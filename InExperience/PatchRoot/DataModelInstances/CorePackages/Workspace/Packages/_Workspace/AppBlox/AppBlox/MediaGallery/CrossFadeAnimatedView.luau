@@ -1,69 +1,70 @@
-﻿local parent = script:FindFirstAncestor("AppBlox").Parent
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local reactOtterModule = require(parent.ReactOtter)
-local useStyle = require(parent.UIBlox).Core.Style.useStyle
+﻿local Parent = script:FindFirstAncestor("AppBlox").Parent
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local ReactOtterModule = require(Parent.ReactOtter)
+local UseStyleFunction = require(Parent.UIBlox).Core.Style.useStyle
 local _ = require(script.Parent.MediaGalleryTypes)
-local t = {
+local config = {
 	zIndex = 1,
 	overlayTransparency = 0.5,
-	animationConfig = { dampingRatio = 1, frequency = 6.666666666667 }
+	animationConfig = { dampingRatio = 1, frequency = 6.666666666666667 }
 }
 
-return function(vectorA)
-	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), reactModule (ref), reactOtterModule (ref)
-	local var1 = cryoModule.Dictionary.join(t, vectorA)
-	local itemsCount = #var1.items
-	local var2 = useStyle()
-	local var3, var4 = reactOtterModule.useAnimatedBinding(0, reactModule.useCallback(function()
-		-- upvalues: var1 (ref)
-		if var1.crossAnim.isCrossFade then
-			var1.crossAnim.setCrossFade(false)
-			var1.crossAnim.setCurrentIndex(var1.crossAnim.nextIndex)
+return function(p1) --[[ Line: 52 | Named "CrossFadeAnimatedView" ]]
+	-- upvalues: CryoModule (copy), config (copy), UseStyleFunction (copy), ReactModule (copy), ReactOtterModule (copy)
+	local JoinResult = CryoModule.Dictionary.join(config, p1)
+	local CountItems = #JoinResult.items
+	local UseStyleResult = UseStyleFunction()
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0, (ReactModule.useCallback(function() --[[ Line: 58 ]]
+		-- upvalues: JoinResult (copy)
+		if JoinResult.crossAnim.isCrossFade then
+			JoinResult.crossAnim.setCrossFade(false)
+			JoinResult.crossAnim.setCurrentIndex(JoinResult.crossAnim.nextIndex)
 		end
 	end, {
-		var1.crossAnim.isCrossFade,
-		var1.crossAnim.nextIndex,
-		var1.crossAnim.setCrossFade,
-		var1.crossAnim.setCurrentIndex
-	}))
-	reactModule.useEffect(function()
-		-- upvalues: itemsCount (ref), var1 (ref), var4 (ref), reactOtterModule (copy)
-		if itemsCount < 2 then return end
-		if var1.crossAnim.isCrossFade then
-			var4(reactOtterModule.spring(1, var1.animationConfig))
+		JoinResult.crossAnim.isCrossFade,
+		JoinResult.crossAnim.nextIndex,
+		JoinResult.crossAnim.setCrossFade,
+		JoinResult.crossAnim.setCurrentIndex
+	})))
+	ReactModule.useEffect(function() --[[ Line: 74 ]]
+		-- upvalues: CountItems (copy), JoinResult (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval)
+		if CountItems < 2 then return end
+		if JoinResult.crossAnim.isCrossFade then
+			UseAnimatedBindingResult2(ReactOtterModule.spring(1, JoinResult.animationConfig))
 			
 			return
+		else
+			UseAnimatedBindingResult2((ReactOtterModule.instant(0)))
 		end
-		var4(reactOtterModule.instant(0))
 	end, {
-		var1.crossAnim.isCrossFade,
-		var1.crossAnim.nextIndex,
-		var1.animationConfig
+		JoinResult.crossAnim.isCrossFade,
+		JoinResult.crossAnim.nextIndex,
+		JoinResult.animationConfig
 	})
 	
-	return reactModule.createElement("ImageLabel", {
+	return ReactModule.createElement("ImageLabel", {
 		BackgroundTransparency = 1,
 		Size = UDim2.fromScale(1, 1),
-		ZIndex = var1.zIndex,
-		Image = var1.items[var1.crossAnim.currentIndex].imageId,
+		ZIndex = JoinResult.zIndex,
+		Image = JoinResult.items[JoinResult.crossAnim.currentIndex].imageId,
 		ScaleType = Enum.ScaleType.Crop,
-		ImageTransparency = var3
+		ImageTransparency = UseAnimatedBindingResult
 	}, {
-		NextImage = if itemsCount >= 2 then reactModule.createElement("ImageLabel", {
+		NextImage = if CountItems >= 2 then ReactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 1,
 			Position = UDim2.fromOffset(0, 0),
 			Size = UDim2.fromScale(1, 1),
-			Image = var1.items[var1.crossAnim.nextIndex].imageId,
+			Image = JoinResult.items[JoinResult.crossAnim.nextIndex].imageId,
 			ScaleType = Enum.ScaleType.Crop,
-			ImageTransparency = var3:map(function(p1)
-				return 1 - p1
+			ImageTransparency = UseAnimatedBindingResult:map(function(p2: number): number --[[ Line: 107 ]]
+				return 1 - p2
 			end)
 		}) else nil,
-		Overlay = reactModule.createElement("Frame", {
+		Overlay = ReactModule.createElement("Frame", {
 			Size = UDim2.fromScale(1, 1),
-			BackgroundTransparency = var1.overlayTransparency,
-			BackgroundColor3 = var2.Theme.Overlay.Color
+			BackgroundTransparency = JoinResult.overlayTransparency,
+			BackgroundColor3 = UseStyleResult.Theme.Overlay.Color
 		})
 	})
 end

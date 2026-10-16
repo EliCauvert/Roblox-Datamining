@@ -1,40 +1,42 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local appChatNetworkingModule = require(parent.AppChatNetworking)
-local conversationChannelsModule = require(appChat.Models.ConversationChannels)
-local signalsExperimentalModule = require(parent.SignalsExperimental)
-local getOtherParticipantsModule = require(script.Parent.getOtherParticipants)
-local getConversationStoreModule = require(appChat.Stores.GetConversationStore)
-local getConversationSearchDataHydrationModule = require(appChat.Stores.GetConversationSearchDataHydration)
-local fFlagAppChatServerSideConversationSearchModule = require(appChat.Flags.FFlagAppChatServerSideConversationSearch)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local AppChatNetworkingModule = require(Parent.AppChatNetworking)
+local ConversationChannelsModule = require(AppChat.Models.ConversationChannels)
+local SignalsExperimentalModule = require(Parent.SignalsExperimental)
+local GetOtherParticipantsModule = require(script.Parent.getOtherParticipants)
+local GetConversationStoreModule = require(AppChat.Stores.GetConversationStore)
+local GetConversationSearchDataHydrationModule = require(AppChat.Stores.GetConversationSearchDataHydration)
+local FFlagAppChatAnyServerSideConversationSearchModule = require(AppChat.Flags.FFlagAppChatAnyServerSideConversationSearch)
 
-return function(p1, p2)
-	-- upvalues: getOtherParticipantsModule (ref), getConversationStoreModule (ref), appChatNetworkingModule (ref), conversationChannelsModule (ref), signalsExperimentalModule (ref), fFlagAppChatServerSideConversationSearchModule (ref), getConversationSearchDataHydrationModule (ref)
-	local var1 = getOtherParticipantsModule(p1, p2)
+return function(p1, p2) --[[ Line: 19 ]]
+	-- upvalues: GetOtherParticipantsModule (copy), GetConversationStoreModule (copy), AppChatNetworkingModule (copy), ConversationChannelsModule (copy), SignalsExperimentalModule (copy), FFlagAppChatAnyServerSideConversationSearchModule (copy), GetConversationSearchDataHydrationModule (copy)
+	local OtherParticipantsModule = GetOtherParticipantsModule(p1, p2)
 	
-	if #var1 == 1 then
-		local var2 = getConversationStoreModule(false)
+	if #OtherParticipantsModule == 1 then
+		local OtherParticipantsModuleEntry = OtherParticipantsModule[1]
+		local ConversationStoreModule = GetConversationStoreModule(false)
 		
-		return appChatNetworkingModule.http.CreateConversation(nil, "one_to_one", { var1[1] }):andThen(function(p3)
-			-- upvalues: conversationChannelsModule (copy), signalsExperimentalModule (copy), var2 (ref), p1 (ref), fFlagAppChatServerSideConversationSearchModule (copy), getConversationSearchDataHydrationModule (copy)
-			local responseBody = p3 and p3.responseBody
-			local var3 = responseBody and (responseBody.conversations and responseBody.conversations[1])
+		return AppChatNetworkingModule.http.CreateConversation(nil, "one_to_one", { OtherParticipantsModuleEntry }):andThen(function(Result) --[[ Line: 27 ]]
+			-- upvalues: ConversationChannelsModule (upval), SignalsExperimentalModule (upval), ConversationStoreModule (copy), p1 (copy), FFlagAppChatAnyServerSideConversationSearchModule (upval), GetConversationSearchDataHydrationModule (upval)
+			local ResponseBody = Result and Result.responseBody
+			local Conversation = ResponseBody and (ResponseBody.conversations and ResponseBody.conversations[1])
 			
-			if var3 == nil or var3.status == "failed" then
+			if Conversation == nil or Conversation.status == "failed" then
 				return nil
 			end
-			local var4 = conversationChannelsModule.fromChannelsApi(var3)
-			signalsExperimentalModule.batch(function()
-				-- upvalues: var2 (copy), var4 (ref), p1 (copy)
-				var2.upsertConversation(var4, false)
-				var2.removeConversation(p1.id)
+			local FromChannelsApiResult = ConversationChannelsModule.fromChannelsApi(Conversation)
+			SignalsExperimentalModule.batch(function() --[[ Line: 35 ]]
+				-- upvalues: ConversationStoreModule (upval), FromChannelsApiResult (copy), p1 (upval)
+				ConversationStoreModule.upsertConversation(FromChannelsApiResult, false)
+				ConversationStoreModule.removeConversation(p1.id)
 			end)
 			
-			if fFlagAppChatServerSideConversationSearchModule then
-				getConversationSearchDataHydrationModule(false).invalidate()
+			if FFlagAppChatAnyServerSideConversationSearchModule then
+				GetConversationSearchDataHydrationModule(false).invalidate()
 			end
-			return var4
+			return FromChannelsApiResult
 		end)
+	else
+		return nil
 	end
-	return nil
 end

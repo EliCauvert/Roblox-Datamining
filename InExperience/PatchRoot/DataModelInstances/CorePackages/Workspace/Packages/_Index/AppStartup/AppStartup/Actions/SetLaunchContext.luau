@@ -1,6 +1,6 @@
-﻿local appStartup = script:FindFirstAncestor("AppStartup")
-local _ = require(appStartup.Enums)
+﻿local AppStartup = script:FindFirstAncestor("AppStartup")
+local _ = require(AppStartup.Enums)
 
-return require(appStartup.Parent.Rodux).makeActionCreator(script.Name, function(p1)
-	return { launchContext = p1 }
+return require(AppStartup.Parent.Rodux).makeActionCreator(script.Name, function(LaunchContext) --[[ Line: 6 ]]
+	return { launchContext = LaunchContext }
 end)

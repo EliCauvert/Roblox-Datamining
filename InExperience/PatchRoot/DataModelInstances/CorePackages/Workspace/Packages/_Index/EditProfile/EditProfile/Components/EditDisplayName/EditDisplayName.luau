@@ -1,123 +1,125 @@
-﻿local editProfile = script:FindFirstAncestor("EditProfile")
-local parent = editProfile.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local text = foundationModule.Text
-local textInput = foundationModule.TextInput
-local iconName = foundationModule.Enums.IconName
-local textKeysModule = require(editProfile.Common.TextKeys)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local constantsModule = require(editProfile.Common.Constants)
-local useDisplayNameTextModule = require(editProfile.Hooks.useDisplayNameText)
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local clearTimeout = luauPolyfillModule.clearTimeout
-local setTimeout = luauPolyfillModule.setTimeout
-local analyticsServiceV2Module = require(editProfile.Analytics.AnalyticsServiceV2)
-local maxDisplayNameCharacters = game:DefineFastInt("MaxDisplayNameCharacters", 20)
-local minDisplayNameCharacters = game:DefineFastInt("MinDisplayNameCharacters", 3)
-local displayNameValidationNetworkDelay = game:DefineFastInt("DisplayNameValidationNetworkDelay", 500)
+﻿local EditProfile = script:FindFirstAncestor("EditProfile")
+local Parent = EditProfile.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local TextInput = FoundationModule.TextInput
+local IconName = FoundationModule.Enums.IconName
+local TextKeysModule = require(EditProfile.Common.TextKeys)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local ConstantsModule = require(EditProfile.Common.Constants)
+local UseDisplayNameTextModule = require(EditProfile.Hooks.useDisplayNameText)
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local ClearTimeoutFunction = LuauPolyfillModule.clearTimeout
+local SetTimeoutFunction = LuauPolyfillModule.setTimeout
+local AnalyticsServiceV2Module = require(EditProfile.Analytics.AnalyticsServiceV2)
+local MaxDisplayNameCharacters = game:DefineFastInt("MaxDisplayNameCharacters", 20)
+local MinDisplayNameCharacters = game:DefineFastInt("MinDisplayNameCharacters", 3)
+local DisplayNameValidationNetworkDelay = game:DefineFastInt("DisplayNameValidationNetworkDelay", 500)
 
-return function(p1)
-	-- upvalues: useLocalization (ref), textKeysModule (ref), useDisplayNameTextModule (ref), reactModule (ref), setTimeout (ref), displayNameValidationNetworkDelay (ref), constantsModule (ref), clearTimeout (ref), minDisplayNameCharacters (ref), analyticsServiceV2Module (ref), maxDisplayNameCharacters (ref), view (ref), text (ref), textInput (ref), iconName (ref)
-	local var1 = useLocalization({ DisplayNameCaption = textKeysModule.DisplayNameCaption })
-	local var2 = useDisplayNameTextModule()
-	local var3, var4 = reactModule.useState(p1.initialDisplayName)
-	local var5, var6 = reactModule.useState(false)
-	local var7, var8 = reactModule.useState(var2.displayNameChangeError)
-	local var9, var10 = reactModule.useState(false)
-	local var11 = reactModule.useRef(setTimeout(function() end, displayNameValidationNetworkDelay))
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var5 (ref), var9 (ref)
+return function(p1) --[[ Line: 33 ]]
+	-- upvalues: UseLocalizationFunction (copy), TextKeysModule (copy), UseDisplayNameTextModule (copy), ReactModule (copy), SetTimeoutFunction (copy), DisplayNameValidationNetworkDelay (copy), ConstantsModule (copy), ClearTimeoutFunction (copy), MinDisplayNameCharacters (copy), AnalyticsServiceV2Module (copy), MaxDisplayNameCharacters (copy), View (copy), Text (copy), TextInput (copy), IconName (copy)
+	local UseLocalizationResult = UseLocalizationFunction({ DisplayNameCaption = TextKeysModule.DisplayNameCaption })
+	local UseDisplayNameTextModuleResult = UseDisplayNameTextModule()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(p1.initialDisplayName)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(UseDisplayNameTextModuleResult.displayNameChangeError)
+	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(false)
+	local UseRefResult = ReactModule.useRef(SetTimeoutFunction(function() --[[ Line: 42 ]] end, DisplayNameValidationNetworkDelay))
+	ReactModule.useEffect(function() --[[ Line: 44 ]]
+		-- upvalues: p1 (copy), UseStateResult1 (copy), UseStateResult4 (copy)
 		if p1.updateErrorState then
-			p1.updateErrorState(var5 or var9)
+			p1.updateErrorState(UseStateResult1 or UseStateResult4)
 		end
-	end, { var5, var9 })
-	reactModule.useEffect(function()
-		-- upvalues: var4 (ref), p1 (ref)
-		var4(p1.initialDisplayName)
+	end, { UseStateResult1, UseStateResult4 })
+	ReactModule.useEffect(function() --[[ Line: 50 ]]
+		-- upvalues: UseStateResult2 (copy), p1 (copy)
+		UseStateResult2(p1.initialDisplayName)
 	end, { p1.initialDisplayName })
 	
-	local function getErrorMessage(p2)
-		-- upvalues: constantsModule (copy), var2 (ref)
+	local function getErrorMessage(Code) --[[ Line: 54 ]]
+		-- upvalues: ConstantsModule (upval), UseDisplayNameTextModuleResult (copy)
 		return ({
-			[constantsModule.DisplayNameValidationErrorCodes.TooShort] = var2.nameTooShortError,
-			[constantsModule.DisplayNameValidationErrorCodes.TooLong] = var2.nameTooLongError,
-			[constantsModule.DisplayNameValidationErrorCodes.InvalidCharacters] = var2.nameUnsupportedCharsError,
-			[constantsModule.DisplayNameValidationErrorCodes.Moderated] = var2.nameInappropriateError,
-			[constantsModule.DisplayNameValidationErrorCodes.Throttled] = var2.nameHasChangedError,
-			[constantsModule.DisplayNameValidationErrorCodes.InvalidCharacterSetCombination] = var2.displayNameChangeMixedCharactersError,
-			[constantsModule.DisplayNameValidationErrorCodes.NameNotAvailable] = var2.nameNotAvailableError
-		})[p2] or var2.displayNameChangeError
+			[ConstantsModule.DisplayNameValidationErrorCodes.TooShort] = UseDisplayNameTextModuleResult.nameTooShortError,
+			[ConstantsModule.DisplayNameValidationErrorCodes.TooLong] = UseDisplayNameTextModuleResult.nameTooLongError,
+			[ConstantsModule.DisplayNameValidationErrorCodes.InvalidCharacters] = UseDisplayNameTextModuleResult.nameUnsupportedCharsError,
+			[ConstantsModule.DisplayNameValidationErrorCodes.Moderated] = UseDisplayNameTextModuleResult.nameInappropriateError,
+			[ConstantsModule.DisplayNameValidationErrorCodes.Throttled] = UseDisplayNameTextModuleResult.nameHasChangedError,
+			[ConstantsModule.DisplayNameValidationErrorCodes.InvalidCharacterSetCombination] = UseDisplayNameTextModuleResult.displayNameChangeMixedCharactersError,
+			[ConstantsModule.DisplayNameValidationErrorCodes.NameNotAvailable] = UseDisplayNameTextModuleResult.nameNotAvailableError
+		})[Code] or UseDisplayNameTextModuleResult.displayNameChangeError
 	end
 	
-	local function textChanged(p2)
-		-- upvalues: clearTimeout (copy), var11 (ref), var4 (ref), var6 (ref), var10 (ref), minDisplayNameCharacters (copy), analyticsServiceV2Module (copy), var8 (ref), var2 (ref), maxDisplayNameCharacters (copy), setTimeout (copy), p1 (ref), getErrorMessage (ref), displayNameValidationNetworkDelay (copy)
-		clearTimeout(var11.current)
-		p2 = p2 or ""
-		local var12 = utf8.len(p2) or 0
-		var4(p2)
-		var6(false)
-		var10(false)
+	local function textChanged(p2) --[[ Line: 67 ]]
+		-- upvalues: ClearTimeoutFunction (upval), UseRefResult (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), UseStateResult2_3 (copy), MinDisplayNameCharacters (upval), AnalyticsServiceV2Module (upval), UseStateResult2_2 (copy), UseDisplayNameTextModuleResult (copy), MaxDisplayNameCharacters (upval), SetTimeoutFunction (upval), p1 (copy), getErrorMessage (copy), DisplayNameValidationNetworkDelay (upval)
+		ClearTimeoutFunction(UseRefResult.current)
+		local Text = p2 or ""
+		local Length: number = utf8.len(Text) or 0
+		UseStateResult2(Text)
+		UseStateResult2_1(false)
+		UseStateResult2_3(false)
 		
-		if var12 < minDisplayNameCharacters then
-			analyticsServiceV2Module.sendDisplayNameTooShort(p2)
-			var8(var2.nameTooShortError)
-			var6(true)
-			
-			return
-		elseif maxDisplayNameCharacters < var12 then
-			var8(var2.nameTooLongError)
-			var6(true)
+		if Length < MinDisplayNameCharacters then
+			AnalyticsServiceV2Module.sendDisplayNameTooShort(Text)
+			UseStateResult2_2(UseDisplayNameTextModuleResult.nameTooShortError)
+			UseStateResult2_1(true)
 			
 			return
 		end
-		var10(true)
-		var11.current = setTimeout(function()
-			-- upvalues: p1 (copy), p2 (write), var6 (copy), var10 (copy), analyticsServiceV2Module (copy), var8 (copy), getErrorMessage (copy)
-			p1.validateDisplayName(p2):andThen(function(_)
-				-- upvalues: var6 (copy), var10 (copy), p1 (copy), p2 (copy)
-				var6(false)
-				var10(false)
-				p1.onDataChange(p2)
-			end):catch(function(p3)
-				-- upvalues: analyticsServiceV2Module (copy), p2 (copy), var8 (copy), getErrorMessage (copy), var6 (copy), var10 (copy)
-				local var13 = if p3 and p3.errors and p3.errors[1] then p3.errors[1].code or -1 else -1
-				analyticsServiceV2Module.sendFilteredDisplayName(p2)
-				var8(getErrorMessage(var13))
-				var6(true)
-				var10(false)
-			end)
-		end, displayNameValidationNetworkDelay)
+		if MaxDisplayNameCharacters < Length then
+			UseStateResult2_2(UseDisplayNameTextModuleResult.nameTooLongError)
+			UseStateResult2_1(true)
+			
+			return
+		else
+			UseStateResult2_3(true)
+			UseRefResult.current = SetTimeoutFunction(function() --[[ Line: 88 ]]
+				-- upvalues: p1 (upval), Text (ref), UseStateResult2_1 (upval), UseStateResult2_3 (upval), AnalyticsServiceV2Module (upval), UseStateResult2_2 (upval), getErrorMessage (upval)
+				p1.validateDisplayName(Text):andThen(function(_) --[[ Line: 91 ]]
+					-- upvalues: UseStateResult2_1 (upval), UseStateResult2_3 (upval), p1 (upval), Text (upval)
+					UseStateResult2_1(false)
+					UseStateResult2_3(false)
+					p1.onDataChange(Text)
+				end):catch(function(Err) --[[ Line: 96 ]]
+					-- upvalues: AnalyticsServiceV2Module (upval), Text (upval), UseStateResult2_2 (upval), getErrorMessage (upval), UseStateResult2_1 (upval), UseStateResult2_3 (upval)
+					local Code = Err and Err.errors and Err.errors[1] and Err.errors[1].code or -1
+					AnalyticsServiceV2Module.sendFilteredDisplayName(Text)
+					UseStateResult2_2((getErrorMessage(Code)))
+					UseStateResult2_1(true)
+					UseStateResult2_3(false)
+				end)
+			end, DisplayNameValidationNetworkDelay)
+		end
 	end
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "auto-y col gap-medium bg-transparent",
 		LayoutOrder = 1,
 		Size = UDim2.new(1, 0, 0, 0)
 	}, {
-		Caption = reactModule.createElement(text, {
+		Caption = ReactModule.createElement(Text, {
 			LayoutOrder = 1,
 			tag = "text-body-medium text-wrap size-full-0 auto-y text-align-x-left",
-			Text = var1.DisplayNameCaption
+			Text = UseLocalizationResult.DisplayNameCaption
 		}),
-		DisplayNameInput = reactModule.createElement(textInput, {
+		DisplayNameInput = ReactModule.createElement(TextInput, {
 			LayoutOrder = 2,
 			label = "",
 			tag = "text-body-medium text-wrap size-full-0 auto-y text-align-x-left",
-			text = var3,
+			text = UseStateResult,
 			width = UDim.new(1, 0),
 			placeholder = p1.initialDisplayName,
-			hint = if var5 then var7 else string.format("%d/%d", utf8.len(var3 or "") or 0, maxDisplayNameCharacters),
-			onChanged = function(p2)
-				-- upvalues: textChanged (ref)
+			hint = if UseStateResult1 then UseStateResult3 else string.format("%d/%d", utf8.len(UseStateResult or "") or 0, MaxDisplayNameCharacters),
+			onChanged = function(p2) --[[ Line: 131 ]]
+				-- upvalues: textChanged (copy)
 				textChanged(p2)
 			end,
-			hasError = var5,
-			iconTrailing = if var3 and #var3 > 0 then {
-				name = iconName.CircleX,
-				onActivated = function()
-					-- upvalues: textChanged (ref)
+			hasError = UseStateResult1,
+			iconTrailing = if UseStateResult and #UseStateResult > 0 then {
+				name = IconName.CircleX,
+				onActivated = function() --[[ Line: 138 ]]
+					-- upvalues: textChanged (copy)
 					textChanged("")
 				end
 			} else nil,

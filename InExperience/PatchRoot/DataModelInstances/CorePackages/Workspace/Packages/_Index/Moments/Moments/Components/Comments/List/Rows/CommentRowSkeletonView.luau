@@ -1,96 +1,144 @@
-﻿local parent = script:FindFirstAncestor("Moments").Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local skeleton = foundationModule.Skeleton
-local view = foundationModule.View
-local radius = foundationModule.Enums.Radius
-local useTokens = foundationModule.Hooks.useTokens
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local FFlagMomentsCommentRowRedesignModule = require(Moments.Flags.FFlagMomentsCommentRowRedesign)
+local Skeleton = FoundationModule.Skeleton
+local View = FoundationModule.View
+local Radius = FoundationModule.Enums.Radius
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-local function _(p1)
-	local var1 = p1.FontSize * p1.LineHeight
+local function _(p1) --[[ Line: 26 | Named "getLineHeights" ]]
+	local ScaledFontSize = p1.FontSize * p1.LineHeight
 	
-	return p1.FontSize + 2 * UDim.new(0, (var1 - p1.FontSize) / 2).Offset, math.round(var1)
+	return p1.FontSize + 2 * UDim.new(0, (ScaledFontSize - p1.FontSize) / 2).Offset, (math.round(ScaledFontSize))
 end
 
-return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), view (ref), skeleton (ref), radius (ref)
-	local var1 = useTokens()
-	local size300 = var1.Size.Size_300
-	local titleSmall = var1.Typography.TitleSmall
-	local var2 = titleSmall.FontSize * titleSmall.LineHeight
-	local var3 = titleSmall.FontSize + 2 * UDim.new(0, (var2 - titleSmall.FontSize) / 2).Offset
-	local _ = math.round(var2)
-	local bodyMedium = var1.Typography.BodyMedium
-	local var4 = bodyMedium.FontSize * bodyMedium.LineHeight
-	local var5 = bodyMedium.FontSize + 2 * UDim.new(0, (var4 - bodyMedium.FontSize) / 2).Offset
-	local rounded = math.round(var4)
-	local t = {}
+return function(Frame) --[[ Line: 34 | Named "CommentRowSkeletonView" ]]
+	-- upvalues: UseTokensFunction (copy), FFlagMomentsCommentRowRedesignModule (copy), ReactModule (copy), View (copy), Skeleton (copy), Radius (copy)
+	local UseTokensResult = UseTokensFunction()
+	local Size300 = UseTokensResult.Size.Size_300
+	local TitleMedium = if FFlagMomentsCommentRowRedesignModule then UseTokensResult.Typography.TitleMedium else UseTokensResult.Typography.TitleSmall
+	local ScaledFontSize = TitleMedium.FontSize * TitleMedium.LineHeight
+	local NewFontSize = TitleMedium.FontSize + 2 * UDim.new(0, (ScaledFontSize - TitleMedium.FontSize) / 2).Offset
+	local _ = math.round(ScaledFontSize)
+	local Size800 = if FFlagMomentsCommentRowRedesignModule then UseTokensResult.Size.Size_800 else UseTokensResult.Size.Size_700
+	local BodyMedium = UseTokensResult.Typography.BodyMedium
+	local ScaledFontSize1 = BodyMedium.FontSize * BodyMedium.LineHeight
+	local NewFontSize1 = BodyMedium.FontSize + 2 * UDim.new(0, (ScaledFontSize1 - BodyMedium.FontSize) / 2).Offset
+	local Rounded = math.round(ScaledFontSize1)
+	local Elements = {}
 	
-	for i, v in p1.bodyLineWidths do
-		t[`Line{i}`] = reactModule.createElement(view, {
+	for LayoutOrder, bodyLineWidth in Frame.bodyLineWidths do
+		Elements[`Line{LayoutOrder}`] = ReactModule.createElement(View, {
 			tag = "row align-y-center",
-			LayoutOrder = i,
-			Size = UDim2.new(1, 0, 0, if i == 1 then var5 else rounded)
+			LayoutOrder = LayoutOrder,
+			Size = UDim2.new(1, 0, 0, if LayoutOrder == 1 then NewFontSize1 else Rounded)
 		}, {
-			Bar = reactModule.createElement(skeleton, {
-				Size = UDim2.new(v, 0, 0, size300),
-				radius = radius.Medium,
-				testId = `{p1.testId}--body-line-{i}`
+			Bar = ReactModule.createElement(Skeleton, {
+				Size = UDim2.new(bodyLineWidth, 0, 0, Size300),
+				radius = Radius.Medium,
+				testId = `{Frame.testId}--body-line-{LayoutOrder}`
 			})
 		})
 	end
-	return reactModule.createElement(view, {
-		tag = "row gap-medium size-full-0 auto-y padding-top-small",
-		LayoutOrder = p1.LayoutOrder,
-		testId = p1.testId
+	return ReactModule.createElement(View, {
+		LayoutOrder = Frame.LayoutOrder,
+		tag = {
+			["row gap-medium size-full-0 auto-y padding-top-small"] = true,
+			["padding-bottom-small"] = FFlagMomentsCommentRowRedesignModule
+		},
+		testId = Frame.testId
 	}, {
-		Avatar = reactModule.createElement(skeleton, {
+		Avatar = ReactModule.createElement(Skeleton, {
 			LayoutOrder = 1,
-			Size = UDim2.fromOffset(var1.Size.Size_700, var1.Size.Size_700),
-			radius = radius.Circle,
-			testId = `{p1.testId}--avatar`
+			Size = UDim2.fromOffset(Size800, Size800),
+			radius = Radius.Circle,
+			testId = `{Frame.testId}--avatar`
 		}),
-		TextColumn = reactModule.createElement(view, { LayoutOrder = 2, tag = "col fill gap-small auto-y" }, {
-			MainContent = reactModule.createElement(view, {
+		TextColumn = ReactModule.createElement(View, {
+			LayoutOrder = 2,
+			tag = {
+				["col fill auto-y"] = true,
+				["gap-xsmall"] = FFlagMomentsCommentRowRedesignModule,
+				["gap-small"] = not FFlagMomentsCommentRowRedesignModule
+			}
+		}, {
+			MainContent = ReactModule.createElement(View, {
 				LayoutOrder = 1,
-				tag = "col gap-xsmall size-full-0 auto-y"
+				tag = {
+					["col size-full-0 auto-y"] = true,
+					["gap-xxsmall"] = FFlagMomentsCommentRowRedesignModule,
+					["gap-xsmall"] = not FFlagMomentsCommentRowRedesignModule
+				}
 			}, {
-				Header = reactModule.createElement(view, {
+				Header = ReactModule.createElement(View, {
 					LayoutOrder = 1,
 					tag = "row align-y-center gap-medium",
-					Size = UDim2.new(1, 0, 0, var3)
+					Size = UDim2.new(1, 0, 0, NewFontSize)
 				}, {
-					Author = reactModule.createElement(skeleton, {
+					Author = ReactModule.createElement(Skeleton, {
 						LayoutOrder = 1,
-						Size = UDim2.fromOffset(p1.authorWidth, size300),
-						radius = radius.Medium,
-						testId = `{p1.testId}--author`
+						Size = UDim2.fromOffset(Frame.authorWidth, Size300),
+						radius = Radius.Medium,
+						testId = `{Frame.testId}--author`
 					}),
-					Timestamp = reactModule.createElement(skeleton, {
+					Timestamp = if FFlagMomentsCommentRowRedesignModule then nil else ReactModule.createElement(Skeleton, {
 						LayoutOrder = 2,
-						Size = UDim2.fromOffset(p1.timestampWidth, size300),
-						radius = radius.Medium,
-						testId = `{p1.testId}--timestamp`
+						Size = UDim2.fromOffset(Frame.timestampWidth, Size300),
+						radius = Radius.Medium,
+						testId = `{Frame.testId}--timestamp`
 					})
 				}),
-				Body = reactModule.createElement(view, { LayoutOrder = 2, tag = "col size-full-0 auto-y" }, t)
+				Body = ReactModule.createElement(View, { LayoutOrder = 2, tag = "col size-full-0 auto-y" }, Elements)
 			}),
-			Reaction = reactModule.createElement(view, {
+			Reaction = if FFlagMomentsCommentRowRedesignModule then nil else ReactModule.createElement(View, {
 				LayoutOrder = 2,
 				tag = "row align-y-center gap-xsmall auto-xy padding-bottom-small",
-				testId = `{p1.testId}--reaction`
+				testId = `{Frame.testId}--reaction`
 			}, {
-				Icon = reactModule.createElement(skeleton, {
+				Icon = ReactModule.createElement(Skeleton, {
 					LayoutOrder = 1,
-					Size = UDim2.fromOffset(var1.Size.Size_500, var1.Size.Size_500),
-					radius = radius.Circle
+					Size = UDim2.fromOffset(UseTokensResult.Size.Size_500, UseTokensResult.Size.Size_500),
+					radius = Radius.Circle
 				}),
-				Count = reactModule.createElement(skeleton, {
+				Count = ReactModule.createElement(Skeleton, {
 					LayoutOrder = 2,
-					Size = UDim2.fromOffset(var1.Size.Size_400, size300),
-					radius = radius.Medium
+					Size = UDim2.fromOffset(UseTokensResult.Size.Size_400, Size300),
+					radius = Radius.Medium
 				})
-			})
+			}),
+			Footer = if FFlagMomentsCommentRowRedesignModule then ReactModule.createElement(View, {
+				LayoutOrder = 2,
+				tag = "row align-y-center gap-small",
+				Size = UDim2.new(1, 0, 0, UseTokensResult.Size.Size_600),
+				testId = `{Frame.testId}--footer`
+			}, {
+				Timestamp = ReactModule.createElement(View, { LayoutOrder = 1, tag = "row align-y-center fill auto-y" }, {
+					Bar = ReactModule.createElement(Skeleton, {
+						Size = UDim2.fromOffset(Frame.timestampWidth, Size300),
+						radius = Radius.Medium,
+						testId = `{Frame.testId}--timestamp`
+					})
+				}),
+				Reaction = ReactModule.createElement(View, {
+					LayoutOrder = 2,
+					tag = "row align-y-center gap-xsmall auto-xy padding-right-small",
+					testId = `{Frame.testId}--reaction`
+				}, {
+					Icon = ReactModule.createElement(Skeleton, {
+						LayoutOrder = 1,
+						Size = UDim2.fromOffset(UseTokensResult.Size.Size_400, UseTokensResult.Size.Size_400),
+						radius = Radius.Circle
+					}),
+					Count = ReactModule.createElement(Skeleton, {
+						LayoutOrder = 2,
+						Size = UDim2.fromOffset(UseTokensResult.Size.Size_400, Size300),
+						radius = Radius.Medium,
+						testId = `{Frame.testId}--reaction-count`
+					})
+				})
+			}) else nil
 		})
 	})
 end

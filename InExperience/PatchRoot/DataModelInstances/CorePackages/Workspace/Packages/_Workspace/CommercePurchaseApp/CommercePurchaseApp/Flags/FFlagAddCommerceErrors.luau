@@ -1,1 +1,1 @@
-﻿return game:GetEngineFeature("AddCommerceErrors")
+﻿return (game:GetEngineFeature("AddCommerceErrors"))

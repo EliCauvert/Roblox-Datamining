@@ -1,362 +1,373 @@
-﻿local viewRecycler = script:FindFirstAncestor("ViewRecycler")
-local diagnosticsModule = require(viewRecycler.Core.Diagnostics)
-local _ = require(viewRecycler.Core.Placement.PlacementTypes)
-local shallowTableModule = require(viewRecycler.Internal.ShallowTable)
-local _ = require(viewRecycler.Core.Types)
-local _ = require(viewRecycler.Core.Virtualizer.VirtualizerSnapshot)
-local _ = require(viewRecycler.Core.RecyclingScope)
-local frozen = table.freeze({ "index", "value" })
-local frozen_1 = table.freeze({ "kind", "revision" })
+﻿local ViewRecycler = script:FindFirstAncestor("ViewRecycler")
+local DiagnosticsModule = require(ViewRecycler.Core.Diagnostics)
+local _ = require(ViewRecycler.Core.Placement.PlacementTypes)
+local ShallowTableModule = require(ViewRecycler.Internal.ShallowTable)
+local _ = require(ViewRecycler.Core.Types)
+local _ = require(ViewRecycler.Core.Virtualizer.VirtualizerSnapshot)
+local _ = require(ViewRecycler.Core.RecyclingScope)
+local Frozen = table.freeze({ "index", "value" })
+local Frozen1 = table.freeze({ "kind", "revision" })
 
-local function _(value, p1)
-	-- upvalues: shallowTableModule (ref), frozen (ref), frozen_1 (ref)
-	return not shallowTableModule.containsEqual(value, p1, frozen) or not shallowTableModule.containsEqual(value.identity, p1.identity, frozen_1)
+local function _(p1, p2): boolean --[[ Line: 61 | Named "assignmentChanged" ]]
+	-- upvalues: ShallowTableModule (copy), Frozen (copy), Frozen1 (copy)
+	return not ShallowTableModule.containsEqual(p1, p2, Frozen) or not ShallowTableModule.containsEqual(p1.identity, p2.identity, Frozen1)
 end
 
-return function(p1)
-	-- upvalues: shallowTableModule (ref), frozen (ref), frozen_1 (ref), diagnosticsModule (ref)
-	local recyclingScope = p1.recyclingScope
+return function(p1) --[[ Line: 69 | Named "createListPresentation" ]]
+	-- upvalues: ShallowTableModule (copy), Frozen (copy), Frozen1 (copy), DiagnosticsModule (copy)
+	local RecyclingScope = p1.recyclingScope
 	local t = {}
-	local var1 = nil
-	local t_1 = {}
-	local t_2 = {}
-	local t_3 = {}
-	local tbl = setmetatable({}, { __mode = "k" })
-	local var2 = 1
-	local var3 = false
+	local v1 = nil
+	local Tbl = {}
+	local Tbl1 = {}
+	local Tbl2 = {}
+	local self = setmetatable({}, { __mode = "k" })
+	local Generation = 1
+	local Flag = false
 	
-	local function makeAssignment(value)
-		-- upvalues: p1 (ref), var2 (write)
-		local t = {
-			key = value.key,
-			index = value.index,
-			value = value.value
+	local function makeAssignment(Desired) --[[ Line: 82 ]]
+		-- upvalues: p1 (copy), Generation (ref)
+		local PrepareDesiredAssignmentResult = {
+			key = Desired.key,
+			index = Desired.index,
+			value = Desired.value
 		}
 		
 		if p1.prepareDesiredAssignment ~= nil then
-			t = p1.prepareDesiredAssignment(t)
+			PrepareDesiredAssignmentResult = p1.prepareDesiredAssignment(PrepareDesiredAssignmentResult)
 		end
-		local t_1 = {
-			key = t.key,
-			index = t.index,
-			value = t.value,
-			generation = var2
+		local config = {
+			key = PrepareDesiredAssignmentResult.key,
+			index = PrepareDesiredAssignmentResult.index,
+			value = PrepareDesiredAssignmentResult.value,
+			generation = Generation
 		}
-		var2 += 1
+		Generation += 1
 		
-		return t_1
+		return config
 	end
 	
-	local function resolvePlacementIntent(p2)
-		-- upvalues: t_3 (write), var1 (write)
-		local var4 = t_3[p2]
+	local function resolvePlacementIntent(ItemView) --[[ Line: 101 ]]
+		-- upvalues: Tbl2 (ref), v1 (ref)
+		local Entry = Tbl2[ItemView]
+		local v2 = v1
 		
-		if var4 == nil or var1 == nil then
+		if Entry == nil or v2 == nil then
 			return nil
-		end
-		local desired = var4.desired
-		
-		return {
-			assignment = var4.assignment,
-			itemLayout = desired.itemLayout,
-			canvasPlacement = desired.canvasPlacement,
-			viewportPlacement = desired.viewportPlacement,
-			contentStartOffset = var1.contentStartOffset,
-			measurementIdentity = {
-				itemIndex = var4.assignment.index,
-				itemKey = var4.assignment.key,
-				assignmentGeneration = var4.assignment.generation,
-				itemRevision = desired.measurementIdentity.itemRevision,
-				pinnedPosition = desired.measurementIdentity.pinnedPosition
+		else
+			local Desired = Entry.desired
+			
+			return {
+				assignment = Entry.assignment,
+				itemLayout = Desired.itemLayout,
+				canvasPlacement = Desired.canvasPlacement,
+				viewportPlacement = Desired.viewportPlacement,
+				contentStartOffset = v2.contentStartOffset,
+				measurementIdentity = {
+					itemIndex = Entry.assignment.index,
+					itemKey = Entry.assignment.key,
+					assignmentGeneration = Entry.assignment.generation,
+					itemRevision = Desired.measurementIdentity.itemRevision,
+					pinnedPosition = Desired.measurementIdentity.pinnedPosition
+				}
 			}
-		}
+		end
 	end
 	
-	local function publish(p2, p3)
-		-- upvalues: p1 (ref), resolvePlacementIntent (ref), tbl (ref)
-		for i, v in p2 do
+	local function publish(List, List1) --[[ Line: 124 ]]
+		-- upvalues: p1 (copy), resolvePlacementIntent (copy), self (copy)
+		for _, value in List do
 			if p1.prepareAssignment ~= nil then
-				p1.prepareAssignment(v.itemView, v.assignment)
+				p1.prepareAssignment(value.itemView, value.assignment)
 			end
 		end
 		if p1.applyPlacementIntent ~= nil then
-			for i_1, v_1 in p2 do
-				p1.applyPlacementIntent(v_1.itemView, if v_1.assignment == nil then nil else resolvePlacementIntent(v_1.itemView))
-				p3[v_1.itemView] = nil
+			for _, value1 in List do
+				p1.applyPlacementIntent(value1.itemView, if value1.assignment == nil then nil else resolvePlacementIntent(value1.itemView))
+				List1[value1.itemView] = nil
 			end
-			for i_2 in p3 do
-				p1.applyPlacementIntent(i_2, resolvePlacementIntent(i_2))
+			for i in List1 do
+				p1.applyPlacementIntent(i, (resolvePlacementIntent(i)))
 			end
 		end
-		for i_1 in p3 do
-			local var4 = tbl[i_1]
+		for i1 in List1 do
+			local SelfEntry: () -> () = self[i1]
 			
-			if var4 ~= nil then
-				var4()
+			if SelfEntry ~= nil then
+				SelfEntry()
 			end
 		end
-		for i_2, v_1 in p2 do
+		for _, value2 in List do
 			if p1.postCommitAssignment ~= nil then
-				p1.postCommitAssignment(v_1.itemView, v_1.assignment)
+				p1.postCommitAssignment(value2.itemView, value2.assignment)
 			end
 		end
 		if p1.presentAssignment ~= nil then
-			for i_3, v_2 in p2 do
-				if v_2.assignment ~= nil then
-					p1.presentAssignment(v_2.itemView, v_2.assignment)
+			for _, value3 in List do
+				if value3.assignment ~= nil then
+					p1.presentAssignment(value3.itemView, value3.assignment)
 				end
 			end
 		end
 	end
 	
-	local function _(value)
-		-- upvalues: var1 (write)
-		return if var1 ~= nil then var1.contentStartOffset ~= value.contentStartOffset else true
+	local function _(p2): boolean --[[ Line: 164 | Named "insetChanged" ]]
+		-- upvalues: v1 (ref)
+		local v2 = v1
+		
+		return v2 == nil or v2.contentStartOffset ~= p2.contentStartOffset
 	end
 	
-	local function reconcile(p4, p5)
-		-- upvalues: t_2 (write), t_1 (ref), makeAssignment (ref), recyclingScope (ref), t (ref), shallowTableModule (copy), frozen (copy), frozen_1 (copy), t_3 (write), var1 (write), publish (ref), diagnosticsModule (copy)
-		local v_4
-		local t_4 = {}
-		local list = table.create(#p4.entries)
-		local t_5 = {}
-		local t_6 = {}
-		local t_7 = {}
-		local t_8 = {}
-		local t_9 = {}
-		local t_10 = {}
-		local t_11 = {}
-		local var5 = 0
-		local var6 = 0
-		local var7 = 0
+	local function reconcile(p2, p3) --[[ Line: 169 ]]
+		-- upvalues: Tbl1 (ref), Tbl (copy), makeAssignment (copy), RecyclingScope (copy), t (copy), ShallowTableModule (upval), Frozen (upval), Frozen1 (upval), Tbl2 (ref), v1 (ref), publish (copy), DiagnosticsModule (upval)
+		local t1 = {}
+		local Buffer = table.create(#p2.entries)
+		local List2 = {}
+		local List3 = {}
+		local List4 = {}
+		local List5 = {}
+		local t2 = {}
+		local List6 = {}
+		local t3 = {}
+		local Retained = 0
+		local Count = 0
+		local Acquired = 0
 		
-		for i, v in p4.entries do
-			assert(t_4[v.key] == nil, `Virtualizer: duplicate key "{v.key}"`)
-			t_4[v.key] = v
-			v_4 = t_2[v.key]
+		for i, entry in p2.entries do
+			assert(t1[entry.key] == nil, `Virtualizer: duplicate key "{entry.key}"`)
+			t1[entry.key] = entry
+			local Entry = Tbl1[entry.key]
 			
-			if v_4 == nil or v_4.itemViewType ~= v.recyclableViewType then
-				table.insert(t_8, i)
+			if Entry == nil or Entry.itemViewType ~= entry.recyclableViewType then
+				table.insert(List5, i)
 			else
-				list[i] = v_4
+				Buffer[i] = Entry
 			end
 		end
-		for i_1, v_1 in t_1 do
-			v_4 = t_4[v_1.assignment.key]
+		for _, value in Tbl do
+			local Entry = t1[value.assignment.key]
 			
-			if v_4 == nil or v_1.itemViewType ~= v_4.recyclableViewType then
-				local itemViewType = t_9[v_1.itemViewType]
+			if Entry == nil or value.itemViewType ~= Entry.recyclableViewType then
+				local List = t2[value.itemViewType]
 				
-				if itemViewType == nil then
-					itemViewType = {}
-					t_9[v_1.itemViewType] = itemViewType
+				if List == nil then
+					List = {}
+					t2[value.itemViewType] = List
 				end
-				table.insert(itemViewType, v_1)
+				table.insert(List, value)
 			end
 		end
-		for i_2, v_2 in t_8 do
-			v_4 = p4.entries[v_2]
-			local recyclableViewType = t_9[v_4.recyclableViewType]
-			local var8 = if recyclableViewType == nil then nil else table.remove(recyclableViewType)
+		for _, value1 in List5 do
+			local Entry = p2.entries[value1]
+			local List1 = t2[Entry.recyclableViewType]
+			local Removed = if List1 == nil then nil else table.remove(List1)
 			
-			if var8 == nil then
-				table.insert(t_7, v_2)
-				table.insert(t_6, { viewType = v_4.recyclableViewType })
+			if Removed == nil then
+				table.insert(List4, value1)
+				table.insert(List3, { viewType = Entry.recyclableViewType })
 			else
-				var8.assignment = makeAssignment(v_4)
-				var8.desired = v_4
-				list[v_2] = var8
-				var6 += 1
+				Removed.assignment = makeAssignment(Entry)
+				Removed.desired = Entry
+				Buffer[value1] = Removed
+				Count += 1
 			end
 		end
-		for i_3, v_3 in t_9 do
-			for i_4, v_5 in v_3 do
-				table.insert(t_5, { view = v_5.itemView, leaseToken = v_5.leaseToken })
+		for _, value2 in t2 do
+			for _, value3 in value2 do
+				table.insert(List2, { view = value3.itemView, leaseToken = value3.leaseToken })
 			end
 		end
-		local var9 = if #t_5 == 0 and #t_6 == 0 then { releasedCount = 0, acquired = {} } else recyclingScope.exchange(t, t_5, t_6)
-		
-		for i_4, v_4 in t_7 do
-			local var10 = p4.entries[v_4]
-			local var11 = var9.acquired[i_4]
-			list[v_4] = {
-				itemView = var11.view,
-				itemViewType = var10.recyclableViewType,
-				leaseToken = var11.leaseToken,
-				assignment = makeAssignment(var10),
-				desired = var10
+		local Config = if #List2 == 0 and #List3 == 0 then { releasedCount = 0, acquired = {} } else RecyclingScope.exchange(t, List2, List3)
+		for i1, value4 in List4 do
+			local Entry = p2.entries[value4]
+			local AcquiredEntry = Config.acquired[i1]
+			Buffer[value4] = {
+				itemView = AcquiredEntry.view,
+				itemViewType = Entry.recyclableViewType,
+				leaseToken = AcquiredEntry.leaseToken,
+				assignment = makeAssignment(Entry),
+				desired = Entry
 			}
-			var7 += 1
+			Acquired += 1
 		end
-		local t_12 = {}
-		local t_13 = {}
+		local t4 = {}
+		local t5 = {}
 		
-		for i_5, v_5 in p4.entries do
-			local var12 = list[i_5]
-			local desired = var12.desired
+		for i3, entry1 in p2.entries do
+			local BufferEntry = Buffer[i3]
+			local Desired = BufferEntry.desired
 			
-			if t_2[v_5.key] ~= var12 then
-				table.insert(t_10, { itemView = var12.itemView, assignment = var12.assignment })
-				t_12[var12.assignment.key] = var12
-				t_13[var12.itemView] = var12
-			end
-			if not shallowTableModule.containsEqual(desired, v_5, frozen) or not shallowTableModule.containsEqual(desired.identity, v_5.identity, frozen_1) then
-				var12.assignment = makeAssignment(v_5)
-				table.insert(t_10, { itemView = var12.itemView, assignment = var12.assignment })
-				var6 += 1
+			if Tbl1[entry1.key] == BufferEntry then
+				if not ShallowTableModule.containsEqual(Desired, entry1, Frozen) or not ShallowTableModule.containsEqual(Desired.identity, entry1.identity, Frozen1) then
+					BufferEntry.assignment = makeAssignment(entry1)
+					table.insert(List6, {
+						itemView = BufferEntry.itemView,
+						assignment = BufferEntry.assignment
+					})
+					Count += 1
+				else
+					Retained += 1
+				end
+				if Desired ~= entry1 or p3 then
+					t3[BufferEntry.itemView] = true
+				end
+				BufferEntry.desired = entry1
 			else
-				var5 += 1
+				table.insert(List6, {
+					itemView = BufferEntry.itemView,
+					assignment = BufferEntry.assignment
+				})
 			end
-			if desired ~= v_5 or p5 then
-				t_11[var12.itemView] = true
-			end
-			var12.desired = v_5
+			t4[BufferEntry.assignment.key] = BufferEntry
+			t5[BufferEntry.itemView] = BufferEntry
 		end
-		for i_6, v_5 in t_1 do
-			if t_13[v_5.itemView] == nil then
-				table.insert(t_10, { assignment = nil, itemView = v_5.itemView })
+		for _, value5 in Tbl do
+			if t5[value5.itemView] == nil then
+				table.insert(List6, { assignment = nil, itemView = value5.itemView })
 			end
 		end
-		table.clear(t_1)
+		table.clear(Tbl)
 		
-		for v_4 = 1, #p4.entries do
-			t_1[v_4] = list[v_4]
+		for i2 = 1, #p2.entries do
+			Tbl[i2] = Buffer[i2]
 		end
-		t_2 = t_12
-		t_3 = t_13
-		var1 = p4
-		publish(t_10, t_11)
+		Tbl1 = t4
+		Tbl2 = t5
+		v1 = p2
+		publish(List6, t3)
 		
 		return {
-			kind = diagnosticsModule.EventKind.ItemViewsSynchronized,
-			retained = var5,
-			reassigned = var6,
-			acquired = var7,
-			released = var9.releasedCount
+			kind = DiagnosticsModule.EventKind.ItemViewsSynchronized,
+			retained = Retained,
+			reassigned = Count,
+			acquired = Acquired,
+			released = Config.releasedCount
 		}
 	end
 	
-	local function applyPlacements(p6, p7)
-		-- upvalues: t_1 (ref), var1 (write), publish (ref)
+	local function applyPlacements(p4, p5) --[[ Line: 298 ]]
+		-- upvalues: Tbl (copy), v1 (ref), publish (copy)
 		local t = {}
 		
-		for i, v in p6.entries do
-			local var13 = t_1[i]
+		for i, entry in p4.entries do
+			local Entry = Tbl[i]
 			
-			if var13.desired ~= v or p7 then
-				var13.desired = v
-				t[var13.itemView] = true
+			if Entry.desired ~= entry or p5 then
+				Entry.desired = entry
+				t[Entry.itemView] = true
 			end
 		end
-		var1 = p6
+		v1 = p4
 		publish({}, t)
 	end
 	
-	local function releaseAll()
-		-- upvalues: t_1 (ref), recyclingScope (ref), t (ref), t_2 (write), t_3 (write), var1 (write), publish (ref)
-		local list = table.create(#t_1)
-		local list_1 = table.create(#t_1)
+	local function releaseAll() --[[ Line: 314 ]]
+		-- upvalues: Tbl (copy), RecyclingScope (copy), t (copy), Tbl1 (ref), Tbl2 (ref), v1 (ref), publish (copy)
+		local Buffer = table.create(#Tbl)
+		local Buffer1 = table.create(#Tbl)
 		
-		for i, v in t_1 do
-			table.insert(list, { view = v.itemView, leaseToken = v.leaseToken })
-			table.insert(list_1, { assignment = nil, itemView = v.itemView })
+		for _, value in Tbl do
+			table.insert(Buffer, { view = value.itemView, leaseToken = value.leaseToken })
+			table.insert(Buffer1, { assignment = nil, itemView = value.itemView })
 		end
-		if #list > 0 then
-			recyclingScope.exchange(t, list, {})
+		if #Buffer > 0 then
+			RecyclingScope.exchange(t, Buffer, {})
 		end
-		table.clear(t_1)
-		table.clear(t_2)
-		table.clear(t_3)
-		var1 = nil
-		publish(list_1, {})
+		table.clear(Tbl)
+		table.clear(Tbl1)
+		table.clear(Tbl2)
+		v1 = nil
+		publish(Buffer1, {})
 	end
 	
 	return {
-		apply = function(_, p8, p9)
-			-- upvalues: var3 (write), recyclingScope (ref), releaseAll (ref), var1 (write), applyPlacements (ref), reconcile (ref)
-			if var3 then
+		apply = function(_, p6, p7) --[[ Line: 332 ]]
+			-- upvalues: Flag (ref), RecyclingScope (copy), releaseAll (copy), v1 (ref), applyPlacements (copy), reconcile (copy)
+			if Flag then
 				return {}
-			elseif p8 == nil then
-				recyclingScope.batch(releaseAll)
+			end
+			if p6 == nil then
+				RecyclingScope.batch(releaseAll)
 				
 				return {}
 			end
-			local var14 = var1
-			local var15 = if var14 ~= nil then var14.contentStartOffset ~= p8.contentStartOffset else true
+			local v2 = v1
+			local v3: boolean = v2 == nil or v2.contentStartOffset ~= p6.contentStartOffset
 			
-			if var1 == nil or p9.assignmentsChanged then
-				local var16 = nil
-				recyclingScope.batch(function()
-					-- upvalues: var16 (write), reconcile (copy), p8 (ref), var15 (ref)
-					var16 = reconcile(p8, var15)
+			if v1 == nil or p7.assignmentsChanged then
+				local v4 = nil
+				RecyclingScope.batch(function() --[[ Line: 352 ]]
+					-- upvalues: v4 (ref), reconcile (upval), p6 (copy), v3 (copy)
+					v4 = reconcile(p6, v3)
 				end)
 				
-				return { var16 }
-			elseif p9.placementChanged or var15 then
-				recyclingScope.batch(function()
-					-- upvalues: applyPlacements (copy), p8 (ref), var15 (ref)
-					applyPlacements(p8, var15)
+				return { v4 }
+			end
+			if p7.placementChanged or v3 then
+				RecyclingScope.batch(function() --[[ Line: 343 ]]
+					-- upvalues: applyPlacements (upval), p6 (copy), v3 (copy)
+					applyPlacements(p6, v3)
 				end)
 			else
-				var1 = p8
+				v1 = p6
 			end
 			return {}
 		end,
-		destroy = function()
-			-- upvalues: var3 (write), recyclingScope (ref), releaseAll (ref), tbl (ref)
-			if not var3 then
-				recyclingScope.batch(releaseAll)
-				var3 = true
-				table.clear(tbl)
+		destroy = function() --[[ Line: 357 ]]
+			-- upvalues: Flag (ref), RecyclingScope (copy), releaseAll (copy), self (copy)
+			if not Flag then
+				RecyclingScope.batch(releaseAll)
+				Flag = true
+				table.clear(self)
 			end
 		end,
-		getItemViews = function()
-			-- upvalues: t_1 (ref)
-			local list = table.create(#t_1)
+		getItemViews = function() --[[ Line: 364 ]]
+			-- upvalues: Tbl (copy)
+			local Buffer = table.create(#Tbl)
 			
-			for i, v in t_1 do
-				list[i] = v.itemView
+			for i, value in Tbl do
+				Buffer[i] = value.itemView
 			end
-			return list
+			return Buffer
 		end,
-		getSnapshot = function()
-			-- upvalues: var1 (write)
-			return var1
+		getSnapshot = function() --[[ Line: 371 ]]
+			-- upvalues: v1 (ref)
+			return v1
 		end,
 		resolvePlacementIntent = resolvePlacementIntent,
-		onPlacementIntentChanged = function(p8, p9)
-			-- upvalues: tbl (ref)
-			assert(tbl[p8] == nil, "Virtualizer: ItemView already has a Placement-intent subscriber")
-			tbl[p8] = p9
+		onPlacementIntentChanged = function(Key, p6) --[[ Line: 375 ]]
+			-- upvalues: self (copy)
+			assert(self[Key] == nil, "Virtualizer: ItemView already has a Placement-intent subscriber")
+			self[Key] = p6
 			
-			return function()
-				-- upvalues: tbl (copy), p8 (ref), p9 (ref)
-				if tbl[p8] == p9 then
-					tbl[p8] = nil
+			return function() --[[ Line: 381 ]]
+				-- upvalues: self (upval), Key (copy), p6 (copy)
+				if self[Key] == p6 then
+					self[Key] = nil
 				end
 			end
 		end,
-		validateMeasurements = function(p8)
-			-- upvalues: t_2 (write), recyclingScope (ref), t (ref)
-			local t_1 = {}
-			local var14 = 0
+		validateMeasurements = function(List) --[[ Line: 387 ]]
+			-- upvalues: Tbl1 (ref), RecyclingScope (copy), t (copy)
+			local List1 = {}
+			local Count = 0
 			
-			for i, v in p8 do
-				local itemKey = t_2[v.itemKey]
+			for _, value in List do
+				local Entry = Tbl1[value.itemKey]
 				
-				if itemKey == nil or itemKey.assignment.index ~= v.itemIndex or (itemKey.assignment.generation ~= v.assignmentGeneration or itemKey.desired.measurementIdentity.itemRevision ~= v.itemRevision) or (itemKey.desired.measurementIdentity.pinnedPosition ~= v.pinnedPosition or not recyclingScope.isLeaseCurrent(t, itemKey.itemView, itemKey.leaseToken)) then
-					var14 += 1
+				if Entry == nil or Entry.assignment.index ~= value.itemIndex or Entry.assignment.generation ~= value.assignmentGeneration or Entry.desired.measurementIdentity.itemRevision ~= value.itemRevision or Entry.desired.measurementIdentity.pinnedPosition ~= value.pinnedPosition or not RecyclingScope.isLeaseCurrent(t, Entry.itemView, Entry.leaseToken) then
+					Count += 1
 				else
-					table.insert(t_1, {
-						itemIndex = itemKey.assignment.index,
-						itemKey = itemKey.assignment.key,
-						itemRevision = v.itemRevision,
-						pinnedPosition = v.pinnedPosition,
-						length = v.length
+					table.insert(List1, {
+						itemIndex = Entry.assignment.index,
+						itemKey = Entry.assignment.key,
+						itemRevision = value.itemRevision,
+						pinnedPosition = value.pinnedPosition,
+						length = value.length
 					})
 				end
 			end
-			return t_1, var14
+			return List1, Count
 		end
 	}
 end

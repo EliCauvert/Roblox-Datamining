@@ -1,7 +1,6 @@
-﻿local socialCarousel = script:FindFirstAncestor("SocialCarousel")
-local parent = socialCarousel.Parent
-local fFlagConnectionsToFriendsRename = require(parent.SharedFlags).FFlagConnectionsToFriendsRename
-local fFlagSocialCarouselShareQREnabled = require(parent.SharedFlags).FFlagSocialCarouselShareQREnabled
+﻿local SocialCarousel = script:FindFirstAncestor("SocialCarousel")
+local FFlagSocialCarouselUpdateVerticalSpacingModule = require(SocialCarousel.Flags.FFlagSocialCarouselUpdateVerticalSpacing)
+local FFlagSocialCarouselShareQREnabled = require(SocialCarousel.Parent.SharedFlags).FFlagSocialCarouselShareQREnabled
 
 return {
 	RODUX_KEY = "FriendsCarousel",
@@ -15,13 +14,8 @@ return {
 		FRIENDS_ARE_NOW_CONNECTIONS = "Feature.Friends.Label.FriendsAreNowConnections",
 		START_SQUAD_TEXT = "Feature.Squads.Label.StartParty",
 		SHARE_QR_HEADING = "Feature.Friends.Action.ShareQR",
-		FRIENDS_HINT_BOLD = if fFlagSocialCarouselShareQREnabled then "Feature.Friends.Label.FriendsHintBold" else nil,
-		FRIENDS_HINT_PLAIN = if fFlagSocialCarouselShareQREnabled then "Feature.Friends.Label.FriendsHintPlain" else nil,
-		CONNECTIONS_LABEL = if fFlagConnectionsToFriendsRename then nil else "CommonUI.Features.Label.Connections",
-		CONNECTIONS_LABEL_WITH_COUNT = if fFlagConnectionsToFriendsRename then nil else "Feature.Friends.Label.ConnectionsCount",
-		CONNECTIONS_HINT_TITLE = if fFlagConnectionsToFriendsRename then nil else "Feature.Friends.Label.AddConnectionsHint",
-		CONNECTIONS_HINT_BODY = if fFlagConnectionsToFriendsRename then nil else "Feature.Friends.Label.AddConnectionsHintBody",
-		ADD_CONNECTIONS_HEADING = if fFlagConnectionsToFriendsRename then nil else "CommonUI.Features.Label.Connect"
+		FRIENDS_HINT_BOLD = if FFlagSocialCarouselShareQREnabled then "Feature.Friends.Label.FriendsHintBold" else nil,
+		FRIENDS_HINT_PLAIN = if FFlagSocialCarouselShareQREnabled then "Feature.Friends.Label.FriendsHintPlain" else nil
 	},
 	ANALYTICS = {
 		CONTENT_TYPE = "User",
@@ -52,6 +46,6 @@ return {
 			SHARE_QR = "ShareQRBtn"
 		}
 	},
-	TILE_TEXT_HEIGHT = if require(socialCarousel.Flags.FFlagSocialCarouselUpdateVerticalSpacing) then 38 else 45,
-	TILE_TEXT_WIDTH = if fFlagSocialCarouselShareQREnabled then 30 else 125
+	TILE_TEXT_HEIGHT = if FFlagSocialCarouselUpdateVerticalSpacingModule then 38 else 45,
+	TILE_TEXT_WIDTH = if FFlagSocialCarouselShareQREnabled then 30 else 125
 }

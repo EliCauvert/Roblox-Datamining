@@ -1,207 +1,217 @@
-﻿local sduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
-local parent = sduiCoreSystem.Parent
-local signalsModule = require(parent.Signals)
-local _ = require(sduiCoreSystem.SduiBuilderTypes)
-local sduiClientBindingTypesModule = require(sduiCoreSystem.ClientBinding.SduiClientBindingTypes)
-local sduiPropUtilsModule = require(sduiCoreSystem.ClientBinding.PropBuilder.SduiPropUtils)
-local sduiLoggerModule = require(sduiCoreSystem.SduiLogger)
-local sduiErrorsModule = require(sduiCoreSystem.SduiErrors)
-local sduiParseHelpersModule = require(sduiCoreSystem.SduiParseHelpers)
-local sduiListEntryNormalizerModule = require(sduiCoreSystem.ClientBinding.PropBuilder.SduiListEntryNormalizer)
-local sduiListEntrySorterModule = require(sduiCoreSystem.ClientBinding.PropBuilder.SduiListEntrySorter)
-local sduiListEntryRendererModule = require(sduiCoreSystem.ClientBinding.PropBuilder.SduiListEntryRenderer)
-local sduiPoolEntryHelpersModule = require(sduiCoreSystem.ClientBinding.PropBuilder.SduiPoolEntryHelpers)
-local _ = require(sduiCoreSystem.ClientBinding.SduiPoolStoreTypes)
-local fFlagSduiPerSectionPoolSizing = require(parent.SharedFlags).FFlagSduiPerSectionPoolSizing
-local propResultCategory = sduiClientBindingTypesModule.PropResultCategory
+﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
+local Parent = SduiCoreSystem.Parent
+local SignalsModule = require(Parent.Signals)
+local _ = require(SduiCoreSystem.SduiBuilderTypes)
+local SduiPropUtilsModule = require(SduiCoreSystem.ClientBinding.PropBuilder.SduiPropUtils)
+local SduiLoggerModule = require(SduiCoreSystem.SduiLogger)
+local SduiErrorsModule = require(SduiCoreSystem.SduiErrors)
+local SduiParseHelpersModule = require(SduiCoreSystem.SduiParseHelpers)
+local SduiListEntryNormalizerModule = require(SduiCoreSystem.ClientBinding.PropBuilder.SduiListEntryNormalizer)
+local SduiListEntrySorterModule = require(SduiCoreSystem.ClientBinding.PropBuilder.SduiListEntrySorter)
+local SduiListEntryRendererModule = require(SduiCoreSystem.ClientBinding.PropBuilder.SduiListEntryRenderer)
+local SduiPoolEntryHelpersModule = require(SduiCoreSystem.ClientBinding.PropBuilder.SduiPoolEntryHelpers)
+local _ = require(SduiCoreSystem.ClientBinding.SduiPoolStoreTypes)
+local FFlagSduiPerSectionPoolSizing = require(Parent.SharedFlags).FFlagSduiPerSectionPoolSizing
+local PropResultCategory = require(SduiCoreSystem.ClientBinding.SduiClientBindingTypes).PropResultCategory
 
-local function _(p1, p2)
-	if p2 ~= nil then
+local function _(List, p1): boolean --[[ Line: 34 | Named "canSorterReorder" ]]
+	if p1 ~= nil then
 		return true
 	end
-	for i, v in p1 do
-		if v.sortRankProp ~= nil then
+	for _, value in List do
+		if value.sortRankProp ~= nil then
 			return true
 		end
 	end
 	return false
 end
 
-local function buildItemsFromEntries(p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14)
-	-- upvalues: sduiListEntrySorterModule (ref), sduiPoolEntryHelpersModule (ref), fFlagSduiPerSectionPoolSizing (ref), sduiListEntryRendererModule (ref)
-	if p5 ~= nil then
-		local var1
-		local var2 = p3
-		
-		if p4 == nil then
-			for i, v in var2 do
-				if v.sortRankProp ~= nil then
-					var1 = true
+local function buildItemsFromEntries(NormalizeBoundDataResult, OrderedIdentifiers, CreateComputed, p2, p3, p4, CaptureErrorContextResult, p5, p6, DeferItemBuild, Callback, PoolEntryConfigs) --[[ Line: 51 ]]
+	-- upvalues: SduiListEntrySorterModule (copy), SduiPoolEntryHelpersModule (copy), FFlagSduiPerSectionPoolSizing (copy), SduiListEntryRendererModule (copy)
+	if CreateComputed ~= nil then
+		local Flag = nil
+		if OrderedIdentifiers == nil then
+			Flag = false
+			
+			for _, value in NormalizeBoundDataResult do
+				if value.sortRankProp ~= nil then
+					Flag = true
+					break
 				end
 			end
-			var1 = false
 		else
-			var1 = true
+			Flag = true
 		end
-		if var1 then
-			p5 = nil
+		if Flag then
+			CreateComputed = nil
 		end
 	end
-	local var3 = sduiListEntrySorterModule.applyOrder(p3, p4, p11, p7, p6, p8, p10)
-	local var4 = nil
-	local entryConfigExtrasFn = nil
-	local var5 = sduiPoolEntryHelpersModule.computePoolSections(var3, if fFlagSduiPerSectionPoolSizing then p14 else nil)
+	local ApplyOrderResult = SduiListEntrySorterModule.applyOrder(NormalizeBoundDataResult, OrderedIdentifiers, p6, p3, p2, p4, p5)
+	local InputSlicer = nil
+	local EntryConfigExtrasFn = nil
+	local PoolSections = SduiPoolEntryHelpersModule.computePoolSections(ApplyOrderResult, if FFlagSduiPerSectionPoolSizing then PoolEntryConfigs else nil)
 	
-	if p13 ~= nil or sduiPoolEntryHelpersModule.sectionsHaveMultiRow(var5) then
-		local var6 = sduiPoolEntryHelpersModule.createPoolEntryFns(var5, p6, p7, p8, p9, if p13 ~= nil then nil else p13(p11), p14)
-		var4 = var6.inputSlicer
-		entryConfigExtrasFn = var6.entryConfigExtrasFn
+	if Callback ~= nil or SduiPoolEntryHelpersModule.sectionsHaveMultiRow(PoolSections) then
+		local PoolEntryFns = SduiPoolEntryHelpersModule.createPoolEntryFns(PoolSections, p2, p3, p4, CaptureErrorContextResult, if Callback == nil then nil else Callback(p6), PoolEntryConfigs)
+		InputSlicer = PoolEntryFns.inputSlicer
+		EntryConfigExtrasFn = PoolEntryFns.entryConfigExtrasFn
 	end
-	if var4 == nil then
-		var4 = sduiListEntryRendererModule.createInputSlicer(p6, p7, p8, p9)
+	if InputSlicer == nil then
+		InputSlicer = SduiListEntryRendererModule.createInputSlicer(p2, p3, p4, CaptureErrorContextResult)
 	end
-	return sduiListEntryRendererModule.buildEntryConfigs(var3, var4, p5, p8, p9, p10, p7, p11, p12, entryConfigExtrasFn)
+	return SduiListEntryRendererModule.buildEntryConfigs(ApplyOrderResult, InputSlicer, CreateComputed, p4, CaptureErrorContextResult, p5, p3, p6, DeferItemBuild, EntryConfigExtrasFn)
 end
 
-return function(_, p15, p16, p17, p18, p19)
-	-- upvalues: sduiLoggerModule (ref), sduiErrorsModule (ref), propResultCategory (ref), sduiListEntryRendererModule (ref), sduiPoolEntryHelpersModule (ref), sduiPropUtilsModule (ref), sduiListEntryNormalizerModule (ref), buildItemsFromEntries (ref), sduiParseHelpersModule (ref), signalsModule (ref)
-	local source = p15 and p15.source
-	local defaultItem = p15 and p15.default_item
-	local orderedIdentifiers = p15 and p15.ordered_identifiers
-	local itemOverrides = p15 and p15.item_overrides
-	local deferItemBuild = p15 and p15.defer_item_build
+return function(_, p7, p8, Callback1, p9, p10) --[[ Line: 123 | Named "buildComponentList" ]]
+	-- upvalues: SduiLoggerModule (copy), SduiErrorsModule (copy), PropResultCategory (copy), SduiListEntryRendererModule (copy), SduiPoolEntryHelpersModule (copy), SduiPropUtilsModule (copy), SduiListEntryNormalizerModule (copy), buildItemsFromEntries (copy), SduiParseHelpersModule (copy), SignalsModule (copy)
+	local Source = p7 and p7.source
+	local DefaultItem = p7 and p7.default_item
+	local OrderedIdentifiers = p7 and p7.ordered_identifiers
+	local ItemOverrides = p7 and p7.item_overrides
+	local DeferItemBuild = p7 and p7.defer_item_build
 	
-	if source == nil then
-		sduiLoggerModule.reportError(sduiErrorsModule.SduiErrorType.FailedToParseProp, {
+	if Source == nil then
+		SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToParseProp, {
 			message = "ComponentList missing source",
-			name = p18.debugName,
-			componentType = p18.currentComponentType,
-			parserName = p18.currentParserName
-		}, p18.appPage)
+			name = p9.debugName,
+			componentType = p9.currentComponentType,
+			parserName = p9.currentParserName
+		}, p9.appPage)
 		
-		return function()
+		return function() --[[ Line: 146 ]]
 			return { data = {} }
-		end, propResultCategory.PropSignal
+		end, PropResultCategory.PropSignal
 	end
-	local type = source.type
-	local value = source.value
-	local var7 = sduiListEntryRendererModule.captureErrorContext(p18)
-	local poolConfig = p15 and p15.pool_config
-	local var8 = sduiPoolEntryHelpersModule.resolvePoolDataGetter(poolConfig and poolConfig.pool_path, p16, p18, p17)
-	local var9 = sduiPoolEntryHelpersModule.buildPoolEntryConfigs(poolConfig)
+	local Type = Source.type
+	local Value = Source.value
+	local CaptureErrorContextResult = SduiListEntryRendererModule.captureErrorContext(p9)
+	local PoolConfig = p7 and p7.pool_config
+	local ResolvePoolDataGetterResult = SduiPoolEntryHelpersModule.resolvePoolDataGetter(PoolConfig and PoolConfig.pool_path, p8, p9, Callback1)
+	local PoolEntryConfigs = SduiPoolEntryHelpersModule.buildPoolEntryConfigs(PoolConfig)
 	
-	if type == "binding_path" then
-		local var10 = nil
+	if Type == "binding_path" then
+		local CreateComputed = nil
 		
-		return sduiPropUtilsModule.generateDynamicBindingPropValue(value, p16, p18, p17, function(p20, p21)
-			-- upvalues: sduiListEntryNormalizerModule (copy), defaultItem (ref), itemOverrides (ref), p18 (ref), var10 (write), buildItemsFromEntries (copy), orderedIdentifiers (ref), p17 (ref), p16 (ref), var7 (ref), p19 (ref), deferItemBuild (ref), var8 (ref), var9 (ref)
-			var10 = buildItemsFromEntries(sduiListEntryNormalizerModule.normalizeBoundData(p20, defaultItem, itemOverrides, p18), orderedIdentifiers, var10, p17, p16, p18, var7, p19, p21, deferItemBuild, var8, var9)
+		return SduiPropUtilsModule.generateDynamicBindingPropValue(Value, p8, p9, Callback1, function(p11, p12) --[[ Line: 178 ]]
+			-- upvalues: SduiListEntryNormalizerModule (upval), DefaultItem (copy), ItemOverrides (copy), p9 (copy), CreateComputed (ref), buildItemsFromEntries (upval), OrderedIdentifiers (copy), Callback1 (copy), p8 (copy), CaptureErrorContextResult (copy), p10 (copy), DeferItemBuild (copy), ResolvePoolDataGetterResult (copy), PoolEntryConfigs (copy)
+			CreateComputed = buildItemsFromEntries(SduiListEntryNormalizerModule.normalizeBoundData(p11, DefaultItem, ItemOverrides, p9), OrderedIdentifiers, CreateComputed, Callback1, p8, p9, CaptureErrorContextResult, p10, p12, DeferItemBuild, ResolvePoolDataGetterResult, PoolEntryConfigs)
 			
-			return var10
-		end), propResultCategory.PropSignal
-	elseif type == "literal" then
-		local items = value and value.items
+			return CreateComputed
+		end), PropResultCategory.PropSignal
+	elseif Type == "literal" then
+		local CreateComputed = Value and Value.items
 		
-		if items == nil then
-			return function()
+		if CreateComputed == nil then
+			return function() --[[ Line: 207 ]]
 				return { data = {} }
-			end, propResultCategory.PropSignal
+			end, PropResultCategory.PropSignal
+		else
+			return function(p11) --[[ Line: 215 ]]
+				-- upvalues: SduiListEntryNormalizerModule (upval), CreateComputed (copy), DefaultItem (copy), p9 (copy), buildItemsFromEntries (upval), OrderedIdentifiers (copy), Callback1 (copy), p8 (copy), CaptureErrorContextResult (copy), p10 (copy), DeferItemBuild (copy), ResolvePoolDataGetterResult (copy), PoolEntryConfigs (copy), SduiLoggerModule (upval), SduiErrorsModule (upval), SduiParseHelpersModule (upval)
+				local Success, Result = pcall(function() --[[ Line: 216 ]]
+					-- upvalues: SduiListEntryNormalizerModule (upval), CreateComputed (upval), DefaultItem (upval), p9 (upval), buildItemsFromEntries (upval), OrderedIdentifiers (upval), Callback1 (upval), p8 (upval), CaptureErrorContextResult (upval), p10 (upval), p11 (copy), DeferItemBuild (upval), ResolvePoolDataGetterResult (upval), PoolEntryConfigs (upval)
+					return (buildItemsFromEntries(SduiListEntryNormalizerModule.normalizeLiteralItems(CreateComputed, DefaultItem, p9), OrderedIdentifiers, nil, Callback1, p8, p9, CaptureErrorContextResult, p10, p11, DeferItemBuild, ResolvePoolDataGetterResult, PoolEntryConfigs))
+				end)
+				
+				if Success then
+					return { data = Result }
+				else
+					SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToParseProp, {
+						message = `Failed to build ComponentList from literal source: {SduiParseHelpersModule.stringifyValue(Result)}`,
+						name = CaptureErrorContextResult.name,
+						componentType = CaptureErrorContextResult.componentType,
+						parserName = CaptureErrorContextResult.parserName
+					}, CaptureErrorContextResult.appPage)
+					
+					return { data = {} }
+				end
+			end, PropResultCategory.PropSignal
 		end
-		return function(p20)
-			-- upvalues: sduiListEntryNormalizerModule (copy), items (ref), defaultItem (ref), p18 (ref), buildItemsFromEntries (copy), orderedIdentifiers (ref), p17 (ref), p16 (ref), var7 (ref), p19 (ref), deferItemBuild (ref), var8 (ref), var9 (ref), sduiLoggerModule (copy), sduiErrorsModule (copy), sduiParseHelpersModule (copy)
-			local ok, status = pcall(function()
-				-- upvalues: sduiListEntryNormalizerModule (copy), items (copy), defaultItem (copy), p18 (copy), buildItemsFromEntries (copy), orderedIdentifiers (copy), p17 (copy), p16 (copy), var7 (copy), p19 (copy), p20 (ref), deferItemBuild (copy), var8 (copy), var9 (copy)
-				return buildItemsFromEntries(sduiListEntryNormalizerModule.normalizeLiteralItems(items, defaultItem, p18), orderedIdentifiers, nil, p17, p16, p18, var7, p19, p20, deferItemBuild, var8, var9)
-			end)
-			
-			if ok then
-				return { data = status }
-			end
-			sduiLoggerModule.reportError(sduiErrorsModule.SduiErrorType.FailedToParseProp, {
-				message = `Failed to build ComponentList from literal source: {sduiParseHelpersModule.stringifyValue(status)}`,
-				name = var7.name,
-				componentType = var7.componentType,
-				parserName = var7.parserName
-			}, var7.appPage)
-			
-			return { data = {} }
-		end, propResultCategory.PropSignal
-	elseif type == "pool" then
-		return signalsModule.createComputed(function(p20)
-			-- upvalues: p17 (ref), sduiListEntryNormalizerModule (copy), defaultItem (ref), itemOverrides (ref), p18 (ref), buildItemsFromEntries (copy), orderedIdentifiers (ref), p16 (ref), var7 (ref), p19 (ref), deferItemBuild (ref), sduiLoggerModule (copy), sduiErrorsModule (copy), sduiParseHelpersModule (copy)
-			local ok, status = pcall(function()
-				-- upvalues: p17 (copy), p20 (ref), sduiListEntryNormalizerModule (copy), defaultItem (copy), itemOverrides (copy), p18 (copy), buildItemsFromEntries (copy), orderedIdentifiers (copy), p16 (copy), var7 (copy), p19 (copy), deferItemBuild (copy), sduiLoggerModule (copy), sduiErrorsModule (copy)
-				local section = (p17(p20) or {})._section
+	elseif Type ~= "pool" then
+		local CreateComputed: (any) -> () = error
+		CreateComputed(`Unknown ComponentList source kind: {Type}`)
+		
+		return
+	else
+		local CreateComputed = SignalsModule
+		CreateComputed = CreateComputed.createComputed
+		CreateComputed = CreateComputed(function(p11) --[[ Line: 256 ]]
+			-- upvalues: Callback1 (copy), SduiListEntryNormalizerModule (upval), DefaultItem (copy), ItemOverrides (copy), p9 (copy), buildItemsFromEntries (upval), OrderedIdentifiers (copy), p8 (copy), CaptureErrorContextResult (copy), p10 (copy), DeferItemBuild (copy), SduiLoggerModule (upval), SduiErrorsModule (upval), SduiParseHelpersModule (upval)
+			local Success, Result = pcall(function() --[[ Line: 257 ]]
+				-- upvalues: Callback1 (upval), p11 (copy), SduiListEntryNormalizerModule (upval), DefaultItem (upval), ItemOverrides (upval), p9 (upval), buildItemsFromEntries (upval), OrderedIdentifiers (upval), p8 (upval), CaptureErrorContextResult (upval), p10 (upval), DeferItemBuild (upval), SduiLoggerModule (upval), SduiErrorsModule (upval)
+				local Section = (Callback1(p11) or {})._section
 				
-				if typeof(section) ~= "table" then
+				if typeof(Section) ~= "table" then
 					return {}
 				end
-				local cells = section.cells
+				local CellsFunction = Section.cells
 				
-				if typeof(cells) ~= "function" then
+				if typeof(CellsFunction) ~= "function" then
 					return {}
 				end
-				local var11 = cells(p20)
+				local CellsResult = CellsFunction(p11)
 				
-				if #var11 == 0 then
+				if #CellsResult == 0 then
 					return {}
 				end
-				local t = {}
-				local list = table.create(#var11, 0)
+				local Items = {}
+				local Buffer = table.create(#CellsResult, 0)
 				
-				for i, v in var11 do
-					if v.item ~= nil then
-						table.insert(t, v.item)
-						list[i] = #t
+				for i, value in CellsResult do
+					if value.item ~= nil then
+						table.insert(Items, value.item)
+						Buffer[i] = #Items
 					end
 				end
-				local var12, var13 = buildItemsFromEntries(sduiListEntryNormalizerModule.normalizeBoundData(t, defaultItem, itemOverrides, p18), orderedIdentifiers, nil, p17, p16, p18, var7, p19, p20, deferItemBuild, nil, nil)
+				local ItemsFromEntries, ItemsFromEntries2 = buildItemsFromEntries(SduiListEntryNormalizerModule.normalizeBoundData(Items, DefaultItem, ItemOverrides, p9), OrderedIdentifiers, nil, Callback1, p8, p9, CaptureErrorContextResult, p10, p11, DeferItemBuild, nil, nil)
 				
-				if #var12 ~= #t then
-					sduiLoggerModule.reportError(sduiErrorsModule.SduiErrorType.FailedToParseProp, {
-						message = `Pool-backed ComponentList dropped {#t - #var12} of {#t} items;` .. " pool templates must resolve to valid templates and must not use is_component_filtered",
-						name = var7.name,
-						componentType = var7.componentType,
-						parserName = var7.parserName
-					}, var7.appPage)
+				if #ItemsFromEntries ~= #Items then
+					SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToParseProp, {
+						message = `Pool-backed ComponentList dropped {#Items - #ItemsFromEntries} of {#Items} items;` .. " pool templates must resolve to valid templates and must not use is_component_filtered",
+						name = CaptureErrorContextResult.name,
+						componentType = CaptureErrorContextResult.componentType,
+						parserName = CaptureErrorContextResult.parserName
+					}, CaptureErrorContextResult.appPage)
 				end
-				local t_1 = {}
+				local t = {}
 				
-				for i_1, v_1 in var13 do
-					t_1[v_1] = var12[i_1]
+				for i1, value1 in ItemsFromEntries2 do
+					t[value1] = ItemsFromEntries[i1]
 				end
-				local t_2 = {}
+				local List = {}
 				
-				for i_2, v_2 in var11 do
-					local var14 = list[i_2]
+				for i2, value2 in CellsResult do
+					local BufferEntry = Buffer[i2]
 					
-					if var14 == 0 then
-						table.insert(t_2, { isBlank = true })
+					if BufferEntry == 0 then
+						table.insert(List, { isBlank = true })
 					else
-						local var15 = t_1[var14]
+						local Entry = t[BufferEntry]
 						
-						if var15 ~= nil then
-							var15.realIndex = v_2.realIndex
-							var15.spanOverride = v_2.spanOverride
-							table.insert(t_2, var15)
+						if Entry ~= nil then
+							Entry.realIndex = value2.realIndex
+							Entry.spanOverride = value2.spanOverride
+							table.insert(List, Entry)
 						end
 					end
 				end
-				return t_2
+				return List
 			end)
 			
-			if ok then
-				return { data = status }
+			if Success then
+				return { data = Result }
+			else
+				SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToParseProp, {
+					message = `Failed to build ComponentList from pool source: {SduiParseHelpersModule.stringifyValue(Result)}`,
+					name = CaptureErrorContextResult.name,
+					componentType = CaptureErrorContextResult.componentType,
+					parserName = CaptureErrorContextResult.parserName
+				}, CaptureErrorContextResult.appPage)
+				
+				return { data = {} }
 			end
-			sduiLoggerModule.reportError(sduiErrorsModule.SduiErrorType.FailedToParseProp, {
-				message = `Failed to build ComponentList from pool source: {sduiParseHelpersModule.stringifyValue(status)}`,
-				name = var7.name,
-				componentType = var7.componentType,
-				parserName = var7.parserName
-			}, var7.appPage)
-			
-			return { data = {} }
-		end), propResultCategory.PropSignal
+		end)
+		
+		return CreateComputed, PropResultCategory.PropSignal
 	end
-	error(`Unknown ComponentList source kind: {type}`)
 end

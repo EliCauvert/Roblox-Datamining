@@ -1,1 +1,1 @@
-﻿return require(script.ContactsListLoadingView)
+﻿return (require(script.ContactsListLoadingView))

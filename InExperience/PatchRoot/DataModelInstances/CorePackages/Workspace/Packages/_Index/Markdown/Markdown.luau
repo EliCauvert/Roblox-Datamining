@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CorePackages").Packages.Markdown)
+﻿return (require(game:GetService("CorePackages").Packages.Markdown))

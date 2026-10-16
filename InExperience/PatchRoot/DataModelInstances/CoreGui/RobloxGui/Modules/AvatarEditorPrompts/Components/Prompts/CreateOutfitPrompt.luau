@@ -1,50 +1,49 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local coreGuiService = game:GetService("CoreGui")
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local tModule = require(corePackagesService.Packages.t)
-local buttonType = require(corePackagesService.Packages.UIBlox).App.Button.Enum.ButtonType
-local _ = coreGuiService:WaitForChild("RobloxGui")
-local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
-local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local promptWithAvatarViewportModule = require(parent.Prompts.PromptWithAvatarViewport)
-local signalCreateOutfitPermissionDeniedModule = require(parent_1.Thunks.SignalCreateOutfitPermissionDenied)
-local createOutfitConfirmedModule = require(parent_1.Actions.CreateOutfitConfirmed)
-local performCreateOutfitModule = require(parent_1.Thunks.PerformCreateOutfit)
-local avatarEditorPromptsPolicyModule = require(parent_1.AvatarEditorPromptsPolicy)
-local createOutfitPrompt = roactModule.PureComponent:extend("CreateOutfitPrompt")
-createOutfitPrompt.validateProps = tModule.strictInterface({
-	humanoidDescription = tModule.instanceOf("HumanoidDescription"),
-	rigType = tModule.enum(Enum.HumanoidRigType),
-	createOutfitConfirmed = tModule.callback,
-	signalCreateOutfitPermissionDenied = tModule.callback,
-	performCreateOutfit = tModule.callback,
-	showCustomOutfitNames = tModule.boolean
+﻿local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local TModule = require(CorePackages.Packages.t)
+local ButtonType = require(CorePackages.Packages.UIBlox).App.Button.Enum.ButtonType
+local _ = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
+local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local PromptWithAvatarViewportModule = require(Parent.Prompts.PromptWithAvatarViewport)
+local SignalCreateOutfitPermissionDeniedModule = require(Parent1.Thunks.SignalCreateOutfitPermissionDenied)
+local CreateOutfitConfirmedModule = require(Parent1.Actions.CreateOutfitConfirmed)
+local PerformCreateOutfitModule = require(Parent1.Thunks.PerformCreateOutfit)
+local AvatarEditorPromptsPolicyModule = require(Parent1.AvatarEditorPromptsPolicy)
+local CreateOutfitPrompt = RoactModule.PureComponent:extend("CreateOutfitPrompt")
+CreateOutfitPrompt.validateProps = TModule.strictInterface({
+	humanoidDescription = TModule.instanceOf("HumanoidDescription"),
+	rigType = TModule.enum(Enum.HumanoidRigType),
+	createOutfitConfirmed = TModule.callback,
+	signalCreateOutfitPermissionDenied = TModule.callback,
+	performCreateOutfit = TModule.callback,
+	showCustomOutfitNames = TModule.boolean
 })
 
-function createOutfitPrompt.render(p1)
-	-- upvalues: roactModule (ref), promptWithAvatarViewportModule (ref), robloxTranslatorModule (ref), buttonType (ref)
-	return roactModule.createElement(promptWithAvatarViewportModule, {
+function CreateOutfitPrompt.render(p1) --[[ Line: 41 ]]
+	-- upvalues: RoactModule (copy), PromptWithAvatarViewportModule (copy), RobloxTranslatorModule (copy), ButtonType (copy)
+	return RoactModule.createElement(PromptWithAvatarViewportModule, {
 		humanoidDescription = p1.props.humanoidDescription,
 		rigType = p1.props.rigType,
-		title = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.CreateOutfitPromptTitle"),
-		bodyText = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.CreateOutfitPromptText"),
+		title = RobloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.CreateOutfitPromptTitle"),
+		bodyText = RobloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.CreateOutfitPromptText"),
 		buttonStackInfo = {
 			buttons = {
 				{
 					isDefaultChild = true,
 					props = {
 						onActivated = p1.props.signalCreateOutfitPermissionDenied,
-						text = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.CreateOutfitPromptNo")
+						text = RobloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.CreateOutfitPromptNo")
 					}
 				},
 				{
 					isDefaultChild = false,
-					buttonType = buttonType.PrimarySystem,
+					buttonType = ButtonType.PrimarySystem,
 					props = {
 						onActivated = if p1.props.showCustomOutfitNames then p1.props.createOutfitConfirmed else p1.props.performCreateOutfit,
-						text = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.CreateOutfitPromptYes")
+						text = RobloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.CreateOutfitPromptYes")
 					}
 				}
 			}
@@ -52,27 +51,27 @@ function createOutfitPrompt.render(p1)
 	})
 end
 
-return avatarEditorPromptsPolicyModule.connect(function(p1, _)
+return (AvatarEditorPromptsPolicyModule.connect(function(p1, _) --[[ Line: 102 ]]
 	return { showCustomOutfitNames = p1.getCustomOutfitNames() }
-end)(roactRoduxModule.connect(function(p1)
+end)((RoactRoduxModule.connect(function(p1) --[[ Line: 77 | Named "mapStateToProps" ]]
 	return {
 		humanoidDescription = p1.promptInfo.humanoidDescription,
 		rigType = p1.promptInfo.rigType
 	}
-end, function(p1)
-	-- upvalues: signalCreateOutfitPermissionDeniedModule (ref), createOutfitConfirmedModule (ref), performCreateOutfitModule (ref)
+end, function(Callback) --[[ Line: 84 | Named "mapDispatchToProps" ]]
+	-- upvalues: SignalCreateOutfitPermissionDeniedModule (copy), CreateOutfitConfirmedModule (copy), PerformCreateOutfitModule (copy)
 	return {
-		signalCreateOutfitPermissionDenied = function()
-			-- upvalues: p1 (ref), signalCreateOutfitPermissionDeniedModule (copy)
-			return p1(signalCreateOutfitPermissionDeniedModule)
+		signalCreateOutfitPermissionDenied = function() --[[ Line: 86 ]]
+			-- upvalues: Callback (copy), SignalCreateOutfitPermissionDeniedModule (upval)
+			return Callback(SignalCreateOutfitPermissionDeniedModule)
 		end,
-		createOutfitConfirmed = function()
-			-- upvalues: p1 (ref), createOutfitConfirmedModule (copy)
-			return p1(createOutfitConfirmedModule())
+		createOutfitConfirmed = function() --[[ Line: 90 ]]
+			-- upvalues: Callback (copy), CreateOutfitConfirmedModule (upval)
+			return Callback(CreateOutfitConfirmedModule())
 		end,
-		performCreateOutfit = function()
-			-- upvalues: p1 (ref), performCreateOutfitModule (copy)
-			return p1(performCreateOutfitModule(""))
+		performCreateOutfit = function() --[[ Line: 94 ]]
+			-- upvalues: Callback (copy), PerformCreateOutfitModule (upval)
+			return Callback(PerformCreateOutfitModule(""))
 		end
 	}
-end)(createOutfitPrompt))
+end)(CreateOutfitPrompt))))

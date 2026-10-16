@@ -1,31 +1,31 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local guiService = game:GetService("GuiService")
-local buttonVariant = require(parent.Foundation).Enums.ButtonVariant
-local chatEntryPointNames = require(parent.SocialCommon).Enums.ChatEntryPointNames
-local enteredChatFromEntryPointModule = require(parent.AppChat.EnteredChatFromEntryPoint)
-local notificationTypeList = guiService:GetNotificationTypeList()
-local enumsModule = require(profilePlatform.Common.Enums)
-local _ = require(profilePlatform.Components.CTARow.Types)
-local eventNamesModule = require(profilePlatform.Analytics.EventNames)
-local profileTypes = enumsModule.ProfileTypes
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local GuiService = game:GetService("GuiService")
+local ButtonVariant = require(Parent.Foundation).Enums.ButtonVariant
+local ChatEntryPointNames = require(Parent.SocialCommon).Enums.ChatEntryPointNames
+local EnteredChatFromEntryPointModule = require(Parent.AppChat.EnteredChatFromEntryPoint)
+local NotificationTypeList = GuiService:GetNotificationTypeList()
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local _ = require(ProfilePlatform.Components.CTARow.Types)
+local EventNamesModule = require(ProfilePlatform.Analytics.EventNames)
+local ProfileTypes = EnumsModule.ProfileTypes
 
 return {
-	[enumsModule.ProfileActions.Chat] = function(p1)
-		-- upvalues: enumsModule (ref), buttonVariant (ref), profileTypes (ref), eventNamesModule (ref), enteredChatFromEntryPointModule (ref), chatEntryPointNames (ref), guiService (ref), notificationTypeList (ref)
+	[EnumsModule.ProfileActions.Chat] = function(p1) --[[ Line: 19 ]]
+		-- upvalues: EnumsModule (copy), ButtonVariant (copy), ProfileTypes (copy), EventNamesModule (copy), EnteredChatFromEntryPointModule (copy), ChatEntryPointNames (copy), GuiService (copy), NotificationTypeList (copy)
 		return {
-			text = p1.localized[enumsModule.ProfileActions.Chat],
-			variant = buttonVariant.Standard,
+			text = p1.localized[EnumsModule.ProfileActions.Chat],
+			variant = ButtonVariant.Standard,
 			onActivated = {
-				[profileTypes.User] = function()
-					-- upvalues: p1 (ref), enumsModule (copy), eventNamesModule (copy), enteredChatFromEntryPointModule (copy), chatEntryPointNames (copy), guiService (copy), notificationTypeList (copy)
-					if p1.buttonSurface == enumsModule.ButtonSurface.ContextualMenu then
-						p1.analytics.fireAnalyticsEvent(eventNamesModule.ContextualMenuButtonChat, { buttonSurface = p1.buttonSurface })
+				[ProfileTypes.User] = function() --[[ Line: 24 ]]
+					-- upvalues: p1 (copy), EnumsModule (upval), EventNamesModule (upval), EnteredChatFromEntryPointModule (upval), ChatEntryPointNames (upval), GuiService (upval), NotificationTypeList (upval)
+					if p1.buttonSurface == EnumsModule.ButtonSurface.ContextualMenu then
+						p1.analytics.fireAnalyticsEvent(EventNamesModule.ContextualMenuButtonChat, { buttonSurface = p1.buttonSurface })
 					else
-						p1.analytics.fireAnalyticsEvent(eventNamesModule.CTAButtonChat, { buttonSurface = p1.buttonSurface })
+						p1.analytics.fireAnalyticsEvent(EventNamesModule.CTAButtonChat, { buttonSurface = p1.buttonSurface })
 					end
-					p1.dispatch(enteredChatFromEntryPointModule(chatEntryPointNames.ProfilePeekView))
-					guiService:BroadcastNotification(p1.profileId, notificationTypeList.LAUNCH_CONVERSATION)
+					p1.dispatch(EnteredChatFromEntryPointModule(ChatEntryPointNames.ProfilePeekView))
+					GuiService:BroadcastNotification(p1.profileId, NotificationTypeList.LAUNCH_CONVERSATION)
 				end
 			}
 		}

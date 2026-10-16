@@ -1,29 +1,31 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local foundationModule = require(parent_1.Foundation)
-local view = foundationModule.View
-local text = foundationModule.Text
-local iconButton = foundationModule.IconButton
-local useLocalization = require(parent_1.Localization).Hooks.useLocalization
-local fFlagPlayerListLocalizeGameTextModule = require(parent.Flags.FFlagPlayerListLocalizeGameText)
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local FoundationModule = require(Parent1.Foundation)
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local IconButton = FoundationModule.IconButton
+local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
+local FFlagPlayerListLocalizeGameTextModule = require(Parent.Flags.FFlagPlayerListLocalizeGameText)
 
-return reactModule.memo(function(p1)
-	-- upvalues: fFlagPlayerListLocalizeGameTextModule (ref), useLocalization (ref), reactModule (ref), view (ref), text (ref), iconButton (ref), foundationModule (ref)
-	return reactModule.createElement(view, {
+return ReactModule.memo(function(p1) --[[ Line: 13 | Named "PanelHeader" ]]
+	-- upvalues: FFlagPlayerListLocalizeGameTextModule (copy), UseLocalizationFunction (copy), ReactModule (copy), View (copy), Text (copy), IconButton (copy), FoundationModule (copy)
+	local Leaderboard = if FFlagPlayerListLocalizeGameTextModule then UseLocalizationFunction({ leaderboard = "InGame.PlayerList.Leaderboard" }).leaderboard else "Leaderboard"
+	
+	return ReactModule.createElement(View, {
 		tag = "row flex-x-between align-y-center auto-y padding-x-large",
 		Size = UDim2.new(1, 0, 0, p1.height),
 		LayoutOrder = p1.layoutOrder
 	}, {
-		Title = reactModule.createElement(text, {
+		Title = ReactModule.createElement(Text, {
 			tag = "auto-xy text-label-medium content-emphasis",
 			LayoutOrder = 1,
-			Text = p1.title or (if fFlagPlayerListLocalizeGameTextModule then useLocalization({ leaderboard = "InGame.PlayerList.Leaderboard" }).leaderboard else "Leaderboard")
+			Text = p1.title or Leaderboard
 		}),
-		CloseButton = reactModule.createElement(iconButton, {
+		CloseButton = ReactModule.createElement(IconButton, {
 			LayoutOrder = 2,
-			icon = { name = foundationModule.Enums.IconName.X },
-			size = foundationModule.Enums.InputSize.XSmall,
+			icon = { name = FoundationModule.Enums.IconName.X },
+			size = FoundationModule.Enums.InputSize.XSmall,
 			onActivated = p1.onClose,
 			isDisabled = p1.isDisabled == true
 		})

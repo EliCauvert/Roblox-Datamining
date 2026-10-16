@@ -1,43 +1,43 @@
-﻿local parent = script:FindFirstAncestor("AuthSignup").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local scrollBarVisibility = foundationModule.Enums.ScrollBarVisibility
-local authAnalyticsModule = require(parent.AuthAnalytics)
-local usernameSuggestionShown = authAnalyticsModule.Events.usernameSuggestionShown
-local eventStreamConstants = authAnalyticsModule.EventStreamConstants
+﻿local Parent = script:FindFirstAncestor("AuthSignup").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local ScrollBarVisibility = FoundationModule.Enums.ScrollBarVisibility
+local AuthAnalyticsModule = require(Parent.AuthAnalytics)
+local UsernameSuggestionShownFunction = AuthAnalyticsModule.Events.usernameSuggestionShown
+local EventStreamConstants = AuthAnalyticsModule.EventStreamConstants
 
-return function(p1)
-	-- upvalues: reactModule (ref), foundationModule (ref), usernameSuggestionShown (ref), eventStreamConstants (ref), view (ref), scrollBarVisibility (ref)
-	local t = {}
+return function(p1) --[[ Line: 19 ]]
+	-- upvalues: ReactModule (copy), FoundationModule (copy), UsernameSuggestionShownFunction (copy), EventStreamConstants (copy), View (copy), ScrollBarVisibility (copy)
+	local Elements = {}
 	
-	for i, v in ipairs(p1.suggestionUsernames) do
-		t[i] = reactModule.createElement(foundationModule.Pill, {
+	for i, suggestionUsername in ipairs(p1.suggestionUsernames) do
+		Elements[i] = ReactModule.createElement(FoundationModule.Pill, {
 			isDisabled = false,
-			text = v,
-			onActivated = function()
-				-- upvalues: p1 (ref), v (ref)
-				p1.onUsernameSelected(v)
+			text = suggestionUsername,
+			onActivated = function() --[[ Line: 25 ]]
+				-- upvalues: p1 (copy), suggestionUsername (copy)
+				p1.onUsernameSelected(suggestionUsername)
 			end
 		})
 	end
-	reactModule.useEffect(function()
-		-- upvalues: usernameSuggestionShown (copy), p1 (ref), eventStreamConstants (copy)
-		usernameSuggestionShown(p1.eventContext, p1.inputUsername, p1.suggestionUsernames, eventStreamConstants.Field.Username)
+	ReactModule.useEffect(function() --[[ Line: 32 ]]
+		-- upvalues: UsernameSuggestionShownFunction (upval), p1 (copy), EventStreamConstants (upval)
+		UsernameSuggestionShownFunction(p1.eventContext, p1.inputUsername, p1.suggestionUsernames, EventStreamConstants.Field.Username)
 	end, {})
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		LayoutOrder = p1.layoutOrder,
 		tag = { ["size-full-1100 padding-y-small"] = true }
 	}, {
-		reactModule.createElement(foundationModule.ScrollView, {
+		ReactModule.createElement(FoundationModule.ScrollView, {
 			scroll = {
 				AutomaticCanvasSize = Enum.AutomaticSize.XY,
 				CanvasSize = UDim2.fromOffset(0, 0),
 				ScrollingDirection = Enum.ScrollingDirection.X,
-				scrollBarVisibility = scrollBarVisibility.None
+				scrollBarVisibility = ScrollBarVisibility.None
 			},
 			tag = { ["row gap-small no-wrap size-full-1000"] = true }
-		}, t)
+		}, Elements)
 	})
 end

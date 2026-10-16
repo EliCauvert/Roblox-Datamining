@@ -1,77 +1,75 @@
 ﻿local _ = require(script.Parent.types)
 
-local function _(p1)
-	local var1 = false
+local function _(p1) --[[ Line: 5 | Named "once" ]]
+	local v1 = false
 	
-	return function()
-		-- upvalues: var1 (write), p1 (ref)
-		if not var1 then
-			var1 = true
+	return function() --[[ Line: 7 | Named "notAgain" ]]
+		-- upvalues: v1 (ref), p1 (copy)
+		if not v1 then
+			v1 = true
 			p1()
 		end
 	end
 end
 
-return function(p1)
-	local var1 = nil
-	local var2 = nil
-	local var3 = 0
+return function(Callback) --[[ Line: 16 | Named "createCachedResource" ]]
+	local v1 = nil
+	local v2 = nil
+	local Count = 0
 	
-	local function disposeResource()
-		-- upvalues: var3 (write), var1 (write), var2 (write)
-		var3 -= 1
+	local function disposeResource() --[[ Line: 21 ]]
+		-- upvalues: Count (ref), v1 (ref), v2 (ref)
+		Count -= 1
 		
-		if var3 == 0 then
-			var1 = nil
+		if Count == 0 then
+			v1 = nil
 			
-			if var2 ~= nil then
-				local var4 = var2
-				var2 = nil
-				var4()
+			if v2 ~= nil then
+				local Callback: () -> () = v2
+				v2 = nil
+				Callback()
 			end
 		end
 	end
 	
-	local function constructResource()
-		-- upvalues: var2 (write), var1 (write), p1 (ref)
-		local var4, var5 = p1()
-		var2 = var4
-		var1 = var5
+	local function constructResource() --[[ Line: 33 ]]
+		-- upvalues: v2 (ref), v1 (ref), Callback (copy)
+		v2, v3 = Callback()
 	end
 	
-	local function handleError(p2, ...)
-		-- upvalues: var3 (write), var1 (write), var2 (write)
-		if not p2 then
-			var3 -= 1
+	local function handleError(Success, ...) --[[ Line: 37 ]]
+		-- upvalues: Count (ref), v1 (ref), v2 (ref)
+		if not Success then
+			Count -= 1
 			
-			if var3 == 0 then
-				var1 = nil
+			if Count == 0 then
+				v1 = nil
 				
-				if var2 ~= nil then
-					local var4 = var2
-					var2 = nil
-					var4()
+				if v2 ~= nil then
+					local Callback: () -> () = v2
+					v2 = nil
+					Callback()
 				end
 			end
 			error(...)
 		end
 	end
 	
-	return function()
-		-- upvalues: var3 (write), handleError (ref), constructResource (ref), disposeResource (ref), var1 (write)
-		var3 += 1
+	return function() --[[ Line: 44 | Named "cachedResource" ]]
+		-- upvalues: Count (ref), handleError (copy), constructResource (copy), disposeResource (copy), v1 (ref)
+		Count += 1
 		
-		if var3 == 1 then
+		if Count == 1 then
 			handleError(pcall(constructResource))
 		end
-		local var4 = false
+		local v3 = false
 		
-		return function()
-			-- upvalues: var4 (write), disposeResource (ref)
-			if not var4 then
-				var4 = true
+		return function() --[[ Line: 7 | Named "notAgain" ]]
+			-- upvalues: v3 (ref), disposeResource (copy)
+			if not v3 then
+				v3 = true
 				disposeResource()
 			end
-		end, var1
+		end, v1
 	end
 end

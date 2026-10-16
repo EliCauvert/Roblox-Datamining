@@ -1,274 +1,265 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local cryoModule = require(corePackagesService.Packages.Cryo)
-local dashModule = require(corePackagesService.Packages.Dash)
-local fFlagAXMarketplaceLicensing = require(corePackagesService.Workspace.Packages.AvatarExperienceFlags).FFlagAXMarketplaceLicensing
-local constantsModule = require(script.Parent.Parent.Constants)
-local _ = require(corePackagesService.Workspace.Packages.AvatarExperienceInspectAndBuy)
-local avatarExperienceCommonModule = require(corePackagesService.Workspace.Packages.AvatarExperienceCommon)
-local itemRestrictions = avatarExperienceCommonModule.Enums.ItemRestrictions
-local getRawItemLicensingInfo = avatarExperienceCommonModule.Utils.getRawItemLicensingInfo
-local parseItemLicensing = avatarExperienceCommonModule.Utils.parseItemLicensing
-local mockIdModule = require(script.Parent.Parent.MockId)
-local t = {
-	new = function()
+﻿local CorePackages = game:GetService("CorePackages")
+local CryoModule = require(CorePackages.Packages.Cryo)
+local DashModule = require(CorePackages.Packages.Dash)
+local FFlagAXMarketplaceLicensing = require(CorePackages.Workspace.Packages.AvatarExperienceFlags).FFlagAXMarketplaceLicensing
+local ConstantsModule = require(script.Parent.Parent.Constants)
+local _ = require(CorePackages.Workspace.Packages.AvatarExperienceInspectAndBuy)
+local AvatarExperienceCommonModule = require(CorePackages.Workspace.Packages.AvatarExperienceCommon)
+local ItemRestrictions = AvatarExperienceCommonModule.Enums.ItemRestrictions
+local GetRawItemLicensingInfoFunction = AvatarExperienceCommonModule.Utils.getRawItemLicensingInfo
+local ParseItemLicensingFunction = AvatarExperienceCommonModule.Utils.parseItemLicensing
+local MockIdModule = require(script.Parent.Parent.MockId)
+local BundleInfoModule = {
+	new = function() --[[ Line: 43 ]]
 		return {}
 	end
 }
 
-function t.mock()
-	-- upvalues: t (ref), mockIdModule (ref)
-	local var1 = t.new()
-	var1.name = ""
-	var1.bundleId = mockIdModule()
-	var1.description = ""
-	var1.bundleType = ""
-	var1.creatorId = ""
-	var1.creatorName = ""
-	var1.productId = ""
-	var1.isForSale = false
-	var1.price = ""
-	var1.assetIds = {}
-	var1.numFavorites = 0
-	var1.costumeId = ""
-	var1.owned = false
-	var1.isForSale = false
-	var1.collectibleItemId = ""
-	var1.collectibleIsLimited = nil
-	var1.collectibleProductId = ""
-	var1.collectibleLowestResalePrice = 0
-	var1.collectibleLowestAvailableResaleProductId = ""
-	var1.collectibleLowestAvailableResaleItemInstanceId = ""
-	var1.collectibleQuantityLimitPerUser = 0
-	var1.remaining = 0
-	var1.productType = ""
+function BundleInfoModule.mock() --[[ Line: 49 ]]
+	-- upvalues: BundleInfoModule (copy), MockIdModule (copy)
+	local NewBundleInfo = BundleInfoModule.new()
+	NewBundleInfo.name = ""
+	NewBundleInfo.bundleId = MockIdModule()
+	NewBundleInfo.description = ""
+	NewBundleInfo.bundleType = ""
+	NewBundleInfo.creatorId = ""
+	NewBundleInfo.creatorName = ""
+	NewBundleInfo.productId = ""
+	NewBundleInfo.isForSale = false
+	NewBundleInfo.price = ""
+	NewBundleInfo.assetIds = {}
+	NewBundleInfo.numFavorites = 0
+	NewBundleInfo.costumeId = ""
+	NewBundleInfo.owned = false
+	NewBundleInfo.isForSale = false
+	NewBundleInfo.collectibleItemId = ""
+	NewBundleInfo.collectibleIsLimited = nil
+	NewBundleInfo.collectibleProductId = ""
+	NewBundleInfo.collectibleLowestResalePrice = 0
+	NewBundleInfo.collectibleLowestAvailableResaleProductId = ""
+	NewBundleInfo.collectibleLowestAvailableResaleItemInstanceId = ""
+	NewBundleInfo.collectibleQuantityLimitPerUser = 0
+	NewBundleInfo.remaining = 0
+	NewBundleInfo.productType = ""
 	
-	return var1
+	return NewBundleInfo
 end
 
-function t.fromBulkPurchaseResult(p1, p2)
-	-- upvalues: t (ref), itemRestrictions (ref)
-	local var1 = t.new()
-	local var2 = if p2 and p2.itemRestrictions then p2.itemRestrictions else {}
-	var1.resellableCount = if p2 and p2.resellableCount then p2.resellableCount else 0
+function BundleInfoModule.fromBulkPurchaseResult(p1, p2) --[[ Line: 82 ]]
+	-- upvalues: BundleInfoModule (copy), ItemRestrictions (copy)
+	local NewBundleInfo = BundleInfoModule.new()
+	local ItemRestrictions1 = if p2 and p2.itemRestrictions then p2.itemRestrictions else {}
+	NewBundleInfo.resellableCount = if p2 and p2.resellableCount then p2.resellableCount else 0
 	
 	if p1.status == Enum.MarketplaceItemPurchaseStatus.Success and p1.type == Enum.MarketplaceProductType.AvatarBundle then
-		var1.owned = true
+		NewBundleInfo.owned = true
 		
-		if var2[itemRestrictions.Collectible] or var2[itemRestrictions.Limited] or var2[itemRestrictions.LimitedUnique] then
-			var1.resellableCount += 1
+		if ItemRestrictions1[ItemRestrictions.Collectible] or ItemRestrictions1[ItemRestrictions.Limited] or ItemRestrictions1[ItemRestrictions.LimitedUnique] then
+			NewBundleInfo.resellableCount += 1
 		end
 	end
-	return var1
+	return NewBundleInfo
 end
 
-function t.fromGetFavoriteForAsset(value, p1)
-	-- upvalues: t (ref)
-	local var1 = t.new()
-	var1.bundleId = tostring(value)
-	var1.isFavorited = p1
+function BundleInfoModule.fromGetFavoriteForAsset(p1, IsFavorited) --[[ Line: 111 ]]
+	-- upvalues: BundleInfoModule (copy)
+	local NewBundleInfo = BundleInfoModule.new()
+	NewBundleInfo.bundleId = tostring(p1)
+	NewBundleInfo.isFavorited = IsFavorited
 	
-	return var1
+	return NewBundleInfo
 end
 
-function t.fromAvatarPreviewItem(p1)
-	-- upvalues: t (ref), fFlagAXMarketplaceLicensing (ref), parseItemLicensing (ref), getRawItemLicensingInfo (ref)
-	local var1 = t.new()
-	var1.name = p1.name
-	var1.description = p1.description
-	var1.price = p1.priceInRobux
-	var1.isForSale = p1.isPurchasable
-	var1.productId = tostring(p1.productId)
-	var1.collectibleItemId = p1.collectibleItemId
-	var1.collectibleProductId = p1.collectibleProductId
-	var1.owned = p1.quantityOwned > 0
-	var1.resellableCount = p1.quantityOwned
-	var1.creatorId = tostring(p1.creator.id)
-	var1.creatorName = p1.creator.name
-	var1.creatorHasVerifiedBadge = p1.creator.hasVerifiedBadge
-	var1.bundleId = tostring(p1.id)
-	var1.bundleType = tostring(p1.bundleType)
-	var1.noPriceStatus = p1.noPriceStatus
+function BundleInfoModule.fromAvatarPreviewItem(p1) --[[ Line: 118 ]]
+	-- upvalues: BundleInfoModule (copy), FFlagAXMarketplaceLicensing (copy), ParseItemLicensingFunction (copy), GetRawItemLicensingInfoFunction (copy)
+	local NewBundleInfo = BundleInfoModule.new()
+	NewBundleInfo.name = p1.name
+	NewBundleInfo.description = p1.description
+	NewBundleInfo.price = p1.priceInRobux
+	NewBundleInfo.isForSale = p1.isPurchasable
+	NewBundleInfo.productId = tostring(p1.productId)
+	NewBundleInfo.collectibleItemId = p1.collectibleItemId
+	NewBundleInfo.collectibleProductId = p1.collectibleProductId
+	NewBundleInfo.owned = p1.quantityOwned > 0
+	NewBundleInfo.resellableCount = p1.quantityOwned
+	NewBundleInfo.creatorId = tostring(p1.creator.id)
+	NewBundleInfo.creatorName = p1.creator.name
+	NewBundleInfo.creatorHasVerifiedBadge = p1.creator.hasVerifiedBadge
+	NewBundleInfo.bundleId = tostring(p1.id)
+	NewBundleInfo.bundleType = tostring(p1.bundleType)
+	NewBundleInfo.noPriceStatus = p1.noPriceStatus
 	
-	if fFlagAXMarketplaceLicensing then
-		var1.itemLicensingInfo = parseItemLicensing(getRawItemLicensingInfo(p1))
+	if FFlagAXMarketplaceLicensing then
+		NewBundleInfo.itemLicensingInfo = ParseItemLicensingFunction(GetRawItemLicensingInfoFunction(p1))
 	end
-	local t_1 = {}
+	local AssetsInBundle = {}
 	
 	if p1.assetsInBundle then
-		for i, v in p1.assetsInBundle do
-			table.insert(t_1, {
-				id = tostring(v.id),
-				assetType = tostring(v.assetType),
-				isIncluded = v.isIncluded,
-				meta = v.meta
+		for _, value in p1.assetsInBundle do
+			table.insert(AssetsInBundle, {
+				id = tostring(value.id),
+				assetType = tostring(value.assetType),
+				isIncluded = value.isIncluded,
+				meta = value.meta
 			})
 		end
 	end
-	var1.assetsInBundle = t_1
+	NewBundleInfo.assetsInBundle = AssetsInBundle
 	
 	if p1.itemRestrictions then
-		local t_2 = {}
+		local ItemRestrictions = {}
 		
-		for i, v in p1.itemRestrictions do
-			t_2[v] = true
+		for _, itemRestriction in p1.itemRestrictions do
+			ItemRestrictions[itemRestriction] = true
 		end
-		var1.itemRestrictions = t_2
+		NewBundleInfo.itemRestrictions = ItemRestrictions
 	end
-	return var1
+	return NewBundleInfo
 end
 
-function t.fromGetAssetBundles(value)
-	-- upvalues: t (ref), constantsModule (ref)
-	local var2 = t.new()
-	var2.name = value.name
-	var2.bundleId = tostring(value.id)
-	var2.description = value.description
-	var2.bundleType = value.bundleType
-	var2.creatorId = tostring(value.creator.id)
-	var2.creatorName = value.creator.name
-	var2.productId = tostring(value.product.id)
+function BundleInfoModule.fromGetAssetBundles(p2) --[[ Line: 166 ]]
+	-- upvalues: BundleInfoModule (copy), ConstantsModule (copy)
+	local NewBundleInfo = BundleInfoModule.new()
+	NewBundleInfo.name = p2.name
+	NewBundleInfo.bundleId = tostring(p2.id)
+	NewBundleInfo.description = p2.description
+	NewBundleInfo.bundleType = p2.bundleType
+	NewBundleInfo.creatorId = tostring(p2.creator.id)
+	NewBundleInfo.creatorName = p2.creator.name
+	NewBundleInfo.productId = tostring(p2.product.id)
 	
-	if value.collectibleItemDetail then
-		var2.isForSale = value.collectibleItemDetail.saleStatus == constantsModule.SaleStatus.OnSale
-		var2.collectibleItemId = value.collectibleItemDetail.collectibleItemId or ""
-		var2.collectibleProductId = value.collectibleItemDetail.collectibleProductId or ""
-		var2.collectibleLowestResalePrice = value.collectibleItemDetail.lowestResalePrice or 0
-		var2.collectibleLowestAvailableResaleProductId = value.collectibleItemDetail.lowestAvailableResaleProductId or ""
-		var2.collectibleLowestAvailableResaleItemInstanceId = value.collectibleItemDetail.lowestAvailableResaleItemInstanceId or ""
-		var2.collectibleQuantityLimitPerUser = value.collectibleItemDetail.quantityLimitPerUser or 0
-		var2.productType = constantsModule.ProductType.CollectibleItem
-		var2.price = value.collectibleItemDetail.price
-		var2.remaining = value.collectibleItemDetail.unitsAvailable or 0
-		var2.collectibleIsLimited = value.collectibleItemDetail.collectibleItemType == "Limited"
-		var2.saleLocation = value.collectibleItemDetail.saleLocation
+	if p2.collectibleItemDetail then
+		NewBundleInfo.isForSale = p2.collectibleItemDetail.saleStatus == ConstantsModule.SaleStatus.OnSale
+		NewBundleInfo.collectibleItemId = p2.collectibleItemDetail.collectibleItemId or ""
+		NewBundleInfo.collectibleProductId = p2.collectibleItemDetail.collectibleProductId or ""
+		NewBundleInfo.collectibleLowestResalePrice = p2.collectibleItemDetail.lowestResalePrice or 0
+		NewBundleInfo.collectibleLowestAvailableResaleProductId = p2.collectibleItemDetail.lowestAvailableResaleProductId or ""
+		NewBundleInfo.collectibleLowestAvailableResaleItemInstanceId = p2.collectibleItemDetail.lowestAvailableResaleItemInstanceId or ""
+		NewBundleInfo.collectibleQuantityLimitPerUser = p2.collectibleItemDetail.quantityLimitPerUser or 0
+		NewBundleInfo.productType = ConstantsModule.ProductType.CollectibleItem
+		NewBundleInfo.price = p2.collectibleItemDetail.price
+		NewBundleInfo.remaining = p2.collectibleItemDetail.unitsAvailable or 0
+		NewBundleInfo.collectibleIsLimited = p2.collectibleItemDetail.collectibleItemType == "Limited"
+		NewBundleInfo.saleLocation = p2.collectibleItemDetail.saleLocation
 	end
-	var2.assetIds = {}
+	NewBundleInfo.assetIds = {}
 	
-	for i, v in pairs(value.items) do
-		if v.type == "UserOutfit" then
-			var2.costumeId = tostring(v.id)
+	for _, item in pairs(p2.items) do
+		if item.type == "UserOutfit" then
+			NewBundleInfo.costumeId = tostring(item.id)
 		else
-			table.insert(var2.assetIds, tostring(v.id))
+			table.insert(NewBundleInfo.assetIds, (tostring(item.id)))
 		end
 	end
-	return var2
+	return NewBundleInfo
 end
 
-function t.fromGetItemDetailsV2(p2)
-	-- upvalues: t (ref), getRawItemLicensingInfo (ref), fFlagAXMarketplaceLicensing (ref), parseItemLicensing (ref), cryoModule (ref)
-	local var3 = t.new()
-	var3.bundleId = tostring(p2.id)
-	var3.isForSale = p2.isPurchasable
-	var3.price = p2.price or 0
-	var3.hasResellers = p2.hasResellers
-	var3.collectibleItemId = p2.collectibleItemId
-	var3.remaining = p2.unitsAvailableForConsumption
-	var3.collectibleTotalQuantity = p2.totalQuantity
-	var3.collectibleLowestResalePrice = p2.lowestResalePrice
-	var3.isOffSale = p2.isOffSale
-	var3.saleLocationType = p2.saleLocationType
-	var3.numFavorites = p2.favoriteCount
-	var3.catalogPriceStatus = p2.priceStatus
-	local var4 = getRawItemLicensingInfo(p2)
+function BundleInfoModule.fromGetItemDetailsV2(p3) --[[ Line: 213 ]]
+	-- upvalues: BundleInfoModule (copy), GetRawItemLicensingInfoFunction (copy), FFlagAXMarketplaceLicensing (copy), ParseItemLicensingFunction (copy), CryoModule (copy)
+	local NewBundleInfo = BundleInfoModule.new()
+	NewBundleInfo.bundleId = tostring(p3.id)
+	NewBundleInfo.isForSale = p3.isPurchasable
+	NewBundleInfo.price = p3.price or 0
+	NewBundleInfo.hasResellers = p3.hasResellers
+	NewBundleInfo.collectibleItemId = p3.collectibleItemId
+	NewBundleInfo.remaining = p3.unitsAvailableForConsumption
+	NewBundleInfo.collectibleTotalQuantity = p3.totalQuantity
+	NewBundleInfo.collectibleLowestResalePrice = p3.lowestResalePrice
+	NewBundleInfo.isOffSale = p3.isOffSale
+	NewBundleInfo.saleLocationType = p3.saleLocationType
+	NewBundleInfo.numFavorites = p3.favoriteCount
+	NewBundleInfo.catalogPriceStatus = p3.priceStatus
+	local RawItemLicensingInfo = GetRawItemLicensingInfoFunction(p3)
 	
-	if fFlagAXMarketplaceLicensing and var4 ~= nil then
-		var3.itemLicensingInfo = parseItemLicensing(var4) or cryoModule.None
+	if FFlagAXMarketplaceLicensing and RawItemLicensingInfo ~= nil then
+		NewBundleInfo.itemLicensingInfo = ParseItemLicensingFunction(RawItemLicensingInfo) or CryoModule.None
 	end
-	local t_1 = {}
+	local AssetsInBundle = {}
 	
-	if p2.bundledItems then
-		for i, v in p2.bundledItems do
-			table.insert(t_1, { id = tostring(v.id), name = v.name })
+	if p3.bundledItems then
+		for _, bundledItem in p3.bundledItems do
+			table.insert(AssetsInBundle, { id = tostring(bundledItem.id), name = bundledItem.name })
 		end
 	end
-	var3.assetsInBundle = t_1
+	NewBundleInfo.assetsInBundle = AssetsInBundle
 	
-	return var3
+	return NewBundleInfo
 end
 
-function t.fromGetItemDetails(p3)
-	-- upvalues: t (ref)
-	local var5 = t.new()
-	var5.bundleId = tostring(p3.Id)
-	var5.owned = p3.Owned
-	var5.isForSale = p3.IsPurchasable
-	var5.price = p3.Price or 0
-	var5.hasResellers = p3.HasResellers
-	var5.collectibleItemId = p3.CollectibleItemId
-	var5.remaining = p3.UnitsAvailableForConsumption
-	var5.collectibleTotalQuantity = p3.TotalQuantity
-	var5.collectibleLowestResalePrice = p3.LowestResalePrice
-	var5.isOffSale = p3.IsOffSale
-	var5.saleLocationType = p3.SaleLocationType
-	var5.numFavorites = p3.FavoriteCount
-	var5.catalogPriceStatus = p3.PriceStatus
-	local t_1 = {}
+function BundleInfoModule.fromGetItemDetails(p4) --[[ Line: 249 ]]
+	-- upvalues: BundleInfoModule (copy)
+	local NewBundleInfo = BundleInfoModule.new()
+	NewBundleInfo.bundleId = tostring(p4.Id)
+	NewBundleInfo.owned = p4.Owned
+	NewBundleInfo.isForSale = p4.IsPurchasable
+	NewBundleInfo.price = p4.Price or 0
+	NewBundleInfo.hasResellers = p4.HasResellers
+	NewBundleInfo.collectibleItemId = p4.CollectibleItemId
+	NewBundleInfo.remaining = p4.UnitsAvailableForConsumption
+	NewBundleInfo.collectibleTotalQuantity = p4.TotalQuantity
+	NewBundleInfo.collectibleLowestResalePrice = p4.LowestResalePrice
+	NewBundleInfo.isOffSale = p4.IsOffSale
+	NewBundleInfo.saleLocationType = p4.SaleLocationType
+	NewBundleInfo.numFavorites = p4.FavoriteCount
+	NewBundleInfo.catalogPriceStatus = p4.PriceStatus
+	local AssetsInBundle = {}
 	
-	if p3.BundledItems then
-		for i, v in p3.BundledItems do
-			table.insert(t_1, { id = tostring(v.Id), name = v.Name })
+	if p4.BundledItems then
+		for _, bundledItem in p4.BundledItems do
+			table.insert(AssetsInBundle, { id = tostring(bundledItem.Id), name = bundledItem.Name })
 		end
 	end
-	var5.assetsInBundle = t_1
+	NewBundleInfo.assetsInBundle = AssetsInBundle
 	
-	return var5
+	return NewBundleInfo
 end
 
-function t.fromGetBundleFavoriteCount(p4, p5)
-	-- upvalues: t (ref)
-	local var6 = t.new()
-	var6.bundleId = tostring(p4)
-	var6.numFavorites = p5
+function BundleInfoModule.fromGetBundleFavoriteCount(p5, NumFavorites) --[[ Line: 282 ]]
+	-- upvalues: BundleInfoModule (copy)
+	local NewBundleInfo = BundleInfoModule.new()
+	NewBundleInfo.bundleId = tostring(p5)
+	NewBundleInfo.numFavorites = NumFavorites
 	
-	return var6
+	return NewBundleInfo
 end
 
-function t.fromGetEconomyProductInfo(p4, p5, p6, p7)
-	-- upvalues: t (ref)
-	local var6 = t.new()
-	var6.bundleId = tostring(p5)
-	var6.owned = p4
-	var6.price = p6
-	var6.isForSale = p7
+function BundleInfoModule.fromGetEconomyProductInfo(Owned, p5, Price, IsForSale) --[[ Line: 289 ]]
+	-- upvalues: BundleInfoModule (copy)
+	local NewBundleInfo = BundleInfoModule.new()
+	NewBundleInfo.bundleId = tostring(p5)
+	NewBundleInfo.owned = Owned
+	NewBundleInfo.price = Price
+	NewBundleInfo.isForSale = IsForSale
 	
-	return var6
+	return NewBundleInfo
 end
 
-function t.fromPurchaseSuccess(p4)
-	-- upvalues: t (ref)
-	local var6 = t.new()
-	var6.bundleId = tostring(p4)
-	var6.owned = true
+function BundleInfoModule.fromPurchaseSuccess(p5) --[[ Line: 298 ]]
+	-- upvalues: BundleInfoModule (copy)
+	local NewBundleInfo = BundleInfoModule.new()
+	NewBundleInfo.bundleId = tostring(p5)
+	NewBundleInfo.owned = true
 	
-	return var6
+	return NewBundleInfo
 end
 
-function t.getSaleDetailsForCollectibles(p4)
-	-- upvalues: dashModule (ref), constantsModule (ref)
-	local var6 = dashModule.joinDeep({}, p4)
+function BundleInfoModule.getSaleDetailsForCollectibles(p5) --[[ Line: 305 ]]
+	-- upvalues: DashModule (copy), ConstantsModule (copy)
+	local JoinDeepResult = DashModule.joinDeep({}, p5)
 	
-	if p4.productType == constantsModule.ProductType.CollectibleItem then
-		local saleLocation = var6.saleLocation
-		local var7 = saleLocation and saleLocation.saleLocationTypeId ~= constantsModule.SaleLocationType.ShopOnly
-		local var8 = saleLocation and saleLocation.saleLocationTypeId ~= constantsModule.SaleLocationType.ShopAndExperiencesById
-		local var9 = saleLocation and (saleLocation.saleLocationTypeId == constantsModule.SaleLocationType.ShopAndExperiencesById and (type(saleLocation.universeIds) == "table" and table.find(saleLocation.universeIds, game.GameId) ~= nil))
-		local var10 = saleLocation and saleLocation.saleLocationTypeId ~= constantsModule.SaleLocationType.ExperiencesDevApiOnly
-		local isForSale = var6.isForSale
+	if p5.productType == ConstantsModule.ProductType.CollectibleItem then
+		local SaleLocation = JoinDeepResult.saleLocation
+		local IsNotSaleLocationTypeIdMatch: boolean = SaleLocation and SaleLocation.saleLocationTypeId ~= ConstantsModule.SaleLocationType.ShopOnly
+		local IsNotSaleLocationTypeIdMatch1: boolean = SaleLocation and SaleLocation.saleLocationTypeId ~= ConstantsModule.SaleLocationType.ShopAndExperiencesById
+		local HasFoundIndex: boolean = SaleLocation and (SaleLocation.saleLocationTypeId == ConstantsModule.SaleLocationType.ShopAndExperiencesById and type(SaleLocation.universeIds) == "table" and table.find(SaleLocation.universeIds, game.GameId) ~= nil)
+		local IsNotSaleLocationTypeIdMatch2: boolean = SaleLocation and SaleLocation.saleLocationTypeId ~= ConstantsModule.SaleLocationType.ExperiencesDevApiOnly
+		JoinDeepResult.isForSale = JoinDeepResult.isForSale and (IsNotSaleLocationTypeIdMatch and (if IsNotSaleLocationTypeIdMatch1 then IsNotSaleLocationTypeIdMatch2 else HasFoundIndex and IsNotSaleLocationTypeIdMatch2))
 		
-		if isForSale then
-			isForSale = var7
-			
-			if isForSale and not var8 then
-				isForSale = var9 and var10
-			end
-		end
-		var6.isForSale = isForSale
-		
-		if not p4.collectibleIsLimited then
-			var6.isForSale = var6.isForSale and not var6.owned
+		if not p5.collectibleIsLimited then
+			JoinDeepResult.isForSale = JoinDeepResult.isForSale and not JoinDeepResult.owned
 		end
 	end
-	return var6
+	return JoinDeepResult
 end
 
-return t
+return BundleInfoModule

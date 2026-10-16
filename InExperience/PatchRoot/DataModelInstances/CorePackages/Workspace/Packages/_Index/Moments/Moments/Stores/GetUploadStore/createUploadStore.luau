@@ -1,38 +1,38 @@
-﻿local createSignal = require(script:FindFirstAncestor("Moments").Parent.Signals).createSignal
+﻿local CreateSignalFunction = require(script:FindFirstAncestor("Moments").Parent.Signals).createSignal
 
-return function()
-	-- upvalues: createSignal (ref)
-	local var1, var2 = createSignal("Idle")
-	local var3, var4 = createSignal(nil)
-	local var5, var6 = createSignal(nil)
+return function() --[[ Line: 31 | Named "createUploadStore" ]]
+	-- upvalues: CreateSignalFunction (copy)
+	local Idle, Idle2 = CreateSignalFunction("Idle")
+	local Signal, Signal2 = CreateSignalFunction(nil)
+	local Signal1, Signal2_1 = CreateSignalFunction(nil)
 	
 	return {
-		getState = var1,
-		getErrorKind = var3,
-		getUploadedMoment = var5,
-		setUploading = function()
-			-- upvalues: var2 (ref), var4 (ref), var6 (ref)
-			var2("Uploading")
-			var4(nil)
-			var6(nil)
+		getState = Idle,
+		getErrorKind = Signal,
+		getUploadedMoment = Signal1,
+		setUploading = function() --[[ Line: 36 ]]
+			-- upvalues: Idle2 (copy), Signal2 (copy), Signal2_1 (copy)
+			Idle2("Uploading")
+			Signal2(nil)
+			Signal2_1(nil)
 		end,
-		setSuccess = function(value)
-			-- upvalues: var2 (ref), var4 (ref), var6 (ref)
-			var2("Success")
-			var4(nil)
-			var6(value)
+		setSuccess = function(p1) --[[ Line: 42 ]]
+			-- upvalues: Idle2 (copy), Signal2 (copy), Signal2_1 (copy)
+			Idle2("Success")
+			Signal2(nil)
+			Signal2_1(p1)
 		end,
-		setFailed = function(value)
-			-- upvalues: var2 (ref), var4 (ref), var6 (ref)
-			var2("Failed")
-			var4(value)
-			var6(nil)
+		setFailed = function(p1) --[[ Line: 48 ]]
+			-- upvalues: Idle2 (copy), Signal2 (copy), Signal2_1 (copy)
+			Idle2("Failed")
+			Signal2(p1)
+			Signal2_1(nil)
 		end,
-		reset = function()
-			-- upvalues: var2 (ref), var4 (ref), var6 (ref)
-			var2("Idle")
-			var4(nil)
-			var6(nil)
+		reset = function() --[[ Line: 54 ]]
+			-- upvalues: Idle2 (copy), Signal2 (copy), Signal2_1 (copy)
+			Idle2("Idle")
+			Signal2(nil)
+			Signal2_1(nil)
 		end
 	}
 end

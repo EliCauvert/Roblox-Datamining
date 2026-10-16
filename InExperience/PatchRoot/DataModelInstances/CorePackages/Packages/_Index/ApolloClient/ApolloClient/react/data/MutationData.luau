@@ -1,147 +1,152 @@
-﻿local t = {}
-local parent = script.Parent.Parent.Parent
-local luauPolyfillModule = require(parent.Parent.LuauPolyfill)
-local boolean = luauPolyfillModule.Boolean
-local object = luauPolyfillModule.Object
-local equalModule = require(parent.jsutils.equal)
-local documentType = require(script.Parent.Parent.parser).DocumentType
-local apolloError = require(parent.errors).ApolloError
+﻿local Parent = script.Parent.Parent.Parent
+local LuauPolyfillModule = require(Parent.Parent.LuauPolyfill)
+local Boolean = LuauPolyfillModule.Boolean
+local Object = LuauPolyfillModule.Object
+local EqualModule = require(Parent.jsutils.equal)
+local DocumentType = require(script.Parent.Parent.parser).DocumentType
+local ApolloError = require(Parent.errors).ApolloError
 local _ = require(script.Parent.Parent.types.types)
-local operationData = require(script.Parent.OperationData).OperationData
-local mergeOptions = require(parent.core).mergeOptions
-local _ = require(parent.link.core)
-local tbl = setmetatable({}, { __index = operationData })
-tbl.__index = tbl
+local OperationData = require(script.Parent.OperationData).OperationData
+local MergeOptionsFunction = require(Parent.core).mergeOptions
+local _ = require(Parent.link.core)
+local self = setmetatable({}, { __index = OperationData })
+self.__index = self
 
-function tbl.new(p1)
-	-- upvalues: operationData (ref), boolean (ref), documentType (ref), tbl (ref)
-	local var1 = operationData.new(p1.options, p1.context)
+function self.new(Options) --[[ Line: 83 ]]
+	-- upvalues: OperationData (copy), Boolean (copy), DocumentType (copy), self (copy)
+	local NewOperationData = OperationData.new(Options.options, Options.context)
 	
-	function var4.runMutation(p2)
-		-- upvalues: var1 (ref), boolean (copy)
-		if p2 == nil then
-			p2 = {}
+	function NewOperationData.runMutation(p1) --[[ Line: 92 ]]
+		-- upvalues: NewOperationData (copy), Boolean (upval)
+		if p1 == nil then
+			p1 = {}
 		end
-		var1:onMutationStart()
-		local var2 = var1:generateNewMutationId()
+		NewOperationData:onMutationStart()
+		local NewMutationId = NewOperationData:generateNewMutationId()
 		
-		return var1:mutate(p2):andThen(function(p3)
-			-- upvalues: var1 (copy), var2 (ref)
-			var1:onMutationCompleted(p3, var2)
+		return NewOperationData:mutate(p1):andThen(function(Result) --[[ Line: 100 ]]
+			-- upvalues: NewOperationData (upval), NewMutationId (copy)
+			NewOperationData:onMutationCompleted(Result, NewMutationId)
 			
-			return p3
-		end):catch(function(p3)
-			-- upvalues: var1 (copy), var2 (ref), boolean (copy)
-			local options = var1:getOptions()
-			local onError = options.onError
-			var1:onMutationError(p3, var2)
+			return Result
+		end):catch(function(Err) --[[ Line: 104 ]]
+			-- upvalues: NewOperationData (upval), NewMutationId (copy), Boolean (upval)
+			local Options = NewOperationData:getOptions()
+			local OnErrorFunction: (any, any) -> () = Options.onError
+			NewOperationData:onMutationError(Err, NewMutationId)
 			
-			if boolean.toJSBoolean(onError) then
-				onError(options, p3)
+			if not Boolean.toJSBoolean(OnErrorFunction) then
+				error(Err)
 				
-				return { data = nil, errors = p3 }
+				return
 			end
-			error(p3)
+			OnErrorFunction(Options, Err)
+			
+			return { data = nil, errors = Err }
 		end)
 	end
 	
-	var1:verifyDocumentType(p1.options.mutation, documentType.Mutation)
-	var1.result = p1.result
-	var1.setResult = p1.setResult
-	var1.mostRecentMutationId = 0
+	NewOperationData:verifyDocumentType(Options.options.mutation, DocumentType.Mutation)
+	NewOperationData.result = Options.result
+	NewOperationData.setResult = Options.setResult
+	NewOperationData.mostRecentMutationId = 0
 	
-	return setmetatable(var1, tbl)
+	return (setmetatable(NewOperationData, self))
 end
 
-function tbl:execute(p1)
-	-- upvalues: documentType (ref), object (ref)
+function self:execute(p1) --[[ Line: 127 ]]
+	-- upvalues: DocumentType (copy), Object (copy)
 	self.isMounted = true
-	self:verifyDocumentType(self:getOptions().mutation, documentType.Mutation)
+	self:verifyDocumentType(self:getOptions().mutation, DocumentType.Mutation)
 	
 	return {
 		self.runMutation,
-		object.assign({}, p1, { client = self:refreshClient().client })
+		Object.assign({}, p1, { client = self:refreshClient().client })
 	}
 end
 
-function tbl:afterExecute()
+function self:afterExecute() --[[ Line: 133 ]]
 	self.isMounted = true
 	
-	return function(...)
-		-- upvalues: self (ref)
+	return function(...) --[[ Line: 135 ]]
+		-- upvalues: self (copy)
 		return self:unmount(...)
 	end
 end
 
-function tbl.cleanup(_) end
+function self:cleanup() --[[ Line: 140 ]] end
 
-function tbl:mutate(p1)
-	-- upvalues: mergeOptions (ref)
-	return self:refreshClient().client:mutate(mergeOptions(self:getOptions(), p1))
+function self:mutate(p1) --[[ Line: 144 ]]
+	-- upvalues: MergeOptionsFunction (copy)
+	return self:refreshClient().client:mutate(MergeOptionsFunction(self:getOptions(), p1))
 end
 
-function tbl:onMutationStart()
+function self:onMutationStart() --[[ Line: 148 ]]
 	if not self.result.loading and not self:getOptions().ignoreResults then
 		self:updateResult({ loading = true, error = nil, data = nil, called = true })
 	end
 end
 
-function tbl:onMutationCompleted(p1, p2)
-	-- upvalues: apolloError (ref), boolean (ref)
-	local options = self:getOptions()
-	local onCompleted = options.onCompleted
-	local ignoreResults = options.ignoreResults
-	local data = p1.data
-	local errors = p1.errors
-	local var1 = if errors and #errors > 0 then apolloError.new({ graphQLErrors = errors }) else nil
+function self:onMutationCompleted(p1, NewMutationId) --[[ Line: 160 ]]
+	-- upvalues: ApolloError (copy), Boolean (copy)
+	local Options = self:getOptions()
+	local OnCompletedFunction = Options.onCompleted
+	local IgnoreResults = Options.ignoreResults
+	local Data = p1.data
+	local Errors = p1.errors
+	local NewApolloError = if Errors and #Errors > 0 then ApolloError.new({ graphQLErrors = Errors }) else nil
 	
-	local function _()
-		-- upvalues: boolean (copy), onCompleted (ref), data (ref)
-		return if boolean.toJSBoolean(onCompleted) then onCompleted(data) else nil
+	local function _() --[[ Line: 172 | Named "callOncomplete" ]]
+		-- upvalues: Boolean (upval), OnCompletedFunction (copy), Data (copy)
+		return if Boolean.toJSBoolean(OnCompletedFunction) then OnCompletedFunction(Data) else nil
 	end
 	
-	if self:isMostRecentMutation(p2) and not ignoreResults then
+	if self:isMostRecentMutation(NewMutationId) and not IgnoreResults then
 		self:updateResult({
 			called = true,
 			loading = false,
-			data = data,
-			error = var1
+			data = Data,
+			error = NewApolloError
 		})
 	end
-	if boolean.toJSBoolean(onCompleted) then
-		local _ = onCompleted(data)
+	if Boolean.toJSBoolean(OnCompletedFunction) then
+		local _ = OnCompletedFunction(Data)
 		
 		return
 	end
 end
 
-function tbl:onMutationError(p1, p2)
-	if self:isMostRecentMutation(p2) then
-		self:updateResult({ loading = false, data = nil, called = true, error = p1 })
+function self:onMutationError(Errors, NewMutationId) --[[ Line: 191 ]]
+	if self:isMostRecentMutation(NewMutationId) then
+		self:updateResult({
+			loading = false,
+			data = nil,
+			called = true,
+			error = Errors
+		})
 	end
 end
 
-function tbl:generateNewMutationId()
+function self:generateNewMutationId() --[[ Line: 202 ]]
 	self.mostRecentMutationId += 1
 	
 	return self.mostRecentMutationId
 end
 
-function tbl:isMostRecentMutation(p1)
-	return self.mostRecentMutationId == p1
+function self:isMostRecentMutation(MostRecentMutationId): boolean --[[ Line: 207 ]]
+	return self.mostRecentMutationId == MostRecentMutationId
 end
 
-function tbl:updateResult(p1)
-	-- upvalues: equalModule (ref)
-	if self.isMounted and (not self.previousResult or not equalModule(self.previousResult, p1)) then
-		self:setResult(p1)
-		self.previousResult = p1
+function self:updateResult(PreviousResult) --[[ Line: 211 ]]
+	-- upvalues: EqualModule (copy)
+	if self.isMounted and (not self.previousResult or not EqualModule(self.previousResult, PreviousResult)) then
+		self:setResult(PreviousResult)
+		self.previousResult = PreviousResult
 		
-		return p1
+		return PreviousResult
+	else
+		return nil
 	end
-	return nil
 end
 
-t.MutationData = tbl
-
-return t
+return { MutationData = self }

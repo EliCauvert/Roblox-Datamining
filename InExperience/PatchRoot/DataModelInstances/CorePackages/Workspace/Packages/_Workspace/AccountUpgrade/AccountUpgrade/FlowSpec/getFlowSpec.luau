@@ -1,8 +1,8 @@
-﻿local accountUpgrade = script:FindFirstAncestor("AccountUpgrade")
-local accountUpgradeFieldModule = require(accountUpgrade.AccountUpgradeField)
-local accountUpgradeFlowModule = require(accountUpgrade.AccountUpgradeFlow)
-local t = {
-	[accountUpgradeFlowModule.Pioneer] = {
+﻿local AccountUpgrade = script:FindFirstAncestor("AccountUpgrade")
+local AccountUpgradeFieldModule = require(AccountUpgrade.AccountUpgradeField)
+local AccountUpgradeFlowModule = require(AccountUpgrade.AccountUpgradeFlow)
+local config = {
+	[AccountUpgradeFlowModule.Pioneer] = {
 		canDismiss = true,
 		signsOutOnDismiss = false,
 		upgradeType = "Pioneer",
@@ -10,16 +10,16 @@ local t = {
 		subtitleTextKey = "Authentication.SignUp.Subtitle.YourProgressCarriesOver",
 		submitTextKey = "Authentication.Login.Action.Save",
 		requiredFields = {
-			accountUpgradeFieldModule.Birthday,
-			accountUpgradeFieldModule.Username,
-			accountUpgradeFieldModule.Password
+			AccountUpgradeFieldModule.Birthday,
+			AccountUpgradeFieldModule.Username,
+			AccountUpgradeFieldModule.Password
 		},
 		optionalFields = {
-			accountUpgradeFieldModule.Email,
-			accountUpgradeFieldModule.Gender
+			AccountUpgradeFieldModule.Email,
+			AccountUpgradeFieldModule.Gender
 		}
 	},
-	[accountUpgradeFlowModule.PioneerU13] = {
+	[AccountUpgradeFlowModule.PioneerU13] = {
 		canDismiss = false,
 		signsOutOnDismiss = false,
 		upgradeType = "PioneerU13",
@@ -27,27 +27,48 @@ local t = {
 		subtitleTextKey = "Authentication.SignUp.Subtitle.YourProgressCarriesOver",
 		submitTextKey = "Authentication.Login.Action.Save",
 		requiredFields = {
-			accountUpgradeFieldModule.Username,
-			accountUpgradeFieldModule.Password
+			AccountUpgradeFieldModule.Username,
+			AccountUpgradeFieldModule.Password
 		},
-		optionalFields = { accountUpgradeFieldModule.Gender }
+		optionalFields = { AccountUpgradeFieldModule.Gender }
 	},
-	[accountUpgradeFlowModule.OAuth] = {
+	[AccountUpgradeFlowModule.OAuth] = {
 		canDismiss = true,
 		signsOutOnDismiss = true,
 		upgradeType = "OAuth",
 		titleTextKey = "Authentication.SignUp.Header.OneLastThing",
 		subtitleTextKey = "Authentication.SignUp.Subtitle.AddYourBirthday",
-		submitTextKey = "Authentication.SignUp.Action.StartPlay",
+		submitTextKey = "Authentication.SignUp.Action.CreateAccountSentenceCase",
+		legalTextKey = "Authentication.SignUp.Description.SignUpAgreement.CreateAnAccount",
+		fitsDialogToContent = true,
 		requiredFields = {
-			accountUpgradeFieldModule.Birthday,
-			accountUpgradeFieldModule.Username
+			AccountUpgradeFieldModule.Birthday,
+			AccountUpgradeFieldModule.Username
 		},
-		optionalFields = { accountUpgradeFieldModule.Gender }
+		optionalFields = { AccountUpgradeFieldModule.Gender }
+	},
+	[AccountUpgradeFlowModule.Signup] = {
+		canDismiss = true,
+		signsOutOnDismiss = false,
+		upgradeType = "Signup",
+		titleTextKey = "Authentication.SignUp.Action.CreateAccountSentenceCase",
+		subtitleTextKey = nil,
+		submitTextKey = "Authentication.SignUp.Action.Create",
+		legalTextKey = "Authentication.SignUp.Description.SignUpAgreement.CreateAnAccount",
+		linkedAccountLegalTextKey = "Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName",
+		boldFieldLabels = true,
+		capturesAuditContent = true,
+		hostReportsSubmit = true,
+		requiredFields = {
+			AccountUpgradeFieldModule.Birthday,
+			AccountUpgradeFieldModule.Username,
+			AccountUpgradeFieldModule.Password
+		},
+		optionalFields = { AccountUpgradeFieldModule.Gender }
 	}
 }
 
-return function(p1)
-	-- upvalues: t (ref)
-	return t[p1]
+return function(p1) --[[ Line: 117 | Named "getFlowSpec" ]]
+	-- upvalues: config (copy)
+	return config[p1]
 end

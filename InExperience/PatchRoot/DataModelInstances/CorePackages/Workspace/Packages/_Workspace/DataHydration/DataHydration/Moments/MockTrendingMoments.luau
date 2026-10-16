@@ -1,7 +1,7 @@
 ﻿local _ = require(script:FindFirstAncestor("DataHydration").Parent.MomentsTypes)
-local t = {}
+local MockTrendingMomentsModule = {}
 
-for i, v in require(script.Parent.MomentFixtures).buildMomentFeedItems(1, 10) do
-	table.insert(t, v.moment)
+for _, value in require(script.Parent.MomentFixtures).buildMomentFeedItems(1, 10) do
+	table.insert(MockTrendingMomentsModule, value.moment)
 end
-return t
+return MockTrendingMomentsModule

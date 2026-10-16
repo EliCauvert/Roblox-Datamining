@@ -1,76 +1,108 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local parent = avatarExperienceCatalog.Parent
-local reactModule = require(parent.React)
-local useSignalState = require(parent.SignalsReact).useSignalState
-local avatarScreen = require(parent.AvatarExperienceNavigation).Enums.AvatarScreen
-local sduiSharedUtilitiesModule = require(parent.SduiSharedUtilities)
-local sduiFeatureEntryPoint = sduiSharedUtilitiesModule.SduiFeatureEntryPoint
-local sduiLoadTimer = sduiSharedUtilitiesModule.SduiLoadTimer
-local _ = require(parent.Foundation)
-local fetchCatalogPageModule = require(script.Parent.fetchCatalogPage)
-local useComponentBreakpointSizeModule = require(script.Parent.Hooks.useComponentBreakpointSize)
-local getCatalogConfigKeyModule = require(script.Parent.Utils.getCatalogConfigKey)
-local catalogSduiPageContextModule = require(script.Parent.CatalogSduiPageContext)
-local getCatalogPageRequestIdStoreModule = require(avatarExperienceCatalog.Stores.GetCatalogPageRequestIdStore)
-local fFlagAXSduiCatalogScrollImpressions = require(parent.AvatarExperienceFlags).FFlagAXSduiCatalogScrollImpressions
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local Parent = AvatarExperienceCatalog.Parent
+local ReactModule = require(Parent.React)
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local AvatarScreen = require(Parent.AvatarExperienceNavigation).Enums.AvatarScreen
+local SduiSharedUtilitiesModule = require(Parent.SduiSharedUtilities)
+local SduiFeatureEntryPoint = SduiSharedUtilitiesModule.SduiFeatureEntryPoint
+local SduiLoadTimer = SduiSharedUtilitiesModule.SduiLoadTimer
+local _ = require(Parent.Foundation)
+local FetchCatalogPageModule = require(script.Parent.fetchCatalogPage)
+local UseComponentBreakpointSizeModule = require(script.Parent.Hooks.useComponentBreakpointSize)
+local GetCatalogConfigKeyModule = require(script.Parent.Utils.getCatalogConfigKey)
+local CatalogSduiPageContextModule = require(script.Parent.CatalogSduiPageContext)
+local GetCatalogPageRequestIdStoreModule = require(AvatarExperienceCatalog.Stores.GetCatalogPageRequestIdStore)
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
+local FFlagAXSduiCatalogScrollImpressions = AvatarExperienceFlagsModule.FFlagAXSduiCatalogScrollImpressions
+local FFlagAXSduiFeedPublishesBreakpoint = AvatarExperienceFlagsModule.FFlagAXSduiFeedPublishesBreakpoint
+local FFlagAXMarketplaceBreakpointMismatchCounter = AvatarExperienceFlagsModule.FFlagAXMarketplaceBreakpointMismatchCounter
+local FFlagAXSduiFeedMaintainScrollOnSeeAll = AvatarExperienceFlagsModule.FFlagAXSduiFeedMaintainScrollOnSeeAll
+local FFlagAXSduiPageVariantRequestId = AvatarExperienceFlagsModule.FFlagAXSduiPageVariantRequestId
+local FFlagAXSduiPublishRequestIdWithResponse = AvatarExperienceFlagsModule.FFlagAXSduiPublishRequestIdWithResponse
 
-return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useComponentBreakpointSizeModule (ref), reactModule (ref), sduiLoadTimer (ref), avatarScreen (ref), getCatalogPageRequestIdStoreModule (ref), useSignalState (ref), fFlagAXSduiCatalogScrollImpressions (ref), fetchCatalogPageModule (ref), catalogSduiPageContextModule (ref), sduiFeatureEntryPoint (ref), getCatalogConfigKeyModule (ref)
-	local var1, var2 = useComponentBreakpointSizeModule()
-	local var3 = if p1.loadTimer then p1.loadTimer else reactModule.useMemo(function()
-		-- upvalues: sduiLoadTimer (copy), avatarScreen (copy)
-		return sduiLoadTimer.createLoadTimer(avatarScreen.Catalog)
+return ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 50 | Named "CatalogSduiEntryPoint" ]]
+	-- upvalues: UseComponentBreakpointSizeModule (copy), FFlagAXSduiFeedPublishesBreakpoint (copy), FFlagAXMarketplaceBreakpointMismatchCounter (copy), ReactModule (copy), SduiLoadTimer (copy), AvatarScreen (copy), GetCatalogPageRequestIdStoreModule (copy), UseSignalStateFunction (copy), FFlagAXSduiCatalogScrollImpressions (copy), FFlagAXSduiFeedMaintainScrollOnSeeAll (copy), FFlagAXSduiPublishRequestIdWithResponse (copy), FFlagAXSduiPageVariantRequestId (copy), FetchCatalogPageModule (copy), CatalogSduiPageContextModule (copy), SduiFeatureEntryPoint (copy), GetCatalogConfigKeyModule (copy)
+	local UseComponentBreakpointSizeModuleResult, UseComponentBreakpointSizeModuleResult2 = UseComponentBreakpointSizeModule(nil, if FFlagAXSduiFeedPublishesBreakpoint or FFlagAXMarketplaceBreakpointMismatchCounter then Frame.breakpointOptions else nil)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 69 ]]
+		-- upvalues: SduiLoadTimer (upval), AvatarScreen (upval)
+		return SduiLoadTimer.createLoadTimer(AvatarScreen.Catalog)
 	end, {})
-	local var4 = if p1.appPage then p1.appPage else avatarScreen.Catalog
-	local var5 = getCatalogPageRequestIdStoreModule(false)
-	local var6 = reactModule.useMemo(function()
-		-- upvalues: fFlagAXSduiCatalogScrollImpressions (copy), p1 (ref)
-		return if fFlagAXSduiCatalogScrollImpressions then {
-			identifier = p1.identifier,
-			onScroll = p1.onScroll,
-			requestImpressionsSignal = p1.requestImpressionsSignal
-		} else { identifier = p1.identifier }
-	end, if fFlagAXSduiCatalogScrollImpressions then { p1.identifier, p1.onScroll, p1.requestImpressionsSignal } else { p1.identifier })
-	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), p1 (ref), fetchCatalogPageModule (copy), var1 (ref), var3 (ref)
-		fetchCatalogPageModule({
-			requestId = var5.getOrCreatePageRequestId(p1.identifier),
-			context = p1.context,
-			screenSize = var1
-		}, var3)
+	local LoadTimer = if Frame.loadTimer then Frame.loadTimer else UseMemoResult
+	local AppPage = if Frame.appPage then Frame.appPage else AvatarScreen.Catalog
+	local CatalogPageRequestIdStoreModule = GetCatalogPageRequestIdStoreModule(false)
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 81 ]]
+		-- upvalues: FFlagAXSduiCatalogScrollImpressions (upval), Frame (copy), FFlagAXSduiFeedMaintainScrollOnSeeAll (upval)
+		return if FFlagAXSduiCatalogScrollImpressions then {
+			identifier = Frame.identifier,
+			onScroll = Frame.onScroll,
+			requestImpressionsSignal = Frame.requestImpressionsSignal,
+			scrollPositionRef = if FFlagAXSduiFeedMaintainScrollOnSeeAll then Frame.scrollPositionRef else nil,
+			scrollRestoreRef = if FFlagAXSduiFeedMaintainScrollOnSeeAll then Frame.scrollRestoreRef else nil
+		} else {
+			identifier = Frame.identifier,
+			scrollPositionRef = if FFlagAXSduiFeedMaintainScrollOnSeeAll then Frame.scrollPositionRef else nil,
+			scrollRestoreRef = if FFlagAXSduiFeedMaintainScrollOnSeeAll then Frame.scrollRestoreRef else nil
+		}
+	end, if FFlagAXSduiCatalogScrollImpressions then {
+		Frame.identifier,
+		Frame.onScroll,
+		Frame.requestImpressionsSignal,
+		if FFlagAXSduiFeedMaintainScrollOnSeeAll then Frame.scrollPositionRef else nil,
+		if FFlagAXSduiFeedMaintainScrollOnSeeAll then Frame.scrollRestoreRef else nil
+	} else {
+		Frame.identifier,
+		if FFlagAXSduiFeedMaintainScrollOnSeeAll then Frame.scrollPositionRef else nil,
+		if FFlagAXSduiFeedMaintainScrollOnSeeAll then Frame.scrollRestoreRef else nil
+	})
+	ReactModule.useEffect(function() --[[ Line: 116 ]]
+		-- upvalues: FFlagAXSduiPublishRequestIdWithResponse (upval), CatalogPageRequestIdStoreModule (copy), Frame (copy), UseComponentBreakpointSizeModuleResult (copy), FFlagAXSduiPageVariantRequestId (upval), FetchCatalogPageModule (upval), LoadTimer (copy)
+		if FFlagAXSduiPublishRequestIdWithResponse then
+			CatalogPageRequestIdStoreModule.activatePageVariant(Frame.identifier, UseComponentBreakpointSizeModuleResult)
+		end
+		FetchCatalogPageModule({
+			requestId = if FFlagAXSduiPublishRequestIdWithResponse then CatalogPageRequestIdStoreModule.getPageVariantRequestIdToSend(Frame.identifier, UseComponentBreakpointSizeModuleResult) elseif FFlagAXSduiPageVariantRequestId then CatalogPageRequestIdStoreModule.activatePageVariant(Frame.identifier, UseComponentBreakpointSizeModuleResult) else CatalogPageRequestIdStoreModule.getOrCreatePageRequestId(Frame.identifier),
+			context = Frame.context,
+			screenSize = UseComponentBreakpointSizeModuleResult
+		}, LoadTimer)
 	end, {
-		var3, var1, p1.context, p1.identifier,
-		useSignalState(var5.getPageRequestIdMap)[p1.identifier], var5
+		LoadTimer, UseComponentBreakpointSizeModuleResult, Frame.context,
+		Frame.identifier,
+		UseSignalStateFunction(CatalogPageRequestIdStoreModule.getPageRequestIdMap)[Frame.identifier],
+		CatalogPageRequestIdStoreModule
 	})
 	
-	return reactModule.createElement(catalogSduiPageContextModule.Provider, { value = var6 }, reactModule.createElement(sduiFeatureEntryPoint, {
-		configKey = getCatalogConfigKeyModule(p1.context, var1),
-		identifier = p1.identifier,
-		appPage = var4,
-		loadTimer = var3,
-		Size = p1.Size,
-		AutomaticSize = p1.AutomaticSize,
-		Position = p1.Position,
-		onAbsoluteSizeChange = var2,
-		onRetry = reactModule.useCallback(function()
-			-- upvalues: var5 (ref), p1 (ref), fetchCatalogPageModule (copy), var1 (ref), var3 (ref)
-			var5.resetPageRequestId(p1.identifier)
-			fetchCatalogPageModule({
-				requestId = var5.getOrCreatePageRequestId(p1.identifier),
-				context = p1.context,
-				screenSize = var1
-			}, var3, { forceRefresh = true })
+	return ReactModule.createElement(CatalogSduiPageContextModule.Provider, { value = UseMemoResult1 }, ReactModule.createElement(SduiFeatureEntryPoint, {
+		configKey = GetCatalogConfigKeyModule(Frame.context, UseComponentBreakpointSizeModuleResult),
+		identifier = Frame.identifier,
+		appPage = AppPage,
+		loadTimer = LoadTimer,
+		Size = Frame.Size,
+		AutomaticSize = Frame.AutomaticSize,
+		Position = Frame.Position,
+		onAbsoluteSizeChange = UseComponentBreakpointSizeModuleResult2,
+		onRetry = ReactModule.useCallback(function() --[[ Line: 138 ]]
+			-- upvalues: FFlagAXSduiPageVariantRequestId (upval), CatalogPageRequestIdStoreModule (copy), Frame (copy), UseComponentBreakpointSizeModuleResult (copy), FetchCatalogPageModule (upval), LoadTimer (copy)
+			if FFlagAXSduiPageVariantRequestId then
+				CatalogPageRequestIdStoreModule.resetPageVariantRequestId(Frame.identifier, UseComponentBreakpointSizeModuleResult)
+			else
+				CatalogPageRequestIdStoreModule.resetPageRequestId(Frame.identifier)
+			end
+			FetchCatalogPageModule({
+				requestId = if FFlagAXSduiPageVariantRequestId then CatalogPageRequestIdStoreModule.activatePageVariant(Frame.identifier, UseComponentBreakpointSizeModuleResult) else CatalogPageRequestIdStoreModule.getOrCreatePageRequestId(Frame.identifier),
+				context = Frame.context,
+				screenSize = UseComponentBreakpointSizeModuleResult
+			}, LoadTimer, { forceRefresh = true })
 		end, {
-			var3,
-			var1,
-			p1.context,
-			p1.identifier,
-			var5
+			LoadTimer,
+			UseComponentBreakpointSizeModuleResult,
+			Frame.context,
+			Frame.identifier,
+			CatalogPageRequestIdStoreModule
 		}),
-		shouldDisplayLoading = p1.shouldDisplayLoading,
-		shouldDisplayError = p1.shouldDisplayError,
-		loadingSlot = p1.loadingSlot,
-		errorSlot = p1.errorSlot,
-		ref = p2
+		shouldDisplayLoading = Frame.shouldDisplayLoading,
+		shouldDisplayError = Frame.shouldDisplayError,
+		loadingSlot = Frame.loadingSlot,
+		errorSlot = Frame.errorSlot,
+		ref = Ref
 	}))
 end)

@@ -1,42 +1,40 @@
-﻿local parent = script.Parent.Parent
-local signalsModule = require(parent.Signals)
-local sharedFlagsModule = require(parent.SharedFlags)
-local robloxReplicatedStorageService = game:GetService("RobloxReplicatedStorage")
-local fFlagChatSummariesSettingEnabled = sharedFlagsModule.FFlagChatSummariesSettingEnabled
-local fFlagEnableClientSummarySystemMessageOnLua = sharedFlagsModule.FFlagEnableClientSummarySystemMessageOnLua
-local fFlagExpChatTextChannelWindowWelcomeAndSummaryModule = require(script.Parent.Flags.FFlagExpChatTextChannelWindowWelcomeAndSummary)
+﻿local Parent = script.Parent.Parent
+local SignalsModule = require(Parent.Signals)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local RobloxReplicatedStorage = game:GetService("RobloxReplicatedStorage")
+local FFlagChatSummariesSettingEnabled = SharedFlagsModule.FFlagChatSummariesSettingEnabled
+local FFlagEnableClientSummarySystemMessageOnLua = SharedFlagsModule.FFlagEnableClientSummarySystemMessageOnLua
+local FFlagExpChatTextChannelWindowWelcomeAndSummaryModule = require(script.Parent.Flags.FFlagExpChatTextChannelWindowWelcomeAndSummary)
 
 return {
-	create = function(p1)
-		-- upvalues: signalsModule (ref), fFlagExpChatTextChannelWindowWelcomeAndSummaryModule (ref), robloxReplicatedStorageService (ref), fFlagChatSummariesSettingEnabled (ref), fFlagEnableClientSummarySystemMessageOnLua (ref)
-		local var1, var2 = signalsModule.createSignal(false)
+	create = function(p1) --[[ Line: 42 ]]
+		-- upvalues: SignalsModule (copy), FFlagExpChatTextChannelWindowWelcomeAndSummaryModule (copy), RobloxReplicatedStorage (copy), FFlagChatSummariesSettingEnabled (copy), FFlagEnableClientSummarySystemMessageOnLua (copy)
+		local Signal, Signal2 = SignalsModule.createSignal(false)
 		
-		if fFlagExpChatTextChannelWindowWelcomeAndSummaryModule then
-			coroutine.wrap(function()
-				-- upvalues: robloxReplicatedStorageService (copy), p1 (ref), fFlagChatSummariesSettingEnabled (copy), fFlagEnableClientSummarySystemMessageOnLua (copy), var2 (ref)
-				local expChatFeatureValueChanged = robloxReplicatedStorageService:WaitForChild("ExpChatFeatureValueChanged", 10)
+		if FFlagExpChatTextChannelWindowWelcomeAndSummaryModule then
+			coroutine.wrap(function() --[[ Line: 46 ]]
+				-- upvalues: RobloxReplicatedStorage (upval), p1 (copy), FFlagChatSummariesSettingEnabled (upval), FFlagEnableClientSummarySystemMessageOnLua (upval), Signal2 (copy)
+				local ExpChatFeatureValueChanged = RobloxReplicatedStorage:WaitForChild("ExpChatFeatureValueChanged", 10)
 				
-				if expChatFeatureValueChanged then
-					expChatFeatureValueChanged.OnClientEvent:Connect(function(p2, p3, p4)
-						-- upvalues: p1 (copy), fFlagChatSummariesSettingEnabled (copy), fFlagEnableClientSummarySystemMessageOnLua (copy), var2 (copy)
+				if ExpChatFeatureValueChanged then
+					ExpChatFeatureValueChanged.OnClientEvent:Connect(function(p2, p3, p4) --[[ Line: 53 ]]
+						-- upvalues: p1 (upval), FFlagChatSummariesSettingEnabled (upval), FFlagEnableClientSummarySystemMessageOnLua (upval), Signal2 (upval)
+						local IsEnabled = nil
 						if tostring(p2) ~= p1 then return end
-						local isEnabled
-						local var3 = fFlagEnableClientSummarySystemMessageOnLua
-						
-						if fFlagChatSummariesSettingEnabled then
-							if p3 == "AllowThirdPartySummary" then
-								isEnabled = p4 == "Enabled"
-								isEnabled = nil
-							else
-								isEnabled = nil
+						repeat
+							if FFlagChatSummariesSettingEnabled then
+								if p3 == "AllowThirdPartySummary" then
+									IsEnabled = p4 == "Enabled"
+									break
+								end
+							elseif FFlagEnableClientSummarySystemMessageOnLua and p3 == "EligibleForThirdPartySummary" then
+								IsEnabled = p4 == "true"
+								break
 							end
-							if isEnabled ~= nil then
-								var2(isEnabled)
-							end
-							return
-						elseif var3 and p3 == "EligibleForThirdPartySummary" then
-							isEnabled = p4 == "true"
-							isEnabled = nil
+							IsEnabled = nil
+						until true
+						if IsEnabled ~= nil then
+							Signal2(IsEnabled)
 						end
 					end)
 					
@@ -44,15 +42,16 @@ return {
 				end
 			end)()
 		end
-		return { getIsEligible = var1 }
+		return { getIsEligible = Signal }
 	end,
-	resolveEligible = function(p1, p2, p3, p4)
+	resolveEligible = function(p1, p2, p3, p4): boolean? --[[ Line: 24 ]]
 		if p3 then
 			if p1 == "AllowThirdPartySummary" then
 				return p2 == "Enabled"
 			end
-		else
-			return if p4 and p1 == "EligibleForThirdPartySummary" then p2 == "true" else nil
+		elseif p4 and p1 == "EligibleForThirdPartySummary" then
+			return p2 == "true"
 		end
+		return nil
 	end
 }

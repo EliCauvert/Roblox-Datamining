@@ -1,92 +1,100 @@
-﻿local parent = script:FindFirstAncestor("PYMKCarousel").Parent
-local reactModule = require(parent.React)
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local useNavigationFocus = require(parent.Navigation).useNavigationFocus
-local homePagePYMKPercentageOfViewPortToStartFetch = game:DefineFastInt("HomePagePYMKPercentageOfViewPortToStartFetch", 25)
+﻿local Parent = script:FindFirstAncestor("PYMKCarousel").Parent
+local ReactModule = require(Parent.React)
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local UseNavigationFocusFunction = require(Parent.Navigation).useNavigationFocus
+local FFlagEnableOnScreenAPIIntegration = require(Parent.SharedFlags).FFlagEnableOnScreenAPIIntegration
+local UseIsRouteOnScreen = if FFlagEnableOnScreenAPIIntegration then require(Parent.RobloxAppNavigation).useIsRouteOnScreen else nil
+local HomePagePYMKPercentageOfViewPortToStartFetch = game:DefineFastInt("HomePagePYMKPercentageOfViewPortToStartFetch", 25)
 
-local var1 = function()
-	-- upvalues: useSelector (ref), reactModule (ref)
-	local var2 = useSelector(function(p1)
+local function v5() --[[ Line: 28 ]]
+	-- upvalues: UseSelectorFunction (copy), ReactModule (copy)
+	local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 29 ]]
 		return p1.ScreenSize
 	end)
-	local var3 = useSelector(function(p1)
+	local UseSelectorResult1 = UseSelectorFunction(function(p1) --[[ Line: 32 ]]
 		return p1.TopBar.topBarHeight
 	end)
-	local var4 = useSelector(function(p1)
+	local UseSelectorResult2 = UseSelectorFunction(function(p1) --[[ Line: 35 ]]
 		return p1.GlobalGuiInset
 	end)
 	
-	return reactModule.useMemo(function()
-		-- upvalues: var3 (ref), var2 (ref), var4 (ref)
+	return (ReactModule.useMemo(function() --[[ Line: 38 ]]
+		-- upvalues: UseSelectorResult1 (copy), UseSelectorResult (copy), UseSelectorResult2 (copy)
 		return {
-			min = Vector2.new(0, var3),
-			max = Vector2.new(var2.X, var2.Y - var4.bottom)
+			min = Vector2.new(0, UseSelectorResult1),
+			max = Vector2.new(UseSelectorResult.X, UseSelectorResult.Y - UseSelectorResult2.bottom)
 		}
-	end, { var3, var2, var4 })
+	end, {
+		UseSelectorResult1,
+		UseSelectorResult,
+		UseSelectorResult2
+	}))
 end
 
-local _ = function(p1, p2)
-	-- upvalues: homePagePYMKPercentageOfViewPortToStartFetch (ref)
-	local current = p2 and p2.current
+local function _(p1, p2): boolean --[[ Line: 48 ]]
+	-- upvalues: HomePagePYMKPercentageOfViewPortToStartFetch (copy)
+	local Current = p2 and p2.current
 	
-	if current then
-		local y = current.AbsolutePosition.Y
-		local var2 = current.AbsolutePosition.Y + current.AbsoluteSize.Y
-		local y_1 = p1.min.Y
-		local y_2 = p1.max.Y
-		local var3 = (y_2 - y_1) / 100 * homePagePYMKPercentageOfViewPortToStartFetch
+	if Current then
+		local NewY = Current.AbsolutePosition.Y + Current.AbsoluteSize.Y
+		local Y = p1.min.Y
+		local Y1 = p1.max.Y
+		local ScaledY = (Y1 - Y) / 100 * HomePagePYMKPercentageOfViewPortToStartFetch
 		
-		return y_1 - var3 < y and var2 < y_2 + var3
+		return Y - ScaledY < Current.AbsolutePosition.Y and NewY < Y1 + ScaledY
+	else
+		return false
 	end
-	return false
 end
 
-return function(p1)
-	-- upvalues: useNavigationFocus (ref), var1 (ref), reactModule (ref), homePagePYMKPercentageOfViewPortToStartFetch (ref)
-	local elementRef = p1.elementRef
-	local scrollViewPositionChangedSignal = p1.scrollViewPositionChangedSignal
-	local callback = p1.callback
-	local var2 = useNavigationFocus()
-	local var3 = var1()
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), elementRef (ref), homePagePYMKPercentageOfViewPortToStartFetch (copy), var2 (ref), callback (ref), scrollViewPositionChangedSignal (ref)
-		local var4
-		local var5 = elementRef
-		local current = var5 and var5.current
+return function(p1) --[[ Line: 73 ]]
+	-- upvalues: FFlagEnableOnScreenAPIIntegration (copy), UseIsRouteOnScreen (copy), UseNavigationFocusFunction (copy), v5 (copy), ReactModule (copy), HomePagePYMKPercentageOfViewPortToStartFetch (copy)
+	local ElementRef = p1.elementRef
+	local ScrollViewPositionChangedSignal = p1.scrollViewPositionChangedSignal
+	local CallbackFunction = p1.callback
+	local UseIsRouteOnScreenResult = if FFlagEnableOnScreenAPIIntegration then UseIsRouteOnScreen() else UseNavigationFocusFunction()
+	local v1 = v5()
+	ReactModule.useEffect(function() --[[ Line: 82 ]]
+		-- upvalues: v1 (copy), ElementRef (copy), HomePagePYMKPercentageOfViewPortToStartFetch (upval), UseIsRouteOnScreenResult (copy), CallbackFunction (copy), ScrollViewPositionChangedSignal (copy)
+		local Current = ElementRef and ElementRef.current
+		local v2 = nil
 		
-		if current then
-			local y = current.AbsolutePosition.Y
-			local var6 = current.AbsolutePosition.Y + current.AbsoluteSize.Y
-			local y_1 = var3.min.Y
-			local y_2 = var3.max.Y
-			local var7 = (y_2 - y_1) / 100 * homePagePYMKPercentageOfViewPortToStartFetch
-			var4 = y_1 - var7 < y and var6 < y_2 + var7
+		if Current then
+			local NewY = Current.AbsolutePosition.Y + Current.AbsoluteSize.Y
+			local Y = v1.min.Y
+			local Y1 = v1.max.Y
+			local ScaledY = (Y1 - Y) / 100 * HomePagePYMKPercentageOfViewPortToStartFetch
+			v2 = Y - ScaledY < Current.AbsolutePosition.Y and NewY < Y1 + ScaledY
 		else
-			var4 = false
+			v2 = false
 		end
-		if var4 and var2 then
-			callback()
+		if v2 and UseIsRouteOnScreenResult then
+			CallbackFunction()
 		end
-		if scrollViewPositionChangedSignal then
-			scrollViewPositionChangedSignal:connect(function()
-				-- upvalues: var3 (copy), elementRef (copy), homePagePYMKPercentageOfViewPortToStartFetch (copy), var2 (copy), callback (copy)
-				local var8
-				local current = elementRef and elementRef.current
+		if ScrollViewPositionChangedSignal then
+			ScrollViewPositionChangedSignal:connect(function() --[[ Line: 88 ]]
+				-- upvalues: v1 (upval), ElementRef (upval), HomePagePYMKPercentageOfViewPortToStartFetch (upval), UseIsRouteOnScreenResult (upval), CallbackFunction (upval)
+				local Current = ElementRef and ElementRef.current
+				local v3 = nil
 				
-				if current then
-					local y = current.AbsolutePosition.Y
-					local var9 = current.AbsolutePosition.Y + current.AbsoluteSize.Y
-					local y_1 = var3.min.Y
-					local y_2 = var3.max.Y
-					local var10 = (y_2 - y_1) / 100 * homePagePYMKPercentageOfViewPortToStartFetch
-					var8 = y_1 - var10 < y and var9 < y_2 + var10
+				if Current then
+					local NewY = Current.AbsolutePosition.Y + Current.AbsoluteSize.Y
+					local Y = v1.min.Y
+					local Y1 = v1.max.Y
+					local ScaledY = (Y1 - Y) / 100 * HomePagePYMKPercentageOfViewPortToStartFetch
+					v3 = Y - ScaledY < Current.AbsolutePosition.Y and NewY < Y1 + ScaledY
 				else
-					var8 = false
+					v3 = false
 				end
-				if var8 and var2 then
-					callback()
+				if v3 and UseIsRouteOnScreenResult then
+					CallbackFunction()
 				end
 			end)
 		end
-	end, { elementRef, scrollViewPositionChangedSignal, var2, var3 })
+	end, {
+		ElementRef,
+		ScrollViewPositionChangedSignal,
+		UseIsRouteOnScreenResult,
+		v1
+	})
 end

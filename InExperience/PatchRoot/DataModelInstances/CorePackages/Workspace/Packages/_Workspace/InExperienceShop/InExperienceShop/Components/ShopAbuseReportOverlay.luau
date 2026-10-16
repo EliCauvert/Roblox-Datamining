@@ -1,45 +1,47 @@
-﻿local httpService = game:GetService("HttpService")
-local parent = script:FindFirstAncestor("InExperienceShop").Parent
-local reactModule = require(parent.React)
-local requestInternalWrapper = require(parent.Http).NetworkLayers.requestInternalWrapper
-local coreScriptsRootProvider = require(parent.CoreScriptsRoactCommon).CoreScriptsRootProvider
-local roactNavigationModule = require(parent.RoactNavigation)
-local roactNetworking = require(parent.RoactServiceTags).RoactNetworking
-local roactServices = require(parent.RoactServices).RoactServices
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local focusRoot = focusNavigationUtilsModule.FocusRoot
-local dynamicReportContainerModule = require(parent.GenericAbuseReporting.DynamicReportContainer)
-local _ = require(parent.GenericAbuseReporting.AbuseVector)
-local t = {
-	isFocused = function()
+﻿local HttpService = game:GetService("HttpService")
+local Parent = script:FindFirstAncestor("InExperienceShop").Parent
+local ReactModule = require(Parent.React)
+local RequestInternalWrapperFunction = require(Parent.Http).NetworkLayers.requestInternalWrapper
+local CoreScriptsRootProvider = require(Parent.CoreScriptsRoactCommon).CoreScriptsRootProvider
+local RoactNavigationModule = require(Parent.RoactNavigation)
+local RoactNetworking = require(Parent.RoactServiceTags).RoactNetworking
+local RoactServices = require(Parent.RoactServices).RoactServices
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+local FocusRoot = FocusNavigationUtilsModule.FocusRoot
+local DynamicReportContainerModule = require(Parent.GenericAbuseReporting.DynamicReportContainer)
+local _ = require(Parent.GenericAbuseReporting.AbuseVector)
+local config = {
+	isFocused = function(): boolean --[[ Line: 30 ]]
 		return true
 	end,
-	addListener = function(_, _)
-		return { remove = function() end }
+	addListener = function(_, _) --[[ Line: 33 ]]
+		return { remove = function() --[[ Line: 35 ]] end }
 	end
 }
 
-return function(p1)
-	-- upvalues: reactModule (ref), coreScriptsRootProvider (ref), roactNavigationModule (ref), t (ref), roactServices (ref), roactNetworking (ref), requestInternalWrapper (ref), httpService (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), dynamicReportContainerModule (ref)
-	return reactModule.createElement("Frame", {
+return function(p1) --[[ Line: 40 | Named "ShopAbuseReportOverlay" ]]
+	-- upvalues: ReactModule (copy), CoreScriptsRootProvider (copy), RoactNavigationModule (copy), config (copy), RoactServices (copy), RoactNetworking (copy), RequestInternalWrapperFunction (copy), HttpService (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), DynamicReportContainerModule (copy)
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		ZIndex = 10,
 		Size = UDim2.fromScale(1, 1)
 	}, {
-		Providers = reactModule.createElement(coreScriptsRootProvider, {}, {
-			Navigation = reactModule.createElement(roactNavigationModule.Provider, { value = t }, {
-				Services = reactModule.createElement(roactServices.ServiceProvider, {
-					services = { [roactNetworking] = requestInternalWrapper(httpService) }
+		Providers = ReactModule.createElement(CoreScriptsRootProvider, {}, {
+			Navigation = ReactModule.createElement(RoactNavigationModule.Provider, { value = config }, {
+				Services = ReactModule.createElement(RoactServices.ServiceProvider, {
+					services = {
+						[RoactNetworking] = RequestInternalWrapperFunction(HttpService)
+					}
 				}, {
-					FocusNavigationCoreScriptsWrapper = reactModule.createElement(focusRoot, {
+					FocusNavigationCoreScriptsWrapper = ReactModule.createElement(FocusRoot, {
 						isIsolated = true,
 						isAutoFocusRoot = true,
 						frameProps = { Size = UDim2.fromScale(1, 1) },
-						surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.CentralOverlay
+						surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.CentralOverlay
 					}, {
-						DynamicReport = reactModule.createElement(dynamicReportContainerModule, {
+						DynamicReport = ReactModule.createElement(DynamicReportContainerModule, {
 							abuseVector = p1.abuseVector,
 							targetId = p1.targetId,
 							onClose = p1.onClose

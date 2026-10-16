@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.VirtualCursorModular.VirtualCursorModular)
+﻿return (require(script.Parent._Workspace.VirtualCursorModular.VirtualCursorModular))

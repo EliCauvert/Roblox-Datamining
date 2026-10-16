@@ -1,140 +1,135 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local reactModule = require(corePackagesService.Packages.React)
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local image = foundationModule.Image
-local view = foundationModule.View
-local useTokens = foundationModule.Hooks.useTokens
+﻿local CorePackages = game:GetService("CorePackages")
+local ReactModule = require(CorePackages.Packages.React)
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local Image = FoundationModule.Image
+local View = FoundationModule.View
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), view (ref), image (ref)
-	local var1 = useTokens()
-	local var2 = reactModule.useMemo(function()
-		-- upvalues: var1 (ref)
+return function(p1) --[[ Line: 17 | Named "ImagePreview" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Image (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 20 ]]
+		-- upvalues: UseTokensResult (copy)
 		return {
 			{
 				id = "Black",
-				style = var1.Color.Extended.Black.Black_100
+				style = UseTokensResult.Color.Extended.Black.Black_100
 			},
 			{
 				id = "White",
-				style = var1.Color.Extended.White.White_100
+				style = UseTokensResult.Color.Extended.White.White_100
 			},
 			{
 				id = "Checkerboard",
 				image = "rbxassetid://6372755229",
-				style = var1.Color.Extended.White.White_0
+				style = UseTokensResult.Color.Extended.White.White_0
 			}
 		}
-	end, { var1 })
-	local var3, var4 = reactModule.useState(1)
-	local var5 = reactModule.useRef(false)
-	local var6 = if p1.autoRotateSeconds then p1.autoRotateSeconds / #var2 else 0
-	reactModule.useEffect(function()
-		-- upvalues: var6 (ref), var2 (ref), var5 (ref), var4 (ref)
-		if var6 <= 0 then
-			return function() end
-		end
-		task.spawn(function()
-			-- upvalues: var2 (copy), var6 (copy), var5 (copy), var4 (copy)
-			for _ = 2, #var2 do
-				task.wait(var6)
-				
-				if not var5.current then
-					var4(function(p2)
-						-- upvalues: var2 (copy)
-						return p2 % #var2 + 1
+	end, { UseTokensResult })
+	local UseStateResult, UseStateResult2 = ReactModule.useState(1)
+	local UseRefResult = ReactModule.useRef(false)
+	local AutoRotateSecondsRatio = if p1.autoRotateSeconds then p1.autoRotateSeconds / #UseMemoResult else 0
+	ReactModule.useEffect(function() --[[ Line: 33 ]]
+		-- upvalues: AutoRotateSecondsRatio (copy), UseMemoResult (copy), UseRefResult (copy), UseStateResult2 (copy)
+		if AutoRotateSecondsRatio <= 0 then
+			return function() --[[ Line: 35 ]] end
+		else
+			task.spawn(function() --[[ Line: 38 ]]
+				-- upvalues: UseMemoResult (upval), AutoRotateSecondsRatio (upval), UseRefResult (upval), UseStateResult2 (upval)
+				for _ = 2, #UseMemoResult do
+					task.wait(AutoRotateSecondsRatio)
+					
+					if UseRefResult.current then break end
+					UseStateResult2(function(p2: number): number --[[ Line: 44 ]]
+						-- upvalues: UseMemoResult (upval)
+						return p2 % #UseMemoResult + 1
 					end)
-					continue
 				end
-				return
+			end)
+			
+			return function() --[[ Line: 50 ]]
+				-- upvalues: UseRefResult (upval)
+				UseRefResult.current = true
 			end
-		end)
-		
-		return function()
-			-- upvalues: var5 (copy)
-			var5.current = true
 		end
-	end, { var6, var2 })
-	local var7, var8 = reactModule.useBinding(var2[1].style)
-	local time300 = var1.Time.Time_300
-	reactModule.useEffect(function()
-		-- upvalues: var7 (ref), var2 (ref), var3 (ref), time300 (ref), var8 (ref)
-		local value = var7:getValue()
-		local style = var2[var3].style
-		local var9 = false
-		task.spawn(function()
-			-- upvalues: time300 (copy), var9 (write), var8 (copy), value (ref), style (ref)
-			local var10 = 0
-			while var10 < time300 do
-				var10 += task.wait()
+	end, { AutoRotateSecondsRatio, UseMemoResult })
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(UseMemoResult[1].style)
+	local Time300 = UseTokensResult.Time.Time_300
+	ReactModule.useEffect(function() --[[ Line: 58 ]]
+		-- upvalues: UseBindingResult (copy), UseMemoResult (copy), UseStateResult (copy), Time300 (copy), UseBindingResult2 (copy)
+		local Value = UseBindingResult:getValue()
+		local Style = UseMemoResult[UseStateResult].style
+		local Flag = false
+		task.spawn(function() --[[ Line: 63 ]]
+			-- upvalues: Time300 (upval), Flag (ref), UseBindingResult2 (upval), Value (copy), Style (copy)
+			local NewElapsed = 0
+			while NewElapsed < Time300 do
+				NewElapsed += task.wait()
 				
-				if not var9 then
-					local minValue = math.min(var10 / time300, 1)
-					var8({
-						Color3 = value.Color3:Lerp(style.Color3, minValue),
-						Transparency = value.Transparency + (style.Transparency - value.Transparency) * minValue
-					})
-					continue
-				end
-				return
+				if Flag then break end
+				local Smallest = math.min(NewElapsed / Time300, 1)
+				UseBindingResult2({
+					Color3 = Value.Color3:Lerp(Style.Color3, Smallest),
+					Transparency = Value.Transparency + (Style.Transparency - Value.Transparency) * Smallest
+				})
 			end
 		end)
 		
-		return function()
-			-- upvalues: var9 (write)
-			var9 = true
+		return function() --[[ Line: 78 ]]
+			-- upvalues: Flag (ref)
+			Flag = true
 		end
 	end, {
-		var3,
-		var2,
-		time300,
-		var7,
-		var8
+		UseStateResult,
+		UseMemoResult,
+		Time300,
+		UseBindingResult,
+		UseBindingResult2
 	})
-	local t = {}
+	local Elements = {}
 	
-	for i, v in var2 do
-		t[v.id] = reactModule.createElement(view, {
-			LayoutOrder = i,
+	for LayoutOrder, value in UseMemoResult do
+		Elements[value.id] = ReactModule.createElement(View, {
+			LayoutOrder = LayoutOrder,
 			tag = {
 				["size-350 radius-small"] = true,
-				["stroke-thick stroke-emphasis"] = i == var3,
-				["stroke-standard stroke-default"] = i ~= var3
+				["stroke-thick stroke-emphasis"] = LayoutOrder == UseStateResult,
+				["stroke-standard stroke-default"] = LayoutOrder ~= UseStateResult
 			},
-			backgroundStyle = v.style,
-			onActivated = function()
-				-- upvalues: var5 (ref), var4 (ref), i (ref)
-				var5.current = true
-				var4(i)
+			backgroundStyle = value.style,
+			onActivated = function() --[[ Line: 93 ]]
+				-- upvalues: UseRefResult (copy), UseStateResult2 (copy), LayoutOrder (copy)
+				UseRefResult.current = true
+				UseStateResult2(LayoutOrder)
 			end,
-			testId = `ImagePreviewBackgroundSwatch{v.id}`
+			testId = `ImagePreviewBackgroundSwatch{value.id}`
 		}, {
-			Checkerboard = v.image and reactModule.createElement(image, {
+			Checkerboard = value.image and ReactModule.createElement(Image, {
 				tag = "size-full radius-small",
-				Image = v.image,
+				Image = value.image,
 				ScaleType = Enum.ScaleType.Tile,
-				TileSize = UDim2.fromOffset(var1.Size.Size_150, var1.Size.Size_150)
+				TileSize = UDim2.fromOffset(UseTokensResult.Size.Size_150, UseTokensResult.Size.Size_150)
 			}) or nil
 		})
 	end
-	return reactModule.createElement(view, { tag = "col align-x-center gap-xsmall size-full" }, {
-		Preview = reactModule.createElement(image, {
+	return ReactModule.createElement(View, { tag = "col align-x-center gap-xsmall size-full" }, {
+		Preview = ReactModule.createElement(Image, {
 			LayoutOrder = 1,
 			tag = "size-full aspect-1-1 radius-small clip",
 			Image = "rbxassetid://6372755229",
 			testId = "ImagePreviewBackground",
-			backgroundStyle = var7,
-			imageStyle = var7:map(function(p2)
-				-- upvalues: var1 (ref)
+			backgroundStyle = UseBindingResult,
+			imageStyle = UseBindingResult:map(function(p2) --[[ Line: 115 ]]
+				-- upvalues: UseTokensResult (copy)
 				return {
-					Color3 = var1.Color.Extended.White.White_100.Color3,
+					Color3 = UseTokensResult.Color.Extended.White.White_100.Color3,
 					Transparency = 1 - p2.Transparency
 				}
 			end),
 			ScaleType = Enum.ScaleType.Tile,
-			TileSize = UDim2.fromOffset(var1.Size.Size_400, var1.Size.Size_400)
+			TileSize = UDim2.fromOffset(UseTokensResult.Size.Size_400, UseTokensResult.Size.Size_400)
 		}, {
-			Asset = reactModule.createElement(image, {
+			Asset = ReactModule.createElement(Image, {
 				tag = "size-full",
 				ZIndex = 2,
 				testId = "ImagePreviewAsset",
@@ -142,10 +137,10 @@ return function(p1)
 				ScaleType = Enum.ScaleType.Fit
 			})
 		}),
-		Swatches = reactModule.createElement(view, {
+		Swatches = ReactModule.createElement(View, {
 			tag = "row gap-xsmall auto-xy",
 			LayoutOrder = 2,
 			testId = "ImagePreviewSwatches"
-		}, t)
+		}, Elements)
 	})
 end

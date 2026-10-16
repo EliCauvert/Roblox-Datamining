@@ -1,136 +1,143 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local parent = momentsCreation.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local view = foundationModule.View
-local useEffect = reactModule.useEffect
-local useMemo = reactModule.useMemo
-local useState = reactModule.useState
-local useTokens = foundationModule.Hooks.useTokens
-local useSignalBinding = signalsReactModule.useSignalBinding
-local useSignalState = signalsReactModule.useSignalState
-local getCaptureVideoContentModule = require(momentsCreation.Capture.getCaptureVideoContent)
-local sampleVideoFramesModule = require(momentsCreation.Capture.sampleVideoFrames)
-local useTimelineSeekControllerModule = require(momentsCreation.Hooks.useTimelineSeekController)
-local fFlagMomentsTTSScrubberDragInOverlayModule = require(momentsCreation.Flags.FFlagMomentsTTSScrubberDragInOverlay)
-local fFlagMomentsScrubberSeekOnReleaseModule = require(momentsCreation.Flags.FFlagMomentsScrubberSeekOnRelease)
-local _ = require(momentsCreation.Types.CreationFlowTypes)
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local Parent = MomentsCreation.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local View = FoundationModule.View
+local UseEffectFunction = ReactModule.useEffect
+local UseMemoFunction = ReactModule.useMemo
+local UseStateFunction = ReactModule.useState
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseSignalBindingFunction = SignalsReactModule.useSignalBinding
+local UseSignalStateFunction = SignalsReactModule.useSignalState
+local GetCaptureVideoContentModule = require(MomentsCreation.Capture.getCaptureVideoContent)
+local SampleVideoFramesModule = require(MomentsCreation.Capture.sampleVideoFrames)
+local UseTimelineSeekControllerModule = require(MomentsCreation.Hooks.useTimelineSeekController)
+local FFlagMomentsTTSScrubberDragInOverlayModule = require(MomentsCreation.Flags.FFlagMomentsTTSScrubberDragInOverlay)
+local FFlagMomentsScrubberSeekOnReleaseModule = require(MomentsCreation.Flags.FFlagMomentsScrubberSeekOnRelease)
+local _ = require(MomentsCreation.Types.CreationFlowTypes)
 
-return function(p1)
-	-- upvalues: useTokens (ref), useSignalState (ref), useTimelineSeekControllerModule (ref), useState (ref), useEffect (ref), getCaptureVideoContentModule (ref), sampleVideoFramesModule (ref), useMemo (ref), reactModule (ref), view (ref), signalsModule (ref), fFlagMomentsScrubberSeekOnReleaseModule (ref), useSignalBinding (ref), fFlagMomentsTTSScrubberDragInOverlayModule (ref)
-	local playback = p1.playback
-	local var1 = useTokens()
-	local height = p1.height or 50
-	local var2 = if p1.interactive ~= nil then false else p1.interactive
-	local var3 = useSignalState(playback.getDuration)
-	local var4 = useSignalState(playback.getRegion)
-	local var5 = useTimelineSeekControllerModule(playback, p1.onSeek, var2, p1.dragOnly == true)
-	local containerRef = var5.containerRef
-	local dragDetectorRef = var5.dragDetectorRef
-	local playheadDragDetectorRef = var5.playheadDragDetectorRef
-	local var6, var7 = useState({})
-	useEffect(function()
-		-- upvalues: p1 (ref), var3 (ref), getCaptureVideoContentModule (copy), var4 (ref), sampleVideoFramesModule (copy), var7 (ref)
-		if p1.capture == nil or var3 <= 0 then return end
-		local var8 = getCaptureVideoContentModule(p1.capture)
+return function(p1) --[[ Line: 56 | Named "VideoTimeline" ]]
+	-- upvalues: UseTokensFunction (copy), UseSignalStateFunction (copy), UseTimelineSeekControllerModule (copy), UseStateFunction (copy), UseEffectFunction (copy), GetCaptureVideoContentModule (copy), SampleVideoFramesModule (copy), UseMemoFunction (copy), ReactModule (copy), View (copy), SignalsModule (copy), FFlagMomentsScrubberSeekOnReleaseModule (copy), UseSignalBindingFunction (copy), FFlagMomentsTTSScrubberDragInOverlayModule (copy)
+	local Playback = p1.playback
+	local UseTokensResult = UseTokensFunction()
+	local Height = p1.height or 50
+	local Interactive = p1.interactive ~= nil and p1.interactive
+	local UseSignalStateResult: number = UseSignalStateFunction(Playback.getDuration)
+	local UseSignalStateResult1 = UseSignalStateFunction(Playback.getRegion)
+	local UseTimelineSeekControllerModuleResult = UseTimelineSeekControllerModule(Playback, p1.onSeek, Interactive, p1.dragOnly == true)
+	local ContainerRef = UseTimelineSeekControllerModuleResult.containerRef
+	local DragDetectorRef = UseTimelineSeekControllerModuleResult.dragDetectorRef
+	local PlayheadDragDetectorRef = UseTimelineSeekControllerModuleResult.playheadDragDetectorRef
+	local UseStateResult, UseStateResult2 = UseStateFunction({})
+	UseEffectFunction(function() --[[ Line: 74 ]]
+		-- upvalues: p1 (copy), UseSignalStateResult (copy), GetCaptureVideoContentModule (upval), UseSignalStateResult1 (copy), SampleVideoFramesModule (upval), UseStateResult2 (copy)
+		if p1.capture == nil or UseSignalStateResult <= 0 then return end
+		local CaptureVideoContentModule = GetCaptureVideoContentModule(p1.capture)
 		
-		if var8 == nil and typeof(p1.capture) ~= "table" then
-			local ok, status = pcall(Content.fromObject, p1.capture)
+		if CaptureVideoContentModule == nil and typeof(p1.capture) ~= "table" then
+			local Success, Result = pcall(Content.fromObject, p1.capture)
 			
-			if ok then
-				var8 = status
+			if Success then
+				CaptureVideoContentModule = Result
 			end
 		end
-		if var8 ~= nil then
-			sampleVideoFramesModule(var8, var3, var7, if var4 ~= nil then 0 else var4.startTime)
+		if CaptureVideoContentModule ~= nil then
+			SampleVideoFramesModule(CaptureVideoContentModule, UseSignalStateResult, UseStateResult2, if UseSignalStateResult1 == nil then 0 else UseSignalStateResult1.startTime)
 		end
-	end, { p1.capture, var3, var4 })
-	local var8 = if p1.playheadPosition ~= nil then useSignalBinding(useMemo(function()
-		-- upvalues: signalsModule (copy), fFlagMomentsScrubberSeekOnReleaseModule (copy), var5 (ref), playback (ref)
-		return signalsModule.createComputed(function(p2)
-			-- upvalues: fFlagMomentsScrubberSeekOnReleaseModule (copy), var5 (copy), playback (copy)
-			if fFlagMomentsScrubberSeekOnReleaseModule and var5.getDragFraction ~= nil then
-				local dragFraction = var5.getDragFraction(p2)
+	end, { p1.capture, UseSignalStateResult, UseSignalStateResult1 })
+	local UseMemoResult = UseMemoFunction(function() --[[ Line: 91 ]]
+		-- upvalues: UseSignalStateResult (copy), UseStateResult (copy), ReactModule (upval), View (upval)
+		local Elements = {}
+		
+		for i = 1, math.max(1, (math.floor(UseSignalStateResult))) do
+			local UseStateResultEntry = UseStateResult[i]
+			Elements["frame_" .. i] = ReactModule.createElement(View, {
+				tag = "shrink size-full-full bg-system-neutral",
+				LayoutOrder = i
+			}, {
+				content = ReactModule.createElement("ImageLabel", {
+					BackgroundTransparency = 1,
+					Size = UDim2.fromScale(1, 1),
+					ImageContent = UseStateResultEntry and UseStateResultEntry.Image,
+					ScaleType = Enum.ScaleType.Crop
+				})
+			})
+		end
+		return Elements
+	end, { UseSignalStateResult, UseStateResult })
+	local UseSignalBindingResult = UseSignalBindingFunction((UseMemoFunction(function() --[[ Line: 112 ]]
+		-- upvalues: SignalsModule (upval), FFlagMomentsScrubberSeekOnReleaseModule (upval), UseTimelineSeekControllerModuleResult (copy), Playback (copy)
+		return SignalsModule.createComputed(function(p2): number --[[ Line: 113 ]]
+			-- upvalues: FFlagMomentsScrubberSeekOnReleaseModule (upval), UseTimelineSeekControllerModuleResult (upval), Playback (upval)
+			if FFlagMomentsScrubberSeekOnReleaseModule and UseTimelineSeekControllerModuleResult.getDragFraction ~= nil then
+				local DragFraction: number = UseTimelineSeekControllerModuleResult.getDragFraction(p2)
 				
-				if dragFraction ~= nil then
-					return math.clamp(dragFraction, 0, 1)
+				if DragFraction ~= nil then
+					return (math.clamp(DragFraction, 0, 1))
 				end
 			end
-			local duration = playback.getDuration(p2)
+			local Duration: number = Playback.getDuration(p2)
 			
-			return if duration <= 0 then 0 else math.clamp(playback.getPosition(p2) / duration, 0, 1)
+			return if Duration <= 0 then 0 else math.clamp(Playback.getPosition(p2) / Duration, 0, 1)
 		end)
-	end, { playback, var5.getDragFraction })):map(function(p2)
-		return UDim2.fromScale(p2, 0.5)
-	end) else UDim2.fromScale(if var3 > 0 then math.clamp(p1.playheadPosition / var3, 0, 1) else 0, 0.5)
+	end, {
+		Playback,
+		UseTimelineSeekControllerModuleResult.getDragFraction
+	})))
+	local MapResult = if p1.playheadPosition == nil then UseSignalBindingResult:map(function(XScale): UDim2 --[[ Line: 130 ]]
+		return UDim2.fromScale(XScale, 0.5)
+	end) else UDim2.fromScale(if UseSignalStateResult > 0 then math.clamp(p1.playheadPosition / UseSignalStateResult, 0, 1) else 0, 0.5)
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		LayoutOrder = p1.layoutOrder,
-		Size = UDim2.new(1, 0, 0, height),
-		ref = containerRef
+		Size = UDim2.new(1, 0, 0, Height),
+		ref = ContainerRef
 	}, {
-		DragDetector = if var2 then reactModule.createElement("UIDragDetector", {
+		DragDetector = if Interactive then ReactModule.createElement("UIDragDetector", {
 			DragStyle = Enum.UIDragDetectorDragStyle.TranslateLine,
 			ResponseStyle = Enum.UIDragDetectorResponseStyle.CustomScale,
-			ref = dragDetectorRef
+			ref = DragDetectorRef
 		}) else nil,
-		FilmStrip = reactModule.createElement("CanvasGroup", {
+		FilmStrip = ReactModule.createElement("CanvasGroup", {
 			BackgroundTransparency = 1,
 			ZIndex = 1,
 			Size = UDim2.fromScale(1, 1)
 		}, {
-			Corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, var1.Radius.Medium) }),
-			FrameLayout = reactModule.createElement(view, {
+			Corner = ReactModule.createElement("UICorner", {
+				CornerRadius = UDim.new(0, UseTokensResult.Radius.Medium)
+			}),
+			FrameLayout = ReactModule.createElement(View, {
 				tag = "size-full-full",
 				layout = {
 					FillDirection = Enum.FillDirection.Horizontal,
-					Padding = UDim.new(0, var1.Size.Size_50),
+					Padding = UDim.new(0, UseTokensResult.Size.Size_50),
 					SortOrder = Enum.SortOrder.LayoutOrder
 				}
-			}, useMemo(function()
-				-- upvalues: var3 (ref), var6 (ref), reactModule (copy), view (copy)
-				local t = {}
-				
-				for i = 1, math.max(1, math.floor(var3)) do
-					local var9 = var6[i]
-					t["frame_" .. i] = reactModule.createElement(view, {
-						tag = "shrink size-full-full bg-system-neutral",
-						LayoutOrder = i
-					}, {
-						content = reactModule.createElement("ImageLabel", {
-							BackgroundTransparency = 1,
-							Size = UDim2.fromScale(1, 1),
-							ImageContent = var9 and var9.Image,
-							ScaleType = Enum.ScaleType.Crop
-						})
-					})
-				end
-				return t
-			end, { var3, var6 }))
+			}, UseMemoResult)
 		}),
-		Overlays = if p1.children then reactModule.createElement(reactModule.Fragment, nil, p1.children) else nil,
-		Playhead = reactModule.createElement(view, {
+		Overlays = if p1.children then ReactModule.createElement(ReactModule.Fragment, nil, p1.children) else nil,
+		Playhead = ReactModule.createElement(View, {
 			ZIndex = 3,
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			Position = var8,
+			Position = MapResult,
 			Size = UDim2.new(0, 4, 1, 20),
 			cornerRadius = UDim.new(0, 2),
-			backgroundStyle = var1.Color.System.Contrast
+			backgroundStyle = UseTokensResult.Color.System.Contrast
 		}),
-		PlayheadDragHandle = if var2 and fFlagMomentsTTSScrubberDragInOverlayModule then reactModule.createElement("Frame", {
+		PlayheadDragHandle = if Interactive and FFlagMomentsTTSScrubberDragInOverlayModule then ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			ZIndex = 3,
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			Position = var8,
+			Position = MapResult,
 			Size = UDim2.new(0, 24, 1, 20)
 		}, {
-			DragDetector = reactModule.createElement("UIDragDetector", {
+			DragDetector = ReactModule.createElement("UIDragDetector", {
 				DragStyle = Enum.UIDragDetectorDragStyle.TranslateLine,
 				ResponseStyle = Enum.UIDragDetectorResponseStyle.CustomScale,
-				ref = playheadDragDetectorRef
+				ref = PlayheadDragDetectorRef
 			})
 		}) else nil
 	})

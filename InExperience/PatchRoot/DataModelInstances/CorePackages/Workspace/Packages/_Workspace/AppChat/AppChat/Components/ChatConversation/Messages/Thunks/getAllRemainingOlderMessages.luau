@@ -1,66 +1,67 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local appChatNetworkingModule = require(parent.AppChatNetworking)
-local roduxNetworkingModule = require(appChat.Http.RoduxNetworking)
-local promiseModule = require(parent.Promise)
-local name = require(appChat.Logger):new(script.Name)
-local getNewestWithNilPreviousMessageIdModule = require(appChat.Components.ChatConversation.Utils.getNewestWithNilPreviousMessageId)
-local appChatMessageFetchRetryDelayMs = game:DefineFastInt("AppChatMessageFetchRetryDelayMs", 500)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local AppChatNetworkingModule = require(Parent.AppChatNetworking)
+local RoduxNetworkingModule = require(AppChat.Http.RoduxNetworking)
+local PromiseModule = require(Parent.Promise)
+local NewResult = require(AppChat.Logger):new(script.Name)
+local GetNewestWithNilPreviousMessageIdModule = require(AppChat.Components.ChatConversation.Utils.getNewestWithNilPreviousMessageId)
+local AppChatMessageFetchRetryDelayMs = game:DefineFastInt("AppChatMessageFetchRetryDelayMs", 500)
 
-local function fetchNextBatch(p1, p2, p3, p4, p5)
-	-- upvalues: name (ref), promiseModule (ref), appChatNetworkingModule (ref), roduxNetworkingModule (ref), appChatMessageFetchRetryDelayMs (ref), fetchNextBatch (ref), getNewestWithNilPreviousMessageIdModule (ref)
-	if p4 <= p5 then
-		name:info("Max depth reached ({}), stopping recursive message fetching", p5)
+local function fetchNextBatch(p1, Callback, p2, p3, p4) --[[ Line: 15 ]]
+	-- upvalues: NewResult (copy), PromiseModule (copy), AppChatNetworkingModule (copy), RoduxNetworkingModule (copy), AppChatMessageFetchRetryDelayMs (copy), fetchNextBatch (copy), GetNewestWithNilPreviousMessageIdModule (copy)
+	if p3 <= p4 then
+		NewResult:info("Max depth reached ({}), stopping recursive message fetching", p4)
 		
-		return promiseModule.resolve()
+		return PromiseModule.resolve()
 	end
-	local chatAppReducer = p1:getState().ChatAppReducer
+	local ChatAppReducer = p1:getState().ChatAppReducer
 	
-	if not chatAppReducer or not chatAppReducer.Conversations then
-		name:info("No conversations in state, stopping recursive message fetching")
+	if not ChatAppReducer or not ChatAppReducer.Conversations then
+		NewResult:info("No conversations in state, stopping recursive message fetching")
 		
-		return promiseModule.resolve()
+		return PromiseModule.resolve()
 	end
-	local var1 = chatAppReducer.Conversations[p3]
+	local Conversation = ChatAppReducer.Conversations[p2]
 	
-	if not var1 then
-		name:info("Conversation not found, stopping recursive message fetching")
+	if not Conversation then
+		NewResult:info("Conversation not found, stopping recursive message fetching")
 		
-		return promiseModule.resolve()
-	elseif var1.fetchedOldestMessage then
-		name:info("Already fetched oldest message, stopping recursive message fetching")
+		return PromiseModule.resolve()
+	elseif Conversation.fetchedOldestMessage then
+		NewResult:info("Already fetched oldest message, stopping recursive message fetching")
 		
-		return promiseModule.resolve()
-	elseif appChatNetworkingModule.rodux.GetOlderMessages.getStatus(p1:getState(), p3) == roduxNetworkingModule.Enum.NetworkStatus.Fetching then
-		name:info("Messages are currently being fetched, waiting before trying again")
+		return PromiseModule.resolve()
+	elseif AppChatNetworkingModule.rodux.GetOlderMessages.getStatus(p1:getState(), p2) == RoduxNetworkingModule.Enum.NetworkStatus.Fetching then
+		NewResult:info("Messages are currently being fetched, waiting before trying again")
 		
-		return promiseModule.delay(appChatMessageFetchRetryDelayMs / 1000):andThen(function()
-			-- upvalues: fetchNextBatch (copy), p1 (ref), p2 (ref), p3 (ref), p4 (ref), p5 (ref)
-			return fetchNextBatch(p1, p2, p3, p4, p5)
+		return PromiseModule.delay(AppChatMessageFetchRetryDelayMs / 1000):andThen(function() --[[ Line: 51 ]]
+			-- upvalues: fetchNextBatch (upval), p1 (copy), Callback (copy), p2 (copy), p3 (copy), p4 (copy)
+			return fetchNextBatch(p1, Callback, p2, p3, p4)
+		end)
+	else
+		local NewestWithNilPreviousMessageIdModule = GetNewestWithNilPreviousMessageIdModule(Conversation.messages)
+		NewResult:info("Fetching batch {} of older messages for conversation {}", p4, p2)
+		
+		return p1:dispatch(Callback(p2, NewestWithNilPreviousMessageIdModule, Conversation.nextCursor)):andThen(function() --[[ Line: 61 ]]
+			-- upvalues: NewResult (upval), p4 (copy), fetchNextBatch (upval), p1 (copy), Callback (copy), p2 (copy), p3 (copy)
+			NewResult:info("Fetched batch {}, continuing to fetch next batch", p4)
+			
+			return fetchNextBatch(p1, Callback, p2, p3, p4 + 1)
 		end)
 	end
-	local var2 = getNewestWithNilPreviousMessageIdModule(var1.messages)
-	name:info("Fetching batch {} of older messages for conversation {}", p5, p3)
-	
-	return p1:dispatch(p2(p3, var2, var1.nextCursor)):andThen(function()
-		-- upvalues: name (copy), p5 (ref), fetchNextBatch (copy), p1 (ref), p2 (ref), p3 (ref), p4 (ref)
-		name:info("Fetched batch {}, continuing to fetch next batch", p5)
-		
-		return fetchNextBatch(p1, p2, p3, p4, p5 + 1)
-	end)
 end
 
-return function(p1, p2, p3)
-	-- upvalues: name (ref), fetchNextBatch (ref), promiseModule (ref)
-	name:info("Starting to fetch all remaining older messages for conversation {}", p2)
+return function(p1, p2, p3) --[[ Line: 67 ]]
+	-- upvalues: NewResult (copy), fetchNextBatch (copy), PromiseModule (copy)
+	NewResult:info("Starting to fetch all remaining older messages for conversation {}", p2)
 	
-	return function(p4)
-		-- upvalues: fetchNextBatch (copy), p1 (ref), p2 (ref), p3 (ref), name (copy), promiseModule (copy)
-		return fetchNextBatch(p4, p1, p2, p3, 0):catch(function(p5)
-			-- upvalues: name (copy), promiseModule (copy)
-			name:warning("Error fetching all remaining older messages: {}", p5)
+	return function(p4) --[[ Line: 69 ]]
+		-- upvalues: fetchNextBatch (upval), p1 (copy), p2 (copy), p3 (copy), NewResult (upval), PromiseModule (upval)
+		return fetchNextBatch(p4, p1, p2, p3, 0):catch(function(Err) --[[ Line: 70 ]]
+			-- upvalues: NewResult (upval), PromiseModule (upval)
+			NewResult:warning("Error fetching all remaining older messages: {}", Err)
 			
-			return promiseModule.reject(p5)
+			return PromiseModule.reject(Err)
 		end)
 	end
 end

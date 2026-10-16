@@ -1,77 +1,80 @@
-﻿local pioneerUtils = script:FindFirstAncestor("PioneerUtils")
-local parent = pioneerUtils.Parent
-local fetchModule = require(parent.Fetch)
-local fetch = fetchModule.fetch
-local response = fetchModule.Response
-local promiseModule = require(parent.Promise)
-local url = require(parent.Http).Url
-local pioneerLeaveReasonModule = require(pioneerUtils.PioneerLeaveReason)
-local isPioneerLaunchModule = require(pioneerUtils.isPioneerLaunch)
-local leaveExperienceModule = require(pioneerUtils.leaveExperience)
-local formattedText = string.format("%s/users/authenticated/app-launch-info", url.USERS_URL)
+﻿local PioneerUtils = script:FindFirstAncestor("PioneerUtils")
+local Parent = PioneerUtils.Parent
+local FetchModule = require(Parent.Fetch)
+local FetchFunction = FetchModule.fetch
+local Response = FetchModule.Response
+local PromiseModule = require(Parent.Promise)
+local PioneerLeaveReasonModule = require(PioneerUtils.PioneerLeaveReason)
+local IsPioneerLaunchModule = require(PioneerUtils.isPioneerLaunch)
+local LeaveExperienceModule = require(PioneerUtils.leaveExperience)
+local Formatted = string.format("%s/users/authenticated/app-launch-info", require(Parent.Http).Url.USERS_URL)
 
-local function _()
-	-- upvalues: promiseModule (ref), fetch (ref), formattedText (ref), response (ref)
-	return promiseModule.new(function(p1)
-		-- upvalues: fetch (copy), formattedText (copy), response (copy)
-		local var1 = fetch(formattedText, { method = "GET" }):catch(function()
-			-- upvalues: response (copy)
-			return response.error()
+local function _() --[[ Line: 16 | Named "fetchIsConfirmedThirteenPlus" ]]
+	-- upvalues: PromiseModule (copy), FetchFunction (copy), Formatted (copy), Response (copy)
+	return PromiseModule.new(function(Callback: (any) -> ()) --[[ Line: 17 ]]
+		-- upvalues: FetchFunction (upval), Formatted (upval), Response (upval)
+		local v1 = FetchFunction(Formatted, { method = "GET" }):catch(function() --[[ Line: 19 ]]
+			-- upvalues: Response (upval)
+			return Response.error()
 		end):expect()
 		
-		if var1.ok then
-			local var2 = var1:json():catch(function()
+		if v1.ok then
+			local v2 = v1:json():catch(function() --[[ Line: 31 ]]
 				return nil
 			end):expect()
-			p1(typeof(var2) == "table" and (typeof(var2.ageBracket) == "number" and var2.ageBracket ~= 1))
+			Callback(typeof(v2) == "table" and typeof(v2.ageBracket) == "number" and v2.ageBracket ~= 1)
 			
 			return
+		else
+			Callback(false)
 		end
-		p1(false)
 	end)
 end
 
-return function(p1, p2)
-	-- upvalues: isPioneerLaunchModule (ref), promiseModule (ref), fetch (ref), formattedText (ref), response (ref), leaveExperienceModule (ref), pioneerLeaveReasonModule (ref)
-	local function _()
-		-- upvalues: p2 (ref)
-		if p2 then
-			p2()
+return function(p1, Callback: () -> ()) --[[ Line: 47 | Named "maybeLeavePioneerOnFaeDownAge" ]]
+	-- upvalues: IsPioneerLaunchModule (copy), PromiseModule (copy), FetchFunction (copy), Formatted (copy), Response (copy), LeaveExperienceModule (copy), PioneerLeaveReasonModule (copy)
+	local function _() --[[ Line: 48 | Named "stay" ]]
+		-- upvalues: Callback (copy)
+		if Callback then
+			Callback()
 		end
 	end
 	
-	if isPioneerLaunchModule() then
+	if IsPioneerLaunchModule() then
 		if p1 then
-			return promiseModule.new(function(p3)
-				-- upvalues: fetch (copy), formattedText (copy), response (copy)
-				local var1 = fetch(formattedText, { method = "GET" }):catch(function()
-					-- upvalues: response (copy)
-					return response.error()
+			return PromiseModule.new(function(Callback: (any) -> ()) --[[ Line: 17 ]]
+				-- upvalues: FetchFunction (upval), Formatted (upval), Response (upval)
+				local v1 = FetchFunction(Formatted, { method = "GET" }):catch(function() --[[ Line: 19 ]]
+					-- upvalues: Response (upval)
+					return Response.error()
 				end):expect()
 				
-				if var1.ok then
-					local var2 = var1:json():catch(function()
+				if v1.ok then
+					local v2 = v1:json():catch(function() --[[ Line: 31 ]]
 						return nil
 					end):expect()
-					p3(typeof(var2) == "table" and (typeof(var2.ageBracket) == "number" and var2.ageBracket ~= 1))
+					Callback(typeof(v2) == "table" and typeof(v2.ageBracket) == "number" and v2.ageBracket ~= 1)
 					
 					return
+				else
+					Callback(false)
 				end
-				p3(false)
-			end):andThen(function(p3)
-				-- upvalues: p2 (ref), leaveExperienceModule (copy), pioneerLeaveReasonModule (copy)
-				if not p3 then
-					leaveExperienceModule(pioneerLeaveReasonModule.AccountUnder13)
-				elseif p2 then
-					p2()
+			end):andThen(function(Result): boolean --[[ Line: 64 ]]
+				-- upvalues: Callback (copy), LeaveExperienceModule (upval), PioneerLeaveReasonModule (upval)
+				if Result then
+					if Callback then
+						Callback()
+					end
+				else
+					LeaveExperienceModule(PioneerLeaveReasonModule.AccountUnder13)
 				end
-				return not p3
+				return not Result
 			end)
-		elseif p2 then
-			p2()
+		elseif Callback then
+			Callback()
 		end
 		return
-	elseif p2 then
-		p2()
+	elseif Callback then
+		Callback()
 	end
 end

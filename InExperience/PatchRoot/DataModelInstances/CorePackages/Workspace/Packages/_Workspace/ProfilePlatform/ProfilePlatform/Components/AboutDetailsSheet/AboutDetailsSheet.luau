@@ -1,200 +1,200 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local robloxAppHooksModule = require(parent.RobloxAppHooks)
-local peekViewModule = require(parent.PeekView)
-local roactUtilsModule = require(parent.RoactUtils)
-local navigationRoduxModule = require(parent.NavigationRodux)
-local foundationModule = require(parent.Foundation)
-local inputUiModule = require(parent.InputUi)
-local useNavigationProps = require(parent.RobloxAppNavigation).useNavigationProps
-local sharedFlagsModule = require(parent.SharedFlags)
-local useProfileFormFactorModule = require(profilePlatform.Hooks.useProfileFormFactor)
-local enumsModule = require(profilePlatform.Common.Enums)
-local constantsModule = require(profilePlatform.Common.Constants)
-local useProfileCardWidthModule = require(profilePlatform.Hooks.useProfileCardWidth)
-local useProfileCardWidth = require(parent.ProfilePlatformCommon).Hooks.useProfileCardWidth
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local textKeysModule = require(profilePlatform.Common.TextKeys)
-local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local navigateBack = navigationRoduxModule.Thunks.NavigateBack
-local useScreenSize = robloxAppHooksModule.useScreenSize
-local useTopBarHeight = robloxAppHooksModule.useTopBarHeight
-local getSafeAreaSize = inputUiModule.getSafeAreaSize
-local peekViewWithTopBar = peekViewModule.PeekViewWithTopBar
-local peekViewState = peekViewModule.PeekViewState
-local fFlagProfilePlatformNewProfileHeader = sharedFlagsModule.FFlagProfilePlatformNewProfileHeader
-local fFlagSwitchProfileWidthHookToSocialCommon = sharedFlagsModule.FFlagSwitchProfileWidthHookToSocialCommon
-local fFlagSignalsNavP3Dispatch = sharedFlagsModule.FFlagSignalsNavP3Dispatch
-local fFlagProfileAboutDetailsUseSheet = sharedFlagsModule.FFlagProfileAboutDetailsUseSheet
-local fFlagEnableSplitPane = sharedFlagsModule.FFlagEnableSplitPane
-local var1 = if fFlagEnableSplitPane then require(parent.SplitPane).SplitPaneStore else nil
-local var2 = if fFlagEnableSplitPane then require(parent.SignalsReact).useSignalState else nil
-local var3 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
-local iconButton = foundationModule.IconButton
-local view = foundationModule.View
-local text = foundationModule.Text
-local sheet = foundationModule.Sheet
-local overlayProvider = foundationModule.OverlayProvider
-local list = { 0.55, 1 }
-local t = {
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local RobloxAppHooksModule = require(Parent.RobloxAppHooks)
+local PeekViewModule = require(Parent.PeekView)
+local RoactUtilsModule = require(Parent.RoactUtils)
+local FoundationModule = require(Parent.Foundation)
+local UseNavigationPropsFunction = require(Parent.RobloxAppNavigation).useNavigationProps
+local SharedFlagsModule = require(Parent.SharedFlags)
+local UseProfileFormFactorModule = require(ProfilePlatform.Hooks.useProfileFormFactor)
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local ConstantsModule = require(ProfilePlatform.Common.Constants)
+local UseProfileCardWidthModule = require(ProfilePlatform.Hooks.useProfileCardWidth)
+local UseProfileCardWidthFunction = require(Parent.ProfilePlatformCommon).Hooks.useProfileCardWidth
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local TextKeysModule = require(ProfilePlatform.Common.TextKeys)
+local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
+local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
+local NavigateBackFunction = require(Parent.NavigationRodux).Thunks.NavigateBack
+local UseScreenSizeFunction = RobloxAppHooksModule.useScreenSize
+local UseTopBarHeightFunction = RobloxAppHooksModule.useTopBarHeight
+local GetSafeAreaSizeFunction = require(Parent.InputUi).getSafeAreaSize
+local PeekViewWithTopBar = PeekViewModule.PeekViewWithTopBar
+local PeekViewState = PeekViewModule.PeekViewState
+local FFlagProfilePlatformNewProfileHeader = SharedFlagsModule.FFlagProfilePlatformNewProfileHeader
+local FFlagSwitchProfileWidthHookToSocialCommon = SharedFlagsModule.FFlagSwitchProfileWidthHookToSocialCommon
+local FFlagSignalsNavP3Dispatch = SharedFlagsModule.FFlagSignalsNavP3Dispatch
+local FFlagProfileAboutDetailsUseSheet = SharedFlagsModule.FFlagProfileAboutDetailsUseSheet
+local FFlagEnableSplitPane = SharedFlagsModule.FFlagEnableSplitPane
+local SplitPaneStore = if FFlagEnableSplitPane then require(Parent.SplitPane).SplitPaneStore else nil
+local UseSignalState = if FFlagEnableSplitPane then require(Parent.SignalsReact).useSignalState else nil
+local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
+local IconButton = FoundationModule.IconButton
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local Sheet = FoundationModule.Sheet
+local OverlayProvider = FoundationModule.OverlayProvider
+local SnapPoints = { 0.55, 1 }
+local config = {
 	position = UDim2.fromScale(0, 0),
 	size = UDim2.fromScale(1, 1),
 	anchorPoint = Vector2.new(0, 0)
 }
 
-local function AboutDetailsSheetLegacy(_)
-	-- upvalues: useTopBarHeight (ref), useDispatch (ref), useProfileFormFactorModule (ref), enumsModule (ref), fFlagEnableSplitPane (ref), var2 (ref), var1 (ref), useScreenSize (ref), useSelector (ref), getSafeAreaSize (ref), fFlagProfilePlatformNewProfileHeader (ref), fFlagSwitchProfileWidthHookToSocialCommon (ref), useProfileCardWidth (ref), useProfileCardWidthModule (ref), constantsModule (ref), reactModule (ref), fFlagSignalsNavP3Dispatch (ref), var3 (ref), navigateBack (ref), peekViewState (ref), useNavigationProps (ref), t (ref), view (ref), peekViewWithTopBar (ref), iconButton (ref)
-	local uDim = UDim.new(0.55, 0)
-	local var4 = useTopBarHeight()
-	local var5 = useDispatch()
-	local var6 = useProfileFormFactorModule()
-	local var7 = var6.formFactor == enumsModule.ProfileFormFactor.Wide
-	local var8 = if fFlagEnableSplitPane then var2(var1.getStore().getIsSplitEnabled) else false
-	local var9 = useSelector(function(p1)
+local function AboutDetailsSheetLegacy(_) --[[ Line: 58 ]]
+	-- upvalues: UseTopBarHeightFunction (copy), UseDispatchFunction (copy), UseProfileFormFactorModule (copy), EnumsModule (copy), FFlagEnableSplitPane (copy), UseSignalState (copy), SplitPaneStore (copy), UseScreenSizeFunction (copy), UseSelectorFunction (copy), GetSafeAreaSizeFunction (copy), FFlagProfilePlatformNewProfileHeader (copy), FFlagSwitchProfileWidthHookToSocialCommon (copy), UseProfileCardWidthFunction (copy), UseProfileCardWidthModule (copy), ConstantsModule (copy), ReactModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateBackFunction (copy), PeekViewState (copy), UseNavigationPropsFunction (copy), config (copy), View (copy), PeekViewWithTopBar (copy), IconButton (copy)
+	local UseTopBarHeightResult = UseTopBarHeightFunction()
+	local UseDispatchResult = UseDispatchFunction()
+	local UseProfileFormFactorModuleResult = UseProfileFormFactorModule()
+	local IsFormFactorMatch = UseProfileFormFactorModuleResult.formFactor == EnumsModule.ProfileFormFactor.Wide
+	local UseSignalStateResult = if FFlagEnableSplitPane then UseSignalState(SplitPaneStore.getStore().getIsSplitEnabled) else false
+	local UseScreenSizeResult = UseScreenSizeFunction()
+	local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 69 ]]
+		return p1.GlobalGuiInset
+	end)
+	local UseSelectorResult1 = UseSelectorFunction(function(p1) --[[ Line: 72 ]]
 		return p1.TopBar.statusBarHeight
 	end)
-	local var10 = getSafeAreaSize(useScreenSize(), useSelector(function(p1)
-		return p1.GlobalGuiInset
-	end))
-	local var11 = (if fFlagProfilePlatformNewProfileHeader then if fFlagSwitchProfileWidthHookToSocialCommon then useProfileCardWidth() else useProfileCardWidthModule(var7) else math.min(var10.X.Offset, constantsModule.MAXIMUM_CONTAINER_WIDTH)) / var10.X.Offset
-	local var12 = reactModule.useCallback(function()
-		-- upvalues: fFlagSignalsNavP3Dispatch (copy), var3 (copy), var5 (ref), navigateBack (copy)
-		if fFlagSignalsNavP3Dispatch then
-			var3.back(true)
+	local SafeAreaSize = GetSafeAreaSizeFunction(UseScreenSizeResult, UseSelectorResult)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 85 ]]
+		-- upvalues: FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateBackFunction (upval)
+		if FFlagSignalsNavP3Dispatch then
+			NavigationCommands.back(true)
 			
 			return
+		else
+			UseDispatchResult(NavigateBackFunction(true))
 		end
-		var5(navigateBack(true))
-	end, { var5 })
-	local var13 = reactModule.useCallback(function()
-		-- upvalues: var12 (ref)
-		var12()
-	end, { var12 })
-	local var14 = reactModule.useCallback(function(p1, _, _)
-		-- upvalues: peekViewState (copy), var12 (ref)
-		if p1 == peekViewState.Closed then
-			var12()
-		end
-	end, { var12 })
-	local sections = useNavigationProps(function(_, p1)
-		return { sections = p1.sections }
-	end).sections or {}
-	local t_1 = {
+	end, { UseDispatchResult })
+	local config1 = {
 		position = UDim2.fromScale(1, 0),
-		size = UDim2.fromScale(var11, 1),
+		size = UDim2.fromScale((if FFlagProfilePlatformNewProfileHeader then if FFlagSwitchProfileWidthHookToSocialCommon then UseProfileCardWidthFunction() else UseProfileCardWidthModule(IsFormFactorMatch) else math.min(SafeAreaSize.X.Offset, ConstantsModule.MAXIMUM_CONTAINER_WIDTH)) / SafeAreaSize.X.Offset, 1),
 		anchorPoint = Vector2.new(1, 0)
 	}
-	local var15 = reactModule.useMemo(function()
-		-- upvalues: fFlagEnableSplitPane (copy), var8 (ref), t (copy), var7 (ref), t_1 (ref)
-		return if fFlagEnableSplitPane and var8 then t elseif var7 then t_1 else t
-	end, { var6.formFactor, var8 })
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 116 ]]
+		-- upvalues: FFlagEnableSplitPane (upval), UseSignalStateResult (copy), config (upval), IsFormFactorMatch (copy), config1 (copy)
+		return if FFlagEnableSplitPane and UseSignalStateResult then config elseif IsFormFactorMatch then config1 else config
+	end, {
+		UseProfileFormFactorModuleResult.formFactor,
+		UseSignalStateResult
+	})
 	
-	return reactModule.createElement(view, {
-		Size = var15.size,
-		Position = var15.position,
-		AnchorPoint = var15.anchorPoint
+	return ReactModule.createElement(View, {
+		Size = UseMemoResult.size,
+		Position = UseMemoResult.position,
+		AnchorPoint = UseMemoResult.anchorPoint
 	}, {
-		AboutDetailsSheet = reactModule.createElement(peekViewWithTopBar, {
-			briefViewContentHeight = uDim,
-			fullViewContentHeight = UDim.new(1, -var4),
-			onViewStateChanged = var14,
-			topBarHeight = var4,
-			topBarSlot = reactModule.createElement(view, {
+		AboutDetailsSheet = ReactModule.createElement(PeekViewWithTopBar, {
+			briefViewContentHeight = UDim.new(0.55, 0),
+			fullViewContentHeight = UDim.new(1, -UseTopBarHeightResult),
+			onViewStateChanged = ReactModule.useCallback(function(Closed, _, _) --[[ Line: 97 ]]
+				-- upvalues: PeekViewState (upval), UseResult (copy)
+				if Closed == PeekViewState.Closed then
+					UseResult()
+				end
+			end, { UseResult }),
+			topBarHeight = UseTopBarHeightResult,
+			topBarSlot = ReactModule.createElement(View, {
 				tag = "bg-surface-100",
 				Active = true,
 				BorderSizePixel = 0,
 				Position = UDim2.new(0, 0, 0, 0),
-				Size = UDim2.new(0, 0, 0, var4)
+				Size = UDim2.new(0, 0, 0, UseTopBarHeightResult)
 			}, {
-				LeftNavigationButton = reactModule.createElement(iconButton, {
+				LeftNavigationButton = ReactModule.createElement(IconButton, {
 					BackgroundTransparency = 1,
 					icon = "icons/navigation/close",
-					Position = UDim2.new(0, 15, 0, var9),
-					onActivated = var13
+					Position = UDim2.new(0, 15, 0, UseSelectorResult1),
+					onActivated = ReactModule.useCallback(function() --[[ Line: 93 ]]
+						-- upvalues: UseResult (copy)
+						UseResult()
+					end, { UseResult })
 				})
 			}),
-			contentSlot = reactModule.createElement(view, {
+			contentSlot = ReactModule.createElement(View, {
 				tag = "auto-y align-x-center col padding-bottom-large",
-				Size = UDim2.new(1, 0, 1, -var4)
+				Size = UDim2.new(1, 0, 1, -UseTopBarHeightResult)
 			}, {
-				Contents = reactModule.createElement(view, {
+				Contents = ReactModule.createElement(View, {
 					tag = "align-x-center col padding-x-xlarge gap-xlarge padding-top-large padding-bottom-large",
 					Size = UDim2.new(1, 0, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y
 				}, {
-					ContentSections = reactModule.createElement(reactModule.Fragment, {}, sections)
+					ContentSections = ReactModule.createElement(ReactModule.Fragment, {}, UseNavigationPropsFunction(function(_, p1) --[[ Line: 103 ]]
+						return { sections = p1.sections }
+					end).sections or {})
 				})
 			})
 		})
 	})
 end
 
-local function AboutDetailsSheetFoundation(_)
-	-- upvalues: useDispatch (ref), fFlagEnableSplitPane (ref), var2 (ref), var1 (ref), reactModule (ref), fFlagSignalsNavP3Dispatch (ref), var3 (ref), navigateBack (ref), useNavigationProps (ref), useLocalization (ref), textKeysModule (ref), view (ref), overlayProvider (ref), sheet (ref), list (ref), text (ref)
-	local var4 = useDispatch()
-	local var5 = if fFlagEnableSplitPane then var2(var1.getStore().getIsSplitEnabled) else false
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: fFlagSignalsNavP3Dispatch (copy), var3 (copy), var4 (ref), navigateBack (copy)
-		if fFlagSignalsNavP3Dispatch then
-			var3.back(true)
+local function AboutDetailsSheetFoundation(_) --[[ Line: 167 ]]
+	-- upvalues: UseDispatchFunction (copy), FFlagEnableSplitPane (copy), UseSignalState (copy), SplitPaneStore (copy), ReactModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateBackFunction (copy), UseNavigationPropsFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), View (copy), OverlayProvider (copy), Sheet (copy), SnapPoints (copy), Text (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseSignalStateResult = if FFlagEnableSplitPane then UseSignalState(SplitPaneStore.getStore().getIsSplitEnabled) else false
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 173 ]]
+		-- upvalues: FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateBackFunction (upval)
+		if FFlagSignalsNavP3Dispatch then
+			NavigationCommands.back(true)
 			
 			return
+		else
+			UseDispatchResult(NavigateBackFunction(true))
 		end
-		var4(navigateBack(true))
-	end, { var4 })
-	local var7 = useNavigationProps(function(_, p1)
+	end, { UseDispatchResult })
+	local UseNavigationPropsResult = UseNavigationPropsFunction(function(_, p1) --[[ Line: 181 ]]
 		return { sections = p1.sections, profileName = p1.profileName }
 	end)
-	local sections = var7.sections or {}
-	local profileName = var7.profileName
-	local var8, var9 = reactModule.useState(nil)
-	local var10 = useLocalization({
-		about = textKeysModule.About,
+	local Sections = UseNavigationPropsResult.sections or {}
+	local ProfileName = UseNavigationPropsResult.profileName
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local UseLocalizationResult = UseLocalizationFunction({
+		about = TextKeysModule.About,
 		aboutHeading = {
-			textKeysModule.AboutDetailsHeading,
-			name = profileName or ""
+			TextKeysModule.AboutDetailsHeading,
+			name = ProfileName or ""
 		}
 	})
-	local var11 = var8
-	local var12 = var8 ~= nil
+	local Gui = UseStateResult
+	local HasUseStateResult = UseStateResult ~= nil
 	
-	if fFlagEnableSplitPane and var5 then
-		var11 = nil
-		var12 = true
+	if FFlagEnableSplitPane and UseSignalStateResult then
+		Gui = nil
+		HasUseStateResult = true
 	end
-	return reactModule.createElement(view, { ref = var9, Size = UDim2.fromScale(1, 1) }, {
-		Overlay = var12 and (reactModule.createElement(overlayProvider, { gui = var11 }, {
-			AboutSheet = reactModule.createElement(sheet.Root, {
+	return ReactModule.createElement(View, { ref = UseStateResult2, Size = UDim2.fromScale(1, 1) }, {
+		Overlay = HasUseStateResult and ReactModule.createElement(OverlayProvider, { gui = Gui }, {
+			AboutSheet = ReactModule.createElement(Sheet.Root, {
 				isOpen = true,
 				preferCenterSheet = true,
 				defaultSnapPointIndex = 1,
-				onClose = var6,
-				snapPoints = list
+				onClose = UseResult,
+				snapPoints = SnapPoints
 			}, {
-				Header = reactModule.createElement(sheet.Header, { hasCloseAffordance = true }, {
-					HeaderContent = reactModule.createElement(text, {
+				Header = ReactModule.createElement(Sheet.Header, { hasCloseAffordance = true }, {
+					HeaderContent = ReactModule.createElement(Text, {
 						LayoutOrder = 1,
 						tag = "size-full-0 auto-y text-heading-small text-align-x-left",
-						Text = if profileName then var10.aboutHeading else var10.about
+						Text = if ProfileName then UseLocalizationResult.aboutHeading else UseLocalizationResult.about
 					})
 				}),
-				Content = reactModule.createElement(sheet.Content, nil, {
-					Contents = reactModule.createElement(view, {
+				Content = ReactModule.createElement(Sheet.Content, nil, {
+					Contents = ReactModule.createElement(View, {
 						tag = "col align-x-center gap-xlarge padding-bottom-large",
 						Size = UDim2.new(1, 0, 0, 0),
 						AutomaticSize = Enum.AutomaticSize.Y
 					}, {
-						ContentSections = reactModule.createElement(reactModule.Fragment, {}, sections)
+						ContentSections = ReactModule.createElement(ReactModule.Fragment, {}, Sections)
 					})
 				})
 			})
-		}) or nil)
+		}) or nil
 	})
 end
 
-return function(p1)
-	-- upvalues: fFlagProfileAboutDetailsUseSheet (ref), AboutDetailsSheetFoundation (ref), AboutDetailsSheetLegacy (ref)
-	return if fFlagProfileAboutDetailsUseSheet then AboutDetailsSheetFoundation(p1) else AboutDetailsSheetLegacy(p1)
+return function(p1) --[[ Line: 242 | Named "AboutDetailsSheet" ]]
+	-- upvalues: FFlagProfileAboutDetailsUseSheet (copy), AboutDetailsSheetFoundation (copy), AboutDetailsSheetLegacy (copy)
+	return if FFlagProfileAboutDetailsUseSheet then AboutDetailsSheetFoundation(p1) else AboutDetailsSheetLegacy(p1)
 end

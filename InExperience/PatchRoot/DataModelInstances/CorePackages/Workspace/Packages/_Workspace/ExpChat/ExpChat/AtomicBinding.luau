@@ -1,257 +1,255 @@
-﻿local function parsePath(p1)
-	local parts = string.split(p1, "/")
+﻿local function parsePath(Text: string) --[[ Line: 4 ]]
+	local Parts = string.split(Text, "/")
 	
-	for i = #parts, 1, -1 do
-		if parts[i] == "" then
-			table.remove(parts, i)
+	for i = #Parts, 1, -1 do
+		if Parts[i] == "" then
+			table.remove(Parts, i)
 		end
 	end
-	return parts
+	return Parts
 end
 
-local function _(p2, p3)
-	local var1 = 0
+local function _(List, Count): boolean --[[ Line: 14 | Named "isManifestResolved" ]]
+	local Count1 = 0
 	
-	for i in pairs(p2) do
-		var1 += 1
+	for _ in pairs(List) do
+		Count1 += 1
 	end
-	assert(var1 <= p3, var1)
+	assert(Count1 <= Count, Count1)
 	
-	return var1 == p3
+	return Count1 == Count
 end
 
-local function unbindNodeDescend(p4, p5)
-	-- upvalues: unbindNodeDescend (ref)
-	if p4.instance == nil then return end
-	p4.instance = nil
-	local connections = p4.connections
+local function unbindNodeDescend(p1, RootInstToManifestIsNil) --[[ Line: 24 ]]
+	-- upvalues: unbindNodeDescend (copy)
+	if p1.instance == nil then return end
+	p1.instance = nil
+	local Connections = p1.connections
 	
-	if connections then
-		for i, v in ipairs(connections) do
-			v:Disconnect()
+	if Connections then
+		for _, connection in ipairs(Connections) do
+			connection:Disconnect()
 		end
-		table.clear(connections)
+		table.clear(Connections)
 	end
-	if p5 and p4.alias then
-		p5[p4.alias] = nil
+	if RootInstToManifestIsNil and p1.alias then
+		RootInstToManifestIsNil[p1.alias] = nil
 	end
-	local children = p4.children
+	local Children = p1.children
 	
-	if children then
-		for i, v in pairs(children) do
-			unbindNodeDescend(v, p5)
+	if Children then
+		for _, child in pairs(Children) do
+			unbindNodeDescend(child, RootInstToManifestIsNil)
 		end
 	end
 end
 
-local t = {}
-t.__index = t
+local AtomicBindingModule = {}
+AtomicBindingModule.__index = AtomicBindingModule
 
-function t.new(p6, p7)
-	-- upvalues: parsePath (ref), t (ref)
-	local t_1 = {}
-	local t_2 = {}
-	local t_3 = {}
-	local t_4 = {}
-	local t_5 = {}
-	local var2 = 1
+function AtomicBindingModule.new(List, _boundFn) --[[ Line: 54 ]]
+	-- upvalues: parsePath (copy), AtomicBindingModule (copy)
+	local _dtorMap = {}
+	local _connections = {}
+	local _rootInstToRootNode = {}
+	local _rootInstToManifest = {}
+	local _parsedManifest = {}
+	local _manifestSizeTarget = 1
 	
-	for i, v in pairs(p6) do
-		t_5[i] = parsePath(v)
-		var2 += 1
+	for i, value in pairs(List) do
+		_parsedManifest[i] = parsePath(value)
+		_manifestSizeTarget += 1
 	end
-	return setmetatable({
-		_boundFn = p7,
-		_parsedManifest = t_5,
-		_manifestSizeTarget = var2,
-		_dtorMap = t_1,
-		_connections = t_2,
-		_rootInstToRootNode = t_3,
-		_rootInstToManifest = t_4
-	}, t)
+	return (setmetatable({
+		_boundFn = _boundFn,
+		_parsedManifest = _parsedManifest,
+		_manifestSizeTarget = _manifestSizeTarget,
+		_dtorMap = _dtorMap,
+		_connections = _connections,
+		_rootInstToRootNode = _rootInstToRootNode,
+		_rootInstToManifest = _rootInstToManifest
+	}, AtomicBindingModule))
 end
 
-function t:_startBoundFn(p8, p9)
-	local boundFn = self._boundFn
-	local dtorMap = self._dtorMap
-	local var3 = dtorMap[p8]
+function AtomicBindingModule:_startBoundFn(Key, InstanceDoesNotExists) --[[ Line: 80 ]]
+	local BoundFnFunction = self._boundFn
+	local DtorMap = self._dtorMap
+	local Callback: () -> () = DtorMap[Key]
 	
-	if var3 then
-		var3()
-		dtorMap[p8] = nil
+	if Callback then
+		Callback()
+		DtorMap[Key] = nil
 	end
-	local var4 = boundFn(p9)
+	local BoundFnResult = BoundFnFunction(InstanceDoesNotExists)
 	
-	if var4 then
-		dtorMap[p8] = var4
-	end
-end
-
-function t:_stopBoundFn(p8)
-	local dtorMap = self._dtorMap
-	local var3 = dtorMap[p8]
-	
-	if var3 then
-		var3()
-		dtorMap[p8] = nil
+	if BoundFnResult then
+		DtorMap[Key] = BoundFnResult
 	end
 end
 
-function t:bindRoot(p8)
-	-- upvalues: unbindNodeDescend (ref)
+function AtomicBindingModule:_stopBoundFn(Key) --[[ Line: 96 ]]
+	local DtorMap = self._dtorMap
+	local Callback: () -> () = DtorMap[Key]
+	
+	if Callback then
+		Callback()
+		DtorMap[Key] = nil
+	end
+end
+
+function AtomicBindingModule:bindRoot(Key) --[[ Line: 106 ]]
+	-- upvalues: unbindNodeDescend (copy)
 	debug.profilebegin("AtomicBinding:BindRoot")
-	local parsedManifest = self._parsedManifest
-	local rootInstToRootNode = self._rootInstToRootNode
-	local rootInstToManifest = self._rootInstToManifest
-	local manifestSizeTarget = self._manifestSizeTarget
+	local ParsedManifest = self._parsedManifest
+	local RootInstToRootNode = self._rootInstToRootNode
+	local RootInstToManifest = self._rootInstToManifest
+	local ManifestSizeTarget = self._manifestSizeTarget
 	
-	if rootInstToManifest[p8] ~= nil then return end
-	local t = {}
-	rootInstToManifest[p8] = t
+	if RootInstToManifest[Key] ~= nil then return end
+	local InstanceDoesNotExists = {}
+	RootInstToManifest[Key] = InstanceDoesNotExists
 	debug.profilebegin("BuildTree")
-	local t_1 = { alias = "root", instance = p8 }
+	local config = { alias = "root", instance = Key }
 	
-	if next(parsedManifest) then
-		t_1.children = {}
-		t_1.connections = {}
+	if next(ParsedManifest) then
+		config.children = {}
+		config.connections = {}
 	end
-	rootInstToRootNode[p8] = t_1
+	RootInstToRootNode[Key] = config
 	
-	for i, v in pairs(parsedManifest) do
-		local var3 = t_1
+	for Alias, value in pairs(ParsedManifest) do
+		local config1 = config
 		
-		for i_1, v_1 in ipairs(v) do
-			local var4 = var3.children[v_1] or {}
+		for i, value1 in ipairs(value) do
+			local Child = config1.children[value1] or {}
 			
-			if i_1 == #v then
-				if var4.alias ~= nil then
+			if i == #value then
+				if Child.alias ~= nil then
 					error("Multiple aliases assigned to one instance")
 				end
-				var4.alias = i
+				Child.alias = Alias
 			else
-				var4.children = var4.children or {}
-				var4.connections = var4.connections or {}
+				Child.children = Child.children or {}
+				Child.connections = Child.connections or {}
 			end
-			var3.children[v_1] = var4
-			var3 = var4
+			config1.children[value1] = Child
+			config1 = Child
 		end
 	end
 	debug.profileend()
 	
-	local function processNode(p9)
-		-- upvalues: t (ref), processNode (ref), self (ref), p8 (ref), unbindNodeDescend (copy), manifestSizeTarget (ref)
-		local var5 = assert(p9.instance, "instance does not exist")
-		local children = p9.children
-		local alias = p9.alias
-		local var6 = not children
+	local function processNode(p2) --[[ Line: 161 ]]
+		-- upvalues: InstanceDoesNotExists (copy), processNode (copy), self (copy), Key (copy), unbindNodeDescend (upval), ManifestSizeTarget (copy)
+		local InstanceDoesNotExist = assert(p2.instance, "instance does not exist")
+		local Children = p2.children
+		local Alias = p2.alias
+		local NoChildren = not Children
 		
-		if alias then
-			t[alias] = var5
+		if Alias then
+			InstanceDoesNotExists[Alias] = InstanceDoesNotExist
 		end
-		if not var6 then
-			local function processAddChild(p10)
-				-- upvalues: children (ref), processNode (copy)
-				local name = children[p10.Name]
+		if not NoChildren then
+			local function processAddChild(Child) --[[ Line: 173 ]]
+				-- upvalues: Children (copy), processNode (upval)
+				local Child1 = Children[Child.Name]
 				
-				if name and name.instance == nil then
-					name.instance = p10
-					processNode(name)
+				if Child1 and Child1.instance == nil then
+					Child1.instance = Child
+					processNode(Child1)
 					
 					return
 				end
 			end
 			
-			local function processDeleteChild(p10)
-				-- upvalues: children (ref), self (copy), p8 (copy), unbindNodeDescend (copy), t (copy), var5 (ref), processNode (copy)
-				local name = p10.Name
-				local var7 = children[name]
+			local function processDeleteChild(Child) --[[ Line: 184 ]]
+				-- upvalues: Children (copy), self (upval), Key (upval), unbindNodeDescend (upval), InstanceDoesNotExists (upval), InstanceDoesNotExist (copy), processNode (upval)
+				local Name = Child.Name
+				local Child1 = Children[Name]
 				
-				if not var7 then return end
-				if var7.instance ~= p10 then return end
-				self:_stopBoundFn(p8)
-				unbindNodeDescend(var7, t)
-				assert(var7.instance == nil, "unbindNodeDescend failed")
-				local var8 = var5:FindFirstChild(name)
+				if not Child1 then return end
+				if Child1.instance ~= Child then return end
+				self:_stopBoundFn(Key)
+				unbindNodeDescend(Child1, InstanceDoesNotExists)
+				assert(Child1.instance == nil, "unbindNodeDescend failed")
+				local Name1 = InstanceDoesNotExist:FindFirstChild(Name)
 				
-				if var8 then
-					local name_1 = children[var8.Name]
+				if Name1 then
+					local Child2 = Children[Name1.Name]
 					
-					if name_1 then
-						if name_1.instance ~= nil then return end
-						name_1.instance = var8
-						processNode(name_1)
+					if Child2 then
+						if Child2.instance ~= nil then return end
+						Child2.instance = Name1
+						processNode(Child2)
 					end
 				end
 			end
 			
-			for i, v in ipairs(var5:GetChildren()) do
-				local name = children[v.Name]
+			for _, child in ipairs(InstanceDoesNotExist:GetChildren()) do
+				local Child = Children[child.Name]
 				
-				if name and name.instance == nil then
-					name.instance = v
-					processNode(name)
+				if Child and Child.instance == nil then
+					Child.instance = child
+					processNode(Child)
 				end
 			end
-			table.insert(p9.connections, var5.ChildAdded:Connect(processAddChild))
-			table.insert(p9.connections, var5.ChildRemoved:Connect(processDeleteChild))
+			table.insert(p2.connections, InstanceDoesNotExist.ChildAdded:Connect(processAddChild))
+			table.insert(p2.connections, InstanceDoesNotExist.ChildRemoved:Connect(processDeleteChild))
 		end
-		if var6 then
-			local var7 = t
-			local var8 = manifestSizeTarget
-			local var9 = 0
+		if NoChildren then
+			local Count = 0
 			
-			for i in pairs(var7) do
-				var9 += 1
+			for _ in pairs(InstanceDoesNotExists) do
+				Count += 1
 			end
-			assert(var9 <= var8, var9)
+			assert(Count <= ManifestSizeTarget, Count)
 			
-			if var9 == var8 then
-				self:_startBoundFn(p8, t)
+			if Count == ManifestSizeTarget then
+				self:_startBoundFn(Key, InstanceDoesNotExists)
 			end
 		end
 	end
 	
 	debug.profilebegin("ResolveTree")
-	processNode(t_1)
+	processNode(config)
 	debug.profileend()
 	debug.profileend()
 end
 
-function t:unbindRoot(p10)
-	-- upvalues: unbindNodeDescend (ref)
-	local rootInstToRootNode = self._rootInstToRootNode
-	local rootInstToManifest = self._rootInstToManifest
-	self:_stopBoundFn(p10)
-	local var10 = rootInstToRootNode[p10]
+function AtomicBindingModule:unbindRoot(Key) --[[ Line: 237 ]]
+	-- upvalues: unbindNodeDescend (copy)
+	local RootInstToRootNode = self._rootInstToRootNode
+	local RootInstToManifest = self._rootInstToManifest
+	self:_stopBoundFn(Key)
+	local RootInstToRootNodeEntry = RootInstToRootNode[Key]
 	
-	if var10 then
-		unbindNodeDescend(var10, assert(rootInstToManifest[p10], "rootInstToManifest is nil"))
-		rootInstToRootNode[p10] = nil
+	if RootInstToRootNodeEntry then
+		unbindNodeDescend(RootInstToRootNodeEntry, (assert(RootInstToManifest[Key], "rootInstToManifest is nil")))
+		RootInstToRootNode[Key] = nil
 	end
-	rootInstToManifest[p10] = nil
+	RootInstToManifest[Key] = nil
 end
 
-function t:destroy()
-	-- upvalues: unbindNodeDescend (ref)
+function AtomicBindingModule:destroy() --[[ Line: 253 ]]
+	-- upvalues: unbindNodeDescend (copy)
 	debug.profilebegin("AtomicBinding:destroy")
 	
-	for i, v in pairs(self._dtorMap) do
-		v:destroy()
+	for _, value in pairs(self._dtorMap) do
+		value:destroy()
 	end
 	table.clear(self._dtorMap)
 	
-	for i, v_1 in ipairs(self._connections) do
-		v_1:Disconnect()
+	for _, connection in ipairs(self._connections) do
+		connection:Disconnect()
 	end
 	table.clear(self._connections)
-	local rootInstToManifest = self._rootInstToManifest
+	local RootInstToManifest = self._rootInstToManifest
 	
-	for i_2, v_2 in pairs(self._rootInstToRootNode) do
-		unbindNodeDescend(v_2, assert(rootInstToManifest[i_2], "rootInstToManifest is nil"))
+	for i, value1 in pairs(self._rootInstToRootNode) do
+		unbindNodeDescend(value1, (assert(RootInstToManifest[i], "rootInstToManifest is nil")))
 	end
 	table.clear(self._rootInstToManifest)
 	table.clear(self._rootInstToRootNode)
 	debug.profileend()
 end
 
-return t
+return AtomicBindingModule

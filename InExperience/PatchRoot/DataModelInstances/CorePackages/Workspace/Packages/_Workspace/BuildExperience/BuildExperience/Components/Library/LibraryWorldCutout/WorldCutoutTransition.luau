@@ -1,30 +1,31 @@
-﻿local t = { phase = "Home", progress = 0 }
-local t_1 = { phase = "World", progress = 1 }
+﻿local InitialState = { phase = "Home", progress = 0 }
+local config = { phase = "World", progress = 1 }
 
 return {
-	initialState = t,
-	reduce = function(p1, p2)
-		-- upvalues: t_1 (ref), t (ref)
-		if p2.type == "Expand" then
-			return if p1.phase == "Home" or p1.phase == "Collapsing" then { phase = "Expanding", progress = p1.progress } else p1
-		elseif p2.type == "Collapse" then
-			return if p1.phase == "World" or p1.phase == "Expanding" then { phase = "Collapsing", progress = p1.progress } else p1
-		elseif p2.type == "Progress" then
-			local clampedValue = math.clamp(p2.progress, 0, 1)
+	initialState = InitialState,
+	reduce = function(InitialState1, p1) --[[ Line: 16 ]]
+		-- upvalues: config (copy), InitialState (copy)
+		if p1.type == "Expand" then
+			return if InitialState1.phase == "Home" or InitialState1.phase == "Collapsing" then { phase = "Expanding", progress = InitialState1.progress } else InitialState1
+		elseif p1.type == "Collapse" then
+			return if InitialState1.phase == "World" or InitialState1.phase == "Expanding" then { phase = "Collapsing", progress = InitialState1.progress } else InitialState1
+		elseif p1.type == "Progress" then
+			local ClampedValue = math.clamp(p1.progress, 0, 1)
 			
-			return if p1.phase == "Expanding" then if clampedValue >= 1 then t_1 else { phase = "Expanding", progress = clampedValue } elseif p1.phase == "Collapsing" then if clampedValue <= 0 then t else { phase = "Collapsing", progress = clampedValue } else p1
+			return if InitialState1.phase == "Expanding" then if ClampedValue >= 1 then config else { phase = "Expanding", progress = ClampedValue } elseif InitialState1.phase == "Collapsing" then if ClampedValue <= 0 then InitialState else { phase = "Collapsing", progress = ClampedValue } else InitialState1
+		else
+			return if p1.type == "Settle" then if InitialState1.phase == "Expanding" then config elseif InitialState1.phase == "Collapsing" then InitialState else InitialState1 elseif InitialState1.phase == "Home" then InitialState1 else InitialState
 		end
-		return if p2.type == "Settle" then if p1.phase == "Expanding" then t_1 elseif p1.phase == "Collapsing" then t else p1 elseif p1.phase == "Home" then p1 else t
 	end,
-	isTransitioning = function(p1)
-		return if p1 ~= "Expanding" then p1 == "Collapsing" else true
+	isTransitioning = function(p1): boolean --[[ Line: 39 ]]
+		return p1 == "Expanding" or p1 == "Collapsing"
 	end,
-	getTarget = function(p1)
+	getTarget = function(p1): number --[[ Line: 43 ]]
 		return if p1 == "Expanding" or p1 == "World" then 1 else 0
 	end,
-	interpolateRect = function(p1, p2, p3)
-		local clampedValue = math.clamp(p3, 0, 1)
+	interpolateRect = function(p1, p2, Value: number): Rect --[[ Line: 47 ]]
+		local ClampedValue = math.clamp(Value, 0, 1)
 		
-		return Rect.new(p1.Min:Lerp(p2.Min, clampedValue), p1.Max:Lerp(p2.Max, clampedValue))
+		return Rect.new(p1.Min:Lerp(p2.Min, ClampedValue), p1.Max:Lerp(p2.Max, ClampedValue))
 	end
 }

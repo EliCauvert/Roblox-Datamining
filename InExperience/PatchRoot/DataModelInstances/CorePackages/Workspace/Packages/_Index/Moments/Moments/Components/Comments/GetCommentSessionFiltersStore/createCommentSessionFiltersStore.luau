@@ -1,73 +1,75 @@
 ﻿local _ = require(script.Parent.Parent.GetCommentCollectionStore.CommentCollectionTypes)
-local createSignal = require(script:FindFirstAncestor("Moments").Parent.Signals).createSignal
-local t = {
+local CreateSignalFunction = require(script:FindFirstAncestor("Moments").Parent.Signals).createSignal
+local config = {
 	sessionHiddenCommentIds = {},
 	recentlyBlockedAuthorIds = {}
 }
 
-return function()
-	-- upvalues: createSignal (ref), t (ref)
-	local var1, var2 = createSignal(t)
+return function() --[[ Line: 27 | Named "createCommentSessionFiltersStore" ]]
+	-- upvalues: CreateSignalFunction (copy), config (copy)
+	local Signal, Signal2 = CreateSignalFunction(config)
 	
 	return {
-		getFilters = var1,
-		reset = function()
-			-- upvalues: var2 (ref)
-			var2({
+		getFilters = Signal,
+		reset = function() --[[ Line: 30 ]]
+			-- upvalues: Signal2 (copy)
+			Signal2({
 				sessionHiddenCommentIds = {},
 				recentlyBlockedAuthorIds = {}
 			})
 		end,
-		hideCommentForSession = function(p1)
-			-- upvalues: var1 (ref), var2 (ref)
-			local var3 = var1(false)
+		hideCommentForSession = function(Key) --[[ Line: 37 ]]
+			-- upvalues: Signal (copy), Signal2 (copy)
+			local SignalResult = Signal(false)
 			
-			if var3.sessionHiddenCommentIds[p1] == true then
-				return
-			end
-			local cloned = table.clone(var3.sessionHiddenCommentIds)
-			cloned[p1] = true
-			var2({
-				sessionHiddenCommentIds = cloned,
-				recentlyBlockedAuthorIds = var3.recentlyBlockedAuthorIds
-			})
-		end,
-		markAuthorRecentlyBlocked = function(p1)
-			-- upvalues: var1 (ref), var2 (ref)
-			local var3 = var1(false)
-			
-			if var3.recentlyBlockedAuthorIds[p1] == true then
-				return
-			end
-			local cloned = table.clone(var3.recentlyBlockedAuthorIds)
-			cloned[p1] = true
-			var2({
-				sessionHiddenCommentIds = var3.sessionHiddenCommentIds,
-				recentlyBlockedAuthorIds = cloned
-			})
-		end,
-		unmarkAuthorRecentlyBlocked = function(p1)
-			-- upvalues: var1 (ref), var2 (ref)
-			local var3 = var1(false)
-			
-			if var3.recentlyBlockedAuthorIds[p1] == true then
-				local cloned = table.clone(var3.recentlyBlockedAuthorIds)
-				cloned[p1] = nil
-				var2({
-					sessionHiddenCommentIds = var3.sessionHiddenCommentIds,
-					recentlyBlockedAuthorIds = cloned
+			if SignalResult.sessionHiddenCommentIds[Key] ~= true then
+				local Copy = table.clone(SignalResult.sessionHiddenCommentIds)
+				Copy[Key] = true
+				Signal2({
+					sessionHiddenCommentIds = Copy,
+					recentlyBlockedAuthorIds = SignalResult.recentlyBlockedAuthorIds
 				})
 				
 				return
 			end
 		end,
-		isCommentSessionHidden = function(p1)
-			-- upvalues: var1 (ref)
-			return var1(false).sessionHiddenCommentIds[p1] == true
+		markAuthorRecentlyBlocked = function(Key) --[[ Line: 50 ]]
+			-- upvalues: Signal (copy), Signal2 (copy)
+			local SignalResult = Signal(false)
+			
+			if SignalResult.recentlyBlockedAuthorIds[Key] ~= true then
+				local Copy = table.clone(SignalResult.recentlyBlockedAuthorIds)
+				Copy[Key] = true
+				Signal2({
+					sessionHiddenCommentIds = SignalResult.sessionHiddenCommentIds,
+					recentlyBlockedAuthorIds = Copy
+				})
+				
+				return
+			end
 		end,
-		isAuthorRecentlyBlocked = function(p1)
-			-- upvalues: var1 (ref)
-			return var1(false).recentlyBlockedAuthorIds[p1] == true
+		unmarkAuthorRecentlyBlocked = function(Key) --[[ Line: 63 ]]
+			-- upvalues: Signal (copy), Signal2 (copy)
+			local SignalResult = Signal(false)
+			
+			if SignalResult.recentlyBlockedAuthorIds[Key] == true then
+				local Copy = table.clone(SignalResult.recentlyBlockedAuthorIds)
+				Copy[Key] = nil
+				Signal2({
+					sessionHiddenCommentIds = SignalResult.sessionHiddenCommentIds,
+					recentlyBlockedAuthorIds = Copy
+				})
+				
+				return
+			end
+		end,
+		isCommentSessionHidden = function(p1): boolean --[[ Line: 76 ]]
+			-- upvalues: Signal (copy)
+			return Signal(false).sessionHiddenCommentIds[p1] == true
+		end,
+		isAuthorRecentlyBlocked = function(p1): boolean --[[ Line: 80 ]]
+			-- upvalues: Signal (copy)
+			return Signal(false).recentlyBlockedAuthorIds[p1] == true
 		end
 	}
 end

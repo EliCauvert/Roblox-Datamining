@@ -1,24 +1,24 @@
-﻿local cryoModule = require(script:FindFirstAncestor("AppBlox").Parent.Cryo)
+﻿local CryoModule = require(script:FindFirstAncestor("AppBlox").Parent.Cryo)
 
-return function(p1)
-	-- upvalues: cryoModule (ref)
-	local t = {}
-	local t_1 = {}
+return function(p1) --[[ Line: 6 | Named "getShowItems" ]]
+	-- upvalues: CryoModule (copy)
+	local JoinResults = {}
+	local JoinResults1 = {}
 	
-	for i, v in ipairs(p1.items) do
-		if v.isYouTubeVideo then
-			table.insert(t, cryoModule.Dictionary.join(v, { originalIndex = i }))
+	for OriginalIndex, item in ipairs(p1.items) do
+		if item.isYouTubeVideo then
+			table.insert(JoinResults, CryoModule.Dictionary.join(item, { originalIndex = OriginalIndex }))
 		else
-			table.insert(t_1, cryoModule.Dictionary.join(v, { originalIndex = i }))
+			table.insert(JoinResults1, CryoModule.Dictionary.join(item, { originalIndex = OriginalIndex }))
 		end
 	end
-	local var1 = cryoModule.List.join(t, t_1)
-	local numberOfThumbnails = p1.numberOfThumbnails
+	local JoinResult = CryoModule.List.join(JoinResults, JoinResults1)
+	local NumberOfThumbnails = p1.numberOfThumbnails
 	
-	if numberOfThumbnails then
-		for i_1 = #var1 + 1, numberOfThumbnails do
-			var1[i_1] = {}
+	if NumberOfThumbnails then
+		for i = #JoinResult + 1, NumberOfThumbnails do
+			JoinResult[i] = {}
 		end
 	end
-	return var1, #t, #t_1
+	return JoinResult, #JoinResults, #JoinResults1
 end

@@ -1,162 +1,165 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local signalsModule = require(parent.Signals)
-local createDataCacheModule = require(dataHydration.createDataCache)
-local createDataResolverModule = require(dataHydration.createDataResolver)
-local _ = require(dataHydration.DataHydrationTypes)
-local discoveryUtilsModule = require(parent.DiscoveryUtils)
-local _ = require(parent.LuauPolyfill)
-local logResponseError = discoveryUtilsModule.logResponseError
-local discoveryEventErrorLogger = discoveryUtilsModule.DiscoveryEventErrorLogger
-local fetchFollowingModule = require(script.Parent.fetchFollowing)
-local requestUpdateFollowingModule = require(script.Parent.requestUpdateFollowing)
-local followingsStoreTypesModule = require(script.Parent.FollowingsStoreTypes)
-local followingsUrlBuilderModule = require(script.Parent.FollowingsUrlBuilder)
-local fFlagLuaAppDataHydrationUpdateItem = require(parent.SharedFlags).FFlagLuaAppDataHydrationUpdateItem
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local SignalsModule = require(Parent.Signals)
+local CreateDataCacheModule = require(DataHydration.createDataCache)
+local CreateDataResolverModule = require(DataHydration.createDataResolver)
+local _ = require(DataHydration.DataHydrationTypes)
+local DiscoveryUtilsModule = require(Parent.DiscoveryUtils)
+local _ = require(Parent.LuauPolyfill)
+local LogResponseErrorFunction = DiscoveryUtilsModule.logResponseError
+local DiscoveryEventErrorLogger = DiscoveryUtilsModule.DiscoveryEventErrorLogger
+local FetchFollowingModule = require(script.Parent.fetchFollowing)
+local RequestUpdateFollowingModule = require(script.Parent.requestUpdateFollowing)
+local FollowingsStoreTypesModule = require(script.Parent.FollowingsStoreTypes)
+local FollowingsUrlBuilderModule = require(script.Parent.FollowingsUrlBuilder)
+local FFlagLuaAppDataHydrationUpdateItem = require(Parent.SharedFlags).FFlagLuaAppDataHydrationUpdateItem
 
-return function()
-	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), logResponseError (ref), followingsUrlBuilderModule (ref), fetchFollowingModule (ref), followingsStoreTypesModule (ref), discoveryEventErrorLogger (ref), signalsModule (ref), requestUpdateFollowingModule (ref), fFlagLuaAppDataHydrationUpdateItem (ref)
-	local var1 = createDataCacheModule()
-	local var2 = nil
-	local var3 = createDataResolverModule({
+return function() --[[ Line: 22 | Named "createFollowingsStore" ]]
+	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), LogResponseErrorFunction (copy), FollowingsUrlBuilderModule (copy), FetchFollowingModule (copy), FollowingsStoreTypesModule (copy), DiscoveryEventErrorLogger (copy), SignalsModule (copy), RequestUpdateFollowingModule (copy), FFlagLuaAppDataHydrationUpdateItem (copy)
+	local DataCacheModule = CreateDataCacheModule()
+	local Config = nil
+	local DataResolverModule = CreateDataResolverModule({
 		supportsMultiGet = false,
-		cache = var1,
-		logError = function(p1)
-			-- upvalues: logResponseError (copy), followingsUrlBuilderModule (copy)
-			logResponseError(followingsUrlBuilderModule.FOLLOWING_STATUS_URL, p1)
+		cache = DataCacheModule,
+		logError = function(p1) --[[ Line: 30 ]]
+			-- upvalues: LogResponseErrorFunction (upval), FollowingsUrlBuilderModule (upval)
+			LogResponseErrorFunction(FollowingsUrlBuilderModule.FOLLOWING_STATUS_URL, p1)
 		end,
-		onClear = function()
-			-- upvalues: var2 (write)
-			var2 = nil
+		onClear = function() --[[ Line: 34 ]]
+			-- upvalues: Config (ref)
+			Config = nil
 		end,
-		fetchFn = function(p1, _)
-			-- upvalues: fetchFollowingModule (copy), followingsStoreTypesModule (copy), discoveryEventErrorLogger (copy), var2 (write)
-			return fetchFollowingModule(p1):andThen(function(p2)
-				-- upvalues: followingsStoreTypesModule (copy), discoveryEventErrorLogger (copy), var2 (copy)
-				local responseBody = p2.responseBody
+		fetchFn = function(UniverseId, _) --[[ Line: 38 ]]
+			-- upvalues: FetchFollowingModule (upval), FollowingsStoreTypesModule (upval), DiscoveryEventErrorLogger (upval), Config (ref)
+			return FetchFollowingModule(UniverseId):andThen(function(Result) --[[ Line: 43 ]]
+				-- upvalues: FollowingsStoreTypesModule (upval), DiscoveryEventErrorLogger (upval), Config (upval)
+				local ResponseBody = Result.responseBody
 				
-				if not followingsStoreTypesModule.followingResponseValidator(responseBody) then
-					discoveryEventErrorLogger.reportError("createFollowingsStore", "Invalid following response", {
-						universeId = responseBody.UniverseId,
-						isFollowing = responseBody.IsFollowing,
-						userId = responseBody.UserId,
-						canFollow = responseBody.CanFollow
+				if not FollowingsStoreTypesModule.followingResponseValidator(ResponseBody) then
+					DiscoveryEventErrorLogger.reportError("createFollowingsStore", "Invalid following response", {
+						universeId = ResponseBody.UniverseId,
+						isFollowing = ResponseBody.IsFollowing,
+						userId = ResponseBody.UserId,
+						canFollow = ResponseBody.CanFollow
 					})
-					error({ StatusCode = p2.responseCode })
+					error({ StatusCode = Result.responseCode })
 				end
-				if responseBody.FollowingCountByType and responseBody.FollowingLimitByType then
-					var2 = {
-						followingCountByType = responseBody.FollowingCountByType,
-						followingLimitByType = responseBody.FollowingLimitByType
+				if ResponseBody.FollowingCountByType and ResponseBody.FollowingLimitByType then
+					Config = {
+						followingCountByType = ResponseBody.FollowingCountByType,
+						followingLimitByType = ResponseBody.FollowingLimitByType
 					}
 				end
 				return {
-					universeId = tostring(responseBody.UniverseId),
-					userId = tostring(responseBody.UserId),
-					canFollow = responseBody.CanFollow,
-					isFollowing = responseBody.IsFollowing
+					universeId = tostring(ResponseBody.UniverseId),
+					userId = tostring(ResponseBody.UserId),
+					canFollow = ResponseBody.CanFollow,
+					isFollowing = ResponseBody.IsFollowing
 				}
-			end):catch(function(p2)
-				-- upvalues: discoveryEventErrorLogger (copy), p1 (ref)
-				if type(p2) == "table" and p2.ClientError ~= nil then
-					discoveryEventErrorLogger.reportError("createFollowingsStore", "Client validation error fetching following", {
-						universeId = p1,
-						clientError = p2.message or p2.ClientError
+			end):catch(function(Err) --[[ Line: 74 ]]
+				-- upvalues: DiscoveryEventErrorLogger (upval), UniverseId (copy)
+				if type(Err) == "table" and Err.ClientError ~= nil then
+					DiscoveryEventErrorLogger.reportError("createFollowingsStore", "Client validation error fetching following", {
+						universeId = UniverseId,
+						clientError = Err.message or Err.ClientError
 					})
 					
 					return
+				else
+					error(Err)
 				end
-				error(p2)
 			end)
 		end
 	})
 	
 	return {
-		fetchFollowing = var3.fetchItem,
-		fetchFollowings = var3.fetchItems,
-		getFollowing = var3.getCachedItem,
-		getFollowings = var3.getCachedItems,
-		getAndFetchFollowing = var3.getAndFetchItem,
-		getAndFetchFollowings = var3.getAndFetchItems,
-		updateFollowing = function(p1, p2)
-			-- upvalues: signalsModule (copy), var1 (ref), var2 (write), requestUpdateFollowingModule (copy), discoveryEventErrorLogger (copy), logResponseError (copy), followingsUrlBuilderModule (copy)
-			local var4, var5 = signalsModule.createSignal(nil)
-			local item = var1.getItem(p1)
-			local var6 = item and item.data(false)
-			local var7 = if var6 then var6.isFollowing else nil
+		fetchFollowing = DataResolverModule.fetchItem,
+		fetchFollowings = DataResolverModule.fetchItems,
+		getFollowing = DataResolverModule.getCachedItem,
+		getFollowings = DataResolverModule.getCachedItems,
+		getAndFetchFollowing = DataResolverModule.getAndFetchItem,
+		getAndFetchFollowings = DataResolverModule.getAndFetchItems,
+		updateFollowing = function(UniverseId, IsFollowing) --[[ Line: 95 ]]
+			-- upvalues: SignalsModule (upval), DataCacheModule (copy), Config (ref), RequestUpdateFollowingModule (upval), DiscoveryEventErrorLogger (upval), LogResponseErrorFunction (upval), FollowingsUrlBuilderModule (upval)
+			local Signal, Signal2 = SignalsModule.createSignal(nil)
+			local Item = DataCacheModule.getItem(UniverseId)
+			local DataResult = Item and Item.data(false)
+			local IsFollowing1 = if DataResult then DataResult.isFollowing else nil
+			local Config1 = Config
 			
-			if p2 and var2 and var2.followingLimitByType <= var2.followingCountByType then
-				var5({
+			if IsFollowing and Config1 and Config1.followingLimitByType <= Config1.followingCountByType then
+				Signal2({
 					type = "error",
 					errorType = "LimitReached",
 					statusCode = nil,
 					statusMessage = nil
 				})
 				
-				return var4
+				return Signal
 			end
-			var1.updateItem(p1, { isFollowing = p2 })
+			DataCacheModule.updateItem(UniverseId, { isFollowing = IsFollowing })
 			
-			if var2 then
-				var2 = {
-					followingCountByType = (if var2 then var2.followingCountByType else 0) + (if p2 then 1 else -1),
-					followingLimitByType = var2.followingLimitByType
+			if Config1 then
+				Config = {
+					followingCountByType = (Config1 and Config1.followingCountByType or 0) + (if IsFollowing then 1 else -1),
+					followingLimitByType = Config1.followingLimitByType
 				}
 			end
-			requestUpdateFollowingModule(p1, p2):andThen(function()
-				-- upvalues: var5 (ref), p2 (ref)
-				var5({ type = "success", isFollowing = p2 })
-			end):catch(function(p3)
-				-- upvalues: var1 (copy), p1 (ref), var7 (ref), var2 (ref), var2 (copy), var5 (ref), discoveryEventErrorLogger (copy), p2 (ref), logResponseError (copy), followingsUrlBuilderModule (copy)
-				var1.updateItem(p1, { isFollowing = var7 })
+			RequestUpdateFollowingModule(UniverseId, IsFollowing):andThen(function() --[[ Line: 143 ]]
+				-- upvalues: Signal2 (copy), IsFollowing (copy)
+				Signal2({ type = "success", isFollowing = IsFollowing })
+			end):catch(function(Err) --[[ Line: 149 ]]
+				-- upvalues: DataCacheModule (upval), UniverseId (copy), IsFollowing1 (copy), Config1 (copy), Config (upval), Signal2 (copy), DiscoveryEventErrorLogger (upval), IsFollowing (copy), LogResponseErrorFunction (upval), FollowingsUrlBuilderModule (upval)
+				DataCacheModule.updateItem(UniverseId, { isFollowing = IsFollowing1 })
 				
-				if var2 then
-					var2 = var2
+				if Config1 then
+					Config = Config1
 				end
-				local var8 = type(p3) == "table" and p3.ClientError ~= nil
-				local var9 = if var8 then p3.message or p3.ClientError else nil
-				local var10 = if type(p3) == "table" and p3.StatusCode then p3.StatusCode else nil
-				local var11 = if type(p3) == "table" and p3.StatusMessage then p3.StatusMessage else nil
-				var5({
+				local HasClientError: boolean = type(Err) == "table" and Err.ClientError ~= nil
+				local Message = if HasClientError then Err.message or Err.ClientError else nil
+				local StatusCode = if type(Err) == "table" and Err.StatusCode then Err.StatusCode else nil
+				local StatusMessage = if type(Err) == "table" and Err.StatusMessage then Err.StatusMessage else nil
+				Signal2({
 					type = "error",
-					errorType = if var8 then "ClientError" elseif var10 == 400 then "LimitReached" else "NetworkError",
-					statusCode = var10,
-					statusMessage = var9 or var11
+					errorType = if HasClientError then "ClientError" elseif StatusCode == 400 then "LimitReached" else "NetworkError",
+					statusCode = StatusCode,
+					statusMessage = Message or StatusMessage
 				})
 				
-				if var8 then
-					discoveryEventErrorLogger.reportError("updateFollowing", "Client validation error updating following", {
-						universeId = p1,
-						method = if p2 then "POST" else "DELETE",
-						clientError = var9
+				if HasClientError then
+					DiscoveryEventErrorLogger.reportError("updateFollowing", "Client validation error updating following", {
+						universeId = UniverseId,
+						method = if IsFollowing then "POST" else "DELETE",
+						clientError = Message
 					})
 					
 					return
+				else
+					LogResponseErrorFunction(FollowingsUrlBuilderModule.FOLLOWING_UPDATE_URL, { StatusCode = StatusCode })
+					DiscoveryEventErrorLogger.reportError("updateFollowing", "Error updating following", {
+						universeId = UniverseId,
+						statusCode = StatusCode,
+						method = if IsFollowing then "POST" else "DELETE",
+						statusMessage = StatusMessage
+					})
 				end
-				logResponseError(followingsUrlBuilderModule.FOLLOWING_UPDATE_URL, { StatusCode = var10 })
-				discoveryEventErrorLogger.reportError("updateFollowing", "Error updating following", {
-					universeId = p1,
-					statusCode = var10,
-					method = if p2 then "POST" else "DELETE",
-					statusMessage = var11
-				})
 			end)
 			
-			return var4
+			return Signal
 		end,
-		updateItem = if fFlagLuaAppDataHydrationUpdateItem then var1.updateItem else nil,
-		updateUserFollowingLimits = if fFlagLuaAppDataHydrationUpdateItem then function(p1)
-			-- upvalues: var2 (write)
-			var2 = p1
+		updateItem = if FFlagLuaAppDataHydrationUpdateItem then DataCacheModule.updateItem else nil,
+		updateUserFollowingLimits = if FFlagLuaAppDataHydrationUpdateItem then function(p1) --[[ Line: 234 ]]
+			-- upvalues: Config (ref)
+			Config = p1
 		end else nil,
-		clear = function()
-			-- upvalues: var2 (write), var3 (ref)
-			var2 = nil
-			var3.clear()
+		clear = function() --[[ Line: 212 ]]
+			-- upvalues: Config (ref), DataResolverModule (copy)
+			Config = nil
+			DataResolverModule.clear()
 		end,
-		dispose = function()
-			-- upvalues: var3 (ref)
-			var3.dispose()
+		dispose = function() --[[ Line: 217 ]]
+			-- upvalues: DataResolverModule (copy)
+			DataResolverModule.dispose()
 		end
 	}
 end

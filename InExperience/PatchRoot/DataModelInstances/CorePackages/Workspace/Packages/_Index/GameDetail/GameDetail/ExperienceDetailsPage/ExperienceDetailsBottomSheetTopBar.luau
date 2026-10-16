@@ -1,95 +1,97 @@
-﻿local parent = script:FindFirstAncestor("GameDetail").Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local roactNavigationModule = require(parent.RoactNavigation)
-local iconButton = foundationModule.IconButton
-local iconName = foundationModule.Enums.IconName
-local buttonSize = foundationModule.Enums.ButtonSize
-local buttonVariant = foundationModule.Enums.ButtonVariant
+﻿local Parent = script:FindFirstAncestor("GameDetail").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local RoactNavigationModule = require(Parent.RoactNavigation)
+local IconButton = FoundationModule.IconButton
+local IconName = FoundationModule.Enums.IconName
+local ButtonSize = FoundationModule.Enums.ButtonSize
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
 
-return function(p1)
-	-- upvalues: reactModule (ref), roactNavigationModule (ref), foundationModule (ref), iconButton (ref), iconName (ref), buttonVariant (ref), buttonSize (ref)
-	local tokens = p1.tokens
-	local navigation = p1.navigation
-	local var1, var2 = reactModule.useBinding(0)
-	local var3, var4 = reactModule.useBinding(false)
-	local var5 = tokens.Padding.Small + tokens.Size.Size_100
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var2 (ref), var5 (ref)
-		local current = p1.sheetContentRef.current
+return function(p1) --[[ Line: 29 | Named "ExperienceDetailsBottomSheetTopBar" ]]
+	-- upvalues: ReactModule (copy), RoactNavigationModule (copy), FoundationModule (copy), IconButton (copy), IconName (copy), ButtonVariant (copy), ButtonSize (copy)
+	local Tokens = p1.tokens
+	local Navigation = p1.navigation
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
+	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(false)
+	local NewSmall = Tokens.Padding.Small + Tokens.Size.Size_100
+	ReactModule.useEffect(function() --[[ Line: 39 ]]
+		-- upvalues: p1 (copy), UseBindingResult2 (copy), NewSmall (copy)
+		local Current = p1.sheetContentRef.current
 		
-		if current then
-			local function updateTopBarState()
-				-- upvalues: current (ref), p1 (copy), var5 (copy), var2 (copy)
-				var2(1 - math.clamp((math.ceil(current.AbsolutePosition.Y) + p1.deviceInsets.top - p1.topBarHeight - var5) / math.max(p1.fullH - p1.briefH, 1), 0, 1))
-			end
+		if not Current then
+			UseBindingResult2(0)
 			
-			var2(1 - math.clamp((math.ceil(current.AbsolutePosition.Y) + p1.deviceInsets.top - p1.topBarHeight - var5) / math.max(p1.fullH - p1.briefH, 1), 0, 1))
-			local var6 = current:GetPropertyChangedSignal("AbsolutePosition"):Connect(updateTopBarState)
-			
-			return function()
-				-- upvalues: var6 (ref)
-				var6:Disconnect()
-			end
+			return
 		end
-		var2(0)
+		local function updateTopBarState() --[[ Line: 46 ]]
+			-- upvalues: Current (copy), p1 (upval), NewSmall (upval), UseBindingResult2 (upval)
+			UseBindingResult2(1 - math.clamp((math.ceil(Current.AbsolutePosition.Y) + p1.deviceInsets.top - p1.topBarHeight - NewSmall) / math.max(p1.fullH - p1.briefH, 1), 0, 1))
+		end
+		
+		UseBindingResult2(1 - math.clamp((math.ceil(Current.AbsolutePosition.Y) + p1.deviceInsets.top - p1.topBarHeight - NewSmall) / math.max(p1.fullH - p1.briefH, 1), 0, 1))
+		local Connection = Current:GetPropertyChangedSignal("AbsolutePosition"):Connect(updateTopBarState)
+		
+		return function() --[[ Line: 60 ]]
+			-- upvalues: Connection (copy)
+			Connection:Disconnect()
+		end
 	end, {
-		p1.overlayFrame, p1.deviceInsets.top, p1.topBarHeight, var5, p1.fullH,
+		p1.overlayFrame, p1.deviceInsets.top, p1.topBarHeight, NewSmall, p1.fullH,
 		p1.briefH
 	})
-	reactModule.useEffect(function()
-		-- upvalues: var4 (ref), navigation (ref), roactNavigationModule (copy)
-		var4(navigation.isFocused())
-		local var6 = navigation.addListener(roactNavigationModule.Events.WillFocus, function()
-			-- upvalues: var4 (copy)
-			var4(true)
+	ReactModule.useEffect(function() --[[ Line: 67 ]]
+		-- upvalues: UseBindingResult2_1 (copy), Navigation (copy), RoactNavigationModule (upval)
+		UseBindingResult2_1(Navigation.isFocused())
+		local AddListenerResult = Navigation.addListener(RoactNavigationModule.Events.WillFocus, function() --[[ Line: 70 ]]
+			-- upvalues: UseBindingResult2_1 (upval)
+			UseBindingResult2_1(true)
 		end)
-		local var7 = navigation.addListener(roactNavigationModule.Events.WillBlur, function()
-			-- upvalues: var4 (copy)
-			var4(false)
+		local AddListenerResult1 = Navigation.addListener(RoactNavigationModule.Events.WillBlur, function() --[[ Line: 74 ]]
+			-- upvalues: UseBindingResult2_1 (upval)
+			UseBindingResult2_1(false)
 		end)
 		
-		return function()
-			-- upvalues: var6 (ref), var7 (ref)
-			var6.remove()
-			var7.remove()
+		return function() --[[ Line: 78 ]]
+			-- upvalues: AddListenerResult (copy), AddListenerResult1 (copy)
+			AddListenerResult.remove()
+			AddListenerResult1.remove()
 		end
-	end, { navigation })
+	end, { Navigation })
 	
-	return reactModule.createElement("ScreenGui", {
+	return ReactModule.createElement("ScreenGui", {
 		DisplayOrder = 1,
 		IgnoreGuiInset = true,
 		ClipToDeviceSafeArea = false,
 		ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
 		ScreenInsets = Enum.ScreenInsets.None,
-		Enabled = var3
+		Enabled = UseBindingResult1
 	}, {
-		TopBarCanvasGroup = reactModule.createElement("CanvasGroup", {
+		TopBarCanvasGroup = ReactModule.createElement("CanvasGroup", {
 			Active = false,
 			BackgroundTransparency = 0,
 			BorderSizePixel = 0,
 			ZIndex = 2,
 			Position = UDim2.new(0, 0, 0, 0),
 			Size = UDim2.new(1, 0, 0, p1.topBarHeight),
-			BackgroundColor3 = tokens.Color.Surface.Surface_0.Color3,
-			GroupTransparency = if p1.shouldMountAsFullView then 0 else var1:map(function(p2)
+			BackgroundColor3 = Tokens.Color.Surface.Surface_0.Color3,
+			GroupTransparency = if p1.shouldMountAsFullView then 0 else UseBindingResult:map(function(p2: number): number --[[ Line: 100 ]]
 				return 1 - p2
 			end),
-			BorderColor3 = tokens.Color.Common.Shimmer.Color3
+			BorderColor3 = Tokens.Color.Common.Shimmer.Color3
 		}, {
-			TopBarOverlay = reactModule.createElement(foundationModule.View, {
+			TopBarOverlay = ReactModule.createElement(FoundationModule.View, {
 				tag = "row align-y-center size-full",
 				padding = {
 					top = UDim.new(0, p1.deviceInsets.top),
-					left = UDim.new(0, tokens.Padding.Large)
+					left = UDim.new(0, Tokens.Padding.Large)
 				}
 			}, {
-				TopBarButton = reactModule.createElement(iconButton, {
+				TopBarButton = ReactModule.createElement(IconButton, {
 					isCircular = true,
 					testId = "--discovery-edp-iconbutton-bottomsheet-nav",
-					icon = if p1.shouldMountAsFullView then iconName.ChevronLargeLeft else iconName.X,
-					variant = buttonVariant.Utility,
-					size = buttonSize.Medium,
+					icon = if p1.shouldMountAsFullView then IconName.ChevronLargeLeft else IconName.X,
+					variant = ButtonVariant.Utility,
+					size = ButtonSize.Medium,
 					onActivated = if p1.shouldMountAsFullView then p1.onBack else p1.onClose
 				})
 			})

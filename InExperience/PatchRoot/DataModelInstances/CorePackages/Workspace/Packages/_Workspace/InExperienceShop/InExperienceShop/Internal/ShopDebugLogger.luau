@@ -1,61 +1,61 @@
-﻿local inExperienceShop = script:FindFirstAncestor("InExperienceShop")
-local promiseModule = require(inExperienceShop.Parent.Promise)
-local fFlagEnableShopDebugLoggingModule = require(inExperienceShop.Flags.FFlagEnableShopDebugLogging)
+﻿local InExperienceShop = script:FindFirstAncestor("InExperienceShop")
+local PromiseModule = require(InExperienceShop.Parent.Promise)
+local FFlagEnableShopDebugLoggingModule = require(InExperienceShop.Flags.FFlagEnableShopDebugLogging)
 
 return {
-	log = function(p1)
-		-- upvalues: fFlagEnableShopDebugLoggingModule (ref)
-		if fFlagEnableShopDebugLoggingModule then
+	log = function(p1) --[[ Line: 9 ]]
+		-- upvalues: FFlagEnableShopDebugLoggingModule (copy)
+		if FFlagEnableShopDebugLoggingModule then
 			print("[ShopDebug]", p1)
 		end
 	end,
-	logLazy = function(p1)
-		-- upvalues: fFlagEnableShopDebugLoggingModule (ref)
-		if fFlagEnableShopDebugLoggingModule then
-			print("[ShopDebug]", p1())
+	logLazy = function(Callback) --[[ Line: 17 ]]
+		-- upvalues: FFlagEnableShopDebugLoggingModule (copy)
+		if FFlagEnableShopDebugLoggingModule then
+			print("[ShopDebug]", Callback())
 		end
 	end,
-	startTimer = function()
-		-- upvalues: fFlagEnableShopDebugLoggingModule (ref)
-		return if fFlagEnableShopDebugLoggingModule then os.clock() else nil
+	startTimer = function() --[[ Line: 26 ]]
+		-- upvalues: FFlagEnableShopDebugLoggingModule (copy)
+		return if FFlagEnableShopDebugLoggingModule then os.clock() else nil
 	end,
-	logElapsed = function(p1, p2)
-		-- upvalues: fFlagEnableShopDebugLoggingModule (ref)
-		if fFlagEnableShopDebugLoggingModule and p2 ~= nil then
+	logElapsed = function(p1, p2) --[[ Line: 33 ]]
+		-- upvalues: FFlagEnableShopDebugLoggingModule (copy)
+		if FFlagEnableShopDebugLoggingModule and p2 ~= nil then
 			print("[ShopDebug]", p1, string.format("(%.3fs)", os.clock() - p2))
 		end
 	end,
-	logElapsedLazy = function(p1, p2)
-		-- upvalues: fFlagEnableShopDebugLoggingModule (ref)
-		if fFlagEnableShopDebugLoggingModule and p2 ~= nil then
-			print("[ShopDebug]", p1(), string.format("(%.3fs)", os.clock() - p2))
+	logElapsedLazy = function(Callback, p1) --[[ Line: 39 ]]
+		-- upvalues: FFlagEnableShopDebugLoggingModule (copy)
+		if FFlagEnableShopDebugLoggingModule and p1 ~= nil then
+			print("[ShopDebug]", Callback(), string.format("(%.3fs)", os.clock() - p1))
 		end
 	end,
-	tracePromise = function(p1, p2)
-		-- upvalues: fFlagEnableShopDebugLoggingModule (ref), promiseModule (ref)
-		if not fFlagEnableShopDebugLoggingModule then
-			return p1
+	tracePromise = function(Promise, p1) --[[ Line: 52 ]]
+		-- upvalues: FFlagEnableShopDebugLoggingModule (copy), PromiseModule (copy)
+		if not FFlagEnableShopDebugLoggingModule then
+			return Promise
 		end
-		local var1 = p1
+		local Promise1 = Promise
 		
-		if p2.onSuccess then
-			local onSuccess = p2.onSuccess
-			var1 = var1:andThen(function(p3)
-				-- upvalues: onSuccess (ref)
-				onSuccess(p3)
+		if p1.onSuccess then
+			local OnSuccessFunction = p1.onSuccess
+			Promise1 = Promise1:andThen(function(Result) --[[ Line: 60 ]]
+				-- upvalues: OnSuccessFunction (copy)
+				OnSuccessFunction(Result)
 				
-				return p3
+				return Result
 			end)
 		end
-		if p2.onError then
-			local onError = p2.onError
-			var1 = var1:catch(function(p3)
-				-- upvalues: onError (ref), promiseModule (copy)
-				onError(p3)
+		if p1.onError then
+			local OnErrorFunction = p1.onError
+			Promise1 = Promise1:catch(function(Err) --[[ Line: 67 ]]
+				-- upvalues: OnErrorFunction (copy), PromiseModule (upval)
+				OnErrorFunction(Err)
 				
-				return promiseModule.reject(p3)
+				return PromiseModule.reject(Err)
 			end)
 		end
-		return var1
+		return Promise1
 	end
 }

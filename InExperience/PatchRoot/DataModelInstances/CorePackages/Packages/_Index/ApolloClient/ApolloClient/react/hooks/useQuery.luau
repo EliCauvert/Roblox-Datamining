@@ -1,14 +1,13 @@
-﻿local t = {}
-local parent = script.Parent.Parent.Parent
-local _ = require(parent.Parent.GraphQL)
-local _ = require(parent.jsutils.typedDocumentNode)
+﻿local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.Parent.GraphQL)
+local _ = require(Parent.jsutils.typedDocumentNode)
 local _ = require(script.Parent.Parent.types.types)
-local useBaseQuery = require(script.Parent.utils.useBaseQuery).useBaseQuery
-local _ = require(parent.core)
+local UseBaseQueryFunction = require(script.Parent.utils.useBaseQuery).useBaseQuery
+local _ = require(Parent.core)
 
-function t.useQuery(p1, p2)
-	-- upvalues: useBaseQuery (ref)
-	return useBaseQuery(p1, p2, false)
-end
-
-return t
+return {
+	useQuery = function(p1, p2) --[[ Line: 27 ]]
+		-- upvalues: UseBaseQueryFunction (copy)
+		return UseBaseQueryFunction(p1, p2, false)
+	end
+}

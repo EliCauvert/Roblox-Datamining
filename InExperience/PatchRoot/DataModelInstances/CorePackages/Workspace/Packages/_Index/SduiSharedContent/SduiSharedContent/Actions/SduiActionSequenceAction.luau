@@ -1,59 +1,58 @@
-﻿local sduiCoreSystemModule = require(script:FindFirstAncestor("SduiSharedContent").Parent.SduiCoreSystem)
-local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
-local sduiActionType = sduiCoreSystemModule.SduiActionType
-local sduiParseHelpers = sduiCoreSystemModule.SduiParseHelpers
+﻿local SduiCoreSystemModule = require(script:FindFirstAncestor("SduiSharedContent").Parent.SduiCoreSystem)
+local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
+local SduiActionType = SduiCoreSystemModule.SduiActionType
+local SduiParseHelpers = SduiCoreSystemModule.SduiParseHelpers
 
-return function(p1, _, p2, p3)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref), sduiParseHelpers (ref)
-	local var1 = if p1 then p1.actionParams else nil
+return function(p1, _, p2, p3) --[[ Line: 25 | Named "SduiActionSequenceAction" ]]
+	-- upvalues: SduiErrorType (copy), SduiActionType (copy), SduiParseHelpers (copy)
+	local ActionParams = p1 and p1.actionParams or nil
 	
-	if var1 == nil then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if ActionParams == nil then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
-			name = sduiActionType.ActionSequence
+			name = SduiActionType.ActionSequence
 		}, p2.appPage)
 		
 		return
 	end
-	local actions = var1.actions
+	local Actions = ActionParams.actions
 	
-	if typeof(actions) ~= "table" then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if typeof(Actions) ~= "table" then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			propName = "actions",
-			name = sduiActionType.ActionSequence,
-			message = `Invalid actionParam: actions is {typeof(actions)}`
+			name = SduiActionType.ActionSequence,
+			message = `Invalid actionParam: actions is {typeof(Actions)}`
 		}, p2.appPage)
 		
 		return
 	end
-	local var2 = 0
+	local v1 = 0
 	
-	for i in actions do
-		if typeof(i) == "number" and var2 < i then
-			var2 = i
+	for action in Actions do
+		if typeof(action) == "number" and v1 < action then
+			v1 = action
 		end
 	end
-	for i_1 = 1, var2 do
-		local var3 = actions[i_1]
+	for i = 1, v1 do
+		local Action = Actions[i]
 		
-		if var3 == nil then
-			continue
-		end
-		if typeof(var3) == "function" then
-			local ok, status = pcall(var3, nil, p3)
-			
-			if not ok then
-				p2.dependencies.logger.reportError(sduiErrorType.FailedToExecuteAction, {
-					name = sduiActionType.ActionSequence,
-					message = `Child action at index {i_1} failed: ` .. sduiParseHelpers.stringifyValue(status)
+		if Action ~= nil then
+			if typeof(Action) == "function" then
+				local Success, Result = pcall(Action, nil, p3)
+				
+				if not Success then
+					p2.dependencies.logger.reportError(SduiErrorType.FailedToExecuteAction, {
+						name = SduiActionType.ActionSequence,
+						message = `Child action at index {i} failed: ` .. SduiParseHelpers.stringifyValue(Result)
+					}, p2.appPage)
+				end
+			else
+				p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
+					propName = "actions",
+					name = SduiActionType.ActionSequence,
+					message = `Child action at index {i} is not callable: {typeof(Action)}`
 				}, p2.appPage)
 			end
-		else
-			p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
-				propName = "actions",
-				name = sduiActionType.ActionSequence,
-				message = `Child action at index {i_1} is not callable: {typeof(var3)}`
-			}, p2.appPage)
 		end
 	end
 end

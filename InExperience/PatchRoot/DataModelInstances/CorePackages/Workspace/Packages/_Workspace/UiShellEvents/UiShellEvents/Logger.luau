@@ -1,1 +1,3 @@
-﻿return require(script:FindFirstAncestor("UiShellEvents").Parent.Loggers).Logger:new("UiShellEvents")
+﻿local Logger = require(script:FindFirstAncestor("UiShellEvents").Parent.Loggers).Logger
+
+return (Logger.new(Logger, "UiShellEvents"))

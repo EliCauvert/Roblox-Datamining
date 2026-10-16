@@ -1,18 +1,18 @@
-﻿local dependenciesModule = require(script:FindFirstAncestor("VoiceChat").dependencies)
-local promise = dependenciesModule.Promise
-local default = dependenciesModule.LinkingProtocol.LinkingProtocol.default
-local settingsRoute = dependenciesModule.LinkingProtocol.Enums.SettingsRoute
+﻿local DependenciesModule = require(script:FindFirstAncestor("VoiceChat").dependencies)
+local Promise = DependenciesModule.Promise
+local Default = DependenciesModule.LinkingProtocol.LinkingProtocol.default
+local SettingsRoute = DependenciesModule.LinkingProtocol.Enums.SettingsRoute
 
-return function()
-	-- upvalues: promise (ref), default (ref), settingsRoute (ref)
-	return promise.new(function(p1, p2)
-		-- upvalues: default (copy), settingsRoute (copy)
-		default:switchToSettingsApp(settingsRoute.Microphone):andThen(function()
-			-- upvalues: p1 (ref)
-			p1()
-		end):catch(function()
-			-- upvalues: p2 (ref)
-			p2()
+return function() --[[ Line: 9 ]]
+	-- upvalues: Promise (copy), Default (copy), SettingsRoute (copy)
+	return Promise.new(function(Callback, Callback1) --[[ Line: 10 ]]
+		-- upvalues: Default (upval), SettingsRoute (upval)
+		Default:switchToSettingsApp(SettingsRoute.Microphone):andThen(function() --[[ Line: 12 ]]
+			-- upvalues: Callback (copy)
+			Callback()
+		end):catch(function() --[[ Line: 15 ]]
+			-- upvalues: Callback1 (copy)
+			Callback1()
 		end)
 	end)
 end

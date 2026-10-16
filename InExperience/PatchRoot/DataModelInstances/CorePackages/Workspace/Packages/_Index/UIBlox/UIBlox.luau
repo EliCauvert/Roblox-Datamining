@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CorePackages").Packages.UIBlox)
+﻿return (require(game:GetService("CorePackages").Packages.UIBlox))

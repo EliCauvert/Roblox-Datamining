@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("UGCValidateDisallowAeroMeshData", false)
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastFlag("UGCValidateDisallowAeroMeshData")
 end

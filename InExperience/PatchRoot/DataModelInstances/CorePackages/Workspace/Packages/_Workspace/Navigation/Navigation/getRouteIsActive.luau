@@ -1,12 +1,12 @@
-﻿local navigation = script:FindFirstAncestor("Navigation")
-local array = require(navigation.Parent.LuauPolyfill).Array
-local getActiveRoutesModule = require(navigation.getActiveRoutes)
+﻿local Navigation = script:FindFirstAncestor("Navigation")
+local Array = require(Navigation.Parent.LuauPolyfill).Array
+local GetActiveRoutesModule = require(Navigation.getActiveRoutes)
 local _ = require(script.Parent.types)
 
-return function(p1, p2)
-	-- upvalues: array (ref), getActiveRoutesModule (ref)
-	return array.find(getActiveRoutesModule(p1), function(p3)
-		-- upvalues: p2 (ref)
-		return p3.routeName == p2
+return function(p1, RouteName): boolean --[[ Line: 12 | Named "getRouteIsActive" ]]
+	-- upvalues: Array (copy), GetActiveRoutesModule (copy)
+	return Array.find(GetActiveRoutesModule(p1), function(p2): boolean --[[ Line: 13 ]]
+		-- upvalues: RouteName (copy)
+		return p2.routeName == RouteName
 	end) ~= nil
 end

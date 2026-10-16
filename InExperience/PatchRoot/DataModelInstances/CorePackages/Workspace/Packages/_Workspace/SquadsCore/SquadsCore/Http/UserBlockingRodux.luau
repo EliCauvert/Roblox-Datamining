@@ -1,5 +1,5 @@
-﻿local squadsCore = script:FindFirstAncestor("SquadsCore")
+﻿local SquadsCore = script:FindFirstAncestor("SquadsCore")
 
-return require(squadsCore.Parent.UserBlockingRodux).config({
-	keyPath = require(squadsCore.Common.Constants).RODUX_KEY .. ".UserBlocking"
-})
+return (require(SquadsCore.Parent.UserBlockingRodux).config({
+	keyPath = require(SquadsCore.Common.Constants).RODUX_KEY .. ".UserBlocking"
+}))

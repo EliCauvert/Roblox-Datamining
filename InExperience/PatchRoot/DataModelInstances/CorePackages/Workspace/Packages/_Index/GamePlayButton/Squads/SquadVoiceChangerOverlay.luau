@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent.Parent._Index.Squads.Squads.Components.SquadVoiceChangers.SquadVoiceChangerOverlay)
+﻿return (require(script.Parent.Parent.Parent.Parent._Index.Squads.Squads.Components.SquadVoiceChangers.SquadVoiceChangerOverlay))

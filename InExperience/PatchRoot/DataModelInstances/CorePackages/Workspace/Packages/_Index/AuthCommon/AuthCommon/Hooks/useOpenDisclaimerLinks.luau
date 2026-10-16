@@ -1,87 +1,84 @@
-﻿local authCommon = script:FindFirstAncestor("AuthCommon")
-local parent = authCommon.Parent
-local reactModule = require(parent.React)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local useRoactService = require(parent.RobloxAppHooks).useRoactService
-local useAppPolicy = require(parent.UniversalAppPolicy).useAppPolicy
-local appLinking = require(parent.RoactServiceTags).AppLinking
-local navigateDown = require(parent.NavigationRodux).Thunks.NavigateDown
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagEnablePioneerLandingPageLayout = sharedFlagsModule.FFlagEnablePioneerLandingPageLayout
-local fFlagSignalsNavP3Dispatch = sharedFlagsModule.FFlagSignalsNavP3Dispatch
-local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
-local appPage = require(parent.RobloxAppEnums).AppPage
-local urlBuilder = require(parent.UrlBuilder).UrlBuilder
-local authAnalyticsModule = require(parent.AuthAnalytics)
-local authFormInteraction = authAnalyticsModule.Events.authFormInteraction
-local eventStreamConstants = authAnalyticsModule.EventStreamConstants
-local openExternalBrowserModule = require(authCommon.Thunks.OpenExternalBrowser)
-local transitionAnimationModule = require(authCommon.Enums.TransitionAnimation)
+﻿local AuthCommon = script:FindFirstAncestor("AuthCommon")
+local Parent = AuthCommon.Parent
+local ReactModule = require(Parent.React)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
+local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
+local AppLinking = require(Parent.RoactServiceTags).AppLinking
+local NavigateDownFunction = require(Parent.NavigationRodux).Thunks.NavigateDown
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagEnablePioneerLandingPageLayout = SharedFlagsModule.FFlagEnablePioneerLandingPageLayout
+local FFlagSignalsNavP3Dispatch = SharedFlagsModule.FFlagSignalsNavP3Dispatch
+local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
+local AuthAnalyticsModule = require(Parent.AuthAnalytics)
+local AuthFormInteractionFunction = AuthAnalyticsModule.Events.authFormInteraction
+local EventStreamConstants = AuthAnalyticsModule.EventStreamConstants
+local OpenExternalBrowserModule = require(AuthCommon.Thunks.OpenExternalBrowser)
+local TransitionAnimationModule = require(AuthCommon.Enums.TransitionAnimation)
 
-return function(p1)
-	-- upvalues: useDispatch (ref), useRoactService (ref), appLinking (ref), useAppPolicy (ref), fFlagEnablePioneerLandingPageLayout (ref), openExternalBrowserModule (ref), appPage (ref), transitionAnimationModule (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), reactModule (ref), authFormInteraction (ref), eventStreamConstants (ref), urlBuilder (ref)
-	local var2 = useDispatch()
-	local var3 = useRoactService(appLinking)
-	local var4 = useAppPolicy(function(p2)
+return function(p1) --[[ Line: 50 | Named "useOpenDisclaimerLinks" ]]
+	-- upvalues: UseDispatchFunction (copy), UseRoactServiceFunction (copy), AppLinking (copy), UseAppPolicyFunction (copy), FFlagEnablePioneerLandingPageLayout (copy), OpenExternalBrowserModule (copy), AppPage (copy), TransitionAnimationModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), ReactModule (copy), AuthFormInteractionFunction (copy), EventStreamConstants (copy), UrlBuilder (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseRoactServiceResult = UseRoactServiceFunction(AppLinking)
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p2) --[[ Line: 53 ]]
 		return p2.shouldUseExternalBrowserForDisclaimerLinks()
 	end)
-	local var5 = nil
-	
-	if fFlagEnablePioneerLandingPageLayout then
-		if p1 then
-			var5 = p1.disableExternalLinks == true
-			var5 = nil
-		else
-			var5 = false
-		end
-	end
-	local var6 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: var4 (ref), var5 (write), openExternalBrowserModule (copy), var3 (ref), appPage (copy), transitionAnimationModule (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var2 (ref), navigateDown (copy)
-		if var4 and not var5 then
-			openExternalBrowserModule(var3, p2)
+	local IsDisableExternalLinks = if FFlagEnablePioneerLandingPageLayout then if p1 then p1.disableExternalLinks == true else false else nil
+	local UseResult = ReactModule.useCallback(function(Detail, p2) --[[ Line: 61 | Named "openLink" ]]
+		-- upvalues: UseAppPolicyResult (copy), IsDisableExternalLinks (ref), OpenExternalBrowserModule (upval), UseRoactServiceResult (copy), AppPage (upval), TransitionAnimationModule (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval)
+		if UseAppPolicyResult and not IsDisableExternalLinks then
+			OpenExternalBrowserModule(UseRoactServiceResult, Detail)
 			
 			return
 		end
-		local t = {
-			name = appPage.GenericWebPage,
-			detail = p2,
+		local config = {
+			name = AppPage.GenericWebPage,
+			detail = Detail,
 			extraProps = {
-				title = if p3 and p3.title ~= nil then p3.title else "",
-				transitionAnimation = if p3 and p3.transitionAnimation ~= nil then p3.transitionAnimation else transitionAnimationModule.SlideInFromRight
+				title = if p2 and p2.title ~= nil then p2.title else "",
+				transitionAnimation = if p2 and p2.transitionAnimation ~= nil then p2.transitionAnimation else TransitionAnimationModule.SlideInFromRight
 			}
 		}
 		
-		if fFlagSignalsNavP3Dispatch then
-			var1.down(var1.fromLegacyPage(t))
+		if FFlagSignalsNavP3Dispatch then
+			NavigationCommands.down(NavigationCommands.fromLegacyPage(config))
 			
 			return
+		else
+			UseDispatchResult(NavigateDownFunction(config))
 		end
-		var2(navigateDown(t))
 	end, {
-		var4,
-		var3,
-		var2,
-		if fFlagEnablePioneerLandingPageLayout then var5 else nil
+		UseAppPolicyResult,
+		UseRoactServiceResult,
+		UseDispatchResult,
+		if FFlagEnablePioneerLandingPageLayout then IsDisableExternalLinks else nil
 	})
-	local var7 = if p1 then p1.ctx else nil
-	local var8 = if p1 then p1.state else nil
-	local var9 = reactModule.useCallback(function()
-		-- upvalues: var7 (ref), authFormInteraction (copy), eventStreamConstants (copy), var8 (ref), var6 (ref), urlBuilder (copy)
-		if var7 then
-			authFormInteraction(var7, eventStreamConstants.Field.TermsOfService, var8)
+	local Ctx = if p1 then p1.ctx else nil
+	local State = if p1 then p1.state else nil
+	local Origin = if p1 then p1.origin else nil
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 98 ]]
+		-- upvalues: Ctx (copy), AuthFormInteractionFunction (upval), EventStreamConstants (upval), State (copy), Origin (copy), UseResult (copy), UrlBuilder (upval)
+		if Ctx then
+			AuthFormInteractionFunction(Ctx, EventStreamConstants.Field.TermsOfService, State, Origin)
 		end
-		var6(urlBuilder.static.about.terms())
-	end, { var6, var7, var8 })
-	local var10 = reactModule.useCallback(function()
-		-- upvalues: var7 (ref), authFormInteraction (copy), eventStreamConstants (copy), var8 (ref), var6 (ref), urlBuilder (copy)
-		if var7 then
-			authFormInteraction(var7, eventStreamConstants.Field.PrivacyPolicy, var8)
+		UseResult(UrlBuilder.static.about.terms())
+	end, { UseResult, Ctx, State, Origin })
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 105 ]]
+		-- upvalues: Ctx (copy), AuthFormInteractionFunction (upval), EventStreamConstants (upval), State (copy), Origin (copy), UseResult (copy), UrlBuilder (upval)
+		if Ctx then
+			AuthFormInteractionFunction(Ctx, EventStreamConstants.Field.PrivacyPolicy, State, Origin)
 		end
-		var6(urlBuilder.static.about.privacy())
-	end, { var6, var7, var8 })
+		UseResult(UrlBuilder.static.about.privacy())
+	end, { UseResult, Ctx, State, Origin })
 	
-	return reactModule.useMemo(function()
-		-- upvalues: var9 (ref), var10 (ref), var6 (ref)
-		return { openTerms = var9, openPrivacy = var10, openLink = var6 }
-	end, { var9, var10, var6 })
+	return ReactModule.useMemo(function() --[[ Line: 114 ]]
+		-- upvalues: UseResult1 (copy), UseResult2 (copy), UseResult (copy)
+		return {
+			openTerms = UseResult1,
+			openPrivacy = UseResult2,
+			openLink = UseResult
+		}
+	end, { UseResult1, UseResult2, UseResult })
 end

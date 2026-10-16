@@ -1,30 +1,31 @@
-﻿local random = Random.new()
+﻿local _Random = Random.new()
 
 return {
 	BAR_WIDTH = 2,
 	BAR_GAP = 2,
 	ITEM_WIDTH = 4,
 	RENDER_INTERVAL = 0.1,
-	amplitudeToDecibels = function(p1)
+	amplitudeToDecibels = function(p1: number): number --[[ Line: 13 ]]
 		return if p1 <= 0 then -1e999 else math.log10(p1) * 20
 	end,
-	amplitudeToNormalized = function(p1)
-		local var1 = if p1 <= 0 then -1e999 else math.log10(p1) * 20
+	amplitudeToNormalized = function(p1: number): number --[[ Line: 20 ]]
+		local ScaledLog10Result: number = if p1 <= 0 then -1e999 else math.log10(p1) * 20
 		
-		return if var1 == -1e999 then 0 else math.clamp((var1 - -60) / 60, 0, 1)
+		return if ScaledLog10Result == -1e999 then 0 else math.clamp((ScaledLog10Result - -60) / 60, 0, 1)
 	end,
-	sampleVolume = function(p1, p2, p3)
-		-- upvalues: random (ref)
-		if not p1 then
-			return random:NextNumber(0, 1)
+	sampleVolume = function(p1, p2, p3) --[[ Line: 33 ]]
+		-- upvalues: _Random (copy)
+		if p1 then
+			local RmsLevel: number = p1.RmsLevel
+			local ScaledLog10Result: number = if RmsLevel <= 0 then -1e999 else math.log10(RmsLevel) * 20
+			local ClampedValue: number = if ScaledLog10Result == -1e999 then 0 else math.clamp((ScaledLog10Result - -60) / 60, 0, 1)
+			local Largest = math.max(p2.current * 0.95, ClampedValue)
+			p2.current = Largest
+			
+			return if p3 and Largest > 0.01 then ClampedValue / Largest else ClampedValue
+		else
+			return _Random:NextNumber(0, 1)
 		end
-		local rmsLevel = p1.RmsLevel
-		local var1 = if rmsLevel <= 0 then -1e999 else math.log10(rmsLevel) * 20
-		local var2 = if var1 == -1e999 then 0 else math.clamp((var1 - -60) / 60, 0, 1)
-		local maxValue = math.max(p2.current * 0.95, var2)
-		p2.current = maxValue
-		
-		return if p3 then if maxValue > 0.01 then var2 / maxValue else var2 else var2
 	end,
 	useAudioAnalyzer = require(script.Parent.useAudioAnalyzer)
 }

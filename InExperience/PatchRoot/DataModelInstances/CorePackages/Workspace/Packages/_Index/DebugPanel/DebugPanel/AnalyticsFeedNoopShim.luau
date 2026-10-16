@@ -1,66 +1,58 @@
-﻿local var1 = function() end
+﻿local function v0() --[[ Line: 11 ]] end
 
-local function noopRegister(_)
-	-- upvalues: var1 (ref)
-	return var1
-end
-
-local function noopNotify(_) end
-
-local function noopRule(_)
+local function noopRule(_) --[[ Line: 17 ]]
 	return nil
 end
 
-local function noopRuleFactory(...)
-	-- upvalues: noopRule (ref)
+local function noopRuleFactory(...) --[[ Line: 20 ]]
+	-- upvalues: noopRule (copy)
 	return noopRule
 end
 
-local t = {
-	fromEventName = noopRuleFactory,
-	fromCtx = noopRuleFactory,
-	fromField = noopRuleFactory,
-	fromEnum = noopRuleFactory,
-	eventNameAsLabel = noopRuleFactory,
-	fixed = noopRuleFactory,
-	walk = function(_, _)
-		return nil
-	end
-}
-
-local function noopFormatter(_, _, _)
+local function noopFormatter(_, _, _) --[[ Line: 36 ]]
 	return nil
 end
 
-local t_1 = {
-	enumLabel = function(_)
-		-- upvalues: noopFormatter (ref)
-		return noopFormatter
-	end,
-	invertEnum = function(_)
-		return {}
-	end
-}
-
-local function noopPreview(_)
+local function noopPreview(_) --[[ Line: 50 ]]
 	return nil
 end
 
-local function noopPreviewFactory(_)
-	-- upvalues: noopPreview (ref)
+local function noopPreviewFactory(_) --[[ Line: 53 ]]
+	-- upvalues: noopPreview (copy)
 	return noopPreview
 end
 
 return {
-	register = noopRegister,
-	notify = noopNotify,
-	Resolvers = t,
-	Formatters = t_1,
+	register = function(_) --[[ Line: 12 ]]
+		-- upvalues: v0 (copy)
+		return v0
+	end,
+	notify = function(_) --[[ Line: 15 ]] end,
+	Resolvers = {
+		fromEventName = noopRuleFactory,
+		fromCtx = noopRuleFactory,
+		fromField = noopRuleFactory,
+		fromEnum = noopRuleFactory,
+		eventNameAsLabel = noopRuleFactory,
+		fixed = noopRuleFactory,
+		walk = function(_, _) --[[ Line: 31 ]]
+			return nil
+		end
+	},
+	Formatters = {
+		enumLabel = function(_) --[[ Line: 39 ]]
+			-- upvalues: noopFormatter (copy)
+			return noopFormatter
+		end,
+		invertEnum = function(_) --[[ Line: 45 ]]
+			return {}
+		end
+	},
 	Previews = {
 		rbxthumb = noopPreviewFactory,
 		fromInstance = noopPreviewFactory,
 		chain = noopPreviewFactory,
-		isPlausibleId = function(_)
+		isPlausibleId = function(_): boolean --[[ Line: 61 ]]
 			return false
 		end
 	}

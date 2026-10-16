@@ -1,38 +1,71 @@
-﻿local gameTile = script:FindFirstAncestor("GameTile")
-local gridTileIconTextFooterModule = require(gameTile.Footer.GridTileIconTextFooter)
-local gridTileTextFooterModule = require(gameTile.Footer.GridTileTextFooter)
-local parent = gameTile.Parent
-local reactModule = require(parent.React)
-local sponsoredTooltipHover = require(parent.Ads).SponsoredTooltipHover
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local tooltipOrientation = require(parent.UIBlox).App.Dialog.Enum.TooltipOrientation
-local _ = require(gameTile.GameTileTypes)
-local getUserInputIsSelectionOnlyModule = require(gameTile.Footer.getUserInputIsSelectionOnly)
-local view = require(parent.Foundation).View
-local responsiveModule = require(parent.Responsive)
-local useBreakpointXOrLarger = responsiveModule.useBreakpointXOrLarger
+﻿local GameTile = script:FindFirstAncestor("GameTile")
+local GridTileIconTextFooterModule = require(GameTile.Footer.GridTileIconTextFooter)
+local GridTileTextFooterModule = require(GameTile.Footer.GridTileTextFooter)
+local Parent = GameTile.Parent
+local ReactModule = require(Parent.React)
+local SponsoredTooltipHover = require(Parent.Ads).SponsoredTooltipHover
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local TooltipOrientation = require(Parent.UIBlox).App.Dialog.Enum.TooltipOrientation
+local _ = require(GameTile.GameTileTypes)
+local GetUserInputIsSelectionOnlyModule = require(GameTile.Footer.getUserInputIsSelectionOnly)
+local View = require(Parent.Foundation).View
+local ResponsiveModule = require(Parent.Responsive)
+local UseBreakpointXOrLargerFunction = ResponsiveModule.useBreakpointXOrLarger
 
-function GridTileSponsoredFooter(p1)
-	-- upvalues: useLocalization (ref), useBreakpointXOrLarger (ref), responsiveModule (ref), reactModule (ref), gridTileTextFooterModule (ref), view (ref), gridTileIconTextFooterModule (ref), sponsoredTooltipHover (ref), tooltipOrientation (ref), getUserInputIsSelectionOnlyModule (ref)
-	local var1 = useLocalization({
+function GridTileSponsoredFooter(p1) --[[ Line: 31 ]]
+	-- upvalues: UseLocalizationFunction (copy), UseBreakpointXOrLargerFunction (copy), ResponsiveModule (copy), ReactModule (copy), GridTileTextFooterModule (copy), View (copy), GridTileIconTextFooterModule (copy), SponsoredTooltipHover (copy), TooltipOrientation (copy), GetUserInputIsSelectionOnlyModule (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
 		sponsoredText = "Feature.GamePage.Label.Sponsored",
 		adText = "Feature.GamePage.Label.Ad"
 	})
-	local var2 = if p1.useLargerFont then 24 else 20
-	local var3 = useBreakpointXOrLarger(responsiveModule.Keys.Medium)
+	local XOffset: number = if p1.useLargerFont then 24 else 20
+	local UseBreakpointXOrLargerResult = UseBreakpointXOrLargerFunction(ResponsiveModule.Keys.Medium)
 	
-	if not p1.enableSponsoredFeedback then
-		return reactModule.createElement(gridTileIconTextFooterModule, {
-			iconElement = reactModule.createElement(sponsoredTooltipHover, {
+	if p1.enableSponsoredFeedback then
+		local Element = ReactModule.createElement(GridTileTextFooterModule, {
+			shouldSizeToContentWidth = true,
+			text = UseLocalizationResult.adText,
+			useLargerFont = p1.useLargerFont,
+			isUnifiedGameTile = p1.isUnifiedGameTile
+		})
+		
+		return if UseBreakpointXOrLargerResult and p1.isSponsoredRatingFooterAllowed and p1.gameStatsElement then ReactModule.createElement(View, {
+			tag = "size-full-0 auto-y row align-y-center gap-xsmall clip"
+		}, {
+			AdLabelWrapper = ReactModule.createElement(View, {
+				LayoutOrder = 1,
+				BackgroundTransparency = 1,
+				Size = UDim2.new(0, 0, 0, 0),
+				AutomaticSize = Enum.AutomaticSize.XY,
+				SizeConstraint = Enum.SizeConstraint.RelativeXX
+			}, { Content = Element }),
+			DotSeparator = ReactModule.createElement(GridTileTextFooterModule, {
+				LayoutOrder = 2,
+				text = "•",
+				shouldSizeToContentWidth = true,
+				useLargerFont = p1.useLargerFont,
+				isUnifiedGameTile = p1.isUnifiedGameTile
+			}),
+			GameStatsWrapper = ReactModule.createElement(View, {
+				LayoutOrder = 3,
+				BackgroundTransparency = 1,
+				Size = UDim2.new(0, 0, 0, 0),
+				AutomaticSize = Enum.AutomaticSize.XY,
+				SizeConstraint = Enum.SizeConstraint.RelativeXX
+			}, { Content = p1.gameStatsElement })
+		}) else Element
+	else
+		return ReactModule.createElement(GridTileIconTextFooterModule, {
+			iconElement = ReactModule.createElement(SponsoredTooltipHover, {
 				supportTenFootUi = true,
-				tooltipOrientation = tooltipOrientation.Bottom,
+				tooltipOrientation = TooltipOrientation.Bottom,
 				onActivateTooltip = p1.onActivateSponsoredTooltip,
-				size = UDim2.fromOffset(var2, var2),
+				size = UDim2.fromOffset(XOffset, XOffset),
 				position = UDim2.fromScale(0.5, 0.5),
 				anchorPoint = Vector2.new(0.5, 0.5),
-				selectable = getUserInputIsSelectionOnlyModule()
+				selectable = GetUserInputIsSelectionOnlyModule()
 			}),
-			text = var1.sponsoredText,
+			text = UseLocalizationResult.sponsoredText,
 			iconSize = if p1.useLargerFont then 24 else 20,
 			useLargerFont = p1.useLargerFont,
 			isUnifiedGameTile = p1.isUnifiedGameTile,
@@ -40,38 +73,6 @@ function GridTileSponsoredFooter(p1)
 			isNarrowScreenXSmall = p1.isNarrowScreenXSmall
 		})
 	end
-	local var4 = reactModule.createElement(gridTileTextFooterModule, {
-		shouldSizeToContentWidth = true,
-		text = var1.adText,
-		useLargerFont = p1.useLargerFont,
-		isUnifiedGameTile = p1.isUnifiedGameTile
-	})
-	
-	return if var3 and p1.isSponsoredRatingFooterAllowed and p1.gameStatsElement then reactModule.createElement(view, {
-		tag = "size-full-0 auto-y row align-y-center gap-xsmall clip"
-	}, {
-		AdLabelWrapper = reactModule.createElement(view, {
-			LayoutOrder = 1,
-			BackgroundTransparency = 1,
-			Size = UDim2.new(0, 0, 0, 0),
-			AutomaticSize = Enum.AutomaticSize.XY,
-			SizeConstraint = Enum.SizeConstraint.RelativeXX
-		}, { Content = var4 }),
-		DotSeparator = reactModule.createElement(gridTileTextFooterModule, {
-			LayoutOrder = 2,
-			text = "\226\128\162",
-			shouldSizeToContentWidth = true,
-			useLargerFont = p1.useLargerFont,
-			isUnifiedGameTile = p1.isUnifiedGameTile
-		}),
-		GameStatsWrapper = reactModule.createElement(view, {
-			LayoutOrder = 3,
-			BackgroundTransparency = 1,
-			Size = UDim2.new(0, 0, 0, 0),
-			AutomaticSize = Enum.AutomaticSize.XY,
-			SizeConstraint = Enum.SizeConstraint.RelativeXX
-		}, { Content = p1.gameStatsElement })
-	}) else var4
 end
 
 return GridTileSponsoredFooter

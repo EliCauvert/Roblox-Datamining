@@ -1,12 +1,10 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-local makeActionCreator = require(corePackagesService.Packages.Rodux).makeActionCreator
-local _ = require(corePackagesService.Packages.t)
-local maybeAssertModule = require(robloxGui.Modules.VoiceChat.Helpers.maybeAssert)
+﻿local CorePackages = game:GetService("CorePackages")
+local _ = require(CorePackages.Packages.t)
+local MaybeAssertModule = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.VoiceChat.Helpers.maybeAssert)
 
-return makeActionCreator(script.Name, function(p1)
-	-- upvalues: maybeAssertModule (ref)
-	maybeAssertModule(tonumber(p1) ~= nil)
+return require(CorePackages.Packages.Rodux).makeActionCreator(script.Name, function(p1) --[[ Line: 9 ]]
+	-- upvalues: MaybeAssertModule (copy)
+	MaybeAssertModule(tonumber(p1) ~= nil)
 	
 	return { userId = tostring(p1) }
 end)

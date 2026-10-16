@@ -1,219 +1,220 @@
-﻿local parent = script.Parent.Parent
-local luaUtils = parent.luaUtils
-local luauPolyfillModule = require(parent.Parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local error = luauPolyfillModule.Error
-local map = luauPolyfillModule.Map
-local set = luauPolyfillModule.Set
-local isNillishModule = require(luaUtils.isNillish)
-local isNillish = isNillishModule.isNillish
-local isNotNillish = isNillishModule.isNotNillish
-local _ = require(luaUtils.null)
-local jsutils = parent.jsutils
-local inspect = require(jsutils.inspect).inspect
-local toObjMap = require(jsutils.toObjMap).toObjMap
-local devAssert = require(jsutils.devAssert).devAssert
-local instanceOfModule = require(jsutils.instanceOf)
-local isObjectLike = require(jsutils.isObjectLike).isObjectLike
-local schema = require(script.Parent.introspection).__Schema
-local _ = require(parent.language.ast)
-local _ = require(parent.error.GraphQLError)
-local directivesModule = require(script.Parent.directives)
-local isDirective = directivesModule.isDirective
-local specifiedDirectives = directivesModule.specifiedDirectives
-local _ = require(jsutils.ObjMap)
-local definitionModule = require(script.Parent.definition)
-local isObjectType = definitionModule.isObjectType
-local isInterfaceType = definitionModule.isInterfaceType
-local isUnionType = definitionModule.isUnionType
-local isInputObjectType = definitionModule.isInputObjectType
-local getNamedType = definitionModule.getNamedType
-local t = nil
-local collectReferencedTypes = nil
+﻿local Parent = script.Parent.Parent
+local LuaUtils = Parent.luaUtils
+local LuauPolyfillModule = require(Parent.Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Error1 = LuauPolyfillModule.Error
+local Map = LuauPolyfillModule.Map
+local Set = LuauPolyfillModule.Set
+local IsNillishModule = require(LuaUtils.isNillish)
+local IsNillishFunction = IsNillishModule.isNillish
+local IsNotNillishFunction = IsNillishModule.isNotNillish
+local _ = require(LuaUtils.null)
+local Jsutils = Parent.jsutils
+local InspectFunction = require(Jsutils.inspect).inspect
+local ToObjMapFunction = require(Jsutils.toObjMap).toObjMap
+local DevAssertFunction = require(Jsutils.devAssert).devAssert
+local InstanceOfModule = require(Jsutils.instanceOf)
+local IsObjectLikeFunction = require(Jsutils.isObjectLike).isObjectLike
+local Schema = require(script.Parent.introspection).__Schema
+local _ = require(Parent.language.ast)
+local _ = require(Parent.error.GraphQLError)
+local DirectivesModule = require(script.Parent.directives)
+local IsDirectiveFunction = DirectivesModule.isDirective
+local SpecifiedDirectives = DirectivesModule.specifiedDirectives
+local _ = require(Jsutils.ObjMap)
+local DefinitionModule = require(script.Parent.definition)
+local IsObjectTypeFunction = DefinitionModule.isObjectType
+local IsInterfaceTypeFunction = DefinitionModule.isInterfaceType
+local IsUnionTypeFunction = DefinitionModule.isUnionType
+local IsInputObjectTypeFunction = DefinitionModule.isInputObjectType
+local GetNamedTypeFunction = DefinitionModule.getNamedType
+local Module = nil
+local Callback = nil
 
-local function isSchema(p1)
-	-- upvalues: instanceOfModule (ref), t (write)
-	return instanceOfModule(p1, t)
+local function isSchema(p1) --[[ Line: 74 ]]
+	-- upvalues: InstanceOfModule (copy), Module (ref)
+	return InstanceOfModule(p1, Module)
 end
 
-local function assertSchema(p1)
-	-- upvalues: instanceOfModule (ref), t (write), error (ref), inspect (ref)
-	if not instanceOfModule(p1, t) then
-		error(error.new(("Expected %s to be a GraphQL schema."):format(inspect(p1))))
+local function assertSchema(p1) --[[ Line: 78 ]]
+	-- upvalues: InstanceOfModule (copy), Module (ref), Error1 (copy), InspectFunction (copy)
+	if not InstanceOfModule(p1, Module) then
+		error(Error1.new(("Expected %s to be a GraphQL schema."):format(InspectFunction(p1))))
 	end
 	return p1
 end
 
-t = {}
-t.__index = t
+Module = {}
+Module.__index = Module
 
-function t.new(p1)
-	-- upvalues: t (write), devAssert (ref), isObjectLike (ref), array (ref), inspect (ref), toObjMap (ref), specifiedDirectives (ref), set (ref), collectReferencedTypes (write), isNotNillish (ref), isDirective (ref), schema (ref), map (ref), isNillish (ref), error (ref), isInterfaceType (ref), isObjectType (ref)
-	local tbl = setmetatable({}, t)
-	tbl.__validationErrors = nil
+function Module.new(Message) --[[ Line: 200 ]]
+	-- upvalues: Module (ref), DevAssertFunction (copy), IsObjectLikeFunction (copy), Array (copy), InspectFunction (copy), ToObjMapFunction (copy), SpecifiedDirectives (copy), Set (copy), Callback (ref), IsNotNillishFunction (copy), IsDirectiveFunction (copy), Schema (copy), Map (copy), IsNillishFunction (copy), Error1 (copy), IsInterfaceTypeFunction (copy), IsObjectTypeFunction (copy)
+	local self = setmetatable({}, Module)
+	self.__validationErrors = nil
 	
-	if p1.assumeValid == true then
-		tbl.__validationErrors = {}
+	if Message.assumeValid == true then
+		self.__validationErrors = {}
 	end
-	devAssert(isObjectLike(p1), "Must provide configuration object.")
-	devAssert(not p1.types or array.isArray(p1.types), ("\"types\" must be Array if provided but got: %s."):format(inspect(p1.types)))
-	devAssert(not p1.directives or array.isArray(p1.directives), "\"directives\" must be Array if provided but got: " .. ("%s."):format(inspect(p1.directives)))
-	tbl.description = p1.description
-	tbl.extensions = if p1.extensions then toObjMap(p1.extensions) else nil
-	tbl.astNode = p1.astNode
-	tbl.extensionASTNodes = p1.extensionASTNodes
-	tbl._queryType = p1.query
-	tbl._mutationType = p1.mutation
-	tbl._subscriptionType = p1.subscription
-	tbl._directives = p1.directives or specifiedDirectives
-	local var1 = set.new()
-	
-	for i, v in ipairs(p1.types or {}) do
-		var1:add(v)
+	DevAssertFunction(IsObjectLikeFunction(Message), "Must provide configuration object.")
+	DevAssertFunction(not Message.types or Array.isArray(Message.types), ("\"types\" must be Array if provided but got: %s."):format(InspectFunction(Message.types)))
+	DevAssertFunction(not Message.directives or Array.isArray(Message.directives), "\"directives\" must be Array if provided but got: " .. ("%s."):format(InspectFunction(Message.directives)))
+	self.description = Message.description
+	self.extensions = if Message.extensions then ToObjMapFunction(Message.extensions) else nil
+	self.astNode = Message.astNode
+	self.extensionASTNodes = Message.extensionASTNodes
+	self._queryType = Message.query
+	self._mutationType = Message.mutation
+	self._subscriptionType = Message.subscription
+	self._directives = Message.directives or SpecifiedDirectives
+	local NewSet = Set.new()
+	local Iterator = ipairs
+	local Types = Message.types or {}
+	for _, value in Iterator(Types) do
+		NewSet:add(value)
 	end
-	if p1.types ~= nil then
-		for i, v_1 in ipairs(p1.types) do
-			var1:delete(v_1)
-			collectReferencedTypes(v_1, var1)
+	if Message.types ~= nil then
+		for _, _type in ipairs(Message.types) do
+			NewSet:delete(_type)
+			Callback(_type, NewSet)
 		end
 	end
-	if isNotNillish(tbl._queryType) then
-		collectReferencedTypes(tbl._queryType, var1)
+	if IsNotNillishFunction(self._queryType) then
+		Callback(self._queryType, NewSet)
 	end
-	if isNotNillish(tbl._mutationType) then
-		collectReferencedTypes(tbl._mutationType, var1)
+	if IsNotNillishFunction(self._mutationType) then
+		Callback(self._mutationType, NewSet)
 	end
-	if isNotNillish(tbl._subscriptionType) then
-		collectReferencedTypes(tbl._subscriptionType, var1)
+	if IsNotNillishFunction(self._subscriptionType) then
+		Callback(self._subscriptionType, NewSet)
 	end
-	for i, v_1 in ipairs(tbl._directives) do
-		if isDirective(v_1) then
-			for i_5, v_2 in ipairs(v_1.args) do
-				collectReferencedTypes(v_2.type, var1)
+	for _, directive in ipairs(self._directives) do
+		if IsDirectiveFunction(directive) then
+			for _, arg in ipairs(directive.args) do
+				Callback(arg.type, NewSet)
 			end
 		end
 	end
-	collectReferencedTypes(schema, var1)
-	tbl._typeMap = map.new()
-	tbl._subTypeMap = map.new()
-	tbl._implementationsMap = map.new()
+	Callback(Schema, NewSet)
+	self._typeMap = Map.new()
+	self._subTypeMap = Map.new()
+	self._implementationsMap = Map.new()
 	
-	for i, v_2 in var1 do
-		if not isNillish(v_2) then
-			local var2 = if typeof(v_2) == "table" then v_2.name else tostring(v_2)
-			devAssert(var2 and var2 ~= "", "One of the provided types for building the Schema is missing a name.")
+	for _, value1 in NewSet do
+		if not IsNillishFunction(value1) then
+			local Name = if typeof(value1) == "table" then value1.name else tostring(value1)
+			DevAssertFunction(Name and Name ~= "", "One of the provided types for building the Schema is missing a name.")
 			
-			if tbl._typeMap:has(var2) then
-				error(error.new(("Schema must contain uniquely named types but contains multiple types named \"%s\"."):format(var2)))
+			if self._typeMap:has(Name) then
+				error(Error1.new(("Schema must contain uniquely named types but contains multiple types named \"%s\"."):format(Name)))
 			end
-			tbl._typeMap:set(var2, v_2)
+			self._typeMap:set(Name, value1)
 			
-			if isInterfaceType(v_2) then
-				for i_4, v_3 in ipairs(v_2:getInterfaces()) do
-					if isInterfaceType(v_3) then
-						local name = tbl._implementationsMap:get(v_3.name)
+			if IsInterfaceTypeFunction(value1) then
+				for _, interface in ipairs(value1:getInterfaces()) do
+					if IsInterfaceTypeFunction(interface) then
+						local GetResult = self._implementationsMap:get(interface.name)
 						
-						if name == nil then
-							name = { objects = {}, interfaces = {} }
-							tbl._implementationsMap:set(v_3.name, name)
+						if GetResult == nil then
+							GetResult = { objects = {}, interfaces = {} }
+							self._implementationsMap:set(interface.name, GetResult)
 						end
-						table.insert(name.interfaces, v_2)
+						table.insert(GetResult.interfaces, value1)
 					end
 				end
-			elseif isObjectType(v_2) then
-				for i_4, v_3 in ipairs(v_2:getInterfaces()) do
-					if isInterfaceType(v_3) then
-						local name = tbl._implementationsMap:get(v_3.name)
+			elseif IsObjectTypeFunction(value1) then
+				for _, interface1 in ipairs(value1:getInterfaces()) do
+					if IsInterfaceTypeFunction(interface1) then
+						local GetResult = self._implementationsMap:get(interface1.name)
 						
-						if name == nil then
-							name = { objects = {}, interfaces = {} }
-							tbl._implementationsMap:set(v_3.name, name)
+						if GetResult == nil then
+							GetResult = { objects = {}, interfaces = {} }
+							self._implementationsMap:set(interface1.name, GetResult)
 						end
-						table.insert(name.objects, v_2)
+						table.insert(GetResult.objects, value1)
 					end
 				end
 			end
 		end
 	end
-	return tbl
+	return self
 end
 
-function t:getQueryType()
+function Module:getQueryType() --[[ Line: 349 ]]
 	return self._queryType
 end
 
-function t:getMutationType()
+function Module:getMutationType() --[[ Line: 353 ]]
 	return self._mutationType
 end
 
-function t:getSubscriptionType()
+function Module:getSubscriptionType() --[[ Line: 357 ]]
 	return self._subscriptionType
 end
 
-function t:getTypeMap()
+function Module:getTypeMap() --[[ Line: 361 ]]
 	return self._typeMap
 end
 
-function t:getType(p2)
-	return self:getTypeMap()[p2]
+function Module:getType(p1) --[[ Line: 365 ]]
+	return self:getTypeMap()[p1]
 end
 
-function t:getPossibleTypes(p2)
-	-- upvalues: isUnionType (ref)
-	return if isUnionType(p2) then p2:getTypes() else self:getImplementations(p2).objects
+function Module.getPossibleTypes(p1, p2) --[[ Line: 369 ]]
+	-- upvalues: IsUnionTypeFunction (copy)
+	return if IsUnionTypeFunction(p2) then p2:getTypes() else p1:getImplementations(p2).objects
 end
 
-function t:getImplementations(p2)
-	return self._implementationsMap:get(p2.name) or { objects = {}, interfaces = {} }
+function Module:getImplementations(p1) --[[ Line: 378 ]]
+	return self._implementationsMap:get(p1.name) or { objects = {}, interfaces = {} }
 end
 
-function t:isSubType(p2, p3)
-	-- upvalues: isUnionType (ref)
-	local name = self._subTypeMap[p2.name]
+function Module:isSubType(p1, p2): boolean --[[ Line: 388 ]]
+	-- upvalues: IsUnionTypeFunction (copy)
+	local SubType = self._subTypeMap[p1.name]
 	
-	if name == nil then
-		name = {}
+	if SubType == nil then
+		SubType = {}
 		
-		if isUnionType(p2) then
-			for i, v in ipairs(p2:getTypes()) do
-				name[v.name] = true
+		if IsUnionTypeFunction(p1) then
+			for _, _type in ipairs(p1:getTypes()) do
+				SubType[_type.name] = true
 			end
 		else
-			local var3 = self:getImplementations(p2)
+			local Implementations = self:getImplementations(p1)
 			
-			for i, v in ipairs(var3.objects) do
-				name[v.name] = true
+			for _, object in ipairs(Implementations.objects) do
+				SubType[object.name] = true
 			end
-			for i_1, v_1 in ipairs(var3.interfaces) do
-				name[v_1.name] = true
+			for _, interface in ipairs(Implementations.interfaces) do
+				SubType[interface.name] = true
 			end
 		end
-		self._subTypeMap:set(p2.name, name)
+		self._subTypeMap:set(p1.name, SubType)
 	end
-	return name[p3.name] ~= nil
+	return SubType[p2.name] ~= nil
 end
 
-function t:getDirectives()
+function Module:getDirectives() --[[ Line: 417 ]]
 	return self._directives
 end
 
-function t:getDirective(p4)
-	-- upvalues: array (ref)
-	return array.find(self:getDirectives(), function(p5)
-		-- upvalues: p4 (ref)
-		return p5.name == p4
+function Module:getDirective(Name) --[[ Line: 421 ]]
+	-- upvalues: Array (copy)
+	return Array.find(self:getDirectives(), function(p3): boolean --[[ Line: 422 ]]
+		-- upvalues: Name (copy)
+		return p3.name == Name
 	end)
 end
 
-function t:toConfig()
-	-- upvalues: array (ref)
+function Module:toConfig() --[[ Line: 427 ]]
+	-- upvalues: Array (copy)
 	return {
 		description = self.description,
 		query = self:getQueryType(),
 		mutation = self:getMutationType(),
 		subscription = self:getSubscriptionType(),
 		types = self:getTypeMap():values(),
-		directives = array.slice(self:getDirectives()),
+		directives = Array.slice(self:getDirectives()),
 		extensions = self.extensions,
 		astNode = self.astNode,
 		extensionASTNodes = self.extensionASTNodes or {},
@@ -221,45 +222,45 @@ function t:toConfig()
 	}
 end
 
-function t:__tostring()
+function Module:__tostring(): string --[[ Line: 443 ]]
 	return "GraphQLSchema"
 end
 
-collectReferencedTypes = function(p4, p5)
-	-- upvalues: getNamedType (ref), isUnionType (ref), collectReferencedTypes (write), isObjectType (ref), isInterfaceType (ref), isInputObjectType (ref)
-	local var4 = getNamedType(p4)
+Callback = function(Type, NewResult) --[[ Line: 485 | Named "collectReferencedTypes" ]]
+	-- upvalues: GetNamedTypeFunction (copy), IsUnionTypeFunction (copy), Callback (ref), IsObjectTypeFunction (copy), IsInterfaceTypeFunction (copy), IsInputObjectTypeFunction (copy)
+	local NamedType = GetNamedTypeFunction(Type)
 	
-	if not p5:has(var4) then
-		p5:add(var4)
+	if not NewResult:has(NamedType) then
+		NewResult:add(NamedType)
 		
-		if isUnionType(var4) then
-			for i, v in ipairs(var4:getTypes()) do
-				collectReferencedTypes(v, p5)
+		if IsUnionTypeFunction(NamedType) then
+			for _, _type in ipairs(NamedType:getTypes()) do
+				Callback(_type, NewResult)
 			end
-			return p5
-		elseif isObjectType(var4) or isInterfaceType(var4) then
-			for i, v in ipairs(var4:getInterfaces()) do
-				collectReferencedTypes(v, p5)
+			return NewResult
+		elseif IsObjectTypeFunction(NamedType) or IsInterfaceTypeFunction(NamedType) then
+			for _, interface in ipairs(NamedType:getInterfaces()) do
+				Callback(interface, NewResult)
 			end
-			for i, v_1 in ipairs(var4:getFields():values()) do
-				collectReferencedTypes(v_1.type, p5)
+			for _, value in ipairs(NamedType:getFields():values()) do
+				Callback(value.type, NewResult)
 				
-				for i_2, v_2 in ipairs(v_1.args) do
-					collectReferencedTypes(v_2.type, p5)
+				for _, arg in ipairs(value.args) do
+					Callback(arg.type, NewResult)
 				end
 			end
-			return p5
-		elseif isInputObjectType(var4) then
-			for i, v in ipairs(var4:getFields():values()) do
-				collectReferencedTypes(v.type, p5)
+			return NewResult
+		elseif IsInputObjectTypeFunction(NamedType) then
+			for _, value1 in ipairs(NamedType:getFields():values()) do
+				Callback(value1.type, NewResult)
 			end
 		end
 	end
-	return p5
+	return NewResult
 end
 
 return {
 	isSchema = isSchema,
 	assertSchema = assertSchema,
-	GraphQLSchema = t
+	GraphQLSchema = Module
 }

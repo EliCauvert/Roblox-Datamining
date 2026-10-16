@@ -1,14 +1,14 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local inGameMenuDependenciesModule = require(corePackagesService.Packages.InGameMenuDependencies)
-local roact = inGameMenuDependenciesModule.Roact
-local cryo = inGameMenuDependenciesModule.Cryo
-local t = inGameMenuDependenciesModule.t
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
-local globalConfigModule = require(script.Parent.Parent.GlobalConfig)
-local t_1 = {
+﻿local CorePackages = game:GetService("CorePackages")
+local InGameMenuDependenciesModule = require(CorePackages.Packages.InGameMenuDependencies)
+local Roact = InGameMenuDependenciesModule.Roact
+local Cryo = InGameMenuDependenciesModule.Cryo
+local T = InGameMenuDependenciesModule.t
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local WithFoundationOrUIBloxStyleFunction = require(CorePackages.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
+local GlobalConfigModule = require(script.Parent.Parent.GlobalConfig)
+local config = {
 	Title = "HeadingLarge",
 	Header1 = "HeadingSmall",
 	Header2 = "TitleLarge",
@@ -19,35 +19,35 @@ local t_1 = {
 	CaptionBody = "BodySmall",
 	Footer = "CaptionSmall"
 }
-local var1 = t.strictInterface({
-	themeKey = t.optional(t.string),
-	fontKey = t.optional(t.string),
-	AnchorPoint = t.optional(t.Vector2),
-	LayoutOrder = t.optional(t.integer),
-	Position = t.optional(t.UDim2),
-	Size = t.optional(t.UDim2),
-	Text = t.string,
-	TextColor3 = t.optional(t.Color3),
-	TextTransparency = t.optional(t.numberConstrained(0, 1)),
-	TextWrapped = t.optional(t.boolean),
-	TextXAlignment = t.optional(t.enum(Enum.TextXAlignment)),
-	TextYAlignment = t.optional(t.enum(Enum.TextYAlignment)),
-	TextTruncate = t.optional(t.enum(Enum.TextTruncate)),
-	Visible = t.optional(t.boolean),
-	ZIndex = t.optional(t.integer),
-	AutomaticSize = t.optional(t.enum(Enum.AutomaticSize)),
-	[roact.Children] = t.optional(t.table)
+local StrictInterfaceResult = T.strictInterface({
+	themeKey = T.optional(T.string),
+	fontKey = T.optional(T.string),
+	AnchorPoint = T.optional(T.Vector2),
+	LayoutOrder = T.optional(T.integer),
+	Position = T.optional(T.UDim2),
+	Size = T.optional(T.UDim2),
+	Text = T.string,
+	TextColor3 = T.optional(T.Color3),
+	TextTransparency = T.optional(T.numberConstrained(0, 1)),
+	TextWrapped = T.optional(T.boolean),
+	TextXAlignment = T.optional(T.enum(Enum.TextXAlignment)),
+	TextYAlignment = T.optional(T.enum(Enum.TextYAlignment)),
+	TextTruncate = T.optional(T.enum(Enum.TextTruncate)),
+	Visible = T.optional(T.boolean),
+	ZIndex = T.optional(T.integer),
+	AutomaticSize = T.optional(T.enum(Enum.AutomaticSize)),
+	[Roact.Children] = T.optional(T.table)
 })
 
-return function(p1)
-	-- upvalues: globalConfigModule (ref), var1 (ref), withFoundationOrUIBloxStyle (ref), foundationFontFaceMigration (ref), t_1 (ref), normalizeFontFace (ref), cryo (ref), roact (ref)
-	if globalConfigModule.propValidation then
-		assert(var1(p1))
+return function(p1) --[[ Line: 48 | Named "ThemedTextLabel" ]]
+	-- upvalues: GlobalConfigModule (copy), StrictInterfaceResult (copy), WithFoundationOrUIBloxStyleFunction (copy), FoundationFontFaceMigration (copy), config (copy), NormalizeFontFaceFunction (copy), Cryo (copy), Roact (copy)
+	if GlobalConfigModule.propValidation then
+		assert(StrictInterfaceResult(p1))
 	end
-	return withFoundationOrUIBloxStyle(function(p2)
-		-- upvalues: foundationFontFaceMigration (copy)
+	return WithFoundationOrUIBloxStyleFunction(function(p2) --[[ Line: 53 ]]
+		-- upvalues: FoundationFontFaceMigration (upval)
 		return {
-			Tokens = if foundationFontFaceMigration then p2 else nil,
+			Tokens = if FoundationFontFaceMigration then p2 else nil,
 			Theme = {
 				BackgroundDefault = {
 					Color = p2.Color.Surface.Surface_0.Color3,
@@ -222,21 +222,21 @@ return function(p1)
 				}
 			}
 		}
-	end, function(p2)
-		-- upvalues: p1 (ref), foundationFontFaceMigration (copy), t_1 (copy), normalizeFontFace (copy), cryo (copy), roact (copy)
-		local var2 = p2.Theme[p1.themeKey or "TextDefault"]
-		local var3 = p2.Font[p1.fontKey or "Body"]
+	end, function(p2) --[[ Line: 227 ]]
+		-- upvalues: p1 (copy), FoundationFontFaceMigration (upval), config (upval), NormalizeFontFaceFunction (upval), Cryo (upval), Roact (upval)
+		local ThemeEntry = p2.Theme[p1.themeKey or "TextDefault"]
+		local v1 = p2.Font[p1.fontKey or "Body"]
 		
-		return roact.createElement("TextLabel", cryo.Dictionary.join({
-			TextColor3 = var2.Color,
-			TextTransparency = var2.Transparency
+		return Roact.createElement("TextLabel", (Cryo.Dictionary.join({
+			TextColor3 = ThemeEntry.Color,
+			TextTransparency = ThemeEntry.Transparency
 		}, p1, {
 			BackgroundTransparency = 1,
-			fontKey = cryo.None,
-			themeKey = cryo.None,
-			Font = if foundationFontFaceMigration then cryo.None else var3.Font,
-			FontFace = if foundationFontFaceMigration then normalizeFontFace((p2.Tokens.Typography[t_1[p1.fontKey or "Body"]] or var3).Font) else nil,
-			TextSize = var3.RelativeSize * p2.Font.BaseSize
-		}))
+			fontKey = Cryo.None,
+			themeKey = Cryo.None,
+			Font = if FoundationFontFaceMigration then Cryo.None else v1.Font,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction((p2.Tokens.Typography[config[p1.fontKey or "Body"]] or v1).Font) else nil,
+			TextSize = v1.RelativeSize * p2.Font.BaseSize
+		})))
 	end)
 end

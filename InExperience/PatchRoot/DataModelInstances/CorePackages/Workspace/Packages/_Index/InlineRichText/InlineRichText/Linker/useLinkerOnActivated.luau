@@ -1,29 +1,30 @@
-﻿local inlineRichText = script:FindFirstAncestor("InlineRichText")
-local reactModule = require(inlineRichText.Parent.React)
-local useNavigateToWebviewModule = require(inlineRichText.Linker.Behaviors.useNavigateToWebview)
-local useInvokeLinkingProtocolModule = require(inlineRichText.Linker.Behaviors.useInvokeLinkingProtocol)
-local useShowErrorToastModule = require(inlineRichText.Linker.Behaviors.useShowErrorToast)
-local linkBehaviorModule = require(inlineRichText.Enums.LinkBehavior)
-local name = require(inlineRichText.Logger):new(script.Name)
-local _ = require(inlineRichText.Types)
+﻿local InlineRichText = script:FindFirstAncestor("InlineRichText")
+local ReactModule = require(InlineRichText.Parent.React)
+local UseNavigateToWebviewModule = require(InlineRichText.Linker.Behaviors.useNavigateToWebview)
+local UseInvokeLinkingProtocolModule = require(InlineRichText.Linker.Behaviors.useInvokeLinkingProtocol)
+local UseShowErrorToastModule = require(InlineRichText.Linker.Behaviors.useShowErrorToast)
+local LinkBehaviorModule = require(InlineRichText.Enums.LinkBehavior)
+local NewResult = require(InlineRichText.Logger):new(script.Name)
+local _ = require(InlineRichText.Types)
 
-return function(p1)
-	-- upvalues: useNavigateToWebviewModule (ref), useInvokeLinkingProtocolModule (ref), useShowErrorToastModule (ref), linkBehaviorModule (ref), reactModule (ref), name (ref)
-	local t = {
-		[linkBehaviorModule.Webview] = useNavigateToWebviewModule(),
-		[linkBehaviorModule.LinkingProtocol] = useInvokeLinkingProtocolModule(),
-		[linkBehaviorModule.ErrorToast] = useShowErrorToastModule({ errorToastTextOverride = p1.errorToastTextOverride })
+return function(p1) --[[ Line: 18 | Named "useLinkerOnActivated" ]]
+	-- upvalues: UseNavigateToWebviewModule (copy), UseInvokeLinkingProtocolModule (copy), UseShowErrorToastModule (copy), LinkBehaviorModule (copy), ReactModule (copy), NewResult (copy)
+	local config = {
+		[LinkBehaviorModule.Webview] = UseNavigateToWebviewModule(),
+		[LinkBehaviorModule.LinkingProtocol] = UseInvokeLinkingProtocolModule(),
+		[LinkBehaviorModule.ErrorToast] = UseShowErrorToastModule({ errorToastTextOverride = p1.errorToastTextOverride })
 	}
 	
-	return reactModule.useCallback(function(p2)
-		-- upvalues: t (ref), name (copy)
-		local linkBehavior = t[p2.linkBehavior]
+	return (ReactModule.useCallback(function(p2) --[[ Line: 31 ]]
+		-- upvalues: config (copy), NewResult (upval)
+		local Entry: (any) -> () = config[p2.linkBehavior]
 		
-		if linkBehavior then
-			linkBehavior(p2.url)
+		if Entry then
+			Entry(p2.url)
 			
 			return
+		else
+			NewResult:error(`Link activation failed with invalid link behavior: {p2.linkBehavior}. This behavior is either invalid or doesn't support activation.`)
 		end
-		name:error(`Link activation failed with invalid link behavior: {p2.linkBehavior}. This behavior is either invalid or doesn't support activation.`)
-	end, { t })
+	end, { config }))
 end

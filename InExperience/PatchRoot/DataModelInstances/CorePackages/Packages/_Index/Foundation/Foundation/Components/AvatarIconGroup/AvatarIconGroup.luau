@@ -1,55 +1,55 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local avatarIconModule = require(foundation.Components.AvatarIcon)
-local internalAvatarGroupModule = require(foundation.Components.InternalAvatarGroup)
-local _ = require(foundation.Components.Types)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local avatarIconSizeModule = require(foundation.Enums.AvatarIconSize)
-local avatarGroupTypeModule = require(foundation.Enums.AvatarGroupType)
-local useAvatarIconVariantsModule = require(foundation.Components.AvatarIcon.useAvatarIconVariants)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local AvatarIconModule = require(Foundation.Components.AvatarIcon)
+local InternalAvatarGroupModule = require(Foundation.Components.InternalAvatarGroup)
+local _ = require(Foundation.Components.Types)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local AvatarIconSizeModule = require(Foundation.Enums.AvatarIconSize)
+local AvatarGroupTypeModule = require(Foundation.Enums.AvatarGroupType)
+local UseAvatarIconVariantsModule = require(Foundation.Components.AvatarIcon.useAvatarIconVariants)
 
-local function renderAvatarIcon(p1, p2, p3)
-	-- upvalues: reactModule (ref), avatarIconModule (ref)
-	return reactModule.createElement(avatarIconModule, {
-		userId = p1,
-		key = p2.key,
-		backgroundStyle = p2.backgroundStyle,
-		backplateStyle = p2.backplateStyle,
-		size = p3,
-		LayoutOrder = p2.LayoutOrder,
-		Position = p2.Position,
-		ZIndex = p2.ZIndex,
-		testId = p2.testId
+local function renderAvatarIcon(UserId, Frame, Size) --[[ Line: 28 ]]
+	-- upvalues: ReactModule (copy), AvatarIconModule (copy)
+	return ReactModule.createElement(AvatarIconModule, {
+		userId = UserId,
+		key = Frame.key,
+		backgroundStyle = Frame.backgroundStyle,
+		backplateStyle = Frame.backplateStyle,
+		size = Size,
+		LayoutOrder = Frame.LayoutOrder,
+		Position = Frame.Position,
+		ZIndex = Frame.ZIndex,
+		testId = Frame.testId
 	})
 end
 
-local t = {
+local config = {
 	max = 1e999,
 	testId = "--foundation-avatar-icon-group",
-	type = avatarGroupTypeModule.Spread,
-	size = avatarIconSizeModule.Medium
+	type = AvatarGroupTypeModule.Spread,
+	size = AvatarIconSizeModule.Medium
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useAvatarIconVariantsModule (ref), avatarGroupTypeModule (ref), avatarIconSizeModule (ref), reactModule (ref), internalAvatarGroupModule (ref), withCommonPropsModule (ref), renderAvatarIcon (ref)
-	local var1 = withDefaultsModule(p1, t)
-	local var2 = useTokensModule()
-	local size = var1.size
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 53 | Named "AvatarIconGroup" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UseAvatarIconVariantsModule (copy), AvatarGroupTypeModule (copy), AvatarIconSizeModule (copy), ReactModule (copy), InternalAvatarGroupModule (copy), WithCommonPropsModule (copy), renderAvatarIcon (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	local UseTokensModuleResult = UseTokensModule()
+	local Size = WithDefaultsModuleResult.size
 	
-	return reactModule.createElement(internalAvatarGroupModule, withCommonPropsModule(var1, {
+	return ReactModule.createElement(InternalAvatarGroupModule, WithCommonPropsModule(WithDefaultsModuleResult, {
 		isEllipsedOverflow = true,
-		ref = p2,
-		type = var1.type,
-		max = var1.max,
-		resolvedSize = useAvatarIconVariantsModule(var2, var1.size).container.size,
-		gap = if var1.type == avatarGroupTypeModule.Spread then var2.Size.Size_200 elseif size == avatarIconSizeModule.Large or size == avatarIconSizeModule.Medium then -var2.Size.Size_50 else -var2.Size.Size_0,
-		backplateStyle = var1.backplateStyle,
-		avatars = var1.avatars,
-		renderAvatar = function(p3, p4)
-			-- upvalues: renderAvatarIcon (copy), var1 (ref)
-			return renderAvatarIcon(p3, p4, var1.size)
+		ref = Ref,
+		type = WithDefaultsModuleResult.type,
+		max = WithDefaultsModuleResult.max,
+		resolvedSize = UseAvatarIconVariantsModule(UseTokensModuleResult, WithDefaultsModuleResult.size).container.size,
+		gap = if WithDefaultsModuleResult.type == AvatarGroupTypeModule.Spread then UseTokensModuleResult.Size.Size_200 elseif Size == AvatarIconSizeModule.Large or Size == AvatarIconSizeModule.Medium then -UseTokensModuleResult.Size.Size_50 else -UseTokensModuleResult.Size.Size_0,
+		backplateStyle = WithDefaultsModuleResult.backplateStyle,
+		avatars = WithDefaultsModuleResult.avatars,
+		renderAvatar = function(UserId, Frame) --[[ Line: 78 ]]
+			-- upvalues: renderAvatarIcon (upval), WithDefaultsModuleResult (copy)
+			return renderAvatarIcon(UserId, Frame, WithDefaultsModuleResult.size)
 		end
 	}))
 end))

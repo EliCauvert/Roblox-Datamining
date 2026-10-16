@@ -1,129 +1,133 @@
-﻿local parent = script:FindFirstAncestor("AppBlox").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local responsiveModule = require(parent.Responsive)
-local view = foundationModule.View
-local iconButton = foundationModule.IconButton
-local useTokens = foundationModule.Hooks.useTokens
-local useDeviceInsets = responsiveModule.useDeviceInsets
-local detailsPageLayoutContextModule = require(script.Parent.DetailsPageLayoutContext)
+﻿local Parent = script:FindFirstAncestor("AppBlox").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local ResponsiveModule = require(Parent.Responsive)
+local View = FoundationModule.View
+local IconButton = FoundationModule.IconButton
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseDeviceInsetsFunction = ResponsiveModule.useDeviceInsets
+local DetailsPageLayoutContextModule = require(script.Parent.DetailsPageLayoutContext)
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useTokens (ref), useDeviceInsets (ref), reactModule (ref), detailsPageLayoutContextModule (ref), foundationModule (ref), responsiveModule (ref), iconButton (ref), view (ref)
-	local var1 = useTokens()
-	local var2 = useDeviceInsets()
-	local var3 = reactModule.useContext(detailsPageLayoutContextModule)
-	local setHasHeader = var3.setHasHeader
-	reactModule.useEffect(function()
-		-- upvalues: setHasHeader (ref)
-		setHasHeader(true)
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 45 | Named "DetailsPageLayoutHeader" ]]
+	-- upvalues: UseTokensFunction (copy), UseDeviceInsetsFunction (copy), ReactModule (copy), DetailsPageLayoutContextModule (copy), FoundationModule (copy), ResponsiveModule (copy), IconButton (copy), View (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
+	local UseContextResult = ReactModule.useContext(DetailsPageLayoutContextModule)
+	local SetHasHeaderFunction = UseContextResult.setHasHeader
+	ReactModule.useEffect(function() --[[ Line: 51 ]]
+		-- upvalues: SetHasHeaderFunction (copy)
+		SetHasHeaderFunction(true)
 		
-		return function()
-			-- upvalues: setHasHeader (copy)
-			setHasHeader(false)
+		return function() --[[ Line: 53 ]]
+			-- upvalues: SetHasHeaderFunction (upval)
+			SetHasHeaderFunction(false)
 		end
-	end, { setHasHeader })
-	local hasFullBleed = var3.hasFullBleed
-	local headerBarHeight = var3.headerBarHeight
-	local stickyHeaderActive = var3.stickyHeaderActive
-	local headerOpacity = var3.headerOpacity
-	local top = var2.top
-	local onClose = var3.onClose
-	local isFullscreenOverlay = var3.isFullscreenOverlay
-	local onExitFullscreenOverlay = var3.onExitFullscreenOverlay
-	local closeIconName = p1.closeIconName or foundationModule.Enums.IconName.ChevronLargeLeft
-	local backgroundColor = p1.backgroundColor or var1.Color.Surface.Surface_0
-	local var4 = responsiveModule.useBreakpointXOrSmaller(responsiveModule.Keys.Small)
-	local testId = var3.testId
-	assert(testId, "DetailsPageLayout.Header must be used within DetailsPageLayout.Root")
-	local var5 = if isFullscreenOverlay and onExitFullscreenOverlay then onExitFullscreenOverlay else onClose
-	local var6 = if isFullscreenOverlay then foundationModule.Enums.IconName.ChevronLargeLeft else closeIconName
-	local var7 = if isFullscreenOverlay then nil else headerOpacity
-	local var8 = if hasFullBleed and var7 then var7:map(function(p3)
-		return p3 >= 0.5
+	end, { SetHasHeaderFunction })
+	local HasFullBleed = UseContextResult.hasFullBleed
+	local HeaderBarHeight = UseContextResult.headerBarHeight
+	local StickyHeaderActive = UseContextResult.stickyHeaderActive
+	local HeaderOpacity = UseContextResult.headerOpacity
+	local Top: number = UseDeviceInsetsResult.top
+	local OnClose = UseContextResult.onClose
+	local IsFullscreenOverlay = UseContextResult.isFullscreenOverlay
+	local OnExitFullscreenOverlay = UseContextResult.onExitFullscreenOverlay
+	local CloseIconName = p1.closeIconName or FoundationModule.Enums.IconName.ChevronLargeLeft
+	local BackgroundColor = p1.backgroundColor or UseTokensResult.Color.Surface.Surface_0
+	local UseBreakpointXOrSmallerResult = ResponsiveModule.useBreakpointXOrSmaller(ResponsiveModule.Keys.Small)
+	local TestId = UseContextResult.testId
+	assert(TestId, "DetailsPageLayout.Header must be used within DetailsPageLayout.Root")
+	local OnExitFullscreenOverlay1 = if IsFullscreenOverlay and OnExitFullscreenOverlay then OnExitFullscreenOverlay else OnClose
+	local ChevronLargeLeft = if IsFullscreenOverlay then FoundationModule.Enums.IconName.ChevronLargeLeft else CloseIconName
+	local HeaderOpacity1 = if IsFullscreenOverlay then nil else HeaderOpacity
+	local MapResult = if HasFullBleed and HeaderOpacity1 then HeaderOpacity1:map(function(p2: number): boolean --[[ Line: 85 ]]
+		return p2 >= 0.5
 	end) else nil
-	local var9 = p1.children and (if hasFullBleed then var7 else not hasFullBleed or stickyHeaderActive)
-	local var10 = if var5 then reactModule.createElement(iconButton, {
-		variant = foundationModule.Enums.ButtonVariant.Utility,
-		size = if var4 then foundationModule.Enums.InputSize.Medium else foundationModule.Enums.InputSize.Large,
-		icon = var6,
-		onActivated = var5,
-		testId = if testId then `{testId}--close-button` else nil
+	local HeaderOpacity1_1 = p1.children and (HasFullBleed and HeaderOpacity1 or (not HasFullBleed or StickyHeaderActive))
+	local Element = if OnExitFullscreenOverlay1 then ReactModule.createElement(IconButton, {
+		variant = FoundationModule.Enums.ButtonVariant.Utility,
+		size = if UseBreakpointXOrSmallerResult then FoundationModule.Enums.InputSize.Medium else FoundationModule.Enums.InputSize.Large,
+		icon = ChevronLargeLeft,
+		onActivated = OnExitFullscreenOverlay1,
+		testId = if TestId then `{TestId}--close-button` else nil
 	}) else nil
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		ZIndex = 2,
 		tag = "col",
-		Size = UDim2.new(1, 0, 0, headerBarHeight),
-		backgroundStyle = if hasFullBleed and var7 then var7:map(function(p3)
-			-- upvalues: backgroundColor (ref)
+		Size = UDim2.new(1, 0, 0, HeaderBarHeight),
+		backgroundStyle = if HasFullBleed and HeaderOpacity1 then HeaderOpacity1:map(function(Alpha: number) --[[ Line: 179 ]]
+			-- upvalues: BackgroundColor (copy)
 			return {
-				Color3 = backgroundColor.Color3,
-				Transparency = math.lerp(1, backgroundColor.Transparency, p3)
+				Color3 = BackgroundColor.Color3,
+				Transparency = math.lerp(1, BackgroundColor.Transparency, Alpha)
 			}
 		end) else {
-			Color3 = backgroundColor.Color3,
-			Transparency = backgroundColor.Transparency
+			Color3 = BackgroundColor.Color3,
+			Transparency = BackgroundColor.Transparency
 		},
-		ref = p2
+		ref = Ref
 	}, {
-		HeaderContent = if p1.fullWidthContent then reactModule.createElement(view, { LayoutOrder = 1, tag = "fill size-full-0" }, {
-			CloseButtonOverlay = if var10 then reactModule.createElement(view, {
+		HeaderContent = if p1.fullWidthContent then ReactModule.createElement(View, { LayoutOrder = 1, tag = "fill size-full-0" }, {
+			CloseButtonOverlay = if Element then ReactModule.createElement(View, {
 				ZIndex = 2,
 				AnchorPoint = Vector2.new(0, 0.5),
-				Position = UDim2.new(0, if var4 then var1.Padding.Medium else var1.Padding.XLarge, 0.5, math.floor(top / 2)),
+				Position = UDim2.new(0, if UseBreakpointXOrSmallerResult then UseTokensResult.Padding.Medium else UseTokensResult.Padding.XLarge, 0.5, (math.floor(Top / 2))),
 				tag = {
 					["auto-xy radius-medium"] = p1.backgroundColor ~= nil,
 					["auto-xy radius-medium bg-over-media-0"] = p1.backgroundColor == nil
 				},
 				backgroundStyle = if p1.backgroundColor then {
-					Color3 = backgroundColor.Color3,
-					Transparency = backgroundColor.Transparency
+					Color3 = BackgroundColor.Color3,
+					Transparency = BackgroundColor.Transparency
 				} else nil
-			}, { CloseButton = var10 }) else nil,
-			Children = if var9 then reactModule.createElement(view, {
-				Size = UDim2.new(1, 0, 1, -top),
-				Position = UDim2.new(0, 0, 0, top),
-				Visible = var8
+			}, { CloseButton = Element }) else nil,
+			Children = if HeaderOpacity1_1 then ReactModule.createElement(View, {
+				Size = UDim2.new(1, 0, 1, -Top),
+				Position = UDim2.new(0, 0, 0, Top),
+				Visible = MapResult
 			}, {
-				Content = reactModule.createElement(reactModule.Fragment, nil, p1.children)
+				Content = ReactModule.createElement(ReactModule.Fragment, nil, p1.children)
 			}) else nil
-		}) else reactModule.createElement(view, {
+		}) else ReactModule.createElement(View, {
 			LayoutOrder = 1,
 			tag = {
-				["row align-y-center fill size-full-0 auto-y padding-x-medium"] = var4,
-				["row align-y-center fill size-full-0 auto-y padding-x-xlarge"] = not var4
+				["row align-y-center fill size-full-0 auto-y padding-x-medium"] = UseBreakpointXOrSmallerResult,
+				["row align-y-center fill size-full-0 auto-y padding-x-xlarge"] = not UseBreakpointXOrSmallerResult
 			},
-			padding = if top > 0 then { top = UDim.new(0, top) } else nil
+			padding = if Top > 0 then { top = UDim.new(0, Top) } else nil
 		}, {
-			Container = if var10 then reactModule.createElement(view, {
+			Container = if Element then ReactModule.createElement(View, {
 				tag = {
 					["auto-xy radius-medium"] = p1.backgroundColor ~= nil,
 					["auto-xy radius-medium bg-over-media-0"] = p1.backgroundColor == nil
 				},
 				backgroundStyle = if p1.backgroundColor then {
-					Color3 = backgroundColor.Color3,
-					Transparency = backgroundColor.Transparency
+					Color3 = BackgroundColor.Color3,
+					Transparency = BackgroundColor.Transparency
 				} else nil
-			}, { CloseButton = var10 }) else nil,
-			Children = if var9 then reactModule.createElement(view, { tag = "fill auto-y", LayoutOrder = 1, Visible = var8 }, {
-				Content = reactModule.createElement(reactModule.Fragment, nil, p1.children)
+			}, { CloseButton = Element }) else nil,
+			Children = if HeaderOpacity1_1 then ReactModule.createElement(View, {
+				tag = "fill auto-y",
+				LayoutOrder = 1,
+				Visible = MapResult
+			}, {
+				Content = ReactModule.createElement(ReactModule.Fragment, nil, p1.children)
 			}) else nil
 		}),
-		BottomBorder = reactModule.createElement(view, {
+		BottomBorder = ReactModule.createElement(View, {
 			LayoutOrder = 2,
-			backgroundStyle = if var7 then var7:map(function(p3)
-				-- upvalues: var1 (ref)
+			backgroundStyle = if HeaderOpacity1 then HeaderOpacity1:map(function(Alpha: number) --[[ Line: 191 ]]
+				-- upvalues: UseTokensResult (copy)
 				return {
-					Color3 = var1.Color.Stroke.Muted.Color3,
-					Transparency = math.lerp(1, var1.Color.Stroke.Muted.Transparency, p3)
+					Color3 = UseTokensResult.Color.Stroke.Muted.Color3,
+					Transparency = math.lerp(1, UseTokensResult.Color.Stroke.Muted.Transparency, Alpha)
 				}
 			end) else {
-				Color3 = var1.Color.Stroke.Muted.Color3,
-				Transparency = var1.Color.Stroke.Muted.Transparency
+				Color3 = UseTokensResult.Color.Stroke.Muted.Color3,
+				Transparency = UseTokensResult.Color.Stroke.Muted.Transparency
 			},
-			testId = if testId then `{testId}--header--bottom-border` else nil,
-			Size = UDim2.new(1, 0, 0, var1.Stroke.Standard)
+			testId = if TestId then `{TestId}--header--bottom-border` else nil,
+			Size = UDim2.new(1, 0, 0, UseTokensResult.Stroke.Standard)
 		})
 	})
 end))

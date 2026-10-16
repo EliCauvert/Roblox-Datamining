@@ -1,29 +1,30 @@
-﻿local radius = require(script.Parent.Parent.Parent.Parent.Foundation).Enums.Radius
+﻿local Radius = require(script.Parent.Parent.Parent.Parent.Foundation).Enums.Radius
 
-return function(p1, p2)
-	-- upvalues: radius (ref)
+return function(p1, p2) --[[ Line: 9 | Named "getClosestRadius" ]]
+	-- upvalues: Radius (copy)
 	if not p2 or p2 == UDim.new(0, 0) then
-		return radius.None
-	elseif p2.Scale >= 0.5 then
-		return radius.Circle
+		return Radius.None
 	end
-	local var1 = nil
-	local var2 = 1e999
+	if p2.Scale >= 0.5 then
+		return Radius.Circle
+	end
+	local v1 = nil
+	local v2 = 1e999
 	
-	for i, v in {
-		[radius.None] = 0,
-		[radius.XSmall] = 2,
-		[radius.Small] = p1.Small,
-		[radius.Medium] = p1.Medium,
-		[radius.Large] = p1.XLarge,
-		[radius.Circle] = p1.Circle
+	for i, value in {
+		[Radius.None] = 0,
+		[Radius.XSmall] = 2,
+		[Radius.Small] = p1.Small,
+		[Radius.Medium] = p1.Medium,
+		[Radius.Large] = p1.XLarge,
+		[Radius.Circle] = p1.Circle
 	} do
-		local absValue = math.abs(p2.Offset - v)
+		local Magnitude = math.abs(p2.Offset - value)
 		
-		if absValue < var2 then
-			var2 = absValue
-			var1 = i
+		if Magnitude < v2 then
+			v2 = Magnitude
+			v1 = i
 		end
 	end
-	return var1
+	return v1
 end

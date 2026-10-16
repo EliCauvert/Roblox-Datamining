@@ -1,12 +1,12 @@
-﻿local parent = script:FindFirstAncestor("ItemDetails").Parent
-local reactModule = require(parent.React)
-local itemInfoRowModule = require(script.Parent.ItemInfoRow)
-local cryoModule = require(parent.Cryo)
+﻿local Parent = script:FindFirstAncestor("ItemDetails").Parent
+local ReactModule = require(Parent.React)
+local ItemInfoRowModule = require(script.Parent.ItemInfoRow)
+local CryoModule = require(Parent.Cryo)
 
-return function(a)
-	-- upvalues: reactModule (ref), cryoModule (ref), itemInfoRowModule (ref)
-	local t = {
-		layout = reactModule.createElement("UIListLayout", {
+return function(Frame) --[[ Line: 42 | Named "ItemInfoList" ]]
+	-- upvalues: ReactModule (copy), CryoModule (copy), ItemInfoRowModule (copy)
+	local config = {
+		layout = ReactModule.createElement("UIListLayout", {
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
 			SortOrder = Enum.SortOrder.LayoutOrder,
@@ -14,13 +14,16 @@ return function(a)
 		})
 	}
 	
-	for i, v in a.rowData do
-		table.insert(t, reactModule.createElement(itemInfoRowModule, cryoModule.Dictionary.join(v, { LayoutOrder = i, hideDivider = next(a.rowData, i) == nil })))
+	for LayoutOrder, value in Frame.rowData do
+		table.insert(config, ReactModule.createElement(ItemInfoRowModule, (CryoModule.Dictionary.join(value, {
+			LayoutOrder = LayoutOrder,
+			hideDivider = next(Frame.rowData, LayoutOrder) == nil
+		}))))
 	end
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		AutomaticSize = Enum.AutomaticSize.Y,
 		Size = UDim2.fromScale(1, 0),
-		LayoutOrder = a.LayoutOrder
-	}, t)
+		LayoutOrder = Frame.LayoutOrder
+	}, config)
 end

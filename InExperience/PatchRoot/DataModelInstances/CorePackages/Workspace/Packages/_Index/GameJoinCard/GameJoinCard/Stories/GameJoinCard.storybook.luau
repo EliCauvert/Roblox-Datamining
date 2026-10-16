@@ -1,48 +1,47 @@
-﻿local gameJoinCard = script:FindFirstAncestor("GameJoinCard")
-local parent = gameJoinCard.Parent
-local reactModule = require(parent.React)
-local reactRobloxModule = require(parent.Dev.ReactRoblox)
-local cryoModule = require(parent.Dev.Cryo)
-local styleModule = require(parent.Style)
-local styleProviderWithDefaultTheme = styleModule.StyleProviderWithDefaultTheme
-local designTokenProvider = styleModule.DesignTokenProvider
-local mockLocale = require(parent.Dev.SocialTestHelpers).StoryHelpers.mockLocale
-local roduxModule = require(parent.Dev.Rodux)
-local roactRoduxModule = require(parent.Dev.RoactRodux)
+﻿local GameJoinCard = script:FindFirstAncestor("GameJoinCard")
+local Parent = GameJoinCard.Parent
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Dev.Cryo)
+local StyleModule = require(Parent.Style)
+local StyleProviderWithDefaultTheme = StyleModule.StyleProviderWithDefaultTheme
+local DesignTokenProvider = StyleModule.DesignTokenProvider
+local MockLocaleFunction = require(Parent.Dev.SocialTestHelpers).StoryHelpers.mockLocale
+local RoduxModule = require(Parent.Dev.Rodux)
+local RoactRoduxModule = require(Parent.Dev.RoactRodux)
 local t = {}
 
-local function createStore(_)
-	-- upvalues: roduxModule (ref)
-	return roduxModule.Store.new(function()
+local function createStore(_) --[[ Line: 15 ]]
+	-- upvalues: RoduxModule (copy)
+	return RoduxModule.Store.new(function() --[[ Line: 16 ]]
 		return {
 			ScreenSize = Vector2.new(600, 600),
 			TopBar = { topBarHeight = 0 },
 			GlobalGuiInset = { left = 0, top = 0, right = 0, bottom = 0 }
 		}
-	end, {}, { roduxModule.thunkMiddleware })
+	end, {}, { RoduxModule.thunkMiddleware })
 end
 
 return {
 	name = "GameJoinCard",
-	storyRoot = gameJoinCard.Stories,
-	roact = reactModule,
-	reactRoblox = reactRobloxModule,
-	mapDefinition = function(p1)
-		-- upvalues: cryoModule (ref), t (ref)
-		return cryoModule.Dictionary.join(p1, {
-			controls = cryoModule.Dictionary.join(t, p1.controls or {})
+	storyRoot = GameJoinCard.Stories,
+	roact = ReactModule,
+	reactRoblox = require(Parent.Dev.ReactRoblox),
+	mapDefinition = function(p1) --[[ Line: 37 ]]
+		-- upvalues: CryoModule (copy), t (copy)
+		return CryoModule.Dictionary.join(p1, {
+			controls = CryoModule.Dictionary.join(t, p1.controls or {})
 		})
 	end,
-	mapStory = function(p1)
-		-- upvalues: reactModule (ref), styleProviderWithDefaultTheme (ref), roactRoduxModule (ref), createStore (ref), designTokenProvider (ref), mockLocale (ref)
-		return function(p2)
-			-- upvalues: reactModule (copy), styleProviderWithDefaultTheme (copy), roactRoduxModule (copy), createStore (copy), designTokenProvider (copy), mockLocale (copy), p1 (ref)
-			return reactModule.createElement(styleProviderWithDefaultTheme, {
+	mapStory = function(p1) --[[ Line: 41 ]]
+		-- upvalues: ReactModule (copy), StyleProviderWithDefaultTheme (copy), RoactRoduxModule (copy), createStore (copy), DesignTokenProvider (copy), MockLocaleFunction (copy)
+		return function(p2) --[[ Line: 42 ]]
+			-- upvalues: ReactModule (upval), StyleProviderWithDefaultTheme (upval), RoactRoduxModule (upval), createStore (upval), DesignTokenProvider (upval), MockLocaleFunction (upval), p1 (copy)
+			return ReactModule.createElement(StyleProviderWithDefaultTheme, {
 				withUiModeSupport = false,
-				withDarkTheme = if p2.theme ~= nil then p2.theme ~= "Light" else true
+				withDarkTheme = p2.theme == nil or p2.theme ~= "Light"
 			}, {
-				reactModule.createElement(roactRoduxModule.StoreProvider, { store = createStore(nil) }, {
-					designTokenProvider = reactModule.createElement(designTokenProvider, { tokenMappers = {} }, { Child = mockLocale(p1, p2) })
+				ReactModule.createElement(RoactRoduxModule.StoreProvider, { store = createStore(nil) }, {
+					designTokenProvider = ReactModule.createElement(DesignTokenProvider, { tokenMappers = {} }, { Child = MockLocaleFunction(p1, p2) })
 				})
 			})
 		end

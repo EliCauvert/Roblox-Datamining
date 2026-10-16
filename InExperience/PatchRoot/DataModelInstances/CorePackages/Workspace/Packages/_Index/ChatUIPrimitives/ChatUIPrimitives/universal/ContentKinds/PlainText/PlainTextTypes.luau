@@ -1,16 +1,16 @@
-﻿local tModule = require(script:FindFirstAncestor("ChatUIPrimitives").Parent.t)
-local var1 = tModule.interface({
-	text = tModule.string,
-	locale = tModule.optional(tModule.string)
+﻿local TModule = require(script:FindFirstAncestor("ChatUIPrimitives").Parent.t)
+local InterfaceResult = TModule.interface({
+	text = TModule.string,
+	locale = TModule.optional(TModule.string)
 })
 
 return {
-	isValid = tModule.interface({
-		fallbackText = tModule.string,
-		displayText = var1,
-		translatedText = tModule.optional(var1),
-		originalText = tModule.optional(var1),
-		wasRewritten = tModule.boolean
+	isValid = TModule.interface({
+		fallbackText = TModule.string,
+		displayText = InterfaceResult,
+		translatedText = TModule.optional(InterfaceResult),
+		originalText = TModule.optional(InterfaceResult),
+		wasRewritten = TModule.boolean
 	}),
-	isValidDraft = tModule.strictInterface({ text = tModule.string })
+	isValidDraft = TModule.strictInterface({ text = TModule.string })
 }

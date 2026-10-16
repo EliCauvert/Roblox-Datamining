@@ -1,13 +1,13 @@
-﻿local sharedFlagsModule = require(script:FindFirstAncestor("ExperimentLayers").Parent.SharedFlags)
-local getFStringDesktopToastNotificationLayer = sharedFlagsModule.getFStringDesktopToastNotificationLayer
-local getFStringUniversalAppGameInviteMenuLayer = sharedFlagsModule.GetFStringUniversalAppGameInviteMenuLayer
-local getFStringAndroidPhoneVerificationLayer = sharedFlagsModule.GetFStringAndroidPhoneVerificationLayer
-local getFStringIOSPhoneVerificationLayer = sharedFlagsModule.GetFStringIOSPhoneVerificationLayer
-local fStringLuaAppBadgesSeeAllIxpLayer = sharedFlagsModule.FStringLuaAppBadgesSeeAllIxpLayer
-local fStringLuaAppDevStoreSeeAllSduiIxpLayer = sharedFlagsModule.FStringLuaAppDevStoreSeeAllSduiIxpLayer
+﻿local SharedFlagsModule = require(script:FindFirstAncestor("ExperimentLayers").Parent.SharedFlags)
+local GetFStringDesktopToastNotificationLayerFunction = SharedFlagsModule.getFStringDesktopToastNotificationLayer
+local GetFStringUniversalAppGameInviteMenuLayerFunction = SharedFlagsModule.GetFStringUniversalAppGameInviteMenuLayer
+local GetFStringAndroidPhoneVerificationLayerFunction = SharedFlagsModule.GetFStringAndroidPhoneVerificationLayer
+local GetFStringIOSPhoneVerificationLayerFunction = SharedFlagsModule.GetFStringIOSPhoneVerificationLayer
+local FStringLuaAppBadgesSeeAllIxpLayer = SharedFlagsModule.FStringLuaAppBadgesSeeAllIxpLayer
+local FStringLuaAppDevStoreSeeAllSduiIxpLayer = SharedFlagsModule.FStringLuaAppDevStoreSeeAllSduiIxpLayer
 game:DefineFastString("LuaAppOmniSearchLayer", "PlayerApp.SearchResultsPage")
 game:DefineFastString("XboxClassicUILayer", "Consoles.Xbox.Classic.UI")
-local voiceUpsellV2ExperimentLayerLua = game:DefineFastString("VoiceUpsellV2ExperimentLayerLua", "SocialVoice.VoiceUpsell")
+local VoiceUpsellV2ExperimentLayerLua = game:DefineFastString("VoiceUpsellV2ExperimentLayerLua", "SocialVoice.VoiceUpsell")
 game:DefineFastString("MobileSoundAndHapticsLayer", "Mobile.UI.Shell")
 
 return {
@@ -55,6 +55,7 @@ return {
 	MorePageExposureLayer = "Universality.MorePage",
 	SettingsRootPageExposureLayer = "UniversalApp.SettingsRootPage",
 	UCUASettingsPageExposureLayer = "UniversalApp.SettingsPage",
+	UnifyShortcutBarExposureLayer = "UniversalApp.UnifyShortcutBar",
 	AvatarExperienceUAAllViews = "AvatarExperience.UA.AllViews",
 	AvatarExperienceUAAllViewsSecondary = "AvatarExperience.UA.AllViews.Secondary",
 	AvatarExperienceUAMarketplaceView = "AvatarExperience.UA.MarketplaceView",
@@ -92,10 +93,13 @@ return {
 	AccessLayer = "Experimentation.ExposureTest.AccessLayer",
 	GridUILayer = "PlayerApp.GridUI",
 	ExpChatHiddenMessagesExpLayer = "ExperienceChat.HiddenMessages",
+	ExpChatMessageHistoryLayer = "ExperienceChat.MessageHistory",
 	ExpChatSystemMessagesExpLayer = "ExperienceChat.SystemMessages",
 	ExpChatTabOrderLayer = "ExperienceChat.TabOrder",
 	ExpChatPresetChatLayer = "UniverseChat.PresetChat",
 	ExpChatPresetChatAutocompleteLayer = "UniverseChat.PresetChatAutocomplete",
+	ExpChatPresetChatEmojiTabLayer = "UniverseChat.PresetChat.Emojis",
+	ExpChatPresetChatEmojiEffectLayer = "UniverseChat.PresetChat.Emojis.Experiment1",
 	ExperienceDetailsPageLayer = "PlayerApp.GameDetailsPage",
 	ExperienceDetailsPageExposureLayer = "PlayerApp.GameDetailsPage.Exposure",
 	ExperienceMenuLayer = "Experience.Menu",
@@ -104,7 +108,7 @@ return {
 	ExperienceMenuExitModalLayer = "Experience.Menu.ExitModal",
 	ConsoleExperienceMenuLayer = "Experience.Menu.Console",
 	LoadingScreenLayer = "Interactivity.LoadingScreen",
-	LuaDesktopToastNotificationLayer = getFStringDesktopToastNotificationLayer(),
+	LuaDesktopToastNotificationLayer = GetFStringDesktopToastNotificationLayerFunction(),
 	BottomBarNavLayer = "PlayerApp.BottomBarNav",
 	DesignSystemDesignTokenLayer = "DesignSystem.DesignToken",
 	GamepassRobuxUpsellLayer = "Revenue.UA.Gamepass.RobuxUpsell",
@@ -122,8 +126,8 @@ return {
 	NotificationsStreamNotificationUXExposureLayer = "Notifications.StreamNotificationUXExposure",
 	NotificationsDeliveryLayer = "Notifications.Delivery",
 	PhoneVerificationEntryLayer = "PlayerApp.HomepageUpsell.PhoneVerificationEntry",
-	AndroidPhoneVerificationLayer = getFStringAndroidPhoneVerificationLayer(),
-	IOSPhoneVerificationLayer = getFStringIOSPhoneVerificationLayer(),
+	AndroidPhoneVerificationLayer = GetFStringAndroidPhoneVerificationLayerFunction(),
+	IOSPhoneVerificationLayer = GetFStringIOSPhoneVerificationLayerFunction(),
 	LogoutLayer = "PlayerApp.Logout",
 	AvatarChatLayer = "Voice.AvatarChat",
 	AvatarChatLaunchControlLayer = "Voice.AvatarChat.LaunchControl",
@@ -132,8 +136,8 @@ return {
 	CameraButton = "AvatarExperience.CameraButtonExposure",
 	VoiceCivilityAndSafety = "Voice.CivilityAndSafety",
 	VoiceVolumeControls = "Voice.VolumeControls",
-	VoiceUpsellV2ExperimentLayerLua = voiceUpsellV2ExperimentLayerLua,
-	LuaGameInviteMenuLayer = getFStringUniversalAppGameInviteMenuLayer(),
+	VoiceUpsellV2ExperimentLayerLua = VoiceUpsellV2ExperimentLayerLua,
+	LuaGameInviteMenuLayer = GetFStringUniversalAppGameInviteMenuLayerFunction(),
 	EDPCommunityLinksLayer = "UserCommunities.EDP.CommunityLinks",
 	EDPPlayerFeedbackExposureLayer = "PlayerApp.EDP.PlayerFeedback.Exposure",
 	PlatformExcellenceQualityImprovementApp = "PlatformExcellence.QualityImprovement.App",
@@ -153,9 +157,9 @@ return {
 	NotApprovedPageUserIDLayer = "UserSafety.NotApprovedPage.UserID",
 	VoiceUserIDLayer = "UserSafety.Voice.UserID",
 	EconomyDeveloperMonetizationEdpVirtualProductsRanking = "Economy.DeveloperMonetization.EdpVirtualProductsRanking",
-	RMLayer = sharedFlagsModule.FStringRMLayer,
-	PlayerAppBadgesExposure = fStringLuaAppBadgesSeeAllIxpLayer,
-	PlayerAppDevStoreSeeAllExposure = fStringLuaAppDevStoreSeeAllSduiIxpLayer,
+	RMLayer = SharedFlagsModule.FStringRMLayer,
+	PlayerAppBadgesExposure = FStringLuaAppBadgesSeeAllIxpLayer,
+	PlayerAppDevStoreSeeAllExposure = FStringLuaAppDevStoreSeeAllSduiIxpLayer,
 	PartyConversationPage = "Party.ConversationPage",
 	PartyPartySheet = "Party.PartySheet",
 	PartyLandingPage = "Party.LandingPage",

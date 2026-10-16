@@ -1,42 +1,42 @@
-﻿local parent = script.Parent.Parent
-local dependenciesModule = require(parent.dependencies)
-local _ = require(parent.type)
-local toastNotificationHelperModule = require(parent.utils.toastNotificationHelper)
-local getNearestWholeNumber = toastNotificationHelperModule.getNearestWholeNumber
-local calculateTimeRemaining = toastNotificationHelperModule.calculateTimeRemaining
-local luauPolyfill = dependenciesModule.LuauPolyfill
-local react = dependenciesModule.React
-local clearInterval = luauPolyfill.clearInterval
-local setInterval = luauPolyfill.setInterval
+﻿local Parent = script.Parent.Parent
+local DependenciesModule = require(Parent.dependencies)
+local _ = require(Parent.type)
+local ToastNotificationHelperModule = require(Parent.utils.toastNotificationHelper)
+local GetNearestWholeNumberFunction = ToastNotificationHelperModule.getNearestWholeNumber
+local CalculateTimeRemainingFunction = ToastNotificationHelperModule.calculateTimeRemaining
+local LuauPolyfill = DependenciesModule.LuauPolyfill
+local React = DependenciesModule.React
+local ClearIntervalFunction = LuauPolyfill.clearInterval
+local SetIntervalFunction = LuauPolyfill.setInterval
 
-return function(value, p1)
-	-- upvalues: react (ref), getNearestWholeNumber (ref), calculateTimeRemaining (ref), setInterval (ref), clearInterval (ref)
-	local _, var1 = react.useState(0)
-	local t = {}
-	local var2 = true
+return function(List, p1) --[[ Line: 26 | Named "useTimeRemainingMap" ]]
+	-- upvalues: React (copy), GetNearestWholeNumberFunction (copy), CalculateTimeRemainingFunction (copy), SetIntervalFunction (copy), ClearIntervalFunction (copy)
+	local _, UseStateResult2 = React.useState(0)
+	local Largests = {}
+	local Flag = true
 	
-	for i, v in pairs(value) do
-		local var3 = getNearestWholeNumber(calculateTimeRemaining(v, p1.notificationReceivedTimestampMs, p1.displayTimestampMs) / 1000)
+	for i, value in pairs(List) do
+		local NearestWholeNumber: number = GetNearestWholeNumberFunction(CalculateTimeRemainingFunction(value, p1.notificationReceivedTimestampMs, p1.displayTimestampMs) / 1000)
 		
-		if var3 > 0 then
-			var2 = false
+		if NearestWholeNumber > 0 then
+			Flag = false
 		end
-		t[i] = math.max(0, var3)
+		Largests[i] = math.max(0, NearestWholeNumber)
 	end
-	react.useEffect(function()
-		-- upvalues: var2 (write), setInterval (copy), var1 (ref), clearInterval (copy)
-		local var4 = if not var2 then setInterval(function()
-			-- upvalues: var1 (copy)
-			var1(os.clock())
-		end, 100) else nil
+	React.useEffect(function() --[[ Line: 43 ]]
+		-- upvalues: Flag (ref), SetIntervalFunction (upval), UseStateResult2 (copy), ClearIntervalFunction (upval)
+		local SetIntervalResult = if Flag then nil else SetIntervalFunction(function() --[[ Line: 46 ]]
+			-- upvalues: UseStateResult2 (upval)
+			UseStateResult2(os.clock())
+		end, 100)
 		
-		return function()
-			-- upvalues: var4 (write), clearInterval (copy)
-			if var4 then
-				clearInterval(var4)
+		return function() --[[ Line: 51 ]]
+			-- upvalues: SetIntervalResult (ref), ClearIntervalFunction (upval)
+			if SetIntervalResult then
+				ClearIntervalFunction(SetIntervalResult)
 			end
 		end
-	end, { var2, var1 })
+	end, { Flag, UseStateResult2 })
 	
-	return t
+	return Largests
 end

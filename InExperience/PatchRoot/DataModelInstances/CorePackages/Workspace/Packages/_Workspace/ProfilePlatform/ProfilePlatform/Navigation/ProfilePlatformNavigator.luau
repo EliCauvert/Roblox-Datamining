@@ -1,94 +1,107 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local enumsModule = require(profilePlatform.Common.Enums)
-local setAliasModule = require(parent.SetAlias)
-local profileContextualMenuModule = require(profilePlatform.Components.ProfileContextualMenu)
-local editProfileLandingModule = require(parent.EditProfile.EditProfileLanding)
-local editDisplayNameErrorModalModule = require(parent.EditProfile.EditDisplayNameErrorModal)
-local usernameInsufficientFundsModalModule = require(parent.EditProfile.UsernameInsufficientFundsModal)
-local enumsModule_1 = require(parent.EditProfile.Enums)
-local profilePlatformViewAdaptorModule = require(profilePlatform.Components.ProfilePlatformViewAdaptor)
-local setAliasModal = setAliasModule.SetAliasModal
-local editProfileScreenViewAdapterModule = require(parent.EditProfile.EditProfileScreenViewAdapter)
-local editProfileToastScreenModule = require(parent.EditProfile.EditProfileToastScreen)
-local editProfileBackgroundContainerModule = require(profilePlatform.Components.EditProfileBackgroundContainer)
-local communityVerificationModalModule = require(profilePlatform.Components.CommunityVerificationModal)
-local inspectAvatarSheetContainerModule = require(profilePlatform.Components.InspectAvatar.InspectAvatarSheetContainer)
-local purchaseConfirmationModalModule = require(profilePlatform.Components.InspectAvatar.PurchaseConfirmationModal)
-local insufficientRobuxDialogModule = require(profilePlatform.Components.InspectAvatar.InsufficientRobuxDialog)
-local momentsGridPageModule = require(profilePlatform.Components.Moments.MomentsGridPage)
-local momentsFeedPageModule = require(profilePlatform.Components.Moments.MomentsFeedPage)
-local fFlagSocialEnableProfileInspectAndBuy = require(parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuy
-local fFlagProfilePlatformEnableMomentsModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableMoments)
-local reactModule = require(parent.React)
-local roactNavigationModule = require(parent.RoactNavigation)
-local fFlagEditProfileBackgroundEnabled = require(parent.SharedFlags).FFlagEditProfileBackgroundEnabled
-local fFlagEnableCommunityVerificationModalModule = require(profilePlatform.Flags.FFlagEnableCommunityVerificationModal)
-local fFlagEditProfileImageV2Enabled = require(parent.SharedFlags).FFlagEditProfileImageV2Enabled
-local fFlagAXEnableProfileTab = require(parent.SharedFlags).FFlagAXEnableProfileTab
-local fFlagAXHideBottomNavForEditProfileImage = require(parent.SharedFlags).FFlagAXHideBottomNavForEditProfileImage
-local fFlagEnableBottomNavOnMarketplace = require(parent.SharedFlags).FFlagEnableBottomNavOnMarketplace
-local fFlagAXSaveManagerOutsideAX = require(parent.SharedFlags).FFlagAXSaveManagerOutsideAX
-local t = {
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local EnumsModule1 = require(Parent.EditProfile.Enums)
+local EditProfileScreenViewAdapterModule = require(Parent.EditProfile.EditProfileScreenViewAdapter)
+local EditProfileToastScreenModule = require(Parent.EditProfile.EditProfileToastScreen)
+local EditProfileBackgroundContainerModule = require(ProfilePlatform.Components.EditProfileBackgroundContainer)
+local CommunityVerificationModalModule = require(ProfilePlatform.Components.CommunityVerificationModal)
+local InspectAvatarSheetContainerModule = require(ProfilePlatform.Components.InspectAvatar.InspectAvatarSheetContainer)
+local PurchaseConfirmationModalModule = require(ProfilePlatform.Components.InspectAvatar.PurchaseConfirmationModal)
+local InsufficientRobuxDialogModule = require(ProfilePlatform.Components.InspectAvatar.InsufficientRobuxDialog)
+local MomentsGridPageModule = require(ProfilePlatform.Components.Moments.MomentsGridPage)
+local MomentsFeedPageModule = require(ProfilePlatform.Components.Moments.MomentsFeedPage)
+local FFlagSocialEnableProfileInspectAndBuy = require(Parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuy
+local FFlagProfilePlatformEnableMomentsModule = require(ProfilePlatform.Flags.FFlagProfilePlatformEnableMoments)
+local ReactModule = require(Parent.React)
+local RoactNavigationModule = require(Parent.RoactNavigation)
+local FFlagEditProfileBackgroundEnabled = require(Parent.SharedFlags).FFlagEditProfileBackgroundEnabled
+local FFlagEditProfileImageV2Enabled = require(Parent.SharedFlags).FFlagEditProfileImageV2Enabled
+local FFlagAXEnableProfileTab = require(Parent.SharedFlags).FFlagAXEnableProfileTab
+local FFlagAXHideBottomNavForEditProfileImage = require(Parent.SharedFlags).FFlagAXHideBottomNavForEditProfileImage
+local FFlagEnableBottomNavOnMarketplace = require(Parent.SharedFlags).FFlagEnableBottomNavOnMarketplace
+local FFlagAXSaveManagerOutsideAX = require(Parent.SharedFlags).FFlagAXSaveManagerOutsideAX
+local NavigationOptions = {
 	overlayEnabled = true,
 	overlayTransparency = 0.5,
 	absorbInput = true
 }
-local t_1 = {
+local config = {
 	overlayEnabled = false,
 	absorbInput = true,
 	renderUnderlyingPage = true
 }
 
-local function _(p1, p2)
-	-- upvalues: t_1 (ref)
-	p2 = p2 or t_1
+local function _(p1, p2) --[[ Line: 57 | Named "makeFullBleedNavigationOptions" ]]
+	-- upvalues: config (copy)
+	local P1 = p2 or config
 	
-	return function(p3)
-		-- upvalues: p2 (ref), p1 (ref)
-		return if p3.navigation.getParam("fullBleed") then p2 else p1
+	return function(p3) --[[ Line: 62 ]]
+		-- upvalues: P1 (copy), p1 (copy)
+		return if p3.navigation.getParam("fullBleed") then P1 else p1
 	end
 end
 
-local function LazyEditProfileImageContainer(p1)
-	-- upvalues: profilePlatform (ref), reactModule (ref)
-	return reactModule.createElement(require(profilePlatform.Components.EditProfileImage.EditProfileImageContainer), p1)
+local function LazyEditProfileImageContainer(p1) --[[ Line: 72 ]]
+	-- upvalues: ProfilePlatform (copy), ReactModule (copy)
+	return ReactModule.createElement(require(ProfilePlatform.Components.EditProfileImage.EditProfileImageContainer), p1)
 end
 
-local t_2 = {}
-local t_3 = {
-	[enumsModule.Screens.ProfileMain] = profilePlatformViewAdaptorModule
+local List = {
+	{
+		[EnumsModule.Screens.ProfileMain] = require(ProfilePlatform.Components.ProfilePlatformViewAdaptor)
+	},
+	{
+		[EnumsModule.Screens.EditProfilePage] = {
+			screen = require(Parent.EditProfile.EditProfileLanding),
+			navigationOptions = if FFlagAXEnableProfileTab then function(p1) --[[ Line: 62 ]]
+				-- upvalues: config (copy), NavigationOptions (copy)
+				return if p1.navigation.getParam("fullBleed") then config else NavigationOptions
+			end else NavigationOptions
+		}
+	},
+	{
+		[EnumsModule.Screens.EditDisplayNameErrorModal] = {
+			screen = require(Parent.EditProfile.EditDisplayNameErrorModal),
+			navigationOptions = NavigationOptions
+		}
+	},
+	{
+		[EnumsModule.Screens.UsernameInsufficientFundsModal] = {
+			screen = require(Parent.EditProfile.UsernameInsufficientFundsModal),
+			navigationOptions = NavigationOptions
+		}
+	},
+	{
+		[EnumsModule.Screens.SetAliasModal] = {
+			screen = require(Parent.SetAlias).SetAliasModal,
+			navigationOptions = NavigationOptions
+		}
+	},
+	{
+		[EnumsModule.Screens.ContextualMenu] = {
+			screen = require(ProfilePlatform.Components.ProfileContextualMenu),
+			navigationOptions = {
+				overlayEnabled = true,
+				overlayTransparency = 1,
+				absorbInput = false
+			}
+		}
+	}
 }
-local t_4 = {}
-local editProfilePage = enumsModule.Screens.EditProfilePage
-local t_5 = { screen = editProfileLandingModule }
 
-if fFlagAXEnableProfileTab then
-	local var1 = t_1
-	
-	local var2 = function(p1)
-		-- upvalues: var1 (ref), t (ref)
-		return if p1.navigation.getParam("fullBleed") then var1 else t
-	end
-else
-	local var2 = t
-end
-t_5.navigationOptions = var2
-t_4[editProfilePage] = t_5
--- Unknown statement at pc 2: <SetList>
-
-if fFlagEnableCommunityVerificationModalModule then
-	table.insert(t_2, {
-		[enumsModule.Screens.CommunityVerificationModal] = {
-			screen = communityVerificationModalModule,
-			navigationOptions = t
+if require(ProfilePlatform.Flags.FFlagEnableCommunityVerificationModal) then
+	table.insert(List, {
+		[EnumsModule.Screens.CommunityVerificationModal] = {
+			screen = CommunityVerificationModalModule,
+			navigationOptions = NavigationOptions
 		}
 	})
 end
-if fFlagEditProfileBackgroundEnabled then
-	table.insert(t_2, {
-		[enumsModule.Screens.EditProfileBackground] = {
-			screen = editProfileBackgroundContainerModule,
+if FFlagEditProfileBackgroundEnabled then
+	table.insert(List, {
+		[EnumsModule.Screens.EditProfileBackground] = {
+			screen = EditProfileBackgroundContainerModule,
 			navigationOptions = {
 				overlayEnabled = false,
 				absorbInput = true,
@@ -97,35 +110,34 @@ if fFlagEditProfileBackgroundEnabled then
 		}
 	})
 end
-local t_6 = {}
-local editProfileSubScreen = enumsModule_1.Screens.EditProfileSubScreen
-local t_7 = { screen = editProfileScreenViewAdapterModule }
+local t = {}
+local EditProfileSubScreen = EnumsModule1.Screens.EditProfileSubScreen
+local config1 = { screen = EditProfileScreenViewAdapterModule }
 
-if fFlagAXEnableProfileTab then
-	local t_8 = {
+if FFlagAXEnableProfileTab then
+	local config2 = {
 		overlayEnabled = true,
 		overlayTransparency = 0.5,
 		absorbInput = false
 	}
-	local var3 = t_1
 	
-	local var4 = function(p1)
-		-- upvalues: var3 (ref), t_8 (ref)
-		return if p1.navigation.getParam("fullBleed") then var3 else t_8
+	local function NavigationOptions1(p1) --[[ Line: 62 ]]
+		-- upvalues: config (copy), config2 (copy)
+		return if p1.navigation.getParam("fullBleed") then config else config2
 	end
 else
-	local var4 = {
+	local NavigationOptions1: (any) -> any = {
 		overlayEnabled = true,
 		overlayTransparency = 0.5,
 		absorbInput = false
 	}
 end
-t_7.navigationOptions = var4
-t_6[editProfileSubScreen] = t_7
-table.insert(t_2, t_6)
-table.insert(t_2, {
-	[enumsModule_1.Screens.EditProfileToast] = {
-		screen = editProfileToastScreenModule,
+config1.navigationOptions = NavigationOptions1
+t[EditProfileSubScreen] = config1
+table.insert(List, t)
+table.insert(List, {
+	[EnumsModule1.Screens.EditProfileToast] = {
+		screen = EditProfileToastScreenModule,
 		navigationOptions = {
 			overlayEnabled = true,
 			overlayTransparency = 1,
@@ -134,45 +146,45 @@ table.insert(t_2, {
 	}
 })
 
-if fFlagEditProfileImageV2Enabled then
-	local var5 = if fFlagAXHideBottomNavForEditProfileImage and fFlagEnableBottomNavOnMarketplace then false else nil
-	local t_8 = {
+if FFlagEditProfileImageV2Enabled then
+	local TabBarVisible = (not FFlagAXHideBottomNavForEditProfileImage or not FFlagEnableBottomNavOnMarketplace) and nil
+	local config3 = {
 		overlayEnabled = true,
 		overlayTransparency = 1,
 		absorbInput = true,
-		tabBarVisible = var5
+		tabBarVisible = TabBarVisible
 	}
-	local t_9 = {
+	local config4 = {
 		overlayEnabled = false,
 		absorbInput = true,
 		renderUnderlyingPage = true,
-		tabBarVisible = var5
+		tabBarVisible = TabBarVisible
 	}
-	local t_10 = {}
-	local editProfileImageProfilePlatform = enumsModule_1.Screens.EditProfileImageProfilePlatform
-	local t_11 = {
+	local t1 = {}
+	local EditProfileImageProfilePlatform = EnumsModule1.Screens.EditProfileImageProfilePlatform
+	local config5 = {
 		screen = LazyEditProfileImageContainer,
-		params = if fFlagAXSaveManagerOutsideAX then { runAvatarSaveManager = true } else nil
+		params = if FFlagAXSaveManagerOutsideAX then { runAvatarSaveManager = true } else nil
 	}
 	
-	if fFlagAXEnableProfileTab then
-		local t_9_1 = t_9 or t_1
+	if FFlagAXEnableProfileTab then
+		local Config4 = config4 or config
 		
-		local var6 = function(p1)
-			-- upvalues: t_9_1 (ref), t_8 (ref)
-			return if p1.navigation.getParam("fullBleed") then t_9_1 else t_8
+		local function NavigationOptions2(p1) --[[ Line: 62 ]]
+			-- upvalues: Config4 (copy), config3 (copy)
+			return if p1.navigation.getParam("fullBleed") then Config4 else config3
 		end
 	else
-		local var6 = t_8
+		local NavigationOptions2: (any) -> any = config3
 	end
-	t_11.navigationOptions = var6
-	t_10[editProfileImageProfilePlatform] = t_11
-	table.insert(t_2, t_10)
+	config5.navigationOptions = NavigationOptions2
+	t1[EditProfileImageProfilePlatform] = config5
+	table.insert(List, t1)
 end
-if fFlagSocialEnableProfileInspectAndBuy then
-	table.insert(t_2, {
-		[enumsModule.Screens.InspectAvatarSheet] = {
-			screen = inspectAvatarSheetContainerModule,
+if FFlagSocialEnableProfileInspectAndBuy then
+	table.insert(List, {
+		[EnumsModule.Screens.InspectAvatarSheet] = {
+			screen = InspectAvatarSheetContainerModule,
 			navigationOptions = {
 				overlayEnabled = true,
 				overlayTransparency = 1,
@@ -180,23 +192,23 @@ if fFlagSocialEnableProfileInspectAndBuy then
 			}
 		}
 	})
-	table.insert(t_2, {
-		[enumsModule.Screens.PurchaseConfirmationModal] = {
-			screen = purchaseConfirmationModalModule,
-			navigationOptions = t
+	table.insert(List, {
+		[EnumsModule.Screens.PurchaseConfirmationModal] = {
+			screen = PurchaseConfirmationModalModule,
+			navigationOptions = NavigationOptions
 		}
 	})
-	table.insert(t_2, {
-		[enumsModule.Screens.InsufficientRobuxDialog] = {
-			screen = insufficientRobuxDialogModule,
-			navigationOptions = t
+	table.insert(List, {
+		[EnumsModule.Screens.InsufficientRobuxDialog] = {
+			screen = InsufficientRobuxDialogModule,
+			navigationOptions = NavigationOptions
 		}
 	})
 end
-if fFlagProfilePlatformEnableMomentsModule then
-	table.insert(t_2, {
-		[enumsModule.Screens.MomentsAll] = {
-			screen = momentsGridPageModule,
+if FFlagProfilePlatformEnableMomentsModule then
+	table.insert(List, {
+		[EnumsModule.Screens.MomentsAll] = {
+			screen = MomentsGridPageModule,
 			navigationOptions = {
 				overlayEnabled = false,
 				absorbInput = true,
@@ -204,19 +216,19 @@ if fFlagProfilePlatformEnableMomentsModule then
 			}
 		}
 	})
-	table.insert(t_2, {
-		[enumsModule.Screens.MomentsFeed] = {
-			screen = momentsFeedPageModule,
+	table.insert(List, {
+		[EnumsModule.Screens.MomentsFeed] = {
+			screen = MomentsFeedPageModule,
 			navigationOptions = { overlayEnabled = false, absorbInput = true }
 		}
 	})
 end
-return roactNavigationModule.createRobloxStackNavigator(t_2, {
+return (RoactNavigationModule.createRobloxStackNavigator(List, {
 	defaultNavigationOptions = {
 		overlayEnabled = true,
 		absorbInput = true,
 		overlayTransparency = 1,
 		disableBackButton = true
 	},
-	mode = roactNavigationModule.StackPresentationStyle.Overlay
-})
+	mode = RoactNavigationModule.StackPresentationStyle.Overlay
+}))

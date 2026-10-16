@@ -1,23 +1,23 @@
-﻿local avatarEditorService = game:GetService("AvatarEditorService")
-local playersService = game:GetService("Players")
+﻿local AvatarEditorService = game:GetService("AvatarEditorService")
+local Players = game:GetService("Players")
 
-return if require(script.Parent.Parent.Flags.FFlagTopBarDeprecateRespawnRodux) then nil else function(p1)
-	-- upvalues: avatarEditorService (ref), playersService (ref)
-	local state = p1:getState()
-	avatarEditorService:BustAvatarFetchCache()
+return if require(script.Parent.Parent.Flags.FFlagTopBarDeprecateRespawnRodux) then nil else function(p1) --[[ Line: 13 ]]
+	-- upvalues: AvatarEditorService (copy), Players (copy)
+	local State = p1:getState()
+	AvatarEditorService:BustAvatarFetchCache()
 	
-	if state.respawn.customCallback then
-		state.respawn.customCallback:Fire()
+	if State.respawn.customCallback then
+		State.respawn.customCallback:Fire()
 		
 		return
 	end
-	local character = playersService.LocalPlayer.Character
+	local Character = Players.LocalPlayer.Character
 	
-	if character ~= nil then
-		local humanoid = character:FindFirstChild("Humanoid")
+	if Character ~= nil then
+		local Humanoid = Character:FindFirstChild("Humanoid")
 		
-		if humanoid ~= nil and humanoid:IsA("Humanoid") then
-			humanoid.Health = 0
+		if Humanoid ~= nil and Humanoid:IsA("Humanoid") then
+			Humanoid.Health = 0
 		end
 	end
 end

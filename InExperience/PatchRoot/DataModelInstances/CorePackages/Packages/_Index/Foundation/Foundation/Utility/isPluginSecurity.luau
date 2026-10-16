@@ -1,12 +1,12 @@
-﻿local wrappersModule = require(script:FindFirstAncestor("Foundation").Utility.Wrappers)
+﻿local WrappersModule = require(script:FindFirstAncestor("Foundation").Utility.Wrappers)
 
-return function()
-	-- upvalues: wrappersModule (ref)
-	local coreGui = wrappersModule.Services.CoreGui
-	local ok, _ = pcall(function()
-		-- upvalues: coreGui (ref)
-		local _ = coreGui:GetChildren()
+return function() --[[ Line: 4 | Named "isPluginSecurity" ]]
+	-- upvalues: WrappersModule (copy)
+	local CoreGui = WrappersModule.Services.CoreGui
+	local Success, _ = pcall(function() --[[ Line: 6 ]]
+		-- upvalues: CoreGui (copy)
+		local _ = CoreGui:GetChildren()
 	end)
 	
-	return ok
+	return Success
 end

@@ -1,164 +1,173 @@
-﻿local identityVerification = script:FindFirstAncestor("IdentityVerification")
-local parent = identityVerification.Parent
-local httpService = game:GetService("HttpService")
-local urlBuilder = require(parent.UrlBuilder).UrlBuilder
-local urlBase = require(parent.UrlBuilder).UrlBase
-local fetchModule = require(parent.Fetch)
-local promiseModule = require(parent.Promise)
-local fetch = fetchModule.fetch
-local response = fetchModule.Response
-local cryoModule = require(parent.Cryo)
-local universalFeatureRestrictionsModule = require(parent.UniversalFeatureRestrictions)
-local showFeatureRestriction = universalFeatureRestrictionsModule.showFeatureRestriction
-local abuseVector = universalFeatureRestrictionsModule.AbuseVector
-local buildAgeVerificationFeatureRestrictionOverridesModule = require(identityVerification.Utils.buildAgeVerificationFeatureRestrictionOverrides)
-local fFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule = require(identityVerification.Flags.FFlagEnableFeatureRestrictionOnAgeVerificationAttempt)
-local var1 = urlBuilder.new({
+﻿local IdentityVerification = script:FindFirstAncestor("IdentityVerification")
+local Parent = IdentityVerification.Parent
+local HttpService = game:GetService("HttpService")
+local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
+local UrlBase = require(Parent.UrlBuilder).UrlBase
+local FetchModule = require(Parent.Fetch)
+local PromiseModule = require(Parent.Promise)
+local FetchFunction = FetchModule.fetch
+local Response = FetchModule.Response
+local CryoModule = require(Parent.Cryo)
+local UniversalFeatureRestrictionsModule = require(Parent.UniversalFeatureRestrictions)
+local ShowFeatureRestrictionFunction = UniversalFeatureRestrictionsModule.showFeatureRestriction
+local AbuseVector = UniversalFeatureRestrictionsModule.AbuseVector
+local BuildAgeVerificationFeatureRestrictionOverridesModule = require(IdentityVerification.Utils.buildAgeVerificationFeatureRestrictionOverrides)
+local FFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule = require(IdentityVerification.Flags.FFlagEnableFeatureRestrictionOnAgeVerificationAttempt)
+local NewUrlBuilder = UrlBuilder.new({
 	path = "age-verification-service/v1/persona-id-verification/verified-status",
-	base = urlBase.APIS,
+	base = UrlBase.APIS,
 	query = { token = "{token}" }
 })
-local var2 = urlBuilder.new({
+local NewUrlBuilder1 = UrlBuilder.new({
 	path = "age-verification-service/v1/persona-id-verification/start-verification",
-	base = urlBase.APIS
+	base = UrlBase.APIS
 })
-local var3 = urlBuilder.new({
+local v1 = UrlBuilder.new({
 	path = "age-verification-service/v1/persona-id-verification/start-liveness-verification",
-	base = urlBase.APIS
+	base = UrlBase.APIS
 })()
 
-local function _(p1)
+local function _(p1) --[[ Line: 46 | Named "getHttpStatusFromWrappedNetworkingError" ]]
 	return if type(p1) == "table" then p1.StatusCode or (p1.responseCode or (p1.status or p1.statusCode)) else nil
 end
 
-local _ = function(p1)
-	-- upvalues: fFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule (ref), showFeatureRestriction (ref), abuseVector (ref), buildAgeVerificationFeatureRestrictionOverridesModule (ref)
-	if fFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule and p1 == 403 then
-		showFeatureRestriction(abuseVector.AgeVerification, buildAgeVerificationFeatureRestrictionOverridesModule())
+local _ = function(p1) --[[ Line: 59 | Named "maybeShowAgeVerificationFeatureRestriction" ]]
+	-- upvalues: FFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule (copy), ShowFeatureRestrictionFunction (copy), AbuseVector (copy), BuildAgeVerificationFeatureRestrictionOverridesModule (copy)
+	if FFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule and p1 == 403 then
+		ShowFeatureRestrictionFunction(AbuseVector.AgeVerification, BuildAgeVerificationFeatureRestrictionOverridesModule())
 		
 		return
 	end
 end
 
-local function startVerification(p1, p2)
-	-- upvalues: var2 (ref), var3 (ref), fetch (ref), promiseModule (ref), httpService (ref), cryoModule (ref), response (ref), fFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule (ref), showFeatureRestriction (ref), abuseVector (ref), buildAgeVerificationFeatureRestrictionOverridesModule (ref)
-	p2 = p2 or var2()
-	local var4 = p2 ~= var3
+local function startVerification(p1, p2) --[[ Line: 152 ]]
+	-- upvalues: NewUrlBuilder1 (copy), v1 (copy), FetchFunction (copy), PromiseModule (copy), HttpService (copy), CryoModule (copy), Response (copy), FFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule (copy), ShowFeatureRestrictionFunction (copy), AbuseVector (copy), BuildAgeVerificationFeatureRestrictionOverridesModule (copy)
+	local P6 = p2 or NewUrlBuilder1()
+	local IsNotPMatch = P6 ~= v1
 	
-	return promiseModule.new(function(p3, p4)
-		-- upvalues: fetch (ref), p2 (ref), httpService (copy), cryoModule (copy), p1 (ref), response (copy), var4 (ref), fFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule (copy), showFeatureRestriction (copy), abuseVector (copy), buildAgeVerificationFeatureRestrictionOverridesModule (copy)
-		local var5 = fetch(p2, {
+	return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ()) --[[ Line: 157 ]]
+		-- upvalues: FetchFunction (copy), P6 (copy), HttpService (upval), CryoModule (upval), p1 (copy), Response (upval), IsNotPMatch (copy), FFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule (upval), ShowFeatureRestrictionFunction (upval), AbuseVector (upval), BuildAgeVerificationFeatureRestrictionOverridesModule (upval)
+		local v2 = FetchFunction(P6, {
 			method = "POST",
-			body = httpService:JSONEncode(cryoModule.Dictionary.join({ generatedLink = true }, p1 or {})),
+			body = HttpService:JSONEncode(CryoModule.Dictionary.join({ generatedLink = true }, p1 or {})),
 			headers = {
 				["Content-Type"] = "application/json",
 				Accept = "application/json"
 			}
-		}):catch(function()
-			-- upvalues: response (copy)
-			return response.error()
+		}):catch(function() --[[ Line: 166 ]]
+			-- upvalues: Response (upval)
+			return Response.error()
 		end):expect()
 		
-		if var5.ok then
-			local var6 = var5:json():catch(function()
+		if v2.ok then
+			local v3 = v2:json():catch(function() --[[ Line: 182 ]]
 				return nil
 			end):expect()
 			
-			if var6 then
-				p3({
-					emailSent = var6.emailSent,
-					sessionIdentifier = var6.sessionIdentifier,
-					daysUntilNextVerification = var6.daysUntilNextVerification,
-					verificationLink = var6.verificationLink,
-					sessionToken = var6.sessionToken
+			if v3 then
+				Callback1({
+					emailSent = v3.emailSent,
+					sessionIdentifier = v3.sessionIdentifier,
+					daysUntilNextVerification = v3.daysUntilNextVerification,
+					verificationLink = v3.verificationLink,
+					sessionToken = v3.sessionToken
 				})
 				
 				return
+			else
+				Callback("Failed to decode HTTP response as JSON for IDV Verification")
+				
+				return
 			end
-			p4("Failed to decode HTTP response as JSON for IDV Verification")
-			
-			return
-		elseif var4 then
-			if fFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule and var5.status == 403 then
-				showFeatureRestriction(abuseVector.AgeVerification, buildAgeVerificationFeatureRestrictionOverridesModule())
+		else
+			if IsNotPMatch then
+				local Status = v2.status
+				
+				if FFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule and Status == 403 then
+					ShowFeatureRestrictionFunction(AbuseVector.AgeVerification, BuildAgeVerificationFeatureRestrictionOverridesModule())
+				end
 			end
+			Callback(string.format("Got start-verification HTTP Response: %d", v2.status))
 		end
-		p4(string.format("Got start-verification HTTP Response: %d", var5.status))
 	end)
 end
 
 return {
 	startVerification = startVerification,
-	startVerificationWithWrappedNetworking = function(p1, p2)
-		-- upvalues: promiseModule (ref), var2 (ref), cryoModule (ref), httpService (ref), fFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule (ref), showFeatureRestriction (ref), abuseVector (ref), buildAgeVerificationFeatureRestrictionOverridesModule (ref)
-		return promiseModule.new(function(p3, p4)
-			-- upvalues: var2 (copy), cryoModule (copy), p2 (ref), p1 (ref), httpService (copy), fFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule (copy), showFeatureRestriction (copy), abuseVector (copy), buildAgeVerificationFeatureRestrictionOverridesModule (copy)
-			p1(var2(), "POST", {
-				postBody = httpService:JSONEncode(cryoModule.Dictionary.join({ generatedLink = true }, p2 or {}))
-			}):catch(function(p5)
-				-- upvalues: fFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule (copy), showFeatureRestriction (copy), abuseVector (copy), buildAgeVerificationFeatureRestrictionOverridesModule (copy), p4 (ref)
-				if fFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule and (if type(p5) == "table" then p5.StatusCode or (p5.responseCode or (p5.status or p5.statusCode)) else nil) == 403 then
-					showFeatureRestriction(abuseVector.AgeVerification, buildAgeVerificationFeatureRestrictionOverridesModule())
+	startVerificationWithWrappedNetworking = function(Callback, p1) --[[ Line: 114 ]]
+		-- upvalues: PromiseModule (copy), NewUrlBuilder1 (copy), CryoModule (copy), HttpService (copy), FFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule (copy), ShowFeatureRestrictionFunction (copy), AbuseVector (copy), BuildAgeVerificationFeatureRestrictionOverridesModule (copy)
+		return PromiseModule.new(function(Callback2, Callback1) --[[ Line: 115 ]]
+			-- upvalues: NewUrlBuilder1 (upval), CryoModule (upval), p1 (copy), Callback (copy), HttpService (upval), FFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule (upval), ShowFeatureRestrictionFunction (upval), AbuseVector (upval), BuildAgeVerificationFeatureRestrictionOverridesModule (upval)
+			Callback(NewUrlBuilder1(), "POST", {
+				postBody = HttpService:JSONEncode((CryoModule.Dictionary.join({ generatedLink = true }, p1 or {})))
+			}):catch(function(Err) --[[ Line: 123 ]]
+				-- upvalues: FFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule (upval), ShowFeatureRestrictionFunction (upval), AbuseVector (upval), BuildAgeVerificationFeatureRestrictionOverridesModule (upval), Callback1 (copy)
+				local StatusCode = if type(Err) == "table" then Err.StatusCode or (Err.responseCode or (Err.status or Err.statusCode)) else nil
+				
+				if FFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule and StatusCode == 403 then
+					ShowFeatureRestrictionFunction(AbuseVector.AgeVerification, BuildAgeVerificationFeatureRestrictionOverridesModule())
 				end
-				p4("Got error on start-verificatin")
-			end):andThen(function(p5)
-				-- upvalues: p4 (ref), p3 (ref)
-				if not p5 or not p5[1] then
-					p4("Got start-verification HTTP with no valid response")
+				Callback1("Got error on start-verificatin")
+			end):andThen(function(Entry) --[[ Line: 129 ]]
+				-- upvalues: Callback1 (copy), Callback2 (copy)
+				if not Entry or not Entry[1] then
+					Callback1("Got start-verification HTTP with no valid response")
 					
 					return
 				end
-				local var4 = p5[1]
+				local Entry1 = Entry[1]
 				
-				if var4 then
-					p3({
-						emailSent = var4.emailSent,
-						sessionIdentifier = var4.sessionIdentifier,
-						daysUntilNextVerification = var4.daysUntilNextVerification,
-						verificationLink = var4.verificationLink,
-						sessionToken = var4.sessionToken
+				if Entry1 then
+					Callback2({
+						emailSent = Entry1.emailSent,
+						sessionIdentifier = Entry1.sessionIdentifier,
+						daysUntilNextVerification = Entry1.daysUntilNextVerification,
+						verificationLink = Entry1.verificationLink,
+						sessionToken = Entry1.sessionToken
 					})
 					
 					return
+				else
+					Callback1("Failed to decode HTTP response as JSON for IDV Verification")
 				end
-				p4("Failed to decode HTTP response as JSON for IDV Verification")
 			end)
 		end)
 	end,
-	startLivenessVerification = function(p1)
-		-- upvalues: startVerification (ref), var3 (ref)
-		return startVerification(p1, var3)
+	startLivenessVerification = function(p1) --[[ Line: 203 ]]
+		-- upvalues: startVerification (copy), v1 (copy)
+		return startVerification(p1, v1)
 	end,
-	getVerifiedStatus = function(p1)
-		-- upvalues: fetch (ref), promiseModule (ref), var1 (ref), response (ref)
-		return promiseModule.new(function(p2, p3)
-			-- upvalues: var1 (copy), p1 (ref), fetch (ref), response (copy)
-			local var4 = fetch(var1({ token = p1 }), { method = "GET" }):catch(function()
-				-- upvalues: response (copy)
-				return response.error()
+	getVerifiedStatus = function(Token) --[[ Line: 71 ]]
+		-- upvalues: FetchFunction (copy), PromiseModule (copy), NewUrlBuilder (copy), Response (copy)
+		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ()) --[[ Line: 73 ]]
+			-- upvalues: NewUrlBuilder (upval), Token (copy), FetchFunction (copy), Response (upval)
+			local v2 = FetchFunction(NewUrlBuilder({ token = Token }), { method = "GET" }):catch(function() --[[ Line: 76 ]]
+				-- upvalues: Response (upval)
+				return Response.error()
 			end):expect()
 			
-			if not var4.ok then
-				p3(string.format("Got verified-status verification HTTP Response: %d", var4.status))
+			if not v2.ok then
+				Callback(string.format("Got verified-status verification HTTP Response: %d", v2.status))
 				
 				return
 			end
-			local var5 = var4:json():catch(function()
+			local v3 = v2:json():catch(function() --[[ Line: 90 ]]
 				return nil
 			end):expect()
 			
-			if var5 then
-				p2({
-					isPending = var5.isPending,
-					sessionStatus = var5.sessionStatus,
-					sessionErrorCode = var5.sessionErrorCode,
-					isVerified = var5.isVerified,
-					ageEstimationNextStep = var5.ageEstimationNextStep
+			if v3 then
+				Callback1({
+					isPending = v3.isPending,
+					sessionStatus = v3.sessionStatus,
+					sessionErrorCode = v3.sessionErrorCode,
+					isVerified = v3.isVerified,
+					ageEstimationNextStep = v3.ageEstimationNextStep
 				})
 				
 				return
+			else
+				Callback("Failed to decode HTTP response as JSON for get IDV Verification status")
 			end
-			p3("Failed to decode HTTP response as JSON for get IDV Verification status")
 		end)
 	end
 }

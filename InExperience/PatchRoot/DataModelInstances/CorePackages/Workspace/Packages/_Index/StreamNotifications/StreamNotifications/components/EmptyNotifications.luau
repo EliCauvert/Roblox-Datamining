@@ -1,43 +1,43 @@
-﻿local streamNotifications = script:FindFirstAncestor("StreamNotifications")
-local parent = streamNotifications.Parent
-local constantsModule = require(streamNotifications.constants)
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useStyle = require(parent.UIBlox).Core.Style.useStyle
-local useTokens = foundationModule.Hooks.useTokens
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
+﻿local StreamNotifications = script:FindFirstAncestor("StreamNotifications")
+local Parent = StreamNotifications.Parent
+local ConstantsModule = require(StreamNotifications.constants)
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseStyleFunction = require(Parent.UIBlox).Core.Style.useStyle
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 
-return function()
-	-- upvalues: useStyle (ref), foundationFontFaceMigration (ref), useTokens (ref), normalizeFontFace (ref), useLocalization (ref), constantsModule (ref), reactModule (ref)
-	local var1 = useStyle()
-	local var2 = if foundationFontFaceMigration then useTokens() else nil
-	local font = var1.Font
-	local var3 = useLocalization({ emptyText = constantsModule.Text.EmptyKey })
+return function() --[[ Line: 15 ]]
+	-- upvalues: UseStyleFunction (copy), FoundationFontFaceMigration (copy), UseTokensFunction (copy), NormalizeFontFaceFunction (copy), UseLocalizationFunction (copy), ConstantsModule (copy), ReactModule (copy)
+	local UseStyleResult = UseStyleFunction()
+	local UseTokensResult = if FoundationFontFaceMigration then UseTokensFunction() else nil
+	local UseStyleResultFont = UseStyleResult.Font
+	local UseLocalizationResult = UseLocalizationFunction({ emptyText = ConstantsModule.Text.EmptyKey })
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		AutomaticSize = Enum.AutomaticSize.XY,
 		Position = UDim2.new(0.5, 0, 0.5, 0),
 		AnchorPoint = Vector2.new(0.5, 0.5)
 	}, {
-		UIListLayout = reactModule.createElement("UIListLayout", {
+		UIListLayout = ReactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
-			Padding = UDim.new(0, constantsModule.DefaultPadding)
+			Padding = UDim.new(0, ConstantsModule.DefaultPadding)
 		}),
-		reactModule.createElement("TextLabel", {
+		ReactModule.createElement("TextLabel", {
 			LayoutOrder = 2,
 			BackgroundTransparency = 1,
-			Text = var3 and var3.emptyText,
-			Font = if foundationFontFaceMigration then nil else font.Header1.Font,
-			FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Typography.TitleLarge.Font) else nil,
-			TextSize = if foundationFontFaceMigration then var2.Typography.TitleLarge.FontSize else font.BaseSize,
-			TextColor3 = var1.Theme.TextDefault.Color,
-			Size = UDim2.new(1, 0, 0, constantsModule.EmptyNotifications.LabelHeight)
+			Text = UseLocalizationResult and UseLocalizationResult.emptyText,
+			Font = if FoundationFontFaceMigration then nil else UseStyleResultFont.Header1.Font,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.TitleLarge.Font) else nil,
+			TextSize = if FoundationFontFaceMigration then UseTokensResult.Typography.TitleLarge.FontSize else UseStyleResultFont.BaseSize,
+			TextColor3 = UseStyleResult.Theme.TextDefault.Color,
+			Size = UDim2.new(1, 0, 0, ConstantsModule.EmptyNotifications.LabelHeight)
 		})
 	})
 end

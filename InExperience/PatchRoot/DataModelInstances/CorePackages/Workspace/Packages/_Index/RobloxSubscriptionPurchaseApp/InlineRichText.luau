@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.InlineRichText.InlineRichText)
+﻿return (require(script.Parent.Parent.Parent._Index.InlineRichText.InlineRichText))

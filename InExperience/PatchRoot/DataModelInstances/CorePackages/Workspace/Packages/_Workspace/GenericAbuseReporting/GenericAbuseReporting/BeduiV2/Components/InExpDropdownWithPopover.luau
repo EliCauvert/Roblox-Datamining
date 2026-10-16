@@ -1,128 +1,130 @@
-﻿local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
-local parent = genericAbuseReporting.Parent
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local foundationModule = require(parent.Foundation)
-local inputHandlersModule = require(parent.InputHandlers)
-local reactModule = require(parent.React)
-local _ = require(parent.ReactFocusNavigation)
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
-local focusRoot = focusNavigationUtilsModule.FocusRoot
-local icon = foundationModule.Icon
-local iconName = foundationModule.Enums.IconName
-local popover = foundationModule.Popover
-local popoverAlign = foundationModule.Enums.PopoverAlign
-local popoverSide = foundationModule.Enums.PopoverSide
-local radius = foundationModule.Enums.Radius
-local text = foundationModule.Text
-local view = foundationModule.View
-local sideModalDropdownButtonModule = require(genericAbuseReporting.Common.SideModalDropdownButton)
-local t = { offset = 5, position = popoverSide.Bottom }
+﻿local GenericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
+local Parent = GenericAbuseReporting.Parent
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local FoundationModule = require(Parent.Foundation)
+local InputHandlersModule = require(Parent.InputHandlers)
+local ReactModule = require(Parent.React)
+local _ = require(Parent.ReactFocusNavigation)
+local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
+local FocusRoot = FocusNavigationUtilsModule.FocusRoot
+local Icon = FoundationModule.Icon
+local IconName = FoundationModule.Enums.IconName
+local Popover = FoundationModule.Popover
+local PopoverAlign = FoundationModule.Enums.PopoverAlign
+local Radius = FoundationModule.Enums.Radius
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local SideModalDropdownButtonModule = require(GenericAbuseReporting.Common.SideModalDropdownButton)
+local Side = {
+	offset = 5,
+	position = FoundationModule.Enums.PopoverSide.Bottom
+}
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), view (ref), text (ref), icon (ref), iconName (ref), popover (ref), sideModalDropdownButtonModule (ref), popoverAlign (ref), t (ref), radius (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
-	local var1, var2 = reactModule.useState(false)
-	local var3 = reactModule.useRef(nil)
-	local var4, var5 = reactModule.useState(0)
-	local onOpenChange = p1.onOpenChange
-	local var6 = reactModule.useCallback(function(p2)
-		-- upvalues: onOpenChange (ref), var2 (ref)
-		if onOpenChange then
-			onOpenChange(p2)
+return ReactModule.memo(function(Frame) --[[ Line: 57 | Named "InExpDropdownWithPopover" ]]
+	-- upvalues: ReactModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), View (copy), Text (copy), Icon (copy), IconName (copy), Popover (copy), SideModalDropdownButtonModule (copy), PopoverAlign (copy), Side (copy), Radius (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(0)
+	local OnOpenChangeFunction = Frame.onOpenChange
+	local UseResult = ReactModule.useCallback(function(p1) --[[ Line: 67 ]]
+		-- upvalues: OnOpenChangeFunction (copy), UseStateResult2 (copy)
+		if OnOpenChangeFunction then
+			OnOpenChangeFunction(p1)
 		end
-		var2(p2)
-	end, { onOpenChange })
-	local var7 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref)
-		if p1.value == nil then
+		UseStateResult2(p1)
+	end, { OnOpenChangeFunction })
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 74 ]]
+		-- upvalues: Frame (copy)
+		if Frame.value == nil then
 			return nil
 		end
-		for i, v in p1.items do
-			if v.id == p1.value then
-				return v
+		for _, item in Frame.items do
+			if item.id == Frame.value then
+				return item
 			end
 		end
 		return nil
-	end, { p1.items, p1.value })
-	local var8 = reactModule.useCallback(function()
-		-- upvalues: var6 (ref), var1 (ref)
-		var6(not var1)
-	end, { var1, var6 })
-	local var9 = reactModule.useCallback(function()
-		-- upvalues: var6 (ref)
-		var6(false)
-	end, { var6 })
-	local var10 = reactModule.useMemo(function()
-		-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), var9 (ref)
-		return {
-			[focusNavigationEventNameEnum.NavigateBack] = { handler = inputHandlersModule.onRelease(var9) }
-		}
-	end, { var9 })
-	local var11 = if var7 then var7.text else p1.placeholder or ""
-	local items = p1.items
-	local onItemChanged = p1.onItemChanged
-	local value = p1.value
+	end, { Frame.items, Frame.value })
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 90 ]]
+		-- upvalues: UseResult (copy)
+		UseResult(false)
+	end, { UseResult })
+	local Items = Frame.items
+	local OnItemChangedFunction = Frame.onItemChanged
+	local Value = Frame.value
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "size-full-0 auto-y padding-top-xxsmall",
-		ref = var3,
-		onAbsoluteSizeChanged = function(value)
-			-- upvalues: var5 (ref)
-			var5(value.AbsoluteSize.X)
+		ref = UseRefResult,
+		onAbsoluteSizeChanged = function(Frame) --[[ Line: 145 ]]
+			-- upvalues: UseStateResult2_1 (copy)
+			UseStateResult2_1(Frame.AbsoluteSize.X)
 		end,
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Popover = reactModule.createElement(popover.Root, { isOpen = var1 }, {
-			Trigger = reactModule.createElement(sideModalDropdownButtonModule, { onActivated = var8, text = var11 }),
-			Anchor = reactModule.createElement(popover.Anchor, { anchorRef = var3 }),
-			Menu = reactModule.createElement(popover.Content, {
+		Popover = ReactModule.createElement(Popover.Root, { isOpen = UseStateResult }, {
+			Trigger = ReactModule.createElement(SideModalDropdownButtonModule, {
+				onActivated = ReactModule.useCallback(function() --[[ Line: 86 ]]
+					-- upvalues: UseResult (copy), UseStateResult (copy)
+					UseResult(not UseStateResult)
+				end, { UseStateResult, UseResult }),
+				text = if UseMemoResult then UseMemoResult.text else Frame.placeholder or ""
+			}),
+			Anchor = ReactModule.createElement(Popover.Anchor, { anchorRef = UseRefResult }),
+			Menu = ReactModule.createElement(Popover.Content, {
 				hasArrow = false,
-				align = popoverAlign.End,
-				side = t,
-				onPressedOutside = var9,
-				radius = radius.Medium
-			}, reactModule.createElement(focusRoot, {
-				surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.ModerationOverlay,
-				isFocusable = var1,
-				isAutoFocusRoot = var1,
-				isIsolated = var1,
-				eventHandlers = var10
+				align = PopoverAlign.End,
+				side = Side,
+				onPressedOutside = UseResult1,
+				radius = Radius.Medium
+			}, ReactModule.createElement(FocusRoot, {
+				surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.ModerationOverlay,
+				isFocusable = UseStateResult,
+				isAutoFocusRoot = UseStateResult,
+				isIsolated = UseStateResult,
+				eventHandlers = ReactModule.useMemo(function() --[[ Line: 94 ]]
+					-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), UseResult1 (copy)
+					return {
+						[FocusNavigationEventNameEnum.NavigateBack] = { handler = InputHandlersModule.onRelease(UseResult1) }
+					}
+				end, { UseResult1 })
 			}, {
-				Menu = reactModule.createElement(view, {
+				Menu = ReactModule.createElement(View, {
 					tag = "col align-x-center align-y-center gap-xsmall auto-y padding-xsmall stroke-default radius-medium",
-					Size = UDim2.new(0, var4 - 2, 0, -2)
-				}, reactModule.useMemo(function()
-					-- upvalues: items (ref), value (ref), reactModule (copy), view (copy), var6 (ref), onItemChanged (ref), text (copy), icon (copy), iconName (copy)
-					local t = {}
+					Size = UDim2.new(0, UseStateResult1 - 2, 0, -2)
+				}, (ReactModule.useMemo(function() --[[ Line: 107 ]]
+					-- upvalues: Items (copy), Value (copy), ReactModule (upval), View (upval), UseResult (copy), OnItemChangedFunction (copy), Text (upval), Icon (upval), IconName (upval)
+					local Elements = {}
 					
-					for i, v in items do
-						local id = v.id
-						local var12 = id == value
-						t[`item-{tostring(id)}`] = reactModule.createElement(view, {
-							LayoutOrder = i,
-							onActivated = function()
-								-- upvalues: var6 (copy), onItemChanged (copy), id (ref)
-								var6(false)
-								onItemChanged(id)
+					for LayoutOrder, item in Items do
+						local Id = item.id
+						local IsIdMatch = Id == Value
+						Elements[`item-{tostring(Id)}`] = ReactModule.createElement(View, {
+							LayoutOrder = LayoutOrder,
+							onActivated = function() --[[ Line: 114 ]]
+								-- upvalues: UseResult (upval), OnItemChangedFunction (upval), Id (copy)
+								UseResult(false)
+								OnItemChangedFunction(Id)
 							end,
 							selection = { Selectable = true },
 							tag = {
 								["row flex-between size-full-0 auto-y padding-small radius-medium"] = true,
-								["bg-shift-200"] = var12
+								["bg-shift-200"] = IsIdMatch
 							}
 						}, {
-							Text = reactModule.createElement(text, {
+							Text = ReactModule.createElement(Text, {
 								TextWrapped = true,
 								tag = "auto-xy",
 								LayoutOrder = 1,
-								Text = v.text,
+								Text = item.text,
 								TextXAlignment = Enum.TextXAlignment.Left
 							}),
-							Check = var12 and reactModule.createElement(icon, { LayoutOrder = 2, name = iconName.CheckLarge }) or nil
+							Check = IsIdMatch and ReactModule.createElement(Icon, { LayoutOrder = 2, name = IconName.CheckLarge }) or nil
 						})
 					end
-					return t
-				end, { items, value, onItemChanged, var6 }))
+					return Elements
+				end, { Items, Value, OnItemChangedFunction, UseResult })))
 			}))
 		})
 	})

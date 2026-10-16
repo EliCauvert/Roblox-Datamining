@@ -1,37 +1,37 @@
-﻿local commerceService = game:GetService("CommerceService")
-local commercePurchaseApp = script:FindFirstAncestor("CommercePurchaseApp")
-local parent = commercePurchaseApp.Parent
-local reactModule = require(parent.React)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local commercePurchasePromptStateEnumModule = require(commercePurchaseApp.Enums.CommercePurchasePromptStateEnum)
-local selectPromptStateModule = require(commercePurchaseApp.Store.Selectors.selectPromptState)
-local initiateCommercePurchaseFlowModule = require(commercePurchaseApp.Store.Thunks.InitiateCommercePurchaseFlow)
-local fFlagAddCommerceErrorsModule = require(commercePurchaseApp.Flags.FFlagAddCommerceErrors)
+﻿local CommerceService = game:GetService("CommerceService")
+local CommercePurchaseApp = script:FindFirstAncestor("CommercePurchaseApp")
+local Parent = CommercePurchaseApp.Parent
+local ReactModule = require(Parent.React)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local CommercePurchasePromptStateEnumModule = require(CommercePurchaseApp.Enums.CommercePurchasePromptStateEnum)
+local SelectPromptStateModule = require(CommercePurchaseApp.Store.Selectors.selectPromptState)
+local InitiateCommercePurchaseFlowModule = require(CommercePurchaseApp.Store.Thunks.InitiateCommercePurchaseFlow)
+local FFlagAddCommerceErrorsModule = require(CommercePurchaseApp.Flags.FFlagAddCommerceErrors)
 
-return function()
-	-- upvalues: useDispatch (ref), useSelector (ref), selectPromptStateModule (ref), useLocalization (ref), fFlagAddCommerceErrorsModule (ref), reactModule (ref), commerceService (ref), commercePurchasePromptStateEnumModule (ref), initiateCommercePurchaseFlowModule (ref)
-	local var1 = useDispatch()
-	local var2 = useSelector(selectPromptStateModule)
-	local var3 = useLocalization({
-		genericError = if fFlagAddCommerceErrorsModule then "CoreScripts.CommercePurchasePrompt.ErrorPrompt.Body.ErrorLoading" else "CoreScripts.CommercePurchasePrompt.ErrorPrompt.GenericError"
+return function() --[[ Line: 15 | Named "useCommercePurchaseRequestListenerEffect" ]]
+	-- upvalues: UseDispatchFunction (copy), UseSelectorFunction (copy), SelectPromptStateModule (copy), UseLocalizationFunction (copy), FFlagAddCommerceErrorsModule (copy), ReactModule (copy), CommerceService (copy), CommercePurchasePromptStateEnumModule (copy), InitiateCommercePurchaseFlowModule (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseSelectorResult = UseSelectorFunction(SelectPromptStateModule)
+	local UseLocalizationResult = UseLocalizationFunction({
+		genericError = if FFlagAddCommerceErrorsModule then "CoreScripts.CommercePurchasePrompt.ErrorPrompt.Body.ErrorLoading" else "CoreScripts.CommercePurchasePrompt.ErrorPrompt.GenericError"
 	})
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), commerceService (copy), var2 (ref), commercePurchasePromptStateEnumModule (copy), initiateCommercePurchaseFlowModule (copy), var3 (ref)
-		local var4 = if var1 then commerceService.PromptCommerceProductPurchaseRequested:Connect(function(p1)
-			-- upvalues: var2 (copy), commercePurchasePromptStateEnumModule (copy), var1 (copy), initiateCommercePurchaseFlowModule (copy), var3 (copy)
-			if var2 == commercePurchasePromptStateEnumModule.None then
-				var1(initiateCommercePurchaseFlowModule(p1, var3.genericError))
+	ReactModule.useEffect(function() --[[ Line: 24 ]]
+		-- upvalues: UseDispatchResult (copy), CommerceService (upval), UseSelectorResult (copy), CommercePurchasePromptStateEnumModule (upval), InitiateCommercePurchaseFlowModule (upval), UseLocalizationResult (copy)
+		local PromptCommerceProductPurchaseRequestedConnection = if UseDispatchResult then CommerceService.PromptCommerceProductPurchaseRequested:Connect(function(CommerceProductId) --[[ Line: 28 ]]
+			-- upvalues: UseSelectorResult (upval), CommercePurchasePromptStateEnumModule (upval), UseDispatchResult (upval), InitiateCommercePurchaseFlowModule (upval), UseLocalizationResult (upval)
+			if UseSelectorResult == CommercePurchasePromptStateEnumModule.None then
+				UseDispatchResult(InitiateCommercePurchaseFlowModule(CommerceProductId, UseLocalizationResult.genericError))
 			end
 		end) else nil
 		
-		return function()
-			-- upvalues: var4 (write)
-			if var4 then
-				var4:Disconnect()
-				var4 = nil
+		return function() --[[ Line: 35 ]]
+			-- upvalues: PromptCommerceProductPurchaseRequestedConnection (ref)
+			if PromptCommerceProductPurchaseRequestedConnection then
+				PromptCommerceProductPurchaseRequestedConnection:Disconnect()
+				PromptCommerceProductPurchaseRequestedConnection = nil
 			end
 		end
-	end, { var1, var3 })
+	end, { UseDispatchResult, UseLocalizationResult })
 end

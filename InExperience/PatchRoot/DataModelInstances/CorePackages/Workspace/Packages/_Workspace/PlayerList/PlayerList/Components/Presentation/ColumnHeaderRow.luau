@@ -1,35 +1,35 @@
-﻿local parent = script.Parent.Parent.Parent
-local reactModule = require(parent.Parent.React)
-local leaderboardRowShellModule = require(parent.Components.Presentation.LeaderboardRowShell)
-local peopleCellModule = require(parent.Components.Presentation.PeopleCell)
-local leaderboardTextCellModule = require(parent.Components.Presentation.LeaderboardTextCell)
-local _ = require(parent.Common.computeStatColumns)
-local gameTextTranslatorContextModule = require(parent.Common.GameTextTranslatorContext)
-local getPeopleHeaderLabelModule = require(parent.Common.getPeopleHeaderLabel)
-local fFlagPlayerListLocalizeGameTextModule = require(parent.Flags.FFlagPlayerListLocalizeGameText)
+﻿local Parent = script.Parent.Parent.Parent
+local ReactModule = require(Parent.Parent.React)
+local LeaderboardRowShellModule = require(Parent.Components.Presentation.LeaderboardRowShell)
+local PeopleCellModule = require(Parent.Components.Presentation.PeopleCell)
+local LeaderboardTextCellModule = require(Parent.Components.Presentation.LeaderboardTextCell)
+local _ = require(Parent.Common.computeStatColumns)
+local GameTextTranslatorContextModule = require(Parent.Common.GameTextTranslatorContext)
+local GetPeopleHeaderLabelModule = require(Parent.Common.getPeopleHeaderLabel)
+local FFlagPlayerListLocalizeGameTextModule = require(Parent.Flags.FFlagPlayerListLocalizeGameText)
 
-return reactModule.memo(function(p1)
-	-- upvalues: fFlagPlayerListLocalizeGameTextModule (ref), reactModule (ref), gameTextTranslatorContextModule (ref), getPeopleHeaderLabelModule (ref), peopleCellModule (ref), leaderboardTextCellModule (ref), leaderboardRowShellModule (ref)
-	local var1 = if fFlagPlayerListLocalizeGameTextModule then reactModule.useContext(gameTextTranslatorContextModule) else nil
-	local t = {
-		PeopleHeader = reactModule.createElement(peopleCellModule, {
+return ReactModule.memo(function(p1) --[[ Line: 18 | Named "ColumnHeaderRow" ]]
+	-- upvalues: FFlagPlayerListLocalizeGameTextModule (copy), ReactModule (copy), GameTextTranslatorContextModule (copy), GetPeopleHeaderLabelModule (copy), PeopleCellModule (copy), LeaderboardTextCellModule (copy), LeaderboardRowShellModule (copy)
+	local UseContextResult = if FFlagPlayerListLocalizeGameTextModule then ReactModule.useContext(GameTextTranslatorContextModule) else nil
+	local config = {
+		PeopleHeader = ReactModule.createElement(PeopleCellModule, {
 			layoutOrder = 1,
 			textTag = "size-full text-caption-small text-align-x-left content-emphasis",
-			displayName = if fFlagPlayerListLocalizeGameTextModule then getPeopleHeaderLabelModule() else "People"
+			displayName = if FFlagPlayerListLocalizeGameTextModule then GetPeopleHeaderLabelModule() else "People"
 		})
 	}
 	
-	for i, v in ipairs(p1.statColumns or {}) do
-		t[`StatHeader_{v.name}`] = reactModule.createElement(leaderboardTextCellModule, {
+	for i, value in ipairs(p1.statColumns or {}) do
+		config[`StatHeader_{value.name}`] = ReactModule.createElement(LeaderboardTextCellModule, {
 			textTag = "size-full text-caption-small text-align-x-left content-emphasis",
-			text = if var1 then var1(v.name) else v.name,
+			text = if UseContextResult then UseContextResult(value.name) else value.name,
 			width = p1.statWidth,
 			rowHeight = p1.headerHeight,
 			layoutOrder = i + 1
 		})
 	end
-	return reactModule.createElement(leaderboardRowShellModule, {
+	return ReactModule.createElement(LeaderboardRowShellModule, {
 		rowHeight = p1.headerHeight,
 		layoutOrder = p1.layoutOrder
-	}, t)
+	}, config)
 end)

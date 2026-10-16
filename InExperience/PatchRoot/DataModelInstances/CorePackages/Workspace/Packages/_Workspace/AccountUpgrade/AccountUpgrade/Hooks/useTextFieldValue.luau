@@ -1,18 +1,18 @@
-﻿local reactModule = require(script:FindFirstAncestor("AccountUpgrade").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("AccountUpgrade").Parent.React)
 
-return function(value, p1)
-	-- upvalues: reactModule (ref)
-	local var1, var2 = reactModule.useState(value or "")
-	local var3 = reactModule.useRef(var1)
+return function(p1, Callback) --[[ Line: 17 | Named "useTextFieldValue" ]]
+	-- upvalues: ReactModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(p1 or "")
+	local UseRefResult = ReactModule.useRef(UseStateResult)
 	
 	return {
-		value = var1,
-		valueRef = var3,
-		onChanged = reactModule.useCallback(function(p2)
-			-- upvalues: var3 (ref), var2 (ref), p1 (ref)
-			var3.current = p2
-			var2(p2)
-			p1(p2)
-		end, { p1 })
+		value = UseStateResult,
+		valueRef = UseRefResult,
+		onChanged = ReactModule.useCallback(function(Current) --[[ Line: 21 ]]
+			-- upvalues: UseRefResult (copy), UseStateResult2 (copy), Callback (copy)
+			UseRefResult.current = Current
+			UseStateResult2(Current)
+			Callback(Current)
+		end, { Callback })
 	}
 end

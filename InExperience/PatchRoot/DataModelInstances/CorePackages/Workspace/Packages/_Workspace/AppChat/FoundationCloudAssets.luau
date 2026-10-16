@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.FoundationCloudAssets.FoundationCloudAssets)
+﻿return (require(script.Parent.Parent.Parent._Index.FoundationCloudAssets.FoundationCloudAssets))

@@ -1,9 +1,9 @@
 ﻿local PPDebugLogging = game:DefineFastFlag("PPDebugLogging", false)
 
-return function(p1)
-	-- upvalues: PPDebugLogging (ref)
-	if PPDebugLogging and p1 then
-		print("[PurchasePrompt]" .. p0())
+return function(Callback) --[[ Line: 3 ]]
+	-- upvalues: PPDebugLogging (copy)
+	if PPDebugLogging and Callback then
+		print("[PurchasePrompt]" .. Callback())
 		
 		return
 	end

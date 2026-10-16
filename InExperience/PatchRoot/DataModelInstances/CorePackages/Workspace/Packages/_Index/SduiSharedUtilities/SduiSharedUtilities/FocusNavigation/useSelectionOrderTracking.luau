@@ -1,26 +1,26 @@
-﻿local reactModule = require(script:FindFirstAncestor("SduiSharedUtilities").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("SduiSharedUtilities").Parent.React)
 
-return function(p1)
-	-- upvalues: reactModule (ref)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref)
-		local current = p1.current
+return function(p1) --[[ Line: 8 | Named "useSelectionOrderTracking" ]]
+	-- upvalues: ReactModule (copy)
+	ReactModule.useEffect(function() --[[ Line: 9 ]]
+		-- upvalues: p1 (copy)
+		local Current = p1.current
 		
-		if current then
-			local var1 = -1
-			local selectionChangedConnection = current.SelectionChanged:Connect(function(_, p2, p3)
-				-- upvalues: current (ref), var1 (write)
-				if p3 == nil or p2 == nil or (not p3:IsDescendantOf(current) or not p2:IsDescendantOf(current)) then
-					return
-				end
-				p3.SelectionOrder = var1
-				var1 -= 1
-			end)
-			
-			return function()
-				-- upvalues: selectionChangedConnection (ref)
-				selectionChangedConnection:Disconnect()
+		if not Current then return end
+		local SelectionOrder = -1
+		local SelectionChangedConnection = Current.SelectionChanged:Connect(function(_, Object, Object1) --[[ Line: 17 ]]
+			-- upvalues: Current (copy), SelectionOrder (ref)
+			if Object1 ~= nil and Object ~= nil and Object1:IsDescendantOf(Current) and Object:IsDescendantOf(Current) then
+				Object1.SelectionOrder = SelectionOrder
+				SelectionOrder -= 1
+				
+				return
 			end
+		end)
+		
+		return function() --[[ Line: 31 ]]
+			-- upvalues: SelectionChangedConnection (copy)
+			SelectionChangedConnection:Disconnect()
 		end
 	end, {})
 end

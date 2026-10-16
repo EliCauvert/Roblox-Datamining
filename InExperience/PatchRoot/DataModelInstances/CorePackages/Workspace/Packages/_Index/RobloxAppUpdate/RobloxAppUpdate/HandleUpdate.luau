@@ -1,24 +1,24 @@
-﻿local robloxAppUpdate = script:FindFirstAncestor("RobloxAppUpdate")
-local parent = robloxAppUpdate.Parent
-local _ = require(robloxAppUpdate.Types)
-local thunksModule = require(robloxAppUpdate.Thunks)
-local getUpdateMessageType = thunksModule.GetUpdateMessageType
-local openCentralOverlayForUpdateRequiredPrompt = thunksModule.OpenCentralOverlayForUpdateRequiredPrompt
-local setNetworkingErrorToast = require(parent.RobloxAppToastsRodux).Thunks.SetNetworkingErrorToast
+﻿local RobloxAppUpdate = script:FindFirstAncestor("RobloxAppUpdate")
+local _ = require(RobloxAppUpdate.Types)
+local ThunksModule = require(RobloxAppUpdate.Thunks)
+local GetUpdateMessageTypeFunction = ThunksModule.GetUpdateMessageType
+local OpenCentralOverlayForUpdateRequiredPromptFunction = ThunksModule.OpenCentralOverlayForUpdateRequiredPrompt
+local SetNetworkingErrorToastFunction = require(RobloxAppUpdate.Parent.RobloxAppToastsRodux).Thunks.SetNetworkingErrorToast
 
-return function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: getUpdateMessageType (ref), openCentralOverlayForUpdateRequiredPrompt (ref), setNetworkingErrorToast (ref)
-	p1(getUpdateMessageType(p2, p3, p4, p5)):andThen(function(p7)
-		-- upvalues: p1 (ref), openCentralOverlayForUpdateRequiredPrompt (copy), p2 (ref), p6 (ref)
-		if p7 then
-			p1(openCentralOverlayForUpdateRequiredPrompt(p2:canPerformBinaryUpdate(), false, p7))
+return function(Callback, p1, p2, p3, p4, Callback1) --[[ Line: 9 ]]
+	-- upvalues: GetUpdateMessageTypeFunction (copy), OpenCentralOverlayForUpdateRequiredPromptFunction (copy), SetNetworkingErrorToastFunction (copy)
+	Callback(GetUpdateMessageTypeFunction(p1, p2, p3, p4)):andThen(function(Result) --[[ Line: 18 ]]
+		-- upvalues: Callback (copy), OpenCentralOverlayForUpdateRequiredPromptFunction (upval), p1 (copy), Callback1 (copy)
+		if Result then
+			Callback(OpenCentralOverlayForUpdateRequiredPromptFunction(p1:canPerformBinaryUpdate(), false, Result))
 			
 			return
+		else
+			Callback1()
 		end
-		p6()
-	end):catch(function(p7)
-		-- upvalues: p1 (ref), setNetworkingErrorToast (copy)
-		warn(p7)
-		p1(setNetworkingErrorToast({ HttpError = Enum.HttpError.OK }))
+	end):catch(function(Err) --[[ Line: 31 ]]
+		-- upvalues: Callback (copy), SetNetworkingErrorToastFunction (upval)
+		warn(Err)
+		Callback(SetNetworkingErrorToastFunction({ HttpError = Enum.HttpError.OK }))
 	end)
 end

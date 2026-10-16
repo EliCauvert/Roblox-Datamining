@@ -1,106 +1,127 @@
-﻿local reactModule = require(script:FindFirstAncestor("ExpChat").Parent.React)
-local waveformAudioModule = require(script.Parent.WaveformAudio)
-local useTickClock = require(script.Parent.useTickClock).useTickClock
-local BAR_WIDTH = waveformAudioModule.BAR_WIDTH
-local ITEM_WIDTH = waveformAudioModule.ITEM_WIDTH
-local RENDER_INTERVAL = waveformAudioModule.RENDER_INTERVAL
-local t = { itemIdx = 0, height = 0.2, age = nil }
+﻿local ReactModule = require(script:FindFirstAncestor("ExpChat").Parent.React)
+local ExpChatWaveformStaleWidthFix = game:DefineFastFlag("ExpChatWaveformStaleWidthFix", false)
+local WaveformAudioModule = require(script.Parent.WaveformAudio)
+local UseTickClockFunction = require(script.Parent.useTickClock).useTickClock
+local BARWIDTH = WaveformAudioModule.BAR_WIDTH
+local ITEMWIDTH = WaveformAudioModule.ITEM_WIDTH
+local RENDERINTERVAL = WaveformAudioModule.RENDER_INTERVAL
+local config = { itemIdx = 0, height = 0.2, age = nil }
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), ITEM_WIDTH (ref), waveformAudioModule (ref), useTickClock (ref), RENDER_INTERVAL (ref), t (ref), BAR_WIDTH (ref)
-	local var1 = p1.normalize == nil or p1.normalize
-	local bindBarStyle = p1.bindBarStyle
-	local onSample = p1.onSample
-	local var2, var3 = reactModule.useState(0)
-	local var4 = if p1.isActive and var2 > 0 then math.ceil(var2 / ITEM_WIDTH) + 1 else 0
-	local var5, var6 = reactModule.useBinding(0)
-	local var7, var8 = reactModule.useBinding(0)
-	local var9 = waveformAudioModule.useAudioAnalyzer(p1.audioDeviceInput)
-	local var10 = reactModule.useRef(0)
-	local var11 = reactModule.useRef({})
-	reactModule.useEffect(function()
-		-- upvalues: var11 (ref), var10 (ref), var6 (ref), var8 (ref)
-		table.clear(var11.current)
-		var10.current = 0
-		var6(0)
-		var8(0)
-	end, { p1.isActive, var4, var6, var8 })
-	useTickClock({
-		intervalSec = RENDER_INTERVAL,
-		enabled = p1.isActive and var4 > 0,
-		onTick = function()
-			-- upvalues: var5 (ref), waveformAudioModule (copy), var9 (ref), var10 (ref), var1 (ref), var11 (ref), var4 (ref), var6 (ref), onSample (ref)
-			local var12 = var5:getValue() + 1
-			local var13 = 0.2 + waveformAudioModule.sampleVolume(var9.current, var10, var1) * 0.8
-			local current = var11.current
-			current[var12] = { height = var13 }
-			current[var12 - var4] = nil
-			var6(var12)
+return ReactModule.memo(function(p1) --[[ Line: 68 | Named "Waveform" ]]
+	-- upvalues: ReactModule (copy), ITEMWIDTH (copy), WaveformAudioModule (copy), UseTickClockFunction (copy), RENDERINTERVAL (copy), config (copy), BARWIDTH (copy), ExpChatWaveformStaleWidthFix (copy)
+	local NoNormalize = p1.normalize == nil or p1.normalize
+	local BindBarStyleFunction = p1.bindBarStyle
+	local OnSampleFunction = p1.onSample
+	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
+	local NewCeiled: number = if p1.isActive and UseStateResult > 0 then math.ceil(UseStateResult / ITEMWIDTH) + 1 else 0
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
+	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(0)
+	local UseAudioAnalyzerResult = WaveformAudioModule.useAudioAnalyzer(p1.audioDeviceInput)
+	local UseRefResult = ReactModule.useRef(0)
+	local UseRefResult1 = ReactModule.useRef({})
+	ReactModule.useEffect(function() --[[ Line: 84 ]]
+		-- upvalues: UseRefResult1 (copy), UseRefResult (copy), UseBindingResult2 (copy), UseBindingResult2_1 (copy)
+		table.clear(UseRefResult1.current)
+		UseRefResult.current = 0
+		UseBindingResult2(0)
+		UseBindingResult2_1(0)
+	end, {
+		p1.isActive,
+		NewCeiled,
+		UseBindingResult2,
+		UseBindingResult2_1
+	})
+	UseTickClockFunction({
+		intervalSec = RENDERINTERVAL,
+		enabled = p1.isActive and NewCeiled > 0,
+		onTick = function() --[[ Line: 94 ]]
+			-- upvalues: UseBindingResult (copy), WaveformAudioModule (upval), UseAudioAnalyzerResult (copy), UseRefResult (copy), NoNormalize (copy), UseRefResult1 (copy), NewCeiled (copy), UseBindingResult2 (copy), OnSampleFunction (copy)
+			local NewValue = UseBindingResult:getValue() + 1
+			local NewSampleVolumeResult = 0.2 + WaveformAudioModule.sampleVolume(UseAudioAnalyzerResult.current, UseRefResult, NoNormalize) * 0.8
+			local Current = UseRefResult1.current
+			Current[NewValue] = { height = NewSampleVolumeResult }
+			Current[NewValue - NewCeiled] = nil
+			UseBindingResult2(NewValue)
 			
-			if onSample then
-				onSample(var12, var13)
+			if OnSampleFunction then
+				OnSampleFunction(NewValue, NewSampleVolumeResult)
 			end
 		end,
-		onFrame = function(p2)
-			-- upvalues: var8 (ref)
-			var8(p2)
+		onFrame = function(p2) --[[ Line: 110 ]]
+			-- upvalues: UseBindingResult2_1 (copy)
+			UseBindingResult2_1(p2)
 		end
 	})
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		Size = UDim2.fromScale(1, 1),
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		ClipsDescendants = true,
-		[reactModule.Change.AbsoluteSize] = function(p2)
-			-- upvalues: var2 (ref), var3 (ref)
-			local x = p2.AbsoluteSize.X
+		[ReactModule.Change.AbsoluteSize] = function(Frame) --[[ Line: 167 ]]
+			-- upvalues: ExpChatWaveformStaleWidthFix (upval), UseStateResult2 (copy), UseStateResult (copy)
+			local X = Frame.AbsoluteSize.X
 			
-			if x ~= var2 then
-				var3(x)
+			if ExpChatWaveformStaleWidthFix then
+				UseStateResult2(X)
+				
+				return
+			end
+			if X ~= UseStateResult then
+				UseStateResult2(X)
 			end
 		end
-	}, reactModule.useMemo(function()
-		-- upvalues: var11 (ref), var4 (ref), ITEM_WIDTH (copy), var5 (ref), t (copy), bindBarStyle (ref), reactModule (copy), var7 (ref), BAR_WIDTH (copy)
-		local t_1 = {}
-		local current = var11.current
+	}, (ReactModule.useMemo(function() --[[ Line: 115 ]]
+		-- upvalues: UseRefResult1 (copy), NewCeiled (copy), ITEMWIDTH (upval), UseBindingResult (copy), config (upval), BindBarStyleFunction (copy), ReactModule (upval), UseBindingResult1 (copy), BARWIDTH (upval)
+		local Frames = {}
+		local Current = UseRefResult1.current
 		
-		for i = 1, var4 do
-			local var12 = var4 - i
-			local var13 = (i - 1) * ITEM_WIDTH
-			local var14 = var5:map(function(p2)
-				-- upvalues: var12 (ref), t (copy), current (ref)
-				local var15 = p2 - var12
+		for i = 1, NewCeiled do
+			local NewCeiledDelta = NewCeiled - i
+			local ScaledI = (i - 1) * ITEMWIDTH
+			local MapResult = UseBindingResult:map(function(p2) --[[ Line: 122 ]]
+				-- upvalues: NewCeiledDelta (copy), config (upval), Current (copy)
+				local ItemIdx = p2 - NewCeiledDelta
 				
-				if var15 <= 0 then
-					return t
+				if ItemIdx <= 0 then
+					return config
+				else
+					local CurrentEntry = Current[ItemIdx]
+					
+					return if CurrentEntry == nil then config else {
+						itemIdx = ItemIdx,
+						height = CurrentEntry.height,
+						age = NewCeiledDelta
+					}
 				end
-				local var16 = current[var15]
-				
-				return if var16 == nil then t else { itemIdx = var15, height = var16.height, age = var12 }
 			end)
-			local var15 = bindBarStyle(var14)
-			t_1["Bar" .. i] = reactModule.createElement("Frame", {
+			local BindBarStyleResult = BindBarStyleFunction(MapResult)
+			Frames["Bar" .. i] = ReactModule.createElement("Frame", {
 				BorderSizePixel = 0,
-				Position = var7:map(function(p2)
-					-- upvalues: var13 (ref), ITEM_WIDTH (copy)
-					return UDim2.new(0, var13 - p2 * ITEM_WIDTH, 0.5, 0)
+				Position = UseBindingResult1:map(function(p2): UDim2 --[[ Line: 141 ]]
+					-- upvalues: ScaledI (copy), ITEMWIDTH (upval)
+					return UDim2.new(0, ScaledI - p2 * ITEMWIDTH, 0.5, 0)
 				end),
 				AnchorPoint = Vector2.new(0, 0.5),
-				Size = var14:map(function(p2)
-					-- upvalues: BAR_WIDTH (copy)
-					return UDim2.new(0, BAR_WIDTH, p2.height, 0)
+				Size = MapResult:map(function(p2): UDim2 --[[ Line: 145 ]]
+					-- upvalues: BARWIDTH (upval)
+					return UDim2.new(0, BARWIDTH, p2.height, 0)
 				end),
-				BackgroundColor3 = var15:map(function(p2)
+				BackgroundColor3 = BindBarStyleResult:map(function(p2) --[[ Line: 148 ]]
 					return p2.color
 				end),
-				BackgroundTransparency = var15:map(function(p2)
+				BackgroundTransparency = BindBarStyleResult:map(function(p2) --[[ Line: 151 ]]
 					return p2.transparency
 				end)
 			}, {
-				Corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) })
+				Corner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) })
 			})
 		end
-		return t_1
-	end, { var4, var5, var7, bindBarStyle }))
+		return Frames
+	end, {
+		NewCeiled,
+		UseBindingResult,
+		UseBindingResult1,
+		BindBarStyleFunction
+	})))
 end)

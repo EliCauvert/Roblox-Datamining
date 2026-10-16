@@ -1,40 +1,42 @@
-﻿local httpService = game:GetService("HttpService")
-local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local parent = avatarExperienceCatalog.Parent
-local url = require(parent.Http).Url
-local _ = require(parent.LuauPolyfill)
-local _ = require(avatarExperienceCatalog.Models.CatalogV2SearchItemDetails)
-local makeAXResponseHandlerModule = require(avatarExperienceCatalog.Utils.makeAXResponseHandler)
-local normalizeCatalogV2SearchItemDetailsModule = require(script.Parent.normalizeCatalogV2SearchItemDetails)
-local constantsModule = require(script.Parent.constants)
-local t = { assetTypeIds = true, bundleTypeIds = true }
+﻿local HttpService = game:GetService("HttpService")
+local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local Parent = AvatarExperienceCatalog.Parent
+local Url = require(Parent.Http).Url
+local _ = require(Parent.LuauPolyfill)
+local _ = require(AvatarExperienceCatalog.Models.CatalogV2SearchItemDetails)
+local MakeAXResponseHandlerModule = require(AvatarExperienceCatalog.Utils.makeAXResponseHandler)
+local NormalizeCatalogV2SearchItemDetailsModule = require(script.Parent.normalizeCatalogV2SearchItemDetails)
+local ConstantsModule = require(script.Parent.constants)
+local config = { assetTypeIds = true, bundleTypeIds = true }
 
-local function buildQueryStringWithArrayParams(p1)
-	-- upvalues: t (ref), httpService (ref)
-	local t_1 = {}
+local function buildQueryStringWithArrayParams(List): string --[[ Line: 20 ]]
+	-- upvalues: config (copy), HttpService (copy)
+	local List1 = {}
 	
-	for i, v in p1 do
-		if not t[i] or type(v) ~= "table" then
-			if not t[i] then
-				table.insert(t_1, `{i}={httpService:UrlEncode(tostring(v))}`)
+	for i, value in List do
+		if not config[i] or type(value) ~= "table" then
+			if not config[i] then
+				table.insert(List1, `{i}={HttpService:UrlEncode((tostring(value)))}`)
+				continue
 			end
+			continue
 		end
-		for i_1, v_1 in v do
-			table.insert(t_1, `{i}={httpService:UrlEncode(tostring(v_1))}`)
+		for _, value1 in value do
+			table.insert(List1, `{i}={HttpService:UrlEncode((tostring(value1)))}`)
 		end
 	end
-	return table.concat(t_1, "&")
+	return table.concat(List1, "&")
 end
 
 return {
-	getCatalogV2SearchItemDetails = function(p2, p3)
-		-- upvalues: buildQueryStringWithArrayParams (ref), url (ref), makeAXResponseHandlerModule (ref), normalizeCatalogV2SearchItemDetailsModule (ref), constantsModule (ref)
-		local var1, var2 = p2(`{url.CATALOG_URL}v2/search/items/details?{buildQueryStringWithArrayParams(p3)}`, "GET")
+	getCatalogV2SearchItemDetails = function(Callback, p1) --[[ Line: 38 ]]
+		-- upvalues: buildQueryStringWithArrayParams (copy), Url (copy), MakeAXResponseHandlerModule (copy), NormalizeCatalogV2SearchItemDetailsModule (copy), ConstantsModule (copy)
+		local GET, GET2 = Callback(`{Url.CATALOG_URL}v2/search/items/details?{buildQueryStringWithArrayParams(p1)}`, "GET")
 		
-		return makeAXResponseHandlerModule(var1, normalizeCatalogV2SearchItemDetailsModule, {
-			modelMismatchCounter = constantsModule.FETCH_CATALOG_V2_SEARCH_ITEM_DETAILS_MODEL_MISMATCH_COUNTER_NAME,
-			latencyCounter = constantsModule.FETCH_CATALOG_V2_SEARCH_ITEM_DETAILS_LATENCY_COUNTER_NAME
-		}), var2
+		return MakeAXResponseHandlerModule(GET, NormalizeCatalogV2SearchItemDetailsModule, {
+			modelMismatchCounter = ConstantsModule.FETCH_CATALOG_V2_SEARCH_ITEM_DETAILS_MODEL_MISMATCH_COUNTER_NAME,
+			latencyCounter = ConstantsModule.FETCH_CATALOG_V2_SEARCH_ITEM_DETAILS_LATENCY_COUNTER_NAME
+		}), GET2
 	end,
 	buildQueryStringWithArrayParams = buildQueryStringWithArrayParams
 }

@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent._Workspace.ProfilePlatform.ProfilePlatform.Common.Enums)
+﻿return (require(script.Parent.Parent._Workspace.ProfilePlatform.ProfilePlatform.Common.Enums))

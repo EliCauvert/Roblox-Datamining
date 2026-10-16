@@ -1,40 +1,40 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local skeleton = foundationModule.Skeleton
-local view = foundationModule.View
-local radius = foundationModule.Enums.Radius
-local useTokens = foundationModule.Hooks.useTokens
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local Skeleton = FoundationModule.Skeleton
+local View = FoundationModule.View
+local Radius = FoundationModule.Enums.Radius
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), view (ref), skeleton (ref), radius (ref)
-	local var1 = useTokens()
+return function(Frame) --[[ Line: 19 | Named "ExperienceResultsLoadingSkeleton" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Skeleton (copy), Radius (copy)
+	local UseTokensResult = UseTokensFunction()
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "row align-y-center gap-medium",
-		LayoutOrder = p1.LayoutOrder,
-		Size = UDim2.new(1, 0, 0, var1.Size.Size_2000),
-		testId = `{p1.testIdPrefix}.LoadingSkeleton.{p1.index}`
+		LayoutOrder = Frame.LayoutOrder,
+		Size = UDim2.new(1, 0, 0, UseTokensResult.Size.Size_2000),
+		testId = `{Frame.testIdPrefix}.LoadingSkeleton.{Frame.index}`
 	}, {
-		ThumbnailContainer = reactModule.createElement(view, {
+		ThumbnailContainer = ReactModule.createElement(View, {
 			LayoutOrder = 1,
-			Size = UDim2.fromOffset(var1.Size.Size_1400, var1.Size.Size_1400)
+			Size = UDim2.fromOffset(UseTokensResult.Size.Size_1400, UseTokensResult.Size.Size_1400)
 		}, {
-			Thumbnail = reactModule.createElement(skeleton, { Size = UDim2.fromScale(1, 1), radius = radius.Medium })
+			Thumbnail = ReactModule.createElement(Skeleton, { Size = UDim2.fromScale(1, 1), radius = Radius.Medium })
 		}),
-		Details = reactModule.createElement(view, {
+		Details = ReactModule.createElement(View, {
 			LayoutOrder = 2,
 			tag = "col fill gap-small size-full-0 auto-y"
 		}, {
-			Title = reactModule.createElement(skeleton, {
+			Title = ReactModule.createElement(Skeleton, {
 				LayoutOrder = 1,
-				Size = UDim2.new(0.72, 0, 0, var1.Size.Size_400),
-				radius = radius.Small
+				Size = UDim2.new(0.72, 0, 0, UseTokensResult.Size.Size_400),
+				radius = Radius.Small
 			}),
-			Description = reactModule.createElement(skeleton, {
+			Description = ReactModule.createElement(Skeleton, {
 				LayoutOrder = 2,
-				Size = UDim2.new(0.44, 0, 0, var1.Size.Size_250),
-				radius = radius.Small
+				Size = UDim2.new(0.44, 0, 0, UseTokensResult.Size.Size_250),
+				radius = Radius.Small
 			})
 		})
 	})

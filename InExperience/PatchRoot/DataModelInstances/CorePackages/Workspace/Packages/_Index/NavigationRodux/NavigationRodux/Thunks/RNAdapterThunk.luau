@@ -1,44 +1,40 @@
-﻿local parent = script:FindFirstAncestor("NavigationRodux").Parent
-local argCheckModule = require(parent.ArgCheck)
-local t = {}
-local RNAdapterThunkTag = require(parent.AppCommonLib).Symbol.named("RNAdapterThunkTag")
+﻿local Parent = script:FindFirstAncestor("NavigationRodux").Parent
+local ArgCheckModule = require(Parent.ArgCheck)
+local RNAdapterThunkTag = require(Parent.AppCommonLib).Symbol.named("RNAdapterThunkTag")
 
-function t.middleware(p1)
-	-- upvalues: argCheckModule (ref), RNAdapterThunkTag (ref)
-	argCheckModule.isType(p1, "function", "rnDispatcher")
-	
-	return function(p2, p3)
-		-- upvalues: RNAdapterThunkTag (copy), p1 (ref)
-		return function(p4)
-			-- upvalues: RNAdapterThunkTag (copy), p3 (ref), p1 (copy), p2 (ref)
-			return if typeof(p4) == "table" and p4[RNAdapterThunkTag] == true then p4(p3, p1) else p2(p4)
+return {
+	middleware = function(p1) --[[ Line: 19 ]]
+		-- upvalues: ArgCheckModule (copy), RNAdapterThunkTag (copy)
+		ArgCheckModule.isType(p1, "function", "rnDispatcher")
+		
+		return function(Callback, p2) --[[ Line: 22 ]]
+			-- upvalues: RNAdapterThunkTag (upval), p1 (copy)
+			return function(Callback1) --[[ Line: 23 ]]
+				-- upvalues: RNAdapterThunkTag (upval), p2 (copy), p1 (upval), Callback (copy)
+				return if typeof(Callback1) == "table" and Callback1[RNAdapterThunkTag] == true then Callback1(p2, p1) else Callback(Callback1)
+			end
 		end
+	end,
+	new = function(p1, Callback) --[[ Line: 33 ]]
+		-- upvalues: ArgCheckModule (copy), RNAdapterThunkTag (copy)
+		ArgCheckModule.isNonEmptyString(p1, "name")
+		ArgCheckModule.isType(Callback, "function", "onInvoke")
+		
+		return (setmetatable({ [RNAdapterThunkTag] = true, type = p1 }, {
+			__call = function(_, ...) --[[ Line: 41 ]]
+				-- upvalues: Callback (copy)
+				Callback(...)
+			end
+		}))
+	end,
+	test = function(Callback, p1, p2) --[[ Line: 47 ]]
+		-- upvalues: ArgCheckModule (copy), RNAdapterThunkTag (copy)
+		ArgCheckModule.assert(type(Callback) == "table" and Callback[RNAdapterThunkTag] == true, "'thunk' must be a valid RNAdapterThunk")
+		
+		return Callback(p1, p2)
+	end,
+	is = function(p1): boolean --[[ Line: 56 ]]
+		-- upvalues: RNAdapterThunkTag (copy)
+		return type(p1) == "table" and p1[RNAdapterThunkTag] == true
 	end
-end
-
-function t.new(p1, p2)
-	-- upvalues: argCheckModule (ref), RNAdapterThunkTag (ref)
-	argCheckModule.isNonEmptyString(p1, "name")
-	argCheckModule.isType(p2, "function", "onInvoke")
-	
-	return setmetatable({ [RNAdapterThunkTag] = true, type = p1 }, {
-		__call = function(_, ...)
-			-- upvalues: p2 (ref)
-			p2(...)
-		end
-	})
-end
-
-function t.test(p1, p2, p3)
-	-- upvalues: argCheckModule (ref), RNAdapterThunkTag (ref)
-	argCheckModule.assert(type(p1) == "table" and p1[RNAdapterThunkTag] == true, "'thunk' must be a valid RNAdapterThunk")
-	
-	return p1(p2, p3)
-end
-
-function t.is(p1)
-	-- upvalues: RNAdapterThunkTag (ref)
-	return type(p1) == "table" and p1[RNAdapterThunkTag] == true
-end
-
-return t
+}

@@ -1,5 +1,5 @@
-﻿local parent = script:FindFirstAncestor("SduiCoreSystem").Parent
-local _ = require(parent.Signals)
-local _ = require(parent.CollectionViews)
+﻿local Parent = script:FindFirstAncestor("SduiCoreSystem").Parent
+local _ = require(Parent.Signals)
+local _ = require(Parent.CollectionViews)
 
 return {}

@@ -1,165 +1,167 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceAnalytics").Parent
-local roactModule = require(parent.Roact)
-local roactRoduxModule = require(parent.RoactRodux)
-local argCheckModule = require(parent.ArgCheck)
-local tModule = require(parent.t)
-local fFlagUseNavigationSelectors = require(parent.SharedFlags).FFlagUseNavigationSelectors
-local selectors = require(parent.NavigationRodux).Selectors
-local fFlagSignalsNavP3gAvatarExperience = require(parent.SharedFlags).FFlagSignalsNavP3gAvatarExperience
-local fFlagAXSduiCatalogScrollImpressions = require(parent.AvatarExperienceFlags).FFlagAXSduiCatalogScrollImpressions
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local useSignalState = require(parent.SignalsReact).useSignalState
-local var1 = if fFlagSignalsNavP3gAvatarExperience then require(parent.NavigationRodux).GetLegacyNavigationStore else nil
-local avatarExperienceImpressionsDetector = roactModule.PureComponent:extend("AvatarExperienceImpressionsDetector")
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceAnalytics").Parent
+local RoactRoduxModule = require(Parent.RoactRodux)
+local ArgCheckModule = require(Parent.ArgCheck)
+local TModule = require(Parent.t)
+local FFlagUseNavigationSelectors = require(Parent.SharedFlags).FFlagUseNavigationSelectors
+local Selectors = require(Parent.NavigationRodux).Selectors
+local FFlagSignalsNavP3gAvatarExperience = require(Parent.SharedFlags).FFlagSignalsNavP3gAvatarExperience
+local FFlagAXSduiCatalogScrollImpressions = require(Parent.AvatarExperienceFlags).FFlagAXSduiCatalogScrollImpressions
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local UseSignalState = require(Parent.SignalsReact).useSignalState
+local GetLegacyNavigationStore = if FFlagSignalsNavP3gAvatarExperience then require(Parent.NavigationRodux).GetLegacyNavigationStore else nil
+local AvatarExperienceImpressionsDetector: (any) -> any = require(Parent.Roact).PureComponent:extend("AvatarExperienceImpressionsDetector")
 
-local _ = function(p1)
-	-- upvalues: fFlagUseNavigationSelectors (ref), selectors (ref)
-	if fFlagUseNavigationSelectors then
-		return selectors.selectCurrentPageName(p1)
+local function _(p1) --[[ Line: 27 ]]
+	-- upvalues: FFlagUseNavigationSelectors (copy), Selectors (copy)
+	if FFlagUseNavigationSelectors then
+		return Selectors.selectCurrentPageName(p1)
+	else
+		local History = p1.Navigation.history
+		local HistoryEntry = History[#History]
+		
+		return HistoryEntry[#HistoryEntry].name
 	end
-	local history = p1.Navigation.history
-	local var2 = history[#history]
-	
-	return var2[#var2].name
 end
 
-avatarExperienceImpressionsDetector.validateProps = tModule.strictInterface({
-	scanDebounceSeconds = tModule.optional(tModule.number),
-	viewFillPercent = tModule.optional(tModule.number),
-	parentRef = tModule.optional(tModule.table),
-	onRequestImpressionsSignal = tModule.table,
-	viewPortBounds = tModule.strictInterface({ min = tModule.Vector2, max = tModule.Vector2 }),
-	appPage = tModule.optional(tModule.string),
-	currentPage = tModule.optional(tModule.string),
-	pageFilter = tModule.optional(tModule.callback),
-	collectObjectsFunc = tModule.optional(tModule.callback),
-	filterImpressionFunc = tModule.optional(tModule.callback),
-	onImpressionsDetected = tModule.union(tModule.callback, tModule.table)
+AvatarExperienceImpressionsDetector.validateProps = TModule.strictInterface({
+	scanDebounceSeconds = TModule.optional(TModule.number),
+	viewFillPercent = TModule.optional(TModule.number),
+	parentRef = TModule.optional(TModule.table),
+	onRequestImpressionsSignal = TModule.table,
+	viewPortBounds = TModule.strictInterface({ min = TModule.Vector2, max = TModule.Vector2 }),
+	appPage = TModule.optional(TModule.string),
+	currentPage = TModule.optional(TModule.string),
+	pageFilter = TModule.optional(TModule.callback),
+	collectObjectsFunc = TModule.optional(TModule.callback),
+	filterImpressionFunc = TModule.optional(TModule.callback),
+	onImpressionsDetected = TModule.union(TModule.callback, TModule.table)
 })
-avatarExperienceImpressionsDetector.defaultProps = { scanDebounceSeconds = 1, viewFillPercent = 0.25 }
+AvatarExperienceImpressionsDetector.defaultProps = { scanDebounceSeconds = 1, viewFillPercent = 0.25 }
 
-function avatarExperienceImpressionsDetector.init(p1)
+function AvatarExperienceImpressionsDetector.init(p1) --[[ Line: 65 ]]
 	p1.isMounted = false
 	p1.lastImpressionTick = nil
 	p1.nextImpressionTick = nil
 end
 
-function avatarExperienceImpressionsDetector._isInstanceVisible(p1, p2)
-	-- upvalues: argCheckModule (ref), fFlagAXSduiCatalogScrollImpressions (ref)
-	if not p2 then
+function AvatarExperienceImpressionsDetector._isInstanceVisible(p1, Frame: Frame): boolean --[[ Line: 71 ]]
+	-- upvalues: ArgCheckModule (copy), FFlagAXSduiCatalogScrollImpressions (copy)
+	if not Frame then
 		return false
 	end
-	local viewPortBounds = p1.props.viewPortBounds
-	argCheckModule.assert(viewPortBounds ~= nil)
+	local ViewPortBounds = p1.props.viewPortBounds
+	ArgCheckModule.assert(ViewPortBounds ~= nil)
 	
-	if not viewPortBounds then
+	if not ViewPortBounds then
 		return false
 	end
-	local _ = nil
-	local var2 = viewPortBounds.max - viewPortBounds.min
-	argCheckModule.assert(var2.X > 0)
-	argCheckModule.assert(var2.Y > 0)
-	local var3 = var2 * p1.props.viewFillPercent
-	argCheckModule.assert(var3.X > 0 and var3.Y > 0)
+	local MaxDelta = ViewPortBounds.max - ViewPortBounds.min
+	ArgCheckModule.assert(MaxDelta.X > 0)
+	ArgCheckModule.assert(MaxDelta.Y > 0)
+	local ScaledMaxDelta = MaxDelta * p1.props.viewFillPercent
+	ArgCheckModule.assert(ScaledMaxDelta.X > 0 and ScaledMaxDelta.Y > 0)
 	
-	if var3.X <= 0 or var3.Y <= 0 then
+	if ScaledMaxDelta.X <= 0 or ScaledMaxDelta.Y <= 0 then
 		return false
-	elseif fFlagAXSduiCatalogScrollImpressions and (p2.AbsoluteSize.X <= 0 or p2.AbsoluteSize.Y <= 0) then
+	elseif FFlagAXSduiCatalogScrollImpressions and (Frame.AbsoluteSize.X <= 0 or Frame.AbsoluteSize.Y <= 0) then
 		return false
+	else
+		local AbsolutePosition = Frame.AbsolutePosition
+		local NewAbsolutePosition = AbsolutePosition + Frame.AbsoluteSize / 2
+		local NewAbsolutePosition1 = AbsolutePosition + Frame.AbsoluteSize
+		local IsXBelow: boolean = ViewPortBounds.min.X < NewAbsolutePosition.X and NewAbsolutePosition.X < ViewPortBounds.max.X
+		local IsYBelow: boolean = ViewPortBounds.min.Y < NewAbsolutePosition.Y and NewAbsolutePosition.Y < ViewPortBounds.max.Y
+		
+		if IsXBelow and IsYBelow then
+			return true
+		end
+		local MinResultDelta = NewAbsolutePosition1:Min(ViewPortBounds.max) - AbsolutePosition:Max(ViewPortBounds.min)
+		local IsXAbove = MinResultDelta.X >= ScaledMaxDelta.X
+		
+		if IsYBelow and IsXAbove then
+			return true
+		else
+			local IsYAbove = MinResultDelta.Y >= ScaledMaxDelta.Y
+			
+			return if IsXBelow and IsYAbove then true elseif IsXAbove and IsYAbove then true else false
+		end
 	end
-	local absolutePosition = p2.AbsolutePosition
-	local var4 = absolutePosition + p2.AbsoluteSize / 2
-	local var5 = absolutePosition + p2.AbsoluteSize
-	local var6 = viewPortBounds.min.X < var4.X and var4.X < viewPortBounds.max.X
-	local var7 = viewPortBounds.min.Y < var4.Y and var4.Y < viewPortBounds.max.Y
-	
-	if var6 and var7 then
-		return true
-	end
-	local var8 = var5:Min(viewPortBounds.max) - absolutePosition:Max(viewPortBounds.min)
-	local var9 = var3.X <= var8.X
-	
-	if var7 and var9 then
-		return true
-	end
-	local var10 = var3.Y <= var8.Y
-	
-	return if var6 and var10 then true else var9 and var10
 end
 
-function avatarExperienceImpressionsDetector._defaultObjectCollector(p1)
-	return p1:GetChildren()
+function AvatarExperienceImpressionsDetector._defaultObjectCollector(Object) --[[ Line: 139 ]]
+	return Object:GetChildren()
 end
 
-function avatarExperienceImpressionsDetector._calculateImpressions(p1)
-	-- upvalues: argCheckModule (ref)
+function AvatarExperienceImpressionsDetector._calculateImpressions(p1) --[[ Line: 143 ]]
+	-- upvalues: ArgCheckModule (copy)
 	if not p1.isMounted then return end
 	if p1.props.pageFilter then
 		if not p1.props.pageFilter(p1.props.currentPage) then return end
 	elseif p1.props.appPage ~= p1.props.currentPage then return end
-	local current = p1.props.parentRef and p1.props.parentRef.current
+	local Current = p1.props.parentRef and p1.props.parentRef.current
 	
-	if not current or not p1:_isInstanceVisible(current) then return end
+	if not Current or not p1:_isInstanceVisible(Current) then return end
 	p1.lastImpressionTick = tick()
-	local t = {}
-	local var2 = (p1.props.collectObjectsFunc or p1._defaultObjectCollector)(current)
+	local Guis = {}
+	local Guis1 = (p1.props.collectObjectsFunc or p1._defaultObjectCollector)(Current)
 	
-	if var2 then
-		for i, v in var2 do
-			if v:IsA("GuiObject") and p1:_isInstanceVisible(v) and (p1.props.filterImpressionFunc == nil or p1.props.filterImpressionFunc(v)) then
-				table.insert(t, v)
+	if Guis1 then
+		for _, Gui in Guis1 do
+			if Gui:IsA("GuiObject") and p1:_isInstanceVisible(Gui) and (p1.props.filterImpressionFunc == nil or p1.props.filterImpressionFunc(Gui)) then
+				table.insert(Guis, Gui)
 			end
 		end
 	end
-	if #t > 0 then
-		argCheckModule.assert(p1.props.onImpressionsDetected ~= nil)
-		p1.props.onImpressionsDetected(t)
+	if #Guis > 0 then
+		ArgCheckModule.assert(p1.props.onImpressionsDetected ~= nil)
+		p1.props.onImpressionsDetected(Guis)
 	end
 end
 
-function avatarExperienceImpressionsDetector._requestImpressions(p2)
-	-- upvalues: argCheckModule (ref)
+function AvatarExperienceImpressionsDetector._requestImpressions(p2) --[[ Line: 183 ]]
+	-- upvalues: ArgCheckModule (copy)
 	if not p2.isMounted then return end
 	if p2.nextImpressionTick ~= nil then return end
 	if not p2.props.parentRef or not p2.props.parentRef.current then return end
-	local var3 = 0
+	local Delay = 0
 	
 	if p2.lastImpressionTick ~= nil then
 		p2.nextImpressionTick = p2.lastImpressionTick + p2.props.scanDebounceSeconds
-		var3 = p2.nextImpressionTick - tick()
+		Delay = p2.nextImpressionTick - tick()
 	end
-	if var3 > 0 then
-		task.delay(var3, function()
-			-- upvalues: argCheckModule (copy), p2 (ref)
-			argCheckModule.assert(p2.nextImpressionTick ~= nil and p2.nextImpressionTick < tick())
+	if Delay > 0 then
+		task.delay(Delay, function() --[[ Line: 202 ]]
+			-- upvalues: ArgCheckModule (upval), p2 (copy)
+			ArgCheckModule.assert(p2.nextImpressionTick ~= nil and p2.nextImpressionTick < tick())
 			p2.nextImpressionTick = nil
 			p2:_calculateImpressions()
 		end)
 		
 		return
+	else
+		p2.nextImpressionTick = nil
+		p2:_calculateImpressions()
 	end
-	p2.nextImpressionTick = nil
-	p2:_calculateImpressions()
 end
 
-function avatarExperienceImpressionsDetector.render(_)
+function AvatarExperienceImpressionsDetector:render() --[[ Line: 214 ]]
 	return nil
 end
 
-function avatarExperienceImpressionsDetector.didMount(p2)
+function AvatarExperienceImpressionsDetector.didMount(p2) --[[ Line: 218 ]]
 	p2.isMounted = true
 	p2:_requestImpressions()
 	
 	if p2.props.onRequestImpressionsSignal then
-		p2.onRequestImpressionsConnection = p2.props.onRequestImpressionsSignal:connect(function()
-			-- upvalues: p2 (ref)
+		p2.onRequestImpressionsConnection = p2.props.onRequestImpressionsSignal:connect(function() --[[ Line: 222 ]]
+			-- upvalues: p2 (copy)
 			p2:_requestImpressions()
 		end)
 	end
 end
 
-function avatarExperienceImpressionsDetector.willUnmount(p2)
+function AvatarExperienceImpressionsDetector.willUnmount(p2) --[[ Line: 228 ]]
 	p2.isMounted = false
 	
 	if p2.onRequestImpressionsConnection ~= nil then
@@ -168,35 +170,34 @@ function avatarExperienceImpressionsDetector.willUnmount(p2)
 	end
 end
 
-function avatarExperienceImpressionsDetector.didUpdate(p2, _, _)
+function AvatarExperienceImpressionsDetector.didUpdate(p2, _, _) --[[ Line: 236 ]]
 	p2:_requestImpressions()
 end
 
-if fFlagSignalsNavP3gAvatarExperience then
-	local var3 = avatarExperienceImpressionsDetector
-	
-	avatarExperienceImpressionsDetector = function(p2)
-		-- upvalues: var1 (ref), useSignalState (ref), reactModule (ref), var3 (ref), cryoModule (ref)
-		return reactModule.createElement(var3, cryoModule.Dictionary.union(p2, {
-			currentPage = useSignalState(var1(false).getCurrentPageName)
+if FFlagSignalsNavP3gAvatarExperience then
+	AvatarExperienceImpressionsDetector = function(p2) --[[ Line: 242 ]]
+		-- upvalues: GetLegacyNavigationStore (copy), UseSignalState (copy), ReactModule (copy), AvatarExperienceImpressionsDetector (copy), CryoModule (copy)
+		return ReactModule.createElement(AvatarExperienceImpressionsDetector, CryoModule.Dictionary.union(p2, {
+			currentPage = UseSignalState(GetLegacyNavigationStore(false).getCurrentPageName)
 		}))
 	end
 	
-	return avatarExperienceImpressionsDetector
+	return AvatarExperienceImpressionsDetector
+else
+	return (RoactRoduxModule.connect(function(p2, _) --[[ Line: 255 ]]
+		-- upvalues: FFlagUseNavigationSelectors (copy), Selectors (copy)
+		local t = {}
+		local SelectCurrentPageNameResult = nil
+		
+		if FFlagUseNavigationSelectors then
+			SelectCurrentPageNameResult = Selectors.selectCurrentPageName(p2)
+		else
+			local History = p2.Navigation.history
+			local HistoryEntry = History[#History]
+			SelectCurrentPageNameResult = HistoryEntry[#HistoryEntry].name
+		end
+		t.currentPage = SelectCurrentPageNameResult
+		
+		return t
+	end)(AvatarExperienceImpressionsDetector))
 end
-return roactRoduxModule.connect(function(p2, _)
-	-- upvalues: fFlagUseNavigationSelectors (ref), selectors (ref)
-	local var4
-	local t = {}
-	
-	if fFlagUseNavigationSelectors then
-		var4 = selectors.selectCurrentPageName(p2)
-	else
-		local history = p2.Navigation.history
-		local var5 = history[#history]
-		var4 = var5[#var5].name
-	end
-	t.currentPage = var4
-	
-	return t
-end)(avatarExperienceImpressionsDetector)

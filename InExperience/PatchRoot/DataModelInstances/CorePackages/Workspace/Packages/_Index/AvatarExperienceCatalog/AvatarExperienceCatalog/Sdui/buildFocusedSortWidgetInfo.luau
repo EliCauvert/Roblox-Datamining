@@ -1,76 +1,77 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local parent = avatarExperienceCatalog.Parent
-local httpService = game:GetService("HttpService")
-local dataHydrationModule = require(parent.DataHydration)
-local logging = require(parent.AppCommonLib).Logging
-local fFlagSduiMarketplaceCatalogSortSupport = require(parent.SharedFlags).FFlagSduiMarketplaceCatalogSortSupport
-local fFlagAXSduiSeeAllPageRequestId = require(parent.AvatarExperienceFlags).FFlagAXSduiSeeAllPageRequestId
-local _ = require(avatarExperienceCatalog.Models.WidgetListInfo)
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local Parent = AvatarExperienceCatalog.Parent
+local HttpService = game:GetService("HttpService")
+local DataHydrationModule = require(Parent.DataHydration)
+local Logging = require(Parent.AppCommonLib).Logging
+local FFlagSduiMarketplaceCatalogSortSupport = require(Parent.SharedFlags).FFlagSduiMarketplaceCatalogSortSupport
+local FFlagAXSduiSeeAllPageRequestId = require(Parent.AvatarExperienceFlags).FFlagAXSduiSeeAllPageRequestId
+local _ = require(AvatarExperienceCatalog.Models.WidgetListInfo)
 
-local function mapCardFootersToItemFooters(p1)
-	if not p1 then
+local function mapCardFootersToItemFooters(CardFooters) --[[ Line: 46 ]]
+	if not CardFooters then
 		return nil
 	end
-	local t = {}
+	local List = {}
 	
-	for i, v in p1 do
-		table.insert(t, { contentType = v.contentType })
+	for _, cardFooter in CardFooters do
+		table.insert(List, { contentType = cardFooter.contentType })
 	end
-	return t
+	return List
 end
 
-local function _(p2)
-	return if p2 then { thumbnailAspectRatio = p2.thumbnailAspectRatio } else nil
+local function _(p1) --[[ Line: 59 | Named "mapCardStyle" ]]
+	return if p1 then { thumbnailAspectRatio = p1.thumbnailAspectRatio } else nil
 end
 
-local function buildTemplate(p2, p3)
-	-- upvalues: mapCardFootersToItemFooters (ref)
-	local t = {
+local function buildTemplate(Template, Template1) --[[ Line: 71 ]]
+	-- upvalues: mapCardFootersToItemFooters (copy)
+	local CardStyle = Template.cardStyle
+	
+	return {
 		type = "ItemGroup",
 		title = nil,
 		description = nil,
-		localizedTitle = p3.title or p2.title,
-		localizedDescription = p3.description or p2.description,
-		itemFooters = mapCardFootersToItemFooters(p2.cardFooters)
+		localizedTitle = Template1.title or Template.title,
+		localizedDescription = Template1.description or Template.description,
+		itemFooters = mapCardFootersToItemFooters(Template.cardFooters),
+		cardStyle = if CardStyle then { thumbnailAspectRatio = CardStyle.thumbnailAspectRatio } else nil,
+		previewColumns = if Template.previewColumns then { default = Template.previewColumns } else nil,
+		previewRows = { default = 1 }
 	}
-	local cardStyle = p2.cardStyle
-	t.cardStyle = if not cardStyle then nil else { thumbnailAspectRatio = cardStyle.thumbnailAspectRatio }
-	t.previewColumns = if p2.previewColumns then { default = p2.previewColumns } else nil
-	t.previewRows = { default = 1 }
-	
-	return t
 end
 
-return function(p2, p3, p4, p5)
-	-- upvalues: logging (ref), dataHydrationModule (ref), fFlagSduiMarketplaceCatalogSortSupport (ref), buildTemplate (ref), fFlagAXSduiSeeAllPageRequestId (ref), httpService (ref)
-	if p2 == nil or p2 == "" then
-		logging.warn("buildFocusedSortWidgetInfo: missing sortId; bailing")
+return function(Id, Text, p1, p2) --[[ Line: 93 | Named "buildFocusedSortWidgetInfo" ]]
+	-- upvalues: Logging (copy), DataHydrationModule (copy), FFlagSduiMarketplaceCatalogSortSupport (copy), buildTemplate (copy), FFlagAXSduiSeeAllPageRequestId (copy), HttpService (copy)
+	if Id == nil or Id == "" then
+		Logging.warn("buildFocusedSortWidgetInfo: missing sortId; bailing")
 		
 		return nil
-	elseif p3 == nil or p3 == "" then
-		logging.warn("buildFocusedSortWidgetInfo: missing context for sortId=" .. p4 .. "; bailing")
+	elseif Text == nil or Text == "" then
+		Logging.warn("buildFocusedSortWidgetInfo: missing context for sortId=" .. Id .. "; bailing")
 		
 		return nil
-	end
-	local marketplaceCatalogSortStore = dataHydrationModule.MarketplaceCatalogSort.getMarketplaceCatalogSortStore(false)
-	local var1 = if fFlagSduiMarketplaceCatalogSortSupport then marketplaceCatalogSortStore.getNormalizedMarketplaceCatalogSort(p2) else marketplaceCatalogSortStore.getMarketplaceCatalogSort(p2)
-	local var2 = if var1 and var1.data then var1.data(false) else nil
-	
-	if not var2 then
-		logging.warn("buildFocusedSortWidgetInfo: sort not in cache for sortId=" .. p4 .. " context=" .. p5)
+	else
+		local MarketplaceCatalogSortStore = DataHydrationModule.MarketplaceCatalogSort.getMarketplaceCatalogSortStore(false)
+		local NormalizedMarketplaceCatalogSort = if FFlagSduiMarketplaceCatalogSortSupport then MarketplaceCatalogSortStore.getNormalizedMarketplaceCatalogSort(Id) else MarketplaceCatalogSortStore.getMarketplaceCatalogSort(Id)
+		local DataResult = if NormalizedMarketplaceCatalogSort and NormalizedMarketplaceCatalogSort.data then NormalizedMarketplaceCatalogSort.data(false) else nil
 		
-		return nil
-	end
-	return {
-		widgetInfo = {
-			[p3] = {
-				id = p2,
-				type = var2.type,
-				content = var2.content,
-				template = buildTemplate(var2, p4),
-				tagId = var2.tagId
+		if DataResult then
+			return {
+				widgetInfo = {
+					[Text] = {
+						id = Id,
+						type = DataResult.type,
+						content = DataResult.content,
+						template = buildTemplate(DataResult, p1),
+						tagId = DataResult.tagId
+					}
+				},
+				requestId = if FFlagAXSduiSeeAllPageRequestId and p2 ~= nil and p2 ~= "" then p2 else HttpService:GenerateGUID(true)
 			}
-		},
-		requestId = if fFlagAXSduiSeeAllPageRequestId and p5 ~= nil and p5 ~= "" then p5 else httpService:GenerateGUID(true)
-	}
+		else
+			Logging.warn("buildFocusedSortWidgetInfo: sort not in cache for sortId=" .. Id .. " context=" .. Text)
+			
+			return nil
+		end
+	end
 end

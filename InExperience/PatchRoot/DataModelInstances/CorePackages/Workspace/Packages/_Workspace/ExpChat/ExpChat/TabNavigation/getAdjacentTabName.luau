@@ -1,18 +1,18 @@
-﻿return function(p1, p2, p3)
-	if #p1 < 2 then
+﻿return function(Tbl, Name, p1) --[[ Line: 19 | Named "getAdjacentTabName" ]]
+	if #Tbl < 2 then
 		return nil
 	end
-	local cloned = table.clone(p1)
-	table.sort(cloned, function(p4, p5)
-		return p4.tabIndex < p5.tabIndex
+	local Copy = table.clone(Tbl)
+	table.sort(Copy, function(A, B): boolean --[[ Line: 25 ]]
+		return A.tabIndex < B.tabIndex
 	end)
-	local var1 = nil
+	local v1: number? = nil
 	
-	for i, v in cloned do
-		if v.name == p2 then
-			var1 = i
+	for i, value in Copy do
+		if value.name == Name then
+			v1 = i
 			break
 		end
 	end
-	return if var1 == nil then nil else cloned[(var1 - 1 + p3) % #cloned + 1].name
+	return if v1 == nil then nil else Copy[(v1 - 1 + p1) % #Copy + 1].name
 end

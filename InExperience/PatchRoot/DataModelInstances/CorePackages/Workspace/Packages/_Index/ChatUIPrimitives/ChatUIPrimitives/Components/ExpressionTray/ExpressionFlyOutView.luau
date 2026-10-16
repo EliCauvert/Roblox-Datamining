@@ -1,43 +1,43 @@
-﻿local chatUIPrimitives = script:FindFirstAncestor("ChatUIPrimitives")
-local parent = chatUIPrimitives.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local useDismissOnEscapeOrMenuModule = require(chatUIPrimitives.Hooks.useDismissOnEscapeOrMenu)
-local t = {
+﻿local ChatUIPrimitives = script:FindFirstAncestor("ChatUIPrimitives")
+local Parent = ChatUIPrimitives.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local UseDismissOnEscapeOrMenuModule = require(ChatUIPrimitives.Hooks.useDismissOnEscapeOrMenu)
+local config = {
 	SelectionBehaviorUp = Enum.SelectionBehavior.Stop,
 	SelectionBehaviorDown = Enum.SelectionBehavior.Stop,
 	SelectionBehaviorLeft = Enum.SelectionBehavior.Stop,
 	SelectionBehaviorRight = Enum.SelectionBehavior.Stop
 }
 
-return reactModule.memo(function(p1)
-	-- upvalues: useDismissOnEscapeOrMenuModule (ref), reactModule (ref), foundationModule (ref), t (ref)
-	useDismissOnEscapeOrMenuModule(p1.isOpen, p1.onPressedOutside)
+return ReactModule.memo(function(p1) --[[ Line: 39 | Named "ExpressionFlyOutView" ]]
+	-- upvalues: UseDismissOnEscapeOrMenuModule (copy), ReactModule (copy), FoundationModule (copy), config (copy)
+	UseDismissOnEscapeOrMenuModule(p1.isOpen, p1.onPressedOutside)
 	
-	return reactModule.createElement(foundationModule.Popover.Root, { isOpen = p1.isOpen }, {
-		Anchor = reactModule.createElement(foundationModule.Popover.Anchor, nil, {
-			AnchorWrapper = reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.Popover.Root, { isOpen = p1.isOpen }, {
+		Anchor = ReactModule.createElement(FoundationModule.Popover.Anchor, nil, {
+			AnchorWrapper = ReactModule.createElement(FoundationModule.View, {
 				tag = "col align-x-center align-y-bottom size-0-full auto-x",
 				padding = if p1.addTopPadding then { top = UDim.new(0, 6) } else nil
 			}, { Button = p1.anchorContent })
 		}),
-		Content = reactModule.createElement(foundationModule.Popover.Content, {
+		Content = ReactModule.createElement(FoundationModule.Popover.Content, {
 			hasArrow = false,
 			side = {
 				offset = 7,
-				position = foundationModule.Enums.PopoverSide.Right
+				position = FoundationModule.Enums.PopoverSide.Right
 			},
 			align = {
 				offset = 3,
-				position = foundationModule.Enums.PopoverAlign.Start
+				position = FoundationModule.Enums.PopoverAlign.Start
 			},
-			radius = foundationModule.Enums.Radius.Medium,
+			radius = FoundationModule.Enums.Radius.Medium,
 			onPressedOutside = p1.onPressedOutside
 		}, {
-			ContentWrapper = reactModule.createElement(foundationModule.View, {
+			ContentWrapper = ReactModule.createElement(FoundationModule.View, {
 				Size = UDim2.fromOffset(p1.width or 360, p1.height or 240),
 				ref = p1.contentRef,
-				selectionGroup = if p1.focusNavEnabled then t else nil
+				selectionGroup = if p1.focusNavEnabled then config else nil
 			}, { Container = p1.content })
 		})
 	})

@@ -1,11 +1,14 @@
-﻿local parent = script.Parent.Parent
-local openPromptModule = require(parent.Actions.OpenPrompt)
-local promptTypeModule = require(parent.PromptType)
+﻿local Parent = script.Parent.Parent
+local OpenPromptModule = require(Parent.Actions.OpenPrompt)
+local PromptTypeModule = require(Parent.PromptType)
 
-return function(p1, p2)
-	-- upvalues: openPromptModule (ref), promptTypeModule (ref)
-	return function(p3)
-		-- upvalues: openPromptModule (copy), promptTypeModule (copy), p1 (ref), p2 (ref)
-		p3:dispatch(openPromptModule(promptTypeModule.SaveAvatar, { humanoidDescription = p1, rigType = p2 }))
+return function(HumanoidDescription, RigType) --[[ Line: 6 ]]
+	-- upvalues: OpenPromptModule (copy), PromptTypeModule (copy)
+	return function(p1) --[[ Line: 7 ]]
+		-- upvalues: OpenPromptModule (upval), PromptTypeModule (upval), HumanoidDescription (copy), RigType (copy)
+		p1:dispatch(OpenPromptModule(PromptTypeModule.SaveAvatar, {
+			humanoidDescription = HumanoidDescription,
+			rigType = RigType
+		}))
 	end
 end

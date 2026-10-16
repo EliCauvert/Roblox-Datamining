@@ -1,130 +1,133 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local _ = require(momentsCreation.Types.CreationFlowTypes)
-local createSignal = require(momentsCreation.Parent.Signals).createSignal
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local _ = require(MomentsCreation.Types.CreationFlowTypes)
+local CreateSignalFunction = require(MomentsCreation.Parent.Signals).createSignal
 
-return function(p1, p2, p3)
-	-- upvalues: createSignal (ref)
-	local var1, var2 = createSignal(0)
-	local var3, var4 = createSignal(0)
-	local var5, var6 = createSignal(0)
-	local var7, var8 = createSignal(true)
-	local var9, var10 = createSignal(false)
-	local var11, var12 = createSignal("Loading")
-	local var13, var14 = createSignal(nil)
-	local var15 = nil
+return function(p1, Callback, Callback1) --[[ Line: 63 | Named "createCapturePreviewController" ]]
+	-- upvalues: CreateSignalFunction (copy)
+	local Signal, Signal2 = CreateSignalFunction(0)
+	local Signal1, Signal2_1 = CreateSignalFunction(0)
+	local Signal3, Signal2_2 = CreateSignalFunction(0)
+	local Signal4, Signal2_3 = CreateSignalFunction(true)
+	local Signal5, Signal2_4 = CreateSignalFunction(false)
+	local Loading, Loading2 = CreateSignalFunction("Loading")
+	local Signal6, Signal2_5 = CreateSignalFunction(nil)
+	local v1 = nil
 	
-	local function play()
-		-- upvalues: var13 (ref), var7 (ref), var8 (ref), var15 (write)
-		local var16 = var13(false)
+	local function play() --[[ Line: 168 ]]
+		-- upvalues: Signal6 (copy), Signal4 (copy), Signal2_3 (copy), v1 (ref)
+		local SignalResult = Signal6(false)
 		
-		if var16 == nil then
-			if var7(false) then return end
-			var8(true)
+		if SignalResult == nil then
+			if Signal4(false) then return end
+			Signal2_3(true)
 			
-			if var15 ~= nil then
-				var15.play()
+			if v1 ~= nil then
+				v1.play()
 			end
 			return
-		elseif not var16.getState(false).isPlaying then
-			var16.play()
+		elseif not SignalResult.getState(false).isPlaying then
+			SignalResult.play()
 		end
 	end
 	
 	return {
 		getCapture = p1.getSelectedCapture,
-		getReadiness = function(p4)
-			-- upvalues: var13 (ref), var11 (ref)
-			local var16 = var13(p4)
+		getReadiness = function(p2) --[[ Line: 160 ]]
+			-- upvalues: Signal6 (copy), Loading (copy)
+			local SignalResult = Signal6(p2)
 			
-			return if var16 == nil then var11(p4) else var16.getState(p4).readiness
+			return if SignalResult == nil then Loading(p2) else SignalResult.getState(p2).readiness
 		end,
 		playback = {
-			getPosition = function(p4)
-				-- upvalues: var13 (ref), p2 (ref), var1 (ref)
-				local var16 = var13(p4)
+			getPosition = function(p2) --[[ Line: 131 ]]
+				-- upvalues: Signal6 (copy), Callback (copy), Signal (copy)
+				local SignalResult = Signal6(p2)
 				
-				if var16 ~= nil then
-					return var16.getPosition(p4)
+				if SignalResult == nil then
+					local CallbackResult = if Callback == nil then nil else Callback(p2)
+					
+					return if CallbackResult == nil then Signal(p2) else math.clamp(Signal(p2) - CallbackResult.startTime, 0, (math.max(0, CallbackResult.endTime - CallbackResult.startTime)))
+				else
+					return SignalResult.getPosition(p2)
 				end
-				local var17 = if p2 ~= nil then nil else p2(p4)
-				
-				return if var17 == nil then var1(p4) else math.clamp(var1(p4) - var17.startTime, 0, math.max(0, var17.endTime - var17.startTime))
 			end,
-			getDuration = function(p4)
-				-- upvalues: var13 (ref), p2 (ref), var3 (ref)
-				local var16 = var13(p4)
+			getDuration = function(p2) --[[ Line: 108 ]]
+				-- upvalues: Signal6 (copy), Callback (copy), Signal1 (copy)
+				local SignalResult = Signal6(p2)
 				
-				if var16 ~= nil then
-					return var16.getState(p4).duration
+				if SignalResult == nil then
+					local CallbackResult = if Callback == nil then nil else Callback(p2)
+					
+					return if CallbackResult == nil then Signal1(p2) else math.max(0, CallbackResult.endTime - CallbackResult.startTime)
+				else
+					return SignalResult.getState(p2).duration
 				end
-				local var17 = if p2 ~= nil then nil else p2(p4)
+			end,
+			getTimeLength = function(p2) --[[ Line: 121 ]]
+				-- upvalues: Signal6 (copy), Signal3 (copy)
+				local SignalResult = Signal6(p2)
 				
-				return if var17 == nil then var3(p4) else math.max(0, var17.endTime - var17.startTime)
+				return if SignalResult == nil then Signal3(p2) else SignalResult.getState(p2).timeLength
 			end,
-			getTimeLength = function(p4)
-				-- upvalues: var13 (ref), var5 (ref)
-				local var16 = var13(p4)
+			getRegion = function(p2) --[[ Line: 97 ]]
+				-- upvalues: Callback (copy)
+				return if Callback == nil then nil else Callback(p2)
+			end,
+			getMusic = function(p2) --[[ Line: 102 ]]
+				-- upvalues: Callback1 (copy)
+				return if Callback1 == nil then nil else Callback1(p2)
+			end,
+			getIsPlaying = function(p2) --[[ Line: 144 ]]
+				-- upvalues: Signal6 (copy), Signal4 (copy)
+				local SignalResult = Signal6(p2)
 				
-				return if var16 == nil then var5(p4) else var16.getState(p4).timeLength
+				return if SignalResult == nil then Signal4(p2) else SignalResult.getState(p2).isPlaying
 			end,
-			getRegion = function(p4)
-				-- upvalues: p2 (ref)
-				return if p2 == nil then nil else p2(p4)
-			end,
-			getMusic = function(p4)
-				-- upvalues: p3 (ref)
-				return if p3 == nil then nil else p3(p4)
-			end,
-			getIsPlaying = function(p4)
-				-- upvalues: var13 (ref), var7 (ref)
-				local var16 = var13(p4)
+			getIsMuted = function(p2) --[[ Line: 152 ]]
+				-- upvalues: Signal6 (copy), Signal5 (copy)
+				local SignalResult = Signal6(p2)
 				
-				return if var16 == nil then var7(p4) else var16.getState(p4).isPlaying
-			end,
-			getIsMuted = function(p4)
-				-- upvalues: var13 (ref), var9 (ref)
-				local var16 = var13(p4)
-				
-				return if var16 == nil then var9(p4) else var16.getState(p4).isMuted
+				return if SignalResult == nil then Signal5(p2) else SignalResult.getState(p2).isMuted
 			end,
 			play = play,
-			pause = function()
-				-- upvalues: var13 (ref), var7 (ref), var8 (ref), var15 (write)
-				local var16 = var13(false)
+			pause = function() --[[ Line: 187 ]]
+				-- upvalues: Signal6 (copy), Signal4 (copy), Signal2_3 (copy), v1 (ref)
+				local SignalResult = Signal6(false)
 				
-				if var16 ~= nil then
-					var16.pause()
+				if SignalResult ~= nil then
+					SignalResult.pause()
 					
 					return
-				elseif not var7(false) then return end
-				var8(false)
+				end
+				if not Signal4(false) then return end
+				Signal2_3(false)
 				
-				if var15 ~= nil then
-					var15.pause()
+				if v1 ~= nil then
+					v1.pause()
 				end
 			end,
-			toggle = function()
-				-- upvalues: var13 (ref), var7 (ref), var8 (ref), var15 (write), play (ref)
-				local var16 = var13(false)
+			toggle = function() --[[ Line: 202 ]]
+				-- upvalues: Signal6 (copy), Signal4 (copy), Signal2_3 (copy), v1 (ref), play (copy)
+				local SignalResult = Signal6(false)
 				
-				if var16 ~= nil then
-					var16.toggle()
+				if SignalResult ~= nil then
+					SignalResult.toggle()
 					
 					return
-				elseif var7(false) then
-					local var17 = var13(false)
+				end
+				if Signal4(false) then
+					local SignalResult1 = Signal6(false)
 					
-					if var17 ~= nil then
-						var17.pause()
+					if SignalResult1 ~= nil then
+						SignalResult1.pause()
 						
 						return
-					elseif not var7(false) then return end
-					var8(false)
+					end
+					if not Signal4(false) then return end
+					Signal2_3(false)
 					
-					if var15 == nil then
-						return
-					else
-						var15.pause()
+					if v1 ~= nil then
+						v1.pause()
 						
 						return
 					end
@@ -132,82 +135,82 @@ return function(p1, p2, p3)
 					play()
 				end
 			end,
-			seek = function(p4)
-				-- upvalues: var13 (ref), p2 (ref), var2 (ref), var15 (write)
-				local var16 = var13(false)
+			seek = function(p2) --[[ Line: 231 ]]
+				-- upvalues: Signal6 (copy), Callback (copy), Signal2 (copy), v1 (ref)
+				local SignalResult = Signal6(false)
 				
-				if var16 ~= nil then
-					var16.seek(p4)
+				if SignalResult ~= nil then
+					SignalResult.seek(p2)
 					
 					return
 				end
-				local var17 = if p2 ~= nil then nil else p2(false)
-				local var18 = p4 + (if var17 ~= nil then 0 else var17.startTime)
-				var2(var18)
+				local CallbackResult = if Callback == nil then nil else Callback(false)
+				local v2 = p2 + (if CallbackResult == nil then 0 else CallbackResult.startTime)
+				Signal2(v2)
 				
-				if var15 ~= nil then
-					var15.seek(var18)
+				if v1 ~= nil then
+					v1.seek(v2)
 				end
 			end,
-			setMuted = function(value)
-				-- upvalues: var13 (ref), var10 (ref), var15 (write)
-				local var16 = var13(false)
+			setMuted = function(p2) --[[ Line: 215 ]]
+				-- upvalues: Signal6 (copy), Signal2_4 (copy), v1 (ref)
+				local SignalResult = Signal6(false)
 				
-				if var16 ~= nil then
-					var16.audio.setMasterMuted(value)
+				if SignalResult ~= nil then
+					SignalResult.audio.setMasterMuted(p2)
 					
 					return
 				end
-				var10(value)
+				Signal2_4(p2)
 				
-				if var15 ~= nil and var15.setMuted ~= nil then
-					var15.setMuted(value)
+				if v1 ~= nil and v1.setMuted ~= nil then
+					v1.setMuted(p2)
 				end
 			end,
-			toggleMute = function()
-				-- upvalues: var13 (ref), var9 (ref), var10 (ref), var15 (write)
-				local var16 = var13(false)
-				local var17 = not (if var16 ~= nil then var9(false) else var16.getState(false).isMuted)
-				local var18 = var13(false)
+			toggleMute = function() --[[ Line: 227 ]]
+				-- upvalues: Signal6 (copy), Signal5 (copy), Signal2_4 (copy), v1 (ref)
+				local SignalResult = Signal6(false)
+				local Inverted = not (if SignalResult == nil then Signal5(false) else SignalResult.getState(false).isMuted)
+				local SignalResult1 = Signal6(false)
 				
-				if var18 ~= nil then
-					var18.audio.setMasterMuted(var17)
+				if SignalResult1 ~= nil then
+					SignalResult1.audio.setMasterMuted(Inverted)
 					
 					return
 				end
-				var10(var17)
+				Signal2_4(Inverted)
 				
-				if var15 ~= nil and var15.setMuted ~= nil then
-					var15.setMuted(var17)
+				if v1 ~= nil and v1.setMuted ~= nil then
+					v1.setMuted(Inverted)
 				end
 			end
 		},
-		setMediaController = var14,
-		setRegion = function(value)
-			-- upvalues: var13 (ref)
-			local var16 = var13(false)
+		setMediaController = Signal2_5,
+		setRegion = function(p2) --[[ Line: 252 ]]
+			-- upvalues: Signal6 (copy)
+			local SignalResult = Signal6(false)
 			
-			if var16 ~= nil then
-				var16.setRegion(value)
+			if SignalResult ~= nil then
+				SignalResult.setRegion(p2)
 			end
 		end,
-		bindEngine = function(p4)
-			-- upvalues: var15 (write), var7 (ref)
-			var15 = p4
+		bindEngine = function(p2) --[[ Line: 85 ]]
+			-- upvalues: v1 (ref), Signal4 (copy)
+			v1 = p2
 			
-			if p4 ~= nil then
-				if var7(false) then
-					p4.play()
+			if p2 ~= nil then
+				if Signal4(false) then
+					p2.play()
 					
 					return
 				end
-				p4.pause()
+				p2.pause()
 			end
 		end,
-		setPosition = var2,
-		setDuration = var4,
-		setTimeLength = var6,
-		setIsPlaying = var8,
-		setReadiness = var12
+		setPosition = Signal2,
+		setDuration = Signal2_1,
+		setTimeLength = Signal2_2,
+		setIsPlaying = Signal2_3,
+		setReadiness = Loading2
 	}
 end

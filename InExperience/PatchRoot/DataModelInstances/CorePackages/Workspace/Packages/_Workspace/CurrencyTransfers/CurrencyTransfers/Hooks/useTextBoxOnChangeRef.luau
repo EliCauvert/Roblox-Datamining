@@ -1,55 +1,56 @@
-﻿local currencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
-local reactModule = require(currencyTransfers.Parent.React)
-local getFFlagCurrencyTransferFixTextBoxInputModule = require(currencyTransfers.Flags.GetFFlagCurrencyTransferFixTextBoxInput)
+﻿local CurrencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
+local ReactModule = require(CurrencyTransfers.Parent.React)
+local GetFFlagCurrencyTransferFixTextBoxInputModule = require(CurrencyTransfers.Flags.GetFFlagCurrencyTransferFixTextBoxInput)
 
-return function(p1, p2)
-	-- upvalues: reactModule (ref), getFFlagCurrencyTransferFixTextBoxInputModule (ref)
-	local var1 = reactModule.useRef(nil)
-	local var2 = reactModule.useRef(false)
+return function(Callback, Callback1) --[[ Line: 18 ]]
+	-- upvalues: ReactModule (copy), GetFFlagCurrencyTransferFixTextBoxInputModule (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(false)
 	
-	return reactModule.useCallback(function(p3)
-		-- upvalues: var1 (ref), getFFlagCurrencyTransferFixTextBoxInputModule (copy), var2 (ref), p1 (ref), p2 (ref)
-		if var1.current then
-			for i, v in ipairs(var1.current) do
-				v:Disconnect()
+	return ReactModule.useCallback(function(TextBox) --[[ Line: 29 ]]
+		-- upvalues: UseRefResult (copy), GetFFlagCurrencyTransferFixTextBoxInputModule (upval), UseRefResult1 (copy), Callback (copy), Callback1 (copy)
+		if UseRefResult.current then
+			for _, Connection in ipairs(UseRefResult.current) do
+				Connection:Disconnect()
 			end
-			var1.current = nil
+			UseRefResult.current = nil
 		end
-		if p3 then
-			local t = {}
-			table.insert(t, p3:GetPropertyChangedSignal("Text"):Connect(function()
-				-- upvalues: p3 (ref), getFFlagCurrencyTransferFixTextBoxInputModule (copy), var2 (copy), p1 (copy)
-				local text = p3.Text
-				local var3 = text:gsub("%D", "")
+		if TextBox then
+			local List = {}
+			table.insert(List, TextBox:GetPropertyChangedSignal("Text"):Connect(function() --[[ Line: 41 ]]
+				-- upvalues: TextBox (copy), GetFFlagCurrencyTransferFixTextBoxInputModule (upval), UseRefResult1 (upval), Callback (upval)
+				local Text: string = TextBox.Text
+				local D = Text:gsub("%D", "")
 				
-				if var3 ~= text then
-					p3.Text = var3
+				if D ~= Text then
+					TextBox.Text = D
 				end
-				if getFFlagCurrencyTransferFixTextBoxInputModule() and var2.current and var3 == "" then
+				if not GetFFlagCurrencyTransferFixTextBoxInputModule() or not UseRefResult1.current or D ~= "" then
+					Callback((tonumber(D)))
+					
 					return
 				end
-				p1(tonumber(var3))
 			end))
 			
-			if p2 then
-				table.insert(t, p3.Focused:Connect(function()
-					-- upvalues: getFFlagCurrencyTransferFixTextBoxInputModule (copy), p3 (ref), var2 (copy), p2 (copy)
-					if getFFlagCurrencyTransferFixTextBoxInputModule() then
-						p3.CursorPosition = #p3.Text + 1
-						var2.current = true
-						task.delay(0.1, function()
-							-- upvalues: var2 (copy)
-							var2.current = false
+			if Callback1 then
+				table.insert(List, TextBox.Focused:Connect(function() --[[ Line: 60 ]]
+					-- upvalues: GetFFlagCurrencyTransferFixTextBoxInputModule (upval), TextBox (copy), UseRefResult1 (upval), Callback1 (upval)
+					if GetFFlagCurrencyTransferFixTextBoxInputModule() then
+						TextBox.CursorPosition = #TextBox.Text + 1
+						UseRefResult1.current = true
+						task.delay(0.1, function() --[[ Line: 67 ]]
+							-- upvalues: UseRefResult1 (upval)
+							UseRefResult1.current = false
 						end)
 					end
-					p2(true, false)
+					Callback1(true, false)
 				end))
-				table.insert(t, p3.FocusLost:Connect(function(p4)
-					-- upvalues: p2 (copy)
-					p2(false, p4)
+				table.insert(List, TextBox.FocusLost:Connect(function(EnterPressed) --[[ Line: 77 ]]
+					-- upvalues: Callback1 (upval)
+					Callback1(false, EnterPressed)
 				end))
 			end
-			var1.current = t
+			UseRefResult.current = List
 		end
-	end, { p1, p2 })
+	end, { Callback, Callback1 })
 end

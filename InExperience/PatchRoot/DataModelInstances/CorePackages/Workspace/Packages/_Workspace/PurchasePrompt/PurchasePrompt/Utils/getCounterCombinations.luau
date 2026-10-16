@@ -1,20 +1,20 @@
-﻿return function(p1, p2, p3, p4, p5)
-	local t = {}
+﻿return function(Text, Text1, Text2, Text3, p1) --[[ Line: 1 ]]
+	local List = {}
 	
-	if p4 == nil then
-		table.insert(t, p1 .. p1 .. p2)
+	if Text3 == nil then
+		table.insert(List, Text .. Text1 .. Text2)
 	else
-		table.insert(t, p1 .. p3 .. p1 .. p2)
+		table.insert(List, Text .. Text3 .. Text1 .. Text2)
 	end
-	if p5 ~= nil then
-		local var1 = tostring(p5)
+	if p1 ~= nil then
+		local Text4 = tostring(p1)
 		
-		if p4 ~= nil then
-			table.insert(t, p1 .. p3 .. p1 .. var1 .. p2)
+		if Text3 ~= nil then
+			table.insert(List, Text .. Text3 .. Text1 .. Text4 .. Text2)
 			
-			return t
+			return List
 		end
-		table.insert(t, p1 .. p1 .. var1 .. p2)
+		table.insert(List, Text .. Text1 .. Text4 .. Text2)
 	end
-	return t
+	return List
 end

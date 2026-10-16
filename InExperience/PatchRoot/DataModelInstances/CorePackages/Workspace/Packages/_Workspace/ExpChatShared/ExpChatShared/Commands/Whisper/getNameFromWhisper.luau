@@ -1,18 +1,19 @@
-﻿local function getArgs(p1, p2)
-	for i, v in pairs(p2) do
-		local text = v .. " "
-		local var1 = string.len(text)
+﻿local function getArgs(Text: string, List): string? --[[ Line: 2 ]]
+	local Length = nil
+	for _, value in pairs(List) do
+		local Text1 = value .. " "
+		Length = string.len(Text1)
 		
-		if string.sub(p1, 1, var1):lower() == text then
-			return string.sub(p1, var1 + 1)
+		if string.sub(Text, 1, Length):lower() == Text1 then
+			return (string.sub(Text, Length + 1))
 		end
 	end
 	return nil
 end
 
-return function(p3, p4)
-	-- upvalues: getArgs (ref)
-	local var2 = getArgs(p3, p4)
+return function(p1, p2) --[[ Line: 15 ]]
+	-- upvalues: getArgs (copy)
+	local Args: string = getArgs(p1, p2)
 	
-	return if var2 then string.split(var2, " ")[1] else nil
+	return if Args then string.split(Args, " ")[1] else nil
 end

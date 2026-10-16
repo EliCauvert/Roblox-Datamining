@@ -1,7 +1,6 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local _ = require(profilePlatform.Common.Enums)
-local _ = require(profilePlatform.Types.Component)
-local _ = require(parent.Foundation)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local _ = require(ProfilePlatform.Common.Enums)
+local _ = require(ProfilePlatform.Types.Component)
+local _ = require(ProfilePlatform.Parent.Foundation)
 
 return {}

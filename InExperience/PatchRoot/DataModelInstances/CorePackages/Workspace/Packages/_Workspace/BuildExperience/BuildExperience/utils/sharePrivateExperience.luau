@@ -1,39 +1,40 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local default = require(parent.ExternalContentSharingProtocol).ExternalContentSharingProtocol.default
-local universalShareSheet = require(parent.ShareSheet).UniversalShareSheet
-local sharedFlagsModule = require(parent.SharedFlags)
-local createExperienceShareLinkModule = require(buildExperience.utils.createExperienceShareLink)
-local fFlagEnableShareSheet = sharedFlagsModule.FFlagEnableShareSheet
-local isSubjectToDesktopPolicies = sharedFlagsModule.isSubjectToDesktopPolicies
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local Default = require(Parent.ExternalContentSharingProtocol).ExternalContentSharingProtocol.default
+local UniversalShareSheet = require(Parent.ShareSheet).UniversalShareSheet
+local SharedFlagsModule = require(Parent.SharedFlags)
+local CreateExperienceShareLinkModule = require(BuildExperience.utils.createExperienceShareLink)
+local FFlagEnableShareSheet = SharedFlagsModule.FFlagEnableShareSheet
+local IsSubjectToDesktopPoliciesFunction = SharedFlagsModule.isSubjectToDesktopPolicies
 
-return function(p1)
-	-- upvalues: createExperienceShareLinkModule (ref), fFlagEnableShareSheet (ref), universalShareSheet (ref), isSubjectToDesktopPolicies (ref), default (ref)
-	return createExperienceShareLinkModule(p1):andThen(function(p2)
-		-- upvalues: fFlagEnableShareSheet (copy), universalShareSheet (copy), isSubjectToDesktopPolicies (copy), default (copy)
-		if p2 == nil then
+return function(p1) --[[ Line: 33 | Named "sharePrivateExperience" ]]
+	-- upvalues: CreateExperienceShareLinkModule (copy), FFlagEnableShareSheet (copy), UniversalShareSheet (copy), IsSubjectToDesktopPoliciesFunction (copy), Default (copy)
+	return CreateExperienceShareLinkModule(p1):andThen(function(Result) --[[ Line: 34 ]]
+		-- upvalues: FFlagEnableShareSheet (upval), UniversalShareSheet (upval), IsSubjectToDesktopPoliciesFunction (upval), Default (upval)
+		if Result == nil then
 			error("sharePrivateExperience: no share link returned")
 		end
-		if fFlagEnableShareSheet then
-			universalShareSheet.show({
+		if FFlagEnableShareSheet then
+			UniversalShareSheet.show({
 				context = "BuildExperiencePrivateInvitesShareLink",
-				url = p2
+				url = Result
 			})
 			
 			return nil
-		elseif isSubjectToDesktopPolicies() then
-			default:setClipboardText({
+		elseif IsSubjectToDesktopPoliciesFunction() then
+			Default:setClipboardText({
 				context = "BuildExperiencePrivateInvitesShareLink",
-				text = p2
+				text = Result
 			})
 			
-			return { copiedToClipboard = true, url = p2 }
+			return { copiedToClipboard = true, url = Result }
+		else
+			Default:shareUrl({
+				context = "BuildExperiencePrivateInvitesShareLink",
+				url = Result
+			})
+			
+			return { copiedToClipboard = false, url = Result }
 		end
-		default:shareUrl({
-			context = "BuildExperiencePrivateInvitesShareLink",
-			url = p2
-		})
-		
-		return { copiedToClipboard = false, url = p2 }
 	end)
 end

@@ -1,137 +1,137 @@
-﻿local color3 = Color3.new(0.35, 0.55, 0.35)
-local color3_1 = Color3.new(0.15, 0.35, 0.15)
-local color3_2 = Color3.new(1, 1, 1)
-local color3_3 = Color3.new(1, 1, 1)
-local color3_4 = Color3.new(1, 1, 1)
-local uDim2 = UDim2.new(0, 0, 0, 0)
-local uDim2_1 = UDim2.new(1, -18, 0, 2)
-local uDim2_2 = UDim2.new(0, 16, 0, 16)
-local uDim2_3 = UDim2.new(1, -100, 0, 0)
-local uDim2_4 = UDim2.new(0, 100, 0, 20)
+﻿local _Color3 = Color3.new(0.35, 0.55, 0.35)
+local _Color3_1 = Color3.new(0.15, 0.35, 0.15)
+local _Color3_2 = Color3.new(1, 1, 1)
+local _Color3_3 = Color3.new(1, 1, 1)
+local _Color3_4 = Color3.new(1, 1, 1)
+local _UDim2 = UDim2.new(0, 0, 0, 0)
+local _UDim2_1 = UDim2.new(1, -18, 0, 2)
+local _UDim2_2 = UDim2.new(0, 16, 0, 16)
+local _UDim2_3 = UDim2.new(1, -100, 0, 0)
+local _UDim2_4 = UDim2.new(0, 100, 0, 20)
 local _ = game:GetService("CoreGui")
 
-local function _(p1)
-	-- upvalues: color3_2 (ref), color3_4 (ref), uDim2_1 (ref), uDim2_2 (ref)
-	p1.TextXAlignment = Enum.TextXAlignment.Center
-	p1.TextColor3 = color3_2
-	p1.BackgroundTransparency = 1
-	p1.BorderColor3 = color3_4
-	p1.BorderSizePixel = 1
-	p1.Position = uDim2_1
-	p1.Size = uDim2_2
+local function _(Label) --[[ Line: 36 | Named "__StyleAndSizeButton" ]]
+	-- upvalues: _Color3_2 (copy), _Color3_4 (copy), _UDim2_1 (copy), _UDim2_2 (copy)
+	Label.TextXAlignment = Enum.TextXAlignment.Center
+	Label.TextColor3 = _Color3_2
+	Label.BackgroundTransparency = 1
+	Label.BorderColor3 = _Color3_4
+	Label.BorderSizePixel = 1
+	Label.Position = _UDim2_1
+	Label.Size = _UDim2_2
 end
 
-local _ = function(p1)
-	-- upvalues: color3_2 (ref)
-	p1.TextXAlignment = Enum.TextXAlignment.Left
-	p1.TextColor3 = color3_2
-	p1.BackgroundTransparency = 1
-	p1.Position = UDim2.new(0, 5, 0, 0)
-	p1.Size = UDim2.new(1, -10, 1, 0)
+local _ = function(Label) --[[ Line: 47 | Named "__StyleAndSizeLabel" ]]
+	-- upvalues: _Color3_2 (copy)
+	Label.TextXAlignment = Enum.TextXAlignment.Left
+	Label.TextColor3 = _Color3_2
+	Label.BackgroundTransparency = 1
+	Label.Position = UDim2.new(0, 5, 0, 0)
+	Label.Size = UDim2.new(1, -10, 1, 0)
 end
 
-local _ = function(p1)
-	-- upvalues: color3_3 (ref)
-	p1.BorderColor3 = color3_3
+local _ = function(p1) --[[ Line: 56 | Named "__StyleRowCellFrame" ]]
+	-- upvalues: _Color3_3 (copy)
+	p1.BorderColor3 = _Color3_3
 	p1.BorderSizePixel = 1
 	p1.BackgroundTransparency = 0.6
 end
 
-local t = {}
-t.__index = t
+local Module = {}
+Module.__index = Module
 
-function t.new(p1)
-	-- upvalues: t (ref), uDim2 (ref), color3_3 (ref), color3_2 (ref), color3_4 (ref), uDim2_1 (ref), uDim2_2 (ref), uDim2_3 (ref), uDim2_4 (ref)
-	local value = {}
-	setmetatable(value, t)
-	value._treeViewItem = p1
-	value._expanded = true
-	value._expansionToggleCallback = nil
-	value._frame = Instance.new("Frame")
-	value._frame.Name = "MemoryAnalyzerRowClassFrame"
-	value._frame.BackgroundTransparency = 1
-	value._buttonFrame = Instance.new("Frame")
-	value._buttonFrame.Name = "ButtonFrame"
-	value._buttonFrame.Parent = value._frame
-	value._buttonFrame.Position = uDim2
-	local var1 = (1 + p1:getStackDepth()) * 20
-	value._buttonFrame.Size = UDim2.new(0, var1, 0, 20)
-	local buttonFrame_1 = value._buttonFrame
-	buttonFrame_1.BorderColor3 = color3_3
-	buttonFrame_1.BorderSizePixel = 1
-	buttonFrame_1.BackgroundTransparency = 0.6
-	value._button = Instance.new("TextButton")
-	value._button.Name = "Button"
-	value._button.Parent = value._buttonFrame
-	local button_1 = value._button
-	button_1.TextXAlignment = Enum.TextXAlignment.Center
-	button_1.TextColor3 = color3_2
-	button_1.BackgroundTransparency = 1
-	button_1.BorderColor3 = color3_4
-	button_1.BorderSizePixel = 1
-	button_1.Position = uDim2_1
-	button_1.Size = uDim2_2
-	value._button.MouseButton1Click:connect(function()
-		-- upvalues: value (ref)
-		value:__toggleExpansion()
+function Module.new(_treeViewItem) --[[ Line: 74 ]]
+	-- upvalues: Module (copy), _UDim2 (copy), _Color3_3 (copy), _Color3_2 (copy), _Color3_4 (copy), _UDim2_1 (copy), _UDim2_2 (copy), _UDim2_3 (copy), _UDim2_4 (copy)
+	local t = {}
+	setmetatable(t, Module)
+	t._treeViewItem = _treeViewItem
+	t._expanded = true
+	t._expansionToggleCallback = nil
+	t._frame = Instance.new("Frame")
+	t._frame.Name = "MemoryAnalyzerRowClassFrame"
+	t._frame.BackgroundTransparency = 1
+	t._buttonFrame = Instance.new("Frame")
+	t._buttonFrame.Name = "ButtonFrame"
+	t._buttonFrame.Parent = t._frame
+	t._buttonFrame.Position = _UDim2
+	local ScaledStackDepth = (1 + _treeViewItem:getStackDepth()) * 20
+	t._buttonFrame.Size = UDim2.new(0, ScaledStackDepth, 0, 20)
+	local ButtonFrame = t._buttonFrame
+	ButtonFrame.BorderColor3 = _Color3_3
+	ButtonFrame.BorderSizePixel = 1
+	ButtonFrame.BackgroundTransparency = 0.6
+	t._button = Instance.new("TextButton")
+	t._button.Name = "Button"
+	t._button.Parent = t._buttonFrame
+	local Button = t._button
+	Button.TextXAlignment = Enum.TextXAlignment.Center
+	Button.TextColor3 = _Color3_2
+	Button.BackgroundTransparency = 1
+	Button.BorderColor3 = _Color3_4
+	Button.BorderSizePixel = 1
+	Button.Position = _UDim2_1
+	Button.Size = _UDim2_2
+	t._button.MouseButton1Click:connect(function() --[[ Line: 102 ]]
+		-- upvalues: t (copy)
+		t:__toggleExpansion()
 	end)
-	value:__updateButtonState()
-	value._labelFrame = Instance.new("Frame")
-	value._labelFrame.Name = "LabelFrame"
-	value._labelFrame.Parent = value._frame
-	value._labelFrame.Position = UDim2.new(0, var1, 0, 0)
-	value._labelFrame.Size = UDim2.new(1, (-var1) - 100, 0, 20)
-	local labelFrame_1 = value._labelFrame
-	labelFrame_1.BorderColor3 = color3_3
-	labelFrame_1.BorderSizePixel = 1
-	labelFrame_1.BackgroundTransparency = 0.6
-	value._labelTextLabel = Instance.new("TextLabel")
-	value._labelTextLabel.Name = "Label"
-	value._labelTextLabel.Parent = value._labelFrame
-	local labelTextLabel = value._labelTextLabel
-	labelTextLabel.TextXAlignment = Enum.TextXAlignment.Left
-	labelTextLabel.TextColor3 = color3_2
-	labelTextLabel.BackgroundTransparency = 1
-	labelTextLabel.Position = UDim2.new(0, 5, 0, 0)
-	labelTextLabel.Size = UDim2.new(1, -10, 1, 0)
-	value._labelTextLabel.Text = p1:getLabel()
-	value._valueFrame = Instance.new("Frame")
-	value._valueFrame.Name = "ValueFrame"
-	value._valueFrame.Parent = value._frame
-	value._valueFrame.Position = uDim2_3
-	value._valueFrame.Size = uDim2_4
-	local valueFrame_1 = value._valueFrame
-	valueFrame_1.BorderColor3 = color3_3
-	valueFrame_1.BorderSizePixel = 1
-	valueFrame_1.BackgroundTransparency = 0.6
-	value._valueTextLabel = Instance.new("TextLabel")
-	value._valueTextLabel.Name = "Value"
-	value._valueTextLabel.Parent = value._valueFrame
-	local valueTextLabel = value._valueTextLabel
-	valueTextLabel.TextXAlignment = Enum.TextXAlignment.Left
-	valueTextLabel.TextColor3 = color3_2
-	valueTextLabel.BackgroundTransparency = 1
-	valueTextLabel.Position = UDim2.new(0, 5, 0, 0)
-	valueTextLabel.Size = UDim2.new(1, -10, 1, 0)
-	value._valueHasBeenNonZero = false
-	value:updateValue()
+	t:__updateButtonState()
+	t._labelFrame = Instance.new("Frame")
+	t._labelFrame.Name = "LabelFrame"
+	t._labelFrame.Parent = t._frame
+	t._labelFrame.Position = UDim2.new(0, ScaledStackDepth, 0, 0)
+	t._labelFrame.Size = UDim2.new(1, -ScaledStackDepth - 100, 0, 20)
+	local LabelFrame = t._labelFrame
+	LabelFrame.BorderColor3 = _Color3_3
+	LabelFrame.BorderSizePixel = 1
+	LabelFrame.BackgroundTransparency = 0.6
+	t._labelTextLabel = Instance.new("TextLabel")
+	t._labelTextLabel.Name = "Label"
+	t._labelTextLabel.Parent = t._labelFrame
+	local LabelTextLabel = t._labelTextLabel
+	LabelTextLabel.TextXAlignment = Enum.TextXAlignment.Left
+	LabelTextLabel.TextColor3 = _Color3_2
+	LabelTextLabel.BackgroundTransparency = 1
+	LabelTextLabel.Position = UDim2.new(0, 5, 0, 0)
+	LabelTextLabel.Size = UDim2.new(1, -10, 1, 0)
+	t._labelTextLabel.Text = _treeViewItem:getLabel()
+	t._valueFrame = Instance.new("Frame")
+	t._valueFrame.Name = "ValueFrame"
+	t._valueFrame.Parent = t._frame
+	t._valueFrame.Position = _UDim2_3
+	t._valueFrame.Size = _UDim2_4
+	local ValueFrame = t._valueFrame
+	ValueFrame.BorderColor3 = _Color3_3
+	ValueFrame.BorderSizePixel = 1
+	ValueFrame.BackgroundTransparency = 0.6
+	t._valueTextLabel = Instance.new("TextLabel")
+	t._valueTextLabel.Name = "Value"
+	t._valueTextLabel.Parent = t._valueFrame
+	local ValueTextLabel = t._valueTextLabel
+	ValueTextLabel.TextXAlignment = Enum.TextXAlignment.Left
+	ValueTextLabel.TextColor3 = _Color3_2
+	ValueTextLabel.BackgroundTransparency = 1
+	ValueTextLabel.Position = UDim2.new(0, 5, 0, 0)
+	ValueTextLabel.Size = UDim2.new(1, -10, 1, 0)
+	t._valueHasBeenNonZero = false
+	t:updateValue()
 	
-	return value
+	return t
 end
 
-function t:isExpanded()
+function Module:isExpanded() --[[ Line: 143 ]]
 	return self._expanded
 end
 
-function t:valueHasBeenNonZero()
+function Module:valueHasBeenNonZero() --[[ Line: 147 ]]
 	return self._valueHasBeenNonZero
 end
 
-function t:setExpansionToggleCallback(p1)
-	self._expansionToggleCallback = p1
+function Module:setExpansionToggleCallback(_expansionToggleCallback) --[[ Line: 151 ]]
+	self._expansionToggleCallback = _expansionToggleCallback
 end
 
-function t:__toggleExpansion()
+function Module:__toggleExpansion() --[[ Line: 155 ]]
 	self._expanded = not self._expanded
 	self:__updateButtonState()
 	
@@ -140,7 +140,7 @@ function t:__toggleExpansion()
 	end
 end
 
-function t:__updateButtonState()
+function Module:__updateButtonState() --[[ Line: 164 ]]
 	if #self._treeViewItem:getChildren() == 0 then
 		self._button.Visible = false
 		
@@ -152,109 +152,111 @@ function t:__updateButtonState()
 		self._button.Text = "-"
 		
 		return
+	else
+		self._button.Text = "+"
 	end
-	self._button.Text = "+"
 end
 
-function t:updateValue()
+function Module:updateValue() --[[ Line: 178 ]]
 	if self._treeViewItem:getValue() >= 0.001 then
 		self._valueHasBeenNonZero = true
 	end
 	self._valueTextLabel.Text = string.format("%.3f", self._treeViewItem:getValue())
 end
 
-function t:setZIndex(p1)
-	self._frame.ZIndex = p1
-	self._labelTextLabel.ZIndex = p1
-	self._valueTextLabel.ZIndex = p1
+function Module:setZIndex(ZIndex) --[[ Line: 190 ]]
+	self._frame.ZIndex = ZIndex
+	self._labelTextLabel.ZIndex = ZIndex
+	self._valueTextLabel.ZIndex = ZIndex
 end
 
-function t:setRowValue(p1)
+function Module:setRowValue(p1) --[[ Line: 196 ]]
 	self._valueTextLabel.Text = string.format("%.3f", p1)
 end
 
-function t:getFrame()
+function Module:getFrame() --[[ Line: 200 ]]
 	return self._frame
 end
 
-function t:setRowNumber(p1)
-	-- upvalues: color3 (ref), color3_1 (ref)
-	if p1 % 2 == 1 then
-		self._buttonFrame.BackgroundColor3 = color3
-		self._labelFrame.BackgroundColor3 = color3
-		self._valueFrame.BackgroundColor3 = color3
+function Module:setRowNumber(HeightInPixRatio: number) --[[ Line: 204 ]]
+	-- upvalues: _Color3 (copy), _Color3_1 (copy)
+	if HeightInPixRatio % 2 == 1 then
+		self._buttonFrame.BackgroundColor3 = _Color3
+		self._labelFrame.BackgroundColor3 = _Color3
+		self._valueFrame.BackgroundColor3 = _Color3
 		
 		return
+	else
+		self._buttonFrame.BackgroundColor3 = _Color3_1
+		self._labelFrame.BackgroundColor3 = _Color3_1
+		self._valueFrame.BackgroundColor3 = _Color3_1
 	end
-	self._buttonFrame.BackgroundColor3 = color3_1
-	self._labelFrame.BackgroundColor3 = color3_1
-	self._valueFrame.BackgroundColor3 = color3_1
 end
 
-local t_1 = {}
-t_1.__index = t_1
-t_1.Indent = string.rep(" ", 4)
+local BaseMemoryAnalyzerModule = {}
+BaseMemoryAnalyzerModule.__index = BaseMemoryAnalyzerModule
+BaseMemoryAnalyzerModule.Indent = string.rep(" ", 4)
 
-function t_1.new(p1)
-	-- upvalues: t_1 (ref)
-	local memoryAnalyzerClassFrame = {}
-	setmetatable(memoryAnalyzerClassFrame, t_1)
-	memoryAnalyzerClassFrame._frame = Instance.new("Frame")
-	memoryAnalyzerClassFrame._frame.Name = "MemoryAnalyzerClassFrame"
-	memoryAnalyzerClassFrame._frame.ZIndex = p1.ZIndex
-	memoryAnalyzerClassFrame._frame.BackgroundTransparency = 1
-	memoryAnalyzerClassFrame._rowsByTreeViewItem = {}
-	memoryAnalyzerClassFrame._layoutDirty = false
-	memoryAnalyzerClassFrame._heightChangedCallback = nil
-	memoryAnalyzerClassFrame._heightInPix = 0
-	memoryAnalyzerClassFrame._frame.Parent = p1
+function BaseMemoryAnalyzerModule.new(Parent) --[[ Line: 227 ]]
+	-- upvalues: BaseMemoryAnalyzerModule (copy)
+	local t = {}
+	setmetatable(t, BaseMemoryAnalyzerModule)
+	t._frame = Instance.new("Frame")
+	t._frame.Name = "MemoryAnalyzerClassFrame"
+	t._frame.ZIndex = Parent.ZIndex
+	t._frame.BackgroundTransparency = 1
+	t._rowsByTreeViewItem = {}
+	t._layoutDirty = false
+	t._heightChangedCallback = nil
+	t._heightInPix = 0
+	t._frame.Parent = Parent
 	
-	return memoryAnalyzerClassFrame
+	return t
 end
 
-function t_1.getMemoryUsageTree(_)
+function BaseMemoryAnalyzerModule:getMemoryUsageTree() --[[ Line: 254 ]]
 	return nil
 end
 
-function t_1:setHeightChangedCallback(p1)
-	self._heightChangedCallback = p1
+function BaseMemoryAnalyzerModule:setHeightChangedCallback(_heightChangedCallback) --[[ Line: 258 ]]
+	self._heightChangedCallback = _heightChangedCallback
 end
 
-function t_1:__getOrMakeRowForTreeViewItem(p1)
-	-- upvalues: t (ref)
-	if self._rowsByTreeViewItem[p1] == nil then
-		local var1 = t.new(p1)
-		var1:setExpansionToggleCallback(function()
-			-- upvalues: self (ref)
+function BaseMemoryAnalyzerModule:__getOrMakeRowForTreeViewItem(TreeViewItem) --[[ Line: 262 ]]
+	-- upvalues: Module (copy)
+	if self._rowsByTreeViewItem[TreeViewItem] == nil then
+		local NewModule = Module.new(TreeViewItem)
+		NewModule:setExpansionToggleCallback(function() --[[ Line: 265 ]]
+			-- upvalues: self (copy)
 			self:__layoutRows()
 		end)
-		var1:getFrame().Parent = self._frame
-		self._rowsByTreeViewItem[p1] = var1
+		NewModule:getFrame().Parent = self._frame
+		self._rowsByTreeViewItem[TreeViewItem] = NewModule
 		self._layoutDirty = true
 	end
-	return self._rowsByTreeViewItem[p1]
+	return self._rowsByTreeViewItem[TreeViewItem]
 end
 
-function t_1:__recursiveUpdateStatValue(p1)
-	self:__getOrMakeRowForTreeViewItem(p1):updateValue()
+function BaseMemoryAnalyzerModule:__recursiveUpdateStatValue(MemoryUsageTree) --[[ Line: 277 ]]
+	self:__getOrMakeRowForTreeViewItem(MemoryUsageTree):updateValue()
 	
-	for i, v in ipairs(p1:getChildren()) do
-		self:__recursiveUpdateStatValue(v)
+	for _, child in ipairs((MemoryUsageTree:getChildren())) do
+		self:__recursiveUpdateStatValue(child)
 	end
 end
 
-function t_1:renderUpdates()
-	local memoryUsageTree = self:getMemoryUsageTree()
+function BaseMemoryAnalyzerModule:renderUpdates() --[[ Line: 288 ]]
+	local MemoryUsageTree = self:getMemoryUsageTree()
 	
-	if memoryUsageTree ~= nil then
-		self:__recursiveUpdateStatValue(memoryUsageTree)
+	if MemoryUsageTree ~= nil then
+		self:__recursiveUpdateStatValue(MemoryUsageTree)
 	end
 	if self._layoutDirty then
 		self:__layoutRows()
 	end
 end
 
-function t_1:__layoutRows()
+function BaseMemoryAnalyzerModule:__layoutRows() --[[ Line: 300 ]]
 	self._layoutDirty = false
 	self._heightInPix = 0
 	
@@ -269,28 +271,28 @@ function t_1:__layoutRows()
 	end
 end
 
-function t_1:__recursiveLayoutTreeViewItem(p2, p3)
-	local var1 = self:__getOrMakeRowForTreeViewItem(p2)
-	local frame = var1:getFrame()
-	local var2 = p3 and var1:valueHasBeenNonZero()
+function BaseMemoryAnalyzerModule:__recursiveLayoutTreeViewItem(MemoryUsageTree, p1) --[[ Line: 317 ]]
+	local OrMakeRowForTreeViewItem = self:__getOrMakeRowForTreeViewItem(MemoryUsageTree)
+	local Frame = OrMakeRowForTreeViewItem:getFrame()
+	local ValueHasBeenNonZeroResult = p1 and OrMakeRowForTreeViewItem:valueHasBeenNonZero()
 	
-	if var2 then
-		frame.Visible = true
-		frame.Size = UDim2.new(1, 0, 0, 20)
-		frame.Position = UDim2.new(0, 0, 0, self._heightInPix)
-		var1:setZIndex(self._frame.ZIndex)
-		var1:setRowNumber(self._heightInPix / 20)
+	if ValueHasBeenNonZeroResult then
+		Frame.Visible = true
+		Frame.Size = UDim2.new(1, 0, 0, 20)
+		Frame.Position = UDim2.new(0, 0, 0, self._heightInPix)
+		OrMakeRowForTreeViewItem:setZIndex(self._frame.ZIndex)
+		OrMakeRowForTreeViewItem:setRowNumber(self._heightInPix / 20)
 		self._heightInPix += 20
 	else
-		frame.Visible = false
+		Frame.Visible = false
 	end
-	for i, v in ipairs(p2:getChildren()) do
-		self:__recursiveLayoutTreeViewItem(v, var1:isExpanded() and var2)
+	for _, child in ipairs((MemoryUsageTree:getChildren())) do
+		self:__recursiveLayoutTreeViewItem(child, OrMakeRowForTreeViewItem:isExpanded() and ValueHasBeenNonZeroResult)
 	end
 end
 
-function t_1:getHeightInPix()
+function BaseMemoryAnalyzerModule:getHeightInPix() --[[ Line: 343 ]]
 	return self._heightInPix
 end
 
-return t_1
+return BaseMemoryAnalyzerModule

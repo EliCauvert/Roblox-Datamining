@@ -1,29 +1,28 @@
-﻿local chatIntervention = script:FindFirstAncestor("ChatIntervention")
-local parent = chatIntervention.Parent
-local roduxModule = require(parent.Rodux)
-local actions = chatIntervention.Actions
-local dictionary = require(parent.llama).Dictionary
+﻿local ChatIntervention = script:FindFirstAncestor("ChatIntervention")
+local Parent = ChatIntervention.Parent
+local Actions = ChatIntervention.Actions
+local Dictionary = require(Parent.llama).Dictionary
 
-return roduxModule.createReducer({
+return require(Parent.Rodux).createReducer({
 	isShowChatFeedbackModal = false,
 	isShowChatFeedbackPill = false,
 	isShowChatNudgeModal = false,
 	isShowChatTimeoutModal = false
 }, {
-	[require(actions.UpdateShowChatFeedbackModalAction).name] = function(value, p1)
-		-- upvalues: dictionary (ref)
-		return dictionary.set(value, "isShowChatFeedbackModal", p1.isShow)
+	[require(Actions.UpdateShowChatFeedbackModalAction).name] = function(p1, p2) --[[ Line: 35 ]]
+		-- upvalues: Dictionary (copy)
+		return Dictionary.set(p1, "isShowChatFeedbackModal", p2.isShow)
 	end,
-	[require(actions.UpdateShowChatFeedbackPillAction).name] = function(value, p1)
-		-- upvalues: dictionary (ref)
-		return dictionary.set(value, "isShowChatFeedbackPill", p1.isShow)
+	[require(Actions.UpdateShowChatFeedbackPillAction).name] = function(p1, p2) --[[ Line: 39 ]]
+		-- upvalues: Dictionary (copy)
+		return Dictionary.set(p1, "isShowChatFeedbackPill", p2.isShow)
 	end,
-	[require(actions.UpdateShowChatNudgeModalAction).name] = function(value, p1)
-		-- upvalues: dictionary (ref)
-		return dictionary.set(value, "isShowChatNudgeModal", p1.isShow)
+	[require(Actions.UpdateShowChatNudgeModalAction).name] = function(p1, p2) --[[ Line: 31 ]]
+		-- upvalues: Dictionary (copy)
+		return Dictionary.set(p1, "isShowChatNudgeModal", p2.isShow)
 	end,
-	[require(actions.UpdateShowChatTimeoutModalAction).name] = function(value, p1)
-		-- upvalues: dictionary (ref)
-		return dictionary.set(value, "isShowChatTimeoutModal", p1.isShow)
+	[require(Actions.UpdateShowChatTimeoutModalAction).name] = function(p1, p2) --[[ Line: 27 ]]
+		-- upvalues: Dictionary (copy)
+		return Dictionary.set(p1, "isShowChatTimeoutModal", p2.isShow)
 	end
 })

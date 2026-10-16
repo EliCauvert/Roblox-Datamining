@@ -1,29 +1,29 @@
-﻿local promiseModule = require(script.Parent.Parent.Parent.Promise)
+﻿local PromiseModule = require(script.Parent.Parent.Parent.Promise)
 
-function createFetch(p1)
-	-- upvalues: promiseModule (ref)
-	return function(p2, p3)
-		-- upvalues: p1 (ref), promiseModule (copy)
-		if p3 == nil then
-			p3 = {}
+function createFetch(Callback) --[[ Line: 9 ]]
+	-- upvalues: PromiseModule (copy)
+	return function(p1, p2) --[[ Line: 10 | Named "fetch" ]]
+		-- upvalues: Callback (copy), PromiseModule (upval)
+		if p2 == nil then
+			p2 = {}
 		end
-		local method = p3.method or "GET"
-		p3.method = nil
-		p3.data = p3.body
-		p3.body = nil
+		local Method = p2.method or "GET"
+		p2.method = nil
+		p2.data = p2.body
+		p2.body = nil
 		
-		return p1(method, p2, p3):andThen(function(p4)
-			-- upvalues: promiseModule (copy)
-			local text = p4.text
+		return Callback(Method, p1, p2):andThen(function(Result) --[[ Line: 19 ]]
+			-- upvalues: PromiseModule (upval)
+			local Text = Result.text
 			
-			function p3.text()
-				-- upvalues: promiseModule (copy), text (ref)
-				return promiseModule.resolve(text)
+			function Result.text() --[[ Line: 21 ]]
+				-- upvalues: PromiseModule (upval), Text (copy)
+				return PromiseModule.resolve(Text)
 			end
 			
-			p4.status = p4.code
+			Result.status = Result.code
 			
-			return p4
+			return Result
 		end)
 	end
 end

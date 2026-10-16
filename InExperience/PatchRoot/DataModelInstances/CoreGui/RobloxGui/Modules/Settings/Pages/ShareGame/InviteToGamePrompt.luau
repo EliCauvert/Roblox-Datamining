@@ -1,119 +1,115 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local corePackagesService = game:GetService("CorePackages")
-local contextActionService = game:GetService("ContextActionService")
-local guiService = game:GetService("GuiService")
-local robloxGui = coreGuiService:WaitForChild("RobloxGui")
-local roactModule = require(corePackagesService.Packages.Roact)
-local roduxModule = require(corePackagesService.Packages.Rodux)
-local modules = robloxGui.Modules
-local settings = modules.Settings
-local constantsModule = require(modules.Settings.Pages.ShareGame.Constants)
-local gameInviteEvents = require(corePackagesService.Workspace.Packages.GameInvite).GameInviteEvents
-local shareGame = settings.Pages.ShareGame
-local fullModalShareGameComponentModule = require(shareGame.Components.FullModalShareGameComponent)
-local appReducerModule = require(shareGame.AppReducer)
-local renderWithCoreScriptsStyleProviderModule = require(modules.Common.renderWithCoreScriptsStyleProvider)
-local inviteStoreModule = require(shareGame.InviteStore)
-local getFFlagEnableSharedInviteStoreModule = require(modules.Flags.GetFFlagEnableSharedInviteStore)
-local getFFlagAbuseReportAnalyticsHasLaunchDataModule = require(modules.Settings.Flags.GetFFlagAbuseReportAnalyticsHasLaunchData)
-local t = {}
-t.__index = t
+﻿local CorePackages = game:GetService("CorePackages")
+local ContextActionService = game:GetService("ContextActionService")
+local GuiService = game:GetService("GuiService")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoduxModule = require(CorePackages.Packages.Rodux)
+local Modules = game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules
+local ConstantsModule = require(Modules.Settings.Pages.ShareGame.Constants)
+local GameInviteEvents = require(CorePackages.Workspace.Packages.GameInvite).GameInviteEvents
+local ShareGame = Modules.Settings.Pages.ShareGame
+local FullModalShareGameComponentModule = require(ShareGame.Components.FullModalShareGameComponent)
+local AppReducerModule = require(ShareGame.AppReducer)
+local RenderWithCoreScriptsStyleProviderModule = require(Modules.Common.renderWithCoreScriptsStyleProvider)
+local InviteStoreModule = require(ShareGame.InviteStore)
+local GetFFlagEnableSharedInviteStoreModule = require(Modules.Flags.GetFFlagEnableSharedInviteStore)
+local GetFFlagAbuseReportAnalyticsHasLaunchDataModule = require(Modules.Settings.Flags.GetFFlagAbuseReportAnalyticsHasLaunchData)
+local InviteToGamePromptModule = {}
+InviteToGamePromptModule.__index = InviteToGamePromptModule
 
-function t.new(p1)
-	-- upvalues: t (ref)
-	local t_1 = { isActive = false, mountTarget = p1 }
-	setmetatable(t_1, t)
+function InviteToGamePromptModule.new(MountTarget) --[[ Line: 40 ]]
+	-- upvalues: InviteToGamePromptModule (copy)
+	local config = { isActive = false, mountTarget = MountTarget }
+	setmetatable(config, InviteToGamePromptModule)
 	
-	return t_1
+	return config
 end
 
-function t:withSocialServiceAndLocalPlayer(p1, p2)
-	self.socialService = p1
-	self.localPlayer = p2
+function InviteToGamePromptModule:withSocialServiceAndLocalPlayer(SocialService, LocalPlayer) --[[ Line: 50 ]]
+	self.socialService = SocialService
+	self.localPlayer = LocalPlayer
 	
 	return self
 end
 
-function t:withAnalytics(p1)
-	self.analytics = p1
+function InviteToGamePromptModule:withAnalytics(Analytics) --[[ Line: 56 ]]
+	self.analytics = Analytics
 	
 	return self
 end
 
-function t:withRequestImpl(p1)
-	self.requestImpl = p1
+function InviteToGamePromptModule:withRequestImpl(RequestImpl) --[[ Line: 61 ]]
+	self.requestImpl = RequestImpl
 	
 	return self
 end
 
-function t:_createTree(p1, p2)
-	-- upvalues: getFFlagEnableSharedInviteStoreModule (ref), inviteStoreModule (ref), roduxModule (ref), appReducerModule (ref), renderWithCoreScriptsStyleProviderModule (ref), roactModule (ref), fullModalShareGameComponentModule (ref)
-	return renderWithCoreScriptsStyleProviderModule({
-		FullModalShareGame = roactModule.createElement(fullModalShareGameComponentModule, {
-			store = if getFFlagEnableSharedInviteStoreModule() then inviteStoreModule else roduxModule.Store.new(appReducerModule, nil, { roduxModule.thunkMiddleware }),
-			isVisible = p1,
+function InviteToGamePromptModule:_createTree(IsVisible, p1) --[[ Line: 66 ]]
+	-- upvalues: GetFFlagEnableSharedInviteStoreModule (copy), InviteStoreModule (copy), RoduxModule (copy), AppReducerModule (copy), RenderWithCoreScriptsStyleProviderModule (copy), RoactModule (copy), FullModalShareGameComponentModule (copy)
+	return RenderWithCoreScriptsStyleProviderModule({
+		FullModalShareGame = RoactModule.createElement(FullModalShareGameComponentModule, {
+			store = if GetFFlagEnableSharedInviteStoreModule() then InviteStoreModule else RoduxModule.Store.new(AppReducerModule, nil, { RoduxModule.thunkMiddleware }),
+			isVisible = IsVisible,
 			analytics = self.analytics,
-			promptMessage = p2 and p2.promptMessage,
-			inviteUserId = p2 and p2.inviteUserId,
-			inviteMessageId = p2 and p2.inviteMessageId,
-			launchData = p2 and p2.launchData,
-			isLoading = p2 and p2.isLoading,
+			promptMessage = p1 and p1.promptMessage,
+			inviteUserId = p1 and p1.inviteUserId,
+			inviteMessageId = p1 and p1.inviteMessageId,
+			launchData = p1 and p1.launchData,
+			isLoading = p1 and p1.isLoading,
 			requestImpl = self.requestImpl,
-			onAfterClosePage = function(_)
-				-- upvalues: self (ref)
+			onAfterClosePage = function(_) --[[ Line: 81 ]]
+				-- upvalues: self (copy)
 				self:hide({})
 			end
 		})
 	})
 end
 
-function t:show(p1)
-	-- upvalues: constantsModule (ref), gameInviteEvents (ref), getFFlagAbuseReportAnalyticsHasLaunchDataModule (ref), roactModule (ref), contextActionService (ref)
+function InviteToGamePromptModule:show(p1) --[[ Line: 95 ]]
+	-- upvalues: ConstantsModule (copy), GameInviteEvents (copy), GetFFlagAbuseReportAnalyticsHasLaunchDataModule (copy), RoactModule (copy), ContextActionService (copy)
 	if self.isActive then return end
 	self.isLoading = p1 and p1.isLoading
 	self.isActive = not self.isLoading
 	
 	if p1 then
-		self.analytics:sendEvent(if p1.inviteUserId then constantsModule.Triggers.DeveloperSingle else constantsModule.Triggers.DeveloperMultiple, gameInviteEvents.ModalOpened, if getFFlagAbuseReportAnalyticsHasLaunchDataModule() then {
-			isLaunchDataProvided = p1.launchData ~= nil and p1.launchData ~= ""
-		} else nil)
+		local IsNotLaunchDataMatch: boolean = p1.launchData ~= nil and p1.launchData ~= ""
+		self.analytics:sendEvent(if p1.inviteUserId then ConstantsModule.Triggers.DeveloperSingle else ConstantsModule.Triggers.DeveloperMultiple, GameInviteEvents.ModalOpened, if GetFFlagAbuseReportAnalyticsHasLaunchDataModule() then { isLaunchDataProvided = IsNotLaunchDataMatch } else nil)
 	end
 	if self.instance then
-		self.instance = roactModule.update(self.instance, self:_createTree(true, p1))
+		self.instance = RoactModule.update(self.instance, self:_createTree(true, p1))
 	else
-		self.instance = roactModule.mount(self:_createTree(true, p1), self.mountTarget, "invitePrompt")
+		self.instance = RoactModule.mount(self:_createTree(true, p1), self.mountTarget, "invitePrompt")
 	end
 	if self.analytics and not self.isLoading then
 		self.analytics:inputShareGameEntryPoint()
 	end
-	contextActionService:BindCoreAction("hideInvitePrompt", function(_, p2, _)
-		-- upvalues: self (ref)
-		if p2 == Enum.UserInputState.Begin then
+	ContextActionService:BindCoreAction("hideInvitePrompt", function(_, UserInputState, _) --[[ Line: 124 ]]
+		-- upvalues: self (copy)
+		if UserInputState == Enum.UserInputState.Begin then
 			self:hide()
 		end
 	end, false, Enum.KeyCode.ButtonB, Enum.KeyCode.Backspace)
 end
 
-function t:hide(_)
-	-- upvalues: roactModule (ref), contextActionService (ref), guiService (ref)
+function InviteToGamePromptModule:hide(_) --[[ Line: 131 ]]
+	-- upvalues: RoactModule (copy), ContextActionService (copy), GuiService (copy)
 	if not self.isActive and not self.isLoading then return end
 	self.isLoading = false
 	self.isActive = false
-	self.instance = roactModule.update(self.instance, self:_createTree(false))
+	self.instance = RoactModule.update(self.instance, self:_createTree(false))
 	
 	if self.socialService and self.localPlayer then
 		self.socialService:InvokeGameInvitePromptClosed(self.localPlayer, {})
 	end
-	contextActionService:UnbindCoreAction("hideInvitePrompt")
-	guiService.SelectedCoreObject = nil
-	guiService:RemoveSelectionGroup("invitePrompt")
+	ContextActionService:UnbindCoreAction("hideInvitePrompt")
+	GuiService.SelectedCoreObject = nil
+	GuiService:RemoveSelectionGroup("invitePrompt")
 end
 
-function t:destruct()
-	-- upvalues: roactModule (ref)
+function InviteToGamePromptModule:destruct() --[[ Line: 148 ]]
+	-- upvalues: RoactModule (copy)
 	if self.instance then
-		roactModule.unmount(self.instance)
+		RoactModule.unmount(self.instance)
 	end
 end
 
-return t
+return InviteToGamePromptModule

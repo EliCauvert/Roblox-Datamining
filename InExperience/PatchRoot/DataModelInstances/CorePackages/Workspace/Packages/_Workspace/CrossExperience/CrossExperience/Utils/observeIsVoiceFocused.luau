@@ -1,17 +1,17 @@
-﻿local crossExperience = script:FindFirstAncestor("CrossExperience")
-local constantsModule = require(crossExperience.Constants)
-local observeCurrentContextIdModule = require(crossExperience.Utils.observeCurrentContextId)
+﻿local CrossExperience = script:FindFirstAncestor("CrossExperience")
+local ConstantsModule = require(CrossExperience.Constants)
+local ObserveCurrentContextIdModule = require(CrossExperience.Utils.observeCurrentContextId)
 
-return function(p1)
-	-- upvalues: observeCurrentContextIdModule (ref), constantsModule (ref)
-	local var1 = nil
-	observeCurrentContextIdModule(function(p2)
-		-- upvalues: constantsModule (copy), var1 (write), p1 (ref)
-		local var2 = p2 == constantsModule.AUDIO_FOCUS_MANAGEMENT.CEV.CONTEXT_ID
+return function(Callback) --[[ Line: 6 ]]
+	-- upvalues: ObserveCurrentContextIdModule (copy), ConstantsModule (copy)
+	local IsCONTEXTIDMatch = nil
+	ObserveCurrentContextIdModule(function(CONTEXTID) --[[ Line: 8 ]]
+		-- upvalues: ConstantsModule (upval), IsCONTEXTIDMatch (ref), Callback (copy)
+		local IsCONTEXTIDMatch1 = CONTEXTID == ConstantsModule.AUDIO_FOCUS_MANAGEMENT.CEV.CONTEXT_ID
 		
-		if var2 ~= var1 then
-			var1 = var2
-			p1(var1)
+		if IsCONTEXTIDMatch1 ~= IsCONTEXTIDMatch then
+			IsCONTEXTIDMatch = IsCONTEXTIDMatch1
+			Callback(IsCONTEXTIDMatch)
 		end
 	end)
 end

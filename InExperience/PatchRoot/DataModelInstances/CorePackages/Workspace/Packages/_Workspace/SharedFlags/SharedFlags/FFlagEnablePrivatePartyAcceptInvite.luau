@@ -1,1 +1,3 @@
-﻿return game:GetEngineFeature("PrivatePartyJoin") and (require(script.Parent.GetFFlagIsSquadEnabled)() and game:DefineFastFlag("EnablePrivatePartyAcceptInvite", false))
+﻿local GetFFlagIsSquadEnabledModule = require(script.Parent.GetFFlagIsSquadEnabled)
+
+return game:GetEngineFeature("PrivatePartyJoin") and (GetFFlagIsSquadEnabledModule() and game:DefineFastFlag("EnablePrivatePartyAcceptInvite", false))

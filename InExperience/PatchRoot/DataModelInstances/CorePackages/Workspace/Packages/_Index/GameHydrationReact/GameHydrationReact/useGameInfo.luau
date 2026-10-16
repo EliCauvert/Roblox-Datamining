@@ -1,14 +1,14 @@
-﻿local parent = script:FindFirstAncestor("GameHydrationReact").Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local dataHydrationModule = require(parent.DataHydration)
+﻿local Parent = script:FindFirstAncestor("GameHydrationReact").Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local DataHydrationModule = require(Parent.DataHydration)
 
-return function(p1)
-	-- upvalues: reactModule (ref), dataHydrationModule (ref), signalsReactModule (ref)
-	local var1 = tostring(p1)
+return function(p1) --[[ Line: 15 | Named "useGameInfo" ]]
+	-- upvalues: ReactModule (copy), DataHydrationModule (copy), SignalsReactModule (copy)
+	local Text = tostring(p1)
 	
-	return signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: dataHydrationModule (copy), var1 (ref)
-		return dataHydrationModule.Game.getGameInfoStore(false).getGameInfo(var1).data
-	end, { var1 }))
+	return SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 18 ]]
+		-- upvalues: DataHydrationModule (upval), Text (copy)
+		return DataHydrationModule.Game.getGameInfoStore(false).getGameInfo(Text).data
+	end, { Text })))
 end

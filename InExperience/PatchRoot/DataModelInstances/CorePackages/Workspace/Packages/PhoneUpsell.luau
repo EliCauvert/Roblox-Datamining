@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.PhoneUpsell.PhoneUpsell)
+﻿return (require(script.Parent._Workspace.PhoneUpsell.PhoneUpsell))

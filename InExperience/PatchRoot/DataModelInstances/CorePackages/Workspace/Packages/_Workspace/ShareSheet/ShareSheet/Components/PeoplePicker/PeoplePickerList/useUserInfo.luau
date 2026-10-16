@@ -1,23 +1,23 @@
-﻿local parent = script:FindFirstAncestor("ShareSheet").Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local userProfileModule = require(parent.DataHydration.UserProfile)
-local var1 = signalsModule.createSignal(nil)
+﻿local Parent = script:FindFirstAncestor("ShareSheet").Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local UserProfileModule = require(Parent.DataHydration.UserProfile)
+local Signal = require(Parent.Signals).createSignal(nil)
 
 return {
-	useUserInfo = function(p1)
-		-- upvalues: reactModule (ref), userProfileModule (ref), signalsReactModule (ref), var1 (ref)
-		local var2 = reactModule.useMemo(function()
-			-- upvalues: p1 (ref), userProfileModule (copy)
-			return if p1 == nil then nil else userProfileModule.getAndFetchUserInfo(p1)
+	useUserInfo = function(p1) --[[ Line: 19 ]]
+		-- upvalues: ReactModule (copy), UserProfileModule (copy), SignalsReactModule (copy), Signal (copy)
+		local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 20 ]]
+			-- upvalues: p1 (copy), UserProfileModule (upval)
+			return if p1 == nil then nil else UserProfileModule.getAndFetchUserInfo(p1)
 		end, { p1 or "" })
-		local var3 = signalsReactModule.useSignalState(if var2 ~= nil then var1 else var2.info)
+		local UseSignalStateResult = SignalsReactModule.useSignalState(if UseMemoResult == nil then Signal else UseMemoResult.info)
+		local UseSignalStateResult1 = SignalsReactModule.useSignalState(if UseMemoResult == nil then Signal else UseMemoResult.status)
 		
 		return if p1 == nil then nil else {
-			displayName = if var3 ~= nil then "" else var3.displayName,
-			username = if var3 ~= nil then "" else var3.username,
-			isLoading = signalsReactModule.useSignalState(if var2 ~= nil then var1 else var2.status) == "NotReady"
+			displayName = if UseSignalStateResult == nil then "" else UseSignalStateResult.displayName,
+			username = if UseSignalStateResult == nil then "" else UseSignalStateResult.username,
+			isLoading = UseSignalStateResult1 == "NotReady"
 		}
 	end
 }

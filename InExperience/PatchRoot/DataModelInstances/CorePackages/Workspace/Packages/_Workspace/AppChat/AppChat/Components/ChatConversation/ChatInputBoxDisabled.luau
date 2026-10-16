@@ -1,74 +1,75 @@
-﻿local parent = script:FindFirstAncestor("AppChat").Parent
-local cryoModule = require(parent.Cryo)
-local foundationModule = require(parent.Foundation)
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-local useCountdownBinding = require(parent.InterventionShared).Hooks.useCountdownBinding
-local images = UIBloxModule.App.ImageSet.Images
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local interactable = UIBloxModule.Core.Control.Interactable
-local t = {
+﻿local Parent = script:FindFirstAncestor("AppChat").Parent
+local CryoModule = require(Parent.Cryo)
+local FoundationModule = require(Parent.Foundation)
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local ReactModule = require(Parent.React)
+local UIBloxModule = require(Parent.UIBlox)
+local UseCountdownBindingFunction = require(Parent.InterventionShared).Hooks.useCountdownBinding
+local Images = UIBloxModule.App.ImageSet.Images
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local Interactable = UIBloxModule.Core.Control.Interactable
+local config = {
 	bodyText = "Chat Disabled",
 	defaultCountdownString = "",
-	onActivated = function() end,
+	onActivated = function() --[[ Line: 28 ]] end,
 	contentVerticalAlignment = Enum.VerticalAlignment.Top
 }
 
-return function(p1)
-	-- upvalues: cryoModule (ref), t (ref), foundationModule (ref), useCountdownBinding (ref), reactModule (ref), interactable (ref), foundationFontFaceMigration (ref), imageSetLabel (ref), images (ref)
-	local var1 = cryoModule.Dictionary.union(t, p1)
-	local var2 = foundationModule.Hooks.useTokens()
-	local var3 = if var1.contentVerticalAlignment == Enum.VerticalAlignment.Center then Enum.TextYAlignment.Center elseif var1.contentVerticalAlignment == Enum.VerticalAlignment.Bottom then Enum.TextYAlignment.Bottom else Enum.TextYAlignment.Top
+return function(p1) --[[ Line: 32 | Named "ChatInputBoxDisabled" ]]
+	-- upvalues: CryoModule (copy), config (copy), FoundationModule (copy), UseCountdownBindingFunction (copy), ReactModule (copy), Interactable (copy), FoundationFontFaceMigration (copy), ImageSetLabel (copy), Images (copy)
+	local UnionResult = CryoModule.Dictionary.union(config, p1)
+	local UseTokensResult = FoundationModule.Hooks.useTokens()
+	local UseCountdownBindingResult = UseCountdownBindingFunction(UnionResult.endTimestamp, UnionResult.defaultCountdownString)
+	local Center = if UnionResult.contentVerticalAlignment == Enum.VerticalAlignment.Center then Enum.TextYAlignment.Center elseif UnionResult.contentVerticalAlignment == Enum.VerticalAlignment.Bottom then Enum.TextYAlignment.Bottom else Enum.TextYAlignment.Top
 	
-	return reactModule.createElement(interactable, {
+	return ReactModule.createElement(Interactable, {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 1, 0),
-		[reactModule.Event.Activated] = var1.onActivated
+		[ReactModule.Event.Activated] = UnionResult.onActivated
 	}, {
-		uiListLayout = reactModule.createElement("UIListLayout", {
-			Padding = UDim.new(0, var2.Gap.Small),
+		uiListLayout = ReactModule.createElement("UIListLayout", {
+			Padding = UDim.new(0, UseTokensResult.Gap.Small),
 			FillDirection = Enum.FillDirection.Horizontal,
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
-			VerticalAlignment = var1.contentVerticalAlignment,
+			VerticalAlignment = UnionResult.contentVerticalAlignment,
 			SortOrder = Enum.SortOrder.LayoutOrder
 		}),
-		disabledText = reactModule.createElement(foundationModule.Text, {
+		disabledText = ReactModule.createElement(FoundationModule.Text, {
 			BackgroundTransparency = 1,
 			TextWrapped = false,
 			tag = "fill",
 			LayoutOrder = 1,
 			Size = UDim2.new(0, 0, 1, 0),
-			Text = var1.bodyText,
-			Font = if foundationFontFaceMigration then nil else var1.font,
-			fontStyle = if foundationFontFaceMigration then cryoModule.Dictionary.join(var2.Typography.BodyLarge, { FontSize = var1.contentSize }) else nil,
-			TextSize = var1.contentSize,
-			textStyle = var2.Color.System.Alert,
+			Text = UnionResult.bodyText,
+			Font = if FoundationFontFaceMigration then nil else UnionResult.font,
+			fontStyle = if FoundationFontFaceMigration then CryoModule.Dictionary.join(UseTokensResult.Typography.BodyLarge, { FontSize = UnionResult.contentSize }) else nil,
+			TextSize = UnionResult.contentSize,
+			textStyle = UseTokensResult.Color.System.Alert,
 			TextXAlignment = Enum.TextXAlignment.Left,
-			TextYAlignment = var3,
+			TextYAlignment = Center,
 			TextTruncate = Enum.TextTruncate.AtEnd
 		}),
-		countdownText = if var1.endTimestamp ~= nil then nil else reactModule.createElement(foundationModule.Text, {
+		countdownText = if UnionResult.endTimestamp == nil then nil else ReactModule.createElement(FoundationModule.Text, {
 			BackgroundTransparency = 1,
 			TextWrapped = false,
 			LayoutOrder = 2,
 			AutomaticSize = Enum.AutomaticSize.X,
 			Size = UDim2.new(0, 0, 1, 0),
-			Text = useCountdownBinding(var1.endTimestamp, var1.defaultCountdownString),
-			Font = if foundationFontFaceMigration then nil else var1.font,
-			fontStyle = if foundationFontFaceMigration then cryoModule.Dictionary.join(var2.Typography.BodyLarge, { FontSize = var1.contentSize }) else nil,
-			TextSize = var1.contentSize,
-			textStyle = var2.Color.Content.Emphasis,
+			Text = UseCountdownBindingResult,
+			Font = if FoundationFontFaceMigration then nil else UnionResult.font,
+			fontStyle = if FoundationFontFaceMigration then CryoModule.Dictionary.join(UseTokensResult.Typography.BodyLarge, { FontSize = UnionResult.contentSize }) else nil,
+			TextSize = UnionResult.contentSize,
+			textStyle = UseTokensResult.Color.Content.Emphasis,
 			TextXAlignment = Enum.TextXAlignment.Center,
-			TextYAlignment = var3
+			TextYAlignment = Center
 		}),
-		icon = reactModule.createElement(imageSetLabel, {
+		icon = ReactModule.createElement(ImageSetLabel, {
 			BackgroundTransparency = 1,
 			LayoutOrder = 3,
-			Size = UDim2.new(0, var1.contentSize, 0, var1.contentSize),
-			ImageColor3 = var2.Color.System.Alert.Color3,
-			ImageTransparency = var2.Color.System.Alert.Transparency,
-			Image = images["icons/status/error_large"]
+			Size = UDim2.new(0, UnionResult.contentSize, 0, UnionResult.contentSize),
+			ImageColor3 = UseTokensResult.Color.System.Alert.Color3,
+			ImageTransparency = UseTokensResult.Color.System.Alert.Transparency,
+			Image = Images["icons/status/error_large"]
 		})
 	})
 end

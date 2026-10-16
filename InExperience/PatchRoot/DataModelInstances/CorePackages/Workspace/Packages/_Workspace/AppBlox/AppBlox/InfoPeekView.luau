@@ -1,81 +1,79 @@
-﻿local parent = script:FindFirstAncestor("AppBlox").Parent
-local foundationModule = require(parent.Foundation)
-local peekViewModule = require(parent.PeekView)
-local peekView = peekViewModule.PeekView
-local peekViewState = peekViewModule.PeekViewState
-local reactModule = require(parent.React)
-local useNavigation = require(parent.Navigation).useNavigation
-local useNavigationProps = require(parent.RobloxAppNavigation).useNavigationProps
-local useTokens = foundationModule.Hooks.useTokens
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
+﻿local Parent = script:FindFirstAncestor("AppBlox").Parent
+local FoundationModule = require(Parent.Foundation)
+local PeekViewModule = require(Parent.PeekView)
+local PeekView = PeekViewModule.PeekView
+local PeekViewState = PeekViewModule.PeekViewState
+local ReactModule = require(Parent.React)
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local UseNavigationPropsFunction = require(Parent.RobloxAppNavigation).useNavigationProps
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 
-return function(p1)
-	-- upvalues: useNavigationProps (ref), reactModule (ref), useNavigation (ref), useTokens (ref), peekViewState (ref), peekView (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
-	local var1 = useNavigationProps(function(_, p2)
+return function(p1) --[[ Line: 26 | Named "InfoPeekView" ]]
+	-- upvalues: UseNavigationPropsFunction (copy), ReactModule (copy), UseNavigationFunction (copy), UseTokensFunction (copy), PeekViewState (copy), PeekView (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	local UseNavigationPropsResult = UseNavigationPropsFunction(function(_, p2) --[[ Line: 27 ]]
 		return { title = p2.title, body = p2.body }
 	end)
-	local var2 = reactModule.useRef(nil)
-	local var3 = useNavigation()
-	local var4 = useTokens()
-	local title = p1.title or var1.title
-	local body = p1.body or var1.body
-	local headingSmall = var4.Typography.HeadingSmall
-	local emphasis = var4.Color.Content.Emphasis
-	local bodyLarge = var4.Typography.BodyLarge
-	local default = var4.Color.Content.Default
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseNavigationResult = UseNavigationFunction()
+	local UseTokensResult = UseTokensFunction()
+	local HeadingSmall = UseTokensResult.Typography.HeadingSmall
+	local Emphasis = UseTokensResult.Color.Content.Emphasis
+	local BodyLarge = UseTokensResult.Typography.BodyLarge
+	local Default = UseTokensResult.Color.Content.Default
 	
-	return reactModule.createElement(peekView, {
+	return ReactModule.createElement(PeekView, {
 		hasScrim = true,
 		mountAsFullView = true,
 		returnToFullView = true,
 		showDraggerInClosedState = false,
 		thumbstickScrollEnabled = true,
 		briefViewContentHeight = UDim.new(0, 0),
-		contentFrameRef = var2,
-		viewStateChanged = reactModule.useCallback(function(p2, _)
-			-- upvalues: peekViewState (copy), var3 (ref)
-			if p2 == peekViewState.Closed or p2 == peekViewState.Hidden then
-				var3.goBack()
+		contentFrameRef = UseRefResult,
+		viewStateChanged = ReactModule.useCallback(function(Closed, _) --[[ Line: 47 ]]
+			-- upvalues: PeekViewState (upval), UseNavigationResult (copy)
+			if Closed == PeekViewState.Closed or Closed == PeekViewState.Hidden then
+				UseNavigationResult.goBack()
 			end
-		end, { var3 })
+		end, { UseNavigationResult })
 	}, {
-		Layout = reactModule.createElement("UIListLayout", {
+		Layout = ReactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
 			SortOrder = Enum.SortOrder.LayoutOrder,
-			Padding = UDim.new(0, var4.Padding.Medium)
+			Padding = UDim.new(0, UseTokensResult.Padding.Medium)
 		}),
-		ContentPadding = reactModule.createElement("UIPadding", {
-			PaddingTop = UDim.new(0, var4.Padding.XXLarge),
-			PaddingLeft = UDim.new(0, var4.Padding.XXLarge),
-			PaddingRight = UDim.new(0, var4.Padding.XXLarge),
-			PaddingBottom = UDim.new(0, var4.Padding.XXLarge)
+		ContentPadding = ReactModule.createElement("UIPadding", {
+			PaddingTop = UDim.new(0, UseTokensResult.Padding.XXLarge),
+			PaddingLeft = UDim.new(0, UseTokensResult.Padding.XXLarge),
+			PaddingRight = UDim.new(0, UseTokensResult.Padding.XXLarge),
+			PaddingBottom = UDim.new(0, UseTokensResult.Padding.XXLarge)
 		}),
-		TitleText = reactModule.createElement("TextLabel", {
+		TitleText = ReactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
 			TextWrapped = true,
 			LayoutOrder = 1,
-			Text = title,
-			Font = if foundationFontFaceMigration then nil else headingSmall.Font,
-			FontFace = if foundationFontFaceMigration then normalizeFontFace(headingSmall.Font) else nil,
-			TextSize = headingSmall.FontSize,
-			TextColor3 = emphasis.Color3,
-			TextTransparency = emphasis.Transparency,
+			Text = p1.title or UseNavigationPropsResult.title,
+			Font = if FoundationFontFaceMigration then nil else HeadingSmall.Font,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(HeadingSmall.Font) else nil,
+			TextSize = HeadingSmall.FontSize,
+			TextColor3 = Emphasis.Color3,
+			TextTransparency = Emphasis.Transparency,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			Size = UDim2.fromScale(1, 0),
 			AutomaticSize = Enum.AutomaticSize.Y
 		}),
-		BodyText = reactModule.createElement("TextLabel", {
+		BodyText = ReactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
 			TextWrapped = true,
 			LayoutOrder = 2,
-			Text = body,
-			Font = if foundationFontFaceMigration then nil else bodyLarge.Font,
-			FontFace = if foundationFontFaceMigration then normalizeFontFace(bodyLarge.Font) else nil,
-			TextSize = bodyLarge.FontSize,
-			TextColor3 = default.Color3,
-			TextTransparency = default.Transparency,
+			Text = p1.body or UseNavigationPropsResult.body,
+			Font = if FoundationFontFaceMigration then nil else BodyLarge.Font,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(BodyLarge.Font) else nil,
+			TextSize = BodyLarge.FontSize,
+			TextColor3 = Default.Color3,
+			TextTransparency = Default.Transparency,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			Size = UDim2.fromScale(1, 0),
 			AutomaticSize = Enum.AutomaticSize.Y

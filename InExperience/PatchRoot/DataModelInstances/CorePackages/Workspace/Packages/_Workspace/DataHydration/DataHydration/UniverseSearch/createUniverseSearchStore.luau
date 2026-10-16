@@ -1,131 +1,133 @@
-﻿local httpService = game:GetService("HttpService")
-local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local cryoModule = require(parent.Cryo)
-local _ = require(parent.HttpClient)
-local createDataCacheModule = require(dataHydration.createDataCache)
-local createDataResolverModule = require(dataHydration.createDataResolver)
-local _ = require(dataHydration.DataHydrationTypes)
-local fetchUniverseSearchModule = require(script.Parent.fetchUniverseSearch)
+﻿local HttpService = game:GetService("HttpService")
+local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local CryoModule = require(Parent.Cryo)
+local _ = require(Parent.HttpClient)
+local CreateDataCacheModule = require(DataHydration.createDataCache)
+local CreateDataResolverModule = require(DataHydration.createDataResolver)
+local _ = require(DataHydration.DataHydrationTypes)
+local FetchUniverseSearchModule = require(script.Parent.fetchUniverseSearch)
 local _ = require(script.Parent.UniverseSearchStoreTypes)
 
-local function _(p1)
-	-- upvalues: httpService (ref)
-	return httpService:JSONEncode(p1)
+local function _(Input) --[[ Line: 29 | Named "paramsKey" ]]
+	-- upvalues: HttpService (copy)
+	return HttpService:JSONEncode(Input)
 end
 
-return function(p1)
-	-- upvalues: cryoModule (ref), createDataCacheModule (ref), createDataResolverModule (ref), fetchUniverseSearchModule (ref), httpService (ref)
-	p1 = p1 or {}
-	local t = {}
-	local t_1 = {}
-	local t_2 = {}
+return function(p1) --[[ Line: 33 | Named "createUniverseSearchStore" ]]
+	-- upvalues: CryoModule (copy), CreateDataCacheModule (copy), CreateDataResolverModule (copy), FetchUniverseSearchModule (copy), HttpService (copy)
+	local P1 = p1 or {}
+	local Inputs = {}
+	local T = {}
+	local JoinResults = {}
 	
-	local function applyItemPatches(p2)
-		-- upvalues: t_2 (write), cryoModule (copy)
-		local data = p2.data
+	local function applyItemPatches(Result) --[[ Line: 40 ]]
+		-- upvalues: JoinResults (ref), CryoModule (upval)
+		local Data = Result.data
 		
-		if data == nil or next(t_2) == nil then
-			return p2
+		if Data == nil or next(JoinResults) == nil then
+			return Result
 		end
-		local var1 = false
-		local list = table.create(#data)
+		local Flag = false
+		local Buffer = table.create(#Data)
 		
-		for i, v in data do
-			local id = t_2[v.id]
+		for i, entry in Data do
+			local JoinResult = JoinResults[entry.id]
 			
-			if id == nil then
-				list[i] = v
+			if JoinResult == nil then
+				Buffer[i] = entry
 			else
-				var1 = true
-				list[i] = cryoModule.Dictionary.join(v, id)
+				Flag = true
+				Buffer[i] = CryoModule.Dictionary.join(entry, JoinResult)
 			end
 		end
-		return if var1 then cryoModule.Dictionary.join(p2, { data = list }) else p2
+		return if Flag then CryoModule.Dictionary.join(Result, { data = Buffer }) else Result
 	end
 	
-	local var2 = createDataCacheModule()
-	local var3 = createDataResolverModule({
+	local DataCacheModule = CreateDataCacheModule()
+	local DataResolverModule = CreateDataResolverModule({
 		supportsMultiGet = false,
-		cache = var2,
-		fetchFn = function(p3, _)
-			-- upvalues: t (write), fetchUniverseSearchModule (copy), p1 (ref), applyItemPatches (ref)
-			return fetchUniverseSearchModule(t[p3], { network = p1.network, baseUrl = p1.baseUrl }):andThen(applyItemPatches)
+		cache = DataCacheModule,
+		fetchFn = function(p2, _) --[[ Line: 71 ]]
+			-- upvalues: Inputs (ref), FetchUniverseSearchModule (upval), P1 (copy), applyItemPatches (copy)
+			return FetchUniverseSearchModule(Inputs[p2], { network = P1.network, baseUrl = P1.baseUrl }):andThen(applyItemPatches)
 		end
 	})
 	
 	return {
-		getSearch = function(p3)
-			-- upvalues: httpService (copy), t (write), var3 (ref)
-			local var4 = httpService:JSONEncode(p3)
-			t[var4] = p3
+		getSearch = function(Input) --[[ Line: 80 ]]
+			-- upvalues: HttpService (upval), Inputs (ref), DataResolverModule (copy)
+			local Json = HttpService:JSONEncode(Input)
+			Inputs[Json] = Input
 			
-			return var3.getCachedItem(var4)
+			return DataResolverModule.getCachedItem(Json)
 		end,
-		fetchSearch = function(p3)
-			-- upvalues: httpService (copy), t (write), var3 (ref)
-			local var4 = httpService:JSONEncode(p3)
-			t[var4] = p3
+		fetchSearch = function(Input) --[[ Line: 86 ]]
+			-- upvalues: HttpService (upval), Inputs (ref), DataResolverModule (copy)
+			local Json = HttpService:JSONEncode(Input)
+			Inputs[Json] = Input
 			
-			return var3.fetchItem(var4)
+			return DataResolverModule.fetchItem(Json)
 		end,
-		refreshSearch = function(p3)
-			-- upvalues: httpService (copy), t (write), t_1 (write), var2 (ref), fetchUniverseSearchModule (copy), p1 (ref), applyItemPatches (ref)
-			local var4 = httpService:JSONEncode(p3)
-			t[var4] = p3
-			local var5 = (t_1[var4] or 0) + 1
-			t_1[var4] = var5
-			var2.resetFailedItem(var4)
+		refreshSearch = function(Input) --[[ Line: 92 ]]
+			-- upvalues: HttpService (upval), Inputs (ref), T (ref), DataCacheModule (copy), FetchUniverseSearchModule (upval), P1 (copy), applyItemPatches (copy)
+			local Json = HttpService:JSONEncode(Input)
+			Inputs[Json] = Input
+			local v1 = (T[Json] or 0) + 1
+			T[Json] = v1
+			DataCacheModule.resetFailedItem(Json)
 			
-			return fetchUniverseSearchModule(p3, { network = p1.network, baseUrl = p1.baseUrl }):andThen(applyItemPatches):andThen(function(p4)
-				-- upvalues: t_1 (copy), var4 (ref), var5 (ref), var2 (copy)
-				if t_1[var4] == var5 then
-					var2.replaceItem(var4, p4)
+			return FetchUniverseSearchModule(Input, { network = P1.network, baseUrl = P1.baseUrl }):andThen(applyItemPatches):andThen(function(Result) --[[ Line: 101 ]]
+				-- upvalues: T (upval), Json (copy), v1 (copy), DataCacheModule (upval)
+				if T[Json] == v1 then
+					DataCacheModule.replaceItem(Json, Result)
 				end
-				return p4
-			end):catch(function(p4)
-				-- upvalues: t_1 (copy), var4 (ref), var5 (ref), var2 (copy)
-				if t_1[var4] == var5 then
-					var2.markItemsAsFailed({ var4 })
+				return Result
+			end):catch(function(Err) --[[ Line: 107 ]]
+				-- upvalues: T (upval), Json (copy), v1 (copy), DataCacheModule (upval)
+				if T[Json] == v1 then
+					DataCacheModule.markItemsAsFailed({ Json })
 				end
-				error(p4)
+				error(Err)
 			end)
 		end,
-		getAndFetchSearch = function(p3)
-			-- upvalues: httpService (copy), t (write), var3 (ref)
-			local var4 = httpService:JSONEncode(p3)
-			t[var4] = p3
+		getAndFetchSearch = function(Input) --[[ Line: 115 ]]
+			-- upvalues: HttpService (upval), Inputs (ref), DataResolverModule (copy)
+			local Json = HttpService:JSONEncode(Input)
+			Inputs[Json] = Input
 			
-			return var3.getAndFetchItem(var4)
+			return DataResolverModule.getAndFetchItem(Json)
 		end,
-		updateSearchItem = function(p3, p4)
-			-- upvalues: t_2 (write), cryoModule (copy), t (write), var3 (ref), applyItemPatches (ref), var2 (ref)
-			t_2[p3] = cryoModule.Dictionary.join(t_2[p3] or {}, p4)
+		updateSearchItem = function(Key, p2) --[[ Line: 123 ]]
+			-- upvalues: JoinResults (ref), CryoModule (upval), Inputs (ref), DataResolverModule (copy), applyItemPatches (copy), DataCacheModule (copy)
+			JoinResults[Key] = CryoModule.Dictionary.join(JoinResults[Key] or {}, p2)
 			
-			for i in t do
-				local var4 = var3.getCachedItem(i).data(false)
+			for input in Inputs do
+				local DataResult = DataResolverModule.getCachedItem(input).data(false)
+				local NoDataResult = DataResult == nil
+				local ApplyItemPatchesResult = nil
 				
-				if var4 ~= nil then
-					local var5 = applyItemPatches(var4)
-					
-					if var5 ~= var4 then
-						var2.updateItem(i, var5)
-					end
+				if not NoDataResult then
+					ApplyItemPatchesResult = applyItemPatches(DataResult)
+					NoDataResult = ApplyItemPatchesResult == DataResult
+				end
+				if not NoDataResult then
+					DataCacheModule.updateItem(input, ApplyItemPatchesResult)
 				end
 			end
 		end,
-		invalidateAll = function()
-			-- upvalues: t (write), t_1 (write), var3 (ref)
-			t = {}
-			t_1 = {}
-			var3.clear()
+		invalidateAll = function() --[[ Line: 140 ]]
+			-- upvalues: Inputs (ref), T (ref), DataResolverModule (copy)
+			Inputs = {}
+			T = {}
+			DataResolverModule.clear()
 		end,
-		dispose = function()
-			-- upvalues: t (write), t_1 (write), t_2 (write), var3 (ref)
-			t = {}
-			t_1 = {}
-			t_2 = {}
-			var3.dispose()
+		dispose = function() --[[ Line: 146 ]]
+			-- upvalues: Inputs (ref), T (ref), JoinResults (ref), DataResolverModule (copy)
+			Inputs = {}
+			T = {}
+			JoinResults = {}
+			DataResolverModule.dispose()
 		end
 	}
 end

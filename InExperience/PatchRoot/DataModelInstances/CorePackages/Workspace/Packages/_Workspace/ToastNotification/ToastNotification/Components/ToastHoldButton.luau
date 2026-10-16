@@ -1,24 +1,25 @@
-﻿local userInputService = game:GetService("UserInputService")
-local parent = script:FindFirstAncestor("ToastNotification").Parent
-local reactModule = require(parent.React)
-local useTokens = require(parent.Foundation).Hooks.useTokens
-local iconWithHoldAnimation = require(parent.AppShortcutBar).IconWithHoldAnimation
+﻿local UserInputService = game:GetService("UserInputService")
+local Parent = script:FindFirstAncestor("ToastNotification").Parent
+local ReactModule = require(Parent.React)
+local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+local IconWithHoldAnimation = require(Parent.AppShortcutBar).IconWithHoldAnimation
 
-return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), iconWithHoldAnimation (ref), userInputService (ref)
-	local iconSize = p1.iconSize or useTokens().Size.Size_350
+return function(p1) --[[ Line: 21 ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), IconWithHoldAnimation (copy), UserInputService (copy)
+	local UseTokensResult = UseTokensFunction()
+	local IconSize = p1.iconSize or UseTokensResult.Size.Size_350
 	
-	return reactModule.createElement("CanvasGroup", {
+	return ReactModule.createElement("CanvasGroup", {
 		BackgroundTransparency = 1,
-		Size = UDim2.fromOffset(iconSize, iconSize),
+		Size = UDim2.fromOffset(IconSize, IconSize),
 		LayoutOrder = p1.layoutOrder,
 		Visible = p1.visible,
 		GroupTransparency = p1.iconTransparency
 	}, {
-		HoldIcon = reactModule.createElement(iconWithHoldAnimation, {
+		HoldIcon = ReactModule.createElement(IconWithHoldAnimation, {
 			size = UDim2.fromScale(1, 1),
-			icon = userInputService:GetImageForKeyCode(Enum.KeyCode.ButtonSelect),
-			iconSize = iconSize,
+			icon = UserInputService:GetImageForKeyCode(Enum.KeyCode.ButtonSelect),
+			iconSize = IconSize,
 			progress = p1.progress
 		})
 	})

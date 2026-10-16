@@ -1,177 +1,180 @@
-﻿local parent = script:FindFirstAncestor("MomentsCreation").Parent
-local momentsCommonModule = require(parent.MomentsCommon)
-local _ = require(parent.MomentsTypes)
-local eventNames = momentsCommonModule.Analytics.EventNames
-local funnelEventNames = momentsCommonModule.Analytics.FunnelEventNames
-local sessionManager = momentsCommonModule.Analytics.SessionManager
-local getFFlagEnableMomentTextGeneration = momentsCommonModule.Flags.GetFFlagEnableMomentTextGeneration
-local creationFlowSteps = funnelEventNames.CreationFlowSteps
-local t = {
-	[eventNames.MomentsEditingFlowContinueToEditButtonPressed] = creationFlowSteps.GalleryItemSelectedContinuePressed,
-	[eventNames.MomentsEditingFlowContinueToDescriptionButtonPressed] = creationFlowSteps.EditingScreenContinuePressed,
-	[eventNames.MomentsEditingFlowPublished] = creationFlowSteps.Published,
-	[eventNames.EditingFlowGalleryPageAppear] = creationFlowSteps.CreateIntent,
-	[eventNames.EditingFlowEditPageAppear] = creationFlowSteps.GalleryItemSelectedContinuePressed,
-	[eventNames.EditingFlowPreviewPageAppear] = creationFlowSteps.EditingScreenContinuePressed,
-	[eventNames.MomentsEditingFlowExited] = creationFlowSteps.CreateIntent
+﻿local Parent = script:FindFirstAncestor("MomentsCreation").Parent
+local MomentsCommonModule = require(Parent.MomentsCommon)
+local _ = require(Parent.MomentsTypes)
+local EventNames = MomentsCommonModule.Analytics.EventNames
+local FunnelEventNames = MomentsCommonModule.Analytics.FunnelEventNames
+local SessionManager = MomentsCommonModule.Analytics.SessionManager
+local GetFFlagEnableMomentTextGenerationFunction = MomentsCommonModule.Flags.GetFFlagEnableMomentTextGeneration
+local CreationFlowSteps = FunnelEventNames.CreationFlowSteps
+local config = {
+	[EventNames.MomentsEditingFlowContinueToEditButtonPressed] = CreationFlowSteps.GalleryItemSelectedContinuePressed,
+	[EventNames.MomentsEditingFlowContinueToDescriptionButtonPressed] = CreationFlowSteps.EditingScreenContinuePressed,
+	[EventNames.MomentsEditingFlowPublished] = CreationFlowSteps.Published,
+	[EventNames.EditingFlowGalleryPageAppear] = CreationFlowSteps.CreateIntent,
+	[EventNames.EditingFlowEditPageAppear] = CreationFlowSteps.GalleryItemSelectedContinuePressed,
+	[EventNames.EditingFlowPreviewPageAppear] = CreationFlowSteps.EditingScreenContinuePressed,
+	[EventNames.MomentsEditingFlowExited] = CreationFlowSteps.CreateIntent
 }
-local t_1 = {
-	Gallery = creationFlowSteps.GalleryItemSelectedContinuePressed,
-	Preview = creationFlowSteps.EditingScreenContinuePressed,
-	Description = creationFlowSteps.EditingScreenContinuePressed
+local config1 = {
+	Gallery = CreationFlowSteps.GalleryItemSelectedContinuePressed,
+	Preview = CreationFlowSteps.EditingScreenContinuePressed,
+	Description = CreationFlowSteps.EditingScreenContinuePressed
 }
 
 return {
-	makeStepField = function(p1)
-		-- upvalues: t (ref)
-		local var1 = t[p1]
+	makeStepField = function(p1) --[[ Line: 82 ]]
+		-- upvalues: config (copy)
+		local Entry = config[p1]
 		
-		return if var1 == nil then {} else { step = var1 }
+		return if Entry == nil then {} else { step = Entry }
 	end,
-	makeStepFieldFromState = function(p1)
-		-- upvalues: t_1 (ref)
-		local var1 = if p1 ~= nil then nil else t_1[p1]
+	makeStepFieldFromState = function(p1) --[[ Line: 92 ]]
+		-- upvalues: config1 (copy)
+		local Entry = if p1 == nil then nil else config1[p1]
 		
-		return if var1 == nil then {} else { step = var1 }
+		return if Entry == nil then {} else { step = Entry }
 	end,
-	makeToolField = function(p1)
+	makeToolField = function(p1) --[[ Line: 101 ]]
 		return if p1 == nil or p1.kind == nil then {} else { tool = p1.kind }
 	end,
-	makeToolFieldFromKind = function(p1)
-		return if p1 == nil then {} else { tool = p1 }
+	makeToolFieldFromKind = function(Tool) --[[ Line: 110 ]]
+		return if Tool == nil then {} else { tool = Tool }
 	end,
-	makeCreationBaseFields = function(p1)
-		return if p1 == nil then {} else { creationSessionId = p1 }
+	makeCreationBaseFields = function(CreationSessionId) --[[ Line: 124 ]]
+		return if CreationSessionId == nil then {} else { creationSessionId = CreationSessionId }
 	end,
-	makeVoiceEventFields = function(p1)
-		-- upvalues: sessionManager (ref), funnelEventNames (ref)
-		local t_1, var1, var2
-		local t = { tool = "voice" }
-		local sessionId = sessionManager.getSessionId(funnelEventNames.FunnelTypes.CreationFlow)
+	makeVoiceEventFields = function(List) --[[ Line: 134 ]]
+		-- upvalues: SessionManager (copy), FunnelEventNames (copy)
+		local config = { tool = "voice" }
+		local SessionId = SessionManager.getSessionId(FunnelEventNames.FunnelTypes.CreationFlow)
+		local v1 = nil
+		local t = nil
+		local v2 = nil
 		
-		if sessionId == nil then
-			t_1 = {}
-			var1 = nil
-			var2 = nil
+		if SessionId == nil then
+			t = {}
+			v1 = nil
+			v2 = nil
 		else
-			t_1 = { creationSessionId = sessionId }
-			var1 = nil
-			var2 = nil
+			t = { creationSessionId = SessionId }
+			v1 = nil
+			v2 = nil
 		end
-		for i, v in t_1, var1, var2 do
-			t[i] = v
+		for i, value in t, v1, v2 do
+			config[i] = value
 		end
-		if p1 ~= nil then
-			for i_1, v_1 in p1 do
-				t[i_1] = v_1
+		if List ~= nil then
+			for i1, value1 in List do
+				config[i1] = value1
 			end
 		end
-		return t
+		return config
 	end,
-	makeTextOverlayEventFields = function(p2)
-		-- upvalues: sessionManager (ref), funnelEventNames (ref)
-		local t_1, var3, var4
-		local t = { tool = "text" }
-		local sessionId = sessionManager.getSessionId(funnelEventNames.FunnelTypes.CreationFlow)
+	makeTextOverlayEventFields = function(List) --[[ Line: 151 ]]
+		-- upvalues: SessionManager (copy), FunnelEventNames (copy)
+		local config = { tool = "text" }
+		local SessionId = SessionManager.getSessionId(FunnelEventNames.FunnelTypes.CreationFlow)
+		local v3 = nil
+		local t = nil
+		local v4 = nil
 		
-		if sessionId == nil then
-			t_1 = {}
-			var3 = nil
-			var4 = nil
+		if SessionId == nil then
+			t = {}
+			v3 = nil
+			v4 = nil
 		else
-			t_1 = { creationSessionId = sessionId }
-			var3 = nil
-			var4 = nil
+			t = { creationSessionId = SessionId }
+			v3 = nil
+			v4 = nil
 		end
-		for i, v in t_1, var3, var4 do
-			t[i] = v
+		for i, value in t, v3, v4 do
+			config[i] = value
 		end
-		if p2 ~= nil then
-			for i_1, v_1 in p2 do
-				t[i_1] = v_1
+		if List ~= nil then
+			for i1, value1 in List do
+				config[i1] = value1
 			end
 		end
-		return t
+		return config
 	end,
-	makeTextOverlayPublishSummaryFields = function(p3)
-		if p3 == nil then
+	makeTextOverlayPublishSummaryFields = function(p1) --[[ Line: 174 ]]
+		if p1 == nil then
 			return {}
 		end
 		local t = {}
-		local textOverlayStyle = p3.textOverlayStyle
+		local TextOverlayStyle = p1.textOverlayStyle
 		
-		if textOverlayStyle ~= nil then
-			if textOverlayStyle.font ~= nil then
-				t.font = textOverlayStyle.font.Name
+		if TextOverlayStyle ~= nil then
+			if TextOverlayStyle.font ~= nil then
+				t.font = TextOverlayStyle.font.Name
 			end
-			if textOverlayStyle.fontSize ~= nil then
-				t.fontSize = tostring(textOverlayStyle.fontSize)
+			if TextOverlayStyle.fontSize ~= nil then
+				t.fontSize = tostring(TextOverlayStyle.fontSize)
 			end
-			if textOverlayStyle.fontColor ~= nil then
-				t.color = "#" .. textOverlayStyle.fontColor:ToHex()
+			if TextOverlayStyle.fontColor ~= nil then
+				t.color = "#" .. TextOverlayStyle.fontColor:ToHex()
 			end
-			if textOverlayStyle.textXAlignment ~= nil then
-				t.alignment = textOverlayStyle.textXAlignment.Name
+			if TextOverlayStyle.textXAlignment ~= nil then
+				t.alignment = TextOverlayStyle.textXAlignment.Name
 			end
 		end
-		if p3.rotation ~= nil then
-			t.rotation = tostring(p3.rotation)
+		if p1.rotation ~= nil then
+			t.rotation = tostring(p1.rotation)
 		end
-		if typeof(p3.position) == "UDim2" then
-			t.positionX = tostring(p3.position.X.Scale)
-			t.positionY = tostring(p3.position.Y.Scale)
+		if typeof(p1.position) == "UDim2" then
+			t.positionX = tostring(p1.position.X.Scale)
+			t.positionY = tostring(p1.position.Y.Scale)
 		end
-		if p3.scale ~= nil then
-			t.scale = tostring(p3.scale)
+		if p1.scale ~= nil then
+			t.scale = tostring(p1.scale)
 		end
 		return if next(t) == nil then {} else t
 	end,
-	makeVoicePublishSummaryFields = function(p3, p4, p5)
-		if p3 == nil then
+	makeVoicePublishSummaryFields = function(p1, p2: number, p3: number) --[[ Line: 213 ]]
+		if p1 == nil then
 			return {}
 		end
 		local t = {}
 		
-		if p3.voiceId ~= nil then
-			t.ttsVoiceId = tostring(p3.voiceId)
+		if p1.voiceId ~= nil then
+			t.ttsVoiceId = tostring(p1.voiceId)
 		end
-		if p3.text ~= nil then
-			t.ttsCharCount = tostring(utf8.len(p3.text) or #p3.text)
+		if p1.text ~= nil then
+			t.ttsCharCount = tostring(utf8.len(p1.text) or #p1.text)
 		end
-		if p5 ~= nil and p5 > 0 then
-			t.ttsDuration = tostring(p5)
+		if p3 ~= nil and p3 > 0 then
+			t.ttsDuration = tostring(p3)
 		end
-		local startTime = p3.startTime or 0
-		t.ttsStartTimeSeconds = tostring(startTime)
+		local StartTime = p1.startTime or 0
+		t.ttsStartTimeSeconds = tostring(StartTime)
 		
-		if p4 ~= nil then
-			t.ttsVideoDurationSeconds = tostring(p4)
-			t.ttsStartTimeFraction = tostring(if p4 > 0 then startTime / p4 else 0)
+		if p2 ~= nil then
+			t.ttsVideoDurationSeconds = tostring(p2)
+			t.ttsStartTimeFraction = tostring(if p2 > 0 then StartTime / p2 else 0)
 		end
 		return t
 	end,
-	makeCaptureDescriptorFields = function(p3)
-		local t = {
-			sourcePlaceId = tostring(p3.SourcePlaceId),
-			localId = tostring(p3.LocalId)
+	makeCaptureDescriptorFields = function(Capture) --[[ Line: 263 ]]
+		local CaptureType = Capture.CaptureType
+		
+		return {
+			sourcePlaceId = tostring(Capture.SourcePlaceId),
+			localId = tostring(Capture.LocalId),
+			captureType = if typeof(CaptureType) == "EnumItem" then CaptureType.Name elseif CaptureType == nil then nil else tostring(CaptureType),
+			universeId = tostring(Capture.SourceUniverseId)
 		}
-		local captureType = p3.CaptureType
-		t.captureType = if typeof(captureType) == "EnumItem" then captureType.Name elseif captureType == nil then nil else tostring(captureType)
-		t.universeId = tostring(p3.SourceUniverseId)
-		
-		return t
 	end,
-	makeGeneratedTextOutcomeFields = function(p3, p4, p5, p6)
-		-- upvalues: getFFlagEnableMomentTextGeneration (ref)
-		return if getFFlagEnableMomentTextGeneration() then {
-			generatedDescriptionOutcome = if p3 == nil then "none" elseif p4 == p3 then "verbatim" elseif p4 == nil or p4 == "" then "discarded" else "edited",
-			generatedSummaryOutcome = if p5 == nil then "none" elseif p6 == p5 then "verbatim" elseif p6 == nil or p6 == "" then "discarded" else "edited"
+	makeGeneratedTextOutcomeFields = function(p1, p2, p3, p4) --[[ Line: 293 ]]
+		-- upvalues: GetFFlagEnableMomentTextGenerationFunction (copy)
+		return if GetFFlagEnableMomentTextGenerationFunction() then {
+			generatedDescriptionOutcome = if p1 == nil then "none" elseif p2 == p1 then "verbatim" elseif p2 == nil or p2 == "" then "discarded" else "edited",
+			generatedSummaryOutcome = if p3 == nil then "none" elseif p4 == p3 then "verbatim" elseif p4 == nil or p4 == "" then "discarded" else "edited"
 		} else {}
 	end,
-	classifyGeneratedTextOutcome = function(p3, p4)
-		return if p3 == nil then "none" elseif p4 == p3 then "verbatim" elseif p4 == nil or p4 == "" then "discarded" else "edited"
+	classifyGeneratedTextOutcome = function(p1, p2): string --[[ Line: 276 ]]
+		return if p1 == nil then "none" elseif p2 == p1 then "verbatim" elseif p2 == nil or p2 == "" then "discarded" else "edited"
 	end,
-	enumName = function(p3)
-		return if typeof(p3) == "EnumItem" then p3.Name elseif p3 == nil then nil else tostring(p3)
+	enumName = function(p1) --[[ Line: 245 ]]
+		return if typeof(p1) == "EnumItem" then p1.Name elseif p1 == nil then nil else tostring(p1)
 	end
 }

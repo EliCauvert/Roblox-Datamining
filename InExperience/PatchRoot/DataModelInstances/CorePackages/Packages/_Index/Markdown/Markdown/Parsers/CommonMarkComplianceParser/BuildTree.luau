@@ -1,305 +1,303 @@
-﻿local markdown = script:FindFirstAncestor("Markdown")
-local _ = require(markdown.Types)
-local constantsModule = require(script.Parent.Parent.Constants)
-local LISTS = constantsModule.LISTS
-local STYLED_TEXT = constantsModule.STYLED_TEXT
-local DIVIDERS = constantsModule.DIVIDERS
-local nodeTypeModule = require(markdown.Enums.NodeType)
-local getNodeTypeModule = require(script.Parent.Parent.getNodeType)
-local isNodeBlockModule = require(script.Parent.Parent.isNodeBlock)
-local insert = table.insert
+﻿local Markdown = script:FindFirstAncestor("Markdown")
+local _ = require(Markdown.Types)
+local ConstantsModule = require(script.Parent.Parent.Constants)
+local LISTS = ConstantsModule.LISTS
+local STYLEDTEXT = ConstantsModule.STYLED_TEXT
+local DIVIDERS = ConstantsModule.DIVIDERS
+local NodeTypeModule = require(Markdown.Enums.NodeType)
+local GetNodeTypeModule = require(script.Parent.Parent.getNodeType)
+local IsNodeBlockModule = require(script.Parent.Parent.isNodeBlock)
+local InsertFunction = table.insert
 local t = {}
 
-local function createTextNode(p1, p2)
-	-- upvalues: getNodeTypeModule (ref)
+local function createTextNode(TextNode, p1) --[[ Line: 23 ]]
+	-- upvalues: GetNodeTypeModule (copy)
 	return {
 		name = "TEXT",
-		text = p1.text,
+		text = TextNode.text,
 		children = {},
-		offset = p1.offset,
-		type = getNodeTypeModule("TEXT", p2)
+		offset = TextNode.offset,
+		type = GetNodeTypeModule("TEXT", p1)
 	}
 end
 
-function t.buildTree(p1, p2)
-	-- upvalues: nodeTypeModule (ref), getNodeTypeModule (ref), insert (ref), t (ref), STYLED_TEXT (ref), createTextNode (ref), LISTS (ref), isNodeBlockModule (ref), DIVIDERS (ref)
-	local t_1 = {
+function t.buildTree(p1, p2) --[[ Line: 34 ]]
+	-- upvalues: NodeTypeModule (copy), GetNodeTypeModule (copy), InsertFunction (copy), t (copy), STYLEDTEXT (copy), createTextNode (copy), LISTS (copy), IsNodeBlockModule (copy), DIVIDERS (copy)
+	local config = {
 		name = "ROOT",
 		offset = 1,
 		children = {},
-		type = nodeTypeModule.Root
+		type = NodeTypeModule.Root
 	}
-	local list = { t_1 }
-	local var1 = 1
-	while var1 <= #p1 do
-		local var2 = p1[var1]
-		local var3 = list[#list]
+	local list = { config }
+	local Count = 1
+	while Count <= #p1 do
+		local TextNode = p1[Count]
+		local Entry = list[#list]
 		
-		if var2.name == "CODE_BLOCK" and var2.capture then
-			insert(var3.children, {
+		if TextNode.name == "CODE_BLOCK" and TextNode.capture then
+			InsertFunction(Entry.children, {
 				name = "CODE_BLOCK",
-				text = string.gsub(var2.capture[2], "^%s*(.-)%s*$", "%1"),
+				text = string.gsub(TextNode.capture[2], "^%s*(.-)%s*$", "%1"),
 				children = {},
-				attributes = { language = var2.capture[1] },
-				offset = var2.offset,
-				type = getNodeTypeModule("CODE_BLOCK", p2)
+				attributes = { language = TextNode.capture[1] },
+				offset = TextNode.offset,
+				type = GetNodeTypeModule("CODE_BLOCK", p2)
 			})
-		elseif var2.name == "EMPHASIS_START" then
-			insert(list, {
+		elseif TextNode.name == "EMPHASIS_START" then
+			InsertFunction(list, {
 				name = "STYLED_TEXT",
-				attributes = { style = var2.text },
+				attributes = { style = TextNode.text },
 				children = {},
-				offset = var2.offset,
-				type = getNodeTypeModule("STYLED_TEXT", p2)
+				offset = TextNode.offset,
+				type = GetNodeTypeModule("STYLED_TEXT", p2)
 			})
-		elseif var2.name == "EMPHASIS_END" then
-			t.closeNode(list, function(p3)
+		elseif TextNode.name == "EMPHASIS_END" then
+			t.closeNode(list, function(p3): boolean --[[ Line: 76 ]]
 				return p3.name == "STYLED_TEXT"
 			end)
-		elseif STYLED_TEXT[var2.name] then
-			insert(var3.children, createTextNode(var2, p2))
-		elseif LISTS[var2.name] and var2.capture then
-			t.closeNode(list, function(p3)
-				-- upvalues: isNodeBlockModule (copy)
-				return isNodeBlockModule(p3)
+		elseif STYLEDTEXT[TextNode.name] then
+			InsertFunction(Entry.children, (createTextNode(TextNode, p2)))
+		elseif LISTS[TextNode.name] and TextNode.capture then
+			t.closeNode(list, function(p3) --[[ Line: 85 ]]
+				-- upvalues: IsNodeBlockModule (upval)
+				return IsNodeBlockModule(p3)
 			end)
-			insert(list, {
+			InsertFunction(list, {
 				name = "LIST_ITEM",
 				children = {},
-				attributes = { depth = #var2.capture[1], prefix = var2.capture[2] },
-				offset = var2.offset,
-				type = getNodeTypeModule("LIST_ITEM", p2)
+				attributes = {
+					depth = #TextNode.capture[1],
+					prefix = TextNode.capture[2]
+				},
+				offset = TextNode.offset,
+				type = GetNodeTypeModule("LIST_ITEM", p2)
 			})
-		elseif var2.name == "HEADING" and not var2.isBlock then
-			if not t.closeNode(list, function(p3)
+		elseif TextNode.name == "HEADING" and not TextNode.isBlock then
+			if not t.closeNode(list, function(p3): boolean --[[ Line: 101 ]]
 				return p3.name == "HEADING"
 			end) then
-				insert(var3.children, createTextNode(var2, p2))
+				InsertFunction(Entry.children, (createTextNode(TextNode, p2)))
 			end
-		elseif var2.isBlock then
-			t.closeNode(list, function(p3)
-				-- upvalues: isNodeBlockModule (copy)
-				return isNodeBlockModule(p3)
+		elseif TextNode.isBlock then
+			t.closeNode(list, function(p3) --[[ Line: 110 ]]
+				-- upvalues: IsNodeBlockModule (upval)
+				return IsNodeBlockModule(p3)
 			end)
-			local var4 = if DIVIDERS[var2.name] then list[#list].children else list
-			local t_2 = {}
-			local t_3 = {}
+			local Children = if DIVIDERS[TextNode.name] then list[#list].children else list
+			local Attributes = {}
+			local Children1 = {}
 			
-			if var2.name == "HEADING" and var2.capture then
-				t_2.depth = #var2.capture[1]
+			if TextNode.name == "HEADING" and TextNode.capture then
+				Attributes.depth = #TextNode.capture[1]
 			end
-			insert(var4, {
-				name = var2.name,
-				children = t_3,
-				attributes = t_2,
-				offset = var2.offset,
-				type = getNodeTypeModule(var2.name, p2)
+			InsertFunction(Children, {
+				name = TextNode.name,
+				children = Children1,
+				attributes = Attributes,
+				offset = TextNode.offset,
+				type = GetNodeTypeModule(TextNode.name, p2)
 			})
-		elseif var2.name == "ESCAPE" and var2.capture then
-			insert(var3.children, {
+		elseif TextNode.name == "ESCAPE" and TextNode.capture then
+			InsertFunction(Entry.children, {
 				name = "TEXT",
-				text = var2.capture[1],
-				offset = var2.offset,
+				text = TextNode.capture[1],
+				offset = TextNode.offset,
 				children = {},
-				type = getNodeTypeModule("TEXT", p2)
+				type = GetNodeTypeModule("TEXT", p2)
 			})
-		elseif var2.name == "LINK_START" and var2.capture then
-			insert(list, {
+		elseif TextNode.name == "LINK_START" and TextNode.capture then
+			InsertFunction(list, {
 				name = "LINK",
-				text = var2.capture[1],
-				attributes = { url = var2.capture[2], title = var2.capture[3] },
+				text = TextNode.capture[1],
+				attributes = { url = TextNode.capture[2], title = TextNode.capture[3] },
 				children = {},
-				offset = var2.offset,
-				type = getNodeTypeModule("LINK", p2)
+				offset = TextNode.offset,
+				type = GetNodeTypeModule("LINK", p2)
 			})
-		elseif var2.name == "LINK_END" then
-			t.closeNode(list, function(p3)
+		elseif TextNode.name == "LINK_END" then
+			t.closeNode(list, function(p3): boolean --[[ Line: 153 ]]
 				return p3.name == "LINK"
 			end)
-		elseif var2.name == "IMAGE" and var2.capture then
-			insert(var3.children, {
-				name = var2.name,
-				text = var2.capture[1],
-				attributes = { url = var2.capture[2], title = var2.capture[3] },
-				offset = var2.offset,
+		elseif TextNode.name == "IMAGE" and TextNode.capture then
+			InsertFunction(Entry.children, {
+				name = TextNode.name,
+				text = TextNode.capture[1],
+				attributes = { url = TextNode.capture[2], title = TextNode.capture[3] },
+				offset = TextNode.offset,
 				children = {},
-				type = getNodeTypeModule("IMAGE", p2)
+				type = GetNodeTypeModule("IMAGE", p2)
 			})
-		elseif var2.name == "OPEN_CLOSE" and var2.capture then
-			local var5 = var2.capture[1]
-			local var6 = var2.capture[2]
+		elseif TextNode.name == "OPEN_CLOSE" and TextNode.capture then
+			local CaptureEntry = TextNode.capture[1]
+			local CaptureEntry1 = TextNode.capture[2]
 			
-			if var2.capture and var5 == "br" then
-				insert(var3.children, {
+			if TextNode.capture and CaptureEntry == "br" then
+				InsertFunction(Entry.children, {
 					name = "BREAK",
 					children = {},
-					offset = var2.offset,
-					type = getNodeTypeModule("BREAK", p2)
+					offset = TextNode.offset,
+					type = GetNodeTypeModule("BREAK", p2)
 				})
 			else
-				insert(var3.children, {
+				InsertFunction(Entry.children, {
 					name = "TAG",
-					text = var5,
-					attributes = if var6 then t.parseXmlAttributes(var6) else {},
+					text = CaptureEntry,
+					attributes = if CaptureEntry1 then t.parseXmlAttributes(CaptureEntry1) else {},
 					children = {},
-					offset = var2.offset,
-					type = if p2.inlineTags[var5] then nodeTypeModule.InlineSpan else nodeTypeModule.Block
+					offset = TextNode.offset,
+					type = if p2.inlineTags[CaptureEntry] then NodeTypeModule.InlineSpan else NodeTypeModule.Block
 				})
 			end
-		elseif var2.name == "OPEN" and var2.capture then
-			local var7 = var2.capture[1]
-			local var8 = var2.capture[2]
+		elseif TextNode.name == "OPEN" and TextNode.capture then
+			local CaptureEntry = TextNode.capture[1]
+			local CaptureEntry2 = TextNode.capture[2]
 			
-			if var2.capture and var7 == "br" then
-				insert(var3.children, {
+			if TextNode.capture and CaptureEntry == "br" then
+				InsertFunction(Entry.children, {
 					name = "BREAK",
 					children = {},
-					offset = var2.offset,
-					type = getNodeTypeModule("BREAK", p2)
+					offset = TextNode.offset,
+					type = GetNodeTypeModule("BREAK", p2)
 				})
 			else
-				insert(list, {
+				InsertFunction(list, {
 					name = "TAG",
-					text = var7,
-					attributes = if var8 then t.parseXmlAttributes(var8) else {},
+					text = CaptureEntry,
+					attributes = if CaptureEntry2 then t.parseXmlAttributes(CaptureEntry2) else {},
 					children = {},
-					offset = var2.offset,
-					type = if p2.inlineTags[var7] then nodeTypeModule.InlineSpan else nodeTypeModule.Block
+					offset = TextNode.offset,
+					type = if p2.inlineTags[CaptureEntry] then NodeTypeModule.InlineSpan else NodeTypeModule.Block
 				})
 			end
-		elseif var2.name == "CLOSE" and var2.capture then
-			local var9 = var2.capture[1]
-			assert(t.closeNode(list, function(p3)
-				-- upvalues: var9 (ref), var2 (ref)
-				if p3.name == "TAG" then
-					assert(p3.text == var9, `Found <{p3.text}> at {p3.offset} when trying to close </{var9}> at {var2.offset}`)
+		elseif TextNode.name == "CLOSE" and TextNode.capture then
+			local CaptureEntry = TextNode.capture[1]
+			assert(t.closeNode(list, function(TextNode1): boolean --[[ Line: 213 ]]
+				-- upvalues: CaptureEntry (copy), TextNode (copy)
+				if TextNode1.name == "TAG" then
+					assert(TextNode1.text == CaptureEntry, `Found <{TextNode1.text}> at {TextNode1.offset} when trying to close </{CaptureEntry}> at {TextNode.offset}`)
 					
 					return true
-				end
-				return false
-			end), `No open tag exists trying to close </{var9}> at {var2.offset}`)
-		elseif var3.name == "HEADING" then
-			local matchIndex = string.find(var2.text, "\n", 1, true)
-			
-			if matchIndex then
-				local substring = string.sub(var2.text, 1, matchIndex - 1)
-				local substring_1 = string.sub(var2.text, matchIndex + 1)
-				
-				if string.find(substring_1, "%S") == nil then
-					insert(var3.children, {
-						name = var2.name,
-						text = var2.text,
-						children = {},
-						offset = var2.offset,
-						type = getNodeTypeModule(var2.name, p2)
-					})
-					var1 += 1
 				else
-					insert(var3.children, {
-						name = var2.name,
-						text = substring,
+					return false
+				end
+			end), `No open tag exists trying to close </{CaptureEntry}> at {TextNode.offset}`)
+		elseif Entry.name == "HEADING" then
+			local FoundAt: number? = string.find(TextNode.text, "\n", 1, true)
+			
+			if not FoundAt then
+				InsertFunction(Entry.children, {
+					name = TextNode.name,
+					text = TextNode.text,
+					children = {},
+					offset = TextNode.offset,
+					type = GetNodeTypeModule(TextNode.name, p2)
+				})
+				Count += 1
+				continue
+			else
+				local Segment = string.sub(TextNode.text, 1, FoundAt - 1)
+				local Segment1 = string.sub(TextNode.text, FoundAt + 1)
+				
+				if string.find(Segment1, "%S") == nil then
+					InsertFunction(Entry.children, {
+						name = TextNode.name,
+						text = TextNode.text,
 						children = {},
-						offset = var2.offset,
-						type = getNodeTypeModule(var2.name, p2)
+						offset = TextNode.offset,
+						type = GetNodeTypeModule(TextNode.name, p2)
 					})
-					t.closeNode(list, function(p3)
+					Count += 1
+					continue
+				else
+					InsertFunction(Entry.children, {
+						name = TextNode.name,
+						text = Segment,
+						children = {},
+						offset = TextNode.offset,
+						type = GetNodeTypeModule(TextNode.name, p2)
+					})
+					t.closeNode(list, function(p3): boolean --[[ Line: 264 ]]
 						return p3.name == "HEADING"
 					end)
-					insert(list, {
+					InsertFunction(list, {
 						name = "PARAGRAPH",
 						children = {
 							{
 								name = "TEXT",
-								text = substring_1,
+								text = Segment1,
 								children = {},
-								offset = var2.offset + matchIndex + 1,
-								type = getNodeTypeModule("TEXT", p2)
+								offset = TextNode.offset + FoundAt + 1,
+								type = GetNodeTypeModule("TEXT", p2)
 							}
 						},
-						offset = var2.offset,
-						type = getNodeTypeModule("PARAGRAPH", p2)
+						offset = TextNode.offset,
+						type = GetNodeTypeModule("PARAGRAPH", p2)
 					})
 				end
-			else
-				insert(var3.children, {
-					name = var2.name,
-					text = var2.text,
-					children = {},
-					offset = var2.offset,
-					type = getNodeTypeModule(var2.name, p2)
-				})
-				var1 += 1
 			end
 		else
-			insert(var3.children, {
-				name = var2.name,
-				text = var2.text,
+			InsertFunction(Entry.children, {
+				name = TextNode.name,
+				text = TextNode.text,
 				children = {},
-				offset = var2.offset,
-				type = getNodeTypeModule(var2.name, p2)
+				offset = TextNode.offset,
+				type = GetNodeTypeModule(TextNode.name, p2)
 			})
 		end
-		var1 += 1
+		Count += 1
 	end
-	t.closeNode(list, function(p3)
-		-- upvalues: isNodeBlockModule (copy)
-		return isNodeBlockModule(p3)
+	t.closeNode(list, function(p3) --[[ Line: 294 ]]
+		-- upvalues: IsNodeBlockModule (upval)
+		return IsNodeBlockModule(p3)
 	end)
-	t.closeNode(list, function(p3)
+	t.closeNode(list, function(p3): boolean --[[ Line: 298 ]]
 		return p3.name == "ROOT"
 	end)
 	
-	return t_1
+	return config
 end
 
-function t.closeNode(p3, p4)
-	-- upvalues: t (ref), insert (ref)
-	local var10 = t.findLastNodeIndex(p3, p4)
+function t.closeNode(List, p3) --[[ Line: 305 ]]
+	-- upvalues: t (copy), InsertFunction (copy)
+	local LastNodeIndex: number = t.findLastNodeIndex(List, p3)
 	
-	if not var10 then
+	if not LastNodeIndex then
 		return nil
 	end
-	local var11 = p3[var10]
+	local Entry = List[LastNodeIndex]
 	
-	for i = var10 + 1, #p3 do
-		insert(var11.children, p3[i])
+	for i = LastNodeIndex + 1, #List do
+		InsertFunction(Entry.children, List[i])
 	end
-	for _ = var10 + 1, #p3 do
-		table.remove(p3)
+	for _ = LastNodeIndex + 1, #List do
+		table.remove(List)
 	end
-	local var12 = p3[var10 - 1]
+	local Entry1 = List[LastNodeIndex - 1]
 	
-	if var12 then
-		table.remove(p3)
-		insert(var12.children, var11)
+	if Entry1 then
+		table.remove(List)
+		InsertFunction(Entry1.children, Entry)
 	end
-	return var11
+	return Entry
 end
 
-function t.findLastNodeIndex(p5, p6)
-	for i = #p5, 1, -1 do
-		local var13
-		local var14 = p5[i]
+function t.findLastNodeIndex(p4, Callback): number? --[[ Line: 332 ]]
+	for i = #p4, 1, -1 do
+		local v1 = p4[i]
 		
-		if typeof(p6) == "string" then
-			var13 = var14.name == p6
-			var13 = nil
-		else
-			var13 = p6(var14)
+		if if typeof(Callback) == "string" then v1.name == Callback else Callback(v1) then
+			return i
 		end
-		if not var13 then
-			continue
-		end
-		return i
 	end
 	return nil
 end
 
-function t.parseXmlAttributes(p7)
+function t.parseXmlAttributes(CaptureEntry: string) --[[ Line: 344 ]]
 	local t = {}
 	
-	for i, v in p7:gmatch("%s*([A-Za-z0-9_-]+)=\"([^\"]+)\"%s*") do
-		t[i] = v
+	for i, value in CaptureEntry:gmatch("%s*([A-Za-z0-9_-]+)=\"([^\"]+)\"%s*") do
+		t[i] = value
 	end
 	return t
 end

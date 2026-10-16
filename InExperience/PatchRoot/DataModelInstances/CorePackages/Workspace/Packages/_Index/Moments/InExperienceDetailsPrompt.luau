@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Workspace.InExperienceDetailsPrompt.InExperienceDetailsPrompt)
+﻿return (require(script.Parent.Parent.Parent._Workspace.InExperienceDetailsPrompt.InExperienceDetailsPrompt))

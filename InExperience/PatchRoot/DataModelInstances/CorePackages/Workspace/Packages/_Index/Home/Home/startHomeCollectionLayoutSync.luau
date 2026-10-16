@@ -1,44 +1,45 @@
-﻿local home = script:FindFirstAncestor("Home")
-local parent = home.Parent
-local signalsModule = require(parent.Signals)
-local collectionViewsModule = require(parent.CollectionViews)
-local displayModule = require(parent.Display)
-local measureHomeCollectionLayoutModule = require(home.measureHomeCollectionLayout)
-local writeHomePageSduiCollectionLayoutModule = require(home.writeHomePageSduiCollectionLayout)
+﻿local Home = script:FindFirstAncestor("Home")
+local Parent = Home.Parent
+local SignalsModule = require(Parent.Signals)
+local CollectionViewsModule = require(Parent.CollectionViews)
+local DisplayModule = require(Parent.Display)
+local MeasureHomeCollectionLayoutModule = require(Home.measureHomeCollectionLayout)
+local WriteHomePageSduiCollectionLayoutModule = require(Home.writeHomePageSduiCollectionLayout)
 
-return function()
-	-- upvalues: collectionViewsModule (ref), displayModule (ref), signalsModule (ref), measureHomeCollectionLayoutModule (ref), writeHomePageSduiCollectionLayoutModule (ref)
-	local mainCollectionLayoutStore = collectionViewsModule.getMainCollectionLayoutStore(false)
-	local displayStore = displayModule.GetDisplayStore(false)
-	local var1 = signalsModule.createComputed(function(p1)
-		-- upvalues: mainCollectionLayoutStore (ref), displayStore (ref), measureHomeCollectionLayoutModule (copy)
-		mainCollectionLayoutStore.getContainerWidth(p1)
-		mainCollectionLayoutStore.getIsContainerMeasured(p1)
-		displayStore.getViewportSize(p1)
-		displayStore.getTopBarHeight(p1)
-		local var2 = measureHomeCollectionLayoutModule()
+return function() --[[ Line: 16 | Named "startHomeCollectionLayoutSync" ]]
+	-- upvalues: CollectionViewsModule (copy), DisplayModule (copy), SignalsModule (copy), MeasureHomeCollectionLayoutModule (copy), WriteHomePageSduiCollectionLayoutModule (copy)
+	local MainCollectionLayoutStore = CollectionViewsModule.getMainCollectionLayoutStore(false)
+	local DisplayStore = DisplayModule.GetDisplayStore(false)
+	local Computed = SignalsModule.createComputed(function(p1) --[[ Line: 22 ]]
+		-- upvalues: MainCollectionLayoutStore (copy), DisplayStore (copy), MeasureHomeCollectionLayoutModule (upval)
+		MainCollectionLayoutStore.getContainerWidth(p1)
+		MainCollectionLayoutStore.getIsContainerMeasured(p1)
+		DisplayStore.getViewportSize(p1)
+		DisplayStore.getTopBarHeight(p1)
+		local MeasureHomeCollectionLayoutModuleResult = MeasureHomeCollectionLayoutModule()
 		
-		return if var2 then var2.rows_above_fold else nil
+		return if MeasureHomeCollectionLayoutModuleResult then MeasureHomeCollectionLayoutModuleResult.rows_above_fold else nil
 	end)
-	local var2 = false
+	local Flag = false
 	
-	return signalsModule.createEffect(function(p1)
-		-- upvalues: var1 (ref), mainCollectionLayoutStore (ref), var2 (write), measureHomeCollectionLayoutModule (copy), writeHomePageSduiCollectionLayoutModule (copy)
-		local var3 = var1(p1)
-		mainCollectionLayoutStore.getNumItemsForAllCategories(p1)
+	return SignalsModule.createEffect(function(p1) --[[ Line: 32 ]]
+		-- upvalues: Computed (copy), MainCollectionLayoutStore (copy), Flag (ref), MeasureHomeCollectionLayoutModule (upval), WriteHomePageSduiCollectionLayoutModule (upval)
+		local ComputedResult = Computed(p1)
+		MainCollectionLayoutStore.getNumItemsForAllCategories(p1)
 		
-		if var3 == nil or var2 then
+		if ComputedResult ~= nil and not Flag then
+			Flag = true
+			task.delay(1, function() --[[ Line: 41 ]]
+				-- upvalues: Flag (upval), MeasureHomeCollectionLayoutModule (upval), WriteHomePageSduiCollectionLayoutModule (upval)
+				Flag = false
+				local MeasureHomeCollectionLayoutModuleResult = MeasureHomeCollectionLayoutModule()
+				
+				if MeasureHomeCollectionLayoutModuleResult then
+					WriteHomePageSduiCollectionLayoutModule(MeasureHomeCollectionLayoutModuleResult)
+				end
+			end)
+			
 			return
 		end
-		var2 = true
-		task.delay(1, function()
-			-- upvalues: var2 (copy), measureHomeCollectionLayoutModule (copy), writeHomePageSduiCollectionLayoutModule (copy)
-			var2 = false
-			local var4 = measureHomeCollectionLayoutModule()
-			
-			if var4 then
-				writeHomePageSduiCollectionLayoutModule(var4)
-			end
-		end)
 	end)
 end

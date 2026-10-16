@@ -1,91 +1,92 @@
 ﻿local UGCValidationService = game:GetService("UGCValidationService")
-local parent = script.Parent.Parent
-local analyticsModule = require(parent.Analytics)
-local util = parent.util
-local _ = require(util.Types)
-local texturePackUtilsModule = require(util.TexturePackUtils)
-local failureReasonsAccumulatorModule = require(util.FailureReasonsAccumulator)
-local getFFlagUGCValidateTexturePackModule = require(parent.flags.getFFlagUGCValidateTexturePack)
-local getFFlagUGCValidateTexturePackOnRCCOnlyModule = require(parent.flags.getFFlagUGCValidateTexturePackOnRCCOnly)
-local t = {}
+local Parent = script.Parent.Parent
+local AnalyticsModule = require(Parent.Analytics)
+local Util = Parent.util
+local _ = require(Util.Types)
+local TexturePackUtilsModule = require(Util.TexturePackUtils)
+local FailureReasonsAccumulatorModule = require(Util.FailureReasonsAccumulator)
+local GetFFlagUGCValidateTexturePackModule = require(Parent.flags.getFFlagUGCValidateTexturePack)
+local GetFFlagUGCValidateTexturePackOnRCCOnlyModule = require(Parent.flags.getFFlagUGCValidateTexturePackOnRCCOnly)
 
-local function validateTexturePackURL(p1, p2, p3)
-	-- upvalues: failureReasonsAccumulatorModule (ref), texturePackUtilsModule (ref), analyticsModule (ref)
-	local var1 = failureReasonsAccumulatorModule.new()
-	local var2 = texturePackUtilsModule.findSurfaceAppearancesMissingTexturePacks(p1, p2)
+local function validateTexturePackURL(p1, p2, p3) --[[ Line: 21 ]]
+	-- upvalues: FailureReasonsAccumulatorModule (copy), TexturePackUtilsModule (copy), AnalyticsModule (copy)
+	local NewFailureReasonsAccumulator = FailureReasonsAccumulatorModule.new()
+	local SurfaceAppearancesMissingTexturePacks = TexturePackUtilsModule.findSurfaceAppearancesMissingTexturePacks(p1, p2)
 	
-	for i, v in var2 do
-		var1:updateReasons(false, {
-			`'{v:GetFullName()}' has a 'TexturePack' property with an invalid URL. Please fix the URL.`
+	for _, surfaceAppearancesMissingTexturePack in SurfaceAppearancesMissingTexturePacks do
+		NewFailureReasonsAccumulator:updateReasons(false, {
+			`'{surfaceAppearancesMissingTexturePack:GetFullName()}' has a 'TexturePack' property with an invalid URL. Please fix the URL.`
 		})
 	end
-	if #var2 > 0 then
-		analyticsModule.reportFailure(analyticsModule.ErrorType.validateTexturePack_InvalidTexturePackURL, nil, p3)
+	if #SurfaceAppearancesMissingTexturePacks > 0 then
+		AnalyticsModule.reportFailure(AnalyticsModule.ErrorType.validateTexturePack_InvalidTexturePackURL, nil, p3)
 	end
-	return var1:getFinalResults()
+	return NewFailureReasonsAccumulator:getFinalResults()
 end
 
-local function validateSurfaceAppearanceTexturePackMatch(p4, p5)
-	-- upvalues: failureReasonsAccumulatorModule (ref), texturePackUtilsModule (ref), UGCValidationService (ref), analyticsModule (ref)
-	local var3 = failureReasonsAccumulatorModule.new()
-	local var4 = false
-	local var5 = false
+local function validateSurfaceAppearanceTexturePackMatch(p4, p5) --[[ Line: 41 ]]
+	-- upvalues: FailureReasonsAccumulatorModule (copy), TexturePackUtilsModule (copy), UGCValidationService (copy), AnalyticsModule (copy)
+	local NewFailureReasonsAccumulator = FailureReasonsAccumulatorModule.new()
+	local v1 = false
+	local Flag = false
 	
-	for i, v in texturePackUtilsModule.findSurfaceAppearancesWithTexturePacks(p4) do
-		local ok, status = pcall(function()
-			-- upvalues: UGCValidationService (copy), v (ref)
-			return UGCValidationService:DoesSurfaceAppearanceMatchTexturePackAsync(v)
+	for _, Object in TexturePackUtilsModule.findSurfaceAppearancesWithTexturePacks(p4) do
+		local Success, Result = pcall(function() --[[ Line: 49 ]]
+			-- upvalues: UGCValidationService (upval), Object (copy)
+			return UGCValidationService:DoesSurfaceAppearanceMatchTexturePackAsync(Object)
 		end)
 		
-		if ok then
-			var3:updateReasons(status, {
-				`The textures in SurfaceAppearance '{v:GetFullName()}' do not match those in its TexturePack. Please fix the TexturePack`
+		if Success then
+			NewFailureReasonsAccumulator:updateReasons(Result, {
+				`The textures in SurfaceAppearance '{Object:GetFullName()}' do not match those in its TexturePack. Please fix the TexturePack`
 			})
 			
-			if not var4 then
-				var4 = not status
+			if not v1 then
+				v1 = not Result
 			end
 		else
-			local var6 = `Failed to download TexturePack for SurfaceAppearance '{v:GetFullName()}'.`
+			local Message: string = `Failed to download TexturePack for SurfaceAppearance '{Object:GetFullName()}'.`
 			
 			if p5.isServer then
-				error(var6)
+				error(Message)
 			end
-			var5 = true
-			var3:updateReasons(false, { var6 })
+			Flag = true
+			NewFailureReasonsAccumulator:updateReasons(false, { Message })
 		end
 	end
-	if var5 then
-		analyticsModule.reportFailure(analyticsModule.ErrorType.validateTexturePack_FailedToDownloadTexturePack, nil, p5)
+	if Flag then
+		AnalyticsModule.reportFailure(AnalyticsModule.ErrorType.validateTexturePack_FailedToDownloadTexturePack, nil, p5)
 	end
-	if var4 then
-		analyticsModule.reportFailure(analyticsModule.ErrorType.validateTexturePack_TexturePackMismatch, nil, p5)
+	if v1 then
+		AnalyticsModule.reportFailure(AnalyticsModule.ErrorType.validateTexturePack_TexturePackMismatch, nil, p5)
 	end
-	return var3:getFinalResults()
+	return NewFailureReasonsAccumulator:getFinalResults()
 end
 
-function t.validate(p6, p7, p8)
-	-- upvalues: getFFlagUGCValidateTexturePackModule (ref), getFFlagUGCValidateTexturePackOnRCCOnlyModule (ref), failureReasonsAccumulatorModule (ref), validateTexturePackURL (ref), validateSurfaceAppearanceTexturePackMatch (ref), analyticsModule (ref)
-	if not getFFlagUGCValidateTexturePackModule() then
-		return true
+return {
+	validate = function(p6, p7, p8) --[[ Line: 82 ]]
+		-- upvalues: GetFFlagUGCValidateTexturePackModule (copy), GetFFlagUGCValidateTexturePackOnRCCOnlyModule (copy), FailureReasonsAccumulatorModule (copy), validateTexturePackURL (copy), validateSurfaceAppearanceTexturePackMatch (copy), AnalyticsModule (copy)
+		if not GetFFlagUGCValidateTexturePackModule() then
+			return true
+		end
+		local v2 = if GetFFlagUGCValidateTexturePackOnRCCOnlyModule() then if p8.isServer then true else false else nil
+		
+		if p8.allowEditableInstances then
+			return true
+		end
+		local CurrentTime = tick()
+		local NewFailureReasonsAccumulator = FailureReasonsAccumulatorModule.new()
+		
+		if GetFFlagUGCValidateTexturePackOnRCCOnlyModule() then
+			if v2 then
+				NewFailureReasonsAccumulator:updateReasons(validateTexturePackURL(p6, p7, p8))
+			end
+		else
+			NewFailureReasonsAccumulator:updateReasons(validateTexturePackURL(p6, p7, p8))
+		end
+		NewFailureReasonsAccumulator:updateReasons(validateSurfaceAppearanceTexturePackMatch(p6, p8))
+		AnalyticsModule.recordScriptTime(script.Name, CurrentTime, p8)
+		
+		return NewFailureReasonsAccumulator:getFinalResults()
 	end
-	local var7 = if getFFlagUGCValidateTexturePackOnRCCOnlyModule() then if p8.isServer then true else false else nil
-	
-	if p8.allowEditableInstances then
-		return true
-	end
-	local currentTime = tick()
-	local var8 = failureReasonsAccumulatorModule.new()
-	
-	if not getFFlagUGCValidateTexturePackOnRCCOnlyModule() then
-		var8:updateReasons(validateTexturePackURL(p6, p7, p8))
-	elseif var7 then
-		var8:updateReasons(validateTexturePackURL(p6, p7, p8))
-	end
-	var8:updateReasons(validateSurfaceAppearanceTexturePackMatch(p6, p8))
-	analyticsModule.recordScriptTime(script.Name, currentTime, p8)
-	
-	return var8:getFinalResults()
-end
-
-return t
+}

@@ -1,28 +1,27 @@
-﻿local playersService = game:GetService("Players")
-local robloxReplicatedStorageService = game:GetService("RobloxReplicatedStorage")
-local setDialogInUse = Instance.new("RemoteEvent")
-setDialogInUse.Name = "SetDialogInUse"
-setDialogInUse.Parent = robloxReplicatedStorageService
+﻿local Players = game:GetService("Players")
+local SetDialogInUse = Instance.new("RemoteEvent")
+SetDialogInUse.Name = "SetDialogInUse"
+SetDialogInUse.Parent = game:GetService("RobloxReplicatedStorage")
 local t = {}
 
-local function setDialogInUse_1(value, p1, p2)
-	-- upvalues: t (ref)
-	if typeof(p1) ~= "Instance" or not p1:IsA("Dialog") then return end
-	if type(p2) ~= "boolean" then return end
-	if typeof(value) ~= "Instance" or not value:IsA("Player") then return end
-	if p1 then
-		p1:SetPlayerIsUsing(value, p2)
-		t[value] = if p2 then p1 else nil
+local function setDialogInUse(Player: Player, Dialog, IsUsing) --[[ Line: 10 ]]
+	-- upvalues: t (copy)
+	if typeof(Dialog) ~= "Instance" or not Dialog:IsA("Dialog") then return end
+	if type(IsUsing) ~= "boolean" then return end
+	if typeof(Player) ~= "Instance" or not Player:IsA("Player") then return end
+	if Dialog then
+		Dialog:SetPlayerIsUsing(Player, IsUsing)
+		t[Player] = IsUsing and Dialog or nil
 	end
 end
 
-playersService.PlayerRemoving:Connect(function(p1)
-	-- upvalues: t (ref)
-	local var1 = t[p1]
+Players.PlayerRemoving:Connect(function(Player) --[[ Line: 29 ]]
+	-- upvalues: t (copy)
+	local Entry = t[Player]
 	
-	if var1 then
-		var1:SetPlayerIsUsing(p1, false)
-		t[p1] = nil
+	if Entry then
+		Entry:SetPlayerIsUsing(Player, false)
+		t[Player] = nil
 	end
 end)
-setDialogInUse.OnServerEvent:Connect(setDialogInUse_1)
+SetDialogInUse.OnServerEvent:Connect(setDialogInUse)

@@ -1,65 +1,58 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local playersService = game:GetService("Players")
-local foundationModule = require(parent.Foundation)
-local localizationModule = require(parent.Localization)
-local momentsCommonModule = require(parent.MomentsCommon)
-local _ = require(parent.MomentsTypes)
-local reactModule = require(parent.React)
-local image = foundationModule.Image
-local skeleton = foundationModule.Skeleton
-local view = foundationModule.View
-local text = foundationModule.Text
-local useFormFactor = momentsCommonModule.Hooks.useFormFactor
-local useImageLoadingState = momentsCommonModule.Hooks.useImageLoadingState
-local useLocalization = localizationModule.Hooks.useLocalization
-local constantsModule = require(moments.Constants)
-local formFactor = momentsCommonModule.Enums.FormFactor
-local fFlagMomentsUseCompositionLibraryModule = require(moments.Flags.FFlagMomentsUseCompositionLibrary)
-local t = {
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local Players = game:GetService("Players")
+local FoundationModule = require(Parent.Foundation)
+local _ = require(Parent.MomentsTypes)
+local ReactModule = require(Parent.React)
+local Image = FoundationModule.Image
+local Skeleton = FoundationModule.Skeleton
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local UseImageLoadingStateFunction = require(Parent.MomentsCommon).Hooks.useImageLoadingState
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local ConstantsModule = require(Moments.Constants)
+local config = {
 	moderatedBody = "Feature.Moments.Label.ModeratedRodeoBody",
 	unavailableBody = "Feature.Moments.Label.MomentUnavailableDefault"
 }
 
-return function(p1)
-	-- upvalues: useLocalization (ref), t (ref), fFlagMomentsUseCompositionLibraryModule (ref), useFormFactor (ref), playersService (ref), reactModule (ref), useImageLoadingState (ref), image (ref), skeleton (ref), view (ref), constantsModule (ref), formFactor (ref), text (ref)
-	local var1 = useLocalization(t)
-	local var2 = if not fFlagMomentsUseCompositionLibraryModule then useFormFactor() else nil
-	local localPlayer = playersService.LocalPlayer
-	local var3 = if localPlayer then localPlayer.UserId else nil
-	local var4 = reactModule.useMemo(function()
-		-- upvalues: var3 (ref), p1 (ref)
-		return var3 ~= nil and p1.creatorId == var3
-	end, { p1.creatorId, var3 or false })
-	local text_1 = "rbxthumb://type=Asset&id=" .. p1.moment.assetId .. "&w=480&h=270"
+return function(p1) --[[ Line: 34 | Named "ModeratedMomentItem" ]]
+	-- upvalues: UseLocalizationFunction (copy), config (copy), Players (copy), ReactModule (copy), UseImageLoadingStateFunction (copy), Image (copy), Skeleton (copy), View (copy), ConstantsModule (copy), Text (copy)
+	local UseLocalizationResult = UseLocalizationFunction(config)
+	local LocalPlayer = Players.LocalPlayer
+	local UserId = if LocalPlayer then LocalPlayer.UserId else nil
+	local UseMemoResult = ReactModule.useMemo(function(): boolean --[[ Line: 39 ]]
+		-- upvalues: UserId (copy), p1 (copy)
+		return UserId ~= nil and p1.creatorId == UserId
+	end, { p1.creatorId, UserId or false })
+	local Text1 = "rbxthumb://type=Asset&id=" .. p1.moment.assetId .. "&w=480&h=270"
+	local UseImageLoadingStateResult = UseImageLoadingStateFunction(if UseMemoResult then Text1 else nil)
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "position-center-center anchor-center-center size-full"
 	}, {
-		OverlayText = reactModule.createElement(view, {
+		OverlayText = ReactModule.createElement(View, {
 			tag = "col flex-evenly align-x-center position-center-center anchor-center-center size-full padding-xlarge",
 			testId = "--moments-moderated-overlay-text",
 			ZIndex = 3,
-			sizeConstraint = {
-				MaxSize = if fFlagMomentsUseCompositionLibraryModule then constantsModule.MaxSize.BottomUI elseif var2 ~= formFactor.Wide then constantsModule.MaxSize.BottomUI else nil
-			}
+			sizeConstraint = { MaxSize = ConstantsModule.MaxSize.BottomUI }
 		}, {
-			Text = reactModule.createElement(text, {
+			Text = ReactModule.createElement(Text, {
 				tag = "auto-xy text-wrap",
 				LayoutOrder = 1,
-				Text = if var4 then var1.moderatedBody else var1.unavailableBody
+				Text = if UseMemoResult then UseLocalizationResult.moderatedBody else UseLocalizationResult.unavailableBody
 			})
 		}),
-		Overlay = reactModule.createElement(view, {
+		Overlay = ReactModule.createElement(View, {
 			tag = "position-center-center anchor-center-center size-full bg-over-media-0",
 			ZIndex = 2
 		}),
-		Content = if var4 then reactModule.createElement(image, {
+		Content = if UseMemoResult then ReactModule.createElement(Image, {
 			Size = UDim2.fromScale(1, 1),
 			ScaleType = Enum.ScaleType.Crop,
-			Image = text_1
+			Image = Text1
 		}, {
-			Skeleton = if not useImageLoadingState(if var4 then text_1 else nil) then reactModule.createElement(skeleton, { Size = UDim2.fromScale(1, 1) }) else nil
+			Skeleton = if UseImageLoadingStateResult then nil else ReactModule.createElement(Skeleton, { Size = UDim2.fromScale(1, 1) })
 		}) else nil
 	})
 end

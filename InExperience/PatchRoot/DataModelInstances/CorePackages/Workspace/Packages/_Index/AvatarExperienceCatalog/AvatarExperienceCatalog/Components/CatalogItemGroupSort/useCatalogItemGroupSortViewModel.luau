@@ -1,176 +1,178 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local parent = avatarExperienceCatalog.Parent
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local useTokens = require(parent.Foundation).Hooks.useTokens
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local _ = require(parent.AvatarExperienceCommon)
-local itemTypeEnum = require(parent.AvatarExperienceModel).Enums.ItemTypeEnum
-local unifiedEventLogEnums = require(parent.AvatarExperienceAnalytics).UnifiedEventLogEnums
-local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
-local fFlagAXCatalogItemInformationPopover = avatarExperienceFlagsModule.FFlagAXCatalogItemInformationPopover
-local fFlagAXDeferLookImpressionsForHydration = avatarExperienceFlagsModule.FFlagAXDeferLookImpressionsForHydration
-local fFlagAXSduiSortSessionImpressionDedup = avatarExperienceFlagsModule.FFlagAXSduiSortSessionImpressionDedup
-local fFlagAXSduiSeeAllClickLogging = avatarExperienceFlagsModule.FFlagAXSduiSeeAllClickLogging
-local useStore = require(parent.RoactUtils).Hooks.RoactRodux.useStore
-local widgetConstantsModule = require(avatarExperienceCatalog.WidgetConstants)
-local getFooterVisibilityFromItemFootersModule = require(avatarExperienceCatalog.Utils.getFooterVisibilityFromItemFooters)
-local _ = require(avatarExperienceCatalog.Components.ResultsList.WidgetListInfoViewModel)
-local selectHydratedLookTypeModule = require(avatarExperienceCatalog.State.Selectors.selectHydratedLookType)
-local useCatalogPageMonolithDependenciesModule = require(avatarExperienceCatalog.Providers.useCatalogPageMonolithDependencies)
-local useOnRequestImpressionsSignalModule = require(script.Parent.Parent.Hooks.useOnRequestImpressionsSignal)
-local useHydrateCatalogSortOnDemandEffectModule = require(script.Parent.Parent.Hooks.useHydrateCatalogSortOnDemandEffect)
-local useAddUnifiedLoggingToCatalogSortEffectModule = require(script.Parent.Parent.Hooks.useAddUnifiedLoggingToCatalogSortEffect)
-local useFirstSeenImpressionFilterModule = require(script.Parent.Parent.Hooks.useFirstSeenImpressionFilter)
-local useSessionSeenImpressionFilterModule = require(script.Parent.Parent.Hooks.useSessionSeenImpressionFilter)
-local useDeferLooksWithoutHydrationFilterModule = require(script.Parent.Parent.Hooks.useDeferLooksWithoutHydrationFilter)
-local useComposedImpressionFilterModule = require(script.Parent.Parent.Hooks.useComposedImpressionFilter)
-local useOnCatalogSortImpressionsDetectedCallbackModule = require(script.Parent.Parent.Hooks.useOnCatalogSortImpressionsDetectedCallback)
-local useOpenInformationPopoverModule = require(script.Parent.Parent.Hooks.useOpenInformationPopover)
-local useCatalogSortSeeAllLoggingModule = require(script.Parent.Parent.Hooks.useCatalogSortSeeAllLogging)
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local Parent = AvatarExperienceCatalog.Parent
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local _ = require(Parent.AvatarExperienceCommon)
+local ItemTypeEnum = require(Parent.AvatarExperienceModel).Enums.ItemTypeEnum
+local UnifiedEventLogEnums = require(Parent.AvatarExperienceAnalytics).UnifiedEventLogEnums
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
+local FFlagAXCatalogItemInformationPopover = AvatarExperienceFlagsModule.FFlagAXCatalogItemInformationPopover
+local FFlagAXDeferLookImpressionsForHydration = AvatarExperienceFlagsModule.FFlagAXDeferLookImpressionsForHydration
+local FFlagAXSduiSortSessionImpressionDedup = AvatarExperienceFlagsModule.FFlagAXSduiSortSessionImpressionDedup
+local FFlagAXSduiSeeAllClickLogging = AvatarExperienceFlagsModule.FFlagAXSduiSeeAllClickLogging
+local FFlagAXSduiSponsoredItemClickTracking = AvatarExperienceFlagsModule.FFlagAXSduiSponsoredItemClickTracking
+local UseStoreFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useStore
+local WidgetConstantsModule = require(AvatarExperienceCatalog.WidgetConstants)
+local GetFooterVisibilityFromItemFootersModule = require(AvatarExperienceCatalog.Utils.getFooterVisibilityFromItemFooters)
+local _ = require(AvatarExperienceCatalog.Components.ResultsList.WidgetListInfoViewModel)
+local SelectHydratedLookTypeModule = require(AvatarExperienceCatalog.State.Selectors.selectHydratedLookType)
+local UseCatalogPageMonolithDependenciesModule = require(AvatarExperienceCatalog.Providers.useCatalogPageMonolithDependencies)
+local UseOnRequestImpressionsSignalModule = require(script.Parent.Parent.Hooks.useOnRequestImpressionsSignal)
+local UseHydrateCatalogSortOnDemandEffectModule = require(script.Parent.Parent.Hooks.useHydrateCatalogSortOnDemandEffect)
+local UseAddUnifiedLoggingToCatalogSortEffectModule = require(script.Parent.Parent.Hooks.useAddUnifiedLoggingToCatalogSortEffect)
+local UseFirstSeenImpressionFilterModule = require(script.Parent.Parent.Hooks.useFirstSeenImpressionFilter)
+local UseSessionSeenImpressionFilterModule = require(script.Parent.Parent.Hooks.useSessionSeenImpressionFilter)
+local UseDeferLooksWithoutHydrationFilterModule = require(script.Parent.Parent.Hooks.useDeferLooksWithoutHydrationFilter)
+local UseComposedImpressionFilterModule = require(script.Parent.Parent.Hooks.useComposedImpressionFilter)
+local UseOnCatalogSortImpressionsDetectedCallbackModule = require(script.Parent.Parent.Hooks.useOnCatalogSortImpressionsDetectedCallback)
+local UseOpenInformationPopoverModule = require(script.Parent.Parent.Hooks.useOpenInformationPopover)
+local UseCatalogSortSeeAllLoggingModule = require(script.Parent.Parent.Hooks.useCatalogSortSeeAllLogging)
 local _ = require(script.Parent.CatalogItemGroupSortView)
 
-local function _(p1, p2, p3)
-	local var1 = if p2 > 0 then p2 else 1
+local function _(p1, p2: number, p3): number --[[ Line: 115 | Named "computeItemWidth" ]]
+	local v1 = if p2 > 0 then p2 else 1
 	
-	return math.floor(math.max(0, p1 - (var1 - 1) * p3) / var1)
+	return (math.floor(math.max(0, p1 - (v1 - 1) * p3) / v1))
 end
 
-return function(p1)
-	-- upvalues: useCatalogPageMonolithDependenciesModule (ref), useTokens (ref), reactModule (ref), useOnRequestImpressionsSignalModule (ref), fFlagAXSduiSeeAllClickLogging (ref), useCatalogSortSeeAllLoggingModule (ref), useFirstSeenImpressionFilterModule (ref), fFlagAXSduiSortSessionImpressionDedup (ref), useSessionSeenImpressionFilterModule (ref), useDeferLooksWithoutHydrationFilterModule (ref), useComposedImpressionFilterModule (ref), fFlagAXDeferLookImpressionsForHydration (ref), useStore (ref), useHydrateCatalogSortOnDemandEffectModule (ref), useLocalization (ref), fFlagAXCatalogItemInformationPopover (ref), useOpenInformationPopoverModule (ref), getFooterVisibilityFromItemFootersModule (ref), unifiedEventLogEnums (ref), useAddUnifiedLoggingToCatalogSortEffectModule (ref), itemTypeEnum (ref), selectHydratedLookTypeModule (ref), cryoModule (ref), widgetConstantsModule (ref), useOnCatalogSortImpressionsDetectedCallbackModule (ref)
-	local widgetTileWithImpressionsTagging = useCatalogPageMonolithDependenciesModule().WidgetTileWithImpressionsTagging
-	local var1 = useTokens()
-	local widgetInfo = p1.widgetInfo
-	local widgetConfiguration = p1.widgetConfiguration
-	local itemsPerRow = p1.itemsPerRow
-	local rowCount = p1.rowCount or 1
-	local var2 = reactModule.useRef(nil)
-	local var3 = useOnRequestImpressionsSignalModule()
-	local var4 = nil
-	local var5 = nil
+return function(p1) --[[ Line: 122 | Named "useCatalogItemGroupSortViewModel" ]]
+	-- upvalues: UseCatalogPageMonolithDependenciesModule (copy), UseTokensFunction (copy), ReactModule (copy), UseOnRequestImpressionsSignalModule (copy), FFlagAXSduiSeeAllClickLogging (copy), UseCatalogSortSeeAllLoggingModule (copy), UseFirstSeenImpressionFilterModule (copy), FFlagAXSduiSortSessionImpressionDedup (copy), UseSessionSeenImpressionFilterModule (copy), UseDeferLooksWithoutHydrationFilterModule (copy), UseComposedImpressionFilterModule (copy), FFlagAXDeferLookImpressionsForHydration (copy), UseStoreFunction (copy), UseHydrateCatalogSortOnDemandEffectModule (copy), UseLocalizationFunction (copy), FFlagAXCatalogItemInformationPopover (copy), UseOpenInformationPopoverModule (copy), GetFooterVisibilityFromItemFootersModule (copy), UnifiedEventLogEnums (copy), UseAddUnifiedLoggingToCatalogSortEffectModule (copy), ItemTypeEnum (copy), SelectHydratedLookTypeModule (copy), CryoModule (copy), WidgetConstantsModule (copy), FFlagAXSduiSponsoredItemClickTracking (copy), UseOnCatalogSortImpressionsDetectedCallbackModule (copy)
+	local WidgetTileWithImpressionsTagging = UseCatalogPageMonolithDependenciesModule().WidgetTileWithImpressionsTagging
+	local UseTokensResult = UseTokensFunction()
+	local WidgetInfo = p1.widgetInfo
+	local WidgetConfiguration = p1.widgetConfiguration
+	local ItemsPerRow: number = p1.itemsPerRow
+	local RowCount = p1.rowCount or 1
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseOnRequestImpressionsSignalModuleResult = UseOnRequestImpressionsSignalModule()
+	local v1 = nil
+	local v2 = nil
 	
-	if fFlagAXSduiSeeAllClickLogging then
-		local var6, var7 = useCatalogSortSeeAllLoggingModule(p1.onSeeAll, p1.widgetAnalyticsInfo)
-		var4 = var6
-		var5 = var7
+	if FFlagAXSduiSeeAllClickLogging then
+		v1, v40 = UseCatalogSortSeeAllLoggingModule(p1.onSeeAll, p1.widgetAnalyticsInfo)
 	end
-	local var8 = if widgetInfo then widgetInfo.id else ""
-	local text = "WIDGET_ITEM_GROUP" .. "_" .. var8
-	local var9 = if fFlagAXSduiSortSessionImpressionDedup then useSessionSeenImpressionFilterModule(var8) else useFirstSeenImpressionFilterModule(var8)
-	local var10 = if fFlagAXDeferLookImpressionsForHydration then useComposedImpressionFilterModule({
-		useDeferLooksWithoutHydrationFilterModule(widgetInfo),
-		var9
-	}) else var9
-	local var11 = reactModule.useMemo(function()
-		-- upvalues: reactModule (copy)
-		return setmetatable({}, {
-			__index = function(p2, p3)
-				-- upvalues: reactModule (copy)
-				local var12 = reactModule.createRef()
-				rawset(p2, p3, var12)
-				
-				return var12
-			end
-		})
-	end, {})
-	local var12 = useStore()
-	local medium = var1.Gap.Medium
-	local var13 = if itemsPerRow > 0 then itemsPerRow else 1
-	local floored = math.floor(math.max(0, (p1.rowWidth or 0) - (var13 - 1) * medium) / var13)
-	useHydrateCatalogSortOnDemandEffectModule(widgetInfo, widgetConfiguration, itemsPerRow)
-	local var14 = useLocalization({
-		widgetTitle = if widgetInfo and widgetInfo.template then widgetInfo.template.title else nil,
-		widgetDescription = if widgetInfo and widgetInfo.template then widgetInfo.template.description else nil
+	local Id = WidgetInfo and WidgetInfo.id or ""
+	local Text = "WIDGET_ITEM_GROUP" .. "_" .. Id
+	local UseSessionSeenImpressionFilterModuleResult = if FFlagAXSduiSortSessionImpressionDedup then UseSessionSeenImpressionFilterModule(Id) else UseFirstSeenImpressionFilterModule(Id)
+	local UseComposedImpressionFilterModuleResult = UseComposedImpressionFilterModule({
+		UseDeferLooksWithoutHydrationFilterModule(WidgetInfo),
+		UseSessionSeenImpressionFilterModuleResult
 	})
-	local var15 = nil
-	local var16 = nil
-	local informationPopoverText = nil
+	local UseComposedImpressionFilterModuleResult1 = if FFlagAXDeferLookImpressionsForHydration then UseComposedImpressionFilterModuleResult else UseSessionSeenImpressionFilterModuleResult
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 177 ]]
+		-- upvalues: ReactModule (upval)
+		return (setmetatable({}, {
+			__index = function(p2, p3) --[[ Line: 179 ]]
+				-- upvalues: ReactModule (upval)
+				local Ref = ReactModule.createRef()
+				rawset(p2, p3, Ref)
+				
+				return Ref
+			end
+		}))
+	end, {})
+	local UseStoreResult = UseStoreFunction()
+	local Medium = UseTokensResult.Gap.Medium
+	local ItemsPerRow1 = if ItemsPerRow > 0 then ItemsPerRow else 1
+	local Floored = math.floor(math.max(0, (p1.rowWidth or 0) - (ItemsPerRow1 - 1) * Medium) / ItemsPerRow1)
+	UseHydrateCatalogSortOnDemandEffectModule(WidgetInfo, WidgetConfiguration, ItemsPerRow)
+	local UseLocalizationResult = UseLocalizationFunction({
+		widgetTitle = if WidgetInfo and WidgetInfo.template then WidgetInfo.template.title else nil,
+		widgetDescription = if WidgetInfo and WidgetInfo.template then WidgetInfo.template.description else nil
+	})
+	local WidgetTitle = nil
+	local WidgetDescription = nil
+	local InformationPopoverText = nil
 	
-	if widgetInfo and widgetInfo.template then
-		var15 = if widgetInfo.template.title then var14.widgetTitle else widgetInfo.template.localizedTitle
-		var16 = if widgetInfo.template.description then var14.widgetDescription else widgetInfo.template.localizedDescription
+	if WidgetInfo and WidgetInfo.template then
+		WidgetTitle = if WidgetInfo.template.title then UseLocalizationResult.widgetTitle else WidgetInfo.template.localizedTitle
+		WidgetDescription = if WidgetInfo.template.description then UseLocalizationResult.widgetDescription else WidgetInfo.template.localizedDescription
 		
-		if fFlagAXCatalogItemInformationPopover then
-			informationPopoverText = widgetInfo.template.informationPopoverText
+		if FFlagAXCatalogItemInformationPopover then
+			InformationPopoverText = WidgetInfo.template.informationPopoverText
 		end
 	end
-	local var17 = if fFlagAXCatalogItemInformationPopover then useOpenInformationPopoverModule(var15, informationPopoverText) else nil
-	local var18 = getFooterVisibilityFromItemFootersModule(if widgetInfo and widgetInfo.template then widgetInfo.template.itemFooters else nil)
-	local ITEM_GROUP = unifiedEventLogEnums.WidgetUiTreatment.ITEM_GROUP
-	useAddUnifiedLoggingToCatalogSortEffectModule({
-		containerRef = var2,
-		widgetInfo = widgetInfo,
+	local UseOpenInformationPopoverModuleResult = if FFlagAXCatalogItemInformationPopover then UseOpenInformationPopoverModule(WidgetTitle, InformationPopoverText) else nil
+	local FooterVisibilityFromItemFootersModule = GetFooterVisibilityFromItemFootersModule(if WidgetInfo and WidgetInfo.template then WidgetInfo.template.itemFooters else nil)
+	local ITEMGROUP = UnifiedEventLogEnums.WidgetUiTreatment.ITEM_GROUP
+	UseAddUnifiedLoggingToCatalogSortEffectModule({
+		containerRef = UseRefResult,
+		widgetInfo = WidgetInfo,
 		widgetAnalyticsInfo = p1.widgetAnalyticsInfo,
 		widgetRow = p1.widgetRow,
-		uiTreatmentType = ITEM_GROUP,
-		seeAllRef = if fFlagAXSduiSeeAllClickLogging then var4 else nil,
-		seeAllCallback = if fFlagAXSduiSeeAllClickLogging then p1.onSeeAll else nil
+		uiTreatmentType = ITEMGROUP,
+		seeAllRef = if FFlagAXSduiSeeAllClickLogging then v1 else nil,
+		seeAllCallback = if FFlagAXSduiSeeAllClickLogging then p1.onSeeAll else nil
 	})
 	
-	local function buildPerTileAnalyticsInfo(p2, p3)
-		-- upvalues: fFlagAXDeferLookImpressionsForHydration (copy), itemTypeEnum (copy), selectHydratedLookTypeModule (copy), var12 (ref), cryoModule (copy), p1 (ref), widgetInfo (ref), ITEM_GROUP (ref)
-		return cryoModule.Dictionary.join(p1.widgetAnalyticsInfo, {
-			itemPosition = p3,
+	local function buildPerTileAnalyticsInfo(p2, GridPositionColumn) --[[ Line: 233 ]]
+		-- upvalues: FFlagAXDeferLookImpressionsForHydration (upval), ItemTypeEnum (upval), SelectHydratedLookTypeModule (upval), UseStoreResult (copy), CryoModule (upval), p1 (copy), WidgetInfo (copy), ITEMGROUP (copy)
+		return CryoModule.Dictionary.join(p1.widgetAnalyticsInfo, {
+			itemPosition = GridPositionColumn,
 			itemId = p2.id,
 			itemType = p2.type,
-			lookType = if not (fFlagAXDeferLookImpressionsForHydration or p2.type ~= itemTypeEnum.Look) then selectHydratedLookTypeModule(var12:getState(), p2.id) else nil,
-			themeId = widgetInfo and widgetInfo.tagId,
+			lookType = if FFlagAXDeferLookImpressionsForHydration or p2.type ~= ItemTypeEnum.Look then nil else SelectHydratedLookTypeModule(UseStoreResult:getState(), p2.id),
+			themeId = WidgetInfo and WidgetInfo.tagId,
 			gridPositionRow = p1.widgetRow,
-			gridPositionColumn = p3,
-			uiTreatmentType = ITEM_GROUP
+			gridPositionColumn = GridPositionColumn,
+			uiTreatmentType = ITEMGROUP
 		})
 	end
 	
-	local var19 = if widgetInfo then widgetInfo.content else nil
+	local AdTrackingDataByItemId = p1.adTrackingDataByItemId
+	local Content = if WidgetInfo then WidgetInfo.content else nil
 	
 	return {
-		headerText = var15,
-		headerDescription = var16,
-		informationPopoverText = informationPopoverText,
-		onInformationIconActivated = var17,
-		seeAllCallback = if fFlagAXSduiSeeAllClickLogging then var5 else p1.onSeeAll,
-		seeAllRef = if fFlagAXSduiSeeAllClickLogging then var4 else nil,
-		itemsPerRow = itemsPerRow,
-		itemGap = medium,
-		gridItems = reactModule.useMemo(function()
-			-- upvalues: cryoModule (copy), var19 (ref), rowCount (ref), itemsPerRow (ref)
-			return cryoModule.List.getRange(var19 or {}, 1, rowCount * itemsPerRow)
-		end, { var19, rowCount, itemsPerRow }),
-		renderTile = function(p2, p3)
-			-- upvalues: buildPerTileAnalyticsInfo (ref), reactModule (copy), widgetTileWithImpressionsTagging (ref), floored (ref), widgetInfo (ref), widgetConstantsModule (copy), var11 (ref), p1 (ref), itemsPerRow (ref), var18 (ref), text (ref)
-			return reactModule.createElement(widgetTileWithImpressionsTagging, {
-				size = UDim2.new(0, floored, 0, 0),
-				cardStyle = if widgetInfo and widgetInfo.template then widgetInfo.template.cardStyle else nil,
-				contentType = p2.type or widgetConstantsModule.ContentType.Asset,
-				tileContentType = widgetInfo and widgetInfo.type,
+		headerText = WidgetTitle,
+		headerDescription = WidgetDescription,
+		informationPopoverText = InformationPopoverText,
+		onInformationIconActivated = UseOpenInformationPopoverModuleResult,
+		seeAllCallback = if FFlagAXSduiSeeAllClickLogging then v2 else p1.onSeeAll,
+		seeAllRef = if FFlagAXSduiSeeAllClickLogging then v1 else nil,
+		itemsPerRow = ItemsPerRow,
+		itemGap = Medium,
+		gridItems = ReactModule.useMemo(function() --[[ Line: 296 ]]
+			-- upvalues: CryoModule (upval), Content (copy), RowCount (copy), ItemsPerRow (copy)
+			return CryoModule.List.getRange(Content or {}, 1, RowCount * ItemsPerRow)
+		end, { Content, RowCount, ItemsPerRow }),
+		renderTile = function(p2, Index) --[[ Line: 266 ]]
+			-- upvalues: buildPerTileAnalyticsInfo (copy), ReactModule (upval), WidgetTileWithImpressionsTagging (copy), Floored (copy), WidgetInfo (copy), WidgetConstantsModule (upval), UseMemoResult (copy), p1 (copy), ItemsPerRow (copy), FooterVisibilityFromItemFootersModule (copy), Text (copy), FFlagAXSduiSponsoredItemClickTracking (upval), AdTrackingDataByItemId (copy)
+			return ReactModule.createElement(WidgetTileWithImpressionsTagging, {
+				size = UDim2.new(0, Floored, 0, 0),
+				cardStyle = if WidgetInfo and WidgetInfo.template then WidgetInfo.template.cardStyle else nil,
+				contentType = p2.type or WidgetConstantsModule.ContentType.Asset,
+				tileContentType = WidgetInfo and WidgetInfo.type,
 				contentId = p2.id or "",
-				index = p3,
-				refCache = var11,
+				index = Index,
+				refCache = UseMemoResult,
 				resultsListRef = p1.gridRef,
 				itemDetailsPeekViewRefs = p1.itemDetailsPeekViewRefs,
-				itemsPerRow = itemsPerRow,
-				analyticsItemCountPerPage = itemsPerRow,
-				isCreatorNameVisible = var18.isCreatorNameVisible,
-				isTitleVisible = var18.isTitleVisible,
-				isPriceVisible = var18.isPriceVisible,
-				impressionsTag = text,
-				widgetAnalyticsInfo = buildPerTileAnalyticsInfo(p2, p3),
-				onThumbnailLoaded = p1.onThumbnailLoaded
+				itemsPerRow = ItemsPerRow,
+				analyticsItemCountPerPage = ItemsPerRow,
+				isCreatorNameVisible = FooterVisibilityFromItemFootersModule.isCreatorNameVisible,
+				isTitleVisible = FooterVisibilityFromItemFootersModule.isTitleVisible,
+				isPriceVisible = FooterVisibilityFromItemFootersModule.isPriceVisible,
+				impressionsTag = Text,
+				widgetAnalyticsInfo = buildPerTileAnalyticsInfo(p2, Index),
+				onThumbnailLoaded = p1.onThumbnailLoaded,
+				adTrackingData = if FFlagAXSduiSponsoredItemClickTracking and AdTrackingDataByItemId and p2.id then AdTrackingDataByItemId[p2.id] else nil
 			})
 		end,
-		containerRef = var2,
-		impressionsKey = text,
+		containerRef = UseRefResult,
+		impressionsKey = Text,
 		widgetRow = p1.widgetRow,
-		onItemsUpdatedSignal = var3,
-		onImpressionsDetected = useOnCatalogSortImpressionsDetectedCallbackModule({
-			widgetInfo = widgetInfo,
+		onItemsUpdatedSignal = UseOnRequestImpressionsSignalModuleResult,
+		onImpressionsDetected = UseOnCatalogSortImpressionsDetectedCallbackModule({
+			widgetInfo = WidgetInfo,
 			widgetAnalyticsInfo = p1.widgetAnalyticsInfo,
 			widgetRow = p1.widgetRow,
-			itemsPerRow = itemsPerRow,
-			uiTreatmentType = ITEM_GROUP
+			itemsPerRow = ItemsPerRow,
+			uiTreatmentType = ITEMGROUP
 		}),
-		filterImpressionFunc = var10,
+		filterImpressionFunc = UseComposedImpressionFilterModuleResult1,
 		horizontalMargin = p1.horizontalMargin,
-		widgetId = var8
+		widgetId = Id
 	}
 end

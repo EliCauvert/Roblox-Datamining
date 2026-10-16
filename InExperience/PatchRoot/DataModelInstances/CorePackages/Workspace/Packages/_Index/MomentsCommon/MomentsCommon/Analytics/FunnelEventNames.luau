@@ -1,4 +1,4 @@
-﻿local t = {
+﻿local FunnelTypes = {
 	AppNavigation = "App Navigation",
 	CreationFlow = "Creation Flow",
 	MusicEnhancement = "Music Enhancement",
@@ -8,112 +8,111 @@
 	VoiceEnhancement = "Voice Enhancement",
 	DraftRecovery = "Draft Recovery"
 }
-local t_1 = {
+local AppNavigationSteps = {
 	AppLaunched = "AppLaunched",
 	TrendingScreenView = "TrendingScreenView",
 	MyMomentsScreenView = "MyMomentsScreenView",
 	UserProfileScreenView = "UserProfileScreenView"
 }
-local t_2 = { TopBar = "TopBar" }
-local t_3 = {
+local CreationFlowSteps = {
 	CreateIntent = "CreateIntent",
 	GalleryItemSelected = "GalleryItemSelected",
 	GalleryItemSelectedContinuePressed = "GalleryItemSelectedContinuePressed",
 	EditingScreenContinuePressed = "EditingScreenContinuePressed",
 	Published = "Published"
 }
-local t_4 = {
+local MusicEnhancementSteps = {
 	MusicButtonPressed = "MusicButtonPressed",
 	MusicSelected = "MusicSelected",
 	MusicApplied = "MusicApplied"
 }
-local t_5 = {
+local TextOverlayEnhancementSteps = {
 	TextOverlayButtonPressed = "TextOverlayButtonPressed",
 	TextOverlayCompleted = "TextOverlayCompleted"
 }
-local t_6 = {
+local StickerOverlayEnhancementSteps = {
 	StickerOverlayButtonPressed = "StickerOverlayButtonPressed",
 	StickerOverlaySelected = "StickerOverlaySelected",
 	StickerOverlayCompleted = "StickerOverlayCompleted"
 }
-local t_7 = {
+local TrimEnhancementSteps = {
 	TrimButtonPressed = "TrimButtonPressed",
 	TrimCompleted = "TrimCompleted"
 }
-local t_8 = {
+local VoiceEnhancementSteps = {
 	VoiceButtonPressed = "VoiceButtonPressed",
 	VoiceTextEntered = "VoiceTextEntered",
 	VoiceGeneratePressed = "VoiceGeneratePressed",
 	VoiceGenerateSucceeded = "VoiceGenerateSucceeded",
 	VoiceApplied = "VoiceApplied"
 }
-local t_9 = {
+local DraftRecoverySteps = {
 	DraftRestored = "DraftRestored",
 	DraftPublished = "DraftPublished"
 }
 
 return {
-	FunnelTypes = t,
+	FunnelTypes = FunnelTypes,
 	FunnelSteps = {
-		[t.AppNavigation] = {
-			[t_1.AppLaunched] = { stepNumber = 1, stepName = "App Launched" },
-			[t_1.TrendingScreenView] = { stepNumber = 2, stepName = "Trending Screen View" },
-			[t_1.MyMomentsScreenView] = { stepNumber = 3, stepName = "My Moments Screen View" },
-			[t_1.UserProfileScreenView] = { stepNumber = 4, stepName = "User Profile Screen View" }
+		[FunnelTypes.AppNavigation] = {
+			[AppNavigationSteps.AppLaunched] = { stepNumber = 1, stepName = "App Launched" },
+			[AppNavigationSteps.TrendingScreenView] = { stepNumber = 2, stepName = "Trending Screen View" },
+			[AppNavigationSteps.MyMomentsScreenView] = { stepNumber = 3, stepName = "My Moments Screen View" },
+			[AppNavigationSteps.UserProfileScreenView] = { stepNumber = 4, stepName = "User Profile Screen View" }
 		},
-		[t.CreationFlow] = {
-			[t_3.CreateIntent] = { stepNumber = 1, stepName = "Create Intent" },
-			[t_3.GalleryItemSelected] = { stepNumber = 2, stepName = "Gallery Item Selected" },
-			[t_3.GalleryItemSelectedContinuePressed] = {
+		[FunnelTypes.CreationFlow] = {
+			[CreationFlowSteps.CreateIntent] = { stepNumber = 1, stepName = "Create Intent" },
+			[CreationFlowSteps.GalleryItemSelected] = { stepNumber = 2, stepName = "Gallery Item Selected" },
+			[CreationFlowSteps.GalleryItemSelectedContinuePressed] = {
 				stepNumber = 3,
 				stepName = "Gallery Item Selected Continue Pressed"
 			},
-			[t_3.EditingScreenContinuePressed] = {
+			[CreationFlowSteps.EditingScreenContinuePressed] = {
 				stepNumber = 4,
 				stepName = "Editing Screen Continue Pressed"
 			},
-			[t_3.Published] = { stepNumber = 5, stepName = "Published" }
+			[CreationFlowSteps.Published] = { stepNumber = 5, stepName = "Published" }
 		},
-		[t.MusicEnhancement] = {
-			[t_4.MusicButtonPressed] = { stepNumber = 1, stepName = "Music Button Pressed" },
-			[t_4.MusicSelected] = { stepNumber = 2, stepName = "Music Selected" },
-			[t_4.MusicApplied] = { stepNumber = 3, stepName = "Music Applied" }
+		[FunnelTypes.MusicEnhancement] = {
+			[MusicEnhancementSteps.MusicButtonPressed] = { stepNumber = 1, stepName = "Music Button Pressed" },
+			[MusicEnhancementSteps.MusicSelected] = { stepNumber = 2, stepName = "Music Selected" },
+			[MusicEnhancementSteps.MusicApplied] = { stepNumber = 3, stepName = "Music Applied" }
 		},
-		[t.TrimEnhancement] = {
-			[t_7.TrimButtonPressed] = { stepNumber = 1, stepName = "Trim Button Pressed" },
-			[t_7.TrimCompleted] = { stepNumber = 2, stepName = "Trim Completed" }
+		[FunnelTypes.TrimEnhancement] = {
+			[TrimEnhancementSteps.TrimButtonPressed] = { stepNumber = 1, stepName = "Trim Button Pressed" },
+			[TrimEnhancementSteps.TrimCompleted] = { stepNumber = 2, stepName = "Trim Completed" }
 		},
-		[t.TextOverlayEnhancement] = {
-			[t_5.TextOverlayButtonPressed] = { stepNumber = 1, stepName = "Text Overlay Button Pressed" },
-			[t_5.TextOverlayCompleted] = { stepNumber = 2, stepName = "Text Overlay Completed" }
+		[FunnelTypes.TextOverlayEnhancement] = {
+			[TextOverlayEnhancementSteps.TextOverlayButtonPressed] = { stepNumber = 1, stepName = "Text Overlay Button Pressed" },
+			[TextOverlayEnhancementSteps.TextOverlayCompleted] = { stepNumber = 2, stepName = "Text Overlay Completed" }
 		},
-		[t.StickerOverlayEnhancement] = {
-			[t_6.StickerOverlayButtonPressed] = {
+		[FunnelTypes.StickerOverlayEnhancement] = {
+			[StickerOverlayEnhancementSteps.StickerOverlayButtonPressed] = {
 				stepNumber = 1,
 				stepName = "Sticker Overlay Button Pressed"
 			},
-			[t_6.StickerOverlaySelected] = { stepNumber = 2, stepName = "Sticker Overlay Selected" },
-			[t_6.StickerOverlayCompleted] = { stepNumber = 3, stepName = "Sticker Overlay Completed" }
+			[StickerOverlayEnhancementSteps.StickerOverlaySelected] = { stepNumber = 2, stepName = "Sticker Overlay Selected" },
+			[StickerOverlayEnhancementSteps.StickerOverlayCompleted] = { stepNumber = 3, stepName = "Sticker Overlay Completed" }
 		},
-		[t.VoiceEnhancement] = {
-			[t_8.VoiceButtonPressed] = { stepNumber = 1, stepName = "Voice Button Pressed" },
-			[t_8.VoiceTextEntered] = { stepNumber = 2, stepName = "Voice Text Entered" },
-			[t_8.VoiceGeneratePressed] = { stepNumber = 3, stepName = "Voice Generate Pressed" },
-			[t_8.VoiceGenerateSucceeded] = { stepNumber = 4, stepName = "Voice Generate Succeeded" },
-			[t_8.VoiceApplied] = { stepNumber = 5, stepName = "Voice Applied" }
+		[FunnelTypes.VoiceEnhancement] = {
+			[VoiceEnhancementSteps.VoiceButtonPressed] = { stepNumber = 1, stepName = "Voice Button Pressed" },
+			[VoiceEnhancementSteps.VoiceTextEntered] = { stepNumber = 2, stepName = "Voice Text Entered" },
+			[VoiceEnhancementSteps.VoiceGeneratePressed] = { stepNumber = 3, stepName = "Voice Generate Pressed" },
+			[VoiceEnhancementSteps.VoiceGenerateSucceeded] = { stepNumber = 4, stepName = "Voice Generate Succeeded" },
+			[VoiceEnhancementSteps.VoiceApplied] = { stepNumber = 5, stepName = "Voice Applied" }
 		},
-		[t.DraftRecovery] = {
-			[t_9.DraftRestored] = { stepNumber = 1, stepName = "Draft Restored" },
-			[t_9.DraftPublished] = { stepNumber = 2, stepName = "Draft Published" }
+		[FunnelTypes.DraftRecovery] = {
+			[DraftRecoverySteps.DraftRestored] = { stepNumber = 1, stepName = "Draft Restored" },
+			[DraftRecoverySteps.DraftPublished] = { stepNumber = 2, stepName = "Draft Published" }
 		}
 	},
-	CreationIntentSource = t_2,
-	AppNavigationSteps = t_1,
-	CreationFlowSteps = t_3,
-	MusicEnhancementSteps = t_4,
-	TrimEnhancementSteps = t_7,
-	TextOverlayEnhancementSteps = t_5,
-	StickerOverlayEnhancementSteps = t_6,
-	VoiceEnhancementSteps = t_8,
-	DraftRecoverySteps = t_9
+	CreationIntentSource = { Captures = "Captures", TopBar = "TopBar" },
+	AppNavigationSteps = AppNavigationSteps,
+	CreationFlowSteps = CreationFlowSteps,
+	MusicEnhancementSteps = MusicEnhancementSteps,
+	TrimEnhancementSteps = TrimEnhancementSteps,
+	TextOverlayEnhancementSteps = TextOverlayEnhancementSteps,
+	StickerOverlayEnhancementSteps = StickerOverlayEnhancementSteps,
+	VoiceEnhancementSteps = VoiceEnhancementSteps,
+	DraftRecoverySteps = DraftRecoverySteps
 }

@@ -1,42 +1,40 @@
-﻿local trustedContacts = script:FindFirstAncestor("TrustedContacts")
-local httpService = game:GetService("HttpService")
-local httpModule = require(trustedContacts.Parent.Http)
-local myHttpRequestModule = require(trustedContacts.Networking.myHttpRequest)
-local _ = require(trustedContacts.TrustedFriendActions.TFActionsEnum)
-local fFlagTFPassQRCodeSourceModule = require(trustedContacts.Flags.FFlagTFPassQRCodeSource)
+﻿local TrustedContacts = script:FindFirstAncestor("TrustedContacts")
+local HttpService = game:GetService("HttpService")
+local HttpModule = require(TrustedContacts.Parent.Http)
+local MyHttpRequestModule = require(TrustedContacts.Networking.myHttpRequest)
+local _ = require(TrustedContacts.TrustedFriendActions.TFActionsEnum)
+local FFlagTFPassQRCodeSourceModule = require(TrustedContacts.Flags.FFlagTFPassQRCodeSource)
 
-return function(p1, p2)
-	-- upvalues: httpModule (ref), fFlagTFPassQRCodeSourceModule (ref), httpService (ref), myHttpRequestModule (ref)
-	local formattedText = string.format("%s/profile-platform-api/v1/profiles/get", httpModule.Url.APIS_URL)
-	local var1 = nil
-	local var2 = nil
+return function(ProfileId, p1) --[[ Line: 17 ]]
+	-- upvalues: HttpModule (copy), FFlagTFPassQRCodeSourceModule (copy), HttpService (copy), MyHttpRequestModule (copy)
+	local Formatted = string.format("%s/profile-platform-api/v1/profiles/get", HttpModule.Url.APIS_URL)
+	local Json = nil
+	local Joined = nil
 	
-	if fFlagTFPassQRCodeSourceModule then
-		local t = {
-			friendRequestToken = if p2 then p2.friendRequestToken else nil,
-			isQrCodeFlow = if p2 and p2.sentFromQrCode then true else nil
+	if FFlagTFPassQRCodeSourceModule then
+		local config = {
+			friendRequestToken = p1 and p1.friendRequestToken or nil,
+			isQrCodeFlow = if p1 and p1.sentFromQrCode then true else nil
 		}
 		
-		if next(t) then
-			var1 = httpService:JSONEncode(t)
+		if next(config) then
+			Json = HttpService:JSONEncode(config)
 		end
-	var2 = if p2 and p2.friendRequestToken and type(p2.friendRequestToken) == "table" then table.concat(p2.friendRequestToken, ",") else nil
-	return myHttpRequestModule(formattedText, "POST", {
+	else
+		Joined = if p1 and p1.friendRequestToken and type(p1.friendRequestToken) == "table" then table.concat(p1.friendRequestToken, ",") else nil
+	end
+	return MyHttpRequestModule(Formatted, "POST", {
 		postBody = {
 			profileType = "User",
-			profileId = p1,
+			profileId = ProfileId,
 			components = {
 				{
 					component = "TrustedFriendActions",
-					context = if fFlagTFPassQRCodeSourceModule then var1 else var2
+					context = if FFlagTFPassQRCodeSourceModule then Json else Joined
 				}
 			}
 		}
-	}):andThen(function(p3)
-		local action
-		if p3 then
-			action = p3.responseBody and (p3.responseBody.components and (p3.responseBody.components.TrustedFriendActions and (p3.responseBody.components.TrustedFriendActions.action or nil)))
-		end
-		return action
+	}):andThen(function(Result) --[[ Line: 50 ]]
+		return Result and Result.responseBody and Result.responseBody.components and Result.responseBody.components.TrustedFriendActions and Result.responseBody.components.TrustedFriendActions.action or nil
 	end)
 end

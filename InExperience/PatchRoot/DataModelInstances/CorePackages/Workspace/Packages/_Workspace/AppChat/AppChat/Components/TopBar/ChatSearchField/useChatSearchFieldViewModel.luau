@@ -1,137 +1,140 @@
-﻿local userInputService = game:GetService("UserInputService")
-local parent = script:FindFirstAncestor("AppChat").Parent
-local reactModule = require(parent.React)
-local _ = require(parent.Foundation)
-local fFlagLuaAppAllowNilHookDepsCleanup = require(parent.SharedFlags).FFlagLuaAppAllowNilHookDepsCleanup
-local inputHandlersModule = require(parent.InputHandlers)
-local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
-local focusNavigationEventNameEnum = require(parent.FocusNavigationUtils).FocusNavigationEventNameEnum
-local useLocalization = require(parent.Localization).Hooks.useLocalization
+﻿local UserInputService = game:GetService("UserInputService")
+local Parent = script:FindFirstAncestor("AppChat").Parent
+local ReactModule = require(Parent.React)
+local _ = require(Parent.Foundation)
+local FFlagLuaAppAllowNilHookDepsCleanup = require(Parent.SharedFlags).FFlagLuaAppAllowNilHookDepsCleanup
+local InputHandlersModule = require(Parent.InputHandlers)
+local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
+local FocusNavigationEventNameEnum = require(Parent.FocusNavigationUtils).FocusNavigationEventNameEnum
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local _ = require(script.Parent.ChatSearchFieldView)
 
-return function(p1)
-	-- upvalues: reactModule (ref), useLocalization (ref), inputHandlersModule (ref), reactFocusNavigationModule (ref), focusNavigationEventNameEnum (ref), userInputService (ref), fFlagLuaAppAllowNilHookDepsCleanup (ref)
-	local var1 = reactModule.useRef(nil)
-	local onExit = p1.onExit
-	local onChanged = p1.onChanged
-	local var2 = useLocalization({ placeholder = "Feature.Chat.Label.SearchWord" })
-	local var3 = reactModule.useRef(Enum.KeyCode.None)
-	local var4 = reactModule.useRef(false)
-	local var5 = reactModule.useCallback(function(p2)
-		-- upvalues: var3 (ref), var4 (ref)
-		var3.current = if p2 then p2.KeyCode else Enum.KeyCode.None
-		var4.current = false
+return function(Frame) --[[ Line: 34 | Named "useChatSearchFieldViewModel" ]]
+	-- upvalues: ReactModule (copy), UseLocalizationFunction (copy), InputHandlersModule (copy), ReactFocusNavigationModule (copy), FocusNavigationEventNameEnum (copy), UserInputService (copy), FFlagLuaAppAllowNilHookDepsCleanup (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	local OnExitFunction = Frame.onExit
+	local OnChangedFunction = Frame.onChanged
+	local UseLocalizationResult = UseLocalizationFunction({ placeholder = "Feature.Chat.Label.SearchWord" })
+	local UseRefResult1 = ReactModule.useRef(Enum.KeyCode.None)
+	local UseRefResult2 = ReactModule.useRef(false)
+	local UseResult = ReactModule.useCallback(function(Input) --[[ Line: 51 ]]
+		-- upvalues: UseRefResult1 (copy), UseRefResult2 (copy)
+		UseRefResult1.current = if Input then Input.KeyCode else Enum.KeyCode.None
+		UseRefResult2.current = false
 	end, {})
-	local var6 = reactModule.useRef(nil)
-	local var7 = reactFocusNavigationModule.useEventHandler(focusNavigationEventNameEnum.NavigateBack, reactModule.useCallback(inputHandlersModule.onRelease(function(p2)
-		-- upvalues: var3 (ref), onExit (ref)
-		local current = var3.current
-		local var8 = current ~= Enum.KeyCode.None and (p2.eventData ~= nil and p2.eventData.KeyCode == current)
+	local UseRefResult3 = ReactModule.useRef(nil)
+	local UseEventResult = ReactFocusNavigationModule.useEventHandler(FocusNavigationEventNameEnum.NavigateBack, ReactModule.useCallback(InputHandlersModule.onRelease(function(p1) --[[ Line: 63 ]]
+		-- upvalues: UseRefResult1 (copy), OnExitFunction (copy)
+		local Current = UseRefResult1.current
+		local IsKeyCodeMatch: boolean = Current ~= Enum.KeyCode.None and (p1.eventData ~= nil and p1.eventData.KeyCode == Current)
 		
-		if not var8 and onExit == nil then return end
-		p2:cancel()
+		if not IsKeyCodeMatch and OnExitFunction == nil then return end
+		p1:cancel()
 		
-		if var8 then
-			var3.current = Enum.KeyCode.None
+		if IsKeyCodeMatch then
+			UseRefResult1.current = Enum.KeyCode.None
 			
 			return
+		else
+			OnExitFunction()
 		end
-		onExit()
-	end), { onExit or false }), nil, var6)
-	local var8 = reactModule.useCallback(function()
-		-- upvalues: userInputService (copy), var6 (ref)
-		local focusedTextBox = userInputService:GetFocusedTextBox()
-		local current = var6.current
+	end), { OnExitFunction or false }), nil, UseRefResult3)
+	local UseResult1 = ReactModule.useCallback(function(): boolean --[[ Line: 103 ]]
+		-- upvalues: UserInputService (upval), UseRefResult3 (copy)
+		local FocusedTextBox = UserInputService:GetFocusedTextBox()
+		local Current = UseRefResult3.current
 		
-		if focusedTextBox and current and not focusedTextBox:IsDescendantOf(current) then
-			focusedTextBox:ReleaseFocus()
+		if FocusedTextBox and Current and not FocusedTextBox:IsDescendantOf(Current) then
+			FocusedTextBox:ReleaseFocus()
 			
 			return true
+		else
+			return false
 		end
-		return false
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: userInputService (copy), var6 (ref), var8 (ref), var1 (ref)
-		local inputBeganConnection = userInputService.InputBegan:Connect(function(p2)
-			-- upvalues: var6 (copy), userInputService (copy), var8 (copy), var1 (copy)
-			local current = var6.current
-			local focusedTextBox = userInputService:GetFocusedTextBox()
+	ReactModule.useEffect(function() --[[ Line: 114 ]]
+		-- upvalues: UserInputService (upval), UseRefResult3 (copy), UseResult1 (copy), UseRefResult (copy)
+		local InputBeganConnection = UserInputService.InputBegan:Connect(function(Input) --[[ Line: 115 ]]
+			-- upvalues: UseRefResult3 (upval), UserInputService (upval), UseResult1 (upval), UseRefResult (upval)
+			local Current = UseRefResult3.current
+			local FocusedTextBox = UserInputService:GetFocusedTextBox()
 			
-			if not (if p2.UserInputType ~= Enum.UserInputType.MouseButton1 then p2.UserInputType == Enum.UserInputType.Touch else true) or not current or (not focusedTextBox or focusedTextBox:IsDescendantOf(current)) then return end
-			local basePlayerGui = current:FindFirstAncestorWhichIsA("BasePlayerGui")
+			if Input.UserInputType ~= Enum.UserInputType.MouseButton1 and Input.UserInputType ~= Enum.UserInputType.Touch or not Current or not FocusedTextBox or FocusedTextBox:IsDescendantOf(Current) then return end
+			local BasePlayerGui = Current:FindFirstAncestorWhichIsA("BasePlayerGui")
 			
-			if not basePlayerGui then return end
-			for i, v in basePlayerGui:GetGuiObjectsAtPosition(p2.Position.X, p2.Position.Y) do
-				if v.Active then
-					if v:IsDescendantOf(current) and var8() and var1.current then
-						var1.current.focus()
+			if not BasePlayerGui then return end
+			for _, value in BasePlayerGui:GetGuiObjectsAtPosition(Input.Position.X, Input.Position.Y) do
+				if value.Active then
+					if value:IsDescendantOf(Current) and UseResult1() and UseRefResult.current then
+						UseRefResult.current.focus()
 					end
-					return
+					break
 				end
 			end
 		end)
 		
-		return function()
-			-- upvalues: inputBeganConnection (ref)
-			inputBeganConnection:Disconnect()
+		return function() --[[ Line: 137 ]]
+			-- upvalues: InputBeganConnection (copy)
+			InputBeganConnection:Disconnect()
 		end
-	end, { var8 })
-	local var9 = reactFocusNavigationModule.useFocusGuiObject()
-	local var10 = reactModule.useContext(reactFocusNavigationModule.FocusNavigationContext)
-	local var11 = reactModule.useCallback(function()
-		-- upvalues: var6 (ref), var10 (ref), var9 (ref)
-		if var6.current and var10 and var10.focusedGuiObject:getValue() ~= nil then
-			var9(var6.current)
+	end, { UseResult1 })
+	local UseFocusGuiObjectResult = ReactFocusNavigationModule.useFocusGuiObject()
+	local UseContextResult = ReactModule.useContext(ReactFocusNavigationModule.FocusNavigationContext)
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 152 ]]
+		-- upvalues: UseRefResult3 (copy), UseContextResult (copy), UseFocusGuiObjectResult (copy)
+		if UseRefResult3.current and UseContextResult and UseContextResult.focusedGuiObject:getValue() ~= nil then
+			UseFocusGuiObjectResult(UseRefResult3.current)
 		end
 	end, {
-		var9,
-		if fFlagLuaAppAllowNilHookDepsCleanup then var10 else var10 or false
+		UseFocusGuiObjectResult,
+		if FFlagLuaAppAllowNilHookDepsCleanup then UseContextResult else UseContextResult or false
 	})
-	local var12 = reactModule.useCallback(function(p2)
-		-- upvalues: var4 (ref), var11 (ref), var1 (ref), onChanged (ref)
-		if p2 == "" then
-			var4.current = true
-			var11()
+	local UseResult3 = ReactModule.useCallback(function(p1) --[[ Line: 171 ]]
+		-- upvalues: UseRefResult2 (copy), UseResult2 (copy), UseRefResult (copy), OnChangedFunction (copy)
+		if p1 == "" then
+			UseRefResult2.current = true
+			UseResult2()
 			
-			if var1.current then
-				var1.current.focus()
+			if UseRefResult.current then
+				UseRefResult.current.focus()
 			end
 		end
-		onChanged(p2)
-	end, { onChanged, var11 })
-	local onFocusGained = p1.onFocusGained
-	local var13 = reactModule.useCallback(function()
-		-- upvalues: var4 (ref), onFocusGained (ref)
-		if var4.current then
-			var4.current = false
+		OnChangedFunction(p1)
+	end, { OnChangedFunction, UseResult2 })
+	local OnFocusGainedFunction = Frame.onFocusGained
+	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 186 ]]
+		-- upvalues: UseRefResult2 (copy), OnFocusGainedFunction (copy)
+		if UseRefResult2.current then
+			UseRefResult2.current = false
 			
 			return
-		elseif onFocusGained then
-			onFocusGained()
 		end
-	end, { onFocusGained })
-	local shouldAutoFocus = p1.shouldAutoFocus or false
-	reactModule.useEffect(function()
-		-- upvalues: shouldAutoFocus (ref), var11 (ref), var8 (ref), var1 (ref)
-		if shouldAutoFocus then
-			var11()
-			var8()
+		if OnFocusGainedFunction then
+			OnFocusGainedFunction()
+		end
+	end, { OnFocusGainedFunction })
+	local ShouldAutoFocus = Frame.shouldAutoFocus or false
+	ReactModule.useEffect(function() --[[ Line: 197 ]]
+		-- upvalues: ShouldAutoFocus (copy), UseResult2 (copy), UseResult1 (copy), UseRefResult (copy)
+		if ShouldAutoFocus then
+			UseResult2()
+			UseResult1()
 			
-			if var1.current then
-				var1.current.focus()
+			if UseRefResult.current then
+				UseRefResult.current.focus()
 			end
 		end
-	end, { shouldAutoFocus, var11, var8 })
+	end, { ShouldAutoFocus, UseResult2, UseResult1 })
 	
 	return {
-		text = p1.text,
-		placeholder = var2.placeholder,
-		onChanged = var12,
-		onFocusGained = if onFocusGained then var13 else nil,
-		onFocusLost = var5,
-		inputRef = var1,
-		containerRef = var7,
-		testId = p1.testId,
-		LayoutOrder = p1.LayoutOrder
+		text = Frame.text,
+		placeholder = UseLocalizationResult.placeholder,
+		onChanged = UseResult3,
+		onFocusGained = if OnFocusGainedFunction then UseResult4 else nil,
+		onFocusLost = UseResult,
+		inputRef = UseRefResult,
+		containerRef = UseEventResult,
+		testId = Frame.testId,
+		LayoutOrder = Frame.LayoutOrder
 	}
 end

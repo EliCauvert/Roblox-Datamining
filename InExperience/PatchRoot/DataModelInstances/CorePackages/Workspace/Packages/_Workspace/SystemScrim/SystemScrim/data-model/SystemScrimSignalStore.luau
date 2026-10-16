@@ -1,23 +1,23 @@
-﻿local signalsModule = require(script:FindFirstAncestor("SystemScrim").Parent.Signals)
+﻿local SignalsModule = require(script:FindFirstAncestor("SystemScrim").Parent.Signals)
 
-local function createDefaultStates()
-	-- upvalues: signalsModule (ref)
-	local var1, var2 = signalsModule.createSignal(false)
-	local var3, var4 = signalsModule.createSignal(1)
-	local var5, var6 = signalsModule.createSignal(true)
+local function createDefaultStates() --[[ Line: 17 ]]
+	-- upvalues: SignalsModule (copy)
+	local Signal, Signal2 = SignalsModule.createSignal(false)
+	local Signal1, Signal2_1 = SignalsModule.createSignal(1)
+	local Signal3, Signal2_2 = SignalsModule.createSignal(true)
 	
 	return {
-		visible = var1,
-		setVisibility = var2,
-		transparency = var3,
-		setTransparency = var4,
-		autoDismiss = var5,
-		setAutoDismiss = var6,
+		visible = Signal,
+		setVisibility = Signal2,
+		transparency = Signal1,
+		setTransparency = Signal2_1,
+		autoDismiss = Signal3,
+		setAutoDismiss = Signal2_2,
 		backgroundScrimActivated = Instance.new("BindableEvent")
 	}
 end
 
-return signalsModule.createComputed(function(_)
-	-- upvalues: createDefaultStates (ref)
-	return createDefaultStates()
+return SignalsModule.createComputed(function(_) --[[ Line: 35 ]]
+	-- upvalues: createDefaultStates (copy)
+	return (createDefaultStates())
 end)

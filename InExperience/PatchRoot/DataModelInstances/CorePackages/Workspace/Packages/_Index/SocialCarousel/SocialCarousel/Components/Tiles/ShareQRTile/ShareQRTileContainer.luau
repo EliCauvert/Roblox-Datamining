@@ -1,69 +1,69 @@
-﻿local socialCarousel = script:FindFirstAncestor("SocialCarousel")
-local parent = socialCarousel.Parent
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local roactUtilsModule = require(parent.RoactUtils)
-local navigationRoduxModule = require(parent.NavigationRodux)
-local navigationModule = require(parent.Navigation)
-local appPage = require(parent.RobloxAppEnums).AppPage
-local navigateDown = navigationRoduxModule.Thunks.NavigateDown
-local navigateBack = navigationRoduxModule.Thunks.NavigateBack
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local useNavigation = navigationModule.useNavigation
-local shareQRTileModule = require(script.Parent.ShareQRTile)
-local useSocialCarouselAnalyticsModule = require(socialCarousel.Analytics.useSocialCarouselAnalytics)
-local useSocialCarouselContextModule = require(socialCarousel.Contexts.useSocialCarouselContext)
-local constantsModule = require(socialCarousel.Common.Constants)
-local fFlagSocialCarouselShareQRBackToAddFriends = require(parent.SharedFlags).FFlagSocialCarouselShareQRBackToAddFriends
-local fFlagCreateConnectionsHub = require(parent.SharedFlags).FFlagCreateConnectionsHub
-local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
-local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
+﻿local SocialCarousel = script:FindFirstAncestor("SocialCarousel")
+local Parent = SocialCarousel.Parent
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local NavigationRoduxModule = require(Parent.NavigationRodux)
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local NavigateDownFunction = NavigationRoduxModule.Thunks.NavigateDown
+local NavigateBackFunction = NavigationRoduxModule.Thunks.NavigateBack
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local ShareQRTileModule = require(script.Parent.ShareQRTile)
+local UseSocialCarouselAnalyticsModule = require(SocialCarousel.Analytics.useSocialCarouselAnalytics)
+local UseSocialCarouselContextModule = require(SocialCarousel.Contexts.useSocialCarouselContext)
+local ConstantsModule = require(SocialCarousel.Common.Constants)
+local FFlagSocialCarouselShareQRBackToAddFriends = require(Parent.SharedFlags).FFlagSocialCarouselShareQRBackToAddFriends
+local FFlagCreateConnectionsHub = require(Parent.SharedFlags).FFlagCreateConnectionsHub
+local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
+local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 
-return function(p1)
-	-- upvalues: useNavigation (ref), useDispatch (ref), useSocialCarouselAnalyticsModule (ref), useSocialCarouselContextModule (ref), reactModule (ref), fFlagSocialCarouselShareQRBackToAddFriends (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateBack (ref), fFlagCreateConnectionsHub (ref), appPage (ref), navigateDown (ref), constantsModule (ref), shareQRTileModule (ref), cryoModule (ref)
-	local var2 = useNavigation()
-	local var3 = useDispatch()
-	local var4 = useSocialCarouselAnalyticsModule()
-	local var5 = useSocialCarouselContextModule()
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: var4 (ref), p1 (ref), fFlagSocialCarouselShareQRBackToAddFriends (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var3 (ref), navigateBack (copy), fFlagCreateConnectionsHub (copy), var2 (ref), appPage (copy), navigateDown (copy), var5 (ref), constantsModule (copy)
-		var4.shareQRPressed(p1.index)
-		local var7 = if fFlagSocialCarouselShareQRBackToAddFriends then function()
-			-- upvalues: fFlagSignalsNavP3Dispatch (copy), var1 (copy), var3 (copy), navigateBack (copy), fFlagCreateConnectionsHub (copy), var2 (copy), appPage (copy), navigateDown (copy)
-			if fFlagSignalsNavP3Dispatch then
-				var1.back(true)
+return function(p1) --[[ Line: 32 | Named "ShareQRTileContainer" ]]
+	-- upvalues: UseNavigationFunction (copy), UseDispatchFunction (copy), UseSocialCarouselAnalyticsModule (copy), UseSocialCarouselContextModule (copy), ReactModule (copy), FFlagSocialCarouselShareQRBackToAddFriends (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateBackFunction (copy), FFlagCreateConnectionsHub (copy), AppPage (copy), NavigateDownFunction (copy), ConstantsModule (copy), ShareQRTileModule (copy), CryoModule (copy)
+	local UseNavigationResult = UseNavigationFunction()
+	local UseDispatchResult = UseDispatchFunction()
+	local UseSocialCarouselAnalyticsModuleResult = UseSocialCarouselAnalyticsModule()
+	local UseSocialCarouselContextModuleResult = UseSocialCarouselContextModule()
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 39 ]]
+		-- upvalues: UseSocialCarouselAnalyticsModuleResult (copy), p1 (copy), FFlagSocialCarouselShareQRBackToAddFriends (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateBackFunction (upval), FFlagCreateConnectionsHub (upval), UseNavigationResult (copy), AppPage (upval), NavigateDownFunction (upval), UseSocialCarouselContextModuleResult (copy), ConstantsModule (upval)
+		UseSocialCarouselAnalyticsModuleResult.shareQRPressed(p1.index)
+		local OnClose = if FFlagSocialCarouselShareQRBackToAddFriends then function() --[[ Line: 43 ]]
+			-- upvalues: FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (upval), NavigateBackFunction (upval), FFlagCreateConnectionsHub (upval), UseNavigationResult (upval), AppPage (upval), NavigateDownFunction (upval)
+			if FFlagSignalsNavP3Dispatch then
+				NavigationCommands.back(true)
 			else
-				var3(navigateBack(true))
+				UseDispatchResult(NavigateBackFunction(true))
 			end
-			if fFlagCreateConnectionsHub then
-				var2.navigate(appPage.CoHubAddConnections)
-				
-				return
-			elseif fFlagSignalsNavP3Dispatch then
-				var1.down(var1.fromLegacyPage({ name = appPage.AddFriendsPage }))
+			if FFlagCreateConnectionsHub then
+				UseNavigationResult.navigate(AppPage.CoHubAddConnections)
 				
 				return
 			end
-			var3(navigateDown({ name = appPage.AddFriendsPage }))
+			if FFlagSignalsNavP3Dispatch then
+				NavigationCommands.down(NavigationCommands.fromLegacyPage({ name = AppPage.AddFriendsPage }))
+				
+				return
+			else
+				UseDispatchResult(NavigateDownFunction({ name = AppPage.AddFriendsPage }))
+			end
 		end else nil
 		
-		if var5.navigateToQRCodePage then
-			var5.navigateToQRCodePage({
-				source = constantsModule.ANALYTICS.SRC.HOMEPAGE_FRIENDS_CAROUSEL,
-				onClose = var7
+		if UseSocialCarouselContextModuleResult.navigateToQRCodePage then
+			UseSocialCarouselContextModuleResult.navigateToQRCodePage({
+				source = ConstantsModule.ANALYTICS.SRC.HOMEPAGE_FRIENDS_CAROUSEL,
+				onClose = OnClose
 			})
 		end
 	end, {
-		var3,
-		var2,
+		UseDispatchResult,
+		UseNavigationResult,
 		p1.index,
-		var4.shareQRPressed,
-		var5.navigateToQRCodePage
+		UseSocialCarouselAnalyticsModuleResult.shareQRPressed,
+		UseSocialCarouselContextModuleResult.navigateToQRCodePage
 	})
-	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), constantsModule (copy)
-		var5.onSuccessfulRender(constantsModule.ANALYTICS.UI_LOADING_EVENTS.SHARE_QR)
+	ReactModule.useEffect(function() --[[ Line: 76 ]]
+		-- upvalues: UseSocialCarouselContextModuleResult (copy), ConstantsModule (upval)
+		UseSocialCarouselContextModuleResult.onSuccessfulRender(ConstantsModule.ANALYTICS.UI_LOADING_EVENTS.SHARE_QR)
 	end, {})
 	
-	return reactModule.createElement(shareQRTileModule, cryoModule.Dictionary.join(p1, { onActivated = var6 }))
+	return ReactModule.createElement(ShareQRTileModule, CryoModule.Dictionary.join(p1, { onActivated = UseResult }))
 end

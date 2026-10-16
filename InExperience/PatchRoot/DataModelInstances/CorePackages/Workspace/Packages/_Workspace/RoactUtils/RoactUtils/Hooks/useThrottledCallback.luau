@@ -1,48 +1,49 @@
-﻿local parent = script:FindFirstAncestor("RoactUtils").Parent
-local reactModule = require(parent.React)
-local promiseModule = require(parent.Promise)
+﻿local Parent = script:FindFirstAncestor("RoactUtils").Parent
+local ReactModule = require(Parent.React)
+local PromiseModule = require(Parent.Promise)
 
-return function(value, p1)
-	-- upvalues: reactModule (ref), promiseModule (ref)
-	local var1 = reactModule.useRef(value)
-	local var2 = reactModule.useRef(p1)
-	var1.current = value
-	var2.current = p1
-	local var3 = reactModule.useRef(nil)
-	local var4 = reactModule.useRef(0)
-	local var5 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref), var2 (ref), var4 (ref), var1 (ref), promiseModule (copy)
-		if var3.current then return end
-		local var6 = var4.current + (var2.current or 0) - tick()
+return function(Current, Current1) --[[ Line: 20 | Named "useThrottledCallback" ]]
+	-- upvalues: ReactModule (copy), PromiseModule (copy)
+	local UseRefResult = ReactModule.useRef(Current)
+	local UseRefResult1 = ReactModule.useRef(Current1)
+	UseRefResult.current = Current
+	UseRefResult1.current = Current1
+	local UseRefResult2 = ReactModule.useRef(nil)
+	local UseRefResult3 = ReactModule.useRef(0)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 30 ]]
+		-- upvalues: UseRefResult2 (copy), UseRefResult1 (copy), UseRefResult3 (copy), UseRefResult (copy), PromiseModule (upval)
+		if UseRefResult2.current then return end
+		local CurrentDelta = UseRefResult3.current + (UseRefResult1.current or 0) - tick()
 		
-		local function runCallback()
-			-- upvalues: var1 (copy), var4 (copy), var3 (copy)
-			var1.current()
-			var4.current = tick()
-			var3.current = nil
+		local function runCallback() --[[ Line: 39 ]]
+			-- upvalues: UseRefResult (upval), UseRefResult3 (upval), UseRefResult2 (upval)
+			UseRefResult.current()
+			UseRefResult3.current = tick()
+			UseRefResult2.current = nil
 		end
 		
-		if var6 > 0 then
-			var3.current = promiseModule.delay(var6):andThen(runCallback)
+		if CurrentDelta > 0 then
+			UseRefResult2.current = PromiseModule.delay(CurrentDelta):andThen(runCallback)
 			
 			return
+		else
+			UseRefResult.current()
+			UseRefResult3.current = tick()
+			UseRefResult2.current = nil
 		end
-		var1.current()
-		var4.current = tick()
-		var3.current = nil
 	end)
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), var1 (ref)
-		return function()
-			-- upvalues: var3 (copy), var1 (copy)
-			local current = var3.current
+	ReactModule.useEffect(function() --[[ Line: 53 ]]
+		-- upvalues: UseRefResult2 (copy), UseRefResult (copy)
+		return function() --[[ Line: 54 ]]
+			-- upvalues: UseRefResult2 (upval), UseRefResult (upval)
+			local Current = UseRefResult2.current
 			
-			if current then
-				current:cancel()
-				var1.current()
+			if Current then
+				Current:cancel()
+				UseRefResult.current()
 			end
 		end
 	end, {})
 	
-	return var5
+	return UseResult
 end

@@ -1,17 +1,17 @@
-﻿local dependenciesModule = require(script.Parent.Parent.Parent.Parent.dependencies)
-local rodux = dependenciesModule.Rodux
-local dash = dependenciesModule.Dash
-local parent = script.Parent.Parent
-local _ = require(parent.AnalyticsTypes)
-local sessionIdUpdatedModule = require(parent.Actions.SessionIdUpdated)
+﻿local DependenciesModule = require(script.Parent.Parent.Parent.Parent.dependencies)
+local Rodux = DependenciesModule.Rodux
+local Dash = DependenciesModule.Dash
+local Parent = script.Parent.Parent
+local _ = require(Parent.AnalyticsTypes)
+local SessionIdUpdatedModule = require(Parent.Actions.SessionIdUpdated)
 local t = {}
 
-return function(_)
-	-- upvalues: rodux (ref), t (ref), sessionIdUpdatedModule (ref), dash (ref)
-	return rodux.createReducer(t, {
-		[sessionIdUpdatedModule.name] = function(p1, p2)
-			-- upvalues: dash (copy), t (copy)
-			return dash.join(p1 or t, { [p2.payload.sessionKey] = p2.payload.sessionId })
+return function(_) --[[ Line: 12 ]]
+	-- upvalues: Rodux (copy), t (copy), SessionIdUpdatedModule (copy), Dash (copy)
+	return Rodux.createReducer(t, {
+		[SessionIdUpdatedModule.name] = function(p1, p2) --[[ Line: 14 ]]
+			-- upvalues: Dash (upval), t (upval)
+			return Dash.join(p1 or t, { [p2.payload.sessionKey] = p2.payload.sessionId })
 		end
 	})
 end

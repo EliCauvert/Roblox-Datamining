@@ -1,61 +1,63 @@
-﻿local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
-local reactModule = require(genericAbuseReporting.Parent.React)
-local frameModule = require(genericAbuseReporting.Common.Frame)
-local simpleSubmitDialogModule = require(genericAbuseReporting.Dialogs.SimpleSubmitDialog)
-local defaultLocalizationKeysModule = require(genericAbuseReporting.LocalizationKeys.DefaultLocalizationKeys)
-local onFormLoadedModule = require(genericAbuseReporting.Analytics.Actions.OnFormLoaded)
-local useAnalyticsSubmitDispatchModule = require(genericAbuseReporting.Analytics.useAnalyticsSubmitDispatch)
-local useAnalyticsDispatchModule = require(genericAbuseReporting.Analytics.useAnalyticsDispatch)
+﻿local GenericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
+local ReactModule = require(GenericAbuseReporting.Parent.React)
+local FrameModule = require(GenericAbuseReporting.Common.Frame)
+local SimpleSubmitDialogModule = require(GenericAbuseReporting.Dialogs.SimpleSubmitDialog)
+local DefaultLocalizationKeysModule = require(GenericAbuseReporting.LocalizationKeys.DefaultLocalizationKeys)
+local OnFormLoadedModule = require(GenericAbuseReporting.Analytics.Actions.OnFormLoaded)
+local UseAnalyticsSubmitDispatchModule = require(GenericAbuseReporting.Analytics.useAnalyticsSubmitDispatch)
+local UseAnalyticsDispatchModule = require(GenericAbuseReporting.Analytics.useAnalyticsDispatch)
 
-return function(p1)
-	-- upvalues: useAnalyticsSubmitDispatchModule (ref), useAnalyticsDispatchModule (ref), defaultLocalizationKeysModule (ref), reactModule (ref), onFormLoadedModule (ref), frameModule (ref), simpleSubmitDialogModule (ref)
-	local var1 = useAnalyticsSubmitDispatchModule()
-	local var2 = useAnalyticsDispatchModule()
-	local hasPreviousSteps = p1.onCloseProps and p1.onCloseProps.hasPreviousSteps
+return function(p1) --[[ Line: 34 | Named "ReportWithReasonAndComment" ]]
+	-- upvalues: UseAnalyticsSubmitDispatchModule (copy), UseAnalyticsDispatchModule (copy), DefaultLocalizationKeysModule (copy), ReactModule (copy), OnFormLoadedModule (copy), FrameModule (copy), SimpleSubmitDialogModule (copy)
+	local UseAnalyticsSubmitDispatchModuleResult = UseAnalyticsSubmitDispatchModule()
+	local UseAnalyticsDispatchModuleResult = UseAnalyticsDispatchModule()
+	local HasPreviousSteps = p1.onCloseProps and p1.onCloseProps.hasPreviousSteps
 	
 	if p1.localizationKeys then
-		p1.localizationKeys.formTitle = p1.localizationKeys.formTitle or defaultLocalizationKeysModule.formTitle
-		p1.localizationKeys.formSubmit = p1.localizationKeys.formSubmit or defaultLocalizationKeysModule.formSubmit
+		p1.localizationKeys.formTitle = p1.localizationKeys.formTitle or DefaultLocalizationKeysModule.formTitle
+		p1.localizationKeys.formSubmit = p1.localizationKeys.formSubmit or DefaultLocalizationKeysModule.formSubmit
 	end
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), onFormLoadedModule (copy), p1 (ref)
-		var2(onFormLoadedModule({
+	ReactModule.useEffect(function() --[[ Line: 44 ]]
+		-- upvalues: UseAnalyticsDispatchModuleResult (copy), OnFormLoadedModule (upval), p1 (copy)
+		UseAnalyticsDispatchModuleResult(OnFormLoadedModule({
 			context = p1.analyticsContext,
 			place_id = game.PlaceId,
 			accumulated_time_ms = workspace:GetServerTimeNow() * 1000
 		}))
-	end, { var2, p1.analyticsContext })
+	end, { UseAnalyticsDispatchModuleResult, p1.analyticsContext })
 	
-	return reactModule.createElement(frameModule, { Size = UDim2.fromScale(1, 1) }, {
-		submitDialog = reactModule.createElement(simpleSubmitDialogModule, {
+	return ReactModule.createElement(FrameModule, { Size = UDim2.fromScale(1, 1) }, {
+		submitDialog = ReactModule.createElement(SimpleSubmitDialogModule, {
 			topCustomComponent = p1.topCustomComponent,
 			footerContent = p1.footerContent,
 			localizationKeys = p1.localizationKeys,
 			reportCategories = p1.reportCategories,
 			reportCategoryDefaultKey = p1.reportCategoryDefaultKey,
-			onSubmit = reactModule.useCallback(function(p2, p3)
-				-- upvalues: p1 (ref), var1 (ref)
+			onSubmit = ReactModule.useCallback(function(p2, p3) --[[ Line: 53 ]]
+				-- upvalues: p1 (copy), UseAnalyticsSubmitDispatchModuleResult (copy)
 				if (if p1.onSubmitProps.hasNextSteps then p1.onSubmitProps.onProceedToNextStep(p2, p3) else p1.onSubmitProps.onSubmit(p2, p3)) and not p1.onSubmitProps.hasNextSteps then
-					var1("Submit")
+					UseAnalyticsSubmitDispatchModuleResult("Submit")
 				end
-			end, { var1, p1.onSubmitProps }),
-			onAbandon = reactModule.useCallback(function()
-				-- upvalues: p1 (ref), var1 (ref)
+			end, { UseAnalyticsSubmitDispatchModuleResult, p1.onSubmitProps }),
+			onAbandon = ReactModule.useCallback(function() --[[ Line: 63 ]]
+				-- upvalues: p1 (copy), UseAnalyticsSubmitDispatchModuleResult (copy)
 				if not p1.onCloseProps then
-					var1("Abandon")
+					UseAnalyticsSubmitDispatchModuleResult("Abandon")
 					
 					return
-				elseif p1.onCloseProps.hasPreviousSteps then
+				end
+				if p1.onCloseProps.hasPreviousSteps then
 					p1.onCloseProps.onBackToPreviousStep()
 					
 					return
+				else
+					p1.onCloseProps.onAbandon()
+					UseAnalyticsSubmitDispatchModuleResult("Abandon")
 				end
-				p1.onCloseProps.onAbandon()
-				var1("Abandon")
-			end, { var1, p1.onCloseProps }),
+			end, { UseAnalyticsSubmitDispatchModuleResult, p1.onCloseProps }),
 			isDisabled = p1.isDisabled,
 			isReportCategoryReadonly = p1.isReportCategoryReadonly,
-			useBackButton = hasPreviousSteps,
+			useBackButton = HasPreviousSteps,
 			scaleDialog = p1.scaleDialog
 		})
 	})

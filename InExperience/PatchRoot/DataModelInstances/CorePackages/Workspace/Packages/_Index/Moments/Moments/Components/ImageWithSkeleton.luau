@@ -1,111 +1,112 @@
-﻿local contentProviderService = game:GetService("ContentProvider")
-local parent = script:FindFirstAncestor("Moments").Parent
-local reactModule = require(parent.React)
-local reactOtterModule = require(parent.ReactOtter)
-local foundationModule = require(parent.Foundation)
-local image = foundationModule.Image
-local skeleton = foundationModule.Skeleton
-local view = foundationModule.View
-local radius = foundationModule.Enums.Radius
-local useTokens = foundationModule.Hooks.useTokens
-local t = { frequency = 3, dampingRatio = 1 }
+﻿local ContentProvider = game:GetService("ContentProvider")
+local Parent = script:FindFirstAncestor("Moments").Parent
+local ReactModule = require(Parent.React)
+local ReactOtterModule = require(Parent.ReactOtter)
+local FoundationModule = require(Parent.Foundation)
+local Image = FoundationModule.Image
+local Skeleton = FoundationModule.Skeleton
+local View = FoundationModule.View
+local Radius = FoundationModule.Enums.Radius
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local config = { frequency = 3, dampingRatio = 1 }
 
-local function _(p1, p2)
-	-- upvalues: radius (ref)
-	return if p1 == radius.Circle then UDim.new(1, 0) else UDim.new(0, p2.Radius[p1])
+local function _(Circle, p1): UDim --[[ Line: 55 | Named "getCornerRadius" ]]
+	-- upvalues: Radius (copy)
+	return if Circle == Radius.Circle then UDim.new(1, 0) else UDim.new(0, p1.Radius[Circle])
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), radius (ref), reactModule (ref), reactOtterModule (ref), contentProviderService (ref), t (ref), view (ref), image (ref), skeleton (ref)
-	local var1 = useTokens()
-	local radius_1 = p1.radius or radius.Medium
-	local image_1 = p1.Image
-	local var2 = image_1 ~= nil and image_1 ~= ""
-	local var3, var4 = reactModule.useState(var2)
-	local var5, var6 = reactOtterModule.useAnimatedBinding(0, function()
-		-- upvalues: image_1 (ref), contentProviderService (copy), var4 (ref)
-		if image_1 ~= nil and contentProviderService:GetAssetFetchStatus(image_1) == Enum.AssetFetchStatus.Success then
-			var4(false)
+return ReactModule.memo(function(Frame) --[[ Line: 62 | Named "ImageWithSkeleton" ]]
+	-- upvalues: UseTokensFunction (copy), Radius (copy), ReactModule (copy), ReactOtterModule (copy), ContentProvider (copy), config (copy), View (copy), Image (copy), Skeleton (copy)
+	local UseTokensResult = UseTokensFunction()
+	local Radius1 = Frame.radius or Radius.Medium
+	local Image1 = Frame.Image
+	local IsNotImageMatch: boolean = Image1 ~= nil and Image1 ~= ""
+	local UseStateResult, UseStateResult2 = ReactModule.useState(IsNotImageMatch)
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0, function() --[[ Line: 71 ]]
+		-- upvalues: Image1 (copy), ContentProvider (upval), UseStateResult2 (copy)
+		if Image1 ~= nil and ContentProvider:GetAssetFetchStatus(Image1) == Enum.AssetFetchStatus.Success then
+			UseStateResult2(false)
 		end
 	end)
-	reactModule.useEffect(function()
-		-- upvalues: var4 (ref), var2 (ref), image_1 (ref), var6 (ref), reactOtterModule (copy), t (copy), contentProviderService (copy)
-		var4(var2)
+	ReactModule.useEffect(function() --[[ Line: 78 ]]
+		-- upvalues: UseStateResult2 (copy), IsNotImageMatch (copy), Image1 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), config (upval), ContentProvider (upval)
+		UseStateResult2(IsNotImageMatch)
 		
-		if not var2 or image_1 == nil or image_1 == "" then
-			var6(reactOtterModule.instant(0))
+		if not IsNotImageMatch or Image1 == nil or Image1 == "" then
+			UseAnimatedBindingResult2((ReactOtterModule.instant(0)))
 			
 			return
 		end
-		local var7 = true
+		local Flag = true
 		
-		local function _()
-			-- upvalues: var7 (write), var6 (copy), reactOtterModule (copy), t (copy)
-			if var7 then
-				var6(reactOtterModule.spring(1, t))
+		local function _() --[[ Line: 87 | Named "fadeInImage" ]]
+			-- upvalues: Flag (ref), UseAnimatedBindingResult2 (upval), ReactOtterModule (upval), config (upval)
+			if Flag then
+				UseAnimatedBindingResult2((ReactOtterModule.spring(1, config)))
 			end
 		end
 		
-		if contentProviderService:GetAssetFetchStatus(image_1) == Enum.AssetFetchStatus.Success then
-			var6(reactOtterModule.spring(1, t))
-			
-			return function()
-				-- upvalues: var7 (write)
-				var7 = false
-			end
-		end
-		var6(reactOtterModule.instant(0))
-		task.spawn(function()
-			-- upvalues: contentProviderService (copy), image_1 (copy), var7 (write), var6 (copy), reactOtterModule (copy), t (copy)
-			pcall(function()
-				-- upvalues: contentProviderService (copy), image_1 (copy), var7 (copy), var6 (copy), reactOtterModule (copy), t (copy)
-				contentProviderService:PreloadAsync({ image_1 }, function(p2, p3)
-					-- upvalues: image_1 (copy), var7 (copy), var6 (copy), reactOtterModule (copy), t (copy)
-					if p2 == image_1 and p3 == Enum.AssetFetchStatus.Success and var7 then
-						var6(reactOtterModule.spring(1, t))
-					end
+		if ContentProvider:GetAssetFetchStatus(Image1) ~= Enum.AssetFetchStatus.Success then
+			UseAnimatedBindingResult2((ReactOtterModule.instant(0)))
+			task.spawn(function() --[[ Line: 101 ]]
+				-- upvalues: ContentProvider (upval), Image1 (upval), Flag (ref), UseAnimatedBindingResult2 (upval), ReactOtterModule (upval), config (upval)
+				pcall(function() --[[ Line: 102 ]]
+					-- upvalues: ContentProvider (upval), Image1 (upval), Flag (upval), UseAnimatedBindingResult2 (upval), ReactOtterModule (upval), config (upval)
+					ContentProvider:PreloadAsync({ Image1 }, function(Image, AssetFetchStatus) --[[ Line: 103 ]]
+						-- upvalues: Image1 (upval), Flag (upval), UseAnimatedBindingResult2 (upval), ReactOtterModule (upval), config (upval)
+						if Image == Image1 and AssetFetchStatus == Enum.AssetFetchStatus.Success and Flag then
+							UseAnimatedBindingResult2((ReactOtterModule.spring(1, config)))
+						end
+					end)
 				end)
+				
+				if ContentProvider:GetAssetFetchStatus(Image1) == Enum.AssetFetchStatus.Success and Flag then
+					UseAnimatedBindingResult2((ReactOtterModule.spring(1, config)))
+				end
 			end)
 			
-			if contentProviderService:GetAssetFetchStatus(image_1) == Enum.AssetFetchStatus.Success and var7 then
-				var6(reactOtterModule.spring(1, t))
+			return function() --[[ Line: 115 ]]
+				-- upvalues: Flag (ref)
+				Flag = false
 			end
-		end)
-		
-		return function()
-			-- upvalues: var7 (write)
-			var7 = false
 		end
-	end, { image_1, var2 })
-	local imageStyle = p1.imageStyle
-	local _ = nil
+		if Flag then
+			UseAnimatedBindingResult2((ReactOtterModule.spring(1, config)))
+		end
+		return function() --[[ Line: 95 ]]
+			-- upvalues: Flag (ref)
+			Flag = false
+		end
+	end, { Image1, IsNotImageMatch })
+	local ImageStyle = Frame.imageStyle
+	local UseAnimatedBindingResult1 = if ImageStyle == nil then UseAnimatedBindingResult else ReactModule.joinBindings({ UseAnimatedBindingResult, ImageStyle }):map(function(Entry): number --[[ Line: 154 ]]
+		return 1 - (1 - Entry[1]) * (1 - (Entry[2].Transparency or 0))
+	end)
 	
-	return reactModule.createElement(view, { LayoutOrder = p1.LayoutOrder, Size = p1.Size }, {
-		Image = reactModule.createElement(image, {
+	return ReactModule.createElement(View, { LayoutOrder = Frame.LayoutOrder, Size = Frame.Size }, {
+		Image = ReactModule.createElement(Image, {
 			tag = "size-full",
-			Image = image_1,
-			backgroundStyle = p1.backgroundStyle,
-			imageStyle = if var2 and imageStyle ~= nil then reactModule.joinBindings({ imageStyle, var5 }):map(function(p2)
-				local var7 = p2[1]
+			Image = Image1,
+			backgroundStyle = Frame.backgroundStyle,
+			imageStyle = if IsNotImageMatch and ImageStyle ~= nil then ReactModule.joinBindings({ ImageStyle, UseAnimatedBindingResult }):map(function(Entry) --[[ Line: 127 ]]
+				local Entry1 = Entry[1]
 				
 				return {
-					Color3 = var7.Color3,
-					Transparency = 1 - (1 - var7.Transparency) * p2[2]
+					Color3 = Entry1.Color3,
+					Transparency = 1 - (1 - Entry1.Transparency) * Entry[2]
 				}
-			end) elseif var2 then var5:map(function(p2)
-				return { Color3 = Color3.new(1, 1, 1), Transparency = 1 - p2 }
-			end) else imageStyle,
-			cornerRadius = if radius_1 == radius.Circle then UDim.new(1, 0) else UDim.new(0, var1.Radius[radius_1]),
-			ScaleType = p1.ScaleType or Enum.ScaleType.Crop
+			end) elseif IsNotImageMatch then UseAnimatedBindingResult:map(function(p1: number) --[[ Line: 136 ]]
+				return { Color3 = Color3.new(1, 1, 1), Transparency = 1 - p1 }
+			end) else ImageStyle,
+			cornerRadius = if Radius1 == Radius.Circle then UDim.new(1, 0) else UDim.new(0, UseTokensResult.Radius[Radius1]),
+			ScaleType = Frame.ScaleType or Enum.ScaleType.Crop
 		}),
-		SkeletonOverlay = if var2 and var3 then reactModule.createElement(view, {
+		SkeletonOverlay = if IsNotImageMatch and UseStateResult then ReactModule.createElement(View, {
 			tag = "size-full",
 			ZIndex = 2,
-			GroupTransparency = if imageStyle ~= nil then reactModule.joinBindings({ var5, imageStyle }):map(function(p2)
-				return 1 - (1 - p2[1]) * (1 - (p2[2].Transparency or 0))
-			end) else var5
+			GroupTransparency = UseAnimatedBindingResult1
 		}, {
-			Shimmer = reactModule.createElement(skeleton, { radius = radius_1, Size = UDim2.fromScale(1, 1) })
+			Shimmer = ReactModule.createElement(Skeleton, { radius = Radius1, Size = UDim2.fromScale(1, 1) })
 		}) else nil
 	})
 end)

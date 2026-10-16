@@ -1,10 +1,10 @@
-﻿local parent = script.Parent.Parent
-local _ = require(parent.util.Types)
-local tryYieldModule = require(parent.util.tryYield)
+﻿local Parent = script.Parent.Parent
+local _ = require(Parent.util.Types)
+local TryYieldModule = require(Parent.util.tryYield)
 
-return function(p1, p2)
-	-- upvalues: tryYieldModule (ref)
-	tryYieldModule(p2)
+return function(p1, p2) --[[ Line: 11 ]]
+	-- upvalues: TryYieldModule (copy)
+	TryYieldModule(p2)
 	
 	return pcall(p1)
 end

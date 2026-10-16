@@ -1,288 +1,296 @@
-﻿local playersService = game:GetService("Players")
-local robloxReplicatedStorageService = game:GetService("RobloxReplicatedStorage")
-local parent = script.Parent
-local parent_1 = parent.Parent
-local platformLeaderboardTypesModule = require(parent.PlatformLeaderboardTypes)
-local platformLeaderboardCacheModule = require(parent.PlatformLeaderboardCache)
-local _ = require(parent.PlatformLeaderboardConfigService)
-local sharedFlagsModule = require(parent_1.SharedFlags)
-local eventType = platformLeaderboardTypesModule.EventType
-local leaderboardType = platformLeaderboardTypesModule.LeaderboardType
-local remoteEventName = platformLeaderboardTypesModule.RemoteEventName
-local platformLeaderboardTabEventRateLimit = game:DefineFastInt("PlatformLeaderboardTabEventRateLimit", 20)
-local platformLeaderboardTabEventRateWindowSeconds = game:DefineFastInt("PlatformLeaderboardTabEventRateWindowSeconds", 10)
-local fFlagPlatformLeaderboardDebugLogging = sharedFlagsModule.FFlagPlatformLeaderboardDebugLogging
-local t = {}
-t.__index = t
+﻿local Players = game:GetService("Players")
+local RobloxReplicatedStorage = game:GetService("RobloxReplicatedStorage")
+local Parent = script.Parent
+local PlatformLeaderboardTypesModule = require(Parent.PlatformLeaderboardTypes)
+local PlatformLeaderboardCacheModule = require(Parent.PlatformLeaderboardCache)
+local _ = require(Parent.PlatformLeaderboardConfigService)
+local EventType = PlatformLeaderboardTypesModule.EventType
+local LeaderboardType = PlatformLeaderboardTypesModule.LeaderboardType
+local RemoteEventName = PlatformLeaderboardTypesModule.RemoteEventName
+local PlatformLeaderboardTabEventRateLimit = game:DefineFastInt("PlatformLeaderboardTabEventRateLimit", 20)
+local PlatformLeaderboardTabEventRateWindowSeconds = game:DefineFastInt("PlatformLeaderboardTabEventRateWindowSeconds", 10)
+local FFlagPlatformLeaderboardDebugLogging = require(Parent.Parent.SharedFlags).FFlagPlatformLeaderboardDebugLogging
+local PlatformLeaderboardController = {}
+PlatformLeaderboardController.__index = PlatformLeaderboardController
 
-function t.new(p1, p2)
-	-- upvalues: t (ref)
-	return setmetatable({
+function PlatformLeaderboardController.new(_configService, _fetcher) --[[ Line: 51 ]]
+	-- upvalues: PlatformLeaderboardController (copy)
+	return (setmetatable({
 		_cache = nil,
 		_pushEvent = nil,
-		_configService = p1,
-		_fetcher = p2,
+		_configService = _configService,
+		_fetcher = _fetcher,
 		_conns = {},
 		_playerTabs = {},
 		_rateLimits = {}
-	}, t)
+	}, PlatformLeaderboardController))
 end
 
-function t:_onConfigChanged(p1, p2)
-	-- upvalues: eventType (ref)
-	self:_pushToAll({ type = eventType.ConfigUpdate, config = p2 })
+function PlatformLeaderboardController:_onConfigChanged(p1, Config) --[[ Line: 66 ]]
+	-- upvalues: EventType (copy)
+	self:_pushToAll({ type = EventType.ConfigUpdate, config = Config })
 	
-	if p2 then
-		if not self._cache then
-			self:_initializeCache(p2)
-			
-			return
-		elseif p1 then
-			self._cache:forceRefresh(p2, not (p1.leaderboardId == p2.leaderboardId))
+	if not Config then
+		if self._cache then
+			self._cache:teardown()
+			self._cache = nil
 		end
+		table.clear(self._playerTabs)
+		
 		return
-	elseif self._cache then
-		self._cache:teardown()
-		self._cache = nil
+	elseif not self._cache then
+		self:_initializeCache(Config)
+		
+		return
+	else
+		if p1 then
+			self._cache:forceRefresh(Config, not (p1.leaderboardId == Config.leaderboardId))
+		end
 	end
-	table.clear(self._playerTabs)
 end
 
-function t:_initializeCache(p1)
-	-- upvalues: platformLeaderboardCacheModule (ref), eventType (ref), playersService (ref)
-	self._cache = platformLeaderboardCacheModule.new(self._fetcher, p1)
-	local cache = self._cache
-	table.insert(self._conns, cache:onGlobalUpdated(function(p2, p3)
-		-- upvalues: self (ref), eventType (copy)
-		self:_pushToGlobalViewers({ type = eventType.GlobalLeaderboardData, data = p2 })
+function PlatformLeaderboardController:_initializeCache(Fetcher) --[[ Line: 86 ]]
+	-- upvalues: PlatformLeaderboardCacheModule (copy), EventType (copy), Players (copy)
+	self._cache = PlatformLeaderboardCacheModule.new(self._fetcher, Fetcher)
+	local Cache = self._cache
+	table.insert(self._conns, Cache:onGlobalUpdated(function(Data, p1) --[[ Line: 92 ]]
+		-- upvalues: self (copy), EventType (upval)
+		self:_pushToGlobalViewers({ type = EventType.GlobalLeaderboardData, data = Data })
 		
-		if p3 then
-			self._configService:updateConfig(p3)
+		if p1 then
+			self._configService:updateConfig(p1)
 		end
 	end))
-	table.insert(self._conns, cache:onFriendsUpdated(function(p2, p3, p4)
-		-- upvalues: playersService (copy), self (ref), eventType (copy)
-		local var1 = playersService:GetPlayerByUserId(p2)
+	table.insert(self._conns, Cache:onFriendsUpdated(function(UserId, Data, p1) --[[ Line: 102 ]]
+		-- upvalues: Players (upval), self (copy), EventType (upval)
+		local Player = Players:GetPlayerByUserId(UserId)
 		
-		if var1 then
-			self:_pushToPlayer(var1, {
-				type = eventType.FriendsLeaderboardData,
-				userId = p2,
-				data = p3
+		if Player then
+			self:_pushToPlayer(Player, {
+				type = EventType.FriendsLeaderboardData,
+				userId = UserId,
+				data = Data
 			})
 		end
-		if p4 then
-			self._configService:updateConfig(p4)
+		if p1 then
+			self._configService:updateConfig(p1)
 		end
 	end))
-	table.insert(self._conns, cache:onUserScoreUpdated(function(p2, p3)
-		-- upvalues: playersService (copy), self (ref), eventType (copy)
-		local var1 = playersService:GetPlayerByUserId(p2)
+	table.insert(self._conns, Cache:onUserScoreUpdated(function(UserId, Entry) --[[ Line: 118 ]]
+		-- upvalues: Players (upval), self (copy), EventType (upval)
+		local Player = Players:GetPlayerByUserId(UserId)
 		
-		if var1 then
-			self:_pushToPlayer(var1, { type = eventType.UserScore, userId = p2, entry = p3 })
+		if Player then
+			self:_pushToPlayer(Player, {
+				type = EventType.UserScore,
+				userId = UserId,
+				entry = Entry
+			})
 		end
 	end))
 end
 
-function t:initialize()
-	-- upvalues: remoteEventName (ref), robloxReplicatedStorageService (ref), eventType (ref), playersService (ref)
+function PlatformLeaderboardController:initialize() --[[ Line: 127 ]]
+	-- upvalues: RemoteEventName (copy), RobloxReplicatedStorage (copy), EventType (copy), Players (copy)
 	self._pushEvent = Instance.new("RemoteEvent")
-	self._pushEvent.Name = remoteEventName.Push
-	self._pushEvent.Parent = robloxReplicatedStorageService
-	local remoteEvent = Instance.new("RemoteEvent")
-	remoteEvent.Name = remoteEventName.TabOpened
-	remoteEvent.Parent = robloxReplicatedStorageService
-	local remoteEvent_1 = Instance.new("RemoteEvent")
-	remoteEvent_1.Name = remoteEventName.TabClosed
-	remoteEvent_1.Parent = robloxReplicatedStorageService
-	self._pushEvent.OnServerEvent:Connect(function() end)
-	local config = self._configService:getConfig()
+	self._pushEvent.Name = RemoteEventName.Push
+	self._pushEvent.Parent = RobloxReplicatedStorage
+	local RemoteEvent = Instance.new("RemoteEvent")
+	RemoteEvent.Name = RemoteEventName.TabOpened
+	RemoteEvent.Parent = RobloxReplicatedStorage
+	local RemoteEvent1 = Instance.new("RemoteEvent")
+	RemoteEvent1.Name = RemoteEventName.TabClosed
+	RemoteEvent1.Parent = RobloxReplicatedStorage
+	self._pushEvent.OnServerEvent:Connect(function() --[[ Line: 143 ]] end)
+	local Config = self._configService:getConfig()
 	
-	if config then
-		self:_initializeCache(config)
+	if Config then
+		self:_initializeCache(Config)
 	end
-	table.insert(self._conns, self._configService:onConfigChanged(function(p1, p2)
-		-- upvalues: self (ref)
+	table.insert(self._conns, self._configService:onConfigChanged(function(p1, p2) --[[ Line: 155 ]]
+		-- upvalues: self (copy)
 		self:_onConfigChanged(p1, p2)
 	end))
 	self:_pushToAll({
-		type = eventType.ConfigUpdate,
+		type = EventType.ConfigUpdate,
 		config = self._configService:getConfig()
 	})
-	table.insert(self._conns, remoteEvent.OnServerEvent:Connect(function(p1, p2)
-		-- upvalues: self (ref)
-		if self:_isRateLimited(p1.UserId) then return end
-		local var1 = self:_validateTabPayload(p1, p2)
+	table.insert(self._conns, RemoteEvent.OnServerEvent:Connect(function(Player: Player, p1) --[[ Line: 167 ]]
+		-- upvalues: self (copy)
+		if self:_isRateLimited(Player.UserId) then return end
+		local ValidateTabPayloadResult = self:_validateTabPayload(Player, p1)
 		
-		if var1 then
-			self:_onTabOpened(p1, var1)
+		if ValidateTabPayloadResult then
+			self:_onTabOpened(Player, ValidateTabPayloadResult)
 		end
 	end))
-	table.insert(self._conns, remoteEvent_1.OnServerEvent:Connect(function(p1, p2)
-		-- upvalues: self (ref)
-		if self:_isRateLimited(p1.UserId) then return end
-		local var1 = self:_validateTabPayload(p1, p2)
+	table.insert(self._conns, RemoteEvent1.OnServerEvent:Connect(function(Player: Player, p1) --[[ Line: 179 ]]
+		-- upvalues: self (copy)
+		if self:_isRateLimited(Player.UserId) then return end
+		local ValidateTabPayloadResult = self:_validateTabPayload(Player, p1)
 		
-		if var1 then
-			self:_onTabClosed(p1, var1)
+		if ValidateTabPayloadResult then
+			self:_onTabClosed(Player, ValidateTabPayloadResult)
 		end
 	end))
-	table.insert(self._conns, playersService.PlayerAdded:Connect(function(p1)
-		-- upvalues: self (ref), eventType (copy)
-		task.defer(function()
-			-- upvalues: self (copy), p1 (ref), eventType (copy)
-			self:_pushToPlayer(p1, {
-				type = eventType.ConfigUpdate,
+	table.insert(self._conns, Players.PlayerAdded:Connect(function(Player) --[[ Line: 192 ]]
+		-- upvalues: self (copy), EventType (upval)
+		task.defer(function() --[[ Line: 193 ]]
+			-- upvalues: self (upval), Player (copy), EventType (upval)
+			self:_pushToPlayer(Player, {
+				type = EventType.ConfigUpdate,
 				config = self._configService:getConfig()
 			})
 		end)
 	end))
-	table.insert(self._conns, playersService.PlayerRemoving:Connect(function(p1)
-		-- upvalues: self (ref)
-		self:_removePlayerFromAllTabs(p1.UserId)
+	table.insert(self._conns, Players.PlayerRemoving:Connect(function(Player) --[[ Line: 204 ]]
+		-- upvalues: self (copy)
+		self:_removePlayerFromAllTabs(Player.UserId)
 	end))
 end
 
-function t:_isRateLimited(p1)
-	-- upvalues: platformLeaderboardTabEventRateWindowSeconds (ref), platformLeaderboardTabEventRateLimit (ref)
-	local processTime = os.clock()
-	local var1 = self._rateLimits[p1]
+function PlatformLeaderboardController:_isRateLimited(UserId): boolean --[[ Line: 215 ]]
+	-- upvalues: PlatformLeaderboardTabEventRateWindowSeconds (copy), PlatformLeaderboardTabEventRateLimit (copy)
+	local ClockTime = os.clock()
+	local RateLimit = self._rateLimits[UserId]
 	
-	if var1 == nil or platformLeaderboardTabEventRateWindowSeconds <= processTime - var1.windowStart then
-		self._rateLimits[p1] = { count = 1, windowStart = processTime }
+	if RateLimit == nil or PlatformLeaderboardTabEventRateWindowSeconds <= ClockTime - RateLimit.windowStart then
+		self._rateLimits[UserId] = { count = 1, windowStart = ClockTime }
 		
 		return false
-	elseif platformLeaderboardTabEventRateLimit <= var1.count then
+	elseif PlatformLeaderboardTabEventRateLimit <= RateLimit.count then
 		return true
+	else
+		RateLimit.count += 1
+		
+		return false
 	end
-	var1.count += 1
-	
-	return false
 end
 
-function t._validateTabPayload(_, p1, p2)
-	if typeof(p2) ~= "table" then
+function PlatformLeaderboardController:_validateTabPayload(Player, p1) --[[ Line: 232 ]]
+	if typeof(p1) ~= "table" then
 		return nil
 	end
-	local tabType = p2.tabType
+	local TabType = p1.tabType
 	
-	if typeof(tabType) ~= "string" then
+	if typeof(TabType) == "string" then
+		local UserId = p1.userId
+		
+		return if UserId == nil or UserId == Player.UserId then { tabType = TabType } else nil
+	else
 		return nil
 	end
-	local userId = p2.userId
-	
-	return if userId == nil or userId == p1.UserId then { tabType = tabType } else nil
 end
 
-function t:_removePlayerFromAllTabs(p1)
+function PlatformLeaderboardController:_removePlayerFromAllTabs(UserId) --[[ Line: 247 ]]
 	if self._cache then
-		self._cache:cleanupForUserId(p1)
+		self._cache:cleanupForUserId(UserId)
 	end
-	self._playerTabs[p1] = nil
-	self._rateLimits[p1] = nil
+	self._playerTabs[UserId] = nil
+	self._rateLimits[UserId] = nil
 end
 
-function t:_onTabOpened(p1, p2)
-	-- upvalues: leaderboardType (ref), eventType (ref), fFlagPlatformLeaderboardDebugLogging (ref)
-	local cache = self._cache
+function PlatformLeaderboardController:_onTabOpened(Player: Player, ValidateTabPayloadResult) --[[ Line: 255 ]]
+	-- upvalues: LeaderboardType (copy), EventType (copy), FFlagPlatformLeaderboardDebugLogging (copy)
+	local Cache = self._cache
 	
-	if not cache then return end
-	local userId = self._playerTabs[p1.UserId] or {}
-	self._playerTabs[p1.UserId] = userId
+	if not Cache then return end
+	local PlayerTab = self._playerTabs[Player.UserId] or {}
+	self._playerTabs[Player.UserId] = PlayerTab
 	
-	if p2.tabType == leaderboardType.Global then
-		if not userId.global then
-			userId.global = true
-			cache:startGlobalRefresh(p1.UserId)
-			local globalData = cache:getGlobalData()
+	if ValidateTabPayloadResult.tabType == LeaderboardType.Global then
+		if not PlayerTab.global then
+			PlayerTab.global = true
+			Cache:startGlobalRefresh(Player.UserId)
+			local GlobalData = Cache:getGlobalData()
 			
-			if globalData then
-				self:_pushToPlayer(p1, {
-					type = eventType.GlobalLeaderboardData,
-					data = globalData
+			if GlobalData then
+				self:_pushToPlayer(Player, {
+					type = EventType.GlobalLeaderboardData,
+					data = GlobalData
 				})
 			end
-			local userIdUserScore = cache:getUserScore(p1.UserId)
+			local UserScore = Cache:getUserScore(Player.UserId)
 			
-			if userIdUserScore then
-				self:_pushToPlayer(p1, {
-					type = eventType.UserScore,
-					userId = p1.UserId,
-					entry = userIdUserScore
+			if UserScore then
+				self:_pushToPlayer(Player, {
+					type = EventType.UserScore,
+					userId = Player.UserId,
+					entry = UserScore
 				})
 				
 				return
 			end
 		end
-	elseif p2.tabType == leaderboardType.Friends then
-		if not userId.friends then
-			userId.friends = true
-			cache:startFriendsRefresh(p1.UserId)
-			local userIdFriendsData = cache:getFriendsData(p1.UserId)
+	elseif ValidateTabPayloadResult.tabType == LeaderboardType.Friends then
+		if not PlayerTab.friends then
+			PlayerTab.friends = true
+			Cache:startFriendsRefresh(Player.UserId)
+			local FriendsData = Cache:getFriendsData(Player.UserId)
 			
-			if userIdFriendsData then
-				self:_pushToPlayer(p1, {
-					type = eventType.FriendsLeaderboardData,
-					userId = p1.UserId,
-					data = userIdFriendsData
+			if FriendsData then
+				self:_pushToPlayer(Player, {
+					type = EventType.FriendsLeaderboardData,
+					userId = Player.UserId,
+					data = FriendsData
 				})
 				
 				return
 			end
 		end
-	elseif fFlagPlatformLeaderboardDebugLogging then
-		warn("[PlatformLeaderboard] Unknown tabType:", p2.tabType)
+	elseif FFlagPlatformLeaderboardDebugLogging then
+		warn("[PlatformLeaderboard] Unknown tabType:", ValidateTabPayloadResult.tabType)
 	end
 end
 
-function t:_onTabClosed(p1, p2)
-	-- upvalues: leaderboardType (ref)
+function PlatformLeaderboardController:_onTabClosed(Player: Player, ValidateTabPayloadResult) --[[ Line: 294 ]]
+	-- upvalues: LeaderboardType (copy)
 	if not self._cache then return end
-	local cache = self._cache
-	local userId = self._playerTabs[p1.UserId]
+	local Cache = self._cache
+	local PlayerTab = self._playerTabs[Player.UserId]
 	
-	if p2.tabType == leaderboardType.Global and userId and userId.global then
-		userId.global = nil
-		cache:stopGlobalRefresh(p1.UserId)
+	if ValidateTabPayloadResult.tabType == LeaderboardType.Global and PlayerTab and PlayerTab.global then
+		PlayerTab.global = nil
+		Cache:stopGlobalRefresh(Player.UserId)
 		
 		return
-	elseif p2.tabType == leaderboardType.Friends and userId and userId.friends then
-		userId.friends = nil
-		cache:stopFriendsRefresh(p1.UserId)
+	end
+	if ValidateTabPayloadResult.tabType == LeaderboardType.Friends and PlayerTab and PlayerTab.friends then
+		PlayerTab.friends = nil
+		Cache:stopFriendsRefresh(Player.UserId)
 	end
 end
 
-function t:_pushToAll(p1)
+function PlatformLeaderboardController:_pushToAll(p1) --[[ Line: 310 ]]
 	if self._pushEvent then
 		self._pushEvent:FireAllClients(p1)
 	end
 end
 
-function t:_pushToGlobalViewers(p1)
-	-- upvalues: playersService (ref)
+function PlatformLeaderboardController:_pushToGlobalViewers(p1) --[[ Line: 316 ]]
+	-- upvalues: Players (copy)
 	if not self._pushEvent then return end
-	for i, v in playersService:GetPlayers() do
-		local userId = self._playerTabs[v.UserId]
+	for _, player in Players:GetPlayers() do
+		local PlayerTab = self._playerTabs[player.UserId]
 		
-		if userId and userId.global then
-			self._pushEvent:FireClient(v, p1)
+		if PlayerTab and PlayerTab.global then
+			self._pushEvent:FireClient(player, p1)
 		end
 	end
 end
 
-function t:_pushToPlayer(p2, p3)
+function PlatformLeaderboardController:_pushToPlayer(Player, p2) --[[ Line: 328 ]]
 	if self._pushEvent then
-		self._pushEvent:FireClient(p2, p3)
+		self._pushEvent:FireClient(Player, p2)
 	end
 end
 
-function t:destroy()
-	for i, v in self._conns do
-		if typeof(v) == "table" and v.disconnect then
-			v:disconnect()
-		elseif typeof(v) == "RBXScriptConnection" then
-			v:Disconnect()
+function PlatformLeaderboardController:destroy() --[[ Line: 334 ]]
+	for _, conn in self._conns do
+		if typeof(conn) == "table" and conn.disconnect then
+			conn:disconnect()
+		elseif typeof(conn) == "RBXScriptConnection" then
+			conn:Disconnect()
 		end
 	end
 	table.clear(self._conns)
@@ -296,4 +304,4 @@ function t:destroy()
 	end
 end
 
-return t
+return PlatformLeaderboardController

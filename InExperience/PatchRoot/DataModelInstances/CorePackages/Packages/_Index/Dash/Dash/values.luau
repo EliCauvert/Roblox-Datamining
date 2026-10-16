@@ -1,12 +1,12 @@
 ﻿local _ = require(script.Parent.Types)
-local insert = table.insert
+local InsertFunction = table.insert
 
-return function(p1)
-	-- upvalues: insert (ref)
+return function(List) --[[ Line: 14 | Named "values" ]]
+	-- upvalues: InsertFunction (copy)
 	local t = {}
 	
-	for i, v in p1 do
-		insert(t, v)
+	for _, value in List do
+		InsertFunction(t, value)
 	end
 	return t
 end

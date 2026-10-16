@@ -1,33 +1,35 @@
-﻿local guiService = game:GetService("GuiService")
-local t = {
+﻿local GuiService = game:GetService("GuiService")
+local config = {
 	[Enum.NormalId.Front] = CFrame.identity,
-	[Enum.NormalId.Left] = CFrame.fromEulerAngles(0, 1.570796326795, 0),
-	[Enum.NormalId.Back] = CFrame.fromEulerAngles(0, 3.14159265359, 0),
-	[Enum.NormalId.Right] = CFrame.fromEulerAngles(0, -1.570796326795, 0),
-	[Enum.NormalId.Top] = CFrame.fromEulerAnglesYXZ(1.570796326795, -1.570796326795, 0),
-	[Enum.NormalId.Bottom] = CFrame.fromEulerAnglesYXZ(-1.570796326795, -1.570796326795, 0)
+	[Enum.NormalId.Left] = CFrame.fromEulerAngles(0, 1.5707963267948966, 0),
+	[Enum.NormalId.Back] = CFrame.fromEulerAngles(0, 3.141592653589793, 0),
+	[Enum.NormalId.Right] = CFrame.fromEulerAngles(0, -1.5707963267948966, 0),
+	[Enum.NormalId.Top] = CFrame.fromEulerAnglesYXZ(1.5707963267948966, -1.5707963267948966, 0),
+	[Enum.NormalId.Bottom] = CFrame.fromEulerAnglesYXZ(-1.5707963267948966, -1.5707963267948966, 0)
 }
 
-return function(p1, p2, p3)
-	-- upvalues: guiService (ref), t (ref)
-	local var1 = p2 / p1.AbsoluteSize
+return function(Object, p1, Camera: Camera) --[[ Line: 21 | Named "guiPositionToScreenPosition" ]]
+	-- upvalues: GuiService (copy), config (copy)
+	local Vector = p1 / Object.AbsoluteSize
 	
-	if p1:IsA("ScreenGui") then
-		return p2
-	elseif p1:IsA("BillboardGui") then
-		local screenSpaceBounds = p1:GetScreenSpaceBounds()
+	if Object:IsA("ScreenGui") then
+		return p1
+	elseif Object:IsA("BillboardGui") then
+		local ScreenSpaceBounds = Object:GetScreenSpaceBounds()
 		
-		return if screenSpaceBounds then screenSpaceBounds.Min + var1 * Vector2.new(screenSpaceBounds.Width, screenSpaceBounds.Height) + guiService:GetInsetArea(Enum.ScreenInsets.None).Min else nil
-	elseif not p1:IsA("SurfaceGui") then
+		return if ScreenSpaceBounds then ScreenSpaceBounds.Min + Vector * Vector2.new(ScreenSpaceBounds.Width, ScreenSpaceBounds.Height) + GuiService:GetInsetArea(Enum.ScreenInsets.None).Min else nil
+	elseif not Object:IsA("SurfaceGui") then
 		return nil
+	else
+		local Adornee = Object.Adornee or Object.Parent
+		
+		if Adornee and Adornee:IsA("BasePart") then
+			local Entry = config[Object.Face]
+			local ScreenPosition, OnScreen = Camera:WorldToScreenPoint(Adornee.CFrame * Entry * ((Entry:Inverse() * Adornee.Size):Abs() * Vector3.new(0.5 - Vector.X, 0.5 - Vector.Y, -0.5)))
+			
+			return if OnScreen then Vector2.new(ScreenPosition.X, ScreenPosition.Y) else nil
+		else
+			return nil
+		end
 	end
-	local adornee = p1.Adornee or p1.Parent
-	
-	if not adornee or not adornee:IsA("BasePart") then
-		return nil
-	end
-	local face = t[p1.Face]
-	local var2, var3 = p3:WorldToScreenPoint(adornee.CFrame * face * ((face:Inverse() * adornee.Size):Abs() * Vector3.new(0.5 - var1.X, 0.5 - var1.Y, -0.5)))
-	
-	return if var3 then Vector2.new(var2.X, var2.Y) else nil
 end

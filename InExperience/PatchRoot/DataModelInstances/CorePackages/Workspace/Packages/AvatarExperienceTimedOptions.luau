@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.AvatarExperienceTimedOptions.AvatarExperienceTimedOptions)
+﻿return (require(script.Parent._Workspace.AvatarExperienceTimedOptions.AvatarExperienceTimedOptions))

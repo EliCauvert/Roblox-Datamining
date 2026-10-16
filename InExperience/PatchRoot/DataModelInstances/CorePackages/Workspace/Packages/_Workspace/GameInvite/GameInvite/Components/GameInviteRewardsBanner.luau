@@ -1,50 +1,53 @@
-﻿local gameInvite = script:FindFirstAncestor("GameInvite")
-local parent = gameInvite.Parent
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local marketplaceService = game:GetService("MarketplaceService")
-local foundationModule = require(parent.Foundation)
-local iconButton = foundationModule.IconButton
-local iconSize = foundationModule.Enums.IconSize
-local gameInviteRewardsInfoModalModule = require(gameInvite.Components.GameInviteRewardsInfoModal)
-local groupService = game:GetService("GroupService")
-local playersService = game:GetService("Players")
+﻿local GameInvite = script:FindFirstAncestor("GameInvite")
+local Parent = GameInvite.Parent
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local MarketplaceService = game:GetService("MarketplaceService")
+local FoundationModule = require(Parent.Foundation)
+local IconButton = FoundationModule.IconButton
+local IconSize = FoundationModule.Enums.IconSize
+local GameInviteRewardsInfoModalModule = require(GameInvite.Components.GameInviteRewardsInfoModal)
+local GroupService = game:GetService("GroupService")
+local Players = game:GetService("Players")
 
-local var1 = function(p1)
-	-- upvalues: groupService (ref), playersService (ref)
-	local var2 = ""
+local function v10(CreatorId) --[[ Line: 29 ]]
+	-- upvalues: GroupService (copy), Players (copy)
+	local Name = ""
 	
-	if p1 == nil or p1 == 0 then
+	if CreatorId == nil or CreatorId == 0 then
 		return ""
-	elseif game.CreatorType == Enum.CreatorType.Group then
-		local ok, status = pcall(function()
-			-- upvalues: groupService (copy), p1 (ref)
-			return groupService:GetGroupInfoAsync(p1)
+	end
+	if game.CreatorType == Enum.CreatorType.Group then
+		local Success, Result = pcall(function() --[[ Line: 35 ]]
+			-- upvalues: GroupService (upval), CreatorId (copy)
+			return GroupService:GetGroupInfoAsync(CreatorId)
 		end)
 		
-		if not ok then
-			var2 = ""
+		if not Success then
+			Name = ""
 		end
-		if status then
-			var2 = status.Name
+		if Result then
+			Name = Result.Name
 			
-			return var2
+			return Name
 		end
 	elseif game.CreatorType == Enum.CreatorType.User then
-		local _ = nil
-		local ok, status = pcall(function()
-			-- upvalues: playersService (copy), p1 (ref)
-			return playersService:GetNameFromUserIdAsync(p1)
+		local Success1
+		Success1, Name = pcall(function() --[[ Line: 46 ]]
+			-- upvalues: Players (upval), CreatorId (copy)
+			return Players:GetNameFromUserIdAsync(CreatorId)
 		end)
-		var2 = if not ok then "" else status
+		
+		if not Success1 then
+			Name = ""
+		end
 	end
-	return var2
+	return Name
 end
 
-return function(p1)
-	-- upvalues: useLocalization (ref), marketplaceService (ref), var1 (ref), reactModule (ref), gameInviteRewardsInfoModalModule (ref), foundationModule (ref), iconButton (ref), iconSize (ref)
-	local creatorId
-	local t = {
+return function(p1) --[[ Line: 56 ]]
+	-- upvalues: UseLocalizationFunction (copy), MarketplaceService (copy), v10 (copy), ReactModule (copy), GameInviteRewardsInfoModalModule (copy), FoundationModule (copy), IconButton (copy), IconSize (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
 		rewardsModalTitle = "Roblox.ReferralRewards.RewardBannerModalTitle",
 		rewardsDetailsTitle = "Roblox.ReferralRewards.RewardBannerModalRewardDetails",
 		rewardsLimitsTitle = "Roblox.ReferralRewards.AdditionalCreatorTerms",
@@ -52,93 +55,70 @@ return function(p1)
 		rewardsTerms = "Roblox.ReferralRewards.ReferralProgramTerms",
 		rewardsHeader = {
 			"Roblox.ReferralRewards.RewardBannerHeader",
-			rewardName = if p1.rewardMetadata then p1.rewardMetadata.name else ""
+			rewardName = p1.rewardMetadata and p1.rewardMetadata.name or ""
 		},
 		rewardsBody = {
 			"Roblox.ReferralRewards.RewardBannerBody",
-			gameName = if game.PlaceId == nil or game.PlaceId == 0 then "" else marketplaceService:GetProductInfoAsync(game.PlaceId).Name,
-			rewardName = if p1.rewardMetadata then p1.rewardMetadata.name else ""
+			gameName = if game.PlaceId == nil or game.PlaceId == 0 then "" else MarketplaceService:GetProductInfoAsync(game.PlaceId).Name,
+			rewardName = p1.rewardMetadata and p1.rewardMetadata.name or ""
+		},
+		rewardsCreatorSupportText = {
+			"Roblox.ReferralRewards.RewardBannerModalCreatorSupport",
+			creatorName = if game.CreatorId == nil or game.CreatorId == 0 then "" else v10(game.CreatorId) or ""
 		}
-	}
-	local list = { "Roblox.ReferralRewards.RewardBannerModalCreatorSupport" }
+	})
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	
-	if game.CreatorId ~= nil and game.CreatorId ~= 0 then
-		creatorId = var1(game.CreatorId) or ""
-	end
-	local var2
-	list.creatorName = creatorId
-	t.rewardsCreatorSupportText = list
-	local var3 = useLocalization(t)
-	local var4, var5 = reactModule.useState(false)
-	local createElement = reactModule.createElement
-	local fragment = reactModule.Fragment
-	local var6 = nil
-	local t_1 = {}
-	
-	if var4 then
-		var2 = p1.rewardMetadata and (var3 and (reactModule.createElement(gameInviteRewardsInfoModalModule, {
-			title = var3.rewardsModalTitle,
-			rewardDetailsTitle = var3.rewardsDetailsTitle,
+	return ReactModule.createElement(ReactModule.Fragment, nil, {
+		RewardInfoModal = UseStateResult and p1.rewardMetadata and UseLocalizationResult and ReactModule.createElement(GameInviteRewardsInfoModalModule, {
+			title = UseLocalizationResult.rewardsModalTitle,
+			rewardDetailsTitle = UseLocalizationResult.rewardsDetailsTitle,
 			rewardDetailsBody = p1.rewardMetadata.description or "",
-			rewardLimitsTitle = var3.rewardsLimitsTitle,
+			rewardLimitsTitle = UseLocalizationResult.rewardsLimitsTitle,
 			rewardLimitsBody = p1.rewardMetadata.limits or "",
-			rewardCreatorSupportText = var3.rewardsCreatorSupportText,
-			rewardsExpiresText = var3.rewardsExpiresText,
-			rewardsTerms = var3.rewardsTerms,
+			rewardCreatorSupportText = UseLocalizationResult.rewardsCreatorSupportText,
+			rewardsExpiresText = UseLocalizationResult.rewardsExpiresText,
+			rewardsTerms = UseLocalizationResult.rewardsTerms,
 			expiryUtc = p1.rewardMetadata.rewardTimeOffset.endUtc or "",
-			modalOpen = var4,
-			setModalOpen = var5
-		}) or nil))
-	end
-	local image
-	t_1.RewardInfoModal = var2
-	local createElement_1 = reactModule.createElement
-	local view = foundationModule.View
-	local t_2 = {
-		tag = "row padding-x-xxlarge size-full-0 auto-y items-center",
-		layoutOrder = p1.layoutOrder
-	}
-	local t_3 = {}
-	local createElement_2 = reactModule.createElement
-	local view_1 = foundationModule.View
-	local t_4 = {
-		tag = "row size-full-0 auto-y wrap bg-surface-300 gap-medium padding-medium radius-medium align-y-top"
-	}
-	local t_5 = {}
-	
-	if p1.rewardMetadata and p1.rewardMetadata.iconAssetId ~= nil and p1.rewardMetadata.iconAssetId ~= "" then
-		image = reactModule.createElement(foundationModule.Image, {
-			tag = "col shrink size-1200-1200 radius-medium self-end",
-			LayoutOrder = 0,
-			Image = "rbxassetid://" .. p1.rewardMetadata.iconAssetId
-		}) or nil
-	end
-	t_5.RewardIcon = image
-	t_5.RewardTextContainer = reactModule.createElement(foundationModule.View, { tag = "col fill auto-xy items-start", LayoutOrder = 1 }, {
-		Text = reactModule.createElement(foundationModule.Text, {
-			tag = "auto-xy text-title-medium text-wrap text-align-x-left",
-			LayoutOrder = 0,
-			Text = var3.rewardsHeader
-		}),
-		Subtext = reactModule.createElement(foundationModule.Text, {
-			tag = "auto-xy text-body-small text-wrap text-align-x-left",
-			LayoutOrder = 1,
-			Text = var3.rewardsBody
+			modalOpen = UseStateResult,
+			setModalOpen = UseStateResult2
+		}) or nil,
+		RewardBannerContainer = ReactModule.createElement(FoundationModule.View, {
+			tag = "row padding-x-xxlarge size-full-0 auto-y items-center",
+			layoutOrder = p1.layoutOrder
+		}, {
+			RewardBannerCard = ReactModule.createElement(FoundationModule.View, {
+				tag = "row size-full-0 auto-y wrap bg-surface-300 gap-medium padding-medium radius-medium align-y-top"
+			}, {
+				RewardIcon = p1.rewardMetadata and p1.rewardMetadata.iconAssetId ~= nil and p1.rewardMetadata.iconAssetId ~= "" and ReactModule.createElement(FoundationModule.Image, {
+					tag = "col shrink size-1200-1200 radius-medium self-end",
+					LayoutOrder = 0,
+					Image = "rbxassetid://" .. p1.rewardMetadata.iconAssetId
+				}) or nil,
+				RewardTextContainer = ReactModule.createElement(FoundationModule.View, { tag = "col fill auto-xy items-start", LayoutOrder = 1 }, {
+					Text = ReactModule.createElement(FoundationModule.Text, {
+						tag = "auto-xy text-title-medium text-wrap text-align-x-left",
+						LayoutOrder = 0,
+						Text = UseLocalizationResult.rewardsHeader
+					}),
+					Subtext = ReactModule.createElement(FoundationModule.Text, {
+						tag = "auto-xy text-body-small text-wrap text-align-x-left",
+						LayoutOrder = 1,
+						Text = UseLocalizationResult.rewardsBody
+					})
+				}),
+				RewardInfoButtonView = ReactModule.createElement(FoundationModule.View, { tag = "col auto-xy items-end", LayoutOrder = 2 }, {
+					RewardInfoButton = ReactModule.createElement(IconButton, {
+						testId = "RewardInfoButton",
+						icon = "icons/actions/info_small",
+						size = IconSize.Small,
+						onActivated = function() --[[ Line: 140 ]]
+							-- upvalues: UseStateResult2 (copy)
+							UseStateResult2(true)
+						end
+					})
+				})
+			})
 		})
 	})
-	t_5.RewardInfoButtonView = reactModule.createElement(foundationModule.View, { tag = "col auto-xy items-end", LayoutOrder = 2 }, {
-		RewardInfoButton = reactModule.createElement(iconButton, {
-			testId = "RewardInfoButton",
-			icon = "icons/actions/info_small",
-			size = iconSize.Small,
-			onActivated = function()
-				-- upvalues: var5 (ref)
-				var5(true)
-			end
-		})
-	})
-	t_3.RewardBannerCard = createElement_2(view_1, t_4, t_5)
-	t_1.RewardBannerContainer = createElement_1(view, t_2, t_3)
-	
-	return createElement(fragment, var6, t_1)
 end

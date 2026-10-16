@@ -1,22 +1,21 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local _ = require(parent.roduxFriendsTypes)
-local selectRecommendationsForUserIdModule = require(script.Parent.selectRecommendationsForUserId)
-local luauPolyfillModule = require(parent_1.LuauPolyfill)
-local object = luauPolyfillModule.Object
-local array = luauPolyfillModule.Array
+﻿local Parent = script.Parent.Parent
+local _ = require(Parent.roduxFriendsTypes)
+local SelectRecommendationsForUserIdModule = require(script.Parent.selectRecommendationsForUserId)
+local LuauPolyfillModule = require(Parent.Parent.LuauPolyfill)
+local Object = LuauPolyfillModule.Object
+local Array = LuauPolyfillModule.Array
 
-local var1 = function(p1, p2)
+local function v6(p1, p2) --[[ Line: 13 ]]
 	return (p1.rank or 0) - (p2.rank or 0)
 end
 
-return function(p1)
-	-- upvalues: selectRecommendationsForUserIdModule (ref), array (ref), object (ref), var1 (ref)
-	return function(p2)
-		-- upvalues: selectRecommendationsForUserIdModule (copy), p1 (ref), array (copy), object (copy), var1 (copy)
-		return function(p3, p4)
-			-- upvalues: selectRecommendationsForUserIdModule (copy), p1 (copy), p2 (ref), array (copy), object (copy), var1 (copy)
-			return array.map(array.sort(object.values(selectRecommendationsForUserIdModule(p1)(p2)(p3, p4)), var1), function(p5)
+return function(p1) --[[ Line: 19 ]]
+	-- upvalues: SelectRecommendationsForUserIdModule (copy), Array (copy), Object (copy), v6 (copy)
+	return function(p2) --[[ Line: 20 ]]
+		-- upvalues: SelectRecommendationsForUserIdModule (upval), p1 (copy), Array (upval), Object (upval), v6 (upval)
+		return function(p3, p4) --[[ Line: 21 ]]
+			-- upvalues: SelectRecommendationsForUserIdModule (upval), p1 (upval), p2 (copy), Array (upval), Object (upval), v6 (upval)
+			return Array.map(Array.sort(Object.values((SelectRecommendationsForUserIdModule(p1)(p2)(p3, p4))), v6), function(p5) --[[ Line: 28 ]]
 				return p5.id
 			end)
 		end

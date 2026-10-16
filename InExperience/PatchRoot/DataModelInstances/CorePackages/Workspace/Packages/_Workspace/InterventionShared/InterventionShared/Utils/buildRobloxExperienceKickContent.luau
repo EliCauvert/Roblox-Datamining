@@ -1,4 +1,4 @@
-﻿local abuseVectorModule = require(script:FindFirstAncestor("InterventionShared").Parent.UniversalFeatureRestrictions.AbuseVector)
+﻿local AbuseVectorModule = require(script:FindFirstAncestor("InterventionShared").Parent.UniversalFeatureRestrictions.AbuseVector)
 local list = {
 	{
 		unitInSeconds = 86400,
@@ -17,7 +17,7 @@ local list = {
 	}
 }
 
-local function parseErrorDetails(p1)
+local function parseErrorDetails(p1) --[[ Line: 37 ]]
 	return if p1 == nil then {
 		beginTimestamp = "",
 		endTimestamp = "",
@@ -31,7 +31,7 @@ local function parseErrorDetails(p1)
 	}
 end
 
-local function buildModerationDetail(p1, p2)
+local function buildModerationDetail(MessageToUser, p1) --[[ Line: 55 ]]
 	return {
 		interventionId = "",
 		punishedUserId = 0,
@@ -44,48 +44,52 @@ local function buildModerationDetail(p1, p2)
 		violation = nil,
 		acknowledgeable = false,
 		showUGCAvatarGuidelinesLink = false,
-		messageToUser = p1,
-		beginDate = p2.beginTimestamp,
-		endDate = p2.endTimestamp,
-		duration = p2.durationSeconds,
-		labelTranslationKey = p2.labelTranslationKey,
+		messageToUser = MessageToUser,
+		beginDate = p1.beginTimestamp,
+		endDate = p1.endTimestamp,
+		duration = p1.durationSeconds,
+		labelTranslationKey = p1.labelTranslationKey,
 		badUtterances = {},
 		context = {}
 	}
 end
 
-local function pickTitleAndBody(p1, p2)
-	-- upvalues: list (ref)
-	if p2 == nil or p2 <= 0 then
+local function pickTitleAndBody(Callback, DurationSeconds: number) --[[ Line: 79 ]]
+	-- upvalues: list (copy)
+	if DurationSeconds == nil or DurationSeconds <= 0 then
 		return {
-			title = p1("Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Banned"),
-			body = p1("Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogBody.Banned")
+			title = Callback("Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Banned"),
+			body = Callback("Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogBody.Banned")
 		}
 	end
-	for i, v in list do
-		if v.unitInSeconds <= p2 then
-			local ceiled = math.ceil(p2 / v.unitInSeconds)
+	for _, value in list do
+		if value.unitInSeconds <= DurationSeconds then
+			local Ceiled = math.ceil(DurationSeconds / value.unitInSeconds)
 			
 			return {
-				title = p1(if ceiled == 1 then v.singularKey else v.pluralKey, { number = ceiled }),
-				body = p1("Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogBody.Suspended")
+				title = Callback(if Ceiled == 1 then value.singularKey else value.pluralKey, { number = Ceiled }),
+				body = Callback("Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogBody.Suspended")
 			}
 		end
 	end
 	return {
-		title = p1(list[3].singularKey, { number = 1 }),
-		body = p1("Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogBody.Suspended")
+		title = Callback(list[3].singularKey, { number = 1 }),
+		body = Callback("Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogBody.Suspended")
 	}
 end
 
-return function(p3, p4, p5)
-	-- upvalues: parseErrorDetails (ref), buildModerationDetail (ref), pickTitleAndBody (ref), abuseVectorModule (ref)
-	local var1 = parseErrorDetails(p4)
-	local var2 = pickTitleAndBody(p5, var1.durationSeconds)
+return function(MessageToUser, p1, p2) --[[ Line: 119 | Named "buildRobloxExperienceKickContent" ]]
+	-- upvalues: parseErrorDetails (copy), buildModerationDetail (copy), pickTitleAndBody (copy), AbuseVectorModule (copy)
+	local ParseErrorDetailsResult = parseErrorDetails(p1)
+	local ModerationDetail = buildModerationDetail(MessageToUser, ParseErrorDetailsResult)
+	local PickTitleAndBodyResult = pickTitleAndBody(p2, ParseErrorDetailsResult.durationSeconds)
 	
 	return {
-		abuseVector = abuseVectorModule.RobloxExperienceKick,
-		moderationDetail = buildModerationDetail(p3, var1),
-		options = { titleOverride = var2.title, bodyOverride = var2.body }
+		abuseVector = AbuseVectorModule.RobloxExperienceKick,
+		moderationDetail = ModerationDetail,
+		options = {
+			titleOverride = PickTitleAndBodyResult.title,
+			bodyOverride = PickTitleAndBodyResult.body
+		}
 	}
 end

@@ -1,7 +1,7 @@
-﻿local tModule = require(game:GetService("CorePackages").Packages.t)
+﻿local TModule = require(game:GetService("CorePackages").Packages.t)
 
-return tModule.union(tModule.instanceIsA("Player"), tModule.interface({
-	UserId = tModule.integer,
-	Name = tModule.string,
-	DisplayName = tModule.string
+return TModule.union(TModule.instanceIsA("Player"), TModule.interface({
+	UserId = TModule.integer,
+	Name = TModule.string,
+	DisplayName = TModule.string
 }))

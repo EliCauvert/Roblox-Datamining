@@ -1,68 +1,68 @@
-﻿local currencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
-local parent = currencyTransfers.Parent
-local reactModule = require(parent.React)
-local transferLocalizationKeysModule = require(currencyTransfers.Localization.TransferLocalizationKeys)
-local transferLocaleFormatModule = require(currencyTransfers.Localization.transferLocaleFormat)
-local signalsReactModule = require(parent.SignalsReact)
-local localizationService = game:GetService("LocalizationService")
-local foundationModule = require(parent.Foundation)
-local snackbar = foundationModule.Snackbar
-local enums = foundationModule.Enums
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local handleReceiveCompleteModule = require(currencyTransfers.Actions.Receive.handleReceiveComplete)
-local useTransferStoreModule = require(currencyTransfers.Hooks.useTransferStore)
-local formatNumberModule = require(currencyTransfers.Utils.formatNumber)
+﻿local CurrencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
+local Parent = CurrencyTransfers.Parent
+local ReactModule = require(Parent.React)
+local TransferLocalizationKeysModule = require(CurrencyTransfers.Localization.TransferLocalizationKeys)
+local TransferLocaleFormatModule = require(CurrencyTransfers.Localization.transferLocaleFormat)
+local SignalsReactModule = require(Parent.SignalsReact)
+local LocalizationService = game:GetService("LocalizationService")
+local FoundationModule = require(Parent.Foundation)
+local Snackbar = FoundationModule.Snackbar
+local Enums = FoundationModule.Enums
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local HandleReceiveCompleteModule = require(CurrencyTransfers.Actions.Receive.handleReceiveComplete)
+local UseTransferStoreModule = require(CurrencyTransfers.Hooks.useTransferStore)
+local FormatNumberModule = require(CurrencyTransfers.Utils.formatNumber)
 
-return function(_)
-	-- upvalues: useLocalization (ref), transferLocalizationKeysModule (ref), useTransferStoreModule (ref), signalsReactModule (ref), formatNumberModule (ref), localizationService (ref), reactModule (ref), transferLocaleFormatModule (ref), handleReceiveCompleteModule (ref), snackbar (ref), enums (ref)
-	local var1 = useLocalization(transferLocalizationKeysModule.Presets.ReceiveRobuxSuccessToast)
-	local var2 = useTransferStoreModule()
-	local var3 = signalsReactModule.useSignalState(var2.getRobuxTransfer)
-	local var4 = signalsReactModule.useSignalState(var2.getIsAlreadyAccepted)
-	local var5 = formatNumberModule(localizationService.RobloxLocaleId, if var3 then var3.receivingAmount or var3.transferAmount else 0)
-	local var6 = reactModule.useMemo(function()
-		-- upvalues: var4 (ref), var1 (ref), transferLocaleFormatModule (copy), var5 (ref)
-		return if var4 then var1.AlreadyAcceptedNotification else transferLocaleFormatModule.substituteAmount(var1.SuccessNotification, tostring(var5))
+return function(_) --[[ Line: 34 | Named "ReceiveRobuxSuccessToast" ]]
+	-- upvalues: UseLocalizationFunction (copy), TransferLocalizationKeysModule (copy), UseTransferStoreModule (copy), SignalsReactModule (copy), FormatNumberModule (copy), LocalizationService (copy), ReactModule (copy), TransferLocaleFormatModule (copy), HandleReceiveCompleteModule (copy), Snackbar (copy), Enums (copy)
+	local UseLocalizationResult = UseLocalizationFunction(TransferLocalizationKeysModule.Presets.ReceiveRobuxSuccessToast)
+	local UseTransferStoreModuleResult = UseTransferStoreModule()
+	local UseSignalStateResult = SignalsReactModule.useSignalState(UseTransferStoreModuleResult.getRobuxTransfer)
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(UseTransferStoreModuleResult.getIsAlreadyAccepted)
+	local FormatNumberModuleResult = FormatNumberModule(LocalizationService.RobloxLocaleId, if UseSignalStateResult then UseSignalStateResult.receivingAmount or UseSignalStateResult.transferAmount else 0)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 44 ]]
+		-- upvalues: UseSignalStateResult1 (copy), UseLocalizationResult (copy), TransferLocaleFormatModule (upval), FormatNumberModuleResult (copy)
+		return if UseSignalStateResult1 then UseLocalizationResult.AlreadyAcceptedNotification else TransferLocaleFormatModule.substituteAmount(UseLocalizationResult.SuccessNotification, (tostring(FormatNumberModuleResult)))
 	end, {
-		var4,
-		var5,
-		var1.SuccessNotification,
-		var1.AlreadyAcceptedNotification
+		UseSignalStateResult1,
+		FormatNumberModuleResult,
+		UseLocalizationResult.SuccessNotification,
+		UseLocalizationResult.AlreadyAcceptedNotification
 	})
-	local var7 = reactModule.useRef(nil)
-	reactModule.useEffect(function()
-		-- upvalues: var7 (ref), handleReceiveCompleteModule (copy), var2 (ref)
-		if var7.current then
-			task.cancel(var7.current)
+	local UseRefResult = ReactModule.useRef(nil)
+	ReactModule.useEffect(function() --[[ Line: 55 ]]
+		-- upvalues: UseRefResult (copy), HandleReceiveCompleteModule (upval), UseTransferStoreModuleResult (copy)
+		if UseRefResult.current then
+			task.cancel(UseRefResult.current)
 		end
-		var7.current = task.delay(5, function()
-			-- upvalues: handleReceiveCompleteModule (copy), var2 (copy)
-			handleReceiveCompleteModule(var2)
+		UseRefResult.current = task.delay(5, function() --[[ Line: 62 ]]
+			-- upvalues: HandleReceiveCompleteModule (upval), UseTransferStoreModuleResult (upval)
+			HandleReceiveCompleteModule(UseTransferStoreModuleResult)
 		end)
 		
-		return function()
-			-- upvalues: var7 (copy)
-			if var7.current then
-				task.cancel(var7.current)
-				var7.current = nil
+		return function() --[[ Line: 68 ]]
+			-- upvalues: UseRefResult (upval)
+			if UseRefResult.current then
+				task.cancel(UseRefResult.current)
+				UseRefResult.current = nil
 			end
 		end
 	end, {})
 	
-	return reactModule.createElement(snackbar, {
+	return ReactModule.createElement(Snackbar, {
 		ZIndex = 100,
-		title = var6,
-		icon = if not var4 then {
-			name = enums.IconName.CircleCheck,
-			variant = enums.IconVariant.Filled
-		} else nil,
+		title = UseMemoResult,
+		icon = if UseSignalStateResult1 then nil else {
+			name = Enums.IconName.CircleCheck,
+			variant = Enums.IconVariant.Filled
+		},
 		Position = UDim2.new(0.5, 0, 0, 50),
 		AnchorPoint = Vector2.new(0.5, 0),
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
-		onClose = function()
-			-- upvalues: handleReceiveCompleteModule (copy), var2 (ref)
-			handleReceiveCompleteModule(var2)
+		onClose = function() --[[ Line: 89 ]]
+			-- upvalues: HandleReceiveCompleteModule (upval), UseTransferStoreModuleResult (copy)
+			HandleReceiveCompleteModule(UseTransferStoreModuleResult)
 		end
 	})
 end

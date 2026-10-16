@@ -1,8 +1,8 @@
-﻿local inExperienceOffers = script:FindFirstAncestor("InExperienceOffers")
-local signalsReactModule = require(inExperienceOffers.Parent.SignalsReact)
-local getOffersStoreModule = require(inExperienceOffers.Stores.GetOffersStore)
+﻿local InExperienceOffers = script:FindFirstAncestor("InExperienceOffers")
+local SignalsReactModule = require(InExperienceOffers.Parent.SignalsReact)
+local GetOffersStoreModule = require(InExperienceOffers.Stores.GetOffersStore)
 
-return function()
-	-- upvalues: signalsReactModule (ref), getOffersStoreModule (ref)
-	return signalsReactModule.useSignalState(getOffersStoreModule(false).getShopHasItems)
+return function() --[[ Line: 12 | Named "useShopHasItems" ]]
+	-- upvalues: SignalsReactModule (copy), GetOffersStoreModule (copy)
+	return SignalsReactModule.useSignalState(GetOffersStoreModule(false).getShopHasItems)
 end

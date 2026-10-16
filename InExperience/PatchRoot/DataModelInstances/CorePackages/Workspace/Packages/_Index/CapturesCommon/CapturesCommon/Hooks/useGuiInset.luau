@@ -1,46 +1,46 @@
-﻿local parent = script.Parent.Parent.Parent
-local guiService = game:GetService("GuiService")
-local userInputService = game:GetService("UserInputService")
-local reactModule = require(parent.React)
-local useEventConnection = require(parent.ReactUtils).useEventConnection
+﻿local Parent = script.Parent.Parent.Parent
+local GuiService = game:GetService("GuiService")
+local UserInputService = game:GetService("UserInputService")
+local ReactModule = require(Parent.React)
+local UseEventConnectionFunction = require(Parent.ReactUtils).useEventConnection
 
-local _ = function()
-	-- upvalues: guiService (ref)
-	local guiInset, guiInset_1 = guiService:GetGuiInset()
+local function _() --[[ Line: 12 ]]
+	-- upvalues: GuiService (copy)
+	local GuiInset, GuiInset2 = GuiService:GetGuiInset()
 	
 	return {
-		bottom = guiInset_1.Y,
-		left = guiInset.X,
-		right = guiInset_1.X,
-		top = guiInset.Y
+		bottom = GuiInset2.Y,
+		left = GuiInset.X,
+		right = GuiInset2.X,
+		top = GuiInset.Y
 	}
 end
 
-return function()
-	-- upvalues: reactModule (ref), guiService (ref), useEventConnection (ref), userInputService (ref)
-	local useState = reactModule.useState
-	local guiInset, guiInset_1 = guiService:GetGuiInset()
-	useState, var7 = useState({
-		bottom = guiInset_1.Y,
-		left = guiInset.X,
-		right = guiInset_1.X,
-		top = guiInset.Y
+return function() --[[ Line: 22 ]]
+	-- upvalues: ReactModule (copy), GuiService (copy), UseEventConnectionFunction (copy), UserInputService (copy)
+	local UseStateFunction = ReactModule.useState
+	local GuiInset, GuiInset2 = GuiService:GetGuiInset()
+	local UseStateResult, UseStateResult2 = UseStateFunction({
+		bottom = GuiInset2.Y,
+		left = GuiInset.X,
+		right = GuiInset2.X,
+		top = GuiInset.Y
 	})
 	
-	local var1 = function()
-		-- upvalues: var7 (ref), guiService (copy)
-		local guiInset, guiInset_1 = guiService:GetGuiInset()
-		var7({
-			bottom = guiInset_1.Y,
-			left = guiInset.X,
-			right = guiInset_1.X,
-			top = guiInset.Y
+	local function v11() --[[ Line: 25 ]]
+		-- upvalues: UseStateResult2 (copy), GuiService (upval)
+		local GuiInset, GuiInset2 = GuiService:GetGuiInset()
+		UseStateResult2({
+			bottom = GuiInset2.Y,
+			left = GuiInset.X,
+			right = GuiInset2.X,
+			top = GuiInset.Y
 		})
 	end
 	
-	useEventConnection(guiService.SafeZoneOffsetsChanged, var1)
-	useEventConnection(userInputService:GetPropertyChangedSignal("BottomBarSize"), var1)
-	useEventConnection(userInputService:GetPropertyChangedSignal("RightBarSize"), var1)
+	UseEventConnectionFunction(GuiService.SafeZoneOffsetsChanged, v11)
+	UseEventConnectionFunction(UserInputService:GetPropertyChangedSignal("BottomBarSize"), v11)
+	UseEventConnectionFunction(UserInputService:GetPropertyChangedSignal("RightBarSize"), v11)
 	
-	return useState
+	return UseStateResult
 end

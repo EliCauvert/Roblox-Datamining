@@ -1,201 +1,199 @@
-﻿local httpService = game:GetService("HttpService")
-local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local httpClientModule = require(parent.HttpClient)
-local _ = require(parent.MomentsTypes)
-local _ = require(dataHydration.Moments.MomentsStoreTypes)
-local isCanonicalNonzeroUuidModule = require(dataHydration.Moments.Util.isCanonicalNonzeroUuid)
-local commentFixturesModule = require(script.Parent.CommentFixtures)
-local mockCommentsPagesModule = require(script.Parent.MockCommentsPages)
+﻿local HttpService = game:GetService("HttpService")
+local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local HttpClientModule = require(Parent.HttpClient)
+local _ = require(Parent.MomentsTypes)
+local _ = require(DataHydration.Moments.MomentsStoreTypes)
+local IsCanonicalNonzeroUuidModule = require(DataHydration.Moments.Util.isCanonicalNonzeroUuid)
+local CommentFixturesModule = require(script.Parent.CommentFixtures)
+local MockCommentsPagesModule = require(script.Parent.MockCommentsPages)
 
-local function parseQuery(p1)
+local function parseQuery(Text: string) --[[ Line: 39 ]]
 	local t = {}
-	local matchIndex = string.find(p1, "?", 1, true)
+	local FoundAt: number? = string.find(Text, "?", 1, true)
 	
-	if matchIndex == nil then
+	if FoundAt == nil then
 		return t
 	end
-	for i in string.gmatch(string.sub(p1, matchIndex + 1), "[^&]+") do
-		local match, match_1 = string.match(i, "([^=]+)=?(.*)")
+	for i in string.gmatch(string.sub(Text, FoundAt + 1), "[^&]+") do
+		local Match, Match2 = string.match(i, "([^=]+)=?(.*)")
 		
-		if match ~= nil then
-			t[match] = match_1 or ""
+		if Match ~= nil then
+			t[Match] = Match2 or ""
 		end
 	end
 	return t
 end
 
-local function _(p2)
-	return string.match(p2, "/moments/([^/]+)/comments") or "feed-1"
+local function _(Text: string): string --[[ Line: 54 | Named "feedItemIdFromCommentsUrl" ]]
+	return string.match(Text, "/moments/([^/]+)/comments") or "feed-1"
 end
 
-local _ = function(p2)
-	return string.match(p2, "/comments/([^/?]+)$")
+local _ = function(Text: string): string --[[ Line: 59 | Named "commentIdFromDeleteUrl" ]]
+	return string.match(Text, "/comments/([^/?]+)$")
 end
 
-local _ = function(p2)
-	return string.match(p2, "/moments/([^/]+)/comments/([^/]+)/reactions$")
+local _ = function(Text: string): string --[[ Line: 63 | Named "reactionIdsFromUrl" ]]
+	return string.match(Text, "/moments/([^/]+)/comments/([^/]+)/reactions$")
 end
 
-local _ = function(p2, p3)
-	return `{p2}:{p3}`
+local _ = function(p1, p2): string --[[ Line: 67 | Named "commentKey" ]]
+	return `{p1}:{p2}`
 end
 
-local function decodeBody(p2)
-	-- upvalues: httpService (ref)
-	if type(p2) ~= "string" or p2 == "" then
+local function decodeBody(Body) --[[ Line: 71 ]]
+	-- upvalues: HttpService (copy)
+	if type(Body) == "string" and Body ~= "" then
+		local Success, Result = pcall(HttpService.JSONDecode, HttpService, Body)
+		
+		return if Success then Result else {}
+	else
 		return {}
 	end
-	local ok, status = pcall(httpService.JSONDecode, httpService, p2)
-	
-	return if ok then status else {}
 end
 
-local _ = function(p2, p3, p4)
-	-- upvalues: httpService (ref)
+local _ = function(StatusCode, Input, Headers) --[[ Line: 82 | Named "json" ]]
+	-- upvalues: HttpService (copy)
 	return {
-		statusCode = p2,
-		headers = p4,
-		responseBody = if p3 == nil then nil else httpService:JSONEncode(p3)
+		statusCode = StatusCode,
+		headers = Headers,
+		responseBody = if Input == nil then nil else HttpService:JSONEncode(Input)
 	}
 end
 
-local function toApiComment(p2)
+local function toApiComment(Comment) --[[ Line: 90 ]]
 	return {
-		commentId = p2.commentId,
-		feedItemId = p2.feedItemId,
-		authorUserId = if p2.author ~= nil then nil else p2.author.userId,
-		text = p2.text,
-		createdAt = p2.createdAt,
-		isAuthoredByViewer = p2.isAuthoredByViewer,
-		reactions = p2.reactions
+		commentId = Comment.commentId,
+		feedItemId = Comment.feedItemId,
+		authorUserId = if Comment.author == nil then nil else Comment.author.userId,
+		text = Comment.text,
+		createdAt = Comment.createdAt,
+		isAuthoredByViewer = Comment.isAuthoredByViewer,
+		reactions = Comment.reactions
 	}
 end
 
-local function cloneReactions(p2)
-	local list = table.create(#p2.counts)
+local function cloneReactions(p1) --[[ Line: 102 ]]
+	local Buffer = table.create(#p1.counts)
 	
-	for i, v in p2.counts do
-		table.insert(list, table.clone(v))
+	for _, count in p1.counts do
+		table.insert(Buffer, table.clone(count))
 	end
 	return {
-		counts = list,
-		userReaction = if p2.userReaction ~= nil then nil else table.clone(p2.userReaction)
+		counts = Buffer,
+		userReaction = if p1.userReaction == nil then nil else table.clone(p1.userReaction)
 	}
 end
 
-local function scheduleDelay(p3, p4)
-	local delayedThread = task.delay(p3, p4)
+local function scheduleDelay(Delay, p2) --[[ Line: 113 ]]
+	local DelayedThread = task.delay(Delay, p2)
 	
-	return function()
-		-- upvalues: delayedThread (ref)
-		if coroutine.status(delayedThread) == "suspended" then
-			task.cancel(delayedThread)
+	return function() --[[ Line: 115 ]]
+		-- upvalues: DelayedThread (copy)
+		if coroutine.status(DelayedThread) == "suspended" then
+			task.cancel(DelayedThread)
 		end
 	end
 end
 
-return function(p3)
-	-- upvalues: commentFixturesModule (ref), mockCommentsPagesModule (ref), toApiComment (ref), cloneReactions (ref), httpClientModule (ref), decodeBody (ref), isCanonicalNonzeroUuidModule (ref), httpService (ref), parseQuery (ref), scheduleDelay (ref)
-	p3 = p3 or {}
-	local unixTimestamp = DateTime.now().UnixTimestamp
+return function(p2) --[[ Line: 122 | Named "createCommentsMockNetwork" ]]
+	-- upvalues: CommentFixturesModule (copy), MockCommentsPagesModule (copy), toApiComment (copy), cloneReactions (copy), HttpClientModule (copy), decodeBody (copy), IsCanonicalNonzeroUuidModule (copy), HttpService (copy), parseQuery (copy), scheduleDelay (copy)
+	local P9 = p2 or {}
+	local UnixTimestamp = DateTime.now().UnixTimestamp
+	local Comments = {}
 	local t = {}
-	local t_1 = {}
-	local t_2 = {}
-	local t_3 = {}
-	local t_4 = {}
+	local t1 = {}
+	local t2 = {}
+	local t3 = {}
 	
-	local function _(p4)
-		-- upvalues: t_3 (ref)
-		local feedItemId = t_3[p4.feedItemId]
+	local function _(ApiComment) --[[ Line: 131 | Named "indexVisibleComment" ]]
+		-- upvalues: t2 (copy)
+		local Entry = t2[ApiComment.feedItemId]
 		
-		if feedItemId == nil then
-			feedItemId = {}
-			t_3[p4.feedItemId] = feedItemId
+		if Entry == nil then
+			Entry = {}
+			t2[ApiComment.feedItemId] = Entry
 		end
-		feedItemId[p4.commentId] = p4
+		Entry[ApiComment.commentId] = ApiComment
 	end
 	
-	local _ = function(p4, p5)
-		-- upvalues: t_3 (ref), t_2 (ref)
-		local var1 = t_3[p4]
+	local _ = function(p3, p4) --[[ Line: 140 | Named "visibleComment" ]]
+		-- upvalues: t2 (copy), t1 (copy)
+		local Entry = t2[p3]
 		
-		return if var1 == nil or t_2[`{p4}:{p5}`] then nil else var1[p5]
+		return if Entry == nil or t1[`{p3}:{p4}`] then nil else Entry[p4]
 	end
 	
-	for i, v in {
-		commentFixturesModule.REACTION_IDS.feedItemId,
-		commentFixturesModule.REACTION_IDS.otherFeedItemId
+	for _, value in {
+		CommentFixturesModule.REACTION_IDS.feedItemId,
+		CommentFixturesModule.REACTION_IDS.otherFeedItemId
 	} do
-		for i_1, v_1 in mockCommentsPagesModule.reactionPage(v, unixTimestamp).comments do
-			local feedItemId = t_3[v_1.feedItemId]
+		for _, comment in MockCommentsPagesModule.reactionPage(value, UnixTimestamp).comments do
+			local Entry = t2[comment.feedItemId]
 			
-			if feedItemId == nil then
-				feedItemId = {}
-				t_3[v_1.feedItemId] = feedItemId
+			if Entry == nil then
+				Entry = {}
+				t2[comment.feedItemId] = Entry
 			end
-			feedItemId[v_1.commentId] = v_1
+			Entry[comment.commentId] = comment
 		end
 	end
-	local function pageWithMutations(p4, p5, p6)
-		-- upvalues: t_1 (ref), t_2 (ref), t_3 (ref), toApiComment (copy), t_4 (ref), p3 (ref), cloneReactions (copy)
-		local t = {}
+	local function pageWithMutations(Match, Cursor, PageForCursorResult) --[[ Line: 159 ]]
+		-- upvalues: t (copy), t1 (copy), t2 (copy), toApiComment (upval), t3 (copy), P9 (copy), cloneReactions (upval)
+		local List = {}
 		
-		if p5 == nil or p5 == "" then
-			local var1 = t_1[p4]
+		if Cursor == nil or Cursor == "" then
+			local Entry = t[Match]
 			
-			if var1 ~= nil then
-				for i, v in var1 do
-					if not t_2[`{v.feedItemId}:{v.commentId}`] then
-						table.insert(t, v)
+			if Entry ~= nil then
+				for _, ApiComment in Entry do
+					if not t1[`{ApiComment.feedItemId}:{ApiComment.commentId}`] then
+						table.insert(List, ApiComment)
 					end
 				end
 			end
 		end
-		for i, v in p6.comments do
-			if not t_2[`{v.feedItemId}:{v.commentId}`] then
-				table.insert(t, v)
+		for _, comment in PageForCursorResult.comments do
+			if not t1[`{comment.feedItemId}:{comment.commentId}`] then
+				table.insert(List, comment)
 			end
 		end
-		local t_5 = {}
+		local Comments = {}
 		
-		for i_1, v_1 in t do
-			local feedItemId = t_3[v_1.feedItemId]
+		for _, ApiComment1 in List do
+			local Entry = t2[ApiComment1.feedItemId]
 			
-			if feedItemId == nil then
-				feedItemId = {}
-				t_3[v_1.feedItemId] = feedItemId
+			if Entry == nil then
+				Entry = {}
+				t2[ApiComment1.feedItemId] = Entry
 			end
-			feedItemId[v_1.commentId] = v_1
-			local var2 = toApiComment(v_1)
-			local feedItemId_1 = t_4[`{v_1.feedItemId}:{v_1.commentId}`]
+			Entry[ApiComment1.commentId] = ApiComment1
+			local ApiComment2 = toApiComment(ApiComment1)
+			local Entry1 = t3[`{ApiComment1.feedItemId}:{ApiComment1.commentId}`] or (P9.reactionProjectionsByCommentId or {})[ApiComment1.commentId]
 			
-			if not feedItemId_1 then
-				feedItemId_1 = (p3.reactionProjectionsByCommentId or {})[v_1.commentId]
+			if Entry1 ~= nil then
+				ApiComment2.reactions = cloneReactions(Entry1)
 			end
-			if feedItemId_1 ~= nil then
-				var2.reactions = cloneReactions(feedItemId_1)
-			end
-			table.insert(t_5, var2)
+			table.insert(Comments, ApiComment2)
 		end
 		return {
-			comments = t_5,
-			nextCursor = p6.nextCursor,
-			hasMore = p6.hasMore
+			comments = Comments,
+			nextCursor = PageForCursorResult.nextCursor,
+			hasMore = PageForCursorResult.hasMore
 		}
 	end
 	
-	local var3 = httpClientModule.createMockNetwork({
+	local MockNetwork = HttpClientModule.createMockNetwork({
 		routes = {
 			{
 				pattern = "/reactions",
-				respond = function(p7)
-					-- upvalues: decodeBody (copy), isCanonicalNonzeroUuidModule (copy), httpService (copy), t_3 (ref), t_2 (ref), p3 (ref), commentFixturesModule (copy), t_4 (ref), cloneReactions (copy)
-					local match, match_1 = string.match(p7.url, "/moments/([^/]+)/comments/([^/]+)/reactions$")
-					local var4 = decodeBody(p7.body)
+				respond = function(p3) --[[ Line: 202 ]]
+					-- upvalues: decodeBody (upval), IsCanonicalNonzeroUuidModule (upval), HttpService (upval), t2 (copy), t1 (copy), P9 (copy), CommentFixturesModule (upval), t3 (copy), cloneReactions (upval)
+					local Match, Match2 = string.match(p3.url, "/moments/([^/]+)/comments/([^/]+)/reactions$")
+					local DecodeBodyResult = decodeBody(p3.body)
 					
-					if match == nil or match_1 == nil or (not isCanonicalNonzeroUuidModule(match) or not isCanonicalNonzeroUuidModule(match_1)) or (var4.reactionType ~= "thumbsup" or not isCanonicalNonzeroUuidModule(var4.emoteId)) then
-						local t = {
+					if Match == nil or Match2 == nil or not IsCanonicalNonzeroUuidModule(Match) or not IsCanonicalNonzeroUuidModule(Match2) or DecodeBodyResult.reactionType ~= "thumbsup" or not IsCanonicalNonzeroUuidModule(DecodeBodyResult.emoteId) then
+						local config = {
 							errorCode = "InvalidRequest",
 							message = "invalid reaction request"
 						}
@@ -203,14 +201,14 @@ return function(p3)
 						return {
 							statusCode = 400,
 							headers = nil,
-							responseBody = if t == nil then nil else httpService:JSONEncode(t)
+							responseBody = if config == nil then nil else HttpService:JSONEncode(config)
 						}
 					end
-					match_1 = t_3[match]
-					match = if match_1 == nil or t_2[`{match}:{match_1}`] then nil else match_1[match_1]
+					local Entry = t2[Match]
+					local Entry1 = if Entry == nil or t1[`{Match}:{Match2}`] then nil else Entry[Match2]
 					
-					if match == nil then
-						local t = {
+					if Entry1 == nil then
+						local config = {
 							errorCode = "CommentNotFound",
 							message = "comment was not found for the requested moment"
 						}
@@ -218,38 +216,39 @@ return function(p3)
 						return {
 							statusCode = 404,
 							headers = nil,
-							responseBody = if t == nil then nil else httpService:JSONEncode(t)
+							responseBody = if config == nil then nil else HttpService:JSONEncode(config)
 						}
 					end
-					match_1 = p3.reactionOutcome or "success"
+					local ReactionOutcome = P9.reactionOutcome or "success"
 					
-					if match_1 == "timeout" then
+					if ReactionOutcome == "timeout" then
 						error("createCommentsMockNetwork: simulated reaction timeout")
 					end
-					if match_1 == "ViewerNotEligibleToReact" then
-						local viewerNotEligibleToReact = commentFixturesModule.ERRORS.ViewerNotEligibleToReact
+					if ReactionOutcome == "ViewerNotEligibleToReact" then
+						local ViewerNotEligibleToReact = CommentFixturesModule.ERRORS.ViewerNotEligibleToReact
 						
 						return {
 							statusCode = 403,
 							headers = nil,
-							responseBody = if viewerNotEligibleToReact == nil then nil else httpService:JSONEncode(viewerNotEligibleToReact)
+							responseBody = if ViewerNotEligibleToReact == nil then nil else HttpService:JSONEncode(ViewerNotEligibleToReact)
 						}
-					elseif match_1 == "RateLimited" then
-						local rateLimited = commentFixturesModule.ERRORS.RateLimited
+					end
+					if ReactionOutcome == "RateLimited" then
+						local RateLimited = CommentFixturesModule.ERRORS.RateLimited
 						
 						return {
 							statusCode = 429,
-							headers = { ["retry-after"] = p3.reactionRetryAfter or "10" },
-							responseBody = if rateLimited == nil then nil else httpService:JSONEncode(rateLimited)
+							headers = { ["retry-after"] = P9.reactionRetryAfter or "10" },
+							responseBody = if RateLimited == nil then nil else HttpService:JSONEncode(RateLimited)
 						}
 					end
-					local var5 = `{match}:{match_1}`
-					local var6 = cloneReactions(t_4[var5] or ((p3.reactionProjectionsByCommentId or {})[match_1] or (match.reactions or { counts = {} })))
-					var6 = if var6.userReaction ~= nil then nil else var6.userReaction.emoteId
+					local Text: string = `{Match}:{Match2}`
+					local CloneReactionsResult = cloneReactions(t3[Text] or ((P9.reactionProjectionsByCommentId or {})[Match2] or (Entry1.reactions or { counts = {} })))
+					local EmoteId = if CloneReactionsResult.userReaction == nil then nil else CloneReactionsResult.userReaction.emoteId
 					
-					if p7.method == "PUT" then
-						if var6 ~= nil and var6 ~= var4.emoteId then
-							local t = {
+					if p3.method == "PUT" then
+						if EmoteId ~= nil and EmoteId ~= DecodeBodyResult.emoteId then
+							local config = {
 								errorCode = "ReactionTypeConflict",
 								message = "a different reaction is selected"
 							}
@@ -257,219 +256,231 @@ return function(p3)
 							return {
 								statusCode = 409,
 								headers = nil,
-								responseBody = if t == nil then nil else httpService:JSONEncode(t)
+								responseBody = if config == nil then nil else HttpService:JSONEncode(config)
 							}
-						elseif var6 == nil then
-							local var7 = false
+						end
+						if EmoteId == nil then
+							local Flag = false
 							
-							for i, v in var6.counts do
-								if v.emoteId == var4.emoteId then
-									v.count += 1
-									var7 = true
+							for _, count1 in CloneReactionsResult.counts do
+								if count1.emoteId == DecodeBodyResult.emoteId then
+									count1.count += 1
+									Flag = true
 								end
 							end
-							if not var7 then
-								table.insert(var6.counts, { count = 1, emoteId = var4.emoteId })
+							if not Flag then
+								table.insert(CloneReactionsResult.counts, { count = 1, emoteId = DecodeBodyResult.emoteId })
 							end
-							var6.userReaction = { emoteId = var4.emoteId }
+							CloneReactionsResult.userReaction = { emoteId = DecodeBodyResult.emoteId }
 						end
-					elseif p7.method ~= "DELETE" then
-						local t = {
-							errorCode = "CommentsUnavailable",
-							message = `unsupported reaction method {p7.method}`
-						}
-						
-						return {
-							statusCode = 405,
-							headers = nil,
-							responseBody = if t == nil then nil else httpService:JSONEncode(t)
-						}
-					elseif var6 == var4.emoteId then
-						for i, v in var6.counts do
-							if v.emoteId == var4.emoteId then
-								v.count = math.max(0, v.count - 1)
+					else
+						if p3.method ~= "DELETE" then
+							local config = {
+								errorCode = "CommentsUnavailable",
+								message = `unsupported reaction method {p3.method}`
+							}
+							
+							return {
+								statusCode = 405,
+								headers = nil,
+								responseBody = if config == nil then nil else HttpService:JSONEncode(config)
+							}
+						end
+						if EmoteId == DecodeBodyResult.emoteId then
+							for _, count in CloneReactionsResult.counts do
+								if count.emoteId == DecodeBodyResult.emoteId then
+									count.count = math.max(0, count.count - 1)
+								end
 							end
+							CloneReactionsResult.userReaction = nil
 						end
-						var6.userReaction = nil
 					end
-					t_4[var5] = var6
+					t3[Text] = CloneReactionsResult
 					
 					return { statusCode = 204, responseBody = nil }
 				end
 			},
 			{
 				pattern = "/comments",
-				respond = function(p8)
-					-- upvalues: parseQuery (copy), mockCommentsPagesModule (copy), unixTimestamp (ref), pageWithMutations (ref), httpService (copy), decodeBody (copy), p3 (ref), commentFixturesModule (copy), t (ref), toApiComment (copy), t_1 (ref), t_3 (ref), t_2 (ref)
-					local method = p8.method
+				respond = function(p4) --[[ Line: 295 ]]
+					-- upvalues: parseQuery (upval), MockCommentsPagesModule (upval), UnixTimestamp (copy), pageWithMutations (copy), HttpService (upval), decodeBody (upval), P9 (copy), CommentFixturesModule (upval), Comments (copy), toApiComment (upval), t (copy), t2 (copy), t1 (copy)
+					local Method = p4.method
 					
-					if method == "GET" then
-						local url = string.match(p8.url, "/moments/([^/]+)/comments") or "feed-1"
-						local var8 = parseQuery(p8.url)
-						local var9 = pageWithMutations(url, var8.cursor, mockCommentsPagesModule.pageForCursor(url, var8.cursor, unixTimestamp))
+					if Method == "GET" then
+						local Match: string = string.match(p4.url, "/moments/([^/]+)/comments") or "feed-1"
+						local ParseQueryResult = parseQuery(p4.url)
+						local PageWithMutationsResult = pageWithMutations(Match, ParseQueryResult.cursor, (MockCommentsPagesModule.pageForCursor(Match, ParseQueryResult.cursor, UnixTimestamp)))
 						
 						return {
 							statusCode = 200,
 							headers = nil,
-							responseBody = if var9 == nil then nil else httpService:JSONEncode(var9)
+							responseBody = if PageWithMutationsResult == nil then nil else HttpService:JSONEncode(PageWithMutationsResult)
 						}
-					elseif method == "POST" then
-						local var10 = decodeBody(p8.body)
-						local clientRequestId = var10.clientRequestId
-						local url = string.match(p8.url, "/moments/([^/]+)/comments") or "feed-1"
-						local var11 = if type(clientRequestId) == "string" then `{url}:{clientRequestId}` else nil
-						local postOutcome = p3.postOutcome or "success"
+					end
+					if Method == "POST" then
+						local DecodeBodyResult = decodeBody(p4.body)
+						local ClientRequestId = DecodeBodyResult.clientRequestId
+						local Match: string = string.match(p4.url, "/moments/([^/]+)/comments") or "feed-1"
+						local Text = if type(ClientRequestId) == "string" then `{Match}:{ClientRequestId}` else nil
+						local PostOutcome = P9.postOutcome or "success"
 						
-						if postOutcome == "timeout" then
+						if PostOutcome == "timeout" then
 							error("createCommentsMockNetwork: simulated timeout")
 						end
-						if postOutcome == "TextFilterRejected" then
-							local textFilterRejected = commentFixturesModule.ERRORS.TextFilterRejected
+						if PostOutcome == "TextFilterRejected" then
+							local TextFilterRejected = CommentFixturesModule.ERRORS.TextFilterRejected
 							
 							return {
 								statusCode = 422,
 								headers = nil,
-								responseBody = if textFilterRejected == nil then nil else httpService:JSONEncode(textFilterRejected)
+								responseBody = if TextFilterRejected == nil then nil else HttpService:JSONEncode(TextFilterRejected)
 							}
-						elseif postOutcome == "RateLimited" then
-							local rateLimited = commentFixturesModule.ERRORS.RateLimited
+						end
+						if PostOutcome == "RateLimited" then
+							local RateLimited = CommentFixturesModule.ERRORS.RateLimited
 							
 							return {
 								statusCode = 429,
 								headers = nil,
-								responseBody = if rateLimited == nil then nil else httpService:JSONEncode(rateLimited)
+								responseBody = if RateLimited == nil then nil else HttpService:JSONEncode(RateLimited)
 							}
-						elseif var11 ~= nil and t[var11] ~= nil then
-							local var12 = toApiComment(t[var11])
+						end
+						if Text ~= nil and Comments[Text] ~= nil then
+							local ApiComment = toApiComment(Comments[Text])
 							
 							return {
 								statusCode = 200,
 								headers = nil,
-								responseBody = if var12 == nil then nil else httpService:JSONEncode(var12)
+								responseBody = if ApiComment == nil then nil else HttpService:JSONEncode(ApiComment)
 							}
 						end
-						local cloned = table.clone(commentFixturesModule.AUTHORS.roblox)
-						cloned.userId = p3.postAuthorUserId or cloned.userId
-						local var13 = commentFixturesModule.makeComment({
+						local Copy = table.clone(CommentFixturesModule.AUTHORS.roblox)
+						Copy.userId = P9.postAuthorUserId or Copy.userId
+						local Comment = CommentFixturesModule.makeComment({
 							isAuthoredByViewer = true,
-							commentId = `posted-{url}-{clientRequestId or httpService:GenerateGUID(false)}`,
-							feedItemId = url,
-							text = if type(var10.text) == "string" then var10.text else "",
+							commentId = `posted-{Match}-{ClientRequestId or HttpService:GenerateGUID(false)}`,
+							feedItemId = Match,
+							text = if type(DecodeBodyResult.text) == "string" then DecodeBodyResult.text else "",
 							createdAt = DateTime.now():ToIsoDate(),
-							author = cloned
+							author = Copy
 						})
 						
-						if var11 ~= nil then
-							t[var11] = var13
+						if Text ~= nil then
+							Comments[Text] = Comment
 						end
-						local var14 = t_1[url] or {}
-						table.insert(var14, 1, var13)
-						t_1[url] = var14
-						local feedItemId = t_3[var13.feedItemId]
+						local Entry1 = t[Match] or {}
+						table.insert(Entry1, 1, Comment)
+						t[Match] = Entry1
+						local Entry2 = t2[Comment.feedItemId]
 						
-						if feedItemId == nil then
-							feedItemId = {}
-							t_3[var13.feedItemId] = feedItemId
+						if Entry2 == nil then
+							Entry2 = {}
+							t2[Comment.feedItemId] = Entry2
 						end
-						feedItemId[var13.commentId] = var13
+						Entry2[Comment.commentId] = Comment
 						
-						if postOutcome == "replay" then
-							local var15 = toApiComment(var13)
+						if PostOutcome == "replay" then
+							local ApiComment = toApiComment(Comment)
 							
 							return {
 								statusCode = 200,
 								headers = nil,
-								responseBody = if var15 == nil then nil else httpService:JSONEncode(var15)
+								responseBody = if ApiComment == nil then nil else HttpService:JSONEncode(ApiComment)
+							}
+						else
+							local ApiComment = toApiComment(Comment)
+							
+							return {
+								statusCode = 201,
+								headers = nil,
+								responseBody = if ApiComment == nil then nil else HttpService:JSONEncode(ApiComment)
 							}
 						end
-						local var16 = toApiComment(var13)
+					else
+						if Method ~= "DELETE" then
+							local config = {
+								errorCode = "CommentsUnavailable",
+								message = `unsupported method {Method}`
+							}
+							
+							return {
+								statusCode = 405,
+								headers = nil,
+								responseBody = if config == nil then nil else HttpService:JSONEncode(config)
+							}
+						end
+						local Match1: string = string.match(p4.url, "/moments/([^/]+)/comments") or "feed-1"
+						local Match2: string? = string.match(p4.url, "/comments/([^/?]+)$")
 						
-						return {
-							statusCode = 201,
-							headers = nil,
-							responseBody = if var16 == nil then nil else httpService:JSONEncode(var16)
-						}
-					elseif method ~= "DELETE" then
-						local t_4 = {
-							errorCode = "CommentsUnavailable",
-							message = `unsupported method {method}`
-						}
+						if Match2 == nil then
+							local config = {
+								errorCode = "CommentsUnavailable",
+								message = "invalid author-comment DELETE path"
+							}
+							
+							return {
+								statusCode = 405,
+								headers = nil,
+								responseBody = if config == nil then nil else HttpService:JSONEncode(config)
+							}
+						end
+						t1[`{Match1}:{Match2}`] = true
+						local Entry = t2[Match1]
 						
-						return {
-							statusCode = 405,
-							headers = nil,
-							responseBody = if t_4 == nil then nil else httpService:JSONEncode(t_4)
-						}
+						if Entry ~= nil then
+							Entry[Match2] = nil
+						end
+						return { statusCode = 204, responseBody = nil }
 					end
-					local url = string.match(p8.url, "/moments/([^/]+)/comments") or "feed-1"
-					local match = string.match(p8.url, "/comments/([^/?]+)$")
-					
-					if match == nil then
-						local t_4 = {
-							errorCode = "CommentsUnavailable",
-							message = "invalid author-comment DELETE path"
-						}
-						
-						return {
-							statusCode = 405,
-							headers = nil,
-							responseBody = if t_4 == nil then nil else httpService:JSONEncode(t_4)
-						}
-					end
-					t_2[`{url}:{match}`] = true
-					local var17 = t_3[url]
-					
-					if var17 ~= nil then
-						var17[match] = nil
-					end
-					return { statusCode = 204, responseBody = nil }
 				end
 			}
 		}
 	})
 	
-	local _ = function(p8)
-		-- upvalues: p3 (ref)
-		if string.find(p8.url, "/reactions", 1, true) then
-			return p3.reactionLatencySeconds or p3.latencySeconds
+	local _ = function(p4) --[[ Line: 376 | Named "latencyForRequest" ]]
+		-- upvalues: P9 (copy)
+		if string.find(p4.url, "/reactions", 1, true) then
+			return P9.reactionLatencySeconds or P9.latencySeconds
+		else
+			local Method = p4.method
+			
+			return (if Method == "GET" then P9.fetchLatencySeconds else Method == "POST" and P9.postLatencySeconds) or P9.latencySeconds
 		end
-		local method = p8.method
-		
-		return if method == "GET" then p3.fetchLatencySeconds or p3.latencySeconds elseif method == "POST" then p3.postLatencySeconds or p3.latencySeconds else p3.latencySeconds
 	end
 	
 	return {
-		request = function(p8, p9)
-			-- upvalues: p3 (ref), var3 (ref), scheduleDelay (copy)
-			local reactionLatencySeconds
-			if string.find(p8.url, "/reactions", 1, true) then
-				reactionLatencySeconds = p3.reactionLatencySeconds or p3.latencySeconds
+		request = function(p4, p5) --[[ Line: 391 ]]
+			-- upvalues: P9 (copy), MockNetwork (copy), scheduleDelay (upval)
+			local ReactionLatencySeconds = nil
+			if string.find(p4.url, "/reactions", 1, true) then
+				ReactionLatencySeconds = P9.reactionLatencySeconds or P9.latencySeconds
 			else
-				local method = p8.method
-				reactionLatencySeconds = if method == "GET" then p3.fetchLatencySeconds or p3.latencySeconds elseif method == "POST" then p3.postLatencySeconds or p3.latencySeconds else p3.latencySeconds
+				local Method = p4.method
+				ReactionLatencySeconds = (if Method == "GET" then P9.fetchLatencySeconds else Method == "POST" and P9.postLatencySeconds) or P9.latencySeconds
 			end
-			if type(reactionLatencySeconds) == "number" and reactionLatencySeconds > 0 then
-				local var8 = false
-				local var9 = nil
-				local var10 = (p3.schedule or scheduleDelay)(reactionLatencySeconds, function()
-					-- upvalues: var8 (write), var9 (write), var3 (copy), p8 (ref), p9 (ref)
-					if not var8 then
-						var9 = var3.request(p8, p9)
+			if type(ReactionLatencySeconds) == "number" and ReactionLatencySeconds > 0 then
+				local Flag = false
+				local RequestResult = nil
+				local Callback = (P9.schedule or scheduleDelay)(ReactionLatencySeconds, function() --[[ Line: 402 ]]
+					-- upvalues: Flag (ref), RequestResult (ref), MockNetwork (upval), p4 (copy), p5 (copy)
+					if not Flag then
+						RequestResult = MockNetwork.request(p4, p5)
 					end
 				end)
 				
-				return function()
-					-- upvalues: var8 (write), var10 (ref), var9 (write)
-					if var8 then return end
-					var8 = true
-					var10()
+				return function() --[[ Line: 408 ]]
+					-- upvalues: Flag (ref), Callback (copy), RequestResult (ref)
+					if Flag then return end
+					Flag = true
+					Callback()
 					
-					if var9 ~= nil then
-						var9()
+					if RequestResult ~= nil then
+						RequestResult()
 					end
 				end
+			else
+				return MockNetwork.request(p4, p5)
 			end
-			return var3.request(p8, p9)
 		end
 	}
 end

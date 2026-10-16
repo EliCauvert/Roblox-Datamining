@@ -1,57 +1,73 @@
-﻿local chatTypesModule = require(script:FindFirstAncestor("BuildExperience").Chat.chatTypes)
+﻿local ChatTypesModule = require(script:FindFirstAncestor("BuildExperience").Chat.chatTypes)
 
 return {
-	getMessageKey = function(p1)
-		-- upvalues: chatTypesModule (ref)
+	getMessageKey = function(p1) --[[ Line: 5 ]]
+		-- upvalues: ChatTypesModule (copy)
 		if p1.kind == "assistant_turn" then
-			local var1 = chatTypesModule.makeAssistantTurnAnchorKey(p1.sessionId, p1.endSequenceId)
+			local AssistantTurnAnchorKey = ChatTypesModule.makeAssistantTurnAnchorKey(p1.sessionId, p1.endSequenceId)
 			
-			return if var1 == nil then if p1.turnKey == nil then if p1.id == nil then nil else `message:{p1.id}` else `turn:{p1.turnKey}` else var1
+			if AssistantTurnAnchorKey ~= nil then
+				return AssistantTurnAnchorKey
+			elseif p1.turnKey ~= nil then
+				return `turn:{p1.turnKey}`
+			end
 		end
+		return if p1.id == nil then nil else `message:{p1.id}`
 	end,
-	getMessageIndexByKey = function(p1)
-		-- upvalues: chatTypesModule (ref)
+	getMessageIndexByKey = function(List) --[[ Line: 21 ]]
+		-- upvalues: ChatTypesModule (copy)
 		local t = {}
 		
-		for i, v in p1 do
-			local var1
-			if v.kind == "assistant_turn" then
-				local var2 = chatTypesModule.makeAssistantTurnAnchorKey(v.sessionId, v.endSequenceId)
-				var1 = if var2 ~= nil then if v.turnKey == nil then if v.id ~= nil then nil else `message:{v.id}` else `turn:{v.turnKey}` else var2
+		for i, value in List do
+			local MessageName = nil
+			if value.kind == "assistant_turn" then
+				local AssistantTurnAnchorKey = ChatTypesModule.makeAssistantTurnAnchorKey(value.sessionId, value.endSequenceId)
+				
+				if AssistantTurnAnchorKey ~= nil then
+					MessageName = AssistantTurnAnchorKey
+				else
+					if value.turnKey ~= nil then
+						MessageName = `turn:{value.turnKey}`
+					end
+				end
+				if MessageName ~= nil then
+					t[MessageName] = i
+				end
+				continue
 			end
-			if var1 ~= nil then
-				t[var1] = i
-			end
+			MessageName = if value.id == nil then nil else `message:{value.id}`
 		end
 		return t
 	end,
-	getLastMessageKey = function(p2)
-		-- upvalues: chatTypesModule (ref)
-		for i = #p2, 1, -1 do
-			local var3
-			local var4 = p2[i]
-			
-			if var4.kind == "assistant_turn" then
-				local var5
-				var3 = not var4.isDone
-				
-				if not var3 then
-					var3 = var4.isOptimisticallyCancelled == true
-					var3 = nil
+	getLastMessageKey = function(p1) --[[ Line: 32 ]]
+		-- upvalues: ChatTypesModule (copy)
+		local v1 = nil
+		local AssistantTurnAnchorKey = nil
+		for i = #p1, 1, -1 do
+			v1 = p1[i]
+			local MessageName = nil
+			repeat
+				if if v1.kind == "assistant_turn" then not v1.isDone or v1.isOptimisticallyCancelled == true else v1.id ~= nil and string.sub(v1.id, -#ChatTypesModule.PENDING_USER_MESSAGE_ID_SUFFIX) == ChatTypesModule.PENDING_USER_MESSAGE_ID_SUFFIX then
+					MessageName = nil
+					break
 				end
-			else
-				var3 = var4.id ~= nil and string.sub(var4.id, -#chatTypesModule.PENDING_USER_MESSAGE_ID_SUFFIX) == chatTypesModule.PENDING_USER_MESSAGE_ID_SUFFIX
+				if v1.kind == "assistant_turn" then
+					AssistantTurnAnchorKey = ChatTypesModule.makeAssistantTurnAnchorKey(v1.sessionId, v1.endSequenceId)
+					
+					if AssistantTurnAnchorKey ~= nil then
+						MessageName = AssistantTurnAnchorKey
+						break
+					end
+					if v1.turnKey ~= nil then
+						MessageName = `turn:{v1.turnKey}`
+						break
+					end
+				end
+				MessageName = if v1.id == nil then nil else `message:{v1.id}`
+			until true
+			if MessageName ~= nil then
+				return MessageName
 			end
-			if var3 then
-				var5 = nil
-			elseif var4.kind == "assistant_turn" then
-				local var6 = chatTypesModule.makeAssistantTurnAnchorKey(var4.sessionId, var4.endSequenceId)
-				var5 = if var6 ~= nil then if var4.turnKey == nil then if var4.id ~= nil then nil else `message:{var4.id}` else `turn:{var4.turnKey}` else var6
-			end
-			if var5 == nil then
-				continue
-			end
-			return var5
 		end
 		return nil
 	end

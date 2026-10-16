@@ -1,20 +1,21 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local signalsModule = require(parent.Signals)
-local adCampaignEligibilityModule = require(parent.DataHydration.AdCampaignEligibility)
-local useSignalState = require(parent.SignalsReact).useSignalState
-local createComputed = signalsModule.createComputed
-local var1 = createComputed(function()
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local AdCampaignEligibilityModule = require(Parent.DataHydration.AdCampaignEligibility)
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local CreateComputedFunction = require(Parent.Signals).createComputed
+local Computed = CreateComputedFunction(function() --[[ Line: 24 ]]
 	return nil
 end)
-local var2 = createComputed(function()
+local Computed1 = CreateComputedFunction(function(): string --[[ Line: 27 ]]
 	return "NotReady"
 end)
 
-return function(p1, p2)
-	-- upvalues: adCampaignEligibilityModule (ref), useSignalState (ref), var1 (ref), var2 (ref)
-	local var3 = if p1 ~= nil and p1 ~= 0 then p2 or adCampaignEligibilityModule.getAdCampaignEligibilityStore(false) else nil
-	local var4 = if var3 ~= nil then nil else var3.getAndFetchEligibility(p1)
-	local var5 = useSignalState(if var4 ~= nil then var2 else var4.status)
+return function(p1, p2) --[[ Line: 31 | Named "useGetAdCampaignEligibility" ]]
+	-- upvalues: AdCampaignEligibilityModule (copy), UseSignalStateFunction (copy), Computed (copy), Computed1 (copy)
+	local v1: boolean = p1 ~= nil and p1 ~= 0
+	local P1 = if v1 then p2 or AdCampaignEligibilityModule.getAdCampaignEligibilityStore(false) else nil
+	local AndFetchEligibility = if P1 == nil then nil else P1.getAndFetchEligibility(p1)
+	local UseSignalStateResult = UseSignalStateFunction(if AndFetchEligibility == nil then Computed else AndFetchEligibility.data)
+	local UseSignalStateResult1 = UseSignalStateFunction(if AndFetchEligibility == nil then Computed1 else AndFetchEligibility.status)
 	
-	return if var5 == "Ready" then useSignalState(if var4 ~= nil then var1 else var4.data) else nil, var5
+	return if UseSignalStateResult1 == "Ready" then UseSignalStateResult else nil, UseSignalStateResult1
 end

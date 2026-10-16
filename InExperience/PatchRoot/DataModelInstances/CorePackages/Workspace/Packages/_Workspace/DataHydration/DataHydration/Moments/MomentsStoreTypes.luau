@@ -1,5 +1,5 @@
-﻿local parent = script:FindFirstAncestor("DataHydration").Parent
-local _ = require(parent.HttpClient)
-local _ = require(parent.MomentsTypes)
+﻿local Parent = script:FindFirstAncestor("DataHydration").Parent
+local _ = require(Parent.HttpClient)
+local _ = require(Parent.MomentsTypes)
 
 return nil

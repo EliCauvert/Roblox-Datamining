@@ -1,11 +1,11 @@
-﻿local parent = script:FindFirstAncestor("SocialCommon").Parent
-local formFactorModule = require(parent.FormFactor)
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
+﻿local Parent = script:FindFirstAncestor("SocialCommon").Parent
+local FormFactorModule = require(Parent.FormFactor)
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
 
-return function()
-	-- upvalues: useSelector (ref), formFactorModule (ref)
-	return useSelector(function(p1)
-		-- upvalues: formFactorModule (copy)
-		return p1.FormFactor == formFactorModule.Enums.FormFactor.WIDE
+return function() --[[ Line: 7 ]]
+	-- upvalues: UseSelectorFunction (copy), FormFactorModule (copy)
+	return UseSelectorFunction(function(p1): boolean --[[ Line: 8 ]]
+		-- upvalues: FormFactorModule (upval)
+		return p1.FormFactor == FormFactorModule.Enums.FormFactor.WIDE
 	end)
 end

@@ -1,73 +1,74 @@
-﻿local gamePlayButton = script:FindFirstAncestor("GamePlayButton")
+﻿local GamePlayButton = script:FindFirstAncestor("GamePlayButton")
 local IXPService = game:GetService("IXPService")
-local _ = require(gamePlayButton.PlayButtonTypes)
-local parent = gamePlayButton.Parent
-local reactModule = require(parent.React)
-local useRoactService = require(parent.RobloxAppHooks).useRoactService
-local roactNetworking = require(parent.RoactServiceTags).RoactNetworking
-local roactUtilsModule = require(parent.RoactUtils)
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
-local voiceChatModule = require(parent.VoiceChat)
-local openCentralOverlayForVerifiedEnableVoice = voiceChatModule.AgeVerificationOverlay.OpenCentralOverlayForVerifiedEnableVoice
-local apiPostRecordUserSeenModal = voiceChatModule.AgeVerificationOverlay.ApiPostRecordUserSeenModal
-local setShowAgeVerificationOverlay = voiceChatModule.AgeVerificationOverlay.SetShowAgeVerificationOverlay
-local useAppPolicy = require(parent.UniversalAppPolicy).useAppPolicy
-local getFStringVoiceUpsellLayer = require(parent.SharedFlags).GetFStringVoiceUpsellLayer
-local fFlagLuaAppDemoModePlayButtonTelemetry = require(parent.SharedFlags).FFlagLuaAppDemoModePlayButtonTelemetry
+local _ = require(GamePlayButton.PlayButtonTypes)
+local Parent = GamePlayButton.Parent
+local ReactModule = require(Parent.React)
+local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
+local RoactNetworking = require(Parent.RoactServiceTags).RoactNetworking
+local RoactUtilsModule = require(Parent.RoactUtils)
+local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
+local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
+local VoiceChatModule = require(Parent.VoiceChat)
+local OpenCentralOverlayForVerifiedEnableVoiceFunction = VoiceChatModule.AgeVerificationOverlay.OpenCentralOverlayForVerifiedEnableVoice
+local ApiPostRecordUserSeenModal = VoiceChatModule.AgeVerificationOverlay.ApiPostRecordUserSeenModal
+local SetShowAgeVerificationOverlayFunction = VoiceChatModule.AgeVerificationOverlay.SetShowAgeVerificationOverlay
+local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
+local GetFStringVoiceUpsellLayerFunction = require(Parent.SharedFlags).GetFStringVoiceUpsellLayer
+local FFlagLuaAppDemoModePlayButtonTelemetry = require(Parent.SharedFlags).FFlagLuaAppDemoModePlayButtonTelemetry
 
-return function(p1, p2, p3)
-	-- upvalues: useRoactService (ref), roactNetworking (ref), useDispatch (ref), useAppPolicy (ref), useSelector (ref), reactModule (ref), getFStringVoiceUpsellLayer (ref), IXPService (ref), openCentralOverlayForVerifiedEnableVoice (ref), fFlagLuaAppDemoModePlayButtonTelemetry (ref), apiPostRecordUserSeenModal (ref), setShowAgeVerificationOverlay (ref)
-	local var1 = useRoactService(roactNetworking)
-	local var2 = useDispatch()
-	local var3 = useAppPolicy(function(p4)
+return function(p1, Callback1, Callback) --[[ Line: 23 ]]
+	-- upvalues: UseRoactServiceFunction (copy), RoactNetworking (copy), UseDispatchFunction (copy), UseAppPolicyFunction (copy), UseSelectorFunction (copy), ReactModule (copy), GetFStringVoiceUpsellLayerFunction (copy), IXPService (copy), OpenCentralOverlayForVerifiedEnableVoiceFunction (copy), FFlagLuaAppDemoModePlayButtonTelemetry (copy), ApiPostRecordUserSeenModal (copy), SetShowAgeVerificationOverlayFunction (copy)
+	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p2) --[[ Line: 30 ]]
 		return {
-			RequireExplicitVoiceConsent = p4.RequireExplicitVoiceConsent(),
-			showVoiceOptInOverlayEnabled = p4.getShowVoiceUpsellV2()
+			RequireExplicitVoiceConsent = p2.RequireExplicitVoiceConsent(),
+			showVoiceOptInOverlayEnabled = p2.getShowVoiceUpsellV2()
 		}
 	end)
-	local var4 = useSelector(function(p4)
-		-- upvalues: p1 (ref)
-		return if p4.ShowAgeVerificationOverlay[p1] == nil then {} else p4.ShowAgeVerificationOverlay[p1]
+	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 37 ]]
+		-- upvalues: p1 (copy)
+		return if p2.ShowAgeVerificationOverlay[p1] == nil then {} else p2.ShowAgeVerificationOverlay[p1]
 	end)
-	local isPlaceEnabledForVoice = var4.isPlaceEnabledForVoice
-	local isUniverseEnabledForVoice = var4.isUniverseEnabledForVoice
-	local showVoiceOptInOverlay = var4.showVoiceOptInOverlay
-	local elegibleToSeeVoiceUpsell = var4.elegibleToSeeVoiceUpsell
+	local IsPlaceEnabledForVoice = UseSelectorResult.isPlaceEnabledForVoice
+	local IsUniverseEnabledForVoice = UseSelectorResult.isUniverseEnabledForVoice
+	local ShowVoiceOptInOverlay = UseSelectorResult.showVoiceOptInOverlay
+	local ElegibleToSeeVoiceUpsell = UseSelectorResult.elegibleToSeeVoiceUpsell
 	
-	return reactModule.useCallback(function(p4, p5)
-		-- upvalues: isUniverseEnabledForVoice (ref), elegibleToSeeVoiceUpsell (ref), getFStringVoiceUpsellLayer (copy), IXPService (copy), showVoiceOptInOverlay (ref), var3 (ref), var2 (ref), openCentralOverlayForVerifiedEnableVoice (copy), p2 (ref), fFlagLuaAppDemoModePlayButtonTelemetry (copy), apiPostRecordUserSeenModal (copy), var1 (ref), setShowAgeVerificationOverlay (copy), p1 (ref), isPlaceEnabledForVoice (ref), p3 (ref)
-		if isUniverseEnabledForVoice and elegibleToSeeVoiceUpsell then
-			local var5 = getFStringVoiceUpsellLayer()
+	return (ReactModule.useCallback(function(p2, p3) --[[ Line: 50 ]]
+		-- upvalues: IsUniverseEnabledForVoice (copy), ElegibleToSeeVoiceUpsell (copy), GetFStringVoiceUpsellLayerFunction (upval), IXPService (upval), ShowVoiceOptInOverlay (copy), UseAppPolicyResult (copy), UseDispatchResult (copy), OpenCentralOverlayForVerifiedEnableVoiceFunction (upval), Callback1 (copy), FFlagLuaAppDemoModePlayButtonTelemetry (upval), ApiPostRecordUserSeenModal (upval), UseRoactServiceResult (copy), SetShowAgeVerificationOverlayFunction (upval), p1 (copy), IsPlaceEnabledForVoice (copy), Callback (copy)
+		if IsUniverseEnabledForVoice and ElegibleToSeeVoiceUpsell then
+			local FStringVoiceUpsellLayer = GetFStringVoiceUpsellLayerFunction()
 			
-			if var5 ~= "" then
-				IXPService:LogUserLayerExposure(var5)
+			if FStringVoiceUpsellLayer ~= "" then
+				IXPService:LogUserLayerExposure(FStringVoiceUpsellLayer)
 			end
 		end
-		if showVoiceOptInOverlay and var3.showVoiceOptInOverlayEnabled then
-			var2(openCentralOverlayForVerifiedEnableVoice({
-				launchGame = function()
-					-- upvalues: p2 (copy), p4 (ref), fFlagLuaAppDemoModePlayButtonTelemetry (copy), p5 (ref)
-					p2(p4, if fFlagLuaAppDemoModePlayButtonTelemetry then p5 else nil)
+		if ShowVoiceOptInOverlay and UseAppPolicyResult.showVoiceOptInOverlayEnabled then
+			UseDispatchResult(OpenCentralOverlayForVerifiedEnableVoiceFunction({
+				launchGame = function() --[[ Line: 59 ]]
+					-- upvalues: Callback1 (upval), p2 (copy), FFlagLuaAppDemoModePlayButtonTelemetry (upval), p3 (copy)
+					Callback1(p2, if FFlagLuaAppDemoModePlayButtonTelemetry then p3 else nil)
 				end,
-				RequireExplicitVoiceConsent = var3.RequireExplicitVoiceConsent,
-				postUserSeenModal = function()
-					-- upvalues: var2 (copy), apiPostRecordUserSeenModal (copy), var1 (copy)
-					return var2(apiPostRecordUserSeenModal.Fetch(var1))
+				RequireExplicitVoiceConsent = UseAppPolicyResult.RequireExplicitVoiceConsent,
+				postUserSeenModal = function() --[[ Line: 66 ]]
+					-- upvalues: UseDispatchResult (upval), ApiPostRecordUserSeenModal (upval), UseRoactServiceResult (upval)
+					return UseDispatchResult(ApiPostRecordUserSeenModal.Fetch(UseRoactServiceResult))
 				end,
-				setShowVoiceOptIn = function(value)
-					-- upvalues: var2 (copy), setShowAgeVerificationOverlay (copy), p1 (copy), isPlaceEnabledForVoice (copy), isUniverseEnabledForVoice (copy)
-					var2(setShowAgeVerificationOverlay(p1, isPlaceEnabledForVoice, isUniverseEnabledForVoice, value.voiceEnabled, value.showVoiceOptInOverlay))
+				setShowVoiceOptIn = function(p4) --[[ Line: 69 ]]
+					-- upvalues: UseDispatchResult (upval), SetShowAgeVerificationOverlayFunction (upval), p1 (upval), IsPlaceEnabledForVoice (upval), IsUniverseEnabledForVoice (upval)
+					UseDispatchResult(SetShowAgeVerificationOverlayFunction(p1, IsPlaceEnabledForVoice, IsUniverseEnabledForVoice, p4.voiceEnabled, p4.showVoiceOptInOverlay))
 				end
 			}))
 			
 			return
+		else
+			Callback(p2, if FFlagLuaAppDemoModePlayButtonTelemetry then p3 else nil)
 		end
-		p3(p4, if fFlagLuaAppDemoModePlayButtonTelemetry then p5 else nil)
 	end, {
-		var1, p1, isPlaceEnabledForVoice, isUniverseEnabledForVoice,
-		showVoiceOptInOverlay, var3.showVoiceOptInOverlayEnabled,
-		var3.RequireExplicitVoiceConsent, var4.isVoiceEnabled, p2, p3,
-		elegibleToSeeVoiceUpsell
-	})
+		UseRoactServiceResult, p1, IsPlaceEnabledForVoice, IsUniverseEnabledForVoice,
+		ShowVoiceOptInOverlay, UseAppPolicyResult.showVoiceOptInOverlayEnabled,
+		UseAppPolicyResult.RequireExplicitVoiceConsent,
+		UseSelectorResult.isVoiceEnabled, Callback1, Callback, ElegibleToSeeVoiceUpsell
+	}))
 end

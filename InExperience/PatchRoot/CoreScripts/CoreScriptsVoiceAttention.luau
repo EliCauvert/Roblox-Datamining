@@ -1,29 +1,29 @@
-﻿local playersService = game:GetService("Players")
+﻿local Players = game:GetService("Players")
 local _ = game:GetService("CorePackages")
-local faceAnimatorService = game:GetService("FaceAnimatorService")
-require(game:GetService("CoreGui").RobloxGui.Modules.VoiceChat.VoiceChatServiceManager).default.participantsUpdate.Event:Connect(function(p1)
-	-- upvalues: playersService (ref)
-	for i, v in pairs(p1) do
-		local var1 = playersService:GetPlayerByUserId(i)
+local FaceAnimatorService = game:GetService("FaceAnimatorService")
+require(game:GetService("CoreGui").RobloxGui.Modules.VoiceChat.VoiceChatServiceManager).default.participantsUpdate.Event:Connect(function(List) --[[ Line: 14 ]]
+	-- upvalues: Players (copy)
+	for UserId, value in pairs(List) do
+		local Player = Players:GetPlayerByUserId(UserId)
 		
-		if var1 then
-			var1:SetAttribute("RBXAttentionVoiceIsActive", v.isSignalActive)
+		if Player then
+			Player:SetAttribute("RBXAttentionVoiceIsActive", value.isSignalActive)
 		end
 	end
 end)
 
-local function setLocalPlayerVideoAnimationEnabled()
-	-- upvalues: playersService (ref), faceAnimatorService (ref)
-	local localPlayer = playersService.LocalPlayer
+local function setLocalPlayerVideoAnimationEnabled() --[[ Line: 23 ]]
+	-- upvalues: Players (copy), FaceAnimatorService (copy)
+	local LocalPlayer = Players.LocalPlayer
 	
-	if localPlayer then
-		localPlayer:SetAttribute("RBXAttentionVideoAnimationEnabled", faceAnimatorService.VideoAnimationEnabled)
+	if LocalPlayer then
+		LocalPlayer:SetAttribute("RBXAttentionVideoAnimationEnabled", FaceAnimatorService.VideoAnimationEnabled)
 	end
 end
 
-local localPlayer = playersService.LocalPlayer
+local LocalPlayer = Players.LocalPlayer
 
-if localPlayer then
-	localPlayer:SetAttribute("RBXAttentionVideoAnimationEnabled", faceAnimatorService.VideoAnimationEnabled)
+if LocalPlayer then
+	LocalPlayer:SetAttribute("RBXAttentionVideoAnimationEnabled", FaceAnimatorService.VideoAnimationEnabled)
 end
-faceAnimatorService:GetPropertyChangedSignal("VideoAnimationEnabled"):Connect(setLocalPlayerVideoAnimationEnabled)
+FaceAnimatorService:GetPropertyChangedSignal("VideoAnimationEnabled"):Connect(setLocalPlayerVideoAnimationEnabled)

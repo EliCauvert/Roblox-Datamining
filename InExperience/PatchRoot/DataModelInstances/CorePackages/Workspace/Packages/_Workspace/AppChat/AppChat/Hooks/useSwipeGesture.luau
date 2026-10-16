@@ -1,151 +1,153 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local reactModule = require(parent.React)
-local reactOtterModule = require(parent.ReactOtter)
-local cryoModule = require(parent.Cryo)
-local swipeDirectionModule = require(appChat.Enums.SwipeDirection)
-local fFlagAppChatSwipeGestureLatestConfigModule = require(appChat.Flags.FFlagAppChatSwipeGestureLatestConfig)
-local appChatSwipeStartThreshold = game:DefineFastInt("AppChatSwipeStartThreshold", 10)
-local appChatSwipeCompleteThreshold = game:DefineFastInt("AppChatSwipeCompleteThreshold", 50)
-local appChatSwipeMaxVerticalDrift = game:DefineFastInt("AppChatSwipeMaxVerticalDrift", 35)
-local appChatGlobalSwipeTracking = game:DefineFastFlag("AppChatGlobalSwipeTracking", false)
-local var1 = nil
-local t = { frequency = 4, dampingRatio = 0.8 }
-local t_1 = {
-	onSwipeComplete = function() end,
-	direction = swipeDirectionModule.Right,
-	swipeStartThreshold = appChatSwipeStartThreshold,
-	swipeCompleteThreshold = appChatSwipeCompleteThreshold,
-	swipeMaxVerticalDrift = appChatSwipeMaxVerticalDrift
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local ReactModule = require(Parent.React)
+local ReactOtterModule = require(Parent.ReactOtter)
+local CryoModule = require(Parent.Cryo)
+local SwipeDirectionModule = require(AppChat.Enums.SwipeDirection)
+local FFlagAppChatSwipeGestureLatestConfigModule = require(AppChat.Flags.FFlagAppChatSwipeGestureLatestConfig)
+local AppChatGlobalSwipeTracking = game:DefineFastFlag("AppChatGlobalSwipeTracking", false)
+local Current = nil
+local config = { frequency = 4, dampingRatio = 0.8 }
+local config1 = {
+	onSwipeComplete = function() --[[ Line: 35 ]] end,
+	direction = SwipeDirectionModule.Right,
+	swipeStartThreshold = game:DefineFastInt("AppChatSwipeStartThreshold", 10),
+	swipeCompleteThreshold = game:DefineFastInt("AppChatSwipeCompleteThreshold", 50),
+	swipeMaxVerticalDrift = game:DefineFastInt("AppChatSwipeMaxVerticalDrift", 35)
 }
 
-return function(p1)
-	-- upvalues: cryoModule (ref), t_1 (ref), reactModule (ref), fFlagAppChatSwipeGestureLatestConfigModule (ref), reactOtterModule (ref), appChatGlobalSwipeTracking (ref), var1 (write), t (ref), swipeDirectionModule (ref)
-	local var2 = cryoModule.Dictionary.union(t_1, p1)
-	local var3 = reactModule.useRef(var2)
+return function(p1) --[[ Line: 48 | Named "useSwipeGesture" ]]
+	-- upvalues: CryoModule (copy), config1 (copy), ReactModule (copy), FFlagAppChatSwipeGestureLatestConfigModule (copy), ReactOtterModule (copy), AppChatGlobalSwipeTracking (copy), Current (ref), config (copy), SwipeDirectionModule (copy)
+	local UnionResult = CryoModule.Dictionary.union(config1, p1)
+	local UseRefResult = ReactModule.useRef(UnionResult)
 	
-	if fFlagAppChatSwipeGestureLatestConfigModule then
-		var3.current = var2
+	if FFlagAppChatSwipeGestureLatestConfigModule then
+		UseRefResult.current = UnionResult
 	end
-	local var4, var5 = reactOtterModule.useAnimatedBinding(0)
-	local var6 = reactModule.useMemo(function()
-		-- upvalues: var4 (ref), var2 (ref)
-		return var4:map(function(p2)
-			-- upvalues: var2 (copy)
-			return math.clamp(p2 / var2.swipeCompleteThreshold, 0, 1)
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 56 ]]
+		-- upvalues: UseAnimatedBindingResult (copy), UnionResult (copy)
+		return UseAnimatedBindingResult:map(function(p2): number --[[ Line: 57 ]]
+			-- upvalues: UnionResult (upval)
+			return (math.clamp(p2 / UnionResult.swipeCompleteThreshold, 0, 1))
 		end)
-	end, { var4, var2.swipeCompleteThreshold })
-	local var7 = reactModule.useRef(nil)
-	local var8 = reactModule.useRef(nil)
-	local var9 = reactModule.useRef(Vector2.zero)
-	local var10 = reactModule.useRef(false)
-	local var11 = reactModule.useMemo(function()
-		-- upvalues: var7 (ref), appChatGlobalSwipeTracking (copy), var1 (copy), var9 (ref), var8 (ref), var10 (ref), var5 (ref), reactOtterModule (copy), t (copy), var3 (ref)
+	end, {
+		UseAnimatedBindingResult,
+		UnionResult.swipeCompleteThreshold
+	})
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseRefResult2 = ReactModule.useRef(nil)
+	local UseRefResult3 = ReactModule.useRef(Vector2.zero)
+	local UseRefResult4 = ReactModule.useRef(false)
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 67 ]]
+		-- upvalues: UseRefResult1 (copy), AppChatGlobalSwipeTracking (upval), Current (upval), UseRefResult3 (copy), UseRefResult2 (copy), UseRefResult4 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), config (upval), UseRefResult (copy)
 		return {
-			getActiveInput = function()
-				-- upvalues: var7 (copy)
-				return var7.current
+			getActiveInput = function() --[[ Line: 68 ]]
+				-- upvalues: UseRefResult1 (upval)
+				return UseRefResult1.current
 			end,
-			setOffset = function(p2)
-				-- upvalues: var3 (copy), var5 (copy), reactOtterModule (copy), t (copy), var10 (copy)
-				local current = var3.current
-				var5(reactOtterModule.spring(p2, t))
+			setOffset = function(Largest) --[[ Line: 99 ]]
+				-- upvalues: UseRefResult (upval), UseAnimatedBindingResult2 (upval), ReactOtterModule (upval), config (upval), UseRefResult4 (upval)
+				local Current = UseRefResult.current
+				UseAnimatedBindingResult2(ReactOtterModule.spring(Largest, config))
 				
-				if not var10.current and current.swipeCompleteThreshold < p2 then
-					var10.current = true
+				if not UseRefResult4.current and Current.swipeCompleteThreshold < Largest then
+					UseRefResult4.current = true
 					
-					if current.onSwipeThresholdReached then
-						current.onSwipeThresholdReached()
+					if Current.onSwipeThresholdReached then
+						Current.onSwipeThresholdReached()
 						
 						return
 					end
-				elseif var10.current and p2 <= current.swipeCompleteThreshold then
-					var10.current = false
+				elseif UseRefResult4.current and Largest <= Current.swipeCompleteThreshold then
+					UseRefResult4.current = false
 				end
 			end,
-			isPastCompleteThreshold = function()
-				-- upvalues: var10 (copy)
-				return var10.current
+			isPastCompleteThreshold = function() --[[ Line: 96 ]]
+				-- upvalues: UseRefResult4 (upval)
+				return UseRefResult4.current
 			end,
-			startSwipe = function(p2, p3)
-				-- upvalues: appChatGlobalSwipeTracking (copy), var1 (copy), var7 (copy), var9 (copy), var8 (copy)
-				if appChatGlobalSwipeTracking then
-					var1 = p2
+			startSwipe = function(Current1, Callback) --[[ Line: 71 ]]
+				-- upvalues: AppChatGlobalSwipeTracking (upval), Current (upval), UseRefResult1 (upval), UseRefResult3 (upval), UseRefResult2 (upval)
+				if AppChatGlobalSwipeTracking then
+					Current = Current1
 				end
-				var7.current = p2
-				var9.current = Vector2.new(p2.Position.X, p2.Position.Y)
-				var8.current = p2.Changed:Connect(function()
-					-- upvalues: p3 (ref)
-					p3()
+				UseRefResult1.current = Current1
+				UseRefResult3.current = Vector2.new(Current1.Position.X, Current1.Position.Y)
+				UseRefResult2.current = Current1.Changed:Connect(function() --[[ Line: 77 ]]
+					-- upvalues: Callback (copy)
+					Callback()
 				end)
 			end,
-			resetSwipe = function()
-				-- upvalues: appChatGlobalSwipeTracking (copy), var1 (copy), var7 (copy), var10 (copy), var8 (copy), var5 (copy), reactOtterModule (copy), t (copy)
-				if appChatGlobalSwipeTracking and var1 == var7.current then
-					var1 = nil
+			resetSwipe = function() --[[ Line: 87 ]]
+				-- upvalues: AppChatGlobalSwipeTracking (upval), Current (upval), UseRefResult1 (upval), UseRefResult4 (upval), UseRefResult2 (upval), UseAnimatedBindingResult2 (upval), ReactOtterModule (upval), config (upval)
+				if AppChatGlobalSwipeTracking and Current == UseRefResult1.current then
+					Current = nil
 				end
-				var7.current = nil
-				var10.current = false
+				UseRefResult1.current = nil
+				UseRefResult4.current = false
 				
-				if var8.current then
-					var8.current:Disconnect()
-					var8.current = nil
+				if UseRefResult2.current then
+					UseRefResult2.current:Disconnect()
+					UseRefResult2.current = nil
 				end
-				var5(reactOtterModule.spring(0, t))
+				UseAnimatedBindingResult2(ReactOtterModule.spring(0, config))
 			end,
-			disconnectInputListener = function()
-				-- upvalues: var8 (copy)
-				if var8.current then
-					var8.current:Disconnect()
-					var8.current = nil
+			disconnectInputListener = function() --[[ Line: 81 ]]
+				-- upvalues: UseRefResult2 (upval)
+				if UseRefResult2.current then
+					UseRefResult2.current:Disconnect()
+					UseRefResult2.current = nil
 				end
 			end
 		}
-	end, { var5 })
-	local var12 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref), var11 (ref), var9 (ref), swipeDirectionModule (copy)
-		local current = var3.current
-		local activeInput = var11.getActiveInput()
+	end, { UseAnimatedBindingResult2 })
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 121 ]]
+		-- upvalues: UseRefResult (copy), UseMemoResult1 (copy), UseRefResult3 (copy), SwipeDirectionModule (upval)
+		local Current = UseRefResult.current
+		local ActiveInput = UseMemoResult1.getActiveInput()
 		
-		if not activeInput then return end
-		if activeInput.UserInputState == Enum.UserInputState.End or activeInput.UserInputState == Enum.UserInputState.Cancel then
-			if var11.isPastCompleteThreshold() then
-				current.onSwipeComplete()
+		if not ActiveInput then return end
+		if ActiveInput.UserInputState == Enum.UserInputState.End or ActiveInput.UserInputState == Enum.UserInputState.Cancel then
+			if UseMemoResult1.isPastCompleteThreshold() then
+				Current.onSwipeComplete()
 			end
-			var11.resetSwipe()
+			UseMemoResult1.resetSwipe()
 			
 			return
 		else
-			local var13 = Vector2.new(activeInput.Position.X, activeInput.Position.Y) - var9.current
-			local var14 = if current.direction == swipeDirectionModule.Right then var13.X else -var13.X
+			local VectorDelta = Vector2.new(ActiveInput.Position.X, ActiveInput.Position.Y) - UseRefResult3.current
+			local X = if Current.direction == SwipeDirectionModule.Right then VectorDelta.X else -VectorDelta.X
+			local Magnitude = math.abs(VectorDelta.Y)
 			
-			if var14 < current.swipeStartThreshold or current.swipeMaxVerticalDrift < math.abs(var13.Y) then
-				var11.setOffset(0)
+			if X < Current.swipeStartThreshold or Current.swipeMaxVerticalDrift < Magnitude then
+				UseMemoResult1.setOffset(0)
 				
 				return
+			else
+				UseMemoResult1.setOffset((math.max(0, X)))
 			end
-			var11.setOffset(math.max(0, var14))
 		end
-	end, { var11 })
-	reactModule.useEffect(function()
-		-- upvalues: var11 (ref)
-		return var11.resetSwipe
-	end, { var11.resetSwipe })
-	local var13 = reactModule.useCallback(function(_, p2)
-		-- upvalues: appChatGlobalSwipeTracking (copy), var1 (copy), var11 (ref), var12 (ref)
-		if appChatGlobalSwipeTracking and var1 ~= nil then return end
-		if var11.getActiveInput() ~= nil then return end
-		if p2.UserInputType == Enum.UserInputType.Touch or p2.UserInputType == Enum.UserInputType.MouseButton1 then
-			var11.startSwipe(p2, var12)
+	end, { UseMemoResult1 })
+	ReactModule.useEffect(function() --[[ Line: 154 ]]
+		-- upvalues: UseMemoResult1 (copy)
+		return UseMemoResult1.resetSwipe
+	end, { UseMemoResult1.resetSwipe })
+	local UseResult1 = ReactModule.useCallback(function(_, Input) --[[ Line: 158 ]]
+		-- upvalues: AppChatGlobalSwipeTracking (upval), Current (upval), UseMemoResult1 (copy), UseResult (copy)
+		if AppChatGlobalSwipeTracking and Current ~= nil then return end
+		if UseMemoResult1.getActiveInput() ~= nil then return end
+		if Input.UserInputType == Enum.UserInputType.Touch or Input.UserInputType == Enum.UserInputType.MouseButton1 then
+			UseMemoResult1.startSwipe(Input, UseResult)
 		end
-	end, { var11, var12 })
+	end, { UseMemoResult1, UseResult })
 	
-	return reactModule.useMemo(function()
-		-- upvalues: var4 (ref), var6 (ref), var13 (ref)
+	return ReactModule.useMemo(function() --[[ Line: 176 ]]
+		-- upvalues: UseAnimatedBindingResult (copy), UseMemoResult (copy), UseResult1 (copy)
 		return {
-			swipeOffset = var4,
-			swipeProgress = var6,
-			onInputBegan = var13
+			swipeOffset = UseAnimatedBindingResult,
+			swipeProgress = UseMemoResult,
+			onInputBegan = UseResult1
 		}
-	end, { var4, var6, var13 })
+	end, { UseAnimatedBindingResult, UseMemoResult, UseResult1 })
 end

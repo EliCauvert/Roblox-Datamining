@@ -1,65 +1,65 @@
-﻿local socialLuaAnalyticsModule = require(script:FindFirstAncestor("UserRelationshipModals").Parent.SocialLuaAnalytics)
-local supportedTelemetryBackends = socialLuaAnalyticsModule.Analytics.Enums.SupportedTelemetryBackends
-local eventTypes = socialLuaAnalyticsModule.Analytics.Enums.EventTypes
-local contexts = socialLuaAnalyticsModule.Analytics.Enums.Contexts
-local eventNamesModule = require(script.Parent.EventNames)
+﻿local SocialLuaAnalyticsModule = require(script:FindFirstAncestor("UserRelationshipModals").Parent.SocialLuaAnalytics)
+local SupportedTelemetryBackends = SocialLuaAnalyticsModule.Analytics.Enums.SupportedTelemetryBackends
+local EventTypes = SocialLuaAnalyticsModule.Analytics.Enums.EventTypes
+local Contexts = SocialLuaAnalyticsModule.Analytics.Enums.Contexts
+local EventNamesModule = require(script.Parent.EventNames)
 
 return {
 	defaults = {
 		links = "",
 		throttlingThousandths = game:DefineFastInt("UserRelationshipModalsAnalyticsThrottlingThousandths", 10000)
 	},
-	[eventNamesModule.ModalSeen] = {
+	[EventNamesModule.ModalSeen] = {
 		description = "Userrelationshipsmodal was opened",
 		lastUpdated = { 26, 4, 16 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter },
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter },
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.UserSeen
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 24 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.UserSeen
 				end,
 				staticCustomFields = {
-					eventContext = contexts.UserRelationshipModals,
+					eventContext = Contexts.UserRelationshipModals,
 					placeId = game.PlaceId
 				}
 			}
 		}
 	},
-	[eventNamesModule.ModalClosed] = {
+	[EventNamesModule.ModalClosed] = {
 		description = "User-relationship-modal was closed without changing the user relationship",
 		lastUpdated = { 26, 4, 16 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter },
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter },
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.ButtonClick
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 43 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.ButtonClick
 				end,
 				staticCustomFields = {
 					btn = "Close",
-					eventContext = contexts.UserRelationshipModals,
+					eventContext = Contexts.UserRelationshipModals,
 					placeId = game.PlaceId
 				}
 			}
 		}
 	},
-	[eventNamesModule.CreateActionPressed] = {
+	[EventNamesModule.CreateActionPressed] = {
 		description = "User pressed on the create action button on a user-relationship-modal",
 		lastUpdated = { 26, 4, 16 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter },
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter },
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.ButtonClick
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 63 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.ButtonClick
 				end,
 				staticCustomFields = {
 					btn = "Create",
-					eventContext = contexts.UserRelationshipModals,
+					eventContext = Contexts.UserRelationshipModals,
 					placeId = game.PlaceId
 				}
 			}

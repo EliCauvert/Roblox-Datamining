@@ -1,33 +1,33 @@
-﻿local parent = script:FindFirstAncestor("ServerTriggeredModals").Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
+﻿local Parent = script:FindFirstAncestor("ServerTriggeredModals").Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
 local _ = require(script.Parent.PromptStyle)
-local getSduiApiStore = require(parent.SduiSharedUtilities).getSduiApiStore
+local GetSduiApiStoreFunction = require(Parent.SduiSharedUtilities).getSduiApiStore
 
-return function(p1, p2)
-	-- upvalues: signalsReactModule (ref), getSduiApiStore (ref), reactModule (ref)
-	local var1 = signalsReactModule.useSignalState(getSduiApiStore().getData(p1).data)
+return function(p1, Category) --[[ Line: 27 | Named "usePromptEntries" ]]
+	-- upvalues: SignalsReactModule (copy), GetSduiApiStoreFunction (copy), ReactModule (copy)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(GetSduiApiStoreFunction().getData(p1).data)
 	
-	return reactModule.useMemo(function()
-		-- upvalues: var1 (ref), p2 (ref)
-		local t = {}
+	return ReactModule.useMemo(function() --[[ Line: 30 ]]
+		-- upvalues: UseSignalStateResult (copy), Category (copy)
+		local List = {}
 		
-		if not var1 then
-			return t
+		if not UseSignalStateResult then
+			return List
 		end
-		for i, v in var1 do
-			local category = v.category
+		for _, value in UseSignalStateResult do
+			local Category1 = value.category
 			
-			if p2 == nil or category == p2 then
-				table.insert(t, {
-					identifier = v.identifier,
-					robloxComponentType = v.robloxComponentType,
-					title = v.title,
-					promptStyle = category,
-					config = v.config
+			if Category == nil or Category1 == Category then
+				table.insert(List, {
+					identifier = value.identifier,
+					robloxComponentType = value.robloxComponentType,
+					title = value.title,
+					promptStyle = Category1,
+					config = value.config
 				})
 			end
 		end
-		return t
-	end, { var1, p2 })
+		return List
+	end, { UseSignalStateResult, Category })
 end

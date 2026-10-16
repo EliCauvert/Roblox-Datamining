@@ -1,19 +1,20 @@
-﻿local perUserAppStorageModule = require(script:FindFirstAncestor("ExpChat").Utils.perUserAppStorage)
+﻿local PerUserAppStorageModule = require(script:FindFirstAncestor("ExpChat").Utils.perUserAppStorage)
 
 return {
-	hasBeenShown = function()
-		-- upvalues: perUserAppStorageModule (ref)
-		return perUserAppStorageModule.getEntry("ExpChatDictationU13PolicyToast").shown == true
+	hasBeenShown = function(): boolean --[[ Line: 11 ]]
+		-- upvalues: PerUserAppStorageModule (copy)
+		return PerUserAppStorageModule.getEntry("ExpChatDictationU13PolicyToast").shown == true
 	end,
-	markShown = function()
-		-- upvalues: perUserAppStorageModule (ref)
-		perUserAppStorageModule.updateEntry("ExpChatDictationU13PolicyToast", function(p1)
+	markShown = function() --[[ Line: 16 ]]
+		-- upvalues: PerUserAppStorageModule (copy)
+		PerUserAppStorageModule.updateEntry("ExpChatDictationU13PolicyToast", function(p1) --[[ Line: 17 ]]
 			if p1.shown == true then
 				return nil
+			else
+				p1.shown = true
+				
+				return p1
 			end
-			p1.shown = true
-			
-			return p1
 		end)
 	end
 }

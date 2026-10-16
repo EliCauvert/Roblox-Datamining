@@ -19,26 +19,26 @@ return require(game:GetService("CorePackages").Packages._Index.Foundation.Founda
 	testId = nil,
 	closeAffordanceRef = nil,
 	contentStartRef = nil,
-	setSheetHeightAvailable = function(_)
+	setSheetHeightAvailable = function(_) --[[ Line: 11 ]]
 		error("No SheetContext available")
 	end,
-	setActionsHeight = function(_)
+	setActionsHeight = function(_) --[[ Line: 15 ]]
 		error("No SheetContext available")
 	end,
-	setHasActionsDivider = function(_)
+	setHasActionsDivider = function(_) --[[ Line: 19 ]]
 		error("No SheetContext available")
 	end,
-	setSheetContentHeight = function(_)
+	setSheetContentHeight = function(_) --[[ Line: 23 ]]
 		error("No SheetContext available")
 	end,
-	setInnerScrollY = function(_)
+	setInnerScrollY = function(_) --[[ Line: 30 ]]
 		error("No SheetContext available")
 	end,
-	setHasHeader = function(_)
+	setHasHeader = function(_) --[[ Line: 34 ]]
 		error("No SheetContext available")
 	end,
-	setFullBleedHeight = function(_)
+	setFullBleedHeight = function(_) --[[ Line: 39 ]]
 		error("No SheetContext available")
 	end,
-	setContentStartRef = function(_) end
+	setContentStartRef = function(_) --[[ Line: 49 ]] end
 })

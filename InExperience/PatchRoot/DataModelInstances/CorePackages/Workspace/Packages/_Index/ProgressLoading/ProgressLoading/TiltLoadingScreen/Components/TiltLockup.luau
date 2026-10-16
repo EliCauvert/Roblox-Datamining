@@ -1,150 +1,151 @@
-﻿local tiltLoadingScreen = script:FindFirstAncestor("TiltLoadingScreen")
-local parent = tiltLoadingScreen.Parent.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local text = foundationModule.Text
-local useTokens = foundationModule.Hooks.useTokens
-local tiltKeyartModule = require(tiltLoadingScreen.Components.TiltKeyart)
-local verifiedBadgeModule = require(tiltLoadingScreen.Components.VerifiedBadge)
-local verifiedBadgeModule_1 = require(parent.VerifiedBadges.VerifiedBadge)
-local fFlagUnifyVerifiedBadgeComponent = require(parent.SharedFlags).FFlagUnifyVerifiedBadgeComponent
-local _ = require(tiltLoadingScreen.Types)
-local TILT_DEGREES = require(tiltLoadingScreen.Constants).KEYART.TILT_DEGREES
-local t = {
+﻿local TiltLoadingScreen = script:FindFirstAncestor("TiltLoadingScreen")
+local Parent = TiltLoadingScreen.Parent.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local TiltKeyartModule = require(TiltLoadingScreen.Components.TiltKeyart)
+local VerifiedBadgeModule = require(TiltLoadingScreen.Components.VerifiedBadge)
+local VerifiedBadgeModule1 = require(Parent.VerifiedBadges.VerifiedBadge)
+local FFlagUnifyVerifiedBadgeComponent = require(Parent.SharedFlags).FFlagUnifyVerifiedBadgeComponent
+local FFlagLoadingScreenMilestones = require(Parent.SharedFlags).FFlagLoadingScreenMilestones
+local _ = require(TiltLoadingScreen.Types)
+local TILTDEGREES = require(TiltLoadingScreen.Constants).KEYART.TILT_DEGREES
+local config = {
 	keyart = {
-		rotation = reactModule.createBinding(TILT_DEGREES),
-		sizeScale = reactModule.createBinding(1),
-		coverTransparency = reactModule.createBinding(1)
+		rotation = ReactModule.createBinding(TILTDEGREES),
+		sizeScale = ReactModule.createBinding(1),
+		coverTransparency = ReactModule.createBinding(1)
 	},
 	frame = {
-		rotation = reactModule.createBinding(-TILT_DEGREES),
-		sizeScale = reactModule.createBinding(1),
-		groupTransparency = reactModule.createBinding(0)
+		rotation = ReactModule.createBinding(-TILTDEGREES),
+		sizeScale = ReactModule.createBinding(1),
+		groupTransparency = ReactModule.createBinding(0)
 	},
 	title = {
-		reveal = reactModule.createBinding(1),
-		slide = reactModule.createBinding(UDim.new(0, 0))
+		reveal = ReactModule.createBinding(1),
+		slide = ReactModule.createBinding(UDim.new(0, 0))
 	},
 	creator = {
-		reveal = reactModule.createBinding(1),
-		slide = reactModule.createBinding(UDim.new(0, 0))
+		reveal = ReactModule.createBinding(1),
+		slide = ReactModule.createBinding(UDim.new(0, 0))
 	},
-	verified = { reveal = reactModule.createBinding(1) }
+	verified = { reveal = ReactModule.createBinding(1) }
 }
 
-local function _(value)
-	return math.clamp(value, 0, 1)
+local function _(Value: number): number --[[ Line: 50 | Named "clamp01" ]]
+	return (math.clamp(Value, 0, 1))
 end
 
-local _ = function(p1)
-	return math.ceil(p1.FontSize * p1.LineHeight)
+local _ = function(p1): number --[[ Line: 54 | Named "clipWindowHeight" ]]
+	return (math.ceil(p1.FontSize * p1.LineHeight))
 end
 
-local _ = function(p1)
-	return p1:map(function(p2)
+local _ = function(p1) --[[ Line: 58 | Named "clippingFromReveal" ]]
+	return p1:map(function(p2: number): boolean --[[ Line: 59 ]]
 		return p2 < 0.999
 	end)
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), t (ref), reactModule (ref), view (ref), tiltKeyartModule (ref), text (ref), fFlagUnifyVerifiedBadgeComponent (ref), verifiedBadgeModule_1 (ref), verifiedBadgeModule (ref)
-	local var1 = useTokens()
-	local animation = p1.animation or t
-	local color3 = var1.Color.Content.Emphasis.Color3
-	local color3_1 = var1.Color.Content.Default.Color3
-	local color3_2 = var1.Color.System.Emphasis.Color3
-	local headingLarge = var1.Typography.HeadingLarge
-	local ceiled = math.ceil(headingLarge.FontSize * headingLarge.LineHeight)
-	local bodyMedium = var1.Typography.BodyMedium
-	local ceiled_1 = math.ceil(bodyMedium.FontSize * bodyMedium.LineHeight)
-	local var2 = animation.title.reveal:map(function(p2)
-		return p2 < 0.999
-	end)
-	local var3 = animation.creator.reveal:map(function(p2)
-		return p2 < 0.999
-	end)
-	local var4 = animation.title.reveal:map(function(p2)
-		-- upvalues: color3 (ref)
-		return { Color3 = color3, Transparency = 1 - math.clamp(p2, 0, 1) }
-	end)
-	local var5 = animation.creator.reveal:map(function(p2)
-		-- upvalues: color3_1 (ref)
+return ReactModule.memo(function(p1) --[[ Line: 64 | Named "TiltLockup" ]]
+	-- upvalues: UseTokensFunction (copy), config (copy), FFlagLoadingScreenMilestones (copy), ReactModule (copy), View (copy), TiltKeyartModule (copy), Text (copy), FFlagUnifyVerifiedBadgeComponent (copy), VerifiedBadgeModule1 (copy), VerifiedBadgeModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	local Animation = p1.animation or config
+	local EmphasisColor3 = UseTokensResult.Color.Content.Emphasis.Color3
+	local DefaultColor3 = UseTokensResult.Color.Content.Default.Color3
+	local EmphasisColor3_1 = UseTokensResult.Color.System.Emphasis.Color3
+	local HeadingLarge = UseTokensResult.Typography.HeadingLarge
+	local BodyMedium = UseTokensResult.Typography.BodyMedium
+	local MapResult = Animation.verified.reveal:map(function(Value: number) --[[ Line: 85 ]]
+		-- upvalues: EmphasisColor3_1 (copy)
 		return {
-			Color3 = color3_1,
-			Transparency = 1 - math.clamp(p2, 0, 1) * 0.6
+			Color3 = EmphasisColor3_1,
+			Transparency = 1 - math.clamp(Value, 0, 1)
 		}
 	end)
-	local var6 = animation.verified.reveal:map(function(p2)
-		-- upvalues: color3_2 (ref)
+	local MapResult1 = Animation.verified.reveal:map(function(Value: number) --[[ Line: 89 ]]
+		-- upvalues: UseTokensResult (copy)
 		return {
-			Color3 = color3_2,
-			Transparency = 1 - math.clamp(p2, 0, 1)
+			Color3 = UseTokensResult.Color.Content.Emphasis.Color3,
+			Transparency = 1 - math.clamp(Value, 0, 1)
 		}
 	end)
-	local var7 = animation.verified.reveal:map(function(p2)
-		-- upvalues: var1 (ref)
-		return {
-			Color3 = var1.Color.Content.Emphasis.Color3,
-			Transparency = 1 - math.clamp(p2, 0, 1)
-		}
-	end)
+	local ThumbnailUrl = p1.thumbnailUrl or ""
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col align-x-center gap-large size-full-0 auto-y",
 		testId = "tilt-lockup"
 	}, {
-		ArtTitle = reactModule.createElement(view, {
+		ArtTitle = ReactModule.createElement(View, {
 			tag = "col align-x-center gap-small size-full-0 auto-y",
 			LayoutOrder = 1
 		}, {
-			Card = reactModule.createElement(tiltKeyartModule, {
-				thumbnailUrl = p1.thumbnailUrl or "",
-				keyart = animation.keyart,
-				frame = animation.frame
+			Card = ReactModule.createElement(TiltKeyartModule, {
+				key = if FFlagLoadingScreenMilestones then "Card_" .. ThumbnailUrl else "Card",
+				thumbnailUrl = ThumbnailUrl,
+				onThumbnailLoaded = p1.onThumbnailLoaded,
+				keyart = Animation.keyart,
+				frame = Animation.frame
 			}),
-			TitleCreator = reactModule.createElement(view, {
+			TitleCreator = ReactModule.createElement(View, {
 				tag = "col align-x-center gap-xsmall auto-y padding-y-xsmall",
 				LayoutOrder = 2,
 				Size = UDim2.new(0.8, 0, 0, 0)
 			}, {
-				TitleWrap = reactModule.createElement(view, {
+				TitleWrap = ReactModule.createElement(View, {
 					LayoutOrder = 1,
-					ClipsDescendants = var2,
-					Size = UDim2.new(1, 0, 0, ceiled),
-					padding = { top = animation.title.slide }
+					ClipsDescendants = Animation.title.reveal:map(function(p2: number): boolean --[[ Line: 59 ]]
+						return p2 < 0.999
+					end),
+					Size = UDim2.new(1, 0, 0, (math.ceil(HeadingLarge.FontSize * HeadingLarge.LineHeight))),
+					padding = { top = Animation.title.slide }
 				}, {
-					Title = reactModule.createElement(text, {
+					Title = ReactModule.createElement(Text, {
 						tag = "size-full text-heading-large text-no-wrap text-align-x-center text-align-y-center text-truncate-end",
 						Text = p1.gameName or "",
-						textStyle = var4
+						textStyle = Animation.title.reveal:map(function(Value: number) --[[ Line: 77 ]]
+							-- upvalues: EmphasisColor3 (copy)
+							return {
+								Color3 = EmphasisColor3,
+								Transparency = 1 - math.clamp(Value, 0, 1)
+							}
+						end)
 					})
 				}),
-				SubWrap = reactModule.createElement(view, {
+				SubWrap = ReactModule.createElement(View, {
 					tag = "col align-x-center align-y-center",
 					LayoutOrder = 2,
-					ClipsDescendants = var3,
-					Size = UDim2.new(1, 0, 0, ceiled_1),
-					padding = { top = animation.creator.slide }
+					ClipsDescendants = Animation.creator.reveal:map(function(p2: number): boolean --[[ Line: 59 ]]
+						return p2 < 0.999
+					end),
+					Size = UDim2.new(1, 0, 0, (math.ceil(BodyMedium.FontSize * BodyMedium.LineHeight))),
+					padding = { top = Animation.creator.slide }
 				}, {
-					Row = reactModule.createElement(view, {
+					Row = ReactModule.createElement(View, {
 						tag = "row align-x-center align-y-center gap-xsmall size-full-0 auto-y"
 					}, {
-						Author = reactModule.createElement(text, {
+						Author = ReactModule.createElement(Text, {
 							tag = "shrink auto-xy text-body-medium text-no-wrap text-truncate-end",
 							LayoutOrder = 1,
 							Text = p1.creatorName or "",
-							textStyle = var5
+							textStyle = Animation.creator.reveal:map(function(Value: number) --[[ Line: 81 ]]
+								-- upvalues: DefaultColor3 (copy)
+								return {
+									Color3 = DefaultColor3,
+									Transparency = 1 - math.clamp(Value, 0, 1) * 0.6
+								}
+							end)
 						}),
-						Verified = if p1.isCreatorVerified then if fFlagUnifyVerifiedBadgeComponent then reactModule.createElement(verifiedBadgeModule_1, {
+						Verified = if p1.isCreatorVerified then if FFlagUnifyVerifiedBadgeComponent then ReactModule.createElement(VerifiedBadgeModule1, {
 							LayoutOrder = 2,
 							testId = "tilt-verified-badge",
-							backplateStyle = var6,
-							checkStyle = var7
-						}) else reactModule.createElement(verifiedBadgeModule, {
+							backplateStyle = MapResult,
+							checkStyle = MapResult1
+						}) else ReactModule.createElement(VerifiedBadgeModule, {
 							LayoutOrder = 2,
-							backplateStyle = var6,
-							checkStyle = var7
+							backplateStyle = MapResult,
+							checkStyle = MapResult1
 						}) else nil
 					})
 				})

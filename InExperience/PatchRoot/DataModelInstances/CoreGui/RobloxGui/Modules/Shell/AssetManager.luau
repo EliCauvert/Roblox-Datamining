@@ -1,10 +1,10 @@
 ﻿local _ = game:GetService("CoreGui"):FindFirstChild("RobloxGui"):FindFirstChild("Modules"):FindFirstChild("Shell")
-local create = require(game:GetService("CorePackages").Workspace.Packages.AppCommonLib).Create
+local CreateFunction = require(game:GetService("CorePackages").Workspace.Packages.AppCommonLib).Create
 
 return {
-	CreateShadow = function(p1)
-		-- upvalues: create (ref)
-		return create("ImageLabel")({
+	CreateShadow = function(p1) --[[ Line: 14 ]]
+		-- upvalues: CreateFunction (copy)
+		return CreateFunction("ImageLabel")({
 			Name = "Shadow",
 			Image = "rbxasset://textures/ui/Shell/Buttons/Generic9ScaleShadow.png",
 			BackgroundTransparency = 1,

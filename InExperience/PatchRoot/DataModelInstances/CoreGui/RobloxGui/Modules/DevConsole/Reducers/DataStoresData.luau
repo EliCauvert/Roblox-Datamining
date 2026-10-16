@@ -1,9 +1,9 @@
-﻿local immutableModule = require(script.Parent.Parent.Immutable)
-local dataStoresUpdateSearchFilterModule = require(script.Parent.Parent.Actions.DataStoresUpdateSearchFilter)
+﻿local ImmutableModule = require(script.Parent.Parent.Immutable)
+local DataStoresUpdateSearchFilterModule = require(script.Parent.Parent.Actions.DataStoresUpdateSearchFilter)
 
-return function(p1, p2)
-	-- upvalues: dataStoresUpdateSearchFilterModule (ref), immutableModule (ref)
-	p1 = p1 or { storesSearchTerm = "" }
+return function(p1, p2) --[[ Line: 9 ]]
+	-- upvalues: DataStoresUpdateSearchFilterModule (copy), ImmutableModule (copy)
+	local P0 = p1 or { storesSearchTerm = "" }
 	
-	return if p2.type == dataStoresUpdateSearchFilterModule.name then immutableModule.Set(p1, "storesSearchTerm", p2.searchTerm) else p1
+	return if p2.type == DataStoresUpdateSearchFilterModule.name then ImmutableModule.Set(P0, "storesSearchTerm", p2.searchTerm) else P0
 end

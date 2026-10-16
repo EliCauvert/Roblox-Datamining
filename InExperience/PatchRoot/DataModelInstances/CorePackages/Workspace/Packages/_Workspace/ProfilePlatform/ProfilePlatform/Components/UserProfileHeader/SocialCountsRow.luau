@@ -1,10 +1,10 @@
-﻿local parent = script:FindFirstAncestor("ProfilePlatform").Parent
-local reactModule = require(parent.React)
-local horizontalPageMargin = require(parent.UIBlox).App.Container.HorizontalPageMargin
+﻿local Parent = script:FindFirstAncestor("ProfilePlatform").Parent
+local ReactModule = require(Parent.React)
+local HorizontalPageMargin = require(Parent.UIBlox).App.Container.HorizontalPageMargin
 
-return function(p1)
-	-- upvalues: reactModule (ref), horizontalPageMargin (ref)
-	return reactModule.createElement(horizontalPageMargin, {
+return function(p1) --[[ Line: 14 | Named "SocialCountsRow" ]]
+	-- upvalues: ReactModule (copy), HorizontalPageMargin (copy)
+	return ReactModule.createElement(HorizontalPageMargin, {
 		backgroundTransparency = 1,
 		useAutomaticSizing = true,
 		layoutOrder = p1.layoutOrder,

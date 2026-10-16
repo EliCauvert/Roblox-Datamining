@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent.Parent._Workspace.AppChat.AppChat.Actions.EnteredChatFromEntryPoint)
+﻿return (require(script.Parent.Parent.Parent.Parent._Workspace.AppChat.AppChat.Actions.EnteredChatFromEntryPoint))

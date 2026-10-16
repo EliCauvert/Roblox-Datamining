@@ -1,101 +1,103 @@
-﻿local avatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
-local promiseModule = require(avatarExperienceProfilePictureEditor.Parent.Promise)
-local parseUserAvatarConfigurationsV4 = require(avatarExperienceProfilePictureEditor.Shared.parseUserAvatarConfigurationsV4).parseUserAvatarConfigurationsV4
-local _ = require(avatarExperienceProfilePictureEditor.Shared.parseCloseupCameraConfig)
-local userAvatarConfigurationsApiModule = require(script.Parent.userAvatarConfigurationsApi)
-local t = {}
-local t_1 = {}
+﻿local AvatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
+local PromiseModule = require(AvatarExperienceProfilePictureEditor.Parent.Promise)
+local ParseUserAvatarConfigurationsV4Function = require(AvatarExperienceProfilePictureEditor.Shared.parseUserAvatarConfigurationsV4).parseUserAvatarConfigurationsV4
+local _ = require(AvatarExperienceProfilePictureEditor.Shared.parseCloseupCameraConfig)
+local UserAvatarConfigurationsApiModule = require(script.Parent.userAvatarConfigurationsApi)
+local Tbl = {}
+local Tbl1 = {}
 
-local function _(p1)
-	if typeof(p1) == "string" then
-		return { p1 }
+local function _(Tbl) --[[ Line: 25 | Named "normalizeSelectionTypes" ]]
+	if typeof(Tbl) == "string" then
+		return { Tbl }
+	else
+		local Copy = table.clone(Tbl)
+		table.sort(Copy)
+		
+		return Copy
 	end
-	local cloned = table.clone(p1)
-	table.sort(cloned)
-	
-	return cloned
 end
 
-local _ = function(p1)
-	-- upvalues: t (ref), t_1 (ref)
-	t[p1] = nil
-	t_1[p1] = nil
+local _ = function(Key) --[[ Line: 39 | Named "clearCacheEntry" ]]
+	-- upvalues: Tbl (copy), Tbl1 (copy)
+	Tbl[Key] = nil
+	Tbl1[Key] = nil
 end
 
 return {
-	buildCacheKey = function(p1, p2)
-		local list
-		local var1 = "%*:%*"
-		local concat = table.concat
+	buildCacheKey = function(p1, Tbl): string --[[ Line: 35 ]]
+		local v1 = "%*:%*"
+		local ConcatFunction = table.concat
+		local list = nil
 		
-		if typeof(p2) == "string" then
-			list = { p2 }
+		if typeof(Tbl) == "string" then
+			list = { Tbl }
 		else
-			local cloned = table.clone(p2)
-			table.sort(cloned)
-			list = cloned
+			local Copy = table.clone(Tbl)
+			table.sort(Copy)
+			list = Copy
 		end
-		return var1:format(p1, concat(list, ","))
+		return (v1:format(p1, (ConcatFunction(list, ","))))
 	end,
-	fetchCached = function(p1, p2, p3)
-		-- upvalues: userAvatarConfigurationsApiModule (ref), t (ref), promiseModule (ref), t_1 (ref), parseUserAvatarConfigurationsV4 (ref)
-		local list
-		p3 = p3 or userAvatarConfigurationsApiModule.DEFAULT_SELECTION_TYPES
-		local var1 = "%*:%*"
-		local concat = table.concat
+	fetchCached = function(p1, p2, p3) --[[ Line: 53 ]]
+		-- upvalues: UserAvatarConfigurationsApiModule (copy), Tbl (copy), PromiseModule (copy), Tbl1 (copy), ParseUserAvatarConfigurationsV4Function (copy)
+		local Tbl2 = p3 or UserAvatarConfigurationsApiModule.DEFAULT_SELECTION_TYPES
+		local v1 = "%*:%*"
+		local ConcatFunction = table.concat
+		local list = nil
 		
-		if typeof(p3) == "string" then
-			list = { p3 }
+		if typeof(Tbl2) == "string" then
+			list = { Tbl2 }
 		else
-			local cloned = table.clone(p3)
-			table.sort(cloned)
-			list = cloned
+			local Copy = table.clone(Tbl2)
+			table.sort(Copy)
+			list = Copy
 		end
-		var1 = var1:format(p2, concat(list, ","))
-		local var2 = t[var1]
+		local FormatResult: string = v1:format(p2, (ConcatFunction(list, ",")))
+		local Entry = Tbl[FormatResult]
 		
-		if var2 then
-			return promiseModule.resolve(var2)
+		if Entry then
+			return PromiseModule.resolve(Entry)
 		end
-		local var3 = t_1[var1]
+		local Entry1 = Tbl1[FormatResult]
 		
-		if var3 then
-			return var3
-		end
-		local var4 = userAvatarConfigurationsApiModule.fetchUserAvatarConfigurations(p1, p2, p3):andThen(function(p4)
-			-- upvalues: parseUserAvatarConfigurationsV4 (copy), t (copy), var1 (ref), t_1 (copy)
-			local t_2 = {
-				response = p4,
-				parsed = parseUserAvatarConfigurationsV4(p4.responseBody)
-			}
-			t[var1] = t_2
-			t_1[var1] = nil
+		if Entry1 then
+			return Entry1
+		else
+			local v2 = UserAvatarConfigurationsApiModule.fetchUserAvatarConfigurations(p1, p2, Tbl2):andThen(function(Result) --[[ Line: 69 ]]
+				-- upvalues: ParseUserAvatarConfigurationsV4Function (upval), Tbl (upval), FormatResult (copy), Tbl1 (upval)
+				local config = {
+					response = Result,
+					parsed = ParseUserAvatarConfigurationsV4Function(Result.responseBody)
+				}
+				Tbl[FormatResult] = config
+				Tbl1[FormatResult] = nil
+				
+				return config
+			end):catch(function(Err) --[[ Line: 78 ]]
+				-- upvalues: Tbl1 (upval), FormatResult (copy), PromiseModule (upval)
+				Tbl1[FormatResult] = nil
+				
+				return PromiseModule.reject(Err)
+			end)
+			Tbl1[FormatResult] = v2
 			
-			return t_2
-		end):catch(function(p4)
-			-- upvalues: t_1 (copy), var1 (ref), promiseModule (copy)
-			t_1[var1] = nil
-			
-			return promiseModule.reject(p4)
-		end)
-		t_1[var1] = var4
-		
-		return var4
+			return v2
+		end
 	end,
-	invalidate = function(p1)
-		-- upvalues: t (ref), t_1 (ref)
-		local var1 = `{p1}:`
+	invalidate = function(p1) --[[ Line: 44 ]]
+		-- upvalues: Tbl (copy), Tbl1 (copy)
+		local Text: string = `{p1}:`
 		
-		for i in t do
-			if string.sub(i, 1, #var1) == var1 then
-				t[i] = nil
-				t_1[i] = nil
+		for i in Tbl do
+			if string.sub(i, 1, #Text) == Text then
+				Tbl[i] = nil
+				Tbl1[i] = nil
 			end
 		end
 	end,
-	clearCacheForTests = function()
-		-- upvalues: t (ref), t_1 (ref)
-		table.clear(t)
-		table.clear(t_1)
+	clearCacheForTests = function() --[[ Line: 87 ]]
+		-- upvalues: Tbl (copy), Tbl1 (copy)
+		table.clear(Tbl)
+		table.clear(Tbl1)
 	end
 }

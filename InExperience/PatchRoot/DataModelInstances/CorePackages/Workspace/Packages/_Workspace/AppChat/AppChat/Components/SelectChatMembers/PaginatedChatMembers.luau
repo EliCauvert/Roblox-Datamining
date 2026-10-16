@@ -1,59 +1,59 @@
-﻿local parent = script:FindFirstAncestor("AppChat").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local flatList = require(parent.VirtualizedList).FlatList
-local appChatPerfChatMembersPaginationWindowSize = game:DefineFastInt("AppChatPerfChatMembersPaginationWindowSize", 2)
-local appChatPerfChatMembersPaginationInitialRender = game:DefineFastInt("AppChatPerfChatMembersPaginationInitialRender", 8)
-local appChatPerfChatMembersPaginationOnEndReachedUnits = game:DefineFastInt("AppChatPerfChatMembersPaginationOnEndReachedUnits", 1)
+﻿local Parent = script:FindFirstAncestor("AppChat").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local FlatList = require(Parent.VirtualizedList).FlatList
+local AppChatPerfChatMembersPaginationWindowSize = game:DefineFastInt("AppChatPerfChatMembersPaginationWindowSize", 2)
+local AppChatPerfChatMembersPaginationInitialRender = game:DefineFastInt("AppChatPerfChatMembersPaginationInitialRender", 8)
+local AppChatPerfChatMembersPaginationOnEndReachedUnits = game:DefineFastInt("AppChatPerfChatMembersPaginationOnEndReachedUnits", 1)
 
-local var1 = function(p1, p2)
-	return tostring(p1 or p2)
+local function KeyExtractor(p1, p2): string --[[ Line: 22 ]]
+	return (tostring(p1 or p2))
 end
 
-local t = {
+local Style = {
 	ScrollBarThickness = 0,
 	Name = "PaginatedChatMembers",
 	BackgroundTransparency = 1
 }
-local t_1 = { BackgroundTransparency = 1 }
+local ContentContainerStyle = { BackgroundTransparency = 1 }
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), appChatPerfChatMembersPaginationWindowSize (ref), appChatPerfChatMembersPaginationInitialRender (ref), appChatPerfChatMembersPaginationOnEndReachedUnits (ref), foundationModule (ref), flatList (ref), t (ref), t_1 (ref), var1 (ref)
-	local var2 = reactModule.useRef(nil)
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref)
-		if var2.current then
-			local nativeScrollRef = var2.current:getNativeScrollRef()
+return ReactModule.memo(function(p1) --[[ Line: 35 | Named "PaginatedChatMembers" ]]
+	-- upvalues: ReactModule (copy), AppChatPerfChatMembersPaginationWindowSize (copy), AppChatPerfChatMembersPaginationInitialRender (copy), AppChatPerfChatMembersPaginationOnEndReachedUnits (copy), FoundationModule (copy), FlatList (copy), Style (copy), ContentContainerStyle (copy), KeyExtractor (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	ReactModule.useEffect(function() --[[ Line: 38 ]]
+		-- upvalues: UseRefResult (copy)
+		if UseRefResult.current then
+			local NativeScrollRef = UseRefResult.current:getNativeScrollRef()
 			
-			if nativeScrollRef and nativeScrollRef._nativeRef and nativeScrollRef._nativeRef.current then
-				nativeScrollRef._nativeRef.current.Selectable = false
+			if NativeScrollRef and NativeScrollRef._nativeRef and NativeScrollRef._nativeRef.current then
+				NativeScrollRef._nativeRef.current.Selectable = false
 			end
 		end
 	end, {})
 	
-	return reactModule.createElement(foundationModule.View, { tag = "size-full col gap-small" }, {
-		Header = if p1.headerText then reactModule.createElement(foundationModule.Text, {
+	return ReactModule.createElement(FoundationModule.View, { tag = "size-full col gap-small" }, {
+		Header = if p1.headerText then ReactModule.createElement(FoundationModule.Text, {
 			tag = "size-full-0 auto-y text-align-x-left text-align-y-bottom text-title-large padding-x-medium",
 			LayoutOrder = 1,
 			Text = p1.headerText
 		}) else nil,
-		ListContainer = reactModule.createElement(foundationModule.View, { LayoutOrder = 2, tag = "size-full-0 fill" }, {
-			List = reactModule.createElement(flatList, {
-				style = t,
-				contentContainerStyle = t_1,
+		ListContainer = ReactModule.createElement(FoundationModule.View, { LayoutOrder = 2, tag = "size-full-0 fill" }, {
+			List = ReactModule.createElement(FlatList, {
+				style = Style,
+				contentContainerStyle = ContentContainerStyle,
 				renderItem = p1.renderItem,
 				data = p1.userIds,
-				windowSize = appChatPerfChatMembersPaginationWindowSize,
-				initialNumToRender = appChatPerfChatMembersPaginationInitialRender,
-				onEndReachedThreshold = appChatPerfChatMembersPaginationOnEndReachedUnits,
-				onEndReached = reactModule.useCallback(function()
-					-- upvalues: p1 (ref)
+				windowSize = AppChatPerfChatMembersPaginationWindowSize,
+				initialNumToRender = AppChatPerfChatMembersPaginationInitialRender,
+				onEndReachedThreshold = AppChatPerfChatMembersPaginationOnEndReachedUnits,
+				onEndReached = ReactModule.useCallback(function() --[[ Line: 51 ]]
+					-- upvalues: p1 (copy)
 					if p1.fetchMoreFriends then
 						p1.fetchMoreFriends()
 					end
 				end, { p1.fetchMoreFriends }),
-				keyExtractor = var1,
-				ref = var2
+				keyExtractor = KeyExtractor,
+				ref = UseRefResult
 			})
 		})
 	})

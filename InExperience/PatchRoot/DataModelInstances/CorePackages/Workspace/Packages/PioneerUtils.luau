@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.PioneerUtils.PioneerUtils)
+﻿return (require(script.Parent._Workspace.PioneerUtils.PioneerUtils))

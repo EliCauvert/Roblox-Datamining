@@ -1,48 +1,49 @@
-﻿local robloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
-local parent = robloxSubscriptionPurchaseApp.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local text = foundationModule.Text
-local badge = foundationModule.Badge
-local badgeVariant = foundationModule.Enums.BadgeVariant
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local fFlagRobloxPlusUpsellBannerUseTryItForFreeModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagRobloxPlusUpsellBannerUseTryItForFree)
+﻿local RobloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
+local Parent = RobloxSubscriptionPurchaseApp.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local Badge = FoundationModule.Badge
+local BadgeVariant = FoundationModule.Enums.BadgeVariant
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local FFlagRobloxPlusUpsellBannerUseTryItForFreeModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagRobloxPlusUpsellBannerUseTryItForFree)
 
-return function(p1)
-	-- upvalues: useLocalization (ref), fFlagRobloxPlusUpsellBannerUseTryItForFreeModule (ref), reactModule (ref), view (ref), badge (ref), badgeVariant (ref), text (ref)
-	local var1 = useLocalization({
+return function(p1) --[[ Line: 26 | Named "RobloxPlusUpsellBannerCTA" ]]
+	-- upvalues: UseLocalizationFunction (copy), FFlagRobloxPlusUpsellBannerUseTryItForFreeModule (copy), ReactModule (copy), View (copy), Badge (copy), BadgeVariant (copy), Text (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
 		subscribe = "Feature.RobloxSubscription.Action.Subscribe",
 		newBadge = "Feature.Catalog.Label.New",
-		getFreeTrialText = if fFlagRobloxPlusUpsellBannerUseTryItForFreeModule then "Feature.RobloxSubscription.Action.TryItForFree" else "Feature.RobloxSubscription.Label.FreeTrialText"
+		getFreeTrialText = if FFlagRobloxPlusUpsellBannerUseTryItForFreeModule then "Feature.RobloxSubscription.Action.TryItForFree" else "Feature.RobloxSubscription.Label.FreeTrialText"
+	})
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 36 ]]
+		-- upvalues: p1 (copy), UseLocalizationResult (copy)
+		return if p1.productInfo.isFreeTrial then UseLocalizationResult.getFreeTrialText else UseLocalizationResult.subscribe
+	end, {
+		p1.productInfo.isFreeTrial,
+		UseLocalizationResult.getFreeTrialText,
+		UseLocalizationResult.subscribe
 	})
 	
-	return if p1.shouldShowNewBadge then reactModule.createElement(view, {
+	return if p1.shouldShowNewBadge then ReactModule.createElement(View, {
 		tag = "row align-y-center gap-xsmall auto-xy",
 		AnchorPoint = Vector2.new(1, 0.5),
 		Position = UDim2.new(1, 0, 0.5, 0)
 	}, {
-		NewBadge = reactModule.createElement(badge, {
+		NewBadge = ReactModule.createElement(Badge, {
 			LayoutOrder = 1,
-			text = var1.newBadge,
-			variant = badgeVariant.Contrast
+			text = UseLocalizationResult.newBadge,
+			variant = BadgeVariant.Contrast
 		})
-	}) else reactModule.createElement(view, {
+	}) else ReactModule.createElement(View, {
 		tag = "auto-xy",
 		AnchorPoint = Vector2.new(1, 0.5),
 		Position = UDim2.new(1, 0, 0.5, 0)
 	}, {
-		SubscribeText = reactModule.createElement(text, {
+		SubscribeText = ReactModule.createElement(Text, {
 			tag = "auto-xy text-body-small content-default",
 			RichText = true,
-			Text = "<u>" .. reactModule.useCallback(function()
-				-- upvalues: p1 (ref), var1 (ref)
-				return if p1.productInfo.isFreeTrial then var1.getFreeTrialText else var1.subscribe
-			end, {
-				p1.productInfo.isFreeTrial,
-				var1.getFreeTrialText,
-				var1.subscribe
-			})() .. "</u>"
+			Text = "<u>" .. UseResult() .. "</u>"
 		})
 	})
 end

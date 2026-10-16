@@ -1,5 +1,5 @@
-﻿local squadsCore = script:FindFirstAncestor("SquadsCore")
+﻿local SquadsCore = script:FindFirstAncestor("SquadsCore")
 
-return require(squadsCore.Parent.RoduxSquads).config({
-	keyPath = require(squadsCore.Common.Constants).RODUX_KEY .. ".Squad"
+return require(SquadsCore.Parent.RoduxSquads).config({
+	keyPath = require(SquadsCore.Common.Constants).RODUX_KEY .. ".Squad"
 })

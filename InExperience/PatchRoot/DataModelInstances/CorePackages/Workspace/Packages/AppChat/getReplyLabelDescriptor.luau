@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent._Workspace.AppChat.AppChat.Utils.getReplyLabelDescriptor)
+﻿return (require(script.Parent.Parent._Workspace.AppChat.AppChat.Utils.getReplyLabelDescriptor))

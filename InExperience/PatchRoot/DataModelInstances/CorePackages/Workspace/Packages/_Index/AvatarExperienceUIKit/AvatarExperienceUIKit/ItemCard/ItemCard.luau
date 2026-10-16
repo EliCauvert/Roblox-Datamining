@@ -1,52 +1,55 @@
-﻿local avatarExperienceUIKit = script:FindFirstAncestor("AvatarExperienceUIKit")
-local parent = avatarExperienceUIKit.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local view = foundationModule.View
-local UIBloxModule = require(parent.UIBlox)
-local useSelectionCursor = UIBloxModule.App.SelectionImage.useSelectionCursor
-local cursorKind = UIBloxModule.App.SelectionImage.CursorKind
-local _ = require(avatarExperienceUIKit.BackgroundLayers.BackgroundLayers)
-local itemCardBackgroundsWrapperModule = require(script.Parent.ItemCardBackgroundsWrapper)
+﻿local AvatarExperienceUIKit = script:FindFirstAncestor("AvatarExperienceUIKit")
+local Parent = AvatarExperienceUIKit.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local View = FoundationModule.View
+local UIBloxModule = require(Parent.UIBlox)
+local UseSelectionCursorFunction = UIBloxModule.App.SelectionImage.useSelectionCursor
+local CursorKind = UIBloxModule.App.SelectionImage.CursorKind
+local _ = require(AvatarExperienceUIKit.BackgroundLayers.BackgroundLayers)
+local ItemCardBackgroundsWrapperModule = require(script.Parent.ItemCardBackgroundsWrapper)
 
-return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useSelectionCursor (ref), cursorKind (ref), useTokens (ref), reactModule (ref), itemCardBackgroundsWrapperModule (ref), view (ref)
-	return reactModule.createElement("TextButton", {
-		Selectable = p1.Selectable,
-		SelectionImageObject = useSelectionCursor(cursorKind.RoundedRect),
+return (ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 29 ]]
+	-- upvalues: UseSelectionCursorFunction (copy), CursorKind (copy), UseTokensFunction (copy), ReactModule (copy), ItemCardBackgroundsWrapperModule (copy), View (copy)
+	local UseSelectionCursorResult = UseSelectionCursorFunction(CursorKind.RoundedRect)
+	local UseTokensResult = UseTokensFunction()
+	
+	return ReactModule.createElement("TextButton", {
+		Selectable = Frame.Selectable,
+		SelectionImageObject = UseSelectionCursorResult,
 		Text = "",
 		AutoButtonColor = false,
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
-		[reactModule.Event.Activated] = if p1.isDisabled then nil else p1.onActivated,
-		ref = p2,
-		Size = p1.Size,
-		AutomaticSize = p1.AutomaticSize,
-		LayoutOrder = p1.LayoutOrder,
+		[ReactModule.Event.Activated] = if Frame.isDisabled then nil else Frame.onActivated,
+		ref = Ref,
+		Size = Frame.Size,
+		AutomaticSize = Frame.AutomaticSize,
+		LayoutOrder = Frame.LayoutOrder,
 		SelectionGroup = true,
-		[reactModule.Change.AbsoluteSize] = p1.onAbsoluteSizeChanged,
-		[reactModule.Tag] = p1.tag
-	}, if p1.backgroundLayers == nil or #p1.backgroundLayers <= 0 then {
-		ItemCardListLayout = reactModule.createElement("UIListLayout", {
+		[ReactModule.Change.AbsoluteSize] = Frame.onAbsoluteSizeChanged,
+		[ReactModule.Tag] = Frame.tag
+	}, if Frame.backgroundLayers == nil or #Frame.backgroundLayers <= 0 then {
+		ItemCardListLayout = ReactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			FillDirection = Enum.FillDirection.Vertical,
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
-			Padding = UDim.new(0, useTokens().Gap.Small)
+			Padding = UDim.new(0, UseTokensResult.Gap.Small)
 		}),
-		ItemCardHeaderSlot = p1.headerSlot,
-		ItemCardFooterSlot = p1.footerSlot
+		ItemCardHeaderSlot = Frame.headerSlot,
+		ItemCardFooterSlot = Frame.footerSlot
 	} else {
-		BackgroundsWrapper = reactModule.createElement(itemCardBackgroundsWrapperModule, {
-			backgroundLayers = p1.backgroundLayers,
-			imageScaleType = p1.imageScaleType,
-			headerSlot = p1.headerSlot,
-			footerSlot = p1.footerSlot
+		BackgroundsWrapper = ReactModule.createElement(ItemCardBackgroundsWrapperModule, {
+			backgroundLayers = Frame.backgroundLayers,
+			imageScaleType = Frame.imageScaleType,
+			headerSlot = Frame.headerSlot,
+			footerSlot = Frame.footerSlot
 		}),
-		SelectedBorder = if p1.showSelectionBorderWithBackground then reactModule.createElement(view, {
+		SelectedBorder = if Frame.showSelectionBorderWithBackground then ReactModule.createElement(View, {
 			tag = "size-full stroke-standard stroke-system-contrast radius-medium",
 			testId = "card-selection-stroke",
 			ZIndex = 2
 		}) else nil
 	})
-end)
+end))

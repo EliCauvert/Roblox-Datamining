@@ -1,38 +1,38 @@
-﻿local textService = game:GetService("TextService")
-local corePackagesService = game:GetService("CorePackages")
-local contextActionService = game:GetService("ContextActionService")
-local inGameMenuDependenciesModule = require(corePackagesService.Packages.InGameMenuDependencies)
-local roact = inGameMenuDependenciesModule.Roact
-local UIBlox = inGameMenuDependenciesModule.UIBlox
-local t = inGameMenuDependenciesModule.t
-local button = UIBlox.App.Button.Button
-local buttonType = UIBlox.App.Button.Enum.ButtonType
-local getTextSize = require(corePackagesService.Workspace.Packages.Style).GetTextSize
-local foundationFontFaceMigration = require(corePackagesService.Packages.Foundation).Utility.Flags.FoundationFontFaceMigration
-local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
-local assetsModule = require(script.Parent.Parent.Resources.Assets)
-local themedTextLabelModule = require(script.Parent.ThemedTextLabel)
-local dividerModule = require(script.Parent.Divider)
-local imageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
-local infoDialog = roact.PureComponent:extend("InfoDialog")
-infoDialog.validateProps = t.strictInterface({
-	bodyText = t.string,
-	dismissText = t.string,
-	titleText = t.string,
-	iconImage = t.union(t.string, t.table),
-	onDismiss = t.callback,
-	visible = t.boolean,
-	buttonRef = t.optional(t.table)
+﻿local TextService = game:GetService("TextService")
+local CorePackages = game:GetService("CorePackages")
+local ContextActionService = game:GetService("ContextActionService")
+local InGameMenuDependenciesModule = require(CorePackages.Packages.InGameMenuDependencies)
+local Roact = InGameMenuDependenciesModule.Roact
+local UIBlox = InGameMenuDependenciesModule.UIBlox
+local T = InGameMenuDependenciesModule.t
+local Button = UIBlox.App.Button.Button
+local ButtonType = UIBlox.App.Button.Enum.ButtonType
+local GetTextSizeFunction = require(CorePackages.Workspace.Packages.Style).GetTextSize
+local FoundationFontFaceMigration = require(CorePackages.Packages.Foundation).Utility.Flags.FoundationFontFaceMigration
+local WithFoundationOrUIBloxStyleFunction = require(CorePackages.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
+local AssetsModule = require(script.Parent.Parent.Resources.Assets)
+local ThemedTextLabelModule = require(script.Parent.ThemedTextLabel)
+local DividerModule = require(script.Parent.Divider)
+local ImageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
+local InfoDialog = Roact.PureComponent:extend("InfoDialog")
+InfoDialog.validateProps = T.strictInterface({
+	bodyText = T.string,
+	dismissText = T.string,
+	titleText = T.string,
+	iconImage = T.union(T.string, T.table),
+	onDismiss = T.callback,
+	visible = T.boolean,
+	buttonRef = T.optional(T.table)
 })
 
-function infoDialog.render(p1)
-	-- upvalues: withFoundationOrUIBloxStyle (ref), foundationFontFaceMigration (ref), getTextSize (ref), textService (ref), roact (ref), imageSetLabel (ref), assetsModule (ref), themedTextLabelModule (ref), dividerModule (ref), button (ref), buttonType (ref)
-	local props = p1.props
+function InfoDialog.render(p1) --[[ Line: 44 ]]
+	-- upvalues: WithFoundationOrUIBloxStyleFunction (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy), Roact (copy), ImageSetLabel (copy), AssetsModule (copy), ThemedTextLabelModule (copy), DividerModule (copy), Button (copy), ButtonType (copy)
+	local Props = p1.props
 	
-	return withFoundationOrUIBloxStyle(function(p2)
-		-- upvalues: foundationFontFaceMigration (copy)
+	return WithFoundationOrUIBloxStyleFunction(function(p2) --[[ Line: 47 ]]
+		-- upvalues: FoundationFontFaceMigration (upval)
 		return {
-			Tokens = if foundationFontFaceMigration then p2 else nil,
+			Tokens = if FoundationFontFaceMigration then p2 else nil,
 			Theme = {
 				Overlay = {
 					Color = p2.Color.Common.Scrim.Color3,
@@ -51,20 +51,20 @@ function infoDialog.render(p1)
 				}
 			}
 		}
-	end, function(p2)
-		-- upvalues: props (ref), foundationFontFaceMigration (copy), getTextSize (copy), textService (copy), roact (copy), imageSetLabel (copy), assetsModule (copy), p1 (ref), themedTextLabelModule (copy), dividerModule (copy), button (copy), buttonType (copy)
-		local font = p2.Font.Body.Font
-		local var1 = p2.Font.Body.RelativeSize * p2.Font.BaseSize
-		local bodyText = props.bodyText
-		local var2 = math.max(if foundationFontFaceMigration then getTextSize(bodyText, var1, p2.Tokens.Typography.BodyLarge.Font, Vector2.new(264, 1e999), { addTemporaryPadding = false }).Y else textService:GetTextSize(bodyText, var1, font, Vector2.new(264, 1e999)).Y, var1 * 2) + 48
+	end, function(p2) --[[ Line: 68 ]]
+		-- upvalues: Props (copy), FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), TextService (upval), Roact (upval), ImageSetLabel (upval), AssetsModule (upval), p1 (copy), ThemedTextLabelModule (upval), DividerModule (upval), Button (upval), ButtonType (upval)
+		local BodyFont = p2.Font.Body.Font
+		local ScaledRelativeSize = p2.Font.Body.RelativeSize * p2.Font.BaseSize
+		local BodyText = Props.bodyText
+		local NewLargest = math.max(if FoundationFontFaceMigration then GetTextSizeFunction(BodyText, ScaledRelativeSize, p2.Tokens.Typography.BodyLarge.Font, Vector2.new(264, 1e999), { addTemporaryPadding = false }).Y else TextService:GetTextSize(BodyText, ScaledRelativeSize, BodyFont, Vector2.new(264, 1e999)).Y, ScaledRelativeSize * 2) + 48
 		
-		return roact.createElement("Frame", {
+		return Roact.createElement("Frame", {
 			BackgroundTransparency = 1,
 			ZIndex = 8,
 			Size = UDim2.new(1, 0, 1, 0),
-			Visible = props.visible
+			Visible = Props.visible
 		}, {
-			Overlay = roact.createElement("TextButton", {
+			Overlay = Roact.createElement("TextButton", {
 				AutoButtonColor = false,
 				BorderSizePixel = 0,
 				Text = "",
@@ -72,98 +72,99 @@ function infoDialog.render(p1)
 				BackgroundTransparency = p2.Theme.Overlay.Transparency,
 				Size = UDim2.new(1, 0, 1, 0)
 			}),
-			DialogMainFrame = roact.createElement(imageSetLabel, {
+			DialogMainFrame = Roact.createElement(ImageSetLabel, {
 				BackgroundTransparency = 1,
 				AnchorPoint = Vector2.new(0.5, 0.5),
-				Image = assetsModule.Images.RoundedRect.Image,
+				Image = AssetsModule.Images.RoundedRect.Image,
 				ImageColor3 = p2.Theme.BackgroundUIDefault.Color,
 				ImageTransparency = p2.Theme.BackgroundUIDefault.Transparency,
 				Position = UDim2.new(0.5, 0, 0.5, 0),
-				ScaleType = assetsModule.Images.RoundedRect.ScaleType,
-				Size = UDim2.new(0, 312, 0, var2 + 49 + 36 + 36 + 24 + 10),
-				SliceCenter = assetsModule.Images.RoundedRect.SliceCenter
+				ScaleType = AssetsModule.Images.RoundedRect.ScaleType,
+				Size = UDim2.new(0, 312, 0, NewLargest + 49 + 36 + 36 + 24 + 10),
+				SliceCenter = AssetsModule.Images.RoundedRect.SliceCenter
 			}, {
-				Padding = roact.createElement("UIPadding", {
+				Padding = Roact.createElement("UIPadding", {
 					PaddingTop = UDim.new(0, 10),
 					PaddingBottom = UDim.new(0, 24),
 					PaddingLeft = UDim.new(0, 24),
 					PaddingRight = UDim.new(0, 24)
 				}),
-				Layout = roact.createElement("UIListLayout", {
+				Layout = Roact.createElement("UIListLayout", {
 					FillDirection = Enum.FillDirection.Vertical,
 					HorizontalAlignment = Enum.HorizontalAlignment.Center,
 					SortOrder = Enum.SortOrder.LayoutOrder
 				}),
-				Icon = roact.createElement(imageSetLabel, {
+				Icon = Roact.createElement(ImageSetLabel, {
 					BackgroundTransparency = 1,
 					LayoutOrder = 1,
 					Size = UDim2.new(0, 36, 0, 36),
 					Image = p1.props.iconImage
 				}),
-				Title = roact.createElement(themedTextLabelModule, {
+				Title = Roact.createElement(ThemedTextLabelModule, {
 					fontKey = "Header1",
 					themeKey = "TextEmphasis",
 					LayoutOrder = 2,
 					Size = UDim2.new(1, 0, 0, 48),
-					Text = props.titleText
+					Text = Props.titleText
 				}),
-				Divider = roact.createElement(dividerModule, { LayoutOrder = 3 }),
-				BodyTextContainer = roact.createElement("Frame", {
+				Divider = Roact.createElement(DividerModule, { LayoutOrder = 3 }),
+				BodyTextContainer = Roact.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 4,
-					Size = UDim2.new(1, 0, 0, var2)
+					Size = UDim2.new(1, 0, 0, NewLargest)
 				}, {
-					BodyText = roact.createElement(themedTextLabelModule, {
+					BodyText = Roact.createElement(ThemedTextLabelModule, {
 						TextWrapped = true,
 						Size = UDim2.new(1, 0, 1, 0),
-						Text = props.bodyText
+						Text = Props.bodyText
 					})
 				}),
-				ConfirmButton = roact.createElement(button, {
-					buttonType = buttonType.PrimarySystem,
+				ConfirmButton = Roact.createElement(Button, {
+					buttonType = ButtonType.PrimarySystem,
 					layoutOrder = 5,
 					size = UDim2.new(1, 0, 0, 36),
-					onActivated = props.onDismiss,
-					text = props.dismissText,
-					[roact.Ref] = p1.props.buttonRef
+					onActivated = Props.onDismiss,
+					text = Props.dismissText,
+					[Roact.Ref] = p1.props.buttonRef
 				})
 			})
 		})
 	end)
 end
 
-function infoDialog.bindActions(p1)
-	-- upvalues: contextActionService (ref)
-	contextActionService:BindCoreAction("InGameMenuModalDismiss", function(_, p2, _)
-		-- upvalues: p1 (ref)
-		if p2 == Enum.UserInputState.Begin then
+function InfoDialog.bindActions(p1) --[[ Line: 171 ]]
+	-- upvalues: ContextActionService (copy)
+	ContextActionService:BindCoreAction("InGameMenuModalDismiss", function(_, UserInputState, _) --[[ Line: 172 | Named "dismissFunc" ]]
+		-- upvalues: p1 (copy)
+		if UserInputState == Enum.UserInputState.Begin then
 			p1.props.onDismiss()
 		end
 	end, false, Enum.KeyCode.Escape)
 end
 
-function infoDialog.unbindActions(_)
-	-- upvalues: contextActionService (ref)
-	contextActionService:UnbindCoreAction("InGameMenuModalDismiss")
+function InfoDialog:unbindActions() --[[ Line: 181 ]]
+	-- upvalues: ContextActionService (copy)
+	ContextActionService:UnbindCoreAction("InGameMenuModalDismiss")
 end
 
-function infoDialog.didMount(p1)
+function InfoDialog.didMount(p1) --[[ Line: 185 ]]
 	if p1.props.visible then
 		p1:bindActions()
 	end
 end
 
-function infoDialog.didUpdate(p1)
+function InfoDialog.didUpdate(p1) --[[ Line: 191 ]]
 	if p1.props.visible then
 		p1:bindActions()
 		
 		return
+	else
+		p1:unbindActions()
 	end
+end
+
+function InfoDialog.willUnmount(p1) --[[ Line: 199 ]]
 	p1:unbindActions()
 end
 
-function infoDialog.willUnmount(p1)
-	p1:unbindActions()
-end
-
-return infoDialog
+return InfoDialog

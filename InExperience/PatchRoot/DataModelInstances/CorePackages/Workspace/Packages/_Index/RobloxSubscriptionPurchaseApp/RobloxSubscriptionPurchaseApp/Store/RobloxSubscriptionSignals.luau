@@ -1,62 +1,61 @@
-﻿local playersService = game:GetService("Players")
-local signalsModule = require(script:FindFirstAncestor("RobloxSubscriptionPurchaseApp").Parent.Signals)
+﻿local Players = game:GetService("Players")
+local SignalsModule = require(script:FindFirstAncestor("RobloxSubscriptionPurchaseApp").Parent.Signals)
 local AXSubscriptionSignalsPlayersServiceOverride = game:DefineFastFlag("AXSubscriptionSignalsPlayersServiceOverride", false)
-local var1 = nil
-local var2 = nil
+local v1 = nil
+local PlayersServiceForTesting = nil
 
-local function _()
-	-- upvalues: AXSubscriptionSignalsPlayersServiceOverride (ref), var2 (write), playersService (ref)
-	return if AXSubscriptionSignalsPlayersServiceOverride and var2 ~= nil then var2 else playersService
+local function _() --[[ Line: 28 | Named "getPlayersService" ]]
+	-- upvalues: AXSubscriptionSignalsPlayersServiceOverride (copy), PlayersServiceForTesting (ref), Players (copy)
+	return if AXSubscriptionSignalsPlayersServiceOverride and PlayersServiceForTesting ~= nil then PlayersServiceForTesting else Players
 end
 
-local var3 = function()
-	-- upvalues: AXSubscriptionSignalsPlayersServiceOverride (ref), var2 (write), playersService (ref), signalsModule (ref)
-	local var4 = if AXSubscriptionSignalsPlayersServiceOverride and var2 ~= nil then var2 else playersService
-	var4 = var4.LocalPlayer
-	local var5, var6 = signalsModule.createSignal(var4.HasRobloxSubscription == true)
-	local var7, var8 = signalsModule.createSignal(false)
-	local var9 = var4:GetPropertyChangedSignal("HasRobloxSubscription"):Connect(function()
-		-- upvalues: var4 (ref), var5 (ref), var6 (ref), var8 (ref)
-		local var10 = var4.HasRobloxSubscription == true
-		local var11 = var5()
-		var6(var10)
+local function v6() --[[ Line: 35 ]]
+	-- upvalues: AXSubscriptionSignalsPlayersServiceOverride (copy), PlayersServiceForTesting (ref), Players (copy), SignalsModule (copy)
+	local LocalPlayer = (if AXSubscriptionSignalsPlayersServiceOverride and PlayersServiceForTesting ~= nil then PlayersServiceForTesting else Players).LocalPlayer
+	local Signal, Signal2 = SignalsModule.createSignal(LocalPlayer.HasRobloxSubscription == true)
+	local Signal1, Signal2_1 = SignalsModule.createSignal(false)
+	local Connection = LocalPlayer:GetPropertyChangedSignal("HasRobloxSubscription"):Connect(function() --[[ Line: 43 ]]
+		-- upvalues: LocalPlayer (copy), Signal (copy), Signal2 (copy), Signal2_1 (copy)
+		local IsHasRobloxSubscription = LocalPlayer.HasRobloxSubscription == true
+		local SignalResult = Signal()
+		Signal2(IsHasRobloxSubscription)
 		
-		if var10 and not var11 then
-			var8(true)
+		if IsHasRobloxSubscription and not SignalResult then
+			Signal2_1(true)
 		end
 	end)
 	
 	return {
-		getHasRobloxSubscription = var5,
-		getGainedRobloxSubscriptionThisSession = var7,
-		setHasRobloxSubscriptionForTesting = var6,
-		setGainedRobloxSubscriptionThisSessionForTesting = var8,
-		cleanup = function()
-			-- upvalues: var9 (ref)
-			if var9 then
-				var9:Disconnect()
+		getHasRobloxSubscription = Signal,
+		getGainedRobloxSubscriptionThisSession = Signal1,
+		setHasRobloxSubscriptionForTesting = Signal2,
+		setGainedRobloxSubscriptionThisSessionForTesting = Signal2_1,
+		cleanup = function() --[[ Line: 61 ]]
+			-- upvalues: Connection (copy)
+			if Connection then
+				Connection:Disconnect()
 			end
 		end
 	}
 end
 
 return {
-	get = function()
-		-- upvalues: var1 (write), signalsModule (ref), var3 (ref)
-		if var1 == nil then
-			var1 = signalsModule.createComputed(var3)(false)
+	get = function() --[[ Line: 71 ]]
+		-- upvalues: v1 (ref), SignalsModule (copy), v6 (copy)
+		if v1 == nil then
+			v1 = SignalsModule.createComputed(v6)(false)
 		end
-		return var1
+		return v1
 	end,
-	setPlayersServiceForTesting = function(p1)
-		-- upvalues: AXSubscriptionSignalsPlayersServiceOverride (ref), var2 (write)
+	setPlayersServiceForTesting = function(Value) --[[ Line: 78 ]]
+		-- upvalues: AXSubscriptionSignalsPlayersServiceOverride (copy), PlayersServiceForTesting (ref)
 		if AXSubscriptionSignalsPlayersServiceOverride then
-			var2 = p1
+			PlayersServiceForTesting = Value
 		end
 	end,
-	cleanup = function()
-		-- upvalues: var1 (write), var2 (write)
-		var1 = nil
-		var2 = nil
+	cleanup = function() --[[ Line: 84 ]]
+		-- upvalues: v1 (ref), PlayersServiceForTesting (ref)
+		v1 = nil
+		PlayersServiceForTesting = nil
 	end
 }

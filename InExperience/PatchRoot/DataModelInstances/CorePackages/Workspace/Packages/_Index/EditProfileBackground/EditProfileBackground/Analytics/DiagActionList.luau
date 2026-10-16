@@ -1,16 +1,16 @@
-﻿local eventNamesModule = require(script.Parent.Enums.EventNames)
+﻿local EventNamesModule = require(script.Parent.Enums.EventNames)
 
 return {
-	[eventNamesModule.EditProfileBackgroundOpened] = {
+	[EventNamesModule.EditProfileBackgroundOpened] = {
 		name = game:DefineFastString("EditProfileBackgroundOpened", "EditProfileBackgroundOpened")
 	},
-	[eventNamesModule.EditProfileBackgroundLoadingStage] = {
+	[EventNamesModule.EditProfileBackgroundLoadingStage] = {
 		name = game:DefineFastString("EditProfileBackgroundLoadingStage", "EditProfileBackgroundLoadingStage")
 	},
-	[eventNamesModule.BackgroundSelected] = {
+	[EventNamesModule.BackgroundSelected] = {
 		name = game:DefineFastString("BackgroundSelected", "BackgroundSelected")
 	},
-	[eventNamesModule.EditProfileBackgroundFailure] = {
+	[EventNamesModule.EditProfileBackgroundFailure] = {
 		name = game:DefineFastString("EditProfileBackgroundFailure", "EditProfileBackgroundFailure")
 	}
 }

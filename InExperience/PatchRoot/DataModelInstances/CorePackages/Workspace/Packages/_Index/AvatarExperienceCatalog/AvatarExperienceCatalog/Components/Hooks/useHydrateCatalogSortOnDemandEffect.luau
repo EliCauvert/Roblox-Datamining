@@ -1,62 +1,66 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local parent = avatarExperienceCatalog.Parent
-local reactModule = require(parent.React)
-local itemTypeEnum = require(parent.AvatarExperienceModel).Enums.ItemTypeEnum
-local useNetworking = require(parent.AvatarExperienceCommon).Hooks.useNetworking
-local fFlagAXMigrateAllTabToSduiDev = require(parent.AvatarExperienceFlags).FFlagAXMigrateAllTabToSduiDev
-local useStore = require(parent.RoactUtils).Hooks.RoactRodux.useStore
-local widgetConstantsModule = require(avatarExperienceCatalog.WidgetConstants)
-local _ = require(avatarExperienceCatalog.Components.ResultsList.WidgetListInfoViewModel)
-local selectHydratedWidgetDataModule = require(avatarExperienceCatalog.State.Selectors.selectHydratedWidgetData)
-local useCatalogPageMonolithDependenciesModule = require(avatarExperienceCatalog.Providers.useCatalogPageMonolithDependencies)
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local Parent = AvatarExperienceCatalog.Parent
+local ReactModule = require(Parent.React)
+local ItemTypeEnum = require(Parent.AvatarExperienceModel).Enums.ItemTypeEnum
+local UseNetworkingFunction = require(Parent.AvatarExperienceCommon).Hooks.useNetworking
+local FFlagAXMigrateAllTabToSduiDev = require(Parent.AvatarExperienceFlags).FFlagAXMigrateAllTabToSduiDev
+local UseStoreFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useStore
+local WidgetConstantsModule = require(AvatarExperienceCatalog.WidgetConstants)
+local _ = require(AvatarExperienceCatalog.Components.ResultsList.WidgetListInfoViewModel)
+local SelectHydratedWidgetDataModule = require(AvatarExperienceCatalog.State.Selectors.selectHydratedWidgetData)
+local UseCatalogPageMonolithDependenciesModule = require(AvatarExperienceCatalog.Providers.useCatalogPageMonolithDependencies)
 local AXCarouselMaxItems = game:DefineFastInt("AXCarouselMaxItems", 50)
 
-local function getContentToHydrate(p1, p2, p3)
-	-- upvalues: AXCarouselMaxItems (ref), itemTypeEnum (ref), fFlagAXMigrateAllTabToSduiDev (ref)
+local function getContentToHydrate(p1, p2, p3) --[[ Line: 56 ]]
+	-- upvalues: AXCarouselMaxItems (copy), ItemTypeEnum (copy), FFlagAXMigrateAllTabToSduiDev (copy)
+	local List = {}
+	local Content = p1 and p1.content
+	
+	if not Content or #Content == 0 then
+		return List
+	end
 	local t = {}
-	local content = p1 and p1.content
 	
-	if not content or #content == 0 then
-		return t
-	end
-	local t_1 = {}
-	
-	for i = 1, math.min(p3 or AXCarouselMaxItems, #content) do
-		local var1 = content[i]
-		local type = var1.type
-		local var2 = t_1[type]
+	for i = 1, math.min(p3 or AXCarouselMaxItems, #Content) do
+		local ContentEntry = Content[i]
+		local Type = ContentEntry.type
+		local Entry = t[Type]
 		
-		if var2 == nil then
-			var2 = if p2 then p2[type] else false
-			t_1[type] = var2
+		if Entry == nil then
+			Entry = p2 and p2[Type] or false
+			t[Type] = Entry
 		end
-		if (type == itemTypeEnum.Look and not fFlagAXMigrateAllTabToSduiDev) or not (var2 and var2[var1.id]) then
-			table.insert(t, var1)
+		local Entry1 = Entry and Entry[ContentEntry.id]
+		
+		if Type == ItemTypeEnum.Look and not FFlagAXMigrateAllTabToSduiDev or not Entry1 then
+			table.insert(List, ContentEntry)
 		end
 	end
-	return t
+	return List
 end
 
-return function(p4, p5, p6)
-	-- upvalues: useCatalogPageMonolithDependenciesModule (ref), useNetworking (ref), useStore (ref), reactModule (ref), widgetConstantsModule (ref), selectHydratedWidgetDataModule (ref), getContentToHydrate (ref)
-	local fetchHydratedWidgetContent = useCatalogPageMonolithDependenciesModule().fetchHydratedWidgetContent
-	local var3 = useNetworking()
-	local var4 = useStore()
-	local var5 = reactModule.useRef(nil)
-	reactModule.useEffect(function()
-		-- upvalues: p4 (ref), widgetConstantsModule (copy), var5 (ref), p5 (ref), p6 (ref), selectHydratedWidgetDataModule (copy), var4 (ref), getContentToHydrate (copy), fetchHydratedWidgetContent (ref), var3 (ref)
-		local id = p4 and p4.id
+return function(p4, p5, p6) --[[ Line: 99 | Named "useHydrateCatalogSortOnDemandEffect" ]]
+	-- upvalues: UseCatalogPageMonolithDependenciesModule (copy), UseNetworkingFunction (copy), UseStoreFunction (copy), ReactModule (copy), WidgetConstantsModule (copy), SelectHydratedWidgetDataModule (copy), getContentToHydrate (copy)
+	local FetchHydratedWidgetContentFunction = UseCatalogPageMonolithDependenciesModule().fetchHydratedWidgetContent
+	local UseNetworkingResult = UseNetworkingFunction()
+	local UseStoreResult = UseStoreFunction()
+	local UseRefResult = ReactModule.useRef(nil)
+	ReactModule.useEffect(function() --[[ Line: 118 ]]
+		-- upvalues: p4 (copy), WidgetConstantsModule (upval), UseRefResult (copy), p5 (copy), p6 (copy), SelectHydratedWidgetDataModule (upval), UseStoreResult (copy), getContentToHydrate (upval), FetchHydratedWidgetContentFunction (copy), UseNetworkingResult (copy)
+		local Id = p4 and p4.id
 		
-		if not id or p4.type == widgetConstantsModule.Types.MySharedAvatarsWidget then return end
-		if var5.current == id then return end
-		local var6 = getContentToHydrate(p4, selectHydratedWidgetDataModule(var4:getState()), if p5 and p5.customizedDataMap and p5.customizedDataMap.hydrateOnlyVisibleItems then p6 else nil)
+		if not Id or p4.type == WidgetConstantsModule.Types.MySharedAvatarsWidget then return end
+		if UseRefResult.current == Id then return end
+		local ContentToHydrate = getContentToHydrate(p4, SelectHydratedWidgetDataModule(UseStoreResult:getState()), if p5 and p5.customizedDataMap and p5.customizedDataMap.hydrateOnlyVisibleItems then p6 else nil)
 		
-		if #var6 == 0 then
+		if #ContentToHydrate ~= 0 then
+			UseRefResult.current = Id
+			FetchHydratedWidgetContentFunction(UseNetworkingResult, ContentToHydrate, Id)
+			
 			return
 		end
-		var5.current = id
-		fetchHydratedWidgetContent(var3, var6, id)
 	end, {
-		p4, p5, p6, var3, fetchHydratedWidgetContent, var4
+		p4, p5, p6, UseNetworkingResult, FetchHydratedWidgetContentFunction,
+		UseStoreResult
 	})
 end

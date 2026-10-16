@@ -1,104 +1,107 @@
 ﻿return {
-	createControlBar = function(helpBar)
-		helpBar.ControlBarContainer = Instance.new("Frame")
-		helpBar.ControlBarContainer.Name = "ControlBarContainer"
-		helpBar.ControlBarContainer.BackgroundTransparency = 1
-		helpBar.ControlBarContainer.BorderSizePixel = 0
-		helpBar.ControlBarContainer.AnchorPoint = Vector2.new(0, 1)
-		helpBar.ControlBarContainerVisiblePosition = UDim2.new(0, 0, 1, 0)
-		helpBar.ControlBarContainerNonVisiblePosition = UDim2.new(0, 0, 1.2, 0)
-		helpBar.ControlBarContainer.Position = helpBar.ControlBarContainerVisiblePosition
-		helpBar.maxControlBarHeight = 45
-		helpBar.ControlBarContainer.Size = UDim2.new(1, 0, 0, helpBar.maxControlBarHeight)
-		helpBar.ControlBarContainer.Parent = helpBar.screenGui
-		local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
-		UIAspectRatioConstraint.AspectRatio = 30
-		UIAspectRatioConstraint.AspectType = Enum.AspectType.ScaleWithParentSize
-		UIAspectRatioConstraint.DominantAxis = Enum.DominantAxis.Width
-		UIAspectRatioConstraint.Parent = helpBar.ControlBarContainer
-		helpBar.defaultBackgroundColor3 = Color3.fromRGB(20, 20, 20)
-		helpBar.defaultBackgroundTransparency = 0.15
-		helpBar.defaultButtonsTimeControlBarXSize = 0.275
-		helpBar.defaultHelpBarXSize = 0.025
-		helpBar.defaultScrubberControlBarXSize = 1 - helpBar.defaultButtonsTimeControlBarXSize - helpBar.defaultHelpBarXSize
-		helpBar.ButtonsTimeControlBar = Instance.new("Frame")
-		helpBar.ButtonsTimeControlBar.Name = "ButtonsTimeControlBar"
-		helpBar.ButtonsTimeControlBar.BackgroundColor3 = helpBar.defaultBackgroundColor3
-		helpBar.ButtonsTimeControlBar.BackgroundTransparency = helpBar.defaultBackgroundTransparency
-		helpBar.ButtonsTimeControlBar.BorderSizePixel = 0
-		helpBar.ButtonsTimeControlBar.SizeConstraint = Enum.SizeConstraint.RelativeXY
-		helpBar.ButtonsTimeControlBar.Size = UDim2.new(helpBar.defaultButtonsTimeControlBarXSize, 0, 1, 0)
-		helpBar.ButtonsTimeControlBar.Parent = helpBar.ControlBarContainer
-		local UIPadding = Instance.new("UIPadding")
-		UIPadding.PaddingLeft = UDim.new(0.02, 0)
-		UIPadding.Parent = helpBar.ButtonsTimeControlBar
-		helpBar.ScrubberControlBar = Instance.new("Frame")
-		helpBar.ScrubberControlBar.Name = "ScrubberControlBar"
-		helpBar.ScrubberControlBar.BackgroundColor3 = Color3.fromRGB(53, 53, 53)
-		helpBar.ScrubberControlBar.BackgroundTransparency = 0.5
-		helpBar.ScrubberControlBar.BorderSizePixel = 0
-		helpBar.ScrubberControlBar.SizeConstraint = Enum.SizeConstraint.RelativeXY
-		helpBar.ScrubberControlBar.Size = UDim2.new(helpBar.defaultScrubberControlBarXSize, 0, 1, 0)
-		helpBar.ScrubberControlBar.Parent = helpBar.ControlBarContainer
-		local UIFlexItem = Instance.new("UIFlexItem")
-		UIFlexItem.FlexMode = Enum.UIFlexMode.Fill
-		UIFlexItem.Parent = helpBar.ScrubberControlBar
-		helpBar.HelpBar = Instance.new("Frame")
-		helpBar.HelpBar.Name = "HelpBar"
-		helpBar.HelpBar.BackgroundColor3 = helpBar.defaultBackgroundColor3
-		helpBar.HelpBar.BackgroundTransparency = helpBar.defaultBackgroundTransparency
-		helpBar.HelpBar.BorderSizePixel = 0
-		helpBar.HelpBar.SizeConstraint = Enum.SizeConstraint.RelativeXY
-		helpBar.HelpBar.Size = UDim2.new(helpBar.defaultHelpBarXSize, 0, 1, 0)
-		helpBar.HelpBar.Parent = helpBar.ControlBarContainer
-		helpBar.maxViewportScalingWidth = helpBar.maxControlBarHeight * UIAspectRatioConstraint.AspectRatio
+	createControlBar = function(p1) --[[ Line: 4 ]]
+		p1.ControlBarContainer = Instance.new("Frame")
+		p1.ControlBarContainer.Name = "ControlBarContainer"
+		p1.ControlBarContainer.BackgroundTransparency = 1
+		p1.ControlBarContainer.BorderSizePixel = 0
+		p1.ControlBarContainer.AnchorPoint = Vector2.new(0, 1)
+		p1.ControlBarContainerVisiblePosition = UDim2.new(0, 0, 1, 0)
+		p1.ControlBarContainerNonVisiblePosition = UDim2.new(0, 0, 1.2, 0)
+		p1.ControlBarContainer.Position = p1.ControlBarContainerVisiblePosition
+		p1.maxControlBarHeight = 45
+		p1.ControlBarContainer.Size = UDim2.new(1, 0, 0, p1.maxControlBarHeight)
+		p1.ControlBarContainer.Parent = p1.screenGui
+		local AspectRatio = Instance.new("UIAspectRatioConstraint")
+		AspectRatio.AspectRatio = 30
+		AspectRatio.AspectType = Enum.AspectType.ScaleWithParentSize
+		AspectRatio.DominantAxis = Enum.DominantAxis.Width
+		AspectRatio.Parent = p1.ControlBarContainer
+		p1.defaultBackgroundColor3 = Color3.fromRGB(20, 20, 20)
+		p1.defaultBackgroundTransparency = 0.15
+		p1.defaultButtonsTimeControlBarXSize = 0.275
+		p1.defaultHelpBarXSize = 0.025
+		p1.defaultScrubberControlBarXSize = 1 - p1.defaultButtonsTimeControlBarXSize - p1.defaultHelpBarXSize
+		p1.ButtonsTimeControlBar = Instance.new("Frame")
+		p1.ButtonsTimeControlBar.Name = "ButtonsTimeControlBar"
+		p1.ButtonsTimeControlBar.BackgroundColor3 = p1.defaultBackgroundColor3
+		p1.ButtonsTimeControlBar.BackgroundTransparency = p1.defaultBackgroundTransparency
+		p1.ButtonsTimeControlBar.BorderSizePixel = 0
+		p1.ButtonsTimeControlBar.SizeConstraint = Enum.SizeConstraint.RelativeXY
+		p1.ButtonsTimeControlBar.Size = UDim2.new(p1.defaultButtonsTimeControlBarXSize, 0, 1, 0)
+		p1.ButtonsTimeControlBar.Parent = p1.ControlBarContainer
+		local Padding = Instance.new("UIPadding")
+		Padding.PaddingLeft = UDim.new(0.02, 0)
+		Padding.Parent = p1.ButtonsTimeControlBar
+		p1.ScrubberControlBar = Instance.new("Frame")
+		p1.ScrubberControlBar.Name = "ScrubberControlBar"
+		p1.ScrubberControlBar.BackgroundColor3 = Color3.fromRGB(53, 53, 53)
+		p1.ScrubberControlBar.BackgroundTransparency = 0.5
+		p1.ScrubberControlBar.BorderSizePixel = 0
+		p1.ScrubberControlBar.SizeConstraint = Enum.SizeConstraint.RelativeXY
+		p1.ScrubberControlBar.Size = UDim2.new(p1.defaultScrubberControlBarXSize, 0, 1, 0)
+		p1.ScrubberControlBar.Parent = p1.ControlBarContainer
+		local FlexItem = Instance.new("UIFlexItem")
+		FlexItem.FlexMode = Enum.UIFlexMode.Fill
+		FlexItem.Parent = p1.ScrubberControlBar
+		p1.HelpBar = Instance.new("Frame")
+		p1.HelpBar.Name = "HelpBar"
+		p1.HelpBar.BackgroundColor3 = p1.defaultBackgroundColor3
+		p1.HelpBar.BackgroundTransparency = p1.defaultBackgroundTransparency
+		p1.HelpBar.BorderSizePixel = 0
+		p1.HelpBar.SizeConstraint = Enum.SizeConstraint.RelativeXY
+		p1.HelpBar.Size = UDim2.new(p1.defaultHelpBarXSize, 0, 1, 0)
+		p1.HelpBar.Parent = p1.ControlBarContainer
+		p1.maxViewportScalingWidth = p1.maxControlBarHeight * AspectRatio.AspectRatio
 		
-		local function setupControlBarScaling()
-			-- upvalues: helpBar (ref), UIAspectRatioConstraint (ref), UIPadding (ref)
-			helpBar.firstThresholdCheck = true
-			helpBar.lastCheckAboveThreshold = false
-			local currentCamera = workspace.CurrentCamera
+		local function setupControlBarScaling() --[[ Line: 73 ]]
+			-- upvalues: p1 (copy), AspectRatio (copy), Padding (copy)
+			p1.firstThresholdCheck = true
+			p1.lastCheckAboveThreshold = false
+			local CurrentCamera = workspace.CurrentCamera
 			
-			if currentCamera then
-				currentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(function()
-					-- upvalues: currentCamera (ref), helpBar (copy), UIAspectRatioConstraint (copy), UIPadding (copy)
-					if helpBar.maxViewportScalingWidth < currentCamera.ViewportSize.X then
-						if not helpBar.firstBoundaryCheck and helpBar.lastCheckAboveThreshold then return end
-						helpBar.lastCheckAboveThreshold = true
-						UIAspectRatioConstraint.Parent = nil
-						UIPadding.PaddingLeft = UDim.new(0, helpBar.ButtonsTimeControlBar.AbsoluteSize.X * UIPadding.PaddingLeft.Scale + UIPadding.PaddingLeft.Offset)
-						helpBar.ButtonsTimeControlBar.Size = UDim2.new(0, helpBar.ButtonsTimeControlBar.AbsoluteSize.X, 1, 0)
-						helpBar.HelpBar.Size = UDim2.new(0, helpBar.HelpBar.AbsoluteSize.X, 1, 0)
-					elseif not helpBar.firstBoundaryCheck and not helpBar.lastCheckAboveThreshold then return end
-					helpBar.lastCheckAboveThreshold = false
-					UIAspectRatioConstraint.Parent = helpBar.ControlBarContainer
-					UIPadding.PaddingLeft = UDim.new(0.02, 0)
-					helpBar.ButtonsTimeControlBar.Size = UDim2.new(helpBar.defaultButtonsTimeControlBarXSize, 0, 1, 0)
-					helpBar.HelpBar.Size = UDim2.new(helpBar.defaultHelpBarXSize, 0, 1, 0)
-					helpBar.firstBoundaryCheck = false
+			if CurrentCamera then
+				CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(function() --[[ Line: 81 ]]
+					-- upvalues: CurrentCamera (copy), p1 (upval), AspectRatio (upval), Padding (upval)
+					if p1.maxViewportScalingWidth < CurrentCamera.ViewportSize.X then
+						if not p1.firstBoundaryCheck and p1.lastCheckAboveThreshold then return end
+						p1.lastCheckAboveThreshold = true
+						AspectRatio.Parent = nil
+						Padding.PaddingLeft = UDim.new(0, p1.ButtonsTimeControlBar.AbsoluteSize.X * Padding.PaddingLeft.Scale + Padding.PaddingLeft.Offset)
+						p1.ButtonsTimeControlBar.Size = UDim2.new(0, p1.ButtonsTimeControlBar.AbsoluteSize.X, 1, 0)
+						p1.HelpBar.Size = UDim2.new(0, p1.HelpBar.AbsoluteSize.X, 1, 0)
+					else
+						if not p1.firstBoundaryCheck and not p1.lastCheckAboveThreshold then return end
+						p1.lastCheckAboveThreshold = false
+						AspectRatio.Parent = p1.ControlBarContainer
+						Padding.PaddingLeft = UDim.new(0.02, 0)
+						p1.ButtonsTimeControlBar.Size = UDim2.new(p1.defaultButtonsTimeControlBarXSize, 0, 1, 0)
+						p1.HelpBar.Size = UDim2.new(p1.defaultHelpBarXSize, 0, 1, 0)
+					end
+					p1.firstBoundaryCheck = false
 				end)
 				
 				return
+			else
+				warn("No current camera found in workspace")
 			end
-			warn("No current camera found in workspace")
 		end
 		
 		setupControlBarScaling()
 		workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(setupControlBarScaling)
 		
-		function helpBar.createUIListLayout(p1, p2)
-			local UIListLayout = Instance.new("UIListLayout")
-			UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Left
-			UIListLayout.VerticalAlignment = Enum.VerticalAlignment.Center
-			UIListLayout.FillDirection = Enum.FillDirection.Horizontal
-			UIListLayout.Padding = UDim.new(0, p2)
-			UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-			UIListLayout.Parent = p1
+		function p1.createUIListLayout(Parent, Offset) --[[ Line: 124 ]]
+			local ListLayout = Instance.new("UIListLayout")
+			ListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Left
+			ListLayout.VerticalAlignment = Enum.VerticalAlignment.Center
+			ListLayout.FillDirection = Enum.FillDirection.Horizontal
+			ListLayout.Padding = UDim.new(0, Offset)
+			ListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+			ListLayout.Parent = Parent
 			
-			return UIListLayout
+			return ListLayout
 		end
 		
-		helpBar.createUIListLayout(helpBar.ControlBarContainer, 0)
-		helpBar.createUIListLayout(helpBar.ButtonsTimeControlBar, 7.5)
+		p1.createUIListLayout(p1.ControlBarContainer, 0)
+		p1.createUIListLayout(p1.ButtonsTimeControlBar, 7.5)
 	end
 }

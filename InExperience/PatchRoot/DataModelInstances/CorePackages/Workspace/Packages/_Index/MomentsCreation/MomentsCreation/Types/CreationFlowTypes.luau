@@ -1,8 +1,8 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local parent = momentsCreation.Parent
-local _ = require(parent.React)
-local _ = require(parent.Signals)
-local _ = require(parent.MomentsTypes)
-local _ = require(momentsCreation.Enums.CreationFlowState)
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local Parent = MomentsCreation.Parent
+local _ = require(Parent.React)
+local _ = require(Parent.Signals)
+local _ = require(Parent.MomentsTypes)
+local _ = require(MomentsCreation.Enums.CreationFlowState)
 
 return {}

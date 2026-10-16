@@ -1,144 +1,137 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local dashModule = require(parent.Dash)
-local reactModule = require(parent.React)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local menuModule = require(foundation.Components.Menu)
-local overlayModule = require(foundation.Providers.Overlay)
-local overlayStoryAnchorModule = require(foundation.Utility.Stories.Shared.OverlayStoryAnchor)
-local popoverAlignModule = require(foundation.Enums.PopoverAlign)
-local popoverSideModule = require(foundation.Enums.PopoverSide)
-local textModule = require(foundation.Components.Text)
-local viewModule = require(foundation.Components.View)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local DashModule = require(Parent.Dash)
+local ReactModule = require(Parent.React)
+local InputSizeModule = require(Foundation.Enums.InputSize)
+local MenuModule = require(Foundation.Components.Menu)
+local OverlayModule = require(Foundation.Providers.Overlay)
+local OverlayStoryAnchorModule = require(Foundation.Utility.Stories.Shared.OverlayStoryAnchor)
+local PopoverAlignModule = require(Foundation.Enums.PopoverAlign)
+local PopoverSideModule = require(Foundation.Enums.PopoverSide)
+local TextModule = require(Foundation.Components.Text)
+local ViewModule = require(Foundation.Components.View)
 local list = {
-	inputSizeModule.XSmall,
-	inputSizeModule.Small,
-	inputSizeModule.Medium,
-	inputSizeModule.Large
-}
-local list_1 = {
-	popoverSideModule.Top,
-	popoverSideModule.Bottom,
-	popoverSideModule.Left,
-	popoverSideModule.Right
-}
-local list_2 = {
-	popoverAlignModule.Start,
-	popoverAlignModule.Center,
-	popoverAlignModule.End
-}
-local list_3 = {
 	{ id = "option-1", text = "Option 1" },
 	{ id = "option-2", text = "Option 2" }
 }
-local PLAYGROUND_FRAME_SIZE = overlayStoryAnchorModule.PLAYGROUND_FRAME_SIZE
-local PLAYGROUND_TAG = overlayStoryAnchorModule.PLAYGROUND_TAG
-local TALL_SIZE = overlayStoryAnchorModule.TALL_SIZE
-local offset = overlayStoryAnchorModule.DEFAULT_SIZE.Y.Offset
-local var1 = offset + 224
-local uDim2 = UDim2.new(0.5, 0, 0.5, -(offset / 2 + 8))
+local Offset: number = OverlayStoryAnchorModule.DEFAULT_SIZE.Y.Offset
+local YOffset = Offset + 224
+local _UDim2 = UDim2.new(0.5, 0, 0.5, -(Offset / 2 + 8))
 
 return {
 	MATRIX_SECTION_TAG = "col gap-large size-full-0 auto-y",
 	PAGE_TAG = "col gap-xxlarge size-full-0 auto-y padding-y-large bg-surface-0",
-	ALIGN_ORDER = list_2,
-	MenuStage = function(p1)
-		-- upvalues: reactModule (ref), menuModule (ref), list_3 (ref), overlayStoryAnchorModule (ref), viewModule (ref), var1 (ref), overlayModule (ref), textModule (ref), uDim2 (ref)
-		local var2, var3 = reactModule.useState(false)
-		local var4, var5 = reactModule.useState(nil)
-		
-		return reactModule.createElement(viewModule, {
-			tag = "radius-medium bg-surface-200",
-			LayoutOrder = p1.LayoutOrder,
-			Size = UDim2.fromOffset(292, var1),
-			ref = var5
+	ALIGN_ORDER = {
+		PopoverAlignModule.Start,
+		PopoverAlignModule.Center,
+		PopoverAlignModule.End
+	},
+	MenuStage = function(Frame) --[[ Line: 126 ]]
+		-- upvalues: ReactModule (copy), MenuModule (copy), list (copy), OverlayStoryAnchorModule (copy), ViewModule (copy), YOffset (copy), OverlayModule (copy), TextModule (copy), _UDim2 (copy)
+		local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+		local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
+		local Element = ReactModule.createElement(MenuModule, {
+			isOpen = UseStateResult,
+			items = Frame.items or list,
+			size = Frame.size,
+			width = Frame.width,
+			maxHeight = Frame.maxHeight,
+			side = Frame.side,
+			align = Frame.align,
+			onPressedOutside = function() --[[ Line: 138 ]]
+				-- upvalues: UseStateResult2 (copy)
+				UseStateResult2(false)
+			end,
+			onActivated = function() --[[ Line: 141 ]]
+				-- upvalues: UseStateResult2 (copy)
+				UseStateResult2(false)
+			end
 		}, {
-			Overlay = if var4 then reactModule.createElement(overlayModule, { gui = var4 }, {
-				Fill = reactModule.createElement(viewModule, { tag = "size-full" }, {
-					Menu = reactModule.createElement(viewModule, {
+			Anchor = ReactModule.createElement(OverlayStoryAnchorModule.Anchor, {
+				onActivated = function() --[[ Line: 146 ]]
+					-- upvalues: UseStateResult2 (copy), UseStateResult (copy)
+					UseStateResult2(not UseStateResult)
+				end
+			})
+		})
+		
+		return ReactModule.createElement(ViewModule, {
+			tag = "radius-medium bg-surface-200",
+			LayoutOrder = Frame.LayoutOrder,
+			Size = UDim2.fromOffset(292, YOffset),
+			ref = UseStateResult2_1
+		}, {
+			Overlay = if UseStateResult1 then ReactModule.createElement(OverlayModule, { gui = UseStateResult1 }, {
+				Fill = ReactModule.createElement(ViewModule, { tag = "size-full" }, {
+					Menu = ReactModule.createElement(ViewModule, {
 						tag = "auto-xy",
 						Position = UDim2.fromScale(0.5, 0.5),
 						AnchorPoint = Vector2.new(0.5, 0.5)
-					}, {
-						Content = reactModule.createElement(menuModule, {
-							isOpen = var2,
-							items = p1.items or list_3,
-							size = p1.size,
-							width = p1.width,
-							maxHeight = p1.maxHeight,
-							side = p1.side,
-							align = p1.align,
-							onPressedOutside = function()
-								-- upvalues: var3 (ref)
-								var3(false)
-							end,
-							onActivated = function()
-								-- upvalues: var3 (ref)
-								var3(false)
-							end
-						}, {
-							Anchor = reactModule.createElement(overlayStoryAnchorModule.Anchor, {
-								onActivated = function()
-									-- upvalues: var3 (ref), var2 (ref)
-									var3(not var2)
-								end
-							})
-						})
-					}),
-					OpenState = if p1.hasOpenStateLabel then reactModule.createElement(textModule, {
+					}, { Content = Element }),
+					OpenState = if Frame.hasOpenStateLabel then ReactModule.createElement(TextModule, {
 						tag = "auto-xy text-caption-small content-muted",
-						Text = `isOpen = {var2}`,
-						Position = uDim2,
+						Text = `isOpen = {UseStateResult}`,
+						Position = _UDim2,
 						AnchorPoint = Vector2.new(0.5, 1)
 					}) else nil
 				})
 			}) else nil
 		})
 	end,
-	MenuTarget = function(p1)
-		-- upvalues: reactModule (ref), menuModule (ref), list_3 (ref), overlayStoryAnchorModule (ref)
-		local var2, var3 = reactModule.useState(false)
+	MenuTarget = function(Frame) --[[ Line: 84 ]]
+		-- upvalues: ReactModule (copy), MenuModule (copy), list (copy), OverlayStoryAnchorModule (copy)
+		local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 		
-		return reactModule.createElement(menuModule, {
-			LayoutOrder = p1.LayoutOrder,
-			isOpen = var2,
-			items = p1.items or list_3,
-			size = p1.size,
-			width = p1.width,
-			maxHeight = p1.maxHeight,
-			side = p1.side,
-			align = p1.align,
-			onPressedOutside = function()
-				-- upvalues: var3 (ref)
-				var3(false)
+		return ReactModule.createElement(MenuModule, {
+			LayoutOrder = Frame.LayoutOrder,
+			isOpen = UseStateResult,
+			items = Frame.items or list,
+			size = Frame.size,
+			width = Frame.width,
+			maxHeight = Frame.maxHeight,
+			side = Frame.side,
+			align = Frame.align,
+			onPressedOutside = function() --[[ Line: 96 ]]
+				-- upvalues: UseStateResult2 (copy)
+				UseStateResult2(false)
 			end,
-			onActivated = function(p2)
-				-- upvalues: p1 (ref), var3 (ref)
-				if p1.onActivated then
-					p1.onActivated(p2)
+			onActivated = function(p1) --[[ Line: 99 ]]
+				-- upvalues: Frame (copy), UseStateResult2 (copy)
+				if Frame.onActivated then
+					Frame.onActivated(p1)
 				end
-				var3(false)
+				UseStateResult2(false)
 			end
 		}, {
-			Anchor = reactModule.createElement(overlayStoryAnchorModule.Anchor, {
-				Size = p1.anchorSize,
-				onActivated = function()
-					-- upvalues: var3 (ref), var2 (ref)
-					var3(not var2)
+			Anchor = ReactModule.createElement(OverlayStoryAnchorModule.Anchor, {
+				Size = Frame.anchorSize,
+				onActivated = function() --[[ Line: 108 ]]
+					-- upvalues: UseStateResult2 (copy), UseStateResult (copy)
+					UseStateResult2(not UseStateResult)
 				end
 			})
 		})
 	end,
-	PLAYGROUND_FRAME_SIZE = PLAYGROUND_FRAME_SIZE,
-	PLAYGROUND_TAG = PLAYGROUND_TAG,
-	SAMPLE_ITEMS = list_3,
-	SIDE_ORDER = list_1,
-	SIZE_ORDER = list,
-	TALL_ANCHOR_SIZE = TALL_SIZE,
-	headerLabels = function(p1)
-		-- upvalues: dashModule (ref)
-		return dashModule.map(p1, function(p2)
-			return tostring(p2)
+	PLAYGROUND_FRAME_SIZE = OverlayStoryAnchorModule.PLAYGROUND_FRAME_SIZE,
+	PLAYGROUND_TAG = OverlayStoryAnchorModule.PLAYGROUND_TAG,
+	SAMPLE_ITEMS = list,
+	SIDE_ORDER = {
+		PopoverSideModule.Top,
+		PopoverSideModule.Bottom,
+		PopoverSideModule.Left,
+		PopoverSideModule.Right
+	},
+	SIZE_ORDER = {
+		InputSizeModule.XSmall,
+		InputSizeModule.Small,
+		InputSizeModule.Medium,
+		InputSizeModule.Large
+	},
+	TALL_ANCHOR_SIZE = OverlayStoryAnchorModule.TALL_SIZE,
+	headerLabels = function(p1) --[[ Line: 184 ]]
+		-- upvalues: DashModule (copy)
+		return DashModule.map(p1, function(p2): string --[[ Line: 185 ]]
+			return (tostring(p2))
 		end)
 	end
 }

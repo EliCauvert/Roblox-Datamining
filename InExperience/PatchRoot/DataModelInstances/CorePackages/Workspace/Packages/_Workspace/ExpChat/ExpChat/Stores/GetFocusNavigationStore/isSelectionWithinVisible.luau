@@ -1,16 +1,17 @@
-﻿return function(p1, p2)
-	if p1 == nil or p2 == nil then
-		return false
-	elseif p1 ~= p2 and not p1:IsDescendantOf(p2) then
+﻿return function(Ancestor, Ancestor1): boolean --[[ Line: 8 | Named "isSelectionWithinVisible" ]]
+	if Ancestor == nil or Ancestor1 == nil then
 		return false
 	end
-	local var1 = p1
-	while var1 ~= nil do
-		if not var1:IsA("GuiObject") or var1.Visible then
-			if var1 == p2 then break end
-			var1 = var1.Parent
-		end
+	if Ancestor ~= Ancestor1 and not Ancestor:IsDescendantOf(Ancestor1) then
 		return false
+	end
+	local Gui = Ancestor
+	while Gui ~= nil do
+		if Gui:IsA("GuiObject") and not Gui.Visible then
+			return false
+		end
+		if Gui == Ancestor1 then break end
+		Gui = Gui.Parent
 	end
 	return true
 end

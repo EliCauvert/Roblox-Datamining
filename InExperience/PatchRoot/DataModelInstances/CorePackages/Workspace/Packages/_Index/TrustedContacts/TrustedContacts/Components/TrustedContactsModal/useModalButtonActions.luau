@@ -1,1 +1,1 @@
-﻿return require(script.useModalButtonActions)
+﻿return (require(script.useModalButtonActions))

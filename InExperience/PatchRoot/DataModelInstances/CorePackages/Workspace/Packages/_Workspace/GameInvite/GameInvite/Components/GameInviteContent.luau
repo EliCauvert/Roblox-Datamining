@@ -1,163 +1,158 @@
-﻿local gameInvite = script:FindFirstAncestor("GameInvite")
-local components = gameInvite.Components
-local context = gameInvite.Context
-local parent = gameInvite.Parent
-local friendsMenuModule = require(parent.FriendsMenu)
-local reactModule = require(parent.React)
-local deviceInfo = require(parent.NotificationsCommon).DeviceInfo
-local roactUtilsModule = require(parent.RoactUtils)
-local friendsMenuFriendsList = friendsMenuModule.FriendsMenuFriendsList
-local inviteFriendContext = friendsMenuModule.InviteFriendContext
-local friendsMenuContextWrapper = friendsMenuModule.FriendsMenuContextWrapper
-local friendsMenuSearch = friendsMenuModule.FriendsMenuSearch
-local friendMenuType = friendsMenuModule.FriendMenuType
-local gameInviteAnalyticsManagerModule = require(gameInvite.analytics.GameInviteAnalyticsManager)
-local gameInviteTitleModule = require(components.GameInviteTitle)
-local gameInviteRewardsBannerModule = require(components.GameInviteRewardsBanner)
-local gameInviteCustomTextModule = require(components.GameInviteCustomText)
-local gameInviteConstantsModule = require(gameInvite.GameInviteConstants)
-local gameInviteModalLayoutContextModule = require(context.GameInviteModalLayoutContext)
-local gameDetailsContextModule = require(context.GameDetailsContext)
-local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
-local getFFlagEnableCommonFriendsMenu = require(parent.SharedFlags).GetFFlagEnableCommonFriendsMenu
-local getFFlagEnableGameInviteRewardsBanner = require(parent.SharedFlags).GetFFlagEnableGameInviteRewardsBanner
-local name = require(parent.Loggers).Logger:new(script.Name)
-local getRewardMetadataModule = require(gameInvite.Requests.GetRewardMetadata)
-local sidePadding = gameInviteConstantsModule.Layout.SidePadding
-local titleHeight = gameInviteConstantsModule.Layout.TitleHeight
+﻿local GameInvite = script:FindFirstAncestor("GameInvite")
+local Components = GameInvite.Components
+local Context = GameInvite.Context
+local Parent = GameInvite.Parent
+local FriendsMenuModule = require(Parent.FriendsMenu)
+local ReactModule = require(Parent.React)
+local DeviceInfo = require(Parent.NotificationsCommon).DeviceInfo
+local FriendsMenuFriendsList = FriendsMenuModule.FriendsMenuFriendsList
+local InviteFriendContext = FriendsMenuModule.InviteFriendContext
+local FriendsMenuContextWrapper = FriendsMenuModule.FriendsMenuContextWrapper
+local FriendsMenuSearch = FriendsMenuModule.FriendsMenuSearch
+local FriendMenuType = FriendsMenuModule.FriendMenuType
+local GameInviteAnalyticsManagerModule = require(GameInvite.analytics.GameInviteAnalyticsManager)
+local GameInviteTitleModule = require(Components.GameInviteTitle)
+local GameInviteRewardsBannerModule = require(Components.GameInviteRewardsBanner)
+local GameInviteCustomTextModule = require(Components.GameInviteCustomText)
+local GameInviteFriendsListContainerModule = require(Components.GameInviteFriendsList.GameInviteFriendsListContainer)
+local GameInviteConstantsModule = require(GameInvite.GameInviteConstants)
+local GameInviteModalLayoutContextModule = require(Context.GameInviteModalLayoutContext)
+local GameDetailsContextModule = require(Context.GameDetailsContext)
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local GetFFlagEnableCommonFriendsMenuFunction = require(Parent.SharedFlags).GetFFlagEnableCommonFriendsMenu
+local GetFFlagEnableGameInviteRewardsBannerFunction = require(Parent.SharedFlags).GetFFlagEnableGameInviteRewardsBanner
+local NewResult = require(Parent.Loggers).Logger:new(script.Name)
+local GetRewardMetadataModule = require(GameInvite.Requests.GetRewardMetadata)
+local FFlagGameInviteInExpUserListRendererModule = require(GameInvite.Flags.FFlagGameInviteInExpUserListRenderer)
+local SidePadding = GameInviteConstantsModule.Layout.SidePadding
+local TitleHeight = GameInviteConstantsModule.Layout.TitleHeight
 
-local var1 = function(p1)
-	-- upvalues: reactModule (ref), gameInviteModalLayoutContextModule (ref), gameDetailsContextModule (ref), getFFlagEnableGameInviteRewardsBanner (ref), getRewardMetadataModule (ref), name (ref), useSelector (ref), deviceInfo (ref), titleHeight (ref), gameInviteTitleModule (ref), sidePadding (ref), friendsMenuSearch (ref), gameInviteAnalyticsManagerModule (ref), gameInviteCustomTextModule (ref), gameInviteRewardsBannerModule (ref), friendsMenuFriendsList (ref), gameInviteConstantsModule (ref), friendMenuType (ref)
-	local var2 = reactModule.useContext(gameInviteModalLayoutContextModule)
-	local var3 = reactModule.useContext(gameDetailsContextModule)
-	local var4, var5 = reactModule.useState(nil)
+local function v25(p1) --[[ Line: 48 ]]
+	-- upvalues: ReactModule (copy), GameInviteModalLayoutContextModule (copy), GameDetailsContextModule (copy), GetFFlagEnableGameInviteRewardsBannerFunction (copy), GetRewardMetadataModule (copy), NewResult (copy), UseSelectorFunction (copy), DeviceInfo (copy), TitleHeight (copy), GameInviteTitleModule (copy), SidePadding (copy), FriendsMenuSearch (copy), GameInviteAnalyticsManagerModule (copy), GameInviteCustomTextModule (copy), GameInviteRewardsBannerModule (copy), FFlagGameInviteInExpUserListRendererModule (copy), GameInviteFriendsListContainerModule (copy), FriendsMenuFriendsList (copy), GameInviteConstantsModule (copy), FriendMenuType (copy)
+	local UseContextResult = ReactModule.useContext(GameInviteModalLayoutContextModule)
+	local UseContextResult1 = ReactModule.useContext(GameDetailsContextModule)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	
-	if getFFlagEnableGameInviteRewardsBanner() then
-		reactModule.useEffect(function()
-			-- upvalues: getRewardMetadataModule (copy), var5 (ref), name (copy)
+	if GetFFlagEnableGameInviteRewardsBannerFunction() then
+		ReactModule.useEffect(function() --[[ Line: 53 ]]
+			-- upvalues: GetRewardMetadataModule (upval), UseStateResult2 (copy), NewResult (upval)
 			if game.GameId > 0 then
-				getRewardMetadataModule():andThen(function(p2)
-					-- upvalues: var5 (copy)
-					if p2.responseBody and p2.responseBody.name and p2.responseBody.description then
-						var5(p2.responseBody)
+				GetRewardMetadataModule():andThen(function(Result) --[[ Line: 55 ]]
+					-- upvalues: UseStateResult2 (upval)
+					if Result.responseBody and Result.responseBody.name and Result.responseBody.description then
+						UseStateResult2(Result.responseBody)
 					end
-				end):catch(function(p2)
-					-- upvalues: name (copy)
-					name:error(`Error fetching reward metadata: {p2}`)
+				end):catch(function(Err) --[[ Line: 59 ]]
+					-- upvalues: NewResult (upval)
+					NewResult:error(`Error fetching reward metadata: {Err}`)
 				end)
 			end
 		end, {})
 	end
-	local var6 = useSelector(function(p2)
+	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 66 ]]
 		return p2.TopBar
 	end)
-	local var7 = deviceInfo.isConsole()
-	local isCompact = var2.modalMode == "compact"
-	local promptMessage = var3.promptMessage
-	local var8 = promptMessage and #promptMessage > 0
-	local var9 = titleHeight + 12
-	local var10 = not isCompact and not var7
+	local IsConsole = DeviceInfo.isConsole()
+	local PromptMessage = UseContextResult1.promptMessage
+	local v1: boolean = PromptMessage and #PromptMessage > 0
+	local NewTitleHeight = TitleHeight + 12
+	local NoIsConsole: boolean = not (UseContextResult.modalMode == "compact") and not IsConsole
 	
-	if var10 then
-		var9 += 48
+	if NoIsConsole then
+		NewTitleHeight += 48
 	end
-	if var8 then
-		var9 += 48
+	if v1 then
+		NewTitleHeight += 48
 	end
-	local var11 = titleHeight
+	local YOffset: number = TitleHeight
 	
-	if (if var3.isCoreScript or not var6 or not var6.statusBarHeight then false else true) and var6 then
-		var9 += var6.statusBarHeight
-		var11 += var6.statusBarHeight
+	if not UseContextResult1.isCoreScript and UseSelectorResult and UseSelectorResult.statusBarHeight and UseSelectorResult then
+		NewTitleHeight += UseSelectorResult.statusBarHeight
+		YOffset += UseSelectorResult.statusBarHeight
 	end
-	local var12
-	local createElement = reactModule.createElement
-	local var13 = "Frame"
-	local t = {
+	return ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 1, 0)
-	}
-	local t_1 = {
-		UIPadding = reactModule.createElement("UIPadding", {
+	}, {
+		UIPadding = ReactModule.createElement("UIPadding", {
 			PaddingBottom = UDim.new(0, 8),
 			PaddingTop = UDim.new(0, 8)
 		}),
-		UIListLayout = reactModule.createElement("UIListLayout", {
+		UIListLayout = ReactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			Padding = UDim.new(0, 12),
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			VerticalAlignment = Enum.VerticalAlignment.Top
 		}),
-		TitleContainer = reactModule.createElement("Frame", {
+		TitleContainer = ReactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			BackgroundTransparency = 1,
 			LayoutOrder = 0,
-			Size = UDim2.new(1, 0, 0, var11)
+			Size = UDim2.new(1, 0, 0, YOffset)
 		}, {
-			GameInviteTitle = reactModule.createElement(gameInviteTitleModule, {
+			GameInviteTitle = ReactModule.createElement(GameInviteTitleModule, {
 				layoutOrder = 0,
-				size = UDim2.new(1, 0, 0, titleHeight),
+				size = UDim2.new(1, 0, 0, TitleHeight),
 				hideCloseButton = p1.hideCloseButton
 			})
 		}),
-		SearchBox = var10 and reactModule.createElement("Frame", {
+		SearchBox = NoIsConsole and ReactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			BackgroundTransparency = 1,
 			LayoutOrder = 1,
 			Size = UDim2.new(1, 0, 0, 36)
 		}, {
-			UIPadding = reactModule.createElement("UIPadding", {
-				PaddingLeft = UDim.new(0, sidePadding),
-				PaddingRight = UDim.new(0, sidePadding)
+			UIPadding = ReactModule.createElement("UIPadding", {
+				PaddingLeft = UDim.new(0, SidePadding),
+				PaddingRight = UDim.new(0, SidePadding)
 			}),
-			UIListLayout = reactModule.createElement("UIListLayout", {
+			UIListLayout = ReactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Vertical,
 				Padding = UDim.new(0, 12),
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				VerticalAlignment = Enum.VerticalAlignment.Top
 			}),
-			FriendsMenuSearch = reactModule.createElement(friendsMenuSearch, {
+			FriendsMenuSearch = ReactModule.createElement(FriendsMenuSearch, {
 				layoutOrder = 1,
 				focusElement = false,
 				size = UDim2.new(1, 0, 0, 36),
-				onFocus = function()
-					-- upvalues: gameInviteAnalyticsManagerModule (copy)
-					gameInviteAnalyticsManagerModule:onSearchFocused()
+				onFocus = function() --[[ Line: 145 ]]
+					-- upvalues: GameInviteAnalyticsManagerModule (upval)
+					GameInviteAnalyticsManagerModule:onSearchFocused()
 				end
 			})
 		}) or nil,
-		CustomTextContainer = var8 and reactModule.createElement(gameInviteCustomTextModule, {
+		CustomTextContainer = v1 and ReactModule.createElement(GameInviteCustomTextModule, {
 			layoutOrder = 2,
 			size = UDim2.new(1, 0, 0, 36),
-			promptMessage = promptMessage
-		}) or nil
-	}
-	
-	if getFFlagEnableGameInviteRewardsBanner() and var4 ~= nil then
-		var12 = reactModule.createElement(gameInviteRewardsBannerModule, { layoutOrder = 2, rewardMetadata = var4 }) or nil
-	end
-	t_1.RewardsBanner = var12
-	t_1.FriendsList = reactModule.createElement(friendsMenuFriendsList, {
-		layoutOrder = 3,
-		size = UDim2.new(1, 0, 1, -var9),
-		parentComponentName = gameInviteConstantsModule.ParentComponentName,
-		menuType = friendMenuType.SingleSelect,
-		gameDetailsData = var3,
-		disableSelectionParentManagement = p1.disableSelectionParentManagement
+			promptMessage = PromptMessage
+		}) or nil,
+		RewardsBanner = GetFFlagEnableGameInviteRewardsBannerFunction() and UseStateResult ~= nil and ReactModule.createElement(GameInviteRewardsBannerModule, { layoutOrder = 2, rewardMetadata = UseStateResult }) or nil,
+		FriendsList = if FFlagGameInviteInExpUserListRendererModule and UseContextResult1.isCoreScript then ReactModule.createElement(GameInviteFriendsListContainerModule, {
+			layoutOrder = 3,
+			size = UDim2.new(1, 0, 1, -NewTitleHeight)
+		}) else ReactModule.createElement(FriendsMenuFriendsList, {
+			layoutOrder = 3,
+			size = UDim2.new(1, 0, 1, -NewTitleHeight),
+			parentComponentName = GameInviteConstantsModule.ParentComponentName,
+			menuType = FriendMenuType.SingleSelect,
+			gameDetailsData = UseContextResult1,
+			disableSelectionParentManagement = p1.disableSelectionParentManagement
+		})
 	})
-	
-	return createElement(var13, t, t_1)
 end
 
-return function(p1)
-	-- upvalues: getFFlagEnableCommonFriendsMenu (ref), reactModule (ref), inviteFriendContext (ref), friendsMenuContextWrapper (ref), var1 (ref)
-	return if getFFlagEnableCommonFriendsMenu() then reactModule.createElement(friendsMenuContextWrapper, {
-		inviteSingleFriend = (if getFFlagEnableCommonFriendsMenu() then reactModule.useContext(inviteFriendContext) else {
-			inviteSingleFriend = function() end,
-			getMaxRecipientRowNum = function() end
-		}).inviteSingleFriend,
-		inviteMultiFriends = function() end,
+return function(p1) --[[ Line: 178 ]]
+	-- upvalues: GetFFlagEnableCommonFriendsMenuFunction (copy), ReactModule (copy), InviteFriendContext (copy), FriendsMenuContextWrapper (copy), v25 (copy)
+	local UseContextResult = if GetFFlagEnableCommonFriendsMenuFunction() then ReactModule.useContext(InviteFriendContext) else {
+		inviteSingleFriend = function() --[[ Line: 181 ]] end,
+		getMaxRecipientRowNum = function() --[[ Line: 181 ]] end
+	}
+	
+	return if GetFFlagEnableCommonFriendsMenuFunction() then ReactModule.createElement(FriendsMenuContextWrapper, {
+		inviteSingleFriend = UseContextResult.inviteSingleFriend,
+		inviteMultiFriends = function() --[[ Line: 185 ]] end,
 		isLoadingCustomParams = p1.isLoadingCustomParams
-	}, { GameInviteContent = reactModule.createElement(var1, p1) }) else reactModule.createElement(var1, p1)
+	}, { GameInviteContent = ReactModule.createElement(v25, p1) }) else ReactModule.createElement(v25, p1)
 end

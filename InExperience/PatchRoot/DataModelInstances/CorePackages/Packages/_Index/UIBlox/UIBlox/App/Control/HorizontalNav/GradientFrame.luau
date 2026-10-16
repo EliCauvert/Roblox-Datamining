@@ -1,46 +1,45 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local core = parent_1.Core
-local reactModule = require(parent_1.Parent.React)
-local _ = require(parent.Style.StyleTypes)
-local useStyleModule = require(core.Style.useStyle)
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.Parent.React)
+local _ = require(Parent.Style.StyleTypes)
+local UseStyleModule = require(Parent1.Core.Style.useStyle)
 
-return function(p1)
-	-- upvalues: useStyleModule (ref), reactModule (ref)
-	local frameRef = p1.frameRef
-	local gradientStyle = p1.gradientStyle
-	local height = p1.height
-	local zIndex = p1.ZIndex
-	local theme = useStyleModule().Theme
-	local var1 = if gradientStyle then gradientStyle.Color else theme.BackgroundDefault.Color
-	local var2 = if gradientStyle then gradientStyle.Transparency else theme.BackgroundDefault.Transparency
+return function(p1) --[[ Line: 29 | Named "GradientFrame" ]]
+	-- upvalues: UseStyleModule (copy), ReactModule (copy)
+	local FrameRef = p1.frameRef
+	local GradientStyle = p1.gradientStyle
+	local Height = p1.height
+	local ZIndex = p1.ZIndex
+	local Theme = UseStyleModule().Theme
+	local Color = GradientStyle and GradientStyle.Color or Theme.BackgroundDefault.Color
+	local Transparency = GradientStyle and GradientStyle.Transparency or Theme.BackgroundDefault.Transparency
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 1, 0),
-		ZIndex = zIndex,
-		ref = frameRef
+		ZIndex = ZIndex,
+		ref = FrameRef
 	}, {
-		Left = reactModule.createElement("Frame", {
-			BackgroundTransparency = var2,
-			BackgroundColor3 = var1,
-			Size = UDim2.new(0, 50, 0, height)
+		Left = ReactModule.createElement("Frame", {
+			BackgroundTransparency = Transparency,
+			BackgroundColor3 = Color,
+			Size = UDim2.new(0, 50, 0, Height)
 		}, {
-			Gradient = reactModule.createElement("UIGradient", {
+			Gradient = ReactModule.createElement("UIGradient", {
 				Transparency = NumberSequence.new({
 					NumberSequenceKeypoint.new(0, 0),
 					NumberSequenceKeypoint.new(1, 1)
 				})
 			})
 		}),
-		Right = reactModule.createElement("Frame", {
-			BackgroundTransparency = var2,
-			BackgroundColor3 = var1,
+		Right = ReactModule.createElement("Frame", {
+			BackgroundTransparency = Transparency,
+			BackgroundColor3 = Color,
 			AnchorPoint = Vector2.new(1, 0),
 			Position = UDim2.fromScale(1, 0),
-			Size = UDim2.new(0, 50, 0, height)
+			Size = UDim2.new(0, 50, 0, Height)
 		}, {
-			Gradient = reactModule.createElement("UIGradient", {
+			Gradient = ReactModule.createElement("UIGradient", {
 				Transparency = NumberSequence.new({
 					NumberSequenceKeypoint.new(0, 1),
 					NumberSequenceKeypoint.new(1, 0)

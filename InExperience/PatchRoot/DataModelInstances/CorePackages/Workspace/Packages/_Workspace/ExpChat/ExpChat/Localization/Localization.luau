@@ -1,112 +1,113 @@
-﻿local parent = script:FindFirstAncestor("ExpChat").Parent
-local roactModule = require(parent.Roact)
-local reactModule = require(parent.React)
-local dictionary = require(parent.llama).Dictionary
+﻿local Parent = script:FindFirstAncestor("ExpChat").Parent
+local RoactModule = require(Parent.Roact)
+local ReactModule = require(Parent.React)
+local Dictionary = require(Parent.llama).Dictionary
 
-local function mapStringToBeLocalized(p1, p2)
-	if type(p2) == "table" then
-		local ok, status = pcall(function()
-			-- upvalues: p1 (ref), p2 (ref)
-			return p1:FormatByKey(p2[1], p2[2])
+local function mapStringToBeLocalized(UseContextResult, Entry) --[[ Line: 9 ]]
+	if type(Entry) == "table" then
+		local Success, Result = pcall(function() --[[ Line: 11 ]]
+			-- upvalues: UseContextResult (copy), Entry (copy)
+			return UseContextResult:FormatByKey(Entry[1], Entry[2])
 		end)
 		
-		return if ok then status else ""
-	elseif type(p2) ~= "string" then
+		return if Success then Result else ""
+	elseif type(Entry) == "string" then
+		local Success1, Result1 = pcall(function() --[[ Line: 21 ]]
+			-- upvalues: UseContextResult (copy), Entry (copy)
+			return UseContextResult:FormatByKey(Entry)
+		end)
+		
+		return if Success1 then Result1 else ""
+	else
 		return ""
 	end
-	local ok, status = pcall(function()
-		-- upvalues: p1 (ref), p2 (ref)
-		return p1:FormatByKey(p2)
-	end)
-	
-	return if ok then status else ""
 end
 
-local function _(p1)
-	-- upvalues: dictionary (ref), mapStringToBeLocalized (ref), roactModule (ref)
-	return function(p2)
-		-- upvalues: dictionary (copy), mapStringToBeLocalized (copy), roactModule (copy), p1 (ref)
-		local function transformedMapper(p3, p4)
-			-- upvalues: dictionary (copy), p2 (ref), mapStringToBeLocalized (copy)
-			return dictionary.map(p2(p4), function(p5, _)
-				-- upvalues: mapStringToBeLocalized (copy), p3 (ref)
-				return mapStringToBeLocalized(p3, p5)
+local function _(p1) --[[ Line: 35 | Named "getConnect" ]]
+	-- upvalues: Dictionary (copy), mapStringToBeLocalized (copy), RoactModule (copy)
+	return function(Callback) --[[ Line: 36 ]]
+		-- upvalues: Dictionary (upval), mapStringToBeLocalized (upval), RoactModule (upval), p1 (copy)
+		local function transformedMapper(p2, Props) --[[ Line: 37 ]]
+			-- upvalues: Dictionary (upval), Callback (copy), mapStringToBeLocalized (upval)
+			return Dictionary.map(Callback(Props), function(p3, _) --[[ Line: 38 ]]
+				-- upvalues: mapStringToBeLocalized (upval), p2 (copy)
+				return (mapStringToBeLocalized(p2, p3))
 			end)
 		end
 		
-		return function(p3)
-			-- upvalues: roactModule (copy), p1 (copy), dictionary (copy), transformedMapper (ref)
-			local var1 = roactModule.Component:extend("Connected-" .. tostring(p3))
+		return function(p2) --[[ Line: 43 ]]
+			-- upvalues: RoactModule (upval), p1 (upval), Dictionary (upval), transformedMapper (copy)
+			local ExtendResult = RoactModule.Component:extend("Connected-" .. tostring(p2))
 			
-			function var4.render(p4)
-				-- upvalues: roactModule (copy), p1 (copy), p3 (ref), dictionary (copy), transformedMapper (copy)
-				return roactModule.createElement(p1.Consumer, {
-					render = function(p5)
-						-- upvalues: roactModule (copy), p3 (copy), dictionary (copy), p4 (ref), transformedMapper (copy)
-						return roactModule.createElement(p3, dictionary.join(p4.props, transformedMapper(p5, p4.props)))
+			function ExtendResult.render(p3) --[[ Line: 46 ]]
+				-- upvalues: RoactModule (upval), p1 (upval), p2 (copy), Dictionary (upval), transformedMapper (upval)
+				return RoactModule.createElement(p1.Consumer, {
+					render = function(p4) --[[ Line: 48 ]]
+						-- upvalues: RoactModule (upval), p2 (upval), Dictionary (upval), p3 (copy), transformedMapper (upval)
+						return RoactModule.createElement(p2, Dictionary.join(p3.props, transformedMapper(p4, p3.props)))
 					end
 				})
 			end
 			
-			return var1
+			return ExtendResult
 		end
 	end
 end
 
-local _ = function(p1)
-	-- upvalues: reactModule (ref), dictionary (ref), mapStringToBeLocalized (ref)
-	return function(p2)
-		-- upvalues: reactModule (copy), p1 (ref), dictionary (copy), mapStringToBeLocalized (copy)
-		local var1 = reactModule.useContext(p1)
+local _ = function(p1) --[[ Line: 62 | Named "getUseLocalization" ]]
+	-- upvalues: ReactModule (copy), Dictionary (copy), mapStringToBeLocalized (copy)
+	return function(p2) --[[ Line: 63 ]]
+		-- upvalues: ReactModule (upval), p1 (copy), Dictionary (upval), mapStringToBeLocalized (upval)
+		local UseContextResult = ReactModule.useContext(p1)
 		
-		return dictionary.map(p2, function(p3, _)
-			-- upvalues: mapStringToBeLocalized (copy), var1 (ref)
-			return mapStringToBeLocalized(var1, p3)
+		return Dictionary.map(p2, function(p3, _) --[[ Line: 65 ]]
+			-- upvalues: mapStringToBeLocalized (upval), UseContextResult (copy)
+			return (mapStringToBeLocalized(UseContextResult, p3))
 		end)
 	end
 end
 
-return function(p1)
-	-- upvalues: roactModule (ref), dictionary (ref), mapStringToBeLocalized (ref), reactModule (ref)
-	local var1 = roactModule.createContext(p1)
+return function(p1) --[[ Line: 71 ]]
+	-- upvalues: RoactModule (copy), Dictionary (copy), mapStringToBeLocalized (copy), ReactModule (copy)
+	local Context = RoactModule.createContext(p1)
 	
 	return {
-		Consumer = var1.Consumer,
-		Provider = var1.Provider,
-		connect = function(p2)
-			-- upvalues: dictionary (copy), mapStringToBeLocalized (copy), roactModule (copy), var1 (ref)
-			local function transformedMapper(p3, p4)
-				-- upvalues: dictionary (copy), p2 (ref), mapStringToBeLocalized (copy)
-				return dictionary.map(p2(p4), function(p5, _)
-					-- upvalues: mapStringToBeLocalized (copy), p3 (ref)
-					return mapStringToBeLocalized(p3, p5)
+		Consumer = Context.Consumer,
+		Provider = Context.Provider,
+		connect = function(Callback) --[[ Line: 36 ]]
+			-- upvalues: Dictionary (upval), mapStringToBeLocalized (upval), RoactModule (upval), Context (copy)
+			local function transformedMapper(p2, Props) --[[ Line: 37 ]]
+				-- upvalues: Dictionary (upval), Callback (copy), mapStringToBeLocalized (upval)
+				return Dictionary.map(Callback(Props), function(p3, _) --[[ Line: 38 ]]
+					-- upvalues: mapStringToBeLocalized (upval), p2 (copy)
+					return (mapStringToBeLocalized(p2, p3))
 				end)
 			end
 			
-			return function(p3)
-				-- upvalues: roactModule (copy), var1 (copy), dictionary (copy), transformedMapper (ref)
-				local var2 = roactModule.Component:extend("Connected-" .. tostring(p3))
+			return function(p2) --[[ Line: 43 ]]
+				-- upvalues: RoactModule (upval), Context (upval), Dictionary (upval), transformedMapper (copy)
+				local ExtendResult = RoactModule.Component:extend("Connected-" .. tostring(p2))
 				
-				function var4.render(p4)
-					-- upvalues: roactModule (copy), var1 (copy), p3 (ref), dictionary (copy), transformedMapper (copy)
-					return roactModule.createElement(var1.Consumer, {
-						render = function(p5)
-							-- upvalues: roactModule (copy), p3 (copy), dictionary (copy), p4 (ref), transformedMapper (copy)
-							return roactModule.createElement(p3, dictionary.join(p4.props, transformedMapper(p5, p4.props)))
+				function ExtendResult.render(p3) --[[ Line: 46 ]]
+					-- upvalues: RoactModule (upval), Context (upval), p2 (copy), Dictionary (upval), transformedMapper (upval)
+					return RoactModule.createElement(Context.Consumer, {
+						render = function(p4) --[[ Line: 48 ]]
+							-- upvalues: RoactModule (upval), p2 (upval), Dictionary (upval), p3 (copy), transformedMapper (upval)
+							return RoactModule.createElement(p2, Dictionary.join(p3.props, transformedMapper(p4, p3.props)))
 						end
 					})
 				end
 				
-				return var2
+				return ExtendResult
 			end
 		end,
-		useLocalization = function(p2)
-			-- upvalues: reactModule (copy), var1 (ref), dictionary (copy), mapStringToBeLocalized (copy)
-			local var2 = reactModule.useContext(var1)
+		useLocalization = function(p2) --[[ Line: 63 ]]
+			-- upvalues: ReactModule (upval), Context (copy), Dictionary (upval), mapStringToBeLocalized (upval)
+			local UseContextResult = ReactModule.useContext(Context)
 			
-			return dictionary.map(p2, function(p3, _)
-				-- upvalues: mapStringToBeLocalized (copy), var2 (ref)
-				return mapStringToBeLocalized(var2, p3)
+			return Dictionary.map(p2, function(p3, _) --[[ Line: 65 ]]
+				-- upvalues: mapStringToBeLocalized (upval), UseContextResult (copy)
+				return (mapStringToBeLocalized(UseContextResult, p3))
 			end)
 		end
 	}

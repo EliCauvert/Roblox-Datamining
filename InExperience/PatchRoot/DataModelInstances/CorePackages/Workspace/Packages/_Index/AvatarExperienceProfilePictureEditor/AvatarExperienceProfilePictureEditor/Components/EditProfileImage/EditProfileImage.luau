@@ -1,96 +1,96 @@
-﻿local avatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
-local parent = avatarExperienceProfilePictureEditor.Parent
-local reactModule = require(parent.React)
-local roactNavigationModule = require(parent.RoactNavigation)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local scrollView = foundationModule.ScrollView
-local visibility = foundationModule.Enums.Visibility
-local iconButton = foundationModule.IconButton
-local text = foundationModule.Text
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local iconName = foundationModule.Enums.IconName
-local iconSize = foundationModule.Enums.IconSize
-local useTokens = foundationModule.Hooks.useTokens
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local focusNavigatorWrapperModule = require(script.Parent.FocusNavigatorWrapper)
-local combinedCarouselsContentModule = require(script.Parent.CombinedCarouselsContent)
-local expandedEmotesGridContentModule = require(script.Parent.ExpandedEmotesGridContent)
-local assetGridScrollSectionModule = require(script.Parent.AssetGridScrollSection)
-local editProfileImageFooterModule = require(script.Parent.EditProfileImageFooter)
-local editProfileImageActionsContextModule = require(avatarExperienceProfilePictureEditor.Context.EditProfileImageActionsContext)
-local useGuiInset = require(avatarExperienceProfilePictureEditor.Hooks.useGuiInset).useGuiInset
-local useEditProfileImageLayout = require(avatarExperienceProfilePictureEditor.Hooks.useEditProfileImageLayout).useEditProfileImageLayout
-local useEditProfileImageViewModelModule = require(avatarExperienceProfilePictureEditor.Hooks.useEditProfileImageViewModel)
-local framesPlusUpsellBarModule = require(script.Parent.FramesPlusUpsellBar)
-local robloxPlusUpsellBanner = require(parent.RobloxSubscriptionPurchaseApp).Components.RobloxPlusUpsellBanner
-local fFlagProfileFramesUpsellFreeTrialModule = require(avatarExperienceProfilePictureEditor.Flags.FFlagProfileFramesUpsellFreeTrial)
-local rotatableAvatarPreviewModule = require(script.Parent.RotatableAvatarPreview)
-local enumsModule = require(avatarExperienceProfilePictureEditor.Common.Enums)
-local constantsModule = require(avatarExperienceProfilePictureEditor.Constants)
-local textKeysModule = require(avatarExperienceProfilePictureEditor.Common.TextKeys)
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagAXEnableProfileTab = sharedFlagsModule.FFlagAXEnableProfileTab
-local fFlagEditProfileImageR15UpgradePrompt = sharedFlagsModule.FFlagEditProfileImageR15UpgradePrompt
-local editProfileImageAnalyticsModule = require(avatarExperienceProfilePictureEditor.Analytics.EditProfileImageAnalytics)
+﻿local AvatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
+local Parent = AvatarExperienceProfilePictureEditor.Parent
+local ReactModule = require(Parent.React)
+local RoactNavigationModule = require(Parent.RoactNavigation)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local ScrollView = FoundationModule.ScrollView
+local Visibility = FoundationModule.Enums.Visibility
+local IconButton = FoundationModule.IconButton
+local Text = FoundationModule.Text
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local IconName = FoundationModule.Enums.IconName
+local IconSize = FoundationModule.Enums.IconSize
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local FocusNavigatorWrapperModule = require(script.Parent.FocusNavigatorWrapper)
+local CombinedCarouselsContentModule = require(script.Parent.CombinedCarouselsContent)
+local ExpandedEmotesGridContentModule = require(script.Parent.ExpandedEmotesGridContent)
+local AssetGridScrollSectionModule = require(script.Parent.AssetGridScrollSection)
+local EditProfileImageFooterModule = require(script.Parent.EditProfileImageFooter)
+local EditProfileImageActionsContextModule = require(AvatarExperienceProfilePictureEditor.Context.EditProfileImageActionsContext)
+local UseGuiInsetFunction = require(AvatarExperienceProfilePictureEditor.Hooks.useGuiInset).useGuiInset
+local UseEditProfileImageLayoutFunction = require(AvatarExperienceProfilePictureEditor.Hooks.useEditProfileImageLayout).useEditProfileImageLayout
+local UseEditProfileImageViewModelModule = require(AvatarExperienceProfilePictureEditor.Hooks.useEditProfileImageViewModel)
+local FramesPlusUpsellBarModule = require(script.Parent.FramesPlusUpsellBar)
+local RobloxPlusUpsellBanner = require(Parent.RobloxSubscriptionPurchaseApp).Components.RobloxPlusUpsellBanner
+local FFlagProfileFramesUpsellFreeTrialModule = require(AvatarExperienceProfilePictureEditor.Flags.FFlagProfileFramesUpsellFreeTrial)
+local RotatableAvatarPreviewModule = require(script.Parent.RotatableAvatarPreview)
+local EnumsModule = require(AvatarExperienceProfilePictureEditor.Common.Enums)
+local ConstantsModule = require(AvatarExperienceProfilePictureEditor.Constants)
+local TextKeysModule = require(AvatarExperienceProfilePictureEditor.Common.TextKeys)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagAXEnableProfileTab = SharedFlagsModule.FFlagAXEnableProfileTab
+local FFlagEditProfileImageR15UpgradePrompt = SharedFlagsModule.FFlagEditProfileImageR15UpgradePrompt
+local EditProfileImageAnalyticsModule = require(AvatarExperienceProfilePictureEditor.Analytics.EditProfileImageAnalytics)
 
-local function renderFramesPlusUpsellBanner(p1)
-	-- upvalues: reactModule (ref), framesPlusUpsellBarModule (ref)
-	return reactModule.createElement(framesPlusUpsellBarModule, {
-		layoutOrder = p1.LayoutOrder,
-		actionText = p1.actionText,
-		onSubscribeActivated = p1.onActivated
+local function renderFramesPlusUpsellBanner(Frame) --[[ Line: 44 ]]
+	-- upvalues: ReactModule (copy), FramesPlusUpsellBarModule (copy)
+	return ReactModule.createElement(FramesPlusUpsellBarModule, {
+		layoutOrder = Frame.LayoutOrder,
+		actionText = Frame.actionText,
+		onSubscribeActivated = Frame.onActivated
 	})
 end
 
-local function createSplitLayout(p1, p2)
-	-- upvalues: reactModule (ref), view (ref), constantsModule (ref)
+local function createSplitLayout(p1, YOffset) --[[ Line: 85 ]]
+	-- upvalues: ReactModule (copy), View (copy), ConstantsModule (copy)
 	return {
-		Preview = reactModule.createElement(view, {
+		Preview = ReactModule.createElement(View, {
 			tag = "align-x-center position-top-right anchor-top-right",
 			ZIndex = 0,
-			Size = UDim2.new(1 - constantsModule.SplitControlsPaneWidthScale, 0, 0, p2)
+			Size = UDim2.new(1 - ConstantsModule.SplitControlsPaneWidthScale, 0, 0, YOffset)
 		}, { AvatarPreview = p1.avatarPreview }),
-		LeftPane = reactModule.createElement(view, {
+		LeftPane = ReactModule.createElement(View, {
 			tag = "col size-full-full bg-surface-0",
 			LayoutOrder = 1,
 			ZIndex = 1,
-			Size = UDim2.fromScale(constantsModule.SplitControlsPaneWidthScale, 1)
+			Size = UDim2.fromScale(ConstantsModule.SplitControlsPaneWidthScale, 1)
 		}, {
 			Header = p1.header,
-			Options = reactModule.createElement(view, { tag = "col grow size-full-0", LayoutOrder = 2 }, { [p1.activeView] = p1.options }),
+			Options = ReactModule.createElement(View, { tag = "col grow size-full-0", LayoutOrder = 2 }, { [p1.activeView] = p1.options }),
 			Footer = p1.footer
 		}),
-		CloseButton = if not p1.header then p1.closeButton else nil
+		CloseButton = if p1.header then nil else p1.closeButton
 	}
 end
 
-local function createStackedLayout(p1, p2, p3)
-	-- upvalues: reactModule (ref), view (ref), scrollView (ref), visibility (ref)
+local function createStackedLayout(p1, XOffset, YOffset) --[[ Line: 119 ]]
+	-- upvalues: ReactModule (copy), View (copy), ScrollView (copy), Visibility (copy)
 	return {
-		StackedContent = reactModule.createElement(view, { tag = "col size-full-full" }, {
+		StackedContent = ReactModule.createElement(View, { tag = "col size-full-full" }, {
 			TitleHeader = p1.header,
-			Preview = reactModule.createElement(view, {
+			Preview = ReactModule.createElement(View, {
 				tag = "col gap-medium size-full-0 auto-y",
 				LayoutOrder = 2
 			}, {
-				ProfilePhotoRow = reactModule.createElement(view, {
+				ProfilePhotoRow = ReactModule.createElement(View, {
 					tag = "align-x-center size-full-0 auto-y",
 					LayoutOrder = 1
 				}, {
-					PreviewClipHost = reactModule.createElement("Frame", {
+					PreviewClipHost = ReactModule.createElement("Frame", {
 						BackgroundTransparency = 1,
 						BorderSizePixel = 0,
 						ClipsDescendants = true,
-						Size = UDim2.fromOffset(p2, p3)
+						Size = UDim2.fromOffset(XOffset, YOffset)
 					}, { AvatarPreview = p1.avatarPreview })
 				})
 			}),
-			ScrollBody = if p1.activeView == "emotes" then reactModule.createElement(view, {
+			ScrollBody = if p1.activeView == "emotes" then ReactModule.createElement(View, {
 				testId = "virtualized-emotes-body",
 				tag = "col grow size-full-0",
 				LayoutOrder = 3
-			}, { Emotes = p1.options }) else reactModule.createElement(scrollView, {
+			}, { Emotes = p1.options }) else ReactModule.createElement(ScrollView, {
 				testId = "portrait-scroll-body",
 				tag = "grow size-full-0",
 				LayoutOrder = 3,
@@ -99,10 +99,10 @@ local function createStackedLayout(p1, p2, p3)
 					ScrollingDirection = Enum.ScrollingDirection.Y,
 					AutomaticCanvasSize = Enum.AutomaticSize.Y,
 					CanvasSize = UDim2.fromScale(0, 0),
-					scrollBarVisibility = visibility.Auto
+					scrollBarVisibility = Visibility.Auto
 				}
 			}, {
-				Content = reactModule.createElement(view, { tag = "col size-full-0 auto-y" }, { [p1.activeView] = p1.options })
+				Content = ReactModule.createElement(View, { tag = "col size-full-0 auto-y" }, { [p1.activeView] = p1.options })
 			}),
 			Footer = p1.footer
 		}),
@@ -110,239 +110,237 @@ local function createStackedLayout(p1, p2, p3)
 	}
 end
 
-local function EditProfileImageBody(p1)
-	-- upvalues: useTokens (ref), useGuiInset (ref), textKeysModule (ref), fFlagProfileFramesUpsellFreeTrialModule (ref), useLocalization (ref), useEditProfileImageLayout (ref), useEditProfileImageViewModelModule (ref), fFlagEditProfileImageR15UpgradePrompt (ref), reactModule (ref), editProfileImageAnalyticsModule (ref), enumsModule (ref), robloxPlusUpsellBanner (ref), renderFramesPlusUpsellBanner (ref), framesPlusUpsellBarModule (ref), constantsModule (ref), assetGridScrollSectionModule (ref), iconName (ref), view (ref), expandedEmotesGridContentModule (ref), combinedCarouselsContentModule (ref), editProfileImageFooterModule (ref), rotatableAvatarPreviewModule (ref), iconButton (ref), iconSize (ref), buttonVariant (ref), foundationModule (ref), text (ref), createSplitLayout (ref), createStackedLayout (ref), focusNavigatorWrapperModule (ref), roactNavigationModule (ref), fFlagAXEnableProfileTab (ref)
-	local var1 = useTokens()
-	local var2 = useGuiInset()
-	local t = { editProfilePicture = textKeysModule.EditProfilePicture }
+local function EditProfileImageBody(p1) --[[ Line: 197 ]]
+	-- upvalues: UseTokensFunction (copy), UseGuiInsetFunction (copy), TextKeysModule (copy), FFlagProfileFramesUpsellFreeTrialModule (copy), UseLocalizationFunction (copy), UseEditProfileImageLayoutFunction (copy), UseEditProfileImageViewModelModule (copy), FFlagEditProfileImageR15UpgradePrompt (copy), ReactModule (copy), EditProfileImageAnalyticsModule (copy), EnumsModule (copy), RobloxPlusUpsellBanner (copy), renderFramesPlusUpsellBanner (copy), FramesPlusUpsellBarModule (copy), ConstantsModule (copy), AssetGridScrollSectionModule (copy), IconName (copy), View (copy), ExpandedEmotesGridContentModule (copy), CombinedCarouselsContentModule (copy), EditProfileImageFooterModule (copy), RotatableAvatarPreviewModule (copy), IconButton (copy), IconSize (copy), ButtonVariant (copy), FoundationModule (copy), Text (copy), createSplitLayout (copy), createStackedLayout (copy), FocusNavigatorWrapperModule (copy), RoactNavigationModule (copy), FFlagAXEnableProfileTab (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseGuiInsetResult = UseGuiInsetFunction()
+	local config = { editProfilePicture = TextKeysModule.EditProfilePicture }
 	
-	if fFlagProfileFramesUpsellFreeTrialModule then
-		t.profileFramesUnlockBanner = textKeysModule.ProfileFramesUnlockBanner
-		t.subscribe = textKeysModule.Subscribe
-		t.tryItForFree = textKeysModule.TryItForFree
+	if FFlagProfileFramesUpsellFreeTrialModule then
+		config.profileFramesUnlockBanner = TextKeysModule.ProfileFramesUnlockBanner
+		config.subscribe = TextKeysModule.Subscribe
+		config.tryItForFree = TextKeysModule.TryItForFree
 	end
-	local var3 = useLocalization(t)
-	local var4 = p1.showCloseButton ~= false
-	local var5 = useEditProfileImageLayout({ guiInset = var2 })
-	local cutoutFieldOfViewDeg = var5.cutoutFieldOfViewDeg
-	local var6 = useEditProfileImageViewModelModule({
+	local UseLocalizationResult = UseLocalizationFunction(config)
+	local IsShowCloseButton = p1.showCloseButton ~= false
+	local UseEditProfileImageLayoutResult = UseEditProfileImageLayoutFunction({ guiInset = UseGuiInsetResult })
+	local CutoutFieldOfViewDeg = UseEditProfileImageLayoutResult.cutoutFieldOfViewDeg
+	local UseEditProfileImageViewModelModuleResult = UseEditProfileImageViewModelModule({
 		mode = p1.mode,
 		initialFrameAssetId = p1.initialFrameAssetId,
 		initialFrameSelectionRequestId = p1.initialFrameSelectionRequestId,
 		onClose = p1.onClose,
 		onSaveSuccess = p1.onSaveSuccess,
-		cutoutFieldOfViewDeg = cutoutFieldOfViewDeg
+		cutoutFieldOfViewDeg = CutoutFieldOfViewDeg
 	})
-	local navigation = var6.navigation
-	local emotes = var6.emotes
-	local frames = var6.frames
-	local preview = var6.preview
-	local footer = var6.footer
-	local activeView = navigation.activeView
-	local onSelect = emotes.onSelect
+	local Navigation = UseEditProfileImageViewModelModuleResult.navigation
+	local Emotes = UseEditProfileImageViewModelModuleResult.emotes
+	local Frames = UseEditProfileImageViewModelModuleResult.frames
+	local Preview = UseEditProfileImageViewModelModuleResult.preview
+	local Footer = UseEditProfileImageViewModelModuleResult.footer
+	local ActiveView = Navigation.activeView
+	local OnSelect = Emotes.onSelect
 	
-	if fFlagEditProfileImageR15UpgradePrompt then
-		local accountRigType = p1.accountRigType
-		onSelect = reactModule.useCallback(function(p2)
-			-- upvalues: p1 (ref), accountRigType (ref), emotes (ref)
-			local onPromptR15Upgrade = p1.onPromptR15Upgrade
+	if FFlagEditProfileImageR15UpgradePrompt then
+		local AccountRigType = p1.accountRigType
+		OnSelect = ReactModule.useCallback(function(SelectedEmoteId) --[[ Line: 235 ]]
+			-- upvalues: p1 (copy), AccountRigType (copy), Emotes (copy)
+			local OnPromptR15UpgradeFunction: (any) -> () = p1.onPromptR15Upgrade
 			
-			if accountRigType == Enum.HumanoidRigType.R6 and p2 ~= emotes.selectedEmoteId and onPromptR15Upgrade then
-				onPromptR15Upgrade(function()
-					-- upvalues: emotes (copy), p2 (ref)
-					emotes.onSelect(p2)
+			if AccountRigType == Enum.HumanoidRigType.R6 and SelectedEmoteId ~= Emotes.selectedEmoteId and OnPromptR15UpgradeFunction then
+				OnPromptR15UpgradeFunction(function() --[[ Line: 242 ]]
+					-- upvalues: Emotes (upval), SelectedEmoteId (copy)
+					Emotes.onSelect(SelectedEmoteId)
 				end)
 				
 				return
+			else
+				Emotes.onSelect(SelectedEmoteId)
 			end
-			emotes.onSelect(p2)
 		end, {
-			accountRigType,
-			emotes.selectedEmoteId,
-			emotes.onSelect,
+			AccountRigType,
+			Emotes.selectedEmoteId,
+			Emotes.onSelect,
 			p1.onPromptR15Upgrade
 		})
 	end
-	reactModule.useEffect(function()
-		-- upvalues: editProfileImageAnalyticsModule (copy), p1 (ref)
-		editProfileImageAnalyticsModule.logPageView({ mode = p1.mode })
+	ReactModule.useEffect(function() --[[ Line: 258 ]]
+		-- upvalues: EditProfileImageAnalyticsModule (upval), p1 (copy)
+		EditProfileImageAnalyticsModule.logPageView({ mode = p1.mode })
 	end, { p1.mode })
-	local var7 = reactModule.useCallback(function()
-		-- upvalues: editProfileImageAnalyticsModule (copy), p1 (ref), activeView (ref), navigation (ref)
-		editProfileImageAnalyticsModule.logClose({ mode = p1.mode, activeView = activeView })
-		navigation.onLeaveScreen()
-	end, { p1.mode, activeView, navigation.onLeaveScreen })
-	local var8 = p1.mode == enumsModule.EditProfileImageMode.FramesOnly
-	local var9 = if frames.shouldShowUpsell then if fFlagProfileFramesUpsellFreeTrialModule then reactModule.createElement(robloxPlusUpsellBanner, {
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 262 ]]
+		-- upvalues: EditProfileImageAnalyticsModule (upval), p1 (copy), ActiveView (copy), Navigation (copy)
+		EditProfileImageAnalyticsModule.logClose({ mode = p1.mode, activeView = ActiveView })
+		Navigation.onLeaveScreen()
+	end, { p1.mode, ActiveView, Navigation.onLeaveScreen })
+	local IsModeMatch = p1.mode == EnumsModule.EditProfileImageMode.FramesOnly
+	local Element = if Frames.shouldShowUpsell then if FFlagProfileFramesUpsellFreeTrialModule then ReactModule.createElement(RobloxPlusUpsellBanner, {
 		showPlusIcon = true,
 		testId = "FramesPlusUpsellBar",
-		message = var3.profileFramesUnlockBanner,
-		subscribeText = var3.subscribe,
-		freeTrialText = var3.tryItForFree,
-		onActivated = function()
-			-- upvalues: frames (ref)
-			frames.onOpenSubscriptionUpsell("banner")
+		message = UseLocalizationResult.profileFramesUnlockBanner,
+		subscribeText = UseLocalizationResult.subscribe,
+		freeTrialText = UseLocalizationResult.tryItForFree,
+		onActivated = function() --[[ Line: 278 ]]
+			-- upvalues: Frames (copy)
+			Frames.onOpenSubscriptionUpsell("banner")
 		end,
 		renderBanner = renderFramesPlusUpsellBanner
-	}) else reactModule.createElement(framesPlusUpsellBarModule, {
-		onSubscribeActivated = function()
-			-- upvalues: frames (ref)
-			frames.onOpenSubscriptionUpsell("banner")
+	}) else ReactModule.createElement(FramesPlusUpsellBarModule, {
+		onSubscribeActivated = function() --[[ Line: 286 ]]
+			-- upvalues: Frames (copy)
+			Frames.onOpenSubscriptionUpsell("banner")
 		end
 	}) else nil
-	local cutoutTopOffset = var5.cutoutTopOffset
-	local cutoutSize = var5.cutoutSize
-	local previewHeight = var5.previewHeight
-	local visiblePreviewHeight = var5.visiblePreviewHeight
-	local previewWidth = var5.previewWidth
-	local isSplit = var5.mode == "split"
-	local var10 = if isSplit then math.floor(var5.safeWidth * constantsModule.SplitControlsPaneWidthScale + 0.5) else var5.safeWidth
-	local closeButtonTopOffset = var5.closeButtonTopOffset
-	local var11 = if var8 then if isSplit then var7 else nil else navigation.onTitleBack
-	local var12 = if activeView == "frames" then if frames.show then reactModule.createElement(assetGridScrollSectionModule, {
-		layoutOrder = 3,
-		title = frames.localizedTitle,
-		titleLeadingIconName = iconName.RobloxPlus,
-		onTitleBack = var11,
-		useInternalScroll = isSplit,
-		gridProps = {
-			tileSize = 96,
-			items = frames.items,
-			isLoading = frames.isLoading,
-			hasError = frames.hasError,
-			onRetry = frames.onRetry,
-			bannerComponent = var9,
-			selectedId = frames.selectedFrameId,
-			onSelect = frames.onSelect,
-			containerWidth = var10
-		}
-	}) else reactModule.createElement(view, { tag = "size-full-0", LayoutOrder = 3 }) elseif activeView == "emotes" then reactModule.createElement(expandedEmotesGridContentModule, {
-		layoutOrder = 3,
-		tileSize = 96,
-		containerWidth = var10,
-		onTitleBack = var11,
-		useInternalScroll = isSplit,
-		ownedEmoteItems = emotes.ownedItems,
-		recommendedEmoteItems = emotes.recommendedItems,
-		emotesLoading = emotes.isLoading,
-		emotesError = emotes.hasError,
-		hasMoreEmotes = emotes.hasMore,
-		isLoadingMoreEmotes = emotes.isLoadingMore,
-		hasLoadMoreEmotesError = emotes.hasLoadMoreError,
-		onMoreEmotes = emotes.onMore,
-		onRetryEmotes = emotes.onRetry,
-		selectedEmoteId = emotes.selectedEmoteId,
-		onSelectEmote = onSelect
-	}) else reactModule.createElement(combinedCarouselsContentModule, {
-		layoutOrder = 3,
-		tileSize = 96,
-		showFrames = frames.show,
-		useInternalScroll = isSplit,
-		emoteItems = emotes.items,
-		emotesLoading = emotes.isLoading,
-		emotesError = emotes.hasError,
-		onRetryEmotes = emotes.onRetry,
-		selectedEmoteId = emotes.selectedEmoteId,
-		onSelectEmote = onSelect,
-		onExpandEmotes = navigation.onExpandEmotes,
-		frameItems = frames.items,
-		framesLoading = frames.isLoading,
-		framesError = frames.hasError,
-		onRetryFrames = frames.onRetry,
-		selectedFrameId = frames.selectedFrameId,
-		onSelectFrame = frames.onSelect,
-		onExpandFrames = navigation.onExpandFrames,
-		framesBannerComponent = var9
+	local PreviewHeight = UseEditProfileImageLayoutResult.previewHeight
+	local VisiblePreviewHeight = UseEditProfileImageLayoutResult.visiblePreviewHeight
+	local PreviewWidth = UseEditProfileImageLayoutResult.previewWidth
+	local IsSplit = UseEditProfileImageLayoutResult.mode == "split"
+	local Floored = if IsSplit then math.floor(UseEditProfileImageLayoutResult.safeWidth * ConstantsModule.SplitControlsPaneWidthScale + 0.5) else UseEditProfileImageLayoutResult.safeWidth
+	local CloseButtonTopOffset = UseEditProfileImageLayoutResult.closeButtonTopOffset
+	local UseResult1 = if IsModeMatch then if IsSplit then UseResult else nil else Navigation.onTitleBack
+	local NoOnTitleBack: boolean = not IsModeMatch and not Navigation.onTitleBack
+	local NoOnTitleBack1: boolean = IsShowCloseButton and (not IsSplit and (NoOnTitleBack or IsModeMatch))
+	local Element1 = ReactModule.createElement(IconButton, {
+		isCircular = true,
+		icon = if IsModeMatch then IconName.ChevronLargeLeft else IconName.X,
+		size = IconSize.Medium,
+		variant = ButtonVariant.Utility,
+		onActivated = UseResult
 	})
-	local var13 = reactModule.createElement(editProfileImageFooterModule, {
-		layoutOrder = 4,
-		footerCta = footer.cta,
-		isSaving = footer.isSaving,
-		localizedSubscribeLabel = footer.subscribeLabel,
-		localizedSaveLabel = footer.saveLabel,
-		selectedEmoteId = emotes.selectedEmoteId,
-		onSave = footer.onSave,
-		onOpenProfileFramesSubscriptionUpsell = frames.onOpenSubscriptionUpsell,
-		renderRecommendedEmotePurchaseFooter = p1.renderRecommendedEmotePurchaseFooter
-	})
-	local var14 = reactModule.createElement(rotatableAvatarPreviewModule, {
-		fillContainer = false,
-		userId = preview.localUserId or "",
-		width = previewWidth,
-		height = previewHeight,
-		cutoutSize = cutoutSize,
-		cutoutTopOffset = cutoutTopOffset,
-		isCameraControlBarDisabled = not isSplit,
-		fieldOfViewDeg = constantsModule.CameraFieldOfViewDeg,
-		fieldOfViewForDistanceScaleDeg = cutoutFieldOfViewDeg,
-		distanceScale = preview.distanceScale,
-		committedYRotDeg = preview.yRotDeg,
-		emoteAssetId = emotes.selectedEmoteId,
-		rigTypeOverride = if fFlagEditProfileImageR15UpgradePrompt then p1.accountRigType else nil,
-		frameImage = frames.selectedImage,
-		onYRotDegChanged = preview.onYRotDegChanged,
-		onDistanceScaleChanged = preview.onDistanceScaleChanged
-	})
-	local var15 = not var8 and not navigation.onTitleBack
-	local headerBar = foundationModule.HeaderBar
-	local t_1 = {
-		activeView = activeView,
-		avatarPreview = var14,
-		closeButton = if var4 and (not isSplit and (var15 or var8)) then reactModule.createElement(view, {
+	local HeaderBar = FoundationModule.HeaderBar
+	local config1 = {
+		activeView = ActiveView,
+		avatarPreview = ReactModule.createElement(RotatableAvatarPreviewModule, {
+			fillContainer = false,
+			userId = Preview.localUserId or "",
+			width = PreviewWidth,
+			height = PreviewHeight,
+			cutoutSize = UseEditProfileImageLayoutResult.cutoutSize,
+			cutoutTopOffset = UseEditProfileImageLayoutResult.cutoutTopOffset,
+			isCameraControlBarDisabled = not IsSplit,
+			fieldOfViewDeg = ConstantsModule.CameraFieldOfViewDeg,
+			fieldOfViewForDistanceScaleDeg = CutoutFieldOfViewDeg,
+			distanceScale = Preview.distanceScale,
+			committedYRotDeg = Preview.yRotDeg,
+			emoteAssetId = Emotes.selectedEmoteId,
+			rigTypeOverride = if FFlagEditProfileImageR15UpgradePrompt then p1.accountRigType else nil,
+			frameImage = Frames.selectedImage,
+			onYRotDegChanged = Preview.onYRotDegChanged,
+			onDistanceScaleChanged = Preview.onDistanceScaleChanged
+		}),
+		closeButton = if NoOnTitleBack1 then ReactModule.createElement(View, {
 			tag = "position-top-left auto-xy",
 			ZIndex = 10,
-			Position = if isSplit then UDim2.fromScale(constantsModule.SplitControlsPaneWidthScale, 0) else nil,
-			ref = navigation.closeButtonRef,
+			Position = if IsSplit then UDim2.fromScale(ConstantsModule.SplitControlsPaneWidthScale, 0) else nil,
+			ref = Navigation.closeButtonRef,
 			padding = {
-				top = UDim.new(0, closeButtonTopOffset),
-				left = UDim.new(0, var1.Padding.XLarge)
+				top = UDim.new(0, CloseButtonTopOffset),
+				left = UDim.new(0, UseTokensResult.Padding.XLarge)
 			}
-		}, {
-			Button = reactModule.createElement(iconButton, {
-				isCircular = true,
-				icon = if var8 then iconName.ChevronLargeLeft else iconName.X,
-				size = iconSize.Medium,
-				variant = buttonVariant.Utility,
-				onActivated = var7
-			})
-		}) else nil,
-		header = if isSplit and var15 and var4 then reactModule.createElement(view, {
+		}, { Button = Element1 }) else nil,
+		header = if IsSplit and NoOnTitleBack and IsShowCloseButton then ReactModule.createElement(View, {
 			tag = "size-full-0 auto-y",
 			LayoutOrder = 1,
-			ref = navigation.closeButtonRef
+			ref = Navigation.closeButtonRef
 		}, {
-			Bar = reactModule.createElement(headerBar.Root, nil, {
-				Leading = reactModule.createElement(headerBar.Leading, nil, {
-					Actions = reactModule.createElement(headerBar.Actions, {
-						actions = { { id = "close", icon = iconName.X, onActivated = var7 } }
+			Bar = ReactModule.createElement(HeaderBar.Root, nil, {
+				Leading = ReactModule.createElement(HeaderBar.Leading, nil, {
+					Actions = ReactModule.createElement(HeaderBar.Actions, {
+						actions = {
+							{ id = "close", icon = IconName.X, onActivated = UseResult }
+						}
 					}),
-					Title = reactModule.createElement(text, {
+					Title = ReactModule.createElement(Text, {
 						tag = "auto-xy text-heading-small content-emphasis",
-						Text = var3.editProfilePicture
+						Text = UseLocalizationResult.editProfilePicture
 					})
 				})
 			})
 		}) else nil,
-		footer = var13,
-		options = var12
+		footer = ReactModule.createElement(EditProfileImageFooterModule, {
+			layoutOrder = 4,
+			footerCta = Footer.cta,
+			isSaving = Footer.isSaving,
+			localizedSubscribeLabel = Footer.subscribeLabel,
+			localizedSaveLabel = Footer.saveLabel,
+			selectedEmoteId = Emotes.selectedEmoteId,
+			onSave = Footer.onSave,
+			onOpenProfileFramesSubscriptionUpsell = Frames.onOpenSubscriptionUpsell,
+			renderRecommendedEmotePurchaseFooter = p1.renderRecommendedEmotePurchaseFooter
+		}),
+		options = if ActiveView == "frames" then if Frames.show then ReactModule.createElement(AssetGridScrollSectionModule, {
+			layoutOrder = 3,
+			title = Frames.localizedTitle,
+			titleLeadingIconName = IconName.RobloxPlus,
+			onTitleBack = UseResult1,
+			useInternalScroll = IsSplit,
+			gridProps = {
+				tileSize = 96,
+				items = Frames.items,
+				isLoading = Frames.isLoading,
+				hasError = Frames.hasError,
+				onRetry = Frames.onRetry,
+				bannerComponent = Element,
+				selectedId = Frames.selectedFrameId,
+				onSelect = Frames.onSelect,
+				containerWidth = Floored
+			}
+		}) else ReactModule.createElement(View, { tag = "size-full-0", LayoutOrder = 3 }) elseif ActiveView == "emotes" then ReactModule.createElement(ExpandedEmotesGridContentModule, {
+			layoutOrder = 3,
+			tileSize = 96,
+			containerWidth = Floored,
+			onTitleBack = UseResult1,
+			useInternalScroll = IsSplit,
+			ownedEmoteItems = Emotes.ownedItems,
+			recommendedEmoteItems = Emotes.recommendedItems,
+			emotesLoading = Emotes.isLoading,
+			emotesError = Emotes.hasError,
+			hasMoreEmotes = Emotes.hasMore,
+			isLoadingMoreEmotes = Emotes.isLoadingMore,
+			hasLoadMoreEmotesError = Emotes.hasLoadMoreError,
+			onMoreEmotes = Emotes.onMore,
+			onRetryEmotes = Emotes.onRetry,
+			selectedEmoteId = Emotes.selectedEmoteId,
+			onSelectEmote = OnSelect
+		}) else ReactModule.createElement(CombinedCarouselsContentModule, {
+			layoutOrder = 3,
+			tileSize = 96,
+			showFrames = Frames.show,
+			useInternalScroll = IsSplit,
+			emoteItems = Emotes.items,
+			emotesLoading = Emotes.isLoading,
+			emotesError = Emotes.hasError,
+			onRetryEmotes = Emotes.onRetry,
+			selectedEmoteId = Emotes.selectedEmoteId,
+			onSelectEmote = OnSelect,
+			onExpandEmotes = Navigation.onExpandEmotes,
+			frameItems = Frames.items,
+			framesLoading = Frames.isLoading,
+			framesError = Frames.hasError,
+			onRetryFrames = Frames.onRetry,
+			selectedFrameId = Frames.selectedFrameId,
+			onSelectFrame = Frames.onSelect,
+			onExpandFrames = Navigation.onExpandFrames,
+			framesBannerComponent = Element
+		})
 	}
 	
-	return reactModule.createElement(focusNavigatorWrapperModule, { onClose = navigation.onBack }, {
-		NavigationEvents = reactModule.createElement(roactNavigationModule.NavigationEvents, { onDidFocus = navigation.onDidFocus }),
-		Root = reactModule.createElement(view, {
-			tag = if fFlagAXEnableProfileTab then {
-				["bg-surface-0"] = not isSplit,
+	return ReactModule.createElement(FocusNavigatorWrapperModule, { onClose = Navigation.onBack }, {
+		NavigationEvents = ReactModule.createElement(RoactNavigationModule.NavigationEvents, { onDidFocus = Navigation.onDidFocus }),
+		Root = ReactModule.createElement(View, {
+			tag = if FFlagAXEnableProfileTab then {
+				["bg-surface-0"] = not IsSplit,
 				["size-full-full"] = true
-			} elseif isSplit then "size-full-full" else "size-full-full bg-surface-0"
-		}, if isSplit then createSplitLayout(t_1, previewHeight) else createStackedLayout(t_1, previewWidth, visiblePreviewHeight))
+			} elseif IsSplit then "size-full-full" else "size-full-full bg-surface-0"
+		}, if IsSplit then createSplitLayout(config1, PreviewHeight) else createStackedLayout(config1, PreviewWidth, VisiblePreviewHeight))
 	})
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), editProfileImageActionsContextModule (ref), EditProfileImageBody (ref)
-	return reactModule.createElement(editProfileImageActionsContextModule.Provider, {
-		value = reactModule.useMemo(function()
-			-- upvalues: p1 (ref)
+return function(p1) --[[ Line: 499 | Named "EditProfileImage" ]]
+	-- upvalues: ReactModule (copy), EditProfileImageActionsContextModule (copy), EditProfileImageBody (copy)
+	return ReactModule.createElement(EditProfileImageActionsContextModule.Provider, {
+		value = ReactModule.useMemo(function() --[[ Line: 501 ]]
+			-- upvalues: p1 (copy)
 			return {
 				onOpenEmoteDetails = p1.onOpenEmoteDetails,
 				onPrepareRecommendedEmotePurchase = p1.onPrepareRecommendedEmotePurchase,
@@ -353,7 +351,7 @@ return function(p1)
 			p1.onPrepareRecommendedEmotePurchase,
 			p1.onShopForMoreEmotes
 		})
-	}, reactModule.createElement(EditProfileImageBody, {
+	}, ReactModule.createElement(EditProfileImageBody, {
 		mode = p1.mode,
 		initialFrameAssetId = p1.initialFrameAssetId,
 		initialFrameSelectionRequestId = p1.initialFrameSelectionRequestId,

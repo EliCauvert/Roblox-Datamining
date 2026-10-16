@@ -1,23 +1,23 @@
-﻿local bulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
-local parent = bulkPurchaseApp.Parent
-local IAPExperienceModule = require(parent.IAPExperience)
-local parseErrorReasonToEconomicRestriction = IAPExperienceModule.Utility.parseErrorReasonToEconomicRestriction
-local economicRestrictionsCounter = IAPExperienceModule.Counters.EconomicRestrictionsCounter
-local universalEconomicRestrictionsCounter = economicRestrictionsCounter.UniversalEconomicRestrictionsCounter
-local economicRestrictionsSurface = economicRestrictionsCounter.EconomicRestrictionsSurface
-local default = require(parent.LoggingProtocol).default
-local bulkPurchaseFailedModule = require(bulkPurchaseApp.Store.Actions.BulkPurchaseFailed)
-local errorCodeEnumModule = require(bulkPurchaseApp.Enums.ErrorCodeEnum)
+﻿local BulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
+local Parent = BulkPurchaseApp.Parent
+local IAPExperienceModule = require(Parent.IAPExperience)
+local ParseErrorReasonToEconomicRestrictionFunction = IAPExperienceModule.Utility.parseErrorReasonToEconomicRestriction
+local EconomicRestrictionsCounter = IAPExperienceModule.Counters.EconomicRestrictionsCounter
+local UniversalEconomicRestrictionsCounter = EconomicRestrictionsCounter.UniversalEconomicRestrictionsCounter
+local EconomicRestrictionsSurface = EconomicRestrictionsCounter.EconomicRestrictionsSurface
+local Default = require(Parent.LoggingProtocol).default
+local BulkPurchaseFailedModule = require(BulkPurchaseApp.Store.Actions.BulkPurchaseFailed)
+local ErrorCodeEnumModule = require(BulkPurchaseApp.Enums.ErrorCodeEnum)
 
-return function(p1, p2)
-	-- upvalues: parseErrorReasonToEconomicRestriction (ref), default (ref), universalEconomicRestrictionsCounter (ref), economicRestrictionsSurface (ref), bulkPurchaseFailedModule (ref), errorCodeEnumModule (ref)
-	local var1 = parseErrorReasonToEconomicRestriction(p1)
-	default:logRobloxTelemetryCounter(universalEconomicRestrictionsCounter, 1, {
-		surface = economicRestrictionsSurface.BulkPurchase,
-		failureReason = if var1.violationType then tostring(var1.violationType) else "null"
+return function(p1, Callback: (any) -> ()) --[[ Line: 14 | Named "handleEconomicRestrictionError" ]]
+	-- upvalues: ParseErrorReasonToEconomicRestrictionFunction (copy), Default (copy), UniversalEconomicRestrictionsCounter (copy), EconomicRestrictionsSurface (copy), BulkPurchaseFailedModule (copy), ErrorCodeEnumModule (copy)
+	local ParseErrorReasonToEconomicRestrictionResult = ParseErrorReasonToEconomicRestrictionFunction(p1)
+	Default:logRobloxTelemetryCounter(UniversalEconomicRestrictionsCounter, 1, {
+		surface = EconomicRestrictionsSurface.BulkPurchase,
+		failureReason = if ParseErrorReasonToEconomicRestrictionResult.violationType then tostring(ParseErrorReasonToEconomicRestrictionResult.violationType) else "null"
 	})
-	p2(bulkPurchaseFailedModule(errorCodeEnumModule.EconomicRestriction, {
-		failureReason = var1.violationType,
-		expirationTimeInMinutes = var1.timeoutMinutes
+	Callback(BulkPurchaseFailedModule(ErrorCodeEnumModule.EconomicRestriction, {
+		failureReason = ParseErrorReasonToEconomicRestrictionResult.violationType,
+		expirationTimeInMinutes = ParseErrorReasonToEconomicRestrictionResult.timeoutMinutes
 	}))
 end

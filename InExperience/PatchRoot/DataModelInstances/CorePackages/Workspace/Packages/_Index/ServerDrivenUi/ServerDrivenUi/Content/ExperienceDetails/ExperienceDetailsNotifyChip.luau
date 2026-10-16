@@ -1,98 +1,92 @@
-﻿local serverDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
-local parent = serverDrivenUi.Parent
-local playersService = game:GetService("Players")
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local signalsReactModule = require(parent.SignalsReact)
-local game = require(parent.DataHydration).Game
-local roactUtilsModule = require(parent.RoactUtils)
-local localizationModule = require(parent.Localization)
-local sduiChip = require(parent.SduiSharedContent).SduiChip
-local toastRoduxModule = require(parent.ToastRodux)
-local toastType = toastRoduxModule.Enums.ToastType
-local setCurrentToastMessage = toastRoduxModule.Actions.SetCurrentToastMessage
-local universalAppPolicyModule = require(parent.UniversalAppPolicy)
-local gameFollow = require(parent.DiscoveryAnalytics).Events.gameFollow
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local useLocalization = localizationModule.Hooks.useLocalization
-local useAppPolicy = universalAppPolicyModule.useAppPolicy
-local useOptimisticUpdateStatusModule = require(serverDrivenUi.Content.ExperienceDetails.Hooks.useOptimisticUpdateStatus)
+﻿local ServerDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
+local Parent = ServerDrivenUi.Parent
+local Players = game:GetService("Players")
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local SignalsReactModule = require(Parent.SignalsReact)
+local Game1 = require(Parent.DataHydration).Game
+local SduiChip = require(Parent.SduiSharedContent).SduiChip
+local ToastRoduxModule = require(Parent.ToastRodux)
+local ToastType = ToastRoduxModule.Enums.ToastType
+local SetCurrentToastMessageFunction = ToastRoduxModule.Actions.SetCurrentToastMessage
+local GameFollowFunction = require(Parent.DiscoveryAnalytics).Events.gameFollow
+local FFlagLuaAppAddUniverseIdToEngagementEvents = require(Parent.SharedFlags).FFlagLuaAppAddUniverseIdToEngagementEvents
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
+local UseOptimisticUpdateStatusModule = require(ServerDrivenUi.Content.ExperienceDetails.Hooks.useOptimisticUpdateStatus)
 
-return reactModule.memo(function(p1)
-	-- upvalues: useDispatch (ref), signalsReactModule (ref), game (ref), useLocalization (ref), reactModule (ref), playersService (ref), gameFollow (ref), setCurrentToastMessage (ref), toastType (ref), useOptimisticUpdateStatusModule (ref), useAppPolicy (ref), sduiChip (ref), foundationModule (ref)
-	local layoutOrder = p1.layoutOrder
-	local universeId = p1.universeId
-	local var1 = useDispatch()
-	local var2 = signalsReactModule.useSignalState(game.getFollowingsStore(false).getAndFetchFollowing(universeId).data)
-	local var3 = if var2 then var2.isFollowing else false
-	local var4 = signalsReactModule.useSignalState(game.getGameInfoStore(false).getAndFetchGameInfo(universeId).data)
-	local var5 = if var4 then var4.name else ""
-	local var6 = useLocalization({
+return ReactModule.memo(function(p1) --[[ Line: 39 | Named "ExperienceDetailsNotifyChip" ]]
+	-- upvalues: UseDispatchFunction (copy), SignalsReactModule (copy), Game1 (copy), UseLocalizationFunction (copy), ReactModule (copy), Players (copy), GameFollowFunction (copy), FFlagLuaAppAddUniverseIdToEngagementEvents (copy), SetCurrentToastMessageFunction (copy), ToastType (copy), UseOptimisticUpdateStatusModule (copy), UseAppPolicyFunction (copy), SduiChip (copy), FoundationModule (copy)
+	local LayoutOrder = p1.layoutOrder
+	local UniverseId = p1.universeId
+	local UseDispatchResult = UseDispatchFunction()
+	local UseSignalStateResult = SignalsReactModule.useSignalState(Game1.getFollowingsStore(false).getAndFetchFollowing(UniverseId).data)
+	local IsFollowing = UseSignalStateResult and UseSignalStateResult.isFollowing or false
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(Game1.getGameInfoStore(false).getAndFetchGameInfo(UniverseId).data)
+	local Name = UseSignalStateResult1 and UseSignalStateResult1.name or ""
+	local UseLocalizationResult = UseLocalizationFunction({
 		notifications = "Feature.GameFollows.LabelNotifications",
 		notificationsTurnedOn = {
 			"Feature.GameFollows.TooltipTurnedOnNotifications",
-			experienceName = var5
+			experienceName = Name
 		},
 		notificationsTurnedOff = {
 			"Feature.GameFollows.TooltipTurnedOffNotifications",
-			experienceName = var5
+			experienceName = Name
 		}
 	})
-	local var7 = if var4 then var4.rootPlaceId else nil
-	
-	return if useAppPolicy(function(p2)
-		return p2.getNotificationsCanReceiveExperience()
-	end) then reactModule.createElement(sduiChip, {
-		text = var6.notifications,
-		leadingIconName = foundationModule.Enums.IconName.Bell,
-		leadingIconVariant = if var3 then foundationModule.Enums.IconVariant.Filled else nil,
-		onActivated = useOptimisticUpdateStatusModule(reactModule.useCallback(function()
-			-- upvalues: var3 (ref), var7 (ref), playersService (copy), gameFollow (copy), game (copy), universeId (ref)
-			local var8 = not var3
+	local RootPlaceId = UseSignalStateResult1 and UseSignalStateResult1.rootPlaceId or nil
+	local UseOptimisticUpdateStatusModuleResult = UseOptimisticUpdateStatusModule(ReactModule.useCallback(function() --[[ Line: 60 ]]
+		-- upvalues: IsFollowing (copy), RootPlaceId (copy), Players (upval), GameFollowFunction (upval), FFlagLuaAppAddUniverseIdToEngagementEvents (upval), UniverseId (copy), Game1 (upval)
+		local NoIsFollowing = not IsFollowing
+		
+		if RootPlaceId then
+			GameFollowFunction({
+				ctx = "ExperienceDetailsNotifyChip",
+				uid = tostring(Players.LocalPlayer and Players.LocalPlayer.UserId),
+				placeId = RootPlaceId,
+				state = if NoIsFollowing then "on" else "off",
+				universeId = if FFlagLuaAppAddUniverseIdToEngagementEvents then UniverseId else nil
+			}, "ExperienceDetailsNotifyChip")
+		end
+		return Game1.getFollowingsStore(false).updateFollowing(UniverseId, NoIsFollowing)
+	end, { UniverseId, RootPlaceId, IsFollowing }), (ReactModule.useCallback(function(p2) --[[ Line: 77 ]]
+		-- upvalues: UseDispatchResult (copy), SetCurrentToastMessageFunction (upval), ToastType (upval), UseLocalizationResult (copy)
+		if not p2 then return end
+		if p2.type == "error" then
+			UseDispatchResult(SetCurrentToastMessageFunction({
+				toastType = if p2.errorType == "LimitReached" then ToastType.GameFollowError else ToastType.NetworkingError,
+				toastMessage = if p2.errorType == "LimitReached" then "Feature.GameFollows.TooltipNotificationsLimitReached" elseif p2.errorType == "NetworkError" then "Feature.Toast.NetworkingError.SomethingIsWrong" else "Feature.GameFollows.TooltipFollowLimitReached"
+			}))
 			
-			if var7 then
-				gameFollow({
-					ctx = "ExperienceDetailsNotifyChip",
-					uid = tostring(playersService.LocalPlayer and playersService.LocalPlayer.UserId),
-					placeId = var7,
-					state = if var8 then "on" else "off"
-				}, "ExperienceDetailsNotifyChip")
-			end
-			return game.getFollowingsStore(false).updateFollowing(universeId, var8)
-		end, { universeId, var7, var3 }), reactModule.useCallback(function(p2)
-			-- upvalues: var1 (ref), setCurrentToastMessage (copy), toastType (copy), var6 (ref)
-			if not p2 then return end
-			if p2.type == "error" then
-				local var8 = "Feature.GameFollows.TooltipFollowLimitReached"
-				
-				if p2.errorType == "LimitReached" then
-					var8 = "Feature.GameFollows.TooltipNotificationsLimitReached"
-				elseif p2.errorType == "NetworkError" then
-					var8 = "Feature.Toast.NetworkingError.SomethingIsWrong"
-				end
-				var1(setCurrentToastMessage({
-					toastType = if p2.errorType == "LimitReached" then toastType.GameFollowError else toastType.NetworkingError,
-					toastMessage = var8
+			return
+		end
+		if p2.type == "success" then
+			if p2.isFollowing then
+				UseDispatchResult(SetCurrentToastMessageFunction({
+					isLocalized = true,
+					toastType = ToastType.NotificationsTurnedOn,
+					toastMessage = UseLocalizationResult.notificationsTurnedOn
 				}))
 				
 				return
-			elseif p2.type == "success" then
-				if p2.isFollowing then
-					var1(setCurrentToastMessage({
-						isLocalized = true,
-						toastType = toastType.NotificationsTurnedOn,
-						toastMessage = var6.notificationsTurnedOn
-					}))
-					
-					return
-				end
-				var1(setCurrentToastMessage({
-					isLocalized = true,
-					toastType = toastType.NotificationsTurnedOff,
-					toastMessage = var6.notificationsTurnedOff
-				}))
 			end
-		end, { var1, var5, var6 })),
-		layoutOrder = layoutOrder
+			UseDispatchResult(SetCurrentToastMessageFunction({
+				isLocalized = true,
+				toastType = ToastType.NotificationsTurnedOff,
+				toastMessage = UseLocalizationResult.notificationsTurnedOff
+			}))
+		end
+	end, { UseDispatchResult, Name, UseLocalizationResult })))
+	
+	return if UseAppPolicyFunction(function(p2) --[[ Line: 115 ]]
+		return p2.getNotificationsCanReceiveExperience()
+	end) then ReactModule.createElement(SduiChip, {
+		text = UseLocalizationResult.notifications,
+		leadingIconName = FoundationModule.Enums.IconName.Bell,
+		leadingIconVariant = if IsFollowing then FoundationModule.Enums.IconVariant.Filled else nil,
+		onActivated = UseOptimisticUpdateStatusModuleResult,
+		layoutOrder = LayoutOrder
 	}) else nil
 end)

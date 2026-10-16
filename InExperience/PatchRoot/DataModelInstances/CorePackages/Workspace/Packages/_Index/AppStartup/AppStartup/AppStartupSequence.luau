@@ -1,28 +1,28 @@
-﻿local scriptContextService = game:GetService("ScriptContext")
-local luaAppCompressionEngineFeature = game:GetEngineFeature("LuaAppCompression")
-local signal = require(script:FindFirstAncestor("AppStartup").Parent.AppCommonLib).Signal
-local t = {}
-t.__index = t
+﻿local ScriptContext = game:GetService("ScriptContext")
+local LuaAppCompressionEngineFeature = game:GetEngineFeature("LuaAppCompression")
+local Signal = require(script:FindFirstAncestor("AppStartup").Parent.AppCommonLib).Signal
+local AppStartupSequenceModule = {}
+AppStartupSequenceModule.__index = AppStartupSequenceModule
 
-function t.new()
-	-- upvalues: signal (ref), t (ref)
-	local t_1 = { isInteractive = false, changed = signal.new() }
-	setmetatable(t_1, t)
+function AppStartupSequenceModule.new() --[[ Line: 22 ]]
+	-- upvalues: Signal (copy), AppStartupSequenceModule (copy)
+	local config = { isInteractive = false, changed = Signal.new() }
+	setmetatable(config, AppStartupSequenceModule)
 	
-	return t_1
+	return config
 end
 
-function t:setInteractive()
-	-- upvalues: luaAppCompressionEngineFeature (ref), scriptContextService (ref)
+function AppStartupSequenceModule:setInteractive() --[[ Line: 31 ]]
+	-- upvalues: LuaAppCompressionEngineFeature (copy), ScriptContext (copy)
 	if self.isInteractive then return end
 	self.isInteractive = true
 	
-	if luaAppCompressionEngineFeature then
-		scriptContextService:CompressLuaApp()
+	if LuaAppCompressionEngineFeature then
+		ScriptContext:CompressLuaApp()
 	end
 	self.changed:fire()
 end
 
-t.default = t.new()
+AppStartupSequenceModule.default = AppStartupSequenceModule.new()
 
-return t
+return AppStartupSequenceModule

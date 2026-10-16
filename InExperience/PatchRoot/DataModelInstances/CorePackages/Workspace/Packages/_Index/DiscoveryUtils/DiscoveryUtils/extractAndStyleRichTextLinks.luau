@@ -1,13 +1,14 @@
-﻿return function(p1)
-	if p1 == nil then
+﻿return function(Text: string) --[[ Line: 9 | Named "extractAndStyleRichTextLinks" ]]
+	if Text == nil then
 		return {}, ""
-	end
-	local t = {}
-	
-	return t, string.gsub(p1, "<a%s+href=\"([^\"]+)\">([^<]*)</a>", function(p2, p3)
-		-- upvalues: t (ref)
-		table.insert(t, p2)
+	else
+		local List = {}
 		
-		return `<u><b>{p3}</b></u>`
-	end)
+		return List, (string.gsub(Text, "<a%s+href=\"([^\"]+)\">([^<]*)</a>", function(Match, p1): string --[[ Line: 21 ]]
+			-- upvalues: List (copy)
+			table.insert(List, Match)
+			
+			return `<u><b>{p1}</b></u>`
+		end))
+	end
 end

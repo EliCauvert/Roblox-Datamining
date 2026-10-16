@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("SetMenuOnPurchasePrompt3", false)
+﻿return (game:DefineFastFlag("SetMenuOnPurchasePrompt3", false))

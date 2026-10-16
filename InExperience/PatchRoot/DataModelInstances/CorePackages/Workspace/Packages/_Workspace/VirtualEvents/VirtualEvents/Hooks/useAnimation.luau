@@ -1,74 +1,74 @@
-﻿local reactModule = require(script:FindFirstAncestor("VirtualEvents").Parent.React)
-local tweenService = game:GetService("TweenService")
-local t = {
+﻿local ReactModule = require(script:FindFirstAncestor("VirtualEvents").Parent.React)
+local TweenService = game:GetService("TweenService")
+local config = {
 	linear = Enum.EasingStyle.Linear,
 	quadratic = Enum.EasingStyle.Quad,
 	cubic = Enum.EasingStyle.Cubic
 }
 
-local function _(p1)
+local function _(p1) --[[ Line: 32 | Named "stopTween" ]]
 	if p1.current then
 		p1.current:Cancel()
 		p1.current = nil
 	end
 end
 
-local _ = function(p1, p2)
+local _ = function(p1, p2): boolean --[[ Line: 40 | Named "isApproximatelyEqual" ]]
 	return math.abs(p1 - p2) < 0.001
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), t (ref), tweenService (ref)
-	local var1 = reactModule.useRef(nil)
-	local var2 = reactModule.useRef(nil)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var2 (ref), t (copy), var1 (ref), tweenService (copy)
-		local startOffset = p1.startOffset
-		local endOffset = p1.endOffset or 0
-		local duration = p1.duration or 0.2
-		local easingStyle = p1.easingStyle or "quadratic"
+return function(p1) --[[ Line: 44 | Named "useAnimation" ]]
+	-- upvalues: ReactModule (copy), config (copy), TweenService (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	ReactModule.useEffect(function() --[[ Line: 48 ]]
+		-- upvalues: p1 (copy), UseRefResult1 (copy), config (upval), UseRefResult (copy), TweenService (upval)
+		local StartOffset = p1.startOffset
+		local EndOffset = p1.endOffset or 0
+		local Duration = p1.duration or 0.2
+		local EasingStyle = p1.easingStyle or "quadratic"
 		
-		if math.abs(startOffset - endOffset) < 0.001 then return end
-		local numberValue = Instance.new("NumberValue")
-		numberValue.Value = startOffset
-		var2.current = startOffset
-		local tweenInfo = TweenInfo.new(duration, t[easingStyle] or t.quadratic, Enum.EasingDirection.Out)
+		if math.abs(StartOffset - EndOffset) < 0.001 then return end
+		local NumValue = Instance.new("NumberValue")
+		NumValue.Value = StartOffset
+		UseRefResult1.current = StartOffset
+		local _TweenInfo = TweenInfo.new(Duration, config[EasingStyle] or config.quadratic, Enum.EasingDirection.Out)
 		
-		if var1.current then
-			var1.current:Cancel()
-			var1.current = nil
+		if UseRefResult.current then
+			UseRefResult.current:Cancel()
+			UseRefResult.current = nil
 		end
-		var1.current = tweenService:Create(numberValue, tweenInfo, { Value = endOffset })
-		local var3 = numberValue:GetPropertyChangedSignal("Value"):Connect(function()
-			-- upvalues: numberValue (ref), var2 (copy), p1 (copy)
-			local value = numberValue.Value
+		UseRefResult.current = TweenService:Create(NumValue, _TweenInfo, { Value = EndOffset })
+		local Connection = NumValue:GetPropertyChangedSignal("Value"):Connect(function() --[[ Line: 75 ]]
+			-- upvalues: NumValue (copy), UseRefResult1 (upval), p1 (upval)
+			local Value = NumValue.Value
 			
-			if var2.current == nil or math.abs(value - var2.current) >= 0.001 then
-				var2.current = value
-				p1.setAnimationOffset(value)
+			if UseRefResult1.current == nil or math.abs(Value - UseRefResult1.current) >= 0.001 then
+				UseRefResult1.current = Value
+				p1.setAnimationOffset(Value)
 			end
 		end)
 		
-		if var1.current then
-			var1.current.Completed:Connect(function()
-				-- upvalues: var3 (ref), numberValue (ref), var1 (copy), var2 (copy)
-				var3:Disconnect()
-				numberValue:Destroy()
-				var1.current = nil
-				var2.current = nil
+		if UseRefResult.current then
+			UseRefResult.current.Completed:Connect(function() --[[ Line: 84 ]]
+				-- upvalues: Connection (copy), NumValue (copy), UseRefResult (upval), UseRefResult1 (upval)
+				Connection:Disconnect()
+				NumValue:Destroy()
+				UseRefResult.current = nil
+				UseRefResult1.current = nil
 			end)
-			var1.current:Play()
+			UseRefResult.current:Play()
 		end
-		return function()
-			-- upvalues: var3 (ref), var1 (copy), numberValue (ref), var2 (copy)
-			var3:Disconnect()
+		return function() --[[ Line: 93 ]]
+			-- upvalues: Connection (copy), UseRefResult (upval), NumValue (copy), UseRefResult1 (upval)
+			Connection:Disconnect()
 			
-			if var1.current then
-				var1.current:Cancel()
-				var1.current = nil
+			if UseRefResult.current then
+				UseRefResult.current:Cancel()
+				UseRefResult.current = nil
 			end
-			numberValue:Destroy()
-			var2.current = nil
+			NumValue:Destroy()
+			UseRefResult1.current = nil
 		end
 	end, {
 		p1.startOffset,

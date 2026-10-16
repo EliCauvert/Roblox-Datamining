@@ -1,1 +1,1 @@
-﻿return game:DefineFastInt("UnfilteredThreadsPvDelayMs", 0)
+﻿return (game:DefineFastInt("UnfilteredThreadsPvDelayMs", 0))

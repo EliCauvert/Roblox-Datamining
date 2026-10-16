@@ -1,13 +1,16 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local colorModeModule = require(foundation.Enums.ColorMode)
-local foundationModule = require(foundation.Providers.Foundation)
-local _ = require(foundation.Providers.Preferences.PreferencesProvider)
-local viewModule = require(foundation.Components.View)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local ColorModeModule = require(Foundation.Enums.ColorMode)
+local FoundationModule = require(Foundation.Providers.Foundation)
+local _ = require(Foundation.Providers.Preferences.PreferencesProvider)
+local ViewModule = require(Foundation.Components.View)
 
-return function(p1, p2, p3)
-	-- upvalues: reactModule (ref), foundationModule (ref), colorModeModule (ref), viewModule (ref)
-	return reactModule.createElement(foundationModule, { colorMode = p3 or colorModeModule.Dark, preferences = p2 }, {
-		Content = reactModule.createElement(viewModule, { Size = UDim2.fromScale(1, 1) }, p1)
+return function(p1, Preferences, p2) --[[ Line: 12 ]]
+	-- upvalues: ReactModule (copy), FoundationModule (copy), ColorModeModule (copy), ViewModule (copy)
+	return ReactModule.createElement(FoundationModule, {
+		colorMode = p2 or ColorModeModule.Dark,
+		preferences = Preferences
+	}, {
+		Content = ReactModule.createElement(ViewModule, { Size = UDim2.fromScale(1, 1) }, p1)
 	})
 end

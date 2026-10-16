@@ -1,101 +1,103 @@
-﻿local dependenciesModule = require(script.Parent.dependencies)
-local t = dependenciesModule.t
-local linkedList = dependenciesModule.LinkedList
-local promise = dependenciesModule.Promise
-local t_1 = { llRoot = nil, llIndex = nil, _isFetching = false }
-t_1.__index = t_1
-local var1 = t.strictInterface({
-	pageSize = t.number,
-	fetchWithCursor = t.callback,
-	fetchInit = t.callback
+﻿local DependenciesModule = require(script.Parent.dependencies)
+local T = DependenciesModule.t
+local LinkedList = DependenciesModule.LinkedList
+local Promise = DependenciesModule.Promise
+local PaginatorModule = { llRoot = nil, llIndex = nil, _isFetching = false }
+PaginatorModule.__index = PaginatorModule
+local StrictInterfaceResult = T.strictInterface({
+	pageSize = T.number,
+	fetchWithCursor = T.callback,
+	fetchInit = T.callback
 })
 
-function t_1.new(p1)
-	-- upvalues: var1 (ref), t_1 (ref)
-	assert(var1(p1))
+function PaginatorModule.new(List) --[[ Line: 23 ]]
+	-- upvalues: StrictInterfaceResult (copy), PaginatorModule (copy)
+	assert(StrictInterfaceResult(List))
 	local t = {}
 	
-	for i, v in pairs(p1) do
-		t[i] = v
+	for i, value in pairs(List) do
+		t[i] = value
 	end
-	setmetatable(t, t_1)
+	setmetatable(t, PaginatorModule)
 	t:_init()
 	
 	return t
 end
 
-function t_1:_init()
-	-- upvalues: linkedList (ref)
+function PaginatorModule:_init() --[[ Line: 35 ]]
+	-- upvalues: LinkedList (copy)
 	self._isFetching = true
 	
-	return self.fetchInit():andThen(function(p2, p3)
-		-- upvalues: self (ref), linkedList (copy)
-		self.llRoot = linkedList.createNode()
+	return self.fetchInit():andThen(function(Result, p1) --[[ Line: 38 ]]
+		-- upvalues: self (copy), LinkedList (upval)
+		self.llRoot = LinkedList.createNode()
 		self.llIndex = self.llRoot
-		self.llIndex:CreatePrevious(p2)
-		self.llIndex:CreateNext(p3)
+		self.llIndex:CreatePrevious(Result)
+		self.llIndex:CreateNext(p1)
 		self._isFetching = false
 	end)
 end
 
-function t_1:getCurrent()
+function PaginatorModule:getCurrent() --[[ Line: 47 ]]
 	return self.llIndex.value or {}
 end
 
-function t_1:getNext()
-	-- upvalues: promise (ref)
+function PaginatorModule:getNext() --[[ Line: 51 ]]
+	-- upvalues: Promise (copy)
 	if self._isFetching then
-		return promise.reject("Paginator is currently busy. Please wait.")
+		return Promise.reject("Paginator is currently busy. Please wait.")
 	end
-	local value = self.llIndex.next.value or ""
+	local Value = self.llIndex.next.value or ""
 	
-	if value == "" then
-		return promise.reject("Next cursor is invalid")
-	end
-	self.llIndex = self.llIndex.next
-	self._isFetching = true
-	
-	return self.fetchWithCursor(value):andThen(function(p2, p3)
-		-- upvalues: self (ref)
-		self.llIndex.previous.value = p2
+	if Value == "" then
+		return Promise.reject("Next cursor is invalid")
+	else
+		self.llIndex = self.llIndex.next
+		self._isFetching = true
 		
-		if self.llIndex.next then
-			self.llIndex.next.value = p3
-		else
-			self.llIndex:CreateNext(p3)
-		end
-		self._isFetching = false
-	end)
+		return self.fetchWithCursor(Value):andThen(function(Result, Value) --[[ Line: 65 ]]
+			-- upvalues: self (copy)
+			self.llIndex.previous.value = Result
+			
+			if self.llIndex.next then
+				self.llIndex.next.value = Value
+			else
+				self.llIndex:CreateNext(Value)
+			end
+			self._isFetching = false
+		end)
+	end
 end
 
-function t_1:getPrevious()
-	-- upvalues: promise (ref)
+function PaginatorModule:getPrevious() --[[ Line: 76 ]]
+	-- upvalues: Promise (copy)
 	if self._isFetching then
-		return promise.reject("Paginator is currently busy. Please wait.")
+		return Promise.reject("Paginator is currently busy. Please wait.")
 	end
-	local value = self.llIndex.previous.value or ""
+	local Value = self.llIndex.previous.value or ""
 	
-	if value == "" then
-		return promise.reject("Previous cursor is invalid")
-	end
-	self.llIndex = self.llIndex.previous
-	self._isFetching = true
-	
-	return self.fetchWithCursor(value, true):andThen(function(p2, p3)
-		-- upvalues: self (ref)
-		self.llIndex.next.value = p3
+	if Value == "" then
+		return Promise.reject("Previous cursor is invalid")
+	else
+		self.llIndex = self.llIndex.previous
+		self._isFetching = true
 		
-		if self.llIndex.previous then
-			self.llIndex.previous.value = p2
-		else
-			self.llIndex:CreatePrevious(p2)
-		end
-		self._isFetching = false
-	end)
+		return self.fetchWithCursor(Value, true):andThen(function(Result, Value) --[[ Line: 90 ]]
+			-- upvalues: self (copy)
+			self.llIndex.next.value = Value
+			
+			if self.llIndex.previous then
+				self.llIndex.previous.value = Result
+			else
+				self.llIndex:CreatePrevious(Result)
+			end
+			self._isFetching = false
+		end)
+	end
 end
 
-function t_1:isFetching()
+function PaginatorModule:isFetching() --[[ Line: 101 ]]
 	return self._isFetching
 end
 
-return t_1
+return PaginatorModule

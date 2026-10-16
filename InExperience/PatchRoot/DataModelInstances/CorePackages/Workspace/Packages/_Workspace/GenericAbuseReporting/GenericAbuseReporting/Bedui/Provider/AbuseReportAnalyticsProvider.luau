@@ -1,18 +1,18 @@
-﻿local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
-local reactModule = require(genericAbuseReporting.Parent.React)
-local abuseReportAnalyticsContextModule = require(genericAbuseReporting.Bedui.Provider.AbuseReportAnalyticsContext)
-local _ = require(genericAbuseReporting.Enums.AbuseVector)
-local _ = require(genericAbuseReporting.Bedui.Utils.BeduiAnalytics)
+﻿local GenericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
+local ReactModule = require(GenericAbuseReporting.Parent.React)
+local AbuseReportAnalyticsContextModule = require(GenericAbuseReporting.Bedui.Provider.AbuseReportAnalyticsContext)
+local _ = require(GenericAbuseReporting.Enums.AbuseVector)
+local _ = require(GenericAbuseReporting.Bedui.Utils.BeduiAnalytics)
 
-return function(p1)
-	-- upvalues: reactModule (ref), abuseReportAnalyticsContextModule (ref)
-	local var1, var2 = reactModule.useState(false)
+return function(p1) --[[ Line: 18 | Named "AbuseReportAnalyticsProvider" ]]
+	-- upvalues: ReactModule (copy), AbuseReportAnalyticsContextModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	
-	return reactModule.createElement(abuseReportAnalyticsContextModule.Provider, {
+	return ReactModule.createElement(AbuseReportAnalyticsContextModule.Provider, {
 		value = {
 			abuseVector = p1.abuseVector,
-			isReportSubmitted = var1,
-			setIsReportSubmitted = var2
+			isReportSubmitted = UseStateResult,
+			setIsReportSubmitted = UseStateResult2
 		}
 	}, p1.children)
 end

@@ -1,537 +1,560 @@
-﻿local function _(p1)
+﻿local function _(Text) --[[ Line: 11 | Named "unimplemented" ]]
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-	print("UNIMPLEMENTED ERROR: " .. tostring(p1))
-	error("FIXME (roblox): " .. p1 .. " is unimplemented", 2)
+	print("UNIMPLEMENTED ERROR: " .. tostring(Text))
+	error("FIXME (roblox): " .. Text .. " is unimplemented", 2)
 end
 
-local parent = script.Parent.Parent
+local Parent = script.Parent.Parent
 local _ = require(script.Parent.ReactInternalTypes)
-local reactFiberLaneModule = require(script.Parent.ReactFiberLane)
-local offscreenLane = reactFiberLaneModule.OffscreenLane
-local reactFiberHostConfigModule = require(script.Parent.ReactFiberHostConfig)
+local ReactFiberLaneModule = require(script.Parent.ReactFiberLane)
+local OffscreenLane = ReactFiberLaneModule.OffscreenLane
+local ReactFiberHostConfigModule = require(script.Parent.ReactFiberHostConfig)
 local _ = require(script.Parent.ReactFiberOffscreenComponent)
-local resetWorkInProgressVersions = require(script.Parent["ReactMutableSource.new"]).resetWorkInProgressVersions
-local reactWorkTagsModule = require(script.Parent.ReactWorkTags)
-local indeterminateComponent = reactWorkTagsModule.IndeterminateComponent
-local functionComponent = reactWorkTagsModule.FunctionComponent
-local classComponent = reactWorkTagsModule.ClassComponent
-local hostRoot = reactWorkTagsModule.HostRoot
-local hostComponent = reactWorkTagsModule.HostComponent
-local hostText = reactWorkTagsModule.HostText
-local hostPortal = reactWorkTagsModule.HostPortal
-local contextProvider = reactWorkTagsModule.ContextProvider
-local contextConsumer = reactWorkTagsModule.ContextConsumer
-local forwardRef = reactWorkTagsModule.ForwardRef
-local fragment = reactWorkTagsModule.Fragment
-local mode = reactWorkTagsModule.Mode
-local profiler = reactWorkTagsModule.Profiler
-local suspenseComponent = reactWorkTagsModule.SuspenseComponent
-local suspenseListComponent = reactWorkTagsModule.SuspenseListComponent
-local memoComponent = reactWorkTagsModule.MemoComponent
-local simpleMemoComponent = reactWorkTagsModule.SimpleMemoComponent
-local lazyComponent = reactWorkTagsModule.LazyComponent
-local incompleteClassComponent = reactWorkTagsModule.IncompleteClassComponent
-local fundamentalComponent = reactWorkTagsModule.FundamentalComponent
-local scopeComponent = reactWorkTagsModule.ScopeComponent
-local block = reactWorkTagsModule.Block
-local offscreenComponent = reactWorkTagsModule.OffscreenComponent
-local legacyHiddenComponent = reactWorkTagsModule.LegacyHiddenComponent
+local ResetWorkInProgressVersionsFunction = require(script.Parent["ReactMutableSource.new"]).resetWorkInProgressVersions
+local ReactWorkTagsModule = require(script.Parent.ReactWorkTags)
+local IndeterminateComponent = ReactWorkTagsModule.IndeterminateComponent
+local FunctionComponent = ReactWorkTagsModule.FunctionComponent
+local ClassComponent = ReactWorkTagsModule.ClassComponent
+local HostRoot = ReactWorkTagsModule.HostRoot
+local HostComponent = ReactWorkTagsModule.HostComponent
+local HostText = ReactWorkTagsModule.HostText
+local HostPortal = ReactWorkTagsModule.HostPortal
+local ContextProvider = ReactWorkTagsModule.ContextProvider
+local ContextConsumer = ReactWorkTagsModule.ContextConsumer
+local ForwardRef = ReactWorkTagsModule.ForwardRef
+local Fragment = ReactWorkTagsModule.Fragment
+local Mode = ReactWorkTagsModule.Mode
+local Profiler = ReactWorkTagsModule.Profiler
+local SuspenseComponent = ReactWorkTagsModule.SuspenseComponent
+local SuspenseListComponent = ReactWorkTagsModule.SuspenseListComponent
+local MemoComponent = ReactWorkTagsModule.MemoComponent
+local SimpleMemoComponent = ReactWorkTagsModule.SimpleMemoComponent
+local LazyComponent = ReactWorkTagsModule.LazyComponent
+local IncompleteClassComponent = ReactWorkTagsModule.IncompleteClassComponent
+local FundamentalComponent = ReactWorkTagsModule.FundamentalComponent
+local ScopeComponent = ReactWorkTagsModule.ScopeComponent
+local Block = ReactWorkTagsModule.Block
+local OffscreenComponent = ReactWorkTagsModule.OffscreenComponent
+local LegacyHiddenComponent = ReactWorkTagsModule.LegacyHiddenComponent
 local _ = require(script.Parent["ReactFiberSuspenseComponent.new"])
-local reactTypeOfModeModule = require(script.Parent.ReactTypeOfMode)
-local noMode = reactTypeOfModeModule.NoMode
-local concurrentMode = reactTypeOfModeModule.ConcurrentMode
-local blockingMode = reactTypeOfModeModule.BlockingMode
-local profileMode = reactTypeOfModeModule.ProfileMode
-local reactFiberFlagsModule = require(script.Parent.ReactFiberFlags)
-local ref = reactFiberFlagsModule.Ref
-local update = reactFiberFlagsModule.Update
-local callback = reactFiberFlagsModule.Callback
-local passive = reactFiberFlagsModule.Passive
-local deletion = reactFiberFlagsModule.Deletion
-local noFlags = reactFiberFlagsModule.NoFlags
-local didCapture = reactFiberFlagsModule.DidCapture
-local snapshot = reactFiberFlagsModule.Snapshot
-local mutationMask = reactFiberFlagsModule.MutationMask
-local layoutMask = reactFiberFlagsModule.LayoutMask
-local passiveMask = reactFiberFlagsModule.PassiveMask
-local staticMask = reactFiberFlagsModule.StaticMask
-local performedWork = reactFiberFlagsModule.PerformedWork
-local invariant = require(parent.Shared).invariant
-local createInstance = reactFiberHostConfigModule.createInstance
-local createTextInstance = reactFiberHostConfigModule.createTextInstance
-local appendInitialChild = reactFiberHostConfigModule.appendInitialChild
-local finalizeInitialChildren = reactFiberHostConfigModule.finalizeInitialChildren
-local prepareUpdate = reactFiberHostConfigModule.prepareUpdate
-local supportsMutation = reactFiberHostConfigModule.supportsMutation
-local supportsPersistence = reactFiberHostConfigModule.supportsPersistence
-local createContainerChildSet = reactFiberHostConfigModule.createContainerChildSet
-local finalizeContainerChildren = reactFiberHostConfigModule.finalizeContainerChildren
-local preparePortalMount = reactFiberHostConfigModule.preparePortalMount
-local unknownModule = require(script.Parent["ReactFiberHostContext.new"])
-local getRootHostContainer = unknownModule.getRootHostContainer
-local popHostContext = unknownModule.popHostContext
-local getHostContext = unknownModule.getHostContext
-local popHostContainer = unknownModule.popHostContainer
-local unknownModule_1 = require(script.Parent["ReactFiberSuspenseContext.new"])
-local popSuspenseContext = unknownModule_1.popSuspenseContext
-local suspenseStackCursor = unknownModule_1.suspenseStackCursor
-local invisibleParentSuspenseContext = unknownModule_1.InvisibleParentSuspenseContext
-local hasSuspenseContext = unknownModule_1.hasSuspenseContext
-local unknownModule_2 = require(script.Parent["ReactFiberContext.new"])
-local isContextProvider = unknownModule_2.isContextProvider
-local popContext = unknownModule_2.popContext
-local popTopLevelContextObject = unknownModule_2.popTopLevelContextObject
-local popProvider = require(script.Parent["ReactFiberNewContext.new"]).popProvider
-local unknownModule_3 = require(script.Parent["ReactFiberHydrationContext.new"])
-local prepareToHydrateHostSuspenseInstance = unknownModule_3.prepareToHydrateHostSuspenseInstance
-local popHydrationState = unknownModule_3.popHydrationState
-local resetHydrationState = unknownModule_3.resetHydrationState
-local prepareToHydrateHostInstance = unknownModule_3.prepareToHydrateHostInstance
-local prepareToHydrateHostTextInstance = unknownModule_3.prepareToHydrateHostTextInstance
-local reactFeatureFlags = require(parent.Shared).ReactFeatureFlags
-local enableSchedulerTracing = reactFeatureFlags.enableSchedulerTracing
-local enableSuspenseCallback = reactFeatureFlags.enableSuspenseCallback
-local enableSuspenseServerRenderer = reactFeatureFlags.enableSuspenseServerRenderer
-local enableFundamentalAPI = reactFeatureFlags.enableFundamentalAPI
-local enableProfilerTimer = reactFeatureFlags.enableProfilerTimer
-local unknownModule_4 = require(script.Parent["ReactFiberWorkLoop.new"])
-local popRenderLanes = unknownModule_4.popRenderLanes
-local markSpawnedWork = unknownModule_4.markSpawnedWork
-local renderDidSuspend = unknownModule_4.renderDidSuspend
-local renderDidSuspendDelayIfPossible = unknownModule_4.renderDidSuspendDelayIfPossible
-local noLanes = reactFiberLaneModule.NoLanes
-local includesSomeLane = reactFiberLaneModule.includesSomeLane
-local mergeLanes = reactFiberLaneModule.mergeLanes
-local transferActualDuration = require(script.Parent["ReactProfilerTimer.new"]).transferActualDuration
+local ReactTypeOfModeModule = require(script.Parent.ReactTypeOfMode)
+local NoMode = ReactTypeOfModeModule.NoMode
+local ConcurrentMode = ReactTypeOfModeModule.ConcurrentMode
+local BlockingMode = ReactTypeOfModeModule.BlockingMode
+local ProfileMode = ReactTypeOfModeModule.ProfileMode
+local ReactFiberFlagsModule = require(script.Parent.ReactFiberFlags)
+local Ref = ReactFiberFlagsModule.Ref
+local Update = ReactFiberFlagsModule.Update
+local HostUpdate = ReactFiberFlagsModule.HostUpdate
+local Callback3 = ReactFiberFlagsModule.Callback
+local Passive = ReactFiberFlagsModule.Passive
+local Deletion = ReactFiberFlagsModule.Deletion
+local NoFlags = ReactFiberFlagsModule.NoFlags
+local DidCapture = ReactFiberFlagsModule.DidCapture
+local Snapshot = ReactFiberFlagsModule.Snapshot
+local MutationMask = ReactFiberFlagsModule.MutationMask
+local LayoutMask = ReactFiberFlagsModule.LayoutMask
+local PassiveMask = ReactFiberFlagsModule.PassiveMask
+local StaticMask = ReactFiberFlagsModule.StaticMask
+local PerformedWork = ReactFiberFlagsModule.PerformedWork
+local InvariantFunction = require(Parent.Shared).invariant
+local CreateInstanceFunction = ReactFiberHostConfigModule.createInstance
+local CreateTextInstanceFunction = ReactFiberHostConfigModule.createTextInstance
+local AppendInitialChildFunction = ReactFiberHostConfigModule.appendInitialChild
+local FinalizeInitialChildrenFunction = ReactFiberHostConfigModule.finalizeInitialChildren
+local PrepareUpdateFunction = ReactFiberHostConfigModule.prepareUpdate
+local SupportsMutation = ReactFiberHostConfigModule.supportsMutation
+local SupportsPersistence = ReactFiberHostConfigModule.supportsPersistence
+local CreateContainerChildSetFunction = ReactFiberHostConfigModule.createContainerChildSet
+local FinalizeContainerChildrenFunction = ReactFiberHostConfigModule.finalizeContainerChildren
+local PreparePortalMountFunction = ReactFiberHostConfigModule.preparePortalMount
+local ReactFiberHostContextNewModule = require(script.Parent["ReactFiberHostContext.new"])
+local GetRootHostContainerFunction = ReactFiberHostContextNewModule.getRootHostContainer
+local PopHostContextFunction = ReactFiberHostContextNewModule.popHostContext
+local GetHostContextFunction = ReactFiberHostContextNewModule.getHostContext
+local PopHostContainerFunction = ReactFiberHostContextNewModule.popHostContainer
+local ReactFiberSuspenseContextNewModule = require(script.Parent["ReactFiberSuspenseContext.new"])
+local PopSuspenseContextFunction = ReactFiberSuspenseContextNewModule.popSuspenseContext
+local SuspenseStackCursor = ReactFiberSuspenseContextNewModule.suspenseStackCursor
+local InvisibleParentSuspenseContext = ReactFiberSuspenseContextNewModule.InvisibleParentSuspenseContext
+local HasSuspenseContextFunction = ReactFiberSuspenseContextNewModule.hasSuspenseContext
+local ReactFiberContextNewModule = require(script.Parent["ReactFiberContext.new"])
+local IsContextProviderFunction = ReactFiberContextNewModule.isContextProvider
+local PopContextFunction = ReactFiberContextNewModule.popContext
+local PopTopLevelContextObjectFunction = ReactFiberContextNewModule.popTopLevelContextObject
+local PopProviderFunction = require(script.Parent["ReactFiberNewContext.new"]).popProvider
+local ReactFiberHydrationContextNewModule = require(script.Parent["ReactFiberHydrationContext.new"])
+local PrepareToHydrateHostSuspenseInstanceFunction = ReactFiberHydrationContextNewModule.prepareToHydrateHostSuspenseInstance
+local PopHydrationStateFunction = ReactFiberHydrationContextNewModule.popHydrationState
+local ResetHydrationStateFunction = ReactFiberHydrationContextNewModule.resetHydrationState
+local PrepareToHydrateHostInstanceFunction = ReactFiberHydrationContextNewModule.prepareToHydrateHostInstance
+local PrepareToHydrateHostTextInstanceFunction = ReactFiberHydrationContextNewModule.prepareToHydrateHostTextInstance
+local ReactFeatureFlags = require(Parent.Shared).ReactFeatureFlags
+local EnableSchedulerTracing = ReactFeatureFlags.enableSchedulerTracing
+local EnableSuspenseCallback = ReactFeatureFlags.enableSuspenseCallback
+local EnableSuspenseServerRenderer = ReactFeatureFlags.enableSuspenseServerRenderer
+local EnableFundamentalAPI = ReactFeatureFlags.enableFundamentalAPI
+local EnableProfilerTimer = ReactFeatureFlags.enableProfilerTimer
+local ReactFiberWorkLoopNewModule = require(script.Parent["ReactFiberWorkLoop.new"])
+local PopRenderLanesFunction = ReactFiberWorkLoopNewModule.popRenderLanes
+local MarkSpawnedWorkFunction = ReactFiberWorkLoopNewModule.markSpawnedWork
+local RenderDidSuspendFunction = ReactFiberWorkLoopNewModule.renderDidSuspend
+local RenderDidSuspendDelayIfPossibleFunction = ReactFiberWorkLoopNewModule.renderDidSuspendDelayIfPossible
+local NoLanes = ReactFiberLaneModule.NoLanes
+local IncludesSomeLaneFunction = ReactFiberLaneModule.includesSomeLane
+local MergeLanesFunction = ReactFiberLaneModule.mergeLanes
+local TransferActualDurationFunction = require(script.Parent["ReactProfilerTimer.new"]).transferActualDuration
 
-local _ = function(p1)
-	-- upvalues: update (ref)
-	p1.flags = bit32.bor(p1.flags, update)
+local _ = function(p1) --[[ Line: 190 | Named "markUpdate" ]]
+	-- upvalues: Update (copy)
+	p1.flags = bit32.bor(p1.flags, Update)
 end
 
-local _ = function(p1)
-	-- upvalues: ref (ref)
-	p1.flags = bit32.bor(p1.flags, ref)
+local _ = function(p1) --[[ Line: 196 | Named "markRef" ]]
+	-- upvalues: Ref (copy)
+	p1.flags = bit32.bor(p1.flags, Ref)
 end
 
-local function hadNoMutationsEffects(p1, p2)
-	-- upvalues: mutationMask (ref), noFlags (ref)
+local function hadNoMutationsEffects(p1, p2): boolean --[[ Line: 202 ]]
+	-- upvalues: MutationMask (copy), NoFlags (copy)
 	if p1 ~= nil and p1.child == p2.child then
 		return true
 	end
-	local child = p2.child
-	while child ~= nil do
-		if bit32.band(child.flags, mutationMask) == noFlags then
-			if bit32.band(child.subtreeFlags, mutationMask) == noFlags then
-				child = child.sibling
-				continue
-			end
+	local Child = p2.child
+	while Child ~= nil do
+		if bit32.band(Child.flags, MutationMask) ~= NoFlags then
 			return false
 		end
-		return false
+		if bit32.band(Child.subtreeFlags, MutationMask) ~= NoFlags then
+			return false
+		end
+		Child = Child.sibling
 	end
 	return true
 end
 
-local var1 = nil
-local _ = nil
-local updateHostComponent = nil
-local updateHostText = nil
+local Callback1: ((any, any, any, any) -> ())? = nil
+local UpdateHostContainer = nil
+local Callback: ((any, any, any, any, any) -> ())? = nil
+local Callback2: ((any, any, any, any) -> ())? = nil
 
-if supportsMutation then
-	var1 = function(p3, p4, _, _)
-		-- upvalues: hostComponent (ref), hostText (ref), appendInitialChild (ref), enableFundamentalAPI (ref), fundamentalComponent (ref), hostPortal (ref)
-		local child = p4.child
-		while child ~= nil do
-			if child.tag == hostComponent or child.tag == hostText then
-				appendInitialChild(p3, child.stateNode)
-			elseif enableFundamentalAPI and child.tag == fundamentalComponent then
-				appendInitialChild(p3, child.stateNode.instance)
-			elseif child.tag == hostPortal or child.child == nil then
-				if child ~= p4 then
-					while child.sibling == nil do
-						if child.return_ ~= nil and child.return_ ~= p4 then
-							child = child.return_
-							continue
-						end
-						return
-					end
-					child.sibling.return_ = child.return_
-					child = child.sibling
-				end
-				return
-			else
-				child.child.return_ = child
-				child = child.child
+if SupportsMutation then
+	Callback1 = function(StateNode, Return, _, _) --[[ Line: 228 ]]
+		-- upvalues: HostComponent (copy), HostText (copy), AppendInitialChildFunction (copy), EnableFundamentalAPI (copy), FundamentalComponent (copy), HostPortal (copy)
+		local Child = Return.child
+		while Child ~= nil do
+			if Child.tag == HostComponent or Child.tag == HostText then
+				AppendInitialChildFunction(StateNode, Child.stateNode)
+			elseif EnableFundamentalAPI and Child.tag == FundamentalComponent then
+				AppendInitialChildFunction(StateNode, Child.stateNode.instance)
+			elseif Child.tag ~= HostPortal and Child.child ~= nil then
+				Child.child.return_ = Child
+				Child = Child.child
+				continue
 			end
+			if Child == Return then break end
+			while Child.sibling == nil do
+				if Child.return_ == nil or Child.return_ == Return then break end
+				Child = Child.return_
+			end
+			Child.sibling.return_ = Child.return_
+			Child = Child.sibling
 		end
 	end
 	
-	local var2 = function(_, _) end
+	UpdateHostContainer = function(_, _) --[[ Line: 266 ]] end
 	
-	updateHostComponent = function(p5, p6, p7, p8, p9)
-		-- upvalues: getHostContext (ref), prepareUpdate (ref), update (ref)
-		local memoizedProps = p5.memoizedProps
+	Callback = function(p3, Return, Type, PendingProps, p4) --[[ Line: 269 | Named "updateHostComponent" ]]
+		-- upvalues: GetHostContextFunction (copy), PrepareUpdateFunction (copy), ReactFeatureFlags (copy), HostUpdate (copy), Update (copy)
+		local MemoizedProps = p3.memoizedProps
 		
-		if memoizedProps == p8 then return end
-		local var3 = prepareUpdate(p6.stateNode, p7, memoizedProps, p8, p9, getHostContext())
-		p6.updateQueue = var3
+		if MemoizedProps == PendingProps then return end
+		local PrepareUpdateResult = PrepareUpdateFunction(Return.stateNode, Type, MemoizedProps, PendingProps, p4, (GetHostContextFunction()))
 		
-		if var3 then
-			p6.flags = bit32.bor(p6.flags, update)
+		if ReactFeatureFlags.enableWorkLoopTrims then
+			if PrepareUpdateResult ~= nil or Return.updateQueue ~= nil then
+				Return.updateQueue = PrepareUpdateResult
+			end
+		else
+			Return.updateQueue = PrepareUpdateResult
+		end
+		if PrepareUpdateResult then
+			if ReactFeatureFlags.enableCommitTraversalTrims then
+				Return.flags = bit32.bor(Return.flags, HostUpdate)
+				
+				return
+			end
+			Return.flags = bit32.bor(Return.flags, Update)
 		end
 	end
 	
-	updateHostText = function(_, p5, p6, p7)
-		-- upvalues: update (ref)
-		if p6 ~= p7 then
-			p5.flags = bit32.bor(p5.flags, update)
+	Callback2 = function(_, Return, MemoizedProps, PendingProps) --[[ Line: 323 | Named "updateHostText" ]]
+		-- upvalues: Update (copy)
+		if MemoizedProps ~= PendingProps then
+			Return.flags = bit32.bor(Return.flags, Update)
 		end
 	end
-elseif supportsPersistence then
-	var1 = function(_, _, _, _)
+elseif SupportsPersistence then
+	Callback1 = function(_, _, _, _) --[[ Line: 336 ]]
 		print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 		print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 		print("UNIMPLEMENTED ERROR: " .. tostring("appendAllChildren"))
 		error("FIXME (roblox): appendAllChildren is unimplemented", 2)
 	end
 	
-	local _ = function(_, _, _, _)
+	local _ = function(_, _, _, _) --[[ Line: 431 | Named "appendAllChildrenToContainer" ]]
 		print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 		print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 		print("UNIMPLEMENTED ERROR: " .. tostring("appendAllChildrenToContainer"))
 		error("FIXME (roblox): appendAllChildrenToContainer is unimplemented", 2)
 	end
 	
-	local function var2(p5, p6)
-		-- upvalues: hadNoMutationsEffects (ref), createContainerChildSet (ref), update (ref), finalizeContainerChildren (ref)
-		local stateNode = p6.stateNode
+	UpdateHostContainer = function(p3, p4) --[[ Line: 525 | Named "updateHostContainer" ]]
+		-- upvalues: hadNoMutationsEffects (copy), CreateContainerChildSetFunction (copy), Update (copy), FinalizeContainerChildrenFunction (copy)
+		local StateNode = p4.stateNode
 		
-		if hadNoMutationsEffects(p5, p6) then
+		if not hadNoMutationsEffects(p3, p4) then
+			local ContainerInfo = StateNode.containerInfo
+			local ContainerChildSet = CreateContainerChildSetFunction(ContainerInfo)
+			print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+			print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+			print("UNIMPLEMENTED ERROR: " .. tostring("appendAllChildrenToContainer"))
+			error("FIXME (roblox): appendAllChildrenToContainer is unimplemented", 2)
+			StateNode.pendingChildren = ContainerChildSet
+			p4.flags = bit32.bor(p4.flags, Update)
+			FinalizeContainerChildrenFunction(ContainerInfo, ContainerChildSet)
+			
 			return
 		end
-		local containerInfo = stateNode.containerInfo
-		local var3 = createContainerChildSet(containerInfo)
-		print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-		print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-		print("UNIMPLEMENTED ERROR: " .. tostring("appendAllChildrenToContainer"))
-		error("FIXME (roblox): appendAllChildrenToContainer is unimplemented", 2)
-		stateNode.pendingChildren = var3
-		p6.flags = bit32.bor(p6.flags, update)
-		finalizeContainerChildren(containerInfo, var3)
 	end
 else
-	local var2 = function(_, _) end
+	UpdateHostContainer = function(_, _) --[[ Line: 641 ]] end
 end
-local function bubbleProperties(p5)
-	-- upvalues: noLanes (ref), noFlags (ref), enableProfilerTimer (ref), profileMode (ref), noMode (ref), mergeLanes (ref), staticMask (ref)
-	local var3 = p5.alternate ~= nil and p5.alternate.child == p5.child
-	local var4 = noLanes
-	local var5 = noFlags
+local function bubbleProperties(Return): boolean --[[ Line: 734 ]]
+	-- upvalues: NoLanes (copy), NoFlags (copy), EnableProfilerTimer (copy), ProfileMode (copy), NoMode (copy), MergeLanesFunction (copy), StaticMask (copy)
+	local IsChildMatch: boolean = Return.alternate ~= nil and Return.alternate.child == Return.child
+	local Value = NoLanes
+	local Value1: number = NoFlags
 	
-	if var3 then
-		if enableProfilerTimer and bit32.band(p5.mode, profileMode) ~= noMode then
-			local selfBaseDuration = p5.selfBaseDuration
-			local child = p5.child
-			while child ~= nil do
-				var4 = mergeLanes(var4, mergeLanes(child.lanes, child.childLanes))
-				var5 = bit32.bor(bit32.bor(var5, bit32.band(child.subtreeFlags, staticMask)), bit32.band(child.flags, staticMask))
-				selfBaseDuration += child.treeBaseDuration
-				child = child.sibling
+	if IsChildMatch then
+		if EnableProfilerTimer and bit32.band(Return.mode, ProfileMode) ~= NoMode then
+			local SelfBaseDuration = Return.selfBaseDuration
+			local Child2 = Return.child
+			while Child2 ~= nil do
+				Value = MergeLanesFunction(Value, MergeLanesFunction(Child2.lanes, Child2.childLanes))
+				Value1 = bit32.bor(bit32.bor(Value1, (bit32.band(Child2.subtreeFlags, StaticMask))), (bit32.band(Child2.flags, StaticMask)))
+				SelfBaseDuration += Child2.treeBaseDuration
+				Child2 = Child2.sibling
 			end
-			p5.treeBaseDuration = selfBaseDuration
+			Return.treeBaseDuration = SelfBaseDuration
 		else
-			local child = p5.child
-			while child ~= nil do
-				var4 = bit32.bor(var4, bit32.bor(child.lanes, child.childLanes))
-				var5 = bit32.bor(bit32.bor(var5, bit32.band(child.subtreeFlags, staticMask)), bit32.band(child.flags, staticMask))
-				child.return_ = p5
-				child = child.sibling
+			local Child = Return.child
+			while Child ~= nil do
+				Value = bit32.bor(Value, (bit32.bor(Child.lanes, Child.childLanes)))
+				Value1 = bit32.bor(bit32.bor(Value1, (bit32.band(Child.subtreeFlags, StaticMask))), (bit32.band(Child.flags, StaticMask)))
+				Child.return_ = Return
+				Child = Child.sibling
 			end
 		end
-		p5.subtreeFlags = bit32.bor(p5.subtreeFlags, var5)
-	elseif enableProfilerTimer and bit32.band(p5.mode, profileMode) ~= noMode then
-		local actualDuration = p5.actualDuration
-		local selfBaseDuration = p5.selfBaseDuration
-		local child = p5.child
-		while child ~= nil do
-			var4 = mergeLanes(var4, mergeLanes(child.lanes, child.childLanes))
-			var5 = bit32.bor(bit32.bor(var5, child.subtreeFlags), child.flags)
-			actualDuration += child.actualDuration
-			selfBaseDuration += child.treeBaseDuration
-			child = child.sibling
-		end
-		p5.actualDuration = actualDuration
-		p5.treeBaseDuration = selfBaseDuration
+		Return.subtreeFlags = bit32.bor(Return.subtreeFlags, Value1)
 	else
-		local child = p5.child
-		while child ~= nil do
-			var4 = bit32.bor(var4, bit32.bor(child.lanes, child.childLanes))
-			var5 = bit32.bor(bit32.bor(var5, child.subtreeFlags), child.flags)
-			child.return_ = p5
-			child = child.sibling
+		if EnableProfilerTimer and bit32.band(Return.mode, ProfileMode) ~= NoMode then
+			local ActualDuration = Return.actualDuration
+			local SelfBaseDuration = Return.selfBaseDuration
+			local Child1 = Return.child
+			while Child1 ~= nil do
+				Value = MergeLanesFunction(Value, MergeLanesFunction(Child1.lanes, Child1.childLanes))
+				Value1 = bit32.bor(bit32.bor(Value1, Child1.subtreeFlags), Child1.flags)
+				ActualDuration += Child1.actualDuration
+				SelfBaseDuration += Child1.treeBaseDuration
+				Child1 = Child1.sibling
+			end
+			Return.actualDuration = ActualDuration
+			Return.treeBaseDuration = SelfBaseDuration
+		else
+			local Child = Return.child
+			while Child ~= nil do
+				Value = bit32.bor(Value, (bit32.bor(Child.lanes, Child.childLanes)))
+				Value1 = bit32.bor(bit32.bor(Value1, Child.subtreeFlags), Child.flags)
+				Child.return_ = Return
+				Child = Child.sibling
+			end
 		end
+		Return.subtreeFlags = bit32.bor(Return.subtreeFlags, Value1)
 	end
-	p5.subtreeFlags = bit32.bor(p5.subtreeFlags, var5)
-	p5.childLanes = var4
+	Return.childLanes = Value
 	
-	return var3
+	return IsChildMatch
 end
 
 return {
-	completeWork = function(p6, p7, p8)
-		-- upvalues: indeterminateComponent (ref), lazyComponent (ref), simpleMemoComponent (ref), functionComponent (ref), forwardRef (ref), fragment (ref), mode (ref), contextConsumer (ref), memoComponent (ref), bubbleProperties (ref), classComponent (ref), isContextProvider (ref), popContext (ref), hostRoot (ref), popHostContainer (ref), popTopLevelContextObject (ref), resetWorkInProgressVersions (ref), popHydrationState (ref), update (ref), snapshot (ref), var2 (write), hostComponent (ref), popHostContext (ref), getRootHostContainer (ref), updateHostComponent (write), ref (ref), invariant (ref), getHostContext (ref), prepareToHydrateHostInstance (ref), createInstance (ref), var1 (write), finalizeInitialChildren (ref), hostText (ref), updateHostText (write), prepareToHydrateHostTextInstance (ref), createTextInstance (ref), profiler (ref), callback (ref), passive (ref), performedWork (ref), noFlags (ref), layoutMask (ref), deletion (ref), passiveMask (ref), suspenseComponent (ref), popSuspenseContext (ref), enableSuspenseServerRenderer (ref), prepareToHydrateHostSuspenseInstance (ref), enableSchedulerTracing (ref), markSpawnedWork (ref), offscreenLane (ref), enableProfilerTimer (ref), profileMode (ref), noMode (ref), resetHydrationState (ref), didCapture (ref), transferActualDuration (ref), blockingMode (ref), hasSuspenseContext (ref), suspenseStackCursor (ref), invisibleParentSuspenseContext (ref), renderDidSuspend (ref), renderDidSuspendDelayIfPossible (ref), supportsPersistence (ref), supportsMutation (ref), enableSuspenseCallback (ref), hostPortal (ref), preparePortalMount (ref), contextProvider (ref), popProvider (ref), incompleteClassComponent (ref), suspenseListComponent (ref), fundamentalComponent (ref), scopeComponent (ref), block (ref), offscreenComponent (ref), legacyHiddenComponent (ref), popRenderLanes (ref), includesSomeLane (ref), unknownModule_4 (ref), concurrentMode (ref)
-		local var6
-		local pendingProps = p7.pendingProps
+	completeWork = function(p3, Return, Lanes) --[[ Line: 873 ]]
+		-- upvalues: IndeterminateComponent (copy), LazyComponent (copy), SimpleMemoComponent (copy), FunctionComponent (copy), ForwardRef (copy), Fragment (copy), Mode (copy), ContextConsumer (copy), MemoComponent (copy), bubbleProperties (copy), ClassComponent (copy), IsContextProviderFunction (copy), PopContextFunction (copy), HostRoot (copy), PopHostContainerFunction (copy), PopTopLevelContextObjectFunction (copy), ResetWorkInProgressVersionsFunction (copy), PopHydrationStateFunction (copy), Update (copy), Snapshot (copy), UpdateHostContainer (ref), HostComponent (copy), PopHostContextFunction (copy), GetRootHostContainerFunction (copy), Callback (ref), Ref (copy), InvariantFunction (copy), GetHostContextFunction (copy), PrepareToHydrateHostInstanceFunction (copy), CreateInstanceFunction (copy), Callback1 (ref), FinalizeInitialChildrenFunction (copy), HostText (copy), Callback2 (ref), PrepareToHydrateHostTextInstanceFunction (copy), CreateTextInstanceFunction (copy), Profiler (copy), Callback3 (copy), Passive (copy), PerformedWork (copy), NoFlags (copy), ReactFeatureFlags (copy), LayoutMask (copy), Deletion (copy), HostUpdate (copy), PassiveMask (copy), SuspenseComponent (copy), PopSuspenseContextFunction (copy), EnableSuspenseServerRenderer (copy), PrepareToHydrateHostSuspenseInstanceFunction (copy), EnableSchedulerTracing (copy), MarkSpawnedWorkFunction (copy), OffscreenLane (copy), EnableProfilerTimer (copy), ProfileMode (copy), NoMode (copy), ResetHydrationStateFunction (copy), DidCapture (copy), TransferActualDurationFunction (copy), BlockingMode (copy), HasSuspenseContextFunction (copy), SuspenseStackCursor (copy), InvisibleParentSuspenseContext (copy), RenderDidSuspendFunction (copy), RenderDidSuspendDelayIfPossibleFunction (copy), SupportsPersistence (copy), SupportsMutation (copy), EnableSuspenseCallback (copy), HostPortal (copy), PreparePortalMountFunction (copy), ContextProvider (copy), PopProviderFunction (copy), IncompleteClassComponent (copy), SuspenseListComponent (copy), FundamentalComponent (copy), ScopeComponent (copy), Block (copy), OffscreenComponent (copy), LegacyHiddenComponent (copy), PopRenderLanesFunction (copy), IncludesSomeLaneFunction (copy), ReactFiberWorkLoopNewModule (copy), ConcurrentMode (copy)
+		local PendingProps = Return.pendingProps
 		
-		if p7.tag == indeterminateComponent or p7.tag == lazyComponent or (p7.tag == simpleMemoComponent or p7.tag == functionComponent) or (p7.tag == forwardRef or p7.tag == fragment or (p7.tag == mode or p7.tag == contextConsumer)) or p7.tag == memoComponent then
-			bubbleProperties(p7)
+		if Return.tag == IndeterminateComponent or Return.tag == LazyComponent or Return.tag == SimpleMemoComponent or Return.tag == FunctionComponent or Return.tag == ForwardRef or Return.tag == Fragment or Return.tag == Mode or Return.tag == ContextConsumer or Return.tag == MemoComponent then
+			bubbleProperties(Return)
 			
 			return nil
-		elseif p7.tag == classComponent then
-			if isContextProvider(p7.type) then
-				popContext(p7)
+		end
+		if Return.tag == ClassComponent then
+			if IsContextProviderFunction(Return.type) then
+				PopContextFunction(Return)
 			end
-			bubbleProperties(p7)
+			bubbleProperties(Return)
 			
 			return nil
-		elseif p7.tag == hostRoot then
-			popHostContainer(p7)
-			popTopLevelContextObject(p7)
-			resetWorkInProgressVersions()
-			local stateNode = p7.stateNode
+		elseif Return.tag == HostRoot then
+			PopHostContainerFunction(Return)
+			PopTopLevelContextObjectFunction(Return)
+			ResetWorkInProgressVersionsFunction()
+			local StateNode = Return.stateNode
 			
-			if stateNode.pendingContext then
-				stateNode.context = stateNode.pendingContext
-				stateNode.pendingContext = nil
+			if StateNode.pendingContext then
+				StateNode.context = StateNode.pendingContext
+				StateNode.pendingContext = nil
 			end
-			if p6 == nil or p6.child == nil then
-				if popHydrationState(p7) then
-					p7.flags = bit32.bor(p7.flags, update)
-				elseif not stateNode.hydrate then
-					p7.flags = bit32.bor(p7.flags, snapshot)
+			if p3 == nil or p3.child == nil then
+				if PopHydrationStateFunction(Return) then
+					Return.flags = bit32.bor(Return.flags, Update)
+				elseif not StateNode.hydrate then
+					Return.flags = bit32.bor(Return.flags, Snapshot)
 				end
 			end
-			var2(p6, p7)
-			bubbleProperties(p7)
+			UpdateHostContainer(p3, Return)
+			bubbleProperties(Return)
 			
 			return nil
-		elseif p7.tag == hostComponent then
-			popHostContext(p7)
-			local var7 = getRootHostContainer()
-			local type = p7.type
+		elseif Return.tag == HostComponent then
+			PopHostContextFunction(Return)
+			local RootHostContainer = GetRootHostContainerFunction()
+			local Type = Return.type
 			
-			if p6 == nil or p7.stateNode == nil then
-				if not pendingProps then
-					invariant(p7.stateNode ~= nil, "We must have new props for new mounts. This error is likely caused by a bug in React. Please file an issue.")
-					bubbleProperties(p7)
+			if p3 == nil or Return.stateNode == nil then
+				if not PendingProps then
+					InvariantFunction(Return.stateNode ~= nil, "We must have new props for new mounts. This error is likely caused by a bug in React. Please file an issue.")
+					bubbleProperties(Return)
 					
 					return nil
 				end
-				local var8 = getHostContext()
+				local HostContext = GetHostContextFunction()
 				
-				if not popHydrationState(p7) then
-					local var9 = createInstance(type, pendingProps, var7, var8, p7)
-					var1(var9, p7, false, false)
-					p7.stateNode = var9
-					
-					if finalizeInitialChildren(var9, type, pendingProps, var7, var8) then
-						p7.flags = bit32.bor(p7.flags, update)
+				if PopHydrationStateFunction(Return) then
+					if PrepareToHydrateHostInstanceFunction(Return, RootHostContainer, HostContext) then
+						Return.flags = bit32.bor(Return.flags, Update)
 					end
-				elseif prepareToHydrateHostInstance(p7, var7, var8) then
-					p7.flags = bit32.bor(p7.flags, update)
+				else
+					local CreateInstanceResult = CreateInstanceFunction(Type, PendingProps, RootHostContainer, HostContext, Return)
+					Callback1(CreateInstanceResult, Return, false, false)
+					Return.stateNode = CreateInstanceResult
+					
+					if FinalizeInitialChildrenFunction(CreateInstanceResult, Type, PendingProps, RootHostContainer, HostContext) then
+						Return.flags = bit32.bor(Return.flags, Update)
+					end
 				end
-				if p7.ref ~= nil then
-					p7.flags = bit32.bor(p7.flags, ref)
+				if Return.ref ~= nil then
+					Return.flags = bit32.bor(Return.flags, Ref)
 				end
 			else
-				updateHostComponent(p6, p7, type, pendingProps, var7)
+				Callback(p3, Return, Type, PendingProps, RootHostContainer)
 				
-				if p6.ref ~= p7.ref then
-					p7.flags = bit32.bor(p7.flags, ref)
+				if p3.ref ~= Return.ref then
+					Return.flags = bit32.bor(Return.flags, Ref)
 				end
 			end
-			bubbleProperties(p7)
+			bubbleProperties(Return)
 			
 			return nil
-		elseif p7.tag == hostText then
-			if p6 and p7.stateNode ~= nil then
-				updateHostText(p6, p7, p6.memoizedProps, pendingProps)
-			elseif typeof(pendingProps) ~= "string" then
-				invariant(p7.stateNode ~= nil, "We must have new props for new mounts. This error is likely caused by a bug in React. Please file an issue.")
-			end
-			local var10 = getRootHostContainer()
-			local var11 = getHostContext()
-			
-			if not popHydrationState(p7) then
-				p7.stateNode = createTextInstance(pendingProps, var10, var11, p7)
-			elseif prepareToHydrateHostTextInstance(p7) then
-				p7.flags = bit32.bor(p7.flags, update)
-			end
-			bubbleProperties(p7)
-			
-			return nil
-		elseif p7.tag == profiler then
-			if not bubbleProperties(p7) then
-				local var12 = update
-				local var13 = callback
-				local var14 = passive
-				local subtreeFlags = p7.subtreeFlags
-				local flags = p7.flags
-				local var15 = flags
+		elseif Return.tag == HostText then
+			if p3 and Return.stateNode ~= nil then
+				Callback2(p3, Return, p3.memoizedProps, PendingProps)
+			else
+				if typeof(PendingProps) ~= "string" then
+					InvariantFunction(Return.stateNode ~= nil, "We must have new props for new mounts. This error is likely caused by a bug in React. Please file an issue.")
+				end
+				local RootHostContainer = GetRootHostContainerFunction()
+				local HostContext = GetHostContextFunction()
 				
-				if bit32.band(flags, performedWork) ~= noFlags or bit32.band(subtreeFlags, performedWork) ~= noFlags then
-					var15 = bit32.bor(var15, var12)
-				end
-				if bit32.band(flags, bit32.bor(layoutMask, deletion)) ~= noFlags or bit32.band(subtreeFlags, bit32.bor(layoutMask, deletion)) ~= noFlags then
-					var15 = bit32.bor(var15, var13)
-				end
-				if bit32.band(flags, passiveMask) ~= noFlags or bit32.band(subtreeFlags, passiveMask) ~= noFlags then
-					var15 = bit32.bor(var15, var14)
-				end
-				p7.flags = var15
-			end
-			return nil
-		elseif p7.tag == suspenseComponent then
-			popSuspenseContext(p7)
-			local memoizedState = p7.memoizedState
-			
-			if enableSuspenseServerRenderer and memoizedState ~= nil and memoizedState.dehydrated ~= nil then
-				if p6 == nil then
-					invariant(popHydrationState(p7), "A dehydrated suspense component was completed without a hydrated node. This is probably a bug in React.")
-					prepareToHydrateHostSuspenseInstance(p7)
-					
-					if enableSchedulerTracing then
-						markSpawnedWork(offscreenLane)
+				if PopHydrationStateFunction(Return) then
+					if PrepareToHydrateHostTextInstanceFunction(Return) then
+						Return.flags = bit32.bor(Return.flags, Update)
 					end
-					bubbleProperties(p7)
+				else
+					Return.stateNode = CreateTextInstanceFunction(PendingProps, RootHostContainer, HostContext, Return)
+				end
+			end
+			bubbleProperties(Return)
+			
+			return nil
+		elseif Return.tag == Profiler then
+			if not bubbleProperties(Return) then
+				local SubtreeFlags: number = Return.subtreeFlags
+				local Flags: number = Return.flags
+				local Value: number = Flags
+				
+				if bit32.band(Flags, PerformedWork) ~= NoFlags or bit32.band(SubtreeFlags, PerformedWork) ~= NoFlags then
+					Value = bit32.bor(Value, Update)
+				end
+				if ReactFeatureFlags.enableCommitTraversalTrims then
+					if bit32.band(Flags, (bit32.bor(LayoutMask, Deletion, HostUpdate))) ~= NoFlags or bit32.band(SubtreeFlags, (bit32.bor(LayoutMask, Deletion, HostUpdate))) ~= NoFlags then
+						Value = bit32.bor(Value, Callback3)
+					end
+				elseif bit32.band(Flags, (bit32.bor(LayoutMask, Deletion))) ~= NoFlags or bit32.band(SubtreeFlags, (bit32.bor(LayoutMask, Deletion))) ~= NoFlags then
+					Value = bit32.bor(Value, Callback3)
+				end
+				if bit32.band(Flags, PassiveMask) ~= NoFlags or bit32.band(SubtreeFlags, PassiveMask) ~= NoFlags then
+					Value = bit32.bor(Value, Passive)
+				end
+				Return.flags = Value
+			end
+			return nil
+		elseif Return.tag == SuspenseComponent then
+			PopSuspenseContextFunction(Return)
+			local MemoizedState = Return.memoizedState
+			
+			if EnableSuspenseServerRenderer and MemoizedState ~= nil and MemoizedState.dehydrated ~= nil then
+				if p3 == nil then
+					InvariantFunction(PopHydrationStateFunction(Return), "A dehydrated suspense component was completed without a hydrated node. This is probably a bug in React.")
+					PrepareToHydrateHostSuspenseInstanceFunction(Return)
 					
-					if enableProfilerTimer and bit32.band(p7.mode, profileMode) ~= noMode and memoizedState ~= nil then
-						local child = p7.child
+					if EnableSchedulerTracing then
+						MarkSpawnedWorkFunction(OffscreenLane)
+					end
+					bubbleProperties(Return)
+					
+					if EnableProfilerTimer and bit32.band(Return.mode, ProfileMode) ~= NoMode and MemoizedState ~= nil then
+						local Child1 = Return.child
 						
-						if child ~= nil then
-							p7.treeBaseDuration = child.treeBaseDuration
+						if Child1 ~= nil then
+							Return.treeBaseDuration = Child1.treeBaseDuration
 						end
 					end
 					return nil
 				else
-					resetHydrationState()
+					ResetHydrationStateFunction()
 					
-					if bit32.band(p7.flags, didCapture) == noFlags then
-						p7.memoizedState = nil
+					if bit32.band(Return.flags, DidCapture) == NoFlags then
+						Return.memoizedState = nil
 					end
-					p7.flags = bit32.bor(p7.flags, update)
-					bubbleProperties(p7)
+					Return.flags = bit32.bor(Return.flags, Update)
+					bubbleProperties(Return)
 					
-					if enableProfilerTimer and bit32.band(p7.mode, profileMode) ~= noMode and memoizedState ~= nil then
-						local child = p7.child
+					if EnableProfilerTimer and bit32.band(Return.mode, ProfileMode) ~= NoMode and MemoizedState ~= nil then
+						local Child = Return.child
 						
-						if child ~= nil then
-							p7.treeBaseDuration -= child.treeBaseDuration
+						if Child ~= nil then
+							Return.treeBaseDuration -= Child.treeBaseDuration
 						end
 					end
 					return nil
 				end
-			elseif bit32.band(p7.flags, didCapture) == noFlags then
-				var6 = memoizedState ~= nil
-				local var16 = false
+			elseif bit32.band(Return.flags, DidCapture) == NoFlags then
+				local v1 = MemoizedState ~= nil
+				local HasMemoizedState = false
 				
-				if p6 ~= nil then
-					var16 = p6.memoizedState ~= nil
-				elseif p7.memoizedProps.fallback ~= nil then
-					popHydrationState(p7)
+				if p3 == nil then
+					if Return.memoizedProps.fallback ~= nil then
+						PopHydrationStateFunction(Return)
+					end
+				else
+					HasMemoizedState = p3.memoizedState ~= nil
 				end
-				if var6 and not var16 and bit32.band(p7.mode, blockingMode) ~= noMode then
-					if (p6 == nil and p7.memoizedProps.unstable_avoidThisFallback ~= true) or hasSuspenseContext(suspenseStackCursor.current, invisibleParentSuspenseContext) then
-						renderDidSuspend()
+				if v1 and not HasMemoizedState and bit32.band(Return.mode, BlockingMode) ~= NoMode then
+					if p3 == nil and Return.memoizedProps.unstable_avoidThisFallback ~= true or HasSuspenseContextFunction(SuspenseStackCursor.current, InvisibleParentSuspenseContext) then
+						RenderDidSuspendFunction()
 					else
-						renderDidSuspendDelayIfPossible()
+						RenderDidSuspendDelayIfPossibleFunction()
 					end
 				end
-				if supportsPersistence and var6 then
-					p7.flags = bit32.bor(p7.flags, update)
+				if SupportsPersistence and v1 then
+					Return.flags = bit32.bor(Return.flags, Update)
 				end
-				if supportsMutation and (var6 or var16) then
-					p7.flags = bit32.bor(p7.flags, update)
+				if SupportsMutation and (v1 or HasMemoizedState) then
+					Return.flags = bit32.bor(Return.flags, Update)
 				end
-				if enableSuspenseCallback and p7.updateQueue ~= nil and p7.memoizedProps.suspenseCallback ~= nil then
-					p7.flags = bit32.bor(p7.flags, update)
+				if EnableSuspenseCallback and Return.updateQueue ~= nil and Return.memoizedProps.suspenseCallback ~= nil then
+					Return.flags = bit32.bor(Return.flags, Update)
 				end
-				bubbleProperties(p7)
+				bubbleProperties(Return)
 				
-				if enableProfilerTimer and bit32.band(p7.mode, profileMode) ~= noMode and var6 then
-					local child = p7.child
+				if EnableProfilerTimer and bit32.band(Return.mode, ProfileMode) ~= NoMode and v1 then
+					local Child = Return.child
 					
-					if child ~= nil then
-						p7.treeBaseDuration -= child.treeBaseDuration
+					if Child ~= nil then
+						Return.treeBaseDuration -= Child.treeBaseDuration
 					end
 				end
 				return nil
 			else
-				p7.lanes = p8
+				Return.lanes = Lanes
 				
-				if enableProfilerTimer and bit32.band(p7.mode, profileMode) ~= noMode then
-					transferActualDuration(p7)
+				if EnableProfilerTimer and bit32.band(Return.mode, ProfileMode) ~= NoMode then
+					TransferActualDurationFunction(Return)
 				end
-				return p7
+				return Return
 			end
-		elseif p7.tag == hostPortal then
-			popHostContainer(p7)
-			var2(p6, p7)
+		elseif Return.tag == HostPortal then
+			PopHostContainerFunction(Return)
+			UpdateHostContainer(p3, Return)
 			
-			if p6 == nil then
-				preparePortalMount(p7.stateNode.containerInfo)
+			if p3 == nil then
+				PreparePortalMountFunction(Return.stateNode.containerInfo)
 			end
-			bubbleProperties(p7)
+			bubbleProperties(Return)
 			
 			return nil
-		elseif p7.tag == contextProvider then
-			popProvider(p7)
-			bubbleProperties(p7)
-			
-			return nil
-		elseif p7.tag == incompleteClassComponent then
-			if isContextProvider(p7.type) then
-				popContext(p7)
+		else
+			if Return.tag == ContextProvider then
+				PopProviderFunction(Return)
+				bubbleProperties(Return)
+				
+				return nil
 			end
-			bubbleProperties(p7)
-			
-			return nil
-		elseif p7.tag == suspenseListComponent then
-			print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-			print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-			print("UNIMPLEMENTED ERROR: " .. tostring("SuspenseListComponent"))
-			error("FIXME (roblox): SuspenseListComponent is unimplemented", 2)
-		elseif p7.tag == fundamentalComponent then
-			print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-			print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-			print("UNIMPLEMENTED ERROR: " .. tostring("FundamentalComponent"))
-			error("FIXME (roblox): FundamentalComponent is unimplemented", 2)
-		elseif p7.tag == scopeComponent then
-			print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-			print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-			print("UNIMPLEMENTED ERROR: " .. tostring("ScopeComponent"))
-			error("FIXME (roblox): ScopeComponent is unimplemented", 2)
-		elseif p7.tag == block then
-			print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-			print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-			print("UNIMPLEMENTED ERROR: " .. tostring("Block"))
-			error("FIXME (roblox): Block is unimplemented", 2)
-		elseif p7.tag ~= offscreenComponent and p7.tag ~= legacyHiddenComponent then
-			invariant(false, "Unknown unit of work tag (%s). This error is likely caused by a bug in React. Please file an issue.", tostring(p7.tag))
-			
-			return nil
+			if Return.tag == IncompleteClassComponent then
+				if IsContextProviderFunction(Return.type) then
+					PopContextFunction(Return)
+				end
+				bubbleProperties(Return)
+				
+				return nil
+			else
+				if Return.tag == SuspenseListComponent then
+					print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+					print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+					print("UNIMPLEMENTED ERROR: " .. tostring("SuspenseListComponent"))
+					error("FIXME (roblox): SuspenseListComponent is unimplemented", 2)
+				elseif Return.tag == FundamentalComponent then
+					print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+					print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+					print("UNIMPLEMENTED ERROR: " .. tostring("FundamentalComponent"))
+					error("FIXME (roblox): FundamentalComponent is unimplemented", 2)
+				elseif Return.tag == ScopeComponent then
+					print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+					print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+					print("UNIMPLEMENTED ERROR: " .. tostring("ScopeComponent"))
+					error("FIXME (roblox): ScopeComponent is unimplemented", 2)
+				elseif Return.tag == Block then
+					print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+					print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+					print("UNIMPLEMENTED ERROR: " .. tostring("Block"))
+					error("FIXME (roblox): Block is unimplemented", 2)
+				elseif Return.tag == OffscreenComponent or Return.tag == LegacyHiddenComponent then
+					PopRenderLanesFunction(Return)
+					local HasMemoizedState = Return.memoizedState ~= nil
+					
+					if p3 ~= nil and (p3.memoizedState ~= nil ~= HasMemoizedState and PendingProps.mode ~= "unstable-defer-without-hiding") then
+						Return.flags = bit32.bor(Return.flags, Update)
+					end
+					if not HasMemoizedState or (IncludesSomeLaneFunction(ReactFiberWorkLoopNewModule.subtreeRenderLanes, OffscreenLane) or bit32.band(Return.mode, ConcurrentMode) == NoMode) then
+						bubbleProperties(Return)
+					end
+					return nil
+				end
+				InvariantFunction(false, "Unknown unit of work tag (%s). This error is likely caused by a bug in React. Please file an issue.", (tostring(Return.tag)))
+				
+				return nil
+			end
 		end
-		popRenderLanes(p7)
-		var6 = p7.memoizedState ~= nil
-		
-		if p6 ~= nil and p6.memoizedState ~= nil ~= var6 and pendingProps.mode ~= "unstable-defer-without-hiding" then
-			p7.flags = bit32.bor(p7.flags, update)
-		end
-		if not var6 or includesSomeLane(unknownModule_4.subtreeRenderLanes, offscreenLane) or bit32.band(p7.mode, concurrentMode) == noMode then
-			bubbleProperties(p7)
-		end
-		return nil
 	end
 }

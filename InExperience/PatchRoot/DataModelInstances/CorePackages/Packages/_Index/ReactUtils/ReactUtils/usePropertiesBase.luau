@@ -1,55 +1,55 @@
-﻿local parent = script:FindFirstAncestor("ReactUtils").Parent
-local reactModule = require(parent.React)
-local array = require(parent.LuauPolyfill).Array
-local useForwardRefModule = require(script.Parent.useForwardRef)
+﻿local Parent = script:FindFirstAncestor("ReactUtils").Parent
+local ReactModule = require(Parent.React)
+local Array = require(Parent.LuauPolyfill).Array
+local UseForwardRefModule = require(script.Parent.useForwardRef)
 
-return function(p1, p2, p3, ...)
-	-- upvalues: array (ref), reactModule (ref), useForwardRefModule (ref)
-	local var1 = array.concat({}, ...)
+return function(p1, Callback, p2, ...) --[[ Line: 15 | Named "usePropertiesBase" ]]
+	-- upvalues: Array (copy), ReactModule (copy), UseForwardRefModule (copy)
+	local ConcatResult = Array.concat({}, ...)
 	
-	return useForwardRefModule(p1, reactModule.useCallback(function(p4)
-		-- upvalues: p2 (ref), array (copy), var1 (ref), p3 (ref)
-		local function onPropChange()
-			-- upvalues: p2 (copy), array (copy), var1 (copy), p4 (ref)
-			p2(table.unpack(array.map(var1, function(p5)
-				-- upvalues: p4 (copy)
-				return p4[p5]
+	return UseForwardRefModule(p1, (ReactModule.useCallback(function(Object) --[[ Line: 23 ]]
+		-- upvalues: Callback (copy), Array (upval), ConcatResult (copy), p2 (copy)
+		local function onPropChange() --[[ Line: 24 ]]
+			-- upvalues: Callback (upval), Array (upval), ConcatResult (upval), Object (copy)
+			Callback(table.unpack(Array.map(ConcatResult, function(p3) --[[ Line: 25 ]]
+				-- upvalues: Object (upval)
+				return Object[p3]
 			end)))
 		end
 		
-		local var2 = nil
+		local DeferredThread = nil
 		
-		local var3 = function()
-			-- upvalues: var2 (write), p2 (copy), array (copy), var1 (copy), p4 (ref)
-			if not var2 then
-				var2 = task.defer(function()
-					-- upvalues: var2 (copy), p2 (copy), array (copy), var1 (copy), p4 (copy)
-					var2 = nil
-					p2(table.unpack(array.map(var1, function(p5)
-						-- upvalues: p4 (copy)
-						return p4[p5]
+		local function v7() --[[ Line: 31 ]]
+			-- upvalues: DeferredThread (ref), Callback (upval), Array (upval), ConcatResult (upval), Object (copy)
+			if not DeferredThread then
+				DeferredThread = task.defer(function() --[[ Line: 33 ]]
+					-- upvalues: DeferredThread (upval), Callback (upval), Array (upval), ConcatResult (upval), Object (upval)
+					DeferredThread = nil
+					Callback(table.unpack(Array.map(ConcatResult, function(p3) --[[ Line: 25 ]]
+						-- upvalues: Object (upval)
+						return Object[p3]
 					end)))
 				end)
 			end
 		end
 		
-		local var4 = array.map(var1, function(p5)
-			-- upvalues: p4 (ref), p3 (copy), var3 (ref), onPropChange (ref)
-			return p4:GetPropertyChangedSignal(p5):Connect(if p3 then var3 else onPropChange)
+		local MapResult = Array.map(ConcatResult, function(PropertyName) --[[ Line: 39 ]]
+			-- upvalues: Object (copy), p2 (upval), v7 (copy), onPropChange (copy)
+			return Object:GetPropertyChangedSignal(PropertyName):Connect(if p2 then v7 else onPropChange)
 		end)
-		p2(table.unpack(array.map(var1, function(p5)
-			-- upvalues: p4 (ref)
-			return p4[p5]
+		Callback(table.unpack(Array.map(ConcatResult, function(p3) --[[ Line: 25 ]]
+			-- upvalues: Object (copy)
+			return Object[p3]
 		end)))
 		
-		return function()
-			-- upvalues: var4 (ref), var2 (write)
-			for i, v in var4 do
-				v:Disconnect()
+		return function() --[[ Line: 45 ]]
+			-- upvalues: MapResult (copy), DeferredThread (ref)
+			for _, Connection in MapResult do
+				Connection:Disconnect()
 			end
-			if var2 then
-				task.cancel(var2)
+			if DeferredThread then
+				task.cancel(DeferredThread)
 			end
 		end
-	end, { p2, table.concat(var1, ",") }))
+	end, { Callback, table.concat(ConcatResult, ",") })))
 end

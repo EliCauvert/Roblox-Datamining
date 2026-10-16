@@ -1,64 +1,63 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local catalogRowItemCard = require(parent.AvatarExperienceCommon).Components.CatalogItemCard.CatalogRowItemCard
-local itemCardThumbnail = require(parent.AvatarExperienceUIKit).ItemCardComponents.ItemCardThumbnail
-local getPriceLineContent = require(parent.AvatarExperienceInspectAndBuy).Utils.getPriceLineContent
-local view = foundationModule.View
-local checkbox = foundationModule.Checkbox
-local useTokens = foundationModule.Hooks.useTokens
-local inputSize = foundationModule.Enums.InputSize
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local fFlagProfileInspectAvatarBuyAllModule = require(profilePlatform.Flags.FFlagProfileInspectAvatarBuyAll)
-local _ = require(profilePlatform.Common.Types)
-local itemDisplayHelpersModule = require(script.Parent.ItemDisplayHelpers)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local CatalogRowItemCard = require(Parent.AvatarExperienceCommon).Components.CatalogItemCard.CatalogRowItemCard
+local ItemCardThumbnail = require(Parent.AvatarExperienceUIKit).ItemCardComponents.ItemCardThumbnail
+local GetPriceLineContentFunction = require(Parent.AvatarExperienceInspectAndBuy).Utils.getPriceLineContent
+local View = FoundationModule.View
+local Checkbox = FoundationModule.Checkbox
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local InputSize = FoundationModule.Enums.InputSize
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local FFlagProfileInspectAvatarBuyAllModule = require(ProfilePlatform.Flags.FFlagProfileInspectAvatarBuyAll)
+local _ = require(ProfilePlatform.Common.Types)
+local ItemDisplayHelpersModule = require(script.Parent.ItemDisplayHelpers)
 
-return function(p1)
-	-- upvalues: useTokens (ref), itemDisplayHelpersModule (ref), useLocalization (ref), reactModule (ref), view (ref), fFlagProfileInspectAvatarBuyAllModule (ref), checkbox (ref), inputSize (ref), catalogRowItemCard (ref), itemCardThumbnail (ref), getPriceLineContent (ref)
-	local var1 = useTokens()
-	local asset = p1.asset
-	local id = asset.id
+return function(p1) --[[ Line: 41 | Named "CatalogItemRowCardContainer" ]]
+	-- upvalues: UseTokensFunction (copy), ItemDisplayHelpersModule (copy), UseLocalizationFunction (copy), ReactModule (copy), View (copy), FFlagProfileInspectAvatarBuyAllModule (copy), Checkbox (copy), InputSize (copy), CatalogRowItemCard (copy), ItemCardThumbnail (copy), GetPriceLineContentFunction (copy)
+	local Asset = p1.asset
+	local Id = Asset.id
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "row align-y-top gap-medium",
 		Size = UDim2.new(1, 0, 0, p1.rowHeight),
 		LayoutOrder = p1.index
 	}, {
-		ItemCheckbox = if fFlagProfileInspectAvatarBuyAllModule then nil else reactModule.createElement(checkbox, {
+		ItemCheckbox = if FFlagProfileInspectAvatarBuyAllModule then nil else ReactModule.createElement(Checkbox, {
 			label = "",
 			LayoutOrder = 1,
 			isChecked = p1.isPurchasable and p1.isChecked,
 			isDisabled = not p1.isPurchasable,
-			size = inputSize.Small,
-			onActivated = function(_)
-				-- upvalues: p1 (ref), id (ref)
-				p1.onToggleItem(id)
+			size = InputSize.Small,
+			onActivated = function(_) --[[ Line: 70 ]]
+				-- upvalues: p1 (copy), Id (copy)
+				p1.onToggleItem(Id)
 			end
 		}),
-		ItemCard = reactModule.createElement(view, { tag = "fill size-0-full", LayoutOrder = 2 }, {
-			Card = reactModule.createElement(catalogRowItemCard, {
+		ItemCard = ReactModule.createElement(View, { tag = "fill size-0-full", LayoutOrder = 2 }, {
+			Card = ReactModule.createElement(CatalogRowItemCard, {
 				tag = "size-full",
-				title = asset.name,
-				presentationSlot = reactModule.createElement(itemCardThumbnail, { url = itemDisplayHelpersModule.getThumbnailUrl(asset) }),
-				creator = if asset.creator and asset.creator.creatorName then {
-					name = asset.creator.creatorName,
-					verified = asset.creator.creatorHasVerifiedBadge
+				title = Asset.name,
+				presentationSlot = ReactModule.createElement(ItemCardThumbnail, { url = ItemDisplayHelpersModule.getThumbnailUrl(Asset) }),
+				creator = if Asset.creator and Asset.creator.creatorName then {
+					name = Asset.creator.creatorName,
+					verified = Asset.creator.creatorHasVerifiedBadge
 				} else nil,
-				itemSubType = itemDisplayHelpersModule.getItemTypeDisplayName(asset, p1.localizedStrings),
-				bundlePartsText = useLocalization(if itemDisplayHelpersModule.shouldShowBundleParts(asset) then {
+				itemSubType = ItemDisplayHelpersModule.getItemTypeDisplayName(Asset, p1.localizedStrings),
+				bundlePartsText = UseLocalizationFunction(if ItemDisplayHelpersModule.shouldShowBundleParts(Asset) then {
 					bundleParts = {
 						"Feature.Catalog.Label.UsingBundleParts",
-						count = asset.bundlePartsCount
+						count = Asset.bundlePartsCount
 					}
 				} else {}).bundleParts,
-				priceLineContent = getPriceLineContent(asset, var1, p1.priceStatusLocalized, { isShopContext = true }),
+				priceLineContent = GetPriceLineContentFunction(Asset, UseTokensFunction(), p1.priceStatusLocalized, { isShopContext = true }),
 				headerSize = UDim2.fromOffset(p1.rowHeight, p1.rowHeight),
 				footerSize = UDim2.fromScale(0, 1),
 				footerAutomaticSize = Enum.AutomaticSize.X,
-				onActivated = function()
-					-- upvalues: p1 (ref), id (ref), asset (ref)
-					p1.openItemDetails(id, asset.itemType or "Asset", p1.index)
+				onActivated = function() --[[ Line: 99 ]]
+					-- upvalues: p1 (copy), Id (copy), Asset (copy)
+					p1.openItemDetails(Id, Asset.itemType or "Asset", p1.index)
 				end
 			})
 		})

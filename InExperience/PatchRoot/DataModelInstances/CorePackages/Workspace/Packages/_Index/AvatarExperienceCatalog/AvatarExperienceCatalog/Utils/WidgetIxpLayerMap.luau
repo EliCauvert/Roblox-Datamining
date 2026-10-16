@@ -1,9 +1,9 @@
-﻿local appUserLayers = require(script:FindFirstAncestor("AvatarExperienceCatalog").Parent.ExperimentLayers).AppUserLayers
+﻿local AppUserLayers = require(script:FindFirstAncestor("AvatarExperienceCatalog").Parent.ExperimentLayers).AppUserLayers
 
 return {
-	TrendingWidget = appUserLayers.AvatarMarketplaceALGOONLYTrendingWidget,
-	ThemedAvatarItemsWidget = appUserLayers.AvatarMarketplaceALGOONLYThematicWidget,
-	PersonalizedAvatarLooksWidget = appUserLayers.AvatarMarketplaceALGOONLYAvatarWidget,
-	PopularAmongFriendsWidget = appUserLayers.AvatarMarketplaceALGOONLYFriendsWidget,
-	CurationWidget = appUserLayers.AvatarMarketplaceALGOONLYCurationWidget
+	TrendingWidget = AppUserLayers.AvatarMarketplaceALGOONLYTrendingWidget,
+	ThemedAvatarItemsWidget = AppUserLayers.AvatarMarketplaceALGOONLYThematicWidget,
+	PersonalizedAvatarLooksWidget = AppUserLayers.AvatarMarketplaceALGOONLYAvatarWidget,
+	PopularAmongFriendsWidget = AppUserLayers.AvatarMarketplaceALGOONLYFriendsWidget,
+	CurationWidget = AppUserLayers.AvatarMarketplaceALGOONLYCurationWidget
 }

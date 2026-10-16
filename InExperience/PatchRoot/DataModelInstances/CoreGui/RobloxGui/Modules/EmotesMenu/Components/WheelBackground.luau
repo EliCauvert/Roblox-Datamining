@@ -1,73 +1,73 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local colors = UIBloxModule.App.Style.Colors
-local withStyle = UIBloxModule.Style.withStyle
-local parent = script.Parent
-local constantsModule = require(parent.Parent.Constants)
-local selectionGradientModule = require(parent.SelectionGradient)
-local selectionEffectModule = require(parent.SelectionEffect)
-local wheelTextModule = require(parent.WheelText)
-local wheelBackground = roactModule.PureComponent:extend("WheelBackground")
+﻿local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
+local Colors = UIBloxModule.App.Style.Colors
+local WithStyleFunction = UIBloxModule.Style.withStyle
+local Parent = script.Parent
+local ConstantsModule = require(Parent.Parent.Constants)
+local SelectionGradientModule = require(Parent.SelectionGradient)
+local SelectionEffectModule = require(Parent.SelectionEffect)
+local WheelTextModule = require(Parent.WheelText)
+local WheelBackground = RoactModule.PureComponent:extend("WheelBackground")
 
-function wheelBackground.renderContent(p1, p2)
-	-- upvalues: constantsModule (ref), roactModule (ref), colors (ref), selectionGradientModule (ref), selectionEffectModule (ref), wheelTextModule (ref)
-	local layout = constantsModule.Layouts[p1.props.layout]
+function WheelBackground.renderContent(p1, Alpha) --[[ Line: 20 ]]
+	-- upvalues: ConstantsModule (copy), RoactModule (copy), Colors (copy), SelectionGradientModule (copy), SelectionEffectModule (copy), WheelTextModule (copy)
+	local Layout = ConstantsModule.Layouts[p1.props.layout]
 	
-	return roactModule.createElement("Folder", {}, {
-		BackgroundCircleOverlay = if p2 then roactModule.createElement("Frame", {
+	return RoactModule.createElement("Folder", {}, {
+		BackgroundCircleOverlay = if Alpha then RoactModule.createElement("Frame", {
 			Size = UDim2.fromScale(1, 1),
-			BackgroundColor3 = colors.Flint:Lerp(Color3.new(0, 0, 0), p2),
-			BackgroundTransparency = constantsModule.WheelBackgroundTransparency * p2
+			BackgroundColor3 = Colors.Flint:Lerp(Color3.new(0, 0, 0), Alpha),
+			BackgroundTransparency = ConstantsModule.WheelBackgroundTransparency * Alpha
 		}, {
-			roactModule.createElement("UICorner", { CornerRadius = UDim.new(0.5, 0) })
-		}) else roactModule.createElement("ImageLabel", {
+			RoactModule.createElement("UICorner", { CornerRadius = UDim.new(0.5, 0) })
+		}) else RoactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 1,
 			ZIndex = 1,
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Size = UDim2.new(1, 0, 1, 0),
 			Position = UDim2.new(0.5, 0, 0.5, 0),
-			Image = layout.CircleBackground
+			Image = Layout.CircleBackground
 		}),
-		BackgroundGradient = roactModule.createElement("Frame", {
+		BackgroundGradient = RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			ZIndex = 2,
 			Size = UDim2.new(1, 0, 1, 0)
 		}, {
-			SelectionGradient = roactModule.createElement(selectionGradientModule)
+			SelectionGradient = RoactModule.createElement(SelectionGradientModule)
 		}),
-		BackgroundImage = roactModule.createElement("ImageLabel", {
+		BackgroundImage = RoactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 1,
 			ZIndex = 3,
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Size = UDim2.new(1, 0, 1, 0),
 			Position = UDim2.new(0.5, 0, 0.5, 0),
-			Image = layout.SegmentedCircle
+			Image = Layout.SegmentedCircle
 		}),
-		Selection = roactModule.createElement("Frame", {
+		Selection = RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			ZIndex = 4,
 			Size = UDim2.new(1, 0, 1, 0)
 		}, {
-			SelectionEffect = roactModule.createElement(selectionEffectModule)
+			SelectionEffect = RoactModule.createElement(SelectionEffectModule)
 		}),
-		BackgroundText = roactModule.createElement("Frame", {
+		BackgroundText = RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			ZIndex = 5,
 			Size = UDim2.new(1, 0, 1, 0)
-		}, { MiddleText = roactModule.createElement(wheelTextModule) })
+		}, { MiddleText = RoactModule.createElement(WheelTextModule) })
 	})
 end
 
-function wheelBackground.render(p1)
-	-- upvalues: withStyle (ref)
-	return withStyle(function(p2)
-		-- upvalues: p1 (ref)
+function WheelBackground.render(p1) --[[ Line: 78 ]]
+	-- upvalues: WithStyleFunction (copy)
+	return WithStyleFunction(function(p2) --[[ Line: 79 ]]
+		-- upvalues: p1 (copy)
 		return p1:renderContent(p2.Settings.PreferredTransparency)
 	end)
 end
 
-return roactRoduxModule.connect(function(p1)
+return RoactRoduxModule.connect(function(p1) --[[ Line: 84 | Named "mapStateToProps" ]]
 	return { layout = p1.layout }
-end, nil)(wheelBackground)
+end, nil)(WheelBackground)

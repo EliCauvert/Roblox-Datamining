@@ -1,52 +1,52 @@
-﻿local chatLineReporting = script:FindFirstAncestor("ChatLineReporting")
-local parent = chatLineReporting.Parent
-local coreGuiService = game:GetService("CoreGui")
-local provider = require(parent.FocusNavigationUtils).FocusNavigableSurfaceRegistry.Provider
-local localizationService = game:GetService("LocalizationService")
-local localization = require(parent.InExperienceLocales).Localization
-local localizationProvider = require(parent.Localization).LocalizationProvider
-local reactModule = require(parent.React)
-local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
-local roactModule = require(parent.Roact)
-local styleProviderWithDefaultTheme = require(parent.Style).StyleProviderWithDefaultTheme
-local layerCollectorProvider = require(parent.UIBlox).Core.Layout.LayerCollector.LayerCollectorProvider
-local chatLineReportStepHandlerModule = require(chatLineReporting.Components.ChatLineReportStepHandler)
-local foundationProvider = require(parent.Foundation).FoundationProvider
-local var1 = nil
-local var2 = nil
+﻿local ChatLineReporting = script:FindFirstAncestor("ChatLineReporting")
+local Parent = ChatLineReporting.Parent
+local CoreGui = game:GetService("CoreGui")
+local Provider = require(Parent.FocusNavigationUtils).FocusNavigableSurfaceRegistry.Provider
+local LocalizationService = game:GetService("LocalizationService")
+local Localization = require(Parent.InExperienceLocales).Localization
+local LocalizationProvider = require(Parent.Localization).LocalizationProvider
+local ReactModule = require(Parent.React)
+local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
+local RoactModule = require(Parent.Roact)
+local StyleProviderWithDefaultTheme = require(Parent.Style).StyleProviderWithDefaultTheme
+local LayerCollectorProvider = require(Parent.UIBlox).Core.Layout.LayerCollector.LayerCollectorProvider
+local ChatLineReportStepHandlerModule = require(ChatLineReporting.Components.ChatLineReportStepHandler)
+local FoundationProvider = require(Parent.Foundation).FoundationProvider
+local NewResult = nil
+local ChatLineReportRoot = nil
 
-local var3 = function()
-	-- upvalues: var2 (write), roactModule (ref), var1 (write)
-	if var2 then
-		roactModule.unmount(var2)
-		var1:teardown()
+local function Unmount() --[[ Line: 26 ]]
+	-- upvalues: ChatLineReportRoot (ref), RoactModule (copy), NewResult (ref)
+	if ChatLineReportRoot then
+		RoactModule.unmount(ChatLineReportRoot)
+		NewResult:teardown()
 	end
 end
 
 return {
-	initialize = function(p1)
-		-- upvalues: reactModule (ref), layerCollectorProvider (ref), roactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), foundationProvider (ref), styleProviderWithDefaultTheme (ref), chatLineReportStepHandlerModule (ref), var3 (ref), var1 (write), reactFocusNavigationModule (ref), var2 (write), provider (ref), coreGuiService (ref)
-		var1 = reactFocusNavigationModule.FocusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui)
-		var2 = roactModule.mount(reactModule.createElement(reactFocusNavigationModule.FocusNavigationContext.Provider, { value = var1 }, {
-			FocusNavigationRegistryProvider = reactModule.createElement(provider, nil, {
-				ChatLineReportRoot = reactModule.createElement("ScreenGui", {
+	initialize = function(Messages) --[[ Line: 33 ]]
+		-- upvalues: ReactModule (copy), LayerCollectorProvider (copy), RoactModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), FoundationProvider (copy), StyleProviderWithDefaultTheme (copy), ChatLineReportStepHandlerModule (copy), Unmount (copy), NewResult (ref), ReactFocusNavigationModule (copy), ChatLineReportRoot (ref), Provider (copy), CoreGui (copy)
+		NewResult = ReactFocusNavigationModule.FocusNavigationService.new(ReactFocusNavigationModule.EngineInterface.CoreGui)
+		ChatLineReportRoot = RoactModule.mount(ReactModule.createElement(ReactFocusNavigationModule.FocusNavigationContext.Provider, { value = NewResult }, {
+			FocusNavigationRegistryProvider = ReactModule.createElement(Provider, nil, {
+				ChatLineReportRoot = ReactModule.createElement("ScreenGui", {
 					IgnoreGuiInset = true,
 					OnTopOfCoreBlur = false,
 					ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 				}, {
-					LayerCollector = reactModule.createElement(layerCollectorProvider, {}, {
-						LocalizationProvider = roactModule.createElement(localizationProvider, {
-							localization = localization.new(localizationService.RobloxLocaleId)
+					LayerCollector = ReactModule.createElement(LayerCollectorProvider, {}, {
+						LocalizationProvider = RoactModule.createElement(LocalizationProvider, {
+							localization = Localization.new(LocalizationService.RobloxLocaleId)
 						}, {
-							FoundationProvider = reactModule.createElement(foundationProvider, { colorMode = "Dark" }, {
-								StyleProvider = reactModule.createElement(styleProviderWithDefaultTheme, { withDarkTheme = true }, {
-									ChatLineReportStepHandler = reactModule.createElement(chatLineReportStepHandlerModule, { unmount = var3, messages = p1 })
+							FoundationProvider = ReactModule.createElement(FoundationProvider, { colorMode = "Dark" }, {
+								StyleProvider = ReactModule.createElement(StyleProviderWithDefaultTheme, { withDarkTheme = true }, {
+									ChatLineReportStepHandler = ReactModule.createElement(ChatLineReportStepHandlerModule, { unmount = Unmount, messages = Messages })
 								})
 							})
 						})
 					})
 				})
 			})
-		}), coreGuiService, "ChatLineReportRoot")
+		}), CoreGui, "ChatLineReportRoot")
 	end
 }

@@ -1,45 +1,45 @@
-﻿local parent = script:FindFirstAncestor("UserRelationshipModals").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local dialog = foundationModule.Dialog
-local dialogSize = foundationModule.Enums.DialogSize
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local userTileModule = require(parent.UserTile)
-local userTile = userTileModule.UserTile
-local layoutMode = userTileModule.LayoutMode
-local promptFriendRequestModalRevampFriendsRename = require(parent.SharedFlags).FFlagConnectionsToFriendsRename and game:DefineFastFlag("PromptFriendRequestModalRevampFriendsRename", false)
-local promptFriendRequestModalInputDelayMs = game:DefineFastInt("PromptFriendRequestModalInputDelayMs", 1000)
+﻿local Parent = script:FindFirstAncestor("UserRelationshipModals").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local Dialog = FoundationModule.Dialog
+local DialogSize = FoundationModule.Enums.DialogSize
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UserTileModule = require(Parent.UserTile)
+local UserTile = UserTileModule.UserTile
+local LayoutMode = UserTileModule.LayoutMode
+local PromptFriendRequestModalRevampFriendsRename = game:DefineFastFlag("PromptFriendRequestModalRevampFriendsRename", false)
+local PromptFriendRequestModalInputDelayMs = game:DefineFastInt("PromptFriendRequestModalInputDelayMs", 1000)
 
-return function(p1)
-	-- upvalues: useLocalization (ref), promptFriendRequestModalRevampFriendsRename (ref), reactModule (ref), dialog (ref), dialogSize (ref), foundationModule (ref), userTile (ref), layoutMode (ref), buttonVariant (ref), promptFriendRequestModalInputDelayMs (ref)
-	local var1 = useLocalization({
+return function(p1) --[[ Line: 30 | Named "PromptFriendRequestModal" ]]
+	-- upvalues: UseLocalizationFunction (copy), PromptFriendRequestModalRevampFriendsRename (copy), ReactModule (copy), Dialog (copy), DialogSize (copy), FoundationModule (copy), UserTile (copy), LayoutMode (copy), ButtonVariant (copy), PromptFriendRequestModalInputDelayMs (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
 		sendText = "InGame.FriendPlayerPrompt.Action.Send",
-		titleText = if promptFriendRequestModalRevampFriendsRename then "InGame.FriendPlayerPrompt.Title.SendFriendRequest.FriendsRename" else "InGame.FriendPlayerPrompt.Title.SendFriendRequest"
+		titleText = if PromptFriendRequestModalRevampFriendsRename then "InGame.FriendPlayerPrompt.Title.SendFriendRequest.FriendsRename" else "InGame.FriendPlayerPrompt.Title.SendFriendRequest"
 	})
 	
-	return reactModule.createElement(dialog.Root, { size = dialogSize.Medium, onClose = p1.onClose }, {
-		DialogTitle = reactModule.createElement(dialog.Title, { text = var1.titleText }),
-		Avatar = reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(Dialog.Root, { size = DialogSize.Medium, onClose = p1.onClose }, {
+		DialogTitle = ReactModule.createElement(Dialog.Title, { text = UseLocalizationResult.titleText }),
+		Avatar = ReactModule.createElement(FoundationModule.View, {
 			tag = "row align-x-center size-full-3000",
 			LayoutOrder = 2
 		}, {
-			UserTile = reactModule.createElement(userTile, {
+			UserTile = ReactModule.createElement(UserTile, {
 				userId = p1.userId,
 				title = p1.displayName,
-				subtitle = "@" .. p0.username,
-				layoutMode = layoutMode.compact
+				subtitle = "@" .. p1.username,
+				layoutMode = LayoutMode.compact
 			})
 		}),
-		Buffer = reactModule.createElement(foundationModule.View, { tag = "size-full-500", LayoutOrder = 3 }),
-		DialogActions = reactModule.createElement(dialog.Actions, {
+		Buffer = ReactModule.createElement(FoundationModule.View, { tag = "size-full-500", LayoutOrder = 3 }),
+		DialogActions = ReactModule.createElement(Dialog.Actions, {
 			LayoutOrder = 4,
 			actions = {
 				{
-					text = var1.sendText,
-					variant = buttonVariant.Emphasis,
+					text = UseLocalizationResult.sendText,
+					variant = ButtonVariant.Emphasis,
 					onActivated = p1.onSendClicked,
-					inputDelay = if p1.inputDelay == nil then promptFriendRequestModalInputDelayMs / 1000 else p1.inputDelay
+					inputDelay = if p1.inputDelay == nil then PromptFriendRequestModalInputDelayMs / 1000 else p1.inputDelay
 				}
 			}
 		})

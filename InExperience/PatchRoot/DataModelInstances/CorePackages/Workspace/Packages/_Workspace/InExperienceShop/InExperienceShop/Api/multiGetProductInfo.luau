@@ -1,43 +1,43 @@
-﻿local inExperienceShop = script:FindFirstAncestor("InExperienceShop")
-local promiseModule = require(inExperienceShop.Parent.Promise)
-local getProductInfoModule = require(script.Parent.getProductInfo)
-local shopDebugLoggerModule = require(inExperienceShop.Internal.ShopDebugLogger)
+﻿local InExperienceShop = script:FindFirstAncestor("InExperienceShop")
+local PromiseModule = require(InExperienceShop.Parent.Promise)
+local GetProductInfoModule = require(script.Parent.getProductInfo)
+local ShopDebugLoggerModule = require(InExperienceShop.Internal.ShopDebugLogger)
 
-return function(p1)
-	-- upvalues: shopDebugLoggerModule (ref), getProductInfoModule (ref), promiseModule (ref)
-	shopDebugLoggerModule.logLazy(function()
-		-- upvalues: p1 (ref)
-		return "multiGetProductInfo: start batchSize=" .. #p1
+return function(List) --[[ Line: 39 | Named "multiGetProductInfo" ]]
+	-- upvalues: ShopDebugLoggerModule (copy), GetProductInfoModule (copy), PromiseModule (copy)
+	ShopDebugLoggerModule.logLazy(function(): string --[[ Line: 42 ]]
+		-- upvalues: List (copy)
+		return "multiGetProductInfo: start batchSize=" .. #List
 	end)
-	local var1 = shopDebugLoggerModule.startTimer()
-	local list = table.create(#p1)
+	local StartTimerResult = ShopDebugLoggerModule.startTimer()
+	local Buffer = table.create(#List)
 	
-	for i, v in ipairs(p1) do
-		list[i] = getProductInfoModule(v.id, v.infoType):andThen(function(p2)
-			-- upvalues: v (ref)
-			return { ok = true, request = v, value = p2 }
-		end):catch(function(p2)
-			-- upvalues: v (ref)
-			return { ok = false, request = v, err = p2 }
+	for i, Request in ipairs(List) do
+		Buffer[i] = GetProductInfoModule(Request.id, Request.infoType):andThen(function(Result) --[[ Line: 49 ]]
+			-- upvalues: Request (copy)
+			return { ok = true, request = Request, value = Result }
+		end):catch(function(Err) --[[ Line: 52 ]]
+			-- upvalues: Request (copy)
+			return { ok = false, request = Request, err = Err }
 		end)
 	end
-	return shopDebugLoggerModule.tracePromise(promiseModule.all(list), {
-		onSuccess = function(p2)
-			-- upvalues: shopDebugLoggerModule (copy), var1 (ref)
-			local var2 = 0
-			local var3 = 0
+	return ShopDebugLoggerModule.tracePromise(PromiseModule.all(Buffer), {
+		onSuccess = function(List) --[[ Line: 57 ]]
+			-- upvalues: ShopDebugLoggerModule (upval), StartTimerResult (copy)
+			local Count = 0
+			local Count1 = 0
 			
-			for i, v in ipairs(p2) do
-				if v.ok then
-					var2 += 1
+			for _, value in ipairs(List) do
+				if value.ok then
+					Count += 1
 				else
-					var3 += 1
+					Count1 += 1
 				end
 			end
-			shopDebugLoggerModule.logElapsedLazy(function()
-				-- upvalues: var2 (write), var3 (write)
-				return "multiGetProductInfo: done succeeded=" .. var6 .. " failed=" .. var7
-			end, var1)
+			ShopDebugLoggerModule.logElapsedLazy(function(): string --[[ Line: 66 ]]
+				-- upvalues: Count (ref), Count1 (ref)
+				return "multiGetProductInfo: done succeeded=" .. Count .. " failed=" .. Count1
+			end, StartTimerResult)
 		end
 	})
 end

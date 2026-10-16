@@ -1,32 +1,31 @@
-﻿local settings = script:FindFirstAncestor("Settings")
-local corePackagesService = game:GetService("CorePackages")
-local gameSettings = UserSettings().GameSettings
-local cachedPolicyServiceModule = require(corePackagesService.Workspace.Packages.CachedPolicyService)
-local settingsServiceModule = require(corePackagesService.Workspace.Packages.SettingsService)
-local valueChangedSignal = settingsServiceModule.ValueChangedSignal
+﻿local CorePackages = game:GetService("CorePackages")
+local GameSettings = UserSettings().GameSettings
+local SettingsServiceModule = require(CorePackages.Workspace.Packages.SettingsService)
+local ValueChangedSignal = SettingsServiceModule.ValueChangedSignal
 
 return {
 	id = "perf-stats",
 	alreadyLocalized = false,
 	label = "CoreScripts.InGameMenu.GameSettings.ShowPerfStats",
-	field_type = settingsServiceModule.SettingEnum.Toggle,
-	onChanged = (function()
-		-- upvalues: valueChangedSignal (ref), gameSettings (ref)
-		local var1 = valueChangedSignal.new(gameSettings.PerformanceStatsVisible)
-		var1:connect(function(p1)
-			-- upvalues: gameSettings (copy)
-			if gameSettings.PerformanceStatsVisible == p1 then
+	field_type = SettingsServiceModule.SettingEnum.Toggle,
+	onChanged = (function() --[[ Line: 23 | Named "PerfStatsValue" ]]
+		-- upvalues: ValueChangedSignal (copy), GameSettings (copy)
+		local NewValueChangedSignal = ValueChangedSignal.new(GameSettings.PerformanceStatsVisible)
+		NewValueChangedSignal:connect(function(PerformanceStatsVisible) --[[ Line: 26 ]]
+			-- upvalues: GameSettings (upval)
+			if GameSettings.PerformanceStatsVisible ~= PerformanceStatsVisible then
+				GameSettings.PerformanceStatsVisible = PerformanceStatsVisible
+				
 				return
 			end
-			gameSettings.PerformanceStatsVisible = p1
 		end)
-		gameSettings.PerformanceStatsVisibleChanged:Connect(function()
-			-- upvalues: var1 (ref), gameSettings (copy)
-			var1:set(gameSettings.PerformanceStatsVisible)
+		GameSettings.PerformanceStatsVisibleChanged:Connect(function() --[[ Line: 36 ]]
+			-- upvalues: NewValueChangedSignal (copy), GameSettings (upval)
+			NewValueChangedSignal:set(GameSettings.PerformanceStatsVisible)
 		end)
 		
-		return var1
+		return NewValueChangedSignal
 	end)(),
-	availability = settingsServiceModule.AvailabilitySignal.new(not cachedPolicyServiceModule:IsSubjectToChinaPolicies()),
-	layoutOrder = require(settings.Integrations.Constants).GAMESETTINGS.LAYOUT_ORDER.PerformanceStatsFrame
+	availability = SettingsServiceModule.AvailabilitySignal.new(not require(CorePackages.Workspace.Packages.CachedPolicyService):IsSubjectToChinaPolicies()),
+	layoutOrder = require(script:FindFirstAncestor("Settings").Integrations.Constants).GAMESETTINGS.LAYOUT_ORDER.PerformanceStatsFrame
 }

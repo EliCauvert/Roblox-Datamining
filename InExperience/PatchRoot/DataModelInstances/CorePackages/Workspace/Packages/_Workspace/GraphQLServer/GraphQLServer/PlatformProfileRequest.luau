@@ -1,32 +1,32 @@
 ﻿return {
-	hasPlatformFields = function(p1)
-		return if table.find(p1, "names.platformName") == nil then table.find(p1, "platformProfileId") ~= nil else true
+	hasPlatformFields = function(List): boolean --[[ Line: 2 ]]
+		return table.find(List, "names.platformName") ~= nil or table.find(List, "platformProfileId") ~= nil
 	end,
-	normalizeProfiles = function(p1, p2)
-		local var1 = table.find(p2, "names.platformName") ~= nil
-		local var2 = table.find(p2, "platformProfileId") ~= nil
+	normalizeProfiles = function(List1, List) --[[ Line: 6 ]]
+		local HasFoundIndex = table.find(List, "names.platformName") ~= nil
+		local HasFoundIndex1 = table.find(List, "platformProfileId") ~= nil
 		
-		if not var1 and not var2 then
-			return p1
+		if not HasFoundIndex and not HasFoundIndex1 then
+			return List1
 		end
-		local t = {}
+		local List2 = {}
 		
-		for i, v in p1 do
-			local cloned = table.clone(v)
+		for _, value in List1 do
+			local Copy = table.clone(value)
 			
-			if var1 then
-				local var3 = if type(v.names) == "table" then table.clone(v.names) else {}
+			if HasFoundIndex then
+				local Copy1 = if type(value.names) == "table" then table.clone(value.names) else {}
 				
-				if type(var3.platformName) ~= "string" then
-					var3.platformName = ""
+				if type(Copy1.platformName) ~= "string" then
+					Copy1.platformName = ""
 				end
-				cloned.names = var3
+				Copy.names = Copy1
 			end
-			if var2 and type(cloned.platformProfileId) ~= "string" then
-				cloned.platformProfileId = ""
+			if HasFoundIndex1 and type(Copy.platformProfileId) ~= "string" then
+				Copy.platformProfileId = ""
 			end
-			table.insert(t, cloned)
+			table.insert(List2, Copy)
 		end
-		return t
+		return List2
 	end
 }

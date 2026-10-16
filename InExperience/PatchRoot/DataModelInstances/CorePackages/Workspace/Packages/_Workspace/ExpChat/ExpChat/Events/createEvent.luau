@@ -1,19 +1,20 @@
-﻿local bindableEventQueueModule = require(script.Parent.bindableEventQueue)
+﻿local BindableEventQueueModule = require(script.Parent.bindableEventQueue)
 
-return function(p1)
-	-- upvalues: bindableEventQueueModule (ref)
-	return function(p2)
-		-- upvalues: p1 (ref), bindableEventQueueModule (copy)
-		return function(...)
-			-- upvalues: p2 (ref), p1 (copy), bindableEventQueueModule (copy)
-			local var1 = p2(...)
+return function(Signal) --[[ Line: 3 ]]
+	-- upvalues: BindableEventQueueModule (copy)
+	return function(Callback) --[[ Line: 4 | Named "createEvent" ]]
+		-- upvalues: Signal (copy), BindableEventQueueModule (upval)
+		return function(...) --[[ Line: 5 ]]
+			-- upvalues: Callback (copy), Signal (upval), BindableEventQueueModule (upval)
+			local CallbackResult = Callback(...)
 			
-			if p1:GetAttribute("isConnected") == true then
-				p1:Fire(var1)
+			if Signal:GetAttribute("isConnected") == true then
+				Signal:Fire(CallbackResult)
 				
 				return
+			else
+				BindableEventQueueModule:add(CallbackResult)
 			end
-			bindableEventQueueModule:add(var1)
 		end
 	end
 end

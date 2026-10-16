@@ -1,26 +1,28 @@
-﻿local inGameAssetReporting = script:FindFirstAncestor("InGameAssetReporting")
-local eventIngestService = game:GetService("EventIngestService")
-local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
-local parent = inGameAssetReporting.Parent
-local eventIngest = require(parent.Analytics).AnalyticsReporters.EventIngest
-local var1 = require(parent.Analytics).Analytics.new(rbxAnalyticsService)
-local cryoModule = require(parent.Cryo)
-local _ = require(inGameAssetReporting.InGameAssetReportUI.Resources.Types)
-local t = {
+﻿local InGameAssetReporting = script:FindFirstAncestor("InGameAssetReporting")
+local EventIngestService = game:GetService("EventIngestService")
+local Parent = InGameAssetReporting.Parent
+local EventIngest = require(Parent.Analytics).AnalyticsReporters.EventIngest
+local NewResult = require(Parent.Analytics).Analytics.new((game:GetService("RbxAnalyticsService")))
+local CryoModule = require(Parent.Cryo)
+local _ = require(InGameAssetReporting.InGameAssetReportUI.Resources.Types)
+local config = {
 	ReportTimeSpent = game:DefineFastString("InGameAssetReportingTimeSpentStat", "TimeSpent"),
 	SubmittedAbuseType = game:DefineFastString("InGameAssetReportingSubmittedAbuseTypeStat", "SubmittedAbuseType")
 }
 
-function submitAnalytics(p1, p2)
-	-- upvalues: eventIngest (ref), eventIngestService (ref), var1 (ref), cryoModule (ref), t (ref)
-	local var2 = eventIngest.new(eventIngestService)
-	local diag = var1.Diag
-	local floored = math.floor(workspace:GetServerTimeNow() * 1000 - p1.accumulated_time_ms)
-	local var3 = cryoModule.Dictionary.join(p1, { accumulated_time_ms = floored, interaction_type = p2 })
-	local text = p1.context .. "_" .. t.SubmittedAbuseType .. "_" .. p0.reason_selection
-	diag:reportStats(p1.context .. "_" .. t.ReportTimeSpent, floored)
-	diag:reportCounter(text, 1)
-	var2:sendEventDeferred(p1.context, p1.event_type, var3)
+function submitAnalytics(p1, Interaction_type) --[[ Line: 17 ]]
+	-- upvalues: EventIngest (copy), EventIngestService (copy), NewResult (copy), CryoModule (copy), config (copy)
+	local NewEventIngest = EventIngest.new(EventIngestService)
+	local Diag = NewResult.Diag
+	local Floored = math.floor(workspace:GetServerTimeNow() * 1000 - p1.accumulated_time_ms)
+	local JoinResult = CryoModule.Dictionary.join(p1, {
+		accumulated_time_ms = Floored,
+		interaction_type = Interaction_type
+	})
+	local Text = p1.context .. "_" .. config.SubmittedAbuseType .. "_" .. p1.reason_selection
+	Diag:reportStats(p1.context .. "_" .. config.ReportTimeSpent, Floored)
+	Diag:reportCounter(Text, 1)
+	NewEventIngest:sendEventDeferred(p1.context, p1.event_type, JoinResult)
 end
 
 return submitAnalytics

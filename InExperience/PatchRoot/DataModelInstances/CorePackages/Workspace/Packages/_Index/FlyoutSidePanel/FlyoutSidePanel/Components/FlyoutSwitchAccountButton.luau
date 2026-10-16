@@ -1,31 +1,31 @@
-﻿local parent = script:FindFirstAncestor("FlyoutSidePanel").Parent
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local foundationModule = require(parent.Foundation)
-local button = foundationModule.Button
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local buttonSize = foundationModule.Enums.ButtonSize
-local fFlagCTAChangeMorePageFlyoutButtonText = require(parent.SharedFlags).FFlagCTAChangeMorePageFlyoutButtonText
+﻿local Parent = script:FindFirstAncestor("FlyoutSidePanel").Parent
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local FoundationModule = require(Parent.Foundation)
+local Button = FoundationModule.Button
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local ButtonSize = FoundationModule.Enums.ButtonSize
+local FFlagCTAChangeMorePageFlyoutButtonText = require(Parent.SharedFlags).FFlagCTAChangeMorePageFlyoutButtonText
 
-return function(p1)
-	-- upvalues: reactModule (ref), useLocalization (ref), fFlagCTAChangeMorePageFlyoutButtonText (ref), button (ref), buttonVariant (ref), buttonSize (ref)
-	return reactModule.createElement(button, {
+return function(p1) --[[ Line: 19 | Named "FlyoutSwitchAccountButton" ]]
+	-- upvalues: ReactModule (copy), UseLocalizationFunction (copy), FFlagCTAChangeMorePageFlyoutButtonText (copy), Button (copy), ButtonVariant (copy), ButtonSize (copy)
+	return ReactModule.createElement(Button, {
 		testId = "--core-ui-flyout-button-switch-account",
 		isDisabled = false,
-		text = useLocalization({
-			title = if fFlagCTAChangeMorePageFlyoutButtonText then "Authentication.AccountSwitch.Header.SwitchAccountSentenceCase" else "Authentication.AccountSwitch.Action.SwitchAccount"
+		text = UseLocalizationFunction({
+			title = if FFlagCTAChangeMorePageFlyoutButtonText then "Authentication.AccountSwitch.Header.SwitchAccountSentenceCase" else "Authentication.AccountSwitch.Action.SwitchAccount"
 		}).title,
-		variant = buttonVariant.Standard,
+		variant = ButtonVariant.Standard,
 		LayoutOrder = p1.layoutOrder,
-		onActivated = reactModule.useCallback(function()
-			-- upvalues: p1 (ref)
+		onActivated = ReactModule.useCallback(function() --[[ Line: 20 ]]
+			-- upvalues: p1 (copy)
 			p1.closeDrawer()
 			
 			if p1.onSwitchAccountActivated then
 				p1.onSwitchAccountActivated()
 			end
 		end, { p1.onSwitchAccountActivated, p1.closeDrawer }),
-		size = buttonSize.Large,
+		size = ButtonSize.Large,
 		width = UDim.new(1, 0)
 	})
 end

@@ -1,153 +1,158 @@
-﻿local parent = script.Parent
-local reactModule = require(parent.Parent.Parent.Parent.React)
-local constantsModule = require(parent.Constants)
+﻿local Parent = script.Parent
+local ReactModule = require(Parent.Parent.Parent.Parent.React)
+local ConstantsModule = require(Parent.Constants)
 
-local function GetUserCFrameWorldSpace(p1, p2)
-	local var1 = p2:GetUserCFrame(p1)
-	local currentCamera = workspace.CurrentCamera
+local function GetUserCFrameWorldSpace(Head, VrService): CFrame --[[ Line: 12 ]]
+	local UserCFrame = VrService:GetUserCFrame(Head)
+	local CurrentCamera = workspace.CurrentCamera
 	
-	if not currentCamera.HeadLocked then
-		var1 = p2:GetUserCFrame(Enum.UserCFrame.Head):Inverse() * var1
+	if not CurrentCamera.HeadLocked then
+		UserCFrame = VrService:GetUserCFrame(Enum.UserCFrame.Head):Inverse() * UserCFrame
 	end
-	return currentCamera.CFrame * (CFrame.new(var1.p * currentCamera.HeadScale) * (var1 - var1.p))
+	return CurrentCamera.CFrame * (CFrame.new(UserCFrame.p * CurrentCamera.HeadScale) * (UserCFrame - UserCFrame.p))
 end
 
-return function(p1, p2)
-	-- upvalues: constantsModule (ref), reactModule (ref), GetUserCFrameWorldSpace (ref)
-	if p1.anchoring == constantsModule.AnchoringTypes.PanelManaged and p1.connectPanelManagerFunction then
-		return
-	end
-	local var1 = reactModule.useRef(p1.offset)
-	local var2 = reactModule.useRef(nil)
-	local var3 = reactModule.useRef(false)
-	local vrService = p1.vrService
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), p1 (ref)
-		var1.current = p1.offset
-	end, {})
-	local var4 = reactModule.useCallback(function(p3)
-		-- upvalues: p1 (ref), constantsModule (copy), vrService (ref), GetUserCFrameWorldSpace (copy), var2 (ref), var3 (ref), var1 (ref), p2 (ref)
-		local currentCamera = workspace.CurrentCamera
-		local var5 = nil
-		local cFrame = currentCamera.CFrame
-		local headScale = currentCamera.HeadScale
-		local headUserCFrame = nil
-		
-		if p1.anchoring == constantsModule.AnchoringTypes.Head then
-			headUserCFrame = vrService:GetUserCFrame(Enum.UserCFrame.Head)
-			local var6 = GetUserCFrameWorldSpace(Enum.UserCFrame.Head, vrService)
+return function(p1, p2) --[[ Line: 24 | Named "usePanel3DRenderStep" ]]
+	-- upvalues: ConstantsModule (copy), ReactModule (copy), GetUserCFrameWorldSpace (copy)
+	if p1.anchoring ~= ConstantsModule.AnchoringTypes.PanelManaged or not p1.connectPanelManagerFunction then
+		local UseRefResult = ReactModule.useRef(p1.offset)
+		local UseRefResult1 = ReactModule.useRef(nil)
+		local UseRefResult2 = ReactModule.useRef(false)
+		local VrService = p1.vrService
+		ReactModule.useEffect(function() --[[ Line: 35 ]]
+			-- upvalues: UseRefResult (copy), p1 (copy)
+			UseRefResult.current = p1.offset
+		end, {})
+		local UseResult = ReactModule.useCallback(function(p3: number) --[[ Line: 39 ]]
+			-- upvalues: p1 (copy), ConstantsModule (upval), VrService (copy), GetUserCFrameWorldSpace (upval), UseRefResult1 (copy), UseRefResult2 (copy), UseRefResult (copy), p2 (copy)
+			local CurrentCamera = workspace.CurrentCamera
+			local X = nil
+			local CurrentCameraCFrame = CurrentCamera.CFrame
+			local HeadScale: number = CurrentCamera.HeadScale
+			local UserCFrame = nil
 			
-			if var2.current == nil then
-				var2.current = var6
-			end
-			assert(var2.current ~= nil, "lastLookCFrame should not be nil.")
-			
-			if var2.current.LookVector:Dot(var6.LookVector) < 0.85 then
-				var3.current = true
-			elseif var2.current.LookVector:Dot(var6.LookVector) > 0.99 then
-				var3.current = false
-			end
-			if var3.current then
-				var2.current = var2.current:Lerp(var6, 7.2 * p3)
-			end
-			var5 = var6.Position + var2.current.LookVector * headScale * 2
-			var5 = Vector3.new(var5.X, var6.Position.Y, var5.Z)
-			local alignedPanel = p1.alignedPanel
-			
-			if alignedPanel then
-				local part = alignedPanel:GetPart()
+			if p1.anchoring == ConstantsModule.AnchoringTypes.Head then
+				UserCFrame = VrService:GetUserCFrame(Enum.UserCFrame.Head)
+				local UserCFrameWorldSpace = GetUserCFrameWorldSpace(Enum.UserCFrame.Head, VrService)
 				
-				if part and (alignedPanel:IsPositionLockedType() and (alignedPanel:IsVisible() or alignedPanel.alwaysUpdatePosition)) then
-					var5 = Vector3.new(part.Position.X, var6.Position.Y - 0.4 * headScale, part.Position.Z)
+				if UseRefResult1.current == nil then
+					UseRefResult1.current = UserCFrameWorldSpace
+				end
+				assert(UseRefResult1.current ~= nil, "lastLookCFrame should not be nil.")
+				
+				if UseRefResult1.current.LookVector:Dot(UserCFrameWorldSpace.LookVector) < 0.85 then
+					UseRefResult2.current = true
+				elseif UseRefResult1.current.LookVector:Dot(UserCFrameWorldSpace.LookVector) > 0.99 then
+					UseRefResult2.current = false
+				end
+				if UseRefResult2.current then
+					UseRefResult1.current = UseRefResult1.current:Lerp(UserCFrameWorldSpace, 7.2 * p3)
+				end
+				local NewPosition = UserCFrameWorldSpace.Position + UseRefResult1.current.LookVector * HeadScale * 2
+				X = Vector3.new(NewPosition.X, UserCFrameWorldSpace.Position.Y, NewPosition.Z)
+				local AlignedPanel = p1.alignedPanel
+				
+				if AlignedPanel then
+					local Part = AlignedPanel:GetPart()
+					
+					if Part and (AlignedPanel:IsPositionLockedType() and (AlignedPanel:IsVisible() or AlignedPanel.alwaysUpdatePosition)) then
+						X = Vector3.new(Part.Position.X, UserCFrameWorldSpace.Position.Y - 0.4 * HeadScale, Part.Position.Z)
+					end
+				end
+			else
+				if p1.anchoring ~= ConstantsModule.AnchoringTypes.Wrist then return end
+				if VrService:GetUserCFrameEnabled(Enum.UserCFrame.RightHand) and VrService.GuiInputUserCFrame == Enum.UserCFrame.LeftHand then
+					UserCFrame = VrService:GetUserCFrame(Enum.UserCFrame.RightHand)
+				elseif VrService:GetUserCFrameEnabled(Enum.UserCFrame.LeftHand) then
+					UserCFrame = VrService:GetUserCFrame(Enum.UserCFrame.LeftHand)
+				end
+				if not UserCFrame then
+					UserCFrame = VrService:GetUserCFrame(Enum.UserCFrame.Head)
+				end
+				X = (CurrentCameraCFrame * CFrame.new(UserCFrame.Position * HeadScale)).Position
+			end
+			if p1.offsetCallback then
+				X = p1.offsetCallback({ finalPosition = X, cameraHeadScale = HeadScale })
+			end
+			if p1.lerp and UseRefResult.current ~= nil then
+				UseRefResult.current = UseRefResult.current:Lerp(p1.offset, 7.2 * p3)
+			else
+				UseRefResult.current = p1.offset
+			end
+			local TiltResult = nil
+			
+			if UseRefResult.current ~= nil then
+				if p1.faceCamera then
+					TiltResult = CFrame.new(X + UseRefResult.current.Position * HeadScale, GetUserCFrameWorldSpace(Enum.UserCFrame.Head, VrService).Position)
+				else
+					local Rx, Ry, Rz = UserCFrame:ToOrientation()
+					TiltResult = CFrame.new(X) * CFrame.Angles(-Rx, Ry, -Rz) * CFrame.new(UseRefResult.current.Position * HeadScale)
 				end
 			end
-		elseif p1.anchoring ~= constantsModule.AnchoringTypes.Wrist then return end
-		if vrService:GetUserCFrameEnabled(Enum.UserCFrame.RightHand) and vrService.GuiInputUserCFrame == Enum.UserCFrame.LeftHand then
-			headUserCFrame = vrService:GetUserCFrame(Enum.UserCFrame.RightHand)
-		elseif vrService:GetUserCFrameEnabled(Enum.UserCFrame.LeftHand) then
-			headUserCFrame = vrService:GetUserCFrame(Enum.UserCFrame.LeftHand)
-		end
-		if not headUserCFrame then
-			headUserCFrame = vrService:GetUserCFrame(Enum.UserCFrame.Head)
-		end
-		var5 = (cFrame * CFrame.new(headUserCFrame.Position * headScale)).Position
-		if p1.offsetCallback then
-			var5 = p1.offsetCallback({ finalPosition = var5, cameraHeadScale = headScale })
-		end
-		if p1.lerp and var1.current ~= nil then
-			var1.current = var1.current:Lerp(p1.offset, 7.2 * p3)
-		else
-			var1.current = p1.offset
-		end
-		local var7 = nil
-		
-		if var1.current ~= nil then
-			if p1.faceCamera then
-				var7 = CFrame.new(var5 + var1.current.Position * headScale, GetUserCFrameWorldSpace(Enum.UserCFrame.Head, vrService).Position)
-			else
-				local var8, var9, var10 = headUserCFrame:ToOrientation()
-				var7 = CFrame.new(var5) * CFrame.Angles(-var8, var9, -var10) * CFrame.new(var1.current.Position * headScale)
+			if p1.tiltCallback then
+				TiltResult = p1.tiltCallback({ panelCFrame = TiltResult, cameraHeadScale = HeadScale })
 			end
-		end
-		if p1.tiltCallback then
-			var7 = p1.tiltCallback({ panelCFrame = var7, cameraHeadScale = headScale })
-		end
-		if p2.current ~= nil then
-			p2.current.CFrame = var7
-			p2.current.Size = Vector3.new(p1.partSize.X * headScale, p1.partSize.Y * headScale, 0.05)
-		end
-	end, {
-		p1.anchoring, p1.faceCamera, p1.lerp, p1.offset, p1.partSize, p1.alignedPanel,
-		p1.offsetCallback, p1.tiltCallback
-	})
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), constantsModule (copy), var4 (ref)
-		if p1.anchoring == constantsModule.AnchoringTypes.World then
-			return function() end
-		end
-		local var5 = nil
-		local var6 = nil
-		local _ = nil
-		
-		local function onCurrentCameraChanged()
-			-- upvalues: var5 (write), var4 (copy)
-			if var5 then
-				var5:Disconnect()
+			if p2.current ~= nil then
+				p2.current.CFrame = TiltResult
+				p2.current.Size = Vector3.new(p1.partSize.X * HeadScale, p1.partSize.Y * HeadScale, 0.05)
 			end
-			if workspace.CurrentCamera then
-				var5 = workspace.CurrentCamera:GetPropertyChangedSignal("CFrame"):Connect(function()
-					-- upvalues: var4 (copy)
-					var4(0)
-				end)
+		end, {
+			p1.anchoring, p1.faceCamera, p1.lerp, p1.offset, p1.partSize, p1.alignedPanel,
+			p1.offsetCallback, p1.tiltCallback
+		})
+		ReactModule.useEffect(function() --[[ Line: 161 ]]
+			-- upvalues: p1 (copy), ConstantsModule (upval), UseResult (copy)
+			if p1.anchoring == ConstantsModule.AnchoringTypes.World then
+				local function Connection() --[[ Line: 205 ]] end
+				
+				return Connection
 			end
-		end
-		
-		local var7 = workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(onCurrentCameraChanged)
-		onCurrentCameraChanged()
-		
-		if p1.alignedPanel then
-			local part = p1.alignedPanel:GetPart()
+			local Connection = nil
+			local Connection1 = nil
+			local Connection2 = nil
 			
-			if part then
-				var6 = part:GetPropertyChangedSignal("CFrame"):Connect(function()
-					-- upvalues: var4 (copy)
-					var4(0)
-				end)
+			local function onCurrentCameraChanged() --[[ Line: 166 ]]
+				-- upvalues: Connection (ref), UseResult (upval)
+				if Connection then
+					Connection:Disconnect()
+				end
+				if workspace.CurrentCamera then
+					Connection = workspace.CurrentCamera:GetPropertyChangedSignal("CFrame"):Connect(function() --[[ Line: 173 ]]
+						-- upvalues: UseResult (upval)
+						UseResult(0)
+					end)
+				end
 			end
-		end
-		local movementUpdateEventConnection = p1.movementUpdateEvent:Connect(var4)
-		
-		return function()
-			-- upvalues: movementUpdateEventConnection (ref), var7 (write), var5 (write), var6 (write)
-			movementUpdateEventConnection:Disconnect()
-			var7:Disconnect()
 			
-			if var5 then
-				var5:Disconnect()
+			Connection2 = workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(onCurrentCameraChanged)
+			onCurrentCameraChanged()
+			
+			if p1.alignedPanel then
+				local Part = p1.alignedPanel:GetPart()
+				
+				if Part then
+					Connection1 = Part:GetPropertyChangedSignal("CFrame"):Connect(function() --[[ Line: 186 ]]
+						-- upvalues: UseResult (upval)
+						UseResult(0)
+					end)
+				end
 			end
-			if var6 then
-				var6:Disconnect()
+			local MovementUpdateEventConnection = p1.movementUpdateEvent:Connect(UseResult)
+			
+			return function() --[[ Line: 194 ]]
+				-- upvalues: MovementUpdateEventConnection (copy), Connection2 (ref), Connection (ref), Connection1 (ref)
+				MovementUpdateEventConnection:Disconnect()
+				Connection2:Disconnect()
+				
+				if Connection then
+					Connection:Disconnect()
+				end
+				if Connection1 then
+					Connection1:Disconnect()
+				end
 			end
-		end
-	end, { p1.anchoring, var4 })
+		end, { p1.anchoring, UseResult })
+		
+		return
+	end
 end

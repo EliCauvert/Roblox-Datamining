@@ -1,46 +1,47 @@
-﻿local constantsModule = require(script.Parent.Parent.Constants)
-local roactModule = require(game:GetService("CorePackages").Packages.Roact)
-local numberInput = roactModule.Component:extend("NumberInput")
+﻿local ConstantsModule = require(script.Parent.Parent.Constants)
+local RoactModule = require(game:GetService("CorePackages").Packages.Roact)
+local NumberInput = RoactModule.Component:extend("NumberInput")
 
-function numberInput.init(p1)
+function NumberInput.init(p1) --[[ Line: 18 ]]
 	p1.state = { Value = p1.props.DefaultValue }
 end
 
-function numberInput.render(p1)
-	-- upvalues: roactModule (ref), constantsModule (ref)
-	local props = p1.props
+function NumberInput.render(p1) --[[ Line: 26 ]]
+	-- upvalues: RoactModule (copy), ConstantsModule (copy)
+	local Props = p1.props
 	
-	return roactModule.createElement("TextBox", {
-		Font = constantsModule.Font.Log,
+	return RoactModule.createElement("TextBox", {
+		Font = ConstantsModule.Font.Log,
 		Text = `{p1.state.Value}`,
-		TextColor3 = constantsModule.Color.Text,
-		TextSize = constantsModule.GeneralFormatting.NumberInputTextSize,
-		TextXAlignment = props.TextXAlignment or Enum.TextXAlignment.Center,
-		BackgroundColor3 = constantsModule.Color.TextBoxGray,
-		BorderColor3 = constantsModule.GeneralFormatting.LineColor,
-		LayoutOrder = props.LayoutOrder,
-		Size = props.Size,
+		TextColor3 = ConstantsModule.Color.Text,
+		TextSize = ConstantsModule.GeneralFormatting.NumberInputTextSize,
+		TextXAlignment = Props.TextXAlignment or Enum.TextXAlignment.Center,
+		BackgroundColor3 = ConstantsModule.Color.TextBoxGray,
+		BorderColor3 = ConstantsModule.GeneralFormatting.LineColor,
+		LayoutOrder = Props.LayoutOrder,
+		Size = Props.Size,
 		ClearTextOnFocus = true,
-		[roactModule.Event.FocusLost] = function(p2)
-			-- upvalues: p1 (ref), props (ref)
-			local var1 = tonumber(p2.Text)
+		[RoactModule.Event.FocusLost] = function(p2) --[[ Line: 43 ]]
+			-- upvalues: p1 (copy), Props (copy)
+			local Number: number? = tonumber(p2.Text)
 			
-			if var1 == nil or var1 ~= var1 then
+			if Number == nil or Number ~= Number then
 				p2.Text = `{p1.state.Value}`
 				
 				return
-			elseif props.IntegerOnly then
-				var1 = math.floor(var1)
 			end
-			local clampedValue = math.clamp(var1, props.Range.Min, props.Range.Max)
-			p1:setState({ Value = clampedValue })
-			p2.Text = `{clampedValue}`
+			if Props.IntegerOnly then
+				Number = math.floor(Number)
+			end
+			local ClampedValue = math.clamp(Number, Props.Range.Min, Props.Range.Max)
+			p1:setState({ Value = ClampedValue })
+			p2.Text = `{ClampedValue}`
 			
-			if props.OnNumberInputChanged then
-				props.OnNumberInputChanged(clampedValue)
+			if Props.OnNumberInputChanged then
+				Props.OnNumberInputChanged(ClampedValue)
 			end
 		end
 	})
 end
 
-return numberInput
+return NumberInput

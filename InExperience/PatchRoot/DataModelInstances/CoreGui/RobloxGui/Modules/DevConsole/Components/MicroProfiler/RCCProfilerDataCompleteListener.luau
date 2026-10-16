@@ -1,58 +1,57 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local getClientReplicatorModule = require(script.Parent.Parent.Parent.Util.getClientReplicator)
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local actions = script.Parent.Parent.Parent.Actions
-local appendRecentDumpPathModule = require(actions.AppendRecentDumpPath)
-local setRCCProfilerStateModule = require(actions.SetRCCProfilerState)
-local RCCProfilerDataCompleteListener = roactModule.Component:extend("RCCProfilerDataCompleteListener")
+﻿local CorePackages = game:GetService("CorePackages")
+local GetClientReplicatorModule = require(script.Parent.Parent.Parent.Util.getClientReplicator)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local Actions = script.Parent.Parent.Parent.Actions
+local AppendRecentDumpPathModule = require(Actions.AppendRecentDumpPath)
+local SetRCCProfilerStateModule = require(Actions.SetRCCProfilerState)
+local RCCProfilerDataCompleteListener = require(CorePackages.Packages.Roact).Component:extend("RCCProfilerDataCompleteListener")
 
-function RCCProfilerDataCompleteListener.didMount(p1)
-	-- upvalues: getClientReplicatorModule (ref)
-	local var1 = getClientReplicatorModule()
+function RCCProfilerDataCompleteListener.didMount(p1) --[[ Line: 13 ]]
+	-- upvalues: GetClientReplicatorModule (copy)
+	local ClientReplicatorModule = GetClientReplicatorModule()
 	
-	if var1 then
-		p1.completeSignal = var1.RCCProfilerDataComplete:Connect(function(p2, p3)
-			-- upvalues: p1 (ref)
+	if ClientReplicatorModule then
+		p1.completeSignal = ClientReplicatorModule.RCCProfilerDataComplete:Connect(function(Success, Message) --[[ Line: 16 ]]
+			-- upvalues: p1 (copy)
 			if p1.props.waitingForRecording then
-				if not p2 then
-					warn(p3)
+				if not Success then
+					warn(Message)
 					p1.props.dispatchSetRCCProfilerState(false)
 					
 					return
 				end
-				p1.props.dispatchSetRCCProfilerState(false, p3)
-				p1.props.dispatchAppendRecentDumpPath(p3)
+				p1.props.dispatchSetRCCProfilerState(false, Message)
+				p1.props.dispatchAppendRecentDumpPath(Message)
 			end
 		end)
 	end
 end
 
-function RCCProfilerDataCompleteListener.willUnmount(p1)
+function RCCProfilerDataCompleteListener.willUnmount(p1) --[[ Line: 30 ]]
 	if p1.completeSignal then
 		p1.completeSignal:Disconnect()
 		p1.completeSignal = nil
 	end
 end
 
-function RCCProfilerDataCompleteListener.render(_)
+function RCCProfilerDataCompleteListener:render() --[[ Line: 37 ]]
 	return nil
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p1, _)
+return RoactRoduxModule.UNSTABLE_connect2(function(p1, _) --[[ Line: 41 | Named "mapStateToProps" ]]
 	return {
 		waitingForRecording = p1.MicroProfiler.waitingForRecording
 	}
-end, function(p1)
-	-- upvalues: appendRecentDumpPathModule (ref), setRCCProfilerStateModule (ref)
+end, function(Callback) --[[ Line: 47 | Named "mapDispatchToProps" ]]
+	-- upvalues: AppendRecentDumpPathModule (copy), SetRCCProfilerStateModule (copy)
 	return {
-		dispatchAppendRecentDumpPath = function(p2)
-			-- upvalues: p1 (ref), appendRecentDumpPathModule (copy)
-			p1(appendRecentDumpPathModule(p2))
+		dispatchAppendRecentDumpPath = function(p1) --[[ Line: 49 ]]
+			-- upvalues: Callback (copy), AppendRecentDumpPathModule (upval)
+			Callback(AppendRecentDumpPathModule(p1))
 		end,
-		dispatchSetRCCProfilerState = function(value, p2)
-			-- upvalues: p1 (ref), setRCCProfilerStateModule (copy)
-			p1(setRCCProfilerStateModule(value, p2))
+		dispatchSetRCCProfilerState = function(p1, p2) --[[ Line: 52 ]]
+			-- upvalues: Callback (copy), SetRCCProfilerStateModule (upval)
+			Callback(SetRCCProfilerStateModule(p1, p2))
 		end
 	}
 end)(RCCProfilerDataCompleteListener)

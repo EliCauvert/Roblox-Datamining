@@ -1,22 +1,23 @@
-﻿local var1 = function(p1, p2)
-	if p1.eventDate == "" or p1.eventDate == nil or (p2.eventDate == "" or p2.eventDate == nil) then
+﻿local function v0(A, B): boolean --[[ Line: 1 ]]
+	if A.eventDate == "" or A.eventDate == nil or B.eventDate == "" or B.eventDate == nil then
 		return true
+	else
+		local _DateTime = DateTime.fromIsoDate(A.eventDate) or nil
+		local _DateTime1 = DateTime.fromIsoDate(B.eventDate) or nil
+		
+		return _DateTime == nil or _DateTime1 == nil or _DateTime1.UnixTimestampMillis < _DateTime.UnixTimestampMillis
 	end
-	local eventDate = DateTime.fromIsoDate(p1.eventDate) or nil
-	local eventDate_1 = DateTime.fromIsoDate(p2.eventDate) or nil
-	
-	return eventDate == nil or eventDate_1 == nil or eventDate_1.UnixTimestampMillis < eventDate.UnixTimestampMillis
 end
 
-return function(p1)
-	-- upvalues: var1 (ref)
-	local ok, status = pcall(function()
-		-- upvalues: p1 (ref), var1 (copy)
-		local cloned = table.clone(p1)
-		table.sort(cloned, var1)
+return function(Tbl) --[[ Line: 16 ]]
+	-- upvalues: v0 (copy)
+	local Success, Result = pcall(function() --[[ Line: 17 ]]
+		-- upvalues: Tbl (copy), v0 (upval)
+		local Copy = table.clone(Tbl)
+		table.sort(Copy, v0)
 		
-		return cloned
+		return Copy
 	end)
 	
-	return if ok then status else p1
+	return if Success then Result else Tbl
 end

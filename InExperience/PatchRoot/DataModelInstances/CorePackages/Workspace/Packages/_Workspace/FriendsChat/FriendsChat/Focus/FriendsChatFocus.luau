@@ -1,40 +1,42 @@
-﻿local friendsChat = script:FindFirstAncestor("FriendsChat")
-local getFriendsChatNavigationStoreModule = require(friendsChat.Stores.GetFriendsChatNavigationStore)
-local fFlagFriendsChatConversationListFocusNav = require(friendsChat.Parent.SharedFlags).FFlagFriendsChatConversationListFocusNav
+﻿local FriendsChat = script:FindFirstAncestor("FriendsChat")
+local GetFriendsChatNavigationStoreModule = require(FriendsChat.Stores.GetFriendsChatNavigationStore)
+local FFlagFriendsChatConversationListFocusNav = require(FriendsChat.Parent.SharedFlags).FFlagFriendsChatConversationListFocusNav
 
-local function _(p1)
-	-- upvalues: fFlagFriendsChatConversationListFocusNav (ref)
-	return if fFlagFriendsChatConversationListFocusNav then p1.getEffectiveConversationId(false) else p1.getSelectedConversationId(false)
+local function _(p1) --[[ Line: 21 | Named "getActiveConversationId" ]]
+	-- upvalues: FFlagFriendsChatConversationListFocusNav (copy)
+	return if FFlagFriendsChatConversationListFocusNav then p1.getEffectiveConversationId(false) else p1.getSelectedConversationId(false)
 end
 
 return {
-	canFocus = function()
-		-- upvalues: fFlagFriendsChatConversationListFocusNav (ref), getFriendsChatNavigationStoreModule (ref)
-		if fFlagFriendsChatConversationListFocusNav then
+	canFocus = function(): boolean --[[ Line: 30 ]]
+		-- upvalues: FFlagFriendsChatConversationListFocusNav (copy), GetFriendsChatNavigationStoreModule (copy)
+		if FFlagFriendsChatConversationListFocusNav then
 			return true
+		else
+			local FriendsChatNavigationStoreModule = GetFriendsChatNavigationStoreModule(false)
+			
+			return (if FFlagFriendsChatConversationListFocusNav then FriendsChatNavigationStoreModule.getEffectiveConversationId(false) else FriendsChatNavigationStoreModule.getSelectedConversationId(false)) ~= nil
 		end
-		local var1 = getFriendsChatNavigationStoreModule(false)
-		
-		return (if fFlagFriendsChatConversationListFocusNav then var1.getEffectiveConversationId(false) else var1.getSelectedConversationId(false)) ~= nil
 	end,
-	focus = function(_)
-		-- upvalues: getFriendsChatNavigationStoreModule (ref), fFlagFriendsChatConversationListFocusNav (ref)
-		local var1 = getFriendsChatNavigationStoreModule(false)
+	focus = function(_) --[[ Line: 37 ]]
+		-- upvalues: GetFriendsChatNavigationStoreModule (copy), FFlagFriendsChatConversationListFocusNav (copy)
+		local FriendsChatNavigationStoreModule = GetFriendsChatNavigationStoreModule(false)
 		
-		if fFlagFriendsChatConversationListFocusNav then
-			if (if fFlagFriendsChatConversationListFocusNav then var1.getEffectiveConversationId(false) else var1.getSelectedConversationId(false)) == nil then
-				var1.requestFocusConversationList()
+		if FFlagFriendsChatConversationListFocusNav then
+			if (if FFlagFriendsChatConversationListFocusNav then FriendsChatNavigationStoreModule.getEffectiveConversationId(false) else FriendsChatNavigationStoreModule.getSelectedConversationId(false)) == nil then
+				FriendsChatNavigationStoreModule.requestFocusConversationList()
 			else
-				var1.requestFocusInputBar()
+				FriendsChatNavigationStoreModule.requestFocusInputBar()
 			end
 			return nil
-		elseif var1.getSelectedConversationId(false) == nil then
+		elseif FriendsChatNavigationStoreModule.getSelectedConversationId(false) == nil then
 			return Enum.ContextActionResult.Pass
-		elseif var1.getIsInputBarFocused(false) then
+		elseif FriendsChatNavigationStoreModule.getIsInputBarFocused(false) then
 			return Enum.ContextActionResult.Pass
+		else
+			FriendsChatNavigationStoreModule.requestFocusInputBar()
+			
+			return Enum.ContextActionResult.Sink
 		end
-		var1.requestFocusInputBar()
-		
-		return Enum.ContextActionResult.Sink
 	end
 }

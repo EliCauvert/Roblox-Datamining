@@ -1,33 +1,35 @@
-﻿local socialCommon = script:FindFirstAncestor("SocialCommon")
-local parent = socialCommon.Parent
-local getMutualFriendsTextModule = require(socialCommon.Utils.getMutualFriendsText)
-local recommendationContextTypeModule = require(socialCommon.Enums.RecommendationContextType)
-local images = require(parent.UIBlox).App.ImageSet.Images
+﻿local SocialCommon = script:FindFirstAncestor("SocialCommon")
+local GetMutualFriendsTextModule = require(SocialCommon.Utils.getMutualFriendsText)
+local RecommendationContextTypeModule = require(SocialCommon.Enums.RecommendationContextType)
+local Images = require(SocialCommon.Parent.UIBlox).App.ImageSet.Images
 
-return function(p1)
-	-- upvalues: recommendationContextTypeModule (ref), getMutualFriendsTextModule (ref), images (ref)
-	local frequents = nil
-	local friend = nil
-	local var1 = p1.recommendation.contextType and p1.recommendation.contextType.rawValue()
-	local mutualFriendsCount = p1.recommendation.mutualFriendsCount or 0
+return function(p1) --[[ Line: 43 ]]
+	-- upvalues: RecommendationContextTypeModule (copy), GetMutualFriendsTextModule (copy), Images (copy)
+	local ConnectionRequests = nil
+	local IconsStatusPlayerFriend = nil
+	local RawValueResult = p1.recommendation.contextType and p1.recommendation.contextType.rawValue()
+	local MutualFriendsCount = p1.recommendation.mutualFriendsCount or 0
 	
 	if p1.recommendation.hasIncomingFriendRequest then
-		frequents = p1.localized.connectionRequests
-		friend = nil
+		ConnectionRequests = p1.localized.connectionRequests
+		IconsStatusPlayerFriend = nil
 	end
-	if var1 == recommendationContextTypeModule.Contacts.rawValue() then
-		frequents = p1.localized.contacts
-	elseif var1 == recommendationContextTypeModule.MutualFriends.rawValue() and mutualFriendsCount > 0 then
-		frequents = getMutualFriendsTextModule({
-			mutualFriendsCount = mutualFriendsCount,
+	if RawValueResult == RecommendationContextTypeModule.Contacts.rawValue() then
+		ConnectionRequests = p1.localized.contacts
+	elseif RawValueResult == RecommendationContextTypeModule.MutualFriends.rawValue() and MutualFriendsCount > 0 then
+		ConnectionRequests = GetMutualFriendsTextModule({
+			mutualFriendsCount = MutualFriendsCount,
 			localized = {
 				mutualConnections = p1.localized.mutualConnections,
 				singularMutualConnection = p1.localized.singularMutualConnection
 			}
 		})
-		friend = images["icons/status/player/friend"]
-	elseif var1 == recommendationContextTypeModule.Frequents.rawValue() then
-		frequents = p1.localized.frequents
+		IconsStatusPlayerFriend = Images["icons/status/player/friend"]
+	elseif RawValueResult == RecommendationContextTypeModule.Frequents.rawValue() then
+		ConnectionRequests = p1.localized.frequents
 	end
-	return { text = frequents, icon = friend }
+	return {
+		text = ConnectionRequests,
+		icon = IconsStatusPlayerFriend
+	}
 end

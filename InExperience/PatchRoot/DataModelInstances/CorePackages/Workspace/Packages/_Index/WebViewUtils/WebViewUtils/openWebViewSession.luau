@@ -1,101 +1,101 @@
-﻿local getFFlagEnableUnifiedWebViews = require(script:FindFirstAncestor("WebViewUtils").Parent.SharedFlags).GetFFlagEnableUnifiedWebViews
-local browserService = game:GetService("BrowserService")
-local httpService = game:GetService("HttpService")
-local webViewService = game:GetService("WebViewService")
+﻿local GetFFlagEnableUnifiedWebViewsFunction = require(script:FindFirstAncestor("WebViewUtils").Parent.SharedFlags).GetFFlagEnableUnifiedWebViews
+local BrowserService = game:GetService("BrowserService")
+local HttpService = game:GetService("HttpService")
+local WebViewService = game:GetService("WebViewService")
 
-local function openUnified(p1, p2, p3)
-	-- upvalues: webViewService (ref)
-	local onWindowClosedConnection = nil
-	local var1 = false
+local function openUnified(Url, Title, Callback) --[[ Line: 25 ]]
+	-- upvalues: WebViewService (copy)
+	local Connection = nil
+	local Flag = false
 	
-	local function stopListening()
-		-- upvalues: onWindowClosedConnection (write)
-		if onWindowClosedConnection ~= nil then
-			onWindowClosedConnection:Disconnect()
-			onWindowClosedConnection = nil
+	local function stopListening() --[[ Line: 29 ]]
+		-- upvalues: Connection (ref)
+		if Connection ~= nil then
+			Connection:Disconnect()
+			Connection = nil
 		end
 	end
 	
-	local function close()
-		-- upvalues: var1 (write), onWindowClosedConnection (write), webViewService (copy)
-		if var1 then return end
-		var1 = true
+	local function close() --[[ Line: 38 ]]
+		-- upvalues: Flag (ref), Connection (ref), WebViewService (upval)
+		if Flag then return end
+		Flag = true
 		
-		if onWindowClosedConnection ~= nil then
-			onWindowClosedConnection:Disconnect()
-			onWindowClosedConnection = nil
+		if Connection ~= nil then
+			Connection:Disconnect()
+			Connection = nil
 		end
-		webViewService:CloseWindow()
+		WebViewService:CloseWindow()
 	end
 	
-	onWindowClosedConnection = webViewService.OnWindowClosed:Connect(function()
-		-- upvalues: var1 (write), onWindowClosedConnection (write), webViewService (copy), p3 (ref)
-		if not var1 then
-			var1 = true
+	Connection = WebViewService.OnWindowClosed:Connect(function() --[[ Line: 47 ]]
+		-- upvalues: Flag (ref), Connection (ref), WebViewService (upval), Callback (copy)
+		if not Flag then
+			Flag = true
 			
-			if onWindowClosedConnection ~= nil then
-				onWindowClosedConnection:Disconnect()
-				onWindowClosedConnection = nil
+			if Connection ~= nil then
+				Connection:Disconnect()
+				Connection = nil
 			end
-			webViewService:CloseWindow()
+			WebViewService:CloseWindow()
 		end
-		if p3 then
-			p3()
+		if Callback then
+			Callback()
 		end
 	end)
-	webViewService:OpenWindow(p1, p2, true)
+	WebViewService:OpenWindow(Url, Title, true)
 	
 	return close, stopListening
 end
 
-local function openBrowser(p1, p2, p3)
-	-- upvalues: browserService (ref), httpService (ref)
-	local browserWindowClosedConnection = nil
-	local var1 = false
+local function openBrowser(Url, Title, Callback) --[[ Line: 60 ]]
+	-- upvalues: BrowserService (copy), HttpService (copy)
+	local Connection = nil
+	local Flag = false
 	
-	local function stopListening()
-		-- upvalues: browserWindowClosedConnection (write)
-		if browserWindowClosedConnection ~= nil then
-			browserWindowClosedConnection:Disconnect()
-			browserWindowClosedConnection = nil
+	local function stopListening() --[[ Line: 64 ]]
+		-- upvalues: Connection (ref)
+		if Connection ~= nil then
+			Connection:Disconnect()
+			Connection = nil
 		end
 	end
 	
-	if p3 then
-		browserWindowClosedConnection = browserService.BrowserWindowClosed:Connect(function()
-			-- upvalues: var1 (write), browserWindowClosedConnection (write), p3 (ref)
-			var1 = true
+	if Callback then
+		Connection = BrowserService.BrowserWindowClosed:Connect(function() --[[ Line: 73 ]]
+			-- upvalues: Flag (ref), Connection (ref), Callback (copy)
+			Flag = true
 			
-			if browserWindowClosedConnection ~= nil then
-				browserWindowClosedConnection:Disconnect()
-				browserWindowClosedConnection = nil
+			if Connection ~= nil then
+				Connection:Disconnect()
+				Connection = nil
 			end
-			p3()
+			Callback()
 		end)
 	end
-	browserService:SendCommand(httpService:JSONEncode({
+	BrowserService:SendCommand(HttpService:JSONEncode({
 		command = "open",
 		visible = true,
 		isGenericWebview = true,
 		enableOverlayReplacement = true,
-		url = p1,
-		title = p2
+		url = Url,
+		title = Title
 	}))
 	
-	return function()
-		-- upvalues: var1 (write), browserWindowClosedConnection (write), browserService (copy)
-		if var1 then return end
-		var1 = true
+	return function() --[[ Line: 89 | Named "close" ]]
+		-- upvalues: Flag (ref), Connection (ref), BrowserService (upval)
+		if Flag then return end
+		Flag = true
 		
-		if browserWindowClosedConnection ~= nil then
-			browserWindowClosedConnection:Disconnect()
-			browserWindowClosedConnection = nil
+		if Connection ~= nil then
+			Connection:Disconnect()
+			Connection = nil
 		end
-		browserService:CloseBrowserWindow()
+		BrowserService:CloseBrowserWindow()
 	end, stopListening
 end
 
-return function(p1, p2, p3)
-	-- upvalues: getFFlagEnableUnifiedWebViews (ref), openUnified (ref), openBrowser (ref)
-	return if getFFlagEnableUnifiedWebViews() then openUnified(p1, p2, p3) else openBrowser(p1, p2, p3)
+return function(Url, Title, p1) --[[ Line: 101 | Named "openWebViewSession" ]]
+	-- upvalues: GetFFlagEnableUnifiedWebViewsFunction (copy), openUnified (copy), openBrowser (copy)
+	return if GetFFlagEnableUnifiedWebViewsFunction() then openUnified(Url, Title, p1) else openBrowser(Url, Title, p1)
 end

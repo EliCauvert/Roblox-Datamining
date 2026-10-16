@@ -1,1 +1,1 @@
-﻿return require(script.ProfileQRCodeEntryPoint)
+﻿return (require(script.ProfileQRCodeEntryPoint))

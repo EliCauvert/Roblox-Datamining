@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("AXProfileConfigurationMultiFieldApply", false) and (game:GetEngineFeature("AvatarEditorServiceApplyProfileConfigurationEnabled") and game:GetEngineFeature("FrameAssetInProfileConfigurationEnabled"))
+﻿local FrameAssetInProfileConfigurationEnabledEngineFeature = game:GetEngineFeature("AvatarEditorServiceApplyProfileConfigurationEnabled") and game:GetEngineFeature("FrameAssetInProfileConfigurationEnabled")
+
+return game:DefineFastFlag("AXProfileConfigurationMultiFieldApply", false) and FrameAssetInProfileConfigurationEnabledEngineFeature

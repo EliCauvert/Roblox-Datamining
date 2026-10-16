@@ -1,162 +1,124 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local userInputService = game:GetService("UserInputService")
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-local foundationModule = require(parent.Foundation)
-local fullscreenPageWithSafeArea = require(parent.AppBlox).FullscreenPageWithSafeArea
-local enumsModule = require(profilePlatform.Common.Enums)
-local useProfileFormFactorModule = require(profilePlatform.Hooks.useProfileFormFactor)
-local useProfileJsonComponentModule = require(profilePlatform.Hooks.useProfileJsonComponent)
-local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfileWrapperContext)
-local useIsMeTabModule = require(profilePlatform.Hooks.useIsMeTab)
-local constantsModule = require(profilePlatform.Common.Constants)
-local visibilityControl = require(parent.AppNavBar).VisibilityControl
-local fFlagAXEnableProfileTab = require(parent.SharedFlags).FFlagAXEnableProfileTab
-local fFlagProfilePlatformMeTabScrollAwayModule = require(profilePlatform.Flags.FFlagProfilePlatformMeTabScrollAway)
-local view = foundationModule.View
-local iconButton = foundationModule.IconButton
-local iconSize = foundationModule.Enums.IconSize
-local useStyle = UIBloxModule.Core.Style.useStyle
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local UserInputService = game:GetService("UserInputService")
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local FullscreenPageWithSafeArea = require(Parent.AppBlox).FullscreenPageWithSafeArea
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local UseProfileFormFactorModule = require(ProfilePlatform.Hooks.useProfileFormFactor)
+local UseProfileJsonComponentModule = require(ProfilePlatform.Hooks.useProfileJsonComponent)
+local UseProfileWrapperContextModule = require(ProfilePlatform.Contexts.useProfileWrapperContext)
+local UseIsMeTabModule = require(ProfilePlatform.Hooks.useIsMeTab)
+local ConstantsModule = require(ProfilePlatform.Common.Constants)
+local VisibilityControl = require(Parent.AppNavBar).VisibilityControl
+local FFlagAXEnableProfileTab = require(Parent.SharedFlags).FFlagAXEnableProfileTab
+local FFlagProfilePlatformMeTabScrollAwayModule = require(ProfilePlatform.Flags.FFlagProfilePlatformMeTabScrollAway)
+local View = FoundationModule.View
+local IconButton = FoundationModule.IconButton
+local IconSize = FoundationModule.Enums.IconSize
+local UseStyleFunction = require(Parent.UIBlox).Core.Style.useStyle
 
-return function(p1)
-	-- upvalues: useStyle (ref), useProfileFormFactorModule (ref), enumsModule (ref), fFlagAXEnableProfileTab (ref), useProfileWrapperContextModule (ref), useIsMeTabModule (ref), useProfileJsonComponentModule (ref), constantsModule (ref), reactModule (ref), fFlagProfilePlatformMeTabScrollAwayModule (ref), visibilityControl (ref), userInputService (ref), view (ref), iconButton (ref), iconSize (ref), fullscreenPageWithSafeArea (ref)
-	local var1
-	local theme = useStyle().Theme
-	local var2 = useProfileFormFactorModule().formFactor == enumsModule.ProfileFormFactor.Wide
-	local var3 = if fFlagAXEnableProfileTab then useProfileWrapperContextModule() else nil
-	
-	if fFlagAXEnableProfileTab then
-		var1 = var3.forceFullView == true
-		var1 = nil
-	else
-		var1 = nil
-	end
-	local var4 = if fFlagAXEnableProfileTab then useIsMeTabModule() else nil
-	local var5 = if var2 then 36 else 16
-	local var6 = if var2 then 24 else 16
-	local var7 = if var2 and (not fFlagAXEnableProfileTab or not var4) then 1018 else 1e999
-	local var8 = if var1 then 0 elseif (useProfileJsonComponentModule(enumsModule.Components.CoverPhoto) or {}).coverPhotoId ~= nil then 56 else -constantsModule.PAGE_PADDING
-	local var9, var10 = reactModule.useState(0)
-	local var11 = var9 > 50
-	local var12 = if fFlagProfilePlatformMeTabScrollAwayModule then var1 else nil
-	local var13 = if fFlagProfilePlatformMeTabScrollAwayModule then reactModule.useRef(false) else nil
-	local var14 = if fFlagProfilePlatformMeTabScrollAwayModule then reactModule.useRef(0) else nil
-	local var15 = reactModule.useCallback(function(p2)
-		-- upvalues: var10 (ref), var12 (ref), var13 (ref), var14 (ref), visibilityControl (copy)
-		local canvasPosition = p2.CanvasPosition
-		var10(math.abs(canvasPosition.Y))
+return function(p1) --[[ Line: 48 | Named "ProfileFullView" ]]
+	-- upvalues: UseStyleFunction (copy), UseProfileFormFactorModule (copy), EnumsModule (copy), FFlagAXEnableProfileTab (copy), UseProfileWrapperContextModule (copy), UseIsMeTabModule (copy), UseProfileJsonComponentModule (copy), ConstantsModule (copy), ReactModule (copy), FFlagProfilePlatformMeTabScrollAwayModule (copy), VisibilityControl (copy), UserInputService (copy), View (copy), IconButton (copy), IconSize (copy), FullscreenPageWithSafeArea (copy)
+	local Theme = UseStyleFunction().Theme
+	local IsFormFactorMatch = UseProfileFormFactorModule().formFactor == EnumsModule.ProfileFormFactor.Wide
+	local UseProfileWrapperContextModuleResult = if FFlagAXEnableProfileTab then UseProfileWrapperContextModule() else nil
+	local IsForceFullView = if FFlagAXEnableProfileTab then UseProfileWrapperContextModuleResult.forceFullView == true else nil
+	local UseIsMeTabModuleResult = if FFlagAXEnableProfileTab then UseIsMeTabModule() else nil
+	local Offset: number = if IsFormFactorMatch then 36 else 16
+	local Offset1: number = if IsFormFactorMatch then 24 else 16
+	local X: number = if IsFormFactorMatch and (not FFlagAXEnableProfileTab or not UseIsMeTabModuleResult) then 1018 else 1e999
+	local UseProfileJsonComponentModuleResult = UseProfileJsonComponentModule(EnumsModule.Components.CoverPhoto) or {}
+	local Negated = if IsForceFullView then 0 elseif UseProfileJsonComponentModuleResult.coverPhotoId == nil then 56 else -ConstantsModule.PAGE_PADDING
+	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
+	local IsUseStateResultAbove = UseStateResult > 50
+	local IsForceFullView1 = if FFlagProfilePlatformMeTabScrollAwayModule then IsForceFullView else nil
+	local UseRefResult = if FFlagProfilePlatformMeTabScrollAwayModule then ReactModule.useRef(false) else nil
+	local UseRefResult1 = if FFlagProfilePlatformMeTabScrollAwayModule then ReactModule.useRef(0) else nil
+	local UseResult = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 93 ]]
+		-- upvalues: UseStateResult2 (copy), IsForceFullView1 (copy), UseRefResult (copy), UseRefResult1 (copy), VisibilityControl (upval)
+		local CanvasPosition = ScrollFrame.CanvasPosition
+		UseStateResult2((math.abs(CanvasPosition.Y)))
 		
-		if var12 then
-			if var13.current then
-				local var16 = canvasPosition.Y - var14.current
+		if IsForceFullView1 then
+			if UseRefResult.current then
+				local YDelta = CanvasPosition.Y - UseRefResult1.current
 				
-				if var16 ~= 0 then
-					visibilityControl.onTouchMoved(-var16)
+				if YDelta ~= 0 then
+					VisibilityControl.onTouchMoved(-YDelta)
 				end
 			end
-			var14.current = canvasPosition.Y
+			UseRefResult1.current = CanvasPosition.Y
 		end
 	end, {
-		if fFlagProfilePlatformMeTabScrollAwayModule then var12 else nil
+		if FFlagProfilePlatformMeTabScrollAwayModule then IsForceFullView1 else nil
 	})
 	
-	if fFlagProfilePlatformMeTabScrollAwayModule then
-		reactModule.useEffect(function()
-			-- upvalues: var12 (ref), userInputService (copy), var13 (ref), visibilityControl (copy)
-			if var12 then
-				local touchStartedConnection = userInputService.TouchStarted:Connect(function()
-					-- upvalues: var13 (copy)
-					var13.current = true
+	if FFlagProfilePlatformMeTabScrollAwayModule then
+		ReactModule.useEffect(function() --[[ Line: 116 ]]
+			-- upvalues: IsForceFullView1 (copy), UserInputService (upval), UseRefResult (copy), VisibilityControl (upval)
+			if IsForceFullView1 then
+				local TouchStartedConnection = UserInputService.TouchStarted:Connect(function() --[[ Line: 120 ]]
+					-- upvalues: UseRefResult (upval)
+					UseRefResult.current = true
 				end)
-				local touchEndedConnection = userInputService.TouchEnded:Connect(function()
-					-- upvalues: var13 (copy), visibilityControl (copy)
-					var13.current = false
-					visibilityControl.onTouchEnded()
+				local TouchEndedConnection = UserInputService.TouchEnded:Connect(function() --[[ Line: 123 ]]
+					-- upvalues: UseRefResult (upval), VisibilityControl (upval)
+					UseRefResult.current = false
+					VisibilityControl.onTouchEnded()
 				end)
 				
-				return function()
-					-- upvalues: touchStartedConnection (ref), touchEndedConnection (ref), visibilityControl (copy)
-					touchStartedConnection:Disconnect()
-					touchEndedConnection:Disconnect()
-					visibilityControl.show()
+				return function() --[[ Line: 127 ]]
+					-- upvalues: TouchStartedConnection (copy), TouchEndedConnection (copy), VisibilityControl (upval)
+					TouchStartedConnection:Disconnect()
+					TouchEndedConnection:Disconnect()
+					VisibilityControl.show()
 				end
+			else
+				return function() --[[ Line: 118 ]] end
 			end
-			return function() end
-		end, { var12 })
+		end, { IsForceFullView1 })
 	end
-	local frame = reactModule.createElement("Frame", {
+	local Frame = ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
 		ZIndex = 1000,
 		Size = UDim2.new(1, 0, 0, 56),
 		Position = UDim2.fromOffset(0, 0),
-		BackgroundColor3 = theme.BackgroundDefault.Color,
-		BackgroundTransparency = if var11 then 0.1 else 1
+		BackgroundColor3 = Theme.BackgroundDefault.Color,
+		BackgroundTransparency = if IsUseStateResultAbove then 0.1 else 1
 	}, {
-		DropShadow = reactModule.createElement("Frame", {
+		DropShadow = ReactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			Size = UDim2.new(1, 0, 0, 2),
 			Position = UDim2.new(0, 0, 1, 0),
-			BackgroundColor3 = theme.DropShadow.Color,
-			BackgroundTransparency = if var11 then theme.DropShadow.Transparency else 1
+			BackgroundColor3 = Theme.DropShadow.Color,
+			BackgroundTransparency = if IsUseStateResultAbove then Theme.DropShadow.Transparency else 1
 		}),
-		HeaderContent = reactModule.createElement(view, { tag = "padding-medium", Size = UDim2.fromScale(1, 1) }, {
-			CloseButton = reactModule.createElement(iconButton, {
+		HeaderContent = ReactModule.createElement(View, { tag = "padding-medium", Size = UDim2.fromScale(1, 1) }, {
+			CloseButton = ReactModule.createElement(IconButton, {
 				icon = "icons/navigation/close",
 				backgroundTransparency = 1,
 				AnchorPoint = Vector2.new(0, 0.5),
 				Position = UDim2.new(0, 0, 0.5, 0),
-				iconSize = iconSize.Medium,
+				iconSize = IconSize.Medium,
 				onActivated = p1.navigateBack
 			})
 		})
 	})
-	local createElement = reactModule.createElement
-	createElement = createElement("Frame", {
-		BackgroundTransparency = 1,
-		BorderSizePixel = 0,
-		Size = UDim2.fromScale(1, if var2 then 0 else 1),
-		AutomaticSize = Enum.AutomaticSize.Y,
-		Position = UDim2.new(0, 0, 0, var8)
-	}, {
-		UIListLayout = if var2 then reactModule.createElement("UIListLayout", {
-			FillDirection = Enum.FillDirection.Vertical,
-			HorizontalAlignment = Enum.HorizontalAlignment.Center,
-			VerticalAlignment = Enum.VerticalAlignment.Top,
-			SortOrder = Enum.SortOrder.LayoutOrder,
-			Padding = UDim.new(0, 0)
-		}) else nil,
-		ConstrainedContent = reactModule.createElement("Frame", {
-			BackgroundTransparency = 1,
-			BorderSizePixel = 0,
-			Size = UDim2.fromScale(1, if var2 then 0 else 1),
-			AutomaticSize = Enum.AutomaticSize.Y,
-			LayoutOrder = if var2 then 1 else nil
-		}, {
-			UISizeConstraint = if var2 then reactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(var7, 1e999) }) else nil,
-			UIPadding = reactModule.createElement("UIPadding", {
-				PaddingLeft = if fFlagAXEnableProfileTab and var4 then nil elseif var2 then UDim.new(0, var5) else nil,
-				PaddingRight = if fFlagAXEnableProfileTab and var4 then nil elseif var2 then UDim.new(0, var5) else nil,
-				PaddingTop = if fFlagAXEnableProfileTab and var4 then UDim.new(0, 24) elseif var2 then UDim.new(0, var6) else nil,
-				PaddingBottom = UDim.new(0, var6)
-			}),
-			Content = p1.renderContent()
-		})
-	})
 	
-	return reactModule.createElement(fullscreenPageWithSafeArea, {
-		includeStatusBar = if fFlagAXEnableProfileTab then not var1 else true,
-		useFullScalePage = if fFlagAXEnableProfileTab then var1 or nil else nil,
-		BackgroundColor3 = theme.BackgroundDefault.Color,
-		BackgroundTransparency = theme.BackgroundDefault.Transparency
+	return ReactModule.createElement(FullscreenPageWithSafeArea, {
+		includeStatusBar = not FFlagAXEnableProfileTab or not IsForceFullView,
+		useFullScalePage = FFlagAXEnableProfileTab and IsForceFullView or nil,
+		BackgroundColor3 = Theme.BackgroundDefault.Color,
+		BackgroundTransparency = Theme.BackgroundDefault.Transparency
 	}, {
-		ContentContainer = reactModule.createElement("Frame", {
+		ContentContainer = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			Size = UDim2.fromScale(1, 1),
 			Position = UDim2.fromOffset(0, 0)
 		}, {
-			ScrollingFrame = reactModule.createElement("ScrollingFrame", {
+			ScrollingFrame = ReactModule.createElement("ScrollingFrame", {
 				Size = UDim2.fromScale(1, 1),
 				Position = UDim2.fromOffset(0, 0),
 				BackgroundTransparency = 1,
@@ -167,9 +129,41 @@ return function(p1)
 				AutomaticCanvasSize = Enum.AutomaticSize.Y,
 				Selectable = false,
 				ElasticBehavior = Enum.ElasticBehavior.Never,
-				[reactModule.Change.CanvasPosition] = var15
-			}, { ContentFrame = createElement })
+				[ReactModule.Change.CanvasPosition] = UseResult
+			}, {
+				ContentFrame = ReactModule.createElement("Frame", {
+					BackgroundTransparency = 1,
+					BorderSizePixel = 0,
+					Size = UDim2.fromScale(1, if IsFormFactorMatch then 0 else 1),
+					AutomaticSize = Enum.AutomaticSize.Y,
+					Position = UDim2.new(0, 0, 0, Negated)
+				}, {
+					UIListLayout = if IsFormFactorMatch then ReactModule.createElement("UIListLayout", {
+						FillDirection = Enum.FillDirection.Vertical,
+						HorizontalAlignment = Enum.HorizontalAlignment.Center,
+						VerticalAlignment = Enum.VerticalAlignment.Top,
+						SortOrder = Enum.SortOrder.LayoutOrder,
+						Padding = UDim.new(0, 0)
+					}) else nil,
+					ConstrainedContent = ReactModule.createElement("Frame", {
+						BackgroundTransparency = 1,
+						BorderSizePixel = 0,
+						Size = UDim2.fromScale(1, if IsFormFactorMatch then 0 else 1),
+						AutomaticSize = Enum.AutomaticSize.Y,
+						LayoutOrder = if IsFormFactorMatch then 1 else nil
+					}, {
+						UISizeConstraint = if IsFormFactorMatch then ReactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(X, 1e999) }) else nil,
+						UIPadding = ReactModule.createElement("UIPadding", {
+							PaddingLeft = if FFlagAXEnableProfileTab and UseIsMeTabModuleResult then nil elseif IsFormFactorMatch then UDim.new(0, Offset) else nil,
+							PaddingRight = if FFlagAXEnableProfileTab and UseIsMeTabModuleResult then nil elseif IsFormFactorMatch then UDim.new(0, Offset) else nil,
+							PaddingTop = if FFlagAXEnableProfileTab and UseIsMeTabModuleResult then UDim.new(0, 24) elseif IsFormFactorMatch then UDim.new(0, Offset1) else nil,
+							PaddingBottom = UDim.new(0, Offset1)
+						}),
+						Content = p1.renderContent()
+					})
+				})
+			})
 		}),
-		StickyHeader = if fFlagAXEnableProfileTab and var1 then nil else frame
+		StickyHeader = if FFlagAXEnableProfileTab and IsForceFullView then nil else Frame
 	})
 end

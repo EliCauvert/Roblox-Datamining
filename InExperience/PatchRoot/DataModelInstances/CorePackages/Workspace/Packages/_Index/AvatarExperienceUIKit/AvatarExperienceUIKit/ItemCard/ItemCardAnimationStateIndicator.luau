@@ -1,74 +1,74 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceUIKit").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceUIKit").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 
-return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
-	local var1 = useTokens()
-	local t = {
-		TabsLayout = reactModule.createElement("UIListLayout", {
+return function(p1) --[[ Line: 25 | Named "ItemCardAnimationStateIndicator" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	local UseTokensResult = UseTokensFunction()
+	local config = {
+		TabsLayout = ReactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Horizontal,
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
 			VerticalAlignment = Enum.VerticalAlignment.Top,
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			HorizontalFlex = Enum.UIFlexAlignment.Fill,
-			Padding = UDim.new(0, var1.Gap.XSmall)
+			Padding = UDim.new(0, UseTokensResult.Gap.XSmall)
 		})
 	}
-	local text = nil
+	local Text = nil
 	
-	for i, v in p1.states do
-		local var2 = if v.isSelected then var1.Color.Stroke.Emphasis else var1.Color.Stroke.Muted
-		t[`{i}-{v.text}`] = reactModule.createElement("Frame", {
+	for LayoutOrder, state in p1.states do
+		local Emphasis = if state.isSelected then UseTokensResult.Color.Stroke.Emphasis else UseTokensResult.Color.Stroke.Muted
+		config[`{LayoutOrder}-{state.text}`] = ReactModule.createElement("Frame", {
 			BorderSizePixel = 0,
-			BackgroundColor3 = var2.Color3,
-			Transparency = var2.Transparency,
-			Size = UDim2.new(1, 0, 0, var1.Size.Size_150),
-			LayoutOrder = i
+			BackgroundColor3 = Emphasis.Color3,
+			Transparency = Emphasis.Transparency,
+			Size = UDim2.new(1, 0, 0, UseTokensResult.Size.Size_150),
+			LayoutOrder = LayoutOrder
 		})
 		
-		if v.isSelected then
-			text = v.text
+		if state.isSelected then
+			Text = state.text
 		end
 	end
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
 		Size = UDim2.fromScale(1, 1),
 		ZIndex = p1.ZIndex
 	}, {
-		ListLayout = reactModule.createElement("UIListLayout", {
+		ListLayout = ReactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			Padding = UDim.new(0, 0)
 		}),
-		Padding = if p1.paddingTop or p1.paddingBottom or (p1.paddingLeft or p1.paddingRight) then reactModule.createElement("UIPadding", {
+		Padding = if p1.paddingTop or p1.paddingBottom or p1.paddingLeft or p1.paddingRight then ReactModule.createElement("UIPadding", {
 			PaddingTop = p1.paddingTop,
 			PaddingBottom = p1.paddingBottom,
 			PaddingLeft = p1.paddingLeft,
 			PaddingRight = p1.paddingRight
 		}) else nil,
-		Tabs = reactModule.createElement("Frame", {
+		Tabs = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			LayoutOrder = 1,
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y
-		}, t),
-		Label = if text then reactModule.createElement("TextLabel", {
+		}, config),
+		Label = if Text then ReactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
 			TextWrapped = true,
 			LayoutOrder = 2,
 			Size = UDim2.fromScale(1, 0),
-			Text = text,
-			Font = if foundationFontFaceMigration then nil else var1.Typography.TitleLarge.Font,
-			FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Typography.TitleLarge.Font) else nil,
-			TextSize = var1.Typography.TitleLarge.FontSize,
-			TextColor3 = var1.Color.Content.Emphasis.Color3,
+			Text = Text,
+			Font = if FoundationFontFaceMigration then nil else UseTokensResult.Typography.TitleLarge.Font,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.TitleLarge.Font) else nil,
+			TextSize = UseTokensResult.Typography.TitleLarge.FontSize,
+			TextColor3 = UseTokensResult.Color.Content.Emphasis.Color3,
 			TextTruncate = Enum.TextTruncate.AtEnd,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Top

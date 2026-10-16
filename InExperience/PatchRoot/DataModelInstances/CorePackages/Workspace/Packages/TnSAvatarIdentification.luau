@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.TnSAvatarIdentification.TnSAvatarIdentification)
+﻿return (require(script.Parent._Workspace.TnSAvatarIdentification.TnSAvatarIdentification))

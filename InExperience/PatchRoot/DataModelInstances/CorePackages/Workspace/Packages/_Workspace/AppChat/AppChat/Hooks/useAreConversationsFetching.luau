@@ -1,13 +1,13 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local roduxNetworkingModule = require(appChat.Http.RoduxNetworking)
-local appChatNetworkingModule = require(parent.AppChatNetworking)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local RoduxNetworkingModule = require(AppChat.Http.RoduxNetworking)
+local AppChatNetworkingModule = require(Parent.AppChatNetworking)
 
-return function()
-	-- upvalues: useSelector (ref), appChatNetworkingModule (ref), roduxNetworkingModule (ref)
-	return useSelector(function(p1)
-		-- upvalues: appChatNetworkingModule (copy), roduxNetworkingModule (copy)
-		return appChatNetworkingModule.rodux.GetUserConversations.getStatus(p1, 1) == roduxNetworkingModule.Enum.NetworkStatus.Fetching
+return function() --[[ Line: 8 ]]
+	-- upvalues: UseSelectorFunction (copy), AppChatNetworkingModule (copy), RoduxNetworkingModule (copy)
+	return UseSelectorFunction(function(p1): boolean --[[ Line: 9 ]]
+		-- upvalues: AppChatNetworkingModule (upval), RoduxNetworkingModule (upval)
+		return AppChatNetworkingModule.rodux.GetUserConversations.getStatus(p1, 1) == RoduxNetworkingModule.Enum.NetworkStatus.Fetching
 	end)
 end

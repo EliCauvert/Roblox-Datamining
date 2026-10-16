@@ -1,23 +1,23 @@
-﻿local parent = script:FindFirstAncestor("Responsive").Parent
-local reactModule = require(parent.React)
-local appCommonLibModule = require(parent.AppCommonLib)
+﻿local Parent = script:FindFirstAncestor("Responsive").Parent
+local ReactModule = require(Parent.React)
+local AppCommonLibModule = require(Parent.AppCommonLib)
 
-return function()
-	-- upvalues: reactModule (ref), appCommonLibModule (ref)
-	local var1, var2 = reactModule.useState(appCommonLibModule.isSpatial)
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), appCommonLibModule (copy)
-		var2(appCommonLibModule.isSpatial())
-		local var3 = appCommonLibModule.connectToIsSpatialChanged(function(p1)
-			-- upvalues: var2 (copy)
-			var2(p1)
+return function() --[[ Line: 5 | Named "useIsSpatial" ]]
+	-- upvalues: ReactModule (copy), AppCommonLibModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(AppCommonLibModule.isSpatial)
+	ReactModule.useEffect(function() --[[ Line: 7 ]]
+		-- upvalues: UseStateResult2 (copy), AppCommonLibModule (upval)
+		UseStateResult2(AppCommonLibModule.isSpatial())
+		local ConnectToIsSpatialChangedResult = AppCommonLibModule.connectToIsSpatialChanged(function(p1) --[[ Line: 9 ]]
+			-- upvalues: UseStateResult2 (upval)
+			UseStateResult2(p1)
 		end)
 		
-		return function()
-			-- upvalues: var3 (ref)
-			var3:Disconnect()
+		return function() --[[ Line: 12 ]]
+			-- upvalues: ConnectToIsSpatialChangedResult (copy)
+			ConnectToIsSpatialChangedResult:Disconnect()
 		end
 	end, {})
 	
-	return var1
+	return UseStateResult
 end

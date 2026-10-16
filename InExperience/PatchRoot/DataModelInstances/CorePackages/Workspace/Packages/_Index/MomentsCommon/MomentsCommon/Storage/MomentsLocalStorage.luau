@@ -1,40 +1,41 @@
-﻿local httpService = game:GetService("HttpService")
-local appStorageService = game:GetService("AppStorageService")
+﻿local HttpService = game:GetService("HttpService")
+local AppStorageService = game:GetService("AppStorageService")
 
-local function get()
-	-- upvalues: appStorageService (ref), httpService (ref)
-	local ok, status = pcall(appStorageService.GetItem, appStorageService, "MomentsLocalStorage")
+local function get() --[[ Line: 7 ]]
+	-- upvalues: AppStorageService (copy), HttpService (copy)
+	local Success, Result = pcall(AppStorageService.GetItem, AppStorageService, "MomentsLocalStorage")
 	
-	if not ok or status == "" then
+	if Success and Result ~= "" then
+		local Success1, Result1 = pcall(HttpService.JSONDecode, HttpService, Result)
+		
+		return if Success1 and typeof(Result1) == "table" then Result1 else {}
+	else
 		return {}
 	end
-	local ok_1, status_1 = pcall(httpService.JSONDecode, httpService, status)
-	
-	return if ok_1 and typeof(status_1) == "table" then status_1 else {}
 end
 
 return {
 	get = get,
-	set = function(value)
-		-- upvalues: appStorageService (ref), httpService (ref)
-		pcall(function()
-			-- upvalues: appStorageService (copy), httpService (copy), value (ref)
-			appStorageService:SetItem("MomentsLocalStorage", httpService:JSONEncode(value))
-			appStorageService:Flush()
+	set = function(p1) --[[ Line: 16 ]]
+		-- upvalues: AppStorageService (copy), HttpService (copy)
+		pcall(function() --[[ Line: 17 ]]
+			-- upvalues: AppStorageService (upval), HttpService (upval), p1 (copy)
+			AppStorageService:SetItem("MomentsLocalStorage", HttpService:JSONEncode(p1))
+			AppStorageService:Flush()
 		end)
 	end,
-	getField = function(p1)
-		-- upvalues: get (ref)
+	getField = function(p1) --[[ Line: 23 ]]
+		-- upvalues: get (copy)
 		return get()[p1]
 	end,
-	setField = function(value, p1)
-		-- upvalues: get (ref), appStorageService (ref), httpService (ref)
-		local var1 = get()
-		var1[value] = p1
-		pcall(function()
-			-- upvalues: appStorageService (copy), httpService (copy), var1 (ref)
-			appStorageService:SetItem("MomentsLocalStorage", httpService:JSONEncode(var1))
-			appStorageService:Flush()
+	setField = function(Key, p1) --[[ Line: 27 ]]
+		-- upvalues: get (copy), AppStorageService (copy), HttpService (copy)
+		local GetResult = get()
+		GetResult[Key] = p1
+		pcall(function() --[[ Line: 17 ]]
+			-- upvalues: AppStorageService (upval), HttpService (upval), GetResult (copy)
+			AppStorageService:SetItem("MomentsLocalStorage", HttpService:JSONEncode(GetResult))
+			AppStorageService:Flush()
 		end)
 	end
 }

@@ -1,83 +1,84 @@
-﻿local profileCTAStore = require(script:FindFirstAncestor("ProfileCtaService").Parent.DataHydration).Profile.ProfileCTAStore
-local createProfileCTAEventListenerModule = require(script.Parent.createProfileCTAEventListener)
+﻿local ProfileCTAStore = require(script:FindFirstAncestor("ProfileCtaService").Parent.DataHydration).Profile.ProfileCTAStore
+local CreateProfileCTAEventListenerModule = require(script.Parent.createProfileCTAEventListener)
 
-return (function()
-	-- upvalues: profileCTAStore (ref), createProfileCTAEventListenerModule (ref)
-	local var1 = 0
+return ((function() --[[ Line: 20 | Named "createProfileCTAService" ]]
+	-- upvalues: ProfileCTAStore (copy), CreateProfileCTAEventListenerModule (copy)
+	local Count = 0
 	local t = {}
-	local var2 = profileCTAStore.get()
+	local GetResult = ProfileCTAStore.get()
 	
-	local function _(p1)
-		-- upvalues: var2 (ref)
-		var2.getCTA(p1, true)
+	local function _(p1) --[[ Line: 25 | Named "refetchCTA" ]]
+		-- upvalues: GetResult (copy)
+		GetResult.getCTA(p1, true)
 	end
 	
-	local _ = createProfileCTAEventListenerModule(function(p1)
-		-- upvalues: var1 (write), var2 (ref), t (ref)
-		if var1 > 0 then
-			var2.getCTA(p1, true)
+	local _ = CreateProfileCTAEventListenerModule(function(Key) --[[ Line: 29 | Named "handleCTAUpdate" ]]
+		-- upvalues: Count (ref), GetResult (copy), t (copy)
+		if Count > 0 then
+			GetResult.getCTA(Key, true)
 			
 			return
+		else
+			t[Key] = true
 		end
-		t[p1] = true
 	end)
 	
-	local _ = function()
-		-- upvalues: var1 (write)
-		var1 += 1
+	local _ = function() --[[ Line: 39 | Named "enableRealTimeUpdates" ]]
+		-- upvalues: Count (ref)
+		Count += 1
 	end
 	
-	local _ = function()
-		-- upvalues: var1 (write)
-		var1 -= 1
+	local _ = function() --[[ Line: 43 | Named "disableRealTimeUpdates" ]]
+		-- upvalues: Count (ref)
+		Count -= 1
 		
-		if var1 < 0 then
-			error("ProfileCTAService: disableRealTimeUpdates called more times than enableRealTimeUpdates. consumerConnectionCount: " .. tostring(var1))
+		if Count < 0 then
+			error("ProfileCTAService: disableRealTimeUpdates called more times than enableRealTimeUpdates. consumerConnectionCount: " .. tostring(Count))
 		end
 	end
 	
 	return {
-		connectRealTimeUpdates = function()
-			-- upvalues: var1 (write)
-			var1 += 1
-			local var3 = false
+		connectRealTimeUpdates = function() --[[ Line: 54 ]]
+			-- upvalues: Count (ref)
+			Count += 1
+			local Flag = false
 			
 			return {
-				Disconnect = function()
-					-- upvalues: var3 (write), var1 (copy)
-					if var3 then return end
-					var3 = true
-					var1 -= 1
+				Disconnect = function() --[[ Line: 60 ]]
+					-- upvalues: Flag (ref), Count (upval)
+					if Flag then return end
+					Flag = true
+					Count -= 1
 					
-					if var1 < 0 then
-						error("ProfileCTAService: disableRealTimeUpdates called more times than enableRealTimeUpdates. consumerConnectionCount: " .. tostring(var1))
+					if Count < 0 then
+						error("ProfileCTAService: disableRealTimeUpdates called more times than enableRealTimeUpdates. consumerConnectionCount: " .. tostring(Count))
 					end
 				end
 			}
 		end,
-		getProfileCTA = function(p1)
-			-- upvalues: t (ref), var2 (ref)
-			local var3 = false
+		getProfileCTA = function(Key) --[[ Line: 70 ]]
+			-- upvalues: t (copy), GetResult (copy)
+			local Flag = false
 			
-			if t[p1] then
-				var3 = true
-				t[p1] = nil
+			if t[Key] then
+				Flag = true
+				t[Key] = nil
 			end
-			return var2.getCTA(p1, var3)
+			return GetResult.getCTA(Key, Flag)
 		end,
-		getProfileCTAs = function(p1)
-			-- upvalues: t (ref), var2 (ref)
-			local t_1 = {}
+		getProfileCTAs = function(List) --[[ Line: 79 ]]
+			-- upvalues: t (copy), GetResult (copy)
+			local t1 = {}
 			
-			for i, v in ipairs(p1) do
-				if t[v] then
-					t_1[v] = true
-					t[v] = nil
+			for _, value in ipairs(List) do
+				if t[value] then
+					t1[value] = true
+					t[value] = nil
 				else
-					t_1[v] = false
+					t1[value] = false
 				end
 			end
-			return var2.getBatchCTAs(p1, t_1)
+			return GetResult.getBatchCTAs(List, t1)
 		end
 	}
-end)()
+end)())

@@ -1,8 +1,8 @@
-﻿local reactModule = require(script:FindFirstAncestor("BuildExperience").Parent.React)
-local adsManagerMenuButtonViewModule = require(script.Parent.AdsManagerMenuButtonView)
-local useAdsManagerMenuButtonViewModelModule = require(script.Parent.useAdsManagerMenuButtonViewModel)
+﻿local ReactModule = require(script:FindFirstAncestor("BuildExperience").Parent.React)
+local AdsManagerMenuButtonViewModule = require(script.Parent.AdsManagerMenuButtonView)
+local UseAdsManagerMenuButtonViewModelModule = require(script.Parent.useAdsManagerMenuButtonViewModel)
 
-return function(p1)
-	-- upvalues: useAdsManagerMenuButtonViewModelModule (ref), reactModule (ref), adsManagerMenuButtonViewModule (ref)
-	return reactModule.createElement(adsManagerMenuButtonViewModule, useAdsManagerMenuButtonViewModelModule(p1))
+return function(p1) --[[ Line: 11 | Named "AdsManagerMenuButton" ]]
+	-- upvalues: UseAdsManagerMenuButtonViewModelModule (copy), ReactModule (copy), AdsManagerMenuButtonViewModule (copy)
+	return ReactModule.createElement(AdsManagerMenuButtonViewModule, (UseAdsManagerMenuButtonViewModelModule(p1)))
 end

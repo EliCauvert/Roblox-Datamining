@@ -1,26 +1,25 @@
-﻿local inGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
-local roact = inGameMenuDependenciesModule.Roact
-local roactRodux = inGameMenuDependenciesModule.RoactRodux
-local parent = script.Parent.Parent
-local themedTextLabelModule = require(parent.Components.ThemedTextLabel)
-local gameIconModule = require(parent.Components.GameIcon)
+﻿local InGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
+local Roact = InGameMenuDependenciesModule.Roact
+local Parent = script.Parent.Parent
+local ThemedTextLabelModule = require(Parent.Components.ThemedTextLabel)
+local GameIconModule = require(Parent.Components.GameIcon)
 
-return roactRodux.UNSTABLE_connect2(function(p1)
+return InGameMenuDependenciesModule.RoactRodux.UNSTABLE_connect2(function(p1) --[[ Line: 47 ]]
 	return { gameName = p1.gameInfo.name }
-end)(function(p1)
-	-- upvalues: roact (ref), gameIconModule (ref), themedTextLabelModule (ref)
-	return roact.createElement("ImageLabel", {
+end)(function(p1) --[[ Line: 17 | Named "GameIconHeader" ]]
+	-- upvalues: Roact (copy), GameIconModule (copy), ThemedTextLabelModule (copy)
+	return Roact.createElement("ImageLabel", {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 0, 148)
 	}, {
-		Padding = roact.createElement("UIPadding", {
+		Padding = Roact.createElement("UIPadding", {
 			PaddingBottom = UDim.new(0, 24),
 			PaddingLeft = UDim.new(0, 24),
 			PaddingRight = UDim.new(0, 24),
 			PaddingTop = UDim.new(0, 24)
 		}),
-		GameIcon = roact.createElement(gameIconModule, { iconSize = 100, gameId = game.GameId }),
-		GameName = roact.createElement(themedTextLabelModule, {
+		GameIcon = Roact.createElement(GameIconModule, { iconSize = 100, gameId = game.GameId }),
+		GameName = Roact.createElement(ThemedTextLabelModule, {
 			fontKey = "Title",
 			themeKey = "TextEmphasis",
 			TextWrapped = true,

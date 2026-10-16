@@ -1,57 +1,63 @@
-﻿local http = script:FindFirstAncestor("Http")
-local updateFetchingStatus = require(http.Actions).UpdateFetchingStatus
-local batchUpdateFetchingStatus = require(http.Actions).BatchUpdateFetchingStatus
+﻿local Http = script:FindFirstAncestor("Http")
+local UpdateFetchingStatus = require(Http.Actions).UpdateFetchingStatus
+local BatchUpdateFetchingStatusFunction = require(Http.Actions).BatchUpdateFetchingStatus
 
-return function(p1)
-	-- upvalues: batchUpdateFetchingStatus (ref), updateFetchingStatus (ref)
-	local t = {}
-	local var1 = false
-	p1 = p1 or 0
+return function(p1) --[[ Line: 5 | Named "createPerformFetchMiddleware" ]]
+	-- upvalues: BatchUpdateFetchingStatusFunction (copy), UpdateFetchingStatus (copy)
+	local List = {}
+	local Flag = false
+	local Delay = p1 or 0
 	
-	return function(p2, p3)
-		-- upvalues: var1 (write), p1 (ref), t (write), batchUpdateFetchingStatus (copy), updateFetchingStatus (copy)
-		local function _()
-			-- upvalues: var1 (copy), p1 (copy), t (copy), p3 (ref), batchUpdateFetchingStatus (copy)
-			if var1 then
+	return function(Callback, p2) --[[ Line: 10 ]]
+		-- upvalues: Flag (ref), Delay (copy), List (ref), BatchUpdateFetchingStatusFunction (upval), UpdateFetchingStatus (upval)
+		local function _() --[[ Line: 11 | Named "runBatchDispatcher" ]]
+			-- upvalues: Flag (upval), Delay (upval), List (upval), p2 (copy), BatchUpdateFetchingStatusFunction (upval)
+			if not Flag then
+				Flag = true
+				task.delay(Delay, function() --[[ Line: 17 ]]
+					-- upvalues: List (upval), Flag (upval), p2 (upval), BatchUpdateFetchingStatusFunction (upval)
+					local v1 = List
+					List = {}
+					Flag = false
+					p2:dispatch(BatchUpdateFetchingStatusFunction(v1, true))
+				end)
+				
 				return
 			end
-			var1 = true
-			task.delay(p1, function()
-				-- upvalues: t (copy), var1 (copy), p3 (copy), batchUpdateFetchingStatus (copy)
-				t = {}
-				var1 = false
-				p3:dispatch(batchUpdateFetchingStatus(t, true))
-			end)
 		end
 		
-		return function(p4)
-			-- upvalues: updateFetchingStatus (copy), t (copy), var1 (copy), p1 (copy), p3 (ref), batchUpdateFetchingStatus (copy), p2 (ref)
-			if p4.type == updateFetchingStatus.name then
-				table.insert(t, p4)
+		return function(p3) --[[ Line: 26 ]]
+			-- upvalues: UpdateFetchingStatus (upval), List (upval), Flag (upval), Delay (upval), p2 (copy), BatchUpdateFetchingStatusFunction (upval), Callback (copy)
+			if p3.type == UpdateFetchingStatus.name then
+				table.insert(List, p3)
 				
-				if not var1 then
-					var1 = true
-					task.delay(p1, function()
-						-- upvalues: t (copy), var1 (copy), p3 (copy), batchUpdateFetchingStatus (copy)
-						t = {}
-						var1 = false
-						p3:dispatch(batchUpdateFetchingStatus(t, true))
+				if not Flag then
+					Flag = true
+					task.delay(Delay, function() --[[ Line: 17 ]]
+						-- upvalues: List (upval), Flag (upval), p2 (upval), BatchUpdateFetchingStatusFunction (upval)
+						local v1 = List
+						List = {}
+						Flag = false
+						p2:dispatch(BatchUpdateFetchingStatusFunction(v1, true))
 					end)
 				end
-			elseif p4.type ~= batchUpdateFetchingStatus.name or p4.shouldImmediatelyDispatch then
-				return p2(p4)
-			end
-			for i, v in pairs(p4.fetchingStatuses) do
-				table.insert(t, v)
-			end
-			if not var1 then
-				var1 = true
-				task.delay(p1, function()
-					-- upvalues: t (copy), var1 (copy), p3 (copy), batchUpdateFetchingStatus (copy)
-					t = {}
-					var1 = false
-					p3:dispatch(batchUpdateFetchingStatus(t, true))
-				end)
+			else
+				if p3.type ~= BatchUpdateFetchingStatusFunction.name or p3.shouldImmediatelyDispatch then
+					return Callback(p3)
+				end
+				for _, fetchingStatus in pairs(p3.fetchingStatuses) do
+					table.insert(List, fetchingStatus)
+				end
+				if not Flag then
+					Flag = true
+					task.delay(Delay, function() --[[ Line: 17 ]]
+						-- upvalues: List (upval), Flag (upval), p2 (upval), BatchUpdateFetchingStatusFunction (upval)
+						local v1 = List
+						List = {}
+						Flag = false
+						p2:dispatch(BatchUpdateFetchingStatusFunction(v1, true))
+					end)
+				end
 			end
 			return nil
 		end

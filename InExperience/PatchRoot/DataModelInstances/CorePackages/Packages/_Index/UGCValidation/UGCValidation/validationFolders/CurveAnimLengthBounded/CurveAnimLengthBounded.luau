@@ -1,35 +1,36 @@
-﻿local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local getFStringUGCValidateCurveAnimationMinLengthModule = require(parent.flags.GetFStringUGCValidateCurveAnimationMinLength)
-local getFStringUGCValidationMaxAnimationLengthModule = require(parent.flags.GetFStringUGCValidationMaxAnimationLength)
-local t = { categories = {} }
+﻿local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local GetFStringUGCValidateCurveAnimationMinLengthModule = require(Parent.flags.GetFStringUGCValidateCurveAnimationMinLength)
+local GetFStringUGCValidationMaxAnimationLengthModule = require(Parent.flags.GetFStringUGCValidationMaxAnimationLength)
+local GetFFlagUGCValidateAQEmoteDurationModule = require(Parent.flags.getFFlagUGCValidateAQEmoteDuration)
+local CurveAnimLengthBoundedModule = { categories = {} }
 
-if not require(parent.flags.getEngineFeatureEngineUGCValidateEmoteAnimationExport)() or not require(parent.flags.getFFlagUGCValidateAQEmoteDuration)() then
-	table.insert(t.categories, validationEnumsModule.UploadCategory.EMOTE_ANIMATION)
+if not require(Parent.flags.getEngineFeatureEngineUGCValidateEmoteAnimationExport)() or not GetFFlagUGCValidateAQEmoteDurationModule() then
+	table.insert(CurveAnimLengthBoundedModule.categories, ValidationEnumsModule.UploadCategory.EMOTE_ANIMATION)
 end
-table.insert(t.categories, validationEnumsModule.UploadCategory.ANIMATION)
-t.requiredData = {
-	validationEnumsModule.SharedDataMember.curveAnimations,
-	validationEnumsModule.SharedDataMember.curveAnimComputedFrames
+table.insert(CurveAnimLengthBoundedModule.categories, ValidationEnumsModule.UploadCategory.ANIMATION)
+CurveAnimLengthBoundedModule.requiredData = {
+	ValidationEnumsModule.SharedDataMember.curveAnimations,
+	ValidationEnumsModule.SharedDataMember.curveAnimComputedFrames
 }
-t.expectedFailures = {}
-t.prereqTests = {
-	validationEnumsModule.ValidationModule.CurveAnimDataAvailable
+CurveAnimLengthBoundedModule.expectedFailures = {}
+CurveAnimLengthBoundedModule.prereqTests = {
+	ValidationEnumsModule.ValidationModule.CurveAnimDataAvailable
 }
 
-function t.run(p1, p2)
-	-- upvalues: getFStringUGCValidateCurveAnimationMinLengthModule (ref), getFStringUGCValidationMaxAnimationLengthModule (ref), errorSourceStringsModule (ref)
-	local animLength = p2.curveAnimComputedFrames.animLength
-	local var1 = getFStringUGCValidateCurveAnimationMinLengthModule.asNumber()
+function CurveAnimLengthBoundedModule.run(p1, p2) --[[ Line: 33 ]]
+	-- upvalues: GetFStringUGCValidateCurveAnimationMinLengthModule (copy), GetFStringUGCValidationMaxAnimationLengthModule (copy), ErrorSourceStringsModule (copy)
+	local AnimLength = p2.curveAnimComputedFrames.animLength
+	local AsNumberResult = GetFStringUGCValidateCurveAnimationMinLengthModule.asNumber()
 	
-	if animLength <= var1 or getFStringUGCValidationMaxAnimationLengthModule.asNumber() < animLength then
-		p1:fail(errorSourceStringsModule.Keys.CurveAnim_InvalidLength, {
-			minLength = tostring(var1),
-			maxLength = getFStringUGCValidationMaxAnimationLengthModule.asString()
+	if AnimLength <= AsNumberResult or GetFStringUGCValidationMaxAnimationLengthModule.asNumber() < AnimLength then
+		p1:fail(ErrorSourceStringsModule.Keys.CurveAnim_InvalidLength, {
+			minLength = tostring(AsNumberResult),
+			maxLength = GetFStringUGCValidationMaxAnimationLengthModule.asString()
 		})
 	end
 end
 
-return t
+return CurveAnimLengthBoundedModule

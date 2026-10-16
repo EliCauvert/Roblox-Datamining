@@ -1,18 +1,18 @@
-﻿local avatarExperienceSave = script:FindFirstAncestor("AvatarExperienceSave")
-local parent = avatarExperienceSave.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local _ = require(avatarExperienceSave.SaveButton.useSaveButtonProps)
+﻿local AvatarExperienceSave = script:FindFirstAncestor("AvatarExperienceSave")
+local Parent = AvatarExperienceSave.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local _ = require(AvatarExperienceSave.SaveButton.useSaveButtonProps)
 
-return function(p1)
-	-- upvalues: foundationModule (ref), reactModule (ref)
-	return reactModule.createElement(foundationModule.Button, {
-		text = p1.text or "Save",
-		isDisabled = p1.disabled,
-		size = foundationModule.Enums.InputSize.Medium,
-		variant = if p1.disabled then foundationModule.Enums.ButtonVariant.Standard else foundationModule.Enums.ButtonVariant.Emphasis,
-		onActivated = p1.onActivated,
-		width = UDim.new(0, foundationModule.Hooks.useTokens().Size.Size_2300),
-		LayoutOrder = p1.LayoutOrder
+return function(Frame) --[[ Line: 14 | Named "SaveButton" ]]
+	-- upvalues: FoundationModule (copy), ReactModule (copy)
+	return ReactModule.createElement(FoundationModule.Button, {
+		text = Frame.text or "Save",
+		isDisabled = Frame.disabled,
+		size = FoundationModule.Enums.InputSize.Medium,
+		variant = if Frame.disabled then FoundationModule.Enums.ButtonVariant.Standard else FoundationModule.Enums.ButtonVariant.Emphasis,
+		onActivated = Frame.onActivated,
+		width = UDim.new(0, FoundationModule.Hooks.useTokens().Size.Size_2300),
+		LayoutOrder = Frame.LayoutOrder
 	})
 end

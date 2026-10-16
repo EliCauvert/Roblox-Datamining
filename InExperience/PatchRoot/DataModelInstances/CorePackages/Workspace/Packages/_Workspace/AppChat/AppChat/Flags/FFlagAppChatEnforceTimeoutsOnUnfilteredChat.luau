@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AppChatEnforceTimeoutsOnUnfilteredChat", false)
+﻿return (game:DefineFastFlag("AppChatEnforceTimeoutsOnUnfilteredChat", false))

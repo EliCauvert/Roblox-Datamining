@@ -1,31 +1,31 @@
-﻿local parent = script.Parent.Parent
-local dependenciesModule = require(parent.dependencies)
-local var1 = dependenciesModule.Analytics.AnalyticsReporters.EventIngest.new(game:GetService("EventIngestService"))
-local logging = dependenciesModule.Logging
-local eventStreamConstantsModule = require(parent.Constants.EventStreamConstants)
-local fFlagEnableAuthAnalyticsPrintDebuggingDev = require(parent.Parent.SharedFlags).FFlagEnableAuthAnalyticsPrintDebuggingDev
+﻿local Parent = script.Parent.Parent
+local DependenciesModule = require(Parent.dependencies)
+local NewResult = DependenciesModule.Analytics.AnalyticsReporters.EventIngest.new((game:GetService("EventIngestService")))
+local Logging = DependenciesModule.Logging
+local EventStreamConstantsModule = require(Parent.Constants.EventStreamConstants)
+local FFlagEnableAuthAnalyticsPrintDebuggingDev = require(Parent.Parent.SharedFlags).FFlagEnableAuthAnalyticsPrintDebuggingDev
 
-return function(p1, p2, p3)
-	-- upvalues: eventStreamConstantsModule (ref), logging (ref), fFlagEnableAuthAnalyticsPrintDebuggingDev (ref), var1 (ref)
+return function(Text1, Text2, List) --[[ Line: 11 ]]
+	-- upvalues: EventStreamConstantsModule (copy), Logging (copy), FFlagEnableAuthAnalyticsPrintDebuggingDev (copy), NewResult (copy)
 	local t = {}
-	p3[eventStreamConstantsModule.EventTimingKeys.OsClock] = tostring(os.clock())
-	p3[eventStreamConstantsModule.EventTimingKeys.OsTime] = tostring(os.time())
+	List[EventStreamConstantsModule.EventTimingKeys.OsClock] = tostring(os.clock())
+	List[EventStreamConstantsModule.EventTimingKeys.OsTime] = tostring(os.time())
 	
-	for i, v in pairs(p3) do
+	for i, value in pairs(List) do
 		if type(i) ~= "string" then
-			logging.warn("Failure logging " .. p1 .. ": Expected " .. i .. " to be a string key but got " .. type(i))
+			Logging.warn("Failure logging " .. Text2 .. ": Expected " .. i .. " to be a string key but got " .. type(i))
 			
 			return
 		end
-		t[i] = v
+		t[i] = value
 	end
-	if fFlagEnableAuthAnalyticsPrintDebuggingDev then
-		local var2 = ""
+	if FFlagEnableAuthAnalyticsPrintDebuggingDev then
+		local Text = ""
 		
-		for i_1, v_1 in pairs(t) do
-			var2 ..= i_1 .. ": " .. tostring(v_1) .. ", "
+		for i1, value1 in pairs(t) do
+			Text ..= i1 .. ": " .. tostring(value1) .. ", "
 		end
-		print("Emitting EventIngest " .. p1 .. ", context " .. p0 .. " with args: " .. string.sub(var2, 1, -3))
+		print("Emitting EventIngest " .. Text2 .. ", context " .. Text1 .. " with args: " .. string.sub(Text, 1, -3))
 	end
-	var1:sendEventDeferred(p1, p2, t)
+	NewResult:sendEventDeferred(Text1, Text2, t)
 end

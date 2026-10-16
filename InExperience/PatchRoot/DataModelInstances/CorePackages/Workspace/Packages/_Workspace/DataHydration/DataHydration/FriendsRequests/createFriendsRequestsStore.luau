@@ -1,470 +1,480 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local createDataCacheModule = require(dataHydration.createDataCache)
-local createDataResolverModule = require(dataHydration.createDataResolver)
-local dataStatus = require(dataHydration.DataHydrationTypes).DataStatus
-local getLocalPlayerUserId = require(dataHydration.DataHydrationUtils).getLocalPlayerUserId
-local mergeListsWithoutDuplicates = require(dataHydration.DataHydrationUtils).mergeListsWithoutDuplicates
-local _ = require(parent.Signals)
-local localUserIdStore = require(parent.LocalUserIdStore).LocalUserIdStore
-local fFlagAddFriendsPageTrustedFriendRequestSection = require(parent.SharedFlags).FFlagAddFriendsPageTrustedFriendRequestSection
-local fFlagFriendsRequestsMergeListsWithoutDuplicates = require(parent.SharedFlags).FFlagFriendsRequestsMergeListsWithoutDuplicates
-local fFlagEnableGetFriendshipStatus = require(parent.SharedFlags).FFlagEnableGetFriendshipStatus
-local requestsModule = require(script.Parent.Requests)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local CreateDataCacheModule = require(DataHydration.createDataCache)
+local CreateDataResolverModule = require(DataHydration.createDataResolver)
+local DataStatus = require(DataHydration.DataHydrationTypes).DataStatus
+local GetLocalPlayerUserIdFunction = require(DataHydration.DataHydrationUtils).getLocalPlayerUserId
+local MergeListsWithoutDuplicatesFunction = require(DataHydration.DataHydrationUtils).mergeListsWithoutDuplicates
+local _ = require(Parent.Signals)
+local LocalUserIdStore = require(Parent.LocalUserIdStore).LocalUserIdStore
+local FFlagAddFriendsPageTrustedFriendRequestSection = require(Parent.SharedFlags).FFlagAddFriendsPageTrustedFriendRequestSection
+local FFlagFriendsRequestsMergeListsWithoutDuplicates = require(Parent.SharedFlags).FFlagFriendsRequestsMergeListsWithoutDuplicates
+local FFlagEnableGetFriendshipStatus = require(Parent.SharedFlags).FFlagEnableGetFriendshipStatus
+local RequestsModule = require(script.Parent.Requests)
 local _ = require(script.Parent.FriendsRequestsStoreTypes)
-local friendsStoreModule = require(dataHydration.Friends.FriendsStore)
-local friendsRequestsPageSize = game:DefineFastInt("FriendsRequestsPageSize", 25)
-local friendsRequestsCacheTtlSec = game:DefineFastInt("FriendsRequestsCacheTtlSec", 0)
+local FriendsStoreModule = require(DataHydration.Friends.FriendsStore)
+local FriendsRequestsPageSize = game:DefineFastInt("FriendsRequestsPageSize", 25)
+local FriendsRequestsCacheTtlSec = game:DefineFastInt("FriendsRequestsCacheTtlSec", 0)
 
-local function _(p1)
+local function _(p1: number): number --[[ Line: 48 | Named "getCacheTTL" ]]
 	return if p1 > 0 then p1 else 1e999
 end
 
-local _ = function(p1)
+local _ = function(p1) --[[ Line: 52 | Named "normalizeId" ]]
 	return if p1 == nil then nil else tostring(p1)
 end
 
-local _ = function(p1)
+local _ = function(p1) --[[ Line: 59 | Named "normalizeCursor" ]]
 	return if p1 == nil or p1 == "" then nil else p1
 end
 
-local function normalizeFriendRequest(p1)
-	local id = p1.id
-	local var1 = if id == nil then nil else tostring(id)
+local function normalizeFriendRequest(p1) --[[ Line: 66 ]]
+	local Id = p1.id
+	local Text = if Id == nil then nil else tostring(Id)
 	
-	if not var1 then
+	if not Text then
 		return nil
 	end
-	local friendRequest = p1.friendRequest
-	local var2 = nil
+	local FriendRequest = p1.friendRequest
+	local MutualFriendsIds = nil
 	
 	if p1.mutualFriendsList then
-		local t = {}
+		local List = {}
 		
-		for i, v in p1.mutualFriendsList do
-			table.insert(t, tostring(v))
+		for _, value in p1.mutualFriendsList do
+			table.insert(List, (tostring(value)))
 		end
-		var2 = t
+		MutualFriendsIds = List
 	end
 	return {
-		id = var1,
+		id = Text,
 		isUnseen = p1.isUnseen,
-		sentAt = if friendRequest and friendRequest.sentAt then DateTime.fromIsoDate(friendRequest.sentAt) else nil,
-		sourceUniverseId = if friendRequest then friendRequest.sourceUniverseId else nil,
-		originSourceType = if friendRequest then friendRequest.originSourceType else nil,
-		contactName = if friendRequest then friendRequest.contactName else nil,
-		mutualFriendsIds = var2
+		sentAt = if FriendRequest and FriendRequest.sentAt then DateTime.fromIsoDate(FriendRequest.sentAt) else nil,
+		sourceUniverseId = if FriendRequest then FriendRequest.sourceUniverseId else nil,
+		originSourceType = if FriendRequest then FriendRequest.originSourceType else nil,
+		contactName = if FriendRequest then FriendRequest.contactName else nil,
+		mutualFriendsIds = MutualFriendsIds
 	}
 end
 
-local function normalizeGetFriendRequestsResponse(p2)
-	-- upvalues: normalizeFriendRequest (ref)
-	local t = {}
-	
-	for i, v in if p2 and p2.data then p2.data else {} do
-		local var3 = normalizeFriendRequest(v)
+local function normalizeGetFriendRequestsResponse(p2) --[[ Line: 96 ]]
+	-- upvalues: normalizeFriendRequest (copy)
+	local Requests = {}
+	local Data = if p2 and p2.data then p2.data else {}
+	for _, entry in Data do
+		local NormalizeFriendRequestResult = normalizeFriendRequest(entry)
 		
-		if var3 then
-			table.insert(t, var3)
+		if NormalizeFriendRequestResult then
+			table.insert(Requests, NormalizeFriendRequestResult)
 		end
 	end
-	local var4 = if p2 then p2.nextPageCursor else nil
-	local var5 = if var4 == nil or var4 == "" then nil else var4
+	local NextPageCursor = if p2 then p2.nextPageCursor else nil
+	local NextPageCursor1 = if NextPageCursor == nil or NextPageCursor == "" then nil else NextPageCursor
 	
 	return {
-		requests = t,
-		nextPageCursor = var5,
-		hasMore = var5 ~= nil
+		requests = Requests,
+		nextPageCursor = NextPageCursor1,
+		hasMore = NextPageCursor1 ~= nil
 	}
 end
 
-local _ = function(p3, p4)
-	-- upvalues: fFlagAddFriendsPageTrustedFriendRequestSection (ref), fFlagFriendsRequestsMergeListsWithoutDuplicates (ref), mergeListsWithoutDuplicates (ref)
-	if not fFlagAddFriendsPageTrustedFriendRequestSection and not fFlagFriendsRequestsMergeListsWithoutDuplicates then
+local _ = function(p3, p4) --[[ Line: 116 | Named "mergeRequestsWithoutDuplicates" ]]
+	-- upvalues: FFlagAddFriendsPageTrustedFriendRequestSection (copy), FFlagFriendsRequestsMergeListsWithoutDuplicates (copy), MergeListsWithoutDuplicatesFunction (copy)
+	if not FFlagAddFriendsPageTrustedFriendRequestSection and not FFlagFriendsRequestsMergeListsWithoutDuplicates then
 		error("mergeRequestsWithoutDuplicates requires FFlagAddFriendsPageTrustedFriendRequestSection or FFlagFriendsRequestsMergeListsWithoutDuplicates to be enabled")
 	end
-	return mergeListsWithoutDuplicates(p3, p4, "id")
+	return MergeListsWithoutDuplicatesFunction(p3, p4, "id")
 end
 
-local function updateFriendshipStatusesForPage(p3)
-	-- upvalues: fFlagEnableGetFriendshipStatus (ref), friendsStoreModule (ref)
-	if not fFlagEnableGetFriendshipStatus then return end
-	local var6 = friendsStoreModule.get()
+local function updateFriendshipStatusesForPage(p3) --[[ Line: 133 ]]
+	-- upvalues: FFlagEnableGetFriendshipStatus (copy), FriendsStoreModule (copy)
+	if not FFlagEnableGetFriendshipStatus then return end
+	local GetResult = FriendsStoreModule.get()
 	
-	for i, v in p3.requests do
-		var6.UpdateFriendshipStatus(v.id, Enum.FriendStatus.FriendRequestReceived)
+	for _, request in p3.requests do
+		GetResult.UpdateFriendshipStatus(request.id, Enum.FriendStatus.FriendRequestReceived)
 	end
 end
 
-local function mergeFriendsRequestsPage(p4, p5, p6)
-	-- upvalues: fFlagAddFriendsPageTrustedFriendRequestSection (ref), fFlagFriendsRequestsMergeListsWithoutDuplicates (ref), mergeListsWithoutDuplicates (ref)
-	if not p4 then
+local function mergeFriendsRequestsPage(DataResult, p4, NextPageCursor) --[[ Line: 144 ]]
+	-- upvalues: FFlagAddFriendsPageTrustedFriendRequestSection (copy), FFlagFriendsRequestsMergeListsWithoutDuplicates (copy), MergeListsWithoutDuplicatesFunction (copy)
+	if not DataResult then
 		return {
-			requests = p5.requests,
-			nextPageCursor = p5.nextPageCursor,
-			hasMore = p5.hasMore
+			requests = p4.requests,
+			nextPageCursor = p4.nextPageCursor,
+			hasMore = p4.hasMore
 		}
-	elseif p4.nextPageCursor ~= p6 then
-		return p4
+	end
+	if DataResult.nextPageCursor ~= NextPageCursor then
+		return DataResult
 	end
 	local t = {}
-	local requests = p4.requests
-	local requests_1 = p5.requests
+	local Requests = DataResult.requests
+	local Requests1 = p4.requests
 	
-	if not fFlagAddFriendsPageTrustedFriendRequestSection and not fFlagFriendsRequestsMergeListsWithoutDuplicates then
+	if not FFlagAddFriendsPageTrustedFriendRequestSection and not FFlagFriendsRequestsMergeListsWithoutDuplicates then
 		error("mergeRequestsWithoutDuplicates requires FFlagAddFriendsPageTrustedFriendRequestSection or FFlagFriendsRequestsMergeListsWithoutDuplicates to be enabled")
 	end
-	t.requests = mergeListsWithoutDuplicates(requests, requests_1, "id")
-	t.nextPageCursor = p5.nextPageCursor
-	t.hasMore = p5.hasMore
+	t.requests = MergeListsWithoutDuplicatesFunction(Requests, Requests1, "id")
+	t.nextPageCursor = p4.nextPageCursor
+	t.hasMore = p4.hasMore
 	
 	return t
 end
 
-local _ = function(p4)
-	-- upvalues: localUserIdStore (ref), getLocalPlayerUserId (ref)
-	local currentUserId = localUserIdStore.getCurrentUserId(p4)
+local _ = function(p4) --[[ Line: 172 | Named "resolveLocalUserId" ]]
+	-- upvalues: LocalUserIdStore (copy), GetLocalPlayerUserIdFunction (copy)
+	local CurrentUserId = LocalUserIdStore.getCurrentUserId(p4)
 	
-	if currentUserId ~= "" then
-		return currentUserId
+	if CurrentUserId == "" then
+		local LocalPlayerUserId = GetLocalPlayerUserIdFunction()
+		
+		return if LocalPlayerUserId then tostring(LocalPlayerUserId) else ""
+	else
+		return CurrentUserId
 	end
-	local var7 = getLocalPlayerUserId()
-	
-	return if var7 then tostring(var7) else ""
 end
 
-return function()
-	-- upvalues: createDataCacheModule (ref), friendsRequestsCacheTtlSec (ref), createDataResolverModule (ref), requestsModule (ref), friendsRequestsPageSize (ref), normalizeGetFriendRequestsResponse (ref), updateFriendshipStatusesForPage (ref), mergeFriendsRequestsPage (ref), localUserIdStore (ref), getLocalPlayerUserId (ref), dataStatus (ref), friendsStoreModule (ref)
-	local var7 = createDataCacheModule(if friendsRequestsCacheTtlSec > 0 then friendsRequestsCacheTtlSec else 1e999)
-	local var8 = createDataCacheModule()
-	local var9 = createDataCacheModule()
-	local var10 = false
-	local var11 = nil
+return function() --[[ Line: 181 | Named "createFriendsRequestsStore" ]]
+	-- upvalues: CreateDataCacheModule (copy), FriendsRequestsCacheTtlSec (copy), CreateDataResolverModule (copy), RequestsModule (copy), FriendsRequestsPageSize (copy), normalizeGetFriendRequestsResponse (copy), updateFriendshipStatusesForPage (copy), mergeFriendsRequestsPage (copy), LocalUserIdStore (copy), GetLocalPlayerUserIdFunction (copy), DataStatus (copy), FriendsStoreModule (copy)
+	local DataCacheModule = CreateDataCacheModule(if FriendsRequestsCacheTtlSec > 0 then FriendsRequestsCacheTtlSec else 1e999)
+	local DataCacheModule1 = CreateDataCacheModule()
+	local DataCacheModule2 = CreateDataCacheModule()
+	local Flag = false
+	local v1 = nil
 	
-	local function _(p4)
-		-- upvalues: var11 (write)
-		var11 = if p4 ~= "" then nil else p4
+	local function _(p4) --[[ Line: 217 | Named "stageSessionId" ]]
+		-- upvalues: v1 (ref)
+		v1 = if p4 == "" then nil else p4
 	end
 	
-	local var12 = createDataResolverModule({
+	local DataResolverModule = CreateDataResolverModule({
 		supportsMultiGet = false,
 		replaceItems = true,
-		cache = var7,
-		fetchFn = function(_, p4)
-			-- upvalues: var10 (write), requestsModule (copy), friendsRequestsPageSize (copy), var11 (write), normalizeGetFriendRequestsResponse (copy), updateFriendshipStatusesForPage (copy), mergeFriendsRequestsPage (copy)
-			local var13 = if var10 then nil else p4.data(false)
-			var10 = false
-			local var14 = if var13 then var13.nextPageCursor else nil
+		cache = DataCacheModule,
+		fetchFn = function(_, p4) --[[ Line: 225 ]]
+			-- upvalues: Flag (ref), RequestsModule (upval), FriendsRequestsPageSize (upval), v1 (ref), normalizeGetFriendRequestsResponse (upval), updateFriendshipStatusesForPage (upval), mergeFriendsRequestsPage (upval)
+			local DataResult = if Flag then nil else p4.data(false)
+			Flag = false
+			local NextPageCursor = if DataResult then DataResult.nextPageCursor else nil
 			
-			return requestsModule.GetFriendsRequests(var14, friendsRequestsPageSize, var11):andThen(function(p5)
-				-- upvalues: normalizeGetFriendRequestsResponse (copy), updateFriendshipStatusesForPage (copy), mergeFriendsRequestsPage (copy), var13 (ref), var14 (ref)
-				local var15 = normalizeGetFriendRequestsResponse(p5)
-				updateFriendshipStatusesForPage(var15)
+			return RequestsModule.GetFriendsRequests(NextPageCursor, FriendsRequestsPageSize, v1):andThen(function(Result) --[[ Line: 232 ]]
+				-- upvalues: normalizeGetFriendRequestsResponse (upval), updateFriendshipStatusesForPage (upval), mergeFriendsRequestsPage (upval), DataResult (copy), NextPageCursor (copy)
+				local NormalizeGetFriendRequestsResponseResult = normalizeGetFriendRequestsResponse(Result)
+				updateFriendshipStatusesForPage(NormalizeGetFriendRequestsResponseResult)
 				
-				return mergeFriendsRequestsPage(var13, var15, var14)
-			end):catch(function(p5)
-				error(p5)
+				return (mergeFriendsRequestsPage(DataResult, NormalizeGetFriendRequestsResponseResult, NextPageCursor))
+			end):catch(function(Err) --[[ Line: 239 ]]
+				error(Err)
 			end)
 		end
 	})
-	local var13 = createDataResolverModule({
+	local DataResolverModule1 = CreateDataResolverModule({
 		supportsMultiGet = false,
 		replaceItems = true,
-		cache = var8,
-		fetchFn = function(_)
-			-- upvalues: requestsModule (copy)
-			return requestsModule.GetFriendRequestsCount():andThen(function(p4)
-				return if p4 and p4.count then p4.count else 0
+		cache = DataCacheModule1,
+		fetchFn = function(_) --[[ Line: 249 ]]
+			-- upvalues: RequestsModule (upval)
+			return RequestsModule.GetFriendRequestsCount():andThen(function(Result) --[[ Line: 250 ]]
+				return if Result and Result.count then Result.count else 0
 			end)
 		end
 	})
-	local var14 = createDataResolverModule({
+	local DataResolverModule2 = CreateDataResolverModule({
 		supportsMultiGet = false,
 		replaceItems = true,
-		cache = var9,
-		fetchFn = function(_)
-			-- upvalues: requestsModule (copy)
-			return requestsModule.GetNewFriendRequestsCount():andThen(function(p4)
-				return if p4 and p4.count then p4.count else 0
+		cache = DataCacheModule2,
+		fetchFn = function(_) --[[ Line: 260 ]]
+			-- upvalues: RequestsModule (upval)
+			return RequestsModule.GetNewFriendRequestsCount():andThen(function(Result) --[[ Line: 261 ]]
+				return if Result and Result.count then Result.count else 0
 			end)
 		end
 	})
 	
 	return {
-		getFriendsRequests = function(p4)
-			-- upvalues: localUserIdStore (copy), getLocalPlayerUserId (copy), var12 (ref), var11 (write), var10 (write)
-			local var15
-			local currentUserId = localUserIdStore.getCurrentUserId(false)
+		getFriendsRequests = function(p4) --[[ Line: 315 ]]
+			-- upvalues: LocalUserIdStore (upval), GetLocalPlayerUserIdFunction (upval), DataResolverModule (copy), v1 (ref), Flag (ref)
+			local CurrentUserId = LocalUserIdStore.getCurrentUserId(false)
+			local CurrentUserId1 = nil
 			
-			if currentUserId == "" then
-				local var16 = getLocalPlayerUserId()
-				var15 = if var16 then tostring(var16) else ""
+			if CurrentUserId == "" then
+				local LocalPlayerUserId = GetLocalPlayerUserIdFunction()
+				CurrentUserId1 = if LocalPlayerUserId then tostring(LocalPlayerUserId) else ""
 			else
-				var15 = currentUserId
+				CurrentUserId1 = CurrentUserId
 			end
 			if p4 and p4.skipFetch then
-				return var12.getCachedItem(var15)
-			elseif p4 and p4.forceFetch then
-				local var17
-				local var18 = if p4 then p4.sessionId else nil
-				local currentUserId_1 = localUserIdStore.getCurrentUserId(false)
+				return DataResolverModule.getCachedItem(CurrentUserId1)
+			end
+			if p4 and p4.forceFetch then
+				local SessionId = if p4 then p4.sessionId else nil
+				local CurrentUserId2 = LocalUserIdStore.getCurrentUserId(false)
+				local CurrentUserId21 = nil
 				
-				if currentUserId_1 == "" then
-					local var19 = getLocalPlayerUserId()
-					var17 = if var19 then tostring(var19) else ""
+				if CurrentUserId2 == "" then
+					local LocalPlayerUserId = GetLocalPlayerUserIdFunction()
+					CurrentUserId21 = if LocalPlayerUserId then tostring(LocalPlayerUserId) else ""
 				else
-					var17 = currentUserId_1
+					CurrentUserId21 = CurrentUserId2
 				end
-				if not var12.isRequestInQueueOrInFlight(var17) then
-					var11 = if var18 ~= "" then nil else var18
-					var10 = true
-					var12.fetchItem(var17)
+				if not DataResolverModule.isRequestInQueueOrInFlight(CurrentUserId21) then
+					v1 = if SessionId == "" then nil else SessionId
+					Flag = true
+					DataResolverModule.fetchItem(CurrentUserId21)
 				end
 			end
-			local var20 = if p4 then p4.sessionId else nil
-			var11 = if var20 ~= "" then nil else var20
+			local SessionId = if p4 then p4.sessionId else nil
+			v1 = if SessionId == "" then nil else SessionId
 			
-			return var12.getAndFetchItem(var15)
+			return DataResolverModule.getAndFetchItem(CurrentUserId1)
 		end,
-		fetchMoreFriendsRequests = function(p4)
-			-- upvalues: localUserIdStore (copy), getLocalPlayerUserId (copy), var12 (ref), dataStatus (copy), var11 (write)
-			local var15
-			local currentUserId = localUserIdStore.getCurrentUserId(false)
+		fetchMoreFriendsRequests = function(p4) --[[ Line: 267 ]]
+			-- upvalues: LocalUserIdStore (upval), GetLocalPlayerUserIdFunction (upval), DataResolverModule (copy), DataStatus (upval), v1 (ref)
+			local CurrentUserId = LocalUserIdStore.getCurrentUserId(false)
+			local CurrentUserId1 = nil
 			
-			if currentUserId == "" then
-				local var16 = getLocalPlayerUserId()
-				var15 = if var16 then tostring(var16) else ""
+			if CurrentUserId == "" then
+				local LocalPlayerUserId = GetLocalPlayerUserIdFunction()
+				CurrentUserId1 = if LocalPlayerUserId then tostring(LocalPlayerUserId) else ""
 			else
-				var15 = currentUserId
+				CurrentUserId1 = CurrentUserId
 			end
-			local cachedItem = var12.getCachedItem(var15)
-			local var17 = cachedItem.data(false)
+			local CachedItem = DataResolverModule.getCachedItem(CurrentUserId1)
+			local DataResult = CachedItem.data(false)
 			
-			if var17 == nil or not var17.hasMore or var17.nextPageCursor == nil then return end
-			if cachedItem.status(false) == dataStatus.NotReady then return end
-			if var12.isRequestInQueueOrInFlight(var15) then
+			if DataResult == nil or not DataResult.hasMore or DataResult.nextPageCursor == nil then return end
+			if CachedItem.status(false) == DataStatus.NotReady then return end
+			if not DataResolverModule.isRequestInQueueOrInFlight(CurrentUserId1) then
+				v1 = if p4 == "" then nil else p4
+				DataResolverModule.fetchItem(CurrentUserId1)
+				
 				return
 			end
-			var11 = if p4 ~= "" then nil else p4
-			var12.fetchItem(var15)
 		end,
-		refetchFriendRequests = function(p4)
-			-- upvalues: localUserIdStore (copy), getLocalPlayerUserId (copy), var12 (ref), var11 (write), var10 (write)
-			local var15
-			local currentUserId = localUserIdStore.getCurrentUserId(false)
+		refetchFriendRequests = function(p4) --[[ Line: 288 ]]
+			-- upvalues: LocalUserIdStore (upval), GetLocalPlayerUserIdFunction (upval), DataResolverModule (copy), v1 (ref), Flag (ref)
+			local CurrentUserId = LocalUserIdStore.getCurrentUserId(false)
+			local CurrentUserId1 = nil
 			
-			if currentUserId == "" then
-				local var16 = getLocalPlayerUserId()
-				var15 = if var16 then tostring(var16) else ""
+			if CurrentUserId == "" then
+				local LocalPlayerUserId = GetLocalPlayerUserIdFunction()
+				CurrentUserId1 = if LocalPlayerUserId then tostring(LocalPlayerUserId) else ""
 			else
-				var15 = currentUserId
+				CurrentUserId1 = CurrentUserId
 			end
-			if var12.isRequestInQueueOrInFlight(var15) then
+			if not DataResolverModule.isRequestInQueueOrInFlight(CurrentUserId1) then
+				v1 = if p4 == "" then nil else p4
+				Flag = true
+				DataResolverModule.fetchItem(CurrentUserId1)
+				
 				return
 			end
-			var11 = if p4 ~= "" then nil else p4
-			var10 = true
-			var12.fetchItem(var15)
 		end,
-		declineAllFriendRequests = function()
-			-- upvalues: requestsModule (copy), localUserIdStore (copy), getLocalPlayerUserId (copy), var7 (ref), var8 (ref)
-			return requestsModule.DeclineAllFriendRequests():andThen(function(p4)
-				-- upvalues: localUserIdStore (copy), getLocalPlayerUserId (copy), var7 (copy), var8 (copy)
-				local var15
-				local currentUserId = localUserIdStore.getCurrentUserId(false)
+		declineAllFriendRequests = function() --[[ Line: 300 ]]
+			-- upvalues: RequestsModule (upval), LocalUserIdStore (upval), GetLocalPlayerUserIdFunction (upval), DataCacheModule (copy), DataCacheModule1 (copy)
+			return RequestsModule.DeclineAllFriendRequests():andThen(function(Result) --[[ Line: 301 ]]
+				-- upvalues: LocalUserIdStore (upval), GetLocalPlayerUserIdFunction (upval), DataCacheModule (upval), DataCacheModule1 (upval)
+				local CurrentUserId = LocalUserIdStore.getCurrentUserId(false)
+				local CurrentUserId1 = nil
 				
-				if currentUserId == "" then
-					local var16 = getLocalPlayerUserId()
-					var15 = if var16 then tostring(var16) else ""
+				if CurrentUserId == "" then
+					local LocalPlayerUserId = GetLocalPlayerUserIdFunction()
+					CurrentUserId1 = if LocalPlayerUserId then tostring(LocalPlayerUserId) else ""
 				else
-					var15 = currentUserId
+					CurrentUserId1 = CurrentUserId
 				end
-				var7.replaceItem(var15, { nextPageCursor = nil, hasMore = false, requests = {} })
-				var8.replaceItem(var15, 0)
+				DataCacheModule.replaceItem(CurrentUserId1, { nextPageCursor = nil, hasMore = false, requests = {} })
+				DataCacheModule1.replaceItem(CurrentUserId1, 0)
 				
-				return p4
+				return Result
 			end)
 		end,
-		removeFriendRequestByUserId = function(p4)
-			-- upvalues: localUserIdStore (copy), getLocalPlayerUserId (copy), var12 (ref), var7 (ref)
-			local var15
-			local currentUserId = localUserIdStore.getCurrentUserId(false)
+		removeFriendRequestByUserId = function(Id) --[[ Line: 376 ]]
+			-- upvalues: LocalUserIdStore (upval), GetLocalPlayerUserIdFunction (upval), DataResolverModule (copy), DataCacheModule (copy)
+			local CurrentUserId = LocalUserIdStore.getCurrentUserId(false)
+			local CurrentUserId1 = nil
 			
-			if currentUserId == "" then
-				local var16 = getLocalPlayerUserId()
-				var15 = if var16 then tostring(var16) else ""
+			if CurrentUserId == "" then
+				local LocalPlayerUserId = GetLocalPlayerUserIdFunction()
+				CurrentUserId1 = if LocalPlayerUserId then tostring(LocalPlayerUserId) else ""
 			else
-				var15 = currentUserId
+				CurrentUserId1 = CurrentUserId
 			end
-			local var17 = var12.getCachedItem(var15).data(false)
+			local DataResult = DataResolverModule.getCachedItem(CurrentUserId1).data(false)
 			
-			if var17 == nil then return end
-			local t = {}
-			local var18 = false
+			if DataResult == nil then return end
+			local Requests = {}
+			local Flag = false
 			
-			for i, v in var17.requests do
-				if v.id == p4 then
-					var18 = true
+			for _, request in DataResult.requests do
+				if request.id == Id then
+					Flag = true
 				else
-					table.insert(t, v)
+					table.insert(Requests, request)
 				end
 			end
-			if var18 then
-				var7.replaceItem(var15, {
-					requests = t,
-					nextPageCursor = var17.nextPageCursor,
-					hasMore = var17.hasMore
+			if Flag then
+				DataCacheModule.replaceItem(CurrentUserId1, {
+					requests = Requests,
+					nextPageCursor = DataResult.nextPageCursor,
+					hasMore = DataResult.hasMore
 				})
 				
 				return
 			end
 		end,
-		appendNewUserId = function(p5)
-			-- upvalues: localUserIdStore (copy), getLocalPlayerUserId (copy), var12 (ref), var7 (ref), friendsStoreModule (copy)
-			local var19 = if p5 == nil then nil else tostring(p5)
+		appendNewUserId = function(p4) --[[ Line: 401 ]]
+			-- upvalues: LocalUserIdStore (upval), GetLocalPlayerUserIdFunction (upval), DataResolverModule (copy), DataCacheModule (copy), FriendsStoreModule (upval)
+			local Text = if p4 == nil then nil else tostring(p4)
 			
-			if not var19 then return end
-			local var20
-			local currentUserId = localUserIdStore.getCurrentUserId(false)
+			if not Text then return end
+			local CurrentUserId = LocalUserIdStore.getCurrentUserId(false)
+			local CurrentUserId1 = nil
 			
-			if currentUserId == "" then
-				local var21 = getLocalPlayerUserId()
-				var20 = if var21 then tostring(var21) else ""
+			if CurrentUserId == "" then
+				local LocalPlayerUserId = GetLocalPlayerUserIdFunction()
+				CurrentUserId1 = if LocalPlayerUserId then tostring(LocalPlayerUserId) else ""
 			else
-				var20 = currentUserId
+				CurrentUserId1 = CurrentUserId
 			end
-			local var22 = var12.getCachedItem(var20).data(false)
-			local t = { isUnseen = true, id = var19 }
+			local DataResult = DataResolverModule.getCachedItem(CurrentUserId1).data(false)
+			local config = { isUnseen = true, id = Text }
 			
-			if var22 == nil then
-				var7.replaceItem(var20, { nextPageCursor = nil, hasMore = false, requests = { t } })
+			if DataResult == nil then
+				DataCacheModule.replaceItem(CurrentUserId1, {
+					nextPageCursor = nil,
+					hasMore = false,
+					requests = { config }
+				})
 			else
-				local list = { t }
+				local Requests = { config }
 				
-				for i, v in var22.requests do
-					if v.id ~= var19 then
-						table.insert(list, v)
+				for _, request in DataResult.requests do
+					if request.id ~= Text then
+						table.insert(Requests, request)
 					end
 				end
-				var7.replaceItem(var20, {
-					requests = list,
-					nextPageCursor = var22.nextPageCursor,
-					hasMore = var22.hasMore
+				DataCacheModule.replaceItem(CurrentUserId1, {
+					requests = Requests,
+					nextPageCursor = DataResult.nextPageCursor,
+					hasMore = DataResult.hasMore
 				})
 			end
-			friendsStoreModule.get().UpdateFriendshipStatus(var19, Enum.FriendStatus.FriendRequestReceived)
+			FriendsStoreModule.get().UpdateFriendshipStatus(Text, Enum.FriendStatus.FriendRequestReceived)
 		end,
-		getFriendsRequestCount = function(p6)
-			-- upvalues: localUserIdStore (copy), getLocalPlayerUserId (copy), var13 (ref)
-			local var23
-			local currentUserId = localUserIdStore.getCurrentUserId(false)
+		getFriendsRequestCount = function(p5) --[[ Line: 336 ]]
+			-- upvalues: LocalUserIdStore (upval), GetLocalPlayerUserIdFunction (upval), DataResolverModule1 (copy)
+			local CurrentUserId = LocalUserIdStore.getCurrentUserId(false)
+			local CurrentUserId1 = nil
 			
-			if currentUserId == "" then
-				local var24 = getLocalPlayerUserId()
-				var23 = if var24 then tostring(var24) else ""
+			if CurrentUserId == "" then
+				local LocalPlayerUserId = GetLocalPlayerUserIdFunction()
+				CurrentUserId1 = if LocalPlayerUserId then tostring(LocalPlayerUserId) else ""
 			else
-				var23 = currentUserId
+				CurrentUserId1 = CurrentUserId
 			end
-			if p6 and p6.skipFetch then
-				return var13.getCachedItem(var23)
-			elseif p6 and p6.forceFetch then
-				local var25
-				local fetchItem = var13.fetchItem
-				local currentUserId_1 = localUserIdStore.getCurrentUserId(false)
+			if p5 and p5.skipFetch then
+				return DataResolverModule1.getCachedItem(CurrentUserId1)
+			end
+			if p5 and p5.forceFetch then
+				local FetchItemFunction: (any) -> () = DataResolverModule1.fetchItem
+				local CurrentUserId2 = LocalUserIdStore.getCurrentUserId(false)
+				local CurrentUserId21 = nil
 				
-				if currentUserId_1 == "" then
-					local var26 = getLocalPlayerUserId()
-					var25 = if var26 then tostring(var26) else ""
+				if CurrentUserId2 == "" then
+					local LocalPlayerUserId = GetLocalPlayerUserIdFunction()
+					CurrentUserId21 = if LocalPlayerUserId then tostring(LocalPlayerUserId) else ""
 				else
-					var25 = currentUserId_1
+					CurrentUserId21 = CurrentUserId2
 				end
-				fetchItem(var25)
+				FetchItemFunction(CurrentUserId21)
 			end
-			return var13.getAndFetchItem(var23)
+			return DataResolverModule1.getAndFetchItem(CurrentUserId1)
 		end,
-		refetchFriendRequestCount = function()
-			-- upvalues: var13 (ref), localUserIdStore (copy), getLocalPlayerUserId (copy)
-			local var23
-			local fetchItem = var13.fetchItem
-			local currentUserId = localUserIdStore.getCurrentUserId(false)
+		refetchFriendRequestCount = function() --[[ Line: 332 ]]
+			-- upvalues: DataResolverModule1 (copy), LocalUserIdStore (upval), GetLocalPlayerUserIdFunction (upval)
+			local FetchItemFunction: (any) -> () = DataResolverModule1.fetchItem
+			local CurrentUserId = LocalUserIdStore.getCurrentUserId(false)
+			local CurrentUserId1 = nil
 			
-			if currentUserId == "" then
-				local var24 = getLocalPlayerUserId()
-				var23 = if var24 then tostring(var24) else ""
+			if CurrentUserId == "" then
+				local LocalPlayerUserId = GetLocalPlayerUserIdFunction()
+				CurrentUserId1 = if LocalPlayerUserId then tostring(LocalPlayerUserId) else ""
 			else
-				var23 = currentUserId
+				CurrentUserId1 = CurrentUserId
 			end
-			fetchItem(var23)
+			FetchItemFunction(CurrentUserId1)
 		end,
-		getNewFriendsRequestCount = function(p6)
-			-- upvalues: localUserIdStore (copy), getLocalPlayerUserId (copy), var14 (ref)
-			local var23
-			local currentUserId = localUserIdStore.getCurrentUserId(false)
+		getNewFriendsRequestCount = function(p5) --[[ Line: 352 ]]
+			-- upvalues: LocalUserIdStore (upval), GetLocalPlayerUserIdFunction (upval), DataResolverModule2 (copy)
+			local CurrentUserId = LocalUserIdStore.getCurrentUserId(false)
+			local CurrentUserId1 = nil
 			
-			if currentUserId == "" then
-				local var24 = getLocalPlayerUserId()
-				var23 = if var24 then tostring(var24) else ""
+			if CurrentUserId == "" then
+				local LocalPlayerUserId = GetLocalPlayerUserIdFunction()
+				CurrentUserId1 = if LocalPlayerUserId then tostring(LocalPlayerUserId) else ""
 			else
-				var23 = currentUserId
+				CurrentUserId1 = CurrentUserId
 			end
-			return if p6 and p6.skipFetch then var14.getCachedItem(var23) else var14.getAndFetchItem(var23)
+			return if p5 and p5.skipFetch then DataResolverModule2.getCachedItem(CurrentUserId1) else DataResolverModule2.getAndFetchItem(CurrentUserId1)
 		end,
-		refetchNewFriendRequestCount = function()
-			-- upvalues: var14 (ref), localUserIdStore (copy), getLocalPlayerUserId (copy)
-			local var23
-			local fetchItem = var14.fetchItem
-			local currentUserId = localUserIdStore.getCurrentUserId(false)
+		refetchNewFriendRequestCount = function() --[[ Line: 362 ]]
+			-- upvalues: DataResolverModule2 (copy), LocalUserIdStore (upval), GetLocalPlayerUserIdFunction (upval)
+			local FetchItemFunction: (any) -> () = DataResolverModule2.fetchItem
+			local CurrentUserId = LocalUserIdStore.getCurrentUserId(false)
+			local CurrentUserId1 = nil
 			
-			if currentUserId == "" then
-				local var24 = getLocalPlayerUserId()
-				var23 = if var24 then tostring(var24) else ""
+			if CurrentUserId == "" then
+				local LocalPlayerUserId = GetLocalPlayerUserIdFunction()
+				CurrentUserId1 = if LocalPlayerUserId then tostring(LocalPlayerUserId) else ""
 			else
-				var23 = currentUserId
+				CurrentUserId1 = CurrentUserId
 			end
-			fetchItem(var23)
+			FetchItemFunction(CurrentUserId1)
 		end,
-		clearNewFriendRequest = function()
-			-- upvalues: requestsModule (copy), var9 (ref), localUserIdStore (copy), getLocalPlayerUserId (copy)
-			return requestsModule.ClearNewFriendRequests():andThen(function()
-				-- upvalues: var9 (copy), localUserIdStore (copy), getLocalPlayerUserId (copy)
-				local var23
-				local replaceItem = var9.replaceItem
-				local currentUserId = localUserIdStore.getCurrentUserId(false)
+		clearNewFriendRequest = function() --[[ Line: 370 ]]
+			-- upvalues: RequestsModule (upval), DataCacheModule2 (copy), LocalUserIdStore (upval), GetLocalPlayerUserIdFunction (upval)
+			return RequestsModule.ClearNewFriendRequests():andThen(function() --[[ Line: 371 ]]
+				-- upvalues: DataCacheModule2 (upval), LocalUserIdStore (upval), GetLocalPlayerUserIdFunction (upval)
+				local ReplaceItemFunction: (any, any) -> () = DataCacheModule2.replaceItem
+				local CurrentUserId = LocalUserIdStore.getCurrentUserId(false)
+				local CurrentUserId1 = nil
 				
-				if currentUserId == "" then
-					local var24 = getLocalPlayerUserId()
-					var23 = if var24 then tostring(var24) else ""
+				if CurrentUserId == "" then
+					local LocalPlayerUserId = GetLocalPlayerUserIdFunction()
+					CurrentUserId1 = if LocalPlayerUserId then tostring(LocalPlayerUserId) else ""
 				else
-					var23 = currentUserId
+					CurrentUserId1 = CurrentUserId
 				end
-				replaceItem(var23, 0)
+				ReplaceItemFunction(CurrentUserId1, 0)
 			end)
 		end,
-		clearNewFriendRequestCount = function()
-			-- upvalues: var9 (ref), localUserIdStore (copy), getLocalPlayerUserId (copy)
-			local var23
-			local replaceItem = var9.replaceItem
-			local currentUserId = localUserIdStore.getCurrentUserId(false)
+		clearNewFriendRequestCount = function() --[[ Line: 366 ]]
+			-- upvalues: DataCacheModule2 (copy), LocalUserIdStore (upval), GetLocalPlayerUserIdFunction (upval)
+			local ReplaceItemFunction: (any, any) -> () = DataCacheModule2.replaceItem
+			local CurrentUserId = LocalUserIdStore.getCurrentUserId(false)
+			local CurrentUserId1 = nil
 			
-			if currentUserId == "" then
-				local var24 = getLocalPlayerUserId()
-				var23 = if var24 then tostring(var24) else ""
+			if CurrentUserId == "" then
+				local LocalPlayerUserId = GetLocalPlayerUserIdFunction()
+				CurrentUserId1 = if LocalPlayerUserId then tostring(LocalPlayerUserId) else ""
 			else
-				var23 = currentUserId
+				CurrentUserId1 = CurrentUserId
 			end
-			replaceItem(var23, 0)
+			ReplaceItemFunction(CurrentUserId1, 0)
 		end,
-		clear = function()
-			-- upvalues: var12 (ref), var13 (ref), var14 (ref)
-			var12.clear()
-			var13.clear()
-			var14.clear()
+		clear = function() --[[ Line: 440 ]]
+			-- upvalues: DataResolverModule (copy), DataResolverModule1 (copy), DataResolverModule2 (copy)
+			DataResolverModule.clear()
+			DataResolverModule1.clear()
+			DataResolverModule2.clear()
 		end,
-		dispose = function()
-			-- upvalues: var12 (ref), var13 (ref), var14 (ref)
-			var12.dispose()
-			var13.dispose()
-			var14.dispose()
+		dispose = function() --[[ Line: 446 ]]
+			-- upvalues: DataResolverModule (copy), DataResolverModule1 (copy), DataResolverModule2 (copy)
+			DataResolverModule.dispose()
+			DataResolverModule1.dispose()
+			DataResolverModule2.dispose()
 		end
 	}
 end

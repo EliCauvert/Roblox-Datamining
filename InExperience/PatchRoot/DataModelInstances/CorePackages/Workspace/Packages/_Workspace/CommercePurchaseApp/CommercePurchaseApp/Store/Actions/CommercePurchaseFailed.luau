@@ -1,6 +1,6 @@
-﻿local commercePurchaseApp = script:FindFirstAncestor("CommercePurchaseApp")
-local _ = require(commercePurchaseApp.Enums.ErrorCodeEnum)
+﻿local CommercePurchaseApp = script:FindFirstAncestor("CommercePurchaseApp")
+local _ = require(CommercePurchaseApp.Enums.ErrorCodeEnum)
 
-return require(commercePurchaseApp.Parent.Rodux).makeActionCreator("CommercePurchaseFailed", function(p1)
-	return { errorCode = p1 }
+return require(CommercePurchaseApp.Parent.Rodux).makeActionCreator("CommercePurchaseFailed", function(ErrorCode) --[[ Line: 12 ]]
+	return { errorCode = ErrorCode }
 end)

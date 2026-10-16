@@ -1,24 +1,24 @@
-﻿local signalsExperimentalModule = require(script.Parent.Parent.SignalsExperimental)
+﻿local SignalsExperimentalModule = require(script.Parent.Parent.SignalsExperimental)
 
 return {
-	create = function()
+	create = function() --[[ Line: 13 ]]
 		return {}
 	end,
-	register = function(p1, p2, p3)
-		if not p1[p2] then
-			p1[p2] = {}
+	register = function(p1, Key, p2) --[[ Line: 18 ]]
+		if not p1[Key] then
+			p1[Key] = {}
 		end
-		table.insert(p1[p2], p3)
+		table.insert(p1[Key], p2)
 	end,
-	handleAction = function(p1, p2)
-		-- upvalues: signalsExperimentalModule (ref)
-		local type = p1[p2.type]
+	handleAction = function(p1, p2) --[[ Line: 28 ]]
+		-- upvalues: SignalsExperimentalModule (copy)
+		local v1 = p1[p2.type]
 		
-		if type and #type > 0 then
-			signalsExperimentalModule.batch(function()
-				-- upvalues: type (ref), p2 (ref)
-				for i, v in type do
-					v(p2)
+		if v1 and #v1 > 0 then
+			SignalsExperimentalModule.batch(function() --[[ Line: 35 ]]
+				-- upvalues: v1 (copy), p2 (copy)
+				for _, value in v1 do
+					value(p2)
 				end
 			end)
 			

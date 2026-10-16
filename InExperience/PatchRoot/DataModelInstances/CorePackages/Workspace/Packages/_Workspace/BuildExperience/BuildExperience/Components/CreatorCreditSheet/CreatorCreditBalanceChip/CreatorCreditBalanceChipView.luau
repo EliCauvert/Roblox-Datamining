@@ -1,19 +1,19 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local chip = foundationModule.Chip
-local chipSize = foundationModule.Enums.ChipSize
-local chipVariant = foundationModule.Enums.ChipVariant
-local iconName = foundationModule.Enums.IconName
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local Chip = FoundationModule.Chip
+local ChipSize = FoundationModule.Enums.ChipSize
+local ChipVariant = FoundationModule.Enums.ChipVariant
+local IconName = FoundationModule.Enums.IconName
 
-return function(p1)
-	-- upvalues: reactModule (ref), chip (ref), iconName (ref), chipVariant (ref), chipSize (ref)
-	return if p1.balanceText == nil then nil else reactModule.createElement(chip, {
+return function(p1) --[[ Line: 18 | Named "CreatorCreditBalanceChipView" ]]
+	-- upvalues: ReactModule (copy), Chip (copy), IconName (copy), ChipVariant (copy), ChipSize (copy)
+	return if p1.balanceText == nil then nil else ReactModule.createElement(Chip, {
 		testId = "creator-credit-balance-chip",
 		text = p1.balanceText,
-		leading = iconName.Robux,
-		variant = chipVariant.Standard,
-		size = chipSize.Medium,
+		leading = IconName.Robux,
+		variant = ChipVariant.Standard,
+		size = ChipSize.Medium,
 		onActivated = p1.onActivated
 	})
 end

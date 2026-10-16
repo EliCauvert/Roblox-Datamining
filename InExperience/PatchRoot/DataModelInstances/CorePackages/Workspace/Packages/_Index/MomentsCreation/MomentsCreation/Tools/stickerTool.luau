@@ -1,44 +1,41 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local parent = momentsCreation.Parent
-local builderIconsModule = require(parent.BuilderIcons)
-local momentsCommonModule = require(parent.MomentsCommon)
-local reactModule = require(parent.React)
-local creationFlowStateModule = require(momentsCreation.Enums.CreationFlowState)
-local _ = require(momentsCreation.Types.CreationFlowTypes)
-local createEditSessionModule = require(momentsCreation.Stores.createEditSession)
-local stickerOverlayControlsModule = require(momentsCreation.Components.StickerOverlay.StickerOverlayControls)
-local stickerOverlayLayerModule = require(momentsCreation.Components.StickerOverlay.StickerOverlayLayer)
-local eventNames = momentsCommonModule.Analytics.EventNames
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local Parent = MomentsCreation.Parent
+local ReactModule = require(Parent.React)
+local _ = require(MomentsCreation.Types.CreationFlowTypes)
+local CreateEditSessionModule = require(MomentsCreation.Stores.createEditSession)
+local StickerOverlayControlsModule = require(MomentsCreation.Components.StickerOverlay.StickerOverlayControls)
+local StickerOverlayLayerModule = require(MomentsCreation.Components.StickerOverlay.StickerOverlayLayer)
+local EventNames = require(Parent.MomentsCommon).Analytics.EventNames
 
 return {
 	kind = "sticker",
 	presentation = "Step",
 	zIndex = 3,
-	step = creationFlowStateModule.StickerOverlay,
+	step = require(MomentsCreation.Enums.CreationFlowState).StickerOverlay,
 	cta = {
 		localizationKey = "Feature.Moments.Action.AddSticker",
 		order = 4,
-		icon = builderIconsModule.Icon.SquareFaceEmoji,
-		analyticsEvent = eventNames.EditingFlowStickerOverlayButtonPressed,
-		commitAnalyticsEvent = eventNames.EditingFlowStickerOverlayDoneButtonPressed,
-		cancelAnalyticsEvent = eventNames.EditingFlowStickerOverlayBackButtonPressed
+		icon = require(Parent.BuilderIcons).Icon.SquareFaceEmoji,
+		analyticsEvent = EventNames.EditingFlowStickerOverlayButtonPressed,
+		commitAnalyticsEvent = EventNames.EditingFlowStickerOverlayDoneButtonPressed,
+		cancelAnalyticsEvent = EventNames.EditingFlowStickerOverlayBackButtonPressed
 	},
 	supportedCaptureTypes = { Enum.CaptureType.Video },
-	createSession = function()
-		-- upvalues: createEditSessionModule (ref)
-		return createEditSessionModule()
+	createSession = function() --[[ Line: 40 ]]
+		-- upvalues: CreateEditSessionModule (copy)
+		return CreateEditSessionModule()
 	end,
-	renderEditor = function(p1)
-		-- upvalues: reactModule (ref), stickerOverlayControlsModule (ref)
-		return reactModule.createElement(stickerOverlayControlsModule, { layoutOrder = 2, controller = p1 })
+	renderEditor = function(Controller) --[[ Line: 43 ]]
+		-- upvalues: ReactModule (copy), StickerOverlayControlsModule (copy)
+		return ReactModule.createElement(StickerOverlayControlsModule, { layoutOrder = 2, controller = Controller })
 	end,
-	renderPreviewLayer = function(p1, p2)
-		-- upvalues: reactModule (ref), stickerOverlayLayerModule (ref)
-		return reactModule.createElement(stickerOverlayLayerModule, { zIndex = 3, controller = p1, ctx = p2 })
+	renderPreviewLayer = function(Controller, Ctx) --[[ Line: 48 ]]
+		-- upvalues: ReactModule (copy), StickerOverlayLayerModule (copy)
+		return ReactModule.createElement(StickerOverlayLayerModule, { zIndex = 3, controller = Controller, ctx = Ctx })
 	end,
-	toEdits = function(p1)
-		local var1 = p1 and p1[1]
+	toEdits = function(Entry) --[[ Line: 51 ]]
+		local Entry1 = Entry and Entry[1]
 		
-		return if var1 == nil or var1.stickerURI == nil or var1.stickerURI == "" then {} else { stickerOverlays = p1 }
+		return if Entry1 == nil or Entry1.stickerURI == nil or Entry1.stickerURI == "" then {} else { stickerOverlays = Entry }
 	end
 }

@@ -1,18 +1,18 @@
-﻿local bulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
-local parent = bulkPurchaseApp.Parent
-local reactModule = require(parent.React)
-local interactiveAlert = require(parent.UIBlox).App.Dialog.Alert.InteractiveAlert
-local useScreenSize = require(parent.EconomyCommonCoreScriptHooks).useScreenSize
-local useCloseOnEscapeEffectModule = require(bulkPurchaseApp.Hooks.useCloseOnEscapeEffect)
-local fFlagBulkPurchaseCloseOnEscapeModule = require(bulkPurchaseApp.Flags.FFlagBulkPurchaseCloseOnEscape)
-local scrimModule = require(script.Parent.Scrim)
+﻿local BulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
+local Parent = BulkPurchaseApp.Parent
+local ReactModule = require(Parent.React)
+local InteractiveAlert = require(Parent.UIBlox).App.Dialog.Alert.InteractiveAlert
+local UseScreenSizeFunction = require(Parent.EconomyCommonCoreScriptHooks).useScreenSize
+local UseCloseOnEscapeEffectModule = require(BulkPurchaseApp.Hooks.useCloseOnEscapeEffect)
+local FFlagBulkPurchaseCloseOnEscapeModule = require(BulkPurchaseApp.Flags.FFlagBulkPurchaseCloseOnEscape)
+local ScrimModule = require(script.Parent.Scrim)
 
-return function(p1)
-	-- upvalues: fFlagBulkPurchaseCloseOnEscapeModule (ref), useCloseOnEscapeEffectModule (ref), useScreenSize (ref), reactModule (ref), scrimModule (ref), interactiveAlert (ref)
-	if fFlagBulkPurchaseCloseOnEscapeModule then
-		useCloseOnEscapeEffectModule("BulkPurchaseCloseAlertPrompt", p1.onDismiss)
+return function(p1) --[[ Line: 22 | Named "AlertPrompt" ]]
+	-- upvalues: FFlagBulkPurchaseCloseOnEscapeModule (copy), UseCloseOnEscapeEffectModule (copy), UseScreenSizeFunction (copy), ReactModule (copy), ScrimModule (copy), InteractiveAlert (copy)
+	if FFlagBulkPurchaseCloseOnEscapeModule then
+		UseCloseOnEscapeEffectModule("BulkPurchaseCloseAlertPrompt", p1.onDismiss)
 	end
-	return reactModule.createElement(scrimModule, {}, reactModule.createElement(interactiveAlert, {
+	return ReactModule.createElement(ScrimModule, {}, ReactModule.createElement(InteractiveAlert, {
 		title = p1.title,
 		bodyText = p1.bodyText,
 		buttonStackInfo = {
@@ -24,7 +24,7 @@ return function(p1)
 			}
 		},
 		position = UDim2.fromScale(0.5, 0.5),
-		screenSize = useScreenSize(),
+		screenSize = UseScreenSizeFunction(),
 		middleContent = p1.middleContent
 	}))
 end

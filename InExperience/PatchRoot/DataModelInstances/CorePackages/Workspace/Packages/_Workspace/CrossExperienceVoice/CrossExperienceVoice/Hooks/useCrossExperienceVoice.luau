@@ -1,234 +1,235 @@
-﻿local crossExperienceVoice = script:FindFirstAncestor("CrossExperienceVoice")
-local dependenciesModule = require(crossExperienceVoice.dependencies)
-local playersService = game:GetService("Players")
-local experienceService = dependenciesModule.ExperienceService.ExperienceService
-local crossExperience = dependenciesModule.CrossExperience
-local react = dependenciesModule.React
-local roactUtils = dependenciesModule.RoactUtils
-local useStore = roactUtils.Hooks.RoactRodux.useStore
-local useDispatch = roactUtils.Hooks.RoactRodux.useDispatch
-local sharedFlags = dependenciesModule.SharedFlags
-local getFFlagEnableCrossExpVoiceMemoryCheck = sharedFlags.getFFlagEnableCrossExpVoiceMemoryCheck
-local fIntPartyVoiceJoinRequestPulseCheckTimeout = sharedFlags.FIntPartyVoiceJoinRequestPulseCheckTimeout
-local cevReadinessSyncEngineFeature = game:GetEngineFeature("CevReadinessSync")
-local voiceStatusChanged = crossExperience.Actions.VoiceStatusChanged
-local useEffect = react.useEffect
-local loggerModule = require(crossExperienceVoice.Logger)
-local default = require(crossExperienceVoice.CrossExperienceVoiceManager).default
-local default_1 = require(crossExperienceVoice.CrossExperienceVoiceAnalytics).default
-local flagsModule = require(crossExperienceVoice.Flags)
-local fFlagFireErrorRCCTimeoutSignal = flagsModule.FFlagFireErrorRCCTimeoutSignal
-local fFlagEnableCEVForceInitialize = flagsModule.FFlagEnableCEVForceInitialize
+﻿local CrossExperienceVoice = script:FindFirstAncestor("CrossExperienceVoice")
+local DependenciesModule = require(CrossExperienceVoice.dependencies)
+local Players = game:GetService("Players")
+local ExperienceService = DependenciesModule.ExperienceService.ExperienceService
+local CrossExperience = DependenciesModule.CrossExperience
+local React = DependenciesModule.React
+local RoactUtils = DependenciesModule.RoactUtils
+local UseStoreFunction = RoactUtils.Hooks.RoactRodux.useStore
+local UseDispatchFunction = RoactUtils.Hooks.RoactRodux.useDispatch
+local SharedFlags = DependenciesModule.SharedFlags
+local GetFFlagEnableCrossExpVoiceMemoryCheckFunction = SharedFlags.getFFlagEnableCrossExpVoiceMemoryCheck
+local FIntPartyVoiceJoinRequestPulseCheckTimeout = SharedFlags.FIntPartyVoiceJoinRequestPulseCheckTimeout
+local CevReadinessSyncEngineFeature = game:GetEngineFeature("CevReadinessSync")
+local VoiceStatusChangedFunction = CrossExperience.Actions.VoiceStatusChanged
+local UseEffectFunction = React.useEffect
+local LoggerModule = require(CrossExperienceVoice.Logger)
+local Default = require(CrossExperienceVoice.CrossExperienceVoiceManager).default
+local Default1 = require(CrossExperienceVoice.CrossExperienceVoiceAnalytics).default
+local FlagsModule = require(CrossExperienceVoice.Flags)
+local FFlagFireErrorRCCTimeoutSignal = FlagsModule.FFlagFireErrorRCCTimeoutSignal
+local FFlagEnableCEVForceInitialize = FlagsModule.FFlagEnableCEVForceInitialize
 
-local _ = function()
-	-- upvalues: crossExperience (ref)
-	return if game.PlaceId == 0 then crossExperience.Constants.EXPERIENCE_TYPE_LUAAPP else crossExperience.Constants.EXPERIENCE_TYPE_UGC
+local function _() --[[ Line: 31 ]]
+	-- upvalues: CrossExperience (copy)
+	return if game.PlaceId == 0 then CrossExperience.Constants.EXPERIENCE_TYPE_LUAAPP else CrossExperience.Constants.EXPERIENCE_TYPE_UGC
 end
 
-return function(vectorA)
-	-- upvalues: useStore (ref), useDispatch (ref), react (ref), crossExperience (ref), loggerModule (ref), default (ref), voiceStatusChanged (ref), default_1 (ref), playersService (ref), fIntPartyVoiceJoinRequestPulseCheckTimeout (ref), fFlagFireErrorRCCTimeoutSignal (ref), getFFlagEnableCrossExpVoiceMemoryCheck (ref), cevReadinessSyncEngineFeature (ref), experienceService (ref), fFlagEnableCEVForceInitialize (ref), useEffect (ref)
-	local var1 = useStore()
-	local var2 = useDispatch()
-	local var3 = react.useRef(nil)
-	local var4 = react.useRef(nil)
-	local var5 = react.useRef(nil)
-	local var6 = react.useRef(nil)
-	local var7 = react.useRef(nil)
-	local var8 = react.useRef(nil)
-	local var9 = react.useRef(nil)
-	local var10 = react.useRef(nil)
-	local var11 = react.useRef(nil)
-	local var12 = react.useMemo(function()
-		-- upvalues: crossExperience (copy)
-		return crossExperience.EventManager.new(if game.PlaceId == 0 then crossExperience.Constants.EXPERIENCE_TYPE_LUAAPP else crossExperience.Constants.EXPERIENCE_TYPE_UGC, true)
+return function(p1) --[[ Line: 42 | Named "useCrossExperienceVoice" ]]
+	-- upvalues: UseStoreFunction (copy), UseDispatchFunction (copy), React (copy), CrossExperience (copy), LoggerModule (copy), Default (copy), VoiceStatusChangedFunction (copy), Default1 (copy), Players (copy), FIntPartyVoiceJoinRequestPulseCheckTimeout (copy), FFlagFireErrorRCCTimeoutSignal (copy), GetFFlagEnableCrossExpVoiceMemoryCheckFunction (copy), CevReadinessSyncEngineFeature (copy), ExperienceService (copy), FFlagEnableCEVForceInitialize (copy), UseEffectFunction (copy)
+	local UseStoreResult = UseStoreFunction()
+	local UseDispatchResult = UseDispatchFunction()
+	local UseRefResult = React.useRef(nil)
+	local UseRefResult1 = React.useRef(nil)
+	local UseRefResult2 = React.useRef(nil)
+	local UseRefResult3 = React.useRef(nil)
+	local UseRefResult4 = React.useRef(nil)
+	local UseRefResult5 = React.useRef(nil)
+	local UseRefResult6 = React.useRef(nil)
+	local UseRefResult7 = React.useRef(nil)
+	local UseRefResult8 = React.useRef(nil)
+	local UseMemoResult = React.useMemo(function() --[[ Line: 55 ]]
+		-- upvalues: CrossExperience (upval)
+		return CrossExperience.EventManager.new(if game.PlaceId == 0 then CrossExperience.Constants.EXPERIENCE_TYPE_LUAAPP else CrossExperience.Constants.EXPERIENCE_TYPE_UGC, true)
 	end, {})
-	local var13 = react.useRef(false)
+	local UseRefResult9 = React.useRef(false)
 	
-	local _ = function()
-		-- upvalues: var13 (ref), var12 (ref), var1 (ref), loggerModule (copy)
-		if var13.current then
-			return
-		end
-		var13.current = true
-		var12:subscribe(var1, loggerModule)
-	end
-	
-	local _ = function()
-		-- upvalues: var13 (ref), var12 (ref), var1 (ref), loggerModule (copy)
-		if var13.current then
-			var13.current = false
-			var12:unsubscribe(var1, loggerModule)
+	local function _() --[[ Line: 61 ]]
+		-- upvalues: UseRefResult9 (copy), UseMemoResult (copy), UseStoreResult (copy), LoggerModule (upval)
+		if not UseRefResult9.current then
+			UseRefResult9.current = true
+			UseMemoResult:subscribe(UseStoreResult, LoggerModule)
 			
 			return
 		end
 	end
 	
-	local var14 = function()
-		-- upvalues: var13 (ref), var12 (ref), var1 (ref), loggerModule (copy), var4 (ref), var5 (ref), var6 (ref), var9 (ref), var10 (ref), var11 (ref), var3 (ref)
-		if var13.current then
-			var13.current = false
-			var12:unsubscribe(var1, loggerModule)
-		end
-		if var4.current then
-			var4.current:Disconnect()
-			var4.current = nil
-		end
-		if var5.current then
-			var5.current:Disconnect()
-			var5.current = nil
-		end
-		if var6.current then
-			var6.current:Disconnect()
-			var6.current = nil
-		end
-		if var9.current then
-			var9.current:Disconnect()
-			var9.current = nil
-		end
-		if var10.current then
-			var10.current:Disconnect()
-			var10.current = nil
-		end
-		if var11.current then
-			var11.current:Disconnect()
-			var11.current = nil
-		end
-		if var3.current then
-			var3.current:Disconnect()
-			var3.current = nil
+	local _ = function() --[[ Line: 71 ]]
+		-- upvalues: UseRefResult9 (copy), UseMemoResult (copy), UseStoreResult (copy), LoggerModule (upval)
+		if UseRefResult9.current then
+			UseRefResult9.current = false
+			UseMemoResult:unsubscribe(UseStoreResult, LoggerModule)
+			
+			return
 		end
 	end
 	
-	local var15 = function()
-		-- upvalues: var9 (ref), default (copy), var2 (ref), voiceStatusChanged (copy), crossExperience (copy), default_1 (copy), playersService (copy), fIntPartyVoiceJoinRequestPulseCheckTimeout (copy), var3 (ref), var1 (ref), fFlagFireErrorRCCTimeoutSignal (copy), var12 (ref), vectorA (ref), var10 (ref), getFFlagEnableCrossExpVoiceMemoryCheck (copy), var11 (ref), var4 (ref), var13 (ref), loggerModule (copy), cevReadinessSyncEngineFeature (copy), var5 (ref), var6 (ref), experienceService (copy), var7 (ref), var8 (ref), fFlagEnableCEVForceInitialize (copy)
-		var9.current = default.JoinRequested.Event:Connect(function()
-			-- upvalues: var2 (copy), voiceStatusChanged (copy), crossExperience (copy), default_1 (copy), playersService (copy)
-			var2(voiceStatusChanged({
-				status = crossExperience.Constants.VOICE_STATUS.RCC_CONNECTING
+	local function v32() --[[ Line: 80 ]]
+		-- upvalues: UseRefResult9 (copy), UseMemoResult (copy), UseStoreResult (copy), LoggerModule (upval), UseRefResult1 (copy), UseRefResult2 (copy), UseRefResult3 (copy), UseRefResult6 (copy), UseRefResult7 (copy), UseRefResult8 (copy), UseRefResult (copy)
+		if UseRefResult9.current then
+			UseRefResult9.current = false
+			UseMemoResult:unsubscribe(UseStoreResult, LoggerModule)
+		end
+		if UseRefResult1.current then
+			UseRefResult1.current:Disconnect()
+			UseRefResult1.current = nil
+		end
+		if UseRefResult2.current then
+			UseRefResult2.current:Disconnect()
+			UseRefResult2.current = nil
+		end
+		if UseRefResult3.current then
+			UseRefResult3.current:Disconnect()
+			UseRefResult3.current = nil
+		end
+		if UseRefResult6.current then
+			UseRefResult6.current:Disconnect()
+			UseRefResult6.current = nil
+		end
+		if UseRefResult7.current then
+			UseRefResult7.current:Disconnect()
+			UseRefResult7.current = nil
+		end
+		if UseRefResult8.current then
+			UseRefResult8.current:Disconnect()
+			UseRefResult8.current = nil
+		end
+		if UseRefResult.current then
+			UseRefResult.current:Disconnect()
+			UseRefResult.current = nil
+		end
+	end
+	
+	local function v33() --[[ Line: 112 ]]
+		-- upvalues: UseRefResult6 (copy), Default (upval), UseDispatchResult (copy), VoiceStatusChangedFunction (upval), CrossExperience (upval), Default1 (upval), Players (upval), FIntPartyVoiceJoinRequestPulseCheckTimeout (upval), UseRefResult (copy), UseStoreResult (copy), FFlagFireErrorRCCTimeoutSignal (upval), UseMemoResult (copy), p1 (copy), UseRefResult7 (copy), GetFFlagEnableCrossExpVoiceMemoryCheckFunction (upval), UseRefResult8 (copy), UseRefResult1 (copy), UseRefResult9 (copy), LoggerModule (upval), CevReadinessSyncEngineFeature (upval), UseRefResult2 (copy), UseRefResult3 (copy), ExperienceService (upval), UseRefResult4 (copy), UseRefResult5 (copy), FFlagEnableCEVForceInitialize (upval)
+		UseRefResult6.current = Default.JoinRequested.Event:Connect(function() --[[ Line: 113 ]]
+			-- upvalues: UseDispatchResult (upval), VoiceStatusChangedFunction (upval), CrossExperience (upval), Default1 (upval), Players (upval)
+			UseDispatchResult(VoiceStatusChangedFunction({
+				status = CrossExperience.Constants.VOICE_STATUS.RCC_CONNECTING
 			}))
-			default_1:logPartyVoiceStatusChanged({
+			Default1:logPartyVoiceStatusChanged({
 				voiceChannelId = nil,
 				voiceSessionId = nil,
-				status = crossExperience.Constants.VOICE_STATUS.RCC_CONNECTING,
-				userId = if playersService.LocalPlayer then tostring(playersService.LocalPlayer.UserId) else ""
+				status = CrossExperience.Constants.VOICE_STATUS.RCC_CONNECTING,
+				userId = if Players.LocalPlayer then tostring(Players.LocalPlayer.UserId) else ""
 			})
 		end)
 		
-		if fIntPartyVoiceJoinRequestPulseCheckTimeout > 0 then
-			var3.current = default.JoinRequestPulseCheck.Event:Connect(function()
-				-- upvalues: var1 (copy), crossExperience (copy), fFlagFireErrorRCCTimeoutSignal (copy), var12 (copy), playersService (copy), var2 (copy), voiceStatusChanged (copy), vectorA (copy), default (copy)
-				local state = var1:getState()
+		if FIntPartyVoiceJoinRequestPulseCheckTimeout > 0 then
+			UseRefResult.current = Default.JoinRequestPulseCheck.Event:Connect(function() --[[ Line: 128 ]]
+				-- upvalues: UseStoreResult (upval), CrossExperience (upval), FFlagFireErrorRCCTimeoutSignal (upval), UseMemoResult (upval), Players (upval), UseDispatchResult (upval), VoiceStatusChangedFunction (upval), p1 (upval), Default (upval)
+				local State = UseStoreResult:getState()
 				
-				if state and state.Squad and (state.Squad.CrossExperienceVoice and state.Squad.CrossExperienceVoice.Experience.voiceStatus == crossExperience.Constants.VOICE_STATUS.RCC_CONNECTING) then
-					if fFlagFireErrorRCCTimeoutSignal then
-						var12:notify(crossExperience.Constants.EVENTS.PARTY_VOICE_STATUS_CHANGED, {
-							status = crossExperience.Constants.VOICE_STATUS.ERROR_RCC_TIMEOUT,
-							userId = if playersService.LocalPlayer then tostring(playersService.LocalPlayer.UserId) else ""
+				if State and State.Squad and State.Squad.CrossExperienceVoice and State.Squad.CrossExperienceVoice.Experience.voiceStatus == CrossExperience.Constants.VOICE_STATUS.RCC_CONNECTING then
+					if FFlagFireErrorRCCTimeoutSignal then
+						UseMemoResult:notify(CrossExperience.Constants.EVENTS.PARTY_VOICE_STATUS_CHANGED, {
+							status = CrossExperience.Constants.VOICE_STATUS.ERROR_RCC_TIMEOUT,
+							userId = if Players.LocalPlayer then tostring(Players.LocalPlayer.UserId) else ""
 						})
 						
 						return
 					end
-					var2(voiceStatusChanged({
-						status = crossExperience.Constants.VOICE_STATUS.ERROR_RCC_TIMEOUT
+					UseDispatchResult(VoiceStatusChangedFunction({
+						status = CrossExperience.Constants.VOICE_STATUS.ERROR_RCC_TIMEOUT
 					}))
 					
-					if vectorA and vectorA.handleRCCConnectionTimeout then
-						default:logPartyVoiceTimeout()
-						default:leave()
+					if p1 and p1.handleRCCConnectionTimeout then
+						Default:logPartyVoiceTimeout()
+						Default:leave()
 					end
 				end
 			end)
 		end
-		var10.current = default.JoinRequestSubmitted.Event:Connect(function(p1)
-			-- upvalues: var2 (copy), voiceStatusChanged (copy), crossExperience (copy), default_1 (copy), playersService (copy)
-			if not p1 then
-				var2(voiceStatusChanged({
-					status = crossExperience.Constants.VOICE_STATUS.ERROR_START_BACKGROUND_DM
+		UseRefResult7.current = Default.JoinRequestSubmitted.Event:Connect(function(p2) --[[ Line: 157 ]]
+			-- upvalues: UseDispatchResult (upval), VoiceStatusChangedFunction (upval), CrossExperience (upval), Default1 (upval), Players (upval)
+			if not p2 then
+				UseDispatchResult(VoiceStatusChangedFunction({
+					status = CrossExperience.Constants.VOICE_STATUS.ERROR_START_BACKGROUND_DM
 				}))
-				default_1:logPartyVoiceStatusChanged({
+				Default1:logPartyVoiceStatusChanged({
 					voiceChannelId = nil,
 					voiceSessionId = nil,
-					status = crossExperience.Constants.VOICE_STATUS.ERROR_START_BACKGROUND_DM,
-					userId = if playersService.LocalPlayer then tostring(playersService.LocalPlayer.UserId) else ""
+					status = CrossExperience.Constants.VOICE_STATUS.ERROR_START_BACKGROUND_DM,
+					userId = if Players.LocalPlayer then tostring(Players.LocalPlayer.UserId) else ""
 				})
 			end
 		end)
 		
-		if getFFlagEnableCrossExpVoiceMemoryCheck() then
-			var11.current = default.JoinFeasibilityCheckPerformed.Event:Connect(function(p1)
-				-- upvalues: var2 (copy), voiceStatusChanged (copy), crossExperience (copy), default_1 (copy), playersService (copy)
-				if not p1 then
-					var2(voiceStatusChanged({
-						status = crossExperience.Constants.VOICE_STATUS.ERROR_JOIN_FEASIBILITY_CHECK_FAILED
+		if GetFFlagEnableCrossExpVoiceMemoryCheckFunction() then
+			UseRefResult8.current = Default.JoinFeasibilityCheckPerformed.Event:Connect(function(p2) --[[ Line: 174 ]]
+				-- upvalues: UseDispatchResult (upval), VoiceStatusChangedFunction (upval), CrossExperience (upval), Default1 (upval), Players (upval)
+				if not p2 then
+					UseDispatchResult(VoiceStatusChangedFunction({
+						status = CrossExperience.Constants.VOICE_STATUS.ERROR_JOIN_FEASIBILITY_CHECK_FAILED
 					}))
-					default_1:logPartyVoiceStatusChanged({
+					Default1:logPartyVoiceStatusChanged({
 						voiceChannelId = nil,
 						voiceSessionId = nil,
-						status = crossExperience.Constants.VOICE_STATUS.ERROR_JOIN_FEASIBILITY_CHECK_FAILED,
-						userId = if playersService.LocalPlayer then tostring(playersService.LocalPlayer.UserId) else ""
+						status = CrossExperience.Constants.VOICE_STATUS.ERROR_JOIN_FEASIBILITY_CHECK_FAILED,
+						userId = if Players.LocalPlayer then tostring(Players.LocalPlayer.UserId) else ""
 					})
 				end
 			end)
 		end
-		var4.current = default.ExperienceJoined.Event:Connect(function()
-			-- upvalues: var13 (copy), var12 (copy), var1 (copy), loggerModule (copy), cevReadinessSyncEngineFeature (copy), default (copy)
-			if not var13.current then
-				var13.current = true
-				var12:subscribe(var1, loggerModule)
+		UseRefResult1.current = Default.ExperienceJoined.Event:Connect(function() --[[ Line: 190 ]]
+			-- upvalues: UseRefResult9 (upval), UseMemoResult (upval), UseStoreResult (upval), LoggerModule (upval), CevReadinessSyncEngineFeature (upval), Default (upval)
+			if not UseRefResult9.current then
+				UseRefResult9.current = true
+				UseMemoResult:subscribe(UseStoreResult, LoggerModule)
 			end
-			if cevReadinessSyncEngineFeature then
-				default:signalCevReadinessSync()
+			if CevReadinessSyncEngineFeature then
+				Default:signalCevReadinessSync()
 			end
 		end)
-		var5.current = default.ExperienceJoinFailed.Event:Connect(function()
-			-- upvalues: var13 (copy), var12 (copy), var1 (copy), loggerModule (copy)
-			if var13.current then
-				var13.current = false
-				var12:unsubscribe(var1, loggerModule)
+		UseRefResult2.current = Default.ExperienceJoinFailed.Event:Connect(function() --[[ Line: 198 ]]
+			-- upvalues: UseRefResult9 (upval), UseMemoResult (upval), UseStoreResult (upval), LoggerModule (upval)
+			if UseRefResult9.current then
+				UseRefResult9.current = false
+				UseMemoResult:unsubscribe(UseStoreResult, LoggerModule)
 				
 				return
 			end
 		end)
-		var6.current = default.ExperienceLeft.Event:Connect(function()
-			-- upvalues: var13 (copy), var12 (copy), var1 (copy), loggerModule (copy)
-			if var13.current then
-				var13.current = false
-				var12:unsubscribe(var1, loggerModule)
+		UseRefResult3.current = Default.ExperienceLeft.Event:Connect(function() --[[ Line: 202 ]]
+			-- upvalues: UseRefResult9 (upval), UseMemoResult (upval), UseStoreResult (upval), LoggerModule (upval)
+			if UseRefResult9.current then
+				UseRefResult9.current = false
+				UseMemoResult:unsubscribe(UseStoreResult, LoggerModule)
 				
 				return
 			end
 		end)
 		
-		if experienceService then
-			var7.current = experienceService:RegisterForExperienceJoin(function()
-				-- upvalues: var13 (copy), var12 (copy), var1 (copy), loggerModule (copy)
+		if ExperienceService then
+			UseRefResult4.current = ExperienceService:RegisterForExperienceJoin(function() --[[ Line: 208 ]]
+				-- upvalues: UseRefResult9 (upval), UseMemoResult (upval), UseStoreResult (upval), LoggerModule (upval)
 				if game.PlaceId == 0 then
-					if not var13.current then return end
-					var13.current = false
-					var12:unsubscribe(var1, loggerModule)
+					if not UseRefResult9.current then return end
+					UseRefResult9.current = false
+					UseMemoResult:unsubscribe(UseStoreResult, LoggerModule)
 				end
 			end)
-			var8.current = experienceService:RegisterForExperienceLeave(function()
-				-- upvalues: var12 (copy), var1 (copy), loggerModule (copy)
+			UseRefResult5.current = ExperienceService:RegisterForExperienceLeave(function() --[[ Line: 214 ]]
+				-- upvalues: UseMemoResult (upval), UseStoreResult (upval), LoggerModule (upval)
 				if game.PlaceId == 0 then
-					var12:restoreStateFromBackground(var1, loggerModule)
+					UseMemoResult:restoreStateFromBackground(UseStoreResult, LoggerModule)
 				end
 			end)
 		end
-		if fFlagEnableCEVForceInitialize and vectorA and vectorA.forceInitializeStoreOnMount then
-			if var13.current then return end
-			var13.current = true
-			var12:subscribe(var1, loggerModule)
+		if FFlagEnableCEVForceInitialize and p1 and p1.forceInitializeStoreOnMount then
+			if UseRefResult9.current then return end
+			UseRefResult9.current = true
+			UseMemoResult:subscribe(UseStoreResult, LoggerModule)
 		end
 	end
 	
-	useEffect(function()
-		-- upvalues: var15 (ref), var14 (ref)
-		var15()
+	UseEffectFunction(function() --[[ Line: 229 ]]
+		-- upvalues: v33 (copy), v32 (copy)
+		v33()
 		
-		return function()
-			-- upvalues: var14 (copy)
-			var14()
+		return function() --[[ Line: 231 ]]
+			-- upvalues: v32 (upval)
+			v32()
 		end
 	end, {})
 	

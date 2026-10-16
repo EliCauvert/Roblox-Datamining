@@ -1,64 +1,65 @@
-﻿local inlineRichText = script:FindFirstAncestor("InlineRichText")
-local name = require(inlineRichText.Logger):new(script.Name)
-local cryoModule = require(inlineRichText.Parent.Cryo)
+﻿local InlineRichText = script:FindFirstAncestor("InlineRichText")
+local NewResult = require(InlineRichText.Logger):new(script.Name)
+local CryoModule = require(InlineRichText.Parent.Cryo)
 local t = {}
 
-local function _(p1, p2)
+local function _(p1, p2): string --[[ Line: 25 | Named "getMemoKey" ]]
 	return `${p1}___${p2}`
 end
 
-local _ = function(p1, p2, p3)
-	-- upvalues: t (ref)
+local _ = function(p1, p2, p3) --[[ Line: 29 | Named "getMemo" ]]
+	-- upvalues: t (copy)
 	return t[p1][`${p2}___${p3}`]
 end
 
-local _ = function(value, p1, p2, p3)
-	-- upvalues: t (ref)
-	t[value][`${p1}___${p2}`] = p3
+local _ = function(p1, p2, p3, p4) --[[ Line: 35 | Named "setMemo" ]]
+	-- upvalues: t (copy)
+	t[p1][`${p2}___${p3}`] = p4
 end
 
-return function(p1, p2, p3, p4)
-	-- upvalues: t (ref), name (ref), cryoModule (ref)
-	if not t[p2] then
-		t[p2] = {}
+return function(p1, Key, p2, p3) --[[ Line: 40 | Named "isDescendant" ]]
+	-- upvalues: t (copy), NewResult (copy), CryoModule (copy)
+	if not t[Key] then
+		t[Key] = {}
 	end
-	local t_1 = {}
+	local t1 = {}
 	
-	local function dfs(p5)
-		-- upvalues: t_1 (ref), p2 (ref), p4 (ref), t (copy), p1 (ref), name (copy), cryoModule (copy), dfs (ref)
-		t_1[p5] = true
-		local var1 = t[p2][`${p5}___${p4}`]
+	local function dfs(Key1) --[[ Line: 46 ]]
+		-- upvalues: t1 (copy), Key (copy), p3 (copy), t (upval), p1 (copy), NewResult (upval), CryoModule (upval), dfs (copy)
+		t1[Key1] = true
+		local Entry = t[Key][`${Key1}___${p3}`]
 		
-		if var1 ~= nil then
-			return var1
+		if Entry ~= nil then
+			return Entry
 		end
-		local var2 = p1[p5]
+		local v1 = p1[Key1]
 		
-		if not var2 then
-			name:error(`Node {p5} not found in graph`)
-			t[p2][`${p5}___${p4}`] = false
+		if not v1 then
+			NewResult:error(`Node {Key1} not found in graph`)
+			t[Key][`${Key1}___${p3}`] = false
 			
 			return false
-		elseif var2.children[p4] then
-			t[p2][`${p5}___${p4}`] = true
+		end
+		if v1.children[p3] then
+			t[Key][`${Key1}___${p3}`] = true
 			
 			return true
 		end
-		local var3 = false
+		local Flag = false
 		
-		for i, v in cryoModule.List.filter(cryoModule.Dictionary.keys(var2.children), function(p6)
-			-- upvalues: t_1 (copy), var2 (ref)
-			return t_1[p6] or not var2.children[p6]
+		for _, value in CryoModule.List.filter(CryoModule.Dictionary.keys(v1.children), function(p4) --[[ Line: 64 ]]
+			-- upvalues: t1 (upval), v1 (copy)
+			return not t1[p4] and v1.children[p4]
 		end) do
-			if dfs(v) then
-				var3 = true
+			if dfs(value) then
+				Flag = true
 				break
 			end
 		end
-		t[p2][`${p5}___${p4}`] = var3
+		t[Key][`${Key1}___${p3}`] = Flag
 		
-		return var3
+		return Flag
 	end
 	
-	return dfs(p3)
+	return (dfs(p2))
 end

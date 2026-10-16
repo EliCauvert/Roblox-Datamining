@@ -1,46 +1,46 @@
-﻿local experienceLoadingScript = script:FindFirstAncestor("ExperienceLoadingScript")
-local setUniverseIdModule = require(experienceLoadingScript.Actions.SetUniverseId)
-local url = require(experienceLoadingScript.Parent.Http).Url
+﻿local ExperienceLoadingScript = script:FindFirstAncestor("ExperienceLoadingScript")
+local SetUniverseIdModule = require(ExperienceLoadingScript.Actions.SetUniverseId)
+local Url = require(ExperienceLoadingScript.Parent.Http).Url
 
-return function(p1, p2)
-	-- upvalues: setUniverseIdModule (ref), url (ref)
-	local var1 = function(p3)
-		-- upvalues: setUniverseIdModule (copy)
-		local placeId = game.PlaceId
-		local gameId = game.GameId
-		while placeId <= 0 or gameId <= 0 do
+return function(Callback, PlaceId) --[[ Line: 6 ]]
+	-- upvalues: SetUniverseIdModule (copy), Url (copy)
+	local function v3(p1) --[[ Line: 7 ]]
+		-- upvalues: SetUniverseIdModule (upval)
+		local PlaceId = game.PlaceId
+		local GameId = game.GameId
+		while PlaceId <= 0 or GameId <= 0 do
 			wait()
-			placeId = game.PlaceId
-			gameId = game.GameId
+			PlaceId = game.PlaceId
+			GameId = game.GameId
 		end
-		p3:dispatch(setUniverseIdModule({ universeId = gameId, placeId = placeId }))
+		p1:dispatch(SetUniverseIdModule({ universeId = GameId, placeId = PlaceId }))
 	end
 	
-	return function(p4)
-		-- upvalues: p2 (ref), url (copy), p1 (ref), setUniverseIdModule (copy), var1 (ref)
-		coroutine.wrap(function()
-			-- upvalues: p2 (copy), url (copy), p1 (copy), p4 (ref), setUniverseIdModule (copy), var1 (copy)
-			local gameId = game.GameId
+	return function(p2) --[[ Line: 23 ]]
+		-- upvalues: PlaceId (copy), Url (upval), Callback (copy), SetUniverseIdModule (upval), v3 (copy)
+		coroutine.wrap(function() --[[ Line: 24 ]]
+			-- upvalues: PlaceId (upval), Url (upval), Callback (upval), p2 (copy), SetUniverseIdModule (upval), v3 (upval)
+			local GameId: number = game.GameId
 			
-			if p2 > 0 and gameId <= 0 then
-				p1(string.format("%suniverses/v1/places/%d/universe", url.APIS_URL, p2), "GET"):andThen(function(p5)
-					-- upvalues: gameId (write), p4 (copy), setUniverseIdModule (copy), p2 (ref), var1 (copy)
-					if p5 and p5.responseBody then
-						gameId = p5.responseBody.universeId
+			if PlaceId > 0 and GameId <= 0 then
+				Callback(string.format("%suniverses/v1/places/%d/universe", Url.APIS_URL, PlaceId), "GET"):andThen(function(Result) --[[ Line: 31 ]]
+					-- upvalues: GameId (ref), p2 (upval), SetUniverseIdModule (upval), PlaceId (copy), v3 (upval)
+					if Result and Result.responseBody then
+						GameId = Result.responseBody.universeId
 						
-						if gameId and gameId >= 0 then
-							p4:dispatch(setUniverseIdModule({ universeId = gameId, placeId = p2 }))
+						if GameId and GameId >= 0 then
+							p2:dispatch(SetUniverseIdModule({ universeId = GameId, placeId = PlaceId }))
 							
 							return
 						end
 					end
-					var1(p4)
-				end, function(_)
-					-- upvalues: var1 (copy), p4 (copy)
-					var1(p4)
+					v3(p2)
+				end, function(_) --[[ Line: 44 ]]
+					-- upvalues: v3 (upval), p2 (upval)
+					v3(p2)
 				end)
 			else
-				var1(p4)
+				v3(p2)
 			end
 		end)()
 	end

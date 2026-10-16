@@ -1,28 +1,29 @@
-﻿local default = require(script:FindFirstAncestor("AuthAnalytics").Parent.LoggingProtocol).default
-local telemetryConfigsModule = require(script.Parent.TelemetryConfigs)
-local luaAppCredentialSheetEventStream = game:DefineFastFlag("LuaAppCredentialSheetEventStream", false)
-local t = {
-	[telemetryConfigsModule.IosAuthServiceLoginCredentialSheetShownConfig.eventName] = telemetryConfigsModule.IosAuthServiceLoginCredentialSheetShownEventConfig,
-	[telemetryConfigsModule.IosAuthServiceLoginCredentialSheetPasswordSelectedConfig.eventName] = telemetryConfigsModule.IosAuthServiceLoginCredentialSheetPasswordSelectedEventConfig,
-	[telemetryConfigsModule.IosAuthServiceLoginCredentialSheetPasskeySelectedConfig.eventName] = telemetryConfigsModule.IosAuthServiceLoginCredentialSheetPasskeySelectedEventConfig,
-	[telemetryConfigsModule.IosAuthServiceLoginCredentialSheetErrorConfig.eventName] = telemetryConfigsModule.IosAuthServiceLoginCredentialSheetErrorEventConfig,
-	[telemetryConfigsModule.IosAuthServiceLoginCredentialSheetDismissedConfig.eventName] = telemetryConfigsModule.IosAuthServiceLoginCredentialSheetDismissedEventConfig,
-	[telemetryConfigsModule.IosAuthServiceLoginCredentialSheetLoginSuccessConfig.eventName] = telemetryConfigsModule.IosAuthServiceLoginCredentialSheetLoginSuccessEventConfig,
-	[telemetryConfigsModule.IosAuthServiceLoginCredentialSheetLoginFailureConfig.eventName] = telemetryConfigsModule.IosAuthServiceLoginCredentialSheetLoginFailureEventConfig,
-	[telemetryConfigsModule.IosAuthServiceLoginCredentialSheetUnavailableConfig.eventName] = telemetryConfigsModule.IosAuthServiceLoginCredentialSheetUnavailableEventConfig
+﻿local Default = require(script:FindFirstAncestor("AuthAnalytics").Parent.LoggingProtocol).default
+local TelemetryConfigsModule = require(script.Parent.TelemetryConfigs)
+local LuaAppCredentialSheetEventStream = game:DefineFastFlag("LuaAppCredentialSheetEventStream", false)
+local config = {
+	[TelemetryConfigsModule.IosAuthServiceLoginCredentialSheetShownConfig.eventName] = TelemetryConfigsModule.IosAuthServiceLoginCredentialSheetShownEventConfig,
+	[TelemetryConfigsModule.IosAuthServiceLoginCredentialSheetPasswordSelectedConfig.eventName] = TelemetryConfigsModule.IosAuthServiceLoginCredentialSheetPasswordSelectedEventConfig,
+	[TelemetryConfigsModule.IosAuthServiceLoginCredentialSheetPasskeySelectedConfig.eventName] = TelemetryConfigsModule.IosAuthServiceLoginCredentialSheetPasskeySelectedEventConfig,
+	[TelemetryConfigsModule.IosAuthServiceLoginCredentialSheetErrorConfig.eventName] = TelemetryConfigsModule.IosAuthServiceLoginCredentialSheetErrorEventConfig,
+	[TelemetryConfigsModule.IosAuthServiceLoginCredentialSheetDismissedConfig.eventName] = TelemetryConfigsModule.IosAuthServiceLoginCredentialSheetDismissedEventConfig,
+	[TelemetryConfigsModule.IosAuthServiceLoginCredentialSheetLoginSuccessConfig.eventName] = TelemetryConfigsModule.IosAuthServiceLoginCredentialSheetLoginSuccessEventConfig,
+	[TelemetryConfigsModule.IosAuthServiceLoginCredentialSheetLoginFailureConfig.eventName] = TelemetryConfigsModule.IosAuthServiceLoginCredentialSheetLoginFailureEventConfig,
+	[TelemetryConfigsModule.IosAuthServiceLoginCredentialSheetUnavailableConfig.eventName] = TelemetryConfigsModule.IosAuthServiceLoginCredentialSheetUnavailableEventConfig
 }
 
 return {
-	report = function(p1, p2)
-		-- upvalues: default (ref), luaAppCredentialSheetEventStream (ref), t (ref)
-		default:logRobloxTelemetryCounter(p1, 1, p2)
+	report = function(p1, p2) --[[ Line: 27 ]]
+		-- upvalues: Default (copy), LuaAppCredentialSheetEventStream (copy), config (copy)
+		Default:logRobloxTelemetryCounter(p1, 1, p2)
 		
-		if not luaAppCredentialSheetEventStream then return end
-		local eventName = t[p1.eventName]
+		if not LuaAppCredentialSheetEventStream then return end
+		local Entry = config[p1.eventName]
 		
-		if eventName == nil then
+		if Entry ~= nil then
+			Default:logRobloxTelemetryEvent(Entry, nil, p2)
+			
 			return
 		end
-		default:logRobloxTelemetryEvent(eventName, nil, p2)
 	end
 }

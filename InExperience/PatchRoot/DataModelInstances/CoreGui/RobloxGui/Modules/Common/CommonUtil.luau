@@ -1,15 +1,15 @@
 ﻿return {
-	TableConcat = function(p1, p2)
+	TableConcat = function(p1, p2) --[[ Line: 12 ]]
 		for i = 1, #p2 do
 			p1[#p1 + 1] = p2[i]
 		end
 		return p1
 	end,
-	SortByName = function(p3)
-		table.sort(p3, function(p4, p5)
-			return p4.Name < p5.Name
+	SortByName = function(List) --[[ Line: 21 ]]
+		table.sort(List, function(A, B): boolean --[[ Line: 22 | Named "compareInstanceNames" ]]
+			return A.Name < B.Name
 		end)
 		
-		return p3
+		return List
 	end
 }

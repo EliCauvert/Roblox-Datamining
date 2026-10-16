@@ -1,6 +1,6 @@
-﻿local contextTypes = require(script.Parent.Parent.Parent.Analytics.Enums).ContextTypes
+﻿local ContextTypes = require(script.Parent.Parent.Parent.Analytics.Enums).ContextTypes
 
-return function(p1)
-	-- upvalues: contextTypes (ref)
-	return if p1 == nil then nil else contextTypes[p1.rawValue()].rawValue()
+return function(p1) --[[ Line: 6 ]]
+	-- upvalues: ContextTypes (copy)
+	return if p1 == nil then nil else ContextTypes[p1.rawValue()].rawValue()
 end

@@ -1,35 +1,36 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local reactModule = require(parent.React)
-local name = require(appChat.Logger):new(script.Name)
-local enumScreensModule = require(appChat.EnumScreens)
-local useNavigation = require(parent.Navigation).useNavigation
-local trustedConnectionsUpsellContainerModule = require(script.Parent.TrustedConnectionsUpsellContainer)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local ReactModule = require(Parent.React)
+local NewResult = require(AppChat.Logger):new(script.Name)
+local EnumScreensModule = require(AppChat.EnumScreens)
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local TrustedConnectionsUpsellContainerModule = require(script.Parent.TrustedConnectionsUpsellContainer)
 
-return function(_)
-	-- upvalues: useNavigation (ref), reactModule (ref), enumScreensModule (ref), name (ref), trustedConnectionsUpsellContainerModule (ref)
-	local var1 = useNavigation()
-	local conversationId = var1 and var1.getParam("conversationId", nil)
-	local modalVariant = var1 and var1.getParam("modalVariant", nil)
-	local var2 = reactModule.useCallback(function()
-		-- upvalues: var1 (ref), enumScreensModule (copy)
-		if var1 and var1.state.routeName == enumScreensModule.TrustedConnectionsUpsell then
-			var1.goBack(var1.state.key)
+return function(_) --[[ Line: 15 ]]
+	-- upvalues: UseNavigationFunction (copy), ReactModule (copy), EnumScreensModule (copy), NewResult (copy), TrustedConnectionsUpsellContainerModule (copy)
+	local UseNavigationResult = UseNavigationFunction()
+	local ConversationIdParam = UseNavigationResult and UseNavigationResult.getParam("conversationId", nil)
+	local ModalVariantParam = UseNavigationResult and UseNavigationResult.getParam("modalVariant", nil)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 19 ]]
+		-- upvalues: UseNavigationResult (copy), EnumScreensModule (upval)
+		if UseNavigationResult and UseNavigationResult.state.routeName == EnumScreensModule.TrustedConnectionsUpsell then
+			UseNavigationResult.goBack(UseNavigationResult.state.key)
 		end
-	end, { var1 })
+	end, { UseNavigationResult })
 	
-	if modalVariant and conversationId then
-		return reactModule.createElement(trustedConnectionsUpsellContainerModule, {
-			conversationId = conversationId,
-			dismissModal = var2,
-			modalVariant = modalVariant
+	if ModalVariantParam and ConversationIdParam then
+		return ReactModule.createElement(TrustedConnectionsUpsellContainerModule, {
+			conversationId = ConversationIdParam,
+			dismissModal = UseResult,
+			modalVariant = ModalVariantParam
 		})
+	else
+		NewResult:error("TrustedConnectionsUpsellScreen: Missing required parameters", {
+			conversationId = ConversationIdParam,
+			modalVariant = ModalVariantParam
+		})
+		UseNavigationResult.goBack()
+		
+		return nil
 	end
-	name:error("TrustedConnectionsUpsellScreen: Missing required parameters", {
-		conversationId = conversationId,
-		modalVariant = modalVariant
-	})
-	var1.goBack()
-	
-	return nil
 end

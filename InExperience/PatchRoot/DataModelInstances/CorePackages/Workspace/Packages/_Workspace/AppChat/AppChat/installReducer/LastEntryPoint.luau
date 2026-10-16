@@ -1,41 +1,41 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local roduxModule = require(parent.Rodux)
-local _ = require(parent.SocialCommon)
-local enteredChatFromEntryPointModule = require(appChat.Actions.EnteredChatFromEntryPoint)
-local fFlagAppChatPerfTrackingModule = require(appChat.Flags.FFlagAppChatPerfTracking)
-local fFlagSharedChatEntryPointAction = require(parent.SharedFlags).FFlagSharedChatEntryPointAction
-local appChatPerfTrackerModule = require(appChat.Telemetry.AppChatPerfTracker)
-local var1 = false
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local _ = require(Parent.SocialCommon)
+local FFlagAppChatPerfTrackingModule = require(AppChat.Flags.FFlagAppChatPerfTracking)
+local FFlagSharedChatEntryPointAction = require(Parent.SharedFlags).FFlagSharedChatEntryPointAction
+local AppChatPerfTrackerModule = require(AppChat.Telemetry.AppChatPerfTracker)
+local Flag = false
 
-local function _(p1)
-	-- upvalues: appChatPerfTrackerModule (ref), var1 (write)
-	pcall(function()
-		-- upvalues: p1 (ref), appChatPerfTrackerModule (copy), var1 (copy)
-		if p1 == nil then
-			appChatPerfTrackerModule.cancel(appChatPerfTrackerModule.Events.ChatLandingTTI, {})
+local function _(EntryPoint) --[[ Line: 22 | Named "trackChatLanding" ]]
+	-- upvalues: AppChatPerfTrackerModule (copy), Flag (ref)
+	pcall(function() --[[ Line: 23 ]]
+		-- upvalues: EntryPoint (copy), AppChatPerfTrackerModule (upval), Flag (upval)
+		if EntryPoint == nil then
+			AppChatPerfTrackerModule.cancel(AppChatPerfTrackerModule.Events.ChatLandingTTI, {})
 			
 			return
+		else
+			AppChatPerfTrackerModule.start(AppChatPerfTrackerModule.Events.ChatLandingTTI, { entryPoint = EntryPoint, coldStart = not Flag })
+			Flag = true
 		end
-		appChatPerfTrackerModule.start(appChatPerfTrackerModule.Events.ChatLandingTTI, { entryPoint = p1, coldStart = not var1 })
-		var1 = true
 	end)
 end
 
-return roduxModule.createReducer("NotSet", {
-	[enteredChatFromEntryPointModule.name] = function(_, p1)
-		-- upvalues: fFlagSharedChatEntryPointAction (ref), fFlagAppChatPerfTrackingModule (ref), appChatPerfTrackerModule (ref), var1 (write)
-		if fFlagSharedChatEntryPointAction and fFlagAppChatPerfTrackingModule then
-			local entryPoint = p1.entryPoint
-			pcall(function()
-				-- upvalues: entryPoint (ref), appChatPerfTrackerModule (copy), var1 (copy)
-				if entryPoint == nil then
-					appChatPerfTrackerModule.cancel(appChatPerfTrackerModule.Events.ChatLandingTTI, {})
+return require(Parent.Rodux).createReducer("NotSet", {
+	[require(AppChat.Actions.EnteredChatFromEntryPoint).name] = function(_, p1) --[[ Line: 39 ]]
+		-- upvalues: FFlagSharedChatEntryPointAction (copy), FFlagAppChatPerfTrackingModule (copy), AppChatPerfTrackerModule (copy), Flag (ref)
+		if FFlagSharedChatEntryPointAction and FFlagAppChatPerfTrackingModule then
+			local EntryPoint = p1.entryPoint
+			pcall(function() --[[ Line: 23 ]]
+				-- upvalues: EntryPoint (copy), AppChatPerfTrackerModule (upval), Flag (upval)
+				if EntryPoint == nil then
+					AppChatPerfTrackerModule.cancel(AppChatPerfTrackerModule.Events.ChatLandingTTI, {})
 					
 					return
+				else
+					AppChatPerfTrackerModule.start(AppChatPerfTrackerModule.Events.ChatLandingTTI, { entryPoint = EntryPoint, coldStart = not Flag })
+					Flag = true
 				end
-				appChatPerfTrackerModule.start(appChatPerfTrackerModule.Events.ChatLandingTTI, { entryPoint = entryPoint, coldStart = not var1 })
-				var1 = true
 			end)
 		end
 		return p1.entryPoint

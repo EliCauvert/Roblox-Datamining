@@ -1,24 +1,24 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
-local _ = require(parent_1.SettingsService)
-local fieldRowModule = require(parent.FieldRow)
-local reactModule = require(parent_1.React)
-local view = require(parent_1.Foundation).View
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
+local _ = require(Parent1.SettingsService)
+local FieldRowModule = require(Parent.FieldRow)
+local ReactModule = require(Parent1.React)
+local View = require(Parent1.Foundation).View
 
-return function(p1)
-	-- upvalues: reactModule (ref), fieldRowModule (ref), view (ref)
-	return reactModule.createElement(view, {
+return function(p1) --[[ Line: 17 | Named "_createPageView" ]]
+	-- upvalues: ReactModule (copy), FieldRowModule (copy), View (copy)
+	return ReactModule.createElement(View, {
 		tag = "padding-x-medium align-x-center align-y-top padding-small col size-full auto-y gui-object-defaults",
 		Visible = p1.visible
 	}, {
-		(function()
-			-- upvalues: p1 (ref), reactModule (copy), fieldRowModule (copy)
-			local t = {}
+		((function() --[[ Line: 18 | Named "getFields" ]]
+			-- upvalues: p1 (copy), ReactModule (upval), FieldRowModule (upval)
+			local Elements = {}
 			
-			for i, v in p1.settings do
-				t[v.id] = reactModule.createElement(fieldRowModule, v)
+			for _, setting in p1.settings do
+				Elements[setting.id] = ReactModule.createElement(FieldRowModule, setting)
 			end
-			return t
-		end)()
+			return Elements
+		end)())
 	})
 end

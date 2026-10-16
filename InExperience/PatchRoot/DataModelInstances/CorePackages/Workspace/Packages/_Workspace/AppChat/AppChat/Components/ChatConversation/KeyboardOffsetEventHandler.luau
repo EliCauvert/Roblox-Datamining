@@ -1,52 +1,59 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local userInputService = game:GetService("UserInputService")
-local usePositionOffsetForVirtualKeyboardModule = require(appChat.Hooks.usePositionOffsetForVirtualKeyboard)
-local reactModule = require(parent.React)
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local UserInputService = game:GetService("UserInputService")
+local UsePositionOffsetForVirtualKeyboardModule = require(AppChat.Hooks.usePositionOffsetForVirtualKeyboard)
+local ReactModule = require(Parent.React)
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
 
-return function(p1)
-	-- upvalues: useSelector (ref), usePositionOffsetForVirtualKeyboardModule (ref), reactModule (ref), userInputService (ref)
-	local var1 = useSelector(function(p2)
+return function(p1) --[[ Line: 16 ]]
+	-- upvalues: UseSelectorFunction (copy), UsePositionOffsetForVirtualKeyboardModule (copy), ReactModule (copy), UserInputService (copy)
+	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 17 ]]
 		return if p2.GlobalGuiInset then p2.GlobalGuiInset.top else 0
 	end)
-	local var2 = if p1.parentViewRef then p1.parentViewRef.current else nil
-	local var3 = usePositionOffsetForVirtualKeyboardModule({ isNearBottomOfScreen = true })
-	local var4 = reactModule.useCallback(function()
-		-- upvalues: userInputService (copy), var3 (ref), var2 (ref), var1 (ref), p1 (ref)
-		local var5 = 0
+	local Current = if p1.parentViewRef then p1.parentViewRef.current else nil
+	local UsePositionOffsetForVirtualKeyboardModuleResult = UsePositionOffsetForVirtualKeyboardModule({ isNearBottomOfScreen = true })
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 23 ]]
+		-- upvalues: UserInputService (upval), UsePositionOffsetForVirtualKeyboardModuleResult (copy), Current (copy), UseSelectorResult (copy), p1 (copy)
+		local YDelta = 0
 		
-		if userInputService.OnScreenKeyboardVisible then
-			if var3 ~= nil then
-				var5 = var3
-			elseif var2 then
-				var5 = var2.AbsolutePosition.Y + var2.AbsoluteSize.Y - (userInputService.OnScreenKeyboardPosition.Y - var1)
+		if UserInputService.OnScreenKeyboardVisible then
+			if UsePositionOffsetForVirtualKeyboardModuleResult == nil then
+				if Current then
+					YDelta = Current.AbsolutePosition.Y + Current.AbsoluteSize.Y - (UserInputService.OnScreenKeyboardPosition.Y - UseSelectorResult)
+				end
+			else
+				YDelta = UsePositionOffsetForVirtualKeyboardModuleResult
 			end
 		end
 		if p1.onKeyboardOffsetChanged then
-			p1.onKeyboardOffsetChanged(var5)
+			p1.onKeyboardOffsetChanged(YDelta)
 		end
-	end, { var3, var1, p1.onKeyboardOffsetChanged, var2 })
-	reactModule.useEffect(function()
-		-- upvalues: var4 (ref), userInputService (copy), var2 (ref)
-		var4()
-		local var5 = userInputService:GetPropertyChangedSignal("OnScreenKeyboardVisible"):Connect(var4)
-		local var6 = userInputService:GetPropertyChangedSignal("OnScreenKeyboardPosition"):Connect(var4)
-		local var7 = if var2 then var2:GetPropertyChangedSignal("AbsoluteSize"):Connect(var4) else nil
+	end, {
+		UsePositionOffsetForVirtualKeyboardModuleResult,
+		UseSelectorResult,
+		p1.onKeyboardOffsetChanged,
+		Current
+	})
+	ReactModule.useEffect(function() --[[ Line: 40 ]]
+		-- upvalues: UseResult (copy), UserInputService (upval), Current (copy)
+		UseResult()
+		local Connection = UserInputService:GetPropertyChangedSignal("OnScreenKeyboardVisible"):Connect(UseResult)
+		local Connection1 = UserInputService:GetPropertyChangedSignal("OnScreenKeyboardPosition"):Connect(UseResult)
+		local Connection2 = if Current then Current:GetPropertyChangedSignal("AbsoluteSize"):Connect(UseResult) else nil
 		
-		return function()
-			-- upvalues: var5 (ref), var6 (ref), var7 (write)
-			if var5 then
-				var5:Disconnect()
+		return function() --[[ Line: 53 ]]
+			-- upvalues: Connection (copy), Connection1 (copy), Connection2 (ref)
+			if Connection then
+				Connection:Disconnect()
 			end
-			if var6 then
-				var6:Disconnect()
+			if Connection1 then
+				Connection1:Disconnect()
 			end
-			if var7 then
-				var7:Disconnect()
+			if Connection2 then
+				Connection2:Disconnect()
 			end
 		end
-	end, { var4, var2 })
+	end, { UseResult, Current })
 	
 	return nil
 end

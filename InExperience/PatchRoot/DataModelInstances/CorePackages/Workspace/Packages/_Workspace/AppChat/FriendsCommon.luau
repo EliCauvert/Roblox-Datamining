@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.FriendsCommon.FriendsCommon)
+﻿return (require(script.Parent.Parent.Parent._Index.FriendsCommon.FriendsCommon))

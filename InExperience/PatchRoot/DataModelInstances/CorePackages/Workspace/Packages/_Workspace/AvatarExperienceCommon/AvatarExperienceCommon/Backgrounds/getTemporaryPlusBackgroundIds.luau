@@ -1,51 +1,50 @@
-﻿local fStringAXPlusExclusiveBackgroundIds = require(script:FindFirstAncestor("AvatarExperienceCommon").Parent.AvatarExperienceFlags).FStringAXPlusExclusiveBackgroundIds
-local var1 = nil
-local frozen = table.freeze({})
-local var2 = false
+﻿local FStringAXPlusExclusiveBackgroundIdsFunction = require(script:FindFirstAncestor("AvatarExperienceCommon").Parent.AvatarExperienceFlags).FStringAXPlusExclusiveBackgroundIds
+local v1 = nil
+local Frozen = table.freeze({})
+local Flag = false
 
-local function _(p1)
-	return string.match(p1, "^%d+$") ~= nil
+local function _(Text: string): boolean --[[ Line: 9 | Named "isNumericId" ]]
+	return string.match(Text, "^%d+$") ~= nil
 end
 
-return function()
-	-- upvalues: fStringAXPlusExclusiveBackgroundIds (ref), var1 (write), frozen (write), var2 (write)
-	local var3 = fStringAXPlusExclusiveBackgroundIds()
+return function() --[[ Line: 13 | Named "getTemporaryPlusBackgroundIds" ]]
+	-- upvalues: FStringAXPlusExclusiveBackgroundIdsFunction (copy), v1 (ref), Frozen (ref), Flag (ref)
+	local FStringAXPlusExclusiveBackgroundIdsResult: string = FStringAXPlusExclusiveBackgroundIdsFunction()
 	
-	if var3 == var1 then
-		return frozen, var2
+	if FStringAXPlusExclusiveBackgroundIdsResult == v1 then
+		return Frozen, Flag
 	end
-	var1 = var3
+	v1 = FStringAXPlusExclusiveBackgroundIdsResult
 	
-	if string.gsub(var3, "^%s*(.-)%s*$", "%1") == "" then
-		var2 = false
-		frozen = table.freeze({})
+	if string.gsub(FStringAXPlusExclusiveBackgroundIdsResult, "^%s*(.-)%s*$", "%1") == "" then
+		Flag = false
+		Frozen = table.freeze({})
 		
-		return frozen, var2
-	elseif string.find(var3, "[;|]") ~= nil then
-		var2 = true
-		frozen = table.freeze({})
-		
-		return frozen, var2
+		return Frozen, Flag
 	end
-	local replaced
-	local t = {}
-	
-	for i, v in string.split(var3, ",") do
-		replaced = string.gsub(v, "^%s*(.-)%s*$", "%1")
+	if string.find(FStringAXPlusExclusiveBackgroundIdsResult, "[;|]") ~= nil then
+		Flag = true
+		Frozen = table.freeze({})
 		
-		if replaced ~= "" then
-			if string.match(replaced, "^%d+$") ~= nil then
-				t[replaced] = true
-				continue
+		return Frozen, Flag
+	end
+	local Tbl = {}
+	
+	for _, value in string.split(FStringAXPlusExclusiveBackgroundIdsResult, ",") do
+		local Replaced = string.gsub(value, "^%s*(.-)%s*$", "%1")
+		
+		if Replaced ~= "" then
+			if string.match(Replaced, "^%d+$") == nil then
+				Flag = true
+				Frozen = table.freeze({})
+				
+				return Frozen, Flag
 			end
-			var2 = true
-			frozen = table.freeze({})
-			
-			return frozen, var2
+			Tbl[Replaced] = true
 		end
 	end
-	var2 = false
-	frozen = table.freeze(t)
+	Flag = false
+	Frozen = table.freeze(Tbl)
 	
-	return frozen, var2
+	return Frozen, Flag
 end

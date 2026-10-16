@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Index.AvatarExperienceDeps.AvatarExperienceDeps)
+﻿return (require(script.Parent._Index.AvatarExperienceDeps.AvatarExperienceDeps))

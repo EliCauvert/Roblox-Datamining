@@ -1,36 +1,36 @@
-﻿local inlineRichText = script:FindFirstAncestor("InlineRichText")
-local linkTypeModule = require(inlineRichText.Enums.LinkType)
-local default = require(inlineRichText.Parent.LinkingProtocol).LinkingProtocol.default
+﻿local InlineRichText = script:FindFirstAncestor("InlineRichText")
+local LinkTypeModule = require(InlineRichText.Enums.LinkType)
+local Default = require(InlineRichText.Parent.LinkingProtocol).LinkingProtocol.default
 local list = {
 	{
-		isLinkType = function(p1)
-			return string.match(p1, "^https://") ~= nil
+		isLinkType = function(Text: string): boolean --[[ Line: 11 ]]
+			return string.match(Text, "^https://") ~= nil
 		end,
-		type = linkTypeModule.Http
+		type = LinkTypeModule.Http
 	},
 	{
-		isLinkType = function(p1)
-			-- upvalues: default (ref)
-			local var1, var2 = default:isURLRegistered(p1):await()
+		isLinkType = function(p1) --[[ Line: 18 ]]
+			-- upvalues: Default (copy)
+			local v1, v2 = Default:isURLRegistered(p1):await()
 			
-			return var1 and var2
+			return v1 and v2
 		end,
-		type = linkTypeModule.LinkingProtocolRegistered
+		type = LinkTypeModule.LinkingProtocolRegistered
 	},
 	{
-		isLinkType = function(_)
+		isLinkType = function(_): boolean --[[ Line: 26 ]]
 			return true
 		end,
-		type = linkTypeModule.Default
+		type = LinkTypeModule.Default
 	}
 }
 
-return function(p1)
-	-- upvalues: list (ref), linkTypeModule (ref)
-	for i, v in list do
-		if v.isLinkType(p1) then
-			return v.type
+return function(p1) --[[ Line: 33 | Named "getLinkType" ]]
+	-- upvalues: list (copy), LinkTypeModule (copy)
+	for _, value in list do
+		if value.isLinkType(p1) then
+			return value.type
 		end
 	end
-	return linkTypeModule.Default
+	return LinkTypeModule.Default
 end

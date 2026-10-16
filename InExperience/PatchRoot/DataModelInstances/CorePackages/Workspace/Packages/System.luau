@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.System.System)
+﻿return (require(script.Parent._Workspace.System.System))

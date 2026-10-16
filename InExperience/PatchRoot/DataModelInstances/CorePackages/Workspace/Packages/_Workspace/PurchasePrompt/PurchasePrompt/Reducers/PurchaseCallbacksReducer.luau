@@ -1,21 +1,18 @@
-﻿local purchasePrompt = script:FindFirstAncestor("PurchasePrompt")
-local rodux = require(purchasePrompt.Parent.PurchasePromptDeps).Rodux
-local setPurchaseCallbacksModule = require(purchasePrompt.Actions.SetPurchaseCallbacks)
-local fFlagAddFetchProductInfoAsACallback = require(purchasePrompt.Parent.SharedFlags).FFlagAddFetchProductInfoAsACallback
-local fFlagAddOnRobloxSubscriptionUpsellSuccessCallbackToUnifiedPurchaseModal = require(purchasePrompt.Parent.SharedFlags).FFlagAddOnRobloxSubscriptionUpsellSuccessCallbackToUnifiedPurchaseModal
-local fFlagEnableLaunchAfterPurchase = require(purchasePrompt.Parent.SharedFlags).FFlagEnableLaunchAfterPurchase
+﻿local PurchasePrompt = script:FindFirstAncestor("PurchasePrompt")
+local FFlagAddOnRobloxSubscriptionUpsellSuccessCallbackToUnifiedPurchaseModal = require(PurchasePrompt.Parent.SharedFlags).FFlagAddOnRobloxSubscriptionUpsellSuccessCallbackToUnifiedPurchaseModal
+local FFlagEnableLaunchAfterPurchase = require(PurchasePrompt.Parent.SharedFlags).FFlagEnableLaunchAfterPurchase
 
-return rodux.createReducer({}, {
-	[setPurchaseCallbacksModule.name] = function(_, p1)
-		-- upvalues: fFlagAddOnRobloxSubscriptionUpsellSuccessCallbackToUnifiedPurchaseModal (ref), fFlagAddFetchProductInfoAsACallback (ref), fFlagEnableLaunchAfterPurchase (ref)
+return (require(PurchasePrompt.Parent.PurchasePromptDeps).Rodux.createReducer({}, {
+	[require(PurchasePrompt.Actions.SetPurchaseCallbacks).name] = function(_, p1) --[[ Line: 13 ]]
+		-- upvalues: FFlagAddOnRobloxSubscriptionUpsellSuccessCallbackToUnifiedPurchaseModal (copy), FFlagEnableLaunchAfterPurchase (copy)
 		return {
 			onFlowComplete = p1.purchaseCallbacks.onFlowComplete,
 			onPurchaseSuccess = p1.purchaseCallbacks.onPurchaseSuccess,
 			onBuyItemButtonMounted = p1.purchaseCallbacks.onBuyItemButtonMounted,
 			onPurchaseAttempt = p1.purchaseCallbacks.onPurchaseAttempt,
-			onRobloxSubscriptionUpsellSuccess = if fFlagAddOnRobloxSubscriptionUpsellSuccessCallbackToUnifiedPurchaseModal then p1.purchaseCallbacks.onRobloxSubscriptionUpsellSuccess else nil,
-			fetchProductInfo = if fFlagAddFetchProductInfoAsACallback then p1.purchaseCallbacks.fetchProductInfo else nil,
-			onLaunchAfterPurchase = if fFlagEnableLaunchAfterPurchase then p1.purchaseCallbacks.onLaunchAfterPurchase else nil
+			onRobloxSubscriptionUpsellSuccess = if FFlagAddOnRobloxSubscriptionUpsellSuccessCallbackToUnifiedPurchaseModal then p1.purchaseCallbacks.onRobloxSubscriptionUpsellSuccess else nil,
+			fetchProductInfo = p1.purchaseCallbacks.fetchProductInfo,
+			onLaunchAfterPurchase = if FFlagEnableLaunchAfterPurchase then p1.purchaseCallbacks.onLaunchAfterPurchase else nil
 		}
 	end
-})
+}))

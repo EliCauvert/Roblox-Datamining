@@ -1,48 +1,76 @@
-﻿local httpService = game:GetService("HttpService")
-local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local expChatSharedModule = require(parent.ExpChatShared)
-local engineFeaturePresetChatUseExpressionTrayOptionsEndpoint = require(parent.SharedFlags).EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint
-local constantsModule = require(expChat.PresetChat.Constants)
-local _ = require(expChat.Stores.GetPresetChatStore.createPresetChatStore)
+﻿local HttpService = game:GetService("HttpService")
+local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local ExpChatSharedModule = require(Parent.ExpChatShared)
+local EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint = require(Parent.SharedFlags).EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint
+local ConstantsModule = require(ExpChat.PresetChat.Constants)
+local _ = require(ExpChat.Stores.GetPresetChatStore.createPresetChatStore)
+local FFlagExpChatPresetTrayDismissAnalyticsModule = require(ExpChat.Flags.FFlagExpChatPresetTrayDismissAnalytics)
+local EmojiUnicodeToIdModule = require(ExpChat.PresetChat.emojiUnicodeToId)
 
-local function buildPresetTrayItems(value, p1)
-	-- upvalues: engineFeaturePresetChatUseExpressionTrayOptionsEndpoint (ref)
-	local t = {}
+local function buildPresetTrayItems(CategoryGroups, PresetClickCounts, ViewedGroupIds) --[[ Line: 17 ]]
+	-- upvalues: FFlagExpChatPresetTrayDismissAnalyticsModule (copy), EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint (copy), EmojiUnicodeToIdModule (copy)
+	local List = {}
 	
-	for i, v in value do
-		for i_1, v_1 in v.categories do
-			local name = v_1.name or v_1.categoryId
-			
-			for i_2, v_2 in if engineFeaturePresetChatUseExpressionTrayOptionsEndpoint then v_1.contents else v_1.messages do
-				table.insert(t, {
-					category = name,
-					preset_id = v_2.presetId,
-					index = i_2 - 1,
-					click = p1[v_2.presetId] or 0
-				})
+	for _, categoryGroup in CategoryGroups do
+		if not FFlagExpChatPresetTrayDismissAnalyticsModule or ViewedGroupIds[categoryGroup.categoryGroupId] then
+			for _, category in categoryGroup.categories do
+				local Name = category.name or category.categoryId
+				local Contents = if EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint then category.contents else category.messages
+				for i, content in Contents do
+					if FFlagExpChatPresetTrayDismissAnalyticsModule then
+						local IsEmoji: boolean = EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint and content.kind == "Emoji"
+						local EmojiUnicodeToIdModuleResult = if IsEmoji then EmojiUnicodeToIdModule(content.unicode) else content.presetId
+						table.insert(List, {
+							category = Name,
+							tab = categoryGroup.name or categoryGroup.categoryGroupId,
+							preset_id = EmojiUnicodeToIdModuleResult,
+							index = i - 1,
+							click = math.min(PresetClickCounts[EmojiUnicodeToIdModuleResult] or 0, 1)
+						})
+					elseif EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint and content.kind == "Emoji" then
+						table.insert(List, {
+							category = Name,
+							emote_id = content.emoteId,
+							index = i - 1,
+							click = PresetClickCounts[content.emoteId] or 0
+						})
+					else
+						table.insert(List, {
+							category = Name,
+							preset_id = content.presetId,
+							index = i - 1,
+							click = PresetClickCounts[content.presetId] or 0
+						})
+					end
+				end
 			end
 		end
 	end
-	return t
+	return List
 end
 
-return function(value, p2)
-	-- upvalues: expChatSharedModule (ref), constantsModule (ref), httpService (ref), buildPresetTrayItems (ref)
-	if p2 == value.getIsTrayOpen(false) then return end
-	value.setIsTrayOpen(p2)
+return function(p1, IsTrayOpen) --[[ Line: 64 | Named "setIsPresetTrayOpen" ]]
+	-- upvalues: FFlagExpChatPresetTrayDismissAnalyticsModule (copy), ExpChatSharedModule (copy), ConstantsModule (copy), HttpService (copy), buildPresetTrayItems (copy)
+	if IsTrayOpen == p1.getIsTrayOpen(false) then return end
+	if FFlagExpChatPresetTrayDismissAnalyticsModule and IsTrayOpen then
+		p1.setPresetClickCounts({})
+		p1.setViewedGroupIds({})
+	end
+	p1.setIsTrayOpen(IsTrayOpen)
 	
-	if p2 then
-		expChatSharedModule.Analytics:TelemetryLogEvent(expChatSharedModule.Analytics.ExpChatPresetActionConfig, {
-			event_type = constantsModule.Analytics.EventTypes.Show,
-			component = constantsModule.Analytics.Components.PresetTray
-		}, expChatSharedModule.Analytics.DefaultStandardizedFields)
+	if IsTrayOpen then
+		ExpChatSharedModule.Analytics:TelemetryLogEvent(ExpChatSharedModule.Analytics.ExpChatPresetActionConfig, {
+			event_type = ConstantsModule.Analytics.EventTypes.Show,
+			component = ConstantsModule.Analytics.Components.PresetTray
+		}, ExpChatSharedModule.Analytics.DefaultStandardizedFields)
 		
 		return
+	else
+		ExpChatSharedModule.Analytics:TelemetryLogEvent(ExpChatSharedModule.Analytics.ExpChatPresetActionConfig, {
+			event_type = ConstantsModule.Analytics.EventTypes.Dismiss,
+			component = ConstantsModule.Analytics.Components.PresetTray,
+			preset_items = HttpService:JSONEncode((buildPresetTrayItems(p1.getCategoryGroups(false), p1.getPresetClickCounts(false), p1.getViewedGroupIds(false))))
+		}, ExpChatSharedModule.Analytics.DefaultStandardizedFields)
 	end
-	expChatSharedModule.Analytics:TelemetryLogEvent(expChatSharedModule.Analytics.ExpChatPresetActionConfig, {
-		event_type = constantsModule.Analytics.EventTypes.Dismiss,
-		component = constantsModule.Analytics.Components.PresetTray,
-		preset_items = httpService:JSONEncode(buildPresetTrayItems(value.getCategoryGroups(false), value.getPresetClickCounts(false)))
-	}, expChatSharedModule.Analytics.DefaultStandardizedFields)
 end

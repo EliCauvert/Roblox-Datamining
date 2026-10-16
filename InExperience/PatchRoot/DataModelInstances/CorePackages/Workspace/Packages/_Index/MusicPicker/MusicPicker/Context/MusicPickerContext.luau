@@ -1,9 +1,9 @@
-﻿local musicPicker = script:FindFirstAncestor("MusicPicker")
-local _ = require(musicPicker.Types.MusicPickerTypes)
+﻿local MusicPicker = script:FindFirstAncestor("MusicPicker")
+local _ = require(MusicPicker.Types.MusicPickerTypes)
 
-return require(musicPicker.Parent.React).createContext({
+return (require(MusicPicker.Parent.React).createContext({
 	previewingId = nil,
-	togglePreview = function() end,
+	togglePreview = function() --[[ Line: 18 ]] end,
 	savedIds = {},
-	toggleSaved = function() end
-})
+	toggleSaved = function() --[[ Line: 20 ]] end
+}))

@@ -1,193 +1,192 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local creatorAgentChatModule = require(parent.DataHydration.CreatorAgentChat)
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local loadingIndicatorModule = require(script.Parent.LoadingIndicator)
-local icon = foundationModule.Icon
-local scrollView = foundationModule.ScrollView
-local text = foundationModule.Text
-local view = foundationModule.View
-local iconName = foundationModule.Enums.IconName
-local iconSize = foundationModule.Enums.IconSize
-local scrollBarVisibility = foundationModule.Enums.ScrollBarVisibility
-local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
-local useScaledValue = foundationModule.Hooks.useScaledValue
-local useTokens = foundationModule.Hooks.useTokens
-local subagentTaskCategory = creatorAgentChatModule.SubagentTaskCategory
-local list = {
-	subagentTaskCategory.Gameplay,
-	subagentTaskCategory.Art,
-	subagentTaskCategory.Audio,
-	subagentTaskCategory.Marketing
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local LoadingIndicatorModule = require(script.Parent.LoadingIndicator)
+local Icon = FoundationModule.Icon
+local ScrollView = FoundationModule.ScrollView
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local IconName = FoundationModule.Enums.IconName
+local IconSize = FoundationModule.Enums.IconSize
+local ScrollBarVisibility = FoundationModule.Enums.ScrollBarVisibility
+local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
+local UseScaledValueFunction = FoundationModule.Hooks.useScaledValue
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local SubagentTaskCategory = require(Parent.DataHydration.CreatorAgentChat).SubagentTaskCategory
+local Names = {
+	SubagentTaskCategory.Gameplay,
+	SubagentTaskCategory.Art,
+	SubagentTaskCategory.Audio,
+	SubagentTaskCategory.Marketing
 }
-local t = {
-	Art = iconName.TwoMakeupBrushes,
-	Audio = iconName.FiveVerticalLinesWave,
-	Gameplay = iconName.Controller,
-	Marketing = iconName.Wallet
+local config = {
+	Art = IconName.TwoMakeupBrushes,
+	Audio = IconName.FiveVerticalLinesWave,
+	Gameplay = IconName.Controller,
+	Marketing = IconName.Wallet
 }
 
-local function getDisplayGroups(p1)
-	-- upvalues: list (ref)
+local function getDisplayGroups(List) --[[ Line: 50 ]]
+	-- upvalues: Names (copy)
 	local t = {}
 	
-	for i, v in p1 do
-		t[v.name] = v
+	for _, value in List do
+		t[value.name] = value
 	end
-	local t_1 = {}
+	local List1 = {}
 	
-	for i_1, v_1 in list do
-		table.insert(t_1, t[v_1] or {
+	for _, name in Names do
+		table.insert(List1, t[name] or {
 			isComplete = false,
 			isLoading = false,
-			name = v_1,
+			name = name,
 			tasks = {}
 		})
-		t[v_1] = nil
+		t[name] = nil
 	end
-	for i_2, v_2 in p1 do
-		if t[v_2.name] ~= nil then
-			table.insert(t_1, v_2)
-			t[v_2.name] = nil
+	for _, value1 in List do
+		if t[value1.name] ~= nil then
+			table.insert(List1, value1)
+			t[value1.name] = nil
 		end
 	end
-	return t_1
+	return List1
 end
 
-local function AgentTaskList(p2)
-	-- upvalues: reactModule (ref), scrollView (ref), scrollBarVisibility (ref), view (ref), stateLayerAffordance (ref)
-	local var1, var2 = reactModule.useBinding(0)
+local function AgentTaskList(Frame) --[[ Line: 86 ]]
+	-- upvalues: ReactModule (copy), ScrollView (copy), ScrollBarVisibility (copy), View (copy), StateLayerAffordance (copy)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
 	
-	return reactModule.createElement(scrollView, {
+	return ReactModule.createElement(ScrollView, {
 		tag = "shrink",
-		LayoutOrder = p2.LayoutOrder,
-		Size = var1:map(function(p3)
-			return UDim2.new(1, 0, 0, p3)
+		LayoutOrder = Frame.LayoutOrder,
+		Size = UseBindingResult:map(function(YOffset): UDim2 --[[ Line: 88 ]]
+			return UDim2.new(1, 0, 0, YOffset)
 		end),
-		onAbsoluteCanvasSizeChanged = reactModule.useCallback(function(p3)
-			-- upvalues: var2 (ref)
-			var2(p3.AbsoluteCanvasSize.Y)
-		end, { var2 }),
+		onAbsoluteCanvasSizeChanged = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 91 ]]
+			-- upvalues: UseBindingResult2 (copy)
+			UseBindingResult2(ScrollFrame.AbsoluteCanvasSize.Y)
+		end, { UseBindingResult2 }),
 		scroll = {
 			AutomaticCanvasSize = Enum.AutomaticSize.Y,
 			CanvasSize = UDim2.new(1, 0, 0, 0),
-			scrollBarVisibility = scrollBarVisibility.None,
+			scrollBarVisibility = ScrollBarVisibility.None,
 			ScrollingDirection = Enum.ScrollingDirection.Y
 		},
-		testId = p2.testId
+		testId = Frame.testId
 	}, {
-		Content = reactModule.createElement(view, {
+		Content = ReactModule.createElement(View, {
 			tag = "col size-full-0 auto-y",
-			onActivated = p2.onActivated,
+			onActivated = Frame.onActivated,
 			layout = {
 				FillDirection = Enum.FillDirection.Vertical,
-				Padding = UDim.new(0, p2.taskGap)
+				Padding = UDim.new(0, Frame.taskGap)
 			},
-			stateLayer = { affordance = stateLayerAffordance.None },
-			testId = `{p2.testId}-content`
-		}, p2.children)
+			stateLayer = { affordance = StateLayerAffordance.None },
+			testId = `{Frame.testId}-content`
+		}, Frame.children)
 	})
 end
 
-local function AgentCard(p2)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), t (ref), reactModule (ref), view (ref), text (ref), loadingIndicatorModule (ref), icon (ref), iconSize (ref), AgentTaskList (ref)
-	local group = p2.group
-	local var1 = useLocalization({
-		building = localizationStringsModule.SUBAGENT_STATUS_BUILDING,
+local function AgentCard(p1) --[[ Line: 132 ]]
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), config (copy), ReactModule (copy), View (copy), Text (copy), LoadingIndicatorModule (copy), Icon (copy), IconSize (copy), AgentTaskList (copy)
+	local Group = p1.group
+	local UseLocalizationResult = UseLocalizationFunction({
+		building = LocalizationStringsModule.SUBAGENT_STATUS_BUILDING,
 		completedTasks = {
-			localizationStringsModule.SUBAGENT_STATUS_COMPLETED_TASKS,
-			COUNT = #group.tasks
+			LocalizationStringsModule.SUBAGENT_STATUS_COMPLETED_TASKS,
+			COUNT = #Group.tasks
 		},
-		notStarted = localizationStringsModule.SUBAGENT_STATUS_NOT_STARTED
+		notStarted = LocalizationStringsModule.SUBAGENT_STATUS_NOT_STARTED
 	})
-	local var2 = if #group.tasks == 0 then var1.notStarted elseif group.isComplete then var1.completedTasks else var1.building
-	local name = t[group.name]
-	local var3 = reactModule.useCallback(function()
-		-- upvalues: p2 (ref), group (ref)
-		p2.onAgentActivated(group)
-	end, { p2.onAgentActivated, group })
-	local t_1 = {}
+	local NotStarted = if #Group.tasks == 0 then UseLocalizationResult.notStarted elseif Group.isComplete then UseLocalizationResult.completedTasks else UseLocalizationResult.building
+	local Entry = config[Group.name]
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 151 ]]
+		-- upvalues: p1 (copy), Group (copy)
+		p1.onAgentActivated(Group)
+	end, { p1.onAgentActivated, Group })
+	local Elements = {}
 	
-	for i, v in group.tasks do
-		t_1[`Task{i}`] = reactModule.createElement(view, {
+	for LayoutOrder, _task in Group.tasks do
+		Elements[`Task{LayoutOrder}`] = ReactModule.createElement(View, {
 			tag = "row align-y-center gap-small size-full-0 auto-y",
-			LayoutOrder = i,
-			testId = `{p2.testId}-card-{p2.index}-task-{i}`
+			LayoutOrder = LayoutOrder,
+			testId = `{p1.testId}-card-{p1.index}-task-{LayoutOrder}`
 		}, {
-			Label = reactModule.createElement(text, {
+			Label = ReactModule.createElement(Text, {
 				LayoutOrder = 1,
 				tag = "fill auto-y text-body-small text-align-x-left text-truncate-end content-emphasis",
-				Text = v.text
+				Text = _task.text
 			}),
-			Status = reactModule.createElement(loadingIndicatorModule, {
+			Status = ReactModule.createElement(LoadingIndicatorModule, {
 				layoutOrder = 2,
-				status = v.status,
-				testId = `{p2.testId}-card-{p2.index}-task-{i}`
+				status = _task.status,
+				testId = `{p1.testId}-card-{p1.index}-task-{LayoutOrder}`
 			})
 		})
 	end
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col gap-large size-full-0 auto-y padding-large stroke-standard stroke-emphasis radius-large",
-		LayoutOrder = p2.index,
-		onActivated = if #group.tasks > 0 then var3 else nil,
-		sizeConstraint = { MaxSize = Vector2.new(1e999, p2.maxHeight) },
-		testId = `{p2.testId}-card-{p2.index}-container`
+		LayoutOrder = p1.index,
+		onActivated = if #Group.tasks > 0 then UseResult else nil,
+		sizeConstraint = { MaxSize = Vector2.new(1e999, p1.maxHeight) },
+		testId = `{p1.testId}-card-{p1.index}-container`
 	}, {
-		Header = reactModule.createElement(view, {
+		Header = ReactModule.createElement(View, {
 			LayoutOrder = 1,
 			tag = "row align-y-center gap-small size-full-0 auto-y",
-			testId = `{p2.testId}-card-{p2.index}`
+			testId = `{p1.testId}-card-{p1.index}`
 		}, {
-			Icon = if name ~= nil then nil else reactModule.createElement(icon, {
+			Icon = if Entry == nil then nil else ReactModule.createElement(Icon, {
 				LayoutOrder = 1,
 				tag = "auto-xy content-emphasis",
-				name = name,
-				size = iconSize.Small,
-				testId = `{p2.testId}-card-{p2.index}-category-icon`
+				name = Entry,
+				size = IconSize.Small,
+				testId = `{p1.testId}-card-{p1.index}-category-icon`
 			}),
-			Title = reactModule.createElement(text, {
+			Title = ReactModule.createElement(Text, {
 				LayoutOrder = 2,
 				tag = "fill auto-y text-title-medium text-wrap text-align-x-left content-emphasis",
-				Text = group.name
+				Text = Group.name
 			}),
-			Status = reactModule.createElement(text, {
+			Status = ReactModule.createElement(Text, {
 				LayoutOrder = 3,
 				tag = "auto-xy padding-left-large text-body-small text-align-x-right content-emphasis",
-				Text = var2
+				Text = NotStarted
 			})
 		}),
-		Tasks = if #group.tasks > 0 then reactModule.createElement(AgentTaskList, {
+		Tasks = if #Group.tasks > 0 then ReactModule.createElement(AgentTaskList, {
 			LayoutOrder = 2,
-			onActivated = var3,
-			taskGap = p2.taskGap,
-			testId = `{p2.testId}-card-{p2.index}-tasks`
-		}, t_1) else nil
+			onActivated = UseResult,
+			taskGap = p1.taskGap,
+			testId = `{p1.testId}-card-{p1.index}-tasks`
+		}, Elements) else nil
 	})
 end
 
-return reactModule.memo(function(p3)
-	-- upvalues: useTokens (ref), useScaledValue (ref), getDisplayGroups (ref), reactModule (ref), AgentCard (ref), view (ref)
-	local var4 = useTokens()
-	local var5 = useScaledValue(156)
-	local testId = p3.testId or "build-agent-list"
-	local t = {}
+return ReactModule.memo(function(Frame) --[[ Line: 220 | Named "AgentsList" ]]
+	-- upvalues: UseTokensFunction (copy), UseScaledValueFunction (copy), getDisplayGroups (copy), ReactModule (copy), AgentCard (copy), View (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseScaledValueResult = UseScaledValueFunction(156)
+	local TestId = Frame.testId or "build-agent-list"
+	local Elements = {}
 	
-	for i, v in getDisplayGroups(p3.groups) do
-		t[`Card{i}`] = reactModule.createElement(AgentCard, {
-			group = v,
-			index = i,
-			maxHeight = var5,
-			onAgentActivated = p3.onAgentActivated,
-			taskGap = var4.Gap.Small,
-			testId = testId
+	for Index, Group in getDisplayGroups(Frame.groups) do
+		Elements[`Card{Index}`] = ReactModule.createElement(AgentCard, {
+			group = Group,
+			index = Index,
+			maxHeight = UseScaledValueResult,
+			onAgentActivated = Frame.onAgentActivated,
+			taskGap = UseTokensResult.Gap.Small,
+			testId = TestId
 		})
 	end
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col gap-medium size-full-0 auto-y padding-y-medium",
-		LayoutOrder = p3.LayoutOrder,
-		testId = testId
-	}, t)
+		LayoutOrder = Frame.LayoutOrder,
+		testId = TestId
+	}, Elements)
 end)

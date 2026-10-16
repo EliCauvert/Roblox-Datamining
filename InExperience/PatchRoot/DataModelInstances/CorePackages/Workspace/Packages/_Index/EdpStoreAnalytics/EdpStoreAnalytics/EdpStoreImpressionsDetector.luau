@@ -1,44 +1,44 @@
-﻿local edpStoreAnalytics = script:FindFirstAncestor("EdpStoreAnalytics")
-local parent = edpStoreAnalytics.Parent
-local reactModule = require(parent.React)
-local appCommonLibModule = require(parent.AppCommonLib)
-local constantsModule = require(edpStoreAnalytics.Constants)
-local edpStoreAnalyticsLoggerModule = require(edpStoreAnalytics.EdpStoreAnalyticsLogger)
-local signal = appCommonLibModule.Signal
-local screenSizeImpressionsDetector = require(parent.Impressions).ScreenSizeImpressionsDetector
+﻿local EdpStoreAnalytics = script:FindFirstAncestor("EdpStoreAnalytics")
+local Parent = EdpStoreAnalytics.Parent
+local ReactModule = require(Parent.React)
+local ConstantsModule = require(EdpStoreAnalytics.Constants)
+local EdpStoreAnalyticsLoggerModule = require(EdpStoreAnalytics.EdpStoreAnalyticsLogger)
+local Signal = require(Parent.AppCommonLib).Signal
+local ScreenSizeImpressionsDetector = require(Parent.Impressions).ScreenSizeImpressionsDetector
 
-return function(p1)
-	-- upvalues: reactModule (ref), signal (ref), constantsModule (ref), edpStoreAnalyticsLoggerModule (ref), screenSizeImpressionsDetector (ref)
-	local var1 = reactModule.useRef(signal.new())
-	local var2 = reactModule.useRef(false)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var1 (ref)
+return function(p1) --[[ Line: 21 ]]
+	-- upvalues: ReactModule (copy), Signal (copy), ConstantsModule (copy), EdpStoreAnalyticsLoggerModule (copy), ScreenSizeImpressionsDetector (copy)
+	local UseRefResult = ReactModule.useRef(Signal.new())
+	local UseRefResult1 = ReactModule.useRef(false)
+	ReactModule.useEffect(function() --[[ Line: 25 ]]
+		-- upvalues: p1 (copy), UseRefResult (copy)
 		if p1.scrollViewPositionChangedSignal.current then
-			p1.scrollViewPositionChangedSignal.current:connect(function()
-				-- upvalues: var1 (copy)
-				var1.current:fire()
+			p1.scrollViewPositionChangedSignal.current:connect(function() --[[ Line: 27 ]]
+				-- upvalues: UseRefResult (upval)
+				UseRefResult.current:fire()
 			end)
 		end
 	end, { p1.scrollViewPositionChangedSignal })
 	
-	return reactModule.createElement(screenSizeImpressionsDetector, {
+	return ReactModule.createElement(ScreenSizeImpressionsDetector, {
 		parentRef = p1.parentRef,
-		onRequestImpressionsSignal = var1.current,
-		onImpressionsDetected = reactModule.useCallback(function(p2)
-			-- upvalues: var2 (ref), p1 (ref), constantsModule (copy), edpStoreAnalyticsLoggerModule (copy)
-			if #p2 == 0 or var2.current then return end
-			if p1.parameters == nil then
+		onRequestImpressionsSignal = UseRefResult.current,
+		onImpressionsDetected = ReactModule.useCallback(function(Entry) --[[ Line: 33 ]]
+			-- upvalues: UseRefResult1 (copy), p1 (copy), ConstantsModule (upval), EdpStoreAnalyticsLoggerModule (upval)
+			if #Entry == 0 or UseRefResult1.current then return end
+			if p1.parameters ~= nil then
+				UseRefResult1.current = true
+				EdpStoreAnalyticsLoggerModule.logImpression({
+					universeId = tonumber(p1.parameters.universeId),
+					productType = p1.parameters.productType,
+					actionType = ConstantsModule.StoreEnums.ActionType.Impression,
+					locationType = p1.parameters.locationType,
+					layoutOrder = tonumber(Entry[1])
+				})
+				EdpStoreAnalyticsLoggerModule.logExperienceStoreExposure()
+				
 				return
 			end
-			var2.current = true
-			edpStoreAnalyticsLoggerModule.logImpression({
-				universeId = tonumber(p1.parameters.universeId),
-				productType = p1.parameters.productType,
-				actionType = constantsModule.StoreEnums.ActionType.Impression,
-				locationType = p1.parameters.locationType,
-				layoutOrder = tonumber(p2[1])
-			})
-			edpStoreAnalyticsLoggerModule.logExperienceStoreExposure()
 		end, { p1.parameters }),
 		impressionsTag = p1.impressionsTag
 	})

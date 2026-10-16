@@ -1,145 +1,133 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local dashModule = require(parent.Dash)
-local reactModule = require(parent.React)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local _ = require(foundation.Enums.ControlState)
-local fillBehaviorModule = require(foundation.Enums.FillBehavior)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local segmentedControlVariantModule = require(foundation.Enums.SegmentedControlVariant)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local useAnimatedHighlightModule = require(foundation.Utility.useAnimatedHighlight)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local segmentModule = require(script.Parent.Segment)
-local useSegmentedControlVariantsModule = require(script.Parent.useSegmentedControlVariants)
-local flagsModule = require(foundation.Utility.Flags)
-local t = {
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local DashModule = require(Parent.Dash)
+local ReactModule = require(Parent.React)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local _ = require(Foundation.Enums.ControlState)
+local FillBehaviorModule = require(Foundation.Enums.FillBehavior)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local UseAnimatedHighlightModule = require(Foundation.Utility.useAnimatedHighlight)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local SegmentModule = require(script.Parent.Segment)
+local UseSegmentedControlVariantsModule = require(script.Parent.useSegmentedControlVariants)
+local FlagsModule = require(Foundation.Utility.Flags)
+local config = {
 	testId = "--foundation-segmented-control",
 	ZIndex = 1,
-	size = inputSizeModule.Medium,
-	variant = segmentedControlVariantModule.Filled,
-	fillBehavior = fillBehaviorModule.Fit
+	size = require(Foundation.Enums.InputSize).Medium,
+	variant = require(Foundation.Enums.SegmentedControlVariant).Filled,
+	fillBehavior = FillBehaviorModule.Fit
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), flagsModule (ref), useTokensModule (ref), useSegmentedControlVariantsModule (ref), fillBehaviorModule (ref), reactModule (ref), useAnimatedHighlightModule (ref), viewModule (ref), withCommonPropsModule (ref), dashModule (ref), segmentModule (ref)
-	local var1
-	local var2 = withDefaultsModule(p1, t)
-	local var3 = if flagsModule.FoundationSegmentedControlBeta then var2.variant else nil
-	local var4 = if flagsModule.FoundationSegmentedControlBeta then var2.fillBehavior else nil
-	local var5 = useTokensModule()
-	local var6 = useSegmentedControlVariantsModule(var5, var2.size, if flagsModule.FoundationSegmentedControlBeta then var3 else nil, if flagsModule.FoundationSegmentedControlBeta then var4 else nil, var2.isCircular)
-	
-	if flagsModule.FoundationSegmentedControlBeta then
-		var1 = var4 == fillBehaviorModule.Fill
-		var1 = nil
-	else
-		var1 = nil
-	end
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local var7 = reactModule.useRef(nil)
-	local _ = nil
-	local var8 = reactModule.useRef({})
-	local var9 = reactModule.useMemo(function()
-		-- upvalues: var8 (ref), var2 (ref), reactModule (copy)
-		local current = var8.current
+return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 54 | Named "SegmentedControl" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), FlagsModule (copy), UseTokensModule (copy), UseSegmentedControlVariantsModule (copy), FillBehaviorModule (copy), ReactModule (copy), UseAnimatedHighlightModule (copy), ViewModule (copy), WithCommonPropsModule (copy), DashModule (copy), SegmentModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	local Variant = if FlagsModule.FoundationSegmentedControlBeta then WithDefaultsModuleResult.variant else nil
+	local FillBehavior = if FlagsModule.FoundationSegmentedControlBeta then WithDefaultsModuleResult.fillBehavior else nil
+	local UseTokensModuleResult = UseTokensModule()
+	local UseSegmentedControlVariantsModuleResult = UseSegmentedControlVariantsModule(UseTokensModuleResult, WithDefaultsModuleResult.size, if FlagsModule.FoundationSegmentedControlBeta then Variant else nil, if FlagsModule.FoundationSegmentedControlBeta then FillBehavior else nil, WithDefaultsModuleResult.isCircular)
+	local IsFillBehaviorMatch = if FlagsModule.FoundationSegmentedControlBeta then FillBehavior == FillBehaviorModule.Fill else nil
+	local UseRefResult = nil
+	local UseBindingResult2 = nil
+	local UseResult = nil
+	local UseResult1 = nil
+	UseRefResult = ReactModule.useRef(nil)
+	local UseMemoResult = nil
+	local UseRefResult1 = ReactModule.useRef({})
+	UseMemoResult = ReactModule.useMemo(function() --[[ Line: 83 ]]
+		-- upvalues: UseRefResult1 (copy), WithDefaultsModuleResult (copy), ReactModule (upval)
+		local Current = UseRefResult1.current
 		
-		for i, v in var2.segments do
-			if v.ref then
-				current[v.id] = v.ref
-			elseif not current[v.id] then
-				current[v.id] = reactModule.createRef()
+		for _, segment in WithDefaultsModuleResult.segments do
+			if segment.ref then
+				Current[segment.id] = segment.ref
+			elseif not Current[segment.id] then
+				Current[segment.id] = ReactModule.createRef()
 			end
 		end
-		return current
-	end, { var2.segments })
-	local var10 = useAnimatedHighlightModule(var2.value, p2 or var7, var9, if flagsModule.FoundationSegmentedControlBeta then var2.size else nil, if flagsModule.FoundationSegmentedControlBeta then var4 else nil)
-	local activeItemHeight = var10.activeItemHeight
-	local highlightPosition = var10.highlightPosition
-	local highlightWidth = var10.highlightWidth
-	local var11, var12 = reactModule.useBinding(Vector2.new(0, 0))
-	local var13 = var12
-	local var14 = reactModule.useCallback(function(p3)
-		-- upvalues: var13 (write)
-		var13(p3.AbsoluteSize)
-	end, { var6.container.tag })
-	local var15 = reactModule.useCallback(function(p3)
-		-- upvalues: var9 (write), var2 (ref)
-		local var16 = 0
+		return Current
+	end, { WithDefaultsModuleResult.segments })
+	local UseAnimatedHighlightModuleResult = UseAnimatedHighlightModule(WithDefaultsModuleResult.value, p2 or UseRefResult, UseMemoResult, if FlagsModule.FoundationSegmentedControlBeta then WithDefaultsModuleResult.size else nil, if FlagsModule.FoundationSegmentedControlBeta then FillBehavior else nil)
+	local ActiveItemHeight = UseAnimatedHighlightModuleResult.activeItemHeight
+	local HighlightPosition = UseAnimatedHighlightModuleResult.highlightPosition
+	local HighlightWidth = UseAnimatedHighlightModuleResult.highlightWidth
+	local UseBindingResult
+	UseBindingResult, UseBindingResult2 = ReactModule.useBinding(Vector2.new(0, 0))
+	UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 106 ]]
+		-- upvalues: UseBindingResult2 (ref)
+		UseBindingResult2(Frame.AbsoluteSize)
+	end, { UseSegmentedControlVariantsModuleResult.container.tag })
+	UseResult1 = ReactModule.useCallback(function(p3): number --[[ Line: 117 ]]
+		-- upvalues: UseMemoResult (ref), WithDefaultsModuleResult (copy)
+		local YDelta = 0
 		
 		if p3.current then
-			local current = var9[var2.value].current
+			local Current = UseMemoResult[WithDefaultsModuleResult.value].current
 			
-			if current then
-				var16 = current.AbsolutePosition.Y - p3.current.AbsolutePosition.Y
+			if Current then
+				YDelta = Current.AbsolutePosition.Y - p3.current.AbsolutePosition.Y
 			end
 		end
-		return var16
-	end, { var2.value })
+		return YDelta
+	end, { WithDefaultsModuleResult.value })
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var2, {
-		tag = if flagsModule.FoundationSegmentedControlBeta and var1 then "size-full-0 auto-y" else nil,
-		Size = if flagsModule.FoundationSegmentedControlBeta then if not var1 then var11:map(function(p3)
-			return UDim2.fromOffset(p3.X, p3.Y)
-		end) else nil else var11:map(function(p3)
-			return UDim2.fromOffset(p3.X, p3.Y)
+	return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, {
+		tag = if FlagsModule.FoundationSegmentedControlBeta and IsFillBehaviorMatch then "size-full-0 auto-y" else nil,
+		Size = if FlagsModule.FoundationSegmentedControlBeta then if IsFillBehaviorMatch then nil else UseBindingResult:map(function(Vector): UDim2 --[[ Line: 136 ]]
+			return UDim2.fromOffset(Vector.X, Vector.Y)
+		end) else UseBindingResult:map(function(Vector): UDim2 --[[ Line: 140 ]]
+			return UDim2.fromOffset(Vector.X, Vector.Y)
 		end)
 	}), {
-		SegmentsContainer = reactModule.createElement(viewModule, withDefaultsModule({
-			tag = var6.container.tag,
-			stroke = if flagsModule.FoundationSegmentedControlBeta then var6.container.stroke else nil,
-			ref = p2 or var7,
-			testId = `{var2.testId}--segments-container`
+		SegmentsContainer = ReactModule.createElement(ViewModule, WithDefaultsModule({
+			tag = UseSegmentedControlVariantsModuleResult.container.tag,
+			stroke = if FlagsModule.FoundationSegmentedControlBeta then UseSegmentedControlVariantsModuleResult.container.stroke else nil,
+			ref = p2 or UseRefResult,
+			testId = `{WithDefaultsModuleResult.testId}--segments-container`
 		}, {
-			onAbsoluteSizeChanged = reactModule.useCallback(function(p3)
-				-- upvalues: var2 (ref), var14 (write)
-				if var2.onAbsoluteSizeChanged then
-					var2.onAbsoluteSizeChanged(p3)
+			onAbsoluteSizeChanged = ReactModule.useCallback(function(p3) --[[ Line: 110 ]]
+				-- upvalues: WithDefaultsModuleResult (copy), UseResult (ref)
+				if WithDefaultsModuleResult.onAbsoluteSizeChanged then
+					WithDefaultsModuleResult.onAbsoluteSizeChanged(p3)
 				end
-				var14(p3)
-			end, { var2.onAbsoluteSizeChanged, var14 })
-		}), dashModule.map(var2.segments, function(p3, p4)
-			-- upvalues: reactModule (copy), segmentModule (copy), var2 (ref), flagsModule (copy), var3 (ref), var4 (ref), var9 (write)
-			return reactModule.createElement(reactModule.Fragment, { key = tostring(p3.id) }, {
-				Segment = reactModule.createElement(segmentModule, {
+				UseResult(p3)
+			end, {
+				WithDefaultsModuleResult.onAbsoluteSizeChanged,
+				UseResult
+			})
+		}), DashModule.map(WithDefaultsModuleResult.segments, function(p3, p4: number) --[[ Line: 155 ]]
+			-- upvalues: ReactModule (upval), SegmentModule (upval), WithDefaultsModuleResult (copy), FlagsModule (upval), Variant (copy), FillBehavior (copy), UseMemoResult (ref)
+			return ReactModule.createElement(ReactModule.Fragment, { key = tostring(p3.id) }, {
+				Segment = ReactModule.createElement(SegmentModule, {
 					id = p3.id,
-					size = var2.size,
-					variant = if flagsModule.FoundationSegmentedControlBeta then var3 else nil,
-					fillBehavior = if flagsModule.FoundationSegmentedControlBeta then var4 else nil,
-					isCircular = var2.isCircular,
+					size = WithDefaultsModuleResult.size,
+					variant = if FlagsModule.FoundationSegmentedControlBeta then Variant else nil,
+					fillBehavior = if FlagsModule.FoundationSegmentedControlBeta then FillBehavior else nil,
+					isCircular = WithDefaultsModuleResult.isCircular,
 					text = p3.text,
 					icon = p3.icon,
-					isActive = p3.id == var2.value,
-					onActivated = var2.onActivated,
+					isActive = p3.id == WithDefaultsModuleResult.value,
+					onActivated = WithDefaultsModuleResult.onActivated,
 					LayoutOrder = (p4 - 1) * 2 + 1,
-					testId = `{var2.testId}--segment-{p7.id}`,
-					ref = var9[p3.id]
+					testId = `{WithDefaultsModuleResult.testId}--segment-{p7.id}`,
+					ref = UseMemoResult[p3.id]
 				})
 			})
 		end)),
-		Overlay = reactModule.createElement(viewModule, {
-			tag = var6.segment.tag,
-			backgroundStyle = if flagsModule.FoundationSegmentedControlBeta then var5.Color.Shift.Shift_300 else var5.Color.Shift.Shift_400,
-			Size = reactModule.joinBindings({ highlightWidth, activeItemHeight }):map(function(p3)
-				return UDim2.fromOffset(p3[1], p3[2])
+		Overlay = ReactModule.createElement(ViewModule, {
+			tag = UseSegmentedControlVariantsModuleResult.segment.tag,
+			backgroundStyle = if FlagsModule.FoundationSegmentedControlBeta then UseTokensModuleResult.Color.Shift.Shift_300 else UseTokensModuleResult.Color.Shift.Shift_400,
+			Size = ReactModule.joinBindings({ HighlightWidth, ActiveItemHeight }):map(function(Entry): UDim2 --[[ Line: 182 ]]
+				return UDim2.fromOffset(Entry[1], Entry[2])
 			end),
-			Position = highlightPosition:map(function(p3)
-				-- upvalues: var15 (write), p2 (ref), var7 (write)
-				return UDim2.fromOffset(p3, var15(p2 or var7))
+			Position = HighlightPosition:map(function(XOffset): UDim2 --[[ Line: 185 ]]
+				-- upvalues: UseResult1 (ref), p2 (copy), UseRefResult (ref)
+				return UDim2.fromOffset(XOffset, (UseResult1(p2 or UseRefResult)))
 			end),
-			ZIndex = var2.ZIndex + 1,
-			testId = `{var2.testId}--animated-overlay`
+			ZIndex = WithDefaultsModuleResult.ZIndex + 1,
+			testId = `{WithDefaultsModuleResult.testId}--animated-overlay`
 		})
 	})
 end))

@@ -1,8 +1,8 @@
-﻿return function(p1)
+﻿return function(List) --[[ Line: 3 ]]
 	local t = {}
 	
-	for i, v in pairs(p1) do
-		t[i] = #v
+	for i, value in pairs(List) do
+		t[i] = #value
 	end
 	return t
 end

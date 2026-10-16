@@ -1,38 +1,37 @@
-﻿local parent = script:FindFirstAncestor("CurrencyTransfers").Parent
-local reactModule = require(parent.React)
-local inputHandlersModule = require(parent.InputHandlers)
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
-local useFocusRoot = focusNavigationUtilsModule.useFocusRoot
-local useFocusOnMount = focusNavigationUtilsModule.useFocusOnMount
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
-local useMostRecentOrDefaultFocusBehavior = reactFocusNavigationModule.useMostRecentOrDefaultFocusBehavior
-local t = {
-	[Enum.KeyCode.ButtonB] = focusNavigationEventNameEnum.NavigateBack,
-	[Enum.KeyCode.Escape] = focusNavigationEventNameEnum.NavigateBack
+﻿local Parent = script:FindFirstAncestor("CurrencyTransfers").Parent
+local ReactModule = require(Parent.React)
+local InputHandlersModule = require(Parent.InputHandlers)
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local UseFocusRootFunction = FocusNavigationUtilsModule.useFocusRoot
+local UseFocusOnMountFunction = FocusNavigationUtilsModule.useFocusOnMount
+local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
+local UseMostRecentOrDefaultFocusBehaviorFunction = require(Parent.ReactFocusNavigation).useMostRecentOrDefaultFocusBehavior
+local EventMap = {
+	[Enum.KeyCode.ButtonB] = FocusNavigationEventNameEnum.NavigateBack,
+	[Enum.KeyCode.Escape] = FocusNavigationEventNameEnum.NavigateBack
 }
 
-return function(value)
-	-- upvalues: reactModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), t (ref), useMostRecentOrDefaultFocusBehavior (ref), useFocusOnMount (ref)
-	local var1, var2 = useMostRecentOrDefaultFocusBehavior(useFocusRoot({
+return function(Callback) --[[ Line: 21 | Named "useTransferSheetFocus" ]]
+	-- upvalues: ReactModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), UseMostRecentOrDefaultFocusBehaviorFunction (copy), UseFocusOnMountFunction (copy)
+	local UseMostRecentOrDefaultFocusBehaviorResult, UseMostRecentOrDefaultFocusBehaviorResult2 = UseMostRecentOrDefaultFocusBehaviorFunction((UseFocusRootFunction({
 		isAutoFocusRoot = true,
 		shouldRestoreFocus = false,
-		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.PopUp,
-		eventMap = t,
-		eventHandlers = reactModule.useMemo(function()
-			-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), value (ref)
+		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.PopUp,
+		eventMap = EventMap,
+		eventHandlers = ReactModule.useMemo(function() --[[ Line: 22 ]]
+			-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), Callback (copy)
 			return {
-				[focusNavigationEventNameEnum.NavigateBack] = {
-					handler = inputHandlersModule.onRelease(function(p1)
-						-- upvalues: value (copy)
-						value()
+				[FocusNavigationEventNameEnum.NavigateBack] = {
+					handler = InputHandlersModule.onRelease(function(p1) --[[ Line: 25 ]]
+						-- upvalues: Callback (upval)
+						Callback()
 						p1:cancel()
 					end)
 				}
 			}
-		end, { value })
-	}))
+		end, { Callback })
+	})))
 	
-	return var2, useFocusOnMount(var1)
+	return UseMostRecentOrDefaultFocusBehaviorResult2, (UseFocusOnMountFunction(UseMostRecentOrDefaultFocusBehaviorResult))
 end

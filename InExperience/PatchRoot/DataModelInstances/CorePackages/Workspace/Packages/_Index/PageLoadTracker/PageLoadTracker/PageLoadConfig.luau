@@ -1,4 +1,4 @@
-﻿local loggingProtocolModule = require(script:FindFirstAncestor("PageLoadTracker").Parent.LoggingProtocol)
+﻿local LoggingProtocolModule = require(script:FindFirstAncestor("PageLoadTracker").Parent.LoggingProtocol)
 
 return {
 	IDLE_TIMEOUT_SECONDS = 1,
@@ -8,8 +8,8 @@ return {
 		description = "Page load completion events with automatic idle detection",
 		links = "",
 		backends = {
-			loggingProtocolModule.TelemetryBackends.Points,
-			loggingProtocolModule.TelemetryBackends.EventIngest
+			LoggingProtocolModule.TelemetryBackends.Points,
+			LoggingProtocolModule.TelemetryBackends.EventIngest
 		},
 		lastUpdated = { 25, 6, 18 }
 	},

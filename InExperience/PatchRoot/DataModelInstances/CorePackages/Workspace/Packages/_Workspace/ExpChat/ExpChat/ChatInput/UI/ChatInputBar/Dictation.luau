@@ -1,3 +1,3 @@
 ﻿local _ = require(script.DictationMode)
 
-return require(script.useDictation)
+return (require(script.useDictation))

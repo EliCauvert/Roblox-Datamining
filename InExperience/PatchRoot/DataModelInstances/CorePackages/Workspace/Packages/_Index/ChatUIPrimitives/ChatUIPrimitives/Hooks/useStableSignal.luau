@@ -1,16 +1,16 @@
-﻿local parent = script:FindFirstAncestor("ChatUIPrimitives").Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
+﻿local Parent = script:FindFirstAncestor("ChatUIPrimitives").Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
 
-return function(value)
-	-- upvalues: reactModule (ref), signalsModule (ref)
-	local var1 = reactModule.useRef(nil)
+return function(p1) --[[ Line: 21 | Named "useStableSignal" ]]
+	-- upvalues: ReactModule (copy), SignalsModule (copy)
+	local UseRefResult = ReactModule.useRef(nil)
 	
-	if var1.current == nil then
-		local var2, var3 = signalsModule.createSignal(value)
-		var1.current = { get = var2, set = var3 }
+	if UseRefResult.current == nil then
+		local Signal, Signal2 = SignalsModule.createSignal(p1)
+		UseRefResult.current = { get = Signal, set = Signal2 }
 	end
-	local current = var1.current
+	local Current = UseRefResult.current
 	
-	return current.get, current.set
+	return Current.get, Current.set
 end

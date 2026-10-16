@@ -1,24 +1,25 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local roduxModule = require(parent.Rodux)
-local socialCommonModule = require(parent.SocialCommon)
-local fFlagAppChatPerfTrackingModule = require(appChat.Flags.FFlagAppChatPerfTracking)
-local appChatPerfTrackerModule = require(appChat.Telemetry.AppChatPerfTracker)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local RoduxModule = require(Parent.Rodux)
+local SocialCommonModule = require(Parent.SocialCommon)
+local FFlagAppChatPerfTrackingModule = require(AppChat.Flags.FFlagAppChatPerfTracking)
+local AppChatPerfTrackerModule = require(AppChat.Telemetry.AppChatPerfTracker)
 
-if require(parent.SharedFlags).FFlagSharedChatEntryPointAction then
-	return socialCommonModule.Actions.EnteredChatFromEntryPoint
-end
-local var1 = false
-
-return roduxModule.makeActionCreator(script.Name, function(p1)
-	-- upvalues: fFlagAppChatPerfTrackingModule (ref), appChatPerfTrackerModule (ref), var1 (write)
-	if fFlagAppChatPerfTrackingModule then
-		if p1 == nil then
-			appChatPerfTrackerModule.cancel(appChatPerfTrackerModule.Events.ChatLandingTTI, {})
-		else
-			appChatPerfTrackerModule.start(appChatPerfTrackerModule.Events.ChatLandingTTI, { entryPoint = p1, coldStart = not var1 })
-			var1 = true
+if require(Parent.SharedFlags).FFlagSharedChatEntryPointAction then
+	return SocialCommonModule.Actions.EnteredChatFromEntryPoint
+else
+	local Flag = false
+	
+	return RoduxModule.makeActionCreator(script.Name, function(EntryPoint) --[[ Line: 27 ]]
+		-- upvalues: FFlagAppChatPerfTrackingModule (copy), AppChatPerfTrackerModule (copy), Flag (ref)
+		if FFlagAppChatPerfTrackingModule then
+			if EntryPoint == nil then
+				AppChatPerfTrackerModule.cancel(AppChatPerfTrackerModule.Events.ChatLandingTTI, {})
+			else
+				AppChatPerfTrackerModule.start(AppChatPerfTrackerModule.Events.ChatLandingTTI, { entryPoint = EntryPoint, coldStart = not Flag })
+				Flag = true
+			end
 		end
-	end
-	return { entryPoint = p1 }
-end)
+		return { entryPoint = EntryPoint }
+	end)
+end

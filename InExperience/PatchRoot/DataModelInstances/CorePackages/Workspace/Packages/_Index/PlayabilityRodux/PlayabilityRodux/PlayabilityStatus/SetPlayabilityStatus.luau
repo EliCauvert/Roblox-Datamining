@@ -1,5 +1,5 @@
-﻿return require(script:FindFirstAncestor("PlayabilityRodux").Parent.Rodux).makeActionCreator(script.Name, function(p1)
-	assert(type(p1) == "table", "SetPlayabilityStatus action expects playabilityStatus to be a table")
+﻿return require(script:FindFirstAncestor("PlayabilityRodux").Parent.Rodux).makeActionCreator(script.Name, function(PlayabilityStatus) --[[ Line: 18 ]]
+	assert(type(PlayabilityStatus) == "table", "SetPlayabilityStatus action expects playabilityStatus to be a table")
 	
-	return { playabilityStatus = p1 }
+	return { playabilityStatus = PlayabilityStatus }
 end)

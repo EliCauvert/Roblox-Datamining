@@ -1,8 +1,8 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local url = require(dataHydration.Parent.Http).Url
-local myHttpRequestModule = require(dataHydration.TrustedConnections.Networking.myHttpRequest)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local Url = require(DataHydration.Parent.Http).Url
+local MyHttpRequestModule = require(DataHydration.TrustedConnections.Networking.myHttpRequest)
 
-return function(p1)
-	-- upvalues: url (ref), myHttpRequestModule (ref)
-	return myHttpRequestModule(string.format("%s/users/%s/accept-trusted-friend-request", url.FRIEND_URL, tostring(p1)), "POST", { postBody = {} })
+return function(p1) --[[ Line: 9 ]]
+	-- upvalues: Url (copy), MyHttpRequestModule (copy)
+	return MyHttpRequestModule(string.format("%s/users/%s/accept-trusted-friend-request", Url.FRIEND_URL, (tostring(p1))), "POST", { postBody = {} })
 end

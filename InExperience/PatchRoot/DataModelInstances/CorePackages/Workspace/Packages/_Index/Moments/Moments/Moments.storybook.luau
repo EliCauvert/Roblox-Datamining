@@ -1,38 +1,37 @@
-﻿local localizationService = game:GetService("LocalizationService")
-local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local foundationModule = require(parent.Foundation)
-local localizationProvider = require(parent.Localization).LocalizationProvider
-local reactModule = require(parent.React)
-local reactRobloxModule = require(parent.Dev.ReactRoblox)
-local localization = require(parent.Dev.RobloxAppLocales).Localization
-local colorMode = foundationModule.Enums.ColorMode
-local device = foundationModule.Enums.Device
-local foundationProvider = foundationModule.FoundationProvider
-local t = { Dark = colorMode.Dark, Light = colorMode.Light }
+﻿local LocalizationService = game:GetService("LocalizationService")
+local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local FoundationModule = require(Parent.Foundation)
+local LocalizationProvider = require(Parent.Localization).LocalizationProvider
+local ReactModule = require(Parent.React)
+local Localization = require(Parent.Dev.RobloxAppLocales).Localization
+local ColorMode = FoundationModule.Enums.ColorMode
+local Device = FoundationModule.Enums.Device
+local FoundationProvider = FoundationModule.FoundationProvider
+local config = { Dark = ColorMode.Dark, Light = ColorMode.Light }
 
 return {
 	name = "Moments",
-	roact = reactModule,
-	reactRoblox = reactRobloxModule,
-	mapStory = function(p1)
-		-- upvalues: reactModule (ref), localization (ref), localizationService (ref), localizationProvider (ref), foundationProvider (ref), t (ref), colorMode (ref), device (ref)
-		return function(p2)
-			-- upvalues: reactModule (copy), localization (copy), localizationService (copy), localizationProvider (copy), foundationProvider (copy), t (copy), colorMode (copy), device (copy), p1 (ref)
-			return reactModule.createElement(localizationProvider, {
-				localization = reactModule.useMemo(function()
-					-- upvalues: localization (copy), localizationService (copy)
-					return localization.new(localizationService.RobloxLocaleId)
+	roact = ReactModule,
+	reactRoblox = require(Parent.Dev.ReactRoblox),
+	mapStory = function(p1) --[[ Line: 28 ]]
+		-- upvalues: ReactModule (copy), Localization (copy), LocalizationService (copy), LocalizationProvider (copy), FoundationProvider (copy), config (copy), ColorMode (copy), Device (copy)
+		return function(p2) --[[ Line: 29 ]]
+			-- upvalues: ReactModule (upval), Localization (upval), LocalizationService (upval), LocalizationProvider (upval), FoundationProvider (upval), config (upval), ColorMode (upval), Device (upval), p1 (copy)
+			return ReactModule.createElement(LocalizationProvider, {
+				localization = ReactModule.useMemo(function() --[[ Line: 30 ]]
+					-- upvalues: Localization (upval), LocalizationService (upval)
+					return Localization.new(LocalizationService.RobloxLocaleId)
 				end, {})
 			}, {
-				Foundation = reactModule.createElement(foundationProvider, {
-					colorMode = t[p2.theme] or colorMode.Dark,
-					device = device[p2.platform] or device.Phone,
+				Foundation = ReactModule.createElement(FoundationProvider, {
+					colorMode = config[p2.theme] or ColorMode.Dark,
+					device = Device[p2.platform] or Device.Phone,
 					preferences = p2.settings,
 					scale = p2.settings and p2.settings.scale
-				}, { Child = reactModule.createElement(p1, p2) })
+				}, { Child = ReactModule.createElement(p1, p2) })
 			})
 		end
 	end,
-	storyRoots = { moments }
+	storyRoots = { Moments }
 }

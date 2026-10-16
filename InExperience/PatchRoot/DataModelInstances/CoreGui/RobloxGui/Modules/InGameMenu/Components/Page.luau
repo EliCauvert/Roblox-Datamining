@@ -1,53 +1,52 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local inGameMenuDependenciesModule = require(corePackagesService.Packages.InGameMenuDependencies)
-local roact = inGameMenuDependenciesModule.Roact
-local roactRodux = inGameMenuDependenciesModule.RoactRodux
-local UIBlox = inGameMenuDependenciesModule.UIBlox
-local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local fFlagCoreUiMigrateUIBloxToFoundation = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
-local var1 = if fFlagCoreUiMigrateUIBloxToFoundation then foundationModule.UNSTABLE.withCursorMigration else UIBlox.App.SelectionImage.withSelectionCursorProvider
-local var2 = if fFlagCoreUiMigrateUIBloxToFoundation then foundationModule.Enums.CursorType else UIBlox.App.SelectionImage.CursorKind
-local parent = script.Parent.Parent
-local navigateUpModule = require(parent.Thunks.NavigateUp)
-local assetsModule = require(parent.Resources.Assets)
-local constantsModule = require(parent.Resources.Constants)
-local zonePortalModule = require(parent.Components.ZonePortal)
-local directionModule = require(parent.Enums.Direction)
-local imageSetButton = UIBlox.Core.ImageSet.ImageSetButton
-local image = foundationModule.Image
-local themedTextLabelModule = require(script.Parent.ThemedTextLabel)
+﻿local CorePackages = game:GetService("CorePackages")
+local InGameMenuDependenciesModule = require(CorePackages.Packages.InGameMenuDependencies)
+local Roact = InGameMenuDependenciesModule.Roact
+local UIBlox = InGameMenuDependenciesModule.UIBlox
+local WithFoundationOrUIBloxStyleFunction = require(CorePackages.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local FFlagCoreUiMigrateUIBloxToFoundation = require(CorePackages.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
+local WithCursorMigration = if FFlagCoreUiMigrateUIBloxToFoundation then FoundationModule.UNSTABLE.withCursorMigration else UIBlox.App.SelectionImage.withSelectionCursorProvider
+local CursorType = if FFlagCoreUiMigrateUIBloxToFoundation then FoundationModule.Enums.CursorType else UIBlox.App.SelectionImage.CursorKind
+local Parent = script.Parent.Parent
+local NavigateUpModule = require(Parent.Thunks.NavigateUp)
+local AssetsModule = require(Parent.Resources.Assets)
+local ConstantsModule = require(Parent.Resources.Constants)
+local ZonePortalModule = require(Parent.Components.ZonePortal)
+local DirectionModule = require(Parent.Enums.Direction)
+local ImageSetButton = UIBlox.Core.ImageSet.ImageSetButton
+local Image = FoundationModule.Image
+local ThemedTextLabelModule = require(script.Parent.ThemedTextLabel)
 
-local function renderWithSelectionCursor(p1, p2)
-	-- upvalues: withFoundationOrUIBloxStyle (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), roact (ref), image (ref), assetsModule (ref), var2 (ref), imageSetButton (ref), themedTextLabelModule (ref), constantsModule (ref), zonePortalModule (ref), directionModule (ref)
-	return withFoundationOrUIBloxStyle(function(p3)
+local function renderWithSelectionCursor(p1, Callback) --[[ Line: 37 ]]
+	-- upvalues: WithFoundationOrUIBloxStyleFunction (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), Roact (copy), Image (copy), AssetsModule (copy), CursorType (copy), ImageSetButton (copy), ThemedTextLabelModule (copy), ConstantsModule (copy), ZonePortalModule (copy), DirectionModule (copy)
+	return WithFoundationOrUIBloxStyleFunction(function(p2) --[[ Line: 38 ]]
 		return {
 			Theme = {
 				IconEmphasis = {
-					Color = p3.Color.Content.Emphasis.Color3,
-					Transparency = p3.Color.Content.Emphasis.Transparency
+					Color = p2.Color.Content.Emphasis.Color3,
+					Transparency = p2.Color.Content.Emphasis.Transparency
 				},
 				BackgroundContrast = {
-					Color = p3.Color.Surface.Surface_100.Color3,
-					Transparency = p3.Color.Surface.Surface_100.Transparency
+					Color = p2.Color.Surface.Surface_100.Color3,
+					Transparency = p2.Color.Surface.Surface_100.Transparency
 				}
 			}
 		}
-	end, function(p3)
-		-- upvalues: p1 (ref), fFlagCoreUiMigrateUIBloxToFoundation (copy), roact (copy), image (copy), assetsModule (copy), p2 (ref), var2 (copy), imageSetButton (copy), themedTextLabelModule (copy), constantsModule (copy), zonePortalModule (copy), directionModule (copy)
-		return roact.createElement("TextButton", {
+	end, function(p2) --[[ Line: 51 ]]
+		-- upvalues: p1 (copy), FFlagCoreUiMigrateUIBloxToFoundation (upval), Roact (upval), Image (upval), AssetsModule (upval), Callback (copy), CursorType (upval), ImageSetButton (upval), ThemedTextLabelModule (upval), ConstantsModule (upval), ZonePortalModule (upval), DirectionModule (upval)
+		return Roact.createElement("TextButton", {
 			AutoButtonColor = false,
 			Text = "",
 			BorderSizePixel = 0,
 			Selectable = false,
-			BackgroundColor3 = p3.Theme.BackgroundContrast.Color,
-			BackgroundTransparency = p3.Theme.BackgroundContrast.Transparency,
+			BackgroundColor3 = p2.Theme.BackgroundContrast.Color,
+			BackgroundTransparency = p2.Theme.BackgroundContrast.Transparency,
 			Position = p1.position,
 			Size = UDim2.new(1, 0, 1, 0),
 			Visible = p1.visible and not p1.pageIsModal,
 			ZIndex = p1.zIndex
 		}, {
-			PageTitle = roact.createElement(themedTextLabelModule, {
+			PageTitle = Roact.createElement(ThemedTextLabelModule, {
 				fontKey = "Header1",
 				themeKey = "TextEmphasis",
 				AnchorPoint = Vector2.new(0.5, 0),
@@ -56,54 +55,54 @@ local function renderWithSelectionCursor(p1, p2)
 				Text = p1.pageTitle
 			}, {
 				ExtraChildren = p1.titleChildren,
-				BackButton = if fFlagCoreUiMigrateUIBloxToFoundation then roact.createElement(image, {
+				BackButton = if FFlagCoreUiMigrateUIBloxToFoundation then Roact.createElement(Image, {
 					tag = "content-emphasis anchor-center-left size-900",
-					Image = assetsModule.Images.NavigateBack,
+					Image = AssetsModule.Images.NavigateBack,
 					backgroundStyle = { Transparency = 1 },
 					Position = UDim2.new(0, 4, 0.5, 0),
 					selection = {
 						NextSelectionDown = p1.NextSelectionDown,
-						SelectionImageObject = p2(var2.RoundedRect)
+						SelectionImageObject = Callback(CursorType.RoundedRect)
 					},
 					onActivated = p1.navigateUp,
 					ref = p1.buttonRef
-				}) else roact.createElement(imageSetButton, {
+				}) else Roact.createElement(ImageSetButton, {
 					BackgroundTransparency = 1,
-					Image = assetsModule.Images.NavigateBack,
+					Image = AssetsModule.Images.NavigateBack,
 					AnchorPoint = Vector2.new(0, 0.5),
-					ImageColor3 = p3.Theme.IconEmphasis.Color,
-					ImageTransparency = p3.Theme.IconEmphasis.Transparency,
+					ImageColor3 = p2.Theme.IconEmphasis.Color,
+					ImageTransparency = p2.Theme.IconEmphasis.Transparency,
 					Position = UDim2.new(0, 4, 0.5, 0),
 					Size = UDim2.new(0, 36, 0, 36),
 					NextSelectionDown = p1.NextSelectionDown,
-					[roact.Event.Activated] = p1.navigateUp,
-					[roact.Ref] = p1.buttonRef,
-					SelectionImageObject = p2(var2.RoundedRect)
+					[Roact.Event.Activated] = p1.navigateUp,
+					[Roact.Ref] = p1.buttonRef,
+					SelectionImageObject = Callback(CursorType.RoundedRect)
 				})
 			}),
-			PageContainer = roact.createElement("Frame", {
+			PageContainer = Roact.createElement("Frame", {
 				BackgroundTransparency = 1,
 				AnchorPoint = Vector2.new(0, 1),
-				Position = UDim2.new(0, constantsModule.Zone.ContentOffset, 1, 0),
-				Size = UDim2.new(1, -constantsModule.Zone.ContentOffset, 1, -68)
-			}, p1[roact.Children]),
-			ZonePortal = roact.createElement(zonePortalModule, { targetZone = 0, direction = directionModule.Left })
+				Position = UDim2.new(0, ConstantsModule.Zone.ContentOffset, 1, 0),
+				Size = UDim2.new(1, -ConstantsModule.Zone.ContentOffset, 1, -68)
+			}, p1[Roact.Children]),
+			ZonePortal = Roact.createElement(ZonePortalModule, { targetZone = 0, direction = DirectionModule.Left })
 		})
 	end)
 end
 
-return roactRodux.UNSTABLE_connect2(nil, function(p1)
-	-- upvalues: navigateUpModule (ref)
+return InGameMenuDependenciesModule.RoactRodux.UNSTABLE_connect2(nil, function(Callback) --[[ Line: 123 ]]
+	-- upvalues: NavigateUpModule (copy)
 	return {
-		navigateUp = function()
-			-- upvalues: p1 (ref), navigateUpModule (copy)
-			p1(navigateUpModule)
+		navigateUp = function() --[[ Line: 125 ]]
+			-- upvalues: Callback (copy), NavigateUpModule (upval)
+			Callback(NavigateUpModule)
 		end
 	}
-end)(function(p1)
-	-- upvalues: var1 (ref), renderWithSelectionCursor (ref)
-	return var1(function(p2)
-		-- upvalues: renderWithSelectionCursor (copy), p1 (ref)
+end)(function(p1) --[[ Line: 117 | Named "Page" ]]
+	-- upvalues: WithCursorMigration (copy), renderWithSelectionCursor (copy)
+	return WithCursorMigration(function(p2) --[[ Line: 118 ]]
+		-- upvalues: renderWithSelectionCursor (upval), p1 (copy)
 		return renderWithSelectionCursor(p1, p2)
 	end)
 end)

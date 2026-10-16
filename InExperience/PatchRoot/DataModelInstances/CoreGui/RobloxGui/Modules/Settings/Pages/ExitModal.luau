@@ -1,223 +1,221 @@
-﻿local _ = {
-	EventContext = "educational_popup",
-	ConfirmName = "educational_confirmed",
-	CancelName = "educational_close_app",
-	DismissName = "educational_dismiss_prompt"
-}
-local coreGuiService = game:GetService("CoreGui")
-local contextActionService = game:GetService("ContextActionService")
-local robloxGui = coreGuiService:WaitForChild("RobloxGui")
-local guiService = game:GetService("GuiService")
-local runService = game:GetService("RunService")
-local corePackagesService = game:GetService("CorePackages")
-local localizationService = game:GetService("LocalizationService")
-local playersService = game:GetService("Players")
-local sharedFlags = corePackagesService.Workspace.Packages.SharedFlags
-local getFFlagGateEducationalPopupVisibilityViaGUAC = require(sharedFlags).GetFFlagGateEducationalPopupVisibilityViaGUAC
-local inExperienceCapabilities = require(corePackagesService.Workspace.Packages.InExperienceCapabilities).InExperienceCapabilities
-local isSideSheetEnabledModule = require(corePackagesService.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
-local fFlagSurvBloxEventTypeEnabled = require(sharedFlags).FFlagSurvBloxEventTypeEnabled
-local var1 = if isSideSheetEnabledModule then require(corePackagesService.Workspace.Packages.InExperienceSideSheet).toggleSideSheet else nil
-local notificationTypeList = guiService:GetNotificationTypeList()
-local roactModule = require(corePackagesService.Packages.Roact)
-local linkingProtocol = require(corePackagesService.Workspace.Packages.LinkingProtocol).LinkingProtocol
-local localization = require(corePackagesService.Workspace.Packages.InExperienceLocales).Localization
-local sendAnalyticsModule = require(robloxGui.Modules.InGameMenu.Utility.SendAnalytics)
-local userLocalStoreModule = require(robloxGui.Modules.InGameMenu.Utility.UserLocalStore)
-local getDefaultQualityLevel = require(corePackagesService.Workspace.Packages.AppCommonLib).GetDefaultQualityLevel
-local surveyEventPublisherModule = require(corePackagesService.Workspace.Packages.OnPlatformSurveys.SurveyEventPublisher)
-local webViewEventTypeModule = require(corePackagesService.Workspace.Packages.OnPlatformSurveys.WebViewEventType)
-local messageBus = require(corePackagesService.Workspace.Packages.MessageBus).MessageBus
-local UIBlox = require(corePackagesService.Packages.InGameMenuDependencies).UIBlox
-local images = UIBlox.App.ImageSet.Images
-local educationalModal = UIBlox.App.Dialog.Modal.EducationalModal
-local renderWithCoreScriptsStyleProviderModule = require(robloxGui.Modules.Common.renderWithCoreScriptsStyleProvider)
-local var2 = nil
-local constantsModule = require(robloxGui.Modules:WaitForChild("InGameMenu"):WaitForChild("Resources"):WaitForChild("Constants"))
-local getFIntEducationalPopupDisplayMaxCountModule = require(robloxGui.Modules.Flags.GetFIntEducationalPopupDisplayMaxCount)
-var2 = (function()
-	-- upvalues: robloxGui (ref), guiService (ref), sendAnalyticsModule (ref), runService (ref), getDefaultQualityLevel (ref), notificationTypeList (ref), linkingProtocol (ref), var2 (write), userLocalStoreModule (ref), getFIntEducationalPopupDisplayMaxCountModule (ref), localization (ref), localizationService (ref), roactModule (ref), educationalModal (ref), images (ref), coreGuiService (ref), fFlagSurvBloxEventTypeEnabled (ref), surveyEventPublisherModule (ref), webViewEventTypeModule (ref), playersService (ref), messageBus (ref), constantsModule (ref), renderWithCoreScriptsStyleProviderModule (ref)
-	local exitModalPage = require(robloxGui.Modules.Settings.SettingsPageFactory):CreateNewPage()
+﻿local CoreGui = game:GetService("CoreGui")
+local ContextActionService = game:GetService("ContextActionService")
+local RobloxGui = CoreGui:WaitForChild("RobloxGui")
+local GuiService = game:GetService("GuiService")
+local RunService = game:GetService("RunService")
+local CorePackages = game:GetService("CorePackages")
+local LocalizationService = game:GetService("LocalizationService")
+local Players = game:GetService("Players")
+local SharedFlags = CorePackages.Workspace.Packages.SharedFlags
+local GetFFlagGateEducationalPopupVisibilityViaGUACFunction = require(SharedFlags).GetFFlagGateEducationalPopupVisibilityViaGUAC
+local InExperienceCapabilities = require(CorePackages.Workspace.Packages.InExperienceCapabilities).InExperienceCapabilities
+local IsSideSheetEnabledModule = require(CorePackages.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
+local FFlagSurvBloxEventTypeEnabled = require(SharedFlags).FFlagSurvBloxEventTypeEnabled
+local ToggleSideSheet = if IsSideSheetEnabledModule then require(CorePackages.Workspace.Packages.InExperienceSideSheet).toggleSideSheet else nil
+local NotificationTypeList = GuiService:GetNotificationTypeList()
+local RoactModule = require(CorePackages.Packages.Roact)
+local LinkingProtocol = require(CorePackages.Workspace.Packages.LinkingProtocol).LinkingProtocol
+local Localization = require(CorePackages.Workspace.Packages.InExperienceLocales).Localization
+local SendAnalyticsModule = require(RobloxGui.Modules.InGameMenu.Utility.SendAnalytics)
+local UserLocalStoreModule = require(RobloxGui.Modules.InGameMenu.Utility.UserLocalStore)
+local GetDefaultQualityLevelFunction = require(CorePackages.Workspace.Packages.AppCommonLib).GetDefaultQualityLevel
+local SurveyEventPublisherModule = require(CorePackages.Workspace.Packages.OnPlatformSurveys.SurveyEventPublisher)
+local WebViewEventTypeModule = require(CorePackages.Workspace.Packages.OnPlatformSurveys.WebViewEventType)
+local MessageBus = require(CorePackages.Workspace.Packages.MessageBus).MessageBus
+local UIBlox = require(CorePackages.Packages.InGameMenuDependencies).UIBlox
+local Images = UIBlox.App.ImageSet.Images
+local EducationalModal = UIBlox.App.Dialog.Modal.EducationalModal
+local RenderWithCoreScriptsStyleProviderModule = require(RobloxGui.Modules.Common.renderWithCoreScriptsStyleProvider)
+local v1 = nil
+local ConstantsModule = require(RobloxGui.Modules:WaitForChild("InGameMenu"):WaitForChild("Resources"):WaitForChild("Constants"))
+local GetFIntEducationalPopupDisplayMaxCountModule = require(RobloxGui.Modules.Flags.GetFIntEducationalPopupDisplayMaxCount)
+v1 = (function() --[[ Line: 79 | Named "Initialize" ]]
+	-- upvalues: RobloxGui (copy), GuiService (copy), SendAnalyticsModule (copy), RunService (copy), GetDefaultQualityLevelFunction (copy), NotificationTypeList (copy), LinkingProtocol (copy), v1 (ref), UserLocalStoreModule (copy), GetFIntEducationalPopupDisplayMaxCountModule (copy), Localization (copy), LocalizationService (copy), RoactModule (copy), EducationalModal (copy), Images (copy), CoreGui (copy), FFlagSurvBloxEventTypeEnabled (copy), SurveyEventPublisherModule (copy), WebViewEventTypeModule (copy), Players (copy), MessageBus (copy), ConstantsModule (copy), RenderWithCoreScriptsStyleProviderModule (copy)
+	local NewPage = require(RobloxGui.Modules.Settings.SettingsPageFactory):CreateNewPage()
 	
-	function exitModalPage.LeaveAppFunc(p1)
-		-- upvalues: guiService (copy), sendAnalyticsModule (copy), runService (copy), getDefaultQualityLevel (copy), notificationTypeList (copy)
-		guiService.SelectedCoreObject = nil
-		sendAnalyticsModule("educational_popup", "educational_close_app", { source = if p1 then "Native" else "Button" })
-		runService.RenderStepped:wait()
-		runService.RenderStepped:wait()
-		settings().Rendering.QualityLevel = getDefaultQualityLevel()
-		guiService:BroadcastNotification("", notificationTypeList.NATIVE_EXIT)
+	function NewPage.LeaveAppFunc(p1) --[[ Line: 83 ]]
+		-- upvalues: GuiService (upval), SendAnalyticsModule (upval), RunService (upval), GetDefaultQualityLevelFunction (upval), NotificationTypeList (upval)
+		GuiService.SelectedCoreObject = nil
+		SendAnalyticsModule("educational_popup", "educational_close_app", { source = if p1 then "Native" else "Button" })
+		RunService.RenderStepped:wait()
+		RunService.RenderStepped:wait()
+		settings().Rendering.QualityLevel = GetDefaultQualityLevelFunction()
+		GuiService:BroadcastNotification("", NotificationTypeList.NATIVE_EXIT)
 	end
 	
-	function exitModalPage.LeaveGameFunc(p1)
-		-- upvalues: guiService (copy), sendAnalyticsModule (copy), linkingProtocol (copy), runService (copy), getDefaultQualityLevel (copy)
-		guiService.SelectedCoreObject = nil
-		sendAnalyticsModule("educational_popup", "educational_confirmed", { source = if p1 then "Gamepad" else "Button" })
-		linkingProtocol.default:detectURL("roblox://navigation/home")
-		runService.RenderStepped:wait()
-		runService.RenderStepped:wait()
+	function NewPage.LeaveGameFunc(IsUserInputTypeMatch) --[[ Line: 100 ]]
+		-- upvalues: GuiService (upval), SendAnalyticsModule (upval), LinkingProtocol (upval), RunService (upval), GetDefaultQualityLevelFunction (upval)
+		GuiService.SelectedCoreObject = nil
+		SendAnalyticsModule("educational_popup", "educational_confirmed", {
+			source = if IsUserInputTypeMatch then "Gamepad" else "Button"
+		})
+		LinkingProtocol.default:detectURL("roblox://navigation/home")
+		RunService.RenderStepped:wait()
+		RunService.RenderStepped:wait()
 		game:Shutdown()
-		settings().Rendering.QualityLevel = getDefaultQualityLevel()
+		settings().Rendering.QualityLevel = GetDefaultQualityLevelFunction()
 	end
 	
-	function exitModalPage.LeaveGameFromHotkey(_, p1, p2)
-		-- upvalues: exitModalPage (ref)
-		if p1 == Enum.UserInputState.Begin then
-			exitModalPage.LeaveGameFunc(if p2.UserInputType ~= Enum.UserInputType.Gamepad1 then if p2.UserInputType ~= Enum.UserInputType.Gamepad2 then if p2.UserInputType ~= Enum.UserInputType.Gamepad3 then p2.UserInputType == Enum.UserInputType.Gamepad4 else true else true else true)
+	function NewPage:LeaveGameFromHotkey(UserInputState, Input) --[[ Line: 119 ]]
+		-- upvalues: NewPage (copy)
+		if UserInputState == Enum.UserInputState.Begin then
+			NewPage.LeaveGameFunc(Input.UserInputType == Enum.UserInputType.Gamepad1 or (Input.UserInputType == Enum.UserInputType.Gamepad2 or (Input.UserInputType == Enum.UserInputType.Gamepad3 or Input.UserInputType == Enum.UserInputType.Gamepad4)))
 		end
 	end
 	
-	function exitModalPage.DontLeaveFunc(p1)
-		-- upvalues: var2 (copy), exitModalPage (ref)
-		var2.dismissedFrom = if p1 then "Gamepad" else "Button"
+	function NewPage.DontLeaveFunc(IsUserInputTypeMatch) --[[ Line: 129 ]]
+		-- upvalues: v1 (upval), NewPage (copy)
+		v1.dismissedFrom = if IsUserInputTypeMatch then "Gamepad" else "Button"
 		
-		if exitModalPage.HubRef then
-			exitModalPage.HubRef:PopMenu(p1, true)
+		if NewPage.HubRef then
+			NewPage.HubRef:PopMenu(IsUserInputTypeMatch, true)
 		end
 	end
 	
-	function exitModalPage.DontLeaveFromHotkey(_, p1, p2)
-		-- upvalues: exitModalPage (ref)
-		if p1 == Enum.UserInputState.Begin then
-			exitModalPage.DontLeaveFunc(if p2.UserInputType ~= Enum.UserInputType.Gamepad1 then if p2.UserInputType ~= Enum.UserInputType.Gamepad2 then if p2.UserInputType ~= Enum.UserInputType.Gamepad3 then p2.UserInputType == Enum.UserInputType.Gamepad4 else true else true else true)
+	function NewPage:DontLeaveFromHotkey(UserInputState, Input) --[[ Line: 136 ]]
+		-- upvalues: NewPage (copy)
+		if UserInputState == Enum.UserInputState.Begin then
+			NewPage.DontLeaveFunc(Input.UserInputType == Enum.UserInputType.Gamepad1 or (Input.UserInputType == Enum.UserInputType.Gamepad2 or (Input.UserInputType == Enum.UserInputType.Gamepad3 or Input.UserInputType == Enum.UserInputType.Gamepad4)))
 		end
 	end
 	
-	function exitModalPage.DontShowAgain()
-		-- upvalues: userLocalStoreModule (copy)
-		local var3 = userLocalStoreModule.new()
-		var3:SetItem("NativeCloseLuaPromptDisplayCount", tostring(1e999))
-		var3:Flush()
+	function NewPage.DontShowAgain() --[[ Line: 147 ]]
+		-- upvalues: UserLocalStoreModule (upval)
+		local NewUserLocalStore = UserLocalStoreModule.new()
+		NewUserLocalStore:SetItem("NativeCloseLuaPromptDisplayCount", (tostring(1e999)))
+		NewUserLocalStore:Flush()
 	end
 	
-	function exitModalPage.ShouldShow()
-		-- upvalues: userLocalStoreModule (copy), getFIntEducationalPopupDisplayMaxCountModule (copy)
-		local var3 = userLocalStoreModule.new()
-		local var4 = tonumber(var3:GetItem("NativeCloseLuaPromptDisplayCount"))
+	function NewPage.ShouldShow(): boolean --[[ Line: 154 ]]
+		-- upvalues: UserLocalStoreModule (upval), GetFIntEducationalPopupDisplayMaxCountModule (upval)
+		local NewUserLocalStore = UserLocalStoreModule.new()
+		local Number: number? = tonumber(NewUserLocalStore:GetItem("NativeCloseLuaPromptDisplayCount"))
 		
-		if getFIntEducationalPopupDisplayMaxCountModule() < var4 then
+		if GetFIntEducationalPopupDisplayMaxCountModule() < Number then
 			return false
+		else
+			NewUserLocalStore:SetItem("NativeCloseLuaPromptDisplayCount", (tostring(Number + 1)))
+			NewUserLocalStore:Flush()
+			
+			return true
 		end
-		var3:SetItem("NativeCloseLuaPromptDisplayCount", tostring(var4 + 1))
-		var3:Flush()
-		
-		return true
 	end
 	
-	exitModalPage.TabHeader = nil
-	exitModalPage.Page.Name = "ExitModalPage"
-	exitModalPage.ShouldShowBottomBar = false
-	exitModalPage.ShouldShowHubBar = false
-	exitModalPage.IsPageClipped = false
-	exitModalPage.Page.Size = UDim2.new(1, 0, 0, 1)
-	local var3 = localization.new(localizationService.RobloxLocaleId)
+	NewPage.TabHeader = nil
+	NewPage.Page.Name = "ExitModalPage"
+	NewPage.ShouldShowBottomBar = false
+	NewPage.ShouldShowHubBar = false
+	NewPage.IsPageClipped = false
+	NewPage.Page.Size = UDim2.new(1, 0, 0, 1)
+	local NewLocalization = Localization.new(LocalizationService.RobloxLocaleId)
 	
-	local function ExitModal()
-		-- upvalues: var3 (ref), localizationService (copy), roactModule (copy), educationalModal (copy), images (copy), coreGuiService (copy), exitModalPage (ref), fFlagSurvBloxEventTypeEnabled (copy), surveyEventPublisherModule (copy), webViewEventTypeModule (copy), playersService (copy), messageBus (copy), constantsModule (copy), renderWithCoreScriptsStyleProviderModule (copy)
-		var3:SetLocale(localizationService.RobloxLocaleId)
-		local t = {
-			title = var3:Format("CoreScripts.InGameMenu.ExitModal.Title"),
-			subtitle = var3:Format("CoreScripts.InGameMenu.ExitModal.Subtitle"),
-			bodyTextOpenMenu = var3:Format("CoreScripts.InGameMenu.ExitModal.BodyTextOpenMenu"),
-			bodyTextClickHome = var3:Format("CoreScripts.InGameMenu.ExitModal.BodyTextClickHome"),
-			optionDontShow = var3:Format("CoreScripts.InGameMenu.ExitModal.OptionDontShow"),
-			actionExit = var3:Format("CoreScripts.InGameMenu.ExitModal.ActionExit"),
-			actionHome = var3:Format("CoreScripts.InGameMenu.ExitModal.ActionHome")
+	local function ExitModal() --[[ Line: 182 ]]
+		-- upvalues: NewLocalization (copy), LocalizationService (upval), RoactModule (upval), EducationalModal (upval), Images (upval), CoreGui (upval), NewPage (copy), FFlagSurvBloxEventTypeEnabled (upval), SurveyEventPublisherModule (upval), WebViewEventTypeModule (upval), Players (upval), MessageBus (upval), ConstantsModule (upval), RenderWithCoreScriptsStyleProviderModule (upval)
+		NewLocalization:SetLocale(LocalizationService.RobloxLocaleId)
+		local config = {
+			title = NewLocalization:Format("CoreScripts.InGameMenu.ExitModal.Title"),
+			subtitle = NewLocalization:Format("CoreScripts.InGameMenu.ExitModal.Subtitle"),
+			bodyTextOpenMenu = NewLocalization:Format("CoreScripts.InGameMenu.ExitModal.BodyTextOpenMenu"),
+			bodyTextClickHome = NewLocalization:Format("CoreScripts.InGameMenu.ExitModal.BodyTextClickHome"),
+			optionDontShow = NewLocalization:Format("CoreScripts.InGameMenu.ExitModal.OptionDontShow"),
+			actionExit = NewLocalization:Format("CoreScripts.InGameMenu.ExitModal.ActionExit"),
+			actionHome = NewLocalization:Format("CoreScripts.InGameMenu.ExitModal.ActionHome")
 		}
 		
-		return renderWithCoreScriptsStyleProviderModule({
-			roactModule.createElement(educationalModal, {
+		return RenderWithCoreScriptsStyleProviderModule({
+			RoactModule.createElement(EducationalModal, {
 				hasDoNotShow = true,
 				bodyContents = {
-					{ isSystemMenuIcon = true, text = t.bodyTextOpenMenu },
+					{ isSystemMenuIcon = true, text = config.bodyTextOpenMenu },
 					{
-						icon = images["icons/menu/home_off"],
-						text = t.bodyTextClickHome
+						icon = Images["icons/menu/home_off"],
+						text = config.bodyTextClickHome
 					}
 				},
-				cancelText = t.actionExit,
-				confirmText = t.actionHome,
-				doNotShowText = t.optionDontShow,
+				cancelText = config.actionExit,
+				confirmText = config.actionHome,
+				doNotShowText = config.optionDontShow,
 				titleBackgroundImageProps = {
 					image = "rbxasset://textures/ui/LuaApp/graphic/Auth/GridBackground_05202026.jpg",
 					imageHeight = 200,
-					text = "<font face=\"GothamBlack\" size=\"42\">" .. t.title .. "</font><font size=\"4\"><br /></font><br />" .. t.subtitle
+					text = "<font face=\"GothamBlack\" size=\"42\">" .. config.title .. "</font><font size=\"4\"><br /></font><br />" .. config.subtitle
 				},
-				screenSize = coreGuiService.RobloxGui.AbsoluteSize,
-				onDismiss = function()
-					-- upvalues: exitModalPage (copy)
-					exitModalPage.DontLeaveFunc(false)
+				screenSize = CoreGui.RobloxGui.AbsoluteSize,
+				onDismiss = function() --[[ Line: 218 ]]
+					-- upvalues: NewPage (upval)
+					NewPage.DontLeaveFunc(false)
 				end,
-				onCancel = function(p1)
-					-- upvalues: exitModalPage (copy)
+				onCancel = function(p1) --[[ Line: 221 ]]
+					-- upvalues: NewPage (upval)
 					if p1 then
-						exitModalPage.DontShowAgain()
+						NewPage.DontShowAgain()
 					end
-					exitModalPage.LeaveAppFunc(false)
+					NewPage.LeaveAppFunc(false)
 				end,
-				onConfirm = function(p1)
-					-- upvalues: exitModalPage (copy), fFlagSurvBloxEventTypeEnabled (copy), surveyEventPublisherModule (copy), webViewEventTypeModule (copy), playersService (copy), messageBus (copy), constantsModule (copy)
+				onConfirm = function(p1) --[[ Line: 227 ]]
+					-- upvalues: NewPage (upval), FFlagSurvBloxEventTypeEnabled (upval), SurveyEventPublisherModule (upval), WebViewEventTypeModule (upval), Players (upval), MessageBus (upval), ConstantsModule (upval)
 					if p1 then
-						exitModalPage.DontShowAgain()
+						NewPage.DontShowAgain()
 					end
-					exitModalPage.LeaveGameFunc(false)
+					NewPage.LeaveGameFunc(false)
 					
-					if fFlagSurvBloxEventTypeEnabled then
-						surveyEventPublisherModule.publishSurveyEvent(webViewEventTypeModule.LeaveButtonClick)
+					if FFlagSurvBloxEventTypeEnabled then
+						SurveyEventPublisherModule.publishSurveyEvent(WebViewEventTypeModule.LeaveButtonClick)
 						
 						return
+					else
+						MessageBus.publish(ConstantsModule.OnSurveyEventDescriptor, {
+							eventType = ConstantsModule.SurveyEventType,
+							userId = tostring(Players.LocalPlayer.UserId),
+							customProps = { chromeSeenCount = tostring(0) }
+						})
 					end
-					messageBus.publish(constantsModule.OnSurveyEventDescriptor, {
-						eventType = constantsModule.SurveyEventType,
-						userId = tostring(playersService.LocalPlayer.UserId),
-						customProps = { chromeSeenCount = tostring(0) }
-					})
 				end
 			})
 		})
 	end
 	
-	local exitModal = roactModule.mount(ExitModal(), exitModalPage.Page, "ExitModal")
-	local var4 = false
+	local ExitModal1 = RoactModule.mount(ExitModal(), NewPage.Page, "ExitModal")
+	local Flag = false
 	
-	local var5 = function()
-		-- upvalues: var4 (write), exitModal (write), roactModule (copy), ExitModal (ref)
-		if not var4 then
-			var4 = true
-			task.delay(1, function()
-				-- upvalues: var4 (copy), exitModal (copy), roactModule (copy), ExitModal (copy)
-				var4 = false
-				exitModal = roactModule.update(exitModal, ExitModal())
+	local function Callback() --[[ Line: 255 ]]
+		-- upvalues: Flag (ref), ExitModal1 (ref), RoactModule (upval), ExitModal (copy)
+		if not Flag then
+			Flag = true
+			task.delay(1, function() --[[ Line: 258 ]]
+				-- upvalues: Flag (upval), ExitModal1 (upval), RoactModule (upval), ExitModal (upval)
+				Flag = false
+				ExitModal1 = RoactModule.update(ExitModal1, ExitModal())
 			end)
 		end
 	end
 	
-	localizationService:GetPropertyChangedSignal("RobloxLocaleId"):Connect(var5)
-	coreGuiService.RobloxGui:GetPropertyChangedSignal("AbsoluteSize"):Connect(var5)
+	LocalizationService:GetPropertyChangedSignal("RobloxLocaleId"):Connect(Callback)
+	CoreGui.RobloxGui:GetPropertyChangedSignal("AbsoluteSize"):Connect(Callback)
 	
-	return exitModalPage
+	return NewPage
 end)()
-var2.Displayed.Event:connect(function()
-	-- upvalues: var2 (write), getFFlagGateEducationalPopupVisibilityViaGUAC (ref), inExperienceCapabilities (ref), contextActionService (ref), isSideSheetEnabledModule (ref), var1 (write)
-	if not var2.ShouldShow() or getFFlagGateEducationalPopupVisibilityViaGUAC() and not inExperienceCapabilities.canViewEducationalPopup then
-		var2.LeaveAppFunc(true)
+v1.Displayed.Event:connect(function() --[[ Line: 273 ]]
+	-- upvalues: v1 (ref), GetFFlagGateEducationalPopupVisibilityViaGUACFunction (copy), InExperienceCapabilities (copy), ContextActionService (copy), IsSideSheetEnabledModule (copy), ToggleSideSheet (ref)
+	if not v1.ShouldShow() or GetFFlagGateEducationalPopupVisibilityViaGUACFunction() and not InExperienceCapabilities.canViewEducationalPopup then
+		v1.LeaveAppFunc(true)
 	end
-	var2.dismissedFrom = "Menu"
-	contextActionService:BindCoreAction("LeaveGameAction", var2.LeaveGameFromHotkey, false, Enum.KeyCode.ButtonA)
-	contextActionService:BindCoreAction("DontLeaveAction", var2.DontLeaveFromHotkey, false, Enum.KeyCode.ButtonB)
+	v1.dismissedFrom = "Menu"
+	ContextActionService:BindCoreAction("LeaveGameAction", v1.LeaveGameFromHotkey, false, Enum.KeyCode.ButtonA)
+	ContextActionService:BindCoreAction("DontLeaveAction", v1.DontLeaveFromHotkey, false, Enum.KeyCode.ButtonB)
 	
-	if isSideSheetEnabledModule then
-		var1(false)
+	if IsSideSheetEnabledModule then
+		ToggleSideSheet(false)
 	end
 end)
-var2.Hidden.Event:connect(function()
-	-- upvalues: var2 (write), sendAnalyticsModule (ref), contextActionService (ref)
-	if var2.dismissedFrom then
-		sendAnalyticsModule("educational_popup", "educational_dismiss_prompt", { source = var2.dismissedFrom })
-		var2.dismissedFrom = nil
+v1.Hidden.Event:connect(function() --[[ Line: 300 ]]
+	-- upvalues: v1 (ref), SendAnalyticsModule (copy), ContextActionService (copy)
+	if v1.dismissedFrom then
+		SendAnalyticsModule("educational_popup", "educational_dismiss_prompt", { source = v1.dismissedFrom })
+		v1.dismissedFrom = nil
 	end
-	contextActionService:UnbindCoreAction("LeaveGameAction")
-	contextActionService:UnbindCoreAction("DontLeaveAction")
+	ContextActionService:UnbindCoreAction("LeaveGameAction")
+	ContextActionService:UnbindCoreAction("DontLeaveAction")
 end)
 
-return var2
+return v1

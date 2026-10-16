@@ -1,76 +1,81 @@
-﻿local currencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
-local sharedFlagsModule = require(currencyTransfers.Parent.SharedFlags)
-local _ = require(currencyTransfers.Stores.createTransferStore)
-local processTransferRequestModule = require(currencyTransfers.NetworkRequests.processTransferRequest)
-local promptStateModule = require(currencyTransfers.Enums.PromptState)
-local _ = require(currencyTransfers.Models.ProcessTransferModel)
-local _ = require(currencyTransfers.Models.ErrorTransferModel)
-local failureReasonModule = require(currencyTransfers.Enums.FailureReason)
-local handleTransferSuccessModule = require(currencyTransfers.Actions.Send.handleTransferSuccess)
-local handleTransferErrorModule = require(currencyTransfers.Actions.Send.handleTransferError)
-local handleTransferBlockModule = require(currencyTransfers.Actions.Send.handleTransferBlock)
-local transferRetryOriginModule = require(currencyTransfers.Enums.TransferRetryOrigin)
-local currencyTransferTelemetryModule = require(currencyTransfers.Events.CurrencyTransferTelemetry)
-local robuxTransferFlowEventNameModule = require(currencyTransfers.Enums.RobuxTransferFlowEventName)
-local logCurrencyTransferCounterModule = require(currencyTransfers.Utils.logCurrencyTransferCounter)
-local logRobuxTransferFlowEventModule = require(currencyTransfers.Utils.logRobuxTransferFlowEvent)
+﻿local CurrencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
+local SharedFlagsModule = require(CurrencyTransfers.Parent.SharedFlags)
+local _ = require(CurrencyTransfers.Stores.createTransferStore)
+local ProcessTransferRequestModule = require(CurrencyTransfers.NetworkRequests.processTransferRequest)
+local PromptStateModule = require(CurrencyTransfers.Enums.PromptState)
+local _ = require(CurrencyTransfers.Models.ProcessTransferModel)
+local _ = require(CurrencyTransfers.Models.ErrorTransferModel)
+local FailureReasonModule = require(CurrencyTransfers.Enums.FailureReason)
+local HandleTransferSuccessModule = require(CurrencyTransfers.Actions.Send.handleTransferSuccess)
+local HandleTransferErrorModule = require(CurrencyTransfers.Actions.Send.handleTransferError)
+local HandleTransferBlockModule = require(CurrencyTransfers.Actions.Send.handleTransferBlock)
+local TransferRetryOriginModule = require(CurrencyTransfers.Enums.TransferRetryOrigin)
+local CurrencyTransferTelemetryModule = require(CurrencyTransfers.Events.CurrencyTransferTelemetry)
+local RobuxTransferFlowEventNameModule = require(CurrencyTransfers.Enums.RobuxTransferFlowEventName)
+local LogCurrencyTransferCounterModule = require(CurrencyTransfers.Utils.logCurrencyTransferCounter)
+local LogRobuxTransferFlowEventModule = require(CurrencyTransfers.Utils.logRobuxTransferFlowEvent)
 
-return function(p1, p2)
-	-- upvalues: logCurrencyTransferCounterModule (ref), currencyTransferTelemetryModule (ref), sharedFlagsModule (ref), logRobuxTransferFlowEventModule (ref), robuxTransferFlowEventNameModule (ref), handleTransferErrorModule (ref), promptStateModule (ref), processTransferRequestModule (ref), handleTransferSuccessModule (ref), failureReasonModule (ref), handleTransferBlockModule (ref), transferRetryOriginModule (ref)
-	local networkImpl = p1.getNetworkImpl()
-	local setPromptState = p1.setPromptState
-	local transferRequestId = p1.getTransferRequestId(false)
+return function(p1, RobuxAmount) --[[ Line: 24 | Named "processTransfer" ]]
+	-- upvalues: LogCurrencyTransferCounterModule (copy), CurrencyTransferTelemetryModule (copy), SharedFlagsModule (copy), LogRobuxTransferFlowEventModule (copy), RobuxTransferFlowEventNameModule (copy), HandleTransferErrorModule (copy), PromptStateModule (copy), ProcessTransferRequestModule (copy), HandleTransferSuccessModule (copy), FailureReasonModule (copy), HandleTransferBlockModule (copy), TransferRetryOriginModule (copy)
+	local NetworkImpl = p1.getNetworkImpl()
+	local SetPromptStateFunction: (any) -> () = p1.setPromptState
+	local TransferRequestId = p1.getTransferRequestId(false)
 	
-	if transferRequestId then
-		setPromptState(promptStateModule.TransferProcessing)
-		logCurrencyTransferCounterModule(p1, currencyTransferTelemetryModule.CurrencyTransferProcessAttemptedCounter)
+	if TransferRequestId then
+		SetPromptStateFunction(PromptStateModule.TransferProcessing)
+		LogCurrencyTransferCounterModule(p1, CurrencyTransferTelemetryModule.CurrencyTransferProcessAttemptedCounter)
 		
-		if sharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
-			logRobuxTransferFlowEventModule(p1, robuxTransferFlowEventNameModule.process_attempted)
+		if SharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
+			LogRobuxTransferFlowEventModule(p1, RobuxTransferFlowEventNameModule.process_attempted)
 		end
-		return processTransferRequestModule({ transferRequestId = transferRequestId, robuxAmount = p2 }, nil, networkImpl):andThen(function(p3)
-			-- upvalues: logCurrencyTransferCounterModule (copy), p1 (ref), currencyTransferTelemetryModule (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), robuxTransferFlowEventNameModule (copy), handleTransferSuccessModule (copy), handleTransferErrorModule (copy)
-			if p3 and p3.success then
-				logCurrencyTransferCounterModule(p1, currencyTransferTelemetryModule.CurrencyTransferProcessSucceededCounter)
+		return ProcessTransferRequestModule({
+			transferRequestId = TransferRequestId,
+			robuxAmount = RobuxAmount
+		}, nil, NetworkImpl):andThen(function(Result) --[[ Line: 53 ]]
+			-- upvalues: LogCurrencyTransferCounterModule (upval), p1 (copy), CurrencyTransferTelemetryModule (upval), SharedFlagsModule (upval), LogRobuxTransferFlowEventModule (upval), RobuxTransferFlowEventNameModule (upval), HandleTransferSuccessModule (upval), HandleTransferErrorModule (upval)
+			if Result and Result.success then
+				LogCurrencyTransferCounterModule(p1, CurrencyTransferTelemetryModule.CurrencyTransferProcessSucceededCounter)
 				
-				if sharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
-					logRobuxTransferFlowEventModule(p1, robuxTransferFlowEventNameModule.process_succeeded)
+				if SharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
+					LogRobuxTransferFlowEventModule(p1, RobuxTransferFlowEventNameModule.process_succeeded)
 				end
-				handleTransferSuccessModule(p1)
+				HandleTransferSuccessModule(p1)
 				
 				return
 			else
-				logCurrencyTransferCounterModule(p1, currencyTransferTelemetryModule.CurrencyTransferProcessFailedCounter)
+				LogCurrencyTransferCounterModule(p1, CurrencyTransferTelemetryModule.CurrencyTransferProcessFailedCounter)
 				
-				if sharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
-					logRobuxTransferFlowEventModule(p1, robuxTransferFlowEventNameModule.process_failed)
+				if SharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
+					LogRobuxTransferFlowEventModule(p1, RobuxTransferFlowEventNameModule.process_failed)
 				end
-				handleTransferErrorModule(p1)
+				HandleTransferErrorModule(p1)
 			end
-		end):catch(function(p3)
-			-- upvalues: logCurrencyTransferCounterModule (copy), p1 (ref), currencyTransferTelemetryModule (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), robuxTransferFlowEventNameModule (copy), failureReasonModule (copy), handleTransferBlockModule (copy), transferRetryOriginModule (copy), handleTransferErrorModule (copy)
-			logCurrencyTransferCounterModule(p1, currencyTransferTelemetryModule.CurrencyTransferProcessFailedCounter)
+		end):catch(function(Err) --[[ Line: 74 ]]
+			-- upvalues: LogCurrencyTransferCounterModule (upval), p1 (copy), CurrencyTransferTelemetryModule (upval), SharedFlagsModule (upval), LogRobuxTransferFlowEventModule (upval), RobuxTransferFlowEventNameModule (upval), FailureReasonModule (upval), HandleTransferBlockModule (upval), TransferRetryOriginModule (upval), HandleTransferErrorModule (upval)
+			LogCurrencyTransferCounterModule(p1, CurrencyTransferTelemetryModule.CurrencyTransferProcessFailedCounter)
 			
-			if sharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
-				logRobuxTransferFlowEventModule(p1, robuxTransferFlowEventNameModule.process_failed)
+			if SharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
+				LogRobuxTransferFlowEventModule(p1, RobuxTransferFlowEventNameModule.process_failed)
 			end
-			if typeof(p3) ~= "table" or not p3.errorMessage then
-				handleTransferErrorModule(p1, nil)
-				
-				return
-			elseif p3.failureReason == failureReasonModule.AmpRecourseAvailable and p3.ampRecourseActions and p3.ampFeatureCheck then
-				handleTransferBlockModule(p1, p3.ampRecourseActions, p3.ampFeatureCheck, transferRetryOriginModule.ProcessTransfer)
+			if typeof(Err) ~= "table" or not Err.errorMessage then
+				HandleTransferErrorModule(p1, nil)
 				
 				return
 			end
-			handleTransferErrorModule(p1, p3)
+			if Err.failureReason == FailureReasonModule.AmpRecourseAvailable and Err.ampRecourseActions and Err.ampFeatureCheck then
+				HandleTransferBlockModule(p1, Err.ampRecourseActions, Err.ampFeatureCheck, TransferRetryOriginModule.ProcessTransfer)
+				
+				return
+			else
+				HandleTransferErrorModule(p1, Err)
+			end
 		end)
 	else
-		logCurrencyTransferCounterModule(p1, currencyTransferTelemetryModule.CurrencyTransferProcessFailedCounter)
+		LogCurrencyTransferCounterModule(p1, CurrencyTransferTelemetryModule.CurrencyTransferProcessFailedCounter)
 		
-		if sharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
-			logRobuxTransferFlowEventModule(p1, robuxTransferFlowEventNameModule.process_failed)
+		if SharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
+			LogRobuxTransferFlowEventModule(p1, RobuxTransferFlowEventNameModule.process_failed)
 		end
-		handleTransferErrorModule(p1)
+		HandleTransferErrorModule(p1)
 	end
 end

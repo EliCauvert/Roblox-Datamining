@@ -1,34 +1,34 @@
-﻿local runService = game:GetService("RunService")
-local httpService = game:GetService("HttpService")
-local userInputService = game:GetService("UserInputService")
-local parent = script:FindFirstAncestor("AvatarExperienceAnalytics").Parent
-local default = require(parent.LoggingProtocol).default
-local dashModule = require(parent.Dash)
-local isSpatial = require(parent.AppCommonLib).isSpatial
-local fFlagAXUnifiedEventCounters = require(parent.AvatarExperienceFlags).FFlagAXUnifiedEventCounters
+﻿local RunService = game:GetService("RunService")
+local HttpService = game:GetService("HttpService")
+local UserInputService = game:GetService("UserInputService")
+local Parent = script:FindFirstAncestor("AvatarExperienceAnalytics").Parent
+local Default = require(Parent.LoggingProtocol).default
+local DashModule = require(Parent.Dash)
+local IsSpatialFunction = require(Parent.AppCommonLib).isSpatial
+local FFlagAXUnifiedEventCounters = require(Parent.AvatarExperienceFlags).FFlagAXUnifiedEventCounters
 
-local function getAXCounterV2Metadata(p1)
-	-- upvalues: userInputService (ref), isSpatial (ref), runService (ref), httpService (ref), dashModule (ref)
-	local t = {
-		AppVersion = runService:GetRobloxVersion(),
-		UserAgent = httpService:GetUserAgent(),
-		CoreScriptVersion = runService:GetCoreScriptVersion(),
-		Platform = if isSpatial() then "VR" else userInputService:GetPlatform()
+local function getAXCounterV2Metadata(p1) --[[ Line: 18 ]]
+	-- upvalues: UserInputService (copy), IsSpatialFunction (copy), RunService (copy), HttpService (copy), DashModule (copy)
+	local AssignResult = {
+		AppVersion = RunService:GetRobloxVersion(),
+		UserAgent = HttpService:GetUserAgent(),
+		CoreScriptVersion = RunService:GetCoreScriptVersion(),
+		Platform = if IsSpatialFunction() then "VR" else UserInputService:GetPlatform()
 	}
 	
 	if p1 and next(p1) ~= nil then
-		t = dashModule.assign({}, t, p1)
+		AssignResult = DashModule.assign({}, AssignResult, p1)
 	end
-	return t
+	return AssignResult
 end
 
-return function(p1, p2, p3)
-	-- upvalues: default (ref), getAXCounterV2Metadata (ref), fFlagAXUnifiedEventCounters (ref)
-	default:logRobloxTelemetryCounter({
+return function(Text, p1, p2) --[[ Line: 38 | Named "sendAXCounterV2" ]]
+	-- upvalues: Default (copy), getAXCounterV2Metadata (copy), FFlagAXUnifiedEventCounters (copy)
+	Default:logRobloxTelemetryCounter({
 		description = "Counter to track various Avatar Experience events.",
 		links = "",
-		eventName = "AvatarExperience_" .. p1,
-		backends = { default.TelemetryBackends.Counter },
+		eventName = "AvatarExperience_" .. Text,
+		backends = { Default.TelemetryBackends.Counter },
 		lastUpdated = { 2025, 10, 30 }
-	}, if fFlagAXUnifiedEventCounters then p3 or 1 else 1, getAXCounterV2Metadata(p2))
+	}, FFlagAXUnifiedEventCounters and p2 or 1, (getAXCounterV2Metadata(p1)))
 end

@@ -1,42 +1,42 @@
-﻿local parent = script:FindFirstAncestor("FlyoutSidePanel").Parent
-local reactModule = require(parent.React)
-local useTokens = require(parent.Foundation).Hooks.useTokens
-local flyoutNavigationItemModule = require(script.Parent.FlyoutNavigationItem)
+﻿local Parent = script:FindFirstAncestor("FlyoutSidePanel").Parent
+local ReactModule = require(Parent.React)
+local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+local FlyoutNavigationItemModule = require(script.Parent.FlyoutNavigationItem)
 
-return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), flyoutNavigationItemModule (ref)
-	local var1 = useTokens()
+return function(p1) --[[ Line: 16 | Named "FlyoutNavigationList" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), FlyoutNavigationItemModule (copy)
+	local UseTokensResult = UseTokensFunction()
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
 		LayoutOrder = p1.layoutOrder
-	}, reactModule.useMemo(function()
-		-- upvalues: reactModule (copy), var1 (ref), p1 (ref), flyoutNavigationItemModule (copy)
-		local t = {
-			ListLayout = reactModule.createElement("UIListLayout", {
+	}, (ReactModule.useMemo(function() --[[ Line: 18 ]]
+		-- upvalues: ReactModule (upval), UseTokensResult (copy), p1 (copy), FlyoutNavigationItemModule (upval)
+		local config = {
+			ListLayout = ReactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Vertical,
 				SortOrder = Enum.SortOrder.LayoutOrder,
-				Padding = UDim.new(0, var1.Gap.Small)
+				Padding = UDim.new(0, UseTokensResult.Gap.Small)
 			})
 		}
 		
-		for i, v in ipairs(p1.navigationItems) do
-			if v and v.textKey then
-				t[v.itemType] = reactModule.createElement(flyoutNavigationItemModule, {
-					item = v,
-					layoutOrder = i,
+		for LayoutOrder, navigationItem in ipairs(p1.navigationItems) do
+			if navigationItem and navigationItem.textKey then
+				config[navigationItem.itemType] = ReactModule.createElement(FlyoutNavigationItemModule, {
+					item = navigationItem,
+					layoutOrder = LayoutOrder,
 					closeDrawer = p1.closeDrawer,
 					buildCreatorWebNavUrl = p1.buildCreatorWebNavUrl
 				})
 			end
 		end
-		return t
+		return config
 	end, {
 		p1.navigationItems,
 		p1.buildCreatorWebNavUrl,
 		p1.closeDrawer,
-		var1.Gap.Small
-	}))
+		UseTokensResult.Gap.Small
+	})))
 end

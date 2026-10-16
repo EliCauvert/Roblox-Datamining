@@ -1,12 +1,12 @@
-﻿local API_URLModule = require(script.Parent.Parent.API_URL)
+﻿local APIURLModule = require(script.Parent.Parent.API_URL)
 
-return function(p1)
-	-- upvalues: API_URLModule (ref)
-	return p1.roduxNetworking.GET("GetSelfSocialLinks", function(p2, p3)
-		-- upvalues: API_URLModule (copy)
-		return p2(API_URLModule):path("v1"):path("promotion-channels"):queryArgs({
-			alwaysReturnUrls = p3.alwaysReturnUrls,
-			filterLink = p3.filterLink
+return function(p1) --[[ Line: 13 ]]
+	-- upvalues: APIURLModule (copy)
+	return p1.roduxNetworking.GET("GetSelfSocialLinks", function(Callback, p2) --[[ Line: 16 ]]
+		-- upvalues: APIURLModule (upval)
+		return Callback(APIURLModule):path("v1"):path("promotion-channels"):queryArgs({
+			alwaysReturnUrls = p2.alwaysReturnUrls,
+			filterLink = p2.filterLink
 		})
 	end)
 end

@@ -1,90 +1,90 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
-local sharedFlagsModule = require(parent_1.SharedFlags)
-local signal = require(parent_1.AppCommonLib).Signal
-local _ = require(parent.PlatformLeaderboardTypes)
-local _ = require(parent.PlatformLeaderboardFetcher)
-local platformLeaderboardConfigPollIntervalSeconds = game:DefineFastInt("PlatformLeaderboardConfigPollIntervalSeconds", 300)
-local platformLeaderboardConfigPollMaxJitterSeconds = game:DefineFastInt("PlatformLeaderboardConfigPollMaxJitterSeconds", 60)
-local fFlagPlatformLeaderboardDebugLogging = sharedFlagsModule.FFlagPlatformLeaderboardDebugLogging
-local t = {}
-t.__index = t
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
+local Signal = require(Parent1.AppCommonLib).Signal
+local _ = require(Parent.PlatformLeaderboardTypes)
+local _ = require(Parent.PlatformLeaderboardFetcher)
+local PlatformLeaderboardConfigPollIntervalSeconds = game:DefineFastInt("PlatformLeaderboardConfigPollIntervalSeconds", 300)
+local PlatformLeaderboardConfigPollMaxJitterSeconds = game:DefineFastInt("PlatformLeaderboardConfigPollMaxJitterSeconds", 60)
+local FFlagPlatformLeaderboardDebugLogging = require(Parent1.SharedFlags).FFlagPlatformLeaderboardDebugLogging
+local PlatformLeaderboardConfigService = {}
+PlatformLeaderboardConfigService.__index = PlatformLeaderboardConfigService
 
-function t.new(p1)
-	-- upvalues: signal (ref), t (ref), platformLeaderboardConfigPollMaxJitterSeconds (ref), platformLeaderboardConfigPollIntervalSeconds (ref), fFlagPlatformLeaderboardDebugLogging (ref)
-	local tbl = setmetatable({
+function PlatformLeaderboardConfigService.new(_fetcher) --[[ Line: 50 ]]
+	-- upvalues: Signal (copy), PlatformLeaderboardConfigService (copy), PlatformLeaderboardConfigPollMaxJitterSeconds (copy), PlatformLeaderboardConfigPollIntervalSeconds (copy), FFlagPlatformLeaderboardDebugLogging (copy)
+	local self = setmetatable({
 		_config = nil,
 		_pollTimer = nil,
-		_fetcher = p1,
-		_configChanged = signal.new()
-	}, t)
-	local ok, status, var1 = pcall(p1.fetchConfig)
+		_fetcher = _fetcher,
+		_configChanged = Signal.new()
+	}, PlatformLeaderboardConfigService)
+	local Success, Result, Result3 = pcall(_fetcher.fetchConfig)
 	
-	if ok and status then
-		tbl._config = var1
+	if Success and Result then
+		self._config = Result3
 	end
-	local var2 = nil
+	local DeferredThread = nil
 	
-	local function pollLoop()
-		-- upvalues: tbl (ref), var2 (write), platformLeaderboardConfigPollMaxJitterSeconds (copy), platformLeaderboardConfigPollIntervalSeconds (copy)
-		while tbl._pollTimer == var2 do
-			task.wait(platformLeaderboardConfigPollIntervalSeconds + math.random() * platformLeaderboardConfigPollMaxJitterSeconds)
-			local ok, status, var3 = pcall(tbl._fetcher.fetchConfig)
+	local function pollLoop() --[[ Line: 64 ]]
+		-- upvalues: self (copy), DeferredThread (ref), PlatformLeaderboardConfigPollMaxJitterSeconds (upval), PlatformLeaderboardConfigPollIntervalSeconds (upval)
+		while self._pollTimer == DeferredThread do
+			task.wait(PlatformLeaderboardConfigPollIntervalSeconds + math.random() * PlatformLeaderboardConfigPollMaxJitterSeconds)
+			local Success, Result, Result3 = pcall(self._fetcher.fetchConfig)
 			
-			if ok and status then
-				tbl:updateConfig(var3)
+			if Success and Result then
+				self:updateConfig(Result3)
 			end
 		end
 	end
 	
-	tbl._pollTimer = task.defer(function()
-		-- upvalues: pollLoop (ref), tbl (ref), var2 (write), fFlagPlatformLeaderboardDebugLogging (copy)
-		if not pcall(pollLoop) and tbl._pollTimer == var2 then
-			if fFlagPlatformLeaderboardDebugLogging then
+	DeferredThread = task.defer(function() --[[ Line: 75 ]]
+		-- upvalues: pollLoop (copy), self (copy), DeferredThread (ref), FFlagPlatformLeaderboardDebugLogging (upval)
+		if not pcall(pollLoop) and self._pollTimer == DeferredThread then
+			if FFlagPlatformLeaderboardDebugLogging then
 				warn("[PlatformLeaderboard] ConfigService poll loop terminated unexpectedly")
 			end
-			tbl._pollTimer = nil
+			self._pollTimer = nil
 		end
 	end)
+	self._pollTimer = DeferredThread
 	
-	return tbl
+	return self
 end
 
-local function _(p2, p3)
-	return p2 == p3 or (if p2 == nil or p3 == nil then false else p2.leaderboardId == p3.leaderboardId and p2.unit == p3.unit)
+local function _(p1, p2): boolean --[[ Line: 89 | Named "configsEqual" ]]
+	return p1 == p2 or p1 ~= nil and p2 ~= nil and (p1.leaderboardId == p2.leaderboardId and p1.unit == p2.unit)
 end
 
-function t:updateConfig(p2)
-	local config = self._config
+function PlatformLeaderboardConfigService:updateConfig(_config) --[[ Line: 99 ]]
+	local Config = self._config
 	
-	if config == p2 or (if config == nil or p2 == nil then false else config.leaderboardId == p2.leaderboardId and config.unit == p2.unit) then
+	if Config ~= _config and (Config == nil or _config == nil or (Config.leaderboardId ~= _config.leaderboardId or Config.unit ~= _config.unit)) then
+		self._config = _config
+		self._configChanged:fire(self._config, self._config)
+		
 		return
 	end
-	local config_1 = self._config
-	self._config = p2
-	self._configChanged:fire(config_1, self._config)
 end
 
-function t:getConfig()
+function PlatformLeaderboardConfigService:getConfig() --[[ Line: 108 ]]
 	return self._config
 end
 
-function t:hasActiveConfig()
+function PlatformLeaderboardConfigService:hasActiveConfig(): boolean --[[ Line: 112 ]]
 	return self._config ~= nil
 end
 
-function t:onConfigChanged(p2)
-	return self._configChanged:connect(p2)
+function PlatformLeaderboardConfigService:onConfigChanged(p1) --[[ Line: 116 ]]
+	return self._configChanged:connect(p1)
 end
 
-function t:teardown()
-	-- upvalues: fFlagPlatformLeaderboardDebugLogging (ref)
-	local pollTimer = self._pollTimer
+function PlatformLeaderboardConfigService:teardown() --[[ Line: 122 ]]
+	-- upvalues: FFlagPlatformLeaderboardDebugLogging (copy)
+	local PollTimer = self._pollTimer
 	self._pollTimer = nil
 	
-	if pollTimer and not pcall(task.cancel, pollTimer) and fFlagPlatformLeaderboardDebugLogging then
+	if PollTimer and not pcall(task.cancel, PollTimer) and FFlagPlatformLeaderboardDebugLogging then
 		warn("[PlatformLeaderboard] ConfigService teardown: failed to cancel poll timer")
 	end
 end
 
-return t
+return PlatformLeaderboardConfigService

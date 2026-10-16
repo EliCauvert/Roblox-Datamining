@@ -1,80 +1,108 @@
-﻿local home = script:FindFirstAncestor("Home")
-local parent = home.Parent
-local reactModule = require(parent.React)
-local _ = require(parent.Navigation)
-local appPage = require(parent.RobloxAppEnums).AppPage
-local responsiveModule = require(parent.Responsive)
-local sduiSharedUtilitiesModule = require(parent.SduiSharedUtilities)
-local sduiPageWrapperEntryPoint = sduiSharedUtilitiesModule.SduiPageWrapperEntryPoint
-local usePageScopeRef = sduiSharedUtilitiesModule.usePageScopeRef
-local useEntrySurfacing = sduiSharedUtilitiesModule.useEntrySurfacing
-local videoUtilsModule = require(parent.VideoUtils)
-local refreshHomePageModule = require(home.refreshHomePage)
-local fetchHomePageModule = require(home.fetchHomePage)
-local useHomeCollectionLayoutSyncModule = require(home.useHomeCollectionLayoutSync)
-local homeConstantsModule = require(home.HomeConstants)
-local fFlagLuaAppSduiStickyHeaderScrollAway = require(parent.SharedFlags).FFlagLuaAppSduiStickyHeaderScrollAway
-local fFlagLuaAppAddHomeExtraTopPadding = require(parent.SharedFlags).FFlagLuaAppAddHomeExtraTopPadding
-local fFlagLuaAppSduiVideoThumbnail = require(parent.SharedFlags).FFlagLuaAppSduiVideoThumbnail
-local fFlagLuaAppOneByTwoHoverIdleAutoplay = require(parent.SharedFlags).FFlagLuaAppOneByTwoHoverIdleAutoplay
-local fFlagSduiDismissPromptPageScope = require(parent.SharedFlags).FFlagSduiDismissPromptPageScope
-local fFlagAppPageShellScrollToTopFocus = require(parent.SharedFlags).FFlagAppPageShellScrollToTopFocus
-local fFlagLuaAppsDefaultSelection = require(parent.SharedFlags).FFlagLuaAppsDefaultSelection
+﻿local AppLifecycleObserverService = game:GetService("AppLifecycleObserverService")
+local Home = script:FindFirstAncestor("Home")
+local Parent = Home.Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local UseSponsoredAdViewabilityDetectorFunction = require(Parent.SponsoredAdViewability).useSponsoredAdViewabilityDetector
+local _ = require(Parent.Navigation)
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local ResponsiveModule = require(Parent.Responsive)
+local SduiSharedUtilitiesModule = require(Parent.SduiSharedUtilities)
+local SduiPageWrapperEntryPoint = SduiSharedUtilitiesModule.SduiPageWrapperEntryPoint
+local UsePageScopeRefFunction = SduiSharedUtilitiesModule.usePageScopeRef
+local UseEntrySurfacingFunction = SduiSharedUtilitiesModule.useEntrySurfacing
+local VideoUtilsModule = require(Parent.VideoUtils)
+local RefreshHomePageModule = require(Home.refreshHomePage)
+local FetchHomePageModule = require(Home.fetchHomePage)
+local UseHomeCollectionLayoutSyncModule = require(Home.useHomeCollectionLayoutSync)
+local HomeConstantsModule = require(Home.HomeConstants)
+local HomePageSessionModule = require(Home.HomePageSession)
+local FFlagLuaAppAddHomeExtraTopPadding = require(Parent.SharedFlags).FFlagLuaAppAddHomeExtraTopPadding
+local FFlagLuaAppSduiVideoThumbnail = require(Parent.SharedFlags).FFlagLuaAppSduiVideoThumbnail
+local FFlagLuaAppOneByTwoHoverIdleAutoplay = require(Parent.SharedFlags).FFlagLuaAppOneByTwoHoverIdleAutoplay
+local FFlagSduiDismissPromptPageScope = require(Parent.SharedFlags).FFlagSduiDismissPromptPageScope
+local FFlagAppPageShellScrollToTopFocus = require(Parent.SharedFlags).FFlagAppPageShellScrollToTopFocus
+local FFlagLuaAppsDefaultSelection = require(Parent.SharedFlags).FFlagLuaAppsDefaultSelection
+local FFlagHomePageRefetchOnDataHydrationAccountReset = require(Parent.SharedFlags).FFlagHomePageRefetchOnDataHydrationAccountReset
+local FFlagLuaAppSduiHomeSponsoredAdViewabilityModule = require(Home.Flags.FFlagLuaAppSduiHomeSponsoredAdViewability)
+local FFlagAppThemeHalloween2026HomeBackground = require(Parent.SharedFlags).FFlagAppThemeHalloween2026HomeBackground
 
-local function _(p1, p2)
+local function _(p1, p2) --[[ Line: 50 | Named "getFromPropsOrNavigationParams" ]]
 	return p1[p2] or p1.navigation and p1.navigation.getParam(p2)
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: homeConstantsModule (ref), fFlagLuaAppAddHomeExtraTopPadding (ref), useEntrySurfacing (ref), fFlagSduiDismissPromptPageScope (ref), usePageScopeRef (ref), reactModule (ref), sduiSharedUtilitiesModule (ref), appPage (ref), fetchHomePageModule (ref), home (ref), useHomeCollectionLayoutSyncModule (ref), fFlagLuaAppOneByTwoHoverIdleAutoplay (ref), responsiveModule (ref), videoUtilsModule (ref), fFlagLuaAppSduiVideoThumbnail (ref), sduiPageWrapperEntryPoint (ref), refreshHomePageModule (ref), fFlagLuaAppSduiStickyHeaderScrollAway (ref), fFlagAppPageShellScrollToTopFocus (ref), fFlagLuaAppsDefaultSelection (ref)
-	local configKey = homeConstantsModule.ConfigKey
-	local var1 = nil
+local function getCommittedHomeSessionId(p1) --[[ Line: 55 ]]
+	-- upvalues: HomePageSessionModule (copy)
+	local v1 = HomePageSessionModule:GetCommittedSignal()(p1)
 	
-	if fFlagLuaAppAddHomeExtraTopPadding then
-		local var2 = useEntrySurfacing(configKey, homeConstantsModule.ContentIdentifier, "fullPage")
-		var1 = (p1.feedTopMargin or 0) + (if var2 then var2.contentTopPadding else 0)
+	return if v1 then v1.sessionId else nil
+end
+
+return ReactModule.memo(function(p1) --[[ Line: 60 | Named "HomeContentEntryPoint" ]]
+	-- upvalues: HomeConstantsModule (copy), FFlagLuaAppAddHomeExtraTopPadding (copy), UseEntrySurfacingFunction (copy), FFlagSduiDismissPromptPageScope (copy), UsePageScopeRefFunction (copy), ReactModule (copy), SduiSharedUtilitiesModule (copy), AppPage (copy), FFlagHomePageRefetchOnDataHydrationAccountReset (copy), FetchHomePageModule (copy), Home (copy), UseHomeCollectionLayoutSyncModule (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), ResponsiveModule (copy), VideoUtilsModule (copy), FFlagLuaAppSduiVideoThumbnail (copy), FFlagLuaAppSduiHomeSponsoredAdViewabilityModule (copy), SignalsReactModule (copy), getCommittedHomeSessionId (copy), UseSponsoredAdViewabilityDetectorFunction (copy), AppLifecycleObserverService (copy), SduiPageWrapperEntryPoint (copy), RefreshHomePageModule (copy), FFlagAppPageShellScrollToTopFocus (copy), FFlagLuaAppsDefaultSelection (copy), FFlagAppThemeHalloween2026HomeBackground (copy)
+	local ConfigKey = HomeConstantsModule.ConfigKey
+	local v1 = nil
+	
+	if FFlagLuaAppAddHomeExtraTopPadding then
+		local FullPage = UseEntrySurfacingFunction(ConfigKey, HomeConstantsModule.ContentIdentifier, "fullPage")
+		v1 = (p1.feedTopMargin or 0) + (FullPage and FullPage.contentTopPadding or 0)
 	end
-	if fFlagSduiDismissPromptPageScope then
-		usePageScopeRef(configKey)
+	if FFlagSduiDismissPromptPageScope then
+		UsePageScopeRefFunction(ConfigKey)
 	end
-	local pageTimer = p1.pageTimer or p1.navigation and p1.navigation.getParam("pageTimer")
-	local var3 = reactModule.useMemo(function()
-		-- upvalues: pageTimer (ref), sduiSharedUtilitiesModule (copy), appPage (copy)
-		return pageTimer or sduiSharedUtilitiesModule.SduiLoadTimer.createLoadTimer(appPage.Home)
-	end, { configKey, pageTimer })
-	reactModule.useEffect(function()
-		-- upvalues: fetchHomePageModule (copy), var3 (ref)
-		fetchHomePageModule(var3)
-	end, { configKey, var3 })
-	reactModule.useEffect(function()
-		-- upvalues: home (copy)
-		return require(home.getHomePageAutoRefreshStore)(false).start()
+	local PageTimer = p1.pageTimer or p1.navigation and p1.navigation.getParam("pageTimer")
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 74 ]]
+		-- upvalues: PageTimer (copy), SduiSharedUtilitiesModule (upval), AppPage (upval)
+		return PageTimer or SduiSharedUtilitiesModule.SduiLoadTimer.createLoadTimer(AppPage.Home)
+	end, { ConfigKey, PageTimer })
+	local UseDataHydrationAccountGenerationResult = if FFlagHomePageRefetchOnDataHydrationAccountReset then SduiSharedUtilitiesModule.useDataHydrationAccountGeneration() else nil
+	ReactModule.useEffect(function() --[[ Line: 84 ]]
+		-- upvalues: FetchHomePageModule (upval), UseMemoResult (copy)
+		FetchHomePageModule(UseMemoResult)
+	end, {
+		ConfigKey,
+		UseMemoResult,
+		if FFlagHomePageRefetchOnDataHydrationAccountReset then UseDataHydrationAccountGenerationResult else nil
+	})
+	ReactModule.useEffect(function() --[[ Line: 94 ]]
+		-- upvalues: Home (upval)
+		return require(Home.getHomePageAutoRefreshStore)(false).start()
 	end, {})
-	useHomeCollectionLayoutSyncModule()
-	local var4 = nil
+	UseHomeCollectionLayoutSyncModule()
+	local UseFeedVideoPlaybackContextResult = nil
 	
-	if fFlagLuaAppOneByTwoHoverIdleAutoplay then
-		local var5 = responsiveModule.usePreferredInput()
-		var4 = videoUtilsModule.useFeedVideoPlaybackContext(nil, nil, nil, nil, videoUtilsModule.getPlaybackDetectionMethod(var5, var5 == responsiveModule.Input.Pointer))
-	elseif fFlagLuaAppSduiVideoThumbnail then
-		local var6 = responsiveModule.usePreferredInput() == responsiveModule.Input.Touch
-		var4 = reactModule.useMemo(function()
-			-- upvalues: videoUtilsModule (copy), var6 (ref)
-			return videoUtilsModule.FeedVideoPlaybackContext.new(var6)
-		end, { var6 })
+	if FFlagLuaAppOneByTwoHoverIdleAutoplay then
+		local UsePreferredInputResult = ResponsiveModule.usePreferredInput()
+		UseFeedVideoPlaybackContextResult = VideoUtilsModule.useFeedVideoPlaybackContext(nil, nil, nil, nil, (VideoUtilsModule.getPlaybackDetectionMethod(UsePreferredInputResult, UsePreferredInputResult == ResponsiveModule.Input.Pointer)))
+	elseif FFlagLuaAppSduiVideoThumbnail then
+		local IsUsePreferredInputResultMatch = ResponsiveModule.usePreferredInput() == ResponsiveModule.Input.Touch
+		UseFeedVideoPlaybackContextResult = ReactModule.useMemo(function() --[[ Line: 112 ]]
+			-- upvalues: VideoUtilsModule (upval), IsUsePreferredInputResultMatch (copy)
+			return VideoUtilsModule.FeedVideoPlaybackContext.new(IsUsePreferredInputResultMatch)
+		end, { IsUsePreferredInputResultMatch })
 	end
-	return reactModule.createElement(sduiPageWrapperEntryPoint, {
-		appPage = appPage.Home,
-		configKey = configKey,
-		contentIdentifier = homeConstantsModule.ContentIdentifier,
-		pageTimer = var3,
-		refresh = refreshHomePageModule,
+	local v2 = nil
+	
+	if FFlagLuaAppSduiHomeSponsoredAdViewabilityModule then
+		local UseStateResult
+		UseStateResult, v36 = ReactModule.useState(nil)
+		UseSponsoredAdViewabilityDetectorFunction(UseStateResult, SignalsReactModule.useSignalState(getCommittedHomeSessionId), AppLifecycleObserverService)
+	end
+	return ReactModule.createElement(SduiPageWrapperEntryPoint, {
+		ref = if FFlagLuaAppSduiHomeSponsoredAdViewabilityModule then v2 else nil,
+		appPage = AppPage.Home,
+		configKey = ConfigKey,
+		contentIdentifier = HomeConstantsModule.ContentIdentifier,
+		pageTimer = UseMemoResult,
+		refresh = RefreshHomePageModule,
 		pageTopPadding = p1.pageTopPadding,
-		feedTopMargin = if fFlagLuaAppSduiStickyHeaderScrollAway then if fFlagLuaAppAddHomeExtraTopPadding then var1 else p1.feedTopMargin else nil,
-		stickyTopPadding = if fFlagLuaAppSduiStickyHeaderScrollAway then p1.feedTopMargin else nil,
-		scrollAway = if fFlagLuaAppSduiStickyHeaderScrollAway then p1.scrollAway else nil,
-		videoPlaybackContext = if fFlagLuaAppSduiVideoThumbnail or fFlagLuaAppOneByTwoHoverIdleAutoplay then var4 else nil,
-		handleBackButton = if fFlagAppPageShellScrollToTopFocus then false else nil,
-		defaultFocusRef = if fFlagAppPageShellScrollToTopFocus and fFlagLuaAppsDefaultSelection then p1.defaultFocusRef else nil
+		feedTopMargin = if FFlagLuaAppAddHomeExtraTopPadding then v1 else p1.feedTopMargin,
+		stickyTopPadding = p1.feedTopMargin,
+		scrollAway = p1.scrollAway,
+		videoPlaybackContext = if FFlagLuaAppSduiVideoThumbnail or FFlagLuaAppOneByTwoHoverIdleAutoplay then UseFeedVideoPlaybackContextResult else nil,
+		handleBackButton = not FFlagAppPageShellScrollToTopFocus and nil,
+		defaultFocusRef = if FFlagAppPageShellScrollToTopFocus and FFlagLuaAppsDefaultSelection then p1.defaultFocusRef else nil,
+		backgroundStyle = if FFlagAppThemeHalloween2026HomeBackground then p1.backgroundStyle else nil,
+		stickyBackgroundStyle = if FFlagAppThemeHalloween2026HomeBackground then p1.stickyBackgroundStyle else nil
 	})
 end)

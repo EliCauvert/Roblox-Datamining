@@ -1,86 +1,91 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local _ = require(parent.React)
-local _ = require(buildExperience.Chat.chatTypes)
-local getPlayButtonStoreModule = require(buildExperience.Stores.GetPlayButtonStore)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local _ = require(Parent.React)
+local _ = require(BuildExperience.Chat.chatTypes)
+local GetPlayButtonStoreModule = require(BuildExperience.Stores.GetPlayButtonStore)
 
-return function()
-	-- upvalues: signalsModule (ref), signalsReactModule (ref), getPlayButtonStoreModule (ref)
-	local var1, var2 = signalsModule.createSignal(false)
-	local var3, var4 = signalsModule.createSignal(nil)
-	local var5, var6 = signalsModule.createSignal(nil)
-	local var7, var8 = signalsModule.createSignal(nil)
-	local var9, var10 = signalsModule.createSignal(nil)
-	local var11, var12 = signalsModule.createSignal(nil)
-	local var13, var14 = signalsModule.createSignal(nil)
-	local var15, var16 = signalsModule.createSignal(nil)
-	local var17, var18 = signalsModule.createSignal(nil)
-	local var19 = 0
+return function() --[[ Line: 88 | Named "createLibraryStore" ]]
+	-- upvalues: SignalsModule (copy), SignalsReactModule (copy), GetPlayButtonStoreModule (copy)
+	local Signal, Signal2 = SignalsModule.createSignal(false)
+	local Signal1, Signal2_1 = SignalsModule.createSignal(nil)
+	local Signal3, Signal2_2 = SignalsModule.createSignal(nil)
+	local Signal4, Signal2_3 = SignalsModule.createSignal(nil)
+	local Signal5, Signal2_4 = SignalsModule.createSignal(nil)
+	local Signal6, Signal2_5 = SignalsModule.createSignal(nil)
+	local Signal7, Signal2_6 = SignalsModule.createSignal(nil)
+	local Signal8, Signal2_7 = SignalsModule.createSignal(nil)
+	local Signal9, Signal2_8 = SignalsModule.createSignal(nil)
+	local Token = 0
 	
 	return {
-		getIsOpen = var1,
-		getIsChatOpen = getPlayButtonStoreModule(false).getIsActive,
-		useIsOpen = function()
-			-- upvalues: signalsReactModule (copy), var1 (ref)
-			return signalsReactModule.useSignalState(var1)
+		getIsOpen = Signal,
+		getIsChatOpen = GetPlayButtonStoreModule(false).getIsActive,
+		useIsOpen = function() --[[ Line: 105 ]]
+			-- upvalues: SignalsReactModule (upval), Signal (copy)
+			return SignalsReactModule.useSignalState(Signal)
 		end,
-		setIsOpen = var2,
-		getFocusRequest = var9,
-		requestFocus = function(p1, p2, p3)
-			-- upvalues: var19 (write), var10 (ref)
-			var19 += 1
-			var10({ token = var19, position = p1, radius = p2, model = p3 })
-		end,
-		clearFocus = function()
-			-- upvalues: var10 (ref)
-			var10(nil)
-		end,
-		getWorldViewportRect = var3,
-		setWorldViewportRect = var4,
-		getWorldChatTop = var5,
-		setWorldChatTop = var6,
-		getWorldChatLeft = var7,
-		setWorldChatLeft = var8,
-		getChatResourceRequest = var11,
-		consumeChatResourceRequest = function(p1)
-			-- upvalues: var11 (ref), var12 (ref)
-			local var20 = var11(false)
-			
-			if var20 ~= nil and var20.token == p1 then
-				var12(nil)
-			end
-		end,
-		requestAddToChat = function(p1, p2, p3)
-			-- upvalues: var19 (write), var12 (ref)
-			var19 += 1
-			var12({
-				action = "Add",
-				token = var19,
-				resource = p1,
-				replacePath = p2,
-				focusComposer = p3
+		setIsOpen = Signal2,
+		getFocusRequest = Signal5,
+		requestFocus = function(Position, Radius, Model) --[[ Line: 109 ]]
+			-- upvalues: Token (ref), Signal2_4 (copy)
+			Token += 1
+			Signal2_4({
+				token = Token,
+				position = Position,
+				radius = Radius,
+				model = Model
 			})
 		end,
-		requestRemoveFromChat = function(p1)
-			-- upvalues: var19 (write), var12 (ref)
-			var19 += 1
-			var12({ action = "Remove", token = var19, resource = p1 })
+		clearFocus = function() --[[ Line: 143 ]]
+			-- upvalues: Signal2_4 (copy)
+			Signal2_4(nil)
 		end,
-		getChatComposerState = var13,
-		setChatComposerState = var14,
-		getPromptFailure = var15,
-		reportPromptFailure = function(p1)
-			-- upvalues: var19 (write), var16 (ref)
-			var19 += 1
-			var16({ token = var19, errorCode = p1 })
+		getWorldViewportRect = Signal1,
+		setWorldViewportRect = Signal2_1,
+		getWorldChatTop = Signal3,
+		setWorldChatTop = Signal2_2,
+		getWorldChatLeft = Signal4,
+		setWorldChatLeft = Signal2_3,
+		getChatResourceRequest = Signal6,
+		consumeChatResourceRequest = function(Token) --[[ Line: 153 ]]
+			-- upvalues: Signal6 (copy), Signal2_5 (copy)
+			local SignalResult = Signal6(false)
+			
+			if SignalResult ~= nil and SignalResult.token == Token then
+				Signal2_5(nil)
+			end
 		end,
-		getChipEvent = var17,
-		reportChipEvent = function(p1, p2)
-			-- upvalues: var19 (write), var18 (ref)
-			var19 += 1
-			var18({ token = var19, kind = p1, uris = p2 })
+		requestAddToChat = function(Resource, ReplacePath, FocusComposer) --[[ Line: 114 ]]
+			-- upvalues: Token (ref), Signal2_5 (copy)
+			Token += 1
+			Signal2_5({
+				action = "Add",
+				token = Token,
+				resource = Resource,
+				replacePath = ReplacePath,
+				focusComposer = FocusComposer
+			})
+		end,
+		requestRemoveFromChat = function(Resource) --[[ Line: 126 ]]
+			-- upvalues: Token (ref), Signal2_5 (copy)
+			Token += 1
+			Signal2_5({ action = "Remove", token = Token, resource = Resource })
+		end,
+		getChatComposerState = Signal7,
+		setChatComposerState = Signal2_6,
+		getPromptFailure = Signal8,
+		reportPromptFailure = function(ErrorCode) --[[ Line: 164 ]]
+			-- upvalues: Token (ref), Signal2_7 (copy)
+			Token += 1
+			Signal2_7({ token = Token, errorCode = ErrorCode })
+		end,
+		getChipEvent = Signal9,
+		reportChipEvent = function(Kind, Uris) --[[ Line: 169 ]]
+			-- upvalues: Token (ref), Signal2_8 (copy)
+			Token += 1
+			Signal2_8({ token = Token, kind = Kind, uris = Uris })
 		end
 	}
 end

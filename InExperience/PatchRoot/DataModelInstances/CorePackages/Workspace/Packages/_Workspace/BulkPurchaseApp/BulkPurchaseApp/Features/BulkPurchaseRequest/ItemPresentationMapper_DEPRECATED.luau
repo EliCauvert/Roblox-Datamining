@@ -1,59 +1,63 @@
-﻿local bulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
-local parent = bulkPurchaseApp.Parent
-local reactModule = require(parent.React)
-local styledTextLabel = require(parent.UIBlox).App.Text.StyledTextLabel
-local priceDEPRECATEDModule = require(bulkPurchaseApp.Components.Price_DEPRECATED)
-local itemStatusModule = require(bulkPurchaseApp.Components.ItemStatus)
+﻿local BulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
+local Parent = BulkPurchaseApp.Parent
+local ReactModule = require(Parent.React)
+local StyledTextLabel = require(Parent.UIBlox).App.Text.StyledTextLabel
+local PriceDEPRECATEDModule = require(BulkPurchaseApp.Components.Price_DEPRECATED)
+local ItemStatusModule = require(BulkPurchaseApp.Components.ItemStatus)
 
 return {
-	mapItemsToPresentation_DEPRECATED = function(p1, p2, p3)
-		-- upvalues: reactModule (ref), priceDEPRECATEDModule (ref)
-		local t = {}
+	mapItemsToPresentation_DEPRECATED = function(List, FontStyle, ColorStyle) --[[ Line: 10 ]]
+		-- upvalues: ReactModule (copy), PriceDEPRECATEDModule (copy)
+		local List1 = {}
 		
-		for i, v in p1 do
-			table.insert(t, {
-				id = v.id,
-				name = v.name,
-				image = v.image,
-				endSlot = reactModule.createElement(priceDEPRECATEDModule, { amount = v.cost, fontStyle = p2, colorStyle = p3 })
-			})
-		end
-		return t
-	end,
-	mapOwnedItemsToPresentation_DEPRECATED = function(p4, p5, p6, p7)
-		-- upvalues: reactModule (ref), styledTextLabel (ref)
-		local t = {}
-		
-		for i, v in p4 do
-			table.insert(t, {
-				id = v.id,
-				name = v.name,
-				image = v.image,
-				endSlot = reactModule.createElement(styledTextLabel, {
-					fontStyle = p5,
-					colorStyle = p6,
-					textXAlignment = Enum.TextXAlignment.Right,
-					textYAlignment = Enum.TextYAlignment.Top,
-					lineHeight = p5.LineHeight,
-					size = UDim2.fromScale(1, 1),
-					text = p7.itemOwned:gsub("{.*}", tostring(v.ownedCount))
+		for _, value in List do
+			table.insert(List1, {
+				id = value.id,
+				name = value.name,
+				image = value.image,
+				endSlot = ReactModule.createElement(PriceDEPRECATEDModule, {
+					amount = value.cost,
+					fontStyle = FontStyle,
+					colorStyle = ColorStyle
 				})
 			})
 		end
-		return t
+		return List1
 	end,
-	mapUnpurchasableItemsToPresentation_DEPRECATED = function(p8)
-		-- upvalues: reactModule (ref), itemStatusModule (ref)
-		local t = {}
+	mapOwnedItemsToPresentation_DEPRECATED = function(List, FontStyle, ColorStyle, p1) --[[ Line: 26 ]]
+		-- upvalues: ReactModule (copy), StyledTextLabel (copy)
+		local List1 = {}
 		
-		for i, v in p8 do
-			table.insert(t, {
-				id = v.id,
-				name = v.name,
-				image = v.image,
-				endSlot = reactModule.createElement(itemStatusModule, { status = v.status })
+		for _, value in List do
+			table.insert(List1, {
+				id = value.id,
+				name = value.name,
+				image = value.image,
+				endSlot = ReactModule.createElement(StyledTextLabel, {
+					fontStyle = FontStyle,
+					colorStyle = ColorStyle,
+					textXAlignment = Enum.TextXAlignment.Right,
+					textYAlignment = Enum.TextYAlignment.Top,
+					lineHeight = FontStyle.LineHeight,
+					size = UDim2.fromScale(1, 1),
+					text = p1.itemOwned:gsub("{.*}", (tostring(value.ownedCount)))
+				})
 			})
 		end
-		return t
+		return List1
+	end,
+	mapUnpurchasableItemsToPresentation_DEPRECATED = function(List) --[[ Line: 47 ]]
+		-- upvalues: ReactModule (copy), ItemStatusModule (copy)
+		local List1 = {}
+		
+		for _, value in List do
+			table.insert(List1, {
+				id = value.id,
+				name = value.name,
+				image = value.image,
+				endSlot = ReactModule.createElement(ItemStatusModule, { status = value.status })
+			})
+		end
+		return List1
 	end
 }

@@ -1,62 +1,62 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local pickedUserListModule = require(buildExperience.Components.UserPicker.PickedUserList)
-local badge = foundationModule.Badge
-local list = foundationModule.List
-local text = foundationModule.Text
-local view = foundationModule.View
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local PickedUserListModule = require(BuildExperience.Components.UserPicker.PickedUserList)
+local Badge = FoundationModule.Badge
+local List = FoundationModule.List
+local Text = FoundationModule.Text
+local View = FoundationModule.View
 
-return function(p1)
-	-- upvalues: reactModule (ref), list (ref), view (ref), text (ref), badge (ref), pickedUserListModule (ref)
-	local testId = p1.testId or "private-invites-management"
-	local isInviteDisabled = p1.isInviteDisabled
-	local var1 = reactModule.createElement(list.Item, {
+return function(p1) --[[ Line: 33 | Named "PrivateInvitesManagementView" ]]
+	-- upvalues: ReactModule (copy), List (copy), View (copy), Text (copy), Badge (copy), PickedUserListModule (copy)
+	local TestId = p1.testId or "private-invites-management"
+	local IsInviteDisabled = p1.isInviteDisabled
+	local Element = ReactModule.createElement(List.Item, {
 		LayoutOrder = 1,
 		title = p1.inviteButtonText,
-		onActivated = if isInviteDisabled then nil else p1.onOpenInvitePicker,
-		testId = `{testId}-invite-button`
+		onActivated = if IsInviteDisabled then nil else p1.onOpenInvitePicker,
+		testId = `{TestId}-invite-button`
 	})
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col gap-medium size-full-0 auto-y",
 		LayoutOrder = p1.layoutOrder,
-		testId = testId
+		testId = TestId
 	}, {
-		Header = reactModule.createElement(view, {
+		Header = ReactModule.createElement(View, {
 			LayoutOrder = 1,
 			tag = "row align-y-center gap-small size-full-0 auto-y"
 		}, {
-			Title = reactModule.createElement(text, {
+			Title = ReactModule.createElement(Text, {
 				LayoutOrder = 1,
 				tag = "fill auto-y text-title-large text-align-x-left content-default",
 				Text = p1.title
 			}),
-			Count = reactModule.createElement(badge, {
+			Count = ReactModule.createElement(Badge, {
 				LayoutOrder = 2,
 				text = p1.countText,
-				testId = `{testId}-count`
+				testId = `{TestId}-count`
 			})
 		}),
-		Body = reactModule.createElement(text, {
+		Body = ReactModule.createElement(Text, {
 			LayoutOrder = 2,
 			tag = "size-full-0 auto-y text-body-small text-wrap text-align-x-left content-muted",
 			Text = p1.subtitle
 		}),
-		Table = reactModule.createElement(pickedUserListModule, {
+		Table = ReactModule.createElement(PickedUserListModule, {
 			layoutOrder = 4,
 			userIds = p1.userIds,
 			onRemove = p1.onRemove,
 			removingUserIds = p1.removingUserIds,
-			header = if isInviteDisabled then reactModule.createElement("CanvasGroup", {
+			header = if IsInviteDisabled then ReactModule.createElement("CanvasGroup", {
 				LayoutOrder = 1,
 				BackgroundTransparency = 1,
 				GroupTransparency = 0.5,
 				Size = UDim2.new(1, 0, 0, 0),
 				AutomaticSize = Enum.AutomaticSize.Y
-			}, { Item = var1 }) else var1,
-			testId = `{testId}-list`
+			}, { Item = Element }) else Element,
+			testId = `{TestId}-list`
 		})
 	})
 end

@@ -1,70 +1,65 @@
-﻿local socialServerDrivenUi = script:FindFirstAncestor("SocialServerDrivenUi")
-local parent = socialServerDrivenUi.Parent
-local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
-local discoveryTypesModule = require(parent.DiscoveryTypes)
-local findAnalyticsField = require(parent.SduiCoreSystem).findAnalyticsField
-local socialCarouselModule = require(parent.SocialCarousel)
-local flyoutSidePanelIXP = require(parent.SharedExperimentDefinition).FlyoutSidePanelIXP
-local openProfileQRCodePageBridgeModule = require(socialServerDrivenUi.System.OpenProfileQRCodePageBridge)
-local fFlagEnableFlyoutFriendsHeaderFix = sharedFlagsModule.FFlagEnableFlyoutFriendsHeaderFix
-local fFlagFlyoutHideFriendsHeader = socialCarouselModule.Flags.FFlagFlyoutHideFriendsHeader
-local fFlagLuaAppCompositionAlways = sharedFlagsModule.FFlagLuaAppCompositionAlways
-local fFlagLuaAppFriendsSortHeaderByPosition = sharedFlagsModule.FFlagLuaAppFriendsSortHeaderByPosition
-local fFlagLuaAppHomeFriendsRemoveItemImpressions = sharedFlagsModule.FFlagLuaAppHomeFriendsRemoveItemImpressions
-local fFlagSocialCarouselShareQREnabled = sharedFlagsModule.FFlagSocialCarouselShareQREnabled
-local fIntLuaAppFriendsSortHeaderMaxHiddenPosition = sharedFlagsModule.FIntLuaAppFriendsSortHeaderMaxHiddenPosition
-local SORT_INDEX_SELECTION_ORDER_MULTIPLIER = discoveryTypesModule.Constants.SORT_INDEX_SELECTION_ORDER_MULTIPLIER
-local SORT_SELECTION_ORDER_BASE = discoveryTypesModule.Constants.SORT_SELECTION_ORDER_BASE
+﻿local SocialServerDrivenUi = script:FindFirstAncestor("SocialServerDrivenUi")
+local Parent = SocialServerDrivenUi.Parent
+local ReactModule = require(Parent.React)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local DiscoveryTypesModule = require(Parent.DiscoveryTypes)
+local FindAnalyticsFieldFunction = require(Parent.SduiCoreSystem).findAnalyticsField
+local SocialCarouselModule = require(Parent.SocialCarousel)
+local FlyoutSidePanelIXP = require(Parent.SharedExperimentDefinition).FlyoutSidePanelIXP
+local OpenProfileQRCodePageBridgeModule = require(SocialServerDrivenUi.System.OpenProfileQRCodePageBridge)
+local FFlagEnableFlyoutFriendsHeaderFix = SharedFlagsModule.FFlagEnableFlyoutFriendsHeaderFix
+local FFlagFlyoutHideFriendsHeader = SocialCarouselModule.Flags.FFlagFlyoutHideFriendsHeader
+local FFlagLuaAppCompositionAlways = SharedFlagsModule.FFlagLuaAppCompositionAlways
+local FFlagLuaAppFriendsSortHeaderByPosition = SharedFlagsModule.FFlagLuaAppFriendsSortHeaderByPosition
+local FFlagLuaAppHomeFriendsRemoveItemImpressions = SharedFlagsModule.FFlagLuaAppHomeFriendsRemoveItemImpressions
+local FFlagSocialCarouselShareQREnabled = SharedFlagsModule.FFlagSocialCarouselShareQREnabled
+local FIntLuaAppFriendsSortHeaderMaxHiddenPosition = SharedFlagsModule.FIntLuaAppFriendsSortHeaderMaxHiddenPosition
+local SORTINDEXSELECTIONORDERMULTIPLIER = DiscoveryTypesModule.Constants.SORT_INDEX_SELECTION_ORDER_MULTIPLIER
+local SORTSELECTIONORDERBASE = DiscoveryTypesModule.Constants.SORT_SELECTION_ORDER_BASE
 
-local function _(p1)
-	-- upvalues: fIntLuaAppFriendsSortHeaderMaxHiddenPosition (ref), fFlagFlyoutHideFriendsHeader (ref), fFlagEnableFlyoutFriendsHeaderFix (ref), flyoutSidePanelIXP (ref)
-	if fIntLuaAppFriendsSortHeaderMaxHiddenPosition < p1 then
+local function _(p1) --[[ Line: 44 | Named "getShouldHideCarouselHeader" ]]
+	-- upvalues: FIntLuaAppFriendsSortHeaderMaxHiddenPosition (copy), FFlagFlyoutHideFriendsHeader (copy), FFlagEnableFlyoutFriendsHeaderFix (copy), FlyoutSidePanelIXP (copy)
+	if FIntLuaAppFriendsSortHeaderMaxHiddenPosition < p1 then
 		return false
 	end
-	local var1 = fFlagFlyoutHideFriendsHeader
+	local IsFlyoutSidePanelEnabled = FFlagFlyoutHideFriendsHeader
 	
-	if var1 then
-		if fFlagEnableFlyoutFriendsHeaderFix then
-			return flyoutSidePanelIXP.isFriendsSortHeaderHiddenInFlyoutIxp()
+	if IsFlyoutSidePanelEnabled then
+		if FFlagEnableFlyoutFriendsHeaderFix then
+			return (FlyoutSidePanelIXP.isFriendsSortHeaderHiddenInFlyoutIxp())
 		end
-		var1 = flyoutSidePanelIXP.isFlyoutSidePanelEnabled()
+		IsFlyoutSidePanelEnabled = FlyoutSidePanelIXP.isFlyoutSidePanelEnabled()
 	end
-	return var1
+	return IsFlyoutSidePanelEnabled
 end
 
-return function(p1)
-	-- upvalues: findAnalyticsField (ref), reactModule (ref), socialCarouselModule (ref), fFlagLuaAppHomeFriendsRemoveItemImpressions (ref), SORT_SELECTION_ORDER_BASE (ref), SORT_INDEX_SELECTION_ORDER_MULTIPLIER (ref), fFlagLuaAppFriendsSortHeaderByPosition (ref), fIntLuaAppFriendsSortHeaderMaxHiddenPosition (ref), fFlagFlyoutHideFriendsHeader (ref), fFlagEnableFlyoutFriendsHeaderFix (ref), flyoutSidePanelIXP (ref), fFlagLuaAppCompositionAlways (ref), fFlagSocialCarouselShareQREnabled (ref), openProfileQRCodePageBridgeModule (ref)
-	local collectionPosition = tonumber(findAnalyticsField("collectionPosition", p1.analyticsContext.analyticsData or {}, -1)) or -1
+return function(p1) --[[ Line: 57 | Named "SduiFriendCarousel" ]]
+	-- upvalues: FindAnalyticsFieldFunction (copy), ReactModule (copy), SocialCarouselModule (copy), FFlagLuaAppHomeFriendsRemoveItemImpressions (copy), SORTSELECTIONORDERBASE (copy), SORTINDEXSELECTIONORDERMULTIPLIER (copy), FFlagLuaAppFriendsSortHeaderByPosition (copy), FIntLuaAppFriendsSortHeaderMaxHiddenPosition (copy), FFlagFlyoutHideFriendsHeader (copy), FFlagEnableFlyoutFriendsHeaderFix (copy), FlyoutSidePanelIXP (copy), FFlagLuaAppCompositionAlways (copy), FFlagSocialCarouselShareQREnabled (copy), OpenProfileQRCodePageBridgeModule (copy)
+	local Number: number = tonumber(FindAnalyticsFieldFunction("collectionPosition", p1.analyticsContext.analyticsData or {}, -1)) or -1
 	
-	return reactModule.createElement(socialCarouselModule.Entry, {
+	return ReactModule.createElement(SocialCarouselModule.Entry, {
 		unifiedLogging = {
 			impressionTag = "HomeFriendCarousel",
-			sortIndex = collectionPosition,
+			sortIndex = Number,
 			appPage = p1.sduiContext.appPage,
 			sortId = p1.sortId or "",
 			scrollViewPositionChangedSignal = p1.scrollViewPositionChangedSignal,
-			skipItemImpressionsLog = if fFlagLuaAppHomeFriendsRemoveItemImpressions then true else nil
+			skipItemImpressionsLog = if FFlagLuaAppHomeFriendsRemoveItemImpressions then true else nil
 		},
-		sortAnalyticsData = reactModule.useMemo(function()
-			-- upvalues: collectionPosition (ref), p1 (ref)
+		sortAnalyticsData = ReactModule.useMemo(function() --[[ Line: 62 ]]
+			-- upvalues: Number (copy), p1 (copy)
 			return {
-				sortIndex = collectionPosition,
+				sortIndex = Number,
 				appPage = p1.sduiContext.appPage,
 				sortId = p1.sortId,
 				startRow = p1.startRow
 			}
-		end, {
-			collectionPosition,
-			p1.sduiContext.appPage,
-			p1.sortId,
-			p1.startRow
-		}),
+		end, { Number, p1.sduiContext.appPage, p1.sortId, p1.startRow }),
 		refreshSignal = p1.refreshSignal,
-		selectionOrderBase = SORT_SELECTION_ORDER_BASE + collectionPosition * SORT_INDEX_SELECTION_ORDER_MULTIPLIER,
-		source = socialCarouselModule.Constants.ANALYTICS.SRC.HOMEPAGE_FRIENDS_CAROUSEL,
-		hideCarouselHeader = if fFlagLuaAppFriendsSortHeaderByPosition then if fIntLuaAppFriendsSortHeaderMaxHiddenPosition < collectionPosition then false else fFlagFlyoutHideFriendsHeader and (if fFlagEnableFlyoutFriendsHeaderFix then flyoutSidePanelIXP.isFriendsSortHeaderHiddenInFlyoutIxp() else flyoutSidePanelIXP.isFlyoutSidePanelEnabled()) elseif fFlagFlyoutHideFriendsHeader and (if fFlagEnableFlyoutFriendsHeaderFix then flyoutSidePanelIXP.isFriendsSortHeaderHiddenInFlyoutIxp() else flyoutSidePanelIXP.isFlyoutSidePanelEnabled()) then true else nil,
-		appCompositionEnabled = if fFlagLuaAppCompositionAlways then true else p1.sduiContext.appCompositionEnabled,
-		navigateToQRCodePage = if fFlagSocialCarouselShareQREnabled then openProfileQRCodePageBridgeModule.requestOpen else nil
+		selectionOrderBase = SORTSELECTIONORDERBASE + Number * SORTINDEXSELECTIONORDERMULTIPLIER,
+		source = SocialCarouselModule.Constants.ANALYTICS.SRC.HOMEPAGE_FRIENDS_CAROUSEL,
+		hideCarouselHeader = if FFlagLuaAppFriendsSortHeaderByPosition then FIntLuaAppFriendsSortHeaderMaxHiddenPosition >= Number and (FFlagFlyoutHideFriendsHeader and (if FFlagEnableFlyoutFriendsHeaderFix then FlyoutSidePanelIXP.isFriendsSortHeaderHiddenInFlyoutIxp() else FlyoutSidePanelIXP.isFlyoutSidePanelEnabled())) elseif FFlagFlyoutHideFriendsHeader and (if FFlagEnableFlyoutFriendsHeaderFix then FlyoutSidePanelIXP.isFriendsSortHeaderHiddenInFlyoutIxp() else FlyoutSidePanelIXP.isFlyoutSidePanelEnabled()) then true else nil,
+		appCompositionEnabled = if FFlagLuaAppCompositionAlways then true else p1.sduiContext.appCompositionEnabled,
+		navigateToQRCodePage = if FFlagSocialCarouselShareQREnabled then OpenProfileQRCodePageBridgeModule.requestOpen else nil
 	})
 end

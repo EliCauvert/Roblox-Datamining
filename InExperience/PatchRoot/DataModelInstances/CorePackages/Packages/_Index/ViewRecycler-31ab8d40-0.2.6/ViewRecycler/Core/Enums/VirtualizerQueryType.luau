@@ -1,4 +1,4 @@
-﻿return table.freeze({
+﻿return (table.freeze({
 	GetVisibleRange = "GetVisibleRange",
 	GetMountedRange = "GetMountedRange",
 	GetScrollState = "GetScrollState",
@@ -10,4 +10,4 @@
 	RequiresItemMeasurement = "RequiresItemMeasurement",
 	GetItemViews = "GetItemViews",
 	GetPlacementIntent = "GetPlacementIntent"
-})
+}))

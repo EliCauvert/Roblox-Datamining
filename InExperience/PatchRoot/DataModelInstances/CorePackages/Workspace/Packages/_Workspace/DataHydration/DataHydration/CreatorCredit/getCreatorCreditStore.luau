@@ -1,8 +1,7 @@
-﻿local signalsModule = require(script:FindFirstAncestor("DataHydration").Parent.Signals)
-local createCreatorCreditStoreModule = require(script.Parent.createCreatorCreditStore)
+﻿local CreateCreatorCreditStoreModule = require(script.Parent.createCreatorCreditStore)
 local _ = require(script.Parent.types)
 
-return signalsModule.createComputed(function()
-	-- upvalues: createCreatorCreditStoreModule (ref)
-	return createCreatorCreditStoreModule()
+return require(script:FindFirstAncestor("DataHydration").Parent.Signals).createComputed(function() --[[ Line: 11 | Named "createDefaultStore" ]]
+	-- upvalues: CreateCreatorCreditStoreModule (copy)
+	return CreateCreatorCreditStoreModule()
 end)

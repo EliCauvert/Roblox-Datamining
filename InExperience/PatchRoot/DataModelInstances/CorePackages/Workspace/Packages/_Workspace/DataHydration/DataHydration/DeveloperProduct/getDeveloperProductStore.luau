@@ -1,6 +1,6 @@
-﻿local createDeveloperProductStoreModule = require(script.Parent.createDeveloperProductStore)
+﻿local CreateDeveloperProductStoreModule = require(script.Parent.createDeveloperProductStore)
 
-return require(script:FindFirstAncestor("DataHydration").Parent.Signals).createComputed(function()
-	-- upvalues: createDeveloperProductStoreModule (ref)
-	return createDeveloperProductStoreModule()
+return require(script:FindFirstAncestor("DataHydration").Parent.Signals).createComputed(function() --[[ Line: 8 ]]
+	-- upvalues: CreateDeveloperProductStoreModule (copy)
+	return CreateDeveloperProductStoreModule()
 end)

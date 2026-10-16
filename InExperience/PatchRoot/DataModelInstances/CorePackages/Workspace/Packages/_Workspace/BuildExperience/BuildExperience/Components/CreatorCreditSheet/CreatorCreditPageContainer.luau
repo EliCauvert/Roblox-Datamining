@@ -1,14 +1,14 @@
-﻿local reactModule = require(script:FindFirstAncestor("BuildExperience").Parent.React)
-local creatorCreditPageViewModule = require(script.Parent.CreatorCreditPageView)
-local dailyLimitBottomSheetModule = require(script.Parent.DailyLimitBottomSheet)
-local useCreatorCreditPageViewModelModule = require(script.Parent.useCreatorCreditPageViewModel)
+﻿local ReactModule = require(script:FindFirstAncestor("BuildExperience").Parent.React)
+local CreatorCreditPageViewModule = require(script.Parent.CreatorCreditPageView)
+local DailyLimitBottomSheetModule = require(script.Parent.DailyLimitBottomSheet)
+local UseCreatorCreditPageViewModelModule = require(script.Parent.useCreatorCreditPageViewModel)
 
-return function(_)
-	-- upvalues: useCreatorCreditPageViewModelModule (ref), reactModule (ref), creatorCreditPageViewModule (ref), dailyLimitBottomSheetModule (ref)
-	local var1 = useCreatorCreditPageViewModelModule()
+return function(_) --[[ Line: 12 | Named "CreatorCreditPageContainer" ]]
+	-- upvalues: UseCreatorCreditPageViewModelModule (copy), ReactModule (copy), CreatorCreditPageViewModule (copy), DailyLimitBottomSheetModule (copy)
+	local UseCreatorCreditPageViewModelModuleResult = UseCreatorCreditPageViewModelModule()
 	
-	return reactModule.createElement(reactModule.Fragment, nil, {
-		Page = reactModule.createElement(creatorCreditPageViewModule, var1.pageProps),
-		LimitSheet = reactModule.createElement(dailyLimitBottomSheetModule, var1.limitSheetProps)
+	return ReactModule.createElement(ReactModule.Fragment, nil, {
+		Page = ReactModule.createElement(CreatorCreditPageViewModule, UseCreatorCreditPageViewModelModuleResult.pageProps),
+		LimitSheet = ReactModule.createElement(DailyLimitBottomSheetModule, UseCreatorCreditPageViewModelModuleResult.limitSheetProps)
 	})
 end

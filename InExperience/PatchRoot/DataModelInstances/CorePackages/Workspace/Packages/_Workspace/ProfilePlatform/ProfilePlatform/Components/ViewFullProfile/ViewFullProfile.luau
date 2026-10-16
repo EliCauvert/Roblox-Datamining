@@ -1,108 +1,115 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local appPage = require(parent.RobloxAppEnums).AppPage
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local navigationRoduxModule = require(parent.NavigationRodux)
-local navigateDown = navigationRoduxModule.Thunks.NavigateDown
-local navigateDownToViewUserProfile = navigationRoduxModule.Thunks.NavigateDownToViewUserProfile
-local urlBuilder = require(parent.UrlBuilder).UrlBuilder
-local urlBase = require(parent.UrlBuilder).UrlBase
-local constantsModule = require(profilePlatform.Common.Constants)
-local UIBloxModule = require(parent.UIBlox)
-local horizontalPageMargin = UIBloxModule.App.Container.HorizontalPageMargin
-local button = UIBloxModule.App.Button.Button
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local enumsModule = require(profilePlatform.Common.Enums)
-local useProfileJsonComponentModule = require(profilePlatform.Hooks.useProfileJsonComponent)
-local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfileWrapperContext)
-local useProfileAnalyticsContextModule = require(profilePlatform.Contexts.useProfileAnalyticsContext)
-local eventNamesModule = require(profilePlatform.Analytics.EventNames)
-local textKeysModule = require(profilePlatform.Common.TextKeys)
-local makeViewGroupPageModule = require(profilePlatform.Utils.makeViewGroupPage)
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagEnableGroupDetailPane = sharedFlagsModule.FFlagEnableGroupDetailPane
-local fFlagSignalsNavP3Dispatch = sharedFlagsModule.FFlagSignalsNavP3Dispatch
-local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local NavigationRoduxModule = require(Parent.NavigationRodux)
+local NavigateDownFunction = NavigationRoduxModule.Thunks.NavigateDown
+local NavigateDownToViewUserProfileFunction = NavigationRoduxModule.Thunks.NavigateDownToViewUserProfile
+local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
+local UrlBase = require(Parent.UrlBuilder).UrlBase
+local ConstantsModule = require(ProfilePlatform.Common.Constants)
+local UIBloxModule = require(Parent.UIBlox)
+local HorizontalPageMargin = UIBloxModule.App.Container.HorizontalPageMargin
+local Button = UIBloxModule.App.Button.Button
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local UseProfileJsonComponentModule = require(ProfilePlatform.Hooks.useProfileJsonComponent)
+local UseProfileWrapperContextModule = require(ProfilePlatform.Contexts.useProfileWrapperContext)
+local UseProfileAnalyticsContextModule = require(ProfilePlatform.Contexts.useProfileAnalyticsContext)
+local EventNamesModule = require(ProfilePlatform.Analytics.EventNames)
+local TextKeysModule = require(ProfilePlatform.Common.TextKeys)
+local MakeViewGroupPageModule = require(ProfilePlatform.Utils.makeViewGroupPage)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagEnableGroupDetailPane = SharedFlagsModule.FFlagEnableGroupDetailPane
+local FFlagSignalsNavP3Dispatch = SharedFlagsModule.FFlagSignalsNavP3Dispatch
+local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 
-function ViewFullProfile(p1)
-	-- upvalues: useProfileJsonComponentModule (ref), enumsModule (ref), useProfileWrapperContextModule (ref), useProfileAnalyticsContextModule (ref), useDispatch (ref), useLocalization (ref), textKeysModule (ref), reactModule (ref), fFlagEnableGroupDetailPane (ref), eventNamesModule (ref), navigateDownToViewUserProfile (ref), appPage (ref), urlBuilder (ref), urlBase (ref), makeViewGroupPageModule (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), horizontalPageMargin (ref), constantsModule (ref), button (ref), buttonType (ref)
-	local viewFullProfile = useProfileJsonComponentModule(enumsModule.Components.ViewFullProfile) or {}
-	local var2 = useProfileWrapperContextModule()
-	local profileId = var2.profileId
-	local profileType = var2.profileType
-	local var3 = useProfileAnalyticsContextModule()
-	local var4 = useDispatch()
-	local var5 = useLocalization({
-		viewFullProfileLabel = textKeysModule.ViewFullProfile,
-		viewCommunityLabel = textKeysModule.ViewCommunity
+function ViewFullProfile(p1) --[[ Line: 39 ]]
+	-- upvalues: UseProfileJsonComponentModule (copy), EnumsModule (copy), UseProfileWrapperContextModule (copy), UseProfileAnalyticsContextModule (copy), UseDispatchFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), FFlagEnableGroupDetailPane (copy), EventNamesModule (copy), NavigateDownToViewUserProfileFunction (copy), AppPage (copy), UrlBuilder (copy), UrlBase (copy), MakeViewGroupPageModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), HorizontalPageMargin (copy), ConstantsModule (copy), Button (copy), ButtonType (copy)
+	local UseProfileJsonComponentModuleResult = UseProfileJsonComponentModule(EnumsModule.Components.ViewFullProfile) or {}
+	local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
+	local ProfileId = UseProfileWrapperContextModuleResult.profileId
+	local ProfileType = UseProfileWrapperContextModuleResult.profileType
+	local UseProfileAnalyticsContextModuleResult = UseProfileAnalyticsContextModule()
+	local UseDispatchResult = UseDispatchFunction()
+	local UseLocalizationResult = UseLocalizationFunction({
+		viewFullProfileLabel = TextKeysModule.ViewFullProfile,
+		viewCommunityLabel = TextKeysModule.ViewCommunity
 	})
 	
-	return reactModule.createElement(horizontalPageMargin, {
+	return ReactModule.createElement(HorizontalPageMargin, {
 		backgroundTransparency = 1,
 		useAutomaticSizing = true,
 		size = UDim2.fromScale(1, 0),
 		layoutOrder = p1.layoutOrder
 	}, {
-		ViewFullProfileFrame = reactModule.createElement("Frame", {
+		ViewFullProfileFrame = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.fromScale(1, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
 			LayoutOrder = p1.layoutOrder
 		}, {
-			UIPadding = reactModule.createElement("UIPadding", {
-				PaddingTop = UDim.new(0, constantsModule.ADDITIONAL_PADDING)
+			UIPadding = ReactModule.createElement("UIPadding", {
+				PaddingTop = UDim.new(0, ConstantsModule.ADDITIONAL_PADDING)
 			}),
-			ViewFullProfile = reactModule.createElement(button, {
-				buttonType = buttonType.Secondary,
-				size = UDim2.new(1, 0, 0, constantsModule.CTA_BUTTON_HEIGHT),
-				onActivated = reactModule.useCallback(function()
-					-- upvalues: var3 (ref), eventNamesModule (copy), var2 (ref), enumsModule (copy), profileType (ref), var4 (ref), navigateDownToViewUserProfile (copy), profileId (ref), viewFullProfile (ref), appPage (copy), urlBuilder (copy), urlBase (copy), textKeysModule (copy), makeViewGroupPageModule (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), navigateDown (copy)
-					var3.fireAnalyticsEvent(eventNamesModule.ViewPlayerProfileButton, {
-						absolutePosition = var2.sourceInfo.homepageCarouselAbsolutePosition,
-						isHomePageCarousel = var2.sourceInfo.source == enumsModule.Sources.HomepageFriendsCarousel,
-						source = var2.sourceInfo.source,
-						isRecommendation = var2.sourceInfo.isRecommendation,
-						recommendationContextType = var2.sourceInfo.recommendationContextType,
-						recommendationRank = var2.sourceInfo.recommendationRank,
-						recommendationSessionId = var2.sourceInfo.recommendationSessionId
+			ViewFullProfile = ReactModule.createElement(Button, {
+				buttonType = ButtonType.Secondary,
+				size = UDim2.new(1, 0, 0, ConstantsModule.CTA_BUTTON_HEIGHT),
+				onActivated = ReactModule.useCallback(function() --[[ Line: 73 ]]
+					-- upvalues: UseProfileAnalyticsContextModuleResult (copy), EventNamesModule (upval), UseProfileWrapperContextModuleResult (copy), EnumsModule (upval), ProfileType (copy), UseDispatchResult (copy), NavigateDownToViewUserProfileFunction (upval), ProfileId (copy), UseProfileJsonComponentModuleResult (copy), AppPage (upval), UrlBuilder (upval), UrlBase (upval), TextKeysModule (upval), MakeViewGroupPageModule (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), NavigateDownFunction (upval)
+					UseProfileAnalyticsContextModuleResult.fireAnalyticsEvent(EventNamesModule.ViewPlayerProfileButton, {
+						absolutePosition = UseProfileWrapperContextModuleResult.sourceInfo.homepageCarouselAbsolutePosition,
+						isHomePageCarousel = UseProfileWrapperContextModuleResult.sourceInfo.source == EnumsModule.Sources.HomepageFriendsCarousel,
+						source = UseProfileWrapperContextModuleResult.sourceInfo.source,
+						isRecommendation = UseProfileWrapperContextModuleResult.sourceInfo.isRecommendation,
+						recommendationContextType = UseProfileWrapperContextModuleResult.sourceInfo.recommendationContextType,
+						recommendationRank = UseProfileWrapperContextModuleResult.sourceInfo.recommendationRank,
+						recommendationSessionId = UseProfileWrapperContextModuleResult.sourceInfo.recommendationSessionId
 					})
 					
-					if profileType == enumsModule.ProfileTypes.User then
-						var4(navigateDownToViewUserProfile(profileId))
+					if ProfileType == EnumsModule.ProfileTypes.User then
+						UseDispatchResult(NavigateDownToViewUserProfileFunction(ProfileId))
 						
 						return
-					elseif profileType == enumsModule.ProfileTypes.Community then
-						local var6 = if viewFullProfile.type == enumsModule.ViewFullProfileTypes.Profile then {
-							name = appPage.GenericWebPage,
-							detail = urlBuilder.new({ base = urlBase.WWW, path = `profiles/{profileId}` })(),
-							extraProps = { titleKey = textKeysModule.Profile }
-						} else makeViewGroupPageModule(profileId)
+					end
+					if ProfileType == EnumsModule.ProfileTypes.Community then
+						local Config = if UseProfileJsonComponentModuleResult.type == EnumsModule.ViewFullProfileTypes.Profile then {
+							name = AppPage.GenericWebPage,
+							detail = UrlBuilder.new({ base = UrlBase.WWW, path = `profiles/{ProfileId}` })(),
+							extraProps = { titleKey = TextKeysModule.Profile }
+						} else MakeViewGroupPageModule(ProfileId)
 						
-						if fFlagSignalsNavP3Dispatch then
-							var1.down(var1.fromLegacyPage(var6))
+						if FFlagSignalsNavP3Dispatch then
+							NavigationCommands.down(NavigationCommands.fromLegacyPage(Config))
 							
 							return
 						end
-						var4(navigateDown(var6))
+						UseDispatchResult(NavigateDownFunction(Config))
 					end
 				end, {
-					var4, profileId, var3, var2,
-					if fFlagEnableGroupDetailPane then profileType else nil,
-					if fFlagEnableGroupDetailPane then viewFullProfile.type else nil
+					UseDispatchResult, ProfileId, UseProfileAnalyticsContextModuleResult,
+					UseProfileWrapperContextModuleResult,
+					if FFlagEnableGroupDetailPane then ProfileType else nil,
+					if FFlagEnableGroupDetailPane then UseProfileJsonComponentModuleResult.type else nil
 				}),
-				text = reactModule.useMemo(function()
-					-- upvalues: profileType (ref), enumsModule (copy), var5 (ref), viewFullProfile (ref)
-					if profileType == enumsModule.ProfileTypes.User then
-						return var5.viewFullProfileLabel
-					elseif profileType == enumsModule.ProfileTypes.Community then
-						return if viewFullProfile.type == enumsModule.ViewFullProfileTypes.Profile then var5.viewFullProfileLabel elseif viewFullProfile.type == enumsModule.ViewFullProfileTypes.Community then var5.viewCommunityLabel else var5.viewFullProfileLabel
+				text = ReactModule.useMemo(function() --[[ Line: 51 ]]
+					-- upvalues: ProfileType (copy), EnumsModule (upval), UseLocalizationResult (copy), UseProfileJsonComponentModuleResult (copy)
+					if ProfileType == EnumsModule.ProfileTypes.User then
+						return UseLocalizationResult.viewFullProfileLabel
+					elseif ProfileType == EnumsModule.ProfileTypes.Community then
+						if UseProfileJsonComponentModuleResult.type == EnumsModule.ViewFullProfileTypes.Profile then
+							return UseLocalizationResult.viewFullProfileLabel
+						elseif UseProfileJsonComponentModuleResult.type == EnumsModule.ViewFullProfileTypes.Community then
+							return UseLocalizationResult.viewCommunityLabel
+						end
 					end
+					return UseLocalizationResult.viewFullProfileLabel
 				end, {
-					var5,
-					if fFlagEnableGroupDetailPane then profileType else nil,
-					if fFlagEnableGroupDetailPane then viewFullProfile.type else nil
+					UseLocalizationResult,
+					if FFlagEnableGroupDetailPane then ProfileType else nil,
+					if FFlagEnableGroupDetailPane then UseProfileJsonComponentModuleResult.type else nil
 				})
 			})
 		})

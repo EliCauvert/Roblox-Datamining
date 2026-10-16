@@ -1,228 +1,230 @@
-﻿local collectionViews = script:FindFirstAncestor("CollectionViews")
-local parent = collectionViews.Parent
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local UIBloxModule = require(parent.UIBlox)
-local images = UIBloxModule.App.ImageSet.Images
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local tooltipOrientation = UIBloxModule.App.Dialog.Enum.TooltipOrientation
-local useDesignTokens = require(parent.Style).useDesignTokens
-local normalizeFontFace = require(parent.Foundation).Utility.normalizeFontFace
-local iconWithTooltip = require(parent.AppBlox).IconWithTooltip
-local responsiveModule = require(parent.Responsive)
-local usePreferredInput = responsiveModule.usePreferredInput
-local checkAndFormatPossibleLinkModule = require(collectionViews.checkAndFormatPossibleLink)
-local _ = require(collectionViews.SeeAllButtonType_Legacy)
-local fFlagLuaAppSortHeaderAnchorTag = require(parent.SharedFlags).FFlagLuaAppSortHeaderAnchorTag
-local foundationFontFaceMigration = require(parent.Foundation).Utility.Flags.FoundationFontFaceMigration
-local truncationCollapseSmall = images["icons/actions/truncationCollapse_small"]
-local cycleRight = images["icons/actions/cycleRight"]
-local t = {
+﻿local CollectionViews = script:FindFirstAncestor("CollectionViews")
+local Parent = CollectionViews.Parent
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local UIBloxModule = require(Parent.UIBlox)
+local Images = UIBloxModule.App.ImageSet.Images
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local TooltipOrientation = UIBloxModule.App.Dialog.Enum.TooltipOrientation
+local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
+local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
+local IconWithTooltip = require(Parent.AppBlox).IconWithTooltip
+local ResponsiveModule = require(Parent.Responsive)
+local UsePreferredInputFunction = ResponsiveModule.usePreferredInput
+local CheckAndFormatPossibleLinkModule = require(CollectionViews.checkAndFormatPossibleLink)
+local _ = require(CollectionViews.SeeAllButtonType_Legacy)
+local FFlagLuaAppSortHeaderAnchorTag = require(Parent.SharedFlags).FFlagLuaAppSortHeaderAnchorTag
+local FoundationFontFaceMigration = require(Parent.Foundation).Utility.Flags.FoundationFontFaceMigration
+local IconsActionsTruncationCollapseSmall = Images["icons/actions/truncationCollapse_small"]
+local IconsActionsCycleRight = Images["icons/actions/cycleRight"]
+local config = {
 	tooltipSupportsVR = true,
 	tooltipSupportsTenFootUi = true,
 	AutomaticSize = Enum.AutomaticSize.Y,
 	Size = UDim2.new(1, 0, 0, 0)
 }
 
-local function HeaderButton(p1)
-	-- upvalues: useDesignTokens (ref), reactModule (ref), imageSetLabel (ref)
-	local var1 = useDesignTokens()
-	local size400 = var1.Size.Size_400
-	local emphasis = var1.Color.Content.Emphasis
+local function HeaderButton(Frame: Frame) --[[ Line: 88 ]]
+	-- upvalues: UseDesignTokensFunction (copy), ReactModule (copy), ImageSetLabel (copy)
+	local UseDesignTokensResult = UseDesignTokensFunction()
+	local Size400 = UseDesignTokensResult.Size.Size_400
+	local Emphasis = UseDesignTokensResult.Color.Content.Emphasis
 	
-	return reactModule.createElement(imageSetLabel, {
+	return ReactModule.createElement(ImageSetLabel, {
 		BackgroundTransparency = 1,
-		Size = p1.Size or UDim2.new(0, size400, 0, size400),
-		Image = p1.image,
-		ImageColor3 = emphasis.Color3,
-		ImageTransparency = emphasis.Transparency,
-		LayoutOrder = p1.LayoutOrder,
-		Rotation = p1.Rotation,
-		AnchorPoint = p1.AnchorPoint,
-		Position = p1.Position
+		Size = Frame.Size or UDim2.new(0, Size400, 0, Size400),
+		Image = Frame.image,
+		ImageColor3 = Emphasis.Color3,
+		ImageTransparency = Emphasis.Transparency,
+		LayoutOrder = Frame.LayoutOrder,
+		Rotation = Frame.Rotation,
+		AnchorPoint = Frame.AnchorPoint,
+		Position = Frame.Position
 	})
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), usePreferredInput (ref), useDesignTokens (ref), responsiveModule (ref), checkAndFormatPossibleLinkModule (ref), fFlagLuaAppSortHeaderAnchorTag (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), HeaderButton (ref), cycleRight (ref), truncationCollapseSmall (ref), iconWithTooltip (ref), tooltipOrientation (ref)
-	local var1 = cryoModule.Dictionary.join(t, p1)
-	local var2, var3 = reactModule.useBinding(0)
-	local var4 = reactModule.useCallback(function(p2)
-		-- upvalues: var3 (ref)
-		var3(p2.AbsoluteSize.X)
+return ReactModule.memo(function(p1) --[[ Line: 115 | Named "CollectionHeader" ]]
+	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), UsePreferredInputFunction (copy), UseDesignTokensFunction (copy), ResponsiveModule (copy), CheckAndFormatPossibleLinkModule (copy), FFlagLuaAppSortHeaderAnchorTag (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), HeaderButton (copy), IconsActionsCycleRight (copy), IconsActionsTruncationCollapseSmall (copy), IconWithTooltip (copy), TooltipOrientation (copy)
+	local JoinResult = CryoModule.Dictionary.join(config, p1)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
+	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 119 ]]
+		-- upvalues: UseBindingResult2 (copy)
+		UseBindingResult2(Frame.AbsoluteSize.X)
 	end, {})
-	local var5 = usePreferredInput()
-	local var6 = useDesignTokens()
-	local titleTypography = var1.titleTypography or var6.Typography.HeadingSmall
-	local titleColor = var1.titleColor or var6.Color.Content.Emphasis
-	local subtitleTypography = var1.subtitleTypography or var6.Typography.BodySmall
-	local var7 = if var1.subtitleTypography then var1.subtitleTypography.FontSize else 17.64 * var6.Stroke.Standard
-	local subtitleColor = var1.subtitleColor or var6.Color.Content.Default
-	local size50 = var6.Size.Size_50
-	local size300 = var6.Size.Size_300
-	local var8 = if not var1.hideButton and var5 ~= responsiveModule.Input.Directional and var1.onActivate then true else false
-	local size700 = var6.Size.Size_700
-	local size100 = var6.Size.Size_100
-	local size500 = var6.Size.Size_500
-	local var9 = var1.tooltipInfoText ~= nil
-	local var10 = if var8 then size500 else 0
-	local var11 = if var9 then size700 + size300 else 0
-	local var12 = if var9 then var11 else 0
-	local var13 = var1.subtitle ~= nil and var1.subtitle ~= ""
-	local var14, var15 = checkAndFormatPossibleLinkModule(var1.subtitle)
-	local var16 = if var1.onActivateSubtitle then var1.onActivateSubtitle else var1.onActivate
+	local UsePreferredInputResult = UsePreferredInputFunction()
+	local UseDesignTokensResult = UseDesignTokensFunction()
+	local TitleTypography = JoinResult.titleTypography or UseDesignTokensResult.Typography.HeadingSmall
+	local TitleColor = JoinResult.titleColor or UseDesignTokensResult.Color.Content.Emphasis
+	local SubtitleTypography = JoinResult.subtitleTypography or UseDesignTokensResult.Typography.BodySmall
+	local FontSize = JoinResult.subtitleTypography and JoinResult.subtitleTypography.FontSize or 17.64 * UseDesignTokensResult.Stroke.Standard
+	local SubtitleColor = JoinResult.subtitleColor or UseDesignTokensResult.Color.Content.Default
+	local Size50 = UseDesignTokensResult.Size.Size_50
+	local Size300 = UseDesignTokensResult.Size.Size_300
+	local IsNotUsePreferredInputResultMatch: boolean = not JoinResult.hideButton and UsePreferredInputResult ~= ResponsiveModule.Input.Directional
+	local Active: boolean = if IsNotUsePreferredInputResultMatch and JoinResult.onActivate then true else false
+	local Size700 = UseDesignTokensResult.Size.Size_700
+	local Size100 = UseDesignTokensResult.Size.Size_100
+	local Size500 = UseDesignTokensResult.Size.Size_500
+	local HasTooltipInfoText = JoinResult.tooltipInfoText ~= nil
+	local Size = if Active then Size500 else 0
+	local NewSize = if HasTooltipInfoText then Size700 + Size300 else 0
+	local NewSize1 = if HasTooltipInfoText then NewSize else 0
+	local IsNotSubtitleMatch: boolean = JoinResult.subtitle ~= nil and JoinResult.subtitle ~= ""
+	local CheckAndFormatPossibleLinkModuleResult, CheckAndFormatPossibleLinkModuleResult2 = CheckAndFormatPossibleLinkModule(JoinResult.subtitle)
+	local OnActivateSubtitle = if JoinResult.onActivateSubtitle then JoinResult.onActivateSubtitle else JoinResult.onActivate
 	
-	if var1.onActivateSubtitle then
-		var14 = true
+	if JoinResult.onActivateSubtitle then
+		CheckAndFormatPossibleLinkModuleResult = true
 	end
-	local var17 = var14 and (not var1.hideSubtitleChevron and not var8)
-	local var18 = if var17 then var6.Size.Size_250 else 0
-	local var19 = var14 and var16 ~= nil
+	local NoActive: boolean = CheckAndFormatPossibleLinkModuleResult and (not JoinResult.hideSubtitleChevron and not Active)
+	local Size250 = UseDesignTokensResult.Size.Size_250
+	local XOffset = if NoActive then Size250 else 0
+	local HasOnActivateSubtitle: boolean = CheckAndFormatPossibleLinkModuleResult and OnActivateSubtitle ~= nil
 	
-	return reactModule.createElement("Frame", {
-		Position = var1.Position,
-		AutomaticSize = var1.AutomaticSize,
-		Size = var1.Size,
+	return ReactModule.createElement("Frame", {
+		Position = JoinResult.Position,
+		AutomaticSize = JoinResult.AutomaticSize,
+		Size = JoinResult.Size,
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
-		LayoutOrder = var1.LayoutOrder,
-		ZIndex = var1.ZIndex,
-		[reactModule.Tag] = if fFlagLuaAppSortHeaderAnchorTag then var1.headerTag else nil,
-		[reactModule.Change.AbsoluteSize] = var4
+		LayoutOrder = JoinResult.LayoutOrder,
+		ZIndex = JoinResult.ZIndex,
+		[ReactModule.Tag] = if FFlagLuaAppSortHeaderAnchorTag then JoinResult.headerTag else nil,
+		[ReactModule.Change.AbsoluteSize] = UseResult
 	}, {
-		LeftContentFrame = reactModule.createElement(if var8 then "TextButton" else "Frame", {
-			Text = if var8 then "" else nil,
-			Size = UDim2.new(1, -var12, 0, 0),
+		LeftContentFrame = ReactModule.createElement(if Active then "TextButton" else "Frame", {
+			Text = if Active then "" else nil,
+			Size = UDim2.new(1, -NewSize1, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
 			BackgroundTransparency = 1,
-			AnchorPoint = var1.AnchorPoint,
+			AnchorPoint = JoinResult.AnchorPoint,
 			BorderSizePixel = 0,
-			AutoButtonColor = if var8 then false else nil,
-			[reactModule.Event.Activated] = if var8 then var1.onActivate else nil,
-			Active = var8,
-			Selectable = var8
+			AutoButtonColor = not Active and nil,
+			[ReactModule.Event.Activated] = if Active then JoinResult.onActivate else nil,
+			Active = Active,
+			Selectable = Active
 		}, {
-			UIListLayout = reactModule.createElement("UIListLayout", {
+			UIListLayout = ReactModule.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				FillDirection = Enum.FillDirection.Vertical,
-				Padding = UDim.new(0, size50),
+				Padding = UDim.new(0, Size50),
 				HorizontalAlignment = Enum.HorizontalAlignment.Left,
 				VerticalAlignment = Enum.VerticalAlignment.Center
 			}),
-			TitleContainer = reactModule.createElement("Frame", {
+			TitleContainer = ReactModule.createElement("Frame", {
 				LayoutOrder = 1,
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
 				AutomaticSize = Enum.AutomaticSize.Y,
 				Size = UDim2.new(1, 0, 0, 0)
 			}, {
-				UIListLayout = reactModule.createElement("UIListLayout", {
+				UIListLayout = ReactModule.createElement("UIListLayout", {
 					SortOrder = Enum.SortOrder.LayoutOrder,
 					FillDirection = Enum.FillDirection.Horizontal,
-					Padding = UDim.new(0, size100),
+					Padding = UDim.new(0, Size100),
 					HorizontalAlignment = Enum.HorizontalAlignment.Left,
 					VerticalAlignment = Enum.VerticalAlignment.Center
 				}),
-				Title = if typeof(var1.title) == "string" then reactModule.createElement("TextLabel", {
+				Title = if typeof(JoinResult.title) == "string" then ReactModule.createElement("TextLabel", {
 					BackgroundTransparency = 1,
 					TextWrapped = false,
 					LayoutOrder = 1,
-					Text = var1.title,
+					Text = JoinResult.title,
 					AutomaticSize = Enum.AutomaticSize.XY,
 					Size = UDim2.new(0, 0, 0, 0),
-					Font = if foundationFontFaceMigration then nil else titleTypography.Font,
-					FontFace = if foundationFontFaceMigration then normalizeFontFace(titleTypography.Font) else nil,
-					TextSize = titleTypography.FontSize,
-					TextTransparency = titleColor.Transparency,
-					TextColor3 = titleColor.Color3,
+					Font = if FoundationFontFaceMigration then nil else TitleTypography.Font,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(TitleTypography.Font) else nil,
+					TextSize = TitleTypography.FontSize,
+					TextTransparency = TitleColor.Transparency,
+					TextColor3 = TitleColor.Color3,
 					TextTruncate = Enum.TextTruncate.SplitWord,
 					TextXAlignment = Enum.TextXAlignment.Left
 				}, {
-					UISizeConstraint = reactModule.createElement("UISizeConstraint", {
-						MaxSize = var2:map(function(p2)
-							-- upvalues: var10 (ref), var11 (ref)
-							local var20 = p2 - var10 - var11
+					UISizeConstraint = ReactModule.createElement("UISizeConstraint", {
+						MaxSize = UseBindingResult:map(function(p2) --[[ Line: 240 ]]
+							-- upvalues: Size (copy), NewSize (copy)
+							local SizeDelta = p2 - Size - NewSize
 							
-							return if var20 > 0 then Vector2.new(var20, 1e999) else nil
+							return if SizeDelta > 0 then Vector2.new(SizeDelta, 1e999) else nil
 						end)
 					})
-				}) elseif typeof(var1.title) == "function" then var1.title() else nil,
-				SeeAllButton = var8 and reactModule.createElement(HeaderButton, {
+				}) elseif typeof(JoinResult.title) == "function" then JoinResult.title() else nil,
+				SeeAllButton = Active and ReactModule.createElement(HeaderButton, {
 					LayoutOrder = 2,
-					Size = UDim2.fromOffset(size500, size500),
-					image = cycleRight
+					Size = UDim2.fromOffset(Size500, Size500),
+					image = IconsActionsCycleRight
 				}) or nil
 			}),
-			SubtitleFrame = var13 and (reactModule.createElement(if var19 then "TextButton" else "Frame", {
+			SubtitleFrame = IsNotSubtitleMatch and ReactModule.createElement(if HasOnActivateSubtitle then "TextButton" else "Frame", {
 				LayoutOrder = 2,
-				Text = if var19 then "" else nil,
+				Text = if HasOnActivateSubtitle then "" else nil,
 				Size = UDim2.new(1, 0, 0, 0),
 				AutomaticSize = Enum.AutomaticSize.Y,
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
-				AutoButtonColor = if var19 then false else nil,
-				[reactModule.Event.Activated] = if var19 then var16 else nil,
-				Active = var19,
-				Selectable = var19
+				AutoButtonColor = not HasOnActivateSubtitle and nil,
+				[ReactModule.Event.Activated] = if HasOnActivateSubtitle then OnActivateSubtitle else nil,
+				Active = HasOnActivateSubtitle,
+				Selectable = HasOnActivateSubtitle
 			}, {
-				UIListLayout = reactModule.createElement("UIListLayout", {
+				UIListLayout = ReactModule.createElement("UIListLayout", {
 					SortOrder = Enum.SortOrder.LayoutOrder,
 					FillDirection = Enum.FillDirection.Horizontal,
-					Padding = UDim.new(0, var6.Size.Size_50),
+					Padding = UDim.new(0, UseDesignTokensResult.Size.Size_50),
 					HorizontalAlignment = Enum.HorizontalAlignment.Left,
 					VerticalAlignment = Enum.VerticalAlignment.Center
 				}),
-				Subtitle = reactModule.createElement("TextLabel", {
+				Subtitle = ReactModule.createElement("TextLabel", {
 					LayoutOrder = 1,
 					BackgroundTransparency = 1,
 					TextWrapped = false,
-					Text = var15,
+					Text = CheckAndFormatPossibleLinkModuleResult2,
 					AutomaticSize = Enum.AutomaticSize.XY,
 					Size = UDim2.new(0, 0, 0, 0),
-					Font = if foundationFontFaceMigration then nil else subtitleTypography.Font,
-					FontFace = if foundationFontFaceMigration then normalizeFontFace(subtitleTypography.Font) else nil,
-					TextSize = var7,
-					TextTransparency = titleColor.Transparency,
-					TextColor3 = subtitleColor.Color3,
+					Font = if FoundationFontFaceMigration then nil else SubtitleTypography.Font,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(SubtitleTypography.Font) else nil,
+					TextSize = FontSize,
+					TextTransparency = TitleColor.Transparency,
+					TextColor3 = SubtitleColor.Color3,
 					TextTruncate = Enum.TextTruncate.SplitWord,
 					TextXAlignment = Enum.TextXAlignment.Left,
-					RichText = var14
+					RichText = CheckAndFormatPossibleLinkModuleResult
 				}, {
-					UISizeConstraint = reactModule.createElement("UISizeConstraint", {
-						MaxSize = var2:map(function(p2)
-							-- upvalues: var18 (ref)
-							local var20 = p2 - var18
+					UISizeConstraint = ReactModule.createElement("UISizeConstraint", {
+						MaxSize = UseBindingResult:map(function(p2) --[[ Line: 297 ]]
+							-- upvalues: XOffset (copy)
+							local X = p2 - XOffset
 							
-							return if var20 > 0 then Vector2.new(var20, 1e999) else nil
+							return if X > 0 then Vector2.new(X, 1e999) else nil
 						end)
 					})
 				}),
-				SubtitleLinkArrow = var17 and reactModule.createElement("Frame", {
+				SubtitleLinkArrow = NoActive and ReactModule.createElement("Frame", {
 					LayoutOrder = 2,
 					BackgroundTransparency = 1,
 					ClipsDescendants = true,
-					Size = UDim2.fromOffset(var18, var18)
+					Size = UDim2.fromOffset(XOffset, XOffset)
 				}, {
-					Icon = reactModule.createElement(HeaderButton, {
+					Icon = ReactModule.createElement(HeaderButton, {
 						Rotation = 90,
-						image = truncationCollapseSmall,
-						Size = UDim2.new(1, var6.Size.Size_50, 1, var6.Size.Size_50),
+						image = IconsActionsTruncationCollapseSmall,
+						Size = UDim2.new(1, UseDesignTokensResult.Size.Size_50, 1, UseDesignTokensResult.Size.Size_50),
 						Position = UDim2.fromScale(0.5, 0.5),
 						AnchorPoint = Vector2.new(0.5, 0.5)
 					})
 				}) or nil
-			}) or nil)
+			}) or nil
 		}),
-		IconWithTooltip = var9 and (reactModule.createElement(iconWithTooltip, {
+		IconWithTooltip = HasTooltipInfoText and ReactModule.createElement(IconWithTooltip, {
 			triggerPointName = "IconWithTooltip",
-			tooltipOrientation = tooltipOrientation.Bottom,
-			hoverText = var1.tooltipInfoText,
-			onActivateTooltip = var1.onActivateInfoIcon,
-			supportVR = var1.tooltipSupportsVR,
-			supportTenFootUi = var1.tooltipSupportsTenFootUi,
-			size = UDim2.new(0, size700, 0, size700),
-			position = if var13 then UDim2.new(1, 0, 0, 0) else UDim2.new(1, 0, 0.5, 0),
-			anchorPoint = if var13 then Vector2.new(1, 0) else Vector2.new(1, 0.5)
-		}) or nil)
+			tooltipOrientation = TooltipOrientation.Bottom,
+			hoverText = JoinResult.tooltipInfoText,
+			onActivateTooltip = JoinResult.onActivateInfoIcon,
+			supportVR = JoinResult.tooltipSupportsVR,
+			supportTenFootUi = JoinResult.tooltipSupportsTenFootUi,
+			size = UDim2.new(0, Size700, 0, Size700),
+			position = if IsNotSubtitleMatch then UDim2.new(1, 0, 0, 0) else UDim2.new(1, 0, 0.5, 0),
+			anchorPoint = if IsNotSubtitleMatch then Vector2.new(1, 0) else Vector2.new(1, 0.5)
+		}) or nil
 	})
 end)

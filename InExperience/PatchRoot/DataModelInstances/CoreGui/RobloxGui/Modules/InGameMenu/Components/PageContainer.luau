@@ -1,146 +1,145 @@
-﻿local guiService = game:GetService("GuiService")
-local inGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
-local roact = inGameMenuDependenciesModule.Roact
-local roactRodux = inGameMenuDependenciesModule.RoactRodux
-local otter = inGameMenuDependenciesModule.Otter
-local t = inGameMenuDependenciesModule.t
-local parent = script.Parent.Parent
-local blurredModalPortalModule = require(script.Parent.BlurredModalPortal)
-local pagesModule = require(script.Parent.Pages)
-local constantsModule = require(script.Parent.Parent.Resources.Constants)
-local t_1 = {}
+﻿local GuiService = game:GetService("GuiService")
+local InGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
+local Roact = InGameMenuDependenciesModule.Roact
+local RoactRodux = InGameMenuDependenciesModule.RoactRodux
+local Otter = InGameMenuDependenciesModule.Otter
+local T = InGameMenuDependenciesModule.t
+local Parent = script.Parent.Parent
+local BlurredModalPortalModule = require(script.Parent.BlurredModalPortal)
+local PagesModule = require(script.Parent.Pages)
+local ConstantsModule = require(script.Parent.Parent.Resources.Constants)
+local ComponentModules = {}
 
-for i, v in pairs(pagesModule.pagesByKey) do
-	t_1[i] = require(v.component)
+for i, value in pairs(PagesModule.pagesByKey) do
+	ComponentModules[i] = require(value.component)
 end
-local withLocalizationModule = require(parent.Localization.withLocalization)
-local pageContainer = roact.PureComponent:extend("PageContainer")
-pageContainer.validateProps = t.strictInterface({
-	currentPage = t.string,
-	visible = t.boolean,
-	controllerBarHeight = t.number,
-	controllerBarCount = t.number
+local WithLocalizationModule = require(Parent.Localization.withLocalization)
+local PageContainer = Roact.PureComponent:extend("PageContainer")
+PageContainer.validateProps = T.strictInterface({
+	currentPage = T.string,
+	visible = T.boolean,
+	controllerBarHeight = T.number,
+	controllerBarCount = T.number
 })
 
-function pageContainer.init(p1, p2)
-	-- upvalues: guiService (ref), pagesModule (ref), roact (ref), otter (ref)
-	function p0.onContainerRendered(p3, p4)
-		-- upvalues: p1 (ref), guiService (copy)
-		if p3 then
-			local selectionParentNameFromKey = p1.getSelectionParentNameFromKey(p4)
-			guiService:RemoveSelectionGroup(selectionParentNameFromKey)
-			guiService:AddSelectionParent(selectionParentNameFromKey, p3)
+function PageContainer.init(p1, p2) --[[ Line: 34 ]]
+	-- upvalues: GuiService (copy), PagesModule (copy), Roact (copy), Otter (copy)
+	function p1.onContainerRendered(SelectionParent, CurrentPage) --[[ Line: 35 ]]
+		-- upvalues: p1 (copy), GuiService (upval)
+		if SelectionParent then
+			local SelectionParentNameFromKey = p1.getSelectionParentNameFromKey(CurrentPage)
+			GuiService:RemoveSelectionGroup(SelectionParentNameFromKey)
+			GuiService:AddSelectionParent(SelectionParentNameFromKey, SelectionParent)
 		end
 	end
 	
-	function p0.getSelectionParentNameFromKey(p3)
-		return p3 .. "_IGMPageSelectionGroup"
+	function p1.getSelectionParentNameFromKey(Text): string --[[ Line: 43 ]]
+		return Text .. "_IGMPageSelectionGroup"
 	end
 	
 	local t = {}
-	local t_1 = {}
-	local t_2 = {}
+	local t1 = {}
+	local t2 = {}
 	p1.pagePositions = {}
 	p1.pageVisibilities = {}
 	
-	for i, v in pairs(pagesModule.pagesByKey) do
-		local var1 = if p2.currentPage == i then 1 else 0
-		local var2, var3 = roact.createBinding(var1)
-		t[i] = var2
-		t_1[i] = var3
-		t_2[i] = var1
-		p1.pagePositions[i] = t[i]:map(function(p3)
+	for i, _ in pairs(PagesModule.pagesByKey) do
+		local v1: number = if p2.currentPage == i then 1 else 0
+		t[i], t1[i] = Roact.createBinding(v1)
+		t2[i] = v1
+		p1.pagePositions[i] = t[i]:map(function(p3: number): UDim2 --[[ Line: 55 ]]
 			return UDim2.new(p3 - 1, 0, 0, 0)
 		end)
-		p1.pageVisibilities[i] = t[i]:map(function(p3)
-			return p3 == 0 or p3 == 1.25
+		p1.pageVisibilities[i] = t[i]:map(function(p3): boolean --[[ Line: 60 ]]
+			return p3 ~= 0 and p3 ~= 1.25
 		end)
 	end
-	p1.pageMotor = otter.createGroupMotor(t_2)
-	p1.pageMotor:onStep(function(p3)
-		-- upvalues: t_1 (ref)
-		for i, v in pairs(p3) do
-			t_1[i](v)
+	p1.pageMotor = Otter.createGroupMotor(t2)
+	p1.pageMotor:onStep(function(List) --[[ Line: 69 ]]
+		-- upvalues: t1 (copy)
+		for i, value in pairs(List) do
+			t1[i](value)
 		end
 	end)
 end
 
-function pageContainer.render(p3)
-	-- upvalues: pagesModule (ref), withLocalizationModule (ref), roact (ref), t_1 (ref), blurredModalPortalModule (ref), constantsModule (ref)
+function PageContainer.render(p3) --[[ Line: 76 ]]
+	-- upvalues: PagesModule (copy), WithLocalizationModule (copy), Roact (copy), ComponentModules (copy), BlurredModalPortalModule (copy), ConstantsModule (copy)
 	local t = {}
 	
-	for i, v in pairs(pagesModule.pagesByKey) do
-		local var4 = p3.pageVisibilities[i]
-		t[i] = withLocalizationModule({ title = v.title })(function(p4)
-			-- upvalues: v (ref), roact (copy), p3 (ref), i (ref), var4 (ref), t_1 (copy), blurredModalPortalModule (copy)
-			return if v.isModal then roact.createElement(blurredModalPortalModule, { Enabled = p3.props.currentPage == i }, {
-				ModalPageContent = roact.createElement(t_1[i], { pageTitle = p4.title })
-			}) else roact.createElement("Frame", {
+	for i, value in pairs(PagesModule.pagesByKey) do
+		local PageVisibility = p3.pageVisibilities[i]
+		t[i] = WithLocalizationModule({ title = value.title })(function(p4) --[[ Line: 84 ]]
+			-- upvalues: value (copy), Roact (upval), p3 (copy), i (copy), PageVisibility (copy), ComponentModules (upval), BlurredModalPortalModule (upval)
+			return if value.isModal then Roact.createElement(BlurredModalPortalModule, { Enabled = p3.props.currentPage == i }, {
+				ModalPageContent = Roact.createElement(ComponentModules[i], { pageTitle = p4.title })
+			}) else Roact.createElement("Frame", {
 				Size = UDim2.new(1, 0, 1, 0),
 				Position = p3.pagePositions[i],
 				BackgroundTransparency = 1,
-				ZIndex = v.navigationDepth,
-				Visible = var4,
-				[roact.Ref] = function(p5)
-					-- upvalues: p3 (copy), i (copy)
+				ZIndex = value.navigationDepth,
+				Visible = PageVisibility,
+				[Roact.Ref] = function(p5) --[[ Line: 92 ]]
+					-- upvalues: p3 (upval), i (upval)
 					p3.onContainerRendered(p5, i)
 				end
 			}, {
-				Page = roact.createElement(t_1[i], { pageTitle = v.title and p4.title })
+				Page = Roact.createElement(ComponentModules[i], { pageTitle = value.title and p4.title })
 			})
 		end)
 	end
-	return roact.createElement("Frame", {
+	return Roact.createElement("Frame", {
 		BackgroundTransparency = 1,
 		ClipsDescendants = true,
-		Size = UDim2.new(0, 400, 1, if p3.props.controllerBarCount > 0 then -1 * constantsModule.ControllerBarHeight else nil),
+		Size = UDim2.new(0, 400, 1, p3.props.controllerBarCount > 0 and -1 * ConstantsModule.ControllerBarHeight or nil),
 		Position = UDim2.new(0, 64, 0, 0),
 		Visible = p3.props.visible
 	}, t)
 end
 
-function pageContainer.didUpdate(p4, p5, _)
-	-- upvalues: pagesModule (ref), otter (ref)
-	local currentPage = p5.currentPage
-	local currentPage_1 = p4.props.currentPage
+function PageContainer.didUpdate(p4, p5, _) --[[ Line: 122 ]]
+	-- upvalues: PagesModule (copy), Otter (copy)
+	local CurrentPage = p5.currentPage
+	local CurrentPage1 = p4.props.currentPage
 	
-	if currentPage ~= currentPage_1 then
-		local isModal = pagesModule.pagesByKey[currentPage_1].isModal
+	if CurrentPage ~= CurrentPage1 then
+		local IsModal = PagesModule.pagesByKey[CurrentPage1].isModal
+		local IsModal1 = PagesModule.pagesByKey[CurrentPage].isModal
 		
-		if isModal or pagesModule.pagesByKey[currentPage].isModal then return end
-		if pagesModule.pagesByKey[currentPage].navigationDepth < pagesModule.pagesByKey[currentPage_1].navigationDepth then
-			if not isModal then
-				p4.pageMotor:setGoal({ [currentPage] = otter.spring(1.25, { frequency = 2.5 }) })
+		if IsModal or IsModal1 then return end
+		if PagesModule.pagesByKey[CurrentPage].navigationDepth < PagesModule.pagesByKey[CurrentPage1].navigationDepth then
+			if not IsModal then
+				p4.pageMotor:setGoal({ [CurrentPage] = Otter.spring(1.25, { frequency = 2.5 }) })
 			end
-		elseif pagesModule.pagesByKey[currentPage].navigationDepth == pagesModule.pagesByKey[currentPage_1].navigationDepth then
-			p4.pageMotor:setGoal({ [currentPage] = otter.spring(0, { frequency = 2.5 }) })
+		elseif PagesModule.pagesByKey[CurrentPage].navigationDepth == PagesModule.pagesByKey[CurrentPage1].navigationDepth then
+			p4.pageMotor:setGoal({ [CurrentPage] = Otter.spring(0, { frequency = 2.5 }) })
 		else
-			local t = {}
-			local var5 = currentPage
-			while var5 ~= nil and var5 ~= currentPage_1 do
-				t[var5] = otter.spring(0, { frequency = 3.5 })
-				var5 = pagesModule.pagesByKey[var5].parentPage
+			local SpringResults = {}
+			local ParentPage = CurrentPage
+			while ParentPage ~= nil and ParentPage ~= CurrentPage1 do
+				SpringResults[ParentPage] = Otter.spring(0, { frequency = 3.5 })
+				ParentPage = PagesModule.pagesByKey[ParentPage].parentPage
 			end
-			p4.pageMotor:setGoal(t)
+			p4.pageMotor:setGoal(SpringResults)
 		end
-		p4.pageMotor:setGoal({ [currentPage_1] = otter.spring(1, { frequency = 2.5 }) })
+		p4.pageMotor:setGoal({ [CurrentPage1] = Otter.spring(1, { frequency = 2.5 }) })
 	end
 end
 
-function pageContainer.willUnmount(p6)
-	-- upvalues: pagesModule (ref), guiService (ref)
-	for i, v in pairs(pagesModule.pagesByKey) do
-		if not v.isModal then
-			guiService:RemoveSelectionGroup(p6.getSelectionParentNameFromKey(i))
+function PageContainer.willUnmount(p6) --[[ Line: 165 ]]
+	-- upvalues: PagesModule (copy), GuiService (copy)
+	for i, value in pairs(PagesModule.pagesByKey) do
+		if not value.isModal then
+			GuiService:RemoveSelectionGroup((p6.getSelectionParentNameFromKey(i)))
 		end
 	end
 end
 
-return roactRodux.UNSTABLE_connect2(function(p7)
+return RoactRodux.UNSTABLE_connect2(function(p7) --[[ Line: 174 ]]
 	return {
 		currentPage = p7.menuPage,
 		visible = p7.isMenuOpen,
 		controllerBarHeight = p7.controllerBarHeight,
 		controllerBarCount = p7.controllerBarCount
 	}
-end)(pageContainer)
+end)(PageContainer)

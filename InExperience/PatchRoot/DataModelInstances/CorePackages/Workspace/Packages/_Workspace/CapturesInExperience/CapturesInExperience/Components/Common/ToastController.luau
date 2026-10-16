@@ -1,81 +1,83 @@
-﻿local parent = script.Parent.Parent.Parent.Parent
-local reactModule = require(parent.React)
-local reactOtterModule = require(parent.ReactOtter)
-local foundationModule = require(parent.Foundation)
-local toast = foundationModule.Toast
-local view = foundationModule.View
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local t = { dampingRatio = 1, frequency = 3 }
-local uDim = UDim.new(0, 296)
+﻿local Parent = script.Parent.Parent.Parent.Parent
+local ReactModule = require(Parent.React)
+local ReactOtterModule = require(Parent.ReactOtter)
+local FoundationModule = require(Parent.Foundation)
+local Toast = FoundationModule.Toast
+local View = FoundationModule.View
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local config = { dampingRatio = 1, frequency = 3 }
+local _UDim = UDim.new(0, 296)
 
-return function(p1)
-	-- upvalues: reactModule (ref), reactOtterModule (ref), t (ref), buttonVariant (ref), view (ref), toast (ref), uDim (ref)
-	local var1, var2 = reactModule.useState(false)
-	local var3, var4 = reactOtterModule.useAnimatedBinding(-200, reactModule.useCallback(function()
-		-- upvalues: var1 (ref), p1 (ref)
-		if not var1 then
+return function(p1) --[[ Line: 36 | Named "ToastController" ]]
+	-- upvalues: ReactModule (copy), ReactOtterModule (copy), config (copy), ButtonVariant (copy), View (copy), Toast (copy), _UDim (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(-200, (ReactModule.useCallback(function() --[[ Line: 39 ]]
+		-- upvalues: UseStateResult (copy), p1 (copy)
+		if not UseStateResult then
 			p1.onDismissed()
 		end
-	end, { var1, p1.onDismissed }))
-	local var5 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref), var4 (ref), reactOtterModule (copy), t (copy)
-		var2(false)
-		var4(reactOtterModule.spring(-200, t))
-	end, { var4 })
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var2 (ref), var4 (ref), reactOtterModule (copy), t (copy), var5 (ref)
+	end, { UseStateResult, p1.onDismissed })))
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 47 ]]
+		-- upvalues: UseStateResult2 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), config (upval)
+		UseStateResult2(false)
+		UseAnimatedBindingResult2(ReactOtterModule.spring(-200, config))
+	end, { UseAnimatedBindingResult2 })
+	ReactModule.useEffect(function() --[[ Line: 52 ]]
+		-- upvalues: p1 (copy), UseStateResult2 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), config (upval), UseResult (copy)
 		if p1.show then
-			var2(true)
-			var4(reactOtterModule.spring(20, t))
+			UseStateResult2(true)
+			UseAnimatedBindingResult2(ReactOtterModule.spring(20, config))
 			
 			return
+		else
+			UseResult()
 		end
-		var5()
-	end, { p1.show, var4, var5 })
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var5 (ref)
+	end, { p1.show, UseAnimatedBindingResult2, UseResult })
+	ReactModule.useEffect(function() --[[ Line: 61 ]]
+		-- upvalues: p1 (copy), UseResult (copy)
 		if p1.show and p1.duration > 0 then
-			local delayedThread = task.delay(p1.duration, function()
-				-- upvalues: var5 (copy)
-				var5()
+			local DelayedThread = task.delay(p1.duration, function() --[[ Line: 63 ]]
+				-- upvalues: UseResult (upval)
+				UseResult()
 			end)
 			
-			return function()
-				-- upvalues: delayedThread (ref)
-				task.cancel(delayedThread)
+			return function() --[[ Line: 66 ]]
+				-- upvalues: DelayedThread (copy)
+				task.cancel(DelayedThread)
 			end
+		else
+			return nil
 		end
-		return nil
-	end, { p1.show, p1.duration, var5 })
-	local onAction = p1.onAction
+	end, { p1.show, p1.duration, UseResult })
+	local OnActionFunction = p1.onAction
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "size-full-0 auto-y col align-x-center anchor-top-center",
-		Position = var3:map(function(p2)
-			return UDim2.new(0.5, 0, 0, p2)
+		Position = UseAnimatedBindingResult:map(function(YOffset): UDim2 --[[ Line: 92 ]]
+			return UDim2.new(0.5, 0, 0, YOffset)
 		end)
 	}, {
-		Toast = reactModule.createElement(toast, {
+		Toast = ReactModule.createElement(Toast, {
 			title = p1.title,
 			text = p1.text,
 			icon = p1.icon,
-			actions = reactModule.useMemo(function()
-				-- upvalues: p1 (ref), onAction (ref), var5 (ref), buttonVariant (copy)
+			actions = ReactModule.useMemo(function() --[[ Line: 74 ]]
+				-- upvalues: p1 (copy), OnActionFunction (copy), UseResult (copy), ButtonVariant (upval)
 				return if p1.actionText then {
 					{
 						text = p1.actionText,
-						onActivated = function()
-							-- upvalues: onAction (copy), var5 (copy)
-							if onAction then
-								onAction()
+						onActivated = function() --[[ Line: 81 ]]
+							-- upvalues: OnActionFunction (upval), UseResult (upval)
+							if OnActionFunction then
+								OnActionFunction()
 							end
-							var5()
+							UseResult()
 						end,
-						variant = buttonVariant.Emphasis
+						variant = ButtonVariant.Emphasis
 					}
 				} else nil
-			end, { p1.actionText, onAction, var5 }),
-			width = uDim
+			end, { p1.actionText, OnActionFunction, UseResult }),
+			width = _UDim
 		})
 	})
 end

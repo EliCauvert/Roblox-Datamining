@@ -1,22 +1,22 @@
-﻿local phoneUpsell = script:FindFirstAncestor("PhoneUpsell")
-local parent = phoneUpsell.Parent
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-local foundationModule = require(parent.Foundation)
-local checkbox = foundationModule.Checkbox
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local useStyle = UIBloxModule.Core.Style.useStyle
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
-local mergePropsModule = require(phoneUpsell.Utils.mergeProps)
-local linkButton = UIBloxModule.App.Button.LinkButton
-local getFFlagDisablePVUpsellDataConsent = require(parent.SharedFlags).GetFFlagDisablePVUpsellDataConsent
+﻿local PhoneUpsell = script:FindFirstAncestor("PhoneUpsell")
+local Parent = PhoneUpsell.Parent
+local ReactModule = require(Parent.React)
+local UIBloxModule = require(Parent.UIBlox)
+local FoundationModule = require(Parent.Foundation)
+local Checkbox = FoundationModule.Checkbox
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
+local MergePropsModule = require(PhoneUpsell.Utils.mergeProps)
+local LinkButton = UIBloxModule.App.Button.LinkButton
+local GetFFlagDisablePVUpsellDataConsentFunction = require(Parent.SharedFlags).GetFFlagDisablePVUpsellDataConsent
 
-local function noOp() end
+local function noOp() --[[ Line: 53 ]] end
 
-local t = {
+local config = {
 	isButtonDisabled = false,
 	isExtraButtonDisabled = false,
 	alwaysShowLegalText = false,
@@ -27,186 +27,201 @@ local t = {
 	onExtraButtonClick = noOp
 }
 
-local function getButtonStackProps(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: buttonType (ref)
-	local list = {
+local function getButtonStackProps(Text, ButtonHeight, OnActivated, IsDisabled, Text1, OnActivated1, IsDisabled1) --[[ Line: 66 ]]
+	-- upvalues: ButtonType (copy)
+	local Buttons = {
 		{
-			buttonType = buttonType.PrimarySystem,
-			props = { onActivated = p3, text = p1, isDisabled = p4 }
+			buttonType = ButtonType.PrimarySystem,
+			props = {
+				onActivated = OnActivated,
+				text = Text,
+				isDisabled = IsDisabled
+			}
 		}
 	}
 	
-	if p5 and p5 ~= "" then
-		table.insert(list, 1, {
-			buttonType = buttonType.Secondary,
-			props = { onActivated = p6, text = p5, isDisabled = p7 }
+	if Text1 and Text1 ~= "" then
+		table.insert(Buttons, 1, {
+			buttonType = ButtonType.Secondary,
+			props = {
+				onActivated = OnActivated1,
+				text = Text1,
+				isDisabled = IsDisabled1
+			}
 		})
 	end
-	return { buttonHeight = p2, buttons = list }
+	return { buttonHeight = ButtonHeight, buttons = Buttons }
 end
 
-return function(p1)
-	-- upvalues: mergePropsModule (ref), t (ref), reactModule (ref), useStyle (ref), useLocalization (ref), interactiveAlert (ref), getButtonStackProps (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), getFFlagDisablePVUpsellDataConsent (ref), checkbox (ref), linkButton (ref)
-	local var1 = mergePropsModule(t, p1)
-	local var2, var3 = reactModule.useState(false)
-	local t_1 = {
+return function(p1) --[[ Line: 102 | Named "InGameEntryView" ]]
+	-- upvalues: MergePropsModule (copy), config (copy), ReactModule (copy), UseStyleFunction (copy), UseLocalizationFunction (copy), InteractiveAlert (copy), getButtonStackProps (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), GetFFlagDisablePVUpsellDataConsentFunction (copy), Checkbox (copy), LinkButton (copy)
+	local MergePropsModuleResult = MergePropsModule(config, p1)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local config1 = {
 		phoneNumberKey = "Feature.VerificationUpsell.Label.PhoneNumber",
 		phonePrivacyDisclaimerKey = "Feature.VerificationUpsell.Description.PhoneNumberNeverPublic",
 		termsOfUseKey = "Feature.VerificationUpsell.Action.TermsOfUse",
 		privacyPolicyKey = "Feature.VerificationUpsell.Action.PrivacyPolicy",
-		titleKey = var1.titleKey,
-		descriptionKey = var1.descriptionKey,
-		buttonKey = var1.buttonKey,
-		legalTextKey = var1.legalTextKey
+		titleKey = MergePropsModuleResult.titleKey,
+		descriptionKey = MergePropsModuleResult.descriptionKey,
+		buttonKey = MergePropsModuleResult.buttonKey,
+		legalTextKey = MergePropsModuleResult.legalTextKey
 	}
 	
-	if var1.extraButtonKey and var1.extraButtonKey ~= "" then
-		t_1.extraButtonKey = var1.extraButtonKey
+	if MergePropsModuleResult.extraButtonKey and MergePropsModuleResult.extraButtonKey ~= "" then
+		config1.extraButtonKey = MergePropsModuleResult.extraButtonKey
 	end
-	local var4 = useStyle()
-	local baseSize = var4.Font.BaseSize
-	local relativeSize = var4.Font.CaptionHeader.RelativeSize
-	local size150 = var4.Tokens.Size.Size_150
-	local var5 = useLocalization(t_1)
-	var5.legalTextKey = var5.legalTextKey:gsub("{buttonText}", var5.buttonKey)
+	local UseStyleResult = UseStyleFunction()
+	local BaseSize = UseStyleResult.Font.BaseSize
+	local RelativeSize = UseStyleResult.Font.CaptionHeader.RelativeSize
+	local Size150 = UseStyleResult.Tokens.Size.Size_150
+	local UseLocalizationResult = UseLocalizationFunction(config1)
+	UseLocalizationResult.legalTextKey = UseLocalizationResult.legalTextKey:gsub("{buttonText}", UseLocalizationResult.buttonKey)
 	
-	return reactModule.createElement(interactiveAlert, {
-		title = var5.titleKey,
-		screenSize = var1.screenSize,
-		buttonStackInfo = getButtonStackProps(var5.buttonKey, var4.Tokens.Size.Size_1200, var1.onButtonClick, var1.isButtonDisabled, var5.extraButtonKey, var1.onExtraButtonClick, var1.isExtraButtonDisabled),
-		onCloseClicked = var1.onClose,
-		middleContent = function()
-			-- upvalues: reactModule (copy), var5 (ref), baseSize (ref), var4 (ref), foundationFontFaceMigration (copy), normalizeFontFace (copy)
-			return reactModule.createElement("Frame", {
+	return ReactModule.createElement(InteractiveAlert, {
+		title = UseLocalizationResult.titleKey,
+		screenSize = MergePropsModuleResult.screenSize,
+		buttonStackInfo = getButtonStackProps(UseLocalizationResult.buttonKey, UseStyleResult.Tokens.Size.Size_1200, MergePropsModuleResult.onButtonClick, MergePropsModuleResult.isButtonDisabled, UseLocalizationResult.extraButtonKey, MergePropsModuleResult.onExtraButtonClick, MergePropsModuleResult.isExtraButtonDisabled),
+		onCloseClicked = MergePropsModuleResult.onClose,
+		middleContent = function() --[[ Line: 141 ]]
+			-- upvalues: ReactModule (upval), UseLocalizationResult (copy), BaseSize (copy), UseStyleResult (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
+			return ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				AutomaticSize = Enum.AutomaticSize.Y,
 				Size = UDim2.new(1, 0, 0, 0)
 			}, {
-				BodyText = reactModule.createElement("TextLabel", {
+				BodyText = ReactModule.createElement("TextLabel", {
 					LayoutOrder = 0,
 					BackgroundTransparency = 1,
 					TextWrapped = true,
 					RichText = true,
-					Text = var5.descriptionKey,
-					TextSize = baseSize,
-					TextColor3 = var4.Theme.TextDefault.Color,
-					TextTransparency = var4.Theme.TextDefault.Transparency,
-					Font = if foundationFontFaceMigration then nil else var4.Font.Body.Font,
-					FontFace = if foundationFontFaceMigration then normalizeFontFace(var4.Tokens.Typography.BodyLarge.Font) else nil,
+					Text = UseLocalizationResult.descriptionKey,
+					TextSize = BaseSize,
+					TextColor3 = UseStyleResult.Theme.TextDefault.Color,
+					TextTransparency = UseStyleResult.Theme.TextDefault.Transparency,
+					Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.Body.Font,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					Size = UDim2.new(1, 0, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y
 				})
 			})
 		end,
-		footerContent = if not getFFlagDisablePVUpsellDataConsent() then function()
-			-- upvalues: reactModule (copy), var4 (ref), var1 (ref), size150 (ref), checkbox (copy), var3 (ref), var2 (ref), var5 (ref), baseSize (ref), relativeSize (ref), foundationFontFaceMigration (copy), normalizeFontFace (copy), linkButton (copy)
-			local frame
-			local createElement = reactModule.createElement
-			local var6 = "Frame"
-			local t = {
+		footerContent = if GetFFlagDisablePVUpsellDataConsentFunction() then function() --[[ Line: 281 ]]
+			return nil
+		end else function() --[[ Line: 167 ]]
+			-- upvalues: ReactModule (upval), UseStyleResult (copy), MergePropsModuleResult (copy), Size150 (copy), Checkbox (upval), UseStateResult2 (copy), UseStateResult (copy), UseLocalizationResult (copy), BaseSize (copy), RelativeSize (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), LinkButton (upval)
+			return ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				AutomaticSize = Enum.AutomaticSize.Y,
 				Size = UDim2.new(1, 0, 0, 0)
-			}
-			local t_1 = {
-				ContentPadding = reactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, var4.Tokens.Size.Size_300) }),
-				ListLayout = reactModule.createElement("UIListLayout", {
+			}, {
+				ContentPadding = ReactModule.createElement("UIPadding", {
+					PaddingTop = UDim.new(0, UseStyleResult.Tokens.Size.Size_300)
+				}),
+				ListLayout = ReactModule.createElement("UIListLayout", {
 					SortOrder = Enum.SortOrder.LayoutOrder,
 					HorizontalAlignment = Enum.HorizontalAlignment.Center,
-					Padding = UDim.new(0, var4.Tokens.Size.Size_150)
-				})
-			}
-			
-			if var1.requireLegalTextCheckbox then
-				frame = reactModule.createElement("Frame", {
+					Padding = UDim.new(0, UseStyleResult.Tokens.Size.Size_150)
+				}),
+				LegalTextContainer = if MergePropsModuleResult.requireLegalTextCheckbox then ReactModule.createElement("Frame", {
 					LayoutOrder = 3,
 					BackgroundTransparency = 1,
 					Size = UDim2.new(1, 0, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y
 				}, {
-					UIListLayout = reactModule.createElement("UIListLayout", {
+					UIListLayout = ReactModule.createElement("UIListLayout", {
 						FillDirection = Enum.FillDirection.Horizontal,
 						HorizontalAlignment = Enum.HorizontalAlignment.Center,
 						VerticalAlignment = Enum.VerticalAlignment.Center,
-						Padding = UDim.new(0, size150)
+						Padding = UDim.new(0, Size150)
 					}),
-					LegalCheckbox = reactModule.createElement(checkbox, { label = "", onActivated = var3, isChecked = var2 }),
-					LegalText = reactModule.createElement("TextLabel", {
+					LegalCheckbox = ReactModule.createElement(Checkbox, {
+						label = "",
+						onActivated = UseStateResult2,
+						isChecked = UseStateResult
+					}),
+					LegalText = ReactModule.createElement("TextLabel", {
 						BackgroundTransparency = 1,
 						TextWrapped = true,
-						Text = var5.legalTextKey,
-						TextSize = baseSize * relativeSize,
-						TextColor3 = var4.Theme.TextDefault.Color,
-						TextTransparency = var4.Theme.TextDefault.Transparency,
-						Font = if foundationFontFaceMigration then nil else var4.Font.Body.Font,
-						FontFace = if foundationFontFaceMigration then normalizeFontFace(var4.Tokens.Typography.BodyLarge.Font) else nil,
+						Text = UseLocalizationResult.legalTextKey,
+						TextSize = BaseSize * RelativeSize,
+						TextColor3 = UseStyleResult.Theme.TextDefault.Color,
+						TextTransparency = UseStyleResult.Theme.TextDefault.Transparency,
+						Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.Body.Font,
+						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
 						TextXAlignment = Enum.TextXAlignment.Left,
-						Size = UDim2.new(1, -(26 + size150), 0, 0),
+						Size = UDim2.new(1, -(26 + Size150), 0, 0),
 						AutomaticSize = Enum.AutomaticSize.Y
 					})
-				})
-			elseif not var1.alwaysShowLegalText then
-				frame = var1.countryCode.prefix == "1" and reactModule.createElement("TextLabel", {
+				}) elseif MergePropsModuleResult.alwaysShowLegalText then ReactModule.createElement("TextLabel", {
 					LayoutOrder = 3,
 					BackgroundTransparency = 1,
 					TextWrapped = true,
-					Text = var5.legalTextKey,
-					TextSize = baseSize * relativeSize,
-					TextColor3 = var4.Theme.TextDefault.Color,
-					TextTransparency = var4.Theme.TextDefault.Transparency,
-					Font = if foundationFontFaceMigration then nil else var4.Font.Body.Font,
-					FontFace = if foundationFontFaceMigration then normalizeFontFace(var4.Tokens.Typography.BodyLarge.Font) else nil,
+					Text = UseLocalizationResult.legalTextKey,
+					TextSize = BaseSize * RelativeSize,
+					TextColor3 = UseStyleResult.Theme.TextDefault.Color,
+					TextTransparency = UseStyleResult.Theme.TextDefault.Transparency,
+					Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.Body.Font,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					Size = UDim2.new(1, 0, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y
-				})
-			end
-			t_1.LegalTextContainer = frame
-			t_1.LegalButtonsContainer = var1.countryCode.prefix == "1" and reactModule.createElement("Frame", {
-				LayoutOrder = 4,
-				BackgroundTransparency = 1,
-				Size = UDim2.new(1, 0, 0, 0),
-				AutomaticSize = Enum.AutomaticSize.Y
-			}, {
-				UIListLayout = reactModule.createElement("UIListLayout", {
-					FillDirection = Enum.FillDirection.Horizontal,
-					SortOrder = Enum.SortOrder.LayoutOrder,
-					HorizontalAlignment = Enum.HorizontalAlignment.Center,
-					VerticalAlignment = Enum.VerticalAlignment.Center,
-					Padding = UDim.new(0, 5)
-				}),
-				TermsOfUseButton = reactModule.createElement(linkButton, {
-					layoutOrder = 5,
-					fontStyle = "CaptionBody",
-					text = var5.termsOfUseKey,
-					onActivated = var1.onTermsOfUseClick,
-					size = UDim2.fromScale(0.2, 0.2)
-				}),
-				TextButtonDivider = reactModule.createElement("TextLabel", {
-					LayoutOrder = 6,
+				}) else MergePropsModuleResult.countryCode.prefix == "1" and ReactModule.createElement("TextLabel", {
+					LayoutOrder = 3,
 					BackgroundTransparency = 1,
-					Text = "-",
 					TextWrapped = true,
-					TextSize = baseSize * relativeSize,
-					TextColor3 = var4.Theme.TextDefault.Color,
-					TextTransparency = var4.Theme.TextDefault.Transparency,
-					Font = if foundationFontFaceMigration then nil else var4.Font.Body.Font,
-					FontFace = if foundationFontFaceMigration then normalizeFontFace(var4.Tokens.Typography.BodyLarge.Font) else nil,
-					TextXAlignment = Enum.TextXAlignment.Center,
-					AutomaticSize = Enum.AutomaticSize.XY
+					Text = UseLocalizationResult.legalTextKey,
+					TextSize = BaseSize * RelativeSize,
+					TextColor3 = UseStyleResult.Theme.TextDefault.Color,
+					TextTransparency = UseStyleResult.Theme.TextDefault.Transparency,
+					Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.Body.Font,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
+					TextXAlignment = Enum.TextXAlignment.Left,
+					Size = UDim2.new(1, 0, 0, 0),
+					AutomaticSize = Enum.AutomaticSize.Y
 				}),
-				PrivacyPolicyButton = reactModule.createElement(linkButton, {
-					layoutOrder = 7,
-					fontStyle = "CaptionBody",
-					text = var5.privacyPolicyKey,
-					onActivated = var1.onPrivacyPolicyClick
+				LegalButtonsContainer = MergePropsModuleResult.countryCode.prefix == "1" and ReactModule.createElement("Frame", {
+					LayoutOrder = 4,
+					BackgroundTransparency = 1,
+					Size = UDim2.new(1, 0, 0, 0),
+					AutomaticSize = Enum.AutomaticSize.Y
+				}, {
+					UIListLayout = ReactModule.createElement("UIListLayout", {
+						FillDirection = Enum.FillDirection.Horizontal,
+						SortOrder = Enum.SortOrder.LayoutOrder,
+						HorizontalAlignment = Enum.HorizontalAlignment.Center,
+						VerticalAlignment = Enum.VerticalAlignment.Center,
+						Padding = UDim.new(0, 5)
+					}),
+					TermsOfUseButton = ReactModule.createElement(LinkButton, {
+						layoutOrder = 5,
+						fontStyle = "CaptionBody",
+						text = UseLocalizationResult.termsOfUseKey,
+						onActivated = MergePropsModuleResult.onTermsOfUseClick,
+						size = UDim2.fromScale(0.2, 0.2)
+					}),
+					TextButtonDivider = ReactModule.createElement("TextLabel", {
+						LayoutOrder = 6,
+						BackgroundTransparency = 1,
+						Text = "-",
+						TextWrapped = true,
+						TextSize = BaseSize * RelativeSize,
+						TextColor3 = UseStyleResult.Theme.TextDefault.Color,
+						TextTransparency = UseStyleResult.Theme.TextDefault.Transparency,
+						Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.Body.Font,
+						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
+						TextXAlignment = Enum.TextXAlignment.Center,
+						AutomaticSize = Enum.AutomaticSize.XY
+					}),
+					PrivacyPolicyButton = ReactModule.createElement(LinkButton, {
+						layoutOrder = 7,
+						fontStyle = "CaptionBody",
+						text = UseLocalizationResult.privacyPolicyKey,
+						onActivated = MergePropsModuleResult.onPrivacyPolicyClick
+					})
 				})
 			})
-			
-			return createElement(var6, t, t_1)
-		end else function()
-			return nil
 		end
 	})
 end

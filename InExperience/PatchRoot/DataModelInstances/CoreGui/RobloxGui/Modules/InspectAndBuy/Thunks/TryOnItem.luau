@@ -1,29 +1,28 @@
-﻿local parent = script.Parent.Parent
-local thunkModule = require(parent.Thunk)
-local analyticsModule = require(parent.Services.Analytics)
-local setTryingOnInfoModule = require(parent.Actions.SetTryingOnInfo)
-local sendCounterModule = require(parent.Thunks.SendCounter)
-local constantsModule = require(parent.Constants)
-local list = { analyticsModule }
+﻿local Parent = script.Parent.Parent
+local ThunkModule = require(Parent.Thunk)
+local AnalyticsModule = require(Parent.Services.Analytics)
+local SetTryingOnInfoModule = require(Parent.Actions.SetTryingOnInfo)
+local SendCounterModule = require(Parent.Thunks.SendCounter)
+local ConstantsModule = require(Parent.Constants)
+local list = { AnalyticsModule }
 
-return function(p1, p2, p3, p4, p5)
-	-- upvalues: thunkModule (ref), list (ref), analyticsModule (ref), setTryingOnInfoModule (ref), sendCounterModule (ref), constantsModule (ref)
-	return thunkModule.new(script.Name, list, function(p6, p7)
-		-- upvalues: analyticsModule (copy), p4 (ref), p5 (ref), p2 (ref), setTryingOnInfoModule (copy), p1 (ref), p3 (ref), sendCounterModule (copy), constantsModule (copy)
-		local var1, var2
-		local var3 = p7[analyticsModule]
-		local _ = nil
-		local _ = nil
+return function(p1, p2, p3, p4, p5) --[[ Line: 18 | Named "TryOnItem" ]]
+	-- upvalues: ThunkModule (copy), list (copy), AnalyticsModule (copy), SetTryingOnInfoModule (copy), SendCounterModule (copy), ConstantsModule (copy)
+	return ThunkModule.new(script.Name, list, function(p6, p7) --[[ Line: 19 ]]
+		-- upvalues: AnalyticsModule (upval), p4 (copy), p5 (copy), p2 (copy), SetTryingOnInfoModule (upval), p1 (copy), p3 (copy), SendCounterModule (upval), ConstantsModule (upval)
+		local v1 = p7[AnalyticsModule]
+		local v2 = nil
+		local v3 = nil
 		
 		if p4 then
-			var1 = "Bundle"
-			var2 = p5
+			v2 = "Bundle"
+			v3 = p5
 		else
-			var1 = "Asset"
-			var2 = p2
+			v2 = "Asset"
+			v3 = p2
 		end
-		var3.reportTryOnButtonClicked(var1, var2)
-		p6:dispatch(setTryingOnInfoModule(p1, p2, p3))
-		p6:dispatch(sendCounterModule(constantsModule.Counters.TryOnButtonClicked))
+		v1.reportTryOnButtonClicked(v2, v3)
+		p6:dispatch(SetTryingOnInfoModule(p1, p2, p3))
+		p6:dispatch(SendCounterModule(ConstantsModule.Counters.TryOnButtonClicked))
 	end)
 end

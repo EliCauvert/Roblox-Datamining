@@ -1,38 +1,39 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local constantsModule = require(parent.Constants)
-local foundationModule = require(parent_1.Foundation)
-local localizationModule = require(parent_1.Localization)
-local _ = require(parent.Enums.TouchControlsEnum)
-local text = foundationModule.Text
-local view = foundationModule.View
-local icon = foundationModule.Icon
-local useTokens = foundationModule.Hooks.useTokens
-local useLocalization = localizationModule.Hooks.useLocalization
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local ConstantsModule = require(Parent.Constants)
+local FoundationModule = require(Parent1.Foundation)
+local _ = require(Parent.Enums.TouchControlsEnum)
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local Icon = FoundationModule.Icon
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
 
-return function(p1)
-	-- upvalues: useTokens (ref), useLocalization (ref), reactModule (ref), view (ref), text (ref), constantsModule (ref), icon (ref)
-	local var1 = useTokens()
-	local touchInput = constantsModule.HELP_PAGE.TOUCH_ENUM_TO_ICON[p1.touchInput]
+return function(p1) --[[ Line: 26 ]]
+	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), View (copy), Text (copy), ConstantsModule (copy), Icon (copy)
+	local UseTokensResult = UseTokensFunction()
+	local TOUCHENUMTOICONEntry = ConstantsModule.HELP_PAGE.TOUCH_ENUM_TO_ICON[p1.touchInput]
+	local Element = TOUCHENUMTOICONEntry and ReactModule.createElement(Icon, {
+		name = TOUCHENUMTOICONEntry,
+		size = UseTokensResult.Size.Size_1200
+	})
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "align-x-center auto-xy col gap-small",
 		LayoutOrder = p1.layoutOrder
 	}, {
-		actionComponent = reactModule.createElement(view, {
+		actionComponent = ReactModule.createElement(View, {
 			tag = "auto-xy padding-x-large padding-y-xsmall radius-large",
 			LayoutOrder = 1,
-			backgroundStyle = var1.Color.Extended.Gray.Gray_600
+			backgroundStyle = UseTokensResult.Color.Extended.Gray.Gray_600
 		}, {
-			InnerAction = reactModule.createElement(text, {
+			InnerAction = ReactModule.createElement(Text, {
 				tag = "auto-xy text-align-x-center text-title-small",
-				textStyle = var1.Color.Extended.White.White_100,
-				Text = useLocalization({ action = p1.action }).action
+				textStyle = UseTokensResult.Color.Extended.White.White_100,
+				Text = UseLocalizationFunction({ action = p1.action }).action
 			})
 		}),
-		iconComponent = touchInput and reactModule.createElement(view, { tag = "auto-xy", LayoutOrder = 2 }, {
-			InnerIcon = touchInput and reactModule.createElement(icon, { name = touchInput, size = var1.Size.Size_1200 })
-		}) or nil
+		iconComponent = TOUCHENUMTOICONEntry and ReactModule.createElement(View, { tag = "auto-xy", LayoutOrder = 2 }, { InnerIcon = Element }) or nil
 	})
 end

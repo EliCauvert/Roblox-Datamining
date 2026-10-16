@@ -1,113 +1,110 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local signalsModule = require(parent.Signals)
-local creatorAgentChatModule = require(parent.DataHydration.CreatorAgentChat)
-local universeConfigurationModule = require(parent.DataHydration.UniverseConfiguration)
-local _ = require(buildExperience.Chat.chatTypes)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local SignalsModule = require(Parent.Signals)
+local CreatorAgentChatModule = require(Parent.DataHydration.CreatorAgentChat)
+local UniverseConfigurationModule = require(Parent.DataHydration.UniverseConfiguration)
+local _ = require(BuildExperience.Chat.chatTypes)
 
-local function _(p1)
+local function _(p1) --[[ Line: 36 | Named "resolveUniverseIdFromSessionLoad" ]]
 	if p1 == nil then
 		return nil
+	else
+		local Meta = p1._meta
+		local Roblox = if Meta == nil then nil else Meta._roblox
+		local UniverseId = if Roblox == nil then nil else Roblox.universeId
+		
+		return if typeof(UniverseId) == "number" and UniverseId ~= 0 then UniverseId else nil
 	end
-	local meta = p1._meta
-	local var1 = if meta ~= nil then nil else meta._roblox
-	local var2 = if var1 ~= nil then nil else var1.universeId
-	
-	return if typeof(var2) == "number" and var2 ~= 0 then var2 else nil
 end
 
-local _ = function(p1)
+local _ = function(p1): string --[[ Line: 49 | Named "gameIconForUniverseId" ]]
 	return string.format("rbxthumb://type=GameIcon&id=%d&w=150&h=150", p1)
 end
 
-local function makeTarget(p1, p2, p3, p4)
-	p1 = p1 or 0
+local function makeTarget(UniverseId, SessionId, DataResult, FallbackExperienceName) --[[ Line: 53 ]]
+	local UniverseId1 = UniverseId or 0
 	
 	return {
-		universeId = p1,
-		placeId = if p3 ~= nil then nil else p3.rootPlaceId,
-		sessionId = p2,
-		experienceName = if p3 == nil or p3.name == "" then p4 else p3.name,
-		gameIcon = if p1 ~= 0 then nil else string.format("rbxthumb://type=GameIcon&id=%d&w=150&h=150", p1)
+		universeId = UniverseId1,
+		placeId = if DataResult == nil then nil else DataResult.rootPlaceId,
+		sessionId = SessionId,
+		experienceName = if DataResult == nil or DataResult.name == "" then FallbackExperienceName else DataResult.name,
+		gameIcon = if UniverseId1 == 0 then nil else string.format("rbxthumb://type=GameIcon&id=%d&w=150&h=150", UniverseId1)
 	}
 end
 
-return function(p1)
-	-- upvalues: creatorAgentChatModule (ref), universeConfigurationModule (ref), signalsModule (ref), makeTarget (ref)
-	local sessionId = p1.sessionId
-	local var1 = typeof(sessionId) == "string" and sessionId ~= ""
-	local var2 = p1.universeId ~= nil and p1.universeId ~= 0
+return function(p1) --[[ Line: 69 | Named "resumeBuildChat" ]]
+	-- upvalues: CreatorAgentChatModule (copy), UniverseConfigurationModule (copy), SignalsModule (copy), makeTarget (copy)
+	local SessionId = p1.sessionId
+	local IsNotSessionIdMatch: boolean = typeof(SessionId) == "string" and SessionId ~= ""
+	local IsNotUniverseIdMatch: boolean = p1.universeId ~= nil and p1.universeId ~= 0
 	
-	if not var2 and not var1 then
+	if IsNotUniverseIdMatch or IsNotSessionIdMatch then
+		local FallbackExperienceName = p1.fallbackExperienceName
+		local SessionLoadResult = if IsNotUniverseIdMatch or not IsNotSessionIdMatch then nil else (p1.creatorAgentChatStore or CreatorAgentChatModule.getCreatorAgentChatStore()).sessionLoad(SessionId)
+		local ConfigurationStore = p1.configurationStore
+		
+		local function _() --[[ Line: 86 | Named "getConfigurationStore" ]]
+			-- upvalues: ConfigurationStore (ref), UniverseConfigurationModule (upval)
+			local ConfigurationStore1 = ConfigurationStore or UniverseConfigurationModule.getUniverseConfigurationStore()
+			ConfigurationStore = ConfigurationStore1
+			
+			return ConfigurationStore1
+		end
+		
+		local Flag = false
+		
+		return SignalsModule.createEffect(function(p2) --[[ Line: 94 ]]
+			-- upvalues: Flag (ref), IsNotUniverseIdMatch (copy), p1 (copy), SessionLoadResult (ref), SessionId (copy), FallbackExperienceName (copy), ConfigurationStore (ref), UniverseConfigurationModule (upval), makeTarget (upval)
+			if Flag then return end
+			local UniverseId = nil
+			if IsNotUniverseIdMatch then
+				UniverseId = p1.universeId
+			elseif SessionLoadResult == nil then
+				UniverseId = nil
+			else
+				local StateResult = SessionLoadResult.state(p2)
+				
+				if StateResult.status == "pending" then return end
+				if StateResult.status == "succeeded" then
+					local Result = StateResult.result
+					
+					if Result == nil then
+						UniverseId = nil
+					else
+						local Meta = Result._meta
+						local Roblox = if Meta == nil then nil else Meta._roblox
+						local UniverseId1 = if Roblox == nil then nil else Roblox.universeId
+						UniverseId = if typeof(UniverseId1) == "number" and UniverseId1 ~= 0 then UniverseId1 else nil
+					end
+				else
+					UniverseId = nil
+				end
+			end
+			if UniverseId == nil then
+				Flag = true
+				p1.onOpenChat({
+					universeId = 0,
+					placeId = nil,
+					gameIcon = nil,
+					sessionId = SessionId,
+					experienceName = FallbackExperienceName
+				})
+				
+				return
+			end
+			local ConfigurationStore1 = ConfigurationStore or UniverseConfigurationModule.getUniverseConfigurationStore()
+			ConfigurationStore = ConfigurationStore1
+			local AndFetchSummary = ConfigurationStore1.getAndFetchSummary(UniverseId)
+			
+			if AndFetchSummary.status(p2) ~= "NotReady" then
+				Flag = true
+				p1.onOpenChat((makeTarget(UniverseId, SessionId, AndFetchSummary.data(p2), FallbackExperienceName)))
+				
+				return
+			end
+		end)
+	else
 		return nil
 	end
-	local fallbackExperienceName = p1.fallbackExperienceName
-	local var3 = nil
-	
-	if not var2 and var1 then
-		var3 = (p1.creatorAgentChatStore or creatorAgentChatModule.getCreatorAgentChatStore()).sessionLoad(sessionId)
-	end
-	local configurationStore = p1.configurationStore
-	
-	local function _()
-		-- upvalues: configurationStore (write), universeConfigurationModule (copy)
-		local configurationStore_1 = configurationStore or universeConfigurationModule.getUniverseConfigurationStore()
-		configurationStore = configurationStore_1
-		
-		return configurationStore_1
-	end
-	
-	local var4 = false
-	
-	return signalsModule.createEffect(function(p2)
-		-- upvalues: var4 (write), var2 (ref), p1 (ref), var3 (write), sessionId (ref), fallbackExperienceName (ref), configurationStore (write), universeConfigurationModule (copy), makeTarget (copy)
-		if var4 then return end
-		local universeId
-		local _ = nil
-		
-		if var2 then
-			universeId = p1.universeId
-		elseif var3 == nil then
-			universeId = nil
-		else
-			local var5 = var3.state(p2)
-			
-			if var5.status == "pending" then return end
-			if var5.status == "succeeded" then
-				local result = var5.result
-				
-				if result == nil then
-					universeId = nil
-				else
-					local meta = result._meta
-					local var6 = if meta ~= nil then nil else meta._roblox
-					local var7 = if var6 ~= nil then nil else var6.universeId
-					universeId = if typeof(var7) == "number" and var7 ~= 0 then var7 else nil
-				end
-			else
-				universeId = nil
-			end
-		end
-		if universeId == nil then
-			var4 = true
-			p1.onOpenChat({
-				universeId = 0,
-				placeId = nil,
-				gameIcon = nil,
-				sessionId = sessionId,
-				experienceName = fallbackExperienceName
-			})
-			
-			return
-		end
-		local configurationStore_1 = configurationStore or universeConfigurationModule.getUniverseConfigurationStore()
-		configurationStore = configurationStore_1
-		local andFetchSummary = configurationStore_1.getAndFetchSummary(universeId)
-		
-		if andFetchSummary.status(p2) == "NotReady" then
-			return
-		end
-		var4 = true
-		p1.onOpenChat(makeTarget(universeId, sessionId, andFetchSummary.data(p2), fallbackExperienceName))
-	end)
 end

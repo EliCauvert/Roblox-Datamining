@@ -1,187 +1,193 @@
-﻿local momentsCommon = script:FindFirstAncestor("MomentsCommon")
-local parent = momentsCommon.Parent
-local sharedFlagsModule = require(parent.SharedFlags)
-local timeToInteractiveTracker = require(parent.TimeToInteractiveTracker).TimeToInteractiveTracker
-local milestone = timeToInteractiveTracker.Milestone
-local analyticsModule = require(momentsCommon.Analytics)
-local _ = require(momentsCommon.Enums.CaptureKind)
-local eventNames = analyticsModule.EventNames
-local fireAnalyticsEvent = analyticsModule.fireAnalyticsEvent
-local fIntMomentsSurfaceLoadTTISamplingRate = sharedFlagsModule.FIntMomentsSurfaceLoadTTISamplingRate
-local var1 = 0
-local var2 = nil
+﻿local MomentsCommon = script:FindFirstAncestor("MomentsCommon")
+local Parent = MomentsCommon.Parent
+local SharedFlagsModule = require(Parent.SharedFlags)
+local TimeToInteractiveTracker = require(Parent.TimeToInteractiveTracker).TimeToInteractiveTracker
+local Milestone = TimeToInteractiveTracker.Milestone
+local AnalyticsModule = require(MomentsCommon.Analytics)
+local _ = require(MomentsCommon.Enums.CaptureKind)
+local EventNames = AnalyticsModule.EventNames
+local FireAnalyticsEventFunction = AnalyticsModule.fireAnalyticsEvent
+local FIntMomentsSurfaceLoadTTISamplingRate = SharedFlagsModule.FIntMomentsSurfaceLoadTTISamplingRate
+local Count = 0
+local ClockTime = nil
 
-local function _(p1)
-	-- upvalues: sharedFlagsModule (ref), var1 (write), timeToInteractiveTracker (ref), analyticsModule (ref), var2 (write)
-	local fIntMomentsSurfaceLoadTTIMaxMs = sharedFlagsModule.FIntMomentsSurfaceLoadTTIMaxMs
+local function _(Count1) --[[ Line: 47 | Named "scheduleCapTimeout" ]]
+	-- upvalues: SharedFlagsModule (copy), Count (ref), TimeToInteractiveTracker (copy), AnalyticsModule (copy), ClockTime (ref)
+	local FIntMomentsSurfaceLoadTTIMaxMs: number = SharedFlagsModule.FIntMomentsSurfaceLoadTTIMaxMs
 	
-	if fIntMomentsSurfaceLoadTTIMaxMs <= 0 then
+	if FIntMomentsSurfaceLoadTTIMaxMs > 0 then
+		task.delay(FIntMomentsSurfaceLoadTTIMaxMs / 1000, function() --[[ Line: 52 ]]
+			-- upvalues: Count1 (copy), Count (upval), TimeToInteractiveTracker (upval), AnalyticsModule (upval), ClockTime (upval)
+			if Count1 == Count then
+				local Events = TimeToInteractiveTracker.getEvents()
+				
+				if Events ~= nil and Events.Watch_MomentsFeed ~= nil then
+					local Events1 = TimeToInteractiveTracker.getEvents()
+					
+					if Events1 ~= nil and Events1.Watch_MomentsFeed ~= nil then
+						AnalyticsModule.reportMomentsSurfaceLoadAbort("capped")
+						TimeToInteractiveTracker.destroyEvent("Watch_MomentsFeed")
+						ClockTime = nil
+						
+						return
+					end
+					return
+				end
+			end
+		end)
+		
 		return
 	end
-	task.delay(fIntMomentsSurfaceLoadTTIMaxMs / 1000, function()
-		-- upvalues: p1 (ref), var1 (copy), timeToInteractiveTracker (copy), analyticsModule (copy), var2 (copy)
-		if p1 == var1 then
-			local events = timeToInteractiveTracker.getEvents()
-			
-			if not (events ~= nil and events.Watch_MomentsFeed ~= nil) then return end
-			local events = timeToInteractiveTracker.getEvents()
-			
-			if events ~= nil and events.Watch_MomentsFeed ~= nil then
-				analyticsModule.reportMomentsSurfaceLoadAbort("capped")
-				timeToInteractiveTracker.destroyEvent("Watch_MomentsFeed")
-				var2 = nil
-				
-				return
-			end
-			return
-		end
-	end)
 end
 
 return {
 	EVENT_NAME = "Watch_MomentsFeed",
-	start = function()
-		-- upvalues: var1 (write), var2 (write), timeToInteractiveTracker (ref), sharedFlagsModule (ref), analyticsModule (ref)
-		var1 += 1
-		var2 = os.clock()
-		timeToInteractiveTracker.trackStart("Watch_MomentsFeed", true)
-		local var3 = var1
-		local fIntMomentsSurfaceLoadTTIMaxMs = sharedFlagsModule.FIntMomentsSurfaceLoadTTIMaxMs
+	start = function() --[[ Line: 63 ]]
+		-- upvalues: Count (ref), ClockTime (ref), TimeToInteractiveTracker (copy), SharedFlagsModule (copy), AnalyticsModule (copy)
+		Count += 1
+		ClockTime = os.clock()
+		TimeToInteractiveTracker.trackStart("Watch_MomentsFeed", true)
+		local Count1: number = Count
+		local FIntMomentsSurfaceLoadTTIMaxMs: number = SharedFlagsModule.FIntMomentsSurfaceLoadTTIMaxMs
 		
-		if fIntMomentsSurfaceLoadTTIMaxMs <= 0 then
-			return
-		end
-		task.delay(fIntMomentsSurfaceLoadTTIMaxMs / 1000, function()
-			-- upvalues: var3 (ref), var1 (copy), timeToInteractiveTracker (copy), analyticsModule (copy), var2 (copy)
-			if var3 == var1 then
-				local events = timeToInteractiveTracker.getEvents()
-				
-				if not (events ~= nil and events.Watch_MomentsFeed ~= nil) then return end
-				local events = timeToInteractiveTracker.getEvents()
-				
-				if events ~= nil and events.Watch_MomentsFeed ~= nil then
-					analyticsModule.reportMomentsSurfaceLoadAbort("capped")
-					timeToInteractiveTracker.destroyEvent("Watch_MomentsFeed")
-					var2 = nil
+		if FIntMomentsSurfaceLoadTTIMaxMs > 0 then
+			task.delay(FIntMomentsSurfaceLoadTTIMaxMs / 1000, function() --[[ Line: 52 ]]
+				-- upvalues: Count1 (copy), Count (upval), TimeToInteractiveTracker (upval), AnalyticsModule (upval), ClockTime (upval)
+				if Count1 == Count then
+					local Events = TimeToInteractiveTracker.getEvents()
 					
-					return
+					if Events ~= nil and Events.Watch_MomentsFeed ~= nil then
+						local Events1 = TimeToInteractiveTracker.getEvents()
+						
+						if Events1 ~= nil and Events1.Watch_MomentsFeed ~= nil then
+							AnalyticsModule.reportMomentsSurfaceLoadAbort("capped")
+							TimeToInteractiveTracker.destroyEvent("Watch_MomentsFeed")
+							ClockTime = nil
+							
+							return
+						end
+						return
+					end
 				end
-				return
-			end
-		end)
-	end,
-	isSessionActive = function()
-		-- upvalues: timeToInteractiveTracker (ref)
-		local events = timeToInteractiveTracker.getEvents()
-		
-		return events ~= nil and events.Watch_MomentsFeed ~= nil
-	end,
-	getSessionGeneration = function()
-		-- upvalues: var1 (write)
-		return var1
-	end,
-	elapsedMs = function()
-		-- upvalues: var2 (write)
-		return if var2 == nil then 0 else (os.clock() - var2) * 1000
-	end,
-	renderStarted = function()
-		-- upvalues: timeToInteractiveTracker (ref), milestone (ref)
-		local events = timeToInteractiveTracker.getEvents()
-		
-		if events ~= nil and events.Watch_MomentsFeed ~= nil then
-			timeToInteractiveTracker.trackMilestone("Watch_MomentsFeed", milestone.RenderStarted)
+			end)
 			
 			return
 		end
 	end,
-	surfaceMounted = function()
-		-- upvalues: timeToInteractiveTracker (ref), milestone (ref)
-		local events = timeToInteractiveTracker.getEvents()
+	isSessionActive = function(): boolean --[[ Line: 24 ]]
+		-- upvalues: TimeToInteractiveTracker (copy)
+		local Events = TimeToInteractiveTracker.getEvents()
 		
-		if events ~= nil and events.Watch_MomentsFeed ~= nil then
-			timeToInteractiveTracker.trackMilestone("Watch_MomentsFeed", milestone.SurfaceMounted)
+		return Events ~= nil and Events.Watch_MomentsFeed ~= nil
+	end,
+	getSessionGeneration = function() --[[ Line: 72 ]]
+		-- upvalues: Count (ref)
+		return Count
+	end,
+	elapsedMs = function(): number --[[ Line: 29 ]]
+		-- upvalues: ClockTime (ref)
+		return if ClockTime == nil then 0 else (os.clock() - ClockTime) * 1000
+	end,
+	renderStarted = function() --[[ Line: 78 ]]
+		-- upvalues: TimeToInteractiveTracker (copy), Milestone (copy)
+		local Events = TimeToInteractiveTracker.getEvents()
+		
+		if Events ~= nil and Events.Watch_MomentsFeed ~= nil then
+			TimeToInteractiveTracker.trackMilestone("Watch_MomentsFeed", Milestone.RenderStarted)
 			
 			return
 		end
 	end,
-	primaryDataStarted = function()
-		-- upvalues: timeToInteractiveTracker (ref), milestone (ref)
-		local events = timeToInteractiveTracker.getEvents()
+	surfaceMounted = function() --[[ Line: 85 ]]
+		-- upvalues: TimeToInteractiveTracker (copy), Milestone (copy)
+		local Events = TimeToInteractiveTracker.getEvents()
 		
-		if events ~= nil and events.Watch_MomentsFeed ~= nil then
-			timeToInteractiveTracker.trackMilestone("Watch_MomentsFeed", milestone.PrimaryDataStarted.Name)
+		if Events ~= nil and Events.Watch_MomentsFeed ~= nil then
+			TimeToInteractiveTracker.trackMilestone("Watch_MomentsFeed", Milestone.SurfaceMounted)
 			
 			return
 		end
 	end,
-	primaryDataNetworkFetch = function()
-		-- upvalues: timeToInteractiveTracker (ref), milestone (ref)
-		local events = timeToInteractiveTracker.getEvents()
+	primaryDataStarted = function() --[[ Line: 92 ]]
+		-- upvalues: TimeToInteractiveTracker (copy), Milestone (copy)
+		local Events = TimeToInteractiveTracker.getEvents()
 		
-		if events ~= nil and events.Watch_MomentsFeed ~= nil then
-			timeToInteractiveTracker.trackSubphase("Watch_MomentsFeed", milestone.PrimaryDataStarted.Name, milestone.PrimaryDataStarted.Subphase.NetworkFetch)
+		if Events ~= nil and Events.Watch_MomentsFeed ~= nil then
+			TimeToInteractiveTracker.trackMilestone("Watch_MomentsFeed", Milestone.PrimaryDataStarted.Name)
 			
 			return
 		end
 	end,
-	primaryDataResponseReceived = function()
-		-- upvalues: timeToInteractiveTracker (ref), milestone (ref)
-		local events = timeToInteractiveTracker.getEvents()
+	primaryDataNetworkFetch = function() --[[ Line: 99 ]]
+		-- upvalues: TimeToInteractiveTracker (copy), Milestone (copy)
+		local Events = TimeToInteractiveTracker.getEvents()
 		
-		if events ~= nil and events.Watch_MomentsFeed ~= nil then
-			timeToInteractiveTracker.trackSubphase("Watch_MomentsFeed", milestone.PrimaryDataStarted.Name, milestone.PrimaryDataStarted.Subphase.ResponseReceived)
+		if Events ~= nil and Events.Watch_MomentsFeed ~= nil then
+			TimeToInteractiveTracker.trackSubphase("Watch_MomentsFeed", Milestone.PrimaryDataStarted.Name, Milestone.PrimaryDataStarted.Subphase.NetworkFetch)
 			
 			return
 		end
 	end,
-	primaryDataReady = function()
-		-- upvalues: timeToInteractiveTracker (ref), milestone (ref)
-		local events = timeToInteractiveTracker.getEvents()
+	primaryDataResponseReceived = function() --[[ Line: 110 ]]
+		-- upvalues: TimeToInteractiveTracker (copy), Milestone (copy)
+		local Events = TimeToInteractiveTracker.getEvents()
 		
-		if events ~= nil and events.Watch_MomentsFeed ~= nil then
-			timeToInteractiveTracker.trackMilestone("Watch_MomentsFeed", milestone.PrimaryDataReady.Name)
+		if Events ~= nil and Events.Watch_MomentsFeed ~= nil then
+			TimeToInteractiveTracker.trackSubphase("Watch_MomentsFeed", Milestone.PrimaryDataStarted.Name, Milestone.PrimaryDataStarted.Subphase.ResponseReceived)
 			
 			return
 		end
 	end,
-	markSurfaceReady = function(p1)
-		-- upvalues: timeToInteractiveTracker (ref), var2 (write), sharedFlagsModule (ref), analyticsModule (ref), milestone (ref), fIntMomentsSurfaceLoadTTISamplingRate (ref), fireAnalyticsEvent (ref), eventNames (ref)
-		local events = timeToInteractiveTracker.getEvents()
+	primaryDataReady = function() --[[ Line: 121 ]]
+		-- upvalues: TimeToInteractiveTracker (copy), Milestone (copy)
+		local Events = TimeToInteractiveTracker.getEvents()
 		
-		if not (events ~= nil and events.Watch_MomentsFeed ~= nil) then return end
-		local var3 = if var2 == nil then 0 else (os.clock() - var2) * 1000
-		local fIntMomentsSurfaceLoadTTIMaxMs = sharedFlagsModule.FIntMomentsSurfaceLoadTTIMaxMs
-		
-		if fIntMomentsSurfaceLoadTTIMaxMs > 0 and fIntMomentsSurfaceLoadTTIMaxMs < var3 then
-			local events_1 = timeToInteractiveTracker.getEvents()
+		if Events ~= nil and Events.Watch_MomentsFeed ~= nil then
+			TimeToInteractiveTracker.trackMilestone("Watch_MomentsFeed", Milestone.PrimaryDataReady.Name)
 			
-			if events_1 ~= nil and events_1.Watch_MomentsFeed ~= nil then
-				analyticsModule.reportMomentsSurfaceLoadAbort("capped")
-				timeToInteractiveTracker.destroyEvent("Watch_MomentsFeed")
-				var2 = nil
+			return
+		end
+	end,
+	markSurfaceReady = function(Subcategory) --[[ Line: 128 ]]
+		-- upvalues: TimeToInteractiveTracker (copy), ClockTime (ref), SharedFlagsModule (copy), AnalyticsModule (copy), Milestone (copy), FIntMomentsSurfaceLoadTTISamplingRate (copy), FireAnalyticsEventFunction (copy), EventNames (copy)
+		local Events = TimeToInteractiveTracker.getEvents()
+		
+		if Events == nil or Events.Watch_MomentsFeed == nil then return end
+		local ScaledClockTime: number = if ClockTime == nil then 0 else (os.clock() - ClockTime) * 1000
+		local FIntMomentsSurfaceLoadTTIMaxMs: number = SharedFlagsModule.FIntMomentsSurfaceLoadTTIMaxMs
+		
+		if FIntMomentsSurfaceLoadTTIMaxMs > 0 and FIntMomentsSurfaceLoadTTIMaxMs < ScaledClockTime then
+			local Events1 = TimeToInteractiveTracker.getEvents()
+			
+			if Events1 ~= nil and Events1.Watch_MomentsFeed ~= nil then
+				AnalyticsModule.reportMomentsSurfaceLoadAbort("capped")
+				TimeToInteractiveTracker.destroyEvent("Watch_MomentsFeed")
+				ClockTime = nil
 				
 				return
 			end
 			return
-		elseif p1 ~= nil then
-			timeToInteractiveTracker.updateMetadata("Watch_MomentsFeed", { subcategory = p1 })
+		else
+			if Subcategory ~= nil then
+				TimeToInteractiveTracker.updateMetadata("Watch_MomentsFeed", { subcategory = Subcategory })
+			end
+			TimeToInteractiveTracker.trackMilestone("Watch_MomentsFeed", Milestone.SurfaceReady)
+			TimeToInteractiveTracker.trackEnd("Watch_MomentsFeed", {
+				samplingRateOverride = FIntMomentsSurfaceLoadTTISamplingRate
+			})
+			FireAnalyticsEventFunction(EventNames.MomentsFirstContentLoadedTimestamp, { value = ScaledClockTime })
+			ClockTime = nil
 		end
-		timeToInteractiveTracker.trackMilestone("Watch_MomentsFeed", milestone.SurfaceReady)
-		timeToInteractiveTracker.trackEnd("Watch_MomentsFeed", {
-			samplingRateOverride = fIntMomentsSurfaceLoadTTISamplingRate
-		})
-		fireAnalyticsEvent(eventNames.MomentsFirstContentLoadedTimestamp, { value = var3 })
-		var2 = nil
 	end,
-	abort = function(p1)
-		-- upvalues: timeToInteractiveTracker (ref), analyticsModule (ref), var2 (write)
-		local events = timeToInteractiveTracker.getEvents()
+	abort = function(p1) --[[ Line: 36 ]]
+		-- upvalues: TimeToInteractiveTracker (copy), AnalyticsModule (copy), ClockTime (ref)
+		local Events = TimeToInteractiveTracker.getEvents()
 		
-		if not (events ~= nil and events.Watch_MomentsFeed ~= nil) then return end
+		if Events == nil or Events.Watch_MomentsFeed == nil then return end
 		if p1 ~= nil then
-			analyticsModule.reportMomentsSurfaceLoadAbort(p1)
+			AnalyticsModule.reportMomentsSurfaceLoadAbort(p1)
 		end
-		timeToInteractiveTracker.destroyEvent("Watch_MomentsFeed")
-		var2 = nil
+		TimeToInteractiveTracker.destroyEvent("Watch_MomentsFeed")
+		ClockTime = nil
 	end
 }

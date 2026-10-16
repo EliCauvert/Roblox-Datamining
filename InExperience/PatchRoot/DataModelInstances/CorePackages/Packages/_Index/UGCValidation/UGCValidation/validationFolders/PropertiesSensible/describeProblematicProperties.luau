@@ -1,16 +1,16 @@
-﻿return function(p1, p2)
-	local t = {}
+﻿return function(List, p1): string --[[ Line: 4 | Named "describeProblematicProperties" ]]
+	local List1 = {}
 	
-	for i, v in p1 do
-		local var1 = if p2 then p2[v] else nil
+	for _, value in List do
+		local v1 = if p1 then p1[value] else nil
 		
-		if var1 == 0 then
-			table.insert(t, `{v} (must be empty)`)
-		elseif var1 == nil then
-			table.insert(t, v)
+		if v1 == 0 then
+			table.insert(List1, `{value} (must be empty)`)
+		elseif v1 == nil then
+			table.insert(List1, value)
 		else
-			table.insert(t, `{v} (limit {var1} bytes)`)
+			table.insert(List1, `{value} (limit {v1} bytes)`)
 		end
 	end
-	return table.concat(t, ", ")
+	return table.concat(List1, ", ")
 end

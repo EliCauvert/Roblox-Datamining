@@ -1,16 +1,16 @@
-﻿local name = require(script:FindFirstAncestor("AppChat").Logger):new(script.Name)
-local seedConversationTopModalSduiPayloadModule = require(script.Parent.seedConversationTopModalSduiPayload)
+﻿local NewResult = require(script:FindFirstAncestor("AppChat").Logger):new(script.Name)
+local SeedConversationTopModalSduiPayloadModule = require(script.Parent.seedConversationTopModalSduiPayload)
 
-return function(p1, p2)
-	-- upvalues: seedConversationTopModalSduiPayloadModule (ref), name (ref)
-	return p1:andThen(function(p3)
-		-- upvalues: seedConversationTopModalSduiPayloadModule (copy), p2 (ref), name (copy)
-		local responseBody = p3 and p3.responseBody
-		local ok, status = pcall(seedConversationTopModalSduiPayloadModule, responseBody and responseBody.sdui, p2)
+return function(Promise, p1) --[[ Line: 7 | Named "seedConversationTopModalFromRequest" ]]
+	-- upvalues: SeedConversationTopModalSduiPayloadModule (copy), NewResult (copy)
+	return Promise:andThen(function(Result) --[[ Line: 8 ]]
+		-- upvalues: SeedConversationTopModalSduiPayloadModule (upval), p1 (copy), NewResult (upval)
+		local ResponseBody = Result and Result.responseBody
+		local Success, Result1 = pcall(SeedConversationTopModalSduiPayloadModule, ResponseBody and ResponseBody.sdui, p1)
 		
-		if not ok then
-			name:warning(`Error seeding conversationTopModal SDUI payload: {tostring(status)}`)
+		if not Success then
+			NewResult:warning(`Error seeding conversationTopModal SDUI payload: {tostring(Result1)}`)
 		end
-		return p3
+		return Result
 	end)
 end

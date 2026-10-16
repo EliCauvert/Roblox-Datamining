@@ -1,36 +1,36 @@
-﻿local guiService = game:GetService("GuiService")
-local chatUIPrimitives = script:FindFirstAncestor("ChatUIPrimitives")
-local parent = chatUIPrimitives.Parent
-local reactModule = require(parent.React)
-local useDefaultFocusBehavior = require(parent.ReactFocusNavigation).useDefaultFocusBehavior
-local restoreSelectionIfStrandedModule = require(chatUIPrimitives.Hooks.restoreSelectionIfStranded)
+﻿local GuiService = game:GetService("GuiService")
+local ChatUIPrimitives = script:FindFirstAncestor("ChatUIPrimitives")
+local Parent = ChatUIPrimitives.Parent
+local ReactModule = require(Parent.React)
+local UseDefaultFocusBehaviorFunction = require(Parent.ReactFocusNavigation).useDefaultFocusBehavior
+local RestoreSelectionIfStrandedModule = require(ChatUIPrimitives.Hooks.restoreSelectionIfStranded)
 
-return function(p1)
-	-- upvalues: parent (ref), reactModule (ref), restoreSelectionIfStrandedModule (ref), guiService (ref), useDefaultFocusBehavior (ref)
-	local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-	local useFocusRoot = focusNavigationUtilsModule.useFocusRoot
-	local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-	local var1 = reactModule.useRef(nil)
-	local var2 = reactModule.useRef(false)
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), p1 (ref), restoreSelectionIfStrandedModule (copy), guiService (copy), var1 (ref)
-		if var2.current and not p1.isOpen then
-			restoreSelectionIfStrandedModule(guiService, var1.current)
+return function(p1) --[[ Line: 29 | Named "ExpressionTrayFocusRoot" ]]
+	-- upvalues: Parent (copy), ReactModule (copy), RestoreSelectionIfStrandedModule (copy), GuiService (copy), UseDefaultFocusBehaviorFunction (copy)
+	local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+	local UseFocusRootFunction = FocusNavigationUtilsModule.useFocusRoot
+	local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(false)
+	ReactModule.useEffect(function() --[[ Line: 37 ]]
+		-- upvalues: UseRefResult1 (copy), p1 (copy), RestoreSelectionIfStrandedModule (upval), GuiService (upval), UseRefResult (copy)
+		if UseRefResult1.current and not p1.isOpen then
+			RestoreSelectionIfStrandedModule(GuiService, UseRefResult.current)
 		end
-		var2.current = p1.isOpen
+		UseRefResult1.current = p1.isOpen
 		
 		return nil
 	end, { p1.isOpen })
-	local var3, var4 = useDefaultFocusBehavior(useFocusRoot({
+	local UseDefaultFocusBehaviorResult, UseDefaultFocusBehaviorResult2 = UseDefaultFocusBehaviorFunction((UseFocusRootFunction({
 		isAutoFocusRoot = true,
 		shouldRestoreFocus = false,
-		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.ContextualMenu,
+		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.ContextualMenu,
 		isFocusable = p1.isOpen
-	}))
+	})))
 	
 	return p1.render({
-		entryButtonRef = var1,
-		defaultFocusRef = var3,
-		containerRef = var4
+		entryButtonRef = UseRefResult,
+		defaultFocusRef = UseDefaultFocusBehaviorResult,
+		containerRef = UseDefaultFocusBehaviorResult2
 	})
 end

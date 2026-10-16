@@ -1,55 +1,55 @@
-﻿local statsUtilsModule = require(game:GetService("CoreGui").RobloxGui.Modules.Stats.StatsUtils)
+﻿local StatsUtilsModule = require(game:GetService("CoreGui").RobloxGui.Modules.Stats.StatsUtils)
 local _ = require(game:GetService("CorePackages").Workspace.Packages.RobloxTranslator)
-local t = {}
-t.__index = t
+local DecoratedValueLabelModule = {}
+DecoratedValueLabelModule.__index = DecoratedValueLabelModule
 
-function t.new(p1, p2)
-	-- upvalues: t (ref), statsUtilsModule (ref)
-	local label = {}
-	setmetatable(label, t)
-	label._frame = Instance.new("Frame")
-	label._frame.Name = "PS_DecoratedValueLabel"
-	label._frame.BackgroundTransparency = 1
-	label._valueName = p2
-	label._statType = p1
-	label._decorationFrame = Instance.new("Frame")
-	label._decorationFrame.Name = "PS_Decoration"
-	label._decorationFrame.Parent = label._frame
-	label._decorationFrame.Position = UDim2.new(0, 0, 0.5, -statsUtilsModule.DecorationSize / 2)
-	label._decorationFrame.Size = UDim2.new(0, statsUtilsModule.DecorationSize, 0, statsUtilsModule.DecorationSize)
-	label._decorationFrame.BackgroundTransparency = 1
-	label._label = Instance.new("TextLabel")
-	label._label.Name = "Label"
-	label._label.Parent = label._frame
-	label._label.Position = UDim2.new(0, statsUtilsModule.DecorationSize + statsUtilsModule.DecorationMargin, 0, 0)
-	label._label.Size = UDim2.new(1, -(statsUtilsModule.DecorationSize + statsUtilsModule.DecorationMargin), 1, 0)
-	label._label.FontSize = statsUtilsModule.PanelValueFontSize
-	label._label.TextXAlignment = Enum.TextXAlignment.Left
-	label._label.TextYAlignment = Enum.TextYAlignment.Center
-	statsUtilsModule.StyleTextWidget(label._label)
+function DecoratedValueLabelModule.new(_statType, _valueName) --[[ Line: 19 ]]
+	-- upvalues: DecoratedValueLabelModule (copy), StatsUtilsModule (copy)
+	local t = {}
+	setmetatable(t, DecoratedValueLabelModule)
+	t._frame = Instance.new("Frame")
+	t._frame.Name = "PS_DecoratedValueLabel"
+	t._frame.BackgroundTransparency = 1
+	t._valueName = _valueName
+	t._statType = _statType
+	t._decorationFrame = Instance.new("Frame")
+	t._decorationFrame.Name = "PS_Decoration"
+	t._decorationFrame.Parent = t._frame
+	t._decorationFrame.Position = UDim2.new(0, 0, 0.5, -StatsUtilsModule.DecorationSize / 2)
+	t._decorationFrame.Size = UDim2.new(0, StatsUtilsModule.DecorationSize, 0, StatsUtilsModule.DecorationSize)
+	t._decorationFrame.BackgroundTransparency = 1
+	t._label = Instance.new("TextLabel")
+	t._label.Name = "Label"
+	t._label.Parent = t._frame
+	t._label.Position = UDim2.new(0, StatsUtilsModule.DecorationSize + StatsUtilsModule.DecorationMargin, 0, 0)
+	t._label.Size = UDim2.new(1, -(StatsUtilsModule.DecorationSize + StatsUtilsModule.DecorationMargin), 1, 0)
+	t._label.FontSize = StatsUtilsModule.PanelValueFontSize
+	t._label.TextXAlignment = Enum.TextXAlignment.Left
+	t._label.TextYAlignment = Enum.TextYAlignment.Center
+	StatsUtilsModule.StyleTextWidget(t._label)
 	
-	return label
+	return t
 end
 
-function t:SetZIndex(p1)
-	self._frame.ZIndex = p1
-	self._decorationFrame.ZIndex = p1
-	self._label.ZIndex = p1
+function DecoratedValueLabelModule:SetZIndex(ZIndex) --[[ Line: 53 ]]
+	self._frame.ZIndex = ZIndex
+	self._decorationFrame.ZIndex = ZIndex
+	self._label.ZIndex = ZIndex
 end
 
-function t:PlaceInParent(p1, p2, p3)
-	self._frame.Parent = p1
-	self._frame.Size = p2
-	self._frame.Position = p3
+function DecoratedValueLabelModule:PlaceInParent(Parent, Size, Position) --[[ Line: 60 ]]
+	self._frame.Parent = Parent
+	self._frame.Size = Size
+	self._frame.Position = Position
 end
 
-function t:GetDecorationFrame()
+function DecoratedValueLabelModule:GetDecorationFrame() --[[ Line: 67 ]]
 	return self._decorationFrame
 end
 
-function t:SetValue(p1)
-	-- upvalues: statsUtilsModule (ref)
-	self._label.Text = string.format("%s: %s", self._valueName, statsUtilsModule.FormatTypedValue(p1, self._statType))
+function DecoratedValueLabelModule:SetValue(p1) --[[ Line: 71 ]]
+	-- upvalues: StatsUtilsModule (copy)
+	self._label.Text = string.format("%s: %s", self._valueName, (StatsUtilsModule.FormatTypedValue(p1, self._statType)))
 end
 
-return t
+return DecoratedValueLabelModule

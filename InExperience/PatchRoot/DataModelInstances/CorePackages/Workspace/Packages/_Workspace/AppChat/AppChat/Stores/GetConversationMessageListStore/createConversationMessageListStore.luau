@@ -1,19 +1,19 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local cryoModule = require(parent.Cryo)
-local signalsModule = require(parent.Signals)
-local signalsExperimentalModule = require(parent.SignalsExperimental)
-local createProxy = signalsExperimentalModule.createProxy
-local arraySetModule = require(appChat.DataStructures.ArraySet)
-local fFlagAppChatBatchMessageListPagePublicationModule = require(appChat.Flags.FFlagAppChatBatchMessageListPagePublication)
-local fFlagAppChatIncrementalPaginationProjectionModule = require(appChat.Flags.FFlagAppChatIncrementalPaginationProjection)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local CryoModule = require(Parent.Cryo)
+local SignalsModule = require(Parent.Signals)
+local SignalsExperimentalModule = require(Parent.SignalsExperimental)
+local CreateProxyFunction = SignalsExperimentalModule.createProxy
+local ArraySetModule = require(AppChat.DataStructures.ArraySet)
+local FFlagAppChatBatchMessageListPagePublicationModule = require(AppChat.Flags.FFlagAppChatBatchMessageListPagePublication)
+local FFlagAppChatIncrementalPaginationProjectionModule = require(AppChat.Flags.FFlagAppChatIncrementalPaginationProjection)
 
-local function _()
-	-- upvalues: arraySetModule (ref)
-	return { messageIds = arraySetModule.new({}) }
+local function _() --[[ Line: 109 | Named "newConversationOrdering" ]]
+	-- upvalues: ArraySetModule (copy)
+	return { messageIds = ArraySetModule.new({}) }
 end
 
-local _ = function()
+local _ = function() --[[ Line: 115 | Named "newMessagePaginationMetadata" ]]
 	return {
 		nextPageCursor = nil,
 		isLoading = false,
@@ -21,278 +21,267 @@ local _ = function()
 	}
 end
 
-return function()
-	-- upvalues: createProxy (ref), signalsModule (ref), arraySetModule (ref), fFlagAppChatIncrementalPaginationProjectionModule (ref), cryoModule (ref), fFlagAppChatBatchMessageListPagePublicationModule (ref), signalsExperimentalModule (ref)
-	local var1 = createProxy({})
-	local var2 = createProxy({})
+return function() --[[ Line: 123 | Named "createConversationMessageListStore" ]]
+	-- upvalues: CreateProxyFunction (copy), SignalsModule (copy), ArraySetModule (copy), FFlagAppChatIncrementalPaginationProjectionModule (copy), CryoModule (copy), FFlagAppChatBatchMessageListPagePublicationModule (copy), SignalsExperimentalModule (copy)
+	local Proxy = CreateProxyFunction({})
+	local Proxy1 = CreateProxyFunction({})
 	local t = {}
-	local t_1 = {}
-	local var3 = 0
+	local t1 = {}
+	local Revision = 0
 	
-	local function getMutation(p1)
-		-- upvalues: t (ref), signalsModule (copy), t_1 (ref)
-		local var4 = t[p1]
+	local function publishMutation(Key, Operation, Tbl, Tbl1, BoundaryMessageId) --[[ Line: 146 ]]
+		-- upvalues: Revision (ref), t (copy), SignalsModule (upval), t1 (copy)
+		Revision += 1
 		
-		if var4 == nil then
-			local var5, var6 = signalsModule.createSignal(nil)
-			t[p1] = var5
-			t_1[p1] = var6
-			
-			return var5
+		if t[Key] == nil then
+			t[Key], t1[Key] = SignalsModule.createSignal(nil)
 		end
-		return var4
-	end
-	
-	local function publishMutation(p1, p2, p3, p4, p5)
-		-- upvalues: var3 (write), t (ref), signalsModule (copy), t_1 (ref)
-		var3 += 1
-		
-		if t[p1] == nil then
-			local var4, var5 = signalsModule.createSignal(nil)
-			t[p1] = var4
-			t_1[p1] = var5
-		end
-		t_1[p1]({
-			operation = p2,
-			messageIds = table.clone(p3),
-			insertedIds = table.clone(p4),
-			boundaryMessageId = p5,
-			revision = var3
+		t1[Key]({
+			operation = Operation,
+			messageIds = table.clone(Tbl),
+			insertedIds = table.clone(Tbl1),
+			boundaryMessageId = BoundaryMessageId,
+			revision = Revision
 		})
 	end
 	
-	local function _(p1)
-		-- upvalues: var1 (ref), arraySetModule (copy)
-		local var4 = var1[p1]
+	local function _(p1) --[[ Line: 164 | Named "getOrDefaultOrdering" ]]
+		-- upvalues: Proxy (copy), ArraySetModule (upval)
+		local ProxyEntry = Proxy[p1]
 		
-		return if var4 == nil then { messageIds = arraySetModule.new({}) } else var4
+		return if ProxyEntry == nil then { messageIds = ArraySetModule.new({}) } else ProxyEntry
 	end
 	
-	local _ = function(p1)
-		-- upvalues: var2 (ref)
-		local var4 = var2[p1]
+	local _ = function(p1) --[[ Line: 172 | Named "getOrDefaultMetadata" ]]
+		-- upvalues: Proxy1 (copy)
+		local ProxyEntry = Proxy1[p1]
 		
-		return if var4 == nil then {
+		return if ProxyEntry == nil then {
 			nextPageCursor = nil,
 			isLoading = false,
 			fetchedOldest = false
-		} else var4
+		} else ProxyEntry
 	end
 	
-	local function prependMessages(p1, p2)
-		-- upvalues: var1 (ref), arraySetModule (copy), fFlagAppChatIncrementalPaginationProjectionModule (copy), publishMutation (ref)
-		local var4 = var1[p1]
-		local var5 = if var4 ~= nil then { messageIds = arraySetModule.new({}) } else var4
-		local var6 = nil
-		local t = {}
+	local function appendMessagesInternal(Key, List) --[[ Line: 213 ]]
+		-- upvalues: Proxy (copy), ArraySetModule (upval)
+		local ProxyEntry = Proxy[Key]
+		local Config = if ProxyEntry == nil then { messageIds = ArraySetModule.new({}) } else ProxyEntry
+		local v1 = Config.messageIds:at(Config.messageIds:size())
+		local List1 = {}
 		
-		if fFlagAppChatIncrementalPaginationProjectionModule then
-			var6 = var5.messageIds:at(1)
-			local t_1 = {}
-			
-			for i, v in p2 do
-				if not var5.messageIds:has(v) and not t_1[v] then
-					t_1[v] = true
-					table.insert(t, v)
-				end
+		for _, value in List do
+			if Config.messageIds:add(value) then
+				table.insert(List1, value)
 			end
 		end
-		if var5.messageIds:prependAll(p2) then
-			var1[p1] = table.clone(var5)
-			
-			if fFlagAppChatIncrementalPaginationProjectionModule then
-				publishMutation(p1, "Prepend", p2, t, var6)
-			end
-			return
-		elseif fFlagAppChatIncrementalPaginationProjectionModule and #p2 > 0 then
-			publishMutation(p1, "Prepend", p2, {}, nil)
+		if #List1 > 0 then
+			Proxy[Key] = table.clone(Config)
 		end
+		return List1, v1
 	end
 	
-	local function appendMessagesInternal(p3, p4)
-		-- upvalues: var1 (ref), arraySetModule (copy)
-		local var7 = var1[p3]
-		local var8 = if var7 ~= nil then { messageIds = arraySetModule.new({}) } else var7
-		local var9 = var8.messageIds:at(var8.messageIds:size())
-		local t = {}
-		
-		for i, v in p4 do
-			if var8.messageIds:add(v) then
-				table.insert(t, v)
-			end
-		end
-		if #t > 0 then
-			var1[p3] = table.clone(var8)
-		end
-		return t, var9
-	end
-	
-	local function appendMessages(p5, p6)
-		-- upvalues: appendMessagesInternal (ref), fFlagAppChatIncrementalPaginationProjectionModule (copy), publishMutation (ref)
-		local var10, var11 = appendMessagesInternal(p5, p6)
-		
-		if fFlagAppChatIncrementalPaginationProjectionModule and #p6 > 0 then
-			publishMutation(p5, "Append", p6, var10, var11)
-		end
-	end
-	
-	local function removeMessage(p5, p6)
-		-- upvalues: var1 (ref), fFlagAppChatIncrementalPaginationProjectionModule (copy), publishMutation (ref)
-		local var10 = var1[p5]
-		
-		if var10 == nil then return end
-		if not var10.messageIds:remove(p6) then return end
-		var1[p5] = table.clone(var10)
-		
-		if fFlagAppChatIncrementalPaginationProjectionModule then
-			publishMutation(p5, "Remove", { p6 }, {}, nil)
-		end
-	end
-	
-	local function publishMessageUpdates(p5, p6)
-		-- upvalues: publishMutation (ref)
-		if #p6 > 0 then
-			publishMutation(p5, "Update", p6, {}, nil)
-		end
-	end
-	
-	local function setLoading(value, p5)
-		-- upvalues: var2 (ref), cryoModule (copy)
-		local var10 = var2[value]
-		var2[value] = cryoModule.Dictionary.union(if var10 ~= nil then {
+	local function updatePagination(Key, p1, FetchedOldest) --[[ Line: 268 ]]
+		-- upvalues: Proxy1 (copy), CryoModule (upval)
+		local ProxyEntry = Proxy1[Key]
+		local Config = if ProxyEntry == nil then {
 			nextPageCursor = nil,
 			isLoading = false,
 			fetchedOldest = false
-		} else var10, { isLoading = p5 })
-	end
-	
-	local function updatePagination(p5, p6, p7)
-		-- upvalues: var2 (ref), cryoModule (copy)
-		local var10 = var2[p5]
-		local var11 = if var10 ~= nil then {
-			nextPageCursor = nil,
+		} else ProxyEntry
+		Proxy1[Key] = CryoModule.Dictionary.union(Config, {
 			isLoading = false,
-			fetchedOldest = false
-		} else var10
-		var2[p5] = cryoModule.Dictionary.union(var11, {
-			isLoading = false,
-			nextPageCursor = if p6 and p6 ~= "" then p6 else var11.nextPageCursor,
-			fetchedOldest = p7
+			nextPageCursor = if p1 and p1 ~= "" then p1 else Config.nextPageCursor,
+			fetchedOldest = FetchedOldest
 		})
 	end
 	
-	local _ = function(p5, p6, p7)
-		-- upvalues: appendMessagesInternal (ref), updatePagination (ref), fFlagAppChatIncrementalPaginationProjectionModule (copy), publishMutation (ref)
-		local var10, var11 = appendMessagesInternal(p5, p6)
-		updatePagination(p5, p7, if p7 ~= nil then p7 == "" else true)
+	local _ = function(p1, p2, p3) --[[ Line: 277 | Named "receivePageInternal" ]]
+		-- upvalues: appendMessagesInternal (copy), updatePagination (copy), FFlagAppChatIncrementalPaginationProjectionModule (upval), publishMutation (copy)
+		local AppendMessagesInternalResult, AppendMessagesInternalResult2 = appendMessagesInternal(p1, p2)
+		updatePagination(p1, p3, p3 == nil or p3 == "")
 		
-		if fFlagAppChatIncrementalPaginationProjectionModule then
-			publishMutation(p5, "AppendAndAdvanceCursor", p6, var10, var11)
+		if FFlagAppChatIncrementalPaginationProjectionModule then
+			publishMutation(p1, "AppendAndAdvanceCursor", p2, AppendMessagesInternalResult, AppendMessagesInternalResult2)
 		end
 	end
 	
 	return {
-		conversations = var1,
-		metadata = var2,
-		getMutation = getMutation,
-		prependMessages = prependMessages,
-		appendMessages = appendMessages,
-		removeMessage = removeMessage,
-		publishMessageUpdates = publishMessageUpdates,
-		setLoading = setLoading,
+		conversations = Proxy,
+		metadata = Proxy1,
+		getMutation = function(Key) --[[ Line: 135 ]]
+			-- upvalues: t (copy), SignalsModule (upval), t1 (copy)
+			local Entry = t[Key]
+			
+			if Entry == nil then
+				local Signal, Signal2 = SignalsModule.createSignal(nil)
+				t[Key] = Signal
+				t1[Key] = Signal2
+				
+				return Signal
+			else
+				return Entry
+			end
+		end,
+		prependMessages = function(Key, List) --[[ Line: 182 ]]
+			-- upvalues: Proxy (copy), ArraySetModule (upval), FFlagAppChatIncrementalPaginationProjectionModule (upval), publishMutation (copy)
+			local ProxyEntry = Proxy[Key]
+			local Config = if ProxyEntry == nil then { messageIds = ArraySetModule.new({}) } else ProxyEntry
+			local BoundaryMessageId = nil
+			local List1 = {}
+			
+			if FFlagAppChatIncrementalPaginationProjectionModule then
+				BoundaryMessageId = Config.messageIds:at(1)
+				local t = {}
+				
+				for _, value in List do
+					if not Config.messageIds:has(value) and not t[value] then
+						t[value] = true
+						table.insert(List1, value)
+					end
+				end
+			end
+			if Config.messageIds:prependAll(List) then
+				Proxy[Key] = table.clone(Config)
+				
+				if FFlagAppChatIncrementalPaginationProjectionModule then
+					publishMutation(Key, "Prepend", List, List1, BoundaryMessageId)
+				end
+				return
+			elseif FFlagAppChatIncrementalPaginationProjectionModule and #List > 0 then
+				publishMutation(Key, "Prepend", List, {}, nil)
+			end
+		end,
+		appendMessages = function(p1, p2) --[[ Line: 231 ]]
+			-- upvalues: appendMessagesInternal (copy), FFlagAppChatIncrementalPaginationProjectionModule (upval), publishMutation (copy)
+			local AppendMessagesInternalResult, AppendMessagesInternalResult2 = appendMessagesInternal(p1, p2)
+			
+			if FFlagAppChatIncrementalPaginationProjectionModule and #p2 > 0 then
+				publishMutation(p1, "Append", p2, AppendMessagesInternalResult, AppendMessagesInternalResult2)
+			end
+		end,
+		removeMessage = function(Key, p1) --[[ Line: 239 ]]
+			-- upvalues: Proxy (copy), FFlagAppChatIncrementalPaginationProjectionModule (upval), publishMutation (copy)
+			local ProxyEntry = Proxy[Key]
+			
+			if ProxyEntry == nil then return end
+			if not ProxyEntry.messageIds:remove(p1) then return end
+			Proxy[Key] = table.clone(ProxyEntry)
+			
+			if FFlagAppChatIncrementalPaginationProjectionModule then
+				publishMutation(Key, "Remove", { p1 }, {}, nil)
+			end
+		end,
+		publishMessageUpdates = function(p1, p2) --[[ Line: 253 ]]
+			-- upvalues: publishMutation (copy)
+			if #p2 > 0 then
+				publishMutation(p1, "Update", p2, {}, nil)
+			end
+		end,
+		setLoading = function(Key, IsLoading) --[[ Line: 260 ]]
+			-- upvalues: Proxy1 (copy), CryoModule (upval)
+			local ProxyEntry = Proxy1[Key]
+			Proxy1[Key] = CryoModule.Dictionary.union(if ProxyEntry == nil then {
+				nextPageCursor = nil,
+				isLoading = false,
+				fetchedOldest = false
+			} else ProxyEntry, { isLoading = IsLoading })
+		end,
 		updatePagination = updatePagination,
-		receivePage = function(p5, p6, p7)
-			-- upvalues: fFlagAppChatBatchMessageListPagePublicationModule (copy), signalsExperimentalModule (copy), appendMessagesInternal (ref), updatePagination (ref), fFlagAppChatIncrementalPaginationProjectionModule (copy), publishMutation (ref)
-			if fFlagAppChatBatchMessageListPagePublicationModule then
-				signalsExperimentalModule.batch(function()
-					-- upvalues: p5 (ref), p6 (ref), p7 (ref), appendMessagesInternal (copy), updatePagination (copy), fFlagAppChatIncrementalPaginationProjectionModule (copy), publishMutation (copy)
-					local var10, var11 = appendMessagesInternal(p5, p6)
-					updatePagination(p5, p7, if p7 ~= nil then p7 == "" else true)
+		receivePage = function(p1, p2, p3) --[[ Line: 286 ]]
+			-- upvalues: FFlagAppChatBatchMessageListPagePublicationModule (upval), SignalsExperimentalModule (upval), appendMessagesInternal (copy), updatePagination (copy), FFlagAppChatIncrementalPaginationProjectionModule (upval), publishMutation (copy)
+			if FFlagAppChatBatchMessageListPagePublicationModule then
+				SignalsExperimentalModule.batch(function() --[[ Line: 288 ]]
+					-- upvalues: p1 (copy), p2 (copy), p3 (copy), appendMessagesInternal (upval), updatePagination (upval), FFlagAppChatIncrementalPaginationProjectionModule (upval), publishMutation (upval)
+					local AppendMessagesInternalResult, AppendMessagesInternalResult2 = appendMessagesInternal(p1, p2)
+					updatePagination(p1, p3, p3 == nil or p3 == "")
 					
-					if fFlagAppChatIncrementalPaginationProjectionModule then
-						publishMutation(p5, "AppendAndAdvanceCursor", p6, var10, var11)
+					if FFlagAppChatIncrementalPaginationProjectionModule then
+						publishMutation(p1, "AppendAndAdvanceCursor", p2, AppendMessagesInternalResult, AppendMessagesInternalResult2)
 					end
 				end)
 				
 				return
 			end
-			local var10, var11 = appendMessagesInternal(p5, p6)
-			updatePagination(p5, p7, if p7 ~= nil then p7 == "" else true)
+			local AppendMessagesInternalResult, AppendMessagesInternalResult2 = appendMessagesInternal(p1, p2)
+			updatePagination(p1, p3, p3 == nil or p3 == "")
 			
-			if fFlagAppChatIncrementalPaginationProjectionModule then
-				publishMutation(p5, "AppendAndAdvanceCursor", p6, var10, var11)
+			if FFlagAppChatIncrementalPaginationProjectionModule then
+				publishMutation(p1, "AppendAndAdvanceCursor", p2, AppendMessagesInternalResult, AppendMessagesInternalResult2)
 			end
 		end,
-		clearConversation = function(p5)
-			-- upvalues: var1 (ref), var2 (ref), fFlagAppChatIncrementalPaginationProjectionModule (copy), publishMutation (ref)
-			var1[p5] = nil
-			var2[p5] = nil
+		clearConversation = function(Key) --[[ Line: 296 ]]
+			-- upvalues: Proxy (copy), Proxy1 (copy), FFlagAppChatIncrementalPaginationProjectionModule (upval), publishMutation (copy)
+			Proxy[Key] = nil
+			Proxy1[Key] = nil
 			
-			if fFlagAppChatIncrementalPaginationProjectionModule then
-				publishMutation(p5, "Reset", {}, {}, nil)
+			if FFlagAppChatIncrementalPaginationProjectionModule then
+				publishMutation(Key, "Reset", {}, {}, nil)
 			end
 		end,
-		clear = function()
-			-- upvalues: var1 (ref), var2 (ref), fFlagAppChatIncrementalPaginationProjectionModule (copy), t (ref), publishMutation (ref)
-			local t_1 = {}
-			local t_2 = {}
+		clear = function() --[[ Line: 304 ]]
+			-- upvalues: Proxy (copy), Proxy1 (copy), FFlagAppChatIncrementalPaginationProjectionModule (upval), t (copy), publishMutation (copy)
+			local List = {}
+			local t2 = {}
 			
-			for i in var1 do
-				table.insert(t_1, i)
-				t_2[i] = true
-				var1[i] = nil
+			for i in Proxy do
+				table.insert(List, i)
+				t2[i] = true
+				Proxy[i] = nil
 			end
-			for i_1 in var2 do
-				var2[i_1] = nil
+			for i1 in Proxy1 do
+				Proxy1[i1] = nil
 			end
-			if fFlagAppChatIncrementalPaginationProjectionModule then
-				for i_2 in t do
-					if not t_2[i_2] then
-						table.insert(t_1, i_2)
+			if FFlagAppChatIncrementalPaginationProjectionModule then
+				for i2 in t do
+					if not t2[i2] then
+						table.insert(List, i2)
 					end
 				end
-				for i_3, v in t_1 do
-					publishMutation(v, "Reset", {}, {}, nil)
+				for _, value in List do
+					publishMutation(value, "Reset", {}, {}, nil)
 				end
 			end
 		end,
-		getIndex = function(p5, p6, p7)
-			-- upvalues: var1 (ref)
-			local var10 = var1(p7)[p5]
+		getIndex = function(p1, p2, p3) --[[ Line: 327 ]]
+			-- upvalues: Proxy (copy)
+			local ProxyResultEntry = Proxy(p3)[p1]
 			
-			return if var10 == nil then nil else var10.messageIds:indexOf(p6)
+			return if ProxyResultEntry == nil then nil else ProxyResultEntry.messageIds:indexOf(p2)
 		end,
-		getOrderedIds = function(p5, p6)
-			-- upvalues: var1 (ref)
-			local var10 = var1(p6)[p5]
+		getOrderedIds = function(p1, p2) --[[ Line: 335 ]]
+			-- upvalues: Proxy (copy)
+			local ProxyResultEntry = Proxy(p2)[p1]
 			
-			return if var10 == nil then {} else var10.messageIds:values()
+			return if ProxyResultEntry == nil then {} else ProxyResultEntry.messageIds:values()
 		end,
-		getPrevId = function(p5, p6, p7)
-			-- upvalues: var1 (ref)
-			local var10 = var1(p7)[p5]
+		getPrevId = function(p1, p2, p3) --[[ Line: 343 ]]
+			-- upvalues: Proxy (copy)
+			local ProxyResultEntry = Proxy(p3)[p1]
 			
-			if var10 == nil then
+			if ProxyResultEntry == nil then
 				return nil
+			else
+				local IndexOfResult: number = ProxyResultEntry.messageIds:indexOf(p2)
+				
+				return if IndexOfResult == nil or IndexOfResult <= 1 then nil else ProxyResultEntry.messageIds:at(IndexOfResult - 1)
 			end
-			local var11 = var10.messageIds:indexOf(p6)
-			
-			return if var11 == nil or var11 <= 1 then nil else var10.messageIds:at(var11 - 1)
 		end,
-		getNextId = function(p5, p6, p7)
-			-- upvalues: var1 (ref)
-			local var10 = var1(p7)[p5]
+		getNextId = function(p1, p2, p3) --[[ Line: 355 ]]
+			-- upvalues: Proxy (copy)
+			local ProxyResultEntry = Proxy(p3)[p1]
 			
-			if var10 == nil then
+			if ProxyResultEntry == nil then
 				return nil
+			else
+				local IndexOfResult: number = ProxyResultEntry.messageIds:indexOf(p2)
+				
+				return if IndexOfResult == nil or ProxyResultEntry.messageIds:size() <= IndexOfResult then nil else ProxyResultEntry.messageIds:at(IndexOfResult + 1)
 			end
-			local var11 = var10.messageIds:indexOf(p6)
-			
-			return if var11 == nil or var10.messageIds:size() <= var11 then nil else var10.messageIds:at(var11 + 1)
 		end,
-		getMetadata = function(p5, p6)
-			-- upvalues: var2 (ref)
-			return var2(p6)[p5]
+		getMetadata = function(p1, p2) --[[ Line: 367 ]]
+			-- upvalues: Proxy1 (copy)
+			return Proxy1(p2)[p1]
 		end
 	}
 end

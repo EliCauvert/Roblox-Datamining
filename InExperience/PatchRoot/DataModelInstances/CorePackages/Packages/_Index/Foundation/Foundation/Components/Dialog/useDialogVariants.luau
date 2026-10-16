@@ -1,19 +1,19 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local _ = require(foundation.Components.Types)
-local dialogSizeModule = require(foundation.Enums.DialogSize)
-local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant)
-local _ = require(foundation.Providers.Style.Tokens)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
-local useDialogModule = require(script.Parent.useDialog)
-local t = {
-	[dialogSizeModule.Small] = 320,
-	[dialogSizeModule.Medium] = 480,
-	[dialogSizeModule.Large] = 640
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local _ = require(Foundation.Components.Types)
+local DialogSizeModule = require(Foundation.Enums.DialogSize)
+local ComposeStyleVariantModule = require(Foundation.Utility.composeStyleVariant)
+local _ = require(Foundation.Providers.Style.Tokens)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
+local UseDialogModule = require(script.Parent.useDialog)
+local config = {
+	[DialogSizeModule.Small] = 320,
+	[DialogSizeModule.Medium] = 480,
+	[DialogSizeModule.Large] = 640
 }
 
-local function variantsFactory(p1)
-	-- upvalues: dialogSizeModule (ref), t (ref)
+local function variantsFactory(p1) --[[ Line: 43 ]]
+	-- upvalues: DialogSizeModule (copy), config (copy)
 	return {
 		common = {
 			backdrop = { backgroundStyle = p1.Color.Common.Backdrop },
@@ -40,11 +40,11 @@ local function variantsFactory(p1)
 			}
 		},
 		size = {
-			[dialogSizeModule.Small] = {
+			[DialogSizeModule.Small] = {
 				shadow = { tag = "padding-large" },
 				inner = {
 					tag = "radius-large",
-					maxWidth = t[dialogSizeModule.Small]
+					maxWidth = config[DialogSizeModule.Small]
 				},
 				body = { tag = "gap-large padding-x-large" },
 				closeAffordance = { offset = p1.Size.Size_300 },
@@ -53,11 +53,11 @@ local function variantsFactory(p1)
 				contentText = { tag = "text-body-medium" },
 				actionsLabel = { tag = "padding-top-large" }
 			},
-			[dialogSizeModule.Medium] = {
+			[DialogSizeModule.Medium] = {
 				shadow = { tag = "padding-xlarge" },
 				inner = {
 					tag = "radius-large",
-					maxWidth = t[dialogSizeModule.Medium]
+					maxWidth = config[DialogSizeModule.Medium]
 				},
 				body = { tag = "gap-xlarge padding-x-xlarge" },
 				closeAffordance = { offset = p1.Size.Size_400 },
@@ -66,11 +66,11 @@ local function variantsFactory(p1)
 				contentText = { tag = "text-body-medium" },
 				actionsLabel = { tag = "padding-top-xlarge" }
 			},
-			[dialogSizeModule.Large] = {
+			[DialogSizeModule.Large] = {
 				shadow = { tag = "padding-xlarge" },
 				inner = {
 					tag = "radius-large",
-					maxWidth = t[dialogSizeModule.Large]
+					maxWidth = config[DialogSizeModule.Large]
 				},
 				body = { tag = "gap-xlarge padding-x-xlarge" },
 				closeAffordance = { offset = p1.Size.Size_400 },
@@ -83,11 +83,14 @@ local function variantsFactory(p1)
 	}
 end
 
-function useDialogVariants()
-	-- upvalues: useTokensModule (ref), variantsContextModule (ref), variantsFactory (ref), useDialogModule (ref), composeStyleVariantModule (ref)
-	local dialog = variantsContextModule.useVariants("Dialog", variantsFactory, useTokensModule())
+function useDialogVariants() --[[ Line: 175 ]]
+	-- upvalues: UseTokensModule (copy), VariantsContextModule (copy), variantsFactory (copy), UseDialogModule (copy), ComposeStyleVariantModule (copy)
+	local Dialog = VariantsContextModule.useVariants("Dialog", variantsFactory, (UseTokensModule()))
 	
-	return composeStyleVariantModule(dialog.common, dialog.size[useDialogModule().responsiveSize])
+	return ComposeStyleVariantModule(Dialog.common, Dialog.size[UseDialogModule().responsiveSize])
 end
 
-return { useDialogVariants = useDialogVariants, DIALOG_SIZES = t }
+return {
+	useDialogVariants = useDialogVariants,
+	DIALOG_SIZES = config
+}

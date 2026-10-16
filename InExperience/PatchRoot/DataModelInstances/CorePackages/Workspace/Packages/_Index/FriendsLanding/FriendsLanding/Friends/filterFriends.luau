@@ -1,19 +1,19 @@
-﻿local friendsLanding = script:FindFirstAncestor("FriendsLanding")
-local dependenciesModule = require(friendsLanding.dependencies)
-local presenceType = dependenciesModule.RoduxPresence.Enums.PresenceType
-local llama = dependenciesModule.llama
-local t = dependenciesModule.t
-local filterToPresenceModule = require(friendsLanding.Friends.filterToPresence)
-local filterStatesModule = require(friendsLanding.Friends.filterStates)
-local getCorrectUserPresenceModule = require(friendsLanding.Friends.getCorrectUserPresence)
+﻿local FriendsLanding = script:FindFirstAncestor("FriendsLanding")
+local DependenciesModule = require(FriendsLanding.dependencies)
+local PresenceType = DependenciesModule.RoduxPresence.Enums.PresenceType
+local Llama = DependenciesModule.llama
+local T = DependenciesModule.t
+local FilterToPresenceModule = require(FriendsLanding.Friends.filterToPresence)
+local FilterStatesModule = require(FriendsLanding.Friends.filterStates)
+local GetCorrectUserPresenceModule = require(FriendsLanding.Friends.getCorrectUserPresence)
 
-return function(p1, p2)
-	-- upvalues: t (ref), llama (ref), filterStatesModule (ref), filterToPresenceModule (ref), getCorrectUserPresenceModule (ref), presenceType (ref)
-	assert(t.table(p1), "friends should be a table")
-	assert(t.string(p2), "filter should be a string")
+return function(p1, Inactive) --[[ Line: 10 ]]
+	-- upvalues: T (copy), Llama (copy), FilterStatesModule (copy), FilterToPresenceModule (copy), GetCorrectUserPresenceModule (copy), PresenceType (copy)
+	assert(T.table(p1), "friends should be a table")
+	assert(T.string(Inactive), "filter should be a string")
 	
-	return llama.List.filter(p1, function(p3)
-		-- upvalues: p2 (ref), filterStatesModule (copy), filterToPresenceModule (copy), getCorrectUserPresenceModule (copy), presenceType (copy), llama (copy)
-		return if p2 == filterStatesModule.Inactive then p3.isInactiveFriend else llama.List.includes(filterToPresenceModule(p2), getCorrectUserPresenceModule(p3) or presenceType.Offline)
+	return Llama.List.filter(p1, function(p2) --[[ Line: 14 ]]
+		-- upvalues: Inactive (copy), FilterStatesModule (upval), FilterToPresenceModule (upval), GetCorrectUserPresenceModule (upval), PresenceType (upval), Llama (upval)
+		return if Inactive == FilterStatesModule.Inactive then p2.isInactiveFriend else Llama.List.includes(FilterToPresenceModule(Inactive), GetCorrectUserPresenceModule(p2) or PresenceType.Offline)
 	end)
 end

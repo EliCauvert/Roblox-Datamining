@@ -1,48 +1,49 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceSlotBasedEditor").Parent
-local cryoModule = require(parent.Cryo)
-local signalsModule = require(parent.Signals)
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceSlotBasedEditor").Parent
+local CryoModule = require(Parent.Cryo)
+local SignalsModule = require(Parent.Signals)
 
-return function()
-	-- upvalues: signalsModule (ref), cryoModule (ref)
-	local var1, var2 = signalsModule.createSignal({})
+return function() --[[ Line: 19 | Named "createStaleInventoryGrantStore" ]]
+	-- upvalues: SignalsModule (copy), CryoModule (copy)
+	local Signal, Signal2 = SignalsModule.createSignal({})
 	local t = {}
 	
 	return {
-		getStaleSearchUuids = var1,
-		getRemovedItemIds = function(p1)
-			-- upvalues: t (ref)
+		getStaleSearchUuids = Signal,
+		getRemovedItemIds = function(p1) --[[ Line: 30 ]]
+			-- upvalues: t (copy)
 			return t[p1]
 		end,
-		isSearchUuidStale = function(p1)
-			-- upvalues: var1 (ref)
-			return var1(false)[p1] == true
+		isSearchUuidStale = function(p1): boolean --[[ Line: 26 ]]
+			-- upvalues: Signal (copy)
+			return Signal(false)[p1] == true
 		end,
-		markSearchUuidStale = function(p1, p2)
-			-- upvalues: t (ref), cryoModule (copy), var1 (ref), var2 (ref)
-			if p2 then
-				local var3 = t[p1]
+		markSearchUuidStale = function(Key, Tbl) --[[ Line: 34 ]]
+			-- upvalues: t (copy), CryoModule (upval), Signal (copy), Signal2 (copy)
+			if Tbl then
+				local Entry = t[Key]
 				
-				if var3 then
-					for i, v in p2 do
-						if not cryoModule.List.find(var3, v) then
-							var3[#var3 + 1] = v
+				if Entry then
+					for _, value in Tbl do
+						if not CryoModule.List.find(Entry, value) then
+							Entry[#Entry + 1] = value
 						end
 					end
 				else
-					t[p1] = table.clone(p2)
+					t[Key] = table.clone(Tbl)
 				end
 			end
-			if var1(false)[p1] == true then
+			if Signal(false)[Key] ~= true then
+				Signal2(CryoModule.Dictionary.join(Signal(false), { [Key] = true }))
+				
 				return
 			end
-			var2(cryoModule.Dictionary.join(var1(false), { [p1] = true }))
 		end,
-		clearSearchUuidStale = function(p3)
-			-- upvalues: t (ref), var1 (ref), var2 (ref), cryoModule (copy)
-			t[p3] = nil
+		clearSearchUuidStale = function(Key) --[[ Line: 55 ]]
+			-- upvalues: t (copy), Signal (copy), Signal2 (copy), CryoModule (upval)
+			t[Key] = nil
 			
-			if var1(false)[p3] == true then
-				var2(cryoModule.Dictionary.join(var1(false), { [p3] = cryoModule.None }))
+			if Signal(false)[Key] == true then
+				Signal2(CryoModule.Dictionary.join(Signal(false), { [Key] = CryoModule.None }))
 				
 				return
 			end

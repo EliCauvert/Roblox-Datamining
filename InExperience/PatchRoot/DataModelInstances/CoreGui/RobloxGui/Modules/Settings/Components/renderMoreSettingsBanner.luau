@@ -1,43 +1,44 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local reactModule = require(corePackagesService.Packages.React)
-local reactRobloxModule = require(corePackagesService.Packages.ReactRoblox)
-local coreScriptsCommonModule = require(corePackagesService.Workspace.Packages.CoreScriptsCommon)
-local inExperienceMenuReactModule = require(script.Parent.Parent.InExperienceMenuReact)
-local moreSettingsBannerModule = require(script.Parent.MoreSettingsBanner)
-local create = require(corePackagesService.Workspace.Packages.AppCommonLib).Create
-local isPioneerLaunch = require(corePackagesService.Workspace.Packages.PioneerUtils).isPioneerLaunch
-local settingsShowSignal = coreScriptsCommonModule.SettingsShowSignal
+﻿local CorePackages = game:GetService("CorePackages")
+local ReactModule = require(CorePackages.Packages.React)
+local ReactRobloxModule = require(CorePackages.Packages.ReactRoblox)
+local InExperienceMenuReactModule = require(script.Parent.Parent.InExperienceMenuReact)
+local MoreSettingsBannerModule = require(script.Parent.MoreSettingsBanner)
+local CreateFunction = require(CorePackages.Workspace.Packages.AppCommonLib).Create
+local IsPioneerLaunch = require(CorePackages.Workspace.Packages.PioneerUtils).isPioneerLaunch
+local SettingsShowSignal = require(CorePackages.Workspace.Packages.CoreScriptsCommon).SettingsShowSignal
 
-return function(value)
-	-- upvalues: isPioneerLaunch (ref), create (ref), settingsShowSignal (ref), reactRobloxModule (ref), reactModule (ref), inExperienceMenuReactModule (ref), moreSettingsBannerModule (ref)
-	if (value.isPioneerLaunch or isPioneerLaunch)() then
-		local var1 = create("Frame")({
+return function(p1) --[[ Line: 21 | Named "renderMoreSettingsBanner" ]]
+	-- upvalues: IsPioneerLaunch (copy), CreateFunction (copy), SettingsShowSignal (copy), ReactRobloxModule (copy), ReactModule (copy), InExperienceMenuReactModule (copy), MoreSettingsBannerModule (copy)
+	if (p1.isPioneerLaunch or IsPioneerLaunch)() then
+		local v1 = CreateFunction("Frame")({
 			Name = "MoreSettingsBannerWrapper",
 			BackgroundTransparency = 1,
 			Size = UDim2.fromScale(1, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
-			LayoutOrder = value.layoutOrder,
-			Parent = value.parent
+			LayoutOrder = p1.layoutOrder,
+			Parent = p1.parent
 		})
-		local var2 = nil
-		settingsShowSignal:connect(function(p1)
-			-- upvalues: var2 (write), var1 (ref), value (ref), reactRobloxModule (copy), reactModule (copy), inExperienceMenuReactModule (copy), moreSettingsBannerModule (copy)
-			if p1 then
-				var1.Parent = value.parent
-				var2 = reactRobloxModule.createRoot(var1)
-				var2:render(reactModule.createElement(inExperienceMenuReactModule, nil, {
-					MoreSettingsBanner = reactModule.createElement(moreSettingsBannerModule)
+		local Root = nil
+		SettingsShowSignal:connect(function(p2) --[[ Line: 37 ]]
+			-- upvalues: Root (ref), v1 (copy), p1 (copy), ReactRobloxModule (upval), ReactModule (upval), InExperienceMenuReactModule (upval), MoreSettingsBannerModule (upval)
+			if p2 then
+				v1.Parent = p1.parent
+				Root = ReactRobloxModule.createRoot(v1)
+				Root:render(ReactModule.createElement(InExperienceMenuReactModule, nil, {
+					MoreSettingsBanner = ReactModule.createElement(MoreSettingsBannerModule)
 				}))
 				
 				return
-			elseif var2 then
-				var2:unmount()
-				var2 = nil
-				var1.Parent = nil
+			end
+			if Root then
+				Root:unmount()
+				Root = nil
+				v1.Parent = nil
 			end
 		end)
 		
-		return var1
+		return v1
+	else
+		return nil
 	end
-	return nil
 end

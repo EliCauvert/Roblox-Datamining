@@ -1,110 +1,112 @@
-﻿local musicPicker = script:FindFirstAncestor("MusicPicker")
-local parent = musicPicker.Parent
-local reactModule = require(parent.React)
-local songbirdModule = require(parent.Songbird)
-local sendAudioPlayerAnalytics = songbirdModule.Analytics.sendAudioPlayerAnalytics
-local analyticActions = songbirdModule.Analytics.AnalyticActions
-local _ = require(musicPicker.Types.MusicPickerTypes)
+﻿local MusicPicker = script:FindFirstAncestor("MusicPicker")
+local Parent = MusicPicker.Parent
+local ReactModule = require(Parent.React)
+local SongbirdModule = require(Parent.Songbird)
+local SendAudioPlayerAnalyticsFunction = SongbirdModule.Analytics.sendAudioPlayerAnalytics
+local AnalyticActions = SongbirdModule.Analytics.AnalyticActions
+local _ = require(MusicPicker.Types.MusicPickerTypes)
 
-local function _(p1, p2)
-	local var1 = p1[p2]
+local function _(p1, p2): string --[[ Line: 51 | Named "thumbnailIdFor" ]]
+	local v1 = p1[p2]
 	
-	return if var1 == nil then "-1" else tostring(var1.thumbnailAssetId)
+	return if v1 == nil then "-1" else tostring(v1.thumbnailAssetId)
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), sendAudioPlayerAnalytics (ref), analyticActions (ref)
-	local source = p1.source
-	local previewingId = p1.previewingId
-	local savedIds = p1.savedIds
-	local itemsById = p1.itemsById
-	local var1 = reactModule.useRef(nil)
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), previewingId (ref), sendAudioPlayerAnalytics (copy), analyticActions (copy), source (ref), itemsById (ref)
-		local current = var1.current
-		local var2 = if previewingId ~= nil then nil else tostring(previewingId)
+return function(p1) --[[ Line: 56 | Named "useMusicPickerAnalytics" ]]
+	-- upvalues: ReactModule (copy), SendAudioPlayerAnalyticsFunction (copy), AnalyticActions (copy)
+	local Source = p1.source
+	local PreviewingId = p1.previewingId
+	local SavedIds = p1.savedIds
+	local ItemsById = p1.itemsById
+	local UseRefResult = ReactModule.useRef(nil)
+	ReactModule.useEffect(function() --[[ Line: 66 ]]
+		-- upvalues: UseRefResult (copy), PreviewingId (copy), SendAudioPlayerAnalyticsFunction (upval), AnalyticActions (upval), Source (copy), ItemsById (copy)
+		local Current = UseRefResult.current
+		local Text = if PreviewingId == nil then nil else tostring(PreviewingId)
 		
-		if (if current ~= nil then nil else current.songId) == var2 then return end
-		if current ~= nil then
-			sendAudioPlayerAnalytics({
-				action = analyticActions.AudioStopped,
-				songId = current.songId,
-				thumbnailId = current.thumbnailId,
-				source = source
+		if (if Current == nil then nil else Current.songId) == Text then return end
+		if Current ~= nil then
+			SendAudioPlayerAnalyticsFunction({
+				action = AnalyticActions.AudioStopped,
+				songId = Current.songId,
+				thumbnailId = Current.thumbnailId,
+				source = Source
 			})
 		end
-		if previewingId == nil then
-			var1.current = nil
+		if PreviewingId == nil then
+			UseRefResult.current = nil
 			
 			return
+		else
+			local ItemsByIdEntry = ItemsById[PreviewingId]
+			local Text1: string = if ItemsByIdEntry == nil then "-1" else tostring(ItemsByIdEntry.thumbnailAssetId)
+			SendAudioPlayerAnalyticsFunction({
+				action = AnalyticActions.AudioPlay,
+				songId = Text,
+				thumbnailId = Text1,
+				source = Source
+			})
+			UseRefResult.current = { songId = Text, thumbnailId = Text1 }
 		end
-		local var3 = itemsById[previewingId]
-		local var4 = if var3 ~= nil then "-1" else tostring(var3.thumbnailAssetId)
-		sendAudioPlayerAnalytics({
-			action = analyticActions.AudioPlay,
-			songId = var2,
-			thumbnailId = var4,
-			source = source
-		})
-		var1.current = { songId = var2, thumbnailId = var4 }
-	end, { previewingId, source, itemsById })
-	local var2 = reactModule.useRef(source)
-	var2.current = source
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), sendAudioPlayerAnalytics (copy), analyticActions (copy), var2 (ref)
-		return function()
-			-- upvalues: var1 (copy), sendAudioPlayerAnalytics (copy), analyticActions (copy), var2 (copy)
-			local current = var1.current
+	end, { PreviewingId, Source, ItemsById })
+	local UseRefResult1 = ReactModule.useRef(Source)
+	UseRefResult1.current = Source
+	ReactModule.useEffect(function() --[[ Line: 103 ]]
+		-- upvalues: UseRefResult (copy), SendAudioPlayerAnalyticsFunction (upval), AnalyticActions (upval), UseRefResult1 (copy)
+		return function() --[[ Line: 104 ]]
+			-- upvalues: UseRefResult (upval), SendAudioPlayerAnalyticsFunction (upval), AnalyticActions (upval), UseRefResult1 (upval)
+			local Current = UseRefResult.current
 			
-			if current ~= nil then
-				sendAudioPlayerAnalytics({
-					action = analyticActions.AudioStopped,
-					songId = current.songId,
-					thumbnailId = current.thumbnailId,
-					source = var2.current
+			if Current ~= nil then
+				SendAudioPlayerAnalyticsFunction({
+					action = AnalyticActions.AudioStopped,
+					songId = Current.songId,
+					thumbnailId = Current.thumbnailId,
+					source = UseRefResult1.current
 				})
-				var1.current = nil
+				UseRefResult.current = nil
 			end
 		end
 	end, {})
-	local var3 = reactModule.useRef(nil)
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), savedIds (ref), sendAudioPlayerAnalytics (copy), analyticActions (copy), itemsById (ref), source (ref)
-		local current = var3.current
-		var3.current = savedIds
+	local UseRefResult2 = ReactModule.useRef(nil)
+	ReactModule.useEffect(function() --[[ Line: 121 ]]
+		-- upvalues: UseRefResult2 (copy), SavedIds (copy), SendAudioPlayerAnalyticsFunction (upval), AnalyticActions (upval), ItemsById (copy), Source (copy)
+		local Current = UseRefResult2.current
+		UseRefResult2.current = SavedIds
 		
-		if current == nil then return end
-		for i, v in savedIds do
-			if v and not current[i] then
-				local var4 = sendAudioPlayerAnalytics
-				local t = { action = analyticActions.Like, songId = tostring(i) }
-				local var5 = itemsById[i]
-				t.thumbnailId = if var5 ~= nil then "-1" else tostring(var5.thumbnailAssetId)
-				t.source = source
-				var4(t)
+		if Current == nil then return end
+		for i, savedId in SavedIds do
+			if savedId and not Current[i] then
+				local ItemsByIdEntry = ItemsById[i]
+				SendAudioPlayerAnalyticsFunction({
+					action = AnalyticActions.Like,
+					songId = tostring(i),
+					thumbnailId = if ItemsByIdEntry == nil then "-1" else tostring(ItemsByIdEntry.thumbnailAssetId),
+					source = Source
+				})
 			end
 		end
-		for i_1, v_1 in current do
-			if v_1 and not savedIds[i_1] then
-				local var6 = sendAudioPlayerAnalytics
-				local t = { action = analyticActions.Unlike, songId = tostring(i_1) }
-				local var7 = itemsById[i_1]
-				t.thumbnailId = if var7 ~= nil then "-1" else tostring(var7.thumbnailAssetId)
-				t.source = source
-				var6(t)
+		for i1, value in Current do
+			if value and not SavedIds[i1] then
+				local ItemsByIdEntry = ItemsById[i1]
+				SendAudioPlayerAnalyticsFunction({
+					action = AnalyticActions.Unlike,
+					songId = tostring(i1),
+					thumbnailId = if ItemsByIdEntry == nil then "-1" else tostring(ItemsByIdEntry.thumbnailAssetId),
+					source = Source
+				})
 			end
 		end
-	end, { savedIds, source, itemsById })
+	end, { SavedIds, Source, ItemsById })
 	
-	return reactModule.useCallback(function(p2)
-		-- upvalues: sendAudioPlayerAnalytics (copy), analyticActions (copy), itemsById (ref), source (ref)
-		local t = {
-			action = analyticActions.AudioPause,
-			songId = tostring(p2)
-		}
-		local var8 = itemsById[p2]
-		t.thumbnailId = if var8 ~= nil then "-1" else tostring(var8.thumbnailAssetId)
-		t.source = source
-		sendAudioPlayerAnalytics(t)
-	end, { source, itemsById })
+	return ReactModule.useCallback(function(p2) --[[ Line: 154 ]]
+		-- upvalues: SendAudioPlayerAnalyticsFunction (upval), AnalyticActions (upval), ItemsById (copy), Source (copy)
+		local ItemsByIdEntry = ItemsById[p2]
+		SendAudioPlayerAnalyticsFunction({
+			action = AnalyticActions.AudioPause,
+			songId = tostring(p2),
+			thumbnailId = if ItemsByIdEntry == nil then "-1" else tostring(ItemsByIdEntry.thumbnailAssetId),
+			source = Source
+		})
+	end, { Source, ItemsById })
 end

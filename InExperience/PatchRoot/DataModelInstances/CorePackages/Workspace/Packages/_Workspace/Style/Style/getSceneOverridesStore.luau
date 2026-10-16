@@ -1,34 +1,34 @@
-﻿local var1 = nil
-local t = {}
-local t_1 = {
-	getSceneOverrides = function()
-		-- upvalues: var1 (write)
-		return var1
+﻿local SceneOverrides = nil
+local List = {}
+local config = {
+	getSceneOverrides = function() --[[ Line: 24 ]]
+		-- upvalues: SceneOverrides (ref)
+		return SceneOverrides
 	end,
-	setSceneOverrides = function(value)
-		-- upvalues: var1 (write), t (ref)
-		var1 = value
+	setSceneOverrides = function(Value) --[[ Line: 27 ]]
+		-- upvalues: SceneOverrides (ref), List (copy)
+		SceneOverrides = Value
 		
-		for i, v in t do
-			v(value)
+		for _, value in List do
+			value(Value)
 		end
 	end,
-	subscribe = function(p1)
-		-- upvalues: t (ref)
-		table.insert(t, p1)
+	subscribe = function(Value) --[[ Line: 33 ]]
+		-- upvalues: List (copy)
+		table.insert(List, Value)
 		
-		return function()
-			-- upvalues: t (copy), p1 (ref)
-			local index = table.find(t, p1)
+		return function() --[[ Line: 35 ]]
+			-- upvalues: List (upval), Value (copy)
+			local FoundIndex: number? = table.find(List, Value)
 			
-			if index then
-				table.remove(t, index)
+			if FoundIndex then
+				table.remove(List, FoundIndex)
 			end
 		end
 	end
 }
 
-return function()
-	-- upvalues: t_1 (ref)
-	return t_1
+return function() --[[ Line: 44 | Named "getSceneOverridesStore" ]]
+	-- upvalues: config (copy)
+	return config
 end

@@ -1,11 +1,11 @@
-﻿local httpService = game:GetService("HttpService")
+﻿local HttpService = game:GetService("HttpService")
 
-return function(p1)
-	-- upvalues: httpService (ref)
-	local t = {}
+return function(List): string --[[ Line: 10 | Named "buildQueryString" ]]
+	-- upvalues: HttpService (copy)
+	local List1 = {}
 	
-	for i, v in pairs(p1) do
-		table.insert(t, string.format("%s=%s", httpService:UrlEncode(tostring(i)), httpService:UrlEncode(tostring(v))))
+	for i, value in pairs(List) do
+		table.insert(List1, string.format("%s=%s", HttpService:UrlEncode((tostring(i))), HttpService:UrlEncode((tostring(value)))))
 	end
-	return if #t == 0 then "" else "?" .. table.concat(t, "&")
+	return if #List1 == 0 then "" else "?" .. table.concat(List1, "&")
 end

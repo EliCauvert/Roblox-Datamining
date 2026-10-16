@@ -1,32 +1,26 @@
-﻿local authSignup = script:FindFirstAncestor("AuthSignup")
-local reactModule = require(authSignup.Parent.React)
-local buildValidatedBirthdayModule = require(authSignup.Util.buildValidatedBirthday)
+﻿local AuthSignup = script:FindFirstAncestor("AuthSignup")
+local ReactModule = require(AuthSignup.Parent.React)
+local BuildValidatedBirthdayModule = require(AuthSignup.Util.buildValidatedBirthday)
 
-local function _(p1, p2)
-	return if p1 == nil or p2 == nil then p1 == p2 else p1.Month == p2.Month and (p1.Day == p2.Day and p1.Year == p2.Year)
+local function _(p1, p2): boolean --[[ Line: 7 | Named "isSameDate" ]]
+	return if p1 == nil or p2 == nil then p1 == p2 else p1.Month == p2.Month and p1.Day == p2.Day and p1.Year == p2.Year
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), buildValidatedBirthdayModule (ref)
-	local var1, var2 = reactModule.useState(nil)
-	local var3 = reactModule.useRef(nil)
+return function(p1) --[[ Line: 24 | Named "useValidatedBirthday" ]]
+	-- upvalues: ReactModule (copy), BuildValidatedBirthdayModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local UseRefResult = ReactModule.useRef(nil)
 	
-	return var1, reactModule.useCallback(function(p2, p3, p4)
-		-- upvalues: buildValidatedBirthdayModule (copy), p1 (ref), var3 (ref), var2 (ref)
-		local var4
-		local var5 = buildValidatedBirthdayModule(p2, p3, p4, p1)
-		local current = var3.current
+	return UseStateResult, (ReactModule.useCallback(function(p2, p3, p4) --[[ Line: 28 ]]
+		-- upvalues: BuildValidatedBirthdayModule (upval), p1 (copy), UseRefResult (copy), UseStateResult2 (copy)
+		local ValidatedBirthdayModule = BuildValidatedBirthdayModule(p2, p3, p4, p1)
+		local Current = UseRefResult.current
 		
-		if current == nil or var5 == nil then
-			var4 = current == var5
-			var4 = nil
-		else
-			var4 = current.Month == var5.Month and (current.Day == var5.Day and current.Year == var5.Year)
-		end
-		if var4 then
+		if not (if Current == nil or ValidatedBirthdayModule == nil then Current == ValidatedBirthdayModule else Current.Month == ValidatedBirthdayModule.Month and (Current.Day == ValidatedBirthdayModule.Day and Current.Year == ValidatedBirthdayModule.Year)) then
+			UseRefResult.current = ValidatedBirthdayModule
+			UseStateResult2(ValidatedBirthdayModule)
+			
 			return
 		end
-		var3.current = var5
-		var2(var5)
-	end, { p1 })
+	end, { p1 }))
 end

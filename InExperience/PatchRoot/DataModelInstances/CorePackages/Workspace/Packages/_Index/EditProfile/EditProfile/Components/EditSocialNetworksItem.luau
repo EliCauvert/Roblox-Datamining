@@ -1,1 +1,1 @@
-﻿return require(script.EditSocialNetworksItem)
+﻿return (require(script.EditSocialNetworksItem))

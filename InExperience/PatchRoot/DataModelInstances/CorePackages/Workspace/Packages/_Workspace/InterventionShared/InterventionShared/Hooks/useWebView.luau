@@ -1,52 +1,53 @@
-﻿local parent = script:FindFirstAncestor("InterventionShared").Parent
-local reactModule = require(parent.React)
-local useEffect = reactModule.useEffect
-local useCallback = reactModule.useCallback
-local useRef = reactModule.useRef
-local getFFlagEnableUnifiedWebViews = require(parent.SharedFlags).GetFFlagEnableUnifiedWebViews
-local browserService = game:GetService("BrowserService")
-local httpService = game:GetService("HttpService")
-local webViewService = game:GetService("WebViewService")
+﻿local Parent = script:FindFirstAncestor("InterventionShared").Parent
+local ReactModule = require(Parent.React)
+local UseEffectFunction = ReactModule.useEffect
+local UseCallbackFunction = ReactModule.useCallback
+local UseRefFunction = ReactModule.useRef
+local GetFFlagEnableUnifiedWebViewsFunction = require(Parent.SharedFlags).GetFFlagEnableUnifiedWebViews
+local BrowserService = game:GetService("BrowserService")
+local HttpService = game:GetService("HttpService")
+local WebViewService = game:GetService("WebViewService")
 
-return function(p1, p2)
-	-- upvalues: useRef (ref), useCallback (ref), getFFlagEnableUnifiedWebViews (ref), webViewService (ref), browserService (ref), httpService (ref), useEffect (ref)
-	local var1 = useRef(nil)
-	local var2 = useCallback(function()
-		-- upvalues: var1 (ref)
-		if var1.current then
-			var1.current:Disconnect()
-			var1.current = nil
+return function(Url, Title) --[[ Line: 20 | Named "useWebView" ]]
+	-- upvalues: UseRefFunction (copy), UseCallbackFunction (copy), GetFFlagEnableUnifiedWebViewsFunction (copy), WebViewService (copy), BrowserService (copy), HttpService (copy), UseEffectFunction (copy)
+	local UseRefResult = UseRefFunction(nil)
+	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 23 ]]
+		-- upvalues: UseRefResult (copy)
+		if UseRefResult.current then
+			UseRefResult.current:Disconnect()
+			UseRefResult.current = nil
 		end
-	end, { var1 })
-	local var3 = useCallback(function()
-		-- upvalues: getFFlagEnableUnifiedWebViews (copy), var2 (ref), var1 (ref), webViewService (copy), p1 (ref), p2 (ref), browserService (copy), httpService (copy)
-		if getFFlagEnableUnifiedWebViews() then
-			var2()
-			var1.current = webViewService.OnWindowClosed:Connect(function()
-				-- upvalues: webViewService (copy), var2 (copy)
-				webViewService:CloseWindow()
-				var2()
+	end, { UseRefResult })
+	local UseCallbackResult1 = UseCallbackFunction(function() --[[ Line: 30 ]]
+		-- upvalues: GetFFlagEnableUnifiedWebViewsFunction (upval), UseCallbackResult (copy), UseRefResult (copy), WebViewService (upval), Url (copy), Title (copy), BrowserService (upval), HttpService (upval)
+		if GetFFlagEnableUnifiedWebViewsFunction() then
+			UseCallbackResult()
+			UseRefResult.current = WebViewService.OnWindowClosed:Connect(function() --[[ Line: 36 ]]
+				-- upvalues: WebViewService (upval), UseCallbackResult (upval)
+				WebViewService:CloseWindow()
+				UseCallbackResult()
 			end)
-			webViewService:OpenWindow(p1, p2, true)
+			WebViewService:OpenWindow(Url, Title, true)
 			
 			return
+		else
+			BrowserService:SendCommand(HttpService:JSONEncode({
+				command = "open",
+				visible = true,
+				isGenericWebview = true,
+				enableOverlayReplacement = true,
+				url = Url,
+				title = Title
+			}))
 		end
-		browserService:SendCommand(httpService:JSONEncode({
-			command = "open",
-			visible = true,
-			isGenericWebview = true,
-			enableOverlayReplacement = true,
-			url = p1,
-			title = p2
-		}))
-	end, { p1, p2, var2 })
-	useEffect(function()
-		-- upvalues: var2 (ref)
-		return function()
-			-- upvalues: var2 (copy)
-			var2()
+	end, { Url, Title, UseCallbackResult })
+	UseEffectFunction(function() --[[ Line: 55 ]]
+		-- upvalues: UseCallbackResult (copy)
+		return function() --[[ Line: 56 ]]
+			-- upvalues: UseCallbackResult (upval)
+			UseCallbackResult()
 		end
-	end, { var2 })
+	end, { UseCallbackResult })
 	
-	return var3
+	return UseCallbackResult1
 end

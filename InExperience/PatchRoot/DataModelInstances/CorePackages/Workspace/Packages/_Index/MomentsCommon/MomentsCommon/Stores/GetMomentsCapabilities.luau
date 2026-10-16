@@ -1,6 +1,6 @@
-﻿local createMomentsCapabilitiesModule = require(script.createMomentsCapabilities)
+﻿local CreateMomentsCapabilitiesModule = require(script.createMomentsCapabilities)
 
-return require(script:FindFirstAncestor("MomentsCommon").Parent.Signals).createComputed(function(_)
-	-- upvalues: createMomentsCapabilitiesModule (ref)
-	return createMomentsCapabilitiesModule()
+return require(script:FindFirstAncestor("MomentsCommon").Parent.Signals).createComputed(function(_) --[[ Line: 13 ]]
+	-- upvalues: CreateMomentsCapabilitiesModule (copy)
+	return CreateMomentsCapabilitiesModule()
 end)

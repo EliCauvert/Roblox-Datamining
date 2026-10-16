@@ -1,143 +1,144 @@
-﻿local coreScriptsPlayerFeedback = script:FindFirstAncestor("CoreScriptsPlayerFeedback")
-local reactModule = require(coreScriptsPlayerFeedback.Parent.React)
-local _ = require(coreScriptsPlayerFeedback.CaptureTypes)
-local getCaptureKeyModule = require(coreScriptsPlayerFeedback.Utils.getCaptureKey)
-local uploadCaptureAssetModule = require(coreScriptsPlayerFeedback.Utils.uploadCaptureAsset)
+﻿local CoreScriptsPlayerFeedback = script:FindFirstAncestor("CoreScriptsPlayerFeedback")
+local ReactModule = require(CoreScriptsPlayerFeedback.Parent.React)
+local _ = require(CoreScriptsPlayerFeedback.CaptureTypes)
+local GetCaptureKeyModule = require(CoreScriptsPlayerFeedback.Utils.getCaptureKey)
+local UploadCaptureAssetModule = require(CoreScriptsPlayerFeedback.Utils.uploadCaptureAsset)
 
-return function()
-	-- upvalues: reactModule (ref), getCaptureKeyModule (ref), uploadCaptureAssetModule (ref)
-	local var1, var2 = reactModule.useState({})
-	local var3 = reactModule.useRef({})
-	local var4 = reactModule.useRef({})
-	local var5 = reactModule.useRef(0)
+return function() --[[ Line: 25 | Named "useCaptureUploads" ]]
+	-- upvalues: ReactModule (copy), GetCaptureKeyModule (copy), UploadCaptureAssetModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState({})
+	local UseRefResult = ReactModule.useRef({})
+	local UseRefResult1 = ReactModule.useRef({})
+	local UseRefResult2 = ReactModule.useRef(0)
 	
 	return {
-		uploadStatuses = var1,
-		anyUploading = reactModule.useMemo(function()
-			-- upvalues: var1 (ref)
-			for i, v in var1 do
-				if v.status == "uploading" then
+		uploadStatuses = UseStateResult,
+		anyUploading = ReactModule.useMemo(function(): boolean --[[ Line: 34 ]]
+			-- upvalues: UseStateResult (copy)
+			for _, value in UseStateResult do
+				if value.status == "uploading" then
 					return true
 				end
 			end
 			return false
-		end, { var1 }),
-		hasNonModerationFailure = reactModule.useMemo(function()
-			-- upvalues: var1 (ref)
-			for i, v in var1 do
-				if v.status == "failed" and v.failureReason ~= Enum.UploadCaptureResult.CaptureModerated then
+		end, { UseStateResult }),
+		hasNonModerationFailure = ReactModule.useMemo(function(): boolean --[[ Line: 43 ]]
+			-- upvalues: UseStateResult (copy)
+			for _, value in UseStateResult do
+				if value.status == "failed" and value.failureReason ~= Enum.UploadCaptureResult.CaptureModerated then
 					return true
 				end
 			end
 			return false
-		end, { var1 }),
-		onCapturesAdded = reactModule.useCallback(function(p1)
-			-- upvalues: getCaptureKeyModule (copy), var1 (ref), var2 (ref), var3 (ref), var4 (ref), var5 (ref), uploadCaptureAssetModule (copy)
+		end, { UseStateResult }),
+		onCapturesAdded = ReactModule.useCallback(function(List) --[[ Line: 54 ]]
+			-- upvalues: GetCaptureKeyModule (upval), UseStateResult (copy), UseStateResult2 (copy), UseRefResult (copy), UseRefResult1 (copy), UseRefResult2 (copy), UploadCaptureAssetModule (upval)
 			local t = {}
 			
-			for i, v in p1 do
-				t[getCaptureKeyModule(v)] = v
+			for _, value in List do
+				t[GetCaptureKeyModule(value)] = value
 			end
-			local t_1 = {}
+			local Captures = {}
 			
-			for i_1, v_1 in t do
-				if var1[i_1] == nil then
-					table.insert(t_1, v_1)
+			for i, value1 in t do
+				if UseStateResult[i] == nil then
+					table.insert(Captures, value1)
 				end
 			end
-			var2(function(p2)
-				-- upvalues: t (ref), t_1 (ref), getCaptureKeyModule (copy), var3 (copy)
-				local t_2 = {}
+			UseStateResult2(function(List) --[[ Line: 68 ]]
+				-- upvalues: t (copy), Captures (copy), GetCaptureKeyModule (upval), UseRefResult (upval)
+				local t1 = {}
 				
-				for i, v in p2 do
+				for i, value in List do
 					if t[i] then
-						t_2[i] = v
+						t1[i] = value
 					end
 				end
-				local var6 = 0
+				local Order = 0
 				
-				for i_1, v_1 in p2 do
-					if v_1.order and var6 < v_1.order then
-						var6 = v_1.order
+				for _, value1 in List do
+					if value1.order and Order < value1.order then
+						Order = value1.order
 					end
 				end
-				for i_2, v_2 in t_1 do
-					var6 += 1
-					local var7 = getCaptureKeyModule(v_2)
-					local var8 = var3.current[var7]
+				for _, capture in Captures do
+					Order += 1
+					local CaptureKeyModule = GetCaptureKeyModule(capture)
+					local CurrentEntry = UseRefResult.current[CaptureKeyModule]
 					
-					if var8 then
-						t_2[var7] = {
-							capture = v_2,
-							status = var8.status,
-							assetId = var8.assetId,
-							failureReason = var8.failureReason,
-							order = var6
+					if CurrentEntry then
+						t1[CaptureKeyModule] = {
+							capture = capture,
+							status = CurrentEntry.status,
+							assetId = CurrentEntry.assetId,
+							failureReason = CurrentEntry.failureReason,
+							order = Order
 						}
 					else
-						t_2[var7] = {
+						t1[CaptureKeyModule] = {
 							status = "uploading",
 							assetId = nil,
-							capture = v_2,
-							order = var6
+							capture = capture,
+							order = Order
 						}
 					end
 				end
-				return t_2
+				return t1
 			end)
 			
-			for i_2, v_2 in t_1 do
-				local var9 = getCaptureKeyModule(v_2)
+			for _, capture in Captures do
+				local CaptureKeyModule = GetCaptureKeyModule(capture)
 				
-				if not var3.current[var9] and not var4.current[var9] then
-					var5.current += 1
-					local current = var5.current
-					var4.current[var9] = current
-					task.spawn(function()
-						-- upvalues: uploadCaptureAssetModule (copy), v_2 (ref), var4 (copy), var9 (ref), current (ref), var3 (copy), var2 (copy)
-						local var10, var11 = uploadCaptureAssetModule(v_2)
+				if not UseRefResult.current[CaptureKeyModule] and not UseRefResult1.current[CaptureKeyModule] then
+					UseRefResult2.current += 1
+					local Current = UseRefResult2.current
+					UseRefResult1.current[CaptureKeyModule] = Current
+					task.spawn(function() --[[ Line: 108 ]]
+						-- upvalues: UploadCaptureAssetModule (upval), capture (copy), UseRefResult1 (upval), CaptureKeyModule (copy), Current (copy), UseRefResult (upval), UseStateResult2 (upval)
+						local UploadCaptureAssetModuleResult, UploadCaptureAssetModuleResult2 = UploadCaptureAssetModule(capture)
 						
-						if var4.current[var9] ~= current then return end
-						var4.current[var9] = nil
-						local t = {
+						if UseRefResult1.current[CaptureKeyModule] ~= Current then return end
+						UseRefResult1.current[CaptureKeyModule] = nil
+						local config = {
 							order = nil,
-							capture = v_2,
-							status = if var10 ~= nil then "failed" else "succeeded",
-							failureReason = var11,
-							assetId = var10
+							capture = capture,
+							status = if UploadCaptureAssetModuleResult == nil then "failed" else "succeeded",
+							failureReason = UploadCaptureAssetModuleResult2,
+							assetId = UploadCaptureAssetModuleResult
 						}
 						
-						if if var10 == nil then var11 == Enum.UploadCaptureResult.CaptureModerated else true then
-							var3.current[var9] = t
+						if UploadCaptureAssetModuleResult ~= nil or UploadCaptureAssetModuleResult2 == Enum.UploadCaptureResult.CaptureModerated then
+							UseRefResult.current[CaptureKeyModule] = config
 						end
-						var2(function(p3)
-							-- upvalues: var9 (copy), v_2 (copy), t (ref)
-							if p3[var9] then
-								local cloned = table.clone(p3)
-								cloned[var9] = {
-									capture = v_2,
-									status = t.status,
-									failureReason = t.failureReason,
-									assetId = t.assetId,
-									order = p3[var9] and p3[var9].order
+						UseStateResult2(function(Tbl) --[[ Line: 125 ]]
+							-- upvalues: CaptureKeyModule (upval), capture (upval), config (copy)
+							if Tbl[CaptureKeyModule] then
+								local Copy = table.clone(Tbl)
+								Copy[CaptureKeyModule] = {
+									capture = capture,
+									status = config.status,
+									failureReason = config.failureReason,
+									assetId = config.assetId,
+									order = Tbl[CaptureKeyModule] and Tbl[CaptureKeyModule].order
 								}
 								
-								return cloned
+								return Copy
+							else
+								return Tbl
 							end
-							return p3
 						end)
 					end)
 				end
 			end
-		end, { var1 }),
-		onCaptureRemoved = reactModule.useCallback(function(p3)
-			-- upvalues: var2 (ref)
-			var2(function(p4)
-				-- upvalues: p3 (ref)
-				local cloned = table.clone(p4)
-				cloned[p3] = nil
+		end, { UseStateResult }),
+		onCaptureRemoved = ReactModule.useCallback(function(p1) --[[ Line: 143 ]]
+			-- upvalues: UseStateResult2 (copy)
+			UseStateResult2(function(Tbl) --[[ Line: 144 ]]
+				-- upvalues: p1 (copy)
+				local Copy = table.clone(Tbl)
+				Copy[p1] = nil
 				
-				return cloned
+				return Copy
 			end)
 		end, {})
 	}

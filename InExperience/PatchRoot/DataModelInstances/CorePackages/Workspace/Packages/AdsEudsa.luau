@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.AdsEudsa.AdsEudsa)
+﻿return (require(script.Parent._Workspace.AdsEudsa.AdsEudsa))

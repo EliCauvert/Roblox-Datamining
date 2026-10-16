@@ -1,65 +1,66 @@
-﻿local serverTriggeredModals = script:FindFirstAncestor("ServerTriggeredModals")
-local parent = serverTriggeredModals.Parent
-local signalsModule = require(parent.Signals)
-local _ = require(parent.ServerDrivenUi)
-local _ = require(serverTriggeredModals.EntryPoint)
+﻿local ServerTriggeredModals = script:FindFirstAncestor("ServerTriggeredModals")
+local Parent = ServerTriggeredModals.Parent
+local SignalsModule = require(Parent.Signals)
+local _ = require(Parent.ServerDrivenUi)
+local _ = require(ServerTriggeredModals.EntryPoint)
 
-return function()
-	-- upvalues: signalsModule (ref)
+return function() --[[ Line: 42 ]]
+	-- upvalues: SignalsModule (copy)
 	local t = {}
 	
-	local function getOrCreateEntry(p1)
-		-- upvalues: t (ref), signalsModule (copy)
-		local var1 = t[p1]
+	local function getOrCreateEntry(Key) --[[ Line: 45 ]]
+		-- upvalues: t (copy), SignalsModule (upval)
+		local Entry = t[Key]
 		
-		if var1 == nil then
-			local var2, var3 = signalsModule.createSignal(nil)
-			local var4, var5 = signalsModule.createSignal(false)
-			local var6, var7 = signalsModule.createSignal(false)
-			var1 = {
-				metadata = { get = var2, set = var3 },
-				hasShown = { get = var4, set = var5 },
-				primaryHandlerClaimed = { get = var6, set = var7 }
+		if Entry == nil then
+			local Signal, Signal2 = SignalsModule.createSignal(nil)
+			local Signal1, Signal2_1 = SignalsModule.createSignal(false)
+			local Signal3, Signal2_2 = SignalsModule.createSignal(false)
+			Entry = {
+				metadata = { get = Signal, set = Signal2 },
+				hasShown = { get = Signal1, set = Signal2_1 },
+				primaryHandlerClaimed = { get = Signal3, set = Signal2_2 }
 			}
-			t[p1] = var1
+			t[Key] = Entry
 		end
-		return var1
+		return Entry
 	end
 	
 	return {
-		getMetadataGetter = function(p1)
-			-- upvalues: getOrCreateEntry (ref)
+		getMetadataGetter = function(p1) --[[ Line: 70 ]]
+			-- upvalues: getOrCreateEntry (copy)
 			return getOrCreateEntry(p1).metadata.get
 		end,
-		setMetadata = function(value, p1)
-			-- upvalues: getOrCreateEntry (ref)
-			getOrCreateEntry(value).metadata.set(p1)
+		setMetadata = function(p1, p2) --[[ Line: 74 ]]
+			-- upvalues: getOrCreateEntry (copy)
+			getOrCreateEntry(p1).metadata.set(p2)
 		end,
-		getHasShownGetter = function(p1)
-			-- upvalues: getOrCreateEntry (ref)
+		getHasShownGetter = function(p1) --[[ Line: 78 ]]
+			-- upvalues: getOrCreateEntry (copy)
 			return getOrCreateEntry(p1).hasShown.get
 		end,
-		setHasShown = function(value, p1)
-			-- upvalues: getOrCreateEntry (ref)
-			getOrCreateEntry(value).hasShown.set(p1)
+		setHasShown = function(p1, p2) --[[ Line: 82 ]]
+			-- upvalues: getOrCreateEntry (copy)
+			getOrCreateEntry(p1).hasShown.set(p2)
 		end,
-		getPrimaryHandlerClaimedGetter = function(p1)
-			-- upvalues: getOrCreateEntry (ref)
+		getPrimaryHandlerClaimedGetter = function(p1) --[[ Line: 86 ]]
+			-- upvalues: getOrCreateEntry (copy)
 			return getOrCreateEntry(p1).primaryHandlerClaimed.get
 		end,
-		tryClaimPrimaryHandler = function(p1)
-			-- upvalues: getOrCreateEntry (ref)
-			local var1 = getOrCreateEntry(p1)
+		tryClaimPrimaryHandler = function(p1): boolean --[[ Line: 90 ]]
+			-- upvalues: getOrCreateEntry (copy)
+			local OrCreateEntry = getOrCreateEntry(p1)
 			
-			if var1.primaryHandlerClaimed.get() then
+			if OrCreateEntry.primaryHandlerClaimed.get() then
 				return false
+			else
+				OrCreateEntry.primaryHandlerClaimed.set(true)
+				
+				return true
 			end
-			var1.primaryHandlerClaimed.set(true)
-			
-			return true
 		end,
-		releasePrimaryHandler = function(p1)
-			-- upvalues: getOrCreateEntry (ref)
+		releasePrimaryHandler = function(p1) --[[ Line: 99 ]]
+			-- upvalues: getOrCreateEntry (copy)
 			getOrCreateEntry(p1).primaryHandlerClaimed.set(false)
 		end
 	}

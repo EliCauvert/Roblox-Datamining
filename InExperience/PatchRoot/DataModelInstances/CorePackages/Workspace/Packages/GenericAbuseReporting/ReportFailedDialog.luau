@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent._Workspace.GenericAbuseReporting.GenericAbuseReporting.Dialogs.ReportFailedDialog)
+﻿return (require(script.Parent.Parent._Workspace.GenericAbuseReporting.GenericAbuseReporting.Dialogs.ReportFailedDialog))

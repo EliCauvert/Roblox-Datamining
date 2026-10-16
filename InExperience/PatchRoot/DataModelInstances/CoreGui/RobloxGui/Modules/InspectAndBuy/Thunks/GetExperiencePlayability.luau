@@ -1,34 +1,33 @@
-﻿local performFetch = require(game:GetService("CorePackages").Workspace.Packages.Http).PerformFetch
-local parent = script.Parent.Parent
-local thunkModule = require(parent.Thunk)
-local networkModule = require(parent.Services.Network)
-local createInspectAndBuyKeyMapperModule = require(parent.createInspectAndBuyKeyMapper)
-local experienceInfoModule = require(parent.Models.ExperienceInfo)
-local setExperienceInfoModule = require(parent.Actions.SetExperienceInfo)
-local sendCounterModule = require(parent.Thunks.SendCounter)
-local constantsModule = require(parent.Constants)
-local list = { networkModule }
-local var1 = createInspectAndBuyKeyMapperModule("getExperiencePlayabilityStatus")
+﻿local PerformFetch = require(game:GetService("CorePackages").Workspace.Packages.Http).PerformFetch
+local Parent = script.Parent.Parent
+local ThunkModule = require(Parent.Thunk)
+local NetworkModule = require(Parent.Services.Network)
+local ExperienceInfoModule = require(Parent.Models.ExperienceInfo)
+local SetExperienceInfoModule = require(Parent.Actions.SetExperienceInfo)
+local SendCounterModule = require(Parent.Thunks.SendCounter)
+local ConstantsModule = require(Parent.Constants)
+local list = { NetworkModule }
+local GetExperiencePlayabilityStatus = require(Parent.createInspectAndBuyKeyMapper)("getExperiencePlayabilityStatus")
 
-return function(p1)
-	-- upvalues: thunkModule (ref), list (ref), networkModule (ref), var1 (ref), performFetch (ref), experienceInfoModule (ref), setExperienceInfoModule (ref), sendCounterModule (ref), constantsModule (ref)
-	return thunkModule.new(script.Name, list, function(p2, p3)
-		-- upvalues: networkModule (copy), var1 (copy), p1 (ref), performFetch (copy), experienceInfoModule (copy), setExperienceInfoModule (copy), sendCounterModule (copy), constantsModule (copy)
-		local var2 = p3[networkModule]
+return function(p1) --[[ Line: 23 | Named "GetExperiencePlayability" ]]
+	-- upvalues: ThunkModule (copy), list (copy), NetworkModule (copy), GetExperiencePlayabilityStatus (copy), PerformFetch (copy), ExperienceInfoModule (copy), SetExperienceInfoModule (copy), SendCounterModule (copy), ConstantsModule (copy)
+	return ThunkModule.new(script.Name, list, function(p2, p3) --[[ Line: 24 ]]
+		-- upvalues: NetworkModule (upval), GetExperiencePlayabilityStatus (upval), p1 (copy), PerformFetch (upval), ExperienceInfoModule (upval), SetExperienceInfoModule (upval), SendCounterModule (upval), ConstantsModule (upval)
+		local v1 = p3[NetworkModule]
 		
-		return performFetch.Single(var1(p2:getState().storeId, p1), function()
-			-- upvalues: var2 (ref), p1 (copy), experienceInfoModule (copy), p2 (ref), setExperienceInfoModule (copy), sendCounterModule (copy), constantsModule (copy)
-			return var2.getExperiencePlayability(p1):andThen(function(p4)
-				-- upvalues: experienceInfoModule (copy), p2 (copy), setExperienceInfoModule (copy), sendCounterModule (copy), constantsModule (copy)
-				p2:dispatch(setExperienceInfoModule(experienceInfoModule.fromGetPlayabilityStatus(p4[1])))
-				p2:dispatch(sendCounterModule(constantsModule.Counters.GetExperiencePlayability .. constantsModule.CounterSuffix.RequestSucceeded))
-			end, function(_)
-				-- upvalues: p2 (copy), sendCounterModule (copy), constantsModule (copy)
-				p2:dispatch(sendCounterModule(constantsModule.Counters.GetExperiencePlayability .. constantsModule.CounterSuffix.RequestRejected))
+		return PerformFetch.Single(GetExperiencePlayabilityStatus(p2:getState().storeId, p1), function() --[[ Line: 29 ]]
+			-- upvalues: v1 (copy), p1 (upval), ExperienceInfoModule (upval), p2 (copy), SetExperienceInfoModule (upval), SendCounterModule (upval), ConstantsModule (upval)
+			return v1.getExperiencePlayability(p1):andThen(function(Entry) --[[ Line: 30 ]]
+				-- upvalues: ExperienceInfoModule (upval), p2 (upval), SetExperienceInfoModule (upval), SendCounterModule (upval), ConstantsModule (upval)
+				p2:dispatch(SetExperienceInfoModule((ExperienceInfoModule.fromGetPlayabilityStatus(Entry[1]))))
+				p2:dispatch(SendCounterModule(ConstantsModule.Counters.GetExperiencePlayability .. ConstantsModule.CounterSuffix.RequestSucceeded))
+			end, function(_) --[[ Line: 38 ]]
+				-- upvalues: p2 (upval), SendCounterModule (upval), ConstantsModule (upval)
+				p2:dispatch(SendCounterModule(ConstantsModule.Counters.GetExperiencePlayability .. ConstantsModule.CounterSuffix.RequestRejected))
 			end)
-		end)(p2):catch(function(_)
-			-- upvalues: p2 (ref), sendCounterModule (copy), constantsModule (copy)
-			p2:dispatch(sendCounterModule(constantsModule.Counters.GetExperiencePlayability .. constantsModule.CounterSuffix.RequestFailed))
+		end)(p2):catch(function(_) --[[ Line: 43 ]]
+			-- upvalues: p2 (copy), SendCounterModule (upval), ConstantsModule (upval)
+			p2:dispatch(SendCounterModule(ConstantsModule.Counters.GetExperiencePlayability .. ConstantsModule.CounterSuffix.RequestFailed))
 		end)
 	end)
 end

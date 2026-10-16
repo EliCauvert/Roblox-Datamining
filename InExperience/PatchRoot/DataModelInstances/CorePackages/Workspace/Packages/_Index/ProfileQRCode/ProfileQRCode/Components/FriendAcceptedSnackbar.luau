@@ -1,1 +1,1 @@
-﻿return require(script.FriendAcceptedSnackbar)
+﻿return (require(script.FriendAcceptedSnackbar))

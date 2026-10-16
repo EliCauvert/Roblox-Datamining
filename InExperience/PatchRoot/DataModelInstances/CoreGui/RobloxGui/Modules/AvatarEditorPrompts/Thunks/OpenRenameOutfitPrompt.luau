@@ -1,19 +1,19 @@
-﻿local avatarEditorService = game:GetService("AvatarEditorService")
-local parent = script.Parent.Parent
-local openPromptModule = require(parent.Actions.OpenPrompt)
-local getOutfitNameModule = require(parent.Network.GetOutfitName)
-local promptTypeModule = require(parent.PromptType)
+﻿local AvatarEditorService = game:GetService("AvatarEditorService")
+local Parent = script.Parent.Parent
+local OpenPromptModule = require(Parent.Actions.OpenPrompt)
+local GetOutfitNameModule = require(Parent.Network.GetOutfitName)
+local PromptTypeModule = require(Parent.PromptType)
 
-return function(p1)
-	-- upvalues: getOutfitNameModule (ref), openPromptModule (ref), promptTypeModule (ref), avatarEditorService (ref)
-	return function(p2)
-		-- upvalues: getOutfitNameModule (copy), p1 (ref), openPromptModule (copy), promptTypeModule (copy), avatarEditorService (copy)
-		getOutfitNameModule(p1):andThen(function(p3)
-			-- upvalues: p2 (ref), openPromptModule (copy), promptTypeModule (copy), p1 (copy)
-			p2:dispatch(openPromptModule(promptTypeModule.RenameOutfit, { outfitId = p1, outfitName = p3 }))
-		end, function(_)
-			-- upvalues: avatarEditorService (copy)
-			avatarEditorService:SignalRenameOutfitFailed()
+return function(OutfitId) --[[ Line: 10 ]]
+	-- upvalues: GetOutfitNameModule (copy), OpenPromptModule (copy), PromptTypeModule (copy), AvatarEditorService (copy)
+	return function(p1) --[[ Line: 11 ]]
+		-- upvalues: GetOutfitNameModule (upval), OutfitId (copy), OpenPromptModule (upval), PromptTypeModule (upval), AvatarEditorService (upval)
+		GetOutfitNameModule(OutfitId):andThen(function(Result) --[[ Line: 12 ]]
+			-- upvalues: p1 (copy), OpenPromptModule (upval), PromptTypeModule (upval), OutfitId (upval)
+			p1:dispatch(OpenPromptModule(PromptTypeModule.RenameOutfit, { outfitId = OutfitId, outfitName = Result }))
+		end, function(_) --[[ Line: 17 ]]
+			-- upvalues: AvatarEditorService (upval)
+			AvatarEditorService:SignalRenameOutfitFailed()
 		end)
 	end
 end

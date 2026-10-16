@@ -1,107 +1,112 @@
-﻿local sessionService = game:GetService("SessionService")
-local cryoModule = require(game:GetService("CorePackages").Packages.Cryo)
-local t = {}
-t.__index = t
-t.MenuContexts = {
+﻿local SessionService = game:GetService("SessionService")
+local CryoModule = require(game:GetService("CorePackages").Packages.Cryo)
+local ReportAbuseAnalyticsModule = {}
+ReportAbuseAnalyticsModule.__index = ReportAbuseAnalyticsModule
+ReportAbuseAnalyticsModule.MenuContexts = {
 	LegacyMenu = game:DefineFastString("ReportAnalyticsLegacyMenuContext", "ReportAbuseLegacyMenu"),
 	LegacySentPage = game:DefineFastString("ReportAnalyticsLegacySentPageContext", "ReportAbuseLegacySentPage"),
 	NewMenu = game:DefineFastString("ReportAnalyticsNewMenuContext", "ReportAbuseNewMenu")
 }
-t.DiagCounters = {
+ReportAbuseAnalyticsModule.DiagCounters = {
 	SuccessfulSubmissionTime = game:DefineFastString("ReportAnalyticsSuccessfulSubmissionTimeStat", "SuccessfulSubmissionTime"),
 	AbandonedSubmissionTime = game:DefineFastString("ReportAnalyticsAbandonedSubmissionTimeStat", "AbandonedSubmissionTime"),
 	SubmittedMethodOfAbuse = game:DefineFastString("ReportAnalyticsSubmittedMethodOfAbuseStat", "SubmittedMethodOfAbuse")
 }
-t.ActionNames = {
+ReportAbuseAnalyticsModule.ActionNames = {
 	FieldChanged = game:DefineFastString("ReportAnalyticsFieldChanged", "FieldChanged"),
 	FormSubmitted = game:DefineFastString("ReportAnalyticsFormSubmitted", "FormSubmitted"),
 	FormAbandoned = game:DefineFastString("ReportAnalyticsFormAbandoned", "FormAbandoned"),
 	ButtonActivated = game:DefineFastString("ReportAnalyticsButtonActivated", "ButtonActivated"),
 	InGameAbuseReport = game:DefineFastString("ReportAnalyticsInGameAbuseReport", "InGameAbuseReport")
 }
-t.SessionConstants = {
+ReportAbuseAnalyticsModule.SessionConstants = {
 	StructuralIdentifier = { Level1 = "level1", AbuseReport = "AbuseReport" },
 	Metadata = {
 		EntryPoint = "entryPoint",
 		DeleteOnGameLeave = "_deleteOnGameLeave"
 	}
 }
-local _ = { SUBMIT = 1, ABANDON = 2 }
 
-function t.new(p1, p2, p3)
-	-- upvalues: t (ref)
-	assert(p3, "Base context needs to be provided to ReportAbuseAnalytics")
-	local t_1 = { _eventStreamImpl = p1, _diagImpl = p2, _context = p3 }
-	setmetatable(t_1, t)
+function ReportAbuseAnalyticsModule.new(_eventStreamImpl, _diagImpl, _context) --[[ Line: 57 ]]
+	-- upvalues: ReportAbuseAnalyticsModule (copy)
+	assert(_context, "Base context needs to be provided to ReportAbuseAnalytics")
+	local config = {
+		_eventStreamImpl = _eventStreamImpl,
+		_diagImpl = _diagImpl,
+		_context = _context
+	}
+	setmetatable(config, ReportAbuseAnalyticsModule)
 	
-	return t_1
+	return config
 end
 
-function t:reportFormSubmitted(p1, p2, p3)
-	-- upvalues: t (ref), cryoModule (ref)
-	local text = self._context .. "_" .. t.DiagCounters.SuccessfulSubmissionTime
-	local text_1 = self._context .. "_" .. t.DiagCounters.SubmittedMethodOfAbuse .. "_" .. p4
-	local var1 = cryoModule.Dictionary.join(p3 or {}, { timeToComplete = p1, methodOfAbuse = p2 })
-	self._diagImpl:reportStats(text, p1)
-	self._diagImpl:reportCounter(text_1, 1)
-	self._eventStreamImpl:sendEventDeferred(self._context, t.ActionNames.FormSubmitted, var1)
+function ReportAbuseAnalyticsModule:reportFormSubmitted(TimeToComplete, MethodOfAbuse, p1) --[[ Line: 70 ]]
+	-- upvalues: ReportAbuseAnalyticsModule (copy), CryoModule (copy)
+	local Text = self._context .. "_" .. ReportAbuseAnalyticsModule.DiagCounters.SubmittedMethodOfAbuse .. "_" .. MethodOfAbuse
+	local JoinResult = CryoModule.Dictionary.join(p1 or {}, {
+		timeToComplete = TimeToComplete,
+		methodOfAbuse = MethodOfAbuse
+	})
+	self._diagImpl:reportStats(self._context .. "_" .. ReportAbuseAnalyticsModule.DiagCounters.SuccessfulSubmissionTime, TimeToComplete)
+	self._diagImpl:reportCounter(Text, 1)
+	self._eventStreamImpl:sendEventDeferred(self._context, ReportAbuseAnalyticsModule.ActionNames.FormSubmitted, JoinResult)
 end
 
-function t:reportFormAbandoned(p1, p2)
-	-- upvalues: t (ref), cryoModule (ref)
-	local var1 = cryoModule.Dictionary.join(p2 or {}, { timeToExit = p1 })
-	self._diagImpl:reportStats(self._context .. "_" .. t.DiagCounters.AbandonedSubmissionTime, p1)
-	self._eventStreamImpl:sendEventDeferred(self._context, t.ActionNames.FormAbandoned, var1)
+function ReportAbuseAnalyticsModule:reportFormAbandoned(TimeToExit, p1) --[[ Line: 93 ]]
+	-- upvalues: ReportAbuseAnalyticsModule (copy), CryoModule (copy)
+	local JoinResult = CryoModule.Dictionary.join(p1 or {}, { timeToExit = TimeToExit })
+	self._diagImpl:reportStats(self._context .. "_" .. ReportAbuseAnalyticsModule.DiagCounters.AbandonedSubmissionTime, TimeToExit)
+	self._eventStreamImpl:sendEventDeferred(self._context, ReportAbuseAnalyticsModule.ActionNames.FormAbandoned, JoinResult)
 end
 
-function t:reportAnalyticsFieldChanged(p1)
-	-- upvalues: t (ref)
-	self._eventStreamImpl:sendEventDeferred(self._context, t.ActionNames.FieldChanged, p1 or {})
+function ReportAbuseAnalyticsModule:reportAnalyticsFieldChanged(p1) --[[ Line: 108 ]]
+	-- upvalues: ReportAbuseAnalyticsModule (copy)
+	self._eventStreamImpl:sendEventDeferred(self._context, ReportAbuseAnalyticsModule.ActionNames.FieldChanged, p1 or {})
 end
 
-function t:reportButtonClick(p1)
-	-- upvalues: t (ref)
-	self._eventStreamImpl:sendEventDeferred(self._context, t.ActionNames.ButtonActivated, p1 or {})
+function ReportAbuseAnalyticsModule:reportButtonClick(p1) --[[ Line: 116 ]]
+	-- upvalues: ReportAbuseAnalyticsModule (copy)
+	self._eventStreamImpl:sendEventDeferred(self._context, ReportAbuseAnalyticsModule.ActionNames.ButtonActivated, p1 or {})
 end
 
-function t:reportInGameAbuseReportInteraction(p1)
-	-- upvalues: t (ref)
-	local abandonedSubmissionTime = t.DiagCounters.AbandonedSubmissionTime
+function ReportAbuseAnalyticsModule:reportInGameAbuseReportInteraction(p1) --[[ Line: 129 ]]
+	-- upvalues: ReportAbuseAnalyticsModule (copy)
+	local AbandonedSubmissionTime = ReportAbuseAnalyticsModule.DiagCounters.AbandonedSubmissionTime
 	
 	if p1.interactionType == 1 then
-		abandonedSubmissionTime = t.DiagCounters.SuccessfulSubmissionTime
-		self._diagImpl:reportCounter(self._context .. "_" .. t.DiagCounters.SubmittedMethodOfAbuse .. "_" .. p10.inferredTypeofabuseSelection, 1)
+		AbandonedSubmissionTime = ReportAbuseAnalyticsModule.DiagCounters.SuccessfulSubmissionTime
+		self._diagImpl:reportCounter(self._context .. "_" .. ReportAbuseAnalyticsModule.DiagCounters.SubmittedMethodOfAbuse .. "_" .. p1.inferredTypeofabuseSelection, 1)
 	end
-	self._diagImpl:reportStats(self._context .. "_" .. abandonedSubmissionTime, p1.timeSpentMs)
-	self._eventStreamImpl:sendEventDeferred(self._context, t.ActionNames.InGameAbuseReport, p1)
+	self._diagImpl:reportStats(self._context .. "_" .. AbandonedSubmissionTime, p1.timeSpentMs)
+	self._eventStreamImpl:sendEventDeferred(self._context, ReportAbuseAnalyticsModule.ActionNames.InGameAbuseReport, p1)
 end
 
-function t:reportEventAndIncrement(p1, p2)
-	self._diagImpl:reportCounter(self._context .. "_" .. p11, 1)
-	self._eventStreamImpl:sendEventDeferred(self._context, p1, p2 or {})
+function ReportAbuseAnalyticsModule:reportEventAndIncrement(Text, p1) --[[ Line: 150 ]]
+	self._diagImpl:reportCounter(self._context .. "_" .. Text, 1)
+	self._eventStreamImpl:sendEventDeferred(self._context, Text, p1 or {})
 end
 
-function t.startAbuseReportSession(_, p1)
-	-- upvalues: sessionService (ref), t (ref)
-	if not sessionService:SessionExists(t.SessionConstants.StructuralIdentifier.AbuseReport) then
-		sessionService:SetSession(t.SessionConstants.StructuralIdentifier.Level1, t.SessionConstants.StructuralIdentifier.AbuseReport, t.SessionConstants.StructuralIdentifier.AbuseReport)
+function ReportAbuseAnalyticsModule:startAbuseReportSession(Value) --[[ Line: 156 ]]
+	-- upvalues: SessionService (copy), ReportAbuseAnalyticsModule (copy)
+	if not SessionService:SessionExists(ReportAbuseAnalyticsModule.SessionConstants.StructuralIdentifier.AbuseReport) then
+		SessionService:SetSession(ReportAbuseAnalyticsModule.SessionConstants.StructuralIdentifier.Level1, ReportAbuseAnalyticsModule.SessionConstants.StructuralIdentifier.AbuseReport, ReportAbuseAnalyticsModule.SessionConstants.StructuralIdentifier.AbuseReport)
 	end
-	if not sessionService:GetMetadata(t.SessionConstants.StructuralIdentifier.AbuseReport, t.SessionConstants.Metadata.EntryPoint) then
-		sessionService:SetMetadata(t.SessionConstants.StructuralIdentifier.AbuseReport, t.SessionConstants.Metadata.EntryPoint, p1)
+	if not SessionService:GetMetadata(ReportAbuseAnalyticsModule.SessionConstants.StructuralIdentifier.AbuseReport, ReportAbuseAnalyticsModule.SessionConstants.Metadata.EntryPoint) then
+		SessionService:SetMetadata(ReportAbuseAnalyticsModule.SessionConstants.StructuralIdentifier.AbuseReport, ReportAbuseAnalyticsModule.SessionConstants.Metadata.EntryPoint, Value)
 	end
-	sessionService:SetMetadata(t.SessionConstants.StructuralIdentifier.AbuseReport, t.SessionConstants.Metadata.DeleteOnGameLeave, "True")
+	SessionService:SetMetadata(ReportAbuseAnalyticsModule.SessionConstants.StructuralIdentifier.AbuseReport, ReportAbuseAnalyticsModule.SessionConstants.Metadata.DeleteOnGameLeave, "True")
 end
 
-function t.getAbuseReportSessionEntryPoint(_)
-	-- upvalues: sessionService (ref), t (ref)
-	return if sessionService:SessionExists(t.SessionConstants.StructuralIdentifier.AbuseReport) then sessionService:GetMetadata(t.SessionConstants.StructuralIdentifier.AbuseReport, t.SessionConstants.Metadata.EntryPoint) else ""
+function ReportAbuseAnalyticsModule:getAbuseReportSessionEntryPoint() --[[ Line: 188 ]]
+	-- upvalues: SessionService (copy), ReportAbuseAnalyticsModule (copy)
+	return if SessionService:SessionExists(ReportAbuseAnalyticsModule.SessionConstants.StructuralIdentifier.AbuseReport) then SessionService:GetMetadata(ReportAbuseAnalyticsModule.SessionConstants.StructuralIdentifier.AbuseReport, ReportAbuseAnalyticsModule.SessionConstants.Metadata.EntryPoint) else ""
 end
 
-function t.endAbuseReportSession(_)
-	-- upvalues: sessionService (ref), t (ref)
-	if sessionService:SessionExists(t.SessionConstants.StructuralIdentifier.AbuseReport) then
-		sessionService:RemoveSession(t.SessionConstants.StructuralIdentifier.AbuseReport)
+function ReportAbuseAnalyticsModule:endAbuseReportSession() --[[ Line: 202 ]]
+	-- upvalues: SessionService (copy), ReportAbuseAnalyticsModule (copy)
+	if SessionService:SessionExists(ReportAbuseAnalyticsModule.SessionConstants.StructuralIdentifier.AbuseReport) then
+		SessionService:RemoveSession(ReportAbuseAnalyticsModule.SessionConstants.StructuralIdentifier.AbuseReport)
 	end
 end
 
-return t
+return ReportAbuseAnalyticsModule

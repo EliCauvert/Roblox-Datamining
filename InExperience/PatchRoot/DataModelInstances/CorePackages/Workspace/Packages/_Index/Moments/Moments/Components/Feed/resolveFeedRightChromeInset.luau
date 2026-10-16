@@ -1,3 +1,3 @@
-﻿return function(value, p1, p2)
-	return if p1 == nil then math.max(value.right, p2) else math.max(value.right, p1)
+﻿return function(p1, p2: number, p3: number): number --[[ Line: 7 | Named "resolveFeedRightChromeInset" ]]
+	return if p2 == nil then math.max(p1.right, p3) else math.max(p1.right, p2)
 end

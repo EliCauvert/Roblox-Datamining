@@ -1,24 +1,25 @@
-﻿local parent = script:FindFirstAncestor("InExperienceSideSheet").Parent
-local _ = require(parent.Chrome)
-local reactModule = require(parent.React)
+﻿local Parent = script:FindFirstAncestor("InExperienceSideSheet").Parent
+local _ = require(Parent.Chrome)
+local ReactModule = require(Parent.React)
 
-return function(p1)
-	-- upvalues: reactModule (ref)
-	local var1, var2 = reactModule.useState(not p1:isEmpty())
-	local var3, var4 = reactModule.useBinding(p1:get().value or 0)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var2 (ref), var4 (ref)
-		p1:connect(function(p2)
-			-- upvalues: p1 (copy), var2 (copy), var4 (copy)
+return function(p1) --[[ Line: 12 | Named "useNotificationCount" ]]
+	-- upvalues: ReactModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(not p1:isEmpty())
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(p1:get().value or 0)
+	ReactModule.useEffect(function() --[[ Line: 16 ]]
+		-- upvalues: p1 (copy), UseStateResult2 (copy), UseBindingResult2 (copy)
+		p1:connect(function(p2) --[[ Line: 17 ]]
+			-- upvalues: p1 (upval), UseStateResult2 (upval), UseBindingResult2 (upval)
 			if p1:isEmpty() then
-				var2(false)
+				UseStateResult2(false)
 				
 				return
+			else
+				UseBindingResult2((math.min(p2.value, 99)))
+				UseStateResult2(true)
 			end
-			var4(math.min(p2.value, 99))
-			var2(true)
 		end)
 	end, { p1 })
 	
-	return var1, var3
+	return UseStateResult, UseBindingResult
 end

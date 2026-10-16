@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("FriendsCarouselProfileFrameEnabled", false) and require(script:FindFirstAncestor("SocialCarousel").Parent.SharedFlags).GetFFlagProfileFrameThumbnailEnabled()
+﻿local GetFFlagProfileFrameThumbnailEnabledFunction = require(script:FindFirstAncestor("SocialCarousel").Parent.SharedFlags).GetFFlagProfileFrameThumbnailEnabled
+
+return game:DefineFastFlag("FriendsCarouselProfileFrameEnabled", false) and GetFFlagProfileFrameThumbnailEnabledFunction()

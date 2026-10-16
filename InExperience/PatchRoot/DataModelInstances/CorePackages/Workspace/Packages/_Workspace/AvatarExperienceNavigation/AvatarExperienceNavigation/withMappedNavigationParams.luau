@@ -1,21 +1,21 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceNavigation").Parent
-local roactModule = require(parent.Roact)
-local cryoModule = require(parent.Cryo)
-local argCheckModule = require(parent.ArgCheck)
-local reactIsModule = require(parent.ReactIs)
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceNavigation").Parent
+local RoactModule = require(Parent.Roact)
+local CryoModule = require(Parent.Cryo)
+local ArgCheckModule = require(Parent.ArgCheck)
+local ReactIsModule = require(Parent.ReactIs)
 
-return function(p1, p2)
-	-- upvalues: argCheckModule (ref), reactIsModule (ref), roactModule (ref), cryoModule (ref)
-	argCheckModule.assert(reactIsModule.isValidElementType(p1), "withMappedNavigationParams must be called with a Roact component (stateful or functional)")
-	p2 = p2 or {}
+return function(p1, p2) --[[ Line: 12 | Named "withMappedNavigationParams" ]]
+	-- upvalues: ArgCheckModule (copy), ReactIsModule (copy), RoactModule (copy), CryoModule (copy)
+	ArgCheckModule.assert(ReactIsModule.isValidElementType(p1), "withMappedNavigationParams must be called with a Roact component (stateful or functional)")
+	local P1 = p2 or {}
 	
-	if p2.forwardRef == nil then
-		p2.forwardRef = true
+	if P1.forwardRef == nil then
+		P1.forwardRef = true
 	end
-	return function(p3)
-		-- upvalues: roactModule (copy), p1 (ref), cryoModule (copy), p2 (ref)
-		return roactModule.createElement(p1, cryoModule.Dictionary.join(p3, p3.navigation.state.params or {}, {
-			[roactModule.Ref] = if p2.forwardRef then p3[roactModule.Ref] else cryoModule.None
+	return function(p3) --[[ Line: 23 ]]
+		-- upvalues: RoactModule (upval), p1 (copy), CryoModule (upval), P1 (copy)
+		return RoactModule.createElement(p1, CryoModule.Dictionary.join(p3, p3.navigation.state.params or {}, {
+			[RoactModule.Ref] = P1.forwardRef and p3[RoactModule.Ref] or CryoModule.None
 		}))
 	end
 end

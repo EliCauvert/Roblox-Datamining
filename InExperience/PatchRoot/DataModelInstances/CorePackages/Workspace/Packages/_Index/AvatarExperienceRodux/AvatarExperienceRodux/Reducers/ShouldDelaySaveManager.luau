@@ -1,10 +1,10 @@
-﻿local avatarExperienceRodux = script:FindFirstAncestor("AvatarExperienceRodux")
+﻿local AvatarExperienceRodux = script:FindFirstAncestor("AvatarExperienceRodux")
 
-return require(avatarExperienceRodux.Parent.Rodux).createReducer(false, {
-	[require(avatarExperienceRodux.Actions.AddSaveDelay).name] = function(_, _)
+return require(AvatarExperienceRodux.Parent.Rodux).createReducer(false, {
+	[require(AvatarExperienceRodux.Actions.AddSaveDelay).name] = function(_, _): boolean --[[ Line: 21 ]]
 		return true
 	end,
-	[require(avatarExperienceRodux.Actions.RemoveSaveDelay).name] = function(_, _)
+	[require(AvatarExperienceRodux.Actions.RemoveSaveDelay).name] = function(_, _): boolean --[[ Line: 25 ]]
 		return false
 	end
 })

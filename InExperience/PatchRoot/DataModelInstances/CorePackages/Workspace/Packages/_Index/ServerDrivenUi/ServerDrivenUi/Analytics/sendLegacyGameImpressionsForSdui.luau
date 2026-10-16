@@ -1,77 +1,79 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local cryoModule = require(parent.Cryo)
-local sendGameImpressions = require(parent.GameCollections).SendGameImpressions
-local _ = require(parent.UnifiedLogging)
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local sduiBuilder = sduiCoreSystemModule.SduiBuilder
-local sduiErrors = sduiCoreSystemModule.SduiErrors
-local sduiParsers = sduiCoreSystemModule.SduiParsers
-local sduiParseHelpers = sduiCoreSystemModule.SduiParseHelpers
-local findAnalyticsFieldInAncestors = sduiCoreSystemModule.findAnalyticsFieldInAncestors
-local appPage = require(parent.RobloxAppEnums).AppPage
-local _ = require(parent.DiscoveryTypes)
-local fFlagLuaAppAddComponentTypeToSearchImpressions = require(parent.SharedFlags).FFlagLuaAppAddComponentTypeToSearchImpressions
-local fFlagSduiFixSearchTelemetry = require(parent.SharedFlags).FFlagSduiFixSearchTelemetry
-local fFlagLuaAppSponsoredGamePreviewVideo = require(parent.SharedFlags).FFlagLuaAppSponsoredGamePreviewVideo
-local fFlagLuaAppSduiPassSortSubId = require(parent.SharedFlags).FFlagLuaAppSduiPassSortSubId
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local CryoModule = require(Parent.Cryo)
+local SendGameImpressions = require(Parent.GameCollections).SendGameImpressions
+local _ = require(Parent.UnifiedLogging)
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiBuilder = SduiCoreSystemModule.SduiBuilder
+local SduiErrors = SduiCoreSystemModule.SduiErrors
+local SduiParsers = SduiCoreSystemModule.SduiParsers
+local SduiParseHelpers = SduiCoreSystemModule.SduiParseHelpers
+local FindAnalyticsFieldInAncestorsFunction = SduiCoreSystemModule.findAnalyticsFieldInAncestors
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local _ = require(Parent.DiscoveryTypes)
+local FFlagSduiFixSearchTelemetry = require(Parent.SharedFlags).FFlagSduiFixSearchTelemetry
+local FFlagLuaAppSponsoredGamePreviewVideo = require(Parent.SharedFlags).FFlagLuaAppSponsoredGamePreviewVideo
+local FFlagLuaAppSduiPassSortSubId = require(Parent.SharedFlags).FFlagLuaAppSduiPassSortSubId
 local t = {}
 
-return function(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
-	-- upvalues: fFlagSduiFixSearchTelemetry (ref), t (ref), cryoModule (ref), sduiParsers (ref), fFlagLuaAppSponsoredGamePreviewVideo (ref), sduiBuilder (ref), fFlagLuaAppSduiPassSortSubId (ref), findAnalyticsFieldInAncestors (ref), appPage (ref), sendGameImpressions (ref), fFlagLuaAppAddComponentTypeToSearchImpressions (ref), sduiParseHelpers (ref), sduiErrors (ref)
-	local t_1 = {}
-	local var1 = if fFlagSduiFixSearchTelemetry then 0 else nil
-	
-	for i, v in p2 or t do
-		local var2 = cryoModule.Dictionary.join(v, {
-			isSponsored = sduiParsers.safeParseBoolean(v.adFlag or false, p7, p4),
-			gameCollectionItemTypeOverride = if fFlagSduiFixSearchTelemetry then v.tileType else nil,
-			sponsoredGamePreviewVideoEligible = if fFlagLuaAppSponsoredGamePreviewVideo then sduiParsers.safeParseBoolean(v.sponsoredGamePreviewVideoEligible or false, p7, p4) else nil
+return function(Entry, p1, p2, p3, p4, p5, p6, Callback: (any, any, any, any, any) -> (), p7, Name) --[[ Line: 29 | Named "sendLegacyGameImpressionsForSdui" ]]
+	-- upvalues: FFlagSduiFixSearchTelemetry (copy), t (copy), CryoModule (copy), SduiParsers (copy), FFlagLuaAppSponsoredGamePreviewVideo (copy), SduiBuilder (copy), FFlagLuaAppSduiPassSortSubId (copy), FindAnalyticsFieldInAncestorsFunction (copy), AppPage (copy), SendGameImpressions (copy), SduiParseHelpers (copy), SduiErrors (copy)
+	local JoinResults = {}
+	local Count = if FFlagSduiFixSearchTelemetry then 0 else nil
+	local P0 = p1 or t
+	for i, value in P0 do
+		local JoinResult = CryoModule.Dictionary.join(value, {
+			isSponsored = SduiParsers.safeParseBoolean(value.adFlag or false, p6, p3),
+			gameCollectionItemTypeOverride = if FFlagSduiFixSearchTelemetry then value.tileType else nil,
+			sponsoredGamePreviewVideoEligible = if FFlagLuaAppSponsoredGamePreviewVideo then SduiParsers.safeParseBoolean(value.sponsoredGamePreviewVideoEligible or false, p6, p3) else nil
 		})
 		
-		if fFlagSduiFixSearchTelemetry then
-			t_1[i] = var2
-			var1 += 1
+		if FFlagSduiFixSearchTelemetry then
+			JoinResults[i] = JoinResult
+			Count += 1
 		else
-			table.insert(t_1, var2)
+			table.insert(JoinResults, JoinResult)
 		end
 	end
-	if (if fFlagSduiFixSearchTelemetry then var1 else #t_1) > 0 and #p1 > 0 then
-		local var3 = if t_1[p1[1]] then t_1[p1[1]].itemComponentType else "unknown"
-		local var4 = nil
-		local var5 = p3[p1[1]]
+	if (if FFlagSduiFixSearchTelemetry then Count else #JoinResults) > 0 and #Entry > 0 then
+		local ItemComponentType = JoinResults[Entry[1]] and JoinResults[Entry[1]].itemComponentType or "unknown"
+		local v1: boolean? = nil
+		local v2 = p2[Entry[1]]
 		
-		if var5 then
-			local componentType = sduiBuilder.getComponentType(var5, p7)
-			var4 = (if componentType ~= "Tile" then componentType == "GameTile" else true) and (var5.props and (var5.props.imageAspectRatio or 0) > 1)
+		if v2 then
+			local ComponentType = SduiBuilder.getComponentType(v2, p6)
+			local v3: boolean = v2.props and (v2.props.imageAspectRatio or 0) > 1
+			v1 = (ComponentType == "Tile" or ComponentType == "GameTile") and v3
 		end
-		local var6 = if fFlagLuaAppSduiPassSortSubId then findAnalyticsFieldInAncestors("sortSubId", p4) else nil
+		local SortSubId = if FFlagLuaAppSduiPassSortSubId then FindAnalyticsFieldInAncestorsFunction("sortSubId", p3) else nil
 		
-		if p8 then
-			p8(p1, t_1, p5.itemsPerRow, p6, var4)
+		if Callback then
+			Callback(Entry, JoinResults, p4.itemsPerRow, p5, v1)
 			
 			return
-		elseif p7.appPage == appPage.SearchPage then
-			sendGameImpressions.sendFromSearch(p7.dependencies.eventIngest, p7.dependencies.appAnalytics, p1, t_1, p7.appPage, {
+		end
+		if p6.appPage == AppPage.SearchPage then
+			SendGameImpressions.sendFromSearch(p6.dependencies.eventIngest, p6.dependencies.appAnalytics, Entry, JoinResults, p6.appPage, {
 				emphasisFlag = 0,
 				seeAllFlag = 0,
-				searchUuid = findAnalyticsFieldInAncestors("searchUuid", p4),
-				sortPos = p5.collectionPosition,
-				gameSetTypeId = tostring(p5.collectionId)
-			}, p9, p6, if fFlagLuaAppAddComponentTypeToSearchImpressions then var4 or false else nil, if fFlagLuaAppAddComponentTypeToSearchImpressions then var3 else nil)
-			
-			return
-		elseif p7.appPage == appPage.ExperienceDetail or p7.appPage == appPage.GameDetail then
-			sendGameImpressions.sendFromGameDetails(p7.dependencies.eventIngest, p7.dependencies.appAnalytics, p1, t_1, tostring(p5.refId))
+				searchUuid = FindAnalyticsFieldInAncestorsFunction("searchUuid", p3),
+				sortPos = p4.collectionPosition,
+				gameSetTypeId = tostring(p4.collectionId)
+			}, p7, p5, v1 or false, ItemComponentType)
 			
 			return
 		end
-		sendGameImpressions.sendFromTopicContents(p7.dependencies.eventIngest, p7.dependencies.appAnalytics, p1, t_1, p7.appPage, tostring(p5.collectionId), p5.collectionPosition, p6, nil, nil, p9, var4 or false, var3, nil, nil, function(p11)
-			-- upvalues: p4 (ref), sduiParseHelpers (copy), p7 (ref), sduiErrors (copy), var3 (ref), p10 (ref)
-			p7.dependencies.logger.reportError(sduiErrors.SduiErrorType.FailedToLogGameImpressions, {
-				componentType = var3,
-				name = p10,
-				message = `Failed to log game impressions. reason: {p11}. analyticsContext: {if p4 then sduiParseHelpers.stringifyValue(p4.analyticsData) else nil}`
-			}, p7.appPage)
-		end, if fFlagLuaAppSduiPassSortSubId and var6 then tostring(var6) else nil)
+		if p6.appPage == AppPage.ExperienceDetail or p6.appPage == AppPage.GameDetail then
+			SendGameImpressions.sendFromGameDetails(p6.dependencies.eventIngest, p6.dependencies.appAnalytics, Entry, JoinResults, (tostring(p4.refId)))
+			
+			return
+		end
+		SendGameImpressions.sendFromTopicContents(p6.dependencies.eventIngest, p6.dependencies.appAnalytics, Entry, JoinResults, p6.appPage, tostring(p4.collectionId), p4.collectionPosition, p5, nil, nil, p7, v1 or false, ItemComponentType, nil, nil, function(p8) --[[ Line: 154 ]]
+			-- upvalues: p3 (copy), SduiParseHelpers (upval), p6 (copy), SduiErrors (upval), ItemComponentType (copy), Name (copy)
+			p6.dependencies.logger.reportError(SduiErrors.SduiErrorType.FailedToLogGameImpressions, {
+				componentType = ItemComponentType,
+				name = Name,
+				message = `Failed to log game impressions. reason: {p8}. analyticsContext: {if p3 then SduiParseHelpers.stringifyValue(p3.analyticsData) else nil}`
+			}, p6.appPage)
+		end, if FFlagLuaAppSduiPassSortSubId and SortSubId then tostring(SortSubId) else nil)
 	end
 end

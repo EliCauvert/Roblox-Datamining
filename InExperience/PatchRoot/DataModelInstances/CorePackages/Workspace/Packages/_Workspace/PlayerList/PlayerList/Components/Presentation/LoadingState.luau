@@ -1,21 +1,21 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local foundationModule = require(parent_1.Foundation)
-local view = foundationModule.View
-local loading = foundationModule.Loading
-local iconSize = foundationModule.Enums.IconSize
-local useLegacyAndTransparencyAwarePanelStyleModule = require(parent.Hooks.useLegacyAndTransparencyAwarePanelStyle)
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local FoundationModule = require(Parent1.Foundation)
+local View = FoundationModule.View
+local Loading = FoundationModule.Loading
+local IconSize = FoundationModule.Enums.IconSize
+local UseLegacyAndTransparencyAwarePanelStyleModule = require(Parent.Hooks.useLegacyAndTransparencyAwarePanelStyle)
 
-return reactModule.memo(function(p1)
-	-- upvalues: useLegacyAndTransparencyAwarePanelStyleModule (ref), reactModule (ref), view (ref), loading (ref), iconSize (ref)
-	local var1 = useLegacyAndTransparencyAwarePanelStyleModule(p1.useLegacyPanelStyling)
+return ReactModule.memo(function(p1) --[[ Line: 19 | Named "LoadingStateImpl" ]]
+	-- upvalues: UseLegacyAndTransparencyAwarePanelStyleModule (copy), ReactModule (copy), View (copy), Loading (copy), IconSize (copy)
+	local UseLegacyAndTransparencyAwarePanelStyleModuleResult = UseLegacyAndTransparencyAwarePanelStyleModule(p1.useLegacyPanelStyling)
 	
-	return reactModule.createElement(view, {
-		tag = var1.panelTag,
+	return ReactModule.createElement(View, {
+		tag = UseLegacyAndTransparencyAwarePanelStyleModuleResult.panelTag,
 		LayoutOrder = p1.layoutOrder,
-		backgroundStyle = var1.backgroundStyle
+		backgroundStyle = UseLegacyAndTransparencyAwarePanelStyleModuleResult.backgroundStyle
 	}, {
-		Spinner = reactModule.createElement(loading, { size = iconSize.XLarge })
+		Spinner = ReactModule.createElement(Loading, { size = IconSize.XLarge })
 	})
 end)

@@ -1,21 +1,23 @@
 ﻿return {
-	getTouchLineAngleDegrees = function(vectorA)
-		if #vectorA < 2 then
+	getTouchLineAngleDegrees = function(Entry): number? --[[ Line: 14 ]]
+		if #Entry < 2 then
 			return nil
+		else
+			local EntryDelta = Entry[2] - Entry[1]
+			
+			return (math.deg((math.atan2(EntryDelta.Y, EntryDelta.X))))
 		end
-		local var1 = vectorA[2] - vectorA[1]
-		
-		return math.deg(math.atan2(var1.Y, var1.X))
 	end,
-	getTouchRotationStepDegrees = function(p1, p2)
+	getTouchRotationStepDegrees = function(p1, p2): number --[[ Line: 26 ]]
 		return (p2 - p1 + 90) % 180 - 90
 	end,
-	touchGestureStartsOnOverlay = function(p1, p2, p3)
-		if #p1 < 2 then
+	touchGestureStartsOnOverlay = function(Entry, Vector, Vector1): boolean --[[ Line: 34 ]]
+		if #Entry < 2 then
 			return false
+		else
+			local EntryRatio = (Entry[1] + Entry[2]) / 2
+			
+			return Vector.X - 64 <= EntryRatio.X and (EntryRatio.X <= Vector.X + Vector1.X + 64 and Vector.Y - 64 <= EntryRatio.Y) and EntryRatio.Y <= Vector.Y + Vector1.Y + 64
 		end
-		local var1 = (p1[1] + p1[2]) / 2
-		
-		return p2.X - 64 <= var1.X and (var1.X <= p2.X + p3.X + 64 and (p2.Y - 64 <= var1.Y and var1.Y <= p2.Y + p3.Y + 64))
 	end
 }

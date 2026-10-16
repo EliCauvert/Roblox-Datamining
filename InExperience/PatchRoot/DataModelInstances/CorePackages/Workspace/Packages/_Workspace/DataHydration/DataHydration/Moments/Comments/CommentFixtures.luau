@@ -1,5 +1,5 @@
 ﻿local _ = require(script:FindFirstAncestor("DataHydration").Parent.MomentsTypes)
-local t = {
+local config = {
 	feedItemId = "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
 	commentId = "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
 	secondCommentId = "cccccccc-cccc-cccc-cccc-cccccccccccc",
@@ -9,7 +9,7 @@ local t = {
 	thumbsUpEmoteId = "ceaa4d10-c6e5-4dbe-97ef-9c2ee37f9a30",
 	unknownEmoteId = "b19f82d3-774b-45a3-a9f7-729d643d126e"
 }
-local t_1 = {
+local config1 = {
 	roblox = {
 		userId = "1",
 		username = "Roblox",
@@ -40,8 +40,8 @@ local t_1 = {
 	unavailableAvatar = { userId = "999999999999999" },
 	malformedAvatar = { userId = "not-a-user-id" }
 }
-local t_2 = {
-	AUTHORS = t_1,
+local config2 = {
+	AUTHORS = config1,
 	ERRORS = {
 		TextFilterRejected = {
 			errorCode = "TextFilterRejected",
@@ -53,39 +53,39 @@ local t_2 = {
 			message = "the viewer cannot react to comments"
 		}
 	},
-	REACTION_IDS = t,
+	REACTION_IDS = config,
 	REACTIONS = {
 		empty = { userReaction = nil, counts = {} },
 		selectedThumbsUp = {
-			counts = { { count = 3, emoteId = t.thumbsUpEmoteId } },
-			userReaction = { emoteId = t.thumbsUpEmoteId }
+			counts = { { count = 3, emoteId = config.thumbsUpEmoteId } },
+			userReaction = { emoteId = config.thumbsUpEmoteId }
 		},
 		selectedUnknown = {
-			counts = { { count = 1, emoteId = t.unknownEmoteId } },
-			userReaction = { emoteId = t.unknownEmoteId }
+			counts = { { count = 1, emoteId = config.unknownEmoteId } },
+			userReaction = { emoteId = config.unknownEmoteId }
 		}
 	},
-	makeComment = function(p1)
-		-- upvalues: t_1 (ref)
-		local t = {
+	makeComment = function(List) --[[ Line: 97 ]]
+		-- upvalues: config1 (copy)
+		local config = {
 			commentId = "c-1",
 			feedItemId = "feed-1",
 			status = "Active",
 			text = "This moment is fire",
 			createdAt = "2026-08-12T12:00:00Z",
 			isAuthoredByViewer = false,
-			author = t_1.roblox
+			author = config1.roblox
 		}
 		
-		if p1 then
-			for i, v in p1 do
-				t[i] = v
+		if List then
+			for i, value in List do
+				config[i] = value
 			end
 		end
-		return t
+		return config
 	end,
-	makeEnvelope = function(p2)
-		local t = {
+	makeEnvelope = function(List) --[[ Line: 115 ]]
+		local config = {
 			count = 25,
 			countIsCapped = false,
 			creatorEnabled = true,
@@ -93,16 +93,16 @@ local t_2 = {
 			viewerCanWrite = true
 		}
 		
-		if p2 then
-			for i, v in p2 do
-				t[i] = v
+		if List then
+			for i, value in List do
+				config[i] = value
 			end
 		end
-		return t
+		return config
 	end
 }
-local t_3 = { count = 99, countIsCapped = true }
-local t_4 = {
+local config3 = { count = 99, countIsCapped = true }
+local CappedEnvelope = {
 	count = 25,
 	countIsCapped = false,
 	creatorEnabled = true,
@@ -110,11 +110,11 @@ local t_4 = {
 	viewerCanWrite = true
 }
 
-if t_3 then
-	for i, v in t_3 do
-		t_4[i] = v
+if config3 then
+	for i, value in config3 do
+		CappedEnvelope[i] = value
 	end
 end
-t_2.cappedEnvelope = t_4
+config2.cappedEnvelope = CappedEnvelope
 
-return t_2
+return config2

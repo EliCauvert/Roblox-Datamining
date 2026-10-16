@@ -1,91 +1,89 @@
-﻿local tweenService = game:GetService("TweenService")
-local chatUIPrimitives = script:FindFirstAncestor("ChatUIPrimitives")
-local parent = chatUIPrimitives.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local _ = require(chatUIPrimitives.UniversalMessage.Types)
+﻿local TweenService = game:GetService("TweenService")
+local ChatUIPrimitives = script:FindFirstAncestor("ChatUIPrimitives")
+local Parent = ChatUIPrimitives.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local _ = require(ChatUIPrimitives.UniversalMessage.Types)
 
-return reactModule.memo(function(p1)
-	-- upvalues: foundationModule (ref), reactModule (ref), tweenService (ref)
-	local var1 = foundationModule.Hooks.useTokens()
-	local circle = var1.Radius.Circle
-	local cooldownEndsAt = p1.cooldownEndsAt
-	local cooldownDurationSeconds = p1.cooldownDurationSeconds
-	local var2 = cooldownEndsAt ~= nil and os.clock() < cooldownEndsAt
-	local var3, var4 = reactModule.useState(nil)
-	local var5 = reactModule.useRef(nil)
-	local var6 = reactModule.useCallback(function(p2)
-		-- upvalues: var3 (ref), var4 (ref)
-		if var3 == nil and p2 and p2.AbsoluteSize.X > 0 then
-			var4(p2.AbsoluteSize)
+return ReactModule.memo(function(p1) --[[ Line: 36 | Named "ExpressionPillView" ]]
+	-- upvalues: FoundationModule (copy), ReactModule (copy), TweenService (copy)
+	local UseTokensResult = FoundationModule.Hooks.useTokens()
+	local Circle = UseTokensResult.Radius.Circle
+	local CooldownEndsAt = p1.cooldownEndsAt
+	local CooldownDurationSeconds = p1.cooldownDurationSeconds
+	local IsClockTimeBelow: boolean = CooldownEndsAt ~= nil and os.clock() < CooldownEndsAt
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseResult = ReactModule.useCallback(function(Frame: Frame) --[[ Line: 46 ]]
+		-- upvalues: UseStateResult (copy), UseStateResult2 (copy)
+		if UseStateResult == nil and Frame and Frame.AbsoluteSize.X > 0 then
+			UseStateResult2(Frame.AbsoluteSize)
 		end
-	end, { var3 })
-	local var7 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref)
+	end, { UseStateResult })
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 52 ]]
+		-- upvalues: p1 (copy)
 		p1.onActivated(p1.content)
 	end, { p1.onActivated, p1.content })
-	reactModule.useEffect(function()
-		-- upvalues: cooldownEndsAt (ref), var3 (ref), var5 (ref), cooldownDurationSeconds (ref), tweenService (copy)
-		if cooldownEndsAt == nil or var3 == nil then return end
-		local current = var5.current
+	ReactModule.useEffect(function() --[[ Line: 56 ]]
+		-- upvalues: CooldownEndsAt (copy), UseStateResult (copy), UseRefResult (copy), CooldownDurationSeconds (copy), TweenService (upval)
+		if CooldownEndsAt == nil or UseStateResult == nil then return end
+		local Current = UseRefResult.current
 		
-		if current == nil then return end
-		local var8 = cooldownEndsAt - os.clock()
+		if Current == nil then return end
+		local CooldownEndsAtDelta = CooldownEndsAt - os.clock()
 		
-		if var8 <= 0 then
-			return
+		if CooldownEndsAtDelta <= 0 then return end
+		Current.Size = UDim2.fromOffset(UseStateResult.X * math.clamp(CooldownEndsAtDelta / CooldownDurationSeconds, 0, 1), UseStateResult.Y)
+		local Tween = TweenService:Create(Current, TweenInfo.new(CooldownEndsAtDelta, Enum.EasingStyle.Linear), { Size = UDim2.fromOffset(0, UseStateResult.Y) })
+		Tween:Play()
+		
+		return function() --[[ Line: 74 ]]
+			-- upvalues: Tween (copy)
+			Tween:Cancel()
+			Tween:Destroy()
 		end
-		current.Size = UDim2.fromOffset(var3.X * math.clamp(var8 / cooldownDurationSeconds, 0, 1), var3.Y)
-		local var9 = tweenService:Create(current, TweenInfo.new(var8, Enum.EasingStyle.Linear), { Size = UDim2.fromOffset(0, var3.Y) })
-		var9:Play()
-		
-		return function()
-			-- upvalues: var9 (ref)
-			var9:Cancel()
-			var9:Destroy()
-		end
-	end, { cooldownEndsAt, var3, cooldownDurationSeconds })
+	end, { CooldownEndsAt, UseStateResult, CooldownDurationSeconds })
 	
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "size-0-800 auto-x radius-circle clip",
-		onAbsoluteSizeChanged = var6,
+		onAbsoluteSizeChanged = UseResult,
 		LayoutOrder = p1.layoutOrder or 0,
-		backgroundStyle = var1.Color.ActionStandard.Background,
-		onActivated = var7,
-		isDisabled = var2,
+		backgroundStyle = UseTokensResult.Color.ActionStandard.Background,
+		onActivated = UseResult1,
+		isDisabled = IsClockTimeBelow,
 		cursor = {
-			radius = UDim.new(0, circle),
-			offset = math.floor(var1.Stroke.Thicker) * 2,
-			borderWidth = math.floor(var1.Stroke.Thicker)
+			radius = UDim.new(0, Circle),
+			offset = math.floor(UseTokensResult.Stroke.Thicker) * 2,
+			borderWidth = math.floor(UseTokensResult.Stroke.Thicker)
 		},
 		ref = p1.buttonRef
 	}, {
-		CooldownClipFrame = if var2 and cooldownEndsAt ~= nil and var3 ~= nil then reactModule.createElement("Frame", {
+		CooldownClipFrame = if IsClockTimeBelow and CooldownEndsAt ~= nil and UseStateResult ~= nil then ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			ClipsDescendants = true,
 			BorderSizePixel = 0,
 			ZIndex = 1,
-			ref = var5,
-			Size = UDim2.fromOffset(var3.X, var3.Y)
+			ref = UseRefResult,
+			Size = UDim2.fromOffset(UseStateResult.X, UseStateResult.Y)
 		}, {
-			CooldownOverlay = reactModule.createElement("Frame", {
+			CooldownOverlay = ReactModule.createElement("Frame", {
 				BorderSizePixel = 0,
-				Size = UDim2.new(0, var3.X, 1, 0),
+				Size = UDim2.new(0, UseStateResult.X, 1, 0),
 				AutomaticSize = Enum.AutomaticSize.Y,
-				BackgroundColor3 = var1.Color.Shift.Shift_400.Color3,
-				BackgroundTransparency = var1.Color.Shift.Shift_400.Transparency
+				BackgroundColor3 = UseTokensResult.Color.Shift.Shift_400.Color3,
+				BackgroundTransparency = UseTokensResult.Color.Shift.Shift_400.Transparency
 			}, {
-				UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, circle) })
+				UICorner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, Circle) })
 			})
 		}) else nil,
-		Text = reactModule.createElement(foundationModule.Text, {
+		Text = ReactModule.createElement(FoundationModule.Text, {
 			tag = "size-0-full auto-x text-label-medium",
 			ZIndex = 2,
 			Text = p1.text,
-			textStyle = var1.Color.ActionStandard.Foreground,
+			textStyle = UseTokensResult.Color.ActionStandard.Foreground,
 			padding = {
-				left = UDim.new(0, var1.Padding.Medium),
-				right = UDim.new(0, var1.Padding.Medium)
+				left = UDim.new(0, UseTokensResult.Padding.Medium),
+				right = UDim.new(0, UseTokensResult.Padding.Medium)
 			}
 		})
 	})

@@ -1,6 +1,6 @@
-﻿local parent = script:FindFirstAncestor("TopicInfosRodux").Parent
-local _ = require(parent.DiscoveryTypes)
+﻿local Parent = script:FindFirstAncestor("TopicInfosRodux").Parent
+local _ = require(Parent.DiscoveryTypes)
 
-return require(parent.Rodux).makeActionCreator(script.Name, function(p1)
-	return { topicInfos = p1 }
+return require(Parent.Rodux).makeActionCreator(script.Name, function(TopicInfos) --[[ Line: 12 ]]
+	return { topicInfos = TopicInfos }
 end)

@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CorePackages").Packages.ServiceContractsProto)
+﻿return (require(game:GetService("CorePackages").Packages.ServiceContractsProto))

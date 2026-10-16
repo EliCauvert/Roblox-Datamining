@@ -1,14 +1,14 @@
-﻿local urlBase = require(script:FindFirstAncestor("DataHydration").Parent.UrlBuilder).UrlBase
-local myStatsExperienceStatsPath = game:DefineFastString("MyStatsExperienceStatsPath", "/my-stats-service/v1")
+﻿local UrlBase = require(script:FindFirstAncestor("DataHydration").Parent.UrlBuilder).UrlBase
+local MyStatsExperienceStatsPath = game:DefineFastString("MyStatsExperienceStatsPath", "/my-stats-service/v1")
 
 return {
 	ProtocolVersion = 2,
 	CapRtnNamespace = "AssistantPlugin",
-	acpUrl = function()
-		-- upvalues: urlBase (ref), myStatsExperienceStatsPath (ref)
-		return urlBase.APIS .. myStatsExperienceStatsPath
+	acpUrl = function(): string --[[ Line: 12 ]]
+		-- upvalues: UrlBase (copy), MyStatsExperienceStatsPath (copy)
+		return UrlBase.APIS .. MyStatsExperienceStatsPath
 	end,
-	ACP_PATH = myStatsExperienceStatsPath,
+	ACP_PATH = MyStatsExperienceStatsPath,
 	Methods = {
 		Initialize = "initialize",
 		SessionNew = "session/new",
@@ -45,52 +45,53 @@ return {
 		MissingThumbnail = -32009
 	},
 	AskTool = { Name = "ask_tool" },
-	extractSessionNewProject = function(p1)
-		if typeof(p1) ~= "table" then
+	extractSessionNewProject = function(p1) --[[ Line: 56 ]]
+		if typeof(p1) == "table" then
+			local Roblox = p1._meta and p1._meta._roblox
+			
+			return if typeof(Roblox) == "table" and typeof(Roblox.universeId) == "number" and typeof(Roblox.placeId) == "number" then Roblox else nil
+		else
 			return nil
 		end
-		local roblox = p1._meta and p1._meta._roblox
-		
-		return if typeof(roblox) == "table" and typeof(roblox.universeId) == "number" and typeof(roblox.placeId) == "number" then roblox else nil
 	end,
-	buildSessionNewWireParams = function(p1)
-		local t = {
+	buildSessionNewWireParams = function(p1) --[[ Line: 67 ]]
+		local config = {
 			universeId = p1.project.universeId,
 			placeId = p1.project.placeId
 		}
 		
 		if p1.experiment ~= nil then
-			t.experiment = p1.experiment
+			config.experiment = p1.experiment
 		end
 		if p1.application ~= nil then
-			t.application = p1.application
+			config.application = p1.application
 		end
 		return {
 			cwd = p1.cwd,
 			mcpServers = p1.mcpServers,
-			_meta = { _roblox = t }
+			_meta = { _roblox = config }
 		}
 	end,
-	buildSessionPromptWireParams = function(p1)
-		local t = { sessionId = p1.sessionId, prompt = p1.prompt }
+	buildSessionPromptWireParams = function(p1) --[[ Line: 101 ]]
+		local config = { sessionId = p1.sessionId, prompt = p1.prompt }
 		
 		if p1.experiment == nil then
 			if p1.meta ~= nil then
-				t._meta = p1.meta
+				config._meta = p1.meta
 			end
-			return t
+			return config
 		else
-			local t_1 = {}
+			local _roblox = {}
 			
 			if p1.meta ~= nil and p1.meta._roblox ~= nil then
-				for i, v in p1.meta._roblox do
-					t_1[i] = v
+				for i, value in p1.meta._roblox do
+					_roblox[i] = value
 				end
 			end
-			t_1.experiment = p1.experiment
-			t._meta = { _roblox = t_1 }
+			_roblox.experiment = p1.experiment
+			config._meta = { _roblox = _roblox }
 			
-			return t
+			return config
 		end
 	end
 }

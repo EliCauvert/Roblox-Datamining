@@ -1,8 +1,8 @@
-﻿local ok, status = pcall(function()
+﻿local Success, Result = pcall(function() --[[ Line: 1 ]]
 	return UserSettings():IsUserFeatureEnabled("UserIsChatTranslationEnabled2")
 end)
 
-return function()
-	-- upvalues: ok (ref), status (ref)
-	return ok and status
+return function() --[[ Line: 5 ]]
+	-- upvalues: Success (copy), Result (copy)
+	return Success and Result
 end

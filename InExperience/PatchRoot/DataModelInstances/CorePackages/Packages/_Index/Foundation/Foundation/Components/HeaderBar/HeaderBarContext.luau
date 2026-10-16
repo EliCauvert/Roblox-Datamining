@@ -1,15 +1,15 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local _ = require(foundation.Enums.HeaderBarSlot)
-local var1 = reactModule.createContext({ testId = "" })
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local _ = require(Foundation.Enums.HeaderBarSlot)
+local Context = ReactModule.createContext({ testId = "" })
 
 return {
-	Context = var1,
-	Provider = function(p1)
-		-- upvalues: reactModule (ref), var1 (ref)
-		return reactModule.createElement(var1.Provider, {
-			value = reactModule.useMemo(function()
-				-- upvalues: p1 (ref)
+	Context = Context,
+	Provider = function(p1) --[[ Line: 25 ]]
+		-- upvalues: ReactModule (copy), Context (copy)
+		return ReactModule.createElement(Context.Provider, {
+			value = ReactModule.useMemo(function() --[[ Line: 26 ]]
+				-- upvalues: p1 (copy)
 				return { testId = p1.testId, slot = p1.slot }
 			end, { p1.testId, p1.slot })
 		}, p1.children)

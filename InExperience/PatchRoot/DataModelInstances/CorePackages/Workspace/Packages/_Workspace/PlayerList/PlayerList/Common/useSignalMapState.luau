@@ -1,21 +1,21 @@
-﻿local parent = script.Parent.Parent.Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local _ = require(parent.CoreScriptsRoactCommon)
+﻿local Parent = script.Parent.Parent.Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local _ = require(Parent.CoreScriptsRoactCommon)
 
-return function(value)
-	-- upvalues: reactModule (ref), signalsModule (ref)
-	local var1, var2 = reactModule.useState(value)
-	reactModule.useLayoutEffect(function()
-		-- upvalues: var2 (ref), value (ref), signalsModule (copy)
-		var2(value)
+return function(p1) --[[ Line: 10 | Named "useSignalMapState" ]]
+	-- upvalues: ReactModule (copy), SignalsModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(p1)
+	ReactModule.useLayoutEffect(function() --[[ Line: 13 ]]
+		-- upvalues: UseStateResult2 (copy), p1 (copy), SignalsModule (upval)
+		UseStateResult2(p1)
 		
-		return signalsModule.createEffect(function(p1)
-			-- upvalues: value (copy), var2 (copy)
-			value.getCount(p1)
-			var2(value)
+		return SignalsModule.createEffect(function(p2) --[[ Line: 15 ]]
+			-- upvalues: p1 (upval), UseStateResult2 (upval)
+			p1.getCount(p2)
+			UseStateResult2(p1)
 		end)
-	end, { value })
+	end, { p1 })
 	
-	return var1
+	return UseStateResult
 end

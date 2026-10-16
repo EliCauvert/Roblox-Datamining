@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Workspace.DsaIllegalContentReporting.DsaIllegalContentReporting)
+﻿return (require(script.Parent.Parent.Parent._Workspace.DsaIllegalContentReporting.DsaIllegalContentReporting))

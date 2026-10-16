@@ -1,27 +1,30 @@
-﻿local expChatShared = script:FindFirstAncestor("ExpChatShared")
-local promiseModule = require(expChatShared.Parent.Promise)
-local contextModule = require(expChatShared.context)
+﻿local ExpChatShared = script:FindFirstAncestor("ExpChatShared")
+local PromiseModule = require(ExpChatShared.Parent.Promise)
+local ContextModule = require(ExpChatShared.context)
 local _ = require(script:FindFirstAncestor("Commands").types)
 
-local function matchesAlias(p1, p2)
-	for i, v in pairs(p1) do
-		if string.find(p2, "^" .. v .. " ") then
+local function matchesAlias(AutoCastCommand, Text: string): boolean --[[ Line: 10 ]]
+	for _, value in pairs(AutoCastCommand) do
+		if string.find(Text, "^" .. value .. " ") then
 			return true
 		end
 	end
 	return false
 end
 
-return function(p3, p4, p5)
-	-- upvalues: promiseModule (ref), contextModule (ref), matchesAlias (ref)
-	return promiseModule.try(function()
-		-- upvalues: contextModule (copy), p3 (ref), matchesAlias (copy), p5 (ref), p4 (ref), promiseModule (copy)
-		assert(contextModule.store, "Store should exist")
+return function(p1, p2, p3) --[[ Line: 20 ]]
+	-- upvalues: PromiseModule (copy), ContextModule (copy), matchesAlias (copy)
+	return PromiseModule.try(function() --[[ Line: 21 ]]
+		-- upvalues: ContextModule (upval), p1 (copy), matchesAlias (upval), p3 (copy), p2 (copy), PromiseModule (upval)
+		assert(ContextModule.store, "Store should exist")
 		
-		if matchesAlias(contextModule.store:getState().AutoCastCommands[p3.name], p5) then
-			local var1 = p3.clientRun(contextModule.store, p4, p5)
+		if matchesAlias(ContextModule.store:getState().AutoCastCommands[p1.name], p3) then
+			local ClientRunResult = p1.clientRun(ContextModule.store, p2, p3)
 			
-			return if var1 and string.find(var1.metadata, "Success") then promiseModule.resolve(var1) else promiseModule.reject()
+			if ClientRunResult and string.find(ClientRunResult.metadata, "Success") then
+				return PromiseModule.resolve(ClientRunResult)
+			end
 		end
+		return PromiseModule.reject()
 	end)
 end

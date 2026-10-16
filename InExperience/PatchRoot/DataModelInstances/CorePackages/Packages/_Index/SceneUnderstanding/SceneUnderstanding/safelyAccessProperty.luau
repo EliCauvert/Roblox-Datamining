@@ -1,8 +1,8 @@
-﻿return function(p1, p2, p3)
-	local ok, status = pcall(function()
-		-- upvalues: p1 (ref), p2 (ref)
+﻿return function(p1, p2, p3) --[[ Line: 15 | Named "safelyAccessProperty" ]]
+	local Success, Result = pcall(function() --[[ Line: 16 ]]
+		-- upvalues: p1 (copy), p2 (copy)
 		return p1[p2]
 	end)
 	
-	return if ok then status else p3
+	return if Success then Result else p3
 end

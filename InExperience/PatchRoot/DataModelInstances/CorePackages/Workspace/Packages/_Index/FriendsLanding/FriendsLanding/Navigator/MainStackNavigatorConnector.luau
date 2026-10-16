@@ -1,21 +1,23 @@
-﻿local friendsLanding = script:FindFirstAncestor("FriendsLanding")
-local parent = friendsLanding.Parent
-local roact = require(friendsLanding.dependencies).Roact
-local mainStackNavigatorModule = require(friendsLanding.Navigator.MainStackNavigator)
-local friendsLandingHeaderBarModule = require(friendsLanding.Components.FriendsLandingHeaderBar)
-local isFromConnectionsHubModule = require(friendsLanding.Navigator.isFromConnectionsHub)
-local fFlagCreateConnectionsHub = require(parent.SharedFlags).FFlagCreateConnectionsHub
-local mainStackNavigatorConnector = roact.PureComponent:extend("MainStackNavigatorConnector")
+﻿local FriendsLanding = script:FindFirstAncestor("FriendsLanding")
+local Roact = require(FriendsLanding.dependencies).Roact
+local MainStackNavigatorModule = require(FriendsLanding.Navigator.MainStackNavigator)
+local FriendsLandingHeaderBarModule = require(FriendsLanding.Components.FriendsLandingHeaderBar)
+local IsFromConnectionsHubModule = require(FriendsLanding.Navigator.isFromConnectionsHub)
+local FFlagCreateConnectionsHub = require(FriendsLanding.Parent.SharedFlags).FFlagCreateConnectionsHub
+local MainStackNavigatorConnector = Roact.PureComponent:extend("MainStackNavigatorConnector")
 
-function mainStackNavigatorConnector.render(p1)
-	-- upvalues: fFlagCreateConnectionsHub (ref), isFromConnectionsHubModule (ref), roact (ref), friendsLandingHeaderBarModule (ref), mainStackNavigatorModule (ref)
-	return roact.createFragment({
-		layout = roact.createElement("UIListLayout", { SortOrder = Enum.SortOrder.LayoutOrder }),
-		topBar = if fFlagCreateConnectionsHub and (fFlagCreateConnectionsHub and isFromConnectionsHubModule(p1.props.navigation)) then nil else roact.createElement(friendsLandingHeaderBarModule, { navigation = p1.props.navigation }),
-		navigator = roact.createElement(mainStackNavigatorModule, { navigation = p1.props.navigation })
+function MainStackNavigatorConnector.render(p1) --[[ Line: 13 ]]
+	-- upvalues: FFlagCreateConnectionsHub (copy), IsFromConnectionsHubModule (copy), Roact (copy), FriendsLandingHeaderBarModule (copy), MainStackNavigatorModule (copy)
+	local Navigation = p1.props.navigation
+	local IsFromConnectionsHubModule1 = FFlagCreateConnectionsHub and IsFromConnectionsHubModule(Navigation)
+	
+	return Roact.createFragment({
+		layout = Roact.createElement("UIListLayout", { SortOrder = Enum.SortOrder.LayoutOrder }),
+		topBar = if FFlagCreateConnectionsHub and IsFromConnectionsHubModule1 then nil else Roact.createElement(FriendsLandingHeaderBarModule, { navigation = p1.props.navigation }),
+		navigator = Roact.createElement(MainStackNavigatorModule, { navigation = p1.props.navigation })
 	})
 end
 
-mainStackNavigatorConnector.router = mainStackNavigatorModule.router
+MainStackNavigatorConnector.router = MainStackNavigatorModule.router
 
-return mainStackNavigatorConnector
+return MainStackNavigatorConnector

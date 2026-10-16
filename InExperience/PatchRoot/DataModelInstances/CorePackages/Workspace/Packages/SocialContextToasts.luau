@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.SocialContextToasts.SocialContextToasts)
+﻿return (require(script.Parent._Workspace.SocialContextToasts.SocialContextToasts))

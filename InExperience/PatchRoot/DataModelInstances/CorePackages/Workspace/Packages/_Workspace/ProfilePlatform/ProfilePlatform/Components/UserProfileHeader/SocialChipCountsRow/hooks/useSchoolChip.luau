@@ -1,41 +1,38 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local localizationModule = require(parent.Localization)
-local navigationModule = require(parent.Navigation)
-local appPage = require(parent.RobloxAppEnums).AppPage
-local socialLuaAnalyticsModule = require(parent.SocialLuaAnalytics)
-local enumsModule = require(profilePlatform.Common.Enums)
-local _ = require(profilePlatform.Common.Types)
-local textKeysModule = require(profilePlatform.Common.TextKeys)
-local eventNamesModule = require(profilePlatform.Analytics.EventNames)
-local useProfileJsonComponentModule = require(profilePlatform.Hooks.useProfileJsonComponent)
-local useNavigation = navigationModule.useNavigation
-local useLocalization = localizationModule.Hooks.useLocalization
-local contexts = socialLuaAnalyticsModule.Analytics.Enums.Contexts
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local _ = require(ProfilePlatform.Common.Types)
+local TextKeysModule = require(ProfilePlatform.Common.TextKeys)
+local EventNamesModule = require(ProfilePlatform.Analytics.EventNames)
+local UseProfileJsonComponentModule = require(ProfilePlatform.Hooks.useProfileJsonComponent)
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local Contexts = require(Parent.SocialLuaAnalytics).Analytics.Enums.Contexts
 
-return function(p1)
-	-- upvalues: useNavigation (ref), useProfileJsonComponentModule (ref), enumsModule (ref), useLocalization (ref), textKeysModule (ref), reactModule (ref), eventNamesModule (ref), appPage (ref), contexts (ref)
-	local var1 = useNavigation()
-	local school = useProfileJsonComponentModule(enumsModule.Components.UserProfileHeader).school
-	local var2 = useLocalization({ classmates = textKeysModule.Classmates })
-	local var3 = reactModule.useMemo(function()
-		-- upvalues: school (ref), var2 (ref)
-		return if if school then school.isSameSchool else nil then var2.classmates else nil
-	end, { school, var2 })
-	local var4 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref), eventNamesModule (copy), var1 (ref), appPage (copy), contexts (copy)
-		p1.fireAnalyticsEvent(eventNamesModule.SchoolButton)
-		var1.navigate(appPage.Schools, { extraProps = { source = contexts.PlayerProfile } })
-	end, { p1, var1 })
+return function(p1) --[[ Line: 24 | Named "useSchoolChip" ]]
+	-- upvalues: UseNavigationFunction (copy), UseProfileJsonComponentModule (copy), EnumsModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), EventNamesModule (copy), AppPage (copy), Contexts (copy)
+	local UseNavigationResult = UseNavigationFunction()
+	local School = UseProfileJsonComponentModule(EnumsModule.Components.UserProfileHeader).school
+	local UseLocalizationResult = UseLocalizationFunction({ classmates = TextKeysModule.Classmates })
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 32 ]]
+		-- upvalues: School (copy), UseLocalizationResult (copy)
+		return if if School then School.isSameSchool else nil then UseLocalizationResult.classmates else nil
+	end, { School, UseLocalizationResult })
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 40 ]]
+		-- upvalues: p1 (copy), EventNamesModule (upval), UseNavigationResult (copy), AppPage (upval), Contexts (upval)
+		p1.fireAnalyticsEvent(EventNamesModule.SchoolButton)
+		UseNavigationResult.navigate(AppPage.Schools, { extraProps = { source = Contexts.PlayerProfile } })
+	end, { p1, UseNavigationResult })
 	
-	return reactModule.useMemo(function()
-		-- upvalues: var3 (ref), var4 (ref)
-		return if var3 == nil then nil else {
+	return ReactModule.useMemo(function() --[[ Line: 49 ]]
+		-- upvalues: UseMemoResult (copy), UseResult (copy)
+		return if UseMemoResult == nil then nil else {
 			layoutOrder = 0,
 			isDisabled = false,
-			text = var3,
-			onActivated = var4
+			text = UseMemoResult,
+			onActivated = UseResult
 		}
-	end, { var3, var4 })
+	end, { UseMemoResult, UseResult })
 end

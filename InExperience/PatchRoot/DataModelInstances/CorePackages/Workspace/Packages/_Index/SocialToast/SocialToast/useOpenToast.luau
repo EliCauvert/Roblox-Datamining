@@ -1,28 +1,28 @@
-﻿local parent = script:FindFirstAncestor("SocialToast").Parent
-local navigationRoduxModule = require(parent.NavigationRodux)
-local reactModule = require(parent.React)
-local appPage = require(parent.RobloxAppEnums).AppPage
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local navigateDown = navigationRoduxModule.Thunks.NavigateDown
-local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
-local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
+﻿local Parent = script:FindFirstAncestor("SocialToast").Parent
+local ReactModule = require(Parent.React)
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local NavigateDownFunction = require(Parent.NavigationRodux).Thunks.NavigateDown
+local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
+local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 
-return function()
-	-- upvalues: useDispatch (ref), reactModule (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref)
-	local var2 = useDispatch()
+return function() --[[ Line: 15 ]]
+	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy)
+	local UseDispatchResult = UseDispatchFunction()
 	
-	return reactModule.useCallback(function(p1)
-		-- upvalues: appPage (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var2 (ref), navigateDown (copy)
-		local t = {
-			name = appPage.SocialToast,
-			extraProps = { toastContent = p1 }
+	return ReactModule.useCallback(function(ToastContent) --[[ Line: 18 ]]
+		-- upvalues: AppPage (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval)
+		local config = {
+			name = AppPage.SocialToast,
+			extraProps = { toastContent = ToastContent }
 		}
 		
-		if fFlagSignalsNavP3Dispatch then
-			var1.down(var1.fromLegacyPage(t))
+		if FFlagSignalsNavP3Dispatch then
+			NavigationCommands.down(NavigationCommands.fromLegacyPage(config))
 			
 			return
+		else
+			UseDispatchResult(NavigateDownFunction(config, nil))
 		end
-		var2(navigateDown(t, nil))
 	end, {})
 end

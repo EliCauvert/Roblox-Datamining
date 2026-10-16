@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.AvatarExperienceUIKit.AvatarExperienceUIKit)
+﻿return (require(script.Parent.Parent.Parent._Index.AvatarExperienceUIKit.AvatarExperienceUIKit))

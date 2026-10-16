@@ -1,263 +1,265 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local guiService = game:GetService("GuiService")
-local coreGuiService = game:GetService("CoreGui")
-local parent = script.Parent.Parent
-local reactModule = require(corePackagesService.Packages.React)
-local avatarExperienceFlagsModule = require(corePackagesService.Workspace.Packages.AvatarExperienceFlags)
-local avatarViewportModule = require(parent.Components.AvatarViewport)
-local avatarExperienceInspectAndBuyModule = require(corePackagesService.Workspace.Packages.AvatarExperienceInspectAndBuy)
-local popoverFocusRestorationContext = require(corePackagesService.Workspace.Packages.AvatarExperienceTimedOptions).PopoverFocusRestorationContext
-local useViewBreakpoints = avatarExperienceInspectAndBuyModule.Hooks.useViewBreakpoints
-local responsivePanelLayout = avatarExperienceInspectAndBuyModule.Components.ResponsivePanelLayout
-local useResponsivePanelLayoutProps = avatarExperienceInspectAndBuyModule.Hooks.useResponsivePanelLayoutProps
-local applyTryOnItemToHumanoidDescription = avatarExperienceInspectAndBuyModule.Utils.applyTryOnItemToHumanoidDescription
-local useInspectAndBuyFocusNavigation = avatarExperienceInspectAndBuyModule.Hooks.useInspectAndBuyFocusNavigation
-local buildBulkPurchaseAnalyticsPayload = avatarExperienceInspectAndBuyModule.Utils.buildBulkPurchaseAnalyticsPayload
-local updateBulkPuchaseResultsModule = require(parent.Actions.UpdateBulkPuchaseResults)
-local getProductInfoModule = require(parent.Thunks.GetProductInfo)
-local getFavoriteForAssetModule = require(parent.Thunks.GetFavoriteForAsset)
-local getFavoriteForBundleModule = require(parent.Thunks.GetFavoriteForBundle)
-local createFavoriteForAssetModule = require(parent.Thunks.CreateFavoriteForAsset)
-local deleteFavoriteForAssetModule = require(parent.Thunks.DeleteFavoriteForAsset)
-local createFavoriteForBundleModule = require(parent.Thunks.CreateFavoriteForBundle)
-local deleteFavoriteForBundleModule = require(parent.Thunks.DeleteFavoriteForBundle)
-local promptPurchaseModule = require(parent.Thunks.PromptPurchase)
-local getItemDetailsModule = require(parent.Thunks.GetItemDetails)
-local roactUtilsModule = require(corePackagesService.Workspace.Packages.RoactUtils)
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
-local itemTypeEnum = require(corePackagesService.Workspace.Packages.AvatarExperienceModel).Enums.ItemTypeEnum
-local openOverlayModule = require(parent.Actions.OpenOverlay)
-local overlayModule = require(parent.Enums.Overlay)
-local overlayModule_1 = require(parent.Components.Overlay)
-local useUnifiedEventListenerInExperience = require(corePackagesService.Workspace.Packages.AvatarExperienceAnalytics).useUnifiedEventListener.useUnifiedEventListenerInExperience
-local useSignalState = require(corePackagesService.Packages.SignalsReact).useSignalState
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local modules = coreGuiService.RobloxGui.Modules
-local themeModule = require(modules.Settings.Theme)
-local constantsModule = require(modules.TopBar.Constants)
-local tutilsModule = require(corePackagesService.Packages.tutils)
-local enableAvatarViewportAutoRotation = game:DefineFastFlag("EnableAvatarViewportAutoRotation", false)
+﻿local CorePackages = game:GetService("CorePackages")
+local GuiService = game:GetService("GuiService")
+local Parent = script.Parent.Parent
+local ReactModule = require(CorePackages.Packages.React)
+local AvatarExperienceFlagsModule = require(CorePackages.Workspace.Packages.AvatarExperienceFlags)
+local AvatarViewportModule = require(Parent.Components.AvatarViewport)
+local AvatarExperienceInspectAndBuyModule = require(CorePackages.Workspace.Packages.AvatarExperienceInspectAndBuy)
+local PopoverFocusRestorationContext = require(CorePackages.Workspace.Packages.AvatarExperienceTimedOptions).PopoverFocusRestorationContext
+local UseViewBreakpointsFunction = AvatarExperienceInspectAndBuyModule.Hooks.useViewBreakpoints
+local ResponsivePanelLayout = AvatarExperienceInspectAndBuyModule.Components.ResponsivePanelLayout
+local UseResponsivePanelLayoutPropsFunction = AvatarExperienceInspectAndBuyModule.Hooks.useResponsivePanelLayoutProps
+local ApplyTryOnItemToHumanoidDescriptionFunction = AvatarExperienceInspectAndBuyModule.Utils.applyTryOnItemToHumanoidDescription
+local UseInspectAndBuyFocusNavigationFunction = AvatarExperienceInspectAndBuyModule.Hooks.useInspectAndBuyFocusNavigation
+local BuildBulkPurchaseAnalyticsPayloadFunction = AvatarExperienceInspectAndBuyModule.Utils.buildBulkPurchaseAnalyticsPayload
+local UpdateBulkPuchaseResultsModule = require(Parent.Actions.UpdateBulkPuchaseResults)
+local GetProductInfoModule = require(Parent.Thunks.GetProductInfo)
+local GetFavoriteForAssetModule = require(Parent.Thunks.GetFavoriteForAsset)
+local GetFavoriteForBundleModule = require(Parent.Thunks.GetFavoriteForBundle)
+local CreateFavoriteForAssetModule = require(Parent.Thunks.CreateFavoriteForAsset)
+local DeleteFavoriteForAssetModule = require(Parent.Thunks.DeleteFavoriteForAsset)
+local CreateFavoriteForBundleModule = require(Parent.Thunks.CreateFavoriteForBundle)
+local DeleteFavoriteForBundleModule = require(Parent.Thunks.DeleteFavoriteForBundle)
+local PromptPurchaseModule = require(Parent.Thunks.PromptPurchase)
+local GetItemDetailsModule = require(Parent.Thunks.GetItemDetails)
+local RoactUtilsModule = require(CorePackages.Workspace.Packages.RoactUtils)
+local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
+local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
+local ItemTypeEnum = require(CorePackages.Workspace.Packages.AvatarExperienceModel).Enums.ItemTypeEnum
+local OpenOverlayModule = require(Parent.Actions.OpenOverlay)
+local OverlayModule = require(Parent.Enums.Overlay)
+local OverlayModule1 = require(Parent.Components.Overlay)
+local UseUnifiedEventListenerInExperienceFunction = require(CorePackages.Workspace.Packages.AvatarExperienceAnalytics).useUnifiedEventListener.useUnifiedEventListenerInExperience
+local UseSignalStateFunction = require(CorePackages.Packages.SignalsReact).useSignalState
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local Modules = game:GetService("CoreGui").RobloxGui.Modules
+local ThemeModule = require(Modules.Settings.Theme)
+local ConstantsModule = require(Modules.TopBar.Constants)
+local TutilsModule = require(CorePackages.Packages.tutils)
+local EnableAvatarViewportAutoRotation = game:DefineFastFlag("EnableAvatarViewportAutoRotation", false)
 local AXViewportCameraFieldOfView = game:DefineFastInt("AXViewportCameraFieldOfView", 68)
-local fFlagAXEnableBatchItemDetailsFetchV2 = avatarExperienceFlagsModule.FFlagAXEnableBatchItemDetailsFetchV2
-local fFlagAXEnableInspectAndBuyFocusNavigation = avatarExperienceFlagsModule.FFlagAXEnableInspectAndBuyFocusNavigation
-local itemSelectionStoreContext = avatarExperienceInspectAndBuyModule.Contexts.ItemSelectionStoreContext
-local provider = itemSelectionStoreContext.Provider
-local useItemSelectionStore = itemSelectionStoreContext.useItemSelectionStore
+local FFlagAXEnableBatchItemDetailsFetchV2 = AvatarExperienceFlagsModule.FFlagAXEnableBatchItemDetailsFetchV2
+local FFlagAXEnableInspectAndBuyFocusNavigation = AvatarExperienceFlagsModule.FFlagAXEnableInspectAndBuyFocusNavigation
+local ItemSelectionStoreContext = AvatarExperienceInspectAndBuyModule.Contexts.ItemSelectionStoreContext
+local Provider = ItemSelectionStoreContext.Provider
+local UseItemSelectionStoreFunction = ItemSelectionStoreContext.useItemSelectionStore
 
-local var1 = function(p1)
+local function v35(p1) --[[ Line: 80 ]]
 	return p1.assets
 end
 
-local var2 = function(p1)
+local function v36(p1) --[[ Line: 84 ]]
 	return p1.collectibleResellableInstances
 end
 
-local var3 = function(p1)
+local function v37(p1) --[[ Line: 88 ]]
 	return p1.bundles
 end
 
-local function InspectAndBuyBaseContainer(p1)
-	-- upvalues: useViewBreakpoints (ref), constantsModule (ref), useTokens (ref), useDispatch (ref), useItemSelectionStore (ref), useSignalState (ref), useSelector (ref), var1 (ref), tutilsModule (ref), var2 (ref), var3 (ref), reactModule (ref), guiService (ref), updateBulkPuchaseResultsModule (ref), itemTypeEnum (ref), buildBulkPurchaseAnalyticsPayload (ref), getItemDetailsModule (ref), getFavoriteForAssetModule (ref), getProductInfoModule (ref), fFlagAXEnableBatchItemDetailsFetchV2 (ref), getFavoriteForBundleModule (ref), deleteFavoriteForAssetModule (ref), createFavoriteForAssetModule (ref), deleteFavoriteForBundleModule (ref), createFavoriteForBundleModule (ref), openOverlayModule (ref), overlayModule (ref), promptPurchaseModule (ref), applyTryOnItemToHumanoidDescription (ref), avatarViewportModule (ref), enableAvatarViewportAutoRotation (ref), AXViewportCameraFieldOfView (ref), useResponsivePanelLayoutProps (ref), useUnifiedEventListenerInExperience (ref), fFlagAXEnableInspectAndBuyFocusNavigation (ref), useInspectAndBuyFocusNavigation (ref), foundationModule (ref), themeModule (ref), responsivePanelLayout (ref), overlayModule_1 (ref), popoverFocusRestorationContext (ref)
-	local var4 = useViewBreakpoints(constantsModule.TopBarHeight)
-	local var5 = useTokens()
-	local var6 = useDispatch()
-	local var7 = useSignalState(useItemSelectionStore().getItemDataMap)
-	local var8 = useSelector(var1, tutilsModule.deepEqual)
-	local var9 = useSelector(var2, tutilsModule.deepEqual)
-	local var10 = useSelector(var3, tutilsModule.deepEqual)
-	local var11 = useResponsivePanelLayoutProps({
-		onInspectMenuClosed = reactModule.useCallback(function()
-			-- upvalues: guiService (copy)
-			guiService:CloseInspectMenu()
+local function InspectAndBuyBaseContainer(p1) --[[ Line: 92 ]]
+	-- upvalues: UseViewBreakpointsFunction (copy), ConstantsModule (copy), UseTokensFunction (copy), UseDispatchFunction (copy), UseItemSelectionStoreFunction (copy), UseSignalStateFunction (copy), UseSelectorFunction (copy), v35 (copy), TutilsModule (copy), v36 (copy), v37 (copy), ReactModule (copy), GuiService (copy), UpdateBulkPuchaseResultsModule (copy), ItemTypeEnum (copy), BuildBulkPurchaseAnalyticsPayloadFunction (copy), GetItemDetailsModule (copy), GetFavoriteForAssetModule (copy), GetProductInfoModule (copy), FFlagAXEnableBatchItemDetailsFetchV2 (copy), GetFavoriteForBundleModule (copy), DeleteFavoriteForAssetModule (copy), CreateFavoriteForAssetModule (copy), DeleteFavoriteForBundleModule (copy), CreateFavoriteForBundleModule (copy), OpenOverlayModule (copy), OverlayModule (copy), PromptPurchaseModule (copy), ApplyTryOnItemToHumanoidDescriptionFunction (copy), AvatarViewportModule (copy), EnableAvatarViewportAutoRotation (copy), AXViewportCameraFieldOfView (copy), UseResponsivePanelLayoutPropsFunction (copy), UseUnifiedEventListenerInExperienceFunction (copy), FFlagAXEnableInspectAndBuyFocusNavigation (copy), UseInspectAndBuyFocusNavigationFunction (copy), FoundationModule (copy), ThemeModule (copy), ResponsivePanelLayout (copy), OverlayModule1 (copy), PopoverFocusRestorationContext (copy)
+	local UseViewBreakpointsResult = UseViewBreakpointsFunction(ConstantsModule.TopBarHeight)
+	local UseTokensResult = UseTokensFunction()
+	local UseDispatchResult = UseDispatchFunction()
+	local UseSignalStateResult = UseSignalStateFunction(UseItemSelectionStoreFunction().getItemDataMap)
+	local UseSelectorResult = UseSelectorFunction(v35, TutilsModule.deepEqual)
+	local UseSelectorResult1 = UseSelectorFunction(v36, TutilsModule.deepEqual)
+	local UseSelectorResult2 = UseSelectorFunction(v37, TutilsModule.deepEqual)
+	local UseResponsivePanelLayoutPropsResult = UseResponsivePanelLayoutPropsFunction({
+		onInspectMenuClosed = ReactModule.useCallback(function() --[[ Line: 107 ]]
+			-- upvalues: GuiService (upval)
+			GuiService:CloseInspectMenu()
 		end, {}),
-		onBulkPurchaseFinished = reactModule.useCallback(function(_, _, p2)
-			-- upvalues: var6 (ref), updateBulkPuchaseResultsModule (copy), itemTypeEnum (copy), var7 (ref), buildBulkPurchaseAnalyticsPayload (copy), var8 (ref), var10 (ref), var9 (ref), p1 (ref), getItemDetailsModule (copy)
-			var6(updateBulkPuchaseResultsModule(p2))
+		onBulkPurchaseFinished = ReactModule.useCallback(function(_, _, p2) --[[ Line: 115 ]]
+			-- upvalues: UseDispatchResult (copy), UpdateBulkPuchaseResultsModule (upval), ItemTypeEnum (upval), UseSignalStateResult (copy), BuildBulkPurchaseAnalyticsPayloadFunction (upval), UseSelectorResult (copy), UseSelectorResult2 (copy), UseSelectorResult1 (copy), p1 (copy), GetItemDetailsModule (upval)
+			UseDispatchResult(UpdateBulkPuchaseResultsModule(p2))
 			
-			for i, v in p2.Items do
-				if v.status == Enum.MarketplaceItemPurchaseStatus.Success then
-					local var12 = v.type == Enum.MarketplaceProductType.AvatarAsset
-					local id = v.id
-					local var13 = if var12 then Enum.AvatarItemType.Asset else Enum.AvatarItemType.Bundle
-					local var14 = if var12 then itemTypeEnum.Asset else itemTypeEnum.Bundle
-					local var15 = buildBulkPurchaseAnalyticsPayload({
-						itemId = tostring(id),
-						itemType = var14,
-						assetsMap = var8,
-						bundlesMap = var10,
-						collectibleResellableInstances = var9,
-						storedData = var7[tostring(id)]
+			for _, item in p2.Items do
+				if item.status == Enum.MarketplaceItemPurchaseStatus.Success then
+					local IsTypeMatch = item.type == Enum.MarketplaceProductType.AvatarAsset
+					local Id = item.id
+					local Asset = if IsTypeMatch then Enum.AvatarItemType.Asset else Enum.AvatarItemType.Bundle
+					local Asset1 = if IsTypeMatch then ItemTypeEnum.Asset else ItemTypeEnum.Bundle
+					local BulkPurchaseAnalyticsPayload = BuildBulkPurchaseAnalyticsPayloadFunction({
+						itemId = tostring(Id),
+						itemType = Asset1,
+						assetsMap = UseSelectorResult,
+						bundlesMap = UseSelectorResult2,
+						collectibleResellableInstances = UseSelectorResult1,
+						storedData = UseSignalStateResult[tostring(Id)]
 					})
 					
-					if var15 then
-						p1.analytics.reportPurchaseSuccessUnifiedEvent(var14, id, var15)
+					if BulkPurchaseAnalyticsPayload then
+						p1.analytics.reportPurchaseSuccessUnifiedEvent(Asset1, Id, BulkPurchaseAnalyticsPayload)
 					end
-					var6(getItemDetailsModule(id, var13))
+					UseDispatchResult(GetItemDetailsModule(Id, Asset))
 				end
 			end
 		end, {
-			var6, var8, var10, var9, var7,
-			p1.analytics.reportPurchaseSuccessUnifiedEvent
+			UseDispatchResult, UseSelectorResult, UseSelectorResult2, UseSelectorResult1,
+			UseSignalStateResult, p1.analytics.reportPurchaseSuccessUnifiedEvent
 		}),
-		onItemDetailsOpened = reactModule.useCallback(function(p3)
-			-- upvalues: itemTypeEnum (copy), var6 (ref), getFavoriteForAssetModule (copy), getProductInfoModule (copy), fFlagAXEnableBatchItemDetailsFetchV2 (copy), getItemDetailsModule (copy), getFavoriteForBundleModule (copy)
-			if p3.itemType == itemTypeEnum.Asset then
-				var6(getFavoriteForAssetModule(p3.id))
-				var6(getProductInfoModule(p3.id))
+		onItemDetailsOpened = ReactModule.useCallback(function(p3) --[[ Line: 161 ]]
+			-- upvalues: ItemTypeEnum (upval), UseDispatchResult (copy), GetFavoriteForAssetModule (upval), GetProductInfoModule (upval), FFlagAXEnableBatchItemDetailsFetchV2 (upval), GetItemDetailsModule (upval), GetFavoriteForBundleModule (upval)
+			if p3.itemType == ItemTypeEnum.Asset then
+				UseDispatchResult(GetFavoriteForAssetModule(p3.id))
+				UseDispatchResult(GetProductInfoModule(p3.id))
 				
-				if fFlagAXEnableBatchItemDetailsFetchV2 then
-					var6(getItemDetailsModule(p3.id, Enum.AvatarItemType.Asset))
+				if FFlagAXEnableBatchItemDetailsFetchV2 then
+					UseDispatchResult(GetItemDetailsModule(p3.id, Enum.AvatarItemType.Asset))
 					
 					return
 				end
-			elseif p3.itemType == itemTypeEnum.Bundle then
-				var6(getFavoriteForBundleModule(p3.id))
+			elseif p3.itemType == ItemTypeEnum.Bundle then
+				UseDispatchResult(GetFavoriteForBundleModule(p3.id))
 			end
-		end, { var6 }),
-		onToggleFavorite = reactModule.useCallback(function(p3, p4)
-			-- upvalues: itemTypeEnum (copy), var6 (ref), deleteFavoriteForAssetModule (copy), createFavoriteForAssetModule (copy), deleteFavoriteForBundleModule (copy), createFavoriteForBundleModule (copy)
-			if p3.itemType == itemTypeEnum.Asset then
+		end, { UseDispatchResult }),
+		onToggleFavorite = ReactModule.useCallback(function(p3, p4) --[[ Line: 180 ]]
+			-- upvalues: ItemTypeEnum (upval), UseDispatchResult (copy), DeleteFavoriteForAssetModule (upval), CreateFavoriteForAssetModule (upval), DeleteFavoriteForBundleModule (upval), CreateFavoriteForBundleModule (upval)
+			if p3.itemType == ItemTypeEnum.Asset then
 				if p4 then
-					var6(deleteFavoriteForAssetModule(p3.id))
+					UseDispatchResult(DeleteFavoriteForAssetModule(p3.id))
+					
+					return
+				else
+					UseDispatchResult(CreateFavoriteForAssetModule(p3.id))
 					
 					return
 				end
-				var6(createFavoriteForAssetModule(p3.id))
-				
-				return
-			elseif p3.itemType == itemTypeEnum.Bundle then
+			elseif p3.itemType == ItemTypeEnum.Bundle then
 				if p4 then
-					var6(deleteFavoriteForBundleModule(p3.id))
+					UseDispatchResult(DeleteFavoriteForBundleModule(p3.id))
 					
 					return
 				end
-				var6(createFavoriteForBundleModule(p3.id))
+				UseDispatchResult(CreateFavoriteForBundleModule(p3.id))
 			end
-		end, { var6 }),
-		openAttributionOverlay = reactModule.useCallback(function(p3)
-			-- upvalues: var6 (ref), openOverlayModule (copy), overlayModule (copy)
-			var6(openOverlayModule(overlayModule.AttributionTraversal, p3))
-		end, { var6 }),
-		onPromptPurchase = function(p3, p4, p5, p6, p7, p8, p9)
-			-- upvalues: var6 (ref), promptPurchaseModule (copy)
-			var6(promptPurchaseModule(p3, p4, p5, p6, p7, p8, p9))
+		end, { UseDispatchResult }),
+		openAttributionOverlay = ReactModule.useCallback(function(p3) --[[ Line: 196 ]]
+			-- upvalues: UseDispatchResult (copy), OpenOverlayModule (upval), OverlayModule (upval)
+			UseDispatchResult(OpenOverlayModule(OverlayModule.AttributionTraversal, p3))
+		end, { UseDispatchResult }),
+		onPromptPurchase = function(p3, p4, p5, p6, p7, p8, p9) --[[ Line: 233 ]]
+			-- upvalues: UseDispatchResult (copy), PromptPurchaseModule (upval)
+			UseDispatchResult(PromptPurchaseModule(p3, p4, p5, p6, p7, p8, p9))
 		end,
-		renderTryOnViewport = reactModule.useCallback(function(p3)
-			-- upvalues: p1 (ref), applyTryOnItemToHumanoidDescription (copy), reactModule (copy), avatarViewportModule (copy), enableAvatarViewportAutoRotation (copy), AXViewportCameraFieldOfView (copy)
+		renderTryOnViewport = ReactModule.useCallback(function(p3) --[[ Line: 255 ]]
+			-- upvalues: p1 (copy), ApplyTryOnItemToHumanoidDescriptionFunction (upval), ReactModule (upval), AvatarViewportModule (upval), EnableAvatarViewportAutoRotation (upval), AXViewportCameraFieldOfView (upval)
 			if p1.localPlayerModel and p1.localPlayerModel.Humanoid then
-				local var16 = p1.localPlayerModel.Humanoid.HumanoidDescription:Clone()
-				applyTryOnItemToHumanoidDescription(p3, var16)
+				local HumanoidDescription = p1.localPlayerModel.Humanoid.HumanoidDescription:Clone()
+				ApplyTryOnItemToHumanoidDescriptionFunction(p3, HumanoidDescription)
 				
-				return reactModule.createElement(avatarViewportModule, {
+				return ReactModule.createElement(AvatarViewportModule, {
 					visible = true,
 					backgroundTransparency = 1,
 					resetCameraAndAutoRotationOnModelChange = true,
 					size = UDim2.new(1, 0, 1, 0),
 					position = UDim2.new(0.5, 0, 0.5, 0),
-					humanoidDescription = var16,
+					humanoidDescription = HumanoidDescription,
 					model = p1.localPlayerModel,
-					disableAutoRotation = not enableAvatarViewportAutoRotation,
+					disableAutoRotation = not EnableAvatarViewportAutoRotation,
 					offsetOptions = {
 						defaultCameraOffset = CFrame.new(0, 0.5, -5),
 						toolOffset = CFrame.new(0, 2, -8)
 					},
 					cameraFieldOfView = AXViewportCameraFieldOfView
 				})
+			else
+				return nil
 			end
-			return nil
 		end, { p1.localPlayerModel }),
 		localPlayerModel = p1.localPlayerModel,
 		analytics = p1.analytics
 	})
-	useUnifiedEventListenerInExperience()
+	UseUnifiedEventListenerInExperienceFunction()
 	
-	if fFlagAXEnableInspectAndBuyFocusNavigation then
-		local var16 = useInspectAndBuyFocusNavigation()
+	if FFlagAXEnableInspectAndBuyFocusNavigation then
+		local UseInspectAndBuyFocusNavigationResult = UseInspectAndBuyFocusNavigationFunction()
 		
-		return reactModule.createElement(popoverFocusRestorationContext.Provider, { value = true }, {
-			InspectAndBuyContent = reactModule.createElement("Frame", {
+		return (ReactModule.createElement(PopoverFocusRestorationContext.Provider, { value = true }, {
+			InspectAndBuyContent = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
-				ref = var16.setFocusRef,
+				ref = UseInspectAndBuyFocusNavigationResult.setFocusRef,
 				Size = UDim2.fromScale(1, 1),
-				SelectionGroup = var16.focusNavigationProps.SelectionGroup,
-				SelectionBehaviorDown = var16.focusNavigationProps.SelectionBehaviorDown,
-				SelectionBehaviorLeft = var16.focusNavigationProps.SelectionBehaviorLeft,
-				SelectionBehaviorRight = var16.focusNavigationProps.SelectionBehaviorRight,
-				SelectionBehaviorUp = var16.focusNavigationProps.SelectionBehaviorUp
+				SelectionGroup = UseInspectAndBuyFocusNavigationResult.focusNavigationProps.SelectionGroup,
+				SelectionBehaviorDown = UseInspectAndBuyFocusNavigationResult.focusNavigationProps.SelectionBehaviorDown,
+				SelectionBehaviorLeft = UseInspectAndBuyFocusNavigationResult.focusNavigationProps.SelectionBehaviorLeft,
+				SelectionBehaviorRight = UseInspectAndBuyFocusNavigationResult.focusNavigationProps.SelectionBehaviorRight,
+				SelectionBehaviorUp = UseInspectAndBuyFocusNavigationResult.focusNavigationProps.SelectionBehaviorUp
 			}, {
-				Content = reactModule.createElement(foundationModule.View, {
-					Size = var4.OverlaySize,
-					Position = var4.OverlayPosition,
-					backgroundStyle = var5.Color.Common.Shadow,
+				Content = ReactModule.createElement(FoundationModule.View, {
+					Size = UseViewBreakpointsResult.OverlaySize,
+					Position = UseViewBreakpointsResult.OverlayPosition,
+					backgroundStyle = UseTokensResult.Color.Common.Shadow,
 					stateLayer = {
-						affordance = foundationModule.Enums.StateLayerAffordance.None
+						affordance = FoundationModule.Enums.StateLayerAffordance.None
 					},
-					onActivated = function()
-						-- upvalues: guiService (copy)
-						guiService:CloseInspectMenu()
+					onActivated = function() --[[ Line: 315 ]]
+						-- upvalues: GuiService (upval)
+						GuiService:CloseInspectMenu()
 					end
 				}, {
-					ContainerView = reactModule.createElement(foundationModule.View, {
+					ContainerView = ReactModule.createElement(FoundationModule.View, {
 						ClipsDescendants = true,
-						AnchorPoint = var4.ContainerAnchorPoint,
-						Size = var4.ContainerSize,
-						Position = var4.ContainerPosition,
+						AnchorPoint = UseViewBreakpointsResult.ContainerAnchorPoint,
+						Size = UseViewBreakpointsResult.ContainerSize,
+						Position = UseViewBreakpointsResult.ContainerPosition,
 						backgroundStyle = {
-							Color3 = themeModule.color("MenuContainer"),
-							Transparency = themeModule.transparency("MenuContainer", 1) * guiService.PreferredTransparency
+							Color3 = ThemeModule.color("MenuContainer"),
+							Transparency = ThemeModule.transparency("MenuContainer", 1) * GuiService.PreferredTransparency
 						},
 						stateLayer = {
-							affordance = foundationModule.Enums.StateLayerAffordance.None
+							affordance = FoundationModule.Enums.StateLayerAffordance.None
 						},
-						onActivated = function() end
+						onActivated = function() --[[ Line: 331 ]] end
 					}, {
-						UICorner = reactModule.createElement("UICorner", { CornerRadius = themeModule.DefaultCornerRadius }),
-						ResponsivePanelLayout = reactModule.createElement(responsivePanelLayout, var11)
+						UICorner = ReactModule.createElement("UICorner", { CornerRadius = ThemeModule.DefaultCornerRadius }),
+						ResponsivePanelLayout = ReactModule.createElement(ResponsivePanelLayout, UseResponsivePanelLayoutPropsResult)
 					}),
-					Overlay = reactModule.createElement(overlayModule_1)
+					Overlay = ReactModule.createElement(OverlayModule1)
 				})
 			})
-		})
-	end
-	return reactModule.createElement(foundationModule.View, {
-		Size = var4.OverlaySize,
-		Position = var4.OverlayPosition,
-		backgroundStyle = var5.Color.Common.Shadow,
-		stateLayer = {
-			affordance = foundationModule.Enums.StateLayerAffordance.None
-		},
-		onActivated = function()
-			-- upvalues: guiService (copy)
-			guiService:CloseInspectMenu()
-		end
-	}, {
-		ContainerView = reactModule.createElement(foundationModule.View, {
-			ClipsDescendants = true,
-			AnchorPoint = var4.ContainerAnchorPoint,
-			Size = var4.ContainerSize,
-			Position = var4.ContainerPosition,
-			backgroundStyle = {
-				Color3 = themeModule.color("MenuContainer"),
-				Transparency = themeModule.transparency("MenuContainer", 1) * guiService.PreferredTransparency
-			},
+		}))
+	else
+		return (ReactModule.createElement(FoundationModule.View, {
+			Size = UseViewBreakpointsResult.OverlaySize,
+			Position = UseViewBreakpointsResult.OverlayPosition,
+			backgroundStyle = UseTokensResult.Color.Common.Shadow,
 			stateLayer = {
-				affordance = foundationModule.Enums.StateLayerAffordance.None
+				affordance = FoundationModule.Enums.StateLayerAffordance.None
 			},
-			onActivated = function() end
+			onActivated = function() --[[ Line: 358 ]]
+				-- upvalues: GuiService (upval)
+				GuiService:CloseInspectMenu()
+			end
 		}, {
-			UICorner = reactModule.createElement("UICorner", { CornerRadius = themeModule.DefaultCornerRadius }),
-			ResponsivePanelLayout = reactModule.createElement(responsivePanelLayout, var11)
-		}),
-		Overlay = reactModule.createElement(overlayModule_1)
-	})
+			ContainerView = ReactModule.createElement(FoundationModule.View, {
+				ClipsDescendants = true,
+				AnchorPoint = UseViewBreakpointsResult.ContainerAnchorPoint,
+				Size = UseViewBreakpointsResult.ContainerSize,
+				Position = UseViewBreakpointsResult.ContainerPosition,
+				backgroundStyle = {
+					Color3 = ThemeModule.color("MenuContainer"),
+					Transparency = ThemeModule.transparency("MenuContainer", 1) * GuiService.PreferredTransparency
+				},
+				stateLayer = {
+					affordance = FoundationModule.Enums.StateLayerAffordance.None
+				},
+				onActivated = function() --[[ Line: 374 ]] end
+			}, {
+				UICorner = ReactModule.createElement("UICorner", { CornerRadius = ThemeModule.DefaultCornerRadius }),
+				ResponsivePanelLayout = ReactModule.createElement(ResponsivePanelLayout, UseResponsivePanelLayoutPropsResult)
+			}),
+			Overlay = ReactModule.createElement(OverlayModule1)
+		}))
+	end
 end
 
-return function(value)
-	-- upvalues: reactModule (ref), provider (ref), InspectAndBuyBaseContainer (ref)
-	return reactModule.createElement(provider, {}, {
-		Inner = reactModule.createElement(InspectAndBuyBaseContainer, value)
+return function(p2) --[[ Line: 386 | Named "InspectAndBuyBaseContainerWithSignalsProvider" ]]
+	-- upvalues: ReactModule (copy), Provider (copy), InspectAndBuyBaseContainer (copy)
+	return ReactModule.createElement(Provider, {}, {
+		Inner = ReactModule.createElement(InspectAndBuyBaseContainer, p2)
 	})
 end

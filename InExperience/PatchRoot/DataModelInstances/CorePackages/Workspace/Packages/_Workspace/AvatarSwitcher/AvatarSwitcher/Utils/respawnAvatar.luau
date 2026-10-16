@@ -1,25 +1,25 @@
-﻿local playersService = game:GetService("Players")
+﻿local Players = game:GetService("Players")
 
-return function(p1)
-	-- upvalues: playersService (ref)
-	local var1, var2 = p1()
+return function(Callback) --[[ Line: 9 | Named "respawnAvatar" ]]
+	-- upvalues: Players (copy)
+	local CallbackResult, CallbackResult2 = Callback()
 	
-	if not var1 then return end
-	if var2 then
-		var2:Fire()
+	if not CallbackResult then return end
+	if CallbackResult2 then
+		CallbackResult2:Fire()
 		
 		return
 	end
-	local localPlayer = playersService.LocalPlayer
+	local LocalPlayer = Players.LocalPlayer
 	
-	if localPlayer then
-		local character = localPlayer.Character
+	if LocalPlayer then
+		local Character = LocalPlayer.Character
 		
-		if character then
-			local humanoid = character:FindFirstChild("Humanoid")
+		if Character then
+			local Humanoid = Character:FindFirstChild("Humanoid")
 			
-			if humanoid and humanoid:IsA("Humanoid") then
-				humanoid.Health = 0
+			if Humanoid and Humanoid:IsA("Humanoid") then
+				Humanoid.Health = 0
 			end
 		end
 	end

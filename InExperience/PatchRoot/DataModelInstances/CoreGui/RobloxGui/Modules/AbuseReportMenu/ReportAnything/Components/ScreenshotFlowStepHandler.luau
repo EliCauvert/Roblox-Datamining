@@ -1,65 +1,64 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local reactModule = require(corePackagesService.Packages.React)
-local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
-local parent = script.Parent.Parent
-local screenshotDialogModule = require(parent.Components.ScreenshotDialog)
-local screenshotReviewDialogModule = require(parent.Components.ScreenshotReviewDialog)
+﻿local CorePackages = game:GetService("CorePackages")
+local ReactModule = require(CorePackages.Packages.React)
+local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
+local Parent = script.Parent.Parent
+local ScreenshotDialogModule = require(Parent.Components.ScreenshotDialog)
+local ScreenshotReviewDialogModule = require(Parent.Components.ScreenshotReviewDialog)
 local _ = require(script.Parent.Parent.Parent.Components.Types)
 
-return function(p1)
-	-- upvalues: reactModule (ref), screenshotReviewDialogModule (ref), robloxTranslatorModule (ref), screenshotDialogModule (ref)
-	local var1, var2 = reactModule.useState(if p1.initialPageNumber == nil then 1 else p1.initialPageNumber)
-	local var3, var4 = reactModule.useState(1.777777777778)
-	local var5, var6 = reactModule.useState(800)
-	local var7, var8 = reactModule.useState(800)
-	local var9, var10 = reactModule.useState(true)
-	local var11 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref)
-		var2(2)
-	end, { var2 })
-	local var12 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref)
-		var2(1)
-	end, { var2 })
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var4 (ref), var6 (ref), var8 (ref), var10 (ref)
-		local currentCamera = game.Workspace.CurrentCamera
+return function(p1) --[[ Line: 25 | Named "ScreenshotFlowStepHandler" ]]
+	-- upvalues: ReactModule (copy), ScreenshotReviewDialogModule (copy), RobloxTranslatorModule (copy), ScreenshotDialogModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(if p1.initialPageNumber == nil then 1 else p1.initialPageNumber)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(1.7777777777777777)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(800)
+	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(800)
+	local UseStateResult5, UseStateResult2_4 = ReactModule.useState(true)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 32 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(2)
+	end, { UseStateResult2 })
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 35 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(1)
+	end, { UseStateResult2 })
+	ReactModule.useEffect(function() --[[ Line: 39 ]]
+		-- upvalues: p1 (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy), UseStateResult2_3 (copy), UseStateResult2_4 (copy)
+		local CurrentCamera = game.Workspace.CurrentCamera
 		
-		if currentCamera ~= nil then
-			local viewportSize = currentCamera.viewportSize
+		if CurrentCamera ~= nil then
+			local ViewportSize = CurrentCamera.viewportSize
 			
 			if p1.viewportInfo then
-				var4(p1.viewportInfo.width / p1.viewportInfo.height)
+				UseStateResult2_1(p1.viewportInfo.width / p1.viewportInfo.height)
 			else
-				var4(viewportSize.X / viewportSize.Y)
+				UseStateResult2_1(ViewportSize.X / ViewportSize.Y)
 			end
-			var6(viewportSize.Y)
-			var8(viewportSize.X)
-			var10(viewportSize.X < viewportSize.Y and viewportSize.X < 800)
+			UseStateResult2_2(ViewportSize.Y)
+			UseStateResult2_3(ViewportSize.X)
+			UseStateResult2_4(ViewportSize.X < ViewportSize.Y and ViewportSize.X < 800)
 		end
 	end, {})
-	local _ = nil
 	
-	return if var1 == 1 then reactModule.createElement(screenshotReviewDialogModule, {
-		imageAspectRatio = var3,
-		isSmallPortraitMode = var9,
-		viewportUISafeAreaHeight = var5,
-		viewportUISafeAreaWidth = var7,
-		onNextPage = var11,
+	return if UseStateResult == 1 then ReactModule.createElement(ScreenshotReviewDialogModule, {
+		imageAspectRatio = UseStateResult1,
+		isSmallPortraitMode = UseStateResult5,
+		viewportUISafeAreaHeight = UseStateResult3,
+		viewportUISafeAreaWidth = UseStateResult4,
+		onNextPage = UseResult,
 		onBack = p1.dismissAction,
 		onSkip = p1.skipAnnotationAction,
 		onRestart = p1.restartAction,
 		screenshot = p1.screenshot,
 		reportAnythingAnalytics = p1.reportAnythingAnalytics
-	}, {}) else reactModule.createElement(screenshotDialogModule, {
-		titleText = if p1.entryPoint == "player" then robloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Label.SelectPerson") else robloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Label.SelectProblem"),
-		backAction = var12,
+	}, {}) else ReactModule.createElement(ScreenshotDialogModule, {
+		titleText = if p1.entryPoint == "player" then RobloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Label.SelectPerson") else RobloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Label.SelectProblem"),
+		backAction = UseResult1,
 		dismissAction = p1.dismissAction,
 		finishAnnotationAction = p1.finishAnnotationAction,
 		initialAnnotationPoints = p1.initialAnnotationPoints,
-		isSmallPortraitMode = var9,
+		isSmallPortraitMode = UseStateResult5,
 		screenshot = p1.screenshot,
-		imageAspectRatio = var3,
+		imageAspectRatio = UseStateResult1,
 		setAnnotationCircleRadius = p1.setAnnotationCircleRadius,
 		setAnnotationAreaDimensions = p1.setAnnotationAreaDimensions,
 		reportAnythingAnalytics = p1.reportAnythingAnalytics

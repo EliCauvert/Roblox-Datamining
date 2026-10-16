@@ -1,28 +1,23 @@
-﻿local gameTile = script:FindFirstAncestor("GameTile")
-local parent = gameTile.Parent
-local gameInfosReducer = require(parent.GameInfosRodux).GameInfosReducer
-local reactModule = require(parent.React)
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local getGameTileLayoutDataModule = require(gameTile.getGameTileLayoutData)
-local getValidTileBadgesModule = require(gameTile.Overlays.getValidTileBadges)
-local _ = require(gameTile.GameTileTypes)
+﻿local GameTile = script:FindFirstAncestor("GameTile")
+local Parent = GameTile.Parent
+local GameInfosReducer = require(Parent.GameInfosRodux).GameInfosReducer
+local ReactModule = require(Parent.React)
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local GetGameTileLayoutDataModule = require(GameTile.getGameTileLayoutData)
+local GetValidTileBadgesModule = require(GameTile.Overlays.getValidTileBadges)
+local _ = require(GameTile.GameTileTypes)
 
-return function(p1, p2, p3)
-	-- upvalues: useSelector (ref), gameInfosReducer (ref), getGameTileLayoutDataModule (ref), reactModule (ref), getValidTileBadgesModule (ref)
-	local var1 = getGameTileLayoutDataModule(useSelector(function(p4)
-		-- upvalues: gameInfosReducer (copy), p1 (ref)
-		return p4.Personalization[gameInfosReducer.key][p1]
+return function(p1, p2, p3) --[[ Line: 13 | Named "useValidTileBadges" ]]
+	-- upvalues: UseSelectorFunction (copy), GameInfosReducer (copy), GetGameTileLayoutDataModule (copy), ReactModule (copy), GetValidTileBadgesModule (copy)
+	local GameTileLayoutDataModule = GetGameTileLayoutDataModule(UseSelectorFunction(function(p4) --[[ Line: 18 ]]
+		-- upvalues: GameInfosReducer (upval), p1 (copy)
+		return p4.Personalization[GameInfosReducer.key][p1]
 	end), p2)
 	
-	return reactModule.useMemo(function()
-		-- upvalues: p3 (ref), var1 (ref), getValidTileBadgesModule (copy)
-		local tileBadgesByPosition = nil
+	return (ReactModule.useMemo(function() --[[ Line: 25 ]]
+		-- upvalues: p3 (copy), GameTileLayoutDataModule (copy), GetValidTileBadgesModule (upval)
+		local TileBadgesByPosition = if p3 then p3 elseif GameTileLayoutDataModule and GameTileLayoutDataModule.tileBadgesByPosition then GameTileLayoutDataModule.tileBadgesByPosition else nil
 		
-		if p3 then
-			tileBadgesByPosition = p3
-		elseif var1 and var1.tileBadgesByPosition then
-			tileBadgesByPosition = var1.tileBadgesByPosition
-		end
-		return if tileBadgesByPosition then getValidTileBadgesModule(tileBadgesByPosition) else nil
-	end, { var1, p3 })
+		return if TileBadgesByPosition then GetValidTileBadgesModule(TileBadgesByPosition) else nil
+	end, { GameTileLayoutDataModule, p3 }))
 end

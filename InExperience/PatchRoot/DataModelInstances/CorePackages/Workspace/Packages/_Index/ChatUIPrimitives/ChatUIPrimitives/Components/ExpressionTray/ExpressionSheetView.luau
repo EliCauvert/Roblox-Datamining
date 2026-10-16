@@ -1,110 +1,123 @@
-﻿local guiService = game:GetService("GuiService")
-local chatUIPrimitives = script:FindFirstAncestor("ChatUIPrimitives")
-local parent = chatUIPrimitives.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local reactRobloxModule = require(parent.ReactRoblox)
-local reactUtilsModule = require(parent.ReactUtils)
-local otterModule = require(parent.Otter)
-local useDismissOnEscapeOrMenuModule = require(chatUIPrimitives.Hooks.useDismissOnEscapeOrMenu)
-local useEventConnection = reactUtilsModule.useEventConnection
-local t = { dampingRatio = 1, frequency = 3.5 }
+﻿local GuiService = game:GetService("GuiService")
+local ChatUIPrimitives = script:FindFirstAncestor("ChatUIPrimitives")
+local Parent = ChatUIPrimitives.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.ReactRoblox)
+local OtterModule = require(Parent.Otter)
+local UseDismissOnEscapeOrMenuModule = require(ChatUIPrimitives.Hooks.useDismissOnEscapeOrMenu)
+local FFlagExpChatExpressionTrayReducedMotionModule = require(ChatUIPrimitives.Flags.FFlagExpChatExpressionTrayReducedMotion)
+local UseEventConnectionFunction = require(Parent.ReactUtils).useEventConnection
+local config = { dampingRatio = 1, frequency = 3.5 }
 
-local function getSafeInsets()
-	-- upvalues: guiService (ref)
-	local deviceSafeInsetsInsetArea = guiService:GetInsetArea(Enum.ScreenInsets.DeviceSafeInsets)
-	local noneInsetArea = guiService:GetInsetArea(Enum.ScreenInsets.None)
+local function getSafeInsets() --[[ Line: 43 ]]
+	-- upvalues: GuiService (copy)
+	local InsetArea = GuiService:GetInsetArea(Enum.ScreenInsets.DeviceSafeInsets)
+	local InsetArea1 = GuiService:GetInsetArea(Enum.ScreenInsets.None)
 	
 	return {
-		left = math.max(0, deviceSafeInsetsInsetArea.Min.X - noneInsetArea.Min.X),
-		right = math.max(0, noneInsetArea.Max.X - deviceSafeInsetsInsetArea.Max.X),
-		bottom = math.max(0, noneInsetArea.Max.Y - deviceSafeInsetsInsetArea.Max.Y)
+		left = math.max(0, InsetArea.Min.X - InsetArea1.Min.X),
+		right = math.max(0, InsetArea1.Max.X - InsetArea.Max.X),
+		bottom = math.max(0, InsetArea1.Max.Y - InsetArea.Max.Y)
 	}
 end
 
-local function _(value, p1)
-	return value.left == p1.left and (value.right == p1.right and value.bottom == p1.bottom)
+local function _(SafeInsets, SafeInsets1): boolean --[[ Line: 53 | Named "insetsEqual" ]]
+	return SafeInsets.left == SafeInsets1.left and SafeInsets.right == SafeInsets1.right and SafeInsets.bottom == SafeInsets1.bottom
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: foundationModule (ref), reactModule (ref), getSafeInsets (ref), useEventConnection (ref), otterModule (ref), t (ref), useDismissOnEscapeOrMenuModule (ref), reactRobloxModule (ref)
-	local var1 = foundationModule.Hooks.useOverlay()
-	local isOpen = p1.isOpen
-	local height = p1.height or 240
-	local var2, var3 = reactModule.useState(false)
-	local var4, var5 = reactModule.useBinding(1)
-	local var6 = reactModule.useRef(nil)
-	local var7, var8 = reactModule.useState(getSafeInsets)
-	useEventConnection(if var1 ~= nil then nil else var1:GetPropertyChangedSignal("AbsoluteSize"), reactModule.useCallback(function()
-		-- upvalues: var8 (ref), getSafeInsets (copy)
-		var8(function(p2)
-			-- upvalues: getSafeInsets (copy)
-			local var9 = getSafeInsets()
+return ReactModule.memo(function(p1) --[[ Line: 57 | Named "ExpressionSheetView" ]]
+	-- upvalues: FoundationModule (copy), FFlagExpChatExpressionTrayReducedMotionModule (copy), ReactModule (copy), getSafeInsets (copy), UseEventConnectionFunction (copy), OtterModule (copy), config (copy), UseDismissOnEscapeOrMenuModule (copy), ReactRobloxModule (copy)
+	local UseOverlayResult = FoundationModule.Hooks.useOverlay()
+	local ReducedMotion = if FFlagExpChatExpressionTrayReducedMotionModule then FoundationModule.Hooks.usePreferences().reducedMotion else false
+	local IsOpen = p1.isOpen
+	local Height = p1.height or 240
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(1)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(getSafeInsets)
+	UseEventConnectionFunction(if UseOverlayResult == nil then nil else UseOverlayResult:GetPropertyChangedSignal("AbsoluteSize"), (ReactModule.useCallback(function() --[[ Line: 74 ]]
+		-- upvalues: UseStateResult2_1 (copy), getSafeInsets (upval)
+		UseStateResult2_1(function(SafeInsets) --[[ Line: 75 ]]
+			-- upvalues: getSafeInsets (upval)
+			local SafeInsets1 = getSafeInsets()
+			local IsBottomMatch: boolean = SafeInsets.left == SafeInsets1.left and SafeInsets.right == SafeInsets1.right and SafeInsets.bottom == SafeInsets1.bottom
 			
-			return if p2.left == var9.left and (p2.right == var9.right and p2.bottom == var9.bottom) then p2 else var9
+			return if IsBottomMatch then SafeInsets else SafeInsets1
 		end)
-	end, {}))
-	local var9 = height + var7.bottom
-	reactModule.useEffect(function()
-		-- upvalues: isOpen (ref), var3 (ref), var6 (ref), otterModule (copy), var4 (ref), var5 (ref), t (copy)
-		if isOpen then
-			var3(true)
-			
-			if var6.current then
-				var6.current:destroy()
+	end, {})))
+	local NewHeight = Height + UseStateResult1.bottom
+	ReactModule.useEffect(function() --[[ Line: 87 ]]
+		-- upvalues: ReducedMotion (ref), UseRefResult (copy), UseBindingResult2 (copy), IsOpen (copy), UseStateResult2 (copy), OtterModule (upval), UseBindingResult (copy), config (upval)
+		if ReducedMotion then
+			if UseRefResult.current then
+				UseRefResult.current:destroy()
+				UseRefResult.current = nil
 			end
-			local var10 = otterModule.createSingleMotor(var4:getValue())
-			var6.current = var10
-			var10:onStep(var5)
-			var10:setGoal(otterModule.spring(0, t))
+			UseBindingResult2(if IsOpen then 0 else 1)
+			UseStateResult2(IsOpen)
 			
 			return
-		elseif var6.current then
-			var6.current:setGoal(otterModule.spring(1, t))
-			var6.current:onComplete(function()
-				-- upvalues: var3 (copy)
-				var3(false)
-			end)
+		else
+			if IsOpen then
+				UseStateResult2(true)
+				
+				if UseRefResult.current then
+					UseRefResult.current:destroy()
+				end
+				local SingleMotor = OtterModule.createSingleMotor(UseBindingResult:getValue())
+				UseRefResult.current = SingleMotor
+				SingleMotor:onStep(UseBindingResult2)
+				SingleMotor:setGoal(OtterModule.spring(0, config))
+				
+				return
+			elseif UseRefResult.current then
+				UseRefResult.current:setGoal(OtterModule.spring(1, config))
+				UseRefResult.current:onComplete(function() --[[ Line: 106 ]]
+					-- upvalues: UseStateResult2 (upval)
+					UseStateResult2(false)
+				end)
+			end
 		end
-	end, { isOpen })
-	reactModule.useEffect(function()
-		-- upvalues: var6 (ref)
-		return function()
-			-- upvalues: var6 (copy)
-			if var6.current then
-				var6.current:destroy()
-				var6.current = nil
+	end, { IsOpen, ReducedMotion })
+	ReactModule.useEffect(function() --[[ Line: 112 ]]
+		-- upvalues: UseRefResult (copy)
+		return function() --[[ Line: 113 ]]
+			-- upvalues: UseRefResult (upval)
+			if UseRefResult.current then
+				UseRefResult.current:destroy()
+				UseRefResult.current = nil
 			end
 		end
 	end, {})
-	useDismissOnEscapeOrMenuModule(isOpen, p1.onPressedOutside)
+	UseDismissOnEscapeOrMenuModule(IsOpen, p1.onPressedOutside)
 	
-	return if var2 and var1 ~= nil then reactRobloxModule.createPortal(reactModule.createElement(foundationModule.View, { tag = "size-full" }, {
-		Backdrop = if isOpen then reactModule.createElement("TextButton", {
+	return if UseStateResult and UseOverlayResult ~= nil then ReactRobloxModule.createPortal(ReactModule.createElement(FoundationModule.View, { tag = "size-full" }, {
+		Backdrop = if IsOpen then ReactModule.createElement("TextButton", {
 			Text = "",
 			AutoButtonColor = false,
 			BackgroundTransparency = 1,
 			Size = UDim2.fromScale(1, 1),
 			ZIndex = 1,
-			[reactModule.Event.Activated] = p1.onPressedOutside
+			[ReactModule.Event.Activated] = p1.onPressedOutside
 		}) else nil,
-		Tray = reactModule.createElement(foundationModule.View, {
+		Tray = ReactModule.createElement(FoundationModule.View, {
 			ZIndex = 2,
 			tag = "anchor-bottom-center stroke-standard stroke-default clip bg-surface-200",
-			Position = var4:map(function(p2)
-				-- upvalues: var9 (ref)
-				return UDim2.new(0.5, 0, 1, math.round(p2 * var9))
+			Position = UseBindingResult:map(function(p2): UDim2 --[[ Line: 144 ]]
+				-- upvalues: NewHeight (copy)
+				return UDim2.new(0.5, 0, 1, (math.round(p2 * NewHeight)))
 			end),
-			Size = UDim2.new(1, 0, 0, var9),
+			Size = UDim2.new(1, 0, 0, NewHeight),
 			padding = {
-				bottom = UDim.new(0, var7.bottom),
-				left = UDim.new(0, var7.left),
-				right = UDim.new(0, var7.right)
+				bottom = UDim.new(0, UseStateResult1.bottom),
+				left = UDim.new(0, UseStateResult1.left),
+				right = UDim.new(0, UseStateResult1.right)
 			},
-			onActivated = function() end,
+			onActivated = function() --[[ Line: 155 ]] end,
 			stateLayer = {
-				affordance = foundationModule.Enums.StateLayerAffordance.None
+				affordance = FoundationModule.Enums.StateLayerAffordance.None
 			}
 		}, { Container = p1.content })
-	}), var1) else nil
+	}), UseOverlayResult) else nil
 end)

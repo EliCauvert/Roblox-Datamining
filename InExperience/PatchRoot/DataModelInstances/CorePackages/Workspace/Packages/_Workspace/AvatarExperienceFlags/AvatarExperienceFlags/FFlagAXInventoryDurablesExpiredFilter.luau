@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("AXInventoryDurablesExpiredFilter", false) and require(script.Parent.FFlagAXInventoryDurablesSupport)
+﻿local FFlagAXInventoryDurablesSupportModule = require(script.Parent.FFlagAXInventoryDurablesSupport)
+
+return game:DefineFastFlag("AXInventoryDurablesExpiredFilter", false) and FFlagAXInventoryDurablesSupportModule

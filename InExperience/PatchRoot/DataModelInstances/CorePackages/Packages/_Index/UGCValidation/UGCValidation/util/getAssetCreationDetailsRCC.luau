@@ -1,13 +1,14 @@
 ﻿local APIUtilModule = require(script.Parent.Parent.util.APIUtil)
-local httpService = game:GetService("HttpService")
-local text = string.format("https://apis.%s", APIUtilModule.getBaseDomain()) .. "assets/rcc/v1/assets/%s"
+local HttpService = game:GetService("HttpService")
+local Text = string.format("https://apis.%s", (APIUtilModule.getBaseDomain())) .. "assets/rcc/v1/assets/%s"
 
-return function(value)
-	-- upvalues: text (ref), APIUtilModule (ref), httpService (ref)
-	local var1, var2 = APIUtilModule.requestAndRetryGet(string.format(text, value))
+return function(p1) --[[ Line: 15 | Named "getAssetCreationDetailsRCC" ]]
+	-- upvalues: Text (copy), APIUtilModule (copy), HttpService (copy)
+	local RequestAndRetryGetResult, RequestAndRetryGetResult2 = APIUtilModule.requestAndRetryGet((string.format(Text, p1)))
 	
-	if var1 then
-		return true, httpService:JSONDecode(var2)
+	if RequestAndRetryGetResult then
+		return true, HttpService:JSONDecode(RequestAndRetryGetResult2)
+	else
+		return false, RequestAndRetryGetResult2
 	end
-	return false, var2
 end

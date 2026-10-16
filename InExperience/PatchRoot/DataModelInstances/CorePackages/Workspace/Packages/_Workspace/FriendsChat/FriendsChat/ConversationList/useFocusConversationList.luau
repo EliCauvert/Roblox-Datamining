@@ -1,37 +1,37 @@
-﻿local parent = script:FindFirstAncestor("FriendsChat").Parent
-local reactModule = require(parent.React)
-local useStableSignal = require(parent.ChatUIPrimitives).Hooks.useStableSignal
-local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
-local useFocusGuiObject = reactFocusNavigationModule.useFocusGuiObject
-local useContainerFocusBehavior = reactFocusNavigationModule.useContainerFocusBehavior
-local fFlagFriendsChatConversationListFocusNav = require(parent.SharedFlags).FFlagFriendsChatConversationListFocusNav
-local useConsumeFocusConversationListRequestModule = require(script.Parent.useConsumeFocusConversationListRequest)
+﻿local Parent = script:FindFirstAncestor("FriendsChat").Parent
+local ReactModule = require(Parent.React)
+local UseStableSignalFunction = require(Parent.ChatUIPrimitives).Hooks.useStableSignal
+local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
+local UseFocusGuiObjectFunction = ReactFocusNavigationModule.useFocusGuiObject
+local UseContainerFocusBehaviorFunction = ReactFocusNavigationModule.useContainerFocusBehavior
+local FFlagFriendsChatConversationListFocusNav = require(Parent.SharedFlags).FFlagFriendsChatConversationListFocusNav
+local UseConsumeFocusConversationListRequestModule = require(script.Parent.useConsumeFocusConversationListRequest)
 
-return function(p1)
-	-- upvalues: fFlagFriendsChatConversationListFocusNav (ref), useFocusGuiObject (ref), useStableSignal (ref), reactModule (ref), useConsumeFocusConversationListRequestModule (ref), useContainerFocusBehavior (ref)
-	local var1 = nil
-	local var2 = nil
+return function(Callback) --[[ Line: 23 | Named "useFocusConversationList" ]]
+	-- upvalues: FFlagFriendsChatConversationListFocusNav (copy), UseFocusGuiObjectFunction (copy), UseStableSignalFunction (copy), ReactModule (copy), UseConsumeFocusConversationListRequestModule (copy), UseContainerFocusBehaviorFunction (copy)
+	local v1 = nil
+	local v2 = nil
 	
-	if fFlagFriendsChatConversationListFocusNav then
-		local var3 = useFocusGuiObject()
-		local var4, var5 = useStableSignal(nil)
-		var2 = var5
-		useConsumeFocusConversationListRequestModule(var4, reactModule.useCallback(function(p2)
-			-- upvalues: p1 (ref), var3 (ref)
-			p1(false).resetAllTransparency()
-			var3(p2)
-		end, { p1, var3 }))
-		var1 = useContainerFocusBehavior(reactModule.useMemo(function()
-			-- upvalues: var4 (ref)
+	if FFlagFriendsChatConversationListFocusNav then
+		local UseFocusGuiObjectResult = UseFocusGuiObjectFunction()
+		local UseStableSignalResult, UseStableSignalResult2 = UseStableSignalFunction(nil)
+		v2 = UseStableSignalResult2
+		UseConsumeFocusConversationListRequestModule(UseStableSignalResult, (ReactModule.useCallback(function(p1) --[[ Line: 37 ]]
+			-- upvalues: Callback (copy), UseFocusGuiObjectResult (copy)
+			Callback(false).resetAllTransparency()
+			UseFocusGuiObjectResult(p1)
+		end, { Callback, UseFocusGuiObjectResult })))
+		v1 = UseContainerFocusBehaviorFunction(ReactModule.useMemo(function() --[[ Line: 48 ]]
+			-- upvalues: UseStableSignalResult (copy)
 			return {
-				getTargets = function()
-					-- upvalues: var4 (copy)
-					local var6 = var4(false)
+				getTargets = function() --[[ Line: 50 ]]
+					-- upvalues: UseStableSignalResult (upval)
+					local UseStableSignalResultResult = UseStableSignalResult(false)
 					
-					return if var6 == nil then {} else { var6 }
+					return if UseStableSignalResultResult == nil then {} else { UseStableSignalResultResult }
 				end
 			}
-		end, { var4 }), nil)
+		end, { UseStableSignalResult }), nil)
 	end
-	return var1, var2
+	return v1, v2
 end

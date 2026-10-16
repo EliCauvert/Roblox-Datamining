@@ -1,27 +1,24 @@
-﻿local parent = script:FindFirstAncestor("InteractionFeedback").Parent
-local cryoModule = require(parent.Cryo)
-local sharedFlagsModule = require(parent.SharedFlags)
+﻿local CryoModule = require(script:FindFirstAncestor("InteractionFeedback").Parent.Cryo)
 local _ = require(script.Parent.InteractionFeedbackContext)
-local sendHapticAnalyticsModule = require(script.Parent.sendHapticAnalytics)
-local fFlagLuaAppHapticTriggeredTelemetry = sharedFlagsModule.FFlagLuaAppHapticTriggeredTelemetry
-local t = {}
+local SendHapticAnalyticsModule = require(script.Parent.sendHapticAnalytics)
+local HapticEffects = {}
 
-return function(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: t (ref), fFlagLuaAppHapticTriggeredTelemetry (ref), cryoModule (ref), sendHapticAnalyticsModule (ref)
-	if not t[p1] then
-		t[p1] = Instance.new("HapticEffect")
-		t[p1].Parent = workspace
-		t[p1].Type = p1
+return function(Type, Position, Radius, ContextKey, InteractionType, p1, p2) --[[ Line: 12 | Named "triggerHaptic" ]]
+	-- upvalues: HapticEffects (copy), CryoModule (copy), SendHapticAnalyticsModule (copy)
+	if not HapticEffects[Type] then
+		HapticEffects[Type] = Instance.new("HapticEffect")
+		HapticEffects[Type].Parent = workspace
+		HapticEffects[Type].Type = Type
 	end
-	t[p1].Position = p2
-	t[p1].Radius = p3
-	t[p1]:Play()
+	HapticEffects[Type].Position = Position
+	HapticEffects[Type].Radius = Radius
+	HapticEffects[Type]:Play()
 	
-	if fFlagLuaAppHapticTriggeredTelemetry and p6 then
-		sendHapticAnalyticsModule(cryoModule.Dictionary.join({
-			hapticType = p1.Name,
-			contextKey = p4,
-			interactionType = p5
-		}, p7 or {}), p6)
+	if p1 then
+		SendHapticAnalyticsModule(CryoModule.Dictionary.join({
+			hapticType = Type.Name,
+			contextKey = ContextKey,
+			interactionType = InteractionType
+		}, p2 or {}), p1)
 	end
 end

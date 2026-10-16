@@ -1,6 +1,6 @@
-﻿local enableInAppBugReporting = game:DefineFastFlag("EnableInAppBugReporting", false)
+﻿local EnableInAppBugReporting = game:DefineFastFlag("EnableInAppBugReporting", false)
 
-return function()
-	-- upvalues: enableInAppBugReporting (ref)
-	return enableInAppBugReporting and game:GetEngineFeature("BugReporterProtocol")
+return function() --[[ Line: 3 ]]
+	-- upvalues: EnableInAppBugReporting (copy)
+	return EnableInAppBugReporting and game:GetEngineFeature("BugReporterProtocol")
 end

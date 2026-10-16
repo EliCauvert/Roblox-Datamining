@@ -1,23 +1,23 @@
-﻿local reactModule = require(game:GetService("CorePackages").Packages.React)
+﻿local ReactModule = require(game:GetService("CorePackages").Packages.React)
 
-return function(p1)
-	-- upvalues: reactModule (ref)
-	local var1, var2 = reactModule.useState(p1:getIsLarge())
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var2 (ref), var1 (ref)
-		local var3 = p1:connect(function()
-			-- upvalues: var2 (copy), p1 (copy)
-			var2(p1:getIsLarge())
+return function(p1) --[[ Line: 4 ]]
+	-- upvalues: ReactModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(p1:getIsLarge())
+	ReactModule.useEffect(function() --[[ Line: 7 ]]
+		-- upvalues: p1 (copy), UseStateResult2 (copy), UseStateResult (copy)
+		local Connection = p1:connect(function() --[[ Line: 8 ]]
+			-- upvalues: UseStateResult2 (upval), p1 (upval)
+			UseStateResult2(p1:getIsLarge())
 		end)
 		
-		if var1 ~= p1:getIsLarge() then
-			var2(p1:getIsLarge())
+		if UseStateResult ~= p1:getIsLarge() then
+			UseStateResult2(p1:getIsLarge())
 		end
-		return function()
-			-- upvalues: var3 (ref)
-			var3:disconnect()
+		return function() --[[ Line: 16 ]]
+			-- upvalues: Connection (copy)
+			Connection:disconnect()
 		end
 	end, { p1 })
 	
-	return var1
+	return UseStateResult
 end

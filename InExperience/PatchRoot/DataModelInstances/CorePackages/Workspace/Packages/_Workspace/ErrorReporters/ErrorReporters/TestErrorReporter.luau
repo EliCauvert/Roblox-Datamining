@@ -1,132 +1,132 @@
-﻿local luauModule = require("@std/luau")
-local fsModule = require("@std/fs")
-local jsonModule = require("@std/json")
-local netModule = require("@std/net")
-local processModule = require("@std/process")
+﻿local LuauModule = require("@std/luau")
+local FsModule = require("@std/fs")
+local JsonModule = require("@std/json")
+local NetModule = require("@std/net")
+local ProcessModule = require("@std/process")
 
-local function _(p1)
+local function _(p1) --[[ Line: 32 | Named "parentDir" ]]
 	return p1:match("^(.*)/[^/]+$") or "."
 end
 
-local _ = function(p1)
-	-- upvalues: fsModule (ref)
-	return fsModule.exists(p1 .. "/init.lua") or fsModule.exists(p1 .. "/init.luau")
+local _ = function(Text) --[[ Line: 37 | Named "isModuleDir" ]]
+	-- upvalues: FsModule (copy)
+	return FsModule.exists(Text .. "/init.lua") or FsModule.exists(Text .. "/init.luau")
 end
 
-local var1 = processModule.args[1]:match("^(.*)/[^/]+$") or "."
-local var2 = (var1:match("^(.*)/[^/]+$") or "."):match("^(.*)/[^/]+$") or "."
-local text = var2 .. "/sentry-sdk/src"
-local var3 = processModule.args[2] or processModule.env.SENTRY_DSN
+local v1 = ProcessModule.args[1]:match("^(.*)/[^/]+$") or "."
+local v2 = (v1:match("^(.*)/[^/]+$") or "."):match("^(.*)/[^/]+$") or "."
+local Text = v2 .. "/sentry-sdk/src"
+local Arg = ProcessModule.args[2] or ProcessModule.env.SENTRY_DSN
 
-if not var3 or var3 == "" then
+if not Arg or Arg == "" then
 	print("ERROR: no DSN provided.")
 	print("  lute TestErrorReporter.lua \"<your-sentry-dsn>\"")
 	print("  or set SENTRY_DSN in the environment")
-	processModule.exit(1)
+	ProcessModule.exit(1)
 end
-for i, v in {
-	var1 .. "/Sentry/SentryReporter.lua",
-	text .. "/Client.lua"
+for _, value in {
+	v1 .. "/Sentry/SentryReporter.lua",
+	Text .. "/Client.lua"
 } do
-	if not fsModule.exists(v) then
-		print(`ERROR: cannot find {v}`)
-		processModule.exit(1)
+	if not FsModule.exists(value) then
+		print(`ERROR: cannot find {value}`)
+		ProcessModule.exit(1)
 	end
 end
-local t = {
-	JSONEncode = function(_, p1)
-		-- upvalues: jsonModule (ref)
-		return jsonModule.serialize(p1)
+local HttpService = {
+	JSONEncode = function(_, p1) --[[ Line: 68 ]]
+		-- upvalues: JsonModule (copy)
+		return JsonModule.serialize(p1)
 	end,
-	JSONDecode = function(_, p1)
-		-- upvalues: jsonModule (ref)
-		return jsonModule.deserialize(p1)
+	JSONDecode = function(_, p1) --[[ Line: 71 ]]
+		-- upvalues: JsonModule (copy)
+		return JsonModule.deserialize(p1)
 	end,
-	RequestInternal = function(_, p1)
-		-- upvalues: netModule (ref)
+	RequestInternal = function(_, p1) --[[ Line: 74 ]]
+		-- upvalues: NetModule (copy)
 		return {
-			Start = function(_, p2)
-				-- upvalues: netModule (copy), p1 (ref)
-				local ok, status = pcall(function()
-					-- upvalues: netModule (copy), p1 (copy)
-					return netModule.request(p1.Url, { method = p1.Method, headers = p1.Headers, body = p1.Body })
+			Start = function(_, Callback: (any, any) -> ()) --[[ Line: 76 ]]
+				-- upvalues: NetModule (upval), p1 (copy)
+				local Success, Result = pcall(function() --[[ Line: 77 ]]
+					-- upvalues: NetModule (upval), p1 (upval)
+					return NetModule.request(p1.Url, { method = p1.Method, headers = p1.Headers, body = p1.Body })
 				end)
 				
-				if ok then
-					p2(true, {
-						Success = status.ok,
-						StatusCode = status.status,
-						Body = status.body,
-						Headers = status.headers
+				if Success then
+					Callback(true, {
+						Success = Result.ok,
+						StatusCode = Result.status,
+						Body = Result.body,
+						Headers = Result.headers
 					})
 					
 					return
+				else
+					Callback(false, (tostring(Result)))
 				end
-				p2(false, tostring(status))
 			end
 		}
 	end
 }
-local t_1 = {
-	HttpService = t,
+local config = {
+	HttpService = HttpService,
 	RunService = {
 		renderStepped = {
-			Connect = function()
-				return { Disconnect = function() end }
+			Connect = function() --[[ Line: 103 ]]
+				return { Disconnect = function() --[[ Line: 105 ]] end }
 			end
 		},
-		IsStudio = function(_)
+		IsStudio = function(_): boolean --[[ Line: 110 ]]
 			return false
 		end,
-		GetRobloxVersion = function(_)
+		GetRobloxVersion = function(_): string --[[ Line: 113 ]]
 			return "version-9.999.0.9999999"
 		end
 	}
 }
-local tbl = setmetatable({ PlaceId = 0, JobId = "lute-test-job" }, {})
+local self = setmetatable({ PlaceId = 0, JobId = "lute-test-job" }, {})
 
-function tbl.GetService(_, p1)
-	-- upvalues: t_1 (ref)
-	return t_1[p1]
+function self:GetService(p1) --[[ Line: 119 ]]
+	-- upvalues: config (copy)
+	return config[p1]
 end
 
-function tbl.DefineFastFlag(_, p1, p2)
+function self:DefineFastFlag(p1, p2) --[[ Line: 122 ]]
 	return p1 == "SentryReportBreadcrumbs" or p2
 end
 
-function tbl.DefineFastInt(_, _, p1)
+function self:DefineFastInt(_, p1) --[[ Line: 129 ]]
 	return p1
 end
 
-local t_2 = {
+local config1 = {
 	Dictionary = {
-		join = function(...)
+		join = function(...) --[[ Line: 140 ]]
 			local t = {}
 			
 			for i = 1, select("#", ...) do
-				local var4 = select(i, ...)
+				local Selected = select(i, ...)
 				
-				if type(var4) ~= "table" then
-					continue
-				end
-				for i, v in pairs(var4) do
-					t[i] = v
+				if type(Selected) == "table" then
+					for i1, value in pairs(Selected) do
+						t[i1] = value
+					end
 				end
 			end
 			return t
 		end
 	}
 }
-local tbl_1 = setmetatable({}, {
-	__index = function()
-		return function()
-			return function()
+local self1 = setmetatable({}, {
+	__index = function() --[[ Line: 159 ]]
+		return function() --[[ Line: 160 ]]
+			return function(): boolean --[[ Line: 161 ]]
 				return true
 			end
 		end
 	end
 })
-local t_3 = {
+local config2 = {
 	print = print,
 	warn = print,
 	error = error,
@@ -157,161 +157,156 @@ local t_3 = {
 	utf8 = utf8,
 	buffer = buffer,
 	tick = os.clock,
-	game = tbl
+	game = self
 }
-local t_4 = {}
-local t_5 = {}
-local t_6 = nil
+local t = {}
+local t1 = {}
+local v3 = nil
 local _ = nil
 
-local _ = function(p1, p2, p3)
-	-- upvalues: t_6 (write)
-	return setmetatable({ __path = p1, __name = p2, __parent = p3 }, t_6)
+local _ = function(p1, p2, p3) --[[ Line: 215 | Named "makeNode" ]]
+	-- upvalues: v3 (ref)
+	return (setmetatable({ __path = p1, __name = p2, __parent = p3 }, v3))
 end
 
-t_6 = {
-	__index = function(p1, p2)
-		-- upvalues: t_6 (write)
-		if type(p2) == "string" and p2:sub(1, 2) == "__" then
-			return rawget(p1, p2)
-		elseif p2 == "Parent" then
+v3 = {
+	__index = function(p1, Text: string) --[[ Line: 224 ]]
+		-- upvalues: v3 (ref)
+		if type(Text) == "string" and Text:sub(1, 2) == "__" then
+			return (rawget(p1, Text))
+		elseif Text == "Parent" then
 			return p1.__parent
-		elseif p2 == "Name" then
+		elseif Text == "Name" then
 			return p1.__name
-		elseif p2 == "FindFirstAncestor" then
-			return function(_, p3)
-				-- upvalues: p1 (ref)
-				local parent = p1.__parent
-				while parent ~= nil do
-					if parent.__name ~= p3 then
-						parent = parent.__parent
-						continue
+		elseif Text == "FindFirstAncestor" then
+			return function(_, Name) --[[ Line: 237 ]]
+				-- upvalues: p1 (copy)
+				local Parent = p1.__parent
+				while Parent ~= nil do
+					if Parent.__name == Name then
+						return Parent
 					end
-					return parent
+					Parent = Parent.__parent
 				end
 				return nil
 			end
+		else
+			local Override = p1.__overrides and p1.__overrides[Text]
+			
+			return if Override == nil then setmetatable({
+				__path = p1.__path .. "/" .. Text,
+				__name = Text,
+				__parent = p1
+			}, v3) else Override
 		end
-		local var5 = p1.__overrides and p1.__overrides[p2]
-		
-		return if var5 == nil then setmetatable({
-			__path = p1.__path .. "/" .. p14,
-			__name = p2,
-			__parent = p1
-		}, t_6) else var5
 	end
 }
 
-local var6 = function(p3)
-	-- upvalues: fsModule (ref), t_5 (ref), luauModule (ref), var6 (write), t_4 (ref), t_3 (ref)
-	assert(type(p3) == "table" and p3.__path, "custom require expects a module node")
+local function v22(ErrorReport) --[[ Line: 259 ]]
+	-- upvalues: FsModule (copy), t1 (copy), LuauModule (copy), v22 (ref), t (copy), config2 (copy)
+	assert(type(ErrorReport) == "table" and ErrorReport.__path, "custom require expects a module node")
 	
-	if p3.__value ~= nil then
-		return p3.__value
+	if ErrorReport.__value ~= nil then
+		return ErrorReport.__value
 	end
-	local path = p3.__path
-	local var7 = path
+	local Path = ErrorReport.__path
 	
-	if fsModule.exists(var7 .. "/init.lua") or fsModule.exists(var7 .. "/init.luau") then
-		path ..= "/init"
+	if FsModule.exists(Path .. "/init.lua") or FsModule.exists(Path .. "/init.luau") then
+		Path ..= "/init"
 	end
-	if t_5[path] ~= nil then
-		return t_5[path]
+	if t1[Path] ~= nil then
+		return t1[Path]
 	end
-	local text = path .. ".lua"
+	local Text = Path .. ".lua"
 	
-	if not fsModule.exists(text) then
-		text = path .. ".luau"
+	if not FsModule.exists(Text) then
+		Text = Path .. ".luau"
 	end
-	local var8 = luauModule.load(luauModule.compile(fsModule.readFileToString(text)), text, setmetatable({ script = p3, require = var6, _G = t_4 }, { __index = t_3 }))()
-	t_5[path] = var8
+	local v4 = LuauModule.load(LuauModule.compile((FsModule.readFileToString(Text))), Text, (setmetatable({ script = ErrorReport, require = v22, _G = t }, { __index = config2 })))()
+	t1[Path] = v4
 	
-	return var8
+	return v4
 end
 
-local tbl_2 = setmetatable({ __name = "Packages", __parent = nil, __path = var2 }, t_6)
-local tbl_3 = setmetatable({
-	__name = "ErrorReporters",
-	__path = var1,
-	__parent = tbl_2
-}, t_6)
-tbl_2.__overrides = {
-	ErrorReporters = tbl_3,
-	SentrySdk = setmetatable({ __name = "SentrySdk", __path = text, __parent = tbl_2 }, t_6),
+local self2 = setmetatable({ __name = "Packages", __parent = nil, __path = v2 }, v3)
+local self21 = setmetatable({ __name = "ErrorReporters", __path = v1, __parent = self2 }, v3)
+self2.__overrides = {
+	ErrorReporters = self21,
+	SentrySdk = setmetatable({ __name = "SentrySdk", __path = Text, __parent = self2 }, v3),
 	Cryo = setmetatable({
 		__name = "Cryo",
-		__path = var2 .. "/Cryo",
-		__parent = tbl_2
-	}, t_6),
-	t = setmetatable({ __name = "t", __path = var2 .. "/t", __parent = tbl_2 }, t_6)
+		__path = v2 .. "/Cryo",
+		__parent = self2
+	}, v3),
+	t = setmetatable({ __name = "t", __path = v2 .. "/t", __parent = self2 }, v3)
 }
-tbl_2.__overrides.Cryo.__value = t_2
-tbl_2.__overrides.t.__value = tbl_1
-local var7 = var6(tbl_3.Sentry.SentryReporter)
-local var8 = var6(tbl_3.Sentry.ErrorReport)
-local var9 = var3:match("@([^/]+)") or "?"
-local var10 = nil
+self2.__overrides.Cryo.__value = config1
+self2.__overrides.t.__value = self1
+local v4 = v22(self21.Sentry.SentryReporter)
+local v5 = v22(self21.Sentry.ErrorReport)
+local v6 = Arg:match("@([^/]+)") or "?"
+local TestingTestErrorReporter = nil
 
-local function summarizeBreadcrumbs()
-	-- upvalues: var10 (write)
-	local t = {}
+local function summarizeBreadcrumbs(): string --[[ Line: 337 ]]
+	-- upvalues: TestingTestErrorReporter (ref)
+	local List = {}
 	
-	for i, v in var10.breadcrumbs do
-		table.insert(t, string.format("      #%d [%s/%s] %s", i, tostring(v.type), tostring(v.category), tostring(v.message)))
+	for i, breadcrumb in TestingTestErrorReporter.breadcrumbs do
+		table.insert(List, string.format("      #%d [%s/%s] %s", i, tostring(breadcrumb.type), tostring(breadcrumb.category), (tostring(breadcrumb.message))))
 	end
-	return table.concat(t, "\n")
+	return table.concat(List, "\n")
 end
 
-local var11 = var7.new({
+local NewResult = v4.new({
 	environment = "development",
 	release = "error-reporter-test",
-	httpService = t,
-	dsn = var3,
-	sentryClientSuccessCallback = function()
-		-- upvalues: var9 (ref), var10 (write), t (ref), summarizeBreadcrumbs (ref)
+	httpService = HttpService,
+	dsn = Arg,
+	sentryClientSuccessCallback = function() --[[ Line: 359 ]]
+		-- upvalues: v6 (copy), TestingTestErrorReporter (ref), HttpService (copy), summarizeBreadcrumbs (copy)
 		print("---- Sentry report accepted ----")
 		print("  environment:", "development")
 		print("  release:", "error-reporter-test")
-		print("  dsn host:", var9)
-		print("  level:", tostring(var10.level))
-		print("  message:", tostring(var10.message))
-		print("  attributes:", t:JSONEncode(var10.attributes))
-		print("  customMetadata:", t:JSONEncode(var10.customMetadata))
-		print("  breadcrumbs:", #var10.breadcrumbs)
+		print("  dsn host:", v6)
+		print("  level:", (tostring(TestingTestErrorReporter.level)))
+		print("  message:", (tostring(TestingTestErrorReporter.message)))
+		print("  attributes:", HttpService:JSONEncode(TestingTestErrorReporter.attributes))
+		print("  customMetadata:", HttpService:JSONEncode(TestingTestErrorReporter.customMetadata))
+		print("  breadcrumbs:", #TestingTestErrorReporter.breadcrumbs)
 		
-		if #var10.breadcrumbs > 0 then
+		if #TestingTestErrorReporter.breadcrumbs > 0 then
 			print(summarizeBreadcrumbs())
 		end
 		print("--------------------------------")
 	end,
-	sentryClientFailureCallback = function(p3)
-		print("[callback] sentryClientFailureCallback fired:", tostring(p3))
+	sentryClientFailureCallback = function(p2) --[[ Line: 374 ]]
+		print("[callback] sentryClientFailureCallback fired:", (tostring(p2)))
 	end
 })
-var10 = var8.fromMessageAndStack("Testing TestErrorReporter", "Script 'CartService', Line 142 - submitOrder\nScript 'PurchaseFlow', Line 88 - startCheckout", "error")
-var10:addAttributes({
+TestingTestErrorReporter = v5.fromMessageAndStack("Testing TestErrorReporter", "Script 'CartService', Line 142 - submitOrder\nScript 'PurchaseFlow', Line 88 - startCheckout", "error")
+TestingTestErrorReporter:addAttributes({
 	appVersion = "1.2.3",
 	baseOs = "iOS",
 	systemVersion = "17.5",
 	deviceName = "iPhone 15",
 	networkType = "wifi"
 })
-var10:addCustomMetadata({ checkout = { cart_id = "cart_abc123", item_count = 3 } })
-var10:addBreadcrumb({
+TestingTestErrorReporter:addCustomMetadata({ checkout = { cart_id = "cart_abc123", item_count = 3 } })
+TestingTestErrorReporter:addBreadcrumb({
 	type = "navigation",
 	category = "navigation",
 	message = "Opened Avatar editor",
 	data = { from = "/home", to = "/avatar" },
 	timestamp = os.time() - 10
 })
-var10:addBreadcrumb({
+TestingTestErrorReporter:addBreadcrumb({
 	type = "ui",
 	category = "ui.click",
 	message = "Tapped Buy",
 	level = "info"
 })
-print("Report breadcrumbs:", #var10.breadcrumbs)
+print("Report breadcrumbs:", #TestingTestErrorReporter.breadcrumbs)
 print("Sending error report to Sentry (context + threads + breadcrumbs)...")
-var11:sendErrorReport(var10)
-var11:stop()
+NewResult:sendErrorReport(TestingTestErrorReporter)
+NewResult:stop()
 print("Done. Check the Sentry issue for the breadcrumb trail.")

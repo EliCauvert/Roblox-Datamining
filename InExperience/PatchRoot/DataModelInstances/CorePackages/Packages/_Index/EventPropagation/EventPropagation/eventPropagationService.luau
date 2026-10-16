@@ -1,196 +1,191 @@
-﻿local focusNavigationUtilsModule = require(script.Parent.Parent.FocusNavigationUtils)
-local getAncestors = focusNavigationUtilsModule.getAncestors
-local mockableWarn = focusNavigationUtilsModule.mockableWarn
-local eventPropagationEventModule = require(script.Parent.eventPropagationEvent)
-local dEBUGEVENTPROPAGATION = _G.__DEBUG_EVENT_PROPAGATION__
+﻿local FocusNavigationUtilsModule = require(script.Parent.Parent.FocusNavigationUtils)
+local GetAncestorsFunction = FocusNavigationUtilsModule.getAncestors
+local MockableWarnFunction = FocusNavigationUtilsModule.mockableWarn
+local EventPropagationEventModule = require(script.Parent.eventPropagationEvent)
+local DEBUGEVENTPROPAGATION = _G.__DEBUG_EVENT_PROPAGATION__
 
-local function describeFunction(p1)
-	return table.concat(table.pack(debug.info(p1, "sln")), " ")
+local function describeFunction(EventHandlerEntry): string --[[ Line: 113 ]]
+	return table.concat(table.pack(debug.info(EventHandlerEntry, "sln")), " ")
 end
 
-local function _(p1, p2)
+local function _(p1, p2) --[[ Line: 117 | Named "getEventsFromRegistry" ]]
 	return p1[p2]
 end
 
-local _ = function(p1, p2, p3)
-	local var1 = p1[p2]
+local _ = function(p1, p2, p3) --[[ Line: 121 | Named "getEventPhasesFromRegistry" ]]
+	local v1 = p1[p2]
 	
-	return if var1 then var1[p3] else nil
+	return if v1 then v1[p3] else nil
 end
 
-local _ = function(p1, p2, p3, p4)
-	local var1 = p1[p2]
-	local var2 = if var1 then var1[p3] else nil
+local _ = function(p1, p2, p3, p4) --[[ Line: 130 | Named "getEventHandler" ]]
+	local v1 = p1[p2]
+	local v2 = if v1 then v1[p3] else nil
 	
-	return if var2 == nil then nil else var2[p4]
+	return if v2 == nil then nil else v2[p4]
 end
 
-local t = {}
-t.__index = t
+local EventPropagationService = {}
+EventPropagationService.__index = EventPropagationService
 
-function t:registerEventHandler(p1, p2, p3, p4)
-	-- upvalues: dEBUGEVENTPROPAGATION (ref), mockableWarn (ref), describeFunction (ref)
-	if dEBUGEVENTPROPAGATION then
-		print("+++ register handler", p2, tostring(p1), p4 or "Bubble")
+function EventPropagationService:registerEventHandler(p1, p2, Handler, Phase) --[[ Line: 143 ]]
+	-- upvalues: DEBUGEVENTPROPAGATION (copy), MockableWarnFunction (copy), describeFunction (copy)
+	if DEBUGEVENTPROPAGATION then
+		print("+++ register handler", p2, tostring(p1), Phase or "Bubble")
 	end
-	p4 = p4 or "Bubble"
+	local Phase1 = Phase or "Bubble"
 	self.eventHandlerRegistry[p1] = self.eventHandlerRegistry[p1] or {}
 	self.eventHandlerRegistry[p1][p2] = self.eventHandlerRegistry[p1][p2] or {}
 	
 	if _G.__DEV__ then
-		local var1 = self.eventHandlerRegistry[p1][p2][p4]
+		local EventHandlerEntry = self.eventHandlerRegistry[p1][p2][Phase1]
 		
-		if var1 then
-			mockableWarn(string.format("New handler bound to the %s phase of '%s' will override an existing handler:\n\tprevious handler: %s\n\t     new handler: %s", p4, p2, table.concat(table.pack(debug.info(p3, "sln")), " "), describeFunction(var1)))
+		if EventHandlerEntry then
+			MockableWarnFunction(string.format("New handler bound to the %s phase of '%s' will override an existing handler:\n\tprevious handler: %s\n\t     new handler: %s", Phase1, p2, table.concat(table.pack(debug.info(Handler, "sln")), " "), describeFunction(EventHandlerEntry)))
 		end
 	end
-	self.eventHandlerRegistry[p1][p2][p4] = p3
+	self.eventHandlerRegistry[p1][p2][Phase1] = Handler
 end
 
-function t:registerEventHandlers(p1, p2)
+function EventPropagationService:registerEventHandlers(p1, List) --[[ Line: 174 ]]
 	if not self.eventHandlerRegistry[p1] then
 		self.eventHandlerRegistry[p1] = {}
 	end
-	for i, v in p2 do
-		self:registerEventHandler(p1, i, v.handler, v.phase)
+	for i, value in List do
+		self:registerEventHandler(p1, i, value.handler, value.phase)
 	end
 end
 
-function t:deregisterEventHandlers(p3, p4)
-	if not self.eventHandlerRegistry[p3] then return end
-	for i, v in p4 do
-		self:deregisterEventHandler(p3, i, v.handler, v.phase)
+function EventPropagationService:deregisterEventHandlers(p2, List) --[[ Line: 183 ]]
+	if not self.eventHandlerRegistry[p2] then return end
+	for i, value in List do
+		self:deregisterEventHandler(p2, i, value.handler, value.phase)
 	end
 end
 
-function t:deregisterEventHandler(p5, p6, p7, p8)
-	-- upvalues: dEBUGEVENTPROPAGATION (ref), mockableWarn (ref)
-	if dEBUGEVENTPROPAGATION then
-		print("--- deregister handler", p6, tostring(p5), p8 or "Bubble")
+function EventPropagationService:deregisterEventHandler(p3, p4, Callback, Phase) --[[ Line: 192 ]]
+	-- upvalues: DEBUGEVENTPROPAGATION (copy), MockableWarnFunction (copy)
+	if DEBUGEVENTPROPAGATION then
+		print("--- deregister handler", p4, tostring(p3), Phase or "Bubble")
 	end
-	p8 = p8 or "Bubble"
-	local var1 = self.eventHandlerRegistry[p5]
-	local var2 = if var1 then var1[p6] else nil
+	local Phase1 = Phase or "Bubble"
+	local EventHandler = self.eventHandlerRegistry[p3]
+	local EventHandlerEntry = if EventHandler then EventHandler[p4] else nil
 	
-	if var2 and var2[p8] then
+	if EventHandlerEntry and EventHandlerEntry[Phase1] then
 		if _G.__DEV__ then
-			local var3 = var2[p8]
+			local Callback1 = EventHandlerEntry[Phase1]
 			
-			if var3 ~= p7 then
-				mockableWarn(string.format("Deregistering non-matching event handler bound to the %s phase of '%s':\n\tprevious handler: %s\n\t     new handler: %s", p8, p6, if type(p7) == "function" then table.concat(table.pack(debug.info(p7, "sln")), " ") else tostring(p7), if type(var3) == "function" then table.concat(table.pack(debug.info(var3, "sln")), " ") else tostring(var3)))
+			if Callback1 ~= Callback then
+				MockableWarnFunction(string.format("Deregistering non-matching event handler bound to the %s phase of '%s':\n\tprevious handler: %s\n\t     new handler: %s", Phase1, p4, if type(Callback) == "function" then table.concat(table.pack(debug.info(Callback, "sln")), " ") else tostring(Callback), if type(Callback1) == "function" then table.concat(table.pack(debug.info(Callback1, "sln")), " ") else tostring(Callback1)))
 			end
 		end
-		var2[p8] = nil
+		EventHandlerEntry[Phase1] = nil
 		
 		return
 	elseif _G.__DEV__ then
-		mockableWarn(string.format("Cannot deregister unregistered event handler bound to the %s phase of '%s'", p8, p6))
+		MockableWarnFunction(string.format("Cannot deregister unregistered event handler bound to the %s phase of '%s'", Phase1, p4))
 	end
 end
 
-function t:getRegisteredEventHandlers(p5)
-	local var1 = self.eventHandlerRegistry[p5]
+function EventPropagationService:getRegisteredEventHandlers(p3) --[[ Line: 233 ]]
+	local EventHandler = self.eventHandlerRegistry[p3]
 	
-	if not var1 then
+	if not EventHandler then
 		return nil
 	end
 	local t = {}
 	
-	for i, v in var1 do
-		t[i] = next(v) ~= nil
+	for i, value in EventHandler do
+		t[i] = next(value) ~= nil
 	end
 	return t
 end
 
-function t:propagateEvent(p6, p7, p8, p9)
-	-- upvalues: eventPropagationEventModule (ref), getAncestors (ref), dEBUGEVENTPROPAGATION (ref)
-	p9 = p9 or {}
-	local synthetic = p9.synthetic or false
-	local silent = p9.silent or false
+function EventPropagationService:propagateEvent(p4, p5, p6, p7) --[[ Line: 247 ]]
+	-- upvalues: EventPropagationEventModule (copy), GetAncestorsFunction (copy), DEBUGEVENTPROPAGATION (copy)
+	local P31 = p7 or {}
+	local Synthetic = P31.synthetic or false
 	
-	local function _(p10, p11)
-		-- upvalues: self (ref), p7 (ref), eventPropagationEventModule (copy), p6 (ref), synthetic (ref), p8 (ref)
-		local var2 = self.eventHandlerRegistry[p10]
-		local var3 = if var2 then var2[p7] else nil
-		local var4 = if var3 ~= nil then nil else var3[p11]
+	local function _(p8, p9) --[[ Line: 257 | Named "runEventHandler" ]]
+		-- upvalues: self (copy), p5 (copy), EventPropagationEventModule (upval), p4 (copy), Synthetic (copy), p6 (copy)
+		local EventHandler = self.eventHandlerRegistry[p8]
+		local EventHandlerEntry = if EventHandler then EventHandler[p5] else nil
+		local Callback: (any) -> () = if EventHandlerEntry == nil then nil else EventHandlerEntry[p9]
 		
-		if var4 then
-			local var5 = eventPropagationEventModule.new(p6, p10, p7, p11, synthetic, p8)
-			var4(var5)
+		if Callback then
+			local NewEventPropagationEvent = EventPropagationEventModule.new(p4, p8, p5, p9, Synthetic, p6)
+			Callback(NewEventPropagationEvent)
 			
-			return var5.cancelled
-		end
-		return false
-	end
-	
-	local _ = false
-	local var2 = if silent then { p6 } else getAncestors(p6)
-	
-	if dEBUGEVENTPROPAGATION then
-		print(">>> capture event", p7, "for", tostring(p6))
-	end
-	local cancelled
-	for i = #var2, 1, -1 do
-		local var3 = var2[i]
-		local var4 = self.eventHandlerRegistry[var3]
-		local var5 = if var4 then var4[p7] else nil
-		local var6 = if var5 ~= nil then nil else var5.Capture
-		
-		if var6 then
-			local capture = eventPropagationEventModule.new(p6, var3, p7, "Capture", synthetic, p8)
-			var6(capture)
-			cancelled = capture.cancelled
+			return NewEventPropagationEvent.cancelled
 		else
-			cancelled = false
+			return false
 		end
-		if not cancelled then
-			continue
-		end
-		return
 	end
-	local var7 = self.eventHandlerRegistry[p6]
-	local var8 = if var7 then var7[p7] else nil
-	local var9 = if var8 ~= nil then nil else var8.Target
 	
-	if var9 then
-		local target = eventPropagationEventModule.new(p6, p6, p7, "Target", synthetic, p8)
-		var9(target)
-		cancelled = target.cancelled
+	local List = if P31.silent or false then { p4 } else GetAncestorsFunction(p4)
+	
+	if DEBUGEVENTPROPAGATION then
+		print(">>> capture event", p5, "for", (tostring(p4)))
+	end
+	for i = #List, 1, -1 do
+		local Entry = List[i]
+		local EventHandler = self.eventHandlerRegistry[Entry]
+		local EventHandlerEntry = if EventHandler then EventHandler[p5] else nil
+		local Capture: (any) -> () = if EventHandlerEntry == nil then nil else EventHandlerEntry.Capture
+		local Cancelled = nil
+		
+		if Capture then
+			local Capture1 = EventPropagationEventModule.new(p4, Entry, p5, "Capture", Synthetic, p6)
+			Capture(Capture1)
+			Cancelled = Capture1.cancelled
+		else
+			Cancelled = false
+		end
+		if Cancelled then return end
+	end
+	local EventHandler = self.eventHandlerRegistry[p4]
+	local EventHandlerEntry = if EventHandler then EventHandler[p5] else nil
+	local Target: (any) -> () = if EventHandlerEntry == nil then nil else EventHandlerEntry.Target
+	local Cancelled = nil
+	
+	if Target then
+		local Target1 = EventPropagationEventModule.new(p4, p4, p5, "Target", Synthetic, p6)
+		Target(Target1)
+		Cancelled = Target1.cancelled
 	else
-		cancelled = false
+		Cancelled = false
 	end
-	if cancelled then return end
-	if dEBUGEVENTPROPAGATION then
-		print("<<< bubble event", p7, "from", tostring(p6))
+	if Cancelled then return end
+	if DEBUGEVENTPROPAGATION then
+		print("<<< bubble event", p5, "from", (tostring(p4)))
 	end
-	for i_1 = 1, #var2 do
-		local var10 = var2[i_1]
-		local var11 = self.eventHandlerRegistry[var10]
-		local var12 = if var11 then var11[p7] else nil
-		local var13 = if var12 ~= nil then nil else var12.Bubble
+	for i1 = 1, #List do
+		local Entry = List[i1]
+		local EventHandler1 = self.eventHandlerRegistry[Entry]
+		local EventHandlerEntry1 = if EventHandler1 then EventHandler1[p5] else nil
+		local Bubble: (any) -> () = if EventHandlerEntry1 == nil then nil else EventHandlerEntry1.Bubble
+		local Cancelled1 = nil
 		
-		if var13 then
-			local bubble = eventPropagationEventModule.new(p6, var10, p7, "Bubble", synthetic, p8)
-			var13(bubble)
-			cancelled = bubble.cancelled
+		if Bubble then
+			local Bubble1 = EventPropagationEventModule.new(p4, Entry, p5, "Bubble", Synthetic, p6)
+			Bubble(Bubble1)
+			Cancelled1 = Bubble1.cancelled
 		else
-			cancelled = false
+			Cancelled1 = false
 		end
-		if not cancelled then
-			continue
-		end
-		return
+		if Cancelled1 then break end
 	end
 end
 
-function t.new()
-	-- upvalues: t (ref)
-	local t_1 = {
+function EventPropagationService.new() --[[ Line: 304 ]]
+	-- upvalues: EventPropagationService (copy)
+	local config = {
 		eventHandlerRegistry = setmetatable({}, { __mode = "k" })
 	}
-	setmetatable(t_1, t)
+	setmetatable(config, EventPropagationService)
 	
-	return t_1
+	return config
 end
 
-return t
+return EventPropagationService

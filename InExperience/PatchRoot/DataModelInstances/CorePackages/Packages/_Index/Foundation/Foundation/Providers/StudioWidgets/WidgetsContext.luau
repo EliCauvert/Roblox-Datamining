@@ -1,5 +1,5 @@
 ﻿local _ = require(script.Parent.Types)
-local var1 = require(script:FindFirstAncestor("Foundation").Parent.React).createContext(nil)
-var1.displayName = "WidgetsContext"
+local Context = require(script:FindFirstAncestor("Foundation").Parent.React).createContext(nil)
+Context.displayName = "WidgetsContext"
 
-return var1
+return Context

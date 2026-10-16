@@ -1,61 +1,62 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local gameTileModule = require(parent.GameTile)
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local sduiActionType = sduiCoreSystemModule.SduiActionType
-local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
-local getGameTileHiddenStore = gameTileModule.getGameTileHiddenStore
-local undoGameNotInterested = gameTileModule.undoGameNotInterested
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local GameTileModule = require(Parent.GameTile)
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiActionType = SduiCoreSystemModule.SduiActionType
+local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
+local GetGameTileHiddenStoreFunction = GameTileModule.getGameTileHiddenStore
+local UndoGameNotInterestedFunction = GameTileModule.undoGameNotInterested
 
-local function _(p1, p2, p3)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref)
-	p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
-		name = sduiActionType.UndoGameTileNotInterested,
-		message = p2,
-		propName = p3
+local function _(p1, Message, PropName) --[[ Line: 16 | Named "reportInvalidParam" ]]
+	-- upvalues: SduiErrorType (copy), SduiActionType (copy)
+	p1.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
+		name = SduiActionType.UndoGameTileNotInterested,
+		message = Message,
+		propName = PropName
 	}, p1.appPage)
 end
 
-return function(p1, _, p2)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref), undoGameNotInterested (ref), getGameTileHiddenStore (ref)
-	local var1 = if p1 then p1.actionParams else nil
+return function(p1, _, p2) --[[ Line: 24 | Named "SduiUndoGameTileNotInterestedAction" ]]
+	-- upvalues: SduiErrorType (copy), SduiActionType (copy), UndoGameNotInterestedFunction (copy), GetGameTileHiddenStoreFunction (copy)
+	local ActionParams = if p1 then p1.actionParams else nil
 	
-	if var1 == nil then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if ActionParams == nil then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
 			propName = nil,
-			name = sduiActionType.UndoGameTileNotInterested
+			name = SduiActionType.UndoGameTileNotInterested
 		}, p2.appPage)
 		
 		return
 	end
-	local universeId = var1.universeId
+	local UniverseId = ActionParams.universeId
 	
-	if typeof(universeId) ~= "string" or universeId == "" then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if typeof(UniverseId) ~= "string" or UniverseId == "" then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing or invalid actionParam: universeId",
 			propName = "universeId",
-			name = sduiActionType.UndoGameTileNotInterested
+			name = SduiActionType.UndoGameTileNotInterested
 		}, p2.appPage)
 		
 		return
 	end
-	local collectionId = var1.collectionId
+	local CollectionId = ActionParams.collectionId
 	
-	if typeof(collectionId) == "string" and collectionId ~= "" then
-		undoGameNotInterested({
+	if typeof(CollectionId) == "string" and CollectionId ~= "" then
+		UndoGameNotInterestedFunction({
 			appPage = p2.appPage,
-			collectionId = collectionId,
+			collectionId = CollectionId,
 			dispatch = p2.dependencies.dispatch,
 			networking = p2.dependencies.networking,
-			setGameHidden = getGameTileHiddenStore(collectionId).setGameHidden,
-			universeId = universeId
+			setGameHidden = GetGameTileHiddenStoreFunction(CollectionId).setGameHidden,
+			universeId = UniverseId
 		})
 		
 		return
+	else
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
+			message = "Missing or invalid actionParam: collectionId",
+			propName = "collectionId",
+			name = SduiActionType.UndoGameTileNotInterested
+		}, p2.appPage)
 	end
-	p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
-		message = "Missing or invalid actionParam: collectionId",
-		propName = "collectionId",
-		name = sduiActionType.UndoGameTileNotInterested
-	}, p2.appPage)
 end

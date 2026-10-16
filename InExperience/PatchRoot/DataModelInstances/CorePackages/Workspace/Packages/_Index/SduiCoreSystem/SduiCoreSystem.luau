@@ -1,10 +1,4 @@
-﻿local sduiActionTypeModule = require(script.SduiActionType)
-local sduiImpressionEventTypeModule = require(script.SduiImpressionEventType)
-local sduiBuilderTypesModule = require(script.SduiBuilderTypes)
-local sduiComponentTypeModule = require(script.SduiComponentType)
-local sduiConfigTypesModule = require(script.SduiConfigTypes)
-local sduiContentTypesModule = require(script.SduiContentTypes)
-local _ = require(script.SduiDataStoreTypes)
+﻿local _ = require(script.SduiDataStoreTypes)
 local _ = require(script.SduiFocusNavigationTypes)
 local _ = require(script.ClientBinding.SduiPoolStoreTypes)
 
@@ -19,15 +13,15 @@ return {
 	reportUnifiedLoggingImpressions = require(script.Analytics.reportUnifiedLoggingImpressions),
 	parseProps = require(script.parseProps),
 	SduiActionParams = require(script.SduiActionParams),
-	SduiActionType = sduiActionTypeModule,
-	SduiImpressionEventType = sduiImpressionEventTypeModule,
+	SduiActionType = require(script.SduiActionType),
+	SduiImpressionEventType = require(script.SduiImpressionEventType),
 	SduiBuilder = require(script.SduiBuilder),
-	SduiBuilderTypes = sduiBuilderTypesModule,
+	SduiBuilderTypes = require(script.SduiBuilderTypes),
 	SduiCollectionAnalyticsBuilder = require(script.Analytics.SduiCollectionAnalyticsBuilder),
 	SduiComponent = require(script.SduiComponent),
-	SduiComponentType = sduiComponentTypeModule,
-	SduiConfigTypes = sduiConfigTypesModule,
-	SduiContentTypes = sduiContentTypesModule,
+	SduiComponentType = require(script.SduiComponentType),
+	SduiConfigTypes = require(script.SduiConfigTypes),
+	SduiContentTypes = require(script.SduiContentTypes),
 	SduiErrors = require(script.SduiErrors),
 	SduiInstrumentation = require(script.SduiInstrumentation),
 	SduiLogger = require(script.SduiLogger),
@@ -44,37 +38,40 @@ return {
 	useUidRefString = require(script.useUidRefString),
 	validateInterface = require(script.validateInterface),
 	validateSduiComponentConfig = require(script.validateSduiComponentConfig),
-	getSduiClientBindingBuilder = function()
+	getSduiClientBindingBuilder = function() --[[ Line: 103 ]]
 		return require(script.ClientBinding.SduiClientBindingBuilder)
 	end,
-	getSduiDataBinder = function()
+	getSduiDataBinder = function() --[[ Line: 106 ]]
 		return require(script.ClientBinding.SduiDataBinder)
 	end,
-	getProtoVariableMapper = function()
+	getProtoVariableMapper = function() --[[ Line: 109 ]]
 		return require(script.ClientBinding.ProtoVariableMapper)
 	end,
-	createBuilderConfig = function(p1)
+	getDefaultHydrationIdPaths = function() --[[ Line: 112 ]]
+		return require(script.ClientBinding.defaultHydrationIdPaths)
+	end,
+	createBuilderConfig = function(p1) --[[ Line: 115 ]]
 		return require(script.ClientBinding.createBuilderConfig)(p1)
 	end,
-	getSduiActionHandlerRegistry = function()
+	getSduiActionHandlerRegistry = function() --[[ Line: 119 ]]
 		return require(script.getSduiActionHandlerRegistry)()
 	end,
-	getSduiImpressionHandlerRegistry = function()
+	getSduiImpressionHandlerRegistry = function() --[[ Line: 122 ]]
 		return require(script.getSduiImpressionHandlerRegistry)()
 	end,
-	getSduiTelemetryHandlerNameRegistry = function()
+	getSduiTelemetryHandlerNameRegistry = function() --[[ Line: 125 ]]
 		return require(script.getSduiTelemetryHandlerNameRegistry)()
 	end,
-	getSduiServiceDependenciesStore = function()
+	getSduiServiceDependenciesStore = function() --[[ Line: 128 ]]
 		return require(script.ClientBinding.getSduiServiceDependenciesStore)()
 	end,
-	getOneByTwoTileFlowIdsFromPools = function(p1)
+	getOneByTwoTileFlowIdsFromPools = function(p1) --[[ Line: 131 ]]
 		return require(script.ClientBinding.PropBuilder.SduiPoolEntryHelpers).getOneByTwoTileFlowIdsFromPools(p1)
 	end,
-	getSduiTokensStore = function()
+	getSduiTokensStore = function() --[[ Line: 136 ]]
 		return require(script.ClientBinding.getSduiTokensStore)()
 	end,
-	getSduiPolicyStore = function()
+	getSduiPolicyStore = function() --[[ Line: 139 ]]
 		return require(script.ClientBinding.getSduiPolicyStore)()
 	end,
 	getSduiComponentRegistry = require(script.getSduiComponentRegistry),

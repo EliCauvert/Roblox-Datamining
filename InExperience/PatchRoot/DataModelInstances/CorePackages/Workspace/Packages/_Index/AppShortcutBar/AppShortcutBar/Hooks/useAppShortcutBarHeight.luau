@@ -1,6 +1,6 @@
-﻿local useTokens = require(script:FindFirstAncestor("AppShortcutBar").Parent.Foundation).Hooks.useTokens
+﻿local UseTokensFunction = require(script:FindFirstAncestor("AppShortcutBar").Parent.Foundation).Hooks.useTokens
 
-return function()
-	-- upvalues: useTokens (ref)
-	return useTokens().Size.Size_1200
+return function() --[[ Line: 5 | Named "useAppShortcutBarHeight" ]]
+	-- upvalues: UseTokensFunction (copy)
+	return UseTokensFunction().Size.Size_1200
 end

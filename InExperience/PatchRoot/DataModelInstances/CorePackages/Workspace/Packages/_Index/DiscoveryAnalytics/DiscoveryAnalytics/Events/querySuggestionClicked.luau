@@ -1,32 +1,32 @@
-﻿local telemetryService = game:GetService("TelemetryService")
-local parent = script:FindFirstAncestor("DiscoveryAnalytics").Parent
-local tModule = require(parent.t)
-local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventErrorLogger
-local t = {
+﻿local TelemetryService = game:GetService("TelemetryService")
+local Parent = script:FindFirstAncestor("DiscoveryAnalytics").Parent
+local TModule = require(Parent.t)
+local DiscoveryEventErrorLogger = require(Parent.DiscoveryUtils).DiscoveryEventErrorLogger
+local config = {
 	eventName = "querySuggestionClicked",
 	description = "User clicked a query suggestion",
 	backends = { "EventIngest" },
 	throttlingPercentage = game:DefineFastInt("QuerySuggestionClickedEventThrottlingHundredthsPercent", 10000),
 	lastUpdated = { 26, 8, 13 }
 }
-local var1 = tModule.strictInterface({
-	pos = tModule.optional(tModule.number),
-	sortPos = tModule.optional(tModule.number),
-	sortId = tModule.optional(tModule.string),
-	queryText = tModule.string,
-	componentType = tModule.string
+local StrictInterfaceResult = TModule.strictInterface({
+	pos = TModule.optional(TModule.number),
+	sortPos = TModule.optional(TModule.number),
+	sortId = TModule.optional(TModule.string),
+	queryText = TModule.string,
+	componentType = TModule.string
 })
 
-return function(p1, p2)
-	-- upvalues: var1 (ref), discoveryEventErrorLogger (ref), telemetryService (ref), t (ref)
-	local var2, var3 = var1(p2)
+return function(EventContext, CustomFields) --[[ Line: 35 ]]
+	-- upvalues: StrictInterfaceResult (copy), DiscoveryEventErrorLogger (copy), TelemetryService (copy), config (copy)
+	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(CustomFields)
 	
-	if not var2 then
-		discoveryEventErrorLogger.reportError("QuerySuggestionClickedInvalidInterface", var3)
+	if not StrictInterfaceResultResult then
+		DiscoveryEventErrorLogger.reportError("QuerySuggestionClickedInvalidInterface", StrictInterfaceResultResult2)
 	end
-	telemetryService:LogEvent(t, {
-		eventContext = p1,
+	TelemetryService:LogEvent(config, {
+		eventContext = EventContext,
 		standardizedFields = { "addSessionInfo", "addSessionId", "addOSInfo" },
-		customFields = p2
+		customFields = CustomFields
 	})
 end

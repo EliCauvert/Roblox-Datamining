@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("ExpChatPerfTrackerTabName", false)
+﻿return (game:DefineFastFlag("ExpChatPerfTrackerTabName", false))

@@ -1,83 +1,83 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local UIBloxModule = require(parent_1.UIBlox)
-local useStyle = UIBloxModule.Core.Style.useStyle
-local localizationModule = require(parent_1.Localization)
-local promiseModule = require(parent_1.Promise)
-local robloxAppHooksModule = require(parent_1.RobloxAppHooks)
-local roactUtilsModule = require(parent_1.RoactUtils)
-local roactServiceTagsModule = require(parent_1.RoactServiceTags)
-local controlState = UIBloxModule.Core.Control.Enum.ControlState
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local images = UIBloxModule.App.ImageSet.Images
-local withTooltip = UIBloxModule.App.Dialog.TooltipV2.withTooltip
-local tooltipOrientation = UIBloxModule.App.Dialog.Enum.TooltipOrientation
-local image = require(parent_1.Foundation).Image
-local fFlagCoreUiMigrateUIBloxToFoundation = require(parent_1.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
-local useLocalization = localizationModule.Hooks.useLocalization
-local useRoactService = robloxAppHooksModule.useRoactService
-local useEffectOnce = roactUtilsModule.Hooks.useEffectOnce
-local appEventIngestService = roactServiceTagsModule.AppEventIngestService
-local constantsModule = require(parent.Constants)
-local var1 = if fFlagCoreUiMigrateUIBloxToFoundation then "icons/logo/studiologo" else images["icons/logo/studiologo"]
-local webViewRedesignEnabledEngineFeature = game:GetEngineFeature("WebViewRedesignEnabled")
+﻿local CoreGui = game:GetService("CoreGui")
+local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local UIBloxModule = require(Parent1.UIBlox)
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local PromiseModule = require(Parent1.Promise)
+local ControlState = UIBloxModule.Core.Control.Enum.ControlState
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local Images = UIBloxModule.App.ImageSet.Images
+local WithTooltipFunction = UIBloxModule.App.Dialog.TooltipV2.withTooltip
+local TooltipOrientation = UIBloxModule.App.Dialog.Enum.TooltipOrientation
+local Image = require(Parent1.Foundation).Image
+local FFlagCoreUiMigrateUIBloxToFoundation = require(Parent1.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
+local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
+local UseRoactServiceFunction = require(Parent1.RobloxAppHooks).useRoactService
+local UseEffectOnceFunction = require(Parent1.RoactUtils).Hooks.useEffectOnce
+local AppEventIngestService = require(Parent1.RoactServiceTags).AppEventIngestService
+local ConstantsModule = require(Parent.Constants)
+local Studiologo = if FFlagCoreUiMigrateUIBloxToFoundation then "icons/logo/studiologo" else Images["icons/logo/studiologo"]
+local WebViewRedesignEnabledEngineFeature = game:GetEngineFeature("WebViewRedesignEnabled")
 
-return function(p1)
-	-- upvalues: useStyle (ref), reactModule (ref), useRoactService (ref), appEventIngestService (ref), useLocalization (ref), useEffectOnce (ref), constantsModule (ref), controlState (ref), promiseModule (ref), tooltipOrientation (ref), coreGuiService (ref), webViewRedesignEnabledEngineFeature (ref), withTooltip (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), image (ref), var1 (ref), imageSetLabel (ref)
-	local _ = nil
-	local _ = nil
-	local theme = useStyle().Theme
-	local var2, var3 = reactModule.useState(false)
-	local var4 = useRoactService(appEventIngestService)
-	local var5 = useLocalization({
+return function(p1) --[[ Line: 48 | Named "StudioCTAIcon" ]]
+	-- upvalues: UseStyleFunction (copy), ReactModule (copy), UseRoactServiceFunction (copy), AppEventIngestService (copy), UseLocalizationFunction (copy), UseEffectOnceFunction (copy), ConstantsModule (copy), ControlState (copy), PromiseModule (copy), TooltipOrientation (copy), CoreGui (copy), WebViewRedesignEnabledEngineFeature (copy), WithTooltipFunction (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), Image (copy), Studiologo (copy), ImageSetLabel (copy)
+	local Theme = nil
+	Theme = UseStyleFunction().Theme
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseRoactServiceResult = UseRoactServiceFunction(AppEventIngestService)
+	local UseLocalizationResult = UseLocalizationFunction({
 		titleText = "CommonUI.Features.StudioCTA.Tooltip.Title",
 		bodyText = "CommonUI.Features.StudioCTA.Tooltip.Body"
 	})
-	local var6 = reactModule.useRef(nil)
-	useEffectOnce(function()
-		-- upvalues: var4 (ref), constantsModule (copy)
-		var4:setRBXEventStream(constantsModule.STUDIO_CTA_EVENT_CONTEXT, constantsModule.STUDIO_CTA_EVENT_NAME_MOUNT)
+	local UseRefResult = ReactModule.useRef(nil)
+	UseEffectOnceFunction(function() --[[ Line: 63 ]]
+		-- upvalues: UseRoactServiceResult (copy), ConstantsModule (upval)
+		UseRoactServiceResult:setRBXEventStream(ConstantsModule.STUDIO_CTA_EVENT_CONTEXT, ConstantsModule.STUDIO_CTA_EVENT_NAME_MOUNT)
 	end, {})
 	
-	if p1.controlState ~= controlState.Hover and p1.controlState ~= controlState.Selected then
-		if var6.current then
-			var6.current:cancel()
-			var6.current = nil
+	if p1.controlState == ControlState.Hover or p1.controlState == ControlState.Selected then
+		if not UseRefResult.current then
+			UseRefResult.current = PromiseModule.delay(0.4):andThenCall(function() --[[ Line: 71 ]]
+				-- upvalues: UseRefResult (copy), UseStateResult2 (copy)
+				UseRefResult.current = nil
+				UseStateResult2(true)
+			end)
 		end
-		if var2 then
-			var3(false)
+	else
+		if UseRefResult.current then
+			UseRefResult.current:cancel()
+			UseRefResult.current = nil
 		end
-	elseif not var6.current then
-		var6.current = promiseModule.delay(0.4):andThenCall(function()
-			-- upvalues: var6 (ref), var3 (ref)
-			var6.current = nil
-			var3(true)
-		end)
+		if UseStateResult then
+			UseStateResult2(false)
+		end
 	end
-	return withTooltip({ headerText = var5.titleText, bodyText = var5.bodyText }, {
+	return WithTooltipFunction({
+		headerText = UseLocalizationResult.titleText,
+		bodyText = UseLocalizationResult.bodyText
+	}, {
 		DisplayOrder = 10,
-		preferredOrientation = tooltipOrientation.Top,
-		guiTarget = coreGuiService,
-		active = if webViewRedesignEnabledEngineFeature then p1.showTooltip and var2 else var2
-	}, function(p2)
-		-- upvalues: fFlagCoreUiMigrateUIBloxToFoundation (copy), reactModule (copy), image (copy), var1 (copy), theme (write), imageSetLabel (copy)
-		return if fFlagCoreUiMigrateUIBloxToFoundation then reactModule.createElement(image, {
+		preferredOrientation = TooltipOrientation.Top,
+		guiTarget = CoreGui,
+		active = if WebViewRedesignEnabledEngineFeature then p1.showTooltip and UseStateResult else UseStateResult
+	}, function(OnAbsolutePositionChanged) --[[ Line: 99 ]]
+		-- upvalues: FFlagCoreUiMigrateUIBloxToFoundation (upval), ReactModule (upval), Image (upval), Studiologo (upval), Theme (ref), ImageSetLabel (upval)
+		return if FFlagCoreUiMigrateUIBloxToFoundation then ReactModule.createElement(Image, {
 			Size = UDim2.fromScale(1, 1),
-			Image = var1,
+			Image = Studiologo,
 			ScaleType = Enum.ScaleType.Fit,
-			imageStyle = { Transparency = 0, Color3 = theme.IconEmphasis.Color },
-			onAbsoluteSizeChanged = p2,
-			onAbsolutePositionChanged = p2
-		}) else reactModule.createElement(imageSetLabel, {
+			imageStyle = { Transparency = 0, Color3 = Theme.IconEmphasis.Color },
+			onAbsoluteSizeChanged = OnAbsolutePositionChanged,
+			onAbsolutePositionChanged = OnAbsolutePositionChanged
+		}) else ReactModule.createElement(ImageSetLabel, {
 			BackgroundTransparency = 1,
 			Size = UDim2.fromScale(1, 1),
-			Image = var1,
+			Image = Studiologo,
 			ScaleType = Enum.ScaleType.Fit,
-			ImageColor3 = theme.IconEmphasis.Color,
-			[reactModule.Change.AbsoluteSize] = p2,
-			[reactModule.Change.AbsolutePosition] = p2
+			ImageColor3 = Theme.IconEmphasis.Color,
+			[ReactModule.Change.AbsoluteSize] = OnAbsolutePositionChanged,
+			[ReactModule.Change.AbsolutePosition] = OnAbsolutePositionChanged
 		})
 	end)
 end

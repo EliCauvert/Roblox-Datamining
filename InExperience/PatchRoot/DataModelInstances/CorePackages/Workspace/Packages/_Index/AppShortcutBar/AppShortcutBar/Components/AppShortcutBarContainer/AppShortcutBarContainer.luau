@@ -1,23 +1,23 @@
-﻿local appShortcutBar = script:FindFirstAncestor("AppShortcutBar")
-local parent = appShortcutBar.Parent
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local appShortcutBarModule = require(appShortcutBar.Components.AppShortcutBar)
-local appStickyShortcutBarModule = require(appShortcutBar.Components.AppStickyShortcutBar)
-local useAppShortcutBarPropsModule = require(script.Parent.useAppShortcutBarProps)
-local useAppPolicy = require(parent.UniversalAppPolicy).useAppPolicy
-local fFlagEnableStickyShortcutBarOnAllPlatforms = require(parent.SharedFlags).FFlagEnableStickyShortcutBarOnAllPlatforms
+﻿local AppShortcutBar = script:FindFirstAncestor("AppShortcutBar")
+local Parent = AppShortcutBar.Parent
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local AppShortcutBarModule = require(AppShortcutBar.Components.AppShortcutBar)
+local AppStickyShortcutBarModule = require(AppShortcutBar.Components.AppStickyShortcutBar)
+local UseAppShortcutBarPropsModule = require(script.Parent.useAppShortcutBarProps)
+local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
+local FFlagEnableStickyShortcutBarOnAllPlatforms = require(Parent.SharedFlags).FFlagEnableStickyShortcutBarOnAllPlatforms
 
-function AppShortcutBarContainer(p1)
-	-- upvalues: useAppShortcutBarPropsModule (ref), useAppPolicy (ref), fFlagEnableStickyShortcutBarOnAllPlatforms (ref), reactModule (ref), appStickyShortcutBarModule (ref), cryoModule (ref), appShortcutBarModule (ref)
-	local var1 = useAppShortcutBarPropsModule()
+function AppShortcutBarContainer(p1) --[[ Line: 18 ]]
+	-- upvalues: UseAppShortcutBarPropsModule (copy), UseAppPolicyFunction (copy), FFlagEnableStickyShortcutBarOnAllPlatforms (copy), ReactModule (copy), AppStickyShortcutBarModule (copy), CryoModule (copy), AppShortcutBarModule (copy)
+	local UseAppShortcutBarPropsModuleResult = UseAppShortcutBarPropsModule()
 	
-	return if useAppPolicy(function(p2)
+	return if UseAppPolicyFunction(function(p2) --[[ Line: 21 ]]
 		return p2.getStickyShortcutBarEnabled()
-	end) or fFlagEnableStickyShortcutBarOnAllPlatforms then reactModule.createElement(appStickyShortcutBarModule, if fFlagEnableStickyShortcutBarOnAllPlatforms then cryoModule.Dictionary.join(var1, {
+	end) or FFlagEnableStickyShortcutBarOnAllPlatforms then ReactModule.createElement(AppStickyShortcutBarModule, if FFlagEnableStickyShortcutBarOnAllPlatforms then CryoModule.Dictionary.join(UseAppShortcutBarPropsModuleResult, {
 		isLeftNavVisible = p1.isLeftNavVisible,
 		currentPage = p1.currentPage
-	}) else var1) else reactModule.createElement(appShortcutBarModule, var1)
+	}) else UseAppShortcutBarPropsModuleResult) else ReactModule.createElement(AppShortcutBarModule, UseAppShortcutBarPropsModuleResult)
 end
 
 return AppShortcutBarContainer

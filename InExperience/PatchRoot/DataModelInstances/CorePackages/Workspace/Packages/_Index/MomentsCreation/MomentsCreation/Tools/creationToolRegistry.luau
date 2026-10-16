@@ -1,42 +1,42 @@
 ﻿local _ = require(script:FindFirstAncestor("MomentsCreation").Types.CreationFlowTypes)
 
-return function(p1)
+return function(List) --[[ Line: 15 | Named "createCreationToolRegistry" ]]
 	local t = {}
-	local t_1 = {}
+	local List1 = {}
 	
-	local function rebuildOrdered()
-		-- upvalues: t_1 (write), t (ref)
-		t_1 = {}
+	local function rebuildOrdered() --[[ Line: 19 ]]
+		-- upvalues: List1 (ref), t (copy)
+		List1 = {}
 		
-		for i, v in t do
-			table.insert(t_1, v)
+		for _, value in t do
+			table.insert(List1, value)
 		end
-		table.sort(t_1, function(p2, p3)
-			return (p2.cta.order or 0) < (p3.cta.order or 0)
+		table.sort(List1, function(A, B): boolean --[[ Line: 24 ]]
+			return (A.cta.order or 0) < (B.cta.order or 0)
 		end)
 	end
 	
-	local function register(p2)
-		-- upvalues: t (ref), rebuildOrdered (ref)
-		for i, v in p2 do
-			t[v.kind] = v
+	local function register(List) --[[ Line: 29 ]]
+		-- upvalues: t (copy), rebuildOrdered (copy)
+		for _, value in List do
+			t[value.kind] = value
 		end
 		rebuildOrdered()
 	end
 	
-	local function get(p3)
-		-- upvalues: t (ref)
-		return t[p3]
+	local function get(p1) --[[ Line: 36 ]]
+		-- upvalues: t (copy)
+		return t[p1]
 	end
 	
-	local function getAll()
-		-- upvalues: t_1 (write)
-		return t_1
+	local function getAll() --[[ Line: 40 ]]
+		-- upvalues: List1 (ref)
+		return List1
 	end
 	
-	if p1 ~= nil then
-		for i, v in p1 do
-			t[v.kind] = v
+	if List ~= nil then
+		for _, value in List do
+			t[value.kind] = value
 		end
 		rebuildOrdered()
 	end

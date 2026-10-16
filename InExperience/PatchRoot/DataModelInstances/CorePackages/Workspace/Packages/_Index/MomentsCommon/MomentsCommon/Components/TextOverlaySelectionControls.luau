@@ -1,21 +1,23 @@
-﻿local momentsCommon = script:FindFirstAncestor("MomentsCommon")
-local parent = momentsCommon.Parent
-local fFlagMomentsTextOverlayV2RedesignModule = require(momentsCommon.Flags.FFlagMomentsTextOverlayV2Redesign)
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local responsiveModule = require(parent.Responsive)
-local view = foundationModule.View
-local icon = foundationModule.Icon
-local var1 = if fFlagMomentsTextOverlayV2RedesignModule then require(parent.BuilderIcons) else nil
-local useTextOverlayPreviewGesturesModule = require(momentsCommon.Hooks.useTextOverlayPreviewGestures)
-local hexColor = Color3.fromHex("FFFFFF")
-local hexColor_1 = Color3.fromHex("121215")
-local t = { Transparency = 0, Color3 = Color3.fromHex("FFFFFF") }
-local uDim = UDim.new(1, 0)
+﻿local MomentsCommon = script:FindFirstAncestor("MomentsCommon")
+local Parent = MomentsCommon.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local ResponsiveModule = require(Parent.Responsive)
+local View = FoundationModule.View
+local Icon = FoundationModule.Icon
+local BuilderIconsModule = if require(MomentsCommon.Flags.FFlagMomentsTextOverlayV2Redesign) then require(Parent.BuilderIcons) else nil
+local UseTextOverlayPreviewGesturesModule = require(MomentsCommon.Hooks.useTextOverlayPreviewGestures)
+local _Color3 = Color3.fromHex("FFFFFF")
+local _Color3_1 = Color3.fromHex("121215")
+local Style = { Transparency = 0, Color3 = Color3.fromHex("FFFFFF") }
+local _UDim = UDim.new(1, 0)
 
-local function createBorderCornerHandle(p1, p2, p3)
-	-- upvalues: reactModule (ref), hexColor (ref), uDim (ref)
-	return reactModule.createElement("Frame", {
+local function createBorderCornerHandle(p1, OnResizeHandleInputBegan, IsPointerMatch) --[[ Line: 44 ]]
+	-- upvalues: ReactModule (copy), _Color3 (copy), _UDim (copy)
+	local IsTL: boolean = p1 == "TL" or p1 == "BL"
+	local IsTL1: boolean = p1 == "TL" or p1 == "TR"
+	
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		ZIndex = 10,
@@ -23,90 +25,88 @@ local function createBorderCornerHandle(p1, p2, p3)
 		Position = UDim2.fromOffset(0, 0),
 		Size = UDim2.fromOffset(24, 24)
 	}, {
-		Horizontal = reactModule.createElement("Frame", {
+		Horizontal = ReactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			ZIndex = 10,
-			AnchorPoint = Vector2.new(if if p1 ~= "TL" then p1 == "BL" else true then 0 else 1, 0.5),
-			BackgroundColor3 = hexColor,
+			AnchorPoint = Vector2.new(if IsTL then 0 else 1, 0.5),
+			BackgroundColor3 = _Color3,
 			Position = UDim2.fromScale(0.5, 0.5),
 			Size = UDim2.fromOffset(14, 3)
 		}, {
-			Corner = reactModule.createElement("UICorner", { CornerRadius = uDim })
+			Corner = ReactModule.createElement("UICorner", { CornerRadius = _UDim })
 		}),
-		Vertical = reactModule.createElement("Frame", {
+		Vertical = ReactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			ZIndex = 10,
-			AnchorPoint = Vector2.new(0.5, if if p1 ~= "TL" then p1 == "TR" else true then 0 else 1),
-			BackgroundColor3 = hexColor,
+			AnchorPoint = Vector2.new(0.5, if IsTL1 then 0 else 1),
+			BackgroundColor3 = _Color3,
 			Position = UDim2.fromScale(0.5, 0.5),
 			Size = UDim2.fromOffset(3, 14)
 		}, {
-			Corner = reactModule.createElement("UICorner", { CornerRadius = uDim })
+			Corner = ReactModule.createElement("UICorner", { CornerRadius = _UDim })
 		}),
-		HitArea = if p3 then reactModule.createElement("ImageButton", {
+		HitArea = if IsPointerMatch then ReactModule.createElement("ImageButton", {
 			Active = true,
 			AutoButtonColor = false,
 			BackgroundTransparency = 1,
 			Size = UDim2.fromScale(1, 1),
 			ZIndex = 11,
-			[reactModule.Event.MouseButton1Down] = p2
+			[ReactModule.Event.MouseButton1Down] = OnResizeHandleInputBegan
 		}) else nil
 	})
 end
 
-local function createZeroSizeCornerChrome(p1, p2, p3)
-	-- upvalues: reactModule (ref)
-	local vector2, uDim2
-	local _ = nil
-	local _ = nil
-	
+local function createZeroSizeCornerChrome(p1, Handle, Visible) --[[ Line: 99 ]]
+	-- upvalues: ReactModule (copy)
+	local _Vector2 = nil
+	local _UDim2 = nil
 	if p1 == "TL" then
-		vector2 = Vector2.new(0, 0)
-		uDim2 = UDim2.fromScale(0, 0)
+		_Vector2 = Vector2.new(0, 0)
+		_UDim2 = UDim2.fromScale(0, 0)
 	elseif p1 == "TR" then
-		vector2 = Vector2.new(1, 0)
-		uDim2 = UDim2.fromScale(1, 0)
+		_Vector2 = Vector2.new(1, 0)
+		_UDim2 = UDim2.fromScale(1, 0)
 	elseif p1 == "BL" then
-		vector2 = Vector2.new(0, 1)
-		uDim2 = UDim2.fromScale(0, 1)
+		_Vector2 = Vector2.new(0, 1)
+		_UDim2 = UDim2.fromScale(0, 1)
 	else
-		vector2 = Vector2.new(1, 1)
-		uDim2 = UDim2.fromScale(1, 1)
+		_Vector2 = Vector2.new(1, 1)
+		_UDim2 = UDim2.fromScale(1, 1)
 	end
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		ZIndex = 10,
-		AnchorPoint = vector2,
-		Position = uDim2,
+		AnchorPoint = _Vector2,
+		Position = _UDim2,
 		Size = UDim2.fromOffset(0, 0),
-		Visible = p3
-	}, { Handle = p2 })
+		Visible = Visible
+	}, { Handle = Handle })
 end
 
-return function(p1)
-	-- upvalues: responsiveModule (ref), useTextOverlayPreviewGesturesModule (ref), createZeroSizeCornerChrome (ref), createBorderCornerHandle (ref), reactModule (ref), view (ref), hexColor_1 (ref), foundationModule (ref), icon (ref), var1 (ref), t (ref)
-	local var2 = responsiveModule.usePreferredInput()
-	local var3 = useTextOverlayPreviewGesturesModule({
+return function(p1) --[[ Line: 144 | Named "TextOverlaySelectionControls" ]]
+	-- upvalues: ResponsiveModule (copy), UseTextOverlayPreviewGesturesModule (copy), createZeroSizeCornerChrome (copy), createBorderCornerHandle (copy), ReactModule (copy), View (copy), _Color3_1 (copy), FoundationModule (copy), Icon (copy), BuilderIconsModule (copy), Style (copy)
+	local UsePreferredInputResult = ResponsiveModule.usePreferredInput()
+	local UseTextOverlayPreviewGesturesModuleResult = UseTextOverlayPreviewGesturesModule({
 		enabled = true,
 		selected = true,
-		preferredInput = var2,
+		preferredInput = UsePreferredInputResult,
 		containerRef = p1.containerRef,
 		scale = p1.scale,
 		rotation = p1.rotation,
 		onScaleChanged = p1.onScaleChanged,
 		onRotationChanged = p1.onRotationChanged
 	})
-	local var4 = var2 == responsiveModule.Input.Pointer
-	local t_1 = {
-		HandleTL = createZeroSizeCornerChrome("TL", createBorderCornerHandle("TL", var3.onResizeHandleInputBegan, var4), p1.visible),
-		HandleTR = createZeroSizeCornerChrome("TR", createBorderCornerHandle("TR", var3.onResizeHandleInputBegan, var4), p1.visible),
-		HandleBL = createZeroSizeCornerChrome("BL", createBorderCornerHandle("BL", var3.onResizeHandleInputBegan, var4), p1.visible),
-		HandleBR = createZeroSizeCornerChrome("BR", createBorderCornerHandle("BR", var3.onResizeHandleInputBegan, var4), p1.visible)
+	local IsUsePreferredInputResultMatch = UsePreferredInputResult == ResponsiveModule.Input.Pointer
+	local config = {
+		HandleTL = createZeroSizeCornerChrome("TL", createBorderCornerHandle("TL", UseTextOverlayPreviewGesturesModuleResult.onResizeHandleInputBegan, IsUsePreferredInputResultMatch), p1.visible),
+		HandleTR = createZeroSizeCornerChrome("TR", createBorderCornerHandle("TR", UseTextOverlayPreviewGesturesModuleResult.onResizeHandleInputBegan, IsUsePreferredInputResultMatch), p1.visible),
+		HandleBL = createZeroSizeCornerChrome("BL", createBorderCornerHandle("BL", UseTextOverlayPreviewGesturesModuleResult.onResizeHandleInputBegan, IsUsePreferredInputResultMatch), p1.visible),
+		HandleBR = createZeroSizeCornerChrome("BR", createBorderCornerHandle("BR", UseTextOverlayPreviewGesturesModuleResult.onResizeHandleInputBegan, IsUsePreferredInputResultMatch), p1.visible)
 	}
 	
-	if var4 and p1.onRotationChanged ~= nil then
-		t_1.RotateChrome = reactModule.createElement("Frame", {
+	if IsUsePreferredInputResultMatch and p1.onRotationChanged ~= nil then
+		config.RotateChrome = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			ZIndex = 10,
@@ -115,34 +115,34 @@ return function(p1)
 			Size = UDim2.fromOffset(0, 0),
 			Visible = p1.visible
 		}, {
-			RotateHandle = reactModule.createElement(view, {
+			RotateHandle = ReactModule.createElement(View, {
 				tag = "radius-circle",
 				ZIndex = 10,
 				AnchorPoint = Vector2.new(0.5, 0.5),
-				backgroundStyle = { Transparency = 0, Color3 = hexColor_1 },
+				backgroundStyle = { Transparency = 0, Color3 = _Color3_1 },
 				Position = UDim2.fromOffset(0, -28),
 				Size = UDim2.fromOffset(32, 32),
 				stateLayer = {
-					affordance = foundationModule.Enums.StateLayerAffordance.None
+					affordance = FoundationModule.Enums.StateLayerAffordance.None
 				}
 			}, {
-				Glyph = reactModule.createElement(icon, {
+				Glyph = ReactModule.createElement(Icon, {
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					Position = UDim2.fromScale(0.5, 0.5),
-					name = var1.Icon.ArrowSpinClockwise,
-					size = foundationModule.Enums.IconSize.Small,
-					style = t
+					name = BuilderIconsModule.Icon.ArrowSpinClockwise,
+					size = FoundationModule.Enums.IconSize.Small,
+					style = Style
 				}),
-				HitArea = reactModule.createElement("ImageButton", {
+				HitArea = ReactModule.createElement("ImageButton", {
 					Active = true,
 					AutoButtonColor = false,
 					BackgroundTransparency = 1,
 					Size = UDim2.fromScale(1, 1),
 					ZIndex = 11,
-					[reactModule.Event.MouseButton1Down] = var3.onRotateHandleInputBegan
+					[ReactModule.Event.MouseButton1Down] = UseTextOverlayPreviewGesturesModuleResult.onRotateHandleInputBegan
 				})
 			})
 		})
 	end
-	return reactModule.createElement(reactModule.Fragment, nil, t_1)
+	return ReactModule.createElement(ReactModule.Fragment, nil, config)
 end

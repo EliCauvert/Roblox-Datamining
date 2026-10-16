@@ -1,12 +1,12 @@
-﻿local useSelector = require(script:FindFirstAncestor("RobloxAppHooks").Parent.RoactUtils).Hooks.RoactRodux.useSelector
-local useLocalUserIdModule = require(script.Parent.useLocalUserId)
+﻿local UseSelectorFunction = require(script:FindFirstAncestor("RobloxAppHooks").Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local UseLocalUserIdModule = require(script.Parent.useLocalUserId)
 
-return function()
-	-- upvalues: useLocalUserIdModule (ref), useSelector (ref)
-	local var1 = useLocalUserIdModule()
+return function() --[[ Line: 7 ]]
+	-- upvalues: UseLocalUserIdModule (copy), UseSelectorFunction (copy)
+	local UseLocalUserIdModuleResult = UseLocalUserIdModule()
 	
-	return useSelector(function(p1)
-		-- upvalues: var1 (ref)
-		return p1.UserRobux[var1]
+	return UseSelectorFunction(function(p1) --[[ Line: 9 ]]
+		-- upvalues: UseLocalUserIdModuleResult (copy)
+		return p1.UserRobux[UseLocalUserIdModuleResult]
 	end)
 end

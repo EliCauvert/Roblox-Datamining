@@ -1,13 +1,13 @@
-﻿local virtualEvents = script:FindFirstAncestor("VirtualEvents")
-local cryoModule = require(virtualEvents.Parent.Cryo)
-local reactModule = require(virtualEvents.Parent.React)
-local useStyle = require(virtualEvents.Parent.UIBlox).Core.Style.useStyle
+﻿local VirtualEvents = script:FindFirstAncestor("VirtualEvents")
+local CryoModule = require(VirtualEvents.Parent.Cryo)
+local ReactModule = require(VirtualEvents.Parent.React)
+local UseStyleFunction = require(VirtualEvents.Parent.UIBlox).Core.Style.useStyle
 
-return function(p1)
-	-- upvalues: useStyle (ref), cryoModule (ref), reactModule (ref)
-	local baseSize = useStyle().Font.BaseSize
+return function(p1) --[[ Line: 15 | Named "SelectableTextLabel" ]]
+	-- upvalues: UseStyleFunction (copy), CryoModule (copy), ReactModule (copy)
+	local BaseSize = UseStyleFunction().Font.BaseSize
 	
-	return reactModule.createElement("TextBox", cryoModule.Dictionary.join({
+	return ReactModule.createElement("TextBox", CryoModule.Dictionary.join({
 		BackgroundTransparency = 1,
 		ClearTextOnFocus = false,
 		TextEditable = false,
@@ -19,12 +19,12 @@ return function(p1)
 		TextXAlignment = Enum.TextXAlignment.Left,
 		TextYAlignment = Enum.TextYAlignment.Top
 	}, p1, {
-		fontStyle = cryoModule.None,
-		colorStyle = cryoModule.None
+		fontStyle = CryoModule.None,
+		colorStyle = CryoModule.None
 	}), {
-		TextSizeConstraint = reactModule.createElement("UITextSizeConstraint", {
-			MaxTextSize = p1.fontStyle.RelativeSize * baseSize,
-			MinTextSize = p1.fontStyle.RelativeMinSize * baseSize
+		TextSizeConstraint = ReactModule.createElement("UITextSizeConstraint", {
+			MaxTextSize = p1.fontStyle.RelativeSize * BaseSize,
+			MinTextSize = p1.fontStyle.RelativeMinSize * BaseSize
 		})
 	})
 end

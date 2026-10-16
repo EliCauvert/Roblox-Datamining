@@ -1,31 +1,31 @@
-﻿local chrome = script:FindFirstAncestor("Chrome")
-local corePackagesService = game:GetService("CorePackages")
-local reactModule = require(corePackagesService.Packages.React)
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local iconName = foundationModule.Enums.IconName
-local iconSize = foundationModule.Enums.IconSize
-local iconVariant = foundationModule.Enums.IconVariant
-local _ = require(chrome.ChromeShared.Service.ChromeUtils)
-local useMappedSignal = require(corePackagesService.Workspace.Packages.Chrome).Hooks.useMappedSignal
-local subMenuContextModule = require(chrome.ChromeShared.Unibar.SubMenuContext)
+﻿local Chrome = script:FindFirstAncestor("Chrome")
+local CorePackages = game:GetService("CorePackages")
+local ReactModule = require(CorePackages.Packages.React)
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local IconName = FoundationModule.Enums.IconName
+local IconSize = FoundationModule.Enums.IconSize
+local IconVariant = FoundationModule.Enums.IconVariant
+local _ = require(Chrome.ChromeShared.Service.ChromeUtils)
+local UseMappedSignalFunction = require(CorePackages.Workspace.Packages.Chrome).Hooks.useMappedSignal
+local SubMenuContextModule = require(Chrome.ChromeShared.Unibar.SubMenuContext)
 
-return function(p1)
-	-- upvalues: useMappedSignal (ref), reactModule (ref), subMenuContextModule (ref), useTokens (ref), foundationModule (ref), iconName (ref), iconSize (ref), iconVariant (ref)
-	local var1 = useMappedSignal(p1.isActive)
-	local var2 = reactModule.useContext(subMenuContextModule)
-	local var3 = useTokens()
+return function(p1) --[[ Line: 20 | Named "AvatarSwitcherIcon" ]]
+	-- upvalues: UseMappedSignalFunction (copy), ReactModule (copy), SubMenuContextModule (copy), UseTokensFunction (copy), FoundationModule (copy), IconName (copy), IconSize (copy), IconVariant (copy)
+	local UseMappedSignalResult = UseMappedSignalFunction(p1.isActive)
+	local UseContextResult = ReactModule.useContext(SubMenuContextModule)
+	local UseTokensResult = UseTokensFunction()
 	
-	return reactModule.createElement(foundationModule.Icon, {
-		name = iconName.CirclePerson,
-		size = iconSize.Large,
-		variant = if var1 then iconVariant.Filled else iconVariant.Regular,
-		style = if var2 then var2:map(function(p2)
-			-- upvalues: var3 (ref)
+	return ReactModule.createElement(FoundationModule.Icon, {
+		name = IconName.CirclePerson,
+		size = IconSize.Large,
+		variant = if UseMappedSignalResult then IconVariant.Filled else IconVariant.Regular,
+		style = if UseContextResult then UseContextResult:map(function(Alpha: number) --[[ Line: 26 ]]
+			-- upvalues: UseTokensResult (copy)
 			return {
-				Color3 = var3.Color.Content.Default.Color3,
-				Transparency = math.lerp(1, var3.Color.Content.Default.Transparency, p2)
+				Color3 = UseTokensResult.Color.Content.Default.Color3,
+				Transparency = math.lerp(1, UseTokensResult.Color.Content.Default.Transparency, Alpha)
 			}
-		end) else var3.Color.Content.Default
+		end) else UseTokensResult.Color.Content.Default
 	})
 end

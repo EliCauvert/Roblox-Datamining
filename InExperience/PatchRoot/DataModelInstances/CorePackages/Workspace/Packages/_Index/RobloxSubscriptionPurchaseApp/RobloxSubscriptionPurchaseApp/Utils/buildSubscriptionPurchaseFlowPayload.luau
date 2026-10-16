@@ -1,63 +1,67 @@
-﻿local robloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
-local robloxSubscriptionStoreModule = require(robloxSubscriptionPurchaseApp.Store.RobloxSubscriptionStore)
-local fFlagEnablePlusReferralTelemetryModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagEnablePlusReferralTelemetry)
-local isRobloxSubscriptionProductFreeTrialModule = require(robloxSubscriptionPurchaseApp.Utils.isRobloxSubscriptionProductFreeTrial)
-local _ = require(robloxSubscriptionPurchaseApp.Models.GetRobloxSubscriptionProductsModel)
+﻿local RobloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
+local RobloxSubscriptionStoreModule = require(RobloxSubscriptionPurchaseApp.Store.RobloxSubscriptionStore)
+local FFlagEnablePlusReferralTelemetryModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagEnablePlusReferralTelemetry)
+local FFlagEnablePlusReferralEntrypointTelemetry = require(RobloxSubscriptionPurchaseApp.Parent.SharedFlags).FFlagEnablePlusReferralEntrypointTelemetry
+local IsRobloxSubscriptionProductFreeTrialModule = require(RobloxSubscriptionPurchaseApp.Utils.isRobloxSubscriptionProductFreeTrial)
+local _ = require(RobloxSubscriptionPurchaseApp.Models.GetRobloxSubscriptionProductsModel)
 
-return function(p1)
-	-- upvalues: robloxSubscriptionStoreModule (ref), isRobloxSubscriptionProductFreeTrialModule (ref), fFlagEnablePlusReferralTelemetryModule (ref)
-	local var1 = robloxSubscriptionStoreModule.get()
-	local entryContext = var1.getEntryContext()
-	local robloxSubscriptionProduct = var1.getRobloxSubscriptionProduct()
-	local paymentSessionId = var1.getPaymentSessionId()
-	local var2 = ""
-	local var3 = ""
+return function(Event_name) --[[ Line: 17 | Named "buildSubscriptionPurchaseFlowPayload" ]]
+	-- upvalues: RobloxSubscriptionStoreModule (copy), IsRobloxSubscriptionProductFreeTrialModule (copy), FFlagEnablePlusReferralTelemetryModule (copy), FFlagEnablePlusReferralEntrypointTelemetry (copy)
+	local GetResult = RobloxSubscriptionStoreModule.get()
+	local EntryContext = GetResult.getEntryContext()
+	local RobloxSubscriptionProduct = GetResult.getRobloxSubscriptionProduct()
+	local PaymentSessionId = GetResult.getPaymentSessionId()
+	local Id = ""
+	local Type = ""
 	
-	if robloxSubscriptionProduct and robloxSubscriptionProduct.ProductKey then
-		var2 = robloxSubscriptionProduct.ProductKey.Id or ""
-		var3 = robloxSubscriptionProduct.ProductKey.Type or ""
+	if RobloxSubscriptionProduct and RobloxSubscriptionProduct.ProductKey then
+		Id = RobloxSubscriptionProduct.ProductKey.Id or ""
+		Type = RobloxSubscriptionProduct.ProductKey.Type or ""
 	end
-	local var4 = if robloxSubscriptionProduct then robloxSubscriptionProduct.LocalizedPriceDisplayString or "" else ""
-	local universeId = (entryContext.metadata or {}).universeId
+	local LocalizedPriceDisplayString = RobloxSubscriptionProduct and RobloxSubscriptionProduct.LocalizedPriceDisplayString or ""
+	local UniverseId = (EntryContext.metadata or {}).universeId
 	
-	if universeId == nil then
-		local gameId = game.GameId
+	if UniverseId == nil then
+		local GameId: number = game.GameId
 		
-		if gameId > 0 then
-			universeId = gameId
+		if GameId > 0 then
+			UniverseId = GameId
 		end
 	end
-	local surfaceName = entryContext.surfaceName
-	local context = entryContext.context
-	local clientSessionId = entryContext.clientSessionId
-	local var5 = if clientSessionId then clientSessionId.clientSessionIdType else nil
-	local var6 = if clientSessionId then clientSessionId.clientSessionId else ""
-	local t = {
-		event_name = p1,
-		client_session_id_type = if var5 ~= nil then "" else var5,
-		client_session_id = var6,
-		purchase_flow_uuid = var6,
-		product_id = var2,
-		product_type = var3,
-		surface_name = if surfaceName ~= nil then "" else tostring(surfaceName),
-		surface_context = if context ~= nil then "" else tostring(context),
-		trial_status = isRobloxSubscriptionProductFreeTrialModule(robloxSubscriptionProduct),
-		display_price = var4,
+	local SurfaceName = EntryContext.surfaceName
+	local Context = EntryContext.context
+	local ClientSessionId = EntryContext.clientSessionId
+	local ClientSessionIdType = if ClientSessionId then ClientSessionId.clientSessionIdType else nil
+	local ClientSessionId1 = if ClientSessionId then ClientSessionId.clientSessionId else ""
+	local config = {
+		event_name = Event_name,
+		client_session_id_type = if ClientSessionIdType == nil then "" else ClientSessionIdType,
+		client_session_id = ClientSessionId1,
+		purchase_flow_uuid = ClientSessionId1,
+		product_id = Id,
+		product_type = Type,
+		surface_name = if SurfaceName == nil then "" else tostring(SurfaceName),
+		surface_context = if Context == nil then "" else tostring(Context),
+		trial_status = IsRobloxSubscriptionProductFreeTrialModule(RobloxSubscriptionProduct),
+		display_price = LocalizedPriceDisplayString,
 		ingest_timestamp_milliseconds = DateTime.now().UnixTimestampMillis
 	}
 	
-	if paymentSessionId ~= "" then
-		t.payment_session_id = paymentSessionId
+	if PaymentSessionId ~= "" then
+		config.payment_session_id = PaymentSessionId
 	end
-	if universeId ~= nil then
-		t.universe_id = universeId
+	if UniverseId ~= nil then
+		config.universe_id = UniverseId
 	end
-	if fFlagEnablePlusReferralTelemetryModule then
-		local referrerId = var1.getReferrerId()
+	if FFlagEnablePlusReferralTelemetryModule then
+		local ReferrerId: number = GetResult.getReferrerId()
 		
-		if referrerId and referrerId > 0 then
-			t.referrer_id = tostring(referrerId)
+		if ReferrerId and ReferrerId > 0 then
+			config.referrer_id = tostring(ReferrerId)
 		end
 	end
-	return t
+	if FFlagEnablePlusReferralEntrypointTelemetry and EntryContext.entrypoint then
+		config.entrypoint = EntryContext.entrypoint
+	end
+	return config
 end

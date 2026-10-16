@@ -1,86 +1,86 @@
-﻿local currencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
-local parent = currencyTransfers.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local button = foundationModule.Button
-local view = foundationModule.View
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local enums = foundationModule.Enums
-local getFFlagCurrencyTransferFlowUIImprovementFixModule = require(currencyTransfers.Flags.GetFFlagCurrencyTransferFlowUIImprovementFix)
+﻿local CurrencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
+local Parent = CurrencyTransfers.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local Button = FoundationModule.Button
+local View = FoundationModule.View
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local Enums = FoundationModule.Enums
+local GetFFlagCurrencyTransferFlowUIImprovementFixModule = require(CurrencyTransfers.Flags.GetFFlagCurrencyTransferFlowUIImprovementFix)
 
-return function(p1)
-	-- upvalues: reactModule (ref), getFFlagCurrencyTransferFlowUIImprovementFixModule (ref), button (ref), enums (ref), buttonVariant (ref), view (ref)
-	return reactModule.createElement(view, {
+return function(p1) --[[ Line: 33 | Named "TransferAmountOptionChips" ]]
+	-- upvalues: ReactModule (copy), GetFFlagCurrencyTransferFlowUIImprovementFixModule (copy), Button (copy), Enums (copy), ButtonVariant (copy), View (copy)
+	return ReactModule.createElement(View, {
 		tag = "row align-x-center align-y-center gap-small auto-xy padding-y-medium",
 		LayoutOrder = p1.layoutOrder or 1
 	}, {
-		ChipsContainer = reactModule.createElement(view, {
+		ChipsContainer = ReactModule.createElement(View, {
 			tag = "row align-x-center align-y-center gap-small auto-xy"
-		}, table.unpack(reactModule.useMemo(function()
-			-- upvalues: getFFlagCurrencyTransferFlowUIImprovementFixModule (copy), p1 (ref), reactModule (copy), button (copy), enums (copy), buttonVariant (copy)
-			local t = {}
-			local var1 = getFFlagCurrencyTransferFlowUIImprovementFixModule()
+		}, table.unpack((ReactModule.useMemo(function() --[[ Line: 34 ]]
+			-- upvalues: GetFFlagCurrencyTransferFlowUIImprovementFixModule (upval), p1 (copy), ReactModule (upval), Button (upval), Enums (upval), ButtonVariant (upval)
+			local Elements = {}
+			local FFlagCurrencyTransferFlowUIImprovementFixModule = GetFFlagCurrencyTransferFlowUIImprovementFixModule()
 			
-			for i, v in ipairs(p1.chips) do
-				local var2 = p1.selectedAmount == v.amount
+			for LayoutOrder, chip in ipairs(p1.chips) do
+				local IsSelectedAmountMatch = p1.selectedAmount == chip.amount
 				
-				if var1 then
-					t[i] = reactModule.createElement("Frame", {
+				if FFlagCurrencyTransferFlowUIImprovementFixModule then
+					Elements[LayoutOrder] = ReactModule.createElement("Frame", {
 						BackgroundTransparency = 1,
 						AutomaticSize = Enum.AutomaticSize.X,
 						Size = UDim2.new(0, 0, 0, 52),
-						LayoutOrder = i
+						LayoutOrder = LayoutOrder
 					}, {
-						ChipFrame = reactModule.createElement("Frame", {
+						ChipFrame = ReactModule.createElement("Frame", {
 							BackgroundTransparency = 1,
 							AutomaticSize = Enum.AutomaticSize.X,
 							Size = UDim2.new(0, 0, 0, 52)
 						}, {
-							Layout = reactModule.createElement("UIListLayout", {
+							Layout = ReactModule.createElement("UIListLayout", {
 								FillDirection = Enum.FillDirection.Vertical,
 								HorizontalAlignment = Enum.HorizontalAlignment.Center,
 								VerticalAlignment = Enum.VerticalAlignment.Center
 							}),
-							ChipButton = reactModule.createElement(button, {
-								text = v.text,
-								icon = enums.IconName.Robux,
-								variant = if var2 then buttonVariant.Subtle else buttonVariant.Standard,
-								size = enums.ChipSize.Medium,
-								onActivated = function() end
+							ChipButton = ReactModule.createElement(Button, {
+								text = chip.text,
+								icon = Enums.IconName.Robux,
+								variant = if IsSelectedAmountMatch then ButtonVariant.Subtle else ButtonVariant.Standard,
+								size = Enums.ChipSize.Medium,
+								onActivated = function() --[[ Line: 77 ]] end
 							})
 						}),
-						TouchTarget = reactModule.createElement("TextButton", {
+						TouchTarget = ReactModule.createElement("TextButton", {
 							Size = UDim2.new(1, 0, 0, 52),
 							BackgroundTransparency = 1,
 							Text = "",
 							ZIndex = 5,
-							[reactModule.Event.Activated] = function()
-								-- upvalues: p1 (copy), v (ref)
-								p1.onChipSelected(v.amount)
+							[ReactModule.Event.Activated] = function() --[[ Line: 88 ]]
+								-- upvalues: p1 (upval), chip (copy)
+								p1.onChipSelected(chip.amount)
 							end,
-							[reactModule.Event.InputBegan] = function(_, p2)
-								-- upvalues: p1 (copy), v (ref)
-								if p2.UserInputType == Enum.UserInputType.Touch then
-									p1.onChipSelected(v.amount)
+							[ReactModule.Event.InputBegan] = function(_, Input) --[[ Line: 97 ]]
+								-- upvalues: p1 (upval), chip (copy)
+								if Input.UserInputType == Enum.UserInputType.Touch then
+									p1.onChipSelected(chip.amount)
 								end
 							end
 						})
 					})
 				else
-					t[i] = reactModule.createElement(button, {
-						text = v.text,
-						icon = enums.IconName.Robux,
-						onActivated = function()
-							-- upvalues: p1 (copy), v (ref)
-							p1.onChipSelected(v.amount)
+					Elements[LayoutOrder] = ReactModule.createElement(Button, {
+						text = chip.text,
+						icon = Enums.IconName.Robux,
+						onActivated = function() --[[ Line: 108 ]]
+							-- upvalues: p1 (upval), chip (copy)
+							p1.onChipSelected(chip.amount)
 						end,
-						LayoutOrder = i,
-						variant = if var2 then buttonVariant.Subtle else buttonVariant.Standard,
-						size = enums.ChipSize.Medium
+						LayoutOrder = LayoutOrder,
+						variant = if IsSelectedAmountMatch then ButtonVariant.Subtle else ButtonVariant.Standard,
+						size = Enums.ChipSize.Medium
 					})
 				end
 			end
-			return t
-		end, { p1.chips, p1.selectedAmount, p1.onChipSelected })))
+			return Elements
+		end, { p1.chips, p1.selectedAmount, p1.onChipSelected }))))
 	})
 end

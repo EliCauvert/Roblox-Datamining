@@ -1,28 +1,28 @@
-﻿local httpService = game:GetService("HttpService")
-local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local url = require(parent.Http).Url
-local myHttpRequestModule = require(dataHydration.Friends.Networking.myHttpRequest)
-local fFlagEnableGetFriendshipStatus = require(parent.SharedFlags).FFlagEnableGetFriendshipStatus
+﻿local HttpService = game:GetService("HttpService")
+local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local Url = require(Parent.Http).Url
+local MyHttpRequestModule = require(DataHydration.Friends.Networking.myHttpRequest)
+local FFlagEnableGetFriendshipStatus = require(Parent.SharedFlags).FFlagEnableGetFriendshipStatus
 
-local function _(p1)
-	return string.match(p1, "^%d+$") ~= nil
+local function _(Text: string): boolean --[[ Line: 23 | Named "isNumericUserId" ]]
+	return string.match(Text, "^%d+$") ~= nil
 end
 
-return function(p1, p2)
-	-- upvalues: fFlagEnableGetFriendshipStatus (ref), httpService (ref), url (ref), myHttpRequestModule (ref)
-	local var1 = p2
+return function(p1, List1) --[[ Line: 27 ]]
+	-- upvalues: FFlagEnableGetFriendshipStatus (copy), HttpService (copy), Url (copy), MyHttpRequestModule (copy)
+	local List = List1
 	
-	if fFlagEnableGetFriendshipStatus then
-		var1 = {}
+	if FFlagEnableGetFriendshipStatus then
+		List = {}
 		
-		for i, v in p2 do
-			if string.match(v, "^%d+$") ~= nil then
-				table.insert(var1, v)
+		for _, value in List1 do
+			if string.match(value, "^%d+$") ~= nil then
+				table.insert(List, value)
 			end
 		end
 	end
-	return myHttpRequestModule(string.format("%s/users/%s/friends/statuses?userIds=%s", url.FRIEND_URL, tostring(p1), httpService:UrlEncode(table.concat(var1, ","))), "GET"):andThen(function(p3)
-		return if p3 then p3.responseBody else nil
+	return MyHttpRequestModule(string.format("%s/users/%s/friends/statuses?userIds=%s", Url.FRIEND_URL, tostring(p1), (HttpService:UrlEncode(table.concat(List, ",")))), "GET"):andThen(function(Result) --[[ Line: 42 ]]
+		return if Result then Result.responseBody else nil
 	end)
 end

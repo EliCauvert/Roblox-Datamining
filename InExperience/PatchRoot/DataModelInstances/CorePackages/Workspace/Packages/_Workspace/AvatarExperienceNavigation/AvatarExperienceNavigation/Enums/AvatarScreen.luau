@@ -1,5 +1,9 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceNavigation").Parent
-local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceNavigation").Parent
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
+local FFlagAXEditorSubcategoryFilters = AvatarExperienceFlagsModule.FFlagAXEditorSubcategoryFilters
+local FFlagAXCatalogMakeupSupport = AvatarExperienceFlagsModule.FFlagAXCatalogMakeupSupport
+local FFlagAXMakeupReleaseFTUX = AvatarExperienceFlagsModule.FFlagAXMakeupReleaseFTUX
+local FFlagAXPhotoboothMomentsPage = AvatarExperienceFlagsModule.FFlagAXPhotoboothMomentsPage
 
 return {
 	None = "None",
@@ -7,11 +11,13 @@ return {
 	AvatarEditor = "AvatarEditor",
 	SlotBasedEditor = "SlotBasedEditor",
 	Catalog = "Catalog",
-	Profile = if require(parent.SharedFlags).FFlagAXEnableProfileTab then "Profile" else nil,
+	Profile = if require(Parent.SharedFlags).FFlagAXEnableProfileTab then "Profile" else nil,
 	CatalogSearch = "CatalogSearch",
 	CatalogSearchLanding = "CatalogSearchLanding",
 	ItemDetails = "ItemDetails",
 	OutfitDetails = "OutfitDetails",
+	SendGiftRecipientPicker = "SendGiftRecipientPicker",
+	SendGiftReview = "SendGiftReview",
 	SellItemPage = "SellItemPage",
 	ItemOwnershipPage = "ItemOwnershipPage",
 	ResellersPage = "ResellersPage",
@@ -34,8 +40,7 @@ return {
 	HeadRefinement = "HeadRefinement",
 	ColorAdjustment = "ColorAdjustment",
 	BodyShape = "BodyShape",
-	Photobooth = "Photobooth",
-	PhotoboothMomentsPage = if avatarExperienceFlagsModule.FFlagAXPhotoboothMomentsPage then "PhotoboothMomentsPage" else nil,
+	PhotoboothMomentsPage = if FFlagAXPhotoboothMomentsPage then "PhotoboothMomentsPage" else nil,
 	BackgroundGeneration = "BackgroundGeneration",
 	EditProfileImage = "EditProfileImage",
 	AppCatalogContextMenuHost = "AppCatalogContextMenuHost",
@@ -105,16 +110,16 @@ return {
 	SlotsAvatarSwitcherFtuxPrompt = "SlotsAvatarSwitcherFtuxPrompt",
 	SlotsCustomizeFtuxPrompt = "SlotsCustomizeFtuxPrompt",
 	EnhancedAvatarHeadsFtuxPrompt = "EnhancedAvatarHeadsFtuxPrompt",
-	SubcategoryFiltersDropdown = if avatarExperienceFlagsModule.FFlagAXEditorSubcategoryFilters then "SubcategoryFiltersDropdown" else nil,
+	SubcategoryFiltersDropdown = if FFlagAXEditorSubcategoryFilters then "SubcategoryFiltersDropdown" else nil,
 	ItemInfoRowPrompt = "ItemInfoRowPrompt",
-	MakeupReleaseFtuxPrompt = if avatarExperienceFlagsModule.FFlagAXMakeupReleaseFTUX then "MakeupReleaseFtuxPrompt" else nil,
+	MakeupReleaseFtuxPrompt = if FFlagAXMakeupReleaseFTUX then "MakeupReleaseFtuxPrompt" else nil,
 	WearAvatarReplaceAllItemsPrompt = "WearAvatarReplaceAllItemsPrompt",
 	ClearAllItemsOnAvatarPrompt = "ClearAllItemsOnAvatarPrompt",
 	CartUnavailableItemsPrompt = "CartUnavailableItemsPrompt",
 	GoToCustomizeToEditPrompt = "GoToCustomizeToEditPrompt",
 	ItemReplacedOnAvatarPrompt = "ItemReplacedOnAvatarPrompt",
 	ItemsUnavailablePrompt = "ItemsUnavailablePrompt",
-	MakeupMax6LayersPrompt = if avatarExperienceFlagsModule.FFlagAXCatalogMakeupSupport then "MakeupMax6LayersPrompt" else nil,
+	MakeupMax6LayersPrompt = if FFlagAXCatalogMakeupSupport then "MakeupMax6LayersPrompt" else nil,
 	TimeoutStatusPrompt = "TimeoutStatusPrompt",
 	UpdateOutfitPage = "UpdateOutfitPage",
 	ManageOutfitPage = "ManageOutfitPage",

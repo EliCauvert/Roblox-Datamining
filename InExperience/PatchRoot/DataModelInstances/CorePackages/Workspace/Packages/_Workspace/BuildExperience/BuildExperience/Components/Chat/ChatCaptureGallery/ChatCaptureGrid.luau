@@ -1,119 +1,119 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local captureGridItemModule = require(buildExperience.Components.MediaSelectionPage.CaptureGridItem)
-local button = foundationModule.Button
-local text = foundationModule.Text
-local view = foundationModule.View
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local fillBehavior = foundationModule.Enums.FillBehavior
-local inputSize = foundationModule.Enums.InputSize
-local uDim2 = UDim2.new(0.25, -3, 0, 1)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local CaptureGridItemModule = require(BuildExperience.Components.MediaSelectionPage.CaptureGridItem)
+local Button = FoundationModule.Button
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local FillBehavior = FoundationModule.Enums.FillBehavior
+local InputSize = FoundationModule.Enums.InputSize
+local _UDim2 = UDim2.new(0.25, -3, 0, 1)
 
-local function renderTile(p1, p2)
-	-- upvalues: reactModule (ref), view (ref), uDim2 (ref)
-	return reactModule.createElement(view, {
-		LayoutOrder = p1,
-		Size = uDim2,
-		testId = `ChatCaptureGrid.Tile.{p1}`,
+local function renderTile(LayoutOrder, Element) --[[ Line: 33 ]]
+	-- upvalues: ReactModule (copy), View (copy), _UDim2 (copy)
+	return ReactModule.createElement(View, {
+		LayoutOrder = LayoutOrder,
+		Size = _UDim2,
+		testId = `ChatCaptureGrid.Tile.{LayoutOrder}`,
 		aspectRatio = {
 			AspectRatio = 1,
 			AspectType = Enum.AspectType.ScaleWithParentSize,
 			DominantAxis = Enum.DominantAxis.Width
 		}
-	}, { Content = p2 })
+	}, { Content = Element })
 end
 
-local function _(p1)
-	-- upvalues: reactModule (ref), text (ref)
-	return reactModule.createElement(text, {
+local function _(Text1) --[[ Line: 48 | Named "renderEmptyState" ]]
+	-- upvalues: ReactModule (copy), Text (copy)
+	return ReactModule.createElement(Text, {
 		LayoutOrder = 1,
 		tag = "size-full-0 auto-y text-body-medium text-align-x-center content-muted",
-		Text = p1
+		Text = Text1
 	})
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), renderTile (ref), view (ref), captureGridItemModule (ref), text (ref), button (ref), fillBehavior (ref), inputSize (ref), buttonVariant (ref)
-	local var1, var2 = reactModule.useState(function()
-		-- upvalues: p1 (ref)
+return ReactModule.memo(function(p1) --[[ Line: 56 | Named "ChatCaptureGrid" ]]
+	-- upvalues: ReactModule (copy), renderTile (copy), View (copy), CaptureGridItemModule (copy), Text (copy), Button (copy), FillBehavior (copy), InputSize (copy), ButtonVariant (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function(): number --[[ Line: 57 ]]
+		-- upvalues: p1 (copy)
 		return if p1.shouldProgressivelyLoad then 0 else #p1.captures
 	end)
-	local var3 = reactModule.useRef(var1)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var3 (ref), var2 (ref)
+	local UseRefResult = ReactModule.useRef(UseStateResult)
+	ReactModule.useEffect(function() --[[ Line: 62 ]]
+		-- upvalues: p1 (copy), UseRefResult (copy), UseStateResult2 (copy)
 		if p1.isLoading then
-			var3.current = 0
-			var2(0)
+			UseRefResult.current = 0
+			UseStateResult2(0)
 			
 			return
-		elseif p1.shouldProgressivelyLoad then
-			local var4 = false
-			task.spawn(function()
-				-- upvalues: var3 (copy), p1 (copy), var4 (write), var2 (copy)
-				task.wait(0.3)
-				
-				for i = var3.current + 1, #p1.captures do
-					task.wait()
-					
-					if not var4 then
-						var3.current = i
-						var2(i)
-						continue
-					end
-					return
-				end
-			end)
-			
-			return function()
-				-- upvalues: var4 (write)
-				var4 = true
-			end
 		end
-		var3.current = #p1.captures
-		var2(#p1.captures)
+		if not p1.shouldProgressivelyLoad then
+			UseRefResult.current = #p1.captures
+			UseStateResult2(#p1.captures)
+			
+			return
+		end
+		local Flag = false
+		task.spawn(function() --[[ Line: 75 ]]
+			-- upvalues: UseRefResult (upval), p1 (upval), Flag (ref), UseStateResult2 (upval)
+			task.wait(0.3)
+			
+			for i = UseRefResult.current + 1, #p1.captures do
+				task.wait()
+				
+				if Flag then break end
+				UseRefResult.current = i
+				UseStateResult2(i)
+			end
+		end)
+		
+		return function() --[[ Line: 87 ]]
+			-- upvalues: Flag (ref)
+			Flag = true
+		end
 	end, { p1.isLoading, p1.shouldProgressivelyLoad, #p1.captures })
 	local t = {}
 	
 	if p1.isLoading then
 		for i = 1, 8 do
-			t[`Placeholder-{i}`] = renderTile(i, reactModule.createElement(view, {
+			t[`Placeholder-{i}`] = renderTile(i, ReactModule.createElement(View, {
 				tag = "size-full radius-medium bg-shift-200",
 				testId = `ChatCaptureGrid.Placeholder.{i}`
 			}))
 		end
 	else
-		for i_1, v in p1.captures do
-			t[`Capture-{i_1}`] = renderTile(i_1, reactModule.createElement(captureGridItemModule, {
-				capture = v,
-				imageContentEnabled = i_1 <= var1,
-				isSelected = p1.isSelected(v),
+		for i1, capture in p1.captures do
+			t[`Capture-{i1}`] = renderTile(i1, ReactModule.createElement(CaptureGridItemModule, {
+				capture = capture,
+				imageContentEnabled = i1 <= UseStateResult,
+				isSelected = p1.isSelected(capture),
 				onActivated = p1.onCaptureToggled,
-				testId = `ChatCaptureGrid.Capture.{i_1}`
+				testId = `ChatCaptureGrid.Capture.{i1}`
 			}))
 		end
 	end
-	return reactModule.createElement(view, { tag = "col gap-medium size-full-0 auto-y" }, {
-		EmptyState = if #p1.captures == 0 and not p1.isLoading then reactModule.createElement(text, {
+	return ReactModule.createElement(View, { tag = "col gap-medium size-full-0 auto-y" }, {
+		EmptyState = if #p1.captures == 0 and not p1.isLoading then ReactModule.createElement(Text, {
 			LayoutOrder = 1,
 			tag = "size-full-0 auto-y text-body-medium text-align-x-center content-muted",
 			Text = p1.emptyText
 		}) else nil,
-		Grid = if #p1.captures > 0 or p1.isLoading then reactModule.createElement(view, {
+		Grid = if #p1.captures > 0 or p1.isLoading then ReactModule.createElement(View, {
 			LayoutOrder = 1,
 			tag = "row wrap gap-xsmall size-full-0 auto-y"
 		}, {
-			Captures = reactModule.createElement(reactModule.Fragment, nil, t)
+			Captures = ReactModule.createElement(ReactModule.Fragment, nil, t)
 		}) else nil,
-		ShowMore = if p1.isFinished or p1.isLoading then nil else reactModule.createElement(button, {
+		ShowMore = if p1.isFinished or p1.isLoading then nil else ReactModule.createElement(Button, {
 			LayoutOrder = 2,
 			testId = "ChatCaptureGrid.ShowMore",
-			fillBehavior = fillBehavior.Fill,
+			fillBehavior = FillBehavior.Fill,
 			onActivated = p1.onShowMore,
-			size = inputSize.Medium,
+			size = InputSize.Medium,
 			text = p1.showMoreText,
-			variant = buttonVariant.Standard
+			variant = ButtonVariant.Standard
 		})
 	})
 end)

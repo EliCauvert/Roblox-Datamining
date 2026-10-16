@@ -1,48 +1,48 @@
-﻿local genericChallenges = script:FindFirstAncestor("GenericChallenges")
-local httpService = game:GetService("HttpService")
-local parent = genericChallenges.Parent
-local default = require(parent.CredentialsProtocol).CredentialsProtocol.default
-local javascriptHybridModule = require(genericChallenges.Types.JavascriptHybrid)
-local _ = require(genericChallenges.Middleware.BuildHybridCallback)
-local getFFlagLuaAppEnableCredentialsProtocol = require(parent.CredentialsProtocol).Flags.GetFFlagLuaAppEnableCredentialsProtocol
-local getFIntLuaAppCredentialsProtocolAvailableTimeout = require(parent.CredentialsProtocol).Flags.GetFIntLuaAppCredentialsProtocolAvailableTimeout
-local getFIntLuaAppCredentialsProtocolTimeout = require(parent.CredentialsProtocol).Flags.GetFIntLuaAppCredentialsProtocolTimeout
-local enableGetCredentialsInCredentialsProtocolHook = game:DefineFastFlag("EnableGetCredentialsInCredentialsProtocolHook", false)
-local executeJavaScriptInWebViewModule = require(genericChallenges.Utils.ExecuteJavaScriptInWebView)
+﻿local GenericChallenges = script:FindFirstAncestor("GenericChallenges")
+local HttpService = game:GetService("HttpService")
+local Parent = GenericChallenges.Parent
+local Default = require(Parent.CredentialsProtocol).CredentialsProtocol.default
+local JavascriptHybridModule = require(GenericChallenges.Types.JavascriptHybrid)
+local _ = require(GenericChallenges.Middleware.BuildHybridCallback)
+local GetFFlagLuaAppEnableCredentialsProtocolFunction = require(Parent.CredentialsProtocol).Flags.GetFFlagLuaAppEnableCredentialsProtocol
+local GetFIntLuaAppCredentialsProtocolAvailableTimeoutFunction = require(Parent.CredentialsProtocol).Flags.GetFIntLuaAppCredentialsProtocolAvailableTimeout
+local GetFIntLuaAppCredentialsProtocolTimeoutFunction = require(Parent.CredentialsProtocol).Flags.GetFIntLuaAppCredentialsProtocolTimeout
+local EnableGetCredentialsInCredentialsProtocolHook = game:DefineFastFlag("EnableGetCredentialsInCredentialsProtocolHook", false)
+local ExecuteJavaScriptInWebViewModule = require(GenericChallenges.Utils.ExecuteJavaScriptInWebView)
 
-return function(p1)
-	-- upvalues: default (ref), executeJavaScriptInWebViewModule (ref), getFFlagLuaAppEnableCredentialsProtocol (ref), javascriptHybridModule (ref), getFIntLuaAppCredentialsProtocolAvailableTimeout (ref), enableGetCredentialsInCredentialsProtocolHook (ref), getFIntLuaAppCredentialsProtocolTimeout (ref), httpService (ref)
-	local var1 = default
-	local var2 = executeJavaScriptInWebViewModule
-	local var3 = getFFlagLuaAppEnableCredentialsProtocol()
+return function(p1) --[[ Line: 19 ]]
+	-- upvalues: Default (copy), ExecuteJavaScriptInWebViewModule (copy), GetFFlagLuaAppEnableCredentialsProtocolFunction (copy), JavascriptHybridModule (copy), GetFIntLuaAppCredentialsProtocolAvailableTimeoutFunction (copy), EnableGetCredentialsInCredentialsProtocolHook (copy), GetFIntLuaAppCredentialsProtocolTimeoutFunction (copy), HttpService (copy)
+	local DefaultCredentialsProtocol = Default
+	local DefaultExecuteJavaScriptInWebView = ExecuteJavaScriptInWebViewModule
+	local FFlagLuaAppEnableCredentialsProtocol = GetFFlagLuaAppEnableCredentialsProtocolFunction()
 	
 	if p1 ~= nil and p1.defaultExecuteJavaScriptInWebView ~= nil then
-		var2 = p1.defaultExecuteJavaScriptInWebView
+		DefaultExecuteJavaScriptInWebView = p1.defaultExecuteJavaScriptInWebView
 	end
 	if p1 ~= nil and p1.defaultCredentialsProtocol ~= nil then
-		var1 = p1.defaultCredentialsProtocol
+		DefaultCredentialsProtocol = p1.defaultCredentialsProtocol
 	end
 	if p1 ~= nil and p1.defaultCredentialsProtocolEnabled ~= nil then
-		var3 = p1.defaultCredentialsProtocolEnabled
+		FFlagLuaAppEnableCredentialsProtocol = p1.defaultCredentialsProtocolEnabled
 	end
-	return function(p2)
-		-- upvalues: var3 (write), javascriptHybridModule (copy), var1 (write), default (copy), getFIntLuaAppCredentialsProtocolAvailableTimeout (copy), var2 (write), enableGetCredentialsInCredentialsProtocolHook (copy), getFIntLuaAppCredentialsProtocolTimeout (copy), httpService (copy)
-		if var3 then
-			if p2.feature == javascriptHybridModule.Feature.CredentialsProtocolAvailable then
-				var1:isAvailable(default.CredentialsTypes.FIDO2, getFIntLuaAppCredentialsProtocolAvailableTimeout()):andThen(function(p3)
-					-- upvalues: var2 (copy), p2 (ref)
-					var2.Execute(p2.data.callId, tostring(p3.isAvailable or false))
-				end):catch(function()
-					-- upvalues: var2 (copy), p2 (ref)
-					var2.Execute(p2.data.callId, "false")
+	return function(p2): boolean --[[ Line: 36 ]]
+		-- upvalues: FFlagLuaAppEnableCredentialsProtocol (ref), JavascriptHybridModule (upval), DefaultCredentialsProtocol (ref), Default (upval), GetFIntLuaAppCredentialsProtocolAvailableTimeoutFunction (upval), DefaultExecuteJavaScriptInWebView (ref), EnableGetCredentialsInCredentialsProtocolHook (upval), GetFIntLuaAppCredentialsProtocolTimeoutFunction (upval), HttpService (upval)
+		if FFlagLuaAppEnableCredentialsProtocol then
+			if p2.feature == JavascriptHybridModule.Feature.CredentialsProtocolAvailable then
+				DefaultCredentialsProtocol:isAvailable(Default.CredentialsTypes.FIDO2, GetFIntLuaAppCredentialsProtocolAvailableTimeoutFunction()):andThen(function(Result) --[[ Line: 44 ]]
+					-- upvalues: DefaultExecuteJavaScriptInWebView (upval), p2 (copy)
+					DefaultExecuteJavaScriptInWebView.Execute(p2.data.callId, (tostring(Result.isAvailable or false)))
+				end):catch(function() --[[ Line: 48 ]]
+					-- upvalues: DefaultExecuteJavaScriptInWebView (upval), p2 (copy)
+					DefaultExecuteJavaScriptInWebView.Execute(p2.data.callId, "false")
 				end)
-			elseif enableGetCredentialsInCredentialsProtocolHook and p2.feature == javascriptHybridModule.Feature.GetCredentials then
-				var1:getCredentials(default.CredentialsTypes.FIDO2, p2.data.authenticationOptionsJSON, getFIntLuaAppCredentialsProtocolTimeout()):andThen(function(p3)
-					-- upvalues: var2 (copy), p2 (ref), httpService (copy)
-					var2.Execute(p2.data.callId, if p3 then httpService:JSONEncode(p3) else "")
-				end):catch(function()
-					-- upvalues: var2 (copy), p2 (ref)
-					var2.Execute(p2.data.callId, "")
+			elseif EnableGetCredentialsInCredentialsProtocolHook and p2.feature == JavascriptHybridModule.Feature.GetCredentials then
+				DefaultCredentialsProtocol:getCredentials(Default.CredentialsTypes.FIDO2, p2.data.authenticationOptionsJSON, GetFIntLuaAppCredentialsProtocolTimeoutFunction()):andThen(function(Result) --[[ Line: 61 ]]
+					-- upvalues: DefaultExecuteJavaScriptInWebView (upval), p2 (copy), HttpService (upval)
+					DefaultExecuteJavaScriptInWebView.Execute(p2.data.callId, if Result then HttpService:JSONEncode(Result) else "")
+				end):catch(function() --[[ Line: 67 ]]
+					-- upvalues: DefaultExecuteJavaScriptInWebView (upval), p2 (copy)
+					DefaultExecuteJavaScriptInWebView.Execute(p2.data.callId, "")
 				end)
 			end
 		end

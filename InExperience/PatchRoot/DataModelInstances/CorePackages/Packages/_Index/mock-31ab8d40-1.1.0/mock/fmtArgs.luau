@@ -1,12 +1,12 @@
-﻿return function(p1)
-	local t = {}
+﻿return function(p1): string --[[ Line: 1 ]]
+	local List = {}
 	
 	for i = 1, p1.n do
 		if type(p1[i]) == "string" then
-			table.insert(t, "\"" .. p0[i] .. "\"")
+			table.insert(List, "\"" .. p1[i] .. "\"")
 		else
-			table.insert(t, tostring(p1[i]))
+			table.insert(List, (tostring(p1[i])))
 		end
 	end
-	return "{" .. table.concat(t, ", ") .. "}"
+	return "{" .. table.concat(List, ", ") .. "}"
 end

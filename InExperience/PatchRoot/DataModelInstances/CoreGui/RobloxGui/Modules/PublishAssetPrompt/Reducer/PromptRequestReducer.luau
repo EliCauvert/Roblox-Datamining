@@ -1,75 +1,75 @@
-﻿local parent = script.Parent.Parent
-local corePackagesService = game:GetService("CorePackages")
-local cryoModule = require(corePackagesService.Packages.Cryo)
+﻿local Parent = script.Parent.Parent
+local CorePackages = game:GetService("CorePackages")
+local CryoModule = require(CorePackages.Packages.Cryo)
 
-return require(corePackagesService.Packages.Rodux).createReducer({ promptInfo = {}, queue = {} }, {
-	[require(parent.Actions.OpenPublishAssetPrompt).name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return if p1.promptInfo.promptType == nil then cryoModule.Dictionary.join(p1, { promptInfo = p2.promptInfo }) else cryoModule.Dictionary.join(p1, {
-			queue = cryoModule.List.join(p1.queue, { p2.promptInfo })
+return (require(CorePackages.Packages.Rodux).createReducer({ promptInfo = {}, queue = {} }, {
+	[require(Parent.Actions.OpenPublishAssetPrompt).name] = function(p1, p2) --[[ Line: 35 ]]
+		-- upvalues: CryoModule (copy)
+		return if p1.promptInfo.promptType == nil then CryoModule.Dictionary.join(p1, { promptInfo = p2.promptInfo }) else CryoModule.Dictionary.join(p1, {
+			queue = CryoModule.List.join(p1.queue, { p2.promptInfo })
 		})
 	end,
-	[require(parent.Actions.OpenPublishAvatarPrompt).name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return if p1.promptInfo.promptType == nil then cryoModule.Dictionary.join(p1, { promptInfo = p2.promptInfo }) else cryoModule.Dictionary.join(p1, {
-			queue = cryoModule.List.join(p1.queue, { p2.promptInfo })
+	[require(Parent.Actions.OpenPublishAvatarPrompt).name] = function(p1, p2) --[[ Line: 47 ]]
+		-- upvalues: CryoModule (copy)
+		return if p1.promptInfo.promptType == nil then CryoModule.Dictionary.join(p1, { promptInfo = p2.promptInfo }) else CryoModule.Dictionary.join(p1, {
+			queue = CryoModule.List.join(p1.queue, { p2.promptInfo })
 		})
 	end,
-	[require(parent.Actions.OpenPublishAvatarAssetPrompt).name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return if p1.promptInfo.promptType == nil then cryoModule.Dictionary.join(p1, { promptInfo = p2.promptInfo }) else cryoModule.Dictionary.join(p1, {
-			queue = cryoModule.List.join(p1.queue, { p2.promptInfo })
+	[require(Parent.Actions.OpenPublishAvatarAssetPrompt).name] = function(p1, p2) --[[ Line: 59 ]]
+		-- upvalues: CryoModule (copy)
+		return if p1.promptInfo.promptType == nil then CryoModule.Dictionary.join(p1, { promptInfo = p2.promptInfo }) else CryoModule.Dictionary.join(p1, {
+			queue = CryoModule.List.join(p1.queue, { p2.promptInfo })
 		})
 	end,
-	[require(parent.Actions.OpenPublishMakeupLookPrompt).name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return if p1.promptInfo.promptType == nil then cryoModule.Dictionary.join(p1, { promptInfo = p2.promptInfo }) else cryoModule.Dictionary.join(p1, {
-			queue = cryoModule.List.join(p1.queue, { p2.promptInfo })
+	[require(Parent.Actions.OpenPublishMakeupLookPrompt).name] = function(p1, p2) --[[ Line: 71 ]]
+		-- upvalues: CryoModule (copy)
+		return if p1.promptInfo.promptType == nil then CryoModule.Dictionary.join(p1, { promptInfo = p2.promptInfo }) else CryoModule.Dictionary.join(p1, {
+			queue = CryoModule.List.join(p1.queue, { p2.promptInfo })
 		})
 	end,
-	[require(parent.Actions.SetHumanoidModel).name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, {
-			promptInfo = cryoModule.Dictionary.join(p1.promptInfo, { humanoidModel = p2.humanoidModel })
+	[require(Parent.Actions.SetHumanoidModel).name] = function(p1, p2) --[[ Line: 81 ]]
+		-- upvalues: CryoModule (copy)
+		return CryoModule.Dictionary.join(p1, {
+			promptInfo = CryoModule.Dictionary.join(p1.promptInfo, { humanoidModel = p2.humanoidModel })
 		})
 	end,
-	[require(parent.Actions.SetAccessoryInstance).name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, {
-			promptInfo = cryoModule.Dictionary.join(p1.promptInfo, { accessoryInstance = p2.accessoryInstance })
+	[require(Parent.Actions.SetAccessoryInstance).name] = function(p1, p2) --[[ Line: 89 ]]
+		-- upvalues: CryoModule (copy)
+		return CryoModule.Dictionary.join(p1, {
+			promptInfo = CryoModule.Dictionary.join(p1.promptInfo, { accessoryInstance = p2.accessoryInstance })
 		})
 	end,
-	[require(parent.Actions.SetPriceInRobux).name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, {
-			promptInfo = cryoModule.Dictionary.join(p1.promptInfo, { priceInRobux = p2.priceInRobux })
+	[require(Parent.Actions.SetPriceInRobux).name] = function(p1, p2) --[[ Line: 97 ]]
+		-- upvalues: CryoModule (copy)
+		return CryoModule.Dictionary.join(p1, {
+			promptInfo = CryoModule.Dictionary.join(p1.promptInfo, { priceInRobux = p2.priceInRobux })
 		})
 	end,
-	[require(parent.Actions.CloseOpenPrompt).name] = function(p1, _)
-		-- upvalues: cryoModule (ref)
-		return if cryoModule.isEmpty(p1.queue) then { promptInfo = {}, queue = p1.queue } else cryoModule.Dictionary.join(p1, {
+	[require(Parent.Actions.CloseOpenPrompt).name] = function(p1, _) --[[ Line: 105 ]]
+		-- upvalues: CryoModule (copy)
+		return if CryoModule.isEmpty(p1.queue) then { promptInfo = {}, queue = p1.queue } else CryoModule.Dictionary.join(p1, {
 			promptInfo = p1.queue[1],
-			queue = cryoModule.List.removeIndex(p1.queue, 1)
+			queue = CryoModule.List.removeIndex(p1.queue, 1)
 		})
 	end,
-	[require(parent.Actions.OpenResultModal).name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, { resultModalType = p2.resultType })
+	[require(Parent.Actions.OpenResultModal).name] = function(p1, p2) --[[ Line: 118 ]]
+		-- upvalues: CryoModule (copy)
+		return CryoModule.Dictionary.join(p1, { resultModalType = p2.resultType })
 	end,
-	[require(parent.Actions.CloseResultModal).name] = function(p1, _)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, { resultModalType = cryoModule.None })
+	[require(Parent.Actions.CloseResultModal).name] = function(p1, _) --[[ Line: 125 ]]
+		-- upvalues: CryoModule (copy)
+		return CryoModule.Dictionary.join(p1, { resultModalType = CryoModule.None })
 	end,
-	[require(parent.Actions.OpenValidationErrorModal).name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, {
-			promptInfo = cryoModule.Dictionary.join(p1.promptInfo, { errorMessage = p2.errorMessage })
+	[require(Parent.Actions.OpenValidationErrorModal).name] = function(p1, p2) --[[ Line: 131 ]]
+		-- upvalues: CryoModule (copy)
+		return CryoModule.Dictionary.join(p1, {
+			promptInfo = CryoModule.Dictionary.join(p1.promptInfo, { errorMessage = p2.errorMessage })
 		})
 	end,
-	[require(parent.Actions.SetPromptVisibility).name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, {
-			promptInfo = cryoModule.Dictionary.join(p1.promptInfo, { promptVisible = p2.promptVisible })
+	[require(Parent.Actions.SetPromptVisibility).name] = function(p1, p2) --[[ Line: 140 ]]
+		-- upvalues: CryoModule (copy)
+		return CryoModule.Dictionary.join(p1, {
+			promptInfo = CryoModule.Dictionary.join(p1.promptInfo, { promptVisible = p2.promptVisible })
 		})
 	end
-})
+}))

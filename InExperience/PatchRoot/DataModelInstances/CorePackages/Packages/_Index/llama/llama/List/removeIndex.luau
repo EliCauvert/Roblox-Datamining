@@ -1,17 +1,17 @@
-﻿local toSetModule = require(script.Parent.toSet)
+﻿local ToSetModule = require(script.Parent.toSet)
 
-return function(p1, ...)
-	-- upvalues: toSetModule (ref)
-	local var1 = type(p1)
-	assert(var1 == "table", "expected a table for first argument, got " .. var1)
+return function(p1, ...) --[[ Line: 4 | Named "removeIndex" ]]
+	-- upvalues: ToSetModule (copy)
+	local ValueType = type(p1)
+	assert(ValueType == "table", "expected a table for first argument, got " .. ValueType)
 	local t = {}
-	local var2 = toSetModule({ ... })
-	local var3 = 1
+	local SetModule = ToSetModule({ ... })
+	local Count = 1
 	
 	for i = 1, #p1 do
-		if not var2[i] then
-			t[var3] = p1[i]
-			var3 += 1
+		if not SetModule[i] then
+			t[Count] = p1[i]
+			Count += 1
 		end
 	end
 	return t

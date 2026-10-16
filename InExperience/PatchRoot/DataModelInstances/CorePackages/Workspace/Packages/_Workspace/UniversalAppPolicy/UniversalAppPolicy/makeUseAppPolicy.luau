@@ -1,58 +1,59 @@
-﻿local parent = script.Parent.Parent
-local policyProviderModule = require(parent.PolicyProvider)
-local logger = policyProviderModule.Logger
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
+﻿local Parent = script.Parent.Parent
+local PolicyProviderModule = require(Parent.PolicyProvider)
+local Logger = PolicyProviderModule.Logger
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
 local _ = require(script.Parent.PolicyTypes)
 
-local function mergePolicies(p1, p2)
-	-- upvalues: cryoModule (ref)
-	local t = {}
+local function mergePolicies(ReadResult, PresentationPolicy) --[[ Line: 15 ]]
+	-- upvalues: CryoModule (copy)
+	local JoinResult = {}
 	
-	for i, v in ipairs(p2) do
-		t = cryoModule.Dictionary.join(t, v(p1))
+	for _, value in ipairs(PresentationPolicy) do
+		JoinResult = CryoModule.Dictionary.join(JoinResult, value(ReadResult))
 	end
-	return t
+	return JoinResult
 end
 
-return function(p3)
-	-- upvalues: reactModule (ref), policyProviderModule (ref), mergePolicies (ref), logger (ref)
-	assert(p3, "expected getPolicyImpl")
+return function(p1) --[[ Line: 25 ]]
+	-- upvalues: ReactModule (copy), PolicyProviderModule (copy), mergePolicies (copy), Logger (copy)
+	assert(p1, "expected getPolicyImpl")
 	
-	return function(p4)
-		-- upvalues: reactModule (copy), policyProviderModule (copy), mergePolicies (copy), p3 (ref), logger (copy)
-		local var1 = reactModule.useContext(policyProviderModule.AppPolicyContext)
-		assert(var1, "Not a descendent of PolicyProvider")
-		local var2, var3 = reactModule.useState(function()
-			-- upvalues: var1 (ref), mergePolicies (copy), p3 (copy), logger (copy)
-			if var1.staticExternalPolicy then
-				return mergePolicies(var1.staticExternalPolicy, var1.presentationPolicy)
+	return function(Callback) --[[ Line: 28 | Named "useAppPolicy" ]]
+		-- upvalues: ReactModule (upval), PolicyProviderModule (upval), mergePolicies (upval), p1 (copy), Logger (upval)
+		local UseContextResult = ReactModule.useContext(PolicyProviderModule.AppPolicyContext)
+		assert(UseContextResult, "Not a descendent of PolicyProvider")
+		local UseStateResult, UseStateResult2 = ReactModule.useState(function() --[[ Line: 32 | Named "getInitialPolicy" ]]
+			-- upvalues: UseContextResult (copy), mergePolicies (upval), p1 (upval), Logger (upval)
+			if UseContextResult.staticExternalPolicy then
+				return (mergePolicies(UseContextResult.staticExternalPolicy, UseContextResult.presentationPolicy))
 			end
-			local var4 = p3.read()
+			local ReadResult = p1.read()
 			
-			if var4 then
-				return mergePolicies(var4, var1.presentationPolicy)
+			if ReadResult then
+				return (mergePolicies(ReadResult, UseContextResult.presentationPolicy))
+			else
+				Logger:trace("No app policy data available")
+				
+				return (mergePolicies({}, UseContextResult.presentationPolicy))
 			end
-			logger:trace("No app policy data available")
-			
-			return mergePolicies({}, var1.presentationPolicy)
 		end)
-		reactModule.useEffect(function()
-			-- upvalues: var1 (ref), p3 (copy), logger (copy), var3 (ref), mergePolicies (copy)
-			local var4 = if not var1.staticExternalPolicy then p3.onPolicyChanged(function(p5)
-				-- upvalues: logger (copy), var3 (copy), mergePolicies (copy), var1 (copy)
-				logger:trace("Received policy update")
-				var3(mergePolicies(p5, var1.presentationPolicy))
-			end) else nil
+		ReactModule.useEffect(function() --[[ Line: 50 ]]
+			-- upvalues: UseContextResult (copy), p1 (upval), Logger (upval), UseStateResult2 (copy), mergePolicies (upval)
+			local OnPolicyChangedResult = if UseContextResult.staticExternalPolicy then nil else p1.onPolicyChanged(function(p2) --[[ Line: 53 ]]
+				-- upvalues: Logger (upval), UseStateResult2 (upval), mergePolicies (upval), UseContextResult (upval)
+				Logger:trace("Received policy update")
+				UseStateResult2((mergePolicies(p2, UseContextResult.presentationPolicy)))
+			end)
 			
-			return function()
-				-- upvalues: var4 (write)
-				if var4 then
-					var4:Disconnect()
+			return function() --[[ Line: 59 ]]
+				-- upvalues: OnPolicyChangedResult (ref)
+				if OnPolicyChangedResult then
+					OnPolicyChangedResult:Disconnect()
 				end
 			end
-		end, { var1 })
+		end, { UseContextResult })
 		
-		return p4(var2)
+		return Callback(UseStateResult)
 	end
 end

@@ -1,1 +1,3 @@
-﻿return require(script:FindFirstAncestor("BuildExperience").Parent.SharedFlags).FFlagBuildAgentAdCampaignToolCallStatusFallback and require(script.Parent.FFlagBuildAgentAdCampaignCard)
+﻿local FFlagBuildAgentAdCampaignCardModule = require(script.Parent.FFlagBuildAgentAdCampaignCard)
+
+return require(script:FindFirstAncestor("BuildExperience").Parent.SharedFlags).FFlagBuildAgentAdCampaignToolCallStatusFallback and FFlagBuildAgentAdCampaignCardModule

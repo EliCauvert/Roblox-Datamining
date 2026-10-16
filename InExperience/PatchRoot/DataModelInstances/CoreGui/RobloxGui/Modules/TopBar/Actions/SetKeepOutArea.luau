@@ -1,5 +1,6 @@
-﻿local corePackagesService = game:GetService("CorePackages")
+﻿local CorePackages = game:GetService("CorePackages")
+local MakeActionCreatorFunction = require(CorePackages.Packages.Rodux).makeActionCreator
 
-return if require(corePackagesService.Workspace.Packages.CoreGuiCommon).Flags.FFlagTopBarSignalizeKeepOutAreas then nil else require(corePackagesService.Packages.Rodux).makeActionCreator(script.Name, function(p1, p2, p3)
-	return { id = p1, position = p2, size = p3 }
+return if require(CorePackages.Workspace.Packages.CoreGuiCommon).Flags.FFlagTopBarSignalizeKeepOutAreas then nil else MakeActionCreatorFunction(script.Name, function(Id, Position, Size) --[[ Line: 11 ]]
+	return { id = Id, position = Position, size = Size }
 end)

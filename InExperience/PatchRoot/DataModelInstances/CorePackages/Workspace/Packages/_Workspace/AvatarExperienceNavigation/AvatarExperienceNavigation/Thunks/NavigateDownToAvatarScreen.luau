@@ -1,33 +1,34 @@
-﻿local avatarExperienceNavigation = script:FindFirstAncestor("AvatarExperienceNavigation")
-local parent = avatarExperienceNavigation.Parent
-local cryoModule = require(parent.Cryo)
-local appPage = require(parent.RobloxAppEnums).AppPage
-local avatarScreenPropertiesModule = require(avatarExperienceNavigation.AvatarRoute.AvatarScreenProperties)
-local navigateDown = require(parent.NavigationRodux).Thunks.NavigateDown
-local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
-local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
+﻿local AvatarExperienceNavigation = script:FindFirstAncestor("AvatarExperienceNavigation")
+local Parent = AvatarExperienceNavigation.Parent
+local CryoModule = require(Parent.Cryo)
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local AvatarScreenPropertiesModule = require(AvatarExperienceNavigation.AvatarRoute.AvatarScreenProperties)
+local NavigateDownFunction = require(Parent.NavigationRodux).Thunks.NavigateDown
+local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
+local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 
-return function(p1, p2, p3)
-	-- upvalues: avatarScreenPropertiesModule (ref), appPage (ref), cryoModule (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref)
-	local var2 = avatarScreenPropertiesModule[p1]
-	local isTransparent = var2 and var2.isTransparent
+return function(RouteName, Detail, p1) --[[ Line: 19 | Named "NavigateDownToAvatarScreen" ]]
+	-- upvalues: AvatarScreenPropertiesModule (copy), AppPage (copy), CryoModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy)
+	local AvatarScreenPropertiesModuleEntry = AvatarScreenPropertiesModule[RouteName]
+	local IsTransparent = AvatarScreenPropertiesModuleEntry and AvatarScreenPropertiesModuleEntry.isTransparent
 	
-	return function(p4)
-		-- upvalues: isTransparent (ref), appPage (copy), p2 (ref), p1 (ref), cryoModule (copy), p3 (ref), fFlagSignalsNavP3Dispatch (copy), var1 (copy), navigateDown (copy)
-		local t = {
-			name = if isTransparent then appPage.AvatarExperienceWrapperTransparent else appPage.AvatarExperienceWrapper,
-			detail = p2,
+	return function(p2) --[[ Line: 22 ]]
+		-- upvalues: IsTransparent (copy), AppPage (upval), Detail (copy), RouteName (copy), CryoModule (upval), p1 (copy), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), NavigateDownFunction (upval)
+		local config = {
+			name = IsTransparent and AppPage.AvatarExperienceWrapperTransparent or AppPage.AvatarExperienceWrapper,
+			detail = Detail,
 			extraProps = {
-				routeName = p1,
-				params = cryoModule.Dictionary.join(p3 or {}, { detail = p2 })
+				routeName = RouteName,
+				params = CryoModule.Dictionary.join(p1 or {}, { detail = Detail })
 			}
 		}
 		
-		if fFlagSignalsNavP3Dispatch then
-			var1.down(var1.fromLegacyPage(t))
+		if FFlagSignalsNavP3Dispatch then
+			NavigationCommands.down(NavigationCommands.fromLegacyPage(config))
 			
 			return
+		else
+			return p2:dispatch(NavigateDownFunction(config))
 		end
-		return p4:dispatch(navigateDown(t))
 	end
 end

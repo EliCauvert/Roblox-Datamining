@@ -1,35 +1,35 @@
-﻿local sduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
-local _ = require(sduiCoreSystem.Parent.Signals)
-local _ = require(sduiCoreSystem.SduiBuilderTypes)
-local _ = require(sduiCoreSystem.ClientBinding.SduiClientBindingTypes)
-local sduiClientBindingBuilderModule = require(sduiCoreSystem.ClientBinding.SduiClientBindingBuilder)
-local sduiLoggerModule = require(sduiCoreSystem.SduiLogger)
-local sduiErrorsModule = require(sduiCoreSystem.SduiErrors)
-local sduiParseHelpersModule = require(sduiCoreSystem.SduiParseHelpers)
-local _ = require(sduiCoreSystem.SduiComponentType)
-local buildConfigForComponent = sduiClientBindingBuilderModule.buildConfigForComponent
+﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
+local _ = require(SduiCoreSystem.Parent.Signals)
+local _ = require(SduiCoreSystem.SduiBuilderTypes)
+local _ = require(SduiCoreSystem.ClientBinding.SduiClientBindingTypes)
+local SduiLoggerModule = require(SduiCoreSystem.SduiLogger)
+local SduiErrorsModule = require(SduiCoreSystem.SduiErrors)
+local SduiParseHelpersModule = require(SduiCoreSystem.SduiParseHelpers)
+local _ = require(SduiCoreSystem.SduiComponentType)
+local BuildConfigForComponent = require(SduiCoreSystem.ClientBinding.SduiClientBindingBuilder).buildConfigForComponent
 
 return {
-	makeStub = function(p1, p2, p3, p4, p5, p6)
-		-- upvalues: buildConfigForComponent (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), sduiParseHelpersModule (ref)
-		return setmetatable({ isBlank = false }, {
-			__index = function(p7, p8)
-				-- upvalues: buildConfigForComponent (copy), p1 (ref), p2 (ref), p3 (ref), p4 (ref), p5 (ref), sduiLoggerModule (copy), sduiErrorsModule (copy), sduiParseHelpersModule (copy), p6 (ref)
+	makeStub = function(p1, p2, p3, p4, p5, p6) --[[ Line: 44 ]]
+		-- upvalues: BuildConfigForComponent (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), SduiParseHelpersModule (copy)
+		return (setmetatable({ isBlank = false }, {
+			__index = function(p7, p8) --[[ Line: 60 ]]
+				-- upvalues: BuildConfigForComponent (upval), p1 (copy), p2 (copy), p3 (copy), p4 (copy), p5 (copy), SduiLoggerModule (upval), SduiErrorsModule (upval), SduiParseHelpersModule (upval), p6 (copy)
 				setmetatable(p7, nil)
-				local ok, status = pcall(buildConfigForComponent, p1, p2, p3, p4, nil, p5, p7)
+				local Success, Result = pcall(BuildConfigForComponent, p1, p2, p3, p4, nil, p5, p7)
 				
-				if ok then
+				if Success then
 					return p7[p8]
+				else
+					SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToParseProp, {
+						message = `Failed to materialize deferred list item: {SduiParseHelpersModule.stringifyValue(Result)}`,
+						name = p6.name,
+						componentType = p6.componentType,
+						parserName = p6.parserName
+					}, p6.appPage)
+					
+					return nil
 				end
-				sduiLoggerModule.reportError(sduiErrorsModule.SduiErrorType.FailedToParseProp, {
-					message = `Failed to materialize deferred list item: {sduiParseHelpersModule.stringifyValue(status)}`,
-					name = p6.name,
-					componentType = p6.componentType,
-					parserName = p6.parserName
-				}, p6.appPage)
-				
-				return nil
 			end
-		})
+		}))
 	end
 }

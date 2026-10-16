@@ -1,42 +1,72 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local button = foundationModule.Button
-local text = foundationModule.Text
-local view = foundationModule.View
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local inputSize = foundationModule.Enums.InputSize
-local fillBehavior = foundationModule.Enums.FillBehavior
-local iconName = foundationModule.Enums.IconName
-local var1 = if require(buildExperience.Flags.FFlagBuildExperienceUseFoundationSheet) then foundationModule.Sheet else require(buildExperience.FoundationFork.Sheet)
-local _ = require(buildExperience.Analytics.AnalyticsMetric)
-local _ = require(buildExperience.Analytics.AnalyticsWindow)
-local _ = require(parent.DataHydration.ExperienceAnalytics)
-local metricChartContainerModule = require(buildExperience.Components.Analytics.Chart.MetricChartContainer)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local Button = FoundationModule.Button
+local IconButton = FoundationModule.IconButton
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local InputSize = FoundationModule.Enums.InputSize
+local FillBehavior = FoundationModule.Enums.FillBehavior
+local IconName = FoundationModule.Enums.IconName
+local FFlagBuildAnalyticsGoalsModule = require(BuildExperience.Flags.FFlagBuildAnalyticsGoals)
+local Sheet = if require(BuildExperience.Flags.FFlagBuildExperienceUseFoundationSheet) then FoundationModule.Sheet else require(BuildExperience.FoundationFork.Sheet)
+local _ = require(BuildExperience.Analytics.AnalyticsMetric)
+local _ = require(BuildExperience.Analytics.AnalyticsWindow)
+local _ = require(Parent.DataHydration.ExperienceAnalytics)
+local MetricChartContainerModule = require(BuildExperience.Components.Analytics.Chart.MetricChartContainer)
 
-return function(p1)
-	-- upvalues: reactModule (ref), var1 (ref), text (ref), view (ref), metricChartContainerModule (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref), iconName (ref)
-	local testId = p1.testId or "MetricDetailSheetView"
+return function(p1) --[[ Line: 58 | Named "MetricDetailSheetView" ]]
+	-- upvalues: FFlagBuildAnalyticsGoalsModule (copy), ReactModule (copy), View (copy), Text (copy), MetricChartContainerModule (copy), Sheet (copy), IconButton (copy), IconName (copy), InputSize (copy), Button (copy), ButtonVariant (copy), FillBehavior (copy)
+	local TestId = p1.testId or "MetricDetailSheetView"
+	local Navigation = if FFlagBuildAnalyticsGoalsModule then p1.navigation else nil
 	
-	return reactModule.createElement(var1.Root, { isOpen = true, onClose = p1.onClose }, {
-		Header = reactModule.createElement(var1.Header, { hasCloseAffordance = true }, {
-			Title = reactModule.createElement(text, {
+	return ReactModule.createElement(Sheet.Root, {
+		isOpen = true,
+		ref = p1.focusRootRef,
+		onClose = p1.onClose,
+		testId = TestId
+	}, {
+		Header = ReactModule.createElement(Sheet.Header, { hasCloseAffordance = p1.showCloseButton ~= false }, {
+			Title = ReactModule.createElement(Text, {
 				tag = "shrink auto-xy text-heading-small text-wrap text-align-x-left content-emphasis",
 				Text = p1.titleText,
-				testId = `{testId}.Title`
+				testId = `{TestId}.Title`
 			})
 		}),
-		Content = reactModule.createElement(var1.Content, nil, {
-			Body = reactModule.createElement(view, {
+		Content = ReactModule.createElement(Sheet.Content, nil, {
+			Body = ReactModule.createElement(View, {
 				tag = "col gap-large size-full-0 auto-y padding-top-medium"
 			}, {
-				ChartCard = reactModule.createElement(view, {
+				Navigation = if Navigation == nil or Navigation.count <= 1 then nil else ReactModule.createElement(View, {
+					LayoutOrder = 0,
+					tag = "row align-x-right gap-small size-full-0 auto-y",
+					testId = `{TestId}.Navigation`
+				}, {
+					Previous = ReactModule.createElement(IconButton, {
+						LayoutOrder = 1,
+						icon = IconName.ChevronLargeLeft,
+						size = InputSize.Small,
+						onActivated = Navigation.onPrevious,
+						isDisabled = Navigation.index == 1,
+						testId = `{TestId}.Previous`
+					}),
+					Next = ReactModule.createElement(IconButton, {
+						LayoutOrder = 2,
+						icon = IconName.ChevronLargeRight,
+						size = InputSize.Small,
+						onActivated = Navigation.onNext,
+						isDisabled = Navigation.index == Navigation.count,
+						testId = `{TestId}.Next`
+					})
+				}),
+				ChartCard = ReactModule.createElement(View, {
 					LayoutOrder = 1,
 					tag = "col size-full-0 auto-y padding-large stroke-standard stroke-default radius-large",
-					testId = `{testId}.ChartCard`
+					testId = `{TestId}.ChartCard`
 				}, {
-					Chart = reactModule.createElement(metricChartContainerModule, {
+					[if Navigation == nil then "Chart" else `Chart{Navigation.index}`] = ReactModule.createElement(MetricChartContainerModule, {
 						hideIcon = true,
 						universeId = p1.universeId,
 						metric = p1.metric,
@@ -46,35 +76,53 @@ return function(p1)
 						summary = p1.summaryText
 					})
 				}),
-				Description = reactModule.createElement(text, {
+				Description = ReactModule.createElement(Text, {
 					LayoutOrder = 2,
 					tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-muted",
 					Text = p1.descriptionText,
-					testId = `{testId}.Description`
-				})
+					testId = `{TestId}.Description`
+				}),
+				HowToImprove = if FFlagBuildAnalyticsGoalsModule and p1.improvementText ~= nil and p1.improvementText ~= "" then ReactModule.createElement(View, {
+					LayoutOrder = 3,
+					tag = "col gap-small size-full-0 auto-y",
+					testId = `{TestId}.HowToImprove`
+				}, {
+					Title = ReactModule.createElement(Text, {
+						LayoutOrder = 1,
+						tag = "size-full-0 auto-y text-heading-small text-wrap text-align-x-left content-emphasis",
+						Text = p1.improvementTitleText,
+						testId = `{TestId}.HowToImproveTitle`
+					}),
+					Tips = ReactModule.createElement(Text, {
+						LayoutOrder = 2,
+						tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-muted",
+						Text = p1.improvementText,
+						testId = `{TestId}.ImprovementText`
+					})
+				}) else nil
 			})
 		}),
-		Actions = reactModule.createElement(var1.Actions, nil, {
-			Analyze = reactModule.createElement(button, {
+		Actions = ReactModule.createElement(Sheet.Actions, nil, {
+			Analyze = ReactModule.createElement(Button, {
 				LayoutOrder = 1,
 				text = p1.analyzeText,
-				size = inputSize.Medium,
-				variant = buttonVariant.Emphasis,
-				fillBehavior = fillBehavior.Fill,
+				size = InputSize.Medium,
+				variant = ButtonVariant.Emphasis,
+				fillBehavior = FillBehavior.Fill,
 				width = UDim.new(1, 0),
 				onActivated = p1.onAnalyze,
-				testId = `{testId}.Analyze`
+				testId = `{TestId}.Analyze`
 			}),
-			ViewInOverview = reactModule.createElement(button, {
+			ViewInOverview = ReactModule.createElement(Button, {
 				LayoutOrder = 2,
 				text = p1.viewInOverviewText,
-				icon = iconName.ArrowUpRightFromSquare,
-				size = inputSize.Medium,
-				variant = buttonVariant.Standard,
-				fillBehavior = fillBehavior.Fill,
+				icon = IconName.ArrowUpRightFromSquare,
+				size = InputSize.Medium,
+				variant = ButtonVariant.Standard,
+				fillBehavior = FillBehavior.Fill,
 				width = UDim.new(1, 0),
 				onActivated = p1.onViewInOverview,
-				testId = `{testId}.ViewInOverview`
+				testId = `{TestId}.ViewInOverview`
 			})
 		})
 	})

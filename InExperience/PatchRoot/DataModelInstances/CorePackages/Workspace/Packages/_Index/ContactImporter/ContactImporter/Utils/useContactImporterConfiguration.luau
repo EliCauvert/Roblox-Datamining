@@ -1,39 +1,38 @@
-﻿local parent = script.Parent.Parent
-local dependenciesModule = require(parent.dependencies)
-local parent_1 = parent.Parent
-local offPlatformFriendRequestsIXPModule = require(parent.Flags.OffPlatformFriendRequestsIXP)
-local useSelector = dependenciesModule.useSelector
-local useSignalState = require(parent_1.SignalsReact).useSignalState
-local getContactImporterParamsModule = require(script.Parent.getContactImporterParams)
-local useUiModeInfo = require(parent_1.RobloxAppHooks).useUiModeInfo
-local uiMode = require(parent_1.RobloxAppEnums).UiMode
-local fFlagContactImporterIXPCleanup = require(parent_1.SharedFlags).FFlagContactImporterIXPCleanup
-local fFlagUseSignalsForIsLocalUserSoothsayer = require(parent_1.SharedFlags).FFlagUseSignalsForIsLocalUserSoothsayer
-local var1 = if fFlagUseSignalsForIsLocalUserSoothsayer then require(parent_1.IsLocalUserSoothsayerStore).GetIsLocalUserSoothsayerStore else nil
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local OffPlatformFriendRequestsIXPModule = require(Parent.Flags.OffPlatformFriendRequestsIXP)
+local UseSelectorFunction = require(Parent.dependencies).useSelector
+local UseSignalStateFunction = require(Parent1.SignalsReact).useSignalState
+local GetContactImporterParamsModule = require(script.Parent.getContactImporterParams)
+local UseUiModeInfoFunction = require(Parent1.RobloxAppHooks).useUiModeInfo
+local UiMode = require(Parent1.RobloxAppEnums).UiMode
+local FFlagContactImporterIXPCleanup = require(Parent1.SharedFlags).FFlagContactImporterIXPCleanup
+local FFlagUseSignalsForIsLocalUserSoothsayer = require(Parent1.SharedFlags).FFlagUseSignalsForIsLocalUserSoothsayer
+local GetIsLocalUserSoothsayerStore = if FFlagUseSignalsForIsLocalUserSoothsayer then require(Parent1.IsLocalUserSoothsayerStore).GetIsLocalUserSoothsayerStore else nil
 
-return function(p1)
-	-- upvalues: fFlagUseSignalsForIsLocalUserSoothsayer (ref), useSignalState (ref), var1 (ref), useSelector (ref), getContactImporterParamsModule (ref), fFlagContactImporterIXPCleanup (ref), offPlatformFriendRequestsIXPModule (ref), useUiModeInfo (ref), uiMode (ref)
-	local var2, shouldShowContactImporterFeature
-	local var3 = useSelector(getContactImporterParamsModule)
-	local var4 = not (useUiModeInfo().uiMode == uiMode.TenFoot) and (if fFlagUseSignalsForIsLocalUserSoothsayer then useSignalState(var1(false).getIsLocalUserSoothsayer) else useSelector(function(p2)
+return function(p1) --[[ Line: 18 ]]
+	-- upvalues: FFlagUseSignalsForIsLocalUserSoothsayer (copy), UseSignalStateFunction (copy), GetIsLocalUserSoothsayerStore (copy), UseSelectorFunction (copy), GetContactImporterParamsModule (copy), FFlagContactImporterIXPCleanup (copy), OffPlatformFriendRequestsIXPModule (copy), UseUiModeInfoFunction (copy), UiMode (copy)
+	local UseSignalStateResult = if FFlagUseSignalsForIsLocalUserSoothsayer then UseSignalStateFunction(GetIsLocalUserSoothsayerStore(false).getIsLocalUserSoothsayer) else UseSelectorFunction(function(p2) --[[ Line: 21 ]]
 		return p2.IsLocalUserSoothsayer
-	end))
-	local var5 = if fFlagContactImporterIXPCleanup then nil elseif fFlagContactImporterIXPCleanup then nil else offPlatformFriendRequestsIXPModule.useOffPlatformFriendRequestsEnabled()
-	local _ = nil
-	local _ = nil
+	end)
+	local UseSelectorResult = UseSelectorFunction(GetContactImporterParamsModule)
+	local UseOffPlatformFriendRequestsEnabledResult = if FFlagContactImporterIXPCleanup then nil else OffPlatformFriendRequestsIXPModule.useOffPlatformFriendRequestsEnabled()
+	local UseOffPlatformFriendRequestsEnabledResult1 = if FFlagContactImporterIXPCleanup then nil else UseOffPlatformFriendRequestsEnabledResult
+	local ShouldShowContactImporterFeature = nil
+	local PolicyIsEnabled = nil
 	
-	if var4 then
-		var2 = true
-		shouldShowContactImporterFeature = true
+	if not (UseUiModeInfoFunction().uiMode == UiMode.TenFoot) and UseSignalStateResult then
+		PolicyIsEnabled = true
+		ShouldShowContactImporterFeature = true
 	else
-		var2 = if fFlagContactImporterIXPCleanup then p1.policyIsEnabled else var5 and p1.policyIsEnabled
-		shouldShowContactImporterFeature = var3.shouldShowContactImporterFeature
+		PolicyIsEnabled = if FFlagContactImporterIXPCleanup then p1.policyIsEnabled else UseOffPlatformFriendRequestsEnabledResult1 and p1.policyIsEnabled
+		ShouldShowContactImporterFeature = UseSelectorResult.shouldShowContactImporterFeature
 	end
-	local shouldShowContactImporterFeature_1 = var2 and shouldShowContactImporterFeature
+	local ShouldShowContactImporterFeature1: boolean = PolicyIsEnabled and ShouldShowContactImporterFeature
 	
 	return {
-		shouldFetchContactImporterData = var2 or false,
-		shouldShowContactImporter = shouldShowContactImporterFeature_1 or false,
-		shouldShowContactImporterModal = shouldShowContactImporterFeature_1 and var3.shouldShowContactImporterUpsellModal or false
+		shouldFetchContactImporterData = PolicyIsEnabled or false,
+		shouldShowContactImporter = ShouldShowContactImporterFeature1 or false,
+		shouldShowContactImporterModal = ShouldShowContactImporterFeature1 and UseSelectorResult.shouldShowContactImporterUpsellModal or false
 	}
 end

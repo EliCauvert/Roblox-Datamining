@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent._Workspace.DataHydration.DataHydration.UserProfile)
+﻿return (require(script.Parent.Parent._Workspace.DataHydration.DataHydration.UserProfile))

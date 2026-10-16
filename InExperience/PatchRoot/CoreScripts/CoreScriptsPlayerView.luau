@@ -1,25 +1,25 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local robloxReplicatedStorageService = game:GetService("RobloxReplicatedStorage")
-local playerViewService = game:GetService("PlayerViewService")
-local var1 = require(coreGuiService:WaitForChild("RobloxGui").Modules.Flags.GetFIntPlayerViewRemoteEventTimeout)()
-local requestDeviceCameraCFrame = robloxReplicatedStorageService:WaitForChild("RequestDeviceCameraCFrame", var1)
-local replicateDeviceCameraCFrame = robloxReplicatedStorageService:WaitForChild("ReplicateDeviceCameraCFrame", var1)
-local playerViewRemoteEventSupportEngineFeature = game:GetEngineFeature("PlayerViewRemoteEventSupport")
+﻿local RobloxReplicatedStorage = game:GetService("RobloxReplicatedStorage")
+local PlayerViewService = game:GetService("PlayerViewService")
+local Timeout = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.Flags.GetFIntPlayerViewRemoteEventTimeout)()
+local RequestDeviceCameraCFrame = RobloxReplicatedStorage:WaitForChild("RequestDeviceCameraCFrame", Timeout)
+local ReplicateDeviceCameraCFrame = RobloxReplicatedStorage:WaitForChild("ReplicateDeviceCameraCFrame", Timeout)
+local PlayerViewRemoteEventSupportEngineFeature = game:GetEngineFeature("PlayerViewRemoteEventSupport")
 
-if requestDeviceCameraCFrame and replicateDeviceCameraCFrame then
-	replicateDeviceCameraCFrame.OnClientEvent:Connect(function(p1, p2, p3)
-		-- upvalues: playerViewRemoteEventSupportEngineFeature (ref), playerViewService (ref)
-		if playerViewRemoteEventSupportEngineFeature then
-			playerViewService:UpdateDeviceCFrame(p1, p2, p3)
+if RequestDeviceCameraCFrame and ReplicateDeviceCameraCFrame then
+	ReplicateDeviceCameraCFrame.OnClientEvent:Connect(function(Player, p1, Timestamp) --[[ Line: 19 ]]
+		-- upvalues: PlayerViewRemoteEventSupportEngineFeature (copy), PlayerViewService (copy)
+		if PlayerViewRemoteEventSupportEngineFeature then
+			PlayerViewService:UpdateDeviceCFrame(Player, p1, Timestamp)
 		end
 	end)
-	requestDeviceCameraCFrame.OnClientEvent:Connect(function()
-		-- upvalues: playerViewRemoteEventSupportEngineFeature (ref), playerViewService (ref)
-		if playerViewRemoteEventSupportEngineFeature then
-			playerViewService:OnCameraCFrameReplicationRequest()
+	RequestDeviceCameraCFrame.OnClientEvent:Connect(function() --[[ Line: 24 ]]
+		-- upvalues: PlayerViewRemoteEventSupportEngineFeature (copy), PlayerViewService (copy)
+		if PlayerViewRemoteEventSupportEngineFeature then
+			PlayerViewService:OnCameraCFrameReplicationRequest()
 		end
 	end)
 	
 	return
+else
+	warn("PlayerViewService failed to initialize.")
 end
-warn("PlayerViewService failed to initialize.")

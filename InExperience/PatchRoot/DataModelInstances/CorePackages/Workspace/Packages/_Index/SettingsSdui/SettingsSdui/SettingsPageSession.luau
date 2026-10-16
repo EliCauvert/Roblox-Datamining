@@ -1,18 +1,18 @@
-﻿local httpService = game:GetService("HttpService")
-local var1 = ""
+﻿local HttpService = game:GetService("HttpService")
+local Guid = ""
 
 return {
-	Get = function(_)
-		-- upvalues: var1 (write), httpService (ref)
-		if var1 == "" then
-			var1 = httpService:GenerateGUID(false)
+	Get = function(_) --[[ Line: 7 ]]
+		-- upvalues: Guid (ref), HttpService (copy)
+		if Guid == "" then
+			Guid = HttpService:GenerateGUID(false)
 		end
-		return var1
+		return Guid
 	end,
-	Refresh = function(_)
-		-- upvalues: var1 (write), httpService (ref)
-		var1 = httpService:GenerateGUID(false)
+	Refresh = function(_) --[[ Line: 14 ]]
+		-- upvalues: Guid (ref), HttpService (copy)
+		Guid = HttpService:GenerateGUID(false)
 		
-		return var1
+		return Guid
 	end
 }

@@ -1,44 +1,43 @@
-﻿local parent = script.Parent.Parent.Parent
-local getMockNameModule = require(script.Parent.getMockName)
+﻿local GetMockNameModule = require(script.Parent.getMockName)
 local _ = require(script.Parent.Parent.Types.ContactTypes)
-local dashModule = require(parent.Dash)
-local t = {}
+local DashModule = require(script.Parent.Parent.Parent.Dash)
+local DeviceContactModule = {}
 
-function t.new(p1)
-	-- upvalues: t (ref)
-	t.__index = t
-	local t_1 = {
-		id = p1.id,
-		phoneNumbers = p1.phoneNumbers,
-		contactName = p1.contactName
+function DeviceContactModule.new(JoinResult) --[[ Line: 9 ]]
+	-- upvalues: DeviceContactModule (copy)
+	DeviceContactModule.__index = DeviceContactModule
+	local config = {
+		id = JoinResult.id,
+		phoneNumbers = JoinResult.phoneNumbers,
+		contactName = JoinResult.contactName
 	}
-	setmetatable(t_1, t)
+	setmetatable(config, DeviceContactModule)
 	
-	return t_1
+	return config
 end
 
-function t.mock(p1)
-	-- upvalues: getMockNameModule (ref), dashModule (ref), t (ref)
-	local var1 = getMockNameModule()
+function DeviceContactModule.mock(p1) --[[ Line: 23 ]]
+	-- upvalues: GetMockNameModule (copy), DashModule (copy), DeviceContactModule (copy)
+	local MockNameModule = GetMockNameModule()
 	
-	return t.new(dashModule.join({
-		id = var1,
-		contactName = var1,
+	return DeviceContactModule.new((DashModule.join({
+		id = MockNameModule,
+		contactName = MockNameModule,
 		phoneNumbers = { "123456" }
-	}, p1))
+	}, p1)))
 end
 
-function t.formatFromDevice(p1)
-	-- upvalues: t (ref)
-	return t.new({
-		id = t.generateId(p1),
+function DeviceContactModule.formatFromDevice(p1) --[[ Line: 39 ]]
+	-- upvalues: DeviceContactModule (copy)
+	return DeviceContactModule.new({
+		id = DeviceContactModule.generateId(p1),
 		contactName = (p1.firstname or "") .. " " .. (p1.lastname or ""),
 		phoneNumbers = p1.phonenumber
 	})
 end
 
-function t.generateId(p1)
+function DeviceContactModule.generateId(p1): string --[[ Line: 49 ]]
 	return (p1.firstname or "") .. (p1.lastname or "") .. tostring(p1.phonenumber[1])
 end
 
-return t
+return DeviceContactModule

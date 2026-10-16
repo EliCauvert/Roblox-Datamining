@@ -1,10 +1,10 @@
-﻿local reactModule = require(script:FindFirstAncestor("ProfileShareLinks").Parent.React)
-local initializeProfileShareLinksAnalyticsModule = require(script.Parent.initializeProfileShareLinksAnalytics)
+﻿local ReactModule = require(script:FindFirstAncestor("ProfileShareLinks").Parent.React)
+local InitializeProfileShareLinksAnalyticsModule = require(script.Parent.initializeProfileShareLinksAnalytics)
 
-return function()
-	-- upvalues: reactModule (ref), initializeProfileShareLinksAnalyticsModule (ref)
-	return reactModule.useMemo(function()
-		-- upvalues: initializeProfileShareLinksAnalyticsModule (copy)
-		return initializeProfileShareLinksAnalyticsModule()
+return function() --[[ Line: 7 ]]
+	-- upvalues: ReactModule (copy), InitializeProfileShareLinksAnalyticsModule (copy)
+	return ReactModule.useMemo(function() --[[ Line: 8 ]]
+		-- upvalues: InitializeProfileShareLinksAnalyticsModule (upval)
+		return InitializeProfileShareLinksAnalyticsModule()
 	end, {})
 end

@@ -1,276 +1,277 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local coreGuiService = game:GetService("CoreGui")
-local playersService = game:GetService("Players")
-local guiService = game:GetService("GuiService")
-local roactModule = require(corePackagesService.Packages.Roact)
-local reactModule = require(corePackagesService.Packages.React)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local tModule = require(corePackagesService.Packages.t)
-local otterModule = require(corePackagesService.Packages.Otter)
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local parent = script.Parent.Parent
-local withLayoutValues = require(parent.Connection.LayoutValues).WithLayoutValues
-local dropDownButtonModule = require(script.Parent.DropDownButton)
-local dropDownPlayerHeaderModule = require(script.Parent.DropDownPlayerHeader)
-local friendDropDownButtonModule = require(script.Parent.FriendDropDownButton)
-local localPlayer = playersService.LocalPlayer
-local robloxGui = coreGuiService:WaitForChild("RobloxGui")
-local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
-local onBlockButtonActivatedModule = require(robloxGui.Modules.Settings.onBlockButtonActivated)
-local images = UIBloxModule.App.ImageSet.Images
-local isNewInGameMenuEnabledModule = require(robloxGui.Modules.isNewInGameMenuEnabled)
-local parent_1 = parent.Parent
-local closePlayerDropDownModule = require(parent_1.Actions.ClosePlayerDropDown)
-local fFlagPlayerListReduceRerendersModule = require(parent_1.Flags.FFlagPlayerListReduceRerenders)
-local unblockPlayerModule = require(parent_1.Thunks.UnblockPlayer)
-local requestFriendshipModule = require(parent_1.Thunks.RequestFriendship)
-local setPlayerIsBlockedModule = require(parent_1.Actions.SetPlayerIsBlocked)
-local playerDropDown = roactModule.PureComponent:extend("PlayerDropDown")
-local fFlagStandardizeSafetyIcon = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagStandardizeSafetyIcon
-local fFlagAllowDisplayingFoundationIconsForDropdownModule = require(parent_1.Flags.FFlagAllowDisplayingFoundationIconsForDropdown)
-playerDropDown.validateProps = tModule.strictInterface({
-	positionY = tModule.number,
-	minPositionBoundY = tModule.number,
-	maxPositionBoundY = tModule.number,
-	contentsVisible = tModule.boolean,
-	selectedPlayer = tModule.optional(tModule.instanceIsA("Player")),
-	isVisible = tModule.boolean,
-	playerRelationship = tModule.optional(tModule.strictInterface({
-		isBlocked = tModule.boolean,
-		friendStatus = tModule.enum(Enum.FriendStatus),
-		isFollowing = tModule.boolean,
-		isFollower = tModule.boolean
+﻿local CorePackages = game:GetService("CorePackages")
+local GuiService = game:GetService("GuiService")
+local RoactModule = require(CorePackages.Packages.Roact)
+local ReactModule = require(CorePackages.Packages.React)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local TModule = require(CorePackages.Packages.t)
+local OtterModule = require(CorePackages.Packages.Otter)
+local Parent = script.Parent.Parent
+local WithLayoutValuesFunction = require(Parent.Connection.LayoutValues).WithLayoutValues
+local DropDownButtonModule = require(script.Parent.DropDownButton)
+local DropDownPlayerHeaderModule = require(script.Parent.DropDownPlayerHeader)
+local FriendDropDownButtonModule = require(script.Parent.FriendDropDownButton)
+local LocalPlayer = game:GetService("Players").LocalPlayer
+local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
+local OnBlockButtonActivatedModule = require(RobloxGui.Modules.Settings.onBlockButtonActivated)
+local Images = require(CorePackages.Packages.UIBlox).App.ImageSet.Images
+local IsNewInGameMenuEnabledModule = require(RobloxGui.Modules.isNewInGameMenuEnabled)
+local Parent1 = Parent.Parent
+local ClosePlayerDropDownModule = require(Parent1.Actions.ClosePlayerDropDown)
+local FFlagPlayerListReduceRerendersModule = require(Parent1.Flags.FFlagPlayerListReduceRerenders)
+local UnblockPlayerModule = require(Parent1.Thunks.UnblockPlayer)
+local RequestFriendshipModule = require(Parent1.Thunks.RequestFriendship)
+local SetPlayerIsBlockedModule = require(Parent1.Actions.SetPlayerIsBlocked)
+local PlayerDropDown = RoactModule.PureComponent:extend("PlayerDropDown")
+local FFlagStandardizeSafetyIcon = require(CorePackages.Workspace.Packages.SharedFlags).FFlagStandardizeSafetyIcon
+local FFlagAllowDisplayingFoundationIconsForDropdownModule = require(Parent1.Flags.FFlagAllowDisplayingFoundationIconsForDropdown)
+PlayerDropDown.validateProps = TModule.strictInterface({
+	positionY = TModule.number,
+	minPositionBoundY = TModule.number,
+	maxPositionBoundY = TModule.number,
+	contentsVisible = TModule.boolean,
+	selectedPlayer = TModule.optional(TModule.instanceIsA("Player")),
+	isVisible = TModule.boolean,
+	playerRelationship = TModule.optional(TModule.strictInterface({
+		isBlocked = TModule.boolean,
+		friendStatus = TModule.enum(Enum.FriendStatus),
+		isFollowing = TModule.boolean,
+		isFollower = TModule.boolean
 	})),
-	inspectMenuEnabled = tModule.boolean,
-	isTenFootInterface = tModule.boolean,
-	subjectToChinaPolicies = tModule.boolean,
-	closeDropDown = tModule.callback,
-	blockPlayerSuccess = tModule.callback,
-	unblockPlayer = tModule.callback,
-	requestFriendship = tModule.callback
+	inspectMenuEnabled = TModule.boolean,
+	isTenFootInterface = TModule.boolean,
+	subjectToChinaPolicies = TModule.boolean,
+	closeDropDown = TModule.callback,
+	blockPlayerSuccess = TModule.callback,
+	unblockPlayer = TModule.callback,
+	requestFriendship = TModule.callback
 })
 
-function playerDropDown.init(p1)
-	-- upvalues: roactModule (ref), otterModule (ref)
-	p1.innerFrameRef = roactModule.createRef()
+function PlayerDropDown.init(p1) --[[ Line: 73 ]]
+	-- upvalues: RoactModule (copy), OtterModule (copy)
+	p1.innerFrameRef = RoactModule.createRef()
 	p1.motorOptions = { dampingRatio = 1, frequency = 4 }
-	p1.motor = otterModule.createSingleMotor(1)
-	p1.motor:onStep(function(p2)
-		-- upvalues: p1 (ref)
-		local current = p1.innerFrameRef.current
+	p1.motor = OtterModule.createSingleMotor(1)
+	p1.motor:onStep(function(XScale) --[[ Line: 83 ]]
+		-- upvalues: p1 (copy)
+		local Current = p1.innerFrameRef.current
 		
-		if current then
-			if p2 == 1 then
-				current.Visible = false
+		if Current then
+			if XScale == 1 then
+				Current.Visible = false
 			else
-				current.Visible = true
+				Current.Visible = true
 			end
-			current.Position = UDim2.new(p2, 0, 0, 0)
+			Current.Position = UDim2.new(XScale, 0, 0, 0)
 		end
 	end)
 	p1.dropDownPosition = 0
 end
 
-function playerDropDown.createFriendButton(p1, p2)
-	-- upvalues: roactModule (ref), friendDropDownButtonModule (ref)
-	return roactModule.createElement(friendDropDownButtonModule, {
+function PlayerDropDown.createFriendButton(p1, PlayerRelationship) --[[ Line: 99 ]]
+	-- upvalues: RoactModule (copy), FriendDropDownButtonModule (copy)
+	return RoactModule.createElement(FriendDropDownButtonModule, {
 		layoutOrder = 1,
 		contentVisible = true,
-		playerRelationship = p2,
+		playerRelationship = PlayerRelationship,
 		selectedPlayer = p1.props.selectedPlayer,
 		dropDownOpen = p1.props.isVisible,
 		requestFriendship = p1.props.requestFriendship
 	})
 end
 
-function playerDropDown.createBlockButton(p1, p2)
-	-- upvalues: robloxTranslatorModule (ref), images (ref), roactModule (ref), dropDownButtonModule (ref), onBlockButtonActivatedModule (ref)
-	local selectedPlayer = p1.props.selectedPlayer
+function PlayerDropDown.createBlockButton(p1, PlayerRelationship) --[[ Line: 111 ]]
+	-- upvalues: RobloxTranslatorModule (copy), Images (copy), RoactModule (copy), DropDownButtonModule (copy), OnBlockButtonActivatedModule (copy)
+	local SelectedPlayer = p1.props.selectedPlayer
+	local InGamePlayerDropDownBlock = RobloxTranslatorModule:FormatByKey("InGame.PlayerDropDown.Block")
+	local InGamePlayerDropDownUnBlock = RobloxTranslatorModule:FormatByKey("InGame.PlayerDropDown.UnBlock")
 	
-	return roactModule.createElement(dropDownButtonModule, {
+	return RoactModule.createElement(DropDownButtonModule, {
 		layoutOrder = 4,
 		lastButton = false,
 		forceShowOptions = false,
-		text = if p2.isBlocked then robloxTranslatorModule:FormatByKey("InGame.PlayerDropDown.UnBlock") else robloxTranslatorModule:FormatByKey("InGame.PlayerDropDown.Block"),
-		icon = images["icons/actions/block"],
-		onActivated = function()
-			-- upvalues: p2 (ref), p1 (ref), selectedPlayer (ref), onBlockButtonActivatedModule (copy)
-			if p2.isBlocked then
-				p1.props.unblockPlayer(selectedPlayer)
+		text = PlayerRelationship.isBlocked and InGamePlayerDropDownUnBlock or InGamePlayerDropDownBlock,
+		icon = Images["icons/actions/block"],
+		onActivated = function() --[[ Line: 123 ]]
+			-- upvalues: PlayerRelationship (copy), p1 (copy), SelectedPlayer (copy), OnBlockButtonActivatedModule (upval)
+			if PlayerRelationship.isBlocked then
+				p1.props.unblockPlayer(SelectedPlayer)
 				
 				return
+			else
+				OnBlockButtonActivatedModule(SelectedPlayer, nil, p1.__componentName, {
+					onBlockingSuccess = function() --[[ Line: 128 ]]
+						-- upvalues: p1 (upval), SelectedPlayer (upval)
+						p1.props.blockPlayerSuccess(SelectedPlayer)
+					end
+				})
 			end
-			onBlockButtonActivatedModule(selectedPlayer, nil, p1.__componentName, {
-				onBlockingSuccess = function()
-					-- upvalues: p1 (copy), selectedPlayer (copy)
-					p1.props.blockPlayerSuccess(selectedPlayer)
-				end
-			})
 		end
 	})
 end
 
-function playerDropDown.createReportButton(p1)
-	-- upvalues: fFlagStandardizeSafetyIcon (ref), fFlagAllowDisplayingFoundationIconsForDropdownModule (ref), images (ref), roactModule (ref), dropDownButtonModule (ref), robloxTranslatorModule (ref), isNewInGameMenuEnabledModule (ref), robloxGui (ref)
-	local selectedPlayer = p1.props.selectedPlayer
+function PlayerDropDown.createReportButton(p1) --[[ Line: 137 ]]
+	-- upvalues: FFlagStandardizeSafetyIcon (copy), FFlagAllowDisplayingFoundationIconsForDropdownModule (copy), Images (copy), RoactModule (copy), DropDownButtonModule (copy), RobloxTranslatorModule (copy), IsNewInGameMenuEnabledModule (copy), RobloxGui (copy)
+	local SelectedPlayer = p1.props.selectedPlayer
 	
-	return roactModule.createElement(dropDownButtonModule, {
+	return RoactModule.createElement(DropDownButtonModule, {
 		layoutOrder = 5,
 		lastButton = true,
 		forceShowOptions = false,
-		text = robloxTranslatorModule:FormatByKey("InGame.PlayerDropDown.Report"),
-		icon = if fFlagStandardizeSafetyIcon and fFlagAllowDisplayingFoundationIconsForDropdownModule then "Flag" else images["icons/actions/feedback"],
-		onActivated = function()
-			-- upvalues: isNewInGameMenuEnabledModule (copy), robloxGui (copy), selectedPlayer (ref), p1 (ref)
-			if isNewInGameMenuEnabledModule() then
-				require(robloxGui.Modules.InGameMenuInit).openReportDialog(selectedPlayer, p1.__componentName)
+		text = RobloxTranslatorModule:FormatByKey("InGame.PlayerDropDown.Report"),
+		icon = if FFlagStandardizeSafetyIcon and FFlagAllowDisplayingFoundationIconsForDropdownModule then "Flag" else Images["icons/actions/feedback"],
+		onActivated = function() --[[ Line: 150 ]]
+			-- upvalues: IsNewInGameMenuEnabledModule (upval), RobloxGui (upval), SelectedPlayer (copy), p1 (copy)
+			if IsNewInGameMenuEnabledModule() then
+				require(RobloxGui.Modules.InGameMenuInit).openReportDialog(SelectedPlayer, p1.__componentName)
 				
 				return
+			else
+				require(RobloxGui.Modules.Settings.Pages.ReportAbuseMenuContainerPage):ReportPlayer(SelectedPlayer, p1.__componentName)
+				p1.props.closeDropDown()
 			end
-			require(robloxGui.Modules.Settings.Pages.ReportAbuseMenuContainerPage):ReportPlayer(selectedPlayer, p1.__componentName)
-			p1.props.closeDropDown()
 		end
 	})
 end
 
-function playerDropDown.createInspectButton(p1)
-	-- upvalues: images (ref), roactModule (ref), dropDownButtonModule (ref), robloxTranslatorModule (ref), localPlayer (ref), guiService (ref)
-	local selectedPlayer = p1.props.selectedPlayer
+function PlayerDropDown.createInspectButton(p1) --[[ Line: 164 ]]
+	-- upvalues: Images (copy), RoactModule (copy), DropDownButtonModule (copy), RobloxTranslatorModule (copy), LocalPlayer (copy), GuiService (copy)
+	local SelectedPlayer = p1.props.selectedPlayer
 	
-	return roactModule.createElement(dropDownButtonModule, {
+	return RoactModule.createElement(DropDownButtonModule, {
 		layoutOrder = 3,
 		forceShowOptions = false,
-		text = robloxTranslatorModule:FormatByKey("InGame.PlayerDropDown.Examine"),
-		icon = images["icons/actions/zoomIn"],
-		lastButton = selectedPlayer == localPlayer,
-		onActivated = function()
-			-- upvalues: guiService (copy), selectedPlayer (ref), p1 (ref)
-			guiService:InspectPlayerFromUserIdWithCtx(selectedPlayer.UserId, "leaderBoard")
+		text = RobloxTranslatorModule:FormatByKey("InGame.PlayerDropDown.Examine"),
+		icon = Images["icons/actions/zoomIn"],
+		lastButton = SelectedPlayer == LocalPlayer,
+		onActivated = function() --[[ Line: 174 ]]
+			-- upvalues: GuiService (upval), SelectedPlayer (copy), p1 (copy)
+			GuiService:InspectPlayerFromUserIdWithCtx(SelectedPlayer.UserId, "leaderBoard")
 			p1.props.closeDropDown()
 		end
 	})
 end
 
-function playerDropDown.render(p1)
-	-- upvalues: withLayoutValues (ref), roactModule (ref), dropDownPlayerHeaderModule (ref), localPlayer (ref)
-	return withLayoutValues(function(p2)
-		-- upvalues: p1 (ref), roactModule (copy), dropDownPlayerHeaderModule (copy), localPlayer (copy)
-		local selectedPlayer = p1.props.selectedPlayer
+function PlayerDropDown.render(p1) --[[ Line: 181 ]]
+	-- upvalues: WithLayoutValuesFunction (copy), RoactModule (copy), DropDownPlayerHeaderModule (copy), LocalPlayer (copy)
+	return WithLayoutValuesFunction(function(p2) --[[ Line: 182 ]]
+		-- upvalues: p1 (copy), RoactModule (upval), DropDownPlayerHeaderModule (upval), LocalPlayer (upval)
+		local SelectedPlayer = p1.props.selectedPlayer
 		
-		if not selectedPlayer or p1.props.isTenFootInterface then
+		if not SelectedPlayer or p1.props.isTenFootInterface then
 			return nil
 		end
-		local t = {
-			UIListLayout = roactModule.createElement("UIListLayout", {
+		local config = {
+			UIListLayout = RoactModule.createElement("UIListLayout", {
 				Padding = UDim.new(0, p2.DropDownButtonPadding),
 				SortOrder = Enum.SortOrder.LayoutOrder
 			}),
-			PlayerHeader = roactModule.createElement(dropDownPlayerHeaderModule, { player = p1.props.selectedPlayer })
+			PlayerHeader = RoactModule.createElement(DropDownPlayerHeaderModule, { player = p1.props.selectedPlayer })
 		}
-		local var1 = p2.DropDownButtonPadding + p2.DropDownHeaderSizeY
-		local playerRelationship = p1.props.playerRelationship
+		local NewDropDownButtonPadding = p2.DropDownButtonPadding + p2.DropDownHeaderSizeY
+		local PlayerRelationship = p1.props.playerRelationship
 		
-		if selectedPlayer ~= localPlayer then
-			if not playerRelationship.isBlocked then
-				t.FriendButton = p1:createFriendButton(playerRelationship)
-				var1 = var1 + p2.DropDownButtonPadding + p2.DropDownButtonSizeY
+		if SelectedPlayer ~= LocalPlayer then
+			if not PlayerRelationship.isBlocked then
+				config.FriendButton = p1:createFriendButton(PlayerRelationship)
+				NewDropDownButtonPadding = NewDropDownButtonPadding + p2.DropDownButtonPadding + p2.DropDownButtonSizeY
 			end
-			t.BlockButton = p1:createBlockButton(playerRelationship)
-			var1 = var1 + p2.DropDownButtonPadding + p2.DropDownButtonSizeY
-			t.ReportButton = p1:createReportButton()
-			var1 = var1 + p2.DropDownButtonPadding + p2.DropDownButtonSizeY
+			config.BlockButton = p1:createBlockButton(PlayerRelationship)
+			local NewNewDropDownButtonPadding = NewDropDownButtonPadding + p2.DropDownButtonPadding + p2.DropDownButtonSizeY
+			config.ReportButton = p1:createReportButton()
+			NewDropDownButtonPadding = NewNewDropDownButtonPadding + p2.DropDownButtonPadding + p2.DropDownButtonSizeY
 		end
 		if p1.props.inspectMenuEnabled then
-			t.InspectButton = p1:createInspectButton()
-			var1 = var1 + p2.DropDownButtonPadding + p2.DropDownButtonSizeY
+			config.InspectButton = p1:createInspectButton()
+			NewDropDownButtonPadding = NewDropDownButtonPadding + p2.DropDownButtonPadding + p2.DropDownButtonSizeY
 		end
-		var1 -= p2.DropDownButtonPadding
-		local var2 = p1.dropDownPosition + (p2.DropDownHeaderBackgroundSize - p2.DropDownHeaderSizeY)
+		local YOffset = NewDropDownButtonPadding - p2.DropDownButtonPadding
+		local NewDropDownPosition = p1.dropDownPosition + (p2.DropDownHeaderBackgroundSize - p2.DropDownHeaderSizeY)
 		
-		if p1.props.maxPositionBoundY < var2 + var1 then
-			var2 -= var2 + var1 - p1.props.maxPositionBoundY
-		elseif var2 < p1.props.minPositionBoundY then
-			var2 += p1.props.minPositionBoundY - var2
+		if p1.props.maxPositionBoundY < NewDropDownPosition + YOffset then
+			NewDropDownPosition -= NewDropDownPosition + YOffset - p1.props.maxPositionBoundY
+		elseif NewDropDownPosition < p1.props.minPositionBoundY then
+			NewDropDownPosition += p1.props.minPositionBoundY - NewDropDownPosition
 		end
-		return roactModule.createElement("Frame", {
+		return RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			ClipsDescendants = true,
 			LayoutOrder = p1.props.layoutOrder,
 			AnchorPoint = Vector2.new(1, 0),
-			Position = UDim2.new(0, 0, 0, var2),
-			Size = UDim2.new(0, p2.PlayerDropDownSizeX + p2.PlayerDropDownOffset, 0, var1)
+			Position = UDim2.new(0, 0, 0, NewDropDownPosition),
+			Size = UDim2.new(0, p2.PlayerDropDownSizeX + p2.PlayerDropDownOffset, 0, YOffset)
 		}, {
-			InnerFrame = roactModule.createElement("Frame", {
+			InnerFrame = RoactModule.createElement("Frame", {
 				Size = UDim2.new(1, -p2.PlayerDropDownOffset, 1, 0),
 				BackgroundTransparency = 1,
 				ClipsDescendants = true,
-				[roactModule.Ref] = p1.innerFrameRef
-			}, t)
+				[RoactModule.Ref] = p1.innerFrameRef
+			}, config)
 		})
 	end)
 end
 
-function playerDropDown.getDropDownPosition(p1)
+function PlayerDropDown.getDropDownPosition(p1): number --[[ Line: 256 ]]
 	return if p1.props.isVisible and p1.props.contentsVisible then 0 else 1
 end
 
-function playerDropDown.didMount(p1)
-	-- upvalues: otterModule (ref)
-	local dropDownPosition = p1:getDropDownPosition()
+function PlayerDropDown.didMount(p1) --[[ Line: 263 ]]
+	-- upvalues: OtterModule (copy)
+	local DropDownPosition = p1:getDropDownPosition()
 	p1.motor:start()
-	p1.motor:setGoal(otterModule.spring(dropDownPosition, p1.motorOptions))
+	p1.motor:setGoal(OtterModule.spring(DropDownPosition, p1.motorOptions))
 end
 
-function playerDropDown.willUpdate(p1, p2, _)
+function PlayerDropDown.willUpdate(p1, p2, _) --[[ Line: 269 ]]
 	p1.dropDownPosition = p2.positionY
 end
 
-function playerDropDown.didUpdate(p1, p2, _)
-	-- upvalues: otterModule (ref)
+function PlayerDropDown.didUpdate(p1, p2, _) --[[ Line: 273 ]]
+	-- upvalues: OtterModule (copy)
 	if p2.selectedPlayer ~= p1.props.selectedPlayer then
-		p1.motor:setGoal(otterModule.instant(1))
+		p1.motor:setGoal(OtterModule.instant(1))
 		p1.motor:step(0)
 	end
-	p1.motor:setGoal(otterModule.spring(p1:getDropDownPosition(), p1.motorOptions))
+	p1.motor:setGoal(OtterModule.spring(p1:getDropDownPosition(), p1.motorOptions))
 end
 
-function playerDropDown.willUnmount(p1)
+function PlayerDropDown.willUnmount(p1) --[[ Line: 283 ]]
 	p1.motor:destroy()
 end
 
-local function mapStateToProps(p1)
-	local selectedPlayer = p1.playerDropDown.selectedPlayer
+local function mapStateToProps(p1) --[[ Line: 287 ]]
+	local SelectedPlayer = p1.playerDropDown.selectedPlayer
 	
 	return {
-		selectedPlayer = selectedPlayer,
+		selectedPlayer = SelectedPlayer,
 		isVisible = p1.playerDropDown.isVisible and p1.displayOptions.isVisible,
-		playerRelationship = selectedPlayer and p1.playerRelationship[selectedPlayer.UserId],
+		playerRelationship = SelectedPlayer and p1.playerRelationship[SelectedPlayer.UserId],
 		inspectMenuEnabled = p1.displayOptions.inspectMenuEnabled,
 		isTenFootInterface = p1.displayOptions.isTenFootInterface,
 		subjectToChinaPolicies = p1.displayOptions.subjectToChinaPolicies
 	}
 end
 
-local function mapDispatchToProps(p1)
-	-- upvalues: closePlayerDropDownModule (ref), setPlayerIsBlockedModule (ref), unblockPlayerModule (ref), requestFriendshipModule (ref)
+local function mapDispatchToProps(Callback) --[[ Line: 301 ]]
+	-- upvalues: ClosePlayerDropDownModule (copy), SetPlayerIsBlockedModule (copy), UnblockPlayerModule (copy), RequestFriendshipModule (copy)
 	return {
-		closeDropDown = function()
-			-- upvalues: p1 (ref), closePlayerDropDownModule (copy)
-			return p1(closePlayerDropDownModule())
+		closeDropDown = function() --[[ Line: 303 ]]
+			-- upvalues: Callback (copy), ClosePlayerDropDownModule (upval)
+			return Callback(ClosePlayerDropDownModule())
 		end,
-		blockPlayerSuccess = function(p2)
-			-- upvalues: p1 (ref), setPlayerIsBlockedModule (copy)
-			p1(setPlayerIsBlockedModule(p2, true))
+		blockPlayerSuccess = function(p1) --[[ Line: 307 ]]
+			-- upvalues: Callback (copy), SetPlayerIsBlockedModule (upval)
+			Callback(SetPlayerIsBlockedModule(p1, true))
 		end,
-		unblockPlayer = function(p2)
-			-- upvalues: p1 (ref), unblockPlayerModule (copy)
-			return p1(unblockPlayerModule(p2))
+		unblockPlayer = function(p1) --[[ Line: 311 ]]
+			-- upvalues: Callback (copy), UnblockPlayerModule (upval)
+			return Callback(UnblockPlayerModule(p1))
 		end,
-		requestFriendship = function(p2, _)
-			-- upvalues: p1 (ref), requestFriendshipModule (copy)
-			return p1(requestFriendshipModule(p2))
+		requestFriendship = function(p1, _) --[[ Line: 315 ]]
+			-- upvalues: Callback (copy), RequestFriendshipModule (upval)
+			return Callback(RequestFriendshipModule(p1))
 		end
 	}
 end
 
-return if fFlagPlayerListReduceRerendersModule then reactModule.memo(roactRoduxModule.connect(mapStateToProps, mapDispatchToProps)(playerDropDown)) else roactRoduxModule.UNSTABLE_connect2(mapStateToProps, mapDispatchToProps)(playerDropDown)
+return if FFlagPlayerListReduceRerendersModule then ReactModule.memo(RoactRoduxModule.connect(mapStateToProps, mapDispatchToProps)(PlayerDropDown)) else RoactRoduxModule.UNSTABLE_connect2(mapStateToProps, mapDispatchToProps)(PlayerDropDown)

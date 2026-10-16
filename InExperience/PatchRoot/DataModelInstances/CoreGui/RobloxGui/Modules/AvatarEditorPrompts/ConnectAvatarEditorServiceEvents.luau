@@ -1,54 +1,57 @@
-﻿local avatarEditorService = game:GetService("AvatarEditorService")
-local corePackagesService = game:GetService("CorePackages")
-local parent = script.Parent
-local openPromptModule = require(parent.Actions.OpenPrompt)
-local promptTypeModule = require(parent.PromptType)
-local openSetFavoritePromptModule = require(parent.Thunks.OpenSetFavoritePrompt)
-local openSaveAvatarPromptModule = require(parent.Thunks.OpenSaveAvatarPrompt)
-local openDeleteOutfitPromptModule = require(parent.Thunks.OpenDeleteOutfitPrompt)
-local openRenameOutfitPromptModule = require(parent.Thunks.OpenRenameOutfitPrompt)
-local openUpdateOutfitPromptModule = require(parent.Thunks.OpenUpdateOutfitPrompt)
-local avatarExperienceCommonModule = require(corePackagesService.Workspace.Packages.AvatarExperienceCommon)
+﻿local AvatarEditorService = game:GetService("AvatarEditorService")
+local Parent = script.Parent
+local OpenPromptModule = require(Parent.Actions.OpenPrompt)
+local PromptTypeModule = require(Parent.PromptType)
+local OpenSetFavoritePromptModule = require(Parent.Thunks.OpenSetFavoritePrompt)
+local OpenSaveAvatarPromptModule = require(Parent.Thunks.OpenSaveAvatarPrompt)
+local OpenDeleteOutfitPromptModule = require(Parent.Thunks.OpenDeleteOutfitPrompt)
+local OpenRenameOutfitPromptModule = require(Parent.Thunks.OpenRenameOutfitPrompt)
+local OpenUpdateOutfitPromptModule = require(Parent.Thunks.OpenUpdateOutfitPrompt)
+local AvatarExperienceCommonModule = require(game:GetService("CorePackages").Workspace.Packages.AvatarExperienceCommon)
 
-return function(p1)
-	-- upvalues: avatarEditorService (ref), avatarExperienceCommonModule (ref), openPromptModule (ref), promptTypeModule (ref), openSaveAvatarPromptModule (ref), openSetFavoritePromptModule (ref), openDeleteOutfitPromptModule (ref), openRenameOutfitPromptModule (ref), openUpdateOutfitPromptModule (ref)
-	local t = {}
-	table.insert(t, avatarEditorService.OpenPromptSaveAvatar:Connect(function(p2, p3)
-		-- upvalues: avatarExperienceCommonModule (copy), p1 (ref), openPromptModule (copy), promptTypeModule (copy), openSaveAvatarPromptModule (copy)
-		avatarExperienceCommonModule.Stores.getTimeoutStatusStore().fetchStatusAsync():andThen(function(p4)
-			-- upvalues: p1 (copy), openPromptModule (copy), promptTypeModule (copy), openSaveAvatarPromptModule (copy), p2 (ref), p3 (ref)
-			if p4.isTimedOut then
-				p1:dispatch(openPromptModule(promptTypeModule.SaveAvatarTimeout, {}))
+return function(p1) --[[ Line: 17 | Named "ConnectAvatarEditorServiceEvents" ]]
+	-- upvalues: AvatarEditorService (copy), AvatarExperienceCommonModule (copy), OpenPromptModule (copy), PromptTypeModule (copy), OpenSaveAvatarPromptModule (copy), OpenSetFavoritePromptModule (copy), OpenDeleteOutfitPromptModule (copy), OpenRenameOutfitPromptModule (copy), OpenUpdateOutfitPromptModule (copy)
+	local List = {}
+	table.insert(List, AvatarEditorService.OpenPromptSaveAvatar:Connect(function(HumanoidDescription, RigType) --[[ Line: 22 ]]
+		-- upvalues: AvatarExperienceCommonModule (upval), p1 (copy), OpenPromptModule (upval), PromptTypeModule (upval), OpenSaveAvatarPromptModule (upval)
+		AvatarExperienceCommonModule.Stores.getTimeoutStatusStore().fetchStatusAsync():andThen(function(Result) --[[ Line: 24 ]]
+			-- upvalues: p1 (upval), OpenPromptModule (upval), PromptTypeModule (upval), OpenSaveAvatarPromptModule (upval), HumanoidDescription (copy), RigType (copy)
+			if Result.isTimedOut then
+				p1:dispatch(OpenPromptModule(PromptTypeModule.SaveAvatarTimeout, {}))
 				
 				return
+			else
+				p1:dispatch(OpenSaveAvatarPromptModule(HumanoidDescription, RigType))
 			end
-			p1:dispatch(openSaveAvatarPromptModule(p2, p3))
 		end)
 	end))
-	table.insert(t, avatarEditorService.OpenAllowInventoryReadAccess:Connect(function()
-		-- upvalues: p1 (ref), openPromptModule (copy), promptTypeModule (copy)
-		p1:dispatch(openPromptModule(promptTypeModule.AllowInventoryReadAccess, {}))
+	table.insert(List, AvatarEditorService.OpenAllowInventoryReadAccess:Connect(function() --[[ Line: 36 ]]
+		-- upvalues: p1 (copy), OpenPromptModule (upval), PromptTypeModule (upval)
+		p1:dispatch(OpenPromptModule(PromptTypeModule.AllowInventoryReadAccess, {}))
 	end))
-	table.insert(t, avatarEditorService.OpenPromptCreateOufit:Connect(function(p2, p3)
-		-- upvalues: p1 (ref), openPromptModule (copy), promptTypeModule (copy)
-		p1:dispatch(openPromptModule(promptTypeModule.CreateOutfit, { humanoidDescription = p2, rigType = p3 }))
+	table.insert(List, AvatarEditorService.OpenPromptCreateOufit:Connect(function(HumanoidDescription, RigType) --[[ Line: 43 ]]
+		-- upvalues: p1 (copy), OpenPromptModule (upval), PromptTypeModule (upval)
+		p1:dispatch(OpenPromptModule(PromptTypeModule.CreateOutfit, {
+			humanoidDescription = HumanoidDescription,
+			rigType = RigType
+		}))
 	end))
-	table.insert(t, avatarEditorService.OpenPromptSetFavorite:Connect(function(p2, p3, p4)
-		-- upvalues: p1 (ref), openSetFavoritePromptModule (copy)
-		p1:dispatch(openSetFavoritePromptModule(p2, p3, p4))
+	table.insert(List, AvatarEditorService.OpenPromptSetFavorite:Connect(function(ItemId, ItemType, ShouldFavorite) --[[ Line: 53 ]]
+		-- upvalues: p1 (copy), OpenSetFavoritePromptModule (upval)
+		p1:dispatch(OpenSetFavoritePromptModule(ItemId, ItemType, ShouldFavorite))
 	end))
-	table.insert(t, avatarEditorService.OpenPromptDeleteOutfit:Connect(function(p2)
-		-- upvalues: p1 (ref), openDeleteOutfitPromptModule (copy)
-		p1:dispatch(openDeleteOutfitPromptModule(p2))
+	table.insert(List, AvatarEditorService.OpenPromptDeleteOutfit:Connect(function(OutfitId) --[[ Line: 60 ]]
+		-- upvalues: p1 (copy), OpenDeleteOutfitPromptModule (upval)
+		p1:dispatch(OpenDeleteOutfitPromptModule(OutfitId))
 	end))
-	table.insert(t, avatarEditorService.OpenPromptRenameOutfit:Connect(function(p2)
-		-- upvalues: p1 (ref), openRenameOutfitPromptModule (copy)
-		p1:dispatch(openRenameOutfitPromptModule(p2))
+	table.insert(List, AvatarEditorService.OpenPromptRenameOutfit:Connect(function(OutfitId) --[[ Line: 67 ]]
+		-- upvalues: p1 (copy), OpenRenameOutfitPromptModule (upval)
+		p1:dispatch(OpenRenameOutfitPromptModule(OutfitId))
 	end))
-	table.insert(t, avatarEditorService.OpenPromptUpdateOutfit:Connect(function(p2, p3, p4)
-		-- upvalues: p1 (ref), openUpdateOutfitPromptModule (copy)
-		p1:dispatch(openUpdateOutfitPromptModule(p2, p3, p4))
+	table.insert(List, AvatarEditorService.OpenPromptUpdateOutfit:Connect(function(OutfitId, HumanoidDescription, RigType) --[[ Line: 74 ]]
+		-- upvalues: p1 (copy), OpenUpdateOutfitPromptModule (upval)
+		p1:dispatch(OpenUpdateOutfitPromptModule(OutfitId, HumanoidDescription, RigType))
 	end))
 	
-	return t
+	return List
 end

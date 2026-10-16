@@ -1,30 +1,30 @@
-﻿local function prettyPrint(p1, p2)
-	-- upvalues: prettyPrint (ref)
-	p2 = p2 or 0
-	local t = {}
+﻿local function prettyPrint(List, p1): string --[[ Line: 3 ]]
+	-- upvalues: prettyPrint (copy)
+	local P1 = p1 or 0
+	local List1 = {}
 	
-	if typeof(p1) == "table" then
-		table.insert(t, "{\n")
+	if typeof(List) == "table" then
+		table.insert(List1, "{\n")
 		
-		for i, v in pairs(p1) do
-			table.insert(t, ("    "):rep(p2 + 1))
-			table.insert(t, tostring(i))
-			table.insert(t, " = ")
-			table.insert(t, prettyPrint(v, p2 + 1))
-			table.insert(t, "\n")
+		for i, value in pairs(List) do
+			table.insert(List1, ("    "):rep(P1 + 1))
+			table.insert(List1, (tostring(i)))
+			table.insert(List1, " = ")
+			table.insert(List1, prettyPrint(value, P1 + 1))
+			table.insert(List1, "\n")
 		end
-		table.insert(t, ("    "):rep(p2))
-		table.insert(t, "}")
-	elseif typeof(p1) == "string" then
-		table.insert(t, string.format("%q", p1))
-		table.insert(t, " (string)")
+		table.insert(List1, ("    "):rep(P1))
+		table.insert(List1, "}")
+	elseif typeof(List) == "string" then
+		table.insert(List1, string.format("%q", List))
+		table.insert(List1, " (string)")
 	else
-		table.insert(t, tostring(p1))
-		table.insert(t, " (")
-		table.insert(t, typeof(p1))
-		table.insert(t, ")")
+		table.insert(List1, (tostring(List)))
+		table.insert(List1, " (")
+		table.insert(List1, (typeof(List)))
+		table.insert(List1, ")")
 	end
-	return table.concat(t, "")
+	return table.concat(List1, "")
 end
 
 return prettyPrint

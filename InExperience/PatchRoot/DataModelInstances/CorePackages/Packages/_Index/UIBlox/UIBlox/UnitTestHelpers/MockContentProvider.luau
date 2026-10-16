@@ -1,160 +1,160 @@
-﻿local roactModule = require(script.Parent.Parent.Parent.Roact)
-local t = {}
-t.__index = t
+﻿local RoactModule = require(script.Parent.Parent.Parent.Roact)
+local Module = {}
+Module.__index = Module
 
-function t.new(p1)
-	-- upvalues: t (ref)
-	local t_1 = {}
-	setmetatable(t_1, { __index = t })
-	t_1.callback = p1
-	t_1.connected = true
-	t_1.isMock = 231
+function Module.new(Callback) --[[ Line: 38 ]]
+	-- upvalues: Module (copy)
+	local t = {}
+	setmetatable(t, { __index = Module })
+	t.callback = Callback
+	t.connected = true
+	t.isMock = 231
 	
-	return t_1
+	return t
 end
 
-function t:Fire(p1)
+function Module:Fire(p1) --[[ Line: 50 ]]
 	if self.connected then
 		self.callback(p1)
 	end
 end
 
-function t:Disconnect()
+function Module:Disconnect() --[[ Line: 56 ]]
 	self.connected = false
 end
 
-local t_1 = {}
-t_1.__index = t_1
+local Module1 = {}
+Module1.__index = Module1
 
-function t_1.new()
-	-- upvalues: t_1 (ref)
+function Module1.new() --[[ Line: 65 ]]
+	-- upvalues: Module1 (copy)
 	local t = {}
-	setmetatable(t, { __index = t_1 })
+	setmetatable(t, { __index = Module1 })
 	t.connections = {}
 	
 	return t
 end
 
-function t_1:Connect(p1)
-	-- upvalues: t (ref)
-	local var1 = t.new(p1)
-	table.insert(self.connections, var1)
+function Module1:Connect(Callback) --[[ Line: 75 ]]
+	-- upvalues: Module (copy)
+	local NewModule = Module.new(Callback)
+	table.insert(self.connections, NewModule)
 	
-	return var1
+	return NewModule
 end
 
-function t_1:Fire(p1)
-	for i, v in self.connections do
-		v:Fire(p1)
+function Module1.Fire(p1, p2) --[[ Line: 81 ]]
+	for _, connection in p1.connections do
+		connection:Fire(p2)
 	end
 end
 
-local t_2 = {}
-t_2.__index = t_2
+local MockContentProviderModule = {}
+MockContentProviderModule.__index = MockContentProviderModule
 
-function t_2.new(p2, p3, p4)
-	-- upvalues: t_2 (ref)
+function MockContentProviderModule.new(p3, p4, p5) --[[ Line: 92 ]]
+	-- upvalues: MockContentProviderModule (copy)
 	local t = {}
-	setmetatable(t, { __index = t_2 })
+	setmetatable(t, { __index = MockContentProviderModule })
 	t.mockContentProviderProceedWithLoad = false
 	t.contentResolved = false
 	t.assetFetchStatuses = {}
 	t.signals = {}
 	t.preloadAsyncCalled = false
 	t.isMock = true
-	t.ultimatelySuccessfulContentIds = p2 or {}
-	t.ultimatelyTimedOutContentIds = p3 or {}
-	t.ultimatelyFailedContentIds = p4 or {}
+	t.ultimatelySuccessfulContentIds = p3 or {}
+	t.ultimatelyTimedOutContentIds = p4 or {}
+	t.ultimatelyFailedContentIds = p5 or {}
 	
 	return t
 end
 
-function t_2:mockReload(p2, p3)
+function MockContentProviderModule:mockReload(p3, p4) --[[ Line: 114 ]]
 	self.mockContentProviderProceedWithLoad = false
-	self:_staggeredProgress(nil, p2, p3 or Enum.AssetFetchStatus.Success)
+	self:_staggeredProgress(nil, p3, p4 or Enum.AssetFetchStatus.Success)
 end
 
-function t_2:proceedWithLoad()
-	-- upvalues: roactModule (ref)
+function MockContentProviderModule:proceedWithLoad() --[[ Line: 120 ]]
+	-- upvalues: RoactModule (copy)
 	self.mockContentProviderProceedWithLoad = true
-	roactModule.act(function()
+	RoactModule.act(function() --[[ Line: 122 ]]
 		task.wait(0.1)
 	end)
 end
 
-function t_2:_setAssetFetchStatus(p2, p3)
-	self.assetFetchStatuses[p2] = p3
+function MockContentProviderModule:_setAssetFetchStatus(p3, Loading) --[[ Line: 127 ]]
+	self.assetFetchStatuses[p3] = Loading
 	
-	if self.signals[p2] then
-		self.signals[p2]:Fire(p3)
+	if self.signals[p3] then
+		self.signals[p3]:Fire(Loading)
 	end
 end
 
-function t_2:_staggeredProgress(p2, p3, p4)
+function MockContentProviderModule:_staggeredProgress(Callback, p3, Failure) --[[ Line: 134 ]]
 	self.contentResolved = false
-	task.spawn(function()
-		-- upvalues: self (ref), p3 (ref), p2 (ref), p4 (ref)
+	task.spawn(function() --[[ Line: 137 ]]
+		-- upvalues: self (copy), p3 (copy), Callback (copy), Failure (copy)
 		while true do
-			if not self.mockContentProviderProceedWithLoad then
-				task.wait()
-				continue
-			end
-			if not self.contentResolved then
+			if self.mockContentProviderProceedWithLoad then
+				if self.contentResolved then
+					break
+				end
 				self:_setAssetFetchStatus(p3, Enum.AssetFetchStatus.Loading)
 				
-				if p2 then
-					p2(p3, Enum.AssetFetchStatus.Loading)
+				if Callback then
+					Callback(p3, Enum.AssetFetchStatus.Loading)
 				end
 				self.contentResolved = true
 				self.mockContentProviderProceedWithLoad = false
 			end
-			self:_setAssetFetchStatus(p3, p4)
-			
-			if p2 then
-				p2(p3, p4)
-			end
-			self.mockContentProviderProceedWithLoad = false
+			task.wait()
 		end
+		self:_setAssetFetchStatus(p3, Failure)
+		
+		if Callback then
+			Callback(p3, Failure)
+		end
+		self.mockContentProviderProceedWithLoad = false
 	end)
 end
 
-function t_2._makeMockSignal(_)
-	-- upvalues: t_1 (ref)
-	return t_1.new()
+function MockContentProviderModule:_makeMockSignal() --[[ Line: 161 ]]
+	-- upvalues: Module1 (copy)
+	return (Module1.new())
 end
 
-function t_2:GetAssetFetchStatusChangedSignal(p5)
-	if self.signals[p5] == nil then
-		self.signals[p5] = self:_makeMockSignal()
+function MockContentProviderModule:GetAssetFetchStatusChangedSignal(p4) --[[ Line: 166 ]]
+	if self.signals[p4] == nil then
+		self.signals[p4] = self:_makeMockSignal()
 	end
-	return self.signals[p5]
+	return self.signals[p4]
 end
 
-function t_2:GetAssetFetchStatus(p5)
-	return if self.assetFetchStatuses[p5] == nil then Enum.AssetFetchStatus.None else self.assetFetchStatuses[p5]
+function MockContentProviderModule.GetAssetFetchStatus(p4, p5) --[[ Line: 173 ]]
+	return if p4.assetFetchStatuses[p5] == nil then Enum.AssetFetchStatus.None else p4.assetFetchStatuses[p5]
 end
 
-function t_2:PreloadAsync(p5, p6)
+function MockContentProviderModule:PreloadAsync(List, Callback) --[[ Line: 181 ]]
 	self.preloadAsyncCalled = true
 	
-	for i, v in ipairs(p5) do
-		if self.ultimatelySuccessfulContentIds[v] then
-			self:_staggeredProgress(p6, v, Enum.AssetFetchStatus.Success)
-		elseif self.ultimatelyTimedOutContentIds[v] then
-			self:_staggeredProgress(p6, v, Enum.AssetFetchStatus.TimedOut)
-		elseif self.ultimatelyFailedContentIds[v] then
-			self:_staggeredProgress(p6, v, Enum.AssetFetchStatus.Failure)
+	for _, value in ipairs(List) do
+		if self.ultimatelySuccessfulContentIds[value] then
+			self:_staggeredProgress(Callback, value, Enum.AssetFetchStatus.Success)
+		elseif self.ultimatelyTimedOutContentIds[value] then
+			self:_staggeredProgress(Callback, value, Enum.AssetFetchStatus.TimedOut)
+		elseif self.ultimatelyFailedContentIds[value] then
+			self:_staggeredProgress(Callback, value, Enum.AssetFetchStatus.Failure)
 		else
-			task.delay(0, function()
-				-- upvalues: self (ref), v (ref), p6 (ref)
-				self:_setAssetFetchStatus(v, Enum.AssetFetchStatus.Success)
+			task.delay(0, function() --[[ Line: 191 ]]
+				-- upvalues: self (copy), value (copy), Callback (copy)
+				self:_setAssetFetchStatus(value, Enum.AssetFetchStatus.Success)
 				
-				if p6 then
-					p6(v, Enum.AssetFetchStatus.Success)
+				if Callback then
+					Callback(value, Enum.AssetFetchStatus.Success)
 				end
 			end)
 		end
 	end
 end
 
-return t_2
+return MockContentProviderModule

@@ -1,15 +1,15 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent.Parent
-local parent_2 = parent_1.Parent
-local foundationModule = require(parent_2.Foundation)
-local reactModule = require(parent_2.React)
-local _ = require(parent_1.Utils.createCoachmarkImpressionCache)
-local usePersistentCoachmarkViewModelModule = require(parent.usePersistentCoachmarkViewModel)
-local educationalTooltip = foundationModule.EducationalTooltip
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent.Parent
+local Parent2 = Parent1.Parent
+local FoundationModule = require(Parent2.Foundation)
+local ReactModule = require(Parent2.React)
+local _ = require(Parent1.Utils.createCoachmarkImpressionCache)
+local UsePersistentCoachmarkViewModelModule = require(Parent.usePersistentCoachmarkViewModel)
+local EducationalTooltip = FoundationModule.EducationalTooltip
 
-return function(p1)
-	-- upvalues: usePersistentCoachmarkViewModelModule (ref), reactModule (ref), educationalTooltip (ref), foundationModule (ref)
-	local var1 = usePersistentCoachmarkViewModelModule({
+return function(p1) --[[ Line: 39 | Named "PersistentCoachmark" ]]
+	-- upvalues: UsePersistentCoachmarkViewModelModule (copy), ReactModule (copy), EducationalTooltip (copy), FoundationModule (copy)
+	local UsePersistentCoachmarkViewModelModuleResult = UsePersistentCoachmarkViewModelModule({
 		impressionCache = p1.impressionCache,
 		maxImpressions = p1.maxImpressions,
 		autoDismissSeconds = p1.autoDismissSeconds,
@@ -19,12 +19,12 @@ return function(p1)
 		onDismissed = p1.onDismissed
 	})
 	
-	return reactModule.createElement(educationalTooltip, {
+	return ReactModule.createElement(EducationalTooltip, {
 		LayoutOrder = p1.layoutOrder,
-		isOpen = var1.isOpen,
-		onClose = var1.onClose,
-		side = p1.side or foundationModule.Enums.PopoverSide.Bottom,
-		align = p1.align or foundationModule.Enums.PopoverAlign.End,
+		isOpen = UsePersistentCoachmarkViewModelModuleResult.isOpen,
+		onClose = UsePersistentCoachmarkViewModelModuleResult.onClose,
+		side = p1.side or FoundationModule.Enums.PopoverSide.Bottom,
+		align = p1.align or FoundationModule.Enums.PopoverAlign.End,
 		title = p1.title,
 		text = p1.text
 	}, p1.children)

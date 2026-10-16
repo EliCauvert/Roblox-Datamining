@@ -1,47 +1,46 @@
-﻿local parent = script:FindFirstAncestor("AppChat").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local typesModule = require(script.Parent.Types)
-local chipGroup = foundationModule.ChipGroup
-local chipGroupVariant = foundationModule.Enums.ChipGroupVariant
-local chipSize = foundationModule.Enums.ChipSize
-local divider = foundationModule.Divider
-local view = foundationModule.View
-local suggestionType = typesModule.SuggestionType
-local t = {
-	[suggestionType.GameCard] = foundationModule.Enums.IconName.Controller,
-	[suggestionType.StartParty] = foundationModule.Enums.IconName.ThreePeople
+﻿local Parent = script:FindFirstAncestor("AppChat").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local ChipGroup = FoundationModule.ChipGroup
+local ChipGroupVariant = FoundationModule.Enums.ChipGroupVariant
+local ChipSize = FoundationModule.Enums.ChipSize
+local Divider = FoundationModule.Divider
+local View = FoundationModule.View
+local SuggestionType = require(script.Parent.Types).SuggestionType
+local config = {
+	[SuggestionType.GameCard] = FoundationModule.Enums.IconName.Controller,
+	[SuggestionType.StartParty] = FoundationModule.Enums.IconName.ThreePeople
 }
 
-return reactModule.memo(function(p1)
-	-- upvalues: t (ref), reactModule (ref), view (ref), divider (ref), chipGroup (ref), chipSize (ref), chipGroupVariant (ref)
-	local t_1 = {}
+return ReactModule.memo(function(Frame) --[[ Line: 44 | Named "SmartSuggestionsChipRow" ]]
+	-- upvalues: config (copy), ReactModule (copy), View (copy), Divider (copy), ChipGroup (copy), ChipSize (copy), ChipGroupVariant (copy)
+	local Chips = {}
 	
-	for i, v in p1.suggestions do
-		t_1[i] = {
-			text = v.display_text,
-			leading = t[v.type],
-			onActivated = function()
-				-- upvalues: p1 (ref), v (ref)
-				p1.onActivated(v)
+	for i, suggestion in Frame.suggestions do
+		Chips[i] = {
+			text = suggestion.display_text,
+			leading = config[suggestion.type],
+			onActivated = function() --[[ Line: 50 ]]
+				-- upvalues: Frame (copy), suggestion (copy)
+				Frame.onActivated(suggestion)
 			end
 		}
 	end
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col gap-small size-full-0 auto-y clip",
 		testId = "SmartSuggestionsChipRow--clip",
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Divider = reactModule.createElement(divider, {
+		Divider = ReactModule.createElement(Divider, {
 			LayoutOrder = 1,
 			testId = "SmartSuggestionsChipRow--divider"
 		}),
-		ChipGroup = reactModule.createElement(chipGroup, {
+		ChipGroup = ReactModule.createElement(ChipGroup, {
 			LayoutOrder = 2,
 			testId = "SmartSuggestionsChipRow",
-			chips = t_1,
-			size = chipSize.Medium,
-			variant = chipGroupVariant.Row
+			chips = Chips,
+			size = ChipSize.Medium,
+			variant = ChipGroupVariant.Row
 		})
 	})
 end)

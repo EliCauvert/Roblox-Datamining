@@ -1,33 +1,34 @@
-﻿local promiseModule = require(script:FindFirstAncestor("GameInvite").Parent.Promise)
+﻿local PromiseModule = require(script:FindFirstAncestor("GameInvite").Parent.Promise)
 
-return function(p1)
-	-- upvalues: promiseModule (ref)
-	local var1 = 0
+return function(Options) --[[ Line: 18 ]]
+	-- upvalues: PromiseModule (copy)
+	local NewMinIntervalSeconds = 0
 	
 	return {
-		send = function(p2)
-			-- upvalues: promiseModule (copy), p1 (ref), var1 (write)
-			return promiseModule.new(function(p3, p4)
-				-- upvalues: p1 (copy), var1 (copy), promiseModule (copy), p2 (ref)
-				local var2 = p1.now()
-				local maxValue = math.max(var2, var1)
-				var1 = maxValue + p1.minIntervalSeconds
+		send = function(p1) --[[ Line: 21 ]]
+			-- upvalues: PromiseModule (upval), Options (copy), NewMinIntervalSeconds (ref)
+			return PromiseModule.new(function(p2, p3) --[[ Line: 22 ]]
+				-- upvalues: Options (upval), NewMinIntervalSeconds (upval), PromiseModule (upval), p1 (copy)
+				local NowResult: number = Options.now()
+				local Largest = math.max(NowResult, NewMinIntervalSeconds)
+				NewMinIntervalSeconds = Largest + Options.minIntervalSeconds
 				
-				local function dispatch()
-					-- upvalues: promiseModule (copy), p2 (copy), p3 (ref), p4 (ref)
-					promiseModule.try(p2):andThen(p3, p4)
+				local function dispatch() --[[ Line: 27 ]]
+					-- upvalues: PromiseModule (upval), p1 (upval), p2 (copy), p3 (copy)
+					PromiseModule.try(p1):andThen(p2, p3)
 				end
 				
-				local var3 = maxValue - var2
+				local LargestDelta = Largest - NowResult
 				
-				if var3 <= 0 then
-					promiseModule.try(p2):andThen(p3, p4)
+				if LargestDelta <= 0 then
+					PromiseModule.try(p1):andThen(p2, p3)
 					
 					return
+				else
+					Options.delay(LargestDelta, dispatch)
 				end
-				p1.delay(var3, dispatch)
 			end)
 		end,
-		options = p1
+		options = Options
 	}
 end

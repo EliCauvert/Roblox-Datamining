@@ -1,29 +1,29 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local cryoModule = require(parent.Cryo)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local CryoModule = require(Parent.Cryo)
 
-return require(parent.Rodux).createReducer({}, {
-	[require(parent.AppChatNetworking).rodux.GetConversationsParticipantsMetadata.Succeeded.name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		for i, v in p2.responseBody.conversation_participants_metadata do
+return require(Parent.Rodux).createReducer({}, {
+	[require(Parent.AppChatNetworking).rodux.GetConversationsParticipantsMetadata.Succeeded.name] = function(p1, p2) --[[ Line: 24 ]]
+		-- upvalues: CryoModule (copy)
+		for i, value in p2.responseBody.conversation_participants_metadata do
 			local t = {}
 			
-			for i_1, v_1 in v.participants_metadata do
-				t[i_1] = {
-					isPending = v_1.is_pending,
-					isBlocked = v_1.is_blocked,
-					isInviter = v_1.is_inviter,
-					isInvited = v_1.is_invited
+			for i1, value1 in value.participants_metadata do
+				t[i1] = {
+					isPending = value1.is_pending,
+					isBlocked = value1.is_blocked,
+					isInviter = value1.is_inviter,
+					isInvited = value1.is_invited
 				}
 			end
-			p1 = cryoModule.Dictionary.join(p1, { [i] = t })
+			p1 = CryoModule.Dictionary.join(p1, { [i] = t })
 		end
 		return p1
 	end,
-	[require(appChat.Conversations.Actions.RemovedConversation).name] = function(p3, p4)
-		-- upvalues: cryoModule (ref)
-		local conversationId = p4.conversationId
+	[require(AppChat.Conversations.Actions.RemovedConversation).name] = function(p3, p4) --[[ Line: 46 ]]
+		-- upvalues: CryoModule (copy)
+		local ConversationId = p4.conversationId
 		
-		return if conversationId then cryoModule.Dictionary.join(p3, { [conversationId] = cryoModule.None }) else p3
+		return if ConversationId then CryoModule.Dictionary.join(p3, { [ConversationId] = CryoModule.None }) else p3
 	end
 })

@@ -1,12 +1,12 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local inputSizeModule = require(foundation.Enums.InputSize)
-local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant)
-local _ = require(foundation.Providers.Style.Tokens)
-local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
-local _ = require(foundation.Components.Types)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local InputSizeModule = require(Foundation.Enums.InputSize)
+local ComposeStyleVariantModule = require(Foundation.Utility.composeStyleVariant)
+local _ = require(Foundation.Providers.Style.Tokens)
+local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
+local _ = require(Foundation.Components.Types)
 
-local function variantsFactory(_)
-	-- upvalues: inputSizeModule (ref)
+local function variantsFactory(_) --[[ Line: 22 ]]
+	-- upvalues: InputSizeModule (copy)
 	return {
 		common = {
 			container = { tag = "col auto-xy" },
@@ -16,17 +16,17 @@ local function variantsFactory(_)
 			}
 		},
 		sizes = {
-			[inputSizeModule.XSmall] = {
+			[InputSizeModule.XSmall] = {
 				container = { tag = "gap-medium" },
 				children = { tag = "gap-small" },
 				legend = { tag = "text-title-small" }
 			},
-			[inputSizeModule.Small] = {
+			[InputSizeModule.Small] = {
 				container = { tag = "gap-large" },
 				children = { tag = "gap-medium" },
 				legend = { tag = "text-title-small" }
 			},
-			[inputSizeModule.Medium] = {
+			[InputSizeModule.Medium] = {
 				container = { tag = "gap-large" },
 				children = { tag = "gap-medium" },
 				legend = { tag = "text-title-medium" }
@@ -35,9 +35,9 @@ local function variantsFactory(_)
 	}
 end
 
-return function(p1, p2)
-	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref)
-	local inputGroup = variantsContextModule.useVariants("InputGroup", variantsFactory, p1)
+return function(p1, p2) --[[ Line: 77 | Named "useInputGroupVariants" ]]
+	-- upvalues: VariantsContextModule (copy), variantsFactory (copy), ComposeStyleVariantModule (copy)
+	local InputGroup = VariantsContextModule.useVariants("InputGroup", variantsFactory, p1)
 	
-	return composeStyleVariantModule(inputGroup.common, inputGroup.sizes[p2])
+	return ComposeStyleVariantModule(InputGroup.common, InputGroup.sizes[p2])
 end

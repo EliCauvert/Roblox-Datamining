@@ -1,78 +1,80 @@
-﻿local gamePlayButton = script:FindFirstAncestor("GamePlayButton")
-local _ = require(gamePlayButton.PlayButtonTypes)
-local parent = gamePlayButton.Parent
-local reactModule = require(parent.React)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local useRoactService = require(parent.RobloxAppHooks).useRoactService
-local appEventIngestService = require(parent.RoactServiceTags).AppEventIngestService
-local unlockPlayIntent = require(parent.DiscoveryAnalytics).Events.unlockPlayIntent
-local openPlayButtonUpsellDialog = require(parent.DiscoveryRouting).OpenPlayButtonUpsellDialog
-local closeCentralOverlay = require(parent.CentralOverlay).Thunks.CloseCentralOverlay
-local flaggedMutedError = require(parent.Loggers).flaggedMutedError
-local discoveryTypesModule = require(parent.DiscoveryTypes)
-local playableUxTreatmentEnum = discoveryTypesModule.PlayableUxTreatmentEnum
-local playabilityStatusEnum = discoveryTypesModule.PlayabilityStatusEnum
-local _ = require(parent.PlayabilityRodux)
-local fFlagLuaAppDemoModePlayButtonTelemetry = require(parent.SharedFlags).FFlagLuaAppDemoModePlayButtonTelemetry
+﻿local GamePlayButton = script:FindFirstAncestor("GamePlayButton")
+local _ = require(GamePlayButton.PlayButtonTypes)
+local Parent = GamePlayButton.Parent
+local ReactModule = require(Parent.React)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
+local AppEventIngestService = require(Parent.RoactServiceTags).AppEventIngestService
+local UnlockPlayIntentFunction = require(Parent.DiscoveryAnalytics).Events.unlockPlayIntent
+local OpenPlayButtonUpsellDialogFunction = require(Parent.DiscoveryRouting).OpenPlayButtonUpsellDialog
+local CloseCentralOverlayFunction = require(Parent.CentralOverlay).Thunks.CloseCentralOverlay
+local FlaggedMutedErrorFunction = require(Parent.Loggers).flaggedMutedError
+local DiscoveryTypesModule = require(Parent.DiscoveryTypes)
+local PlayableUxTreatmentEnum = DiscoveryTypesModule.PlayableUxTreatmentEnum
+local PlayabilityStatusEnum = DiscoveryTypesModule.PlayabilityStatusEnum
+local _ = require(Parent.PlayabilityRodux)
+local FFlagLuaAppDemoModePlayButtonTelemetry = require(Parent.SharedFlags).FFlagLuaAppDemoModePlayButtonTelemetry
 
-local function _(p1)
-	return if p1 then if type(p1.titleText) == "string" and type(p1.bodyText) == "string" and (type(p1.primaryActionText) == "string" and type(p1.secondaryActionText) == "string") then p1 else nil else nil
+local function _(p1) --[[ Line: 20 | Named "asReconfirmLaunchModalData" ]]
+	return if p1 and (type(p1.titleText) == "string" and type(p1.bodyText) == "string" and type(p1.primaryActionText) == "string" and type(p1.secondaryActionText) == "string") then p1 else nil
 end
 
-return function(p1, p2, p3, p4)
-	-- upvalues: useRoactService (ref), appEventIngestService (ref), useDispatch (ref), reactModule (ref), unlockPlayIntent (ref), playabilityStatusEnum (ref), fFlagLuaAppDemoModePlayButtonTelemetry (ref), playableUxTreatmentEnum (ref), flaggedMutedError (ref), openPlayButtonUpsellDialog (ref), closeCentralOverlay (ref)
-	local var1 = useRoactService(appEventIngestService)
-	local var2 = useDispatch()
-	local var3 = reactModule.useCallback(function(p5)
-		-- upvalues: unlockPlayIntent (copy), var1 (ref), p2 (ref), p1 (ref), p4 (ref)
-		unlockPlayIntent(var1, {
-			universeId = p2,
-			upsellName = p5,
-			playabilityStatus = if p1 then p1.playabilityStatus else nil,
-			pageName = p4
+return function(p1, UniverseId, Callback, PageName) --[[ Line: 44 ]]
+	-- upvalues: UseRoactServiceFunction (copy), AppEventIngestService (copy), UseDispatchFunction (copy), ReactModule (copy), UnlockPlayIntentFunction (copy), PlayabilityStatusEnum (copy), FFlagLuaAppDemoModePlayButtonTelemetry (copy), PlayableUxTreatmentEnum (copy), FlaggedMutedErrorFunction (copy), OpenPlayButtonUpsellDialogFunction (copy), CloseCentralOverlayFunction (copy)
+	local UseRoactServiceResult = UseRoactServiceFunction(AppEventIngestService)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseResult = ReactModule.useCallback(function(UpsellName) --[[ Line: 53 ]]
+		-- upvalues: UnlockPlayIntentFunction (upval), UseRoactServiceResult (copy), UniverseId (copy), p1 (copy), PageName (copy)
+		UnlockPlayIntentFunction(UseRoactServiceResult, {
+			universeId = UniverseId,
+			upsellName = UpsellName,
+			playabilityStatus = p1 and p1.playabilityStatus or nil,
+			pageName = PageName
 		})
-	end, { var1, p2, p1, p4 })
+	end, { UseRoactServiceResult, UniverseId, p1, PageName })
 	
-	return reactModule.useCallback(function(p5, p6)
-		-- upvalues: p1 (ref), playabilityStatusEnum (copy), p3 (ref), fFlagLuaAppDemoModePlayButtonTelemetry (copy), playableUxTreatmentEnum (copy), flaggedMutedError (copy), p2 (ref), var3 (ref), var2 (ref), openPlayButtonUpsellDialog (copy), closeCentralOverlay (copy)
-		if not p1 or not p1.playableUxTreatment or (not p1.playableUxTreatment.treatment or p1.playabilityStatus ~= playabilityStatusEnum.Playable) then
-			p3(p5, if fFlagLuaAppDemoModePlayButtonTelemetry then p6 else nil)
-			
-			return
-		elseif p1.playableUxTreatment.treatment ~= playableUxTreatmentEnum.ReconfirmLaunchModal then
-			flaggedMutedError("PlayableUxTreatmentUnsupported", `playableUxTreatment treatment {p1.playableUxTreatment.treatment} is unsupported for universeId {p2}`)
-			p3(p5, if fFlagLuaAppDemoModePlayButtonTelemetry then p6 else nil)
-			var3("GameLaunch")
+	return ReactModule.useCallback(function(p2, p3) --[[ Line: 68 ]]
+		-- upvalues: p1 (copy), PlayabilityStatusEnum (upval), Callback (copy), FFlagLuaAppDemoModePlayButtonTelemetry (upval), PlayableUxTreatmentEnum (upval), FlaggedMutedErrorFunction (upval), UniverseId (copy), UseResult (copy), UseDispatchResult (copy), OpenPlayButtonUpsellDialogFunction (upval), CloseCentralOverlayFunction (upval)
+		if not p1 or not p1.playableUxTreatment or not p1.playableUxTreatment.treatment or p1.playabilityStatus ~= PlayabilityStatusEnum.Playable then
+			Callback(p2, if FFlagLuaAppDemoModePlayButtonTelemetry then p3 else nil)
 			
 			return
 		end
-		local data = p1.playableUxTreatment.data
-		local var4 = if not data then if type(data.titleText) == "string" and type(data.bodyText) == "string" and (type(data.primaryActionText) == "string" and type(data.secondaryActionText) == "string") then data else nil else nil
+		if p1.playableUxTreatment.treatment ~= PlayableUxTreatmentEnum.ReconfirmLaunchModal then
+			FlaggedMutedErrorFunction("PlayableUxTreatmentUnsupported", `playableUxTreatment treatment {p1.playableUxTreatment.treatment} is unsupported for universeId {UniverseId}`)
+			Callback(p2, if FFlagLuaAppDemoModePlayButtonTelemetry then p3 else nil)
+			UseResult("GameLaunch")
+			
+			return
+		end
+		local Data = p1.playableUxTreatment.data
+		local Data1 = if Data and (type(Data.titleText) == "string" and type(Data.bodyText) == "string" and type(Data.primaryActionText) == "string" and type(Data.secondaryActionText) == "string") then Data else nil
 		
-		if var4 then
-			var2(openPlayButtonUpsellDialog(var4.titleText, var4.bodyText, var4.primaryActionText, var4.secondaryActionText, function()
-				-- upvalues: var2 (copy), closeCentralOverlay (copy), p3 (copy), p5 (ref), fFlagLuaAppDemoModePlayButtonTelemetry (copy), p6 (ref)
-				var2(closeCentralOverlay())
-				p3(p5, if fFlagLuaAppDemoModePlayButtonTelemetry then p6 else nil)
-			end, function()
-				-- upvalues: var2 (copy), closeCentralOverlay (copy)
-				var2(closeCentralOverlay())
-			end, function()
-				-- upvalues: var2 (copy), closeCentralOverlay (copy)
-				var2(closeCentralOverlay())
+		if Data1 then
+			UseDispatchResult(OpenPlayButtonUpsellDialogFunction(Data1.titleText, Data1.bodyText, Data1.primaryActionText, Data1.secondaryActionText, function() --[[ Line: 102 ]]
+				-- upvalues: UseDispatchResult (upval), CloseCentralOverlayFunction (upval), Callback (upval), p2 (copy), FFlagLuaAppDemoModePlayButtonTelemetry (upval), p3 (copy)
+				UseDispatchResult(CloseCentralOverlayFunction())
+				Callback(p2, if FFlagLuaAppDemoModePlayButtonTelemetry then p3 else nil)
+			end, function() --[[ Line: 109 ]]
+				-- upvalues: UseDispatchResult (upval), CloseCentralOverlayFunction (upval)
+				UseDispatchResult(CloseCentralOverlayFunction())
+			end, function() --[[ Line: 112 ]]
+				-- upvalues: UseDispatchResult (upval), CloseCentralOverlayFunction (upval)
+				UseDispatchResult(CloseCentralOverlayFunction())
 			end))
-			var3("ReconfirmLaunchModal")
+			UseResult("ReconfirmLaunchModal")
 			
 			return
+		else
+			FlaggedMutedErrorFunction("PlayableUxTreatmentMissingData", `playableUxTreatment data is missing for treatment {PlayableUxTreatmentEnum.ReconfirmLaunchModal} on universeId {UniverseId}`)
+			Callback(p2, if FFlagLuaAppDemoModePlayButtonTelemetry then p3 else nil)
+			UseResult("GameLaunch")
 		end
-		flaggedMutedError("PlayableUxTreatmentMissingData", `playableUxTreatment data is missing for treatment {playableUxTreatmentEnum.ReconfirmLaunchModal} on universeId {p2}`)
-		p3(p5, if fFlagLuaAppDemoModePlayButtonTelemetry then p6 else nil)
-		var3("GameLaunch")
 	end, {
 		p1,
-		p2,
-		p3,
-		var3,
-		var2
+		UniverseId,
+		Callback,
+		UseResult,
+		UseDispatchResult
 	})
 end

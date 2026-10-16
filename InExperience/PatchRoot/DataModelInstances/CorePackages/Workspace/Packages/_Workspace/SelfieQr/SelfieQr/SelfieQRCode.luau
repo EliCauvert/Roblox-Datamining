@@ -1,84 +1,81 @@
-﻿local avatarCreationService = game:GetService("AvatarCreationService")
-local parent = script:FindFirstAncestor("SelfieQr").Parent
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local foundationModule = require(parent.Foundation)
-local httpModule = require(parent.Http)
-local localizationModule = require(parent.Localization)
-local promiseModule = require(parent.Promise)
-local QRCodeDisplayModule = require(parent.QRCodeDisplay)
-local reactModule = require(parent.React)
-local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
-local responsiveModule = require(parent.Responsive)
-local roactNetworking = require(parent.RoactServiceTags).RoactNetworking
-local useRoactService = require(parent.RobloxAppHooks).useRoactService
-local dialog = foundationModule.Dialog
-local dialogSize = foundationModule.Enums.DialogSize
-local displayQRCode = QRCodeDisplayModule.DisplayQRCode
-local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
-local image = foundationModule.Image
-local icon = foundationModule.Icon
-local url = httpModule.Url
-local useLocalization = localizationModule.Hooks.useLocalization
-local useTokens = foundationModule.Hooks.useTokens
-local adoptStyleTokens = game:DefineFastFlag("AdoptStyleTokens", false)
-local allowQrEnlargeUniversally = game:DefineFastFlag("AllowQrEnlargeUniversally", false)
-local consoleCloseAffordanceFix = game:DefineFastFlag("ConsoleCloseAffordanceFix", false)
-local enableTimeoutUI = game:DefineFastFlag("EnableTimeoutUI", false)
-local selfieQrTimeoutSeconds = game:DefineFastInt("SelfieQrTimeoutSeconds", 120)
-local debugAvatarGenerationStaticApiKey = game:DefineFastString("DebugAvatarGenerationStaticApiKey", "NOT_SET")
-local t = {
-	[Enum.KeyCode.ButtonB] = focusNavigationEventNameEnum.NavigateBack
+﻿local AvatarCreationService = game:GetService("AvatarCreationService")
+local Parent = script:FindFirstAncestor("SelfieQr").Parent
+local FoundationModule = require(Parent.Foundation)
+local PromiseModule = require(Parent.Promise)
+local QRCodeDisplayModule = require(Parent.QRCodeDisplay)
+local ReactModule = require(Parent.React)
+local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
+local ResponsiveModule = require(Parent.Responsive)
+local RoactNetworking = require(Parent.RoactServiceTags).RoactNetworking
+local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
+local Dialog = FoundationModule.Dialog
+local DialogSize = FoundationModule.Enums.DialogSize
+local DisplayQRCode = QRCodeDisplayModule.DisplayQRCode
+local FocusNavigationEventNameEnum = require(Parent.FocusNavigationUtils).FocusNavigationEventNameEnum
+local Image = FoundationModule.Image
+local Icon = FoundationModule.Icon
+local Url = require(Parent.Http).Url
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local AdoptStyleTokens = game:DefineFastFlag("AdoptStyleTokens", false)
+local AllowQrEnlargeUniversally = game:DefineFastFlag("AllowQrEnlargeUniversally", false)
+local ConsoleCloseAffordanceFix = game:DefineFastFlag("ConsoleCloseAffordanceFix", false)
+local EnableTimeoutUI = game:DefineFastFlag("EnableTimeoutUI", false)
+local SelfieQrTimeoutSeconds = game:DefineFastInt("SelfieQrTimeoutSeconds", 120)
+local DebugAvatarGenerationStaticApiKey = game:DefineFastString("DebugAvatarGenerationStaticApiKey", "NOT_SET")
+local config = {
+	[Enum.KeyCode.ButtonB] = FocusNavigationEventNameEnum.NavigateBack
 }
 
-local function SelfieQRCodeView(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), enableTimeoutUI (ref), adoptStyleTokens (ref), displayQRCode (ref), QRCodeDisplayModule (ref), image (ref)
-	local var1 = useTokens()
+local function SelfieQRCodeView(p1) --[[ Line: 60 ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), EnableTimeoutUI (copy), AdoptStyleTokens (copy), DisplayQRCode (copy), QRCodeDisplayModule (copy), Image (copy)
+	local UseTokensResult = UseTokensFunction()
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		ClipsDescendants = true,
 		Size = p1.outerSize,
 		Position = UDim2.fromScale(0.5, 0.5),
 		AnchorPoint = Vector2.new(0.5, 0.5),
-		BackgroundColor3 = if enableTimeoutUI and p1.errorOccurred then var1.Color.Extended.Gray.Gray_1000.Color3 elseif adoptStyleTokens then var1.Color.Extended.White.White_0.Color3 else Color3.fromRGB(255, 255, 255)
+		BackgroundColor3 = if EnableTimeoutUI and p1.errorOccurred then UseTokensResult.Color.Extended.Gray.Gray_1000.Color3 elseif AdoptStyleTokens then UseTokensResult.Color.Extended.White.White_0.Color3 else Color3.fromRGB(255, 255, 255)
 	}, {
-		QRContainer = if enableTimeoutUI and p1.errorOccurred then nil else reactModule.createElement("Frame", {
+		QRContainer = if EnableTimeoutUI and p1.errorOccurred then nil else ReactModule.createElement("Frame", {
 			Size = UDim2.fromOffset(p1.sideLength, p1.sideLength),
 			Position = UDim2.fromScale(0.5, 0.5),
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			BackgroundTransparency = if adoptStyleTokens then var1.Color.None.Transparency else 1
+			BackgroundTransparency = if AdoptStyleTokens then UseTokensResult.Color.None.Transparency else 1
 		}, {
-			DisplayQRCode = reactModule.createElement(displayQRCode, {
+			DisplayQRCode = ReactModule.createElement(DisplayQRCode, {
 				toEncode = p1.url,
 				ecLevel = QRCodeDisplayModule.ECLevels.EC_LEVEL_4,
 				sideLength = p1.sideLength
 			})
 		}),
-		LogoContainer = if enableTimeoutUI and p1.errorOccurred then nil else reactModule.createElement("Frame", {
+		LogoContainer = if EnableTimeoutUI and p1.errorOccurred then nil else ReactModule.createElement("Frame", {
 			ZIndex = 10,
 			ClipsDescendants = true,
 			Size = UDim2.new(0.3, 0, 0.3, 0),
 			Position = UDim2.new(0.5, 0, 0.5, 0),
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			BackgroundColor3 = if adoptStyleTokens then var1.Color.Extended.Black.Black_0.Color3 else Color3.fromRGB(0, 0, 0)
+			BackgroundColor3 = if AdoptStyleTokens then UseTokensResult.Color.Extended.Black.Black_0.Color3 else Color3.fromRGB(0, 0, 0)
 		}, {
-			Corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0.125, 0) }),
-			Stroke = reactModule.createElement("UIStroke", {
+			Corner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0.125, 0) }),
+			Stroke = ReactModule.createElement("UIStroke", {
 				Thickness = 1,
-				Color = var1.Color.Extended.White.White_0.Color3,
+				Color = UseTokensResult.Color.Extended.White.White_0.Color3,
 				ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
 				LineJoinMode = Enum.LineJoinMode.Round
 			}),
-			Icon = reactModule.createElement(image, {
+			Icon = ReactModule.createElement(Image, {
 				ZIndex = 11,
-				Size = if adoptStyleTokens then UDim2.fromScale(1, 1) else UDim2.new(0.75, 0, 0.75, 0),
+				Size = if AdoptStyleTokens then UDim2.fromScale(1, 1) else UDim2.new(0.75, 0, 0.75, 0),
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Position = UDim2.fromScale(0.5, 0.5),
-				BackgroundTransparency = if adoptStyleTokens then nil else 1,
-				Image = if adoptStyleTokens then "rbxasset://textures/ui/LuaApp/ExternalSite/roblox@3x.png" else "icons/logo/block"
+				BackgroundTransparency = if AdoptStyleTokens then nil else 1,
+				Image = if AdoptStyleTokens then "rbxasset://textures/ui/LuaApp/ExternalSite/roblox@3x.png" else "icons/logo/block"
 			})
 		}),
-		Corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0.065, 0) }),
-		Constraint = reactModule.createElement("UIAspectRatioConstraint", {
+		Corner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0.065, 0) }),
+		Constraint = ReactModule.createElement("UIAspectRatioConstraint", {
 			AspectRatio = 1,
 			AspectType = Enum.AspectType.FitWithinMaxSize,
 			DominantAxis = Enum.DominantAxis.Width
@@ -86,27 +83,27 @@ local function SelfieQRCodeView(p1)
 	})
 end
 
-local function getJobStatus(p1, p2)
-	-- upvalues: debugAvatarGenerationStaticApiKey (ref), promiseModule (ref)
-	return p1(p2, "GET", {
-		headers = { ["X-Static-Api-Key"] = debugAvatarGenerationStaticApiKey }
-	}):andThen(function(p3)
-		-- upvalues: promiseModule (copy)
-		local responseBody = p3.responseBody
+local function getJobStatus(Callback, p1) --[[ Line: 133 ]]
+	-- upvalues: DebugAvatarGenerationStaticApiKey (copy), PromiseModule (copy)
+	return Callback(p1, "GET", {
+		headers = { ["X-Static-Api-Key"] = DebugAvatarGenerationStaticApiKey }
+	}):andThen(function(Result) --[[ Line: 135 ]]
+		-- upvalues: PromiseModule (upval)
+		local ResponseBody = Result.responseBody
 		
-		return responseBody or promiseModule.reject("Invalid response from getJobStatus")
+		return if ResponseBody then ResponseBody else PromiseModule.reject("Invalid response from getJobStatus")
 	end)
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), responsiveModule (ref), useRoactService (ref), roactNetworking (ref), useTokens (ref), useLocalization (ref), selfieQrTimeoutSeconds (ref), enableTimeoutUI (ref), avatarCreationService (ref), getJobStatus (ref), url (ref), dialogSize (ref), consoleCloseAffordanceFix (ref), reactFocusNavigationModule (ref), t (ref), focusNavigationEventNameEnum (ref), adoptStyleTokens (ref), allowQrEnlargeUniversally (ref), SelfieQRCodeView (ref), dialog (ref), icon (ref), foundationModule (ref)
-	local var1, var2 = reactModule.useState(false)
-	local var3 = responsiveModule.usePreferredInput() == responsiveModule.Input.Directional
-	local var4, var5 = reactModule.useState(false)
-	local var6, var7 = reactModule.useState(false)
-	local var8 = useRoactService(roactNetworking)
-	local var9 = useTokens()
-	local var10 = useLocalization({
+return function(p1) --[[ Line: 146 ]]
+	-- upvalues: ReactModule (copy), ResponsiveModule (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), UseTokensFunction (copy), UseLocalizationFunction (copy), SelfieQrTimeoutSeconds (copy), EnableTimeoutUI (copy), AvatarCreationService (copy), getJobStatus (copy), Url (copy), DialogSize (copy), ConsoleCloseAffordanceFix (copy), ReactFocusNavigationModule (copy), config (copy), FocusNavigationEventNameEnum (copy), AdoptStyleTokens (copy), AllowQrEnlargeUniversally (copy), SelfieQRCodeView (copy), Dialog (copy), Icon (copy), FoundationModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local IsUsePreferredInputResultMatch = ResponsiveModule.usePreferredInput() == ResponsiveModule.Input.Directional
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(false)
+	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
+	local UseTokensResult = UseTokensFunction()
+	local UseLocalizationResult = UseLocalizationFunction({
 		title = {
 			"AvatarGeneration.SelfieConsent.QRTitle",
 			fontStart = "<font weight=\"heavy\" size=\"24\">",
@@ -129,299 +126,310 @@ return function(p1)
 		}
 	})
 	
-	local function _()
-		-- upvalues: var7 (ref), var2 (ref), var5 (ref)
-		var7(true)
-		var2(false)
-		var5(false)
+	local function _() --[[ Line: 178 | Named "handleError" ]]
+		-- upvalues: UseStateResult2_2 (copy), UseStateResult2 (copy), UseStateResult2_1 (copy)
+		UseStateResult2_2(true)
+		UseStateResult2(false)
+		UseStateResult2_1(false)
 	end
 	
-	reactModule.useEffect(function()
-		-- upvalues: selfieQrTimeoutSeconds (copy), enableTimeoutUI (copy), var7 (ref), var2 (ref), var5 (ref), p1 (ref), avatarCreationService (copy), getJobStatus (copy), var8 (ref), url (copy)
-		local var11 = nil
-		local delayedThread = task.delay(selfieQrTimeoutSeconds, function()
-			-- upvalues: enableTimeoutUI (copy), var7 (copy), var2 (copy), var5 (copy), p1 (copy), avatarCreationService (copy)
-			if enableTimeoutUI then
-				var7(true)
-				var2(false)
-				var5(false)
+	ReactModule.useEffect(function() --[[ Line: 185 ]]
+		-- upvalues: SelfieQrTimeoutSeconds (upval), EnableTimeoutUI (upval), UseStateResult2_2 (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), p1 (copy), AvatarCreationService (upval), getJobStatus (upval), UseRoactServiceResult (copy), Url (upval)
+		local DelayedThread = nil
+		local DelayedThread1 = task.delay(SelfieQrTimeoutSeconds, function() --[[ Line: 187 ]]
+			-- upvalues: EnableTimeoutUI (upval), UseStateResult2_2 (upval), UseStateResult2 (upval), UseStateResult2_1 (upval), p1 (upval), AvatarCreationService (upval)
+			if EnableTimeoutUI then
+				UseStateResult2_2(true)
+				UseStateResult2(false)
+				UseStateResult2_1(false)
 				
 				return
+			else
+				p1.displaySelfieQRCode(false)
+				AvatarCreationService:HandleSelfieQRResult(false, "job not completed within time limit")
 			end
-			p1.displaySelfieQRCode(false)
-			avatarCreationService:HandleSelfieQRResult(false, "job not completed within time limit")
 		end)
 		
-		local function poll(p2)
-			-- upvalues: getJobStatus (copy), var8 (copy), p1 (copy), avatarCreationService (copy), enableTimeoutUI (copy), var7 (copy), var2 (copy), var5 (copy), var11 (write), poll (ref)
-			getJobStatus(var8, p2):andThen(function(p3)
-				-- upvalues: p1 (copy), avatarCreationService (copy), enableTimeoutUI (copy), var7 (copy), var2 (copy), var5 (copy), var11 (copy), poll (copy), p2 (ref)
-				if p3.status == "done" then
-					local var12 = p3.fileIds and p3.fileIds[1]
+		local function poll(Formatted) --[[ Line: 196 ]]
+			-- upvalues: getJobStatus (upval), UseRoactServiceResult (upval), p1 (upval), AvatarCreationService (upval), EnableTimeoutUI (upval), UseStateResult2_2 (upval), UseStateResult2 (upval), UseStateResult2_1 (upval), DelayedThread (ref), poll (copy)
+			getJobStatus(UseRoactServiceResult, Formatted):andThen(function(Result) --[[ Line: 198 ]]
+				-- upvalues: p1 (upval), AvatarCreationService (upval), EnableTimeoutUI (upval), UseStateResult2_2 (upval), UseStateResult2 (upval), UseStateResult2_1 (upval), DelayedThread (upval), poll (upval), Formatted (copy)
+				if Result.status == "done" then
+					local FileId = Result.fileIds and Result.fileIds[1]
 					p1.displaySelfieQRCode(false)
-					avatarCreationService:HandleSelfieQRResult(true, var12)
+					AvatarCreationService:HandleSelfieQRResult(true, FileId)
 					
 					return
-				elseif p3.status ~= "cancelled" and p3.status ~= "error" then
-					var11 = task.delay(1, function()
-						-- upvalues: poll (copy), p2 (copy)
-						poll(p2)
+				end
+				if Result.status ~= "cancelled" and Result.status ~= "error" then
+					DelayedThread = task.delay(1, function() --[[ Line: 211 ]]
+						-- upvalues: poll (upval), Formatted (upval)
+						poll(Formatted)
 					end)
 					
 					return
-				elseif enableTimeoutUI then
-					var7(true)
-					var2(false)
-					var5(false)
+				end
+				if EnableTimeoutUI then
+					UseStateResult2_2(true)
+					UseStateResult2(false)
+					UseStateResult2_1(false)
 					
 					return
+				else
+					p1.displaySelfieQRCode(false)
+					AvatarCreationService:HandleSelfieQRResult(false, "job polling failed")
 				end
-				p1.displaySelfieQRCode(false)
-				avatarCreationService:HandleSelfieQRResult(false, "job polling failed")
-			end):catch(function(_)
-				-- upvalues: enableTimeoutUI (copy), var7 (copy), var2 (copy), var5 (copy), p1 (copy), avatarCreationService (copy)
-				if enableTimeoutUI then
-					var7(true)
-					var2(false)
-					var5(false)
+			end):catch(function(_) --[[ Line: 216 ]]
+				-- upvalues: EnableTimeoutUI (upval), UseStateResult2_2 (upval), UseStateResult2 (upval), UseStateResult2_1 (upval), p1 (upval), AvatarCreationService (upval)
+				if EnableTimeoutUI then
+					UseStateResult2_2(true)
+					UseStateResult2(false)
+					UseStateResult2_1(false)
 					
 					return
+				else
+					p1.displaySelfieQRCode(false)
+					AvatarCreationService:HandleSelfieQRResult(false, "job polling failed")
 				end
-				p1.displaySelfieQRCode(false)
-				avatarCreationService:HandleSelfieQRResult(false, "job polling failed")
 			end)
 		end
 		
-		poll(string.format("%sml-runtime-gateway/v0.2/jobs/%s", url.APIS_URL, p1.jobId))
+		poll((string.format("%sml-runtime-gateway/v0.2/jobs/%s", Url.APIS_URL, p1.jobId)))
 		
-		return function()
-			-- upvalues: var11 (write), delayedThread (ref)
-			if var11 then
-				task.cancel(var11)
+		return function() --[[ Line: 229 ]]
+			-- upvalues: DelayedThread (ref), DelayedThread1 (copy)
+			if DelayedThread then
+				task.cancel(DelayedThread)
 			end
-			if delayedThread then
-				task.cancel(delayedThread)
+			if DelayedThread1 then
+				task.cancel(DelayedThread1)
 			end
 		end
 	end, {})
-	local t_1 = { ZIndex = 2, size = dialogSize.Medium }
+	local config1 = { ZIndex = 2, size = DialogSize.Medium }
 	
-	if not var3 then
-		function t_1.onClose(_)
-			-- upvalues: p1 (ref), enableTimeoutUI (copy), avatarCreationService (copy)
+	if not IsUsePreferredInputResultMatch then
+		function config1:onClose() --[[ Line: 245 ]]
+			-- upvalues: p1 (copy), EnableTimeoutUI (upval), AvatarCreationService (upval)
 			p1.displaySelfieQRCode(false)
 			
-			if enableTimeoutUI then
-				avatarCreationService:HandleSelfieQRResult(false, "QR code closed before job completed or session expired")
+			if EnableTimeoutUI then
+				AvatarCreationService:HandleSelfieQRResult(false, "QR code closed before job completed or session expired")
 				
 				return
+			else
+				AvatarCreationService:HandleSelfieQRResult(false, "QR code closed before job completed")
 			end
-			avatarCreationService:HandleSelfieQRResult(false, "QR code closed before job completed")
 		end
 	end
-	local var11 = if consoleCloseAffordanceFix then reactFocusNavigationModule.useEventHandler(focusNavigationEventNameEnum.NavigateBack, reactModule.useCallback(function(p2)
-		-- upvalues: var1 (ref), var2 (ref), p1 (ref), enableTimeoutUI (copy), avatarCreationService (copy)
-		local eventData = p2.eventData
+	local UseEventMapResult = if ConsoleCloseAffordanceFix then ReactFocusNavigationModule.useEventMap(config) else nil
+	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 259 ]]
+		-- upvalues: UseStateResult (copy), UseStateResult2 (copy), p1 (copy), EnableTimeoutUI (upval), AvatarCreationService (upval)
+		local EventData = p2.eventData
 		
-		if eventData and eventData.UserInputState == Enum.UserInputState.End then
+		if EventData and EventData.UserInputState == Enum.UserInputState.End then
 			p2:cancel()
 			
-			if var1 then
-				var2(false)
+			if UseStateResult then
+				UseStateResult2(false)
 				
 				return
 			end
 			p1.displaySelfieQRCode(false)
 			
-			if enableTimeoutUI then
-				avatarCreationService:HandleSelfieQRResult(false, "QR code closed before job completed or session expired")
+			if EnableTimeoutUI then
+				AvatarCreationService:HandleSelfieQRResult(false, "QR code closed before job completed or session expired")
 				
 				return
 			end
-			avatarCreationService:HandleSelfieQRResult(false, "QR code closed before job completed")
+			AvatarCreationService:HandleSelfieQRResult(false, "QR code closed before job completed")
 		end
-	end, { var1, p1.displaySelfieQRCode }), nil, if consoleCloseAffordanceFix then reactFocusNavigationModule.useEventMap(t) else nil) else nil
+	end, { UseStateResult, p1.displaySelfieQRCode })
+	local UseEventResult = if ConsoleCloseAffordanceFix then ReactFocusNavigationModule.useEventHandler(FocusNavigationEventNameEnum.NavigateBack, UseResult, nil, UseEventMapResult) else nil
 	
-	return if var1 then reactModule.createElement("Frame", {
+	return if UseStateResult then ReactModule.createElement("Frame", {
 		ZIndex = 7,
-		ref = if consoleCloseAffordanceFix then var11 else nil,
+		ref = if ConsoleCloseAffordanceFix then UseEventResult else nil,
 		Size = UDim2.new(1, 0, 1, 0),
-		BackgroundColor3 = if adoptStyleTokens then var9.Color.Extended.Black.Black_60.Color3 else Color3.fromRGB(0, 0, 0),
-		BackgroundTransparency = if adoptStyleTokens then var9.Color.Extended.Black.Black_60.Transparency else 0.4
+		BackgroundColor3 = if AdoptStyleTokens then UseTokensResult.Color.Extended.Black.Black_60.Color3 else Color3.fromRGB(0, 0, 0),
+		BackgroundTransparency = if AdoptStyleTokens then UseTokensResult.Color.Extended.Black.Black_60.Transparency else 0.4
 	}, {
-		InvisibleCloseButton = reactModule.createElement("TextButton", {
+		InvisibleCloseButton = ReactModule.createElement("TextButton", {
 			Size = UDim2.new(1, 0, 1, 0),
-			BackgroundTransparency = if adoptStyleTokens then var9.Color.ActionUtility.Background.Transparency else 1,
+			BackgroundTransparency = if AdoptStyleTokens then UseTokensResult.Color.ActionUtility.Background.Transparency else 1,
 			Text = "",
-			ZIndex = if not consoleCloseAffordanceFix then 5 else nil,
-			[reactModule.Event.Activated] = if allowQrEnlargeUniversally and not var3 or not consoleCloseAffordanceFix then function()
-				-- upvalues: var2 (ref)
-				var2(false)
-			end else nil
+			ZIndex = if ConsoleCloseAffordanceFix then nil else 5,
+			[ReactModule.Event.Activated] = if AllowQrEnlargeUniversally and not IsUsePreferredInputResultMatch then function() --[[ Line: 311 ]]
+				-- upvalues: UseStateResult2 (copy)
+				UseStateResult2(false)
+			end elseif ConsoleCloseAffordanceFix then nil else function() --[[ Line: 311 ]]
+				-- upvalues: UseStateResult2 (copy)
+				UseStateResult2(false)
+			end
 		}),
-		QRCodeArea = reactModule.createElement(SelfieQRCodeView, {
+		QRCodeArea = ReactModule.createElement(SelfieQRCodeView, {
 			sideLength = 500,
 			url = p1.url,
 			outerSize = UDim2.fromOffset(600, 600),
-			errorOccurred = if enableTimeoutUI then var6 else nil
+			errorOccurred = if EnableTimeoutUI then UseStateResult3 else nil
 		})
-	}) else reactModule.createElement("Frame", {
+	}) else ReactModule.createElement("Frame", {
 		ZIndex = 0,
-		ref = if consoleCloseAffordanceFix then var11 else nil,
+		ref = if ConsoleCloseAffordanceFix then UseEventResult else nil,
 		Size = UDim2.new(1, 0, 1, 0),
-		BackgroundColor3 = if adoptStyleTokens then var9.Color.Extended.Black.Black_0.Color3 else Color3.fromRGB(0, 0, 0),
-		BackgroundTransparency = if adoptStyleTokens then var9.Color.None.Transparency else 1
+		BackgroundColor3 = if AdoptStyleTokens then UseTokensResult.Color.Extended.Black.Black_0.Color3 else Color3.fromRGB(0, 0, 0),
+		BackgroundTransparency = if AdoptStyleTokens then UseTokensResult.Color.None.Transparency else 1
 	}, {
-		InvisibleCloseButton = if not consoleCloseAffordanceFix then reactModule.createElement("TextButton", {
+		InvisibleCloseButton = if ConsoleCloseAffordanceFix then nil else ReactModule.createElement("TextButton", {
 			Size = UDim2.new(1, 0, 1, 0),
-			BackgroundTransparency = if adoptStyleTokens then var9.Color.ActionUtility.Background.Transparency else 1,
+			BackgroundTransparency = if AdoptStyleTokens then UseTokensResult.Color.ActionUtility.Background.Transparency else 1,
 			Text = "",
 			ZIndex = 1,
-			[reactModule.Event.Activated] = function()
-				-- upvalues: p1 (ref), avatarCreationService (copy)
+			[ReactModule.Event.Activated] = function() --[[ Line: 344 ]]
+				-- upvalues: p1 (copy), AvatarCreationService (upval)
 				p1.displaySelfieQRCode(false)
-				avatarCreationService:HandleSelfieQRResult(false, "QR code closed before job completed")
+				AvatarCreationService:HandleSelfieQRResult(false, "QR code closed before job completed")
 			end
-		}) else nil,
-		Dialog = reactModule.createElement(dialog.Root, t_1, {
-			DialogContent = reactModule.createElement(dialog.Content, nil, {
-				Layout = reactModule.createElement("UIListLayout", {
+		}),
+		Dialog = ReactModule.createElement(Dialog.Root, config1, {
+			DialogContent = ReactModule.createElement(Dialog.Content, nil, {
+				Layout = ReactModule.createElement("UIListLayout", {
 					HorizontalAlignment = Enum.HorizontalAlignment.Center,
 					SortOrder = Enum.SortOrder.LayoutOrder,
-					Padding = if adoptStyleTokens then UDim.new(0, var9.Padding.Small) else UDim.new(0, 10)
+					Padding = if AdoptStyleTokens then UDim.new(0, UseTokensResult.Padding.Small) else UDim.new(0, 10)
 				}),
-				TopSpacer = reactModule.createElement("Frame", {
+				TopSpacer = ReactModule.createElement("Frame", {
 					LayoutOrder = 0,
-					Size = if adoptStyleTokens then UDim2.fromOffset(0, 56) else UDim2.new(0, 0, 0, 50),
-					BackgroundTransparency = if adoptStyleTokens then var9.Color.None.Transparency else 1
+					Size = if AdoptStyleTokens then UDim2.fromOffset(0, 56) else UDim2.new(0, 0, 0, 50),
+					BackgroundTransparency = if AdoptStyleTokens then UseTokensResult.Color.None.Transparency else 1
 				}),
-				HoverFrame = reactModule.createElement("Frame", {
+				HoverFrame = ReactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 1,
 					Size = UDim2.new(1, 0, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y
 				}, {
-					Layout = reactModule.createElement("UIListLayout", {
+					Layout = ReactModule.createElement("UIListLayout", {
 						HorizontalAlignment = Enum.HorizontalAlignment.Center,
 						VerticalAlignment = Enum.VerticalAlignment.Center
 					}),
-					InteractiveArea = reactModule.createElement("TextButton", {
+					InteractiveArea = ReactModule.createElement("TextButton", {
 						Text = "",
 						Size = UDim2.new(0.65, 0, 0, 0),
-						BackgroundTransparency = if adoptStyleTokens then var9.Color.ActionUtility.Background.Transparency else 1,
+						BackgroundTransparency = if AdoptStyleTokens then UseTokensResult.Color.ActionUtility.Background.Transparency else 1,
 						AutoButtonColor = false,
-						[reactModule.Event.MouseEnter] = function()
-							-- upvalues: enableTimeoutUI (copy), var6 (ref), allowQrEnlargeUniversally (copy), var3 (ref), var5 (ref)
-							if enableTimeoutUI and var6 then return end
-							if allowQrEnlargeUniversally or var3 then
-								var5(true)
+						[ReactModule.Event.MouseEnter] = function() --[[ Line: 386 ]]
+							-- upvalues: EnableTimeoutUI (upval), UseStateResult3 (copy), AllowQrEnlargeUniversally (upval), IsUsePreferredInputResultMatch (copy), UseStateResult2_1 (copy)
+							if EnableTimeoutUI and UseStateResult3 then return end
+							if AllowQrEnlargeUniversally or IsUsePreferredInputResultMatch then
+								UseStateResult2_1(true)
 							end
 						end,
-						[reactModule.Event.MouseLeave] = function()
-							-- upvalues: var5 (ref)
-							var5(false)
+						[ReactModule.Event.MouseLeave] = function() --[[ Line: 394 ]]
+							-- upvalues: UseStateResult2_1 (copy)
+							UseStateResult2_1(false)
 						end,
-						[reactModule.Event.Activated] = function()
-							-- upvalues: enableTimeoutUI (copy), var6 (ref), allowQrEnlargeUniversally (copy), var3 (ref), var2 (ref), var5 (ref)
-							if enableTimeoutUI and var6 then return end
-							if allowQrEnlargeUniversally or var3 then
-								var2(true)
+						[ReactModule.Event.Activated] = function() --[[ Line: 397 ]]
+							-- upvalues: EnableTimeoutUI (upval), UseStateResult3 (copy), AllowQrEnlargeUniversally (upval), IsUsePreferredInputResultMatch (copy), UseStateResult2 (copy), UseStateResult2_1 (copy)
+							if EnableTimeoutUI and UseStateResult3 then return end
+							if AllowQrEnlargeUniversally or IsUsePreferredInputResultMatch then
+								UseStateResult2(true)
 								
-								if enableTimeoutUI then
-									var5(false)
+								if EnableTimeoutUI then
+									UseStateResult2_1(false)
 								end
 							end
 						end
 					}, {
-						Constraint = reactModule.createElement("UIAspectRatioConstraint", {
+						Constraint = ReactModule.createElement("UIAspectRatioConstraint", {
 							AspectRatio = 1,
 							AspectType = Enum.AspectType.ScaleWithParentSize,
 							DominantAxis = Enum.DominantAxis.Width
 						}),
-						BorderFrame = reactModule.createElement("Frame", {
+						BorderFrame = ReactModule.createElement("Frame", {
 							Size = UDim2.new(0.98, 0, 0.98, 0),
 							Position = UDim2.fromScale(0.5, 0.5),
 							AnchorPoint = Vector2.new(0.5, 0.5),
-							BackgroundTransparency = var9.Color.ActionEmphasis.Border.Transparency
+							BackgroundTransparency = UseTokensResult.Color.ActionEmphasis.Border.Transparency
 						}, {
-							Stroke = reactModule.createElement("UIStroke", {
+							Stroke = ReactModule.createElement("UIStroke", {
 								Thickness = 3,
-								Color = if adoptStyleTokens then var9.Color.Extended.White.White_0.Color3 else Color3.fromRGB(255, 255, 255),
+								Color = if AdoptStyleTokens then UseTokensResult.Color.Extended.White.White_0.Color3 else Color3.fromRGB(255, 255, 255),
 								ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
 								LineJoinMode = Enum.LineJoinMode.Round,
-								Transparency = if adoptStyleTokens then if var4 then var9.Color.ActionEmphasis.Foreground.Transparency else var9.Color.ActionEmphasis.Border.Transparency elseif var4 then 0 else 1
+								Transparency = if AdoptStyleTokens then UseStateResult1 and UseTokensResult.Color.ActionEmphasis.Foreground.Transparency or UseTokensResult.Color.ActionEmphasis.Border.Transparency elseif UseStateResult1 then 0 else 1
 							}),
-							Corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0.075, 0) })
+							Corner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0.075, 0) })
 						}),
-						QRCodeArea = reactModule.createElement(SelfieQRCodeView, {
+						QRCodeArea = ReactModule.createElement(SelfieQRCodeView, {
 							sideLength = 225,
 							url = p1.url,
 							outerSize = UDim2.new(0.95, 0, 0.95, 0),
-							errorOccurred = if enableTimeoutUI then var6 else nil
+							errorOccurred = if EnableTimeoutUI then UseStateResult3 else nil
 						})
 					})
 				}),
-				BottomSpacer = reactModule.createElement("Frame", {
+				BottomSpacer = ReactModule.createElement("Frame", {
 					LayoutOrder = 2,
-					Size = if adoptStyleTokens then UDim2.fromOffset(0, var9.Gap.XXLarge) else UDim2.new(0, 0, 0, 30),
-					BackgroundTransparency = if adoptStyleTokens then var9.Color.None.Transparency else 1
+					Size = if AdoptStyleTokens then UDim2.fromOffset(0, UseTokensResult.Gap.XXLarge) else UDim2.new(0, 0, 0, 30),
+					BackgroundTransparency = if AdoptStyleTokens then UseTokensResult.Color.None.Transparency else 1
 				}),
-				TextContainerWrapper = reactModule.createElement("Frame", {
+				TextContainerWrapper = ReactModule.createElement("Frame", {
 					LayoutOrder = 3,
-					Size = UDim2.new(1, 0, 0, var9.Size.Size_2000),
-					BackgroundTransparency = var9.Color.None.Transparency
+					Size = UDim2.new(1, 0, 0, UseTokensResult.Size.Size_2000),
+					BackgroundTransparency = UseTokensResult.Color.None.Transparency
 				}, {
-					Layout = if not enableTimeoutUI then reactModule.createElement("UIListLayout", {
+					Layout = if EnableTimeoutUI then nil else ReactModule.createElement("UIListLayout", {
 						SortOrder = Enum.SortOrder.LayoutOrder,
 						HorizontalAlignment = Enum.HorizontalAlignment.Center
-					}) else nil,
-					TextAndIconContainer = if enableTimeoutUI then reactModule.createElement("Frame", {
+					}),
+					TextAndIconContainer = if EnableTimeoutUI then ReactModule.createElement("Frame", {
 						Size = UDim2.new(1, 0, 1, 0),
-						BackgroundTransparency = var9.Color.None.Transparency
+						BackgroundTransparency = UseTokensResult.Color.None.Transparency
 					}, {
-						Layout = reactModule.createElement("UIListLayout", {
-							FillDirection = if var6 then Enum.FillDirection.Horizontal else Enum.FillDirection.Vertical,
+						Layout = ReactModule.createElement("UIListLayout", {
+							FillDirection = if UseStateResult3 then Enum.FillDirection.Horizontal else Enum.FillDirection.Vertical,
 							SortOrder = Enum.SortOrder.LayoutOrder,
 							HorizontalAlignment = Enum.HorizontalAlignment.Left,
 							VerticalAlignment = Enum.VerticalAlignment.Top,
-							Padding = UDim.new(0, var9.Gap.Medium)
+							Padding = UDim.new(0, UseTokensResult.Gap.Medium)
 						}),
-						WarningIcon = if var6 then reactModule.createElement(icon, {
+						WarningIcon = if UseStateResult3 then ReactModule.createElement(Icon, {
 							LayoutOrder = 1,
-							name = foundationModule.Enums.IconName.TriangleExclamation,
-							size = var9.Size.Size_700,
-							BackgroundTransparency = var9.Color.None.Transparency
+							name = FoundationModule.Enums.IconName.TriangleExclamation,
+							size = UseTokensResult.Size.Size_700,
+							BackgroundTransparency = UseTokensResult.Color.None.Transparency
 						}) else nil,
-						TextContent = reactModule.createElement("Frame", {
+						TextContent = ReactModule.createElement("Frame", {
 							LayoutOrder = 2,
-							Size = if var6 then UDim2.new(1, -48, 0, 0) else UDim2.fromScale(1, 0),
+							Size = if UseStateResult3 then UDim2.new(1, -48, 0, 0) else UDim2.fromScale(1, 0),
 							AutomaticSize = Enum.AutomaticSize.Y,
-							BackgroundTransparency = var9.Color.None.Transparency
+							BackgroundTransparency = UseTokensResult.Color.None.Transparency
 						}, {
-							Layout = reactModule.createElement("UIListLayout", {
+							Layout = ReactModule.createElement("UIListLayout", {
 								SortOrder = Enum.SortOrder.LayoutOrder,
 								HorizontalAlignment = Enum.HorizontalAlignment.Left,
-								Padding = UDim.new(0, var9.Gap.Small)
+								Padding = UDim.new(0, UseTokensResult.Gap.Small)
 							}),
-							TitleText = reactModule.createElement(dialog.Text, {
+							TitleText = ReactModule.createElement(Dialog.Text, {
 								LayoutOrder = 3,
-								Text = if var6 then var10.errorTitle else var10.title,
-								TextXAlignment = if var6 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
+								Text = if UseStateResult3 then UseLocalizationResult.errorTitle else UseLocalizationResult.title,
+								TextXAlignment = if UseStateResult3 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
 								Font = Enum.Font.SourceSansBold
 							}),
-							DialogText = reactModule.createElement(dialog.Text, {
+							DialogText = ReactModule.createElement(Dialog.Text, {
 								LayoutOrder = 4,
-								Text = if var6 then var10.errorBody else "",
+								Text = if UseStateResult3 then UseLocalizationResult.errorBody else "",
 								TextXAlignment = Enum.TextXAlignment.Left
 							})
 						})
 					}) else nil,
-					TitleText = if not enableTimeoutUI then reactModule.createElement(dialog.Text, {
+					TitleText = if EnableTimeoutUI then nil else ReactModule.createElement(Dialog.Text, {
 						LayoutOrder = 3,
-						Text = var10.title,
+						Text = UseLocalizationResult.title,
 						Font = Enum.Font.SourceSansBold
-					}) else nil,
-					DialogText = if not enableTimeoutUI then reactModule.createElement(dialog.Text, { LayoutOrder = 4, Text = var10.body }) else nil
+					}),
+					DialogText = if EnableTimeoutUI then nil else ReactModule.createElement(Dialog.Text, { LayoutOrder = 4, Text = UseLocalizationResult.body })
 				})
 			})
 		})

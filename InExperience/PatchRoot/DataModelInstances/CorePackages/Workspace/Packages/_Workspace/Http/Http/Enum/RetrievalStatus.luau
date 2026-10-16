@@ -1,18 +1,18 @@
-﻿local t = {}
-local t_1 = {
+﻿local RetrievalStatusModule = {}
+local config = {
 	NotStarted = "NotStarted",
 	Fetching = "Fetching",
 	Done = "Done",
 	Failed = "Failed"
 }
-setmetatable(t, {
-	__newindex = function(_, _, _) end,
-	__index = function(_, p1)
-		-- upvalues: t_1 (ref)
-		assert(t_1[p1] ~= nil, "RetrievalStatus Enum has no value: " .. tostring(p1))
+setmetatable(RetrievalStatusModule, {
+	__newindex = function(_, _, _) --[[ Line: 11 ]] end,
+	__index = function(_, p1) --[[ Line: 12 ]]
+		-- upvalues: config (copy)
+		assert(config[p1] ~= nil, "RetrievalStatus Enum has no value: " .. tostring(p1))
 		
-		return t_1[p1]
+		return config[p1]
 	end
 })
 
-return t
+return RetrievalStatusModule

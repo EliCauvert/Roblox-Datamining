@@ -1,41 +1,33 @@
-﻿local gameDetailRodux = script:FindFirstAncestor("GameDetailRodux")
-local parent = gameDetailRodux.Parent
-local apiFetchGameIcons = require(parent.GameIconRodux).GameIcons.ApiFetchGameIcons
-local dataHydrationModule = require(parent.DataHydration)
-local functional = require(parent.AppCommonLib).Functional
-local gamesMultigetPlaceDetailsModule = require(gameDetailRodux.GamesByPlaceId.GamesMultigetPlaceDetails)
-local placeInfoModel = require(parent.PlaceInfoRodux).Models.PlaceInfoModel
-local receivedPlacesInfos = require(parent.PlaceInfoRodux).Actions.ReceivedPlacesInfos
-local convertUniverseIdToString = require(parent.SharedFlags).ConvertUniverseIdToString
-local fFlagMigrateGameIconsToStore = require(parent.SharedFlags).FFlagMigrateGameIconsToStore
+﻿local GameDetailRodux = script:FindFirstAncestor("GameDetailRodux")
+local Parent = GameDetailRodux.Parent
+local DataHydrationModule = require(Parent.DataHydration)
+local Functional = require(Parent.AppCommonLib).Functional
+local GamesMultigetPlaceDetailsModule = require(GameDetailRodux.GamesByPlaceId.GamesMultigetPlaceDetails)
+local PlaceInfoModel = require(Parent.PlaceInfoRodux).Models.PlaceInfoModel
+local ReceivedPlacesInfosFunction = require(Parent.PlaceInfoRodux).Actions.ReceivedPlacesInfos
+local ConvertUniverseIdToStringFunction = require(Parent.SharedFlags).ConvertUniverseIdToString
 
-return function(p1, p2)
-	-- upvalues: gamesMultigetPlaceDetailsModule (ref), functional (ref), placeInfoModel (ref), convertUniverseIdToString (ref), receivedPlacesInfos (ref), fFlagMigrateGameIconsToStore (ref), dataHydrationModule (ref), apiFetchGameIcons (ref)
-	return function(p3)
-		-- upvalues: p2 (ref), gamesMultigetPlaceDetailsModule (copy), p1 (ref), functional (copy), placeInfoModel (copy), convertUniverseIdToString (copy), receivedPlacesInfos (copy), fFlagMigrateGameIconsToStore (copy), dataHydrationModule (copy), apiFetchGameIcons (copy)
-		if p2 and #p2 ~= 0 then
-			return gamesMultigetPlaceDetailsModule(p1, p2):andThen(function(p4)
-				-- upvalues: functional (copy), placeInfoModel (copy), convertUniverseIdToString (copy), p3 (ref), receivedPlacesInfos (copy), fFlagMigrateGameIconsToStore (copy), dataHydrationModule (copy), apiFetchGameIcons (copy), p1 (copy)
-				local t = {}
-				local var1 = functional.Map(p4.responseBody, function(p5)
-					-- upvalues: placeInfoModel (copy), convertUniverseIdToString (copy), t (ref)
-					local var2 = placeInfoModel.fromWeb(p5)
-					table.insert(t, convertUniverseIdToString(var2.universeId))
-					
-					return var2
-				end)
-				p3:dispatch(receivedPlacesInfos(var1))
+return function(p1, p2) --[[ Line: 12 ]]
+	-- upvalues: GamesMultigetPlaceDetailsModule (copy), Functional (copy), PlaceInfoModel (copy), ConvertUniverseIdToStringFunction (copy), ReceivedPlacesInfosFunction (copy), DataHydrationModule (copy)
+	return function(p3) --[[ Line: 13 ]]
+		-- upvalues: p2 (copy), GamesMultigetPlaceDetailsModule (upval), p1 (copy), Functional (upval), PlaceInfoModel (upval), ConvertUniverseIdToStringFunction (upval), ReceivedPlacesInfosFunction (upval), DataHydrationModule (upval)
+		if not p2 or #p2 == 0 then return end
+		return GamesMultigetPlaceDetailsModule(p1, p2):andThen(function(Result) --[[ Line: 18 ]]
+			-- upvalues: Functional (upval), PlaceInfoModel (upval), ConvertUniverseIdToStringFunction (upval), p3 (copy), ReceivedPlacesInfosFunction (upval), DataHydrationModule (upval)
+			local List = {}
+			local MapResult = Functional.Map(Result.responseBody, function(p4) --[[ Line: 22 ]]
+				-- upvalues: PlaceInfoModel (upval), ConvertUniverseIdToStringFunction (upval), List (copy)
+				local FromWebResult = PlaceInfoModel.fromWeb(p4)
+				table.insert(List, (ConvertUniverseIdToStringFunction(FromWebResult.universeId)))
 				
-				if #t > 0 then
-					if fFlagMigrateGameIconsToStore then
-						dataHydrationModule.Game.getGameIconStore(false).getAndFetchGameIcons(t)
-						
-						return var1
-					end
-					p3:dispatch(apiFetchGameIcons(p1, t))
-				end
-				return var1
+				return FromWebResult
 			end)
-		end
+			p3:dispatch(ReceivedPlacesInfosFunction(MapResult))
+			
+			if #List > 0 then
+				DataHydrationModule.Game.getGameIconStore(false).getAndFetchGameIcons(List)
+			end
+			return MapResult
+		end)
 	end
 end

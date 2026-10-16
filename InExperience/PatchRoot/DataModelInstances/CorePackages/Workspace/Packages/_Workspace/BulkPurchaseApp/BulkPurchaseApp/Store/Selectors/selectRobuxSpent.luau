@@ -1,14 +1,14 @@
 ﻿local _ = require(script:FindFirstAncestor("BulkPurchaseApp").Store.Types)
 
-return function(p1)
-	local var1 = 0
+return function(p1): number --[[ Line: 7 | Named "selectRobuxSpent" ]]
+	local NewPriceRobux = 0
 	
 	if p1.itemData and p1.itemStatuses then
-		for i, v in p1.itemData do
-			if p1.itemStatuses[v.id] == Enum.MarketplaceItemPurchaseStatus.Success then
-				var1 += v.priceRobux
+		for _, value in p1.itemData do
+			if p1.itemStatuses[value.id] == Enum.MarketplaceItemPurchaseStatus.Success then
+				NewPriceRobux += value.priceRobux
 			end
 		end
 	end
-	return var1
+	return NewPriceRobux
 end

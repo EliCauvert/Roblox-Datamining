@@ -1,65 +1,65 @@
-﻿local serverDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
-local parent = serverDrivenUi.Parent
-local reactModule = require(parent.React)
-local tutilsModule = require(parent.tutils)
-local _ = require(parent.CollectionViews)
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local sduiConfigReducerModule = require(serverDrivenUi.Rodux.SduiConfigReducer)
-local useSduiContextModule = require(serverDrivenUi.System.useSduiContext)
-local getSduiFeedStoreModule = require(serverDrivenUi.DataStore.getSduiFeedStore)
-local processCollectionConfigModule = require(serverDrivenUi.System.processCollectionConfig)
-local getItemCollectionKeyModule = require(serverDrivenUi.DataStore.getItemCollectionKey)
-local _ = require(parent.SduiCoreSystem)
-local fFlagLuaAppLayoutParamsInContext = require(parent.SharedFlags).FFlagLuaAppLayoutParamsInContext
-local fFlagLuaAppUseEffectInSignalPreprocessing = require(parent.SharedFlags).FFlagLuaAppUseEffectInSignalPreprocessing
+﻿local ServerDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
+local Parent = ServerDrivenUi.Parent
+local ReactModule = require(Parent.React)
+local TutilsModule = require(Parent.tutils)
+local _ = require(Parent.CollectionViews)
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local SduiConfigReducerModule = require(ServerDrivenUi.Rodux.SduiConfigReducer)
+local UseSduiContextModule = require(ServerDrivenUi.System.useSduiContext)
+local GetSduiFeedStoreModule = require(ServerDrivenUi.DataStore.getSduiFeedStore)
+local ProcessCollectionConfigModule = require(ServerDrivenUi.System.processCollectionConfig)
+local GetItemCollectionKeyModule = require(ServerDrivenUi.DataStore.getItemCollectionKey)
+local _ = require(Parent.SduiCoreSystem)
+local FFlagLuaAppLayoutParamsInContext = require(Parent.SharedFlags).FFlagLuaAppLayoutParamsInContext
+local FFlagLuaAppUseEffectInSignalPreprocessing = require(Parent.SharedFlags).FFlagLuaAppUseEffectInSignalPreprocessing
 
-return function(p1, p2, p3)
-	-- upvalues: useSelector (ref), sduiConfigReducerModule (ref), tutilsModule (ref), useSduiContextModule (ref), fFlagLuaAppLayoutParamsInContext (ref), fFlagLuaAppUseEffectInSignalPreprocessing (ref), reactModule (ref), getSduiFeedStoreModule (ref), getItemCollectionKeyModule (ref), processCollectionConfigModule (ref)
-	p3 = p3 or p1
-	local var1 = useSelector(function(p4)
-		-- upvalues: sduiConfigReducerModule (copy), p3 (ref)
+return function(AppPage, p1, p2) --[[ Line: 30 | Named "useSduiContextFromRoduxAndProcessConfigs" ]]
+	-- upvalues: UseSelectorFunction (copy), SduiConfigReducerModule (copy), TutilsModule (copy), UseSduiContextModule (copy), FFlagLuaAppLayoutParamsInContext (copy), FFlagLuaAppUseEffectInSignalPreprocessing (copy), ReactModule (copy), GetSduiFeedStoreModule (copy), GetItemCollectionKeyModule (copy), ProcessCollectionConfigModule (copy)
+	local P2 = p2 or AppPage
+	local UseSelectorResult = UseSelectorFunction(function(p3) --[[ Line: 37 ]]
+		-- upvalues: SduiConfigReducerModule (upval), P2 (copy)
 		local t = {}
-		local var2 = p4.Personalization[sduiConfigReducerModule.key][p3]
+		local PersonalizationEntry = p3.Personalization[SduiConfigReducerModule.key][P2]
 		
-		if var2 then
-			t.templates = if var2.rootConfig then var2.rootConfig.templates else nil
-			t.dataUpdatedTimestamp = var2.dataUpdatedTimestamp
-			t.itemCollections = var2.itemCollections
+		if PersonalizationEntry then
+			t.templates = PersonalizationEntry.rootConfig and PersonalizationEntry.rootConfig.templates or nil
+			t.dataUpdatedTimestamp = PersonalizationEntry.dataUpdatedTimestamp
+			t.itemCollections = PersonalizationEntry.itemCollections
 		end
 		return t
-	end, tutilsModule.shallowEqual)
-	local var2 = useSduiContextModule({
-		appPage = p1,
-		templates = var1.templates,
-		dataUpdatedTimestamp = var1.dataUpdatedTimestamp,
-		pageLayoutConfig = if fFlagLuaAppLayoutParamsInContext then p2 else nil
+	end, TutilsModule.shallowEqual)
+	local UseSduiContextModuleResult = UseSduiContextModule({
+		appPage = AppPage,
+		templates = UseSelectorResult.templates,
+		dataUpdatedTimestamp = UseSelectorResult.dataUpdatedTimestamp,
+		pageLayoutConfig = if FFlagLuaAppLayoutParamsInContext then p1 else nil
 	});
-	(if fFlagLuaAppUseEffectInSignalPreprocessing then reactModule.useEffect else reactModule.useLayoutEffect)(function()
-		-- upvalues: getSduiFeedStoreModule (copy), p3 (ref), var1 (ref), getItemCollectionKeyModule (copy), processCollectionConfigModule (copy), var2 (ref)
-		local var3 = getSduiFeedStoreModule(p3)
-		local t = {}
+	(if FFlagLuaAppUseEffectInSignalPreprocessing then ReactModule.useEffect else ReactModule.useLayoutEffect)(function() --[[ Line: 59 ]]
+		-- upvalues: GetSduiFeedStoreModule (upval), P2 (copy), UseSelectorResult (copy), GetItemCollectionKeyModule (upval), ProcessCollectionConfigModule (upval), UseSduiContextModuleResult (copy)
+		local SduiFeedStoreModule = GetSduiFeedStoreModule(P2)
+		local ItemCollections = {}
 		
-		if var1.itemCollections then
-			for i, v in var1.itemCollections do
-				t[getItemCollectionKeyModule(v.topicId, v.sortIndex)] = {
-					sduiConfig = processCollectionConfigModule(v.sduiConfig, v.topicId, var2),
-					dataUpdatedTimestamp = v.dataUpdatedTimestamp
+		if UseSelectorResult.itemCollections then
+			for _, itemCollection in UseSelectorResult.itemCollections do
+				ItemCollections[GetItemCollectionKeyModule(itemCollection.topicId, itemCollection.sortIndex)] = {
+					sduiConfig = ProcessCollectionConfigModule(itemCollection.sduiConfig, itemCollection.topicId, UseSduiContextModuleResult),
+					dataUpdatedTimestamp = itemCollection.dataUpdatedTimestamp
 				}
 			end
-			var3.updateData({
-				templates = var1.templates,
-				itemCollections = t,
-				dataUpdatedTimestamp = var1.dataUpdatedTimestamp
+			SduiFeedStoreModule.updateData({
+				templates = UseSelectorResult.templates,
+				itemCollections = ItemCollections,
+				dataUpdatedTimestamp = UseSelectorResult.dataUpdatedTimestamp
 			})
 		end
-		return function() end
+		return function() --[[ Line: 77 ]] end
 	end, {
-		var2,
-		var1.itemCollections,
-		var1.templates,
-		var1.dataUpdatedTimestamp,
-		p3
+		UseSduiContextModuleResult,
+		UseSelectorResult.itemCollections,
+		UseSelectorResult.templates,
+		UseSelectorResult.dataUpdatedTimestamp,
+		P2
 	})
 	
-	return var2
+	return UseSduiContextModuleResult
 end

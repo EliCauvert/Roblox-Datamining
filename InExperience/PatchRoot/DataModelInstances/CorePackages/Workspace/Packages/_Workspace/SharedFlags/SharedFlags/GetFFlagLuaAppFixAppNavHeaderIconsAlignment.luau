@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("LuaAppFixAppNavHeaderIconsAlignment", false)
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastFlag("LuaAppFixAppNavHeaderIconsAlignment")
 end

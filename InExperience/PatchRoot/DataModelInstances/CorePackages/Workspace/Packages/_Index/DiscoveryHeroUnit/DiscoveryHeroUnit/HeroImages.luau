@@ -1,191 +1,201 @@
-﻿local discoveryHeroUnit = script:FindFirstAncestor("DiscoveryHeroUnit")
-local parent = discoveryHeroUnit.Parent
-local reactModule = require(parent.React)
-local _ = require(parent.Foundation)
-local argCheckModule = require(parent.ArgCheck)
-local fFlagLuaAppHomePageFirstImageLoadObserver = require(parent.SharedFlags).FFlagLuaAppHomePageFirstImageLoadObserver
-local parallaxUtilsModule = require(discoveryHeroUnit.ParallaxUtils)
-local useNormalizedVerticalProgress = parallaxUtilsModule.useNormalizedVerticalProgress
-local getYPositionOffsetForMotion = parallaxUtilsModule.getYPositionOffsetForMotion
-local getNormalizedTopPosition = parallaxUtilsModule.getNormalizedTopPosition
-local _ = require(discoveryHeroUnit.HeroUnitTypes)
+﻿local DiscoveryHeroUnit = script:FindFirstAncestor("DiscoveryHeroUnit")
+local Parent = DiscoveryHeroUnit.Parent
+local ReactModule = require(Parent.React)
+local _ = require(Parent.Foundation)
+local ArgCheckModule = require(Parent.ArgCheck)
+local FFlagLuaAppHomePageFirstImageLoadObserver = require(Parent.SharedFlags).FFlagLuaAppHomePageFirstImageLoadObserver
+local ParallaxUtilsModule = require(DiscoveryHeroUnit.ParallaxUtils)
+local UseNormalizedVerticalProgressFunction = ParallaxUtilsModule.useNormalizedVerticalProgress
+local GetYPositionOffsetForMotionFunction = ParallaxUtilsModule.getYPositionOffsetForMotion
+local GetNormalizedTopPositionFunction = ParallaxUtilsModule.getNormalizedTopPosition
+local _ = require(DiscoveryHeroUnit.HeroUnitTypes)
 
-local function _(p1, p2, p3)
+local function _(p1: number, p2: number, p3: number): number --[[ Line: 71 | Named "calculateModifiedNormalizedPosition" ]]
 	return if p1 < 0 and p3 and p3 > 0 then math.clamp(p1 / p3, -1, 0) elseif p2 == nil or p2 <= 0 or p2 >= 1 then p1 else math.clamp(p1 / p2, 0, 1)
 end
 
-local _ = function(p1, p2)
+local _ = function(p1, p2) --[[ Line: 87 | Named "computeNormalizedHeroUnitHeight" ]]
 	if p1 == nil then
 		return nil
+	else
+		local Y: number = p1.AbsoluteWindowSize.Y
+		
+		return if Y <= 0 then nil else p2 / Y
 	end
-	local y = p1.AbsoluteWindowSize.Y
-	
-	return if y <= 0 then nil else p2 / y
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: argCheckModule (ref), reactModule (ref), getNormalizedTopPosition (ref), useNormalizedVerticalProgress (ref), fFlagLuaAppHomePageFirstImageLoadObserver (ref), getYPositionOffsetForMotion (ref)
-	argCheckModule.assert(p1.foregroundAspectRatio > 0, "HeroImages: foregroundAspectRatio must be > 0")
-	local var1 = reactModule.useRef(nil)
-	local var2 = reactModule.useRef(nil)
-	local var3, var4 = reactModule.useBinding(Vector2.new(0, 0))
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), var4 (ref)
-		if var1 and var1.current then
-			var4(var1.current.AbsoluteSize)
+return ReactModule.memo(function(Frame: Frame) --[[ Line: 99 | Named "HeroImages" ]]
+	-- upvalues: ArgCheckModule (copy), ReactModule (copy), GetNormalizedTopPositionFunction (copy), UseNormalizedVerticalProgressFunction (copy), FFlagLuaAppHomePageFirstImageLoadObserver (copy), GetYPositionOffsetForMotionFunction (copy)
+	ArgCheckModule.assert(Frame.foregroundAspectRatio > 0, "HeroImages: foregroundAspectRatio must be > 0")
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(Vector2.new(0, 0))
+	ReactModule.useEffect(function() --[[ Line: 107 ]]
+		-- upvalues: UseRefResult (copy), UseBindingResult2 (copy)
+		if UseRefResult and UseRefResult.current then
+			UseBindingResult2(UseRefResult.current.AbsoluteSize)
 		end
 	end, {})
-	local var5 = reactModule.useCallback(function(p2)
-		-- upvalues: var2 (ref), getNormalizedTopPosition (copy), p1 (ref), var4 (ref)
-		if p2 then
-			var2.current = getNormalizedTopPosition(p1.verticalScrollingFrameRef.current, p2)
-			var4(p2.AbsoluteSize)
+	local UseResult = ReactModule.useCallback(function(Frame1) --[[ Line: 113 ]]
+		-- upvalues: UseRefResult1 (copy), GetNormalizedTopPositionFunction (upval), Frame (copy), UseBindingResult2 (copy)
+		if Frame1 then
+			UseRefResult1.current = GetNormalizedTopPositionFunction(Frame.verticalScrollingFrameRef.current, Frame1)
+			UseBindingResult2(Frame1.AbsoluteSize)
 		end
-	end, { p1.verticalScrollingFrameRef })
-	local var6 = useNormalizedVerticalProgress(p1.verticalScrollingFrameRef, var1)
-	local var7, var8 = reactModule.useBinding(Vector2.new(0, 0))
-	local var9 = reactModule.useCallback(function(p2, p3, p4, p5, p6)
-		-- upvalues: argCheckModule (copy)
-		argCheckModule.assert(p5 > 0)
-		argCheckModule.assert(p6 > 0)
-		local var10 = p2 - p3 + p4 * 2
+	end, { Frame.verticalScrollingFrameRef })
+	local UseNormalizedVerticalProgressResult = UseNormalizedVerticalProgressFunction(Frame.verticalScrollingFrameRef, UseRefResult)
+	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(Vector2.new(0, 0))
+	local UseResult1 = ReactModule.useCallback(function(p1, p2, p3: number, p4: number, p5: number): Vector2 --[[ Line: 124 ]]
+		-- upvalues: ArgCheckModule (upval)
+		ArgCheckModule.assert(p4 > 0)
+		ArgCheckModule.assert(p5 > 0)
+		local Y = p1 - p2 + p3 * 2
 		
-		return Vector2.new(p5 / p6 * var10, var10)
+		return Vector2.new(p4 / p5 * Y, Y)
 	end, {})
-	local var10 = if p1.foregroundAspectRatio == 1 then p1.foregroundOverflow + p1.tokens.Padding.Small else p1.foregroundOverflow - p1.tokens.Padding.Small
-	local var11 = p1.backgroundOverflow * 2
-	local backgroundOverflow = p1.backgroundOverflow
+	local NewForegroundOverflow = if Frame.foregroundAspectRatio == 1 then Frame.foregroundOverflow + Frame.tokens.Padding.Small else Frame.foregroundOverflow - Frame.tokens.Padding.Small
+	local ScaledBackgroundOverflow = Frame.backgroundOverflow * 2
+	local BackgroundOverflow = Frame.backgroundOverflow
+	local YOffset = -Frame.foregroundOverflow * (if Frame.gradientHeightPercent and Frame.gradientHeightPercent > 0 then Frame.gradientHeightPercent else 1) + (if Frame.gradientHeightPercent >= 0.9 then 1 else 0)
 	
-	return reactModule.createElement("Frame", {
-		[reactModule.Change.AbsoluteSize] = var5,
-		ref = var1,
+	return ReactModule.createElement("Frame", {
+		[ReactModule.Change.AbsoluteSize] = UseResult,
+		ref = UseRefResult,
 		BackgroundTransparency = 1,
-		Size = p1.Size,
-		ZIndex = p1.ZIndex,
-		Position = p1.Position,
-		AnchorPoint = p1.AnchorPoint,
-		LayoutOrder = p1.LayoutOrder,
+		Size = Frame.Size,
+		ZIndex = Frame.ZIndex,
+		Position = Frame.Position,
+		AnchorPoint = Frame.AnchorPoint,
+		LayoutOrder = Frame.LayoutOrder,
 		ClipsDescendants = true
 	}, {
-		BackgroundImage = reactModule.createElement("ImageLabel", {
+		BackgroundImage = ReactModule.createElement("ImageLabel", {
 			AnchorPoint = Vector2.new(0.5, 1),
-			Size = UDim2.new(1, 0, 1, -p1.foregroundOverflow),
+			Size = UDim2.new(1, 0, 1, -Frame.foregroundOverflow),
 			Position = UDim2.new(0.5, 0, 1, 0),
 			BackgroundTransparency = 0,
-			BackgroundColor3 = p1.tokens.Color.Surface.Surface_100.Color3,
+			BackgroundColor3 = Frame.tokens.Color.Surface.Surface_100.Color3,
 			ZIndex = 0,
-			Image = p1.backgroundImage,
+			Image = Frame.backgroundImage,
 			ScaleType = Enum.ScaleType.Crop,
-			[reactModule.Tag] = if fFlagLuaAppHomePageFirstImageLoadObserver then "observed-image data-testid=--hero-unit-background-image" else "data-testid=--hero-unit-background-image",
-			ImageRectOffset = if p1.enableBackgroundAnimation then reactModule.joinBindings({
-				normalizedPosition = var6,
-				imageSize = var7,
-				frameSize = var3
-			}):map(function(p2)
-				-- upvalues: var2 (ref), getNormalizedTopPosition (copy), p1 (ref), var1 (ref), getYPositionOffsetForMotion (copy), var11 (ref), backgroundOverflow (ref), var9 (ref)
-				if var2.current == nil then
-					var2.current = getNormalizedTopPosition(p1.verticalScrollingFrameRef.current, var1.current)
+			[ReactModule.Tag] = if FFlagLuaAppHomePageFirstImageLoadObserver then "observed-image data-testid=--hero-unit-background-image" else "data-testid=--hero-unit-background-image",
+			ImageRectOffset = if Frame.enableBackgroundAnimation then ReactModule.joinBindings({
+				normalizedPosition = UseNormalizedVerticalProgressResult,
+				imageSize = UseBindingResult1,
+				frameSize = UseBindingResult
+			}):map(function(p1): Vector2 --[[ Line: 190 ]]
+				-- upvalues: UseRefResult1 (copy), GetNormalizedTopPositionFunction (upval), Frame (copy), UseRefResult (copy), GetYPositionOffsetForMotionFunction (upval), ScaledBackgroundOverflow (copy), BackgroundOverflow (copy), UseResult1 (copy)
+				if UseRefResult1.current == nil then
+					UseRefResult1.current = GetNormalizedTopPositionFunction(Frame.verticalScrollingFrameRef.current, UseRefResult.current)
 				end
-				local var12
-				local current = p1.verticalScrollingFrameRef.current
-				local y = p2.frameSize.Y
+				local Current = Frame.verticalScrollingFrameRef.current
+				local Y = p1.frameSize.Y
+				local v1 = nil
 				
-				if current == nil then
-					var12 = nil
+				if Current == nil then
+					v1 = nil
 				else
-					local y_1 = current.AbsoluteWindowSize.Y
-					var12 = if y_1 <= 0 then nil else y / y_1
+					local Y1: number = Current.AbsoluteWindowSize.Y
+					v1 = if Y1 <= 0 then nil else Y / Y1
 				end
-				local normalizedPosition = p2.normalizedPosition
-				local current_1 = var2.current
-				normalizedPosition = getYPositionOffsetForMotion(if normalizedPosition < 0 and var12 and var12 > 0 then math.clamp(normalizedPosition / var12, -1, 0) elseif current_1 == nil or current_1 <= 0 or current_1 >= 1 then normalizedPosition else math.clamp(normalizedPosition / current_1, 0, 1), 0, var11, backgroundOverflow)
-				current_1 = p2.imageSize
+				local NormalizedPosition: number = p1.normalizedPosition
+				local Current1: number = UseRefResult1.current
+				local YPositionOffsetForMotion = GetYPositionOffsetForMotionFunction(if NormalizedPosition < 0 and v1 and v1 > 0 then math.clamp(NormalizedPosition / v1, -1, 0) elseif Current1 == nil or Current1 <= 0 or Current1 >= 1 then NormalizedPosition else math.clamp(NormalizedPosition / Current1, 0, 1), 0, ScaledBackgroundOverflow, BackgroundOverflow)
+				local ImageSize = p1.imageSize
 				
-				if current_1.X > 0 and current_1.Y > 0 and (var1 and var1.current) then
-					local frameSize = p2.frameSize
-					local var13 = var9(frameSize.Y, p1.foregroundOverflow, p1.backgroundOverflow, current_1.X, current_1.Y)
+				if ImageSize.X > 0 and ImageSize.Y > 0 and UseRefResult and UseRefResult.current then
+					local FrameSize = p1.frameSize
+					local UseResultResult = UseResult1(FrameSize.Y, Frame.foregroundOverflow, Frame.backgroundOverflow, ImageSize.X, ImageSize.Y)
 					
-					return Vector2.new((1 - frameSize.X / var13.X) * current_1.X * 0.5, normalizedPosition * (current_1.Y / var13.Y))
+					return Vector2.new((1 - FrameSize.X / UseResultResult.X) * ImageSize.X * 0.5, YPositionOffsetForMotion * (ImageSize.Y / UseResultResult.Y))
+				else
+					return Vector2.new(0, 0)
 				end
-				return Vector2.new(0, 0)
 			end) else nil,
-			ImageRectSize = if p1.enableBackgroundAnimation then reactModule.joinBindings({ imageSize = var7, frameSize = var3 }):map(function(p2)
-				-- upvalues: var1 (ref), var9 (ref), p1 (ref)
-				local imageSize = p2.imageSize
+			ImageRectSize = if Frame.enableBackgroundAnimation then ReactModule.joinBindings({
+				imageSize = UseBindingResult1,
+				frameSize = UseBindingResult
+			}):map(function(p1): Vector2 --[[ Line: 233 ]]
+				-- upvalues: UseRefResult (copy), UseResult1 (copy), Frame (copy)
+				local ImageSize = p1.imageSize
 				
-				if imageSize.X > 0 and imageSize.Y > 0 and (var1 and var1.current) then
-					local frameSize = p2.frameSize
-					local var12 = var9(frameSize.Y, p1.foregroundOverflow, p1.backgroundOverflow, imageSize.X, imageSize.Y)
+				if ImageSize.X > 0 and ImageSize.Y > 0 and UseRefResult and UseRefResult.current then
+					local FrameSize = p1.frameSize
+					local UseResultResult = UseResult1(FrameSize.Y, Frame.foregroundOverflow, Frame.backgroundOverflow, ImageSize.X, ImageSize.Y)
 					
-					return Vector2.new(frameSize.X / var12.X * imageSize.X, imageSize.Y - p1.backgroundOverflow * 2 / var12.Y * imageSize.Y)
+					return Vector2.new(FrameSize.X / UseResultResult.X * ImageSize.X, ImageSize.Y - Frame.backgroundOverflow * 2 / UseResultResult.Y * ImageSize.Y)
+				else
+					return Vector2.new(0, 0)
 				end
-				return Vector2.new(0, 0)
 			end) else nil,
-			[reactModule.Change.ContentImageSize] = function(p2)
-				-- upvalues: var8 (ref)
-				if p2 then
-					var8(p2.ContentImageSize)
+			[ReactModule.Change.ContentImageSize] = function(p1) --[[ Line: 262 ]]
+				-- upvalues: UseBindingResult2_1 (copy)
+				if p1 then
+					UseBindingResult2_1(p1.ContentImageSize)
 				end
 			end
 		}, {
-			CornerRadius = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, p1.cornerRadius) })
+			CornerRadius = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, Frame.cornerRadius) })
 		}),
-		ForegroundImage = reactModule.createElement("ImageLabel", {
+		ForegroundImage = ReactModule.createElement("ImageLabel", {
 			AnchorPoint = Vector2.new(0.5, 0),
-			Size = UDim2.new(1, -p1.foregroundOverflow, 1 / p1.foregroundAspectRatio, -p1.foregroundOverflow / p1.foregroundAspectRatio),
+			Size = UDim2.new(1, -Frame.foregroundOverflow, 1 / Frame.foregroundAspectRatio, -Frame.foregroundOverflow / Frame.foregroundAspectRatio),
 			SizeConstraint = Enum.SizeConstraint.RelativeYY,
-			Position = if p1.enableForegroundAnimation then reactModule.joinBindings({ normalizedPosition = var6, frameSize = var3 }):map(function(p2)
-				-- upvalues: var2 (ref), getNormalizedTopPosition (copy), p1 (ref), var1 (ref), getYPositionOffsetForMotion (copy), var10 (ref)
-				if var2.current == nil then
-					var2.current = getNormalizedTopPosition(p1.verticalScrollingFrameRef.current, var1.current)
+			Position = if Frame.enableForegroundAnimation then ReactModule.joinBindings({
+				normalizedPosition = UseNormalizedVerticalProgressResult,
+				frameSize = UseBindingResult
+			}):map(function(p1): UDim2 --[[ Line: 287 ]]
+				-- upvalues: UseRefResult1 (copy), GetNormalizedTopPositionFunction (upval), Frame (copy), UseRefResult (copy), GetYPositionOffsetForMotionFunction (upval), NewForegroundOverflow (copy)
+				if UseRefResult1.current == nil then
+					UseRefResult1.current = GetNormalizedTopPositionFunction(Frame.verticalScrollingFrameRef.current, UseRefResult.current)
 				end
-				local var12
-				local current = p1.verticalScrollingFrameRef.current
-				local y = p2.frameSize.Y
+				local Current = Frame.verticalScrollingFrameRef.current
+				local Y = p1.frameSize.Y
+				local v1 = nil
 				
-				if current == nil then
-					var12 = nil
+				if Current == nil then
+					v1 = nil
 				else
-					local y_1 = current.AbsoluteWindowSize.Y
-					var12 = if y_1 <= 0 then nil else y / y_1
+					local Y1: number = Current.AbsoluteWindowSize.Y
+					v1 = if Y1 <= 0 then nil else Y / Y1
 				end
-				local normalizedPosition = p2.normalizedPosition
-				local current_1 = var2.current
-				local var13 = if normalizedPosition < 0 and var12 and var12 > 0 then math.clamp(normalizedPosition / var12, -1, 0) elseif current_1 == nil or current_1 <= 0 or current_1 >= 1 then normalizedPosition else math.clamp(normalizedPosition / current_1, 0, 1)
-				normalizedPosition = p2.frameSize.Y
-				local var14 = -((normalizedPosition - p1.foregroundOverflow) / p1.foregroundAspectRatio - normalizedPosition)
+				local NormalizedPosition: number = p1.normalizedPosition
+				local Current1: number = UseRefResult1.current
+				local ClampedValue = if NormalizedPosition < 0 and v1 and v1 > 0 then math.clamp(NormalizedPosition / v1, -1, 0) elseif Current1 == nil or Current1 <= 0 or Current1 >= 1 then NormalizedPosition else math.clamp(NormalizedPosition / Current1, 0, 1)
+				local Y2 = p1.frameSize.Y
+				local Negated = -((Y2 - Frame.foregroundOverflow) / Frame.foregroundAspectRatio - Y2)
 				
-				if p1.foregroundAspectRatio == 1 then
-					var14 -= p1.tokens.Size.Size_1500
+				if Frame.foregroundAspectRatio == 1 then
+					Negated -= Frame.tokens.Size.Size_1500
 				end
-				return UDim2.new(0.5, 0, 0, getYPositionOffsetForMotion(var13, var14, var10, 0))
+				return UDim2.new(0.5, 0, 0, (GetYPositionOffsetForMotionFunction(ClampedValue, Negated, NewForegroundOverflow, 0)))
 			end) else UDim2.new(0.5, 0, 0, 0),
-			Image = p1.foregroundImage,
+			Image = Frame.foregroundImage,
 			ZIndex = 1,
 			BackgroundTransparency = 1,
-			[reactModule.Tag] = if fFlagLuaAppHomePageFirstImageLoadObserver then "observed-image data-testid=--hero-unit-foreground-image" else "data-testid=--hero-unit-foreground-image"
+			[ReactModule.Tag] = if FFlagLuaAppHomePageFirstImageLoadObserver then "observed-image data-testid=--hero-unit-foreground-image" else "data-testid=--hero-unit-foreground-image"
 		}),
-		HeroGradientFrame = p1.gradient and reactModule.createElement("Frame", {
+		HeroGradientFrame = Frame.gradient and ReactModule.createElement("Frame", {
 			ZIndex = 2,
 			BackgroundTransparency = 0,
 			BorderSizePixel = 0,
 			AnchorPoint = Vector2.new(0, 1),
 			Position = UDim2.new(0, 0, 1, 1),
-			Size = UDim2.new(p1.gradientWidthPercent, 0, p1.gradientHeightPercent, -p1.foregroundOverflow * (if p1.gradientHeightPercent and p1.gradientHeightPercent > 0 then p1.gradientHeightPercent else 1) + (if p1.gradientHeightPercent >= 0.9 then 1 else 0)),
+			Size = UDim2.new(Frame.gradientWidthPercent, 0, Frame.gradientHeightPercent, YOffset),
 			BackgroundColor3 = Color3.new(1, 1, 1)
 		}, {
-			HeroGradient = reactModule.createElement("UIGradient", {
-				Rotation = p1.gradient.degree,
+			HeroGradient = ReactModule.createElement("UIGradient", {
+				Rotation = Frame.gradient.degree,
 				Transparency = NumberSequence.new({
-					NumberSequenceKeypoint.new(0, p1.gradient.startOpacity),
-					NumberSequenceKeypoint.new(1, p1.gradient.endOpacity)
+					NumberSequenceKeypoint.new(0, Frame.gradient.startOpacity),
+					NumberSequenceKeypoint.new(1, Frame.gradient.endOpacity)
 				}),
 				Color = ColorSequence.new({
-					ColorSequenceKeypoint.new(0, p1.gradient.startColor),
-					ColorSequenceKeypoint.new(1, p1.gradient.endColor)
+					ColorSequenceKeypoint.new(0, Frame.gradient.startColor),
+					ColorSequenceKeypoint.new(1, Frame.gradient.endColor)
 				})
 			}),
-			CornerRadius = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, p1.cornerRadius) })
+			CornerRadius = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, Frame.cornerRadius) })
 		}) or nil
 	})
 end)

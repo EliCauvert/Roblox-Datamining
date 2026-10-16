@@ -1,90 +1,97 @@
-﻿local parent = script:FindFirstAncestor("ProfilePlatform").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local navigationModule = require(parent.Navigation)
-local robloxAppHooksModule = require(parent.RobloxAppHooks)
-local roactUtilsModule = require(parent.RoactUtils)
-local momentsCommonModule = require(parent.MomentsCommon)
-local momentsModule = require(parent.Moments)
-local genericAbuseReportingModule = require(parent.GenericAbuseReporting)
-local centralOverlayModule = require(parent.CentralOverlay)
-local useOpenBlockingModalModule = require(parent.MomentsCommon.useOpenBlockingModal)
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagMomentsOptimisticProfilePending = sharedFlagsModule.FFlagMomentsOptimisticProfilePending
-local fFlagEnableArgusImmersiveNav = sharedFlagsModule.FFlagEnableArgusImmersiveNav
-local fFlagEnableReportingFlowForMomentsFeed = sharedFlagsModule.FFlagEnableReportingFlowForMomentsFeed
-local fFlagEnableMomentsCommentReporting = sharedFlagsModule.FFlagEnableMomentsCommentReporting
-local fFlagEnableMomentsCommentBlocking = sharedFlagsModule.FFlagEnableMomentsCommentBlocking
-local fFlagAbuseReportSubmissionTargetV4 = sharedFlagsModule.FFlagAbuseReportSubmissionTargetV4
-local view = foundationModule.View
-local iconButton = foundationModule.IconButton
-local buttonSize = foundationModule.Enums.ButtonSize
-local foundationProvider = foundationModule.FoundationProvider
-local colorMode = foundationModule.Enums.ColorMode
-local useScreenSize = robloxAppHooksModule.useScreenSize
-local useStatusBarHeight = robloxAppHooksModule.useStatusBarHeight
-local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local abuseVector = genericAbuseReportingModule.Enums.AbuseVector
-local openDynamicAbuseReport = genericAbuseReportingModule.Thunks.OpenDynamicAbuseReport
-local closeCentralOverlay = centralOverlayModule.Thunks.CloseCentralOverlay
-local fireAnalyticsEvent = momentsCommonModule.Analytics.fireAnalyticsEvent
-local eventNames = momentsCommonModule.Analytics.EventNames
-local useNavigation = navigationModule.useNavigation
-local feed = momentsModule.Feed
-local momentsImmersivePresentation = momentsModule.MomentsImmersivePresentation
-local immersiveFeedKind = momentsModule.Constants.ImmersiveFeedKind
-local createUserMomentsFeedSourceModule = require(parent.Moments.CreateUserMomentsFeedSource)
-local reportMoment = momentsModule.reportMoment
+﻿local Parent = script:FindFirstAncestor("ProfilePlatform").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local RobloxAppHooksModule = require(Parent.RobloxAppHooks)
+local RoactUtilsModule = require(Parent.RoactUtils)
+local MomentsCommonModule = require(Parent.MomentsCommon)
+local MomentsModule = require(Parent.Moments)
+local GenericAbuseReportingModule = require(Parent.GenericAbuseReporting)
+local UseOpenBlockingModalModule = require(Parent.MomentsCommon.useOpenBlockingModal)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagMomentsOptimisticProfilePending = SharedFlagsModule.FFlagMomentsOptimisticProfilePending
+local FFlagEnableMomentsCommentReporting = SharedFlagsModule.FFlagEnableMomentsCommentReporting
+local FFlagEnableMomentsCommentBlocking = SharedFlagsModule.FFlagEnableMomentsCommentBlocking
+local FFlagAbuseReportSubmissionTargetV4 = SharedFlagsModule.FFlagAbuseReportSubmissionTargetV4
+local FFlagMomentsServeEDPVideos = SharedFlagsModule.FFlagMomentsServeEDPVideos
+local View = FoundationModule.View
+local IconButton = FoundationModule.IconButton
+local ButtonSize = FoundationModule.Enums.ButtonSize
+local FoundationProvider = FoundationModule.FoundationProvider
+local ColorMode = FoundationModule.Enums.ColorMode
+local UseScreenSizeFunction = RobloxAppHooksModule.useScreenSize
+local UseStatusBarHeightFunction = RobloxAppHooksModule.useStatusBarHeight
+local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
+local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
+local AbuseVector = GenericAbuseReportingModule.Enums.AbuseVector
+local OpenDynamicAbuseReportFunction = GenericAbuseReportingModule.Thunks.OpenDynamicAbuseReport
+local CloseCentralOverlayFunction = require(Parent.CentralOverlay).Thunks.CloseCentralOverlay
+local FireAnalyticsEventFunction = MomentsCommonModule.Analytics.fireAnalyticsEvent
+local EventNames = MomentsCommonModule.Analytics.EventNames
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local Feed = MomentsModule.Feed
+local MomentsImmersivePresentation = MomentsModule.MomentsImmersivePresentation
+local ImmersiveFeedKind = MomentsModule.Constants.ImmersiveFeedKind
+local CreateUserMomentsFeedSourceModule = require(Parent.Moments.CreateUserMomentsFeedSource)
+local ReportMomentFunction = MomentsModule.reportMoment
 
-return if fFlagEnableArgusImmersiveNav then function()
-	-- upvalues: useNavigation (ref), fFlagMomentsOptimisticProfilePending (ref), reactModule (ref), fireAnalyticsEvent (ref), eventNames (ref), fFlagEnableReportingFlowForMomentsFeed (ref), useDispatch (ref), closeCentralOverlay (ref), reportMoment (ref), openDynamicAbuseReport (ref), abuseVector (ref), fFlagAbuseReportSubmissionTargetV4 (ref), fFlagEnableMomentsCommentReporting (ref), fFlagEnableMomentsCommentBlocking (ref), useOpenBlockingModalModule (ref), useScreenSize (ref), view (ref), momentsImmersivePresentation (ref), immersiveFeedKind (ref)
-	local var1 = useNavigation()
-	local extraProps = var1.getParam("extraProps")
-	local var2 = if extraProps and extraProps.targetUserId then extraProps.targetUserId else 0
-	local var3 = if extraProps and extraProps.initialIndex then extraProps.initialIndex else 1
-	local var4 = if fFlagMomentsOptimisticProfilePending and extraProps ~= nil then extraProps.initialMomentId else nil
-	local var5 = reactModule.useCallback(function()
-		-- upvalues: fireAnalyticsEvent (copy), eventNames (copy), var2 (ref), var1 (ref)
-		fireAnalyticsEvent(eventNames.ProfileClosePressed, { userId = tostring(var2) })
-		var1.goBack()
-	end, { var1.goBack, var2 })
-	local var6 = nil
-	
-	if fFlagEnableReportingFlowForMomentsFeed then
-		local var7 = useDispatch()
-		var6 = reactModule.useCallback(function(p1)
-			-- upvalues: var7 (ref), closeCentralOverlay (copy), reportMoment (copy), openDynamicAbuseReport (copy), abuseVector (copy), fFlagAbuseReportSubmissionTargetV4 (copy)
-			local var8 = false
-			
-			local function submitMomentsIp(_)
-				-- upvalues: var8 (write), p1 (ref), var7 (copy), closeCentralOverlay (copy), reportMoment (copy)
-				var8 = true
-				
-				local function _(p2)
-					-- upvalues: p1 (copy), var7 (copy), closeCentralOverlay (copy)
+local function MomentsFeedPageImmersive() --[[ Line: 70 ]]
+	-- upvalues: UseNavigationFunction (copy), FFlagMomentsOptimisticProfilePending (copy), ReactModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), UseDispatchFunction (copy), FFlagMomentsServeEDPVideos (copy), OpenDynamicAbuseReportFunction (copy), AbuseVector (copy), CloseCentralOverlayFunction (copy), ReportMomentFunction (copy), FFlagAbuseReportSubmissionTargetV4 (copy), FFlagEnableMomentsCommentReporting (copy), FFlagEnableMomentsCommentBlocking (copy), UseOpenBlockingModalModule (copy), UseScreenSizeFunction (copy), View (copy), MomentsImmersivePresentation (copy), ImmersiveFeedKind (copy)
+	local UseNavigationResult = UseNavigationFunction()
+	local ExtraPropsParam = UseNavigationResult.getParam("extraProps")
+	local TargetUserId = if ExtraPropsParam and ExtraPropsParam.targetUserId then ExtraPropsParam.targetUserId else 0
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 80 ]]
+		-- upvalues: FireAnalyticsEventFunction (upval), EventNames (upval), TargetUserId (copy), UseNavigationResult (copy)
+		FireAnalyticsEventFunction(EventNames.ProfileClosePressed, { userId = tostring(TargetUserId) })
+		UseNavigationResult.goBack()
+	end, { UseNavigationResult.goBack, TargetUserId })
+	local UseDispatchResult = UseDispatchFunction()
+	local UseResult1 = ReactModule.useCallback(function(p1) --[[ Line: 90 ]]
+		-- upvalues: FFlagMomentsServeEDPVideos (upval), UseDispatchResult (copy), OpenDynamicAbuseReportFunction (upval), AbuseVector (upval), CloseCentralOverlayFunction (upval), ReportMomentFunction (upval), FFlagAbuseReportSubmissionTargetV4 (upval)
+		if FFlagMomentsServeEDPVideos and p1.onCustomSubmit then
+			UseDispatchResult(OpenDynamicAbuseReportFunction({
+				abuseVector = AbuseVector.MomentsFeed,
+				targetId = p1.feedItemId,
+				onSubmit = p1.onSubmit,
+				onClose = function() --[[ Line: 103 ]]
+					-- upvalues: p1 (copy), UseDispatchResult (upval), CloseCentralOverlayFunction (upval)
 					p1.onClose()
-					var7(closeCentralOverlay())
+					UseDispatchResult(CloseCentralOverlayFunction())
+				end,
+				onCustomSubmit = p1.onCustomSubmit
+			}))
+			
+			return
+		else
+			local Flag = false
+			
+			local function submitMomentsIp(_) --[[ Line: 116 ]]
+				-- upvalues: Flag (ref), p1 (copy), UseDispatchResult (upval), CloseCentralOverlayFunction (upval), ReportMomentFunction (upval)
+				Flag = true
+				
+				local function _(p2) --[[ Line: 122 | Named "showConfirmation" ]]
+					-- upvalues: p1 (upval), UseDispatchResult (upval), CloseCentralOverlayFunction (upval)
+					p1.onClose()
+					UseDispatchResult(CloseCentralOverlayFunction())
 					
 					if p1.onIpReportCode then
 						p1.onIpReportCode(p2)
 					end
 				end
 				
-				return reportMoment(p1.feedItemId, "IntellectualProperty"):andThen(function(p2)
-					-- upvalues: p1 (copy), var7 (copy), closeCentralOverlay (copy)
-					local reportCode = p2.reportCode
+				return ReportMomentFunction(p1.feedItemId, "IntellectualProperty"):andThen(function(Result) --[[ Line: 129 ]]
+					-- upvalues: p1 (upval), UseDispatchResult (upval), CloseCentralOverlayFunction (upval)
+					local ReportCode = Result.reportCode
 					p1.onClose()
-					var7(closeCentralOverlay())
+					UseDispatchResult(CloseCentralOverlayFunction())
 					
 					if p1.onIpReportCode then
-						p1.onIpReportCode(reportCode)
+						p1.onIpReportCode(ReportCode)
 					end
-					return p2
-				end, function()
-					-- upvalues: p1 (copy), var7 (copy), closeCentralOverlay (copy)
+					return Result
+				end, function() --[[ Line: 132 ]]
+					-- upvalues: p1 (upval), UseDispatchResult (upval), CloseCentralOverlayFunction (upval)
 					p1.onClose()
-					var7(closeCentralOverlay())
+					UseDispatchResult(CloseCentralOverlayFunction())
 					
 					if p1.onIpReportCode then
 						p1.onIpReportCode(nil)
@@ -92,116 +99,118 @@ return if fFlagEnableArgusImmersiveNav then function()
 				end)
 			end
 			
-			var7(openDynamicAbuseReport({
-				abuseVector = abuseVector.MomentsFeed,
+			UseDispatchResult(OpenDynamicAbuseReportFunction({
+				abuseVector = AbuseVector.MomentsFeed,
 				targetId = p1.feedItemId,
-				onSubmit = function()
-					-- upvalues: var8 (write), p1 (ref)
-					if var8 then
+				onSubmit = function() --[[ Line: 139 ]]
+					-- upvalues: Flag (ref), p1 (copy)
+					if not Flag then
+						p1.onSubmit()
+						
 						return
 					end
-					p1.onSubmit()
 				end,
-				onClose = function()
-					-- upvalues: p1 (ref), var7 (copy), closeCentralOverlay (copy)
+				onClose = function() --[[ Line: 145 ]]
+					-- upvalues: p1 (copy), UseDispatchResult (upval), CloseCentralOverlayFunction (upval)
 					p1.onClose()
-					var7(closeCentralOverlay())
+					UseDispatchResult(CloseCentralOverlayFunction())
 				end,
-				onCustomSubmit = if not fFlagAbuseReportSubmissionTargetV4 then function(p2)
-					-- upvalues: submitMomentsIp (ref)
+				onCustomSubmit = if FFlagAbuseReportSubmissionTargetV4 then nil else function(p2) --[[ Line: 150 ]]
+					-- upvalues: submitMomentsIp (copy)
 					return if p2.endpoint == "moments-ip" then submitMomentsIp(p2) else nil
-				end else nil,
-				clientActionHandlers = if fFlagAbuseReportSubmissionTargetV4 then { ["moments-ip"] = submitMomentsIp } else nil
+				end,
+				clientActionHandlers = if FFlagAbuseReportSubmissionTargetV4 then { ["moments-ip"] = submitMomentsIp } else nil
 			}))
-		end, { var7 })
-	end
-	local var8 = nil
+		end
+	end, { UseDispatchResult })
+	local UseScreenSizeResult = UseScreenSizeFunction()
 	
-	if fFlagEnableMomentsCommentReporting then
-		local var9 = useDispatch()
-		var8 = reactModule.useCallback(function(p1)
-			-- upvalues: var9 (ref), openDynamicAbuseReport (copy), abuseVector (copy), closeCentralOverlay (copy)
-			var9(openDynamicAbuseReport({
-				abuseVector = abuseVector.MomentComment,
-				attributes = {
-					targetId = p1.commentId,
-					channelId = p1.channelId,
-					reportedUserId = p1.reportedUserId
-				},
-				analyticsTargetId = p1.commentId,
-				onClose = function()
-					-- upvalues: var9 (copy), closeCentralOverlay (copy)
-					var9(closeCentralOverlay())
-				end
-			}))
-		end, { var9 })
-	end
-	local var10 = useScreenSize()
-	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "bg-surface-0",
-		Size = UDim2.fromOffset(var10.X, var10.Y)
+		Size = UDim2.fromOffset(UseScreenSizeResult.X, UseScreenSizeResult.Y)
 	}, {
-		Presentation = reactModule.createElement(momentsImmersivePresentation, {
+		Presentation = ReactModule.createElement(MomentsImmersivePresentation, {
 			sessionSource = "profile",
-			feedKind = immersiveFeedKind.User,
-			targetUserId = var2,
-			initialIndex = var3,
-			initialMomentId = var4,
-			onBack = var5,
-			openMomentsFeedReport = var6,
-			openMomentCommentReport = var8,
-			openBlockUser = if fFlagEnableMomentsCommentBlocking then useOpenBlockingModalModule(var1) else nil
+			feedKind = ImmersiveFeedKind.User,
+			targetUserId = TargetUserId,
+			initialIndex = if ExtraPropsParam and ExtraPropsParam.initialIndex then ExtraPropsParam.initialIndex else 1,
+			initialMomentId = if FFlagMomentsOptimisticProfilePending and ExtraPropsParam ~= nil then ExtraPropsParam.initialMomentId else nil,
+			onBack = UseResult,
+			openMomentsFeedReport = UseResult1,
+			openMomentCommentReport = if FFlagEnableMomentsCommentReporting then ReactModule.useCallback(function(p1) --[[ Line: 167 ]]
+				-- upvalues: UseDispatchResult (copy), OpenDynamicAbuseReportFunction (upval), AbuseVector (upval), CloseCentralOverlayFunction (upval)
+				UseDispatchResult(OpenDynamicAbuseReportFunction({
+					abuseVector = AbuseVector.MomentComment,
+					attributes = {
+						targetId = p1.commentId,
+						channelId = p1.channelId,
+						reportedUserId = p1.reportedUserId
+					},
+					analyticsTargetId = p1.commentId,
+					onClose = function() --[[ Line: 183 ]]
+						-- upvalues: UseDispatchResult (upval), CloseCentralOverlayFunction (upval)
+						UseDispatchResult(CloseCentralOverlayFunction())
+					end
+				}))
+			end, { UseDispatchResult }) else nil,
+			openBlockUser = if FFlagEnableMomentsCommentBlocking then UseOpenBlockingModalModule(UseNavigationResult) else nil
 		})
 	})
-end else function()
-	-- upvalues: useNavigation (ref), fFlagMomentsOptimisticProfilePending (ref), reactModule (ref), createUserMomentsFeedSourceModule (ref), fireAnalyticsEvent (ref), eventNames (ref), useScreenSize (ref), useSelector (ref), useStatusBarHeight (ref), view (ref), foundationProvider (ref), colorMode (ref), feed (ref), iconButton (ref), buttonSize (ref)
-	local var1 = useNavigation()
-	local extraProps = var1.getParam("extraProps")
-	local var2 = if extraProps and extraProps.targetUserId then extraProps.targetUserId else 0
-	local var3 = if extraProps and extraProps.initialIndex then extraProps.initialIndex else 1
-	local var4 = if fFlagMomentsOptimisticProfilePending and extraProps ~= nil then extraProps.initialMomentId else nil
-	local var5 = reactModule.useMemo(function()
-		-- upvalues: createUserMomentsFeedSourceModule (copy), var2 (ref), var3 (ref), var4 (ref)
-		return createUserMomentsFeedSourceModule(var2, { initialIndex = var3, initialMomentId = var4 })
-	end, { var2, var3, var4 })
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: fireAnalyticsEvent (copy), eventNames (copy), var2 (ref), var1 (ref)
-		fireAnalyticsEvent(eventNames.ProfileClosePressed, { userId = tostring(var2) })
-		var1.goBack()
-	end, { var1.goBack, var2 })
-	local var7 = useScreenSize()
-	local var8 = useSelector(function(p1)
+end
+
+local function MomentsFeedPageLegacy() --[[ Line: 221 ]]
+	-- upvalues: UseNavigationFunction (copy), FFlagMomentsOptimisticProfilePending (copy), ReactModule (copy), CreateUserMomentsFeedSourceModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), UseScreenSizeFunction (copy), UseSelectorFunction (copy), UseStatusBarHeightFunction (copy), View (copy), FoundationProvider (copy), ColorMode (copy), Feed (copy), IconButton (copy), ButtonSize (copy)
+	local UseNavigationResult = UseNavigationFunction()
+	local ExtraPropsParam = UseNavigationResult.getParam("extraProps")
+	local TargetUserId = if ExtraPropsParam and ExtraPropsParam.targetUserId then ExtraPropsParam.targetUserId else 0
+	local InitialIndex = if ExtraPropsParam and ExtraPropsParam.initialIndex then ExtraPropsParam.initialIndex else 1
+	local InitialMomentId = if FFlagMomentsOptimisticProfilePending and ExtraPropsParam ~= nil then ExtraPropsParam.initialMomentId else nil
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 231 ]]
+		-- upvalues: CreateUserMomentsFeedSourceModule (upval), TargetUserId (copy), InitialIndex (copy), InitialMomentId (copy)
+		return CreateUserMomentsFeedSourceModule(TargetUserId, {
+			initialIndex = InitialIndex,
+			initialMomentId = InitialMomentId
+		})
+	end, { TargetUserId, InitialIndex, InitialMomentId })
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 238 ]]
+		-- upvalues: FireAnalyticsEventFunction (upval), EventNames (upval), TargetUserId (copy), UseNavigationResult (copy)
+		FireAnalyticsEventFunction(EventNames.ProfileClosePressed, { userId = tostring(TargetUserId) })
+		UseNavigationResult.goBack()
+	end, { UseNavigationResult.goBack, TargetUserId })
+	local UseScreenSizeResult = UseScreenSizeFunction()
+	local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 248 ]]
 		return p1.GlobalGuiInset
 	end)
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "bg-surface-0",
-		Size = UDim2.fromOffset(var7.X, var7.Y),
+		Size = UDim2.fromOffset(UseScreenSizeResult.X, UseScreenSizeResult.Y),
 		padding = {
-			top = UDim.new(0, var8.top + useStatusBarHeight()),
-			bottom = UDim.new(0, var8.bottom),
-			left = UDim.new(0, var8.left),
-			right = UDim.new(0, var8.right)
+			top = UDim.new(0, UseSelectorResult.top + UseStatusBarHeightFunction()),
+			bottom = UDim.new(0, UseSelectorResult.bottom),
+			left = UDim.new(0, UseSelectorResult.left),
+			right = UDim.new(0, UseSelectorResult.right)
 		}
 	}, {
-		OnVideoUI = reactModule.createElement(foundationProvider, { colorMode = colorMode.Dark }, {
-			Feed = reactModule.createElement(feed, {
+		OnVideoUI = ReactModule.createElement(FoundationProvider, { colorMode = ColorMode.Dark }, {
+			Feed = ReactModule.createElement(Feed, {
 				active = true,
 				playbackActive = true,
-				source = var5,
-				initialIndex = var3
+				source = UseMemoResult,
+				initialIndex = InitialIndex
 			}),
-			CloseButtonContainer = reactModule.createElement(view, {
+			CloseButtonContainer = ReactModule.createElement(View, {
 				tag = "position-top-left anchor-top-left auto-xy padding-large",
 				ZIndex = 100000
 			}, {
-				CloseButton = reactModule.createElement(iconButton, {
+				CloseButton = ReactModule.createElement(IconButton, {
 					icon = "icons/navigation/close",
-					size = buttonSize.Medium,
-					onActivated = var6
+					size = ButtonSize.Medium,
+					onActivated = UseResult
 				})
 			})
 		})
 	})
 end
+
+return if SharedFlagsModule.FFlagEnableArgusImmersiveNav then MomentsFeedPageImmersive else MomentsFeedPageLegacy

@@ -1,101 +1,100 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local robloxReplicatedStorageService = game:GetService("RobloxReplicatedStorage")
+﻿local RobloxReplicatedStorage = game:GetService("RobloxReplicatedStorage")
 local _ = game:GetService("StarterPlayer")
-local common = coreGuiService:FindFirstChild("RobloxGui"):FindFirstChild("Modules"):FindFirstChild("Common")
-local avatarJointUpgradeFeatureEngineFeature = game:GetEngineFeature("AvatarJointUpgradeFeature")
-local avatarJointUpgradeDefaultOnFeatureEngineFeature = game:GetEngineFeature("AvatarJointUpgradeDefaultOnFeature")
+local Common = game:GetService("CoreGui"):FindFirstChild("RobloxGui"):FindFirstChild("Modules"):FindFirstChild("Common")
+local AvatarJointUpgradeFeatureEngineFeature = game:GetEngineFeature("AvatarJointUpgradeFeature")
+local AvatarJointUpgradeDefaultOnFeatureEngineFeature = game:GetEngineFeature("AvatarJointUpgradeDefaultOnFeature")
 
-local function _()
-	-- upvalues: avatarJointUpgradeFeatureEngineFeature (ref), avatarJointUpgradeDefaultOnFeatureEngineFeature (ref)
-	return avatarJointUpgradeFeatureEngineFeature and avatarJointUpgradeDefaultOnFeatureEngineFeature
+local function _() --[[ Line: 11 | Named "jointUpgradeActive" ]]
+	-- upvalues: AvatarJointUpgradeFeatureEngineFeature (copy), AvatarJointUpgradeDefaultOnFeatureEngineFeature (copy)
+	return AvatarJointUpgradeFeatureEngineFeature and AvatarJointUpgradeDefaultOnFeatureEngineFeature
 end
 
-local ragdollRiggingModule = require(common:FindFirstChild("RagdollRigging"))
-local humanoidReadyUtilModule = require(common:FindFirstChild("HumanoidReadyUtil"))
-local var1 = (function()
+local RagdollRiggingModule = require(Common:FindFirstChild("RagdollRigging"))
+local HumanoidReadyUtilModule = require(Common:FindFirstChild("HumanoidReadyUtil"))
+local Value = (function() --[[ Line: 23 | Named "getDefaultDeathType" ]]
 	if not game:GetEngineFeature("PolicyInfoForServerRobloxOnlyAsyncEnabled") then
 		return game:DefineFastString("DeathTypeValue", "Classic")
 	end
-	local defaultAvatarDeathType = game:GetService("PolicyService"):GetPolicyInfoForServerRobloxOnlyAsync().DefaultAvatarDeathType
+	local DefaultAvatarDeathType = game:GetService("PolicyService"):GetPolicyInfoForServerRobloxOnlyAsync().DefaultAvatarDeathType
 	
-	if defaultAvatarDeathType == nil then
+	if DefaultAvatarDeathType == nil then
 		error("PolicyService did not have death type policy")
 	end
-	return defaultAvatarDeathType
+	return DefaultAvatarDeathType
 end)()
-local deathType = Instance.new("StringValue")
-deathType.Name = "DeathType"
-deathType.Value = var1
-deathType.Parent = robloxReplicatedStorageService
+local DeathType = Instance.new("StringValue")
+DeathType.Name = "DeathType"
+DeathType.Value = Value
+DeathType.Parent = RobloxReplicatedStorage
 
-if not avatarJointUpgradeFeatureEngineFeature and var1 ~= "Ragdoll" then return end
-local t = {}
+if not AvatarJointUpgradeFeatureEngineFeature and Value ~= "Ragdoll" then return end
+local Humanoids = {}
 
-if not avatarJointUpgradeFeatureEngineFeature then
-	local onRagdoll = Instance.new("RemoteEvent")
-	onRagdoll.Name = "OnRagdoll"
-	onRagdoll.OnServerEvent:Connect(function(p1, p2)
-		-- upvalues: t (ref), ragdollRiggingModule (ref)
-		if p2 and t[p1] == p2 then
-			local parent = p2 and p2.Parent
+if not AvatarJointUpgradeFeatureEngineFeature then
+	local OnRagdoll = Instance.new("RemoteEvent")
+	OnRagdoll.Name = "OnRagdoll"
+	OnRagdoll.OnServerEvent:Connect(function(Player, Humanoid) --[[ Line: 62 ]]
+		-- upvalues: Humanoids (copy), RagdollRiggingModule (copy)
+		if Humanoid and Humanoids[Player] == Humanoid then
+			local Parent = Humanoid and Humanoid.Parent
 			
-			if parent and parent:IsA("Model") then
-				ragdollRiggingModule.disableMotors(parent, p2.RigType)
+			if Parent and Parent:IsA("Model") then
+				RagdollRiggingModule.disableMotors(Parent, Humanoid.RigType)
 			end
-			t[p1] = nil
+			Humanoids[Player] = nil
 		end
 	end)
-	onRagdoll.Parent = robloxReplicatedStorageService
+	OnRagdoll.Parent = RobloxReplicatedStorage
 end
-humanoidReadyUtilModule.registerHumanoidReady(function(p1, p2, p3)
-	-- upvalues: avatarJointUpgradeFeatureEngineFeature (ref), avatarJointUpgradeDefaultOnFeatureEngineFeature (ref), ragdollRiggingModule (ref), var1 (ref), t (ref)
-	if avatarJointUpgradeFeatureEngineFeature then
-		if p3.RigType == Enum.HumanoidRigType.R15 and (avatarJointUpgradeFeatureEngineFeature and avatarJointUpgradeDefaultOnFeatureEngineFeature) then
-			ragdollRiggingModule.createRagdollJoints(p2, p3.RigType, avatarJointUpgradeFeatureEngineFeature and avatarJointUpgradeDefaultOnFeatureEngineFeature)
-		elseif var1 == "Ragdoll" then
-			ragdollRiggingModule.createRagdollJoints(p2, p3.RigType, false)
+HumanoidReadyUtilModule.registerHumanoidReady(function(Player, p1, Humanoid: Humanoid) --[[ Line: 75 ]]
+	-- upvalues: AvatarJointUpgradeFeatureEngineFeature (copy), AvatarJointUpgradeDefaultOnFeatureEngineFeature (copy), RagdollRiggingModule (copy), Value (copy), Humanoids (copy)
+	if AvatarJointUpgradeFeatureEngineFeature then
+		if Humanoid.RigType == Enum.HumanoidRigType.R15 and (AvatarJointUpgradeFeatureEngineFeature and AvatarJointUpgradeDefaultOnFeatureEngineFeature) then
+			RagdollRiggingModule.createRagdollJoints(p1, Humanoid.RigType, AvatarJointUpgradeFeatureEngineFeature and AvatarJointUpgradeDefaultOnFeatureEngineFeature)
+		elseif Value == "Ragdoll" then
+			RagdollRiggingModule.createRagdollJoints(p1, Humanoid.RigType, false)
 		end
 	end
-	if var1 ~= "Ragdoll" then return end
-	local characterRemovingConnection = nil
+	if Value ~= "Ragdoll" then return end
+	local Connection = nil
 	
-	local function _()
-		-- upvalues: characterRemovingConnection (write), t (copy), p1 (ref), p3 (ref)
-		characterRemovingConnection:Disconnect()
+	local function _() --[[ Line: 89 | Named "disconnect" ]]
+		-- upvalues: Connection (ref), Humanoids (upval), Player (copy), Humanoid (copy)
+		Connection:Disconnect()
 		
-		if t[p1] == p3 then
-			t[p1] = nil
+		if Humanoids[Player] == Humanoid then
+			Humanoids[Player] = nil
 		end
 	end
 	
-	characterRemovingConnection = p1.CharacterRemoving:Connect(function(p4)
-		-- upvalues: p2 (ref), characterRemovingConnection (write), t (copy), p1 (ref), p3 (ref)
-		if p4 == p2 then
-			characterRemovingConnection:Disconnect()
+	Connection = Player.CharacterRemoving:Connect(function(Character) --[[ Line: 97 ]]
+		-- upvalues: p1 (copy), Connection (ref), Humanoids (upval), Player (copy), Humanoid (copy)
+		if Character == p1 then
+			Connection:Disconnect()
 			
-			if t[p1] == p3 then
-				t[p1] = nil
+			if Humanoids[Player] == Humanoid then
+				Humanoids[Player] = nil
 			end
 		end
 	end)
-	p3.BreakJointsOnDeath = false
+	Humanoid.BreakJointsOnDeath = false
 	
-	if not avatarJointUpgradeFeatureEngineFeature then
-		ragdollRiggingModule.createRagdollJoints(p2, p3.RigType, avatarJointUpgradeFeatureEngineFeature and avatarJointUpgradeDefaultOnFeatureEngineFeature)
+	if not AvatarJointUpgradeFeatureEngineFeature then
+		RagdollRiggingModule.createRagdollJoints(p1, Humanoid.RigType, AvatarJointUpgradeFeatureEngineFeature and AvatarJointUpgradeDefaultOnFeatureEngineFeature)
 	end
-	t[p1] = p3
+	Humanoids[Player] = Humanoid
 	
-	if avatarJointUpgradeFeatureEngineFeature then
-		p3.Died:Connect(function()
-			-- upvalues: t (copy), p1 (ref), p3 (ref), ragdollRiggingModule (copy), avatarJointUpgradeFeatureEngineFeature (copy), avatarJointUpgradeDefaultOnFeatureEngineFeature (copy)
-			t[p1] = nil
-			local parent = p3.Parent
+	if AvatarJointUpgradeFeatureEngineFeature then
+		Humanoid.Died:Connect(function() --[[ Line: 114 ]]
+			-- upvalues: Humanoids (upval), Player (copy), Humanoid (copy), RagdollRiggingModule (upval), AvatarJointUpgradeFeatureEngineFeature (upval), AvatarJointUpgradeDefaultOnFeatureEngineFeature (upval)
+			Humanoids[Player] = nil
+			local Parent = Humanoid.Parent
 			
-			if parent and parent:IsA("Model") then
-				ragdollRiggingModule.disableMotors(parent, p3.RigType)
+			if Parent and Parent:IsA("Model") then
+				RagdollRiggingModule.disableMotors(Parent, Humanoid.RigType)
 				
-				if avatarJointUpgradeFeatureEngineFeature and avatarJointUpgradeDefaultOnFeatureEngineFeature then
-					ragdollRiggingModule.easeNongraphicJointFriction(parent, 0.85)
+				if AvatarJointUpgradeFeatureEngineFeature and AvatarJointUpgradeDefaultOnFeatureEngineFeature then
+					RagdollRiggingModule.easeNongraphicJointFriction(Parent, 0.85)
 				end
 			end
 		end)

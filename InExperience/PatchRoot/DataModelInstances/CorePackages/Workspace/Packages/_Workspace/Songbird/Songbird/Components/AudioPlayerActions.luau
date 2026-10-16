@@ -1,113 +1,116 @@
-﻿local songbird = script:FindFirstAncestor("Songbird")
-local coreGuiService = game:GetService("CoreGui")
-local reactModule = require(songbird.Parent.React)
-local reactUtilsModule = require(songbird.Parent.ReactUtils)
-local reactRobloxModule = require(songbird.Parent.ReactRoblox)
-local foundationModule = require(songbird.Parent.Foundation)
-local localizationModule = require(songbird.Parent.Localization)
-local customFoundationChipModule = require(songbird.Components.CustomFoundationChip)
-local analyticActionsModule = require(songbird.Analytics.AnalyticActions)
-local sendAudioPlayerAnalyticsModule = require(songbird.Analytics.sendAudioPlayerAnalytics)
-local _ = require(songbird.types)
-local reportSongDialogModule = require(songbird.Components.ReportSongDialog)
-local getFFlagSongDetailsPageDesignPass = require(songbird.Parent.SharedFlags).GetFFlagSongDetailsPageDesignPass
-local useLocalization = localizationModule.Hooks.useLocalization
-local useCallback = reactModule.useCallback
-local useState = reactModule.useState
-local createNextOrder = reactUtilsModule.createNextOrder
+﻿local Songbird = script:FindFirstAncestor("Songbird")
+local CoreGui = game:GetService("CoreGui")
+local ReactModule = require(Songbird.Parent.React)
+local ReactRobloxModule = require(Songbird.Parent.ReactRoblox)
+local FoundationModule = require(Songbird.Parent.Foundation)
+local CustomFoundationChipModule = require(Songbird.Components.CustomFoundationChip)
+local AnalyticActionsModule = require(Songbird.Analytics.AnalyticActions)
+local SendAudioPlayerAnalyticsModule = require(Songbird.Analytics.sendAudioPlayerAnalytics)
+local _ = require(Songbird.types)
+local ReportSongDialogModule = require(Songbird.Components.ReportSongDialog)
+local GetFFlagSongDetailsPageDesignPassFunction = require(Songbird.Parent.SharedFlags).GetFFlagSongDetailsPageDesignPass
+local UseLocalizationFunction = require(Songbird.Parent.Localization).Hooks.useLocalization
+local UseCallbackFunction = ReactModule.useCallback
+local UseStateFunction = ReactModule.useState
+local CreateNextOrderFunction = require(Songbird.Parent.ReactUtils).createNextOrder
 
-return function(p1)
-	-- upvalues: useLocalization (ref), useState (ref), createNextOrder (ref), useCallback (ref), sendAudioPlayerAnalyticsModule (ref), analyticActionsModule (ref), reactModule (ref), foundationModule (ref), getFFlagSongDetailsPageDesignPass (ref), customFoundationChipModule (ref), reactRobloxModule (ref), reportSongDialogModule (ref), coreGuiService (ref)
-	local var1 = useLocalization({
+return function(Frame) --[[ Line: 37 | Named "AudioPlayerActions" ]]
+	-- upvalues: UseLocalizationFunction (copy), UseStateFunction (copy), CreateNextOrderFunction (copy), UseCallbackFunction (copy), SendAudioPlayerAnalyticsModule (copy), AnalyticActionsModule (copy), ReactModule (copy), FoundationModule (copy), GetFFlagSongDetailsPageDesignPassFunction (copy), CustomFoundationChipModule (copy), ReactRobloxModule (copy), ReportSongDialogModule (copy), CoreGui (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
 		favorite = "Feature.SongDetails.Action.Favorite",
 		report = "Feature.SongDetails.Action.Report"
 	})
-	local var2, var3 = useState(false)
-	local var4 = createNextOrder()
-	local var5 = useCallback(function(p2)
-		-- upvalues: p1 (ref), sendAudioPlayerAnalyticsModule (copy)
-		sendAudioPlayerAnalyticsModule({
-			action = p2,
-			songId = p1.audio.assetId:gsub("rbxassetid://", ""),
-			thumbnailId = (if p1.audio.thumbnailAssetId then p1.audio.thumbnailAssetId:gsub("rbxassetid://", "") else nil) or "-1",
-			source = p1.analyticsSource
+	local UseStateResult, UseStateResult2 = UseStateFunction(false)
+	local NextOrder = CreateNextOrderFunction()
+	local UseCallbackResult = UseCallbackFunction(function(Action) --[[ Line: 47 ]]
+		-- upvalues: Frame (copy), SendAudioPlayerAnalyticsModule (upval)
+		SendAudioPlayerAnalyticsModule({
+			action = Action,
+			songId = Frame.audio.assetId:gsub("rbxassetid://", ""),
+			thumbnailId = (if Frame.audio.thumbnailAssetId then Frame.audio.thumbnailAssetId:gsub("rbxassetid://", "") else nil) or "-1",
+			source = Frame.analyticsSource
 		})
 	end, {
-		p1.audio.assetId,
-		p1.audio.thumbnail,
-		p1.audio.thumbnailAssetId,
-		p1.analyticsSource
+		Frame.audio.assetId,
+		Frame.audio.thumbnail,
+		Frame.audio.thumbnailAssetId,
+		Frame.analyticsSource
 	})
-	local var6 = useCallback(function()
-		-- upvalues: p1 (ref), var5 (ref), analyticActionsModule (copy)
-		if p1.audio.isLiked then
-			if p1.onUnlike then
-				var5(analyticActionsModule.Unlike)
-				p1.onUnlike()
+	local UseCallbackResult1 = UseCallbackFunction(function() --[[ Line: 72 ]]
+		-- upvalues: Frame (copy), UseCallbackResult (copy), AnalyticActionsModule (upval)
+		if Frame.audio.isLiked then
+			if Frame.onUnlike then
+				UseCallbackResult(AnalyticActionsModule.Unlike)
+				Frame.onUnlike()
 				
 				return
 			end
-		elseif p1.onLike then
-			var5(analyticActionsModule.Like)
-			p1.onLike()
+		elseif Frame.onLike then
+			UseCallbackResult(AnalyticActionsModule.Like)
+			Frame.onLike()
 		end
-	end, { p1.audio.isLiked, p1.onLike, p1.onUnlike, var5 })
-	local var7 = useCallback(function()
-		-- upvalues: var5 (ref), analyticActionsModule (copy), var3 (ref)
-		var5(analyticActionsModule.StartAudioReport)
-		var3(true)
+	end, {
+		Frame.audio.isLiked,
+		Frame.onLike,
+		Frame.onUnlike,
+		UseCallbackResult
+	})
+	local UseCallbackResult2 = UseCallbackFunction(function() --[[ Line: 93 ]]
+		-- upvalues: UseCallbackResult (copy), AnalyticActionsModule (upval), UseStateResult2 (copy)
+		UseCallbackResult(AnalyticActionsModule.StartAudioReport)
+		UseStateResult2(true)
 	end, {})
-	local var8 = useCallback(function()
-		-- upvalues: var3 (ref)
-		var3(false)
+	local UseCallbackResult3 = UseCallbackFunction(function() --[[ Line: 98 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(false)
 	end, {})
 	
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "auto-xy row gap-small",
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Favorite = if getFFlagSongDetailsPageDesignPass() then reactModule.createElement(foundationModule.Chip, {
-			text = var1.favorite,
+		Favorite = if GetFFlagSongDetailsPageDesignPassFunction() then ReactModule.createElement(FoundationModule.Chip, {
+			text = UseLocalizationResult.favorite,
 			leading = {
-				iconName = foundationModule.Enums.IconName.Star,
-				iconVariant = if p1.audio.isLiked then foundationModule.Enums.IconVariant.Filled else nil
+				iconName = FoundationModule.Enums.IconName.Star,
+				iconVariant = if Frame.audio.isLiked then FoundationModule.Enums.IconVariant.Filled else nil
 			},
-			onActivated = var6,
-			LayoutOrder = var4()
-		}) else reactModule.createElement(customFoundationChipModule, {
-			LayoutOrder = var4(),
-			text = var1.favorite,
-			icon = if p1.audio.isLiked then "icons/actions/favoriteOn" else "icons/actions/favoriteOff",
-			onActivated = var6
+			onActivated = UseCallbackResult1,
+			LayoutOrder = NextOrder()
+		}) else ReactModule.createElement(CustomFoundationChipModule, {
+			LayoutOrder = NextOrder(),
+			text = UseLocalizationResult.favorite,
+			icon = if Frame.audio.isLiked then "icons/actions/favoriteOn" else "icons/actions/favoriteOff",
+			onActivated = UseCallbackResult1
 		}),
-		Report = if getFFlagSongDetailsPageDesignPass() then reactModule.createElement(foundationModule.Chip, {
-			text = var1.report,
-			leading = { iconName = foundationModule.Enums.IconName.Flag },
-			onActivated = var7,
-			LayoutOrder = var4()
-		}) else reactModule.createElement(customFoundationChipModule, {
+		Report = if GetFFlagSongDetailsPageDesignPassFunction() then ReactModule.createElement(FoundationModule.Chip, {
+			text = UseLocalizationResult.report,
+			leading = { iconName = FoundationModule.Enums.IconName.Flag },
+			onActivated = UseCallbackResult2,
+			LayoutOrder = NextOrder()
+		}) else ReactModule.createElement(CustomFoundationChipModule, {
 			icon = "icons/actions/feedback",
-			LayoutOrder = var4(),
-			text = var1.report,
-			onActivated = var7
+			LayoutOrder = NextOrder(),
+			text = UseLocalizationResult.report,
+			onActivated = UseCallbackResult2
 		}),
-		ReportDialog = var2 and reactRobloxModule.createPortal(reactModule.createElement("ScreenGui", {
+		ReportDialog = UseStateResult and ReactRobloxModule.createPortal(ReactModule.createElement("ScreenGui", {
 			DisplayOrder = 2,
 			ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 		}, {
-			Background = reactModule.createElement(foundationModule.View, {
+			Background = ReactModule.createElement(FoundationModule.View, {
 				tag = "size-full row align-y-center align-x-center bg-over-media-100",
 				stateLayer = {
-					affordance = foundationModule.Enums.StateLayerAffordance.None
+					affordance = FoundationModule.Enums.StateLayerAffordance.None
 				},
-				onActivated = var8
+				onActivated = UseCallbackResult3
 			}, {
-				Dialog = reactModule.createElement(reportSongDialogModule, {
-					audio = p1.audio,
-					analyticsSource = p1.analyticsSource or "unknown",
-					onClose = var8
+				Dialog = ReactModule.createElement(ReportSongDialogModule, {
+					audio = Frame.audio,
+					analyticsSource = Frame.analyticsSource or "unknown",
+					onClose = UseCallbackResult3
 				})
 			})
-		}), coreGuiService)
+		}), CoreGui)
 	})
 end

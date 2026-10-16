@@ -1,11 +1,11 @@
-﻿local parent = script:FindFirstAncestor("AppChat").Parent
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local contextModule = require(script.Parent.Context)
+﻿local Parent = script:FindFirstAncestor("AppChat").Parent
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local ContextModule = require(script.Parent.Context)
 
-return function(p1)
-	-- upvalues: reactModule (ref), contextModule (ref), cryoModule (ref)
-	return reactModule.createElement(contextModule.Provider, {
-		value = cryoModule.Dictionary.join({ top = 0, right = 12, bottom = 0, left = 12 }, p1.value)
+return function(p1) --[[ Line: 19 | Named "ChatPagePaddingProvider" ]]
+	-- upvalues: ReactModule (copy), ContextModule (copy), CryoModule (copy)
+	return ReactModule.createElement(ContextModule.Provider, {
+		value = CryoModule.Dictionary.join({ top = 0, right = 12, bottom = 0, left = 12 }, p1.value)
 	}, p1.children)
 end

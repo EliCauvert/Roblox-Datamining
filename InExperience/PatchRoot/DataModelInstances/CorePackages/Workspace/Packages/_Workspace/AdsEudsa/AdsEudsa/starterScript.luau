@@ -1,8 +1,8 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local roactModule = require(script.Parent.Parent.Roact)
-local adsEuDsaPromptHandlerModule = require(script.Parent.AdsEuDsaPromptHandler)
+﻿local CoreGui = game:GetService("CoreGui")
+local RoactModule = require(script.Parent.Parent.Roact)
+local AdsEuDsaPromptHandlerModule = require(script.Parent.AdsEuDsaPromptHandler)
 
-return function()
-	-- upvalues: roactModule (ref), adsEuDsaPromptHandlerModule (ref), coreGuiService (ref)
-	roactModule.mount(roactModule.createElement(adsEuDsaPromptHandlerModule), coreGuiService, "AdsEuDsaPromptHandler")
+return function() --[[ Line: 9 | Named "starterScript" ]]
+	-- upvalues: RoactModule (copy), AdsEuDsaPromptHandlerModule (copy), CoreGui (copy)
+	RoactModule.mount(RoactModule.createElement(AdsEuDsaPromptHandlerModule), CoreGui, "AdsEuDsaPromptHandler")
 end

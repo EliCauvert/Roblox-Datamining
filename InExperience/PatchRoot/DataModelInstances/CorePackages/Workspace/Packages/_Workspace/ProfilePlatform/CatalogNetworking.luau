@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.CatalogNetworking.CatalogNetworking)
+﻿return (require(script.Parent.Parent.Parent._Index.CatalogNetworking.CatalogNetworking))

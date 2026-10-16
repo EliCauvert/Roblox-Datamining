@@ -1,32 +1,32 @@
-﻿local t = {
+﻿local config = {
 	candidateType = nil,
 	protocol = nil,
 	priority = nil,
 	component = nil
 }
 
-return function(p1)
-	-- upvalues: t (ref)
-	if p1 == nil or p1 == "" then
-		return t
+return function(Text: string) --[[ Line: 10 | Named "parseIceCandidate" ]]
+	-- upvalues: config (copy)
+	if Text == nil or Text == "" then
+		return config
 	end
-	local t_1 = {}
+	local List = {}
 	
-	for i in string.gmatch(p1, "%S+") do
-		table.insert(t_1, i)
+	for i in string.gmatch(Text, "%S+") do
+		table.insert(List, i)
 	end
-	local var1 = nil
+	local CandidateType = nil
 	
-	for i_1, v in t_1 do
-		if v == "typ" then
-			var1 = t_1[i_1 + 1]
+	for i1, value in List do
+		if value == "typ" then
+			CandidateType = List[i1 + 1]
 			break
 		end
 	end
-	return if var1 == nil then t else {
-		candidateType = var1,
-		protocol = t_1[3],
-		priority = t_1[4],
-		component = t_1[2]
+	return if CandidateType == nil then config else {
+		candidateType = CandidateType,
+		protocol = List[3],
+		priority = List[4],
+		component = List[2]
 	}
 end

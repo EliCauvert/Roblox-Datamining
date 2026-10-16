@@ -1,7 +1,7 @@
-﻿local parent = script.Parent.Parent
+﻿local Parent = script.Parent.Parent
 
 return {
 	Players = game:GetService("Players"),
-	llama = require(parent.LuaSocialLibrariesDeps).llama,
-	Rodux = require(parent.Rodux)
+	llama = require(Parent.LuaSocialLibrariesDeps).llama,
+	Rodux = require(Parent.Rodux)
 }

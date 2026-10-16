@@ -1,39 +1,37 @@
-﻿local httpService = game:GetService("HttpService")
-local httpRbxApiService = game:GetService("HttpRbxApiService")
-local playersService = game:GetService("Players")
-local robloxReplicatedStorageService = game:GetService("RobloxReplicatedStorage")
+﻿local HttpService = game:GetService("HttpService")
+local HttpRbxApiService = game:GetService("HttpRbxApiService")
+local Players = game:GetService("Players")
+local RobloxReplicatedStorage = game:GetService("RobloxReplicatedStorage")
 local _ = game:GetService("RunService")
-local chatService = game:GetService("Chat")
-local textChatService = game:GetService("TextChatService")
-local corePackagesService = game:GetService("CorePackages")
-local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-local url = require(corePackagesService.Workspace.Packages.CoreScriptsCommon).Url
+local Chat = game:GetService("Chat")
+local TextChatService = game:GetService("TextChatService")
+local CorePackages = game:GetService("CorePackages")
+local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+local Url = require(CorePackages.Workspace.Packages.CoreScriptsCommon).Url
 game:DefineFastFlag("EnableSetUserBlocklistInitialized", false)
-local fFlagInExperienceUserProfileSettingsEnabledModule = require(robloxGui.Modules.Common.Flags.FFlagInExperienceUserProfileSettingsEnabled)
-local fFlagInExperienceRequestProfileSettingsModule = require(robloxGui.Modules.Common.Flags.FFlagInExperienceRequestProfileSettings)
-local fStringRccInExperienceNameEnabledAllowListModule = require(robloxGui.Modules.Common.Flags.FStringRccInExperienceNameEnabledAllowList)
-local useNewDirectChatAPI = game:DefineFastFlag("UseNewDirectChatAPI", false)
-local enableCreatePartyNudge = game:DefineFastFlag("EnableCreatePartyNudge", false)
-local enableCreatePartyNudgeWithVersion = game:DefineFastFlag("EnableCreatePartyNudgeWithVersion", false)
-local fFlagEnablePartyNudgeAfterJoin = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagEnablePartyNudgeAfterJoin
-local fFlagShowFriendJoinedYouToastForNonReferredJoins = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagShowFriendJoinedYouToastForNonReferredJoins
-local fFlagBadgeVisibilitySettingEnabled = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagBadgeVisibilitySettingEnabled
-local fFlagEnableModerateChatRemoteEvent = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagEnableModerateChatRemoteEvent
-local fFlagEnableSummarySystemMessageOnLua = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagEnableSummarySystemMessageOnLua
-local fFlagAIRephraseSettingEnabled = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagAIRephraseSettingEnabled
-local fFlagChatSummariesSettingEnabled = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagChatSummariesSettingEnabled
-local profileSettingsSlidingWindowRateLimit = game:DefineFastFlag("ProfileSettingsSlidingWindowRateLimit", false)
-local profileSettingsRateLimitSeconds = game:DefineFastInt("ProfileSettingsRateLimitSeconds", 5)
-local profileSettingsMaxRequestsPerWindow = game:DefineFastInt("ProfileSettingsMaxRequestsPerWindow", 3)
-local profileSettingsRateLimitWindowSeconds = game:DefineFastInt("ProfileSettingsRateLimitWindowSeconds", 60)
-local disableRCCAntiHarrasmentAllowList = game:DefineFastFlag("DisableRCCAntiHarrasmentAllowList", false)
-local luaGetCanManageAsync = game:DefineFastFlag("UseGetCanManageAsync", false) and game:GetEngineFeature("LuaGetCanManageAsync")
-local fFlagUserPresenceTokenRccCheckPermissionsLuaModule = require(robloxGui.Modules.Common.Flags.FFlagUserPresenceTokenRccCheckPermissionsLua)
-local shouldShowFriendJoinedPlayerToastModule = require(robloxGui.Modules.Server.shouldShowFriendJoinedPlayerToast)
-local gatePrivateServerNudge = game:DefineFastFlag("GatePrivateServerNudge", false)
-local globalUserBlockingLuaReadsFromSCMCache = game:DefineFastFlag("GlobalUserBlockingLuaReadsFromSCMCache", false)
+local FFlagInExperienceUserProfileSettingsEnabledModule = require(RobloxGui.Modules.Common.Flags.FFlagInExperienceUserProfileSettingsEnabled)
+local FFlagInExperienceRequestProfileSettingsModule = require(RobloxGui.Modules.Common.Flags.FFlagInExperienceRequestProfileSettings)
+local FStringRccInExperienceNameEnabledAllowListModule = require(RobloxGui.Modules.Common.Flags.FStringRccInExperienceNameEnabledAllowList)
+local UseNewDirectChatAPI = game:DefineFastFlag("UseNewDirectChatAPI", false)
+local EnableCreatePartyNudge = game:DefineFastFlag("EnableCreatePartyNudge", false)
+local EnableCreatePartyNudgeWithVersion = game:DefineFastFlag("EnableCreatePartyNudgeWithVersion", false)
+local FFlagEnablePartyNudgeAfterJoin = require(CorePackages.Workspace.Packages.SharedFlags).FFlagEnablePartyNudgeAfterJoin
+local FFlagShowFriendJoinedYouToastForNonReferredJoins = require(CorePackages.Workspace.Packages.SharedFlags).FFlagShowFriendJoinedYouToastForNonReferredJoins
+local FFlagBadgeVisibilitySettingEnabled = require(CorePackages.Workspace.Packages.SharedFlags).FFlagBadgeVisibilitySettingEnabled
+local FFlagEnableModerateChatRemoteEvent = require(CorePackages.Workspace.Packages.SharedFlags).FFlagEnableModerateChatRemoteEvent
+local FFlagEnableSummarySystemMessageOnLua = require(CorePackages.Workspace.Packages.SharedFlags).FFlagEnableSummarySystemMessageOnLua
+local FFlagAIRephraseSettingEnabled = require(CorePackages.Workspace.Packages.SharedFlags).FFlagAIRephraseSettingEnabled
+local FFlagChatSummariesSettingEnabled = require(CorePackages.Workspace.Packages.SharedFlags).FFlagChatSummariesSettingEnabled
+local ProfileSettingsSlidingWindowRateLimit = game:DefineFastFlag("ProfileSettingsSlidingWindowRateLimit", false)
+local ProfileSettingsRateLimitSeconds = game:DefineFastInt("ProfileSettingsRateLimitSeconds", 5)
+local ProfileSettingsMaxRequestsPerWindow = game:DefineFastInt("ProfileSettingsMaxRequestsPerWindow", 3)
+local ProfileSettingsRateLimitWindowSeconds = game:DefineFastInt("ProfileSettingsRateLimitWindowSeconds", 60)
+local DisableRCCAntiHarrasmentAllowList = game:DefineFastFlag("DisableRCCAntiHarrasmentAllowList", false)
+local ShouldShowFriendJoinedPlayerToastModule = require(RobloxGui.Modules.Server.shouldShowFriendJoinedPlayerToast)
+local GatePrivateServerNudge = game:DefineFastFlag("GatePrivateServerNudge", false)
+local GlobalUserBlockingLuaReadsFromSCMCache = game:DefineFastFlag("GlobalUserBlockingLuaReadsFromSCMCache", false)
 local t = {}
-local t_1 = {
+local config = {
 	Admin = { GroupId = 1200769 },
 	Intern = { GroupId = 2868472, GroupRank = 100 },
 	Star = { GroupId = 4199740 },
@@ -44,561 +42,521 @@ local t_1 = {
 }
 
 if game.CreatorType == Enum.CreatorType.Group then
-	t_1.PlaceCreator = { GroupRank = 255, GroupId = game.CreatorId }
+	config.PlaceCreator = { GroupRank = 255, GroupId = game.CreatorId }
 end
-local t_2 = {}
-local t_3 = {}
-local t_4 = {}
-local t_5 = {}
-local t_6 = {}
+local t1 = {}
+local t2 = {}
+local t3 = {}
+local CurrentTimes = {}
+local t4 = {}
 game:DefineFastInt("MaxBlockListSize", 500)
-local canChatWith = Instance.new("RemoteEvent")
-canChatWith.Name = "CanChatWith"
-canChatWith.Parent = robloxReplicatedStorageService
-local setPlayerBlockList = Instance.new("RemoteEvent")
-setPlayerBlockList.Name = "SetPlayerBlockList"
-setPlayerBlockList.Parent = robloxReplicatedStorageService
-local updatePlayerBlockList = Instance.new("RemoteEvent")
-updatePlayerBlockList.Name = "UpdatePlayerBlockList"
-updatePlayerBlockList.Parent = robloxReplicatedStorageService
-local newPlayerGroupDetails = Instance.new("RemoteEvent")
-newPlayerGroupDetails.Name = "NewPlayerGroupDetails"
-newPlayerGroupDetails.Parent = robloxReplicatedStorageService
-local newPlayerCanManageDetails = Instance.new("RemoteEvent")
-newPlayerCanManageDetails.Name = "NewPlayerCanManageDetails"
-newPlayerCanManageDetails.Parent = robloxReplicatedStorageService
-local sendPlayerBlockList = Instance.new("RemoteEvent")
-sendPlayerBlockList.Name = "SendPlayerBlockList"
-sendPlayerBlockList.Parent = robloxReplicatedStorageService
-local updateLocalPlayerBlockList = Instance.new("RemoteEvent")
-updateLocalPlayerBlockList.Name = "UpdateLocalPlayerBlockList"
-updateLocalPlayerBlockList.Parent = robloxReplicatedStorageService
-local sendPlayerProfileSettings = Instance.new("RemoteEvent")
-sendPlayerProfileSettings.Name = "SendPlayerProfileSettings"
-sendPlayerProfileSettings.Parent = robloxReplicatedStorageService
-local requestPlayerProfileSettings = nil
+local CanChatWith = Instance.new("RemoteEvent")
+CanChatWith.Name = "CanChatWith"
+CanChatWith.Parent = RobloxReplicatedStorage
+local SetPlayerBlockList = Instance.new("RemoteEvent")
+SetPlayerBlockList.Name = "SetPlayerBlockList"
+SetPlayerBlockList.Parent = RobloxReplicatedStorage
+local UpdatePlayerBlockList = Instance.new("RemoteEvent")
+UpdatePlayerBlockList.Name = "UpdatePlayerBlockList"
+UpdatePlayerBlockList.Parent = RobloxReplicatedStorage
+local NewPlayerGroupDetails = Instance.new("RemoteEvent")
+NewPlayerGroupDetails.Name = "NewPlayerGroupDetails"
+NewPlayerGroupDetails.Parent = RobloxReplicatedStorage
+local NewPlayerCanManageDetails = Instance.new("RemoteEvent")
+NewPlayerCanManageDetails.Name = "NewPlayerCanManageDetails"
+NewPlayerCanManageDetails.Parent = RobloxReplicatedStorage
+local SendPlayerBlockList = Instance.new("RemoteEvent")
+SendPlayerBlockList.Name = "SendPlayerBlockList"
+SendPlayerBlockList.Parent = RobloxReplicatedStorage
+local UpdateLocalPlayerBlockList = Instance.new("RemoteEvent")
+UpdateLocalPlayerBlockList.Name = "UpdateLocalPlayerBlockList"
+UpdateLocalPlayerBlockList.Parent = RobloxReplicatedStorage
+local SendPlayerProfileSettings = Instance.new("RemoteEvent")
+SendPlayerProfileSettings.Name = "SendPlayerProfileSettings"
+SendPlayerProfileSettings.Parent = RobloxReplicatedStorage
+local RequestPlayerProfileSettings = nil
 
-if fFlagInExperienceRequestProfileSettingsModule then
-	requestPlayerProfileSettings = Instance.new("RemoteEvent")
-	requestPlayerProfileSettings.Name = "RequestPlayerProfileSettings"
-	requestPlayerProfileSettings.Parent = robloxReplicatedStorageService
+if FFlagInExperienceRequestProfileSettingsModule then
+	RequestPlayerProfileSettings = Instance.new("RemoteEvent")
+	RequestPlayerProfileSettings.Name = "RequestPlayerProfileSettings"
+	RequestPlayerProfileSettings.Parent = RobloxReplicatedStorage
 end
-local updatePlayerProfileSettings = nil
+local UpdatePlayerProfileSettings = nil
 
-if fFlagBadgeVisibilitySettingEnabled then
-	updatePlayerProfileSettings = Instance.new("RemoteEvent")
-	updatePlayerProfileSettings.Name = "UpdatePlayerProfileSettings"
-	updatePlayerProfileSettings.Parent = robloxReplicatedStorageService
+if FFlagBadgeVisibilitySettingEnabled then
+	UpdatePlayerProfileSettings = Instance.new("RemoteEvent")
+	UpdatePlayerProfileSettings.Name = "UpdatePlayerProfileSettings"
+	UpdatePlayerProfileSettings.Parent = RobloxReplicatedStorage
 end
-local showFriendJoinedPlayerToast = nil
-local showPlayerJoinedFriendsToast = nil
+local ShowFriendJoinedPlayerToast = nil
+local ShowPlayerJoinedFriendsToast = nil
 
-if fFlagEnablePartyNudgeAfterJoin then
-	showPlayerJoinedFriendsToast = Instance.new("RemoteEvent")
-	showPlayerJoinedFriendsToast.Name = "ShowPlayerJoinedFriendsToast"
-	showPlayerJoinedFriendsToast.Parent = robloxReplicatedStorageService
+if FFlagEnablePartyNudgeAfterJoin then
+	ShowPlayerJoinedFriendsToast = Instance.new("RemoteEvent")
+	ShowPlayerJoinedFriendsToast.Name = "ShowPlayerJoinedFriendsToast"
+	ShowPlayerJoinedFriendsToast.Parent = RobloxReplicatedStorage
 end
-if fFlagEnablePartyNudgeAfterJoin or fFlagShowFriendJoinedYouToastForNonReferredJoins then
-	showFriendJoinedPlayerToast = Instance.new("RemoteEvent")
-	showFriendJoinedPlayerToast.Name = "ShowFriendJoinedPlayerToast"
-	showFriendJoinedPlayerToast.Parent = robloxReplicatedStorageService
+if FFlagEnablePartyNudgeAfterJoin or FFlagShowFriendJoinedYouToastForNonReferredJoins then
+	ShowFriendJoinedPlayerToast = Instance.new("RemoteEvent")
+	ShowFriendJoinedPlayerToast.Name = "ShowFriendJoinedPlayerToast"
+	ShowFriendJoinedPlayerToast.Parent = RobloxReplicatedStorage
 end
-local createOrJoinParty = Instance.new("RemoteEvent")
-createOrJoinParty.Name = "CreateOrJoinParty"
-createOrJoinParty.Parent = robloxReplicatedStorageService
-local moderateChatSettingUpdated = nil
+local CreateOrJoinParty = Instance.new("RemoteEvent")
+CreateOrJoinParty.Name = "CreateOrJoinParty"
+CreateOrJoinParty.Parent = RobloxReplicatedStorage
+local ModerateChatSettingUpdated = nil
 
-if fFlagEnableModerateChatRemoteEvent then
-	moderateChatSettingUpdated = Instance.new("RemoteEvent")
-	moderateChatSettingUpdated.Name = "ModerateChatSettingUpdated"
-	moderateChatSettingUpdated.Parent = robloxReplicatedStorageService
+if FFlagEnableModerateChatRemoteEvent then
+	ModerateChatSettingUpdated = Instance.new("RemoteEvent")
+	ModerateChatSettingUpdated.Name = "ModerateChatSettingUpdated"
+	ModerateChatSettingUpdated.Parent = RobloxReplicatedStorage
 end
-local expChatFeatureValueChanged = nil
+local ExpChatFeatureValueChanged = nil
 
-if fFlagEnableSummarySystemMessageOnLua or fFlagAIRephraseSettingEnabled or fFlagChatSummariesSettingEnabled then
-	expChatFeatureValueChanged = Instance.new("RemoteEvent")
-	expChatFeatureValueChanged.Name = "ExpChatFeatureValueChanged"
-	expChatFeatureValueChanged.Parent = robloxReplicatedStorageService
+if FFlagEnableSummarySystemMessageOnLua or FFlagAIRephraseSettingEnabled or FFlagChatSummariesSettingEnabled then
+	ExpChatFeatureValueChanged = Instance.new("RemoteEvent")
+	ExpChatFeatureValueChanged.Name = "ExpChatFeatureValueChanged"
+	ExpChatFeatureValueChanged.Parent = RobloxReplicatedStorage
 end
-local t_7 = {}
+local t5 = {}
 
-local function _(p1)
+local function _(p1): boolean --[[ Line: 174 | Named "verifyUserId" ]]
 	return type(p1) == "number"
 end
 
-local function verifyBlockList(p1)
-	if #p1 == 0 or game:GetFastInt("MaxBlockListSize") < #p1 then
+local function verifyBlockList(UserIds): boolean --[[ Line: 178 ]]
+	if #UserIds == 0 or game:GetFastInt("MaxBlockListSize") < #UserIds then
 		return false
 	end
-	for i, v in pairs(p1) do
-		if type(v) ~= "number" then
+	for _, userId in pairs(UserIds) do
+		if type(userId) ~= "number" then
 			return false
 		end
 	end
 	return true
 end
 
-local _ = function(p2)
-	-- upvalues: newPlayerGroupDetails (ref), t_2 (ref)
-	newPlayerGroupDetails:FireClient(p2, t_2)
+local _ = function(Player) --[[ Line: 191 | Named "sendPlayerAllGroupDetails" ]]
+	-- upvalues: NewPlayerGroupDetails (copy), t1 (copy)
+	NewPlayerGroupDetails:FireClient(Player, t1)
 end
 
-local function getPlayerGroupDetails(p2)
-	-- upvalues: t_1 (ref), t_2 (ref), newPlayerGroupDetails (ref)
+local function getPlayerGroupDetails(Player) --[[ Line: 195 ]]
+	-- upvalues: config (copy), t1 (copy), NewPlayerGroupDetails (copy)
 	local t = {}
 	
-	for i, v in pairs(t_1) do
-		if v.GroupRank == nil then
-			local ok, status = pcall(function()
-				-- upvalues: p2 (ref), v (ref)
-				return p2:IsInGroupAsync(v.GroupId)
+	for i, PlaceCreator in pairs(config) do
+		if PlaceCreator.GroupRank == nil then
+			local Success1, Result1 = pcall(function() --[[ Line: 205 ]]
+				-- upvalues: Player (copy), PlaceCreator (copy)
+				return Player:IsInGroupAsync(PlaceCreator.GroupId)
 			end)
-			t[i] = ok and status
+			t[i] = Success1 and Result1
 		else
-			local ok, status = pcall(function()
-				-- upvalues: p2 (ref), v (ref)
-				return v.GroupRank <= p2:GetRankInGroupAsync(v.GroupId)
+			local Success, Result = pcall(function(): boolean --[[ Line: 199 ]]
+				-- upvalues: Player (copy), PlaceCreator (copy)
+				return PlaceCreator.GroupRank <= Player:GetRankInGroupAsync(PlaceCreator.GroupId)
 			end)
-			t[i] = ok and status
+			t[i] = Success and Result
 		end
 	end
-	if p2.Parent then
-		local var1 = tostring(p2.UserId)
-		t_2[var1] = t
-		newPlayerGroupDetails:FireAllClients({ [var1] = t })
+	if Player.Parent then
+		local Text = tostring(Player.UserId)
+		t1[Text] = t
+		NewPlayerGroupDetails:FireAllClients({ [Text] = t })
 	end
 end
 
-local function sendCanChatWith(p3)
-	-- upvalues: playersService (ref), useNewDirectChatAPI (ref), textChatService (ref), canChatWith (ref), chatService (ref)
+local function sendCanChatWith(Player: Player) --[[ Line: 222 ]]
+	-- upvalues: Players (copy), UseNewDirectChatAPI (copy), TextChatService (copy), CanChatWith (copy), Chat (copy)
 	local t = {}
 	
-	for i, v in ipairs(playersService:GetPlayers()) do
-		if useNewDirectChatAPI then
-			local ok, status = pcall(function()
-				-- upvalues: textChatService (copy), p3 (ref), v (ref)
-				return textChatService:CanUsersDirectChatAsync(p3.UserId, { v.UserId })
+	for _, player in ipairs(Players:GetPlayers()) do
+		if UseNewDirectChatAPI then
+			local Success, Result = pcall(function() --[[ Line: 227 ]]
+				-- upvalues: TextChatService (upval), Player (copy), player (copy)
+				return TextChatService:CanUsersDirectChatAsync(Player.UserId, { player.UserId })
 			end)
-			t[v.UserId] = ok and #status > 0
-			canChatWith:FireClient(v, { [p3.UserId] = ok and #status > 0 })
+			t[player.UserId] = Success and #Result > 0
+			CanChatWith:FireClient(player, { [Player.UserId] = Success and #Result > 0 })
 		else
-			local ok, status = pcall(function()
-				-- upvalues: chatService (copy), p3 (ref), v (ref)
-				return chatService:CanUsersChatAsync(p3.UserId, v.UserId)
+			local Success1, Result1 = pcall(function() --[[ Line: 236 ]]
+				-- upvalues: Chat (upval), Player (copy), player (copy)
+				return Chat:CanUsersChatAsync(Player.UserId, player.UserId)
 			end)
-			t[v.userId] = ok and status
-			canChatWith:FireClient(v, { [p3.userId] = ok and status })
+			t[player.userId] = Success1 and Result1
+			CanChatWith:FireClient(player, { [Player.userId] = Success1 and Result1 })
 		end
 	end
-	canChatWith:FireClient(p3, t)
+	CanChatWith:FireClient(Player, t)
 end
 
-local function sendPlayerAllCanManage(p4)
-	-- upvalues: t_3 (ref), newPlayerCanManageDetails (ref)
-	for i, v in pairs(t_3) do
-		newPlayerCanManageDetails:FireClient(p4, i, v)
-	end
-end
-
-local function getPlayerCanManage(p5)
-	-- upvalues: luaGetCanManageAsync (ref), t_3 (ref), newPlayerCanManageDetails (ref), url (ref), httpService (ref), fFlagUserPresenceTokenRccCheckPermissionsLuaModule (ref), httpRbxApiService (ref)
-	if luaGetCanManageAsync then
-		if p5.UserId <= 0 or not p5.Parent then return end
-		local var2 = false
-		local ok, status = pcall(p5.GetCanManageAsync, p5)
-		
-		if ok and status then
-			var2 = true
-		end
-		local var3 = tostring(p5.UserId)
-		t_3[var3] = var2
-		newPlayerCanManageDetails:FireAllClients(var3, var2)
-		
-		return
-	else
-		local var4 = false
-		
-		if p5.UserId > 0 then
-			local ok, status = pcall(function()
-				-- upvalues: url (copy), httpService (copy), p5 (ref), fFlagUserPresenceTokenRccCheckPermissionsLuaModule (copy), httpRbxApiService (copy)
-				local formattedText = string.format(url.APIS_URL .. "asset-permissions-api/v1/rcc/assets/check-permissions")
-				local var5 = httpService:JSONEncode({
-					requests = {
-						{
-							action = "Edit",
-							subject = { subjectType = "User", subjectId = p5.UserId },
-							assetId = game.PlaceId
-						}
-					}
-				})
-				
-				return httpService:JSONDecode(if fFlagUserPresenceTokenRccCheckPermissionsLuaModule then httpRbxApiService:PostAsyncFullUrlForPlayer(formattedText, var5, p5) else httpRbxApiService:PostAsyncFullUrl(formattedText, var5))
-			end)
-			
-			if ok then
-				status = status.results[1]
-				
-				if status.value and status.value.status == "HasPermission" then
-					var4 = true
-				end
-			end
-		end
-		if p5.Parent then
-			local var5 = tostring(p5.UserId)
-			t_3[var5] = var4
-			newPlayerCanManageDetails:FireAllClients(var5, var4)
-		end
+local function sendPlayerAllCanManage(Player) --[[ Line: 250 ]]
+	-- upvalues: t2 (copy), NewPlayerCanManageDetails (copy)
+	for i, value in pairs(t2) do
+		NewPlayerCanManageDetails:FireClient(Player, i, value)
 	end
 end
 
-local _ = function(p5, p6)
-	-- upvalues: url (ref), httpService (ref), httpRbxApiService (ref)
-	return pcall(function()
-		-- upvalues: url (copy), httpService (copy), p6 (ref), p5 (ref), httpRbxApiService (copy)
-		return httpService:JSONDecode(httpRbxApiService:PostAsyncFullUrl(string.format(url.APIS_URL .. "user-blocking-api/v1/users/rcc/batch-check-reciprocal-block"), httpService:JSONEncode({ userIds = p6, requesterUserId = p5.UserId })))
+local function getPlayerCanManage(Player: Player) --[[ Line: 256 ]]
+	-- upvalues: t2 (copy), NewPlayerCanManageDetails (copy)
+	if Player.UserId <= 0 or not Player.Parent then return end
+	local Flag = false
+	local Success, Result = pcall(Player.GetCanManageAsync, Player)
+	
+	if Success and Result then
+		Flag = true
+	end
+	local Text = tostring(Player.UserId)
+	t2[Text] = Flag
+	NewPlayerCanManageDetails:FireAllClients(Text, Flag)
+end
+
+local _ = function(Player: Player, UserIds) --[[ Line: 273 ]]
+	-- upvalues: Url (copy), HttpService (copy), HttpRbxApiService (copy)
+	return pcall(function() --[[ Line: 274 ]]
+		-- upvalues: Url (upval), HttpService (upval), UserIds (copy), Player (copy), HttpRbxApiService (upval)
+		return HttpService:JSONDecode((HttpRbxApiService:PostAsyncFullUrl(string.format(Url.APIS_URL .. "user-blocking-api/v1/users/rcc/batch-check-reciprocal-block"), (HttpService:JSONEncode({ userIds = UserIds, requesterUserId = Player.UserId })))))
 	end)
 end
 
-local function sendPlayerBlockList_1(p5)
-	-- upvalues: globalUserBlockingLuaReadsFromSCMCache (ref), playersService (ref), updateLocalPlayerBlockList (ref), sendPlayerBlockList (ref), url (ref), httpService (ref), httpRbxApiService (ref)
-	local t
-	if p5.UserId <= 0 then return end
-	if globalUserBlockingLuaReadsFromSCMCache then
-		local function scanAndSendBlockList(p6)
-			-- upvalues: p5 (ref), playersService (copy), updateLocalPlayerBlockList (copy), sendPlayerBlockList (copy)
-			if not p5.Parent then return end
+local function sendPlayerBlockList(Player: Player) --[[ Line: 288 ]]
+	-- upvalues: GlobalUserBlockingLuaReadsFromSCMCache (copy), Players (copy), UpdateLocalPlayerBlockList (copy), SendPlayerBlockList (copy), Url (copy), HttpService (copy), HttpRbxApiService (copy)
+	if Player.UserId <= 0 then return end
+	if GlobalUserBlockingLuaReadsFromSCMCache then
+		local function scanAndSendBlockList(p1) --[[ Line: 294 ]]
+			-- upvalues: Player (copy), Players (upval), UpdateLocalPlayerBlockList (upval), SendPlayerBlockList (upval)
+			if not Player.Parent then return end
 			local t = {}
 			
-			for i, v in playersService:GetPlayers() do
-				if v ~= p5 then
-					if p5:HasBlockedPlayer(v.UserId) then
-						t[v.UserId] = true
+			for _, player in Players:GetPlayers() do
+				if player ~= Player then
+					if Player:HasBlockedPlayer(player.UserId) then
+						t[player.UserId] = true
 					end
-					if p6 and v:HasBlockedPlayer(p5.UserId) then
-						updateLocalPlayerBlockList:FireClient(v, p5.UserId, true)
+					if p1 and player:HasBlockedPlayer(Player.UserId) then
+						UpdateLocalPlayerBlockList:FireClient(player, Player.UserId, true)
 					end
 				end
 			end
-			sendPlayerBlockList:FireClient(p5, t)
+			SendPlayerBlockList:FireClient(Player, t)
 		end
 		
-		t = false
-		p5.BlockListChanged:Connect(function()
-			-- upvalues: t (write), scanAndSendBlockList (ref)
-			if t then
+		local UserIds = false
+		Player.BlockListChanged:Connect(function() --[[ Line: 319 ]]
+			-- upvalues: UserIds (ref), scanAndSendBlockList (copy)
+			if UserIds then
 				scanAndSendBlockList(false)
 				
 				return
+			else
+				scanAndSendBlockList(true)
+				UserIds = true
 			end
-			scanAndSendBlockList(true)
-			t = true
 		end)
 		
-		if p5:GetBlockListInitialized() then
+		if Player:GetBlockListInitialized() then
 			scanAndSendBlockList(true)
-			t = true
+			UserIds = true
 		end
 		return
 	else
-		t = {}
+		local UserIds = {}
 		
-		for i, v in playersService:GetPlayers() do
-			if p5 ~= v then
-				table.insert(t, v.UserId)
+		for _, player in Players:GetPlayers() do
+			if Player ~= player then
+				table.insert(UserIds, player.UserId)
 			end
 		end
-		local ok, status = pcall(function()
-			-- upvalues: url (copy), httpService (copy), t (ref), p5 (ref), httpRbxApiService (copy)
-			return httpService:JSONDecode(httpRbxApiService:PostAsyncFullUrl(string.format(url.APIS_URL .. "user-blocking-api/v1/users/rcc/batch-check-reciprocal-block"), httpService:JSONEncode({ userIds = t, requesterUserId = p5.UserId })))
+		local Success, Result = pcall(function() --[[ Line: 274 ]]
+			-- upvalues: Url (upval), HttpService (upval), UserIds (copy), Player (copy), HttpRbxApiService (upval)
+			return HttpService:JSONDecode((HttpRbxApiService:PostAsyncFullUrl(string.format(Url.APIS_URL .. "user-blocking-api/v1/users/rcc/batch-check-reciprocal-block"), (HttpService:JSONEncode({ userIds = UserIds, requesterUserId = Player.UserId })))))
 		end)
-		local t_1 = {}
-		local t_2 = {}
+		local List = {}
+		local t = {}
 		
-		if ok and status then
-			for i_1, v_1 in status.users do
-				if v_1.isBlocked then
-					t_2[v_1.userId] = true
-					table.insert(t_1, v_1.userId)
+		if Success and Result then
+			for _, user in Result.users do
+				if user.isBlocked then
+					t[user.userId] = true
+					table.insert(List, user.userId)
 				end
-				if v_1.isBlockingViewer then
-					local userIdPlayerByUserId = playersService:GetPlayerByUserId(v_1.userId)
-					userIdPlayerByUserId:UpdatePlayerBlocked(p5.UserId, true)
-					updateLocalPlayerBlockList:FireClient(userIdPlayerByUserId, p5.UserId, true)
+				if user.isBlockingViewer then
+					local Player1 = Players:GetPlayerByUserId(user.userId)
+					Player1:UpdatePlayerBlocked(Player.UserId, true)
+					UpdateLocalPlayerBlockList:FireClient(Player1, Player.UserId, true)
 				end
 			end
 		end
-		p5:AddToBlockList(t_1)
+		Player:AddToBlockList(List)
 		
 		if game:GetFastFlag("EnableSetUserBlocklistInitialized") then
-			p5:SetBlockListInitialized()
+			Player:SetBlockListInitialized()
 		end
-		sendPlayerBlockList:FireClient(p5, t_2)
+		SendPlayerBlockList:FireClient(Player, t)
 	end
 end
 
-local function sendPlayerAllInExperienceNameEnabled(p7)
-	-- upvalues: t_4 (ref), sendPlayerProfileSettings (ref)
-	for i, v in pairs(t_4) do
-		sendPlayerProfileSettings:FireClient(p7, i, { isInExperienceNameEnabled = v })
+local function sendPlayerAllInExperienceNameEnabled(Player) --[[ Line: 369 ]]
+	-- upvalues: t3 (copy), SendPlayerProfileSettings (copy)
+	for i, IsInExperienceNameEnabled in pairs(t3) do
+		SendPlayerProfileSettings:FireClient(Player, i, { isInExperienceNameEnabled = IsInExperienceNameEnabled })
 	end
 end
 
-local _ = function(p8)
-	-- upvalues: url (ref), httpRbxApiService (ref), httpService (ref)
-	return pcall(function()
-		-- upvalues: p8 (ref), url (copy), httpRbxApiService (copy), httpService (copy)
-		return httpService:JSONDecode(httpRbxApiService:GetAsyncFullUrl(url.APIS_URL .. `user-profile-api/v1/user/profiles/rcc/settings?userId={p8.UserId}`, Enum.ThrottlingPriority.Default, Enum.HttpRequestType.Players))
+local _ = function(Player: Player) --[[ Line: 379 ]]
+	-- upvalues: Url (copy), HttpRbxApiService (copy), HttpService (copy)
+	return pcall(function() --[[ Line: 380 ]]
+		-- upvalues: Player (copy), Url (upval), HttpRbxApiService (upval), HttpService (upval)
+		return HttpService:JSONDecode((HttpRbxApiService:GetAsyncFullUrl(Url.APIS_URL .. `user-profile-api/v1/user/profiles/rcc/settings?userId={Player.UserId}`, Enum.ThrottlingPriority.Default, Enum.HttpRequestType.Players)))
 	end)
 end
 
-local var2 = function(p8)
-	-- upvalues: fStringRccInExperienceNameEnabledAllowListModule (ref), disableRCCAntiHarrasmentAllowList (ref), url (ref), httpRbxApiService (ref), httpService (ref), t_4 (ref), sendPlayerProfileSettings (ref)
-	if p8.UserId <= 0 then return end
-	local var3 = false
+local function Callback1(Player: Player) --[[ Line: 390 ]]
+	-- upvalues: FStringRccInExperienceNameEnabledAllowListModule (copy), DisableRCCAntiHarrasmentAllowList (copy), Url (copy), HttpRbxApiService (copy), HttpService (copy), t3 (copy), SendPlayerProfileSettings (copy)
+	if Player.UserId <= 0 then return end
+	local IsInExperienceNameEnabled = false
 	
-	if fStringRccInExperienceNameEnabledAllowListModule.isAllowListedUserId(p8.UserId) or disableRCCAntiHarrasmentAllowList then
-		local ok, status = pcall(function()
-			-- upvalues: p8 (ref), url (copy), httpRbxApiService (copy), httpService (copy)
-			return httpService:JSONDecode(httpRbxApiService:GetAsyncFullUrl(url.APIS_URL .. `user-profile-api/v1/user/profiles/rcc/settings?userId={p8.UserId}`, Enum.ThrottlingPriority.Default, Enum.HttpRequestType.Players))
+	if FStringRccInExperienceNameEnabledAllowListModule.isAllowListedUserId(Player.UserId) or DisableRCCAntiHarrasmentAllowList then
+		local Success, Result = pcall(function() --[[ Line: 380 ]]
+			-- upvalues: Player (copy), Url (upval), HttpRbxApiService (upval), HttpService (upval)
+			return HttpService:JSONDecode((HttpRbxApiService:GetAsyncFullUrl(Url.APIS_URL .. `user-profile-api/v1/user/profiles/rcc/settings?userId={Player.UserId}`, Enum.ThrottlingPriority.Default, Enum.HttpRequestType.Players)))
 		end)
-		local var4 = status
 		
-		if ok and var4 then
-			ok = var4.isSettingsEnabled and (var4.userProfileSettings and var4.userProfileSettings.isInExperienceNameEnabled)
-			var3 = ok
+		if Success and Result then
+			IsInExperienceNameEnabled = Result.isSettingsEnabled and (Result.userProfileSettings and Result.userProfileSettings.isInExperienceNameEnabled)
 		end
 	end
-	local var5 = tostring(p8.UserId)
-	t_4[var5] = var3
-	sendPlayerProfileSettings:FireAllClients(var5, { isInExperienceNameEnabled = var3 })
+	local Text = tostring(Player.UserId)
+	t3[Text] = IsInExperienceNameEnabled
+	SendPlayerProfileSettings:FireAllClients(Text, { isInExperienceNameEnabled = IsInExperienceNameEnabled })
 end
 
-if fFlagInExperienceRequestProfileSettingsModule then
-	requestPlayerProfileSettings.OnServerEvent:Connect(function(p8)
-		-- upvalues: t_4 (ref), sendPlayerProfileSettings (ref), var2 (ref)
-		local var3 = tostring(p8.UserId)
-		local var4 = t_4[var3]
+if FFlagInExperienceRequestProfileSettingsModule then
+	RequestPlayerProfileSettings.OnServerEvent:Connect(function(Player: Player) --[[ Line: 417 ]]
+		-- upvalues: t3 (copy), SendPlayerProfileSettings (copy), Callback1 (copy)
+		local Text = tostring(Player.UserId)
+		local Entry = t3[Text]
 		
-		if var4 == nil then
-			coroutine.wrap(var2)(p8)
+		if Entry == nil then
+			coroutine.wrap(Callback1)(Player)
 			
 			return
+		else
+			SendPlayerProfileSettings:FireClient(Player, Text, { isInExperienceNameEnabled = Entry })
 		end
-		sendPlayerProfileSettings:FireClient(p8, var3, { isInExperienceNameEnabled = var4 })
 	end)
 end
-local _ = function(p8, p9, p10)
-	-- upvalues: url (ref), httpService (ref), enableCreatePartyNudgeWithVersion (ref), gatePrivateServerNudge (ref), httpRbxApiService (ref)
-	return pcall(function()
-		-- upvalues: url (copy), httpService (copy), p8 (ref), p9 (ref), p10 (ref), enableCreatePartyNudgeWithVersion (copy), gatePrivateServerNudge (copy), httpRbxApiService (copy)
-		return httpService:JSONDecode(httpRbxApiService:PostAsyncFullUrl(string.format(url.APIS_URL .. "group-up/v1/create-party-nudge"), httpService:JSONEncode({
-			inviterId = p8,
-			inviteeId = p9,
-			nudgeType = p10,
+local _ = function(InviterId, InviteeId, NudgeType) --[[ Line: 434 ]]
+	-- upvalues: Url (copy), HttpService (copy), EnableCreatePartyNudgeWithVersion (copy), GatePrivateServerNudge (copy), HttpRbxApiService (copy)
+	return pcall(function() --[[ Line: 435 ]]
+		-- upvalues: Url (upval), HttpService (upval), InviterId (copy), InviteeId (copy), NudgeType (copy), EnableCreatePartyNudgeWithVersion (upval), GatePrivateServerNudge (upval), HttpRbxApiService (upval)
+		return HttpService:JSONDecode((HttpRbxApiService:PostAsyncFullUrl(string.format(Url.APIS_URL .. "group-up/v1/create-party-nudge"), (HttpService:JSONEncode({
+			inviterId = InviterId,
+			inviteeId = InviteeId,
+			nudgeType = NudgeType,
 			placeId = game.PlaceId,
 			gameInstanceId = game.JobId,
 			universeId = game.GameId,
-			version = if enableCreatePartyNudgeWithVersion then 1 else nil,
-			privateServerId = if gatePrivateServerNudge then game.PrivateServerId else nil,
-			privateServerOwnerId = if gatePrivateServerNudge then game.PrivateServerOwnerId else nil
-		})))
+			version = if EnableCreatePartyNudgeWithVersion then 1 else nil,
+			privateServerId = if GatePrivateServerNudge then game.PrivateServerId else nil,
+			privateServerOwnerId = if GatePrivateServerNudge then game.PrivateServerOwnerId else nil
+		})))))
 	end)
 end
 
-local function canCreatePartyNudge(p8)
-	return if p8 then p8.PartyId == "" and (p8.VRDevice == "" and (typeof(p8.OsPlatform) == "string" and ({
-		Windows = true,
-		iOS = true,
-		Android = true,
-		OSX = true,
-		Win32 = true,
-		Windows_Universal = true
-	})[p8.OsPlatform])) else false
+local function canCreatePartyNudge(Player) --[[ Line: 456 ]]
+	if Player then
+		local config = {
+			Windows = true,
+			iOS = true,
+			Android = true,
+			OSX = true,
+			Win32 = true,
+			Windows_Universal = true
+		}
+		
+		return Player.PartyId == "" and (Player.VRDevice == "" and typeof(Player.OsPlatform) == "string") and config[Player.OsPlatform]
+	else
+		return false
+	end
 end
 
-local var3 = function(p8)
-	-- upvalues: playersService (ref), fFlagEnablePartyNudgeAfterJoin (ref), enableCreatePartyNudge (ref), canCreatePartyNudge (ref), url (ref), httpService (ref), enableCreatePartyNudgeWithVersion (ref), gatePrivateServerNudge (ref), httpRbxApiService (ref), createOrJoinParty (ref), fFlagShowFriendJoinedYouToastForNonReferredJoins (ref), shouldShowFriendJoinedPlayerToastModule (ref), showFriendJoinedPlayerToast (write), showPlayerJoinedFriendsToast (write)
-	local v
-	local var4 = nil
-	local players = playersService:GetPlayers()
+local function Callback2(Player: Player) --[[ Line: 478 ]]
+	-- upvalues: Players (copy), FFlagEnablePartyNudgeAfterJoin (copy), EnableCreatePartyNudge (copy), canCreatePartyNudge (copy), Url (copy), HttpService (copy), EnableCreatePartyNudgeWithVersion (copy), GatePrivateServerNudge (copy), HttpRbxApiService (copy), CreateOrJoinParty (copy), FFlagShowFriendJoinedYouToastForNonReferredJoins (copy), ShouldShowFriendJoinedPlayerToastModule (copy), ShowFriendJoinedPlayerToast (ref), ShowPlayerJoinedFriendsToast (ref)
+	local Player1 = nil
+	local Players1 = Players:GetPlayers()
 	
-	for i, v in players do
-		if v.UserId == p8.FollowUserId then
-			var4 = v
+	for _, Player2 in Players1 do
+		if Player2.UserId == Player.FollowUserId then
+			Player1 = Player2
 			break
 		end
 	end
-	local var5 = false
+	local v1 = false
 	
-	if fFlagEnablePartyNudgeAfterJoin and enableCreatePartyNudge and (canCreatePartyNudge(var4) and canCreatePartyNudge(p8)) then
-		local _ = nil
-		v = p8.UserId
-		local userId = var4.UserId
-		local var6 = "OneToOneNudgeInExperience"
-		local ok, status = pcall(function()
-			-- upvalues: url (copy), httpService (copy), v (ref), userId (ref), var6 (ref), enableCreatePartyNudgeWithVersion (copy), gatePrivateServerNudge (copy), httpRbxApiService (copy)
-			return httpService:JSONDecode(httpRbxApiService:PostAsyncFullUrl(string.format(url.APIS_URL .. "group-up/v1/create-party-nudge"), httpService:JSONEncode({
-				inviterId = v,
-				inviteeId = userId,
-				nudgeType = var6,
+	if FFlagEnablePartyNudgeAfterJoin and EnableCreatePartyNudge and canCreatePartyNudge(Player1) and canCreatePartyNudge(Player) then
+		local UserId = Player.UserId
+		local UserId1 = Player1.UserId
+		local NudgeType = "OneToOneNudgeInExperience"
+		local Result
+		v1, Result = pcall(function() --[[ Line: 435 ]]
+			-- upvalues: Url (upval), HttpService (upval), UserId (copy), UserId1 (copy), NudgeType (copy), EnableCreatePartyNudgeWithVersion (upval), GatePrivateServerNudge (upval), HttpRbxApiService (upval)
+			return HttpService:JSONDecode((HttpRbxApiService:PostAsyncFullUrl(string.format(Url.APIS_URL .. "group-up/v1/create-party-nudge"), (HttpService:JSONEncode({
+				inviterId = UserId,
+				inviteeId = UserId1,
+				nudgeType = NudgeType,
 				placeId = game.PlaceId,
 				gameInstanceId = game.JobId,
 				universeId = game.GameId,
-				version = if enableCreatePartyNudgeWithVersion then 1 else nil,
-				privateServerId = if gatePrivateServerNudge then game.PrivateServerId else nil,
-				privateServerOwnerId = if gatePrivateServerNudge then game.PrivateServerOwnerId else nil
-			})))
+				version = if EnableCreatePartyNudgeWithVersion then 1 else nil,
+				privateServerId = if GatePrivateServerNudge then game.PrivateServerId else nil,
+				privateServerOwnerId = if GatePrivateServerNudge then game.PrivateServerOwnerId else nil
+			})))))
 		end)
-		var5 = ok
-		local var7 = status
 		
-		if var5 and var7 and var7.shouldAutoCreateOrJoinGroupUp then
-			createOrJoinParty:FireClient(p8, "PartyNudge", var7.nudge)
+		if v1 and Result and Result.shouldAutoCreateOrJoinGroupUp then
+			CreateOrJoinParty:FireClient(Player, "PartyNudge", Result.nudge)
 		end
 	end
-	if not var5 and #players > 0 then
-		if var4 and (not fFlagShowFriendJoinedYouToastForNonReferredJoins or shouldShowFriendJoinedPlayerToastModule(p8)) then
-			showFriendJoinedPlayerToast:FireClient(var4, p8)
+	if not v1 and #Players1 > 0 then
+		if Player1 and (not FFlagShowFriendJoinedYouToastForNonReferredJoins or ShouldShowFriendJoinedPlayerToastModule(Player)) then
+			ShowFriendJoinedPlayerToast:FireClient(Player1, Player)
 		end
-		if fFlagEnablePartyNudgeAfterJoin then
-			showPlayerJoinedFriendsToast:FireClient(p8)
+		if FFlagEnablePartyNudgeAfterJoin then
+			ShowPlayerJoinedFriendsToast:FireClient(Player)
 		end
 	end
 end
 
-local function onPlayerAdded(p9)
-	-- upvalues: sendPlayerBlockList_1 (ref), newPlayerGroupDetails (ref), t_2 (ref), getPlayerGroupDetails (ref), fFlagInExperienceUserProfileSettingsEnabledModule (ref), sendPlayerAllInExperienceNameEnabled (ref), var2 (ref), sendPlayerAllCanManage (ref), getPlayerCanManage (ref), sendCanChatWith (ref), fFlagEnablePartyNudgeAfterJoin (ref), fFlagShowFriendJoinedYouToastForNonReferredJoins (ref), var3 (ref)
-	coroutine.wrap(sendPlayerBlockList_1)(p9)
-	newPlayerGroupDetails:FireClient(p9, t_2)
+local function onPlayerAdded(Player: Player) --[[ Line: 521 ]]
+	-- upvalues: sendPlayerBlockList (copy), NewPlayerGroupDetails (copy), t1 (copy), getPlayerGroupDetails (copy), FFlagInExperienceUserProfileSettingsEnabledModule (copy), sendPlayerAllInExperienceNameEnabled (copy), Callback1 (copy), sendPlayerAllCanManage (copy), getPlayerCanManage (copy), sendCanChatWith (copy), FFlagEnablePartyNudgeAfterJoin (copy), FFlagShowFriendJoinedYouToastForNonReferredJoins (copy), Callback2 (copy)
+	coroutine.wrap(sendPlayerBlockList)(Player)
+	NewPlayerGroupDetails:FireClient(Player, t1)
 	
-	if p9.UserId > 0 then
-		coroutine.wrap(getPlayerGroupDetails)(p9)
+	if Player.UserId > 0 then
+		coroutine.wrap(getPlayerGroupDetails)(Player)
 	end
-	if fFlagInExperienceUserProfileSettingsEnabledModule then
-		sendPlayerAllInExperienceNameEnabled(p9)
-		coroutine.wrap(var2)(p9)
+	if FFlagInExperienceUserProfileSettingsEnabledModule then
+		sendPlayerAllInExperienceNameEnabled(Player)
+		coroutine.wrap(Callback1)(Player)
 	end
-	sendPlayerAllCanManage(p9)
-	coroutine.wrap(getPlayerCanManage)(p9)
-	sendCanChatWith(p9)
+	sendPlayerAllCanManage(Player)
+	coroutine.wrap(getPlayerCanManage)(Player)
+	sendCanChatWith(Player)
 	
-	if fFlagEnablePartyNudgeAfterJoin or fFlagShowFriendJoinedYouToastForNonReferredJoins then
-		coroutine.wrap(var3)(p9)
+	if FFlagEnablePartyNudgeAfterJoin or FFlagShowFriendJoinedYouToastForNonReferredJoins then
+		coroutine.wrap(Callback2)(Player)
 	end
 end
 
-setPlayerBlockList.OnServerEvent:Connect(function(p9, p10)
-	-- upvalues: verifyBlockList (ref)
+SetPlayerBlockList.OnServerEvent:Connect(function(Player, UserIds) --[[ Line: 542 ]]
+	-- upvalues: verifyBlockList (copy)
 	if game:GetFastFlag("EnableSetUserBlocklistInitialized") then
-		p9:SetBlockListInitialized()
+		Player:SetBlockListInitialized()
 	end
-	if type(p10) == "table" and verifyBlockList(p10) then
-		p9:AddToBlockList(p10)
+	if type(UserIds) == "table" and verifyBlockList(UserIds) then
+		Player:AddToBlockList(UserIds)
 	end
 end)
-updatePlayerBlockList.OnServerEvent:Connect(function(p9, p10, p11)
-	if type(p11) == "boolean" and type(p10) == "number" then
-		p9:UpdatePlayerBlocked(p10, p11)
+UpdatePlayerBlockList.OnServerEvent:Connect(function(Player, UserId, Blocked) --[[ Line: 553 ]]
+	if type(Blocked) == "boolean" and type(UserId) == "number" then
+		Player:UpdatePlayerBlocked(UserId, Blocked)
 	end
 end)
 
-if fFlagBadgeVisibilitySettingEnabled then
-	updatePlayerProfileSettings.OnServerEvent:Connect(function(p9, p10)
-		-- upvalues: profileSettingsSlidingWindowRateLimit (ref), t_6 (ref), profileSettingsRateLimitWindowSeconds (ref), profileSettingsMaxRequestsPerWindow (ref), t_5 (ref), profileSettingsRateLimitSeconds (ref), t_4 (ref), sendPlayerProfileSettings (ref)
-		if type(p10) ~= "table" then return end
+if FFlagBadgeVisibilitySettingEnabled then
+	UpdatePlayerProfileSettings.OnServerEvent:Connect(function(Player, p2) --[[ Line: 562 ]]
+		-- upvalues: ProfileSettingsSlidingWindowRateLimit (copy), t4 (copy), ProfileSettingsRateLimitWindowSeconds (copy), ProfileSettingsMaxRequestsPerWindow (copy), CurrentTimes (copy), ProfileSettingsRateLimitSeconds (copy), t3 (copy), SendPlayerProfileSettings (copy)
+		if type(p2) ~= "table" then return end
 		local t = {}
 		
-		if type(p10.isInExperienceNameEnabled) == "boolean" then
-			t.isInExperienceNameEnabled = p10.isInExperienceNameEnabled
-		else
-			return
-		end
-		local var8 = tostring(p9.UserId)
-		local currentTime = tick()
+		if type(p2.isInExperienceNameEnabled) ~= "boolean" then return end
+		t.isInExperienceNameEnabled = p2.isInExperienceNameEnabled
+		local Text = tostring(Player.UserId)
+		local CurrentTime = tick()
 		
-		if profileSettingsSlidingWindowRateLimit then
-			if not t_6[var8] then
-				t_6[var8] = {}
+		if ProfileSettingsSlidingWindowRateLimit then
+			if not t4[Text] then
+				t4[Text] = {}
 			end
-			local var9 = t_6[var8]
-			local var10 = currentTime - profileSettingsRateLimitWindowSeconds
+			local Entry = t4[Text]
+			local CurrentTimeDelta = CurrentTime - ProfileSettingsRateLimitWindowSeconds
 			
-			for i = #var9, 1, -1 do
-				if var9[i] < var10 then
-					table.remove(var9, i)
+			for i = #Entry, 1, -1 do
+				if Entry[i] < CurrentTimeDelta then
+					table.remove(Entry, i)
 				end
 			end
-			if profileSettingsMaxRequestsPerWindow <= #var9 then return end
-			table.insert(var9, currentTime)
+			if ProfileSettingsMaxRequestsPerWindow <= #Entry then return end
+			table.insert(Entry, CurrentTime)
 		else
-			local var11 = t_5[var8]
+			local CurrentTime1: number = CurrentTimes[Text]
 			
-			if var11 and currentTime - var11 < profileSettingsRateLimitSeconds then return end
-			t_5[var8] = currentTime
+			if CurrentTime1 and CurrentTime - CurrentTime1 < ProfileSettingsRateLimitSeconds then return end
+			CurrentTimes[Text] = CurrentTime
 		end
-		t_4[var8] = t.isInExperienceNameEnabled
-		sendPlayerProfileSettings:FireAllClients(var8, t)
+		t3[Text] = t.isInExperienceNameEnabled
+		SendPlayerProfileSettings:FireAllClients(Text, t)
 	end)
 end
-if fFlagEnableModerateChatRemoteEvent then
-	moderateChatSettingUpdated.OnServerEvent:Connect(function(p9, p10)
-		-- upvalues: textChatService (ref), moderateChatSettingUpdated (write)
-		if typeof(p10) == "boolean" and textChatService:setModerationModeEnabled(p9.UserId, p10) then
-			moderateChatSettingUpdated:FireClient(p9, p10)
+if FFlagEnableModerateChatRemoteEvent then
+	ModerateChatSettingUpdated.OnServerEvent:Connect(function(Player: Player, p2) --[[ Line: 610 ]]
+		-- upvalues: TextChatService (copy), ModerateChatSettingUpdated (ref)
+		if typeof(p2) == "boolean" and TextChatService:setModerationModeEnabled(Player.UserId, p2) then
+			ModerateChatSettingUpdated:FireClient(Player, p2)
 		end
 	end)
 end
-if fFlagEnableSummarySystemMessageOnLua or fFlagAIRephraseSettingEnabled or fFlagChatSummariesSettingEnabled then
-	textChatService.ExpChatFeatureValueChanged:Connect(function(p9, p10, p11)
-		-- upvalues: playersService (ref), expChatFeatureValueChanged (write)
-		local var8 = playersService:GetPlayerByUserId(p9)
+if FFlagEnableSummarySystemMessageOnLua or FFlagAIRephraseSettingEnabled or FFlagChatSummariesSettingEnabled then
+	TextChatService.ExpChatFeatureValueChanged:Connect(function(UserId, FeatureName, FeatureValue) --[[ Line: 620 ]]
+		-- upvalues: Players (copy), ExpChatFeatureValueChanged (ref)
+		local Player = Players:GetPlayerByUserId(UserId)
 		
-		if var8 then
-			expChatFeatureValueChanged:FireClient(var8, p9, p10, p11)
+		if Player then
+			ExpChatFeatureValueChanged:FireClient(Player, UserId, FeatureName, FeatureValue)
 		end
 	end)
 end
-playersService.PlayerAdded:connect(onPlayerAdded)
+Players.PlayerAdded:connect(onPlayerAdded)
 
-for i, v in pairs(playersService:GetPlayers()) do
-	onPlayerAdded(v)
+for _, player in pairs(Players:GetPlayers()) do
+	onPlayerAdded(player)
 end
-playersService.PlayerRemoving:connect(function(p9)
-	-- upvalues: t (ref), t_7 (ref), t_2 (ref), t_3 (ref), t_4 (ref), fFlagBadgeVisibilitySettingEnabled (ref), profileSettingsSlidingWindowRateLimit (ref), t_6 (ref), t_5 (ref)
-	local var8 = tostring(p9.UserId)
+Players.PlayerRemoving:connect(function(Player) --[[ Line: 634 ]]
+	-- upvalues: t (copy), t5 (copy), t1 (copy), t2 (copy), t3 (copy), FFlagBadgeVisibilitySettingEnabled (copy), ProfileSettingsSlidingWindowRateLimit (copy), t4 (copy), CurrentTimes (copy)
+	local Text = tostring(Player.UserId)
 	
-	if t[var8] then
-		t[var8] = nil
-		t_7[var8] = nil
+	if t[Text] then
+		t[Text] = nil
+		t5[Text] = nil
 	end
-	if t_2[var8] then
-		t_2[var8] = nil
+	if t1[Text] then
+		t1[Text] = nil
 	end
-	if t_3[var8] ~= nil then
-		t_3[var8] = nil
+	if t2[Text] ~= nil then
+		t2[Text] = nil
 	end
-	if t_4[var8] ~= nil then
-		t_4[var8] = nil
+	if t3[Text] ~= nil then
+		t3[Text] = nil
 	end
-	if fFlagBadgeVisibilitySettingEnabled then
-		if profileSettingsSlidingWindowRateLimit then
-			if t_6[var8] == nil then
-				return
-			else
-				t_6[var8] = nil
+	if FFlagBadgeVisibilitySettingEnabled then
+		if ProfileSettingsSlidingWindowRateLimit then
+			if t4[Text] ~= nil then
+				t4[Text] = nil
 				
 				return
 			end
-		elseif t_5[var8] ~= nil then
-			t_5[var8] = nil
+		elseif CurrentTimes[Text] ~= nil then
+			CurrentTimes[Text] = nil
 		end
 	end
 end)
 
-local var8 = function() end
+local function Callback() --[[ Line: 662 ]] end
 
-for i_1, v_1 in ipairs(robloxReplicatedStorageService:GetChildren()) do
-	if v_1:IsA("RemoteEvent") then
-		v_1.OnServerEvent:Connect(var8)
+for _, RemoteEvent in ipairs(RobloxReplicatedStorage:GetChildren()) do
+	if RemoteEvent:IsA("RemoteEvent") then
+		RemoteEvent.OnServerEvent:Connect(Callback)
 	end
 end

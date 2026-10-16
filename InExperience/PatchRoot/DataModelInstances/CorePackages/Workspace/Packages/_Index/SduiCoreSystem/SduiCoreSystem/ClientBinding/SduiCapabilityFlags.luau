@@ -1,44 +1,49 @@
-﻿local sharedFlagsModule = require(script:FindFirstAncestor("SduiCoreSystem").Parent.SharedFlags)
+﻿local SharedFlagsModule = require(script:FindFirstAncestor("SduiCoreSystem").Parent.SharedFlags)
 
-local function _()
+local function _() --[[ Line: 13 | Named "isPinShortcutServiceEnabled" ]]
 	return game:GetEngineFeature("PinShortcutServiceEnabled")
 end
 
 return {
 	CAPABILITY_SUPPORTS_HYDRATION_CLIENT_HINTS = true,
-	CAPABILITY_SUPPORTS_MULTI_SIZE_POOL = sharedFlagsModule.FFlagSduiPerSectionPoolSizing,
-	CAPABILITY_SUPPORTS_EDP_PERSISTENT_ACTION_BAR_PLAY_BUTTON = sharedFlagsModule.FFlagSduiEdpPersistentActionBarPlayButton,
-	CAPABILITY_SUPPORTS_EDP_COMMUNITY_SECTION = sharedFlagsModule.FFlagSduiCommunitySectionSupport,
-	CAPABILITY_SUPPORTS_EDP_BUILD_TAG = sharedFlagsModule.FFlagLuaAppEdpShowBuildTag,
-	CAPABILITY_SUPPORTS_OPEN_EXPERIENCE_STORE_SEE_ALL_WITH_WEBVIEW_FALLBACK_ACTION = sharedFlagsModule.FFlagSduiCapabilityDevStoreSeeAllWebviewFallback,
-	CAPABILITY_SUPPORTS_PIN_SHORTCUT_ACTION = (function()
-		-- upvalues: sharedFlagsModule (ref)
-		if not sharedFlagsModule.FFlagSduiPinShortcutAction then
+	CAPABILITY_SUPPORTS_MULTI_SIZE_POOL = SharedFlagsModule.FFlagSduiPerSectionPoolSizing,
+	CAPABILITY_SUPPORTS_EDP_PERSISTENT_ACTION_BAR_PLAY_BUTTON = SharedFlagsModule.FFlagSduiEdpPersistentActionBarPlayButton,
+	CAPABILITY_SUPPORTS_EDP_COMMUNITY_SECTION = SharedFlagsModule.FFlagSduiCommunitySectionSupport,
+	CAPABILITY_SUPPORTS_EDP_BUILD_TAG = SharedFlagsModule.FFlagLuaAppEdpShowBuildTag,
+	CAPABILITY_SUPPORTS_OPEN_EXPERIENCE_STORE_SEE_ALL_WITH_WEBVIEW_FALLBACK_ACTION = SharedFlagsModule.FFlagSduiCapabilityDevStoreSeeAllWebviewFallback,
+	CAPABILITY_SUPPORTS_PIN_SHORTCUT_ACTION = (function(): boolean --[[ Line: 17 | Named "isPinShortcutAvailable" ]]
+		-- upvalues: SharedFlagsModule (copy)
+		if not SharedFlagsModule.FFlagSduiPinShortcutAction then
 			return false
 		elseif not game:GetEngineFeature("PinShortcutServiceEnabled") then
 			return false
+		else
+			local PinShortcutService = nil
+			pcall(function() --[[ Line: 26 ]]
+				-- upvalues: PinShortcutService (ref)
+				PinShortcutService = game:GetService("PinShortcutService")
+			end)
+			
+			if PinShortcutService == nil then
+				return false
+			else
+				local Success, Result = pcall(function() --[[ Line: 32 ]]
+					-- upvalues: PinShortcutService (ref)
+					return PinShortcutService:IsAvailable()
+				end)
+				
+				return if Success then Result == true else false
+			end
 		end
-		local var1 = nil
-		pcall(function()
-			-- upvalues: var1 (write)
-			var1 = game:GetService("PinShortcutService")
-		end)
-		
-		if var1 == nil then
-			return false
-		end
-		local ok, status = pcall(function()
-			-- upvalues: var1 (write)
-			return var1:IsAvailable()
-		end)
-		
-		return if ok then status == true else false
 	end)(),
-	CAPABILITY_SUPPORTS_EVENT_RSVP_FACE_PILE = sharedFlagsModule.FFlagSduiEventRsvpFacePile,
-	CAPABILITY_SUPPORTS_SCALED_PLAY_BUTTON_AND_IMAGE_SIZES = sharedFlagsModule.FFlagSduiScalePlayButtonAndImageSizes,
-	CAPABILITY_SUPPORTS_EXTENDED_CLIENT_CAPABILITIES = sharedFlagsModule.FFlagSduiAdvertiseRuntimeSupportSets,
-	CAPABILITY_SUPPORTS_PREFERRED_TEXT_SIZE_LINE_BUDGETS = sharedFlagsModule.FFlagSduiPreferredTextSizeLineBudgets,
-	CAPABILITY_SUPPORTS_CONTAINER_QUERIES = sharedFlagsModule.FFlagSduiContainerQueries,
-	CAPABILITY_SUPPORTS_EDP_EARLY_ACCESS_UPSELL = sharedFlagsModule.FFlagEnableGameJoinEarlyAccess,
-	CAPABILITY_SUPPORTS_EDP_INFO_TABLE_STABLE_ITEM_KEYS = sharedFlagsModule.FFlagInfoTableStableItemKeys
+	CAPABILITY_SUPPORTS_EVENT_RSVP_FACE_PILE = SharedFlagsModule.FFlagSduiEventRsvpFacePile,
+	CAPABILITY_SUPPORTS_SCALED_PLAY_BUTTON_AND_IMAGE_SIZES = SharedFlagsModule.FFlagSduiScalePlayButtonAndImageSizes,
+	CAPABILITY_SUPPORTS_EXTENDED_CLIENT_CAPABILITIES = SharedFlagsModule.FFlagSduiAdvertiseRuntimeSupportSets,
+	CAPABILITY_SUPPORTS_PREFERRED_TEXT_SIZE_LINE_BUDGETS = SharedFlagsModule.FFlagSduiPreferredTextSizeLineBudgets,
+	CAPABILITY_SUPPORTS_CONTAINER_QUERIES = SharedFlagsModule.FFlagSduiContainerQueries,
+	CAPABILITY_SUPPORTS_EDP_EARLY_ACCESS_UPSELL = SharedFlagsModule.FFlagEnableGameJoinEarlyAccess,
+	CAPABILITY_SUPPORTS_EDP_INFO_TABLE_STABLE_ITEM_KEYS = SharedFlagsModule.FFlagInfoTableStableItemKeys,
+	CAPABILITY_SUPPORTS_VIDEO_PLAYER_ACCESS_CONTEXT = SharedFlagsModule.FFlagLuaAppHomeMomentVideoFallback,
+	CAPABILITY_SUPPORTS_GROUP_ANNOUNCEMENTS = SharedFlagsModule.FFlagGroupAnnouncementsSdui,
+	CAPABILITY_SUPPORTS_EDP_MEDIA_GALLERY_MOMENT_VIDEO = SharedFlagsModule.FFlagLuaAppEdpMomentVideo
 }

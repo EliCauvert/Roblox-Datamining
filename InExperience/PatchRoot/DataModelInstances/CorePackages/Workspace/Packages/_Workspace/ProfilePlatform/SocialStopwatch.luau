@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.SocialStopwatch.SocialStopwatch)
+﻿return (require(script.Parent.Parent.Parent._Index.SocialStopwatch.SocialStopwatch))

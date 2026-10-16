@@ -1,32 +1,33 @@
-﻿local reactModule = require(script:FindFirstAncestor("ExpChat").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("ExpChat").Parent.React)
 
-return function()
-	-- upvalues: reactModule (ref)
-	local var1, var2 = reactModule.useBinding({})
-	local var3 = reactModule.useRef(nil)
+return function() --[[ Line: 26 | Named "useTranscribedSamples" ]]
+	-- upvalues: ReactModule (copy)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding({})
+	local UseRefResult = ReactModule.useRef(nil)
 	
 	return {
-		binding = var1,
-		begin = function(p1)
-			-- upvalues: var3 (ref)
-			var3.current = var3.current or p1
+		binding = UseBindingResult,
+		begin = function(p1) --[[ Line: 32 ]]
+			-- upvalues: UseRefResult (copy)
+			UseRefResult.current = UseRefResult.current or p1
 		end,
-		commit = function(p1)
-			-- upvalues: var3 (ref), var1 (ref), var2 (ref)
-			local current = var3.current
-			var3.current = nil
+		commit = function(EndIdx) --[[ Line: 38 ]]
+			-- upvalues: UseRefResult (copy), UseBindingResult (copy), UseBindingResult2 (copy)
+			local Current = UseRefResult.current
+			UseRefResult.current = nil
 			
-			if current == nil or p1 < current then
+			if Current ~= nil and EndIdx >= Current then
+				local Copy = table.clone(UseBindingResult:getValue())
+				table.insert(Copy, { startIdx = Current, endIdx = EndIdx })
+				UseBindingResult2(Copy)
+				
 				return
 			end
-			local cloned = table.clone(var1:getValue())
-			table.insert(cloned, { startIdx = current, endIdx = p1 })
-			var2(cloned)
 		end,
-		reset = function()
-			-- upvalues: var3 (ref), var2 (ref)
-			var3.current = nil
-			var2({})
+		reset = function() --[[ Line: 49 ]]
+			-- upvalues: UseRefResult (copy), UseBindingResult2 (copy)
+			UseRefResult.current = nil
+			UseBindingResult2({})
 		end
 	}
 end

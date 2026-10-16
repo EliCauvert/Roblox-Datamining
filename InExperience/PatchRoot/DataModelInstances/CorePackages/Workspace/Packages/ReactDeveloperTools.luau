@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.ReactDeveloperTools.ReactDeveloperTools)
+﻿return (require(script.Parent._Workspace.ReactDeveloperTools.ReactDeveloperTools))

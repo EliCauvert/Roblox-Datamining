@@ -1,8 +1,8 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local conversationModule = require(appChat.Models.Conversation)
-local fFlagAppChatEnableU13ChatOptIn = require(appChat.Parent.SharedFlags).FFlagAppChatEnableU13ChatOptIn
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local ConversationModule = require(AppChat.Models.Conversation)
+local FFlagAppChatEnableU13ChatOptIn = require(AppChat.Parent.SharedFlags).FFlagAppChatEnableU13ChatOptIn
 
-return function(p1)
-	-- upvalues: fFlagAppChatEnableU13ChatOptIn (ref), conversationModule (ref)
-	return if fFlagAppChatEnableU13ChatOptIn then if p1 then p1.userOptedIntoChatMessages == conversationModule.UserOptedIntoChatMessagesStatus.NotOptedIn else false else false
+return function(p1): boolean --[[ Line: 6 ]]
+	-- upvalues: FFlagAppChatEnableU13ChatOptIn (copy), ConversationModule (copy)
+	return if FFlagAppChatEnableU13ChatOptIn and p1 then p1.userOptedIntoChatMessages == ConversationModule.UserOptedIntoChatMessagesStatus.NotOptedIn else false
 end

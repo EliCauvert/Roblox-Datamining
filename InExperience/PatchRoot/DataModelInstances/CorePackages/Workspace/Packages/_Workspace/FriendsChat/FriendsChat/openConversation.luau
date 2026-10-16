@@ -1,21 +1,22 @@
-﻿local friendsChat = script:FindFirstAncestor("FriendsChat")
-local parent = friendsChat.Parent
-local _ = require(parent.Promise)
-local fetchConversationDetailsToSignalsModule = require(parent.AppChat.fetchConversationDetailsToSignals)
-local getConversationStoreModule = require(parent.AppChat.GetConversationStore)
-local getFriendsChatNavigationStoreModule = require(friendsChat.Stores.GetFriendsChatNavigationStore)
+﻿local FriendsChat = script:FindFirstAncestor("FriendsChat")
+local Parent = FriendsChat.Parent
+local _ = require(Parent.Promise)
+local FetchConversationDetailsToSignalsModule = require(Parent.AppChat.fetchConversationDetailsToSignals)
+local GetConversationStoreModule = require(Parent.AppChat.GetConversationStore)
+local GetFriendsChatNavigationStoreModule = require(FriendsChat.Stores.GetFriendsChatNavigationStore)
 
-return function(p1)
-	-- upvalues: fetchConversationDetailsToSignalsModule (ref), getConversationStoreModule (ref), getFriendsChatNavigationStoreModule (ref)
-	return fetchConversationDetailsToSignalsModule(p1):andThen(function()
-		-- upvalues: getConversationStoreModule (copy), p1 (ref), getFriendsChatNavigationStoreModule (copy)
-		if getConversationStoreModule(false).getConversation(p1, false) == nil then
+return function(p1) --[[ Line: 16 | Named "openConversation" ]]
+	-- upvalues: FetchConversationDetailsToSignalsModule (copy), GetConversationStoreModule (copy), GetFriendsChatNavigationStoreModule (copy)
+	return FetchConversationDetailsToSignalsModule(p1):andThen(function(): boolean --[[ Line: 17 ]]
+		-- upvalues: GetConversationStoreModule (upval), p1 (copy), GetFriendsChatNavigationStoreModule (upval)
+		if GetConversationStoreModule(false).getConversation(p1, false) == nil then
 			return false
+		else
+			GetFriendsChatNavigationStoreModule(false).setSelectedConversationId(p1)
+			
+			return true
 		end
-		getFriendsChatNavigationStoreModule(false).setSelectedConversationId(p1)
-		
-		return true
-	end, function()
+	end, function(): boolean --[[ Line: 24 ]]
 		return false
 	end)
 end

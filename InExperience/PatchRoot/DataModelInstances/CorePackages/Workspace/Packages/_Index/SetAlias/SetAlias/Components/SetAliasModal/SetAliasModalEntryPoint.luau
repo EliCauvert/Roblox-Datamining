@@ -1,24 +1,23 @@
-﻿local parent = script.Parent.Parent.Parent
-local socialLuaAnalyticsModule = require(parent.Parent.SocialLuaAnalytics)
-local dependenciesModule = require(parent.dependencies)
-local react = dependenciesModule.React
-local useLocalUserId = dependenciesModule.Hooks.useLocalUserId
-local analyticsModule = require(parent.Analytics)
-local constantsModule = require(parent.Common.Constants)
-local defaultAnalyticsService = socialLuaAnalyticsModule.Analytics.DefaultAnalyticsService
-local setAliasModalContainerModule = require(script.Parent.SetAliasModalContainer)
+﻿local Parent = script.Parent.Parent.Parent
+local DependenciesModule = require(Parent.dependencies)
+local React = DependenciesModule.React
+local UseLocalUserIdFunction = DependenciesModule.Hooks.useLocalUserId
+local AnalyticsModule = require(Parent.Analytics)
+local ConstantsModule = require(Parent.Common.Constants)
+local DefaultAnalyticsService = require(Parent.Parent.SocialLuaAnalytics).Analytics.DefaultAnalyticsService
+local SetAliasModalContainerModule = require(script.Parent.SetAliasModalContainer)
 
-return function(p1)
-	-- upvalues: useLocalUserId (ref), react (ref), analyticsModule (ref), defaultAnalyticsService (ref), constantsModule (ref), setAliasModalContainerModule (ref)
-	return react.createElement(analyticsModule.Context.Provider, {
+return function(p1) --[[ Line: 15 ]]
+	-- upvalues: UseLocalUserIdFunction (copy), React (copy), AnalyticsModule (copy), DefaultAnalyticsService (copy), ConstantsModule (copy), SetAliasModalContainerModule (copy)
+	return React.createElement(AnalyticsModule.Context.Provider, {
 		value = {
-			fireAnalyticsEvent = analyticsModule.setupFireAnalyticsEvents({
-				analytics = defaultAnalyticsService,
+			fireAnalyticsEvent = AnalyticsModule.setupFireAnalyticsEvents({
+				analytics = DefaultAnalyticsService,
 				infoForAllEvents = {
-					uid = useLocalUserId(),
-					origin = p1.navigation.getParam(constantsModule.ORIGIN)
+					uid = UseLocalUserIdFunction(),
+					origin = p1.navigation.getParam(ConstantsModule.ORIGIN)
 				}
 			})
 		}
-	}, { react.createElement(setAliasModalContainerModule, p1) })
+	}, { React.createElement(SetAliasModalContainerModule, p1) })
 end

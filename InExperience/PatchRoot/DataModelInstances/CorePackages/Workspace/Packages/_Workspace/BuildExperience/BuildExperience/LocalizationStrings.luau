@@ -1,50 +1,50 @@
-﻿local localizationService = game:GetService("LocalizationService")
-local buildExperience = script:FindFirstAncestor("BuildExperience")
-local fFlagBuildExperienceMonetizationNativeUIModule = require(buildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI)
-local sharedFlagsModule = require(buildExperience.Parent.SharedFlags)
-local fFlagEnableShareSheet = sharedFlagsModule.FFlagEnableShareSheet
-local fFlagEnableTeamTestLua = sharedFlagsModule.FFlagEnableTeamTestLua
-local fFlagBuildExperienceClientDataModelTools = sharedFlagsModule.FFlagBuildExperienceClientDataModelTools
+﻿local LocalizationService = game:GetService("LocalizationService")
+local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local FFlagBuildExperienceToolLocalizationModule = require(BuildExperience.Flags.FFlagBuildExperienceToolLocalization)
+local SharedFlagsModule = require(BuildExperience.Parent.SharedFlags)
+local FFlagEnableShareSheet = SharedFlagsModule.FFlagEnableShareSheet
+local FFlagEnableTeamTestLua = SharedFlagsModule.FFlagEnableTeamTestLua
+local FFlagBuildExperienceClientDataModelTools = SharedFlagsModule.FFlagBuildExperienceClientDataModelTools
 
-local function formatShareExperience(p1)
+local function formatShareExperience(p1): string --[[ Line: 20 ]]
 	return `Share {p1}`
 end
 
-local function formatGameSharedWithTarget(p1)
+local function formatGameSharedWithTarget(p1): string --[[ Line: 24 ]]
 	return if p1 == "" then "Game shared" else `Game shared with {p1}`
 end
 
-local function formatCampaignDate(p1)
-	-- upvalues: localizationService (ref)
-	local robloxLocaleId = localizationService.RobloxLocaleId
+local function formatCampaignDate(p1) --[[ Line: 32 ]]
+	-- upvalues: LocalizationService (copy)
+	local RobloxLocaleId = LocalizationService.RobloxLocaleId
 	
-	if robloxLocaleId == "" then
-		robloxLocaleId = "en-us"
+	if RobloxLocaleId == "" then
+		RobloxLocaleId = "en-us"
 	end
-	return DateTime.fromUnixTimestampMillis(p1):FormatLocalTime("MMM D", robloxLocaleId)
+	return DateTime.fromUnixTimestampMillis(p1):FormatLocalTime("MMM D", RobloxLocaleId)
 end
 
-local function formatAdCampaignSheetDate(p1)
-	-- upvalues: localizationService (ref)
-	local robloxLocaleId = localizationService.RobloxLocaleId
+local function formatAdCampaignSheetDate(p1) --[[ Line: 41 ]]
+	-- upvalues: LocalizationService (copy)
+	local RobloxLocaleId = LocalizationService.RobloxLocaleId
 	
-	if robloxLocaleId == "" then
-		robloxLocaleId = "en-us"
+	if RobloxLocaleId == "" then
+		RobloxLocaleId = "en-us"
 	end
-	return DateTime.fromUnixTimestampMillis(p1):FormatUniversalTime("MMM D", robloxLocaleId)
+	return DateTime.fromUnixTimestampMillis(p1):FormatUniversalTime("MMM D", RobloxLocaleId)
 end
 
-local function formatAdCampaignSheetLocalDate(p1)
-	-- upvalues: localizationService (ref)
-	local robloxLocaleId = localizationService.RobloxLocaleId
+local function formatAdCampaignSheetLocalDate(p1) --[[ Line: 49 ]]
+	-- upvalues: LocalizationService (copy)
+	local RobloxLocaleId = LocalizationService.RobloxLocaleId
 	
-	if robloxLocaleId == "" then
-		robloxLocaleId = "en-us"
+	if RobloxLocaleId == "" then
+		RobloxLocaleId = "en-us"
 	end
-	return DateTime.fromUnixTimestampMillis(p1):FormatLocalTime("MMM D", robloxLocaleId)
+	return DateTime.fromUnixTimestampMillis(p1):FormatLocalTime("MMM D", RobloxLocaleId)
 end
 
-local t = {
+local config = {
 	ask_for_logs = {
 		completed = "Feature.Build.Label.ToolLogsDone",
 		failed = "Feature.Build.Label.ToolLogsFailed",
@@ -137,23 +137,65 @@ local t = {
 	}
 }
 
-if fFlagBuildExperienceMonetizationNativeUIModule then
-	t.manage_developer_product = {
+if require(BuildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI) then
+	config.manage_developer_product = {
 		completed = "Feature.Build.Title.DeveloperProduct",
 		failed = "Feature.Build.Title.DeveloperProduct",
 		running = "Feature.Build.Title.DeveloperProduct"
 	}
+	config.manage_game_pass = {
+		completed = "Feature.Build.Title.GamePass",
+		failed = "Feature.Build.Title.GamePass",
+		running = "Feature.Build.Title.GamePass"
+	}
+	config.manage_subscription = {
+		completed = "Feature.Build.Title.Subscription",
+		failed = "Feature.Build.Title.Subscription",
+		running = "Feature.Build.Title.Subscription"
+	}
 end
-if fFlagBuildExperienceClientDataModelTools then
-	t.inspect_client_instance = {
+if FFlagBuildExperienceClientDataModelTools then
+	config.inspect_client_instance = {
 		completed = "Feature.Build.Label.ToolInspectDone",
 		failed = "Feature.Build.Label.ToolInspectFailed",
 		running = "Feature.Build.Label.ToolInspectRunning"
 	}
-	t.search_client_datamodel = {
+	config.search_client_datamodel = {
 		completed = "Feature.Build.Label.ToolClientDMDone",
 		failed = "Feature.Build.Label.ToolClientDMFailed",
 		running = "Feature.Build.Label.ToolClientDMRunning"
+	}
+end
+if FFlagBuildExperienceToolLocalizationModule then
+	config.ask_analytics_agent = {
+		completed = "Feature.Build.Label.ToolAnalyticsDone",
+		failed = "Feature.Build.Label.ToolAnalyticsFailed",
+		running = "Feature.Build.Label.ToolAnalyticsRunning"
+	}
+	config.check_ad_campaign_eligibility = {
+		completed = "Feature.Build.Label.ToolAdEligibilityDone",
+		failed = "Feature.Build.Label.ToolAdEligibilityFailed",
+		running = "Feature.Build.Label.ToolAdEligibilityRunning"
+	}
+	config.compile_luau = {
+		completed = "Feature.Build.Label.ToolCompileDone",
+		failed = "Feature.Build.Label.ToolCompileFailed",
+		running = "Feature.Build.Label.ToolCompileRunning"
+	}
+	config.verify_luau = {
+		completed = "Feature.Build.Label.ToolVerifyDone",
+		failed = "Feature.Build.Label.ToolVerifyFailed",
+		running = "Feature.Build.Label.ToolVerifyRunning"
+	}
+	config.lookup_engine_api_docs = {
+		completed = "Feature.Build.Label.ToolApiDocsDone",
+		failed = "Feature.Build.Label.ToolApiDocsFailed",
+		running = "Feature.Build.Label.ToolApiDocsRunning"
+	}
+	config.restore_version = {
+		completed = "Feature.Build.Label.ToolRestoreVersionDone",
+		failed = "Feature.Build.Label.ToolRestoreVersionFailed",
+		running = "Feature.Build.Label.ToolRestoreVersionRunning"
 	}
 end
 return {
@@ -184,6 +226,22 @@ return {
 	AGENT_DEV_PRODUCT_REJECT = "Feature.Build.Action.Reject",
 	AGENT_DEV_PRODUCT_TITLE = "Feature.Build.Title.DeveloperProduct",
 	AGENT_DEV_PRODUCT_UPDATE = "Feature.Build.Description.UpdateDeveloperProduct",
+	AGENT_GAME_PASS_ACTIVATE = "Feature.Build.Description.ActivateGamePass",
+	AGENT_GAME_PASS_CREATE = "Feature.Build.Description.CreateGamePass",
+	AGENT_GAME_PASS_DEACTIVATE = "Feature.Build.Description.DeactivateGamePass",
+	AGENT_GAME_PASS_TITLE = "Feature.Build.Title.GamePass",
+	AGENT_GAME_PASS_UPDATE = "Feature.Build.Description.UpdateGamePass",
+	AGENT_SUBSCRIPTION_ACTIVATE = "Feature.Build.Description.ActivateSubscription",
+	AGENT_SUBSCRIPTION_CREATE = "Feature.Build.Description.CreateSubscription",
+	AGENT_SUBSCRIPTION_DEACTIVATE = "Feature.Build.Description.DeactivateSubscription",
+	AGENT_SUBSCRIPTION_DEACTIVATE_CANCEL_RENEWALS = "Feature.Build.Description.DeactivateSubscriptionCancelRenewals",
+	AGENT_SUBSCRIPTION_DELETE = "Feature.Build.Description.DeleteSubscription",
+	AGENT_SUBSCRIPTION_PRODUCT_TYPE = "Feature.Build.Label.SubscriptionProductType",
+	AGENT_SUBSCRIPTION_PRODUCT_TYPE_CONSUMABLE = "Feature.Build.Label.SubscriptionProductTypeConsumable",
+	AGENT_SUBSCRIPTION_PRODUCT_TYPE_CURRENCY = "Feature.Build.Label.SubscriptionProductTypeCurrency",
+	AGENT_SUBSCRIPTION_PRODUCT_TYPE_DURABLE = "Feature.Build.Label.SubscriptionProductTypeDurable",
+	AGENT_SUBSCRIPTION_TITLE = "Feature.Build.Title.Subscription",
+	AGENT_SUBSCRIPTION_UPDATE = "Feature.Build.Description.UpdateSubscription",
 	ANALYTICS_DURATION_TEMPLATE = "Feature.Build.Analytics.DurationHours",
 	ANALYTICS_METRIC_TITLE_ARPPU = "Feature.Build.Analytics.Title.Arppu",
 	ANALYTICS_METRIC_TITLE_D1_RETENTION = "Feature.Build.Analytics.Title.D1Retention",
@@ -201,6 +259,8 @@ return {
 	ADS_STATS_PAGE_TITLE = "Feature.Build.Title.GetUsers",
 	ADS_STATS_PAST_CAMPAIGNS = "Feature.Build.Header.PastCampaigns",
 	ADS_STATS_PLAY_TIME = "Feature.Build.Label.PlayTime",
+	ANSWER_FORM_CUSTOM_OPTION = "Feature.Build.Action.AddCustomOption",
+	ANSWER_FORM_ANSWERS = "Feature.Build.Header.Answers",
 	ANSWER_STACK_CUSTOM_ANSWER = "Feature.Build.Header.CustomAnswer",
 	ANSWER_STACK_NEXT = "Feature.Build.Action.Next",
 	ANSWER_STACK_SELECT_AN_OPTION = "Feature.Build.Label.SelectOption",
@@ -232,6 +292,12 @@ return {
 	ADS_STATS_CREATE_SUCCESS = "Feature.Build.Title.AdCreatedPeriod",
 	BUILD_MENU_INVITE_TO_PLAYTEST = "Feature.Build.Action.AddToPlaytest",
 	BUILD_MENU_LOADING = "Feature.Build.Label.Loading",
+	MODEL_PICKER_TITLE = "Feature.Build.Title.ChooseModel",
+	MODEL_PICKER_UNAVAILABLE = "Feature.Build.Label.ModelUnavailable",
+	MODEL_PICKER_DEFAULT_LABEL = "Feature.Build.Label.DefaultModel",
+	MODEL_PICKER_DEFAULT_DESCRIPTION = "Feature.Build.Description.DefaultModel",
+	MODEL_PICKER_ADVANCED_LABEL = "Feature.Build.Label.AdvancedModel",
+	MODEL_PICKER_ADVANCED_DESCRIPTION = "Feature.Build.Description.AdvancedModel",
 	BUILD_MENU_PLAYTEST = "Feature.Build.Action.Playtest",
 	BUILD_MENU_PUBLISH = "Feature.Build.Action.Publish",
 	BUILD_MENU_PUBLISH_LATEST = "Feature.Build.Action.PublishLatest",
@@ -264,6 +330,9 @@ return {
 	CREATOR_CREDIT_BUY_ROBUX_BUTTON = "Feature.Build.Action.BuyRobux",
 	CREATOR_CREDIT_BUY_MORE_ROBUX_TITLE = "Feature.Build.Title.NoRobuxForUsage",
 	CREATOR_CREDIT_BUY_MORE_ROBUX_DESCRIPTION = "Feature.Build.Description.BuyRobuxToCreate",
+	CREATOR_CREDIT_FREE_LIMIT_REACHED_TITLE = "Feature.Build.Title.FreeLimitReached",
+	CREATOR_CREDIT_FREE_LIMIT_REACHED_DESCRIPTION = "Feature.Build.Description.EnableUsageOrWait",
+	CREATOR_CREDIT_MANAGE_USAGE_BUTTON = "Feature.Build.Action.ManageUsage",
 	CREATOR_CREDIT_FREE_TRIAL_EXHAUSTED_TITLE = "Feature.Build.Title.FreeUsageReached",
 	CREATOR_CREDIT_FREE_TRIAL_EXHAUSTED_DESCRIPTION = "Feature.Build.Description.BuyUsageOrWait",
 	CREATOR_CREDIT_DAILY_LIMIT_REACHED_TITLE = "Feature.Build.Title.DailyRobuxReached",
@@ -302,8 +371,9 @@ return {
 	CHAT_ASSISTANT_RESPONSE_FAILED = "Feature.Build.Message.BuildResponseFailed",
 	CHAT_ASSISTANT_STILL_WORKING = "Feature.Build.Message.BuildStillWorking",
 	CHAT_ASSISTANT_STOPPED = "Feature.Build.Message.BuildStopped",
+	CHAT_ASSISTANT_TAKING_LONGER = "Feature.Build.Message.BuildTakingLonger",
 	CHAT_BUILD_CHAT_PAGE_TITLE = "New Game",
-	CHAT_COMPLETED_GAME_CREATION_DESCRIPTION = if fFlagEnableTeamTestLua then "Feature.Build.Description.GameSavedPlaytest" else "Feature.Build.Description.GameCreationDone",
+	CHAT_COMPLETED_GAME_CREATION_DESCRIPTION = if FFlagEnableTeamTestLua then "Feature.Build.Description.GameSavedPlaytest" else "Feature.Build.Description.GameCreationDone",
 	CHAT_COMPLETED_GAME_CREATION_TITLE = "Feature.Build.Title.GameCreationDone",
 	CHAT_COMPOSER_PLACEHOLDER = "Feature.Build.Label.DescribeIdea",
 	CHAT_COPY_TEXT = "Feature.Build.Action.CopyText",
@@ -344,8 +414,7 @@ return {
 	CHAT_REVERT_CONFIRMATION_DESCRIPTION = "Feature.Build.Description.RestoreLatest",
 	CHAT_REVERT_CONFIRMATION_TITLE = "Feature.Build.Title.RevertLastChange",
 	CHAT_REVERT_TO_VERSION = "Feature.Build.Description.RevertToVersion",
-	CHAT_REVERT_FAILURE = if fFlagEnableTeamTestLua then "Feature.Build.Message.RevertVersionFail" else "Feature.Build.Message.PublishNotReverted",
-	CHAT_REVERT_SUCCESS = if fFlagEnableTeamTestLua then "Feature.Build.Message.CreatedRevertedVer" else "Feature.Build.Message.PublishReverted",
+	CHAT_REVERT_FAILURE = if FFlagEnableTeamTestLua then "Feature.Build.Message.RevertVersionFail" else "Feature.Build.Message.PublishNotReverted",
 	CHAT_STOP_CONFIRMATION_ACTION = "Feature.Build.Action.Stop",
 	CHAT_STOP_CONFIRMATION_CANCEL = "Feature.Build.Action.KeepBuilding",
 	CHAT_STOP_CONFIRMATION_DESCRIPTION = "Feature.Build.Description.StopBuild",
@@ -387,7 +456,7 @@ return {
 	GAME_CONFIGURATION_GAME_DETAILS_BODY = "Feature.Build.Description.ManageAppearance",
 	GAME_CONFIGURATION_ICON_AND_THUMBNAILS = "Feature.Build.Label.IconThumbnails",
 	GAME_CONFIGURATION_SALES_OPTIONS = "Feature.Build.Label.SalesOptions",
-	GAME_CONFIGURATION_LINK_COPIED = if not fFlagEnableShareSheet then "Feature.Build.Message.LinkCopied" else nil,
+	GAME_CONFIGURATION_LINK_COPIED = if FFlagEnableShareSheet then nil else "Feature.Build.Message.LinkCopied",
 	GAME_CONFIGURATION_LOADING = "Feature.Build.Label.Loading",
 	GAME_CONFIGURATION_PREVIEW = "Feature.Build.Action.Preview",
 	GAME_CONFIGURATION_PUBLISH = "Feature.Build.Action.Publish",
@@ -414,6 +483,7 @@ return {
 	MEDIA_SELECTION_VIDEO = "Feature.Build.Label.Video",
 	MY_CREATIONS_BUILD_WITH_AI = "Feature.Build.Description.BuildIdeaGame",
 	MY_CREATIONS_BUILDING = "Feature.Build.Label.Building",
+	MY_CREATIONS_CREATE_NEW_GAME = "Feature.Build.Action.CreateNewGame",
 	MY_CREATIONS_INPUT_NEEDED = "Feature.Build.Label.InputNeeded",
 	MY_CREATIONS_LOAD_ERROR = "Feature.Build.Message.ExperiencesLoadFailed",
 	MY_CREATIONS_NEW_GAME = "Feature.Build.Content.NewGame",
@@ -424,6 +494,16 @@ return {
 	MY_CREATIONS_READY = "Feature.Build.Label.Ready",
 	MY_CREATIONS_RESTRICTED = "Feature.Build.Label.Limited",
 	MY_CREATIONS_UNIVERSE_NAME = "Feature.Build.Label.UniverseNumber",
+	MY_CREATIONS_FILTER_ALL = "Feature.Build.Label.All",
+	MY_CREATIONS_FILTER_ALL_GAMES = "Feature.Build.Label.AllGames",
+	MY_CREATIONS_FILTER_APPLY = "CommonUI.Messages.Action.Apply",
+	MY_CREATIONS_FILTER_GAMES = "CommonUI.Features.Label.Games",
+	MY_CREATIONS_FILTER_GROUP_GAMES = "Feature.Build.Label.GroupGames",
+	MY_CREATIONS_FILTER_GROUPS = "Feature.Build.Label.Groups",
+	MY_CREATIONS_FILTER_MY_GAMES = "Feature.Build.Label.MyGames",
+	MY_CREATIONS_FILTER_RESET = "CommonUI.Messages.Action.Reset",
+	MY_CREATIONS_FILTER_SEARCH_GROUPS = "Feature.Build.Label.Search",
+	MY_CREATIONS_FILTER_TITLE = "Feature.Build.Label.Filters",
 	PLAYTEST_DISABLED_TOOLTIP = "Feature.Build.Description.PlaytestLocked",
 	PLAYTEST_TITLE = "Feature.Build.Action.Playtest",
 	PRIVATE_INVITES_ADD_ERROR = "Feature.Build.Message.PlaytesterRequestFailed",
@@ -435,7 +515,6 @@ return {
 	PRIVATE_INVITES_ALL_FRIENDS_ADDED = "Feature.Build.Message.AllFriendsAdded",
 	PRIVATE_INVITES_FRIENDS_LOAD_ERROR = "Feature.Build.Message.FriendsLoadFailed",
 	PRIVATE_INVITES_INVITE_BUTTON = "Feature.Build.Action.AddFriends",
-	PRIVATE_INVITES_INVITE_MESSAGE = "Feature.Build.Message.PrivatePlaytestInvite",
 	PRIVATE_INVITES_COUNT = "Feature.Build.Label.InviteCount",
 	PRIVATE_INVITES_NO_FRIENDS = "Feature.Build.Message.NoFriendsToAdd",
 	PRIVATE_INVITES_PAGE_TITLE = "Feature.Build.Title.Playtesters",
@@ -444,9 +523,6 @@ return {
 	PRIVATE_INVITES_ROW_TITLE = "Feature.Build.Title.Playtesters",
 	PRIVATE_INVITES_ROW_TITLE_EMPTY = "Feature.Build.Action.AddToPlaytest",
 	PRIVATE_INVITES_SEARCH_PLACEHOLDER = "Feature.Build.Label.Search",
-	PRIVATE_INVITES_SEND_FAILURE_BODY = "Feature.Build.Message.PlaytestInviteSendFailedBody",
-	PRIVATE_INVITES_SEND_FAILURE_HINT = "Feature.Build.Message.PlaytestInviteSendFailedHint",
-	PRIVATE_INVITES_SEND_FAILURE_TITLE = "Feature.Build.Title.PlaytestInviteSendFailed",
 	PRIVATE_INVITES_SENT = "Feature.Build.Message.PlaytestersAdded",
 	PRIVATE_INVITES_SHARE_LINK = "Feature.Build.Action.ShareLink",
 	PRIVATE_INVITES_SHARE_LINK_ERROR = "Feature.Build.Message.ShareLinkFailed",
@@ -464,8 +540,6 @@ return {
 	SHARE_AUDIENCE_FRIENDS_ONLY_TITLE = "Feature.Build.Title.FriendsOnlyPlay",
 	SHARE_AUDIENCE_PLAYTESTERS_ONLY_DESCRIPTION = "Feature.Build.Description.PlaytesterAccess",
 	SHARE_AUDIENCE_PLAYTESTERS_ONLY_TITLE = "Feature.Build.Title.PlaytestersOnlyPlay",
-	SHARE_AUDIENCE_PRIVATE_DESCRIPTION = "Feature.Build.Description.PrivateShare",
-	SHARE_AUDIENCE_PRIVATE_TITLE = "Feature.Build.Title.GamePrivate",
 	SHARE_AUDIENCE_SHARE = "Feature.Build.Action.Share",
 	SHARE_EXPERIENCE = "Feature.Build.Message.ShareExperience",
 	SHARE_GAME_SHARED = "Feature.Build.Message.GameShared",
@@ -560,6 +634,7 @@ return {
 	MONETIZATION_LOADING = "Feature.Build.Label.Loading",
 	MONETIZATION_RETRY = "Feature.Build.Action.Retry",
 	MONETIZATION_DEFAULT_PRODUCT_NAME = "Feature.Build.Label.DefaultDeveloperProduct",
+	MONETIZATION_GAME_PASS = "Feature.InExperienceShop.GamePass",
 	MONETIZATION_PRICE_UNAVAILABLE = "Feature.Build.Label.PriceUnavailable",
 	MONETIZATION_ON_SALE = "Feature.Build.Label.OnSale",
 	MONETIZATION_OFF_SALE = "Feature.Build.Label.OffSale",
@@ -582,14 +657,15 @@ return {
 	MONETIZATION_COMPOSER_DETAIL = "Feature.Build.Placeholder.DescribeProductUpdate",
 	formatGameSharedWithTarget = formatGameSharedWithTarget,
 	formatShareExperience = formatShareExperience,
-	getChatToolActivityLocalizationKey = function(p1, p2)
-		-- upvalues: t (ref)
+	getChatToolActivityLocalizationKey = function(p1, p2) --[[ Line: 211 ]]
+		-- upvalues: config (copy)
 		if p1 == nil then
 			return nil
+		else
+			local Entry = config[p1]
+			
+			return if Entry == nil then nil elseif p2 == "completed" then Entry.completed elseif p2 == "failed" then Entry.failed else Entry.running
 		end
-		local var1 = t[p1]
-		
-		return if var1 == nil then nil elseif p2 == "completed" then var1.completed elseif p2 == "failed" then var1.failed else var1.running
 	end,
 	formatAdCampaignSheetDate = formatAdCampaignSheetDate,
 	formatAdCampaignSheetLocalDate = formatAdCampaignSheetLocalDate,

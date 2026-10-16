@@ -6,12 +6,12 @@
 		lastUpdated = { 26, 3, 25 },
 		throttlingPercentage = game:DefineFastInt("VideoBlockingTelemetryThrottleHundredthsPercent", 10000)
 	},
-	isInPipeDenyList = function(p1, p2)
-		if not p1 or not p2 or p2 == "" then
+	isInPipeDenyList = function(Text: string, Text1: string): boolean --[[ Line: 15 ]]
+		if not Text or not Text1 or Text1 == "" then
 			return false
 		end
-		for i in p2:gmatch("([^|]+)") do
-			if typeof(i) == "string" and string.lower(i) == string.lower(p1) then
+		for i in Text1:gmatch("([^|]+)") do
+			if typeof(i) == "string" and string.lower(i) == string.lower(Text) then
 				return true
 			end
 		end

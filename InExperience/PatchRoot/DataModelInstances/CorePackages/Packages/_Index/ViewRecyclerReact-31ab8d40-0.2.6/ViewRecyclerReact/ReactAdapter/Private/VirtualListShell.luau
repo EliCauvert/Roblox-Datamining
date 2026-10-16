@@ -1,99 +1,100 @@
-﻿local viewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
-local axis = require(viewRecyclerReact.Parent.ViewRecycler).Axis
-local reactModule = require(viewRecyclerReact.Parent.React)
-local createElement = reactModule.createElement
+﻿local ViewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
+local Axis = require(ViewRecyclerReact.Parent.ViewRecycler).Axis
+local ReactModule = require(ViewRecyclerReact.Parent.React)
+local CreateElementFunction = ReactModule.createElement
 
-return function(p1)
-	-- upvalues: reactModule (ref), axis (ref), createElement (ref)
-	local var1, var2 = reactModule.useState({
+return function(p1) --[[ Line: 19 | Named "VirtualListShell" ]]
+	-- upvalues: ReactModule (copy), Axis (copy), CreateElementFunction (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState({
 		thickness = 12,
 		verticalPosition = Enum.VerticalScrollBarPosition.Right
 	})
-	local var3 = reactModule.useRef(nil)
-	local t = {
+	local UseRefResult = ReactModule.useRef(nil)
+	local config = {
 		Size = UDim2.fromScale(1, 1),
-		ScrollingDirection = if p1.axis == axis.X then Enum.ScrollingDirection.X else Enum.ScrollingDirection.Y,
-		[reactModule.Tag] = p1.tag
+		ScrollingDirection = if p1.axis == Axis.X then Enum.ScrollingDirection.X else Enum.ScrollingDirection.Y,
+		[ReactModule.Tag] = p1.tag
 	}
-	local t_1 = { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }
-	local t_2 = {
+	local config1 = { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }
+	local config2 = {
 		CanvasSize = true,
 		CanvasPosition = true,
 		ref = true,
-		[reactModule.Tag] = true,
-		[reactModule.Change.AbsoluteWindowSize] = true,
-		[reactModule.Change.CanvasPosition] = true
+		[ReactModule.Tag] = true,
+		[ReactModule.Change.AbsoluteWindowSize] = true,
+		[ReactModule.Change.CanvasPosition] = true
 	}
 	
 	if p1.scrollingFrameProps ~= nil then
-		for i, v in p1.scrollingFrameProps do
-			if t[i] ~= nil or t_2[i] then
+		for i, scrollingFrameProp in p1.scrollingFrameProps do
+			if config[i] ~= nil or config2[i] then
 				error(`VirtualList: {tostring(i)} is already used by ViewRecycler`)
 			end
-			if i == "AnchorPoint" or i == "LayoutOrder" or (i == "Position" or i == "Rotation") then
-				t_1[i] = v
+			if i == "AnchorPoint" or i == "LayoutOrder" or i == "Position" or i == "Rotation" then
+				config1[i] = scrollingFrameProp
 			else
-				t[i] = v
+				config[i] = scrollingFrameProp
 			end
 		end
 	end
-	if t.Visible ~= nil then
-		t_1.Visible = t.Visible
+	if config.Visible ~= nil then
+		config1.Visible = config.Visible
 	end
-	if t.ZIndex ~= nil then
-		t_1.ZIndex = t.ZIndex
+	if config.ZIndex ~= nil then
+		config1.ZIndex = config.ZIndex
 	end
-	t.ref = reactModule.useCallback(function(p2)
-		-- upvalues: var3 (ref), p1 (ref), var2 (ref)
-		local current = var3.current
+	config.ref = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 63 ]]
+		-- upvalues: UseRefResult (copy), p1 (copy), UseStateResult2 (copy)
+		local CurrentFunction: () -> () = UseRefResult.current
 		
-		if current ~= nil then
-			var3.current = nil
-			current()
+		if CurrentFunction ~= nil then
+			UseRefResult.current = nil
+			CurrentFunction()
 		end
-		p1.internalRef.current = p2
-		p1.onScrollingFrameChanged(p2)
+		p1.internalRef.current = ScrollFrame
+		p1.onScrollingFrameChanged(ScrollFrame)
 		
-		if p2 == nil then
-			return
-		end
-		local function updateScrollBarState()
-			-- upvalues: var2 (copy), p2 (ref)
-			var2({
-				thickness = p2.ScrollBarThickness,
-				verticalPosition = p2.VerticalScrollBarPosition
+		if ScrollFrame ~= nil then
+			local function updateScrollBarState() --[[ Line: 74 ]]
+				-- upvalues: UseStateResult2 (upval), ScrollFrame (copy)
+				UseStateResult2({
+					thickness = ScrollFrame.ScrollBarThickness,
+					verticalPosition = ScrollFrame.VerticalScrollBarPosition
+				})
+			end
+			
+			UseStateResult2({
+				thickness = ScrollFrame.ScrollBarThickness,
+				verticalPosition = ScrollFrame.VerticalScrollBarPosition
 			})
-		end
-		
-		var2({
-			thickness = p2.ScrollBarThickness,
-			verticalPosition = p2.VerticalScrollBarPosition
-		})
-		local var4 = p2:GetPropertyChangedSignal("ScrollBarThickness"):Connect(updateScrollBarState)
-		local var5 = p2:GetPropertyChangedSignal("VerticalScrollBarPosition"):Connect(updateScrollBarState)
-		
-		function var4.current()
-			-- upvalues: var4 (ref), var5 (ref)
-			var4:Disconnect()
-			var5:Disconnect()
+			local Connection = ScrollFrame:GetPropertyChangedSignal("ScrollBarThickness"):Connect(updateScrollBarState)
+			local Connection1 = ScrollFrame:GetPropertyChangedSignal("VerticalScrollBarPosition"):Connect(updateScrollBarState)
+			
+			function UseRefResult.current() --[[ Line: 85 ]]
+				-- upvalues: Connection (copy), Connection1 (copy)
+				Connection:Disconnect()
+				Connection1:Disconnect()
+			end
+			
+			return
 		end
 	end, { p1.internalRef, p1.onScrollingFrameChanged })
 	
-	return createElement("Frame", t_1, {
-		ScrollingFrame = createElement("ScrollingFrame", t),
-		ViewRecyclerOverlay = createElement("Frame", {
+	return CreateElementFunction("Frame", config1, {
+		ScrollingFrame = CreateElementFunction("ScrollingFrame", config),
+		ViewRecyclerOverlay = CreateElementFunction("Frame", {
 			Active = false,
 			BackgroundTransparency = 1,
 			ClipsDescendants = true,
 			Name = "ViewRecyclerOverlay",
 			Selectable = false,
-			Position = UDim2.fromOffset(if p1.axis == axis.Y and var1.verticalPosition == Enum.VerticalScrollBarPosition.Left then var1.thickness else 0, 0),
-			Size = if p1.axis == axis.X then UDim2.new(1, 0, 1, -var1.thickness) else UDim2.new(1, -var1.thickness, 1, 0),
-			ZIndex = t.ZIndex,
-			ref = reactModule.useCallback(function(p2)
-				-- upvalues: p1 (ref)
-				p1.viewportOverlayRef.current = p2
-				p1.onViewportOverlayChanged(p2)
+			Position = UDim2.fromOffset(if p1.axis == Axis.Y and UseStateResult.verticalPosition == Enum.VerticalScrollBarPosition.Left then UseStateResult.thickness else 0, 0),
+			Size = if p1.axis == Axis.X then UDim2.new(1, 0, 1, -UseStateResult.thickness) else UDim2.new(1, -UseStateResult.thickness, 1, 0),
+			ZIndex = config.ZIndex,
+			ref = ReactModule.useCallback(function(Current) --[[ Line: 100 ]]
+				-- upvalues: p1 (copy)
+				p1.viewportOverlayRef.current = Current
+				p1.onViewportOverlayChanged(Current)
 			end, { p1.onViewportOverlayChanged, p1.viewportOverlayRef })
 		})
 	})

@@ -1,157 +1,156 @@
-﻿local x_1
-local _ = game:GetService("RunService")
-local guiService = game:GetService("GuiService")
-local corePackagesService = game:GetService("CorePackages")
-local robloxGui = game:GetService("CoreGui").RobloxGui
-local notificationService = game:GetService("NotificationService")
-local httpService = game:GetService("HttpService")
-local httpRbxApiService = game:GetService("HttpRbxApiService")
-local errorPromptModule = require(robloxGui.Modules.ErrorPrompt)
-local url = require(corePackagesService.Workspace.Packages.CoreScriptsCommon).Url
+﻿local _ = game:GetService("RunService")
+local GuiService = game:GetService("GuiService")
+local RobloxGui = game:GetService("CoreGui").RobloxGui
+local NotificationService = game:GetService("NotificationService")
+local HttpService = game:GetService("HttpService")
+local HttpRbxApiService = game:GetService("HttpRbxApiService")
+local Url = require(game:GetService("CorePackages").Workspace.Packages.CoreScriptsCommon).Url
 
-local function _()
-	-- upvalues: guiService (ref)
-	guiService.SelectedCoreObject = nil
+local function _() --[[ Line: 18 | Named "leaveGame" ]]
+	-- upvalues: GuiService (copy)
+	GuiService.SelectedCoreObject = nil
 	game:Shutdown()
 end
 
-local t = { Warning = 1, Lockout = 2 }
+local config = { Warning = 1, Lockout = 2 }
 
-local _ = function(p1)
+local _ = function(p1) --[[ Line: 28 | Named "parseResponse" ]]
 	return {
 		State = p1.response.state.type,
 		Messages = p1.response.state.messages
 	}
 end
 
-local _ = function(p1)
-	-- upvalues: url (ref), httpRbxApiService (ref)
-	local _, _ = pcall(httpRbxApiService.GetAsyncFullUrl, httpRbxApiService, url.RCS_URL .. "screen-time-api/v1/messages/mark-read" .. "?" .. ("mesasgeId=" .. p1))
+local _ = function(Text) --[[ Line: 37 | Named "markRead" ]]
+	-- upvalues: Url (copy), HttpRbxApiService (copy)
+	local _, _ = pcall(HttpRbxApiService.GetAsyncFullUrl, HttpRbxApiService, Url.RCS_URL .. "screen-time-api/v1/messages/mark-read" .. "?" .. ("mesasgeId=" .. Text))
 end
 
-local t_1 = {
+local config1 = {
 	displaying = nil,
 	displayMessageCallback = nil,
 	pendingResolveMessage = {},
 	resolvedMessage = {},
-	update = function(p1, p2)
-		for i, v in pairs(p2) do
-			table.insert(p1.pendingResolveMessage, { id = v.id, message = v.text })
+	update = function(p1, Messages) --[[ Line: 57 ]]
+		for _, message in pairs(Messages) do
+			table.insert(p1.pendingResolveMessage, { id = message.id, message = message.text })
 		end
 		p1:processNext()
 	end,
-	processNext = function(p3)
-		-- upvalues: url (ref), httpRbxApiService (ref)
-		if p3.displaying then return end
-		local removed = table.remove(p3.pendingResolveMessage, 1)
+	processNext = function(p2) --[[ Line: 68 ]]
+		-- upvalues: Url (copy), HttpRbxApiService (copy)
+		if p2.displaying then return end
+		local Removed = table.remove(p2.pendingResolveMessage, 1)
 		
-		if not removed then return end
-		if p3.resolvedMessage[removed.id] then
-			p3:processNext()
+		if not Removed then return end
+		if p2.resolvedMessage[Removed.id] then
+			p2:processNext()
 			
 			return
 		end
-		p3.displaying = removed
+		p2.displaying = Removed
 		
-		if p3.displayMessageCallback then
-			p3.displayMessageCallback(removed.message)
+		if p2.displayMessageCallback then
+			p2.displayMessageCallback(Removed.message)
 		end
-		spawn(function()
-			-- upvalues: removed (ref), url (copy), httpRbxApiService (copy)
-			local _, _ = pcall(httpRbxApiService.GetAsyncFullUrl, httpRbxApiService, url.RCS_URL .. "screen-time-api/v1/messages/mark-read" .. "?" .. ("mesasgeId=" .. removed.id))
+		spawn(function() --[[ Line: 88 ]]
+			-- upvalues: Removed (copy), Url (upval), HttpRbxApiService (upval)
+			local _, _ = pcall(HttpRbxApiService.GetAsyncFullUrl, HttpRbxApiService, Url.RCS_URL .. "screen-time-api/v1/messages/mark-read" .. "?" .. ("mesasgeId=" .. Removed.id))
 		end)
 	end,
-	resolve = function(p3)
-		p3.resolvedMessage[p3.displaying.id] = p3.displaying.message
-		p3.displaying = nil
-		p3:processNext()
+	resolve = function(p2) --[[ Line: 94 ]]
+		p2.resolvedMessage[p2.displaying.id] = p2.displaying.message
+		p2.displaying = nil
+		p2:processNext()
 	end
 }
-local default = errorPromptModule.new("Default", {
+local Default = require(RobloxGui.Modules.ErrorPrompt).new("Default", {
 	MessageTextScaled = true,
 	HideErrorCode = true,
 	MenuIsOpenKey = "AnitAddictionPrompt"
 })
-default:setParent(robloxGui)
+Default:setParent(RobloxGui)
 local list = {
 	{
 		Text = "OK",
 		LocalizationKey = "InGame.CommonUI.Button.Ok",
 		LayoutOrder = 1,
 		Primary = true,
-		Callback = function()
-			-- upvalues: default (ref), t_1 (ref)
-			default:_close()
-			t_1:resolve()
+		Callback = function() --[[ Line: 114 ]]
+			-- upvalues: Default (copy), config1 (copy)
+			Default:_close()
+			config1:resolve()
 		end
 	}
 }
 
-function t_1.displayMessage(p3)
-	-- upvalues: default (ref)
-	default:_open(p3)
+function config1.displayMessageCallback(Message) --[[ Line: 110 ]]
+	-- upvalues: Default (copy)
+	Default:_open(Message)
 end
 
-default:updateButtons(list)
-default:setErrorTitle("Warning", "InGame.CommonUI.Title.Warning")
-local x = robloxGui.AbsoluteSize.X
-local y = robloxGui.AbsoluteSize.Y
-robloxGui:GetPropertyChangedSignal("AbsoluteSize"):connect(function()
-	-- upvalues: default (ref), robloxGui (ref), x (write), y (write)
-	if not default then return end
-	local x_1 = robloxGui.AbsoluteSize.X
-	local y_1 = robloxGui.AbsoluteSize.Y
+Default:updateButtons(list)
+Default:setErrorTitle("Warning", "InGame.CommonUI.Title.Warning")
+local X = RobloxGui.AbsoluteSize.X
+local Y = RobloxGui.AbsoluteSize.Y
+RobloxGui:GetPropertyChangedSignal("AbsoluteSize"):connect(function() --[[ Line: 136 | Named "onScreenSizeChanged" ]]
+	-- upvalues: Default (copy), RobloxGui (copy), X (ref), Y (ref)
+	if not Default then return end
+	local X1 = RobloxGui.AbsoluteSize.X
+	local Y1 = RobloxGui.AbsoluteSize.Y
 	
-	if x ~= x_1 or y ~= y_1 then
-		x = x_1
-		y = y_1
-		default:resizeWidthAndHeight(x, y)
+	if X ~= X1 or Y ~= Y1 then
+		X = X1
+		Y = Y1
+		Default:resizeWidthAndHeight(X, Y)
 	end
 end)
 
-if default then
-	x_1 = robloxGui.AbsoluteSize.X
-	local y_1 = robloxGui.AbsoluteSize.Y
+if Default then
+	local X1 = RobloxGui.AbsoluteSize.X
+	local Y1 = RobloxGui.AbsoluteSize.Y
 	
-	if x ~= x_1 or y ~= y_1 then
-		default:resizeWidthAndHeight(x_1, y_1)
+	if X ~= X1 or Y ~= Y1 then
+		X = X1
+		Y = Y1
+		Default:resizeWidthAndHeight(X, Y)
 	end
 end
-x_1 = nil
+local Connection = nil
 
-local _ = function(p3)
-	-- upvalues: x_1 (write), guiService (ref), t_1 (ref)
-	local t = {
-		State = p3.response.state.type,
-		Messages = p3.response.state.messages
+local _ = function(p2) --[[ Line: 154 | Named "antiAddictionStatesUpdated" ]]
+	-- upvalues: Connection (ref), GuiService (copy), config1 (copy)
+	local config = {
+		State = p2.response.state.type,
+		Messages = p2.response.state.messages
 	}
 	
-	if t.State == 2 then
-		if x_1 then
-			x_1:Disconnect()
+	if config.State == 2 then
+		if Connection then
+			Connection:Disconnect()
 		end
-		guiService.SelectedCoreObject = nil
+		GuiService.SelectedCoreObject = nil
 		game:Shutdown()
 	end
-	t_1:update(t.Messages)
+	config1:update(config.Messages)
 end
 
-x_1 = notificationService.RobloxEventReceived:Connect(function(p3)
-	-- upvalues: httpService (ref), t (ref), x_1 (write), guiService (ref), t_1 (ref)
-	if p3.namespace == "AntiAddictionNotifications" then
-		local detail = httpService:JSONDecode(p3.detail)
-		local t_2 = {
-			State = detail.response.state.type,
-			Messages = detail.response.state.messages
+Connection = NotificationService.RobloxEventReceived:Connect(function(EventData) --[[ Line: 168 ]]
+	-- upvalues: HttpService (copy), config (copy), Connection (ref), GuiService (copy), config1 (copy)
+	if EventData.namespace == "AntiAddictionNotifications" then
+		local Data = HttpService:JSONDecode(EventData.detail)
+		local config2 = {
+			State = Data.response.state.type,
+			Messages = Data.response.state.messages
 		}
 		
-		if t_2.State == t.Lockout then
-			if x_1 then
-				x_1:Disconnect()
+		if config2.State == config.Lockout then
+			if Connection then
+				Connection:Disconnect()
 			end
-			guiService.SelectedCoreObject = nil
+			GuiService.SelectedCoreObject = nil
 			game:Shutdown()
 		end
-		t_1:update(t_2.Messages)
+		config1:update(config2.Messages)
 	end
 end)

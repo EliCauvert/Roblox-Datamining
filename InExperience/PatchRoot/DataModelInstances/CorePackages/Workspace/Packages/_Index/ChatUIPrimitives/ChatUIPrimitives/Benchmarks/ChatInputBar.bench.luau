@@ -1,33 +1,32 @@
-﻿local chatUIPrimitives = script:FindFirstAncestor("ChatUIPrimitives")
-local parent = chatUIPrimitives.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local benchmark = require(parent.Dev.JestBenchmark).benchmark
-local benchmarkUtilsModule = require(parent.Dev.BenchmarkUtils)
-local benchFile = benchmarkUtilsModule.benchFile
-local mountComponentTimes = benchmarkUtilsModule.mountComponentTimes
-local chatInputBarViewModule = require(chatUIPrimitives.Components.ChatInputBar.ChatInputBarView)
+﻿local ChatUIPrimitives = script:FindFirstAncestor("ChatUIPrimitives")
+local Parent = ChatUIPrimitives.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local BenchmarkFunction = require(Parent.Dev.JestBenchmark).benchmark
+local BenchmarkUtilsModule = require(Parent.Dev.BenchmarkUtils)
+local MountComponentTimesFunction = BenchmarkUtilsModule.mountComponentTimes
+local ChatInputBarViewModule = require(ChatUIPrimitives.Components.ChatInputBar.ChatInputBarView)
 
-local function inputBarProps()
+local function inputBarProps() --[[ Line: 17 ]]
 	return {
 		canLocalUserChat = true,
 		placeholderText = "Write a message",
-		onSend = function(_) end,
+		onSend = function(_) --[[ Line: 19 ]] end,
 		autocomplete = { commands = nil, emojis = true }
 	}
 end
 
-local function wrapped()
-	-- upvalues: reactModule (ref), foundationModule (ref), chatInputBarViewModule (ref), inputBarProps (ref)
-	return reactModule.createElement(foundationModule.FoundationProvider, nil, reactModule.createElement(chatInputBarViewModule, inputBarProps()))
+local function wrapped() --[[ Line: 26 ]]
+	-- upvalues: ReactModule (copy), FoundationModule (copy), ChatInputBarViewModule (copy), inputBarProps (copy)
+	return ReactModule.createElement(FoundationModule.FoundationProvider, nil, ReactModule.createElement(ChatInputBarViewModule, (inputBarProps())))
 end
 
-benchFile(script, function()
-	-- upvalues: benchmark (ref), parent (ref), wrapped (ref), mountComponentTimes (ref), reactModule (ref), foundationModule (ref), chatInputBarViewModule (ref), inputBarProps (ref)
-	benchmark("Render ChatInputBarView (emoji autocomplete)", function()
-		-- upvalues: parent (copy), wrapped (copy)
-		require(parent.Dev.ReactTestingLibrary).render(wrapped()):unmount()
+BenchmarkUtilsModule.benchFile(script, function() --[[ Line: 34 ]]
+	-- upvalues: BenchmarkFunction (copy), Parent (copy), wrapped (copy), MountComponentTimesFunction (copy), ReactModule (copy), FoundationModule (copy), ChatInputBarViewModule (copy), inputBarProps (copy)
+	BenchmarkFunction("Render ChatInputBarView (emoji autocomplete)", function() --[[ Line: 35 ]]
+		-- upvalues: Parent (upval), wrapped (upval)
+		require(Parent.Dev.ReactTestingLibrary).render(wrapped()):unmount()
 	end)
-	mountComponentTimes(reactModule.createElement(foundationModule.FoundationProvider, nil, reactModule.createElement(chatInputBarViewModule, inputBarProps())), "ChatInputBarView", 25)
-	mountComponentTimes(reactModule.createElement(foundationModule.FoundationProvider, nil, reactModule.createElement(chatInputBarViewModule, inputBarProps())), "ChatInputBarView", 50)
+	MountComponentTimesFunction(ReactModule.createElement(FoundationModule.FoundationProvider, nil, ReactModule.createElement(ChatInputBarViewModule, (inputBarProps()))), "ChatInputBarView", 25)
+	MountComponentTimesFunction(ReactModule.createElement(FoundationModule.FoundationProvider, nil, ReactModule.createElement(ChatInputBarViewModule, (inputBarProps()))), "ChatInputBarView", 50)
 end)

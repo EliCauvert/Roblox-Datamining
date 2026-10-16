@@ -1,34 +1,35 @@
-﻿local authAnalytics = script:FindFirstAncestor("AuthAnalytics")
-local parent = authAnalytics.Parent
-local telemetryConfigsModule = require(authAnalytics.RobloxTelemetry.TelemetryConfigs)
-local loginStatus = require(parent.RobloxAppEnums).LoginStatus
-local fFlagUseSignalsForAuthenticationStatus = require(parent.SharedFlags).FFlagUseSignalsForAuthenticationStatus
-local var1 = if fFlagUseSignalsForAuthenticationStatus then require(parent.AuthenticationStatus).GetAuthenticationStatusStore else nil
-local t = {
-	[loginStatus.UNKNOWN] = true,
-	[loginStatus.LOGGED_OUT] = true,
-	[loginStatus.LOGGED_IN] = true
+﻿local AuthAnalytics = script:FindFirstAncestor("AuthAnalytics")
+local Parent = AuthAnalytics.Parent
+local TelemetryConfigsModule = require(AuthAnalytics.RobloxTelemetry.TelemetryConfigs)
+local LoginStatus = require(Parent.RobloxAppEnums).LoginStatus
+local FFlagUseSignalsForAuthenticationStatus = require(Parent.SharedFlags).FFlagUseSignalsForAuthenticationStatus
+local GetAuthenticationStatusStore = if FFlagUseSignalsForAuthenticationStatus then require(Parent.AuthenticationStatus).GetAuthenticationStatusStore else nil
+local config = {
+	[LoginStatus.UNKNOWN] = true,
+	[LoginStatus.LOGGED_OUT] = true,
+	[LoginStatus.LOGGED_IN] = true
 }
 
-local function _(p1)
-	-- upvalues: t (ref)
-	return if p1 == nil then "NIL" elseif t[p1] then p1 else "UNRECOGNIZED"
+local function _(p1) --[[ Line: 24 | Named "normalizeAuthenticationStatusForTelemetry" ]]
+	-- upvalues: config (copy)
+	return if p1 == nil then "NIL" elseif config[p1] then p1 else "UNRECOGNIZED"
 end
 
-return function(p1, p2, p3)
-	-- upvalues: fFlagUseSignalsForAuthenticationStatus (ref), var1 (ref), loginStatus (ref), telemetryConfigsModule (ref), t (ref)
-	return function(p4)
-		-- upvalues: fFlagUseSignalsForAuthenticationStatus (copy), var1 (copy), loginStatus (copy), p3 (ref), p1 (ref), p2 (ref), telemetryConfigsModule (copy), t (copy)
-		local var2 = if fFlagUseSignalsForAuthenticationStatus then var1(false).getStatus(false) else p4:getState().AuthenticationStatus.status
+return function(p1, p2, Callback) --[[ Line: 34 ]]
+	-- upvalues: FFlagUseSignalsForAuthenticationStatus (copy), GetAuthenticationStatusStore (copy), LoginStatus (copy), TelemetryConfigsModule (copy), config (copy)
+	return function(p3) --[[ Line: 37 ]]
+		-- upvalues: FFlagUseSignalsForAuthenticationStatus (upval), GetAuthenticationStatusStore (upval), LoginStatus (upval), Callback (copy), p1 (copy), p2 (copy), TelemetryConfigsModule (upval), config (upval)
+		local Status = if FFlagUseSignalsForAuthenticationStatus then GetAuthenticationStatusStore(false).getStatus(false) else p3:getState().AuthenticationStatus.status
 		
-		if var2 == loginStatus.LOGGED_IN then
+		if Status ~= LoginStatus.LOGGED_IN then
+			Callback(p1):andThen(function(_) --[[ Line: 52 ]]
+				-- upvalues: p2 (upval), TelemetryConfigsModule (upval), Status (copy), config (upval)
+				p2:logRobloxTelemetryCounter(TelemetryConfigsModule.ValidCookieForNoCachedUserTelemetryConfig, 1, {
+					authenticationStatus = if Status == nil then "NIL" elseif config[Status] then Status else "UNRECOGNIZED"
+				})
+			end):catch(function(_) --[[ Line: 63 ]] end)
+			
 			return
 		end
-		p3(p1):andThen(function(_)
-			-- upvalues: p2 (copy), telemetryConfigsModule (copy), var2 (ref), t (copy)
-			p2:logRobloxTelemetryCounter(telemetryConfigsModule.ValidCookieForNoCachedUserTelemetryConfig, 1, {
-				authenticationStatus = if var2 == nil then "NIL" elseif t[var2] then var2 else "UNRECOGNIZED"
-			})
-		end):catch(function(_) end)
 	end
 end

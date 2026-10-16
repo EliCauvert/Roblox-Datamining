@@ -1,65 +1,63 @@
-﻿local graphing = script:FindFirstAncestor("Graphing")
-local reactModule = require(graphing.Parent.React)
-local styleUtilModule = require(graphing.Util.StyleUtil)
-local typesModule = require(graphing.Types)
-local useViewportBindingModule = require(graphing.Util.useViewportBinding)
-local useViewportBinding = useViewportBindingModule.useViewportBinding
-local useViewportVisibility = useViewportBindingModule.useViewportVisibility
+﻿local Graphing = script:FindFirstAncestor("Graphing")
+local ReactModule = require(Graphing.Parent.React)
+local StyleUtilModule = require(Graphing.Util.StyleUtil)
+local TypesModule = require(Graphing.Types)
+local UseViewportBindingModule = require(Graphing.Util.useViewportBinding)
+local UseViewportBindingFunction = UseViewportBindingModule.useViewportBinding
+local UseViewportVisibilityFunction = UseViewportBindingModule.useViewportVisibility
 
-function GridLine(p1)
-	-- upvalues: typesModule (ref), styleUtilModule (ref), useViewportBinding (ref), useViewportVisibility (ref), reactModule (ref)
-	assert(if p1.Orientation ~= typesModule.ORIENTATION_VERTICAL then p1.Orientation == typesModule.ORIENTATION_HORIZONTAL else true, `Invalid orientation {p1.Orientation}`)
-	local color3 = p1.Color3 or styleUtilModule.GRID_LINE_COLOR3
-	local transparency = p1.Transparency or styleUtilModule.GRID_LINE_TRANSPARENCY
-	local thickness = p1.Thickness or styleUtilModule.GRID_LINE_THICKNESS
-	local var1 = useViewportBinding(function(p2)
-		-- upvalues: p1 (ref), typesModule (copy), thickness (ref)
-		local var2 = if p1.Orientation == typesModule.ORIENTATION_VERTICAL then p2.plotToViewX(p1.Position) else p2.plotToViewY(p1.Position)
-		local var3 = 0
-		local var4 = 1
+function GridLine(p1) --[[ Line: 38 ]]
+	-- upvalues: TypesModule (copy), StyleUtilModule (copy), UseViewportBindingFunction (copy), UseViewportVisibilityFunction (copy), ReactModule (copy)
+	assert(p1.Orientation == TypesModule.ORIENTATION_VERTICAL or p1.Orientation == TypesModule.ORIENTATION_HORIZONTAL, `Invalid orientation {p1.Orientation}`)
+	local _Color3 = p1.Color3 or StyleUtilModule.GRID_LINE_COLOR3
+	local Transparency = p1.Transparency or StyleUtilModule.GRID_LINE_TRANSPARENCY
+	local Thickness = p1.Thickness or StyleUtilModule.GRID_LINE_THICKNESS
+	local UseViewportBindingResult = UseViewportBindingFunction(function(p2) --[[ Line: 48 ]]
+		-- upvalues: p1 (copy), TypesModule (upval), Thickness (copy)
+		local PlotToViewXResult = if p1.Orientation == TypesModule.ORIENTATION_VERTICAL then p2.plotToViewX(p1.Position) else p2.plotToViewY(p1.Position)
+		local PlotToViewXResult1 = 0
+		local PlotToViewXResult2 = 1
 		
 		if p1.OppositeAxisBounds then
-			if p1.Orientation == typesModule.ORIENTATION_VERTICAL then
-				var3 = p2.plotToViewY(p1.OppositeAxisBounds.Min)
-				var4 = p2.plotToViewY(p1.OppositeAxisBounds.Max)
+			if p1.Orientation == TypesModule.ORIENTATION_VERTICAL then
+				PlotToViewXResult1 = p2.plotToViewY(p1.OppositeAxisBounds.Min)
+				PlotToViewXResult2 = p2.plotToViewY(p1.OppositeAxisBounds.Max)
 			else
-				var3 = p2.plotToViewX(p1.OppositeAxisBounds.Min)
-				var4 = p2.plotToViewX(p1.OppositeAxisBounds.Max)
+				PlotToViewXResult1 = p2.plotToViewX(p1.OppositeAxisBounds.Min)
+				PlotToViewXResult2 = p2.plotToViewX(p1.OppositeAxisBounds.Max)
 			end
 		end
-		local uDim2, uDim2_1
-		local _ = nil
-		local _ = nil
-		
-		if p1.Orientation == typesModule.ORIENTATION_VERTICAL then
-			uDim2 = UDim2.fromScale(var2, (var3 + var4) / 2)
-			uDim2_1 = UDim2.new(0, thickness, var4 - var3, 0)
+		local _UDim2 = nil
+		local _UDim2_1 = nil
+		if p1.Orientation == TypesModule.ORIENTATION_VERTICAL then
+			_UDim2 = UDim2.fromScale(PlotToViewXResult, (PlotToViewXResult1 + PlotToViewXResult2) / 2)
+			_UDim2_1 = UDim2.new(0, Thickness, PlotToViewXResult2 - PlotToViewXResult1, 0)
 		else
-			uDim2 = UDim2.fromScale((var3 + var4) / 2, var2)
-			uDim2_1 = UDim2.new(var4 - var3, 0, 0, thickness)
+			_UDim2 = UDim2.fromScale((PlotToViewXResult1 + PlotToViewXResult2) / 2, PlotToViewXResult)
+			_UDim2_1 = UDim2.new(PlotToViewXResult2 - PlotToViewXResult1, 0, 0, Thickness)
 		end
-		return { position = uDim2, size = uDim2_1 }
+		return { position = _UDim2, size = _UDim2_1 }
 	end, {
 		p1.Orientation,
 		p1.Position,
 		p1.OppositeAxisBounds,
-		thickness
+		Thickness
 	})
 	
-	return if useViewportVisibility(function(p2)
-		-- upvalues: p1 (ref), typesModule (copy)
-		return if p1.OppositeAxisBounds then if p1.Orientation == typesModule.ORIENTATION_VERTICAL then p2.isRectInViewport(Rect.new(p1.Position, p1.OppositeAxisBounds.Min, p1.Position, p1.OppositeAxisBounds.Max)) else p2.isRectInViewport(Rect.new(p1.OppositeAxisBounds.Min, p1.Position, p1.OppositeAxisBounds.Max, p1.Position)) elseif p1.Orientation == typesModule.ORIENTATION_VERTICAL then p2.isPointInViewportX(p1.Position) else p2.isPointInViewportY(p1.Position)
-	end, { p1.Orientation, p1.Position, p1.OppositeAxisBounds }) then reactModule.createElement("Frame", {
+	return if UseViewportVisibilityFunction(function(p2) --[[ Line: 76 ]]
+		-- upvalues: p1 (copy), TypesModule (upval)
+		return if p1.OppositeAxisBounds then if p1.Orientation == TypesModule.ORIENTATION_VERTICAL then p2.isRectInViewport(Rect.new(p1.Position, p1.OppositeAxisBounds.Min, p1.Position, p1.OppositeAxisBounds.Max)) else p2.isRectInViewport(Rect.new(p1.OppositeAxisBounds.Min, p1.Position, p1.OppositeAxisBounds.Max, p1.Position)) elseif p1.Orientation == TypesModule.ORIENTATION_VERTICAL then p2.isPointInViewportX(p1.Position) else p2.isPointInViewportY(p1.Position)
+	end, { p1.Orientation, p1.Position, p1.OppositeAxisBounds }) then ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
 		AnchorPoint = Vector2.new(0.5, 0.5),
-		Position = var1:map(function(p2)
+		Position = UseViewportBindingResult:map(function(p2) --[[ Line: 98 ]]
 			return p2.position
 		end),
-		Size = var1:map(function(p2)
+		Size = UseViewportBindingResult:map(function(p2) --[[ Line: 101 ]]
 			return p2.size
 		end),
-		BackgroundColor3 = color3,
-		BackgroundTransparency = transparency,
+		BackgroundColor3 = _Color3,
+		BackgroundTransparency = Transparency,
 		ZIndex = p1.ZIndex
 	}, p1.children) else nil
 end

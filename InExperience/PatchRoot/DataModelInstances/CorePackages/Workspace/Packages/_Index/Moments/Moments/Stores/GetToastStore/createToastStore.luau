@@ -1,50 +1,50 @@
-﻿local signalsModule = require(script:FindFirstAncestor("Moments").Parent.Signals)
-local createSignal = signalsModule.createSignal
+﻿local SignalsModule = require(script:FindFirstAncestor("Moments").Parent.Signals)
+local CreateSignalFunction = SignalsModule.createSignal
 
-return function()
-	-- upvalues: createSignal (ref), signalsModule (ref)
-	local var1 = 0
-	local var2, var3 = createSignal({})
+return function() --[[ Line: 41 | Named "createToastStore" ]]
+	-- upvalues: CreateSignalFunction (copy), SignalsModule (copy)
+	local Id = 0
+	local Signal, Signal2 = CreateSignalFunction({})
 	
 	return {
-		getToasts = var2,
-		getToast = signalsModule.createComputed(function(p1)
-			-- upvalues: var2 (ref)
-			local var4 = var2(p1)
+		getToasts = Signal,
+		getToast = SignalsModule.createComputed(function(p1) --[[ Line: 77 ]]
+			-- upvalues: Signal (copy)
+			local SignalResult = Signal(p1)
 			
-			return if #var4 == 0 then nil else var4[#var4].data
+			return if #SignalResult == 0 then nil else SignalResult[#SignalResult].data
 		end),
-		triggerToast = function(p1)
-			-- upvalues: var1 (write), var2 (ref), var3 (ref)
-			var1 += 1
-			local t = { id = var1, data = p1 }
-			local var4 = var2(false)
+		triggerToast = function(Data) --[[ Line: 45 ]]
+			-- upvalues: Id (ref), Signal (copy), Signal2 (copy)
+			Id += 1
+			local config = { id = Id, data = Data }
+			local SignalResult = Signal(false)
 			
-			if #var4 >= 4 then
-				local t_1 = {}
+			if #SignalResult >= 4 then
+				local List = {}
 				
-				for i = #var4 - 4 + 2, #var4 do
-					table.insert(t_1, var4[i])
+				for i = #SignalResult - 4 + 2, #SignalResult do
+					table.insert(List, SignalResult[i])
 				end
-				table.insert(t_1, t)
-				var3(t_1)
+				table.insert(List, config)
+				Signal2(List)
 			else
-				local cloned = table.clone(var4)
-				table.insert(cloned, t)
-				var3(cloned)
+				local Copy = table.clone(SignalResult)
+				table.insert(Copy, config)
+				Signal2(Copy)
 			end
-			return t.id
+			return config.id
 		end,
-		dismissToast = function(p2)
-			-- upvalues: var2 (ref), var3 (ref)
-			local t = {}
+		dismissToast = function(Id) --[[ Line: 66 ]]
+			-- upvalues: Signal (copy), Signal2 (copy)
+			local List = {}
 			
-			for i, v in var2(false) do
-				if v.id ~= p2 then
-					table.insert(t, v)
+			for _, value in Signal(false) do
+				if value.id ~= Id then
+					table.insert(List, value)
 				end
 			end
-			var3(t)
+			Signal2(List)
 		end
 	}
 end

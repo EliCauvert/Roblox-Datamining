@@ -1,6 +1,6 @@
-﻿return function(p1)
-	return if p1 == nil then false else pcall(function()
-		-- upvalues: p1 (ref)
+﻿return function(p1) --[[ Line: 1 | Named "finishDictationInput" ]]
+	return p1 ~= nil and pcall(function() --[[ Line: 7 ]]
+		-- upvalues: p1 (copy)
 		p1:FinishInput()
 	end)
 end

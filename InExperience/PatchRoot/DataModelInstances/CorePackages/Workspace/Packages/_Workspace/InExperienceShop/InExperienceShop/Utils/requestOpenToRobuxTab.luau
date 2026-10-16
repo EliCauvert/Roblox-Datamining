@@ -1,10 +1,10 @@
-﻿local inExperienceShop = script:FindFirstAncestor("InExperienceShop")
-local getInExperienceShopStoreModule = require(inExperienceShop.Stores.getInExperienceShopStore)
-local isSideSheetEnabledModule = require(inExperienceShop.Parent.InExperienceSideSheetUtils.isSideSheetEnabled)
+﻿local InExperienceShop = script:FindFirstAncestor("InExperienceShop")
+local GetInExperienceShopStoreModule = require(InExperienceShop.Stores.getInExperienceShopStore)
+local IsSideSheetEnabledModule = require(InExperienceShop.Parent.InExperienceSideSheetUtils.isSideSheetEnabled)
 
-return function()
-	-- upvalues: isSideSheetEnabledModule (ref), getInExperienceShopStoreModule (ref)
-	if isSideSheetEnabledModule then
-		getInExperienceShopStoreModule(false).setShouldOpenToRobuxTab(true)
+return function() --[[ Line: 7 | Named "requestOpenToRobuxTab" ]]
+	-- upvalues: IsSideSheetEnabledModule (copy), GetInExperienceShopStoreModule (copy)
+	if IsSideSheetEnabledModule then
+		GetInExperienceShopStoreModule(false).setShouldOpenToRobuxTab(true)
 	end
 end

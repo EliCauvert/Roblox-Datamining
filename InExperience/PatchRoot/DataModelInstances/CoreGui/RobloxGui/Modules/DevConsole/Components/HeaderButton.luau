@@ -1,27 +1,27 @@
-﻿local roactModule = require(game:GetService("CorePackages").Packages.Roact)
-local constantsModule = require(script.Parent.Parent.Constants)
-local mainWindowHeader = constantsModule.Font.MainWindowHeader
-local mainWindowHeader_1 = constantsModule.DefaultFontSize.MainWindowHeader
-local text = constantsModule.Color.Text
+﻿local RoactModule = require(game:GetService("CorePackages").Packages.Roact)
+local ConstantsModule = require(script.Parent.Parent.Constants)
+local MainWindowHeader = ConstantsModule.Font.MainWindowHeader
+local MainWindowHeader1 = ConstantsModule.DefaultFontSize.MainWindowHeader
+local Text = ConstantsModule.Color.Text
 
-return function(p1)
-	-- upvalues: roactModule (ref), mainWindowHeader_1 (ref), text (ref), mainWindowHeader (ref)
-	local text_1 = p1.text
-	local sortfunction = p1.sortfunction
+return function(p1) --[[ Line: 18 | Named "HeaderButton" ]]
+	-- upvalues: RoactModule (copy), MainWindowHeader1 (copy), Text (copy), MainWindowHeader (copy)
+	local Text1 = p1.text
+	local SortfunctionFunction = p1.sortfunction
 	
-	return roactModule.createElement("TextButton", {
-		Text = text_1,
-		TextSize = mainWindowHeader_1,
-		TextColor3 = text,
-		Font = mainWindowHeader,
+	return RoactModule.createElement("TextButton", {
+		Text = Text1,
+		TextSize = MainWindowHeader1,
+		TextColor3 = Text,
+		Font = MainWindowHeader,
 		TextXAlignment = Enum.TextXAlignment.Left,
 		Size = p1.size,
 		Position = p1.pos,
 		BackgroundTransparency = 1,
-		[roactModule.Event.Activated] = function()
-			-- upvalues: sortfunction (ref), text_1 (ref)
-			if sortfunction then
-				sortfunction(text_1)
+		[RoactModule.Event.Activated] = function() --[[ Line: 35 ]]
+			-- upvalues: SortfunctionFunction (copy), Text1 (copy)
+			if SortfunctionFunction then
+				SortfunctionFunction(Text1)
 			end
 		end
 	})

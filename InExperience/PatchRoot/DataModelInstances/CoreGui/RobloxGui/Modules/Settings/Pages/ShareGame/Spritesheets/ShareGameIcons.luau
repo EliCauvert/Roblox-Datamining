@@ -1,8 +1,8 @@
-﻿local function _(p1, p2)
-	return { offset = p1, size = p2 }
+﻿local function _(Offset, Size) --[[ Line: 3 | Named "createFrameModel" ]]
+	return { offset = Offset, size = Size }
 end
 
-local t = {
+local config = {
 	frames = {
 		back = { offset = Vector2.new(2, 19), size = Vector2.new(24, 24) },
 		clear = { offset = Vector2.new(6, 51), size = Vector2.new(16, 16) },
@@ -17,17 +17,17 @@ local t = {
 }
 
 return {
-	GetFrame = function(_, p1)
-		-- upvalues: t (ref)
-		return t.frames[p1]
+	GetFrame = function(_, p1) --[[ Line: 26 ]]
+		-- upvalues: config (copy)
+		return config.frames[p1]
 	end,
-	GetImagePath = function(_)
+	GetImagePath = function(_): string --[[ Line: 30 ]]
 		return "rbxasset://textures/ui/Settings/ShareGame/icons.png"
 	end,
-	ApplyImage = function(p1, p2, p3)
-		local var1 = p1:GetFrame(p3)
-		p2.Image = "rbxasset://textures/ui/Settings/ShareGame/icons.png"
-		p2.ImageRectOffset = var1.offset
-		p2.ImageRectSize = var1.size
+	ApplyImage = function(ThreadState, Image, p1) --[[ Line: 34 ]]
+		local Frame = ThreadState:GetFrame(p1)
+		Image.Image = "rbxasset://textures/ui/Settings/ShareGame/icons.png"
+		Image.ImageRectOffset = Frame.offset
+		Image.ImageRectSize = Frame.size
 	end
 }

@@ -89,27 +89,30 @@ Authentication.Login.Response.UnverifiedEmailLoginWithUsername,لم يتم ال�
 Authentication.Login.WeChat.AntiAddictionText,ابتعد عن التجارب السيئة وارفض المشاركة في التجارب المقرصنة. ابقَ متيقظًا واحذر الخداع. إن المشاركة في بعض التجارب مفيدة لعقلك، لكن الإفراط فيها يمكن أن يضر بصحتك. لذلك نوصيك بإدارة وقتك بالمفيد النافع واتباع نمط حياة سليم.
 Authentication.SignUp.Action.ApplyOnNextRespawn,تطبيق عند إعادة الظهور التالي
 Authentication.SignUp.Action.Cancel,
+Authentication.SignUp.Action.ContinueSetup,متابعة الإعداد
+Authentication.SignUp.Action.Create,إنشاء
+Authentication.SignUp.Action.CreateAccountSentenceCase,إنشاء حساب
 Authentication.SignUp.Action.ExitModalLeave,الخروج
 Authentication.SignUp.Action.RespawnNow,إعادة الظهور الآن
-Authentication.SignUp.Action.StartPlay,بدء اللعب
 Authentication.SignUp.Button.OKCaptialized,موافق
 Authentication.SignUp.Button.RetryLogIn,إعادة محاولة تسجيل الدخول
 Authentication.SignUp.Description.AccountAlreadyLinked,حساب على منصة {platformAccountName} مرتبط بالفعل بحساب على منصة Roblox. يُرجى محاولة تسجيل الدخول مرة أخرى.
 Authentication.SignUp.Description.BirthdayHint,أدخِل التاريخ
+Authentication.SignUp.Description.SignUpAgreement.CreateAnAccount,من خلال إنشاء حساب، فإنك توافق على {startTermsTag}شروطنا{endTermsTag}، بما في ذلك بند التحكيم، وتقر {startPrivacyTag}بسياسة الخصوصية{endPrivacyTag} السارية لدينا. إذا كان عمرك أقل من 18 عامًا، يجب على أحد والديك أو الوصي عليك السماح بحسابك والموافقة على شروطنا.
 Authentication.SignUp.Description.Try,جرب
 Authentication.SignUp.Description.UsernameChanged,كل شيء جاهز! حسابك جاهز ومرتبط بمنصّة {platform}. أعد الظهور الآن لرؤية اسم المستخدم المحدث في اللعبة، أو سيُطبق التغيير في المرة القادمة.
 Authentication.SignUp.Description.UsernameUnchanged,لقد انضممت! حسابك جاهز ومرتبط بمنصّة {platform}. يمكنك الدردشة مع الأصدقاء وتشغيل الملايين من ألعاب منصّة Roblox.
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,سيتم ربط حسابك في منصة Roblox بحسابك على حساب {platform}. يمكنك إلغاء الربط من شاشة الإعدادات في أي وقت. قد تكون هناك فترة انتظار قبل أن تتمكن من ربط الحساب بحساب آخر على حساب {platform}. من خلال النقر على {ctaButton}، أنت توافق على شروط الاستخدام بما في ذلك شرط التحكيم وأنت تُقِر بسياسة الخصوصية.
-Authentication.SignUp.Header.CloseWithoutFinishing,هل تريد الإغلاق دون الانتهاء؟
+Authentication.SignUp.Header.CancelAccountCreation,هل تريد إلغاء إنشاء الحساب؟
 Authentication.SignUp.Header.OneLastThing,شيء أخير
 Authentication.SignUp.Header.SetUpYourRobloxAccount,إعداد حسابك على منصّة Roblox
 Authentication.SignUp.Heading.CountryCodeSelector,حدد البلد
 Authentication.SignUp.Heading.RetryLogIn,
 Authentication.SignUp.Label.Birthday,تاريخ الميلاد
+Authentication.SignUp.Label.BirthdayPickerWithDateAndAge,{date} (العمر: {yearsOld})
 Authentication.SignUp.Label.Continue,
 Authentication.SignUp.Label.Day,يوم
 Authentication.SignUp.Label.EnterYourEmail,أدخل بريدك الإلكتروني
-Authentication.SignUp.Label.Error.MinimumAgeNotMet,يجب أن تكون أكبر سنًا لتشغيل هذه اللعبة
 Authentication.SignUp.Label.ErrorsWithPassword,هناك أخطاء في كلمة المرور.
 Authentication.SignUp.Label.ErrorsWithUsername,هناك أخطاء في اسم المستخدم.
 Authentication.SignUp.Label.ExitModalSubtitle,لقد أوشكت على إنشاء حسابك. إذا خرجت من الصفحة الآن، فستفقد التقدم الذي أحرزته.
@@ -261,7 +264,6 @@ Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,تتجاوز الم�
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,يتميز {meshName} بكونه مضيئًا للغاية. تتجاوز مساحة الإضاءة × الشدة الحد المسموح به (حيث تبلغ حاليًا {emissivePercentage}%، ويجب أن تكون {maxEmissivePercentage}% أو أقل). قم بتقليص المساحة المتوهجة أو خفض قيمة EmissiveStrength.
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,تم تجاوز المنطقة المُضيئة.
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,يتميز {assetTypeName} بكونه مضيئًا للغاية. تتجاوز مساحة الإضاءة × الشدة الحد المسموح به (حيث تبلغ حاليًا {emissiveArea}، ويجب أن تكون {maxEmissiveArea} أو أقل). قم بتقليص المساحة المتوهجة أو خفض قيمة EmissiveStrength.
-Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,يستخدم هذا الأصل خرائط إضاءة ذاتية متاحة فقط للمصممين في برنامج المصممين الموثوق بهم. يُرجى إزالة محتوى خرائط الإضاءة الذاتية بالكامل أو الانضمام إلى البرنامج قبل الرفع.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,تفتقد الحركة المنشورة إلى قيمة صالحة للحد الأقصى لإزاحة الأجزاء. يُرجى إعادة نشر الحركة.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,تفتقد الحركة المنشورة إلى علامة حركة تعبيرية صالحة من تصميم المستخدم (UGC). يُرجى إعادة نشر الحركة.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,تعذَّر حساب الحد الأقصى لإزاحة الجزء من بيانات الحركة المنشورة. يُرجى إعادة نشر الحركة.
@@ -269,6 +271,7 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,تحد
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,يجب وضع الرأس فوق UpperTorso. يقع مركز الرأس أسفل الجزء العلوي من الجسم، مما يشير إلى أن أصل Mesh للرأس منهار أو في غير موضعه الصحيح.
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,يجب أن تكون خاصية InternalOverrideFACSData في FaceControls فارغة عند الرفع.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,تم اكتشاف أن نظام FACS قام بتوسيع حجم رأسك إلى {modPercent}%، لكن تعديل الرأس مخالف لسياسة المتجر المتعلقة بحركات الوجه.
+Common.UGCValidation.ErrorLabel.FacsJointCountBounded,يمكن أن تحتوي الرؤوس الديناميكية على {maxFacsJointCount} من مفاصل نظام FACS كحد أقصى، لكن هذا الرأس يحتوي على {actualJointCount}. يُرجى تقليل عدد مفاصل نظام FACS والمحاولة مرة أخرى.
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,تم اكتشاف أن نظام FACS قام بتقليص حجم رأسك إلى {modPercent}%، لكن تغيير الرأس مخالف لسياسة المتجر المتعلقة بحركات الوجه.
 Common.UGCValidation.ErrorLabel.FolderStructureMismatch,تنسيق الملف الذي تم تحميله لا يطابق بنية المجلد المتوقعة. يُرجى المحاولة مرة أخرى أو الإبلاغ عن الأخطاء.
 Common.UGCValidation.ErrorLabel.HrdBone_OutOfBounds,العظم {bonePath} بعيد جدًا عن MeshPart {partName}، يرجى وضعه أقرب إلى حدود حجم MeshPart‏.
@@ -397,7 +400,6 @@ CommonUI.Features.Action.LessLowercase,أقل
 CommonUI.Features.Action.MoreLowercase,المزيد
 CommonUI.Features.Action.Send,
 CommonUI.Features.Label.About,حول
-CommonUI.Features.Label.AcceptConnection,قبول جهة الاتصال
 CommonUI.Features.Label.AcceptFriend,قبول الصداقة
 CommonUI.Features.Label.Add,إضافة
 CommonUI.Features.Label.AddConnection,إضافة جهة اتصال
@@ -406,15 +408,15 @@ CommonUI.Features.Label.AddFriend,إضافة صديق
 CommonUI.Features.Label.Badges,شارات
 CommonUI.Features.Label.Charts,الرائجة
 CommonUI.Features.Label.Chat,الدردشة
-CommonUI.Features.Label.Connect,الأصدقاء
 CommonUI.Features.Label.Connection,جهة اتصال
 CommonUI.Features.Label.Connections,جهات الاتصال
 CommonUI.Features.Label.ControllerBar.HoldPrefix,أوقف
 CommonUI.Features.Label.ControllerBar.Search,
 CommonUI.Features.Label.ControllerBar.ToPlaySuffix,للعب
-CommonUI.Features.Label.CreateGames,إنشاء
-CommonUI.Features.Label.Friends,
+CommonUI.Features.Label.CreateGames,
+CommonUI.Features.Label.Friends,الأصدقاء
 CommonUI.Features.Label.Game,الخبرات
+CommonUI.Features.Label.Games,الألعاب
 CommonUI.Features.Label.GiftCards,شراء بطاقات الهدايا
 CommonUI.Features.Label.Groups,المجتمعات
 CommonUI.Features.Label.HelpAndSafety,المساعدة والأمان
@@ -431,7 +433,6 @@ CommonUI.Features.Label.PrivacyPolicy,
 CommonUI.Features.Label.Profile,الملف الشخصي
 CommonUI.Features.Label.RM,
 CommonUI.Features.Label.Redeem,تحصيل الأكواد
-CommonUI.Features.Label.RemoveConnection,إزالة الصديق
 CommonUI.Features.Label.ReportLogs,سجلات التقرير
 CommonUI.Features.Label.ReportLogsSentenceCase,الإبلاغ عن السجلات
 CommonUI.Features.Label.Sent,تم الإرسال
@@ -655,15 +656,18 @@ CoreScripts.Feedback.FeedbackReportDialog.MainHeader,
 CoreScripts.Feedback.FeedbackReportDialog.OriginalTextHeader,النص الأصلي ({SourceLanguage})
 CoreScripts.Feedback.FeedbackReportDialog.ProblemDropdownSelectionHeader,ما هي المشكلة في هذه الترجمة؟
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.AccuracyIssue,مشكلة في الدقة
+CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.ImageQuality,جودة الصورة
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.InappropriateOrDerogatory,غير لائق أو فيه استهزاء
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.SpellingOrGrammarIssue,مشكلة في الكتابة أو الإعراب
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.Untranslated,غير مترجم
 CoreScripts.Feedback.FeedbackReportDialog.SubmitFeedback,
 CoreScripts.Feedback.FeedbackReportDialog.TextSelectionHeader,النص المحدد
 CoreScripts.Feedback.Help.Instructions,حدد أي نص لتقديم تعليقات على الترجمات غير الصحيحة أو الناقصة.
+CoreScripts.Feedback.Help.InstructionsWithImage,حدد أي نص أو صورة لتقديم ملاحظات بشأن الترجمات غير الدقيقة أو الناقصة.
 CoreScripts.Feedback.Help.MainHeader,
 CoreScripts.Feedback.Onboarding.Cancel,
 CoreScripts.Feedback.Onboarding.Instructions,
+CoreScripts.Feedback.Onboarding.InstructionsWithImage,
 CoreScripts.Feedback.Onboarding.MainHeader,أخبرنا ما الذي حصل
 CoreScripts.Feedback.Onboarding.Start,البدء
 CoreScripts.Feedback.SubmissionToastBody,سوف تستخدم Roblox هذه المعلومات لتحسين جودة الترجمة لهذه التجربة
@@ -700,6 +704,7 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,الفئة *
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Other,أخرى
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,تحديد فئة
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,مشكلة في الشراء
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Suggestion,اقتراح
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,بحد أقصى {MAX} من الأحرف
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,التفاصيل *
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,إلغاء التحديد
@@ -707,6 +712,7 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,قم بتض
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,صِف ما هو مفقود ومتى رأيته آخر مرة. إذا تعرض حسابك للاختراق، يرجى تضمين رقم بطاقة دعم العملاء لدى منصّة Roblox وأي تفاصيل ذات صلة.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,صِف طلبك أو مشكلتك هنا. قدّم أكبر قدر ممكن من التفاصيل لمساعدتنا في فهم الموقف.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,أخبرنا بما حاولت شراؤه، ومتى حدث ذلك، والقيمة الإجمالية (على سبيل المثال 500 Robux / 4.99 دولار أمريكي). قم بتضمين أي رسائل خطأ رأيتها.
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Suggestion,شاركنا ما تود إضافته أو تحسينه، ولماذا سيجعل ذلك اللعبة أفضل.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,هل تحاول الإبلاغ عن إساءة؟
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>إرسال بلاغ بدلًا من ذلك.</u>
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,تحديد
@@ -1088,7 +1094,6 @@ CoreScripts.TextChat.ChatWindow.ChatDisabled.RegionUnavailable,يمكنك هنا
 CoreScripts.TextChat.ChatWindow.ChatDisabled.SettingOff,يمكنك هنا عرض رسائل النظام فقط. حدِّث إعدادات التواصل لتشغيل الدردشة.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatInRegion,يمكنك عرض رسائل النظام والدردشة مع المستخدمين في منطقتك فقط.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithAgeGroupAAndTF,يمكن فقط للأشخاص في فئات عمرية مماثلة ولأصدقائك الموثوق بهم الدردشة معك.
-CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithAgeGroupAndTC,يمكن فقط للأشخاص في فئات عمرية مماثلة ولجهات التواصل الموثوقة لديك الدردشة معك.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.BelowThreshold,رحِّب بكل مَن يلعبون الآن!
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.Local.WithCount,يوجد {RBX_COUNT} من اللاعبين الآخرين في الدردشة. رحِّب بهم!
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.V3,👋 رحِّب بكل مَن يلعبون الآن!
@@ -1154,7 +1159,6 @@ CoreScripts.TextChat.Online.Success.Singular,{RBX_COUNT} لاعب أون لاي�
 CoreScripts.TextChat.Online.Success.Singular3,{RBX_COUNT} لاعب آخر أون لاين حاليًا ويمكنه الدردشة.
 CoreScripts.TextChat.TeamChat.Error.NotOnTeam,لا يمكنك الدردشة مع الفريق لأنك لست جزءًا من الفريق.
 CoreScripts.TextChat.TeamChat.PrefixText,[فريق]
-CoreScripts.TextChat.Toast.ModerateChatOff.Subtitle,يمكنك الدردشة مع أشخاص في فئات عمرية مماثلة ومع جهات التواصل الموثوقة لديك فقط.
 CoreScripts.TextChat.Toast.ModerateChatOff.Subtitle.FriendsRename,يمكنك الآن الدردشة مع أشخاص في فئات عمرية مماثلة ومع الأصدقاء الموثوق بهم.
 CoreScripts.TextChat.Toast.ModerateChatOff.Title,تم إيقاف عرض القراءة فقط
 CoreScripts.TextChat.Toast.ModerateChatOn.Subtitle,بعض الرسائل متاحة للقراءة فقط استنادًا إلى أذونات دورك.
@@ -1277,7 +1281,6 @@ Feature.AccountSettings.Message.Error.InvalidTwitchUrl,رابط ملفك الش�
 Feature.AccountSettings.Message.Error.InvalidXUrl,مقبض X غير صالح.
 Feature.AccountSettings.Message.Error.InvalidYouTubeUrl,رابط YouTube غير صالح.
 Feature.AddFriends.Action.FriendAdded,تمت إضافة صديق
-Feature.AddFriends.Action.IgnoreConnectionRequest,تجاهل طلب الاتصال
 Feature.AddFriends.Action.IgnoreFriendRequest,تجاهل طلب الصداقة
 Feature.AddFriends.Action.IgnoreTrustedFriendRequest,تجاهل طلب الصديق الموثوق به
 Feature.AddFriends.Action.RequestIgnored,تم تجاهل الطلب
@@ -1902,9 +1905,9 @@ Feature.BlockingModal.Action.Block,
 Feature.BlockingModal.Action.BlockAndReport,حظر وإبلاغ
 Feature.BlockingModal.Action.Cancel,
 Feature.BlockingModal.Heading.BlockUser,هل تريد حظر {DisplayName}؟
-Feature.BlockingModal.Message.BlockConfirmation,سيؤدي حظر هذا المستخدم إلى إزالته من قائمة جهات تواصلك أو متابعيك، ولن يتمكّن من إرسال أي رسائل أو طلبات أو دعوات إليك.<br /><br />لن يتم إعلامه بأنك قمت بحظره.
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,سيؤدي حظر هذا المستخدم إلى إزالته من قائمة أصدقائك أو متابعيك، ولن يتمكَّن من إرسال أي رسائل أو طلبات أو دعوات إليك.<br /><br />لن يتم إعلامه بأنك قمت بحظره.
 Feature.Build.Action.Add,
+Feature.Build.Action.AddCustomOption,إضافة خيار مخصص...
 Feature.Build.Action.AddFriends,دعوة الأصدقاء
 Feature.Build.Action.AddPlaytester,دعوة مختبر لعب مبكر واحد
 Feature.Build.Action.AddPlaytesters,دعوة مختبري اللعب المبكرين
@@ -1920,6 +1923,7 @@ Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,نسخ النص
 Feature.Build.Action.Create,
 Feature.Build.Action.CreateDeveloperProduct,
+Feature.Build.Action.CreateNewGame,إنشاء لعبة جديدة
 Feature.Build.Action.Delete,
 Feature.Build.Action.Dismiss,
 Feature.Build.Action.DontAskAgain,عدم السؤال مرة أخرى
@@ -1973,6 +1977,17 @@ Feature.Build.Analytics.Description.PayerConversion,"""التحويل إلى د�
 Feature.Build.Analytics.Description.PlaythroughRate,"""معدل إكمال جلسة اللعب"" هو النسبة المئوية لعدد الزيارات التي أكملت جلسة لعب كاملة. وتشير المعدلات الأعلى إلى أن اللاعبين يجدون تجربتك سهلة الاندماج وتستحق الإنهاء."
 Feature.Build.Analytics.Description.TotalPlaytime,"""إجمالي مدة اللعب"" هو مجموع الوقت الذي قضاه جميع اللاعبين في تجربتك خلال الفترة. وعادةً ما يشير ارتفاع مدة اللعب إلى جلسات أكثر تفاعلًا."
 Feature.Build.Analytics.DurationHours,{number} من الساعات
+Feature.Build.Analytics.Goal.Action.CreateAd,إنشاء إعلان
+Feature.Build.Analytics.Goal.Action.SellItems,بيع العناصر
+Feature.Build.Analytics.Goal.Action.ShareWithFriends,مشاركة مع الأصدقاء
+Feature.Build.Analytics.Goal.EarnRobux,
+Feature.Build.Analytics.Goal.FirstImpression,كوّن انطباعًا أوليًا جيدًا
+Feature.Build.Analytics.Goal.GetMorePlayers,اجذب المزيد من اللاعبين
+Feature.Build.Analytics.Goal.KeepPlayersComingBack,اجعل اللاعبين متحمسين للعودة
+Feature.Build.Analytics.Goal.Locked.EarnRobux,اربح عملات Robux في لعبتك للاطِّلاع على هذه الإحصائيات.
+Feature.Build.Analytics.Goal.Locked.FirstImpression,احصل على لاعبك الأول للاطِّلاع على هذه الإحصائيات.
+Feature.Build.Analytics.Goal.Locked.GetMorePlayers,احصل على المزيد من اللاعبين للاطِّلاع على هذه الإحصائيات.
+Feature.Build.Analytics.Goal.Locked.KeepPlayersComingBack,احصل على لاعبك العائد الأول للاطِّلاع على هذه الإحصائيات.
 Feature.Build.Analytics.KeyStats,الإحصاءات الرئيسية
 Feature.Build.Analytics.LastMonth,الشهر الماضي
 Feature.Build.Analytics.LastWeek,
@@ -2004,9 +2019,14 @@ Feature.Build.Analytics.Summary.TotalPlaytime,إجمالي الساعات الت
 Feature.Build.Analytics.Title.Arppu,ARPPU
 Feature.Build.Analytics.Title.ConcurrentUsers,إجمالي اللاعبين
 Feature.Build.Analytics.Title.D1Retention,احتفاظ يوم 1
+Feature.Build.Analytics.Title.D7Retention,الاحتفاظ في اليوم السابع
 Feature.Build.Analytics.Title.DailyActiveUsers,
+Feature.Build.Analytics.Title.NewUserSessionTime,مدة جلسة المستخدم الجديد
 Feature.Build.Analytics.Title.PayerConversion,تحويل إلى دافعين
 Feature.Build.Analytics.Title.PlaythroughRate,
+Feature.Build.Analytics.Title.RobuxSpent,عملات Robux التي تم إنفاقها
+Feature.Build.Analytics.Title.TopAcquisitionSource,أفضل مصدر
+Feature.Build.Analytics.Title.TopDropOffStep,أكبر تراجع
 Feature.Build.Analytics.Title.TotalPlaytime,
 Feature.Build.Analytics.Visits,الزيارات
 Feature.Build.Content.NewGame,لعبة جديدة
@@ -2050,7 +2070,6 @@ Feature.Build.Description.PlaytestLatest,أنت تختبر اللعب لأحدث
 Feature.Build.Description.PlaytestLocked,يمكنك بدء اختبار اللعب بعد إنشاء لعبتك الأولى.
 Feature.Build.Description.PlaytesterAccess,يمكنك دعوة الأصدقاء كمختبري لعب مبكرين أو تغيير إعدادات جمهور لعبتك للسماح لمزيد من الأشخاص باللعب.
 Feature.Build.Description.PricingRules,إعداد قواعد التسعير
-Feature.Build.Description.PrivateShare,غيّر إعدادات الجمهور للعبتك لمشاركتها.
 Feature.Build.Description.PromoteGameFree,اعرض لعبتك أمام عدد أكبر من اللاعبين بضغطة واحدة.
 Feature.Build.Description.PromoteGamePaid,أنشئ إعلانًا لعرض لعبتك أمام الملايين من اللاعبين.
 Feature.Build.Description.PromoteGameWithAdCampaign,زوِّد أعداد جمهورك من خلال حملة إعلانية لمدة {durationDays} من الأيام واجعل لعبتك متاحة للاكتشاف.
@@ -2080,6 +2099,7 @@ Feature.Build.Error.MonetizationOptionsLoad,تعذَّر تحميل الخيار
 Feature.Build.Error.MonetizationPermissionDenied,ليس لديك الإذن لتغيير خيارات الحصول على عائد.
 Feature.Build.Header.AccessSharing,إمكانية الوصول والمشاركة
 Feature.Build.Header.AllVersions,جميع الإصدارات
+Feature.Build.Header.Answers,الإجابات
 Feature.Build.Header.ContentMaturity,حساسية المحتوى
 Feature.Build.Header.CustomAnswer,إجابة مخصصة
 Feature.Build.Header.GameConfiguration,تهيئة اللعبة
@@ -2094,6 +2114,7 @@ Feature.Build.Label.AdditionalUsage,استخدام إضافي لميزة Build
 Feature.Build.Label.AdditionalUsed,تم استخدام {USED} من {LIMIT}
 Feature.Build.Label.AdsManager,إدارة الإعلانات
 Feature.Build.Label.All,
+Feature.Build.Label.AllGames,كل الألعاب
 Feature.Build.Label.AmountAvailable,الاستخدام المتاح: {AMOUNT}
 Feature.Build.Label.Autosaved,تم الحفظ تلقائيًا
 Feature.Build.Label.Available,المتاح
@@ -2118,12 +2139,15 @@ Feature.Build.Label.DeveloperProductPriceUnavailable,?
 Feature.Build.Label.Done,
 Feature.Build.Label.EasyPerformanceReport,تقرير أداء مبسط
 Feature.Build.Label.Error,
+Feature.Build.Label.Filters,
 Feature.Build.Label.Free,مجانًا
 Feature.Build.Label.FreeBuildUsage,استخدام ميزة Build المجاني
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,
 Feature.Build.Label.GamePlays,عدد مرات تشغيل اللعبة
 Feature.Build.Label.GetMoreBuildUsage,احصل على المزيد من استخدام ميزة Build
+Feature.Build.Label.GroupGames,ألعاب المجموعات
+Feature.Build.Label.Groups,المجموعات
 Feature.Build.Label.Hi,مرحبًا
 Feature.Build.Label.IconThumbnails,الأيقونة والصور المصغرة
 Feature.Build.Label.Images2D,الصور ثنائية الأبعاد
@@ -2137,6 +2161,7 @@ Feature.Build.Label.ManagedPricing,التسعير المُدار
 Feature.Build.Label.ManagedPricingMixed,مختلط عبر المنتجات الحالية
 Feature.Build.Label.MaximizeForGamePlays,زوِّد عدد مرات تشغيل اللعبة إلى أقصى حد
 Feature.Build.Label.Models3D,النماذج ثلاثية الأبعاد
+Feature.Build.Label.MyGames,ألعابي
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,لا يوجد حدّ
 Feature.Build.Label.NotStarted,لم يتم البدء
@@ -2176,6 +2201,15 @@ Feature.Build.Label.Thinking,جارٍ التفكير
 Feature.Build.Label.Title,العنوان
 Feature.Build.Label.TitleDescription,العنوان والوصف
 Feature.Build.Label.Tool,أداة
+Feature.Build.Label.ToolAdEligibilityDone,تم التحقُّق من أهلية الإعلان
+Feature.Build.Label.ToolAdEligibilityFailed,تعذَّر التحقُّق من أهلية الإعلان
+Feature.Build.Label.ToolAdEligibilityRunning,جارٍ التحقُّق من أهلية الإعلان
+Feature.Build.Label.ToolAnalyticsDone,تم تحليل الإحصائيات
+Feature.Build.Label.ToolAnalyticsFailed,تعذَّر تحليل الإحصائيات
+Feature.Build.Label.ToolAnalyticsRunning,جارٍ تحليل الإحصائيات
+Feature.Build.Label.ToolApiDocsDone,تم البحث في مستندات واجهة برمجة التطبيقات (API)
+Feature.Build.Label.ToolApiDocsFailed,تعذّر البحث في مستندات واجهة برمجة التطبيقات (API)
+Feature.Build.Label.ToolApiDocsRunning,جارٍ البحث في مستندات واجهة برمجة التطبيقات (API)
 Feature.Build.Label.ToolAssetDone,تم إدراج الأصل
 Feature.Build.Label.ToolAssetFailed,تعذَّر إدراج الأصل
 Feature.Build.Label.ToolAssetRunning,جارٍ إدراج الأصل
@@ -2185,6 +2219,9 @@ Feature.Build.Label.ToolAssetSearchRunning,جارٍ البحث في مكتبة �
 Feature.Build.Label.ToolClientDMDone,تم البحث في DataModel للعميل
 Feature.Build.Label.ToolClientDMFailed,تعذَّر البحث في DataModel للعميل
 Feature.Build.Label.ToolClientDMRunning,جارٍ البحث في DataModel للعميل
+Feature.Build.Label.ToolCompileDone,تم تجميع الكود
+Feature.Build.Label.ToolCompileFailed,تعذَّر تجميع الكود
+Feature.Build.Label.ToolCompileRunning,جارٍ تجميع الكود
 Feature.Build.Label.ToolGameInfoDone,تم تحديث معلومات اللعبة
 Feature.Build.Label.ToolGameInfoFailed,تعذَّر تحديث معلومات اللعبة
 Feature.Build.Label.ToolGameInfoRunning,جارٍ تحديث معلومات اللعبة
@@ -2221,6 +2258,9 @@ Feature.Build.Label.ToolQuestionRunning,جارٍ طرح سؤال
 Feature.Build.Label.ToolReqUpdateDone,تم تحديث المتطلبات
 Feature.Build.Label.ToolReqUpdateFailed,تعذَّر تحديث المتطلبات
 Feature.Build.Label.ToolReqUpdateRunning,جارٍ تحديث المتطلبات
+Feature.Build.Label.ToolRestoreVersionDone,تمت استعادة الإصدار
+Feature.Build.Label.ToolRestoreVersionFailed,تعذَّرت استعادة الإصدار
+Feature.Build.Label.ToolRestoreVersionRunning,جارٍ استعادة الإصدار
 Feature.Build.Label.ToolScriptDone,تم تشغيل النص البرمجي
 Feature.Build.Label.ToolScriptFailed,تعذَّر تشغيل النص البرمجي
 Feature.Build.Label.ToolScriptRunning,جارٍ تشغيل النص البرمجي
@@ -2236,6 +2276,9 @@ Feature.Build.Label.ToolTasksPlanRunning,جارٍ التخطيط لمهامك
 Feature.Build.Label.ToolThumbnailDone,تم إعداد الصورة المصغرة للعبة
 Feature.Build.Label.ToolThumbnailFailed,تعذّر إعداد الصورة المصغرة للعبة
 Feature.Build.Label.ToolThumbnailRunning,جارٍ إعداد الصورة المصغرة للعبة
+Feature.Build.Label.ToolVerifyDone,تم التحقُّق من الأخطاء
+Feature.Build.Label.ToolVerifyFailed,تعذَّر التحقُّق من الأخطاء
+Feature.Build.Label.ToolVerifyRunning,جارٍ التحقُّق من الأخطاء
 Feature.Build.Label.UniverseNumber,الكون {UNIVERSE_ID}
 Feature.Build.Label.Unknown,غير معروف
 Feature.Build.Label.UnlimitedUsed,تم استخدام {USED} • بلا حد أقصى
@@ -2266,12 +2309,12 @@ Feature.Build.Message.BuildInternalError,واجهت ميزة Build مشكلة. �
 Feature.Build.Message.BuildResponseFailed,تعذَّر على ميزة Build الاستجابة. حاول مرة أخرى.
 Feature.Build.Message.BuildStillWorking,جارٍ العمل على ذلك. يمكنك مغادرة التطبيق أو تشغيل منصّة Roblox أو بدء مشروع آخر أثناء الانتظار.
 Feature.Build.Message.BuildStopped,لقد أوقفت ميزة Build.
+Feature.Build.Message.BuildTakingLonger,يستغرق هذا وقتًا أطول من المتوقع. يمكنك الاستمرار في الانتظار أو بدء شيء آخر.
 Feature.Build.Message.BuildTemporarilyDown,ميزة Build غير متوفرة مؤقتًا. حاول مرة أخرى بعد دقيقة.
 Feature.Build.Message.CompletedTasks,{COUNT} من المهام المكتملة
 Feature.Build.Message.ConversationGone,لم تعد هذه المحادثة متوفرة. ابدأ محادثة جديدة.
 Feature.Build.Message.ConversationNotFound,تعذَّر العثور على هذه المحادثة. ابدأ محادثة جديدة.
 Feature.Build.Message.CreateGameToUseBuild,أنشئ لعبة جديدة لبدء استخدام ميزة Build.
-Feature.Build.Message.CreatedRevertedVer,تم إنشاء إصدار تم التراجع عنه.
 Feature.Build.Message.ErrorCodeText,({ERROR_CODE}) {ERROR_TEXT}
 Feature.Build.Message.ExpandAudience,يمكنك توسيع نطاق أهلية جمهورك في مركز المصمم
 Feature.Build.Message.ExperiencesLoadFailed,تعذَّر تحميل التجارب
@@ -2298,17 +2341,13 @@ Feature.Build.Message.NoSearchResultsFound,لم يتم العثور على أي 
 Feature.Build.Message.NoVersionHistory,لا يوجد سجل إصدارات حتى الآن.
 Feature.Build.Message.OneTaskCompleted,تم إكمال مهمة واحدة
 Feature.Build.Message.OutOfBuildUsage,لقد نفد رصيدك من استخدام ميزة Build. اعرض خياراتك لاستخدام عملات Robux لمواصلة الإنشاء.
-Feature.Build.Message.PlaytestInviteSendFailedBody,تعذر إرسال رابط دعوة الدردشة إلى المستخدمين التاليين:
-Feature.Build.Message.PlaytestInviteSendFailedHint,"يُرجى استخدام زر ""مشاركة"" للحصول على الرابط."
 Feature.Build.Message.PlaytesterRequestFailed,لم نتمكن من إكمال طلبك. يُرجى إعادة المحاولة.
 Feature.Build.Message.PlaytestersAdded,تمت دعوة {INVITED_COUNT} من أصل {MAX_INVITES} من مختبري اللعب المبكرين
-Feature.Build.Message.PrivatePlaytestInvite,تمت دعوتك من قِبل {username} لتكون مختبر لعب مبكر لتجربة {experienceName}
 Feature.Build.Message.PublicPublishFailed,تم نشر لعبتك، ولكن تعذَّر جعلها عامة. حاول مرة أخرى.
 Feature.Build.Message.PublishExpandAudience,يمكنك النشر لتوسيع نطاق جمهورك
 Feature.Build.Message.PublishNotReverted,لم يتم التراجع عن عملية النشر. حاوِل مرة أخرى.
 Feature.Build.Message.PublishPromotionUpsell,تهانينا على نشر لعبتك! لديك {promotionCount} من العروض الخاصة المجانية المتاحة لجذب المزيد من اللاعبين على منصّة Roblox.
 Feature.Build.Message.PublishPromotionUpsellSingular,تهانينا على نشر لعبتك! لديك عرض خاص مجاني واحد متاح لجذب المزيد من اللاعبين على منصّة Roblox.
-Feature.Build.Message.PublishReverted,تم التراجع عن النشر.
 Feature.Build.Message.QuestionnaireNeeded,تم تحرير هذه اللعبة خارج ميزة Build. أكمل استبيان المحتوى للنشر.
 Feature.Build.Message.ReadyToPlay,لعبتك جاهزة للتشغيل على منصّة Roblox!
 Feature.Build.Message.ResetHours,ستتم إعادة التعيين خلال {HOURS} من الساعات
@@ -2366,14 +2405,12 @@ Feature.Build.Title.ExperienceAudience,جمهور التجربة
 Feature.Build.Title.FreeUsageReached,تم الوصول إلى حد استخدام ميزة Build المجاني
 Feature.Build.Title.FriendsOnlyPlay,يمكن للأصدقاء فقط اللعب
 Feature.Build.Title.GameCreationDone,اكتمل إنشاء اللعبة
-Feature.Build.Title.GamePrivate,هذه اللعبة خاصة
 Feature.Build.Title.GenericError,
 Feature.Build.Title.GetUsers,الحصول على المستخدمين
 Feature.Build.Title.ManagedPricingAcknowledgement,هل تريد تشغيل التسعير المُدار؟
 Feature.Build.Title.NoMonetizationProducts,ابدأ الكسب في لعبتك
 Feature.Build.Title.NoRobuxForUsage,لم يتبقَ أي عملات Robux لاستخدام ميزة Build
 Feature.Build.Title.PickCampaign,اختَر مدة
-Feature.Build.Title.PlaytestInviteSendFailed,تعذَّر إرسال الدعوات
 Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersAddRejected,تعذَّر إضافة المستخدمين التاليين:
 Feature.Build.Title.PlaytestersOnlyPlay,يمكن لمختبري اللعب فقط تشغيل اللعبة
@@ -2875,7 +2912,6 @@ Feature.Chat.Description.OSAGroupDescriptionWithLinker,سلامتك تهمنا. 
 Feature.Chat.Description.SnoozeDescription,يمكنك إيقاف تشغيل الإشعارات في قائمة التجارب
 Feature.Chat.Drawer.Join,
 Feature.Chat.Heading.ChatWithConnections,دردش مع الأصدقاء
-Feature.Chat.Heading.ChatWithFriends,الدردشة مع الأصدقاء
 Feature.Chat.Heading.CreateUnfilteredChatDialog,هل تريد إنشاء مجموعة جديدة تتضمن ميزات الدردشة الشاملة؟
 Feature.Chat.Heading.ExpressiveChat,الدردشة المتقدمة
 Feature.Chat.Heading.FailedToLeaveGroup,تعذرت مغادرة المجموعة
@@ -2892,8 +2928,7 @@ Feature.Chat.Heading.SafeChattingWithUsername,حافِظ على سلامتك أ�
 Feature.Chat.Heading.UserInvitedYouToJoin,تمت دعوتك من {combinedName} للانضمام إلى الدردشة
 Feature.Chat.Heading.UserInvitedYouToJoinAGroup,تمت دعوتك من {combinedName} للانضمام إلى مجموعة
 Feature.Chat.Heading.YouWereInvitedToGroup,لقد تلقيتَ دعوة للانضمام إلى المجموعة
-Feature.Chat.Label.AddConnections,إضافة أصدقاء
-Feature.Chat.Label.AddFriends,
+Feature.Chat.Label.AddFriends,إضافة أصدقاء
 Feature.Chat.Label.Available,متاحة
 Feature.Chat.Label.Blocked,محظور
 Feature.Chat.Label.ChatDetails,تفاصيل المحادثة
@@ -2931,8 +2966,7 @@ Feature.Chat.Label.ReplyChatInputPlaceholder,الرد على {DISPLAY_NAME}
 Feature.Chat.Label.ReplyToYourselfChatInputPlaceholder,رد على رسالتك
 Feature.Chat.Label.ReplyingToOthers,رسالة {DISPLAY_NAME} مفادها...
 Feature.Chat.Label.ReplyingToYourself,رسالتك مفادها…
-Feature.Chat.Label.SearchConnections,البحث عن أصدقاء
-Feature.Chat.Label.SearchFriends,
+Feature.Chat.Label.SearchFriends,البحث عن أصدقاء
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SnoozeChatNotifications,كتم إشعارات الدردشة داخل التجربة:
 Feature.Chat.Label.SnoozePartyNotifications,كتم إشعارات الفرقة داخل التجربة لمدة:
@@ -2952,9 +2986,6 @@ Feature.Chat.Label.UnknownUser,مستخدم غير معروف
 Feature.Chat.Label.User,المستخدم
 Feature.Chat.Label.ViewProfile,عرض الملف الشخصي
 Feature.Chat.Label.YouRepliedToYou,أنت أجبت نفسك
-Feature.Chat.Message.AddConnectionsLimit,يمكنك إضافة ما يصل إلى {connectionsNum} من الأصدقاء في مجموعة الدردشة.
-Feature.Chat.Message.AddConnectionsPartyLimit,يمكنك إضافة ما يصل إلى {connectionsNum} من الأصدقاء في الفرقة.
-Feature.Chat.Message.AddConnectionsPartyLimitSingular,يمكنك إنشاء فرقة مع صديق واحد فقط بسبب إعدادات الخصوصية لديك.
 Feature.Chat.Message.AddFriendsLimit,يمكنك الحصول على ما يصل إلى {connectionsNum} من الأصدقاء في مجموعة الدردشة.
 Feature.Chat.Message.AddFriendsPartyLimit,يمكنك الحصول على {connectionsNum} من الأصدقاء كحد أقصى في الحفلة.
 Feature.Chat.Message.AddFriendsPartyLimitSingular,يمكنك إنشاء مجموعة مع صديق واحد فقط بسبب إعدادات الخصوصية لديك.
@@ -2963,9 +2994,7 @@ Feature.Chat.Message.ChatIsDisabledByPrivacySetting,تم تعطيل الدردش
 Feature.Chat.Message.ChatUnavailableRegion,الدردشة غير متاحة في منطقتك في الوقت الحالي.
 Feature.Chat.Message.ChatUnavailableWithUser,الدردشة غير متاحة مع هذا المستخدم في الوقت الحالي.
 Feature.Chat.Message.Default,ليس كل شخص في هذه المحادثة يمكنه رؤية رسالتك.
-Feature.Chat.Message.EnableChat,للدردشة مع الأصدقاء، شغّل الدردشة في إعدادات الخصوصية لديك.
 Feature.Chat.Message.EnableChat.FriendsRename,للدردشة مع الأصدقاء، شغل الدردشة في إعدادات الخصوصية لديك.
-Feature.Chat.Message.EnableParty,لإنشاء فرقة مع الأصدقاء، شغّل الفرقة في إعدادات الخصوصية لديك.
 Feature.Chat.Message.EnableParty.FriendsRename,لإنشاء مجموعة مع الأصدقاء، شغّل المجموعة في إعدادات الخصوصية لديك.
 Feature.Chat.Message.FailedToLeaveGroup,تعذرت إزالتك من المحادثة {CONVERSATION_TITLE}.
 Feature.Chat.Message.FailedToLeaveGroup.V2,لم نتمكن من إزالتك من المجموعة {CONVERSATION_TITLE}.
@@ -2973,12 +3002,10 @@ Feature.Chat.Message.FailedToRemoveUser,المستخدم {USERNAME} لا يمك�
 Feature.Chat.Message.FailedToRemoveUser.V2,لم نتمكن من إزالة المستخدم {USERNAME} من المجموعة {CONVERSATION_TITLE}.
 Feature.Chat.Message.FailedToRenameConversation,لا يمكن إعادة تسمية المحادثة {EXISTING_NAME} إلى {NEW_NAME}.
 Feature.Chat.Message.FailedToRenameConversation.V2,لم نتمكن من إعادة تسمية المجموعة {EXISTING_NAME} إلى {NEW_NAME}.
-Feature.Chat.Message.GroupConnectionLimitSingular,يمكنك إضافة صديق واحد فقط للدردشة معه.
-Feature.Chat.Message.GroupFriendLimitSingular,
+Feature.Chat.Message.GroupFriendLimitSingular,يمكنك إضافة صديق واحد فقط للدردشة معه.
 Feature.Chat.Message.LeaveGroup,لن تتمكن من مواصلة الدردشة مع هذه المجموعة.
 Feature.Chat.Message.LeaveGroup.V2,هل أنت متأكد من أنك تريد مغادرة هذه المجموعة؟
 Feature.Chat.Message.MakeConnectionsToChat,أنشئ صداقات على منصّة Roblox لبدء الدردشة معًا
-Feature.Chat.Message.MakeConnectionsToParty,أنشئ صداقات على منصّة Roblox للانضمام إلى الفرقة معًا
 Feature.Chat.Message.MakeFriendsToParty,كوّن صداقات على Roblox لإنشاء فرقة معًا
 Feature.Chat.Message.MessageContentModerated,تم الإشراف على رسالتك ولم يتم إرسالها.
 Feature.Chat.Message.MessageUnavailable,الرسالة غير متوفرة
@@ -2995,8 +3022,7 @@ Feature.Chat.Response.ChatNameFullyModerated,تم الإشراف على اسم �
 Feature.Chat.Response.ChatNameFullyModerated.V2,تم الإشراف على اسم المجموعة.
 Feature.Chat.Response.NetworkError,خطأ في الشبكة
 Feature.Chat.RobloxConnectUnavailableWithUser,لا تتوفر ميزة Roblox Connect مع هذا المستخدم في الوقت الحالي.
-Feature.Chat.Text.NoConnections,لم تضف أي أصدقاء بعد. للبدء، ابحث عن أصدقائك على منصّة Roblox ثم أضفهم.
-Feature.Chat.Text.NoFriends,
+Feature.Chat.Text.NoFriends,لم تضف أي أصدقاء بعد. للبدء، ابحث عن أصدقائك على منصّة Roblox ثم أضفهم.
 Feature.Chat.Title.FriendsChat,دردشة الأصدقاء
 Feature.Chat.Title.MuteChatNotifications,كتم إشعارات الدردشة من الأصدقاء أثناء اللعب
 Feature.Chat.Title.NewChat,دردشة جديدة
@@ -3112,7 +3138,7 @@ Feature.FAE.Action.Continue,
 Feature.FAE.Action.Unlock,
 Feature.FAE.Action.UnlockChat,
 Feature.FAE.CheckIfYouCanJoinGame,دعنا نتحقّق مما إذا كان بإمكانك الانضمام إلى هذه اللعبة.
-Feature.FAE.Label.ChatWithFriends,
+Feature.FAE.Label.ChatWithFriends,الدردشة مع الأصدقاء
 Feature.FAE.Label.DayLeft,
 Feature.FAE.Label.DaysLeft,{daysLeft} من الأيام المتبقية
 Feature.FAE.Label.GetASecureAgeCheckToUnlockChatAndAddTrustedFriends,أكمِل إجراءات تقدير العمر الآمنة لفتح الدردشة وإضافة أصدقاء موثوق بهم.
@@ -3151,8 +3177,6 @@ Feature.Friends.Action.AccountDeleted,تم حذف الحساب
 Feature.Friends.Action.Add,
 Feature.Friends.Action.Block,
 Feature.Friends.Action.Close,
-Feature.Friends.Action.ConnectionAdded,تمت إضافة جهة الاتصال
-Feature.Friends.Action.ConnectionRequestSent,تم ارسال طلب الاتصال
 Feature.Friends.Action.EditProfile,تحرير الملف الشخصي
 Feature.Friends.Action.FindFriends,العثور على أصدقاء
 Feature.Friends.Action.FriendAdded,تمت إضافة الصديق
@@ -3200,9 +3224,6 @@ Feature.Friends.Error.UserBlockedError,أنت محظور من تنفيذ هذه 
 Feature.Friends.Error.UserNotPassedCaptcha,أنت لم تجتز اختبار Captcha.
 Feature.Friends.Feature.Friends.Heading.AddFriends,
 Feature.Friends.Heading.FilterBy,تصفية حسب
-Feature.Friends.Label.AddConnectionVPC,لإضافة جهة التواصل الموثوقة هذه، أنت بحاجة إلى إذن والديك.
-Feature.Friends.Label.AddConnectionsHint,جهات الاتصال تجعل Roblox أكثر متعة!
-Feature.Friends.Label.AddConnectionsHintBody,أضِف الناس الذين تعرفهم بالفعل أو اكتشِف جهات اتصال جديدة
 Feature.Friends.Label.AddFriendVPC,لإضافة هذا الصديق الموثوق به، أنت بحاجة إلى إذن والديك.
 Feature.Friends.Label.All,
 Feature.Friends.Label.AllowContactsAccess,السماح بالوصول إلى جهات اتصالك لتتواصل مع الأصدقاء على Roblox!
@@ -3216,12 +3237,7 @@ Feature.Friends.Label.ConnectedNumYears,أصدقاء منذ {num} من السن�
 Feature.Friends.Label.ConnectedOneDay,أصدقاء منذ يوم واحد
 Feature.Friends.Label.ConnectedOneMonth,أصدقاء منذ شهر واحد
 Feature.Friends.Label.ConnectedOneYear,أصدقاء منذ سنة واحدة
-Feature.Friends.Label.ConnectionRecentlyPlayed,<b>جهة تواصل واحدة</b> لعبت مؤخرًا
-Feature.Friends.Label.ConnectionRemoved,تمت إزالة جهة التواصل
 Feature.Friends.Label.ConnectionRequest,طلب صداقة
-Feature.Friends.Label.ConnectionsCount,جهات الاتصال ({connectionCount})
-Feature.Friends.Label.ConnectionsPlayed,{numberOfConnections} من جهات التواصل قامت باللعب
-Feature.Friends.Label.ConnectionsRecentlyPlayed,<b>{numberOfConnections} من جهات التواصل</b> لعبوا مؤخرًا
 Feature.Friends.Label.ContactsCaption,لمساعدتك وأصدقائك في العثور على بعضكم على Roblox، سيقوم Roblox بمزامنة جهات اتصالك بانتظام وتخزين المستخدمين الذين تتطابق معهم. يمكنك تغيير هذا الخيار متى ما شئت في إعدادات الحساب.
 Feature.Friends.Label.FewestInteractions,تفاعلات أقلّ
 Feature.Friends.Label.FindFriendsHintBody,اتصل بالأصدقاء الذين تعرفهم بالفعل أو اكتشف أصدقاء جدد.
@@ -3247,25 +3263,18 @@ Feature.Friends.Label.JoinedInYear,انضم إلى المنصة في {year}
 Feature.Friends.Label.ManageFriendsList,إدارة قائمة أصدقائك
 Feature.Friends.Label.ManageFriendsListCaption,راجع الأصدقاء الذين تفاعلت معهم أقل من غيرهم للحفاظ على قائمة محدّثة.
 Feature.Friends.Label.MultipleMutuals,{numConnections} من جهات التواصل المشتركة
-Feature.Friends.Label.MutualConnection,جهة اتصال واحدة مشتركة
-Feature.Friends.Label.MutualConnectionTitle,جهة تواصل مشتركة واحدة
-Feature.Friends.Label.MutualConnections,{numConnections} من جهات الاتصال المشتركة
-Feature.Friends.Label.MutualConnectionsTitle,
 Feature.Friends.Label.MutualFriendTitle,صديق مشترك واحد
 Feature.Friends.Label.MutualFriends,أصدقاء مشتركون
 Feature.Friends.Label.MutualFriendsTitle,{numConnections} من الأصدقاء المشتركين
-Feature.Friends.Label.NewConnection,جهة تواصل جديدة
 Feature.Friends.Label.NewFriend,صديق جديد
 Feature.Friends.Label.NewFriendRequestsMax,أكثر من {maxRequestsCount}
 Feature.Friends.Label.NoFriendsYet,ليس لدى {name} أي أصدقاء بعد.
 Feature.Friends.Label.NowTrusted,{username} الآن ضمن أصدقائك الموثوقين
-Feature.Friends.Label.OneMutual,
+Feature.Friends.Label.OneMutual,جهة تواصل مشتركة واحدة
 Feature.Friends.Label.PYMK,أشخاص قد تعرفهم
 Feature.Friends.Label.Pending,
 Feature.Friends.Label.PlayedByUser,تم اللعب بواسطة <b>{name}</b>
-Feature.Friends.Label.PlayedByUserAndOneOther,تم اللعب بواسطة <b>{name}</b> و<b>جهة تواصل واحدة أخرى</b>
 Feature.Friends.Label.PlayedByUserAndOneOther.FriendsRename,تم اللعب بواسطة <b>{name}</b> و<b>صديق واحد آخر</b>
-Feature.Friends.Label.PlayedByUserAndOthers,تم اللعب بواسطة <b>{name}</b> و<b>{numOfOthers} من جهات التواصل الأخرى</b>
 Feature.Friends.Label.PlayedByUserAndOthers.FriendsRename,تم اللعب بواسطة <b>{name}</b> و <b>{numOfOthers} من الأصدقاء الآخرين</b>
 Feature.Friends.Label.RenameInfoText,"أصبح الأصدقاء على Roblox الآن يعرفون باسم ""جهات التواصل"". أضِف الناس الذين تعرفهم كجهات تواصل لتتمكن بسهولة من معرفة جهة التواصل المتصلة بالشبكة أون لاين، وبدء فرقة، واللعب سويًا. <br /><br />الآن، يمكن للمستخدمين الذين تم التحقق من أن أعمارهم 13 عامًا أو أكثر، إلغاء قفل ميزات الدردشة المتقدمة مع جهات التواصل المؤهلة، بالإضافة إلى العديد من الميزات التي سيتم إطلاقها قريبًا!"
 Feature.Friends.Label.Request,طلب
@@ -3287,18 +3296,10 @@ Feature.Friends.Message.ViewAndConnectHint,عرض طلبات الاتصال وإ
 Feature.Friends.Message.ViewAndConnectTooltip,عرض طلبات الصداقة وتواصل مع الأصدقاء الذين تعرفهم بالفعل.
 Feature.Friends.Mutual,جهة تواصل مشتركة
 Feature.Friends.Mutuals,جهات تواصل مشتركة
-Feature.Friends.OneMutualConnection,جهة اتصال مشتركة
 Feature.Friends.OneMutualFriend,صديق مشترَك
-Feature.Friends.OneOtherMutualConnection,جهة اتصال مشتركة أخرى
 Feature.Friends.OneOtherMutualFriend,صديق مشترَك آخر
-Feature.Friends.PluralMutualConnections,هم جهات اتصال مشتركة
 Feature.Friends.PluralMutualFriends,أصدقاء مشترَكون
-Feature.Friends.PluralOtherMutualConnections,جهات اتصال مشتركة أخرى
 Feature.Friends.PluralOtherMutualFriends,أصدقاء مشتركون آخرون
-Feature.Friends.TCEducation.Modal.TextIntro,تتضاعف المتعة على Roblox مع الناس الذين تعرفهم. سيصبح المستخدمون الذين تم التحقق من أعمارهم والذين ستتمكن من إضافتهم باستخدام كود الاستجابة السريعة (QR)، أو عبر قائمة جهات الاتصال، جهات تواصل موثوقة، مما يتيح لك الاستفادة من ميزات إضافية، مثل:
-Feature.Friends.TCEducation.Modal.TextIntro.EighteenPlus,بصفتك مستخدمًا تم التحقق من أن عمره يزيد عن 18 عامًا، يمكنك الاستفادة أكثر من جهات التواصل التي يزيد عمرها عن 18 عامًا والتي تم التحقق منها، ومن جهات التواصل الموثوقة لديك.
-Feature.Friends.TCEducation.Modal.TextOutro,ستتوفر قريبًا طرق جديدة لإضافة الآخرين كجهات تواصل موثوقة. ويمكنك التحكم في الجهات التي تسمح لها بالتواصل معك من خلال إدارة جهات التواصل في حسابك.
-Feature.Friends.TCEducation.Modal.TextOutro.EighteenPlus,عند إضافة مستخدم آخر تم التحقق من عمره باستخدام كود QR أو من خلال جهات الاتصال، سيصبح جهة تواصل موثوقة. كما ستتوفر المزيد من الخيارات قريبًا.
 Feature.Friends.TCEducation.Title,إضافة الناس الذين تعرفهم
 Feature.Friends.TCFeature.AndMore,والمزيد من الميزات في المستقبل
 Feature.Friends.TCFeature.ChatWithoutFilters,الدردشة دون فلاتر
@@ -3312,11 +3313,7 @@ Feature.Friends.Text.NoConnections,لم تضف أي جهات اتصال حتى �
 Feature.Friends.Text.NoFriends,لم تضف أي أصدقاء بعد. للبدء، ابحث عن أصدقائك على Roblox ثم أضفهم.
 Feature.Friends.Title.TrustedFriendsExpiredLink,انتهت صلاحية الرابط
 Feature.Friends.Title.TrustedFriendsInvalidLink,الرابط غير صالح
-Feature.Friends.TrustedConnection.AcceptTrustedRequest,قبول جهة التواصل الموثوقة
-Feature.Friends.TrustedConnection.Action.RemoveTrustedConnection,إزالة جهة تواصل موثوقة
-Feature.Friends.TrustedConnection.Label.AddTrustedConnection,إضافة جهة تواصل موثوقة
 Feature.Friends.TrustedConnection.Label.Trusted,
-Feature.Friends.TrustedConnection.Toast.TrustedConnectionRemoved,تمت إزالة جهة تواصل موثوقة
 Feature.Friends.TrustedFriend.AcceptTrustedRequest,قبول صديق موثوق
 Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend,إزالة صديق موثوق
 Feature.Friends.TrustedFriend.AddBack.Header,طلب صديق موثوق
@@ -3326,9 +3323,6 @@ Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,أصبح {name} الآن
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,تم إزالة الصديق الموثوق
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,تم إرسال طلب إضافة كصديق موثوق
 Feature.FriendsActivityFeed.Label.ViewRecentActivity,عرض النشاط الأخير
-Feature.FriendsMenu.Label.SearchForConnections,البحث عن جهات تواصل
-Feature.FriendsMenu.Label.SelectedConnectionsCount,تم تحديد {numerator}/{denominator} من جهات الاتصال
-Feature.FriendsMenu.Label.SelectedConnectionsCountNoLimit,تم تحديد {selectedCount} من جهات الاتصال
 Feature.FriendsMenu.Label.SelectedFriendsCount,تم تحديد {numerator}/{denominator} من الأصدقاء
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,تم تحديد {selectedCount} من الأصدقاء
 Feature.GameDetails.Action.GameDetails,
@@ -3535,9 +3529,11 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,تبقى {time}
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,بشراء عملات Robux، فإنك توافق على {termsLinkStart}شروط الاستخدام{termsLinkEnd}، بما في ذلك شرط التحكيم وسياسة الإلغاء.
+Feature.InExperienceShop.GamePass,تذكرة اللعبة
 Feature.InExperienceShop.Label.BonusItem,عنصر مكافأة
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,ينتهي خلال {timeRemaining}
+Feature.InExperienceShop.Label.FreeTrial,فترة تجريبية مجانية
 Feature.InExperienceShop.Label.NoDescription,لا يوجد وصف
 Feature.InExperienceShop.Label.OfferEndTime,ينتهي {offer} خلال {timeRemaining}
 Feature.InExperienceShop.Label.PreviewBanner,هذه معاينة لمتجرك في Roblox Studio. لا يرى اللاعبون هذه المعاينة.
@@ -3549,6 +3545,7 @@ Feature.InExperienceShop.Label.Timer.Minute.Plural,{number} من الدقائق
 Feature.InExperienceShop.Label.Timer.Minute.Singular,دقيقة واحدة
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number} من الثواني
 Feature.InExperienceShop.Label.Timer.Second.Singular,ثانية واحدة
+Feature.InExperienceShop.Label.Trial,فترة تجريبية
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,لقد اشتريتَ {ROBUX_AMOUNT} من عملات Robux بنجاح
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,هل أنت متأكد من أنك تريد حذف هذا العنصر نهائيًا من المقتنيات؟ إذا غيرت رأيك، فستحتاج إلى أن تربحه مرة أخرى في التجارب.
 Feature.Item.Label.DeleteItemUndercase,حذف العنصر
@@ -3603,7 +3600,7 @@ Feature.Moments.Description.HowToCaptureStep2,تمكين عناصر تحكم ا�
 Feature.Moments.Description.HowToCaptureStep3,التقط صورًا ومقاطع فيديو خاصة باللعب
 Feature.Moments.Description.LeaveMomentsCreation,ستفقد جميع التغييرات التي أجريتها، لكن لا يزال بإمكانك العثور على هذه اللقطة في معرض <b>اللقطات</b>.
 Feature.Moments.Description.NoMusicResults,لم يتم العثور على أي موسيقى
-Feature.Moments.Description.NonInfiniteScrollEndBody,لقد وصلت إلى نقطة توقف في اللحظات. اضغط أدناه لمواصلة المشاهدة.
+Feature.Moments.Description.NonInfiniteScrollEndBody,لقد أوقفنا موجزك مؤقتًا. يمكنك تحديد ما إذا كنت ترغب في مواصلة المشاهدة.
 Feature.Moments.Description.NothingHereYet,لا يوجد شيء هنا حتى الآن...
 Feature.Moments.Description.PublishMoment,صِف لحظتك
 Feature.Moments.Description.StayFriendly,لنحافظ على أجواء ودّية
@@ -3662,12 +3659,14 @@ Feature.Moments.Label.MomentFailedToPostTitle,تعذَّر نشر اللحظة
 Feature.Moments.Label.MomentNoLongerAvailable,لم تعد هذه اللحظة متاحة.
 Feature.Moments.Label.MomentPublishedBody,تم نشر لحظتك بنجاح.
 Feature.Moments.Label.MomentPublishedTitle,تم نشر اللحظة
+Feature.Moments.Label.MomentRemovedBody,لقد انتهكت قواعد السلامة السارية لدينا، لذا لم تعد متاحة.
+Feature.Moments.Label.MomentRemovedTitle,أزلنا هذه اللحظة
 Feature.Moments.Label.MomentUnavailable,اللحظة غير متاحة
 Feature.Moments.Label.MomentUnavailableDefault,هذه اللحظة غير متاحة.
 Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NoCommentsYet,لا توجد أي تعليقات حتى الآن
-Feature.Moments.Label.NonInfiniteScrollEndTitle,أنت على اطلاع بكل جديد حاليًا
+Feature.Moments.Label.NonInfiniteScrollEndTitle,هناك المزيد من اللحظات لمشاهدتها
 Feature.Moments.Label.Photos,الصور
 Feature.Moments.Label.PostDeleted,تم حذف اللحظة
 Feature.Moments.Label.PostRemovedBody,تنتهك اللحظة التي نشرتها معايير مجتمعنا.
@@ -3707,6 +3706,7 @@ Feature.Moments.Label.VoiceLimitReachedBody,انتظر دقيقة، ثم حاو�
 Feature.Moments.Label.VoiceModerationError,يجب أن يتبع النص البرمجي لديك قواعد السلامة
 Feature.Moments.Label.VoicePlaceholder,اكتب نص التعليق الصوتي. الحد الأقصى هو {maxCount} من الأحرف
 Feature.Moments.Label.VoiceTimeoutBody,انتهت المدة لإنشاء التعليق الصوتي.
+Feature.Moments.Label.VoiceTooManyNumbersError,يحتوي النص البرمجي على عدد كبير جدًا من الأرقام
 Feature.Moments.Label.WriteComment,اكتب تعليقًا
 Feature.Moments.Title.Comments,التعليقات
 Feature.Moments.Title.CommentsWithCappedCount,التعليقات ({count} فأكثر)
@@ -3813,10 +3813,16 @@ Feature.Parents.Title.EnterParentEmailV2,إدخال البريد الإلكتر�
 Feature.Parents.Title.SomethingWentWrong,
 Feature.PlayerSearchResults.Action.AddFriend,
 Feature.PlayerSearchResults.Label.FromSearch,من البحث
+Feature.PlayerSearchResults.Label.NewUsername,اسم مستخدم جديد
 Feature.PlayerSearchResults.Label.Previously,سابقًا
 Feature.PlayerSearchResults.Label.ThisIsYou,هذا أنت
+Feature.PlayerSearchResults.Label.You,أنت
 Feature.PlayerSearchResults.Label.YouAreFollowing,أنت تتابع
+Feature.PlayerSearchResults.Label.YouAreFriends,صرت صديقًا
+Feature.PrivateServers.Action.CreatePrivateServer,إنشاء خادم خاص
+Feature.PrivateServers.Action.FreeWithBlackbird,مجانًا مع Plus
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,عمليات شراء الخوادم الخاصة غير مدعومة في Studio.
+Feature.PrivateServers.Description.VipServersNotSupported,لا تدعم هذه اللعبة الخوادم الخاصة.
 Feature.Profile.Action.AboutThisProfile,حول هذا الملف الشخصي
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -3880,7 +3886,6 @@ Feature.Profile.Label.AboutDetailsHeading,نبذة عن {name}
 Feature.Profile.Label.AboutPlaceholder,
 Feature.Profile.Label.AddFriend,
 Feature.Profile.Label.AgedUpDisplayNameCaption,هذا هو الاسم العام الأساسي الذي سيراه المستخدمون الآخرون على Roblox. اختر اسمًا يتعرف أصدقاؤك عليك من خلاله، مثل اسمك الحقيقي.
-Feature.Profile.Label.AgedUpDisplayNameConnectionsCaption,هذا هو الاسم العام الأساسي الذي سيظهر للمستخدمين الآخرين على Roblox. اختر اسمًا يتعرف عليك الناس من خلاله، مثل اسمك الحقيقي.
 Feature.Profile.Label.AgedUpDisplayNameFailed,"لا يمكن حفظ الاسم. جرّب اسمًا آخر.
 "
 Feature.Profile.Label.AgedUpDisplayNameFriendsCaption,هذا هو الاسم العام الأساسي الذي سيراه المستخدمون الآخرون على منصّة Roblox. اختر اسمًا يتعرف أصدقاؤك عليك من خلاله، مثل اسمك الحقيقي.
@@ -3915,7 +3920,6 @@ Feature.Profile.Message.InvalidAliasError,لا يمكن حفظ الاسم. جر�
 Feature.Profile.Message.NoExperienceAccess,{name} هي تجربة لا يمكنك الوصول إليها.
 Feature.Profile.Message.QRLoadFailed,تعذّر التحميل.
 Feature.Profile.Message.QRNofificationRequest,أرسل لك طلب صداقة من رمز QR
-Feature.Profile.Message.QRNotificationRequest,أرسل إليك طلب صداقة باستخدام كود الاستجابة السريعة (QR)
 Feature.Profile.Message.QRNotificationRequest.FriendsRename,أرسل لك طلب صداقة من خلال كود الاستجابة السريعة (QR)
 Feature.Profile.Title.QrScanner,ماسح QR
 Feature.Profile.Tooltip.CurrencyTransfer.Body,يمكنك الآن إرسال عملات Robux.
@@ -4066,9 +4070,12 @@ Feature.RobloxSubscription.Description.Benefit.DiscountV2,خصم بنسبة 10% 
 Feature.RobloxSubscription.Description.Benefit.DiscountV3,خصم بنسبة 10% في أول {trialUnlockDays} من الأيام، ثم خصم بنسبة 20% على العناصر والأفاتارات
 Feature.RobloxSubscription.Description.ExclusiveBenefits,متعة أكثر مقابل عدد أقل من عملات Robux. اشترِك في Roblox Plus.
 Feature.RobloxSubscription.Description.JoinEarly,انضم مبكرًا مع اشتراك Plus
+Feature.RobloxSubscription.Description.NoLongerValidReferralGenericError,لم يعد رابط الإحالة هذا صالحًا.
 Feature.RobloxSubscription.Description.ReferralRecipientInvite,تمت دعوتك من قِبَل {username} للانضمام إلى Plus. سيحصل كلاكما على {amount} من عملات Robux عندما تشترك Plus.
+Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,"بالضغط على \u{201C}{ctaText}\u{201D}، فإنك توافق على <a href=""{referralTermsUrl}"">شروط برنامج الإحالة</a> و<a href=""{termsUrl}"">شروط الاشتراك في منصّة Roblox</a>. سيتم تحصيل الرسوم منك تلقائيًا كل شهر حتى تقوم بالإلغاء."
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"بالضغط على \u{201C}{ctaText}\u{201D}، فإنك توافق على <a href=""{termsUrl}"">شروط الاشتراك في منصّة Roblox</a>. سيتم تحصيل الرسوم منك تلقائيًا كل شهر حتى تقوم بالإلغاء."
 Feature.RobloxSubscription.Heading.ReferralEntry,شارك Plus للحصول على {amount} من عملات Robux
+Feature.RobloxSubscription.Heading.ReferralRecipientEntry,انضم إلى اشتراك Plus للحصول على {amount} من عملات Robux
 Feature.RobloxSubscription.Heading.ReferralRecipientJoin,انضم إلى اشتراك Plus، واحصل على
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,خوادم خاصة مجانية
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
@@ -4085,6 +4092,7 @@ Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,{boldStart}شهر واحد
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV3,{boldStart}{trialDuration} {trialPeriodLabel} مجانًا،{boldEnd} ثم {price}/{periodType}
 Feature.RobloxSubscription.Label.month,
 Feature.RobloxSubscription.Label.months,أشهر
+Feature.RobloxSubscription.Message.AlreadySubscribed,أنت مشترك بالفعل في Plus. هذا الرابط مخصص للأعضاء الجدد. شارك رابطك الخاص لدعوة أصدقائك والحصول على المكافآت.
 Feature.RobloxSubscription.Title.AgeCheckTrial,احصل على أسبوع مجاني من Plus
 Feature.RobloxSubscription.Title.AlreadySubscribed,خبر سار
 Feature.RobloxSubscription.Title.GenericError,
@@ -4161,7 +4169,6 @@ Feature.SettingsHub.Label.Captures,
 Feature.SettingsHub.Label.ChooseOne,اختر واحدة
 Feature.SettingsHub.Label.Connect,الاتصال
 Feature.SettingsHub.Label.Connected,
-Feature.SettingsHub.Label.ConnectionsListLoadErrorMessage,تعذَّر تحميل جهات الاتصال. يُرجى إعادة المحاولة لاحقًا.
 Feature.SettingsHub.Label.DefaultInviteMessage,هل تريد دعوة {DisplayName} للانضمام إليك؟
 Feature.SettingsHub.Label.Disconnect,قطع الاتصال
 Feature.SettingsHub.Label.Disconnected,
@@ -4177,8 +4184,6 @@ Feature.SettingsHub.Label.MethodOfAbuse,نوع سوء المعاملة؟
 Feature.SettingsHub.Label.Moderated,تم الإشراف عليها
 Feature.SettingsHub.Label.ModeratedInviteError,تمت الإشراف على الدعوة إلى التجربة ولم نوافق على إرسالها.
 Feature.SettingsHub.Label.Mute,
-Feature.SettingsHub.Label.NoConnectionsPageMessage,أضِف جهات اتصال حتى تتمكنوا من الاستكشاف معًا.
-Feature.SettingsHub.Label.NoConnectionsScreen,أنشئ جهات اتصال حتى تتمكن من دعوتهم للانضمام إليك!
 Feature.SettingsHub.Label.NoFriendsPageMessage,أضف أصدقاءك حتى تتمكن من الاستكشاف واللعب معهم.
 Feature.SettingsHub.Label.NoFriendsScreen,أنشئ صداقات لكي تتمكن من دعوتهم للانضمام إليك.
 Feature.SettingsHub.Label.QuitButton,إنهاء
@@ -4189,7 +4194,6 @@ Feature.SettingsHub.Label.Report.OtherActionsHeader,خطوات أخرى يمكن
 Feature.SettingsHub.Label.Report.ReceivedReportBody,لقد تلقينا تقريرك وسوف نتخذ الإجراء المناسب إذا لزم الأمر. ملاحظاتك تساهم بالحفاظ على سلامة مجتمعنا.
 Feature.SettingsHub.Label.ReportComment,
 Feature.SettingsHub.Label.SceneCaptured,تم التقاط المشهد
-Feature.SettingsHub.Label.SearchForFriendsPlaceholder,
 Feature.SettingsHub.Label.SearchForFriendsPlaceholder.FriendsRename,
 Feature.SettingsHub.Label.Sending,جاري الإرسال
 Feature.SettingsHub.Label.Show,
@@ -4255,9 +4259,7 @@ Feature.SettingsHub.Prompt.Subtitle.Respect,الرجاء الحفاظ على Rob
 Feature.SettingsHub.Prompt.Subtitle.Retry,الرجاء محاولة الخروج وإعادة الانضمام.
 Feature.SettingsHub.Prompt.Subtitle.Revoked,بسبب مخالفات متعددة لمعايير مجتمعنا، ألغينا مؤقتًا وصولك إلى المحادثة الصوتية لحين انتهاء صلاحية إصدار Beta.
 Feature.SettingsHub.Prompt.Subtitle.SelectingTurnOn,"من خلال تحديد ""تفعيل""، أسمح لشركة Roblox بجمع واستخدام وتخزين تسجيلي الصوتي لتمكين الخدمات الصوتية ولغرض الإشراف والأمان وتحسين خدماتها وأدواتها."
-Feature.SettingsHub.Prompt.Subtitle.TalkAgeGroupTrustedConnectionsUpdate,يمكنك الآن التحدث مع أشخاص في فئات عمرية مماثلة ومع جهات التواصل الموثوقة لديك.
 Feature.SettingsHub.Prompt.Subtitle.TalkAgeGroupTrustedFriendsUpdate,يمكنك الآن التحدث مع أشخاص في فئات عمرية مماثلة ومع الأصدقاء الموثوق بهم.
-Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupTrustedConnections,يمكن فقط للأشخاص في فئات عمرية مماثلة ولجهات التواصل الموثوقة لديك التحدث معك.
 Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupTrustedFriends,يمكن فقط للأشخاص في فئات عمرية مماثلة ولأصدقائك الموثوق بهم التحدث معك.
 Feature.SettingsHub.Prompt.Subtitle.TemporarySuspension2,بسبب انتهاك معايير مجتمعنا، ألغينا بشكل مؤقت وصولك إلى المحادثة مع الصوت حتى
 Feature.SettingsHub.Prompt.Subtitle.TemporaryVoiceBan1,لقد عطّلنا المحادثة الصوتية مؤقتًا لأنك قلت شيئًا قد يتعارض مع معايير مجتمع Roblox.
@@ -4329,8 +4331,19 @@ Feature.SongDetails.Action.ReportAudio,الإبلاغ عن مقطع صوتي
 Feature.SongDetails.Label.InappropriateAudio,مقطع صوتي غير لائق
 Feature.SongDetails.Label.InappropriateThumbnail,صورة مصغّرة غير لائقة
 Feature.SongDetails.Label.SongPreview,معاينة الأغنية
+Feature.SplitPane.EditAvatarButtonText,
 Feature.SplitPane.Label.CollapseAvatar,طيّ الأفاتار
 Feature.SplitPane.Label.ExpandAvatar,توسيع الأفاتار
+Feature.SplitPane.Tour.Button.Continue,
+Feature.SplitPane.Tour.Button.FinishTour,إنهاء الجولة
+Feature.SplitPane.Tour.Button.SkipTour,تخطي الجولة
+Feature.SplitPane.Tour.Step1.Description.Collapsed,أصبحت أفاتاراتك المحفوظة ظاهرة على الصفحة الرئيسية. قُم بتوسيع هذه المساحة لرؤيتها.
+Feature.SplitPane.Tour.Step1.Description.Expanded,أصبحت أفاتاراتك المحفوظة ظاهرة على الصفحة الرئيسية. قُم بتدويرها أو تقريبها لرؤية كل التفاصيل.
+Feature.SplitPane.Tour.Step1.Title,شاهد نفسك على الصفحة الرئيسية
+Feature.SplitPane.Tour.Step2.Description,اختر كيف تريد أن تكون إطلالتك. بدِّل بين أفاتاراتك المحفوظة قبل انضمامك إلى اللعبة مباشرةً.
+Feature.SplitPane.Tour.Step2.Title,غيّر إطلالتك في أي وقت
+Feature.SplitPane.Tour.Step3.Description,يمكنك إخفاء هذه المساحة في أي وقت للتركيز على اكتشاف ألعاب جديدة. سيظل الأفاتار المحفوظ لديك هنا.
+Feature.SplitPane.Tour.Step3.Title,اختر ما تريد رؤيته
 Feature.Squads.Action.Add,
 Feature.Squads.Action.AddOthers,إضافة آخرين
 Feature.Squads.Action.ConnectToVoice,الاتصال بالمحادثة الصوتية
@@ -5006,10 +5019,8 @@ InGame.NotificationScript2.Capture.Permission.AlertTextIOS,اذهب إلى ال�
 InGame.NotificationScript2.Capture.Permission.AlertTitle,تمكين حفظ الأذونات
 InGame.NotificationScript2.Capture.Success.ToastText,
 InGame.NotificationScript2.FriendRequestEvent.Accept,تم إنشاء صداقة بينك وبين {RBX_NAME}.
-InGame.NotificationScript2.Message.ConnectionRequestEvent.Accepted,
-InGame.NotificationScript2.Message.ConnectionRequestEvent.Sent,أرسل لك طلب صداقة!
 InGame.NotificationScript2.Message.FriendRequestEvent.Accepted,
-InGame.NotificationScript2.Message.FriendRequestEvent.Sent,
+InGame.NotificationScript2.Message.FriendRequestEvent.Sent,أرسل لك طلب صداقة!
 InGame.NotificationScript2.Screenshot.ButtonText,فتح المجلد
 InGame.NotificationScript2.Screenshot.Description,تحقق من مجلد لقطات الشاشة لديك لمعاينتها.
 InGame.NotificationScript2.Screenshot.Title,تم حفظ لقطة الشاشة
@@ -5051,7 +5062,6 @@ InGame.UnknownNamespace.GameChat_ChatCommandsTeller_MuteCommand,/mute <speaker> 
 InGame.UnknownNamespace.GameChat_ChatCommandsTeller_TeamCommand,/team <message> أو /t <message> : لإرسال دردشة فريق لأشخاص معك في الفريق.
 InGame.UnknownNamespace.GameChat_ChatCommandsTeller_UnMuteCommand,/unmute <speaker> : لإلغاء كتم صوت المستخدم.
 InGame.UnknownNamespace.GameChat_ChatCommandsTeller_WhisperCommand,/whisper <speaker> أو /w <speaker> : لفتح قناة مراسلة خاصة مع المتكلم.
-InGame.UnknownNamespace.GameChat_FriendChatNotifier_JoinMessage,انضمت جهة تواصلك {RBX_NAME} إلى التجربة.
 InGame.UnknownNamespace.GameChat_PrivateMessaging_CannotWhisperToSelf,لا يمكنك إجراء دردشة خاصة مع نفسك.
 InGame.UnknownNamespace.GameChat_TeamChat_NowInTeam,صرت الآن عضوًا في فريق '{RBX_NAME}'.
 InGame.UnknownNamespace.Network,(الشبكة)

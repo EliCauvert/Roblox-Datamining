@@ -1,42 +1,42 @@
 ﻿local PYMKCarousel = script:FindFirstAncestor("PYMKCarousel")
-local dependenciesModule = require(PYMKCarousel.dependencies)
+local DependenciesModule = require(PYMKCarousel.dependencies)
 local _ = require(PYMKCarousel.Common.OmniTypes)
-local transformOmniRecommendationsToActionsModule = require(script.Parent.transformOmniRecommendationsToActions)
-local RECOMMENDATION_SESSION_ID_KEY = require(PYMKCarousel.Common.Constants).RECOMMENDATION_SESSION_ID_KEY
-local convertActions = dependenciesModule.convertActions
-local roduxAnalytics = dependenciesModule.RoduxAnalytics
-local var1 = roduxAnalytics.installReducer()
+local TransformOmniRecommendationsToActionsModule = require(script.Parent.transformOmniRecommendationsToActions)
+local RECOMMENDATIONSESSIONIDKEY = require(PYMKCarousel.Common.Constants).RECOMMENDATION_SESSION_ID_KEY
+local ConvertActionsFunction = DependenciesModule.convertActions
+local RoduxAnalytics = DependenciesModule.RoduxAnalytics
+local InstallReducerResult = RoduxAnalytics.installReducer()
 
-local var2 = function(p1, _)
-	-- upvalues: roduxAnalytics (ref), RECOMMENDATION_SESSION_ID_KEY (ref)
-	local var3 = nil
+local function v7(p1, _) --[[ Line: 12 ]]
+	-- upvalues: RoduxAnalytics (copy), RECOMMENDATIONSESSIONIDKEY (copy)
+	local RecommendationRequestId = nil
 	
-	if p1 and p1.recommendations and (#p1.recommendations > 0 and p1.recommendations[1]) and p1.recommendations[1].contentMetadata then
-		local contentMetadata = p1.recommendations[1].contentMetadata
-		var3 = if contentMetadata then contentMetadata.recommendationRequestId else nil
+	if p1 and p1.recommendations and #p1.recommendations > 0 and p1.recommendations[1] and p1.recommendations[1].contentMetadata then
+		local ContentMetadata = p1.recommendations[1].contentMetadata
+		RecommendationRequestId = if ContentMetadata then ContentMetadata.recommendationRequestId else nil
 	end
-	return roduxAnalytics.Actions.SessionIdUpdated({
-		sessionKey = RECOMMENDATION_SESSION_ID_KEY,
-		sessionId = var3
+	return RoduxAnalytics.Actions.SessionIdUpdated({
+		sessionKey = RECOMMENDATIONSESSIONIDKEY,
+		sessionId = RecommendationRequestId
 	})
 end
 
-local _ = function(p1)
-	-- upvalues: transformOmniRecommendationsToActionsModule (ref), var2 (ref)
+local function _(p1) --[[ Line: 34 ]]
+	-- upvalues: TransformOmniRecommendationsToActionsModule (copy), v7 (copy)
 	return {
-		AddOmniRecommendations = function(p2)
-			-- upvalues: transformOmniRecommendationsToActionsModule (copy), p1 (ref), var2 (copy)
-			return transformOmniRecommendationsToActionsModule(p2.recommendations or {}, p1, nil, var2)
+		AddOmniRecommendations = function(p2) --[[ Line: 36 ]]
+			-- upvalues: TransformOmniRecommendationsToActionsModule (upval), p1 (copy), v7 (upval)
+			return TransformOmniRecommendationsToActionsModule(p2.recommendations or {}, p1, nil, v7)
 		end
 	}
 end
 
-return function(p1)
-	-- upvalues: convertActions (ref), var1 (ref), transformOmniRecommendationsToActionsModule (ref), var2 (ref)
-	return convertActions(var1, {
-		AddOmniRecommendations = function(p2)
-			-- upvalues: transformOmniRecommendationsToActionsModule (copy), p1 (ref), var2 (copy)
-			return transformOmniRecommendationsToActionsModule(p2.recommendations or {}, p1, nil, var2)
+return function(p1) --[[ Line: 42 ]]
+	-- upvalues: ConvertActionsFunction (copy), InstallReducerResult (copy), TransformOmniRecommendationsToActionsModule (copy), v7 (copy)
+	return ConvertActionsFunction(InstallReducerResult, {
+		AddOmniRecommendations = function(p2) --[[ Line: 36 ]]
+			-- upvalues: TransformOmniRecommendationsToActionsModule (upval), p1 (copy), v7 (upval)
+			return TransformOmniRecommendationsToActionsModule(p2.recommendations or {}, p1, nil, v7)
 		end
 	}, {})
 end

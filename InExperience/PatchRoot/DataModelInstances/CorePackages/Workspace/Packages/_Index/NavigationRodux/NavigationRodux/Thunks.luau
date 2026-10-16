@@ -1,17 +1,17 @@
-﻿local navigationRodux = script:FindFirstAncestor("NavigationRodux")
+﻿local NavigationRodux = script:FindFirstAncestor("NavigationRodux")
 
 return {
-	NavigateBack = require(navigationRodux.Thunks.NavigateBack),
-	NavigateDown = require(navigationRodux.Thunks.NavigateDown),
-	NavigateSideways = require(navigationRodux.Thunks.NavigateSideways),
-	NavigateToRoute = require(navigationRodux.Thunks.NavigateToRoute),
-	NavigateFromWebView = require(navigationRodux.Thunks.NavigateFromWebView),
-	RNAdapterThunk = require(navigationRodux.Thunks.RNAdapterThunk),
-	SetNavigationLocked = require(navigationRodux.Thunks.SetNavigationLocked),
-	NavigateDownToGroups = require(navigationRodux.Thunks.NavigateDownToGroups),
-	NavigateDownToNotifications = require(navigationRodux.Thunks.NavigateDownToNotifications),
-	NavigateDownToPrivacySettings = require(navigationRodux.Thunks.NavigateDownToPrivacySettings),
-	NavigateDownToNotificationSettings = require(navigationRodux.Thunks.NavigateDownToNotificationSettings),
-	NavigateDownToReportAbuse = require(navigationRodux.Thunks.NavigateDownToReportAbuse),
-	NavigateDownToViewUserProfile = require(navigationRodux.Thunks.NavigateDownToViewUserProfile)
+	NavigateBack = require(NavigationRodux.Thunks.NavigateBack),
+	NavigateDown = require(NavigationRodux.Thunks.NavigateDown),
+	NavigateSideways = require(NavigationRodux.Thunks.NavigateSideways),
+	NavigateToRoute = require(NavigationRodux.Thunks.NavigateToRoute),
+	NavigateFromWebView = require(NavigationRodux.Thunks.NavigateFromWebView),
+	RNAdapterThunk = require(NavigationRodux.Thunks.RNAdapterThunk),
+	SetNavigationLocked = require(NavigationRodux.Thunks.SetNavigationLocked),
+	NavigateDownToGroups = require(NavigationRodux.Thunks.NavigateDownToGroups),
+	NavigateDownToNotifications = require(NavigationRodux.Thunks.NavigateDownToNotifications),
+	NavigateDownToPrivacySettings = require(NavigationRodux.Thunks.NavigateDownToPrivacySettings),
+	NavigateDownToNotificationSettings = require(NavigationRodux.Thunks.NavigateDownToNotificationSettings),
+	NavigateDownToReportAbuse = require(NavigationRodux.Thunks.NavigateDownToReportAbuse),
+	NavigateDownToViewUserProfile = require(NavigationRodux.Thunks.NavigateDownToViewUserProfile)
 }

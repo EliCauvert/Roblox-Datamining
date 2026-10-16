@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.TnSAdIdentification.TnSAdIdentification)
+﻿return (require(script.Parent._Workspace.TnSAdIdentification.TnSAdIdentification))

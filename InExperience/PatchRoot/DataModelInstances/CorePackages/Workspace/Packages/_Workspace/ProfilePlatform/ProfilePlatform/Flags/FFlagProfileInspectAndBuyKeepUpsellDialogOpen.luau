@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("ProfileInspectAndBuyKeepUpsellDialogOpen", false) and require(script:FindFirstAncestor("ProfilePlatform").Flags.FFlagProfileInspectAndBuyRefreshBalanceAfterPurchase)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+
+return game:DefineFastFlag("ProfileInspectAndBuyKeepUpsellDialogOpen", false) and require(ProfilePlatform.Flags.FFlagProfileInspectAndBuyRefreshBalanceAfterPurchase)

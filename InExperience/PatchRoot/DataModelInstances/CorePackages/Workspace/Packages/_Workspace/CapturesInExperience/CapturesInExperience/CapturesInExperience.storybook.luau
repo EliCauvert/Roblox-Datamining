@@ -1,36 +1,34 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
-local dashModule = require(parent_1.Dash)
-local roactModule = require(parent_1.Roact)
-local socialTestHelpersModule = require(parent_1.Dev.SocialTestHelpers)
-local UIBloxModule = require(parent_1.UIBlox)
-local robloxAppUIBloxConfigModule = require(parent_1.Dev.RobloxAppUIBloxConfig)
-local capturesContextModule = require(parent.Context.CapturesContext)
-local mockLocale = socialTestHelpersModule.StoryHelpers.mockLocale
-UIBloxModule.init(robloxAppUIBloxConfigModule)
-local appStyleProvider = UIBloxModule.App.Style.AppStyleProvider
-roactModule.setGlobalConfig({ elementTracing = true })
-local t = {
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
+local DashModule = require(Parent1.Dash)
+local RoactModule = require(Parent1.Roact)
+local UIBloxModule = require(Parent1.UIBlox)
+local CapturesContextModule = require(Parent.Context.CapturesContext)
+local MockLocaleFunction = require(Parent1.Dev.SocialTestHelpers).StoryHelpers.mockLocale
+UIBloxModule.init((require(Parent1.Dev.RobloxAppUIBloxConfig)))
+local AppStyleProvider = UIBloxModule.App.Style.AppStyleProvider
+RoactModule.setGlobalConfig({ elementTracing = true })
+local config = {
 	Default = { themeName = "Light", fontName = "Gotham" },
 	Light = { themeName = "Light", fontName = "Gotham" },
 	Dark = { themeName = "Dark", fontName = "Gotham" }
 }
-local t_1 = { language = "en-us" }
+local config1 = { language = "en-us" }
 
 return {
 	name = "CapturesInExperience",
-	storyRoot = parent,
-	roact = roactModule,
-	mapDefinition = function(p1)
-		-- upvalues: dashModule (ref), t_1 (ref)
-		return dashModule.join(p1, { controls = dashModule.join(t_1, p1.controls) })
+	storyRoot = Parent,
+	roact = RoactModule,
+	mapDefinition = function(p1) --[[ Line: 45 ]]
+		-- upvalues: DashModule (copy), config1 (copy)
+		return DashModule.join(p1, { controls = DashModule.join(config1, p1.controls) })
 	end,
-	mapStory = function(p1)
-		-- upvalues: roactModule (ref), capturesContextModule (ref), dashModule (ref), appStyleProvider (ref), t (ref), mockLocale (ref)
-		return function(p2)
-			-- upvalues: roactModule (copy), capturesContextModule (copy), dashModule (copy), appStyleProvider (copy), t (copy), mockLocale (copy), p1 (ref)
-			return roactModule.createElement(capturesContextModule.Provider, { value = { fireAnalyticsEvent = dashModule.noop } }, {
-				Element = roactModule.createElement(appStyleProvider, { style = if p2 then t[p2.theme] else t.Default }, { Child = mockLocale(p1, p2) })
+	mapStory = function(p1) --[[ Line: 49 ]]
+		-- upvalues: RoactModule (copy), CapturesContextModule (copy), DashModule (copy), AppStyleProvider (copy), config (copy), MockLocaleFunction (copy)
+		return function(p2) --[[ Line: 50 ]]
+			-- upvalues: RoactModule (upval), CapturesContextModule (upval), DashModule (upval), AppStyleProvider (upval), config (upval), MockLocaleFunction (upval), p1 (copy)
+			return RoactModule.createElement(CapturesContextModule.Provider, { value = { fireAnalyticsEvent = DashModule.noop } }, {
+				Element = RoactModule.createElement(AppStyleProvider, { style = p2 and config[p2.theme] or config.Default }, { Child = MockLocaleFunction(p1, p2) })
 			})
 		end
 	end

@@ -1,65 +1,46 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local _ = require(parent.DataHydration.AdCampaignEligibility)
-local _ = require(parent.DataHydration.CreatorAgentChat)
-local fFlagEnablePaidAdsModule = require(buildExperience.Flags.FFlagEnablePaidAds)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local _ = require(Parent.DataHydration.AdCampaignEligibility)
+local _ = require(Parent.DataHydration.CreatorAgentChat)
+local FFlagEnablePaidAdsModule = require(BuildExperience.Flags.FFlagEnablePaidAds)
 
-local function getDefaultOffer(p1)
-	return if not (p1.feedback ~= nil and p1.feedback.fundingType == "free") then if p1.plays == nil or p1.plays.fundingType ~= "free" then p1.feedback or p1.plays else p1.plays else p1.feedback
+local function isUsableOffer(p1): boolean --[[ Line: 32 ]]
+	return typeof(p1) == "table" and (if p1.campaignOption == "feedback" then if p1.fundingType == "free" then typeof(p1.durationDays) == "number" and (p1.durationDays % 1 == 0 and (p1.durationDays > 0 and (typeof(p1.priceRobux) == "number" and (p1.priceRobux % 1 == 0 and p1.priceRobux >= 0)))) and (p1.fundingType == "free" or p1.priceRobux > 0) else p1.fundingType == "paid" and (typeof(p1.durationDays) == "number" and (p1.durationDays % 1 == 0 and (p1.durationDays > 0 and (typeof(p1.priceRobux) == "number" and (p1.priceRobux % 1 == 0 and p1.priceRobux >= 0)))) and (p1.fundingType == "free" or p1.priceRobux > 0)) else p1.campaignOption == "plays" and (if p1.fundingType == "free" then typeof(p1.durationDays) == "number" and (p1.durationDays % 1 == 0 and (p1.durationDays > 0 and (typeof(p1.priceRobux) == "number" and (p1.priceRobux % 1 == 0 and p1.priceRobux >= 0)))) and (p1.fundingType == "free" or p1.priceRobux > 0) else p1.fundingType == "paid" and (typeof(p1.durationDays) == "number" and (p1.durationDays % 1 == 0 and (p1.durationDays > 0 and (typeof(p1.priceRobux) == "number" and (p1.priceRobux % 1 == 0 and p1.priceRobux >= 0)))) and (p1.fundingType == "free" or p1.priceRobux > 0))))
 end
 
-local function isUsableOffer(p1)
-	local var1 = false
-	
-	if typeof(p1) == "table" then
-		if p1.campaignOption ~= "feedback" then
-			var1 = false
-			
-			if p1.campaignOption == "plays" then
-				if p1.fundingType ~= "free" then
-					var1 = false
-					
-					if p1.fundingType == "paid" then
-						var1 = typeof(p1.durationDays) == "number" and (p1.durationDays % 1 == 0 and (p1.durationDays > 0 and (typeof(p1.priceRobux) == "number" and (p1.priceRobux % 1 == 0 and (p1.priceRobux >= 0 and (if p1.fundingType ~= "free" then p1.priceRobux > 0 else true))))))
-					end
-				end
-			end
-		end
-	end
-	return var1
-end
-
-local function getSelectableOffers(p1)
-	-- upvalues: isUsableOffer (ref)
+local function getSelectableOffers(p1) --[[ Line: 45 ]]
+	-- upvalues: isUsableOffer (copy)
 	if p1 == nil or typeof(p1.offers) ~= "table" then
 		return nil
 	end
-	local var1 = nil
-	local var2 = nil
+	local Feedback = nil
+	local Plays = nil
 	
-	for i, v in p1.offers do
-		local var3 = isUsableOffer(v) and (if v.fundingType ~= "paid" then v.fundingType == "free" and p1.freeCreditsRemaining > 0 else true)
+	for _, offer in p1.offers do
+		local IsPaid: boolean = isUsableOffer(offer) and (offer.fundingType == "paid" or offer.fundingType == "free" and p1.freeCreditsRemaining > 0)
 		
-		if var3 and v.campaignOption == "feedback" then
-			var1 = v
-		elseif var3 and v.campaignOption == "plays" then
-			var2 = v
+		if IsPaid and offer.campaignOption == "feedback" then
+			Feedback = offer
+		elseif IsPaid and offer.campaignOption == "plays" then
+			Plays = offer
 		end
 	end
-	return if var1 == nil and var2 == nil then nil else { feedback = var1, plays = var2 }
+	return if Feedback == nil and Plays == nil then nil else { feedback = Feedback, plays = Plays }
 end
 
-local function isEligibleForFreePromotion(p2)
-	-- upvalues: fFlagEnablePaidAdsModule (ref), isUsableOffer (ref)
+local function isEligibleForFreePromotion(p2): boolean --[[ Line: 73 ]]
+	-- upvalues: FFlagEnablePaidAdsModule (copy), isUsableOffer (copy)
 	if p2 == nil or p2.userEligible ~= true or p2.universeEligible ~= true then
 		return false
-	elseif not fFlagEnablePaidAdsModule then
+	end
+	if not FFlagEnablePaidAdsModule then
 		return p2.cardType == "promote_free"
-	elseif typeof(p2.offers) ~= "table" then
+	end
+	if typeof(p2.offers) ~= "table" then
 		return false
 	end
-	for i, v in p2.offers do
-		if isUsableOffer(v) and v.fundingType == "free" then
+	for _, offer in p2.offers do
+		if isUsableOffer(offer) and offer.fundingType == "free" then
 			return true
 		end
 	end
@@ -67,55 +48,59 @@ local function isEligibleForFreePromotion(p2)
 end
 
 return {
-	getDefaultOffer = getDefaultOffer,
+	getDefaultOffer = function(p3) --[[ Line: 23 ]]
+		return if p3.feedback == nil or p3.feedback.fundingType ~= "free" then (p3.plays == nil or p3.plays.fundingType ~= "free") and p3.feedback or p3.plays else p3.feedback
+	end,
 	isEligibleForFreePromotion = isEligibleForFreePromotion,
-	freeCreditsRemaining = function(p3)
+	freeCreditsRemaining = function(p3) --[[ Line: 91 ]]
 		return if p3 == nil then 0 else p3.freeCreditsRemaining
 	end,
-	hasFreeCredit = function(p3)
-		return (if p3 ~= nil then 0 else p3.freeCreditsRemaining) > 0
+	hasFreeCredit = function(p3): boolean --[[ Line: 97 ]]
+		return (if p3 == nil then 0 else p3.freeCreditsRemaining) > 0
 	end,
-	hasUsableOffer = function(p3)
-		-- upvalues: fFlagEnablePaidAdsModule (ref), getSelectableOffers (ref)
-		if fFlagEnablePaidAdsModule then
+	hasUsableOffer = function(p3): boolean --[[ Line: 104 ]]
+		-- upvalues: FFlagEnablePaidAdsModule (copy), getSelectableOffers (copy)
+		if FFlagEnablePaidAdsModule then
 			return getSelectableOffers(p3) ~= nil
+		else
+			local Offer = if p3 == nil then nil else p3.offer
+			
+			return Offer ~= nil and Offer.durationDays > 0
 		end
-		local var4 = if p3 ~= nil then nil else p3.offer
-		
-		return var4 ~= nil and var4.durationDays > 0
 	end,
 	getSelectableOffers = getSelectableOffers,
-	canCreateCampaign = function(p3)
-		-- upvalues: fFlagEnablePaidAdsModule (ref), getSelectableOffers (ref), isEligibleForFreePromotion (ref)
+	canCreateCampaign = function(p3) --[[ Line: 112 ]]
+		-- upvalues: FFlagEnablePaidAdsModule (copy), getSelectableOffers (copy), isEligibleForFreePromotion (copy)
 		if p3 == nil or p3.userEligible ~= true or p3.universeEligible ~= true then
 			return false
-		elseif fFlagEnablePaidAdsModule then
+		end
+		if FFlagEnablePaidAdsModule then
 			return getSelectableOffers(p3) ~= nil
 		end
-		local var4 = isEligibleForFreePromotion(p3)
+		local IsEligibleForFreePromotion = isEligibleForFreePromotion(p3)
 		
-		if var4 then
-			var4 = (if p3 ~= nil then 0 else p3.freeCreditsRemaining) > 0
+		if IsEligibleForFreePromotion then
+			IsEligibleForFreePromotion = (if p3 == nil then 0 else p3.freeCreditsRemaining) > 0
 			
-			if var4 then
-				if fFlagEnablePaidAdsModule then
+			if IsEligibleForFreePromotion then
+				if FFlagEnablePaidAdsModule then
 					return getSelectableOffers(p3) ~= nil
 				end
-				local var5 = if p3 ~= nil then nil else p3.offer
-				var4 = var5 ~= nil and var5.durationDays > 0
+				local Offer = if p3 == nil then nil else p3.offer
+				IsEligibleForFreePromotion = Offer ~= nil and Offer.durationDays > 0
 			end
 		end
-		return var4
+		return IsEligibleForFreePromotion
 	end,
-	campaignSheetTerms = function(p3, p4)
-		-- upvalues: fFlagEnablePaidAdsModule (ref), getSelectableOffers (ref)
-		local var4 = if p3 ~= nil then nil else p3.offer
+	campaignSheetTerms = function(p3, RunStartMs) --[[ Line: 122 ]]
+		-- upvalues: FFlagEnablePaidAdsModule (copy), getSelectableOffers (copy)
+		local Offer = if p3 == nil then nil else p3.offer
 		
 		return {
-			runStartMs = p4,
-			durationDays = if var4 ~= nil then nil else var4.durationDays,
-			estimatedPriceRobux = if var4 ~= nil then nil else var4.displayAmountRobux,
-			campaignOffers = if fFlagEnablePaidAdsModule then getSelectableOffers(p3) else nil
+			runStartMs = RunStartMs,
+			durationDays = if Offer == nil then nil else Offer.durationDays,
+			estimatedPriceRobux = if Offer == nil then nil else Offer.displayAmountRobux,
+			campaignOffers = if FFlagEnablePaidAdsModule then getSelectableOffers(p3) else nil
 		}
 	end
 }

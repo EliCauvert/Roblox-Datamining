@@ -1,33 +1,33 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local parent_2 = parent_1.Parent
-local roactModule = require(parent_2.Roact)
-local tModule = require(parent_2.t)
-local withStyleModule = require(parent_1.Core.Style.withStyle)
-local core = parent_1.Core
-local getIconSizeModule = require(parent.ImageSet.getIconSize)
-local iconSizeModule = require(parent.ImageSet.Enum.IconSize)
-local interactableModule = require(core.Control.Interactable)
-local imageSetComponentModule = require(core.ImageSet.ImageSetComponent)
-local scrollButton = roactModule.PureComponent:extend("ScrollButton")
-scrollButton.validateProps = tModule.strictInterface({ icon = tModule.table, callback = tModule.callback })
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local Parent2 = Parent1.Parent
+local RoactModule = require(Parent2.Roact)
+local TModule = require(Parent2.t)
+local WithStyleModule = require(Parent1.Core.Style.withStyle)
+local Core = Parent1.Core
+local GetIconSizeModule = require(Parent.ImageSet.getIconSize)
+local IconSizeModule = require(Parent.ImageSet.Enum.IconSize)
+local InteractableModule = require(Core.Control.Interactable)
+local ImageSetComponentModule = require(Core.ImageSet.ImageSetComponent)
+local ScrollButton = RoactModule.PureComponent:extend("ScrollButton")
+ScrollButton.validateProps = TModule.strictInterface({ icon = TModule.table, callback = TModule.callback })
 
-function scrollButton.render(p1)
-	-- upvalues: withStyleModule (ref), roactModule (ref), interactableModule (ref), imageSetComponentModule (ref), getIconSizeModule (ref), iconSizeModule (ref)
-	return withStyleModule(function(p2)
-		-- upvalues: roactModule (copy), interactableModule (copy), p1 (ref), imageSetComponentModule (copy), getIconSizeModule (copy), iconSizeModule (copy)
-		return roactModule.createElement(interactableModule, {
+function ScrollButton.render(p1) --[[ Line: 28 ]]
+	-- upvalues: WithStyleModule (copy), RoactModule (copy), InteractableModule (copy), ImageSetComponentModule (copy), GetIconSizeModule (copy), IconSizeModule (copy)
+	return WithStyleModule(function(p2) --[[ Line: 29 ]]
+		-- upvalues: RoactModule (upval), InteractableModule (upval), p1 (copy), ImageSetComponentModule (upval), GetIconSizeModule (upval), IconSizeModule (upval)
+		return RoactModule.createElement(InteractableModule, {
 			AutoButtonColor = false,
 			Size = UDim2.fromScale(1, 1),
 			BackgroundColor3 = p2.Theme.BackgroundUIContrast.Color,
 			BackgroundTransparency = p2.Theme.BackgroundUIContrast.Transparency,
 			BorderSizePixel = 0,
-			[roactModule.Event.Activated] = p1.props.callback,
-			onStateChanged = function() end
+			[RoactModule.Event.Activated] = p1.props.callback,
+			onStateChanged = function() --[[ Line: 38 ]] end
 		}, {
-			Icon = roactModule.createElement(imageSetComponentModule.Label, {
+			Icon = RoactModule.createElement(ImageSetComponentModule.Label, {
 				BackgroundTransparency = 1,
-				Size = UDim2.fromOffset(getIconSizeModule(iconSizeModule.Medium), getIconSizeModule(iconSizeModule.Medium)),
+				Size = UDim2.fromOffset(GetIconSizeModule(IconSizeModule.Medium), GetIconSizeModule(IconSizeModule.Medium)),
 				Position = UDim2.fromScale(0.5, 0.5),
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Image = p1.props.icon,
@@ -38,4 +38,4 @@ function scrollButton.render(p1)
 	end)
 end
 
-return scrollButton
+return ScrollButton

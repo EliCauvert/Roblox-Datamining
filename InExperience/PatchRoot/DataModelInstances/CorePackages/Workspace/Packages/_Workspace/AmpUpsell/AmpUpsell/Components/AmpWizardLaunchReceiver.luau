@@ -1,25 +1,25 @@
-﻿local ampUpsell = script:FindFirstAncestor("AmpUpsell")
-local parent = ampUpsell.Parent
-local reactModule = require(parent.React)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local appAmpWizardLaunchBridgeModule = require(ampUpsell.Common.AppAmpWizardLaunchBridge)
-local openAmpWizardContainerModule = require(ampUpsell.Common.OpenAmpWizardContainer)
+﻿local AmpUpsell = script:FindFirstAncestor("AmpUpsell")
+local Parent = AmpUpsell.Parent
+local ReactModule = require(Parent.React)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local AppAmpWizardLaunchBridgeModule = require(AmpUpsell.Common.AppAmpWizardLaunchBridge)
+local OpenAmpWizardContainerModule = require(AmpUpsell.Common.OpenAmpWizardContainer)
 
-return function()
-	-- upvalues: useDispatch (ref), reactModule (ref), appAmpWizardLaunchBridgeModule (ref), openAmpWizardContainerModule (ref)
-	local var1 = useDispatch()
-	reactModule.useEffect(function()
-		-- upvalues: appAmpWizardLaunchBridgeModule (copy), var1 (ref), openAmpWizardContainerModule (copy)
-		local var2 = appAmpWizardLaunchBridgeModule.subscribe(function(p1)
-			-- upvalues: var1 (copy), openAmpWizardContainerModule (copy)
-			var1(openAmpWizardContainerModule(p1.featureName, p1.completionCallback or function() end, p1.recourseData, p1.entryPointEventCtx, p1.extraParameters, p1.nameSpace, nil, nil, nil, p1.usePrologue, p1.prologueOptions))
+return function() --[[ Line: 9 | Named "AmpWizardLaunchReceiver" ]]
+	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), AppAmpWizardLaunchBridgeModule (copy), OpenAmpWizardContainerModule (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	ReactModule.useEffect(function() --[[ Line: 12 ]]
+		-- upvalues: AppAmpWizardLaunchBridgeModule (upval), UseDispatchResult (copy), OpenAmpWizardContainerModule (upval)
+		local SubscribeResult = AppAmpWizardLaunchBridgeModule.subscribe(function(p1) --[[ Line: 13 ]]
+			-- upvalues: UseDispatchResult (upval), OpenAmpWizardContainerModule (upval)
+			UseDispatchResult(OpenAmpWizardContainerModule(p1.featureName, p1.completionCallback or function() --[[ Line: 18 ]] end, p1.recourseData, p1.entryPointEventCtx, p1.extraParameters, p1.nameSpace, nil, nil, nil, p1.usePrologue, p1.prologueOptions))
 		end)
 		
-		return function()
-			-- upvalues: var2 (ref)
-			var2:disconnect()
+		return function() --[[ Line: 31 ]]
+			-- upvalues: SubscribeResult (copy)
+			SubscribeResult:disconnect()
 		end
-	end, { var1 })
+	end, { UseDispatchResult })
 	
 	return nil
 end

@@ -1,12 +1,12 @@
-﻿return function(p1, p2)
-	local descendants = p1:GetDescendants()
-	table.insert(descendants, p1)
-	local t = {}
+﻿return function(Object, Name) --[[ Line: 1 ]]
+	local Descendants = Object:GetDescendants()
+	table.insert(Descendants, Object)
+	local List = {}
 	
-	for i, v in descendants do
-		if v.Name == p2 then
-			table.insert(t, v)
+	for _, descendant in Descendants do
+		if descendant.Name == Name then
+			table.insert(List, descendant)
 		end
 	end
-	return t
+	return List
 end

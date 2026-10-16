@@ -1,33 +1,33 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local corePackagesService = game:GetService("CorePackages")
-local localizationService = game:GetService("LocalizationService")
-local roactModule = require(corePackagesService.Packages.Roact)
-local roduxModule = require(corePackagesService.Packages.Rodux)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local localization = require(corePackagesService.Workspace.Packages.InExperienceLocales).Localization
-local localizationProvider = require(corePackagesService.Workspace.Packages.Localization).LocalizationProvider
-local globalConfigModule = require(script.GlobalConfig)
-local reducersModule = require(script.Reducers)
-local feedbackAppModule = require(script.Components.FeedbackApp)
+﻿local CoreGui = game:GetService("CoreGui")
+local CorePackages = game:GetService("CorePackages")
+local LocalizationService = game:GetService("LocalizationService")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoduxModule = require(CorePackages.Packages.Rodux)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local Localization = require(CorePackages.Workspace.Packages.InExperienceLocales).Localization
+local LocalizationProvider = require(CorePackages.Workspace.Packages.Localization).LocalizationProvider
+local GlobalConfigModule = require(script.GlobalConfig)
+local ReducersModule = require(script.Reducers)
+local FeedbackAppModule = require(script.Components.FeedbackApp)
 
 return {
-	initialize = function()
-		-- upvalues: globalConfigModule (ref), roactModule (ref), roduxModule (ref), reducersModule (ref), roactRoduxModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), feedbackAppModule (ref), coreGuiService (ref)
-		if globalConfigModule.propValidation then
-			roactModule.setGlobalConfig({ propValidation = true })
+	initialize = function() --[[ Line: 23 ]]
+		-- upvalues: GlobalConfigModule (copy), RoactModule (copy), RoduxModule (copy), ReducersModule (copy), RoactRoduxModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), FeedbackAppModule (copy), CoreGui (copy)
+		if GlobalConfigModule.propValidation then
+			RoactModule.setGlobalConfig({ propValidation = true })
 		end
-		if globalConfigModule.elementTracing then
-			roactModule.setGlobalConfig({ elementTracing = true })
+		if GlobalConfigModule.elementTracing then
+			RoactModule.setGlobalConfig({ elementTracing = true })
 		end
-		local list = { roduxModule.thunkMiddleware }
+		local List = { RoduxModule.thunkMiddleware }
 		
-		if globalConfigModule.logStore then
-			table.insert(list, roduxModule.loggerMiddleware)
+		if GlobalConfigModule.logStore then
+			table.insert(List, RoduxModule.loggerMiddleware)
 		end
-		roactModule.mount(roactModule.createElement(roactRoduxModule.StoreProvider, { store = roduxModule.Store.new(reducersModule, nil, list) }, {
-			LocalizationProvider = roactModule.createElement(localizationProvider, {
-				localization = localization.new(localizationService.RobloxLocaleId)
-			}, { Feedback = roactModule.createElement(feedbackAppModule) })
-		}), coreGuiService, "Feedback")
+		RoactModule.mount(RoactModule.createElement(RoactRoduxModule.StoreProvider, { store = RoduxModule.Store.new(ReducersModule, nil, List) }, {
+			LocalizationProvider = RoactModule.createElement(LocalizationProvider, {
+				localization = Localization.new(LocalizationService.RobloxLocaleId)
+			}, { Feedback = RoactModule.createElement(FeedbackAppModule) })
+		}), CoreGui, "Feedback")
 	end
 }

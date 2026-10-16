@@ -1,71 +1,70 @@
-﻿local parent = script:FindFirstAncestor("InterventionShared").Parent
-local localizationService = game:GetService("LocalizationService")
-local runService = game:GetService("RunService")
-local localization = require(parent.RobloxAppLocales).Localization
-local reactModule = require(parent.React)
-local fFlagAppChatReactiveFeatureRestrictions = require(parent.SharedFlags).FFlagAppChatReactiveFeatureRestrictions
-local var1 = if fFlagAppChatReactiveFeatureRestrictions then localization.new(localizationService.RobloxLocaleId) else nil
+﻿local Parent = script:FindFirstAncestor("InterventionShared").Parent
+local LocalizationService = game:GetService("LocalizationService")
+local RunService = game:GetService("RunService")
+local Localization = require(Parent.RobloxAppLocales).Localization
+local ReactModule = require(Parent.React)
+local FFlagAppChatReactiveFeatureRestrictions = require(Parent.SharedFlags).FFlagAppChatReactiveFeatureRestrictions
+local NewLocalization = if FFlagAppChatReactiveFeatureRestrictions then Localization.new(LocalizationService.RobloxLocaleId) else nil
 
-return function(p1, p2)
-	-- upvalues: reactModule (ref), fFlagAppChatReactiveFeatureRestrictions (ref), var1 (ref), localizationService (ref), runService (ref)
-	local var2, var3 = reactModule.useBinding(p2 or "")
-	local var4 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref), fFlagAppChatReactiveFeatureRestrictions (copy), var1 (copy), localizationService (copy), var3 (ref), p2 (ref)
+return function(p1, p2) --[[ Line: 24 | Named "useCountdownBinding" ]]
+	-- upvalues: ReactModule (copy), FFlagAppChatReactiveFeatureRestrictions (copy), NewLocalization (copy), LocalizationService (copy), RunService (copy)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(p2 or "")
+	local UseResult = ReactModule.useCallback(function(): number --[[ Line: 26 ]]
+		-- upvalues: p1 (copy), FFlagAppChatReactiveFeatureRestrictions (upval), NewLocalization (upval), LocalizationService (upval), UseBindingResult2 (copy), p2 (copy)
 		if p1 == nil then
-			var3(p2 or "")
+			UseBindingResult2(p2 or "")
 			
 			return 0
 		end
-		local var5
-		local _ = nil
-		local maxValue = math.max(p1 - DateTime.now().UnixTimestamp, 0)
+		local Largest = math.max(p1 - DateTime.now().UnixTimestamp, 0)
+		local FormatUniversalTimeResult = nil
 		
-		if fFlagAppChatReactiveFeatureRestrictions and var1 ~= nil and maxValue >= 86400 then
-			local ceiled = math.ceil(maxValue / 86400)
-			var5 = if ceiled == 1 then var1:Format("Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular") else var1:Format("Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural", { number = ceiled })
+		if FFlagAppChatReactiveFeatureRestrictions and NewLocalization ~= nil and Largest >= 86400 then
+			local Ceiled = math.ceil(Largest / 86400)
+			FormatUniversalTimeResult = if Ceiled == 1 then NewLocalization:Format("Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular") else NewLocalization:Format("Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural", { number = Ceiled })
 		else
-			var5 = if maxValue >= 3600 then DateTime.fromUnixTimestamp(maxValue):FormatUniversalTime(if fFlagAppChatReactiveFeatureRestrictions then "HH:mm:ss" else "h:mm:ss", localizationService.RobloxLocaleId) else DateTime.fromUnixTimestamp(maxValue):FormatUniversalTime("m:ss", localizationService.RobloxLocaleId)
+			FormatUniversalTimeResult = if Largest >= 3600 then DateTime.fromUnixTimestamp(Largest):FormatUniversalTime(if FFlagAppChatReactiveFeatureRestrictions then "HH:mm:ss" else "h:mm:ss", LocalizationService.RobloxLocaleId) else DateTime.fromUnixTimestamp(Largest):FormatUniversalTime("m:ss", LocalizationService.RobloxLocaleId)
 		end
-		var3(var5)
+		UseBindingResult2(FormatUniversalTimeResult)
 		
-		return maxValue
+		return Largest
 	end, { p2, p1 })
-	reactModule.useEffect(function()
-		-- upvalues: var4 (ref)
-		var4()
-	end, { var4 })
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), runService (copy), var4 (ref)
-		local heartbeatConnection = nil
+	ReactModule.useEffect(function() --[[ Line: 63 ]]
+		-- upvalues: UseResult (copy)
+		UseResult()
+	end, { UseResult })
+	ReactModule.useEffect(function() --[[ Line: 68 ]]
+		-- upvalues: p1 (copy), RunService (upval), UseResult (copy)
+		local Connection = nil
 		
 		if p1 ~= nil then
-			local var5 = p1 - DateTime.now().UnixTimestamp
+			local v1 = p1 - DateTime.now().UnixTimestamp
 			
-			if var5 > 0 then
-				local var6 = 0
-				heartbeatConnection = runService.Heartbeat:Connect(function()
-					-- upvalues: var6 (write), var5 (write), var4 (copy), heartbeatConnection (write)
-					local processTime = os.clock()
+			if v1 > 0 then
+				local v2 = 0
+				Connection = RunService.Heartbeat:Connect(function() --[[ Line: 77 ]]
+					-- upvalues: v2 (ref), v1 (ref), UseResult (upval), Connection (ref)
+					local ClockTime = os.clock()
 					
-					if processTime - var6 < 1 then return end
-					var6 = processTime
-					var5 = var4()
+					if ClockTime - v2 < 1 then return end
+					v2 = ClockTime
+					v1 = UseResult()
 					
-					if var5 <= 0 and heartbeatConnection then
-						heartbeatConnection:Disconnect()
-						heartbeatConnection = nil
+					if v1 <= 0 and Connection then
+						Connection:Disconnect()
+						Connection = nil
 					end
 				end)
 			end
 		end
-		return function()
-			-- upvalues: heartbeatConnection (write)
-			if heartbeatConnection ~= nil then
-				heartbeatConnection:Disconnect()
-				heartbeatConnection = nil
+		return function() --[[ Line: 91 ]]
+			-- upvalues: Connection (ref)
+			if Connection ~= nil then
+				Connection:Disconnect()
+				Connection = nil
 			end
 		end
-	end, { p1, var4 })
+	end, { p1, UseResult })
 	
-	return var2
+	return UseBindingResult
 end

@@ -1,27 +1,27 @@
-﻿local ampUpsell = script:FindFirstAncestor("AmpUpsell")
-local parent = ampUpsell.Parent
-local UIBloxModule = require(parent.UIBlox)
-local reactModule = require(parent.React)
-local roactRoduxModule = require(parent.RoactRodux)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local analyticsServiceModule = require(ampUpsell.Analytics.AnalyticsService)
-local sendButtonClickEventModule = require(ampUpsell.Analytics.sendButtonClickEvent)
-local appScreensModule = require(ampUpsell.Common.AppScreens)
-local partialPageModal = UIBloxModule.App.Dialog.Modal.PartialPageModal
-local styledTextLabel = UIBloxModule.App.Text.StyledTextLabel
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local useStyle = UIBloxModule.Core.Style.useStyle
+﻿local AmpUpsell = script:FindFirstAncestor("AmpUpsell")
+local Parent = AmpUpsell.Parent
+local UIBloxModule = require(Parent.UIBlox)
+local ReactModule = require(Parent.React)
+local RoactRoduxModule = require(Parent.RoactRodux)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local AnalyticsServiceModule = require(AmpUpsell.Analytics.AnalyticsService)
+local SendButtonClickEventModule = require(AmpUpsell.Analytics.sendButtonClickEvent)
+local AppScreensModule = require(AmpUpsell.Common.AppScreens)
+local PartialPageModal = UIBloxModule.App.Dialog.Modal.PartialPageModal
+local StyledTextLabel = UIBloxModule.App.Text.StyledTextLabel
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 
-function AccountSettingsUpsell(value)
-	-- upvalues: useLocalization (ref), useStyle (ref), analyticsServiceModule (ref), reactModule (ref), partialPageModal (ref), sendButtonClickEventModule (ref), appScreensModule (ref), buttonType (ref), styledTextLabel (ref)
-	local onCloseModal = value.onCloseModal
-	local onCloseModal_1 = value.onCloseModal
-	local featureName = value.featureName
-	local var1 = useLocalization(value.localizationStrings)
-	local var2 = useStyle()
-	local var3 = if value.analyticsService then value.analyticsService else analyticsServiceModule.EventStream
+function AccountSettingsUpsell(p1) --[[ Line: 27 ]]
+	-- upvalues: UseLocalizationFunction (copy), UseStyleFunction (copy), AnalyticsServiceModule (copy), ReactModule (copy), PartialPageModal (copy), SendButtonClickEventModule (copy), AppScreensModule (copy), ButtonType (copy), StyledTextLabel (copy)
+	local OnCloseModalFunction = p1.onCloseModal
+	local OnCloseModalFunction1 = p1.onCloseModal
+	local FeatureName = p1.featureName
+	local UseLocalizationResult = UseLocalizationFunction(p1.localizationStrings)
+	local UseStyleResult = UseStyleFunction()
+	local AnalyticsService = if p1.analyticsService then p1.analyticsService else AnalyticsServiceModule.EventStream
 	
-	return reactModule.createElement("ImageButton", {
+	return ReactModule.createElement("ImageButton", {
 		AutoButtonColor = false,
 		ImageTransparency = 1,
 		BackgroundTransparency = 1,
@@ -29,67 +29,67 @@ function AccountSettingsUpsell(value)
 		Size = UDim2.new(1, 0, 1, 0),
 		BackgroundColor3 = Color3.new(0, 0, 0)
 	}, {
-		Overlay = reactModule.createElement("Frame", {
+		Overlay = ReactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 1, 0)
 		}, {
-			Content = reactModule.createElement(partialPageModal, {
-				title = var1.title,
-				screenSize = value.screenSize,
-				onCloseClicked = function()
-					-- upvalues: sendButtonClickEventModule (copy), var3 (ref), appScreensModule (copy), featureName (ref), onCloseModal (ref)
-					sendButtonClickEventModule(var3, appScreensModule.AccountSettingsUpsell, featureName, "CloseModal")
-					onCloseModal()
+			Content = ReactModule.createElement(PartialPageModal, {
+				title = UseLocalizationResult.title,
+				screenSize = p1.screenSize,
+				onCloseClicked = function() --[[ Line: 39 ]]
+					-- upvalues: SendButtonClickEventModule (upval), AnalyticsService (copy), AppScreensModule (upval), FeatureName (copy), OnCloseModalFunction (copy)
+					SendButtonClickEventModule(AnalyticsService, AppScreensModule.AccountSettingsUpsell, FeatureName, "CloseModal")
+					OnCloseModalFunction()
 				end,
 				buttonStackProps = {
 					buttonHeight = 48,
 					forcedFillDirection = Enum.FillDirection.Horizontal,
 					buttons = {
 						{
-							buttonType = buttonType.Secondary,
+							buttonType = ButtonType.Secondary,
 							props = {
 								isDisabled = false,
-								onActivated = function()
-									-- upvalues: sendButtonClickEventModule (copy), var3 (ref), appScreensModule (copy), featureName (ref), onCloseModal_1 (ref)
-									sendButtonClickEventModule(var3, appScreensModule.AccountSettingsUpsell, featureName, "Cancelled")
-									onCloseModal_1()
+								onActivated = function() --[[ Line: 51 ]]
+									-- upvalues: SendButtonClickEventModule (upval), AnalyticsService (copy), AppScreensModule (upval), FeatureName (copy), OnCloseModalFunction1 (copy)
+									SendButtonClickEventModule(AnalyticsService, AppScreensModule.AccountSettingsUpsell, FeatureName, "Cancelled")
+									OnCloseModalFunction1()
 								end,
-								text = var1.buttonCancel
+								text = UseLocalizationResult.buttonCancel
 							}
 						},
 						{
-							buttonType = buttonType.PrimarySystem,
+							buttonType = ButtonType.PrimarySystem,
 							props = {
 								isDisabled = false,
-								onActivated = function()
-									-- upvalues: sendButtonClickEventModule (copy), var3 (ref), appScreensModule (copy), featureName (ref), value (ref), var1 (ref)
-									sendButtonClickEventModule(var3, appScreensModule.AccountSettingsUpsell, featureName, "OpenAccountSettings")
-									value.openAccountSettings(var1.buttonSettings)
+								onActivated = function() --[[ Line: 67 ]]
+									-- upvalues: SendButtonClickEventModule (upval), AnalyticsService (copy), AppScreensModule (upval), FeatureName (copy), p1 (copy), UseLocalizationResult (copy)
+									SendButtonClickEventModule(AnalyticsService, AppScreensModule.AccountSettingsUpsell, FeatureName, "OpenAccountSettings")
+									p1.openAccountSettings(UseLocalizationResult.buttonSettings)
 								end,
-								text = var1.buttonSettings
+								text = UseLocalizationResult.buttonSettings
 							}
 						}
 					}
 				}
 			}, {
-				ViewFrame = reactModule.createElement("Frame", {
+				ViewFrame = ReactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					AutomaticSize = Enum.AutomaticSize.XY
 				}, {
-					UIPadding = reactModule.createElement("UIPadding", {
+					UIPadding = ReactModule.createElement("UIPadding", {
 						PaddingTop = UDim.new(0, 24),
 						PaddingBottom = UDim.new(0, 24)
 					}),
-					Text = reactModule.createElement(styledTextLabel, {
+					Text = ReactModule.createElement(StyledTextLabel, {
 						fluidSizing = false,
-						fontStyle = var2.Font.Body,
-						colorStyle = var2.Theme.TextEmphasis,
+						fontStyle = UseStyleResult.Font.Body,
+						colorStyle = UseStyleResult.Theme.TextEmphasis,
 						size = UDim2.new(1, 0, 0, 0),
 						textXAlignment = Enum.TextXAlignment.Left,
 						textYAlignment = Enum.TextYAlignment.Center,
 						automaticSize = Enum.AutomaticSize.Y,
-						text = var1.message
+						text = UseLocalizationResult.message
 					})
 				})
 			})
@@ -97,7 +97,7 @@ function AccountSettingsUpsell(value)
 	})
 end
 
-AccountSettingsUpsell = roactRoduxModule.connect(function(p1, _)
+AccountSettingsUpsell = RoactRoduxModule.connect(function(p1, _) --[[ Line: 121 ]]
 	return { screenSize = p1.ScreenSize }
 end)(AccountSettingsUpsell)
 

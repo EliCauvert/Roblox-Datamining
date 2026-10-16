@@ -1,17 +1,17 @@
-﻿local telemetryService = game:GetService("TelemetryService")
-local parent = script:FindFirstAncestor("DiscoveryAnalytics").Parent
-local tModule = require(parent.t)
-local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventErrorLogger
-local var1 = tModule.strictInterface({
-	item_positions = tModule.string,
-	social_link_urls = tModule.string,
-	social_link_types = tModule.string,
-	social_link_display_type = tModule.string,
-	assignment_id = tModule.number,
-	assignment_type = tModule.string,
-	page = tModule.string
+﻿local TelemetryService = game:GetService("TelemetryService")
+local Parent = script:FindFirstAncestor("DiscoveryAnalytics").Parent
+local TModule = require(Parent.t)
+local DiscoveryEventErrorLogger = require(Parent.DiscoveryUtils).DiscoveryEventErrorLogger
+local StrictInterfaceResult = TModule.strictInterface({
+	item_positions = TModule.string,
+	social_link_urls = TModule.string,
+	social_link_types = TModule.string,
+	social_link_display_type = TModule.string,
+	assignment_id = TModule.number,
+	assignment_type = TModule.string,
+	page = TModule.string
 })
-local t = {
+local config = {
 	eventName = "EdpSocialLinksImpressions",
 	description = "Impressions for social links on EDP",
 	lastUpdated = { 25, 12, 10 },
@@ -19,15 +19,15 @@ local t = {
 	throttlingPercentage = game:DefineFastInt("SocialLinksImpressionsEventHundredthsPercent", 10000)
 }
 
-return function(p1)
-	-- upvalues: var1 (ref), discoveryEventErrorLogger (ref), telemetryService (ref), t (ref)
-	local var2, var3 = var1(p1)
+return function(CustomFields) --[[ Line: 40 ]]
+	-- upvalues: StrictInterfaceResult (copy), DiscoveryEventErrorLogger (copy), TelemetryService (copy), config (copy)
+	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(CustomFields)
 	
-	if not var2 then
-		discoveryEventErrorLogger.reportError("SocialLinksImpressionsEventInterface", var3)
+	if not StrictInterfaceResultResult then
+		DiscoveryEventErrorLogger.reportError("SocialLinksImpressionsEventInterface", StrictInterfaceResultResult2)
 	end
-	telemetryService:LogEvent(t, {
-		customFields = p1,
+	TelemetryService:LogEvent(config, {
+		customFields = CustomFields,
 		standardizedFields = { "addSessionInfo" }
 	})
 end

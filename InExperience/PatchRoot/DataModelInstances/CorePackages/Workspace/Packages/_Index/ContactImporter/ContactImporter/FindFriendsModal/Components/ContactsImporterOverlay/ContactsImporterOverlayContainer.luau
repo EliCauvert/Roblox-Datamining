@@ -1,168 +1,173 @@
-﻿local parent = script.Parent.Parent.Parent.Parent
-local dependenciesModule = require(parent.dependencies)
-local _ = parent.Parent
-local textKeysModule = require(parent.Common.TextKeys)
-local contactImporterModalInfoUpdaterModule = require(parent.Utils.contactImporterModalInfoUpdater)
-local updateOptedInUsers = dependenciesModule.SocialModalsCommon.Utils.updateOptedInUsers
-local enumScreens = dependenciesModule.SocialModalsCommon.EnumScreens
-local constantsModule = require(parent.Common.Constants)
-local analyticsModule = require(parent.Analytics)
-local roact = dependenciesModule.Roact
-local roactRodux = dependenciesModule.RoactRodux
-local permissionsProtocol = dependenciesModule.PermissionsProtocol
-local promise = dependenciesModule.Promise
-local contactsImporterOverlayModule = require(script.Parent.ContactsImporterOverlay)
-local mapDispatchToPropsModule = require(script.Parent.mapDispatchToProps)
-local selectors = dependenciesModule.RoduxContacts.Selectors
-local appStorageService = dependenciesModule.AppStorageService
-local discoverabilityAnalytics = dependenciesModule.DiscoverabilityAnalytics
-local contactsImporterOverlayContainer = roact.PureComponent:extend("ContactsImporterOverlayContainer")
-contactsImporterOverlayContainer.defaultProps = {
+﻿local Parent = script.Parent.Parent.Parent.Parent
+local DependenciesModule = require(Parent.dependencies)
+local _ = Parent.Parent
+local TextKeysModule = require(Parent.Common.TextKeys)
+local ContactImporterModalInfoUpdaterModule = require(Parent.Utils.contactImporterModalInfoUpdater)
+local UpdateOptedInUsers = DependenciesModule.SocialModalsCommon.Utils.updateOptedInUsers
+local EnumScreens = DependenciesModule.SocialModalsCommon.EnumScreens
+local ConstantsModule = require(Parent.Common.Constants)
+local AnalyticsModule = require(Parent.Analytics)
+local Roact = DependenciesModule.Roact
+local RoactRodux = DependenciesModule.RoactRodux
+local PermissionsProtocol = DependenciesModule.PermissionsProtocol
+local Promise = DependenciesModule.Promise
+local ContactsImporterOverlayModule = require(script.Parent.ContactsImporterOverlay)
+local MapDispatchToPropsModule = require(script.Parent.mapDispatchToProps)
+local Selectors = DependenciesModule.RoduxContacts.Selectors
+local AppStorageService = DependenciesModule.AppStorageService
+local DiscoverabilityAnalytics = DependenciesModule.DiscoverabilityAnalytics
+local ContactsImporterOverlayContainer = Roact.PureComponent:extend("ContactsImporterOverlayContainer")
+ContactsImporterOverlayContainer.defaultProps = {
 	localUserId = "",
 	handleShowToastForTests = nil,
-	checkOrRequestPermissions = function(p1)
-		-- upvalues: permissionsProtocol (ref)
-		return permissionsProtocol.default:checkOrRequestPermissions(p1)
+	checkOrRequestPermissions = function(p1) --[[ Line: 44 ]]
+		-- upvalues: PermissionsProtocol (copy)
+		return PermissionsProtocol.default:checkOrRequestPermissions(p1)
 	end
 }
 
-function contactsImporterOverlayContainer.init(p1)
-	-- upvalues: constantsModule (ref), discoverabilityAnalytics (ref), analyticsModule (ref), permissionsProtocol (ref), textKeysModule (ref), updateOptedInUsers (ref), appStorageService (ref), enumScreens (ref), promise (ref)
-	p1.isFromAddFriendsPage = p1.props.navigation.getParam(constantsModule.IS_FROM_ADD_FRIENDS_PAGE, false)
-	p1.entryPoint = if p1.isFromAddFriendsPage then discoverabilityAnalytics.EntryPoints.AddFriends else discoverabilityAnalytics.EntryPoints.HomePage
-	p1.fireAnalyticsEvent = analyticsModule.setupFireAnalyticsEvents({
-		analytics = analyticsModule.AnalyticsService,
+function ContactsImporterOverlayContainer.init(p1) --[[ Line: 52 ]]
+	-- upvalues: ConstantsModule (copy), DiscoverabilityAnalytics (copy), AnalyticsModule (copy), PermissionsProtocol (copy), TextKeysModule (copy), UpdateOptedInUsers (copy), AppStorageService (copy), EnumScreens (copy), Promise (copy)
+	p1.isFromAddFriendsPage = p1.props.navigation.getParam(ConstantsModule.IS_FROM_ADD_FRIENDS_PAGE, false)
+	p1.entryPoint = if p1.isFromAddFriendsPage then DiscoverabilityAnalytics.EntryPoints.AddFriends else DiscoverabilityAnalytics.EntryPoints.HomePage
+	p1.fireAnalyticsEvent = AnalyticsModule.setupFireAnalyticsEvents({
+		analytics = AnalyticsModule.AnalyticsService,
 		defaultAnalyticsInfo = { entry = p1.entryPoint }
 	})
-	local param = p1.props.navigation.getParam(constantsModule.OPEN_AMP_UPSELL)
+	local Param = p1.props.navigation.getParam(ConstantsModule.OPEN_AMP_UPSELL)
 	
-	function p1.checkOrRequestContactsPermissions()
-		-- upvalues: p1 (ref), permissionsProtocol (copy)
-		return p1.props.checkOrRequestPermissions({ permissionsProtocol.Permissions.CONTACTS_ACCESS })
+	function p1.checkOrRequestContactsPermissions() --[[ Line: 67 ]]
+		-- upvalues: p1 (copy), PermissionsProtocol (upval)
+		return p1.props.checkOrRequestPermissions({ PermissionsProtocol.Permissions.CONTACTS_ACCESS })
 	end
 	
-	function p1.failedToUpload(_)
-		-- upvalues: p1 (ref), textKeysModule (copy)
-		p1.props.showToast(textKeysModule.CI_FAILED)
+	function p1:failedToUpload() --[[ Line: 74 ]]
+		-- upvalues: p1 (copy), TextKeysModule (upval)
+		p1.props.showToast(TextKeysModule.CI_FAILED)
 	end
 	
-	function p1.closeModal()
-		-- upvalues: p1 (ref)
+	function p1.closeModal() --[[ Line: 81 ]]
+		-- upvalues: p1 (copy)
 		p1.props.navigation.pop()
 	end
 	
-	function p1.permissionsFlowToContactImporter()
-		-- upvalues: p1 (ref), constantsModule (copy), permissionsProtocol (copy), updateOptedInUsers (copy), appStorageService (copy), enumScreens (copy), param (ref), promise (copy)
-		local props = p1.props
-		local navigation = props.navigation
-		local param_1 = navigation.getParam(constantsModule.IS_FROM_SIGNUP)
-		p1.checkOrRequestContactsPermissions():andThen(function(p2)
-			-- upvalues: permissionsProtocol (copy), updateOptedInUsers (copy), appStorageService (copy), props (ref), param_1 (ref), navigation (ref), enumScreens (copy), constantsModule (copy), param (copy), p1 (copy), promise (copy)
-			if p2 == permissionsProtocol.Status.AUTHORIZED then
-				updateOptedInUsers:addUserToLocalStorage(appStorageService, props.localUserId)
+	function p1.permissionsFlowToContactImporter() --[[ Line: 85 ]]
+		-- upvalues: p1 (copy), ConstantsModule (upval), PermissionsProtocol (upval), UpdateOptedInUsers (upval), AppStorageService (upval), EnumScreens (upval), Param (copy), Promise (upval)
+		local Props = p1.props
+		local Navigation = Props.navigation
+		local Param1 = Navigation.getParam(ConstantsModule.IS_FROM_SIGNUP)
+		p1.checkOrRequestContactsPermissions():andThen(function(Result) --[[ Line: 91 ]]
+			-- upvalues: PermissionsProtocol (upval), UpdateOptedInUsers (upval), AppStorageService (upval), Props (copy), Param1 (copy), Navigation (copy), EnumScreens (upval), ConstantsModule (upval), Param (upval), p1 (upval), Promise (upval)
+			if Result == PermissionsProtocol.Status.AUTHORIZED then
+				UpdateOptedInUsers:addUserToLocalStorage(AppStorageService, Props.localUserId)
 				
-				if param_1 then
-					props.updateUserSettings()
-					props.navigation.pop()
+				if Param1 then
+					Props.updateUserSettings()
+					Props.navigation.pop()
 				else
-					props.hideContactImporterModal()
-					navigation.replace(enumScreens.ContactsList, {
-						[constantsModule.SHOULD_UPDATE_USER_SETTINGS] = true,
-						[constantsModule.IS_PHONE_VERIFIED] = navigation.getParam(constantsModule.IS_PHONE_VERIFIED),
-						[constantsModule.OPEN_LEARN_MORE_LINK] = navigation.getParam(constantsModule.OPEN_LEARN_MORE_LINK),
-						openAmpUpsell = param,
+					Props.hideContactImporterModal()
+					Navigation.replace(EnumScreens.ContactsList, {
+						[ConstantsModule.SHOULD_UPDATE_USER_SETTINGS] = true,
+						[ConstantsModule.IS_PHONE_VERIFIED] = Navigation.getParam(ConstantsModule.IS_PHONE_VERIFIED),
+						[ConstantsModule.OPEN_LEARN_MORE_LINK] = Navigation.getParam(ConstantsModule.OPEN_LEARN_MORE_LINK),
+						openAmpUpsell = Param,
 						entryPoint = p1.entryPoint
 					})
 				end
-				return promise.resolve()
-			elseif p2 == permissionsProtocol.Status.DENIED then
-				navigation.replace(enumScreens.ContactsRevokedAccessDialog, {
-					screenSize = props.screenSize,
+				return Promise.resolve()
+			elseif Result == PermissionsProtocol.Status.DENIED then
+				Navigation.replace(EnumScreens.ContactsRevokedAccessDialog, {
+					screenSize = Props.screenSize,
 					closeModal = p1.closeModal
 				})
 				
-				return promise.resolve()
+				return Promise.resolve()
+			else
+				return Promise.reject()
 			end
-			return promise.reject()
 		end):catch(p1.failedToUpload)
 	end
 	
-	function p1.checkDiscoverability(p2)
-		-- upvalues: p1 (ref), constantsModule (copy)
-		return p2 and p1.props.navigation.getParam(constantsModule.IS_PHONE_VERIFIED)
+	function p1.checkDiscoverability(IsDiscoverabilityUnsetParam) --[[ Line: 122 ]]
+		-- upvalues: p1 (copy), ConstantsModule (upval)
+		local Param = p1.props.navigation.getParam(ConstantsModule.IS_PHONE_VERIFIED)
+		
+		return IsDiscoverabilityUnsetParam and Param
 	end
 	
-	function p1.onConnectContacts()
-		-- upvalues: p1 (ref), analyticsModule (copy)
-		local isDiscoverabilityUnset = p1.props.navigation.getParam("isDiscoverabilityUnset")
-		p1.fireAnalyticsEvent(analyticsModule.EventNames.ContactImportModalContinue)
+	function p1.onConnectContacts() --[[ Line: 128 ]]
+		-- upvalues: p1 (copy), AnalyticsModule (upval)
+		local IsDiscoverabilityUnsetParam = p1.props.navigation.getParam("isDiscoverabilityUnset")
+		p1.fireAnalyticsEvent(AnalyticsModule.EventNames.ContactImportModalContinue)
 		
-		if p1.checkDiscoverability(isDiscoverabilityUnset) then
+		if p1.checkDiscoverability(IsDiscoverabilityUnsetParam) then
 			p1.navigateToDiscoverabilityModal()
 			
 			return
+		else
+			p1.permissionsFlowToContactImporter()
 		end
-		p1.permissionsFlowToContactImporter()
 	end
 	
-	function p1.navigateToDiscoverabilityModal()
-		-- upvalues: p1 (ref), enumScreens (copy)
-		local props = p1.props
-		local navigation = props.navigation
-		props.getUserSettingsMetadata():andThen(function()
-			-- upvalues: navigation (ref), enumScreens (copy), p1 (copy)
-			navigation.replace(enumScreens.DiscoverabilityOverlay, { entryPoint = p1.entryPoint })
+	function p1.navigateToDiscoverabilityModal() --[[ Line: 140 ]]
+		-- upvalues: p1 (copy), EnumScreens (upval)
+		local Props = p1.props
+		local Navigation = Props.navigation
+		Props.getUserSettingsMetadata():andThen(function() --[[ Line: 144 ]]
+			-- upvalues: Navigation (copy), EnumScreens (upval), p1 (upval)
+			Navigation.replace(EnumScreens.DiscoverabilityOverlay, { entryPoint = p1.entryPoint })
 		end)
 	end
 	
-	function p1.onAddFriendsActivated()
-		-- upvalues: p1 (ref), analyticsModule (copy), enumScreens (copy)
-		local props = p1.props
-		p1.fireAnalyticsEvent(analyticsModule.EventNames.ContactImportModalAddFriends)
-		props.navigation.replace(enumScreens.AddFriendsPage)
+	function p1.onAddFriendsActivated() --[[ Line: 151 ]]
+		-- upvalues: p1 (copy), AnalyticsModule (upval), EnumScreens (upval)
+		local Props = p1.props
+		p1.fireAnalyticsEvent(AnalyticsModule.EventNames.ContactImportModalAddFriends)
+		Props.navigation.replace(EnumScreens.AddFriendsPage)
 	end
 	
-	function p1.onCloseClicked()
-		-- upvalues: p1 (ref), analyticsModule (copy)
-		local props = p1.props
-		p1.fireAnalyticsEvent(analyticsModule.EventNames.ContactImportModalClose)
-		props.navigation.pop()
+	function p1.onCloseClicked() --[[ Line: 158 ]]
+		-- upvalues: p1 (copy), AnalyticsModule (upval)
+		local Props = p1.props
+		p1.fireAnalyticsEvent(AnalyticsModule.EventNames.ContactImportModalClose)
+		Props.navigation.pop()
 	end
 	
-	function p1.onLearnMoreClick()
-		-- upvalues: p1 (ref)
+	function p1.onLearnMoreClick() --[[ Line: 164 ]]
+		-- upvalues: p1 (copy)
 		p1.props.openLearnMoreLink()
 	end
 end
 
-function contactsImporterOverlayContainer.didMount(p1)
-	-- upvalues: analyticsModule (ref), contactImporterModalInfoUpdaterModule (ref), appStorageService (ref)
-	p1.fireAnalyticsEvent(analyticsModule.EventNames.ContactImportModalPageLoad)
-	contactImporterModalInfoUpdaterModule:addSeenCount(appStorageService, p1.props.localUserId)
-	contactImporterModalInfoUpdaterModule:updateTimestamp(appStorageService, p1.props.localUserId, DateTime.now().UnixTimestampMillis)
+function ContactsImporterOverlayContainer.didMount(p1) --[[ Line: 171 ]]
+	-- upvalues: AnalyticsModule (copy), ContactImporterModalInfoUpdaterModule (copy), AppStorageService (copy)
+	p1.fireAnalyticsEvent(AnalyticsModule.EventNames.ContactImportModalPageLoad)
+	ContactImporterModalInfoUpdaterModule:addSeenCount(AppStorageService, p1.props.localUserId)
+	ContactImporterModalInfoUpdaterModule:updateTimestamp(AppStorageService, p1.props.localUserId, DateTime.now().UnixTimestampMillis)
 end
 
-function contactsImporterOverlayContainer.render(p1)
-	-- upvalues: constantsModule (ref), roact (ref), contactsImporterOverlayModule (ref)
-	local props = p1.props
-	local navigation = props.navigation
+function ContactsImporterOverlayContainer.render(p1) --[[ Line: 183 ]]
+	-- upvalues: ConstantsModule (copy), Roact (copy), ContactsImporterOverlayModule (copy)
+	local Props = p1.props
+	local Navigation = Props.navigation
+	local Param = p1.props.navigation.getParam(ConstantsModule.IS_FROM_SIGNUP)
 	
-	return roact.createElement(contactsImporterOverlayModule, {
-		screenSize = props.screenSize,
+	return Roact.createElement(ContactsImporterOverlayModule, {
+		screenSize = Props.screenSize,
 		onCloseClicked = p1.onCloseClicked,
 		onAddFriendsActivated = p1.onAddFriendsActivated,
 		onConnectContacts = p1.onConnectContacts,
 		onLearnMoreClick = p1.onLearnMoreClick,
-		isFromAddFriendsPage = navigation.getParam(constantsModule.IS_FROM_ADD_FRIENDS_PAGE, false),
-		isFromSignup = if navigation.getParam(constantsModule.IS_FROM_SOCIAL_ONBOARDING_BUTTONS) then true else p1.props.navigation.getParam(constantsModule.IS_FROM_SIGNUP)
+		isFromAddFriendsPage = Navigation.getParam(ConstantsModule.IS_FROM_ADD_FRIENDS_PAGE, false),
+		isFromSignup = if Navigation.getParam(ConstantsModule.IS_FROM_SOCIAL_ONBOARDING_BUTTONS) then true else Param
 	})
 end
 
-return roactRodux.connect(function(p1)
-	-- upvalues: selectors (ref)
+return RoactRodux.connect(function(p1) --[[ Line: 201 ]]
+	-- upvalues: Selectors (copy)
 	return {
-		contacts = selectors.sortContacts(p1),
+		contacts = Selectors.sortContacts(p1),
 		localUserId = p1.LocalUserId,
 		screenSize = p1.ScreenSize
 	}
-end, mapDispatchToPropsModule)(contactsImporterOverlayContainer)
+end, MapDispatchToPropsModule)(ContactsImporterOverlayContainer)

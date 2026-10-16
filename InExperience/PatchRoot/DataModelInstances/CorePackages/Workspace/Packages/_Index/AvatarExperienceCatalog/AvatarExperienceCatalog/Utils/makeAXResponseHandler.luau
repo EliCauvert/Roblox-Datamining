@@ -1,30 +1,33 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local parent = avatarExperienceCatalog.Parent
-local avatarExperienceAnalyticsModule = require(parent.AvatarExperienceAnalytics)
-local sendAXStat = avatarExperienceAnalyticsModule.sendAXStat
-local analyticsService = avatarExperienceAnalyticsModule.AnalyticsService
-local _ = require(parent.LuauPolyfill)
-local fFlagAXSendModelMismatchCounterModule = require(avatarExperienceCatalog.Flags.FFlagAXSendModelMismatchCounter)
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local Parent = AvatarExperienceCatalog.Parent
+local AvatarExperienceAnalyticsModule = require(Parent.AvatarExperienceAnalytics)
+local SendAXStatFunction = AvatarExperienceAnalyticsModule.sendAXStat
+local AnalyticsService = AvatarExperienceAnalyticsModule.AnalyticsService
+local _ = require(Parent.LuauPolyfill)
+local FFlagAXSendModelMismatchCounterModule = require(AvatarExperienceCatalog.Flags.FFlagAXSendModelMismatchCounter)
 
-return function(p1, p2, p3)
-	-- upvalues: sendAXStat (ref), fFlagAXSendModelMismatchCounterModule (ref), analyticsService (ref)
-	local var1 = if p3 then p3.latencyCounter else nil
-	local var2 = if p3 then p3.modelMismatchCounter else nil
-	local var3 = if var1 then os.clock() else nil
+return function(Promise, Callback, p1) --[[ Line: 11 | Named "makeAXResponseHandler" ]]
+	-- upvalues: SendAXStatFunction (copy), FFlagAXSendModelMismatchCounterModule (copy), AnalyticsService (copy)
+	local LatencyCounter = if p1 then p1.latencyCounter else nil
+	local ModelMismatchCounter = if p1 then p1.modelMismatchCounter else nil
+	local ClockTime = if LatencyCounter then os.clock() else nil
 	
-	return p1:andThen(function(p4)
-		-- upvalues: var1 (ref), var3 (ref), sendAXStat (copy), p2 (ref), fFlagAXSendModelMismatchCounterModule (copy), var2 (ref), analyticsService (copy)
-		if var1 and var3 then
-			sendAXStat({ statName = var1, deltaMs = (os.clock() - var3) * 1000 })
+	return (Promise:andThen(function(Result) --[[ Line: 23 ]]
+		-- upvalues: LatencyCounter (copy), ClockTime (copy), SendAXStatFunction (upval), Callback (copy), FFlagAXSendModelMismatchCounterModule (upval), ModelMismatchCounter (copy), AnalyticsService (upval)
+		if LatencyCounter and ClockTime then
+			SendAXStatFunction({
+				statName = LatencyCounter,
+				deltaMs = (os.clock() - ClockTime) * 1000
+			})
 		end
-		local var4, var5 = p2(if p4 then p4.responseBody else nil)
+		local CallbackResult, CallbackResult2 = Callback(if Result then Result.responseBody else nil)
 		
-		if var5 then
-			if fFlagAXSendModelMismatchCounterModule and var2 then
-				analyticsService.EventStream:sendEventDeferred(var2, "marketplaceModelMismatchMetric", {})
+		if CallbackResult2 then
+			if FFlagAXSendModelMismatchCounterModule and ModelMismatchCounter then
+				AnalyticsService.EventStream:sendEventDeferred(ModelMismatchCounter, "marketplaceModelMismatchMetric", {})
 			end
-			warn(var5)
+			warn(CallbackResult2)
 		end
-		return var4
-	end)
+		return CallbackResult
+	end))
 end

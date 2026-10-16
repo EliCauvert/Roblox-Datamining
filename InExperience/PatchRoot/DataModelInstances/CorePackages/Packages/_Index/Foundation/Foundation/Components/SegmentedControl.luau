@@ -1,1 +1,1 @@
-﻿return require(script.SegmentedControl)
+﻿return (require(script.SegmentedControl))

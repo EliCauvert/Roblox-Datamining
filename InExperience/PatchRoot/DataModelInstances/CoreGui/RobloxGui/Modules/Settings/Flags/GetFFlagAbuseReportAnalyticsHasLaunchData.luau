@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("LuaAppAbuseReportAnalyticsHasLaunchData", false)
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastFlag("LuaAppAbuseReportAnalyticsHasLaunchData")
 end

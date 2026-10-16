@@ -1,107 +1,104 @@
-﻿local avatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
-local parent = avatarExperienceProfilePictureEditor.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local localizationModule = require(parent.Localization)
-local avatarExperienceUIKitModule = require(parent.AvatarExperienceUIKit)
-local view = foundationModule.View
-local scrollView = foundationModule.ScrollView
-local visibility = foundationModule.Enums.Visibility
-local radius = foundationModule.Enums.Radius
-local useTokens = foundationModule.Hooks.useTokens
-local useLocalization = localizationModule.Hooks.useLocalization
-local sectionTitleModule = require(avatarExperienceProfilePictureEditor.Components.SectionTitle.SectionTitle)
-local sectionTitleWithActionModule = require(avatarExperienceProfilePictureEditor.Components.SectionTitle.SectionTitleWithAction)
-local assetPickerErrorBodyModule = require(script.Parent.AssetPickerErrorBody)
-local assetPickerTileModule = require(script.Parent.AssetPickerTile)
-local _ = require(avatarExperienceProfilePictureEditor.Utils.getAssetPickerStatus)
-local textKeysModule = require(avatarExperienceProfilePictureEditor.Common.TextKeys)
-local widgetLayout = avatarExperienceUIKitModule.WidgetComponents.WidgetLayout
-local itemCardThumbnailSkeleton = avatarExperienceUIKitModule.ItemCardComponents.ItemCardThumbnailSkeleton
+﻿local AvatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
+local Parent = AvatarExperienceProfilePictureEditor.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local AvatarExperienceUIKitModule = require(Parent.AvatarExperienceUIKit)
+local View = FoundationModule.View
+local ScrollView = FoundationModule.ScrollView
+local Visibility = FoundationModule.Enums.Visibility
+local Radius = FoundationModule.Enums.Radius
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local SectionTitleModule = require(AvatarExperienceProfilePictureEditor.Components.SectionTitle.SectionTitle)
+local SectionTitleWithActionModule = require(AvatarExperienceProfilePictureEditor.Components.SectionTitle.SectionTitleWithAction)
+local AssetPickerErrorBodyModule = require(script.Parent.AssetPickerErrorBody)
+local AssetPickerTileModule = require(script.Parent.AssetPickerTile)
+local _ = require(AvatarExperienceProfilePictureEditor.Utils.getAssetPickerStatus)
+local TextKeysModule = require(AvatarExperienceProfilePictureEditor.Common.TextKeys)
+local WidgetLayout = AvatarExperienceUIKitModule.WidgetComponents.WidgetLayout
+local ItemCardThumbnailSkeleton = AvatarExperienceUIKitModule.ItemCardComponents.ItemCardThumbnailSkeleton
 
-return function(value)
-	-- upvalues: useTokens (ref), useLocalization (ref), textKeysModule (ref), reactModule (ref), view (ref), assetPickerTileModule (ref), assetPickerErrorBodyModule (ref), itemCardThumbnailSkeleton (ref), radius (ref), scrollView (ref), visibility (ref), widgetLayout (ref), sectionTitleWithActionModule (ref), sectionTitleModule (ref)
-	local status = value.status or "ready"
-	local var1 = useTokens()
-	local var2 = useLocalization({ details = textKeysModule.DetailsButton })
-	local tileSize = value.tileSize
-	local shimmerTileCount = value.shimmerTileCount or 8
-	local var3 = reactModule.useMemo(function()
-		-- upvalues: var2 (ref)
-		return { details = var2.details }
-	end, { var2.details })
-	local var4 = reactModule.useMemo(function()
-		-- upvalues: value (ref), reactModule (copy), view (copy), tileSize (ref), assetPickerTileModule (copy), var3 (ref)
-		local t = {}
+return function(p1) --[[ Line: 48 | Named "AssetPickerCarousel" ]]
+	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), View (copy), AssetPickerTileModule (copy), AssetPickerErrorBodyModule (copy), ItemCardThumbnailSkeleton (copy), Radius (copy), ScrollView (copy), Visibility (copy), WidgetLayout (copy), SectionTitleWithActionModule (copy), SectionTitleModule (copy)
+	local Status = p1.status or "ready"
+	local UseTokensResult = UseTokensFunction()
+	local UseLocalizationResult = UseLocalizationFunction({ details = TextKeysModule.DetailsButton })
+	local TileSize = p1.tileSize
+	local ShimmerTileCount = p1.shimmerTileCount or 8
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 56 ]]
+		-- upvalues: UseLocalizationResult (copy)
+		return { details = UseLocalizationResult.details }
+	end, { UseLocalizationResult.details })
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 63 ]]
+		-- upvalues: p1 (copy), ReactModule (upval), View (upval), TileSize (copy), AssetPickerTileModule (upval), UseMemoResult (copy)
+		local Elements = {}
 		
-		for i, v in value.items do
-			t["Asset_" .. v.id] = reactModule.createElement(view, {
+		for LayoutOrder, item in p1.items do
+			Elements["Asset_" .. item.id] = ReactModule.createElement(View, {
 				tag = "size-full-0 auto-y",
-				Size = UDim2.fromOffset(tileSize, 0),
+				Size = UDim2.fromOffset(TileSize, 0),
 				AutomaticSize = Enum.AutomaticSize.Y,
-				LayoutOrder = i
+				LayoutOrder = LayoutOrder
 			}, {
-				Tile = reactModule.createElement(assetPickerTileModule, {
-					item = v,
-					selectedId = value.selectedId,
-					onSelect = value.onSelect,
-					onDetailsActivated = value.onDetailsActivated,
-					labels = var3
+				Tile = ReactModule.createElement(AssetPickerTileModule, {
+					item = item,
+					selectedId = p1.selectedId,
+					onSelect = p1.onSelect,
+					onDetailsActivated = p1.onDetailsActivated,
+					labels = UseMemoResult
 				})
 			})
 		end
-		if value.trailingCarouselComponent then
-			t.Trailing = value.trailingCarouselComponent
+		if p1.trailingCarouselComponent then
+			Elements.Trailing = p1.trailingCarouselComponent
 		end
-		return t
+		return Elements
 	end, {
-		value.items, value.selectedId, tileSize, value.onSelect,
-		value.onDetailsActivated, var3, value.trailingCarouselComponent
+		p1.items, p1.selectedId, TileSize, p1.onSelect, p1.onDetailsActivated,
+		UseMemoResult, p1.trailingCarouselComponent
 	})
-	local title = value.title or ""
-	local var5 = status == "ready" and value.onTitleActivated ~= nil
-	local var6 = 1
+	local Title = p1.title or ""
+	local HasOnTitleActivated: boolean = Status == "ready" and p1.onTitleActivated ~= nil
+	local LayoutOrder = 1
 	local t = {}
 	
-	if value.bannerComponent then
-		t.Banner = reactModule.createElement(view, { tag = "size-full-0 auto-y", LayoutOrder = var6 }, { Banner = value.bannerComponent })
-		var6 += 1
+	if p1.bannerComponent then
+		t.Banner = ReactModule.createElement(View, { tag = "size-full-0 auto-y", LayoutOrder = LayoutOrder }, { Banner = p1.bannerComponent })
+		LayoutOrder += 1
 	end
-	if status == "error" then
-		t.Error = reactModule.createElement(assetPickerErrorBodyModule, { onRetry = value.onRetry, layoutOrder = var6 })
+	if Status == "error" then
+		t.Error = ReactModule.createElement(AssetPickerErrorBodyModule, { onRetry = p1.onRetry, layoutOrder = LayoutOrder })
 	else
-		local t_1
-		local _ = nil
-		
-		if status == "loading" then
-			t_1 = {}
+		local Elements = nil
+		if Status == "loading" then
+			Elements = {}
 			
-			for i = 1, shimmerTileCount do
-				t_1["Shimmer_" .. i] = reactModule.createElement(itemCardThumbnailSkeleton, {
-					Size = UDim2.fromOffset(tileSize, tileSize),
-					radius = radius.Medium,
+			for i = 1, ShimmerTileCount do
+				Elements["Shimmer_" .. i] = ReactModule.createElement(ItemCardThumbnailSkeleton, {
+					Size = UDim2.fromOffset(TileSize, TileSize),
+					radius = Radius.Medium,
 					LayoutOrder = i
 				})
 			end
 		else
-			t_1 = var4
+			Elements = UseMemoResult1
 		end
-		local cloned = table.clone(t_1)
-		cloned.CarouselStrokeInset = reactModule.createElement("UIPadding", {
-			PaddingTop = UDim.new(0, var1.Padding.XSmall),
-			PaddingBottom = UDim.new(0, var1.Padding.XSmall),
-			PaddingLeft = UDim.new(0, var1.Padding.XSmall),
-			PaddingRight = UDim.new(0, var1.Padding.XSmall)
+		local Copy = table.clone(Elements)
+		Copy.CarouselStrokeInset = ReactModule.createElement("UIPadding", {
+			PaddingTop = UDim.new(0, UseTokensResult.Padding.XSmall),
+			PaddingBottom = UDim.new(0, UseTokensResult.Padding.XSmall),
+			PaddingLeft = UDim.new(0, UseTokensResult.Padding.XSmall),
+			PaddingRight = UDim.new(0, UseTokensResult.Padding.XSmall)
 		})
-		t.List = reactModule.createElement(scrollView, {
+		t.List = ReactModule.createElement(ScrollView, {
 			tag = "size-full-0 auto-y",
 			testId = "asset-picker-carousel-scroll",
-			LayoutOrder = var6,
+			LayoutOrder = LayoutOrder,
 			selection = { Selectable = false },
 			layout = {
 				FillDirection = Enum.FillDirection.Horizontal,
 				VerticalAlignment = Enum.VerticalAlignment.Top,
-				Padding = UDim.new(0, var1.Gap.Medium),
+				Padding = UDim.new(0, UseTokensResult.Gap.Medium),
 				SortOrder = Enum.SortOrder.LayoutOrder
 			},
 			scroll = {
@@ -109,25 +106,22 @@ return function(value)
 				AutomaticSize = Enum.AutomaticSize.Y,
 				AutomaticCanvasSize = Enum.AutomaticSize.X,
 				CanvasSize = UDim2.fromScale(0, 0),
-				scrollBarVisibility = visibility.None
+				scrollBarVisibility = Visibility.None
 			}
-		}, cloned)
+		}, Copy)
 	end
-	return reactModule.createElement(widgetLayout, {
-		LayoutOrder = value.layoutOrder,
+	return ReactModule.createElement(WidgetLayout, {
+		LayoutOrder = p1.layoutOrder,
 		padding = {
-			left = UDim.new(0, var1.Padding.XLarge),
-			right = UDim.new(0, var1.Padding.XLarge)
+			left = UDim.new(0, UseTokensResult.Padding.XLarge),
+			right = UDim.new(0, UseTokensResult.Padding.XLarge)
 		},
-		headerSlot = if title ~= "" then nil elseif var5 then reactModule.createElement(sectionTitleWithActionModule, {
+		headerSlot = if Title == "" then nil elseif HasOnTitleActivated then ReactModule.createElement(SectionTitleWithActionModule, {
 			variant = "expand",
-			title = title,
-			leadingIconName = value.titleLeadingIconName,
-			onActivated = value.onTitleActivated
-		}) else reactModule.createElement(sectionTitleModule, {
-			title = title,
-			leadingIconName = value.titleLeadingIconName
-		}),
-		contentSlot = reactModule.createElement(view, { tag = "col gap-small size-full-0 auto-y" }, t)
+			title = Title,
+			leadingIconName = p1.titleLeadingIconName,
+			onActivated = p1.onTitleActivated
+		}) else ReactModule.createElement(SectionTitleModule, { title = Title, leadingIconName = p1.titleLeadingIconName }),
+		contentSlot = ReactModule.createElement(View, { tag = "col gap-small size-full-0 auto-y" }, t)
 	})
 end

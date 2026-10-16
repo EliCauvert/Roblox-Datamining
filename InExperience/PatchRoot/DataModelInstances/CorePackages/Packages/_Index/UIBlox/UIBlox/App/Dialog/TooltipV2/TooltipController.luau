@@ -1,147 +1,152 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
-local parent_2 = parent_1.Parent.Parent
-local parent_3 = parent_2.Parent
-local reactModule = require(parent_3.React)
-local portal = require(parent_3.Roact).Portal
-local luauPolyfillModule = require(parent_3.LuauPolyfill)
-local _ = require(parent.Types)
-local constantsModule = require(parent.Constants)
-local withAnimationModule = require(parent_2.Core.Animation.withAnimation)
-local tooltipCalloutModule = require(parent.TooltipCallout)
-local tooltipOrientationModule = require(parent_1.Tooltip.Enum.TooltipOrientation)
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
+local Parent2 = Parent1.Parent.Parent
+local Parent3 = Parent2.Parent
+local ReactModule = require(Parent3.React)
+local Portal = require(Parent3.Roact).Portal
+local LuauPolyfillModule = require(Parent3.LuauPolyfill)
+local _ = require(Parent.Types)
+local ConstantsModule = require(Parent.Constants)
+local WithAnimationModule = require(Parent2.Core.Animation.withAnimation)
+local TooltipCalloutModule = require(Parent.TooltipCallout)
+local TooltipOrientationModule = require(Parent1.Tooltip.Enum.TooltipOrientation)
 
-local function argmax(a, b)
-	local var1 = nil
+local function argmax(List, p1) --[[ Line: 19 ]]
+	local v1 = nil
 	
-	for i, v in pairs(a) do
-		if not b[i] and (var1 == nil or a[var1] < v) then
-			var1 = i
+	for i, value in pairs(List) do
+		if not p1[i] and (v1 == nil or List[v1] < value) then
+			v1 = i
 		end
 	end
-	return var1
+	return v1
 end
 
-local function getDistances(p1, p2)
-	-- upvalues: tooltipOrientationModule (ref), constantsModule (ref)
+local function getDistances(Vector, Vector1) --[[ Line: 32 ]]
+	-- upvalues: TooltipOrientationModule (copy), ConstantsModule (copy)
 	return {
-		[tooltipOrientationModule.Top] = p1.Y - constantsModule.SCREEN_MARGIN,
-		[tooltipOrientationModule.Bottom] = p2.Y - p1.Y - constantsModule.SCREEN_MARGIN,
-		[tooltipOrientationModule.Left] = p1.X - constantsModule.SCREEN_MARGIN,
-		[tooltipOrientationModule.Right] = p2.X - p1.X - constantsModule.SCREEN_MARGIN
+		[TooltipOrientationModule.Top] = Vector.Y - ConstantsModule.SCREEN_MARGIN,
+		[TooltipOrientationModule.Bottom] = Vector1.Y - Vector.Y - ConstantsModule.SCREEN_MARGIN,
+		[TooltipOrientationModule.Left] = Vector.X - ConstantsModule.SCREEN_MARGIN,
+		[TooltipOrientationModule.Right] = Vector1.X - Vector.X - ConstantsModule.SCREEN_MARGIN
 	}
 end
 
-function getOrientationAndContentOffset(value, p1, p2, p3)
-	-- upvalues: argmax (ref), tooltipOrientationModule (ref), constantsModule (ref)
-	local var2
+function getOrientationAndContentOffset(OPPOSITEORIENTATIONEntry, p2, Vector, Vector1) --[[ Line: 43 ]]
+	-- upvalues: argmax (copy), TooltipOrientationModule (copy), ConstantsModule (copy)
 	local t = {}
-	local zero = Vector2.zero
+	local ZeroVector = Vector2.zero
+	local Right = nil
+	local v2 = nil
+	local Bottom = nil
+	local v3 = nil
 	while true do
-		if not value or t[value] then
-			local var3 = argmax(p1, t)
+		if not OPPOSITEORIENTATIONEntry or t[OPPOSITEORIENTATIONEntry] then
+			local ArgmaxResult = argmax(p2, t)
 			
-			if not var3 then break end
-			value = var3
+			if not ArgmaxResult then break end
+			OPPOSITEORIENTATIONEntry = ArgmaxResult
 		end
-		if value == tooltipOrientationModule.Top or value == tooltipOrientationModule.Bottom then
-			if p2.Y + constantsModule.DISTANCE_TO_CONTENT + p3.Y <= p1[value] then
-				local var4 = if p1[tooltipOrientationModule.Right] < p1[tooltipOrientationModule.Left] then tooltipOrientationModule.Right else tooltipOrientationModule.Left
-				var2 = p1[var4]
+		if OPPOSITEORIENTATIONEntry == TooltipOrientationModule.Top or OPPOSITEORIENTATIONEntry == TooltipOrientationModule.Bottom then
+			if Vector.Y + ConstantsModule.DISTANCE_TO_CONTENT + Vector1.Y <= p2[OPPOSITEORIENTATIONEntry] then
+				Right = if p2[TooltipOrientationModule.Right] < p2[TooltipOrientationModule.Left] then TooltipOrientationModule.Right else TooltipOrientationModule.Left
+				v2 = p2[Right]
 				
-				if constantsModule.MIN_DISTANCE_TO_CARET_MIDDLE <= var2 then
-					zero = math.max(0, p3.X / 2 - var2) * -1 * constantsModule.ORIENTATION_VECTOR[var4]
+				if ConstantsModule.MIN_DISTANCE_TO_CARET_MIDDLE <= v2 then
+					ZeroVector = math.max(0, Vector1.X / 2 - v2) * -1 * ConstantsModule.ORIENTATION_VECTOR[Right]
 					break
 				end
-				t[constantsModule.OPPOSITE_ORIENTATION[value]] = true
-				return value, zero
+				t[ConstantsModule.OPPOSITE_ORIENTATION[OPPOSITEORIENTATIONEntry]] = true
 			end
-		elseif p2.X + constantsModule.DISTANCE_TO_CONTENT + p3.X <= p1[value] then
-			local var5 = if p1[tooltipOrientationModule.Bottom] < p1[tooltipOrientationModule.Top] then tooltipOrientationModule.Bottom else tooltipOrientationModule.Top
-			var2 = p1[var5]
+		elseif Vector.X + ConstantsModule.DISTANCE_TO_CONTENT + Vector1.X <= p2[OPPOSITEORIENTATIONEntry] then
+			Bottom = if p2[TooltipOrientationModule.Bottom] < p2[TooltipOrientationModule.Top] then TooltipOrientationModule.Bottom else TooltipOrientationModule.Top
+			v3 = p2[Bottom]
 			
-			if constantsModule.MIN_DISTANCE_TO_CARET_MIDDLE <= var2 then
-				zero = math.max(0, p3.Y / 2 - var2) * -1 * constantsModule.ORIENTATION_VECTOR[var5]
+			if ConstantsModule.MIN_DISTANCE_TO_CARET_MIDDLE <= v3 then
+				ZeroVector = math.max(0, Vector1.Y / 2 - v3) * -1 * ConstantsModule.ORIENTATION_VECTOR[Bottom]
 				break
 			end
-			t[constantsModule.OPPOSITE_ORIENTATION[value]] = true
+			t[ConstantsModule.OPPOSITE_ORIENTATION[OPPOSITEORIENTATIONEntry]] = true
 		end
-		t[value] = true
-		value = constantsModule.OPPOSITE_ORIENTATION[value]
+		t[OPPOSITEORIENTATIONEntry] = true
+		OPPOSITEORIENTATIONEntry = ConstantsModule.OPPOSITE_ORIENTATION[OPPOSITEORIENTATIONEntry]
 	end
+	return OPPOSITEORIENTATIONEntry, ZeroVector
 end
 
-return function(p4)
-	-- upvalues: reactModule (ref), tooltipOrientationModule (ref), getDistances (ref), constantsModule (ref), luauPolyfillModule (ref), tooltipCalloutModule (ref), portal (ref), withAnimationModule (ref)
-	local var6, var7 = reactModule.useState(Vector2.zero)
-	local var8, var9 = reactModule.useState(Vector2.zero)
-	local var10, var11 = reactModule.useState(Vector2.zero)
-	local var12, var13 = reactModule.useState(Vector2.zero)
-	local var14, var15 = reactModule.useState(Vector2.zero)
-	local var16 = reactModule.useCallback(function(p5)
-		-- upvalues: var7 (ref), var9 (ref)
-		var7(p5.AbsolutePosition)
-		var9(p5.AbsoluteSize)
+return function(ScreenGui) --[[ Line: 106 | Named "TooltipController" ]]
+	-- upvalues: ReactModule (copy), TooltipOrientationModule (copy), getDistances (copy), ConstantsModule (copy), LuauPolyfillModule (copy), TooltipCalloutModule (copy), Portal (copy), WithAnimationModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.zero)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(Vector2.zero)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(Vector2.zero)
+	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(Vector2.zero)
+	local UseStateResult5, UseStateResult2_4 = ReactModule.useState(Vector2.zero)
+	local UseResult = ReactModule.useCallback(function(Frame: Frame) --[[ Line: 113 ]]
+		-- upvalues: UseStateResult2 (copy), UseStateResult2_1 (copy)
+		UseStateResult2(Frame.AbsolutePosition)
+		UseStateResult2_1(Frame.AbsoluteSize)
 	end)
 	
-	local var17 = function(p5)
-		-- upvalues: var13 (ref), var11 (ref)
-		if p5 then
-			var13(p5.AbsolutePosition)
-			var11(p5.AbsoluteSize)
+	local function Ref(Frame: Frame) --[[ Line: 119 ]]
+		-- upvalues: UseStateResult2_3 (copy), UseStateResult2_2 (copy)
+		if Frame then
+			UseStateResult2_3(Frame.AbsolutePosition)
+			UseStateResult2_2(Frame.AbsoluteSize)
 		end
 	end
 	
-	local var18 = var8 / 2
-	local var19 = var6 + var18 - var12
-	local preferredOrientation = p4.preferredOrientation or tooltipOrientationModule.Top
-	local var20, var21 = reactModule.useMemo(function()
-		-- upvalues: getDistances (copy), var19 (ref), var10 (ref), preferredOrientation (ref), var18 (ref), var14 (ref)
-		return getOrientationAndContentOffset(preferredOrientation, getDistances(var19, var10), var18, var14)
+	local UseStateResultRatio = UseStateResult1 / 2
+	local UseStateResultDelta = UseStateResult + UseStateResultRatio - UseStateResult4
+	local PreferredOrientation = ScreenGui.preferredOrientation or TooltipOrientationModule.Top
+	local UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 131 ]]
+		-- upvalues: getDistances (upval), UseStateResultDelta (copy), UseStateResult3 (copy), PreferredOrientation (copy), UseStateResultRatio (copy), UseStateResult5 (copy)
+		return getOrientationAndContentOffset(PreferredOrientation, getDistances(UseStateResultDelta, UseStateResult3), UseStateResultRatio, UseStateResult5)
 	end, {
-		preferredOrientation,
-		var10,
-		var19,
-		var18,
-		var14
+		PreferredOrientation,
+		UseStateResult3,
+		UseStateResultDelta,
+		UseStateResultRatio,
+		UseStateResult5
 	})
+	local Active = not ScreenGui.disabled and ScreenGui.active
 	
-	return reactModule.createElement(reactModule.Fragment, nil, {
-		Portal = withAnimationModule(if if p4.disabled then false else p4.active then constantsModule.ACTIVE_ANIMATION_TARGETS else constantsModule.INACTIVE_ANIMATION_TARGETS, function(p5)
-			-- upvalues: var20 (ref), var19 (ref), var18 (ref), var21 (ref), var15 (ref), luauPolyfillModule (copy), p4 (ref), reactModule (copy), tooltipCalloutModule (copy), var17 (ref), portal (copy)
-			if p5.transparency == 1 then
+	return ReactModule.createElement(ReactModule.Fragment, nil, {
+		Portal = WithAnimationModule(if Active then ConstantsModule.ACTIVE_ANIMATION_TARGETS else ConstantsModule.INACTIVE_ANIMATION_TARGETS, function(p3) --[[ Line: 142 | Named "renderWithAnimation" ]]
+			-- upvalues: UseMemoResult (copy), UseStateResultDelta (copy), UseStateResultRatio (copy), UseMemoResult2 (copy), UseStateResult2_4 (copy), LuauPolyfillModule (upval), ScreenGui (copy), ReactModule (upval), TooltipCalloutModule (upval), Ref (copy), Portal (upval)
+			if p3.transparency == 1 then
 				return nil
+			else
+				local config = {
+					Tooltip = ReactModule.createElement(TooltipCalloutModule, (LuauPolyfillModule.Object.assign({}, ScreenGui.tooltipProps, {
+						orientation = UseMemoResult,
+						triggerPointCenter = UseStateResultDelta,
+						triggerPointRadius = UseStateResultRatio,
+						contentOffsetVector = UseMemoResult2,
+						onContentSizeChanged = UseStateResult2_4,
+						distanceOffset = p3.distanceOffset,
+						transparency = p3.transparency
+					})))
+				}
+				
+				return ReactModule.createElement(Portal, { target = ScreenGui.guiTarget }, {
+					TooltipLayer = if ScreenGui.DEBUG_useTargetDirectly then ReactModule.createElement("Frame", {
+						ZIndex = ScreenGui.DisplayOrder,
+						Size = UDim2.fromScale(1, 1),
+						BackgroundTransparency = 1,
+						[ReactModule.Change.AbsoluteSize] = Ref,
+						[ReactModule.Change.AbsolutePosition] = Ref,
+						ref = Ref
+					}, config) else ReactModule.createElement("ScreenGui", {
+						ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
+						IgnoreGuiInset = true,
+						DisplayOrder = ScreenGui.DisplayOrder,
+						[ReactModule.Change.AbsoluteSize] = Ref,
+						[ReactModule.Change.AbsolutePosition] = Ref,
+						ref = Ref
+					}, config)
+				})
 			end
-			local t = {
-				Tooltip = reactModule.createElement(tooltipCalloutModule, luauPolyfillModule.Object.assign({}, p4.tooltipProps, {
-					orientation = var20,
-					triggerPointCenter = var19,
-					triggerPointRadius = var18,
-					contentOffsetVector = var21,
-					onContentSizeChanged = var15,
-					distanceOffset = p5.distanceOffset,
-					transparency = p5.transparency
-				}))
-			}
-			
-			return reactModule.createElement(portal, { target = p4.guiTarget }, {
-				TooltipLayer = if p4.DEBUG_useTargetDirectly then reactModule.createElement("Frame", {
-					ZIndex = p4.DisplayOrder,
-					Size = UDim2.fromScale(1, 1),
-					BackgroundTransparency = 1,
-					[reactModule.Change.AbsoluteSize] = var17,
-					[reactModule.Change.AbsolutePosition] = var17,
-					ref = var17
-				}, t) else reactModule.createElement("ScreenGui", {
-					ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
-					IgnoreGuiInset = true,
-					DisplayOrder = p4.DisplayOrder,
-					[reactModule.Change.AbsoluteSize] = var17,
-					[reactModule.Change.AbsolutePosition] = var17,
-					ref = var17
-				}, t)
-			})
-		end, constantsModule.ANIMATION_OPTIONS),
-		[p4.triggerPointName or "TriggerPoint"] = p4.renderTriggerPoint(var16)
+		end, ConstantsModule.ANIMATION_OPTIONS),
+		[ScreenGui.triggerPointName or "TriggerPoint"] = ScreenGui.renderTriggerPoint(UseResult)
 	})
 end

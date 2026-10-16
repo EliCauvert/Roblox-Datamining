@@ -1,47 +1,57 @@
-﻿local userList = script:FindFirstAncestor("UserList")
-local parent = userList.Parent
-local reactModule = require(parent.React)
-local friendsCommonModule = require(parent.FriendsCommon)
-local socialExperienceJoinModule = require(parent.SocialExperienceJoin)
-local _ = require(userList.Common.Types)
-local useGetPresenceByUserId = friendsCommonModule.Hooks.useGetPresenceByUserId
-local useJoinUserInExperience = socialExperienceJoinModule.useJoinUserInExperience
-local useCtaForRowModule = require(userList.Hooks.useCtaForRow)
-local useProfileCtaModule = require(userList.Hooks.useProfileCta)
-local fFlagUserListCanonicalCtaAnalyticsModule = require(userList.Flags.FFlagUserListCanonicalCtaAnalytics)
-local fFlagUserListComposeRenderRowWithCta = require(parent.SharedFlags).FFlagUserListComposeRenderRowWithCta
+﻿local UserList = script:FindFirstAncestor("UserList")
+local Parent = UserList.Parent
+local _ = require(UserList.Common.Types)
+local UseGetPresenceByUserIdFunction = require(Parent.FriendsCommon).Hooks.useGetPresenceByUserId
+local UseJoinUserInExperienceFunction = require(Parent.SocialExperienceJoin).useJoinUserInExperience
+local UseCtaForRowModule = require(UserList.Hooks.useCtaForRow)
+local UseProfileCtaModule = require(UserList.Hooks.useProfileCta)
+local ComposeCtaRowModule = require(script.Parent.composeCtaRow)
+local FFlagUserListCanonicalCtaAnalyticsModule = require(UserList.Flags.FFlagUserListCanonicalCtaAnalytics)
+local FFlagUserListComposeRenderRowWithCta = require(Parent.SharedFlags).FFlagUserListComposeRenderRowWithCta
+local FFlagUserListSurfaceExtensions = require(Parent.SharedFlags).FFlagUserListSurfaceExtensions
+local FFlagUserListSurfacePresenceWins = require(Parent.SharedFlags).FFlagUserListSurfacePresenceWins
 
-return reactModule.memo(function(p1)
-	-- upvalues: useProfileCtaModule (ref), useGetPresenceByUserId (ref), useJoinUserInExperience (ref), useCtaForRowModule (ref), fFlagUserListCanonicalCtaAnalyticsModule (ref), fFlagUserListComposeRenderRowWithCta (ref)
-	local id = p1.entity.id
-	local var1, var2 = useProfileCtaModule(id)
-	local var3 = useGetPresenceByUserId(id)
-	local var4 = useCtaForRowModule(var1, var2, p1.actionHandlers, id, p1.ctaConfig, useJoinUserInExperience(id, { presence = var3 }), if fFlagUserListCanonicalCtaAnalyticsModule then p1.index else nil)
-	local ctaConfig = p1.ctaConfig
-	local var5 = if var4.isLoading and (ctaConfig ~= nil and (ctaConfig.showLoadingPlaceholder ~= false and ctaConfig.primaryCtaMinWidth ~= nil)) and ctaConfig then {
-		minWidth = ctaConfig.primaryCtaMinWidth,
-		maxWidth = ctaConfig.primaryCtaMaxWidth
-	} else nil
-	local renderRow = p1.renderRow
+return require(Parent.React).memo(function(p1) --[[ Line: 41 | Named "CtaRow" ]]
+	-- upvalues: UseProfileCtaModule (copy), UseGetPresenceByUserIdFunction (copy), UseJoinUserInExperienceFunction (copy), UseCtaForRowModule (copy), FFlagUserListCanonicalCtaAnalyticsModule (copy), FFlagUserListSurfaceExtensions (copy), ComposeCtaRowModule (copy), FFlagUserListComposeRenderRowWithCta (copy), FFlagUserListSurfacePresenceWins (copy)
+	local Id = p1.entity.id
+	local UseProfileCtaModuleResult, UseProfileCtaModuleResult2 = UseProfileCtaModule(Id)
+	local UseGetPresenceByUserIdResult = UseGetPresenceByUserIdFunction(Id)
+	local UseCtaForRowModuleResult = UseCtaForRowModule(UseProfileCtaModuleResult, UseProfileCtaModuleResult2, p1.actionHandlers, Id, p1.ctaConfig, UseJoinUserInExperienceFunction(Id, { presence = UseGetPresenceByUserIdResult }), if FFlagUserListCanonicalCtaAnalyticsModule then p1.index else nil)
 	
-	if fFlagUserListComposeRenderRowWithCta and renderRow then
-		local createRow = p1.createRow
-		
-		return renderRow(function(p2)
-			-- upvalues: var3 (ref), var4 (ref), var5 (ref), createRow (ref)
-			local cloned = table.clone(p2)
-			cloned.presence = if var3 then var3.userPresenceType else nil
-			cloned.primaryCta = var4.primaryCta
-			cloned.secondaryCta = var4.secondaryCta
-			cloned.ctaLoading = var5
-			
-			return createRow(cloned)
-		end, p1.entity, p1.index or 0)
+	if FFlagUserListSurfaceExtensions then
+		return ComposeCtaRowModule(p1, p1.ctaConfig, UseGetPresenceByUserIdResult, UseCtaForRowModuleResult)
 	end
-	return p1.createRow({
-		presence = if var3 then var3.userPresenceType else nil,
-		primaryCta = var4.primaryCta,
-		secondaryCta = var4.secondaryCta,
-		ctaLoading = var5
-	})
+	local CtaConfig = p1.ctaConfig
+	local HasPrimaryCtaMinWidth: boolean = CtaConfig ~= nil and (CtaConfig.showLoadingPlaceholder ~= false and CtaConfig.primaryCtaMinWidth ~= nil)
+	local Config = if UseCtaForRowModuleResult.isLoading and HasPrimaryCtaMinWidth and CtaConfig then {
+		minWidth = CtaConfig.primaryCtaMinWidth,
+		maxWidth = CtaConfig.primaryCtaMaxWidth
+	} else nil
+	local RenderRowFunction = p1.renderRow
+	
+	if FFlagUserListComposeRenderRowWithCta and RenderRowFunction then
+		local CreateRowFunction = p1.createRow
+		
+		return RenderRowFunction(function(Tbl) --[[ Line: 78 ]]
+			-- upvalues: UseGetPresenceByUserIdResult (copy), FFlagUserListSurfacePresenceWins (upval), UseCtaForRowModuleResult (copy), Config (copy), CreateRowFunction (copy)
+			local Copy = table.clone(Tbl)
+			Copy.presence = if UseGetPresenceByUserIdResult then UseGetPresenceByUserIdResult.userPresenceType else nil
+			
+			if FFlagUserListSurfacePresenceWins and Tbl.presence ~= nil then
+				Copy.presence = Tbl.presence
+			end
+			Copy.primaryCta = UseCtaForRowModuleResult.primaryCta
+			Copy.secondaryCta = UseCtaForRowModuleResult.secondaryCta
+			Copy.ctaLoading = Config
+			
+			return CreateRowFunction(Copy)
+		end, p1.entity, p1.index or 0)
+	else
+		return p1.createRow({
+			presence = if UseGetPresenceByUserIdResult then UseGetPresenceByUserIdResult.userPresenceType else nil,
+			primaryCta = UseCtaForRowModuleResult.primaryCta,
+			secondaryCta = UseCtaForRowModuleResult.secondaryCta,
+			ctaLoading = Config
+		})
+	end
 end)

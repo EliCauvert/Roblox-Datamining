@@ -1,55 +1,57 @@
-﻿local function _(p1, p2)
-	local ok, status = pcall(function()
-		-- upvalues: p1 (ref), p2 (ref)
+﻿local function _(p1, p2) --[[ Line: 7 | Named "dumpProperty" ]]
+	local Success, Result = pcall(function() --[[ Line: 8 ]]
+		-- upvalues: p1 (copy), p2 (copy)
 		return p1[p2]
 	end)
 	
-	return if ok then tostring(status) else nil
+	return if Success then tostring(Result) else nil
 end
 
-local function dumpInstance(p1, p2)
-	local name = p1.Name
-	local var1 = false
-	
-	for i, v in p2 or {} do
-		local ok, status = pcall(function()
-			-- upvalues: p1 (ref), v (ref)
-			return p1[v]
+local function dumpInstance(p1, p2): string --[[ Line: 14 ]]
+	local Name = p1.Name
+	local Flag = false
+	local P3 = p2 or {}
+	for _, value in P3 do
+		local Success, Result = pcall(function() --[[ Line: 8 ]]
+			-- upvalues: p1 (copy), value (copy)
+			return p1[value]
 		end)
-		local var2 = if ok then tostring(status) else nil
+		local Text = if Success then tostring(Result) else nil
 		
-		if var2 then
-			if var1 then
-				name ..= ", "
+		if Text then
+			local Text1 = nil
+			if Flag then
+				Text1 = Name .. ", "
 			else
-				var1 = true
-				name ..= "   ("
+				Flag = true
+				Text1 = Name .. "   ("
 			end
-			name ..= v .. "=" .. var3
+			Name = Text1 .. value .. "=" .. Text
 		end
 	end
-	if var1 then
-		name ..= ")"
+	if Flag then
+		Name ..= ")"
 	end
-	return name .. "\n"
+	return Name .. "\n"
 end
 
-local function dumpInstanceTree(p3, p4, p5)
-	-- upvalues: dumpInstance (ref), dumpInstanceTree (ref)
-	if p3 == nil then
-		return p5 .. "[nil Instance]\n"
-	elseif p3.Name == nil then
-		return p5 .. "[Invalid Instance]\n"
+local function dumpInstanceTree(Object, p3, Text): string --[[ Line: 38 ]]
+	-- upvalues: dumpInstance (copy), dumpInstanceTree (copy)
+	if Object == nil then
+		return Text .. "[nil Instance]\n"
 	end
-	local text = p5 .. dumpInstance(p3, p4)
+	if Object.Name == nil then
+		return Text .. "[Invalid Instance]\n"
+	end
+	local Text1 = Text .. dumpInstance(Object, p3)
 	
-	for i, v in p3:GetChildren() do
-		text ..= dumpInstanceTree(v, p4, p5 .. "   ")
+	for _, child in Object:GetChildren() do
+		Text1 ..= dumpInstanceTree(child, p3, Text .. "   ")
 	end
-	return text
+	return Text1
 end
 
-return function(p6, p7)
-	-- upvalues: dumpInstanceTree (ref)
-	return dumpInstanceTree(p6, p7, "")
+return function(p4, p5) --[[ Line: 61 ]]
+	-- upvalues: dumpInstanceTree (copy)
+	return (dumpInstanceTree(p4, p5, ""))
 end

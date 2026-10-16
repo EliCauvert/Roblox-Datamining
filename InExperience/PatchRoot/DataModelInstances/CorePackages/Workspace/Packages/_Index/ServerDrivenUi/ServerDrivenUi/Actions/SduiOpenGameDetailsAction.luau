@@ -1,105 +1,99 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local cryoModule = require(parent.Cryo)
-local getInputModeStore = require(parent.Responsive).GetInputModeStore
-local appPage = require(parent.RobloxAppEnums).AppPage
-local openGameDetails = require(parent.GameDetail).OpenGameDetails
-local intervalPerformanceTracker = require(parent.IntervalPerformanceTracker).IntervalPerformanceTracker
-local sponsoredGamesRecordClick = require(parent.DiscoveryAnalytics).Requests.sponsoredGamesRecordClick
-local calculateRowPositionFields = require(parent.UnifiedLogging).calculateRowPositionFields
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local findAnalyticsFieldInAncestors = sduiCoreSystemModule.findAnalyticsFieldInAncestors
-local sduiParsers = sduiCoreSystemModule.SduiParsers
-local sduiErrors = sduiCoreSystemModule.SduiErrors
-local fFlagEnableExperienceDetailsBottomSheet = require(parent.SharedFlags).FFlagEnableExperienceDetailsBottomSheet
-local fFlagLuaAppEdpBottomSheetPeekViewEvents = require(parent.SharedFlags).FFlagLuaAppEdpBottomSheetPeekViewEvents
-local fFlagLuaAppSduiEdpEnabled = require(parent.SharedFlags).FFlagLuaAppSduiEdpEnabled
-local fFlagLuaAppSduiPassSortSubId = require(parent.SharedFlags).FFlagLuaAppSduiPassSortSubId
-local fFlagSduiFixSearchTelemetry = require(parent.SharedFlags).FFlagSduiFixSearchTelemetry
-local fFlagLuaAppSduiSponsoredTwoByOneTile = require(parent.SharedFlags).FFlagLuaAppSduiSponsoredTwoByOneTile
+﻿local ServerDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
+local Parent = ServerDrivenUi.Parent
+local CryoModule = require(Parent.Cryo)
+local GetInputModeStoreFunction = require(Parent.Responsive).GetInputModeStore
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local OpenGameDetailsFunction = require(Parent.GameDetail).OpenGameDetails
+local IntervalPerformanceTracker = require(Parent.IntervalPerformanceTracker).IntervalPerformanceTracker
+local SponsoredGamesRecordClickFunction = require(Parent.DiscoveryAnalytics).Requests.sponsoredGamesRecordClick
+local CalculateRowPositionFieldsFunction = require(Parent.UnifiedLogging).calculateRowPositionFields
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local FindAnalyticsFieldInAncestorsFunction = SduiCoreSystemModule.findAnalyticsFieldInAncestors
+local SduiParsers = SduiCoreSystemModule.SduiParsers
+local SduiErrors = SduiCoreSystemModule.SduiErrors
+local FilterAndStringifyAnalyticsDataModule = require(ServerDrivenUi.Analytics.filterAndStringifyAnalyticsData)
+local FFlagEnableExperienceDetailsBottomSheet = require(Parent.SharedFlags).FFlagEnableExperienceDetailsBottomSheet
+local FFlagLuaAppEdpBottomSheetPeekViewEvents = require(Parent.SharedFlags).FFlagLuaAppEdpBottomSheetPeekViewEvents
+local FFlagLuaAppSduiEdpEnabled = require(Parent.SharedFlags).FFlagLuaAppSduiEdpEnabled
+local FFlagLuaAppSduiPassSortSubId = require(Parent.SharedFlags).FFlagLuaAppSduiPassSortSubId
+local FFlagSduiFixSearchTelemetry = require(Parent.SharedFlags).FFlagSduiFixSearchTelemetry
+local FFlagLuaAppSduiSponsoredTwoByOneTile = require(Parent.SharedFlags).FFlagLuaAppSduiSponsoredTwoByOneTile
+local FFlagSduiForwardAnalyticsDataToGameClick = require(Parent.SharedFlags).FFlagSduiForwardAnalyticsDataToGameClick
 local t = {}
 
-return function(p1, p2, p3)
-	-- upvalues: sduiErrors (ref), getInputModeStore (ref), t (ref), findAnalyticsFieldInAncestors (ref), intervalPerformanceTracker (ref), fFlagSduiFixSearchTelemetry (ref), sduiParsers (ref), fFlagLuaAppSduiSponsoredTwoByOneTile (ref), cryoModule (ref), sponsoredGamesRecordClick (ref), calculateRowPositionFields (ref), fFlagLuaAppSduiPassSortSubId (ref), openGameDetails (ref), fFlagLuaAppEdpBottomSheetPeekViewEvents (ref), fFlagEnableExperienceDetailsBottomSheet (ref), appPage (ref), fFlagLuaAppSduiEdpEnabled (ref)
-	p3.dependencies.logger.reportCounter(sduiErrors.SduiCounterName.OpenGameDetailsAction, { name = getInputModeStore(false).getLastInputType(false) }, true)
-	local var1 = if p1 then p1.actionParams else t
-	local var2 = findAnalyticsFieldInAncestors("itemComponentType", p2)
+return function(p1, p2, p3) --[[ Line: 35 ]]
+	-- upvalues: SduiErrors (copy), GetInputModeStoreFunction (copy), t (copy), FindAnalyticsFieldInAncestorsFunction (copy), IntervalPerformanceTracker (copy), FFlagSduiFixSearchTelemetry (copy), SduiParsers (copy), FFlagLuaAppSduiSponsoredTwoByOneTile (copy), CryoModule (copy), SponsoredGamesRecordClickFunction (copy), CalculateRowPositionFieldsFunction (copy), FFlagLuaAppSduiPassSortSubId (copy), FFlagSduiForwardAnalyticsDataToGameClick (copy), FilterAndStringifyAnalyticsDataModule (copy), OpenGameDetailsFunction (copy), FFlagLuaAppEdpBottomSheetPeekViewEvents (copy), FFlagEnableExperienceDetailsBottomSheet (copy), AppPage (copy), FFlagLuaAppSduiEdpEnabled (copy)
+	p3.dependencies.logger.reportCounter(SduiErrors.SduiCounterName.OpenGameDetailsAction, {
+		name = GetInputModeStoreFunction(false).getLastInputType(false)
+	}, true)
+	local ActionParams = p1 and p1.actionParams or t
+	local ItemComponentType = FindAnalyticsFieldInAncestorsFunction("itemComponentType", p2)
 	
-	if var2 == "Tile" or var2 == "GameTile" then
-		intervalPerformanceTracker:startTracking("AppGameTile_to_GameDetail", 2)
+	if ItemComponentType == "Tile" or ItemComponentType == "GameTile" then
+		IntervalPerformanceTracker:startTracking("AppGameTile_to_GameDetail", 2)
 	end
-	local placeId = var1.placeId or findAnalyticsFieldInAncestors("placeId", p2)
-	local universeId = var1.universeId or findAnalyticsFieldInAncestors("universeId", p2)
-	local var3 = findAnalyticsFieldInAncestors("itemPosition", p2)
-	local var4 = if fFlagSduiFixSearchTelemetry then findAnalyticsFieldInAncestors("topicDataPosition", p2, var3) else var3
-	local var5 = sduiParsers.safeParseBoolean(findAnalyticsFieldInAncestors("adFlag", p2, false), p3, p2)
-	local var6 = findAnalyticsFieldInAncestors("nativeAdData", p2)
+	local PlaceId = ActionParams.placeId or FindAnalyticsFieldInAncestorsFunction("placeId", p2)
+	local UniverseId = ActionParams.universeId or FindAnalyticsFieldInAncestorsFunction("universeId", p2)
+	local ItemPosition = FindAnalyticsFieldInAncestorsFunction("itemPosition", p2)
+	local TopicDataPosition = if FFlagSduiFixSearchTelemetry then FindAnalyticsFieldInAncestorsFunction("topicDataPosition", p2, ItemPosition) else ItemPosition
+	local SafeParseBooleanResult = SduiParsers.safeParseBoolean(FindAnalyticsFieldInAncestorsFunction("adFlag", p2, false), p3, p2)
+	local NativeAdData = FindAnalyticsFieldInAncestorsFunction("nativeAdData", p2)
 	
-	if var6 == nil then
-		var6 = findAnalyticsFieldInAncestors("adId", p2)
+	if NativeAdData == nil then
+		NativeAdData = FindAnalyticsFieldInAncestorsFunction("adId", p2)
 	end
-	local placeIdOverride = nil
-	local var7 = nil
-	local var8 = nil
+	local PlaceIdOverride = nil
+	local JoinResult = nil
+	local TileType = nil
 	
-	if fFlagLuaAppSduiSponsoredTwoByOneTile then
-		placeIdOverride = var1.placeIdOverride
-		var8 = findAnalyticsFieldInAncestors("tileType", p2)
-		var7 = cryoModule.Dictionary.join(var1.experienceJoinData or t, { nativeAdData = var6, tileType = var8 })
+	if FFlagLuaAppSduiSponsoredTwoByOneTile then
+		PlaceIdOverride = ActionParams.placeIdOverride
+		TileType = FindAnalyticsFieldInAncestorsFunction("tileType", p2)
+		JoinResult = CryoModule.Dictionary.join(ActionParams.experienceJoinData or t, { nativeAdData = NativeAdData, tileType = TileType })
 	end
-	local var9 = findAnalyticsFieldInAncestors("navigationUniverseId", p2, universeId)
-	local collectionPosition = nil
-	local collectionId = nil
-	local totalNumberOfItems = nil
-	local itemsPerRow = nil
-	local startRowNumber = nil
-	local var10 = p2.getCollectionData and p2.getCollectionData() or nil
+	local NavigationUniverseId = FindAnalyticsFieldInAncestorsFunction("navigationUniverseId", p2, UniverseId)
+	local CollectionPosition = nil
+	local CollectionId = nil
+	local TotalNumberOfItems = nil
+	local ItemsPerRow = nil
+	local StartRowNumber = nil
+	local CollectionData = p2.getCollectionData and p2.getCollectionData() or nil
 	
-	if var10 then
-		collectionPosition = var10.collectionPosition
-		collectionId = var10.collectionId
-		totalNumberOfItems = var10.totalNumberOfItems
-		itemsPerRow = var10.itemsPerRow
-		startRowNumber = var10.startRowNumber
+	if CollectionData then
+		CollectionPosition = CollectionData.collectionPosition
+		CollectionId = CollectionData.collectionId
+		TotalNumberOfItems = CollectionData.totalNumberOfItems
+		ItemsPerRow = CollectionData.itemsPerRow
+		StartRowNumber = CollectionData.startRowNumber
 	end
-	local collectionPosition_1 = collectionPosition or findAnalyticsFieldInAncestors("collectionIndex", p2)
-	local collectionId_1 = collectionId or findAnalyticsFieldInAncestors("collectionId", p2)
-	local totalNumberOfItems_1 = totalNumberOfItems or findAnalyticsFieldInAncestors("totalNumberOfItems", p2)
-	local var11 = findAnalyticsFieldInAncestors("gameSetTargetId", p2)
-	local var12 = findAnalyticsFieldInAncestors("heroUnitId", p2)
-	local seeAllFlag = tonumber(findAnalyticsFieldInAncestors("seeAllFlag", p2)) or 0
-	local dependencies = p3.dependencies
+	local CollectionPosition1 = CollectionPosition or FindAnalyticsFieldInAncestorsFunction("collectionIndex", p2)
+	local CollectionId1 = CollectionId or FindAnalyticsFieldInAncestorsFunction("collectionId", p2)
+	local TotalNumberOfItems1 = TotalNumberOfItems or FindAnalyticsFieldInAncestorsFunction("totalNumberOfItems", p2)
+	local GameSetTargetId = FindAnalyticsFieldInAncestorsFunction("gameSetTargetId", p2)
+	local HeroUnitId = FindAnalyticsFieldInAncestorsFunction("heroUnitId", p2)
+	local Number: number = tonumber(FindAnalyticsFieldInAncestorsFunction("seeAllFlag", p2)) or 0
+	local Dependencies = p3.dependencies
 	
-	if var5 and var6 then
-		sponsoredGamesRecordClick(dependencies.networking, tostring(var6))
+	if SafeParseBooleanResult and NativeAdData then
+		SponsoredGamesRecordClickFunction(Dependencies.networking, (tostring(NativeAdData)))
 	end
-	local var13 = calculateRowPositionFields(var3, itemsPerRow, startRowNumber)
-	local var14 = findAnalyticsFieldInAncestors("appliedFilters", p2)
-	local var15 = if fFlagLuaAppSduiPassSortSubId then findAnalyticsFieldInAncestors("sortSubId", p2) else nil
+	local RowPositionFields = CalculateRowPositionFieldsFunction(ItemPosition, ItemsPerRow, StartRowNumber)
+	local AppliedFilters = FindAnalyticsFieldInAncestorsFunction("appliedFilters", p2)
+	local SortSubId = if FFlagLuaAppSduiPassSortSubId then FindAnalyticsFieldInAncestorsFunction("sortSubId", p2) else nil
+	local FilterAndStringifyAnalyticsDataModuleResult = if FFlagSduiForwardAnalyticsDataToGameClick then FilterAndStringifyAnalyticsDataModule(CryoModule.Dictionary.join(CollectionData or t, p2.ancestorAnalyticsData or t, p2.analyticsData or t)) else nil
 	
-	if var1.inheritReferralSession == true then
-		dependencies.gameAnalytics.reportOpenGameDetailFromGameDetail(if fFlagLuaAppSduiSponsoredTwoByOneTile and placeIdOverride then placeIdOverride else placeId, var3, totalNumberOfItems_1, var5, var6, tostring(universeId), p3.appPage, findAnalyticsFieldInAncestors("hostUniverseId", p2))
+	if ActionParams.inheritReferralSession == true then
+		Dependencies.gameAnalytics.reportOpenGameDetailFromGameDetail(if FFlagLuaAppSduiSponsoredTwoByOneTile and PlaceIdOverride then PlaceIdOverride else PlaceId, ItemPosition, TotalNumberOfItems1, SafeParseBooleanResult, NativeAdData, tostring(UniverseId), p3.appPage, (FindAnalyticsFieldInAncestorsFunction("hostUniverseId", p2)))
 	else
-		dependencies.gameAnalytics.reportOpenGameDetailWithId(if fFlagLuaAppSduiSponsoredTwoByOneTile and placeIdOverride then placeIdOverride else placeId, tostring(collectionId_1), var11, collectionPosition_1, var3, totalNumberOfItems_1, var5, var6, tostring(universeId), p3.appPage, tostring(var9), var14, var4, true, var13.positionInRow, var13.rowInSort, var13.rowOnPage, var12, nil, if fFlagLuaAppSduiSponsoredTwoByOneTile and var8 then var8 else nil, if fFlagLuaAppSduiPassSortSubId and var15 then tostring(var15) else nil, nil, seeAllFlag)
+		Dependencies.gameAnalytics.reportOpenGameDetailWithId(if FFlagLuaAppSduiSponsoredTwoByOneTile and PlaceIdOverride then PlaceIdOverride else PlaceId, tostring(CollectionId1), GameSetTargetId, CollectionPosition1, ItemPosition, TotalNumberOfItems1, SafeParseBooleanResult, NativeAdData, tostring(UniverseId), p3.appPage, tostring(NavigationUniverseId), AppliedFilters, TopicDataPosition, true, RowPositionFields.positionInRow, RowPositionFields.rowInSort, RowPositionFields.rowOnPage, HeroUnitId, nil, if FFlagLuaAppSduiSponsoredTwoByOneTile and TileType then TileType else nil, if FFlagLuaAppSduiPassSortSubId and SortSubId then tostring(SortSubId) else nil, if FFlagSduiForwardAnalyticsDataToGameClick then FilterAndStringifyAnalyticsDataModuleResult else nil, Number)
 	end
-	local var16
-	local navigation = dependencies.getNavigation()
-	local dispatch = dependencies.dispatch
-	local var17 = tostring(var9)
-	local t_1 = {
-		index = var3,
-		placeIdOverride = if fFlagLuaAppSduiSponsoredTwoByOneTile and placeIdOverride then placeIdOverride else nil,
-		experienceJoinData = if fFlagLuaAppSduiSponsoredTwoByOneTile and var7 then var7 else nil
-	}
-	
-	if fFlagLuaAppEdpBottomSheetPeekViewEvents then
-		var16 = nil
-	elseif fFlagEnableExperienceDetailsBottomSheet then
-		var16 = p3.appPage == appPage.GameDetail
-		var16 = nil
-	else
-		var16 = nil
-	end
-	t_1.mountAsFullView = var16
-	dispatch(openGameDetails(var17, navigation, t_1, if fFlagLuaAppSduiEdpEnabled then dependencies.networking else nil))
-	p3.dependencies.logger.reportCounter(sduiErrors.SduiCounterName.OpenGameDetailsActionFinish, { name = getInputModeStore(false).getLastInputType(false) }, true)
+	Dependencies.dispatch(OpenGameDetailsFunction(tostring(NavigationUniverseId), Dependencies.getNavigation(), {
+		index = ItemPosition,
+		placeIdOverride = if FFlagLuaAppSduiSponsoredTwoByOneTile and PlaceIdOverride then PlaceIdOverride else nil,
+		experienceJoinData = if FFlagLuaAppSduiSponsoredTwoByOneTile and JoinResult then JoinResult else nil,
+		mountAsFullView = if FFlagLuaAppEdpBottomSheetPeekViewEvents then nil elseif FFlagEnableExperienceDetailsBottomSheet then p3.appPage == AppPage.GameDetail else nil
+	}, if FFlagLuaAppSduiEdpEnabled then Dependencies.networking else nil))
+	p3.dependencies.logger.reportCounter(SduiErrors.SduiCounterName.OpenGameDetailsActionFinish, {
+		name = GetInputModeStoreFunction(false).getLastInputType(false)
+	}, true)
 end

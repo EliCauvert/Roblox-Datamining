@@ -1,11 +1,11 @@
-﻿local dependenciesModule = require(script:FindFirstAncestor("FriendsLanding").dependencies)
-local rodux = dependenciesModule.Rodux
-local roduxNetworking = dependenciesModule.RoduxNetworking
+﻿local DependenciesModule = require(script:FindFirstAncestor("FriendsLanding").dependencies)
+local Rodux = DependenciesModule.Rodux
+local RoduxNetworking = DependenciesModule.RoduxNetworking
 
-return function()
-	-- upvalues: rodux (ref), roduxNetworking (ref)
-	return rodux.combineReducers({
+return function() --[[ Line: 7 ]]
+	-- upvalues: Rodux (copy), RoduxNetworking (copy)
+	return Rodux.combineReducers({
 		Friends = require(script.Friends)(),
-		NetworkStatus = roduxNetworking.installReducer()
+		NetworkStatus = RoduxNetworking.installReducer()
 	})
 end

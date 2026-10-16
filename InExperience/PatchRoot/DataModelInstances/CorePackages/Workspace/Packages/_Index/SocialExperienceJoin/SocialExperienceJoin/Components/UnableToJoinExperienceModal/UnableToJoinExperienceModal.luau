@@ -1,38 +1,41 @@
-﻿local socialExperienceJoin = script:FindFirstAncestor("SocialExperienceJoin")
-local parent = socialExperienceJoin.Parent
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-local textKeysModule = require(socialExperienceJoin.Common.TextKeys)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
+﻿local SocialExperienceJoin = script:FindFirstAncestor("SocialExperienceJoin")
+local Parent = SocialExperienceJoin.Parent
+local ReactModule = require(Parent.React)
+local UIBloxModule = require(Parent.UIBlox)
+local TextKeysModule = require(SocialExperienceJoin.Common.TextKeys)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
 
-return function(p1)
-	-- upvalues: useLocalization (ref), textKeysModule (ref), reactModule (ref), interactiveAlert (ref), buttonType (ref)
-	local var1 = useLocalization({
-		titleText = textKeysModule.UnableToJoin,
+return function(p1) --[[ Line: 21 ]]
+	-- upvalues: UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), InteractiveAlert (copy), ButtonType (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
+		titleText = TextKeysModule.UnableToJoin,
 		bodyText = {
-			textKeysModule.NoExperienceAccess,
+			TextKeysModule.NoExperienceAccess,
 			name = p1.userPrimaryName
 		},
-		confirmButtonText = textKeysModule.ViewDetails,
-		cancelButtonText = textKeysModule.Cancel
+		confirmButtonText = TextKeysModule.ViewDetails,
+		cancelButtonText = TextKeysModule.Cancel
 	})
 	
-	return reactModule.createElement(interactiveAlert, {
+	return ReactModule.createElement(InteractiveAlert, {
 		screenSize = p1.screenSize,
-		title = var1.titleText,
-		bodyText = var1.bodyText,
+		title = UseLocalizationResult.titleText,
+		bodyText = UseLocalizationResult.bodyText,
 		buttonStackInfo = {
 			buttons = {
 				{
 					buttonType = nil,
-					props = { text = var1.cancelButtonText, onActivated = p1.cancel }
+					props = {
+						text = UseLocalizationResult.cancelButtonText,
+						onActivated = p1.cancel
+					}
 				},
 				{
-					buttonType = buttonType.PrimarySystem,
+					buttonType = ButtonType.PrimarySystem,
 					props = {
-						text = var1.confirmButtonText,
+						text = UseLocalizationResult.confirmButtonText,
 						onActivated = p1.openGameDetailsPeekView
 					}
 				}

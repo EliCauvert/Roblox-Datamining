@@ -1,4 +1,4 @@
-﻿return require(script.Parent.createEnum)("PromptState", {
+﻿return (require(script.Parent.createEnum)("PromptState", {
 	"None", "PremiumUpsell", "RobuxUpsell", "LargeRobuxUpsell", "PromptPurchase",
 	"PromptSubscriptionPurchase", "PurchaseInProgress", "PollingBalance",
 	"UpsellInProgress", "U13PaymentModal", "U13MonthlyThreshold1Modal",
@@ -6,4 +6,4 @@
 	"ParentalConsentWarningPaymentModal13To17", "PurchaseComplete",
 	"LeaveRobloxWarning", "EnablePurchaseVPCModal", "Error",
 	"InitializingPurchase", "BlackbirdUpsellInProgress"
-})
+}))

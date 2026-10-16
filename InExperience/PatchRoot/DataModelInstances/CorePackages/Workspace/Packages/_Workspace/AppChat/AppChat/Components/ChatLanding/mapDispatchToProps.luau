@@ -1,41 +1,42 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local roactPaginator = require(appChat.SocialLibraries).RoactPaginator
-local promiseModule = require(appChat.Parent.Promise)
-local fetchConversationsByPageModule = require(appChat.Conversations.Thunks.fetchConversationsByPage)
-local networkingChatModule = require(appChat.Http.NetworkingChat)
-local createConversationModule = require(appChat.Conversations.Thunks.createConversation)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local RoactPaginator = require(AppChat.SocialLibraries).RoactPaginator
+local PromiseModule = require(AppChat.Parent.Promise)
+local FetchConversationsByPageModule = require(AppChat.Conversations.Thunks.fetchConversationsByPage)
+local NetworkingChatModule = require(AppChat.Http.NetworkingChat)
+local CreateConversationModule = require(AppChat.Conversations.Thunks.createConversation)
 
-return function(p1)
-	-- upvalues: roactPaginator (ref), fetchConversationsByPageModule (ref), promiseModule (ref), networkingChatModule (ref), createConversationModule (ref)
+return function(Callback) --[[ Line: 11 ]]
+	-- upvalues: RoactPaginator (copy), FetchConversationsByPageModule (copy), PromiseModule (copy), NetworkingChatModule (copy), CreateConversationModule (copy)
 	return {
-		[roactPaginator.fetchInit] = function()
-			-- upvalues: p1 (ref), fetchConversationsByPageModule (copy)
-			return p1(fetchConversationsByPageModule())
+		[RoactPaginator.fetchInit] = function() --[[ Line: 13 ]]
+			-- upvalues: Callback (copy), FetchConversationsByPageModule (upval)
+			return Callback(FetchConversationsByPageModule())
 		end,
-		[roactPaginator.fetchWithCursor] = function(p2)
-			-- upvalues: promiseModule (copy), p1 (ref), fetchConversationsByPageModule (copy)
-			return promiseModule.new(function(p3)
-				-- upvalues: p1 (copy), fetchConversationsByPageModule (copy), p2 (ref)
-				coroutine.wrap(function()
-					-- upvalues: p1 (copy), fetchConversationsByPageModule (copy), p2 (copy), p3 (ref)
-					local var1, var2, var3 = p1(fetchConversationsByPageModule(p2)):await()
+		[RoactPaginator.fetchWithCursor] = function(p1) --[[ Line: 17 ]]
+			-- upvalues: PromiseModule (upval), Callback (copy), FetchConversationsByPageModule (upval)
+			return PromiseModule.new(function(Callback1) --[[ Line: 18 ]]
+				-- upvalues: Callback (upval), FetchConversationsByPageModule (upval), p1 (copy)
+				coroutine.wrap(function() --[[ Line: 19 ]]
+					-- upvalues: Callback (upval), FetchConversationsByPageModule (upval), p1 (upval), Callback1 (copy)
+					local v1, v2, v3 = Callback(FetchConversationsByPageModule(p1)):await()
 					
-					if var1 then
-						p3(var2, var3)
+					if v1 then
+						Callback1(v2, v3)
 						
 						return
+					else
+						Callback1(nil, p1)
 					end
-					p3(nil, p2)
 				end)()
 			end)
 		end,
-		startOneToOneConversation = function(p2)
-			-- upvalues: p1 (ref), networkingChatModule (copy)
-			return p1(networkingChatModule.StartOneToOneConversation.API(p2))
+		startOneToOneConversation = function(p1) --[[ Line: 30 ]]
+			-- upvalues: Callback (copy), NetworkingChatModule (upval)
+			return Callback(NetworkingChatModule.StartOneToOneConversation.API(p1))
 		end,
-		createOneToOneConversation = function(p2)
-			-- upvalues: p1 (ref), createConversationModule (copy)
-			return p1(createConversationModule("one_to_one", { p2 }))
+		createOneToOneConversation = function(p1) --[[ Line: 34 ]]
+			-- upvalues: Callback (copy), CreateConversationModule (upval)
+			return Callback(CreateConversationModule("one_to_one", { p1 }))
 		end
 	}
 end

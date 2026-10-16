@@ -1,57 +1,60 @@
-﻿local t = {}
-local parent = script.Parent
-local parent_1 = parent.Parent
-local luauPolyfillModule = require(parent_1.LuauPolyfill)
-local boolean = luauPolyfillModule.Boolean
-local array = luauPolyfillModule.Array
-local error = luauPolyfillModule.Error
-local toJSBoolean = require(script.Parent.utilities.globals.null).toJSBoolean
-local DEV = require(parent.utilities).DEV
-require(parent.jsutils.invariant).invariant(typeof(DEV) == "boolean", tostring(DEV))
-local _ = require(parent_1.GraphQL)
-local isNonEmptyArray = require(parent.utilities).isNonEmptyArray
-local hasOwnPropertyModule = require(parent.luaUtils.hasOwnProperty)
-local tbl = setmetatable({}, { __index = error })
-tbl.__index = tbl
+﻿local ErrorsModule = {}
+local Parent = script.Parent
+local Parent1 = Parent.Parent
+local LuauPolyfillModule = require(Parent1.LuauPolyfill)
+local Boolean = LuauPolyfillModule.Boolean
+local Array = LuauPolyfillModule.Array
+local Error = LuauPolyfillModule.Error
+local ToJSBooleanFunction = require(script.Parent.utilities.globals.null).toJSBoolean
+local DEV = require(Parent.utilities).DEV
+require(Parent.jsutils.invariant).invariant(typeof(DEV) == "boolean", (tostring(DEV)))
+local _ = require(Parent1.GraphQL)
+local IsNonEmptyArrayFunction = require(Parent.utilities).isNonEmptyArray
+local HasOwnPropertyModule = require(Parent.luaUtils.hasOwnProperty)
+local self = setmetatable({}, { __index = Error })
+self.__index = self
 
-function t.isApolloError(p1)
-	-- upvalues: hasOwnPropertyModule (ref)
-	return hasOwnPropertyModule(p1, "graphQLErrors")
+function ErrorsModule.isApolloError(p1) --[[ Line: 43 ]]
+	-- upvalues: HasOwnPropertyModule (copy)
+	return HasOwnPropertyModule(p1, "graphQLErrors")
 end
 
-local function generateErrorMessage(p1)
-	-- upvalues: isNonEmptyArray (ref), array (ref), boolean (ref), toJSBoolean (ref)
-	local var1 = ""
+local function generateErrorMessage(NewResult): string --[[ Line: 49 ]]
+	-- upvalues: IsNonEmptyArrayFunction (copy), Array (copy), Boolean (copy), ToJSBooleanFunction (copy)
+	local Text = ""
 	
-	if isNonEmptyArray(p1.graphQLErrors) and isNonEmptyArray(p1.graphQLErrors) or isNonEmptyArray(p1.clientErrors) then
-		for i, v in pairs(array.concat(if boolean.toJSBoolean(p1.graphQLErrors) then p1.graphQLErrors else {}, if boolean.toJSBoolean(p1.clientErrors) then p1.clientErrors else {})) do
-			var1 ..= ("%s\n"):format(if toJSBoolean(v) then v.message else "Error message not found.")
+	if IsNonEmptyArrayFunction(NewResult.graphQLErrors) and IsNonEmptyArrayFunction(NewResult.graphQLErrors) or IsNonEmptyArrayFunction(NewResult.clientErrors) then
+		local ConcatFunction = Array.concat
+		local GraphQLErrors = Boolean.toJSBoolean(NewResult.graphQLErrors) and NewResult.graphQLErrors or {}
+		local ClientErrors = Boolean.toJSBoolean(NewResult.clientErrors) and NewResult.clientErrors or {}
+		for _, value in pairs((ConcatFunction(GraphQLErrors, ClientErrors))) do
+			Text ..= ("%s\n"):format(if ToJSBooleanFunction(value) then value.message else "Error message not found.")
 		end
 	end
-	if p1.networkError ~= nil then
-		local networkError = p1.networkError
-		var1 ..= ("%s\n"):format(if typeof(networkError) == "string" then networkError elseif networkError.message then networkError.message else networkError.error)
+	if NewResult.networkError ~= nil then
+		local NetworkError = NewResult.networkError
+		Text ..= ("%s\n"):format(if typeof(NetworkError) == "string" then NetworkError elseif NetworkError.message then NetworkError.message else NetworkError.error)
 	end
-	return string.gsub(var1, "\n$", "")
+	return (string.gsub(Text, "\n$", ""))
 end
 
-function tbl.new(p2)
-	-- upvalues: error (ref), boolean (ref), generateErrorMessage (ref), tbl (ref)
-	local graphQLErrors = p2.graphQLErrors
-	local clientErrors = p2.clientErrors
-	local networkError = p2.networkError
-	local errorMessage = p2.errorMessage
-	local extraInfo = p2.extraInfo
-	local var2 = error.new(errorMessage)
-	var2.graphQLErrors = if boolean.toJSBoolean(graphQLErrors) then graphQLErrors else {}
-	var2.clientErrors = if boolean.toJSBoolean(clientErrors) then clientErrors else {}
-	var2.networkError = if boolean.toJSBoolean(networkError) then networkError else nil
-	var2.message = if boolean.toJSBoolean(errorMessage) then errorMessage else generateErrorMessage(var2)
-	var2.extraInfo = extraInfo
+function self.new(ErrorMessage) --[[ Line: 104 ]]
+	-- upvalues: Error (copy), Boolean (copy), generateErrorMessage (copy), self (copy)
+	local GraphQLErrors = ErrorMessage.graphQLErrors
+	local ClientErrors = ErrorMessage.clientErrors
+	local NetworkError = ErrorMessage.networkError
+	local ErrorMessage1 = ErrorMessage.errorMessage
+	local ExtraInfo = ErrorMessage.extraInfo
+	local NewError = Error.new(ErrorMessage1)
+	NewError.graphQLErrors = Boolean.toJSBoolean(GraphQLErrors) and GraphQLErrors or {}
+	NewError.clientErrors = Boolean.toJSBoolean(ClientErrors) and ClientErrors or {}
+	NewError.networkError = Boolean.toJSBoolean(NetworkError) and NetworkError or nil
+	NewError.message = Boolean.toJSBoolean(ErrorMessage1) and ErrorMessage1 or generateErrorMessage(NewError)
+	NewError.extraInfo = ExtraInfo
 	
-	return setmetatable(var2, tbl)
+	return (setmetatable(NewError, self))
 end
 
-t.ApolloError = tbl
+ErrorsModule.ApolloError = self
 
-return t
+return ErrorsModule

@@ -1,26 +1,25 @@
-﻿local avatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
-local toastRoduxModule = require(avatarExperienceProfilePictureEditor.Parent.ToastRodux)
-local textKeysModule = require(avatarExperienceProfilePictureEditor.Common.TextKeys)
-local toastType = toastRoduxModule.Enums.ToastType
-local setCurrentToastMessage = toastRoduxModule.Actions.SetCurrentToastMessage
-local t = {
+﻿local AvatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
+local ToastRoduxModule = require(AvatarExperienceProfilePictureEditor.Parent.ToastRodux)
+local ToastType = ToastRoduxModule.Enums.ToastType
+local SetCurrentToastMessageFunction = ToastRoduxModule.Actions.SetCurrentToastMessage
+local config = {
 	toastMessage = "Feature.Profile.Heading.ProfilePictureSaved",
 	isLocalized = false,
-	toastType = toastType.SuccessConfirmation
+	toastType = ToastType.SuccessConfirmation
 }
-local t_1 = {
+local config1 = {
 	isLocalized = false,
-	toastMessage = textKeysModule.SaveFailed,
-	toastType = toastType.NetworkingError
+	toastMessage = require(AvatarExperienceProfilePictureEditor.Common.TextKeys).SaveFailed,
+	toastType = ToastType.NetworkingError
 }
 
 return {
-	showSaveSuccessToast = function(p1)
-		-- upvalues: setCurrentToastMessage (ref), t (ref)
-		p1(setCurrentToastMessage(t))
+	showSaveSuccessToast = function(Callback: (any) -> ()) --[[ Line: 22 ]]
+		-- upvalues: SetCurrentToastMessageFunction (copy), config (copy)
+		Callback(SetCurrentToastMessageFunction(config))
 	end,
-	showSaveFailureToast = function(p1)
-		-- upvalues: setCurrentToastMessage (ref), t_1 (ref)
-		p1(setCurrentToastMessage(t_1))
+	showSaveFailureToast = function(Callback: (any) -> ()) --[[ Line: 26 ]]
+		-- upvalues: SetCurrentToastMessageFunction (copy), config1 (copy)
+		Callback(SetCurrentToastMessageFunction(config1))
 	end
 }

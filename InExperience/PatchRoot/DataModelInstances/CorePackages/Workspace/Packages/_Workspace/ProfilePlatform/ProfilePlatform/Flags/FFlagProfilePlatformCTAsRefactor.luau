@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("ProfilePlatformCTAsRefactor_V3", false)

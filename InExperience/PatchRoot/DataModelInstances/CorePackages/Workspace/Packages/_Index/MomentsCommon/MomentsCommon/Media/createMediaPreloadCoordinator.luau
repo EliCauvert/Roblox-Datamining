@@ -1,268 +1,265 @@
-﻿local momentsCommon = script:FindFirstAncestor("MomentsCommon")
-local parent = momentsCommon.Parent
-local signalsModule = require(parent.Signals)
-local fFlagMomentsAutoplayAmpPolicy = require(parent.SharedFlags).FFlagMomentsAutoplayAmpPolicy
-local _ = require(momentsCommon.Media.MediaTypes)
-local _ = require(momentsCommon.Media.Preload.selectPreloadPolicy)
-local _ = require(momentsCommon.Media.Telemetry.mediaTelemetry)
-local createMomentMediaControllerModule = require(momentsCommon.Media.createMomentMediaController)
-local defaultMediaNodeRegistryModule = require(momentsCommon.Media.defaultMediaNodeRegistry)
-local _ = require(momentsCommon.Media.mediaNodeRegistry)
-local getFFlagMomentsRenderPostAssetsModule = require(momentsCommon.Flags.GetFFlagMomentsRenderPostAssets)
-local createSignal = signalsModule.createSignal
-local createEffect = signalsModule.createEffect
+﻿local MomentsCommon = script:FindFirstAncestor("MomentsCommon")
+local Parent = MomentsCommon.Parent
+local SignalsModule = require(Parent.Signals)
+local FFlagMomentsAutoplayAmpPolicy = require(Parent.SharedFlags).FFlagMomentsAutoplayAmpPolicy
+local _ = require(MomentsCommon.Media.MediaTypes)
+local _ = require(MomentsCommon.Media.Preload.selectPreloadPolicy)
+local _ = require(MomentsCommon.Media.Telemetry.mediaTelemetry)
+local CreateMomentMediaControllerModule = require(MomentsCommon.Media.createMomentMediaController)
+local DefaultMediaNodeRegistryModule = require(MomentsCommon.Media.defaultMediaNodeRegistry)
+local _ = require(MomentsCommon.Media.mediaNodeRegistry)
+local GetFFlagMomentsRenderPostAssetsModule = require(MomentsCommon.Flags.GetFFlagMomentsRenderPostAssets)
+local CreateSignalFunction = SignalsModule.createSignal
+local CreateEffectFunction = SignalsModule.createEffect
 
-local function _(p1, p2, p3)
+local function _(p1, p2, p3): boolean --[[ Line: 98 | Named "indexInWindow" ]]
 	return p2 - p3.back <= p1 and p1 <= p2 + p3.forward
 end
 
-return function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: getFFlagMomentsRenderPostAssetsModule (ref), defaultMediaNodeRegistryModule (ref), createMomentMediaControllerModule (ref), createSignal (ref), fFlagMomentsAutoplayAmpPolicy (ref), createEffect (ref)
-	p6 = p6 or {}
-	local var1 = getFFlagMomentsRenderPostAssetsModule()
-	local now = p5.now or os.clock
-	local registry = p6.registry or defaultMediaNodeRegistryModule()
-	local createController = p6.createController or function(p7)
-		-- upvalues: createMomentMediaControllerModule (copy), p5 (ref), p4 (ref), registry (ref), p6 (ref)
-		return createMomentMediaControllerModule(p7, {
-			services = p5,
-			audioDeviceOutput = p4,
-			registry = registry,
-			parent = p6.parent,
-			masterVolume = p6.masterVolume
+return function(p1, p2, p3, AudioDeviceOutput, Services, p4) --[[ Line: 102 | Named "createMediaPreloadCoordinator" ]]
+	-- upvalues: GetFFlagMomentsRenderPostAssetsModule (copy), DefaultMediaNodeRegistryModule (copy), CreateMomentMediaControllerModule (copy), CreateSignalFunction (copy), FFlagMomentsAutoplayAmpPolicy (copy), CreateEffectFunction (copy)
+	local P8 = p4 or {}
+	local FFlagMomentsRenderPostAssetsModule = GetFFlagMomentsRenderPostAssetsModule()
+	local Now = Services.now or os.clock
+	local Registry = P8.registry or DefaultMediaNodeRegistryModule()
+	local CreateController = P8.createController or function(p5) --[[ Line: 118 ]]
+		-- upvalues: CreateMomentMediaControllerModule (upval), Services (copy), AudioDeviceOutput (copy), Registry (copy), P8 (copy)
+		return CreateMomentMediaControllerModule(p5, {
+			services = Services,
+			audioDeviceOutput = AudioDeviceOutput,
+			registry = Registry,
+			parent = P8.parent,
+			masterVolume = P8.masterVolume
 		})
 	end
-	local t = {}
-	local var2 = nil
-	local var3 = nil
-	local var4 = false
-	local var5, var6 = createSignal({})
+	local Tbl = {}
+	local MomentId = nil
+	local v1 = nil
+	local Flag = false
+	local Signal, Signal2 = CreateSignalFunction({})
 	
-	local function _()
-		-- upvalues: t (ref), var6 (ref)
-		local t_1 = {}
+	local function _() --[[ Line: 138 | Named "publishControllerMap" ]]
+		-- upvalues: Tbl (copy), Signal2 (copy)
+		local Controllers = {}
 		
-		for i, v in t do
-			t_1[i] = v.controller
+		for i, value in Tbl do
+			Controllers[i] = value.controller
 		end
-		var6(t_1)
+		Signal2(Controllers)
 	end
 	
-	local function scheduleDecodeRetry(p7, p8)
-		-- upvalues: p2 (ref), var4 (write), t (ref), var3 (write), p1 (ref), scheduleDecodeRetry (ref)
-		if p8.retryScheduled or p2.maxDecodeRetries <= p8.decodeRetries then
+	local function scheduleDecodeRetry(p5, p6) --[[ Line: 149 ]]
+		-- upvalues: p2 (copy), Flag (ref), Tbl (copy), v1 (ref), p1 (copy), scheduleDecodeRetry (copy)
+		if not p6.retryScheduled and p2.maxDecodeRetries > p6.decodeRetries then
+			p6.retryScheduled = true
+			task.delay(p2.decodeRetryDelayMs / 1000, function() --[[ Line: 154 ]]
+				-- upvalues: p6 (copy), Flag (upval), Tbl (upval), p5 (copy), v1 (upval), p1 (upval), scheduleDecodeRetry (upval)
+				p6.retryScheduled = false
+				
+				if Flag or Tbl[p5] ~= p6 or v1 ~= p5 or not p6.decoded then return end
+				if not p1.getPlaybackActive(false) then return end
+				local Readiness = p6.controller.getState(false).readiness
+				
+				if Readiness ~= "Ready" and Readiness ~= "Failed" then
+					p6.decodeRetries += 1
+					p6.controller.releaseDecoder()
+					p6.controller.decode()
+					scheduleDecodeRetry(p5, p6)
+					
+					return
+				end
+			end)
+			
 			return
 		end
-		p8.retryScheduled = true
-		task.delay(p2.decodeRetryDelayMs / 1000, function()
-			-- upvalues: p8 (ref), var4 (copy), t (copy), p7 (ref), var3 (copy), p1 (copy), scheduleDecodeRetry (copy)
-			p8.retryScheduled = false
-			
-			if var4 or t[p7] ~= p8 or (var3 ~= p7 or not p8.decoded) then return end
-			if not p1.getPlaybackActive(false) then return end
-			local readiness = p8.controller.getState(false).readiness
-			
-			if readiness == "Ready" or readiness == "Failed" then
-				return
-			end
-			p8.decodeRetries += 1
-			p8.controller.releaseDecoder()
-			p8.controller.decode()
-			scheduleDecodeRetry(p7, p8)
-		end)
 	end
 	
-	local function reconcile(p7)
-		-- upvalues: p1 (ref), fFlagMomentsAutoplayAmpPolicy (copy), var3 (write), p2 (ref), var1 (ref), t (ref), var2 (write), createController (ref), var4 (write), scheduleDecodeRetry (ref), var6 (ref), now (ref), p3 (ref)
-		local v_2, i
-		local items = p1.getItems(p7)
-		local activeIndex = p1.getActiveIndex(p7)
-		local playbackActive = p1.getPlaybackActive(p7)
-		local var7 = if fFlagMomentsAutoplayAmpPolicy then p1.getCanAutoPlay(p7) else nil
-		local var8 = items[activeIndex]
-		local var9 = if var8 ~= nil then nil else var8.momentId
-		var3 = var9
-		local t_1 = {}
-		local t_2 = {}
-		local t_3 = {}
+	local function reconcile(p5) --[[ Line: 175 ]]
+		-- upvalues: p1 (copy), FFlagMomentsAutoplayAmpPolicy (upval), v1 (ref), p2 (copy), FFlagMomentsRenderPostAssetsModule (copy), Tbl (copy), MomentId (ref), CreateController (copy), Flag (ref), scheduleDecodeRetry (copy), Signal2 (copy), Now (copy), p3 (copy)
+		local Items = p1.getItems(p5)
+		local ActiveIndex = p1.getActiveIndex(p5)
+		local PlaybackActive = p1.getPlaybackActive(p5)
+		local CanAutoPlay = if FFlagMomentsAutoplayAmpPolicy then p1.getCanAutoPlay(p5) else nil
+		local Item = Items[ActiveIndex]
+		local MomentId1 = if Item == nil then nil else Item.momentId
+		v1 = MomentId1
+		local t = {}
+		local t1 = {}
+		local ResolveResults = {}
 		
-		for i, v in items do
-			v_2 = p2.downloadWindow
+		for i, item in Items do
+			local DownloadWindow = p2.downloadWindow
 			
-			if activeIndex - v_2.back <= i and i <= activeIndex + v_2.forward then
-				local var10 = if var1 and v.resolve ~= nil then v.resolve(p7) or v else v
-				t_1[var10.momentId] = true
-				t_3[var10.momentId] = var10
-				local decodeWindow = p2.decodeWindow
+			if ActiveIndex - DownloadWindow.back <= i and i <= ActiveIndex + DownloadWindow.forward then
+				local ResolveResult = FFlagMomentsRenderPostAssetsModule and item.resolve ~= nil and item.resolve(p5) or item
+				t[ResolveResult.momentId] = true
+				ResolveResults[ResolveResult.momentId] = ResolveResult
+				local DecodeWindow = p2.decodeWindow
 				
-				if activeIndex - decodeWindow.back <= i and i <= activeIndex + decodeWindow.forward then
-					t_2[var10.momentId] = true
+				if ActiveIndex - DecodeWindow.back <= i and i <= ActiveIndex + DecodeWindow.forward then
+					t1[ResolveResult.momentId] = true
 				end
 			end
 		end
-		local var11 = false
+		local Flag1 = false
 		
-		for i_1, v_1 in t do
-			v_2 = t_3[i_1]
+		for i1, value in Tbl do
+			local ResolveResult = ResolveResults[i1]
 			
-			if not t_1[i_1] or var1 and v_2 ~= nil and v_1.sourceKey ~= v_2.sourceKey then
-				if var2 == i_1 then
-					var2 = nil
+			if not t[i1] or FFlagMomentsRenderPostAssetsModule and ResolveResult ~= nil and value.sourceKey ~= ResolveResult.sourceKey then
+				if MomentId == i1 then
+					MomentId = nil
 				end
-				v_1.controller.dispose()
-				t[i_1] = nil
-				var11 = true
+				value.controller.dispose()
+				Tbl[i1] = nil
+				Flag1 = true
 			end
 		end
-		for i_2 in t_1 do
-			if t[i_2] == nil then
-				v_2 = createController(t_3[i_2])
-				local t_4 = {
+		for i2 in t do
+			if Tbl[i2] == nil then
+				local Controller = CreateController(ResolveResults[i2])
+				local config = {
 					active = nil,
 					decoded = false,
 					recordedTtff = false,
 					decodeStartedAt = nil,
 					decodeRetries = 0,
 					retryScheduled = false,
-					controller = v_2,
-					sourceKey = if var1 then t_3[i_2].sourceKey else nil
+					controller = Controller,
+					sourceKey = if FFlagMomentsRenderPostAssetsModule then ResolveResults[i2].sourceKey else nil
 				}
-				t[i_2] = t_4
-				var11 = true
-				task.spawn(function()
-					-- upvalues: var4 (copy), t (copy), i_2 (ref), t_4 (ref), v_2 (ref), p2 (copy), var3 (copy), p1 (copy), scheduleDecodeRetry (copy)
-					if var4 or t[i_2] ~= t_4 then return end
-					v_2.download()
+				Tbl[i2] = config
+				Flag1 = true
+				task.spawn(function() --[[ Line: 242 ]]
+					-- upvalues: Flag (upval), Tbl (upval), i2 (copy), config (copy), Controller (copy), p2 (upval), v1 (upval), p1 (upval), scheduleDecodeRetry (upval)
+					if Flag or Tbl[i2] ~= config then return end
+					Controller.download()
 					
-					if not var4 and t[i_2] == t_4 then
-						local var12 = i_2
-						local var13 = t_4
-						
-						if not var13.retryScheduled then
-							if p2.maxDecodeRetries <= var13.decodeRetries then return end
-							var13.retryScheduled = true
-							task.delay(p2.decodeRetryDelayMs / 1000, function()
-								-- upvalues: var13 (ref), var4 (copy), t (copy), var12 (ref), var3 (copy), p1 (copy), scheduleDecodeRetry (copy)
-								var13.retryScheduled = false
+					if not Flag and Tbl[i2] == config and not config.retryScheduled then
+						if p2.maxDecodeRetries <= config.decodeRetries then return end
+						config.retryScheduled = true
+						task.delay(p2.decodeRetryDelayMs / 1000, function() --[[ Line: 154 ]]
+							-- upvalues: config (copy), Flag (upval), Tbl (upval), i2 (copy), v1 (upval), p1 (upval), scheduleDecodeRetry (upval)
+							config.retryScheduled = false
+							
+							if Flag or Tbl[i2] ~= config or v1 ~= i2 or not config.decoded then return end
+							if not p1.getPlaybackActive(false) then return end
+							local Readiness = config.controller.getState(false).readiness
+							
+							if Readiness ~= "Ready" and Readiness ~= "Failed" then
+								config.decodeRetries += 1
+								config.controller.releaseDecoder()
+								config.controller.decode()
+								scheduleDecodeRetry(i2, config)
 								
-								if var4 or t[var12] ~= var13 or (var3 ~= var12 or not var13.decoded) then return end
-								if not p1.getPlaybackActive(false) then return end
-								local readiness = var13.controller.getState(false).readiness
-								
-								if readiness == "Ready" or readiness == "Failed" then
-									return
-								end
-								var13.decodeRetries += 1
-								var13.controller.releaseDecoder()
-								var13.controller.decode()
-								scheduleDecodeRetry(var12, var13)
-							end)
-						end
+								return
+							end
+						end)
 					end
 				end)
 			end
 		end
-		if var11 then
-			local t_4 = {}
+		if Flag1 then
+			local Controllers = {}
 			
-			for i_3, v_2 in t do
-				t_4[i_3] = v_2.controller
+			for i3, value1 in Tbl do
+				Controllers[i3] = value1.controller
 			end
-			var6(t_4)
+			Signal2(Controllers)
 		end
-		for i_3, v_3 in t do
-			v_2 = t_2[i_3] == true
+		for i4, value2 in Tbl do
+			local IsEntry = t1[i4] == true
 			
-			if v_2 and not v_3.decoded then
-				v_3.decodeStartedAt = now()
-				v_3.controller.decode()
-				v_3.decoded = true
-			elseif not v_2 and v_3.decoded then
-				v_3.controller.releaseDecoder()
-				v_3.decoded = false
-			end
-		end
-		for i_4, v_4 in t do
-			v_2 = i_4 == var9
-			
-			if v_4.active ~= v_2 then
-				v_4.controller.setActive(v_2)
-				v_4.active = v_2
+			if IsEntry and not value2.decoded then
+				value2.decodeStartedAt = Now()
+				value2.controller.decode()
+				value2.decoded = true
+			elseif not IsEntry and value2.decoded then
+				value2.controller.releaseDecoder()
+				value2.decoded = false
 			end
 		end
-		local var12 = if var9 ~= nil then nil else t[var9]
-		local var13 = var12 ~= nil and var12.controller.getState(p7).readiness == "Ready"
+		for i5, value3 in Tbl do
+			local IsMomentIdMatch = i5 == MomentId1
+			
+			if value3.active ~= IsMomentIdMatch then
+				value3.controller.setActive(IsMomentIdMatch)
+				value3.active = IsMomentIdMatch
+			end
+		end
+		local Entry = if MomentId1 == nil then nil else Tbl[MomentId1]
+		local IsReady: boolean = Entry ~= nil and Entry.controller.getState(p5).readiness == "Ready"
 		
-		if fFlagMomentsAutoplayAmpPolicy then
-			if var2 ~= nil and var2 ~= var9 then
-				if t[var2] ~= nil then
-					t[var2].controller.pause()
+		if FFlagMomentsAutoplayAmpPolicy then
+			if MomentId ~= nil and MomentId ~= MomentId1 then
+				if Tbl[MomentId] ~= nil then
+					Tbl[MomentId].controller.pause()
 				end
-				var2 = nil
+				MomentId = nil
 			end
-			i = var12 ~= nil and var12.controller.getState(p7).isPlaying
-			
-			if i then
-				var2 = var9
+			if Entry ~= nil and Entry.controller.getState(p5).isPlaying then
+				MomentId = MomentId1
 			end
 		end
-		if playbackActive and var12 ~= nil and var13 then
-			if (not fFlagMomentsAutoplayAmpPolicy or var7) and var2 ~= var9 then
-				if var2 ~= nil and t[var2] ~= nil then
-					t[var2].controller.pause()
+		if PlaybackActive and Entry ~= nil and IsReady then
+			if (not FFlagMomentsAutoplayAmpPolicy or CanAutoPlay) and MomentId ~= MomentId1 then
+				if MomentId ~= nil and Tbl[MomentId] ~= nil then
+					Tbl[MomentId].controller.pause()
 				end
-				var2 = var9
-				var12.controller.play()
+				MomentId = MomentId1
+				Entry.controller.play()
 				
-				if not var12.recordedTtff then
-					var12.recordedTtff = true
-					i = var12.decodeStartedAt
+				if not Entry.recordedTtff then
+					Entry.recordedTtff = true
+					local DecodeStartedAt = Entry.decodeStartedAt
 					
-					if i == nil or var9 == nil then
-						return
-					else
-						p3.recordTimeToFirstFrame({ momentId = var9, durationSeconds = now() - i })
+					if DecodeStartedAt ~= nil and MomentId1 ~= nil then
+						p3.recordTimeToFirstFrame({
+							momentId = MomentId1,
+							durationSeconds = Now() - DecodeStartedAt
+						})
 						
 						return
 					end
 				end
 			end
-		elseif var2 ~= nil then
-			if t[var2] ~= nil then
-				t[var2].controller.pause()
+		elseif MomentId ~= nil then
+			if Tbl[MomentId] ~= nil then
+				Tbl[MomentId].controller.pause()
 			end
-			var2 = nil
+			MomentId = nil
 		end
 	end
 	
-	local var14 = createEffect(function(p8)
-		-- upvalues: var4 (write), reconcile (ref)
-		if var4 then
+	local Effect = CreateEffectFunction(function(p6) --[[ Line: 338 ]]
+		-- upvalues: Flag (ref), reconcile (copy)
+		if not Flag then
+			reconcile(p6)
+			
 			return
 		end
-		reconcile(p8)
 	end)
 	
 	return {
-		getControllerFor = function(p8)
-			-- upvalues: t (ref)
-			local var15 = t[p8]
+		getControllerFor = function(p6) --[[ Line: 345 ]]
+			-- upvalues: Tbl (copy)
+			local Entry = Tbl[p6]
 			
-			return if var15 == nil then nil else var15.controller
+			return if Entry == nil then nil else Entry.controller
 		end,
-		getControllerMap = var5,
-		dispose = function()
-			-- upvalues: var4 (write), var14 (ref), t (ref), var2 (write), var6 (ref)
-			if var4 then return end
-			var4 = true
-			var14()
+		getControllerMap = Signal,
+		dispose = function() --[[ Line: 350 ]]
+			-- upvalues: Flag (ref), Effect (copy), Tbl (copy), MomentId (ref), Signal2 (copy)
+			if Flag then return end
+			Flag = true
+			Effect()
 			
-			for i, v in t do
-				v.controller.dispose()
+			for _, value in Tbl do
+				value.controller.dispose()
 			end
-			table.clear(t)
-			var2 = nil
-			var6({})
+			table.clear(Tbl)
+			MomentId = nil
+			Signal2({})
 		end
 	}
 end

@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("AXCatalogBackgroundsFilters", false) and require(script.Parent.FFlagAXCatalogBackgroundsSupport)
+﻿local FFlagAXCatalogBackgroundsSupportModule = require(script.Parent.FFlagAXCatalogBackgroundsSupport)
+
+return game:DefineFastFlag("AXCatalogBackgroundsFilters", false) and FFlagAXCatalogBackgroundsSupportModule

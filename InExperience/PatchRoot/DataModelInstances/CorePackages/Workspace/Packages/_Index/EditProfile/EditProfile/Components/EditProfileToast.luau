@@ -1,1 +1,1 @@
-﻿return require(script.EditProfileToastScreen)
+﻿return (require(script.EditProfileToastScreen))

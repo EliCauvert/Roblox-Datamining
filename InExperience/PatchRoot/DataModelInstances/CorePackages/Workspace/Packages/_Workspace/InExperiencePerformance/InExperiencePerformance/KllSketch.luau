@@ -1,78 +1,82 @@
-﻿local t = {}
-t.__index = t
+﻿local KllSketchModule = {}
+KllSketchModule.__index = KllSketchModule
 
-function t.new(p1)
-	-- upvalues: t (ref)
-	return setmetatable({
+function KllSketchModule.new(p1: number) --[[ Line: 20 ]]
+	-- upvalues: KllSketchModule (copy)
+	return (setmetatable({
 		levels = { table.create(p1) },
 		weightedSketch = { totalWeight = 0, cached = false, weightTuples = {} },
 		maxSize = if p1 % 2 == 0 then p1 else p1 - 1
-	}, t)
+	}, KllSketchModule))
 end
 
-function t:insert(p1)
+function KllSketchModule:insert(p1) --[[ Line: 36 ]]
 	self.weightedSketch.cached = false
-	local levels = self.levels
-	table.insert(levels[1], p1)
+	local Levels = self.levels
+	table.insert(Levels[1], p1)
 	
-	for i, v in levels do
-		if self.maxSize <= #v then
-			compressWeightedKll(levels, i)
+	for i, level in Levels do
+		if self.maxSize <= #level then
+			compressWeightedKll(Levels, i)
 		end
 	end
 end
 
-function compressWeightedKll(p2, p3)
-	local var1 = p2[p3]
-	table.sort(var1)
-	local list = table.create(#var1 // 2)
+function compressWeightedKll(List1, Count: number) --[[ Line: 51 ]]
+	local List = List1[Count]
+	table.sort(List)
+	local Buffer = table.create(#List // 2)
 	
-	for i = 1, #var1, 2 do
-		table.insert(list, var1[math.random(2) - 1 + i])
+	for i = 1, #List, 2 do
+		table.insert(Buffer, List[math.random(2) - 1 + i])
 	end
-	if p3 == #p2 then
-		table.insert(p2, list)
+	if Count == #List1 then
+		table.insert(List1, Buffer)
 	else
-		table.move(list, 1, #list, #p2[p3 + 1] + 1, p2[p3 + 1])
+		table.move(Buffer, 1, #Buffer, #List1[Count + 1] + 1, List1[Count + 1])
 	end
-	table.clear(p2[p3])
+	table.clear(List1[Count])
 end
 
-function t:generateWeightedSketch()
-	local t = {}
-	local var2 = 1
-	local var3 = 0
+function KllSketchModule:generateWeightedSketch() --[[ Line: 77 ]]
+	local List = {}
+	local Weight = 1
+	local TotalWeight = 0
 	
-	for i, v in self.levels do
-		for i_1, v_1 in v do
-			table.insert(t, { value = v_1, weight = var2 })
-			var3 += var2
+	for _, level in self.levels do
+		for _, Value in level do
+			table.insert(List, { value = Value, weight = Weight })
+			TotalWeight += Weight
 		end
-		var2 *= 2
+		Weight *= 2
 	end
-	table.sort(t, function(p4, p5)
-		return p4.value < p5.value
+	table.sort(List, function(A, B): boolean --[[ Line: 94 ]]
+		return A.value < B.value
 	end)
-	self.weightedSketch = { cached = true, weightTuples = t, totalWeight = var3 }
+	self.weightedSketch = {
+		cached = true,
+		weightTuples = List,
+		totalWeight = TotalWeight
+	}
 end
 
-function t:getPercentile(p4)
+function KllSketchModule:getPercentile(p2: number) --[[ Line: 106 ]]
 	if not self.weightedSketch.cached then
 		self:generateWeightedSketch()
 	end
 	if #self.weightedSketch.weightTuples > 0 then
-		local floored = math.floor(p4 / 100 * self.weightedSketch.totalWeight)
-		local var4 = 0
+		local Floored = math.floor(p2 / 100 * self.weightedSketch.totalWeight)
+		local NewWeight = 0
 		
-		for i, v in self.weightedSketch.weightTuples do
-			var4 += v.weight
+		for _, weightTuple in self.weightedSketch.weightTuples do
+			NewWeight += weightTuple.weight
 			
-			if floored <= var4 then
-				return v.value
+			if Floored <= NewWeight then
+				return weightTuple.value
 			end
 		end
 	end
 	return 0
 end
 
-return t
+return KllSketchModule

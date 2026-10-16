@@ -1,79 +1,82 @@
-﻿local replicatedStorageService = game:GetService("ReplicatedStorage")
-local robloxReplicatedStorageService = game:GetService("RobloxReplicatedStorage")
+﻿local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local RobloxReplicatedStorage = game:GetService("RobloxReplicatedStorage")
 
 if not game:GetService("RunService"):IsStudio() then return end
-local var1
-local function _(p1)
-	-- upvalues: robloxReplicatedStorageService (ref)
-	local var2 = robloxReplicatedStorageService:FindFirstChild(p1)
+local function _(ChildName) --[[ Line: 16 | Named "ensureRemote" ]]
+	-- upvalues: RobloxReplicatedStorage (copy)
+	local ChildName1 = RobloxReplicatedStorage:FindFirstChild(ChildName)
 	
-	if var2 and var2:IsA("RemoteEvent") then
-		return var2
+	if ChildName1 and ChildName1:IsA("RemoteEvent") then
+		return ChildName1
+	else
+		local RemoteEvent = Instance.new("RemoteEvent")
+		RemoteEvent.Name = ChildName
+		RemoteEvent.Parent = RobloxReplicatedStorage
+		
+		return RemoteEvent
 	end
-	local remoteEvent = Instance.new("RemoteEvent")
-	remoteEvent.Name = p1
-	remoteEvent.Parent = robloxReplicatedStorageService
+end
+
+local _ = function(ChildName) --[[ Line: 27 | Named "waitForBindable" ]]
+	-- upvalues: ReplicatedStorage (copy)
+	local ChildName1 = ReplicatedStorage:WaitForChild(ChildName, 5)
 	
-	return remoteEvent
+	return if ChildName1 == nil or not ChildName1:IsA("BindableEvent") then nil else ChildName1
 end
 
-local _ = function(p1)
-	-- upvalues: replicatedStorageService (ref)
-	local var2 = replicatedStorageService:WaitForChild(p1, 5)
+local PlatformLeaderboardPush = RobloxReplicatedStorage:FindFirstChild("PlatformLeaderboardPush")
+local RemoteEvent = nil
+
+if PlatformLeaderboardPush and PlatformLeaderboardPush:IsA("RemoteEvent") then
+	RemoteEvent = PlatformLeaderboardPush
+else
+	local PlatformLeaderboardPush1 = Instance.new("RemoteEvent")
+	PlatformLeaderboardPush1.Name = "PlatformLeaderboardPush"
+	PlatformLeaderboardPush1.Parent = RobloxReplicatedStorage
+	RemoteEvent = PlatformLeaderboardPush1
+end
+local PlatformLeaderboardTabOpened = RobloxReplicatedStorage:FindFirstChild("PlatformLeaderboardTabOpened")
+local RemoteEvent1 = nil
+
+if PlatformLeaderboardTabOpened and PlatformLeaderboardTabOpened:IsA("RemoteEvent") then
+	RemoteEvent1 = PlatformLeaderboardTabOpened
+else
+	local PlatformLeaderboardTabOpened1 = Instance.new("RemoteEvent")
+	PlatformLeaderboardTabOpened1.Name = "PlatformLeaderboardTabOpened"
+	PlatformLeaderboardTabOpened1.Parent = RobloxReplicatedStorage
+	RemoteEvent1 = PlatformLeaderboardTabOpened1
+end
+local PlatformLeaderboardTabClosed = RobloxReplicatedStorage:FindFirstChild("PlatformLeaderboardTabClosed")
+
+if not PlatformLeaderboardTabClosed or not PlatformLeaderboardTabClosed:IsA("RemoteEvent") then
+	local PlatformLeaderboardTabClosed1 = Instance.new("RemoteEvent")
+	PlatformLeaderboardTabClosed1.Name = "PlatformLeaderboardTabClosed"
+	PlatformLeaderboardTabClosed1.Parent = RobloxReplicatedStorage
+end
+local PlatformLeaderboardMockPushToAll = ReplicatedStorage:WaitForChild("PlatformLeaderboardMockPushToAll", 5)
+local PlatformLeaderboardMockPushToAll1 = if PlatformLeaderboardMockPushToAll == nil or not PlatformLeaderboardMockPushToAll:IsA("BindableEvent") then nil else PlatformLeaderboardMockPushToAll
+
+if PlatformLeaderboardMockPushToAll1 == nil then return end
+local PlatformLeaderboardMockPushToPlayer = ReplicatedStorage:WaitForChild("PlatformLeaderboardMockPushToPlayer", 5)
+local PlatformLeaderboardMockPushToPlayer1 = if PlatformLeaderboardMockPushToPlayer == nil or not PlatformLeaderboardMockPushToPlayer:IsA("BindableEvent") then nil else PlatformLeaderboardMockPushToPlayer
+local PlatformLeaderboardMockTabOpened = ReplicatedStorage:WaitForChild("PlatformLeaderboardMockTabOpened", 5)
+local PlatformLeaderboardMockTabOpened1 = if PlatformLeaderboardMockTabOpened == nil or not PlatformLeaderboardMockTabOpened:IsA("BindableEvent") then nil else PlatformLeaderboardMockTabOpened
+
+if PlatformLeaderboardMockPushToPlayer1 ~= nil and PlatformLeaderboardMockTabOpened1 ~= nil then
+	PlatformLeaderboardMockPushToAll1.Event:Connect(function(p1) --[[ Line: 52 ]]
+		-- upvalues: RemoteEvent (copy)
+		RemoteEvent:FireAllClients(p1)
+	end)
+	PlatformLeaderboardMockPushToPlayer1.Event:Connect(function(Player: Player, p1) --[[ Line: 56 ]]
+		-- upvalues: RemoteEvent (copy)
+		if typeof(Player) == "Instance" and Player:IsA("Player") then
+			RemoteEvent:FireClient(Player, p1)
+		end
+	end)
+	RemoteEvent1.OnServerEvent:Connect(function(Player, p1) --[[ Line: 62 ]]
+		-- upvalues: PlatformLeaderboardMockTabOpened1 (copy)
+		PlatformLeaderboardMockTabOpened1:Fire(Player, p1)
+	end)
 	
-	return if var2 == nil or not var2:IsA("BindableEvent") then nil else var2
-end
-
-local platformLeaderboardPush = robloxReplicatedStorageService:FindFirstChild("PlatformLeaderboardPush")
-
-if platformLeaderboardPush and platformLeaderboardPush:IsA("RemoteEvent") then
-	var1 = platformLeaderboardPush
-else
-	local platformLeaderboardPush_1 = Instance.new("RemoteEvent")
-	platformLeaderboardPush_1.Name = "PlatformLeaderboardPush"
-	platformLeaderboardPush_1.Parent = robloxReplicatedStorageService
-	var1 = platformLeaderboardPush_1
-end
-local platformLeaderboardTabOpened = robloxReplicatedStorageService:FindFirstChild("PlatformLeaderboardTabOpened")
-
-if platformLeaderboardTabOpened and platformLeaderboardTabOpened:IsA("RemoteEvent") then
-	platformLeaderboardPush = platformLeaderboardTabOpened
-else
-	local platformLeaderboardTabOpened_1 = Instance.new("RemoteEvent")
-	platformLeaderboardTabOpened_1.Name = "PlatformLeaderboardTabOpened"
-	platformLeaderboardTabOpened_1.Parent = robloxReplicatedStorageService
-	platformLeaderboardPush = platformLeaderboardTabOpened_1
-end
-platformLeaderboardTabOpened = robloxReplicatedStorageService:FindFirstChild("PlatformLeaderboardTabClosed")
-
-if not platformLeaderboardTabOpened or not platformLeaderboardTabOpened:IsA("RemoteEvent") then
-	local platformLeaderboardTabClosed = Instance.new("RemoteEvent")
-	platformLeaderboardTabClosed.Name = "PlatformLeaderboardTabClosed"
-	platformLeaderboardTabClosed.Parent = robloxReplicatedStorageService
-end
-local platformLeaderboardMockPushToAll = replicatedStorageService:WaitForChild("PlatformLeaderboardMockPushToAll", 5)
-platformLeaderboardTabOpened = if platformLeaderboardMockPushToAll == nil or not platformLeaderboardMockPushToAll:IsA("BindableEvent") then nil else platformLeaderboardMockPushToAll
-
-if platformLeaderboardTabOpened == nil then return end
-local platformLeaderboardMockPushToPlayer = replicatedStorageService:WaitForChild("PlatformLeaderboardMockPushToPlayer", 5)
-platformLeaderboardMockPushToAll = if platformLeaderboardMockPushToPlayer == nil or not platformLeaderboardMockPushToPlayer:IsA("BindableEvent") then nil else platformLeaderboardMockPushToPlayer
-local platformLeaderboardMockTabOpened = replicatedStorageService:WaitForChild("PlatformLeaderboardMockTabOpened", 5)
-platformLeaderboardMockPushToPlayer = if platformLeaderboardMockTabOpened == nil or not platformLeaderboardMockTabOpened:IsA("BindableEvent") then nil else platformLeaderboardMockTabOpened
-
-if platformLeaderboardMockPushToAll == nil or platformLeaderboardMockPushToPlayer == nil then
 	return
 end
-platformLeaderboardTabOpened.Event:Connect(function(p1)
-	-- upvalues: var1 (ref)
-	var1:FireAllClients(p1)
-end)
-platformLeaderboardMockPushToAll.Event:Connect(function(p1, p2)
-	-- upvalues: var1 (ref)
-	if typeof(p1) == "Instance" and p1:IsA("Player") then
-		var1:FireClient(p1, p2)
-	end
-end)
-platformLeaderboardPush.OnServerEvent:Connect(function(p1, p2)
-	-- upvalues: platformLeaderboardMockPushToPlayer (ref)
-	platformLeaderboardMockPushToPlayer:Fire(p1, p2)
-end)

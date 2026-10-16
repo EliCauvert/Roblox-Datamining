@@ -1,38 +1,38 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local playersService = game:GetService("Players")
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local setPlayerFriendStatusModule = require(script.Parent.Parent.Parent.Actions.SetPlayerFriendStatus)
-local eventConnectionModule = require(script.Parent.EventConnection)
-local socialConnector = roactModule.PureComponent:extend("SocialConnector")
+﻿local CorePackages = game:GetService("CorePackages")
+local Players = game:GetService("Players")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local SetPlayerFriendStatusModule = require(script.Parent.Parent.Parent.Actions.SetPlayerFriendStatus)
+local EventConnectionModule = require(script.Parent.EventConnection)
+local SocialConnector = RoactModule.PureComponent:extend("SocialConnector")
 
-function socialConnector.didMount(p1)
+function SocialConnector.didMount(p1) --[[ Line: 17 ]]
 	p1.mounted = true
 end
 
-function socialConnector.render(p1)
-	-- upvalues: roactModule (ref), eventConnectionModule (ref), playersService (ref)
-	return roactModule.createFragment({
-		FriendStatusChangedConnection = roactModule.createElement(eventConnectionModule, {
-			event = playersService.LocalPlayer.FriendStatusChanged,
-			callback = function(p2, p3)
-				-- upvalues: p1 (ref)
+function SocialConnector.render(p1) --[[ Line: 21 ]]
+	-- upvalues: RoactModule (copy), EventConnectionModule (copy), Players (copy)
+	return RoactModule.createFragment({
+		FriendStatusChangedConnection = RoactModule.createElement(EventConnectionModule, {
+			event = Players.LocalPlayer.FriendStatusChanged,
+			callback = function(p2, p3) --[[ Line: 25 ]]
+				-- upvalues: p1 (copy)
 				p1.props.setPlayerFriendStatus(p2, p3)
 			end
 		})
 	})
 end
 
-function socialConnector.willUnmount(p1)
+function SocialConnector.willUnmount(p1) --[[ Line: 32 ]]
 	p1.mounted = false
 end
 
-return roactRoduxModule.connect(nil, function(p1)
-	-- upvalues: setPlayerFriendStatusModule (ref)
+return RoactRoduxModule.connect(nil, function(Callback) --[[ Line: 36 | Named "mapDispatchToProps" ]]
+	-- upvalues: SetPlayerFriendStatusModule (copy)
 	return {
-		setPlayerFriendStatus = function(value, p2)
-			-- upvalues: p1 (ref), setPlayerFriendStatusModule (copy)
-			return p1(setPlayerFriendStatusModule(value, p2))
+		setPlayerFriendStatus = function(p1, p2) --[[ Line: 38 ]]
+			-- upvalues: Callback (copy), SetPlayerFriendStatusModule (upval)
+			return Callback(SetPlayerFriendStatusModule(p1, p2))
 		end
 	}
-end)(socialConnector)
+end)(SocialConnector)

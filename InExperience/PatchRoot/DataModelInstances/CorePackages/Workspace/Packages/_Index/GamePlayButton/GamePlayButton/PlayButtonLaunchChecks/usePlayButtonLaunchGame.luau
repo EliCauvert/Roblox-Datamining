@@ -1,142 +1,148 @@
-﻿local gamePlayButton = script:FindFirstAncestor("GamePlayButton")
-local _ = require(gamePlayButton.PlayButtonTypes)
-local parent = gamePlayButton.Parent
-local reactModule = require(parent.React)
-local useRoactService = require(parent.RobloxAppHooks).useRoactService
-local roactServiceTagsModule = require(parent.RoactServiceTags)
-local roactAnalytics = roactServiceTagsModule.RoactAnalytics
-local appEventIngestService = roactServiceTagsModule.AppEventIngestService
-local appGame = roactServiceTagsModule.AppGame
-local roactUtilsModule = require(parent.RoactUtils)
-local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local discoveryAnalyticsModule = require(parent.DiscoveryAnalytics)
-local gamePlayIntent = discoveryAnalyticsModule.Events.gamePlayIntent
-local joinGamePlayButton = discoveryAnalyticsModule.Points.joinGamePlayButton
-local gameVotesRoduxModule = require(parent.GameVotesRodux)
-local reasonForNotVoteable = gameVotesRoduxModule.Enums.ReasonForNotVoteable
-local clearUserGameVotes = gameVotesRoduxModule.UserGameVotes.ClearUserGameVotes
-local isVRAppBuild = require(parent.AppCommonLib).IsVRAppBuild
-local splashScreenManager = require(parent.SplashScreenManager).SplashScreenManager
-local launchGame = require(parent.GameLaunch).LaunchGame
-local fFlagDeferInExperienceRbxmDownload = require(parent.SharedFlags).FFlagDeferInExperienceRbxmDownload
-local dashModule = require(parent.Dash)
-local getFFlagLuaAppEnableVirtualEventPlaceId = require(parent.SharedFlags).GetFFlagLuaAppEnableVirtualEventPlaceId
-local fFlagLuaAppEnableStratusStreamingTestOnly = require(parent.SharedFlags).FFlagLuaAppEnableStratusStreamingTestOnly
-local navigateToRoute = require(parent.NavigationRodux).Thunks.NavigateToRoute
-local appPage = require(parent.RobloxAppEnums).AppPage
-local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
-local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
-local fFlagLuaAppEnablePlayButtonThrottle = require(parent.SharedFlags).FFlagLuaAppEnablePlayButtonThrottle
-local fIntLuaAppPlayButtonThrottleTimeSeconds = require(parent.SharedFlags).FIntLuaAppPlayButtonThrottleTimeSeconds
-local fFlagLuaAppFixLaunchGameSourceParam = require(parent.SharedFlags).FFlagLuaAppFixLaunchGameSourceParam
-local fFlagLuaAppEnableStratusStreamingCheck = require(parent.SharedFlags).FFlagLuaAppEnableStratusStreamingCheck
-local fFlagLuaAppDemoModePlayButtonTelemetry = require(parent.SharedFlags).FFlagLuaAppDemoModePlayButtonTelemetry
-local videoService = game:GetService("VideoService")
+﻿local GamePlayButton = script:FindFirstAncestor("GamePlayButton")
+local _ = require(GamePlayButton.PlayButtonTypes)
+local Parent = GamePlayButton.Parent
+local ReactModule = require(Parent.React)
+local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
+local RoactServiceTagsModule = require(Parent.RoactServiceTags)
+local RoactAnalytics = RoactServiceTagsModule.RoactAnalytics
+local AppEventIngestService = RoactServiceTagsModule.AppEventIngestService
+local AppGame = RoactServiceTagsModule.AppGame
+local RoactUtilsModule = require(Parent.RoactUtils)
+local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
+local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
+local DiscoveryAnalyticsModule = require(Parent.DiscoveryAnalytics)
+local GamePlayIntentFunction = DiscoveryAnalyticsModule.Events.gamePlayIntent
+local JoinGamePlayButtonFunction = DiscoveryAnalyticsModule.Points.joinGamePlayButton
+local GameVotesRoduxModule = require(Parent.GameVotesRodux)
+local ReasonForNotVoteable = GameVotesRoduxModule.Enums.ReasonForNotVoteable
+local ClearUserGameVotesFunction = GameVotesRoduxModule.UserGameVotes.ClearUserGameVotes
+local IsVRAppBuildFunction = require(Parent.AppCommonLib).IsVRAppBuild
+local SplashScreenManager = require(Parent.SplashScreenManager).SplashScreenManager
+local LaunchGameFunction = require(Parent.GameLaunch).LaunchGame
+local FFlagDeferInExperienceRbxmDownload = require(Parent.SharedFlags).FFlagDeferInExperienceRbxmDownload
+local DashModule = require(Parent.Dash)
+local GetFFlagLuaAppEnableVirtualEventPlaceIdFunction = require(Parent.SharedFlags).GetFFlagLuaAppEnableVirtualEventPlaceId
+local FFlagLuaAppEnableStratusStreamingTestOnly = require(Parent.SharedFlags).FFlagLuaAppEnableStratusStreamingTestOnly
+local NavigateToRouteFunction = require(Parent.NavigationRodux).Thunks.NavigateToRoute
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
+local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
+local FFlagLuaAppEnablePlayButtonThrottle = require(Parent.SharedFlags).FFlagLuaAppEnablePlayButtonThrottle
+local FIntLuaAppPlayButtonThrottleTimeSeconds = require(Parent.SharedFlags).FIntLuaAppPlayButtonThrottleTimeSeconds
+local FFlagLuaAppFixLaunchGameSourceParam = require(Parent.SharedFlags).FFlagLuaAppFixLaunchGameSourceParam
+local FFlagLuaAppEnableStratusStreamingCheck = require(Parent.SharedFlags).FFlagLuaAppEnableStratusStreamingCheck
+local FFlagLuaAppDemoModePlayButtonTelemetry = require(Parent.SharedFlags).FFlagLuaAppDemoModePlayButtonTelemetry
+local VideoService = game:GetService("VideoService")
 
-return function(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: useRoactService (ref), roactAnalytics (ref), appEventIngestService (ref), appGame (ref), useSelector (ref), useDispatch (ref), fFlagLuaAppEnablePlayButtonThrottle (ref), reactModule (ref), fIntLuaAppPlayButtonThrottleTimeSeconds (ref), getFFlagLuaAppEnableVirtualEventPlaceId (ref), fFlagLuaAppDemoModePlayButtonTelemetry (ref), gamePlayIntent (ref), joinGamePlayButton (ref), fFlagLuaAppEnableStratusStreamingTestOnly (ref), fFlagLuaAppEnableStratusStreamingCheck (ref), videoService (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateToRoute (ref), isVRAppBuild (ref), splashScreenManager (ref), fFlagDeferInExperienceRbxmDownload (ref), dashModule (ref), fFlagLuaAppFixLaunchGameSourceParam (ref), launchGame (ref), reasonForNotVoteable (ref), clearUserGameVotes (ref)
-	local var2 = useRoactService(roactAnalytics)
-	local var3 = useRoactService(appEventIngestService)
-	local var4 = useRoactService(appGame)
-	local var5 = useSelector(function(p8)
-		-- upvalues: p1 (ref)
-		return p8.UserGameVotes[p1]
+return function(UniverseId, p1, p2, ReferralSource, Ctx, LaunchSource, ExtraParams) --[[ Line: 45 ]]
+	-- upvalues: UseRoactServiceFunction (copy), RoactAnalytics (copy), AppEventIngestService (copy), AppGame (copy), UseSelectorFunction (copy), UseDispatchFunction (copy), FFlagLuaAppEnablePlayButtonThrottle (copy), ReactModule (copy), FIntLuaAppPlayButtonThrottleTimeSeconds (copy), GetFFlagLuaAppEnableVirtualEventPlaceIdFunction (copy), FFlagLuaAppDemoModePlayButtonTelemetry (copy), GamePlayIntentFunction (copy), JoinGamePlayButtonFunction (copy), FFlagLuaAppEnableStratusStreamingTestOnly (copy), FFlagLuaAppEnableStratusStreamingCheck (copy), VideoService (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateToRouteFunction (copy), IsVRAppBuildFunction (copy), SplashScreenManager (copy), FFlagDeferInExperienceRbxmDownload (copy), DashModule (copy), FFlagLuaAppFixLaunchGameSourceParam (copy), LaunchGameFunction (copy), ReasonForNotVoteable (copy), ClearUserGameVotesFunction (copy)
+	local UseRoactServiceResult = UseRoactServiceFunction(RoactAnalytics)
+	local UseRoactServiceResult1 = UseRoactServiceFunction(AppEventIngestService)
+	local UseRoactServiceResult2 = UseRoactServiceFunction(AppGame)
+	local UseSelectorResult = UseSelectorFunction(function(p3) --[[ Line: 58 ]]
+		-- upvalues: UniverseId (copy)
+		return p3.UserGameVotes[UniverseId]
 	end)
-	local var6 = useDispatch()
-	local var7 = if fFlagLuaAppEnablePlayButtonThrottle then reactModule.useRef(0) else nil
+	local UseDispatchResult = UseDispatchFunction()
+	local UseRefResult = if FFlagLuaAppEnablePlayButtonThrottle then ReactModule.useRef(0) else nil
 	
-	return reactModule.useCallback(function(p8, p9)
-		-- upvalues: fFlagLuaAppEnablePlayButtonThrottle (copy), var7 (ref), fIntLuaAppPlayButtonThrottleTimeSeconds (copy), getFFlagLuaAppEnableVirtualEventPlaceId (copy), p2 (ref), p3 (ref), fFlagLuaAppDemoModePlayButtonTelemetry (copy), gamePlayIntent (copy), var3 (ref), p4 (ref), p1 (ref), p7 (write), joinGamePlayButton (copy), var2 (ref), p5 (ref), fFlagLuaAppEnableStratusStreamingTestOnly (copy), fFlagLuaAppEnableStratusStreamingCheck (copy), videoService (copy), appPage (copy), p6 (ref), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var6 (ref), navigateToRoute (copy), isVRAppBuild (copy), splashScreenManager (copy), fFlagDeferInExperienceRbxmDownload (copy), dashModule (copy), fFlagLuaAppFixLaunchGameSourceParam (copy), launchGame (copy), var4 (ref), var5 (ref), reasonForNotVoteable (copy), clearUserGameVotes (copy)
-		if fFlagLuaAppEnablePlayButtonThrottle then
-			local currentTime = tick()
+	return (ReactModule.useCallback(function(Callback: (any) -> (), p3) --[[ Line: 66 ]]
+		-- upvalues: FFlagLuaAppEnablePlayButtonThrottle (upval), UseRefResult (copy), FIntLuaAppPlayButtonThrottleTimeSeconds (upval), GetFFlagLuaAppEnableVirtualEventPlaceIdFunction (upval), p1 (copy), p2 (copy), FFlagLuaAppDemoModePlayButtonTelemetry (upval), GamePlayIntentFunction (upval), UseRoactServiceResult1 (copy), ReferralSource (copy), UniverseId (copy), ExtraParams (ref), JoinGamePlayButtonFunction (upval), UseRoactServiceResult (copy), Ctx (copy), FFlagLuaAppEnableStratusStreamingTestOnly (upval), FFlagLuaAppEnableStratusStreamingCheck (upval), VideoService (upval), AppPage (upval), LaunchSource (copy), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateToRouteFunction (upval), IsVRAppBuildFunction (upval), SplashScreenManager (upval), FFlagDeferInExperienceRbxmDownload (upval), DashModule (upval), FFlagLuaAppFixLaunchGameSourceParam (upval), LaunchGameFunction (upval), UseRoactServiceResult2 (copy), UseSelectorResult (copy), ReasonForNotVoteable (upval), ClearUserGameVotesFunction (upval)
+		if FFlagLuaAppEnablePlayButtonThrottle then
+			local CurrentTime = tick()
 			
-			if currentTime - var7.current < fIntLuaAppPlayButtonThrottleTimeSeconds then return end
-			var7.current = currentTime
+			if CurrentTime - UseRefResult.current < FIntLuaAppPlayButtonThrottleTimeSeconds then return end
+			UseRefResult.current = CurrentTime
 		end
-		if getFFlagLuaAppEnableVirtualEventPlaceId() and (not p2 or not p3) or not getFFlagLuaAppEnableVirtualEventPlaceId() and not p3 then return end
-		if p8 == nil then
-			gamePlayIntent(var3, "PlayButton", {
-				placeId = if getFFlagLuaAppEnableVirtualEventPlaceId() then p2 else p3,
-				rootPlaceId = tonumber(p3),
-				referralSource = p4,
-				universeId = p1,
-				launchData = if p7 and p7.launchData then p7.launchData else nil,
-				tileType = if p7 then p7.tileType else nil,
-				nativeAdData = if p7 then p7.nativeAdData else nil,
-				actionType = if fFlagLuaAppDemoModePlayButtonTelemetry then p9 else nil
+		if GetFFlagLuaAppEnableVirtualEventPlaceIdFunction() and (not p1 or not p2) or not GetFFlagLuaAppEnableVirtualEventPlaceIdFunction() and not p2 then return end
+		if Callback == nil then
+			GamePlayIntentFunction(UseRoactServiceResult1, "PlayButton", {
+				placeId = if GetFFlagLuaAppEnableVirtualEventPlaceIdFunction() then p1 else p2,
+				rootPlaceId = tonumber(p2),
+				referralSource = ReferralSource,
+				universeId = UniverseId,
+				launchData = if ExtraParams and ExtraParams.launchData then ExtraParams.launchData else nil,
+				tileType = if ExtraParams then ExtraParams.tileType else nil,
+				nativeAdData = if ExtraParams then ExtraParams.nativeAdData else nil,
+				actionType = if FFlagLuaAppDemoModePlayButtonTelemetry then p3 else nil
 			})
-		elseif fFlagLuaAppDemoModePlayButtonTelemetry then
-			p8(p9)
+		elseif FFlagLuaAppDemoModePlayButtonTelemetry then
+			Callback(p3)
 		else
-			p8()
+			Callback()
 		end
-		joinGamePlayButton(var2.InfluxDb, "gamePlayIntent", {
+		JoinGamePlayButtonFunction(UseRoactServiceResult.InfluxDb, "gamePlayIntent", {
 			isUniversalApp = true,
-			referralSource = p4,
-			placeId = if getFFlagLuaAppEnableVirtualEventPlaceId() then p2 else p3,
-			ctx = p5,
-			actionType = if fFlagLuaAppDemoModePlayButtonTelemetry then p9 else nil
+			referralSource = ReferralSource,
+			placeId = if GetFFlagLuaAppEnableVirtualEventPlaceIdFunction() then p1 else p2,
+			ctx = Ctx,
+			actionType = if FFlagLuaAppDemoModePlayButtonTelemetry then p3 else nil
 		})
 		
-		if fFlagLuaAppEnableStratusStreamingTestOnly then
-			if fFlagLuaAppEnableStratusStreamingCheck then
-				if videoService:GameStreamingEnabled() then
-					local list = {
+		if FFlagLuaAppEnableStratusStreamingTestOnly then
+			if FFlagLuaAppEnableStratusStreamingCheck then
+				if VideoService:GameStreamingEnabled() then
+					local list1 = {
 						{
-							name = appPage.VideoServer,
-							placeId = if getFFlagLuaAppEnableVirtualEventPlaceId() then p2 else p3,
-							launchSource = p6,
-							extraParams = p7
+							name = AppPage.VideoServer,
+							placeId = if GetFFlagLuaAppEnableVirtualEventPlaceIdFunction() then p1 else p2,
+							launchSource = LaunchSource,
+							extraParams = ExtraParams
 						}
 					}
 					
-					if fFlagSignalsNavP3Dispatch then
-						var1.to(var1.fromLegacyPage(list[#list]))
+					if FFlagSignalsNavP3Dispatch then
+						NavigationCommands.to(NavigationCommands.fromLegacyPage(list1[#list1]))
+						
+						return
+					else
+						UseDispatchResult(NavigateToRouteFunction(list1))
 						
 						return
 					end
-					var6(navigateToRoute(list))
-					
-					return
-				elseif isVRAppBuild() then
-					splashScreenManager.initialize(36)
-					wait(0.3)
 				end
-				if fFlagDeferInExperienceRbxmDownload then
-					p7 = dashModule.join(p7 or {}, { universeId = p1 })
-				end
-				if fFlagLuaAppFixLaunchGameSourceParam then
-					launchGame(if getFFlagLuaAppEnableVirtualEventPlaceId() then p2 else p3, p4, p7, var4, p6)
-				else
-					launchGame(if getFFlagLuaAppEnableVirtualEventPlaceId() then p2 else p3, p6, p7, var4)
-				end
-				if var5 and var5.reasonForNotVoteable == reasonForNotVoteable.PlayGame then
-					var6(clearUserGameVotes(p1))
-				end
-				return
 			else
 				local list = {
 					{
-						name = appPage.VideoServer,
-						placeId = if getFFlagLuaAppEnableVirtualEventPlaceId() then p2 else p3,
-						launchSource = p6,
-						extraParams = p7
+						name = AppPage.VideoServer,
+						placeId = if GetFFlagLuaAppEnableVirtualEventPlaceIdFunction() then p1 else p2,
+						launchSource = LaunchSource,
+						extraParams = ExtraParams
 					}
 				}
 				
-				if fFlagSignalsNavP3Dispatch then
-					var1.to(var1.fromLegacyPage(list[#list]))
+				if FFlagSignalsNavP3Dispatch then
+					NavigationCommands.to(NavigationCommands.fromLegacyPage(list[#list]))
+					
+					return
+				else
+					UseDispatchResult(NavigateToRouteFunction(list))
 					
 					return
 				end
-				var6(navigateToRoute(list))
 			end
 		end
+		if IsVRAppBuildFunction() then
+			SplashScreenManager.initialize(36)
+			wait(0.3)
+		end
+		if FFlagDeferInExperienceRbxmDownload then
+			ExtraParams = DashModule.join(ExtraParams or {}, { universeId = UniverseId })
+		end
+		if FFlagLuaAppFixLaunchGameSourceParam then
+			LaunchGameFunction(if GetFFlagLuaAppEnableVirtualEventPlaceIdFunction() then p1 else p2, ReferralSource, ExtraParams, UseRoactServiceResult2, LaunchSource)
+		else
+			LaunchGameFunction(if GetFFlagLuaAppEnableVirtualEventPlaceIdFunction() then p1 else p2, LaunchSource, ExtraParams, UseRoactServiceResult2)
+		end
+		if UseSelectorResult and UseSelectorResult.reasonForNotVoteable == ReasonForNotVoteable.PlayGame then
+			UseDispatchResult(ClearUserGameVotesFunction(UniverseId))
+		end
 	end, {
-		var3, var2, var4, var5, p1,
-		if getFFlagLuaAppEnableVirtualEventPlaceId() then p2 else nil, p3, p4, p5, p7,
-		if fFlagLuaAppDemoModePlayButtonTelemetry then var6 else nil,
-		if fFlagLuaAppDemoModePlayButtonTelemetry then p6 else nil
-	})
+		UseRoactServiceResult1, UseRoactServiceResult, UseRoactServiceResult2,
+		UseSelectorResult, UniverseId,
+		if GetFFlagLuaAppEnableVirtualEventPlaceIdFunction() then p1 else nil, p2,
+		ReferralSource, Ctx, ExtraParams,
+		if FFlagLuaAppDemoModePlayButtonTelemetry then UseDispatchResult else nil,
+		if FFlagLuaAppDemoModePlayButtonTelemetry then LaunchSource else nil
+	}))
 end

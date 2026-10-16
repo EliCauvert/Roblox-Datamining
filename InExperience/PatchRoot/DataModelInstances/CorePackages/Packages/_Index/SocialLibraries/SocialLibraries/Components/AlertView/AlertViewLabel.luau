@@ -1,27 +1,27 @@
-﻿local dependenciesModule = require(script:FindFirstAncestor("SocialLibraries").dependencies)
-local roact = dependenciesModule.Roact
-local UIBlox = dependenciesModule.UIBlox
-local foundationFontFaceMigration = dependenciesModule.Foundation.Utility.Flags.FoundationFontFaceMigration
-local normalizeFontFace = dependenciesModule.Foundation.Utility.normalizeFontFace
-local alertViewLabel = roact.PureComponent:extend("AlertViewLabel")
-alertViewLabel.defaultProps = {
+﻿local DependenciesModule = require(script:FindFirstAncestor("SocialLibraries").dependencies)
+local Roact = DependenciesModule.Roact
+local UIBlox = DependenciesModule.UIBlox
+local FoundationFontFaceMigration = DependenciesModule.Foundation.Utility.Flags.FoundationFontFaceMigration
+local NormalizeFontFaceFunction = DependenciesModule.Foundation.Utility.normalizeFontFace
+local AlertViewLabel = Roact.PureComponent:extend("AlertViewLabel")
+AlertViewLabel.defaultProps = {
 	BackgroundTransparency = 1,
 	Text = "",
 	Size = UDim2.new(1, 0, 0, 40),
 	TextXAlignment = Enum.TextXAlignment.Center
 }
 
-function alertViewLabel.render(p1)
-	-- upvalues: UIBlox (ref), roact (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
-	return UIBlox.Style.withStyle(function(p2)
-		-- upvalues: p1 (ref), roact (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy)
-		local font = p1.props.Font or p2.Font.Body.Font
+function AlertViewLabel.render(p1) --[[ Line: 16 ]]
+	-- upvalues: UIBlox (copy), Roact (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	return UIBlox.Style.withStyle(function(p2) --[[ Line: 17 ]]
+		-- upvalues: p1 (copy), Roact (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
+		local _Font = p1.props.Font or p2.Font.Body.Font
 		
-		return roact.createElement("TextLabel", {
+		return Roact.createElement("TextLabel", {
 			TextWrapped = true,
 			BackgroundTransparency = p1.props.BackgroundTransparency,
-			Font = if foundationFontFaceMigration then nil else font,
-			FontFace = if foundationFontFaceMigration then normalizeFontFace(font) else nil,
+			Font = if FoundationFontFaceMigration then nil else _Font,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(_Font) else nil,
 			LayoutOrder = p1.props.LayoutOrder,
 			Size = p1.props.Size,
 			Text = p1.props.Text,
@@ -32,4 +32,4 @@ function alertViewLabel.render(p1)
 	end)
 end
 
-return alertViewLabel
+return AlertViewLabel

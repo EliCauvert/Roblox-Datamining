@@ -1,18 +1,19 @@
-﻿return function(p1)
-	if Enum.AssetType.LeftArm == p1 then
+﻿return function(AssetType) --[[ Line: 5 | Named "getPartNamesInHierarchyOrder" ]]
+	if Enum.AssetType.LeftArm == AssetType then
 		return { "LeftUpperArm", "LeftLowerArm", "LeftHand" }
-	elseif Enum.AssetType.RightArm == p1 then
+	elseif Enum.AssetType.RightArm == AssetType then
 		return { "RightUpperArm", "RightLowerArm", "RightHand" }
-	elseif Enum.AssetType.LeftLeg == p1 then
+	elseif Enum.AssetType.LeftLeg == AssetType then
 		return { "LeftUpperLeg", "LeftLowerLeg", "LeftFoot" }
-	elseif Enum.AssetType.RightLeg == p1 then
+	elseif Enum.AssetType.RightLeg == AssetType then
 		return { "RightUpperLeg", "RightLowerLeg", "RightFoot" }
-	elseif Enum.AssetType.DynamicHead == p1 then
+	elseif Enum.AssetType.DynamicHead == AssetType then
 		return { "Head" }
-	elseif Enum.AssetType.Torso == p1 then
+	elseif Enum.AssetType.Torso == AssetType then
 		return { "LowerTorso", "UpperTorso" }
+	else
+		assert(false, "Invalid asset type")
+		
+		return {}
 	end
-	assert(false, "Invalid asset type")
-	
-	return {}
 end

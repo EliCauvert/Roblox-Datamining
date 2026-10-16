@@ -1,335 +1,337 @@
-﻿local authCommon = script:FindFirstAncestor("AuthCommon")
-local parent = authCommon.Parent
-local authLocalStorageKeysModule = require(authCommon.Enums.AuthLocalStorageKeys)
-local appStorageService = game:GetService("AppStorageService")
-local httpService = game:GetService("HttpService")
-local getFFlagEnableMultiPageSignup = require(parent.SharedFlags).GetFFlagEnableMultiPageSignup
-local _ = require(authCommon.Utils.PreviousAccountEntry)
-local gameParams = require(parent.ExperienceService).GameParams
-local _ = { passkeySignupName = "PasskeySignupName" }
-local t = {
-	setRobloxLocaleId = function(value)
-		-- upvalues: appStorageService (ref), authLocalStorageKeysModule (ref)
-		appStorageService:SetItem(authLocalStorageKeysModule.RobloxLocaleId, value)
+﻿local AuthCommon = script:FindFirstAncestor("AuthCommon")
+local Parent = AuthCommon.Parent
+local AuthLocalStorageKeysModule = require(AuthCommon.Enums.AuthLocalStorageKeys)
+local AppStorageService = game:GetService("AppStorageService")
+local HttpService = game:GetService("HttpService")
+local GetFFlagEnableMultiPageSignupFunction = require(Parent.SharedFlags).GetFFlagEnableMultiPageSignup
+local _ = require(AuthCommon.Utils.PreviousAccountEntry)
+local GameParams = require(Parent.ExperienceService).GameParams
+local AppStorageUtilitiesModule = {
+	setRobloxLocaleId = function(Value) --[[ Line: 19 ]]
+		-- upvalues: AppStorageService (copy), AuthLocalStorageKeysModule (copy)
+		AppStorageService:SetItem(AuthLocalStorageKeysModule.RobloxLocaleId, Value)
 	end,
-	setGameLocaleId = function(value)
-		-- upvalues: appStorageService (ref), authLocalStorageKeysModule (ref)
-		appStorageService:SetItem(authLocalStorageKeysModule.GameLocaleId, value)
+	setGameLocaleId = function(Value) --[[ Line: 24 ]]
+		-- upvalues: AppStorageService (copy), AuthLocalStorageKeysModule (copy)
+		AppStorageService:SetItem(AuthLocalStorageKeysModule.GameLocaleId, Value)
 	end,
-	getAuthenticatedTheme = function()
-		-- upvalues: appStorageService (ref), authLocalStorageKeysModule (ref)
-		return appStorageService:GetItem(authLocalStorageKeysModule.AuthenticatedTheme)
+	getAuthenticatedTheme = function() --[[ Line: 28 ]]
+		-- upvalues: AppStorageService (copy), AuthLocalStorageKeysModule (copy)
+		return AppStorageService:GetItem(AuthLocalStorageKeysModule.AuthenticatedTheme)
 	end,
-	setAuthenticatedTheme = function(value)
-		-- upvalues: appStorageService (ref), authLocalStorageKeysModule (ref)
-		appStorageService:SetItem(authLocalStorageKeysModule.AuthenticatedTheme, value)
+	setAuthenticatedTheme = function(Value) --[[ Line: 32 ]]
+		-- upvalues: AppStorageService (copy), AuthLocalStorageKeysModule (copy)
+		AppStorageService:SetItem(AuthLocalStorageKeysModule.AuthenticatedTheme, Value)
 	end,
-	getAccountBlob = function()
-		-- upvalues: appStorageService (ref), authLocalStorageKeysModule (ref)
-		return if game:GetEngineFeature("AccountSwitchFeatureEnabled") then appStorageService:GetItem(authLocalStorageKeysModule.AccountBlob) or "" else ""
+	getAccountBlob = function() --[[ Line: 36 ]]
+		-- upvalues: AppStorageService (copy), AuthLocalStorageKeysModule (copy)
+		return game:GetEngineFeature("AccountSwitchFeatureEnabled") and AppStorageService:GetItem(AuthLocalStorageKeysModule.AccountBlob) or ""
 	end,
-	setAccountBlob = function(value)
-		-- upvalues: appStorageService (ref), authLocalStorageKeysModule (ref)
+	setAccountBlob = function(p1) --[[ Line: 43 ]]
+		-- upvalues: AppStorageService (copy), AuthLocalStorageKeysModule (copy)
 		if game:GetEngineFeature("AccountSwitchFeatureEnabled") then
-			appStorageService:SetItem(authLocalStorageKeysModule.AccountBlob, value or "")
+			AppStorageService:SetItem(AuthLocalStorageKeysModule.AccountBlob, p1 or "")
 		end
 	end,
-	getDefaultUsername = function()
-		-- upvalues: appStorageService (ref), authLocalStorageKeysModule (ref)
-		return appStorageService:GetItem(authLocalStorageKeysModule.CredentialValue)
+	getDefaultUsername = function() --[[ Line: 49 ]]
+		-- upvalues: AppStorageService (copy), AuthLocalStorageKeysModule (copy)
+		return AppStorageService:GetItem(AuthLocalStorageKeysModule.CredentialValue)
 	end,
-	getSignupActionRequired = function()
-		-- upvalues: appStorageService (ref), authLocalStorageKeysModule (ref)
-		return appStorageService:GetItem(authLocalStorageKeysModule.SignupActionRequired)
+	getSignupActionRequired = function() --[[ Line: 53 ]]
+		-- upvalues: AppStorageService (copy), AuthLocalStorageKeysModule (copy)
+		return AppStorageService:GetItem(AuthLocalStorageKeysModule.SignupActionRequired)
 	end,
-	setSignupActionRequired = function(value)
-		-- upvalues: appStorageService (ref), authLocalStorageKeysModule (ref)
-		appStorageService:SetItem(authLocalStorageKeysModule.SignupActionRequired, value)
+	setSignupActionRequired = function(Value) --[[ Line: 57 ]]
+		-- upvalues: AppStorageService (copy), AuthLocalStorageKeysModule (copy)
+		AppStorageService:SetItem(AuthLocalStorageKeysModule.SignupActionRequired, Value)
 	end,
-	getAccountSwitcherMetadataMap = function()
-		-- upvalues: appStorageService (ref), authLocalStorageKeysModule (ref)
-		return if game:GetEngineFeature("AccountSwitcherMetadataMapKeyAvailable") then appStorageService:GetItem(authLocalStorageKeysModule.AccountSwitcherMetadataMap) or "" else ""
+	getAccountSwitcherMetadataMap = function() --[[ Line: 61 ]]
+		-- upvalues: AppStorageService (copy), AuthLocalStorageKeysModule (copy)
+		return game:GetEngineFeature("AccountSwitcherMetadataMapKeyAvailable") and AppStorageService:GetItem(AuthLocalStorageKeysModule.AccountSwitcherMetadataMap) or ""
 	end,
-	setAccountSwitcherMetadataMap = function(value)
-		-- upvalues: appStorageService (ref), authLocalStorageKeysModule (ref)
+	setAccountSwitcherMetadataMap = function(Json) --[[ Line: 68 ]]
+		-- upvalues: AppStorageService (copy), AuthLocalStorageKeysModule (copy)
 		if game:GetEngineFeature("AccountSwitcherMetadataMapKeyAvailable") then
-			appStorageService:SetItem(authLocalStorageKeysModule.AccountSwitcherMetadataMap, value or "")
+			AppStorageService:SetItem(AuthLocalStorageKeysModule.AccountSwitcherMetadataMap, Json or "")
 		end
 	end
 }
 
-function t.setAccountSwitchStartupQueryParams(value)
-	-- upvalues: httpService (ref), t (ref)
-	if typeof(value) == "table" then
-		value = httpService:JSONEncode(value)
+function AppStorageUtilitiesModule.setAccountSwitchStartupQueryParams(AccountSwitchStartupQueryParams) --[[ Line: 74 ]]
+	-- upvalues: HttpService (copy), AppStorageUtilitiesModule (copy)
+	if typeof(AccountSwitchStartupQueryParams) == "table" then
+		AccountSwitchStartupQueryParams = HttpService:JSONEncode(AccountSwitchStartupQueryParams)
 	end
 	if game:GetEngineFeature("AccountSwitcherMetadataMapKeyAvailable") then
-		local var1
-		local accountSwitcherMetadataMap = t.getAccountSwitcherMetadataMap()
-		local _ = nil
+		local AccountSwitcherMetadataMap = AppStorageUtilitiesModule.getAccountSwitcherMetadataMap()
+		local config = nil
 		
-		if accountSwitcherMetadataMap == nil or accountSwitcherMetadataMap == "" then
-			var1 = { AccountSwitchStartupQueryParams = value }
+		if AccountSwitcherMetadataMap == nil or AccountSwitcherMetadataMap == "" then
+			config = {
+				AccountSwitchStartupQueryParams = AccountSwitchStartupQueryParams
+			}
 		else
-			var1 = httpService:JSONDecode(accountSwitcherMetadataMap)
-			var1.AccountSwitchStartupQueryParams = value
+			config = HttpService:JSONDecode(AccountSwitcherMetadataMap)
+			config.AccountSwitchStartupQueryParams = AccountSwitchStartupQueryParams
 		end
-		t.setAccountSwitcherMetadataMap(httpService:JSONEncode(var1))
+		AppStorageUtilitiesModule.setAccountSwitcherMetadataMap(HttpService:JSONEncode(config))
 	end
 end
 
-function t.clearAccountSwitchStartupGameParams()
-	-- upvalues: t (ref)
-	t.setAccountSwitchStartupQueryParams("")
+function AppStorageUtilitiesModule.clearAccountSwitchStartupGameParams() --[[ Line: 95 ]]
+	-- upvalues: AppStorageUtilitiesModule (copy)
+	AppStorageUtilitiesModule.setAccountSwitchStartupQueryParams("")
 end
 
-function t.getAccountSwitchStartupGameParams()
-	-- upvalues: t (ref), httpService (ref), gameParams (ref)
+function AppStorageUtilitiesModule.getAccountSwitchStartupGameParams() --[[ Line: 99 ]]
+	-- upvalues: AppStorageUtilitiesModule (copy), HttpService (copy), GameParams (copy)
 	if not game:GetEngineFeature("AccountSwitcherMetadataMapKeyAvailable") then
 		return nil
 	end
-	local accountSwitcherMetadataMap = t.getAccountSwitcherMetadataMap()
+	local AccountSwitcherMetadataMap = AppStorageUtilitiesModule.getAccountSwitcherMetadataMap()
 	
-	if accountSwitcherMetadataMap == nil or accountSwitcherMetadataMap == "" then
+	if AccountSwitcherMetadataMap == nil or AccountSwitcherMetadataMap == "" then
 		return nil
 	end
-	local var1 = httpService:JSONDecode(accountSwitcherMetadataMap)
+	local Data = HttpService:JSONDecode(AccountSwitcherMetadataMap)
 	
-	if var1 == nil or var1 == "" or (next(var1) == nil or next(var1) == "") or var1.AccountSwitchTargetUsername == nil then
+	if Data == nil or Data == "" or next(Data) == nil or next(Data) == "" or Data.AccountSwitchTargetUsername == nil then
 		return nil
 	end
-	local accountSwitchStartupQueryParams = var1.AccountSwitchStartupQueryParams
+	local AccountSwitchStartupQueryParams = Data.AccountSwitchStartupQueryParams
 	
-	if accountSwitchStartupQueryParams == nil or accountSwitchStartupQueryParams == "" then
+	if AccountSwitchStartupQueryParams == nil or AccountSwitchStartupQueryParams == "" then
 		return nil
 	end
-	accountSwitchStartupQueryParams = httpService:JSONDecode(accountSwitchStartupQueryParams)
+	local Data1 = HttpService:JSONDecode(AccountSwitchStartupQueryParams)
 	
-	local _ = function(p1)
-		local var2 = tonumber(p1)
+	local function _(p1) --[[ Line: 123 ]]
+		local Number: number? = tonumber(p1)
 		
-		return var2 or (p1 == "true" or (if p1 == "false" then false else p1))
+		return if Number then Number else p1 == "true" or p1 ~= "false" and p1
 	end
 	
-	local var2 = gameParams.fromParams(accountSwitchStartupQueryParams)
+	local FromParamsResult = GameParams.fromParams(Data1)
 	
-	for i, v in pairs(accountSwitchStartupQueryParams) do
-		local var3 = tonumber(v)
-		var2[i] = var3 or (v == "true" or (if v == "false" then false else v))
+	for i, entry in pairs(Data1) do
+		local Number: number? = tonumber(entry)
+		FromParamsResult[i] = if Number then Number else entry == "true" or entry ~= "false" and entry
 	end
-	return var2
+	return FromParamsResult
 end
 
-function t.getAccountSwitchTargetUsername()
-	-- upvalues: t (ref), httpService (ref)
+function AppStorageUtilitiesModule.getAccountSwitchTargetUsername() --[[ Line: 151 ]]
+	-- upvalues: AppStorageUtilitiesModule (copy), HttpService (copy)
 	if not game:GetEngineFeature("AccountSwitcherMetadataMapKeyAvailable") then
 		return ""
 	end
-	local accountSwitcherMetadataMap = t.getAccountSwitcherMetadataMap()
+	local AccountSwitcherMetadataMap = AppStorageUtilitiesModule.getAccountSwitcherMetadataMap()
 	
-	if accountSwitcherMetadataMap == nil or accountSwitcherMetadataMap == "" then
+	if AccountSwitcherMetadataMap == nil or AccountSwitcherMetadataMap == "" then
 		return ""
-	end
-	local var4 = httpService:JSONDecode(accountSwitcherMetadataMap)
-	
-	return if var4 == nil or var4 == "" or (next(var4) == nil or next(var4) == "") or var4.AccountSwitchTargetUsername == nil then "" else var4.AccountSwitchTargetUsername
-end
-
-function t.setAccountSwitchTargetUsername(value)
-	-- upvalues: t (ref), httpService (ref)
-	if game:GetEngineFeature("AccountSwitcherMetadataMapKeyAvailable") then
-		local var4
-		local accountSwitcherMetadataMap = t.getAccountSwitcherMetadataMap()
-		local _ = nil
+	else
+		local Data = HttpService:JSONDecode(AccountSwitcherMetadataMap)
 		
-		if accountSwitcherMetadataMap == nil or accountSwitcherMetadataMap == "" then
-			var4 = { AccountSwitchTargetUsername = value }
-		else
-			var4 = httpService:JSONDecode(accountSwitcherMetadataMap)
-			var4.AccountSwitchTargetUsername = value
-		end
-		t.setAccountSwitcherMetadataMap(httpService:JSONEncode(var4))
+		return if Data == nil or Data == "" or next(Data) == nil or next(Data) == "" or Data.AccountSwitchTargetUsername == nil then "" else Data.AccountSwitchTargetUsername
 	end
 end
 
-function t.getAccountSwitchStatus()
-	-- upvalues: t (ref), httpService (ref)
+function AppStorageUtilitiesModule.setAccountSwitchTargetUsername(AccountSwitchTargetUsername) --[[ Line: 172 ]]
+	-- upvalues: AppStorageUtilitiesModule (copy), HttpService (copy)
+	if game:GetEngineFeature("AccountSwitcherMetadataMapKeyAvailable") then
+		local AccountSwitcherMetadataMap = AppStorageUtilitiesModule.getAccountSwitcherMetadataMap()
+		local config = nil
+		
+		if AccountSwitcherMetadataMap == nil or AccountSwitcherMetadataMap == "" then
+			config = {
+				AccountSwitchTargetUsername = AccountSwitchTargetUsername
+			}
+		else
+			config = HttpService:JSONDecode(AccountSwitcherMetadataMap)
+			config.AccountSwitchTargetUsername = AccountSwitchTargetUsername
+		end
+		AppStorageUtilitiesModule.setAccountSwitcherMetadataMap(HttpService:JSONEncode(config))
+	end
+end
+
+function AppStorageUtilitiesModule.getAccountSwitchStatus() --[[ Line: 188 ]]
+	-- upvalues: AppStorageUtilitiesModule (copy), HttpService (copy)
 	if not game:GetEngineFeature("AccountSwitcherMetadataMapKeyAvailable") then
 		return ""
 	end
-	local accountSwitcherMetadataMap = t.getAccountSwitcherMetadataMap()
+	local AccountSwitcherMetadataMap = AppStorageUtilitiesModule.getAccountSwitcherMetadataMap()
 	
-	if accountSwitcherMetadataMap == nil or accountSwitcherMetadataMap == "" then
+	if AccountSwitcherMetadataMap == nil or AccountSwitcherMetadataMap == "" then
 		return ""
+	else
+		local Data = HttpService:JSONDecode(AccountSwitcherMetadataMap)
+		
+		return if Data == nil or Data == "" or next(Data) == nil or next(Data) == "" or Data.AccountSwitchStatus == nil then "" else Data.AccountSwitchStatus
 	end
-	local var4 = httpService:JSONDecode(accountSwitcherMetadataMap)
-	
-	return if var4 == nil or var4 == "" or (next(var4) == nil or next(var4) == "") or var4.AccountSwitchStatus == nil then "" else var4.AccountSwitchStatus
 end
 
-function t.setAccountSwitchStatus(value)
-	-- upvalues: t (ref), httpService (ref)
+function AppStorageUtilitiesModule.setAccountSwitchStatus(AccountSwitchStatus) --[[ Line: 210 ]]
+	-- upvalues: AppStorageUtilitiesModule (copy), HttpService (copy)
 	if game:GetEngineFeature("AccountSwitcherMetadataMapKeyAvailable") then
-		local var4
-		local accountSwitcherMetadataMap = t.getAccountSwitcherMetadataMap()
-		local _ = nil
+		local AccountSwitcherMetadataMap = AppStorageUtilitiesModule.getAccountSwitcherMetadataMap()
+		local config = nil
 		
-		if accountSwitcherMetadataMap == nil or accountSwitcherMetadataMap == "" then
-			var4 = { AccountSwitchStatus = value }
+		if AccountSwitcherMetadataMap == nil or AccountSwitcherMetadataMap == "" then
+			config = { AccountSwitchStatus = AccountSwitchStatus }
 		else
-			var4 = httpService:JSONDecode(accountSwitcherMetadataMap)
-			var4.AccountSwitchStatus = value
+			config = HttpService:JSONDecode(AccountSwitcherMetadataMap)
+			config.AccountSwitchStatus = AccountSwitchStatus
 		end
-		t.setAccountSwitcherMetadataMap(httpService:JSONEncode(var4))
+		AppStorageUtilitiesModule.setAccountSwitcherMetadataMap(HttpService:JSONEncode(config))
 	end
 end
 
-function t.getMultipageSignupMetadataMap()
-	-- upvalues: appStorageService (ref), authLocalStorageKeysModule (ref)
-	return appStorageService:GetItem(authLocalStorageKeysModule.MultipageSignupMetadataMap) or ""
+function AppStorageUtilitiesModule.getMultipageSignupMetadataMap() --[[ Line: 226 ]]
+	-- upvalues: AppStorageService (copy), AuthLocalStorageKeysModule (copy)
+	return AppStorageService:GetItem(AuthLocalStorageKeysModule.MultipageSignupMetadataMap) or ""
 end
 
-function t.setMultipageSignupMetadataMap(value)
-	-- upvalues: appStorageService (ref), authLocalStorageKeysModule (ref)
-	appStorageService:SetItem(authLocalStorageKeysModule.MultipageSignupMetadataMap, value or "")
+function AppStorageUtilitiesModule.setMultipageSignupMetadataMap(Json) --[[ Line: 230 ]]
+	-- upvalues: AppStorageService (copy), AuthLocalStorageKeysModule (copy)
+	AppStorageService:SetItem(AuthLocalStorageKeysModule.MultipageSignupMetadataMap, Json or "")
 end
 
-function t.getIncompleteSignupUserId()
-	-- upvalues: t (ref), httpService (ref)
-	local multipageSignupMetadataMap = t.getMultipageSignupMetadataMap()
+function AppStorageUtilitiesModule.getIncompleteSignupUserId() --[[ Line: 234 ]]
+	-- upvalues: AppStorageUtilitiesModule (copy), HttpService (copy)
+	local MultipageSignupMetadataMap = AppStorageUtilitiesModule.getMultipageSignupMetadataMap()
 	
-	if multipageSignupMetadataMap == nil or multipageSignupMetadataMap == "" then
+	if MultipageSignupMetadataMap == nil or MultipageSignupMetadataMap == "" then
 		return ""
-	end
-	local var4 = httpService:JSONDecode(multipageSignupMetadataMap)
-	
-	return if var4 == nil or var4 == "" or (next(var4) == nil or next(var4) == "") or var4.IncompleteSignupUserId == nil then "" else var4.IncompleteSignupUserId
-end
-
-function t.setIncompleteSignupUserId(value)
-	-- upvalues: getFFlagEnableMultiPageSignup (ref), t (ref), httpService (ref)
-	if getFFlagEnableMultiPageSignup() then
-		local var4
-		local multipageSignupMetadataMap = t.getMultipageSignupMetadataMap()
-		local _ = nil
+	else
+		local Data = HttpService:JSONDecode(MultipageSignupMetadataMap)
 		
-		if multipageSignupMetadataMap == nil or multipageSignupMetadataMap == "" then
-			var4 = { IncompleteSignupUserId = value }
-		else
-			var4 = httpService:JSONDecode(multipageSignupMetadataMap)
-			var4.IncompleteSignupUserId = value
-		end
-		t.setMultipageSignupMetadataMap(httpService:JSONEncode(var4))
+		return if Data == nil or Data == "" or next(Data) == nil or next(Data) == "" or Data.IncompleteSignupUserId == nil then "" else Data.IncompleteSignupUserId
 	end
 end
 
-function t.getIncompleteSignupUsername()
-	-- upvalues: t (ref), httpService (ref)
-	local multipageSignupMetadataMap = t.getMultipageSignupMetadataMap()
-	
-	if multipageSignupMetadataMap == nil or multipageSignupMetadataMap == "" then
-		return ""
-	end
-	local var4 = httpService:JSONDecode(multipageSignupMetadataMap)
-	
-	return if var4 == nil or var4 == "" or (next(var4) == nil or next(var4) == "") or var4.IncompleteSignupUsername == nil then "" else var4.IncompleteSignupUsername
-end
-
-function t.setIncompleteSignupUsername(value)
-	-- upvalues: getFFlagEnableMultiPageSignup (ref), t (ref), httpService (ref)
-	if getFFlagEnableMultiPageSignup() then
-		local var4
-		local multipageSignupMetadataMap = t.getMultipageSignupMetadataMap()
-		local _ = nil
+function AppStorageUtilitiesModule.setIncompleteSignupUserId(IncompleteSignupUserId) --[[ Line: 252 ]]
+	-- upvalues: GetFFlagEnableMultiPageSignupFunction (copy), AppStorageUtilitiesModule (copy), HttpService (copy)
+	if GetFFlagEnableMultiPageSignupFunction() then
+		local MultipageSignupMetadataMap = AppStorageUtilitiesModule.getMultipageSignupMetadataMap()
+		local config = nil
 		
-		if multipageSignupMetadataMap == nil or multipageSignupMetadataMap == "" then
-			var4 = { IncompleteSignupUsername = value }
+		if MultipageSignupMetadataMap == nil or MultipageSignupMetadataMap == "" then
+			config = { IncompleteSignupUserId = IncompleteSignupUserId }
 		else
-			var4 = httpService:JSONDecode(multipageSignupMetadataMap)
-			var4.IncompleteSignupUsername = value
+			config = HttpService:JSONDecode(MultipageSignupMetadataMap)
+			config.IncompleteSignupUserId = IncompleteSignupUserId
 		end
-		t.setMultipageSignupMetadataMap(httpService:JSONEncode(var4))
+		AppStorageUtilitiesModule.setMultipageSignupMetadataMap(HttpService:JSONEncode(config))
 	end
 end
 
-function getMultiPageSignupKey(value)
-	-- upvalues: t (ref), httpService (ref)
-	local multipageSignupMetadataMap = t.getMultipageSignupMetadataMap()
+function AppStorageUtilitiesModule.getIncompleteSignupUsername() --[[ Line: 268 ]]
+	-- upvalues: AppStorageUtilitiesModule (copy), HttpService (copy)
+	local MultipageSignupMetadataMap = AppStorageUtilitiesModule.getMultipageSignupMetadataMap()
 	
-	if multipageSignupMetadataMap == nil or multipageSignupMetadataMap == "" then
+	if MultipageSignupMetadataMap == nil or MultipageSignupMetadataMap == "" then
 		return ""
+	else
+		local Data = HttpService:JSONDecode(MultipageSignupMetadataMap)
+		
+		return if Data == nil or Data == "" or next(Data) == nil or next(Data) == "" or Data.IncompleteSignupUsername == nil then "" else Data.IncompleteSignupUsername
 	end
-	local var4 = httpService:JSONDecode(multipageSignupMetadataMap)
-	
-	return if var4 == nil or var4 == "" or (next(var4) == nil or next(var4) == "") or var4[value] == nil then "" else var4[value]
 end
 
-function setMultiPageSignupKey(value, p1)
-	-- upvalues: t (ref), httpService (ref)
+function AppStorageUtilitiesModule.setIncompleteSignupUsername(IncompleteSignupUsername) --[[ Line: 286 ]]
+	-- upvalues: GetFFlagEnableMultiPageSignupFunction (copy), AppStorageUtilitiesModule (copy), HttpService (copy)
+	if GetFFlagEnableMultiPageSignupFunction() then
+		local MultipageSignupMetadataMap = AppStorageUtilitiesModule.getMultipageSignupMetadataMap()
+		local config = nil
+		
+		if MultipageSignupMetadataMap == nil or MultipageSignupMetadataMap == "" then
+			config = { IncompleteSignupUsername = IncompleteSignupUsername }
+		else
+			config = HttpService:JSONDecode(MultipageSignupMetadataMap)
+			config.IncompleteSignupUsername = IncompleteSignupUsername
+		end
+		AppStorageUtilitiesModule.setMultipageSignupMetadataMap(HttpService:JSONEncode(config))
+	end
+end
+
+function getMultiPageSignupKey(p1) --[[ Line: 302 ]]
+	-- upvalues: AppStorageUtilitiesModule (copy), HttpService (copy)
+	local MultipageSignupMetadataMap = AppStorageUtilitiesModule.getMultipageSignupMetadataMap()
+	
+	if MultipageSignupMetadataMap == nil or MultipageSignupMetadataMap == "" then
+		return ""
+	else
+		local Data = HttpService:JSONDecode(MultipageSignupMetadataMap)
+		
+		return if Data == nil or Data == "" or next(Data) == nil or next(Data) == "" or Data[p1] == nil then "" else Data[p1]
+	end
+end
+
+function setMultiPageSignupKey(Key, p1) --[[ Line: 314 ]]
+	-- upvalues: AppStorageUtilitiesModule (copy), HttpService (copy)
 	if game:GetEngineFeature("MultipageSignupMetadataMapKeyAvailable") then
-		local var4
-		local multipageSignupMetadataMap = t.getMultipageSignupMetadataMap()
-		local _ = nil
+		local MultipageSignupMetadataMap = AppStorageUtilitiesModule.getMultipageSignupMetadataMap()
+		local config = nil
 		
-		if multipageSignupMetadataMap == nil or multipageSignupMetadataMap == "" then
-			var4 = { [value] = p1 }
+		if MultipageSignupMetadataMap == nil or MultipageSignupMetadataMap == "" then
+			config = { [Key] = p1 }
 		else
-			var4 = httpService:JSONDecode(multipageSignupMetadataMap)
-			var4[value] = p1
+			config = HttpService:JSONDecode(MultipageSignupMetadataMap)
+			config[Key] = p1
 		end
-		t.setMultipageSignupMetadataMap(httpService:JSONEncode(var4))
+		AppStorageUtilitiesModule.setMultipageSignupMetadataMap(HttpService:JSONEncode(config))
 	end
 end
 
-function t.getPasskeySignupUsername()
+function AppStorageUtilitiesModule.getPasskeySignupUsername() --[[ Line: 330 ]]
 	return getMultiPageSignupKey("PasskeySignupName")
 end
 
-function t.setPasskeySignupUsername(value)
-	setMultiPageSignupKey("PasskeySignupName", value)
+function AppStorageUtilitiesModule.setPasskeySignupUsername(p1) --[[ Line: 334 ]]
+	setMultiPageSignupKey("PasskeySignupName", p1)
 end
 
-function t.getPreviousAccountsList()
-	-- upvalues: appStorageService (ref), authLocalStorageKeysModule (ref), httpService (ref)
-	if not game:GetEngineFeature("PreviousAccountsListAvailable") then
+function AppStorageUtilitiesModule.getPreviousAccountsList() --[[ Line: 338 ]]
+	-- upvalues: AppStorageService (copy), AuthLocalStorageKeysModule (copy), HttpService (copy)
+	if game:GetEngineFeature("PreviousAccountsListAvailable") then
+		local Item = AppStorageService:GetItem(AuthLocalStorageKeysModule.PreviousAccountsList) or ""
+		
+		return if Item == "" then {} else HttpService:JSONDecode(Item)
+	else
 		return {}
 	end
-	local previousAccountsList = appStorageService:GetItem(authLocalStorageKeysModule.PreviousAccountsList) or ""
-	local _ = nil
-	
-	return if previousAccountsList == "" then {} else httpService:JSONDecode(previousAccountsList)
 end
 
-function t.setPreviousAccountsList(value)
-	-- upvalues: httpService (ref), appStorageService (ref), authLocalStorageKeysModule (ref)
+function AppStorageUtilitiesModule.setPreviousAccountsList(Input) --[[ Line: 352 ]]
+	-- upvalues: HttpService (copy), AppStorageService (copy), AuthLocalStorageKeysModule (copy)
 	if game:GetEngineFeature("PreviousAccountsListAvailable") then
-		appStorageService:SetItem(authLocalStorageKeysModule.PreviousAccountsList, httpService:JSONEncode(value))
-		appStorageService:flush()
+		AppStorageService:SetItem(AuthLocalStorageKeysModule.PreviousAccountsList, (HttpService:JSONEncode(Input)))
+		AppStorageService:flush()
 	end
 end
 
-function t.getLastSuccessfulSignInMethod()
-	-- upvalues: appStorageService (ref), authLocalStorageKeysModule (ref)
-	return if game:GetEngineFeature("LastSuccessfulSignInMethodKeyAvailable") then appStorageService:GetItem(authLocalStorageKeysModule.LastSuccessfulSignInMethod) else ""
+function AppStorageUtilitiesModule.getLastSuccessfulSignInMethod() --[[ Line: 363 ]]
+	-- upvalues: AppStorageService (copy), AuthLocalStorageKeysModule (copy)
+	return if game:GetEngineFeature("LastSuccessfulSignInMethodKeyAvailable") then AppStorageService:GetItem(AuthLocalStorageKeysModule.LastSuccessfulSignInMethod) else ""
 end
 
-function t.setLastSuccessfulSignInMethod(value)
-	-- upvalues: appStorageService (ref), authLocalStorageKeysModule (ref)
+function AppStorageUtilitiesModule.setLastSuccessfulSignInMethod(Value) --[[ Line: 370 ]]
+	-- upvalues: AppStorageService (copy), AuthLocalStorageKeysModule (copy)
 	if game:GetEngineFeature("LastSuccessfulSignInMethodKeyAvailable") then
-		appStorageService:SetItem(authLocalStorageKeysModule.LastSuccessfulSignInMethod, value)
+		AppStorageService:SetItem(AuthLocalStorageKeysModule.LastSuccessfulSignInMethod, Value)
 	end
 end
 
-function t.setDiscoveryClientFallbackCache(value)
-	-- upvalues: appStorageService (ref), authLocalStorageKeysModule (ref)
+function AppStorageUtilitiesModule.setDiscoveryClientFallbackCache(Value) --[[ Line: 376 ]]
+	-- upvalues: AppStorageService (copy), AuthLocalStorageKeysModule (copy)
 	if game:GetEngineFeature("UniversalAppDiscoveryClientFallbackCacheStorageKey") then
-		appStorageService:SetItem(authLocalStorageKeysModule.DiscoveryClientFallbackCache, value)
+		AppStorageService:SetItem(AuthLocalStorageKeysModule.DiscoveryClientFallbackCache, Value)
 	end
 end
 
-function t.flush()
-	-- upvalues: appStorageService (ref)
-	appStorageService:flush()
+function AppStorageUtilitiesModule.flush() --[[ Line: 382 ]]
+	-- upvalues: AppStorageService (copy)
+	AppStorageService:flush()
 end
 
-return t
+return AppStorageUtilitiesModule

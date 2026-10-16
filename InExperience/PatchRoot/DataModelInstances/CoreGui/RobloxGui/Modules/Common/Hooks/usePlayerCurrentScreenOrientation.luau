@@ -1,28 +1,28 @@
-﻿local reactModule = require(game:GetService("CorePackages").Packages.React)
-local usePlayerGuiModule = require(script.Parent.usePlayerGui)
+﻿local ReactModule = require(game:GetService("CorePackages").Packages.React)
+local UsePlayerGuiModule = require(script.Parent.usePlayerGui)
 
-return function()
-	-- upvalues: usePlayerGuiModule (ref), reactModule (ref)
-	local var1 = usePlayerGuiModule()
-	local var2, var3 = reactModule.useState(nil)
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), var3 (ref)
-		local var4 = nil
+return function() --[[ Line: 5 | Named "usePlayerCurrentScreenOrientation" ]]
+	-- upvalues: UsePlayerGuiModule (copy), ReactModule (copy)
+	local UsePlayerGuiModuleResult = UsePlayerGuiModule()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	ReactModule.useEffect(function() --[[ Line: 9 ]]
+		-- upvalues: UsePlayerGuiModuleResult (copy), UseStateResult2 (copy)
+		local Connection = nil
 		
-		if var1 then
-			var3(var1.CurrentScreenOrientation)
-			var4 = var1:GetPropertyChangedSignal("CurrentScreenOrientation"):Connect(function()
-				-- upvalues: var3 (copy), var1 (copy)
-				var3(var1.CurrentScreenOrientation)
+		if UsePlayerGuiModuleResult then
+			UseStateResult2(UsePlayerGuiModuleResult.CurrentScreenOrientation)
+			Connection = UsePlayerGuiModuleResult:GetPropertyChangedSignal("CurrentScreenOrientation"):Connect(function() --[[ Line: 15 ]]
+				-- upvalues: UseStateResult2 (upval), UsePlayerGuiModuleResult (upval)
+				UseStateResult2(UsePlayerGuiModuleResult.CurrentScreenOrientation)
 			end)
 		end
-		return function()
-			-- upvalues: var4 (write)
-			if var4 then
-				var4:Disconnect()
+		return function() --[[ Line: 20 ]]
+			-- upvalues: Connection (ref)
+			if Connection then
+				Connection:Disconnect()
 			end
 		end
-	end, { var1 })
+	end, { UsePlayerGuiModuleResult })
 	
-	return var2
+	return UseStateResult
 end

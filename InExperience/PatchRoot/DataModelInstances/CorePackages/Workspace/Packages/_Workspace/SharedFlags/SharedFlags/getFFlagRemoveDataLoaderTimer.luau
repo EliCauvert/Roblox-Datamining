@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("RemoveDataLoaderTimer", false)
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastFlag("RemoveDataLoaderTimer")
 end

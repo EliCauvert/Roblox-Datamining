@@ -1,11 +1,11 @@
-﻿local selectActiveBackgroundModule = require(script.Parent.selectActiveBackground)
-local nOBACKGROUNDASSETID = require(script.Parent.constants).NO_BACKGROUND_ASSET_ID
+﻿local SelectActiveBackgroundModule = require(script.Parent.selectActiveBackground)
+local NOBACKGROUNDASSETID = require(script.Parent.constants).NO_BACKGROUND_ASSET_ID
 
-return function(p1)
-	-- upvalues: selectActiveBackgroundModule (ref), nOBACKGROUNDASSETID (ref)
-	local var1 = selectActiveBackgroundModule(p1)
+return function(p1) --[[ Line: 15 | Named "buildOutfitProfileConfiguration" ]]
+	-- upvalues: SelectActiveBackgroundModule (copy), NOBACKGROUNDASSETID (copy)
+	local SelectActiveBackgroundModuleResult = SelectActiveBackgroundModule(p1)
 	
 	return {
-		BackgroundAssetId = if var1 ~= nil then nOBACKGROUNDASSETID else var1
+		BackgroundAssetId = if SelectActiveBackgroundModuleResult == nil then NOBACKGROUNDASSETID else SelectActiveBackgroundModuleResult
 	}
 end

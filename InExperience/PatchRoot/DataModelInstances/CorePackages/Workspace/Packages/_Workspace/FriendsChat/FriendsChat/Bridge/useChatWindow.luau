@@ -1,12 +1,12 @@
-﻿local reactModule = require(script:FindFirstAncestor("FriendsChat").Parent.React)
-local friendsChatDependencyContextModule = require(script.Parent.FriendsChatDependencyContext)
+﻿local ReactModule = require(script:FindFirstAncestor("FriendsChat").Parent.React)
+local FriendsChatDependencyContextModule = require(script.Parent.FriendsChatDependencyContext)
 
-return function()
-	-- upvalues: reactModule (ref), friendsChatDependencyContextModule (ref)
-	local var1 = reactModule.useContext(friendsChatDependencyContextModule)
+return function() --[[ Line: 8 | Named "useChatWindow" ]]
+	-- upvalues: ReactModule (copy), FriendsChatDependencyContextModule (copy)
+	local UseContextResult = ReactModule.useContext(FriendsChatDependencyContextModule)
 	
-	if var1 == nil then
+	if UseContextResult == nil then
 		error("useChatWindow must be used within a FriendsChatDependencyBridge")
 	end
-	return var1.ChatWindow
+	return UseContextResult.ChatWindow
 end

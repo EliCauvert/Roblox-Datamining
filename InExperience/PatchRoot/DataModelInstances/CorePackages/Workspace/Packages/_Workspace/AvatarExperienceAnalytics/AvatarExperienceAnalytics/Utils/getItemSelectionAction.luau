@@ -1,6 +1,6 @@
-﻿local unifiedEventLogEnumsModule = require(script:FindFirstAncestor("AvatarExperienceAnalytics").UnifiedEventLogEnums)
+﻿local UnifiedEventLogEnumsModule = require(script:FindFirstAncestor("AvatarExperienceAnalytics").UnifiedEventLogEnums)
 
-return function(p1)
-	-- upvalues: unifiedEventLogEnumsModule (ref)
-	return if p1 then unifiedEventLogEnumsModule.MarketplaceUnifiedAction.ITEM_DESELECTED else unifiedEventLogEnumsModule.MarketplaceUnifiedAction.ITEM_SELECTED
+return function(p1) --[[ Line: 5 | Named "getItemSelectionAction" ]]
+	-- upvalues: UnifiedEventLogEnumsModule (copy)
+	return if p1 then UnifiedEventLogEnumsModule.MarketplaceUnifiedAction.ITEM_DESELECTED else UnifiedEventLogEnumsModule.MarketplaceUnifiedAction.ITEM_SELECTED
 end

@@ -1,85 +1,87 @@
-﻿local reactModule = require(script:FindFirstAncestor("ExpChat").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("ExpChat").Parent.React)
 local _ = require(script.Parent.DictationMode)
-local dictationAnalyticsModule = require(script.Parent.DictationAnalytics)
+local DictationAnalyticsModule = require(script.Parent.DictationAnalytics)
 
-local function classifyEditType(p1, p2)
-	-- upvalues: dictationAnalyticsModule (ref)
-	return if #p2 == 0 then dictationAnalyticsModule.EditTypes.FullClear elseif #p1 < #p2 and string.sub(p2, 1, #p1) == p1 then dictationAnalyticsModule.EditTypes.Addition elseif #p2 < #p1 and string.sub(p1, 1, #p2) == p2 then dictationAnalyticsModule.EditTypes.Deletion else dictationAnalyticsModule.EditTypes.Mixed
+local function classifyEditType(Text1: string, Text: string) --[[ Line: 29 ]]
+	-- upvalues: DictationAnalyticsModule (copy)
+	return if #Text == 0 then DictationAnalyticsModule.EditTypes.FullClear elseif #Text1 < #Text and string.sub(Text, 1, #Text1) == Text1 then DictationAnalyticsModule.EditTypes.Addition elseif #Text < #Text1 and string.sub(Text1, 1, #Text) == Text then DictationAnalyticsModule.EditTypes.Deletion else DictationAnalyticsModule.EditTypes.Mixed
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), dictationAnalyticsModule (ref), classifyEditType (ref)
-	local enabled = p1.enabled
-	local textBoxRef = p1.textBoxRef
-	local customTextBoxRef = p1.customTextBoxRef
-	local var1 = reactModule.useRef(nil)
-	local var2 = reactModule.useRef(nil)
-	local var3 = reactModule.useRef(false)
-	local var4 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: enabled (ref), var2 (ref), var1 (ref), dictationAnalyticsModule (copy)
-		if enabled then
-			var2.current = p2
-			var1.current = {
-				mode = p3,
-				outcome = dictationAnalyticsModule.Outcomes.Full,
-				textStt = p2
+return function(p1) --[[ Line: 42 | Named "useSendTelemetry" ]]
+	-- upvalues: ReactModule (copy), DictationAnalyticsModule (copy), classifyEditType (copy)
+	local Enabled = p1.enabled
+	local TextBoxRef = p1.textBoxRef
+	local CustomTextBoxRef = p1.customTextBoxRef
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseRefResult2 = ReactModule.useRef(false)
+	local UseResult = ReactModule.useCallback(function(Current, Mode) --[[ Line: 57 ]]
+		-- upvalues: Enabled (copy), UseRefResult1 (copy), UseRefResult (copy), DictationAnalyticsModule (upval)
+		if Enabled then
+			UseRefResult1.current = Current
+			UseRefResult.current = {
+				mode = Mode,
+				outcome = DictationAnalyticsModule.Outcomes.Full,
+				textStt = Current
 			}
 			
 			return
 		end
-	end, { enabled })
-	local var5 = reactModule.useCallback(function(p2)
-		-- upvalues: enabled (ref), var1 (ref), var3 (ref)
-		if not enabled then
+	end, { Enabled })
+	local UseResult1 = ReactModule.useCallback(function(TextSent) --[[ Line: 69 ]]
+		-- upvalues: Enabled (copy), UseRefResult (copy), UseRefResult2 (copy)
+		if not Enabled then
 			return nil
 		end
-		local current = var1.current
-		var1.current = nil
+		local Current = UseRefResult.current
+		UseRefResult.current = nil
 		
-		if current == nil then
+		if Current == nil then
 			return nil
-		end
-		var3.current = true
-		current.textSent = p2
-		
-		return current
-	end, { enabled })
-	reactModule.useEffect(function()
-		-- upvalues: enabled (ref), customTextBoxRef (ref), textBoxRef (ref), var2 (ref), var3 (ref), var1 (ref), dictationAnalyticsModule (copy), classifyEditType (copy)
-		if not enabled then return end
-		local current = customTextBoxRef.current or textBoxRef.current
-		
-		if current == nil then
-			return
-		end
-		local var6 = current:GetPropertyChangedSignal("Text"):Connect(function()
-			-- upvalues: var2 (copy), var3 (copy), current (ref), var1 (copy), dictationAnalyticsModule (copy), classifyEditType (copy)
-			local current_1 = var2.current
+		else
+			UseRefResult2.current = true
+			Current.textSent = TextSent
 			
-			if current_1 == nil then return end
-			if var3.current then
-				var3.current = false
-				var2.current = nil
+			return Current
+		end
+	end, { Enabled })
+	ReactModule.useEffect(function() --[[ Line: 83 ]]
+		-- upvalues: Enabled (copy), CustomTextBoxRef (copy), TextBoxRef (copy), UseRefResult1 (copy), UseRefResult2 (copy), UseRefResult (copy), DictationAnalyticsModule (upval), classifyEditType (upval)
+		if not Enabled then return end
+		local Current = CustomTextBoxRef.current or TextBoxRef.current
+		
+		if Current == nil then return end
+		local Connection = Current:GetPropertyChangedSignal("Text"):Connect(function() --[[ Line: 91 ]]
+			-- upvalues: UseRefResult1 (upval), UseRefResult2 (upval), Current (copy), UseRefResult (upval), DictationAnalyticsModule (upval), classifyEditType (upval)
+			local Current1 = UseRefResult1.current
+			
+			if Current1 == nil then return end
+			if UseRefResult2.current then
+				UseRefResult2.current = false
+				UseRefResult1.current = nil
 				
 				return
 			end
-			local text = current.Text
+			local Text = Current.Text
 			
-			if text == current_1 then return end
-			if var1.current then
-				var1.current.outcome = dictationAnalyticsModule.Outcomes.Partial
+			if Text == Current1 then return end
+			if UseRefResult.current then
+				UseRefResult.current.outcome = DictationAnalyticsModule.Outcomes.Partial
 			end
-			dictationAnalyticsModule.fire(dictationAnalyticsModule.Events.TextEdit, {
-				[dictationAnalyticsModule.Properties.SttMode] = dictationAnalyticsModule.Modes.Standard,
-				[dictationAnalyticsModule.Properties.EditType] = classifyEditType(current_1, text)
+			DictationAnalyticsModule.fire(DictationAnalyticsModule.Events.TextEdit, {
+				[DictationAnalyticsModule.Properties.SttMode] = DictationAnalyticsModule.Modes.Standard,
+				[DictationAnalyticsModule.Properties.EditType] = classifyEditType(Current1, Text)
 			})
 		end)
 		
-		return function()
-			-- upvalues: var6 (ref)
-			var6:Disconnect()
+		return function() --[[ Line: 113 ]]
+			-- upvalues: Connection (copy)
+			Connection:Disconnect()
 		end
-	end, { enabled, textBoxRef, customTextBoxRef })
+	end, { Enabled, TextBoxRef, CustomTextBoxRef })
 	
-	return { stageTranscription = var4, consumeOnSend = var5 }
+	return {
+		stageTranscription = UseResult,
+		consumeOnSend = UseResult1
+	}
 end

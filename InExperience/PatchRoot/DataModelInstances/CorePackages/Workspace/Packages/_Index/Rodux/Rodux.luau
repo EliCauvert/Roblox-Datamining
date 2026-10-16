@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CorePackages").Packages.Rodux)
+﻿return (require(game:GetService("CorePackages").Packages.Rodux))

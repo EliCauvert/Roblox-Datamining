@@ -1,28 +1,30 @@
-﻿local parent = script:FindFirstAncestor("DataHydration").Parent
-local httpClientModule = require(parent.HttpClient)
-local httpModule = require(parent.Http)
-local urlBuilderModule = require(parent.UrlBuilder)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local HttpClientModule = require(Parent.HttpClient)
+local HttpModule = require(Parent.Http)
+local UrlBuilderModule = require(Parent.UrlBuilder)
 local _ = require(script.Parent.Parent.FriendsRequestsStoreTypes)
-local fFlagAddFriendsSessionId = require(parent.SharedFlags).FFlagAddFriendsSessionId
-local fFlagAddFriendsPageHighlightUnseenRequests = require(parent.SharedFlags).FFlagAddFriendsPageHighlightUnseenRequests
-local fetch = httpClientModule.fetch
-local asPromise = httpClientModule.asPromise
+local FFlagAddFriendsSessionId = require(Parent.SharedFlags).FFlagAddFriendsSessionId
+local FFlagAddFriendsPageHighlightUnseenRequests = require(Parent.SharedFlags).FFlagAddFriendsPageHighlightUnseenRequests
+local FFlagFriendsRequestsRemoveRedundantParamsModule = require(DataHydration.Flags.FFlagFriendsRequestsRemoveRedundantParams)
+local FetchFunction = HttpClientModule.fetch
+local AsPromiseFunction = HttpClientModule.asPromise
 
-return function(p1, p2, p3)
-	-- upvalues: urlBuilderModule (ref), httpModule (ref), fFlagAddFriendsPageHighlightUnseenRequests (ref), fFlagAddFriendsSessionId (ref), fetch (ref), asPromise (ref)
-	return asPromise(fetch({
+return function(Cursor, Limit, p1) --[[ Line: 22 ]]
+	-- upvalues: UrlBuilderModule (copy), HttpModule (copy), FFlagFriendsRequestsRemoveRedundantParamsModule (copy), FFlagAddFriendsPageHighlightUnseenRequests (copy), FFlagAddFriendsSessionId (copy), FetchFunction (copy), AsPromiseFunction (copy)
+	return AsPromiseFunction((FetchFunction({
 		method = "GET",
 		analyticsKey = "friends.get-friend-requests",
-		url = urlBuilderModule.UrlBuilder.addQueryString(`{httpModule.Url.FRIEND_URL}/my/friends/requests`, {
-			sortOrder = "Desc",
-			fetchMutualFriends = "true",
-			limit = p2,
-			cursor = p1,
-			uprankUnseen = if fFlagAddFriendsPageHighlightUnseenRequests then "true" else nil,
-			sessionId = if fFlagAddFriendsSessionId then p3 else nil
+		url = UrlBuilderModule.UrlBuilder.addQueryString(`{HttpModule.Url.FRIEND_URL}/my/friends/requests`, {
+			sortOrder = if FFlagFriendsRequestsRemoveRedundantParamsModule then nil else "Desc",
+			fetchMutualFriends = if FFlagFriendsRequestsRemoveRedundantParamsModule then nil else "true",
+			limit = Limit,
+			cursor = Cursor,
+			uprankUnseen = if FFlagAddFriendsPageHighlightUnseenRequests then "true" else nil,
+			sessionId = if FFlagAddFriendsSessionId then p1 else nil
 		}),
-		decode = function(p4)
-			return p4
+		decode = function(p2) --[[ Line: 40 ]]
+			return p2
 		end
-	}))
+	})))
 end

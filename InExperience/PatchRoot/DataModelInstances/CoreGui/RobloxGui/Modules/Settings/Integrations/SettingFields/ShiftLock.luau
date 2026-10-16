@@ -1,84 +1,88 @@
-﻿local settings = script:FindFirstAncestor("Settings")
-local corePackagesService = game:GetService("CorePackages")
-local userInputService = game:GetService("UserInputService")
-local gameSettings = UserSettings().GameSettings
-local playersService = game:GetService("Players")
-local settingsServiceModule = require(corePackagesService.Workspace.Packages.SettingsService)
-local valueChangedSignal = settingsServiceModule.ValueChangedSignal
-local availabilitySignal = settingsServiceModule.AvailabilitySignal
-local visibilitySignal = settingsServiceModule.VisibilitySignal
-local settingEnum = settingsServiceModule.SettingEnum
-local localPlayer = playersService.LocalPlayer
-local LAYOUT_ORDER = require(settings.Integrations.Constants).GAMESETTINGS.LAYOUT_ORDER
-local t = {
+﻿local UserInputService = game:GetService("UserInputService")
+local GameSettings = UserSettings().GameSettings
+local SettingsServiceModule = require(game:GetService("CorePackages").Workspace.Packages.SettingsService)
+local ValueChangedSignal = SettingsServiceModule.ValueChangedSignal
+local AvailabilitySignal = SettingsServiceModule.AvailabilitySignal
+local VisibilitySignal = SettingsServiceModule.VisibilitySignal
+local SettingEnum = SettingsServiceModule.SettingEnum
+local LocalPlayer = game:GetService("Players").LocalPlayer
+local LAYOUTORDER = require(script:FindFirstAncestor("Settings").Integrations.Constants).GAMESETTINGS.LAYOUT_ORDER
+local config = {
 	[Enum.ControlMode.MouseLockSwitch] = true,
 	[Enum.ControlMode.Classic] = false
 }
 
-local function _()
-	-- upvalues: t (ref), gameSettings (ref), valueChangedSignal (ref)
-	local var1 = valueChangedSignal.new(t[gameSettings.ControlMode])
-	var1:connect(function(p1)
-		-- upvalues: t (copy), gameSettings (copy)
-		if t[gameSettings.ControlMode] == p1 then
+local function _() --[[ Line: 31 | Named "ShiftLockValue" ]]
+	-- upvalues: config (copy), GameSettings (copy), ValueChangedSignal (copy)
+	local NewValueChangedSignal = ValueChangedSignal.new(config[GameSettings.ControlMode])
+	NewValueChangedSignal:connect(function(p1) --[[ Line: 34 ]]
+		-- upvalues: config (upval), GameSettings (upval)
+		if config[GameSettings.ControlMode] ~= p1 then
+			GameSettings.ControlMode = if p1 then Enum.ControlMode.MouseLockSwitch else Enum.ControlMode.Classic
+			
 			return
 		end
-		gameSettings.ControlMode = if p1 then Enum.ControlMode.MouseLockSwitch else Enum.ControlMode.Classic
 	end)
 	
-	return var1
+	return NewValueChangedSignal
 end
 
-local function ShiftLockAvailability(_, p1)
-	-- upvalues: localPlayer (ref), userInputService (ref), availabilitySignal (ref)
-	local function _()
-		-- upvalues: localPlayer (copy), userInputService (copy)
-		return userInputService.MouseEnabled and (userInputService.KeyboardEnabled and (if localPlayer then localPlayer.DevEnableMouseLock else true))
+local function ShiftLockAvailability(_, NewResult) --[[ Line: 45 ]]
+	-- upvalues: LocalPlayer (copy), UserInputService (copy), AvailabilitySignal (copy)
+	local function _() --[[ Line: 46 | Named "available" ]]
+		-- upvalues: LocalPlayer (upval), UserInputService (upval)
+		local NoLocalPlayer = not LocalPlayer or LocalPlayer.DevEnableMouseLock
+		
+		return UserInputService.MouseEnabled and (UserInputService.KeyboardEnabled and NoLocalPlayer)
 	end
 	
-	local var1 = availabilitySignal.new(userInputService.MouseEnabled and (userInputService.KeyboardEnabled and (if localPlayer then localPlayer.DevEnableMouseLock else true)))
-	var1:connect(function(p2)
-		-- upvalues: p1 (ref)
-		if p2 then
-			p1:set(p2)
+	local NoLocalPlayer = not LocalPlayer or LocalPlayer.DevEnableMouseLock
+	local NewAvailabilitySignal = AvailabilitySignal.new(UserInputService.MouseEnabled and (UserInputService.KeyboardEnabled and NoLocalPlayer))
+	NewAvailabilitySignal:connect(function(p1) --[[ Line: 52 ]]
+		-- upvalues: NewResult (copy)
+		if p1 then
+			NewResult:set(p1)
 		end
 	end, true)
 	
-	if localPlayer then
-		localPlayer.Changed:Connect(function(p2)
-			-- upvalues: var1 (ref), localPlayer (copy), userInputService (copy)
-			if p2 == "DevEnableMouseLock" then
-				var1:set(userInputService.MouseEnabled and (userInputService.KeyboardEnabled and (if localPlayer then localPlayer.DevEnableMouseLock else true)))
+	if LocalPlayer then
+		LocalPlayer.Changed:Connect(function(p1) --[[ Line: 59 ]]
+			-- upvalues: NewAvailabilitySignal (copy), LocalPlayer (upval), UserInputService (upval)
+			if p1 == "DevEnableMouseLock" then
+				local NoLocalPlayer = not LocalPlayer or LocalPlayer.DevEnableMouseLock
+				NewAvailabilitySignal:set(UserInputService.MouseEnabled and (UserInputService.KeyboardEnabled and NoLocalPlayer))
 			end
 		end)
 	end
-	userInputService.Changed:Connect(function(p2)
-		-- upvalues: var1 (ref), localPlayer (copy), userInputService (copy)
-		if p2 == "MouseEnabled" or p2 == "KeyboardEnabled" then
-			var1:set(userInputService.MouseEnabled and (userInputService.KeyboardEnabled and (if localPlayer then localPlayer.DevEnableMouseLock else true)))
+	UserInputService.Changed:Connect(function(p1) --[[ Line: 66 ]]
+		-- upvalues: NewAvailabilitySignal (copy), LocalPlayer (upval), UserInputService (upval)
+		if p1 == "MouseEnabled" or p1 == "KeyboardEnabled" then
+			local NoLocalPlayer = not LocalPlayer or LocalPlayer.DevEnableMouseLock
+			NewAvailabilitySignal:set(UserInputService.MouseEnabled and (UserInputService.KeyboardEnabled and NoLocalPlayer))
 		end
 	end)
 	
-	return var1
+	return NewAvailabilitySignal
 end
 
-local var1 = valueChangedSignal.new(t[gameSettings.ControlMode])
-var1:connect(function(p1)
-	-- upvalues: t (ref), gameSettings (ref)
-	if t[gameSettings.ControlMode] == p1 then
+local NewValueChangedSignal = ValueChangedSignal.new(config[GameSettings.ControlMode])
+NewValueChangedSignal:connect(function(p1) --[[ Line: 34 ]]
+	-- upvalues: config (copy), GameSettings (copy)
+	if config[GameSettings.ControlMode] ~= p1 then
+		GameSettings.ControlMode = if p1 then Enum.ControlMode.MouseLockSwitch else Enum.ControlMode.Classic
+		
 		return
 	end
-	gameSettings.ControlMode = if p1 then Enum.ControlMode.MouseLockSwitch else Enum.ControlMode.Classic
 end)
-local var2 = visibilitySignal.new(true)
+local NewVisibilitySignal = VisibilitySignal.new(true)
 
 return {
 	id = "shift-lock",
 	label = "CoreScripts.InGameMenu.GameSettings.ShiftLock",
 	alreadyLocalized = false,
-	field_type = settingEnum.Toggle,
-	onChanged = var1,
-	availability = ShiftLockAvailability(var1, var2),
-	visibility = var2,
-	layoutOrder = LAYOUT_ORDER.ShiftLockFrame
+	field_type = SettingEnum.Toggle,
+	onChanged = NewValueChangedSignal,
+	availability = ShiftLockAvailability(NewValueChangedSignal, NewVisibilitySignal),
+	visibility = NewVisibilitySignal,
+	layoutOrder = LAYOUTORDER.ShiftLockFrame
 }

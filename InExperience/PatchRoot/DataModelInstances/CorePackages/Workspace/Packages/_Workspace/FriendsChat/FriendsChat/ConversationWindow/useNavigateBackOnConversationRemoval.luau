@@ -1,39 +1,40 @@
-﻿local parent = script:FindFirstAncestor("FriendsChat").Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local getFFlagAppChatEnableRootedNavigationModule = require(parent.AppChat.getFFlagAppChatEnableRootedNavigation)
-local expChatConversationListAdapterModule = require(script.Parent.Parent.ConversationList.ExpChatConversationListAdapter)
+﻿local Parent = script:FindFirstAncestor("FriendsChat").Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local GetFFlagAppChatEnableRootedNavigationModule = require(Parent.AppChat.getFFlagAppChatEnableRootedNavigation)
+local ExpChatConversationListAdapterModule = require(script.Parent.Parent.ConversationList.ExpChatConversationListAdapter)
 
-return function(p1)
-	-- upvalues: getFFlagAppChatEnableRootedNavigationModule (ref), expChatConversationListAdapterModule (ref), reactModule (ref), signalsModule (ref), signalsReactModule (ref)
-	local conversationId = p1.conversationId
-	local onBack = p1.onBack
+return function(p1) --[[ Line: 30 | Named "useNavigateBackOnConversationRemoval" ]]
+	-- upvalues: GetFFlagAppChatEnableRootedNavigationModule (copy), ExpChatConversationListAdapterModule (copy), ReactModule (copy), SignalsModule (copy), SignalsReactModule (copy)
+	local ConversationId = p1.conversationId
+	local OnBackFunction = p1.onBack
 	
-	if getFFlagAppChatEnableRootedNavigationModule() then
-		local conversationStore = expChatConversationListAdapterModule.getConversationStore()
-		local var1 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-			-- upvalues: signalsModule (copy), conversationStore (ref), conversationId (ref)
-			return signalsModule.createComputed(function(p2)
-				-- upvalues: conversationStore (copy), conversationId (copy)
-				return conversationStore.getConversation(conversationId, p2) ~= nil
+	if GetFFlagAppChatEnableRootedNavigationModule() then
+		local ConversationStore = ExpChatConversationListAdapterModule.getConversationStore()
+		local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 36 ]]
+			-- upvalues: SignalsModule (upval), ConversationStore (copy), ConversationId (copy)
+			return SignalsModule.createComputed(function(p2): boolean --[[ Line: 37 ]]
+				-- upvalues: ConversationStore (upval), ConversationId (upval)
+				return ConversationStore.getConversation(ConversationId, p2) ~= nil
 			end)
-		end, { conversationStore, conversationId }))
-		local var2 = reactModule.useRef(false)
-		reactModule.useEffect(function()
-			-- upvalues: var2 (ref)
-			var2.current = false
-		end, { conversationId })
-		reactModule.useEffect(function()
-			-- upvalues: var1 (ref), var2 (ref), onBack (ref)
-			if var1 then
-				var2.current = true
+		end, { ConversationStore, ConversationId })))
+		local UseRefResult = ReactModule.useRef(false)
+		ReactModule.useEffect(function() --[[ Line: 44 ]]
+			-- upvalues: UseRefResult (copy)
+			UseRefResult.current = false
+		end, { ConversationId })
+		ReactModule.useEffect(function() --[[ Line: 47 ]]
+			-- upvalues: UseSignalStateResult (copy), UseRefResult (copy), OnBackFunction (copy)
+			if UseSignalStateResult then
+				UseRefResult.current = true
 				
 				return
-			elseif var2.current and onBack then
-				var2.current = false
-				onBack()
 			end
-		end, { var1, onBack })
+			if UseRefResult.current and OnBackFunction then
+				UseRefResult.current = false
+				OnBackFunction()
+			end
+		end, { UseSignalStateResult, OnBackFunction })
 	end
 end

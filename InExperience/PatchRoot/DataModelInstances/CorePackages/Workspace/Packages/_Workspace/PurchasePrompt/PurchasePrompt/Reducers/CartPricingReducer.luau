@@ -1,55 +1,39 @@
-﻿local purchasePrompt = script:FindFirstAncestor("PurchasePrompt")
-local parent = purchasePrompt.Parent
-local rodux = require(parent.PurchasePromptDeps).Rodux
-local _ = require(parent.IAPExperience)
-local setCartPricingResponseModule = require(purchasePrompt.Actions.SetCartPricingResponse)
-local setCartPricingFetchingModule = require(purchasePrompt.Actions.SetCartPricingFetching)
-local setCartPricingFetchFailedModule = require(purchasePrompt.Actions.SetCartPricingFetchFailed)
-local completeRequestModule = require(purchasePrompt.Actions.CompleteRequest)
-local requestAssetPurchaseModule = require(purchasePrompt.Actions.RequestAssetPurchase)
-local requestBundlePurchaseModule = require(purchasePrompt.Actions.RequestBundlePurchase)
-local requestGamepassPurchaseModule = require(purchasePrompt.Actions.RequestGamepassPurchase)
-local requestProductPurchaseModule = require(purchasePrompt.Actions.RequestProductPurchase)
-local requestPremiumPurchaseModule = require(purchasePrompt.Actions.RequestPremiumPurchase)
-local requestSubscriptionPurchaseModule = require(purchasePrompt.Actions.RequestSubscriptionPurchase)
-local requestAvatarCreationFeePurchaseModule = require(purchasePrompt.Actions.RequestAvatarCreationFeePurchase)
-local requestExperiencePurchaseModule = require(purchasePrompt.Actions.RequestExperiencePurchase)
-local requestLookPurchaseModule = require(purchasePrompt.Actions.RequestLookPurchase)
-local requestRobuxUpsellPurchaseModule = require(purchasePrompt.Actions.RequestRobuxUpsellPurchase)
-local requestDeveloperSubscriptionPurchaseModule = require(purchasePrompt.Actions.RequestDeveloperSubscriptionPurchase)
-local t = { response = nil, isFetching = false, requestId = nil }
+﻿local PurchasePrompt = script:FindFirstAncestor("PurchasePrompt")
+local Parent = PurchasePrompt.Parent
+local _ = require(Parent.IAPExperience)
+local config = { response = nil, isFetching = false, requestId = nil }
 
-local function clear()
-	-- upvalues: t (ref)
-	return t
+local function clear() --[[ Line: 52 ]]
+	-- upvalues: config (copy)
+	return config
 end
 
-return rodux.createReducer(t, {
-	[setCartPricingFetchingModule.name] = function(p1, p2)
+return (require(Parent.PurchasePromptDeps).Rodux.createReducer(config, {
+	[require(PurchasePrompt.Actions.SetCartPricingFetching).name] = function(p1, p2) --[[ Line: 57 ]]
 		return {
 			isFetching = true,
 			response = p1.response,
 			requestId = p2.requestId
 		}
 	end,
-	[setCartPricingResponseModule.name] = function(p1, p2)
+	[require(PurchasePrompt.Actions.SetCartPricingResponse).name] = function(p1, p2) --[[ Line: 60 ]]
 		return {
 			isFetching = false,
 			response = p2.response,
 			requestId = p1.requestId
 		}
 	end,
-	[setCartPricingFetchFailedModule.name] = clear,
-	[completeRequestModule.name] = clear,
-	[requestAssetPurchaseModule.name] = clear,
-	[requestBundlePurchaseModule.name] = clear,
-	[requestGamepassPurchaseModule.name] = clear,
-	[requestProductPurchaseModule.name] = clear,
-	[requestPremiumPurchaseModule.name] = clear,
-	[requestSubscriptionPurchaseModule.name] = clear,
-	[requestAvatarCreationFeePurchaseModule.name] = clear,
-	[requestExperiencePurchaseModule.name] = clear,
-	[requestLookPurchaseModule.name] = clear,
-	[requestRobuxUpsellPurchaseModule.name] = clear,
-	[requestDeveloperSubscriptionPurchaseModule.name] = clear
-})
+	[require(PurchasePrompt.Actions.SetCartPricingFetchFailed).name] = clear,
+	[require(PurchasePrompt.Actions.CompleteRequest).name] = clear,
+	[require(PurchasePrompt.Actions.RequestAssetPurchase).name] = clear,
+	[require(PurchasePrompt.Actions.RequestBundlePurchase).name] = clear,
+	[require(PurchasePrompt.Actions.RequestGamepassPurchase).name] = clear,
+	[require(PurchasePrompt.Actions.RequestProductPurchase).name] = clear,
+	[require(PurchasePrompt.Actions.RequestPremiumPurchase).name] = clear,
+	[require(PurchasePrompt.Actions.RequestSubscriptionPurchase).name] = clear,
+	[require(PurchasePrompt.Actions.RequestAvatarCreationFeePurchase).name] = clear,
+	[require(PurchasePrompt.Actions.RequestExperiencePurchase).name] = clear,
+	[require(PurchasePrompt.Actions.RequestLookPurchase).name] = clear,
+	[require(PurchasePrompt.Actions.RequestRobuxUpsellPurchase).name] = clear,
+	[require(PurchasePrompt.Actions.RequestDeveloperSubscriptionPurchase).name] = clear
+}))

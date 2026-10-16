@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.InteractionFeedback.InteractionFeedback)
+﻿return (require(script.Parent._Workspace.InteractionFeedback.InteractionFeedback))

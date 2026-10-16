@@ -1,20 +1,20 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local buttonVariant = require(profilePlatform.Parent.Foundation).Enums.ButtonVariant
-local enumsModule = require(profilePlatform.Common.Enums)
-local _ = require(profilePlatform.Components.CTARow.Types)
-local profileTypes = enumsModule.ProfileTypes
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local ButtonVariant = require(ProfilePlatform.Parent.Foundation).Enums.ButtonVariant
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local _ = require(ProfilePlatform.Components.CTARow.Types)
+local ProfileTypes = EnumsModule.ProfileTypes
 
 return {
-	[enumsModule.ProfileActions.PlayExperience] = function(p1)
-		-- upvalues: buttonVariant (ref), enumsModule (ref), profileTypes (ref)
+	[EnumsModule.ProfileActions.PlayExperience] = function(p1) --[[ Line: 14 ]]
+		-- upvalues: ButtonVariant (copy), EnumsModule (copy), ProfileTypes (copy)
 		return {
-			variant = buttonVariant.Emphasis,
+			variant = ButtonVariant.Emphasis,
 			isLoading = p1.experienceUtilities.isLoading,
 			isDisabled = not p1.experienceUtilities.isInExperience,
-			text = p1.localized[enumsModule.ProfileActions.PlayExperience],
+			text = p1.localized[EnumsModule.ProfileActions.PlayExperience],
 			onActivated = {
-				[profileTypes.User] = function()
-					-- upvalues: p1 (ref)
+				[ProfileTypes.User] = function() --[[ Line: 21 ]]
+					-- upvalues: p1 (copy)
 					p1.experienceUtilities.playExperience()
 				end
 			}

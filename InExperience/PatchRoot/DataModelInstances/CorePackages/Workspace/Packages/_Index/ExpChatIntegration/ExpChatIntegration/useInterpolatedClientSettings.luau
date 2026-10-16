@@ -1,27 +1,31 @@
-﻿local parent = script:FindFirstAncestor("ExpChatIntegration").Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
+﻿local Parent = script:FindFirstAncestor("ExpChatIntegration").Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
 local _ = require(script.Parent.ChatPlatformContext)
-local useChatPlatformModule = require(script.Parent.useChatPlatform)
-local fFlagExpChatAddressFrame0Flash = require(parent.ChatUIPrimitives).Flags.FFlagExpChatAddressFrame0Flash
+local UseChatPlatformModule = require(script.Parent.useChatPlatform)
+local FFlagExpChatAddressFrame0Flash = require(Parent.ChatUIPrimitives).Flags.FFlagExpChatAddressFrame0Flash
 
-return function(value)
-	-- upvalues: useChatPlatformModule (ref), signalsReactModule (ref), reactModule (ref), fFlagExpChatAddressFrame0Flash (ref)
-	local var1 = signalsReactModule.useSignalState(useChatPlatformModule().getInterpolators)
-	local getBackgroundColor = var1.getBackgroundColor
-	local getBackgroundTransparency = var1.getBackgroundTransparency
-	local var2, var3 = reactModule.useState({
-		BackgroundColor3 = if fFlagExpChatAddressFrame0Flash then getBackgroundColor(value) else nil,
-		BackgroundColor = if not fFlagExpChatAddressFrame0Flash then getBackgroundColor(value) else nil,
-		BackgroundTransparency = getBackgroundTransparency(value)
+return function(p1) --[[ Line: 14 | Named "useInterpolatedClientSettings" ]]
+	-- upvalues: UseChatPlatformModule (copy), SignalsReactModule (copy), ReactModule (copy), FFlagExpChatAddressFrame0Flash (copy)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(UseChatPlatformModule().getInterpolators)
+	local GetBackgroundColorFunction = UseSignalStateResult.getBackgroundColor
+	local GetBackgroundTransparencyFunction = UseSignalStateResult.getBackgroundTransparency
+	local UseStateResult, UseStateResult2 = ReactModule.useState({
+		BackgroundColor3 = if FFlagExpChatAddressFrame0Flash then GetBackgroundColorFunction(p1) else nil,
+		BackgroundColor = if FFlagExpChatAddressFrame0Flash then nil else GetBackgroundColorFunction(p1),
+		BackgroundTransparency = GetBackgroundTransparencyFunction(p1)
 	})
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), getBackgroundColor (ref), value (ref), getBackgroundTransparency (ref)
-		var3({
-			BackgroundColor3 = getBackgroundColor(value),
-			BackgroundTransparency = getBackgroundTransparency(value)
+	ReactModule.useEffect(function() --[[ Line: 26 ]]
+		-- upvalues: UseStateResult2 (copy), GetBackgroundColorFunction (copy), p1 (copy), GetBackgroundTransparencyFunction (copy)
+		UseStateResult2({
+			BackgroundColor3 = GetBackgroundColorFunction(p1),
+			BackgroundTransparency = GetBackgroundTransparencyFunction(p1)
 		})
-	end, { value, getBackgroundColor, getBackgroundTransparency })
+	end, {
+		p1,
+		GetBackgroundColorFunction,
+		GetBackgroundTransparencyFunction
+	})
 	
-	return var2
+	return UseStateResult
 end

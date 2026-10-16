@@ -1,7 +1,7 @@
-﻿local reactModule = require(script:FindFirstAncestor("AppChat").Parent.React)
-local replyingToMessageDispatchContextModule = require(script.Parent.ReplyingToMessageDispatchContext)
+﻿local ReactModule = require(script:FindFirstAncestor("AppChat").Parent.React)
+local ReplyingToMessageDispatchContextModule = require(script.Parent.ReplyingToMessageDispatchContext)
 
-return function()
-	-- upvalues: reactModule (ref), replyingToMessageDispatchContextModule (ref)
-	return reactModule.useContext(replyingToMessageDispatchContextModule)
+return function() --[[ Line: 7 | Named "useReplyingToMessageDispatch" ]]
+	-- upvalues: ReactModule (copy), ReplyingToMessageDispatchContextModule (copy)
+	return ReactModule.useContext(ReplyingToMessageDispatchContextModule)
 end

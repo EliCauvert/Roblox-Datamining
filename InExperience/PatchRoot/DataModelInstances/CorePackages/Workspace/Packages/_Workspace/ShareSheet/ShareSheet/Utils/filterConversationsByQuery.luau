@@ -1,18 +1,20 @@
-﻿local _ = require(script:FindFirstAncestor("ShareSheet").Parent.AppChat.GetConversationListStore)
-local conversationUtilsModule = require(script.Parent.ConversationUtils)
+﻿local ConversationUtilsModule = require(script.Parent.ConversationUtils)
+local _ = require(script:FindFirstAncestor("ShareSheet").Types)
 
-return function(p1, p2, p3, p4)
-	-- upvalues: conversationUtilsModule (ref)
-	if p2 == "" then
-		return p1
+return function(List, Text: string, p1, p2) --[[ Line: 10 | Named "filterConversationsByQuery" ]]
+	-- upvalues: ConversationUtilsModule (copy)
+	if Text == "" then
+		return List
 	end
-	local lowerText = string.lower(p2)
-	local t = {}
+	local Lowered = string.lower(Text)
+	local List1 = {}
 	
-	for i, v in p1 do
-		if string.find(string.lower((if p3 then p3[v.id] else nil) or conversationUtilsModule.getDisplayName(v) or ""), lowerText, 1, true) ~= nil or string.find(string.lower(if p4 then p4[v.id] or "" else ""), lowerText, 1, true) ~= nil then
-			table.insert(t, v)
+	for _, value in List do
+		local Lowered1 = string.lower(p2 and p2[value.id] or "")
+		
+		if string.find(string.lower((if p1 then p1[value.id] else nil) or ConversationUtilsModule.getDisplayName(value) or ""), Lowered, 1, true) ~= nil or string.find(Lowered1, Lowered, 1, true) ~= nil then
+			table.insert(List1, value)
 		end
 	end
-	return t
+	return List1
 end

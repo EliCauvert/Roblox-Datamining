@@ -1,19 +1,19 @@
-﻿local getCamMicPermissionsModule = require(game:GetService("CoreGui").RobloxGui.Modules.Settings.getCamMicPermissions)
-local default = require(game:GetService("CorePackages").Workspace.Packages.PermissionsProtocol).PermissionsProtocol.default
+﻿local GetCamMicPermissionsModule = require(game:GetService("CoreGui").RobloxGui.Modules.Settings.getCamMicPermissions)
+local Default = require(game:GetService("CorePackages").Workspace.Packages.PermissionsProtocol).PermissionsProtocol.default
 
-return function(p1, p2, p3)
-	-- upvalues: default (ref), getCamMicPermissionsModule (ref)
-	local list = nil
+return function(Callback, p1, p2) --[[ Line: 13 ]]
+	-- upvalues: Default (copy), GetCamMicPermissionsModule (copy)
+	local List = nil
 	
-	if p2 then
-		if p2 == "camera" then
-			list = { default.Permissions.CAMERA_ACCESS }
-		elseif p2 == "microphone" then
-			list = { default.Permissions.MICROPHONE_ACCESS }
+	if p1 then
+		if p1 == "camera" then
+			List = { Default.Permissions.CAMERA_ACCESS }
+		elseif p1 == "microphone" then
+			List = { Default.Permissions.MICROPHONE_ACCESS }
 		end
 	end
-	getCamMicPermissionsModule(function(p4)
-		-- upvalues: p1 (ref)
-		p1(p4.hasCameraPermissions, p4.hasMicPermissions)
-	end, list, p3, "ExperienceChat.getPermissions")
+	GetCamMicPermissionsModule(function(p3) --[[ Line: 24 ]]
+		-- upvalues: Callback (copy)
+		Callback(p3.hasCameraPermissions, p3.hasMicPermissions)
+	end, List, p2, "ExperienceChat.getPermissions")
 end

@@ -1,12 +1,12 @@
-﻿local inExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
-local enumsModule = require(inExperienceSideSheet.Common.Enums)
-local getActionBindingsStoreModule = require(inExperienceSideSheet.Stores.GetActionBindingsStore)
+﻿local InExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
+local EnumsModule = require(InExperienceSideSheet.Common.Enums)
+local GetActionBindingsStoreModule = require(InExperienceSideSheet.Stores.GetActionBindingsStore)
 
-return function(value)
-	-- upvalues: getActionBindingsStoreModule (ref), enumsModule (ref)
-	local respawn = getActionBindingsStoreModule().sessionActionBindings[enumsModule.ActionBinding.Respawn]
+return function(p1) --[[ Line: 7 | Named "setIsRespawnEnabled" ]]
+	-- upvalues: GetActionBindingsStoreModule (copy), EnumsModule (copy)
+	local SessionActionBinding = GetActionBindingsStoreModule().sessionActionBindings[EnumsModule.ActionBinding.Respawn]
 	
-	if respawn then
-		respawn.setIsEnabled(value)
+	if SessionActionBinding then
+		SessionActionBinding.setIsEnabled(p1)
 	end
 end

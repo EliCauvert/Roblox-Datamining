@@ -1,7 +1,7 @@
-﻿local reactModule = require(script.Parent.Parent.Parent.Parent.Parent.React)
-local layerCollectorContextModule = require(script.Parent.LayerCollectorContext)
+﻿local ReactModule = require(script.Parent.Parent.Parent.Parent.Parent.React)
+local LayerCollectorContextModule = require(script.Parent.LayerCollectorContext)
 
-return function()
-	-- upvalues: reactModule (ref), layerCollectorContextModule (ref)
-	return reactModule.useContext(layerCollectorContextModule)
+return function() --[[ Line: 9 ]]
+	-- upvalues: ReactModule (copy), LayerCollectorContextModule (copy)
+	return (ReactModule.useContext(LayerCollectorContextModule))
 end

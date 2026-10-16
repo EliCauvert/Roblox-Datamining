@@ -1,16 +1,13 @@
-﻿local purchasePrompt = script:FindFirstAncestor("PurchasePrompt")
-local parent = purchasePrompt.Parent
-local rodux = require(parent.PurchasePromptDeps).Rodux
-local setPurchaseAnalyticsMetadataModule = require(purchasePrompt.Actions.SetPurchaseAnalyticsMetadata)
-local completeRequestModule = require(purchasePrompt.Actions.CompleteRequest)
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagUnifiedPurchaseGamepassAddProductUniverseId = sharedFlagsModule.FFlagUnifiedPurchaseGamepassAddProductUniverseId
-local fFlagPassShopPurchaseSurfaceToBuyModal = sharedFlagsModule.FFlagPassShopPurchaseSurfaceToBuyModal
+﻿local PurchasePrompt = script:FindFirstAncestor("PurchasePrompt")
+local Parent = PurchasePrompt.Parent
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagUnifiedPurchaseGamepassAddProductUniverseId = SharedFlagsModule.FFlagUnifiedPurchaseGamepassAddProductUniverseId
+local FFlagPassShopPurchaseSurfaceToBuyModal = SharedFlagsModule.FFlagPassShopPurchaseSurfaceToBuyModal
 local t = {}
 
-return rodux.createReducer(t, {
-	[setPurchaseAnalyticsMetadataModule.name] = function(_, p1)
-		-- upvalues: fFlagUnifiedPurchaseGamepassAddProductUniverseId (ref)
+return (require(Parent.PurchasePromptDeps).Rodux.createReducer(t, {
+	[require(PurchasePrompt.Actions.SetPurchaseAnalyticsMetadata).name] = function(_, p1) --[[ Line: 18 ]]
+		-- upvalues: FFlagUnifiedPurchaseGamepassAddProductUniverseId (copy)
 		return {
 			purchaseFlowUUID = p1.purchaseAnalyticsMetadata.purchaseFlowUUID,
 			surface = p1.purchaseAnalyticsMetadata.surface,
@@ -18,14 +15,14 @@ return rodux.createReducer(t, {
 			productType = p1.purchaseAnalyticsMetadata.productType,
 			productTargetId = p1.purchaseAnalyticsMetadata.productTargetId,
 			saleLocationUniverseId = p1.purchaseAnalyticsMetadata.saleLocationUniverseId,
-			productUniverseId = if fFlagUnifiedPurchaseGamepassAddProductUniverseId then p1.purchaseAnalyticsMetadata.productUniverseId else nil,
+			productUniverseId = if FFlagUnifiedPurchaseGamepassAddProductUniverseId then p1.purchaseAnalyticsMetadata.productUniverseId else nil,
 			price = p1.purchaseAnalyticsMetadata.price,
 			userRobuxBalance = p1.purchaseAnalyticsMetadata.userRobuxBalance,
 			eventMetadata = p1.purchaseAnalyticsMetadata.eventMetadata
 		}
 	end,
-	[completeRequestModule.name] = function(p1, _)
-		-- upvalues: fFlagPassShopPurchaseSurfaceToBuyModal (ref), t (ref)
-		return if fFlagPassShopPurchaseSurfaceToBuyModal then t else p1
+	[require(PurchasePrompt.Actions.CompleteRequest).name] = function(p1, _) --[[ Line: 34 ]]
+		-- upvalues: FFlagPassShopPurchaseSurfaceToBuyModal (copy), t (copy)
+		return if FFlagPassShopPurchaseSurfaceToBuyModal then t else p1
 	end
-})
+}))

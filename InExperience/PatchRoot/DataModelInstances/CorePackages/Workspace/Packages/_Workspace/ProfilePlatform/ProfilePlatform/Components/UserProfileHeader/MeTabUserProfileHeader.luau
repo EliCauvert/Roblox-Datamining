@@ -1,88 +1,89 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local useTokens = foundationModule.Hooks.useTokens
-local horizontalPageMargin = require(parent.UIBlox).App.Container.HorizontalPageMargin
-local userTile = require(parent.UserTile).UserTile
-local layoutMode = require(parent.UserTile).LayoutMode
-local enumsModule = require(profilePlatform.Common.Enums)
-local constantsModule = require(profilePlatform.Common.Constants)
-local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfileWrapperContext)
-local useProfileJsonComponentModule = require(profilePlatform.Hooks.useProfileJsonComponent)
-local useProfileFormFactorModule = require(profilePlatform.Hooks.useProfileFormFactor)
-local socialChipCountsRowContainer = require(profilePlatform.Components.UserProfileHeader.SocialChipCountsRow).SocialChipCountsRowContainer
-local profileActionBarModule = require(profilePlatform.Components.ProfileActionBar)
-local CTARowModule = require(profilePlatform.Components.CTARow)
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagEnableFontStylisticAlternativesOnSocialScreens = sharedFlagsModule.FFlagEnableFontStylisticAlternativesOnSocialScreens
-local fFlagEnableSocialTabsPage = sharedFlagsModule.FFlagEnableSocialTabsPage
-local var1 = if require(profilePlatform.Flags.FFlagProfilePlatformCTAsRefactor) then CTARowModule else profileActionBarModule
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local HorizontalPageMargin = require(Parent.UIBlox).App.Container.HorizontalPageMargin
+local UserTile = require(Parent.UserTile).UserTile
+local LayoutMode = require(Parent.UserTile).LayoutMode
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local ConstantsModule = require(ProfilePlatform.Common.Constants)
+local UseProfileWrapperContextModule = require(ProfilePlatform.Contexts.useProfileWrapperContext)
+local UseProfileJsonComponentModule = require(ProfilePlatform.Hooks.useProfileJsonComponent)
+local UseProfileFormFactorModule = require(ProfilePlatform.Hooks.useProfileFormFactor)
+local SocialChipCountsRowContainer = require(ProfilePlatform.Components.UserProfileHeader.SocialChipCountsRow).SocialChipCountsRowContainer
+local CTARowModule = require(ProfilePlatform.Components.CTARow)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagEnableFontStylisticAlternativesOnSocialScreens = SharedFlagsModule.FFlagEnableFontStylisticAlternativesOnSocialScreens
+local FFlagEnableSocialTabsPage = SharedFlagsModule.FFlagEnableSocialTabsPage
 
-return function(p1)
-	-- upvalues: useTokens (ref), useProfileWrapperContextModule (ref), useProfileFormFactorModule (ref), enumsModule (ref), useProfileJsonComponentModule (ref), fFlagEnableFontStylisticAlternativesOnSocialScreens (ref), constantsModule (ref), reactModule (ref), view (ref), userTile (ref), layoutMode (ref), var1 (ref), horizontalPageMargin (ref), socialChipCountsRowContainer (ref), fFlagEnableSocialTabsPage (ref)
-	local var2 = useTokens()
-	local profileId = useProfileWrapperContextModule().profileId
-	local var3 = useProfileFormFactorModule().formFactor == enumsModule.ProfileFormFactor.Wide
-	local userProfileHeader = useProfileJsonComponentModule(enumsModule.Components.UserProfileHeader) or {}
-	local names = userProfileHeader.names or {}
-	local username = names.username or ""
-	local var4 = if var3 then 128 else constantsModule.AVATAR_HEADSHOT_HEIGHT
+return function(p1) --[[ Line: 54 | Named "MeTabUserProfileHeader" ]]
+	-- upvalues: UseTokensFunction (copy), UseProfileWrapperContextModule (copy), UseProfileFormFactorModule (copy), EnumsModule (copy), UseProfileJsonComponentModule (copy), FFlagEnableFontStylisticAlternativesOnSocialScreens (copy), ConstantsModule (copy), ReactModule (copy), View (copy), UserTile (copy), LayoutMode (copy), CTARowModule (copy), HorizontalPageMargin (copy), SocialChipCountsRowContainer (copy), FFlagEnableSocialTabsPage (copy)
+	local UseTokensResult = UseTokensFunction()
+	local ProfileId = UseProfileWrapperContextModule().profileId
+	local IsFormFactorMatch = UseProfileFormFactorModule().formFactor == EnumsModule.ProfileFormFactor.Wide
+	local UseProfileJsonComponentModuleResult = UseProfileJsonComponentModule(EnumsModule.Components.UserProfileHeader) or {}
+	local Names = UseProfileJsonComponentModuleResult.names or {}
+	local Username = Names.username or ""
+	local AVATARHEADSHOTHEIGHT = if IsFormFactorMatch then 128 else ConstantsModule.AVATAR_HEADSHOT_HEIGHT
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = {
 			["col size-full-0 auto-y"] = true,
-			["gap-xxlarge"] = var3,
-			["gap-large"] = not var3
+			["gap-xxlarge"] = IsFormFactorMatch,
+			["gap-large"] = not IsFormFactorMatch
 		},
 		LayoutOrder = p1.layoutOrder
 	}, {
-		HeaderBlock = reactModule.createElement(horizontalPageMargin, {
+		HeaderBlock = ReactModule.createElement(HorizontalPageMargin, {
 			backgroundTransparency = 1,
 			useAutomaticSizing = true,
 			layoutOrder = 1,
 			size = UDim2.new(1, 0, 0, 0)
 		}, {
-			Row = reactModule.createElement(view, {
+			Row = ReactModule.createElement(View, {
 				tag = {
-					["row align-y-center gap-medium size-full-0 auto-y"] = var3,
-					["col gap-medium size-full-0 auto-y"] = not var3
+					["row align-y-center gap-medium size-full-0 auto-y"] = IsFormFactorMatch,
+					["col gap-medium size-full-0 auto-y"] = not IsFormFactorMatch
 				}
 			}, {
-				Identity = reactModule.createElement(view, {
+				Identity = ReactModule.createElement(View, {
 					LayoutOrder = 1,
-					tag = { grow = var3, ["size-full-0"] = not var3 },
-					Size = if var3 then UDim2.fromOffset(0, var4) else UDim2.new(1, 0, 0, var4)
+					tag = {
+						grow = IsFormFactorMatch,
+						["size-full-0"] = not IsFormFactorMatch
+					},
+					Size = if IsFormFactorMatch then UDim2.fromOffset(0, AVATARHEADSHOTHEIGHT) else UDim2.new(1, 0, 0, AVATARHEADSHOTHEIGHT)
 				}, {
-					UserTile = reactModule.createElement(userTile, {
+					UserTile = ReactModule.createElement(UserTile, {
 						userPresenceType = nil,
-						userId = profileId,
-						title = names.primaryName or "",
-						subtitle = if username ~= "" then nil elseif fFlagEnableFontStylisticAlternativesOnSocialScreens then `<font features="zero, ss03">@{username}</font>` else "@" .. username,
-						isPremium = userProfileHeader.isPremium,
-						isVerified = userProfileHeader.isVerified,
-						isRobloxAdmin = userProfileHeader.isRobloxAdmin,
-						layoutMode = layoutMode.wide,
-						titleStyle = if var3 then var2.Typography.HeadingLarge else var2.Typography.HeadingSmall,
-						subtitleStyle = if var3 then var2.Typography.BodyLarge else var2.Typography.BodyMedium
+						userId = ProfileId,
+						title = Names.primaryName or "",
+						subtitle = if Username == "" then nil elseif FFlagEnableFontStylisticAlternativesOnSocialScreens then `<font features="zero, ss03">@{Username}</font>` else "@" .. Username,
+						isPremium = UseProfileJsonComponentModuleResult.isPremium,
+						isVerified = UseProfileJsonComponentModuleResult.isVerified,
+						isRobloxAdmin = UseProfileJsonComponentModuleResult.isRobloxAdmin,
+						layoutMode = LayoutMode.wide,
+						titleStyle = if IsFormFactorMatch then UseTokensResult.Typography.HeadingLarge else UseTokensResult.Typography.HeadingSmall,
+						subtitleStyle = if IsFormFactorMatch then UseTokensResult.Typography.BodyLarge else UseTokensResult.Typography.BodyMedium
 					})
 				}),
-				Actions = reactModule.createElement(view, {
+				Actions = ReactModule.createElement(View, {
 					LayoutOrder = 2,
 					tag = {
-						["grow auto-y"] = var3,
-						["size-full-0 auto-y"] = not var3
+						["grow auto-y"] = IsFormFactorMatch,
+						["size-full-0 auto-y"] = not IsFormFactorMatch
 					}
 				}, {
-					Actions = reactModule.createElement(var1, { layoutOrder = 1 })
+					Actions = ReactModule.createElement(CTARowModule, { layoutOrder = 1 })
 				})
 			})
 		}),
-		SocialCountsRow = if userProfileHeader.counts ~= nil then reactModule.createElement(socialChipCountsRowContainer, {
+		SocialCountsRow = if UseProfileJsonComponentModuleResult.counts ~= nil then ReactModule.createElement(SocialChipCountsRowContainer, {
 			layoutOrder = 2,
 			size = UDim2.fromScale(1, 0),
-			title = if fFlagEnableSocialTabsPage then `@{username}` else nil
+			title = if FFlagEnableSocialTabsPage then `@{Username}` else nil
 		}) else nil
 	})
 end

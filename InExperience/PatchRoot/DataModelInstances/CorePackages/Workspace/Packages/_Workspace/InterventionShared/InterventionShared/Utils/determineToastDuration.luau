@@ -1,4 +1,4 @@
-﻿local var1 = require(script:FindFirstAncestor("InterventionShared").Parent.RobloxAppLocales).Localization.new(game:GetService("LocalizationService").RobloxLocaleId)
+﻿local NewResult = require(script:FindFirstAncestor("InterventionShared").Parent.RobloxAppLocales).Localization.new(game:GetService("LocalizationService").RobloxLocaleId)
 local list = {
 	{
 		threshold = 1380,
@@ -20,21 +20,22 @@ local list = {
 	}
 }
 
-return function(p1)
-	-- upvalues: list (ref), var1 (ref)
-	local var2 = ""
+return function(p1) --[[ Line: 39 ]]
+	-- upvalues: list (copy), NewResult (copy)
+	local FormatResult = ""
 	
-	for i, v in list do
-		if v.threshold <= p1 then
-			local ceiled = math.ceil(p1 / v.unit)
+	for _, value in list do
+		if value.threshold <= p1 then
+			local Ceiled = math.ceil(p1 / value.unit)
 			
-			if ceiled == 1 then
-				return var1:Format(v.headingSingle)
+			if Ceiled == 1 then
+				return (NewResult:Format(value.headingSingle))
+			else
+				FormatResult = NewResult:Format(value.headingPlural, { number = Ceiled })
+				
+				return FormatResult
 			end
-			var2 = var1:Format(v.headingPlural, { number = ceiled })
-			
-			return var2
 		end
 	end
-	return var2
+	return FormatResult
 end

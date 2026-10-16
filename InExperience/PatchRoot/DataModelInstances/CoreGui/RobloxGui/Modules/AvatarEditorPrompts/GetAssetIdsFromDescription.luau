@@ -4,40 +4,39 @@
 	"RightLeg", "RunAnimation", "Shirt", "SwimAnimation", "Torso", "WalkAnimation"
 }
 
-return function(p1)
-	-- upvalues: list (ref)
-	local v_1
-	local t = {}
+return function(Humanoid: Humanoid) --[[ Line: 23 ]]
+	-- upvalues: list (copy)
+	local List = {}
 	
-	for i, v in ipairs(list) do
-		v_1 = p1[v]
+	for _, value in ipairs(list) do
+		local HumanoidEntry = Humanoid[value]
 		
-		if typeof(v_1) == "number" and v_1 > 0 then
-			table.insert(t, v_1)
-		elseif typeof(v_1) == "string" and v_1 ~= "" then
-			for i_1 in v_1:gmatch("([%d]+),?") do
-				table.insert(t, tonumber(i_1))
+		if typeof(HumanoidEntry) == "number" and HumanoidEntry > 0 then
+			table.insert(List, HumanoidEntry)
+		elseif typeof(HumanoidEntry) == "string" and HumanoidEntry ~= "" then
+			for i in HumanoidEntry:gmatch("([%d]+),?") do
+				table.insert(List, (tonumber(i)))
 			end
 		end
 	end
-	for i_1, v_1 in ipairs(p1:GetAccessories(true)) do
-		table.insert(t, v_1.AssetId)
+	for _, accessory in ipairs((Humanoid:GetAccessories(true))) do
+		table.insert(List, accessory.AssetId)
 	end
-	for v_1, v_2 in p1:GetChildren() do
-		if v_2:IsA("MakeupDescription") and v_2.AssetId > 0 then
-			table.insert(t, v_2.AssetId)
+	for _, MakeupDescription in Humanoid:GetChildren() do
+		if MakeupDescription:IsA("MakeupDescription") and MakeupDescription.AssetId > 0 then
+			table.insert(List, MakeupDescription.AssetId)
 		end
 	end
-	local emotes = p1:GetEmotes()
+	local Emotes = Humanoid:GetEmotes()
 	
-	for i_3, v_3 in ipairs(p1:GetEquippedEmotes()) do
-		local name = emotes[v_3.Name]
+	for _, equippedEmote in ipairs((Humanoid:GetEquippedEmotes())) do
+		local Emote = Emotes[equippedEmote.Name]
 		
-		if name then
-			for i_4, v_4 in ipairs(name) do
-				table.insert(t, v_4)
+		if Emote then
+			for _, value1 in ipairs(Emote) do
+				table.insert(List, value1)
 			end
 		end
 	end
-	return t
+	return List
 end

@@ -1,33 +1,33 @@
-﻿local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
-local parent = genericAbuseReporting.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local layoutSlotsModule = require(genericAbuseReporting.BeduiV2.Components.LayoutSlots)
-local layout = layoutSlotsModule.inlineSlots.Layout
-local overlaidControlsProvider = layoutSlotsModule.OverlaidControlsProvider
-local radius = foundationModule.Enums.Radius
-local skeleton = foundationModule.Skeleton
-local view = foundationModule.View
+﻿local GenericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
+local Parent = GenericAbuseReporting.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local LayoutSlotsModule = require(GenericAbuseReporting.BeduiV2.Components.LayoutSlots)
+local Layout = LayoutSlotsModule.inlineSlots.Layout
+local OverlaidControlsProvider = LayoutSlotsModule.OverlaidControlsProvider
+local Radius = FoundationModule.Enums.Radius
+local Skeleton = FoundationModule.Skeleton
+local View = FoundationModule.View
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), overlaidControlsProvider (ref), layout (ref), skeleton (ref), radius (ref), view (ref)
-	return reactModule.createElement(overlaidControlsProvider, { value = p1.shouldUseOverlaidControls }, {
-		Layout = reactModule.createElement(layout, {
-			body = reactModule.createElement(reactModule.Fragment, nil, {
-				Title = reactModule.createElement(skeleton, {
+return ReactModule.memo(function(p1) --[[ Line: 24 | Named "DynamicReportV2InExpLoading" ]]
+	-- upvalues: ReactModule (copy), OverlaidControlsProvider (copy), Layout (copy), Skeleton (copy), Radius (copy), View (copy)
+	return ReactModule.createElement(OverlaidControlsProvider, { value = p1.shouldUseOverlaidControls }, {
+		Layout = ReactModule.createElement(Layout, {
+			body = ReactModule.createElement(ReactModule.Fragment, nil, {
+				Title = ReactModule.createElement(Skeleton, {
 					LayoutOrder = 1,
 					Size = UDim2.new(0.8, 0, 0, 40),
-					radius = radius.Medium
+					radius = Radius.Medium
 				}),
-				Items = reactModule.createElement(view, {
+				Items = ReactModule.createElement(View, {
 					tag = "col gap-medium size-full-0 auto-y",
 					LayoutOrder = 2
 				}, {
-					Item1 = reactModule.createElement(skeleton, { Size = UDim2.new(1, 0, 0, 50), radius = radius.Medium }),
-					Item2 = reactModule.createElement(skeleton, { Size = UDim2.new(1, 0, 0, 50), radius = radius.Medium }),
-					Item3 = reactModule.createElement(skeleton, { Size = UDim2.new(1, 0, 0, 50), radius = radius.Medium }),
-					Item4 = reactModule.createElement(skeleton, { Size = UDim2.new(1, 0, 0, 50), radius = radius.Medium }),
-					Item5 = reactModule.createElement(skeleton, { Size = UDim2.new(1, 0, 0, 50), radius = radius.Medium })
+					Item1 = ReactModule.createElement(Skeleton, { Size = UDim2.new(1, 0, 0, 50), radius = Radius.Medium }),
+					Item2 = ReactModule.createElement(Skeleton, { Size = UDim2.new(1, 0, 0, 50), radius = Radius.Medium }),
+					Item3 = ReactModule.createElement(Skeleton, { Size = UDim2.new(1, 0, 0, 50), radius = Radius.Medium }),
+					Item4 = ReactModule.createElement(Skeleton, { Size = UDim2.new(1, 0, 0, 50), radius = Radius.Medium }),
+					Item5 = ReactModule.createElement(Skeleton, { Size = UDim2.new(1, 0, 0, 50), radius = Radius.Medium })
 				})
 			})
 		})

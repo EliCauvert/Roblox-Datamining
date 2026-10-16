@@ -1,566 +1,567 @@
-﻿local ampUpsell = script:FindFirstAncestor("AmpUpsell")
-local parent = ampUpsell.Parent
-local reactModule = require(parent.React)
-local useNavigation = require(parent.Navigation).useNavigation
-local enumsModule = require(ampUpsell.Common.Enums)
-local actionTypeEnum = enumsModule.ActionTypeEnum
-local actionStatusEnum = enumsModule.ActionStatusEnum
-local accessResponseEnum = enumsModule.AccessResponseEnum
-local userSettingsSettingNameEnum = enumsModule.UserSettingsSettingNameEnum
-local _ = require(ampUpsell.Common.Types)
-local accountSettingsUpsellStringsFn = require(ampUpsell.Common.LocalizationStrings).accountSettingsUpsellStringsFn
-local foundationModule = require(parent.Foundation)
-local iconSize = foundationModule.Enums.IconSize
-local loading = foundationModule.Loading
-local cryoModule = require(parent.Cryo)
-local analyticsServiceModule = require(ampUpsell.Analytics.AnalyticsService)
-local sendModalActionEventModule = require(ampUpsell.Analytics.sendModalActionEvent)
-local ampApiProviderModule = require(ampUpsell.Common.AmpApiProvider)
-local appScreensModule = require(ampUpsell.Common.AppScreens)
-local errorScreenModule = require(ampUpsell.Components.ErrorScreen)
-local useCompletionCallbackWithReturnPageModule = require(ampUpsell.Common.useCompletionCallbackWithReturnPage)
-local useApolloClient = require(parent.ApolloClient).useApolloClient
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagAmpWizardEntryPointEventCtxFallback = sharedFlagsModule.FFlagAmpWizardEntryPointEventCtxFallback
-local fFlagEnableAmpWizardDeepLink = sharedFlagsModule.FFlagEnableAmpWizardDeepLink
-local getFFlagEnableAmpUpsellGqlModule = require(ampUpsell.Flags.GetFFlagEnableAmpUpsellGql)
-local getFFlagEnableAmpEmailUpsellSupportModule = require(ampUpsell.Flags.GetFFlagEnableAmpEmailUpsellSupport)
-local getFFlagEnableAmpIDVUpsellSupportModule = require(ampUpsell.Flags.GetFFlagEnableAmpIDVUpsellSupport)
-local getFFlagEnableAmpIDVUpsellPopOnCompletionModule = require(ampUpsell.Flags.GetFFlagEnableAmpIDVUpsellPopOnCompletion)
-local getFFlagEnableAmpSubscriptionUpsellModule = require(ampUpsell.Flags.GetFFlagEnableAmpSubscriptionUpsell)
-local getFFlagEnableAmpVPCPrologueModule = require(ampUpsell.Flags.GetFFlagEnableAmpVPCPrologue)
-local getFFlagEnableAmpWizardInlineVPCForFAEModule = require(ampUpsell.Flags.GetFFlagEnableAmpWizardInlineVPCForFAE)
-local getFFlagEnableAmpWizardVPCNavigationFixModule = require(ampUpsell.Flags.GetFFlagEnableAmpWizardVPCNavigationFix)
-local VPCPrologueModule = require(ampUpsell.Components.Prologues.VPCPrologue)
-local logEventOnceIfEnabled = require(ampUpsell.Common.LoggingUtils).logEventOnceIfEnabled
-local VPCApiProviderModule = require(ampUpsell.Common.VPCApiProvider)
-local useRoactService = require(parent.RobloxAppHooks).useRoactService
-local roactNetworking = require(parent.RoactServiceTags).RoactNetworking
-local VPCRequestTypeEnum = enumsModule.VPCRequestTypeEnum
+﻿local AmpUpsell = script:FindFirstAncestor("AmpUpsell")
+local Parent = AmpUpsell.Parent
+local ReactModule = require(Parent.React)
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local EnumsModule = require(AmpUpsell.Common.Enums)
+local ActionTypeEnum = EnumsModule.ActionTypeEnum
+local ActionStatusEnum = EnumsModule.ActionStatusEnum
+local AccessResponseEnum = EnumsModule.AccessResponseEnum
+local UserSettingsSettingNameEnum = EnumsModule.UserSettingsSettingNameEnum
+local _ = require(AmpUpsell.Common.Types)
+local AccountSettingsUpsellStringsFnFunction = require(AmpUpsell.Common.LocalizationStrings).accountSettingsUpsellStringsFn
+local FoundationModule = require(Parent.Foundation)
+local IconSize = FoundationModule.Enums.IconSize
+local Loading = FoundationModule.Loading
+local CryoModule = require(Parent.Cryo)
+local AnalyticsServiceModule = require(AmpUpsell.Analytics.AnalyticsService)
+local SendModalActionEventModule = require(AmpUpsell.Analytics.sendModalActionEvent)
+local AmpApiProviderModule = require(AmpUpsell.Common.AmpApiProvider)
+local AppScreensModule = require(AmpUpsell.Common.AppScreens)
+local ErrorScreenModule = require(AmpUpsell.Components.ErrorScreen)
+local UseCompletionCallbackWithReturnPageModule = require(AmpUpsell.Common.useCompletionCallbackWithReturnPage)
+local UseApolloClientFunction = require(Parent.ApolloClient).useApolloClient
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagAmpWizardEntryPointEventCtxFallback = SharedFlagsModule.FFlagAmpWizardEntryPointEventCtxFallback
+local FFlagEnableAmpWizardDeepLink = SharedFlagsModule.FFlagEnableAmpWizardDeepLink
+local GetFFlagEnableAmpUpsellGqlModule = require(AmpUpsell.Flags.GetFFlagEnableAmpUpsellGql)
+local GetFFlagEnableAmpEmailUpsellSupportModule = require(AmpUpsell.Flags.GetFFlagEnableAmpEmailUpsellSupport)
+local GetFFlagEnableAmpIDVUpsellSupportModule = require(AmpUpsell.Flags.GetFFlagEnableAmpIDVUpsellSupport)
+local GetFFlagEnableAmpIDVUpsellPopOnCompletionModule = require(AmpUpsell.Flags.GetFFlagEnableAmpIDVUpsellPopOnCompletion)
+local GetFFlagEnableAmpSubscriptionUpsellModule = require(AmpUpsell.Flags.GetFFlagEnableAmpSubscriptionUpsell)
+local GetFFlagEnableAmpVPCPrologueModule = require(AmpUpsell.Flags.GetFFlagEnableAmpVPCPrologue)
+local GetFFlagEnableAmpWizardInlineVPCForFAEModule = require(AmpUpsell.Flags.GetFFlagEnableAmpWizardInlineVPCForFAE)
+local GetFFlagEnableAmpWizardVPCNavigationFixModule = require(AmpUpsell.Flags.GetFFlagEnableAmpWizardVPCNavigationFix)
+local VPCPrologueModule = require(AmpUpsell.Components.Prologues.VPCPrologue)
+local LogEventOnceIfEnabledFunction = require(AmpUpsell.Common.LoggingUtils).logEventOnceIfEnabled
+local VPCApiProviderModule = require(AmpUpsell.Common.VPCApiProvider)
+local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
+local RoactNetworking = require(Parent.RoactServiceTags).RoactNetworking
+local VPCRequestTypeEnum = EnumsModule.VPCRequestTypeEnum
 
-local function VPCPrologueController(p1)
-	-- upvalues: reactModule (ref), accessResponseEnum (ref), cryoModule (ref), actionStatusEnum (ref), VPCPrologueModule (ref)
-	local options = p1.options
+local function VPCPrologueController(p1) --[[ Line: 92 ]]
+	-- upvalues: ReactModule (copy), AccessResponseEnum (copy), CryoModule (copy), ActionStatusEnum (copy), VPCPrologueModule (copy)
+	local Options = p1.options
 	
-	return reactModule.createElement(VPCPrologueModule, {
+	return ReactModule.createElement(VPCPrologueModule, {
 		recourseData = p1.recourseData,
-		onConfirm = reactModule.useCallback(function()
-			-- upvalues: p1 (ref), options (ref)
-			local actionProps = p1.request.actionProps
+		onConfirm = ReactModule.useCallback(function() --[[ Line: 95 ]]
+			-- upvalues: p1 (copy), Options (copy)
+			local ActionProps = p1.request.actionProps
 			p1.onDone()
 			
-			if options and options.onConfirm then
-				options.onConfirm()
+			if Options and Options.onConfirm then
+				Options.onConfirm()
 			end
 			if p1.request.openUpsellFn then
-				p1.request.openUpsellFn(actionProps)
+				p1.request.openUpsellFn(ActionProps)
 			end
-		end, { p1.request, p1.onDone, options }),
-		onCancel = reactModule.useCallback(function()
-			-- upvalues: p1 (ref), options (ref), accessResponseEnum (copy), cryoModule (copy), actionStatusEnum (copy)
+		end, { p1.request, p1.onDone, Options }),
+		onCancel = ReactModule.useCallback(function() --[[ Line: 106 ]]
+			-- upvalues: p1 (copy), Options (copy), AccessResponseEnum (upval), CryoModule (upval), ActionStatusEnum (upval)
 			p1.onDone()
 			
-			if options and options.onCancel then
-				options.onCancel()
+			if Options and Options.onCancel then
+				Options.onCancel()
 			end
-			p1.handleCompletion(accessResponseEnum.Denied, cryoModule.Dictionary.join(p1.actionsTaken, { [p1.request.action] = actionStatusEnum.Cancelled }))
+			p1.handleCompletion(AccessResponseEnum.Denied, CryoModule.Dictionary.join(p1.actionsTaken, { [p1.request.action] = ActionStatusEnum.Cancelled }))
 		end, {
 			p1.handleCompletion,
 			p1.actionsTaken,
 			p1.onDone,
 			p1.request,
-			options
+			Options
 		}),
-		config = if options then options.config else nil
+		config = if Options then Options.config else nil
 	})
 end
 
-local function getSuccessfulActions(p1)
-	-- upvalues: actionStatusEnum (ref)
-	local t = {}
+local function getSuccessfulActions(ActionsTaken) --[[ Line: 125 ]]
+	-- upvalues: ActionStatusEnum (copy)
+	local List = {}
 	
-	for i, v in pairs(p1) do
-		if v == actionStatusEnum.Success then
-			table.insert(t, i)
+	for i, value in pairs(ActionsTaken) do
+		if value == ActionStatusEnum.Success then
+			table.insert(List, i)
 		end
 	end
-	return t
+	return List
 end
 
-local function _(p2, p3, p4)
-	-- upvalues: actionTypeEnum (ref)
-	local action = p4.action
+local function _(p1, List, p2): boolean --[[ Line: 137 | Named "shouldUseVpcV2" ]]
+	-- upvalues: ActionTypeEnum (copy)
+	local Action = p2.action
 	
-	if p2 == nil or action ~= actionTypeEnum.ParentConsent and action ~= actionTypeEnum.ParentLink then
+	if p1 == nil or Action ~= ActionTypeEnum.ParentConsent and Action ~= ActionTypeEnum.ParentLink then
 		return false
+	else
+		local ParentConsentTypes = p2.parentConsentTypes
+		local Value = if ParentConsentTypes then ParentConsentTypes[1] else nil
+		
+		return Value == nil or (List == nil or table.find(List, Value) == nil)
 	end
-	local parentConsentTypes = p4.parentConsentTypes
-	local var1 = if parentConsentTypes then parentConsentTypes[1] else nil
-	
-	return var1 == nil or (if p3 ~= nil then table.find(p3, var1) == nil else true)
 end
 
-return function(p2)
-	-- upvalues: useNavigation (ref), fFlagAmpWizardEntryPointEventCtxFallback (ref), ampApiProviderModule (ref), analyticsServiceModule (ref), useRoactService (ref), roactNetworking (ref), reactModule (ref), useApolloClient (ref), useCompletionCallbackWithReturnPageModule (ref), fFlagEnableAmpWizardDeepLink (ref), actionTypeEnum (ref), appScreensModule (ref), cryoModule (ref), actionStatusEnum (ref), accessResponseEnum (ref), getFFlagEnableAmpEmailUpsellSupportModule (ref), getFFlagEnableAmpIDVUpsellSupportModule (ref), getFFlagEnableAmpIDVUpsellPopOnCompletionModule (ref), getFFlagEnableAmpWizardVPCNavigationFixModule (ref), logEventOnceIfEnabled (ref), getFFlagEnableAmpSubscriptionUpsellModule (ref), userSettingsSettingNameEnum (ref), getFFlagEnableAmpVPCPrologueModule (ref), getFFlagEnableAmpWizardInlineVPCForFAEModule (ref), accountSettingsUpsellStringsFn (ref), getFFlagEnableAmpUpsellGqlModule (ref), getSuccessfulActions (ref), sendModalActionEventModule (ref), VPCRequestTypeEnum (ref), VPCApiProviderModule (ref), VPCPrologueController (ref), errorScreenModule (ref), loading (ref), iconSize (ref)
-	local var1 = useNavigation()
-	local featureName = p2.featureName
-	local nameSpace = p2.nameSpace
-	local recourseData = p2.recourseData
-	local extraParameters = p2.extraParameters
-	local var2 = if fFlagAmpWizardEntryPointEventCtxFallback and (p2.entryPointEventCtx == nil or p2.entryPointEventCtx == "") then "defaultLuaContext" else p2.entryPointEventCtx
-	local openUpsells = p2.openUpsells
-	local vpcV2Launcher = p2.vpcV2Launcher
-	local vpcExcludedRequestTypes = p2.vpcExcludedRequestTypes
-	local completionCallback = p2.completionCallback
-	local metadata = p2.metadata
-	local var3 = if p2.ampApiProvider then p2.ampApiProvider else ampApiProviderModule
-	local var4 = if p2.analyticsService then p2.analyticsService else analyticsServiceModule.EventStream
-	local var5 = if p2.openAccountSettingsUpsell then p2.openAccountSettingsUpsell else var1.push
-	local var6 = if p2.isInExperienceEntry then p2.isInExperienceEntry else false
-	local var7 = useRoactService(roactNetworking)
-	local var8, var9 = reactModule.useState({})
-	local var10, var11 = reactModule.useState(false)
-	local var12, var13 = reactModule.useState(nil)
-	local var14, var15 = reactModule.useState(nil)
-	local var16 = useApolloClient()
-	local var17 = if fFlagEnableAmpWizardDeepLink then useCompletionCallbackWithReturnPageModule(var1, completionCallback, metadata) else completionCallback
-	local var18 = reactModule.useCallback(function(p3)
-		-- upvalues: vpcV2Launcher (ref), vpcExcludedRequestTypes (ref), actionTypeEnum (copy), var1 (ref)
-		local var19
-		local action = p3.action
+return function(p1) --[[ Line: 156 | Named "WizardContainer" ]]
+	-- upvalues: UseNavigationFunction (copy), FFlagAmpWizardEntryPointEventCtxFallback (copy), AmpApiProviderModule (copy), AnalyticsServiceModule (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), ReactModule (copy), UseApolloClientFunction (copy), UseCompletionCallbackWithReturnPageModule (copy), FFlagEnableAmpWizardDeepLink (copy), ActionTypeEnum (copy), AppScreensModule (copy), CryoModule (copy), ActionStatusEnum (copy), AccessResponseEnum (copy), GetFFlagEnableAmpEmailUpsellSupportModule (copy), GetFFlagEnableAmpIDVUpsellSupportModule (copy), GetFFlagEnableAmpIDVUpsellPopOnCompletionModule (copy), GetFFlagEnableAmpWizardVPCNavigationFixModule (copy), LogEventOnceIfEnabledFunction (copy), GetFFlagEnableAmpSubscriptionUpsellModule (copy), UserSettingsSettingNameEnum (copy), GetFFlagEnableAmpVPCPrologueModule (copy), GetFFlagEnableAmpWizardInlineVPCForFAEModule (copy), AccountSettingsUpsellStringsFnFunction (copy), GetFFlagEnableAmpUpsellGqlModule (copy), getSuccessfulActions (copy), SendModalActionEventModule (copy), VPCRequestTypeEnum (copy), VPCApiProviderModule (copy), VPCPrologueController (copy), ErrorScreenModule (copy), Loading (copy), IconSize (copy)
+	local UseNavigationResult = UseNavigationFunction()
+	local FeatureName = p1.featureName
+	local NameSpace = p1.nameSpace
+	local RecourseData = p1.recourseData
+	local ExtraParameters = p1.extraParameters
+	local DefaultLuaContext = if FFlagAmpWizardEntryPointEventCtxFallback and (p1.entryPointEventCtx == nil or p1.entryPointEventCtx == "") then "defaultLuaContext" else p1.entryPointEventCtx
+	local OpenUpsells = p1.openUpsells
+	local VpcV2Launcher = p1.vpcV2Launcher
+	local VpcExcludedRequestTypes = p1.vpcExcludedRequestTypes
+	local CompletionCallback = p1.completionCallback
+	local Metadata = p1.metadata
+	local AmpApiProvider = if p1.ampApiProvider then p1.ampApiProvider else AmpApiProviderModule
+	local AnalyticsService = if p1.analyticsService then p1.analyticsService else AnalyticsServiceModule.EventStream
+	local OpenAccountSettingsUpsell = if p1.openAccountSettingsUpsell then p1.openAccountSettingsUpsell else UseNavigationResult.push
+	local IsInExperienceEntry = if p1.isInExperienceEntry then p1.isInExperienceEntry else false
+	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
+	local UseStateResult, UseStateResult2 = ReactModule.useState({})
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(nil)
+	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(nil)
+	local UseApolloClientResult = UseApolloClientFunction()
+	local UseCompletionCallbackWithReturnPageModuleResult = UseCompletionCallbackWithReturnPageModule(UseNavigationResult, CompletionCallback, Metadata)
+	local Callback = if FFlagEnableAmpWizardDeepLink then UseCompletionCallbackWithReturnPageModuleResult else CompletionCallback
+	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 193 ]]
+		-- upvalues: VpcV2Launcher (copy), VpcExcludedRequestTypes (copy), ActionTypeEnum (upval), UseNavigationResult (copy)
+		local Action = p2.action
+		local v1 = nil
 		
-		if vpcV2Launcher == nil or action ~= actionTypeEnum.ParentConsent and action ~= actionTypeEnum.ParentLink then
-			var19 = false
+		if VpcV2Launcher == nil or Action ~= ActionTypeEnum.ParentConsent and Action ~= ActionTypeEnum.ParentLink then
+			v1 = false
 		else
-			local parentConsentTypes = p3.parentConsentTypes
-			local var20 = if parentConsentTypes then parentConsentTypes[1] else nil
-			var19 = var20 == nil or (if vpcExcludedRequestTypes ~= nil then table.find(vpcExcludedRequestTypes, var20) == nil else true)
+			local ParentConsentTypes = p2.parentConsentTypes
+			local Value = if ParentConsentTypes then ParentConsentTypes[1] else nil
+			v1 = Value == nil or (VpcExcludedRequestTypes == nil or table.find(VpcExcludedRequestTypes, Value) == nil)
 		end
-		if not var19 then
-			var1.pop()
+		if not v1 then
+			UseNavigationResult.pop()
 		end
-	end, { var1.pop, vpcV2Launcher, vpcExcludedRequestTypes })
-	local var19 = reactModule.useCallback(function(_, p3)
-		-- upvalues: actionTypeEnum (copy), appScreensModule (copy), var9 (ref), cryoModule (copy), var8 (ref), actionStatusEnum (copy), var17 (ref), accessResponseEnum (copy), getFFlagEnableAmpEmailUpsellSupportModule (copy), getFFlagEnableAmpIDVUpsellSupportModule (copy), featureName (ref), var2 (ref), metadata (ref), getFFlagEnableAmpIDVUpsellPopOnCompletionModule (copy), var1 (ref), recourseData (ref), var6 (ref), getFFlagEnableAmpWizardVPCNavigationFixModule (copy), var18 (ref), p2 (ref), logEventOnceIfEnabled (copy), getFFlagEnableAmpSubscriptionUpsellModule (copy)
-		local action = p3.action
+	end, {
+		UseNavigationResult.pop,
+		VpcV2Launcher,
+		VpcExcludedRequestTypes
+	})
+	local UseResult1 = ReactModule.useCallback(function(_, p2) --[[ Line: 200 ]]
+		-- upvalues: ActionTypeEnum (upval), AppScreensModule (upval), UseStateResult2 (copy), CryoModule (upval), UseStateResult (copy), ActionStatusEnum (upval), Callback (copy), AccessResponseEnum (upval), GetFFlagEnableAmpEmailUpsellSupportModule (upval), GetFFlagEnableAmpIDVUpsellSupportModule (upval), FeatureName (copy), DefaultLuaContext (copy), Metadata (copy), GetFFlagEnableAmpIDVUpsellPopOnCompletionModule (upval), UseNavigationResult (copy), RecourseData (copy), IsInExperienceEntry (copy), GetFFlagEnableAmpWizardVPCNavigationFixModule (upval), UseResult (copy), p1 (copy), LogEventOnceIfEnabledFunction (upval), GetFFlagEnableAmpSubscriptionUpsellModule (upval)
+		local Action = p2.action
 		
-		if action == actionTypeEnum.Phone then
-			return {
-				eventContext = "AmpUpsell",
-				origin = appScreensModule.AmpWizardContainer,
-				onSuccess = function()
-					-- upvalues: var9 (copy), cryoModule (copy), var8 (copy), actionTypeEnum (copy), actionStatusEnum (copy)
-					var9(cryoModule.Dictionary.join(var8, { [actionTypeEnum.Phone] = actionStatusEnum.Success }))
-				end,
-				onFailure = function()
-					-- upvalues: var17 (copy), accessResponseEnum (copy), cryoModule (copy), var8 (copy), actionTypeEnum (copy), actionStatusEnum (copy)
-					var17(accessResponseEnum.Denied, cryoModule.Dictionary.join(var8, { [actionTypeEnum.Phone] = actionStatusEnum.Failure }))
-				end,
-				onCancelled = function()
-					-- upvalues: var17 (copy), accessResponseEnum (copy), cryoModule (copy), var8 (copy), actionTypeEnum (copy), actionStatusEnum (copy)
-					var17(accessResponseEnum.Denied, cryoModule.Dictionary.join(var8, { [actionTypeEnum.Phone] = actionStatusEnum.Cancelled }))
+		return if Action == ActionTypeEnum.Phone then {
+			eventContext = "AmpUpsell",
+			origin = AppScreensModule.AmpWizardContainer,
+			onSuccess = function() --[[ Line: 206 ]]
+				-- upvalues: UseStateResult2 (upval), CryoModule (upval), UseStateResult (upval), ActionTypeEnum (upval), ActionStatusEnum (upval)
+				UseStateResult2(CryoModule.Dictionary.join(UseStateResult, { [ActionTypeEnum.Phone] = ActionStatusEnum.Success }))
+			end,
+			onFailure = function() --[[ Line: 211 ]]
+				-- upvalues: Callback (upval), AccessResponseEnum (upval), CryoModule (upval), UseStateResult (upval), ActionTypeEnum (upval), ActionStatusEnum (upval)
+				Callback(AccessResponseEnum.Denied, CryoModule.Dictionary.join(UseStateResult, { [ActionTypeEnum.Phone] = ActionStatusEnum.Failure }))
+			end,
+			onCancelled = function() --[[ Line: 217 ]]
+				-- upvalues: Callback (upval), AccessResponseEnum (upval), CryoModule (upval), UseStateResult (upval), ActionTypeEnum (upval), ActionStatusEnum (upval)
+				Callback(AccessResponseEnum.Denied, CryoModule.Dictionary.join(UseStateResult, { [ActionTypeEnum.Phone] = ActionStatusEnum.Cancelled }))
+			end
+		} elseif GetFFlagEnableAmpEmailUpsellSupportModule() and Action == ActionTypeEnum.AddedEmail then {
+			eventContext = "AmpUpsell",
+			closeOnEmailUpdate = true,
+			addEmailOver13TextKey = "Feature.VerificationUpsell.Description.IDVerificationAddEmailText",
+			addEmailUnder13TextKey = "Feature.VerificationUpsell.Description.IDVerificationAddEmailText",
+			addEmailTitleKey = "Feature.VerificationUpsell.Heading.AddEmail",
+			successCallback = function(_) --[[ Line: 231 ]]
+				-- upvalues: UseStateResult2 (upval), CryoModule (upval), UseStateResult (upval), ActionTypeEnum (upval), ActionStatusEnum (upval)
+				UseStateResult2(CryoModule.Dictionary.join(UseStateResult, { [ActionTypeEnum.Email] = ActionStatusEnum.Success }))
+			end,
+			failureCallback = function() --[[ Line: 236 ]]
+				-- upvalues: Callback (upval), AccessResponseEnum (upval), CryoModule (upval), UseStateResult (upval), ActionTypeEnum (upval), ActionStatusEnum (upval)
+				Callback(AccessResponseEnum.Denied, CryoModule.Dictionary.join(UseStateResult, { [ActionTypeEnum.Phone] = ActionStatusEnum.Failure }))
+			end,
+			closeCentralOverlay = function() --[[ Line: 242 ]] end
+		} elseif GetFFlagEnableAmpIDVUpsellSupportModule() and Action == ActionTypeEnum.GovernmentId then {
+			featureName = FeatureName,
+			entryPointEventCtx = DefaultLuaContext,
+			metadata = Metadata,
+			onSuccess = function() --[[ Line: 249 ]]
+				-- upvalues: GetFFlagEnableAmpIDVUpsellPopOnCompletionModule (upval), UseNavigationResult (upval), UseStateResult2 (upval), CryoModule (upval), UseStateResult (upval), ActionTypeEnum (upval), ActionStatusEnum (upval)
+				if GetFFlagEnableAmpIDVUpsellPopOnCompletionModule() then
+					UseNavigationResult.pop()
 				end
-			}
-		elseif getFFlagEnableAmpEmailUpsellSupportModule() and action == actionTypeEnum.AddedEmail then
-			return {
-				eventContext = "AmpUpsell",
-				closeOnEmailUpdate = true,
-				addEmailOver13TextKey = "Feature.VerificationUpsell.Description.IDVerificationAddEmailText",
-				addEmailUnder13TextKey = "Feature.VerificationUpsell.Description.IDVerificationAddEmailText",
-				addEmailTitleKey = "Feature.VerificationUpsell.Heading.AddEmail",
-				successCallback = function(_)
-					-- upvalues: var9 (copy), cryoModule (copy), var8 (copy), actionTypeEnum (copy), actionStatusEnum (copy)
-					var9(cryoModule.Dictionary.join(var8, { [actionTypeEnum.Email] = actionStatusEnum.Success }))
-				end,
-				failureCallback = function()
-					-- upvalues: var17 (copy), accessResponseEnum (copy), cryoModule (copy), var8 (copy), actionTypeEnum (copy), actionStatusEnum (copy)
-					var17(accessResponseEnum.Denied, cryoModule.Dictionary.join(var8, { [actionTypeEnum.Phone] = actionStatusEnum.Failure }))
-				end,
-				closeCentralOverlay = function() end
-			}
-		elseif getFFlagEnableAmpIDVUpsellSupportModule() and action == actionTypeEnum.GovernmentId then
-			return {
-				featureName = featureName,
-				entryPointEventCtx = var2,
-				metadata = metadata,
-				onSuccess = function()
-					-- upvalues: getFFlagEnableAmpIDVUpsellPopOnCompletionModule (copy), var1 (copy), var9 (copy), cryoModule (copy), var8 (copy), actionTypeEnum (copy), actionStatusEnum (copy)
-					if getFFlagEnableAmpIDVUpsellPopOnCompletionModule() then
-						var1.pop()
-					end
-					var9(cryoModule.Dictionary.join(var8, { [actionTypeEnum.GovernmentId] = actionStatusEnum.Success }))
-				end,
-				onFailure = function()
-					-- upvalues: getFFlagEnableAmpIDVUpsellPopOnCompletionModule (copy), var1 (copy), var17 (copy), accessResponseEnum (copy), cryoModule (copy), var8 (copy), actionTypeEnum (copy), actionStatusEnum (copy)
-					if getFFlagEnableAmpIDVUpsellPopOnCompletionModule() then
-						var1.pop()
-					end
-					var17(accessResponseEnum.Denied, cryoModule.Dictionary.join(var8, { [actionTypeEnum.GovernmentId] = actionStatusEnum.Failure }))
-				end,
-				onCancelled = function()
-					-- upvalues: getFFlagEnableAmpIDVUpsellPopOnCompletionModule (copy), var1 (copy), var17 (copy), accessResponseEnum (copy), cryoModule (copy), var8 (copy), actionTypeEnum (copy), actionStatusEnum (copy)
-					if getFFlagEnableAmpIDVUpsellPopOnCompletionModule() then
-						var1.pop()
-					end
-					var17(accessResponseEnum.Denied, cryoModule.Dictionary.join(var8, {
-						[actionTypeEnum.GovernmentId] = actionStatusEnum.Cancelled
-					}))
+				UseStateResult2(CryoModule.Dictionary.join(UseStateResult, { [ActionTypeEnum.GovernmentId] = ActionStatusEnum.Success }))
+			end,
+			onFailure = function() --[[ Line: 260 ]]
+				-- upvalues: GetFFlagEnableAmpIDVUpsellPopOnCompletionModule (upval), UseNavigationResult (upval), Callback (upval), AccessResponseEnum (upval), CryoModule (upval), UseStateResult (upval), ActionTypeEnum (upval), ActionStatusEnum (upval)
+				if GetFFlagEnableAmpIDVUpsellPopOnCompletionModule() then
+					UseNavigationResult.pop()
 				end
-			}
-		elseif action == actionTypeEnum.ParentConsent or action == actionTypeEnum.ParentLink then
-			return {
-				recourseAction = p3.action,
-				parentConsentTypes = p3.parentConsentTypes,
-				recourseData = recourseData,
-				entryPointEventCtx = var2,
-				isInExperienceEntry = var6,
-				onCancel = function()
-					-- upvalues: getFFlagEnableAmpWizardVPCNavigationFixModule (copy), var18 (copy), p3 (ref), var17 (copy), accessResponseEnum (copy), cryoModule (copy), var8 (copy), action (ref), actionStatusEnum (copy)
-					if getFFlagEnableAmpWizardVPCNavigationFixModule() then
-						var18(p3)
-					end
-					var17(accessResponseEnum.Denied, cryoModule.Dictionary.join(var8, { [action] = actionStatusEnum.Cancelled }))
-				end,
-				onSuccess = function()
-					-- upvalues: getFFlagEnableAmpWizardVPCNavigationFixModule (copy), var18 (copy), p3 (ref), var17 (copy), accessResponseEnum (copy), cryoModule (copy), var8 (copy), action (ref), actionStatusEnum (copy)
-					if getFFlagEnableAmpWizardVPCNavigationFixModule() then
-						var18(p3)
-					end
-					var17(accessResponseEnum.Denied, cryoModule.Dictionary.join(var8, { [action] = actionStatusEnum.Success }))
-				end,
-				onRetryAmp = function()
-					-- upvalues: var18 (copy), p3 (ref), var9 (copy), cryoModule (copy), var8 (copy), action (ref), actionStatusEnum (copy)
-					var18(p3)
-					var9(cryoModule.Dictionary.join(var8, { [action] = actionStatusEnum.RetryRequested }))
+				Callback(AccessResponseEnum.Denied, CryoModule.Dictionary.join(UseStateResult, { [ActionTypeEnum.GovernmentId] = ActionStatusEnum.Failure }))
+			end,
+			onCancelled = function() --[[ Line: 272 ]]
+				-- upvalues: GetFFlagEnableAmpIDVUpsellPopOnCompletionModule (upval), UseNavigationResult (upval), Callback (upval), AccessResponseEnum (upval), CryoModule (upval), UseStateResult (upval), ActionTypeEnum (upval), ActionStatusEnum (upval)
+				if GetFFlagEnableAmpIDVUpsellPopOnCompletionModule() then
+					UseNavigationResult.pop()
 				end
-			}
-		elseif action == actionTypeEnum.AgeEstimation then
-			return {
-				featureName = featureName,
-				entryPointEventCtx = var2,
-				metadata = metadata,
-				skipFacialAgeEstimationWebLinkModal = p2.skipFacialAgeEstimationWebLinkModal,
-				onSuccess = function()
-					-- upvalues: logEventOnceIfEnabled (copy), var1 (copy), var17 (copy), accessResponseEnum (copy), cryoModule (copy), var8 (copy), actionTypeEnum (copy), actionStatusEnum (copy)
-					logEventOnceIfEnabled("complete_flow_with_success")
-					var1.pop()
-					var17(accessResponseEnum.Granted, cryoModule.Dictionary.join(var8, {
-						[actionTypeEnum.AgeEstimation] = actionStatusEnum.Success
-					}))
-				end,
-				onFailure = function()
-					-- upvalues: logEventOnceIfEnabled (copy), var1 (copy), var17 (copy), accessResponseEnum (copy), cryoModule (copy), var8 (copy), actionTypeEnum (copy), actionStatusEnum (copy)
-					logEventOnceIfEnabled("complete_flow_with_error")
-					var1.pop()
-					var17(accessResponseEnum.Denied, cryoModule.Dictionary.join(var8, {
-						[actionTypeEnum.AgeEstimation] = actionStatusEnum.Failure
-					}))
-				end,
-				onCancel = function()
-					-- upvalues: logEventOnceIfEnabled (copy), var1 (copy), var17 (copy), accessResponseEnum (copy), cryoModule (copy), var8 (copy), actionTypeEnum (copy), actionStatusEnum (copy)
-					logEventOnceIfEnabled("complete_flow_with_cancel")
-					var1.pop()
-					var17(accessResponseEnum.Denied, cryoModule.Dictionary.join(var8, {
-						[actionTypeEnum.AgeEstimation] = actionStatusEnum.Cancelled
-					}))
-				end,
-				onRetry = function()
-					-- upvalues: var1 (copy), var9 (copy), cryoModule (copy), var8 (copy), actionTypeEnum (copy), actionStatusEnum (copy)
-					var1.pop()
-					var9(cryoModule.Dictionary.join(var8, {
-						[actionTypeEnum.AgeEstimation] = actionStatusEnum.RetryRequested
-					}))
+				Callback(AccessResponseEnum.Denied, CryoModule.Dictionary.join(UseStateResult, {
+					[ActionTypeEnum.GovernmentId] = ActionStatusEnum.Cancelled
+				}))
+			end
+		} elseif Action == ActionTypeEnum.ParentConsent or Action == ActionTypeEnum.ParentLink then {
+			recourseAction = p2.action,
+			parentConsentTypes = p2.parentConsentTypes,
+			recourseData = RecourseData,
+			entryPointEventCtx = DefaultLuaContext,
+			isInExperienceEntry = IsInExperienceEntry,
+			onCancel = function() --[[ Line: 293 ]]
+				-- upvalues: GetFFlagEnableAmpWizardVPCNavigationFixModule (upval), UseResult (upval), p2 (copy), Callback (upval), AccessResponseEnum (upval), CryoModule (upval), UseStateResult (upval), Action (copy), ActionStatusEnum (upval)
+				if GetFFlagEnableAmpWizardVPCNavigationFixModule() then
+					UseResult(p2)
 				end
-			}
-		elseif getFFlagEnableAmpSubscriptionUpsellModule() and action == actionTypeEnum.Subscription then
-			local var20 = recourseData
-			
-			return {
-				purchaseUIOptions = var20 and var20.purchaseUIOptions,
-				surfaceName = var20 and var20.surfaceName,
-				surfaceContext = var20 and var20.surfaceContext,
-				analyticsContext = var20 and var20.analyticsContext,
-				onSuccess = function()
-					-- upvalues: var1 (copy), var17 (copy), accessResponseEnum (copy), cryoModule (copy), var8 (copy), actionTypeEnum (copy), actionStatusEnum (copy)
-					var1.pop()
-					var17(accessResponseEnum.Granted, cryoModule.Dictionary.join(var8, { [actionTypeEnum.Subscription] = actionStatusEnum.Success }))
-				end,
-				onFailure = function()
-					-- upvalues: var1 (copy), var17 (copy), accessResponseEnum (copy), cryoModule (copy), var8 (copy), actionTypeEnum (copy), actionStatusEnum (copy)
-					var1.pop()
-					var17(accessResponseEnum.Denied, cryoModule.Dictionary.join(var8, { [actionTypeEnum.Subscription] = actionStatusEnum.Failure }))
-				end,
-				onCancel = function()
-					-- upvalues: var1 (copy), var17 (copy), accessResponseEnum (copy), cryoModule (copy), var8 (copy), actionTypeEnum (copy), actionStatusEnum (copy)
-					var1.pop()
-					var17(accessResponseEnum.Denied, cryoModule.Dictionary.join(var8, {
-						[actionTypeEnum.Subscription] = actionStatusEnum.Cancelled
-					}))
+				Callback(AccessResponseEnum.Denied, CryoModule.Dictionary.join(UseStateResult, { [Action] = ActionStatusEnum.Cancelled }))
+			end,
+			onSuccess = function() --[[ Line: 302 ]]
+				-- upvalues: GetFFlagEnableAmpWizardVPCNavigationFixModule (upval), UseResult (upval), p2 (copy), Callback (upval), AccessResponseEnum (upval), CryoModule (upval), UseStateResult (upval), Action (copy), ActionStatusEnum (upval)
+				if GetFFlagEnableAmpWizardVPCNavigationFixModule() then
+					UseResult(p2)
 				end
-			}
-		end
-		return {}
-	end, { var8, var17, var18 })
-	local var20 = reactModule.useCallback(function(p3)
-		-- upvalues: vpcV2Launcher (ref), vpcExcludedRequestTypes (ref), actionTypeEnum (copy), userSettingsSettingNameEnum (copy), openUpsells (ref)
-		local var21
-		local var22 = vpcExcludedRequestTypes
-		local action = p3.action
+				Callback(AccessResponseEnum.Denied, CryoModule.Dictionary.join(UseStateResult, { [Action] = ActionStatusEnum.Success }))
+			end,
+			onRetryAmp = function() --[[ Line: 311 ]]
+				-- upvalues: UseResult (upval), p2 (copy), UseStateResult2 (upval), CryoModule (upval), UseStateResult (upval), Action (copy), ActionStatusEnum (upval)
+				UseResult(p2)
+				UseStateResult2(CryoModule.Dictionary.join(UseStateResult, { [Action] = ActionStatusEnum.RetryRequested }))
+			end
+		} elseif Action == ActionTypeEnum.AgeEstimation then {
+			featureName = FeatureName,
+			entryPointEventCtx = DefaultLuaContext,
+			metadata = Metadata,
+			skipFacialAgeEstimationWebLinkModal = p1.skipFacialAgeEstimationWebLinkModal,
+			onSuccess = function() --[[ Line: 324 ]]
+				-- upvalues: LogEventOnceIfEnabledFunction (upval), UseNavigationResult (upval), Callback (upval), AccessResponseEnum (upval), CryoModule (upval), UseStateResult (upval), ActionTypeEnum (upval), ActionStatusEnum (upval)
+				LogEventOnceIfEnabledFunction("complete_flow_with_success")
+				UseNavigationResult.pop()
+				Callback(AccessResponseEnum.Granted, CryoModule.Dictionary.join(UseStateResult, {
+					[ActionTypeEnum.AgeEstimation] = ActionStatusEnum.Success
+				}))
+			end,
+			onFailure = function() --[[ Line: 335 ]]
+				-- upvalues: LogEventOnceIfEnabledFunction (upval), UseNavigationResult (upval), Callback (upval), AccessResponseEnum (upval), CryoModule (upval), UseStateResult (upval), ActionTypeEnum (upval), ActionStatusEnum (upval)
+				LogEventOnceIfEnabledFunction("complete_flow_with_error")
+				UseNavigationResult.pop()
+				Callback(AccessResponseEnum.Denied, CryoModule.Dictionary.join(UseStateResult, {
+					[ActionTypeEnum.AgeEstimation] = ActionStatusEnum.Failure
+				}))
+			end,
+			onCancel = function() --[[ Line: 346 ]]
+				-- upvalues: LogEventOnceIfEnabledFunction (upval), UseNavigationResult (upval), Callback (upval), AccessResponseEnum (upval), CryoModule (upval), UseStateResult (upval), ActionTypeEnum (upval), ActionStatusEnum (upval)
+				LogEventOnceIfEnabledFunction("complete_flow_with_cancel")
+				UseNavigationResult.pop()
+				Callback(AccessResponseEnum.Denied, CryoModule.Dictionary.join(UseStateResult, {
+					[ActionTypeEnum.AgeEstimation] = ActionStatusEnum.Cancelled
+				}))
+			end,
+			onRetry = function() --[[ Line: 357 ]]
+				-- upvalues: UseNavigationResult (upval), UseStateResult2 (upval), CryoModule (upval), UseStateResult (upval), ActionTypeEnum (upval), ActionStatusEnum (upval)
+				UseNavigationResult.pop()
+				UseStateResult2(CryoModule.Dictionary.join(UseStateResult, {
+					[ActionTypeEnum.AgeEstimation] = ActionStatusEnum.RetryRequested
+				}))
+			end
+		} elseif GetFFlagEnableAmpSubscriptionUpsellModule() and Action == ActionTypeEnum.Subscription then {
+			purchaseUIOptions = RecourseData and RecourseData.purchaseUIOptions,
+			surfaceName = RecourseData and RecourseData.surfaceName,
+			surfaceContext = RecourseData and RecourseData.surfaceContext,
+			analyticsContext = RecourseData and RecourseData.analyticsContext,
+			onSuccess = function() --[[ Line: 374 ]]
+				-- upvalues: UseNavigationResult (upval), Callback (upval), AccessResponseEnum (upval), CryoModule (upval), UseStateResult (upval), ActionTypeEnum (upval), ActionStatusEnum (upval)
+				UseNavigationResult.pop()
+				Callback(AccessResponseEnum.Granted, CryoModule.Dictionary.join(UseStateResult, { [ActionTypeEnum.Subscription] = ActionStatusEnum.Success }))
+			end,
+			onFailure = function() --[[ Line: 384 ]]
+				-- upvalues: UseNavigationResult (upval), Callback (upval), AccessResponseEnum (upval), CryoModule (upval), UseStateResult (upval), ActionTypeEnum (upval), ActionStatusEnum (upval)
+				UseNavigationResult.pop()
+				Callback(AccessResponseEnum.Denied, CryoModule.Dictionary.join(UseStateResult, { [ActionTypeEnum.Subscription] = ActionStatusEnum.Failure }))
+			end,
+			onCancel = function() --[[ Line: 394 ]]
+				-- upvalues: UseNavigationResult (upval), Callback (upval), AccessResponseEnum (upval), CryoModule (upval), UseStateResult (upval), ActionTypeEnum (upval), ActionStatusEnum (upval)
+				UseNavigationResult.pop()
+				Callback(AccessResponseEnum.Denied, CryoModule.Dictionary.join(UseStateResult, {
+					[ActionTypeEnum.Subscription] = ActionStatusEnum.Cancelled
+				}))
+			end
+		} else {}
+	end, { UseStateResult, Callback, UseResult })
+	local UseResult2 = ReactModule.useCallback(function(p2) --[[ Line: 415 ]]
+		-- upvalues: VpcV2Launcher (copy), VpcExcludedRequestTypes (copy), ActionTypeEnum (upval), UserSettingsSettingNameEnum (upval), OpenUpsells (copy)
+		local Action = p2.action
+		local v1 = nil
 		
-		if vpcV2Launcher == nil or action ~= actionTypeEnum.ParentConsent and action ~= actionTypeEnum.ParentLink then
-			var21 = false
+		if VpcV2Launcher == nil or Action ~= ActionTypeEnum.ParentConsent and Action ~= ActionTypeEnum.ParentLink then
+			v1 = false
 		else
-			local parentConsentTypes = p3.parentConsentTypes
-			local var23 = if parentConsentTypes then parentConsentTypes[1] else nil
-			var21 = var23 == nil or (if var22 ~= nil then table.find(var22, var23) == nil else true)
+			local ParentConsentTypes = p2.parentConsentTypes
+			local Value = if ParentConsentTypes then ParentConsentTypes[1] else nil
+			v1 = Value == nil or (VpcExcludedRequestTypes == nil or table.find(VpcExcludedRequestTypes, Value) == nil)
 		end
-		if var21 then
-			return vpcV2Launcher
+		if v1 then
+			return VpcV2Launcher
 		end
-		local action_1 = p3.action
+		local Action1 = p2.action
 		
-		if action_1 == actionTypeEnum.UserSettings then
-			local userSettings = p3.userSettings
+		if Action1 == ActionTypeEnum.UserSettings then
+			local UserSettings = p2.userSettings
 			
-			return if userSettings and userSettings.settingName == userSettingsSettingNameEnum.AllowFacialAgeEstimation then nil else openUpsells[action_1]
+			if UserSettings and UserSettings.settingName == UserSettingsSettingNameEnum.AllowFacialAgeEstimation then
+				return nil
+			end
 		end
-	end, { openUpsells, vpcV2Launcher, vpcExcludedRequestTypes })
-	local var21 = reactModule.useCallback(function(_, p3)
-		-- upvalues: var11 (ref), var20 (ref), var19 (ref), actionTypeEnum (copy), p2 (ref), getFFlagEnableAmpVPCPrologueModule (copy), vpcV2Launcher (ref), vpcExcludedRequestTypes (ref), var13 (ref), getFFlagEnableAmpWizardInlineVPCForFAEModule (copy), userSettingsSettingNameEnum (copy), var15 (ref), var17 (ref), accessResponseEnum (copy), var8 (ref), accountSettingsUpsellStringsFn (copy), var5 (ref), featureName (ref), var1 (ref), cryoModule (copy), actionStatusEnum (copy)
-		if p3 == nil or #p3 == 0 then
-			var11(true)
+		return OpenUpsells[Action1]
+	end, { OpenUpsells, VpcV2Launcher, VpcExcludedRequestTypes })
+	local UseResult3 = ReactModule.useCallback(function(_, Entry) --[[ Line: 433 ]]
+		-- upvalues: UseStateResult2_1 (copy), UseResult2 (copy), UseResult1 (copy), ActionTypeEnum (upval), p1 (copy), GetFFlagEnableAmpVPCPrologueModule (upval), VpcV2Launcher (copy), VpcExcludedRequestTypes (copy), UseStateResult2_2 (copy), GetFFlagEnableAmpWizardInlineVPCForFAEModule (upval), UserSettingsSettingNameEnum (upval), UseStateResult2_3 (copy), Callback (copy), AccessResponseEnum (upval), UseStateResult (copy), AccountSettingsUpsellStringsFnFunction (upval), OpenAccountSettingsUpsell (copy), FeatureName (copy), UseNavigationResult (copy), CryoModule (upval), ActionStatusEnum (upval)
+		if Entry == nil or #Entry == 0 then
+			UseStateResult2_1(true)
 			
 			return
 		end
-		local var22 = p3[1]
-		local action = var22.action
-		local var23 = var20(var22)
+		local Entry1 = Entry[1]
+		local Action = Entry1.action
+		local UseResultResult: (any) -> () = UseResult2(Entry1)
 		
-		if var23 == nil then
-			if getFFlagEnableAmpWizardInlineVPCForFAEModule() and action == actionTypeEnum.UserSettings then
-				local userSettings = var22.userSettings
+		if UseResultResult == nil then
+			if GetFFlagEnableAmpWizardInlineVPCForFAEModule() and Action == ActionTypeEnum.UserSettings then
+				local UserSettings = Entry1.userSettings
 				
-				if userSettings and userSettings.settingName == userSettingsSettingNameEnum.AllowFacialAgeEstimation then
-					var15(var22)
-					
-					return
-				elseif action == actionTypeEnum.Subscription then
-					var17(accessResponseEnum.Denied, var8)
+				if UserSettings and UserSettings.settingName == UserSettingsSettingNameEnum.AllowFacialAgeEstimation then
+					UseStateResult2_3(Entry1)
 					
 					return
 				end
-				local var24 = accountSettingsUpsellStringsFn(var22)
+			end
+			if Action == ActionTypeEnum.Subscription then
+				Callback(AccessResponseEnum.Denied, UseStateResult)
 				
-				if var24 then
-					var5({
-						featureName = featureName,
-						localizationStrings = var24,
-						onCloseModal = function()
-							-- upvalues: var1 (copy), var17 (copy), accessResponseEnum (copy), cryoModule (copy), var8 (copy), action (ref), actionStatusEnum (copy)
-							var1.pop()
-							var17(accessResponseEnum.Denied, cryoModule.Dictionary.join(var8, { [action] = actionStatusEnum.Cancelled }))
-						end
-					})
-					
-					return
-				end
-				var17(accessResponseEnum.Error, var8)
+				return
+			end
+			local AccountSettingsUpsellStringsFnResult = AccountSettingsUpsellStringsFnFunction(Entry1)
+			
+			if AccountSettingsUpsellStringsFnResult then
+				OpenAccountSettingsUpsell({
+					featureName = FeatureName,
+					localizationStrings = AccountSettingsUpsellStringsFnResult,
+					onCloseModal = function() --[[ Line: 482 ]]
+						-- upvalues: UseNavigationResult (upval), Callback (upval), AccessResponseEnum (upval), CryoModule (upval), UseStateResult (upval), Action (copy), ActionStatusEnum (upval)
+						UseNavigationResult.pop()
+						Callback(AccessResponseEnum.Denied, CryoModule.Dictionary.join(UseStateResult, { [Action] = ActionStatusEnum.Cancelled }))
+					end
+				})
+				
+				return
+			else
+				Callback(AccessResponseEnum.Error, UseStateResult)
 				
 				return
 			end
 		else
-			local var25 = var19(action, var22)
+			local UseResultResult1 = UseResult1(Action, Entry1)
+			local IsActionMatch: boolean = Action == ActionTypeEnum.ParentConsent or Action == ActionTypeEnum.ParentLink
 			
-			if p2.usePrologue and (if action ~= actionTypeEnum.ParentConsent then action == actionTypeEnum.ParentLink else true) and getFFlagEnableAmpVPCPrologueModule() then
-				local var26
-				local var27 = vpcV2Launcher
-				local var28 = vpcExcludedRequestTypes
-				local action_1 = var22.action
+			if p1.usePrologue and IsActionMatch and GetFFlagEnableAmpVPCPrologueModule() then
+				local Action1 = Entry1.action
+				local v1 = nil
 				
-				if var27 == nil or action_1 ~= actionTypeEnum.ParentConsent and action_1 ~= actionTypeEnum.ParentLink then
-					var26 = false
+				if VpcV2Launcher == nil or Action1 ~= ActionTypeEnum.ParentConsent and Action1 ~= ActionTypeEnum.ParentLink then
+					v1 = false
 				else
-					local parentConsentTypes = var22.parentConsentTypes
-					local var29 = if parentConsentTypes then parentConsentTypes[1] else nil
-					var26 = var29 == nil or (if var28 ~= nil then table.find(var28, var29) == nil else true)
+					local ParentConsentTypes = Entry1.parentConsentTypes
+					local Value = if ParentConsentTypes then ParentConsentTypes[1] else nil
+					v1 = Value == nil or (VpcExcludedRequestTypes == nil or table.find(VpcExcludedRequestTypes, Value) == nil)
 				end
-				if var26 then
-					var23(var25)
+				if not v1 then
+					UseStateResult2_2({
+						action = Action,
+						actionProps = UseResultResult1,
+						openUpsellFn = UseResultResult
+					})
 					
 					return
-				else
-					var13({
-						action = action,
-						actionProps = var25,
-						openUpsellFn = var23
-					})
 				end
 			end
+			UseResultResult(UseResultResult1)
 		end
 	end, {
-		var8, var17, featureName, var19, var1.pop, var5, var20, p2.usePrologue,
-		vpcV2Launcher, vpcExcludedRequestTypes, var15
+		UseStateResult, Callback, FeatureName, UseResult1, UseNavigationResult.pop,
+		OpenAccountSettingsUpsell, UseResult2, p1.usePrologue, VpcV2Launcher,
+		VpcExcludedRequestTypes, UseStateResult2_3
 	})
-	local var22 = reactModule.useCallback(function(p3, p4)
-		-- upvalues: var11 (ref), logEventOnceIfEnabled (copy), getFFlagEnableAmpUpsellGqlModule (copy), var3 (ref), var16 (ref), getSuccessfulActions (copy), var8 (ref), extraParameters (ref), accessResponseEnum (copy), var21 (ref), var17 (ref)
-		var11(false)
-		logEventOnceIfEnabled("amp_feature_access_init")
-		local var23 = if getFFlagEnableAmpUpsellGqlModule() then var3.upsellFeatureAccessGql(var16, p3, getSuccessfulActions(var8), p4, extraParameters) else var3.upsellFeatureAccess(p3, getSuccessfulActions(var8), p4, extraParameters)
+	local UseResult4 = ReactModule.useCallback(function(p2, p3) --[[ Line: 504 ]]
+		-- upvalues: UseStateResult2_1 (copy), LogEventOnceIfEnabledFunction (upval), GetFFlagEnableAmpUpsellGqlModule (upval), AmpApiProvider (copy), UseApolloClientResult (copy), getSuccessfulActions (upval), UseStateResult (copy), ExtraParameters (copy), AccessResponseEnum (upval), UseResult3 (copy), Callback (copy)
+		UseStateResult2_1(false)
+		LogEventOnceIfEnabledFunction("amp_feature_access_init")
+		local UpsellFeatureAccessGqlResult = if GetFFlagEnableAmpUpsellGqlModule() then AmpApiProvider.upsellFeatureAccessGql(UseApolloClientResult, p2, getSuccessfulActions(UseStateResult), p3, ExtraParameters) else AmpApiProvider.upsellFeatureAccess(p2, getSuccessfulActions(UseStateResult), p3, ExtraParameters)
 		
-		if var23.access == accessResponseEnum.Error then
-			var11(true)
-			
-			return
-		elseif var23.access == accessResponseEnum.Actionable then
-			logEventOnceIfEnabled("amp_feature_access_actionable")
-			var21(var23.recourse, var23.recourses)
-			
-			return
-		elseif var23.access == accessResponseEnum.Granted then
-			logEventOnceIfEnabled("amp_feature_access_granted")
-			var17(accessResponseEnum.Granted, var8)
-			
-			return
-		elseif var23.access == accessResponseEnum.Denied then
-			logEventOnceIfEnabled("amp_feature_access_denied")
-			var17(accessResponseEnum.Denied, var8)
+		if UpsellFeatureAccessGqlResult.access == AccessResponseEnum.Error then
+			UseStateResult2_1(true)
 			
 			return
 		end
-		var17(accessResponseEnum.Pending, var8)
-	end, { var3, extraParameters, var17 })
-	reactModule.useEffect(function()
-		-- upvalues: sendModalActionEventModule (copy), var4 (ref), appScreensModule (copy), featureName (ref)
-		sendModalActionEventModule(var4, appScreensModule.AmpWizardContainer, featureName, "Shown")
-	end, { var4 })
-	reactModule.useEffect(function()
-		-- upvalues: var22 (ref), featureName (ref), nameSpace (ref)
-		var22(featureName, nameSpace)
-	end, { var8, featureName, var22, nameSpace })
-	reactModule.useEffect(function()
-		-- upvalues: getFFlagEnableAmpWizardInlineVPCForFAEModule (copy), var14 (ref), VPCRequestTypeEnum (copy), var19 (ref), cryoModule (copy), recourseData (ref), VPCApiProviderModule (copy), var7 (ref), actionTypeEnum (copy), var20 (ref), var11 (ref), var15 (ref), getFFlagEnableAmpVPCPrologueModule (copy), vpcV2Launcher (ref), vpcExcludedRequestTypes (ref), var13 (ref)
-		if getFFlagEnableAmpWizardInlineVPCForFAEModule() and var14 ~= nil then
-			local function _(p3)
-				-- upvalues: VPCRequestTypeEnum (copy)
+		if UpsellFeatureAccessGqlResult.access == AccessResponseEnum.Actionable then
+			LogEventOnceIfEnabledFunction("amp_feature_access_actionable")
+			UseResult3(UpsellFeatureAccessGqlResult.recourse, UpsellFeatureAccessGqlResult.recourses)
+			
+			return
+		end
+		if UpsellFeatureAccessGqlResult.access == AccessResponseEnum.Granted then
+			LogEventOnceIfEnabledFunction("amp_feature_access_granted")
+			Callback(AccessResponseEnum.Granted, UseStateResult)
+			
+			return
+		end
+		if UpsellFeatureAccessGqlResult.access == AccessResponseEnum.Denied then
+			LogEventOnceIfEnabledFunction("amp_feature_access_denied")
+			Callback(AccessResponseEnum.Denied, UseStateResult)
+			
+			return
+		else
+			Callback(AccessResponseEnum.Pending, UseStateResult)
+		end
+	end, { AmpApiProvider, ExtraParameters, Callback })
+	ReactModule.useEffect(function() --[[ Line: 537 ]]
+		-- upvalues: SendModalActionEventModule (upval), AnalyticsService (copy), AppScreensModule (upval), FeatureName (copy)
+		SendModalActionEventModule(AnalyticsService, AppScreensModule.AmpWizardContainer, FeatureName, "Shown")
+	end, { AnalyticsService })
+	ReactModule.useEffect(function() --[[ Line: 541 ]]
+		-- upvalues: UseResult4 (copy), FeatureName (copy), NameSpace (copy)
+		UseResult4(FeatureName, NameSpace)
+	end, { UseStateResult, FeatureName, UseResult4, NameSpace })
+	ReactModule.useEffect(function() --[[ Line: 548 ]]
+		-- upvalues: GetFFlagEnableAmpWizardInlineVPCForFAEModule (upval), UseStateResult4 (copy), VPCRequestTypeEnum (upval), UseResult1 (copy), CryoModule (upval), RecourseData (copy), VPCApiProviderModule (upval), UseRoactServiceResult (copy), ActionTypeEnum (upval), UseResult2 (copy), UseStateResult2_1 (copy), UseStateResult2_3 (copy), GetFFlagEnableAmpVPCPrologueModule (upval), VpcV2Launcher (copy), VpcExcludedRequestTypes (copy), UseStateResult2_2 (copy)
+		if GetFFlagEnableAmpWizardInlineVPCForFAEModule() and UseStateResult4 ~= nil then
+			local function _(Action) --[[ Line: 555 | Named "faeRecourse" ]]
+				-- upvalues: VPCRequestTypeEnum (upval)
 				return {
-					action = p3,
+					action = Action,
 					parentConsentTypes = { VPCRequestTypeEnum.UpdateUserSetting }
 				}
 			end
 			
-			local function buildFAEProps(p3)
-				-- upvalues: var19 (copy), cryoModule (copy), recourseData (copy)
-				return cryoModule.Dictionary.join(var19(p3.action, p3), {
-					recourseData = cryoModule.Dictionary.join(recourseData or {}, { allowFacialAgeEstimation = "Enabled" })
+			local function buildFAEProps(p2) --[[ Line: 564 ]]
+				-- upvalues: UseResult1 (upval), CryoModule (upval), RecourseData (upval)
+				return CryoModule.Dictionary.join(UseResult1(p2.action, p2), {
+					recourseData = CryoModule.Dictionary.join(RecourseData or {}, { allowFacialAgeEstimation = "Enabled" })
 				})
 			end
 			
-			VPCApiProviderModule.getLinkedParentEmails(var7):andThen(function(p3)
-				-- upvalues: actionTypeEnum (copy), VPCRequestTypeEnum (copy), buildFAEProps (ref), var20 (copy), var11 (copy), var15 (copy), getFFlagEnableAmpVPCPrologueModule (copy), vpcV2Launcher (copy), vpcExcludedRequestTypes (copy), var13 (copy)
-				local var23 = if (if p3.parentEmails then #p3.parentEmails else 0) > 0 then actionTypeEnum.ParentConsent else actionTypeEnum.ParentLink
-				local t = {
-					action = var23,
+			VPCApiProviderModule.getLinkedParentEmails(UseRoactServiceResult):andThen(function(Result) --[[ Line: 572 ]]
+				-- upvalues: ActionTypeEnum (upval), VPCRequestTypeEnum (upval), buildFAEProps (copy), UseResult2 (upval), UseStateResult2_1 (upval), UseStateResult2_3 (upval), GetFFlagEnableAmpVPCPrologueModule (upval), VpcV2Launcher (upval), VpcExcludedRequestTypes (upval), UseStateResult2_2 (upval)
+				local CountParentEmails: number = Result.parentEmails and #Result.parentEmails or 0
+				local ParentConsent = if CountParentEmails > 0 then ActionTypeEnum.ParentConsent else ActionTypeEnum.ParentLink
+				local config = {
+					action = ParentConsent,
 					parentConsentTypes = { VPCRequestTypeEnum.UpdateUserSetting }
 				}
-				local var24 = buildFAEProps(t)
-				local var25 = var20(t)
+				local FAEProps = buildFAEProps(config)
+				local UseResultResult: (any) -> () = UseResult2(config)
 				
-				if var25 == nil then
-					var11(true)
-					var15(nil)
+				if UseResultResult == nil then
+					UseStateResult2_1(true)
+					UseStateResult2_3(nil)
 					
 					return
-				elseif getFFlagEnableAmpVPCPrologueModule() then
-					local var26
-					local var27 = vpcV2Launcher
-					local var28 = vpcExcludedRequestTypes
-					local action = t.action
-					
-					if var27 == nil or action ~= actionTypeEnum.ParentConsent and action ~= actionTypeEnum.ParentLink then
-						var26 = false
-					else
-						local parentConsentTypes = t.parentConsentTypes
-						local var29 = if parentConsentTypes then parentConsentTypes[1] else nil
-						var26 = var29 == nil or (if var28 ~= nil then table.find(var28, var29) == nil else true)
-					end
-					if var26 then
-						var25(var24)
-					else
-						var13({
-							action = var23,
-							actionProps = var24,
-							openUpsellFn = var25
-						})
-					end
-					var15(nil)
 				end
-			end):catch(function(_)
-				-- upvalues: actionTypeEnum (copy), VPCRequestTypeEnum (copy), buildFAEProps (ref), var20 (copy), var11 (copy), getFFlagEnableAmpVPCPrologueModule (copy), vpcV2Launcher (copy), vpcExcludedRequestTypes (copy), var13 (copy), var15 (copy)
-				local t = {
-					action = actionTypeEnum.ParentLink,
+				repeat
+					if GetFFlagEnableAmpVPCPrologueModule() then
+						local Action = config.action
+						local v1 = nil
+						
+						if VpcV2Launcher == nil or Action ~= ActionTypeEnum.ParentConsent and Action ~= ActionTypeEnum.ParentLink then
+							v1 = false
+						else
+							local ParentConsentTypes = config.parentConsentTypes
+							local Value = if ParentConsentTypes then ParentConsentTypes[1] else nil
+							v1 = Value == nil or (VpcExcludedRequestTypes == nil or table.find(VpcExcludedRequestTypes, Value) == nil)
+						end
+						if not v1 then
+							UseStateResult2_2({
+								action = ParentConsent,
+								actionProps = FAEProps,
+								openUpsellFn = UseResultResult
+							})
+							break
+						end
+					end
+					UseResultResult(FAEProps)
+				until true
+				UseStateResult2_3(nil)
+			end):catch(function(_) --[[ Line: 603 ]]
+				-- upvalues: ActionTypeEnum (upval), VPCRequestTypeEnum (upval), buildFAEProps (copy), UseResult2 (upval), UseStateResult2_1 (upval), GetFFlagEnableAmpVPCPrologueModule (upval), VpcV2Launcher (upval), VpcExcludedRequestTypes (upval), UseStateResult2_2 (upval), UseStateResult2_3 (upval)
+				local config = {
+					action = ActionTypeEnum.ParentLink,
 					parentConsentTypes = { VPCRequestTypeEnum.UpdateUserSetting }
 				}
-				local var23 = buildFAEProps(t)
-				local var24 = var20(t)
-				
-				if var24 == nil then
-					var11(true)
-				elseif getFFlagEnableAmpVPCPrologueModule() then
-					local var25
-					local var26 = vpcV2Launcher
-					local var27 = vpcExcludedRequestTypes
-					local action = t.action
-					
-					if var26 == nil or action ~= actionTypeEnum.ParentConsent and action ~= actionTypeEnum.ParentLink then
-						var25 = false
-					else
-						local parentConsentTypes = t.parentConsentTypes
-						local var28 = if parentConsentTypes then parentConsentTypes[1] else nil
-						var25 = var28 == nil or (if var27 ~= nil then table.find(var27, var28) == nil else true)
+				local FAEProps = buildFAEProps(config)
+				local UseResultResult: (any) -> () = UseResult2(config)
+				repeat
+					if UseResultResult == nil then
+						UseStateResult2_1(true)
+						break
 					end
-					if var25 then
-						var24(var23)
-					else
-						var13({
-							action = actionTypeEnum.ParentLink,
-							actionProps = var23,
-							openUpsellFn = var24
-						})
+					if GetFFlagEnableAmpVPCPrologueModule() then
+						local Action = config.action
+						local v1 = nil
+						
+						if VpcV2Launcher == nil or Action ~= ActionTypeEnum.ParentConsent and Action ~= ActionTypeEnum.ParentLink then
+							v1 = false
+						else
+							local ParentConsentTypes = config.parentConsentTypes
+							local Value = if ParentConsentTypes then ParentConsentTypes[1] else nil
+							v1 = Value == nil or (VpcExcludedRequestTypes == nil or table.find(VpcExcludedRequestTypes, Value) == nil)
+						end
+						if not v1 then
+							UseStateResult2_2({
+								action = ActionTypeEnum.ParentLink,
+								actionProps = FAEProps,
+								openUpsellFn = UseResultResult
+							})
+							break
+						end
 					end
-				end
-				var15(nil)
+					UseResultResult(FAEProps)
+				until true
+				UseStateResult2_3(nil)
 			end)
 			
 			return
 		end
 	end, {
-		var14, var7, var19, openUpsells, recourseData, var20, vpcV2Launcher,
-		vpcExcludedRequestTypes
+		UseStateResult4, UseRoactServiceResult, UseResult1, OpenUpsells, RecourseData,
+		UseResult2, VpcV2Launcher, VpcExcludedRequestTypes
 	})
 	
-	return if getFFlagEnableAmpVPCPrologueModule() and var12 then reactModule.createElement(VPCPrologueController, {
-		request = var12,
-		recourseData = recourseData,
-		handleCompletion = var17,
-		actionsTaken = var8,
-		options = p2.prologueOptions,
-		onDone = function()
-			-- upvalues: var13 (ref)
-			var13(nil)
+	return if GetFFlagEnableAmpVPCPrologueModule() and UseStateResult3 then ReactModule.createElement(VPCPrologueController, {
+		request = UseStateResult3,
+		recourseData = RecourseData,
+		handleCompletion = Callback,
+		actionsTaken = UseStateResult,
+		options = p1.prologueOptions,
+		onDone = function() --[[ Line: 644 ]]
+			-- upvalues: UseStateResult2_2 (copy)
+			UseStateResult2_2(nil)
 		end
-	}) elseif var10 then reactModule.createElement(errorScreenModule, {
-		featureName = featureName,
-		onRetry = function()
-			-- upvalues: var11 (ref), var22 (ref), featureName (ref)
-			var11(false)
-			var22(featureName)
+	}) elseif UseStateResult1 then ReactModule.createElement(ErrorScreenModule, {
+		featureName = FeatureName,
+		onRetry = function() --[[ Line: 653 ]]
+			-- upvalues: UseStateResult2_1 (copy), UseResult4 (copy), FeatureName (copy)
+			UseStateResult2_1(false)
+			UseResult4(FeatureName)
 		end,
-		onCancel = function()
-			-- upvalues: var17 (ref), accessResponseEnum (copy), var8 (ref)
-			var17(accessResponseEnum.Denied, var8)
+		onCancel = function() --[[ Line: 657 ]]
+			-- upvalues: Callback (copy), AccessResponseEnum (upval), UseStateResult (copy)
+			Callback(AccessResponseEnum.Denied, UseStateResult)
 		end
-	}) else reactModule.createElement(loading, {
-		size = iconSize.Medium,
+	}) else ReactModule.createElement(Loading, {
+		size = IconSize.Medium,
 		Position = UDim2.fromScale(0.5, 0.5),
 		AnchorPoint = Vector2.new(0.5, 0.5)
 	})

@@ -1,6 +1,6 @@
-﻿local llamaModule = require(script:FindFirstAncestor("RoduxFriends").Parent.llama)
+﻿local LlamaModule = require(script:FindFirstAncestor("RoduxFriends").Parent.llama)
 
-return function(p1, p2)
-	-- upvalues: llamaModule (ref)
-	return if p1 then if llamaModule.List.find(p1, p2) then p1 else llamaModule.List.join(p1, { p2 }) else { p2 }
+return function(p1, p2) --[[ Line: 5 ]]
+	-- upvalues: LlamaModule (copy)
+	return if p1 then if LlamaModule.List.find(p1, p2) then p1 else LlamaModule.List.join(p1, { p2 }) else { p2 }
 end

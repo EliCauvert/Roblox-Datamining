@@ -1,30 +1,30 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local foundationModule = require(parent.Foundation)
-local foundationCloudAssetsModule = require(parent.FoundationCloudAssets)
-local reactModule = require(parent.React)
-local image = foundationModule.Image
-local view = foundationModule.View
-local useTokens = foundationModule.Hooks.useTokens
-local assets = foundationCloudAssetsModule.Assets
-foundationCloudAssetsModule.preloadAsset("pictograms/find_people")
-local findPeople = assets["pictograms/find_people"] or {}
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local FoundationModule = require(Parent.Foundation)
+local FoundationCloudAssetsModule = require(Parent.FoundationCloudAssets)
+local ReactModule = require(Parent.React)
+local Image = FoundationModule.Image
+local View = FoundationModule.View
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local Assets = FoundationCloudAssetsModule.Assets
+FoundationCloudAssetsModule.preloadAsset("pictograms/find_people")
+local PictogramsFindPeople = Assets["pictograms/find_people"] or {}
 
-return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), view (ref), image (ref), findPeople (ref)
-	local var1 = useTokens()
-	local testId = p1.testId or "SearchEmptyState"
+return function(Frame) --[[ Line: 27 | Named "SearchEmptyState" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Image (copy), PictogramsFindPeople (copy)
+	local UseTokensResult = UseTokensFunction()
+	local TestId = Frame.testId or "SearchEmptyState"
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col align-x-center align-y-center size-full",
-		LayoutOrder = p1.LayoutOrder,
-		testId = testId
+		LayoutOrder = Frame.LayoutOrder,
+		testId = TestId
 	}, {
-		Image = reactModule.createElement(image, {
-			Image = findPeople.assetId,
-			imageStyle = var1.Color.Content.Emphasis,
+		Image = ReactModule.createElement(Image, {
+			Image = PictogramsFindPeople.assetId,
+			imageStyle = UseTokensResult.Color.Content.Emphasis,
 			ScaleType = Enum.ScaleType.Fit,
-			Size = UDim2.fromOffset(320 * var1.Config.UI.Scale, 180 * var1.Config.UI.Scale),
-			testId = `{testId}.Image`
+			Size = UDim2.fromOffset(320 * UseTokensResult.Config.UI.Scale, 180 * UseTokensResult.Config.UI.Scale),
+			testId = `{TestId}.Image`
 		})
 	})
 end

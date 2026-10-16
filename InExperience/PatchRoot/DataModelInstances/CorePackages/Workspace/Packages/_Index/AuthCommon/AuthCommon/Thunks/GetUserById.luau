@@ -1,16 +1,17 @@
-﻿local authCommon = script:FindFirstAncestor("AuthCommon")
-local promiseModule = require(authCommon.Parent.Promise)
-local getUserByIdRequestModule = require(authCommon.Http.Requests.GetUserByIdRequest)
+﻿local AuthCommon = script:FindFirstAncestor("AuthCommon")
+local PromiseModule = require(AuthCommon.Parent.Promise)
+local GetUserByIdRequestModule = require(AuthCommon.Http.Requests.GetUserByIdRequest)
 
-return function(p1, p2)
-	-- upvalues: getUserByIdRequestModule (ref), promiseModule (ref)
-	return getUserByIdRequestModule(p1, p2):andThen(function(p3)
-		-- upvalues: promiseModule (copy)
-		if not p3 or not p3.responseBody then
-			return promiseModule.reject()
+return function(p1, p2) --[[ Line: 7 ]]
+	-- upvalues: GetUserByIdRequestModule (copy), PromiseModule (copy)
+	return GetUserByIdRequestModule(p1, p2):andThen(function(Result) --[[ Line: 8 ]]
+		-- upvalues: PromiseModule (upval)
+		if Result and Result.responseBody then
+			local ResponseBody = Result.responseBody
+			
+			return if ResponseBody == nil then PromiseModule.reject() else PromiseModule.resolve(ResponseBody)
+		else
+			return PromiseModule.reject()
 		end
-		local responseBody = p3.responseBody
-		
-		return if responseBody == nil then promiseModule.reject() else promiseModule.resolve(responseBody)
 	end)
 end

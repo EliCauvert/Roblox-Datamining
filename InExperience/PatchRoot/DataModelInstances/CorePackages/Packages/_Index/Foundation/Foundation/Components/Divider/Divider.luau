@@ -1,33 +1,37 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local dividerVariantModule = require(foundation.Enums.DividerVariant)
-local orientationModule = require(foundation.Enums.Orientation)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local useDividerVariantsModule = require(script.Parent.useDividerVariants)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local t = {
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local DividerVariantModule = require(Foundation.Enums.DividerVariant)
+local OrientationModule = require(Foundation.Enums.Orientation)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local UseDividerVariantsModule = require(script.Parent.useDividerVariants)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local config = {
 	testId = "--foundation-divider",
-	variant = dividerVariantModule.Default,
-	orientation = orientationModule.Horizontal
+	variant = DividerVariantModule.Default,
+	orientation = OrientationModule.Horizontal
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useDividerVariantsModule (ref), dividerVariantModule (ref), orientationModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref)
-	local var1 = withDefaultsModule(p1, t)
-	local var2 = useDividerVariantsModule(useTokensModule(), var1.variant, var1.orientation)
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 29 | Named "Divider" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UseDividerVariantsModule (copy), DividerVariantModule (copy), OrientationModule (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	local UseDividerVariantsModuleResult = UseDividerVariantsModule(UseTokensModule(), WithDefaultsModuleResult.variant, WithDefaultsModuleResult.orientation)
+	local IsNotOrientationMatch: boolean = WithDefaultsModuleResult.variant == DividerVariantModule.Heavy and WithDefaultsModuleResult.orientation ~= OrientationModule.Vertical
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var1, { tag = var2.container.tag, ref = p2 }), {
-		DividerStroke = reactModule.createElement(viewModule, {
-			Size = var2.stroke.Size,
-			backgroundStyle = var2.stroke.backgroundStyle
+	return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, {
+		tag = UseDividerVariantsModuleResult.container.tag,
+		ref = Ref
+	}), {
+		DividerStroke = ReactModule.createElement(ViewModule, {
+			Size = UseDividerVariantsModuleResult.stroke.Size,
+			backgroundStyle = UseDividerVariantsModuleResult.stroke.backgroundStyle
 		}),
-		DividerLine = if var1.variant == dividerVariantModule.Heavy and var1.orientation ~= orientationModule.Vertical then reactModule.createElement(viewModule, {
-			tag = var2.line.tag,
-			Position = var2.line.position,
-			backgroundStyle = var2.line.backgroundStyle
+		DividerLine = if IsNotOrientationMatch then ReactModule.createElement(ViewModule, {
+			tag = UseDividerVariantsModuleResult.line.tag,
+			Position = UseDividerVariantsModuleResult.line.position,
+			backgroundStyle = UseDividerVariantsModuleResult.line.backgroundStyle
 		}) else nil
 	})
 end))

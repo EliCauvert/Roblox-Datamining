@@ -1,52 +1,46 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local inputSizeModule = require(foundation.Enums.InputSize)
-local sliderVariantModule = require(foundation.Enums.SliderVariant)
-local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant)
-local _ = require(foundation.Providers.Style.Tokens)
-local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
-local _ = require(foundation.Components.Types)
-local flagsModule = require(foundation.Utility.Flags)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local InputSizeModule = require(Foundation.Enums.InputSize)
+local SliderVariantModule = require(Foundation.Enums.SliderVariant)
+local ComposeStyleVariantModule = require(Foundation.Utility.composeStyleVariant)
+local _ = require(Foundation.Providers.Style.Tokens)
+local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
+local _ = require(Foundation.Components.Types)
+local FlagsModule = require(Foundation.Utility.Flags)
 
-local function variantsFactory(p1)
-	-- upvalues: flagsModule (ref), sliderVariantModule (ref), inputSizeModule (ref)
+local function variantsFactory(p1) --[[ Line: 38 ]]
+	-- upvalues: SliderVariantModule (copy), FlagsModule (copy), InputSizeModule (copy)
 	return {
 		common = {
 			bar = {
-				tag = if flagsModule.FoundationSliderBeta then "position-center-center anchor-center-center radius-circle" else "position-center-center anchor-center-center size-full-100 radius-small"
+				tag = "position-center-center anchor-center-center radius-circle"
 			},
-			fill = {
-				tag = if flagsModule.FoundationSliderBeta then "radius-circle" else "radius-small"
-			}
+			fill = { tag = "radius-circle" }
 		},
 		variants = {
-			[sliderVariantModule.Emphasis] = {
-				bar = {
-					tag = if flagsModule.FoundationSliderBeta then "bg-shift-200" else "bg-shift-400"
-				},
+			[SliderVariantModule.Emphasis] = {
+				bar = { tag = "bg-shift-200" },
 				fill = { tag = "bg-emphasis" },
 				knob = {
 					hasShadow = true,
 					style = p1.Color.Extended.White.White_100,
-					dragStyle = if flagsModule.FoundationSystemEmphasisNonActions then p1.Color.System.Emphasis else p1.Color.ActionEmphasis.Background
+					dragStyle = if FlagsModule.FoundationSystemEmphasisNonActions then p1.Color.System.Emphasis else p1.Color.ActionEmphasis.Background
 				}
 			},
-			[sliderVariantModule.Standard] = {
-				bar = {
-					tag = if flagsModule.FoundationSliderBeta then "bg-shift-200" else "bg-shift-400"
-				},
+			[SliderVariantModule.Standard] = {
+				bar = { tag = "bg-shift-200" },
 				fill = { tag = "bg-system-contrast" },
 				knob = {
+					hasShadow = true,
 					style = p1.Color.System.Contrast,
 					dragStyle = p1.Color.System.Contrast,
-					stroke = if flagsModule.FoundationSliderBeta then {
+					stroke = {
 						Color = p1.Color.Stroke.Default.Color3,
 						Transparency = p1.Color.Stroke.Default.Transparency,
 						Thickness = p1.Stroke.Standard
-					} else nil,
-					hasShadow = if flagsModule.FoundationSliderBeta then true else false
+					}
 				}
 			},
-			[sliderVariantModule.Utility] = {
+			[SliderVariantModule.Utility] = {
 				knob = {
 					hasShadow = true,
 					style = p1.Color.None,
@@ -60,22 +54,10 @@ local function variantsFactory(p1)
 			}
 		},
 		sizes = {
-			[inputSizeModule.XSmall] = {
-				bar = if flagsModule.FoundationSliderBeta then { height = p1.Size.Size_100 } else nil,
-				hitbox = if flagsModule.FoundationSliderBeta then nil else { height = p1.Size.Size_300 }
-			},
-			[inputSizeModule.Small] = {
-				bar = if flagsModule.FoundationSliderBeta then { height = p1.Size.Size_150 } else nil,
-				hitbox = if flagsModule.FoundationSliderBeta then nil else { height = p1.Size.Size_400 }
-			},
-			[inputSizeModule.Medium] = {
-				bar = if flagsModule.FoundationSliderBeta then { height = p1.Size.Size_200 } else nil,
-				hitbox = if flagsModule.FoundationSliderBeta then nil else { height = p1.Size.Size_500 }
-			},
-			[inputSizeModule.Large] = {
-				bar = if flagsModule.FoundationSliderBeta then { height = p1.Size.Size_250 } else nil,
-				hitbox = if flagsModule.FoundationSliderBeta then nil else { height = p1.Size.Size_700 }
-			}
+			[InputSizeModule.XSmall] = { bar = { height = p1.Size.Size_100 } },
+			[InputSizeModule.Small] = { bar = { height = p1.Size.Size_150 } },
+			[InputSizeModule.Medium] = { bar = { height = p1.Size.Size_200 } },
+			[InputSizeModule.Large] = { bar = { height = p1.Size.Size_250 } }
 		},
 		orientation = {
 			[true] = {
@@ -98,9 +80,9 @@ local function variantsFactory(p1)
 	}
 end
 
-return function(p1, p2, p3, p4)
-	-- upvalues: variantsContextModule (ref), variantsFactory (ref), flagsModule (ref), composeStyleVariantModule (ref)
-	local slider = variantsContextModule.useVariants("Slider", variantsFactory, p1)
+return function(p1, p2, p3, p4) --[[ Line: 134 ]]
+	-- upvalues: VariantsContextModule (copy), variantsFactory (copy), FlagsModule (copy), ComposeStyleVariantModule (copy)
+	local Slider = VariantsContextModule.useVariants("Slider", variantsFactory, p1)
 	
-	return if flagsModule.FoundationSliderCapture then composeStyleVariantModule(slider.common, slider.variants[p3], slider.sizes[p2]) else composeStyleVariantModule(slider.common, slider.variants[p3], slider.sizes[p2], slider.orientation[p4])
+	return if FlagsModule.FoundationSliderCapture then ComposeStyleVariantModule(Slider.common, Slider.variants[p3], Slider.sizes[p2]) else ComposeStyleVariantModule(Slider.common, Slider.variants[p3], Slider.sizes[p2], Slider.orientation[p4])
 end

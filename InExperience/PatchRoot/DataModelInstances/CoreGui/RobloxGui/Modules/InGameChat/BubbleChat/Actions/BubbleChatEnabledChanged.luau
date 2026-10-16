@@ -1,11 +1,10 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local makeActionCreator = require(corePackagesService.Packages.Rodux).makeActionCreator
-local tModule = require(corePackagesService.Packages.t)
-local maybeAssertModule = require(script.Parent.Parent.Helpers.maybeAssert)
+﻿local CorePackages = game:GetService("CorePackages")
+local TModule = require(CorePackages.Packages.t)
+local MaybeAssertModule = require(script.Parent.Parent.Helpers.maybeAssert)
 
-return makeActionCreator(script.Name, function(p1)
-	-- upvalues: maybeAssertModule (ref), tModule (ref)
-	maybeAssertModule(tModule.boolean(p1))
+return require(CorePackages.Packages.Rodux).makeActionCreator(script.Name, function(Enabled) --[[ Line: 7 ]]
+	-- upvalues: MaybeAssertModule (copy), TModule (copy)
+	MaybeAssertModule(TModule.boolean(Enabled))
 	
-	return { enabled = p1 }
+	return { enabled = Enabled }
 end)

@@ -1,9 +1,9 @@
-﻿local parent = script.Parent
+﻿local Parent = script.Parent
 
 return {
 	Events = require(script.Events),
 	mountClientApp = require(script.mountClientApp),
-	listenToDispatch = require(script.listenToDispatch)(require(parent.ExpChatShared).ActionBindableEvent),
+	listenToDispatch = require(script.listenToDispatch)(require(Parent.ExpChatShared).ActionBindableEvent),
 	GlobalFlags = require(script.GlobalFlags),
 	getExperienceChatVisualConfig = require(script.getExperienceChatVisualConfig),
 	Stores = require(script.Stores),
@@ -13,9 +13,10 @@ return {
 	isUserChatEnabled = require(script.isUserChatEnabled),
 	requestSelectTab = require(script.ExternalNavigation.requestSelectTab),
 	requestSelectFriendsTab = require(script.ExternalNavigation.requestSelectFriendsTab),
+	isHistoricalMessage = require(script.isHistoricalMessage),
 	shouldSkipHistoricalMessage = require(script.shouldSkipHistoricalMessage),
 	shouldSuppressUnreadForTabMetadata = require(script.shouldSuppressUnreadForTabMetadata),
-	ExpChatPerfTracker = require(parent.ChatUIPrimitives).Telemetry.ExpChatPerfTracker,
+	ExpChatPerfTracker = require(Parent.ChatUIPrimitives).Telemetry.ExpChatPerfTracker,
 	["jest.config"] = script["jest.config"],
 	["jest.bench.config"] = script["jest.bench.config"],
 	["mockDataModel-jest.config"] = script["mockDataModel-jest.config"]

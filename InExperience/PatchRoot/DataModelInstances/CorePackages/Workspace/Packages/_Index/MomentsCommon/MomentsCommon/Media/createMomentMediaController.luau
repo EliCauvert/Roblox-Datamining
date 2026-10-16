@@ -1,539 +1,571 @@
-﻿local momentsCommon = script:FindFirstAncestor("MomentsCommon")
-local parent = momentsCommon.Parent
-local cryoModule = require(parent.Cryo)
-local signalsModule = require(parent.Signals)
-local _ = require(parent.MomentsTypes)
-local _ = require(momentsCommon.Media.MediaTypes)
-local createAudioGraphModule = require(momentsCommon.Media.createAudioGraph)
-local mediaRootModule = require(momentsCommon.Media.mediaRoot)
-local _ = require(momentsCommon.Media.mediaNodeRegistry)
-local defaultMediaNodeRegistryModule = require(momentsCommon.Media.defaultMediaNodeRegistry)
-local preloadConstantsModule = require(momentsCommon.Media.Preload.preloadConstants)
-local fFlagMomentsVideoPermissionContextFixModule = require(momentsCommon.Flags.FFlagMomentsVideoPermissionContextFix)
-local fFlagMomentsOptimisticProfilePending = require(parent.SharedFlags).FFlagMomentsOptimisticProfilePending
-local _ = require(momentsCommon.Media.Nodes.createVideoNode)
-local _ = require(momentsCommon.Media.Nodes.createScreenshotNode)
-local _ = require(momentsCommon.Media.Nodes.createMusicNode)
-local _ = require(momentsCommon.Media.Nodes.createTtsNode)
-local createSignal = signalsModule.createSignal
-local createComputed = signalsModule.createComputed
-local getFFlagMomentsStickerButtonModule = require(momentsCommon.Flags.GetFFlagMomentsStickerButton)
-local loopEpsilonSeconds = preloadConstantsModule.loopEpsilonSeconds
+﻿local MomentsCommon = script:FindFirstAncestor("MomentsCommon")
+local Parent = MomentsCommon.Parent
+local CryoModule = require(Parent.Cryo)
+local SignalsModule = require(Parent.Signals)
+local _ = require(Parent.MomentsTypes)
+local _ = require(MomentsCommon.Media.MediaTypes)
+local CreateAudioGraphModule = require(MomentsCommon.Media.createAudioGraph)
+local MediaRootModule = require(MomentsCommon.Media.mediaRoot)
+local _ = require(MomentsCommon.Media.mediaNodeRegistry)
+local DefaultMediaNodeRegistryModule = require(MomentsCommon.Media.defaultMediaNodeRegistry)
+local FFlagMomentsVideoPermissionContextFixModule = require(MomentsCommon.Flags.FFlagMomentsVideoPermissionContextFix)
+local FFlagMomentsOptimisticProfilePending = require(Parent.SharedFlags).FFlagMomentsOptimisticProfilePending
+local _ = require(MomentsCommon.Media.Nodes.createVideoNode)
+local _ = require(MomentsCommon.Media.Nodes.createScreenshotNode)
+local _ = require(MomentsCommon.Media.Nodes.createMusicNode)
+local _ = require(MomentsCommon.Media.Nodes.createTtsNode)
+local CreateSignalFunction = SignalsModule.createSignal
+local CreateComputedFunction = SignalsModule.createComputed
+local GetFFlagMomentsStickerButtonModule = require(MomentsCommon.Flags.GetFFlagMomentsStickerButton)
+local LoopEpsilonSeconds = require(MomentsCommon.Media.Preload.preloadConstants).loopEpsilonSeconds
 
-return function(p1, p2)
-	-- upvalues: defaultMediaNodeRegistryModule (ref), mediaRootModule (ref), createAudioGraphModule (ref), fFlagMomentsVideoPermissionContextFixModule (ref), fFlagMomentsOptimisticProfilePending (ref), getFFlagMomentsStickerButtonModule (ref), createSignal (ref), createComputed (ref), cryoModule (ref), loopEpsilonSeconds (ref)
-	local services = p2.services
-	local registry = p2.registry or defaultMediaNodeRegistryModule()
-	local var1 = p1.captureType == Enum.CaptureType.Video
-	local edits = p1.edits
-	local var2 = if edits ~= nil then nil else edits.ttsAudios
-	local var3 = false
+return function(p1, p2) --[[ Line: 107 | Named "createMomentMediaController" ]]
+	-- upvalues: DefaultMediaNodeRegistryModule (copy), MediaRootModule (copy), CreateAudioGraphModule (copy), FFlagMomentsVideoPermissionContextFixModule (copy), FFlagMomentsOptimisticProfilePending (copy), GetFFlagMomentsStickerButtonModule (copy), CreateSignalFunction (copy), CreateComputedFunction (copy), CryoModule (copy), LoopEpsilonSeconds (copy)
+	local Services = p2.services
+	local Registry = p2.registry or DefaultMediaNodeRegistryModule()
+	local IsCaptureTypeMatch = p1.captureType == Enum.CaptureType.Video
+	local Edits = p1.edits
+	local TtsAudios = if Edits == nil then nil else Edits.ttsAudios
+	local EnableDucking = false
 	
-	if var2 ~= nil then
-		for i, v in var2 do
-			if v.assetId ~= nil then
-				var3 = true
+	if TtsAudios ~= nil then
+		for _, ttsAudio in TtsAudios do
+			if ttsAudio.assetId ~= nil then
+				EnableDucking = true
 				break
 			end
 		end
 	end
-	local var4 = mediaRootModule(p1.momentId, p2.parent)
-	local folder = var4.folder
-	local var5 = createAudioGraphModule(folder, p2.audioDeviceOutput, { masterVolume = p2.masterVolume, enableDucking = var3 })
-	local t = {}
-	local t_1 = {}
+	local LocalTts = p1.localTts
 	
-	local function _(p3)
-		-- upvalues: t (ref), t_1 (ref)
-		table.insert(t, p3)
-		t_1[p3.id] = p3
+	if LocalTts ~= nil then
+		EnableDucking = true
+	end
+	local MediaRootModuleResult = MediaRootModule(p1.momentId, p2.parent)
+	local Folder = MediaRootModuleResult.folder
+	local AudioGraphModule = CreateAudioGraphModule(Folder, p2.audioDeviceOutput, {
+		masterVolume = p2.masterVolume,
+		enableDucking = EnableDucking
+	})
+	local List = {}
+	local Musics = {}
+	
+	local function _(p3) --[[ Line: 146 | Named "addNode" ]]
+		-- upvalues: List (copy), Musics (copy)
+		table.insert(List, p3)
+		Musics[p3.id] = p3
 	end
 	
-	local var6 = nil
-	local var7 = nil
+	local v1 = nil
+	local v2 = nil
 	
-	if var1 then
-		local video = registry.create("video", {
+	if IsCaptureTypeMatch then
+		local Video = Registry.create("video", {
 			id = "video",
 			kind = "video",
 			zIndex = 0,
 			content = p1.content,
-			preloadContent = if fFlagMomentsVideoPermissionContextFixModule then p1.preloadContent else nil,
-			region = if edits ~= nil then nil else edits.trim,
-			parent = folder,
+			preloadContent = if FFlagMomentsVideoPermissionContextFixModule then p1.preloadContent else nil,
+			region = if Edits == nil then nil else Edits.trim,
+			parent = Folder,
 			cornerRadius = p1.cornerRadius
-		}, services)
-		var6 = video
-		table.insert(t, video)
-		t_1[video.id] = video
+		}, Services)
+		v1 = Video
+		table.insert(List, Video)
+		Musics[Video.id] = Video
 	else
-		local screenshot = registry.create("screenshot", {
+		local Screenshot = Registry.create("screenshot", {
 			id = "screenshot",
 			kind = "screenshot",
 			image = p1.content.Uri,
-			imageContent = if fFlagMomentsOptimisticProfilePending then p1.content else nil,
-			poster = if p1.posterContent ~= nil then nil else p1.posterContent.Uri,
-			posterContent = if fFlagMomentsOptimisticProfilePending then p1.posterContent else nil,
-			parent = folder
-		}, services)
-		var7 = screenshot
-		table.insert(t, screenshot)
-		t_1[screenshot.id] = screenshot
+			imageContent = if FFlagMomentsOptimisticProfilePending then p1.content else nil,
+			poster = if p1.posterContent == nil then nil else p1.posterContent.Uri,
+			posterContent = if FFlagMomentsOptimisticProfilePending then p1.posterContent else nil,
+			parent = Folder
+		}, Services)
+		v2 = Screenshot
+		table.insert(List, Screenshot)
+		Musics[Screenshot.id] = Screenshot
 	end
-	local var8 = nil
+	local v3 = nil
 	
-	if edits ~= nil and edits.music ~= nil then
-		local music = registry.create("music", {
+	if Edits ~= nil and Edits.music ~= nil then
+		local Music = Registry.create("music", {
 			id = "music",
 			kind = "music",
-			assetId = edits.music.assetId,
-			startTime = edits.music.startTime,
-			parent = folder
-		}, services)
-		var8 = music
-		table.insert(t, music)
-		t_1[music.id] = music
+			assetId = Edits.music.assetId,
+			startTime = Edits.music.startTime,
+			parent = Folder
+		}, Services)
+		v3 = Music
+		table.insert(List, Music)
+		Musics[Music.id] = Music
 	end
-	local var9 = var8 ~= nil
-	local t_2 = {}
+	local v4 = v3 ~= nil
+	local List1 = {}
 	
-	if var2 ~= nil then
-		for i, v in var2 do
-			if v.assetId ~= nil then
-				local tts = registry.create("tts", {
+	if TtsAudios ~= nil then
+		for i, ttsAudio1 in TtsAudios do
+			if ttsAudio1.assetId ~= nil then
+				local Tts = Registry.create("tts", {
 					kind = "tts",
 					id = `tts:{i - 1}`,
-					assetId = v.assetId,
-					assetAccessContext = v.assetAccessContext,
-					startTime = v.startTime,
-					parent = folder
-				}, services)
-				table.insert(t_2, tts)
-				table.insert(t, tts)
-				t_1[tts.id] = tts
+					assetId = ttsAudio1.assetId,
+					assetAccessContext = ttsAudio1.assetAccessContext,
+					startTime = ttsAudio1.startTime,
+					parent = Folder
+				}, Services)
+				table.insert(List1, Tts)
+				table.insert(List, Tts)
+				Musics[Tts.id] = Tts
 			end
 		end
 	end
-	if edits ~= nil and edits.textOverlays ~= nil then
-		for i, v in edits.textOverlays do
-			local text = registry.create("text", { kind = "text", id = `text:{i - 1}`, overlay = v }, services)
-			table.insert(t, text)
-			t_1[text.id] = text
+	if LocalTts ~= nil then
+		local Tts = Registry.create("tts", {
+			kind = "tts",
+			id = `tts:{#List1}`,
+			text = LocalTts.text,
+			voiceId = LocalTts.voiceId,
+			startTime = LocalTts.startTime,
+			parent = Folder
+		}, Services)
+		table.insert(List1, Tts)
+		table.insert(List, Tts)
+		Musics[Tts.id] = Tts
+	end
+	if Edits ~= nil and Edits.textOverlays ~= nil then
+		for i1, textOverlay in Edits.textOverlays do
+			local Text = Registry.create("text", {
+				kind = "text",
+				id = `text:{i1 - 1}`,
+				overlay = textOverlay
+			}, Services)
+			table.insert(List, Text)
+			Musics[Text.id] = Text
 		end
 	end
-	if getFFlagMomentsStickerButtonModule() and edits ~= nil and edits.stickerOverlays ~= nil then
-		for i, v in edits.stickerOverlays do
-			local sticker = registry.create("sticker", { kind = "sticker", id = `sticker:{i - 1}`, overlay = v }, services)
-			table.insert(t, sticker)
-			t_1[sticker.id] = sticker
+	if GetFFlagMomentsStickerButtonModule() and Edits ~= nil and Edits.stickerOverlays ~= nil then
+		for i2, stickerOverlay in Edits.stickerOverlays do
+			local Sticker = Registry.create("sticker", {
+				kind = "sticker",
+				id = `sticker:{i2 - 1}`,
+				overlay = stickerOverlay
+			}, Services)
+			table.insert(List, Sticker)
+			Musics[Sticker.id] = Sticker
 		end
 	end
-	local t_3 = {}
+	local List2 = {}
 	
-	for i, v in t do
-		if v.usesDecoder then
-			table.insert(t_3, v)
+	for _, value in List do
+		if value.usesDecoder then
+			table.insert(List2, value)
 		end
 	end
-	local t_4 = {}
+	local List3 = {}
 	
-	for i_1, v_1 in t do
-		local render = v_1.render
+	for _, value1 in List do
+		local Render = value1.render
 		
-		if render ~= nil then
-			table.insert(t_4, { id = v_1.id, zIndex = v_1.zIndex or 0, render = render })
+		if Render ~= nil then
+			table.insert(List3, {
+				id = value1.id,
+				zIndex = value1.zIndex or 0,
+				render = Render
+			})
 		end
 	end
-	table.sort(t_4, function(p3, p4)
-		return p3.zIndex < p4.zIndex
+	table.sort(List3, function(A, B): boolean --[[ Line: 283 ]]
+		return A.zIndex < B.zIndex
 	end)
-	local var10 = createSignal(t_4)
-	local t_5 = {}
+	local Signal = CreateSignalFunction(List3)
+	local AddStemResults = {}
 	
-	local _ = function(p3)
-		-- upvalues: t_5 (ref), var5 (ref)
-		local audioStem = p3.audioStem
-		local getAudioSource = p3.getAudioSource
+	local _ = function(p3) --[[ Line: 295 | Named "addStem" ]]
+		-- upvalues: AddStemResults (copy), AudioGraphModule (copy)
+		local AudioStem = p3.audioStem
+		local GetAudioSourceFunction = p3.getAudioSource
 		
-		if audioStem == nil or getAudioSource == nil or t_5[audioStem.stemId] ~= nil then
+		if AudioStem ~= nil and GetAudioSourceFunction ~= nil and AddStemResults[AudioStem.stemId] == nil then
+			AddStemResults[AudioStem.stemId] = AudioGraphModule.addStem(AudioStem.stemId, GetAudioSourceFunction(), AudioStem.defaultVolume, AudioStem.role)
+			
 			return
 		end
-		t_5[audioStem.stemId] = var5.addStem(audioStem.stemId, getAudioSource(), audioStem.defaultVolume, audioStem.role)
 	end
 	
-	local _ = function(p3)
-		-- upvalues: t_5 (ref)
-		local audioStem = p3.audioStem
+	local _ = function(p3) --[[ Line: 303 | Named "removeStem" ]]
+		-- upvalues: AddStemResults (copy)
+		local AudioStem = p3.audioStem
 		
-		if audioStem == nil then return end
-		local stemId = t_5[audioStem.stemId]
+		if AudioStem == nil then return end
+		local AddStemResult: () -> () = AddStemResults[AudioStem.stemId]
 		
-		if stemId ~= nil then
-			stemId()
-			t_5[audioStem.stemId] = nil
+		if AddStemResult ~= nil then
+			AddStemResult()
+			AddStemResults[AudioStem.stemId] = nil
 		end
 	end
 	
-	for i_2, v_2 in t do
-		if v_2.getAudioSource ~= nil and not v_2.usesDecoder then
-			local audioStem = v_2.audioStem
-			local getAudioSource = v_2.getAudioSource
-			
-			if audioStem ~= nil and getAudioSource ~= nil and t_5[audioStem.stemId] == nil then
-				t_5[audioStem.stemId] = var5.addStem(audioStem.stemId, getAudioSource(), audioStem.defaultVolume, audioStem.role)
-			end
+	for _, value2 in List do
+		local NoGetAudioSource = value2.getAudioSource == nil or value2.usesDecoder
+		local GetAudioSourceFunction = nil
+		local AudioStem = nil
+		
+		if not NoGetAudioSource then
+			AudioStem = value2.audioStem
+			GetAudioSourceFunction = value2.getAudioSource
+			NoGetAudioSource = AudioStem == nil or GetAudioSourceFunction == nil or AddStemResults[AudioStem.stemId] ~= nil
+		end
+		if not NoGetAudioSource then
+			AddStemResults[AudioStem.stemId] = AudioGraphModule.addStem(AudioStem.stemId, GetAudioSourceFunction(), AudioStem.defaultVolume, AudioStem.role)
 		end
 	end
-	local var11, var12 = createSignal(false)
-	local var13, var14 = createSignal(false)
-	local var15, var16 = createSignal(false)
-	local var17, var18 = createSignal(0)
-	local var19, var20 = createSignal(false)
-	local var21 = false
-	local var22 = nil
-	local var23 = if var6 ~= nil then var7.getPosition else var6.getPosition
-	local var24 = createComputed(function(p3)
-		-- upvalues: var15 (ref), var13 (ref), var11 (ref)
-		return if var15(p3) then "Playing" elseif var13(p3) then "Decoded" elseif var11(p3) then "Downloaded" else "Idle"
+	local Signal1, Signal2 = CreateSignalFunction(false)
+	local Signal3, Signal2_1 = CreateSignalFunction(false)
+	local Signal4, Signal2_2 = CreateSignalFunction(false)
+	local Signal5, Signal2_3 = CreateSignalFunction(0)
+	local Signal6, Signal2_4 = CreateSignalFunction(false)
+	local Flag = false
+	local Largest = nil
+	local GetPosition = if v1 == nil then v2.getPosition else v1.getPosition
+	local Computed = CreateComputedFunction(function(p3): string --[[ Line: 348 ]]
+		-- upvalues: Signal4 (copy), Signal3 (copy), Signal1 (copy)
+		return if Signal4(p3) then "Playing" elseif Signal3(p3) then "Decoded" elseif Signal1(p3) then "Downloaded" else "Idle"
 	end)
-	local var25 = createComputed(function(p3)
-		-- upvalues: var6 (write), var13 (ref), var11 (ref), var7 (write), var15 (ref), var19 (ref)
-		local var26, var27, duration, timeLength
-		local _ = nil
-		local resolution = nil
-		local _ = nil
-		local _ = nil
-		local _ = nil
+	local Computed1 = CreateComputedFunction(function(p3) --[[ Line: 362 ]]
+		-- upvalues: v1 (ref), Signal3 (copy), Signal1 (copy), v2 (ref), Signal4 (copy), Signal6 (copy)
+		local Resolution = nil
+		local FailureReason1 = nil
+		local TimeLength = nil
+		local Ready = nil
+		local Duration = nil
 		
-		if var6 == nil then
-			local var28 = var7
-			local failureReason = var28.getFailureReason(p3)
-			var26 = if failureReason ~= nil then if var28.getIsImageLoaded(p3) then "Ready" else "Loading" else "Failed"
-			var27 = failureReason
-			duration = var28.getDuration()
-			timeLength = var28.getDuration()
+		if v1 == nil then
+			local v5 = v2
+			local FailureReason = v5.getFailureReason(p3)
+			Ready = if FailureReason == nil then if v5.getIsImageLoaded(p3) then "Ready" else "Loading" else "Failed"
+			FailureReason1 = FailureReason
+			Duration = v5.getDuration()
+			TimeLength = v5.getDuration()
 		else
-			local failureReason = var6.getFailureReason(p3)
-			var26 = if failureReason ~= nil then if var6.getIsLoaded(p3) then "Ready" elseif var13(p3) or var11(p3) then "Loading" else "Idle" else "Failed"
-			var27 = failureReason
-			resolution = var6.getResolution(p3)
-			duration = var6.getDuration(p3)
-			timeLength = var6.getTimeLength(p3)
+			local FailureReason = v1.getFailureReason(p3)
+			Ready = if FailureReason == nil then if v1.getIsLoaded(p3) then "Ready" elseif Signal3(p3) or Signal1(p3) then "Loading" else "Idle" else "Failed"
+			FailureReason1 = FailureReason
+			Resolution = v1.getResolution(p3)
+			Duration = v1.getDuration(p3)
+			TimeLength = v1.getTimeLength(p3)
 		end
 		return {
-			readiness = var26,
-			resolution = resolution,
-			duration = duration,
-			timeLength = timeLength,
-			isPlaying = var15(p3),
-			isMuted = var19(p3),
-			failureReason = var27
+			readiness = Ready,
+			resolution = Resolution,
+			duration = Duration,
+			timeLength = TimeLength,
+			isPlaying = Signal4(p3),
+			isMuted = Signal6(p3),
+			failureReason = FailureReason1
 		}
-	end, cryoModule.Dictionary.equals)
-	local var26 = nil
-	local var27 = 0
+	end, CryoModule.Dictionary.equals)
+	local RenderSteppedConnection = nil
+	local v5 = 0
 	
-	local _ = function()
-		-- upvalues: var26 (write), var8 (write), t_2 (ref), var27 (write), var23 (ref), services (ref), var21 (write), loopEpsilonSeconds (copy)
-		if var26 == nil and (var8 ~= nil or #t_2 ~= 0) then
-			var27 = var23(false)
-			var26 = services.runService.RenderStepped:Connect(function()
-				-- upvalues: var21 (copy), var23 (copy), var27 (copy), loopEpsilonSeconds (copy), var8 (copy), t_2 (copy)
-				if var21 then return end
-				local var28 = var23(false)
+	local _ = function() --[[ Line: 415 | Named "startRealignLoop" ]]
+		-- upvalues: RenderSteppedConnection (ref), v3 (ref), List1 (copy), v5 (ref), GetPosition (copy), Services (copy), Flag (ref), LoopEpsilonSeconds (upval)
+		if RenderSteppedConnection == nil and (v3 ~= nil or #List1 ~= 0) then
+			v5 = GetPosition(false)
+			RenderSteppedConnection = Services.runService.RenderStepped:Connect(function() --[[ Line: 420 ]]
+				-- upvalues: Flag (upval), GetPosition (upval), v5 (upval), LoopEpsilonSeconds (upval), v3 (upval), List1 (upval)
+				if Flag then return end
+				local v6 = GetPosition(false)
 				
-				if var28 < var27 - loopEpsilonSeconds then
-					if var8 ~= nil then
-						var8.realignToRegionStart()
+				if v6 < v5 - LoopEpsilonSeconds then
+					if v3 ~= nil then
+						v3.realignToRegionStart()
 					end
-					for i, v in t_2 do
-						v.realignToRegionStart()
+					for _, value in List1 do
+						value.realignToRegionStart()
 					end
 				end
-				for i, v in t_2 do
-					v.syncToClock(var28)
+				for _, value1 in List1 do
+					value1.syncToClock(v6)
 				end
-				var27 = var28
+				v5 = v6
 			end)
 			
 			return
 		end
 	end
 	
-	local _ = function()
-		-- upvalues: var26 (write)
-		if var26 ~= nil then
-			var26:Disconnect()
-			var26 = nil
+	local _ = function() --[[ Line: 439 | Named "stopRealignLoop" ]]
+		-- upvalues: RenderSteppedConnection (ref)
+		if RenderSteppedConnection ~= nil then
+			RenderSteppedConnection:Disconnect()
+			RenderSteppedConnection = nil
 		end
 	end
 	
-	local function download()
-		-- upvalues: var21 (write), t (ref), var12 (ref)
-		if var21 then return end
-		for i, v in t do
-			v.download()
-		end
-		if var21 then
-			return
-		end
-		var12(true)
+	local _ = function() --[[ Line: 502 | Named "isVideoReadyForPlayback" ]]
+		-- upvalues: v1 (ref)
+		return v1 == nil or v1.isPlaybackReady()
 	end
 	
-	local function decode()
-		-- upvalues: var21 (write), t_3 (ref), t_5 (ref), var5 (ref), var9 (ref), var14 (ref)
-		if var21 then return end
-		for i, v in t_3 do
-			local decode = v.decode
-			
-			if decode ~= nil then
-				decode()
-			end
-			local audioStem = v.audioStem
-			local getAudioSource = v.getAudioSource
-			
-			if audioStem ~= nil and getAudioSource ~= nil and t_5[audioStem.stemId] == nil then
-				t_5[audioStem.stemId] = var5.addStem(audioStem.stemId, getAudioSource(), audioStem.defaultVolume, audioStem.role)
-			end
-		end
-		if var9 and t_5.video ~= nil then
-			var5.setMuted("video", true)
-		end
-		var14(true)
-	end
-	
-	local function releaseDecoder()
-		-- upvalues: var21 (write), t_3 (ref), t_5 (ref), var14 (ref), var16 (ref)
-		if var21 then return end
-		for i, v in t_3 do
-			local audioStem = v.audioStem
-			
-			if audioStem ~= nil then
-				local stemId = t_5[audioStem.stemId]
-				
-				if stemId ~= nil then
-					stemId()
-					t_5[audioStem.stemId] = nil
-				end
-			end
-			local releaseDecoder = v.releaseDecoder
-			
-			if releaseDecoder ~= nil then
-				releaseDecoder()
-			end
-		end
-		var14(false)
-		var16(false)
-	end
-	
-	local _ = function()
-		-- upvalues: var6 (write)
-		return if var6 ~= nil then var6.isPlaybackReady() else true
-	end
-	
-	local function play()
-		-- upvalues: var21 (write), var6 (write), var22 (write), var8 (write), t_2 (ref), var7 (write), t (ref), var23 (ref), var16 (ref), var26 (write), var27 (write), services (ref), loopEpsilonSeconds (copy)
-		if not var21 then
-			if not (if var6 ~= nil then var6.isPlaybackReady() else true) then return end
-			var22 = nil
-			
-			if var8 ~= nil then
-				var8.realignToRegionStart()
-			end
-			for i, v in t_2 do
-				v.realignToRegionStart()
-			end
-			if var7 ~= nil then
-				var7.seek(0)
-			end
-			for i, v_1 in t do
-				local play = v_1.play
-				
-				if play ~= nil then
-					play()
-				end
-			end
-			if var22 ~= nil and var22 > 0 then
-				for i, v_2 in t do
-					local seek = v_2.seek
-					
-					if seek ~= nil then
-						seek(var22)
-					end
-				end
-			end
-			for i, v_2 in t_2 do
-				v_2.syncToClock(var23(false))
-			end
-			var16(true)
-			
-			if var26 == nil then
-				if var8 == nil and #t_2 == 0 then return end
-				var27 = var23(false)
-				var26 = services.runService.RenderStepped:Connect(function()
-					-- upvalues: var21 (copy), var23 (copy), var27 (copy), loopEpsilonSeconds (copy), var8 (copy), t_2 (copy)
-					if var21 then return end
-					local var28 = var23(false)
-					
-					if var28 < var27 - loopEpsilonSeconds then
-						if var8 ~= nil then
-							var8.realignToRegionStart()
-						end
-						for i, v in t_2 do
-							v.realignToRegionStart()
-						end
-					end
-					for i, v in t_2 do
-						v.syncToClock(var28)
-					end
-				end)
-			end
-			return
-		end
-	end
-	
-	local function pauseAndRemember(p3)
-		-- upvalues: var21 (write), var6 (write), var22 (write), var23 (ref), t (ref), var16 (ref), var26 (write)
-		if var21 then return end
-		if var6 ~= nil then
-			var22 = math.max(0, var23(false) - p3)
-		end
-		for i, v in t do
-			local pause = v.pause
-			
-			if pause ~= nil then
-				pause()
-			end
-		end
-		var16(false)
+	local function play() --[[ Line: 506 ]]
+		-- upvalues: Flag (ref), v1 (ref), Largest (ref), v3 (ref), List1 (copy), v2 (ref), List (copy), GetPosition (copy), Signal2_2 (copy), RenderSteppedConnection (ref), v5 (ref), Services (copy), LoopEpsilonSeconds (upval)
+		if Flag or v1 ~= nil and not v1.isPlaybackReady() then return end
+		local Largest1: number = Largest
+		Largest = nil
 		
-		if var26 ~= nil then
-			var26:Disconnect()
-			var26 = nil
+		if v3 ~= nil then
+			v3.realignToRegionStart()
+		end
+		for _, value in List1 do
+			value.realignToRegionStart()
+		end
+		if v2 ~= nil then
+			v2.seek(0)
+		end
+		for _, value1 in List do
+			local PlayFunction: () -> () = value1.play
+			
+			if PlayFunction ~= nil then
+				PlayFunction()
+			end
+		end
+		if Largest1 ~= nil and Largest1 > 0 then
+			for _, value2 in List do
+				local SeekFunction: (any) -> () = value2.seek
+				
+				if SeekFunction ~= nil then
+					SeekFunction(Largest1)
+				end
+			end
+		end
+		for _, value3 in List1 do
+			value3.syncToClock(GetPosition(false))
+		end
+		Signal2_2(true)
+		
+		if RenderSteppedConnection == nil then
+			if v3 == nil and #List1 == 0 then return end
+			v5 = GetPosition(false)
+			RenderSteppedConnection = Services.runService.RenderStepped:Connect(function() --[[ Line: 420 ]]
+				-- upvalues: Flag (upval), GetPosition (upval), v5 (upval), LoopEpsilonSeconds (upval), v3 (upval), List1 (upval)
+				if Flag then return end
+				local v6 = GetPosition(false)
+				
+				if v6 < v5 - LoopEpsilonSeconds then
+					if v3 ~= nil then
+						v3.realignToRegionStart()
+					end
+					for _, value in List1 do
+						value.realignToRegionStart()
+					end
+				end
+				for _, value1 in List1 do
+					value1.syncToClock(v6)
+				end
+				v5 = v6
+			end)
+		end
+	end
+	
+	local function pauseAndRemember(p3) --[[ Line: 558 ]]
+		-- upvalues: Flag (ref), v1 (ref), Largest (ref), GetPosition (copy), List (copy), Signal2_2 (copy), RenderSteppedConnection (ref)
+		if Flag then return end
+		if v1 ~= nil then
+			Largest = math.max(0, GetPosition(false) - p3)
+		end
+		for _, value in List do
+			local PauseFunction: () -> () = value.pause
+			
+			if PauseFunction ~= nil then
+				PauseFunction()
+			end
+		end
+		Signal2_2(false)
+		
+		if RenderSteppedConnection ~= nil then
+			RenderSteppedConnection:Disconnect()
+			RenderSteppedConnection = nil
 		end
 	end
 	
 	return {
-		getState = var25,
-		getPosition = var23,
-		getUserToggleNonce = var17,
-		getVisualLayers = var10,
-		getResourceLevel = var24,
+		getState = Computed1,
+		getPosition = GetPosition,
+		getUserToggleNonce = Signal5,
+		getVisualLayers = Signal,
+		getResourceLevel = Computed,
 		audio = {
-			setVolume = function(value, p4)
-				-- upvalues: var21 (write), var5 (ref)
-				if not var21 then
-					var5.setVolume(value, p4)
+			setVolume = function(p4, p5) --[[ Line: 666 ]]
+				-- upvalues: Flag (ref), AudioGraphModule (copy)
+				if not Flag then
+					AudioGraphModule.setVolume(p4, p5)
 				end
 			end,
-			setMuted = function(value, p4)
-				-- upvalues: var21 (write), var5 (ref)
-				if not var21 then
-					var5.setMuted(value, p4)
+			setMuted = function(p4, p5) --[[ Line: 671 ]]
+				-- upvalues: Flag (ref), AudioGraphModule (copy)
+				if not Flag then
+					AudioGraphModule.setMuted(p4, p5)
 				end
 			end,
-			setMasterMuted = function(value)
-				-- upvalues: var21 (write), var5 (ref), var20 (ref)
-				if var21 then
+			setMasterMuted = function(p4) --[[ Line: 633 ]]
+				-- upvalues: Flag (ref), AudioGraphModule (copy), Signal2_4 (copy)
+				if not Flag then
+					AudioGraphModule.setMasterMuted(p4)
+					Signal2_4(p4)
+					
 					return
 				end
-				var5.setMasterMuted(value)
-				var20(value)
 			end
 		},
-		download = download,
-		decode = decode,
-		releaseDecoder = releaseDecoder,
+		download = function() --[[ Line: 446 ]]
+			-- upvalues: Flag (ref), List (copy), Signal2 (copy)
+			if Flag then return end
+			for _, value in List do
+				value.download()
+			end
+			if not Flag then
+				Signal2(true)
+				
+				return
+			end
+		end,
+		decode = function() --[[ Line: 464 ]]
+			-- upvalues: Flag (ref), List2 (copy), AddStemResults (copy), AudioGraphModule (copy), v4 (copy), Signal2_1 (copy)
+			if Flag then return end
+			for _, value in List2 do
+				local DecodeFunction: () -> () = value.decode
+				
+				if DecodeFunction ~= nil then
+					DecodeFunction()
+				end
+				local AudioStem = value.audioStem
+				local GetAudioSourceFunction = value.getAudioSource
+				
+				if AudioStem ~= nil and GetAudioSourceFunction ~= nil and AddStemResults[AudioStem.stemId] == nil then
+					AddStemResults[AudioStem.stemId] = AudioGraphModule.addStem(AudioStem.stemId, GetAudioSourceFunction(), AudioStem.defaultVolume, AudioStem.role)
+				end
+			end
+			if v4 and AddStemResults.video ~= nil then
+				AudioGraphModule.setMuted("video", true)
+			end
+			Signal2_1(true)
+		end,
+		releaseDecoder = function() --[[ Line: 485 ]]
+			-- upvalues: Flag (ref), List2 (copy), AddStemResults (copy), Signal2_1 (copy), Signal2_2 (copy)
+			if Flag then return end
+			for _, value in List2 do
+				local AudioStem = value.audioStem
+				local NoAudioStem = AudioStem == nil
+				local AddStemResult = nil
+				
+				if not NoAudioStem then
+					AddStemResult = AddStemResults[AudioStem.stemId]
+					NoAudioStem = AddStemResult == nil
+				end
+				if not NoAudioStem then
+					AddStemResult()
+					AddStemResults[AudioStem.stemId] = nil
+				end
+				local ReleaseDecoderFunction: () -> () = value.releaseDecoder
+				
+				if ReleaseDecoderFunction ~= nil then
+					ReleaseDecoderFunction()
+				end
+			end
+			Signal2_1(false)
+			Signal2_2(false)
+		end,
 		play = play,
-		pause = function(p4)
-			-- upvalues: pauseAndRemember (ref)
+		pause = function(p4) --[[ Line: 578 ]]
+			-- upvalues: pauseAndRemember (copy)
 			pauseAndRemember(p4 or 2)
 		end,
-		toggle = function()
-			-- upvalues: var21 (write), var15 (ref), var6 (write), pauseAndRemember (ref), play (ref), var18 (ref), var17 (ref)
-			if var21 then return end
-			if not var15(false) then
-				if not (if var6 ~= nil then var6.isPlaybackReady() else true) then return end
-			end
-			if var15(false) then
+		toggle = function() --[[ Line: 582 ]]
+			-- upvalues: Flag (ref), Signal4 (copy), v1 (ref), pauseAndRemember (copy), play (copy), Signal2_3 (copy), Signal5 (copy)
+			if Flag then return end
+			if not Signal4(false) and (v1 ~= nil and not v1.isPlaybackReady()) then return end
+			if Signal4(false) then
 				pauseAndRemember(0)
 			else
 				play()
 			end
-			var18(var17(false) + 1)
+			Signal2_3(Signal5(false) + 1)
 		end,
-		seek = function(p4)
-			-- upvalues: var21 (write), var15 (ref), var25 (ref), t (ref)
-			if var21 then return end
-			if var15(false) then
-				local duration = var25(false).duration
+		seek = function(p4: number) --[[ Line: 604 ]]
+			-- upvalues: Flag (ref), Signal4 (copy), Computed1 (copy), List (copy)
+			if Flag then return end
+			if Signal4(false) then
+				local Duration: number = Computed1(false).duration
 				
-				if duration > 0 and duration <= p4 then
+				if Duration > 0 and Duration <= p4 then
 					p4 = 0
 				end
 			end
-			for i, v in t do
-				local seek = v.seek
+			for _, value in List do
+				local SeekFunction: (any) -> () = value.seek
 				
-				if seek ~= nil then
-					seek(p4)
+				if SeekFunction ~= nil then
+					SeekFunction(p4)
 				end
 			end
 		end,
-		setRegion = function(value)
-			-- upvalues: var21 (write), var6 (write)
-			if var21 then return end
-			if var6 ~= nil then
-				var6.setRegion(value)
+		setRegion = function(p5) --[[ Line: 624 ]]
+			-- upvalues: Flag (ref), v1 (ref)
+			if Flag then return end
+			if v1 ~= nil then
+				v1.setRegion(p5)
 			end
 		end,
-		setActive = function(value)
-			-- upvalues: var22 (write), var21 (write), var5 (ref), var20 (ref)
-			if value then
-				var22 = nil
+		setActive = function(p5) --[[ Line: 643 ]]
+			-- upvalues: Largest (ref), Flag (ref), AudioGraphModule (copy), Signal2_4 (copy)
+			if p5 then
+				Largest = nil
 			end
-			local var28 = not value
+			local NoP14 = not p5
 			
-			if var21 then
+			if not Flag then
+				AudioGraphModule.setMasterMuted(NoP14)
+				Signal2_4(NoP14)
+				
 				return
 			end
-			var5.setMasterMuted(var28)
-			var20(var28)
 		end,
-		setSurface = function(value, p5)
-			-- upvalues: var21 (write), t_1 (ref)
-			if var21 then return end
-			local var28 = t_1[value]
+		setSurface = function(p5, p6) --[[ Line: 655 ]]
+			-- upvalues: Flag (ref), Musics (copy)
+			if Flag then return end
+			local Music = Musics[p5]
 			
-			if var28 ~= nil and var28.setSurface ~= nil then
-				var28.setSurface(p5)
+			if Music ~= nil and Music.setSurface ~= nil then
+				Music.setSurface(p6)
 			end
 		end,
-		getVideoPreviewSource = function()
-			-- upvalues: var1 (ref), p1 (ref), edits (ref)
-			return if var1 then {
+		getVideoPreviewSource = function() --[[ Line: 697 ]]
+			-- upvalues: IsCaptureTypeMatch (copy), p1 (copy), Edits (copy)
+			return if IsCaptureTypeMatch then {
 				content = p1.content,
-				region = if edits ~= nil then nil else edits.trim
+				region = if Edits == nil then nil else Edits.trim
 			} else nil
 		end,
-		getHasVideoPreview = function()
-			-- upvalues: var1 (ref)
-			return var1
+		getHasVideoPreview = function() --[[ Line: 707 ]]
+			-- upvalues: IsCaptureTypeMatch (copy)
+			return IsCaptureTypeMatch
 		end,
-		dispose = function()
-			-- upvalues: var21 (write), var26 (write), t (ref), var5 (ref), var4 (ref)
-			if var21 then return end
-			var21 = true
+		dispose = function() --[[ Line: 679 ]]
+			-- upvalues: Flag (ref), RenderSteppedConnection (ref), List (copy), AudioGraphModule (copy), MediaRootModuleResult (copy)
+			if Flag then return end
+			Flag = true
 			
-			if var26 ~= nil then
-				var26:Disconnect()
-				var26 = nil
+			if RenderSteppedConnection ~= nil then
+				RenderSteppedConnection:Disconnect()
+				RenderSteppedConnection = nil
 			end
-			for i, v in t do
-				v.dispose()
+			for _, value in List do
+				value.dispose()
 			end
-			var5.dispose()
-			var4.dispose()
+			AudioGraphModule.dispose()
+			MediaRootModuleResult.dispose()
 		end
 	}
 end

@@ -1,47 +1,47 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local cryoModule = require(corePackagesService.Packages.Cryo)
-local _ = require(corePackagesService.Packages.Promise)
-local getCurrentHumanoidDescriptionModule = require(script.Parent.GetCurrentHumanoidDescription)
-local getAssetIdsFromDescriptionModule = require(script.Parent.GetAssetIdsFromDescription)
-local getAssetNamesForIdsModule = require(script.Parent.GetAssetNamesForIds)
+﻿local CorePackages = game:GetService("CorePackages")
+local CryoModule = require(CorePackages.Packages.Cryo)
+local _ = require(CorePackages.Packages.Promise)
+local GetCurrentHumanoidDescriptionModule = require(script.Parent.GetCurrentHumanoidDescription)
+local GetAssetIdsFromDescriptionModule = require(script.Parent.GetAssetIdsFromDescription)
+local GetAssetNamesForIdsModule = require(script.Parent.GetAssetNamesForIds)
 
-return function(p1)
-	-- upvalues: cryoModule (ref), getCurrentHumanoidDescriptionModule (ref), getAssetIdsFromDescriptionModule (ref), getAssetNamesForIdsModule (ref)
-	local function getAddedAndRemovedIds(p2, p3)
-		-- upvalues: cryoModule (copy)
-		local var1 = cryoModule.List.toSet(p2)
-		local var2 = cryoModule.List.toSet(p3)
+return function(p1) --[[ Line: 10 ]]
+	-- upvalues: CryoModule (copy), GetCurrentHumanoidDescriptionModule (copy), GetAssetIdsFromDescriptionModule (copy), GetAssetNamesForIdsModule (copy)
+	local function getAddedAndRemovedIds(p2, p3) --[[ Line: 11 ]]
+		-- upvalues: CryoModule (upval)
+		local Set = CryoModule.List.toSet(p2)
+		local Set1 = CryoModule.List.toSet(p3)
 		
-		return cryoModule.List.filter(p3, function(p4)
-			-- upvalues: var1 (ref)
-			return var1[p4] == nil
-		end), cryoModule.List.filter(p2, function(p4)
-			-- upvalues: var2 (ref)
-			return var2[p4] == nil
-		end)
+		return CryoModule.List.filter(p3, function(p4): boolean --[[ Line: 15 ]]
+			-- upvalues: Set (copy)
+			return Set[p4] == nil
+		end), (CryoModule.List.filter(p2, function(p4): boolean --[[ Line: 19 ]]
+			-- upvalues: Set1 (copy)
+			return Set1[p4] == nil
+		end))
 	end
 	
-	return getCurrentHumanoidDescriptionModule():andThen(function(p2)
-		-- upvalues: getAssetIdsFromDescriptionModule (copy), p1 (ref), getAddedAndRemovedIds (ref), cryoModule (copy), getAssetNamesForIdsModule (copy)
-		local var1, var2 = getAddedAndRemovedIds(getAssetIdsFromDescriptionModule(p2), getAssetIdsFromDescriptionModule(p1))
+	return GetCurrentHumanoidDescriptionModule():andThen(function(Result) --[[ Line: 26 ]]
+		-- upvalues: GetAssetIdsFromDescriptionModule (upval), p1 (copy), getAddedAndRemovedIds (copy), CryoModule (upval), GetAssetNamesForIdsModule (upval)
+		local AddedAndRemovedIds, AddedAndRemovedIds2 = getAddedAndRemovedIds(GetAssetIdsFromDescriptionModule(Result), (GetAssetIdsFromDescriptionModule(p1)))
 		
-		return getAssetNamesForIdsModule(cryoModule.List.join(var1, var2)):andThen(function(p3)
-			-- upvalues: var1 (ref), var2 (ref)
-			local t = {}
+		return GetAssetNamesForIdsModule((CryoModule.List.join(AddedAndRemovedIds, AddedAndRemovedIds2))):andThen(function(Result) --[[ Line: 33 ]]
+			-- upvalues: AddedAndRemovedIds (copy), AddedAndRemovedIds2 (copy)
+			local AddedNames = {}
 			
-			for i, v in ipairs(var1) do
-				table.insert(t, p3[v])
+			for _, addedAndRemovedId in ipairs(AddedAndRemovedIds) do
+				table.insert(AddedNames, Result[addedAndRemovedId])
 			end
-			local t_1 = {}
+			local RemovedNames = {}
 			
-			for i_1, v_1 in ipairs(var2) do
-				table.insert(t_1, p3[v_1])
+			for _, value in ipairs(AddedAndRemovedIds2) do
+				table.insert(RemovedNames, Result[value])
 			end
 			return {
-				addedNames = t,
-				removedNames = t_1,
-				addedAssetIds = var1,
-				removedAssetIds = var2
+				addedNames = AddedNames,
+				removedNames = RemovedNames,
+				addedAssetIds = AddedAndRemovedIds,
+				removedAssetIds = AddedAndRemovedIds2
 			}
 		end)
 	end)

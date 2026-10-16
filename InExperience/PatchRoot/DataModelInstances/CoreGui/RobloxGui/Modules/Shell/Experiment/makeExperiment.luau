@@ -1,60 +1,63 @@
 ﻿local IXPService = game:GetService("IXPService")
 
-return function(p1, p2, p3, p4, p5)
-	-- upvalues: IXPService (ref)
-	for i, v in {
+return function(p1, p2, p3, p4, p5) --[[ Line: 23 | Named "makeExperiment" ]]
+	-- upvalues: IXPService (copy)
+	for _, value in {
 		p1,
 		p2,
 		p3,
 		p4,
 		p5
 	} do
-		if not IXPService[v] then
-			error("makeExperiment factory expects configured members to exist on IXPService. Member " .. v .. " not found")
+		if not IXPService[value] then
+			error("makeExperiment factory expects configured members to exist on IXPService. Member " .. value .. " not found")
 		end
 	end
-	return function(p6, p7, p8, p9)
-		-- upvalues: IXPService (copy), p3 (ref), p5 (ref), p4 (ref), p2 (ref), p1 (ref)
-		if p9 == nil then
-			p9 = true
+	return function(p6, p7, Callback, p8: boolean) --[[ Line: 44 ]]
+		-- upvalues: IXPService (upval), p3 (copy), p5 (copy), p4 (copy), p2 (copy), p1 (copy)
+		if p8 == nil then
+			p8 = true
 		end
 		assert(type(p7) == "table", "makeExperiment expects layerNames to be a list of layers")
-		assert(type(p8) == "function", "makeExperiment expects mapLayers to be a function")
+		assert(type(Callback) == "function", "makeExperiment expects mapLayers to be a function")
 		
-		local function updateStateLayerData(p10)
-			-- upvalues: p7 (ref), IXPService (copy), p3 (copy), p8 (ref)
-			local t = {}
+		local function updateStateLayerData(LayerLoadingStatus) --[[ Line: 57 ]]
+			-- upvalues: p7 (copy), IXPService (upval), p3 (upval), Callback (copy)
+			local LayerToVariables = {}
 			
-			for i, v in ipairs(p7) do
-				t[v] = IXPService[p3](IXPService, v)
+			for _, value in ipairs(p7) do
+				LayerToVariables[value] = IXPService[p3](IXPService, value)
 			end
-			p8({ layerToVariables = t, layerLoadingStatus = p10 })
+			Callback({
+				layerToVariables = LayerToVariables,
+				layerLoadingStatus = LayerLoadingStatus
+			})
 		end
 		
-		local function logAllLayersExposure()
-			-- upvalues: p7 (ref), IXPService (copy), p5 (copy), p4 (copy)
-			for i, v in ipairs(p7) do
-				if IXPService[p5](IXPService, v) == Enum.IXPLoadingStatus.Initialized then
-					IXPService[p4](IXPService, v)
+		local function logAllLayersExposure() --[[ Line: 69 ]]
+			-- upvalues: p7 (copy), IXPService (upval), p5 (upval), p4 (upval)
+			for _, value in ipairs(p7) do
+				if IXPService[p5](IXPService, value) == Enum.IXPLoadingStatus.Initialized then
+					IXPService[p4](IXPService, value)
 				end
 			end
 		end
 		
-		updateStateLayerData(IXPService[p2](IXPService))
-		local var1 = IXPService[p1]:Connect(function()
-			-- upvalues: IXPService (copy), p2 (copy), updateStateLayerData (ref), p9 (write), logAllLayersExposure (ref)
-			local var2 = IXPService[p2](IXPService)
-			updateStateLayerData(var2)
+		updateStateLayerData((IXPService[p2](IXPService)))
+		local Connection = IXPService[p1]:Connect(function() --[[ Line: 81 ]]
+			-- upvalues: IXPService (upval), p2 (upval), updateStateLayerData (copy), p8 (ref), logAllLayersExposure (copy)
+			local IXPLoadingStatus = IXPService[p2](IXPService)
+			updateStateLayerData(IXPLoadingStatus)
 			
-			if p9 and var2 == Enum.IXPLoadingStatus.Initialized then
+			if p8 and IXPLoadingStatus == Enum.IXPLoadingStatus.Initialized then
 				logAllLayersExposure()
 			end
 		end)
-		p6.Destroying:Once(function()
-			-- upvalues: var1 (ref)
-			var1:Disconnect()
+		p6.Destroying:Once(function() --[[ Line: 95 ]]
+			-- upvalues: Connection (copy)
+			Connection:Disconnect()
 		end)
 		
-		return var1
+		return Connection
 	end
 end

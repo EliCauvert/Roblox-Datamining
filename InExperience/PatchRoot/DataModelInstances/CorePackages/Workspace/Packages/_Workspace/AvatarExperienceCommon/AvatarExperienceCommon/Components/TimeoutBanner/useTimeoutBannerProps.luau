@@ -1,40 +1,41 @@
-﻿local avatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
-local parent = avatarExperienceCommon.Parent
-local reactModule = require(parent.React)
-local useSignalState = require(parent.SignalsReact).useSignalState
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useNavigation = require(parent.Navigation).useNavigation
-local avatarScreen = require(parent.AvatarExperienceNavigation).Enums.AvatarScreen
-local getTimeoutStatusStoreModule = require(avatarExperienceCommon.Stores.TimeoutStatusStore.getTimeoutStatusStore)
-local formatTimeoutEndTimeModule = require(avatarExperienceCommon.Utils.formatTimeoutEndTime)
+﻿local AvatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
+local Parent = AvatarExperienceCommon.Parent
+local ReactModule = require(Parent.React)
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local AvatarScreen = require(Parent.AvatarExperienceNavigation).Enums.AvatarScreen
+local GetTimeoutStatusStoreModule = require(AvatarExperienceCommon.Stores.TimeoutStatusStore.getTimeoutStatusStore)
+local FormatTimeoutEndTimeModule = require(AvatarExperienceCommon.Utils.formatTimeoutEndTime)
 
-return function(value)
-	-- upvalues: getTimeoutStatusStoreModule (ref), useSignalState (ref), useNavigation (ref), reactModule (ref), formatTimeoutEndTimeModule (ref), useLocalization (ref), avatarScreen (ref)
-	local var1 = if value and value.shouldFetch ~= nil then value.shouldFetch else false
-	local var2 = if value and value.shouldNavigateOnClick ~= nil then value.shouldNavigateOnClick else true
-	local var3 = getTimeoutStatusStoreModule()
-	local var4 = useSignalState(var3.getStatus)
-	local var5 = useSignalState(var3.getIsTimedOut)
-	local var6 = useNavigation()
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), var3 (ref)
-		if var1 then
-			var3.fetchStatus()
+return function(p1) --[[ Line: 28 | Named "useTimeoutBannerProps" ]]
+	-- upvalues: GetTimeoutStatusStoreModule (copy), UseSignalStateFunction (copy), UseNavigationFunction (copy), ReactModule (copy), FormatTimeoutEndTimeModule (copy), UseLocalizationFunction (copy), AvatarScreen (copy)
+	local ShouldFetch = if p1 and p1.shouldFetch ~= nil then p1.shouldFetch else false
+	local NoP0 = not p1 or p1.shouldNavigateOnClick == nil or p1.shouldNavigateOnClick
+	local TimeoutStatusStoreModule = GetTimeoutStatusStoreModule()
+	local UseSignalStateResult = UseSignalStateFunction(TimeoutStatusStoreModule.getStatus)
+	local UseSignalStateResult1 = UseSignalStateFunction(TimeoutStatusStoreModule.getIsTimedOut)
+	local UseNavigationResult = UseNavigationFunction()
+	ReactModule.useEffect(function() --[[ Line: 39 ]]
+		-- upvalues: ShouldFetch (copy), TimeoutStatusStoreModule (copy)
+		if ShouldFetch then
+			TimeoutStatusStoreModule.fetchStatus()
 		end
-	end, { var1, var3 })
-	local var7 = formatTimeoutEndTimeModule(if var4.timeoutAction then var4.timeoutAction.endTime else var4.details and var4.details.endDate)
+	end, { ShouldFetch, TimeoutStatusStoreModule })
+	local FormatTimeoutEndTimeModuleResult = FormatTimeoutEndTimeModule(UseSignalStateResult.timeoutAction and UseSignalStateResult.timeoutAction.endTime or UseSignalStateResult.details and UseSignalStateResult.details.endDate)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 54 ]]
+		-- upvalues: UseNavigationResult (copy), AvatarScreen (upval)
+		UseNavigationResult.navigate(AvatarScreen.TimeoutStatusPrompt)
+	end, { UseNavigationResult })
 	
 	return {
-		messageText = useLocalization({
-			messageText = if var7 then {
+		messageText = UseLocalizationFunction({
+			messageText = if FormatTimeoutEndTimeModuleResult then {
 				"Feature.Timeout.WarningBanner.DisabledUntilMessage",
-				time = var7
+				time = FormatTimeoutEndTimeModuleResult
 			} else "Feature.Timeout.WarningBanner.DisabledMessage"
 		}).messageText,
-		onBannerActivated = if var2 then reactModule.useCallback(function()
-			-- upvalues: var6 (ref), avatarScreen (copy)
-			var6.navigate(avatarScreen.TimeoutStatusPrompt)
-		end, { var6 }) else nil,
-		shouldShow = var5
+		onBannerActivated = if NoP0 then UseResult else nil,
+		shouldShow = UseSignalStateResult1
 	}
 end

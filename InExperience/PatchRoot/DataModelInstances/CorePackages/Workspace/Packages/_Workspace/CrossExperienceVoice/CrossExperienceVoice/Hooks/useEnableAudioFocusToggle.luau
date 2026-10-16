@@ -1,78 +1,77 @@
-﻿local audioFocusManagementEngineFeature = game:GetEngineFeature("AudioFocusManagement")
-local dependenciesModule = require(script:FindFirstAncestor("CrossExperienceVoice").dependencies)
-local sharedFlags = dependenciesModule.SharedFlags
-local fFlagEnableCrossExperienceVoiceCaptureMute = sharedFlags.GetFFlagEnableCrossExperienceVoiceCaptureMute()
-local fFlagEnableVoiceChatMuteForVideoCaptures = sharedFlags.GetFFlagEnableVoiceChatMuteForVideoCaptures()
-local var1 = if fFlagEnableVoiceChatMuteForVideoCaptures then game:GetService("CaptureService") else nil
-local react = dependenciesModule.React
-local cryo = dependenciesModule.Cryo
+﻿local AudioFocusManagementEngineFeature = game:GetEngineFeature("AudioFocusManagement")
+local DependenciesModule = require(script:FindFirstAncestor("CrossExperienceVoice").dependencies)
+local SharedFlags = DependenciesModule.SharedFlags
+local FFlagEnableCrossExperienceVoiceCaptureMute = SharedFlags.GetFFlagEnableCrossExperienceVoiceCaptureMute()
+local FFlagEnableVoiceChatMuteForVideoCaptures = SharedFlags.GetFFlagEnableVoiceChatMuteForVideoCaptures()
+local CaptureService = if FFlagEnableVoiceChatMuteForVideoCaptures then game:GetService("CaptureService") else nil
+local React = DependenciesModule.React
+local Cryo = DependenciesModule.Cryo
 
-local function useIsCapturingVideo()
-	-- upvalues: react (ref), var1 (ref)
-	local var2, var3 = react.useState(var1 and var1:IsCapturingVideo())
-	react.useEffect(function()
-		-- upvalues: var1 (copy), var3 (ref)
-		if var1 then
-			local videoCaptureInProgressConnection = var1.VideoCaptureInProgress:Connect(function(p1)
-				-- upvalues: var3 (copy)
-				var3(p1)
-			end)
-			
-			return function()
-				-- upvalues: var1 (copy), videoCaptureInProgressConnection (ref)
-				if var1 then
-					videoCaptureInProgressConnection:Disconnect()
-				end
+local function useIsCapturingVideo() --[[ Line: 18 ]]
+	-- upvalues: React (copy), CaptureService (copy)
+	local UseStateResult, UseStateResult2 = React.useState(CaptureService and CaptureService:IsCapturingVideo())
+	React.useEffect(function() --[[ Line: 21 ]]
+		-- upvalues: CaptureService (upval), UseStateResult2 (copy)
+		if not CaptureService then return end
+		local VideoCaptureInProgressConnection = CaptureService.VideoCaptureInProgress:Connect(function(IsInProgress) --[[ Line: 26 ]]
+			-- upvalues: UseStateResult2 (upval)
+			UseStateResult2(IsInProgress)
+		end)
+		
+		return function() --[[ Line: 30 ]]
+			-- upvalues: CaptureService (upval), VideoCaptureInProgressConnection (copy)
+			if CaptureService then
+				VideoCaptureInProgressConnection:Disconnect()
 			end
 		end
 	end, {})
 	
-	return var2
+	return UseStateResult
 end
 
-return function()
-	-- upvalues: react (ref), fFlagEnableCrossExperienceVoiceCaptureMute (ref), fFlagEnableVoiceChatMuteForVideoCaptures (ref), useIsCapturingVideo (ref), cryo (ref), audioFocusManagementEngineFeature (ref)
-	local var2, var3 = react.useState({})
-	local var4 = if fFlagEnableCrossExperienceVoiceCaptureMute and fFlagEnableVoiceChatMuteForVideoCaptures then useIsCapturingVideo() else false
-	local var5 = react.useCallback(function(p1)
-		-- upvalues: var2 (ref), cryo (copy), var3 (ref)
-		if not var2[p1] then
-			var3(cryo.Dictionary.join(var2, { [p1] = true }))
+return function(): boolean --[[ Line: 40 | Named "useEnableAudioFocusToggle" ]]
+	-- upvalues: React (copy), FFlagEnableCrossExperienceVoiceCaptureMute (copy), FFlagEnableVoiceChatMuteForVideoCaptures (copy), useIsCapturingVideo (copy), Cryo (copy), AudioFocusManagementEngineFeature (copy)
+	local UseStateResult, UseStateResult2 = React.useState({})
+	local UseIsCapturingVideoResult = if FFlagEnableCrossExperienceVoiceCaptureMute and FFlagEnableVoiceChatMuteForVideoCaptures then useIsCapturingVideo() else false
+	local UseResult = React.useCallback(function(p1) --[[ Line: 48 ]]
+		-- upvalues: UseStateResult (copy), Cryo (upval), UseStateResult2 (copy)
+		if not UseStateResult[p1] then
+			UseStateResult2((Cryo.Dictionary.join(UseStateResult, { [p1] = true })))
 		end
-	end, { var2 })
-	local var6 = react.useCallback(function(p1)
-		-- upvalues: var2 (ref), cryo (copy), var3 (ref)
-		if var2[p1] then
-			var3(cryo.Dictionary.join(var2, { [p1] = nil }))
+	end, { UseStateResult })
+	local UseResult1 = React.useCallback(function(p1) --[[ Line: 57 ]]
+		-- upvalues: UseStateResult (copy), Cryo (upval), UseStateResult2 (copy)
+		if UseStateResult[p1] then
+			UseStateResult2((Cryo.Dictionary.join(UseStateResult, { [p1] = nil })))
 		end
-	end, { var2 })
-	react.useEffect(function()
-		-- upvalues: audioFocusManagementEngineFeature (copy), var3 (ref), var5 (ref), var6 (ref)
-		if not audioFocusManagementEngineFeature then return end
-		local ok, status = pcall(function()
+	end, { UseStateResult })
+	React.useEffect(function() --[[ Line: 66 ]]
+		-- upvalues: AudioFocusManagementEngineFeature (upval), UseStateResult2 (copy), UseResult (copy), UseResult1 (copy)
+		if not AudioFocusManagementEngineFeature then return end
+		local Success, Result = pcall(function() --[[ Line: 71 ]]
 			return game:GetService("AudioFocusService")
 		end)
 		
-		if not ok or not status then return end
+		if not Success or not Result then return end
 		local t = {}
 		
-		for i, v in pairs(status:GetRegisteredContexts()) do
+		for i, _ in pairs((Result:GetRegisteredContexts())) do
 			t[i] = true
 		end
-		var3(t)
-		local onContextRegisteredConnection = status.OnContextRegistered:Connect(var5)
-		local onContextUnregisteredConnection = status.OnContextUnregistered:Connect(var6)
+		UseStateResult2(t)
+		local OnContextRegisteredConnection = Result.OnContextRegistered:Connect(UseResult)
+		local OnContextUnregisteredConnection = Result.OnContextUnregistered:Connect(UseResult1)
 		
-		return function()
-			-- upvalues: onContextRegisteredConnection (ref), onContextUnregisteredConnection (ref)
-			if onContextRegisteredConnection then
-				onContextRegisteredConnection:Disconnect()
+		return function() --[[ Line: 88 ]]
+			-- upvalues: OnContextRegisteredConnection (copy), OnContextUnregisteredConnection (copy)
+			if OnContextRegisteredConnection then
+				OnContextRegisteredConnection:Disconnect()
 			end
-			if onContextUnregisteredConnection then
-				onContextUnregisteredConnection:Disconnect()
+			if OnContextUnregisteredConnection then
+				OnContextUnregisteredConnection:Disconnect()
 			end
 		end
 	end, {})
 	
-	return var2[1] and (var2[2] and not var4)
+	return UseStateResult[1] and (UseStateResult[2] and not UseIsCapturingVideoResult)
 end

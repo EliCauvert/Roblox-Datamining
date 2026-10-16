@@ -1,109 +1,111 @@
-﻿local parent = script:FindFirstAncestor("ExperienceStoreServerDrivenUi").Parent
-local reactModule = require(parent.React)
-local fFlagSduiLocalFeedFilter = require(parent.SharedFlags).FFlagSduiLocalFeedFilter
-local foundationModule = require(parent.Foundation)
-local chip = foundationModule.Chip
-local scrollView = foundationModule.ScrollView
-local view = foundationModule.View
-local chipSize = foundationModule.Enums.ChipSize
-local t = {
+﻿local Parent = script:FindFirstAncestor("ExperienceStoreServerDrivenUi").Parent
+local ReactModule = require(Parent.React)
+local FFlagSduiLocalFeedFilter = require(Parent.SharedFlags).FFlagSduiLocalFeedFilter
+local FoundationModule = require(Parent.Foundation)
+local Chip = FoundationModule.Chip
+local ScrollView = FoundationModule.ScrollView
+local View = FoundationModule.View
+local ChipSize = FoundationModule.Enums.ChipSize
+local Scroll = {
 	AutomaticCanvasSize = Enum.AutomaticSize.X,
 	AutomaticSize = Enum.AutomaticSize.Y,
 	CanvasSize = UDim2.fromScale(0, 0),
 	ScrollingDirection = Enum.ScrollingDirection.X,
-	scrollBarVisibility = foundationModule.Enums.Visibility.None
+	scrollBarVisibility = FoundationModule.Enums.Visibility.None
 }
-local t_1 = { Selectable = false }
-local var1 = reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), chip (ref)
-	local optionId = p1.optionId
-	local onSelect = p1.onSelect
+local Selection = { Selectable = false }
+local MemoResult = ReactModule.memo(function(p1) --[[ Line: 78 | Named "PillTab" ]]
+	-- upvalues: ReactModule (copy), Chip (copy)
+	local OptionId = p1.optionId
+	local OnSelectFunction = p1.onSelect
 	
-	return reactModule.createElement(chip, {
+	return ReactModule.createElement(Chip, {
 		text = p1.displayName,
 		isChecked = p1.isChecked,
 		size = p1.chipSize,
 		LayoutOrder = p1.layoutOrder,
-		onActivated = reactModule.useCallback(function()
-			-- upvalues: onSelect (ref), optionId (ref)
-			onSelect(optionId)
-		end, { onSelect, optionId })
+		onActivated = ReactModule.useCallback(function() --[[ Line: 82 ]]
+			-- upvalues: OnSelectFunction (copy), OptionId (copy)
+			OnSelectFunction(OptionId)
+		end, { OnSelectFunction, OptionId })
 	})
 end)
 
-return reactModule.memo(function(value)
-	-- upvalues: chipSize (ref), fFlagSduiLocalFeedFilter (ref), reactModule (ref), var1 (ref), scrollView (ref), t (ref), t_1 (ref), view (ref)
-	local options = value.options
-	local onOptionActivated = value.onOptionActivated
-	local chipSize_1 = value.chipSize or chipSize.Medium
-	local selectedOption = value.selectedOption
+return ReactModule.memo(function(p1) --[[ Line: 97 | Named "SduiPillTabsCarousel" ]]
+	-- upvalues: ChipSize (copy), FFlagSduiLocalFeedFilter (copy), ReactModule (copy), MemoResult (copy), ScrollView (copy), Scroll (copy), Selection (copy), View (copy)
+	local Options = p1.options
+	local OnOptionActivated = p1.onOptionActivated
+	local ChipSize1 = p1.chipSize or ChipSize.Medium
+	local SelectedOption = p1.selectedOption
 	
-	if fFlagSduiLocalFeedFilter then
-		if selectedOption == nil or selectedOption == "" then
-			selectedOption = value.defaultOption
+	if FFlagSduiLocalFeedFilter then
+		if SelectedOption == nil or SelectedOption == "" then
+			SelectedOption = p1.defaultOption
 		end
-	elseif selectedOption == nil or selectedOption == "" then
-		selectedOption = "all"
+	elseif SelectedOption == nil or SelectedOption == "" then
+		SelectedOption = "all"
 	end
-	local var2 = reactModule.useRef(onOptionActivated)
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), onOptionActivated (ref)
-		var2.current = onOptionActivated
-	end, { onOptionActivated })
-	reactModule.useEffect(function()
-		-- upvalues: value (ref), fFlagSduiLocalFeedFilter (copy), var2 (ref)
-		local defaultOption = value.defaultOption
+	local UseRefResult = ReactModule.useRef(OnOptionActivated)
+	ReactModule.useEffect(function() --[[ Line: 112 ]]
+		-- upvalues: UseRefResult (copy), OnOptionActivated (copy)
+		UseRefResult.current = OnOptionActivated
+	end, { OnOptionActivated })
+	ReactModule.useEffect(function() --[[ Line: 116 ]]
+		-- upvalues: p1 (copy), FFlagSduiLocalFeedFilter (upval), UseRefResult (copy)
+		local DefaultOption = p1.defaultOption
 		
-		if fFlagSduiLocalFeedFilter and (value.selectedOption == nil or value.selectedOption == "") and (defaultOption ~= nil and defaultOption ~= "") then
-			local current = var2.current
+		if FFlagSduiLocalFeedFilter and (p1.selectedOption == nil or p1.selectedOption == "") and DefaultOption ~= nil and DefaultOption ~= "" then
+			local CurrentFunction: (any, any, any) -> () = UseRefResult.current
 			
-			if current then
-				current(nil, nil, { selectedCategoryId = defaultOption })
+			if CurrentFunction then
+				CurrentFunction(nil, nil, { selectedCategoryId = DefaultOption })
 			end
 		end
-	end, { value.defaultOption, value.selectedOption })
-	local var3 = reactModule.useCallback(function(p1)
-		-- upvalues: var2 (ref)
-		local current = var2.current
+	end, { p1.defaultOption, p1.selectedOption })
+	local UseResult = ReactModule.useCallback(function(SelectedCategoryId) --[[ Line: 131 ]]
+		-- upvalues: UseRefResult (copy)
+		local CurrentFunction: (any, any, any) -> () = UseRefResult.current
 		
-		if current then
-			current(nil, nil, { selectedCategoryId = p1 })
+		if CurrentFunction then
+			CurrentFunction(nil, nil, { selectedCategoryId = SelectedCategoryId })
 		end
 	end, {})
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 138 ]]
+		-- upvalues: Options (copy), ReactModule (upval), MemoResult (upval), SelectedOption (ref), ChipSize1 (copy), UseResult (copy)
+		local Elements = {}
+		
+		if not Options then
+			return Elements
+		end
+		for LayoutOrder, option in Options do
+			local OptionId = option.optionId
+			Elements["Pill_" .. OptionId] = ReactModule.createElement(MemoResult, {
+				optionId = OptionId,
+				displayName = option.displayName,
+				isChecked = OptionId == SelectedOption,
+				chipSize = ChipSize1,
+				layoutOrder = LayoutOrder,
+				onSelect = UseResult
+			})
+		end
+		return Elements
+	end, { Options, SelectedOption, UseResult, ChipSize1 })
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 157 ]]
+		-- upvalues: p1 (copy)
+		local config = { ["size-full-0 auto-y"] = true }
+		
+		if p1.tag then
+			config[p1.tag] = true
+		end
+		return config
+	end, { p1.tag })
 	
-	return if options and #options ~= 0 then reactModule.createElement(scrollView, {
-		LayoutOrder = value.layoutOrder,
-		tag = reactModule.useMemo(function()
-			-- upvalues: value (ref)
-			local t = { ["size-full-0 auto-y"] = true }
-			
-			if value.tag then
-				t[value.tag] = true
-			end
-			return t
-		end, { value.tag }),
-		scroll = t,
-		selection = t_1
+	return if Options and #Options ~= 0 then ReactModule.createElement(ScrollView, {
+		LayoutOrder = p1.layoutOrder,
+		tag = UseMemoResult1,
+		scroll = Scroll,
+		selection = Selection
 	}, {
-		Row = reactModule.createElement(view, { tag = "row gap-small auto-xy" }, reactModule.useMemo(function()
-			-- upvalues: options (ref), reactModule (copy), var1 (copy), selectedOption (write), chipSize_1 (ref), var3 (ref)
-			local t = {}
-			
-			if not options then
-				return t
-			end
-			for i, v in options do
-				local optionId = v.optionId
-				t["Pill_" .. optionId] = reactModule.createElement(var1, {
-					optionId = optionId,
-					displayName = v.displayName,
-					isChecked = optionId == selectedOption,
-					chipSize = chipSize_1,
-					layoutOrder = i,
-					onSelect = var3
-				})
-			end
-			return t
-		end, { options, selectedOption, var3, chipSize_1 }))
+		Row = ReactModule.createElement(View, { tag = "row gap-small auto-xy" }, UseMemoResult)
 	}) else nil
 end)

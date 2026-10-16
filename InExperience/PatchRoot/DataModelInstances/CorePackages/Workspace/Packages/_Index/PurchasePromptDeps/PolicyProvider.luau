@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.PolicyProvider.PolicyProvider)
+﻿return (require(script.Parent.Parent.Parent._Index.PolicyProvider.PolicyProvider))

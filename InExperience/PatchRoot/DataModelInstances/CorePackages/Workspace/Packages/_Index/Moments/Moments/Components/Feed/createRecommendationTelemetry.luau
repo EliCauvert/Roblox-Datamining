@@ -1,26 +1,26 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local _ = require(parent.Signals)
-local momentsCommonModule = require(parent.MomentsCommon)
-local analytics = momentsCommonModule.Analytics
-local fFlagMomentsRealtimeSessionTelemetry = momentsCommonModule.Flags.FFlagMomentsRealtimeSessionTelemetry
-local constantsModule = require(moments.Constants)
-local emitRecommendationImpressionModule = require(moments.Analytics.emitRecommendationImpression)
-local emitRecommendationActionModule = require(moments.Analytics.emitRecommendationAction)
-local _ = require(moments.SignalTracker)
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local _ = require(Parent.Signals)
+local MomentsCommonModule = require(Parent.MomentsCommon)
+local Analytics = MomentsCommonModule.Analytics
+local FFlagMomentsRealtimeSessionTelemetry = MomentsCommonModule.Flags.FFlagMomentsRealtimeSessionTelemetry
+local ConstantsModule = require(Moments.Constants)
+local EmitRecommendationImpressionModule = require(Moments.Analytics.emitRecommendationImpression)
+local EmitRecommendationActionModule = require(Moments.Analytics.emitRecommendationAction)
+local _ = require(Moments.SignalTracker)
 local _ = require(script.Parent.FeedTypes)
-local fFlagMomentsComments = require(parent.SharedFlags).FFlagMomentsComments
-local t = {
-	AddReaction = constantsModule.RecommendationActionType.AddReaction,
-	RemoveReaction = constantsModule.RecommendationActionType.RemoveReaction,
-	Share = constantsModule.RecommendationActionType.Share,
-	Report = constantsModule.RecommendationActionType.Report,
-	Join = constantsModule.RecommendationActionType.Play,
-	Comment = if fFlagMomentsComments then constantsModule.RecommendationActionType.Comment else nil,
-	CommentDelete = if fFlagMomentsComments then constantsModule.RecommendationActionType.CommentDelete else nil,
-	CommentSectionOpen = if fFlagMomentsComments then constantsModule.RecommendationActionType.CommentSectionOpen else nil
+local FFlagMomentsComments = require(Parent.SharedFlags).FFlagMomentsComments
+local config = {
+	AddReaction = ConstantsModule.RecommendationActionType.AddReaction,
+	RemoveReaction = ConstantsModule.RecommendationActionType.RemoveReaction,
+	Share = ConstantsModule.RecommendationActionType.Share,
+	Report = ConstantsModule.RecommendationActionType.Report,
+	Join = ConstantsModule.RecommendationActionType.Play,
+	Comment = if FFlagMomentsComments then ConstantsModule.RecommendationActionType.Comment else nil,
+	CommentDelete = if FFlagMomentsComments then ConstantsModule.RecommendationActionType.CommentDelete else nil,
+	CommentSectionOpen = if FFlagMomentsComments then ConstantsModule.RecommendationActionType.CommentSectionOpen else nil
 }
-local t_1 = {
+local config1 = {
 	AddReaction = "reaction_add",
 	RemoveReaction = "reaction_remove",
 	Share = "share",
@@ -28,59 +28,60 @@ local t_1 = {
 	Join = "join"
 }
 
-local function _(value, p1)
-	return if value == "AddReaction" or value == "RemoveReaction" then p1.reactionType or "" else ""
+local function _(p1, p2) --[[ Line: 69 | Named "getSignalValue" ]]
+	return (p1 == "AddReaction" or p1 == "RemoveReaction") and p2.reactionType or ""
 end
 
-return function(p1)
-	-- upvalues: emitRecommendationImpressionModule (ref), t (ref), fFlagMomentsRealtimeSessionTelemetry (ref), t_1 (ref), analytics (ref), emitRecommendationActionModule (ref), fFlagMomentsComments (ref)
-	local getMomentsSessionId = p1.getMomentsSessionId
-	local signalTracker = p1.signalTracker
+return function(p1) --[[ Line: 76 | Named "createRecommendationTelemetry" ]]
+	-- upvalues: EmitRecommendationImpressionModule (copy), config (copy), FFlagMomentsRealtimeSessionTelemetry (copy), config1 (copy), Analytics (copy), EmitRecommendationActionModule (copy), FFlagMomentsComments (copy)
+	local GetMomentsSessionIdFunction = p1.getMomentsSessionId
+	local SignalTracker = p1.signalTracker
 	
 	return {
-		logView = function(p2, p3)
-			-- upvalues: emitRecommendationImpressionModule (copy), getMomentsSessionId (ref), signalTracker (ref)
-			emitRecommendationImpressionModule({
+		logView = function(p2, p3) --[[ Line: 81 ]]
+			-- upvalues: EmitRecommendationImpressionModule (upval), GetMomentsSessionIdFunction (copy), SignalTracker (copy)
+			EmitRecommendationImpressionModule({
 				itemId = p2.itemId,
 				tracingId = p2.tracingId or "",
-				momentsSessionId = getMomentsSessionId(false),
+				momentsSessionId = GetMomentsSessionIdFunction(false),
 				position = p3.itemPosition,
 				durationSeconds = p3.durationSeconds
 			})
 			
-			if signalTracker then
-				signalTracker:recordSignal(p2.itemId, "View", string.format("%.1f", p3.durationSeconds))
+			if SignalTracker then
+				SignalTracker:recordSignal(p2.itemId, "View", string.format("%.1f", p3.durationSeconds))
 			end
 		end,
-		logAction = function(p2, p3, p4)
-			-- upvalues: t (copy), fFlagMomentsRealtimeSessionTelemetry (copy), t_1 (copy), analytics (copy), emitRecommendationActionModule (copy), fFlagMomentsComments (copy), getMomentsSessionId (ref), signalTracker (ref)
-			local var1 = t[p2]
+		logAction = function(p2, p3, p4) --[[ Line: 95 ]]
+			-- upvalues: config (upval), FFlagMomentsRealtimeSessionTelemetry (upval), config1 (upval), Analytics (upval), EmitRecommendationActionModule (upval), FFlagMomentsComments (upval), GetMomentsSessionIdFunction (copy), SignalTracker (copy)
+			local Entry = config[p2]
 			
-			if var1 == nil then
+			if Entry == nil then
 				return nil
-			elseif fFlagMomentsRealtimeSessionTelemetry then
-				local var2 = t_1[p2]
+			end
+			if FFlagMomentsRealtimeSessionTelemetry then
+				local Entry1 = config1[p2]
 				
-				if var2 ~= nil then
-					analytics.reportMomentsEngagement(var2)
+				if Entry1 ~= nil then
+					Analytics.reportMomentsEngagement(Entry1)
 				end
 			end
-			local var3 = emitRecommendationActionModule({
+			local EmitRecommendationActionModuleResult = EmitRecommendationActionModule({
 				itemId = p3.itemId,
 				tracingId = p3.tracingId or "",
-				momentsSessionId = if fFlagMomentsComments and p4.momentsSessionId ~= nil then p4.momentsSessionId else getMomentsSessionId(false),
-				actionType = var1,
+				momentsSessionId = if FFlagMomentsComments and p4.momentsSessionId ~= nil then p4.momentsSessionId else GetMomentsSessionIdFunction(false),
+				actionType = Entry,
 				reactionType = p4.reactionType,
 				destinationPlaceId = p4.destinationPlaceId,
 				commentText = p4.commentText,
 				actionWeight = p4.actionWeight,
-				commentSectionOpenDurationSeconds = if fFlagMomentsComments then p4.commentSectionOpenDurationSeconds else nil
+				commentSectionOpenDurationSeconds = if FFlagMomentsComments then p4.commentSectionOpenDurationSeconds else nil
 			})
 			
-			if signalTracker then
-				signalTracker:recordSignal(p3.itemId, p2, if p2 == "AddReaction" or p2 == "RemoveReaction" then p4.reactionType or "" else "")
+			if SignalTracker then
+				SignalTracker:recordSignal(p3.itemId, p2, (p2 == "AddReaction" or p2 == "RemoveReaction") and p4.reactionType or "")
 			end
-			return var3
+			return EmitRecommendationActionModuleResult
 		end
 	}
 end

@@ -1,114 +1,116 @@
-﻿local discoveryUtils = script:FindFirstAncestor("DiscoveryUtils")
-local discoveryClientAppStorageModule = require(discoveryUtils.DiscoveryClientAppStorage)
-local discoveryEventErrorLoggerModule = require(discoveryUtils.Telemetry.DiscoveryEventErrorLogger)
-local luaAppOmniRecommendationsTopicIdAndNumberOfItemsToCache = game:DefineFastString("LuaAppOmniRecommendationsTopicIdAndNumberOfItemsToCache", `{100000000}:20,{100000001}:20,{100000003}:20`)
+﻿local DiscoveryUtils = script:FindFirstAncestor("DiscoveryUtils")
+local DiscoveryClientAppStorageModule = require(DiscoveryUtils.DiscoveryClientAppStorage)
+local DiscoveryEventErrorLoggerModule = require(DiscoveryUtils.Telemetry.DiscoveryEventErrorLogger)
+local LuaAppOmniRecommendationsTopicIdAndNumberOfItemsToCache = game:DefineFastString("LuaAppOmniRecommendationsTopicIdAndNumberOfItemsToCache", `{100000000}:20,{100000001}:20,{100000003}:20`)
 
 return {
 	HOME_OMNI_FEED_CACHE_VERSION = 2,
 	HOME_SDUI_FEED_CACHE_VERSION = 3,
-	cacheOmniRecommendationsData = function(p1)
-		-- upvalues: luaAppOmniRecommendationsTopicIdAndNumberOfItemsToCache (ref), discoveryClientAppStorageModule (ref), discoveryEventErrorLoggerModule (ref)
+	cacheOmniRecommendationsData = function(p1) --[[ Line: 37 ]]
+		-- upvalues: LuaAppOmniRecommendationsTopicIdAndNumberOfItemsToCache (copy), DiscoveryClientAppStorageModule (copy), DiscoveryEventErrorLoggerModule (copy)
 		assert(p1.pageType, "pageType is required")
 		assert(p1.sorts, "sorts is required")
 		assert(p1.contentMetadata, "contentMetadata is required")
 		assert(p1.contentMetadata.Game, "contentMetadata.Game is required")
-		task.spawn(function()
-			-- upvalues: luaAppOmniRecommendationsTopicIdAndNumberOfItemsToCache (copy), p1 (ref), discoveryClientAppStorageModule (copy), discoveryEventErrorLoggerModule (copy)
-			local ok, status = pcall(function()
-				-- upvalues: luaAppOmniRecommendationsTopicIdAndNumberOfItemsToCache (copy), p1 (copy), discoveryClientAppStorageModule (copy)
+		task.spawn(function() --[[ Line: 43 ]]
+			-- upvalues: LuaAppOmniRecommendationsTopicIdAndNumberOfItemsToCache (upval), p1 (copy), DiscoveryClientAppStorageModule (upval), DiscoveryEventErrorLoggerModule (upval)
+			local Success, Result = pcall(function() --[[ Line: 44 ]]
+				-- upvalues: LuaAppOmniRecommendationsTopicIdAndNumberOfItemsToCache (upval), p1 (upval), DiscoveryClientAppStorageModule (upval)
 				local t = {}
 				
-				for i, v in string.split(luaAppOmniRecommendationsTopicIdAndNumberOfItemsToCache, ",") do
-					local parts = string.split(v, ":")
-					local var1 = tonumber(parts[1])
-					local var2 = tonumber(parts[2])
+				for _, value in string.split(LuaAppOmniRecommendationsTopicIdAndNumberOfItemsToCache, ",") do
+					local Parts = string.split(value, ":")
+					local Number: number? = tonumber(Parts[1])
+					local Number1: number? = tonumber(Parts[2])
 					
-					if var1 and var2 then
-						t[var1] = { count = 0, cap = var2 }
+					if Number and Number1 then
+						t[Number] = { count = 0, cap = Number1 }
 					end
 				end
-				local t_1 = {}
+				local Sorts = {}
 				
-				for i_1, v_1 in p1.sorts do
-					local topicId = t[v_1.topicId]
+				for _, sort in p1.sorts do
+					local Entry = t[sort.topicId]
+					local NoEntry: boolean = Entry == nil or sort.recommendationList == nil
+					local Copy = nil
 					
-					if topicId ~= nil and v_1.recommendationList ~= nil then
-						local cloned = table.clone(v_1)
+					if not NoEntry then
+						Copy = table.clone(sort)
+						NoEntry = Entry.cap <= Entry.count
+					end
+					if not NoEntry then
+						local RecommendationList = {}
 						
-						if topicId.cap > topicId.count then
-							local t_2 = {}
-							
-							for i_2, v_2 in v_1.recommendationList do
-								if topicId.cap <= topicId.count then break end
-								table.insert(t_2, v_2)
-								topicId.count += 1
-							end
-							cloned.recommendationList = t_2
-							table.insert(t_1, cloned)
+						for _, value1 in sort.recommendationList do
+							if Entry.cap <= Entry.count then break end
+							table.insert(RecommendationList, value1)
+							Entry.count += 1
 						end
+						Copy.recommendationList = RecommendationList
+						table.insert(Sorts, Copy)
 					end
 				end
-				local t_2 = {}
+				local Game1 = {}
 				
-				for i_2, v_2 in ipairs(t_1) do
-					for i_3, v_3 in ipairs(v_2.recommendationList) do
-						if v_3.contentType == "Game" then
-							local var3 = tostring(v_3.contentId)
-							local var4 = p1.contentMetadata.Game[var3]
+				for _, sort1 in ipairs(Sorts) do
+					for _, value2 in ipairs(sort1.recommendationList) do
+						if value2.contentType == "Game" then
+							local Text = tostring(value2.contentId)
+							local GameEntry = p1.contentMetadata.Game[Text]
 							
-							if var4 then
-								local cloned = table.clone(var4)
-								cloned.playerCount = nil
-								t_2[var3] = cloned
+							if GameEntry then
+								local Copy = table.clone(GameEntry)
+								Copy.playerCount = nil
+								Game1[Text] = Copy
 							end
 						end
 					end
 				end
-				discoveryClientAppStorageModule.setJsonStorageData(discoveryClientAppStorageModule.CacheKey.HomeOmniFeedCache, {
+				DiscoveryClientAppStorageModule.setJsonStorageData(DiscoveryClientAppStorageModule.CacheKey.HomeOmniFeedCache, {
 					pageType = p1.pageType,
-					sorts = t_1,
-					contentMetadata = { Game = t_2 }
+					sorts = Sorts,
+					contentMetadata = { Game = Game1 }
 				}, 2)
 			end)
 			
-			if not ok then
-				discoveryEventErrorLoggerModule.reportError("HomeOmniFeedCacheError", status)
+			if not Success then
+				DiscoveryEventErrorLoggerModule.reportError("HomeOmniFeedCacheError", Result)
 			end
 		end)
 	end,
-	getTopicIdToNumCacheItems = function()
-		-- upvalues: luaAppOmniRecommendationsTopicIdAndNumberOfItemsToCache (ref)
+	getTopicIdToNumCacheItems = function() --[[ Line: 23 ]]
+		-- upvalues: LuaAppOmniRecommendationsTopicIdAndNumberOfItemsToCache (copy)
 		local t = {}
 		
-		for i, v in string.split(luaAppOmniRecommendationsTopicIdAndNumberOfItemsToCache, ",") do
-			local parts = string.split(v, ":")
-			local var5 = tonumber(parts[1])
-			local var6 = tonumber(parts[2])
+		for _, value in string.split(LuaAppOmniRecommendationsTopicIdAndNumberOfItemsToCache, ",") do
+			local Parts = string.split(value, ":")
+			local Number: number? = tonumber(Parts[1])
+			local Number1: number? = tonumber(Parts[2])
 			
-			if var5 and var6 then
-				t[tostring(var5)] = { count = 0, cap = var6 }
+			if Number and Number1 then
+				t[tostring(Number)] = { count = 0, cap = Number1 }
 			end
 		end
 		return t
 	end,
-	cacheSduiHomePageData = function(p2)
-		-- upvalues: discoveryClientAppStorageModule (ref), discoveryEventErrorLoggerModule (ref)
-		task.spawn(function()
-			-- upvalues: discoveryClientAppStorageModule (copy), p2 (ref), discoveryEventErrorLoggerModule (copy)
-			local ok, status = pcall(function()
-				-- upvalues: discoveryClientAppStorageModule (copy), p2 (copy)
-				discoveryClientAppStorageModule.setJsonStorageData(discoveryClientAppStorageModule.CacheKey.HomeOmniFeedCache, p2, 3)
+	cacheSduiHomePageData = function(p2) --[[ Line: 117 ]]
+		-- upvalues: DiscoveryClientAppStorageModule (copy), DiscoveryEventErrorLoggerModule (copy)
+		task.spawn(function() --[[ Line: 118 ]]
+			-- upvalues: DiscoveryClientAppStorageModule (upval), p2 (copy), DiscoveryEventErrorLoggerModule (upval)
+			local Success, Result = pcall(function() --[[ Line: 119 ]]
+				-- upvalues: DiscoveryClientAppStorageModule (upval), p2 (upval)
+				DiscoveryClientAppStorageModule.setJsonStorageData(DiscoveryClientAppStorageModule.CacheKey.HomeOmniFeedCache, p2, 3)
 			end)
 			
-			if not ok then
-				discoveryEventErrorLoggerModule.reportError("HomeSduiFeedCacheError", status)
+			if not Success then
+				DiscoveryEventErrorLoggerModule.reportError("HomeSduiFeedCacheError", Result)
 			end
 		end)
 	end,
-	getCachedSduiHomePageData = function()
-		-- upvalues: discoveryClientAppStorageModule (ref)
-		local jsonStorageData = discoveryClientAppStorageModule.getJsonStorageData(discoveryClientAppStorageModule.CacheKey.HomeOmniFeedCache, 3)
+	getCachedSduiHomePageData = function() --[[ Line: 132 ]]
+		-- upvalues: DiscoveryClientAppStorageModule (copy)
+		local JsonStorageData = DiscoveryClientAppStorageModule.getJsonStorageData(DiscoveryClientAppStorageModule.CacheKey.HomeOmniFeedCache, 3)
 		
-		return if type(jsonStorageData) == "string" then jsonStorageData else nil
+		return if type(JsonStorageData) == "string" then JsonStorageData else nil
 	end
 }

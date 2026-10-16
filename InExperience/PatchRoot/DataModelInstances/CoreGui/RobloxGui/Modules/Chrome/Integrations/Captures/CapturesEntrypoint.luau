@@ -1,45 +1,41 @@
-﻿local chrome = script:FindFirstAncestor("Chrome")
-local coreGuiService = game:GetService("CoreGui")
-local corePackagesService = game:GetService("CorePackages")
-local starterGuiService = game:GetService("StarterGui")
-local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
-local capturesAppModule = require(coreGuiService:WaitForChild("RobloxGui").Modules.Captures.CapturesApp)
-local capturesPolicy = require(corePackagesService.Workspace.Packages.CapturesInExperience).CapturesPolicy
-local serviceModule = require(chrome.Service)
-local chromeUtilsModule = require(chrome.ChromeShared.Service.ChromeUtils)
-local commonIconModule = require(chrome.Integrations.CommonIcon)
-local mappedSignal = chromeUtilsModule.MappedSignal
-local fFlagEnableConsoleExpControls = sharedFlagsModule.FFlagEnableConsoleExpControls
-local sideSheetPlacement = require(corePackagesService.Workspace.Packages.Chrome).Enums.SideSheetPlacement
-local _ = serviceModule.AvailabilitySignal.Available
-local var1 = mappedSignal.new(capturesAppModule.onIsActiveChanged, function()
-	-- upvalues: capturesAppModule (ref)
-	return capturesAppModule.getIsActive()
+﻿local Chrome = script:FindFirstAncestor("Chrome")
+local CorePackages = game:GetService("CorePackages")
+local StarterGui = game:GetService("StarterGui")
+local CapturesAppModule = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.Captures.CapturesApp)
+local CapturesPolicy = require(CorePackages.Workspace.Packages.CapturesInExperience).CapturesPolicy
+local ServiceModule = require(Chrome.Service)
+local ChromeUtilsModule = require(Chrome.ChromeShared.Service.ChromeUtils)
+local CommonIconModule = require(Chrome.Integrations.CommonIcon)
+local FFlagEnableConsoleExpControls = require(CorePackages.Workspace.Packages.SharedFlags).FFlagEnableConsoleExpControls
+local _ = ServiceModule.AvailabilitySignal.Available
+local NewResult = ChromeUtilsModule.MappedSignal.new(CapturesAppModule.onIsActiveChanged, function() --[[ Line: 27 ]]
+	-- upvalues: CapturesAppModule (copy)
+	return CapturesAppModule.getIsActive()
 end)
-local var2 = serviceModule:register({
+local RegisterResult = ServiceModule:register({
 	id = "camera_entrypoint",
 	label = "Feature.SettingsHub.Label.Captures",
-	initialAvailability = if starterGuiService:GetCoreGuiEnabled(Enum.CoreGuiType.All) or starterGuiService:GetCoreGuiEnabled(Enum.CoreGuiType.Captures) then serviceModule.AvailabilitySignal.Available else serviceModule.AvailabilitySignal.Unavailable,
-	sideSheetPlacement = sideSheetPlacement.BelowFold,
-	activated = function(_)
-		-- upvalues: capturesAppModule (ref)
-		capturesAppModule.onToggleActivationFromChrome()
+	initialAvailability = if StarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.All) or StarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.Captures) then ServiceModule.AvailabilitySignal.Available else ServiceModule.AvailabilitySignal.Unavailable,
+	sideSheetPlacement = require(CorePackages.Workspace.Packages.Chrome).Enums.SideSheetPlacement.BelowFold,
+	activated = function(_) --[[ Line: 36 ]]
+		-- upvalues: CapturesAppModule (copy)
+		CapturesAppModule.onToggleActivationFromChrome()
 	end,
-	isActivated = var1,
+	isActivated = NewResult,
 	components = {
-		Icon = function(_)
-			-- upvalues: commonIconModule (ref), var1 (ref)
-			return commonIconModule("icons/controls/cameraOff", "icons/controls/cameraOn", var1)
+		Icon = function(_) --[[ Line: 41 ]]
+			-- upvalues: CommonIconModule (copy), NewResult (copy)
+			return CommonIconModule("icons/controls/cameraOff", "icons/controls/cameraOn", NewResult)
 		end
 	}
 })
-chromeUtilsModule.setCoreGuiAvailability(var2, Enum.CoreGuiType.Captures)
+ChromeUtilsModule.setCoreGuiAvailability(RegisterResult, Enum.CoreGuiType.Captures)
 
-if fFlagEnableConsoleExpControls then
-	local var3 = capturesPolicy.PolicyImplementation.read()
+if FFlagEnableConsoleExpControls then
+	local ReadResult = CapturesPolicy.PolicyImplementation.read()
 	
-	if not (if var3 then capturesPolicy.Mapper(var3).eligibleForCapturesFeature() else false) then
-		var2.availability:forceUnavailable()
+	if not (if ReadResult then CapturesPolicy.Mapper(ReadResult).eligibleForCapturesFeature() else false) then
+		RegisterResult.availability:forceUnavailable()
 	end
 end
-return var2
+return RegisterResult

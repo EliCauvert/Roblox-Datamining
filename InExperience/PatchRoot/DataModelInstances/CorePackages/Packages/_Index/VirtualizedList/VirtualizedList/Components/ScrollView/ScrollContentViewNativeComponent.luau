@@ -1,25 +1,26 @@
-﻿local parent = script.Parent.Parent.Parent.Parent
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local object = luauPolyfillModule.Object
-local reactModule = require(parent.React)
-local change = reactModule.Change
-local scrollContentViewNativeComponent = reactModule.Component:extend("ScrollContentViewNativeComponent")
+﻿local Parent = script.Parent.Parent.Parent.Parent
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Object = LuauPolyfillModule.Object
+local ReactModule = require(Parent.React)
+local Change = ReactModule.Change
+local ScrollContentViewNativeComponent = ReactModule.Component:extend("ScrollContentViewNativeComponent")
 
-function scrollContentViewNativeComponent.init(p1, p2)
-	p1.props = p2
+function ScrollContentViewNativeComponent.init(p1, Props) --[[ Line: 27 ]]
+	p1.props = Props
 end
 
-function scrollContentViewNativeComponent.render(p1)
-	-- upvalues: array (ref), object (ref), change (ref), reactModule (ref)
-	return reactModule.createElement("Frame", object.assign({
+function ScrollContentViewNativeComponent.render(p1) --[[ Line: 31 ]]
+	-- upvalues: Array (copy), Object (copy), Change (copy), ReactModule (copy)
+	return ReactModule.createElement("Frame", Object.assign({
 		Name = "RCTScrollContentView",
-		[change.AbsoluteSize] = p1.props.onLayout,
+		[Change.AbsoluteSize] = p1.props.onLayout,
+		BorderSizePixel = 0,
 		Size = UDim2.new(1, 0, 1, 0)
-	}, if p1.props.AutomaticSize then { AutomaticSize = p1.props.AutomaticSize } else nil, if array.isArray(p1.props.style) then array.reduce(p1.props.style, function(p2, p3)
-		-- upvalues: object (copy)
-		return object.assign(p2, p3)
+	}, if p1.props.AutomaticSize then { AutomaticSize = p1.props.AutomaticSize } else nil, if Array.isArray(p1.props.style) then Array.reduce(p1.props.style, function(p2, p3) --[[ Line: 33 ]]
+		-- upvalues: Object (upval)
+		return Object.assign(p2, p3)
 	end, {}) else p1.props.style), p1.props.children)
 end
 
-return scrollContentViewNativeComponent
+return ScrollContentViewNativeComponent

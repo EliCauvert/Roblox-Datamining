@@ -1,58 +1,73 @@
-﻿local socialCarousel = script:FindFirstAncestor("SocialCarousel")
-local parent = socialCarousel.Parent
-local reactModule = require(parent.React)
-local tile = require(socialCarousel.Common.Enums).Tile
-local userTileModule = require(socialCarousel.Components.Tiles.UserTile)
-local addFriendsTileModule = require(socialCarousel.Components.Tiles.AddFriendsTile)
-local friendsHintTileModule = require(socialCarousel.Components.Tiles.FriendsHintTile)
-local startSquadTileModule = require(socialCarousel.Components.Tiles.StartSquadTile)
-local shareQRTileModule = require(socialCarousel.Components.Tiles.ShareQRTile)
-local tileModule = require(socialCarousel.BaseComponents.Tile)
+﻿local SocialCarousel = script:FindFirstAncestor("SocialCarousel")
+local Parent = SocialCarousel.Parent
+local ReactModule = require(Parent.React)
+local Tile = require(SocialCarousel.Common.Enums).Tile
+local UserTileModule = require(SocialCarousel.Components.Tiles.UserTile)
+local AddFriendsTileModule = require(SocialCarousel.Components.Tiles.AddFriendsTile)
+local FriendsHintTileModule = require(SocialCarousel.Components.Tiles.FriendsHintTile)
+local StartSquadTileModule = require(SocialCarousel.Components.Tiles.StartSquadTile)
+local ShareQRTileModule = require(SocialCarousel.Components.Tiles.ShareQRTile)
+local TileModule = require(SocialCarousel.BaseComponents.Tile)
+local FFlagSocialCarouselInGameTitleMarquee = require(Parent.SharedFlags).FFlagSocialCarouselInGameTitleMarquee
+
+local function renderUserTile(Item, Index, ItemSize, SelectionOrder, OnTileContentChanged, PlayStatus, OnMarqueeFinished, MarqueeRunId, OnMarqueeHover, OnMarqueeHoverEnd) --[[ Line: 15 ]]
+	-- upvalues: FFlagSocialCarouselInGameTitleMarquee (copy), ReactModule (copy), UserTileModule (copy)
+	local config = {
+		item = Item,
+		index = Index,
+		itemSize = ItemSize,
+		selectionOrder = SelectionOrder,
+		onTileContentChanged = OnTileContentChanged
+	}
+	
+	if FFlagSocialCarouselInGameTitleMarquee then
+		config.playStatus = PlayStatus
+		config.onMarqueeFinished = OnMarqueeFinished
+		config.marqueeRunId = MarqueeRunId
+		config.onMarqueeHover = OnMarqueeHover
+		config.onMarqueeHoverEnd = OnMarqueeHoverEnd
+	end
+	return ReactModule.createElement(UserTileModule, config)
+end
 
 return {
-	[tile.Friend] = function(p1, p2, p3, p4, p5)
-		-- upvalues: reactModule (ref), userTileModule (ref)
-		return reactModule.createElement(userTileModule, {
-			item = p1,
-			index = p2,
-			itemSize = p3,
-			selectionOrder = p4,
-			onTileContentChanged = p5
+	[Tile.Friend] = renderUserTile,
+	[Tile.Recommendation] = renderUserTile,
+	[Tile.AddFriends] = function(_, Index, ItemSize, SelectionOrder, _) --[[ Line: 59 ]]
+		-- upvalues: ReactModule (copy), AddFriendsTileModule (copy)
+		return ReactModule.createElement(AddFriendsTileModule, {
+			index = Index,
+			itemSize = ItemSize,
+			selectionOrder = SelectionOrder
 		})
 	end,
-	[tile.Recommendation] = function(p1, p2, p3, p4, p5)
-		-- upvalues: reactModule (ref), userTileModule (ref)
-		return reactModule.createElement(userTileModule, {
-			item = p1,
-			index = p2,
-			itemSize = p3,
-			selectionOrder = p4,
-			onTileContentChanged = p5
+	[Tile.FriendsHint] = function(_, Index, ItemSize, SelectionOrder, _) --[[ Line: 66 ]]
+		-- upvalues: ReactModule (copy), FriendsHintTileModule (copy)
+		return ReactModule.createElement(FriendsHintTileModule, {
+			index = Index,
+			itemSize = ItemSize,
+			selectionOrder = SelectionOrder
 		})
 	end,
-	[tile.AddFriends] = function(_, p1, p2, p3, _)
-		-- upvalues: reactModule (ref), addFriendsTileModule (ref)
-		return reactModule.createElement(addFriendsTileModule, { index = p1, itemSize = p2, selectionOrder = p3 })
-	end,
-	[tile.FriendsHint] = function(_, p1, p2, p3, _)
-		-- upvalues: reactModule (ref), friendsHintTileModule (ref)
-		return reactModule.createElement(friendsHintTileModule, { index = p1, itemSize = p2, selectionOrder = p3 })
-	end,
-	[tile.StartSquad] = function(p1, p2, p3, p4, _)
-		-- upvalues: reactModule (ref), startSquadTileModule (ref)
-		return reactModule.createElement(startSquadTileModule, {
-			index = p2,
-			item = p1,
-			itemSize = p3,
-			selectionOrder = p4
+	[Tile.StartSquad] = function(Item, Index, ItemSize, SelectionOrder, _) --[[ Line: 73 ]]
+		-- upvalues: ReactModule (copy), StartSquadTileModule (copy)
+		return ReactModule.createElement(StartSquadTileModule, {
+			index = Index,
+			item = Item,
+			itemSize = ItemSize,
+			selectionOrder = SelectionOrder
 		})
 	end,
-	[tile.ShareQR] = if require(parent.SharedFlags).FFlagSocialCarouselShareQREnabled then function(_, p1, p2, p3, _)
-		-- upvalues: reactModule (ref), shareQRTileModule (ref)
-		return reactModule.createElement(shareQRTileModule, { index = p1, itemSize = p2, selectionOrder = p3 })
+	[Tile.ShareQR] = if require(Parent.SharedFlags).FFlagSocialCarouselShareQREnabled then function(_, Index, ItemSize, SelectionOrder, _) --[[ Line: 82 ]]
+		-- upvalues: ReactModule (copy), ShareQRTileModule (copy)
+		return ReactModule.createElement(ShareQRTileModule, {
+			index = Index,
+			itemSize = ItemSize,
+			selectionOrder = SelectionOrder
+		})
 	end else nil,
-	[tile.Skeleton] = function(_, p1, p2, _, _)
-		-- upvalues: reactModule (ref), tileModule (ref)
-		return reactModule.createElement(tileModule, { isLoading = true, index = p1, itemSize = p2 })
+	[Tile.Skeleton] = function(_, Index, ItemSize, _, _) --[[ Line: 90 ]]
+		-- upvalues: ReactModule (copy), TileModule (copy)
+		return ReactModule.createElement(TileModule, { isLoading = true, index = Index, itemSize = ItemSize })
 	end
 }

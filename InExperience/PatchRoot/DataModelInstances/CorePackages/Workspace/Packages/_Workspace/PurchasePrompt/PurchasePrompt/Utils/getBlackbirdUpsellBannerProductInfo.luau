@@ -1,23 +1,23 @@
 ﻿local _ = require(script:FindFirstAncestor("PurchasePrompt").Parent.RobloxSubscriptionPurchaseApp)
 
-return function(p1)
-	if type(p1) ~= "table" or #p1 == 0 then
+return function(Entry) --[[ Line: 11 | Named "getBlackbirdUpsellBannerProductInfo" ]]
+	if type(Entry) ~= "table" or #Entry == 0 then
 		return nil
 	end
-	local var1 = p1[1]
-	local var2 = if var1.EligibleOffers and var1.EligibleOffers[1] then var1.EligibleOffers[1].OfferType == "FreeTrial" else false
-	local discountPercent = nil
-	local featureConfig = var1.ProductTypeDetails and (var1.ProductTypeDetails.RobloxSubscriptionProductDetails and var1.ProductTypeDetails.RobloxSubscriptionProductDetails.FeatureConfig)
+	local Entry1 = Entry[1]
+	local IsFreeTrial: boolean = if Entry1.EligibleOffers and Entry1.EligibleOffers[1] then Entry1.EligibleOffers[1].OfferType == "FreeTrial" else false
+	local DiscountPercent = nil
+	local FeatureConfig = Entry1.ProductTypeDetails and (Entry1.ProductTypeDetails.RobloxSubscriptionProductDetails and Entry1.ProductTypeDetails.RobloxSubscriptionProductDetails.FeatureConfig)
 	
-	if featureConfig and featureConfig.VirtualTransactionDiscounts then
-		local var3 = featureConfig.VirtualTransactionDiscounts[1]
+	if FeatureConfig and FeatureConfig.VirtualTransactionDiscounts then
+		local VirtualTransactionDiscount = FeatureConfig.VirtualTransactionDiscounts[1]
 		
-		if var3 then
-			discountPercent = var3.DiscountPercent
+		if VirtualTransactionDiscount then
+			DiscountPercent = VirtualTransactionDiscount.DiscountPercent
 		end
 	end
 	return {
-		isFreeTrial = var2,
-		initialDiscountPercentage = discountPercent
+		isFreeTrial = IsFreeTrial,
+		initialDiscountPercentage = DiscountPercent
 	}
 end

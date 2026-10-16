@@ -1,155 +1,153 @@
-﻿local sduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
-local parent = sduiCoreSystem.Parent
-local cryoModule = require(parent.Cryo)
-local tutilsModule = require(parent.tutils)
-local _ = require(sduiCoreSystem.SduiBuilderTypes)
-local sduiConfigTypesModule = require(sduiCoreSystem.SduiConfigTypes)
-local sduiErrorsModule = require(sduiCoreSystem.SduiErrors)
-local validateInterfaceModule = require(sduiCoreSystem.validateInterface)
-local sduiTemplateInterface = sduiConfigTypesModule.SduiTemplateInterface
+﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
+local Parent = SduiCoreSystem.Parent
+local CryoModule = require(Parent.Cryo)
+local TutilsModule = require(Parent.tutils)
+local _ = require(SduiCoreSystem.SduiBuilderTypes)
+local SduiErrorsModule = require(SduiCoreSystem.SduiErrors)
+local ValidateInterfaceModule = require(SduiCoreSystem.validateInterface)
+local SduiTemplateInterface = require(SduiCoreSystem.SduiConfigTypes).SduiTemplateInterface
 local t = {}
 
-local function _(p1, p2)
-	-- upvalues: tutilsModule (ref)
-	p2 = p2 or {}
+local function _(p1, p2) --[[ Line: 26 | Named "deepJoinArrays" ]]
+	-- upvalues: TutilsModule (copy)
+	local List = p2 or {}
 	
-	for i, v in tutilsModule.deepCopy(p1) do
-		table.insert(p2, v)
+	for _, value in TutilsModule.deepCopy(p1) do
+		table.insert(List, value)
 	end
-	return p2
+	return List
 end
 
-local function deepJoin(p3, p4)
-	-- upvalues: t (ref), tutilsModule (ref), deepJoin (ref)
-	if not p3 then
-		return p4
+local function deepJoin(Props, Props1) --[[ Line: 36 ]]
+	-- upvalues: t (copy), TutilsModule (copy), deepJoin (copy)
+	if not Props then
+		return Props1
 	end
-	local var1 = tutilsModule.deepCopy(p3)
+	local DeepCopyResult = TutilsModule.deepCopy(Props)
 	
-	for i, v in p4 or t do
-		if typeof(v) == "table" then
-			var1[i] = deepJoin(var1[i], v)
+	for i, value in Props1 or t do
+		if typeof(value) == "table" then
+			DeepCopyResult[i] = deepJoin(DeepCopyResult[i], value)
 		else
-			var1[i] = v
+			DeepCopyResult[i] = value
 		end
 	end
-	return var1
+	return DeepCopyResult
 end
 
-local t_1 = {}
-t_1.__index = t_1
+local SduiTemplateRegistry = {}
+SduiTemplateRegistry.__index = SduiTemplateRegistry
 
-function t_1.new(p5)
-	-- upvalues: t_1 (ref)
-	local t = { _registeredTemplates = p5 or {} }
-	setmetatable(t, t_1)
+function SduiTemplateRegistry.new(p3) --[[ Line: 60 ]]
+	-- upvalues: SduiTemplateRegistry (copy)
+	local config = { _registeredTemplates = p3 or {} }
+	setmetatable(config, SduiTemplateRegistry)
 	
-	return t
+	return config
 end
 
-function t_1:getTemplate(p5)
-	return self._registeredTemplates[p5]
+function SduiTemplateRegistry:getTemplate(p3) --[[ Line: 69 ]]
+	return self._registeredTemplates[p3]
 end
 
-function t_1.shouldResolveTemplate(_, p5)
-	return p5.templateKey ~= nil and p5.templateKey ~= "NONE"
+function SduiTemplateRegistry:shouldResolveTemplate(p3): boolean --[[ Line: 73 ]]
+	return p3.templateKey ~= nil and p3.templateKey ~= "NONE"
 end
 
-function t_1:resolveTemplateForConfig(p5, p6, p7)
-	-- upvalues: sduiErrorsModule (ref), validateInterfaceModule (ref), sduiTemplateInterface (ref), t_1 (ref), cryoModule (ref), t (ref), deepJoin (ref), tutilsModule (ref)
-	local templateKey = p5.templateKey
+function SduiTemplateRegistry:resolveTemplateForConfig(RegisteredTemplate, p3, p4): boolean --[[ Line: 80 ]]
+	-- upvalues: SduiErrorsModule (copy), ValidateInterfaceModule (copy), SduiTemplateInterface (copy), SduiTemplateRegistry (copy), CryoModule (copy), t (copy), deepJoin (copy), TutilsModule (copy)
+	local TemplateKey = RegisteredTemplate.templateKey
 	
-	if not templateKey or templateKey == "NONE" then
+	if not TemplateKey or TemplateKey == "NONE" then
 		return true
 	end
-	assert(templateKey, "templateKey must exist")
-	p7 = p7 or {}
-	assert(p7, "seen exists")
+	assert(TemplateKey, "templateKey must exist")
+	local P12 = p4 or {}
+	assert(P12, "seen exists")
 	
-	if p7[p5] then
-		p6.dependencies.logger.reportError(sduiErrorsModule.SduiErrorType.DetectedCycleInTemplates, {
-			componentType = p5.componentType,
-			value = templateKey,
-			message = `Found cycle in template with key {templateKey}`
-		}, p6.appPage)
-		p5.templateKey = "NONE"
+	if P12[RegisteredTemplate] then
+		p3.dependencies.logger.reportError(SduiErrorsModule.SduiErrorType.DetectedCycleInTemplates, {
+			componentType = RegisteredTemplate.componentType,
+			value = TemplateKey,
+			message = `Found cycle in template with key {TemplateKey}`
+		}, p3.appPage)
+		RegisteredTemplate.templateKey = "NONE"
 		
 		return false
 	end
-	p7[p5] = true
-	local var2 = self._registeredTemplates[templateKey]
+	P12[RegisteredTemplate] = true
+	local RegisteredTemplate1 = self._registeredTemplates[TemplateKey]
 	
-	if var2 == nil then
-		p6.dependencies.logger.reportError(sduiErrorsModule.SduiErrorType.FailedToFindTemplate, {
-			componentType = p5.componentType,
-			value = templateKey,
-			message = `Failed to find template for key {templateKey}`
-		}, p6.appPage)
-		p5.templateKey = "NONE"
+	if RegisteredTemplate1 == nil then
+		p3.dependencies.logger.reportError(SduiErrorsModule.SduiErrorType.FailedToFindTemplate, {
+			componentType = RegisteredTemplate.componentType,
+			value = TemplateKey,
+			message = `Failed to find template for key {TemplateKey}`
+		}, p3.appPage)
+		RegisteredTemplate.templateKey = "NONE"
 		
 		return false
 	end
-	assert(var2, "template exists")
-	local var3, var4 = validateInterfaceModule(var2, sduiTemplateInterface, false)
+	assert(RegisteredTemplate1, "template exists")
+	local ValidateInterfaceModuleResult, ValidateInterfaceModuleResult2 = ValidateInterfaceModule(RegisteredTemplate1, SduiTemplateInterface, false)
 	
-	if not var3 then
-		p6.dependencies.logger.reportError(sduiErrorsModule.SduiErrorType.InvalidComponentConfig, {
-			message = `Invalid Template for templateKey {templateKey}. err: {var4}`,
-			componentType = p5.componentType or var2.componentType,
-			name = templateKey
-		}, p6.appPage)
+	if not ValidateInterfaceModuleResult then
+		p3.dependencies.logger.reportError(SduiErrorsModule.SduiErrorType.InvalidComponentConfig, {
+			message = `Invalid Template for templateKey {TemplateKey}. err: {ValidateInterfaceModuleResult2}`,
+			componentType = RegisteredTemplate.componentType or RegisteredTemplate1.componentType,
+			name = TemplateKey
+		}, p3.appPage)
 	end
-	t_1.resolveTemplateForConfig(self, var2, p6, p7)
-	p5.templateKey = "NONE"
+	SduiTemplateRegistry.resolveTemplateForConfig(self, RegisteredTemplate1, p3, P12)
+	RegisteredTemplate.templateKey = "NONE"
 	
-	if p5.componentType then
-		if p5.componentType and var2.componentType and p5.componentType ~= var2.componentType then
-			p6.dependencies.logger.reportError(sduiErrorsModule.SduiErrorType.ComponentTypeMismatchWithTemplate, {
-				componentType = p5.componentType,
-				value = templateKey,
-				message = `Mismatch in componentType for template {templateKey}. Component {p5.componentType} and template {var2.componentType}`
-			}, p6.appPage)
-			
-			return false
-		elseif var2.analyticsData then
-			p5.analyticsData = cryoModule.Dictionary.join(var2.analyticsData, p5.analyticsData or t)
-		end
-		if var2.props then
-			local ok, status = pcall(function()
-				-- upvalues: deepJoin (copy), var2 (ref), p5 (ref)
-				return deepJoin(var2.props, p5.props)
-			end)
-			
-			if ok then
-				p5.props = status
-			else
-				p6.dependencies.logger.reportError(sduiErrorsModule.SduiErrorType.FailedToJoinTemplateProps, {
-					componentType = p5.componentType,
-					value = templateKey,
-					message = status
-				}, p6.appPage)
-			end
-		end
-		if var2.children then
-			local children = p5.children or {}
-			
-			for i, v in tutilsModule.deepCopy(var2.children) do
-				table.insert(children, v)
-			end
-			p5.children = children
-		end
-		if var2.conditionalProps then
-			local conditionalProps = p5.conditionalProps or {}
-			
-			for i, v in tutilsModule.deepCopy(var2.conditionalProps) do
-				table.insert(conditionalProps, v)
-			end
-			p5.conditionalProps = conditionalProps
-		end
-		return true
-	else
-		p5.componentType = var2.componentType
+	if not RegisteredTemplate.componentType then
+		RegisteredTemplate.componentType = RegisteredTemplate1.componentType
+	elseif RegisteredTemplate.componentType and RegisteredTemplate1.componentType and RegisteredTemplate.componentType ~= RegisteredTemplate1.componentType then
+		p3.dependencies.logger.reportError(SduiErrorsModule.SduiErrorType.ComponentTypeMismatchWithTemplate, {
+			componentType = RegisteredTemplate.componentType,
+			value = TemplateKey,
+			message = `Mismatch in componentType for template {TemplateKey}. Component {RegisteredTemplate.componentType} and template {RegisteredTemplate1.componentType}`
+		}, p3.appPage)
+		
+		return false
 	end
+	if RegisteredTemplate1.analyticsData then
+		RegisteredTemplate.analyticsData = CryoModule.Dictionary.join(RegisteredTemplate1.analyticsData, RegisteredTemplate.analyticsData or t)
+	end
+	if RegisteredTemplate1.props then
+		local Success, Result = pcall(function() --[[ Line: 158 ]]
+			-- upvalues: deepJoin (upval), RegisteredTemplate1 (copy), RegisteredTemplate (copy)
+			return (deepJoin(RegisteredTemplate1.props, RegisteredTemplate.props))
+		end)
+		
+		if Success then
+			RegisteredTemplate.props = Result
+		else
+			p3.dependencies.logger.reportError(SduiErrorsModule.SduiErrorType.FailedToJoinTemplateProps, {
+				componentType = RegisteredTemplate.componentType,
+				value = TemplateKey,
+				message = Result
+			}, p3.appPage)
+		end
+	end
+	if RegisteredTemplate1.children then
+		local Children = RegisteredTemplate.children or {}
+		
+		for _, value in TutilsModule.deepCopy(RegisteredTemplate1.children) do
+			table.insert(Children, value)
+		end
+		RegisteredTemplate.children = Children
+	end
+	if RegisteredTemplate1.conditionalProps then
+		local ConditionalProps = RegisteredTemplate.conditionalProps or {}
+		
+		for _, value1 in TutilsModule.deepCopy(RegisteredTemplate1.conditionalProps) do
+			table.insert(ConditionalProps, value1)
+		end
+		RegisteredTemplate.conditionalProps = ConditionalProps
+	end
+	return true
 end
 
-return t_1
+return SduiTemplateRegistry

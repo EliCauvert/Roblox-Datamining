@@ -1,3 +1,3 @@
-﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator(script.Name, function(p1)
-	return { isSubjectToChinaPolicies = p1 }
+﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator(script.Name, function(IsSubjectToChinaPolicies) --[[ Line: 4 ]]
+	return { isSubjectToChinaPolicies = IsSubjectToChinaPolicies }
 end)

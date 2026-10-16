@@ -1,22 +1,21 @@
-﻿local editProfile = script:FindFirstAncestor("EditProfile")
-local parent = editProfile.Parent
-local httpModule = require(parent.Http)
-local httpRequestModule = require(parent.HttpRequest)
-local _ = require(parent.DataHydration)
-local enumsModule = require(editProfile.Common.Enums)
-local url = httpModule.Url
-local var1 = httpRequestModule.config({
-	requestFunction = function(p1, p2, p3)
-		-- upvalues: httpRequestModule (ref)
-		return httpRequestModule.requestFunctions.RequestInternal(p1, p2, p3)
+﻿local EditProfile = script:FindFirstAncestor("EditProfile")
+local Parent = EditProfile.Parent
+local HttpRequestModule = require(Parent.HttpRequest)
+local _ = require(Parent.DataHydration)
+local EnumsModule = require(EditProfile.Common.Enums)
+local Url = require(Parent.Http).Url
+local ConfigResult = HttpRequestModule.config({
+	requestFunction = function(p1, p2, p3) --[[ Line: 16 ]]
+		-- upvalues: HttpRequestModule (copy)
+		return HttpRequestModule.requestFunctions.RequestInternal(p1, p2, p3)
 	end
 })
 
-return function(p1)
-	-- upvalues: url (ref), var1 (ref), enumsModule (ref)
-	return var1(string.format("%s/users/%s", url.USERS_URL, p1), enumsModule.RequestMethods.GET):andThen(function(p2)
-		return p2.responseBody.description or ""
-	end):catch(function(p2)
-		error(p2)
+return function(p1) --[[ Line: 21 | Named "fetchUserDescription" ]]
+	-- upvalues: Url (copy), ConfigResult (copy), EnumsModule (copy)
+	return ConfigResult(string.format("%s/users/%s", Url.USERS_URL, p1), EnumsModule.RequestMethods.GET):andThen(function(Result) --[[ Line: 25 ]]
+		return Result.responseBody.description or ""
+	end):catch(function(Err) --[[ Line: 28 ]]
+		error(Err)
 	end)
 end

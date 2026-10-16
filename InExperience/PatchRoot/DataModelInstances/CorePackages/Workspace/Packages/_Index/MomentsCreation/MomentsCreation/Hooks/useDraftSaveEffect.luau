@@ -1,38 +1,37 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local parent = momentsCreation.Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local momentsCommonModule = require(parent.MomentsCommon)
-local getCreationFlowStoreModule = require(momentsCreation.Stores.GetCreationFlowStore)
-local momentsDraftStorageModule = require(momentsCreation.Storage.MomentsDraftStorage)
-local fireAnalyticsEventModule = require(momentsCreation.Analytics.fireAnalyticsEvent)
-local fFlagMomentsCommentsCreatorControlModule = require(momentsCreation.Flags.FFlagMomentsCommentsCreatorControl)
-local eventNames = momentsCommonModule.Analytics.EventNames
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local Parent = MomentsCreation.Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local GetCreationFlowStoreModule = require(MomentsCreation.Stores.GetCreationFlowStore)
+local MomentsDraftStorageModule = require(MomentsCreation.Storage.MomentsDraftStorage)
+local FireAnalyticsEventModule = require(MomentsCreation.Analytics.fireAnalyticsEvent)
+local FFlagMomentsCommentsCreatorControlModule = require(MomentsCreation.Flags.FFlagMomentsCommentsCreatorControl)
+local EventNames = require(Parent.MomentsCommon).Analytics.EventNames
 
-return function()
-	-- upvalues: getCreationFlowStoreModule (ref), reactModule (ref), signalsModule (ref), fFlagMomentsCommentsCreatorControlModule (ref), momentsDraftStorageModule (ref), fireAnalyticsEventModule (ref), eventNames (ref)
-	local var1 = getCreationFlowStoreModule(false)
-	reactModule.useEffect(function()
-		-- upvalues: signalsModule (copy), var1 (ref), fFlagMomentsCommentsCreatorControlModule (copy), momentsDraftStorageModule (copy), fireAnalyticsEventModule (copy), eventNames (copy)
-		return signalsModule.createEffect(function(p1)
-			-- upvalues: var1 (copy), fFlagMomentsCommentsCreatorControlModule (copy), momentsDraftStorageModule (copy), fireAnalyticsEventModule (copy), eventNames (copy)
-			local selectedCapture = var1.getSelectedCapture(p1)
-			local description = var1.getDescription(p1)
-			local var2 = if fFlagMomentsCommentsCreatorControlModule then var1.getCommentsEnabled(p1) else nil
-			local editsMap = var1.getEditsMap(p1)
+return function(p1) --[[ Line: 24 | Named "useDraftSaveEffect" ]]
+	-- upvalues: GetCreationFlowStoreModule (copy), ReactModule (copy), SignalsModule (copy), FFlagMomentsCommentsCreatorControlModule (copy), MomentsDraftStorageModule (copy), FireAnalyticsEventModule (copy), EventNames (copy)
+	local CreationFlowStoreModule = GetCreationFlowStoreModule(false)
+	ReactModule.useEffect(function() --[[ Line: 27 ]]
+		-- upvalues: p1 (copy), SignalsModule (upval), CreationFlowStoreModule (copy), FFlagMomentsCommentsCreatorControlModule (upval), MomentsDraftStorageModule (upval), FireAnalyticsEventModule (upval), EventNames (upval)
+		return if p1 then nil else SignalsModule.createEffect(function(p2) --[[ Line: 32 ]]
+			-- upvalues: CreationFlowStoreModule (upval), FFlagMomentsCommentsCreatorControlModule (upval), MomentsDraftStorageModule (upval), FireAnalyticsEventModule (upval), EventNames (upval)
+			local SelectedCapture = CreationFlowStoreModule.getSelectedCapture(p2)
+			local Description = CreationFlowStoreModule.getDescription(p2)
+			local CommentsEnabled = if FFlagMomentsCommentsCreatorControlModule then CreationFlowStoreModule.getCommentsEnabled(p2) else nil
+			local EditsMap = CreationFlowStoreModule.getEditsMap(p2)
 			
-			if selectedCapture == nil then return end
-			if not momentsDraftStorageModule.save({
+			if SelectedCapture == nil then return end
+			if not MomentsDraftStorageModule.save({
 				captureRef = {
-					localId = selectedCapture.LocalId,
-					captureType = selectedCapture.CaptureType
+					localId = SelectedCapture.LocalId,
+					captureType = SelectedCapture.CaptureType
 				},
-				description = description,
-				commentsEnabled = var2,
-				edits = editsMap
+				description = Description,
+				commentsEnabled = CommentsEnabled,
+				edits = EditsMap
 			}) then
-				fireAnalyticsEventModule(eventNames.DraftSaveFailedEvent, {})
+				FireAnalyticsEventModule(EventNames.DraftSaveFailedEvent, {})
 			end
 		end)
-	end, { var1 })
+	end, { CreationFlowStoreModule, p1 })
 end

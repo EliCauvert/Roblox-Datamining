@@ -1,89 +1,100 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local dataHydrationModule = require(parent.DataHydration)
-local presenceType = require(appChat.Http.RoduxPresence).Enums.PresenceType
-local circle25 = require(parent.UIBlox).App.ImageSet.Images["component_assets/circle_25"]
-local fFlagAppChatPresenceStoreMigrationModule = require(appChat.Flags.FFlagAppChatPresenceStoreMigration)
-local presenceType_1 = dataHydrationModule.Presence.PresenceEnums.PresenceType
-local t = {
-	[presenceType.Offline] = "Common.Presence.Label.Offline",
-	[presenceType.Online] = "Common.Presence.Label.Online",
-	[presenceType.InGame] = "",
-	[presenceType.InStudio] = ""
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local PresenceType = require(AppChat.Http.RoduxPresence).Enums.PresenceType
+local ComponentAssetsCircle25 = require(Parent.UIBlox).App.ImageSet.Images["component_assets/circle_25"]
+local FFlagAppChatPresenceStoreMigrationModule = require(AppChat.Flags.FFlagAppChatPresenceStoreMigration)
+local PresenceType1 = require(Parent.DataHydration).Presence.PresenceEnums.PresenceType
+local UserPresenceText = {
+	[PresenceType.Offline] = "Common.Presence.Label.Offline",
+	[PresenceType.Online] = "Common.Presence.Label.Online",
+	[PresenceType.InGame] = "",
+	[PresenceType.InStudio] = ""
 }
-local t_1 = {
-	[presenceType.Offline] = "",
-	[presenceType.Online] = circle25,
-	[presenceType.InGame] = circle25,
-	[presenceType.InStudio] = circle25
+local UserPresenceImage = {
+	[PresenceType.Offline] = "",
+	[PresenceType.Online] = ComponentAssetsCircle25,
+	[PresenceType.InGame] = ComponentAssetsCircle25,
+	[PresenceType.InStudio] = ComponentAssetsCircle25
 }
-local t_2 = {
+local config = {
 	Offline = "Common.Presence.Label.Offline",
 	Online = "Common.Presence.Label.Online",
 	InGame = "",
 	InStudio = ""
 }
-local t_3 = {
+local config1 = {
 	Offline = "",
-	Online = circle25,
-	InGame = circle25,
-	InStudio = circle25
+	Online = ComponentAssetsCircle25,
+	InGame = ComponentAssetsCircle25,
+	InStudio = ComponentAssetsCircle25
 }
 
-return {
-	getUserDisplayPresence = if fFlagAppChatPresenceStoreMigrationModule then function(p1, p2)
-		-- upvalues: t_2 (ref), presenceType_1 (ref), t_3 (ref)
-		if not p1 then
-			return { text = "" }
-		elseif p2 then
-			return {
-				text = t_2[presenceType_1.Online],
-				image = t_3[presenceType_1.Online]
-			}
-		end
-		local t = {}
-		local userPresenceType = p1.userPresenceType
-		local lastLocation = p1.lastLocation
-		t.text = if userPresenceType == presenceType_1.Offline then t_2[presenceType_1.Offline] elseif userPresenceType == presenceType_1.Online then t_2[presenceType_1.Online] elseif userPresenceType ~= presenceType_1.InGame and userPresenceType ~= presenceType_1.InStudio then if lastLocation and lastLocation ~= "" then tostring(lastLocation) else t_2[presenceType_1.Online] else ""
-		t.image = t_3[p1.userPresenceType]
-		
-		return t
-	end else function(p1, p2)
-		-- upvalues: t (ref), presenceType (ref), t_1 (ref)
-		local t_2
-		if not p1 then
-			return { text = "" }
-		elseif p2 then
-			t_2 = {
-				text = t[presenceType.Online],
-				image = t_1[presenceType.Online]
+local function v10(p1) --[[ Line: 44 ]]
+	-- upvalues: PresenceType (copy), UserPresenceText (copy)
+	local UserPresenceType = p1.userPresenceType
+	local LastLocation = p1.lastLocation
+	
+	return if UserPresenceType == PresenceType.Offline then UserPresenceText[PresenceType.Offline] elseif UserPresenceType == PresenceType.Online then UserPresenceText[PresenceType.Online] elseif UserPresenceType == PresenceType.InGame or UserPresenceType == PresenceType.InStudio then if LastLocation then tostring(LastLocation) else UserPresenceText[PresenceType.Online] else ""
+end
+
+local function getUserPresenceTextFromStore(p1) --[[ Line: 63 ]]
+	-- upvalues: PresenceType1 (copy), config (copy)
+	local UserPresenceType = p1.userPresenceType
+	local LastLocation = p1.lastLocation
+	
+	return if UserPresenceType == PresenceType1.Offline then config[PresenceType1.Offline] elseif UserPresenceType == PresenceType1.Online then config[PresenceType1.Online] elseif UserPresenceType == PresenceType1.InGame or UserPresenceType == PresenceType1.InStudio then if LastLocation and LastLocation ~= "" then tostring(LastLocation) else config[PresenceType1.Online] else ""
+end
+
+local function v12(p1, p2) --[[ Line: 82 ]]
+	-- upvalues: UserPresenceText (copy), PresenceType (copy), UserPresenceImage (copy)
+	local config = nil
+	if not p1 then
+		return { text = "" }
+	end
+	repeat
+		if p2 then
+			config = {
+				text = UserPresenceText[PresenceType.Online],
+				image = UserPresenceImage[PresenceType.Online]
 			}
 			
-			if not t_2 then
-				t_2 = {}
-				local userPresenceType = p1.userPresenceType
-				local lastLocation = p1.lastLocation
-				t_2.text = if userPresenceType == presenceType.Offline then t[presenceType.Offline] elseif userPresenceType == presenceType.Online then t[presenceType.Online] elseif userPresenceType == presenceType.InGame or userPresenceType == presenceType.InStudio then if lastLocation then tostring(lastLocation) else t[presenceType.Online] else ""
-				t_2.image = t_1[p1.userPresenceType]
-			end
-			return t_2
+			if config then break end
 		end
-	end,
-	getUserPresenceText = if fFlagAppChatPresenceStoreMigrationModule then function(p1)
-		-- upvalues: presenceType_1 (ref), t_2 (ref)
-		local userPresenceType = p1.userPresenceType
-		local lastLocation = p1.lastLocation
+		local UserPresenceType = p1.userPresenceType
+		local LastLocation = p1.lastLocation
+		config = {
+			text = if UserPresenceType == PresenceType.Offline then UserPresenceText[PresenceType.Offline] elseif UserPresenceType == PresenceType.Online then UserPresenceText[PresenceType.Online] elseif UserPresenceType == PresenceType.InGame or UserPresenceType == PresenceType.InStudio then if LastLocation then tostring(LastLocation) else UserPresenceText[PresenceType.Online] else "",
+			image = UserPresenceImage[p1.userPresenceType]
+		}
+	until true
+	return config
+end
+
+local function getUserDisplayPresenceFromStoreData(p1, p2) --[[ Line: 99 ]]
+	-- upvalues: config (copy), PresenceType1 (copy), config1 (copy)
+	if not p1 then
+		return { text = "" }
+	elseif p2 then
+		return {
+			text = config[PresenceType1.Online],
+			image = config1[PresenceType1.Online]
+		}
+	else
+		local UserPresenceType = p1.userPresenceType
+		local LastLocation = p1.lastLocation
 		
-		return if userPresenceType == presenceType_1.Offline then t_2[presenceType_1.Offline] elseif userPresenceType == presenceType_1.Online then t_2[presenceType_1.Online] elseif not (userPresenceType ~= presenceType_1.InGame and userPresenceType ~= presenceType_1.InStudio) then if lastLocation and lastLocation ~= "" then tostring(lastLocation) else t_2[presenceType_1.Online] else ""
-	end else function(p1)
-		-- upvalues: presenceType (ref), t (ref)
-		local userPresenceType = p1.userPresenceType
-		local lastLocation = p1.lastLocation
-		
-		return if userPresenceType == presenceType.Offline then t[presenceType.Offline] elseif userPresenceType == presenceType.Online then t[presenceType.Online] elseif not (userPresenceType ~= presenceType.InGame and userPresenceType ~= presenceType.InStudio) then if lastLocation then tostring(lastLocation) else t[presenceType.Online] else ""
-	end,
-	userPresenceImage = t_1,
-	userPresenceText = t,
-	storePresenceImage = if fFlagAppChatPresenceStoreMigrationModule then t_3 else nil,
-	storePresenceText = if fFlagAppChatPresenceStoreMigrationModule then t_2 else nil
+		return {
+			text = if UserPresenceType == PresenceType1.Offline then config[PresenceType1.Offline] elseif UserPresenceType == PresenceType1.Online then config[PresenceType1.Online] elseif UserPresenceType == PresenceType1.InGame or UserPresenceType == PresenceType1.InStudio then if LastLocation and LastLocation ~= "" then tostring(LastLocation) else config[PresenceType1.Online] else "",
+			image = config1[p1.userPresenceType]
+		}
+	end
+end
+
+return {
+	getUserDisplayPresence = if FFlagAppChatPresenceStoreMigrationModule then getUserDisplayPresenceFromStoreData else v12,
+	getUserPresenceText = if FFlagAppChatPresenceStoreMigrationModule then getUserPresenceTextFromStore else v10,
+	userPresenceImage = UserPresenceImage,
+	userPresenceText = UserPresenceText,
+	storePresenceImage = if FFlagAppChatPresenceStoreMigrationModule then config1 else nil,
+	storePresenceText = if FFlagAppChatPresenceStoreMigrationModule then config else nil
 }

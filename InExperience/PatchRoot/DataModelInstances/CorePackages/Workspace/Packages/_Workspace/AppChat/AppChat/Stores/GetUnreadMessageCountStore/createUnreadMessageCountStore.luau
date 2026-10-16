@@ -1,23 +1,23 @@
-﻿local parent = script:FindFirstAncestor("AppChat").Parent
-local _ = require(parent.Signals)
-local createSessionScopedSignal = require(parent.SignalsUtils).createSessionScopedSignal
-local _ = require(parent.AppChatNetworking)
+﻿local Parent = script:FindFirstAncestor("AppChat").Parent
+local _ = require(Parent.Signals)
+local CreateSessionScopedSignalFunction = require(Parent.SignalsUtils).createSessionScopedSignal
+local _ = require(Parent.AppChatNetworking)
 
-return function()
-	-- upvalues: createSessionScopedSignal (ref)
-	local var1, var2 = createSessionScopedSignal(0)
+return function() --[[ Line: 18 | Named "createUnreadMessageCountStore" ]]
+	-- upvalues: CreateSessionScopedSignalFunction (copy)
+	local SessionScopedSignal, SessionScopedSignal2 = CreateSessionScopedSignalFunction(0)
 	
 	return {
-		getUnreadMessageCount = var1,
-		receivedConversationMetadata = function(p1)
-			-- upvalues: var2 (ref)
+		getUnreadMessageCount = SessionScopedSignal,
+		receivedConversationMetadata = function(p1) --[[ Line: 21 ]]
+			-- upvalues: SessionScopedSignal2 (copy)
 			if p1 and p1.global_unread_message_count then
-				var2(p1.global_unread_message_count)
+				SessionScopedSignal2(p1.global_unread_message_count)
 			end
 		end,
-		reset = function()
-			-- upvalues: var2 (ref)
-			var2(0)
+		reset = function() --[[ Line: 27 ]]
+			-- upvalues: SessionScopedSignal2 (copy)
+			SessionScopedSignal2(0)
 		end
 	}
 end

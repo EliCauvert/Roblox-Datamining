@@ -1,66 +1,66 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local coreGuiService = game:GetService("CoreGui")
-local playersService = game:GetService("Players")
-local guiService = game:GetService("GuiService")
-local runService = game:GetService("RunService")
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local parent = script.Parent.Parent.Parent
-local closePlayerDropDownModule = require(parent.Actions.ClosePlayerDropDown)
-local setPlayerListVisibilityModule = require(parent.Actions.SetPlayerListVisibility)
-local isNewInGameMenuEnabledModule = require(coreGuiService.RobloxGui.Modules.isNewInGameMenuEnabled)
-local robloxGui = coreGuiService:WaitForChild("RobloxGui")
-local tenFootSideBar = roactModule.PureComponent:extend("TenFootSideBar")
+﻿local CorePackages = game:GetService("CorePackages")
+local CoreGui = game:GetService("CoreGui")
+local Players = game:GetService("Players")
+local GuiService = game:GetService("GuiService")
+local RunService = game:GetService("RunService")
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local Parent = script.Parent.Parent.Parent
+local ClosePlayerDropDownModule = require(Parent.Actions.ClosePlayerDropDown)
+local SetPlayerListVisibilityModule = require(Parent.Actions.SetPlayerListVisibility)
+local IsNewInGameMenuEnabledModule = require(CoreGui.RobloxGui.Modules.isNewInGameMenuEnabled)
+local RobloxGui = CoreGui:WaitForChild("RobloxGui")
+local TenFootSideBar = require(CorePackages.Packages.Roact).PureComponent:extend("TenFootSideBar")
 
-function tenFootSideBar.init(p1)
+function TenFootSideBar.init(p1) --[[ Line: 22 ]]
 	p1.sideBar = nil
 end
 
-function tenFootSideBar.render(_)
+function TenFootSideBar:render() --[[ Line: 26 ]]
 	return nil
 end
 
-function tenFootSideBar.openSidebar(p1, p2)
-	-- upvalues: runService (ref), playersService (ref), guiService (ref), robloxGui (ref), isNewInGameMenuEnabledModule (ref)
-	local var1 = not runService:IsStudio() and p2 ~= playersService.LocalPlayer
+function TenFootSideBar.openSidebar(p1, SelectedPlayer) --[[ Line: 30 ]]
+	-- upvalues: RunService (copy), Players (copy), GuiService (copy), RobloxGui (copy), IsNewInGameMenuEnabledModule (copy)
+	local IsNotSelectedPlayerMatch: boolean = not RunService:IsStudio() and SelectedPlayer ~= Players.LocalPlayer
 	
-	if not var1 then
+	if not IsNotSelectedPlayerMatch then
 		p1.props.closeSideBar()
 		
 		return
 	end
-	local selectedCoreObject = guiService.SelectedCoreObject
-	local unknownModule = require(robloxGui.Modules:FindFirstChild("ScreenManager") or robloxGui.Modules.Shell.ScreenManager)
-	local unknownModule_1 = require(robloxGui.Modules:FindFirstChild("LocalizedStrings") or robloxGui.Modules.Shell.LocalizedStrings)
+	local SelectedCoreObject = GuiService.SelectedCoreObject
+	local Module = require(RobloxGui.Modules:FindFirstChild("ScreenManager") or RobloxGui.Modules.Shell.ScreenManager)
+	local Module1 = require(RobloxGui.Modules:FindFirstChild("LocalizedStrings") or RobloxGui.Modules.Shell.LocalizedStrings)
 	
 	if not p1.sideBar then
-		p1.sideBar = require(robloxGui.Modules:FindFirstChild("SideBar") or robloxGui.Modules.Shell.SideBar)()
+		p1.sideBar = require(RobloxGui.Modules:FindFirstChild("SideBar") or RobloxGui.Modules.Shell.SideBar)()
 	end
 	p1.sideBar:RemoveAllItems()
 	
-	if var1 then
-		p1.sideBar:AddItem(unknownModule_1:LocStringUA("Xbox.Old.ReportPlayer"), function()
-			-- upvalues: p1 (ref), guiService (copy), isNewInGameMenuEnabledModule (copy), robloxGui (copy), p2 (ref)
+	if IsNotSelectedPlayerMatch then
+		p1.sideBar:AddItem(Module1:LocStringUA("Xbox.Old.ReportPlayer"), function() --[[ Line: 58 ]]
+			-- upvalues: p1 (copy), GuiService (upval), IsNewInGameMenuEnabledModule (upval), RobloxGui (upval), SelectedPlayer (copy)
 			p1.props.closePlayerList()
-			guiService.SelectedCoreObject = nil
+			GuiService.SelectedCoreObject = nil
 			
-			if isNewInGameMenuEnabledModule() then
-				require(robloxGui.Modules.InGameMenuInit).openReportDialog(p2, p1.__componentName)
+			if IsNewInGameMenuEnabledModule() then
+				require(RobloxGui.Modules.InGameMenuInit).openReportDialog(SelectedPlayer, p1.__componentName)
 				
 				return
+			else
+				require(RobloxGui.Modules.Settings.Pages.ReportAbuseMenuContainerPage):ReportPlayer(SelectedPlayer, p1.__componentName)
 			end
-			require(robloxGui.Modules.Settings.Pages.ReportAbuseMenuContainerPage):ReportPlayer(p2, p1.__componentName)
 		end)
 	end
-	local closedConnection = nil
-	closedConnection = p1.sideBar.Closed:connect(function()
-		-- upvalues: closedConnection (write), p1 (ref), selectedCoreObject (ref), guiService (copy)
-		closedConnection:disconnect()
+	local ClosedConnection = nil
+	ClosedConnection = p1.sideBar.Closed:connect(function() --[[ Line: 75 ]]
+		-- upvalues: ClosedConnection (ref), p1 (copy), SelectedCoreObject (copy), GuiService (upval)
+		ClosedConnection:disconnect()
 		p1.props.closeSideBar()
 		
 		if p1.props.playerListVisible then
-			if selectedCoreObject and selectedCoreObject.Parent then
-				guiService.SelectedCoreObject = selectedCoreObject
+			if SelectedCoreObject and SelectedCoreObject.Parent then
+				GuiService.SelectedCoreObject = SelectedCoreObject
 				
 				return
 			end
@@ -68,41 +68,41 @@ function tenFootSideBar.openSidebar(p1, p2)
 			p1.props.openPlayerList()
 		end
 	end)
-	unknownModule:OpenScreen(p1.sideBar, false)
+	Module:OpenScreen(p1.sideBar, false)
 end
 
-function tenFootSideBar.didMount(p1)
+function TenFootSideBar.didMount(p1) --[[ Line: 92 ]]
 	if p1.props.sideBarVisible then
 		p1:openSidebar(p1.props.selectedPlayer)
 	end
 end
 
-function tenFootSideBar.didUpdate(p1, p2)
+function TenFootSideBar.didUpdate(p1, p2) --[[ Line: 98 ]]
 	if p1.props.sideBarVisible and p1.props.sideBarVisible ~= p2.sideBarVisible then
 		p1:openSidebar(p1.props.selectedPlayer)
 	end
 end
 
-return roactRoduxModule.connect(function(p1)
+return RoactRoduxModule.connect(function(p1) --[[ Line: 104 | Named "mapStateToProps" ]]
 	return {
 		selectedPlayer = p1.playerDropDown.selectedPlayer,
 		sideBarVisible = p1.displayOptions.isTenFootInterface and p1.playerDropDown.isVisible,
 		playerListVisible = p1.displayOptions.isVisible
 	}
-end, function(p1)
-	-- upvalues: closePlayerDropDownModule (ref), setPlayerListVisibilityModule (ref)
+end, function(Callback) --[[ Line: 112 | Named "mapDispatchToProps" ]]
+	-- upvalues: ClosePlayerDropDownModule (copy), SetPlayerListVisibilityModule (copy)
 	return {
-		closeSideBar = function()
-			-- upvalues: p1 (ref), closePlayerDropDownModule (copy)
-			return p1(closePlayerDropDownModule())
+		closeSideBar = function() --[[ Line: 114 ]]
+			-- upvalues: Callback (copy), ClosePlayerDropDownModule (upval)
+			return Callback(ClosePlayerDropDownModule())
 		end,
-		closePlayerList = function()
-			-- upvalues: p1 (ref), setPlayerListVisibilityModule (copy)
-			return p1(setPlayerListVisibilityModule(false))
+		closePlayerList = function() --[[ Line: 118 ]]
+			-- upvalues: Callback (copy), SetPlayerListVisibilityModule (upval)
+			return Callback(SetPlayerListVisibilityModule(false))
 		end,
-		openPlayerList = function()
-			-- upvalues: p1 (ref), setPlayerListVisibilityModule (copy)
-			return p1(setPlayerListVisibilityModule(true))
+		openPlayerList = function() --[[ Line: 122 ]]
+			-- upvalues: Callback (copy), SetPlayerListVisibilityModule (upval)
+			return Callback(SetPlayerListVisibilityModule(true))
 		end
 	}
-end)(tenFootSideBar)
+end)(TenFootSideBar)

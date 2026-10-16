@@ -1,33 +1,33 @@
-﻿local bodyAssetTypes = require(script.Parent.Parent.Constants).BodyAssetTypes
+﻿local BodyAssetTypes = require(script.Parent.Parent.Constants).BodyAssetTypes
 
-return function(p1, p2)
-	-- upvalues: bodyAssetTypes (ref)
-	local t = {}
-	local var1 = p1:ToHex()
+return function(p1, p2) --[[ Line: 18 | Named "buildBodySlotViewportProps" ]]
+	-- upvalues: BodyAssetTypes (copy)
+	local LookAssetInfos = {}
+	local Hex = p1:ToHex()
 	
-	for i, v in bodyAssetTypes do
-		local var2 = tostring(v.Value)
-		local var3 = p2[var2]
+	for _, bodyAssetType in BodyAssetTypes do
+		local Text = tostring(bodyAssetType.Value)
+		local v1 = p2[Text]
 		
-		if var3 then
-			for i_1, v_1 in var3 do
-				t[i_1] = { quantityOwned = 1, id = i_1, assetType = tonumber(var2) }
+		if v1 then
+			for Id, _ in v1 do
+				LookAssetInfos[Id] = { quantityOwned = 1, id = Id, assetType = tonumber(Text) }
 			end
 		end
 	end
 	return {
 		lookDetails = {
-			lookAssetInfos = t,
+			lookAssetInfos = LookAssetInfos,
 			lookBundleInfos = {},
 			avatarProperties = {
 				playerAvatarType = "R15",
 				bodyColor3s = {
-					headColor3 = var1,
-					leftArmColor3 = var1,
-					leftLegColor3 = var1,
-					rightArmColor3 = var1,
-					rightLegColor3 = var1,
-					torsoColor3 = var1
+					headColor3 = Hex,
+					leftArmColor3 = Hex,
+					leftLegColor3 = Hex,
+					rightArmColor3 = Hex,
+					rightLegColor3 = Hex,
+					torsoColor3 = Hex
 				}
 			}
 		}

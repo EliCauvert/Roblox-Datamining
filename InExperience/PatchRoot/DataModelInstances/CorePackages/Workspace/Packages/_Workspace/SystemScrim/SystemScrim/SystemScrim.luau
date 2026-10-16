@@ -1,26 +1,28 @@
-﻿local parent = script:FindFirstAncestor("SystemScrim").Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
+﻿local Parent = script:FindFirstAncestor("SystemScrim").Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
 
-return function(p1)
-	-- upvalues: signalsReactModule (ref), reactModule (ref)
-	local var1 = signalsReactModule.useSignalState(p1.store.autoDismiss)
+return function(p1) --[[ Line: 23 | Named "SystemScrim" ]]
+	-- upvalues: SignalsReactModule (copy), ReactModule (copy)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(p1.store.autoDismiss)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 26 ]]
+		-- upvalues: p1 (copy), UseSignalStateResult (copy)
+		p1.store.backgroundScrimActivated:Fire()
+		
+		if UseSignalStateResult then
+			p1.store.setVisibility(false)
+		end
+	end, { UseSignalStateResult })
+	local UseSignalBindingResult = SignalsReactModule.useSignalBinding(p1.store.transparency)
 	
-	return if signalsReactModule.useSignalState(p1.store.visible) then reactModule.createElement("TextButton", {
+	return if SignalsReactModule.useSignalState(p1.store.visible) then ReactModule.createElement("TextButton", {
 		Size = UDim2.fromScale(1, 1),
 		Visible = true,
-		BackgroundTransparency = signalsReactModule.useSignalBinding(p1.store.transparency),
+		BackgroundTransparency = UseSignalBindingResult,
 		BackgroundColor3 = Color3.new(0, 0, 0),
 		Text = "",
 		AutoButtonColor = false,
 		BorderSizePixel = 0,
-		[reactModule.Event.Activated] = reactModule.useCallback(function()
-			-- upvalues: p1 (ref), var1 (ref)
-			p1.store.backgroundScrimActivated:Fire()
-			
-			if var1 then
-				p1.store.setVisibility(false)
-			end
-		end, { var1 })
+		[ReactModule.Event.Activated] = UseResult
 	}) else nil
 end

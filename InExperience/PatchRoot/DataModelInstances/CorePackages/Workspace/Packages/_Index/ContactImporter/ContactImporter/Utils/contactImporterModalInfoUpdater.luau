@@ -1,82 +1,92 @@
-﻿local constantsModule = require(script.Parent.Parent.Parent.ContactImporter.Common.Constants)
-local universal_app_contact_importer_storage_keysEngineFeature = game:GetEngineFeature(constantsModule.UNIVERSAL_APP_CONTACT_IMPORTER_STORAGE_KEYS)
+﻿local ConstantsModule = require(script.Parent.Parent.Parent.ContactImporter.Common.Constants)
+local EngineFeature = game:GetEngineFeature(ConstantsModule.UNIVERSAL_APP_CONTACT_IMPORTER_STORAGE_KEYS)
 
 return {
-	addSeenCount = function(_, p1, p2)
-		-- upvalues: universal_app_contact_importer_storage_keysEngineFeature (ref), constantsModule (ref)
-		if not universal_app_contact_importer_storage_keysEngineFeature then return end
-		local ok, status = pcall(function()
-			-- upvalues: p1 (ref), constantsModule (copy)
-			return p1:GetItem(constantsModule.LOCAL_STORAGE_KEY_MODAL_DISPLAY_COUNT)
+	addSeenCount = function(_, p1, Text) --[[ Line: 9 ]]
+		-- upvalues: EngineFeature (copy), ConstantsModule (copy)
+		if not EngineFeature then return end
+		local Success, Result = pcall(function() --[[ Line: 13 ]]
+			-- upvalues: p1 (copy), ConstantsModule (upval)
+			return p1:GetItem(ConstantsModule.LOCAL_STORAGE_KEY_MODAL_DISPLAY_COUNT)
 		end)
 		
-		if ok then
-			local var1 = ""
+		if Success then
+			local Text1 = ""
 			
-			if status == "" then
-				var1 = p2 .. ":" .. "1"
+			if Result == "" then
+				Text1 = Text .. ":" .. "1"
 			else
-				local var2 = false
+				local Flag = false
 				
-				for i in string.gmatch(status or "", "([^,]+)") do
-					local parts = string.split(i, ":")
-					local var3 = parts[1]
-					local var4 = tonumber(parts[2]) or 0
+				for i in string.gmatch(Result or "", "([^,]+)") do
+					local Parts = string.split(i, ":")
+					local Part = Parts[1]
+					local Number: number = tonumber(Parts[2]) or 0
 					
-					if var3 == p2 then
-						var2 = true
-						var4 += 1
+					if Part == Text then
+						Flag = true
+						Number += 1
 					end
-					local text = var3 .. ":" .. tostring(var4)
-					var1 = if var1 ~= "" then text else var1 .. "," .. text
+					local Text2 = Part .. ":" .. tostring(Number)
+					
+					if Text1 == "" then
+						Text1 = Text2
+					else
+						Text1 ..= "," .. Text2
+					end
 				end
-				if not var2 then
-					var1 ..= "," .. p1 .. ":" .. "1"
+				if not Flag then
+					Text1 ..= "," .. Text .. ":" .. "1"
 				end
 			end
-			pcall(function()
-				-- upvalues: p1 (ref), constantsModule (copy), var1 (write)
-				p1:SetItem(constantsModule.LOCAL_STORAGE_KEY_MODAL_DISPLAY_COUNT, var1)
+			pcall(function() --[[ Line: 44 ]]
+				-- upvalues: p1 (copy), ConstantsModule (upval), Text1 (ref)
+				p1:SetItem(ConstantsModule.LOCAL_STORAGE_KEY_MODAL_DISPLAY_COUNT, Text1)
 				p1:Flush()
 			end)
 		end
 	end,
-	updateTimestamp = function(_, p3, p4, p5)
-		-- upvalues: universal_app_contact_importer_storage_keysEngineFeature (ref), constantsModule (ref)
-		if not universal_app_contact_importer_storage_keysEngineFeature then return end
-		local ok, status = pcall(function()
-			-- upvalues: p3 (ref), constantsModule (copy)
-			return p3:GetItem(constantsModule.LOCAL_STORAGE_KEY_MODAL_TIMESTAMP)
+	updateTimestamp = function(_, p2, Text, p3) --[[ Line: 51 ]]
+		-- upvalues: EngineFeature (copy), ConstantsModule (copy)
+		if not EngineFeature then return end
+		local Success, Result = pcall(function() --[[ Line: 60 ]]
+			-- upvalues: p2 (copy), ConstantsModule (upval)
+			return p2:GetItem(ConstantsModule.LOCAL_STORAGE_KEY_MODAL_TIMESTAMP)
 		end)
 		
-		if ok then
-			local var5 = ""
+		if Success then
+			local Text1 = ""
 			
-			if status == "" then
-				var5 = p4 .. ":" .. tostring(p5)
+			if Result == "" then
+				Text1 = Text .. ":" .. tostring(p3)
 			else
-				local var6 = false
+				local Flag = false
 				
-				for i in string.gmatch(status or "", "([^,]+)") do
-					local parts = string.split(i, ":")
-					local var7 = parts[1]
-					local var8 = parts[2]
+				for i in string.gmatch(Result or "", "([^,]+)") do
+					local Parts = string.split(i, ":")
+					local Part = Parts[1]
+					local Part1 = Parts[2]
 					
-					if var7 == p4 then
-						var8 = tostring(p5)
-						var6 = true
+					if Part == Text then
+						Part1 = tostring(p3)
+						Flag = true
 					end
-					local text = var7 .. ":" .. tostring(var8)
-					var5 = if var5 ~= "" then text else var5 .. "," .. text
+					local Text2 = Part .. ":" .. tostring(Part1)
+					
+					if Text1 == "" then
+						Text1 = Text2
+					else
+						Text1 ..= "," .. Text2
+					end
 				end
-				if not var6 then
-					var5 ..= "," .. p3 .. ":" .. tostring(p5)
+				if not Flag then
+					Text1 ..= "," .. Text .. ":" .. tostring(p3)
 				end
 			end
-			pcall(function()
-				-- upvalues: p3 (ref), constantsModule (copy), var5 (write)
-				p3:SetItem(constantsModule.LOCAL_STORAGE_KEY_MODAL_TIMESTAMP, var5)
-				p3:Flush()
+			pcall(function() --[[ Line: 92 ]]
+				-- upvalues: p2 (copy), ConstantsModule (upval), Text1 (ref)
+				p2:SetItem(ConstantsModule.LOCAL_STORAGE_KEY_MODAL_TIMESTAMP, Text1)
+				p2:Flush()
 			end)
 		end
 	end

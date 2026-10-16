@@ -1,20 +1,20 @@
-﻿return function(...)
+﻿return function(...) --[[ Line: 2 | Named "zip" ]]
 	local t = {}
-	local var1 = select("#", ...)
-	local count = #select(1, ...)
+	local Selected = select("#", ...)
+	local Count = #select(1, ...)
 	
-	for i = 2, var1 do
-		local count_1 = #select(i, ...)
+	for i = 2, Selected do
+		local Count1 = #select(i, ...)
 		
-		if count_1 < count then
-			count = count_1
+		if Count1 < Count then
+			Count = Count1
 		end
 	end
-	for i_2 = 1, count do
-		t[i_2] = {}
+	for i1 = 1, Count do
+		t[i1] = {}
 		
-		for i_1 = 1, var1 do
-			t[i_2][i_1] = select(i_1, ...)[i_2]
+		for i2 = 1, Selected do
+			t[i1][i2] = select(i2, ...)[i1]
 		end
 	end
 	return t

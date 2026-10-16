@@ -1,14 +1,14 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local cryoModule = require(corePackagesService.Packages.Cryo)
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local reactModule = require(corePackagesService.Packages.React)
-local reactRobloxModule = require(corePackagesService.Packages.ReactRoblox)
-local view = foundationModule.View
-local useStyleSheet = foundationModule.Hooks.useStyleSheet
+﻿local CorePackages = game:GetService("CorePackages")
+local CryoModule = require(CorePackages.Packages.Cryo)
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local ReactModule = require(CorePackages.Packages.React)
+local ReactRobloxModule = require(CorePackages.Packages.ReactRoblox)
+local View = FoundationModule.View
+local UseStyleSheetFunction = FoundationModule.Hooks.useStyleSheet
 
-return function(p1)
-	-- upvalues: useStyleSheet (ref), cryoModule (ref), reactModule (ref), reactRobloxModule (ref), view (ref)
-	return reactRobloxModule.createPortal(reactModule.createElement(view, { tag = "auto-xy" }, cryoModule.Dictionary.join({
-		StyleLink = reactModule.createElement("StyleLink", { StyleSheet = useStyleSheet() })
-	}, p1.children)), p1.parent)
+return function(p1) --[[ Line: 16 | Named "PortalWithFoundationStylelink" ]]
+	-- upvalues: UseStyleSheetFunction (copy), CryoModule (copy), ReactModule (copy), ReactRobloxModule (copy), View (copy)
+	return ReactRobloxModule.createPortal(ReactModule.createElement(View, { tag = "auto-xy" }, (CryoModule.Dictionary.join({
+		StyleLink = ReactModule.createElement("StyleLink", { StyleSheet = UseStyleSheetFunction() })
+	}, p1.children))), p1.parent)
 end

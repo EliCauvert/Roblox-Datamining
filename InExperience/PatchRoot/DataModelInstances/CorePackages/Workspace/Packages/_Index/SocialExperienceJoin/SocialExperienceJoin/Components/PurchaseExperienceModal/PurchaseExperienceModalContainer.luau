@@ -1,152 +1,153 @@
-﻿local socialExperienceJoin = script:FindFirstAncestor("SocialExperienceJoin")
-local parent = socialExperienceJoin.Parent
-local reactModule = require(parent.React)
-local roactUtilsModule = require(parent.RoactUtils)
-local navigationModule = require(parent.Navigation)
-local robloxAppNavigationModule = require(parent.RobloxAppNavigation)
-local robloxAppHooksModule = require(parent.RobloxAppHooks)
-local promiseModule = require(parent.Promise)
-local purchaseExperienceModalModule = require(script.Parent.PurchaseExperienceModal)
-local purchaseProductByIdModule = require(socialExperienceJoin.Networking.PurchaseProductById)
-local constantsModule = require(socialExperienceJoin.Common.Constants)
-local initializeSocialExperienceJoinAnalyticsModule = require(socialExperienceJoin.Analytics.initializeSocialExperienceJoinAnalytics)
-local eventNamesModule = require(socialExperienceJoin.Analytics.EventNames)
-local RODUX_KEY = constantsModule.RODUX_KEY
-local useNavigation = navigationModule.useNavigation
-local useNavigationProps = robloxAppNavigationModule.useNavigationProps
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
-local useScreenSize = robloxAppHooksModule.useScreenSize
-local purchaseExperienceStatusModule = require(socialExperienceJoin.Analytics.PurchaseExperienceStatus)
+﻿local SocialExperienceJoin = script:FindFirstAncestor("SocialExperienceJoin")
+local Parent = SocialExperienceJoin.Parent
+local ReactModule = require(Parent.React)
+local RoactUtilsModule = require(Parent.RoactUtils)
+local PromiseModule = require(Parent.Promise)
+local PurchaseExperienceModalModule = require(script.Parent.PurchaseExperienceModal)
+local PurchaseProductByIdModule = require(SocialExperienceJoin.Networking.PurchaseProductById)
+local ConstantsModule = require(SocialExperienceJoin.Common.Constants)
+local InitializeSocialExperienceJoinAnalyticsModule = require(SocialExperienceJoin.Analytics.initializeSocialExperienceJoinAnalytics)
+local EventNamesModule = require(SocialExperienceJoin.Analytics.EventNames)
+local RODUXKEY = ConstantsModule.RODUX_KEY
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local UseNavigationPropsFunction = require(Parent.RobloxAppNavigation).useNavigationProps
+local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
+local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
+local UseScreenSizeFunction = require(Parent.RobloxAppHooks).useScreenSize
+local PurchaseExperienceStatusModule = require(SocialExperienceJoin.Analytics.PurchaseExperienceStatus)
 
-return function()
-	-- upvalues: useNavigation (ref), useDispatch (ref), useNavigationProps (ref), useScreenSize (ref), reactModule (ref), initializeSocialExperienceJoinAnalyticsModule (ref), useSelector (ref), RODUX_KEY (ref), eventNamesModule (ref), purchaseExperienceStatusModule (ref), purchaseProductByIdModule (ref), constantsModule (ref), promiseModule (ref), purchaseExperienceModalModule (ref)
-	local var1 = useNavigation()
-	local var2 = useDispatch()
-	local var3 = useNavigationProps(function(p1, p2)
+return function() --[[ Line: 38 ]]
+	-- upvalues: UseNavigationFunction (copy), UseDispatchFunction (copy), UseNavigationPropsFunction (copy), UseScreenSizeFunction (copy), ReactModule (copy), InitializeSocialExperienceJoinAnalyticsModule (copy), UseSelectorFunction (copy), RODUXKEY (copy), EventNamesModule (copy), PurchaseExperienceStatusModule (copy), PurchaseProductByIdModule (copy), ConstantsModule (copy), PromiseModule (copy), PurchaseExperienceModalModule (copy)
+	local UseNavigationResult = UseNavigationFunction()
+	local UseDispatchResult = UseDispatchFunction()
+	local UseNavigationPropsResult = UseNavigationPropsFunction(function(UniverseId, p1) --[[ Line: 41 ]]
 		return {
-			universeId = p1,
-			userId = p2.userId,
-			openGameDetailsPeekView = p2.openGameDetailsPeekView,
-			analyticProps = p2.analyticProps
+			universeId = UniverseId,
+			userId = p1.userId,
+			openGameDetailsPeekView = p1.openGameDetailsPeekView,
+			analyticProps = p1.analyticProps
 		}
 	end)
-	local var4 = useScreenSize()
-	local var5 = reactModule.useMemo(function()
-		-- upvalues: initializeSocialExperienceJoinAnalyticsModule (copy), var3 (ref)
-		return initializeSocialExperienceJoinAnalyticsModule(var3.analyticProps)
-	end, { var3.analyticProps })
-	local var6 = useSelector(function(p1)
-		-- upvalues: RODUX_KEY (copy), var3 (ref)
-		return p1[RODUX_KEY].Games.productInfoByGameId[var3.universeId]
-	end)
-	local var7 = useSelector(function(p1)
-		-- upvalues: RODUX_KEY (copy), var3 (ref)
-		return p1[RODUX_KEY].Games.byGameId[var3.universeId]
+	local UseScreenSizeResult = UseScreenSizeFunction()
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 51 ]]
+		-- upvalues: InitializeSocialExperienceJoinAnalyticsModule (upval), UseNavigationPropsResult (copy)
+		return InitializeSocialExperienceJoinAnalyticsModule(UseNavigationPropsResult.analyticProps)
+	end, { UseNavigationPropsResult.analyticProps })
+	local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 56 ]]
+		-- upvalues: RODUXKEY (upval), UseNavigationPropsResult (copy)
+		return p1[RODUXKEY].Games.productInfoByGameId[UseNavigationPropsResult.universeId]
 	end)
 	
-	local _ = function()
-		-- upvalues: var5 (ref), eventNamesModule (copy), purchaseExperienceStatusModule (copy), var3 (ref)
-		var5.fireAnalyticsEvent(eventNamesModule.PurchaseExperienceAttempt, {
-			status = purchaseExperienceStatusModule.Success,
-			universeId = var3.universeId,
-			profileUserId = var3.userId
+	local function _() --[[ Line: 63 ]]
+		-- upvalues: UseMemoResult (copy), EventNamesModule (upval), PurchaseExperienceStatusModule (upval), UseNavigationPropsResult (copy)
+		UseMemoResult.fireAnalyticsEvent(EventNamesModule.PurchaseExperienceAttempt, {
+			status = PurchaseExperienceStatusModule.Success,
+			universeId = UseNavigationPropsResult.universeId,
+			profileUserId = UseNavigationPropsResult.userId
 		})
 	end
 	
-	local _ = function(_)
-		-- upvalues: var5 (ref), eventNamesModule (copy), purchaseExperienceStatusModule (copy), var3 (ref)
-		var5.fireAnalyticsEvent(eventNamesModule.PurchaseExperienceAttempt, {
-			status = purchaseExperienceStatusModule.PurchaseError,
-			universeId = var3.universeId,
-			profileUserId = var3.userId
+	local _ = function(_) --[[ Line: 72 ]]
+		-- upvalues: UseMemoResult (copy), EventNamesModule (upval), PurchaseExperienceStatusModule (upval), UseNavigationPropsResult (copy)
+		UseMemoResult.fireAnalyticsEvent(EventNamesModule.PurchaseExperienceAttempt, {
+			status = PurchaseExperienceStatusModule.PurchaseError,
+			universeId = UseNavigationPropsResult.universeId,
+			profileUserId = UseNavigationPropsResult.userId
 		})
 	end
 	
-	local _ = function(_)
-		-- upvalues: var5 (ref), eventNamesModule (copy), purchaseExperienceStatusModule (copy), var3 (ref)
-		var5.fireAnalyticsEvent(eventNamesModule.PurchaseExperienceAttempt, {
-			status = purchaseExperienceStatusModule.NetworkError,
-			universeId = var3.universeId,
-			profileUserId = var3.userId
+	local _ = function(_) --[[ Line: 81 ]]
+		-- upvalues: UseMemoResult (copy), EventNamesModule (upval), PurchaseExperienceStatusModule (upval), UseNavigationPropsResult (copy)
+		UseMemoResult.fireAnalyticsEvent(EventNamesModule.PurchaseExperienceAttempt, {
+			status = PurchaseExperienceStatusModule.NetworkError,
+			universeId = UseNavigationPropsResult.universeId,
+			profileUserId = UseNavigationPropsResult.userId
 		})
 	end
 	
-	local var8 = reactModule.useCallback(function()
-		-- upvalues: var1 (ref)
-		var1.pop()
-	end, { var1 })
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 90 ]]
+		-- upvalues: UseNavigationResult (copy)
+		UseNavigationResult.pop()
+	end, { UseNavigationResult })
 	
-	return reactModule.createElement(purchaseExperienceModalModule, {
-		cancelPurchase = reactModule.useCallback(function()
-			-- upvalues: var5 (ref), eventNamesModule (copy), var3 (ref), var8 (ref)
-			var5.fireAnalyticsEvent(eventNamesModule.CancelPurchaseExperience, {
-				universeId = var3.universeId,
-				profileUserId = var3.userId
+	return ReactModule.createElement(PurchaseExperienceModalModule, {
+		cancelPurchase = ReactModule.useCallback(function() --[[ Line: 94 ]]
+			-- upvalues: UseMemoResult (copy), EventNamesModule (upval), UseNavigationPropsResult (copy), UseResult (copy)
+			UseMemoResult.fireAnalyticsEvent(EventNamesModule.CancelPurchaseExperience, {
+				universeId = UseNavigationPropsResult.universeId,
+				profileUserId = UseNavigationPropsResult.userId
 			})
-			var8()
-		end, { var8, var5, var3.universeId }),
-		experienceName = var7.name,
-		price = var6.price,
-		purchaseExperience = reactModule.useCallback(function()
-			-- upvalues: var5 (ref), eventNamesModule (copy), var3 (ref), var2 (ref), purchaseProductByIdModule (copy), var6 (ref), constantsModule (copy), promiseModule (copy), var8 (ref), purchaseExperienceStatusModule (copy)
-			var5.fireAnalyticsEvent(eventNamesModule.PurchaseExperience, {
-				universeId = var3.universeId,
-				profileUserId = var3.userId
+			UseResult()
+		end, {
+			UseResult,
+			UseMemoResult,
+			UseNavigationPropsResult.universeId
+		}),
+		experienceName = UseSelectorFunction(function(p1) --[[ Line: 59 ]]
+			-- upvalues: RODUXKEY (upval), UseNavigationPropsResult (copy)
+			return p1[RODUXKEY].Games.byGameId[UseNavigationPropsResult.universeId]
+		end).name,
+		price = UseSelectorResult.price,
+		purchaseExperience = ReactModule.useCallback(function() --[[ Line: 103 ]]
+			-- upvalues: UseMemoResult (copy), EventNamesModule (upval), UseNavigationPropsResult (copy), UseDispatchResult (copy), PurchaseProductByIdModule (upval), UseSelectorResult (copy), ConstantsModule (upval), PromiseModule (upval), UseResult (copy), PurchaseExperienceStatusModule (upval)
+			UseMemoResult.fireAnalyticsEvent(EventNamesModule.PurchaseExperience, {
+				universeId = UseNavigationPropsResult.universeId,
+				profileUserId = UseNavigationPropsResult.userId
 			})
 			
-			local _ = function()
-				-- upvalues: var2 (copy), purchaseProductByIdModule (copy), var6 (copy), constantsModule (copy)
-				return var2(purchaseProductByIdModule.API(var6.productId, {
-					expectedCurrency = constantsModule.RobuxCurrency,
-					expectedPrice = var6.price,
-					expectedSellerId = var6.sellerId
+			local function _() --[[ Line: 109 ]]
+				-- upvalues: UseDispatchResult (upval), PurchaseProductByIdModule (upval), UseSelectorResult (upval), ConstantsModule (upval)
+				return UseDispatchResult(PurchaseProductByIdModule.API(UseSelectorResult.productId, {
+					expectedCurrency = ConstantsModule.RobuxCurrency,
+					expectedPrice = UseSelectorResult.price,
+					expectedSellerId = UseSelectorResult.sellerId
 				}))
 			end
 			
-			var2(purchaseProductByIdModule.API(var6.productId, {
-				expectedCurrency = constantsModule.RobuxCurrency,
-				expectedPrice = var6.price,
-				expectedSellerId = var6.sellerId
-			})):andThen(function(p1)
-				-- upvalues: promiseModule (copy)
-				local responseBody = p1.responseBody
+			UseDispatchResult(PurchaseProductByIdModule.API(UseSelectorResult.productId, {
+				expectedCurrency = ConstantsModule.RobuxCurrency,
+				expectedPrice = UseSelectorResult.price,
+				expectedSellerId = UseSelectorResult.sellerId
+			})):andThen(function(Result) --[[ Line: 118 ]]
+				-- upvalues: PromiseModule (upval)
+				local ResponseBody = Result.responseBody
 				
-				return if type(responseBody) == "table" then responseBody else promiseModule.reject()
-			end):andThen(function(p1)
-				-- upvalues: var8 (copy), var5 (copy), eventNamesModule (copy), purchaseExperienceStatusModule (copy), var3 (copy)
-				var8()
+				return type(ResponseBody) == "table" and ResponseBody or PromiseModule.reject()
+			end):andThen(function(Result) --[[ Line: 122 ]]
+				-- upvalues: UseResult (upval), UseMemoResult (upval), EventNamesModule (upval), PurchaseExperienceStatusModule (upval), UseNavigationPropsResult (upval)
+				UseResult()
 				
-				if p1.purchased then
-					var5.fireAnalyticsEvent(eventNamesModule.PurchaseExperienceAttempt, {
-						status = purchaseExperienceStatusModule.Success,
-						universeId = var3.universeId,
-						profileUserId = var3.userId
+				if Result.purchased then
+					UseMemoResult.fireAnalyticsEvent(EventNamesModule.PurchaseExperienceAttempt, {
+						status = PurchaseExperienceStatusModule.Success,
+						universeId = UseNavigationPropsResult.universeId,
+						profileUserId = UseNavigationPropsResult.userId
 					})
 					
 					return
+				else
+					UseMemoResult.fireAnalyticsEvent(EventNamesModule.PurchaseExperienceAttempt, {
+						status = PurchaseExperienceStatusModule.PurchaseError,
+						universeId = UseNavigationPropsResult.universeId,
+						profileUserId = UseNavigationPropsResult.userId
+					})
 				end
-				var5.fireAnalyticsEvent(eventNamesModule.PurchaseExperienceAttempt, {
-					status = purchaseExperienceStatusModule.PurchaseError,
-					universeId = var3.universeId,
-					profileUserId = var3.userId
-				})
-			end):catch(function(_)
-				-- upvalues: var8 (copy), var5 (copy), eventNamesModule (copy), purchaseExperienceStatusModule (copy), var3 (copy)
-				var8()
-				var5.fireAnalyticsEvent(eventNamesModule.PurchaseExperienceAttempt, {
-					status = purchaseExperienceStatusModule.NetworkError,
-					universeId = var3.universeId,
-					profileUserId = var3.userId
+			end):catch(function(_) --[[ Line: 131 ]]
+				-- upvalues: UseResult (upval), UseMemoResult (upval), EventNamesModule (upval), PurchaseExperienceStatusModule (upval), UseNavigationPropsResult (upval)
+				UseResult()
+				UseMemoResult.fireAnalyticsEvent(EventNamesModule.PurchaseExperienceAttempt, {
+					status = PurchaseExperienceStatusModule.NetworkError,
+					universeId = UseNavigationPropsResult.universeId,
+					profileUserId = UseNavigationPropsResult.userId
 				})
 			end)
 		end, {
-			var2,
-			var6.productId,
-			var6.price,
-			var6.sellerId,
-			var8
+			UseDispatchResult,
+			UseSelectorResult.productId,
+			UseSelectorResult.price,
+			UseSelectorResult.sellerId,
+			UseResult
 		}),
-		screenSize = var4
+		screenSize = UseScreenSizeResult
 	})
 end

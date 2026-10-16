@@ -1,138 +1,152 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local virtualEventsModule = require(parent.VirtualEvents)
-local eventsListCarousel = virtualEventsModule.EventsListCarousel
-local enumsModule = require(profilePlatform.Common.Enums)
-local eventNamesModule = require(profilePlatform.Analytics.EventNames)
-local cryoModule = require(parent.Cryo)
-local _ = require(parent.Signals)
-local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfileWrapperContext)
-local useProfileJsonComponentModule = require(profilePlatform.Hooks.useProfileJsonComponent)
-local useProfileAnalyticsContextModule = require(profilePlatform.Contexts.useProfileAnalyticsContext)
-local launchGame = require(profilePlatform.Parent.GameLaunch).LaunchGame
-local useNavigation = require(profilePlatform.Parent.Navigation).useNavigation
-local _ = require(profilePlatform.Parent.GraphQLServer)
-local useRoactService = require(parent.RobloxAppHooks).useRoactService
-local appGame = require(parent.RoactServiceTags).AppGame
-local reactModule = require(parent.React)
-local horizontalPageMargin = require(parent.UIBlox).App.Container.HorizontalPageMargin
-local createGroupEventsStoreModule = require(profilePlatform.Stores.createGroupEventsStore)
-local useSignalState = require(parent.SignalsReact).useSignalState
-local appPage = require(parent.RobloxAppEnums).AppPage
-local fFlagLuaAppSduiEventDetailsEnabled = require(parent.SharedFlags).FFlagLuaAppSduiEventDetailsEnabled
-local navigateToEventDetails = require(parent.VirtualEvents).navigateToEventDetails
-local useApolloClient = require(parent.ApolloClient).useApolloClient
-local roactNavigationModule = require(parent.RoactNavigation)
-local eventsSkeletonModule = require(profilePlatform.Components.Events.EventsSkeleton)
-local fFlagEnableCommunityProfileLoadingSkeletonsModule = require(profilePlatform.Flags.FFlagEnableCommunityProfileLoadingSkeletons)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local VirtualEventsModule = require(Parent.VirtualEvents)
+local EventsListCarousel = VirtualEventsModule.EventsListCarousel
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local EventNamesModule = require(ProfilePlatform.Analytics.EventNames)
+local CryoModule = require(Parent.Cryo)
+local _ = require(Parent.Signals)
+local UseProfileWrapperContextModule = require(ProfilePlatform.Contexts.useProfileWrapperContext)
+local UseProfileJsonComponentModule = require(ProfilePlatform.Hooks.useProfileJsonComponent)
+local UseProfileAnalyticsContextModule = require(ProfilePlatform.Contexts.useProfileAnalyticsContext)
+local LaunchGameFunction = require(ProfilePlatform.Parent.GameLaunch).LaunchGame
+local UseNavigationFunction = require(ProfilePlatform.Parent.Navigation).useNavigation
+local _ = require(ProfilePlatform.Parent.GraphQLServer)
+local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
+local AppGame = require(Parent.RoactServiceTags).AppGame
+local ReactModule = require(Parent.React)
+local HorizontalPageMargin = require(Parent.UIBlox).App.Container.HorizontalPageMargin
+local CreateGroupEventsStoreModule = require(ProfilePlatform.Stores.createGroupEventsStore)
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local FFlagLuaAppSduiEventDetailsEnabled = require(Parent.SharedFlags).FFlagLuaAppSduiEventDetailsEnabled
+local NavigateToEventDetailsFunction = require(Parent.VirtualEvents).navigateToEventDetails
+local UseApolloClientFunction = require(Parent.ApolloClient).useApolloClient
+local RoactNavigationModule = require(Parent.RoactNavigation)
+local EventsSkeletonModule = require(ProfilePlatform.Components.Events.EventsSkeleton)
+local FFlagEnableCommunityProfileLoadingSkeletonsModule = require(ProfilePlatform.Flags.FFlagEnableCommunityProfileLoadingSkeletons)
 
-return function(p1)
-	-- upvalues: useProfileJsonComponentModule (ref), enumsModule (ref), useProfileWrapperContextModule (ref), useRoactService (ref), appGame (ref), useNavigation (ref), useApolloClient (ref), useProfileAnalyticsContextModule (ref), reactModule (ref), createGroupEventsStoreModule (ref), useSignalState (ref), eventNamesModule (ref), virtualEventsModule (ref), cryoModule (ref), fFlagLuaAppSduiEventDetailsEnabled (ref), navigateToEventDetails (ref), appPage (ref), launchGame (ref), fFlagEnableCommunityProfileLoadingSkeletonsModule (ref), horizontalPageMargin (ref), roactNavigationModule (ref), eventsSkeletonModule (ref), eventsListCarousel (ref)
-	local var1 = useProfileJsonComponentModule(enumsModule.Components.Events)
-	local var2 = tonumber(useProfileWrapperContextModule().profileId)
-	local var3 = useRoactService(appGame)
-	local var4 = useNavigation()
-	local var5 = useApolloClient()
-	local var6 = useProfileAnalyticsContextModule()
-	local var7 = reactModule.useMemo(function()
-		-- upvalues: createGroupEventsStoreModule (copy), var2 (ref)
-		return createGroupEventsStoreModule(var2)
-	end, { var2 })
-	local var8 = useSignalState(var7.getEvents)
-	local var9 = reactModule.useMemo(function()
-		-- upvalues: var8 (ref), var1 (ref)
+return function(p1) --[[ Line: 63 | Named "EventsContainer" ]]
+	-- upvalues: UseProfileJsonComponentModule (copy), EnumsModule (copy), UseProfileWrapperContextModule (copy), UseRoactServiceFunction (copy), AppGame (copy), UseNavigationFunction (copy), UseApolloClientFunction (copy), UseProfileAnalyticsContextModule (copy), ReactModule (copy), CreateGroupEventsStoreModule (copy), UseSignalStateFunction (copy), EventNamesModule (copy), VirtualEventsModule (copy), CryoModule (copy), FFlagLuaAppSduiEventDetailsEnabled (copy), NavigateToEventDetailsFunction (copy), AppPage (copy), LaunchGameFunction (copy), FFlagEnableCommunityProfileLoadingSkeletonsModule (copy), HorizontalPageMargin (copy), RoactNavigationModule (copy), EventsSkeletonModule (copy), EventsListCarousel (copy)
+	local UseProfileJsonComponentModuleResult = UseProfileJsonComponentModule(EnumsModule.Components.Events)
+	local Number: number? = tonumber(UseProfileWrapperContextModule().profileId)
+	local UseRoactServiceResult = UseRoactServiceFunction(AppGame)
+	local UseNavigationResult = UseNavigationFunction()
+	local UseApolloClientResult = UseApolloClientFunction()
+	local UseProfileAnalyticsContextModuleResult = UseProfileAnalyticsContextModule()
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 73 ]]
+		-- upvalues: CreateGroupEventsStoreModule (upval), Number (copy)
+		return CreateGroupEventsStoreModule(Number)
+	end, { Number })
+	local UseSignalStateResult = UseSignalStateFunction(UseMemoResult.getEvents)
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 80 ]]
+		-- upvalues: UseSignalStateResult (copy), UseProfileJsonComponentModuleResult (copy)
+		local List = {}
+		
+		if UseSignalStateResult == nil then
+			return List
+		end
 		local t = {}
 		
-		if var8 == nil then
-			return t
+		for _, value in ipairs(UseSignalStateResult) do
+			t[value.id] = value
 		end
-		local t_1 = {}
-		
-		for i, v in ipairs(var8) do
-			t_1[v.id] = v
-		end
-		for i, v_1 in ipairs(if var1 then var1.events else {}) do
-			local id = t_1[v_1.id]
+		local Iterator = ipairs
+		local Events = if UseProfileJsonComponentModuleResult then UseProfileJsonComponentModuleResult.events else {}
+		for _, value1 in Iterator(Events) do
+			local Entry = t[value1.id]
 			
-			if id ~= nil then
-				table.insert(t, id)
+			if Entry ~= nil then
+				table.insert(List, Entry)
 			end
 		end
-		return t
-	end, { var8, var1 })
+		return List
+	end, {
+		UseSignalStateResult,
+		UseProfileJsonComponentModuleResult
+	})
+	local Number1: number = #UseMemoResult1 > 0 and tonumber(UseMemoResult1[1].universeId) or 0
+	local UseResult = ReactModule.useCallback(function(p2, Status) --[[ Line: 110 ]]
+		-- upvalues: UseProfileAnalyticsContextModuleResult (copy), EventNamesModule (upval), VirtualEventsModule (upval), UseMemoResult (copy), UseApolloClientResult (copy), CryoModule (upval)
+		UseProfileAnalyticsContextModuleResult.fireAnalyticsEvent(EventNamesModule.EventRSVP, { virtualEventId = p2.id, status = Status })
+		VirtualEventsModule.fireVirtualEventRSVP({
+			channel = "communityPeekView",
+			virtualEventId = p2.id,
+			universeId = tostring(p2.universeId),
+			status = Status
+		})
+		UseMemoResult.updateRsvpStatus(p2, Status)
+		UseApolloClientResult.cache:modify({
+			id = "VirtualEvent:" .. p2.id,
+			fields = {
+				userRsvpStatus = function(_, _, _) --[[ Line: 126 ]]
+					-- upvalues: Status (copy)
+					return Status
+				end,
+				rsvpCounters = function(_, p3, _) --[[ Line: 129 ]]
+					-- upvalues: Status (copy), CryoModule (upval)
+					return CryoModule.Dictionary.join(p3, { going = p3.going + (if Status == "going" then 1 else -1) })
+				end
+			}
+		})
+	end, { UseMemoResult })
+	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 141 ]]
+		-- upvalues: UseProfileAnalyticsContextModuleResult (copy), EventNamesModule (upval), FFlagLuaAppSduiEventDetailsEnabled (upval), NavigateToEventDetailsFunction (upval), UseNavigationResult (copy), AppPage (upval)
+		UseProfileAnalyticsContextModuleResult.fireAnalyticsEvent(EventNamesModule.EventOpened, { virtualEventId = p2.id })
+		
+		if FFlagLuaAppSduiEventDetailsEnabled then
+			NavigateToEventDetailsFunction(UseNavigationResult, p2.id, (tostring(p2.universeId)))
+			
+			return
+		else
+			UseNavigationResult.navigate(AppPage.EventDetails, {
+				extraProps = { currentTime = DateTime.now(), virtualEventId = p2.id }
+			})
+		end
+	end, { UseNavigationResult })
+	local UseResult2 = ReactModule.useCallback(function(p2) --[[ Line: 157 ]]
+		-- upvalues: UseProfileAnalyticsContextModuleResult (copy), EventNamesModule (upval), VirtualEventsModule (upval), LaunchGameFunction (upval), UseRoactServiceResult (copy)
+		UseProfileAnalyticsContextModuleResult.fireAnalyticsEvent(EventNamesModule.EventJoined, { virtualEventId = p2.id })
+		VirtualEventsModule.fireVirtualEventJoined({
+			channel = "communityPeekView",
+			virtualEventId = p2.id,
+			universeId = tostring(p2.universeId)
+		})
+		LaunchGameFunction(p2.placeId, nil, { eventId = p2.id }, UseRoactServiceResult)
+	end, {})
+	local UseResult3 = ReactModule.useCallback(function(p2) --[[ Line: 169 ]]
+		-- upvalues: VirtualEventsModule (upval)
+		VirtualEventsModule.fireVirtualEventImpression({
+			channel = "communityPeekView",
+			virtualEventId = p2.id,
+			universeId = p2.universeId
+		})
+	end, {})
+	local UseSignalStateResult1 = if FFlagEnableCommunityProfileLoadingSkeletonsModule then UseSignalStateFunction(UseMemoResult.isLoading) else false
 	
-	return reactModule.createElement(horizontalPageMargin, {
+	return ReactModule.createElement(HorizontalPageMargin, {
 		backgroundTransparency = 1,
 		useAutomaticSizing = true,
 		size = UDim2.new(1, 0, 0, 0),
 		layoutOrder = p1.layoutOrder
 	}, {
-		NavEvents = reactModule.createElement(roactNavigationModule.NavigationEvents, {
-			onDidFocus = function()
-				-- upvalues: var7 (ref)
-				var7.refetch()
+		NavEvents = ReactModule.createElement(RoactNavigationModule.NavigationEvents, {
+			onDidFocus = function() --[[ Line: 188 ]]
+				-- upvalues: UseMemoResult (copy)
+				UseMemoResult.refetch()
 			end
 		}),
-		EventsCarousel = if fFlagEnableCommunityProfileLoadingSkeletonsModule and (if fFlagEnableCommunityProfileLoadingSkeletonsModule then useSignalState(var7.isLoading) else false) then reactModule.createElement(eventsSkeletonModule, { numSkeletons = #var1.events }) else reactModule.createElement(eventsListCarousel, {
+		EventsCarousel = if FFlagEnableCommunityProfileLoadingSkeletonsModule and UseSignalStateResult1 then ReactModule.createElement(EventsSkeletonModule, {
+			numSkeletons = #UseProfileJsonComponentModuleResult.events
+		}) else ReactModule.createElement(EventsListCarousel, {
 			peekViewFormat = true,
 			referralSource = "communityPeekView",
-			virtualEvents = var9,
-			onTileActivated = reactModule.useCallback(function(p2)
-				-- upvalues: var6 (ref), eventNamesModule (copy), fFlagLuaAppSduiEventDetailsEnabled (copy), navigateToEventDetails (copy), var4 (ref), appPage (copy)
-				var6.fireAnalyticsEvent(eventNamesModule.EventOpened, { virtualEventId = p2.id })
-				
-				if fFlagLuaAppSduiEventDetailsEnabled then
-					navigateToEventDetails(var4, p2.id, tostring(p2.universeId))
-					
-					return
-				end
-				var4.navigate(appPage.EventDetails, {
-					extraProps = { currentTime = DateTime.now(), virtualEventId = p2.id }
-				})
-			end, { var4 }),
-			onRsvpChanged = reactModule.useCallback(function(p2, p3)
-				-- upvalues: var6 (ref), eventNamesModule (copy), virtualEventsModule (copy), var7 (ref), var5 (ref), cryoModule (copy)
-				var6.fireAnalyticsEvent(eventNamesModule.EventRSVP, { virtualEventId = p2.id, status = p3 })
-				virtualEventsModule.fireVirtualEventRSVP({
-					channel = "communityPeekView",
-					virtualEventId = p2.id,
-					universeId = tostring(p2.universeId),
-					status = p3
-				})
-				var7.updateRsvpStatus(p2, p3)
-				var5.cache:modify({
-					id = "VirtualEvent:" .. p2.id,
-					fields = {
-						userRsvpStatus = function(_, _, _)
-							-- upvalues: p3 (ref)
-							return p3
-						end,
-						rsvpCounters = function(_, p4, _)
-							-- upvalues: p3 (ref), cryoModule (copy)
-							return cryoModule.Dictionary.join(p4, { going = p4.going + (if p3 == "going" then 1 else -1) })
-						end
-					}
-				})
-			end, { var7 }),
-			onJoinEvent = reactModule.useCallback(function(p2)
-				-- upvalues: var6 (ref), eventNamesModule (copy), virtualEventsModule (copy), launchGame (copy), var3 (ref)
-				var6.fireAnalyticsEvent(eventNamesModule.EventJoined, { virtualEventId = p2.id })
-				virtualEventsModule.fireVirtualEventJoined({
-					channel = "communityPeekView",
-					virtualEventId = p2.id,
-					universeId = tostring(p2.universeId)
-				})
-				launchGame(p2.placeId, nil, { eventId = p2.id }, var3)
-			end, {}),
-			onEventImpression = reactModule.useCallback(function(p2)
-				-- upvalues: virtualEventsModule (copy)
-				virtualEventsModule.fireVirtualEventImpression({
-					channel = "communityPeekView",
-					virtualEventId = p2.id,
-					universeId = p2.universeId
-				})
-			end, {}),
-			universeId = if #var9 > 0 then tonumber(var9[1].universeId) or 0 else 0
+			virtualEvents = UseMemoResult1,
+			onTileActivated = UseResult1,
+			onRsvpChanged = UseResult,
+			onJoinEvent = UseResult2,
+			onEventImpression = UseResult3,
+			universeId = Number1
 		})
 	})
 end

@@ -1,17 +1,17 @@
-﻿local uDim2 = UDim2.new(1.1, 0, 1.1, 0)
-local uDim2_1 = UDim2.new(0.9, 0, 0.9, 0)
-local tweenService = game:GetService("TweenService")
-local corePackagesService = game:GetService("CorePackages")
-local appFonts = require(corePackagesService.Workspace.Packages.Style).AppFonts
-local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
-local create = require(corePackagesService.Workspace.Packages.AppCommonLib).Create
-local tweenInfo = TweenInfo.new(0.15, Enum.EasingStyle.Sine)
-local tweenInfo_1 = TweenInfo.new(0.6, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, -1, true)
-local localizeGameplayPaused = game:DefineFastFlag("LocalizeGameplayPaused", false)
+﻿local _UDim2 = UDim2.new(1.1, 0, 1.1, 0)
+local _UDim2_1 = UDim2.new(0.9, 0, 0.9, 0)
+local TweenService = game:GetService("TweenService")
+local CorePackages = game:GetService("CorePackages")
+local AppFonts = require(CorePackages.Workspace.Packages.Style).AppFonts
+local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
+local CreateFunction = require(CorePackages.Workspace.Packages.AppCommonLib).Create
+local _TweenInfo = TweenInfo.new(0.15, Enum.EasingStyle.Sine)
+local _TweenInfo1 = TweenInfo.new(0.6, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, -1, true)
+local LocalizeGameplayPaused = game:DefineFastFlag("LocalizeGameplayPaused", false)
 
-local function build()
-	-- upvalues: create (ref), uDim2_1 (ref), appFonts (ref), localizeGameplayPaused (ref), robloxTranslatorModule (ref)
-	return create("ImageLabel")({
+local function build() --[[ Line: 23 ]]
+	-- upvalues: CreateFunction (copy), _UDim2_1 (copy), AppFonts (copy), LocalizeGameplayPaused (copy), RobloxTranslatorModule (copy)
+	return CreateFunction("ImageLabel")({
 		Name = "NetworkPause",
 		Image = "rbxasset://textures/ui/PurchasePrompt/LoadingBG.png",
 		ScaleType = Enum.ScaleType.Slice,
@@ -22,14 +22,14 @@ local function build()
 		ImageColor3 = Color3.fromRGB(122, 122, 122),
 		ImageTransparency = 0,
 		BackgroundTransparency = 1,
-		create("UISizeConstraint")({ MaxSize = Vector2.new(312, 251) }),
-		create("UIPadding")({
+		CreateFunction("UISizeConstraint")({ MaxSize = Vector2.new(312, 251) }),
+		CreateFunction("UIPadding")({
 			PaddingTop = UDim.new(0, 24),
 			PaddingLeft = UDim.new(0, 24),
 			PaddingRight = UDim.new(0, 24),
 			PaddingBottom = UDim.new(0, 24)
 		}),
-		create("Frame")({
+		CreateFunction("Frame")({
 			Name = "Accent",
 			BorderSizePixel = 0,
 			BackgroundTransparency = 0,
@@ -37,47 +37,47 @@ local function build()
 			Size = UDim2.new(1, 0, 0, 1),
 			Position = UDim2.new(0, 0, 0, 88)
 		}),
-		create("Frame")({
+		CreateFunction("Frame")({
 			Name = "Upper",
 			Size = UDim2.new(1, 0, 0, 88),
 			BackgroundTransparency = 1,
-			create("Frame")({
+			CreateFunction("Frame")({
 				Name = "IconContainer",
 				Size = UDim2.new(0, 40, 0, 37),
 				AnchorPoint = Vector2.new(0.5, 0),
 				Position = UDim2.new(0.5, 0, 0, 0),
 				BackgroundTransparency = 1,
-				create("ImageLabel")({
+				CreateFunction("ImageLabel")({
 					Name = "Icon",
 					BackgroundTransparency = 1,
 					Image = "rbxasset://textures/ui/NetworkPause/no connection.png",
 					ImageTransparency = 0,
-					Size = uDim2_1,
+					Size = _UDim2_1,
 					Position = UDim2.new(0.5, 0, 0.88, 0),
 					AnchorPoint = Vector2.new(0.5, 0.88)
 				})
 			}),
-			create("TextLabel")({
+			CreateFunction("TextLabel")({
 				Name = "Label",
 				TextSize = 22,
 				TextWrapped = true,
 				BackgroundTransparency = 1,
 				TextTransparency = 0,
-				Font = appFonts.default:getBold(),
-				Text = localizeGameplayPaused and robloxTranslatorModule:FormatByKey("InGame.GameplayPaused.Title") or "Gameplay Paused",
+				Font = AppFonts.default:getBold(),
+				Text = LocalizeGameplayPaused and RobloxTranslatorModule:FormatByKey("InGame.GameplayPaused.Title") or "Gameplay Paused",
 				Size = UDim2.new(1, 0, 0, 22),
 				Position = UDim2.new(0, 0, 0, 54),
 				TextColor3 = Color3.fromRGB(255, 255, 255)
 			})
 		}),
-		create("TextLabel")({
+		CreateFunction("TextLabel")({
 			Name = "Lower",
 			TextSize = 18,
 			TextWrapped = true,
 			BackgroundTransparency = 1,
 			TextTransparency = 0,
-			Font = appFonts.default:getDefault(),
-			Text = localizeGameplayPaused and robloxTranslatorModule:FormatByKey("InGame.GameplayPaused.Body") or "Gameplay has been paused: please wait while the game content loads.",
+			Font = AppFonts.default:getDefault(),
+			Text = LocalizeGameplayPaused and RobloxTranslatorModule:FormatByKey("InGame.GameplayPaused.Body") or "Gameplay has been paused: please wait while the game content loads.",
 			TextColor3 = Color3.fromRGB(190, 190, 190),
 			Position = UDim2.new(0, 0, 0, 89),
 			Size = UDim2.new(1, 0, 1, -89)
@@ -85,45 +85,46 @@ local function build()
 	})
 end
 
-local t = {}
-t.__index = t
+local NetworkPauseNotificationModule = {}
+NetworkPauseNotificationModule.__index = NetworkPauseNotificationModule
 
-function t.new()
-	-- upvalues: t (ref), build (ref), tweenService (ref), tweenInfo (ref), tweenInfo_1 (ref), uDim2 (ref)
-	local tbl = setmetatable({}, t)
-	local var1 = build()
-	local var2 = tweenService:Create(var1, tweenInfo, { ImageTransparency = 0 })
-	local var3 = tweenService:Create(var1, tweenInfo, { ImageTransparency = 1 })
-	local icon = tweenService:Create(var1.Upper.IconContainer.Icon, tweenInfo_1, { ImageTransparency = 0.75, Size = uDim2 })
-	tbl.__gui = var1
-	tbl.__guiParent = nil
-	tbl.__show = false
-	tbl.__animations = { show = var2, hide = var3, pulse = icon }
+function NetworkPauseNotificationModule.new() --[[ Line: 122 ]]
+	-- upvalues: NetworkPauseNotificationModule (copy), build (copy), TweenService (copy), _TweenInfo (copy), _TweenInfo1 (copy), _UDim2 (copy)
+	local self = setmetatable({}, NetworkPauseNotificationModule)
+	local BuildResult = build()
+	self.__gui = BuildResult
+	self.__guiParent = nil
+	self.__show = false
+	self.__animations = {
+		show = TweenService:Create(BuildResult, _TweenInfo, { ImageTransparency = 0 }),
+		hide = TweenService:Create(BuildResult, _TweenInfo, { ImageTransparency = 1 }),
+		pulse = TweenService:Create(BuildResult.Upper.IconContainer.Icon, _TweenInfo1, { ImageTransparency = 0.75, Size = _UDim2 })
+	}
 	
-	return tbl
+	return self
 end
 
-function t:Show()
-	-- upvalues: uDim2_1 (ref)
-	self.__gui.Upper.IconContainer.Icon.Size = uDim2_1
+function NetworkPauseNotificationModule:Show() --[[ Line: 146 ]]
+	-- upvalues: _UDim2_1 (copy)
+	self.__gui.Upper.IconContainer.Icon.Size = _UDim2_1
 	self.__gui.Upper.IconContainer.Icon.ImageTransparency = 0
 	self.__show = true
 	self.__gui.Parent = self.__guiParent
 	self.__animations.pulse:Play()
 end
 
-function t:Hide()
+function NetworkPauseNotificationModule:Hide() --[[ Line: 154 ]]
 	self.__show = false
 	self.__gui.Parent = nil
 	self.__animations.pulse:Cancel()
 end
 
-function t:SetParent(p1)
-	self.__guiParent = p1
+function NetworkPauseNotificationModule:SetParent(Parent) --[[ Line: 160 ]]
+	self.__guiParent = Parent
 	
 	if self.__show then
-		self.__gui.Parent = p1
+		self.__gui.Parent = Parent
 	end
 end
 
-return t
+return NetworkPauseNotificationModule

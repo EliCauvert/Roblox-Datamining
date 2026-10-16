@@ -1,31 +1,35 @@
-﻿local reactModule = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.React)
-local submitAnalyticsModule = require(script.Parent.submitAnalytics)
-local analyticsSubmitContextModule = require(script.Parent.AnalyticsSubmitContext)
-local analyticsStateContextModule = require(script.Parent.AnalyticsStateContext)
-local analyticsDispatchContextModule = require(script.Parent.AnalyticsDispatchContext)
-local analyticsReducerModule = require(script.Parent.AnalyticsReducer)
+﻿local ReactModule = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.React)
+local SubmitAnalyticsModule = require(script.Parent.submitAnalytics)
+local AnalyticsSubmitContextModule = require(script.Parent.AnalyticsSubmitContext)
+local AnalyticsStateContextModule = require(script.Parent.AnalyticsStateContext)
+local AnalyticsDispatchContextModule = require(script.Parent.AnalyticsDispatchContext)
+local AnalyticsReducerModule = require(script.Parent.AnalyticsReducer)
 
-return function(p1)
-	-- upvalues: reactModule (ref), analyticsReducerModule (ref), submitAnalyticsModule (ref), analyticsSubmitContextModule (ref), analyticsStateContextModule (ref), analyticsDispatchContextModule (ref)
-	local var1, var2 = reactModule.useReducer(analyticsReducerModule.reducer, analyticsReducerModule.initialState)
+return function(p1) --[[ Line: 22 | Named "AnalyticsProvider" ]]
+	-- upvalues: ReactModule (copy), AnalyticsReducerModule (copy), SubmitAnalyticsModule (copy), AnalyticsSubmitContextModule (copy), AnalyticsStateContextModule (copy), AnalyticsDispatchContextModule (copy)
+	local UseReducerResult, UseReducerResult2 = ReactModule.useReducer(AnalyticsReducerModule.reducer, AnalyticsReducerModule.initialState)
 	
-	return reactModule.createElement(analyticsSubmitContextModule.Provider, {
-		value = reactModule.useCallback(function(p2)
-			-- upvalues: p1 (ref), var1 (ref), submitAnalyticsModule (copy)
-			local var3 = if p1.onBeforeSubmitAnalytics then p1.onBeforeSubmitAnalytics(var1) else var1
+	return ReactModule.createElement(AnalyticsSubmitContextModule.Provider, {
+		value = ReactModule.useCallback(function(p2) --[[ Line: 25 ]]
+			-- upvalues: p1 (copy), UseReducerResult (copy), SubmitAnalyticsModule (upval)
+			local OnBeforeSubmitAnalyticsResult = if p1.onBeforeSubmitAnalytics then p1.onBeforeSubmitAnalytics(UseReducerResult) else UseReducerResult
 			
-			if var3 then
+			if OnBeforeSubmitAnalyticsResult then
 				if p1.onSubmitAnalytics then
-					p1.onSubmitAnalytics(var3, p2)
+					p1.onSubmitAnalytics(OnBeforeSubmitAnalyticsResult, p2)
 					
 					return
 				end
-				submitAnalyticsModule(var3, p2)
+				SubmitAnalyticsModule(OnBeforeSubmitAnalyticsResult, p2)
 			end
-		end, { var1, p1.onBeforeSubmitAnalytics, p1.onSubmitAnalytics })
+		end, {
+			UseReducerResult,
+			p1.onBeforeSubmitAnalytics,
+			p1.onSubmitAnalytics
+		})
 	}, {
-		stateProvider = reactModule.createElement(analyticsStateContextModule.Provider, { value = var1 }, {
-			dispatchProvider = reactModule.createElement(analyticsDispatchContextModule.Provider, { value = var2 }, p1.children)
+		stateProvider = ReactModule.createElement(AnalyticsStateContextModule.Provider, { value = UseReducerResult }, {
+			dispatchProvider = ReactModule.createElement(AnalyticsDispatchContextModule.Provider, { value = UseReducerResult2 }, p1.children)
 		})
 	})
 end

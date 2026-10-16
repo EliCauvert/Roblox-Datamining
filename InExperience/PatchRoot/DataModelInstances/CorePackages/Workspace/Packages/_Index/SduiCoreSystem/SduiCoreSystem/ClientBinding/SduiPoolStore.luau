@@ -1,718 +1,700 @@
-﻿local sduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
-local parent = sduiCoreSystem.Parent
-local signalsModule = require(parent.Signals)
-local collectionViewsModule = require(parent.CollectionViews)
-local sduiErrorsModule = require(sduiCoreSystem.SduiErrors)
-local sduiLoggerModule = require(sduiCoreSystem.SduiLogger)
-local sduiParseHelpersModule = require(sduiCoreSystem.SduiParseHelpers)
-local _ = require(sduiCoreSystem.ClientBinding.SduiPoolStoreTypes)
-local sduiPoolStoreLayoutModule = require(sduiCoreSystem.ClientBinding.SduiPoolStoreLayout)
-local getMainCollectionLayoutStore = collectionViewsModule.getMainCollectionLayoutStore
-local processOneGrid = collectionViewsModule.processOneGrid
-local makePoolGetSpanConfig = sduiPoolStoreLayoutModule.makePoolGetSpanConfig
-local layoutToCells = sduiPoolStoreLayoutModule.layoutToCells
-local cellsEqual = sduiPoolStoreLayoutModule.cellsEqual
-local EMPTY_CELLS = sduiPoolStoreLayoutModule.EMPTY_CELLS
-local fFlagLuaAppEnableNxMRoduxApportioning = require(parent.SharedFlags).FFlagLuaAppEnableNxMRoduxApportioning
-local fFlagSduiCollectionGridRevealRows = require(parent.SharedFlags).FFlagSduiCollectionGridRevealRows
-local fFlagSduiSkipFeedAnalyticsPosition = require(parent.SharedFlags).FFlagSduiSkipFeedAnalyticsPosition
-local fFlagSduiPerSectionPoolSizing = require(parent.SharedFlags).FFlagSduiPerSectionPoolSizing
-local fFlagSduiVerticalFeedProgressiveFillOnScroll = require(parent.SharedFlags).FFlagSduiVerticalFeedProgressiveFillOnScroll
-local fFlagLuaAppEnableOneByTwoTileFunnelTelemetrySdui = require(parent.SharedFlags).FFlagLuaAppEnableOneByTwoTileFunnelTelemetrySdui
-local frozen = table.freeze({})
+﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
+local Parent = SduiCoreSystem.Parent
+local SignalsModule = require(Parent.Signals)
+local CollectionViewsModule = require(Parent.CollectionViews)
+local SduiErrorsModule = require(SduiCoreSystem.SduiErrors)
+local SduiLoggerModule = require(SduiCoreSystem.SduiLogger)
+local SduiParseHelpersModule = require(SduiCoreSystem.SduiParseHelpers)
+local _ = require(SduiCoreSystem.ClientBinding.SduiPoolStoreTypes)
+local SduiPoolStoreLayoutModule = require(SduiCoreSystem.ClientBinding.SduiPoolStoreLayout)
+local GetMainCollectionLayoutStoreFunction = CollectionViewsModule.getMainCollectionLayoutStore
+local ProcessOneGridFunction = CollectionViewsModule.processOneGrid
+local MakePoolGetSpanConfigFunction = SduiPoolStoreLayoutModule.makePoolGetSpanConfig
+local LayoutToCellsFunction = SduiPoolStoreLayoutModule.layoutToCells
+local CellsEqual = SduiPoolStoreLayoutModule.cellsEqual
+local EMPTYCELLS = SduiPoolStoreLayoutModule.EMPTY_CELLS
+local FFlagLuaAppEnableNxMRoduxApportioning = require(Parent.SharedFlags).FFlagLuaAppEnableNxMRoduxApportioning
+local FFlagSduiCollectionGridRevealRows = require(Parent.SharedFlags).FFlagSduiCollectionGridRevealRows
+local FFlagSduiSkipFeedAnalyticsPosition = require(Parent.SharedFlags).FFlagSduiSkipFeedAnalyticsPosition
+local FFlagSduiPerSectionPoolSizing = require(Parent.SharedFlags).FFlagSduiPerSectionPoolSizing
+local FFlagSduiVerticalFeedProgressiveFillOnScroll = require(Parent.SharedFlags).FFlagSduiVerticalFeedProgressiveFillOnScroll
+local FFlagLuaAppEnableOneByTwoTileFunnelTelemetrySdui = require(Parent.SharedFlags).FFlagLuaAppEnableOneByTwoTileFunnelTelemetrySdui
+local Frozen = table.freeze({})
 
-local function logSkipped(p1, p2, p3)
-	-- upvalues: sduiLoggerModule (ref), sduiErrorsModule (ref), sduiParseHelpersModule (ref)
-	local onSkipped = p2 and p2.onSkipped
-	local oneByTwoTileFlowId = p1 and p1.oneByTwoTileFlowId
+local function logSkipped(Item, p1, p2) --[[ Line: 87 ]]
+	-- upvalues: SduiLoggerModule (copy), SduiErrorsModule (copy), SduiParseHelpersModule (copy)
+	local OnSkipped = p1 and p1.onSkipped
+	local OneByTwoTileFlowId = Item and Item.oneByTwoTileFlowId
 	
-	if onSkipped and p1 and typeof(oneByTwoTileFlowId) == "string" then
-		local ok, status = pcall(function()
-			-- upvalues: onSkipped (ref), oneByTwoTileFlowId (ref), p1 (ref)
-			onSkipped({
+	if OnSkipped and Item and typeof(OneByTwoTileFlowId) == "string" then
+		local Success, Result = pcall(function() --[[ Line: 91 ]]
+			-- upvalues: OnSkipped (copy), OneByTwoTileFlowId (copy), Item (copy)
+			OnSkipped({
 				componentType = "OneByTwoTile",
 				isSdui = true,
-				oneByTwoTileFlowId = oneByTwoTileFlowId,
-				contentType = p1.contentType,
-				adId = p1.adId
+				oneByTwoTileFlowId = OneByTwoTileFlowId,
+				contentType = Item.contentType,
+				adId = Item.adId
 			})
 			
 			return nil
 		end)
 		
-		if not ok then
-			sduiLoggerModule.reportError(sduiErrorsModule.SduiErrorType.CodeError, {
+		if not Success then
+			SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.CodeError, {
 				name = "OneByTwoTileSkipped",
-				message = sduiParseHelpersModule.stringifyValue(status)
-			}, p3)
+				message = SduiParseHelpersModule.stringifyValue(Result)
+			}, p2)
 		end
 	end
 end
 
-local function sectionConfigsEqual(p1, p2)
-	-- upvalues: fFlagSduiSkipFeedAnalyticsPosition (ref), fFlagSduiPerSectionPoolSizing (ref)
-	if p1 == p2 then
-		return true
-	elseif p1 == nil or p2 == nil then
-		return false
-	end
-	local var1 = false
+local function sectionConfigsEqual(p1, p2): boolean --[[ Line: 110 ]]
+	-- upvalues: FFlagSduiSkipFeedAnalyticsPosition (copy), FFlagSduiPerSectionPoolSizing (copy)
+	return p1 == p2 or p1 ~= nil and p2 ~= nil and (p1.poolId == p2.poolId and p1.numberOfRows == p2.numberOfRows and (if FFlagSduiSkipFeedAnalyticsPosition then p1.doesNotAdvanceStartRow == p2.doesNotAdvanceStartRow and (if FFlagSduiPerSectionPoolSizing then p1.entryCollectionItemSize == p2.entryCollectionItemSize and (if FFlagSduiPerSectionPoolSizing then p1.templateCollectionItemSize == p2.templateCollectionItemSize and (p1.prevSectionInPoolId == p2.prevSectionInPoolId and p1.prevSectionId == p2.prevSectionId) else p1.prevSectionInPoolId == p2.prevSectionInPoolId and p1.prevSectionId == p2.prevSectionId) elseif FFlagSduiPerSectionPoolSizing then p1.templateCollectionItemSize == p2.templateCollectionItemSize and (p1.prevSectionInPoolId == p2.prevSectionInPoolId and p1.prevSectionId == p2.prevSectionId) else p1.prevSectionInPoolId == p2.prevSectionInPoolId and p1.prevSectionId == p2.prevSectionId) elseif FFlagSduiPerSectionPoolSizing then p1.entryCollectionItemSize == p2.entryCollectionItemSize and (if FFlagSduiPerSectionPoolSizing then p1.templateCollectionItemSize == p2.templateCollectionItemSize and (p1.prevSectionInPoolId == p2.prevSectionInPoolId and p1.prevSectionId == p2.prevSectionId) else p1.prevSectionInPoolId == p2.prevSectionInPoolId and p1.prevSectionId == p2.prevSectionId) elseif FFlagSduiPerSectionPoolSizing then p1.templateCollectionItemSize == p2.templateCollectionItemSize and (p1.prevSectionInPoolId == p2.prevSectionInPoolId and p1.prevSectionId == p2.prevSectionId) else p1.prevSectionInPoolId == p2.prevSectionInPoolId and p1.prevSectionId == p2.prevSectionId))
+end
+
+local function _(p1, p2, p3) --[[ Line: 130 | Named "getSectionCollectionItemSize" ]]
+	local CollectionItemSize = p2.collectionItemSize
 	
-	if p1.poolId == p2.poolId then
-		var1 = false
+	if typeof(CollectionItemSize) == "string" and p1.getItemsPerRow[CollectionItemSize] ~= nil then
+		return CollectionItemSize
+	end
+	local EntryCollectionItemSize = p3.entryCollectionItemSize
+	
+	if typeof(EntryCollectionItemSize) == "string" and p1.getItemsPerRow[EntryCollectionItemSize] ~= nil then
+		return EntryCollectionItemSize
+	else
+		local TemplateCollectionItemSize = p3.templateCollectionItemSize
 		
-		if p1.numberOfRows == p2.numberOfRows then
-			if fFlagSduiSkipFeedAnalyticsPosition then
-				var1 = p1.doesNotAdvanceStartRow == p2.doesNotAdvanceStartRow
-				var1 = nil
-			else
-				var1 = true
-			end
-			if var1 then
-				if fFlagSduiPerSectionPoolSizing then
-					var1 = p1.entryCollectionItemSize == p2.entryCollectionItemSize
-					var1 = nil
-				else
-					var1 = true
-				end
-				if var1 then
-					if fFlagSduiPerSectionPoolSizing then
-						var1 = p1.templateCollectionItemSize == p2.templateCollectionItemSize
-						var1 = nil
-					else
-						var1 = true
-					end
-					var1 = var1 and (p1.prevSectionInPoolId == p2.prevSectionInPoolId and p1.prevSectionId == p2.prevSectionId)
-				end
-			end
-		end
+		return if typeof(TemplateCollectionItemSize) == "string" and p1.getItemsPerRow[TemplateCollectionItemSize] ~= nil then TemplateCollectionItemSize else "Medium"
 	end
-	return var1
 end
 
-local function _(p1, p2, p3)
-	local collectionItemSize = p2.collectionItemSize
-	
-	if typeof(collectionItemSize) == "string" and p1.getItemsPerRow[collectionItemSize] ~= nil then
-		return collectionItemSize
-	end
-	local entryCollectionItemSize = p3.entryCollectionItemSize
-	
-	if typeof(entryCollectionItemSize) == "string" and p1.getItemsPerRow[entryCollectionItemSize] ~= nil then
-		return entryCollectionItemSize
-	end
-	local templateCollectionItemSize = p3.templateCollectionItemSize
-	
-	return if typeof(templateCollectionItemSize) == "string" and p1.getItemsPerRow[templateCollectionItemSize] ~= nil then templateCollectionItemSize else "Medium"
-end
-
-local function createSduiPoolStore(p1)
-	-- upvalues: fFlagSduiCollectionGridRevealRows (ref), signalsModule (ref), sectionConfigsEqual (ref), getMainCollectionLayoutStore (ref), fFlagSduiPerSectionPoolSizing (ref), frozen (ref), EMPTY_CELLS (ref), makePoolGetSpanConfig (ref), processOneGrid (ref), fFlagLuaAppEnableNxMRoduxApportioning (ref), layoutToCells (ref), fFlagLuaAppEnableOneByTwoTileFunnelTelemetrySdui (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), sduiParseHelpersModule (ref), logSkipped (ref), fFlagSduiSkipFeedAnalyticsPosition (ref), cellsEqual (ref), fFlagSduiVerticalFeedProgressiveFillOnScroll (ref)
+local function createSduiPoolStore(Key) --[[ Line: 162 ]]
+	-- upvalues: FFlagSduiCollectionGridRevealRows (copy), SignalsModule (copy), sectionConfigsEqual (copy), GetMainCollectionLayoutStoreFunction (copy), FFlagSduiPerSectionPoolSizing (copy), Frozen (copy), EMPTYCELLS (copy), MakePoolGetSpanConfigFunction (copy), ProcessOneGridFunction (copy), FFlagLuaAppEnableNxMRoduxApportioning (copy), LayoutToCellsFunction (copy), FFlagLuaAppEnableOneByTwoTileFunnelTelemetrySdui (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), SduiParseHelpersModule (copy), logSkipped (copy), FFlagSduiSkipFeedAnalyticsPosition (copy), CellsEqual (copy), FFlagSduiVerticalFeedProgressiveFillOnScroll (copy)
 	local t = {}
-	local t_1 = {}
-	local var1 = if fFlagSduiCollectionGridRevealRows then {} else nil
-	local t_2 = {}
-	local t_3 = {}
-	local var2 = if fFlagSduiCollectionGridRevealRows then {} else nil
-	local t_4 = {}
-	local t_5 = {}
-	local var3, var4 = signalsModule.createSignal(nil)
-	local var5 = nil
+	local t1 = {}
+	local T = if FFlagSduiCollectionGridRevealRows then {} else nil
+	local t2 = {}
+	local t3 = {}
+	local T1 = if FFlagSduiCollectionGridRevealRows then {} else nil
+	local t4 = {}
+	local t5 = {}
+	local Signal, Signal2 = SignalsModule.createSignal(nil)
+	local v1 = nil
 	
-	local function _(value)
-		-- upvalues: t (ref), signalsModule (copy)
-		local var6 = t[value]
+	local function _(Key) --[[ Line: 183 | Named "getOrCreatePoolSignal" ]]
+		-- upvalues: t (copy), SignalsModule (upval)
+		local Entry = t[Key]
 		
-		if var6 == nil then
-			local var7, var8 = signalsModule.createSignal(nil)
-			var6 = { get = var7, set = var8 }
-			t[value] = var6
+		if Entry == nil then
+			local Signal, Signal2 = SignalsModule.createSignal(nil)
+			Entry = { get = Signal, set = Signal2 }
+			t[Key] = Entry
 		end
-		return var6
+		return Entry
 	end
 	
-	local _ = function(value)
-		-- upvalues: t_1 (ref), signalsModule (copy), sectionConfigsEqual (copy)
-		local var6 = t_1[value]
+	local _ = function(Key) --[[ Line: 193 | Named "getOrCreateSectionConfigSignal" ]]
+		-- upvalues: t1 (copy), SignalsModule (upval), sectionConfigsEqual (upval)
+		local Entry = t1[Key]
 		
-		if var6 == nil then
-			local var7, var8 = signalsModule.createSignal(nil, sectionConfigsEqual)
-			var6 = { get = var7, set = var8 }
-			t_1[value] = var6
+		if Entry == nil then
+			local Signal, Signal2 = SignalsModule.createSignal(nil, sectionConfigsEqual)
+			Entry = { get = Signal, set = Signal2 }
+			t1[Key] = Entry
 		end
-		return var6
+		return Entry
 	end
 	
-	local var6 = if fFlagSduiCollectionGridRevealRows then function(p2)
-		-- upvalues: var1 (ref), signalsModule (copy)
-		local var7 = var1[p2]
+	local Callback = if FFlagSduiCollectionGridRevealRows then function(Key) --[[ Line: 205 ]]
+		-- upvalues: T (copy), SignalsModule (upval)
+		local Entry = T[Key]
 		
-		if var7 == nil then
-			local var8, var9 = signalsModule.createSignal(nil)
-			var7 = { get = var8, set = var9 }
-			var1[p2] = var7
+		if Entry == nil then
+			local Signal, Signal2 = SignalsModule.createSignal(nil)
+			Entry = { get = Signal, set = Signal2 }
+			T[Key] = Entry
 		end
-		return var7
+		return Entry
 	end else nil
 	local _ = nil
 	
-	local var7 = function(p2)
-		-- upvalues: t_2 (ref), signalsModule (copy), t_1 (ref), sectionConfigsEqual (copy), t (ref), var3 (ref), getMainCollectionLayoutStore (copy), fFlagSduiPerSectionPoolSizing (copy), frozen (copy), var7 (write), EMPTY_CELLS (copy), makePoolGetSpanConfig (copy), processOneGrid (copy), fFlagLuaAppEnableNxMRoduxApportioning (copy), layoutToCells (copy), fFlagLuaAppEnableOneByTwoTileFunnelTelemetrySdui (copy), var5 (write), sduiLoggerModule (copy), sduiErrorsModule (copy), sduiParseHelpersModule (copy), p1 (ref), logSkipped (copy)
-		local var8 = t_2[p2]
+	local function v44(Key1) --[[ Line: 219 ]]
+		-- upvalues: t2 (copy), SignalsModule (upval), t1 (copy), sectionConfigsEqual (upval), t (copy), Signal (copy), GetMainCollectionLayoutStoreFunction (upval), FFlagSduiPerSectionPoolSizing (upval), Frozen (upval), v44 (ref), EMPTYCELLS (upval), MakePoolGetSpanConfigFunction (upval), ProcessOneGridFunction (upval), FFlagLuaAppEnableNxMRoduxApportioning (upval), LayoutToCellsFunction (upval), FFlagLuaAppEnableOneByTwoTileFunnelTelemetrySdui (upval), v1 (ref), SduiLoggerModule (upval), SduiErrorsModule (upval), SduiParseHelpersModule (upval), Key (copy), logSkipped (upval)
+		local Entry = t2[Key1]
 		
-		if var8 == nil then
-			local var9 = signalsModule.createComputed(function(p3)
-				-- upvalues: p2 (ref), t_1 (copy), signalsModule (copy), sectionConfigsEqual (copy), t (copy), var3 (copy), getMainCollectionLayoutStore (copy), fFlagSduiPerSectionPoolSizing (copy), frozen (copy), var7 (copy), EMPTY_CELLS (copy), makePoolGetSpanConfig (copy), processOneGrid (copy), fFlagLuaAppEnableNxMRoduxApportioning (copy), layoutToCells (copy), fFlagLuaAppEnableOneByTwoTileFunnelTelemetrySdui (copy), var5 (copy), sduiLoggerModule (copy), sduiErrorsModule (copy), sduiParseHelpersModule (copy), p1 (copy), logSkipped (copy)
-				local var10 = t_1[p2]
+		if Entry == nil then
+			local Computed = SignalsModule.createComputed(function(p1) --[[ Line: 224 ]]
+				-- upvalues: Key1 (copy), t1 (upval), SignalsModule (upval), sectionConfigsEqual (upval), t (upval), Signal (upval), GetMainCollectionLayoutStoreFunction (upval), FFlagSduiPerSectionPoolSizing (upval), Frozen (upval), v44 (upval), EMPTYCELLS (upval), MakePoolGetSpanConfigFunction (upval), ProcessOneGridFunction (upval), FFlagLuaAppEnableNxMRoduxApportioning (upval), LayoutToCellsFunction (upval), FFlagLuaAppEnableOneByTwoTileFunnelTelemetrySdui (upval), v1 (upval), SduiLoggerModule (upval), SduiErrorsModule (upval), SduiParseHelpersModule (upval), Key (upval), logSkipped (upval)
+				local Entry = t1[Key1]
 				
-				if var10 == nil then
-					local var11, var12 = signalsModule.createSignal(nil, sectionConfigsEqual)
-					var10 = { get = var11, set = var12 }
-					t_1[p2] = var10
+				if Entry == nil then
+					local Signal1, Signal2 = SignalsModule.createSignal(nil, sectionConfigsEqual)
+					Entry = { get = Signal1, set = Signal2 }
+					t1[Key1] = Entry
 				end
-				local var13 = var10.get(p3)
+				local GetResult = Entry.get(p1)
 				
-				if var13 == nil or var13.poolId == nil then
+				if GetResult == nil or GetResult.poolId == nil then
 					return nil
 				end
-				local poolId = var13.poolId
-				local var14 = t[poolId]
+				local PoolId = GetResult.poolId
+				local Entry1 = t[PoolId]
 				
-				if var14 == nil then
-					local var15, var16 = signalsModule.createSignal(nil)
-					var14 = { get = var15, set = var16 }
-					t[poolId] = var14
+				if Entry1 == nil then
+					local Signal3, Signal2_1 = SignalsModule.createSignal(nil)
+					Entry1 = { get = Signal3, set = Signal2_1 }
+					t[PoolId] = Entry1
 				end
-				local var17 = var14.get(p3)
+				local GetResult1 = Entry1.get(p1)
 				
-				if var17 == nil or #var17.items == 0 then
+				if GetResult1 == nil or #GetResult1.items == 0 then
 					return nil
 				end
-				local collectionItemSize, var18, entryCollectionItemSize, templateCollectionItemSize
-				local var19 = var3(p3) or getMainCollectionLayoutStore(p3)
-				local _ = nil
+				local SignalResult = Signal(p1) or GetMainCollectionLayoutStoreFunction(p1)
+				local CollectionItemSize1 = nil
 				
-				if fFlagSduiPerSectionPoolSizing then
-					collectionItemSize = var17.collectionItemSize
+				if FFlagSduiPerSectionPoolSizing then
+					local CollectionItemSize = GetResult1.collectionItemSize
 					
-					if typeof(collectionItemSize) == "string" and var19.getItemsPerRow[collectionItemSize] ~= nil then
-						var18 = collectionItemSize
+					if typeof(CollectionItemSize) == "string" and SignalResult.getItemsPerRow[CollectionItemSize] ~= nil then
+						CollectionItemSize1 = CollectionItemSize
 					else
-						entryCollectionItemSize = var13.entryCollectionItemSize
+						local EntryCollectionItemSize = GetResult.entryCollectionItemSize
 						
-						if typeof(entryCollectionItemSize) == "string" and var19.getItemsPerRow[entryCollectionItemSize] ~= nil then
-							var18 = entryCollectionItemSize
+						if typeof(EntryCollectionItemSize) == "string" and SignalResult.getItemsPerRow[EntryCollectionItemSize] ~= nil then
+							CollectionItemSize1 = EntryCollectionItemSize
 						else
-							templateCollectionItemSize = var13.templateCollectionItemSize
-							var18 = if typeof(templateCollectionItemSize) == "string" and var19.getItemsPerRow[templateCollectionItemSize] ~= nil then templateCollectionItemSize else "Medium"
+							local TemplateCollectionItemSize = GetResult.templateCollectionItemSize
+							CollectionItemSize1 = if typeof(TemplateCollectionItemSize) == "string" and SignalResult.getItemsPerRow[TemplateCollectionItemSize] ~= nil then TemplateCollectionItemSize else "Medium"
 						end
 					end
-				var18 = if typeof(var17.collectionItemSize) == "string" and var19.getItemsPerRow[var17.collectionItemSize] ~= nil then var17.collectionItemSize else "Medium"
-				collectionItemSize = var19.getItemsPerRow[var18](p3)
+				else
+					CollectionItemSize1 = if typeof(GetResult1.collectionItemSize) == "string" and SignalResult.getItemsPerRow[GetResult1.collectionItemSize] ~= nil then GetResult1.collectionItemSize else "Medium"
+				end
+				local v2: number = SignalResult.getItemsPerRow[CollectionItemSize1](p1)
 				
-				if collectionItemSize <= 0 then
+				if v2 <= 0 then
 					return nil
 				end
-				entryCollectionItemSize = 1
-				templateCollectionItemSize = frozen
+				local NextStartIndex = 1
+				local PendingSpanTiles = Frozen
 				
-				if var13.prevSectionInPoolId ~= nil then
-					local var20 = var7(var13.prevSectionInPoolId)(p3)
+				if GetResult.prevSectionInPoolId ~= nil then
+					local v3 = v44(GetResult.prevSectionInPoolId)(p1)
 					
-					if var20 == nil then
+					if v3 == nil then
 						return nil
 					end
-					entryCollectionItemSize = var20.nextStartIndex
-					templateCollectionItemSize = var20.pendingSpanTiles
+					NextStartIndex = v3.nextStartIndex
+					PendingSpanTiles = v3.pendingSpanTiles
 				end
-				local numberOfRows = var13.numberOfRows
+				local NumberOfRows = GetResult.numberOfRows
 				
-				if numberOfRows <= 0 then
-					numberOfRows = 1e999
+				if NumberOfRows <= 0 then
+					NumberOfRows = 1e999
 				end
-				if var17.layouts == nil and #templateCollectionItemSize == 0 then
-					local maxValue = math.max(0, #var17.items - entryCollectionItemSize + 1)
-					local minValue = math.min(if numberOfRows == 1e999 then maxValue else numberOfRows * collectionItemSize, maxValue)
+				if GetResult1.layouts == nil and #PendingSpanTiles == 0 then
+					local Largest = math.max(0, #GetResult1.items - NextStartIndex + 1)
+					local Smallest = math.min(if NumberOfRows == 1e999 then Largest else NumberOfRows * v2, Largest)
 					
-					if minValue == 0 then
+					if Smallest == 0 then
 						return {
 							actualRowCount = 0,
-							cells = EMPTY_CELLS,
-							nextStartIndex = entryCollectionItemSize,
-							pendingSpanTiles = frozen
+							cells = EMPTYCELLS,
+							nextStartIndex = NextStartIndex,
+							pendingSpanTiles = Frozen
 						}
 					end
-					local ceiled = math.ceil(minValue / collectionItemSize)
-					local t_2 = {}
+					local Ceiled = math.ceil(Smallest / v2)
+					local Cells = {}
 					
-					for i = 0, minValue - 1 do
-						local var21 = entryCollectionItemSize + i
-						t_2[i + 1] = { item = var17.items[var21], realIndex = var21 }
+					for i2 = 0, Smallest - 1 do
+						local NewNextStartIndex = NextStartIndex + i2
+						Cells[i2 + 1] = {
+							item = GetResult1.items[NewNextStartIndex],
+							realIndex = NewNextStartIndex
+						}
 					end
-					for i_1 = minValue + 1, ceiled * collectionItemSize do
-						t_2[i_1] = {}
+					for i3 = Smallest + 1, Ceiled * v2 do
+						Cells[i3] = {}
 					end
 					return {
-						cells = t_2,
-						actualRowCount = ceiled,
-						nextStartIndex = entryCollectionItemSize + minValue,
-						pendingSpanTiles = frozen
+						cells = Cells,
+						actualRowCount = Ceiled,
+						nextStartIndex = NextStartIndex + Smallest,
+						pendingSpanTiles = Frozen
 					}
 				else
-					local var22 = processOneGrid(var17.items, entryCollectionItemSize, templateCollectionItemSize, collectionItemSize, numberOfRows, if var17.layouts ~= nil then nil else makePoolGetSpanConfig(var17.layouts), not fFlagLuaAppEnableNxMRoduxApportioning)
-					local var23, var24 = layoutToCells(var22.layout, collectionItemSize, var17.items, var17.layouts)
+					local ProcessOneGridResult = ProcessOneGridFunction(GetResult1.items, NextStartIndex, PendingSpanTiles, v2, NumberOfRows, if GetResult1.layouts == nil then nil else MakePoolGetSpanConfigFunction(GetResult1.layouts), not FFlagLuaAppEnableNxMRoduxApportioning)
+					local LayoutToCellsResult, LayoutToCellsResult2 = LayoutToCellsFunction(ProcessOneGridResult.layout, v2, GetResult1.items, GetResult1.layouts)
 					
-					if fFlagLuaAppEnableOneByTwoTileFunnelTelemetrySdui then
-						local onPlaced = var5 and var5.onPlaced
-						
-						for i_2, v in var23 do
-							local item = v.item
-							local oneByTwoTileFlowId = item and item.oneByTwoTileFlowId
+					if FFlagLuaAppEnableOneByTwoTileFunnelTelemetrySdui then
+						local OnPlaced = v1 and v1.onPlaced
+						for i1, value1 in LayoutToCellsResult do
+							local Item = value1.item
+							local OneByTwoTileFlowId = Item and Item.oneByTwoTileFlowId
 							
-							if onPlaced and item and typeof(oneByTwoTileFlowId) == "string" then
-								local ok, status = pcall(function()
-									-- upvalues: onPlaced (ref), oneByTwoTileFlowId (ref), item (ref), i_2 (ref), collectionItemSize (ref)
-									onPlaced({
+							if OnPlaced and (Item and typeof(OneByTwoTileFlowId) == "string") then
+								local Success, Result = pcall(function() --[[ Line: 316 ]]
+									-- upvalues: OnPlaced (copy), OneByTwoTileFlowId (copy), Item (copy), i1 (copy), v2 (copy)
+									OnPlaced({
 										componentType = "OneByTwoTile",
 										isSdui = true,
-										oneByTwoTileFlowId = oneByTwoTileFlowId,
-										contentType = item.contentType,
-										adId = item.adId,
-										gridRow = math.ceil(i_2 / collectionItemSize),
-										gridCol = (i_2 - 1) % collectionItemSize + 1
+										oneByTwoTileFlowId = OneByTwoTileFlowId,
+										contentType = Item.contentType,
+										adId = Item.adId,
+										gridRow = math.ceil(i1 / v2),
+										gridCol = (i1 - 1) % v2 + 1
 									})
 									
 									return nil
 								end)
 								
-								if not ok then
-									sduiLoggerModule.reportError(sduiErrorsModule.SduiErrorType.CodeError, {
+								if not Success then
+									SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.CodeError, {
 										name = "OneByTwoTilePlaced",
-										message = sduiParseHelpersModule.stringifyValue(status)
-									}, p1)
+										message = SduiParseHelpersModule.stringifyValue(Result)
+									}, Key)
 								end
 							end
 						end
-						local v_3
-						local var25 = false
+						local Flag = false
 						
-						for i_3, v_1 in t_1 do
-							if i_3 ~= p2 then
-								v_3 = v_1.get(false)
+						for i4, value2 in t1 do
+							if i4 ~= Key1 then
+								local GetResult2 = value2.get(false)
 								
-								if v_3 and v_3.prevSectionInPoolId == p2 then
-									var25 = true
+								if GetResult2 and GetResult2.prevSectionInPoolId == Key1 then
+									Flag = true
 									break
 								end
 							end
 						end
-						if not var25 then
-							for i_3, v_2 in var22.pendingSpanTiles do
-								logSkipped(var17.items[v_2.index], var5, p1)
+						if not Flag then
+							for _, pendingSpanTile in ProcessOneGridResult.pendingSpanTiles do
+								logSkipped(GetResult1.items[pendingSpanTile.index], v1, Key)
 							end
-							local t_2 = {}
+							local t6 = {}
 							
-							for i_5, v_3 in var23 do
-								local item = v_3.item
-								local oneByTwoTileFlowId = item and item.oneByTwoTileFlowId
+							for _, value in LayoutToCellsResult do
+								local Item = value.item
+								local OneByTwoTileFlowId = Item and Item.oneByTwoTileFlowId
 								
-								if typeof(oneByTwoTileFlowId) == "string" then
-									t_2[oneByTwoTileFlowId] = true
+								if typeof(OneByTwoTileFlowId) == "string" then
+									t6[OneByTwoTileFlowId] = true
 								end
 							end
-							for i_3 = var22.nextStartIndex, #var17.items do
-								local var26 = var17.items[i_3]
-								v_3 = var26 and var26.oneByTwoTileFlowId
+							for i = ProcessOneGridResult.nextStartIndex, #GetResult1.items do
+								local Item = GetResult1.items[i]
+								local OneByTwoTileFlowId = Item and Item.oneByTwoTileFlowId
 								
-								if typeof(v_3) == "string" and not t_2[v_3] then
-									logSkipped(var26, var5, p1)
+								if typeof(OneByTwoTileFlowId) == "string" and not t6[OneByTwoTileFlowId] then
+									logSkipped(Item, v1, Key)
 								end
 							end
 						end
 					end
 					return {
-						cells = var23,
-						actualRowCount = var24,
-						nextStartIndex = var22.nextStartIndex,
-						pendingSpanTiles = var22.pendingSpanTiles
+						cells = LayoutToCellsResult,
+						actualRowCount = LayoutToCellsResult2,
+						nextStartIndex = ProcessOneGridResult.nextStartIndex,
+						pendingSpanTiles = ProcessOneGridResult.pendingSpanTiles
 					}
 				end
 			end)
-			t_2[p2] = var9
+			t6[Key1] = Computed
 			
-			return var9
+			return Computed
+		else
+			return Entry
 		end
-		return var8
 	end
 	
-	local function getRowCountComputed(p4)
-		-- upvalues: t_3 (ref), signalsModule (copy), t_1 (ref), sectionConfigsEqual (copy), var7 (write)
-		local var27 = t_3[p4]
+	local function getRowCountComputed(Key) --[[ Line: 382 ]]
+		-- upvalues: t3 (copy), SignalsModule (upval), t1 (copy), sectionConfigsEqual (upval), v44 (ref)
+		local Entry = t3[Key]
 		
-		if var27 == nil then
-			local var28 = signalsModule.createComputed(function(p5)
-				-- upvalues: p4 (ref), t_1 (copy), signalsModule (copy), sectionConfigsEqual (copy), var7 (copy)
-				local var29 = t_1[p4]
+		if Entry == nil then
+			local Computed = SignalsModule.createComputed(function(p2) --[[ Line: 387 ]]
+				-- upvalues: Key (copy), t1 (upval), SignalsModule (upval), sectionConfigsEqual (upval), v44 (upval)
+				local v4 = t1[Key]
 				
-				if var29 == nil then
-					local var30, var31 = signalsModule.createSignal(nil, sectionConfigsEqual)
-					var29 = { get = var30, set = var31 }
-					t_1[p4] = var29
+				if v4 == nil then
+					local Signal, Signal2 = SignalsModule.createSignal(nil, sectionConfigsEqual)
+					v4 = { get = Signal, set = Signal2 }
+					t1[Key] = v4
 				end
-				local var32 = var29.get(p5)
+				local GetResult = v4.get(p2)
 				
-				if var32 == nil then
+				if GetResult == nil then
 					return 0
-				elseif var32.poolId == nil or var32.numberOfRows > 0 then
-					return var32.numberOfRows
+				elseif GetResult.poolId == nil or GetResult.numberOfRows > 0 then
+					return GetResult.numberOfRows
+				else
+					local v5 = v44(Key)(p2)
+					
+					return if v5 == nil then 0 else v5.actualRowCount
 				end
-				local var33 = var7(p4)(p5)
-				
-				return if var33 == nil then 0 else var33.actualRowCount
 			end)
-			t_3[p4] = var28
+			t3[Key] = Computed
 			
-			return var28
+			return Computed
+		else
+			return Entry
 		end
-		return var27
 	end
 	
-	local _ = function(p4)
-		-- upvalues: var2 (ref), signalsModule (copy), t_3 (ref), t_1 (ref), sectionConfigsEqual (copy), var7 (write), var6 (write)
-		local var27 = var2[p4]
+	local _ = function(Key) --[[ Line: 402 | Named "getDisplayedRowCountComputed" ]]
+		-- upvalues: T1 (copy), SignalsModule (upval), t3 (copy), t1 (copy), sectionConfigsEqual (upval), v44 (ref), Callback (ref)
+		local Entry = T1[Key]
 		
-		if var27 == nil then
-			local var28 = signalsModule.createComputed(function(p5)
-				-- upvalues: p4 (ref), t_3 (copy), signalsModule (copy), t_1 (copy), sectionConfigsEqual (copy), var7 (copy), var6 (copy)
-				local var29
-				local var30 = t_3[p4]
+		if Entry == nil then
+			local Computed = SignalsModule.createComputed(function(p2): number --[[ Line: 407 ]]
+				-- upvalues: Key (copy), t3 (upval), SignalsModule (upval), t1 (upval), sectionConfigsEqual (upval), v44 (upval), Callback (upval)
+				local v4 = t3[Key]
+				local Callback = nil
 				
-				if var30 == nil then
-					local var31 = signalsModule.createComputed(function(p6)
-						-- upvalues: p4 (ref), t_1 (copy), signalsModule (copy), sectionConfigsEqual (copy), var7 (copy)
-						local var32 = t_1[p4]
+				if v4 == nil then
+					local Computed = SignalsModule.createComputed(function(p3) --[[ Line: 387 ]]
+						-- upvalues: Key (copy), t1 (upval), SignalsModule (upval), sectionConfigsEqual (upval), v44 (upval)
+						local v5 = t1[Key]
 						
-						if var32 == nil then
-							local var33, var34 = signalsModule.createSignal(nil, sectionConfigsEqual)
-							var32 = { get = var33, set = var34 }
-							t_1[p4] = var32
+						if v5 == nil then
+							local Signal, Signal2 = SignalsModule.createSignal(nil, sectionConfigsEqual)
+							v5 = { get = Signal, set = Signal2 }
+							t1[Key] = v5
 						end
-						local var35 = var32.get(p6)
+						local GetResult = v5.get(p3)
 						
-						if var35 == nil then
+						if GetResult == nil then
 							return 0
-						elseif var35.poolId == nil or var35.numberOfRows > 0 then
-							return var35.numberOfRows
+						elseif GetResult.poolId == nil or GetResult.numberOfRows > 0 then
+							return GetResult.numberOfRows
+						else
+							local v6 = v44(Key)(p3)
+							
+							return if v6 == nil then 0 else v6.actualRowCount
 						end
-						local var36 = var7(p4)(p6)
-						
-						return if var36 == nil then 0 else var36.actualRowCount
 					end)
-					t_3[p4] = var31
-					var29 = var31
+					t3[Key] = Computed
+					Callback = Computed
 				else
-					var29 = var30
+					Callback = v4
 				end
-				var29 = var29(p5)
-				local var32 = var6(p4).get(p5)
+				local CallbackResult: number = Callback(p2)
+				local GetResult: number = Callback(Key).get(p2)
 				
-				return if var32 == nil then var29 else math.min(math.max(math.floor(var32), 0), var29)
+				return if GetResult == nil then CallbackResult else math.min(math.max(math.floor(GetResult), 0), CallbackResult)
 			end)
-			var2[p4] = var28
+			T1[Key] = Computed
 			
-			return var28
+			return Computed
+		else
+			return Entry
 		end
-		return var27
 	end
 	
 	local _ = nil
 	
-	local var27 = function(p4)
-		-- upvalues: t_4 (ref), signalsModule (copy), t_1 (ref), sectionConfigsEqual (copy), var27 (write), fFlagSduiSkipFeedAnalyticsPosition (copy), fFlagSduiCollectionGridRevealRows (copy), var2 (ref), t_3 (ref), var7 (write), var6 (write)
-		local var28 = t_4[p4]
+	local function GetSectionStartRow(Key) --[[ Line: 423 ]]
+		-- upvalues: t4 (copy), SignalsModule (upval), t1 (copy), sectionConfigsEqual (upval), GetSectionStartRow (ref), FFlagSduiSkipFeedAnalyticsPosition (upval), FFlagSduiCollectionGridRevealRows (upval), T1 (copy), t3 (copy), v44 (ref), Callback (ref)
+		local Entry = t4[Key]
 		
-		if var28 == nil then
-			local var29 = signalsModule.createComputed(function(p5)
-				-- upvalues: p4 (ref), t_1 (copy), signalsModule (copy), sectionConfigsEqual (copy), var27 (copy), fFlagSduiSkipFeedAnalyticsPosition (copy), fFlagSduiCollectionGridRevealRows (copy), var2 (copy), t_3 (copy), var7 (copy), var6 (copy)
-				local var30 = t_1[p4]
+		if Entry == nil then
+			local Computed = SignalsModule.createComputed(function(p2): number --[[ Line: 428 ]]
+				-- upvalues: Key (copy), t1 (upval), SignalsModule (upval), sectionConfigsEqual (upval), GetSectionStartRow (upval), FFlagSduiSkipFeedAnalyticsPosition (upval), FFlagSduiCollectionGridRevealRows (upval), T1 (upval), t3 (upval), v44 (upval), Callback (upval)
+				local Entry = t1[Key]
 				
-				if var30 == nil then
-					local var31, var32 = signalsModule.createSignal(nil, sectionConfigsEqual)
-					var30 = { get = var31, set = var32 }
-					t_1[p4] = var30
+				if Entry == nil then
+					local Signal, Signal2 = SignalsModule.createSignal(nil, sectionConfigsEqual)
+					Entry = { get = Signal, set = Signal2 }
+					t1[Key] = Entry
 				end
-				local var33 = var30.get(p5)
+				local GetResult = Entry.get(p2)
 				
-				if var33 == nil or var33.prevSectionId == nil then
+				if GetResult == nil or GetResult.prevSectionId == nil then
 					return 1
 				end
-				local var34
-				local var35 = var27(var33.prevSectionId)(p5)
+				local v4: number = GetSectionStartRow(GetResult.prevSectionId)(p2)
+				local GetResult1 = nil
 				
-				if fFlagSduiSkipFeedAnalyticsPosition then
-					local prevSectionId = var33.prevSectionId
-					local var36 = t_1[prevSectionId]
+				if FFlagSduiSkipFeedAnalyticsPosition then
+					local PrevSectionId = GetResult.prevSectionId
+					local Entry1 = t1[PrevSectionId]
 					
-					if var36 == nil then
-						local var37, var38 = signalsModule.createSignal(nil, sectionConfigsEqual)
-						var36 = { get = var37, set = var38 }
-						t_1[prevSectionId] = var36
+					if Entry1 == nil then
+						local Signal1, Signal2_1 = SignalsModule.createSignal(nil, sectionConfigsEqual)
+						Entry1 = { get = Signal1, set = Signal2_1 }
+						t1[PrevSectionId] = Entry1
 					end
-					var34 = var36.get(p5)
+					GetResult1 = Entry1.get(p2)
 				else
-					var34 = nil
+					GetResult1 = nil
 				end
-				local var39
-				if fFlagSduiSkipFeedAnalyticsPosition and var34 ~= nil and var34.doesNotAdvanceStartRow then
-					var39 = 0
-				elseif fFlagSduiCollectionGridRevealRows then
-					local prevSectionId = var33.prevSectionId
-					local var40 = var2[prevSectionId]
+				local v5 = nil
+				if FFlagSduiSkipFeedAnalyticsPosition and GetResult1 ~= nil and GetResult1.doesNotAdvanceStartRow then
+					v5 = 0
+				elseif FFlagSduiCollectionGridRevealRows then
+					local PrevSectionId = GetResult.prevSectionId
+					local Entry2 = T1[PrevSectionId]
+					local Callback1 = nil
 					
-					if var40 == nil then
-						local var41 = signalsModule.createComputed(function(p6)
-							-- upvalues: prevSectionId (ref), t_3 (copy), signalsModule (copy), t_1 (copy), sectionConfigsEqual (copy), var7 (copy), var6 (copy)
-							local var42
-							local var43 = t_3[prevSectionId]
+					if Entry2 == nil then
+						local Computed = SignalsModule.createComputed(function(p3): number --[[ Line: 407 ]]
+							-- upvalues: PrevSectionId (copy), t3 (upval), SignalsModule (upval), t1 (upval), sectionConfigsEqual (upval), v44 (upval), Callback (upval)
+							local v6 = t3[PrevSectionId]
+							local Callback = nil
 							
-							if var43 == nil then
-								local var44 = signalsModule.createComputed(function(p7)
-									-- upvalues: prevSectionId (ref), t_1 (copy), signalsModule (copy), sectionConfigsEqual (copy), var7 (copy)
-									local var45 = t_1[prevSectionId]
+							if v6 == nil then
+								local Computed = SignalsModule.createComputed(function(p4) --[[ Line: 387 ]]
+									-- upvalues: PrevSectionId (copy), t1 (upval), SignalsModule (upval), sectionConfigsEqual (upval), v44 (upval)
+									local v7 = t1[PrevSectionId]
 									
-									if var45 == nil then
-										local var46, var47 = signalsModule.createSignal(nil, sectionConfigsEqual)
-										var45 = { get = var46, set = var47 }
-										t_1[prevSectionId] = var45
+									if v7 == nil then
+										local Signal, Signal2 = SignalsModule.createSignal(nil, sectionConfigsEqual)
+										v7 = { get = Signal, set = Signal2 }
+										t1[PrevSectionId] = v7
 									end
-									local var48 = var45.get(p7)
+									local GetResult = v7.get(p4)
 									
-									if var48 == nil then
+									if GetResult == nil then
 										return 0
-									elseif var48.poolId == nil or var48.numberOfRows > 0 then
-										return var48.numberOfRows
+									elseif GetResult.poolId == nil or GetResult.numberOfRows > 0 then
+										return GetResult.numberOfRows
+									else
+										local v8 = v44(PrevSectionId)(p4)
+										
+										return if v8 == nil then 0 else v8.actualRowCount
 									end
-									local var49 = var7(prevSectionId)(p7)
-									
-									return if var49 == nil then 0 else var49.actualRowCount
 								end)
-								t_3[prevSectionId] = var44
-								var42 = var44
+								t3[PrevSectionId] = Computed
+								Callback = Computed
 							else
-								var42 = var43
+								Callback = v6
 							end
-							var42 = var42(p6)
-							local var45 = var6(prevSectionId).get(p6)
+							local CallbackResult: number = Callback(p3)
+							local GetResult: number = Callback(PrevSectionId).get(p3)
 							
-							return if var45 == nil then var42 else math.min(math.max(math.floor(var45), 0), var42)
+							return if GetResult == nil then CallbackResult else math.min(math.max(math.floor(GetResult), 0), CallbackResult)
 						end)
-						var2[prevSectionId] = var41
-						var39 = var41
+						T1[PrevSectionId] = Computed
+						Callback1 = Computed
 					else
-						var39 = var40
+						Callback1 = Entry2
 					end
-					var39 = var39(p5)
+					v5 = Callback1(p2)
 				else
-					local prevSectionId = var33.prevSectionId
-					local var42 = t_3[prevSectionId]
+					local PrevSectionId1 = GetResult.prevSectionId
+					local Entry1 = t3[PrevSectionId1]
+					local Callback2 = nil
 					
-					if var42 == nil then
-						local var43 = signalsModule.createComputed(function(p6)
-							-- upvalues: prevSectionId (ref), t_1 (copy), signalsModule (copy), sectionConfigsEqual (copy), var7 (copy)
-							local var44 = t_1[prevSectionId]
+					if Entry1 == nil then
+						local Computed = SignalsModule.createComputed(function(p3) --[[ Line: 387 ]]
+							-- upvalues: PrevSectionId1 (copy), t1 (upval), SignalsModule (upval), sectionConfigsEqual (upval), v44 (upval)
+							local v6 = t1[PrevSectionId1]
 							
-							if var44 == nil then
-								local var45, var46 = signalsModule.createSignal(nil, sectionConfigsEqual)
-								var44 = { get = var45, set = var46 }
-								t_1[prevSectionId] = var44
+							if v6 == nil then
+								local Signal, Signal2 = SignalsModule.createSignal(nil, sectionConfigsEqual)
+								v6 = { get = Signal, set = Signal2 }
+								t1[PrevSectionId1] = v6
 							end
-							local var47 = var44.get(p6)
+							local GetResult = v6.get(p3)
 							
-							if var47 == nil then
+							if GetResult == nil then
 								return 0
-							elseif var47.poolId == nil or var47.numberOfRows > 0 then
-								return var47.numberOfRows
+							elseif GetResult.poolId == nil or GetResult.numberOfRows > 0 then
+								return GetResult.numberOfRows
+							else
+								local v7 = v44(PrevSectionId1)(p3)
+								
+								return if v7 == nil then 0 else v7.actualRowCount
 							end
-							local var48 = var7(prevSectionId)(p6)
-							
-							return if var48 == nil then 0 else var48.actualRowCount
 						end)
-						t_3[prevSectionId] = var43
-						var39 = var43
+						t3[PrevSectionId1] = Computed
+						Callback2 = Computed
 					else
-						var39 = var42
+						Callback2 = Entry1
 					end
-					var39 = var39(p5)
+					v5 = Callback2(p2)
 				end
-				return var35 + var39
+				return v4 + v5
 			end)
-			t_4[p4] = var29
+			t4[Key] = Computed
 			
-			return var29
+			return Computed
+		else
+			return Entry
 		end
-		return var28
 	end
 	
 	return {
-		getSectionInfo = function(p4)
-			-- upvalues: signalsModule (copy), t_1 (ref), sectionConfigsEqual (copy), t_5 (ref), var7 (write), EMPTY_CELLS (copy), cellsEqual (copy), var27 (write), t_3 (ref)
-			return signalsModule.createComputed(function(p5)
-				-- upvalues: p4 (ref), t_1 (copy), signalsModule (copy), sectionConfigsEqual (copy), t_5 (copy), var7 (copy), EMPTY_CELLS (copy), cellsEqual (copy), var27 (copy), t_3 (copy)
-				local var28 = t_1[p4]
+		getSectionInfo = function(Key) --[[ Line: 471 ]]
+			-- upvalues: SignalsModule (upval), t1 (copy), sectionConfigsEqual (upval), t5 (copy), v44 (ref), EMPTYCELLS (upval), CellsEqual (upval), GetSectionStartRow (ref), t3 (copy)
+			return SignalsModule.createComputed(function(p2) --[[ Line: 472 ]]
+				-- upvalues: Key (copy), t1 (upval), SignalsModule (upval), sectionConfigsEqual (upval), t5 (upval), v44 (upval), EMPTYCELLS (upval), CellsEqual (upval), GetSectionStartRow (upval), t3 (upval)
+				local Entry = t1[Key]
 				
-				if var28 == nil then
-					local var29, var30 = signalsModule.createSignal(nil, sectionConfigsEqual)
-					var28 = { get = var29, set = var30 }
-					t_1[p4] = var28
+				if Entry == nil then
+					local Signal, Signal2 = SignalsModule.createSignal(nil, sectionConfigsEqual)
+					Entry = { get = Signal, set = Signal2 }
+					t1[Key] = Entry
 				end
-				if var28.get(p5) == nil then
+				if Entry.get(p2) == nil then
 					return nil
 				end
-				local var31
 				local t = {}
-				local var32 = t_5[p4]
+				local Entry1 = t5[Key]
+				local Callback = nil
 				
-				if var32 == nil then
-					local var33 = signalsModule.createComputed(function(p6)
-						-- upvalues: var7 (copy), p4 (ref), EMPTY_CELLS (copy)
-						local var34 = var7(p4)(p6)
+				if Entry1 == nil then
+					local Computed = SignalsModule.createComputed(function(p3) --[[ Line: 459 ]]
+						-- upvalues: v44 (upval), Key (copy), EMPTYCELLS (upval)
+						local v4 = v44(Key)(p3)
 						
-						return if var34 == nil then EMPTY_CELLS else var34.cells
-					end, cellsEqual)
-					t_5[p4] = var33
-					var31 = var33
+						return if v4 == nil then EMPTYCELLS else v4.cells
+					end, CellsEqual)
+					t5[Key] = Computed
+					Callback = Computed
 				else
-					var31 = var32
+					Callback = Entry1
 				end
-				local var34
-				t.cells = var31(p5)
-				t.startRow = var27(p4)(p5)
-				local var35 = t_3[p4]
+				t.cells = Callback(p2)
+				t.startRow = GetSectionStartRow(Key)(p2)
+				local Entry2 = t3[Key]
+				local Callback1 = nil
 				
-				if var35 == nil then
-					local var36 = signalsModule.createComputed(function(p6)
-						-- upvalues: p4 (ref), t_1 (copy), signalsModule (copy), sectionConfigsEqual (copy), var7 (copy)
-						local var37 = t_1[p4]
+				if Entry2 == nil then
+					local Computed = SignalsModule.createComputed(function(p3) --[[ Line: 387 ]]
+						-- upvalues: Key (copy), t1 (upval), SignalsModule (upval), sectionConfigsEqual (upval), v44 (upval)
+						local v4 = t1[Key]
 						
-						if var37 == nil then
-							local var38, var39 = signalsModule.createSignal(nil, sectionConfigsEqual)
-							var37 = { get = var38, set = var39 }
-							t_1[p4] = var37
+						if v4 == nil then
+							local Signal, Signal2 = SignalsModule.createSignal(nil, sectionConfigsEqual)
+							v4 = { get = Signal, set = Signal2 }
+							t1[Key] = v4
 						end
-						local var40 = var37.get(p6)
+						local GetResult = v4.get(p3)
 						
-						if var40 == nil then
+						if GetResult == nil then
 							return 0
-						elseif var40.poolId == nil or var40.numberOfRows > 0 then
-							return var40.numberOfRows
+						elseif GetResult.poolId == nil or GetResult.numberOfRows > 0 then
+							return GetResult.numberOfRows
+						else
+							local v5 = v44(Key)(p3)
+							
+							return if v5 == nil then 0 else v5.actualRowCount
 						end
-						local var41 = var7(p4)(p6)
-						
-						return if var41 == nil then 0 else var41.actualRowCount
 					end)
-					t_3[p4] = var36
-					var34 = var36
+					t3[Key] = Computed
+					Callback1 = Computed
 				else
-					var34 = var35
+					Callback1 = Entry2
 				end
-				t.actualRowCount = var34(p5)
+				t.actualRowCount = Callback1(p2)
 				
 				return t
 			end)
 		end,
-		getSectionStartRow = var27,
-		getSectionRowCount = if fFlagSduiVerticalFeedProgressiveFillOnScroll then getRowCountComputed else nil,
-		getSectionCells = function(p4)
-			-- upvalues: t_5 (ref), signalsModule (copy), var7 (write), EMPTY_CELLS (copy), cellsEqual (copy)
-			local var28 = t_5[p4]
+		getSectionStartRow = GetSectionStartRow,
+		getSectionRowCount = if FFlagSduiVerticalFeedProgressiveFillOnScroll then getRowCountComputed else nil,
+		getSectionCells = function(Key) --[[ Line: 454 ]]
+			-- upvalues: t5 (copy), SignalsModule (upval), v44 (ref), EMPTYCELLS (upval), CellsEqual (upval)
+			local Entry = t5[Key]
 			
-			if var28 == nil then
-				local var29 = signalsModule.createComputed(function(p5)
-					-- upvalues: var7 (copy), p4 (ref), EMPTY_CELLS (copy)
-					local var30 = var7(p4)(p5)
+			if Entry == nil then
+				local Computed = SignalsModule.createComputed(function(p2) --[[ Line: 459 ]]
+					-- upvalues: v44 (upval), Key (copy), EMPTYCELLS (upval)
+					local v4 = v44(Key)(p2)
 					
-					return if var30 == nil then EMPTY_CELLS else var30.cells
-				end, cellsEqual)
-				t_5[p4] = var29
+					return if v4 == nil then EMPTYCELLS else v4.cells
+				end, CellsEqual)
+				t5[Key] = Computed
 				
-				return var29
+				return Computed
+			else
+				return Entry
 			end
-			return var28
 		end,
-		setSectionDisplayedRowCount = if fFlagSduiCollectionGridRevealRows then function(p4, p5)
-			-- upvalues: var6 (write)
-			var6(p4).set(p5)
+		setSectionDisplayedRowCount = if FFlagSduiCollectionGridRevealRows then function(p2, p3) --[[ Line: 529 ]]
+			-- upvalues: Callback (ref)
+			Callback(p2).set(p3)
 		end else nil,
-		setPools = function(value)
-			-- upvalues: t (ref), signalsModule (copy)
-			for i, v in value do
-				local var28 = t[i]
+		setPools = function(List) --[[ Line: 489 ]]
+			-- upvalues: t (copy), SignalsModule (upval)
+			for i, value in List do
+				local Entry = t[i]
 				
-				if var28 == nil then
-					local var29, var30 = signalsModule.createSignal(nil)
-					var28 = { get = var29, set = var30 }
-					t[i] = var28
+				if Entry == nil then
+					local Signal, Signal2 = SignalsModule.createSignal(nil)
+					Entry = { get = Signal, set = Signal2 }
+					t[i] = Entry
 				end
-				var28.set(v)
+				Entry.set(value)
 			end
 		end,
-		setSections = function(value)
-			-- upvalues: t_1 (ref), signalsModule (copy), sectionConfigsEqual (copy), fFlagSduiSkipFeedAnalyticsPosition (copy)
-			local t = {}
-			local var31 = nil
+		setSections = function(List) --[[ Line: 496 ]]
+			-- upvalues: t1 (copy), SignalsModule (upval), sectionConfigsEqual (upval), FFlagSduiSkipFeedAnalyticsPosition (upval)
+			local SectionIds = {}
+			local PrevSectionId = nil
 			
-			for i, v in value do
-				local sectionId = v.sectionId
-				local poolId = v.poolId
-				local var32 = nil
+			for _, value in List do
+				local SectionId = value.sectionId
+				local PoolId = value.poolId
+				local PrevSectionInPoolId = nil
 				
-				if poolId ~= nil then
-					var32 = t[poolId]
-					t[poolId] = sectionId
+				if PoolId ~= nil then
+					PrevSectionInPoolId = SectionIds[PoolId]
+					SectionIds[PoolId] = SectionId
 				end
-				local var33 = t_1[sectionId]
+				local Entry = t1[SectionId]
 				
-				if var33 == nil then
-					local var34, var35 = signalsModule.createSignal(nil, sectionConfigsEqual)
-					var33 = { get = var34, set = var35 }
-					t_1[sectionId] = var33
+				if Entry == nil then
+					local Signal, Signal2 = SignalsModule.createSignal(nil, sectionConfigsEqual)
+					Entry = { get = Signal, set = Signal2 }
+					t1[SectionId] = Entry
 				end
-				var33.set({
-					poolId = poolId,
-					numberOfRows = v.numberOfRows,
-					doesNotAdvanceStartRow = if fFlagSduiSkipFeedAnalyticsPosition then v.doesNotAdvanceStartRow else nil,
-					entryCollectionItemSize = v.entryCollectionItemSize,
-					templateCollectionItemSize = v.templateCollectionItemSize,
-					prevSectionInPoolId = var32,
-					prevSectionId = var31
-				})
-				var31 = sectionId
+				local SetFunction: (any) -> () = Entry.set
+				local config = {
+					poolId = PoolId,
+					numberOfRows = value.numberOfRows,
+					doesNotAdvanceStartRow = if FFlagSduiSkipFeedAnalyticsPosition then value.doesNotAdvanceStartRow else nil,
+					entryCollectionItemSize = value.entryCollectionItemSize,
+					templateCollectionItemSize = value.templateCollectionItemSize,
+					prevSectionInPoolId = PrevSectionInPoolId
+				}
+				config.prevSectionId = PrevSectionId
+				SetFunction(config)
+				PrevSectionId = SectionId
 			end
 		end,
-		setLayoutStore = function(value)
-			-- upvalues: var4 (ref)
-			var4(value)
+		setLayoutStore = function(p2) --[[ Line: 535 ]]
+			-- upvalues: Signal2 (copy)
+			Signal2(p2)
 		end,
-		setOneByTwoTileFunnelListener = if fFlagLuaAppEnableOneByTwoTileFunnelTelemetrySdui then function(p4)
-			-- upvalues: var5 (write)
-			var5 = p4
+		setOneByTwoTileFunnelListener = if FFlagLuaAppEnableOneByTwoTileFunnelTelemetrySdui then function(p2) --[[ Line: 539 ]]
+			-- upvalues: v1 (ref)
+			v1 = p2
 		end else nil
 	}
 end
 
-local tbl = setmetatable({}, { __mode = "v" })
+local self = setmetatable({}, { __mode = "v" })
 
 return {
-	getSduiPoolStore = function(p4)
-		-- upvalues: tbl (ref), fFlagLuaAppEnableOneByTwoTileFunnelTelemetrySdui (ref), createSduiPoolStore (ref)
-		local var31 = tbl[p4]
+	getSduiPoolStore = function(Key) --[[ Line: 549 ]]
+		-- upvalues: self (copy), FFlagLuaAppEnableOneByTwoTileFunnelTelemetrySdui (copy), createSduiPoolStore (copy)
+		local SelfEntry = self[Key]
 		
-		if var31 == nil then
-			local var32 = if fFlagLuaAppEnableOneByTwoTileFunnelTelemetrySdui then createSduiPoolStore(p4) else createSduiPoolStore()
-			tbl[p4] = var32
+		if SelfEntry == nil then
+			local SduiPoolStore = if FFlagLuaAppEnableOneByTwoTileFunnelTelemetrySdui then createSduiPoolStore(Key) else createSduiPoolStore()
+			self[Key] = SduiPoolStore
 			
-			return var32
+			return SduiPoolStore
+		else
+			return SelfEntry
 		end
-		return var31
 	end
 }

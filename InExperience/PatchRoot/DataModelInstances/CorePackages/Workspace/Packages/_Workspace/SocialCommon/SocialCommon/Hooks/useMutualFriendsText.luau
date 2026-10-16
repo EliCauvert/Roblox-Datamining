@@ -1,18 +1,16 @@
-﻿local socialCommon = script:FindFirstAncestor("SocialCommon")
-local parent = socialCommon.Parent
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local getMutualFriendsTextModule = require(socialCommon.Utils.getMutualFriendsText)
-local fFlagConnectionsToFriendsRename = require(parent.SharedFlags).FFlagConnectionsToFriendsRename
+﻿local SocialCommon = script:FindFirstAncestor("SocialCommon")
+local UseLocalizationFunction = require(SocialCommon.Parent.Localization).Hooks.useLocalization
+local GetMutualFriendsTextModule = require(SocialCommon.Utils.getMutualFriendsText)
 
-return function(p1)
-	-- upvalues: useLocalization (ref), fFlagConnectionsToFriendsRename (ref), getMutualFriendsTextModule (ref)
-	return getMutualFriendsTextModule({
-		mutualFriendsCount = p1,
-		localized = useLocalization({
-			singularMutualConnection = if fFlagConnectionsToFriendsRename then "Feature.Friends.Label.MutualFriendTitle" else "Feature.Friends.Label.MutualConnection",
+return function(MutualFriendsCount) --[[ Line: 12 ]]
+	-- upvalues: UseLocalizationFunction (copy), GetMutualFriendsTextModule (copy)
+	return GetMutualFriendsTextModule({
+		mutualFriendsCount = MutualFriendsCount,
+		localized = UseLocalizationFunction({
+			singularMutualConnection = "Feature.Friends.Label.MutualFriendTitle",
 			mutualConnections = {
-				if fFlagConnectionsToFriendsRename then "Feature.Friends.Label.MutualFriendsTitle" else "Feature.Friends.Label.MutualConnections",
-				numConnections = p1
+				"Feature.Friends.Label.MutualFriendsTitle",
+				numConnections = MutualFriendsCount
 			}
 		})
 	})

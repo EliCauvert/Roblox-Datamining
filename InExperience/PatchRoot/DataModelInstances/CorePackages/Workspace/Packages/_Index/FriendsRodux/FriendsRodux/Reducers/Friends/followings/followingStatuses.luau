@@ -1,26 +1,26 @@
-﻿local friendsRodux = script:FindFirstAncestor("FriendsRodux")
-local parent = friendsRodux.Parent
-local _ = require(friendsRodux.roduxFriendsTypes)
-local roduxModule = require(parent.Rodux)
-local dashModule = require(parent.Dash)
+﻿local FriendsRodux = script:FindFirstAncestor("FriendsRodux")
+local Parent = FriendsRodux.Parent
+local _ = require(FriendsRodux.roduxFriendsTypes)
+local RoduxModule = require(Parent.Rodux)
+local DashModule = require(Parent.Dash)
 local t = {}
 
-return function(p1)
-	-- upvalues: roduxModule (ref), t (ref), dashModule (ref)
-	return roduxModule.createReducer(t, {
-		[p1.friendsNetworking.GetFollowingExists.Succeeded.name] = function(p2, p3)
-			-- upvalues: dashModule (copy)
+return function(p1) --[[ Line: 20 ]]
+	-- upvalues: RoduxModule (copy), t (copy), DashModule (copy)
+	return RoduxModule.createReducer(t, {
+		[p1.friendsNetworking.GetFollowingExists.Succeeded.name] = function(p2, p3) --[[ Line: 25 ]]
+			-- upvalues: DashModule (upval)
 			local t = {}
-			dashModule.forEach(p3.responseBody.followings, function(p4)
-				-- upvalues: t (ref)
+			DashModule.forEach(p3.responseBody.followings, function(p4) --[[ Line: 27 ]]
+				-- upvalues: t (copy)
 				t[tostring(p4.userId)] = { isFollowed = p4.isFollowed, isFollowing = p4.isFollowing }
 			end)
 			
-			return dashModule.join(p2, t)
+			return DashModule.join(p2, t)
 		end,
-		[p1.userBlockingNetworking.BlockUserById.Succeeded.name] = function(p2, p3)
-			-- upvalues: dashModule (copy)
-			return dashModule.join(p2, {
+		[p1.userBlockingNetworking.BlockUserById.Succeeded.name] = function(p2, p3) --[[ Line: 36 ]]
+			-- upvalues: DashModule (upval)
+			return DashModule.join(p2, {
 				[tostring(p3.namedIds.users)] = { isFollowed = false, isFollowing = false }
 			})
 		end

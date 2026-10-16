@@ -1,16 +1,16 @@
-﻿local trustAndSafetyIxp = script:FindFirstAncestor("TrustAndSafetyIxp")
-local parent = trustAndSafetyIxp.Parent
-local getFFlagReportAnythingAnnotationIXP = require(parent.SharedFlags).GetFFlagReportAnythingAnnotationIXP
-local getFStringReportAnythingAnnotationIXPLayerName = require(parent.SharedFlags).GetFStringReportAnythingAnnotationIXPLayerName
-local getFFlagForceReportAnythingAnnotationEnabledModule = require(trustAndSafetyIxp.Flags.GetFFlagForceReportAnythingAnnotationEnabled)
-local IXPServiceWrapper = require(parent.IxpServiceWrapper).IXPServiceWrapper
-local name = require(parent.CoreScriptsInitializer).CoreLogger:new(script.Name)
-local t = {}
-t.__index = t
+﻿local TrustAndSafetyIxp = script:FindFirstAncestor("TrustAndSafetyIxp")
+local Parent = TrustAndSafetyIxp.Parent
+local GetFFlagReportAnythingAnnotationIXPFunction = require(Parent.SharedFlags).GetFFlagReportAnythingAnnotationIXP
+local GetFStringReportAnythingAnnotationIXPLayerNameFunction = require(Parent.SharedFlags).GetFStringReportAnythingAnnotationIXPLayerName
+local GetFFlagForceReportAnythingAnnotationEnabledModule = require(TrustAndSafetyIxp.Flags.GetFFlagForceReportAnythingAnnotationEnabled)
+local IXPServiceWrapper = require(Parent.IxpServiceWrapper).IXPServiceWrapper
+local NewResult = require(Parent.CoreScriptsInitializer).CoreLogger:new(script.Name)
+local TrustAndSafetyIXPManager = {}
+TrustAndSafetyIXPManager.__index = TrustAndSafetyIXPManager
 
-function t.new(p1)
-	-- upvalues: IXPServiceWrapper (ref), t (ref)
-	local t_1 = {
+function TrustAndSafetyIXPManager.new(p1) --[[ Line: 19 ]]
+	-- upvalues: IXPServiceWrapper (copy), TrustAndSafetyIXPManager (copy)
+	local config = {
 		_initialized = false,
 		_ixpInitialized = false,
 		_optionalScreenshotEnabled = false,
@@ -19,65 +19,67 @@ function t.new(p1)
 		_ixpServiceWrapper = p1 or IXPServiceWrapper,
 		_callbacks = {}
 	}
-	setmetatable(t_1, t)
+	setmetatable(config, TrustAndSafetyIXPManager)
 	
-	return t_1
+	return config
 end
 
-function t:getReportAnythingExperienceEnabled()
-	-- upvalues: getFFlagForceReportAnythingAnnotationEnabledModule (ref)
-	return if getFFlagForceReportAnythingAnnotationEnabledModule() then true else self._reportAnythingExperienceEnabled or self._optionalScreenshotEnabled
+function TrustAndSafetyIXPManager.getReportAnythingExperienceEnabled(p1) --[[ Line: 33 ]]
+	-- upvalues: GetFFlagForceReportAnythingAnnotationEnabledModule (copy)
+	return if GetFFlagForceReportAnythingAnnotationEnabledModule() then true else p1._reportAnythingExperienceEnabled or p1._optionalScreenshotEnabled
 end
 
-function t:getReportAnythingAvatarEnabled()
-	-- upvalues: getFFlagForceReportAnythingAnnotationEnabledModule (ref)
-	return if getFFlagForceReportAnythingAnnotationEnabledModule() then true else self._reportAnythingAvatarEnabled or self._optionalScreenshotEnabled
+function TrustAndSafetyIXPManager.getReportAnythingAvatarEnabled(p1) --[[ Line: 40 ]]
+	-- upvalues: GetFFlagForceReportAnythingAnnotationEnabledModule (copy)
+	return if GetFFlagForceReportAnythingAnnotationEnabledModule() then true else p1._reportAnythingAvatarEnabled or p1._optionalScreenshotEnabled
 end
 
-function t:waitForInitialization(p1)
+function TrustAndSafetyIXPManager:waitForInitialization(Callback: () -> ()) --[[ Line: 47 ]]
 	if self._ixpInitialized then
-		p1()
+		Callback()
 		
 		return
+	else
+		table.insert(self._callbacks, Callback)
 	end
-	table.insert(self._callbacks, p1)
 end
 
-function t:initialize()
-	-- upvalues: getFFlagReportAnythingAnnotationIXP (ref), getFStringReportAnythingAnnotationIXPLayerName (ref), name (ref)
+function TrustAndSafetyIXPManager:initialize() --[[ Line: 55 ]]
+	-- upvalues: GetFFlagReportAnythingAnnotationIXPFunction (copy), GetFStringReportAnythingAnnotationIXPLayerNameFunction (copy), NewResult (copy)
 	if self._initialized then return end
 	self._initialized = true
 	
-	local function invokeCallbacks()
-		-- upvalues: self (ref)
-		for i, v in ipairs(self._callbacks) do
-			v()
+	local function invokeCallbacks() --[[ Line: 61 ]]
+		-- upvalues: self (copy)
+		for _, callback in ipairs(self._callbacks) do
+			callback()
 		end
 		self._callbacks = {}
 	end
 	
-	if getFFlagReportAnythingAnnotationIXP() then
-		task.spawn(function()
-			-- upvalues: self (ref), getFStringReportAnythingAnnotationIXPLayerName (copy), name (copy), invokeCallbacks (ref)
+	if GetFFlagReportAnythingAnnotationIXPFunction() then
+		task.spawn(function() --[[ Line: 74 ]]
+			-- upvalues: self (copy), GetFStringReportAnythingAnnotationIXPLayerNameFunction (upval), NewResult (upval), invokeCallbacks (copy)
 			self._ixpServiceWrapper:WaitForInitialization()
-			local var1 = self._ixpServiceWrapper:GetLayerData(getFStringReportAnythingAnnotationIXPLayerName())
+			local LayerData = self._ixpServiceWrapper:GetLayerData(GetFStringReportAnythingAnnotationIXPLayerNameFunction())
 			
-			if var1 then
-				self._optionalScreenshotEnabled = var1.OptionalScreenshotEnabled or false
-				self._reportAnythingExperienceEnabled = var1.OptionalScreenshotExperience or false
-				self._reportAnythingAvatarEnabled = var1.OptionalScreenshotAvatar or false
+			if LayerData then
+				self._optionalScreenshotEnabled = LayerData.OptionalScreenshotEnabled or false
+				self._reportAnythingExperienceEnabled = LayerData.OptionalScreenshotExperience or false
+				self._reportAnythingAvatarEnabled = LayerData.OptionalScreenshotAvatar or false
 			end
-			name:debug("RA Optional Screenshot enabled (Avatar and/or Experience) or Select In Scene enabled? Both Avatar and Exp: {}, Exp: {}, Avatar: {}, Select in Scene: {}. Invoking {} callbacks.", self._optionalScreenshotEnabled, self._reportAnythingExperienceEnabled, self._reportAnythingAvatarEnabled, self._selectInSceneEnabled, #self._callbacks)
+			NewResult:debug("RA Optional Screenshot enabled (Avatar and/or Experience) or Select In Scene enabled? Both Avatar and Exp: {}, Exp: {}, Avatar: {}, Select in Scene: {}. Invoking {} callbacks.", self._optionalScreenshotEnabled, self._reportAnythingExperienceEnabled, self._reportAnythingAvatarEnabled, self._selectInSceneEnabled, #self._callbacks)
 			self._ixpInitialized = true
 			invokeCallbacks()
 		end)
 		
 		return
+	else
+		self._ixpInitialized = true
+		invokeCallbacks()
 	end
-	self._ixpInitialized = true
-	invokeCallbacks()
 end
 
-t.default = t.new()
+TrustAndSafetyIXPManager.default = TrustAndSafetyIXPManager.new()
 
-return t
+return TrustAndSafetyIXPManager

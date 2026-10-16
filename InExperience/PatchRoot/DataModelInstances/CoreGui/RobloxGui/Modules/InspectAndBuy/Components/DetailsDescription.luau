@@ -1,68 +1,67 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local textService = game:GetService("TextService")
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local appFonts = require(corePackagesService.Workspace.Packages.Style).AppFonts
-local parent = script.Parent.Parent
-local colorsModule = require(parent.Colors)
-local utilityFunctionsModule = require(parent.UtilityFunctions)
-local detailsDescription = roactModule.PureComponent:extend("DetailsDescription")
+﻿local CorePackages = game:GetService("CorePackages")
+local TextService = game:GetService("TextService")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local AppFonts = require(CorePackages.Workspace.Packages.Style).AppFonts
+local Parent = script.Parent.Parent
+local ColorsModule = require(Parent.Colors)
+local UtilityFunctionsModule = require(Parent.UtilityFunctions)
+local DetailsDescription = RoactModule.PureComponent:extend("DetailsDescription")
 
-function detailsDescription.setText(value)
-	-- upvalues: utilityFunctionsModule (ref)
-	local assetInfo = value.props.assetInfo or {}
-	local bundleInfo = value.props.bundleInfo or {}
+function DetailsDescription.setText(p1) --[[ Line: 18 ]]
+	-- upvalues: UtilityFunctionsModule (copy)
+	local AssetInfo = p1.props.assetInfo or {}
+	local BundleInfo = p1.props.bundleInfo or {}
 	
-	if assetInfo.parentBundleId ~= nil then
-		local bundleId = utilityFunctionsModule.getBundleId(assetInfo)
+	if AssetInfo.parentBundleId ~= nil then
+		local BundleId = UtilityFunctionsModule.getBundleId(AssetInfo)
 		
-		if bundleInfo[bundleId] then
-			value.description = bundleInfo[bundleId].description or ""
+		if BundleInfo[BundleId] then
+			p1.description = BundleInfo[BundleId].description or ""
 			
 			return
 		end
-	elseif assetInfo then
-		value.description = assetInfo.description or ""
+	elseif AssetInfo then
+		p1.description = AssetInfo.description or ""
 	end
 end
 
-function detailsDescription.init(p1)
-	-- upvalues: roactModule (ref)
+function DetailsDescription.init(p1) --[[ Line: 34 ]]
+	-- upvalues: RoactModule (copy)
 	p1.description = ""
-	p1.descriptionRef = roactModule.createRef()
+	p1.descriptionRef = RoactModule.createRef()
 end
 
-function detailsDescription.render(p1)
-	-- upvalues: roactModule (ref), appFonts (ref), colorsModule (ref)
+function DetailsDescription.render(p1) --[[ Line: 39 ]]
+	-- upvalues: RoactModule (copy), AppFonts (copy), ColorsModule (copy)
 	p1:setText()
 	
-	return roactModule.createElement("TextLabel", {
+	return RoactModule.createElement("TextLabel", {
 		BackgroundTransparency = 1,
 		LayoutOrder = 4,
-		Size = UDim2.new(1, -20, 0, p1:calculateSize()),
+		Size = UDim2.new(1, -20, 0, (p1:calculateSize())),
 		Text = p1.description or "",
 		TextXAlignment = Enum.TextXAlignment.Left,
 		TextYAlignment = Enum.TextYAlignment.Top,
 		TextSize = 16,
 		TextWrapped = true,
-		Font = appFonts.default:getDefault(),
-		TextColor3 = colorsModule.White,
-		[roactModule.Ref] = p1.descriptionRef
+		Font = AppFonts.default:getDefault(),
+		TextColor3 = ColorsModule.White,
+		[RoactModule.Ref] = p1.descriptionRef
 	})
 end
 
-function detailsDescription.calculateSize(p1)
-	-- upvalues: textService (ref), appFonts (ref)
-	if p1.descriptionRef.current and p1.props.assetInfo then
-		return textService:GetTextSize(p1.description, 16, appFonts.default:getDefault(), Vector2.new(p1.descriptionRef.current.AbsoluteSize.X, 5000)).Y
-	end
+function DetailsDescription.calculateSize(p1) --[[ Line: 58 ]]
+	-- upvalues: TextService (copy), AppFonts (copy)
+	if not p1.descriptionRef.current or not p1.props.assetInfo then return end
+	return TextService:GetTextSize(p1.description, 16, AppFonts.default:getDefault(), Vector2.new(p1.descriptionRef.current.AbsoluteSize.X, 5000)).Y
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p1, _)
+return RoactRoduxModule.UNSTABLE_connect2(function(p1, _) --[[ Line: 70 ]]
 	return {
 		view = p1.view,
 		assetInfo = p1.assets[p1.detailsInformation.assetId],
 		detailsInformation = p1.detailsInformation,
 		bundleInfo = p1.bundles
 	}
-end)(detailsDescription)
+end)(DetailsDescription)

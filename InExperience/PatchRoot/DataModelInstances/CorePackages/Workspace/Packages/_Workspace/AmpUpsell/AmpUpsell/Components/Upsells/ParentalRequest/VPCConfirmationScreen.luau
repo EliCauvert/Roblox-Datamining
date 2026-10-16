@@ -1,67 +1,71 @@
-﻿local ampUpsell = script:FindFirstAncestor("AmpUpsell")
-local parent = ampUpsell.Parent
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local UIBloxModule = require(parent.UIBlox)
-local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local cryoModule = require(parent.Cryo)
-local getFFlagEnableVPCUpsellFoundationDialogHardeningModule = require(ampUpsell.Flags.GetFFlagEnableVPCUpsellFoundationDialogHardening)
-local getShouldUseFoundationUIVPCUpsellModule = require(ampUpsell.Flags.GetShouldUseFoundationUIVPCUpsell)
-local foundationModule = require(parent.Foundation)
-local dialog = foundationModule.Dialog
-local dialogSize = foundationModule.Enums.DialogSize
-local buttonVariant = foundationModule.Enums.ButtonVariant
+﻿local AmpUpsell = script:FindFirstAncestor("AmpUpsell")
+local Parent = AmpUpsell.Parent
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local UIBloxModule = require(Parent.UIBlox)
+local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local CryoModule = require(Parent.Cryo)
+local GetFFlagEnableVPCUpsellFoundationDialogHardeningModule = require(AmpUpsell.Flags.GetFFlagEnableVPCUpsellFoundationDialogHardening)
+local GetShouldUseFoundationUIVPCUpsellModule = require(AmpUpsell.Flags.GetShouldUseFoundationUIVPCUpsell)
+local FoundationModule = require(Parent.Foundation)
+local Dialog = FoundationModule.Dialog
+local DialogSize = FoundationModule.Enums.DialogSize
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
 
-local function selectScreenSize(p1)
+local function selectScreenSize(p1) --[[ Line: 27 ]]
 	return p1.ScreenSize
 end
 
-return function(p1)
-	-- upvalues: useSelector (ref), selectScreenSize (ref), getShouldUseFoundationUIVPCUpsellModule (ref), useLocalization (ref), cryoModule (ref), reactModule (ref), dialog (ref), dialogSize (ref), getFFlagEnableVPCUpsellFoundationDialogHardeningModule (ref), buttonVariant (ref), interactiveAlert (ref), buttonType (ref)
-	local onAck = p1.onAck
-	local var1 = useSelector(selectScreenSize)
-	local messageStrings = p1.messageStrings
-	local parentEmails = p1.parentEmails
-	local var2 = if #parentEmails == 1 then useLocalization(cryoModule.Dictionary.join(messageStrings, {
+return function(p1) --[[ Line: 31 | Named "VPCConfirmationScreen" ]]
+	-- upvalues: UseSelectorFunction (copy), selectScreenSize (copy), GetShouldUseFoundationUIVPCUpsellModule (copy), UseLocalizationFunction (copy), CryoModule (copy), ReactModule (copy), Dialog (copy), DialogSize (copy), GetFFlagEnableVPCUpsellFoundationDialogHardeningModule (copy), ButtonVariant (copy), InteractiveAlert (copy), ButtonType (copy)
+	local OnAck = p1.onAck
+	local UseSelectorResult = UseSelectorFunction(selectScreenSize)
+	local MessageStrings = p1.messageStrings
+	local ParentEmails = p1.parentEmails
+	local DisablePortal = if p1.disablePortal then p1.disablePortal else false
+	local UseLocalizationResult = if #ParentEmails == 1 then UseLocalizationFunction(CryoModule.Dictionary.join(MessageStrings, {
 		bodyText = {
-			messageStrings.oneParentBody,
-			parentEmail = parentEmails[1]
+			MessageStrings.oneParentBody,
+			parentEmail = ParentEmails[1]
 		}
-	})) else useLocalization(cryoModule.Dictionary.join(messageStrings, { bodyText = messageStrings.multipleParentsBody }))
+	})) else UseLocalizationFunction(CryoModule.Dictionary.join(MessageStrings, { bodyText = MessageStrings.multipleParentsBody }))
 	
-	return if getShouldUseFoundationUIVPCUpsellModule(if p1.isInExperienceEntry then p1.isInExperienceEntry else false) then reactModule.createElement(dialog.Root, {
-		size = dialogSize.Small,
-		onClose = onAck,
-		disablePortal = if p1.disablePortal then p1.disablePortal else false,
-		hasBackdrop = if getFFlagEnableVPCUpsellFoundationDialogHardeningModule() then true else false
+	return if GetShouldUseFoundationUIVPCUpsellModule(if p1.isInExperienceEntry then p1.isInExperienceEntry else false) then ReactModule.createElement(Dialog.Root, {
+		size = DialogSize.Small,
+		onClose = OnAck,
+		disablePortal = DisablePortal,
+		hasBackdrop = if GetFFlagEnableVPCUpsellFoundationDialogHardeningModule() then true else false
 	}, {
-		DialogTitle = reactModule.createElement(dialog.Title, { text = var2.title }),
-		DialogContent = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
-			DialogText = reactModule.createElement(dialog.Text, { Text = var2.bodyText })
+		DialogTitle = ReactModule.createElement(Dialog.Title, { text = UseLocalizationResult.title }),
+		DialogContent = ReactModule.createElement(Dialog.Content, { LayoutOrder = 2 }, {
+			DialogText = ReactModule.createElement(Dialog.Text, { Text = UseLocalizationResult.bodyText })
 		}),
-		DialogActions = reactModule.createElement(dialog.Actions, {
+		DialogActions = ReactModule.createElement(Dialog.Actions, {
 			LayoutOrder = 3,
 			actions = {
 				{
-					text = var2.buttonText,
-					variant = buttonVariant.Standard,
-					onActivated = onAck
+					text = UseLocalizationResult.buttonText,
+					variant = ButtonVariant.Standard,
+					onActivated = OnAck
 				}
 			}
 		})
-	}) else reactModule.createElement(interactiveAlert, {
+	}) else ReactModule.createElement(InteractiveAlert, {
 		anchorPoint = Vector2.new(0.5, 0.5),
 		position = UDim2.new(0.5, 0, 0.5, 0),
-		screenSize = var1,
-		title = var2.title,
-		bodyText = var2.bodyText,
+		screenSize = UseSelectorResult,
+		title = UseLocalizationResult.title,
+		bodyText = UseLocalizationResult.bodyText,
 		buttonStackInfo = {
 			buttons = {
 				{
-					buttonType = buttonType.PrimarySystem,
-					props = { onActivated = onAck, text = var2.buttonText }
+					buttonType = ButtonType.PrimarySystem,
+					props = {
+						onActivated = OnAck,
+						text = UseLocalizationResult.buttonText
+					}
 				}
 			}
 		}

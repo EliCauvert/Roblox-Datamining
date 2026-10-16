@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.EdpStoreAnalytics.EdpStoreAnalytics)
+﻿return (require(script.Parent.Parent.Parent._Index.EdpStoreAnalytics.EdpStoreAnalytics))

@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.VrSpatialUi.VrSpatialUi)
+﻿return (require(script.Parent._Workspace.VrSpatialUi.VrSpatialUi))

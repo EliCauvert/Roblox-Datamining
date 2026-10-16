@@ -1,11 +1,11 @@
-﻿local parent = script:FindFirstAncestor("AuthCommon").Parent
-local httpService = game:GetService("HttpService")
-local urlBuilder = require(parent.UrlBuilder).UrlBuilder
-local promiseModule = require(parent.Promise)
+﻿local Parent = script:FindFirstAncestor("AuthCommon").Parent
+local HttpService = game:GetService("HttpService")
+local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
+local PromiseModule = require(Parent.Promise)
 
-return function(p1, p2, p3)
-	-- upvalues: urlBuilder (ref), httpService (ref), promiseModule (ref)
-	return if type(p2) == "string" and type(p3) == "string" then p1(urlBuilder.fromString("apis:auth-token-service/v1/login/status")(), "POST", {
-		postBody = httpService:JSONEncode({ code = p2, privateKey = p3 })
-	}) elseif type(p2) == "string" then promiseModule.reject("invalid private key") else promiseModule.reject("invalid login code")
+return function(Callback, Code, PrivateKey) --[[ Line: 8 ]]
+	-- upvalues: UrlBuilder (copy), HttpService (copy), PromiseModule (copy)
+	return if type(Code) == "string" and type(PrivateKey) == "string" then Callback(UrlBuilder.fromString("apis:auth-token-service/v1/login/status")(), "POST", {
+		postBody = HttpService:JSONEncode({ code = Code, privateKey = PrivateKey })
+	}) elseif type(Code) == "string" then PromiseModule.reject("invalid private key") else PromiseModule.reject("invalid login code")
 end

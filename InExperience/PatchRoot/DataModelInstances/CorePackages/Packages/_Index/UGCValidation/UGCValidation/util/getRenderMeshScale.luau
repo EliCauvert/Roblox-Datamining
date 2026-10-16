@@ -1,26 +1,22 @@
-﻿local parent = script.Parent.Parent
-local constantsModule = require(parent.Constants)
-local _ = require(parent.util.Types)
-local getMeshInfoModule = require(parent.util.getMeshInfo)
-local getMeshMinMaxModule = require(parent.util.getMeshMinMax)
-local getExpectedPartSizeModule = require(parent.util.getExpectedPartSize)
+﻿local Parent = script.Parent.Parent
+local ConstantsModule = require(Parent.Constants)
+local _ = require(Parent.util.Types)
+local GetMeshInfoModule = require(Parent.util.getMeshInfo)
+local GetMeshMinMaxModule = require(Parent.util.getMeshMinMax)
+local GetExpectedPartSizeModule = require(Parent.util.getExpectedPartSize)
 
-return function(p1, p2)
-	-- upvalues: getMeshInfoModule (ref), constantsModule (ref), getMeshMinMaxModule (ref), getExpectedPartSizeModule (ref)
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local var1, var2, var3 = getMeshInfoModule(p1, constantsModule.MESH_CONTENT_TYPE.RENDER_MESH, p2)
+return function(p1, p2) --[[ Line: 12 | Named "getRenderMeshScale" ]]
+	-- upvalues: GetMeshInfoModule (copy), ConstantsModule (copy), GetMeshMinMaxModule (copy), GetExpectedPartSizeModule (copy)
+	local MeshInfoModule, MeshInfoModule2, MeshInfoModule3 = GetMeshInfoModule(p1, ConstantsModule.MESH_CONTENT_TYPE.RENDER_MESH, p2)
 	
-	if not var1 then
-		return var1, var2
+	if not MeshInfoModule then
+		return MeshInfoModule, MeshInfoModule2
 	end
-	local _ = nil
-	local _ = nil
-	local var4, var5, var6, var7 = getMeshMinMaxModule(var3, p2)
+	local MeshMinMaxModule, MeshMinMaxModule2, MeshMinMaxModule3, MeshMinMaxModule4 = GetMeshMinMaxModule(MeshInfoModule3, p2)
 	
-	if var4 then
-		return true, nil, getExpectedPartSizeModule(p1, p2) / (var7 - var6)
+	if MeshMinMaxModule then
+		return true, nil, GetExpectedPartSizeModule(p1, p2) / (MeshMinMaxModule4 - MeshMinMaxModule3)
+	else
+		return MeshMinMaxModule, MeshMinMaxModule2
 	end
-	return var4, var5
 end

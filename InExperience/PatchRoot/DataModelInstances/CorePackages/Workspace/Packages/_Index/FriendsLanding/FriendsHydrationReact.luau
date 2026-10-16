@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.FriendsHydrationReact.FriendsHydrationReact)
+﻿return (require(script.Parent.Parent.Parent._Index.FriendsHydrationReact.FriendsHydrationReact))

@@ -1,9 +1,8 @@
-﻿local chatUIPrimitives = script:FindFirstAncestor("ChatUIPrimitives")
-local parent = chatUIPrimitives.Parent
-local reactModule = require(parent.React)
-local _ = require(parent.Signals)
-local _ = require(chatUIPrimitives.Types)
+﻿local ChatUIPrimitives = script:FindFirstAncestor("ChatUIPrimitives")
+local Parent = ChatUIPrimitives.Parent
+local _ = require(Parent.Signals)
+local _ = require(ChatUIPrimitives.Types)
 
-return reactModule.memo(function(_)
+return require(Parent.React).memo(function(_) --[[ Line: 19 | Named "BubbleEntry" ]]
 	return nil
 end)

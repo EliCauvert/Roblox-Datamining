@@ -1,187 +1,165 @@
-﻿local edpFallbackActionBarPlayButtonWidth = game:DefineFastInt("EdpFallbackActionBarPlayButtonWidth", 236)
-local edpFallbackIconSize = game:DefineFastInt("EdpFallbackIconSize", 140)
-local parent = script:FindFirstAncestor("GameDetail").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local image = foundationModule.Image
-local text = foundationModule.Text
-local icon = foundationModule.Icon
-local skeleton = foundationModule.Skeleton
-local radius = foundationModule.Enums.Radius
-local buttonSize = foundationModule.Enums.ButtonSize
-local useTokens = foundationModule.Hooks.useTokens
-local playButton = require(parent.GamePlayButton).PlayButton
-local useImageLoadFadeModule = require(script.Parent.Parent.useImageLoadFade)
-local responsiveModule = require(parent.Responsive)
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagLuaAppMediaGalleryGamepadSupport = sharedFlagsModule.FFlagLuaAppMediaGalleryGamepadSupport
-local fFlagLuaAppLaunchWhenLoadingEdp = sharedFlagsModule.FFlagLuaAppLaunchWhenLoadingEdp
-local fFlagLuaAppSduiEdpFallbackAttributionFromCache = sharedFlagsModule.FFlagLuaAppSduiEdpFallbackAttributionFromCache
-local fFlagSduiScalePlayButtonAndImageSizes = sharedFlagsModule.FFlagSduiScalePlayButtonAndImageSizes
-local fFlagEnableGameJoinEarlyAccess = sharedFlagsModule.FFlagEnableGameJoinEarlyAccess
+﻿local EdpFallbackActionBarPlayButtonWidth = game:DefineFastInt("EdpFallbackActionBarPlayButtonWidth", 236)
+local EdpFallbackIconSize = game:DefineFastInt("EdpFallbackIconSize", 140)
+local Parent = script:FindFirstAncestor("GameDetail").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local Image = FoundationModule.Image
+local Text = FoundationModule.Text
+local Icon = FoundationModule.Icon
+local Skeleton = FoundationModule.Skeleton
+local Radius = FoundationModule.Enums.Radius
+local ButtonSize = FoundationModule.Enums.ButtonSize
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local PlayButton = require(Parent.GamePlayButton).PlayButton
+local UseImageLoadFadeModule = require(script.Parent.Parent.useImageLoadFade)
+local ResponsiveModule = require(Parent.Responsive)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagLuaAppMediaGalleryGamepadSupport = SharedFlagsModule.FFlagLuaAppMediaGalleryGamepadSupport
+local FFlagLuaAppLaunchWhenLoadingEdp = SharedFlagsModule.FFlagLuaAppLaunchWhenLoadingEdp
+local FFlagLuaAppSduiEdpFallbackAttributionFromCache = SharedFlagsModule.FFlagLuaAppSduiEdpFallbackAttributionFromCache
+local FFlagSduiScalePlayButtonAndImageSizes = SharedFlagsModule.FFlagSduiScalePlayButtonAndImageSizes
+local FFlagEnableGameJoinEarlyAccess = SharedFlagsModule.FFlagEnableGameJoinEarlyAccess
 
-local function VerifiedBadgeIcon()
-	-- upvalues: useTokens (ref), reactModule (ref), view (ref), icon (ref), foundationModule (ref)
-	local var1 = useTokens()
+local function VerifiedBadgeIcon() --[[ Line: 46 ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Icon (copy), FoundationModule (copy)
+	local UseTokensResult = UseTokensFunction()
 	
-	return reactModule.createElement(view, { LayoutOrder = 2, tag = "auto-xy" }, {
-		Backplate = reactModule.createElement(icon, {
+	return ReactModule.createElement(View, { LayoutOrder = 2, tag = "auto-xy" }, {
+		Backplate = ReactModule.createElement(Icon, {
 			ZIndex = 1,
-			name = foundationModule.Enums.IconName.VerifiedBackplate,
-			style = var1.Color.System.Emphasis,
-			size = foundationModule.Enums.IconSize.Small
+			name = FoundationModule.Enums.IconName.VerifiedBackplate,
+			style = UseTokensResult.Color.System.Emphasis,
+			size = FoundationModule.Enums.IconSize.Small
 		}),
-		Check = reactModule.createElement(icon, {
+		Check = ReactModule.createElement(Icon, {
 			ZIndex = 2,
-			name = foundationModule.Enums.IconName.VerifiedCheck,
-			size = foundationModule.Enums.IconSize.Small,
-			variant = foundationModule.Enums.IconVariant.Filled,
-			style = var1.Color.Extended.White.White_100
+			name = FoundationModule.Enums.IconName.VerifiedCheck,
+			size = FoundationModule.Enums.IconSize.Small,
+			variant = FoundationModule.Enums.IconVariant.Filled,
+			style = UseTokensResult.Color.Extended.White.White_100
 		})
 	})
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), responsiveModule (ref), edpFallbackIconSize (ref), fFlagSduiScalePlayButtonAndImageSizes (ref), useImageLoadFadeModule (ref), reactModule (ref), view (ref), image (ref), skeleton (ref), text (ref), radius (ref), VerifiedBadgeIcon (ref), fFlagLuaAppSduiEdpFallbackAttributionFromCache (ref), playButton (ref), buttonSize (ref), edpFallbackActionBarPlayButtonWidth (ref), fFlagLuaAppLaunchWhenLoadingEdp (ref), fFlagEnableGameJoinEarlyAccess (ref)
-	local var1
-	local var2 = useTokens()
-	local isSmallScreen = p1.isSmallScreen
-	local var3 = p1.isLoading == true
-	
-	if fFlagLuaAppMediaGalleryGamepadSupport then
-		var1 = responsiveModule.useLastInput() == responsiveModule.Input.Directional
-		var1 = nil
-	else
-		var1 = false
-	end
-	local _ = nil
-	local var4 = if isSmallScreen then var2.Size.Size_1400 elseif fFlagLuaAppMediaGalleryGamepadSupport and var1 and edpFallbackIconSize > 0 then if fFlagSduiScalePlayButtonAndImageSizes then edpFallbackIconSize * var2.Config.UI.Scale else edpFallbackIconSize else var2.Size.Size_2500 * 2
-	local _ = nil
-	local var5 = if isSmallScreen then 150 elseif fFlagSduiScalePlayButtonAndImageSizes and var4 > 256 then 512 else 256
-	local var6 = useImageLoadFadeModule()
-	local var7 = reactModule.createElement(view, {
+return ReactModule.memo(function(p1) --[[ Line: 68 | Named "FallbackAttributionRow" ]]
+	-- upvalues: UseTokensFunction (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy), ResponsiveModule (copy), EdpFallbackIconSize (copy), FFlagSduiScalePlayButtonAndImageSizes (copy), UseImageLoadFadeModule (copy), ReactModule (copy), View (copy), Image (copy), Skeleton (copy), Text (copy), Radius (copy), VerifiedBadgeIcon (copy), FFlagLuaAppSduiEdpFallbackAttributionFromCache (copy), PlayButton (copy), ButtonSize (copy), EdpFallbackActionBarPlayButtonWidth (copy), FFlagLuaAppLaunchWhenLoadingEdp (copy), FFlagEnableGameJoinEarlyAccess (copy)
+	local UseTokensResult = UseTokensFunction()
+	local IsSmallScreen = p1.isSmallScreen
+	local IsIsLoading = p1.isLoading == true
+	local IsUseLastInputResultMatch: boolean = if FFlagLuaAppMediaGalleryGamepadSupport then ResponsiveModule.useLastInput() == ResponsiveModule.Input.Directional else false
+	local Size1400 = if IsSmallScreen then UseTokensResult.Size.Size_1400 elseif FFlagLuaAppMediaGalleryGamepadSupport and IsUseLastInputResultMatch and EdpFallbackIconSize > 0 then if FFlagSduiScalePlayButtonAndImageSizes then EdpFallbackIconSize * UseTokensResult.Config.UI.Scale else EdpFallbackIconSize else UseTokensResult.Size.Size_2500 * 2
+	local v1: number = if IsSmallScreen then 150 elseif FFlagSduiScalePlayButtonAndImageSizes and Size1400 > 256 then 512 else 256
+	local Formatted = string.format("rbxthumb://type=GameIcon&id=%s&w=%d&h=%d", p1.universeId, v1, v1)
+	local UseImageLoadFadeModuleResult = UseImageLoadFadeModule()
+	local Element = ReactModule.createElement(View, {
 		LayoutOrder = 1,
 		testId = "--edp-fallback-attribution-icon",
-		Size = UDim2.fromOffset(var4, var4)
+		Size = UDim2.fromOffset(Size1400, Size1400)
 	}, {
-		GameIcon = reactModule.createElement(image, {
+		GameIcon = ReactModule.createElement(Image, {
 			tag = "radius-medium",
-			Image = string.format("rbxthumb://type=GameIcon&id=%s&w=%d&h=%d", p1.universeId, var5, var5),
+			Image = Formatted,
 			Size = UDim2.fromScale(1, 1),
-			onLoaded = var6.onLoaded
+			onLoaded = UseImageLoadFadeModuleResult.onLoaded
 		}),
-		SkeletonOverlay = if var6.skeletonVisible then reactModule.createElement(view, {
+		SkeletonOverlay = if UseImageLoadFadeModuleResult.skeletonVisible then ReactModule.createElement(View, {
 			tag = "radius-medium",
 			ZIndex = 2,
 			ClipsDescendants = true,
 			Size = UDim2.fromScale(1, 1),
-			GroupTransparency = var6.overlayTransparency
+			GroupTransparency = UseImageLoadFadeModuleResult.overlayTransparency
 		}, {
-			Skeleton = reactModule.createElement(skeleton, { Size = UDim2.fromScale(1, 1) })
+			Skeleton = ReactModule.createElement(Skeleton, { Size = UDim2.fromScale(1, 1) })
 		}) else nil
 	})
-	local var8 = if isSmallScreen then var2.Typography.CaptionLarge.LineHeight * var2.Typography.CaptionLarge.FontSize else var2.Typography.BodyMedium.LineHeight * var2.Typography.BodyMedium.FontSize
-	local var9 = nil
-	
-	if p1.gameName then
-		var9 = reactModule.createElement(text, {
+	local ScaledLineHeight = if IsSmallScreen then UseTokensResult.Typography.CaptionLarge.LineHeight * UseTokensResult.Typography.CaptionLarge.FontSize else UseTokensResult.Typography.BodyMedium.LineHeight * UseTokensResult.Typography.BodyMedium.FontSize
+	local Element1 = if p1.gameName then ReactModule.createElement(Text, {
+		LayoutOrder = 1,
+		testId = "--edp-fallback-attribution-title",
+		tag = {
+			["auto-xy text-wrap text-align-x-left text-truncate-none"] = true,
+			["text-heading-small"] = IsSmallScreen,
+			["text-heading-large"] = not IsSmallScreen
+		},
+		Text = p1.gameName
+	}) elseif IsIsLoading then ReactModule.createElement(Skeleton, {
+		LayoutOrder = 1,
+		Size = UDim2.fromOffset(UseTokensResult.Size.Size_2800 * 2, if IsSmallScreen then ScaledLineHeight else UseTokensResult.Typography.HeadingMedium.LineHeight * UseTokensResult.Typography.HeadingMedium.FontSize),
+		radius = Radius.Small
+	}) else nil
+	local Element2 = if p1.creatorName then ReactModule.createElement(View, {
+		tag = "row align-y-center gap-xsmall auto-xy",
+		LayoutOrder = 2
+	}, {
+		CreatorName = ReactModule.createElement(Text, {
+			tag = "auto-xy text-body-medium content-default",
 			LayoutOrder = 1,
-			testId = "--edp-fallback-attribution-title",
-			tag = {
-				["auto-xy text-wrap text-align-x-left text-truncate-none"] = true,
-				["text-heading-small"] = isSmallScreen,
-				["text-heading-large"] = not isSmallScreen
-			},
-			Text = p1.gameName
-		})
-	elseif var3 then
-		var9 = reactModule.createElement(skeleton, {
-			LayoutOrder = 1,
-			Size = UDim2.fromOffset(var2.Size.Size_2800 * 2, if isSmallScreen then var8 else var2.Typography.HeadingMedium.LineHeight * var2.Typography.HeadingMedium.FontSize),
-			radius = radius.Small
-		})
-	end
-	local var10 = nil
-	
-	if p1.creatorName then
-		var10 = reactModule.createElement(view, {
-			tag = "row align-y-center gap-xsmall auto-xy",
-			LayoutOrder = 2
-		}, {
-			CreatorName = reactModule.createElement(text, {
-				tag = "auto-xy text-body-medium content-default",
-				LayoutOrder = 1,
-				testId = "--edp-fallback-attribution-creator",
-				Text = p1.creatorName,
-				TextTruncate = Enum.TextTruncate.None
-			}),
-			Badge = if p1.hasVerifiedBadge then reactModule.createElement(VerifiedBadgeIcon) else nil
-		})
-	elseif var3 then
-		var10 = reactModule.createElement(skeleton, {
-			LayoutOrder = 2,
-			testId = "--edp-fallback-attribution-creator-skeleton",
-			Size = UDim2.fromOffset(var2.Size.Size_2800 * 2, if fFlagLuaAppSduiEdpFallbackAttributionFromCache then var2.Typography.BodyLarge.FontSize * var2.Typography.BodyLarge.LineHeight else var8),
-			radius = radius.Small
-		})
-	end
-	local var11 = nil
+			testId = "--edp-fallback-attribution-creator",
+			Text = p1.creatorName,
+			TextTruncate = Enum.TextTruncate.None
+		}),
+		Badge = if p1.hasVerifiedBadge then ReactModule.createElement(VerifiedBadgeIcon) else nil
+	}) elseif IsIsLoading then ReactModule.createElement(Skeleton, {
+		LayoutOrder = 2,
+		testId = "--edp-fallback-attribution-creator-skeleton",
+		Size = UDim2.fromOffset(UseTokensResult.Size.Size_2800 * 2, if FFlagLuaAppSduiEdpFallbackAttributionFromCache then UseTokensResult.Typography.BodyLarge.FontSize * UseTokensResult.Typography.BodyLarge.LineHeight else ScaledLineHeight),
+		radius = Radius.Small
+	}) else nil
+	local Element3 = nil
 	
 	if p1.ageRecDisplayName then
-		var11 = reactModule.createElement(text, {
+		Element3 = ReactModule.createElement(Text, {
 			tag = "auto-xy text-body-medium content-default",
 			LayoutOrder = 3,
 			testId = "--edp-fallback-attribution-age-rating",
 			Text = p1.ageRecDisplayName
 		})
-	elseif var3 then
-		local fontSize
-		local _ = nil
-		
-		if fFlagLuaAppSduiEdpFallbackAttributionFromCache then
-			fontSize = var2.Typography.BodyMedium.FontSize
+	elseif IsIsLoading then
+		local FontSize = nil
+		if FFlagLuaAppSduiEdpFallbackAttributionFromCache then
+			FontSize = UseTokensResult.Typography.BodyMedium.FontSize
 			
-			if not isSmallScreen then
-				fontSize += var2.Padding.XSmall
+			if not IsSmallScreen then
+				FontSize += UseTokensResult.Padding.XSmall
 			end
 		else
-			fontSize = var8
+			FontSize = ScaledLineHeight
 		end
-		var11 = reactModule.createElement(skeleton, {
+		Element3 = ReactModule.createElement(Skeleton, {
 			LayoutOrder = 3,
 			testId = "--edp-fallback-attribution-age-rating-skeleton",
-			Size = UDim2.fromOffset(if isSmallScreen then var2.Size.Size_2400 else var2.Size.Size_2800, fontSize),
-			radius = radius.Small
+			Size = UDim2.fromOffset(if IsSmallScreen then UseTokensResult.Size.Size_2400 else UseTokensResult.Size.Size_2800, FontSize),
+			radius = Radius.Small
 		})
 	end
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		LayoutOrder = 1,
 		tag = {
 			["row size-full-0 auto-y"] = true,
-			["gap-medium"] = isSmallScreen,
-			["gap-xlarge"] = not isSmallScreen,
-			["align-y-center"] = isSmallScreen,
-			["align-y-bottom"] = not isSmallScreen
+			["gap-medium"] = IsSmallScreen,
+			["gap-xlarge"] = not IsSmallScreen,
+			["align-y-center"] = IsSmallScreen,
+			["align-y-bottom"] = not IsSmallScreen
 		}
 	}, {
-		Icon = var7,
-		ContentColumn = reactModule.createElement(view, {
+		Icon = Element,
+		ContentColumn = ReactModule.createElement(View, {
 			LayoutOrder = 2,
 			testId = "--edp-fallback-attribution-content-column",
 			tag = {
-				["col fill gap-xsmall auto-xy"] = fFlagLuaAppSduiEdpFallbackAttributionFromCache,
-				["col fill gap-small auto-xy"] = not fFlagLuaAppSduiEdpFallbackAttributionFromCache
+				["col fill gap-xsmall auto-xy"] = FFlagLuaAppSduiEdpFallbackAttributionFromCache,
+				["col fill gap-small auto-xy"] = not FFlagLuaAppSduiEdpFallbackAttributionFromCache
 			}
 		}, {
-			Title = var9,
-			Creator = var10,
-			AgeRating = var11,
-			ActionRow = if not isSmallScreen then reactModule.createElement(view, {
+			Title = Element1,
+			Creator = Element2,
+			AgeRating = Element3,
+			ActionRow = if IsSmallScreen then nil else ReactModule.createElement(View, {
 				tag = "row align-y-center gap-small auto-xy",
 				LayoutOrder = 4
 			}, {
-				PlayBtn = reactModule.createElement(playButton, {
+				PlayBtn = ReactModule.createElement(PlayButton, {
 					useUIBloxButton = true,
 					launchOnReleaseAfterUnmount = true,
 					expandWidthForSecondaryPlayButton = true,
@@ -192,22 +170,22 @@ return reactModule.memo(function(p1)
 					launchSource = p1.launchSource,
 					experienceJoinData = p1.experienceJoinData,
 					placeId = p1.placeIdOverride,
-					buttonSize = buttonSize.Large,
-					width = UDim.new(0, if fFlagSduiScalePlayButtonAndImageSizes then edpFallbackActionBarPlayButtonWidth * var2.Config.UI.Scale else edpFallbackActionBarPlayButtonWidth),
-					launchWhenLoading = if fFlagLuaAppLaunchWhenLoadingEdp then true else nil,
-					enableEarlyAccessPlusTooltip = if fFlagEnableGameJoinEarlyAccess then true else nil
+					buttonSize = ButtonSize.Large,
+					width = UDim.new(0, if FFlagSduiScalePlayButtonAndImageSizes then EdpFallbackActionBarPlayButtonWidth * UseTokensResult.Config.UI.Scale else EdpFallbackActionBarPlayButtonWidth),
+					launchWhenLoading = if FFlagLuaAppLaunchWhenLoadingEdp then true else nil,
+					enableEarlyAccessPlusTooltip = if FFlagEnableGameJoinEarlyAccess then true else nil
 				}),
-				OverflowSkeleton1 = if var3 then reactModule.createElement(skeleton, {
+				OverflowSkeleton1 = if IsIsLoading then ReactModule.createElement(Skeleton, {
 					LayoutOrder = 2,
-					Size = UDim2.fromOffset(var2.Size.Size_1200, var2.Size.Size_1200),
-					radius = radius.Medium
+					Size = UDim2.fromOffset(UseTokensResult.Size.Size_1200, UseTokensResult.Size.Size_1200),
+					radius = Radius.Medium
 				}) else nil,
-				OverflowSkeleton2 = if var3 then reactModule.createElement(skeleton, {
+				OverflowSkeleton2 = if IsIsLoading then ReactModule.createElement(Skeleton, {
 					LayoutOrder = 3,
-					Size = UDim2.fromOffset(var2.Size.Size_1200, var2.Size.Size_1200),
-					radius = radius.Medium
+					Size = UDim2.fromOffset(UseTokensResult.Size.Size_1200, UseTokensResult.Size.Size_1200),
+					radius = Radius.Medium
 				}) else nil
-			}) else nil
+			})
 		})
 	})
 end)

@@ -1,72 +1,77 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local signalsModule = require(parent_1.Signals)
-local signalsReactModule = require(parent_1.SignalsReact)
-local foundationModule = require(parent_1.Foundation)
-local view = foundationModule.View
-local text = foundationModule.Text
-local _ = require(parent_1.LeaderboardStore)
-local statCellModule = require(parent.Components.Presentation.StatCell)
-local constantsModule = require(parent.Common.Constants)
-local _ = require(parent.Common.computeStatColumns)
-local gameTextTranslatorContextModule = require(parent.Common.GameTextTranslatorContext)
-local fFlagPlayerListLocalizeGameTextModule = require(parent.Flags.FFlagPlayerListLocalizeGameText)
-local usePreferredTransparencyBindingModule = require(parent.Hooks.usePreferredTransparencyBinding)
-local ROW_FLEX_TAG = constantsModule.ROW_FLEX_TAG
-local TEAM_LAYOUT_MULTIPLIER = constantsModule.TEAM_LAYOUT_MULTIPLIER
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local SignalsModule = require(Parent1.Signals)
+local SignalsReactModule = require(Parent1.SignalsReact)
+local FoundationModule = require(Parent1.Foundation)
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local _ = require(Parent1.LeaderboardStore)
+local StatCellModule = require(Parent.Components.Presentation.StatCell)
+local ConstantsModule = require(Parent.Common.Constants)
+local _ = require(Parent.Common.computeStatColumns)
+local GameTextTranslatorContextModule = require(Parent.Common.GameTextTranslatorContext)
+local FFlagPlayerListLocalizeGameTextModule = require(Parent.Flags.FFlagPlayerListLocalizeGameText)
+local UsePreferredTransparencyBindingModule = require(Parent.Hooks.usePreferredTransparencyBinding)
+local ROWFLEXTAG = ConstantsModule.ROW_FLEX_TAG
+local TEAMLAYOUTMULTIPLIER = ConstantsModule.TEAM_LAYOUT_MULTIPLIER
 
-return reactModule.memo(function(p1)
-	-- upvalues: fFlagPlayerListLocalizeGameTextModule (ref), reactModule (ref), gameTextTranslatorContextModule (ref), signalsReactModule (ref), usePreferredTransparencyBindingModule (ref), signalsModule (ref), TEAM_LAYOUT_MULTIPLIER (ref), view (ref), text (ref), statCellModule (ref), constantsModule (ref), ROW_FLEX_TAG (ref)
-	local var1 = if fFlagPlayerListLocalizeGameTextModule then reactModule.useContext(gameTextTranslatorContextModule) else nil
-	local var2 = signalsReactModule.useSignalBinding(p1.name)
-	local var3 = if fFlagPlayerListLocalizeGameTextModule then reactModule.useMemo(function()
-		-- upvalues: var1 (ref), var2 (ref)
-		return if var1 then var2:map(var1) else var2
-	end, { var1, var2 }) else var2
-	local var4 = signalsReactModule.useSignalBinding(p1.color)
-	local var5 = usePreferredTransparencyBindingModule()
-	local rowHeight = p1.rowHeight
-	local var6 = signalsReactModule.useSignalBinding(reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), p1 (ref), TEAM_LAYOUT_MULTIPLIER (copy)
-		return signalsModule.createComputed(function(p2)
-			-- upvalues: p1 (copy), TEAM_LAYOUT_MULTIPLIER (copy)
-			return if p1.order then p1.order(p2) * TEAM_LAYOUT_MULTIPLIER else p1.layoutOrder or 0
+return ReactModule.memo(function(p1) --[[ Line: 25 | Named "TeamEntryView" ]]
+	-- upvalues: FFlagPlayerListLocalizeGameTextModule (copy), ReactModule (copy), GameTextTranslatorContextModule (copy), SignalsReactModule (copy), UsePreferredTransparencyBindingModule (copy), SignalsModule (copy), TEAMLAYOUTMULTIPLIER (copy), View (copy), Text (copy), StatCellModule (copy), ConstantsModule (copy), ROWFLEXTAG (copy)
+	local UseContextResult = if FFlagPlayerListLocalizeGameTextModule then ReactModule.useContext(GameTextTranslatorContextModule) else nil
+	local UseSignalBindingResult = SignalsReactModule.useSignalBinding(p1.name)
+	local UseSignalBindingResult1 = SignalsReactModule.useSignalBinding(p1.color)
+	local UsePreferredTransparencyBindingModuleResult = UsePreferredTransparencyBindingModule()
+	local RowHeight = p1.rowHeight
+	local UseSignalBindingResult2 = SignalsReactModule.useSignalBinding((ReactModule.useMemo(function() --[[ Line: 50 ]]
+		-- upvalues: SignalsModule (upval), p1 (copy), TEAMLAYOUTMULTIPLIER (upval)
+		return SignalsModule.createComputed(function(p2) --[[ Line: 51 ]]
+			-- upvalues: p1 (upval), TEAMLAYOUTMULTIPLIER (upval)
+			return if p1.order then p1.order(p2) * TEAMLAYOUTMULTIPLIER else p1.layoutOrder or 0
 		end)
-	end, { p1.order, p1.layoutOrder }))
-	local t = {
-		NameLabel = reactModule.createElement(view, { LayoutOrder = 1, tag = "fill size-0-full clip" }, {
-			Label = reactModule.createElement(text, {
+	end, { p1.order, p1.layoutOrder })))
+	local config = {
+		NameLabel = ReactModule.createElement(View, { LayoutOrder = 1, tag = "fill size-0-full clip" }, {
+			Label = ReactModule.createElement(Text, {
 				tag = "size-full text-label-small text-align-x-left content-emphasis",
-				Text = var3
+				Text = if FFlagPlayerListLocalizeGameTextModule then ReactModule.useMemo(function() --[[ Line: 42 ]]
+					-- upvalues: UseContextResult (copy), UseSignalBindingResult (copy)
+					return if UseContextResult then UseSignalBindingResult:map(UseContextResult) else UseSignalBindingResult
+				end, { UseContextResult, UseSignalBindingResult }) else UseSignalBindingResult
 			})
 		})
 	}
 	
 	if p1.statColumns then
-		for i, v in ipairs(p1.statColumns) do
-			t[`TeamStat_{v.name}`] = reactModule.createElement(statCellModule, {
+		for i, statColumn in ipairs(p1.statColumns) do
+			config[`TeamStat_{statColumn.name}`] = ReactModule.createElement(StatCellModule, {
 				textTag = "text-label-small content-emphasis",
-				statName = v.name,
-				playerStat = if p1.teamStats then p1.teamStats.getData(v.name, false) else nil,
+				statName = statColumn.name,
+				playerStat = if p1.teamStats then p1.teamStats.getData(statColumn.name, false) else nil,
 				statWidth = p1.statWidth,
-				rowHeight = rowHeight,
+				rowHeight = RowHeight,
 				layoutOrder = i + 1
 			})
 		end
 	end
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		testId = "team-entry-view",
-		Size = UDim2.new(1, 0, 0, rowHeight),
-		backgroundStyle = reactModule.useMemo(function()
-			-- upvalues: reactModule (copy), var4 (ref), var5 (ref)
-			return reactModule.joinBindings({ color = var4, pt = var5 }):map(function(p2)
+		Size = UDim2.new(1, 0, 0, RowHeight),
+		backgroundStyle = ReactModule.useMemo(function() --[[ Line: 86 ]]
+			-- upvalues: ReactModule (upval), UseSignalBindingResult1 (copy), UsePreferredTransparencyBindingModuleResult (copy)
+			return ReactModule.joinBindings({
+				color = UseSignalBindingResult1,
+				pt = UsePreferredTransparencyBindingModuleResult
+			}):map(function(p2) --[[ Line: 90 ]]
 				return { Color3 = p2.color, Transparency = 0.5 * p2.pt }
 			end)
-		end, { var4, var5 }),
-		LayoutOrder = var6,
-		selection = constantsModule.NOT_SELECTABLE
+		end, {
+			UseSignalBindingResult1,
+			UsePreferredTransparencyBindingModuleResult
+		}),
+		LayoutOrder = UseSignalBindingResult2,
+		selection = ConstantsModule.NOT_SELECTABLE
 	}, {
-		RowContent = reactModule.createElement(view, { tag = `size-full {ROW_FLEX_TAG}` }, t)
+		RowContent = ReactModule.createElement(View, { tag = `size-full {ROWFLEXTAG}` }, config)
 	})
 end)

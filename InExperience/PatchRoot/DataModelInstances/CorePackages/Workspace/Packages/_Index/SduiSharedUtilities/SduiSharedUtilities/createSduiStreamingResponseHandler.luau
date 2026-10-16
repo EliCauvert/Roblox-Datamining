@@ -1,82 +1,84 @@
-﻿local sduiStreamingResponseUtilsModule = require(script:FindFirstAncestor("SduiSharedUtilities").SduiStreamingResponseUtils)
+﻿local SduiStreamingResponseUtilsModule = require(script:FindFirstAncestor("SduiSharedUtilities").SduiStreamingResponseUtils)
 
-return function(a)
-	-- upvalues: sduiStreamingResponseUtilsModule (ref)
-	local var1 = 0
-	local var2 = nil
-	local var3 = nil
-	local var4 = ""
+return function(p1) --[[ Line: 20 | Named "createSduiStreamingResponseHandler" ]]
+	-- upvalues: SduiStreamingResponseUtilsModule (copy)
+	local Count = 0
+	local Value = nil
+	local Value1 = nil
+	local Text = ""
 	
-	local function processExtractedFrames(p1)
-		-- upvalues: a (ref), var1 (write), var2 (write), var3 (write)
-		local var5
-		for i, v in p1 do
-			var6, var7 = a.processFrame(v)
+	local function processExtractedFrames(List) --[[ Line: 28 ]]
+		-- upvalues: p1 (copy), Count (ref), Value (ref), Value1 (ref)
+		local ProcessFrameResult2 = nil
+		for _, value in List do
+			local ProcessFrameResult
+			ProcessFrameResult, ProcessFrameResult2 = p1.processFrame(value)
 			
-			if not var6 then
-				var3 = var5
-				
-				return
+			if not ProcessFrameResult then
+				Value1 = ProcessFrameResult2
+				break
 			end
-			var1 += 1
-			var2 = var5
+			Count += 1
+			Value = ProcessFrameResult2
 		end
 	end
 	
-	local function _(p2)
-		-- upvalues: sduiStreamingResponseUtilsModule (copy), var3 (write), var4 (write), processExtractedFrames (ref)
-		local ok, status, var6 = pcall(sduiStreamingResponseUtilsModule.extractFrames, p2)
+	local function _(p2) --[[ Line: 41 | Named "extractAndProcessFrames" ]]
+		-- upvalues: SduiStreamingResponseUtilsModule (upval), Value1 (ref), Text (ref), processExtractedFrames (copy)
+		local Success, Result, Result3 = pcall(SduiStreamingResponseUtilsModule.extractFrames, p2)
 		
-		if ok then
-			var4 = var6
-			processExtractedFrames(status)
+		if Success then
+			Text = Result3
+			processExtractedFrames(Result)
 			
 			return
+		else
+			Value1 = Result
 		end
-		var3 = status
 	end
 	
 	return {
-		handleChunk = function(p2)
-			-- upvalues: a (ref), var3 (write), var4 (write), sduiStreamingResponseUtilsModule (copy), processExtractedFrames (ref)
-			a.loadTimer.logUiStreamChunkReceived()
+		handleChunk = function(Text1) --[[ Line: 52 ]]
+			-- upvalues: p1 (copy), Value1 (ref), Text (ref), SduiStreamingResponseUtilsModule (upval), processExtractedFrames (copy)
+			p1.loadTimer.logUiStreamChunkReceived()
 			
-			if #p2 == 0 or var3 ~= nil then return end
-			var4 ..= p2
-			local ok, status, var6 = pcall(sduiStreamingResponseUtilsModule.extractFrames, var4)
+			if #Text1 == 0 or Value1 ~= nil then return end
+			Text ..= Text1
+			local Success, Result, Result3 = pcall(SduiStreamingResponseUtilsModule.extractFrames, Text)
 			
-			if ok then
-				var4 = var6
-				processExtractedFrames(status)
+			if Success then
+				Text = Result3
+				processExtractedFrames(Result)
 				
 				return
+			else
+				Value1 = Result
 			end
-			var3 = status
 		end,
-		finalize = function(p2)
-			-- upvalues: var1 (write), sduiStreamingResponseUtilsModule (copy), var4 (write), var3 (write), processExtractedFrames (ref), a (ref), var2 (write)
-			if var1 == 0 and not sduiStreamingResponseUtilsModule.isEmptyResponseBody(p2) then
-				local var6 = if typeof(p2) == "buffer" then buffer.tostring(p2) else p2
+		finalize = function(Buf) --[[ Line: 63 ]]
+			-- upvalues: Count (ref), SduiStreamingResponseUtilsModule (upval), Text (ref), Value1 (ref), processExtractedFrames (copy), p1 (copy), Value (ref)
+			if Count == 0 and not SduiStreamingResponseUtilsModule.isEmptyResponseBody(Buf) then
+				local Text1 = if typeof(Buf) == "buffer" then buffer.tostring(Buf) else Buf
 				
-				if typeof(var6) == "string" and #var6 > 0 then
-					var4 = var6
-					local ok, status, var7 = pcall(sduiStreamingResponseUtilsModule.extractFrames, var4)
+				if typeof(Text1) == "string" and #Text1 > 0 then
+					Text = Text1
+					local Success, Result, Result3 = pcall(SduiStreamingResponseUtilsModule.extractFrames, Text)
 					
-					if ok then
-						var4 = var7
-						processExtractedFrames(status)
+					if Success then
+						Text = Result3
+						processExtractedFrames(Result)
 					else
-						var3 = status
+						Value1 = Result
 					end
 				end
 			end
-			return if var3 == nil then if #var4 > 0 then {
+			return if Value1 == nil then if #Text > 0 then {
 				ok = false,
-				value = `Streaming response for {a.configKey} ended with {#var4} undecoded bytes remaining`
-			} elseif var1 > 0 then { ok = true, value = var2 } else {
+				value = `Streaming response for {p1.configKey} ended with {#Text} undecoded bytes remaining`
+			} elseif Count > 0 then { ok = true, value = Value } else {
 				ok = false,
-				value = `Streaming request for {a.configKey} completed without receiving data`
-			} else { ok = false, value = var3 }
+				value = `Streaming request for {p1.configKey} completed without receiving data`
+			} else { ok = false, value = Value1 }
 		end
 	}
 end

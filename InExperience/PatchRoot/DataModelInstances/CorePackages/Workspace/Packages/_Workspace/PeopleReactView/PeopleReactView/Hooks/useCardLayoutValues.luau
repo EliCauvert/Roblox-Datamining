@@ -1,23 +1,23 @@
-﻿local peopleReactView = script:FindFirstAncestor("PeopleReactView")
-local parent = peopleReactView.Parent
-local reactModule = require(parent.React)
-local useTokens = require(parent.Foundation).Hooks.useTokens
-local calculateCardLayoutModule = require(peopleReactView.Utils.calculateCardLayout)
+﻿local PeopleReactView = script:FindFirstAncestor("PeopleReactView")
+local Parent = PeopleReactView.Parent
+local ReactModule = require(Parent.React)
+local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+local CalculateCardLayoutModule = require(PeopleReactView.Utils.calculateCardLayout)
 
-return function()
-	-- upvalues: useTokens (ref), reactModule (ref), calculateCardLayoutModule (ref)
-	local var1 = useTokens()
-	local var2, var3 = reactModule.useBinding(0)
-	local var4, var5 = reactModule.useBinding(0)
-	local var6, var7 = reactModule.useBinding(0)
+return function() --[[ Line: 11 | Named "useCardLayoutValues" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), CalculateCardLayoutModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
+	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(0)
+	local UseBindingResult3, UseBindingResult2_2 = ReactModule.useBinding(0)
 	
-	return var2, var4, var6, reactModule.useCallback(function(p1, p2, p3)
-		-- upvalues: calculateCardLayoutModule (copy), var7 (ref), var3 (ref), var5 (ref), var1 (ref)
-		local var8, var9 = calculateCardLayoutModule(p1, p2, p3)
-		var7(var9)
-		var3(var8)
-		var5(var8 + var1.Size.Size_1400)
+	return UseBindingResult, UseBindingResult1, UseBindingResult3, (ReactModule.useCallback(function(p1, p2, p3) --[[ Line: 19 ]]
+		-- upvalues: CalculateCardLayoutModule (upval), UseBindingResult2_2 (copy), UseBindingResult2 (copy), UseBindingResult2_1 (copy), UseTokensResult (copy)
+		local CardLayoutModule, CardLayoutModule2 = CalculateCardLayoutModule(p1, p2, p3)
+		UseBindingResult2_2(CardLayoutModule2)
+		UseBindingResult2(CardLayoutModule)
+		UseBindingResult2_1(CardLayoutModule + UseTokensResult.Size.Size_1400)
 		
-		return var8
-	end, { var1.Size.Size_1400 })
+		return CardLayoutModule
+	end, { UseTokensResult.Size.Size_1400 }))
 end

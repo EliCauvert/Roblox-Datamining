@@ -1,61 +1,61 @@
-﻿local roduxSquads = script:FindFirstAncestor("RoduxSquads")
-local roduxModule = require(roduxSquads.Parent.Rodux)
-local createInternalPersistManager = require(roduxSquads.Persists.PersistManager).createInternalPersistManager
-local createPersistManager = require(roduxSquads.Persists.PersistManager).createPersistManager
-local createPause = require(roduxSquads.Persists.Actions).createPause
-local createPersistAndUpdateState = require(roduxSquads.Persists.Actions).createPersistAndUpdateState
-local t = { isPaused = false }
+﻿local RoduxSquads = script:FindFirstAncestor("RoduxSquads")
+local RoduxModule = require(RoduxSquads.Parent.Rodux)
+local CreateInternalPersistManagerFunction = require(RoduxSquads.Persists.PersistManager).createInternalPersistManager
+local CreatePersistManagerFunction = require(RoduxSquads.Persists.PersistManager).createPersistManager
+local CreatePauseFunction = require(RoduxSquads.Persists.Actions).createPause
+local CreatePersistAndUpdateStateFunction = require(RoduxSquads.Persists.Actions).createPersistAndUpdateState
+local config = { isPaused = false }
 
-return function(p1, p2)
-	-- upvalues: createPause (ref), createPersistAndUpdateState (ref), createInternalPersistManager (ref), createPersistManager (ref), t (ref), roduxModule (ref)
-	local var1 = false
-	local var2 = createPause(p1)
-	local var3 = createPersistAndUpdateState(p1)
-	local var4 = createInternalPersistManager(p1)
-	local var5 = createPersistManager(p1, var4)
-	local isPaused = t.isPaused
-	local var6 = nil
-	local var7 = nil
+return function(p1, Callback) --[[ Line: 13 ]]
+	-- upvalues: CreatePauseFunction (copy), CreatePersistAndUpdateStateFunction (copy), CreateInternalPersistManagerFunction (copy), CreatePersistManagerFunction (copy), config (copy), RoduxModule (copy)
+	local Flag = false
+	local Pause = CreatePauseFunction(p1)
+	local PersistAndUpdateState = CreatePersistAndUpdateStateFunction(p1)
+	local InternalPersistManager = CreateInternalPersistManagerFunction(p1)
+	local PersistManager = CreatePersistManagerFunction(p1, InternalPersistManager)
+	local IsPaused = config.isPaused
+	local GetResult = nil
 	
-	if var4 then
-		var7 = var4.bindToStorage(function(p3)
-			-- upvalues: var6 (write)
-			var6 = p3
+	if InternalPersistManager then
+		local _ = InternalPersistManager.bindToStorage(function(p2) --[[ Line: 27 ]]
+			-- upvalues: GetResult (ref)
+			GetResult = p2
 		end)
-		var6 = var4.get()
+		GetResult = InternalPersistManager.get()
 	end
-	return function(p3, p4)
-		-- upvalues: var4 (ref), var1 (write), var6 (write), var3 (ref), isPaused (write), p2 (ref)
-		if var4 and not var1 then
-			p3 = var6 or p3
+	return function(p2, p3) --[[ Line: 33 ]]
+		-- upvalues: InternalPersistManager (copy), Flag (ref), GetResult (ref), PersistAndUpdateState (copy), IsPaused (ref), Callback (copy)
+		if InternalPersistManager and not Flag then
+			p2 = GetResult or p2
 		end
-		var1 = true
-		local var8 = p3
+		Flag = true
+		local v1 = p2
 		
-		if var3.name == p4.type then
-			var8 = var6
+		if PersistAndUpdateState.name == p3.type then
+			v1 = GetResult
 			
-			return var8
-		elseif not isPaused then
-			var8 = p2(p3, p4)
+			return v1
+		end
+		if not IsPaused then
+			v1 = Callback(p2, p3)
 			
-			if var4 and var8 ~= p3 then
-				var4.update(var8)
+			if InternalPersistManager and v1 ~= p2 then
+				InternalPersistManager.update(v1)
 			end
 		end
-		return var8
-	end, roduxModule.createReducer(t, {
-		[var3.name] = function(_, _)
-			-- upvalues: isPaused (write)
-			isPaused = false
+		return v1
+	end, RoduxModule.createReducer(config, {
+		[PersistAndUpdateState.name] = function(_, _) --[[ Line: 55 ]]
+			-- upvalues: IsPaused (ref)
+			IsPaused = false
 			
-			return { isPaused = isPaused }
+			return { isPaused = IsPaused }
 		end,
-		[var2.name] = function(_, _)
-			-- upvalues: isPaused (write)
-			isPaused = true
+		[Pause.name] = function(_, _) --[[ Line: 59 ]]
+			-- upvalues: IsPaused (ref)
+			IsPaused = true
 			
-			return { isPaused = isPaused }
+			return { isPaused = IsPaused }
 		end
-	}), var5
+	}), PersistManager
 end

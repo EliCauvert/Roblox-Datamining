@@ -1,10 +1,10 @@
-﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator(script.Name, function(p1, p2, p3, p4)
+﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator(script.Name, function(PromptType, AccessoryType, Guid, Scopes) --[[ Line: 22 ]]
 	return {
 		promptInfo = {
-			promptType = p1,
-			accessoryType = p2,
-			guid = p3,
-			scopes = p4
+			promptType = PromptType,
+			accessoryType = AccessoryType,
+			guid = Guid,
+			scopes = Scopes
 		}
 	}
 end)

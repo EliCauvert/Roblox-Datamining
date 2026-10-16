@@ -1,78 +1,77 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local parent = avatarExperienceCatalog.Parent
-local reactModule = require(parent.React)
-local roactNavigationModule = require(parent.RoactNavigation)
-local useSignalState = require(parent.SignalsReact).useSignalState
-local sendAXCounterV2 = require(parent.AvatarExperienceAnalytics).sendAXCounterV2
-local constantsModule = require(avatarExperienceCatalog.Constants)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useNavigation = require(parent.Navigation).useNavigation
-local avatarExperienceCommonModule = require(parent.AvatarExperienceCommon)
-local AXPartialPageModal = avatarExperienceCommonModule.Components.AXPartialPageModal
-local getTimeoutStatusStore = avatarExperienceCommonModule.Stores.getTimeoutStatusStore
-local formatTimeoutEndTime = avatarExperienceCommonModule.Utils.formatTimeoutEndTime
-local labelAbuseTypeMapping = avatarExperienceCommonModule.Constants.LabelAbuseTypeMapping
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local text = foundationModule.Text
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local inputSize = foundationModule.Enums.InputSize
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local Parent = AvatarExperienceCatalog.Parent
+local ReactModule = require(Parent.React)
+local RoactNavigationModule = require(Parent.RoactNavigation)
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local SendAXCounterV2Function = require(Parent.AvatarExperienceAnalytics).sendAXCounterV2
+local ConstantsModule = require(AvatarExperienceCatalog.Constants)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local AvatarExperienceCommonModule = require(Parent.AvatarExperienceCommon)
+local AXPartialPageModal = AvatarExperienceCommonModule.Components.AXPartialPageModal
+local GetTimeoutStatusStoreFunction = AvatarExperienceCommonModule.Stores.getTimeoutStatusStore
+local FormatTimeoutEndTimeFunction = AvatarExperienceCommonModule.Utils.formatTimeoutEndTime
+local LabelAbuseTypeMapping = AvatarExperienceCommonModule.Constants.LabelAbuseTypeMapping
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local InputSize = FoundationModule.Enums.InputSize
 
-return function()
-	-- upvalues: useNavigation (ref), getTimeoutStatusStore (ref), useSignalState (ref), reactModule (ref), sendAXCounterV2 (ref), constantsModule (ref), roactNavigationModule (ref), labelAbuseTypeMapping (ref), useLocalization (ref), formatTimeoutEndTime (ref), AXPartialPageModal (ref), buttonVariant (ref), inputSize (ref), view (ref), text (ref)
-	local var1 = useNavigation()
-	local var2 = useSignalState(getTimeoutStatusStore().getTimeoutDetails)
-	reactModule.useEffect(function()
-		-- upvalues: sendAXCounterV2 (copy), constantsModule (copy), var2 (ref)
-		sendAXCounterV2(constantsModule.COUNTERS.TimeoutStatusPromptShown, {
-			labelTranslationKey = if var2 then var2.labelTranslationKey else ""
+return function() --[[ Line: 31 | Named "TimeoutStatusPrompt" ]]
+	-- upvalues: UseNavigationFunction (copy), GetTimeoutStatusStoreFunction (copy), UseSignalStateFunction (copy), ReactModule (copy), SendAXCounterV2Function (copy), ConstantsModule (copy), RoactNavigationModule (copy), LabelAbuseTypeMapping (copy), UseLocalizationFunction (copy), FormatTimeoutEndTimeFunction (copy), AXPartialPageModal (copy), ButtonVariant (copy), InputSize (copy), View (copy), Text (copy)
+	local UseNavigationResult = UseNavigationFunction()
+	local UseSignalStateResult = UseSignalStateFunction(GetTimeoutStatusStoreFunction().getTimeoutDetails)
+	ReactModule.useEffect(function() --[[ Line: 36 ]]
+		-- upvalues: SendAXCounterV2Function (upval), ConstantsModule (upval), UseSignalStateResult (copy)
+		SendAXCounterV2Function(ConstantsModule.COUNTERS.TimeoutStatusPromptShown, {
+			labelTranslationKey = if UseSignalStateResult then UseSignalStateResult.labelTranslationKey else ""
 		})
 	end, {})
-	local var3 = reactModule.useCallback(function()
-		-- upvalues: var1 (ref), roactNavigationModule (copy)
-		var1.dispatch(roactNavigationModule.Actions.back(nil))
-	end, { var1 })
-	local _ = nil
-	local var4 = useLocalization({
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 42 ]]
+		-- upvalues: UseNavigationResult (copy), RoactNavigationModule (upval)
+		UseNavigationResult.dispatch(RoactNavigationModule.Actions.back(nil))
+	end, { UseNavigationResult })
+	local UseLocalizationResult = UseLocalizationFunction({
 		titleText = "Feature.Timeout.Prompt.TitleText",
 		closeText = "Feature.Timeout.Label.OK",
 		bodyText = {
 			"Feature.Timeout.Prompt.BodyText",
-			rule = useLocalization({
-				rule = if var2 and labelAbuseTypeMapping then labelAbuseTypeMapping[var2.labelTranslationKey] or "Feature.NotApproved.Label.AbuseType.Other" else "Feature.NotApproved.Label.AbuseType.Other"
+			rule = UseLocalizationFunction({
+				rule = UseSignalStateResult and LabelAbuseTypeMapping and LabelAbuseTypeMapping[UseSignalStateResult.labelTranslationKey] or "Feature.NotApproved.Label.AbuseType.Other"
 			}).rule,
-			time = if var2 then formatTimeoutEndTime(var2.endDate) else ""
+			time = if UseSignalStateResult then FormatTimeoutEndTimeFunction(UseSignalStateResult.endDate) else ""
 		}
 	})
 	
-	return reactModule.createElement(AXPartialPageModal, {
-		onBackgroundPress = var3,
+	return ReactModule.createElement(AXPartialPageModal, {
+		onBackgroundPress = UseResult,
 		buttonStackProps = {
 			rowLayout = false,
 			buttons = {
 				{
 					props = {
-						onActivated = var3,
-						text = var4.closeText,
-						variant = buttonVariant.Standard,
-						size = inputSize.Medium
+						onActivated = UseResult,
+						text = UseLocalizationResult.closeText,
+						variant = ButtonVariant.Standard,
+						size = InputSize.Medium
 					}
 				}
 			}
 		}
 	}, {
-		ViewFrame = reactModule.createElement(view, {
+		ViewFrame = ReactModule.createElement(View, {
 			tag = "auto-y size-full-0 padding-bottom-xxlarge col align-x-left align-y-top"
 		}, {
-			PromptBodyTitle = reactModule.createElement(text, {
+			PromptBodyTitle = ReactModule.createElement(Text, {
 				tag = "auto-xy padding-bottom-small text-align-x-left text-heading-small text-wrap",
 				LayoutOrder = 2,
-				Text = var4.titleText
+				Text = UseLocalizationResult.titleText
 			}),
-			PromptBodyText = reactModule.createElement(text, {
+			PromptBodyText = ReactModule.createElement(Text, {
 				tag = "auto-xy text-align-x-left text-body-large text-wrap font-family-code",
 				LayoutOrder = 3,
-				Text = var4.bodyText
+				Text = UseLocalizationResult.bodyText
 			})
 		})
 	})

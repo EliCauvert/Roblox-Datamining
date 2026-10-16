@@ -1,148 +1,143 @@
-﻿local parent = script:FindFirstAncestor("VrCommon").Parent
-local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
-local playersService = game:GetService("Players")
+﻿local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
+local Players = game:GetService("Players")
 local VRService = game:GetService("VRService")
-local userGameSettingsService = UserSettings():GetService("UserGameSettings")
-local t = {}
-t.__index = t
-local create = require(parent.AppCommonLib).Create
-local fIntSafetyBubbleRadiusModule = require(script.Parent.FIntSafetyBubbleRadius)
-local var1 = require(script.Parent.FIntSafetyBubbleTransparencyPercent) * 0.01
+local UserGameSettings = UserSettings():GetService("UserGameSettings")
+local SafetyBubbleModule = {}
+SafetyBubbleModule.__index = SafetyBubbleModule
+local CreateFunction = require(script:FindFirstAncestor("VrCommon").Parent.AppCommonLib).Create
+local FIntSafetyBubbleRadiusModule = require(script.Parent.FIntSafetyBubbleRadius)
+local ScaledFIntSafetyBubbleTransparencyPercentModule = require(script.Parent.FIntSafetyBubbleTransparencyPercent) * 0.01
 
-function t.new()
-	-- upvalues: t (ref), userGameSettingsService (ref), create (ref), rbxAnalyticsService (ref)
-	local tbl = setmetatable({}, t)
-	tbl.subjects = {}
-	tbl.mode = userGameSettingsService.VRSafetyBubbleMode
-	tbl.enabled = tbl.mode ~= Enum.VRSafetyBubbleMode.Anyone
-	tbl.updateCadence = 0.2
-	tbl.Toggled = create("BindableEvent")({ Name = "SafetyBubbleToggled" })
-	userGameSettingsService:GetPropertyChangedSignal("VRSafetyBubbleMode"):Connect(function()
-		-- upvalues: tbl (ref), userGameSettingsService (copy), rbxAnalyticsService (copy)
-		tbl.mode = userGameSettingsService.VRSafetyBubbleMode
-		local var2 = tbl.mode ~= Enum.VRSafetyBubbleMode.Anyone
+function SafetyBubbleModule.new() --[[ Line: 26 ]]
+	-- upvalues: SafetyBubbleModule (copy), UserGameSettings (copy), CreateFunction (copy), RbxAnalyticsService (copy)
+	local self = setmetatable({}, SafetyBubbleModule)
+	self.subjects = {}
+	self.mode = UserGameSettings.VRSafetyBubbleMode
+	self.enabled = self.mode ~= Enum.VRSafetyBubbleMode.Anyone
+	self.updateCadence = 0.2
+	self.Toggled = CreateFunction("BindableEvent")({ Name = "SafetyBubbleToggled" })
+	UserGameSettings:GetPropertyChangedSignal("VRSafetyBubbleMode"):Connect(function() --[[ Line: 39 ]]
+		-- upvalues: self (copy), UserGameSettings (upval), RbxAnalyticsService (upval)
+		self.mode = UserGameSettings.VRSafetyBubbleMode
+		local IsNotModeMatch = self.mode ~= Enum.VRSafetyBubbleMode.Anyone
 		
-		if tbl.enabled ~= var2 then
-			tbl.enabled = var2
-			tbl.Toggled:Fire()
-			rbxAnalyticsService:ReportCounter("VR-SafetyBubble-" .. (if var2 then "On" else "Off"))
+		if self.enabled ~= IsNotModeMatch then
+			self.enabled = IsNotModeMatch
+			self.Toggled:Fire()
+			RbxAnalyticsService:ReportCounter("VR-SafetyBubble-" .. (if IsNotModeMatch then "On" else "Off"))
 		end
 	end)
 	
-	return tbl
+	return self
 end
 
-function t:ToggleEnabled()
-	-- upvalues: userGameSettingsService (ref)
-	userGameSettingsService.VRSafetyBubbleMode = if self.enabled then Enum.VRSafetyBubbleMode.Anyone else Enum.VRSafetyBubbleMode.NoOne
+function SafetyBubbleModule:ToggleEnabled() --[[ Line: 54 ]]
+	-- upvalues: UserGameSettings (copy)
+	UserGameSettings.VRSafetyBubbleMode = self.enabled and Enum.VRSafetyBubbleMode.Anyone or Enum.VRSafetyBubbleMode.NoOne
 end
 
-function t:HasToolAncestor(p1)
-	return if p1 == nil or p1.Parent == nil then false else p1.Parent:IsA("Tool") or self:HasToolAncestor(p1.Parent)
+function SafetyBubbleModule:HasToolAncestor(Parent) --[[ Line: 59 ]]
+	return Parent ~= nil and Parent.Parent ~= nil and (Parent.Parent:IsA("Tool") or self:HasToolAncestor(Parent.Parent))
 end
 
-function t:IsValidPartToModify(p1)
-	return if p1:IsA("BasePart") or p1:IsA("Decal") then not self:HasToolAncestor(p1) else false
+function SafetyBubbleModule.IsValidPartToModify(p1, Object): boolean --[[ Line: 66 ]]
+	return if Object:IsA("BasePart") or Object:IsA("Decal") then not p1:HasToolAncestor(Object) else false
 end
 
-function t:CachePartsRecursive(p1, p2)
-	if p1 then
-		if self:IsValidPartToModify(p1) then
-			self.subjects[p2].cachedParts[p1] = true
-			self.subjects[p2].transparencyDirty = true
+function SafetyBubbleModule:CachePartsRecursive(Object, SubjectIndex) --[[ Line: 73 ]]
+	if Object then
+		if self:IsValidPartToModify(Object) then
+			self.subjects[SubjectIndex].cachedParts[Object] = true
+			self.subjects[SubjectIndex].transparencyDirty = true
 		end
-		for i, v in pairs(p1:GetChildren()) do
-			self:CachePartsRecursive(v, p2)
+		for _, child in pairs(Object:GetChildren()) do
+			self:CachePartsRecursive(child, SubjectIndex)
 		end
 	end
 end
 
-function t:TeardownTransparency(p3)
-	for i, v in pairs(self.subjects[p3].cachedParts) do
+function SafetyBubbleModule:TeardownTransparency(SubjectIndex) --[[ Line: 85 ]]
+	for i, _ in pairs(self.subjects[SubjectIndex].cachedParts) do
 		i.LocalTransparencyModifier = 0
 	end
-	self.subjects[p3].cachedParts = {}
-	self.subjects[p3].transparencyDirty = true
-	self.subjects[p3].lastTransparency = nil
+	self.subjects[SubjectIndex].cachedParts = {}
+	self.subjects[SubjectIndex].transparencyDirty = true
+	self.subjects[SubjectIndex].lastTransparency = nil
 	
-	if self.subjects[p3].descendantAddedConn then
-		self.subjects[p3].descendantAddedConn:disconnect()
-		self.subjects[p3].descendantAddedConn = nil
+	if self.subjects[SubjectIndex].descendantAddedConn then
+		self.subjects[SubjectIndex].descendantAddedConn:disconnect()
+		self.subjects[SubjectIndex].descendantAddedConn = nil
 	end
-	if self.subjects[p3].descendantRemovingConn then
-		self.subjects[p3].descendantRemovingConn:disconnect()
-		self.subjects[p3].descendantRemovingConn = nil
+	if self.subjects[SubjectIndex].descendantRemovingConn then
+		self.subjects[SubjectIndex].descendantRemovingConn:disconnect()
+		self.subjects[SubjectIndex].descendantRemovingConn = nil
 	end
-	for i_1, v_1 in pairs(self.subjects[p3].toolDescendantAddedConns) do
-		v_1:Disconnect()
-		self.subjects[p3].toolDescendantAddedConns[i_1] = nil
+	for i1, toolDescendantAddedConn in pairs(self.subjects[SubjectIndex].toolDescendantAddedConns) do
+		toolDescendantAddedConn:Disconnect()
+		self.subjects[SubjectIndex].toolDescendantAddedConns[i1] = nil
 	end
-	for i_2, v_2 in pairs(self.subjects[p3].toolDescendantRemovingConns) do
-		v_2:Disconnect()
-		self.subjects[p3].toolDescendantRemovingConns[i_2] = nil
+	for i2, toolDescendantRemovingConn in pairs(self.subjects[SubjectIndex].toolDescendantRemovingConns) do
+		toolDescendantRemovingConn:Disconnect()
+		self.subjects[SubjectIndex].toolDescendantRemovingConns[i2] = nil
 	end
 end
 
-function t:GetSubjectIndex(p4)
-	local subjectsCount = #self.subjects
-	local var2 = 1
-	while var2 <= subjectsCount do
-		if self.subjects[var2].character ~= p4 then
-			var2 += 1
-			continue
+function SafetyBubbleModule:GetSubjectIndex(Character): number --[[ Line: 111 ]]
+	local CountSubjects = #self.subjects
+	local Count = 1
+	while Count <= CountSubjects do
+		if self.subjects[Count].character == Character then
+			return Count
 		end
-		return var2
+		Count += 1
 	end
 	return 0
 end
 
-function t:SubjectExists(p5)
-	return self:GetSubjectIndex(p5) > 0
+function SafetyBubbleModule:SubjectExists(Character): boolean --[[ Line: 125 ]]
+	return self:GetSubjectIndex(Character) > 0
 end
 
-function t:SetupTransparency(p5)
-	local var3 = self:GetSubjectIndex(p5)
+function SafetyBubbleModule:SetupTransparency(Character) --[[ Line: 131 ]]
+	local SubjectIndex = self:GetSubjectIndex(Character)
 	
-	if var3 == 0 then return end
-	if self.subjects[var3].descendantAddedConn then
-		self.subjects[var3].descendantAddedConn:disconnect()
+	if SubjectIndex == 0 then return end
+	if self.subjects[SubjectIndex].descendantAddedConn then
+		self.subjects[SubjectIndex].descendantAddedConn:disconnect()
 	end
-	self.subjects[var3].descendantAddedConn = p5.DescendantAdded:Connect(function(p6)
-		-- upvalues: var3 (write), self (ref), p5 (ref)
-		var3 = self:GetSubjectIndex(p5)
+	self.subjects[SubjectIndex].descendantAddedConn = Character.DescendantAdded:Connect(function(Descendant) --[[ Line: 140 ]]
+		-- upvalues: SubjectIndex (ref), self (copy), Character (copy)
+		SubjectIndex = self:GetSubjectIndex(Character)
 		
-		if var3 == 0 then return end
-		if self:IsValidPartToModify(p6) then
-			self.subjects[var3].cachedParts[p6] = true
-			self.subjects[var3].transparencyDirty = true
+		if SubjectIndex == 0 then return end
+		if self:IsValidPartToModify(Descendant) then
+			self.subjects[SubjectIndex].cachedParts[Descendant] = true
+			self.subjects[SubjectIndex].transparencyDirty = true
 		end
 	end)
 	
 	if self.descendantRemovingConn then
 		self.descendantRemovingConn:disconnect()
 	end
-	self.descendantRemovingConn = p5.DescendantRemoving:connect(function(p6)
-		-- upvalues: var3 (write), self (ref), p5 (ref)
-		var3 = self:GetSubjectIndex(p5)
+	self.descendantRemovingConn = Character.DescendantRemoving:connect(function(Descendant) --[[ Line: 156 ]]
+		-- upvalues: SubjectIndex (ref), self (copy), Character (copy)
+		SubjectIndex = self:GetSubjectIndex(Character)
 		
-		if var3 == 0 then return end
-		if self.subjects[var3] and self.subjects[var3].cachedParts[p6] then
-			self.subjects[var3].cachedParts[p6] = nil
-			p6.LocalTransparencyModifier = 0
+		if SubjectIndex == 0 then return end
+		if self.subjects[SubjectIndex] and self.subjects[SubjectIndex].cachedParts[Descendant] then
+			self.subjects[SubjectIndex].cachedParts[Descendant] = nil
+			Descendant.LocalTransparencyModifier = 0
 		end
 	end)
-	self:CachePartsRecursive(p5, var3)
+	self:CachePartsRecursive(Character, SubjectIndex)
 end
 
-function t:AddSubject(p5)
-	local subjectsCount = #self.subjects
-	local var3 = 1
-	while var3 <= subjectsCount do
-		if self.subjects[var3].character ~= p5 then
-			var3 += 1
-			continue
-		end
-		return
+function SafetyBubbleModule:AddSubject(Character) --[[ Line: 172 ]]
+	local CountSubjects = #self.subjects
+	local Count = 1
+	while Count <= CountSubjects do
+		if self.subjects[Count].character == Character then return end
+		Count += 1
 	end
 	table.insert(self.subjects, {
 		transparencyDirty = false,
@@ -154,112 +149,113 @@ function t:AddSubject(p5)
 		toolDescendantRemovingConns = {},
 		cachedParts = {}
 	})
-	self.subjects[var3].character = p5
-	self:SetupTransparency(p5)
+	self.subjects[Count].character = Character
+	self:SetupTransparency(Character)
 end
 
-function t:update(p6)
-	-- upvalues: fIntSafetyBubbleRadiusModule (ref), VRService (ref), playersService (ref), var1 (ref)
-	local currentCamera = workspace.CurrentCamera
+function SafetyBubbleModule:update(p1) --[[ Line: 202 ]]
+	-- upvalues: FIntSafetyBubbleRadiusModule (copy), VRService (copy), Players (copy), ScaledFIntSafetyBubbleTransparencyPercentModule (copy)
+	local CurrentCamera = workspace.CurrentCamera
 	
-	if not currentCamera then return end
+	if not CurrentCamera then return end
 	if self.enabled then
-		local maxValue = math.max(fIntSafetyBubbleRadiusModule * currentCamera.HeadScale, 0.1)
-		local character = nil
-		local var4 = maxValue + 3
-		local var5 = currentCamera.CFrame * VRService:GetUserCFrame(Enum.UserCFrame.Head)
-		self.updateCadence -= p6
+		local Largest = math.max(FIntSafetyBubbleRadiusModule * CurrentCamera.HeadScale, 0.1)
+		local Character = nil
+		local NewLargest = Largest + 3
+		local ScaledUserCFrame = CurrentCamera.CFrame * VRService:GetUserCFrame(Enum.UserCFrame.Head)
+		self.updateCadence -= p1
 		
 		if self.updateCadence <= 0 then
 			self.updateCadence = 0.2
 			
-			for i_1, v in pairs(playersService:GetPlayers()) do
-				if v.Character and v ~= playersService.LocalPlayer then
-					if self.mode == Enum.VRSafetyBubbleMode.OnlyFriends and playersService.LocalPlayer:IsFriendsWithAsync(v.UserId) then
-						local characterSubjectIndex = self:GetSubjectIndex(v.Character)
+			for _, player in pairs(Players:GetPlayers()) do
+				if player.Character and player ~= Players.LocalPlayer then
+					if self.mode == Enum.VRSafetyBubbleMode.OnlyFriends and Players.LocalPlayer:IsFriendsWithAsync(player.UserId) then
+						local SubjectIndex: number = self:GetSubjectIndex(player.Character)
 						
-						if characterSubjectIndex > 0 then
-							self:TeardownTransparency(characterSubjectIndex)
-							table.remove(self.subjects, characterSubjectIndex)
+						if SubjectIndex > 0 then
+							self:TeardownTransparency(SubjectIndex)
+							table.remove(self.subjects, SubjectIndex)
 						end
-					elseif not self:SubjectExists(v.Character) and v.Character then
-						local boundingBox, boundingBox_1 = v.Character:GetBoundingBox()
-						local var6 = (boundingBox.Position - var5.Position).Magnitude - boundingBox_1.Z
+					elseif not self:SubjectExists(player.Character) and player.Character then
+						local BoundingCFrame, BoundingSize = player.Character:GetBoundingBox()
+						local MagnitudeDelta = (BoundingCFrame.Position - ScaledUserCFrame.Position).Magnitude - BoundingSize.Z
 						
-						if var6 < var4 then
-							var4 = var6
-							character = v.Character
+						if MagnitudeDelta < NewLargest then
+							NewLargest = MagnitudeDelta
+							Character = player.Character
 						end
 					end
 				end
 			end
-			if character then
-				self:AddSubject(character)
+			if Character then
+				self:AddSubject(Character)
 			end
 		end
 		if not self.subjects or #self.subjects == 0 then return end
-		local subjectsCount = #self.subjects
-		while subjectsCount > 0 do
-			local boundingBox, boundingBox_1 = self.subjects[subjectsCount].character:GetBoundingBox()
+		local CountSubjects = #self.subjects
+		while CountSubjects > 0 do
+			local BoundingCFrame1, BoundingSize1 = self.subjects[CountSubjects].character:GetBoundingBox()
 			
-			if maxValue * 2 < (boundingBox.Position - var5.Position).Magnitude - boundingBox_1.Z then
-				self:TeardownTransparency(subjectsCount)
-				table.remove(self.subjects, subjectsCount)
+			if Largest * 2 < (BoundingCFrame1.Position - ScaledUserCFrame.Position).Magnitude - BoundingSize1.Z then
+				self:TeardownTransparency(CountSubjects)
+				table.remove(self.subjects, CountSubjects)
 			end
-			subjectsCount -= 1
+			CountSubjects -= 1
 		end
-		local subjectsCount_1 = #self.subjects
-		local var7 = 1
-		while var7 <= subjectsCount_1 do
-			local magnitude
-			local var8 = 0
-			local character_1 = self.subjects[var7].character
-			local _ = 0
+		local CountSubjects1 = #self.subjects
+		local Count = 1
+		while Count <= CountSubjects1 do
+			local ScaledFIntSafetyBubbleTransparencyPercentModule1 = 0
+			local Character1 = self.subjects[Count].character
+			local Distance = nil
 			
-			if character_1.PrimaryPart then
-				magnitude = (Vector3.new(character_1:GetPrimaryPartCFrame().p.x, var5.Position.Y, character_1:GetPrimaryPartCFrame().p.z) - var5.Position).Magnitude
+			if Character1.PrimaryPart then
+				Distance = (Vector3.new(Character1:GetPrimaryPartCFrame().p.x, ScaledUserCFrame.Position.Y, Character1:GetPrimaryPartCFrame().p.z) - ScaledUserCFrame.Position).Magnitude
 			else
-				local boundingBox, boundingBox_1 = character_1:GetBoundingBox()
-				magnitude = (boundingBox.Position - var5.Position).Magnitude - boundingBox_1.Z
+				local BoundingCFrame2, BoundingSize2 = Character1:GetBoundingBox()
+				Distance = (BoundingCFrame2.Position - ScaledUserCFrame.Position).Magnitude - BoundingSize2.Z
 			end
-			if magnitude < maxValue then
-				if subjectsCount_1 > 3 then
-					var8 = 1
+			if Distance < Largest then
+				if CountSubjects1 > 3 then
+					ScaledFIntSafetyBubbleTransparencyPercentModule1 = 1
 				else
-					local var9 = maxValue * 0.75
-					var8 = if magnitude < var9 then var1 else (1 - (magnitude - var9) / (maxValue - var9)) * var1
+					local ScaledLargest = Largest * 0.75
+					ScaledFIntSafetyBubbleTransparencyPercentModule1 = if Distance < ScaledLargest then ScaledFIntSafetyBubbleTransparencyPercentModule else (1 - (Distance - ScaledLargest) / (Largest - ScaledLargest)) * ScaledFIntSafetyBubbleTransparencyPercentModule
 				end
 			end
-			if not self.subjects[var7].lastTransparency then
-				self.subjects[var7].transparencyDirty = true
+			if not self.subjects[Count].lastTransparency then
+				self.subjects[Count].transparencyDirty = true
 			end
-			var8 = math.clamp(var8, 0, 1)
+			local ClampedValue = math.clamp(ScaledFIntSafetyBubbleTransparencyPercentModule1, 0, 1)
 			
-			if self.subjects[var7].transparencyDirty or self.subjects[var7].lastTransparency ~= var8 then
-				for i_1, v in pairs(self.subjects[var7].cachedParts) do
-					i_1.LocalTransparencyModifier = var8
+			if self.subjects[Count].transparencyDirty or self.subjects[Count].lastTransparency ~= ClampedValue then
+				for i1, _ in pairs(self.subjects[Count].cachedParts) do
+					i1.LocalTransparencyModifier = ClampedValue
 				end
-				self.subjects[var7].transparencyDirty = false
-				self.subjects[var7].lastTransparency = var8
+				self.subjects[Count].transparencyDirty = false
+				self.subjects[Count].lastTransparency = ClampedValue
 			end
-			local tool = character_1:FindFirstChildOfClass("Tool")
+			local Tool = Character1:FindFirstChildOfClass("Tool")
 			
-			if tool then
-				for v, v in pairs(tool:GetChildren()) do
-					if v:IsA("BasePart") then
-						v.LocalTransparencyModifier = var8
+			if Tool then
+				for _, Part in pairs(Tool:GetChildren()) do
+					if Part:IsA("BasePart") then
+						Part.LocalTransparencyModifier = ClampedValue
 					end
 				end
 			end
-			var7 += 1
+			Count += 1
 		end
 		return
-	elseif self.subjects and #self.subjects > 0 then
-		for i = 1, #self.subjects do
-			self:TeardownTransparency(i)
+	else
+		if self.subjects and #self.subjects > 0 then
+			for i = 1, #self.subjects do
+				self:TeardownTransparency(i)
+			end
+			self.subjects = {}
 		end
-		self.subjects = {}
 	end
 end
 
-return t
+return SafetyBubbleModule

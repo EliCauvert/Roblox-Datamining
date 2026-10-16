@@ -1,14 +1,14 @@
-﻿local guiService = game:GetService("GuiService")
-local runService = game:GetService("RunService")
+﻿local GuiService = game:GetService("GuiService")
+local RunService = game:GetService("RunService")
 
-return function(p1)
-	-- upvalues: guiService (ref), runService (ref)
-	guiService.SelectedCoreObject = nil
-	runService.RenderStepped:Wait()
-	runService.RenderStepped:Wait()
+return function(Callback: () -> ()) --[[ Line: 10 | Named "leaveExperience" ]]
+	-- upvalues: GuiService (copy), RunService (copy)
+	GuiService.SelectedCoreObject = nil
+	RunService.RenderStepped:Wait()
+	RunService.RenderStepped:Wait()
 	
-	if p1 then
-		p1()
+	if Callback then
+		Callback()
 	end
 	game:Shutdown()
 end

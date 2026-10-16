@@ -1,57 +1,55 @@
-﻿local tModule = require(script.Parent.Parent.Parent.Parent.t)
-local t = { minimumItemsPerRow = 2, minimumItemWidth = 160 }
-local t_1 = { minimumItemsPerRow = 1, minimumItemWidth = 332 }
+﻿local TModule = require(script.Parent.Parent.Parent.Parent.t)
+local config = { minimumItemsPerRow = 2, minimumItemWidth = 160 }
 
-local function _(p1, p2, p3)
-	local maxValue = math.max(p3.minimumItemsPerRow, math.floor((p1 + p2) / (p3.minimumItemWidth + p2)))
+local function _(p1, p2, p3) --[[ Line: 24 | Named "getItemMetrics" ]]
+	local Largest = math.max(p3.minimumItemsPerRow, (math.floor((p1 + p2) / (p3.minimumItemWidth + p2))))
 	
 	return {
-		itemsPerRow = maxValue,
-		itemWidth = math.floor((p1 - (maxValue - 1) * p2) / maxValue)
+		itemsPerRow = Largest,
+		itemWidth = math.floor((p1 - (Largest - 1) * p2) / Largest)
 	}
 end
 
-local t_2 = {}
-local var1 = tModule.strictInterface({
-	minimumItemsPerRow = tModule.intersection(tModule.integer, tModule.numberMin(1)),
-	minimumItemWidth = tModule.numberMin(0)
+local StrictInterfaceResult = TModule.strictInterface({
+	minimumItemsPerRow = TModule.intersection(TModule.integer, TModule.numberMin(1)),
+	minimumItemWidth = TModule.numberMin(0)
 })
-local var2 = tModule.tuple(tModule.numberMin(0), tModule.number)
-
-function t_2.makeCustomMetricsGetter(p1)
-	-- upvalues: var1 (ref), var2 (ref)
-	assert(var1(p1))
-	
-	return function(p2, p3)
-		-- upvalues: var2 (copy), p1 (ref)
-		assert(var2(p2, p3))
-		local maxValue = math.max(p1.minimumItemsPerRow, math.floor((p2 + p3) / (p1.minimumItemWidth + p3)))
+local TupleResult = TModule.tuple(TModule.numberMin(0), TModule.number)
+local GridMetricsModule = {
+	makeCustomMetricsGetter = function(p1) --[[ Line: 48 ]]
+		-- upvalues: StrictInterfaceResult (copy), TupleResult (copy)
+		assert(StrictInterfaceResult(p1))
 		
-		return {
-			itemsPerRow = maxValue,
-			itemWidth = math.floor((p2 - (maxValue - 1) * p3) / maxValue)
-		}
+		return function(p2, p3) --[[ Line: 51 ]]
+			-- upvalues: TupleResult (upval), p1 (copy)
+			assert(TupleResult(p2, p3))
+			local Largest = math.max(p1.minimumItemsPerRow, (math.floor((p2 + p3) / (p1.minimumItemWidth + p3))))
+			
+			return {
+				itemsPerRow = Largest,
+				itemWidth = math.floor((p2 - (Largest - 1) * p3) / Largest)
+			}
+		end
 	end
-end
+}
+GridMetricsModule.getLargeMetrics = GridMetricsModule.makeCustomMetricsGetter({ minimumItemsPerRow = 1, minimumItemWidth = 332 })
+GridMetricsModule.getMediumMetrics = GridMetricsModule.makeCustomMetricsGetter(config)
 
-t_2.getLargeMetrics = t_2.makeCustomMetricsGetter(t_1)
-t_2.getMediumMetrics = t_2.makeCustomMetricsGetter(t)
-
-function t_2.getSmallMetrics(p1, p2)
-	-- upvalues: t_2 (ref)
-	local var3 = t_2.getMediumMetrics(p1, p2).itemsPerRow + 1
+function GridMetricsModule.getSmallMetrics(p1, p2) --[[ Line: 60 ]]
+	-- upvalues: GridMetricsModule (copy)
+	local NewItemsPerRow = GridMetricsModule.getMediumMetrics(p1, p2).itemsPerRow + 1
 	
 	return {
-		itemsPerRow = var3,
-		itemWidth = math.floor((p1 - (var3 - 1) * p2) / var3)
+		itemsPerRow = NewItemsPerRow,
+		itemWidth = math.floor((p1 - (NewItemsPerRow - 1) * p2) / NewItemsPerRow)
 	}
 end
 
-function t_2.getMetricsForFixedColumns(p1, p2, p3)
+function GridMetricsModule.getMetricsForFixedColumns(p1, p2, ItemsPerRow: number) --[[ Line: 73 ]]
 	return {
-		itemsPerRow = p3,
-		itemWidth = math.floor((p1 - (p3 - 1) * p2) / p3)
+		itemsPerRow = ItemsPerRow,
+		itemWidth = math.floor((p1 - (ItemsPerRow - 1) * p2) / ItemsPerRow)
 	}
 end
 
-return t_2
+return GridMetricsModule

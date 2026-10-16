@@ -1,21 +1,21 @@
-﻿local reactModule = require(script:FindFirstAncestor("GameTile").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("GameTile").Parent.React)
 
-return function(p1, p2, p3)
-	-- upvalues: reactModule (ref)
-	return reactModule.useMemo(function()
-		-- upvalues: p1 (ref), p2 (ref), p3 (ref)
+return function(p1, p2, p3) --[[ Line: 7 | Named "useHasInGameFriends" ]]
+	-- upvalues: ReactModule (copy)
+	return (ReactModule.useMemo(function(): boolean --[[ Line: 8 ]]
+		-- upvalues: p1 (copy), p2 (copy), p3 (copy)
 		if not p1 or not p2 or not p3 then
 			return false
 		end
-		for i, v in pairs(p3) do
-			if v ~= p1 then
-				local var1 = p2[v]
+		for _, value in pairs(p3) do
+			if value ~= p1 then
+				local v1 = p2[value]
 				
-				if var1 and var1.isFriend then
+				if v1 and v1.isFriend then
 					return true
 				end
 			end
 		end
 		return false
-	end, { p1, p2, p3 })
+	end, { p1, p2, p3 }))
 end

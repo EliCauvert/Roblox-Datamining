@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.CredentialsProtocol.CredentialsProtocol)
+﻿return (require(script.Parent.Parent.Parent._Index.CredentialsProtocol.CredentialsProtocol))

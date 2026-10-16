@@ -1,69 +1,71 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local default = require(parent_1.VoiceChatCore).CoreVoiceManager.default
-local default_1 = require(parent_1.VoiceChat).GlobalVoiceManager.default
-local eventNamesModule = require(parent.Analytics.EventNames)
-local videoCaptureStartedModule = require(parent.Actions.VideoCaptureStarted)
-local videoCaptureStoppedModule = require(parent.Actions.VideoCaptureStopped)
-local _ = require(parent.Types)
-local captureTriggerTypeModule = require(parent.Enums.CaptureTriggerType)
-local constantsModule = require(parent.Constants)
-local getFFlagEnableVoiceChatMuteForVideoCaptures = require(parent_1.SharedFlags).GetFFlagEnableVoiceChatMuteForVideoCaptures
-local getFFlagEnableCrossExperienceVoiceCaptureMute = require(parent_1.SharedFlags).GetFFlagEnableCrossExperienceVoiceCaptureMute
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local Default = require(Parent1.VoiceChatCore).CoreVoiceManager.default
+local Default1 = require(Parent1.VoiceChat).GlobalVoiceManager.default
+local EventNamesModule = require(Parent.Analytics.EventNames)
+local VideoCaptureStartedModule = require(Parent.Actions.VideoCaptureStarted)
+local VideoCaptureStoppedModule = require(Parent.Actions.VideoCaptureStopped)
+local _ = require(Parent.Types)
+local CaptureTriggerTypeModule = require(Parent.Enums.CaptureTriggerType)
+local ConstantsModule = require(Parent.Constants)
+local GetFFlagEnableVoiceChatMuteForVideoCaptures = require(Parent1.SharedFlags).GetFFlagEnableVoiceChatMuteForVideoCaptures
+local GetFFlagEnableCrossExperienceVoiceCaptureMuteFunction = require(Parent1.SharedFlags).GetFFlagEnableCrossExperienceVoiceCaptureMute
 
-local function maybeMuteVoiceChat(p1)
-	-- upvalues: getFFlagEnableCrossExperienceVoiceCaptureMute (ref), default_1 (ref), default (ref), getFFlagEnableVoiceChatMuteForVideoCaptures (ref)
+local function maybeMuteVoiceChat(p1) --[[ Line: 22 ]]
+	-- upvalues: GetFFlagEnableCrossExperienceVoiceCaptureMuteFunction (copy), Default1 (copy), Default (copy), GetFFlagEnableVoiceChatMuteForVideoCaptures (copy)
 	if game:GetEngineFeature("ReenableMomentsVoice") then return end
-	if getFFlagEnableCrossExperienceVoiceCaptureMute() then
+	if GetFFlagEnableCrossExperienceVoiceCaptureMuteFunction() then
 		if p1 then
-			default_1:MuteAll("Capture")
+			Default1:MuteAll("Capture")
 		else
-			default_1:UnmuteAll("Capture")
+			Default1:UnmuteAll("Capture")
 		end
 	end
-	if default:UserVoiceEnabled() and default:IsInitialized() then
-		if not getFFlagEnableCrossExperienceVoiceCaptureMute() then
-			default:MuteAll(p1, "Capture")
+	if Default:UserVoiceEnabled() and Default:IsInitialized() then
+		if not GetFFlagEnableCrossExperienceVoiceCaptureMuteFunction() then
+			Default:MuteAll(p1, "Capture")
 		end
-		if getFFlagEnableVoiceChatMuteForVideoCaptures then
+		if GetFFlagEnableVoiceChatMuteForVideoCaptures then
 			if p1 then
-				default:RequestHidePublicVoiceUI()
+				Default:RequestHidePublicVoiceUI()
 				
 				return
 			end
-			default:RequestShowPublicVoiceUI()
+			Default:RequestShowPublicVoiceUI()
 		end
 	end
 end
 
-return function(p1, _, p2)
-	-- upvalues: constantsModule (ref), videoCaptureStartedModule (ref), captureTriggerTypeModule (ref), maybeMuteVoiceChat (ref), eventNamesModule (ref), videoCaptureStoppedModule (ref)
-	return function(p3, p4)
-		-- upvalues: p1 (ref), constantsModule (copy), videoCaptureStartedModule (copy), captureTriggerTypeModule (copy), maybeMuteVoiceChat (copy), p2 (ref), eventNamesModule (copy), videoCaptureStoppedModule (copy)
-		local status = p1:getState()[constantsModule.RoduxKey].IsVideoCaptureActive.status
+return function(p1, _, Callback) --[[ Line: 47 | Named "makeVideoCaptureInProgressHandler" ]]
+	-- upvalues: ConstantsModule (copy), VideoCaptureStartedModule (copy), CaptureTriggerTypeModule (copy), maybeMuteVoiceChat (copy), EventNamesModule (copy), VideoCaptureStoppedModule (copy)
+	return function(p2, DeveloperCapture) --[[ Line: 52 | Named "videoCaptureInProgressHandler" ]]
+		-- upvalues: p1 (copy), ConstantsModule (upval), VideoCaptureStartedModule (upval), CaptureTriggerTypeModule (upval), maybeMuteVoiceChat (upval), Callback (copy), EventNamesModule (upval), VideoCaptureStoppedModule (upval)
+		local Status = p1:getState()[ConstantsModule.RoduxKey].IsVideoCaptureActive.status
 		
-		if p3 and not status then
-			p1:dispatch(videoCaptureStartedModule(p4))
+		if p2 and not Status then
+			p1:dispatch(VideoCaptureStartedModule(DeveloperCapture))
 			
-			if p4 == captureTriggerTypeModule.UserCapture or p4 == captureTriggerTypeModule.DeveloperCapture then
+			if DeveloperCapture == CaptureTriggerTypeModule.UserCapture or DeveloperCapture == CaptureTriggerTypeModule.DeveloperCapture then
 				maybeMuteVoiceChat(true)
 			end
-			if p4 == captureTriggerTypeModule.DeveloperCapture then
-				p2(eventNamesModule.CapturesVideoCaptureDevApiStarted)
+			if DeveloperCapture == CaptureTriggerTypeModule.DeveloperCapture then
+				Callback(EventNamesModule.CapturesVideoCaptureDevApiStarted)
 			end
-			p2(eventNamesModule.CapturesVideoCaptureStarted, { triggerType = p4 })
+			Callback(EventNamesModule.CapturesVideoCaptureStarted, { triggerType = DeveloperCapture })
 			
 			return
-		elseif not p3 and status then
-			p1:dispatch(videoCaptureStoppedModule(p4))
-			
-			if p4 == captureTriggerTypeModule.UserCapture or p4 == captureTriggerTypeModule.DeveloperCapture then
-				maybeMuteVoiceChat(false)
+		else
+			if not p2 and Status then
+				p1:dispatch(VideoCaptureStoppedModule(DeveloperCapture))
+				
+				if DeveloperCapture == CaptureTriggerTypeModule.UserCapture or DeveloperCapture == CaptureTriggerTypeModule.DeveloperCapture then
+					maybeMuteVoiceChat(false)
+				end
+				if DeveloperCapture == CaptureTriggerTypeModule.DeveloperCapture then
+					Callback(EventNamesModule.CapturesVideoCaptureDevApiEnded)
+				end
+				Callback(EventNamesModule.CapturesVideoCaptureStopped, { triggerType = DeveloperCapture })
 			end
-			if p4 == captureTriggerTypeModule.DeveloperCapture then
-				p2(eventNamesModule.CapturesVideoCaptureDevApiEnded)
-			end
-			p2(eventNamesModule.CapturesVideoCaptureStopped, { triggerType = p4 })
 		end
 	end
 end

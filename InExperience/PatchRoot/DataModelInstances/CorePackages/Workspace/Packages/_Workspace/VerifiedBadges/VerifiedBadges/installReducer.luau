@@ -1,12 +1,12 @@
-﻿local verifiedBadges = script:FindFirstAncestor("VerifiedBadges")
-local roduxModule = require(verifiedBadges.Parent.Rodux)
-local roduxNetworking = require(verifiedBadges.dependencies).RoduxNetworking
+﻿local VerifiedBadges = script:FindFirstAncestor("VerifiedBadges")
+local RoduxModule = require(VerifiedBadges.Parent.Rodux)
+local RoduxNetworking = require(VerifiedBadges.dependencies).RoduxNetworking
 
-return function()
-	-- upvalues: roduxModule (ref), roduxNetworking (ref)
-	return roduxModule.combineReducers({
+return function() --[[ Line: 12 | Named "installReducer" ]]
+	-- upvalues: RoduxModule (copy), RoduxNetworking (copy)
+	return RoduxModule.combineReducers({
 		VerifiedUsers = require(script.VerifiedUsers),
 		VerifiedGroups = require(script.VerifiedGroups),
-		NetworkStatus = roduxNetworking.installReducer()
+		NetworkStatus = RoduxNetworking.installReducer()
 	})
 end

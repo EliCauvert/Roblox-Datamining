@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CorePackages").Packages.FocusBehaviors)
+﻿return (require(game:GetService("CorePackages").Packages.FocusBehaviors))

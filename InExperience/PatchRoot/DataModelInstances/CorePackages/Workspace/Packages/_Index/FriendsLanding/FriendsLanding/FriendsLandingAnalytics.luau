@@ -1,11 +1,11 @@
-﻿local context = require(script:FindFirstAncestor("FriendsLanding").dependencies).SocialLibraries.Context
-local analyticsContextModule = require(script.AnalyticsContext)
+﻿local Context = require(script:FindFirstAncestor("FriendsLanding").dependencies).SocialLibraries.Context
+local AnalyticsContextModule = require(script.AnalyticsContext)
 
 return {
 	Class = require(script.FriendsLandingAnalytics),
-	Context = analyticsContextModule,
-	connect = context.getConnect(analyticsContextModule),
-	with = context.getWith(analyticsContextModule),
+	Context = AnalyticsContextModule,
+	connect = Context.getConnect(AnalyticsContextModule),
+	with = Context.getWith(AnalyticsContextModule),
 	ButtonClickEvents = require(script.ButtonClickEvents),
 	AddFriendsPageLoadAnalytics = require(script.AddFriendsPageLoadAnalytics),
 	ImpressionEvents = require(script.ImpressionEvents)

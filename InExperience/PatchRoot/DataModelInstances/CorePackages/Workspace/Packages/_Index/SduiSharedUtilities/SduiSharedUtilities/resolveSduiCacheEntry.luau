@@ -1,29 +1,29 @@
-﻿local fFlagSduiAlwaysCacheWithIdentifier = require(script:FindFirstAncestor("SduiSharedUtilities").Parent.SharedFlags).FFlagSduiAlwaysCacheWithIdentifier
+﻿local FFlagSduiAlwaysCacheWithIdentifier = require(script:FindFirstAncestor("SduiSharedUtilities").Parent.SharedFlags).FFlagSduiAlwaysCacheWithIdentifier
 
-return function(p1, p2, p3)
-	-- upvalues: fFlagSduiAlwaysCacheWithIdentifier (ref)
-	if not p1 then
+return function(List, p1, p2) --[[ Line: 15 | Named "resolveSduiCacheEntry" ]]
+	-- upvalues: FFlagSduiAlwaysCacheWithIdentifier (copy)
+	if not List then
 		return nil
 	end
-	local var1 = p1[p3 or p2]
+	local Entry = List[p2 or p1]
 	
-	if var1 then
-		return var1
-	elseif p3 == nil then
-		if fFlagSduiAlwaysCacheWithIdentifier then
-			local var2 = nil
+	if Entry then
+		return Entry
+	end
+	if p2 == nil then
+		if FFlagSduiAlwaysCacheWithIdentifier then
+			local v1 = nil
 			
-			for i, v in p1 do
-				if var2 == nil then
-					var2 = v
-					continue
+			for _, value in List do
+				if v1 ~= nil then
+					return nil
 				end
-				return nil
+				v1 = value
 			end
-			return var2
+			return v1
 		else
-			for i, v in p1 do
-				return v
+			for _, value1 in List do
+				return value1
 			end
 		end
 	end

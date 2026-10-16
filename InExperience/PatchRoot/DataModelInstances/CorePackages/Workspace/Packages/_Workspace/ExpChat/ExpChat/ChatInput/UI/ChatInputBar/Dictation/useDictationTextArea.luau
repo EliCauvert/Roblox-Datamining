@@ -1,75 +1,82 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local reactModule = require(expChat.Parent.React)
-local fFlagExpChatComposerInputBarFigmaParityModule = require(expChat.Flags.FFlagExpChatComposerInputBarFigmaParity)
-local localizationModule = require(expChat.Localization)
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local ReactModule = require(ExpChat.Parent.React)
+local FFlagExpChatComposerInputBarFigmaParityModule = require(ExpChat.Flags.FFlagExpChatComposerInputBarFigmaParity)
+local LocalizationModule = require(ExpChat.Localization)
 local _ = require(script.Parent.useDictationInputBar)
 
-local function _(startValue, endValue, alpha)
-	return startValue + (endValue - startValue) * alpha
+local function _(p1, p2, p3) --[[ Line: 28 | Named "lerp" ]]
+	return p1 + (p2 - p1) * p3
 end
 
-return function(p1, p2)
-	-- upvalues: localizationModule (ref), fFlagExpChatComposerInputBarFigmaParityModule (ref), reactModule (ref)
-	local var1 = localizationModule.useLocalization({
+return function(p1, p2) --[[ Line: 42 | Named "useDictationTextArea" ]]
+	-- upvalues: LocalizationModule (copy), FFlagExpChatComposerInputBarFigmaParityModule (copy), ReactModule (copy)
+	local UseLocalizationResult = LocalizationModule.useLocalization({
 		transcribingText = "CoreScripts.TextChat.ChatWindow.Transcribing"
 	})
-	local var2 = if var1.transcribingText and var1.transcribingText ~= "" then var1.transcribingText else "Transcribing..."
-	local var3 = if p1 then p1.dictation.bindings.isAudioActive else nil
-	local var4 = if p1 then p1.chatInputBarSettings else nil
-	local var5 = if p1 then p1.state else nil
-	local var6 = if p1 then p1.isTranscribing else false
-	local var7 = if p2.showPlaceholderText and not fFlagExpChatComposerInputBarFigmaParityModule then 0.5 else 0
-	local var8 = reactModule.useMemo(function()
-		-- upvalues: var3 (ref), p2 (ref), var7 (ref), reactModule (copy)
-		return if var3 == nil then p2.transparencyValue:map(function(p3)
-			-- upvalues: var7 (copy)
-			return var7 + (1 - var7) * p3
-		end) else reactModule.joinBindings({ fade = p2.transparencyValue, hide = var3 }):map(function(p3)
-			-- upvalues: var7 (copy)
-			local var9 = if p3.hide then 1 else var7
+	local TranscribingText = if UseLocalizationResult.transcribingText and UseLocalizationResult.transcribingText ~= "" then UseLocalizationResult.transcribingText else "Transcribing..."
+	local IsAudioActive = if p1 then p1.dictation.bindings.isAudioActive else nil
+	local ChatInputBarSettings = if p1 then p1.chatInputBarSettings else nil
+	local IsTranscribing = if p1 then p1.isTranscribing else false
+	local v1: number = if p2.showPlaceholderText and not FFlagExpChatComposerInputBarFigmaParityModule then 0.5 else 0
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 64 ]]
+		-- upvalues: IsAudioActive (copy), p2 (copy), v1 (copy), ReactModule (upval)
+		return if IsAudioActive == nil then p2.transparencyValue:map(function(p3): number --[[ Line: 66 ]]
+			-- upvalues: v1 (upval)
+			return v1 + (1 - v1) * p3
+		end) else ReactModule.joinBindings({ fade = p2.transparencyValue, hide = IsAudioActive }):map(function(p3) --[[ Line: 73 ]]
+			-- upvalues: v1 (upval)
+			local v2 = if p3.hide then 1 else v1
 			
-			return var9 + (1 - var9) * p3.fade
+			return v2 + (1 - v2) * p3.fade
 		end)
-	end, { p2.transparencyValue, var3, var7 })
-	local var9 = if var4 then var4.TextStrokeTransparency else 0
-	local var10 = reactModule.useMemo(function()
-		-- upvalues: var3 (ref), p2 (ref), var9 (ref), reactModule (copy)
-		return if var3 == nil then p2.transparencyValue:map(function(p3)
-			-- upvalues: var9 (copy)
-			return var9 + (1 - var9) * p3
-		end) else reactModule.joinBindings({ fade = p2.transparencyValue, hide = var3 }):map(function(p3)
-			-- upvalues: var9 (copy)
-			local var11 = if p3.hide then 1 else var9
+	end, { p2.transparencyValue, IsAudioActive, v1 })
+	local TextStrokeTransparency = if ChatInputBarSettings then ChatInputBarSettings.TextStrokeTransparency else 0
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 80 ]]
+		-- upvalues: IsAudioActive (copy), p2 (copy), TextStrokeTransparency (copy), ReactModule (upval)
+		return if IsAudioActive == nil then p2.transparencyValue:map(function(p3): number --[[ Line: 82 ]]
+			-- upvalues: TextStrokeTransparency (upval)
+			return TextStrokeTransparency + (1 - TextStrokeTransparency) * p3
+		end) else ReactModule.joinBindings({ fade = p2.transparencyValue, hide = IsAudioActive }):map(function(p3) --[[ Line: 89 ]]
+			-- upvalues: TextStrokeTransparency (upval)
+			local TextStrokeTransparency1 = if p3.hide then 1 else TextStrokeTransparency
 			
-			return var11 + (1 - var11) * p3.fade
+			return TextStrokeTransparency1 + (1 - TextStrokeTransparency1) * p3.fade
 		end)
-	end, { p2.transparencyValue, var3, var9 })
-	local var11 = if p1 then p1.customTextBoxRef else nil
-	local var12 = if p1 then p1.textBoxRef else nil
-	local var13 = if var4 then var4.PlaceholderColor3 else nil
-	local var14 = if var4 then var4.TextColor3 else nil
-	reactModule.useEffect(function()
-		-- upvalues: var11 (ref), var12 (ref), var6 (ref), var2 (ref), var13 (ref), var14 (ref)
-		if var11 == nil or var12 == nil then return end
-		local var15 = if var11.current then var11.current else var12.current
+	end, {
+		p2.transparencyValue,
+		IsAudioActive,
+		TextStrokeTransparency
+	})
+	local CustomTextBoxRef = if p1 then p1.customTextBoxRef else nil
+	local TextBoxRef = if p1 then p1.textBoxRef else nil
+	local PlaceholderColor3 = if ChatInputBarSettings then ChatInputBarSettings.PlaceholderColor3 else nil
+	local TextColor3 = if ChatInputBarSettings then ChatInputBarSettings.TextColor3 else nil
+	ReactModule.useEffect(function() --[[ Line: 103 ]]
+		-- upvalues: CustomTextBoxRef (copy), TextBoxRef (copy), IsTranscribing (copy), TranscribingText (copy), PlaceholderColor3 (copy), TextColor3 (copy)
+		if CustomTextBoxRef == nil or TextBoxRef == nil then return end
+		local Current = if CustomTextBoxRef.current then CustomTextBoxRef.current else TextBoxRef.current
 		
-		if var15 == nil then return end
-		if var6 then
-			var15.Text = var2
-			var15.TextEditable = false
-			var15.TextColor3 = var13
+		if Current == nil then return end
+		if IsTranscribing then
+			Current.Text = TranscribingText
+			Current.TextEditable = false
+			Current.TextColor3 = PlaceholderColor3
 			
 			return
 		end
-		var15.TextEditable = true
-		var15.TextColor3 = var14
+		Current.TextEditable = true
+		Current.TextColor3 = TextColor3
 		
-		if var15.Text == var2 then
-			var15.Text = ""
+		if Current.Text == TranscribingText then
+			Current.Text = ""
 		end
 	end, {
-		var5, var6, var2, var11, var12, var13, var14
+		if p1 then p1.state else nil, IsTranscribing, TranscribingText,
+		CustomTextBoxRef, TextBoxRef, PlaceholderColor3, TextColor3
 	})
 	
-	return { textTransparency = var8, textStrokeTransparency = var10 }
+	return {
+		textTransparency = UseMemoResult,
+		textStrokeTransparency = UseMemoResult1
+	}
 end

@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.PeopleReactView.PeopleReactView)
+﻿return (require(script.Parent._Workspace.PeopleReactView.PeopleReactView))

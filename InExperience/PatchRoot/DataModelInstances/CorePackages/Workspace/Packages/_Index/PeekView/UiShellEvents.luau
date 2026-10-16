@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Workspace.UiShellEvents.UiShellEvents)
+﻿return (require(script.Parent.Parent.Parent._Workspace.UiShellEvents.UiShellEvents))

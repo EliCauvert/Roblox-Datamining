@@ -1,89 +1,88 @@
 ﻿local _ = require(script.Parent.Parent.types)
 
 return {
-	awaitRequestState = function(p1, p2)
-		while p1(false).status == "pending" do
-			if p2 > os.clock() then
-				task.wait()
-				continue
+	awaitRequestState = function(Callback, p1) --[[ Line: 10 ]]
+		while Callback(false).status == "pending" do
+			if p1 <= os.clock() then
+				return Callback(false)
 			end
-			return p1(false)
-		end
-		return p1(false)
-	end,
-	awaitRequestStateCancelled = function(p3, p4)
-		while p3(false).status == "pending" and not p4() do
 			task.wait()
 		end
-		return p3(false)
+		return Callback(false)
 	end,
-	getMaxHistorySequenceId = function(a)
-		local var1 = nil
+	awaitRequestStateCancelled = function(Callback, p2) --[[ Line: 20 ]]
+		while Callback(false).status == "pending" and not p2() do
+			task.wait()
+		end
+		return Callback(false)
+	end,
+	getMaxHistorySequenceId = function(List) --[[ Line: 30 ]]
+		local v1 = nil
 		
-		for i, v in a do
-			local sequenceId = v.sequenceId
+		for _, value in List do
+			local SequenceId = value.sequenceId
 			
-			if typeof(sequenceId) == "number" and (var1 == nil or var1 < sequenceId) then
-				var1 = sequenceId
+			if typeof(SequenceId) == "number" and (v1 == nil or v1 < SequenceId) then
+				v1 = SequenceId
 			end
 		end
-		return var1
+		return v1
 	end,
-	getSessionLoadHistory = function(p5)
-		local var2 = if p5 ~= nil then nil else p5.history
+	getSessionLoadHistory = function(p3) --[[ Line: 41 ]]
+		local History = if p3 == nil then nil else p3.history
 		
-		return if typeof(var2) == "table" then var2 else {}
+		return if typeof(History) == "table" then History else {}
 	end,
-	getNextHistoryPageToken = function(p5)
-		local var2 = if p5 ~= nil then nil else p5.nextHistoryPageToken
+	getNextHistoryPageToken = function(p3) --[[ Line: 46 ]]
+		local NextHistoryPageToken = if p3 == nil then nil else p3.nextHistoryPageToken
 		
-		return if typeof(var2) == "string" and var2 ~= "" then var2 else nil
+		return if typeof(NextHistoryPageToken) == "string" and NextHistoryPageToken ~= "" then NextHistoryPageToken else nil
 	end,
-	collectSequenceIds = function(p5)
+	collectSequenceIds = function(List) --[[ Line: 51 ]]
 		local t = {}
 		
-		for i, v in p5 do
-			local sequenceId = v.sequenceId
+		for _, value in List do
+			local SequenceId = value.sequenceId
 			
-			if typeof(sequenceId) == "number" then
-				t[sequenceId] = true
+			if typeof(SequenceId) == "number" then
+				t[SequenceId] = true
 			end
 		end
 		return t
 	end,
-	historyOverlapsSequenceIds = function(p6, p7)
-		for i, v in p6 do
-			local sequenceId = v.sequenceId
+	historyOverlapsSequenceIds = function(List, p3): boolean --[[ Line: 62 ]]
+		for _, value in List do
+			local SequenceId = value.sequenceId
 			
-			if typeof(sequenceId) == "number" and p7[sequenceId] then
+			if typeof(SequenceId) == "number" and p3[SequenceId] then
 				return true
 			end
 		end
 		return false
 	end,
-	appendUniqueHistoryBySequenceId = function(p8, p9, p10)
-		local var2 = 0
+	appendUniqueHistoryBySequenceId = function(List, List1, p4): number --[[ Line: 72 ]]
+		local Count = 0
 		
-		for i, v in p9 do
-			local sequenceId = v.sequenceId
+		for _, value in List1 do
+			local SequenceId = value.sequenceId
 			
-			if typeof(sequenceId) ~= "number" or not p10[sequenceId] then
-				if typeof(sequenceId) == "number" then
-					p10[sequenceId] = true
+			if typeof(SequenceId) ~= "number" or not p4[SequenceId] then
+				if typeof(SequenceId) == "number" then
+					p4[SequenceId] = true
 				end
-				table.insert(p8, v)
-				var2 += 1
+				table.insert(List, value)
+				Count += 1
 			end
 		end
-		return var2
+		return Count
 	end,
-	cloneHistoryBySequenceId = function(p11)
-		return table.clone(p11)
+	cloneHistoryBySequenceId = function(Tbl) --[[ Line: 91 ]]
+		return table.clone(Tbl)
 	end,
-	resolveNonNegativeNumber = function(p11, p12)
-		return if typeof(p11) == "number" and p11 >= 0 then p11 else p12
+	resolveNonNegativeNumber = function(p5: number, p6) --[[ Line: 95 ]]
+		return if typeof(p5) == "number" and p5 >= 0 then p5 else p6
 	end,
-	resolvePositiveNumber = function(p11, p12)
-		return if typeof(p11) == "number" and p11 > 0 then p11 else p12
+	resolvePositiveNumber = function(p5: number, p6) --[[ Line: 102 ]]
+		return if typeof(p5) == "number" and p5 > 0 then p5 else p6
 	end
 }

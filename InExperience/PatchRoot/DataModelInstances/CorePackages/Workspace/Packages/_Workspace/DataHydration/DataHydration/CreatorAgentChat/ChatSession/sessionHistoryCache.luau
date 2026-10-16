@@ -1,81 +1,82 @@
 ﻿local _ = require(script.Parent.Parent.types)
-local historyPageUtilsModule = require(script.Parent.historyPageUtils)
-local constantsModule = require(script.Parent.constants)
+local HistoryPageUtilsModule = require(script.Parent.historyPageUtils)
+local ConstantsModule = require(script.Parent.constants)
 
 return {
-	createSessionHistoryCache = function(p1)
-		-- upvalues: constantsModule (ref), historyPageUtilsModule (ref)
-		p1 = p1 or constantsModule.getMaxCachedSessionHistories()
+	createSessionHistoryCache = function(p1) --[[ Line: 24 ]]
+		-- upvalues: ConstantsModule (copy), HistoryPageUtilsModule (copy)
+		local P0 = p1 or ConstantsModule.getMaxCachedSessionHistories()
 		local t = {}
-		local t_1 = {}
+		local List = {}
 		
-		local function removeFromOrder(p2)
-			-- upvalues: t_1 (ref)
-			for i, v in t_1 do
-				if v == p2 then
-					table.remove(t_1, i)
-					
-					return
+		local function removeFromOrder(Key) --[[ Line: 29 ]]
+			-- upvalues: List (copy)
+			for i, value in List do
+				if value == Key then
+					table.remove(List, i)
+					break
 				end
 			end
 		end
 		
-		local function _(p3)
-			-- upvalues: removeFromOrder (ref), t_1 (ref)
-			removeFromOrder(p3)
-			table.insert(t_1, p3)
+		local function _(p2) --[[ Line: 38 | Named "touch" ]]
+			-- upvalues: removeFromOrder (copy), List (copy)
+			removeFromOrder(p2)
+			table.insert(List, p2)
 		end
 		
-		local _ = function()
-			-- upvalues: t_1 (ref), t (ref)
-			local var1 = t_1[1]
+		local _ = function() --[[ Line: 43 | Named "evictOldest" ]]
+			-- upvalues: List (copy), t (copy)
+			local Entry = List[1]
 			
-			if var1 == nil then
+			if Entry ~= nil then
+				table.remove(List, 1)
+				t[Entry] = nil
+				
 				return
 			end
-			table.remove(t_1, 1)
-			t[var1] = nil
 		end
 		
 		return {
-			save = function(p3, p4)
-				-- upvalues: t (ref), historyPageUtilsModule (copy), removeFromOrder (ref), t_1 (ref), p1 (ref)
-				t[p3] = {
-					loadedBySequenceId = historyPageUtilsModule.cloneHistoryBySequenceId(p4.loadedBySequenceId),
-					overlayBySequenceId = historyPageUtilsModule.cloneHistoryBySequenceId(p4.overlayBySequenceId),
-					hasLoadedHistory = p4.hasLoadedHistory,
-					nextHistoryPageToken = p4.nextHistoryPageToken,
-					latestObservedHistorySequenceId = p4.latestObservedHistorySequenceId,
-					pendingUserMessage = p4.pendingUserMessage
+			save = function(Key, p2) --[[ Line: 52 ]]
+				-- upvalues: t (copy), HistoryPageUtilsModule (upval), removeFromOrder (copy), List (copy), P0 (copy)
+				t[Key] = {
+					loadedBySequenceId = HistoryPageUtilsModule.cloneHistoryBySequenceId(p2.loadedBySequenceId),
+					overlayBySequenceId = HistoryPageUtilsModule.cloneHistoryBySequenceId(p2.overlayBySequenceId),
+					hasLoadedHistory = p2.hasLoadedHistory,
+					nextHistoryPageToken = p2.nextHistoryPageToken,
+					latestObservedHistorySequenceId = p2.latestObservedHistorySequenceId,
+					pendingUserMessage = p2.pendingUserMessage
 				}
-				removeFromOrder(p3)
-				table.insert(t_1, p3)
-				while p1 < #t_1 do
-					local var1 = t_1[1]
+				removeFromOrder(Key)
+				table.insert(List, Key)
+				while P0 < #List do
+					local Entry = List[1]
 					
-					if var1 == nil then continue end
-					table.remove(t_1, 1)
-					t[var1] = nil
+					if Entry == nil then continue end
+					table.remove(List, 1)
+					t[Entry] = nil
 				end
 			end,
-			restore = function(p5)
-				-- upvalues: t (ref), removeFromOrder (ref), t_1 (ref), historyPageUtilsModule (copy)
-				local var2 = t[p5]
+			restore = function(p3) --[[ Line: 67 ]]
+				-- upvalues: t (copy), removeFromOrder (copy), List (copy), HistoryPageUtilsModule (upval)
+				local Entry = t[p3]
 				
-				if var2 == nil then
+				if Entry == nil then
 					return nil
+				else
+					removeFromOrder(p3)
+					table.insert(List, p3)
+					
+					return {
+						loadedBySequenceId = HistoryPageUtilsModule.cloneHistoryBySequenceId(Entry.loadedBySequenceId),
+						overlayBySequenceId = HistoryPageUtilsModule.cloneHistoryBySequenceId(Entry.overlayBySequenceId),
+						hasLoadedHistory = Entry.hasLoadedHistory,
+						nextHistoryPageToken = Entry.nextHistoryPageToken,
+						latestObservedHistorySequenceId = Entry.latestObservedHistorySequenceId,
+						pendingUserMessage = Entry.pendingUserMessage
+					}
 				end
-				removeFromOrder(p5)
-				table.insert(t_1, p5)
-				
-				return {
-					loadedBySequenceId = historyPageUtilsModule.cloneHistoryBySequenceId(var2.loadedBySequenceId),
-					overlayBySequenceId = historyPageUtilsModule.cloneHistoryBySequenceId(var2.overlayBySequenceId),
-					hasLoadedHistory = var2.hasLoadedHistory,
-					nextHistoryPageToken = var2.nextHistoryPageToken,
-					latestObservedHistorySequenceId = var2.latestObservedHistorySequenceId,
-					pendingUserMessage = var2.pendingUserMessage
-				}
 			end
 		}
 	end

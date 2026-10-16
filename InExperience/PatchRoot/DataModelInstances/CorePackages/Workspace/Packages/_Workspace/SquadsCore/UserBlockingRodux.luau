@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.UserBlockingRodux.UserBlockingRodux)
+﻿return (require(script.Parent.Parent.Parent._Index.UserBlockingRodux.UserBlockingRodux))

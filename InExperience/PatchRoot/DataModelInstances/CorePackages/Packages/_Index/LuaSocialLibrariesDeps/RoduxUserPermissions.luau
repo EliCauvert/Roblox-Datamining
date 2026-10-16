@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.RoduxUserPermissions.RoduxUserPermissions)
+﻿return (require(script.Parent.Parent.Parent._Index.RoduxUserPermissions.RoduxUserPermissions))

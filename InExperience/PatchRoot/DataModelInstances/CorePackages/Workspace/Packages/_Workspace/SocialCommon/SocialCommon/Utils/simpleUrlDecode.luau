@@ -1,5 +1,5 @@
-﻿return function(p1)
-	return p1:gsub("+", " "):gsub("%%(%x%x)", function(p2)
-		return string.char(tonumber(p2, 16))
-	end)
+﻿return function(Text: string) --[[ Line: 2 ]]
+	return (Text:gsub("+", " "):gsub("%%(%x%x)", function(p1): string --[[ Line: 3 ]]
+		return (string.char((tonumber(p1, 16))))
+	end))
 end

@@ -1,6 +1,6 @@
-﻿local t = {}
-local t_1 = {}
-local t_2 = {
+﻿local NewInstances = {}
+local t = {}
+local config = {
 	ID = 0,
 	Type = "Model",
 	Properties = { Name = "Safety Bubble Dummy", PrimaryPart = "_R:1_" },
@@ -11,7 +11,7 @@ local t_2 = {
 			Properties = {
 				Transparency = 0.5,
 				Name = "HumanoidRootPart",
-				Size = Vector3.new(2, 2, 1),
+				Size = vector.create(2, 2, 1),
 				Anchored = true,
 				BottomSurface = Enum.SurfaceType.Smooth,
 				TopSurface = Enum.SurfaceType.Smooth
@@ -24,9 +24,9 @@ local t_2 = {
 						Part1 = "_R:3_",
 						Name = "Root Hip",
 						Part0 = "_R:1_",
-						MaxVelocity = 0.10000000149,
-						C1 = CFrame.new(0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 1, 0),
-						C0 = CFrame.new(0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 1, 0)
+						MaxVelocity = 0.10000000149011612,
+						C1 = CFrame.new(0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 1, -0),
+						C0 = CFrame.new(0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 1, -0)
 					},
 					Children = {}
 				}
@@ -36,7 +36,7 @@ local t_2 = {
 			ID = 3,
 			Type = "Part",
 			Properties = {
-				Size = Vector3.new(2, 2, 1),
+				Size = vector.create(2, 2, 1),
 				Name = "Torso",
 				BottomSurface = Enum.SurfaceType.Smooth,
 				TopSurface = Enum.SurfaceType.Smooth
@@ -49,9 +49,9 @@ local t_2 = {
 						Part1 = "_R:9_",
 						Name = "Left Hip",
 						Part0 = "_R:3_",
-						MaxVelocity = 0.10000000149,
-						C1 = CFrame.new(-0.5, 1, 0, -0.000000043711, 0, -1, 0, 0.999999940395, 0, 1, 0, -0.000000043711),
-						C0 = CFrame.new(-1, -1, 0, -0.000000043711, 0, -1, 0, 0.999999940395, 0, 1, 0, -0.000000043711)
+						MaxVelocity = 0.10000000149011612,
+						C1 = CFrame.new(-0.5, 1, 0, -4.371138828673793e-08, 0, -1, 0, 0.9999999403953552, 0, 1, 0, -4.371138828673793e-08),
+						C0 = CFrame.new(-1, -1, 0, -4.371138828673793e-08, 0, -1, 0, 0.9999999403953552, 0, 1, 0, -4.371138828673793e-08)
 					},
 					Children = {}
 				},
@@ -62,9 +62,9 @@ local t_2 = {
 						Part1 = "_R:10_",
 						Name = "Right Hip",
 						Part0 = "_R:3_",
-						MaxVelocity = 0.10000000149,
-						C1 = CFrame.new(0.5, 1, 0, -0.000000043711, 0, 1, 0, 0.999999940395, 0, -1, 0, -0.000000043711),
-						C0 = CFrame.new(1, -1, 0, -0.000000043711, 0, 1, 0, 0.999999940395, 0, -1, 0, -0.000000043711)
+						MaxVelocity = 0.10000000149011612,
+						C1 = CFrame.new(0.5, 1, 0, -4.371138828673793e-08, 0, 1, 0, 0.9999999403953552, 0, -1, 0, -4.371138828673793e-08),
+						C0 = CFrame.new(1, -1, 0, -4.371138828673793e-08, 0, 1, -0, 0.9999999403953552, 0, -1, 0, -4.371138828673793e-08)
 					},
 					Children = {}
 				},
@@ -75,9 +75,9 @@ local t_2 = {
 						Part1 = "_R:11_",
 						Name = "Left Shoulder",
 						Part0 = "_R:3_",
-						MaxVelocity = 0.10000000149,
-						C1 = CFrame.new(0.5, 0.5, 0, -0.000000043711, 0, -1, 0, 0.999999940395, 0, 1, 0, -0.000000043711),
-						C0 = CFrame.new(-1, 0.5, 0, -0.000000043711, 0, -1, 0, 0.999999940395, 0, 1, 0, -0.000000043711)
+						MaxVelocity = 0.10000000149011612,
+						C1 = CFrame.new(0.5, 0.5, 0, -4.371138828673793e-08, 0, -1, 0, 0.9999999403953552, 0, 1, 0, -4.371138828673793e-08),
+						C0 = CFrame.new(-1, 0.5, 0, -4.371138828673793e-08, 0, -1, 0, 0.9999999403953552, 0, 1, 0, -4.371138828673793e-08)
 					},
 					Children = {}
 				},
@@ -88,9 +88,9 @@ local t_2 = {
 						Part1 = "_R:12_",
 						Name = "Right Shoulder",
 						Part0 = "_R:3_",
-						MaxVelocity = 0.10000000149,
-						C1 = CFrame.new(-0.5, 0.5, 0, -0.000000043711, 0, 1, 0, 0.999999940395, 0, -1, 0, -0.000000043711),
-						C0 = CFrame.new(1, 0.5, 0, -0.000000043711, 0, 1, 0, 0.999999940395, 0, -1, 0, -0.000000043711)
+						MaxVelocity = 0.10000000149011612,
+						C1 = CFrame.new(-0.5, 0.5, 0, -4.371138828673793e-08, 0, 1, 0, 0.9999999403953552, 0, -1, 0, -4.371138828673793e-08),
+						C0 = CFrame.new(1, 0.5, 0, -4.371138828673793e-08, 0, 1, -0, 0.9999999403953552, 0, -1, 0, -4.371138828673793e-08)
 					},
 					Children = {}
 				},
@@ -101,9 +101,9 @@ local t_2 = {
 						Part1 = "_R:13_",
 						Name = "Neck",
 						Part0 = "_R:3_",
-						MaxVelocity = 0.10000000149,
-						C1 = CFrame.new(0, -0.5, 0, -1, 0, 0, 0, 0, 1, 0, 1, 0),
-						C0 = CFrame.new(0, 1, 0, -1, 0, 0, 0, 0, 1, 0, 1, 0)
+						MaxVelocity = 0.10000000149011612,
+						C1 = CFrame.new(0, -0.5, 0, -1, 0, 0, 0, 0, 1, 0, 1, -0),
+						C0 = CFrame.new(0, 1, 0, -1, 0, 0, 0, 0, 1, 0, 1, -0)
 					},
 					Children = {}
 				}
@@ -113,12 +113,12 @@ local t_2 = {
 			ID = 9,
 			Type = "Part",
 			Properties = {
-				Size = Vector3.new(1, 2, 1),
+				Size = vector.create(1, 2, 1),
 				Name = "Left Leg",
 				CanCollide = false,
-				Position = Vector3.new(-0.5, -1.999999880791, 0),
+				Position = vector.create(-0.5, -1.9999998807907104, 0),
 				BottomSurface = Enum.SurfaceType.Smooth,
-				CFrame = CFrame.new(-0.5, -1.999999880791, 0, 1, 0, 0, 0, 0.999999880791, 0, 0, 0, 1),
+				CFrame = CFrame.new(-0.5, -1.9999998807907104, 0, 1, 0, 0, 0, 0.9999998807907104, 0, 0, 0, 1),
 				TopSurface = Enum.SurfaceType.Smooth
 			},
 			Children = {}
@@ -127,12 +127,12 @@ local t_2 = {
 			ID = 10,
 			Type = "Part",
 			Properties = {
-				Size = Vector3.new(1, 2, 1),
+				Size = vector.create(1, 2, 1),
 				Name = "Right Leg",
 				CanCollide = false,
-				Position = Vector3.new(0.5, -1.999999880791, 0),
+				Position = vector.create(0.5, -1.9999998807907104, 0),
 				BottomSurface = Enum.SurfaceType.Smooth,
-				CFrame = CFrame.new(0.5, -1.999999880791, 0, 1, 0, 0, 0, 0.999999880791, 0, 0, 0, 1),
+				CFrame = CFrame.new(0.5, -1.9999998807907104, 0, 1, 0, 0, 0, 0.9999998807907104, 0, 0, 0, 1),
 				TopSurface = Enum.SurfaceType.Smooth
 			},
 			Children = {}
@@ -141,12 +141,12 @@ local t_2 = {
 			ID = 11,
 			Type = "Part",
 			Properties = {
-				Size = Vector3.new(1, 2, 1),
+				Size = vector.create(1, 2, 1),
 				Name = "Left Arm",
 				CanCollide = false,
-				Position = Vector3.new(-1.5, 0.000000059605, 0),
+				Position = vector.create(-1.5, 5.960464477539063e-08, 0),
 				BottomSurface = Enum.SurfaceType.Smooth,
-				CFrame = CFrame.new(-1.5, 0.000000059605, 0, 1, 0, 0, 0, 0.999999880791, 0, 0, 0, 1),
+				CFrame = CFrame.new(-1.5, 5.960464477539063e-08, 0, 1, 0, 0, 0, 0.9999998807907104, 0, 0, 0, 1),
 				TopSurface = Enum.SurfaceType.Smooth
 			},
 			Children = {}
@@ -155,12 +155,12 @@ local t_2 = {
 			ID = 12,
 			Type = "Part",
 			Properties = {
-				Size = Vector3.new(1, 2, 1),
+				Size = vector.create(1, 2, 1),
 				Name = "Right Arm",
 				CanCollide = false,
-				Position = Vector3.new(1.5, 0.000000059605, 0),
+				Position = vector.create(1.5, 5.960464477539063e-08, 0),
 				BottomSurface = Enum.SurfaceType.Smooth,
-				CFrame = CFrame.new(1.5, 0.000000059605, 0, 1, 0, 0, 0, 0.999999880791, 0, 0, 0, 1),
+				CFrame = CFrame.new(1.5, 5.960464477539063e-08, 0, 1, 0, 0, 0, 0.9999998807907104, 0, 0, 0, 1),
 				TopSurface = Enum.SurfaceType.Smooth
 			},
 			Children = {}
@@ -170,8 +170,8 @@ local t_2 = {
 			Type = "Part",
 			Properties = {
 				Name = "Head",
-				Position = Vector3.new(0, 1.5, 0),
-				Size = Vector3.new(2, 1, 1),
+				Position = vector.create(0, 1.5, 0),
+				Size = vector.create(2, 1, 1),
 				CFrame = CFrame.new(0, 1.5, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1),
 				BottomSurface = Enum.SurfaceType.Smooth,
 				TopSurface = Enum.SurfaceType.Smooth
@@ -186,7 +186,7 @@ local t_2 = {
 				{
 					ID = 15,
 					Type = "SpecialMesh",
-					Properties = { Scale = Vector3.new(1.25, 1.25, 1.25) },
+					Properties = { Scale = vector.create(1.25, 1.25, 1.25) },
 					Children = {}
 				}
 			}
@@ -200,50 +200,49 @@ local t_2 = {
 	}
 }
 
-local function Scan(p1, p2, p3, p4)
-	-- upvalues: t_1 (ref), t (ref), Scan (ref)
-	local var1 = Instance.new(p1.Type)
+local function Scan(p1, Parent, p2, p3) --[[ Line: 316 ]]
+	-- upvalues: t (copy), NewInstances (copy), Scan (copy)
+	local NewInstance = Instance.new(p1.Type)
 	
 	if p1.ID then
-		local ID = t_1[p1.ID]
+		local Entry = t[p1.ID]
 		
-		if ID then
-			ID[1][ID[2]] = var1
-			t_1[p1.ID] = nil
+		if Entry then
+			Entry[1][Entry[2]] = NewInstance
+			t[p1.ID] = nil
 		else
-			t[p1.ID] = var1
+			NewInstances[p1.ID] = NewInstance
 		end
 	end
-	for i, v in pairs(p1.Properties) do
-		local v
-		if type(v) == "string" then
-			local var2 = tonumber(v:match("^_R:(%w+)_$"))
+	for i, property in pairs(p1.Properties) do
+		if type(property) == "string" then
+			local Number: number? = tonumber(property:match("^_R:(%w+)_$"))
 			
-			if var2 then
-				if t[var2] then
-					v = t[var2]
+			if Number then
+				if NewInstances[Number] then
+					property = NewInstances[Number]
 				else
-					t_1[var2] = { var1, i }
-					v = nil
+					t[Number] = { NewInstance, i }
+					property = nil
 				end
 			end
 		end
-		var1[i] = v
+		NewInstance[i] = property
 	end
-	for i_1, v_1 in pairs(p1.Children) do
-		Scan(v_1, var1, p3, p4)
+	for _, child in pairs(p1.Children) do
+		Scan(child, NewInstance, p2, p3)
 	end
-	var1.Parent = p2
+	NewInstance.Parent = Parent
 	
-	if var1:IsA("Part") then
-		var1.Position += p3
-		var1.Orientation += p4
-		var1.Anchored = true
+	if NewInstance:IsA("Part") then
+		NewInstance.Position += p2
+		NewInstance.Orientation += p3
+		NewInstance.Anchored = true
 	end
-	return var1
+	return NewInstance
 end
 
-return function(p5, p6)
-	-- upvalues: Scan (ref), t_2 (ref)
-	return Scan(t_2, nil, p5, p6)
+return function(p4, p5) --[[ Line: 354 ]]
+	-- upvalues: Scan (copy), config (copy)
+	return (Scan(config, nil, p4, p5))
 end

@@ -1,46 +1,49 @@
-﻿local parent = script.Parent.Parent.Parent
-local core = parent.Core
-local parent_1 = parent.Parent
-local tModule = require(parent_1.t)
-local roactModule = require(parent_1.Roact)
-local withStyleModule = require(core.Style.withStyle)
-local listTable = roactModule.PureComponent:extend("ListTable")
-listTable.validateProps = tModule.strictInterface({
-	layoutOrder = tModule.optional(tModule.integer),
-	size = tModule.optional(tModule.UDim2),
-	showDividers = tModule.optional(tModule.boolean),
-	dividerStartOffset = tModule.optional(tModule.number),
-	anchorPoint = tModule.optional(tModule.Vector2),
-	position = tModule.optional(tModule.UDim2),
-	automaticSize = tModule.optional(tModule.enum(Enum.AutomaticSize)),
-	cells = tModule.array(tModule.table)
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local TModule = require(Parent1.t)
+local RoactModule = require(Parent1.Roact)
+local WithStyleModule = require(Parent.Core.Style.withStyle)
+local ListTable = RoactModule.PureComponent:extend("ListTable")
+ListTable.validateProps = TModule.strictInterface({
+	layoutOrder = TModule.optional(TModule.integer),
+	size = TModule.optional(TModule.UDim2),
+	showDividers = TModule.optional(TModule.boolean),
+	dividerStartOffset = TModule.optional(TModule.number),
+	anchorPoint = TModule.optional(TModule.Vector2),
+	position = TModule.optional(TModule.UDim2),
+	automaticSize = TModule.optional(TModule.enum(Enum.AutomaticSize)),
+	cells = TModule.array(TModule.table)
 })
-listTable.defaultProps = { showDividers = true, dividerStartOffset = 24 }
+ListTable.defaultProps = { showDividers = true, dividerStartOffset = 24 }
 
-function listTable.render(p1)
-	-- upvalues: withStyleModule (ref), roactModule (ref)
-	return withStyleModule(function(p2)
-		-- upvalues: p1 (ref), roactModule (copy)
-		local automaticSize = p1.props.automaticSize
-		local size = p1.props.size or (if automaticSize then if automaticSize == Enum.AutomaticSize.X then UDim2.fromScale(0, 1) elseif automaticSize == Enum.AutomaticSize.Y then UDim2.fromScale(1, 0) elseif automaticSize == Enum.AutomaticSize.XY then UDim2.fromScale(0, 0) else UDim2.fromScale(1, 1) else UDim2.fromScale(1, 1))
-		local t = {
-			ListLayout = roactModule.createElement("UIListLayout", {
+function ListTable.render(p1) --[[ Line: 49 ]]
+	-- upvalues: WithStyleModule (copy), RoactModule (copy)
+	return WithStyleModule(function(p2) --[[ Line: 50 ]]
+		-- upvalues: p1 (copy), RoactModule (upval)
+		local Size = p1.props.size
+		local AutomaticSize = p1.props.automaticSize
+		
+		if not Size then
+			Size = if AutomaticSize then if AutomaticSize == Enum.AutomaticSize.X then UDim2.fromScale(0, 1) elseif AutomaticSize == Enum.AutomaticSize.Y then UDim2.fromScale(1, 0) elseif AutomaticSize == Enum.AutomaticSize.XY then UDim2.fromScale(0, 0) else UDim2.fromScale(1, 1) else UDim2.fromScale(1, 1)
+		end
+		local config = {
+			ListLayout = RoactModule.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				FillDirection = Enum.FillDirection.Vertical
 			})
 		}
-		local cells = p1.props.cells
+		local Cells = p1.props.cells
 		
-		for i, v in ipairs(cells) do
-			t["Cell " .. i] = roactModule.createElement("Frame", {
+		for LayoutOrder, cell in ipairs(Cells) do
+			config["Cell " .. LayoutOrder] = RoactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
-				LayoutOrder = i,
+				LayoutOrder = LayoutOrder,
 				Size = UDim2.fromScale(1, 0),
 				AutomaticSize = Enum.AutomaticSize.Y
 			}, {
-				Content = v,
-				Divider = p1.props.showDividers and i < #cells and roactModule.createElement("Frame", {
+				Content = cell,
+				Divider = p1.props.showDividers and LayoutOrder < #Cells and RoactModule.createElement("Frame", {
 					BorderSizePixel = 0,
 					ZIndex = 100,
 					Size = UDim2.new(1, -p1.props.dividerStartOffset, 0, 1),
@@ -50,15 +53,15 @@ function listTable.render(p1)
 				}) or nil
 			})
 		end
-		return roactModule.createElement("Frame", {
+		return RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = p1.props.layoutOrder,
-			Size = size,
-			AutomaticSize = automaticSize,
+			Size = Size,
+			AutomaticSize = AutomaticSize,
 			AnchorPoint = p1.props.anchorPoint,
 			Position = p1.props.position
-		}, t)
+		}, config)
 	end)
 end
 
-return listTable
+return ListTable

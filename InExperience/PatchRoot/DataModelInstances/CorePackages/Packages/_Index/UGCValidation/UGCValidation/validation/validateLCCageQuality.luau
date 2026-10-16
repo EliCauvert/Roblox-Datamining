@@ -1,43 +1,42 @@
-﻿local parent = script.Parent.Parent
-local getCageMeshInfosModule = require(parent.validation.getCageMeshInfos)
-local getFStringLCCageQualityDocumentationLinkModule = require(parent.flags.getFStringLCCageQualityDocumentationLink)
-local validateLCCagingRelevancyModule = require(parent.validation.validateLCCagingRelevancy)
-local validateRenderMeshInsideOuterCageMeshModule = require(parent.validation.validateRenderMeshInsideOuterCageMesh)
-local _ = require(parent.util.Types)
+﻿local Parent = script.Parent.Parent
+local GetCageMeshInfosModule = require(Parent.validation.getCageMeshInfos)
+local GetFStringLCCageQualityDocumentationLinkModule = require(Parent.flags.getFStringLCCageQualityDocumentationLink)
+local ValidateLCCagingRelevancyModule = require(Parent.validation.validateLCCagingRelevancy)
+local ValidateRenderMeshInsideOuterCageMeshModule = require(Parent.validation.validateRenderMeshInsideOuterCageMesh)
+local _ = require(Parent.util.Types)
 
-return function(p1, p2, p3)
-	-- upvalues: getCageMeshInfosModule (ref), validateLCCagingRelevancyModule (ref), validateRenderMeshInsideOuterCageMeshModule (ref), getFStringLCCageQualityDocumentationLinkModule (ref)
-	local var1 = true
-	local t = {}
-	local wrapLayer = p1:FindFirstChild("Handle"):FindFirstChildOfClass("WrapLayer")
-	assert(wrapLayer, "calling validateInstanceTree() means we would not get this far if there was no WrapLayer")
-	local var2, var3, var4 = getCageMeshInfosModule(p1, p3)
+return function(Object, p1, p2) --[[ Line: 11 | Named "validateLCCageQuality" ]]
+	-- upvalues: GetCageMeshInfosModule (copy), ValidateLCCagingRelevancyModule (copy), ValidateRenderMeshInsideOuterCageMeshModule (copy), GetFStringLCCageQualityDocumentationLinkModule (copy)
+	local Flag = true
+	local List = {}
+	local WrapLayer = Object:FindFirstChild("Handle"):FindFirstChildOfClass("WrapLayer")
+	assert(WrapLayer, "calling validateInstanceTree() means we would not get this far if there was no WrapLayer")
+	local CageMeshInfosModule, CageMeshInfosModule2, CageMeshInfosModule3 = GetCageMeshInfosModule(Object, p2)
 	
-	if not var2 or var4 == nil then
-		return false, var3
+	if not CageMeshInfosModule or CageMeshInfosModule3 == nil then
+		return false, CageMeshInfosModule2
 	end
-	local var5, var6 = unpack({ var4[1], var4[2] })
-	local _ = false
-	local _ = {}
-	local var7, var8 = validateLCCagingRelevancyModule(var5, var6, p2, wrapLayer.ReferenceOrigin.Position, wrapLayer.CageOrigin.Position, p3)
+	local Unpacked, Unpacked2 = unpack({ CageMeshInfosModule3[1], CageMeshInfosModule3[2] })
+	local ValidateLCCagingRelevancyModuleResult, ValidateLCCagingRelevancyModuleResult2 = ValidateLCCagingRelevancyModule(Unpacked, Unpacked2, p1, WrapLayer.ReferenceOrigin.Position, WrapLayer.CageOrigin.Position, p2)
 	
-	if not var7 and var8 ~= nil then
-		var1 = false
+	if not ValidateLCCagingRelevancyModuleResult and ValidateLCCagingRelevancyModuleResult2 ~= nil then
+		Flag = false
 		
-		for i, v in var8 do
-			table.insert(t, v)
+		for _, value in ValidateLCCagingRelevancyModuleResult2 do
+			table.insert(List, value)
 		end
 	end
-	local var9, var10 = validateRenderMeshInsideOuterCageMeshModule(wrapLayer, var6, p2, p3)
+	local ValidateRenderMeshInsideOuterCageMeshModuleResult, ValidateRenderMeshInsideOuterCageMeshModuleResult2 = ValidateRenderMeshInsideOuterCageMeshModule(WrapLayer, Unpacked2, p1, p2)
 	
-	if not var9 then
-		table.insert(t, table.concat(var10, "\n"))
-		var1 = false
+	if not ValidateRenderMeshInsideOuterCageMeshModuleResult then
+		table.insert(List, table.concat(ValidateRenderMeshInsideOuterCageMeshModuleResult2, "\n"))
+		Flag = false
 	end
-	if var1 then
+	if Flag then
 		return true
-	elseif getFStringLCCageQualityDocumentationLinkModule() ~= "" then
-		table.insert(t, string.format("[Caging best practices](%s)", getFStringLCCageQualityDocumentationLinkModule()))
 	end
-	return false, t
+	if GetFStringLCCageQualityDocumentationLinkModule() ~= "" then
+		table.insert(List, (string.format("[Caging best practices](%s)", GetFStringLCCageQualityDocumentationLinkModule())))
+	end
+	return false, List
 end

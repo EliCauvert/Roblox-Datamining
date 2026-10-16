@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.SMSProtocol.SMSProtocol)
+﻿return (require(script.Parent.Parent.Parent._Index.SMSProtocol.SMSProtocol))

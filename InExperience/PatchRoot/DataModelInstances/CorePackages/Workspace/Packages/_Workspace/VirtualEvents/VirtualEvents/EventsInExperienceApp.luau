@@ -1,50 +1,51 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
-local httpService = game:GetService("HttpService")
-local reactModule = require(parent_1.React)
-local roactCompatModule = require(parent_1.RoactCompat)
-local roactNetworking = require(parent_1.RoactServiceTags).RoactNetworking
-local roactServices = require(parent_1.RoactServices).RoactServices
-local requestInternalWrapper = require(parent_1.Http).NetworkLayers.requestInternalWrapper
-local coreScriptsRootProvider = require(parent_1.CoreScriptsRoactCommon).CoreScriptsRootProvider
-local eventInExperiencePromptsModule = require(parent.Components.CoreUI.EventInExperiencePrompts)
-local eventsInExperienceAppFixStyleLink = game:DefineFastFlag("EventsInExperienceAppFixStyleLink", false)
-local t = {}
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
+local HttpService = game:GetService("HttpService")
+local ReactModule = require(Parent1.React)
+local RoactCompatModule = require(Parent1.RoactCompat)
+local RoactNetworking = require(Parent1.RoactServiceTags).RoactNetworking
+local RoactServices = require(Parent1.RoactServices).RoactServices
+local RequestInternalWrapperFunction = require(Parent1.Http).NetworkLayers.requestInternalWrapper
+local CoreScriptsRootProvider = require(Parent1.CoreScriptsRoactCommon).CoreScriptsRootProvider
+local EventInExperiencePromptsModule = require(Parent.Components.CoreUI.EventInExperiencePrompts)
+local EventsInExperienceAppFixStyleLink = game:DefineFastFlag("EventsInExperienceAppFixStyleLink", false)
 
-local var1 = function(p1, p2)
-	-- upvalues: reactModule (ref), coreScriptsRootProvider (ref), roactServices (ref), roactNetworking (ref), requestInternalWrapper (ref), httpService (ref), eventsInExperienceAppFixStyleLink (ref), roactCompatModule (ref)
-	local var2 = reactModule.createElement(coreScriptsRootProvider, {}, {
-		RoactServicesProvider = reactModule.createElement(roactServices.ServiceProvider, {
-			services = { [roactNetworking] = requestInternalWrapper(httpService) }
+local function v10(p1, p2) --[[ Line: 29 ]]
+	-- upvalues: ReactModule (copy), CoreScriptsRootProvider (copy), RoactServices (copy), RoactNetworking (copy), RequestInternalWrapperFunction (copy), HttpService (copy), EventsInExperienceAppFixStyleLink (copy), RoactCompatModule (copy)
+	local Element = ReactModule.createElement(CoreScriptsRootProvider, {}, {
+		RoactServicesProvider = ReactModule.createElement(RoactServices.ServiceProvider, {
+			services = {
+				[RoactNetworking] = RequestInternalWrapperFunction(HttpService)
+			}
 		}, p2)
 	})
 	
-	if eventsInExperienceAppFixStyleLink then
-		var2 = reactModule.createElement("Folder", nil, var2)
+	if EventsInExperienceAppFixStyleLink then
+		Element = ReactModule.createElement("Folder", nil, Element)
 	end
-	return roactCompatModule.mount(var2, p1, "EventsInExperienceRoot")
+	return RoactCompatModule.mount(Element, p1, "EventsInExperienceRoot")
 end
 
-function t.createApp()
-	-- upvalues: var1 (ref), reactModule (ref), eventInExperiencePromptsModule (ref), roactCompatModule (ref)
-	local t = { _coreUiHandle = nil }
-	
-	function t.mountCoreUI(p1)
-		-- upvalues: t (ref), var1 (copy), reactModule (copy), eventInExperiencePromptsModule (copy)
-		t._coreUiHandle = var1(p1, {
-			EventInExperiencePrompts = reactModule.createElement(eventInExperiencePromptsModule)
-		})
-	end
-	
-	function t.unMountCoreUI()
-		-- upvalues: t (ref), roactCompatModule (copy)
-		if t._coreUiHandle then
-			roactCompatModule.unmount(t._coreUiHandle)
-			t._coreUiHandle = nil
+return {
+	createApp = function() --[[ Line: 43 ]]
+		-- upvalues: v10 (copy), ReactModule (copy), EventInExperiencePromptsModule (copy), RoactCompatModule (copy)
+		local config = { _coreUiHandle = nil }
+		
+		function config.mountCoreUI(p1) --[[ Line: 48 ]]
+			-- upvalues: config (copy), v10 (upval), ReactModule (upval), EventInExperiencePromptsModule (upval)
+			config._coreUiHandle = v10(p1, {
+				EventInExperiencePrompts = ReactModule.createElement(EventInExperiencePromptsModule)
+			})
 		end
+		
+		function config.unMountCoreUI() --[[ Line: 54 ]]
+			-- upvalues: config (copy), RoactCompatModule (upval)
+			if config._coreUiHandle then
+				RoactCompatModule.unmount(config._coreUiHandle)
+				config._coreUiHandle = nil
+			end
+		end
+		
+		return config
 	end
-	
-	return t
-end
-
-return t
+}

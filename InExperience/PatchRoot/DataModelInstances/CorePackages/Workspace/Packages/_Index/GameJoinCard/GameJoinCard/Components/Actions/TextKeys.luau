@@ -1,9 +1,9 @@
-﻿local userCtaAction = require(script:FindFirstAncestor("GameJoinCard").Parent.UserCtaCommon).Enums.UserCtaAction
+﻿local UserCtaAction = require(script:FindFirstAncestor("GameJoinCard").Parent.UserCtaCommon).Enums.UserCtaAction
 
 return {
-	[userCtaAction.JoinExperience] = "Feature.Profile.Action.JoinGame",
-	[userCtaAction.PlayExperience] = "Feature.ExperienceDetails.PlayButtonText.Play",
-	[userCtaAction.Chat] = "Feature.Profile.Action.Chat",
-	[userCtaAction.ViewProfile] = "Feature.Profile.Action.ViewProfile",
-	[userCtaAction.UnlockExperience] = "Feature.ExperienceDetails.PlayButtonText.Unlock"
+	[UserCtaAction.JoinExperience] = "Feature.Profile.Action.JoinGame",
+	[UserCtaAction.PlayExperience] = "Feature.ExperienceDetails.PlayButtonText.Play",
+	[UserCtaAction.Chat] = "Feature.Profile.Action.Chat",
+	[UserCtaAction.ViewProfile] = "Feature.Profile.Action.ViewProfile",
+	[UserCtaAction.UnlockExperience] = "Feature.ExperienceDetails.PlayButtonText.Unlock"
 }

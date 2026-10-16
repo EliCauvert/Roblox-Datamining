@@ -1,94 +1,94 @@
-﻿local bulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
-local parent = bulkPurchaseApp.Parent
-local reactModule = require(parent.React)
-local _ = require(parent.Style)
-local itemCardThumbnail = require(parent.AvatarExperienceUIKit).ItemCardComponents.ItemCardThumbnail
-local _ = require(parent.AvatarExperienceCommon)
-local itemStatusToItemStatusKeyModule = require(bulkPurchaseApp.Enums.ItemStatusToItemStatusKey)
-local fFlagBulkPurchaseEnablePurchaseOptionsModule = require(bulkPurchaseApp.Flags.FFlagBulkPurchaseEnablePurchaseOptions)
+﻿local BulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
+local Parent = BulkPurchaseApp.Parent
+local ReactModule = require(Parent.React)
+local _ = require(Parent.Style)
+local ItemCardThumbnail = require(Parent.AvatarExperienceUIKit).ItemCardComponents.ItemCardThumbnail
+local _ = require(Parent.AvatarExperienceCommon)
+local ItemStatusToItemStatusKeyModule = require(BulkPurchaseApp.Enums.ItemStatusToItemStatusKey)
+local FFlagBulkPurchaseEnablePurchaseOptionsModule = require(BulkPurchaseApp.Flags.FFlagBulkPurchaseEnablePurchaseOptions)
 local _ = require(script.Parent.BulkPurchaseRequestItem)
 local _ = require(script.Parent.BulkPurchaseRequestOwnedItem)
 local _ = require(script.Parent.BulkPurchaseRequestUnpurchasableItem)
 
-local function _(p1, p2)
-	local cloned = table.clone(p1)
-	cloned.id = p2
+local function _(Tbl, Id) --[[ Line: 36 | Named "toCardPropsWithId" ]]
+	local Copy = table.clone(Tbl)
+	Copy.id = Id
 	
-	return cloned
+	return Copy
 end
 
 return {
-	mapItemsToRowPresentation = function(p1, p2)
-		-- upvalues: fFlagBulkPurchaseEnablePurchaseOptionsModule (ref), reactModule (ref), itemCardThumbnail (ref)
-		local t = {}
+	mapItemsToRowPresentation = function(List, p1) --[[ Line: 44 ]]
+		-- upvalues: FFlagBulkPurchaseEnablePurchaseOptionsModule (copy), ReactModule (copy), ItemCardThumbnail (copy)
+		local List1 = {}
 		
-		for i, v in p1 do
-			local list = { { type = "price", price = v.cost } }
+		for _, value in List do
+			local List2 = { { type = "price", price = value.cost } }
 			
-			if v.originalPrice then
-				table.insert(list, {
+			if value.originalPrice then
+				table.insert(List2, {
 					type = "price",
 					strikethrough = true,
-					price = v.originalPrice
+					price = value.originalPrice
 				})
 			end
-			if fFlagBulkPurchaseEnablePurchaseOptionsModule and p2 and (v.timedOptionDays and v.timedOptionDays > 0) then
-				local timedOptionDays = v.timedOptionDays
-				table.insert(list, {
+			if FFlagBulkPurchaseEnablePurchaseOptionsModule and p1 and value.timedOptionDays and value.timedOptionDays > 0 then
+				local TimedOptionDays = value.timedOptionDays
+				table.insert(List2, {
 					type = "badge",
-					text = p2:Format(if timedOptionDays == 1 then "Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay" else "Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays", { num = tostring(timedOptionDays) })
+					text = p1:Format(if TimedOptionDays == 1 then "Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay" else "Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays", { num = tostring(TimedOptionDays) })
 				})
 			end
-			local cloned = table.clone({
-				presentationSlot = reactModule.createElement(itemCardThumbnail, { url = v.image }),
-				title = v.name,
-				priceLineContent = list
+			local Copy = table.clone({
+				presentationSlot = ReactModule.createElement(ItemCardThumbnail, { url = value.image }),
+				title = value.name,
+				priceLineContent = List2
 			})
-			cloned.id = v.id
-			table.insert(t, cloned)
+			Copy.id = value.id
+			table.insert(List1, Copy)
 		end
-		return t
+		return List1
 	end,
-	mapOwnedItemsToRowPresentation = function(p3, p4, p5)
-		-- upvalues: reactModule (ref), itemCardThumbnail (ref)
-		local t = {}
+	mapOwnedItemsToRowPresentation = function(List, ColorStyle, p2) --[[ Line: 76 ]]
+		-- upvalues: ReactModule (copy), ItemCardThumbnail (copy)
+		local List1 = {}
 		
-		for i, v in p3 do
-			local cloned = table.clone({
-				presentationSlot = reactModule.createElement(itemCardThumbnail, { url = v.image }),
-				title = v.name,
+		for _, value in List do
+			local Copy = table.clone({
+				presentationSlot = ReactModule.createElement(ItemCardThumbnail, { url = value.image }),
+				title = value.name,
 				priceLineContent = {
 					{
 						type = "text",
-						text = p5.itemOwned:gsub("{.*}", tostring(v.ownedCount)),
-						colorStyle = p4
+						text = p2.itemOwned:gsub("{.*}", (tostring(value.ownedCount))),
+						colorStyle = ColorStyle
 					}
 				}
 			})
-			cloned.id = v.id
-			table.insert(t, cloned)
+			Copy.id = value.id
+			table.insert(List1, Copy)
 		end
-		return t
+		return List1
 	end,
-	mapUnpurchasableItemsToRowPresentation = function(p6, p7, p8, p9)
-		-- upvalues: itemStatusToItemStatusKeyModule (ref), reactModule (ref), itemCardThumbnail (ref)
-		local t = {}
+	mapUnpurchasableItemsToRowPresentation = function(List, p3, p4, p5) --[[ Line: 98 ]]
+		-- upvalues: ItemStatusToItemStatusKeyModule (copy), ReactModule (copy), ItemCardThumbnail (copy)
+		local List1 = {}
 		
-		for i, v in p6 do
-			local cloned = table.clone({
-				presentationSlot = reactModule.createElement(itemCardThumbnail, { url = v.image }),
-				title = v.name,
+		for _, value in List do
+			local Copy = table.clone({
+				presentationSlot = ReactModule.createElement(ItemCardThumbnail, { url = value.image }),
+				title = value.name,
 				priceLineContent = {
 					{
 						type = "text",
-						text = p7[itemStatusToItemStatusKeyModule[v.status]],
-						colorStyle = if v.status == Enum.MarketplaceItemPurchaseStatus.Success then p8 else p9
+						text = p3[ItemStatusToItemStatusKeyModule[value.status]],
+						colorStyle = if value.status == Enum.MarketplaceItemPurchaseStatus.Success then p4 else p5
 					}
 				}
 			})
-			cloned.id = v.id
-			table.insert(t, cloned)
+			Copy.id = value.id
+			table.insert(List1, Copy)
 		end
-		return t
+		return List1
 	end
 }

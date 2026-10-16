@@ -1,181 +1,194 @@
-﻿local parent = script:FindFirstAncestor("ContactImporter").Parent
+﻿local Parent = script:FindFirstAncestor("ContactImporter").Parent
 local IXPService = game:GetService("IXPService")
-local messageBusService = game:GetService("MessageBusService")
-local reactModule = require(parent.React)
-local useNavigation = require(parent.Navigation).useNavigation
-local socialModalsCommonModule = require(parent.SocialModalsCommon)
-local promiseModule = require(parent.Promise)
-local permissionsProtocol = require(parent.PermissionsProtocol).PermissionsProtocol
-local appUserLayers = require(parent.ExperimentLayers).AppUserLayers
-local roactAppExperimentModule = require(parent.RoactAppExperiment)
-local useAppPolicy = require(parent.UniversalAppPolicy).useAppPolicy
-local getDeepValue = require(parent.LuaSocialLibrariesDeps).SocialLibraries.config({}).Dictionary.getDeepValue
-local default = permissionsProtocol.default
-local list = { permissionsProtocol.Permissions.CONTACTS_ACCESS }
-local enumScreens = socialModalsCommonModule.EnumScreens
-local settingsRoute = require(parent.LinkingProtocol).Enums.SettingsRoute
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagCIDeeplinkEnabledForAll = sharedFlagsModule.FFlagCIDeeplinkEnabledForAll
-local fFlagCiDeprecateFindFriendsModal = sharedFlagsModule.FFlagCiDeprecateFindFriendsModal
-local fFlagAddFriendsPageFAEUpsell = sharedFlagsModule.FFlagAddFriendsPageFAEUpsell
-local autoPromptStatusModule = require(script.Parent.Parent.Signals.autoPromptStatus)
-local realtimeMessageId = messageBusService:GetMessageId("Realtime", "appResume")
+local MessageBusService = game:GetService("MessageBusService")
+local ReactModule = require(Parent.React)
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local PromiseModule = require(Parent.Promise)
+local PermissionsProtocol = require(Parent.PermissionsProtocol).PermissionsProtocol
+local AppUserLayers = require(Parent.ExperimentLayers).AppUserLayers
+local RoactAppExperimentModule = require(Parent.RoactAppExperiment)
+local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
+local GetDeepValueFunction = require(Parent.LuaSocialLibrariesDeps).SocialLibraries.config({}).Dictionary.getDeepValue
+local Default = PermissionsProtocol.default
+local list = { PermissionsProtocol.Permissions.CONTACTS_ACCESS }
+local EnumScreens = require(Parent.SocialModalsCommon).EnumScreens
+local SettingsRoute = require(Parent.LinkingProtocol).Enums.SettingsRoute
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagCIDeeplinkEnabledForAll = SharedFlagsModule.FFlagCIDeeplinkEnabledForAll
+local FFlagCiDeprecateFindFriendsModal = SharedFlagsModule.FFlagCiDeprecateFindFriendsModal
+local FFlagAddFriendsPageFAEUpsell = SharedFlagsModule.FFlagAddFriendsPageFAEUpsell
+local AutoPromptStatusModule = require(script.Parent.Parent.Signals.autoPromptStatus)
+local RealtimeMessageId = MessageBusService:GetMessageId("Realtime", "appResume")
 
-return function(p1)
-	-- upvalues: useNavigation (ref), reactModule (ref), useAppPolicy (ref), getDeepValue (ref), enumScreens (ref), fFlagCIDeeplinkEnabledForAll (ref), roactAppExperimentModule (ref), appUserLayers (ref), permissionsProtocol (ref), fFlagAddFriendsPageFAEUpsell (ref), autoPromptStatusModule (ref), default (ref), list (ref), promiseModule (ref), fFlagCiDeprecateFindFriendsModal (ref), settingsRoute (ref), IXPService (ref), messageBusService (ref), realtimeMessageId (ref)
-	local var1 = useNavigation()
-	local var2, var3 = reactModule.useState(false)
-	local var4 = useAppPolicy(function(p2)
+return function(p1) --[[ Line: 39 | Named "useBeginContactImporter" ]]
+	-- upvalues: UseNavigationFunction (copy), ReactModule (copy), UseAppPolicyFunction (copy), GetDeepValueFunction (copy), EnumScreens (copy), FFlagCIDeeplinkEnabledForAll (copy), RoactAppExperimentModule (copy), AppUserLayers (copy), PermissionsProtocol (copy), FFlagAddFriendsPageFAEUpsell (copy), AutoPromptStatusModule (copy), Default (copy), list (copy), PromiseModule (copy), FFlagCiDeprecateFindFriendsModal (copy), SettingsRoute (copy), IXPService (copy), MessageBusService (copy), RealtimeMessageId (copy)
+	local UseNavigationResult = UseNavigationFunction()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p2) --[[ Line: 43 ]]
 		return p2.getContactImporterEnabled()
 	end)
-	local var5 = if p1 then p1.entryPoint else nil
-	local var6 = (getDeepValue(var1, "state.routeName") or {}) == enumScreens.ContactImporter
-	local var7 = useAppPolicy(function(p2)
+	local EntryPoint = p1 and p1.entryPoint or nil
+	local IsContactImporterMatch = (GetDeepValueFunction(UseNavigationResult, "state.routeName") or {}) == EnumScreens.ContactImporter
+	local UseAppPolicyResult1 = UseAppPolicyFunction(function(p2) --[[ Line: 51 ]]
 		return p2.getContactImporterEncouraged()
 	end)
-	local var8 = if not fFlagCIDeeplinkEnabledForAll then roactAppExperimentModule.useUserExperiment({
-		appUserLayers.ContactImporterDevicePermissionNeededModalExposure
-	}, function(p2)
-		-- upvalues: appUserLayers (copy)
-		return (p2[appUserLayers.ContactImporterDevicePermissionNeededModalExposure] or {}).systemSettingsDeeplinkEnabled
-	end, false) else nil
-	local var9 = not var7
-	local var10 = reactModule.useCallback(function(p2)
-		-- upvalues: permissionsProtocol (copy), var3 (ref), var1 (ref), enumScreens (copy), var5 (ref)
-		local var11 = p2.status == permissionsProtocol.Status.AUTHORIZED
-		var3(var11)
+	local UseUserExperimentResult = if FFlagCIDeeplinkEnabledForAll then nil else RoactAppExperimentModule.useUserExperiment({
+		AppUserLayers.ContactImporterDevicePermissionNeededModalExposure
+	}, function(p2) --[[ Line: 61 ]]
+		-- upvalues: AppUserLayers (upval)
+		return (p2[AppUserLayers.ContactImporterDevicePermissionNeededModalExposure] or {}).systemSettingsDeeplinkEnabled
+	end, false)
+	local NoUseAppPolicyResult1 = not UseAppPolicyResult1
+	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 70 ]]
+		-- upvalues: PermissionsProtocol (upval), UseStateResult2 (copy), UseNavigationResult (copy), EnumScreens (upval), EntryPoint (copy)
+		local IsStatusMatch = p2.status == PermissionsProtocol.Status.AUTHORIZED
+		UseStateResult2(IsStatusMatch)
 		
-		if var11 then
-			var1.navigate(enumScreens.ContactsList, { shouldUpdateUserSettings = true, entrypoint = var5 })
+		if IsStatusMatch then
+			UseNavigationResult.navigate(EnumScreens.ContactsList, { shouldUpdateUserSettings = true, entrypoint = EntryPoint })
 		end
-	end, { var1, var5 })
-	local var11 = reactModule.useCallback(function(p2)
-		-- upvalues: permissionsProtocol (copy), var3 (ref), fFlagAddFriendsPageFAEUpsell (copy), autoPromptStatusModule (copy), var7 (ref), default (copy), list (copy), var10 (ref), promiseModule (copy)
-		local status = p2.status
+	end, { UseNavigationResult, EntryPoint })
+	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 82 ]]
+		-- upvalues: PermissionsProtocol (upval), UseStateResult2 (copy), FFlagAddFriendsPageFAEUpsell (upval), AutoPromptStatusModule (upval), UseAppPolicyResult1 (copy), Default (upval), list (upval), UseResult (copy), PromiseModule (upval)
+		local Status = p2.status
 		
-		if status == permissionsProtocol.Status.AUTHORIZED then
-			var3(true)
+		if Status == PermissionsProtocol.Status.AUTHORIZED then
+			UseStateResult2(true)
 			
-			if fFlagAddFriendsPageFAEUpsell then
-				autoPromptStatusModule.setStatus(false)
+			if FFlagAddFriendsPageFAEUpsell then
+				AutoPromptStatusModule.setStatus(false)
 			end
-		elseif status == permissionsProtocol.Status.DENIED then
-			if var7 then
-				if fFlagAddFriendsPageFAEUpsell then
-					local processTime = os.clock()
-					default:requestPermissions(list):andThen(function(p3)
-						-- upvalues: processTime (ref), permissionsProtocol (copy), autoPromptStatusModule (copy)
-						autoPromptStatusModule.setStatus(if os.clock() - processTime < 0.5 then p3.status == permissionsProtocol.Status.AUTHORIZED else true)
+		elseif Status == PermissionsProtocol.Status.DENIED then
+			if UseAppPolicyResult1 then
+				if FFlagAddFriendsPageFAEUpsell then
+					local ClockTime = os.clock()
+					Default:requestPermissions(list):andThen(function(Result) --[[ Line: 101 ]]
+						-- upvalues: ClockTime (copy), PermissionsProtocol (upval), AutoPromptStatusModule (upval)
+						AutoPromptStatusModule.setStatus(os.clock() - ClockTime >= 0.5 or Result.status == PermissionsProtocol.Status.AUTHORIZED)
 						
-						return p3
-					end):andThen(var10)
+						return Result
+					end):andThen(UseResult)
 				else
-					default:requestPermissions(list):andThen(var10)
+					Default:requestPermissions(list):andThen(UseResult)
 				end
-			elseif fFlagAddFriendsPageFAEUpsell then
-				autoPromptStatusModule.setStatus(false)
+			elseif FFlagAddFriendsPageFAEUpsell then
+				AutoPromptStatusModule.setStatus(false)
 			end
-		elseif fFlagAddFriendsPageFAEUpsell then
-			autoPromptStatusModule.setStatus(false)
+		elseif FFlagAddFriendsPageFAEUpsell then
+			AutoPromptStatusModule.setStatus(false)
 		end
-		return promiseModule.resolve(p2.status)
-	end, { var10, var7 })
-	local var12 = reactModule.useCallback(function()
-		-- upvalues: fFlagCiDeprecateFindFriendsModal (copy), var6 (ref), default (copy), list (copy), permissionsProtocol (copy), var3 (ref), var1 (ref), enumScreens (copy), var5 (ref), settingsRoute (copy), var7 (ref), var2 (ref), fFlagCIDeeplinkEnabledForAll (copy), IXPService (copy), appUserLayers (copy), var8 (write), var9 (ref)
-		if fFlagCiDeprecateFindFriendsModal and var6 then
-			default:requestPermissions(list):andThen(function(p2)
-				-- upvalues: permissionsProtocol (copy), var3 (copy), var1 (copy), enumScreens (copy), var5 (copy), settingsRoute (copy)
-				if p2.status == permissionsProtocol.Status.AUTHORIZED then
-					var3(true)
-					var1.replace(enumScreens.ContactsList, { entrypoint = var5 })
+		return PromiseModule.resolve(p2.status)
+	end, { UseResult, UseAppPolicyResult1 })
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 121 ]]
+		-- upvalues: FFlagCiDeprecateFindFriendsModal (upval), IsContactImporterMatch (copy), Default (upval), list (upval), PermissionsProtocol (upval), UseStateResult2 (copy), UseNavigationResult (copy), EnumScreens (upval), EntryPoint (copy), SettingsRoute (upval), UseAppPolicyResult1 (copy), UseStateResult (copy), FFlagCIDeeplinkEnabledForAll (upval), IXPService (upval), AppUserLayers (upval), UseUserExperimentResult (ref), NoUseAppPolicyResult1 (copy)
+		if FFlagCiDeprecateFindFriendsModal and IsContactImporterMatch then
+			Default:requestPermissions(list):andThen(function(Result) --[[ Line: 123 ]]
+				-- upvalues: PermissionsProtocol (upval), UseStateResult2 (upval), UseNavigationResult (upval), EnumScreens (upval), EntryPoint (upval), SettingsRoute (upval)
+				if Result.status == PermissionsProtocol.Status.AUTHORIZED then
+					UseStateResult2(true)
+					UseNavigationResult.replace(EnumScreens.ContactsList, { entrypoint = EntryPoint })
 					
 					return
+				else
+					UseNavigationResult.replace(EnumScreens.SettingsPermissionInteractiveAlert, { settingsRoute = SettingsRoute.Contacts })
 				end
-				var1.replace(enumScreens.SettingsPermissionInteractiveAlert, { settingsRoute = settingsRoute.Contacts })
 			end)
 			
 			return
-		elseif var7 then
-			if var2 then
-				var1.navigate(enumScreens.ContactsList, { entrypoint = var5 })
-				
-				return
-			elseif not fFlagCIDeeplinkEnabledForAll then
-				IXPService:LogUserLayerExposure(appUserLayers.ContactImporterDevicePermissionNeededModalExposure)
-			end
-			if var8 or fFlagCIDeeplinkEnabledForAll then
-				var1.navigate(enumScreens.SettingsPermissionInteractiveAlert, { settingsRoute = settingsRoute.Contacts })
+		end
+		if UseAppPolicyResult1 then
+			if UseStateResult then
+				UseNavigationResult.navigate(EnumScreens.ContactsList, { entrypoint = EntryPoint })
 				
 				return
 			end
-			var1.navigate(enumScreens.ContactsRevokedAccessDialog)
-			
-			return
-		elseif var9 then
-			default:requestPermissions(list):andThen(function(p2)
-				-- upvalues: permissionsProtocol (copy), var1 (copy), enumScreens (copy), var5 (copy), fFlagCIDeeplinkEnabledForAll (copy), IXPService (copy), appUserLayers (copy), var8 (copy), settingsRoute (copy)
-				if p2.status == permissionsProtocol.Status.AUTHORIZED then
-					var1.navigate(enumScreens.ContactsList, { entrypoint = var5 })
+			if not FFlagCIDeeplinkEnabledForAll then
+				IXPService:LogUserLayerExposure(AppUserLayers.ContactImporterDevicePermissionNeededModalExposure)
+			end
+			if UseUserExperimentResult or FFlagCIDeeplinkEnabledForAll then
+				UseNavigationResult.navigate(EnumScreens.SettingsPermissionInteractiveAlert, { settingsRoute = SettingsRoute.Contacts })
+				
+				return
+			else
+				UseNavigationResult.navigate(EnumScreens.ContactsRevokedAccessDialog)
+				
+				return
+			end
+		elseif NoUseAppPolicyResult1 then
+			Default:requestPermissions(list):andThen(function(Result) --[[ Line: 154 ]]
+				-- upvalues: PermissionsProtocol (upval), UseNavigationResult (upval), EnumScreens (upval), EntryPoint (upval), FFlagCIDeeplinkEnabledForAll (upval), IXPService (upval), AppUserLayers (upval), UseUserExperimentResult (upval), SettingsRoute (upval)
+				if Result.status == PermissionsProtocol.Status.AUTHORIZED then
+					UseNavigationResult.navigate(EnumScreens.ContactsList, { entrypoint = EntryPoint })
 					
 					return
-				elseif not fFlagCIDeeplinkEnabledForAll then
-					IXPService:LogUserLayerExposure(appUserLayers.ContactImporterDevicePermissionNeededModalExposure)
 				end
-				if var8 or fFlagCIDeeplinkEnabledForAll then
-					var1.navigate(enumScreens.SettingsPermissionInteractiveAlert, { settingsRoute = settingsRoute.Contacts })
+				if not FFlagCIDeeplinkEnabledForAll then
+					IXPService:LogUserLayerExposure(AppUserLayers.ContactImporterDevicePermissionNeededModalExposure)
+				end
+				if UseUserExperimentResult or FFlagCIDeeplinkEnabledForAll then
+					UseNavigationResult.navigate(EnumScreens.SettingsPermissionInteractiveAlert, { settingsRoute = SettingsRoute.Contacts })
 					
 					return
+				else
+					UseNavigationResult.navigate(EnumScreens.ContactsRevokedAccessDialog)
 				end
-				var1.navigate(enumScreens.ContactsRevokedAccessDialog)
 			end)
 			
 			return
+		else
 		end
 	end, {
-		var2, var4, var7, var9, var5, var8
+		UseStateResult, UseAppPolicyResult, UseAppPolicyResult1, NoUseAppPolicyResult1,
+		EntryPoint, UseUserExperimentResult
 	})
-	reactModule.useEffect(function()
-		-- upvalues: fFlagAddFriendsPageFAEUpsell (copy), autoPromptStatusModule (copy), default (copy), list (copy), var4 (ref), var7 (ref), var9 (ref), var11 (ref)
-		if fFlagAddFriendsPageFAEUpsell then
-			autoPromptStatusModule.setStatus(nil)
+	ReactModule.useEffect(function() --[[ Line: 189 ]]
+		-- upvalues: FFlagAddFriendsPageFAEUpsell (upval), AutoPromptStatusModule (upval), Default (upval), list (upval), UseAppPolicyResult (copy), UseAppPolicyResult1 (copy), NoUseAppPolicyResult1 (copy), UseResult1 (copy)
+		if FFlagAddFriendsPageFAEUpsell then
+			AutoPromptStatusModule.setStatus(nil)
 		end
-		local var13 = default:hasPermissions(list)
+		local HasPermissions = Default:hasPermissions(list)
 		
-		if var4 and (var7 or var9) then
-			var13:andThen(var11)
-		elseif fFlagAddFriendsPageFAEUpsell then
-			autoPromptStatusModule.setStatus(false)
+		if UseAppPolicyResult and (UseAppPolicyResult1 or NoUseAppPolicyResult1) then
+			HasPermissions:andThen(UseResult1)
+		elseif FFlagAddFriendsPageFAEUpsell then
+			AutoPromptStatusModule.setStatus(false)
 		end
-		return if fFlagAddFriendsPageFAEUpsell then function()
-			-- upvalues: autoPromptStatusModule (copy)
-			autoPromptStatusModule.setStatus(nil)
+		return if FFlagAddFriendsPageFAEUpsell then function() --[[ Line: 203 ]]
+			-- upvalues: AutoPromptStatusModule (upval)
+			AutoPromptStatusModule.setStatus(nil)
 		end else nil
-	end, { var4, var7, var9 })
-	reactModule.useEffect(function()
-		-- upvalues: var8 (write), fFlagCIDeeplinkEnabledForAll (copy), messageBusService (copy), realtimeMessageId (copy), default (copy), list (copy), permissionsProtocol (copy), var3 (ref)
-		if var8 or fFlagCIDeeplinkEnabledForAll then
-			local var13 = messageBusService:Subscribe(realtimeMessageId, function()
-				-- upvalues: default (copy), list (copy), permissionsProtocol (copy), var3 (copy)
-				default:hasPermissions(list):andThen(function(p2)
-					-- upvalues: permissionsProtocol (copy), var3 (copy)
-					if p2 and p2.status == permissionsProtocol.Status.AUTHORIZED then
-						var3(true)
+	end, {
+		UseAppPolicyResult,
+		UseAppPolicyResult1,
+		NoUseAppPolicyResult1
+	})
+	ReactModule.useEffect(function() --[[ Line: 211 ]]
+		-- upvalues: UseUserExperimentResult (ref), FFlagCIDeeplinkEnabledForAll (upval), MessageBusService (upval), RealtimeMessageId (upval), Default (upval), list (upval), PermissionsProtocol (upval), UseStateResult2 (copy)
+		if UseUserExperimentResult or FFlagCIDeeplinkEnabledForAll then
+			local SubscribeResult = MessageBusService:Subscribe(RealtimeMessageId, function() --[[ Line: 213 ]]
+				-- upvalues: Default (upval), list (upval), PermissionsProtocol (upval), UseStateResult2 (upval)
+				Default:hasPermissions(list):andThen(function(Result) --[[ Line: 214 ]]
+					-- upvalues: PermissionsProtocol (upval), UseStateResult2 (upval)
+					if Result and Result.status == PermissionsProtocol.Status.AUTHORIZED then
+						UseStateResult2(true)
 					end
 				end)
 			end, false, true)
 			
-			return function()
-				-- upvalues: var13 (ref)
-				var13:Disconnect()
+			return function() --[[ Line: 221 ]]
+				-- upvalues: SubscribeResult (copy)
+				SubscribeResult:Disconnect()
 			end
+		else
+			return nil
 		end
-		return nil
-	end, { var8 })
+	end, { UseUserExperimentResult })
 	
-	if not var4 then
+	if not UseAppPolicyResult then
 		return nil, nil
-	elseif var7 or var9 then
-		return var2, var12
+	elseif UseAppPolicyResult1 or NoUseAppPolicyResult1 then
+		return UseStateResult, UseResult2
+	else
+		return nil, nil
 	end
-	return nil, nil
 end

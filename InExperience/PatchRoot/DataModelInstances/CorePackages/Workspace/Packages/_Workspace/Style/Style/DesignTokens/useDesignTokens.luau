@@ -1,14 +1,14 @@
-﻿local parent = script:FindFirstAncestor("Style").Parent
-local argCheckModule = require(parent.ArgCheck)
-local dashModule = require(parent.Dash)
-local reactModule = require(parent.React)
-local designTokenContextModule = require(script.Parent.DesignTokenContext)
+﻿local Parent = script:FindFirstAncestor("Style").Parent
+local ArgCheckModule = require(Parent.ArgCheck)
+local DashModule = require(Parent.Dash)
+local ReactModule = require(Parent.React)
+local DesignTokenContextModule = require(script.Parent.DesignTokenContext)
 
-return function(value)
-	-- upvalues: reactModule (ref), designTokenContextModule (ref), dashModule (ref), argCheckModule (ref)
-	local var1 = reactModule.useContext(designTokenContextModule)
-	local value_1 = value or dashModule.identity
-	argCheckModule.assert(var1, "Design Tokens not found, ensure AppStyleProvider has been configured correctly.")
+return function(p1) --[[ Line: 11 | Named "useDesignTokens" ]]
+	-- upvalues: ReactModule (copy), DesignTokenContextModule (copy), DashModule (copy), ArgCheckModule (copy)
+	local UseContextResult = ReactModule.useContext(DesignTokenContextModule)
+	local Callback = p1 or DashModule.identity
+	ArgCheckModule.assert(UseContextResult, "Design Tokens not found, ensure AppStyleProvider has been configured correctly.")
 	
-	return value_1(var1)
+	return Callback(UseContextResult)
 end

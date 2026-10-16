@@ -1,4 +1,4 @@
-﻿return function(p1)
+﻿return function(p1) --[[ Line: 3 ]]
 	p1.economicRestrictionBaseTextDays = "IAPExperience.PurchaseError.Text.EconomicRestrictionsDays"
 	p1.economicRestrictionBaseTextHours = "IAPExperience.PurchaseError.Text.EconomicRestrictionsHours"
 	p1.economicRestrictionBaseTextDaysGeneral = "IAPExperience.PurchaseError.Text.EconomicRestrictionsDaysGeneral"

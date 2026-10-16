@@ -1,6 +1,6 @@
-﻿local checkAndSendEventModule = require(script.Parent.Parent.Utils.checkAndSendEvent)
+﻿local CheckAndSendEventModule = require(script.Parent.Parent.Utils.checkAndSendEvent)
 
-return function(p1, p2)
-	-- upvalues: checkAndSendEventModule (ref)
-	checkAndSendEventModule(p1, "pioneerAgeRestrictedBlocked", { source = p2 })
+return function(p1, Source) --[[ Line: 5 ]]
+	-- upvalues: CheckAndSendEventModule (copy)
+	CheckAndSendEventModule(p1, "pioneerAgeRestrictedBlocked", { source = Source })
 end

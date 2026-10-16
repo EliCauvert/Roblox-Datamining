@@ -1,30 +1,30 @@
-﻿local parent = script:FindFirstAncestor("AppChat").Parent
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local text = foundationModule.Text
-local t = { layoutOrder = 2, userText = "", contentText = "" }
+﻿local Parent = script:FindFirstAncestor("AppChat").Parent
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local config = { layoutOrder = 2, userText = "", contentText = "" }
 
-function ReplyComposeBarText(p1)
-	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), view (ref), text (ref)
-	local var1 = cryoModule.Dictionary.union(t, p1)
+function ReplyComposeBarText(p1) --[[ Line: 22 ]]
+	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), View (copy), Text (copy)
+	local UnionResult = CryoModule.Dictionary.union(config, p1)
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col fill auto-y align-x-left clip",
-		LayoutOrder = var1.layoutOrder
+		LayoutOrder = UnionResult.layoutOrder
 	}, {
-		UserReplyingTo = reactModule.createElement(text, {
+		UserReplyingTo = ReactModule.createElement(Text, {
 			tag = "text-caption-medium content-muted text-truncate-end text-align-x-left auto-xy",
 			LayoutOrder = 1,
-			Text = var1.userText
+			Text = UnionResult.userText
 		}),
-		ContentReplyingTo = reactModule.createElement(text, {
+		ContentReplyingTo = ReactModule.createElement(Text, {
 			tag = "text-body-medium content-emphasis text-truncate-end text-align-x-left auto-xy",
 			LayoutOrder = 2,
-			Text = var1.contentText
+			Text = UnionResult.contentText
 		})
 	})
 end
 
-return reactModule.memo(ReplyComposeBarText)
+return ReactModule.memo(ReplyComposeBarText)

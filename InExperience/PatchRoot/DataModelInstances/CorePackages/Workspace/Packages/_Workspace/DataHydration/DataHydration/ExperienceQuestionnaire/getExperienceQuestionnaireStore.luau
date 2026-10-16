@@ -1,6 +1,6 @@
-﻿local createExperienceQuestionnaireStoreModule = require(script.Parent.createExperienceQuestionnaireStore)
+﻿local CreateExperienceQuestionnaireStoreModule = require(script.Parent.createExperienceQuestionnaireStore)
 
-return require(script:FindFirstAncestor("DataHydration").Parent.Signals).createComputed(function()
-	-- upvalues: createExperienceQuestionnaireStoreModule (ref)
-	return createExperienceQuestionnaireStoreModule()
+return require(script:FindFirstAncestor("DataHydration").Parent.Signals).createComputed(function() --[[ Line: 8 ]]
+	-- upvalues: CreateExperienceQuestionnaireStoreModule (copy)
+	return CreateExperienceQuestionnaireStoreModule()
 end)

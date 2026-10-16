@@ -1,11 +1,11 @@
-﻿return function(p1, p2)
-	if not p1 or p1 == "" then
+﻿return function(Text: string, Number): boolean --[[ Line: 7 | Named "parseUserAllowList" ]]
+	if not Text or Text == "" then
 		return false
 	end
-	for i, v in string.split(p1, ",") do
-		local var1 = v:match("^%s*(.-)%s*$")
+	for _, value in string.split(Text, ",") do
+		local SS = value:match("^%s*(.-)%s*$")
 		
-		if var1 and tonumber(var1) == p2 then
+		if SS and tonumber(SS) == Number then
 			return true
 		end
 	end

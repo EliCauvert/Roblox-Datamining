@@ -1,6 +1,6 @@
-﻿local openValidationErrorModalModule = require(script.Parent.Parent.Actions.OpenValidationErrorModal)
+﻿local OpenValidationErrorModalModule = require(script.Parent.Parent.Actions.OpenValidationErrorModal)
 
-return function(p1)
-	-- upvalues: openValidationErrorModalModule (ref)
-	p1:dispatch(openValidationErrorModalModule())
+return function(p1) --[[ Line: 5 ]]
+	-- upvalues: OpenValidationErrorModalModule (copy)
+	p1:dispatch(OpenValidationErrorModalModule())
 end

@@ -1,1 +1,1 @@
-﻿return require(script.QRCodeView)
+﻿return (require(script.QRCodeView))

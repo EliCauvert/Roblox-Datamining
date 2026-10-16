@@ -23,6 +23,7 @@
 		BackendDriven = "BackendDriven",
 		UniversalFeatureRestriction = "universalFeatureRestriction",
 		TemporaryAvatarKickWarning = "temporaryAvatarKickWarning",
+		DictationSafetyReminderToast = "dictationSafetyReminderToast",
 		None = "none"
 	},
 	AbuseVectorType = {

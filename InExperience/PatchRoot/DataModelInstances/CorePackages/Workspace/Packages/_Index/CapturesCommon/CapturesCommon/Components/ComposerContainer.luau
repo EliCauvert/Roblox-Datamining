@@ -1,95 +1,94 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local foundationModule = require(parent_1.Foundation)
-local reactModule = require(parent_1.React)
-local icon = foundationModule.Icon
-local view = foundationModule.View
-local useCallback = reactModule.useCallback
-local useScreenSizeModule = require(parent.Hooks.useScreenSize)
-local useState = reactModule.useState
-local useTokens = foundationModule.Hooks.useTokens
-local captureItemModule = require(parent.Components.CaptureItem)
-local _ = require(parent.Types)
-local vector2 = Vector2.new(700, 500)
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local FoundationModule = require(Parent1.Foundation)
+local ReactModule = require(Parent1.React)
+local Icon = FoundationModule.Icon
+local View = FoundationModule.View
+local UseCallbackFunction = ReactModule.useCallback
+local UseScreenSizeModule = require(Parent.Hooks.useScreenSize)
+local UseStateFunction = ReactModule.useState
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local CaptureItemModule = require(Parent.Components.CaptureItem)
+local _ = require(Parent.Types)
+local _Vector2 = Vector2.new(700, 500)
 
-return function(p1)
-	-- upvalues: useTokens (ref), useScreenSizeModule (ref), useState (ref), useCallback (ref), vector2 (ref), reactModule (ref), view (ref), foundationModule (ref), icon (ref), captureItemModule (ref)
-	local var1 = useTokens()
-	local var2 = useScreenSizeModule()
-	local var3, var4 = useState(var2)
-	local var5 = useCallback(function(p2)
-		-- upvalues: var4 (ref), p1 (ref)
-		var4(p2.AbsoluteSize)
-		p1.onAbsoluteSizeChangedCallback(p2)
-	end, { p1.onAbsoluteSizeChangedCallback })
-	local y = var2.Y
-	local x = var2.X
-	local var6 = p1.enableLargeScreenMode and (vector2.X < var3.X and vector2.Y < var3.Y)
-	local var7 = if p1.children == nil then 1 else 0.6
+return function(p1) --[[ Line: 31 ]]
+	-- upvalues: UseTokensFunction (copy), UseScreenSizeModule (copy), UseStateFunction (copy), UseCallbackFunction (copy), _Vector2 (copy), ReactModule (copy), View (copy), FoundationModule (copy), Icon (copy), CaptureItemModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseScreenSizeModuleResult = UseScreenSizeModule()
+	local UseStateResult, UseStateResult2 = UseStateFunction(UseScreenSizeModuleResult)
+	local Y = UseScreenSizeModuleResult.Y
+	local X = UseScreenSizeModuleResult.X
+	local IsYBelow: boolean = p1.enableLargeScreenMode and (_Vector2.X < UseStateResult.X and _Vector2.Y < UseStateResult.Y)
+	local XScale: number = if p1.children == nil then 1 else 0.6
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "size-full-full bg-over-media-0",
-		onAbsoluteSizeChanged = var5,
+		onAbsoluteSizeChanged = UseCallbackFunction(function(Frame) --[[ Line: 37 ]]
+			-- upvalues: UseStateResult2 (copy), p1 (copy)
+			UseStateResult2(Frame.AbsoluteSize)
+			p1.onAbsoluteSizeChangedCallback(Frame)
+		end, { p1.onAbsoluteSizeChangedCallback }),
 		stateLayer = {
-			affordance = foundationModule.Enums.StateLayerAffordance.None
+			affordance = FoundationModule.Enums.StateLayerAffordance.None
 		}
 	}, {
-		ComposerScreenContainer = reactModule.createElement(view, {
-			Size = if var6 then UDim2.fromOffset(math.min(var3.X, vector2.X), math.min(var3.Y, vector2.Y)) else UDim2.fromScale(1, 1),
+		ComposerScreenContainer = ReactModule.createElement(View, {
+			Size = if IsYBelow then UDim2.fromOffset(math.min(UseStateResult.X, _Vector2.X), (math.min(UseStateResult.Y, _Vector2.Y))) else UDim2.fromScale(1, 1),
 			stateLayer = {
-				affordance = foundationModule.Enums.StateLayerAffordance.None
+				affordance = FoundationModule.Enums.StateLayerAffordance.None
 			},
 			tag = {
 				["anchor-center-center bg-surface-200 position-center-center"] = true,
-				["radius-large"] = var6
+				["radius-large"] = IsYBelow
 			}
 		}, {
-			ComposerContainer = reactModule.createElement(view, {
+			ComposerContainer = ReactModule.createElement(View, {
 				tag = {
 					["anchor-center-center bg-action-subtle position-center-center size-full-full"] = true,
-					["padding-right-large"] = var6
+					["padding-right-large"] = IsYBelow
 				}
 			}, {
-				BackButtonContainer = reactModule.createElement(view, { tag = "auto-xy bg-action-subtle", ZIndex = 2 }, {
-					Padding = reactModule.createElement("UIPadding", {
-						PaddingBottom = UDim.new(0, var1.Padding.Large),
-						PaddingLeft = UDim.new(0, var1.Padding.XXLarge),
-						PaddingRight = UDim.new(0, var1.Padding.Large),
-						PaddingTop = UDim.new(0, var1.Padding.XXLarge)
+				BackButtonContainer = ReactModule.createElement(View, { tag = "auto-xy bg-action-subtle", ZIndex = 2 }, {
+					Padding = ReactModule.createElement("UIPadding", {
+						PaddingBottom = UDim.new(0, UseTokensResult.Padding.Large),
+						PaddingLeft = UDim.new(0, UseTokensResult.Padding.XXLarge),
+						PaddingRight = UDim.new(0, UseTokensResult.Padding.Large),
+						PaddingTop = UDim.new(0, UseTokensResult.Padding.XXLarge)
 					}),
-					BackButton = reactModule.createElement(view, {
+					BackButton = ReactModule.createElement(View, {
 						onActivated = p1.onCloseCallback,
 						tag = {
 							["auto-xy bg-over-media-300 padding-medium radius-circle"] = true
 						}
 					}, {
-						BackIcon = reactModule.createElement(icon, {
+						BackIcon = ReactModule.createElement(Icon, {
 							ZIndex = 2,
 							AnchorPoint = Vector2.new(0.5, 0.5),
-							IconSize = foundationModule.Enums.IconSize.Small,
-							name = if var6 then "icons/navigation/close" else "icons/actions/cycleLeft",
+							IconSize = FoundationModule.Enums.IconSize.Small,
+							name = if IsYBelow then "icons/navigation/close" else "icons/actions/cycleLeft",
 							Position = UDim2.fromScale(0.5, 0.5),
-							style = var1.Color.ActionEmphasis.Foreground
+							style = UseTokensResult.Color.ActionEmphasis.Foreground
 						})
 					})
 				}),
-				CaptureContainer = reactModule.createElement(view, {
+				CaptureContainer = ReactModule.createElement(View, {
 					ZIndex = 1,
-					Size = if y < x then UDim2.new(var7, if var6 then var1.Padding.Large else 0, 1, 0) else UDim2.fromScale(1, var7),
+					Size = if Y < X then UDim2.new(XScale, if IsYBelow then UseTokensResult.Padding.Large else 0, 1, 0) else UDim2.fromScale(1, XScale),
 					tag = {
 						["bg-surface-100 clip"] = true,
-						["padding-right-large"] = var6 and p1.children ~= nil,
-						["radius-large"] = var6
+						["padding-right-large"] = IsYBelow and p1.children ~= nil,
+						["radius-large"] = IsYBelow
 					}
 				}, {
-					CapturePreviewFrame = reactModule.createElement(view, {
+					CapturePreviewFrame = ReactModule.createElement(View, {
 						LayoutOrder = 2,
 						tag = "anchor-center-center bg-action-subtle position-center-center size-full-full"
 					}, {
-						CapturePreview = reactModule.createElement(captureItemModule, {
+						CapturePreview = ReactModule.createElement(CaptureItemModule, {
 							isVideoPlaying = true,
 							capture = p1.capture,
-							onActivated = function() end,
+							onActivated = function() --[[ Line: 120 ]] end,
 							scaleType = Enum.ScaleType.Fit
 						})
 					})

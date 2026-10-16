@@ -1,64 +1,63 @@
-﻿local performFetch = require(game:GetService("CorePackages").Workspace.Packages.Http).PerformFetch
-local parent = script.Parent.Parent
-local thunkModule = require(parent.Thunk)
-local networkModule = require(parent.Services.Network)
-local bundleInfoModule = require(parent.Models.BundleInfo)
-local setBundlesModule = require(parent.Actions.SetBundles)
-local getProductInfoModule = require(parent.Thunks.GetProductInfo)
-local createInspectAndBuyKeyMapperModule = require(parent.createInspectAndBuyKeyMapper)
-local setAssetToBundlesMappingModule = require(parent.Actions.SetAssetToBundlesMapping)
-local sendCounterModule = require(parent.Thunks.SendCounter)
-local constantsModule = require(parent.Constants)
-local list = { networkModule }
-local var1 = createInspectAndBuyKeyMapperModule("getAssetBundles")
+﻿local PerformFetch = require(game:GetService("CorePackages").Workspace.Packages.Http).PerformFetch
+local Parent = script.Parent.Parent
+local ThunkModule = require(Parent.Thunk)
+local NetworkModule = require(Parent.Services.Network)
+local BundleInfoModule = require(Parent.Models.BundleInfo)
+local SetBundlesModule = require(Parent.Actions.SetBundles)
+local GetProductInfoModule = require(Parent.Thunks.GetProductInfo)
+local SetAssetToBundlesMappingModule = require(Parent.Actions.SetAssetToBundlesMapping)
+local SendCounterModule = require(Parent.Thunks.SendCounter)
+local ConstantsModule = require(Parent.Constants)
+local list = { NetworkModule }
+local GetAssetBundles = require(Parent.createInspectAndBuyKeyMapper)("getAssetBundles")
 
-return function(value)
-	-- upvalues: thunkModule (ref), list (ref), networkModule (ref), var1 (ref), performFetch (ref), bundleInfoModule (ref), getProductInfoModule (ref), setBundlesModule (ref), setAssetToBundlesMappingModule (ref), sendCounterModule (ref), constantsModule (ref)
-	return thunkModule.new(script.Name, list, function(p1, p2)
-		-- upvalues: networkModule (copy), var1 (copy), value (ref), performFetch (copy), bundleInfoModule (copy), getProductInfoModule (copy), setBundlesModule (copy), setAssetToBundlesMappingModule (copy), sendCounterModule (copy), constantsModule (copy)
-		local var2 = p2[networkModule]
+return function(p1) --[[ Line: 23 | Named "GetAssetBundles" ]]
+	-- upvalues: ThunkModule (copy), list (copy), NetworkModule (copy), GetAssetBundles (copy), PerformFetch (copy), BundleInfoModule (copy), GetProductInfoModule (copy), SetBundlesModule (copy), SetAssetToBundlesMappingModule (copy), SendCounterModule (copy), ConstantsModule (copy)
+	return ThunkModule.new(script.Name, list, function(p2, p3) --[[ Line: 24 ]]
+		-- upvalues: NetworkModule (upval), GetAssetBundles (upval), p1 (copy), PerformFetch (upval), BundleInfoModule (upval), GetProductInfoModule (upval), SetBundlesModule (upval), SetAssetToBundlesMappingModule (upval), SendCounterModule (upval), ConstantsModule (upval)
+		local v1 = p3[NetworkModule]
 		
-		return performFetch.Single(var1(p1:getState().storeId, value), function(_)
-			-- upvalues: var2 (ref), value (copy), bundleInfoModule (copy), p1 (ref), getProductInfoModule (copy), setBundlesModule (copy), setAssetToBundlesMappingModule (copy), sendCounterModule (copy), constantsModule (copy)
-			return var2.getAssetBundles(value):andThen(function(p3)
-				-- upvalues: bundleInfoModule (copy), p1 (copy), getProductInfoModule (copy), setBundlesModule (copy), setAssetToBundlesMappingModule (copy), value (copy), sendCounterModule (copy), constantsModule (copy)
-				local var3
-				local t = {}
-				local t_1 = {}
+		return PerformFetch.Single(GetAssetBundles(p2:getState().storeId, p1), function(_) --[[ Line: 29 ]]
+			-- upvalues: v1 (copy), p1 (upval), BundleInfoModule (upval), p2 (copy), GetProductInfoModule (upval), SetBundlesModule (upval), SetAssetToBundlesMappingModule (upval), SendCounterModule (upval), ConstantsModule (upval)
+			return v1.getAssetBundles(p1):andThen(function(Result) --[[ Line: 30 ]]
+				-- upvalues: BundleInfoModule (upval), p2 (upval), GetProductInfoModule (upval), SetBundlesModule (upval), SetAssetToBundlesMappingModule (upval), p1 (upval), SendCounterModule (upval), ConstantsModule (upval)
+				local List = {}
+				local FromGetAssetBundlesResults = {}
+				local Flag = nil
 				
-				for i, v in pairs(p3.data) do
-					local var4 = bundleInfoModule.fromGetAssetBundles(v)
-					table.insert(t_1, var4)
-					table.insert(t, tostring(var4.bundleId))
-					var3 = false
+				for _, entry in pairs(Result.data) do
+					local FromGetAssetBundlesResult = BundleInfoModule.fromGetAssetBundles(entry)
+					table.insert(FromGetAssetBundlesResults, FromGetAssetBundlesResult)
+					table.insert(List, (tostring(FromGetAssetBundlesResult.bundleId)))
+					Flag = false
 					
-					for i_1, v_1 in pairs(v.items) do
-						if v_1.type == "UserOutfit" then
-							var3 = true
+					for _, item in pairs(entry.items) do
+						if item.type == "UserOutfit" then
+							Flag = true
 							break
 						end
 					end
-					if not var3 then
-						for i_1, v_1 in pairs(v.items) do
-							if not p1:getState().assets[v_1.id] then
-								coroutine.wrap(function()
-									-- upvalues: p1 (copy), getProductInfoModule (copy), v_1 (ref)
-									p1:dispatch(getProductInfoModule(v_1.id))
+					if not Flag then
+						for _, item1 in pairs(entry.items) do
+							if not p2:getState().assets[item1.id] then
+								coroutine.wrap(function() --[[ Line: 54 ]]
+									-- upvalues: p2 (upval), GetProductInfoModule (upval), item1 (copy)
+									p2:dispatch(GetProductInfoModule(item1.id))
 								end)()
 							end
 						end
 					end
 				end
-				p1:dispatch(setBundlesModule(t_1))
-				p1:dispatch(setAssetToBundlesMappingModule(tostring(value), t))
-				p1:dispatch(sendCounterModule(constantsModule.Counters.GetAssetBundles .. constantsModule.CounterSuffix.RequestSucceeded))
-			end, function(_)
-				-- upvalues: p1 (copy), sendCounterModule (copy), constantsModule (copy)
-				p1:dispatch(sendCounterModule(constantsModule.Counters.GetAssetBundles .. constantsModule.CounterSuffix.RequestRejected))
+				p2:dispatch(SetBundlesModule(FromGetAssetBundlesResults))
+				p2:dispatch(SetAssetToBundlesMappingModule(tostring(p1), List))
+				p2:dispatch(SendCounterModule(ConstantsModule.Counters.GetAssetBundles .. ConstantsModule.CounterSuffix.RequestSucceeded))
+			end, function(_) --[[ Line: 69 ]]
+				-- upvalues: p2 (upval), SendCounterModule (upval), ConstantsModule (upval)
+				p2:dispatch(SendCounterModule(ConstantsModule.Counters.GetAssetBundles .. ConstantsModule.CounterSuffix.RequestRejected))
 			end)
-		end)(p1):catch(function(_)
-			-- upvalues: p1 (ref), sendCounterModule (copy), constantsModule (copy)
-			p1:dispatch(sendCounterModule(constantsModule.Counters.GetAssetBundles .. constantsModule.CounterSuffix.RequestFailed))
+		end)(p2):catch(function(_) --[[ Line: 74 ]]
+			-- upvalues: p2 (copy), SendCounterModule (upval), ConstantsModule (upval)
+			p2:dispatch(SendCounterModule(ConstantsModule.Counters.GetAssetBundles .. ConstantsModule.CounterSuffix.RequestFailed))
 		end)
 	end)
 end

@@ -1,98 +1,101 @@
-﻿local playersService = game:GetService("Players")
-local parent = script.Parent
-local parent_1 = parent.Parent
-local userProfilesModule = require(parent_1.UserProfiles)
-local sortTableByValue = require(parent_1.CoreScriptsRoactCommon).Utilities.sortTableByValue
-local _ = require(parent.createPersonStore)
-local getFFlagPeoplePageEnablePersonSignalStore = require(parent.Flags).GetFFlagPeoplePageEnablePersonSignalStore
-local _, status = pcall(function()
+﻿local Players = game:GetService("Players")
+local Parent = script.Parent
+local Parent1 = Parent.Parent
+local UserProfilesModule = require(Parent1.UserProfiles)
+local SortTableByValueFunction = require(Parent1.CoreScriptsRoactCommon).Utilities.sortTableByValue
+local _ = require(Parent.createPersonStore)
+local GetFFlagPeoplePageEnablePersonSignalStoreFunction = require(Parent.Flags).GetFFlagPeoplePageEnablePersonSignalStore
+local FFlagUserProfilePlatformProfile = require(Parent1.SharedFlags).FFlagUserProfilePlatformProfile
+local _, Result = pcall(function() --[[ Line: 21 ]]
 	return game:GetService("PlatformFriendsService")
 end)
-local userProfileStore = userProfilesModule.Stores.UserProfileStore
+local UserProfileStore = UserProfilesModule.Stores.UserProfileStore
 
-local function comparePeople(p1, p2)
-	-- upvalues: playersService (ref)
-	local localPlayer = playersService.LocalPlayer
-	local var1 = p1.Name:lower()
-	local var2 = p2.Name:lower()
+local function comparePeople(A, B): boolean --[[ Line: 74 ]]
+	-- upvalues: Players (copy)
+	local LocalPlayer = Players.LocalPlayer
+	local Lowered = A.Name:lower()
+	local Lowered1 = B.Name:lower()
 	
-	if p1 == localPlayer then
-		var1 = " "
+	if A == LocalPlayer then
+		Lowered = " "
 	end
-	if p2 == localPlayer then
-		var2 = " "
+	if B == LocalPlayer then
+		Lowered1 = " "
 	end
-	return var1 < var2
+	return Lowered < Lowered1
 end
 
-return {
-	getInExperienceCombinedName = function(p1)
-		-- upvalues: userProfileStore (ref)
-		local t = {}
+local v1 = if GetFFlagPeoplePageEnablePersonSignalStoreFunction() then function(p1) --[[ Line: 97 ]]
+	-- upvalues: SortTableByValueFunction (copy), Players (copy)
+	for i, value in SortTableByValueFunction(p1, function(p2, p3): boolean --[[ Line: 98 ]]
+		-- upvalues: Players (upval)
+		local Person = p2.value.getPerson()
+		local Person1 = p3.value.getPerson()
+		local LocalPlayer = Players.LocalPlayer
+		local Lowered = Person.Name:lower()
+		local Lowered1 = Person1.Name:lower()
 		
-		for i, v in userProfileStore.get().fetchNamesByUserIds(p1)(false).data do
-			t[p1[i]] = v.names.getInExperienceCombinedName
+		if Person == LocalPlayer then
+			Lowered = " "
 		end
-		return t
+		if Person1 == LocalPlayer then
+			Lowered1 = " "
+		end
+		return Lowered < Lowered1
+	end) do
+		local v2 = p1[value.key]
+		
+		if v2 then
+			v2.setOrder(i)
+		end
+	end
+end else nil
+
+return {
+	getInExperienceCombinedName = function(p2) --[[ Line: 28 ]]
+		-- upvalues: UserProfileStore (copy)
+		local GetInExperienceCombinedNames = {}
+		
+		for i, entry in UserProfileStore.get().fetchNamesByUserIds(p2)(false).data do
+			GetInExperienceCombinedNames[p2[i]] = entry.names.getInExperienceCombinedName
+		end
+		return GetInExperienceCombinedNames
 	end,
-	getPlatformData = function(p2)
-		-- upvalues: userProfileStore (ref)
+	getPlatformData = function(p3) --[[ Line: 42 ]]
+		-- upvalues: UserProfileStore (copy), FFlagUserProfilePlatformProfile (copy)
 		local t = {}
 		
-		for i, v in userProfileStore.get().fetchNamesByUserIds(p2)(false).data do
-			t[p2[i]] = {
-				platformName = v.names.getPlatformName,
-				platformProfileId = v.getPlatformProfileId
+		for i, entry in UserProfileStore.get().fetchNamesByUserIds(p3, nil, FFlagUserProfilePlatformProfile)(false).data do
+			t[p3[i]] = {
+				platformName = entry.names.getPlatformName,
+				platformProfileId = entry.getPlatformProfileId
 			}
 		end
 		return t
 	end,
-	canShowPlatformProfile = function(p3)
-		-- upvalues: status (ref)
-		return game:GetEngineFeature("PlatformFriendsService") and (game:GetEngineFeature("PlatformFriendsProfile") and (status and (status:IsProfileEnabled() and (p3 and p3 ~= ""))))
+	canShowPlatformProfile = function(p4): boolean --[[ Line: 59 ]]
+		-- upvalues: Result (copy)
+		return game:GetEngineFeature("PlatformFriendsService") and (game:GetEngineFeature("PlatformFriendsProfile") and (Result and (Result:IsProfileEnabled() and (p4 and p4 ~= ""))))
 	end,
-	showPlatformProfile = function(p3)
-		-- upvalues: status (ref)
-		if game:GetEngineFeature("PlatformFriendsService") and (game:GetEngineFeature("PlatformFriendsProfile") and (status and (status:IsProfileEnabled() and (p3 and p3 ~= "")))) then
-			status:ShowProfile(p3)
+	showPlatformProfile = function(PlatformUserId) --[[ Line: 68 ]]
+		-- upvalues: Result (copy)
+		if game:GetEngineFeature("PlatformFriendsService") and (game:GetEngineFeature("PlatformFriendsProfile") and (Result and (Result:IsProfileEnabled() and (PlatformUserId and PlatformUserId ~= "")))) then
+			Result:ShowProfile(PlatformUserId)
 		end
 	end,
 	comparePeople = comparePeople,
-	sortPeople = function(p3)
-		-- upvalues: comparePeople (ref)
-		table.sort(p3, comparePeople)
+	sortPeople = function(List) --[[ Line: 91 ]]
+		-- upvalues: comparePeople (copy)
+		table.sort(List, comparePeople)
 		
-		return p3
+		return List
 	end,
-	sortPersonStores = if getFFlagPeoplePageEnablePersonSignalStore() then if getFFlagPeoplePageEnablePersonSignalStore() then function(p3)
-		-- upvalues: sortTableByValue (ref), playersService (ref)
-		for i, v in sortTableByValue(p3, function(p4, p5)
-			-- upvalues: playersService (copy)
-			local person = p4.value.getPerson()
-			local person_1 = p5.value.getPerson()
-			local localPlayer = playersService.LocalPlayer
-			local var1 = person.Name:lower()
-			local var2 = person_1.Name:lower()
-			
-			if person == localPlayer then
-				var1 = " "
-			end
-			if person_1 == localPlayer then
-				var2 = " "
-			end
-			return var1 < var2
-		end) do
-			local key = p3[v.key]
-			
-			if key then
-				key.setOrder(i)
-			end
-		end
-	end else nil else nil,
-	showPersonButtons = function(p4, p5)
-		-- upvalues: playersService (ref)
-		local localPlayer = playersService.LocalPlayer
+	sortPersonStores = if GetFFlagPeoplePageEnablePersonSignalStoreFunction() then v1 else nil,
+	showPersonButtons = function(LocalPlayer, p4: number): boolean --[[ Line: 112 ]]
+		-- upvalues: Players (copy)
+		local LocalPlayer1 = Players.LocalPlayer
 		
-		return p4 ~= nil and (localPlayer ~= nil and (p4 ~= localPlayer and (p5 > 0 and localPlayer.UserId > 0)))
+		return LocalPlayer ~= nil and (LocalPlayer1 ~= nil and (LocalPlayer ~= LocalPlayer1 and (p4 > 0 and LocalPlayer1.UserId > 0)))
 	end
 }

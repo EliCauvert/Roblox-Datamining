@@ -1,14 +1,14 @@
-﻿local accountUpgradeFlowModule = require(script:FindFirstAncestor("AccountUpgrade").AccountUpgradeFlow)
-local getPioneerAccountUpgradeAvailabilityModule = require(script.Parent.getPioneerAccountUpgradeAvailability)
-local t = {
-	[accountUpgradeFlowModule.Pioneer] = getPioneerAccountUpgradeAvailabilityModule,
-	[accountUpgradeFlowModule.PioneerU13] = getPioneerAccountUpgradeAvailabilityModule
+﻿local AccountUpgradeFlowModule = require(script:FindFirstAncestor("AccountUpgrade").AccountUpgradeFlow)
+local GetPioneerAccountUpgradeAvailabilityModule = require(script.Parent.getPioneerAccountUpgradeAvailability)
+local config = {
+	[AccountUpgradeFlowModule.Pioneer] = GetPioneerAccountUpgradeAvailabilityModule,
+	[AccountUpgradeFlowModule.PioneerU13] = GetPioneerAccountUpgradeAvailabilityModule
 }
 
-return function(p1)
-	-- upvalues: t (ref)
-	local var1 = t[p1]
-	assert(var1 ~= nil, `Unsupported account upgrade flow: {p1}`)
+return function(p1) --[[ Line: 17 | Named "getAvailability" ]]
+	-- upvalues: config (copy)
+	local Entry = config[p1]
+	assert(Entry ~= nil, `Unsupported account upgrade flow: {p1}`)
 	
-	return var1()
+	return Entry()
 end

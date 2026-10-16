@@ -1,34 +1,34 @@
-﻿local parent = script:FindFirstAncestor("AppChat").Parent
-local reactModule = require(parent.React)
-local useCursor = require(parent.Foundation).Hooks.useCursor
-local t = {
+﻿local Parent = script:FindFirstAncestor("AppChat").Parent
+local ReactModule = require(Parent.React)
+local UseCursorFunction = require(Parent.Foundation).Hooks.useCursor
+local config = {
 	Size36x36 = "rbxasset://textures/ui/LuaChat/graphic/gr-profile-border-36x36.png",
 	Size48x48 = "rbxasset://textures/ui/LuaChat/graphic/gr-profile-border-48x48.png"
 }
 
-return function(p1)
-	-- upvalues: t (ref), useCursor (ref), reactModule (ref)
-	return reactModule.createElement("ImageButton", {
+return function(Frame) --[[ Line: 28 | Named "CircleMask" ]]
+	-- upvalues: config (copy), UseCursorFunction (copy), ReactModule (copy)
+	return ReactModule.createElement("ImageButton", {
 		Size = UDim2.new(1, 0, 1, 0),
-		BackgroundColor3 = p1.circleInteriorBackgroundColor3,
-		BackgroundTransparency = p1.circleInteriorBackgroundTransparency,
+		BackgroundColor3 = Frame.circleInteriorBackgroundColor3,
+		BackgroundTransparency = Frame.circleInteriorBackgroundTransparency,
 		BorderSizePixel = 0,
 		Image = "",
-		SelectionImageObject = useCursor(),
+		SelectionImageObject = UseCursorFunction(),
 		AutoButtonColor = false,
 		ClipsDescendants = true,
-		[reactModule.Event.Activated] = p1.onActivated,
-		Selectable = p1.selectable,
-		LayoutOrder = p1.LayoutOrder
+		[ReactModule.Event.Activated] = Frame.onActivated,
+		Selectable = Frame.selectable,
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		imageMask = reactModule.createElement("ImageLabel", {
+		imageMask = ReactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			ZIndex = 2,
-			Image = t[p1.overlaySize or "Size36x36"],
-			ImageColor3 = p1.circleColor3,
-			ImageTransparency = p1.circleTransparency,
+			Image = config[Frame.overlaySize or "Size36x36"],
+			ImageColor3 = Frame.circleColor3,
+			ImageTransparency = Frame.circleTransparency,
 			Size = UDim2.fromScale(1, 1)
-		}, p1.renderAboveMask)
-	}, p1.children)
+		}, Frame.renderAboveMask)
+	}, Frame.children)
 end

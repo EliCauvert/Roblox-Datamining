@@ -1,113 +1,116 @@
-﻿local parent = script:FindFirstAncestor("GenericAbuseReporting").Parent
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local button = foundationModule.Button
-local view = foundationModule.View
-local buttonVariant = foundationModule.Enums.ButtonVariant
+﻿local Parent = script:FindFirstAncestor("GenericAbuseReporting").Parent
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local Button = FoundationModule.Button
+local View = FoundationModule.View
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
 
-local function validateSteps(p1)
-	if not p1 or type(p1) ~= "table" then
+local function validateSteps(Steps) --[[ Line: 58 ]]
+	if not Steps or type(Steps) ~= "table" then
 		return "Steps must not be nil and be a table", false
 	end
-	for i, v in pairs(p1) do
-		if i ~= v.stepId then
-			return `Step id mismatch: key {i} does not match step.stepId {v.stepId}`, false
+	for i, step in pairs(Steps) do
+		if i ~= step.stepId then
+			return `Step id mismatch: key {i} does not match step.stepId {step.stepId}`, false
 		end
 	end
 	return "", true
 end
 
-return reactModule.memo(function(p2)
-	-- upvalues: reactModule (ref), validateSteps (ref), cryoModule (ref), view (ref), button (ref), buttonVariant (ref)
-	local var1, var2 = reactModule.useState(p2.currentStep)
-	local var3, var4 = reactModule.useState({ p2.currentStep })
-	local var5 = reactModule.useCallback(function(p3)
-		-- upvalues: p2 (ref)
-		if p2.onErrorCallback then
-			p2.onErrorCallback(p3)
+return ReactModule.memo(function(p1) --[[ Line: 70 | Named "Stepper" ]]
+	-- upvalues: ReactModule (copy), validateSteps (copy), CryoModule (copy), View (copy), Button (copy), ButtonVariant (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(p1.currentStep)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState({ p1.currentStep })
+	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 74 ]]
+		-- upvalues: p1 (copy)
+		if p1.onErrorCallback then
+			p1.onErrorCallback(p2)
 			
 			return
+		else
+			warn(p2)
 		end
-		warn(p3)
-	end, { p2.onErrorCallback })
-	reactModule.useEffect(function()
-		-- upvalues: validateSteps (copy), p2 (ref), var5 (ref)
-		local var6, var7 = validateSteps(p2.steps)
+	end, { p1.onErrorCallback })
+	ReactModule.useEffect(function() --[[ Line: 82 ]]
+		-- upvalues: validateSteps (upval), p1 (copy), UseResult (copy)
+		local ValidateStepsResult, ValidateStepsResult2 = validateSteps(p1.steps)
 		
-		if not var7 then
-			var5(var6)
+		if not ValidateStepsResult2 then
+			UseResult(ValidateStepsResult)
 		end
-	end, { p2.steps, p2.onErrorCallback, var5 })
-	local var6 = reactModule.useMemo(function()
-		-- upvalues: p2 (ref), var1 (ref)
-		return p2.steps and p2.steps[var1]
-	end, { var1, p2.steps })
-	local var7 = reactModule.useCallback(function(p3)
-		-- upvalues: p2 (ref), var2 (ref), var3 (ref), var4 (ref), cryoModule (copy)
-		if not p2.steps[p3] then
+	end, { p1.steps, p1.onErrorCallback, UseResult })
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 89 ]]
+		-- upvalues: p1 (copy), UseStateResult (copy)
+		return p1.steps and p1.steps[UseStateResult]
+	end, { UseStateResult, p1.steps })
+	local UseResult1 = ReactModule.useCallback(function(Value): boolean --[[ Line: 95 ]]
+		-- upvalues: p1 (copy), UseStateResult2 (copy), UseStateResult1 (copy), UseStateResult2_1 (copy), CryoModule (upval)
+		if not p1.steps[Value] then
 			return false
 		end
-		var2(p3)
-		local index = table.find(var3, p3)
+		UseStateResult2(Value)
+		local FoundIndex: number? = table.find(UseStateResult1, Value)
 		
-		if index then
-			var4(function(p4)
-				-- upvalues: cryoModule (copy), index (ref)
-				return if #p4 == 0 then p4 else cryoModule.List.removeRange(p4, index + 1, #p4)
+		if FoundIndex then
+			UseStateResult2_1(function(p2) --[[ Line: 105 ]]
+				-- upvalues: CryoModule (upval), FoundIndex (copy)
+				return if #p2 == 0 then p2 else CryoModule.List.removeRange(p2, FoundIndex + 1, #p2)
 			end)
 		else
-			var4(function(p4)
-				-- upvalues: p3 (ref)
-				local cloned = table.clone(p4)
-				table.insert(cloned, p3)
+			UseStateResult2_1(function(Tbl) --[[ Line: 112 ]]
+				-- upvalues: Value (copy)
+				local Copy = table.clone(Tbl)
+				table.insert(Copy, Value)
 				
-				return cloned
+				return Copy
 			end)
 		end
 		return true
-	end, { p2.steps, var3 })
+	end, { p1.steps, UseStateResult1 })
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 122 ]]
+		-- upvalues: UseMemoResult (copy), UseResult1 (copy)
+		if not UseMemoResult or UseMemoResult.validateState and not UseMemoResult.validateState() then return end
+		if UseResult1(UseMemoResult.predefinedNextStepId) and UseMemoResult.onStepContinue then
+			UseMemoResult.onStepContinue()
+		end
+	end, { UseMemoResult, UseResult1 })
+	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 136 ]]
+		-- upvalues: UseStateResult1 (copy), UseResult1 (copy), UseMemoResult (copy)
+		local UseStateResultEntry = UseStateResult1[#UseStateResult1 - 1]
+		
+		if UseStateResultEntry and UseResult1(UseStateResultEntry) and UseMemoResult and UseMemoResult.onStepCancel then
+			UseMemoResult.onStepCancel()
+		end
+	end, { UseStateResult1, UseMemoResult, UseResult1 })
 	
-	return if var6 == nil then nil else reactModule.createElement(view, { tag = "auto-xy col flex-between" }, {
-		ContentContainer = reactModule.createElement(view, { tag = "size-full-0 auto-y", LayoutOrder = 0 }, var6.content),
-		ButtonRow = reactModule.createElement(view, {
+	return if UseMemoResult == nil then nil else ReactModule.createElement(View, { tag = "auto-xy col flex-between" }, {
+		ContentContainer = ReactModule.createElement(View, { tag = "size-full-0 auto-y", LayoutOrder = 0 }, UseMemoResult.content),
+		ButtonRow = ReactModule.createElement(View, {
 			LayoutOrder = 1,
-			tag = `size-full-0 auto-y padding-y-small gap-small row {var6.stepStyle and var6.stepStyle.buttonXAlignment}`
+			tag = `size-full-0 auto-y padding-y-small gap-small row {UseMemoResult.stepStyle and UseMemoResult.stepStyle.buttonXAlignment}`
 		}, {
-			BackButton = if var6.labels and var6.labels.backButton then reactModule.createElement(button, {
+			BackButton = if UseMemoResult.labels and UseMemoResult.labels.backButton then ReactModule.createElement(Button, {
 				LayoutOrder = 0,
-				onActivated = reactModule.useCallback(function()
-					-- upvalues: var3 (ref), var7 (ref), var6 (ref)
-					local var8 = var3[#var3 - 1]
-					
-					if var8 and var7(var8) and (var6 and var6.onStepCancel) then
-						var6.onStepCancel()
-					end
-				end, { var3, var6, var7 }),
-				text = var6.labels.backButton,
-				variant = var6.stepStyle and (var6.stepStyle.backButton and (var6.stepStyle.backButton.variant or buttonVariant.Text)),
-				fillBehavior = var6.stepStyle and (var6.stepStyle.backButton and (var6.stepStyle.backButton.fillBehavior or nil))
+				onActivated = UseResult3,
+				text = UseMemoResult.labels.backButton,
+				variant = UseMemoResult.stepStyle and UseMemoResult.stepStyle.backButton and UseMemoResult.stepStyle.backButton.variant or ButtonVariant.Text,
+				fillBehavior = UseMemoResult.stepStyle and UseMemoResult.stepStyle.backButton and UseMemoResult.stepStyle.backButton.fillBehavior or nil
 			}) else nil,
-			ContinueButton = if var6.labels and var6.labels.continueButton then reactModule.createElement(button, {
+			ContinueButton = if UseMemoResult.labels and UseMemoResult.labels.continueButton then ReactModule.createElement(Button, {
 				LayoutOrder = 1,
-				onActivated = reactModule.useCallback(function()
-					-- upvalues: var6 (ref), var7 (ref)
-					if not var6 or var6.validateState and not var6.validateState() then return end
-					if var7(var6.predefinedNextStepId) and var6.onStepContinue then
-						var6.onStepContinue()
-					end
-				end, { var6, var7 }),
-				text = var6.labels.continueButton,
-				variant = var6.stepStyle and (var6.stepStyle.continueButton and (var6.stepStyle.continueButton.variant or buttonVariant.Standard)),
-				fillBehavior = var6.stepStyle and (var6.stepStyle.continueButton and (var6.stepStyle.continueButton.fillBehavior or nil))
+				onActivated = UseResult2,
+				text = UseMemoResult.labels.continueButton,
+				variant = UseMemoResult.stepStyle and UseMemoResult.stepStyle.continueButton and UseMemoResult.stepStyle.continueButton.variant or ButtonVariant.Standard,
+				fillBehavior = UseMemoResult.stepStyle and UseMemoResult.stepStyle.continueButton and UseMemoResult.stepStyle.continueButton.fillBehavior or nil
 			}) else nil
 		}),
-		FooterContainer = if var6.footer then reactModule.createElement(view, { tag = "size-full-0 auto-y col", LayoutOrder = 2 }, {
-			Divider = reactModule.createElement(view, {
+		FooterContainer = if UseMemoResult.footer then ReactModule.createElement(View, { tag = "size-full-0 auto-y col", LayoutOrder = 2 }, {
+			Divider = ReactModule.createElement(View, {
 				tag = "size-full-50 bg-shift-100 padding-bottom-medium",
 				LayoutOrder = 0
 			}),
-			Footer = reactModule.createElement(view, { tag = "auto-xy padding-top-medium" }, var6.footer)
+			Footer = ReactModule.createElement(View, { tag = "auto-xy padding-top-medium" }, UseMemoResult.footer)
 		}) else nil
 	})
 end)

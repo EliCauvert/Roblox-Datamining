@@ -1,39 +1,39 @@
-﻿local dependenciesModule = require(script:FindFirstAncestor("SocialLibraries").dependencies)
-local llama = dependenciesModule.llama
-local enumsModule = require(script.Parent.Parent.Analytics.Enums)
-local contexts = enumsModule.Contexts
-local eventTypes = enumsModule.EventTypes
-local subPages = enumsModule.SubPages
-local pages = enumsModule.Pages
+﻿local DependenciesModule = require(script:FindFirstAncestor("SocialLibraries").dependencies)
+local Llama = DependenciesModule.llama
+local EnumsModule = require(script.Parent.Parent.Analytics.Enums)
+local Contexts = EnumsModule.Contexts
+local EventTypes = EnumsModule.EventTypes
+local SubPages = EnumsModule.SubPages
+local Pages = EnumsModule.Pages
 local _ = require(script.Parent.Parent.Analytics.FireEvent.Types)
-local isEnumModule = require(script.Parent.Parent.Utils.isEnum)
-local t = dependenciesModule.t
-local formatKeyValidationErrorModule = require(script.Parent.formatKeyValidationError)
-local formatErrorForIncorrectKeyModule = require(script.Parent.formatErrorForIncorrectKey)
-local var1 = t.strictInterface({
-	context = t.any,
-	eventType = t.any,
-	additionalInfo = t.optional(t.table),
-	formatRulesForAdditionalInfo = t.optional(t.table)
+local IsEnumModule = require(script.Parent.Parent.Utils.isEnum)
+local T = DependenciesModule.t
+local FormatKeyValidationErrorModule = require(script.Parent.formatKeyValidationError)
+local FormatErrorForIncorrectKeyModule = require(script.Parent.formatErrorForIncorrectKey)
+local StrictInterfaceResult = T.strictInterface({
+	context = T.any,
+	eventType = T.any,
+	additionalInfo = T.optional(T.table),
+	formatRulesForAdditionalInfo = T.optional(T.table)
 })
 
-return function(p1, p2)
-	-- upvalues: llama (ref), isEnumModule (ref), contexts (ref), formatKeyValidationErrorModule (ref), eventTypes (ref), formatErrorForIncorrectKeyModule (ref), var1 (ref), subPages (ref), pages (ref)
-	llama.Dictionary.map(p1, function(p3, p4)
-		-- upvalues: isEnumModule (copy), contexts (copy), formatKeyValidationErrorModule (copy), eventTypes (copy), formatErrorForIncorrectKeyModule (copy), var1 (copy), subPages (copy), pages (copy), llama (copy), p2 (ref)
-		local var2 = if isEnumModule(p4) then p4.rawValue() else p4
-		assert(contexts.isEnumValue(p3.context), formatKeyValidationErrorModule("context", "a Context enum", var2))
-		assert(eventTypes.isEnumValue(p3.eventType), formatKeyValidationErrorModule("eventType", "an EventType enum", var2))
-		assert(if type(p3.additionalInfo) ~= "table" then p3.additionalInfo == nil else true, formatKeyValidationErrorModule("additionalInfo", "nil or a table", var2))
-		assert(if type(p3.formatRulesForAdditionalInfo) ~= "table" then p3.formatRulesForAdditionalInfo == nil else true, formatKeyValidationErrorModule("formatRulesForAdditionalInfo", "nil or a table", var2))
-		assert(formatErrorForIncorrectKeyModule(var1)(p3, var2))
+return function(p1, p2): boolean --[[ Line: 23 ]]
+	-- upvalues: Llama (copy), IsEnumModule (copy), Contexts (copy), FormatKeyValidationErrorModule (copy), EventTypes (copy), FormatErrorForIncorrectKeyModule (copy), StrictInterfaceResult (copy), SubPages (copy), Pages (copy)
+	Llama.Dictionary.map(p1, function(p3, p4) --[[ Line: 24 ]]
+		-- upvalues: IsEnumModule (upval), Contexts (upval), FormatKeyValidationErrorModule (upval), EventTypes (upval), FormatErrorForIncorrectKeyModule (upval), StrictInterfaceResult (upval), SubPages (upval), Pages (upval), Llama (upval), p2 (copy)
+		local RawValueResult = if IsEnumModule(p4) then p4.rawValue() else p4
+		assert(Contexts.isEnumValue(p3.context), FormatKeyValidationErrorModule("context", "a Context enum", RawValueResult))
+		assert(EventTypes.isEnumValue(p3.eventType), FormatKeyValidationErrorModule("eventType", "an EventType enum", RawValueResult))
+		assert(type(p3.additionalInfo) == "table" or p3.additionalInfo == nil, FormatKeyValidationErrorModule("additionalInfo", "nil or a table", RawValueResult))
+		assert(type(p3.formatRulesForAdditionalInfo) == "table" or p3.formatRulesForAdditionalInfo == nil, FormatKeyValidationErrorModule("formatRulesForAdditionalInfo", "nil or a table", RawValueResult))
+		assert(FormatErrorForIncorrectKeyModule(StrictInterfaceResult)(p3, RawValueResult))
 		
 		if p3.additionalInfo then
-			assert(if p3.additionalInfo.subpage ~= nil then subPages.isEnumValue(p3.additionalInfo.subpage) else true, formatKeyValidationErrorModule("subpage additional info", "SubPages enum", var2))
-			assert(if p3.additionalInfo.page ~= nil then pages.isEnumValue(p3.additionalInfo.page) else true, formatKeyValidationErrorModule("page additional info", "Pages enum", var2))
-			llama.Dictionary.map(p2 or {}, function(p5, p6)
-				-- upvalues: p3 (ref), var2 (ref)
-				assert(p5(p3.additionalInfo[p6]), p6 .. " key is invalid. Issue with: " .. var6)
+			assert(p3.additionalInfo.subpage == nil or SubPages.isEnumValue(p3.additionalInfo.subpage), FormatKeyValidationErrorModule("subpage additional info", "SubPages enum", RawValueResult))
+			assert(p3.additionalInfo.page == nil or Pages.isEnumValue(p3.additionalInfo.page), FormatKeyValidationErrorModule("page additional info", "Pages enum", RawValueResult))
+			Llama.Dictionary.map(p2 or {}, function(Callback, Text) --[[ Line: 53 ]]
+				-- upvalues: p3 (copy), RawValueResult (copy)
+				assert(Callback(p3.additionalInfo[Text]), Text .. " key is invalid. Issue with: " .. RawValueResult)
 			end)
 		end
 	end)

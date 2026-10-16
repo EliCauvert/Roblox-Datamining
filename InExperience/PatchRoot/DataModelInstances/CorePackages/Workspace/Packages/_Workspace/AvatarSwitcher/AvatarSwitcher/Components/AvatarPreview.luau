@@ -1,120 +1,120 @@
-﻿local avatarSwitcher = script:FindFirstAncestor("AvatarSwitcher")
-local parent = avatarSwitcher.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local foundationCloudAssetsModule = require(parent.FoundationCloudAssets)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local sendAXCounterV2 = require(parent.AvatarExperienceAnalytics).sendAXCounterV2
-local outfitViewportModule = require(avatarSwitcher.Components.OutfitViewport.OutfitViewport)
-local constantsModule = require(avatarSwitcher.Constants)
-local avatarSwitcher3DPreview = game:DefineFastFlag("AvatarSwitcher3DPreview", false)
-local fFlagAvatarSwitcherAccurateAvatarWarning = require(parent.AvatarExperienceFlags).FFlagAvatarSwitcherAccurateAvatarWarning
-local fFlagAvatarSwitcherWarningLayoutFix = require(parent.AvatarExperienceFlags).FFlagAvatarSwitcherWarningLayoutFix
-local fFlagAvatarSwitcherCounters = require(parent.AvatarExperienceFlags).FFlagAvatarSwitcherCounters
-local fFlagAXBackgroundsInOutfitThumbnails = require(parent.SharedFlags).FFlagAXBackgroundsInOutfitThumbnails
-local t = {
-	AVATAR = foundationCloudAssetsModule.Assets["pictograms/avatar"],
-	AVATAR_ISSUE = foundationCloudAssetsModule.Assets["pictograms/avatar_issue"]
+﻿local AvatarSwitcher = script:FindFirstAncestor("AvatarSwitcher")
+local Parent = AvatarSwitcher.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local FoundationCloudAssetsModule = require(Parent.FoundationCloudAssets)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local SendAXCounterV2Function = require(Parent.AvatarExperienceAnalytics).sendAXCounterV2
+local OutfitViewportModule = require(AvatarSwitcher.Components.OutfitViewport.OutfitViewport)
+local ConstantsModule = require(AvatarSwitcher.Constants)
+local AvatarSwitcher3DPreview = game:DefineFastFlag("AvatarSwitcher3DPreview", false)
+local FFlagAvatarSwitcherAccurateAvatarWarning = require(Parent.AvatarExperienceFlags).FFlagAvatarSwitcherAccurateAvatarWarning
+local FFlagAvatarSwitcherWarningLayoutFix = require(Parent.AvatarExperienceFlags).FFlagAvatarSwitcherWarningLayoutFix
+local FFlagAvatarSwitcherCounters = require(Parent.AvatarExperienceFlags).FFlagAvatarSwitcherCounters
+local FFlagAXBackgroundsInOutfitThumbnails = require(Parent.SharedFlags).FFlagAXBackgroundsInOutfitThumbnails
+local config = {
+	AVATAR = FoundationCloudAssetsModule.Assets["pictograms/avatar"],
+	AVATAR_ISSUE = FoundationCloudAssetsModule.Assets["pictograms/avatar_issue"]
 }
 
-return function(p1)
-	-- upvalues: reactModule (ref), useLocalization (ref), useTokens (ref), foundationModule (ref), t (ref), avatarSwitcher3DPreview (ref), outfitViewportModule (ref), fFlagAvatarSwitcherCounters (ref), sendAXCounterV2 (ref), constantsModule (ref), fFlagAvatarSwitcherAccurateAvatarWarning (ref), fFlagAvatarSwitcherWarningLayoutFix (ref), fFlagAXBackgroundsInOutfitThumbnails (ref)
-	local var1, var2 = reactModule.useState(false)
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref)
-		var2(false)
+return function(p1) --[[ Line: 46 | Named "AvatarPreview" ]]
+	-- upvalues: ReactModule (copy), UseLocalizationFunction (copy), UseTokensFunction (copy), FoundationModule (copy), config (copy), AvatarSwitcher3DPreview (copy), OutfitViewportModule (copy), FFlagAvatarSwitcherCounters (copy), SendAXCounterV2Function (copy), ConstantsModule (copy), FFlagAvatarSwitcherAccurateAvatarWarning (copy), FFlagAvatarSwitcherWarningLayoutFix (copy), FFlagAXBackgroundsInOutfitThumbnails (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	ReactModule.useEffect(function() --[[ Line: 48 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(false)
 	end, { p1.outfitId })
-	local var3 = useLocalization({
+	local UseLocalizationResult = UseLocalizationFunction({
 		selectAvatar = "Feature.AvatarSwitcher.Message.SelectAvatar",
 		unkownSupportHeader = "Feature.AvatarSwitcher.Heading.UnknownSupport",
 		unkownSupportContent = "Feature.AvatarSwitcher.Message.UnknownSupport",
 		partiallyUnsupported = "Feature.AvatarSwitcher.Message.PartiallyUnsupported"
 	})
-	local var4 = useTokens()
+	local UseTokensResult = UseTokensFunction()
 	
-	return if p1.outfitId == nil then reactModule.createElement(foundationModule.View, {
+	return if p1.outfitId == nil then ReactModule.createElement(FoundationModule.View, {
 		tag = "size-full col align-x-center align-y-center",
 		padding = {
-			bottom = UDim.new(0, p1.messageBottomPadding or var4.Padding.Medium)
+			bottom = UDim.new(0, p1.messageBottomPadding or UseTokensResult.Padding.Medium)
 		}
 	}, {
-		Image = reactModule.createElement(foundationModule.Image, {
+		Image = ReactModule.createElement(FoundationModule.Image, {
 			LayoutOrder = 1,
-			Image = t.AVATAR.assetId,
-			Size = UDim2.fromOffset(t.AVATAR.size.X / 3, t.AVATAR.size.Y / 3)
+			Image = config.AVATAR.assetId,
+			Size = UDim2.fromOffset(config.AVATAR.size.X / 3, config.AVATAR.size.Y / 3)
 		}),
-		Text = reactModule.createElement(foundationModule.Text, {
+		Text = ReactModule.createElement(FoundationModule.Text, {
 			tag = "auto-xy text-title-medium",
 			LayoutOrder = 2,
-			Text = var3.selectAvatar
+			Text = UseLocalizationResult.selectAvatar
 		})
-	}) elseif p1.showAvatarSupportWarning then reactModule.createElement(foundationModule.View, {
+	}) elseif p1.showAvatarSupportWarning then ReactModule.createElement(FoundationModule.View, {
 		tag = "size-full",
 		padding = {
-			bottom = UDim.new(0, p1.messageBottomPadding or var4.Padding.Medium)
+			bottom = UDim.new(0, p1.messageBottomPadding or UseTokensResult.Padding.Medium)
 		}
 	}, {
-		ScrollView = reactModule.createElement(foundationModule.ScrollView, {
+		ScrollView = ReactModule.createElement(FoundationModule.ScrollView, {
 			tag = "size-full",
 			scroll = {
 				CanvasSize = UDim2.fromScale(0, 1),
 				AutomaticCanvasSize = Enum.AutomaticSize.Y,
-				scrollBarVisibility = foundationModule.Enums.ScrollBarVisibility.None
+				scrollBarVisibility = FoundationModule.Enums.ScrollBarVisibility.None
 			}
 		}, {
-			ScrollingContent = reactModule.createElement(foundationModule.View, { tag = "size-full col align-x-center align-y-center" }, {
-				Image = reactModule.createElement(foundationModule.Image, {
+			ScrollingContent = ReactModule.createElement(FoundationModule.View, { tag = "size-full col align-x-center align-y-center" }, {
+				Image = ReactModule.createElement(FoundationModule.Image, {
 					LayoutOrder = 1,
-					Image = t.AVATAR_ISSUE.assetId,
-					Size = UDim2.fromOffset(t.AVATAR_ISSUE.size.X / 3, t.AVATAR_ISSUE.size.Y / 3)
+					Image = config.AVATAR_ISSUE.assetId,
+					Size = UDim2.fromOffset(config.AVATAR_ISSUE.size.X / 3, config.AVATAR_ISSUE.size.Y / 3)
 				}),
-				Header = reactModule.createElement(foundationModule.Text, {
+				Header = ReactModule.createElement(FoundationModule.Text, {
 					tag = "auto-y size-full-0 text-title-medium text-wrap padding-bottom-small",
 					LayoutOrder = 2,
-					Text = var3.unkownSupportHeader
+					Text = UseLocalizationResult.unkownSupportHeader
 				}),
-				Content = reactModule.createElement(foundationModule.Text, {
+				Content = ReactModule.createElement(FoundationModule.Text, {
 					tag = "auto-y size-full-0 text-body-small text-wrap",
 					LayoutOrder = 3,
-					Text = var3.unkownSupportContent
+					Text = UseLocalizationResult.unkownSupportContent
 				})
 			})
 		})
-	}) elseif avatarSwitcher3DPreview and not var1 then reactModule.createElement(foundationModule.View, { tag = "size-full col" }, {
-		OutfitViewportContainer = reactModule.createElement(foundationModule.View, { tag = "size-full-0 grow", LayoutOrder = 1 }, {
-			OutfitViewport = reactModule.createElement(outfitViewportModule, {
+	}) elseif AvatarSwitcher3DPreview and not UseStateResult then ReactModule.createElement(FoundationModule.View, { tag = "size-full col" }, {
+		OutfitViewportContainer = ReactModule.createElement(FoundationModule.View, { tag = "size-full-0 grow", LayoutOrder = 1 }, {
+			OutfitViewport = ReactModule.createElement(OutfitViewportModule, {
 				outfitId = p1.outfitId,
 				rigType = p1.rigType,
-				onLoadingFailed = function()
-					-- upvalues: fFlagAvatarSwitcherCounters (copy), sendAXCounterV2 (copy), constantsModule (copy), var2 (ref)
-					if fFlagAvatarSwitcherCounters then
-						sendAXCounterV2(constantsModule.Counters.AvatarPreviewLoadFailed)
+				onLoadingFailed = function() --[[ Line: 131 ]]
+					-- upvalues: FFlagAvatarSwitcherCounters (upval), SendAXCounterV2Function (upval), ConstantsModule (upval), UseStateResult2 (copy)
+					if FFlagAvatarSwitcherCounters then
+						SendAXCounterV2Function(ConstantsModule.Counters.AvatarPreviewLoadFailed)
 					end
-					var2(true)
+					UseStateResult2(true)
 				end,
-				onLoaded = if fFlagAvatarSwitcherAccurateAvatarWarning then p1.onAvatarPreviewLoaded else nil
+				onLoaded = if FFlagAvatarSwitcherAccurateAvatarWarning then p1.onAvatarPreviewLoaded else nil
 			})
 		}),
-		CompatibilityWarningContainer = not fFlagAvatarSwitcherWarningLayoutFix and (p1.showAvatarTypeCompatibilityWarning and reactModule.createElement(foundationModule.View, {
+		CompatibilityWarningContainer = not FFlagAvatarSwitcherWarningLayoutFix and (p1.showAvatarTypeCompatibilityWarning and ReactModule.createElement(FoundationModule.View, {
 			tag = "size-full-0 auto-y padding-y-medium",
 			LayoutOrder = 2
 		}, {
-			InfoIcon = reactModule.createElement(foundationModule.Image, {
+			InfoIcon = ReactModule.createElement(FoundationModule.Image, {
 				Image = "icons/actions/info",
 				LayoutOrder = 1,
-				Size = UDim2.fromOffset(var4.Size.Size_500, var4.Size.Size_500)
+				Size = UDim2.fromOffset(UseTokensResult.Size.Size_500, UseTokensResult.Size.Size_500)
 			}),
-			CompatibilityWarning = reactModule.createElement(foundationModule.Text, {
+			CompatibilityWarning = ReactModule.createElement(FoundationModule.Text, {
 				tag = "auto-y position-top-right anchor-top-right text-caption-small text-wrap text-align-x-left padding-top-xsmall",
 				LayoutOrder = 2,
-				Size = UDim2.new(1, (-var4.Size.Size_500) - var4.Gap.Small, 0, 0),
-				Text = var3.partiallyUnsupported
+				Size = UDim2.new(1, -UseTokensResult.Size.Size_500 - UseTokensResult.Gap.Small, 0, 0),
+				Text = UseLocalizationResult.partiallyUnsupported
 			})
 		}))
-	}) else reactModule.createElement(foundationModule.Image, {
+	}) else ReactModule.createElement(FoundationModule.Image, {
 		tag = "size-full",
-		Image = if fFlagAXBackgroundsInOutfitThumbnails then `rbxthumb://type=Outfit&id={p1.outfitId}&w=420&h=420&includeBackground=true` else `rbxthumb://type=Outfit&id={p1.outfitId}&w=420&h=420`,
+		Image = if FFlagAXBackgroundsInOutfitThumbnails then `rbxthumb://type=Outfit&id={p1.outfitId}&w=420&h=420&includeBackground=true` else `rbxthumb://type=Outfit&id={p1.outfitId}&w=420&h=420`,
 		ScaleType = p1.imageScaleType
 	}, {})
 end

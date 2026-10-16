@@ -1,27 +1,27 @@
-﻿local httpService = game:GetService("HttpService")
+﻿local HttpService = game:GetService("HttpService")
 
-return function(p1)
-	-- upvalues: httpService (ref)
-	if p1 == nil or p1.errors == nil or (not p1.errors[1] or not p1.errors[1].fieldData) then
+return function(p1) --[[ Line: 3 ]]
+	-- upvalues: HttpService (copy)
+	if p1 == nil or p1.errors == nil or not p1.errors[1] or not p1.errors[1].fieldData then
 		return "", ""
 	end
-	local fieldData = p1.errors[1].fieldData
-	local ok, status = pcall(function()
-		-- upvalues: httpService (copy), fieldData (ref)
-		return httpService:JSONDecode(fieldData)
+	local FieldData = p1.errors[1].fieldData
+	local Success, Result = pcall(function() --[[ Line: 11 ]]
+		-- upvalues: HttpService (upval), FieldData (copy)
+		return HttpService:JSONDecode(FieldData)
 	end)
 	
-	if not ok then
-		return "", fieldData
+	if not Success then
+		return "", FieldData
 	end
-	local var1 = ""
-	local var2 = ""
+	local UnifiedCaptchaId = ""
+	local DxBlob = ""
 	
-	if status.unifiedCaptchaId then
-		var1 = status.unifiedCaptchaId
+	if Result.unifiedCaptchaId then
+		UnifiedCaptchaId = Result.unifiedCaptchaId
 	end
-	if status.dxBlob then
-		var2 = status.dxBlob
+	if Result.dxBlob then
+		DxBlob = Result.dxBlob
 	end
-	return var1, var2
+	return UnifiedCaptchaId, DxBlob
 end

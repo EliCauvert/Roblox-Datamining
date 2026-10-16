@@ -1,15 +1,15 @@
-﻿local momentsCommonModule = require(script:FindFirstAncestor("Moments").Parent.MomentsCommon)
-local analytics = momentsCommonModule.Analytics
-local funnelEventNames = analytics.FunnelEventNames
-local fFlagMomentsRealtimeSessionTelemetry = momentsCommonModule.Flags.FFlagMomentsRealtimeSessionTelemetry
+﻿local MomentsCommonModule = require(script:FindFirstAncestor("Moments").Parent.MomentsCommon)
+local Analytics = MomentsCommonModule.Analytics
+local FunnelEventNames = Analytics.FunnelEventNames
+local FFlagMomentsRealtimeSessionTelemetry = MomentsCommonModule.Flags.FFlagMomentsRealtimeSessionTelemetry
 
-return function(p1)
-	-- upvalues: analytics (ref), funnelEventNames (ref), fFlagMomentsRealtimeSessionTelemetry (ref)
-	local var1 = analytics.SessionManager.startSession(funnelEventNames.FunnelTypes.CreationFlow)
-	analytics.fireFunnelAnalyticsEvent(funnelEventNames.FunnelTypes.CreationFlow, funnelEventNames.CreationFlowSteps.CreateIntent, var1, { source = p1 })
-	analytics.fireAnalyticsEvent(analytics.EventNames.MomentCreationStarted, { source = p1, creationSessionId = var1 })
+return function(Source) --[[ Line: 32 | Named "logCreateIntent" ]]
+	-- upvalues: Analytics (copy), FunnelEventNames (copy), FFlagMomentsRealtimeSessionTelemetry (copy)
+	local StartSessionResult = Analytics.SessionManager.startSession(FunnelEventNames.FunnelTypes.CreationFlow)
+	Analytics.fireFunnelAnalyticsEvent(FunnelEventNames.FunnelTypes.CreationFlow, FunnelEventNames.CreationFlowSteps.CreateIntent, StartSessionResult, { source = Source })
+	Analytics.fireAnalyticsEvent(Analytics.EventNames.MomentCreationStarted, { source = Source, creationSessionId = StartSessionResult })
 	
-	if fFlagMomentsRealtimeSessionTelemetry then
-		analytics.reportMomentsCreationStep("create_intent")
+	if FFlagMomentsRealtimeSessionTelemetry then
+		Analytics.reportMomentsCreationStep("create_intent")
 	end
 end

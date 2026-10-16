@@ -1,6 +1,6 @@
-﻿local inExperienceOffers = script:FindFirstAncestor("InExperienceOffers")
-local _ = require(inExperienceOffers.Enums.FeatureKey)
-local _ = require(inExperienceOffers.Enums.NotificationLocation)
-local _ = require(inExperienceOffers.Enums.OfferStatus)
+﻿local InExperienceOffers = script:FindFirstAncestor("InExperienceOffers")
+local _ = require(InExperienceOffers.Enums.FeatureKey)
+local _ = require(InExperienceOffers.Enums.NotificationLocation)
+local _ = require(InExperienceOffers.Enums.OfferStatus)
 
 return {}

@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("HomepagePromptsHalloween2026Theme", false)

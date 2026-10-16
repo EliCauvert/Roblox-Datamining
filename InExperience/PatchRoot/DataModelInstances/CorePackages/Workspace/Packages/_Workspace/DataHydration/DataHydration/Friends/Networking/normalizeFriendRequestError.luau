@@ -1,21 +1,21 @@
-﻿local httpService = game:GetService("HttpService")
+﻿local HttpService = game:GetService("HttpService")
 
-return function(p1)
-	-- upvalues: httpService (ref)
-	local var1 = if type(p1) == "table" then p1.StatusCode else nil
-	local code = nil
-	local var2 = if type(p1) == "table" then p1.Body else nil
+return function(p1) --[[ Line: 14 ]]
+	-- upvalues: HttpService (copy)
+	local StatusCode = if type(p1) == "table" then p1.StatusCode else nil
+	local Code = nil
+	local Body = if type(p1) == "table" then p1.Body else nil
 	
-	if type(var2) == "string" then
-		local ok, status = pcall(httpService.JSONDecode, httpService, var2)
+	if type(Body) == "string" then
+		local Success, Result = pcall(HttpService.JSONDecode, HttpService, Body)
 		
-		if ok and type(status) == "table" then
-			local errors = status.errors
+		if Success and type(Result) == "table" then
+			local Errors = Result.errors
 			
-			if type(errors) == "table" and errors[1] then
-				code = errors[1].code
+			if type(Errors) == "table" and Errors[1] then
+				Code = Errors[1].code
 			end
 		end
 	end
-	return { statusCode = var1, firstErrorCode = code }
+	return { statusCode = StatusCode, firstErrorCode = Code }
 end

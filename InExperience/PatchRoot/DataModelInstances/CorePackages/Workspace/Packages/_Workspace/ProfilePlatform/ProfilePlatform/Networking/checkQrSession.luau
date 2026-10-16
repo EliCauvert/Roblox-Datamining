@@ -1,7 +1,7 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local httpModule = require(profilePlatform.Parent.Http)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local HttpModule = require(ProfilePlatform.Parent.Http)
 
-return require(profilePlatform.Networking.myRoduxNetworking).GET("CheckQRSession", function(p1, p2)
-	-- upvalues: httpModule (ref)
-	return p1(httpModule.Url.FRIEND_URL):path("my"):path("friends"):path(tostring(p2)):path("check-qr-session")
+return require(ProfilePlatform.Networking.myRoduxNetworking).GET("CheckQRSession", function(Callback, p1) --[[ Line: 6 | Named "buildUrl" ]]
+	-- upvalues: HttpModule (copy)
+	return Callback(HttpModule.Url.FRIEND_URL):path("my"):path("friends"):path((tostring(p1))):path("check-qr-session")
 end)

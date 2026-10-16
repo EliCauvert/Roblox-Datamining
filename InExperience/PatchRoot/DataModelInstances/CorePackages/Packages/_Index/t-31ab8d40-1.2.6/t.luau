@@ -1,805 +1,896 @@
-﻿local typeof = typeof or type
+﻿local Typeof1 = typeof or type
 
-local function _(p1)
-	-- upvalues: typeof (ref)
-	return function(p2)
-		-- upvalues: typeof (copy), p1 (ref)
-		local var1 = typeof(p2)
+local function _(p1) --[[ Line: 6 | Named "primitive" ]]
+	-- upvalues: Typeof1 (copy)
+	return function(p2) --[[ Line: 7 ]]
+		-- upvalues: Typeof1 (upval), p1 (copy)
+		local TypeofResult = Typeof1(p2)
 		
-		if var1 == p1 then
+		if TypeofResult == p1 then
 			return true
+		else
+			return false, string.format("%s expected, got %s", p1, TypeofResult)
 		end
-		return false, string.format("%s expected, got %s", p1, var1)
 	end
 end
 
-local t = {
-	any = function(p1)
-		if p1 == nil then
-			return false, "any expected, got nil"
-		end
+local function any(p1) --[[ Line: 26 ]]
+	if p1 == nil then
+		return false, "any expected, got nil"
+	else
 		return true
+	end
+end
+
+local v1 = "boolean"
+
+local function Boolean(p1) --[[ Line: 7 ]]
+	-- upvalues: Typeof1 (copy), v1 (copy)
+	local TypeofResult = Typeof1(p1)
+	
+	if TypeofResult == v1 then
+		return true
+	else
+		return false, string.format("%s expected, got %s", v1, TypeofResult)
+	end
+end
+
+local v2 = "thread"
+
+local function Thread(p1) --[[ Line: 7 ]]
+	-- upvalues: Typeof1 (copy), v2 (copy)
+	local TypeofResult = Typeof1(p1)
+	
+	if TypeofResult == v2 then
+		return true
+	else
+		return false, string.format("%s expected, got %s", v2, TypeofResult)
+	end
+end
+
+local v3 = "function"
+
+local function Callback(p1) --[[ Line: 7 ]]
+	-- upvalues: Typeof1 (copy), v3 (copy)
+	local TypeofResult = Typeof1(p1)
+	
+	if TypeofResult == v3 then
+		return true
+	else
+		return false, string.format("%s expected, got %s", v3, TypeofResult)
+	end
+end
+
+local v4 = "nil"
+
+local function None(p1) --[[ Line: 7 ]]
+	-- upvalues: Typeof1 (copy), v4 (copy)
+	local TypeofResult = Typeof1(p1)
+	
+	if TypeofResult == v4 then
+		return true
+	else
+		return false, string.format("%s expected, got %s", v4, TypeofResult)
+	end
+end
+
+local v5 = "string"
+
+local function v12(p1) --[[ Line: 7 ]]
+	-- upvalues: Typeof1 (copy), v5 (copy)
+	local TypeofResult = Typeof1(p1)
+	
+	if TypeofResult == v5 then
+		return true
+	else
+		return false, string.format("%s expected, got %s", v5, TypeofResult)
+	end
+end
+
+local v6 = "table"
+
+local function v14(p1) --[[ Line: 7 ]]
+	-- upvalues: Typeof1 (copy), v6 (copy)
+	local TypeofResult = Typeof1(p1)
+	
+	if TypeofResult == v6 then
+		return true
+	else
+		return false, string.format("%s expected, got %s", v6, TypeofResult)
+	end
+end
+
+local v7 = "userdata"
+
+local function Userdata(p1) --[[ Line: 7 ]]
+	-- upvalues: Typeof1 (copy), v7 (copy)
+	local TypeofResult = Typeof1(p1)
+	
+	if TypeofResult == v7 then
+		return true
+	else
+		return false, string.format("%s expected, got %s", v7, TypeofResult)
+	end
+end
+
+local v8 = "Axes"
+
+local function Axes(p1) --[[ Line: 7 ]]
+	-- upvalues: Typeof1 (copy), v8 (copy)
+	local TypeofResult = Typeof1(p1)
+	
+	if TypeofResult == v8 then
+		return true
+	else
+		return false, string.format("%s expected, got %s", v8, TypeofResult)
+	end
+end
+
+local v9 = "BrickColor"
+
+local function v20(p1) --[[ Line: 7 ]]
+	-- upvalues: Typeof1 (copy), v9 (copy)
+	local TypeofResult = Typeof1(p1)
+	
+	if TypeofResult == v9 then
+		return true
+	else
+		return false, string.format("%s expected, got %s", v9, TypeofResult)
+	end
+end
+
+local v10 = "CFrame"
+
+local function v22(p1) --[[ Line: 7 ]]
+	-- upvalues: Typeof1 (copy), v10 (copy)
+	local TypeofResult = Typeof1(p1)
+	
+	if TypeofResult == v10 then
+		return true
+	else
+		return false, string.format("%s expected, got %s", v10, TypeofResult)
+	end
+end
+
+local v11 = "Color3"
+
+local function v24(p1) --[[ Line: 7 ]]
+	-- upvalues: Typeof1 (copy), v11 (copy)
+	local TypeofResult = Typeof1(p1)
+	
+	if TypeofResult == v11 then
+		return true
+	else
+		return false, string.format("%s expected, got %s", v11, TypeofResult)
+	end
+end
+
+local v12 = "ColorSequence"
+
+local function ColorSequence(p1) --[[ Line: 7 ]]
+	-- upvalues: Typeof1 (copy), v12 (copy)
+	local TypeofResult = Typeof1(p1)
+	
+	if TypeofResult == v12 then
+		return true
+	else
+		return false, string.format("%s expected, got %s", v12, TypeofResult)
+	end
+end
+
+local v13 = "ColorSequenceKeypoint"
+
+local function ColorSequenceKeypoint(p1) --[[ Line: 7 ]]
+	-- upvalues: Typeof1 (copy), v13 (copy)
+	local TypeofResult = Typeof1(p1)
+	
+	if TypeofResult == v13 then
+		return true
+	else
+		return false, string.format("%s expected, got %s", v13, TypeofResult)
+	end
+end
+
+local v14 = "DockWidgetPluginGuiInfo"
+
+local function DockWidgetPluginGuiInfo(p1) --[[ Line: 7 ]]
+	-- upvalues: Typeof1 (copy), v14 (copy)
+	local TypeofResult = Typeof1(p1)
+	
+	if TypeofResult == v14 then
+		return true
+	else
+		return false, string.format("%s expected, got %s", v14, TypeofResult)
+	end
+end
+
+local v15 = "Faces"
+
+local function Faces(p1) --[[ Line: 7 ]]
+	-- upvalues: Typeof1 (copy), v15 (copy)
+	local TypeofResult = Typeof1(p1)
+	
+	if TypeofResult == v15 then
+		return true
+	else
+		return false, string.format("%s expected, got %s", v15, TypeofResult)
+	end
+end
+
+local v16 = "Instance"
+
+local function v34(p1) --[[ Line: 7 ]]
+	-- upvalues: Typeof1 (copy), v16 (copy)
+	local TypeofResult = Typeof1(p1)
+	
+	if TypeofResult == v16 then
+		return true
+	else
+		return false, string.format("%s expected, got %s", v16, TypeofResult)
+	end
+end
+
+local v17 = "NumberRange"
+
+local function v36(p1) --[[ Line: 7 ]]
+	-- upvalues: Typeof1 (copy), v17 (copy)
+	local TypeofResult = Typeof1(p1)
+	
+	if TypeofResult == v17 then
+		return true
+	else
+		return false, string.format("%s expected, got %s", v17, TypeofResult)
+	end
+end
+
+local v18 = "NumberSequence"
+
+local function NumberSequence(p1) --[[ Line: 7 ]]
+	-- upvalues: Typeof1 (copy), v18 (copy)
+	local TypeofResult = Typeof1(p1)
+	
+	if TypeofResult == v18 then
+		return true
+	else
+		return false, string.format("%s expected, got %s", v18, TypeofResult)
+	end
+end
+
+local v19 = "NumberSequenceKeypoint"
+
+local function NumberSequenceKeypoint(p1) --[[ Line: 7 ]]
+	-- upvalues: Typeof1 (copy), v19 (copy)
+	local TypeofResult = Typeof1(p1)
+	
+	if TypeofResult == v19 then
+		return true
+	else
+		return false, string.format("%s expected, got %s", v19, TypeofResult)
+	end
+end
+
+local v20 = "PathWaypoint"
+
+local function PathWaypoint(p1) --[[ Line: 7 ]]
+	-- upvalues: Typeof1 (copy), v20 (copy)
+	local TypeofResult = Typeof1(p1)
+	
+	if TypeofResult == v20 then
+		return true
+	else
+		return false, string.format("%s expected, got %s", v20, TypeofResult)
+	end
+end
+
+local v21 = "PhysicalProperties"
+
+local function PhysicalProperties(p1) --[[ Line: 7 ]]
+	-- upvalues: Typeof1 (copy), v21 (copy)
+	local TypeofResult = Typeof1(p1)
+	
+	if TypeofResult == v21 then
+		return true
+	else
+		return false, string.format("%s expected, got %s", v21, TypeofResult)
+	end
+end
+
+local v22 = "Random"
+
+local function v46(p1) --[[ Line: 7 ]]
+	-- upvalues: Typeof1 (copy), v22 (copy)
+	local TypeofResult = Typeof1(p1)
+	
+	if TypeofResult == v22 then
+		return true
+	else
+		return false, string.format("%s expected, got %s", v22, TypeofResult)
+	end
+end
+
+local v23 = "Ray"
+
+local function v48(p1) --[[ Line: 7 ]]
+	-- upvalues: Typeof1 (copy), v23 (copy)
+	local TypeofResult = Typeof1(p1)
+	
+	if TypeofResult == v23 then
+		return true
+	else
+		return false, string.format("%s expected, got %s", v23, TypeofResult)
+	end
+end
+
+local v24 = "Rect"
+
+local function v50(p1) --[[ Line: 7 ]]
+	-- upvalues: Typeof1 (copy), v24 (copy)
+	local TypeofResult = Typeof1(p1)
+	
+	if TypeofResult == v24 then
+		return true
+	else
+		return false, string.format("%s expected, got %s", v24, TypeofResult)
+	end
+end
+
+local v25 = "Region3"
+
+local function v52(p1) --[[ Line: 7 ]]
+	-- upvalues: Typeof1 (copy), v25 (copy)
+	local TypeofResult = Typeof1(p1)
+	
+	if TypeofResult == v25 then
+		return true
+	else
+		return false, string.format("%s expected, got %s", v25, TypeofResult)
+	end
+end
+
+local v26 = "Region3int16"
+
+local function Region3int16(p1) --[[ Line: 7 ]]
+	-- upvalues: Typeof1 (copy), v26 (copy)
+	local TypeofResult = Typeof1(p1)
+	
+	if TypeofResult == v26 then
+		return true
+	else
+		return false, string.format("%s expected, got %s", v26, TypeofResult)
+	end
+end
+
+local v27 = "TweenInfo"
+
+local function v56(p1) --[[ Line: 7 ]]
+	-- upvalues: Typeof1 (copy), v27 (copy)
+	local TypeofResult = Typeof1(p1)
+	
+	if TypeofResult == v27 then
+		return true
+	else
+		return false, string.format("%s expected, got %s", v27, TypeofResult)
+	end
+end
+
+local v28 = "UDim"
+
+local function v58(p1) --[[ Line: 7 ]]
+	-- upvalues: Typeof1 (copy), v28 (copy)
+	local TypeofResult = Typeof1(p1)
+	
+	if TypeofResult == v28 then
+		return true
+	else
+		return false, string.format("%s expected, got %s", v28, TypeofResult)
+	end
+end
+
+local v29 = "UDim2"
+
+local function v60(p1) --[[ Line: 7 ]]
+	-- upvalues: Typeof1 (copy), v29 (copy)
+	local TypeofResult = Typeof1(p1)
+	
+	if TypeofResult == v29 then
+		return true
+	else
+		return false, string.format("%s expected, got %s", v29, TypeofResult)
+	end
+end
+
+local v30 = "Vector2"
+
+local function v62(p1) --[[ Line: 7 ]]
+	-- upvalues: Typeof1 (copy), v30 (copy)
+	local TypeofResult = Typeof1(p1)
+	
+	if TypeofResult == v30 then
+		return true
+	else
+		return false, string.format("%s expected, got %s", v30, TypeofResult)
+	end
+end
+
+local v31 = "Vector3"
+
+local function v64(p1) --[[ Line: 7 ]]
+	-- upvalues: Typeof1 (copy), v31 (copy)
+	local TypeofResult = Typeof1(p1)
+	
+	if TypeofResult == v31 then
+		return true
+	else
+		return false, string.format("%s expected, got %s", v31, TypeofResult)
+	end
+end
+
+local v32 = "Vector3int16"
+
+local function Vector3int16(p1) --[[ Line: 7 ]]
+	-- upvalues: Typeof1 (copy), v32 (copy)
+	local TypeofResult = Typeof1(p1)
+	
+	if TypeofResult == v32 then
+		return true
+	else
+		return false, string.format("%s expected, got %s", v32, TypeofResult)
+	end
+end
+
+local v33 = "Enum"
+
+local function v68(p1) --[[ Line: 7 ]]
+	-- upvalues: Typeof1 (copy), v33 (copy)
+	local TypeofResult = Typeof1(p1)
+	
+	if TypeofResult == v33 then
+		return true
+	else
+		return false, string.format("%s expected, got %s", v33, TypeofResult)
+	end
+end
+
+local v34 = "EnumItem"
+
+local function EnumItem(p1) --[[ Line: 7 ]]
+	-- upvalues: Typeof1 (copy), v34 (copy)
+	local TypeofResult = Typeof1(p1)
+	
+	if TypeofResult == v34 then
+		return true
+	else
+		return false, string.format("%s expected, got %s", v34, TypeofResult)
+	end
+end
+
+local v35 = "RBXScriptSignal"
+
+local function RBXScriptSignal(p1) --[[ Line: 7 ]]
+	-- upvalues: Typeof1 (copy), v35 (copy)
+	local TypeofResult = Typeof1(p1)
+	
+	if TypeofResult == v35 then
+		return true
+	else
+		return false, string.format("%s expected, got %s", v35, TypeofResult)
+	end
+end
+
+local v36 = "RBXScriptConnection"
+local TModule = {
+	any = any,
+	boolean = Boolean,
+	thread = Thread,
+	callback = Callback,
+	none = None,
+	string = v12,
+	table = v14,
+	userdata = Userdata,
+	number = function(p1) --[[ Line: 106 ]]
+		-- upvalues: Typeof1 (copy)
+		local TypeofResult = Typeof1(p1)
+		
+		if TypeofResult ~= "number" then
+			return false, string.format("number expected, got %s", TypeofResult)
+		elseif p1 == p1 then
+			return true
+		else
+			return false, "unexpected NaN value"
+		end
+	end,
+	nan = function(p1) --[[ Line: 126 ]]
+		if p1 == p1 then
+			return false, "unexpected non-NaN value"
+		else
+			return true
+		end
+	end,
+	Axes = Axes,
+	BrickColor = v20,
+	CFrame = v22,
+	Color3 = v24,
+	ColorSequence = ColorSequence,
+	ColorSequenceKeypoint = ColorSequenceKeypoint,
+	DockWidgetPluginGuiInfo = DockWidgetPluginGuiInfo,
+	Faces = Faces,
+	Instance = v34,
+	NumberRange = v36,
+	NumberSequence = NumberSequence,
+	NumberSequenceKeypoint = NumberSequenceKeypoint,
+	PathWaypoint = PathWaypoint,
+	PhysicalProperties = PhysicalProperties,
+	Random = v46,
+	Ray = v48,
+	Rect = v50,
+	Region3 = v52,
+	Region3int16 = Region3int16,
+	TweenInfo = v56,
+	UDim = v58,
+	UDim2 = v60,
+	Vector2 = v62,
+	Vector3 = v64,
+	Vector3int16 = Vector3int16,
+	Enum = v68,
+	EnumItem = EnumItem,
+	RBXScriptSignal = RBXScriptSignal,
+	RBXScriptConnection = function(p1) --[[ Line: 7 ]]
+		-- upvalues: Typeof1 (copy), v36 (copy)
+		local TypeofResult = Typeof1(p1)
+		
+		if TypeofResult == v36 then
+			return true
+		else
+			return false, string.format("%s expected, got %s", v36, TypeofResult)
+		end
 	end
 }
-local var1 = "boolean"
 
-function t.boolean(p1)
-	-- upvalues: typeof (ref), var1 (ref)
-	local var2 = typeof(p1)
+function TModule.literal(...) --[[ Line: 406 ]]
+	-- upvalues: TModule (copy)
+	local Selected = select("#", ...)
 	
-	if var2 == var1 then
-		return true
-	end
-	return false, string.format("%s expected, got %s", var1, var2)
-end
-
-local var2 = "thread"
-
-function t.thread(p1)
-	-- upvalues: typeof (ref), var2 (ref)
-	local var3 = typeof(p1)
-	
-	if var3 == var2 then
-		return true
-	end
-	return false, string.format("%s expected, got %s", var2, var3)
-end
-
-local var3 = "function"
-
-function t.callback(p1)
-	-- upvalues: typeof (ref), var3 (ref)
-	local var4 = typeof(p1)
-	
-	if var4 == var3 then
-		return true
-	end
-	return false, string.format("%s expected, got %s", var3, var4)
-end
-
-local var4 = "nil"
-
-function t.none(p1)
-	-- upvalues: typeof (ref), var4 (ref)
-	local var5 = typeof(p1)
-	
-	if var5 == var4 then
-		return true
-	end
-	return false, string.format("%s expected, got %s", var4, var5)
-end
-
-local var5 = "string"
-
-function t.string(p1)
-	-- upvalues: typeof (ref), var5 (ref)
-	local var6 = typeof(p1)
-	
-	if var6 == var5 then
-		return true
-	end
-	return false, string.format("%s expected, got %s", var5, var6)
-end
-
-local var6 = "table"
-
-function t.table(p1)
-	-- upvalues: typeof (ref), var6 (ref)
-	local var7 = typeof(p1)
-	
-	if var7 == var6 then
-		return true
-	end
-	return false, string.format("%s expected, got %s", var6, var7)
-end
-
-local var7 = "userdata"
-
-function t.userdata(p1)
-	-- upvalues: typeof (ref), var7 (ref)
-	local var8 = typeof(p1)
-	
-	if var8 == var7 then
-		return true
-	end
-	return false, string.format("%s expected, got %s", var7, var8)
-end
-
-function t.number(p1)
-	-- upvalues: typeof (ref)
-	local var8 = typeof(p1)
-	
-	if var8 ~= "number" then
-		return false, string.format("number expected, got %s", var8)
-	elseif p1 == p1 then
-		return true
-	end
-	return false, "unexpected NaN value"
-end
-
-function t.nan(p1)
-	if p1 == p1 then
-		return false, "unexpected non-NaN value"
-	end
-	return true
-end
-
-local var8 = "Axes"
-
-function t.Axes(p1)
-	-- upvalues: typeof (ref), var8 (ref)
-	local var9 = typeof(p1)
-	
-	if var9 == var8 then
-		return true
-	end
-	return false, string.format("%s expected, got %s", var8, var9)
-end
-
-local var9 = "BrickColor"
-
-function t.BrickColor(p1)
-	-- upvalues: typeof (ref), var9 (ref)
-	local var10 = typeof(p1)
-	
-	if var10 == var9 then
-		return true
-	end
-	return false, string.format("%s expected, got %s", var9, var10)
-end
-
-local var10 = "CFrame"
-
-function t.CFrame(p1)
-	-- upvalues: typeof (ref), var10 (ref)
-	local var11 = typeof(p1)
-	
-	if var11 == var10 then
-		return true
-	end
-	return false, string.format("%s expected, got %s", var10, var11)
-end
-
-local var11 = "Color3"
-
-function t.Color3(p1)
-	-- upvalues: typeof (ref), var11 (ref)
-	local var12 = typeof(p1)
-	
-	if var12 == var11 then
-		return true
-	end
-	return false, string.format("%s expected, got %s", var11, var12)
-end
-
-local var12 = "ColorSequence"
-
-function t.ColorSequence(p1)
-	-- upvalues: typeof (ref), var12 (ref)
-	local var13 = typeof(p1)
-	
-	if var13 == var12 then
-		return true
-	end
-	return false, string.format("%s expected, got %s", var12, var13)
-end
-
-local var13 = "ColorSequenceKeypoint"
-
-function t.ColorSequenceKeypoint(p1)
-	-- upvalues: typeof (ref), var13 (ref)
-	local var14 = typeof(p1)
-	
-	if var14 == var13 then
-		return true
-	end
-	return false, string.format("%s expected, got %s", var13, var14)
-end
-
-local var14 = "DockWidgetPluginGuiInfo"
-
-function t.DockWidgetPluginGuiInfo(p1)
-	-- upvalues: typeof (ref), var14 (ref)
-	local var15 = typeof(p1)
-	
-	if var15 == var14 then
-		return true
-	end
-	return false, string.format("%s expected, got %s", var14, var15)
-end
-
-local var15 = "Faces"
-
-function t.Faces(p1)
-	-- upvalues: typeof (ref), var15 (ref)
-	local var16 = typeof(p1)
-	
-	if var16 == var15 then
-		return true
-	end
-	return false, string.format("%s expected, got %s", var15, var16)
-end
-
-local var16 = "Instance"
-
-function t.Instance(p1)
-	-- upvalues: typeof (ref), var16 (ref)
-	local var17 = typeof(p1)
-	
-	if var17 == var16 then
-		return true
-	end
-	return false, string.format("%s expected, got %s", var16, var17)
-end
-
-local var17 = "NumberRange"
-
-function t.NumberRange(p1)
-	-- upvalues: typeof (ref), var17 (ref)
-	local var18 = typeof(p1)
-	
-	if var18 == var17 then
-		return true
-	end
-	return false, string.format("%s expected, got %s", var17, var18)
-end
-
-local var18 = "NumberSequence"
-
-function t.NumberSequence(p1)
-	-- upvalues: typeof (ref), var18 (ref)
-	local var19 = typeof(p1)
-	
-	if var19 == var18 then
-		return true
-	end
-	return false, string.format("%s expected, got %s", var18, var19)
-end
-
-local var19 = "NumberSequenceKeypoint"
-
-function t.NumberSequenceKeypoint(p1)
-	-- upvalues: typeof (ref), var19 (ref)
-	local var20 = typeof(p1)
-	
-	if var20 == var19 then
-		return true
-	end
-	return false, string.format("%s expected, got %s", var19, var20)
-end
-
-local var20 = "PathWaypoint"
-
-function t.PathWaypoint(p1)
-	-- upvalues: typeof (ref), var20 (ref)
-	local var21 = typeof(p1)
-	
-	if var21 == var20 then
-		return true
-	end
-	return false, string.format("%s expected, got %s", var20, var21)
-end
-
-local var21 = "PhysicalProperties"
-
-function t.PhysicalProperties(p1)
-	-- upvalues: typeof (ref), var21 (ref)
-	local var22 = typeof(p1)
-	
-	if var22 == var21 then
-		return true
-	end
-	return false, string.format("%s expected, got %s", var21, var22)
-end
-
-local var22 = "Random"
-
-function t.Random(p1)
-	-- upvalues: typeof (ref), var22 (ref)
-	local var23 = typeof(p1)
-	
-	if var23 == var22 then
-		return true
-	end
-	return false, string.format("%s expected, got %s", var22, var23)
-end
-
-local var23 = "Ray"
-
-function t.Ray(p1)
-	-- upvalues: typeof (ref), var23 (ref)
-	local var24 = typeof(p1)
-	
-	if var24 == var23 then
-		return true
-	end
-	return false, string.format("%s expected, got %s", var23, var24)
-end
-
-local var24 = "Rect"
-
-function t.Rect(p1)
-	-- upvalues: typeof (ref), var24 (ref)
-	local var25 = typeof(p1)
-	
-	if var25 == var24 then
-		return true
-	end
-	return false, string.format("%s expected, got %s", var24, var25)
-end
-
-local var25 = "Region3"
-
-function t.Region3(p1)
-	-- upvalues: typeof (ref), var25 (ref)
-	local var26 = typeof(p1)
-	
-	if var26 == var25 then
-		return true
-	end
-	return false, string.format("%s expected, got %s", var25, var26)
-end
-
-local var26 = "Region3int16"
-
-function t.Region3int16(p1)
-	-- upvalues: typeof (ref), var26 (ref)
-	local var27 = typeof(p1)
-	
-	if var27 == var26 then
-		return true
-	end
-	return false, string.format("%s expected, got %s", var26, var27)
-end
-
-local var27 = "TweenInfo"
-
-function t.TweenInfo(p1)
-	-- upvalues: typeof (ref), var27 (ref)
-	local var28 = typeof(p1)
-	
-	if var28 == var27 then
-		return true
-	end
-	return false, string.format("%s expected, got %s", var27, var28)
-end
-
-local var28 = "UDim"
-
-function t.UDim(p1)
-	-- upvalues: typeof (ref), var28 (ref)
-	local var29 = typeof(p1)
-	
-	if var29 == var28 then
-		return true
-	end
-	return false, string.format("%s expected, got %s", var28, var29)
-end
-
-local var29 = "UDim2"
-
-function t.UDim2(p1)
-	-- upvalues: typeof (ref), var29 (ref)
-	local var30 = typeof(p1)
-	
-	if var30 == var29 then
-		return true
-	end
-	return false, string.format("%s expected, got %s", var29, var30)
-end
-
-local var30 = "Vector2"
-
-function t.Vector2(p1)
-	-- upvalues: typeof (ref), var30 (ref)
-	local var31 = typeof(p1)
-	
-	if var31 == var30 then
-		return true
-	end
-	return false, string.format("%s expected, got %s", var30, var31)
-end
-
-local var31 = "Vector3"
-
-function t.Vector3(p1)
-	-- upvalues: typeof (ref), var31 (ref)
-	local var32 = typeof(p1)
-	
-	if var32 == var31 then
-		return true
-	end
-	return false, string.format("%s expected, got %s", var31, var32)
-end
-
-local var32 = "Vector3int16"
-
-function t.Vector3int16(p1)
-	-- upvalues: typeof (ref), var32 (ref)
-	local var33 = typeof(p1)
-	
-	if var33 == var32 then
-		return true
-	end
-	return false, string.format("%s expected, got %s", var32, var33)
-end
-
-local var33 = "Enum"
-
-function t.Enum(p1)
-	-- upvalues: typeof (ref), var33 (ref)
-	local var34 = typeof(p1)
-	
-	if var34 == var33 then
-		return true
-	end
-	return false, string.format("%s expected, got %s", var33, var34)
-end
-
-local var34 = "EnumItem"
-
-function t.EnumItem(p1)
-	-- upvalues: typeof (ref), var34 (ref)
-	local var35 = typeof(p1)
-	
-	if var35 == var34 then
-		return true
-	end
-	return false, string.format("%s expected, got %s", var34, var35)
-end
-
-local var35 = "RBXScriptSignal"
-
-function t.RBXScriptSignal(p1)
-	-- upvalues: typeof (ref), var35 (ref)
-	local var36 = typeof(p1)
-	
-	if var36 == var35 then
-		return true
-	end
-	return false, string.format("%s expected, got %s", var35, var36)
-end
-
-local var36 = "RBXScriptConnection"
-
-function t.RBXScriptConnection(p1)
-	-- upvalues: typeof (ref), var36 (ref)
-	local var37 = typeof(p1)
-	
-	if var37 == var36 then
-		return true
-	end
-	return false, string.format("%s expected, got %s", var36, var37)
-end
-
-function t.literal(...)
-	-- upvalues: t (ref)
-	local var37 = select("#", ...)
-	
-	if var37 == 1 then
-		local var38 = ...
+	if Selected == 1 then
+		local v37 = (...)
 		
-		return function(p1)
-			-- upvalues: var38 (ref)
-			if p1 == var38 then
+		return function(p1) --[[ Line: 410 ]]
+			-- upvalues: v37 (copy)
+			if p1 == v37 then
 				return true
+			else
+				return false, string.format("expected %s, got %s", tostring(v37), (tostring(p1)))
 			end
-			return false, string.format("expected %s, got %s", tostring(var38), tostring(p1))
 		end
 	end
-	local t_1 = {}
+	local LiteralResults = {}
 	
-	for i = 1, var37 do
-		t_1[i] = t.literal(select(i, ...))
+	for i = 1, Selected do
+		LiteralResults[i] = TModule.literal((select(i, ...)))
 	end
-	return t.union(unpack(t_1))
+	return TModule.union(unpack(LiteralResults))
 end
 
-t.exactly = t.literal
+TModule.exactly = TModule.literal
 
-function t.keyOf(p1)
-	-- upvalues: t (ref)
-	local t_1 = {}
+function TModule.keyOf(List) --[[ Line: 439 ]]
+	-- upvalues: TModule (copy)
+	local t = {}
 	
-	for i in pairs(p1) do
-		t_1[#t_1 + 1] = i
+	for i in pairs(List) do
+		t[#t + 1] = i
 	end
-	return t.literal(unpack(t_1))
+	return TModule.literal(unpack(t))
 end
 
-function t.valueOf(p2)
-	-- upvalues: t (ref)
-	local t_1 = {}
+function TModule.valueOf(List) --[[ Line: 454 ]]
+	-- upvalues: TModule (copy)
+	local t = {}
 	
-	for i, v in pairs(p2) do
-		t_1[#t_1 + 1] = v
+	for _, value in pairs(List) do
+		t[#t + 1] = value
 	end
-	return t.literal(unpack(t_1))
+	return TModule.literal(unpack(t))
 end
 
-function t.integer(p3)
-	-- upvalues: t (ref)
-	local var39, var40 = t.number(p3)
+function TModule.integer(p1: number) --[[ Line: 469 ]]
+	-- upvalues: TModule (copy)
+	local NumberResult, NumberResult2 = TModule.number(p1)
 	
-	if not var39 then
-		return false, var40 or ""
-	elseif p3 % 1 == 0 then
+	if not NumberResult then
+		return false, NumberResult2 or ""
+	elseif p1 % 1 == 0 then
 		return true
+	else
+		return false, string.format("integer expected, got %s", p1)
 	end
-	return false, string.format("integer expected, got %s", p3)
 end
 
-function t.numberMin(a)
-	-- upvalues: t (ref)
-	return function(p3)
-		-- upvalues: t (copy), a (ref)
-		local var39, var40 = t.number(p3)
+function TModule.numberMin(p1) --[[ Line: 488 ]]
+	-- upvalues: TModule (copy)
+	return function(p2) --[[ Line: 489 ]]
+		-- upvalues: TModule (upval), p1 (copy)
+		local NumberResult, NumberResult2 = TModule.number(p2)
 		
-		if not var39 then
-			return false, var40 or ""
-		elseif a <= p3 then
+		if not NumberResult then
+			return false, NumberResult2 or ""
+		elseif p1 <= p2 then
 			return true
+		else
+			return false, string.format("number >= %s expected, got %s", p1, p2)
 		end
-		return false, string.format("number >= %s expected, got %s", a, p3)
 	end
 end
 
-function t.numberMax(a)
-	-- upvalues: t (ref)
-	return function(p3)
-		-- upvalues: t (copy), a (ref)
-		local var39, var40 = t.number(p3)
+function TModule.numberMax(p1) --[[ Line: 509 ]]
+	-- upvalues: TModule (copy)
+	return function(p2) --[[ Line: 510 ]]
+		-- upvalues: TModule (upval), p1 (copy)
+		local NumberResult, NumberResult2 = TModule.number(p2)
 		
-		if not var39 then
-			return false, var40
-		elseif p3 <= a then
+		if not NumberResult then
+			return false, NumberResult2
+		elseif p2 <= p1 then
 			return true
+		else
+			return false, string.format("number <= %s expected, got %s", p1, p2)
 		end
-		return false, string.format("number <= %s expected, got %s", a, p3)
 	end
 end
 
-function t.numberMinExclusive(a)
-	-- upvalues: t (ref)
-	return function(p3)
-		-- upvalues: t (copy), a (ref)
-		local var39, var40 = t.number(p3)
+function TModule.numberMinExclusive(p1) --[[ Line: 530 ]]
+	-- upvalues: TModule (copy)
+	return function(p2) --[[ Line: 531 ]]
+		-- upvalues: TModule (upval), p1 (copy)
+		local NumberResult, NumberResult2 = TModule.number(p2)
 		
-		if not var39 then
-			return false, var40 or ""
-		elseif a < p3 then
+		if not NumberResult then
+			return false, NumberResult2 or ""
+		elseif p1 < p2 then
 			return true
+		else
+			return false, string.format("number > %s expected, got %s", p1, p2)
 		end
-		return false, string.format("number > %s expected, got %s", a, p3)
 	end
 end
 
-function t.numberMaxExclusive(a)
-	-- upvalues: t (ref)
-	return function(p3)
-		-- upvalues: t (copy), a (ref)
-		local var39, var40 = t.number(p3)
+function TModule.numberMaxExclusive(p1) --[[ Line: 551 ]]
+	-- upvalues: TModule (copy)
+	return function(p2) --[[ Line: 552 ]]
+		-- upvalues: TModule (upval), p1 (copy)
+		local NumberResult, NumberResult2 = TModule.number(p2)
 		
-		if not var39 then
-			return false, var40 or ""
-		elseif p3 < a then
+		if not NumberResult then
+			return false, NumberResult2 or ""
+		elseif p2 < p1 then
 			return true
+		else
+			return false, string.format("number < %s expected, got %s", p1, p2)
 		end
-		return false, string.format("number < %s expected, got %s", a, p3)
 	end
 end
 
-t.numberPositive = t.numberMinExclusive(0)
-t.numberNegative = t.numberMaxExclusive(0)
+TModule.numberPositive = TModule.numberMinExclusive(0)
+TModule.numberNegative = TModule.numberMaxExclusive(0)
 
-function t.numberConstrained(p3, p4)
-	-- upvalues: t (ref)
-	assert(t.number(p3) and t.number(p4))
-	local var39 = t.numberMin(p3)
-	local var40 = t.numberMax(p4)
+function TModule.numberConstrained(p1, p2) --[[ Line: 587 ]]
+	-- upvalues: TModule (copy)
+	assert(TModule.number(p1) and TModule.number(p2))
+	local NumberMinResult = TModule.numberMin(p1)
+	local NumberMaxResult = TModule.numberMax(p2)
 	
-	return function(p5)
-		-- upvalues: var39 (ref), var40 (ref)
-		local var41, var42 = var39(p5)
+	return function(p3) --[[ Line: 591 ]]
+		-- upvalues: NumberMinResult (copy), NumberMaxResult (copy)
+		local NumberMinResultResult, NumberMinResultResult2 = NumberMinResult(p3)
 		
-		if not var41 then
-			return false, var42 or ""
+		if not NumberMinResultResult then
+			return false, NumberMinResultResult2 or ""
 		end
-		local var43, var44 = var40(p5)
+		local NumberMaxResultResult, NumberMaxResultResult2 = NumberMaxResult(p3)
 		
-		if var43 then
+		if NumberMaxResultResult then
 			return true
+		else
+			return false, NumberMaxResultResult2 or ""
 		end
-		return false, var44 or ""
 	end
 end
 
-function t.numberConstrainedExclusive(p3, p4)
-	-- upvalues: t (ref)
-	assert(t.number(p3) and t.number(p4))
-	local var39 = t.numberMinExclusive(p3)
-	local var40 = t.numberMaxExclusive(p4)
+function TModule.numberConstrainedExclusive(p1, p2) --[[ Line: 614 ]]
+	-- upvalues: TModule (copy)
+	assert(TModule.number(p1) and TModule.number(p2))
+	local NumberMinExclusiveResult = TModule.numberMinExclusive(p1)
+	local NumberMaxExclusiveResult = TModule.numberMaxExclusive(p2)
 	
-	return function(p5)
-		-- upvalues: var39 (ref), var40 (ref)
-		local var41, var42 = var39(p5)
+	return function(p3) --[[ Line: 618 ]]
+		-- upvalues: NumberMinExclusiveResult (copy), NumberMaxExclusiveResult (copy)
+		local NumberMinExclusiveResultResult, NumberMinExclusiveResultResult2 = NumberMinExclusiveResult(p3)
 		
-		if not var41 then
-			return false, var42 or ""
+		if not NumberMinExclusiveResultResult then
+			return false, NumberMinExclusiveResultResult2 or ""
 		end
-		local var43, var44 = var40(p5)
+		local NumberMaxExclusiveResultResult, NumberMaxExclusiveResultResult2 = NumberMaxExclusiveResult(p3)
 		
-		if var43 then
+		if NumberMaxExclusiveResultResult then
 			return true
+		else
+			return false, NumberMaxExclusiveResultResult2 or ""
 		end
-		return false, var44 or ""
 	end
 end
 
-function t.match(p3)
-	-- upvalues: t (ref)
-	assert(t.string(p3))
+function TModule.match(Pattern) --[[ Line: 640 ]]
+	-- upvalues: TModule (copy)
+	assert(TModule.string(Pattern))
 	
-	return function(p4)
-		-- upvalues: t (copy), p3 (ref)
-		local var39, var40 = t.string(p4)
+	return function(Text: string) --[[ Line: 642 ]]
+		-- upvalues: TModule (upval), Pattern (copy)
+		local v38, v39 = TModule.string(Text)
 		
-		if not var39 then
-			return false, var40
-		elseif string.match(p4, p3) == nil then
-			return false, string.format("\"%s\" failed to match pattern \"%s\"", p4, p3)
+		if not v38 then
+			return false, v39
+		elseif string.match(Text, Pattern) == nil then
+			return false, string.format("\"%s\" failed to match pattern \"%s\"", Text, Pattern)
+		else
+			return true
 		end
-		return true
 	end
 end
 
-function t.optional(p3)
-	-- upvalues: t (ref)
-	assert(t.callback(p3))
+function TModule.optional(Callback) --[[ Line: 663 ]]
+	-- upvalues: TModule (copy)
+	assert(TModule.callback(Callback))
 	
-	return function(p4)
-		-- upvalues: p3 (ref)
-		if p4 == nil then
+	return function(p1) --[[ Line: 665 ]]
+		-- upvalues: Callback (copy)
+		if p1 == nil then
 			return true
 		end
-		local var39, var40 = p3(p4)
+		local CallbackResult, CallbackResult2 = Callback(p1)
 		
-		if var39 then
+		if CallbackResult then
 			return true
+		else
+			return false, string.format("(optional) %s", CallbackResult2 or "")
 		end
-		return false, string.format("(optional) %s", var40 or "")
 	end
 end
 
-function t.tuple(...)
+function TModule.tuple(...) --[[ Line: 685 ]]
 	local list = { ... }
 	
-	return function(...)
-		-- upvalues: list (ref)
-		local list_1 = { ... }
+	return function(...) --[[ Line: 687 ]]
+		-- upvalues: list (copy)
+		local list1 = { ... }
+		local v38 = nil
 		
 		for i = 1, #list do
-			local var39, var40 = list[i](list_1[i])
+			local v39
+			v39, v115 = list[i](list1[i])
 			
-			if var39 ~= false then
-				continue
-			end
-			return false, string.format("Bad tuple index #%s:\n\t%s", i, var40 or "")
-		end
-		return true
-	end
-end
-
-function t.keys(p3)
-	-- upvalues: t (ref)
-	assert(t.callback(p3))
-	
-	return function(p4)
-		-- upvalues: t (copy), p3 (ref)
-		local var39, var40 = t.table(p4)
-		
-		if var39 == false then
-			return false, var40 or ""
-		end
-		for i in pairs(p4) do
-			local var41, var42 = p3(i)
-			
-			if var41 == false then
-				return false, string.format("bad key %s:\n\t%s", tostring(i), var42 or "")
+			if v39 == false then
+				return false, string.format("Bad tuple index #%s:\n\t%s", i, v38 or "")
 			end
 		end
 		return true
 	end
 end
 
-function t.values(p4)
-	-- upvalues: t (ref)
-	assert(t.callback(p4))
+function TModule.keys(Callback) --[[ Line: 706 ]]
+	-- upvalues: TModule (copy)
+	assert(TModule.callback(Callback))
 	
-	return function(p5)
-		-- upvalues: t (copy), p4 (ref)
-		local var39, var40 = t.table(p5)
+	return function(List) --[[ Line: 708 ]]
+		-- upvalues: TModule (upval), Callback (copy)
+		local v38, v39 = TModule.table(List)
 		
-		if var39 == false then
-			return false, var40 or ""
+		if v38 == false then
+			return false, v39 or ""
 		end
-		for i, v in pairs(p5) do
-			local var41, var42 = p4(v)
+		local CallbackResult2 = nil
+		for i in pairs(List) do
+			local CallbackResult
+			CallbackResult, CallbackResult2 = Callback(i)
 			
-			if var41 == false then
-				return false, string.format("bad value for key %s:\n\t%s", tostring(i), var42 or "")
+			if CallbackResult == false then
+				return false, string.format("bad key %s:\n\t%s", tostring(i), CallbackResult2 or "")
 			end
 		end
 		return true
 	end
 end
 
-function t.map(p5, p6)
-	-- upvalues: t (ref)
-	assert(t.callback(p5), t.callback(p6))
-	local var39 = t.keys(p5)
-	local var40 = t.values(p6)
+function TModule.values(Callback) --[[ Line: 732 ]]
+	-- upvalues: TModule (copy)
+	assert(TModule.callback(Callback))
 	
-	return function(p7)
-		-- upvalues: var39 (ref), var40 (ref)
-		local var41, var42 = var39(p7)
+	return function(List) --[[ Line: 734 ]]
+		-- upvalues: TModule (upval), Callback (copy)
+		local v38, v39 = TModule.table(List)
 		
-		if not var41 then
-			return false, var42 or ""
+		if v38 == false then
+			return false, v39 or ""
 		end
-		local var43, var44 = var40(p7)
+		local CallbackResult2 = nil
+		for i, value in pairs(List) do
+			local CallbackResult
+			CallbackResult, CallbackResult2 = Callback(value)
+			
+			if CallbackResult == false then
+				return false, string.format("bad value for key %s:\n\t%s", tostring(i), CallbackResult2 or "")
+			end
+		end
+		return true
+	end
+end
+
+function TModule.map(Any, Callback) --[[ Line: 759 ]]
+	-- upvalues: TModule (copy)
+	assert(TModule.callback(Any), TModule.callback(Callback))
+	local KeysResult = TModule.keys(Any)
+	local ValuesResult = TModule.values(Callback)
+	
+	return function(p1) --[[ Line: 763 ]]
+		-- upvalues: KeysResult (copy), ValuesResult (copy)
+		local KeysResultResult, KeysResultResult2 = KeysResult(p1)
 		
-		if var43 then
+		if not KeysResultResult then
+			return false, KeysResultResult2 or ""
+		end
+		local ValuesResultResult, ValuesResultResult2 = ValuesResult(p1)
+		
+		if ValuesResultResult then
 			return true
+		else
+			return false, ValuesResultResult2 or ""
 		end
-		return false, var44 or ""
 	end
 end
 
-local var39 = t.keys(t.integer)
+local KeysResult = TModule.keys(TModule.integer)
 
-function t.array(p5)
-	-- upvalues: t (ref), var39 (ref)
-	assert(t.callback(p5))
-	local var40 = t.values(p5)
+function TModule.array(Callback) --[[ Line: 787 ]]
+	-- upvalues: TModule (copy), KeysResult (copy)
+	assert(TModule.callback(Callback))
+	local ValuesResult = TModule.values(Callback)
 	
-	return function(p6)
-		-- upvalues: var39 (copy), var40 (ref)
-		local var41, var42 = var39(p6)
+	return function(List) --[[ Line: 790 ]]
+		-- upvalues: KeysResult (upval), ValuesResult (copy)
+		local KeysResultResult, KeysResultResult2 = KeysResult(List)
 		
-		if var41 == false then
-			return false, string.format("[array] %s", var42 or "")
+		if KeysResultResult == false then
+			return false, string.format("[array] %s", KeysResultResult2 or "")
 		end
-		local var43 = 0
+		local Count = 0
 		
-		for i, v in ipairs(p6) do
-			var43 += 1
+		for i, _ in ipairs(List) do
+			Count += 1
 		end
-		for i_1 in pairs(p6) do
-			if i_1 < 1 or var43 < i_1 then
-				return false, string.format("[array] key %s must be sequential", tostring(i_1))
+		for i in pairs(List) do
+			if i < 1 or Count < i then
+				return false, string.format("[array] key %s must be sequential", (tostring(i)))
 			end
 		end
-		local var44, var45 = var40(p6)
+		local ValuesResultResult, ValuesResultResult2 = ValuesResult(List)
 		
-		if var44 then
+		if ValuesResultResult then
 			return true
+		else
+			return false, string.format("[array] %s", ValuesResultResult2 or "")
 		end
-		return false, string.format("[array] %s", var45 or "")
 	end
 end
 
-local var46 = t.array(t.callback)
+local ArrayResult = TModule.array(TModule.callback)
 
-function t.union(...)
-	-- upvalues: var46 (ref)
+function TModule.union(...) --[[ Line: 829 ]]
+	-- upvalues: ArrayResult (copy)
 	local list = { ... }
-	assert(var46(list))
+	assert(ArrayResult(list))
 	
-	return function(p7)
-		-- upvalues: list (ref)
-		for i, v in pairs(list) do
-			if v(p7) then
+	return function(p1) --[[ Line: 832 ]]
+		-- upvalues: list (copy)
+		for _, value in pairs(list) do
+			if value(p1) then
 				return true
 			end
 		end
@@ -807,204 +898,214 @@ function t.union(...)
 	end
 end
 
-t.some = t.union
+TModule.some = TModule.union
 
-function t.intersection(...)
-	-- upvalues: var46 (ref)
+function TModule.intersection(...) --[[ Line: 854 ]]
+	-- upvalues: ArrayResult (copy)
 	local list = { ... }
-	assert(var46(list))
+	assert(ArrayResult(list))
 	
-	return function(p7)
-		-- upvalues: list (ref)
-		for i, v in pairs(list) do
-			local var47, var48 = v(p7)
+	return function(p1) --[[ Line: 857 ]]
+		-- upvalues: list (copy)
+		local v38 = nil
+		for _, value in pairs(list) do
+			local v39
+			v39, v139 = value(p1)
 			
-			if not var47 then
-				return false, var48 or ""
+			if not v39 then
+				return false, v38 or ""
 			end
 		end
 		return true
 	end
 end
 
-t.every = t.intersection
-local var47 = t.map(t.any, t.callback)
+TModule.every = TModule.intersection
+local MapResult = TModule.map(TModule.any, TModule.callback)
 
-function t.interface(p7)
-	-- upvalues: var47 (ref), t (ref)
-	assert(var47(p7))
+function TModule.interface(p1) --[[ Line: 883 ]]
+	-- upvalues: MapResult (copy), TModule (copy)
+	assert(MapResult(p1))
 	
-	return function(p8)
-		-- upvalues: t (copy), p7 (ref)
-		local var48, var49 = t.table(p8)
+	return function(p2) --[[ Line: 885 ]]
+		-- upvalues: TModule (upval), p1 (copy)
+		local v38, v39 = TModule.table(p2)
 		
-		if var48 == false then
-			return false, var49 or ""
+		if v38 == false then
+			return false, v39 or ""
 		end
-		for i, v in pairs(p7) do
-			local var50, var51 = v(p8[i])
+		local v40 = nil
+		for i, value in pairs(p1) do
+			local v41
+			v41, v143 = value(p2[i])
 			
-			if var50 == false then
-				return false, string.format("[interface] bad value for %s:\n\t%s", tostring(i), var51 or "")
+			if v41 == false then
+				return false, string.format("[interface] bad value for %s:\n\t%s", tostring(i), v40 or "")
 			end
 		end
 		return true
 	end
 end
 
-function t.strictInterface(p8)
-	-- upvalues: var47 (ref), t (ref)
-	assert(var47(p8))
+function TModule.strictInterface(p2) --[[ Line: 908 ]]
+	-- upvalues: MapResult (copy), TModule (copy)
+	assert(MapResult(p2))
 	
-	return function(p9)
-		-- upvalues: t (copy), p8 (ref)
-		local var48, var49 = t.table(p9)
+	return function(List) --[[ Line: 910 ]]
+		-- upvalues: TModule (upval), p2 (copy)
+		local v38, v39 = TModule.table(List)
 		
-		if var48 == false then
-			return false, var49 or ""
+		if v38 == false then
+			return false, v39 or ""
 		end
-		for i, v in pairs(p8) do
-			local var50, var51 = v(p9[i])
+		local v40 = nil
+		for i, value in pairs(p2) do
+			local v41
+			v41, v147 = value(List[i])
 			
-			if var50 == false then
-				return false, string.format("[interface] bad value for %s:\n\t%s", tostring(i), var51 or "")
+			if v41 == false then
+				return false, string.format("[interface] bad value for %s:\n\t%s", tostring(i), v40 or "")
 			end
 		end
-		for i_1 in pairs(p9) do
-			if not p8[i_1] then
-				return false, string.format("[interface] unexpected field '%s'", tostring(i_1))
+		for i1 in pairs(List) do
+			if not p2[i1] then
+				return false, string.format("[interface] unexpected field '%s'", (tostring(i1)))
 			end
 		end
 		return true
 	end
 end
 
-function t.instanceOf(p10, p11)
-	-- upvalues: t (ref)
-	assert(t.string(p10))
-	local var52 = if p11 ~= nil then t.children(p11) else nil
+function TModule.instanceOf(ClassName, p3) --[[ Line: 941 ]]
+	-- upvalues: TModule (copy)
+	assert(TModule.string(ClassName))
+	local ChildrenResult = if p3 == nil then nil else TModule.children(p3)
 	
-	return function(p12)
-		-- upvalues: t (copy), p10 (ref), var52 (write)
-		local var53, var54 = t.Instance(p12)
+	return function(p4) --[[ Line: 949 ]]
+		-- upvalues: TModule (upval), ClassName (copy), ChildrenResult (ref)
+		local v42, v43 = TModule.Instance(p4)
 		
-		if not var53 then
-			return false, var54 or ""
-		elseif p12.ClassName ~= p10 then
-			return false, string.format("%s expected, got %s", p10, p12.ClassName)
-		elseif var52 then
-			local var55, var56 = var52(p12)
+		if not v42 then
+			return false, v43 or ""
+		end
+		if p4.ClassName ~= ClassName then
+			return false, string.format("%s expected, got %s", ClassName, p4.ClassName)
+		end
+		if ChildrenResult then
+			local ChildrenResultResult, ChildrenResultResult2 = ChildrenResult(p4)
 			
-			if var55 then
-				return true
-			else
-				return false, var56
+			if not ChildrenResultResult then
+				return false, ChildrenResultResult2
 			end
 		end
+		return true
 	end
 end
 
-t.instance = t.instanceOf
+TModule.instance = TModule.instanceOf
 
-function t.instanceIsA(p10, p11)
-	-- upvalues: t (ref)
-	assert(t.string(p10))
-	local var52 = if p11 ~= nil then t.children(p11) else nil
+function TModule.instanceIsA(ClassName, p3) --[[ Line: 978 ]]
+	-- upvalues: TModule (copy)
+	assert(TModule.string(ClassName))
+	local ChildrenResult = if p3 == nil then nil else TModule.children(p3)
 	
-	return function(p12)
-		-- upvalues: t (copy), p10 (ref), var52 (write)
-		local var53, var54 = t.Instance(p12)
+	return function(Object) --[[ Line: 986 ]]
+		-- upvalues: TModule (upval), ClassName (copy), ChildrenResult (ref)
+		local v42, v43 = TModule.Instance(Object)
 		
-		if not var53 then
-			return false, var54 or ""
-		elseif not p12:IsA(p10) then
-			return false, string.format("%s expected, got %s", p10, p12.ClassName)
-		elseif var52 then
-			local var55, var56 = var52(p12)
+		if not v42 then
+			return false, v43 or ""
+		end
+		if not Object:IsA(ClassName) then
+			return false, string.format("%s expected, got %s", ClassName, Object.ClassName)
+		end
+		if ChildrenResult then
+			local ChildrenResultResult, ChildrenResultResult2 = ChildrenResult(Object)
 			
-			if var55 then
-				return true
-			else
-				return false, var56
+			if not ChildrenResultResult then
+				return false, ChildrenResultResult2
 			end
 		end
+		return true
 	end
 end
 
-function t.enum(p10)
-	-- upvalues: t (ref)
-	assert(t.Enum(p10))
+function TModule.enum(EnumType) --[[ Line: 1014 ]]
+	-- upvalues: TModule (copy)
+	assert(TModule.Enum(EnumType))
 	
-	return function(p11)
-		-- upvalues: t (copy), p10 (ref)
-		local var52, var53 = t.EnumItem(p11)
+	return function(p3) --[[ Line: 1016 ]]
+		-- upvalues: TModule (upval), EnumType (copy)
+		local EnumItemResult, EnumItemResult2 = TModule.EnumItem(p3)
 		
-		if not var52 then
-			return false, var53
-		elseif p11.EnumType == p10 then
+		if not EnumItemResult then
+			return false, EnumItemResult2
+		elseif p3.EnumType == EnumType then
 			return true
+		else
+			return false, string.format("enum of %s expected, got enum of %s", tostring(EnumType), (tostring(p3.EnumType)))
 		end
-		return false, string.format("enum of %s expected, got enum of %s", tostring(p10), tostring(p11.EnumType))
 	end
 end
 
-local var52 = t.tuple(t.callback, t.callback)
+local TupleResult = TModule.tuple(TModule.callback, TModule.callback)
 
-function t.wrap(p10, p11)
-	-- upvalues: var52 (ref)
-	assert(var52(p10, p11))
+function TModule.wrap(Callback1, Callback) --[[ Line: 1041 ]]
+	-- upvalues: TupleResult (copy)
+	assert(TupleResult(Callback1, Callback))
 	
-	return function(...)
-		-- upvalues: p11 (ref), p10 (ref)
-		assert(p11(...))
+	return function(...) --[[ Line: 1043 ]]
+		-- upvalues: Callback (copy), Callback1 (copy)
+		assert(Callback(...))
 		
-		return p10(...)
+		return Callback1(...)
 	end
 end
 
-function t.strict(p10)
-	return function(...)
-		-- upvalues: p10 (ref)
-		assert(p10(...))
+function TModule.strict(Callback) --[[ Line: 1057 ]]
+	return function(...) --[[ Line: 1058 ]]
+		-- upvalues: Callback (copy)
+		assert(Callback(...))
 	end
 end
 
-local var53 = t.map(t.string, t.callback)
+local MapResult1 = TModule.map(TModule.string, TModule.callback)
 
-function t.children(p10)
-	-- upvalues: var53 (ref), t (ref)
-	assert(var53(p10))
+function TModule.children(p3) --[[ Line: 1077 ]]
+	-- upvalues: MapResult1 (copy), TModule (copy)
+	assert(MapResult1(p3))
 	
-	return function(p11)
-		-- upvalues: t (copy), p10 (ref)
-		local var54, var55 = t.Instance(p11)
+	return function(Object) --[[ Line: 1080 ]]
+		-- upvalues: TModule (upval), p3 (copy)
+		local v42, v43 = TModule.Instance(Object)
 		
-		if not var54 then
-			return false, var55 or ""
+		if not v42 then
+			return false, v43 or ""
 		end
-		local var56
-		local t_1 = {}
+		local t = {}
+		local Name = nil
 		
-		for i, v in pairs(p11:GetChildren()) do
-			var56 = v.Name
+		for i, child in pairs(Object:GetChildren()) do
+			Name = child.Name
 			
-			if p10[var56] then
-				if not t_1[var56] then
-					t_1[var56] = v
-					continue
+			if p3[Name] then
+				if t[Name] then
+					return false, string.format("Cannot process multiple children with the same name \"%s\"", Name)
 				end
-				return false, string.format("Cannot process multiple children with the same name \"%s\"", var56)
+				t[Name] = child
 			end
 		end
-		for i_1, v_1 in pairs(p10) do
-			var56, var128 = v_1(t_1[i_1])
+		local v44 = nil
+		for i, value in pairs(p3) do
+			local v45
+			v45, v165 = value(t[i])
 			
-			if not var56 then
-				return false, string.format("[%s.%s] %s", p11:GetFullName(), i_1, var128 or "")
+			if not v45 then
+				return false, string.format("[%s.%s] %s", Object:GetFullName(), i, v44 or "")
 			end
 		end
 		return true
 	end
 end
 
-return t
+return TModule

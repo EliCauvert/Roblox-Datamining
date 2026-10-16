@@ -1,9 +1,9 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local constantsModule = require(momentsCreation.Constants)
-local _ = require(momentsCreation.Parent.MomentsTypes)
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local ConstantsModule = require(MomentsCreation.Constants)
+local _ = require(MomentsCreation.Parent.MomentsTypes)
 
-return function()
-	-- upvalues: constantsModule (ref)
+return function() --[[ Line: 23 | Named "makeDefaultTextOverlayEdit" ]]
+	-- upvalues: ConstantsModule (copy)
 	return {
 		rotation = 0,
 		scale = 1,
@@ -13,7 +13,7 @@ return function()
 		textOverlayStyle = {
 			font = Enum.Font.BuilderSansMedium,
 			fontColor = Color3.new(0, 0, 0),
-			fontSize = constantsModule.TextOverlay.DefaultFontSize,
+			fontSize = ConstantsModule.TextOverlay.DefaultFontSize,
 			textXAlignment = Enum.TextXAlignment.Center
 		}
 	}

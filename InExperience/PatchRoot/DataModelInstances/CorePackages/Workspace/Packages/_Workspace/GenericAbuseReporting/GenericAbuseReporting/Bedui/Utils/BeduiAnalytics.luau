@@ -1,18 +1,12 @@
-﻿local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
-local parent = genericAbuseReporting.Parent
-local localPlayer = game:GetService("Players").LocalPlayer
-local telemetryService = game:GetService("TelemetryService")
-local argCheckModule = require(parent.ArgCheck)
-local dashModule = require(parent.Dash)
-local abuseEntrypointModule = require(genericAbuseReporting.Enums.AbuseEntrypoint)
-local _ = require(genericAbuseReporting.Enums.AbuseVector)
-local t = {
-	Abandoned = "EVENT_ABANDONED",
-	Error = "EVENT_ERROR",
-	Rendered = "EVENT_RENDERED",
-	Submitted = "EVENT_SUBMITTED"
-}
-local t_1 = {
+﻿local GenericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
+local Parent = GenericAbuseReporting.Parent
+local LocalPlayer = game:GetService("Players").LocalPlayer
+local TelemetryService = game:GetService("TelemetryService")
+local ArgCheckModule = require(Parent.ArgCheck)
+local DashModule = require(Parent.Dash)
+local AbuseEntrypointModule = require(GenericAbuseReporting.Enums.AbuseEntrypoint)
+local _ = require(GenericAbuseReporting.Enums.AbuseVector)
+local config = {
 	eventName = "DynamicAbuseReportEvent",
 	description = "Event to track dynamic abuse report",
 	links = "https://github.rbx.com/Roblox/proto-schemas/pull/6068",
@@ -21,23 +15,28 @@ local t_1 = {
 	throttlingPercentage = game:DefineFastInt("DynamicAbuseReportThrottleHundredthsPercent", 0)
 }
 
-local function buildCustomFields(p1)
-	-- upvalues: dashModule (ref), localPlayer (ref), abuseEntrypointModule (ref)
+local function buildCustomFields(p1) --[[ Line: 60 ]]
+	-- upvalues: DashModule (copy), LocalPlayer (copy), AbuseEntrypointModule (copy)
 	return {
 		abuse_vector = p1.context.abuseVector,
-		user_id = if localPlayer then localPlayer.UserId else 0,
+		user_id = if LocalPlayer then LocalPlayer.UserId else 0,
 		event_type = p1.eventType,
-		entry_point = abuseEntrypointModule.APP,
-		meta = if p1.meta then dashModule.pretty(p1.meta, { depth = 10, multiline = false }) else nil
+		entry_point = AbuseEntrypointModule.APP,
+		meta = if p1.meta then DashModule.pretty(p1.meta, { depth = 10, multiline = false }) else nil
 	}
 end
 
 return {
-	sendAnalyticsEvent = function(p1)
-		-- upvalues: argCheckModule (ref), telemetryService (ref), t_1 (ref), buildCustomFields (ref)
-		argCheckModule.assert(p1.context, "customFields must be provided")
-		argCheckModule.assert(p1.context.abuseVector, "customFields.abuse_vector must be provided")
-		telemetryService:LogEvent(t_1, { customFields = buildCustomFields(p1) })
+	sendAnalyticsEvent = function(p1) --[[ Line: 76 ]]
+		-- upvalues: ArgCheckModule (copy), TelemetryService (copy), config (copy), buildCustomFields (copy)
+		ArgCheckModule.assert(p1.context, "customFields must be provided")
+		ArgCheckModule.assert(p1.context.abuseVector, "customFields.abuse_vector must be provided")
+		TelemetryService:LogEvent(config, { customFields = buildCustomFields(p1) })
 	end,
-	TelemetryEventType = t
+	TelemetryEventType = {
+		Abandoned = "EVENT_ABANDONED",
+		Error = "EVENT_ERROR",
+		Rendered = "EVENT_RENDERED",
+		Submitted = "EVENT_SUBMITTED"
+	}
 }

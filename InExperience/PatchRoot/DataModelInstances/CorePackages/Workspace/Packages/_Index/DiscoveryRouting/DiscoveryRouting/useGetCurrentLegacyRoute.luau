@@ -1,25 +1,26 @@
-﻿local parent = script:FindFirstAncestor("DiscoveryRouting").Parent
-local reactModule = require(parent.React)
-local useStore = require(parent.RoactUtils).Hooks.RoactRodux.useStore
-local navigationRoduxModule = require(parent.NavigationRodux)
-local selectCurrentLegacyRoute = navigationRoduxModule.Selectors.selectCurrentLegacyRoute
-local getLegacyNavigationStore = navigationRoduxModule.GetLegacyNavigationStore
-local fFlagSignalsNavP2NavigationPrimitives = require(parent.SharedFlags).FFlagSignalsNavP2NavigationPrimitives
+﻿local Parent = script:FindFirstAncestor("DiscoveryRouting").Parent
+local ReactModule = require(Parent.React)
+local UseStoreFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useStore
+local NavigationRoduxModule = require(Parent.NavigationRodux)
+local SelectCurrentLegacyRouteFunction = NavigationRoduxModule.Selectors.selectCurrentLegacyRoute
+local GetLegacyNavigationStoreFunction = NavigationRoduxModule.GetLegacyNavigationStore
+local FFlagSignalsNavP2NavigationPrimitives = require(Parent.SharedFlags).FFlagSignalsNavP2NavigationPrimitives
 
-local function getCurrentLegacyRouteFromSignals()
-	-- upvalues: getLegacyNavigationStore (ref)
-	return getLegacyNavigationStore(false).getCurrentLegacyRoute(false)
+local function getCurrentLegacyRouteFromSignals() --[[ Line: 17 ]]
+	-- upvalues: GetLegacyNavigationStoreFunction (copy)
+	return GetLegacyNavigationStoreFunction(false).getCurrentLegacyRoute(false)
 end
 
-return function()
-	-- upvalues: fFlagSignalsNavP2NavigationPrimitives (ref), getCurrentLegacyRouteFromSignals (ref), useStore (ref), reactModule (ref), selectCurrentLegacyRoute (ref)
-	if fFlagSignalsNavP2NavigationPrimitives then
+return function() --[[ Line: 23 | Named "useGetCurrentLegacyRoute" ]]
+	-- upvalues: FFlagSignalsNavP2NavigationPrimitives (copy), getCurrentLegacyRouteFromSignals (copy), UseStoreFunction (copy), ReactModule (copy), SelectCurrentLegacyRouteFunction (copy)
+	if FFlagSignalsNavP2NavigationPrimitives then
 		return getCurrentLegacyRouteFromSignals
+	else
+		local UseStoreResult = UseStoreFunction()
+		
+		return ReactModule.useCallback(function() --[[ Line: 28 ]]
+			-- upvalues: SelectCurrentLegacyRouteFunction (upval), UseStoreResult (copy)
+			return SelectCurrentLegacyRouteFunction(UseStoreResult:getState())
+		end, { UseStoreResult })
 	end
-	local var1 = useStore()
-	
-	return reactModule.useCallback(function()
-		-- upvalues: selectCurrentLegacyRoute (copy), var1 (ref)
-		return selectCurrentLegacyRoute(var1:getState())
-	end, { var1 })
 end

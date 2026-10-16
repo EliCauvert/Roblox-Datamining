@@ -1,3 +1,3 @@
-﻿return require(script.Parent.Parent.Action)(script.Name, function(p1)
-	return { dumpPath = p1 }
+﻿return require(script.Parent.Parent.Action)(script.Name, function(DumpPath) --[[ Line: 4 ]]
+	return { dumpPath = DumpPath }
 end)

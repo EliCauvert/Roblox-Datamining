@@ -1,65 +1,65 @@
-﻿local socialServerDrivenUi = script:FindFirstAncestor("SocialServerDrivenUi")
-local parent = socialServerDrivenUi.Parent
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local sduiActionType = sduiCoreSystemModule.SduiActionType
-local getSduiActionHandlerRegistry = sduiCoreSystemModule.getSduiActionHandlerRegistry
-local fFlagLuaAppSduiVerificationUpsellActions = require(parent.SharedFlags).FFlagLuaAppSduiVerificationUpsellActions
-local fFlagSduiRequestFriendshipActionHandler = require(parent.SharedFlags).FFlagSduiRequestFriendshipActionHandler
-local fFlagEditProfileFramesEnabled = require(parent.SharedFlags).FFlagEditProfileFramesEnabled
-local fFlagAddSDUIEditProfileFramesAction = require(parent.SharedFlags).FFlagAddSDUIEditProfileFramesAction
-local fFlagAppChatConversationTrustedFriendUpsellBanner = require(parent.SharedFlags).FFlagAppChatConversationTrustedFriendUpsellBanner
+﻿local SocialServerDrivenUi = script:FindFirstAncestor("SocialServerDrivenUi")
+local Parent = SocialServerDrivenUi.Parent
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiActionType = SduiCoreSystemModule.SduiActionType
+local GetSduiActionHandlerRegistryFunction = SduiCoreSystemModule.getSduiActionHandlerRegistry
+local FFlagLuaAppSduiVerificationUpsellActions = require(Parent.SharedFlags).FFlagLuaAppSduiVerificationUpsellActions
+local FFlagSduiRequestFriendshipActionHandler = require(Parent.SharedFlags).FFlagSduiRequestFriendshipActionHandler
+local FFlagEditProfileFramesEnabled = require(Parent.SharedFlags).FFlagEditProfileFramesEnabled
+local FFlagAddSDUIEditProfileFramesAction = require(Parent.SharedFlags).FFlagAddSDUIEditProfileFramesAction
+local FFlagAppChatConversationTrustedFriendUpsellBanner = require(Parent.SharedFlags).FFlagAppChatConversationTrustedFriendUpsellBanner
 
-return function()
-	-- upvalues: sduiActionType (ref), fFlagLuaAppSduiVerificationUpsellActions (ref), socialServerDrivenUi (ref), fFlagSduiRequestFriendshipActionHandler (ref), fFlagEditProfileFramesEnabled (ref), fFlagAddSDUIEditProfileFramesAction (ref), fFlagAppChatConversationTrustedFriendUpsellBanner (ref), getSduiActionHandlerRegistry (ref)
-	getSduiActionHandlerRegistry().registerActionHandlerConfigs({
-		[sduiActionType.OpenFacialAgeEstimation] = if not fFlagLuaAppSduiVerificationUpsellActions then {
-			lazyHandler = function()
-				-- upvalues: socialServerDrivenUi (copy)
-				return require(socialServerDrivenUi.Actions.SduiOpenFacialAgeEstimationAction)
-			end
-		} else nil,
-		[sduiActionType.OpenAddConnectionsPage] = {
-			lazyHandler = function()
-				-- upvalues: socialServerDrivenUi (copy)
-				return require(socialServerDrivenUi.Actions.SduiOpenAddConnectionsPageAction)
+return function() --[[ Line: 17 | Named "registerSocialActions" ]]
+	-- upvalues: SduiActionType (copy), FFlagLuaAppSduiVerificationUpsellActions (copy), SocialServerDrivenUi (copy), FFlagSduiRequestFriendshipActionHandler (copy), FFlagEditProfileFramesEnabled (copy), FFlagAddSDUIEditProfileFramesAction (copy), FFlagAppChatConversationTrustedFriendUpsellBanner (copy), GetSduiActionHandlerRegistryFunction (copy)
+	GetSduiActionHandlerRegistryFunction().registerActionHandlerConfigs({
+		[SduiActionType.OpenFacialAgeEstimation] = if FFlagLuaAppSduiVerificationUpsellActions then nil else {
+			lazyHandler = function() --[[ Line: 24 ]]
+				-- upvalues: SocialServerDrivenUi (upval)
+				return require(SocialServerDrivenUi.Actions.SduiOpenFacialAgeEstimationAction)
 			end
 		},
-		[sduiActionType.OpenMarketplace] = {
-			lazyHandler = function()
-				-- upvalues: socialServerDrivenUi (copy)
-				return require(socialServerDrivenUi.Actions.SduiOpenMarketplaceAction)
+		[SduiActionType.OpenAddConnectionsPage] = {
+			lazyHandler = function() --[[ Line: 30 ]]
+				-- upvalues: SocialServerDrivenUi (upval)
+				return require(SocialServerDrivenUi.Actions.SduiOpenAddConnectionsPageAction)
 			end
 		},
-		[sduiActionType.HideProfileCompletion] = {
-			lazyHandler = function()
-				-- upvalues: socialServerDrivenUi (copy)
-				return require(socialServerDrivenUi.Actions.SduiHideProfileCompletionAction)
+		[SduiActionType.OpenMarketplace] = {
+			lazyHandler = function() --[[ Line: 35 ]]
+				-- upvalues: SocialServerDrivenUi (upval)
+				return require(SocialServerDrivenUi.Actions.SduiOpenMarketplaceAction)
 			end
 		},
-		[sduiActionType.RequestFriendship] = if fFlagSduiRequestFriendshipActionHandler then {
+		[SduiActionType.HideProfileCompletion] = {
+			lazyHandler = function() --[[ Line: 40 ]]
+				-- upvalues: SocialServerDrivenUi (upval)
+				return require(SocialServerDrivenUi.Actions.SduiHideProfileCompletionAction)
+			end
+		},
+		[SduiActionType.RequestFriendship] = if FFlagSduiRequestFriendshipActionHandler then {
 			skipUnifiedLogging = true,
-			lazyHandler = function()
-				-- upvalues: socialServerDrivenUi (copy)
-				return require(socialServerDrivenUi.Actions.SduiRequestFriendshipAction)
+			lazyHandler = function() --[[ Line: 46 ]]
+				-- upvalues: SocialServerDrivenUi (upval)
+				return require(SocialServerDrivenUi.Actions.SduiRequestFriendshipAction)
 			end
 		} else nil,
-		[sduiActionType.OpenProfileFramesEditor] = if fFlagEditProfileFramesEnabled and fFlagAddSDUIEditProfileFramesAction then {
-			lazyHandler = function()
-				-- upvalues: socialServerDrivenUi (copy)
-				return require(socialServerDrivenUi.Actions.SduiOpenProfileFramesEditorAction)
+		[SduiActionType.OpenProfileFramesEditor] = if FFlagEditProfileFramesEnabled and FFlagAddSDUIEditProfileFramesAction then {
+			lazyHandler = function() --[[ Line: 55 ]]
+				-- upvalues: SocialServerDrivenUi (upval)
+				return require(SocialServerDrivenUi.Actions.SduiOpenProfileFramesEditorAction)
 			end
 		} else nil,
-		[sduiActionType.OpenTrustedFriendsUpsellModal] = if fFlagAppChatConversationTrustedFriendUpsellBanner then {
-			lazyHandler = function()
-				-- upvalues: socialServerDrivenUi (copy)
-				return require(socialServerDrivenUi.Actions.SduiOpenTrustedFriendsUpsellModalAction)
+		[SduiActionType.OpenTrustedFriendsUpsellModal] = if FFlagAppChatConversationTrustedFriendUpsellBanner then {
+			lazyHandler = function() --[[ Line: 62 ]]
+				-- upvalues: SocialServerDrivenUi (upval)
+				return require(SocialServerDrivenUi.Actions.SduiOpenTrustedFriendsUpsellModalAction)
 			end
 		} else nil,
-		[sduiActionType.RecordPartyChatConversationUpsellAcknowledgement] = if fFlagAppChatConversationTrustedFriendUpsellBanner then {
+		[SduiActionType.RecordPartyChatConversationUpsellAcknowledgement] = if FFlagAppChatConversationTrustedFriendUpsellBanner then {
 			skipUnifiedLogging = true,
-			lazyHandler = function()
-				-- upvalues: socialServerDrivenUi (copy)
-				return require(socialServerDrivenUi.Actions.SduiRecordPartyChatConversationUpsellAcknowledgementAction)
+			lazyHandler = function() --[[ Line: 69 ]]
+				-- upvalues: SocialServerDrivenUi (upval)
+				return require(SocialServerDrivenUi.Actions.SduiRecordPartyChatConversationUpsellAcknowledgementAction)
 			end
 		} else nil
 	})

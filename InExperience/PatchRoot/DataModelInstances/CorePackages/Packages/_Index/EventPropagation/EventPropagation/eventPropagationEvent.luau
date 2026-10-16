@@ -1,24 +1,24 @@
-﻿local t = {}
-t.__index = t
+﻿local EventPropagationEventModule = {}
+EventPropagationEventModule.__index = EventPropagationEventModule
 
-function t.new(p1, p2, p3, p4, p5, p6)
-	-- upvalues: t (ref)
-	local t_1 = {
+function EventPropagationEventModule.new(TargetInstance, CurrentInstance, EventName, Phase, p1, Tbl) --[[ Line: 18 ]]
+	-- upvalues: EventPropagationEventModule (copy)
+	local config = {
 		cancelled = false,
-		phase = p4,
-		currentInstance = p2,
-		targetInstance = p1,
-		eventName = p3,
-		synthetic = p5 or false,
-		eventData = if type(p6) == "table" and not table.isfrozen(p6) then table.freeze(p6) else p6
+		phase = Phase,
+		currentInstance = CurrentInstance,
+		targetInstance = TargetInstance,
+		eventName = EventName,
+		synthetic = p1 or false,
+		eventData = if type(Tbl) == "table" and not table.isfrozen(Tbl) then table.freeze(Tbl) else Tbl
 	}
-	setmetatable(t_1, t)
+	setmetatable(config, EventPropagationEventModule)
 	
-	return t_1
+	return config
 end
 
-function t:cancel()
+function EventPropagationEventModule:cancel() --[[ Line: 41 ]]
 	self.cancelled = true
 end
 
-return t
+return EventPropagationEventModule

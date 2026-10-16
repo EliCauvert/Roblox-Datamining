@@ -1,66 +1,64 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local cryoModule = require(parent.Cryo)
-local roduxModule = require(parent.Rodux)
-local removedConversationModule = require(appChat.Conversations.Actions.RemovedConversation)
-local currentConversationTimeoutEndedModule = require(appChat.Conversations.Actions.CurrentConversationTimeoutEnded)
-local appChatNetworkingModule = require(parent.AppChatNetworking)
-local serializeChatTimeoutRangeModule = require(appChat.Utils.serializeChatTimeoutRange)
-local fFlagAppChatReactiveFeatureRestrictions = require(parent.SharedFlags).FFlagAppChatReactiveFeatureRestrictions
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local CryoModule = require(Parent.Cryo)
+local SerializeChatTimeoutRangeModule = require(AppChat.Utils.serializeChatTimeoutRange)
+local FFlagAppChatReactiveFeatureRestrictions = require(Parent.SharedFlags).FFlagAppChatReactiveFeatureRestrictions
 
-return roduxModule.createReducer({ userTimeout = {}, byConversationId = {} }, {
-	[appChatNetworkingModule.rodux.GetChatModerationStatuses.Succeeded.name] = function(p1, p2)
-		-- upvalues: serializeChatTimeoutRangeModule (ref), cryoModule (ref), fFlagAppChatReactiveFeatureRestrictions (ref)
-		local responseBody = p2.responseBody
-		local var1 = if p2.postBody then p2.postBody.ids else nil
+return (require(Parent.Rodux).createReducer({ userTimeout = {}, byConversationId = {} }, {
+	[require(Parent.AppChatNetworking).rodux.GetChatModerationStatuses.Succeeded.name] = function(JoinResult, p1) --[[ Line: 37 ]]
+		-- upvalues: SerializeChatTimeoutRangeModule (copy), CryoModule (copy), FFlagAppChatReactiveFeatureRestrictions (copy)
+		local ResponseBody = p1.responseBody
+		local Ids = if p1.postBody then p1.postBody.ids else nil
 		
-		if responseBody.user_timeout_range then
-			p1 = cryoModule.Dictionary.join(p1, {
-				userTimeout = serializeChatTimeoutRangeModule(responseBody.user_timeout_range)
+		if ResponseBody.user_timeout_range then
+			JoinResult = CryoModule.Dictionary.join(JoinResult, {
+				userTimeout = SerializeChatTimeoutRangeModule(ResponseBody.user_timeout_range)
 			})
-		elseif fFlagAppChatReactiveFeatureRestrictions and var1 ~= nil then
-			p1 = cryoModule.Dictionary.join(p1, { userTimeout = {} })
+		elseif FFlagAppChatReactiveFeatureRestrictions and Ids ~= nil then
+			JoinResult = CryoModule.Dictionary.join(JoinResult, { userTimeout = {} })
 		end
-		if responseBody.conversation_timeout_ranges then
+		if ResponseBody.conversation_timeout_ranges then
 			local t = {}
 			
-			for i, v in responseBody.conversation_timeout_ranges do
-				local id = v.id
-				t[id] = true
-				p1 = cryoModule.Dictionary.join(p1, {
-					byConversationId = cryoModule.Dictionary.join(p1.byConversationId, { [id] = serializeChatTimeoutRangeModule(v.timeout_range) })
+			for _, conversationTimeoutRange in ResponseBody.conversation_timeout_ranges do
+				local Id = conversationTimeoutRange.id
+				t[Id] = true
+				JoinResult = CryoModule.Dictionary.join(JoinResult, {
+					byConversationId = CryoModule.Dictionary.join(JoinResult.byConversationId, {
+						[Id] = SerializeChatTimeoutRangeModule(conversationTimeoutRange.timeout_range)
+					})
 				})
 			end
-			if fFlagAppChatReactiveFeatureRestrictions and var1 ~= nil and #var1 > 0 then
-				for i, v_1 in var1 do
-					if not t[v_1] then
-						p1 = cryoModule.Dictionary.join(p1, {
-							byConversationId = cryoModule.Dictionary.join(p1.byConversationId, { [v_1] = cryoModule.None })
+			if FFlagAppChatReactiveFeatureRestrictions and Ids ~= nil and #Ids > 0 then
+				for _, id in Ids do
+					if not t[id] then
+						JoinResult = CryoModule.Dictionary.join(JoinResult, {
+							byConversationId = CryoModule.Dictionary.join(JoinResult.byConversationId, { [id] = CryoModule.None })
 						})
 					end
 				end
 			end
 		end
-		return p1
+		return JoinResult
 	end,
-	[removedConversationModule.name] = function(p3, p4)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p3, {
-			byConversationId = cryoModule.Dictionary.join(p3.byConversationId, { [p4.conversationId] = cryoModule.None })
+	[require(AppChat.Conversations.Actions.RemovedConversation).name] = function(p2, p3) --[[ Line: 89 ]]
+		-- upvalues: CryoModule (copy)
+		return CryoModule.Dictionary.join(p2, {
+			byConversationId = CryoModule.Dictionary.join(p2.byConversationId, { [p3.conversationId] = CryoModule.None })
 		})
 	end,
-	[currentConversationTimeoutEndedModule.name] = function(p3, p4)
-		-- upvalues: fFlagAppChatReactiveFeatureRestrictions (ref), cryoModule (ref)
-		local var2 = p3
-		local unixTimestamp = DateTime.now().UnixTimestamp
+	[require(AppChat.Conversations.Actions.CurrentConversationTimeoutEnded).name] = function(JoinResult, p2) --[[ Line: 97 ]]
+		-- upvalues: FFlagAppChatReactiveFeatureRestrictions (copy), CryoModule (copy)
+		local JoinResult1 = JoinResult
+		local UnixTimestamp = DateTime.now().UnixTimestamp
 		
-		if p3.userTimeout and p3.userTimeout.endTimestamp and p3.userTimeout.endTimestamp < unixTimestamp and (not fFlagAppChatReactiveFeatureRestrictions or p3.userTimeout.requiresAcknowledgement ~= true) then
-			var2 = cryoModule.Dictionary.join(var2, { userTimeout = {} })
+		if JoinResult.userTimeout and JoinResult.userTimeout.endTimestamp and JoinResult.userTimeout.endTimestamp < UnixTimestamp and (not FFlagAppChatReactiveFeatureRestrictions or JoinResult.userTimeout.requiresAcknowledgement ~= true) then
+			JoinResult1 = CryoModule.Dictionary.join(JoinResult1, { userTimeout = {} })
 		end
-		local conversationId = p4.conversationId
+		local ConversationId = p2.conversationId
 		
-		return if p3.byConversationId[conversationId] and p3.byConversationId[conversationId].endTimestamp and unixTimestamp > p3.byConversationId[conversationId].endTimestamp and (not fFlagAppChatReactiveFeatureRestrictions or p3.byConversationId[conversationId].requiresAcknowledgement ~= true) then cryoModule.Dictionary.join(var2, {
-			byConversationId = cryoModule.Dictionary.join(var2.byConversationId, { [conversationId] = cryoModule.None })
-		}) else var2
+		return if JoinResult.byConversationId[ConversationId] and JoinResult.byConversationId[ConversationId].endTimestamp and UnixTimestamp > JoinResult.byConversationId[ConversationId].endTimestamp and (not FFlagAppChatReactiveFeatureRestrictions or JoinResult.byConversationId[ConversationId].requiresAcknowledgement ~= true) then CryoModule.Dictionary.join(JoinResult1, {
+			byConversationId = CryoModule.Dictionary.join(JoinResult1.byConversationId, { [ConversationId] = CryoModule.None })
+		}) else JoinResult1
 	end
-})
+}))

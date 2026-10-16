@@ -1,80 +1,80 @@
-﻿local abuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
-local reactModule = require(game:GetService("CorePackages").Packages.React)
-local constantsModule = require(abuseReportMenu.Components.Constants)
-local _ = require(abuseReportMenu.Components.Types)
-local tnSIXPWrapperModule = require(abuseReportMenu.IXP.TnSIXPWrapper)
-local runScreenshotCaptureSequenceModule = require(script.Parent.runScreenshotCaptureSequence)
+﻿local AbuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
+local ReactModule = require(game:GetService("CorePackages").Packages.React)
+local ConstantsModule = require(AbuseReportMenu.Components.Constants)
+local _ = require(AbuseReportMenu.Components.Types)
+local TnSIXPWrapperModule = require(AbuseReportMenu.IXP.TnSIXPWrapper)
+local RunScreenshotCaptureSequenceModule = require(script.Parent.runScreenshotCaptureSequence)
 
-local function _()
-	-- upvalues: constantsModule (ref)
+local function _() --[[ Line: 29 | Named "emptySnapshot" ]]
+	-- upvalues: ConstantsModule (copy)
 	return {
 		screenshotId = "",
-		identificationResults = constantsModule.InitialIdentificationResults
+		identificationResults = ConstantsModule.InitialIdentificationResults
 	}
 end
 
-return function()
-	-- upvalues: reactModule (ref), constantsModule (ref), tnSIXPWrapperModule (ref), runScreenshotCaptureSequenceModule (ref)
-	local var1 = reactModule.useRef({
+return function() --[[ Line: 54 | Named "useCaptureScreenshotV2" ]]
+	-- upvalues: ReactModule (copy), ConstantsModule (copy), TnSIXPWrapperModule (copy), RunScreenshotCaptureSequenceModule (copy)
+	local UseRefResult = ReactModule.useRef({
 		screenshotId = "",
-		identificationResults = constantsModule.InitialIdentificationResults
+		identificationResults = ConstantsModule.InitialIdentificationResults
 	})
-	local var2, var3 = reactModule.useState(false)
-	local idle = reactModule.useRef("idle")
-	local var4 = tnSIXPWrapperModule.getReportAnythingAvatarEnabled() or tnSIXPWrapperModule.getReportAnythingExperienceEnabled()
-	local var5 = reactModule.useRef(var4)
-	var5.current = var4
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local Idle = ReactModule.useRef("idle")
+	local ReportAnythingAvatarEnabled = TnSIXPWrapperModule.getReportAnythingAvatarEnabled() or TnSIXPWrapperModule.getReportAnythingExperienceEnabled()
+	local UseRefResult1 = ReactModule.useRef(ReportAnythingAvatarEnabled)
+	UseRefResult1.current = ReportAnythingAvatarEnabled
 	
 	return {
-		captureIfApplicable = reactModule.useCallback(function(p1)
-			-- upvalues: var5 (ref), idle (ref), runScreenshotCaptureSequenceModule (copy), var3 (ref), var1 (ref)
-			if var5.current and idle.current == "idle" then
-				idle.current = "capturing"
-				runScreenshotCaptureSequenceModule({
+		captureIfApplicable = ReactModule.useCallback(function(p1) --[[ Line: 81 ]]
+			-- upvalues: UseRefResult1 (copy), Idle (copy), RunScreenshotCaptureSequenceModule (upval), UseStateResult2 (copy), UseRefResult (copy)
+			if UseRefResult1.current and Idle.current == "idle" then
+				Idle.current = "capturing"
+				RunScreenshotCaptureSequenceModule({
 					hide = p1.hide,
 					show = p1.show,
-					onScreenshotTaken = function()
-						-- upvalues: var3 (copy)
-						var3(true)
+					onScreenshotTaken = function() --[[ Line: 91 ]]
+						-- upvalues: UseStateResult2 (upval)
+						UseStateResult2(true)
 					end,
-					onScreenshotUploaded = function(p2)
-						-- upvalues: var1 (copy)
-						var1.current = {
-							screenshotId = p2,
-							identificationResults = var1.current.identificationResults
+					onScreenshotUploaded = function(ScreenshotId) --[[ Line: 94 ]]
+						-- upvalues: UseRefResult (upval)
+						UseRefResult.current = {
+							screenshotId = ScreenshotId,
+							identificationResults = UseRefResult.current.identificationResults
 						}
 					end,
-					onIdentificationCompleted = function(p2)
-						-- upvalues: var1 (copy)
-						var1.current = {
-							screenshotId = var1.current.screenshotId,
-							identificationResults = p2
+					onIdentificationCompleted = function(IdentificationResults) --[[ Line: 100 ]]
+						-- upvalues: UseRefResult (upval)
+						UseRefResult.current = {
+							screenshotId = UseRefResult.current.screenshotId,
+							identificationResults = IdentificationResults
 						}
 					end,
-					onCaptureEnd = function()
-						-- upvalues: idle (copy)
-						idle.current = "done"
+					onCaptureEnd = function() --[[ Line: 106 ]]
+						-- upvalues: Idle (upval)
+						Idle.current = "done"
 					end
 				})
 				
 				return
 			end
 		end, {}),
-		reset = reactModule.useCallback(function()
-			-- upvalues: var1 (ref), constantsModule (copy), idle (ref), var3 (ref)
-			var1.current = {
+		reset = ReactModule.useCallback(function() --[[ Line: 71 ]]
+			-- upvalues: UseRefResult (copy), ConstantsModule (upval), Idle (copy), UseStateResult2 (copy)
+			UseRefResult.current = {
 				screenshotId = "",
-				identificationResults = constantsModule.InitialIdentificationResults
+				identificationResults = ConstantsModule.InitialIdentificationResults
 			}
-			idle.current = "idle"
-			var3(false)
+			Idle.current = "idle"
+			UseStateResult2(false)
 		end, {}),
-		getIsCapturing = reactModule.useCallback(function()
-			-- upvalues: idle (ref)
-			return idle.current == "capturing"
+		getIsCapturing = ReactModule.useCallback(function(): boolean --[[ Line: 77 ]]
+			-- upvalues: Idle (copy)
+			return Idle.current == "capturing"
 		end, {}),
-		isCaptureApplicable = var4,
-		isScreenshotTaken = var2,
-		snapshotRef = var1
+		isCaptureApplicable = ReportAnythingAvatarEnabled,
+		isScreenshotTaken = UseStateResult,
+		snapshotRef = UseRefResult
 	}
 end

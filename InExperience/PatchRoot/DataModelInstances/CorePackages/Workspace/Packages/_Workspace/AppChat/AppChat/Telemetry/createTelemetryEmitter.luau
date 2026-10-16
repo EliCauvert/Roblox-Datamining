@@ -1,15 +1,15 @@
-﻿local parent = script:FindFirstAncestor("AppChat").Parent
-local socialLuaAnalyticsModule = require(parent.SocialLuaAnalytics)
-local loggingProtocolModule = require(parent.LoggingProtocol)
-local loggerModule = require(script.Parent.Logger)
+﻿local Parent = script:FindFirstAncestor("AppChat").Parent
+local SocialLuaAnalyticsModule = require(Parent.SocialLuaAnalytics)
+local LoggingProtocolModule = require(Parent.LoggingProtocol)
+local LoggerModule = require(script.Parent.Logger)
 
-return function(p1)
-	-- upvalues: socialLuaAnalyticsModule (ref), loggingProtocolModule (ref), loggerModule (ref)
-	return socialLuaAnalyticsModule.Telemetry.createEmitter({
+return function(GetSharedInfo) --[[ Line: 8 ]]
+	-- upvalues: SocialLuaAnalyticsModule (copy), LoggingProtocolModule (copy), LoggerModule (copy)
+	return SocialLuaAnalyticsModule.Telemetry.createEmitter({
 		shouldUseTelemetryService = true,
-		telemetryImpl = loggingProtocolModule.default,
-		loggerImpl = loggerModule,
+		telemetryImpl = LoggingProtocolModule.default,
+		loggerImpl = LoggerModule,
 		defaultTelemetryConfig = { throttlingThousandths = 10000, links = "example.com" },
-		getSharedInfo = p1
+		getSharedInfo = GetSharedInfo
 	})
 end

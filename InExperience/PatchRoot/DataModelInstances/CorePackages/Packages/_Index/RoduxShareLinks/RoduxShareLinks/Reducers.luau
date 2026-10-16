@@ -1,7 +1,7 @@
-﻿local roduxModule = require(script:FindFirstAncestor("RoduxShareLinks").Parent.Rodux)
-local invitesModule = require(script.Invites)
+﻿local RoduxModule = require(script:FindFirstAncestor("RoduxShareLinks").Parent.Rodux)
+local InvitesModule = require(script.Invites)
 
-return function(p1)
-	-- upvalues: roduxModule (ref), invitesModule (ref)
-	return roduxModule.combineReducers({ Invites = invitesModule(p1) })
+return function(p1) --[[ Line: 7 ]]
+	-- upvalues: RoduxModule (copy), InvitesModule (copy)
+	return RoduxModule.combineReducers({ Invites = InvitesModule(p1) })
 end

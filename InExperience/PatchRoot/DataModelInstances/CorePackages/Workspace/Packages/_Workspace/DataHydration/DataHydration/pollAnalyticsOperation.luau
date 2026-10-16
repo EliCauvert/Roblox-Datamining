@@ -1,31 +1,31 @@
-﻿local parent = script:FindFirstAncestor("DataHydration").Parent
-local promiseModule = require(parent.Promise)
-local httpClientModule = require(parent.HttpClient)
-local fetch = httpClientModule.fetch
-local asPromise = httpClientModule.asPromise
+﻿local Parent = script:FindFirstAncestor("DataHydration").Parent
+local PromiseModule = require(Parent.Promise)
+local HttpClientModule = require(Parent.HttpClient)
+local FetchFunction = HttpClientModule.fetch
+local AsPromiseFunction = HttpClientModule.asPromise
 
-return function(p1)
-	-- upvalues: promiseModule (ref), fetch (ref), asPromise (ref)
-	local delay = p1.delay or promiseModule.delay
+return function(p1) --[[ Line: 50 | Named "pollAnalyticsOperation" ]]
+	-- upvalues: PromiseModule (copy), FetchFunction (copy), AsPromiseFunction (copy)
+	local Delay = p1.delay or PromiseModule.delay
 	
-	local function postQuery(p2)
-		-- upvalues: fetch (copy), p1 (ref), asPromise (copy), promiseModule (copy), delay (ref), postQuery (ref)
-		return asPromise(fetch({
+	local function postQuery(p2) --[[ Line: 53 ]]
+		-- upvalues: FetchFunction (upval), p1 (copy), AsPromiseFunction (upval), PromiseModule (upval), Delay (copy), postQuery (copy)
+		return AsPromiseFunction((FetchFunction({
 			method = "POST",
 			network = p1.network,
 			url = p1.url,
 			body = p1.body,
 			analyticsKey = p1.analyticsKey,
-			decode = function(p3)
-				return if p3 then p3.operation else {}
+			decode = function(p3) --[[ Line: 60 ]]
+				return p3 and p3.operation or {}
 			end
-		})):andThen(function(p3)
-			-- upvalues: p2 (ref), promiseModule (copy), p1 (copy), delay (copy), postQuery (copy)
-			return if p3.done == true then if p3.error == nil then promiseModule.resolve(p1.mapResult(p3)) else promiseModule.reject({
-				responseCode = p3.error.code,
-				errorMessage = p3.error.message
-			}) elseif p2 >= 6 then promiseModule.reject({ errorMessage = p1.timeoutMessage }) else delay(2):andThen(function()
-				-- upvalues: postQuery (copy), p2 (copy)
+		}))):andThen(function(Result) --[[ Line: 64 ]]
+			-- upvalues: p2 (copy), PromiseModule (upval), p1 (upval), Delay (upval), postQuery (upval)
+			return if Result.done == true then if Result.error == nil then PromiseModule.resolve(p1.mapResult(Result)) else PromiseModule.reject({
+				responseCode = Result.error.code,
+				errorMessage = Result.error.message
+			}) elseif p2 >= 6 then PromiseModule.reject({ errorMessage = p1.timeoutMessage }) else Delay(2):andThen(function() --[[ Line: 71 ]]
+				-- upvalues: postQuery (upval), p2 (upval)
 				return postQuery(p2 + 1)
 			end)
 		end)

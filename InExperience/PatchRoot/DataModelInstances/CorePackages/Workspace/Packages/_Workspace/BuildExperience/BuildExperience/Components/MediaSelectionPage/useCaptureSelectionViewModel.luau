@@ -1,31 +1,31 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
 
-return function(p1)
-	-- upvalues: signalsReactModule (ref), reactModule (ref)
-	local var1 = signalsReactModule.useSignalState(p1.captureSource.getCaptures)
-	local var2 = signalsReactModule.useSignalState(p1.captureSource.getIsFinished)
-	local var3, var4 = reactModule.useState(nil)
+return function(p1) --[[ Line: 22 | Named "useCaptureSelectionViewModel" ]]
+	-- upvalues: SignalsReactModule (copy), ReactModule (copy)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(p1.captureSource.getCaptures)
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(p1.captureSource.getIsFinished)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	
 	return {
-		captures = var1,
-		selectedCapture = var3,
-		previewContent = reactModule.useMemo(function()
-			-- upvalues: var3 (ref)
-			return if var3 == nil or typeof(var3) ~= "Object" then nil else Content.fromObject(var3)
-		end, { var3 }),
-		isFinished = var2,
-		onCaptureSelected = reactModule.useCallback(function(p2)
-			-- upvalues: var4 (ref)
-			var4(p2)
+		captures = UseSignalStateResult,
+		selectedCapture = UseStateResult,
+		previewContent = ReactModule.useMemo(function() --[[ Line: 27 ]]
+			-- upvalues: UseStateResult (copy)
+			return if UseStateResult == nil or typeof(UseStateResult) ~= "Object" then nil else Content.fromObject(UseStateResult)
+		end, { UseStateResult }),
+		isFinished = UseSignalStateResult1,
+		onCaptureSelected = ReactModule.useCallback(function(p2) --[[ Line: 34 ]]
+			-- upvalues: UseStateResult2 (copy)
+			UseStateResult2(p2)
 		end, {}),
-		onConfirm = reactModule.useCallback(function()
-			-- upvalues: var3 (ref), p1 (ref)
-			if var3 ~= nil then
-				p1.onCaptureConfirmed(var3)
+		onConfirm = ReactModule.useCallback(function() --[[ Line: 38 ]]
+			-- upvalues: UseStateResult (copy), p1 (copy)
+			if UseStateResult ~= nil then
+				p1.onCaptureConfirmed(UseStateResult)
 			end
-		end, { var3, p1.onCaptureConfirmed }),
+		end, { UseStateResult, p1.onCaptureConfirmed }),
 		onShowMore = p1.captureSource.fetchMore
 	}
 end

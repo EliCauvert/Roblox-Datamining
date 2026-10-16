@@ -1,20 +1,19 @@
-﻿local httpService = game:GetService("HttpService")
-local parent = script:FindFirstAncestor("PlayWithRewardState").Parent
-local mutedError = require(parent.Loggers).mutedError
-local tModule = require(parent.t)
-local fFlagLuaAppEnableContainedRewardUiModule = require(script.Parent.FFlagLuaAppEnableContainedRewardUi)
-local var1 = tModule.interface({
-	titleText = tModule.string,
-	subtitleText = tModule.string,
-	buttonText = tModule.string,
-	coachmarkTitleText = tModule.string,
-	coachmarkSubtitleText = tModule.string,
-	showButton = tModule.boolean,
-	variantId = tModule.string,
-	keepRewardContained = if fFlagLuaAppEnableContainedRewardUiModule then tModule.optional(tModule.boolean) else nil
+﻿local HttpService = game:GetService("HttpService")
+local Parent = script:FindFirstAncestor("PlayWithRewardState").Parent
+local MutedErrorFunction = require(Parent.Loggers).mutedError
+local TModule = require(Parent.t)
+local FFlagLuaAppEnableContainedRewardUiModule = require(script.Parent.FFlagLuaAppEnableContainedRewardUi)
+local InterfaceResult = TModule.interface({
+	titleText = TModule.string,
+	subtitleText = TModule.string,
+	buttonText = TModule.string,
+	coachmarkTitleText = TModule.string,
+	coachmarkSubtitleText = TModule.string,
+	showButton = TModule.boolean,
+	variantId = TModule.string,
+	keepRewardContained = if FFlagLuaAppEnableContainedRewardUiModule then TModule.optional(TModule.boolean) else nil
 })
-local t = {}
-local t_1 = {
+local config = {
 	titleText = "",
 	subtitleText = "",
 	buttonText = "",
@@ -22,38 +21,38 @@ local t_1 = {
 	coachmarkSubtitleText = "",
 	showButton = false,
 	variantId = "",
-	keepRewardContained = if fFlagLuaAppEnableContainedRewardUiModule then false else nil
+	keepRewardContained = not FFlagLuaAppEnableContainedRewardUiModule and nil
 }
 
-function t.fromJsonData(p1)
-	-- upvalues: t_1 (ref), httpService (ref), var1 (ref), mutedError (ref), fFlagLuaAppEnableContainedRewardUiModule (ref)
-	local cloned = table.clone(t_1)
-	local ok, status = pcall(function()
-		-- upvalues: httpService (copy), p1 (ref)
-		return httpService:JSONDecode(p1)
-	end)
-	
-	if ok then
-		local var2, var3 = var1(status)
+return {
+	fromJsonData = function(Input) --[[ Line: 44 ]]
+		-- upvalues: config (copy), HttpService (copy), InterfaceResult (copy), MutedErrorFunction (copy), FFlagLuaAppEnableContainedRewardUiModule (copy)
+		local Copy = table.clone(config)
+		local Success, Result = pcall(function() --[[ Line: 47 ]]
+			-- upvalues: HttpService (upval), Input (copy)
+			return HttpService:JSONDecode(Input)
+		end)
 		
-		if not var2 then
-			mutedError(`PlayWithRewardExperimentData invalid: {tostring(var3)}`)
+		if Success then
+			local InterfaceResultResult, InterfaceResultResult2 = InterfaceResult(Result)
 			
-			return cloned
+			if not InterfaceResultResult then
+				MutedErrorFunction(`PlayWithRewardExperimentData invalid: {tostring(InterfaceResultResult2)}`)
+				
+				return Copy
+			end
+			Copy.titleText = Result.titleText
+			Copy.subtitleText = Result.subtitleText
+			Copy.buttonText = Result.buttonText
+			Copy.coachmarkTitleText = Result.coachmarkTitleText
+			Copy.coachmarkSubtitleText = Result.coachmarkSubtitleText
+			Copy.showButton = Result.showButton
+			Copy.variantId = Result.variantId
+			
+			if FFlagLuaAppEnableContainedRewardUiModule then
+				Copy.keepRewardContained = Result.keepRewardContained or false
+			end
 		end
-		cloned.titleText = status.titleText
-		cloned.subtitleText = status.subtitleText
-		cloned.buttonText = status.buttonText
-		cloned.coachmarkTitleText = status.coachmarkTitleText
-		cloned.coachmarkSubtitleText = status.coachmarkSubtitleText
-		cloned.showButton = status.showButton
-		cloned.variantId = status.variantId
-		
-		if fFlagLuaAppEnableContainedRewardUiModule then
-			cloned.keepRewardContained = status.keepRewardContained or false
-		end
+		return Copy
 	end
-	return cloned
-end
-
-return t
+}

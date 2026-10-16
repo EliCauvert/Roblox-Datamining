@@ -1,122 +1,127 @@
-﻿local parent = script:FindFirstAncestor("GameDetail").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local iconButton = foundationModule.IconButton
-local iconName = foundationModule.Enums.IconName
-local buttonSize = foundationModule.Enums.ButtonSize
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local useTokens = foundationModule.Hooks.useTokens
-local useDeviceInsets = require(parent.Responsive).useDeviceInsets
-local appPage = require(parent.RobloxAppEnums).AppPage
-local navigationRoduxModule = require(parent.NavigationRodux)
-local selectors = navigationRoduxModule.Selectors
-local navigateBack = navigationRoduxModule.Thunks.NavigateBack
-local peekViewState = require(parent.PeekView).PeekViewState
-local roactUtilsModule = require(parent.RoactUtils)
-local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagUseNavigationSelectors = sharedFlagsModule.FFlagUseNavigationSelectors
-local fFlagSignalsNavP3fGameDetails = sharedFlagsModule.FFlagSignalsNavP3fGameDetails
-local fFlagSignalsNavP3Dispatch = sharedFlagsModule.FFlagSignalsNavP3Dispatch
-local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
-local useSignalState = require(parent.SignalsReact).useSignalState
-local createComputed = require(parent.Signals).createComputed
-local getLegacyNavigationStore = require(parent.NavigationRodux).GetLegacyNavigationStore
-local experienceDetailsPageUtilsModule = require(script.Parent.ExperienceDetailsPageUtils)
+﻿local Parent = script:FindFirstAncestor("GameDetail").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local IconButton = FoundationModule.IconButton
+local IconName = FoundationModule.Enums.IconName
+local ButtonSize = FoundationModule.Enums.ButtonSize
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseDeviceInsetsFunction = require(Parent.Responsive).useDeviceInsets
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local NavigationRoduxModule = require(Parent.NavigationRodux)
+local Selectors = NavigationRoduxModule.Selectors
+local NavigateBackFunction = NavigationRoduxModule.Thunks.NavigateBack
+local PeekViewState = require(Parent.PeekView).PeekViewState
+local RoactUtilsModule = require(Parent.RoactUtils)
+local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
+local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagUseNavigationSelectors = SharedFlagsModule.FFlagUseNavigationSelectors
+local FFlagSignalsNavP3fGameDetails = SharedFlagsModule.FFlagSignalsNavP3fGameDetails
+local FFlagSignalsNavP3Dispatch = SharedFlagsModule.FFlagSignalsNavP3Dispatch
+local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local CreateComputedFunction = require(Parent.Signals).createComputed
+local GetLegacyNavigationStoreFunction = require(Parent.NavigationRodux).GetLegacyNavigationStore
+local ExperienceDetailsPageUtilsModule = require(script.Parent.ExperienceDetailsPageUtils)
 
-return reactModule.memo(function(p1)
-	-- upvalues: useDispatch (ref), useDeviceInsets (ref), useTokens (ref), fFlagSignalsNavP3fGameDetails (ref), reactModule (ref), getLegacyNavigationStore (ref), createComputed (ref), appPage (ref), useSignalState (ref), useSelector (ref), fFlagUseNavigationSelectors (ref), selectors (ref), peekViewState (ref), experienceDetailsPageUtilsModule (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateBack (ref), view (ref), iconButton (ref), iconName (ref), buttonVariant (ref), buttonSize (ref)
-	local pageProps = p1.pageProps
-	local onClose = p1.onClose
-	local var2 = useDispatch()
-	local var3 = useDeviceInsets()
-	local var4 = useTokens()
-	local var5 = if fFlagSignalsNavP3fGameDetails then useSignalState(reactModule.useMemo(function()
-		-- upvalues: getLegacyNavigationStore (copy), createComputed (copy), appPage (copy)
-		local var6 = getLegacyNavigationStore(false)
+return ReactModule.memo(function(p1) --[[ Line: 43 | Named "PeekViewTopBar" ]]
+	-- upvalues: UseDispatchFunction (copy), UseDeviceInsetsFunction (copy), UseTokensFunction (copy), FFlagSignalsNavP3fGameDetails (copy), ReactModule (copy), GetLegacyNavigationStoreFunction (copy), CreateComputedFunction (copy), AppPage (copy), UseSignalStateFunction (copy), UseSelectorFunction (copy), FFlagUseNavigationSelectors (copy), Selectors (copy), PeekViewState (copy), ExperienceDetailsPageUtilsModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateBackFunction (copy), View (copy), IconButton (copy), IconName (copy), ButtonVariant (copy), ButtonSize (copy)
+	local PageProps = p1.pageProps
+	local OnCloseFunction = p1.onClose
+	local UseDispatchResult = UseDispatchFunction()
+	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
+	local UseTokensResult = UseTokensFunction()
+	local UseSignalStateResult = nil
+	UseSignalStateResult = if FFlagSignalsNavP3fGameDetails then UseSignalStateFunction((ReactModule.useMemo(function() --[[ Line: 53 ]]
+		-- upvalues: GetLegacyNavigationStoreFunction (upval), CreateComputedFunction (upval), AppPage (upval)
+		local LegacyNavigationStore = GetLegacyNavigationStoreFunction(false)
 		
-		return createComputed(function(p2)
-			-- upvalues: var6 (ref), appPage (copy)
-			local currentLegacyRoute = var6.getCurrentLegacyRoute(p2)
-			local var7 = 0
+		return CreateComputedFunction(function(p2): boolean --[[ Line: 55 ]]
+			-- upvalues: LegacyNavigationStore (copy), AppPage (upval)
+			local CurrentLegacyRoute = LegacyNavigationStore.getCurrentLegacyRoute(p2)
+			local Count = 0
 			
-			if currentLegacyRoute then
-				for i = 1, #currentLegacyRoute do
-					if currentLegacyRoute[i].name == appPage.GameDetail then
-						var7 += 1
+			if CurrentLegacyRoute then
+				for i = 1, #CurrentLegacyRoute do
+					if CurrentLegacyRoute[i].name == AppPage.GameDetail then
+						Count += 1
 						
-						if var7 <= 1 then
-							continue
+						if Count > 1 then
+							return true
 						end
-						return true
 					end
 				end
 			end
 			return false
 		end)
-	end, {})) else useSelector(function(p2)
-		-- upvalues: fFlagUseNavigationSelectors (copy), selectors (copy), appPage (copy)
-		local var7 = if fFlagUseNavigationSelectors then selectors.selectLegacyHistory(p2) else p2.Navigation.history
-		local var8 = var7 and var7[#var7]
-		local var9 = 0
+	end, {}))) else UseSelectorFunction(function(p2): boolean --[[ Line: 73 ]]
+		-- upvalues: FFlagUseNavigationSelectors (upval), Selectors (upval), AppPage (upval)
+		local SelectLegacyHistoryResult = if FFlagUseNavigationSelectors then Selectors.selectLegacyHistory(p2) else p2.Navigation.history
+		local SelectLegacyHistoryResultEntry = SelectLegacyHistoryResult and SelectLegacyHistoryResult[#SelectLegacyHistoryResult]
+		local Count = 0
 		
-		if var8 then
-			for i = 1, #var8 do
-				if var8[i].name == appPage.GameDetail then
-					var9 += 1
+		if SelectLegacyHistoryResultEntry then
+			for i = 1, #SelectLegacyHistoryResultEntry do
+				if SelectLegacyHistoryResultEntry[i].name == AppPage.GameDetail then
+					Count += 1
 					
-					if var9 <= 1 then
-						continue
+					if Count > 1 then
+						return true
 					end
-					return true
 				end
 			end
 		end
 		return false
 	end)
-	reactModule.useEffect(function()
-		-- upvalues: var5 (write), var2 (ref), peekViewState (copy)
-		return function()
-			-- upvalues: var5 (copy), var2 (copy), peekViewState (copy)
-			if not var5 then
-				var2({
+	ReactModule.useEffect(function() --[[ Line: 93 ]]
+		-- upvalues: UseSignalStateResult (ref), UseDispatchResult (copy), PeekViewState (upval)
+		return function() --[[ Line: 94 ]]
+			-- upvalues: UseSignalStateResult (upval), UseDispatchResult (upval), PeekViewState (upval)
+			if not UseSignalStateResult then
+				UseDispatchResult({
 					type = "SetGameDetailsPeekViewState",
-					viewState = peekViewState.Closed
+					viewState = PeekViewState.Closed
 				})
 			end
 		end
-	end, { var2, var5 })
-	local showBackButton = experienceDetailsPageUtilsModule.getFromPropsOrNavigationParams(pageProps, "showBackButton")
-	local var10 = if showBackButton ~= nil then var5 else showBackButton
+	end, { UseDispatchResult, UseSignalStateResult })
+	local ShowBackButtonFromPropsOrNavigationParams = ExperienceDetailsPageUtilsModule.getFromPropsOrNavigationParams(PageProps, "showBackButton")
+	local UseSignalStateResult1 = if ShowBackButtonFromPropsOrNavigationParams == nil then UseSignalStateResult else ShowBackButtonFromPropsOrNavigationParams
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "row align-y-center size-full",
 		padding = {
-			top = UDim.new(0, var3.top),
-			left = UDim.new(0, var4.Padding.Large)
+			top = UDim.new(0, UseDeviceInsetsResult.top),
+			left = UDim.new(0, UseTokensResult.Padding.Large)
 		}
 	}, {
-		NavButton = reactModule.createElement(iconButton, {
+		NavButton = ReactModule.createElement(IconButton, {
 			isCircular = true,
 			testId = "--discovery-edp-iconbutton-peekview-nav",
-			icon = if var10 then iconName.ChevronLargeLeft else iconName.X,
-			variant = buttonVariant.Utility,
-			size = buttonSize.Medium,
-			onActivated = reactModule.useCallback(function()
-				-- upvalues: var10 (ref), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var2 (ref), navigateBack (copy), onClose (ref)
-				if not var10 then
-					onClose()
-					
-					return
-				elseif fFlagSignalsNavP3Dispatch then
-					var1.back()
+			icon = if UseSignalStateResult1 then IconName.ChevronLargeLeft else IconName.X,
+			variant = ButtonVariant.Utility,
+			size = ButtonSize.Medium,
+			onActivated = ReactModule.useCallback(function() --[[ Line: 108 ]]
+				-- upvalues: UseSignalStateResult1 (copy), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateBackFunction (upval), OnCloseFunction (copy)
+				if not UseSignalStateResult1 then
+					OnCloseFunction()
 					
 					return
 				end
-				var2(navigateBack())
-			end, { var10, var2, onClose })
+				if FFlagSignalsNavP3Dispatch then
+					NavigationCommands.back()
+					
+					return
+				else
+					UseDispatchResult(NavigateBackFunction())
+				end
+			end, {
+				UseSignalStateResult1,
+				UseDispatchResult,
+				OnCloseFunction
+			})
 		})
 	})
 end)

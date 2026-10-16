@@ -1,23 +1,22 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local roduxModule = require(corePackagesService.Packages.Rodux)
-local actions = script.Parent.Parent.Actions
-local fFlagAddNewPlayerListMobileFocusNav = require(corePackagesService.Workspace.Packages.PlayerList).Flags.FFlagAddNewPlayerListMobileFocusNav
+﻿local CorePackages = game:GetService("CorePackages")
+local Actions = script.Parent.Parent.Actions
+local FFlagAddNewPlayerListMobileFocusNav = require(CorePackages.Workspace.Packages.PlayerList).Flags.FFlagAddNewPlayerListMobileFocusNav
 
-return roduxModule.createReducer({ isVisible = false, selectedPlayer = nil }, {
-	[require(actions.SetPlayerListVisibility).name] = function(p1, p2)
-		-- upvalues: fFlagAddNewPlayerListMobileFocusNav (ref)
+return (require(CorePackages.Packages.Rodux).createReducer({ isVisible = false, selectedPlayer = nil }, {
+	[require(Actions.SetPlayerListVisibility).name] = function(p1, p2) --[[ Line: 21 ]]
+		-- upvalues: FFlagAddNewPlayerListMobileFocusNav (copy)
 		return if p2.isVisible then p1 else {
 			isVisible = false,
-			selectedPlayer = if fFlagAddNewPlayerListMobileFocusNav then nil else p1.selectedPlayer
+			selectedPlayer = if FFlagAddNewPlayerListMobileFocusNav then nil else p1.selectedPlayer
 		}
 	end,
-	[require(actions.OpenPlayerDropDown).name] = function(_, p1)
+	[require(Actions.OpenPlayerDropDown).name] = function(_, p1) --[[ Line: 31 ]]
 		return { isVisible = true, selectedPlayer = p1.selectedPlayer }
 	end,
-	[require(actions.ClosePlayerDropDown).name] = function(p1, _)
+	[require(Actions.ClosePlayerDropDown).name] = function(p1, _) --[[ Line: 38 ]]
 		return { isVisible = false, selectedPlayer = p1.selectedPlayer }
 	end,
-	[require(actions.RemovePlayer).name] = function(p1, p2)
+	[require(Actions.RemovePlayer).name] = function(p1, p2) --[[ Line: 45 ]]
 		return if p2.player == p1.selectedPlayer then { isVisible = false, selectedPlayer = nil } else p1
 	end
-})
+}))

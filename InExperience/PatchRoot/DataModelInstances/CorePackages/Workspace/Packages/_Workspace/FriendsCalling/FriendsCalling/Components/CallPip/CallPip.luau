@@ -1,75 +1,73 @@
-﻿local parent = script:FindFirstAncestor("FriendsCalling").Parent
-local floatingWindowModule = require(parent.FloatingWindow)
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local roactUtilsModule = require(parent.RoactUtils)
-local responsiveModule = require(parent.Responsive)
-local robloxAppEnumsModule = require(parent.RobloxAppEnums)
-local robloxAppHooksModule = require(parent.RobloxAppHooks)
-local placeholderCollapsedModule = require(script.Parent.PlaceholderCollapsed)
-local placeholderExpandedModule = require(script.Parent.PlaceholderExpanded)
-local resolveGeometryModule = require(script.Parent.resolveGeometry)
-local colorMode = foundationModule.Enums.ColorMode
-local deviceOrientationMode = robloxAppEnumsModule.DeviceOrientationMode
-local foundationProvider = foundationModule.FoundationProvider
-local useSelectedTheme = roactUtilsModule.Hooks.useSelectedTheme
-local useDeviceInsets = responsiveModule.useDeviceInsets
-local useDeviceOrientation = robloxAppHooksModule.useDeviceOrientation
-local useTokens = foundationModule.Hooks.useTokens
-local uDim2 = UDim2.fromOffset(120, 160)
-local frozen = table.freeze({ Compact = "Compact", Expanded = "Expanded" })
+﻿local Parent = script:FindFirstAncestor("FriendsCalling").Parent
+local FloatingWindowModule = require(Parent.FloatingWindow)
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local PlaceholderCollapsedModule = require(script.Parent.PlaceholderCollapsed)
+local PlaceholderExpandedModule = require(script.Parent.PlaceholderExpanded)
+local ResolveGeometryModule = require(script.Parent.resolveGeometry)
+local ColorMode = FoundationModule.Enums.ColorMode
+local DeviceOrientationMode = require(Parent.RobloxAppEnums).DeviceOrientationMode
+local FoundationProvider = FoundationModule.FoundationProvider
+local UseSelectedThemeFunction = require(Parent.RoactUtils).Hooks.useSelectedTheme
+local UseDeviceInsetsFunction = require(Parent.Responsive).useDeviceInsets
+local UseDeviceOrientationFunction = require(Parent.RobloxAppHooks).useDeviceOrientation
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local _UDim2 = UDim2.fromOffset(120, 160)
+local Frozen = table.freeze({ Compact = "Compact", Expanded = "Expanded" })
 
-local function CallPipWindow(p1)
-	-- upvalues: useTokens (ref), useDeviceInsets (ref), useDeviceOrientation (ref), deviceOrientationMode (ref), reactModule (ref), frozen (ref), resolveGeometryModule (ref), placeholderExpandedModule (ref), placeholderCollapsedModule (ref), floatingWindowModule (ref), uDim2 (ref)
-	local host = p1.host
-	local var1 = useTokens()
-	local var2 = useDeviceInsets()
-	local var3 = useDeviceOrientation() ~= deviceOrientationMode.Landscape
-	local var4, var5 = reactModule.useState(p1.initialPresentation or frozen.Compact)
-	local var6, var7 = reactModule.useState(nil)
-	local var8 = reactModule.useCallback(function(p2)
-		-- upvalues: var7 (ref)
-		var7(p2)
+local function CallPipWindow(p1) --[[ Line: 56 ]]
+	-- upvalues: UseTokensFunction (copy), UseDeviceInsetsFunction (copy), UseDeviceOrientationFunction (copy), DeviceOrientationMode (copy), ReactModule (copy), Frozen (copy), ResolveGeometryModule (copy), PlaceholderExpandedModule (copy), PlaceholderCollapsedModule (copy), FloatingWindowModule (copy), _UDim2 (copy)
+	local Host = p1.host
+	local UseTokensResult = UseTokensFunction()
+	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
+	local IsNotUseDeviceOrientationResultMatch = UseDeviceOrientationFunction() ~= DeviceOrientationMode.Landscape
+	local UseStateResult, UseStateResult2 = ReactModule.useState(p1.initialPresentation or Frozen.Compact)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
+	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 65 ]]
+		-- upvalues: UseStateResult2_1 (copy)
+		UseStateResult2_1(p2)
 	end, {})
-	local var9 = reactModule.useCallback(function()
-		-- upvalues: var5 (ref), frozen (copy)
-		var5(frozen.Expanded)
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 68 ]]
+		-- upvalues: UseStateResult2 (copy), Frozen (upval)
+		UseStateResult2(Frozen.Expanded)
 	end, {})
-	local var10 = reactModule.useCallback(function()
-		-- upvalues: var5 (ref), frozen (copy)
-		var5(frozen.Compact)
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 71 ]]
+		-- upvalues: UseStateResult2 (copy), Frozen (upval)
+		UseStateResult2(Frozen.Compact)
 	end, {})
-	local var11 = var4 == frozen.Expanded
-	local var12 = resolveGeometryModule({
-		deviceInsets = var2,
-		exposesTopSafeArea = host.exposesTopSafeArea,
-		isPortrait = var3,
-		margin = var1.Padding.Medium
+	local IsUseStateResultMatch = UseStateResult == Frozen.Expanded
+	local ResolveGeometryModuleResult = ResolveGeometryModule({
+		deviceInsets = UseDeviceInsetsResult,
+		exposesTopSafeArea = Host.exposesTopSafeArea,
+		isPortrait = IsNotUseDeviceOrientationResultMatch,
+		margin = UseTokensResult.Padding.Medium
 	})
 	
-	return reactModule.createElement(floatingWindowModule.Window, {
+	return ReactModule.createElement(FloatingWindowModule.Window, {
 		testId = "friends-calling-pip",
-		behavior = floatingWindowModule.Behaviors.Contained,
-		boundsInsets = if var11 then var12.expanded.boundsInsets else var12.collapsed.boundsInsets,
-		children = if var11 then reactModule.createElement(placeholderExpandedModule, {
-			hasRoundedCorners = var12.expanded.hasRoundedCorners,
-			onCollapse = var10,
-			onDragInputTarget = var8,
-			topPadding = var12.expanded.topPadding
-		}) else reactModule.createElement(placeholderCollapsedModule, { onDragInputTarget = var8 }),
-		displayOrder = host.displayOrder,
-		dragInputTarget = var6,
-		draggable = not (var11 and var3),
+		behavior = FloatingWindowModule.Behaviors.Contained,
+		boundsInsets = if IsUseStateResultMatch then ResolveGeometryModuleResult.expanded.boundsInsets else ResolveGeometryModuleResult.collapsed.boundsInsets,
+		children = if IsUseStateResultMatch then ReactModule.createElement(PlaceholderExpandedModule, {
+			hasRoundedCorners = ResolveGeometryModuleResult.expanded.hasRoundedCorners,
+			onCollapse = UseResult2,
+			onDragInputTarget = UseResult,
+			topPadding = ResolveGeometryModuleResult.expanded.topPadding
+		}) else ReactModule.createElement(PlaceholderCollapsedModule, { onDragInputTarget = UseResult }),
+		displayOrder = Host.displayOrder,
+		dragInputTarget = UseStateResult1,
+		draggable = not (IsUseStateResultMatch and IsNotUseDeviceOrientationResultMatch),
 		initialCenter = UDim2.fromScale(0.85, 0.2),
-		onActivated = if var11 then nil else var9,
-		screenInsets = host.screenInsets,
-		size = if var11 then var12.expanded.size else uDim2
+		onActivated = if IsUseStateResultMatch then nil else UseResult1,
+		screenInsets = Host.screenInsets,
+		size = if IsUseStateResultMatch then ResolveGeometryModuleResult.expanded.size else _UDim2
 	})
 end
 
-return function(p1)
-	-- upvalues: useSelectedTheme (ref), colorMode (ref), reactModule (ref), foundationProvider (ref), CallPipWindow (ref)
-	return reactModule.createElement(foundationProvider, {
-		colorMode = if p1.host.followsAppColorMode and useSelectedTheme() == "light" then colorMode.Light else colorMode.Dark
-	}, { Window = reactModule.createElement(CallPipWindow, p1) })
+return function(p1) --[[ Line: 111 | Named "CallPip" ]]
+	-- upvalues: UseSelectedThemeFunction (copy), ColorMode (copy), ReactModule (copy), FoundationProvider (copy), CallPipWindow (copy)
+	local UseSelectedThemeResult = UseSelectedThemeFunction()
+	
+	return ReactModule.createElement(FoundationProvider, {
+		colorMode = if p1.host.followsAppColorMode and UseSelectedThemeResult == "light" then ColorMode.Light else ColorMode.Dark
+	}, { Window = ReactModule.createElement(CallPipWindow, p1) })
 end

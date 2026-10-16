@@ -1,124 +1,124 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local parent = avatarExperienceCatalog.Parent
-local avatarExperienceCommonModule = require(parent.AvatarExperienceCommon)
-local normalize = avatarExperienceCommonModule.Utils.normalize
-local normalizeBoolean = normalize.normalizeBoolean
-local normalizeString = normalize.normalizeString
-local normalizeNumber = normalize.normalizeNumber
-local makeNormalizeTableFn = normalize.makeNormalizeTableFn
-local getRawItemLicensingInfo = avatarExperienceCommonModule.Utils.getRawItemLicensingInfo
-local convertToPascalCaseModule = require(avatarExperienceCatalog.Utils.convertToPascalCase)
-local fFlagAXMarketplaceLicensing = require(parent.AvatarExperienceFlags).FFlagAXMarketplaceLicensing
-local ASSET_TYPE_ID_STRING_TO_NAME = require(parent.AvatarExperienceCommon).Constants.ASSET_TYPE_ID_STRING_TO_NAME
-local _ = require(avatarExperienceCatalog.Models.CatalogV2SearchItemDetails)
-local t = {
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local Parent = AvatarExperienceCatalog.Parent
+local AvatarExperienceCommonModule = require(Parent.AvatarExperienceCommon)
+local Normalize = AvatarExperienceCommonModule.Utils.normalize
+local NormalizeBooleanFunction = Normalize.normalizeBoolean
+local NormalizeStringFunction = Normalize.normalizeString
+local NormalizeNumberFunction = Normalize.normalizeNumber
+local GetRawItemLicensingInfoFunction = AvatarExperienceCommonModule.Utils.getRawItemLicensingInfo
+local ConvertToPascalCaseModule = require(AvatarExperienceCatalog.Utils.convertToPascalCase)
+local FFlagAXMarketplaceLicensing = require(Parent.AvatarExperienceFlags).FFlagAXMarketplaceLicensing
+local ASSETTYPEIDSTRINGTONAME = require(Parent.AvatarExperienceCommon).Constants.ASSET_TYPE_ID_STRING_TO_NAME
+local _ = require(AvatarExperienceCatalog.Models.CatalogV2SearchItemDetails)
+local config = {
 	[1] = "BodyParts",
 	[2] = "Animations",
 	[3] = "Shoes",
 	[4] = "DynamicHead"
 }
 
-local function _(p1)
-	-- upvalues: normalizeNumber (ref), normalizeString (ref)
+local function _(p1) --[[ Line: 33 | Named "normalizeBundledItem" ]]
+	-- upvalues: NormalizeNumberFunction (copy), NormalizeStringFunction (copy)
 	return {
-		Id = normalizeNumber(p1.id),
-		Name = normalizeString(p1.name),
-		Type = normalizeString(p1.type)
+		Id = NormalizeNumberFunction(p1.id),
+		Name = NormalizeStringFunction(p1.name),
+		Type = NormalizeStringFunction(p1.type)
 	}
 end
 
-local function normalizeBundledItems(p1)
-	-- upvalues: normalizeNumber (ref), normalizeString (ref)
-	if typeof(p1) ~= "table" then
+local function normalizeBundledItems(BundledItems) --[[ Line: 41 ]]
+	-- upvalues: NormalizeNumberFunction (copy), NormalizeStringFunction (copy)
+	if typeof(BundledItems) ~= "table" then
 		return nil
 	end
-	local t = {}
+	local List = {}
 	
-	for i, v in p1 do
-		table.insert(t, {
-			Id = normalizeNumber(v.id),
-			Name = normalizeString(v.name),
-			Type = normalizeString(v.type)
+	for _, bundledItem in BundledItems do
+		table.insert(List, {
+			Id = NormalizeNumberFunction(bundledItem.id),
+			Name = NormalizeStringFunction(bundledItem.name),
+			Type = NormalizeStringFunction(bundledItem.type)
 		})
 	end
-	return t
+	return List
 end
 
-local function normalizeTimedOptions(p2)
-	-- upvalues: normalizeNumber (ref), normalizeBoolean (ref)
-	local t = nil
+local function normalizeTimedOptions(p1) --[[ Line: 54 ]]
+	-- upvalues: NormalizeNumberFunction (copy), NormalizeBooleanFunction (copy)
+	local List = nil
 	
-	if p2.timedOptions then
-		t = {}
+	if p1.timedOptions then
+		List = {}
 		
-		for i, v in p2.timedOptions do
-			table.insert(t, {
-				days = normalizeNumber(v.days),
-				price = normalizeNumber(v.price),
-				selected = if v.selected then normalizeBoolean(v.selected) else nil,
-				discountInformation = v.discountInformation
+		for _, timedOption in p1.timedOptions do
+			table.insert(List, {
+				days = NormalizeNumberFunction(timedOption.days),
+				price = NormalizeNumberFunction(timedOption.price),
+				selected = if timedOption.selected then NormalizeBooleanFunction(timedOption.selected) else nil,
+				discountInformation = timedOption.discountInformation
 			})
 		end
 	end
-	return t
+	return List
 end
 
-local function normalizeItem(p3)
-	-- upvalues: ASSET_TYPE_ID_STRING_TO_NAME (ref), t (ref), getRawItemLicensingInfo (ref), normalizeString (ref), normalizeBundledItems (ref), normalizeBoolean (ref), normalizeNumber (ref), normalizeTimedOptions (ref), fFlagAXMarketplaceLicensing (ref), convertToPascalCaseModule (ref)
-	if type(p3) ~= "table" then
+local function normalizeItem(p2) --[[ Line: 70 ]]
+	-- upvalues: ASSETTYPEIDSTRINGTONAME (copy), config (copy), GetRawItemLicensingInfoFunction (copy), NormalizeStringFunction (copy), normalizeBundledItems (copy), NormalizeBooleanFunction (copy), NormalizeNumberFunction (copy), normalizeTimedOptions (copy), FFlagAXMarketplaceLicensing (copy), ConvertToPascalCaseModule (copy)
+	if type(p2) == "table" then
+		local RawItemLicensingInfo = GetRawItemLicensingInfoFunction(p2)
+		
+		return ConvertToPascalCaseModule({
+			assetType = NormalizeStringFunction(if p2.assetType then ASSETTYPEIDSTRINGTONAME[tostring(p2.assetType)] else nil),
+			bundleType = NormalizeStringFunction(if type(p2.bundleType) == "number" then config[p2.bundleType] or tostring(p2.bundleType) else p2.bundleType),
+			bundledItems = normalizeBundledItems(p2.bundledItems),
+			collectibleItemId = NormalizeStringFunction(p2.collectibleItemId),
+			creatorHasVerifiedBadge = NormalizeBooleanFunction(p2.creatorHasVerifiedBadge),
+			creatorName = NormalizeStringFunction(p2.creatorName),
+			creatorTargetId = NormalizeNumberFunction(p2.creatorTargetId),
+			creatorType = NormalizeStringFunction(p2.creatorType),
+			description = NormalizeStringFunction(p2.description),
+			favoriteCount = NormalizeNumberFunction(p2.favoriteCount),
+			hasResellers = NormalizeBooleanFunction(p2.hasResellers),
+			id = NormalizeNumberFunction(p2.id),
+			isRecolorable = NormalizeBooleanFunction(p2.isRecolorable),
+			itemRestrictions = p2.itemRestrictions or {},
+			itemStatus = p2.itemStatus or {},
+			itemType = NormalizeStringFunction(p2.itemType),
+			lowestPrice = NormalizeNumberFunction(p2.lowestPrice),
+			lowestResalePrice = NormalizeNumberFunction(p2.lowestResalePrice),
+			name = NormalizeStringFunction(p2.name),
+			price = NormalizeNumberFunction(p2.price),
+			productId = NormalizeNumberFunction(p2.productId),
+			priceStatus = NormalizeStringFunction(p2.priceStatus),
+			saleLocationType = NormalizeStringFunction(p2.saleLocationType),
+			totalQuantity = NormalizeNumberFunction(p2.totalQuantity),
+			unitsAvailableForConsumption = NormalizeNumberFunction(p2.unitsAvailableForConsumption),
+			offSaleDeadline = NormalizeStringFunction(p2.offSaleDeadline),
+			quantityLimitPerUser = NormalizeNumberFunction(p2.quantityLimitPerUser),
+			isOffSale = NormalizeBooleanFunction(p2.isOffSale),
+			timedOptions = normalizeTimedOptions(p2),
+			itemLicensingInfo = if FFlagAXMarketplaceLicensing then RawItemLicensingInfo else nil
+		}), nil
+	else
 		return nil, "Item must be a table"
 	end
-	local _ = nil
-	
-	return convertToPascalCaseModule({
-		assetType = normalizeString(if p3.assetType then ASSET_TYPE_ID_STRING_TO_NAME[tostring(p3.assetType)] else nil),
-		bundleType = normalizeString(if type(p3.bundleType) == "number" then t[p3.bundleType] or tostring(p3.bundleType) else p3.bundleType),
-		bundledItems = normalizeBundledItems(p3.bundledItems),
-		collectibleItemId = normalizeString(p3.collectibleItemId),
-		creatorHasVerifiedBadge = normalizeBoolean(p3.creatorHasVerifiedBadge),
-		creatorName = normalizeString(p3.creatorName),
-		creatorTargetId = normalizeNumber(p3.creatorTargetId),
-		creatorType = normalizeString(p3.creatorType),
-		description = normalizeString(p3.description),
-		favoriteCount = normalizeNumber(p3.favoriteCount),
-		hasResellers = normalizeBoolean(p3.hasResellers),
-		id = normalizeNumber(p3.id),
-		isRecolorable = normalizeBoolean(p3.isRecolorable),
-		itemRestrictions = p3.itemRestrictions or {},
-		itemStatus = p3.itemStatus or {},
-		itemType = normalizeString(p3.itemType),
-		lowestPrice = normalizeNumber(p3.lowestPrice),
-		lowestResalePrice = normalizeNumber(p3.lowestResalePrice),
-		name = normalizeString(p3.name),
-		price = normalizeNumber(p3.price),
-		productId = normalizeNumber(p3.productId),
-		priceStatus = normalizeString(p3.priceStatus),
-		saleLocationType = normalizeString(p3.saleLocationType),
-		totalQuantity = normalizeNumber(p3.totalQuantity),
-		unitsAvailableForConsumption = normalizeNumber(p3.unitsAvailableForConsumption),
-		offSaleDeadline = normalizeString(p3.offSaleDeadline),
-		quantityLimitPerUser = normalizeNumber(p3.quantityLimitPerUser),
-		isOffSale = normalizeBoolean(p3.isOffSale),
-		timedOptions = normalizeTimedOptions(p3),
-		itemLicensingInfo = if fFlagAXMarketplaceLicensing then getRawItemLicensingInfo(p3) else nil
-	}), nil
 end
 
-return makeNormalizeTableFn({
-	data = function(p3)
-		-- upvalues: normalizeItem (ref)
-		if typeof(p3) ~= "table" then
+return (Normalize.makeNormalizeTableFn({
+	data = function(List) --[[ Line: 125 ]]
+		-- upvalues: normalizeItem (copy)
+		if typeof(List) ~= "table" then
 			return nil, nil
 		end
 		local t = {}
-		local t_1 = {}
+		local List1 = {}
 		
-		for i, v in p3 do
-			local var1, var2 = normalizeItem(v)
-			table.insert(t_1, var2)
-			t[i] = var1
+		for i, value in List do
+			local NormalizeItemResult, NormalizeItemResult2 = normalizeItem(value)
+			table.insert(List1, NormalizeItemResult2)
+			t[i] = NormalizeItemResult
 		end
-		return t, if next(t_1) then table.concat(t_1, " ") else nil
+		return t, if next(List1) then table.concat(List1, " ") else nil
 	end,
-	nextPageCursor = normalizeString
-})
+	nextPageCursor = NormalizeStringFunction
+}))

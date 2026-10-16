@@ -1,23 +1,20 @@
-﻿local parent = script:FindFirstAncestor("FlyoutSidePanel").Parent
-local appPage = require(parent.RobloxAppEnums).AppPage
-local navigationRoduxModule = require(parent.NavigationRodux)
-local fFlagAppIaHomeSubTab = require(parent.SharedFlags).FFlagAppIaHomeSubTab
+﻿local Parent = script:FindFirstAncestor("FlyoutSidePanel").Parent
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local NavigationRoduxModule = require(Parent.NavigationRodux)
+local FFlagAppIaHomeSubTab = require(Parent.SharedFlags).FFlagAppIaHomeSubTab
 
-return function(p1, p2, p3)
-	-- upvalues: appPage (ref), fFlagAppIaHomeSubTab (ref), navigationRoduxModule (ref)
-	local var1 = if p1 ~= appPage.Home then if p1 ~= appPage.Games then fFlagAppIaHomeSubTab and p1 == navigationRoduxModule.Constants.HomeContainerName else true else true
-	local var2 = if p2 ~= appPage.Home then p2 == appPage.Games else true
+return function(Games, Games1, p1): boolean --[[ Line: 13 ]]
+	-- upvalues: AppPage (copy), FFlagAppIaHomeSubTab (copy), NavigationRoduxModule (copy)
+	local IsGamesMatch: boolean = Games == AppPage.Home or (Games == AppPage.Games or FFlagAppIaHomeSubTab and Games == NavigationRoduxModule.Constants.HomeContainerName)
+	local IsGamesMatch1: boolean = Games1 == AppPage.Home or Games1 == AppPage.Games
 	
-	if not var1 and not var2 then
+	if not IsGamesMatch and not IsGamesMatch1 then
 		return false
-	elseif not var1 or p2 ~= p1 then
+	elseif IsGamesMatch and Games1 == Games then
+		local IsGamesMatch2: boolean = IsGamesMatch and Games1 == AppPage.GameDetail
+		
+		return if IsGamesMatch1 then not p1 else IsGamesMatch2 and not p1
+	else
 		return true
 	end
-	local var3
-	local var4 = var1 and p2 == appPage.GameDetail
-	
-	if not var2 then
-		var3 = var4 and not p3
-	end
-	return var3
 end

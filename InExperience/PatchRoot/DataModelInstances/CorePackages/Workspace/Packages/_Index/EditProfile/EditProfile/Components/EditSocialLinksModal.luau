@@ -1,1 +1,1 @@
-﻿return require(script.EditSocialLinksModalContainer)
+﻿return (require(script.EditSocialLinksModalContainer))

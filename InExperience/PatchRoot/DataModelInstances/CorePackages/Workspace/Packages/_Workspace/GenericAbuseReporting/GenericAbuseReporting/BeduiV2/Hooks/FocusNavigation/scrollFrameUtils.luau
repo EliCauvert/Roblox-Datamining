@@ -1,53 +1,57 @@
-﻿local gamepadUtils = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.InputUi).Gamepad.GamepadUtils
+﻿local GamepadUtils = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.InputUi).Gamepad.GamepadUtils
 
 return {
 	SCROLL_INCREMENT = 300,
 	STICK_MAX_SPEED = 1000,
-	getScrollableAncestor = function(p1)
-		return if p1 == nil then nil elseif p1:IsA("ScrollingFrame") then p1 else p1:FindFirstAncestorWhichIsA("ScrollingFrame")
+	getScrollableAncestor = function(ScrollingFrame) --[[ Line: 26 ]]
+		return if ScrollingFrame == nil then nil elseif ScrollingFrame:IsA("ScrollingFrame") then ScrollingFrame else ScrollingFrame:FindFirstAncestorWhichIsA("ScrollingFrame")
 	end,
-	canScrollVertically = function(p1)
-		return if p1.ScrollingEnabled then p1.AbsoluteWindowSize.Y < p1.AbsoluteCanvasSize.Y else false
+	canScrollVertically = function(ScrollFrame): boolean --[[ Line: 36 ]]
+		return if ScrollFrame.ScrollingEnabled then ScrollFrame.AbsoluteWindowSize.Y < ScrollFrame.AbsoluteCanvasSize.Y else false
 	end,
-	clampCanvasY = function(value, minValue)
-		return math.clamp(minValue, 0, math.max(0, value.AbsoluteCanvasSize.Y - value.AbsoluteWindowSize.Y))
+	clampCanvasY = function(ScrollFrame, Value: number): number --[[ Line: 44 ]]
+		return (math.clamp(Value, 0, (math.max(0, ScrollFrame.AbsoluteCanvasSize.Y - ScrollFrame.AbsoluteWindowSize.Y))))
 	end,
-	scrollByIncrement = function(p1, p2)
-		if p1 == nil then return end
-		local var1 = p1.AbsoluteCanvasSize.Y - p1.AbsoluteWindowSize.Y
+	scrollByIncrement = function(ScrollFrame, Y: number) --[[ Line: 51 ]]
+		if ScrollFrame == nil then return end
+		local YDelta = ScrollFrame.AbsoluteCanvasSize.Y - ScrollFrame.AbsoluteWindowSize.Y
 		
-		if p2 > 0 and var1 - 350 <= p1.CanvasPosition.Y then
-			p1.CanvasPosition = Vector2.new(0, var1)
-			
-			return
-		elseif p2 < 0 and p1.CanvasPosition.Y <= 350 then
-			p1.CanvasPosition = Vector2.new(0, 0)
+		if Y > 0 and YDelta - 350 <= ScrollFrame.CanvasPosition.Y then
+			ScrollFrame.CanvasPosition = Vector2.new(0, YDelta)
 			
 			return
 		end
-		p1.CanvasPosition += Vector2.new(0, p2)
+		if Y < 0 and ScrollFrame.CanvasPosition.Y <= 350 then
+			ScrollFrame.CanvasPosition = Vector2.new(0, 0)
+			
+			return
+		else
+			ScrollFrame.CanvasPosition += Vector2.new(0, Y)
+		end
 	end,
-	scrollByAnalogInput = function(p1, p2, p3)
-		-- upvalues: gamepadUtils (ref)
-		if p1 == nil or not (if not p1.ScrollingEnabled then false else p1.AbsoluteWindowSize.Y < p1.AbsoluteCanvasSize.Y) then return end
-		local var1 = gamepadUtils.normalizeStickByDeadzone(Vector2.new(p2.Position.X, p2.Position.Y))
+	scrollByAnalogInput = function(ScrollFrame, p1, p2) --[[ Line: 69 ]]
+		-- upvalues: GamepadUtils (copy)
+		if ScrollFrame == nil or not (if ScrollFrame.ScrollingEnabled then ScrollFrame.AbsoluteCanvasSize.Y > ScrollFrame.AbsoluteWindowSize.Y else false) then return end
+		local NormalizeStickByDeadzoneResult = GamepadUtils.normalizeStickByDeadzone((Vector2.new(p1.Position.X, p1.Position.Y)))
 		
-		if var1.Y == 0 then
+		if NormalizeStickByDeadzoneResult.Y ~= 0 then
+			ScrollFrame.CanvasPosition = Vector2.new(ScrollFrame.CanvasPosition.X, (math.clamp(ScrollFrame.CanvasPosition.Y + p2 * -NormalizeStickByDeadzoneResult.Y * 1000, 0, (math.max(0, ScrollFrame.AbsoluteCanvasSize.Y - ScrollFrame.AbsoluteWindowSize.Y)))))
+			
 			return
 		end
-		p1.CanvasPosition = Vector2.new(p1.CanvasPosition.X, math.clamp(p1.CanvasPosition.Y + p3 * -var1.Y * 1000, 0, math.max(0, p1.AbsoluteCanvasSize.Y - p1.AbsoluteWindowSize.Y)))
 	end,
-	isInsideContainer = function(p1, p2)
-		return if p1 == nil or p2 == nil then false elseif p1 ~= p2 then p1:IsDescendantOf(p2) else true
+	isInsideContainer = function(Ancestor, Ancestor1) --[[ Line: 87 ]]
+		return Ancestor ~= nil and Ancestor1 ~= nil and (Ancestor == Ancestor1 or Ancestor:IsDescendantOf(Ancestor1))
 	end,
-	resolveScrollTarget = function(p1, p2)
-		if p2 == nil then
+	resolveScrollTarget = function(ScrollingFrame, Ancestor) --[[ Line: 98 ]]
+		if Ancestor == nil then
 			return nil
-		elseif not (if p1 == nil or p2 == nil then false elseif p1 ~= p2 then p1:IsDescendantOf(p2) else true) then
+		elseif ScrollingFrame ~= nil and Ancestor ~= nil and (ScrollingFrame == Ancestor or ScrollingFrame:IsDescendantOf(Ancestor)) then
+			local ScrollingFrame1 = if ScrollingFrame == nil then nil elseif ScrollingFrame:IsA("ScrollingFrame") then ScrollingFrame else ScrollingFrame:FindFirstAncestorWhichIsA("ScrollingFrame")
+			
+			return if ScrollingFrame1 == nil then nil elseif ScrollingFrame1 == Ancestor or ScrollingFrame1:IsDescendantOf(Ancestor) then ScrollingFrame1 else nil
+		else
 			return nil
 		end
-		local var1 = if p1 == nil then nil elseif p1:IsA("ScrollingFrame") then p1 else p1:FindFirstAncestorWhichIsA("ScrollingFrame")
-		
-		return if var1 == nil then nil elseif var1 == p2 or var1:IsDescendantOf(p2) then var1 else nil
 	end
 }

@@ -1,55 +1,58 @@
-﻿local var1 = script:FindFirstAncestor("ultimate-list")
-local dataSourceMethodsModule = require(var1.DataSources.DataSourceMethods)
-local _ = require(var1.DataSources)
-local _ = require(var1.Dimensions)
-local exhaustiveMatchModule = require(var1.Util.exhaustiveMatch)
+﻿local UltimateList = script:FindFirstAncestor("ultimate-list")
+local DataSourceMethodsModule = require(UltimateList.DataSources.DataSourceMethods)
+local _ = require(UltimateList.DataSources)
+local _ = require(UltimateList.Dimensions)
+local ExhaustiveMatchModule = require(UltimateList.Util.exhaustiveMatch)
 
-return function(p1, p2, p3, p4, p5)
-	-- upvalues: exhaustiveMatchModule (ref), dataSourceMethodsModule (ref)
-	local var2, var3, var4
-	local function compareInView(p6)
-		-- upvalues: p5 (ref), exhaustiveMatchModule (copy), p3 (ref), p4 (ref)
-		local var5 = if p5 == "x" then p6.position.X.Offset elseif p5 == "y" then p6.position.Y.Offset else exhaustiveMatchModule(p5)
+return function(p1, Callback, p2, p3, p4) --[[ Line: 8 | Named "binarySearchIndexRangeInView" ]]
+	-- upvalues: ExhaustiveMatchModule (copy), DataSourceMethodsModule (copy)
+	local function compareInView(p5): string --[[ Line: 18 ]]
+		-- upvalues: p4 (copy), ExhaustiveMatchModule (upval), p2 (copy), p3 (copy)
+		local Offset = if p4 == "x" then p5.position.X.Offset elseif p4 == "y" then p5.position.Y.Offset else ExhaustiveMatchModule(p4)
+		local Offset1 = if p4 == "x" then p5.size.X.Offset elseif p4 == "y" then p5.size.Y.Offset else ExhaustiveMatchModule(p4)
 		
-		return if var5 + (if p5 == "x" then p6.size.X.Offset elseif p5 == "y" then p6.size.Y.Offset else exhaustiveMatchModule(p5)) < p3 then "before" elseif p3 + p4 < var5 then "after" else "inside"
+		return if Offset + Offset1 < p2 then "before" elseif p2 + p3 < Offset then "after" else "inside"
 	end
 	
-	local var5 = 1
-	local var6 = dataSourceMethodsModule.length(p1)
-	local var7 = var6
-	while var5 <= var7 do
-		var2 = (var5 + var7) // 2
-		var3 = dataSourceMethodsModule.get(p1, var2)
-		assert(var3 ~= nil, "get() returned nil, meaning the length is inaccurate")
-		var4 = compareInView(p2(var3.value, var2))
+	local v1 = 1
+	local LengthResult = DataSourceMethodsModule.length(p1)
+	local LengthResult1: number = LengthResult
+	local LengthResultRatio = nil
+	local GetResult = nil
+	while v1 <= LengthResult1 do
+		LengthResultRatio = (v1 + LengthResult1) // 2
+		GetResult = DataSourceMethodsModule.get(p1, LengthResultRatio)
+		assert(GetResult ~= nil, "get() returned nil, meaning the length is inaccurate")
+		local CompareInViewResult: string = compareInView((Callback(GetResult.value, LengthResultRatio)))
 		
-		if var4 == "after" then
-			var7 = var2 - 1
-		elseif var4 == "before" then
-			var5 = var2 + 1
-		elseif var4 ~= "inside" then
-			exhaustiveMatchModule(var4)
-			continue
+		if CompareInViewResult == "after" then
+			LengthResult1 = LengthResultRatio - 1
+		elseif CompareInViewResult == "before" then
+			v1 = LengthResultRatio + 1
+		else
+			if CompareInViewResult == "inside" then
+				local X: number = LengthResultRatio
+				local GetResult1 = GetResult
+				while X > 1 do
+					local BeforeResult = GetResult1.before()
+					
+					if BeforeResult == nil or compareInView(Callback(BeforeResult.value, X - 1)) ~= "inside" then break end
+					X -= 1
+					GetResult1 = BeforeResult
+				end
+				local Y: number = LengthResultRatio
+				local GetResult2 = GetResult
+				while Y < LengthResult do
+					local AfterResult = GetResult2.after()
+					
+					if AfterResult == nil or compareInView(Callback(AfterResult.value, Y + 1)) ~= "inside" then break end
+					Y += 1
+					GetResult2 = AfterResult
+				end
+				return (Vector3.new(X, Y))
+			end
+			ExhaustiveMatchModule(CompareInViewResult)
 		end
-		local var8 = var2
-		local var9 = var3
-		while var8 > 1 do
-			local var10 = var9.before()
-			
-			if var10 == nil or compareInView(p2(var10.value, var8 - 1)) ~= "inside" then break end
-			var8 -= 1
-			var9 = var10
-		end
-		local var11 = var2
-		local var12 = var3
-		while var11 < var6 do
-			local var13 = var12.after()
-			
-			if var13 == nil or compareInView(p2(var13.value, var11 + 1)) ~= "inside" then break end
-			var11 += 1
-			var12 = var13
-		end
-		return Vector3.new(var8, var11)
 	end
-	return Vector3.new(0, 0, 0)
+	return vector.create(0, 0, 0)
 end

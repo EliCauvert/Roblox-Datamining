@@ -1,41 +1,30 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local socialService = game:GetService("SocialService")
-local default = require(corePackagesService.Workspace.Packages.ExternalContentSharingProtocol).ExternalContentSharingProtocol.default
-local var1 = require(corePackagesService.Workspace.Packages.CachedPolicyService):IsContentSharingAllowed()
-local var2 = require(corePackagesService.Packages.PolicyProvider).GetPolicyImplementations.MemStorageService("app-policy")
-local differentiateSharingBaseOnPlatform = game:DefineFastFlag("DifferentiateSharingBaseOnPlatform", false)
-local var3 = false
+﻿local CorePackages = game:GetService("CorePackages")
+local SocialService = game:GetService("SocialService")
+local Default = require(CorePackages.Workspace.Packages.ExternalContentSharingProtocol).ExternalContentSharingProtocol.default
+local IsContentSharingAllowed = require(CorePackages.Workspace.Packages.CachedPolicyService):IsContentSharingAllowed()
+local AppPolicy = require(CorePackages.Packages.PolicyProvider).GetPolicyImplementations.MemStorageService("app-policy")
+local DifferentiateSharingBaseOnPlatform = game:DefineFastFlag("DifferentiateSharingBaseOnPlatform", false)
+local EligibleForCapturesFeature = false
 
-if differentiateSharingBaseOnPlatform then
-	local eligibleForCapturesFeature
-	local var4 = var2.read()
-	
-	if var4 and var4.EnableShareCaptureCTA then
-		eligibleForCapturesFeature = var4.EligibleForCapturesFeature
-		
-		if not eligibleForCapturesFeature then
-			eligibleForCapturesFeature = false
-		end
-		var3 = eligibleForCapturesFeature
-	end
+if DifferentiateSharingBaseOnPlatform then
+	local ReadResult = AppPolicy.read()
+	EligibleForCapturesFeature = ReadResult and ReadResult.EnableShareCaptureCTA and ReadResult.EligibleForCapturesFeature or false
 end
-socialService.OpenShareSheetWithLink:Connect(function(p1)
-	-- upvalues: default (ref), differentiateSharingBaseOnPlatform (ref), var3 (write), var1 (ref)
-	if not default then return end
-	assert(default ~= nil, "ExternalContentSharingProtocol is required")
+SocialService.OpenShareSheetWithLink:Connect(function(Text) --[[ Line: 21 ]]
+	-- upvalues: Default (copy), DifferentiateSharingBaseOnPlatform (copy), EligibleForCapturesFeature (ref), IsContentSharingAllowed (copy)
+	if not Default then return end
+	assert(Default ~= nil, "ExternalContentSharingProtocol is required")
 	
-	if differentiateSharingBaseOnPlatform then
-		if var3 then
-			default:shareUrl({ context = "PromptLinkSharing", url = p1 })
-			
-			return
-		else
-			default:setClipboardText({ context = "PromptLinkSharing", text = p1 })
+	if DifferentiateSharingBaseOnPlatform then
+		if not EligibleForCapturesFeature then
+			Default:setClipboardText({ context = "PromptLinkSharing", text = Text })
 			
 			return
 		end
-	elseif var1 then
-	else
-		default:setClipboardText({ context = "PromptLinkSharing", text = p1 })
+	elseif not IsContentSharingAllowed then
+		Default:setClipboardText({ context = "PromptLinkSharing", text = Text })
+		
+		return
 	end
+	Default:shareUrl({ context = "PromptLinkSharing", url = Text })
 end)

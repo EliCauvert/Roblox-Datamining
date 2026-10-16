@@ -1,94 +1,86 @@
-﻿local ampUpsell = script:FindFirstAncestor("AmpUpsell")
-local parent = ampUpsell.Parent
-local roactNavigationModule = require(parent.RoactNavigation)
-local reactModule = require(parent.React)
-local wizardContainerModule = require(ampUpsell.Components.WizardContainer)
-local actionTypeEnum = require(ampUpsell.Common.Enums).ActionTypeEnum
-local useNavigation = require(parent.Navigation).useNavigation
-local createLazyComponent = require(parent.RoactUtils).Components.createLazyComponent
-local FAEUpsellContainerModule = require(ampUpsell.Components.Upsells.FacialAgeEstimation.FAEUpsellContainer)
-local IDVUpsellContainerModule = require(ampUpsell.Components.Upsells.IdentityVerification.IDVUpsellContainer)
-local cryoModule = require(parent.Cryo)
-local appScreensModule = require(ampUpsell.Common.AppScreens)
-local webViewServiceWrapperModule = require(ampUpsell.Components.WebViewServiceWrapper)
-local urlBuilder = require(parent.UrlBuilder).UrlBuilder
-local accountSettingsUpsellModule = require(ampUpsell.Components.Upsells.AccountSettingsUpsell)
-local VPCUpsellContainerModule = require(ampUpsell.Components.Upsells.ParentalRequest.VPCUpsellContainer)
-local robloxSubscriptionPurchaseAppModule = require(parent.RobloxSubscriptionPurchaseApp)
-local robloxSubscriptionFlowCompleteReason = robloxSubscriptionPurchaseAppModule.RobloxSubscriptionFlowCompleteReason
-local surfaceName = robloxSubscriptionPurchaseAppModule.SurfaceName
-local _ = {
-	Wizard = "Wizard",
-	FAEUpsell = "FAEUpsell",
-	IDVUpsell = "IDVUpsell",
-	AccountSettingsUpsell = "AccountSettingsUpsell",
-	SubscriptionUpsell = "SubscriptionUpsell",
-	VPCUpsell = "VPCUpsell"
-}
+﻿local AmpUpsell = script:FindFirstAncestor("AmpUpsell")
+local Parent = AmpUpsell.Parent
+local RoactNavigationModule = require(Parent.RoactNavigation)
+local ReactModule = require(Parent.React)
+local WizardContainerModule = require(AmpUpsell.Components.WizardContainer)
+local ActionTypeEnum = require(AmpUpsell.Common.Enums).ActionTypeEnum
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local CreateLazyComponentFunction = require(Parent.RoactUtils).Components.createLazyComponent
+local FAEUpsellContainerModule = require(AmpUpsell.Components.Upsells.FacialAgeEstimation.FAEUpsellContainer)
+local IDVUpsellContainerModule = require(AmpUpsell.Components.Upsells.IdentityVerification.IDVUpsellContainer)
+local CryoModule = require(Parent.Cryo)
+local AppScreensModule = require(AmpUpsell.Common.AppScreens)
+local WebViewServiceWrapperModule = require(AmpUpsell.Components.WebViewServiceWrapper)
+local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
+local AccountSettingsUpsellModule = require(AmpUpsell.Components.Upsells.AccountSettingsUpsell)
+local VPCUpsellContainerModule = require(AmpUpsell.Components.Upsells.ParentalRequest.VPCUpsellContainer)
+local RobloxSubscriptionPurchaseAppModule = require(Parent.RobloxSubscriptionPurchaseApp)
+local RobloxSubscriptionFlowCompleteReason = RobloxSubscriptionPurchaseAppModule.RobloxSubscriptionFlowCompleteReason
+local SurfaceName = RobloxSubscriptionPurchaseAppModule.SurfaceName
 
-local var1 = function(p1)
-	-- upvalues: useNavigation (ref), reactModule (ref), appScreensModule (ref), urlBuilder (ref), cryoModule (ref), actionTypeEnum (ref), wizardContainerModule (ref)
-	local var2 = useNavigation()
+local function v17(p1) --[[ Line: 45 ]]
+	-- upvalues: UseNavigationFunction (copy), ReactModule (copy), AppScreensModule (copy), UrlBuilder (copy), CryoModule (copy), ActionTypeEnum (copy), WizardContainerModule (copy)
+	local UseNavigationResult = UseNavigationFunction()
 	
-	return reactModule.createElement(wizardContainerModule, cryoModule.Dictionary.join(p1 or {}, {
+	return ReactModule.createElement(WizardContainerModule, (CryoModule.Dictionary.join(p1 or {}, {
 		openUpsells = {
-			[actionTypeEnum.AgeEstimation] = reactModule.useCallback(function(p2)
-				-- upvalues: var2 (ref)
-				var2.push("FAEUpsell", { extraProps = p2 })
-			end, { var2 }),
-			[actionTypeEnum.GovernmentId] = reactModule.useCallback(function(p2)
-				-- upvalues: var2 (ref)
-				var2.push("IDVUpsell", { extraProps = p2 })
-			end, { var2 }),
-			[actionTypeEnum.Subscription] = reactModule.useCallback(function(p2)
-				-- upvalues: var2 (ref)
-				var2.push("SubscriptionUpsell", { extraProps = p2 })
-			end, { var2 }),
-			[actionTypeEnum.ParentConsent] = reactModule.useCallback(function(p2)
-				-- upvalues: var2 (ref)
-				var2.push("VPCUpsell", { extraProps = p2 })
-			end, { var2 }),
-			[actionTypeEnum.ParentLink] = reactModule.useCallback(function(p2)
-				-- upvalues: var2 (ref)
-				var2.push("VPCUpsell", { extraProps = p2 })
-			end, { var2 })
+			[ActionTypeEnum.AgeEstimation] = ReactModule.useCallback(function(ExtraProps) --[[ Line: 67 ]]
+				-- upvalues: UseNavigationResult (copy)
+				UseNavigationResult.push("FAEUpsell", { extraProps = ExtraProps })
+			end, { UseNavigationResult }),
+			[ActionTypeEnum.GovernmentId] = ReactModule.useCallback(function(ExtraProps) --[[ Line: 62 ]]
+				-- upvalues: UseNavigationResult (copy)
+				UseNavigationResult.push("IDVUpsell", { extraProps = ExtraProps })
+			end, { UseNavigationResult }),
+			[ActionTypeEnum.Subscription] = ReactModule.useCallback(function(ExtraProps) --[[ Line: 71 ]]
+				-- upvalues: UseNavigationResult (copy)
+				UseNavigationResult.push("SubscriptionUpsell", { extraProps = ExtraProps })
+			end, { UseNavigationResult }),
+			[ActionTypeEnum.ParentConsent] = ReactModule.useCallback(function(ExtraProps) --[[ Line: 74 ]]
+				-- upvalues: UseNavigationResult (copy)
+				UseNavigationResult.push("VPCUpsell", { extraProps = ExtraProps })
+			end, { UseNavigationResult }),
+			[ActionTypeEnum.ParentLink] = ReactModule.useCallback(function(ExtraProps) --[[ Line: 77 ]]
+				-- upvalues: UseNavigationResult (copy)
+				UseNavigationResult.push("VPCUpsell", { extraProps = ExtraProps })
+			end, { UseNavigationResult })
 		},
-		openAccountSettingsUpsell = reactModule.useCallback(function(p2)
-			-- upvalues: var2 (ref), appScreensModule (copy), urlBuilder (copy), cryoModule (copy)
-			var2.push("AccountSettingsUpsell", {
-				extraProps = cryoModule.Dictionary.join(p2 or {}, {
-					openAccountSettings = function(p3)
-						-- upvalues: var2 (copy), appScreensModule (copy), urlBuilder (copy)
-						var2.push(appScreensModule.GenericWebPage, {
-							detail = urlBuilder.static.settings.account(),
-							extraProps = { title = p3 }
+		openAccountSettingsUpsell = ReactModule.useCallback(function(p2) --[[ Line: 48 ]]
+			-- upvalues: UseNavigationResult (copy), AppScreensModule (upval), UrlBuilder (upval), CryoModule (upval)
+			UseNavigationResult.push("AccountSettingsUpsell", {
+				extraProps = CryoModule.Dictionary.join(p2 or {}, {
+					openAccountSettings = function(Title) --[[ Line: 49 ]]
+						-- upvalues: UseNavigationResult (upval), AppScreensModule (upval), UrlBuilder (upval)
+						UseNavigationResult.push(AppScreensModule.GenericWebPage, {
+							detail = UrlBuilder.static.settings.account(),
+							extraProps = { title = Title }
 						})
 					end
 				})
 			})
-		end, { var2 })
-	}))
+		end, { UseNavigationResult })
+	})))
 end
 
-return roactNavigationModule.createAppContainer(roactNavigationModule.createRobloxStackNavigator({
+return (RoactNavigationModule.createAppContainer((RoactNavigationModule.createRobloxStackNavigator({
 	{
 		Wizard = {
-			screen = function(p1)
-				-- upvalues: useNavigation (ref), reactModule (ref), var1 (ref)
-				local extraProps = useNavigation().getParam("extraProps")
+			screen = function(p1) --[[ Line: 93 ]]
+				-- upvalues: UseNavigationFunction (copy), ReactModule (copy), v17 (copy)
+				local ExtraPropsParam = UseNavigationFunction().getParam("extraProps")
 				
-				if not extraProps and p1 and p1.screenProps then
-					extraProps = p1.screenProps.extraProps
+				if not ExtraPropsParam and p1 and p1.screenProps then
+					ExtraPropsParam = p1.screenProps.extraProps
 				end
-				return reactModule.createElement(var1, extraProps)
+				return ReactModule.createElement(v17, ExtraPropsParam)
 			end,
 			navigationOptions = { transparent = true, overlayEnabled = true }
 		}
 	},
 	{
 		FAEUpsell = {
-			screen = createLazyComponent(function()
-				-- upvalues: FAEUpsellContainerModule (ref)
+			screen = CreateLazyComponentFunction(function() --[[ Line: 110 ]]
+				-- upvalues: FAEUpsellContainerModule (copy)
 				return FAEUpsellContainerModule
 			end),
 			navigationOptions = { transparent = true, overlayEnabled = true }
@@ -96,11 +88,11 @@ return roactNavigationModule.createAppContainer(roactNavigationModule.createRobl
 	},
 	{
 		IDVUpsell = {
-			screen = createLazyComponent(function()
-				-- upvalues: useNavigation (ref), reactModule (ref), IDVUpsellContainerModule (ref)
-				return function()
-					-- upvalues: useNavigation (copy), reactModule (copy), IDVUpsellContainerModule (copy)
-					return reactModule.createElement(IDVUpsellContainerModule, useNavigation().getParam("extraProps"))
+			screen = CreateLazyComponentFunction(function() --[[ Line: 121 ]]
+				-- upvalues: UseNavigationFunction (copy), ReactModule (copy), IDVUpsellContainerModule (copy)
+				return function() --[[ Line: 122 ]]
+					-- upvalues: UseNavigationFunction (upval), ReactModule (upval), IDVUpsellContainerModule (upval)
+					return ReactModule.createElement(IDVUpsellContainerModule, (UseNavigationFunction().getParam("extraProps")))
 				end
 			end),
 			navigationOptions = { transparent = true, overlayEnabled = true }
@@ -108,60 +100,62 @@ return roactNavigationModule.createAppContainer(roactNavigationModule.createRobl
 	},
 	{
 		SubscriptionUpsell = {
-			screen = function(p1)
-				-- upvalues: reactModule (ref), robloxSubscriptionPurchaseAppModule (ref), robloxSubscriptionFlowCompleteReason (ref), surfaceName (ref)
-				local extraProps = p1.navigation.getParam("extraProps") or {}
-				reactModule.useEffect(function()
-					-- upvalues: robloxSubscriptionPurchaseAppModule (copy), extraProps (ref), robloxSubscriptionFlowCompleteReason (copy), surfaceName (copy)
-					local var2 = robloxSubscriptionPurchaseAppModule.initiateRobloxSubscriptionPurchase(extraProps.purchaseUIOptions, {
-						onFlowComplete = function(p2)
-							-- upvalues: robloxSubscriptionFlowCompleteReason (copy), extraProps (copy)
-							if p2 == robloxSubscriptionFlowCompleteReason.UpsellPurchaseSucceeded then
-								if extraProps.onSuccess then
-									extraProps.onSuccess()
+			screen = function(p1) --[[ Line: 136 ]]
+				-- upvalues: ReactModule (copy), RobloxSubscriptionPurchaseAppModule (copy), RobloxSubscriptionFlowCompleteReason (copy), SurfaceName (copy)
+				local ExtraPropsParam = p1.navigation.getParam("extraProps") or {}
+				ReactModule.useEffect(function() --[[ Line: 152 ]]
+					-- upvalues: RobloxSubscriptionPurchaseAppModule (upval), ExtraPropsParam (copy), RobloxSubscriptionFlowCompleteReason (upval), SurfaceName (upval)
+					local InitiateRobloxSubscriptionPurchaseResult = RobloxSubscriptionPurchaseAppModule.initiateRobloxSubscriptionPurchase(ExtraPropsParam.purchaseUIOptions, {
+						onFlowComplete = function(UpsellPurchaseFailed) --[[ Line: 156 ]]
+							-- upvalues: RobloxSubscriptionFlowCompleteReason (upval), ExtraPropsParam (upval)
+							if UpsellPurchaseFailed == RobloxSubscriptionFlowCompleteReason.UpsellPurchaseSucceeded then
+								if ExtraPropsParam.onSuccess then
+									ExtraPropsParam.onSuccess()
 									
 									return
 								end
-							elseif p2 == robloxSubscriptionFlowCompleteReason.UpsellPurchaseFailed then
-								if extraProps.onFailure then
-									extraProps.onFailure()
-									
-									return
-								elseif extraProps.onCancel then
-									extraProps.onCancel()
+							elseif UpsellPurchaseFailed == RobloxSubscriptionFlowCompleteReason.UpsellPurchaseFailed then
+								if ExtraPropsParam.onFailure then
+									ExtraPropsParam.onFailure()
 									
 									return
 								end
-							elseif extraProps.onCancel then
-								extraProps.onCancel()
+								if ExtraPropsParam.onCancel then
+									ExtraPropsParam.onCancel()
+									
+									return
+								end
+							elseif ExtraPropsParam.onCancel then
+								ExtraPropsParam.onCancel()
 							end
 						end
-					}, nil, extraProps.surfaceName or surfaceName.Unspecified, extraProps.surfaceContext or robloxSubscriptionPurchaseAppModule.SurfaceContext.Unspecified, nil, extraProps.analyticsContext)
+					}, nil, ExtraPropsParam.surfaceName or SurfaceName.Unspecified, ExtraPropsParam.surfaceContext or RobloxSubscriptionPurchaseAppModule.SurfaceContext.Unspecified, nil, ExtraPropsParam.analyticsContext)
 					
-					return function()
-						-- upvalues: var2 (ref)
-						if var2 then
-							var2()
+					return function() --[[ Line: 186 ]]
+						-- upvalues: InitiateRobloxSubscriptionPurchaseResult (copy)
+						if InitiateRobloxSubscriptionPurchaseResult then
+							InitiateRobloxSubscriptionPurchaseResult()
 						end
 					end
 				end, {
-					extraProps.analyticsContext, extraProps.onCancel, extraProps.onFailure,
-					extraProps.onSuccess, extraProps.purchaseUIOptions, extraProps.surfaceContext,
-					extraProps.surfaceName
+					ExtraPropsParam.analyticsContext, ExtraPropsParam.onCancel,
+					ExtraPropsParam.onFailure, ExtraPropsParam.onSuccess,
+					ExtraPropsParam.purchaseUIOptions, ExtraPropsParam.surfaceContext,
+					ExtraPropsParam.surfaceName
 				})
 				
-				return reactModule.createElement(reactModule.Fragment, {})
+				return ReactModule.createElement(ReactModule.Fragment, {})
 			end,
 			navigationOptions = { transparent = true, overlayEnabled = false }
 		}
 	},
 	{
 		AccountSettingsUpsell = {
-			screen = createLazyComponent(function()
-				-- upvalues: useNavigation (ref), reactModule (ref), accountSettingsUpsellModule (ref)
-				return function()
-					-- upvalues: useNavigation (copy), reactModule (copy), accountSettingsUpsellModule (copy)
-					return reactModule.createElement(accountSettingsUpsellModule, useNavigation().getParam("extraProps"))
+			screen = CreateLazyComponentFunction(function() --[[ Line: 214 ]]
+				-- upvalues: UseNavigationFunction (copy), ReactModule (copy), AccountSettingsUpsellModule (copy)
+				return function() --[[ Line: 215 ]]
+					-- upvalues: UseNavigationFunction (upval), ReactModule (upval), AccountSettingsUpsellModule (upval)
+					return ReactModule.createElement(AccountSettingsUpsellModule, (UseNavigationFunction().getParam("extraProps")))
 				end
 			end),
 			navigationOptions = { transparent = true, overlayEnabled = true }
@@ -169,31 +163,31 @@ return roactNavigationModule.createAppContainer(roactNavigationModule.createRobl
 	},
 	{
 		VPCUpsell = {
-			screen = createLazyComponent(function()
-				-- upvalues: useNavigation (ref), reactModule (ref), VPCUpsellContainerModule (ref)
-				return function()
-					-- upvalues: useNavigation (copy), reactModule (copy), VPCUpsellContainerModule (copy)
-					return reactModule.createElement(VPCUpsellContainerModule, useNavigation().getParam("extraProps"))
+			screen = CreateLazyComponentFunction(function() --[[ Line: 229 ]]
+				-- upvalues: UseNavigationFunction (copy), ReactModule (copy), VPCUpsellContainerModule (copy)
+				return function() --[[ Line: 230 ]]
+					-- upvalues: UseNavigationFunction (upval), ReactModule (upval), VPCUpsellContainerModule (upval)
+					return ReactModule.createElement(VPCUpsellContainerModule, (UseNavigationFunction().getParam("extraProps")))
 				end
 			end),
 			navigationOptions = { transparent = true, overlayEnabled = true }
 		}
 	},
 	{
-		[appScreensModule.GenericWebPage] = {
-			screen = function()
-				-- upvalues: useNavigation (ref), webViewServiceWrapperModule (ref)
-				local var2 = useNavigation()
-				local extraProps = var2.getParam("extraProps")
-				webViewServiceWrapperModule.new({
-					url = var2.getParam("detail"),
-					title = extraProps.title or "",
-					closeCallback = function()
-						-- upvalues: var2 (ref), extraProps (ref)
-						var2.pop()
+		[AppScreensModule.GenericWebPage] = {
+			screen = function() --[[ Line: 245 ]]
+				-- upvalues: UseNavigationFunction (copy), WebViewServiceWrapperModule (copy)
+				local UseNavigationResult = UseNavigationFunction()
+				local ExtraPropsParam = UseNavigationResult.getParam("extraProps")
+				WebViewServiceWrapperModule.new({
+					url = UseNavigationResult.getParam("detail"),
+					title = ExtraPropsParam.title or "",
+					closeCallback = function() --[[ Line: 252 ]]
+						-- upvalues: UseNavigationResult (copy), ExtraPropsParam (copy)
+						UseNavigationResult.pop()
 						
-						if extraProps.onClose then
-							extraProps.onClose()
+						if ExtraPropsParam.onClose then
+							ExtraPropsParam.onClose()
 						end
 					end
 				}):open()
@@ -203,9 +197,9 @@ return roactNavigationModule.createAppContainer(roactNavigationModule.createRobl
 	}
 }, {
 	initialRouteName = "Wizard",
-	transitionConfig = function()
+	transitionConfig = function() --[[ Line: 272 ]]
 		return {
 			transitionSpec = { frequency = 100000, dampingRatio = 1 }
 		}
 	end
-}))
+}))))

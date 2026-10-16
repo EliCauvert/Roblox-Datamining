@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AppChatRefactorChatMessage", false)
+﻿return (game:DefineFastFlag("AppChatRefactorChatMessage", false))

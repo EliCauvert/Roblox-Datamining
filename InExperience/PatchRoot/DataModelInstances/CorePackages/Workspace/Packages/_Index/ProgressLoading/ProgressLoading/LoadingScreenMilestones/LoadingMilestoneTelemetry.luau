@@ -1,73 +1,97 @@
-﻿local progressLoading = script:FindFirstAncestor("ProgressLoading")
-local _ = progressLoading.Parent
-local runService = game:GetService("RunService")
-local userInputService = game:GetService("UserInputService")
-local telemetryService = game:GetService("TelemetryService")
+﻿local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+local TelemetryService = game:GetService("TelemetryService")
 local _ = require(script.Parent.Types)
-local constantsModule = require(script.Parent.Constants)
-local forwardErrorToScriptContextModule = require(script.Parent.forwardErrorToScriptContext)
-local fIntLoadingScreenMilestonesSampleRateModule = require(progressLoading.Flags.FIntLoadingScreenMilestonesSampleRate)
-
-local function reportMilestoneError(p1)
-	-- upvalues: forwardErrorToScriptContextModule (ref)
-	forwardErrorToScriptContextModule(debug.traceback(tostring(p1), 2))
-end
+local ConstantsModule = require(script.Parent.Constants)
+local TryMilestoneOperationModule = require(script.Parent.tryMilestoneOperation)
 
 return {
-	getMilestoneSessionMetadata = function(p1)
-		-- upvalues: constantsModule (ref), runService (ref), userInputService (ref)
+	reportHoldGateHit = function(Tbl, HoldGateHit) --[[ Line: 65 ]]
+		-- upvalues: TryMilestoneOperationModule (copy), ConstantsModule (copy), TelemetryService (copy)
+		return TryMilestoneOperationModule(function() --[[ Line: 66 ]]
+			-- upvalues: Tbl (copy), ConstantsModule (upval), HoldGateHit (copy), TelemetryService (upval)
+			local Copy = table.clone(Tbl)
+			Copy.dismissSource = ConstantsModule.DismissSource.NormalReady
+			Copy.holdGateHit = HoldGateHit
+			TelemetryService:LogCounter({
+				description = "Completed normal-first HoldOn screens without reduced motion, with readiness and gate-release observations, split by whether readiness preceded gate release.",
+				links = "https://roblox.atlassian.net/wiki/x/AAPROQE",
+				eventName = ConstantsModule.EVENT_NAME .. "_HoldGateHit",
+				backends = { "RobloxTelemetryCounter" },
+				lastUpdated = { 2026, 10, 12 }
+			}, { customFields = Copy }, 1)
+		end)
+	end,
+	reportContentVisibility = function(Tbl, TitleVisible, CreatorVisible, ThumbnailVisible) --[[ Line: 42 ]]
+		-- upvalues: TryMilestoneOperationModule (copy), TelemetryService (copy), ConstantsModule (copy)
+		return TryMilestoneOperationModule(function() --[[ Line: 48 ]]
+			-- upvalues: Tbl (copy), TitleVisible (copy), CreatorVisible (copy), ThumbnailVisible (copy), TelemetryService (upval), ConstantsModule (upval)
+			local Copy = table.clone(Tbl)
+			Copy.titleVisible = TitleVisible
+			Copy.creatorVisible = CreatorVisible
+			Copy.thumbnailVisible = ThumbnailVisible
+			Copy.allContentVisible = TitleVisible and (CreatorVisible and ThumbnailVisible)
+			TelemetryService:LogCounter({
+				description = "Completed loading screens with mount and dismissal-start observations, split by title, creator, thumbnail, and all-content visibility before dismissal.",
+				links = "https://roblox.atlassian.net/wiki/x/AAPROQE",
+				eventName = ConstantsModule.EVENT_NAME .. "_ContentVisibility",
+				backends = { "RobloxTelemetryCounter" },
+				lastUpdated = { 2026, 10, 11 }
+			}, { customFields = Copy }, 1)
+		end)
+	end,
+	reportAddedWait = function(Tbl, Value, DismissSource) --[[ Line: 24 ]]
+		-- upvalues: TryMilestoneOperationModule (copy), TelemetryService (copy)
+		return TryMilestoneOperationModule(function() --[[ Line: 29 ]]
+			-- upvalues: Tbl (copy), DismissSource (copy), TelemetryService (upval), Value (copy)
+			local Copy = table.clone(Tbl)
+			Copy.dismissSource = DismissSource
+			TelemetryService:LogStat({
+				eventName = "TiltLoadingScreenAddedWait",
+				description = "Milliseconds from the first dismissal request to dismissal start in completed loading screens.",
+				links = "https://roblox.atlassian.net/wiki/x/AAPROQE",
+				backends = { "RobloxTelemetryStat" },
+				lastUpdated = { 2026, 10, 1 }
+			}, { customFields = Copy }, Value)
+		end)
+	end,
+	getMilestoneSessionMetadata = function(Subcategory) --[[ Line: 11 ]]
+		-- upvalues: ConstantsModule (copy), RunService (copy), UserInputService (copy)
 		return {
-			category = constantsModule.CATEGORY,
-			page = constantsModule.PAGE,
-			subcategory = p1,
-			AppVersion = runService:GetRobloxVersion(),
-			CoreScriptVersion = runService:GetCoreScriptVersion(),
-			Platform = tostring(userInputService:GetPlatform())
+			category = ConstantsModule.CATEGORY,
+			page = ConstantsModule.PAGE,
+			subcategory = Subcategory,
+			AppVersion = RunService:GetRobloxVersion(),
+			CoreScriptVersion = RunService:GetCoreScriptVersion(),
+			Platform = tostring(UserInputService:GetPlatform())
 		}
 	end,
-	completeMilestoneTracker = function(p1)
-		-- upvalues: constantsModule (ref), fIntLoadingScreenMilestonesSampleRateModule (ref), reportMilestoneError (ref)
-		return xpcall(function()
-			-- upvalues: p1 (ref), constantsModule (copy), fIntLoadingScreenMilestonesSampleRateModule (copy)
-			p1.trackEnd(constantsModule.TILT_EVENT_NAME, {
-				samplingRateOverride = fIntLoadingScreenMilestonesSampleRateModule
-			})
-		end, reportMilestoneError)
-	end,
-	discardMilestoneTracker = function(p1)
-		-- upvalues: constantsModule (ref), reportMilestoneError (ref)
-		return xpcall(function()
-			-- upvalues: p1 (ref), constantsModule (copy)
-			p1.destroyEvent(constantsModule.TILT_EVENT_NAME)
-		end, reportMilestoneError)
-	end,
-	reportMilestoneError = reportMilestoneError,
-	countMilestonesStarted = function(p1)
-		-- upvalues: telemetryService (ref), reportMilestoneError (ref)
-		return xpcall(function()
-			-- upvalues: telemetryService (copy), p1 (ref)
-			telemetryService:LogCounter({
-				eventName = "TiltLoadingScreenMilestonesStarted",
+	countMilestonesStarted = function(CustomFields) --[[ Line: 80 ]]
+		-- upvalues: TryMilestoneOperationModule (copy), TelemetryService (copy), ConstantsModule (copy)
+		return TryMilestoneOperationModule(function() --[[ Line: 81 ]]
+			-- upvalues: TelemetryService (upval), ConstantsModule (upval), CustomFields (copy)
+			TelemetryService:LogCounter({
 				description = "Instrumented Tilt loading screens, before tracker initialization.",
 				links = "https://roblox.atlassian.net/wiki/x/AAPROQE",
+				eventName = ConstantsModule.EVENT_NAME .. "_MilestonesStarted",
 				backends = { "RobloxTelemetryCounter" },
 				lastUpdated = { 2026, 9, 28 }
-			}, { customFields = p1 }, 1)
-		end, reportMilestoneError)
+			}, { customFields = CustomFields }, 1)
+		end)
 	end,
-	countMilestonesOutcome = function(p1, p2)
-		-- upvalues: telemetryService (ref), reportMilestoneError (ref)
-		return xpcall(function()
-			-- upvalues: p1 (ref), p2 (ref), telemetryService (copy)
-			local cloned = table.clone(p1)
-			cloned.outcome = p2
-			telemetryService:LogCounter({
-				eventName = "TiltLoadingScreenMilestonesOutcome",
+	countMilestonesOutcome = function(Tbl, Outcome) --[[ Line: 92 ]]
+		-- upvalues: TryMilestoneOperationModule (copy), TelemetryService (copy), ConstantsModule (copy)
+		return TryMilestoneOperationModule(function() --[[ Line: 93 ]]
+			-- upvalues: Tbl (copy), Outcome (copy), TelemetryService (upval), ConstantsModule (upval)
+			local Copy = table.clone(Tbl)
+			Copy.outcome = Outcome
+			TelemetryService:LogCounter({
 				description = "Terminal outcomes of instrumented Tilt loading screens, independent of TTI sampling.",
 				links = "https://roblox.atlassian.net/wiki/x/AAPROQE",
+				eventName = ConstantsModule.EVENT_NAME .. "_MilestonesOutcome",
 				backends = { "RobloxTelemetryCounter" },
 				lastUpdated = { 2026, 9, 28 }
-			}, { customFields = cloned }, 1)
-		end, reportMilestoneError)
+			}, { customFields = Copy }, 1)
+		end)
 	end
 }

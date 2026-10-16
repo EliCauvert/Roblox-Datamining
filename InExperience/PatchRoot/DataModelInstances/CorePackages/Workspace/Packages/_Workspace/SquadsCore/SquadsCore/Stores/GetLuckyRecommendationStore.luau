@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("SquadsCore").Parent.Signals).createComputed(require(script.createLuckyRecommendationStore))
+﻿return require(script:FindFirstAncestor("SquadsCore").Parent.Signals).createComputed((require(script.createLuckyRecommendationStore)))

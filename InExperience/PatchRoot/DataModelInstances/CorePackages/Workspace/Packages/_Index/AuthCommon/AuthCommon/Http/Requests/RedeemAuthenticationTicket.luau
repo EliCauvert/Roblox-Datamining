@@ -1,17 +1,17 @@
-﻿local authCommon = script:FindFirstAncestor("AuthCommon")
-local parent = authCommon.Parent
-local httpService = game:GetService("HttpService")
-local httpModule = require(parent.Http)
-local appStorageUtilitiesModule = require(authCommon.Utils.AppStorageUtilities)
-local fFlagEnableLuaAccountSwitch = require(parent.SharedFlags).FFlagEnableLuaAccountSwitch
+﻿local AuthCommon = script:FindFirstAncestor("AuthCommon")
+local Parent = AuthCommon.Parent
+local HttpService = game:GetService("HttpService")
+local HttpModule = require(Parent.Http)
+local AppStorageUtilitiesModule = require(AuthCommon.Utils.AppStorageUtilities)
+local FFlagEnableLuaAccountSwitch = require(Parent.SharedFlags).FFlagEnableLuaAccountSwitch
 
-return function(p1, p2)
-	-- upvalues: httpService (ref), fFlagEnableLuaAccountSwitch (ref), appStorageUtilitiesModule (ref), httpModule (ref)
-	return p1(string.format("%sv1/authentication-ticket/redeem", httpModule.Url.AUTH_URL), "POST", {
-		postBody = httpService:JSONEncode({
+return function(Callback, AuthenticationTicket) --[[ Line: 16 ]]
+	-- upvalues: HttpService (copy), FFlagEnableLuaAccountSwitch (copy), AppStorageUtilitiesModule (copy), HttpModule (copy)
+	return (Callback(string.format("%sv1/authentication-ticket/redeem", HttpModule.Url.AUTH_URL), "POST", {
+		postBody = HttpService:JSONEncode({
 			retainCurrentSession = true,
-			authenticationTicket = p2,
-			accountBlob = fFlagEnableLuaAccountSwitch and appStorageUtilitiesModule.getAccountBlob() or nil
+			authenticationTicket = AuthenticationTicket,
+			accountBlob = FFlagEnableLuaAccountSwitch and AppStorageUtilitiesModule.getAccountBlob() or nil
 		})
-	})
+	}))
 end

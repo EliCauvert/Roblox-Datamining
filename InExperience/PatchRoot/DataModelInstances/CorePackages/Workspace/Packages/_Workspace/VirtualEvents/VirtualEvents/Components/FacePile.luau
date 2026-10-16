@@ -1,46 +1,46 @@
-﻿local virtualEvents = script:FindFirstAncestor("VirtualEvents")
-local cryoModule = require(virtualEvents.Parent.Cryo)
-local reactModule = require(virtualEvents.Parent.React)
-local uDim = UDim.new(0, 12)
+﻿local VirtualEvents = script:FindFirstAncestor("VirtualEvents")
+local CryoModule = require(VirtualEvents.Parent.Cryo)
+local ReactModule = require(VirtualEvents.Parent.React)
+local _UDim = UDim.new(0, 12)
 
-return function(p1)
-	-- upvalues: reactModule (ref), cryoModule (ref), uDim (ref)
-	local t = {}
+return function(p1) --[[ Line: 19 | Named "FacePile" ]]
+	-- upvalues: ReactModule (copy), CryoModule (copy), _UDim (copy)
+	local ImageLabels = {}
 	
-	for i, v in reactModule.useMemo(function()
-		-- upvalues: p1 (ref), cryoModule (copy)
+	for LayoutOrder, value in ReactModule.useMemo(function() --[[ Line: 22 ]]
+		-- upvalues: p1 (copy), CryoModule (upval)
 		if p1.desiredFirstUserId then
-			local var1 = cryoModule.List.find(p1.userIds, p1.desiredFirstUserId)
+			local FindResult = CryoModule.List.find(p1.userIds, p1.desiredFirstUserId)
 			
-			if var1 then
-				local cloned = table.clone(p1.userIds)
-				table.remove(cloned, var1)
-				table.insert(cloned, 1, p1.desiredFirstUserId)
+			if FindResult then
+				local Copy = table.clone(p1.userIds)
+				table.remove(Copy, FindResult)
+				table.insert(Copy, 1, p1.desiredFirstUserId)
 				
-				return cloned
+				return Copy
 			end
 		end
 		return p1.userIds
 	end, { p1.userIds, p1.desiredFirstUserId }) do
-		t[v] = reactModule.createElement("ImageLabel", {
-			LayoutOrder = i,
+		ImageLabels[value] = ReactModule.createElement("ImageLabel", {
+			LayoutOrder = LayoutOrder,
 			BackgroundColor3 = Color3.fromRGB(209, 209, 209),
-			Image = ("rbxthumb://type=AvatarHeadShot&id=%s&w=100&h=100"):format(v),
+			Image = ("rbxthumb://type=AvatarHeadShot&id=%s&w=100&h=100"):format(value),
 			Size = UDim2.fromOffset(36, 36)
 		}, {
-			BorderRadius = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0.5, 0) })
+			BorderRadius = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0.5, 0) })
 		})
 	end
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		LayoutOrder = p1.layoutOrder,
 		AutomaticSize = Enum.AutomaticSize.XY
 	}, {
-		Layout = reactModule.createElement("UIListLayout", {
+		Layout = ReactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			FillDirection = Enum.FillDirection.Horizontal,
-			Padding = uDim
+			Padding = _UDim
 		}),
-		Faces = reactModule.createElement(reactModule.Fragment, nil, t)
+		Faces = ReactModule.createElement(ReactModule.Fragment, nil, ImageLabels)
 	})
 end

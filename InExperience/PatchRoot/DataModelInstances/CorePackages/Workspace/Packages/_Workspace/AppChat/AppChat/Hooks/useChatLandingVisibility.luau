@@ -1,36 +1,39 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local sharedFlagsModule = require(parent.SharedFlags)
-local getFFlagEnableAppChatInExperience = sharedFlagsModule.GetFFlagEnableAppChatInExperience
-local useAppPolicyModule = require(appChat.Hooks.useAppPolicy)
-local useIsChatEnabledModule = require(appChat.Hooks.useIsChatEnabled)
-local useIsInExperienceModule = require(appChat.Hooks.useIsInExperience)
-local getFFlagHideNotificationIconForVRModule = require(appChat.Flags.getFFlagHideNotificationIconForVR)
-local fFlagAppChatRemoveNotifications = sharedFlagsModule.FFlagAppChatRemoveNotifications
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local SharedFlagsModule = require(Parent.SharedFlags)
+local GetFFlagEnableAppChatInExperienceFunction = SharedFlagsModule.GetFFlagEnableAppChatInExperience
+local UseAppPolicyModule = require(AppChat.Hooks.useAppPolicy)
+local UseIsChatEnabledModule = require(AppChat.Hooks.useIsChatEnabled)
+local UseIsInExperienceModule = require(AppChat.Hooks.useIsInExperience)
+local GetFFlagHideNotificationIconForVRModule = require(AppChat.Flags.getFFlagHideNotificationIconForVR)
+local FFlagAppChatRemoveNotifications = SharedFlagsModule.FFlagAppChatRemoveNotifications
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
 
-return function()
-	-- upvalues: useIsInExperienceModule (ref), useIsChatEnabledModule (ref), useAppPolicyModule (ref), getFFlagHideNotificationIconForVRModule (ref), useSelector (ref), fFlagAppChatRemoveNotifications (ref), getFFlagEnableAppChatInExperience (ref)
-	local var1 = useIsInExperienceModule()
-	local var2 = useIsChatEnabledModule()
+return function() --[[ Line: 24 | Named "useChatLandingVisibility" ]]
+	-- upvalues: UseIsInExperienceModule (copy), UseIsChatEnabledModule (copy), UseAppPolicyModule (copy), GetFFlagHideNotificationIconForVRModule (copy), UseSelectorFunction (copy), FFlagAppChatRemoveNotifications (copy), GetFFlagEnableAppChatInExperienceFunction (copy)
+	local UseIsInExperienceModuleResult = UseIsInExperienceModule()
+	local UseIsChatEnabledModuleResult = UseIsChatEnabledModule()
+	local UseAppPolicyModuleResult = UseAppPolicyModule(function(p1) --[[ Line: 28 ]]
+		return p1.getChatHeaderSearch()
+	end)
+	local UseAppPolicyModuleResult1 = UseAppPolicyModule(function(p1) --[[ Line: 31 ]]
+		return p1.getChatHeaderCreateChatGroup()
+	end)
+	local UseAppPolicyModuleResult2 = UseAppPolicyModule(function(p1) --[[ Line: 34 ]]
+		-- upvalues: GetFFlagHideNotificationIconForVRModule (upval)
+		return p1.getChatHeaderNotifications() and (not GetFFlagHideNotificationIconForVRModule() or p1.getWebViewSupport())
+	end)
 	
 	return {
-		topBarShowSearch = useAppPolicyModule(function(p1)
-			return p1.getChatHeaderSearch()
-		end) and (not var1 and var2),
-		topBarShowCreateChatGroup = useAppPolicyModule(function(p1)
-			return p1.getChatHeaderCreateChatGroup()
-		end) and var2,
-		topBarShowNotifications = not var1 and (useAppPolicyModule(function(p1)
-			-- upvalues: getFFlagHideNotificationIconForVRModule (copy)
-			return p1.getChatHeaderNotifications() and (not getFFlagHideNotificationIconForVRModule() or p1.getWebViewSupport())
-		end) and not fFlagAppChatRemoveNotifications),
-		topBarShowSnoozeNotifications = var1 and getFFlagEnableAppChatInExperience(),
-		showSearchRow = var1,
-		notificationCount = useSelector(function(p1)
-			local notificationBadgeCounts = p1.NotificationBadgeCounts
+		topBarShowSearch = UseAppPolicyModuleResult and (not UseIsInExperienceModuleResult and UseIsChatEnabledModuleResult),
+		topBarShowCreateChatGroup = UseAppPolicyModuleResult1 and UseIsChatEnabledModuleResult,
+		topBarShowNotifications = not UseIsInExperienceModuleResult and (UseAppPolicyModuleResult2 and not FFlagAppChatRemoveNotifications),
+		topBarShowSnoozeNotifications = UseIsInExperienceModuleResult and GetFFlagEnableAppChatInExperienceFunction(),
+		showSearchRow = UseIsInExperienceModuleResult,
+		notificationCount = UseSelectorFunction(function(p1) --[[ Line: 39 ]]
+			local NotificationBadgeCounts = p1.NotificationBadgeCounts
 			
-			return if notificationBadgeCounts then notificationBadgeCounts.TopBarNotificationIcon else 0
+			return NotificationBadgeCounts and NotificationBadgeCounts.TopBarNotificationIcon or 0
 		end)
 	}
 end

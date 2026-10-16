@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("ExpChatPresetChatAutocompleteAnalyticsEnabled", false) and require(script:FindFirstAncestor("ExpChat").Flags.FFlagExpChatPresetChatAutocompleteEnabled)
+﻿local FFlagExpChatPresetChatAutocompleteEnabledModule = require(script:FindFirstAncestor("ExpChat").Flags.FFlagExpChatPresetChatAutocompleteEnabled)
+
+return game:DefineFastFlag("ExpChatPresetChatAutocompleteAnalyticsEnabled", false) and FFlagExpChatPresetChatAutocompleteEnabledModule

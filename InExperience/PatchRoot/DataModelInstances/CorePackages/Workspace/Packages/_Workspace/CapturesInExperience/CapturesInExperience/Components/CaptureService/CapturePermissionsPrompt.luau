@@ -1,65 +1,66 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local foundationModule = require(parent_1.Foundation)
-local localizationModule = require(parent_1.Localization)
-local reactModule = require(parent_1.React)
-local roactUtilsModule = require(parent_1.RoactUtils)
-local robloxAppHooksModule = require(parent_1.RobloxAppHooks)
-local UIBloxModule = require(parent_1.UIBlox)
-local text = foundationModule.Text
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local useLocalization = localizationModule.Hooks.useLocalization
-local useScreenSize = robloxAppHooksModule.useScreenSize
-local permissionPromptFinishedModule = require(parent.Thunks.PermissionPromptFinished)
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local UIBloxModule = require(Parent1.UIBlox)
+local Text = require(Parent1.Foundation).Text
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
+local UseDispatchFunction = require(Parent1.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
+local UseScreenSizeFunction = require(Parent1.RobloxAppHooks).useScreenSize
+local PermissionPromptFinishedModule = require(Parent.Thunks.PermissionPromptFinished)
 
-return function(p1)
-	-- upvalues: useDispatch (ref), useLocalization (ref), useScreenSize (ref), reactModule (ref), permissionPromptFinishedModule (ref), buttonType (ref), text (ref), interactiveAlert (ref)
-	local var1 = useDispatch()
-	local var2 = useLocalization({
+return function(p1) --[[ Line: 26 ]]
+	-- upvalues: UseDispatchFunction (copy), UseLocalizationFunction (copy), UseScreenSizeFunction (copy), ReactModule (copy), PermissionPromptFinishedModule (copy), ButtonType (copy), Text (copy), InteractiveAlert (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseLocalizationResult = UseLocalizationFunction({
 		allowAccessToCapturesTitle = "Feature.Captures.Title.AllowAccessToCaptures",
 		allowAccessToCapturesBody = "Feature.Captures.Body.AllowAccessToCaptures",
 		allow = "Feature.Captures.Action.Allow",
 		dontAllow = "Feature.Captures.Action.DontAllow"
 	})
-	local var3 = useScreenSize()
-	local var4 = reactModule.useCallback(function()
-		-- upvalues: var1 (ref), permissionPromptFinishedModule (copy), p1 (ref)
-		var1(permissionPromptFinishedModule(p1.promptId, true))
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 37 ]]
+		-- upvalues: UseDispatchResult (copy), PermissionPromptFinishedModule (upval), p1 (copy)
+		UseDispatchResult(PermissionPromptFinishedModule(p1.promptId, true))
 	end, { p1.promptId })
-	local var5 = reactModule.useCallback(function()
-		-- upvalues: var1 (ref), permissionPromptFinishedModule (copy), p1 (ref)
-		var1(permissionPromptFinishedModule(p1.promptId, false))
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 43 ]]
+		-- upvalues: UseDispatchResult (copy), PermissionPromptFinishedModule (upval), p1 (copy)
+		UseDispatchResult(PermissionPromptFinishedModule(p1.promptId, false))
 	end, { p1.promptId })
 	
-	return reactModule.createElement(interactiveAlert, {
+	return ReactModule.createElement(InteractiveAlert, {
 		isMiddleContentFocusable = false,
-		buttonStackInfo = reactModule.useMemo(function()
-			-- upvalues: buttonType (copy), var4 (ref), var2 (ref), var5 (ref)
+		buttonStackInfo = ReactModule.useMemo(function() --[[ Line: 49 ]]
+			-- upvalues: ButtonType (upval), UseResult (copy), UseLocalizationResult (copy), UseResult1 (copy)
 			return {
 				buttons = {
 					{
 						isDefaultChild = false,
-						buttonType = buttonType.PrimarySystem,
-						props = { onActivated = var4, text = var2.allow }
+						buttonType = ButtonType.PrimarySystem,
+						props = {
+							onActivated = UseResult,
+							text = UseLocalizationResult.allow
+						}
 					},
 					{
 						isDefaultChild = true,
-						props = { onActivated = var5, text = var2.dontAllow }
+						props = {
+							onActivated = UseResult1,
+							text = UseLocalizationResult.dontAllow
+						}
 					}
 				}
 			}
-		end, { var4, var5 }),
-		middleContent = reactModule.useCallback(function()
-			-- upvalues: reactModule (copy), text (copy), var2 (ref)
-			return reactModule.createElement(text, {
+		end, { UseResult, UseResult1 }),
+		middleContent = ReactModule.useCallback(function() --[[ Line: 71 ]]
+			-- upvalues: ReactModule (upval), Text (upval), UseLocalizationResult (copy)
+			return ReactModule.createElement(Text, {
 				tag = "size-full-1200 text-align-x-center text-body-large text-wrap",
-				Text = var2.allowAccessToCapturesBody
+				Text = UseLocalizationResult.allowAccessToCapturesBody
 			})
 		end, {}),
 		position = UDim2.fromScale(0.5, 0.5),
-		screenSize = var3,
-		title = var2.allowAccessToCapturesTitle
+		screenSize = UseScreenSizeFunction(),
+		title = UseLocalizationResult.allowAccessToCapturesTitle
 	})
 end

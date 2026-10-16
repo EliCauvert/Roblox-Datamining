@@ -1,48 +1,48 @@
-﻿local dependenciesModule = require(script:FindFirstAncestor("CrossExperienceVoice").dependencies)
-local experimentCacheManager = dependenciesModule.ExperimentCacheManager.ExperimentCacheManager
-local getFFlagEnableCrossExpVoice = dependenciesModule.SharedFlags.GetFFlagEnableCrossExpVoice
-local crossExpVoiceIXPLayer = game:DefineFastString("CrossExpVoiceIXPLayer", "Social.PartyVoice")
-local debugCrossExpVoiceIXPLayer = game:DefineFastString("DebugCrossExpVoiceIXPLayer", "")
-local partyVoiceVolumeEngineFeature = game:GetEngineFeature("PartyVoiceVolume")
-local t = {}
-t.__index = t
-local t_1 = {
+﻿local DependenciesModule = require(script:FindFirstAncestor("CrossExperienceVoice").dependencies)
+local ExperimentCacheManager = DependenciesModule.ExperimentCacheManager.ExperimentCacheManager
+local GetFFlagEnableCrossExpVoiceFunction = DependenciesModule.SharedFlags.GetFFlagEnableCrossExpVoice
+local CrossExpVoiceIXPLayer = game:DefineFastString("CrossExpVoiceIXPLayer", "Social.PartyVoice")
+local DebugCrossExpVoiceIXPLayer = game:DefineFastString("DebugCrossExpVoiceIXPLayer", "")
+local PartyVoiceVolumeEngineFeature = game:GetEngineFeature("PartyVoiceVolume")
+local IXPManager = {}
+IXPManager.__index = IXPManager
+local config = {
 	CrossExpVoiceDebugVariant_0 = { partyVoiceExp = false },
 	CrossExpVoiceDebugVariant_1 = { partyVoiceExp = true }
 }
 
-function t.new()
-	-- upvalues: t (ref)
-	local t_1 = { initialized = false, variant = {} }
-	setmetatable(t_1, t)
+function IXPManager.new() --[[ Line: 47 ]]
+	-- upvalues: IXPManager (copy)
+	local config = { initialized = false, variant = {} }
+	setmetatable(config, IXPManager)
 	
-	return t_1
+	return config
 end
 
-function t:initialize()
-	-- upvalues: experimentCacheManager (ref), crossExpVoiceIXPLayer (ref), debugCrossExpVoiceIXPLayer (ref), t_1 (ref)
-	local var1 = experimentCacheManager.default:getLayerVariables(crossExpVoiceIXPLayer)
+function IXPManager:initialize() --[[ Line: 58 ]]
+	-- upvalues: ExperimentCacheManager (copy), CrossExpVoiceIXPLayer (copy), DebugCrossExpVoiceIXPLayer (copy), config (copy)
+	local LayerVariables = ExperimentCacheManager.default:getLayerVariables(CrossExpVoiceIXPLayer)
 	
-	if var1 ~= nil then
+	if LayerVariables ~= nil then
 		self.initialized = true
-		self.variant = table.clone(var1)
+		self.variant = table.clone(LayerVariables)
 	end
-	if debugCrossExpVoiceIXPLayer ~= "None" then
+	if DebugCrossExpVoiceIXPLayer ~= "None" then
 		self.initialized = true
-		self.variant = t_1[debugCrossExpVoiceIXPLayer] or self.variant
+		self.variant = config[DebugCrossExpVoiceIXPLayer] or self.variant
 	end
 end
 
-function t.logLayerExposure(_)
-	-- upvalues: experimentCacheManager (ref), crossExpVoiceIXPLayer (ref)
-	experimentCacheManager.default:logLayerExposure(crossExpVoiceIXPLayer)
+function IXPManager:logLayerExposure() --[[ Line: 72 ]]
+	-- upvalues: ExperimentCacheManager (copy), CrossExpVoiceIXPLayer (copy)
+	ExperimentCacheManager.default:logLayerExposure(CrossExpVoiceIXPLayer)
 end
 
-function t.getHasPartyVoiceVolume()
-	-- upvalues: partyVoiceVolumeEngineFeature (ref), t (ref)
-	return partyVoiceVolumeEngineFeature and t.default.variant.partyVoiceExp
+function IXPManager.getHasPartyVoiceVolume() --[[ Line: 76 ]]
+	-- upvalues: PartyVoiceVolumeEngineFeature (copy), IXPManager (copy)
+	return PartyVoiceVolumeEngineFeature and IXPManager.default.variant.partyVoiceExp
 end
 
-t.default = if getFFlagEnableCrossExpVoice() then t.new() else nil
+IXPManager.default = if GetFFlagEnableCrossExpVoiceFunction() then IXPManager.new() else nil
 
-return t
+return IXPManager

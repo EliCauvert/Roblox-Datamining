@@ -1,7 +1,7 @@
-﻿local reactModule = require(script:FindFirstAncestor("ProfilePlatform").Parent.React)
-local profileScrollContextModule = require(script.Parent.ProfileScrollContext)
+﻿local ReactModule = require(script:FindFirstAncestor("ProfilePlatform").Parent.React)
+local ProfileScrollContextModule = require(script.Parent.ProfileScrollContext)
 
-return function()
-	-- upvalues: reactModule (ref), profileScrollContextModule (ref)
-	return reactModule.useContext(profileScrollContextModule)
+return function() --[[ Line: 7 ]]
+	-- upvalues: ReactModule (copy), ProfileScrollContextModule (copy)
+	return ReactModule.useContext(ProfileScrollContextModule)
 end

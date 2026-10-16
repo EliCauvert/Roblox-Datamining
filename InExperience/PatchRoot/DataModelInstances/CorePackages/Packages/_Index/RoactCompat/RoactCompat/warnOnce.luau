@@ -1,10 +1,10 @@
-﻿local console = require(script.Parent.Parent.Shared).console
+﻿local Console = require(script.Parent.Parent.Shared).console
 local t = {}
 
-return function(p1, p2)
-	-- upvalues: t (ref), console (ref)
-	if not t[p1] then
-		console.warn("The legacy Roact API '%s' is deprecated, and will be removed in a future release.\n\n%s", p1, p2)
+return function(Key, p1) --[[ Line: 22 | Named "warnOnce" ]]
+	-- upvalues: t (copy), Console (copy)
+	if not t[Key] then
+		Console.warn("The legacy Roact API '%s' is deprecated, and will be removed in a future release.\n\n%s", Key, p1)
 	end
-	t[p1] = true
+	t[Key] = true
 end

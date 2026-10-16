@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.PageSessionRodux.PageSessionRodux)
+﻿return (require(script.Parent.Parent.Parent._Index.PageSessionRodux.PageSessionRodux))

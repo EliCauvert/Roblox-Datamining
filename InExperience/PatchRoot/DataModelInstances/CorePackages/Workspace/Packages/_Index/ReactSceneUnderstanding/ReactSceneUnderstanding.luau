@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CorePackages").Packages.ReactSceneUnderstanding)
+﻿return (require(game:GetService("CorePackages").Packages.ReactSceneUnderstanding))

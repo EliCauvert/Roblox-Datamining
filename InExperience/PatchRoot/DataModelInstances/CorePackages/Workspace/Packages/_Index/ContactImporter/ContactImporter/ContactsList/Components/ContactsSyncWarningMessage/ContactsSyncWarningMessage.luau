@@ -1,19 +1,19 @@
-﻿local parent = script:FindFirstAncestor("ContactImporter").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local text = foundationModule.Text
-local view = foundationModule.View
-local useLocalization = require(parent.Localization).Hooks.useLocalization
+﻿local Parent = script:FindFirstAncestor("ContactImporter").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-return function(p1)
-	-- upvalues: useLocalization (ref), reactModule (ref), view (ref), text (ref)
-	return reactModule.createElement(view, {
+return function(p1) --[[ Line: 16 | Named "ContactsSyncWarningMessage" ]]
+	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), View (copy), Text (copy)
+	return ReactModule.createElement(View, {
 		tag = "size-full-0 auto-y margin-y-small",
 		LayoutOrder = p1.layoutOrder
 	}, {
-		text = reactModule.createElement(text, {
+		text = ReactModule.createElement(Text, {
 			tag = "auto-y size-full-0 text-align-x-left text-wrap radius-medium bg-action-alert padding-medium stroke-emphasis",
-			Text = useLocalization({ message = "Feature.Contacts.Message.ContactsSyncWarning" }).message
+			Text = UseLocalizationFunction({ message = "Feature.Contacts.Message.ContactsSyncWarning" }).message
 		})
 	})
 end

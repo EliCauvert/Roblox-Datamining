@@ -1,11 +1,10 @@
-﻿local parent = script.Parent.Parent
-local constantsModule = require(parent.Constants)
-local _ = require(parent.util.Types)
-local t = { JointRotationName = "JointRotation" }
-local var1 = nil
-local flags = parent.flags
-local getFFlagUGCValidationAllowHRDUploadModule = require(flags.getFFlagUGCValidationAllowHRDUpload)
-local getFFlagDebugAllowHRDUploadOnBundleBackendModule = require(flags.getFFlagDebugAllowHRDUploadOnBundleBackend)
+﻿local Parent = script.Parent.Parent
+local ConstantsModule = require(Parent.Constants)
+local _ = require(Parent.util.Types)
+local T = nil
+local Flags = Parent.flags
+local GetFFlagUGCValidationAllowHRDUploadModule = require(Flags.getFFlagUGCValidationAllowHRDUpload)
+local GetFFlagDebugAllowHRDUploadOnBundleBackendModule = require(Flags.getFFlagDebugAllowHRDUploadOnBundleBackend)
 local list = {
 	"Index",
 	"Middle",
@@ -14,18 +13,18 @@ local list = {
 	"Thumb"
 }
 
-local function buildDrdSchema(p1)
-	-- upvalues: list (ref)
+local function buildDrdSchema(p1) --[[ Line: 14 ]]
+	-- upvalues: list (copy)
 	local t = {}
 	
-	for i, v in list do
-		local var2 = `{p1}Hand{v}`
-		t[`{var2}1`] = {
+	for _, value in list do
+		local HandName: string = `{p1}Hand{value}`
+		t[`{HandName}1`] = {
 			ClassName = "Bone",
 			_children = {
-				[`{var2}2`] = {
+				[`{HandName}2`] = {
 					ClassName = "Bone",
-					_children = { [`{var2}3`] = { ClassName = "Bone" } }
+					_children = { [`{HandName}3`] = { ClassName = "Bone" } }
 				}
 			}
 		}
@@ -33,7 +32,7 @@ local function buildDrdSchema(p1)
 	return t
 end
 
-local t_1 = {
+local config = {
 	HeadBase = {
 		ClassName = "Bone",
 		_children = {
@@ -44,7 +43,7 @@ local t_1 = {
 		}
 	}
 }
-local t_2 = {
+local config1 = {
 	Spine = {
 		ClassName = "Bone",
 		_children = {
@@ -74,114 +73,113 @@ local t_2 = {
 		}
 	}
 }
-local t_3 = { LeftToeBase = { ClassName = "Bone" } }
-local t_4 = { RightToeBase = { ClassName = "Bone" } }
-local var3 = buildDrdSchema("Left")
-local var4 = buildDrdSchema("Right")
-local var5 = false
-
-function t.setIsBackendBundleUpload(value)
-	-- upvalues: var5 (write)
-	var5 = value
-end
-
-function t.checkFlagEnabledForAllowHrd()
-	-- upvalues: getFFlagUGCValidationAllowHRDUploadModule (ref), getFFlagDebugAllowHRDUploadOnBundleBackendModule (ref), var5 (write)
-	return if getFFlagUGCValidationAllowHRDUploadModule() then true else getFFlagDebugAllowHRDUploadOnBundleBackendModule() and var5
-end
-
-local var6 = nil
-local var7 = nil
-
-function t.getHrdJointLabels()
-	-- upvalues: var6 (write)
-	if var6 == nil then
-		var6 = Instance.new("HumanoidRigDescription"):GetJointLabels()
-	end
-	return var6
-end
-
-function t.getDrdJointLabels()
-	-- upvalues: var7 (write)
-	if var7 == nil then
-		var7 = Instance.new("DigitsRigDescription"):GetJointLabels()
-	end
-	return var7
-end
-
-function t.getJointNameWhitelist()
-	-- upvalues: var1 (write), constantsModule (ref), t (ref)
-	if var1 ~= nil then
-		return var1
-	end
-	var1 = {}
-	
-	for i, v in constantsModule.R15_STANDARD_JOINT_NAMES do
-		var1[i] = true
-	end
-	for i_1, v_1 in t.getHrdJointLabels() do
-		var1[v_1.Name] = true
-	end
-	for i_2, v_2 in t.getDrdJointLabels() do
-		var1[`LeftHand{v_2.Name}`] = true
-		var1[`RightHand{v_2.Name}`] = true
-	end
-	return var1
-end
-
-function t.getNameWhitelistOfClassInSchema(p2, p3)
-	-- upvalues: t (ref)
-	local t_1 = {}
-	
-	for i, v in p2 do
-		if v.ClassName == p3 then
-			t_1[i] = true
+local config2 = { LeftToeBase = { ClassName = "Bone" } }
+local config3 = { RightToeBase = { ClassName = "Bone" } }
+local Left = buildDrdSchema("Left")
+local Right = buildDrdSchema("Right")
+local IsBackendBundleUpload = false
+local JointLabels = nil
+local JointLabels1 = nil
+local R15plusUtils = {
+	JointRotationName = "JointRotation",
+	setIsBackendBundleUpload = function(Value) --[[ Line: 126 ]]
+		-- upvalues: IsBackendBundleUpload (ref)
+		IsBackendBundleUpload = Value
+	end,
+	checkFlagEnabledForAllowHrd = function(): boolean --[[ Line: 130 ]]
+		-- upvalues: GetFFlagUGCValidationAllowHRDUploadModule (copy), GetFFlagDebugAllowHRDUploadOnBundleBackendModule (copy), IsBackendBundleUpload (ref)
+		return if GetFFlagUGCValidationAllowHRDUploadModule() then true elseif GetFFlagDebugAllowHRDUploadOnBundleBackendModule() and IsBackendBundleUpload then true else false
+	end,
+	getHrdJointLabels = function() --[[ Line: 148 ]]
+		-- upvalues: JointLabels (ref)
+		if JointLabels == nil then
+			JointLabels = Instance.new("HumanoidRigDescription"):GetJointLabels()
 		end
-		if v._children ~= nil then
-			for i_1, v_1 in t.getNameWhitelistOfClassInSchema(v._children, p3) do
-				t_1[i_1] = v_1
+		return JointLabels
+	end,
+	getDrdJointLabels = function() --[[ Line: 155 ]]
+		-- upvalues: JointLabels1 (ref)
+		if JointLabels1 == nil then
+			JointLabels1 = Instance.new("DigitsRigDescription"):GetJointLabels()
+		end
+		return JointLabels1
+	end
+}
+
+function R15plusUtils.getJointNameWhitelist() --[[ Line: 162 ]]
+	-- upvalues: T (ref), ConstantsModule (copy), R15plusUtils (copy)
+	if T ~= nil then
+		return T
+	end
+	T = {}
+	
+	for i, _ in ConstantsModule.R15_STANDARD_JOINT_NAMES do
+		T[i] = true
+	end
+	for _, value in R15plusUtils.getHrdJointLabels() do
+		T[value.Name] = true
+	end
+	for _, value1 in R15plusUtils.getDrdJointLabels() do
+		T[`LeftHand{value1.Name}`] = true
+		T[`RightHand{value1.Name}`] = true
+	end
+	return T
+end
+
+function R15plusUtils.getNameWhitelistOfClassInSchema(Children, ClassName) --[[ Line: 184 ]]
+	-- upvalues: R15plusUtils (copy)
+	local t = {}
+	
+	for i, child in Children do
+		if child.ClassName == ClassName then
+			t[i] = true
+		end
+		if child._children ~= nil then
+			for i1, value in R15plusUtils.getNameWhitelistOfClassInSchema(child._children, ClassName) do
+				t[i1] = value
 			end
 		end
 	end
-	return t_1
+	return t
 end
 
-function t.getSchemaFlatHierarchyList(p4, p5)
-	-- upvalues: t (ref)
-	local t_1 = {}
+function R15plusUtils.getSchemaFlatHierarchyList(Children, Tbl) --[[ Line: 204 ]]
+	-- upvalues: R15plusUtils (copy)
+	local t = {}
 	
-	for i, v in p4 do
-		local cloned = table.clone(p5)
-		table.insert(cloned, i)
-		t_1[i] = { ClassName = v.ClassName, path = cloned }
+	for i, child in Children do
+		local Copy = table.clone(Tbl)
+		table.insert(Copy, i)
+		t[i] = { ClassName = child.ClassName, path = Copy }
 		
-		if v._children ~= nil then
-			for i_1, v_1 in t.getSchemaFlatHierarchyList(v._children, cloned) do
-				t_1[i_1] = v_1
+		if child._children ~= nil then
+			for i1, value in R15plusUtils.getSchemaFlatHierarchyList(child._children, Copy) do
+				t[i1] = value
 			end
 		end
 	end
-	return t_1
+	return t
 end
 
-function t.getFingerFlatSuffixes()
-	-- upvalues: list (ref)
+function R15plusUtils.getFingerFlatSuffixes() --[[ Line: 228 ]]
+	-- upvalues: list (copy)
 	return list
 end
 
-function t.getDrdSchema(p6)
-	-- upvalues: var3 (ref), var4 (ref)
-	if p6 == "Left" then
-		return var3
-	elseif p6 == "Right" then
-		return var4
+function R15plusUtils.getDrdSchema(Text) --[[ Line: 232 ]]
+	-- upvalues: Left (copy), Right (copy)
+	if Text == "Left" then
+		return Left
+	elseif Text == "Right" then
+		return Right
+	else
+		error("Invalid side: " .. Text)
 	end
-	error("Invalid side: " .. p5)
 end
 
-function t.getAvatarBoneSchema(p6)
-	-- upvalues: t_1 (ref), t_2 (ref), t_3 (ref), t_4 (ref), var3 (ref), var4 (ref)
-	return if p6 == "Head" then t_1 elseif p6 == "UpperTorso" then t_2 elseif p6 == "LeftFoot" then t_3 elseif p6 == "RightFoot" then t_4 elseif p6 == "LeftHand" then var3 elseif p6 == "RightHand" then var4 else {}
+function R15plusUtils.getAvatarBoneSchema(p2) --[[ Line: 242 ]]
+	-- upvalues: config (copy), config1 (copy), config2 (copy), config3 (copy), Left (copy), Right (copy)
+	return if p2 == "Head" then config elseif p2 == "UpperTorso" then config1 elseif p2 == "LeftFoot" then config2 elseif p2 == "RightFoot" then config3 elseif p2 == "LeftHand" then Left elseif p2 == "RightHand" then Right else {}
 end
 
-return t
+return R15plusUtils

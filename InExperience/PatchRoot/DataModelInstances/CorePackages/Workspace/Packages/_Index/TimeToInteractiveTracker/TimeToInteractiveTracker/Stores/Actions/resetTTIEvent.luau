@@ -1,25 +1,26 @@
 ﻿local _ = require(script.Parent.Parent.types)
 
-return function(p1)
-	return function(p2)
-		-- upvalues: p1 (ref)
-		p1(function(p3)
-			-- upvalues: p2 (ref)
-			local var1 = p3[p2]
+return function(Callback) --[[ Line: 7 ]]
+	return function(p1) --[[ Line: 8 ]]
+		-- upvalues: Callback (copy)
+		Callback(function(Tbl) --[[ Line: 9 ]]
+			-- upvalues: p1 (copy)
+			local Entry = Tbl[p1]
 			
-			if var1 == nil then
-				return p3
+			if Entry == nil then
+				return Tbl
+			else
+				local Copy = table.clone(Tbl)
+				Copy[p1] = {
+					startTime = nil,
+					endTime = nil,
+					deltaMs = nil,
+					sent = nil,
+					metadata = table.clone(Entry.metadata)
+				}
+				
+				return Copy
 			end
-			local cloned = table.clone(p3)
-			cloned[p2] = {
-				startTime = nil,
-				endTime = nil,
-				deltaMs = nil,
-				sent = nil,
-				metadata = table.clone(var1.metadata)
-			}
-			
-			return cloned
 		end)
 	end
 end

@@ -1,15 +1,15 @@
-﻿local getImageSetDataModule = require(script.Parent.GetImageSetData)
-local getImageSetPathPatternModule = require(script.Parent.GetImageSetPathPattern)
-local images = require(script.Parent.Parent.FoundationImages).Images
+﻿local GetImageSetDataModule = require(script.Parent.GetImageSetData)
+local GetImageSetPathPatternModule = require(script.Parent.GetImageSetPathPattern)
+local Images = require(script.Parent.Parent.FoundationImages).Images
 local _ = require(script.Parent.types)
 
-return function(p1, p2)
-	-- upvalues: getImageSetDataModule (ref), images (ref), getImageSetPathPatternModule (ref)
-	local var1 = getImageSetDataModule(p2 or images.ImagesResolutionScale)[p1]
+return function(p1, p2) --[[ Line: 9 | Named "GetImageData" ]]
+	-- upvalues: GetImageSetDataModule (copy), Images (copy), GetImageSetPathPatternModule (copy)
+	local ImageSetDataModuleEntry = GetImageSetDataModule(p2 or Images.ImagesResolutionScale)[p1]
 	
-	return if var1 == nil then nil else {
-		Image = getImageSetPathPatternModule(var1.ImageSet),
-		ImageRectSize = var1.ImageRectSize,
-		ImageRectOffset = var1.ImageRectOffset
+	return if ImageSetDataModuleEntry == nil then nil else {
+		Image = GetImageSetPathPatternModule(ImageSetDataModuleEntry.ImageSet),
+		ImageRectSize = ImageSetDataModuleEntry.ImageRectSize,
+		ImageRectOffset = ImageSetDataModuleEntry.ImageRectOffset
 	}
 end

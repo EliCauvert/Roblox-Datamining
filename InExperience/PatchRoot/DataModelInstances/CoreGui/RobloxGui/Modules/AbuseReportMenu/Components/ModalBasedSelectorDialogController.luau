@@ -1,91 +1,89 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local guiService = game:GetService("GuiService")
-local abuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
-local corePackagesService = game:GetService("CorePackages")
-local roactModule = require(corePackagesService.Packages.Roact)
-local constantsModule = require(abuseReportMenu.Components.Constants)
-local modalBaseSelectorDialogModule = require(abuseReportMenu.Components.ModalBaseSelectorDialog)
-local fFlagHideShortcutsOnReportDropdownModule = require(abuseReportMenu.Flags.FFlagHideShortcutsOnReportDropdown)
-local isInExperienceUIVREnabled = require(corePackagesService.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled
-local isSpatial = nil
+﻿local CoreGui = game:GetService("CoreGui")
+local GuiService = game:GetService("GuiService")
+local AbuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
+local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local ConstantsModule = require(AbuseReportMenu.Components.Constants)
+local ModalBaseSelectorDialogModule = require(AbuseReportMenu.Components.ModalBaseSelectorDialog)
+local FFlagHideShortcutsOnReportDropdownModule = require(AbuseReportMenu.Flags.FFlagHideShortcutsOnReportDropdown)
+local IsInExperienceUIVREnabled = require(CorePackages.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled
+local IsSpatialFunction = nil
 local UIManager = nil
-local panelType = nil
+local PanelType = nil
 
-if isInExperienceUIVREnabled then
-	isSpatial = require(corePackagesService.Workspace.Packages.AppCommonLib).isSpatial
-	local vrSpatialUiModule = require(corePackagesService.Workspace.Packages.VrSpatialUi)
-	UIManager = vrSpatialUiModule.UIManager
-	panelType = vrSpatialUiModule.Constants.PanelType
+if IsInExperienceUIVREnabled then
+	IsSpatialFunction = require(CorePackages.Workspace.Packages.AppCommonLib).isSpatial
+	local VrSpatialUiModule = require(CorePackages.Workspace.Packages.VrSpatialUi)
+	UIManager = VrSpatialUiModule.UIManager
+	PanelType = VrSpatialUiModule.Constants.PanelType
 end
-local t = {
+local config = {
 	modalSelectorHandle = nil,
 	modalSelectorFrame = nil,
 	modalSelectorScreenGui = nil
 }
 
 return {
-	mountModalSelector = function(p1, p2, p3, p4, p5, p6)
-		-- upvalues: guiService (ref), isInExperienceUIVREnabled (ref), isSpatial (write), UIManager (write), panelType (write), t (ref), coreGuiService (ref), constantsModule (ref), fFlagHideShortcutsOnReportDropdownModule (ref), roactModule (ref), modalBaseSelectorDialogModule (ref)
-		local guiInset, _ = guiService:GetGuiInset()
+	mountModalSelector = function(ViewportHeight, ViewportWidth, CellData, OnSelect, OnClose, Callback: () -> ()) --[[ Line: 58 ]]
+		-- upvalues: GuiService (copy), IsInExperienceUIVREnabled (copy), IsSpatialFunction (ref), UIManager (ref), PanelType (ref), config (copy), CoreGui (copy), ConstantsModule (copy), FFlagHideShortcutsOnReportDropdownModule (copy), RoactModule (copy), ModalBaseSelectorDialogModule (copy)
+		local GuiInset, _ = GuiService:GetGuiInset()
 		
-		if isInExperienceUIVREnabled and isSpatial() then
-			local moreMenuPanelObject = UIManager.getInstance():getPanelObject(panelType.MoreMenu)
-			local frame = Instance.new("Frame")
-			frame.BackgroundTransparency = 1
-			frame.Position = UDim2.new(0, 0, 0, 0)
-			frame.Size = UDim2.new(1, 0, 1, 0)
-			frame.ZIndex = 10
-			frame.Parent = moreMenuPanelObject
-			t.modalSelectorFrame = frame
-		elseif not t.modalSelectorScreenGui then
-			local modalSelectorDialogGui = Instance.new("ScreenGui")
-			modalSelectorDialogGui.Name = "ModalSelectorDialogGui"
-			modalSelectorDialogGui.DisplayOrder = 7
-			modalSelectorDialogGui.Enabled = true
-			modalSelectorDialogGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-			modalSelectorDialogGui.Parent = coreGuiService:FindFirstChild(constantsModule.AbuseReportMenuPlaceholderFrame, true)
-			t.modalSelectorScreenGui = modalSelectorDialogGui
-			local frame = Instance.new("Frame")
-			frame.BackgroundTransparency = 1
-			frame.Position = UDim2.new(0, 0, 0, -guiInset.Y)
-			frame.Size = UDim2.new(1, 0, 1, guiInset.Y)
-			frame.Parent = t.modalSelectorScreenGui
-			t.modalSelectorFrame = frame
+		if IsInExperienceUIVREnabled and IsSpatialFunction() then
+			local PanelObject = UIManager.getInstance():getPanelObject(PanelType.MoreMenu)
+			local Frame = Instance.new("Frame")
+			Frame.BackgroundTransparency = 1
+			Frame.Position = UDim2.new(0, 0, 0, 0)
+			Frame.Size = UDim2.new(1, 0, 1, 0)
+			Frame.ZIndex = 10
+			Frame.Parent = PanelObject
+			config.modalSelectorFrame = Frame
+		elseif not config.modalSelectorScreenGui then
+			local ModalSelectorDialogGui = Instance.new("ScreenGui")
+			ModalSelectorDialogGui.Name = "ModalSelectorDialogGui"
+			ModalSelectorDialogGui.DisplayOrder = 7
+			ModalSelectorDialogGui.Enabled = true
+			ModalSelectorDialogGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+			ModalSelectorDialogGui.Parent = CoreGui:FindFirstChild(ConstantsModule.AbuseReportMenuPlaceholderFrame, true)
+			config.modalSelectorScreenGui = ModalSelectorDialogGui
+			local Frame = Instance.new("Frame")
+			Frame.BackgroundTransparency = 1
+			Frame.Position = UDim2.new(0, 0, 0, -GuiInset.Y)
+			Frame.Size = UDim2.new(1, 0, 1, GuiInset.Y)
+			Frame.Parent = config.modalSelectorScreenGui
+			config.modalSelectorFrame = Frame
 		end
-		if fFlagHideShortcutsOnReportDropdownModule and p6 ~= nil then
-			p6()
+		if FFlagHideShortcutsOnReportDropdownModule and Callback ~= nil then
+			Callback()
 		end
-		t.modalSelectorHandle = roactModule.mount(roactModule.createElement(modalBaseSelectorDialogModule, {
+		config.modalSelectorHandle = RoactModule.mount(RoactModule.createElement(ModalBaseSelectorDialogModule, {
 			isShown = true,
-			cellData = p3,
-			viewportHeight = p1,
-			viewportWidth = p2,
-			onSelect = p4,
-			onClose = p5
-		}), t.modalSelectorFrame, "ModalSelectorDialog")
+			cellData = CellData,
+			viewportHeight = ViewportHeight,
+			viewportWidth = ViewportWidth,
+			onSelect = OnSelect,
+			onClose = OnClose
+		}), config.modalSelectorFrame, "ModalSelectorDialog")
 	end,
-	unmountModalSelector = function()
-		-- upvalues: t (ref), roactModule (ref), isInExperienceUIVREnabled (ref)
-		if t.modalSelectorHandle ~= nil then
-			roactModule.unmount(t.modalSelectorHandle)
-			t.modalSelectorHandle = nil
+	unmountModalSelector = function() --[[ Line: 34 ]]
+		-- upvalues: config (copy), RoactModule (copy), IsInExperienceUIVREnabled (copy)
+		if config.modalSelectorHandle ~= nil then
+			RoactModule.unmount(config.modalSelectorHandle)
+			config.modalSelectorHandle = nil
 		end
-		if isInExperienceUIVREnabled then
-			if t.modalSelectorFrame ~= nil then
-				t.modalSelectorFrame.Parent = nil
-				t.modalSelectorFrame = nil
+		if IsInExperienceUIVREnabled then
+			if config.modalSelectorFrame ~= nil then
+				config.modalSelectorFrame.Parent = nil
+				config.modalSelectorFrame = nil
 			end
-			if t.modalSelectorScreenGui == nil then
-				return
-			else
-				t.modalSelectorScreenGui = nil
+			if config.modalSelectorScreenGui ~= nil then
+				config.modalSelectorScreenGui = nil
 				
 				return
 			end
-		elseif t.modalSelectorScreenGui ~= nil then
-			t.modalSelectorFrame.Parent = nil
-			t.modalSelectorFrame = nil
-			t.modalSelectorScreenGui = nil
+		elseif config.modalSelectorScreenGui ~= nil then
+			config.modalSelectorFrame.Parent = nil
+			config.modalSelectorFrame = nil
+			config.modalSelectorScreenGui = nil
 		end
 	end
 }

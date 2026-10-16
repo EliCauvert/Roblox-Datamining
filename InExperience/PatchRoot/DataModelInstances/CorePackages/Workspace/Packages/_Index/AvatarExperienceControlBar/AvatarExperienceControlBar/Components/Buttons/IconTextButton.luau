@@ -1,70 +1,68 @@
-﻿local avatarExperienceControlBar = script:FindFirstAncestor("AvatarExperienceControlBar")
-local parent = avatarExperienceControlBar.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useSemanticTokensModule = require(avatarExperienceControlBar.Hooks.useSemanticTokens)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useHoverBindingModule = require(avatarExperienceControlBar.Hooks.useHoverBinding)
-local isBuilderIcon = foundationModule.Utility.isBuilderIcon
-local fFlagAXMigrateBuilderIcons = require(parent.AvatarExperienceFlags).FFlagAXMigrateBuilderIcons
-local fFlagAXResetAvatarButton = require(parent.AvatarExperienceFlags).FFlagAXResetAvatarButton
+﻿local AvatarExperienceControlBar = script:FindFirstAncestor("AvatarExperienceControlBar")
+local Parent = AvatarExperienceControlBar.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseSemanticTokensModule = require(AvatarExperienceControlBar.Hooks.useSemanticTokens)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseHoverBindingModule = require(AvatarExperienceControlBar.Hooks.useHoverBinding)
+local IsBuilderIconFunction = FoundationModule.Utility.isBuilderIcon
+local FFlagAXMigrateBuilderIcons = require(Parent.AvatarExperienceFlags).FFlagAXMigrateBuilderIcons
+local FFlagAXResetAvatarButton = require(Parent.AvatarExperienceFlags).FFlagAXResetAvatarButton
 
-return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useSemanticTokensModule (ref), useHoverBindingModule (ref), useLocalization (ref), fFlagAXMigrateBuilderIcons (ref), isBuilderIcon (ref), reactModule (ref), foundationModule (ref), fFlagAXResetAvatarButton (ref)
-	local var1 = useSemanticTokensModule()
-	local var2, var3 = useHoverBindingModule()
-	local var4 = if p1.radius then p1.radius else var1.defaultIconTextButtonRadius
-	local var5 = useLocalization({ text = p1.localizedTextKey })
-	local var6 = if var5.text then var5.text else p1.text
-	local var7 = if p1.iconSize then p1.iconSize else var1.defaultIconSize
-	local icon = fFlagAXMigrateBuilderIcons and isBuilderIcon(p1.icon)
+return (ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 29 ]]
+	-- upvalues: UseSemanticTokensModule (copy), UseHoverBindingModule (copy), UseLocalizationFunction (copy), FFlagAXMigrateBuilderIcons (copy), IsBuilderIconFunction (copy), ReactModule (copy), FoundationModule (copy), FFlagAXResetAvatarButton (copy)
+	local UseSemanticTokensModuleResult = UseSemanticTokensModule()
+	local UseHoverBindingModuleResult, UseHoverBindingModuleResult2 = UseHoverBindingModule()
+	local UseLocalizationResult = UseLocalizationFunction({ text = Frame.localizedTextKey })
+	local IconSize = if Frame.iconSize then Frame.iconSize else UseSemanticTokensModuleResult.defaultIconSize
+	local IsBuilderIcon = FFlagAXMigrateBuilderIcons and IsBuilderIconFunction(Frame.icon)
 	
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "auto-xy size-full-0 clip row gap-xsmall items-center",
-		onActivated = p1.onActivated,
-		isDisabled = p1.disabled,
-		ref = p2,
-		onStateChanged = var3,
-		GroupTransparency = if fFlagAXResetAvatarButton then if p1.disabled then var1.contentDisabledTransparency else var1.contentForegroundStyle.Transparency else nil,
-		backgroundStyle = var2:map(function(p3)
-			-- upvalues: var1 (ref)
+		onActivated = Frame.onActivated,
+		isDisabled = Frame.disabled,
+		ref = Ref,
+		onStateChanged = UseHoverBindingModuleResult2,
+		GroupTransparency = if FFlagAXResetAvatarButton then if Frame.disabled then UseSemanticTokensModuleResult.contentDisabledTransparency else UseSemanticTokensModuleResult.contentForegroundStyle.Transparency else nil,
+		backgroundStyle = UseHoverBindingModuleResult:map(function(p1) --[[ Line: 55 ]]
+			-- upvalues: UseSemanticTokensModuleResult (copy)
 			return {
-				Color3 = var1.hoverIconBackgroundStyle.Color3,
-				Transparency = if p3 then var1.hoverIconBackgroundStyle.Transparency else 1
+				Color3 = UseSemanticTokensModuleResult.hoverIconBackgroundStyle.Color3,
+				Transparency = if p1 then UseSemanticTokensModuleResult.hoverIconBackgroundStyle.Transparency else 1
 			}
 		end),
-		cornerRadius = UDim.new(0, var4),
+		cornerRadius = UDim.new(0, if Frame.radius then Frame.radius else UseSemanticTokensModuleResult.defaultIconTextButtonRadius),
 		padding = {
-			left = UDim.new(0, var1.textButtonPaddingLeft),
-			right = UDim.new(0, var1.textButtonPaddingRight),
-			top = UDim.new(0, var1.textButtonPaddingY),
-			bottom = UDim.new(0, var1.textButtonPaddingY)
+			left = UDim.new(0, UseSemanticTokensModuleResult.textButtonPaddingLeft),
+			right = UDim.new(0, UseSemanticTokensModuleResult.textButtonPaddingRight),
+			top = UDim.new(0, UseSemanticTokensModuleResult.textButtonPaddingY),
+			bottom = UDim.new(0, UseSemanticTokensModuleResult.textButtonPaddingY)
 		},
-		Visible = p1.Visible,
-		LayoutOrder = p1.LayoutOrder
+		Visible = Frame.Visible,
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Icon = reactModule.createElement(foundationModule.View, {
-			Size = UDim2.new(0, var1.iconTextButtonIconContainerSize, 0, var1.iconTextButtonIconContainerSize),
-			tag = if fFlagAXMigrateBuilderIcons then {
+		Icon = ReactModule.createElement(FoundationModule.View, {
+			Size = UDim2.new(0, UseSemanticTokensModuleResult.iconTextButtonIconContainerSize, 0, UseSemanticTokensModuleResult.iconTextButtonIconContainerSize),
+			tag = if FFlagAXMigrateBuilderIcons then {
 				["radius-circle"] = true,
-				["row align-x-center align-y-center"] = icon
+				["row align-x-center align-y-center"] = IsBuilderIcon
 			} else "radius-circle"
 		}, {
-			IconImage = if icon then reactModule.createElement(foundationModule.Icon, {
+			IconImage = if IsBuilderIcon then ReactModule.createElement(FoundationModule.Icon, {
 				tag = "position-center-center anchor-center-center",
-				name = p1.icon,
-				size = var7,
-				style = var1.contentForegroundStyle
-			}) else reactModule.createElement(foundationModule.Image, {
+				name = Frame.icon,
+				size = IconSize,
+				style = UseSemanticTokensModuleResult.contentForegroundStyle
+			}) else ReactModule.createElement(FoundationModule.Image, {
 				tag = "position-center-center anchor-center-center",
-				Image = p1.icon,
-				Size = UDim2.new(0, var7, 0, var7),
-				imageStyle = var1.contentForegroundStyle
+				Image = Frame.icon,
+				Size = UDim2.new(0, IconSize, 0, IconSize),
+				imageStyle = UseSemanticTokensModuleResult.contentForegroundStyle
 			})
 		}),
-		Text = reactModule.createElement(foundationModule.Text, {
+		Text = ReactModule.createElement(FoundationModule.Text, {
 			tag = "auto-xy text-title-medium content-emphasis",
-			Text = var6
+			Text = if UseLocalizationResult.text then UseLocalizationResult.text else Frame.text
 		})
 	})
-end)
+end))

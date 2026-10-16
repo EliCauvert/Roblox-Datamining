@@ -1,20 +1,20 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local _ = require(foundation.Providers.Style.Tokens)
-local _ = require(foundation.Components.Types)
-local colorNamespaceModule = require(foundation.Enums.ColorNamespace)
-local stateLayerModeModule = require(foundation.Enums.StateLayerMode)
-local controlStateModule = require(foundation.Enums.ControlState)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local _ = require(Foundation.Providers.Style.Tokens)
+local _ = require(Foundation.Components.Types)
+local ColorNamespaceModule = require(Foundation.Enums.ColorNamespace)
+local StateLayerModeModule = require(Foundation.Enums.StateLayerMode)
+local ControlStateModule = require(Foundation.Enums.ControlState)
 
-function guiStateToStateLayer(p1)
-	-- upvalues: controlStateModule (ref)
-	return if p1 == controlStateModule.Pressed then "Press" elseif p1 == controlStateModule.SelectedPressed then "Press" elseif p1 == controlStateModule.Hover then "Hover" else "Idle"
+function guiStateToStateLayer(Hover): string --[[ Line: 15 ]]
+	-- upvalues: ControlStateModule (copy)
+	return if Hover == ControlStateModule.Pressed then "Press" elseif Hover == ControlStateModule.SelectedPressed then "Press" elseif Hover == ControlStateModule.Hover then "Hover" else "Idle"
 end
 
-function stateLayerModeToTokenNamespace(p1)
-	-- upvalues: stateLayerModeModule (ref), colorNamespaceModule (ref)
-	return if p1 == stateLayerModeModule.Default then colorNamespaceModule.Color elseif p1 == stateLayerModeModule.Inverse then colorNamespaceModule.Inverse elseif p1 == stateLayerModeModule.Light then colorNamespaceModule.LightMode elseif p1 == stateLayerModeModule.Dark then colorNamespaceModule.DarkMode else colorNamespaceModule.Color
+function stateLayerModeToTokenNamespace(Dark) --[[ Line: 27 ]]
+	-- upvalues: StateLayerModeModule (copy), ColorNamespaceModule (copy)
+	return if Dark == StateLayerModeModule.Default then ColorNamespaceModule.Color elseif Dark == StateLayerModeModule.Inverse then ColorNamespaceModule.Inverse elseif Dark == StateLayerModeModule.Light then ColorNamespaceModule.LightMode elseif Dark == StateLayerModeModule.Dark then ColorNamespaceModule.DarkMode else ColorNamespaceModule.Color
 end
 
-return function(p1, p2, p3)
+return function(p1, p2, p3) --[[ Line: 41 | Named "getStateLayerStyle" ]]
 	return p1[stateLayerModeToTokenNamespace(p2)].State[guiStateToStateLayer(p3)]
 end

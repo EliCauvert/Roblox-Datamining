@@ -1,9 +1,13 @@
-﻿return function(p1, p2)
-	if p1 then
-		local absolutePosition = p1.AbsolutePosition
-		local absoluteSize = p1.AbsoluteSize
+﻿return function(Frame: Frame, Vector): boolean --[[ Line: 1 | Named "isPointInGuiObjectBounds" ]]
+	if Frame then
+		local AbsolutePosition = Frame.AbsolutePosition
+		local AbsoluteSize = Frame.AbsoluteSize
+		local Y = AbsolutePosition.Y
+		local NewX = AbsolutePosition.X + AbsoluteSize.X
+		local NewY = AbsolutePosition.Y + AbsoluteSize.Y
 		
-		return absolutePosition.X <= p2.X and (p2.X <= absolutePosition.X + absoluteSize.X and (absolutePosition.Y <= p2.Y and p2.Y <= absolutePosition.Y + absoluteSize.Y))
+		return AbsolutePosition.X <= Vector.X and (Vector.X <= NewX and Y <= Vector.Y) and Vector.Y <= NewY
+	else
+		return false
 	end
-	return false
 end

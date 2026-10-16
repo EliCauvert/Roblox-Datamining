@@ -1,14 +1,14 @@
-﻿local parent = script:FindFirstAncestor("Moments").Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local t = { readOnly = "Feature.Moments.Label.CommentsReadOnly" }
+﻿local Parent = script:FindFirstAncestor("Moments").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local config = { readOnly = "Feature.Moments.Label.CommentsReadOnly" }
 
-return function()
-	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), foundationModule (ref)
-	return reactModule.createElement(foundationModule.Text, {
+return function() --[[ Line: 14 | Named "CommentsReadOnlyNoticeView" ]]
+	-- upvalues: UseLocalizationFunction (copy), config (copy), ReactModule (copy), FoundationModule (copy)
+	return ReactModule.createElement(FoundationModule.Text, {
 		tag = "auto-xy text-body-small content-muted",
 		testId = "moments-comments-read-only",
-		Text = useLocalization(t).readOnly
+		Text = UseLocalizationFunction(config).readOnly
 	})
 end

@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.NetworkingPresence.NetworkingPresence)
+﻿return (require(script.Parent.Parent.Parent._Index.NetworkingPresence.NetworkingPresence))

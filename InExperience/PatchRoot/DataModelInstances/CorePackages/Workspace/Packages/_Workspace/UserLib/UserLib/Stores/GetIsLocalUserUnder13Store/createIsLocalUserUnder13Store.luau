@@ -1,17 +1,17 @@
-﻿local parent = script:FindFirstAncestor("UserLib").Parent
-local _ = require(parent.Signals)
-local createSessionScopedSignal = require(parent.SignalsUtils).createSessionScopedSignal
+﻿local Parent = script:FindFirstAncestor("UserLib").Parent
+local _ = require(Parent.Signals)
+local CreateSessionScopedSignalFunction = require(Parent.SignalsUtils).createSessionScopedSignal
 
-return function()
-	-- upvalues: createSessionScopedSignal (ref)
-	local var1, var2 = createSessionScopedSignal(false)
+return function() --[[ Line: 15 ]]
+	-- upvalues: CreateSessionScopedSignalFunction (copy)
+	local SessionScopedSignal, SessionScopedSignal2 = CreateSessionScopedSignalFunction(false)
 	
 	return {
-		getIsLocalUserUnder13 = var1,
-		setIsLocalUserUnder13 = var2,
-		reset = function()
-			-- upvalues: var2 (ref)
-			var2(false)
+		getIsLocalUserUnder13 = SessionScopedSignal,
+		setIsLocalUserUnder13 = SessionScopedSignal2,
+		reset = function() --[[ Line: 18 ]]
+			-- upvalues: SessionScopedSignal2 (copy)
+			SessionScopedSignal2(false)
 		end
 	}
 end

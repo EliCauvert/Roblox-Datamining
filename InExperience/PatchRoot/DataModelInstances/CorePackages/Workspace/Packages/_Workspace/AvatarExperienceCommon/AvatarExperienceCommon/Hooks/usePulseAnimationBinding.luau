@@ -1,51 +1,50 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
-local reactModule = require(parent.React)
-local otterModule = require(parent.Otter)
-local useAnimatedBinding = require(parent.ReactOtter).useAnimatedBinding
-local _ = { easeIn = 1, easeOut = 10 }
-local _ = { easeOut = 1, easeIn = 0 }
-local t = { frequency = 10, dampingRatio = 1 }
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
+local ReactModule = require(Parent.React)
+local OtterModule = require(Parent.Otter)
+local UseAnimatedBindingFunction = require(Parent.ReactOtter).useAnimatedBinding
+local config = { frequency = 10, dampingRatio = 1 }
 
-return function(p1)
-	-- upvalues: reactModule (ref), otterModule (ref), t (ref), useAnimatedBinding (ref)
-	local var1 = reactModule.useRef(nil)
-	local var2, var3 = useAnimatedBinding({ thickness = 0, transparency = 0 }, reactModule.useCallback(function(p2)
-		-- upvalues: var1 (ref), p1 (ref), otterModule (copy), t (copy)
-		if var1.current and p1 then
+return function(p1) --[[ Line: 53 | Named "usePulseAnimationBinding" ]]
+	-- upvalues: ReactModule (copy), OtterModule (copy), config (copy), UseAnimatedBindingFunction (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = UseAnimatedBindingFunction({ thickness = 0, transparency = 0 }, (ReactModule.useCallback(function(p2) --[[ Line: 56 ]]
+		-- upvalues: UseRefResult (copy), p1 (copy), OtterModule (upval), config (upval)
+		if UseRefResult.current and p1 then
 			if p2.thickness == 10 then
-				var1.current({
-					thickness = otterModule.instant(1),
-					transparency = otterModule.instant(0)
+				UseRefResult.current({
+					thickness = OtterModule.instant(1),
+					transparency = OtterModule.instant(0)
 				})
 				
 				return
-			elseif p2.thickness == 1 then
-				var1.current({
-					thickness = otterModule.ease(10, t),
-					transparency = otterModule.ease(1, t)
+			end
+			if p2.thickness == 1 then
+				UseRefResult.current({
+					thickness = OtterModule.ease(10, config),
+					transparency = OtterModule.ease(1, config)
 				})
 			end
 		end
-	end, { p1 }))
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var1 (ref), var3 (ref), otterModule (copy), t (copy)
+	end, { p1 })))
+	ReactModule.useEffect(function() --[[ Line: 76 ]]
+		-- upvalues: p1 (copy), UseRefResult (copy), UseAnimatedBindingResult2 (copy), OtterModule (upval), config (upval)
 		if p1 then
-			if not var1.current then
-				var1.current = var3
+			if not UseRefResult.current then
+				UseRefResult.current = UseAnimatedBindingResult2
 			end
-			var3({
-				thickness = otterModule.ease(10, t),
-				transparency = otterModule.ease(1, t)
+			UseAnimatedBindingResult2({
+				thickness = OtterModule.ease(10, config),
+				transparency = OtterModule.ease(1, config)
 			})
 		end
-		return function()
-			-- upvalues: var3 (copy), otterModule (copy)
-			var3({
-				thickness = otterModule.instant(0),
-				transparency = otterModule.instant(0)
+		return function() --[[ Line: 87 ]]
+			-- upvalues: UseAnimatedBindingResult2 (upval), OtterModule (upval)
+			UseAnimatedBindingResult2({
+				thickness = OtterModule.instant(0),
+				transparency = OtterModule.instant(0)
 			})
 		end
 	end, { p1 })
 	
-	return var2
+	return UseAnimatedBindingResult
 end

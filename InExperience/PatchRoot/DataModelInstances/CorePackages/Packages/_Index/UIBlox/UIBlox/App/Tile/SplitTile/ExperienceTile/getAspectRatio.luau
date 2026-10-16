@@ -1,15 +1,15 @@
-﻿local aspectRatioModeModule = require(script.Parent.Enum.AspectRatioMode)
-local t = {
-	[aspectRatioModeModule.Wide] = 0.5625,
-	[aspectRatioModeModule.Square] = 1
+﻿local AspectRatioModeModule = require(script.Parent.Enum.AspectRatioMode)
+local config = {
+	[AspectRatioModeModule.Wide] = 0.5625,
+	[AspectRatioModeModule.Square] = 1
 }
 
-return function(p1)
-	-- upvalues: t (ref)
-	local var1 = t[p1]
+return function(p1) --[[ Line: 14 | Named "getAspectRatio" ]]
+	-- upvalues: config (copy)
+	local Entry = config[p1]
 	
-	if not var1 then
+	if not Entry then
 		error("Unkown aspect ratio " .. tostring(p1))
 	end
-	return var1
+	return Entry
 end

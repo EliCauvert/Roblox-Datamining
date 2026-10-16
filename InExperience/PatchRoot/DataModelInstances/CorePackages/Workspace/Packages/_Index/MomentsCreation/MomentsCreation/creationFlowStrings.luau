@@ -1,4 +1,4 @@
-﻿local fFlagMomentsCreationBackCta = require(script:FindFirstAncestor("MomentsCreation").Parent.MomentsCommon).Flags.FFlagMomentsCreationBackCta
+﻿local FFlagMomentsCreationBackCta = require(script:FindFirstAncestor("MomentsCreation").Parent.MomentsCommon).Flags.FFlagMomentsCreationBackCta
 
 return {
 	CommunityStandardsText = "Feature.Moments.Description.CommunityStandards",
@@ -34,8 +34,8 @@ return {
 	PublishingAllowComments = "Feature.Moments.Label.AllowComments",
 	PublishingCtaContinue = "Feature.Moments.Action.Continue",
 	PublishingCtaPrimary = "Feature.Moments.Action.Post",
-	PublishingCtaReturn = if fFlagMomentsCreationBackCta then "Feature.Moments.Action.Back" else "Feature.Moments.Action.Return",
-	PublishingCtaSecondary = if fFlagMomentsCreationBackCta then "Feature.Moments.Action.Back" else "Feature.Moments.Action.ReturnToEditing",
+	PublishingCtaReturn = if FFlagMomentsCreationBackCta then "Feature.Moments.Action.Back" else "Feature.Moments.Action.Return",
+	PublishingCtaSecondary = if FFlagMomentsCreationBackCta then "Feature.Moments.Action.Back" else "Feature.Moments.Action.ReturnToEditing",
 	PublishingDescription = "Feature.Moments.Description.PublishMoment",
 	StayFriendlyModeration = "Feature.Moments.Label.StayFriendlyModeration"
 }

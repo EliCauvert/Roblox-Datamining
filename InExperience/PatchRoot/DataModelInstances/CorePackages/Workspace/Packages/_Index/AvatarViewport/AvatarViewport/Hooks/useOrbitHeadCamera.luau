@@ -1,97 +1,97 @@
-﻿local tweenService = game:GetService("TweenService")
-local avatarViewport = script:FindFirstAncestor("AvatarViewport")
-local reactModule = require(avatarViewport.Parent.React)
-local computeOrbitHeadCFrameModule = require(avatarViewport.Camera.computeOrbitHeadCFrame)
-local constantsModule = require(avatarViewport.Constants)
-local _ = require(avatarViewport.Types)
+﻿local TweenService = game:GetService("TweenService")
+local AvatarViewport = script:FindFirstAncestor("AvatarViewport")
+local ReactModule = require(AvatarViewport.Parent.React)
+local ComputeOrbitHeadCFrameModule = require(AvatarViewport.Camera.computeOrbitHeadCFrame)
+local ConstantsModule = require(AvatarViewport.Constants)
+local _ = require(AvatarViewport.Types)
 
-return function(p1)
-	-- upvalues: reactModule (ref), computeOrbitHeadCFrameModule (ref), tweenService (ref), constantsModule (ref)
-	local var1 = reactModule.useRef(nil)
-	local var2 = reactModule.useRef(p1.config)
-	var2.current = p1.config
-	local var3 = reactModule.useRef(p1.frameCloseupPreviewCamera)
-	var3.current = p1.frameCloseupPreviewCamera
-	local var4 = reactModule.useRef(p1.yRotDeg)
-	local var5 = reactModule.useRef(p1.distanceScale)
-	local yRotDegRef = p1.yRotDegRef or var4
-	local distanceScaleRef = p1.distanceScaleRef or var5
+return function(p1) --[[ Line: 36 | Named "useOrbitHeadCamera" ]]
+	-- upvalues: ReactModule (copy), ComputeOrbitHeadCFrameModule (copy), TweenService (copy), ConstantsModule (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(p1.config)
+	UseRefResult1.current = p1.config
+	local UseRefResult2 = ReactModule.useRef(p1.frameCloseupPreviewCamera)
+	UseRefResult2.current = p1.frameCloseupPreviewCamera
+	local UseRefResult3 = ReactModule.useRef(p1.yRotDeg)
+	local UseRefResult4 = ReactModule.useRef(p1.distanceScale)
+	local YRotDegRef = p1.yRotDegRef or UseRefResult3
+	local DistanceScaleRef = p1.distanceScaleRef or UseRefResult4
 	
 	if not p1.yRotDegRef then
-		var4.current = p1.yRotDeg
+		UseRefResult3.current = p1.yRotDeg
 	end
 	if not p1.distanceScaleRef then
-		var5.current = p1.distanceScale
+		UseRefResult4.current = p1.distanceScale
 	end
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: var1 (ref)
-		local current = var1.current
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 56 ]]
+		-- upvalues: UseRefResult (copy)
+		local Current = UseRefResult.current
 		
-		if current then
-			current:Cancel()
-			var1.current = nil
+		if Current then
+			Current:Cancel()
+			UseRefResult.current = nil
 		end
 	end, {})
-	local var7 = reactModule.useCallback(function(p2)
-		-- upvalues: p1 (ref), var2 (ref), var3 (ref), yRotDegRef (ref), distanceScaleRef (ref), computeOrbitHeadCFrameModule (copy), var6 (ref), tweenService (copy), constantsModule (copy), var1 (ref)
-		local current = p1.cameraRef.current
-		local model = p1.model
+	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 64 ]]
+		-- upvalues: p1 (copy), UseRefResult1 (copy), UseRefResult2 (copy), YRotDegRef (copy), DistanceScaleRef (copy), ComputeOrbitHeadCFrameModule (upval), UseResult (copy), TweenService (upval), ConstantsModule (upval), UseRefResult (copy)
+		local Current = p1.cameraRef.current
+		local Model = p1.model
 		
-		if not current or not model then return end
-		local current_1 = var2.current
-		local _ = nil
-		local current_2 = var3.current
-		local var8 = if current_2 then current_2({
-			character = model,
-			yRotDeg = yRotDegRef.current,
-			distanceScale = distanceScaleRef.current,
-			config = current_1
-		}) else computeOrbitHeadCFrameModule({
-			character = model,
-			yRotDeg = yRotDegRef.current,
-			distanceScale = distanceScaleRef.current,
-			baseDistance = current_1.baseDistance,
-			fieldOfViewDeg = current_1.fieldOfViewDeg,
-			fieldOfViewForDistanceScaleDeg = current_1.fieldOfViewForDistanceScaleDeg,
-			focusPartName = current_1.focusPartName,
-			layout = current_1.layout
+		if not Current or not Model then return end
+		local Current1 = UseRefResult1.current
+		local CurrentFunction = UseRefResult2.current
+		local CurrentResult = if CurrentFunction then CurrentFunction({
+			character = Model,
+			yRotDeg = YRotDegRef.current,
+			distanceScale = DistanceScaleRef.current,
+			config = Current1
+		}) else ComputeOrbitHeadCFrameModule({
+			character = Model,
+			yRotDeg = YRotDegRef.current,
+			distanceScale = DistanceScaleRef.current,
+			baseDistance = Current1.baseDistance,
+			fieldOfViewDeg = Current1.fieldOfViewDeg,
+			fieldOfViewForDistanceScaleDeg = Current1.fieldOfViewForDistanceScaleDeg,
+			focusPartName = Current1.focusPartName,
+			layout = Current1.layout
 		})
 		
-		if not var8 then return end
-		current.FieldOfView = current_1.fieldOfViewDeg
+		if not CurrentResult then return end
+		Current.FieldOfView = Current1.fieldOfViewDeg
 		
 		if p2 and p2.tween then
-			var6()
-			local var9 = tweenService:Create(current, constantsModule.EmoteCameraTweenInfo, { CFrame = var8 })
-			var1.current = var9
-			var9.Completed:Connect(function()
-				-- upvalues: var1 (copy), var9 (ref)
-				if var1.current == var9 then
-					var1.current = nil
+			UseResult()
+			local Tween = TweenService:Create(Current, ConstantsModule.EmoteCameraTweenInfo, { CFrame = CurrentResult })
+			UseRefResult.current = Tween
+			Tween.Completed:Connect(function() --[[ Line: 107 ]]
+				-- upvalues: UseRefResult (upval), Tween (copy)
+				if UseRefResult.current == Tween then
+					UseRefResult.current = nil
 				end
 			end)
-			var9:Play()
+			Tween:Play()
 			
 			return
+		else
+			UseResult()
+			Current.CFrame = CurrentResult
 		end
-		var6()
-		current.CFrame = var8
-	end, { p1.model, var6, p1.cameraRef })
-	reactModule.useEffect(function()
-		-- upvalues: var7 (ref)
-		var7()
+	end, { p1.model, UseResult, p1.cameraRef })
+	ReactModule.useEffect(function() --[[ Line: 122 ]]
+		-- upvalues: UseResult1 (copy)
+		UseResult1()
 	end, {
 		p1.yRotDeg, p1.distanceScale, p1.model, p1.config.fieldOfViewDeg,
 		p1.config.fieldOfViewForDistanceScaleDeg, p1.config.layout.viewportHeight,
-		p1.config.layout.cutoutTopOffset, p1.config.layout.cutoutDiameter, var7
+		p1.config.layout.cutoutTopOffset, p1.config.layout.cutoutDiameter, UseResult1
 	})
-	reactModule.useEffect(function()
-		-- upvalues: var6 (ref)
-		return function()
-			-- upvalues: var6 (copy)
-			var6()
+	ReactModule.useEffect(function() --[[ Line: 138 ]]
+		-- upvalues: UseResult (copy)
+		return function() --[[ Line: 139 ]]
+			-- upvalues: UseResult (upval)
+			UseResult()
 		end
-	end, { var6 })
+	end, { UseResult })
 	
-	return { frameCamera = var7 }
+	return { frameCamera = UseResult1 }
 end

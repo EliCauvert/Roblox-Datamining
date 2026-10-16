@@ -1,12 +1,12 @@
-﻿local playersService = game:GetService("Players")
-local getPlaytestModeStoreModule = require(game:GetService("CorePackages").Workspace.Packages.CoreScriptsRoactCommon.GetPlaytestModeStore)
-local playerPermissionsModule = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.PlayerPermissionsModule)
+﻿local Players = game:GetService("Players")
+local GetPlaytestModeStoreModule = require(game:GetService("CorePackages").Workspace.Packages.CoreScriptsRoactCommon.GetPlaytestModeStore)
+local PlayerPermissionsModule = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.PlayerPermissionsModule)
 
-return function()
-	-- upvalues: getPlaytestModeStoreModule (ref), playerPermissionsModule (ref), playersService (ref)
-	local var1 = getPlaytestModeStoreModule(false)
-	task.spawn(function()
-		-- upvalues: var1 (ref), playerPermissionsModule (copy), playersService (copy)
-		var1.setHasEditAccess(playerPermissionsModule.CanPlayerManagePlaceAsync(playersService.LocalPlayer))
+return function() --[[ Line: 10 | Named "initPlaytestMode" ]]
+	-- upvalues: GetPlaytestModeStoreModule (copy), PlayerPermissionsModule (copy), Players (copy)
+	local PlaytestModeStoreModule = GetPlaytestModeStoreModule(false)
+	task.spawn(function() --[[ Line: 13 ]]
+		-- upvalues: PlaytestModeStoreModule (copy), PlayerPermissionsModule (upval), Players (upval)
+		PlaytestModeStoreModule.setHasEditAccess(PlayerPermissionsModule.CanPlayerManagePlaceAsync(Players.LocalPlayer))
 	end)
 end

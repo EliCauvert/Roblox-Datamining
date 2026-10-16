@@ -1,8 +1,8 @@
-﻿local var1 = nil
+﻿local TabId = nil
 local t = {}
-local t_1 = {}
-local t_2 = { TTI = "TTI", Interval = "Interval" }
-local t_3 = {
+local t1 = {}
+local EventTypes = { TTI = "TTI", Interval = "Interval" }
+local Events = {
 	ChatWindowMountTTI = "ChatWindowMountTTI",
 	ChatWindowTabSwitchTTI = "ChatWindowTabSwitchTTI",
 	MessageSendToWindowRenderInterval = "MessageSendToWindowRenderInterval",
@@ -11,87 +11,91 @@ local t_3 = {
 }
 
 return {
-	EventTypes = t_2,
-	Events = t_3,
+	EventTypes = EventTypes,
+	Events = Events,
 	EventConfig = {
-		[t_3.ChatWindowMountTTI] = {
+		[Events.ChatWindowMountTTI] = {
 			baseName = "ExpChat_ChatWindowMountTTI",
-			type = t_2.TTI,
-			canFinish = function(_)
+			type = EventTypes.TTI,
+			canFinish = function(_): boolean --[[ Line: 56 ]]
 				return true
 			end,
-			onStart = function(_) end
+			onStart = function(_) --[[ Line: 59 ]] end
 		},
-		[t_3.ChatWindowTabSwitchTTI] = {
+		[Events.ChatWindowTabSwitchTTI] = {
 			baseName = "ExpChat_ChatWindowTabSwitchTTI",
-			type = t_2.TTI,
-			canFinish = function(p1)
-				-- upvalues: var1 (write)
-				return (p1 and p1.tabId) == var1
+			type = EventTypes.TTI,
+			canFinish = function(p1): boolean --[[ Line: 64 ]]
+				-- upvalues: TabId (ref)
+				return (p1 and p1.tabId) == TabId
 			end,
-			onStart = function(p1)
-				-- upvalues: var1 (write)
-				var1 = if p1 then p1.tabId else nil
+			onStart = function(p1) --[[ Line: 68 ]]
+				-- upvalues: TabId (ref)
+				TabId = if p1 then p1.tabId else nil
 			end
 		},
-		[t_3.MessageSendToWindowRenderInterval] = {
+		[Events.MessageSendToWindowRenderInterval] = {
 			name = "ExpChat_MessageSendToWindowRenderInterval",
-			type = t_2.Interval,
+			type = EventTypes.Interval,
 			intervalMetrics = { "duration", "averageFPS", "longestFrameTime" },
-			canStart = function(_)
-				-- upvalues: t_1 (write)
-				return if t_1.id ~= nil then (t_1.timestamp or 0) + 5 < os.clock() else true
+			canStart = function(_): boolean --[[ Line: 76 ]]
+				-- upvalues: t1 (ref)
+				local Timestamp = t1.timestamp or 0
+				
+				return t1.id == nil or Timestamp + 5 < os.clock()
 			end,
-			canFinish = function(p1)
-				-- upvalues: t_1 (write)
-				return p1 and p1.messageId == t_1.id
+			canFinish = function(p1): boolean --[[ Line: 80 ]]
+				-- upvalues: t1 (ref)
+				return p1 and p1.messageId == t1.id
 			end,
-			onStart = function(p1)
-				-- upvalues: t_1 (write)
+			onStart = function(p1) --[[ Line: 83 ]]
+				-- upvalues: t1 (ref)
 				if p1 then
-					t_1 = { id = p1.messageId, timestamp = os.clock() }
+					t1 = { id = p1.messageId, timestamp = os.clock() }
 				end
 			end,
-			onFinish = function(_)
-				-- upvalues: t_1 (write)
-				t_1 = {}
+			onFinish = function(_) --[[ Line: 91 ]]
+				-- upvalues: t1 (ref)
+				t1 = {}
 			end
 		},
-		[t_3.MessageReceiveToWindowRenderInterval] = {
+		[Events.MessageReceiveToWindowRenderInterval] = {
 			name = "ExpChat_MessageReceiveToWindowRenderInterval",
-			type = t_2.Interval,
+			type = EventTypes.Interval,
 			intervalMetrics = { "duration", "averageFPS", "longestFrameTime" },
-			canStart = function(_)
-				-- upvalues: t (write)
-				return if t.id ~= nil then (t.timestamp or 0) + 5 < os.clock() else true
+			canStart = function(_): boolean --[[ Line: 99 ]]
+				-- upvalues: t (ref)
+				local Timestamp = t.timestamp or 0
+				
+				return t.id == nil or Timestamp + 5 < os.clock()
 			end,
-			canFinish = function(p1)
-				-- upvalues: t (write)
+			canFinish = function(p1): boolean --[[ Line: 103 ]]
+				-- upvalues: t (ref)
 				return p1 and p1.messageId == t.id
 			end,
-			onStart = function(p1)
-				-- upvalues: t (write)
+			onStart = function(p1) --[[ Line: 106 ]]
+				-- upvalues: t (ref)
 				if p1 then
 					t = { id = p1.messageId, timestamp = os.clock() }
 				end
 			end,
-			onFinish = function(_)
-				-- upvalues: t (write)
+			onFinish = function(_) --[[ Line: 114 ]]
+				-- upvalues: t (ref)
 				t = {}
 			end
 		},
-		[t_3.ChatWindowScrollInterval] = {
+		[Events.ChatWindowScrollInterval] = {
 			name = "ExpChat_ChatWindowScrollInterval",
-			type = t_2.Interval,
+			type = EventTypes.Interval,
 			intervalMetrics = { "averageFPS", "longestFrameTime" },
-			canStart = function()
+			canStart = function(): boolean --[[ Line: 123 ]]
 				return true
 			end,
-			canFinish = function()
+			canFinish = function(): boolean --[[ Line: 126 ]]
 				return true
 			end,
-			onStart = function() end,
-			onFinish = function() end
+			onStart = function() --[[ Line: 129 ]] end,
+			onFinish = function() --[[ Line: 130 ]] end
 		}
 	}
 }

@@ -1,203 +1,210 @@
-﻿local socialExperienceJoin = script:FindFirstAncestor("SocialExperienceJoin")
-local parent = socialExperienceJoin.Parent
-local gameDetailRoduxModule = require(parent.GameDetailRodux)
-local reactModule = require(parent.React)
-local roactServiceTagsModule = require(parent.RoactServiceTags)
-local roactUtilsModule = require(parent.RoactUtils)
-local robloxAppHooksModule = require(parent.RobloxAppHooks)
-local signalsReactModule = require(parent.SignalsReact)
-local networkingGamesModule = require(socialExperienceJoin.Networking.NetworkingGames)
-local joinCardCacheStoreModule = require(socialExperienceJoin.Stores.JoinCardCacheStore)
-local playabilityStatusEnum = require(parent.DiscoveryTypes).PlayabilityStatusEnum
-local fetchUserSettingsAndOptions = gameDetailRoduxModule.FetchUserSettingsAndOptions
-local apiFetchAgeRecommendations = gameDetailRoduxModule.AgeRecommendations.ApiFetchAgeRecommendations
-local roactNetworking = roactServiceTagsModule.RoactNetworking
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
-local useRoactService = robloxAppHooksModule.useRoactService
-local useSignalState = signalsReactModule.useSignalState
-local fFlagLuaAppPlayButtonAmpAgeCheckFlow = require(parent.SharedFlags).FFlagLuaAppPlayButtonAmpAgeCheckFlow
-local fFlagLuaAppPlayButtonWizardCloseDelay = require(parent.SharedFlags).FFlagLuaAppPlayButtonWizardCloseDelay
-local fIntLuaAppPlayButtonWizardCloseDelayMs = require(parent.SharedFlags).FIntLuaAppPlayButtonWizardCloseDelayMs
-local fStringLuaAppPlayButtonAgeCheckAmpFeatureName = require(parent.SharedFlags).FStringLuaAppPlayButtonAgeCheckAmpFeatureName
-local fStringLuaAppPlayButtonAgeCheckAmpNameSpace = require(parent.SharedFlags).FStringLuaAppPlayButtonAgeCheckAmpNameSpace
-local ampUpsellModule = require(parent.AmpUpsell)
-local openAmpWizardContainer = ampUpsellModule.OpenAmpWizardContainer
-local accessResponseEnum = ampUpsellModule.AmpEnums.AccessResponseEnum
-local delayedAmpWizardCompletionCallbackOverride = require(parent.GamePlayButton).delayedAmpWizardCompletionCallbackOverride
+﻿local SocialExperienceJoin = script:FindFirstAncestor("SocialExperienceJoin")
+local Parent = SocialExperienceJoin.Parent
+local GameDetailRoduxModule = require(Parent.GameDetailRodux)
+local ReactModule = require(Parent.React)
+local RoactUtilsModule = require(Parent.RoactUtils)
+local NetworkingGamesModule = require(SocialExperienceJoin.Networking.NetworkingGames)
+local JoinCardCacheStoreModule = require(SocialExperienceJoin.Stores.JoinCardCacheStore)
+local PlayabilityStatusEnum = require(Parent.DiscoveryTypes).PlayabilityStatusEnum
+local FetchUserSettingsAndOptionsFunction = GameDetailRoduxModule.FetchUserSettingsAndOptions
+local ApiFetchAgeRecommendations = GameDetailRoduxModule.AgeRecommendations.ApiFetchAgeRecommendations
+local RoactNetworking = require(Parent.RoactServiceTags).RoactNetworking
+local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
+local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
+local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local FFlagLuaAppPlayButtonAmpAgeCheckFlow = require(Parent.SharedFlags).FFlagLuaAppPlayButtonAmpAgeCheckFlow
+local FFlagLuaAppPlayButtonWizardCloseDelay = require(Parent.SharedFlags).FFlagLuaAppPlayButtonWizardCloseDelay
+local FIntLuaAppPlayButtonWizardCloseDelayMs = require(Parent.SharedFlags).FIntLuaAppPlayButtonWizardCloseDelayMs
+local FStringLuaAppPlayButtonAgeCheckAmpFeatureName = require(Parent.SharedFlags).FStringLuaAppPlayButtonAgeCheckAmpFeatureName
+local FStringLuaAppPlayButtonAgeCheckAmpNameSpace = require(Parent.SharedFlags).FStringLuaAppPlayButtonAgeCheckAmpNameSpace
+local AmpUpsellModule = require(Parent.AmpUpsell)
+local OpenAmpWizardContainerFunction = AmpUpsellModule.OpenAmpWizardContainer
+local AccessResponseEnum = AmpUpsellModule.AmpEnums.AccessResponseEnum
+local DelayedAmpWizardCompletionCallbackOverrideFunction = require(Parent.GamePlayButton).delayedAmpWizardCompletionCallbackOverride
 local t = {}
-local var1 = (function(p1)
+local v1 = (function(Text: string) --[[ Line: 55 | Named "parseContentMaturityMapping" ]]
 	local t = {}
 	
-	if p1 == "" then
+	if Text == "" then
 		return t
 	end
-	for i, v in string.split(p1, ",") do
-		local parts = string.split(v, "=")
+	for _, value in string.split(Text, ",") do
+		local Parts = string.split(value, "=")
 		
-		if #parts == 2 and parts[1] ~= "" and parts[2] ~= "" then
-			t[parts[1]] = parts[2]
+		if #Parts == 2 and Parts[1] ~= "" and Parts[2] ~= "" then
+			t[Parts[1]] = Parts[2]
 		end
 	end
 	return t
-end)(game:DefineFastString("LuaAppUpsellMaturityRatingToSettingMapping", "mild=NinePlus,moderate=ThirteenPlus,restricted=SeventeenPlus,unrated=ThirteenPlus"))
+end)((game:DefineFastString("LuaAppUpsellMaturityRatingToSettingMapping", "mild=NinePlus,moderate=ThirteenPlus,restricted=SeventeenPlus,unrated=ThirteenPlus")))
 
-local function parentalControlsRequiresAgeCheck(p2, p3)
-	-- upvalues: var1 (ref)
-	if not p2 or not p3 then
+local function parentalControlsRequiresAgeCheck(p1, p2): boolean --[[ Line: 71 ]]
+	-- upvalues: v1 (copy)
+	if not p1 or not p2 then
 		return false
 	end
-	local contentAgeRestriction = p2.contentAgeRestriction
+	local ContentAgeRestriction = p1.contentAgeRestriction
 	
-	if not contentAgeRestriction or not contentAgeRestriction.options then
+	if not ContentAgeRestriction or not ContentAgeRestriction.options then
 		return false
 	end
-	local var2 = var1[p3]
+	local OptionValue = v1[p2]
 	
-	if not var2 then
+	if not OptionValue then
 		return false
 	end
-	for i, v in contentAgeRestriction.options do
-		if v and v.option and v.option.optionValue == var2 then
-			return v.requirement == "ContentAgeRestrictionVerification"
+	for _, option in ContentAgeRestriction.options do
+		if option and option.option and option.option.optionValue == OptionValue then
+			return option.requirement == "ContentAgeRestrictionVerification"
 		end
 	end
 	return false
 end
 
-local _ = {
-	Success = "Success",
-	Cancelled = "Cancelled",
-	Error = "Error"
-}
-
-return function(p4, p5)
-	-- upvalues: useDispatch (ref), useRoactService (ref), roactNetworking (ref), reactModule (ref), joinCardCacheStoreModule (ref), useSignalState (ref), useSelector (ref), networkingGamesModule (ref), playabilityStatusEnum (ref), apiFetchAgeRecommendations (ref), fetchUserSettingsAndOptions (ref), t (ref), parentalControlsRequiresAgeCheck (ref), fFlagLuaAppPlayButtonAmpAgeCheckFlow (ref), accessResponseEnum (ref), openAmpWizardContainer (ref), fStringLuaAppPlayButtonAgeCheckAmpFeatureName (ref), fStringLuaAppPlayButtonAgeCheckAmpNameSpace (ref), fFlagLuaAppPlayButtonWizardCloseDelay (ref), delayedAmpWizardCompletionCallbackOverride (ref), fIntLuaAppPlayButtonWizardCloseDelayMs (ref)
-	local var3 = useDispatch()
-	local var4 = useRoactService(roactNetworking)
-	local var5, var6 = reactModule.useState(false)
-	local var7, var8 = reactModule.useState(false)
-	local var9 = joinCardCacheStoreModule.get()
-	local var10 = useSignalState(var9.getUserSettings)
-	local var11 = if p4 ~= "" then nil else useSignalState(var9.getPlayabilityEntries)[p4]
-	local var12 = reactModule.useRef(var11 ~= nil)
-	local var13 = useSelector(function(p6)
-		-- upvalues: p4 (ref)
-		local var14 = p6.AgeRecommendations and p6.AgeRecommendations[p4]
+return function(p3, Callback) --[[ Line: 110 | Named "useAgeCheckUpsellState" ]]
+	-- upvalues: UseDispatchFunction (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), ReactModule (copy), JoinCardCacheStoreModule (copy), UseSignalStateFunction (copy), UseSelectorFunction (copy), NetworkingGamesModule (copy), PlayabilityStatusEnum (copy), ApiFetchAgeRecommendations (copy), FetchUserSettingsAndOptionsFunction (copy), t (copy), parentalControlsRequiresAgeCheck (copy), FFlagLuaAppPlayButtonAmpAgeCheckFlow (copy), AccessResponseEnum (copy), OpenAmpWizardContainerFunction (copy), FStringLuaAppPlayButtonAgeCheckAmpFeatureName (copy), FStringLuaAppPlayButtonAgeCheckAmpNameSpace (copy), FFlagLuaAppPlayButtonWizardCloseDelay (copy), DelayedAmpWizardCompletionCallbackOverrideFunction (copy), FIntLuaAppPlayButtonWizardCloseDelayMs (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
+	local GetResult = JoinCardCacheStoreModule.get()
+	local UseSignalStateResult = UseSignalStateFunction(GetResult.getPlayabilityEntries)
+	local UseSignalStateResult1 = UseSignalStateFunction(GetResult.getUserSettings)
+	local UseSignalStateResultEntry = if p3 == "" then nil else UseSignalStateResult[p3]
+	local UseRefResult = ReactModule.useRef(UseSignalStateResultEntry ~= nil)
+	local UseSelectorResult = UseSelectorFunction(function(p4) --[[ Line: 127 ]]
+		-- upvalues: p3 (copy)
+		local AgeRecommendation = p4.AgeRecommendations and p4.AgeRecommendations[p3]
 		
-		return if var14 and var14.summary and var14.summary.ageRecommendation then var14.summary.ageRecommendation.contentMaturity else nil
+		return if AgeRecommendation and AgeRecommendation.summary and AgeRecommendation.summary.ageRecommendation then AgeRecommendation.summary.ageRecommendation.contentMaturity else nil
 	end)
-	reactModule.useEffect(function()
-		-- upvalues: p4 (ref), var6 (ref), var8 (ref), var9 (ref), var3 (ref), networkingGamesModule (copy)
-		if p4 == "" then
-			var6(true)
-			var8(false)
+	ReactModule.useEffect(function() --[[ Line: 135 ]]
+		-- upvalues: p3 (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), GetResult (copy), UseDispatchResult (copy), NetworkingGamesModule (upval)
+		if p3 == "" then
+			UseStateResult2(true)
+			UseStateResult2_1(false)
 			
 			return
-		elseif var9.getPlayabilityEntries(false)[p4] == nil then
-			var8(false)
-			var6(false)
-			var3(networkingGamesModule.GetExperiencesPlayabilityStatus.API({ p4 })):andThen(function(p6)
-				-- upvalues: var9 (copy), p4 (copy)
-				local var14 = p6.responseBody and p6.responseBody[1]
+		end
+		if GetResult.getPlayabilityEntries(false)[p3] == nil then
+			UseStateResult2_1(false)
+			UseStateResult2(false)
+			UseDispatchResult(NetworkingGamesModule.GetExperiencesPlayabilityStatus.API({ p3 })):andThen(function(Result) --[[ Line: 155 ]]
+				-- upvalues: GetResult (upval), p3 (upval)
+				local ResponseBodyEntry = Result.responseBody and Result.responseBody[1]
 				
-				if var14 then
-					var9.setPlayabilityEntry(p4, var14)
+				if ResponseBodyEntry then
+					GetResult.setPlayabilityEntry(p3, ResponseBodyEntry)
 				end
-			end):catch(function() end):finally(function()
-				-- upvalues: var6 (copy)
-				var6(true)
+			end):catch(function() --[[ Line: 161 ]] end):finally(function() --[[ Line: 162 ]]
+				-- upvalues: UseStateResult2 (upval)
+				UseStateResult2(true)
+			end)
+			
+			return
+		else
+			UseStateResult2(true)
+			UseStateResult2_1(GetResult.getUserSettings(false) ~= nil)
+		end
+	end, { UseDispatchResult, p3, GetResult })
+	ReactModule.useEffect(function() --[[ Line: 167 ]]
+		-- upvalues: p3 (copy), UseSignalStateResultEntry (copy), PlayabilityStatusEnum (upval), UseDispatchResult (copy), ApiFetchAgeRecommendations (upval), UseRoactServiceResult (copy), UseStateResult2_1 (copy)
+		if p3 == "" then return end
+		if (UseSignalStateResultEntry and UseSignalStateResultEntry.playabilityStatus) == PlayabilityStatusEnum.ContextualPlayabilityAgeRecommendationParentalControls then
+			UseDispatchResult(ApiFetchAgeRecommendations.Fetch(UseRoactServiceResult, p3)):catch(function() --[[ Line: 176 ]] end):finally(function() --[[ Line: 176 ]]
+				-- upvalues: UseStateResult2_1 (upval)
+				UseStateResult2_1(true)
 			end)
 			
 			return
 		end
-		var6(true)
-		var8(var9.getUserSettings(false) ~= nil)
-	end, { var3, p4, var9 })
-	reactModule.useEffect(function()
-		-- upvalues: p4 (ref), var11 (ref), playabilityStatusEnum (copy), var3 (ref), apiFetchAgeRecommendations (copy), var4 (ref), var8 (ref)
-		if p4 == "" then return end
-		if (var11 and var11.playabilityStatus) == playabilityStatusEnum.ContextualPlayabilityAgeRecommendationParentalControls then
-			var3(apiFetchAgeRecommendations.Fetch(var4, p4)):catch(function() end):finally(function()
-				-- upvalues: var8 (copy)
-				var8(true)
+	end, {
+		UseDispatchResult,
+		UseRoactServiceResult,
+		p3,
+		UseSignalStateResultEntry
+	})
+	ReactModule.useEffect(function() --[[ Line: 181 ]]
+		-- upvalues: p3 (copy), UseSignalStateResultEntry (copy), PlayabilityStatusEnum (upval), GetResult (copy), FetchUserSettingsAndOptionsFunction (upval), UseRoactServiceResult (copy), t (upval)
+		if p3 == "" then return end
+		if (UseSignalStateResultEntry and UseSignalStateResultEntry.playabilityStatus) ~= PlayabilityStatusEnum.ContextualPlayabilityAgeRecommendationParentalControls then return end
+		if GetResult.getUserSettings(false) == nil then
+			FetchUserSettingsAndOptionsFunction(UseRoactServiceResult):andThen(function(Result) --[[ Line: 192 ]]
+				-- upvalues: GetResult (upval)
+				GetResult.setUserSettings(Result)
+			end):catch(function() --[[ Line: 194 ]]
+				-- upvalues: GetResult (upval), t (upval)
+				GetResult.setUserSettings(t)
 			end)
 			
 			return
 		end
-	end, { var3, var4, p4, var11 })
-	reactModule.useEffect(function()
-		-- upvalues: p4 (ref), var11 (ref), playabilityStatusEnum (copy), var9 (ref), fetchUserSettingsAndOptions (copy), var4 (ref), t (copy)
-		if p4 == "" then return end
-		if (var11 and var11.playabilityStatus) ~= playabilityStatusEnum.ContextualPlayabilityAgeRecommendationParentalControls then return end
-		if var9.getUserSettings(false) == nil then
-			fetchUserSettingsAndOptions(var4):andThen(function(p6)
-				-- upvalues: var9 (copy)
-				var9.setUserSettings(p6)
-			end):catch(function()
-				-- upvalues: var9 (copy), t (copy)
-				var9.setUserSettings(t)
+	end, {
+		UseRoactServiceResult,
+		p3,
+		UseSignalStateResultEntry,
+		GetResult
+	})
+	local ParentalControlsRequiresAgeCheckResult = UseSignalStateResultEntry ~= nil and (UseSignalStateResultEntry.playabilityStatus == PlayabilityStatusEnum.ContextualPlayabilityAgeRecommendationParentalControls and parentalControlsRequiresAgeCheck(UseSignalStateResult1, UseSelectorResult))
+	local IsPlayabilityStatusMatch = UseSignalStateResultEntry ~= nil and (UseSignalStateResultEntry.playabilityStatus == PlayabilityStatusEnum.ContextualPlayabilityUnverifiedSeventeenPlusUser or (FFlagLuaAppPlayButtonAmpAgeCheckFlow and UseSignalStateResultEntry.playabilityStatus == PlayabilityStatusEnum.ContextualPlayabilityAgeCheckRequired or ParentalControlsRequiresAgeCheckResult))
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 211 ]]
+		-- upvalues: p3 (copy), UseDispatchResult (copy), NetworkingGamesModule (upval), GetResult (copy), FetchUserSettingsAndOptionsFunction (upval), UseRoactServiceResult (copy), t (upval)
+		if p3 ~= "" then
+			UseDispatchResult(NetworkingGamesModule.GetExperiencesPlayabilityStatus.API({ p3 })):andThen(function(Result) --[[ Line: 216 ]]
+				-- upvalues: GetResult (upval), p3 (upval)
+				local ResponseBodyEntry = Result.responseBody and Result.responseBody[1]
+				
+				if ResponseBodyEntry then
+					GetResult.setPlayabilityEntry(p3, ResponseBodyEntry)
+				end
+			end):catch(function() --[[ Line: 222 ]]
+				-- upvalues: GetResult (upval), p3 (upval)
+				GetResult.clearPlayabilityEntry(p3)
+			end)
+			FetchUserSettingsAndOptionsFunction(UseRoactServiceResult):andThen(function(Result) --[[ Line: 225 ]]
+				-- upvalues: GetResult (upval)
+				GetResult.setUserSettings(Result)
+			end):catch(function() --[[ Line: 227 ]]
+				-- upvalues: GetResult (upval), t (upval)
+				GetResult.setUserSettings(t)
 			end)
 			
 			return
 		end
-	end, { var4, p4, var11, var9 })
-	local var14 = var11 ~= nil and (if var11.playabilityStatus ~= playabilityStatusEnum.ContextualPlayabilityUnverifiedSeventeenPlusUser then if fFlagLuaAppPlayButtonAmpAgeCheckFlow then true else var11 ~= nil and (var11.playabilityStatus == playabilityStatusEnum.ContextualPlayabilityAgeRecommendationParentalControls and parentalControlsRequiresAgeCheck(var10, var13)) else true)
-	local var15 = reactModule.useCallback(function()
-		-- upvalues: p4 (ref), var3 (ref), networkingGamesModule (copy), var9 (ref), fetchUserSettingsAndOptions (copy), var4 (ref), t (copy)
-		if p4 == "" then
-			return
-		end
-		var3(networkingGamesModule.GetExperiencesPlayabilityStatus.API({ p4 })):andThen(function(p6)
-			-- upvalues: var9 (copy), p4 (copy)
-			local var16 = p6.responseBody and p6.responseBody[1]
+	end, { UseDispatchResult, UseRoactServiceResult, p3, GetResult })
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 232 ]]
+		-- upvalues: AccessResponseEnum (upval), UseResult (copy), Callback (copy), UseDispatchResult (copy), OpenAmpWizardContainerFunction (upval), FStringLuaAppPlayButtonAgeCheckAmpFeatureName (upval), FStringLuaAppPlayButtonAgeCheckAmpNameSpace (upval), FFlagLuaAppPlayButtonWizardCloseDelay (upval), DelayedAmpWizardCompletionCallbackOverrideFunction (upval), FIntLuaAppPlayButtonWizardCloseDelayMs (upval)
+		local function onAmpWizardCompletion(Error, _) --[[ Line: 233 ]]
+			-- upvalues: AccessResponseEnum (upval), UseResult (upval), Callback (upval)
+			local Success: string = if Error == AccessResponseEnum.Granted then "Success" elseif Error == AccessResponseEnum.Error then "Error" else "Cancelled"
 			
-			if var16 then
-				var9.setPlayabilityEntry(p4, var16)
+			if Success == "Success" then
+				UseResult()
 			end
-		end):catch(function()
-			-- upvalues: var9 (copy), p4 (copy)
-			var9.clearPlayabilityEntry(p4)
-		end)
-		fetchUserSettingsAndOptions(var4):andThen(function(p6)
-			-- upvalues: var9 (copy)
-			var9.setUserSettings(p6)
-		end):catch(function()
-			-- upvalues: var9 (copy), t (copy)
-			var9.setUserSettings(t)
-		end)
-	end, { var3, var4, p4, var9 })
-	local var16 = reactModule.useCallback(function()
-		-- upvalues: accessResponseEnum (copy), var15 (ref), p5 (ref), var3 (ref), openAmpWizardContainer (copy), fStringLuaAppPlayButtonAgeCheckAmpFeatureName (copy), fStringLuaAppPlayButtonAgeCheckAmpNameSpace (copy), fFlagLuaAppPlayButtonWizardCloseDelay (copy), delayedAmpWizardCompletionCallbackOverride (copy), fIntLuaAppPlayButtonWizardCloseDelayMs (copy)
-		local function onAmpWizardCompletion(p6, _)
-			-- upvalues: accessResponseEnum (copy), var15 (copy), p5 (copy)
-			local var17 = if p6 == accessResponseEnum.Granted then "Success" elseif p6 == accessResponseEnum.Error then "Error" else "Cancelled"
-			
-			if var17 == "Success" then
-				var15()
-			end
-			if p5 then
-				p5(var17)
+			if Callback then
+				Callback(Success)
 			end
 		end
 		
-		var3(openAmpWizardContainer(fStringLuaAppPlayButtonAgeCheckAmpFeatureName, onAmpWizardCompletion, nil, "joinCardAgeCheckRequired", nil, fStringLuaAppPlayButtonAgeCheckAmpNameSpace, nil, nil, if fFlagLuaAppPlayButtonWizardCloseDelay then delayedAmpWizardCompletionCallbackOverride(onAmpWizardCompletion, fIntLuaAppPlayButtonWizardCloseDelayMs) else nil))
-	end, { var3, var15, p5 })
-	local var17 = var11 ~= nil and (var11.playabilityStatus == playabilityStatusEnum.ContextualPlayabilityAgeRecommendationParentalControls and (if var10 ~= nil then var13 == nil and not var7 else true))
-	local var18 = if var11 then var11.playabilityStatus else nil
+		UseDispatchResult(OpenAmpWizardContainerFunction(FStringLuaAppPlayButtonAgeCheckAmpFeatureName, onAmpWizardCompletion, nil, "joinCardAgeCheckRequired", nil, FStringLuaAppPlayButtonAgeCheckAmpNameSpace, nil, nil, if FFlagLuaAppPlayButtonWizardCloseDelay then DelayedAmpWizardCompletionCallbackOverrideFunction(onAmpWizardCompletion, FIntLuaAppPlayButtonWizardCloseDelayMs) else nil))
+	end, { UseDispatchResult, UseResult, Callback })
+	local NoUseSignalStateResult: boolean = UseSignalStateResultEntry ~= nil and (UseSignalStateResultEntry.playabilityStatus == PlayabilityStatusEnum.ContextualPlayabilityAgeRecommendationParentalControls and (UseSignalStateResult1 == nil or UseSelectorResult == nil and not UseStateResult1))
+	local PlayabilityStatus = if UseSignalStateResultEntry then UseSignalStateResultEntry.playabilityStatus else nil
 	
-	return reactModule.useMemo(function()
-		-- upvalues: var18 (ref), var5 (ref), var17 (ref), var14 (ref), var12 (ref), var16 (ref), var15 (ref)
+	return ReactModule.useMemo(function() --[[ Line: 275 ]]
+		-- upvalues: PlayabilityStatus (copy), UseStateResult (copy), NoUseSignalStateResult (copy), IsPlayabilityStatusMatch (copy), UseRefResult (copy), UseResult1 (copy), UseResult (copy)
 		return {
-			cachedPlayabilityStatus = var18,
-			playabilityChecked = var5,
-			pendingParentalControlsResolution = var17,
-			ageCheckRequired = var14,
-			playabilityFromCache = var12.current,
-			joinAgeCheckUpsellFlow = var16,
-			refetchPlayability = var15
+			cachedPlayabilityStatus = PlayabilityStatus,
+			playabilityChecked = UseStateResult,
+			pendingParentalControlsResolution = NoUseSignalStateResult,
+			ageCheckRequired = IsPlayabilityStatusMatch,
+			playabilityFromCache = UseRefResult.current,
+			joinAgeCheckUpsellFlow = UseResult1,
+			refetchPlayability = UseResult
 		}
 	end, {
-		var18, var5, var17, var14, var16, var15
+		PlayabilityStatus, UseStateResult, NoUseSignalStateResult,
+		IsPlayabilityStatusMatch, UseResult1, UseResult
 	})
 end

@@ -1,36 +1,36 @@
-﻿local tModule = require(script:FindFirstAncestor("RoduxSquads").Parent.t)
-local t = {}
+﻿local TModule = require(script:FindFirstAncestor("RoduxSquads").Parent.t)
+local SquadInviteeModelModule = {}
 
-function t.new(p1)
-	-- upvalues: t (ref)
-	assert(t.isValid(p1))
-	t.__index = t
-	setmetatable(p1, t)
+function SquadInviteeModelModule.new(p1) --[[ Line: 8 ]]
+	-- upvalues: SquadInviteeModelModule (copy)
+	assert(SquadInviteeModelModule.isValid(p1))
+	SquadInviteeModelModule.__index = SquadInviteeModelModule
+	setmetatable(p1, SquadInviteeModelModule)
 	
 	return p1
 end
 
-function t.mock(p1)
-	-- upvalues: t (ref)
-	p1 = p1 or {}
+function SquadInviteeModelModule.mock(p1) --[[ Line: 20 ]]
+	-- upvalues: SquadInviteeModelModule (copy)
+	local P1 = p1 or {}
 	
-	return t.new({
-		invitedAtTimestampMs = p1.invitedAtTimestampMs or 333333,
-		userId = p1.userId or 11111111
-	})
+	return (SquadInviteeModelModule.new({
+		invitedAtTimestampMs = P1.invitedAtTimestampMs or 333333,
+		userId = P1.userId or 11111111
+	}))
 end
 
-function t.format(p1)
-	-- upvalues: t (ref)
-	return t.new({
+function SquadInviteeModelModule.format(p1) --[[ Line: 31 ]]
+	-- upvalues: SquadInviteeModelModule (copy)
+	return (SquadInviteeModelModule.new({
 		invitedAtTimestampMs = p1.invitedAtTimestampMs,
 		userId = p1.userId
-	})
+	}))
 end
 
-t.isValid = tModule.interface({
-	invitedAtTimestampMs = tModule.number,
-	userId = tModule.number
+SquadInviteeModelModule.isValid = TModule.interface({
+	invitedAtTimestampMs = TModule.number,
+	userId = TModule.number
 })
 
-return t
+return SquadInviteeModelModule

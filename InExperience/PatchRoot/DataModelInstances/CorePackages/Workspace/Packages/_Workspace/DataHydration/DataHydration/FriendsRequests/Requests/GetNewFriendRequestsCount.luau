@@ -1,18 +1,18 @@
-﻿local parent = script:FindFirstAncestor("DataHydration").Parent
-local httpClientModule = require(parent.HttpClient)
-local httpModule = require(parent.Http)
+﻿local Parent = script:FindFirstAncestor("DataHydration").Parent
+local HttpClientModule = require(Parent.HttpClient)
+local HttpModule = require(Parent.Http)
 local _ = require(script.Parent.Parent.FriendsRequestsStoreTypes)
-local fetch = httpClientModule.fetch
-local asPromise = httpClientModule.asPromise
+local FetchFunction = HttpClientModule.fetch
+local AsPromiseFunction = HttpClientModule.asPromise
 
-return function()
-	-- upvalues: fetch (ref), httpModule (ref), asPromise (ref)
-	return asPromise(fetch({
+return function() --[[ Line: 15 ]]
+	-- upvalues: FetchFunction (copy), HttpModule (copy), AsPromiseFunction (copy)
+	return AsPromiseFunction((FetchFunction({
 		method = "GET",
 		analyticsKey = "friends.get-new-friend-requests-count",
-		url = `{httpModule.Url.FRIEND_URL}/my/new-friend-requests/count`,
-		decode = function(p1)
+		url = `{HttpModule.Url.FRIEND_URL}/my/new-friend-requests/count`,
+		decode = function(p1) --[[ Line: 20 ]]
 			return p1
 		end
-	}))
+	})))
 end

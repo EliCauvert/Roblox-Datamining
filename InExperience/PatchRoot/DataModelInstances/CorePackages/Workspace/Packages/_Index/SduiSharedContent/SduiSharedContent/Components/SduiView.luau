@@ -1,13 +1,13 @@
-﻿local parent = script:FindFirstAncestor("SduiSharedContent").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local _ = require(parent.SduiCompat)
-local fFlagSduiViewContainerRefEnabled = require(parent.SharedFlags).FFlagSduiViewContainerRefEnabled
+﻿local Parent = script:FindFirstAncestor("SduiSharedContent").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local _ = require(Parent.SduiCompat)
+local FFlagSduiViewContainerRefEnabled = require(Parent.SharedFlags).FFlagSduiViewContainerRefEnabled
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), foundationModule (ref), fFlagSduiViewContainerRefEnabled (ref)
-	return reactModule.createElement(foundationModule.View, {
-		ref = if fFlagSduiViewContainerRefEnabled then p1.containerRef else nil,
+return ReactModule.memo(function(p1) --[[ Line: 49 | Named "SduiView" ]]
+	-- upvalues: ReactModule (copy), FoundationModule (copy), FFlagSduiViewContainerRefEnabled (copy)
+	return ReactModule.createElement(FoundationModule.View, {
+		ref = if FFlagSduiViewContainerRefEnabled then p1.containerRef else nil,
 		AnchorPoint = p1.anchorPoint,
 		AutomaticSize = p1.automaticSize,
 		ClipsDescendants = p1.clipsDescendants,
@@ -28,7 +28,7 @@ return reactModule.memo(function(p1)
 		onSecondaryActivated = p1.onSecondaryActivated,
 		padding = p1.padding,
 		scale = p1.scale,
-		selection = if p1.selectable ~= nil then nil else { Selectable = p1.selectable },
+		selection = if p1.selectable == nil then nil else { Selectable = p1.selectable },
 		selectionGroup = p1.selectionGroup,
 		tag = p1.tag,
 		testId = p1.testId

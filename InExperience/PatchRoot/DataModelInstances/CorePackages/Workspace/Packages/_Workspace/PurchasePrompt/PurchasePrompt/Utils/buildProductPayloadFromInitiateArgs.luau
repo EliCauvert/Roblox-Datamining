@@ -1,43 +1,43 @@
-﻿local productTypeEnum = require(script:FindFirstAncestor("PurchasePrompt").types).ProductTypeEnum
+﻿local ProductTypeEnum = require(script:FindFirstAncestor("PurchasePrompt").types).ProductTypeEnum
 
-return function(a, b, p1, p2, p3, p4, p5, p6, p7, p8, p9)
-	-- upvalues: productTypeEnum (ref)
-	p9 = p9 or {}
+return function(p1, InfoType, p2, p3, p4, p5, p6, p7, p8, p9, p10) --[[ Line: 10 | Named "buildProductPayloadFromInitiateArgs" ]]
+	-- upvalues: ProductTypeEnum (copy)
+	local P10 = p10 or {}
 	
-	return if b == Enum.InfoType.Asset then {
-		kind = productTypeEnum.Asset,
-		id = tostring(a),
-		equipIfPurchased = p1 or false,
-		isRobloxPurchase = p2 or false,
-		idempotencyKey = p3 or "",
-		purchaseAuthToken = p4 or "",
-		collectibleItemId = p5 or "",
-		collectibleItemInstanceId = p6 or "",
-		collectibleProductId = p7 or "",
-		expectedPrice = p8 or 0
-	} elseif b == Enum.InfoType.GamePass then { kind = productTypeEnum.Gamepass, id = tostring(a) } elseif b == Enum.InfoType.Product then {
+	return if InfoType == Enum.InfoType.Asset then {
+		kind = ProductTypeEnum.Asset,
+		id = tostring(p1),
+		equipIfPurchased = p2 or false,
+		isRobloxPurchase = p3 or false,
+		idempotencyKey = p4 or "",
+		purchaseAuthToken = p5 or "",
+		collectibleItemId = p6 or "",
+		collectibleItemInstanceId = p7 or "",
+		collectibleProductId = p8 or "",
+		expectedPrice = p9 or 0
+	} elseif InfoType == Enum.InfoType.GamePass then { kind = ProductTypeEnum.Gamepass, id = tostring(p1) } elseif InfoType == Enum.InfoType.Product then {
 		universeId = nil,
-		kind = productTypeEnum.Product,
-		id = tostring(a),
-		equipIfPurchased = p1 or false
-	} elseif b == Enum.InfoType.Bundle then {
-		kind = productTypeEnum.Bundle,
-		id = tostring(a),
-		idempotencyKey = p3 or "",
-		collectibleItemId = p5 or "",
-		collectibleItemInstanceId = p6 or "",
-		collectibleProductId = p7 or "",
-		expectedPrice = p8 or 0
-	} elseif b == productTypeEnum.Experience then {
-		kind = productTypeEnum.Experience,
-		universeId = tostring(a),
-		experienceName = p9.name or "",
-		experienceIconUrl = p9.imageUrl or ""
-	} elseif b == productTypeEnum.Look then {
+		kind = ProductTypeEnum.Product,
+		id = tostring(p1),
+		equipIfPurchased = p2 or false
+	} elseif InfoType == Enum.InfoType.Bundle then {
+		kind = ProductTypeEnum.Bundle,
+		id = tostring(p1),
+		idempotencyKey = p4 or "",
+		collectibleItemId = p6 or "",
+		collectibleItemInstanceId = p7 or "",
+		collectibleProductId = p8 or "",
+		expectedPrice = p9 or 0
+	} elseif InfoType == ProductTypeEnum.Experience then {
+		kind = ProductTypeEnum.Experience,
+		universeId = tostring(p1),
+		experienceName = P10.name or "",
+		experienceIconUrl = P10.imageUrl or ""
+	} elseif InfoType == ProductTypeEnum.Look then {
 		salesLocationId = 0,
-		kind = productTypeEnum.Look,
-		id = tostring(a),
-		expectedPrice = p9.expectedPrice or (p8 or 0),
+		kind = ProductTypeEnum.Look,
+		id = tostring(p1),
+		expectedPrice = P10.expectedPrice or (p9 or 0),
 		excludedAssetIds = {},
 		excludedBundleIds = {}
 	} else nil

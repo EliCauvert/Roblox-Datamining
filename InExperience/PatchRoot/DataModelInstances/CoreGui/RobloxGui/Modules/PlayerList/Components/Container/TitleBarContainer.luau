@@ -1,19 +1,19 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local parent = script.Parent.Parent.Parent
-local reactModule = require(corePackagesService.Packages.React)
-local signalsReactModule = require(corePackagesService.Packages.SignalsReact)
-local _ = require(corePackagesService.Workspace.Packages.LeaderboardStore)
-local useLeaderboardStore = require(corePackagesService.Workspace.Packages.PlayerList).Hooks.useLeaderboardStore
-local titleBarViewModule = require(parent.Components.PresentationCommon.TitleBarView)
-local fFlagPlayerListFixLeaderstatsStacking = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagPlayerListFixLeaderstatsStacking
+﻿local CorePackages = game:GetService("CorePackages")
+local ReactModule = require(CorePackages.Packages.React)
+local SignalsReactModule = require(CorePackages.Packages.SignalsReact)
+local _ = require(CorePackages.Workspace.Packages.LeaderboardStore)
+local UseLeaderboardStoreFunction = require(CorePackages.Workspace.Packages.PlayerList).Hooks.useLeaderboardStore
+local TitleBarViewModule = require(script.Parent.Parent.Parent.Components.PresentationCommon.TitleBarView)
+local FFlagPlayerListFixLeaderstatsStacking = require(CorePackages.Workspace.Packages.SharedFlags).FFlagPlayerListFixLeaderstatsStacking
 
-return reactModule.memo(function(p1)
-	-- upvalues: useLeaderboardStore (ref), fFlagPlayerListFixLeaderstatsStacking (ref), signalsReactModule (ref), reactModule (ref), titleBarViewModule (ref)
-	local gameStatsList = useLeaderboardStore().getGameStatsList()
+return ReactModule.memo(function(p1) --[[ Line: 41 | Named "TitleBarContainer" ]]
+	-- upvalues: UseLeaderboardStoreFunction (copy), FFlagPlayerListFixLeaderstatsStacking (copy), SignalsReactModule (copy), ReactModule (copy), TitleBarViewModule (copy)
+	local GameStatsList = UseLeaderboardStoreFunction().getGameStatsList()
+	local UseSignalStateResult = if FFlagPlayerListFixLeaderstatsStacking then nil else SignalsReactModule.useSignalState(GameStatsList.getCount)
 	
-	return reactModule.createElement(titleBarViewModule, {
-		gameStats = gameStatsList,
-		gameStatsCount = if fFlagPlayerListFixLeaderstatsStacking then nil elseif fFlagPlayerListFixLeaderstatsStacking then nil else signalsReactModule.useSignalState(gameStatsList.getCount),
+	return ReactModule.createElement(TitleBarViewModule, {
+		gameStats = GameStatsList,
+		gameStatsCount = if FFlagPlayerListFixLeaderstatsStacking then nil else UseSignalStateResult,
 		size = p1.size,
 		entrySizeX = p1.entrySizeX,
 		layoutOrder = p1.layoutOrder,

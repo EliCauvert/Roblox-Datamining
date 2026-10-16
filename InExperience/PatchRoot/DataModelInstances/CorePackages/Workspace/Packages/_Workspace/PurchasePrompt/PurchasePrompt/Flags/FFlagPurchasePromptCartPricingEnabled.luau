@@ -1,1 +1,3 @@
-﻿return require(script:FindFirstAncestor("PurchasePrompt").Parent.SharedFlags).FFlagPurchasePromptFetchCartPricing and require(script.Parent.FFlagPurchasePromptPriceShouldUseProductInfoPrice)
+﻿local FFlagPurchasePromptPriceShouldUseProductInfoPriceModule = require(script.Parent.FFlagPurchasePromptPriceShouldUseProductInfoPrice)
+
+return require(script:FindFirstAncestor("PurchasePrompt").Parent.SharedFlags).FFlagPurchasePromptFetchCartPricing and FFlagPurchasePromptPriceShouldUseProductInfoPriceModule

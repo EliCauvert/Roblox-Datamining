@@ -1,33 +1,34 @@
-﻿local signalsModule = require(script:FindFirstAncestor("ProfilePlatform").Parent.Signals)
-local inspectAvatarTooltipImpressionCacheModule = require(script.Parent.InspectAvatarTooltipImpressionCache)
-local profilePlatformInspectAvatarTooltipMaxImpressions = game:DefineFastInt("ProfilePlatformInspectAvatarTooltipMaxImpressions", 3)
+﻿local SignalsModule = require(script:FindFirstAncestor("ProfilePlatform").Parent.Signals)
+local InspectAvatarTooltipImpressionCacheModule = require(script.Parent.InspectAvatarTooltipImpressionCache)
+local ProfilePlatformInspectAvatarTooltipMaxImpressions = game:DefineFastInt("ProfilePlatformInspectAvatarTooltipMaxImpressions", 3)
 
-return function()
-	-- upvalues: signalsModule (ref), inspectAvatarTooltipImpressionCacheModule (ref), profilePlatformInspectAvatarTooltipMaxImpressions (ref)
-	local var1, var2 = signalsModule.createSignal(false)
+return function() --[[ Line: 17 | Named "createInspectAvatarTooltipStore" ]]
+	-- upvalues: SignalsModule (copy), InspectAvatarTooltipImpressionCacheModule (copy), ProfilePlatformInspectAvatarTooltipMaxImpressions (copy)
+	local Signal, Signal2 = SignalsModule.createSignal(false)
 	
 	return {
-		getIsOpen = var1,
-		tryShow = function()
-			-- upvalues: inspectAvatarTooltipImpressionCacheModule (copy), profilePlatformInspectAvatarTooltipMaxImpressions (copy), var2 (ref)
-			local value = inspectAvatarTooltipImpressionCacheModule.getValue()
+		getIsOpen = Signal,
+		tryShow = function() --[[ Line: 20 ]]
+			-- upvalues: InspectAvatarTooltipImpressionCacheModule (upval), ProfilePlatformInspectAvatarTooltipMaxImpressions (upval), Signal2 (copy)
+			local Value: number = InspectAvatarTooltipImpressionCacheModule.getValue()
 			
-			if value < 0 or profilePlatformInspectAvatarTooltipMaxImpressions <= value then
-				var2(false)
+			if Value < 0 or ProfilePlatformInspectAvatarTooltipMaxImpressions <= Value then
+				Signal2(false)
 				
 				return
+			else
+				InspectAvatarTooltipImpressionCacheModule.incrementValue()
+				Signal2(true)
 			end
-			inspectAvatarTooltipImpressionCacheModule.incrementValue()
-			var2(true)
 		end,
-		hide = function()
-			-- upvalues: var2 (ref)
-			var2(false)
+		hide = function() --[[ Line: 32 ]]
+			-- upvalues: Signal2 (copy)
+			Signal2(false)
 		end,
-		permanentlyDismiss = function()
-			-- upvalues: inspectAvatarTooltipImpressionCacheModule (copy), var2 (ref)
-			inspectAvatarTooltipImpressionCacheModule.dismissValue()
-			var2(false)
+		permanentlyDismiss = function() --[[ Line: 36 ]]
+			-- upvalues: InspectAvatarTooltipImpressionCacheModule (upval), Signal2 (copy)
+			InspectAvatarTooltipImpressionCacheModule.dismissValue()
+			Signal2(false)
 		end
 	}
 end

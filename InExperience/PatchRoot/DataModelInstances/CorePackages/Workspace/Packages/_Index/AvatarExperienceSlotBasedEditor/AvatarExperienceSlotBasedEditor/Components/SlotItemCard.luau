@@ -1,107 +1,114 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceSlotBasedEditor").Parent
-local reactModule = require(parent.React)
-local AXTooltip = require(parent.AXCommon).Components.AXTooltip
-local avatarExperienceUIKitModule = require(parent.AvatarExperienceUIKit)
-local itemCard = avatarExperienceUIKitModule.ItemCardComponents.ItemCard
-local itemCardHeader = avatarExperienceUIKitModule.ItemCardComponents.ItemCardHeader
-local slotItemCardFooterModule = require(script.Parent.SlotItemCardFooter)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local useTokens = foundationModule.Hooks.useTokens
-local reactOtterModule = require(parent.ReactOtter)
-local fFlagAXSlotBasedEditorCategoryTooltip = require(parent.AvatarExperienceFlags).FFlagAXSlotBasedEditorCategoryTooltip
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceSlotBasedEditor").Parent
+local ReactModule = require(Parent.React)
+local AXTooltip = require(Parent.AXCommon).Components.AXTooltip
+local AvatarExperienceUIKitModule = require(Parent.AvatarExperienceUIKit)
+local ItemCard = AvatarExperienceUIKitModule.ItemCardComponents.ItemCard
+local ItemCardHeader = AvatarExperienceUIKitModule.ItemCardComponents.ItemCardHeader
+local SlotItemCardFooterModule = require(script.Parent.SlotItemCardFooter)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local ReactOtterModule = require(Parent.ReactOtter)
+local FFlagAXSlotBasedEditorCategoryTooltip = require(Parent.AvatarExperienceFlags).FFlagAXSlotBasedEditorCategoryTooltip
 local AXSlotBasedEditorCategoryTooltipKey = game:DefineFastString("AXSlotBasedEditorCategoryTooltipKey", "SlotEditorSecondCategory")
-local t = { dampingRatio = 1, frequency = 1 }
+local config = { dampingRatio = 1, frequency = 1 }
 
-return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useTokens (ref), reactOtterModule (ref), reactModule (ref), foundationModule (ref), t (ref), fFlagAXSlotBasedEditorCategoryTooltip (ref), itemCard (ref), itemCardHeader (ref), view (ref), AXTooltip (ref), AXSlotBasedEditorCategoryTooltipKey (ref), slotItemCardFooterModule (ref)
-	local var1 = useTokens()
-	local var2, var3 = reactOtterModule.useAnimatedBinding(1)
-	local var4, var5 = reactModule.useState(false)
-	local var6 = reactModule.useCallback(function(p3)
-		-- upvalues: foundationModule (copy), var5 (ref)
-		if p3 == foundationModule.Enums.ControlState.Default then
-			var5(false)
+return (ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 46 ]]
+	-- upvalues: UseTokensFunction (copy), ReactOtterModule (copy), ReactModule (copy), FoundationModule (copy), config (copy), FFlagAXSlotBasedEditorCategoryTooltip (copy), ItemCard (copy), ItemCardHeader (copy), View (copy), AXTooltip (copy), AXSlotBasedEditorCategoryTooltipKey (copy), SlotItemCardFooterModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(1)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseResult = ReactModule.useCallback(function(Default) --[[ Line: 52 ]]
+		-- upvalues: FoundationModule (upval), UseStateResult2 (copy)
+		if Default == FoundationModule.Enums.ControlState.Default then
+			UseStateResult2(false)
 			
 			return
-		elseif p3 == foundationModule.Enums.ControlState.Hover then
-			var5(true)
+		end
+		if Default == FoundationModule.Enums.ControlState.Hover then
+			UseStateResult2(true)
 		end
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: var4 (ref), var1 (ref), var3 (ref), reactOtterModule (copy), t (copy)
-		var3(reactOtterModule.spring(if var4 then var1.Color.Stroke.Emphasis.Transparency else 1, t))
-	end, { var4 })
-	local var7 = nil
-	local var8 = nil
+	ReactModule.useEffect(function() --[[ Line: 62 ]]
+		-- upvalues: UseStateResult (copy), UseTokensResult (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), config (upval)
+		UseAnimatedBindingResult2(ReactOtterModule.spring(if UseStateResult then UseTokensResult.Color.Stroke.Emphasis.Transparency else 1, config))
+	end, { UseStateResult })
+	local Ref1 = nil
+	local UseResult1 = nil
 	
-	if fFlagAXSlotBasedEditorCategoryTooltip then
-		var7 = reactModule.createRef()
-		var8 = reactModule.useCallback(function()
-			-- upvalues: var7 (write), p1 (ref)
-			if var7.current then
-				var7.current()
+	if FFlagAXSlotBasedEditorCategoryTooltip then
+		Ref1 = ReactModule.createRef()
+		UseResult1 = ReactModule.useCallback(function() --[[ Line: 71 ]]
+			-- upvalues: Ref1 (ref), Frame (copy)
+			if Ref1.current then
+				Ref1.current()
 			end
-			if p1.onActivated then
-				p1.onActivated()
+			if Frame.onActivated then
+				Frame.onActivated()
 			end
-		end, { p1.onActivated })
+		end, { Frame.onActivated })
 	end
-	return reactModule.createElement(itemCard, {
-		Size = p1.Size or UDim2.fromOffset(var1.Size.Size_2500, 0),
-		LayoutOrder = p1.LayoutOrder,
+	return ReactModule.createElement(ItemCard, {
+		Size = Frame.Size or UDim2.fromOffset(UseTokensResult.Size.Size_2500, 0),
+		LayoutOrder = Frame.LayoutOrder,
 		AutomaticSize = Enum.AutomaticSize.Y,
-		onActivated = if fFlagAXSlotBasedEditorCategoryTooltip then var8 else p1.onActivated,
-		ref = p2,
-		headerSlot = reactModule.createElement(itemCardHeader, { LayoutOrder = 1, BackgroundTransparency = 1 }, reactModule.createElement(view, {
-			onStateChanged = var6,
+		onActivated = if FFlagAXSlotBasedEditorCategoryTooltip then UseResult1 else Frame.onActivated,
+		ref = Ref,
+		headerSlot = ReactModule.createElement(ItemCardHeader, { LayoutOrder = 1, BackgroundTransparency = 1 }, ReactModule.createElement(View, {
+			onStateChanged = UseResult,
 			stateLayer = {
-				affordance = foundationModule.Enums.StateLayerAffordance.None
+				affordance = FoundationModule.Enums.StateLayerAffordance.None
 			},
-			onActivated = if fFlagAXSlotBasedEditorCategoryTooltip then var8 else p1.onActivated,
+			onActivated = if FFlagAXSlotBasedEditorCategoryTooltip then UseResult1 else Frame.onActivated,
 			Size = UDim2.fromScale(1, 1),
 			backgroundStyle = { Transparency = 1 },
 			selection = { Selectable = false },
 			padding = {
-				top = UDim.new(0, var1.Padding.XXSmall),
-				bottom = UDim.new(0, var1.Padding.XXSmall),
-				left = UDim.new(0, var1.Padding.XXSmall),
-				right = UDim.new(0, var1.Padding.XXSmall)
+				top = UDim.new(0, UseTokensResult.Padding.XXSmall),
+				bottom = UDim.new(0, UseTokensResult.Padding.XXSmall),
+				left = UDim.new(0, UseTokensResult.Padding.XXSmall),
+				right = UDim.new(0, UseTokensResult.Padding.XXSmall)
 			}
 		}, {
-			CornerRadius = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, var1.Radius.Medium) }),
-			HeaderSlot = p1.renderHeaderSlot(),
-			HoverFrame = reactModule.createElement("Frame", {
+			CornerRadius = ReactModule.createElement("UICorner", {
+				CornerRadius = UDim.new(0, UseTokensResult.Radius.Medium)
+			}),
+			HeaderSlot = Frame.renderHeaderSlot(),
+			HoverFrame = ReactModule.createElement("Frame", {
 				ZIndex = 2,
 				Size = UDim2.fromScale(1, 1),
-				BackgroundTransparency = var2
+				BackgroundTransparency = UseAnimatedBindingResult
 			}, {
-				CornerRadius = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, var1.Radius.Medium) })
-			}),
-			BorderFrame = reactModule.createElement("Frame", {
-				Size = UDim2.fromScale(1, 1),
-				BackgroundColor3 = var1.Color.Surface.Surface_200.Color3,
-				BackgroundTransparency = p1.BackgroundTransparency or 0
-			}, {
-				CornerRadius = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, var1.Radius.Medium) }),
-				Stroke = reactModule.createElement("UIStroke", {
-					Color = var1.Color.Stroke.Default.Color3,
-					Transparency = if p1.isActive then var1.Color.Selection.End.Transparency else var1.Color.State.Press.Transparency,
-					Thickness = var1.Stroke.Thick
+				CornerRadius = ReactModule.createElement("UICorner", {
+					CornerRadius = UDim.new(0, UseTokensResult.Radius.Medium)
 				})
 			}),
-			AXTooltip = fFlagAXSlotBasedEditorCategoryTooltip and reactModule.createElement(AXTooltip, {
+			BorderFrame = ReactModule.createElement("Frame", {
+				Size = UDim2.fromScale(1, 1),
+				BackgroundColor3 = UseTokensResult.Color.Surface.Surface_200.Color3,
+				BackgroundTransparency = Frame.BackgroundTransparency or 0
+			}, {
+				CornerRadius = ReactModule.createElement("UICorner", {
+					CornerRadius = UDim.new(0, UseTokensResult.Radius.Medium)
+				}),
+				Stroke = ReactModule.createElement("UIStroke", {
+					Color = UseTokensResult.Color.Stroke.Default.Color3,
+					Transparency = if Frame.isActive then UseTokensResult.Color.Selection.End.Transparency else UseTokensResult.Color.State.Press.Transparency,
+					Thickness = UseTokensResult.Stroke.Thick
+				})
+			}),
+			AXTooltip = FFlagAXSlotBasedEditorCategoryTooltip and ReactModule.createElement(AXTooltip, {
 				popoverSide = "Top",
 				tooltipLocalizationKey = "Feature.Avatar.Tooltip.CustomizeOverhaulSubcategories",
 				tooltipStorageKey = AXSlotBasedEditorCategoryTooltipKey,
-				dismissTooltipRef = var7,
-				showTooltip = p1.showSecondCategoryTooltip
+				dismissTooltipRef = Ref1,
+				showTooltip = Frame.showSecondCategoryTooltip
 			})
 		})),
-		footerSlot = reactModule.createElement(slotItemCardFooterModule, {
+		footerSlot = ReactModule.createElement(SlotItemCardFooterModule, {
 			LayoutOrder = 2,
-			title = p1.title,
+			title = Frame.title,
 			TextXAlignment = Enum.TextXAlignment.Center
 		})
 	})
-end)
+end))

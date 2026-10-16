@@ -1,32 +1,33 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
-local promiseModule = require(parent.Promise)
-local _ = require(parent.LuauPolyfill)
-local sduiSharedUtilitiesModule = require(parent.SduiSharedUtilities)
-local sduiResponseType = sduiSharedUtilitiesModule.SduiResponseType
-local getSduiApiStore = sduiSharedUtilitiesModule.getSduiApiStore
-local sduiApiStorePostConfigContentType = sduiSharedUtilitiesModule.SduiApiStorePostConfigContentType
-local avatarScreen = require(parent.AvatarExperienceNavigation).Enums.AvatarScreen
-local fFlagAXFetchCatalogPageReturnsPromise = require(parent.AvatarExperienceFlags).FFlagAXFetchCatalogPageReturnsPromise
-local getCatalogPageUrlModule = require(script.Parent.Utils.getCatalogPageUrl)
-local getCatalogConfigKeyModule = require(script.Parent.Utils.getCatalogConfigKey)
-local normalizeScreenSizeForWire = require(parent.AvatarExperienceCommon).Utils.normalizeScreenSizeForWire
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
+local PromiseModule = require(Parent.Promise)
+local _ = require(Parent.LuauPolyfill)
+local SduiSharedUtilitiesModule = require(Parent.SduiSharedUtilities)
+local SduiResponseType = SduiSharedUtilitiesModule.SduiResponseType
+local GetSduiApiStoreFunction = SduiSharedUtilitiesModule.getSduiApiStore
+local SduiApiStorePostConfigContentType = SduiSharedUtilitiesModule.SduiApiStorePostConfigContentType
+local AvatarScreen = require(Parent.AvatarExperienceNavigation).Enums.AvatarScreen
+local FFlagAXFetchCatalogPageReturnsPromise = require(Parent.AvatarExperienceFlags).FFlagAXFetchCatalogPageReturnsPromise
+local GetCatalogPageUrlModule = require(script.Parent.Utils.getCatalogPageUrl)
+local GetCatalogConfigKeyModule = require(script.Parent.Utils.getCatalogConfigKey)
+local NormalizeScreenSizeForWireFunction = require(Parent.AvatarExperienceCommon).Utils.normalizeScreenSizeForWire
 
-return function(p1, p2, p3)
-	-- upvalues: parent (ref), normalizeScreenSizeForWire (ref), getSduiApiStore (ref), sduiResponseType (ref), getCatalogPageUrlModule (ref), avatarScreen (ref), getCatalogConfigKeyModule (ref), sduiApiStorePostConfigContentType (ref), fFlagAXFetchCatalogPageReturnsPromise (ref), promiseModule (ref)
-	local marketplaceCatalogPage = require(parent.ServiceContractsProto).apppageplatform.marketplacecatalog.marketplace_catalog_page
-	local cloned = table.clone(p1)
-	cloned.screenSize = normalizeScreenSizeForWire(p1.screenSize)
-	
-	return if fFlagAXFetchCatalogPageReturnsPromise then getSduiApiStore().fetchIfNeeded({
-		responseType = sduiResponseType.Protobuf,
-		url = getCatalogPageUrlModule(),
-		surfaceKey = avatarScreen.Catalog,
-		configKey = getCatalogConfigKeyModule(cloned.context, cloned.screenSize),
-		loadTimer = p2,
-		apiProto = marketplaceCatalogPage.MarketplaceCatalogPageResponse,
+return function(Tbl, LoadTimer, p1) --[[ Line: 36 | Named "fetchCatalogPage" ]]
+	-- upvalues: Parent (copy), NormalizeScreenSizeForWireFunction (copy), GetSduiApiStoreFunction (copy), SduiResponseType (copy), GetCatalogPageUrlModule (copy), AvatarScreen (copy), GetCatalogConfigKeyModule (copy), SduiApiStorePostConfigContentType (copy), FFlagAXFetchCatalogPageReturnsPromise (copy), PromiseModule (copy)
+	local MarketplaceCatalogPage = require(Parent.ServiceContractsProto).apppageplatform.marketplacecatalog.marketplace_catalog_page
+	local Copy = table.clone(Tbl)
+	Copy.screenSize = NormalizeScreenSizeForWireFunction(Tbl.screenSize)
+	local IfNeeded = GetSduiApiStoreFunction().fetchIfNeeded({
+		responseType = SduiResponseType.Protobuf,
+		url = GetCatalogPageUrlModule(),
+		surfaceKey = AvatarScreen.Catalog,
+		configKey = GetCatalogConfigKeyModule(Copy.context, Copy.screenSize),
+		loadTimer = LoadTimer,
+		apiProto = MarketplaceCatalogPage.MarketplaceCatalogPageResponse,
 		postConfig = {
-			body = cloned,
-			contentType = sduiApiStorePostConfigContentType.Json
+			body = Copy,
+			contentType = SduiApiStorePostConfigContentType.Json
 		}
-	}, p3 ~= nil and p3.forceRefresh == true) or promiseModule.resolve() else nil
+	}, p1 ~= nil and p1.forceRefresh == true)
+	
+	return if FFlagAXFetchCatalogPageReturnsPromise then IfNeeded or PromiseModule.resolve() else nil
 end

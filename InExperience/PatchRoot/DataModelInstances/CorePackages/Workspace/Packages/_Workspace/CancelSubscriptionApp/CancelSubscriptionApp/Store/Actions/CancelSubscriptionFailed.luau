@@ -1,6 +1,6 @@
-﻿local cancelSubscriptionApp = script:FindFirstAncestor("CancelSubscriptionApp")
-local _ = require(cancelSubscriptionApp.Enums.ErrorStateEnum)
+﻿local CancelSubscriptionApp = script:FindFirstAncestor("CancelSubscriptionApp")
+local _ = require(CancelSubscriptionApp.Enums.ErrorStateEnum)
 
-return require(cancelSubscriptionApp.Parent.Rodux).makeActionCreator("CancelSubscriptionFailed", function(p1, p2)
-	return { errorState = p1, subscriptionId = p2 }
+return require(CancelSubscriptionApp.Parent.Rodux).makeActionCreator("CancelSubscriptionFailed", function(ErrorState, SubscriptionId) --[[ Line: 15 ]]
+	return { errorState = ErrorState, subscriptionId = SubscriptionId }
 end)

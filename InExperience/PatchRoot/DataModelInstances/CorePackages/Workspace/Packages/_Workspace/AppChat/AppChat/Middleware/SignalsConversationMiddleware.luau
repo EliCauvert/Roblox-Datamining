@@ -1,786 +1,988 @@
-﻿local playersService = game:GetService("Players")
-local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local appChatNetworkingModule = require(parent.AppChatNetworking)
-local cryoModule = require(parent.Cryo)
-local signalsExperimentalModule = require(parent.SignalsExperimental)
-local constantsModule = require(appChat.Constants)
-local conversationsModule = require(appChat.Conversations)
-local conversationChannelsModule = require(appChat.Models.ConversationChannels)
-local conversationModule = require(appChat.Models.Conversation)
-local messageModelModule = require(appChat.Models.MessageModel)
-local getConversationMessageViewModelStoreModule = require(appChat.Stores.GetConversationMessageViewModelStore)
-local getConversationListStoreModule = require(appChat.Stores.GetConversationListStore)
-local getConversationStoreModule = require(appChat.Stores.GetConversationStore)
-local getConversationSearchDataHydrationModule = require(appChat.Stores.GetConversationSearchDataHydration)
-local searchIntroducedConversationIdsModule = require(appChat.Stores.searchIntroducedConversationIds)
-local networkingBlockingModule = require(appChat.Http.NetworkingBlocking)
-local networkingChatModule = require(appChat.Http.NetworkingChat)
-local changedParticipantsModule = require(appChat.Conversations.Actions.ChangedParticipants)
-local conversationModerationTypeChangedModule = require(appChat.Conversations.Actions.ConversationModerationTypeChanged)
-local friendConversationCreatedModule = require(appChat.Conversations.Actions.FriendConversationCreated)
-local friendshipDestroyedModule = require(appChat.Actions.FriendshipDestroyed)
-local hasUnreadMessagesModule = require(appChat.Conversations.Actions.HasUnreadMessages)
-local readConversationModule = require(appChat.Conversations.Actions.ReadConversation)
-local receivedChannelsMigrationConflictModule = require(appChat.Conversations.Actions.ReceivedChannelsMigrationConflict)
-local receivedConversationModule = require(appChat.Conversations.Actions.ReceivedConversation)
-local receivedLatestMessagesModule = require(appChat.Conversations.Actions.ReceivedLatestMessages)
-local receivedOldestConversationModule = require(appChat.Conversations.Actions.ReceivedOldestConversation)
-local receivedPageConversationsModule = require(appChat.Conversations.Actions.ReceivedPageConversations)
-local removedConversationModule = require(appChat.Conversations.Actions.RemovedConversation)
-local renamedGroupConversationModule = require(appChat.Conversations.Actions.RenamedGroupConversation)
-local requestLatestMessagesModule = require(appChat.Conversations.Actions.RequestLatestMessages)
-local requestPageConversationsModule = require(appChat.Conversations.Actions.RequestPageConversations)
-local receivedMessages = conversationsModule.Actions.ReceivedMessages
-local setConversationLoadingStatusModule = require(appChat.Conversations.Actions.SetConversationLoadingStatus)
-local setPinnedGameForConversationModule = require(appChat.Conversations.Actions.SetPinnedGameForConversation)
-local setUserLeavingConversationModule = require(appChat.Conversations.Actions.SetUserLeavingConversation)
-local setUserTypingModule = require(appChat.Conversations.Actions.SetUserTyping)
-local fFlagAppChatConversationStoreModule = require(appChat.Flags.FFlagAppChatConversationStore)
-local fFlagAppChatServerSideConversationSearchModule = require(appChat.Flags.FFlagAppChatServerSideConversationSearch)
-local appChatBatchConversationPageUpsert = game:DefineFastFlag("AppChatBatchConversationPageUpsert", false)
-local t = {
-	[constantsModule.OptInVariant.OsaContextCard] = {
+﻿local Players = game:GetService("Players")
+local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local AppChatNetworkingModule = require(Parent.AppChatNetworking)
+local CryoModule = require(Parent.Cryo)
+local SignalsExperimentalModule = require(Parent.SignalsExperimental)
+local ConstantsModule = require(AppChat.Constants)
+local ConversationChannelsModule = require(AppChat.Models.ConversationChannels)
+local ConversationModule = require(AppChat.Models.Conversation)
+local MessageModelModule = require(AppChat.Models.MessageModel)
+local GetConversationMessageViewModelStoreModule = require(AppChat.Stores.GetConversationMessageViewModelStore)
+local GetConversationListStoreModule = require(AppChat.Stores.GetConversationListStore)
+local GetConversationStoreModule = require(AppChat.Stores.GetConversationStore)
+local GetConversationSearchDataHydrationModule = require(AppChat.Stores.GetConversationSearchDataHydration)
+local SearchIntroducedConversationIdsModule = require(AppChat.Stores.searchIntroducedConversationIds)
+local NetworkingChatModule = require(AppChat.Http.NetworkingChat)
+local GetPreciseUnixTimestampModule = require(AppChat.Utils.getPreciseUnixTimestamp)
+local FFlagAppChatConversationStoreModule = require(AppChat.Flags.FFlagAppChatConversationStore)
+local FFlagAppChatConversationLoadRetryModule = require(AppChat.Flags.FFlagAppChatConversationLoadRetry)
+local FFlagAppChatAnyServerSideConversationSearchModule = require(AppChat.Flags.FFlagAppChatAnyServerSideConversationSearch)
+local AppChatBatchConversationPageUpsert = game:DefineFastFlag("AppChatBatchConversationPageUpsert", false)
+local FFlagAppChatDerivedConversationLatestActivityModule = require(AppChat.Flags.FFlagAppChatDerivedConversationLatestActivity)
+local config = {
+	[ConstantsModule.OptInVariant.OsaContextCard] = {
 		field = "osaAcknowledgementStatus",
-		value = conversationChannelsModule.OsaAcknowledgementStatus.Acknowledged
+		value = ConversationChannelsModule.OsaAcknowledgementStatus.Acknowledged
 	},
-	[constantsModule.OptInVariant.ChatOptInInfoCard] = {
+	[ConstantsModule.OptInVariant.ChatOptInInfoCard] = {
 		field = "userOptedIntoChatMessages",
-		value = conversationChannelsModule.UserOptedIntoChatMessagesStatus.OptedIn
+		value = ConversationChannelsModule.UserOptedIntoChatMessagesStatus.OptedIn
 	}
 }
 
-local function upsertConversationResponse(p1, p2)
-	-- upvalues: conversationChannelsModule (ref), fFlagAppChatServerSideConversationSearchModule (ref), signalsExperimentalModule (ref), searchIntroducedConversationIdsModule (ref)
-	if p2 == nil or p2.status == "failed" then return end
-	local var1 = conversationChannelsModule.fromChannelsApi(p2)
+local function upsertConversationResponse(p1, Conversation) --[[ Line: 65 ]]
+	-- upvalues: ConversationChannelsModule (copy), FFlagAppChatAnyServerSideConversationSearchModule (copy), SignalsExperimentalModule (copy), SearchIntroducedConversationIdsModule (copy)
+	if Conversation == nil or Conversation.status == "failed" then return end
+	local FromChannelsApiResult = ConversationChannelsModule.fromChannelsApi(Conversation)
 	
-	if fFlagAppChatServerSideConversationSearchModule then
-		signalsExperimentalModule.batch(function()
-			-- upvalues: p1 (ref), var1 (ref), searchIntroducedConversationIdsModule (copy)
-			p1.upsertConversation(var1)
-			searchIntroducedConversationIdsModule.remove(var1.id)
+	if FFlagAppChatAnyServerSideConversationSearchModule then
+		SignalsExperimentalModule.batch(function() --[[ Line: 75 ]]
+			-- upvalues: p1 (copy), FromChannelsApiResult (copy), SearchIntroducedConversationIdsModule (upval)
+			p1.upsertConversation(FromChannelsApiResult)
+			SearchIntroducedConversationIdsModule.remove(FromChannelsApiResult.id)
 		end)
 		
 		return
+	else
+		p1.upsertConversation(FromChannelsApiResult)
 	end
-	p1.upsertConversation(var1)
 end
 
-local function upsertConversationResponses(p1, p2)
-	-- upvalues: appChatBatchConversationPageUpsert (ref), signalsExperimentalModule (ref), upsertConversationResponse (ref)
-	if p2 == nil or p2.conversations == nil then return end
-	if appChatBatchConversationPageUpsert then
-		signalsExperimentalModule.batch(function()
-			-- upvalues: p2 (ref), upsertConversationResponse (copy), p1 (ref)
-			for i, v in p2.conversations do
-				upsertConversationResponse(p1, v)
+local function upsertConversationResponses(p1, ResponseBody) --[[ Line: 84 ]]
+	-- upvalues: AppChatBatchConversationPageUpsert (copy), SignalsExperimentalModule (copy), upsertConversationResponse (copy)
+	if ResponseBody == nil or ResponseBody.conversations == nil then return end
+	if AppChatBatchConversationPageUpsert then
+		SignalsExperimentalModule.batch(function() --[[ Line: 91 ]]
+			-- upvalues: ResponseBody (copy), upsertConversationResponse (upval), p1 (copy)
+			for _, conversation in ResponseBody.conversations do
+				upsertConversationResponse(p1, conversation)
 			end
 		end)
 		
 		return
 	end
-	for i, v in p2.conversations do
-		upsertConversationResponse(p1, v)
+	for _, conversation in ResponseBody.conversations do
+		upsertConversationResponse(p1, conversation)
 	end
 end
 
-local function _(p3, p4, p5)
-	-- upvalues: cryoModule (ref)
-	if p4 == nil then return end
-	local conversation = p3.getConversation(p4, false)
+local function _(p2, p3, p4) --[[ Line: 103 | Named "updateConversation" ]]
+	-- upvalues: CryoModule (copy)
+	if p3 == nil then return end
+	local Conversation = p2.getConversation(p3, false)
 	
-	if conversation == nil then
+	if Conversation ~= nil then
+		p2.upsertConversation(CryoModule.Dictionary.join(Conversation, p4), false)
+		
 		return
 	end
-	p3.upsertConversation(cryoModule.Dictionary.join(conversation, p5), false)
 end
 
-local _ = function(p3)
-	return if p3 == nil then nil elseif typeof(p3) == "DateTime" then p3.UnixTimestamp elseif type(p3) == "table" and p3.GetUnixTimestamp ~= nil then p3:GetUnixTimestamp() else nil
+local _ = function(p2) --[[ Line: 114 | Named "getUnixTimestamp" ]]
+	return if p2 == nil then nil elseif typeof(p2) == "DateTime" then p2.UnixTimestamp elseif type(p2) == "table" and p2.GetUnixTimestamp ~= nil then p2:GetUnixTimestamp() else nil
 end
 
-local _ = function(p3)
-	if type(p3) ~= "string" then
+local _ = function(p2) --[[ Line: 127 | Named "getDateTimeFromIsoDate" ]]
+	if type(p2) == "string" then
+		local Success, Result = pcall(function() --[[ Line: 132 ]]
+			-- upvalues: p2 (copy)
+			return DateTime.fromIsoDate(p2)
+		end)
+		
+		return if Success then Result else nil
+	else
 		return nil
 	end
-	local ok, status = pcall(function()
-		-- upvalues: p3 (ref)
-		return DateTime.fromIsoDate(p3)
-	end)
-	
-	return if ok then status else nil
 end
 
-local _ = function(p3)
-	if p3.sent == nil then
-		local createdAt = p3.created_at or p3.createdAt
+local _ = function(p2) --[[ Line: 138 | Named "getMessageSentTime" ]]
+	if p2.sent == nil then
+		local CreatedAt = p2.created_at or p2.createdAt
 		
-		if type(createdAt) ~= "string" then
+		if type(CreatedAt) == "string" then
+			local Success1, Result1 = pcall(function() --[[ Line: 132 ]]
+				-- upvalues: CreatedAt (copy)
+				return DateTime.fromIsoDate(CreatedAt)
+			end)
+			
+			return if Success1 then Result1 else nil
+		else
 			return nil
 		end
-		local ok, status = pcall(function()
-			-- upvalues: createdAt (ref)
-			return DateTime.fromIsoDate(createdAt)
-		end)
-		
-		return if ok then status else nil
-	elseif type(p3.sent) == "string" then
-		local sent = p3.sent
-		
-		if type(sent) ~= "string" then
-			return nil
-		end
-		local ok, status = pcall(function()
-			-- upvalues: sent (ref)
-			return DateTime.fromIsoDate(sent)
-		end)
-		
-		return if ok then status else nil
+	elseif type(p2.sent) ~= "string" then
+		return p2.sent
 	else
-		return p3.sent
+		local Sent = p2.sent
+		
+		if type(Sent) == "string" then
+			local Success, Result = pcall(function() --[[ Line: 132 ]]
+				-- upvalues: Sent (copy)
+				return DateTime.fromIsoDate(Sent)
+			end)
+			
+			return if Success then Result else nil
+		else
+			return nil
+		end
 	end
 end
 
-local function messagesFromWebResponse(p3, p4)
-	-- upvalues: messageModelModule (ref)
-	if p4 == nil then
+local function messagesFromWebResponse(p2, ChatMessages) --[[ Line: 145 ]]
+	-- upvalues: MessageModelModule (copy)
+	if ChatMessages == nil then
 		return {}
 	end
-	local id = nil
-	local t = {}
+	local Id = nil
+	local FromWebResults = {}
 	
-	for i = #p4, 1, -1 do
-		local var1 = p4[i]
-		local var2 = messageModelModule.fromWeb(var1, p3, id)
+	for i = #ChatMessages, 1, -1 do
+		local ChatMessage = ChatMessages[i]
+		local FromWebResult = MessageModelModule.fromWeb(ChatMessage, p2, Id)
 		
-		if var2 ~= nil then
-			var2.isPreviewable = var1.is_previewable
-			var2.isBadgeable = var1.is_badgeable
-			id = var2.id
-			table.insert(t, 1, var2)
+		if FromWebResult ~= nil then
+			FromWebResult.isPreviewable = ChatMessage.is_previewable
+			FromWebResult.isBadgeable = ChatMessage.is_badgeable
+			Id = FromWebResult.id
+			table.insert(FromWebResults, 1, FromWebResult)
 		end
 	end
-	return t
+	return FromWebResults
 end
 
-local _ = function(p5)
-	return if p5.isPreviewable == nil then if p5.is_previewable == nil then false else p5.is_previewable else p5.isPreviewable
+local _ = function(p3) --[[ Line: 165 | Named "isMessagePreviewable" ]]
+	return if p3.isPreviewable == nil then p3.is_previewable ~= nil and p3.is_previewable else p3.isPreviewable
 end
 
-local function getNewestMessageUnixTime(p5)
-	-- upvalues: getConversationMessageViewModelStoreModule (ref)
-	if p5 == nil then
+local function getNewestMessageUnixTime(p3) --[[ Line: 175 ]]
+	-- upvalues: GetConversationMessageViewModelStoreModule (copy)
+	if p3 == nil then
 		return 0
 	end
-	local var3 = getConversationMessageViewModelStoreModule(false)
-	local var4 = var3.conversationMessageListStore.getOrderedIds(p5, false)[1]
-	local var5 = var4 and var3.conversationMessageStore.getMessage(var4, false)
-	local var6 = var5
+	local ConversationMessageViewModelStoreModule = GetConversationMessageViewModelStoreModule(false)
+	local OrderedId = ConversationMessageViewModelStoreModule.conversationMessageListStore.getOrderedIds(p3, false)[1]
+	local Message = OrderedId and ConversationMessageViewModelStoreModule.conversationMessageStore.getMessage(OrderedId, false)
+	local Sent = Message
 	
-	if var6 then
-		if var5.sent == nil then
-			local createdAt = var5.created_at or var5.createdAt
+	if Sent then
+		if Message.sent == nil then
+			local CreatedAt = Message.created_at or Message.createdAt
 			
-			if type(createdAt) == "string" then
-				local ok, status = pcall(function()
-					-- upvalues: createdAt (ref)
-					return DateTime.fromIsoDate(createdAt)
+			if type(CreatedAt) == "string" then
+				local Success1, Result1 = pcall(function() --[[ Line: 132 ]]
+					-- upvalues: CreatedAt (copy)
+					return DateTime.fromIsoDate(CreatedAt)
 				end)
-				var6 = if ok then status else nil
+				Sent = if Success1 then Result1 else nil
 			else
-				var6 = nil
+				Sent = nil
 			end
-		elseif type(var5.sent) == "string" then
-			local sent = var5.sent
+		elseif type(Message.sent) == "string" then
+			local Sent1 = Message.sent
 			
-			if type(sent) == "string" then
-				local ok, status = pcall(function()
-					-- upvalues: sent (ref)
-					return DateTime.fromIsoDate(sent)
+			if type(Sent1) == "string" then
+				local Success, Result = pcall(function() --[[ Line: 132 ]]
+					-- upvalues: Sent1 (copy)
+					return DateTime.fromIsoDate(Sent1)
 				end)
-				var6 = if ok then status else nil
+				Sent = if Success then Result else nil
 			else
-				var6 = nil
+				Sent = nil
 			end
 		else
-			var6 = var5.sent
+			Sent = Message.sent
 		end
 	end
-	return (if var6 == nil then nil elseif typeof(var6) == "DateTime" then var6.UnixTimestamp elseif type(var6) == "table" and var6.GetUnixTimestamp ~= nil then var6:GetUnixTimestamp() else nil) or 0
+	return (if Sent == nil then nil elseif typeof(Sent) == "DateTime" then Sent.UnixTimestamp elseif type(Sent) == "table" and Sent.GetUnixTimestamp ~= nil then Sent:GetUnixTimestamp() else nil) or 0
 end
 
-local function shouldMarkConversationUnreadFromMessages(p5, p6)
-	-- upvalues: getNewestMessageUnixTime (ref), playersService (ref)
-	if p6 == nil then
+local function shouldMarkConversationUnreadFromMessages(ConversationId, Messages): boolean --[[ Line: 189 ]]
+	-- upvalues: getNewestMessageUnixTime (copy), Players (copy)
+	if Messages == nil then
 		return false
 	end
-	local var3 = getNewestMessageUnixTime(p5)
-	local var4 = tostring(playersService.LocalPlayer.UserId)
+	local NewestMessageUnixTime = getNewestMessageUnixTime(ConversationId)
+	local Text = tostring(Players.LocalPlayer.UserId)
 	
-	for i, v in p6 do
-		local var5
-		if v.sent == nil then
-			local createdAt = v.created_at or v.createdAt
+	for _, message in Messages do
+		local Sent1 = nil
+		if message.sent == nil then
+			local CreatedAt = message.created_at or message.createdAt
 			
-			if type(createdAt) == "string" then
-				local ok, status = pcall(function()
-					-- upvalues: createdAt (ref)
-					return DateTime.fromIsoDate(createdAt)
+			if type(CreatedAt) == "string" then
+				local Success1, Result1 = pcall(function() --[[ Line: 132 ]]
+					-- upvalues: CreatedAt (copy)
+					return DateTime.fromIsoDate(CreatedAt)
 				end)
-				var5 = if ok then status else nil
+				Sent1 = if Success1 then Result1 else nil
 			else
-				var5 = nil
+				Sent1 = nil
 			end
-		elseif type(v.sent) == "string" then
-			local sent = v.sent
+		elseif type(message.sent) == "string" then
+			local Sent = message.sent
 			
-			if type(sent) == "string" then
-				local ok, status = pcall(function()
-					-- upvalues: sent (ref)
-					return DateTime.fromIsoDate(sent)
+			if type(Sent) == "string" then
+				local Success, Result = pcall(function() --[[ Line: 132 ]]
+					-- upvalues: Sent (copy)
+					return DateTime.fromIsoDate(Sent)
 				end)
-				var5 = if ok then status else nil
+				Sent1 = if Success then Result else nil
 			else
-				var5 = nil
+				Sent1 = nil
 			end
 		else
-			var5 = v.sent
+			Sent1 = message.sent
 		end
-		local var6 = if var5 == nil then nil elseif typeof(var5) == "DateTime" then var5.UnixTimestamp elseif type(var5) == "table" and var5.GetUnixTimestamp ~= nil then var5:GetUnixTimestamp() else nil
-		var5 = v.sender_user_id or v.senderTargetId
+		local UnixTimestamp = if Sent1 == nil then nil elseif typeof(Sent1) == "DateTime" then Sent1.UnixTimestamp elseif type(Sent1) == "table" and Sent1.GetUnixTimestamp ~= nil then Sent1:GetUnixTimestamp() else nil
+		local SenderUserId = message.sender_user_id or message.senderTargetId
 		
-		if var6 ~= nil and var3 < var6 and (var5 ~= nil and tostring(var5) ~= var4) and v.is_badgeable == true then
+		if UnixTimestamp ~= nil and NewestMessageUnixTime < UnixTimestamp and SenderUserId ~= nil and tostring(SenderUserId) ~= Text and message.is_badgeable == true then
 			return true
 		end
 	end
 	return false
 end
 
-local _ = function(p7)
-	-- upvalues: getConversationMessageViewModelStoreModule (ref)
-	if p7.previewMessageId == nil then
+local _ = function(p3) --[[ Line: 212 | Named "getPreviewMessageUnixTime" ]]
+	-- upvalues: GetConversationMessageViewModelStoreModule (copy)
+	if p3.previewMessageId == nil then
 		return 0
 	end
-	local message = getConversationMessageViewModelStoreModule(false).conversationMessageStore.getMessage(p7.previewMessageId, false)
-	local var7 = message
+	local Message = GetConversationMessageViewModelStoreModule(false).conversationMessageStore.getMessage(p3.previewMessageId, false)
+	local Sent = Message
 	
-	if var7 then
-		if message.sent == nil then
-			local createdAt = message.created_at or message.createdAt
+	if Sent then
+		if Message.sent == nil then
+			local CreatedAt = Message.created_at or Message.createdAt
 			
-			if type(createdAt) == "string" then
-				local ok, status = pcall(function()
-					-- upvalues: createdAt (ref)
-					return DateTime.fromIsoDate(createdAt)
+			if type(CreatedAt) == "string" then
+				local Success1, Result1 = pcall(function() --[[ Line: 132 ]]
+					-- upvalues: CreatedAt (copy)
+					return DateTime.fromIsoDate(CreatedAt)
 				end)
-				var7 = if ok then status else nil
+				Sent = if Success1 then Result1 else nil
 			else
-				var7 = nil
+				Sent = nil
 			end
-		elseif type(message.sent) == "string" then
-			local sent = message.sent
+		elseif type(Message.sent) == "string" then
+			local Sent1 = Message.sent
 			
-			if type(sent) == "string" then
-				local ok, status = pcall(function()
-					-- upvalues: sent (ref)
-					return DateTime.fromIsoDate(sent)
+			if type(Sent1) == "string" then
+				local Success, Result = pcall(function() --[[ Line: 132 ]]
+					-- upvalues: Sent1 (copy)
+					return DateTime.fromIsoDate(Sent1)
 				end)
-				var7 = if ok then status else nil
+				Sent = if Success then Result else nil
 			else
-				var7 = nil
+				Sent = nil
 			end
 		else
-			var7 = message.sent
+			Sent = Message.sent
 		end
 	end
-	return (if var7 == nil then nil elseif typeof(var7) == "DateTime" then var7.UnixTimestamp elseif type(var7) == "table" and var7.GetUnixTimestamp ~= nil then var7:GetUnixTimestamp() else nil) or 0
+	return (if Sent == nil then nil elseif typeof(Sent) == "DateTime" then Sent.UnixTimestamp elseif type(Sent) == "table" and Sent.GetUnixTimestamp ~= nil then Sent:GetUnixTimestamp() else nil) or 0
 end
 
-local function updateConversationLastUpdatedFromMessages(p7, p8, p9, p10)
-	-- upvalues: getConversationMessageViewModelStoreModule (ref), fFlagAppChatServerSideConversationSearchModule (ref), searchIntroducedConversationIdsModule (ref), cryoModule (ref)
-	if p8 == nil or p9 == nil then return end
-	local conversation = p7.getConversation(p8, false)
+local function updateConversationLastUpdatedFromMessages(p3, ConversationId, Messages, ShouldMarkConversationUnread) --[[ Line: 223 ]]
+	-- upvalues: GetConversationMessageViewModelStoreModule (copy), FFlagAppChatAnyServerSideConversationSearchModule (copy), SearchIntroducedConversationIdsModule (copy), CryoModule (copy)
+	if ConversationId == nil or Messages == nil then return end
+	local Conversation = p3.getConversation(ConversationId, false)
 	
-	if conversation == nil then return end
-	local var7, var8
-	local var9 = nil
-	local id = nil
+	if Conversation == nil then return end
+	local LastUpdated = nil
+	local Id = nil
+	local UnixTimestamp = nil
 	
-	if conversation.previewMessageId == nil then
-		var7 = 0
+	if Conversation.previewMessageId == nil then
+		UnixTimestamp = 0
 	else
-		local message = getConversationMessageViewModelStoreModule(false).conversationMessageStore.getMessage(conversation.previewMessageId, false)
-		var8 = message
+		local Message = GetConversationMessageViewModelStoreModule(false).conversationMessageStore.getMessage(Conversation.previewMessageId, false)
+		local Sent = Message
 		
-		if var8 then
-			if message.sent == nil then
-				local createdAt = message.created_at or message.createdAt
+		if Sent then
+			if Message.sent == nil then
+				local CreatedAt = Message.created_at or Message.createdAt
 				
-				if type(createdAt) == "string" then
-					local ok, status = pcall(function()
-						-- upvalues: createdAt (ref)
-						return DateTime.fromIsoDate(createdAt)
+				if type(CreatedAt) == "string" then
+					local Success1, Result1 = pcall(function() --[[ Line: 132 ]]
+						-- upvalues: CreatedAt (copy)
+						return DateTime.fromIsoDate(CreatedAt)
 					end)
-					var8 = if ok then status else nil
+					Sent = if Success1 then Result1 else nil
 				else
-					var8 = nil
+					Sent = nil
+				end
+			elseif type(Message.sent) == "string" then
+				local Sent1 = Message.sent
+				
+				if type(Sent1) == "string" then
+					local Success, Result = pcall(function() --[[ Line: 132 ]]
+						-- upvalues: Sent1 (copy)
+						return DateTime.fromIsoDate(Sent1)
+					end)
+					Sent = if Success then Result else nil
+				else
+					Sent = nil
+				end
+			else
+				Sent = Message.sent
+			end
+		end
+		UnixTimestamp = (if Sent == nil then nil elseif typeof(Sent) == "DateTime" then Sent.UnixTimestamp elseif type(Sent) == "table" and Sent.GetUnixTimestamp ~= nil then Sent:GetUnixTimestamp() else nil) or 0
+	end
+	local LastUpdated1 = Conversation.lastUpdated
+	local UnixTimestamp1 = (if LastUpdated1 == nil then nil elseif typeof(LastUpdated1) == "DateTime" then LastUpdated1.UnixTimestamp elseif type(LastUpdated1) == "table" and LastUpdated1.GetUnixTimestamp ~= nil then LastUpdated1:GetUnixTimestamp() else nil) or 0
+	
+	for _, message in Messages do
+		if message ~= nil and (if message.isPreviewable == nil then message.is_previewable ~= nil and message.is_previewable else message.isPreviewable) then
+			local Sent2 = nil
+			if message.sent == nil then
+				local CreatedAt1 = message.created_at or message.createdAt
+				
+				if type(CreatedAt1) == "string" then
+					local Success3, Result3 = pcall(function() --[[ Line: 132 ]]
+						-- upvalues: CreatedAt1 (copy)
+						return DateTime.fromIsoDate(CreatedAt1)
+					end)
+					Sent2 = if Success3 then Result3 else nil
+				else
+					Sent2 = nil
 				end
 			elseif type(message.sent) == "string" then
-				local sent = message.sent
+				local Sent1 = message.sent
 				
-				if type(sent) == "string" then
-					local ok, status = pcall(function()
-						-- upvalues: sent (ref)
-						return DateTime.fromIsoDate(sent)
+				if type(Sent1) == "string" then
+					local Success2, Result2 = pcall(function() --[[ Line: 132 ]]
+						-- upvalues: Sent1 (copy)
+						return DateTime.fromIsoDate(Sent1)
 					end)
-					var8 = if ok then status else nil
+					Sent2 = if Success2 then Result2 else nil
 				else
-					var8 = nil
+					Sent2 = nil
 				end
 			else
-				var8 = message.sent
+				Sent2 = message.sent
 			end
-		end
-		var7 = (if var8 == nil then nil elseif typeof(var8) == "DateTime" then var8.UnixTimestamp elseif type(var8) == "table" and var8.GetUnixTimestamp ~= nil then var8:GetUnixTimestamp() else nil) or 0
-	end
-	var8 = conversation.lastUpdated
-	local var10 = (if var8 == nil then nil elseif typeof(var8) == "DateTime" then var8.UnixTimestamp elseif type(var8) == "table" and var8.GetUnixTimestamp ~= nil then var8:GetUnixTimestamp() else nil) or 0
-	
-	for i, v in p9 do
-		if v ~= nil and (if v.isPreviewable ~= nil then if v.is_previewable ~= nil then false else v.is_previewable else v.isPreviewable) then
-			local var11
-			if v.sent == nil then
-				local createdAt = v.created_at or v.createdAt
-				
-				if type(createdAt) == "string" then
-					local ok, status = pcall(function()
-						-- upvalues: createdAt (ref)
-						return DateTime.fromIsoDate(createdAt)
-					end)
-					var11 = if ok then status else nil
-				else
-					var11 = nil
-				end
-			elseif type(v.sent) == "string" then
-				local sent = v.sent
-				
-				if type(sent) == "string" then
-					local ok, status = pcall(function()
-						-- upvalues: sent (ref)
-						return DateTime.fromIsoDate(sent)
-					end)
-					var11 = if ok then status else nil
-				else
-					var11 = nil
-				end
-			else
-				var11 = v.sent
-			end
-			local var12 = if var11 == nil then nil elseif typeof(var11) == "DateTime" then var11.UnixTimestamp elseif type(var11) == "table" and var11.GetUnixTimestamp ~= nil then var11:GetUnixTimestamp() else nil
+			local UnixTimestamp2 = if Sent2 == nil then nil elseif typeof(Sent2) == "DateTime" then Sent2.UnixTimestamp elseif type(Sent2) == "table" and Sent2.GetUnixTimestamp ~= nil then Sent2:GetUnixTimestamp() else nil
 			
-			if var12 ~= nil and var7 < var12 then
-				var7 = var12
-				var9 = var11
-				id = v.id
+			if UnixTimestamp2 ~= nil and UnixTimestamp < UnixTimestamp2 then
+				UnixTimestamp = UnixTimestamp2
+				LastUpdated = Sent2
+				Id = message.id
 			end
 		end
 	end
-	if var9 == nil then
-		if p10 then
-			local t = { hasUnreadMessages = true }
+	if LastUpdated ~= nil then
+		local config = { previewMessageId = Id }
+		
+		if UnixTimestamp1 < UnixTimestamp then
+			config.lastUpdated = LastUpdated
 			
-			if p8 == nil then return end
-			var8 = p7.getConversation(p8, false)
+			if FFlagAppChatAnyServerSideConversationSearchModule then
+				SearchIntroducedConversationIdsModule.remove(ConversationId)
+			end
+		end
+		if ShouldMarkConversationUnread then
+			config.hasUnreadMessages = true
+		end
+		if ConversationId == nil then return end
+		local Conversation1 = p3.getConversation(ConversationId, false)
+		
+		if Conversation1 ~= nil then
+			p3.upsertConversation(CryoModule.Dictionary.join(Conversation1, config), false)
 			
-			if var8 == nil then return end
-			p7.upsertConversation(cryoModule.Dictionary.join(var8, t), false)
+			return
 		end
 		return
-	else
-		local t = { previewMessageId = id }
+	elseif ShouldMarkConversationUnread then
+		local config = { hasUnreadMessages = true }
 		
-		if var10 < var7 then
-			t.lastUpdated = var9
-			
-			if fFlagAppChatServerSideConversationSearchModule then
-				searchIntroducedConversationIdsModule.remove(p8)
+		if ConversationId == nil then return end
+		local Conversation2 = p3.getConversation(ConversationId, false)
+		
+		if Conversation2 == nil then return end
+		p3.upsertConversation(CryoModule.Dictionary.join(Conversation2, config), false)
+	end
+end
+
+local function hasPreviewableMessageNewerThan(List, p4): boolean --[[ Line: 281 ]]
+	-- upvalues: GetPreciseUnixTimestampModule (copy)
+	for _, value in List do
+		if value ~= nil and (if value.isPreviewable == nil then value.is_previewable ~= nil and value.is_previewable else value.isPreviewable) then
+			local Sent1 = nil
+			if value.sent == nil then
+				local CreatedAt = value.created_at or value.createdAt
+				
+				if type(CreatedAt) == "string" then
+					local Success1, Result1 = pcall(function() --[[ Line: 132 ]]
+						-- upvalues: CreatedAt (copy)
+						return DateTime.fromIsoDate(CreatedAt)
+					end)
+					Sent1 = if Success1 then Result1 else nil
+				else
+					Sent1 = nil
+				end
+			elseif type(value.sent) == "string" then
+				local Sent = value.sent
+				
+				if type(Sent) == "string" then
+					local Success, Result = pcall(function() --[[ Line: 132 ]]
+						-- upvalues: Sent (copy)
+						return DateTime.fromIsoDate(Sent)
+					end)
+					Sent1 = if Success then Result else nil
+				else
+					Sent1 = nil
+				end
+			else
+				Sent1 = value.sent
+			end
+			if p4 < (GetPreciseUnixTimestampModule(Sent1) or 0) then
+				return true
 			end
 		end
-		if p10 then
-			t.hasUnreadMessages = true
-		end
-		if p8 == nil then return end
-		var8 = p7.getConversation(p8, false)
+	end
+	return false
+end
+
+local function updateConversationFromMessages(p5, ConversationId, Messages, ShouldMarkConversationUnread) --[[ Line: 294 ]]
+	-- upvalues: FFlagAppChatAnyServerSideConversationSearchModule (copy), SearchIntroducedConversationIdsModule (copy), hasPreviewableMessageNewerThan (copy), GetPreciseUnixTimestampModule (copy), CryoModule (copy)
+	if ConversationId == nil or Messages == nil then return end
+	local Conversation = p5.getConversation(ConversationId, false)
+	
+	if Conversation == nil then return end
+	local Flag = false
+	
+	if FFlagAppChatAnyServerSideConversationSearchModule and SearchIntroducedConversationIdsModule.has(ConversationId) and hasPreviewableMessageNewerThan(Messages, GetPreciseUnixTimestampModule(Conversation.lastUpdated) or 0) then
+		SearchIntroducedConversationIdsModule.remove(ConversationId)
+		Flag = true
+	end
+	local t = {}
+	
+	if ShouldMarkConversationUnread then
+		t.hasUnreadMessages = true
+	end
+	if Flag or ShouldMarkConversationUnread then
+		if ConversationId == nil then return end
+		local Conversation1 = p5.getConversation(ConversationId, false)
 		
-		if var8 == nil then
-			return
-		end
-		p7.upsertConversation(cryoModule.Dictionary.join(var8, t), false)
+		if Conversation1 == nil then return end
+		p5.upsertConversation(CryoModule.Dictionary.join(Conversation1, t), false)
 	end
 end
 
-local function handleCreateConversationSucceeded(p11, p12)
-	-- upvalues: upsertConversationResponse (ref), fFlagAppChatServerSideConversationSearchModule (ref), getConversationSearchDataHydrationModule (ref)
-	local responseBody = p11.responseBody
-	upsertConversationResponse(p12, responseBody and (responseBody.conversations and responseBody.conversations[1]))
+local _ = function(p5): boolean --[[ Line: 344 | Named "isInitialConversationPage" ]]
+	local QueryArgs = if p5 == nil then nil else p5.queryArgs
 	
-	if fFlagAppChatServerSideConversationSearchModule then
-		getConversationSearchDataHydrationModule(false).invalidate()
-	end
-end
-
-local function handleDuplicateConversationSucceeded(p11, p12)
-	-- upvalues: upsertConversationResponse (ref), fFlagAppChatServerSideConversationSearchModule (ref), getConversationSearchDataHydrationModule (ref)
-	local responseBody = p11.responseBody
-	upsertConversationResponse(p12, responseBody and (responseBody.conversations and responseBody.conversations[1]))
-	
-	if fFlagAppChatServerSideConversationSearchModule then
-		getConversationSearchDataHydrationModule(false).invalidate()
-	end
-end
-
-local function handleGetUserConversationsSucceeded(p11, p12)
-	-- upvalues: upsertConversationResponses (ref)
-	upsertConversationResponses(p12, p11.responseBody)
-	local nextCursor = p11.responseBody and p11.responseBody.next_cursor
-	local t = { isFetchingConversations = false }
-	
-	if nextCursor == nil or nextCursor == "" then
-		t.oldestConversationIsFetched = true
-	end
-	p12.setListStatus(t)
-end
-
-local function handleGetUserConversationsFailed(_, p11)
-	p11.setListStatus({ isFetchingConversations = false })
-end
-
-local function handleGetConversationDetailsSucceeded(p11, p12)
-	-- upvalues: upsertConversationResponses (ref)
-	upsertConversationResponses(p12, p11.responseBody)
-end
-
-local function handleLegacyGetUserConversationsSucceeded(p11, p12)
-	-- upvalues: conversationModule (ref)
-	local responseBody = p11.responseBody
-	
-	if responseBody == nil then return end
-	for i, v in ipairs(responseBody) do
-		p12.upsertConversation(conversationModule.fromWeb(v))
-	end
-	p12.setListStatus({ isFetchingConversations = false })
-	local pageSize = p11.queryArgs and p11.queryArgs.pageSize
-	
-	if pageSize ~= nil and #responseBody < pageSize then
-		p12.setListStatus({ oldestConversationIsFetched = true })
-	end
-end
-
-local t_1 = {
-	[appChatNetworkingModule.rodux.CreateConversation.Succeeded.name] = handleCreateConversationSucceeded,
-	[appChatNetworkingModule.rodux.DuplicateConversation.Succeeded.name] = handleDuplicateConversationSucceeded,
-	[appChatNetworkingModule.rodux.GetUserConversations.Succeeded.name] = handleGetUserConversationsSucceeded,
-	[appChatNetworkingModule.rodux.GetUserConversations.Failed.name] = handleGetUserConversationsFailed,
-	[appChatNetworkingModule.rodux.GetConversationDetails.Succeeded.name] = handleGetConversationDetailsSucceeded,
-	[appChatNetworkingModule.rodux.MultiGetConversationDetails.Succeeded.name] = handleGetConversationDetailsSucceeded,
-	[appChatNetworkingModule.rodux.MarkConversation.Succeeded.name] = function(p13, p14)
-		-- upvalues: cryoModule (ref)
-		local conversationIds = p13.postBody and p13.postBody.conversation_ids
+	if type(QueryArgs) ~= "table" then
+		return true
+	elseif QueryArgs.pageNumber == nil then
+		local Cursor = QueryArgs.cursor
 		
-		if conversationIds == nil then return end
-		for i, v in conversationIds do
-			local t = { hasUnreadMessages = false }
+		return Cursor == nil or Cursor == ""
+	else
+		return QueryArgs.pageNumber == 1
+	end
+end
+
+local _ = function(p5, p6) --[[ Line: 356 | Named "applyConversationLoadSuccessStatus" ]]
+	-- upvalues: FFlagAppChatConversationLoadRetryModule (copy), CryoModule (copy)
+	if not FFlagAppChatConversationLoadRetryModule then return end
+	p6.error = CryoModule.None
+	p6.isFetchingNextPage = false
+	local QueryArgs = if p5 == nil then nil else p5.queryArgs
+	local IsPageNumberMatch = nil
+	
+	if type(QueryArgs) == "table" then
+		if QueryArgs.pageNumber == nil then
+			local Cursor = QueryArgs.cursor
+			IsPageNumberMatch = Cursor == nil or Cursor == ""
+		else
+			IsPageNumberMatch = QueryArgs.pageNumber == 1
+		end
+	else
+		IsPageNumberMatch = true
+	end
+	if IsPageNumberMatch then
+		p6.hasFetchedInitialPage = true
+	end
+end
+
+local _ = function(p5, p6) --[[ Line: 367 | Named "applyConversationLoadFailureStatus" ]]
+	-- upvalues: FFlagAppChatConversationLoadRetryModule (copy)
+	if not FFlagAppChatConversationLoadRetryModule then return end
+	p6.isFetchingNextPage = false
+	local QueryArgs = if p5 == nil then nil else p5.queryArgs
+	local IsPageNumberMatch = nil
+	
+	if type(QueryArgs) == "table" then
+		if QueryArgs.pageNumber == nil then
+			local Cursor = QueryArgs.cursor
+			IsPageNumberMatch = Cursor == nil or Cursor == ""
+		else
+			IsPageNumberMatch = QueryArgs.pageNumber == 1
+		end
+	else
+		IsPageNumberMatch = true
+	end
+	if IsPageNumberMatch then
+		p6.error = p5 == nil or p5.error == nil or p5.error
+	end
+end
+
+local function handleGetUserConversationsFailed(p5, p6) --[[ Line: 390 ]]
+	-- upvalues: FFlagAppChatConversationLoadRetryModule (copy)
+	local config = { isFetchingConversations = false }
+	
+	if FFlagAppChatConversationLoadRetryModule then
+		config.isFetchingNextPage = false
+		local QueryArgs = if p5 == nil then nil else p5.queryArgs
+		local IsPageNumberMatch = nil
+		
+		if type(QueryArgs) == "table" then
+			if QueryArgs.pageNumber == nil then
+				local Cursor = QueryArgs.cursor
+				IsPageNumberMatch = Cursor == nil or Cursor == ""
+			else
+				IsPageNumberMatch = QueryArgs.pageNumber == 1
+			end
+		else
+			IsPageNumberMatch = true
+		end
+		if IsPageNumberMatch then
+			config.error = p5 == nil or p5.error == nil or p5.error
+		end
+	end
+	p6.setListStatus(config)
+end
+
+local function handleGetConversationDetailsSucceeded(p5, p6) --[[ Line: 398 ]]
+	-- upvalues: upsertConversationResponses (copy)
+	upsertConversationResponses(p6, p5.responseBody)
+end
+
+local function handleLegacyGetUserConversationsSucceeded(p5, p6) --[[ Line: 402 ]]
+	-- upvalues: ConversationModule (copy), FFlagAppChatConversationLoadRetryModule (copy), CryoModule (copy)
+	local ResponseBody = p5.responseBody
+	
+	if ResponseBody == nil then return end
+	for _, value in ipairs(ResponseBody) do
+		p6.upsertConversation(ConversationModule.fromWeb(value))
+	end
+	local config = { isFetchingConversations = false }
+	
+	if FFlagAppChatConversationLoadRetryModule then
+		config.error = CryoModule.None
+		config.isFetchingNextPage = false
+		local QueryArgs = if p5 == nil then nil else p5.queryArgs
+		local IsPageNumberMatch = nil
+		
+		if type(QueryArgs) == "table" then
+			if QueryArgs.pageNumber == nil then
+				local Cursor = QueryArgs.cursor
+				IsPageNumberMatch = Cursor == nil or Cursor == ""
+			else
+				IsPageNumberMatch = QueryArgs.pageNumber == 1
+			end
+		else
+			IsPageNumberMatch = true
+		end
+		if IsPageNumberMatch then
+			config.hasFetchedInitialPage = true
+		end
+	end
+	p6.setListStatus(config)
+	local PageSize = p5.queryArgs and p5.queryArgs.pageSize
+	
+	if PageSize ~= nil and #ResponseBody < PageSize then
+		p6.setListStatus({ oldestConversationIsFetched = true })
+	end
+end
+
+local config1 = {
+	[AppChatNetworkingModule.rodux.CreateConversation.Succeeded.name] = function(p7, p8) --[[ Line: 330 ]]
+		-- upvalues: upsertConversationResponse (copy), FFlagAppChatAnyServerSideConversationSearchModule (copy), GetConversationSearchDataHydrationModule (copy)
+		local ResponseBody = p7.responseBody
+		upsertConversationResponse(p8, ResponseBody and (ResponseBody.conversations and ResponseBody.conversations[1]))
+		
+		if FFlagAppChatAnyServerSideConversationSearchModule then
+			GetConversationSearchDataHydrationModule(false).invalidate()
+		end
+	end,
+	[AppChatNetworkingModule.rodux.DuplicateConversation.Succeeded.name] = function(p7, p8) --[[ Line: 340 ]]
+		-- upvalues: upsertConversationResponse (copy), FFlagAppChatAnyServerSideConversationSearchModule (copy), GetConversationSearchDataHydrationModule (copy)
+		local ResponseBody = p7.responseBody
+		upsertConversationResponse(p8, ResponseBody and (ResponseBody.conversations and ResponseBody.conversations[1]))
+		
+		if FFlagAppChatAnyServerSideConversationSearchModule then
+			GetConversationSearchDataHydrationModule(false).invalidate()
+		end
+	end,
+	[AppChatNetworkingModule.rodux.GetUserConversations.Succeeded.name] = function(p7, p8) --[[ Line: 377 ]]
+		-- upvalues: upsertConversationResponses (copy), FFlagAppChatConversationLoadRetryModule (copy), CryoModule (copy)
+		upsertConversationResponses(p8, p7.responseBody)
+		local NextCursor = p7.responseBody and p7.responseBody.next_cursor
+		local config = { isFetchingConversations = false }
+		
+		if NextCursor == nil or NextCursor == "" then
+			config.oldestConversationIsFetched = true
+		end
+		if FFlagAppChatConversationLoadRetryModule then
+			config.error = CryoModule.None
+			config.isFetchingNextPage = false
+			local QueryArgs = if p7 == nil then nil else p7.queryArgs
+			local IsPageNumberMatch = nil
 			
-			if v ~= nil then
-				local conversation = p14.getConversation(v, false)
-				
-				if conversation ~= nil then
-					p14.upsertConversation(cryoModule.Dictionary.join(conversation, t), false)
+			if type(QueryArgs) == "table" then
+				if QueryArgs.pageNumber == nil then
+					local Cursor = QueryArgs.cursor
+					IsPageNumberMatch = Cursor == nil or Cursor == ""
+				else
+					IsPageNumberMatch = QueryArgs.pageNumber == 1
 				end
+			else
+				IsPageNumberMatch = true
+			end
+			if IsPageNumberMatch then
+				config.hasFetchedInitialPage = true
+			end
+		end
+		p8.setListStatus(config)
+	end,
+	[AppChatNetworkingModule.rodux.GetUserConversations.Failed.name] = handleGetUserConversationsFailed,
+	[AppChatNetworkingModule.rodux.GetConversationDetails.Succeeded.name] = handleGetConversationDetailsSucceeded,
+	[AppChatNetworkingModule.rodux.MultiGetConversationDetails.Succeeded.name] = handleGetConversationDetailsSucceeded,
+	[AppChatNetworkingModule.rodux.MarkConversation.Succeeded.name] = function(p7, p8) --[[ Line: 461 ]]
+		-- upvalues: CryoModule (copy)
+		local ConversationIds = p7.postBody and p7.postBody.conversation_ids
+		
+		if ConversationIds == nil then return end
+		for _, conversationId in ConversationIds do
+			local config = { hasUnreadMessages = false }
+			local v1 = conversationId == nil
+			local Conversation = nil
+			
+			if not v1 then
+				Conversation = p8.getConversation(conversationId, false)
+				v1 = Conversation == nil
+			end
+			if not v1 then
+				p8.upsertConversation(CryoModule.Dictionary.join(Conversation, config), false)
 			end
 		end
 	end,
-	[appChatNetworkingModule.rodux.GetConversationsParticipantsMetadata.Succeeded.name] = function(p15, p16)
-		local responseBody = p15.responseBody
+	[AppChatNetworkingModule.rodux.GetConversationsParticipantsMetadata.Succeeded.name] = function(p9, p10) --[[ Line: 570 ]]
+		local ResponseBody = p9.responseBody
 		
-		if responseBody == nil or responseBody.conversation_participants_metadata == nil then return end
-		for i, v in responseBody.conversation_participants_metadata do
+		if ResponseBody == nil or ResponseBody.conversation_participants_metadata == nil then return end
+		for i, value in ResponseBody.conversation_participants_metadata do
 			local t = {}
 			
-			for i_1, v_1 in v.participants_metadata do
-				t[i_1] = {
-					isPending = v_1.is_pending,
-					isBlocked = v_1.is_blocked,
-					isInviter = v_1.is_inviter,
-					isInvited = v_1.is_invited
+			for i1, value1 in value.participants_metadata do
+				t[i1] = {
+					isPending = value1.is_pending,
+					isBlocked = value1.is_blocked,
+					isInviter = value1.is_inviter,
+					isInvited = value1.is_invited
 				}
 			end
-			p16.setParticipantMetadata(i, t)
+			p10.setParticipantMetadata(i, t)
 		end
 	end,
-	[appChatNetworkingModule.rodux.RecordModalSequenceResponse.Succeeded.name] = function(p17, p18)
-		-- upvalues: constantsModule (ref), t (ref), conversationChannelsModule (ref), cryoModule (ref)
-		local postBody = p17.postBody
+	[AppChatNetworkingModule.rodux.RecordModalSequenceResponse.Succeeded.name] = function(p11, p12) --[[ Line: 516 ]]
+		-- upvalues: ConstantsModule (copy), config (copy), ConversationChannelsModule (copy), CryoModule (copy)
+		local PostBody = p11.postBody
 		
-		if postBody == nil or postBody.action_type ~= constantsModule.ModalAction.Accept then return end
-		local modalVariant = t[postBody.modal_variant]
+		if PostBody == nil or PostBody.action_type ~= ConstantsModule.ModalAction.Accept then return end
+		local Entry = config[PostBody.modal_variant]
 		
-		if modalVariant == nil then return end
-		local conversationId = postBody.conversation_id or conversationChannelsModule.getFriendConversationId({ postBody.friend_id })
-		local t_1 = { [modalVariant.field] = modalVariant.value }
+		if Entry == nil then return end
+		local ConversationId = PostBody.conversation_id or ConversationChannelsModule.getFriendConversationId({ PostBody.friend_id })
+		local config1 = { [Entry.field] = Entry.value }
 		
-		if conversationId == nil then return end
-		local conversation = p18.getConversation(conversationId, false)
+		if ConversationId == nil then return end
+		local Conversation = p12.getConversation(ConversationId, false)
 		
-		if conversation == nil then
+		if Conversation ~= nil then
+			p12.upsertConversation(CryoModule.Dictionary.join(Conversation, config1), false)
+			
 			return
 		end
-		p18.upsertConversation(cryoModule.Dictionary.join(conversation, t_1), false)
 	end,
-	[networkingChatModule.GetUserConversations.Succeeded.name] = handleLegacyGetUserConversationsSucceeded,
-	[networkingChatModule.GetUserConversations.Failed.name] = handleGetUserConversationsFailed,
-	[networkingChatModule.GetConversations.Succeeded.name] = handleLegacyGetUserConversationsSucceeded,
-	[networkingChatModule.GetConversations.Failed.name] = handleGetUserConversationsFailed,
-	[networkingChatModule.GetLatestMessages.Succeeded.name] = function(p17, p18)
-		-- upvalues: updateConversationLastUpdatedFromMessages (ref), messagesFromWebResponse (ref)
-		local responseBody = p17.responseBody
+	[NetworkingChatModule.GetUserConversations.Succeeded.name] = handleLegacyGetUserConversationsSucceeded,
+	[NetworkingChatModule.GetUserConversations.Failed.name] = handleGetUserConversationsFailed,
+	[NetworkingChatModule.GetConversations.Succeeded.name] = handleLegacyGetUserConversationsSucceeded,
+	[NetworkingChatModule.GetConversations.Failed.name] = handleGetUserConversationsFailed,
+	[NetworkingChatModule.GetLatestMessages.Succeeded.name] = function(p11, p12) --[[ Line: 649 ]]
+		-- upvalues: FFlagAppChatDerivedConversationLatestActivityModule (copy), updateConversationFromMessages (copy), messagesFromWebResponse (copy), updateConversationLastUpdatedFromMessages (copy)
+		local ResponseBody = p11.responseBody
 		
-		if responseBody == nil then return end
-		for i, v in ipairs(responseBody) do
-			local var13 = tostring(v.conversationId)
-			updateConversationLastUpdatedFromMessages(p18, var13, messagesFromWebResponse(var13, v.chatMessages))
-		end
-	end,
-	[networkingChatModule.MarkAsRead.Succeeded.name] = function(p19, p20)
-		-- upvalues: cryoModule (ref)
-		local conversationId = p19.postBody and p19.postBody.conversationId
-		local t = { hasUnreadMessages = false }
-		
-		if conversationId == nil then return end
-		local conversation = p20.getConversation(conversationId, false)
-		
-		if conversation == nil then
-			return
-		end
-		p20.upsertConversation(cryoModule.Dictionary.join(conversation, t), false)
-	end,
-	[networkingBlockingModule.BlockUserById.Succeeded.name] = function(p19, p20)
-		-- upvalues: conversationChannelsModule (ref)
-		local users = p19.namedIds and p19.namedIds.users
-		
-		if users == nil then return end
-		local var14 = tostring(users)
-		
-		for i, v in p20.getConversations(false) do
-			if v.type == conversationChannelsModule.Type.OneToOne and table.find(v.participants or {}, var14) then
-				p20.removeConversation(v.id)
+		if ResponseBody == nil then return end
+		for _, value in ipairs(ResponseBody) do
+			local Text = tostring(value.conversationId)
+			
+			if FFlagAppChatDerivedConversationLatestActivityModule then
+				updateConversationFromMessages(p12, Text, (messagesFromWebResponse(Text, value.chatMessages)))
+			else
+				updateConversationLastUpdatedFromMessages(p12, Text, (messagesFromWebResponse(Text, value.chatMessages)))
 			end
 		end
-		p20.removeConversation(conversationChannelsModule.getFriendConversationId({ var14 }))
 	end,
-	[receivedConversationModule.name] = function(p21, p22)
-		p22.upsertConversation(p21.conversation)
-	end,
-	[receivedMessages.name] = function(p21, p22)
-		-- upvalues: updateConversationLastUpdatedFromMessages (ref)
-		updateConversationLastUpdatedFromMessages(p22, p21.conversationId, p21.messages, p21.shouldMarkConversationUnread)
-	end,
-	[removedConversationModule.name] = function(p21, p22)
-		if p21.conversationId then
-			p22.removeConversation(p21.conversationId)
+	[NetworkingChatModule.MarkAsRead.Succeeded.name] = function(p13, p14) --[[ Line: 473 ]]
+		-- upvalues: CryoModule (copy)
+		local ConversationId = p13.postBody and p13.postBody.conversationId
+		local config = { hasUnreadMessages = false }
+		
+		if ConversationId == nil then return end
+		local Conversation = p14.getConversation(ConversationId, false)
+		
+		if Conversation ~= nil then
+			p14.upsertConversation(CryoModule.Dictionary.join(Conversation, config), false)
+			
+			return
 		end
 	end,
-	[renamedGroupConversationModule.name] = function(p21, p22)
-		-- upvalues: cryoModule (ref)
-		local conversationId = p21.conversationId
-		local t = {
-			lastUpdated = p21.lastUpdated,
-			title = p21.title,
-			isDefaultTitle = p21.isDefaultTitle
+	[require(AppChat.Http.NetworkingBlocking).BlockUserById.Succeeded.name] = function(p13, p14) --[[ Line: 554 ]]
+		-- upvalues: ConversationChannelsModule (copy)
+		local Users = p13.namedIds and p13.namedIds.users
+		
+		if Users == nil then return end
+		local Text = tostring(Users)
+		
+		for _, value in p14.getConversations(false) do
+			local Participants = value.participants or {}
+			
+			if value.type == ConversationChannelsModule.Type.OneToOne and table.find(Participants, Text) then
+				p14.removeConversation(value.id)
+			end
+		end
+		p14.removeConversation(ConversationChannelsModule.getFriendConversationId({ Text }))
+	end,
+	[require(AppChat.Conversations.Actions.ReceivedConversation).name] = function(p15, p16) --[[ Line: 423 ]]
+		p16.upsertConversation(p15.conversation)
+	end,
+	[require(AppChat.Conversations).Actions.ReceivedMessages.name] = function(p15, p16) --[[ Line: 610 ]]
+		-- upvalues: FFlagAppChatDerivedConversationLatestActivityModule (copy), updateConversationFromMessages (copy), updateConversationLastUpdatedFromMessages (copy)
+		if FFlagAppChatDerivedConversationLatestActivityModule then
+			updateConversationFromMessages(p16, p15.conversationId, p15.messages, p15.shouldMarkConversationUnread)
+			
+			return
+		else
+			updateConversationLastUpdatedFromMessages(p16, p15.conversationId, p15.messages, p15.shouldMarkConversationUnread)
+		end
+	end,
+	[require(AppChat.Conversations.Actions.RemovedConversation).name] = function(p15, p16) --[[ Line: 427 ]]
+		if p15.conversationId then
+			p16.removeConversation(p15.conversationId)
+		end
+	end,
+	[require(AppChat.Conversations.Actions.RenamedGroupConversation).name] = function(p15, p16) --[[ Line: 433 ]]
+		-- upvalues: CryoModule (copy)
+		local ConversationId = p15.conversationId
+		local config = {
+			lastUpdated = p15.lastUpdated,
+			title = p15.title,
+			isDefaultTitle = p15.isDefaultTitle
 		}
 		
-		if conversationId == nil then return end
-		local conversation = p22.getConversation(conversationId, false)
+		if ConversationId == nil then return end
+		local Conversation = p16.getConversation(ConversationId, false)
 		
-		if conversation == nil then
+		if Conversation ~= nil then
+			p16.upsertConversation(CryoModule.Dictionary.join(Conversation, config), false)
+			
 			return
 		end
-		p22.upsertConversation(cryoModule.Dictionary.join(conversation, t), false)
 	end,
-	[changedParticipantsModule.name] = function(p21, p22)
-		-- upvalues: cryoModule (ref)
-		local conversationId = p21.conversationId
-		local t = {
-			participants = p21.participants,
-			lastUpdated = p21.lastUpdated,
-			title = p21.title
+	[require(AppChat.Conversations.Actions.ChangedParticipants).name] = function(p15, p16) --[[ Line: 441 ]]
+		-- upvalues: CryoModule (copy)
+		local ConversationId = p15.conversationId
+		local config = {
+			participants = p15.participants,
+			lastUpdated = p15.lastUpdated,
+			title = p15.title
 		}
 		
-		if conversationId == nil then return end
-		local conversation = p22.getConversation(conversationId, false)
+		if ConversationId == nil then return end
+		local Conversation = p16.getConversation(ConversationId, false)
 		
-		if conversation == nil then
+		if Conversation ~= nil then
+			p16.upsertConversation(CryoModule.Dictionary.join(Conversation, config), false)
+			
 			return
 		end
-		p22.upsertConversation(cryoModule.Dictionary.join(conversation, t), false)
 	end,
-	[hasUnreadMessagesModule.name] = function(p21, p22)
-		-- upvalues: cryoModule (ref)
-		local id = p21.conversation and p21.conversation.id
-		local t = { hasUnreadMessages = true }
+	[require(AppChat.Conversations.Actions.HasUnreadMessages).name] = function(p15, p16) --[[ Line: 449 ]]
+		-- upvalues: CryoModule (copy)
+		local Id = p15.conversation and p15.conversation.id
+		local config = { hasUnreadMessages = true }
 		
-		if id == nil then return end
-		local conversation = p22.getConversation(id, false)
+		if Id == nil then return end
+		local Conversation = p16.getConversation(Id, false)
 		
-		if conversation == nil then
+		if Conversation ~= nil then
+			p16.upsertConversation(CryoModule.Dictionary.join(Conversation, config), false)
+			
 			return
 		end
-		p22.upsertConversation(cryoModule.Dictionary.join(conversation, t), false)
 	end,
-	[readConversationModule.name] = function(p21, p22)
-		-- upvalues: cryoModule (ref)
-		local conversationId = p21.conversationId
-		local t = { hasUnreadMessages = false }
+	[require(AppChat.Conversations.Actions.ReadConversation).name] = function(p15, p16) --[[ Line: 455 ]]
+		-- upvalues: CryoModule (copy)
+		local ConversationId = p15.conversationId
+		local config = { hasUnreadMessages = false }
 		
-		if conversationId == nil then return end
-		local conversation = p22.getConversation(conversationId, false)
+		if ConversationId == nil then return end
+		local Conversation = p16.getConversation(ConversationId, false)
 		
-		if conversation == nil then
+		if Conversation ~= nil then
+			p16.upsertConversation(CryoModule.Dictionary.join(Conversation, config), false)
+			
 			return
 		end
-		p22.upsertConversation(cryoModule.Dictionary.join(conversation, t), false)
 	end,
-	[setUserTypingModule.name] = function(value, p21)
-		local conversationId = value.conversationId and p21.getConversation(value.conversationId, false)
+	[require(AppChat.Conversations.Actions.SetUserTyping).name] = function(p15, p16) --[[ Line: 479 ]]
+		local Conversation = p15.conversationId and p16.getConversation(p15.conversationId, false)
 		
-		if conversationId == nil then
+		if Conversation ~= nil then
+			local Copy = table.clone(Conversation.usersTyping or {})
+			Copy[p15.userId] = p15.value
+			p16.setUsersTyping(p15.conversationId, Copy)
+			
 			return
 		end
-		local cloned = table.clone(conversationId.usersTyping or {})
-		cloned[value.userId] = value.value
-		p21.setUsersTyping(value.conversationId, cloned)
 	end,
-	[setConversationLoadingStatusModule.name] = function(value, p21)
-		-- upvalues: cryoModule (ref)
-		local conversationId = value.conversationId
-		local t = { initialLoadingStatus = value.value }
+	[require(AppChat.Conversations.Actions.SetConversationLoadingStatus).name] = function(p15, p16) --[[ Line: 489 ]]
+		-- upvalues: CryoModule (copy)
+		local ConversationId = p15.conversationId
+		local config = { initialLoadingStatus = p15.value }
 		
-		if conversationId == nil then return end
-		local conversation = p21.getConversation(conversationId, false)
+		if ConversationId == nil then return end
+		local Conversation = p16.getConversation(ConversationId, false)
 		
-		if conversation == nil then
+		if Conversation ~= nil then
+			p16.upsertConversation(CryoModule.Dictionary.join(Conversation, config), false)
+			
 			return
 		end
-		p21.upsertConversation(cryoModule.Dictionary.join(conversation, t), false)
 	end,
-	[setUserLeavingConversationModule.name] = function(value, p21)
-		-- upvalues: cryoModule (ref)
-		local id = value.id
-		local t = { isUserLeaving = value.isLeaving }
+	[require(AppChat.Conversations.Actions.SetUserLeavingConversation).name] = function(p15, p16) --[[ Line: 495 ]]
+		-- upvalues: CryoModule (copy)
+		local Id = p15.id
+		local config = { isUserLeaving = p15.isLeaving }
 		
-		if id == nil then return end
-		local conversation = p21.getConversation(id, false)
+		if Id == nil then return end
+		local Conversation = p16.getConversation(Id, false)
 		
-		if conversation == nil then
+		if Conversation ~= nil then
+			p16.upsertConversation(CryoModule.Dictionary.join(Conversation, config), false)
+			
 			return
 		end
-		p21.upsertConversation(cryoModule.Dictionary.join(conversation, t), false)
 	end,
-	[setPinnedGameForConversationModule.name] = function(value, p21)
-		-- upvalues: cryoModule (ref)
-		local conversationId = value.conversationId
-		local t = {
+	[require(AppChat.Conversations.Actions.SetPinnedGameForConversation).name] = function(p15, p16) --[[ Line: 501 ]]
+		-- upvalues: CryoModule (copy)
+		local ConversationId = p15.conversationId
+		local config = {
 			pinnedGame = {
-				rootPlaceId = value.rootPlaceId,
-				universeId = value.universeId
+				rootPlaceId = p15.rootPlaceId,
+				universeId = p15.universeId
 			}
 		}
 		
-		if conversationId == nil then return end
-		local conversation = p21.getConversation(conversationId, false)
+		if ConversationId == nil then return end
+		local Conversation = p16.getConversation(ConversationId, false)
 		
-		if conversation == nil then
+		if Conversation ~= nil then
+			p16.upsertConversation(CryoModule.Dictionary.join(Conversation, config), false)
+			
 			return
 		end
-		p21.upsertConversation(cryoModule.Dictionary.join(conversation, t), false)
 	end,
-	[conversationModerationTypeChangedModule.name] = function(p21, p22)
-		-- upvalues: cryoModule (ref)
-		local conversationId = p21.conversationId
-		local t = { moderationType = p21.moderationType }
+	[require(AppChat.Conversations.Actions.ConversationModerationTypeChanged).name] = function(p15, p16) --[[ Line: 510 ]]
+		-- upvalues: CryoModule (copy)
+		local ConversationId = p15.conversationId
+		local config = { moderationType = p15.moderationType }
 		
-		if conversationId == nil then return end
-		local conversation = p22.getConversation(conversationId, false)
+		if ConversationId == nil then return end
+		local Conversation = p16.getConversation(ConversationId, false)
 		
-		if conversation == nil then
+		if Conversation ~= nil then
+			p16.upsertConversation(CryoModule.Dictionary.join(Conversation, config), false)
+			
 			return
 		end
-		p22.upsertConversation(cryoModule.Dictionary.join(conversation, t), false)
 	end,
-	[friendConversationCreatedModule.name] = function(p21, p22)
-		-- upvalues: fFlagAppChatServerSideConversationSearchModule (ref), getConversationSearchDataHydrationModule (ref)
-		if p21.oldFriendConversationId then
-			p22.removeConversation(p21.oldFriendConversationId)
+	[require(AppChat.Conversations.Actions.FriendConversationCreated).name] = function(p15, p16) --[[ Line: 533 ]]
+		-- upvalues: FFlagAppChatAnyServerSideConversationSearchModule (copy), GetConversationSearchDataHydrationModule (copy)
+		if p15.oldFriendConversationId then
+			p16.removeConversation(p15.oldFriendConversationId)
 		end
-		if fFlagAppChatServerSideConversationSearchModule then
-			getConversationSearchDataHydrationModule(false).invalidate()
+		if FFlagAppChatAnyServerSideConversationSearchModule then
+			GetConversationSearchDataHydrationModule(false).invalidate()
 		end
 	end,
-	[friendshipDestroyedModule.name] = function(p21, p22)
-		-- upvalues: conversationChannelsModule (ref)
-		local var15 = if p21.userId1 ~= "localUserId" then if p21.userId2 ~= "localUserId" then nil else p21.userId2 else p21.userId1
+	[require(AppChat.Actions.FriendshipDestroyed).name] = function(p15, p16) --[[ Line: 543 ]]
+		-- upvalues: ConversationChannelsModule (copy)
+		local UserId2 = if p15.userId1 == "localUserId" then if p15.userId2 == "localUserId" then nil else p15.userId2 else p15.userId1
 		
-		if var15 == nil then
+		if UserId2 ~= nil then
+			p16.removeConversation(ConversationChannelsModule.getFriendConversationId({ UserId2 }))
+			
 			return
 		end
-		p22.removeConversation(conversationChannelsModule.getFriendConversationId({ var15 }))
 	end,
-	[requestPageConversationsModule.name] = function(_, p21)
-		p21.setListStatus({ isFetchingConversations = true })
+	[require(AppChat.Conversations.Actions.RequestPageConversations).name] = function(_, p15) --[[ Line: 590 ]]
+		p15.setListStatus({ isFetchingConversations = true })
 	end,
-	[receivedPageConversationsModule.name] = function(_, p21)
-		p21.setListStatus({ isFetchingConversations = false })
+	[require(AppChat.Conversations.Actions.ReceivedPageConversations).name] = function(_, p15) --[[ Line: 596 ]]
+		p15.setListStatus({ isFetchingConversations = false })
 	end,
-	[requestLatestMessagesModule.name] = function(_, _)
-		-- upvalues: getConversationListStoreModule (ref)
-		getConversationListStoreModule(false).setLatestMessagesFetching(true)
+	[require(AppChat.Conversations.Actions.RequestLatestMessages).name] = function(_, _) --[[ Line: 602 ]]
+		-- upvalues: GetConversationListStoreModule (copy)
+		GetConversationListStoreModule(false).setLatestMessagesFetching(true)
 	end,
-	[receivedLatestMessagesModule.name] = function(_, _)
-		-- upvalues: getConversationListStoreModule (ref)
-		getConversationListStoreModule(false).setLatestMessagesFetching(false)
+	[require(AppChat.Conversations.Actions.ReceivedLatestMessages).name] = function(_, _) --[[ Line: 606 ]]
+		-- upvalues: GetConversationListStoreModule (copy)
+		GetConversationListStoreModule(false).setLatestMessagesFetching(false)
 	end,
-	[appChatNetworkingModule.rodux.GetNewerMessages.Succeeded.name] = function(p21, p22)
-		-- upvalues: updateConversationLastUpdatedFromMessages (ref), shouldMarkConversationUnreadFromMessages (ref)
-		local conversationId = p21.queryArgs and p21.queryArgs.conversation_id
-		local responseBody = p21.responseBody
-		local messages = responseBody and responseBody.messages
-		updateConversationLastUpdatedFromMessages(p22, conversationId, messages, shouldMarkConversationUnreadFromMessages(conversationId, messages))
+	[AppChatNetworkingModule.rodux.GetNewerMessages.Succeeded.name] = function(p15, p16) --[[ Line: 628 ]]
+		-- upvalues: FFlagAppChatDerivedConversationLatestActivityModule (copy), updateConversationFromMessages (copy), shouldMarkConversationUnreadFromMessages (copy), updateConversationLastUpdatedFromMessages (copy)
+		local ConversationId = p15.queryArgs and p15.queryArgs.conversation_id
+		local ResponseBody = p15.responseBody
+		local Messages = ResponseBody and ResponseBody.messages
+		
+		if FFlagAppChatDerivedConversationLatestActivityModule then
+			updateConversationFromMessages(p16, ConversationId, Messages, (shouldMarkConversationUnreadFromMessages(ConversationId, Messages)))
+			
+			return
+		else
+			updateConversationLastUpdatedFromMessages(p16, ConversationId, Messages, (shouldMarkConversationUnreadFromMessages(ConversationId, Messages)))
+		end
 	end,
-	[receivedOldestConversationModule.name] = function(_, p21)
-		p21.setListStatus({ oldestConversationIsFetched = true })
+	[require(AppChat.Conversations.Actions.ReceivedOldestConversation).name] = function(_, p15) --[[ Line: 673 ]]
+		p15.setListStatus({ oldestConversationIsFetched = true })
 	end,
-	[receivedChannelsMigrationConflictModule.name] = function(_, p21)
-		-- upvalues: getConversationListStoreModule (ref)
-		p21.clear()
-		getConversationListStoreModule(false).setLatestMessagesFetching(false)
+	[require(AppChat.Conversations.Actions.ReceivedChannelsMigrationConflict).name] = function(_, p15) --[[ Line: 679 ]]
+		-- upvalues: GetConversationListStoreModule (copy)
+		p15.clear()
+		GetConversationListStoreModule(false).setLatestMessagesFetching(false)
 	end
 }
 
-return function(value, _)
-	-- upvalues: fFlagAppChatConversationStoreModule (ref), t_1 (ref), getConversationStoreModule (ref)
-	return function(p21)
-		-- upvalues: value (ref), fFlagAppChatConversationStoreModule (copy), t_1 (copy), getConversationStoreModule (copy)
-		local var15 = value(p21)
+return function(Callback, _) --[[ Line: 724 | Named "SignalsConversationMiddleware" ]]
+	-- upvalues: FFlagAppChatConversationStoreModule (copy), config1 (copy), GetConversationStoreModule (copy)
+	return function(p15) --[[ Line: 725 ]]
+		-- upvalues: Callback (copy), FFlagAppChatConversationStoreModule (upval), config1 (upval), GetConversationStoreModule (upval)
+		local CallbackResult = Callback(p15)
 		
-		if not fFlagAppChatConversationStoreModule then
-			return var15
+		if not FFlagAppChatConversationStoreModule then
+			return CallbackResult
 		end
-		local type = t_1[p21.type]
+		local Entry: (any, any) -> () = config1[p15.type]
 		
-		if type then
-			type(p21, getConversationStoreModule(false))
+		if Entry then
+			Entry(p15, GetConversationStoreModule(false))
 		end
-		return var15
+		return CallbackResult
 	end
 end

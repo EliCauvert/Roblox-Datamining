@@ -1,1 +1,1 @@
-﻿return require(script.DisplayQRCodeFromMatrix)
+﻿return (require(script.DisplayQRCodeFromMatrix))

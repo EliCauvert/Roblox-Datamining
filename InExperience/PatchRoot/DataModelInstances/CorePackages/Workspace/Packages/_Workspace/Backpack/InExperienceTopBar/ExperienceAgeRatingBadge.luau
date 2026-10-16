@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent.Parent._Workspace.InExperienceTopBar.InExperienceTopBar.Components.ExperienceAgeRatingBadge.ExperienceAgeRatingBadgeContainer)
+﻿return (require(script.Parent.Parent.Parent.Parent._Workspace.InExperienceTopBar.InExperienceTopBar.Components.ExperienceAgeRatingBadge.ExperienceAgeRatingBadgeContainer))

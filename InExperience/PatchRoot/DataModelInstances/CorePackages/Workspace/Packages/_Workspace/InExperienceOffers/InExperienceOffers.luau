@@ -1,11 +1,9 @@
-﻿local getAllUserOffersModule = require(script.Api.getAllUserOffers)
-local getOffersStoreModule = require(script.Stores.GetOffersStore)
-local _ = require(script.Stores.GetOffersStore.createOffersStore)
+﻿local _ = require(script.Stores.GetOffersStore.createOffersStore)
 local _ = require(script.Types)
 
 return {
-	getAllUserOffers = getAllUserOffersModule,
-	getOffersStore = getOffersStoreModule,
+	getAllUserOffers = require(script.Api.getAllUserOffers),
+	getOffersStore = require(script.Stores.GetOffersStore),
 	FeatureKeys = require(script.Enums.FeatureKey),
 	NotificationLocation = require(script.Enums.NotificationLocation),
 	OfferStatuses = require(script.Enums.OfferStatus),

@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Index.Markdown.Markdown)
+﻿return (require(script.Parent._Index.Markdown.Markdown))

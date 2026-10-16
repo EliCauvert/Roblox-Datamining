@@ -1,96 +1,84 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local components = foundation.Components
-local iconModule = require(components.Icon)
-local iconButtonModule = require(components.IconButton)
-local inputFieldModule = require(components.InputField)
-local internalTextInputModule = require(components.InternalTextInput)
-local _ = require(foundation.Components.Types)
-local viewModule = require(components.View)
-local useTextInputVariantsModule = require(foundation.Components.TextInput.useTextInputVariants)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local _ = require(foundation.Enums.InputVariant)
-local getInputTextSizeModule = require(foundation.Utility.getInputTextSize)
-local _ = require(foundation.Enums.ControlState)
-local t = {
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local Components = Foundation.Components
+local IconModule = require(Components.Icon)
+local IconButtonModule = require(Components.IconButton)
+local InputFieldModule = require(Components.InputField)
+local InternalTextInputModule = require(Components.InternalTextInput)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Components.View)
+local UseTextInputVariantsModule = require(Foundation.Components.TextInput.useTextInputVariants)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local _ = require(Foundation.Enums.InputVariant)
+local GetInputTextSizeModule = require(Foundation.Utility.getInputTextSize)
+local _ = require(Foundation.Enums.ControlState)
+local config = {
 	testId = "--foundation-text-input",
-	size = inputSizeModule.Large
+	size = require(Foundation.Enums.InputSize).Large
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useTextInputVariantsModule (ref), reactModule (ref), inputFieldModule (ref), withCommonPropsModule (ref), getInputTextSizeModule (ref), internalTextInputModule (ref), viewModule (ref), iconModule (ref), iconButtonModule (ref)
-	local var1 = withDefaultsModule(p1, t)
-	local var2 = useTextInputVariantsModule(useTokensModule(), var1.size, var1.variant)
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 51 | Named "TextInput" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UseTextInputVariantsModule (copy), ReactModule (copy), InputFieldModule (copy), WithCommonPropsModule (copy), GetInputTextSizeModule (copy), InternalTextInputModule (copy), ViewModule (copy), IconModule (copy), IconButtonModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	local UseTextInputVariantsModuleResult = UseTextInputVariantsModule(UseTokensModule(), WithDefaultsModuleResult.size, WithDefaultsModuleResult.variant)
 	
-	return reactModule.createElement(inputFieldModule, withCommonPropsModule(var1, {
-		width = var1.width,
-		ref = p2,
-		label = var1.label,
-		size = getInputTextSizeModule(var1.size),
-		isRequired = var1.isRequired,
-		isDisabled = var1.isDisabled,
-		hasError = var1.hasError,
-		hint = var1.hint,
-		textBoxRef = var1.textBoxRef,
-		input = function(p3)
-			-- upvalues: reactModule (copy), internalTextInputModule (copy), var1 (ref), var2 (ref), viewModule (copy), iconModule (copy), iconButtonModule (copy)
-			local var3
-			local createElement = reactModule.createElement
-			local t = {
-				ref = p3,
-				inputRef = var1.inputRef,
-				hasError = var1.hasError,
-				isDisabled = var1.isDisabled,
-				hasClearButton = var1.hasClearButton,
-				text = var1.text,
-				textInputType = var1.textInputType,
-				focusBehavior = var1.focusBehavior,
-				size = var1.size,
-				variant = var1.variant,
-				Selectable = var1.Selectable,
-				NextSelectionUp = var1.NextSelectionUp,
-				NextSelectionDown = var1.NextSelectionDown,
-				NextSelectionLeft = var1.NextSelectionLeft,
-				NextSelectionRight = var1.NextSelectionRight,
+	return ReactModule.createElement(InputFieldModule, WithCommonPropsModule(WithDefaultsModuleResult, {
+		width = WithDefaultsModuleResult.width,
+		ref = Ref,
+		label = WithDefaultsModuleResult.label,
+		size = GetInputTextSizeModule(WithDefaultsModuleResult.size),
+		isRequired = WithDefaultsModuleResult.isRequired,
+		isDisabled = WithDefaultsModuleResult.isDisabled,
+		hasError = WithDefaultsModuleResult.hasError,
+		hint = WithDefaultsModuleResult.hint,
+		textBoxRef = WithDefaultsModuleResult.textBoxRef,
+		input = function(Ref) --[[ Line: 68 ]]
+			-- upvalues: ReactModule (upval), InternalTextInputModule (upval), WithDefaultsModuleResult (copy), UseTextInputVariantsModuleResult (copy), ViewModule (upval), IconModule (upval), IconButtonModule (upval)
+			return ReactModule.createElement(InternalTextInputModule, {
+				ref = Ref,
+				inputRef = WithDefaultsModuleResult.inputRef,
+				hasError = WithDefaultsModuleResult.hasError,
+				isDisabled = WithDefaultsModuleResult.isDisabled,
+				hasClearButton = WithDefaultsModuleResult.hasClearButton,
+				text = WithDefaultsModuleResult.text,
+				textInputType = WithDefaultsModuleResult.textInputType,
+				focusBehavior = WithDefaultsModuleResult.focusBehavior,
+				size = WithDefaultsModuleResult.size,
+				variant = WithDefaultsModuleResult.variant,
+				Selectable = WithDefaultsModuleResult.Selectable,
+				NextSelectionUp = WithDefaultsModuleResult.NextSelectionUp,
+				NextSelectionDown = WithDefaultsModuleResult.NextSelectionDown,
+				NextSelectionLeft = WithDefaultsModuleResult.NextSelectionLeft,
+				NextSelectionRight = WithDefaultsModuleResult.NextSelectionRight,
 				horizontalPadding = {
-					left = var2.container.horizontalPadding,
-					right = var2.container.horizontalPadding
+					left = UseTextInputVariantsModuleResult.container.horizontalPadding,
+					right = UseTextInputVariantsModuleResult.container.horizontalPadding
 				},
-				onChanged = var1.onChanged,
-				onFocus = var1.onFocusGained,
-				onFocusLost = var1.onFocusLost,
-				onReturnPressed = var1.onReturnPressed,
-				placeholder = var1.placeholder,
-				leadingElement = if var1.leadingIcon then reactModule.createElement(viewModule, { tag = "row align-y-center size-0-full auto-x" }, reactModule.createElement(iconModule, {
-					name = var1.leadingIcon,
-					style = var2.icon.style,
-					size = var2.icon.size
-				})) else nil
-			}
-			
-			if var1.iconTrailing then
-				var3 = reactModule.createElement
-				var3 = var3(viewModule, { tag = "row align-y-center size-0-full auto-x" }, if type(var1.iconTrailing) == "table" and var1.iconTrailing.onActivated then reactModule.createElement(iconButtonModule, {
-					onActivated = var1.iconTrailing.onActivated,
-					isDisabled = var1.isDisabled,
-					size = var2.icon.size,
-					icon = var1.iconTrailing.name,
-					testId = `{var1.testId}--trailing-icon-button`
-				}) else reactModule.createElement(iconModule, {
-					name = if type(var1.iconTrailing) == "table" then var1.iconTrailing.name else var1.iconTrailing,
-					style = var2.icon.style,
-					size = var2.icon.size
-				}))
-			else
-				var3 = nil
-			end
-			t.trailingElement = var3
-			t.testId = `{var1.testId}--internal-text-input`
-			
-			return createElement(internalTextInputModule, t)
+				onChanged = WithDefaultsModuleResult.onChanged,
+				onFocus = WithDefaultsModuleResult.onFocusGained,
+				onFocusLost = WithDefaultsModuleResult.onFocusLost,
+				onReturnPressed = WithDefaultsModuleResult.onReturnPressed,
+				placeholder = WithDefaultsModuleResult.placeholder,
+				leadingElement = if WithDefaultsModuleResult.leadingIcon then ReactModule.createElement(ViewModule, { tag = "row align-y-center size-0-full auto-x" }, ReactModule.createElement(IconModule, {
+					name = WithDefaultsModuleResult.leadingIcon,
+					style = UseTextInputVariantsModuleResult.icon.style,
+					size = UseTextInputVariantsModuleResult.icon.size
+				})) else nil,
+				trailingElement = if WithDefaultsModuleResult.iconTrailing then ReactModule.createElement(ViewModule, { tag = "row align-y-center size-0-full auto-x" }, if type(WithDefaultsModuleResult.iconTrailing) == "table" and WithDefaultsModuleResult.iconTrailing.onActivated then ReactModule.createElement(IconButtonModule, {
+					onActivated = WithDefaultsModuleResult.iconTrailing.onActivated,
+					isDisabled = WithDefaultsModuleResult.isDisabled,
+					size = UseTextInputVariantsModuleResult.icon.size,
+					icon = WithDefaultsModuleResult.iconTrailing.name,
+					testId = `{WithDefaultsModuleResult.testId}--trailing-icon-button`
+				}) else ReactModule.createElement(IconModule, {
+					name = if type(WithDefaultsModuleResult.iconTrailing) == "table" then WithDefaultsModuleResult.iconTrailing.name else WithDefaultsModuleResult.iconTrailing,
+					style = UseTextInputVariantsModuleResult.icon.style,
+					size = UseTextInputVariantsModuleResult.icon.size
+				})) else nil,
+				testId = `{WithDefaultsModuleResult.testId}--internal-text-input`
+			})
 		end
 	}))
 end))

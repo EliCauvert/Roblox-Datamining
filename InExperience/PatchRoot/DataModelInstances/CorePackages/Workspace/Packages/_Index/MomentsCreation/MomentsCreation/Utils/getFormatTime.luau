@@ -1,5 +1,5 @@
-﻿return function(p1)
-	local maxValue = math.max(0, math.floor(p1))
+﻿return function(Value: number): string --[[ Line: 7 | Named "getFormatTime" ]]
+	local Largest = math.max(0, (math.floor(Value)))
 	
-	return string.format("%d:%02d", math.floor(maxValue / 60), maxValue % 60)
+	return string.format("%d:%02d", math.floor(Largest / 60), Largest % 60)
 end

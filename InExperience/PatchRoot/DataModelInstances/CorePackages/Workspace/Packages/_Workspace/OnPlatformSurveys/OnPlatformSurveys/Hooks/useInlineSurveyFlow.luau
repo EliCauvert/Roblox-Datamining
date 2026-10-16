@@ -1,220 +1,227 @@
-﻿local onPlatformSurveys = script:FindFirstAncestor("OnPlatformSurveys")
-local parent = onPlatformSurveys.Parent
-local httpService = game:GetService("HttpService")
-local userInputService = game:GetService("UserInputService")
-local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagInlineSurveyEnhancements = sharedFlagsModule.FFlagInlineSurveyEnhancements
-local fFlagInlineSurveyBranching = sharedFlagsModule.FFlagInlineSurveyBranching
-local fFlagInlineSurveyPartialResponse = sharedFlagsModule.FFlagInlineSurveyPartialResponse
-local inlineSurveyHelpersModule = require(onPlatformSurveys.Utils.inlineSurveyHelpers)
-local inlineSurveyApiModule = require(onPlatformSurveys.Api.inlineSurveyApi)
-local phaseModule = require(onPlatformSurveys.Enums.Phase)
-local inlineSurveyReducerModule = require(onPlatformSurveys.Hooks.inlineSurveyReducer)
-local _ = require(onPlatformSurveys.Types.InlineSurveyTypes)
+﻿local OnPlatformSurveys = script:FindFirstAncestor("OnPlatformSurveys")
+local Parent = OnPlatformSurveys.Parent
+local HttpService = game:GetService("HttpService")
+local UserInputService = game:GetService("UserInputService")
+local ReactModule = require(Parent.React)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagInlineSurveyEnhancements = SharedFlagsModule.FFlagInlineSurveyEnhancements
+local FFlagInlineSurveyBranching = SharedFlagsModule.FFlagInlineSurveyBranching
+local FFlagInlineSurveyPartialResponse = SharedFlagsModule.FFlagInlineSurveyPartialResponse
+local InlineSurveyHelpersModule = require(OnPlatformSurveys.Utils.inlineSurveyHelpers)
+local InlineSurveyApiModule = require(OnPlatformSurveys.Api.inlineSurveyApi)
+local PhaseModule = require(OnPlatformSurveys.Enums.Phase)
+local InlineSurveyReducerModule = require(OnPlatformSurveys.Hooks.inlineSurveyReducer)
+local _ = require(OnPlatformSurveys.Types.InlineSurveyTypes)
 
-local function _()
-	-- upvalues: userInputService (ref)
-	local focusedTextBox = userInputService:GetFocusedTextBox()
+local function _() --[[ Line: 46 | Named "releaseKeyboardFocus" ]]
+	-- upvalues: UserInputService (copy)
+	local FocusedTextBox = UserInputService:GetFocusedTextBox()
 	
-	if focusedTextBox ~= nil then
-		focusedTextBox:ReleaseFocus()
+	if FocusedTextBox ~= nil then
+		FocusedTextBox:ReleaseFocus()
 	end
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), inlineSurveyReducerModule (ref), inlineSurveyApiModule (ref), inlineSurveyHelpersModule (ref), fFlagInlineSurveyBranching (ref), httpService (ref), fFlagInlineSurveyEnhancements (ref), userInputService (ref), phaseModule (ref), fFlagInlineSurveyPartialResponse (ref)
-	local networkImpl = p1.networkImpl
-	local eventType = p1.eventType
-	local var1, var2 = reactModule.useReducer(inlineSurveyReducerModule.reducer, p1.hasInvite == true, inlineSurveyReducerModule.getInitialState)
-	local var3 = reactModule.useRef(0)
-	local var4 = reactModule.useRef(false)
-	local var5 = reactModule.useRef(var1)
-	var5.current = var1
-	local var6 = reactModule.useRef(p1.onClose)
-	var6.current = p1.onClose
-	local var7 = reactModule.useRef(p1.onComplete)
-	var7.current = p1.onComplete
-	local var8 = reactModule.useRef(p1.onEligible)
-	var8.current = p1.onEligible
-	local var9 = reactModule.useRef(false)
-	local var10 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref), var4 (ref), var9 (ref), var2 (ref), inlineSurveyApiModule (copy), networkImpl (ref), eventType (ref)
-		local var11 = var3.current + 1
-		var3.current = var11
-		var4.current = false
-		var9.current = false
-		var2({ type = "fetchRequested" })
-		inlineSurveyApiModule.fetchInlineSurvey(networkImpl, eventType):andThen(function(p2)
-			-- upvalues: var3 (copy), var11 (ref), var2 (copy)
-			if var3.current == var11 then
-				var2({ type = "questionsReceived", response = p2 })
+return function(p1) --[[ Line: 53 | Named "useInlineSurveyFlow" ]]
+	-- upvalues: ReactModule (copy), InlineSurveyReducerModule (copy), InlineSurveyApiModule (copy), InlineSurveyHelpersModule (copy), FFlagInlineSurveyBranching (copy), HttpService (copy), FFlagInlineSurveyEnhancements (copy), UserInputService (copy), PhaseModule (copy), FFlagInlineSurveyPartialResponse (copy)
+	local NetworkImpl = p1.networkImpl
+	local EventType = p1.eventType
+	local UseReducerResult, UseReducerResult2 = ReactModule.useReducer(InlineSurveyReducerModule.reducer, p1.hasInvite == true, InlineSurveyReducerModule.getInitialState)
+	local UseRefResult = ReactModule.useRef(0)
+	local UseRefResult1 = ReactModule.useRef(false)
+	local UseRefResult2 = ReactModule.useRef(UseReducerResult)
+	UseRefResult2.current = UseReducerResult
+	local UseRefResult3 = ReactModule.useRef(p1.onClose)
+	UseRefResult3.current = p1.onClose
+	local UseRefResult4 = ReactModule.useRef(p1.onComplete)
+	UseRefResult4.current = p1.onComplete
+	local UseRefResult5 = ReactModule.useRef(p1.onEligible)
+	UseRefResult5.current = p1.onEligible
+	local UseRefResult6 = ReactModule.useRef(false)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 75 ]]
+		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), UseRefResult6 (copy), UseReducerResult2 (copy), InlineSurveyApiModule (upval), NetworkImpl (copy), EventType (copy)
+		local NewCurrent = UseRefResult.current + 1
+		UseRefResult.current = NewCurrent
+		UseRefResult1.current = false
+		UseRefResult6.current = false
+		UseReducerResult2({ type = "fetchRequested" })
+		InlineSurveyApiModule.fetchInlineSurvey(NetworkImpl, EventType):andThen(function(Result) --[[ Line: 82 ]]
+			-- upvalues: UseRefResult (upval), NewCurrent (copy), UseReducerResult2 (upval)
+			if UseRefResult.current == NewCurrent then
+				UseReducerResult2({ type = "questionsReceived", response = Result })
 				
 				return
 			end
-		end):catch(function(p2)
-			-- upvalues: var3 (copy), var11 (ref), var2 (copy)
-			if var3.current == var11 then
-				warn("Inline survey fetch failed:", p2)
-				var2({ type = "fetchFailed" })
-				
-				return
-			end
-		end)
-	end, { networkImpl, eventType })
-	local var11 = reactModule.useCallback(function()
-		-- upvalues: var5 (ref), var4 (ref), inlineSurveyHelpersModule (copy), fFlagInlineSurveyBranching (copy), httpService (copy), var2 (ref), var3 (ref), inlineSurveyApiModule (copy), networkImpl (ref)
-		local current = var5.current
-		
-		if var4.current then return end
-		local index = current.questions[current.index]
-		local surveyId = current.surveyId
-		
-		if index == nil or surveyId == nil then return end
-		local var12 = inlineSurveyHelpersModule.mergeCurrentAnswerIntoBatch(current.answersByQuestionId, index, current.answer)
-		local var13 = if fFlagInlineSurveyBranching then inlineSurveyHelpersModule.getVisitedQuestions(current.questions, var12) else current.questions
-		
-		if not inlineSurveyHelpersModule.canSubmitAll(var13, var12) then return end
-		local idempotencyKey = current.idempotencyKey or httpService:GenerateGUID(false)
-		local var14 = inlineSurveyHelpersModule.buildSubmitPayload(surveyId, var13, var12, idempotencyKey)
-		
-		if #var14.answers == 0 then
-			var2({ type = "submitSucceeded" })
-			
-			return
-		end
-		local var15 = var3.current + 1
-		var3.current = var15
-		var4.current = true
-		var2({ type = "submitStarted", idempotencyKey = idempotencyKey })
-		inlineSurveyApiModule.submitSurveyResponse(networkImpl, var14):andThen(function(_)
-			-- upvalues: var3 (copy), var15 (ref), var4 (copy), var2 (copy)
-			if var3.current == var15 then
-				var4.current = false
-				var2({ type = "submitSucceeded" })
-				
-				return
-			end
-		end):catch(function(p2)
-			-- upvalues: var3 (copy), var15 (ref), var4 (copy), var2 (copy)
-			if var3.current == var15 then
-				var4.current = false
-				warn("Inline survey submit failed:", p2)
-				var2({ type = "submitFailed" })
+		end):catch(function(Err) --[[ Line: 88 ]]
+			-- upvalues: UseRefResult (upval), NewCurrent (copy), UseReducerResult2 (upval)
+			if UseRefResult.current == NewCurrent then
+				warn("Inline survey fetch failed:", Err)
+				UseReducerResult2({ type = "fetchFailed" })
 				
 				return
 			end
 		end)
-	end, { networkImpl })
-	local var12 = reactModule.useCallback(function()
-		-- upvalues: var5 (ref), var4 (ref), fFlagInlineSurveyEnhancements (copy), var11 (ref), inlineSurveyHelpersModule (copy), userInputService (copy), var2 (ref)
-		local current = var5.current
+	end, { NetworkImpl, EventType })
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 97 ]]
+		-- upvalues: UseRefResult2 (copy), UseRefResult1 (copy), InlineSurveyHelpersModule (upval), FFlagInlineSurveyBranching (upval), HttpService (upval), UseReducerResult2 (copy), UseRefResult (copy), InlineSurveyApiModule (upval), NetworkImpl (copy)
+		local Current = UseRefResult2.current
 		
-		if current.questions[current.index] == nil or var4.current then return end
-		if not fFlagInlineSurveyEnhancements then
-			var11()
-			
-			return
-		elseif not inlineSurveyHelpersModule.canAdvance(current.questions, current.index, current.answersByQuestionId, current.answer) then return end
-		local focusedTextBox = userInputService:GetFocusedTextBox()
+		if UseRefResult1.current then return end
+		local Question = Current.questions[Current.index]
+		local SurveyId = Current.surveyId
 		
-		if focusedTextBox ~= nil then
-			focusedTextBox:ReleaseFocus()
+		if Question == nil or SurveyId == nil then return end
+		local MergeCurrentAnswerIntoBatchResult = InlineSurveyHelpersModule.mergeCurrentAnswerIntoBatch(Current.answersByQuestionId, Question, Current.answer)
+		local VisitedQuestions = if FFlagInlineSurveyBranching then InlineSurveyHelpersModule.getVisitedQuestions(Current.questions, MergeCurrentAnswerIntoBatchResult) else Current.questions
+		
+		if not InlineSurveyHelpersModule.canSubmitAll(VisitedQuestions, MergeCurrentAnswerIntoBatchResult) then return end
+		local IdempotencyKey = Current.idempotencyKey or HttpService:GenerateGUID(false)
+		local SubmitPayload = InlineSurveyHelpersModule.buildSubmitPayload(SurveyId, VisitedQuestions, MergeCurrentAnswerIntoBatchResult, IdempotencyKey)
+		
+		if #SubmitPayload.answers == 0 then
+			UseReducerResult2({ type = "submitSucceeded" })
+			
+			return
+		else
+			local NewCurrent = UseRefResult.current + 1
+			UseRefResult.current = NewCurrent
+			UseRefResult1.current = true
+			UseReducerResult2({ type = "submitStarted", idempotencyKey = IdempotencyKey })
+			InlineSurveyApiModule.submitSurveyResponse(NetworkImpl, SubmitPayload):andThen(function(_) --[[ Line: 131 ]]
+				-- upvalues: UseRefResult (upval), NewCurrent (copy), UseRefResult1 (upval), UseReducerResult2 (upval)
+				if UseRefResult.current == NewCurrent then
+					UseRefResult1.current = false
+					UseReducerResult2({ type = "submitSucceeded" })
+					
+					return
+				end
+			end):catch(function(Err) --[[ Line: 138 ]]
+				-- upvalues: UseRefResult (upval), NewCurrent (copy), UseRefResult1 (upval), UseReducerResult2 (upval)
+				if UseRefResult.current == NewCurrent then
+					UseRefResult1.current = false
+					warn("Inline survey submit failed:", Err)
+					UseReducerResult2({ type = "submitFailed" })
+					
+					return
+				end
+			end)
 		end
-		if inlineSurveyHelpersModule.isLastQuestion(current.questions, current.index, current.answer) then
-			var11()
+	end, { NetworkImpl })
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 149 ]]
+		-- upvalues: UseRefResult2 (copy), UseRefResult1 (copy), FFlagInlineSurveyEnhancements (upval), UseResult1 (copy), InlineSurveyHelpersModule (upval), UserInputService (upval), UseReducerResult2 (copy)
+		local Current = UseRefResult2.current
+		
+		if Current.questions[Current.index] == nil or UseRefResult1.current then return end
+		if not FFlagInlineSurveyEnhancements then
+			UseResult1()
 			
 			return
 		end
-		var2({ type = "next" })
-	end, { var11 })
-	local var13 = reactModule.useCallback(function()
-		-- upvalues: var5 (ref), var11 (ref), var10 (ref)
-		if var5.current.errorType == "submit" then
-			var11()
+		if not InlineSurveyHelpersModule.canAdvance(Current.questions, Current.index, Current.answersByQuestionId, Current.answer) then return end
+		local FocusedTextBox = UserInputService:GetFocusedTextBox()
+		
+		if FocusedTextBox ~= nil then
+			FocusedTextBox:ReleaseFocus()
+		end
+		if InlineSurveyHelpersModule.isLastQuestion(Current.questions, Current.index, Current.answer) then
+			UseResult1()
 			
 			return
+		else
+			UseReducerResult2({ type = "next" })
 		end
-		var10()
-	end, { var11, var10 })
-	local var14 = reactModule.useCallback(function(p2)
-		-- upvalues: var2 (ref)
-		var2({ type = "setAnswer", answer = p2 })
+	end, { UseResult1 })
+	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 174 ]]
+		-- upvalues: UseRefResult2 (copy), UseResult1 (copy), UseResult (copy)
+		if UseRefResult2.current.errorType == "submit" then
+			UseResult1()
+			
+			return
+		else
+			UseResult()
+		end
+	end, { UseResult1, UseResult })
+	local UseResult4 = ReactModule.useCallback(function(Answer) --[[ Line: 182 ]]
+		-- upvalues: UseReducerResult2 (copy)
+		UseReducerResult2({ type = "setAnswer", answer = Answer })
 	end, {})
-	local var15 = reactModule.useCallback(function()
-		-- upvalues: var4 (ref), var5 (ref), phaseModule (copy), httpService (copy), inlineSurveyHelpersModule (copy), inlineSurveyApiModule (copy), networkImpl (ref)
-		if var4.current then return end
-		local current = var5.current
-		local surveyId = current.surveyId
+	local UseResult5 = ReactModule.useCallback(function() --[[ Line: 187 ]]
+		-- upvalues: UseRefResult1 (copy), UseRefResult2 (copy), PhaseModule (upval), HttpService (upval), InlineSurveyHelpersModule (upval), InlineSurveyApiModule (upval), NetworkImpl (copy)
+		if UseRefResult1.current then return end
+		local Current = UseRefResult2.current
+		local SurveyId = Current.surveyId
 		
-		if surveyId == nil or current.phase == phaseModule.Completed then return end
-		local var16 = inlineSurveyHelpersModule.buildSubmitPayload(surveyId, current.questions, current.answersByQuestionId, current.idempotencyKey or httpService:GenerateGUID(false), { finished = false })
+		if SurveyId == nil or Current.phase == PhaseModule.Completed then return end
+		local SubmitPayload = InlineSurveyHelpersModule.buildSubmitPayload(SurveyId, Current.questions, Current.answersByQuestionId, Current.idempotencyKey or HttpService:GenerateGUID(false), { finished = false })
 		
-		if #var16.answers == 0 then
+		if #SubmitPayload.answers ~= 0 then
+			InlineSurveyApiModule.submitSurveyResponse(NetworkImpl, SubmitPayload):catch(function(Err) --[[ Line: 207 ]]
+				warn("Inline survey partial submit failed:", Err)
+			end)
+			
 			return
 		end
-		inlineSurveyApiModule.submitSurveyResponse(networkImpl, var16):catch(function(p2)
-			warn("Inline survey partial submit failed:", p2)
-		end)
-	end, { networkImpl })
-	local var16 = reactModule.useCallback(function()
-		-- upvalues: fFlagInlineSurveyEnhancements (copy), userInputService (copy), fFlagInlineSurveyPartialResponse (copy), var15 (ref), var3 (ref), var4 (ref), var2 (ref)
-		if fFlagInlineSurveyEnhancements then
-			local focusedTextBox = userInputService:GetFocusedTextBox()
+	end, { NetworkImpl })
+	local UseResult6 = ReactModule.useCallback(function() --[[ Line: 212 ]]
+		-- upvalues: FFlagInlineSurveyEnhancements (upval), UserInputService (upval), FFlagInlineSurveyPartialResponse (upval), UseResult5 (copy), UseRefResult (copy), UseRefResult1 (copy), UseReducerResult2 (copy)
+		if FFlagInlineSurveyEnhancements then
+			local FocusedTextBox = UserInputService:GetFocusedTextBox()
 			
-			if focusedTextBox ~= nil then
-				focusedTextBox:ReleaseFocus()
+			if FocusedTextBox ~= nil then
+				FocusedTextBox:ReleaseFocus()
 			end
 		end
-		if fFlagInlineSurveyPartialResponse then
-			var15()
+		if FFlagInlineSurveyPartialResponse then
+			UseResult5()
 		end
-		var3.current += 1
-		var4.current = false
-		var2({ type = "dismissed" })
-	end, if fFlagInlineSurveyPartialResponse then { var15 } else {})
-	local var17 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref)
-		var2({ type = "inviteAccepted" })
+		UseRefResult.current += 1
+		UseRefResult1.current = false
+		UseReducerResult2({ type = "dismissed" })
+	end, if FFlagInlineSurveyPartialResponse then { UseResult5 } else {})
+	local UseResult7 = ReactModule.useCallback(function() --[[ Line: 224 ]]
+		-- upvalues: UseReducerResult2 (copy)
+		UseReducerResult2({ type = "inviteAccepted" })
 	end, {})
-	local var18 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref), var4 (ref), var2 (ref)
-		var3.current += 1
-		var4.current = false
-		var2({ type = "inviteDeclined" })
+	local UseResult8 = ReactModule.useCallback(function() --[[ Line: 228 ]]
+		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), UseReducerResult2 (copy)
+		UseRefResult.current += 1
+		UseRefResult1.current = false
+		UseReducerResult2({ type = "inviteDeclined" })
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: var10 (ref), var3 (ref)
-		var10()
+	ReactModule.useEffect(function() --[[ Line: 235 ]]
+		-- upvalues: UseResult (copy), UseRefResult (copy)
+		UseResult()
 		
-		return function()
-			-- upvalues: var3 (copy)
-			var3.current += 1
+		return function() --[[ Line: 237 ]]
+			-- upvalues: UseRefResult (upval)
+			UseRefResult.current += 1
 		end
-	end, { var10 })
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), phaseModule (copy), var7 (ref), var6 (ref), var9 (ref), var8 (ref)
-		if var1.phase == phaseModule.Completed and var7.current then
-			var7.current()
+	end, { UseResult })
+	ReactModule.useEffect(function() --[[ Line: 242 ]]
+		-- upvalues: UseReducerResult (copy), PhaseModule (upval), UseRefResult4 (copy), UseRefResult3 (copy), UseRefResult6 (copy), UseRefResult5 (copy)
+		if UseReducerResult.phase == PhaseModule.Completed and UseRefResult4.current then
+			UseRefResult4.current()
 			
 			return
-		elseif var1.phase == phaseModule.Closed and var6.current then
-			var6.current()
+		end
+		if UseReducerResult.phase == PhaseModule.Closed and UseRefResult3.current then
+			UseRefResult3.current()
 			
 			return
-		elseif (var1.phase == phaseModule.Started or var1.phase == phaseModule.Invite) and (not var9.current and var8.current) then
-			var9.current = true
-			var8.current()
 		end
-	end, { var1.phase })
+		if (UseReducerResult.phase == PhaseModule.Started or UseReducerResult.phase == PhaseModule.Invite) and not UseRefResult6.current and UseRefResult5.current then
+			UseRefResult6.current = true
+			UseRefResult5.current()
+		end
+	end, { UseReducerResult.phase })
 	
 	return {
-		state = var1,
-		setAnswer = var14,
-		submit = var12,
-		retry = var13,
-		dismiss = var16,
-		acceptInvite = var17,
-		declineInvite = var18
+		state = UseReducerResult,
+		setAnswer = UseResult4,
+		submit = UseResult2,
+		retry = UseResult3,
+		dismiss = UseResult6,
+		acceptInvite = UseResult7,
+		declineInvite = UseResult8
 	}
 end

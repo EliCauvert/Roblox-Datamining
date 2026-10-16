@@ -1,44 +1,44 @@
-﻿local sduiSharedUtilities = script:FindFirstAncestor("SduiSharedUtilities")
-local dataHydrationModule = require(sduiSharedUtilities.Parent.DataHydration)
-local _ = require(sduiSharedUtilities.SduiIntegrationTypes)
+﻿local SduiSharedUtilities = script:FindFirstAncestor("SduiSharedUtilities")
+local DataHydrationModule = require(SduiSharedUtilities.Parent.DataHydration)
+local _ = require(SduiSharedUtilities.SduiIntegrationTypes)
 
-local function collectUniverseIds(p1, p2)
-	-- upvalues: collectUniverseIds (ref)
-	if type(p1) ~= "table" then return end
-	for i, v in p1 do
-		if i == "universe_id" and (type(v) == "string" or type(v) == "number") then
-			p2[tostring(v)] = true
-		elseif type(v) == "table" then
-			collectUniverseIds(v, p2)
+local function collectUniverseIds(List, p1) --[[ Line: 16 ]]
+	-- upvalues: collectUniverseIds (copy)
+	if type(List) ~= "table" then return end
+	for i, value in List do
+		if i == "universe_id" and (type(value) == "string" or type(value) == "number") then
+			p1[tostring(value)] = true
+		elseif type(value) == "table" then
+			collectUniverseIds(value, p1)
 		end
 	end
 end
 
-local function prewarmIcons(p3, p4)
-	-- upvalues: collectUniverseIds (ref), dataHydrationModule (ref)
+local function prewarmIcons(List, Large) --[[ Line: 41 ]]
+	-- upvalues: collectUniverseIds (copy), DataHydrationModule (copy)
 	local t = {}
 	
-	for i, v in p3 do
-		collectUniverseIds(v, t)
+	for _, value in List do
+		collectUniverseIds(value, t)
 	end
-	local t_1 = {}
+	local List1 = {}
 	
-	for i_1 in t do
-		table.insert(t_1, i_1)
+	for i in t do
+		table.insert(List1, i)
 	end
-	if #t_1 > 0 then
-		dataHydrationModule.Game.getGameIconStore(false).getAndFetchGameIcons(t_1, p4)
+	if #List1 > 0 then
+		DataHydrationModule.Game.getGameIconStore(false).getAndFetchGameIcons(List1, Large)
 	end
 end
 
 return {
 	collectUniverseIds = collectUniverseIds,
-	prewarmSmallIcons = function(p5)
-		-- upvalues: prewarmIcons (ref), dataHydrationModule (ref)
-		prewarmIcons(p5, dataHydrationModule.Game.GameIconSize.Small)
+	prewarmSmallIcons = function(p2) --[[ Line: 56 ]]
+		-- upvalues: prewarmIcons (copy), DataHydrationModule (copy)
+		prewarmIcons(p2, DataHydrationModule.Game.GameIconSize.Small)
 	end,
-	prewarmLargeIcons = function(p5)
-		-- upvalues: prewarmIcons (ref), dataHydrationModule (ref)
-		prewarmIcons(p5, dataHydrationModule.Game.GameIconSize.Large)
+	prewarmLargeIcons = function(p2) --[[ Line: 60 ]]
+		-- upvalues: prewarmIcons (copy), DataHydrationModule (copy)
+		prewarmIcons(p2, DataHydrationModule.Game.GameIconSize.Large)
 	end
 }

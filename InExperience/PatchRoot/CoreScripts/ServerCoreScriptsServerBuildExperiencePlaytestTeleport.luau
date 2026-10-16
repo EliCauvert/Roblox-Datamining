@@ -1,57 +1,56 @@
-﻿local assetService = game:GetService("AssetService")
-local httpService = game:GetService("HttpService")
-local playersService = game:GetService("Players")
-local robloxReplicatedStorageService = game:GetService("RobloxReplicatedStorage")
-local teleportService = game:GetService("TeleportService")
-local buildPlaytestReservedServerId = game:DefineFastFlag("BuildPlaytestReservedServerId", false)
-local var1 = nil
+﻿local AssetService = game:GetService("AssetService")
+local HttpService = game:GetService("HttpService")
+local Players = game:GetService("Players")
+local TeleportService = game:GetService("TeleportService")
+local BuildPlaytestReservedServerId = game:DefineFastFlag("BuildPlaytestReservedServerId", false)
+local v1 = nil
 local t = {}
-local buildExperiencePlaytestTeleport = Instance.new("RemoteEvent")
-buildExperiencePlaytestTeleport.Name = "BuildExperiencePlaytestTeleport"
-buildExperiencePlaytestTeleport.Parent = robloxReplicatedStorageService
-playersService.PlayerRemoving:Connect(function(p1)
-	-- upvalues: t (ref)
-	t[p1.UserId] = nil
+local BuildExperiencePlaytestTeleport = Instance.new("RemoteEvent")
+BuildExperiencePlaytestTeleport.Name = "BuildExperiencePlaytestTeleport"
+BuildExperiencePlaytestTeleport.Parent = game:GetService("RobloxReplicatedStorage")
+Players.PlayerRemoving:Connect(function(Player) --[[ Line: 21 ]]
+	-- upvalues: t (copy)
+	t[Player.UserId] = nil
 end)
 
-local function getCurrentExperiencePlaceIds()
-	-- upvalues: var1 (write), assetService (ref)
-	if var1 ~= nil then
-		return var1
+local function getCurrentExperiencePlaceIds() --[[ Line: 25 ]]
+	-- upvalues: v1 (ref), AssetService (copy)
+	if v1 ~= nil then
+		return v1
 	end
 	local t = {}
-	local gamePlacesAsync = assetService:GetGamePlacesAsync()
+	local GamePlacesAsync = AssetService:GetGamePlacesAsync()
 	while true do
-		for i, v in gamePlacesAsync:GetCurrentPage() do
-			t[v.PlaceId] = true
+		for _, value in GamePlacesAsync:GetCurrentPage() do
+			t[value.PlaceId] = true
 		end
-		if gamePlacesAsync.IsFinished then break end
-		gamePlacesAsync:AdvanceToNextPageAsync()
+		if GamePlacesAsync.IsFinished then break end
+		GamePlacesAsync:AdvanceToNextPageAsync()
 	end
-	var1 = t
+	v1 = t
 	
 	return t
 end
 
-buildExperiencePlaytestTeleport.OnServerEvent:Connect(function(p1, p2)
-	-- upvalues: t (ref), getCurrentExperiencePlaceIds (ref), buildPlaytestReservedServerId (ref), httpService (ref), teleportService (ref)
-	local userId = t[p1.UserId]
+BuildExperiencePlaytestTeleport.OnServerEvent:Connect(function(Player: Player, PlaceId: number) --[[ Line: 48 ]]
+	-- upvalues: t (copy), getCurrentExperiencePlaceIds (copy), BuildPlaytestReservedServerId (copy), HttpService (copy), TeleportService (copy)
+	local Entry: number = t[Player.UserId]
 	
-	if userId ~= nil and userId > 5 then return end
-	if userId == nil then
-		t[p1.UserId] = 1
+	if Entry ~= nil and Entry > 5 then return end
+	if Entry == nil then
+		t[Player.UserId] = 1
 	else
-		t[p1.UserId] = userId + 1
+		t[Player.UserId] = Entry + 1
 	end
-	if not p1:GetCanManageAsync() then return end
-	if typeof(p2) ~= "number" or p2 <= 0 then return end
-	if game.PlaceId ~= p2 and not getCurrentExperiencePlaceIds()[p2] then return end
-	local teleportOptions = Instance.new("TeleportOptions")
+	if not Player:GetCanManageAsync() then return end
+	if typeof(PlaceId) ~= "number" or PlaceId <= 0 then return end
+	if game.PlaceId ~= PlaceId and not getCurrentExperiencePlaceIds()[PlaceId] then return end
+	local TeleportOptions = Instance.new("TeleportOptions")
 	
-	if buildPlaytestReservedServerId then
-		teleportOptions.ReservedServerId = httpService:GenerateGUID(false)
+	if BuildPlaytestReservedServerId then
+		TeleportOptions.ReservedServerId = HttpService:GenerateGUID(false)
 	else
-		teleportOptions.ShouldReserveServer = true
+		TeleportOptions.ShouldReserveServer = true
 	end
-	teleportService:TeleportAsync(p2, { p1 }, teleportOptions)
+	TeleportService:TeleportAsync(PlaceId, { Player }, TeleportOptions)
 end)

@@ -1,20 +1,20 @@
-﻿local socialCommon = script:FindFirstAncestor("SocialCommon")
-local reactModule = require(socialCommon.Parent.React)
-local inputUtilitiesModule = require(socialCommon.Utils.InputUtilities)
+﻿local SocialCommon = script:FindFirstAncestor("SocialCommon")
+local ReactModule = require(SocialCommon.Parent.React)
+local InputUtilitiesModule = require(SocialCommon.Utils.InputUtilities)
 
-return function()
-	-- upvalues: reactModule (ref), inputUtilitiesModule (ref)
-	local var1, var2 = reactModule.useState(false)
+return function() --[[ Line: 8 ]]
+	-- upvalues: ReactModule (copy), InputUtilitiesModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	
-	return var1, reactModule.useCallback(function(_, p1)
-		-- upvalues: inputUtilitiesModule (copy), var2 (ref)
-		if inputUtilitiesModule.isPointerInput(p1) then
-			var2(true)
+	return UseStateResult, ReactModule.useCallback(function(_, p1) --[[ Line: 11 ]]
+		-- upvalues: InputUtilitiesModule (upval), UseStateResult2 (copy)
+		if InputUtilitiesModule.isPointerInput(p1) then
+			UseStateResult2(true)
 		end
-	end, { var2 }), reactModule.useCallback(function(_, p1)
-		-- upvalues: inputUtilitiesModule (copy), var2 (ref)
-		if inputUtilitiesModule.isPointerInput(p1) then
-			var2(false)
+	end, { UseStateResult2 }), (ReactModule.useCallback(function(_, p1) --[[ Line: 17 ]]
+		-- upvalues: InputUtilitiesModule (upval), UseStateResult2 (copy)
+		if InputUtilitiesModule.isPointerInput(p1) then
+			UseStateResult2(false)
 		end
-	end, { var2 })
+	end, { UseStateResult2 }))
 end

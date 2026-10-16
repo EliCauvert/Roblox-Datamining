@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("IntervalPerformanceTracker").Parent.Loggers).Logger:new("IntervalPerformanceTracker")
+﻿return (require(script:FindFirstAncestor("IntervalPerformanceTracker").Parent.Loggers).Logger:new("IntervalPerformanceTracker"))

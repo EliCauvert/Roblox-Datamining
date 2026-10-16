@@ -1,72 +1,75 @@
-﻿local authCommon = script:FindFirstAncestor("AuthCommon")
-local parent = authCommon.Parent
-local httpService = game:GetService("HttpService")
-local promiseModule = require(parent.Promise)
-local loginRequestsModule = require(authCommon.Http.Requests.LoginRequests)
-local loginResultModule = require(authCommon.Models.LoginResult)
-local loginErrorCodesModule = require(authCommon.Enums.LoginErrorCodes)
-local loginMethodsModule = require(authCommon.Enums.LoginMethods)
-local appStorageUtilitiesModule = require(authCommon.Utils.AppStorageUtilities)
-local getMultipleUsersPerCredentialErrorDataModule = require(authCommon.Utils.GetMultipleUsersPerCredentialErrorData)
-local getFFlagLuaAppUsingSecurityQuestionsForLuaLogin = require(parent.SharedFlags).GetFFlagLuaAppUsingSecurityQuestionsForLuaLogin
-local getFFlagEnableLoginAccountSelector = require(parent.SharedFlags).GetFFlagEnableLoginAccountSelector
-local fFlagEnableLastLoginMethodTracking = require(parent.SharedFlags).FFlagEnableLastLoginMethodTracking
-local enableIllegalChildAccountLinkingErrorMessageOnLoginByOtp = game:DefineFastFlag("EnableIllegalChildAccountLinkingErrorMessageOnLoginByOtp", false)
+﻿local AuthCommon = script:FindFirstAncestor("AuthCommon")
+local Parent = AuthCommon.Parent
+local HttpService = game:GetService("HttpService")
+local PromiseModule = require(Parent.Promise)
+local LoginRequestsModule = require(AuthCommon.Http.Requests.LoginRequests)
+local LoginResultModule = require(AuthCommon.Models.LoginResult)
+local LoginErrorCodesModule = require(AuthCommon.Enums.LoginErrorCodes)
+local LoginMethodsModule = require(AuthCommon.Enums.LoginMethods)
+local AppStorageUtilitiesModule = require(AuthCommon.Utils.AppStorageUtilities)
+local GetMultipleUsersPerCredentialErrorDataModule = require(AuthCommon.Utils.GetMultipleUsersPerCredentialErrorData)
+local GetFFlagLuaAppUsingSecurityQuestionsForLuaLoginFunction = require(Parent.SharedFlags).GetFFlagLuaAppUsingSecurityQuestionsForLuaLogin
+local GetFFlagEnableLoginAccountSelectorFunction = require(Parent.SharedFlags).GetFFlagEnableLoginAccountSelector
+local FFlagEnableLastLoginMethodTracking = require(Parent.SharedFlags).FFlagEnableLastLoginMethodTracking
+local EnableIllegalChildAccountLinkingErrorMessageOnLoginByOtp = game:DefineFastFlag("EnableIllegalChildAccountLinkingErrorMessageOnLoginByOtp", false)
 
-return function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: loginRequestsModule (ref), loginResultModule (ref), fFlagEnableLastLoginMethodTracking (ref), appStorageUtilitiesModule (ref), loginMethodsModule (ref), httpService (ref), loginErrorCodesModule (ref), getFFlagLuaAppUsingSecurityQuestionsForLuaLogin (ref), getFFlagEnableLoginAccountSelector (ref), getMultipleUsersPerCredentialErrorDataModule (ref), promiseModule (ref), enableIllegalChildAccountLinkingErrorMessageOnLoginByOtp (ref)
-	return function()
-		-- upvalues: loginRequestsModule (copy), p1 (ref), p2 (ref), p3 (ref), p5 (ref), p6 (ref), loginResultModule (copy), fFlagEnableLastLoginMethodTracking (copy), appStorageUtilitiesModule (copy), loginMethodsModule (copy), httpService (copy), loginErrorCodesModule (copy), getFFlagLuaAppUsingSecurityQuestionsForLuaLogin (copy), getFFlagEnableLoginAccountSelector (copy), getMultipleUsersPerCredentialErrorDataModule (copy), promiseModule (copy), enableIllegalChildAccountLinkingErrorMessageOnLoginByOtp (copy), p4 (ref)
-		return loginRequestsModule.logByOtp(p1, p2, p3, p5, p6):andThen(function(p7)
-			-- upvalues: loginResultModule (copy), fFlagEnableLastLoginMethodTracking (copy), appStorageUtilitiesModule (copy), loginMethodsModule (copy)
-			assert(p7, "no login attempt result")
-			assert(#p7 == 1, "no result or more than one result")
-			assert(loginResultModule.fromJsonData(p7[1]), "result invalid")
+return function(p1, p2, p3, SecurityQuestionsCallback, p4, p5) --[[ Line: 23 | Named "loginByOtp" ]]
+	-- upvalues: LoginRequestsModule (copy), LoginResultModule (copy), FFlagEnableLastLoginMethodTracking (copy), AppStorageUtilitiesModule (copy), LoginMethodsModule (copy), HttpService (copy), LoginErrorCodesModule (copy), GetFFlagLuaAppUsingSecurityQuestionsForLuaLoginFunction (copy), GetFFlagEnableLoginAccountSelectorFunction (copy), GetMultipleUsersPerCredentialErrorDataModule (copy), PromiseModule (copy), EnableIllegalChildAccountLinkingErrorMessageOnLoginByOtp (copy)
+	return function() --[[ Line: 31 ]]
+		-- upvalues: LoginRequestsModule (upval), p1 (copy), p2 (copy), p3 (copy), p4 (copy), p5 (copy), LoginResultModule (upval), FFlagEnableLastLoginMethodTracking (upval), AppStorageUtilitiesModule (upval), LoginMethodsModule (upval), HttpService (upval), LoginErrorCodesModule (upval), GetFFlagLuaAppUsingSecurityQuestionsForLuaLoginFunction (upval), GetFFlagEnableLoginAccountSelectorFunction (upval), GetMultipleUsersPerCredentialErrorDataModule (upval), PromiseModule (upval), EnableIllegalChildAccountLinkingErrorMessageOnLoginByOtp (upval), SecurityQuestionsCallback (copy)
+		return LoginRequestsModule.logByOtp(p1, p2, p3, p4, p5):andThen(function(Entry) --[[ Line: 33 ]]
+			-- upvalues: LoginResultModule (upval), FFlagEnableLastLoginMethodTracking (upval), AppStorageUtilitiesModule (upval), LoginMethodsModule (upval)
+			assert(Entry, "no login attempt result")
+			assert(#Entry == 1, "no result or more than one result")
+			assert(LoginResultModule.fromJsonData(Entry[1]), "result invalid")
 			
-			if fFlagEnableLastLoginMethodTracking then
-				appStorageUtilitiesModule.setLastSuccessfulSignInMethod(loginMethodsModule.EmailOtp)
+			if FFlagEnableLastLoginMethodTracking then
+				AppStorageUtilitiesModule.setLastSuccessfulSignInMethod(LoginMethodsModule.EmailOtp)
 			end
-			return loginResultModule.fromJsonData(p7[1])
-		end, function(p7)
-			-- upvalues: httpService (copy), loginErrorCodesModule (copy), getFFlagLuaAppUsingSecurityQuestionsForLuaLogin (copy), getFFlagEnableLoginAccountSelector (copy), getMultipleUsersPerCredentialErrorDataModule (copy), promiseModule (copy), enableIllegalChildAccountLinkingErrorMessageOnLoginByOtp (copy), p4 (copy)
-			local body = httpService:JSONDecode(p7.Body)
-			local var1 = nil
-			local code = body.errors[1].code
-			local var2 = nil
-			local userFacingMessage = body and (body.errors and (body.errors[1] and body.errors[1].userFacingMessage))
+			return LoginResultModule.fromJsonData(Entry[1])
+		end, function(p6) --[[ Line: 41 ]]
+			-- upvalues: HttpService (upval), LoginErrorCodesModule (upval), GetFFlagLuaAppUsingSecurityQuestionsForLuaLoginFunction (upval), GetFFlagEnableLoginAccountSelectorFunction (upval), GetMultipleUsersPerCredentialErrorDataModule (upval), PromiseModule (upval), EnableIllegalChildAccountLinkingErrorMessageOnLoginByOtp (upval), SecurityQuestionsCallback (upval)
+			local Data = HttpService:JSONDecode(p6.Body)
+			local ErrorKey: string? = nil
+			local Code = Data.errors[1].code
+			local SecurityQuestionsData = nil
+			local UserFacingMessage = Data and (Data.errors and (Data.errors[1] and Data.errors[1].userFacingMessage))
 			
-			if code == loginErrorCodesModule.IncorrectCValueOrPassword then
-				var1 = "Authentication.Login.Response.IncorrectOtpCode"
-			elseif getFFlagLuaAppUsingSecurityQuestionsForLuaLogin() and code == loginErrorCodesModule.SecurityQuestions then
-				var1 = "Authentication.Login.Response.SomethingWentWrong"
+			if Code == LoginErrorCodesModule.IncorrectCValueOrPassword then
+				ErrorKey = "Authentication.Login.Response.IncorrectOtpCode"
+			elseif GetFFlagLuaAppUsingSecurityQuestionsForLuaLoginFunction() and Code == LoginErrorCodesModule.SecurityQuestions then
+				ErrorKey = "Authentication.Login.Response.SomethingWentWrong"
 				
-				if body.errors[1].fieldData then
-					local fieldData = httpService:JSONDecode(body.errors[1].fieldData)
+				if Data.errors[1].fieldData then
+					local Data1 = HttpService:JSONDecode(Data.errors[1].fieldData)
 					
-					if fieldData.sessionId and fieldData.userId then
-						var2 = fieldData
-						var1 = nil
+					if Data1.sessionId and Data1.userId then
+						SecurityQuestionsData = Data1
+						ErrorKey = nil
 					end
 				end
-			elseif getFFlagEnableLoginAccountSelector() and code == loginErrorCodesModule.MultipleUsersPerCredential then
-				return promiseModule.reject({
-					errorKey = var1,
-					errorCode = code,
-					usersData = getMultipleUsersPerCredentialErrorDataModule(body)
-				})
-			elseif code == loginErrorCodesModule.ServiceUnavailable then
-				var1 = "Authentication.Login.Response.ServiceUnavailable"
-			elseif enableIllegalChildAccountLinkingErrorMessageOnLoginByOtp and code == loginErrorCodesModule.IllegalChildAccountLinking then
-				var1 = "Authentication.Login.LinkIllegalChildAccountLinking"
-			elseif code ~= loginErrorCodesModule.AccountLocked then
-				var1 = "Authentication.Login.Response.UnknownErrorLoginWithDifferentMethod"
+			else
+				if GetFFlagEnableLoginAccountSelectorFunction() and Code == LoginErrorCodesModule.MultipleUsersPerCredential then
+					return PromiseModule.reject({
+						errorKey = ErrorKey,
+						errorCode = Code,
+						usersData = GetMultipleUsersPerCredentialErrorDataModule(Data)
+					})
+				end
+				if Code == LoginErrorCodesModule.ServiceUnavailable then
+					ErrorKey = "Authentication.Login.Response.ServiceUnavailable"
+				elseif EnableIllegalChildAccountLinkingErrorMessageOnLoginByOtp and Code == LoginErrorCodesModule.IllegalChildAccountLinking then
+					ErrorKey = "Authentication.Login.LinkIllegalChildAccountLinking"
+				elseif Code ~= LoginErrorCodesModule.AccountLocked then
+					ErrorKey = "Authentication.Login.Response.UnknownErrorLoginWithDifferentMethod"
+				end
 			end
-			return promiseModule.reject({
-				errorKey = var1,
-				errorCode = code,
-				securityQuestionsData = var2,
-				securityQuestionsCallback = p4,
-				userFacingMessage = userFacingMessage
+			return PromiseModule.reject({
+				errorKey = ErrorKey,
+				errorCode = Code,
+				securityQuestionsData = SecurityQuestionsData,
+				securityQuestionsCallback = SecurityQuestionsCallback,
+				userFacingMessage = UserFacingMessage
 			})
 		end)
 	end

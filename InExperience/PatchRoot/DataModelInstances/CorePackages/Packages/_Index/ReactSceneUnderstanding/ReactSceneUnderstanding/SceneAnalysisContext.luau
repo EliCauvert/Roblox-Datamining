@@ -1,40 +1,41 @@
-﻿local reactSceneUnderstanding = script:FindFirstAncestor("ReactSceneUnderstanding")
-local reactModule = require(reactSceneUnderstanding.Parent.React)
-local _ = require(reactSceneUnderstanding.Parent.SceneUnderstanding)
-local useState = reactModule.useState
-local var1 = reactModule.createContext(nil)
+﻿local ReactSceneUnderstanding = script:FindFirstAncestor("ReactSceneUnderstanding")
+local ReactModule = require(ReactSceneUnderstanding.Parent.React)
+local _ = require(ReactSceneUnderstanding.Parent.SceneUnderstanding)
+local UseStateFunction = ReactModule.useState
+local Context = ReactModule.createContext(nil)
 
 return {
-	Provider = function(p1)
-		-- upvalues: useState (ref), reactModule (ref), var1 (ref)
-		local var2, var3 = useState({})
-		local var4, var5 = useState({})
-		local var6, var7 = useState({})
-		local var8, var9 = useState({})
+	Provider = function(p1) --[[ Line: 102 ]]
+		-- upvalues: UseStateFunction (copy), ReactModule (copy), Context (copy)
+		local UseStateResult, UseStateResult2 = UseStateFunction({})
+		local UseStateResult1, UseStateResult2_1 = UseStateFunction({})
+		local UseStateResult3, UseStateResult2_2 = UseStateFunction({})
+		local UseStateResult4, UseStateResult2_3 = UseStateFunction({})
 		
-		return reactModule.createElement(var1.Provider, {
+		return ReactModule.createElement(Context.Provider, {
 			value = {
 				rangeQueryOptions = p1.rangeQueryOptions,
 				viewportQueryOptions = p1.viewportQueryOptions,
 				dataModelTraversalOptions = p1.dataModelTraversalOptions,
-				sourceAssets = var2,
-				setSourceAssets = var3,
-				assetsInView = var4,
-				setAssetsInView = var5,
-				assetsInRange = var6,
-				setAssetsInRange = var7,
-				audibleSounds = var8,
-				setAudibleSounds = var9
+				sourceAssets = UseStateResult,
+				setSourceAssets = UseStateResult2,
+				assetsInView = UseStateResult1,
+				setAssetsInView = UseStateResult2_1,
+				assetsInRange = UseStateResult3,
+				setAssetsInRange = UseStateResult2_2,
+				audibleSounds = UseStateResult4,
+				setAudibleSounds = UseStateResult2_3
 			}
 		}, p1.children)
 	end,
-	use = function()
-		-- upvalues: reactModule (ref), var1 (ref)
-		local var2 = reactModule.useContext(var1)
+	use = function() --[[ Line: 129 ]]
+		-- upvalues: ReactModule (copy), Context (copy)
+		local UseContextResult = ReactModule.useContext(Context)
 		
-		if var2 then
-			return var2
+		if UseContextResult then
+			return UseContextResult
+		else
+			error("attempt to use SceneAnalysisContext with no provider. Add `ReactSceneUnderstanding.SceneAnalysisProvider` to the React tree and try again")
 		end
-		error("attempt to use SceneAnalysisContext with no provider. Add `ReactSceneUnderstanding.SceneAnalysisProvider` to the React tree and try again")
 	end
 }

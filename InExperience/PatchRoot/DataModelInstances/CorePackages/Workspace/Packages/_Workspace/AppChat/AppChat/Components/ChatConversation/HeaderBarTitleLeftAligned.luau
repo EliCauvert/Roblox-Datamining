@@ -1,42 +1,42 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local foundationModule = require(parent.Foundation)
-local conversationTitleWithFacePileModule = require(appChat.Components.ChatConversation.ConversationTitleWithFacePile)
-local useTokens = foundationModule.Hooks.useTokens
-local reactModule = require(parent.React)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local FoundationModule = require(Parent.Foundation)
+local ConversationTitleWithFacePileModule = require(AppChat.Components.ChatConversation.ConversationTitleWithFacePile)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local ReactModule = require(Parent.React)
 
-return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), foundationModule (ref), conversationTitleWithFacePileModule (ref)
-	return reactModule.createElement(foundationModule.View, {
+return function(p1) --[[ Line: 19 | Named "HeaderBarTitleLeftAligned" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), FoundationModule (copy), ConversationTitleWithFacePileModule (copy)
+	return ReactModule.createElement(FoundationModule.View, {
 		Size = UDim2.new(1, 0, 1, 0),
 		layout = {
 			FillDirection = Enum.FillDirection.Horizontal,
-			Padding = UDim.new(0, useTokens().Gap.Medium),
+			Padding = UDim.new(0, UseTokensFunction().Gap.Medium),
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			VerticalAlignment = Enum.VerticalAlignment.Center
 		}
 	}, {
-		LeftFrame = if p1.renderLeft then reactModule.createElement(foundationModule.View, {
+		LeftFrame = if p1.renderLeft then ReactModule.createElement(FoundationModule.View, {
 			LayoutOrder = 1,
 			AutomaticSize = Enum.AutomaticSize.XY,
 			ItemLineAlignment = Enum.ItemLineAlignment.Center
-		}, reactModule.createElement(p1.renderLeft)) else nil,
-		CenterFrame = reactModule.createElement(foundationModule.View, {
+		}, ReactModule.createElement(p1.renderLeft)) else nil,
+		CenterFrame = ReactModule.createElement(FoundationModule.View, {
 			LayoutOrder = 2,
 			flexItem = { FlexMode = Enum.UIFlexMode.Fill },
 			Size = UDim2.new(1, 0, 1, 0)
 		}, {
-			ConversationTitle = reactModule.createElement(conversationTitleWithFacePileModule, {
+			ConversationTitle = ReactModule.createElement(ConversationTitleWithFacePileModule, {
 				titleText = p1.titleText,
 				conversationId = p1.conversationId,
 				navigateToChatDetails = p1.navigateToChatDetails
 			})
 		}),
-		RightFrame = if p1.renderRight then reactModule.createElement(foundationModule.View, {
+		RightFrame = if p1.renderRight then ReactModule.createElement(FoundationModule.View, {
 			LayoutOrder = 3,
 			tag = if p1.ignoreRightMargin then nil else "padding-right-small",
 			AutomaticSize = Enum.AutomaticSize.XY,
 			ItemLineAlignment = Enum.ItemLineAlignment.Center
-		}, reactModule.createElement(p1.renderRight)) else nil
+		}, ReactModule.createElement(p1.renderRight)) else nil
 	})
 end

@@ -1,61 +1,69 @@
-﻿local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
-local parent = genericAbuseReporting.Parent
-local reactModule = require(parent.React)
-local roactNetworking = require(parent.RoactServiceTags).RoactNetworking
-local useRoactService = require(parent.RobloxAppHooks).useRoactService
-local abuseReportBeduiContextModule = require(genericAbuseReporting.Bedui.Provider.AbuseReportBeduiContext)
-local abuseReportBeduiContextStatus = require(genericAbuseReporting.Bedui.Provider.AbuseReportBeduiTypes).AbuseReportBeduiContextStatus
-local abuseVectorModule = require(genericAbuseReporting.Enums.AbuseVector)
-local fetchBeduiDataModule = require(genericAbuseReporting.Bedui.Provider.fetchBeduiData)
-local validateBeduiDataModule = require(genericAbuseReporting.Bedui.Provider.validateBeduiData)
+﻿local GenericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
+local Parent = GenericAbuseReporting.Parent
+local ReactModule = require(Parent.React)
+local RoactNetworking = require(Parent.RoactServiceTags).RoactNetworking
+local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
+local AbuseReportBeduiContextModule = require(GenericAbuseReporting.Bedui.Provider.AbuseReportBeduiContext)
+local AbuseReportBeduiContextStatus = require(GenericAbuseReporting.Bedui.Provider.AbuseReportBeduiTypes).AbuseReportBeduiContextStatus
+local AbuseVectorModule = require(GenericAbuseReporting.Enums.AbuseVector)
+local FetchBeduiDataModule = require(GenericAbuseReporting.Bedui.Provider.fetchBeduiData)
+local ValidateBeduiDataModule = require(GenericAbuseReporting.Bedui.Provider.validateBeduiData)
 
-return function(p1)
-	-- upvalues: reactModule (ref), abuseReportBeduiContextStatus (ref), useRoactService (ref), roactNetworking (ref), fetchBeduiDataModule (ref), validateBeduiDataModule (ref), abuseVectorModule (ref), abuseReportBeduiContextModule (ref)
-	local var1, var2 = reactModule.useState({ status = abuseReportBeduiContextStatus.Loading })
-	local var3 = useRoactService(roactNetworking)
-	reactModule.useEffect(function()
-		-- upvalues: fetchBeduiDataModule (copy), var3 (ref), p1 (ref), validateBeduiDataModule (copy), abuseVectorModule (copy), var2 (ref), abuseReportBeduiContextStatus (copy)
-		fetchBeduiDataModule(var3, p1.abuseVector):andThen(function(p2)
-			-- upvalues: validateBeduiDataModule (copy), fetchBeduiDataModule (copy), var3 (copy), abuseVectorModule (copy), var2 (copy), abuseReportBeduiContextStatus (copy)
-			local var4, var5 = validateBeduiDataModule(p2.responseBody)
+return function(p1) --[[ Line: 33 | Named "AbuseReportBeduiProvider" ]]
+	-- upvalues: ReactModule (copy), AbuseReportBeduiContextStatus (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), FetchBeduiDataModule (copy), ValidateBeduiDataModule (copy), AbuseVectorModule (copy), AbuseReportBeduiContextModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState({ status = AbuseReportBeduiContextStatus.Loading })
+	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
+	ReactModule.useEffect(function() --[[ Line: 39 ]]
+		-- upvalues: FetchBeduiDataModule (upval), UseRoactServiceResult (copy), p1 (copy), ValidateBeduiDataModule (upval), AbuseVectorModule (upval), UseStateResult2 (copy), AbuseReportBeduiContextStatus (upval)
+		FetchBeduiDataModule(UseRoactServiceResult, p1.abuseVector):andThen(function(Result) --[[ Line: 41 ]]
+			-- upvalues: ValidateBeduiDataModule (upval), FetchBeduiDataModule (upval), UseRoactServiceResult (upval), AbuseVectorModule (upval), UseStateResult2 (upval), AbuseReportBeduiContextStatus (upval)
+			local ValidateBeduiDataModuleResult, ValidateBeduiDataModuleResult2 = ValidateBeduiDataModule(Result.responseBody)
 			
-			if var4 then
-				var2({
-					status = abuseReportBeduiContextStatus.Success,
-					beduiData = p2.responseBody
+			if ValidateBeduiDataModuleResult then
+				UseStateResult2({
+					status = AbuseReportBeduiContextStatus.Success,
+					beduiData = Result.responseBody
 				})
 				
 				return
-			end
-			warn("Invalid Bedui data:", var5)
-			fetchBeduiDataModule(var3, abuseVectorModule.Common):andThen(function(p3)
-				-- upvalues: validateBeduiDataModule (copy), var2 (copy), abuseReportBeduiContextStatus (copy)
-				local var6, var7 = validateBeduiDataModule(p3.responseBody)
-				
-				if var6 then
-					var2({
-						status = abuseReportBeduiContextStatus.Success,
-						beduiData = p3.responseBody
-					})
+			else
+				warn("Invalid Bedui data:", ValidateBeduiDataModuleResult2)
+				FetchBeduiDataModule(UseRoactServiceResult, AbuseVectorModule.Common):andThen(function(Result) --[[ Line: 47 ]]
+					-- upvalues: ValidateBeduiDataModule (upval), UseStateResult2 (upval), AbuseReportBeduiContextStatus (upval)
+					local ValidateBeduiDataModuleResult, ValidateBeduiDataModuleResult2 = ValidateBeduiDataModule(Result.responseBody)
 					
-					return
-				end
-				warn("Invalid Bedui common data:", var7)
-				var2({
-					status = abuseReportBeduiContextStatus.Error,
-					error = var7
-				})
-			end):catch(function(p3)
-				-- upvalues: var2 (copy), abuseReportBeduiContextStatus (copy)
-				warn("Failed to get Bedui common data")
-				var2({ status = abuseReportBeduiContextStatus.Error, error = p3 })
-			end)
-		end):catch(function(p2)
-			-- upvalues: var2 (copy), abuseReportBeduiContextStatus (copy)
+					if ValidateBeduiDataModuleResult then
+						UseStateResult2({
+							status = AbuseReportBeduiContextStatus.Success,
+							beduiData = Result.responseBody
+						})
+						
+						return
+					else
+						warn("Invalid Bedui common data:", ValidateBeduiDataModuleResult2)
+						UseStateResult2({
+							status = AbuseReportBeduiContextStatus.Error,
+							error = ValidateBeduiDataModuleResult2
+						})
+					end
+				end):catch(function(Err) --[[ Line: 63 ]]
+					-- upvalues: UseStateResult2 (upval), AbuseReportBeduiContextStatus (upval)
+					warn("Failed to get Bedui common data")
+					UseStateResult2({
+						status = AbuseReportBeduiContextStatus.Error,
+						error = Err
+					})
+				end)
+			end
+		end):catch(function(Err) --[[ Line: 77 ]]
+			-- upvalues: UseStateResult2 (upval), AbuseReportBeduiContextStatus (upval)
 			warn("Failed to get Bedui data")
-			var2({ status = abuseReportBeduiContextStatus.Error, error = p2 })
+			UseStateResult2({
+				status = AbuseReportBeduiContextStatus.Error,
+				error = Err
+			})
 		end)
 	end, { p1.abuseVector })
 	
-	return reactModule.createElement(abuseReportBeduiContextModule.Provider, { value = var1 }, p1.children)
+	return ReactModule.createElement(AbuseReportBeduiContextModule.Provider, { value = UseStateResult }, p1.children)
 end

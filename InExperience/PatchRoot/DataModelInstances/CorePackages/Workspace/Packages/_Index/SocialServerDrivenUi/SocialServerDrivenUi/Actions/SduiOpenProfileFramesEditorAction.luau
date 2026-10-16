@@ -1,22 +1,22 @@
-﻿local parent = script:FindFirstAncestor("SocialServerDrivenUi").Parent
-local _ = require(parent.SduiCoreSystem)
-local serverTriggeredModalsModule = require(parent.ServerTriggeredModals)
-local reportPromptImpression = serverTriggeredModalsModule.reportPromptImpression
-local fetchPrompts = serverTriggeredModalsModule.fetchPrompts
-local createProfileCompletionPromptsConfig = require(parent.ProfilePlatformCommon).Utils.createProfileCompletionPromptsConfig
-local profileFramesEditorScreen = game:DefineFastString("ProfileFramesEditorScreen", "EditProfileImageProfilePlatform")
-local profileFramesUpsellPromptType = game:DefineFastString("ProfileFramesUpsellPromptType", "ProfileFramesUpsell")
+﻿local Parent = script:FindFirstAncestor("SocialServerDrivenUi").Parent
+local _ = require(Parent.SduiCoreSystem)
+local ServerTriggeredModalsModule = require(Parent.ServerTriggeredModals)
+local ReportPromptImpressionFunction = ServerTriggeredModalsModule.reportPromptImpression
+local FetchPromptsFunction = ServerTriggeredModalsModule.fetchPrompts
+local CreateProfileCompletionPromptsConfigFunction = require(Parent.ProfilePlatformCommon).Utils.createProfileCompletionPromptsConfig
+local ProfileFramesEditorScreen = game:DefineFastString("ProfileFramesEditorScreen", "EditProfileImageProfilePlatform")
+local ProfileFramesUpsellPromptType = game:DefineFastString("ProfileFramesUpsellPromptType", "ProfileFramesUpsell")
 
-return function(p1, _, p2, _)
-	-- upvalues: reportPromptImpression (ref), profileFramesUpsellPromptType (ref), fetchPrompts (ref), createProfileCompletionPromptsConfig (ref), profileFramesEditorScreen (ref)
-	local var1 = if p1 then p1.actionParams else nil
-	local var2 = if var1 then var1.promptId else nil
+return function(p1, _, p2, _) --[[ Line: 20 ]]
+	-- upvalues: ReportPromptImpressionFunction (copy), ProfileFramesUpsellPromptType (copy), FetchPromptsFunction (copy), CreateProfileCompletionPromptsConfigFunction (copy), ProfileFramesEditorScreen (copy)
+	local ActionParams = p1 and p1.actionParams or nil
+	local PromptId = if ActionParams then ActionParams.promptId else nil
 	
-	if reportPromptImpression then
-		reportPromptImpression(profileFramesUpsellPromptType, var2):andThen(function()
-			-- upvalues: fetchPrompts (copy), createProfileCompletionPromptsConfig (copy)
-			fetchPrompts(createProfileCompletionPromptsConfig(), true)
-		end):catch(function() end)
+	if ReportPromptImpressionFunction then
+		ReportPromptImpressionFunction(ProfileFramesUpsellPromptType, PromptId):andThen(function() --[[ Line: 31 ]]
+			-- upvalues: FetchPromptsFunction (upval), CreateProfileCompletionPromptsConfigFunction (upval)
+			FetchPromptsFunction(CreateProfileCompletionPromptsConfigFunction(), true)
+		end):catch(function() --[[ Line: 34 ]] end)
 	end
-	p2.dependencies.getNavigation().navigate(profileFramesEditorScreen, { mode = "framesOnly" })
+	p2.dependencies.getNavigation().navigate(ProfileFramesEditorScreen, { mode = "framesOnly" })
 end

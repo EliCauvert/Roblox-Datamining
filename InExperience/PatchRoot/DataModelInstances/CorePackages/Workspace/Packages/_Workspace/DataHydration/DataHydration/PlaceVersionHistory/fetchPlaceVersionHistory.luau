@@ -1,185 +1,199 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local httpClientModule = require(parent.HttpClient)
-local urlBase = require(parent.UrlBuilder).UrlBase
-local withCsrfRetryModule = require(dataHydration.withCsrfRetry)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local HttpClientModule = require(Parent.HttpClient)
+local UrlBase = require(Parent.UrlBuilder).UrlBase
+local WithCsrfRetryModule = require(DataHydration.withCsrfRetry)
 local _ = require(script.Parent.PlaceVersionHistoryStoreTypes)
-local fetch = httpClientModule.fetch
-local asPromise = httpClientModule.asPromise
+local FetchFunction = HttpClientModule.fetch
+local AsPromiseFunction = HttpClientModule.asPromise
 
-local function _(p1)
+local function _(p1) --[[ Line: 21 | Named "debugRestore" ]]
 	print(`[PlaceVersionHistoryRestoreDebug] {p1}`)
 end
 
-local _ = function(p1)
+local _ = function(p1) --[[ Line: 25 | Named "debugNote" ]]
 	print(`[PlaceVersionHistoryNoteDebug] {p1}`)
 end
 
-local function bodyPreview(p1)
-	if p1 == nil then
+local function bodyPreview(Buf): string --[[ Line: 29 ]]
+	if Buf == nil then
 		return "nil"
+	else
+		local Replaced = string.gsub(if typeof(Buf) == "buffer" then buffer.tostring(Buf) else tostring(Buf), "[\r\n]+", " ")
+		
+		return if #Replaced > 500 then string.sub(Replaced, 1, 500) .. "..." else Replaced
 	end
-	local replaced = string.gsub(if typeof(p1) == "buffer" then buffer.tostring(p1) else tostring(p1), "[\r\n]+", " ")
-	
-	return if #replaced > 500 then string.sub(replaced, 1, 500) .. "..." else replaced
 end
 
-local function appendQuery(p1, p2)
-	local var1 = false
-	local t = {}
+local function appendQuery(Text: string, List): string --[[ Line: 43 ]]
+	local Flag = false
+	local List1 = {}
 	
-	for i, v in p2 do
-		if v ~= nil then
-			var1 = true
-			table.insert(t, ("%s=%s"):format(i, tostring(v)))
+	for i, value in List do
+		if value ~= nil then
+			Flag = true
+			table.insert(List1, ("%s=%s"):format(i, (tostring(value))))
 		end
 	end
-	return if var1 then p1 .. (if string.find(p1, "?", 1, true) ~= nil then "?" else "&") .. table.concat(t, "&") else p1
+	return if Flag then Text .. (if string.find(Text, "?", 1, true) == nil then "?" else "&") .. table.concat(List1, "&") else Text
 end
 
-local function historyUrl(p3, p4, p5)
-	-- upvalues: appendQuery (ref)
-	local var2 = ("%s/place-version-history-api/v1/%d/history"):format(p3, p4)
+local function historyUrl(BaseUrl, p1, p2) --[[ Line: 60 ]]
+	-- upvalues: appendQuery (copy)
+	local VersionName: string = ("%s/place-version-history-api/v1/%d/history"):format(BaseUrl, p1)
 	
-	return if p5 == nil then appendQuery(var2, { pageSize = 100 }) else appendQuery(var2, {
-		cursor = p5.cursor,
-		pageSize = p5.pageSize or p5.limit,
-		isPublished = p5.isPublished
+	return if p2 == nil then appendQuery(VersionName, { pageSize = 100 }) else appendQuery(VersionName, {
+		cursor = p2.cursor,
+		pageSize = p2.pageSize or p2.limit,
+		isPublished = p2.isPublished
 	})
 end
 
-local _ = function(p3, p4, p5)
-	return ("%s/place-version-history-api/v1/%d/version/%s/notes"):format(p3, p4, p5)
+local _ = function(p1, p2, p3): string --[[ Line: 72 | Named "notesUrl" ]]
+	return ("%s/place-version-history-api/v1/%d/version/%s/notes"):format(p1, p2, p3)
 end
 
-local _ = function(p3, p4, p5)
-	return ("%s/v1/assets/%d/revert-version?assetVersionNumber=%d"):format(p3, p4, p5)
+local _ = function(p1, p2, p3): string --[[ Line: 76 | Named "revertUrl" ]]
+	return ("%s/v1/assets/%d/revert-version?assetVersionNumber=%d"):format(p1, p2, p3)
 end
 
-local _ = function(p3, p4)
-	return ("%s/universes/v1/places/%d/rollback"):format(p3, p4)
+local _ = function(p1, p2): string --[[ Line: 80 | Named "rollbackUrl" ]]
+	return ("%s/universes/v1/places/%d/rollback"):format(p1, p2)
 end
 
-local _ = function(p3)
-	-- upvalues: urlBase (ref)
-	p3 = p3 or {}
+local _ = function(p1) --[[ Line: 84 | Named "resolveBase" ]]
+	-- upvalues: UrlBase (copy)
+	local P14 = p1 or {}
 	
-	return p3.network, p3.baseUrl or urlBase.APIS
+	return P14.network, P14.baseUrl or UrlBase.APIS
 end
 
-local _ = function(p3)
-	-- upvalues: urlBase (ref)
-	return (p3 or {}).developBaseUrl or urlBase.new("develop")
+local _ = function(p1) --[[ Line: 89 | Named "resolveDevelopBase" ]]
+	-- upvalues: UrlBase (copy)
+	return (p1 or {}).developBaseUrl or UrlBase.new("develop")
 end
 
-local _ = function(p3)
-	-- upvalues: withCsrfRetryModule (ref), httpClientModule (ref)
-	return (p3 or {}).network or withCsrfRetryModule(httpClientModule.createRequestInternalNetwork())
+local _ = function(p1) --[[ Line: 94 | Named "resolveMutatingNetwork" ]]
+	-- upvalues: WithCsrfRetryModule (copy), HttpClientModule (copy)
+	return (p1 or {}).network or WithCsrfRetryModule(HttpClientModule.createRequestInternalNetwork())
 end
 
-local _ = function(p3)
-	return if type(p3) == "number" then p3 elseif type(p3) == "string" then tonumber(p3) else nil
+local _ = function(p1) --[[ Line: 99 | Named "toNumber" ]]
+	return if type(p1) == "number" then p1 elseif type(p1) == "string" then tonumber(p1) else nil
 end
 
 return {
 	DEFAULT_HISTORY_PAGE_SIZE = 100,
-	fetchHistory = function(p3, p4, p5)
-		-- upvalues: urlBase (ref), historyUrl (ref), fetch (ref), asPromise (ref)
-		p4 = p4 or {}
+	fetchHistory = function(p1, p2, p3) --[[ Line: 113 ]]
+		-- upvalues: UrlBase (copy), historyUrl (copy), FetchFunction (copy), AsPromiseFunction (copy)
+		local P19 = p2 or {}
 		
-		return asPromise(fetch({
+		return AsPromiseFunction((FetchFunction({
 			method = "GET",
 			analyticsKey = "place-version-history.get-history",
-			network = p4.network,
-			url = historyUrl(p4.baseUrl or urlBase.APIS, p3, p5),
-			decode = function(p6)
-				return p6
+			network = P19.network,
+			url = historyUrl(P19.baseUrl or UrlBase.APIS, p1, p3),
+			decode = function(p4) --[[ Line: 125 ]]
+				return p4
 			end
-		}))
+		})))
 	end,
-	revertVersion = function(p3, p4, p5)
-		-- upvalues: urlBase (ref), fetch (ref), withCsrfRetryModule (ref), httpClientModule (ref), asPromise (ref)
-		return asPromise(fetch({
+	revertVersion = function(AssetId, AssetVersionNumber, p1) --[[ Line: 132 ]]
+		-- upvalues: UrlBase (copy), FetchFunction (copy), WithCsrfRetryModule (copy), HttpClientModule (copy), AsPromiseFunction (copy)
+		return AsPromiseFunction((FetchFunction({
 			method = "POST",
 			analyticsKey = "place-version-history.revert-version",
 			legacy = true,
-			network = (p5 or {}).network or withCsrfRetryModule(httpClientModule.createRequestInternalNetwork()),
-			url = ("%s/v1/assets/%d/revert-version?assetVersionNumber=%d"):format((p5 or {}).developBaseUrl or urlBase.new("develop"), p3, p4),
+			network = (p1 or {}).network or WithCsrfRetryModule(HttpClientModule.createRequestInternalNetwork()),
+			url = ("%s/v1/assets/%d/revert-version?assetVersionNumber=%d"):format((p1 or {}).developBaseUrl or UrlBase.new("develop"), AssetId, AssetVersionNumber),
 			body = {},
-			decode = function(_)
-				-- upvalues: p3 (ref), p4 (ref)
-				return { assetId = p3, assetVersionNumber = p4 }
-			end
-		}))
-	end,
-	rollbackPlace = function(p3, p4, p5, p6, p7)
-		-- upvalues: urlBase (ref), fetch (ref), withCsrfRetryModule (ref), httpClientModule (ref), bodyPreview (ref), asPromise (ref)
-		p7 = p7 or {}
-		local _ = p7.network
-		
-		return asPromise(fetch({
-			method = "POST",
-			analyticsKey = "place-version-history.rollback-place",
-			network = (p7 or {}).network or withCsrfRetryModule(httpClientModule.createRequestInternalNetwork()),
-			url = ("%s/universes/v1/places/%d/rollback"):format(p7.baseUrl or urlBase.APIS, p3),
-			body = { versionToRollback = p4, message = p5, published = p6 },
-			analytics = function(_, p8, p9, p10, p11, p12)
-				-- upvalues: bodyPreview (copy)
-				if p10 == nil then
-					if p12 ~= "succeeded" then
-						print(`[PlaceVersionHistoryRestoreDebug] {`request failed method={p8} url={p9} status={p12} durationMs={math.floor(p11)} response=nil`}`)
-					end
-					return
-				elseif p12 == "succeeded" and p10.statusCode >= 200 and p10.statusCode < 300 then
-					return
-				end
-				print(`[PlaceVersionHistoryRestoreDebug] {`request failed method={p8} url={p9} status={p12} httpStatus={p10.statusCode} httpError={tostring(p10.httpError)} durationMs={math.floor(p11)} body="{bodyPreview(p34.responseBody)}"`}`)
-			end,
-			decode = function(p8)
-				-- upvalues: p3 (ref), p4 (ref), p5 (ref)
-				local t = { placeId = p3, versionToRollback = p4 }
-				local newVersionNumber = p8.newVersionNumber
-				t.newVersionNumber = if type(newVersionNumber) == "number" then newVersionNumber elseif type(newVersionNumber) == "string" then tonumber(newVersionNumber) else nil
-				t.message = p5
-				
-				return t
-			end
-		}))
-	end,
-	addVersionNote = function(p3, p4, p5, p6)
-		-- upvalues: urlBase (ref), fetch (ref), withCsrfRetryModule (ref), httpClientModule (ref), bodyPreview (ref), asPromise (ref)
-		p6 = p6 or {}
-		local _ = p6.network
-		local baseUrl = p6.baseUrl or urlBase.APIS
-		local var2 = if p5.title == nil then "nil" else tostring(#p5.title)
-		local var3 = if p5.description == nil then "nil" else tostring(#p5.description)
-		
-		return asPromise(fetch({
-			method = "POST",
-			analyticsKey = "place-version-history.add-note",
-			network = (p6 or {}).network or withCsrfRetryModule(httpClientModule.createRequestInternalNetwork()),
-			url = ("%s/place-version-history-api/v1/%d/version/%s/notes"):format(baseUrl, p3, p4),
-			body = p5,
-			analytics = function(_, p7, p8, p9, p10, p11)
-				-- upvalues: var2 (ref), var3 (ref), bodyPreview (copy)
-				if p9 == nil then
-					if p11 ~= "succeeded" then
-						print(`[PlaceVersionHistoryNoteDebug] {`request failed method={p7} url={p8} status={p11} durationMs={math.floor(p10)} titleLength={var2} descriptionLength={var3} response=nil`}`)
-					end
-					return
-				elseif p11 == "succeeded" and p9.statusCode >= 200 and p9.statusCode < 300 then
-					return
-				end
-				print(`[PlaceVersionHistoryNoteDebug] {`request failed method={p7} url={p8} status={p11} httpStatus={p9.statusCode} httpError={tostring(p9.httpError)} durationMs={math.floor(p10)} titleLength={var2} descriptionLength={var3} body="{bodyPreview(p44.responseBody)}"`}`)
-			end,
-			decode = function(p7)
-				-- upvalues: p3 (ref), p4 (ref)
+			decode = function(_) --[[ Line: 146 ]]
+				-- upvalues: AssetId (copy), AssetVersionNumber (copy)
 				return {
-					placeId = p3,
-					version = p4,
-					placeVersion = p7.placeVersion
+					assetId = AssetId,
+					assetVersionNumber = AssetVersionNumber
 				}
 			end
-		}))
+		})))
+	end,
+	rollbackPlace = function(PlaceId, VersionToRollback, Message, Published, p1) --[[ Line: 156 ]]
+		-- upvalues: UrlBase (copy), FetchFunction (copy), WithCsrfRetryModule (copy), HttpClientModule (copy), bodyPreview (copy), AsPromiseFunction (copy)
+		local P30 = p1 or {}
+		local _ = P30.network
+		
+		return AsPromiseFunction((FetchFunction({
+			method = "POST",
+			analyticsKey = "place-version-history.rollback-place",
+			network = (p1 or {}).network or WithCsrfRetryModule(HttpClientModule.createRequestInternalNetwork()),
+			url = ("%s/universes/v1/places/%d/rollback"):format(P30.baseUrl or UrlBase.APIS, PlaceId),
+			body = {
+				versionToRollback = VersionToRollback,
+				message = Message,
+				published = Published
+			},
+			analytics = function(_, p2, p3, p4, Value: number, p5) --[[ Line: 175 ]]
+				-- upvalues: bodyPreview (upval)
+				if p4 == nil then
+					if p5 ~= "succeeded" then
+						print(`[PlaceVersionHistoryRestoreDebug] {`request failed method={p2} url={p3} status={p5} durationMs={math.floor(Value)} response=nil`}`)
+					end
+					return
+				elseif p5 ~= "succeeded" or p4.statusCode < 200 or p4.statusCode >= 300 then
+					print(`[PlaceVersionHistoryRestoreDebug] {`request failed method={p2} url={p3} status={p5} httpStatus={p4.statusCode} httpError={tostring(p4.httpError)} durationMs={math.floor(Value)} body="{bodyPreview(p34.responseBody)}"`}`)
+					
+					return
+				else
+				end
+			end,
+			decode = function(p2) --[[ Line: 197 ]]
+				-- upvalues: PlaceId (copy), VersionToRollback (copy), Message (copy)
+				local NewVersionNumber = p2.newVersionNumber
+				
+				return {
+					placeId = PlaceId,
+					versionToRollback = VersionToRollback,
+					newVersionNumber = if type(NewVersionNumber) == "number" then NewVersionNumber elseif type(NewVersionNumber) == "string" then tonumber(NewVersionNumber) else nil,
+					message = Message
+				}
+			end
+		})))
+	end,
+	addVersionNote = function(PlaceId, Version, Body, p1) --[[ Line: 209 ]]
+		-- upvalues: UrlBase (copy), FetchFunction (copy), WithCsrfRetryModule (copy), HttpClientModule (copy), bodyPreview (copy), AsPromiseFunction (copy)
+		local P40 = p1 or {}
+		local _ = P40.network
+		local BaseUrl = P40.baseUrl or UrlBase.APIS
+		local Nil: string = if Body.title == nil then "nil" else tostring(#Body.title)
+		local Nil1: string = if Body.description == nil then "nil" else tostring(#Body.description)
+		
+		return AsPromiseFunction((FetchFunction({
+			method = "POST",
+			analyticsKey = "place-version-history.add-note",
+			network = (p1 or {}).network or WithCsrfRetryModule(HttpClientModule.createRequestInternalNetwork()),
+			url = ("%s/place-version-history-api/v1/%d/version/%s/notes"):format(BaseUrl, PlaceId, Version),
+			body = Body,
+			analytics = function(_, p2, p3, p4, Value: number, p5) --[[ Line: 224 ]]
+				-- upvalues: Nil (copy), Nil1 (copy), bodyPreview (upval)
+				if p4 == nil then
+					if p5 ~= "succeeded" then
+						print(`[PlaceVersionHistoryNoteDebug] {`request failed method={p2} url={p3} status={p5} durationMs={math.floor(Value)} titleLength={Nil} descriptionLength={Nil1} response=nil`}`)
+					end
+					return
+				elseif p5 ~= "succeeded" or p4.statusCode < 200 or p4.statusCode >= 300 then
+					print(`[PlaceVersionHistoryNoteDebug] {`request failed method={p2} url={p3} status={p5} httpStatus={p4.statusCode} httpError={tostring(p4.httpError)} durationMs={math.floor(Value)} titleLength={Nil} descriptionLength={Nil1} body="{bodyPreview(p44.responseBody)}"`}`)
+					
+					return
+				else
+				end
+			end,
+			decode = function(p2) --[[ Line: 248 ]]
+				-- upvalues: PlaceId (copy), Version (copy)
+				return {
+					placeId = PlaceId,
+					version = Version,
+					placeVersion = p2.placeVersion
+				}
+			end
+		})))
 	end
 }

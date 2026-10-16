@@ -1,27 +1,29 @@
-﻿local purchasePrompt = script:FindFirstAncestor("PurchasePrompt")
-local marketplaceService = game:GetService("MarketplaceService")
-local errorOccurredModule = require(purchasePrompt.Actions.ErrorOccurred)
-local purchaseErrorModule = require(purchasePrompt.Enums.PurchaseError)
-local clearProductInfoCachesModule = require(purchasePrompt.Utils.clearProductInfoCaches)
-local shouldCheckSubscriptionMembershipForProductTypeModule = require(purchasePrompt.Utils.shouldCheckSubscriptionMembershipForProductType)
-local fFlagEnablePriceChangedErrorHandlingModule = require(purchasePrompt.Flags.FFlagEnablePriceChangedErrorHandling)
-local clearProductInfoCachesOnPriceChanged = game:DefineFastFlag("ClearProductInfoCachesOnPriceChanged", false)
-local enableConvertPriceChangedToUnknownFailure = game:DefineFastFlag("EnableConvertPriceChangedToUnknownFailure", false)
-local enableSignalCheckPlayerHasRobloxSubscriptionEngineFeature = game:GetEngineFeature("EnableSignalCheckPlayerHasRobloxSubscription")
+﻿local PurchasePrompt = script:FindFirstAncestor("PurchasePrompt")
+local MarketplaceService = game:GetService("MarketplaceService")
+local ErrorOccurredModule = require(PurchasePrompt.Actions.ErrorOccurred)
+local PurchaseErrorModule = require(PurchasePrompt.Enums.PurchaseError)
+local ClearProductInfoCachesModule = require(PurchasePrompt.Utils.clearProductInfoCaches)
+local ShouldCheckSubscriptionMembershipForProductTypeModule = require(PurchasePrompt.Utils.shouldCheckSubscriptionMembershipForProductType)
+local FFlagEnablePriceChangedErrorHandlingModule = require(PurchasePrompt.Flags.FFlagEnablePriceChangedErrorHandling)
+local ClearProductInfoCachesOnPriceChanged = game:DefineFastFlag("ClearProductInfoCachesOnPriceChanged", false)
+local EnableConvertPriceChangedToUnknownFailure = game:DefineFastFlag("EnableConvertPriceChangedToUnknownFailure", false)
+local EnableSignalCheckPlayerHasRobloxSubscriptionEngineFeature = game:GetEngineFeature("EnableSignalCheckPlayerHasRobloxSubscription")
 
-return function(p1, p2, p3)
-	-- upvalues: fFlagEnablePriceChangedErrorHandlingModule (ref), purchaseErrorModule (ref), clearProductInfoCachesOnPriceChanged (ref), clearProductInfoCachesModule (ref), enableSignalCheckPlayerHasRobloxSubscriptionEngineFeature (ref), shouldCheckSubscriptionMembershipForProductTypeModule (ref), marketplaceService (ref), enableConvertPriceChangedToUnknownFailure (ref), errorOccurredModule (ref)
-	if not fFlagEnablePriceChangedErrorHandlingModule then
+return function(p1, PriceChanged, p2): boolean --[[ Line: 20 | Named "handlePriceChangedError" ]]
+	-- upvalues: FFlagEnablePriceChangedErrorHandlingModule (copy), PurchaseErrorModule (copy), ClearProductInfoCachesOnPriceChanged (copy), ClearProductInfoCachesModule (copy), EnableSignalCheckPlayerHasRobloxSubscriptionEngineFeature (copy), ShouldCheckSubscriptionMembershipForProductTypeModule (copy), MarketplaceService (copy), EnableConvertPriceChangedToUnknownFailure (copy), ErrorOccurredModule (copy)
+	if not FFlagEnablePriceChangedErrorHandlingModule then
 		return false
-	elseif p2 ~= purchaseErrorModule.PriceChanged then
+	end
+	if PriceChanged ~= PurchaseErrorModule.PriceChanged then
 		return false
-	elseif clearProductInfoCachesOnPriceChanged then
-		clearProductInfoCachesModule()
 	end
-	if enableSignalCheckPlayerHasRobloxSubscriptionEngineFeature and shouldCheckSubscriptionMembershipForProductTypeModule(p3) then
-		marketplaceService:signalCheckPlayerHasRobloxSubscription()
+	if ClearProductInfoCachesOnPriceChanged then
+		ClearProductInfoCachesModule()
 	end
-	p1:dispatch(errorOccurredModule(if enableConvertPriceChangedToUnknownFailure then purchaseErrorModule.UnknownFailure else purchaseErrorModule.PriceChanged))
+	if EnableSignalCheckPlayerHasRobloxSubscriptionEngineFeature and ShouldCheckSubscriptionMembershipForProductTypeModule(p2) then
+		MarketplaceService:signalCheckPlayerHasRobloxSubscription()
+	end
+	p1:dispatch(ErrorOccurredModule(if EnableConvertPriceChangedToUnknownFailure then PurchaseErrorModule.UnknownFailure else PurchaseErrorModule.PriceChanged))
 	
 	return true
 end

@@ -1,29 +1,29 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local _ = require(buildExperience.Chat.chatTypes)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local _ = require(BuildExperience.Chat.chatTypes)
 
-return function()
-	-- upvalues: signalsModule (ref), signalsReactModule (ref)
-	local var1, var2 = signalsModule.createSignal(false)
-	local var3, var4 = signalsModule.createSignal(nil)
-	local var5, var6 = signalsModule.createSignal(nil)
+return function() --[[ Line: 26 | Named "createPlayButtonStore" ]]
+	-- upvalues: SignalsModule (copy), SignalsReactModule (copy)
+	local Signal, Signal2 = SignalsModule.createSignal(false)
+	local Signal1, Signal2_1 = SignalsModule.createSignal(nil)
+	local Signal3, Signal2_2 = SignalsModule.createSignal(nil)
 	
 	return {
-		getIsActive = var1,
-		useIsActive = function()
-			-- upvalues: signalsReactModule (copy), var1 (ref)
-			return signalsReactModule.useSignalState(var1)
+		getIsActive = Signal,
+		useIsActive = function() --[[ Line: 32 ]]
+			-- upvalues: SignalsReactModule (upval), Signal (copy)
+			return SignalsReactModule.useSignalState(Signal)
 		end,
-		setIsActive = var2,
-		getResumeTarget = var3,
-		useResumeTarget = function()
-			-- upvalues: signalsReactModule (copy), var3 (ref)
-			return signalsReactModule.useSignalState(var3)
+		setIsActive = Signal2,
+		getResumeTarget = Signal1,
+		useResumeTarget = function() --[[ Line: 36 ]]
+			-- upvalues: SignalsReactModule (upval), Signal1 (copy)
+			return SignalsReactModule.useSignalState(Signal1)
 		end,
-		setResumeTarget = var4,
-		getPendingResourceAttachment = var5,
-		setPendingResourceAttachment = var6
+		setResumeTarget = Signal2_1,
+		getPendingResourceAttachment = Signal3,
+		setPendingResourceAttachment = Signal2_2
 	}
 end

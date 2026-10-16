@@ -1,15 +1,15 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local userInputService = require(foundation.Utility.Wrappers.Services).UserInputService
-local inputPlatformModule = require(foundation.Enums.InputPlatform)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local UserInputService = require(Foundation.Utility.Wrappers.Services).UserInputService
+local InputPlatformModule = require(Foundation.Enums.InputPlatform)
 
-local function _()
-	-- upvalues: userInputService (ref)
-	local ok, status = pcall(function()
-		-- upvalues: userInputService (copy)
-		return userInputService:GetConnectedGamepads()
+local function _(): boolean --[[ Line: 22 | Named "hasConnectedGamepad" ]]
+	-- upvalues: UserInputService (copy)
+	local Success, Result = pcall(function() --[[ Line: 23 ]]
+		-- upvalues: UserInputService (upval)
+		return UserInputService:GetConnectedGamepads()
 	end)
 	
-	return ok and (typeof(status) == "table" and #status > 0)
+	return Success and (typeof(Result) == "table" and #Result > 0)
 end
 
 local list = {
@@ -20,69 +20,79 @@ local list = {
 	Enum.KeyCode.DPadUp
 }
 
-local function getPlatformFromImage(p1)
-	-- upvalues: userInputService (ref), inputPlatformModule (ref)
-	local ok, status = pcall(function()
-		-- upvalues: userInputService (copy), p1 (ref)
-		return userInputService:GetImageForKeyCode(p1)
+local function getPlatformFromImage(KeyCode) --[[ Line: 39 ]]
+	-- upvalues: UserInputService (copy), InputPlatformModule (copy)
+	local Success, Result = pcall(function() --[[ Line: 40 ]]
+		-- upvalues: UserInputService (upval), KeyCode (copy)
+		return UserInputService:GetImageForKeyCode(KeyCode)
 	end)
 	
-	if not ok or typeof(status) ~= "string" or status == "" then
+	if Success and typeof(Result) == "string" and Result ~= "" then
+		local Lowered: string = Result:lower()
+		
+		return if Lowered:find("ps5") then InputPlatformModule.PS5 elseif Lowered:find("ps4") then InputPlatformModule.PS4 elseif Lowered:find("xbox") then InputPlatformModule.Xbox else nil
+	else
 		return nil
 	end
-	local var1 = status:lower()
-	
-	return if var1:find("ps5") then inputPlatformModule.PS5 elseif var1:find("ps4") then inputPlatformModule.PS4 elseif var1:find("xbox") then inputPlatformModule.Xbox else nil
 end
 
-local _ = function()
-	-- upvalues: list (ref), getPlatformFromImage (ref)
-	for i, v in list do
-		local var1 = getPlatformFromImage(v)
+local _ = function() --[[ Line: 62 | Named "getPlatformFromGamepadAssets" ]]
+	-- upvalues: list (copy), getPlatformFromImage (copy)
+	local PlatformFromImage = nil
+	for _, value in list do
+		PlatformFromImage = getPlatformFromImage(value)
 		
-		if var1 ~= nil then
-			return var1
+		if PlatformFromImage ~= nil then
+			return PlatformFromImage
 		end
 	end
 	return nil
 end
 
-local _ = function()
-	-- upvalues: userInputService (ref)
-	local ok, status = pcall(function()
-		-- upvalues: userInputService (copy)
-		return userInputService:GetStringForKeyCode(Enum.KeyCode.ButtonA)
+local _ = function(): boolean --[[ Line: 73 | Named "isPlaystation" ]]
+	-- upvalues: UserInputService (copy)
+	local Success, Result = pcall(function() --[[ Line: 74 ]]
+		-- upvalues: UserInputService (upval)
+		return UserInputService:GetStringForKeyCode(Enum.KeyCode.ButtonA)
 	end)
 	
-	return ok and status == "ButtonCross"
+	return Success and Result == "ButtonCross"
 end
 
-return function()
-	-- upvalues: userInputService (ref), inputPlatformModule (ref), list (ref), getPlatformFromImage (ref)
-	local ok, status = pcall(function()
-		-- upvalues: userInputService (copy)
-		return userInputService:GetConnectedGamepads()
+return function() --[[ Line: 80 | Named "detectInputPlatform" ]]
+	-- upvalues: UserInputService (copy), InputPlatformModule (copy), list (copy), getPlatformFromImage (copy)
+	local Success, Result = pcall(function() --[[ Line: 23 ]]
+		-- upvalues: UserInputService (upval)
+		return UserInputService:GetConnectedGamepads()
 	end)
 	
-	if not ok or not (typeof(status) == "table" and #status > 0) then
-		return inputPlatformModule.Default
+	if Success then
+		Success = typeof(Result) == "table" and #Result > 0
 	end
-	local var2, var3
-	for i, v in list do
-		var2 = getPlatformFromImage(v)
+	if not Success then
+		return InputPlatformModule.Default
+	end
+	local v1 = nil
+	local PlatformFromImage = nil
+	
+	for _, value in list do
+		PlatformFromImage = getPlatformFromImage(value)
 		
-		if var2 ~= nil then
-			var3 = var2
-			if var3 ~= nil then
-				return var3
-			end
-			local ok_1, status_1 = pcall(function()
-				-- upvalues: userInputService (copy)
-				return userInputService:GetStringForKeyCode(Enum.KeyCode.ButtonA)
-			end)
-			
-			return if ok_1 and status_1 == "ButtonCross" then inputPlatformModule.PS5 else inputPlatformModule.Xbox
+		if PlatformFromImage ~= nil then
+			v1 = PlatformFromImage
+			break
 		end
 	end
-	var3 = nil
+	if v1 ~= nil then
+		return v1
+	end
+	local Success1, Result1 = pcall(function() --[[ Line: 74 ]]
+		-- upvalues: UserInputService (upval)
+		return UserInputService:GetStringForKeyCode(Enum.KeyCode.ButtonA)
+	end)
+	
+	if Success1 then
+		Success1 = Result1 == "ButtonCross"
+	end
+	return if Success1 then InputPlatformModule.PS5 else InputPlatformModule.Xbox
 end

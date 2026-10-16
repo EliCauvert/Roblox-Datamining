@@ -1,25 +1,24 @@
-﻿local chrome = script:FindFirstAncestor("Chrome")
-local corePackagesService = game:GetService("CorePackages")
-local serviceModule = require(chrome.Service)
-local commonIconModule = require(chrome.Integrations.CommonIcon)
-local sideSheetPlacement = require(corePackagesService.Workspace.Packages.Chrome).Enums.SideSheetPlacement
-local inGameMenuIntegrationUtilsModule = require(script.Parent.InGameMenuIntegrationUtils)
-local leaveGamePage = inGameMenuIntegrationUtilsModule.createPageOpenSignal("LeaveGamePage")
+﻿local Chrome = script:FindFirstAncestor("Chrome")
+local CorePackages = game:GetService("CorePackages")
+local ServiceModule = require(Chrome.Service)
+local CommonIconModule = require(Chrome.Integrations.CommonIcon)
+local InGameMenuIntegrationUtilsModule = require(script.Parent.InGameMenuIntegrationUtils)
+local LeaveGamePage = InGameMenuIntegrationUtilsModule.createPageOpenSignal("LeaveGamePage")
 
-return serviceModule:register({
+return ServiceModule:register({
 	label = "CoreScripts.InGameMenu.LeaveGame",
-	initialAvailability = serviceModule.AvailabilitySignal.Available,
-	id = require(corePackagesService.Workspace.Packages.InExperienceSideSheet).Enums.ActionBinding.Leave,
-	sideSheetPlacement = sideSheetPlacement.SessionAction,
-	activated = function(_)
-		-- upvalues: inGameMenuIntegrationUtilsModule (ref), leaveGamePage (ref)
-		inGameMenuIntegrationUtilsModule.toggleIGMPage("LeaveGamePage", leaveGamePage:get())
+	initialAvailability = ServiceModule.AvailabilitySignal.Available,
+	id = require(CorePackages.Workspace.Packages.InExperienceSideSheet).Enums.ActionBinding.Leave,
+	sideSheetPlacement = require(CorePackages.Workspace.Packages.Chrome).Enums.SideSheetPlacement.SessionAction,
+	activated = function(_) --[[ Line: 22 ]]
+		-- upvalues: InGameMenuIntegrationUtilsModule (copy), LeaveGamePage (copy)
+		InGameMenuIntegrationUtilsModule.toggleIGMPage("LeaveGamePage", LeaveGamePage:get())
 	end,
-	isActivated = leaveGamePage,
+	isActivated = LeaveGamePage,
 	components = {
-		Icon = function(_)
-			-- upvalues: commonIconModule (ref), leaveGamePage (ref)
-			return commonIconModule("icons/actions/leave", nil, leaveGamePage)
+		Icon = function(_) --[[ Line: 27 ]]
+			-- upvalues: CommonIconModule (copy), LeaveGamePage (copy)
+			return CommonIconModule("icons/actions/leave", nil, LeaveGamePage)
 		end
 	}
 })

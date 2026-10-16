@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CorePackages").Packages.RegExp)
+﻿return (require(game:GetService("CorePackages").Packages.RegExp))

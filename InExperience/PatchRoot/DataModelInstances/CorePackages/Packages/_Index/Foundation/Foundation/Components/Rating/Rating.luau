@@ -1,112 +1,119 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local builderIconsModule = require(parent.BuilderIcons)
-local reactModule = require(parent.React)
-local chipSizeModule = require(foundation.Enums.ChipSize)
-local dividerModule = require(foundation.Components.Divider)
-local iconModule = require(foundation.Components.Icon)
-local orientationModule = require(foundation.Enums.Orientation)
-local ratingValueModule = require(foundation.Enums.RatingValue)
-local textModule = require(foundation.Components.Text)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local useRatingVariantsModule = require(script.Parent.useRatingVariants)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local icon = builderIconsModule.Icon
-local iconVariant = builderIconsModule.IconVariant
-local t = {
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local BuilderIconsModule = require(Parent.BuilderIcons)
+local ReactModule = require(Parent.React)
+local DividerModule = require(Foundation.Components.Divider)
+local IconModule = require(Foundation.Components.Icon)
+local OrientationModule = require(Foundation.Enums.Orientation)
+local RatingValueModule = require(Foundation.Enums.RatingValue)
+local TextModule = require(Foundation.Components.Text)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local UseRatingVariantsModule = require(script.Parent.useRatingVariants)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local Icon = BuilderIconsModule.Icon
+local IconVariant = BuilderIconsModule.IconVariant
+local config = {
 	Selectable = true,
 	testId = "--foundation-rating",
-	size = chipSizeModule.Medium,
-	value = ratingValueModule.None
+	size = require(Foundation.Enums.ChipSize).Medium,
+	value = RatingValueModule.None
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useRatingVariantsModule (ref), reactModule (ref), ratingValueModule (ref), viewModule (ref), withCommonPropsModule (ref), iconModule (ref), icon (ref), iconVariant (ref), textModule (ref), dividerModule (ref), orientationModule (ref)
-	local var1 = withDefaultsModule(p1, t)
-	local var2 = useTokensModule()
-	local var3 = useRatingVariantsModule(var2, var1.size)
-	local var4 = reactModule.useRef(nil)
-	local var5 = reactModule.useRef(nil)
-	local var6 = reactModule.useMemo(function()
-		-- upvalues: var2 (ref)
-		local floored = math.floor(var2.Stroke.Thicker)
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 41 | Named "Rating" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UseRatingVariantsModule (copy), ReactModule (copy), RatingValueModule (copy), ViewModule (copy), WithCommonPropsModule (copy), IconModule (copy), Icon (copy), IconVariant (copy), TextModule (copy), DividerModule (copy), OrientationModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	local UseTokensModuleResult = UseTokensModule()
+	local UseRatingVariantsModuleResult = UseRatingVariantsModule(UseTokensModuleResult, WithDefaultsModuleResult.size)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 49 ]]
+		-- upvalues: UseTokensModuleResult (copy)
+		local Floored = math.floor(UseTokensModuleResult.Stroke.Thicker)
 		
 		return {
-			radius = UDim.new(0, var2.Radius.Circle),
-			offset = floored * 2,
-			borderWidth = floored
+			radius = UDim.new(0, UseTokensModuleResult.Radius.Circle),
+			offset = Floored * 2,
+			borderWidth = Floored
 		}
-	end, { var2 })
+	end, { UseTokensModuleResult })
+	local IsValueMatch = WithDefaultsModuleResult.value == RatingValueModule.ThumbUp
+	local IsValueMatch1 = WithDefaultsModuleResult.value == RatingValueModule.ThumbDown
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var1, {
-		tag = var3.container.tag,
-		backgroundStyle = var3.container.backgroundStyle,
-		ref = p2
+	return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, {
+		tag = UseRatingVariantsModuleResult.container.tag,
+		backgroundStyle = UseRatingVariantsModuleResult.container.backgroundStyle,
+		ref = Ref
 	}), {
-		ThumbUp = reactModule.createElement(viewModule, {
+		ThumbUp = ReactModule.createElement(ViewModule, {
 			LayoutOrder = 1,
-			tag = var3.thumbUpSegment.tag,
-			ref = var4,
-			onActivated = var1.onThumbUp,
-			cursor = var6,
+			tag = UseRatingVariantsModuleResult.thumbUpSegment.tag,
+			ref = UseRefResult,
+			onActivated = WithDefaultsModuleResult.onThumbUp,
+			cursor = UseMemoResult,
 			selection = {
-				Selectable = var1.Selectable,
-				NextSelectionUp = var1.NextSelectionUp,
-				NextSelectionDown = var1.NextSelectionDown,
-				NextSelectionLeft = var1.NextSelectionLeft,
-				NextSelectionRight = var5
+				Selectable = WithDefaultsModuleResult.Selectable,
+				NextSelectionUp = WithDefaultsModuleResult.NextSelectionUp,
+				NextSelectionDown = WithDefaultsModuleResult.NextSelectionDown,
+				NextSelectionLeft = WithDefaultsModuleResult.NextSelectionLeft,
+				NextSelectionRight = UseRefResult1
 			},
-			testId = `{var1.testId}--thumb-up`
+			testId = `{WithDefaultsModuleResult.testId}--thumb-up`
 		}, {
-			Icon = reactModule.createElement(viewModule, { LayoutOrder = 1, tag = var3.thumbUpIcon.tag }, {
-				Icon = reactModule.createElement(iconModule, {
-					name = icon.ThumbUp,
-					variant = if var1.value == ratingValueModule.ThumbUp then iconVariant.Filled else iconVariant.Regular,
-					size = var3.iconSize,
-					style = var3.text.contentStyle,
-					testId = `{var1.testId}--thumb-up-icon`
+			Icon = ReactModule.createElement(ViewModule, {
+				LayoutOrder = 1,
+				tag = UseRatingVariantsModuleResult.thumbUpIcon.tag
+			}, {
+				Icon = ReactModule.createElement(IconModule, {
+					name = Icon.ThumbUp,
+					variant = if IsValueMatch then IconVariant.Filled else IconVariant.Regular,
+					size = UseRatingVariantsModuleResult.iconSize,
+					style = UseRatingVariantsModuleResult.text.contentStyle,
+					testId = `{WithDefaultsModuleResult.testId}--thumb-up-icon`
 				})
 			}),
-			Text = reactModule.createElement(textModule, {
+			Text = ReactModule.createElement(TextModule, {
 				LayoutOrder = 2,
-				Text = var1.text,
-				textStyle = var3.text.contentStyle,
-				tag = var3.text.tag,
-				testId = `{var1.testId}--text`
+				Text = WithDefaultsModuleResult.text,
+				textStyle = UseRatingVariantsModuleResult.text.contentStyle,
+				tag = UseRatingVariantsModuleResult.text.tag,
+				testId = `{WithDefaultsModuleResult.testId}--text`
 			})
 		}),
-		Divider = reactModule.createElement(viewModule, {
+		Divider = ReactModule.createElement(ViewModule, {
 			LayoutOrder = 2,
-			tag = var3.dividerContainer.tag,
-			testId = `{var1.testId}--divider`
+			tag = UseRatingVariantsModuleResult.dividerContainer.tag,
+			testId = `{WithDefaultsModuleResult.testId}--divider`
 		}, {
-			Line = reactModule.createElement(dividerModule, { orientation = orientationModule.Vertical })
+			Line = ReactModule.createElement(DividerModule, { orientation = OrientationModule.Vertical })
 		}),
-		ThumbDown = reactModule.createElement(viewModule, {
+		ThumbDown = ReactModule.createElement(ViewModule, {
 			LayoutOrder = 3,
-			tag = var3.thumbDownSegment.tag,
-			ref = var5,
-			onActivated = var1.onThumbDown,
-			cursor = var6,
+			tag = UseRatingVariantsModuleResult.thumbDownSegment.tag,
+			ref = UseRefResult1,
+			onActivated = WithDefaultsModuleResult.onThumbDown,
+			cursor = UseMemoResult,
 			selection = {
-				Selectable = var1.Selectable,
-				NextSelectionUp = var1.NextSelectionUp,
-				NextSelectionDown = var1.NextSelectionDown,
-				NextSelectionLeft = var4,
-				NextSelectionRight = var1.NextSelectionRight
+				Selectable = WithDefaultsModuleResult.Selectable,
+				NextSelectionUp = WithDefaultsModuleResult.NextSelectionUp,
+				NextSelectionDown = WithDefaultsModuleResult.NextSelectionDown,
+				NextSelectionLeft = UseRefResult,
+				NextSelectionRight = WithDefaultsModuleResult.NextSelectionRight
 			},
-			testId = `{var1.testId}--thumb-down`
+			testId = `{WithDefaultsModuleResult.testId}--thumb-down`
 		}, {
-			Icon = reactModule.createElement(viewModule, { LayoutOrder = 1, tag = var3.thumbDownIcon.tag }, {
-				Icon = reactModule.createElement(iconModule, {
-					name = icon.ThumbDown,
-					variant = if var1.value == ratingValueModule.ThumbDown then iconVariant.Filled else iconVariant.Regular,
-					size = var3.iconSize,
-					style = var3.text.contentStyle,
-					testId = `{var1.testId}--thumb-down-icon`
+			Icon = ReactModule.createElement(ViewModule, {
+				LayoutOrder = 1,
+				tag = UseRatingVariantsModuleResult.thumbDownIcon.tag
+			}, {
+				Icon = ReactModule.createElement(IconModule, {
+					name = Icon.ThumbDown,
+					variant = if IsValueMatch1 then IconVariant.Filled else IconVariant.Regular,
+					size = UseRatingVariantsModuleResult.iconSize,
+					style = UseRatingVariantsModuleResult.text.contentStyle,
+					testId = `{WithDefaultsModuleResult.testId}--thumb-down-icon`
 				})
 			})
 		})

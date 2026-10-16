@@ -1,15 +1,14 @@
-﻿local home = script:FindFirstAncestor("Home")
-local parent = home.Parent
-local reactModule = require(parent.React)
-local startHomeCollectionLayoutSyncModule = require(home.startHomeCollectionLayoutSync)
-local fFlagEnableHomePageSduiPrefetch = require(parent.SharedFlags).FFlagEnableHomePageSduiPrefetch
+﻿local Home = script:FindFirstAncestor("Home")
+local Parent = Home.Parent
+local ReactModule = require(Parent.React)
+local StartHomeCollectionLayoutSyncModule = require(Home.startHomeCollectionLayoutSync)
+local FFlagEnableHomePageSduiPrefetch = require(Parent.SharedFlags).FFlagEnableHomePageSduiPrefetch
 
-return function()
-	-- upvalues: reactModule (ref), fFlagEnableHomePageSduiPrefetch (ref), startHomeCollectionLayoutSyncModule (ref)
-	reactModule.useEffect(function()
-		-- upvalues: fFlagEnableHomePageSduiPrefetch (copy), startHomeCollectionLayoutSyncModule (copy)
-		if fFlagEnableHomePageSduiPrefetch then
-			return startHomeCollectionLayoutSyncModule()
-		end
+return function() --[[ Line: 11 | Named "useHomeCollectionLayoutSync" ]]
+	-- upvalues: ReactModule (copy), FFlagEnableHomePageSduiPrefetch (copy), StartHomeCollectionLayoutSyncModule (copy)
+	ReactModule.useEffect(function() --[[ Line: 12 ]]
+		-- upvalues: FFlagEnableHomePageSduiPrefetch (upval), StartHomeCollectionLayoutSyncModule (upval)
+		if not FFlagEnableHomePageSduiPrefetch then return end
+		return StartHomeCollectionLayoutSyncModule()
 	end, {})
 end

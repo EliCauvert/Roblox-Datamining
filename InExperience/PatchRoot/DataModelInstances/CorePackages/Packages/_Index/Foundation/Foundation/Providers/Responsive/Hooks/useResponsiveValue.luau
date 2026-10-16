@@ -1,11 +1,11 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local _ = require(foundation.Enums.Breakpoint)
-local _ = require(foundation.Providers.Responsive.ResponsiveContext)
-local _ = require(foundation.Components.Types)
-local useBreakpointModule = require(script.Parent.useBreakpoint)
-local useResponsiveModule = require(foundation.Providers.Responsive.useResponsive)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local _ = require(Foundation.Enums.Breakpoint)
+local _ = require(Foundation.Providers.Responsive.ResponsiveContext)
+local _ = require(Foundation.Components.Types)
+local UseBreakpointModule = require(script.Parent.useBreakpoint)
+local UseResponsiveModule = require(Foundation.Providers.Responsive.useResponsive)
 
-return function(p1, p2)
-	-- upvalues: useBreakpointModule (ref), useResponsiveModule (ref)
-	return p2[useResponsiveModule().config.breakpoint.shortNames[useBreakpointModule(p1)]]
+return function(p1, p2) --[[ Line: 14 | Named "useResponsiveValue" ]]
+	-- upvalues: UseBreakpointModule (copy), UseResponsiveModule (copy)
+	return p2[UseResponsiveModule().config.breakpoint.shortNames[UseBreakpointModule(p1)]]
 end

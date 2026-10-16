@@ -1,3 +1,3 @@
-﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator(script.Name, function(p1)
-	return { humanoidModel = p1 }
+﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator(script.Name, function(HumanoidModel) --[[ Line: 4 ]]
+	return { humanoidModel = HumanoidModel }
 end)

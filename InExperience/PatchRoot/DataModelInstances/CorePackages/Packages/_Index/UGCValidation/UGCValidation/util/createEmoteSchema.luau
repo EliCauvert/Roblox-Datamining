@@ -1,15 +1,15 @@
-﻿local list = {
+﻿local Names = {
 	"ThumbnailCharacterRotation", "ThumbnailHorizontalOffset", "ThumbnailKeyframe",
 	"ThumbnailVerticalOffset", "ThumbnailZoom", "ThumbnailTime",
 	"ThumbnailFieldOfView"
 }
 
-return function()
-	-- upvalues: list (ref)
-	local t = { ClassName = "Animation", _children = {} }
+return function() --[[ Line: 15 | Named "createEmoteSchema" ]]
+	-- upvalues: Names (copy)
+	local config = { ClassName = "Animation", _children = {} }
 	
-	for i, v in list do
-		table.insert(t._children, { ClassName = "NumberValue", _optional = true, Name = v })
+	for _, name in Names do
+		table.insert(config._children, { ClassName = "NumberValue", _optional = true, Name = name })
 	end
-	return t
+	return config
 end

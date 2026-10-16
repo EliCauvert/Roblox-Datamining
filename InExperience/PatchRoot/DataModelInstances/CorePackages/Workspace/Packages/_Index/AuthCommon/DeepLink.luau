@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.DeepLink.DeepLink)
+﻿return (require(script.Parent.Parent.Parent._Index.DeepLink.DeepLink))

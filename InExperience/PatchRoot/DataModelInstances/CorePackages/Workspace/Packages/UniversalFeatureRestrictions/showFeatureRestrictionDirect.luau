@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent._Workspace.UniversalFeatureRestrictions.UniversalFeatureRestrictions.Utils.showFeatureRestrictionDirect)
+﻿return (require(script.Parent.Parent._Workspace.UniversalFeatureRestrictions.UniversalFeatureRestrictions.Utils.showFeatureRestrictionDirect))

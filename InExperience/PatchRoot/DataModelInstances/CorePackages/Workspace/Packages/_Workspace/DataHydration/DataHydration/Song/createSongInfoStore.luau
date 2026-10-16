@@ -1,13 +1,13 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local createDataCacheModule = require(dataHydration.createDataCache)
-local _ = require(dataHydration.DataHydrationTypes)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local CreateDataCacheModule = require(DataHydration.createDataCache)
+local _ = require(DataHydration.DataHydrationTypes)
 
-return function()
-	-- upvalues: createDataCacheModule (ref)
-	local var1 = createDataCacheModule()
+return function() --[[ Line: 14 | Named "createSongInfoStore" ]]
+	-- upvalues: CreateDataCacheModule (copy)
+	local DataCacheModule = CreateDataCacheModule()
 	
 	return {
-		getSongInfo = var1.getItem,
-		updateSongs = var1.updateItems
+		getSongInfo = DataCacheModule.getItem,
+		updateSongs = DataCacheModule.updateItems
 	}
 end

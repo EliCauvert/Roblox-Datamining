@@ -1,20 +1,19 @@
-﻿return function(p1)
-	local var1 = 1 + (p1 or 5)
-	local trac = debug.traceback()
-	local var2 = nil
-	local var3 = 1
+﻿return function(p1): string --[[ Line: 7 | Named "littleTraceback" ]]
+	local Traceback: string = debug.traceback()
+	local v1: number? = nil
+	local v2 = 1
 	
-	for _ = 1, var1 do
-		local _, var4 = trac:find("\n", var3, true)
+	for _ = 1, 1 + (p1 or 5) do
+		local _, EndIndex = Traceback:find("\n", v2, true)
 		
-		if var4 then
-			var3 = var4 + 1
-			
-			if not var2 then
-				var2 = var3
-			end
+		if not EndIndex then
+			return Traceback:sub(v1 or 1)
 		end
-		return trac:sub(var2 or 1)
+		v2 = EndIndex + 1
+		
+		if not v1 then
+			v1 = v2
+		end
 	end
-	return trac:sub(var2 or 1, var3 - 1)
+	return Traceback:sub(v1 or 1, v2 - 1)
 end

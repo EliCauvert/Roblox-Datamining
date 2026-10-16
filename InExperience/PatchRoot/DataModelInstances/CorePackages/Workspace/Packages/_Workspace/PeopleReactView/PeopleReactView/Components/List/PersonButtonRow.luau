@@ -1,308 +1,309 @@
-﻿local peopleReactView = script:FindFirstAncestor("PeopleReactView")
-local parent = peopleReactView.Parent
-local reactModule = require(parent.React)
-local robloxAppEnumsModule = require(parent.RobloxAppEnums)
-local robloxAppHooksModule = require(parent.RobloxAppHooks)
-local foundationModule = require(parent.Foundation)
-local peopleServiceModule = require(parent.PeopleService)
-local signalsReactModule = require(parent.SignalsReact)
-local view = foundationModule.View
-local personButtonModule = require(peopleReactView.Components.Buttons.PersonButton)
-local muteVolumeButtonModule = require(peopleReactView.Components.Buttons.MuteVolumeButton)
-local useDeviceOrientation = robloxAppHooksModule.useDeviceOrientation
-local useSignalState = signalsReactModule.useSignalState
-local personButtonConfigsModule = require(peopleReactView.Configs.PersonButtonConfigs)
-local peoplePageLayoutContextModule = require(peopleReactView.PeoplePageLayoutContext)
-local sideSheetFocusContextModule = require(peopleReactView.SideSheetFocusContext)
-local getPersonButtonRowSelectionBehaviorLeftModule = require(peopleReactView.Utils.getPersonButtonRowSelectionBehaviorLeft)
-local flags = peopleServiceModule.getService("Flags")
-local getFFlagAddPeoplePageCardLayout = flags.GetFFlagAddPeoplePageCardLayout
-local fFlagVoiceVolumeControlsPerUserPlayerListButton = flags.FFlagVoiceVolumeControlsPerUserPlayerListButton
-local fFlagSideSheetOpenPeoplePage = require(parent.SharedFlags).FFlagSideSheetOpenPeoplePage
-local fFlagPeopleListButtonOverflowModule = require(peopleReactView.Flags.FFlagPeopleListButtonOverflow)
+﻿local PeopleReactView = script:FindFirstAncestor("PeopleReactView")
+local Parent = PeopleReactView.Parent
+local ReactModule = require(Parent.React)
+local RobloxAppEnumsModule = require(Parent.RobloxAppEnums)
+local PeopleServiceModule = require(Parent.PeopleService)
+local View = require(Parent.Foundation).View
+local PersonButtonModule = require(PeopleReactView.Components.Buttons.PersonButton)
+local MuteVolumeButtonModule = require(PeopleReactView.Components.Buttons.MuteVolumeButton)
+local UseDeviceOrientationFunction = require(Parent.RobloxAppHooks).useDeviceOrientation
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local PersonButtonConfigsModule = require(PeopleReactView.Configs.PersonButtonConfigs)
+local PeoplePageLayoutContextModule = require(PeopleReactView.PeoplePageLayoutContext)
+local SideSheetFocusContextModule = require(PeopleReactView.SideSheetFocusContext)
+local GetPersonButtonRowSelectionBehaviorLeftModule = require(PeopleReactView.Utils.getPersonButtonRowSelectionBehaviorLeft)
+local FlagsService = PeopleServiceModule.getService("Flags")
+local GetFFlagAddPeoplePageCardLayoutFunction = FlagsService.GetFFlagAddPeoplePageCardLayout
+local FFlagVoiceVolumeControlsPerUserPlayerListButton = FlagsService.FFlagVoiceVolumeControlsPerUserPlayerListButton
+local FFlagSideSheetOpenPeoplePage = require(Parent.SharedFlags).FFlagSideSheetOpenPeoplePage
+local FFlagPeopleListButtonOverflowModule = require(PeopleReactView.Flags.FFlagPeopleListButtonOverflow)
 
-local function MemoizedButton(p1)
-	-- upvalues: getFFlagAddPeoplePageCardLayout (ref), reactModule (ref), peopleServiceModule (ref), personButtonModule (ref)
-	local config = p1.config
-	local var1 = if getFFlagAddPeoplePageCardLayout() then reactModule.useMemo(function()
-		-- upvalues: peopleServiceModule (copy)
-		return peopleServiceModule.getService("Constants")
+local function MemoizedButton(p1) --[[ Line: 33 ]]
+	-- upvalues: GetFFlagAddPeoplePageCardLayoutFunction (copy), ReactModule (copy), PeopleServiceModule (copy), PersonButtonModule (copy)
+	local Config = p1.config
+	local UseMemoResult = if GetFFlagAddPeoplePageCardLayoutFunction() then ReactModule.useMemo(function() --[[ Line: 41 ]]
+		-- upvalues: PeopleServiceModule (upval)
+		return PeopleServiceModule.getService("Constants")
 	end, {}) else nil
-	local var2 = reactModule.useCallback(function(p2)
-		-- upvalues: p1 (ref)
+	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 46 ]]
+		-- upvalues: p1 (copy)
 		p1.onButtonMount(p2, p1.buttonId)
 	end, { p1.onButtonMount })
-	local var3 = if getFFlagAddPeoplePageCardLayout() then reactModule.useCallback(function()
-		-- upvalues: config (ref), var1 (ref)
-		if config.id == var1.PERSON_BUTTONS.BLOCK_PLAYER then
-			config.onActivated("ingame_menu")
-			
-			return
-		elseif config.id == var1.PERSON_BUTTONS.REPORT_PLAYER then
-			config.onActivated("MenuPlayerList")
+	local UseResult1 = if GetFFlagAddPeoplePageCardLayoutFunction() then ReactModule.useCallback(function() --[[ Line: 51 ]]
+		-- upvalues: Config (copy), UseMemoResult (copy)
+		if Config.id == UseMemoResult.PERSON_BUTTONS.BLOCK_PLAYER then
+			Config.onActivated("ingame_menu")
 			
 			return
 		end
-		config.onActivated(var1.ANALYTICS.ENTRY_POINT.PEOPLE_LIST)
-	end, { config.id, config.onActivated }) else nil
+		if Config.id == UseMemoResult.PERSON_BUTTONS.REPORT_PLAYER then
+			Config.onActivated("MenuPlayerList")
+			
+			return
+		else
+			Config.onActivated(UseMemoResult.ANALYTICS.ENTRY_POINT.PEOPLE_LIST)
+		end
+	end, { Config.id, Config.onActivated }) else nil
 	
-	return reactModule.useMemo(function()
-		-- upvalues: reactModule (copy), personButtonModule (copy), config (ref), getFFlagAddPeoplePageCardLayout (copy), var3 (ref), var2 (ref)
-		return reactModule.createElement(personButtonModule, {
-			text = config.text,
-			icon = { on = config.onIcon, off = config.offIcon },
-			animatedIcon = config.animatedIcon,
-			buttonState = config.buttonState,
-			LayoutOrder = config.layoutOrder,
-			onActivated = if getFFlagAddPeoplePageCardLayout() then var3 else config.onActivated,
-			isGrayedOut = config.isGrayedOut,
-			isDisabled = config.isDisabled,
-			isBuilderIcon = config.isBuilderIcon,
-			buttonVariant = config.buttonVariant,
-			onMount = var2
+	return ReactModule.useMemo(function() --[[ Line: 62 ]]
+		-- upvalues: ReactModule (upval), PersonButtonModule (upval), Config (copy), GetFFlagAddPeoplePageCardLayoutFunction (upval), UseResult1 (copy), UseResult (copy)
+		return ReactModule.createElement(PersonButtonModule, {
+			text = Config.text,
+			icon = { on = Config.onIcon, off = Config.offIcon },
+			animatedIcon = Config.animatedIcon,
+			buttonState = Config.buttonState,
+			LayoutOrder = Config.layoutOrder,
+			onActivated = if GetFFlagAddPeoplePageCardLayoutFunction() then UseResult1 else Config.onActivated,
+			isGrayedOut = Config.isGrayedOut,
+			isDisabled = Config.isDisabled,
+			isBuilderIcon = Config.isBuilderIcon,
+			buttonVariant = Config.buttonVariant,
+			onMount = UseResult
 		})
 	end, {
-		config.text, config.onIcon, config.offIcon, config.animatedIcon,
-		config.buttonState, config.layoutOrder, config.onActivated, config.isGrayedOut,
-		config.isDisabled, config.isBuilderIcon, config.buttonVariant, var2
+		Config.text, Config.onIcon, Config.offIcon, Config.animatedIcon,
+		Config.buttonState, Config.layoutOrder, Config.onActivated, Config.isGrayedOut,
+		Config.isDisabled, Config.isBuilderIcon, Config.buttonVariant, UseResult
 	})
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), peoplePageLayoutContextModule (ref), personButtonConfigsModule (ref), fFlagPeopleListButtonOverflowModule (ref), useDeviceOrientation (ref), robloxAppEnumsModule (ref), peopleServiceModule (ref), fFlagVoiceVolumeControlsPerUserPlayerListButton (ref), useSignalState (ref), getFFlagAddPeoplePageCardLayout (ref), fFlagSideSheetOpenPeoplePage (ref), sideSheetFocusContextModule (ref), getPersonButtonRowSelectionBehaviorLeftModule (ref), muteVolumeButtonModule (ref), MemoizedButton (ref), view (ref)
-	local var1 = reactModule.useContext(peoplePageLayoutContextModule)
-	local var2 = personButtonConfigsModule(p1.userId, if fFlagPeopleListButtonOverflowModule then var1.isCompact else false)
-	local var3 = useDeviceOrientation() == robloxAppEnumsModule.DeviceOrientationMode.Portrait or fFlagPeopleListButtonOverflowModule and var1.isCompact
-	local var4 = reactModule.useMemo(function()
-		-- upvalues: peopleServiceModule (copy)
-		return peopleServiceModule.getService("FocusNavigationService")
+return function(p1) --[[ Line: 96 ]]
+	-- upvalues: ReactModule (copy), PeoplePageLayoutContextModule (copy), PersonButtonConfigsModule (copy), FFlagPeopleListButtonOverflowModule (copy), UseDeviceOrientationFunction (copy), RobloxAppEnumsModule (copy), PeopleServiceModule (copy), FFlagVoiceVolumeControlsPerUserPlayerListButton (copy), UseSignalStateFunction (copy), GetFFlagAddPeoplePageCardLayoutFunction (copy), FFlagSideSheetOpenPeoplePage (copy), SideSheetFocusContextModule (copy), GetPersonButtonRowSelectionBehaviorLeftModule (copy), MuteVolumeButtonModule (copy), MemoizedButton (copy), View (copy)
+	local UseContextResult = ReactModule.useContext(PeoplePageLayoutContextModule)
+	local PersonButtonConfigsModuleResult = PersonButtonConfigsModule(p1.userId, if FFlagPeopleListButtonOverflowModule then UseContextResult.isCompact else false)
+	local IsUseDeviceOrientationResultMatch = UseDeviceOrientationFunction() == RobloxAppEnumsModule.DeviceOrientationMode.Portrait or FFlagPeopleListButtonOverflowModule and UseContextResult.isCompact
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 106 ]]
+		-- upvalues: PeopleServiceModule (upval)
+		return PeopleServiceModule.getService("FocusNavigationService")
 	end, {})
-	local var5 = if fFlagVoiceVolumeControlsPerUserPlayerListButton then reactModule.useMemo(function()
-		-- upvalues: peopleServiceModule (copy)
-		return peopleServiceModule.getService("Constants")
+	local UseMemoResult1 = if FFlagVoiceVolumeControlsPerUserPlayerListButton then ReactModule.useMemo(function() --[[ Line: 111 ]]
+		-- upvalues: PeopleServiceModule (upval)
+		return PeopleServiceModule.getService("Constants")
 	end, {}) else nil
-	local var6 = if fFlagVoiceVolumeControlsPerUserPlayerListButton then useSignalState((if fFlagVoiceVolumeControlsPerUserPlayerListButton then reactModule.useMemo(function()
-		-- upvalues: peopleServiceModule (copy)
-		return peopleServiceModule.getService("PeopleVoiceChatStore")
-	end, {}) else nil).getShowVolumeControl) else false
-	local var7 = reactModule.useRef({})
-	local var8 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: var7 (ref)
+	local UseMemoResult2 = if FFlagVoiceVolumeControlsPerUserPlayerListButton then ReactModule.useMemo(function() --[[ Line: 117 ]]
+		-- upvalues: PeopleServiceModule (upval)
+		return PeopleServiceModule.getService("PeopleVoiceChatStore")
+	end, {}) else nil
+	local UseSignalStateResult = if FFlagVoiceVolumeControlsPerUserPlayerListButton then UseSignalStateFunction(UseMemoResult2.getShowVolumeControl) else false
+	local UseRefResult = ReactModule.useRef({})
+	local UseResult = ReactModule.useCallback(function(p2, p3) --[[ Line: 128 ]]
+		-- upvalues: UseRefResult (copy)
 		if p2 then
-			var7.current[p3] = p2
+			UseRefResult.current[p3] = p2
 			
 			return
+		else
+			UseRefResult.current[p3] = nil
 		end
-		var7.current[p3] = nil
 	end, {})
-	local var9 = reactModule.useMemo(function()
-		-- upvalues: getFFlagAddPeoplePageCardLayout (copy), var2 (ref)
-		local t = {}
+	local UseMemoResult3 = ReactModule.useMemo(function(): string --[[ Line: 136 ]]
+		-- upvalues: GetFFlagAddPeoplePageCardLayoutFunction (upval), PersonButtonConfigsModuleResult (copy)
+		local List = {}
 		
-		if getFFlagAddPeoplePageCardLayout() then
-			for i, v in var2 do
-				if v.shouldShow() then
-					table.insert(t, v.id)
+		if GetFFlagAddPeoplePageCardLayoutFunction() then
+			for _, value in PersonButtonConfigsModuleResult do
+				if value.shouldShow() then
+					table.insert(List, value.id)
 				end
 			end
 		else
-			for i, v in ipairs(var2) do
-				if v.shouldShow() then
-					table.insert(t, v.id)
+			for _, value1 in ipairs(PersonButtonConfigsModuleResult) do
+				if value1.shouldShow() then
+					table.insert(List, value1.id)
 				end
 			end
 		end
-		table.sort(t)
+		table.sort(List)
 		
-		return table.concat(t, ",")
-	end, { var2 })
-	reactModule.useEffect(function()
-		-- upvalues: fFlagVoiceVolumeControlsPerUserPlayerListButton (copy), var7 (ref), var6 (ref), var5 (ref), getFFlagAddPeoplePageCardLayout (copy), var2 (ref), p1 (ref), var4 (ref)
-		local t = {}
+		return table.concat(List, ",")
+	end, { PersonButtonConfigsModuleResult })
+	ReactModule.useEffect(function() --[[ Line: 156 ]]
+		-- upvalues: FFlagVoiceVolumeControlsPerUserPlayerListButton (upval), UseRefResult (copy), UseSignalStateResult (copy), UseMemoResult1 (copy), GetFFlagAddPeoplePageCardLayoutFunction (upval), PersonButtonConfigsModuleResult (copy), p1 (copy), UseMemoResult (copy)
+		local List = {}
 		
-		if fFlagVoiceVolumeControlsPerUserPlayerListButton then
-			local function _(p2)
-				-- upvalues: var7 (copy), t (ref), var6 (copy), var5 (copy)
+		if FFlagVoiceVolumeControlsPerUserPlayerListButton then
+			local function _(p2) --[[ Line: 161 | Named "appendVisibleConfig" ]]
+				-- upvalues: UseRefResult (upval), List (copy), UseSignalStateResult (upval), UseMemoResult1 (upval)
 				if not p2.shouldShow() then return end
-				local id = var7.current[p2.id]
+				local CurrentEntry = UseRefResult.current[p2.id]
 				
-				if id then
-					table.insert(t, id)
+				if CurrentEntry then
+					table.insert(List, CurrentEntry)
 				end
-				if var6 and p2.id == var5.PERSON_BUTTONS.MUTE_PLAYER then
-					local var10 = var7.current[p2.id .. "_volume"]
+				if UseSignalStateResult and p2.id == UseMemoResult1.PERSON_BUTTONS.MUTE_PLAYER then
+					local CurrentEntry1 = UseRefResult.current[p2.id .. "_volume"]
 					
-					if var10 then
-						table.insert(t, var10)
+					if CurrentEntry1 then
+						table.insert(List, CurrentEntry1)
 					end
 				end
 			end
 			
-			if getFFlagAddPeoplePageCardLayout() then
-				for i, v in var2 do
-					if v.shouldShow() then
-						local id = var7.current[v.id]
+			if GetFFlagAddPeoplePageCardLayoutFunction() then
+				for _, value in PersonButtonConfigsModuleResult do
+					if value.shouldShow() then
+						local CurrentEntry = UseRefResult.current[value.id]
 						
-						if id then
-							table.insert(t, id)
+						if CurrentEntry then
+							table.insert(List, CurrentEntry)
 						end
-						if var6 and v.id == var5.PERSON_BUTTONS.MUTE_PLAYER then
-							local var10 = var7.current[v.id .. "_volume"]
+						if UseSignalStateResult and value.id == UseMemoResult1.PERSON_BUTTONS.MUTE_PLAYER then
+							local CurrentEntry1 = UseRefResult.current[value.id .. "_volume"]
 							
-							if var10 then
-								table.insert(t, var10)
+							if CurrentEntry1 then
+								table.insert(List, CurrentEntry1)
 							end
 						end
 					end
 				end
 			else
-				for i, v in ipairs(var2) do
-					if v.shouldShow() then
-						local id = var7.current[v.id]
+				for _, value1 in ipairs(PersonButtonConfigsModuleResult) do
+					if value1.shouldShow() then
+						local CurrentEntry = UseRefResult.current[value1.id]
 						
-						if id then
-							table.insert(t, id)
+						if CurrentEntry then
+							table.insert(List, CurrentEntry)
 						end
-						if var6 and v.id == var5.PERSON_BUTTONS.MUTE_PLAYER then
-							local var11 = var7.current[v.id .. "_volume"]
+						if UseSignalStateResult and value1.id == UseMemoResult1.PERSON_BUTTONS.MUTE_PLAYER then
+							local CurrentEntry2 = UseRefResult.current[value1.id .. "_volume"]
 							
-							if var11 then
-								table.insert(t, var11)
+							if CurrentEntry2 then
+								table.insert(List, CurrentEntry2)
 							end
 						end
 					end
 				end
 			end
-		elseif getFFlagAddPeoplePageCardLayout() then
-			for i, v in var2 do
-				if v.shouldShow() then
-					local id = var7.current[v.id]
+		elseif GetFFlagAddPeoplePageCardLayoutFunction() then
+			for _, value2 in PersonButtonConfigsModuleResult do
+				if value2.shouldShow() then
+					local CurrentEntry = UseRefResult.current[value2.id]
 					
-					if id then
-						table.insert(t, id)
+					if CurrentEntry then
+						table.insert(List, CurrentEntry)
 					end
 				end
 			end
 		else
-			for i, v in ipairs(var2) do
-				if v.shouldShow() then
-					local id = var7.current[v.id]
+			for _, value3 in ipairs(PersonButtonConfigsModuleResult) do
+				if value3.shouldShow() then
+					local CurrentEntry = UseRefResult.current[value3.id]
 					
-					if id then
-						table.insert(t, id)
+					if CurrentEntry then
+						table.insert(List, CurrentEntry)
 					end
 				end
 			end
 		end
-		if #t > 0 then
-			table.sort(t, function(p2, p3)
-				return p2.LayoutOrder < p3.LayoutOrder
+		if #List > 0 then
+			table.sort(List, function(A, B): boolean --[[ Line: 209 ]]
+				return A.LayoutOrder < B.LayoutOrder
 			end)
-			var4.registerButtonRow(p1.userId, t, p1.index or 0)
+			UseMemoResult.registerButtonRow(p1.userId, List, p1.index or 0)
 		end
-	end, if fFlagVoiceVolumeControlsPerUserPlayerListButton then {
+	end, if FFlagVoiceVolumeControlsPerUserPlayerListButton then {
 		p1.userId,
 		p1.index,
-		var4,
-		var9,
-		var6
-	} else { p1.userId, p1.index, var4, var9 })
-	reactModule.useEffect(function()
-		-- upvalues: var4 (ref), p1 (ref)
-		return function()
-			-- upvalues: var4 (copy), p1 (copy)
-			var4.handlePersonRemoved(p1.userId)
-			var4.unregisterButtonRow(p1.userId)
+		UseMemoResult,
+		UseMemoResult3,
+		UseSignalStateResult
+	} else { p1.userId, p1.index, UseMemoResult, UseMemoResult3 })
+	ReactModule.useEffect(function() --[[ Line: 234 ]]
+		-- upvalues: UseMemoResult (copy), p1 (copy)
+		return function() --[[ Line: 235 ]]
+			-- upvalues: UseMemoResult (upval), p1 (upval)
+			UseMemoResult.handlePersonRemoved(p1.userId)
+			UseMemoResult.unregisterButtonRow(p1.userId)
 		end
-	end, { p1.userId, var4 })
-	local var12 = reactModule.useMemo(function()
-		-- upvalues: var4 (ref), p1 (ref)
-		return var4.hasSelectablePlatformButton(p1.userId)
-	end, { p1.userId, var4 })
-	local var13 = if fFlagSideSheetOpenPeoplePage then reactModule.useContext(sideSheetFocusContextModule) else false
-	local var14 = reactModule.useMemo(function()
-		-- upvalues: fFlagSideSheetOpenPeoplePage (copy), getPersonButtonRowSelectionBehaviorLeftModule (copy), var12 (ref), var13 (ref)
-		return if fFlagSideSheetOpenPeoplePage then getPersonButtonRowSelectionBehaviorLeftModule(var12, var13) elseif var12 then Enum.SelectionBehavior.Escape else Enum.SelectionBehavior.Stop
-	end, { var13, var12 })
+	end, { p1.userId, UseMemoResult })
+	local UseMemoResult4 = ReactModule.useMemo(function() --[[ Line: 241 ]]
+		-- upvalues: UseMemoResult (copy), p1 (copy)
+		return UseMemoResult.hasSelectablePlatformButton(p1.userId)
+	end, { p1.userId, UseMemoResult })
+	local UseContextResult1 = if FFlagSideSheetOpenPeoplePage then ReactModule.useContext(SideSheetFocusContextModule) else false
+	local UseMemoResult5 = ReactModule.useMemo(function() --[[ Line: 248 ]]
+		-- upvalues: FFlagSideSheetOpenPeoplePage (upval), GetPersonButtonRowSelectionBehaviorLeftModule (upval), UseMemoResult4 (copy), UseContextResult1 (copy)
+		return if FFlagSideSheetOpenPeoplePage then GetPersonButtonRowSelectionBehaviorLeftModule(UseMemoResult4, UseContextResult1) elseif UseMemoResult4 then Enum.SelectionBehavior.Escape else Enum.SelectionBehavior.Stop
+	end, { UseContextResult1, UseMemoResult4 })
 	
-	if not reactModule.useMemo(function()
-		-- upvalues: getFFlagAddPeoplePageCardLayout (copy), var2 (ref)
-		if getFFlagAddPeoplePageCardLayout() then
-			for i, v in var2 do
-				if v.shouldShow() then
+	if not ReactModule.useMemo(function(): boolean --[[ Line: 256 ]]
+		-- upvalues: GetFFlagAddPeoplePageCardLayoutFunction (upval), PersonButtonConfigsModuleResult (copy)
+		if GetFFlagAddPeoplePageCardLayoutFunction() then
+			for _, value in PersonButtonConfigsModuleResult do
+				if value.shouldShow() then
 					return true
 				end
 			end
 		else
-			for i, v in ipairs(var2) do
-				if v.shouldShow() then
+			for _, value1 in ipairs(PersonButtonConfigsModuleResult) do
+				if value1.shouldShow() then
 					return true
 				end
 			end
 		end
 		return false
-	end, { var2 }) then
+	end, { PersonButtonConfigsModuleResult }) then
 		return nil
 	end
-	local t = {}
+	local Elements = {}
 	
-	if getFFlagAddPeoplePageCardLayout() then
-		for i, v in var2 do
-			if v.shouldShow() then
-				if fFlagVoiceVolumeControlsPerUserPlayerListButton and var6 and v.id == var5.PERSON_BUTTONS.MUTE_PLAYER then
-					table.insert(t, reactModule.createElement(muteVolumeButtonModule, {
-						key = v.id,
-						config = v,
+	if GetFFlagAddPeoplePageCardLayoutFunction() then
+		for _, Config1 in PersonButtonConfigsModuleResult do
+			if Config1.shouldShow() then
+				if FFlagVoiceVolumeControlsPerUserPlayerListButton and UseSignalStateResult and Config1.id == UseMemoResult1.PERSON_BUTTONS.MUTE_PLAYER then
+					table.insert(Elements, ReactModule.createElement(MuteVolumeButtonModule, {
+						key = Config1.id,
+						config = Config1,
 						userId = p1.userId,
-						entryPoint = var5.ANALYTICS.ENTRY_POINT.PEOPLE_LIST,
-						muteButtonName = v.id,
-						volumeButtonName = v.id .. "_volume",
-						onButtonMount = var8
+						entryPoint = UseMemoResult1.ANALYTICS.ENTRY_POINT.PEOPLE_LIST,
+						muteButtonName = Config1.id,
+						volumeButtonName = Config1.id .. "_volume",
+						onButtonMount = UseResult
 					}))
 				else
-					table.insert(t, reactModule.createElement(MemoizedButton, {
-						key = v.id,
-						config = v,
-						buttonId = v.id,
-						onButtonMount = var8
+					table.insert(Elements, ReactModule.createElement(MemoizedButton, {
+						key = Config1.id,
+						config = Config1,
+						buttonId = Config1.id,
+						onButtonMount = UseResult
 					}))
 				end
 			end
 		end
 	else
-		for i, v in ipairs(var2) do
-			if v.shouldShow() then
-				if fFlagVoiceVolumeControlsPerUserPlayerListButton and var6 and v.id == var5.PERSON_BUTTONS.MUTE_PLAYER then
-					table.insert(t, reactModule.createElement(muteVolumeButtonModule, {
-						key = v.id,
-						config = v,
+		for _, Config in ipairs(PersonButtonConfigsModuleResult) do
+			if Config.shouldShow() then
+				if FFlagVoiceVolumeControlsPerUserPlayerListButton and (UseSignalStateResult and Config.id == UseMemoResult1.PERSON_BUTTONS.MUTE_PLAYER) then
+					table.insert(Elements, ReactModule.createElement(MuteVolumeButtonModule, {
+						key = Config.id,
+						config = Config,
 						userId = p1.userId,
-						entryPoint = var5.ANALYTICS.ENTRY_POINT.PEOPLE_LIST,
-						muteButtonName = v.id,
-						volumeButtonName = v.id .. "_volume",
-						onButtonMount = var8
+						entryPoint = UseMemoResult1.ANALYTICS.ENTRY_POINT.PEOPLE_LIST,
+						muteButtonName = Config.id,
+						volumeButtonName = Config.id .. "_volume",
+						onButtonMount = UseResult
 					}))
 				else
-					table.insert(t, reactModule.createElement(MemoizedButton, {
-						key = v.id,
-						config = v,
-						buttonId = v.id,
-						onButtonMount = var8
+					table.insert(Elements, ReactModule.createElement(MemoizedButton, {
+						key = Config.id,
+						config = Config,
+						buttonId = Config.id,
+						onButtonMount = UseResult
 					}))
 				end
 			end
 		end
 	end
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		LayoutOrder = 1,
 		tag = {
 			["auto-xy row"] = true,
-			["gap-small"] = var3,
-			["gap-medium"] = not var3
+			["gap-small"] = IsUseDeviceOrientationResultMatch,
+			["gap-medium"] = not IsUseDeviceOrientationResultMatch
 		},
 		selectionGroup = {
-			SelectionBehaviorLeft = var14,
+			SelectionBehaviorLeft = UseMemoResult5,
 			SelectionBehaviorRight = Enum.SelectionBehavior.Stop
 		}
-	}, t)
+	}, Elements)
 end

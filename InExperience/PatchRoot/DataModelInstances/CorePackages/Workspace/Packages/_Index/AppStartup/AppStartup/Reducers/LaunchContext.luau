@@ -1,8 +1,8 @@
-﻿local appStartup = script:FindFirstAncestor("AppStartup")
-local _ = require(appStartup.Enums)
+﻿local AppStartup = script:FindFirstAncestor("AppStartup")
+local _ = require(AppStartup.Enums)
 
-return require(appStartup.Parent.Rodux).createReducer(nil, {
-	[require(appStartup.Actions.SetLaunchContext).name] = function(_, p1)
+return require(AppStartup.Parent.Rodux).createReducer(nil, {
+	[require(AppStartup.Actions.SetLaunchContext).name] = function(_, p1) --[[ Line: 8 ]]
 		return p1.launchContext
 	end
 })

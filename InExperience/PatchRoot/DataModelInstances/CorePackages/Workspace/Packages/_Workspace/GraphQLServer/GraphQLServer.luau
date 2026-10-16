@@ -1,11 +1,11 @@
-﻿local graphqlModule = require(script.graphql)
+﻿local GraphqlModule = require(script.graphql)
 
 return {
 	GraphQLServer = require(script.Server),
-	types = graphqlModule.generatedTypes,
-	mocks = graphqlModule.mocks,
+	types = GraphqlModule.generatedTypes,
+	mocks = GraphqlModule.mocks,
 	ApolloClientTestUtils = require(script.ApolloClientTestUtils),
-	generateTypeDefs = graphqlModule.generateTypeDefs,
+	generateTypeDefs = GraphqlModule.generateTypeDefs,
 	enums = require(script.graphql.enums),
 	["jest.config"] = script["jest.config"]
 }

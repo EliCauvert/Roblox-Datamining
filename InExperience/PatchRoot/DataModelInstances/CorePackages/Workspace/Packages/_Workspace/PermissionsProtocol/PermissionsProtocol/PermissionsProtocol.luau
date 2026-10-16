@@ -1,12 +1,12 @@
-﻿local parent = script.Parent.Parent
-local messageBus = require(parent.MessageBus).MessageBus
-local promiseModule = require(parent.Promise)
-local tModule = require(parent.t)
-local getFFlagLuaEnableShowUpsellMethod = require(parent.SharedFlags).GetFFlagLuaEnableShowUpsellMethod
-local scopedSubscribersForPermissionsProtocol2 = game:DefineFastFlag("ScopedSubscribersForPermissionsProtocol2", false)
+﻿local Parent = script.Parent.Parent
+local MessageBus = require(Parent.MessageBus).MessageBus
+local PromiseModule = require(Parent.Promise)
+local TModule = require(Parent.t)
+local GetFFlagLuaEnableShowUpsellMethodFunction = require(Parent.SharedFlags).GetFFlagLuaEnableShowUpsellMethod
+local ScopedSubscribersForPermissionsProtocol2 = game:DefineFastFlag("ScopedSubscribersForPermissionsProtocol2", false)
 local _ = require(script.Parent.PermissionsProtocolTypes)
 game:DefineFastFlag("DebugRomarkAudioPermissionsBypass", false)
-local t = {
+local Permissions = {
 	CAMERA_ACCESS = "CAMERA_ACCESS",
 	MICROPHONE_ACCESS = "MICROPHONE_ACCESS",
 	LOCAL_NETWORK = "LOCAL_NETWORK",
@@ -14,274 +14,288 @@ local t = {
 	WRITE_MEDIA_STORAGE = "WRITE_MEDIA_STORAGE",
 	POST_NOTIFICATIONS = "POST_NOTIFICATIONS"
 }
-local t_1 = {
+local Status = {
 	AUTHORIZED = "AUTHORIZED",
 	DENIED = "DENIED",
 	RESTRICTED = "RESTRICTED",
 	UNSUPPORTED = "UNSUPPORTED"
 }
-local t_2 = {
+local UpsellStatus = {
 	SHOW = "SHOW",
 	HIDE = "HIDE",
 	UNSUPPORTED = "UNSUPPORTED"
 }
-local var1 = tModule.array(tModule.valueOf(t))
-local var2 = tModule.valueOf(t_1)
-local var3 = tModule.valueOf(t_2)
-local t_3 = {
-	Permissions = t,
-	Status = t_1,
-	UpsellStatus = t_2,
+local ArrayResult = TModule.array(TModule.valueOf(Permissions))
+local ValueOfResult = TModule.valueOf(Status)
+local ValueOfResult1 = TModule.valueOf(UpsellStatus)
+local PermissionsProtocolModule = {
+	Permissions = Permissions,
+	Status = Status,
+	UpsellStatus = UpsellStatus,
 	PERMISSION_REQUEST_PROTOCOL_METHOD_REQUEST_DESCRIPTOR = {
 		protocolName = "PermissionsProtocol",
 		methodName = "PermissionsRequest",
-		validateParams = tModule.strictInterface({ permissions = var1 })
+		validateParams = TModule.strictInterface({ permissions = ArrayResult })
 	},
 	PERMISSION_REQUEST_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR = {
 		protocolName = "PermissionsProtocol",
 		methodName = "PermissionsRequest",
-		validateParams = tModule.strictInterface({ status = var2, missingPermissions = var1 })
+		validateParams = TModule.strictInterface({ status = ValueOfResult, missingPermissions = ArrayResult })
 	},
 	HAS_PERMISSIONS_PROTOCOL_METHOD_REQUEST_DESCRIPTOR = {
 		protocolName = "PermissionsProtocol",
 		methodName = "HasPermissions",
-		validateParams = tModule.strictInterface({ permissions = var1 })
+		validateParams = TModule.strictInterface({ permissions = ArrayResult })
 	},
 	HAS_PERMISSIONS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR = {
 		protocolName = "PermissionsProtocol",
 		methodName = "HasPermissions",
-		validateParams = tModule.strictInterface({ status = var2, missingPermissions = var1 })
+		validateParams = TModule.strictInterface({ status = ValueOfResult, missingPermissions = ArrayResult })
 	},
 	SUPPORTS_PERMISSIONS_PROTOCOL_METHOD_REQUEST_DESCRIPTOR = {
 		protocolName = "PermissionsProtocol",
 		methodName = "SupportsPermissions",
-		validateParams = tModule.strictInterface({ includeStatus = tModule.literal(false) })
+		validateParams = TModule.strictInterface({ includeStatus = TModule.literal(false) })
 	},
 	SUPPORTS_PERMISSIONS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR = {
 		protocolName = "PermissionsProtocol",
 		methodName = "SupportsPermissions",
-		validateParams = tModule.strictInterface({ permissions = var1 })
+		validateParams = TModule.strictInterface({ permissions = ArrayResult })
 	},
 	SHOULD_SHOW_PERMISSION_UPSELL_PROTOCOL_METHOD_REQUEST_DESCRIPTOR = {
 		protocolName = "PermissionsProtocol",
 		methodName = "ShouldShowPermissionUpsell",
-		validateParams = tModule.strictInterface({ permissions = var1 })
+		validateParams = TModule.strictInterface({ permissions = ArrayResult })
 	},
 	SHOULD_SHOW_PERMISSION_UPSELL_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR = {
 		protocolName = "PermissionsProtocol",
 		methodName = "ShouldShowPermissionUpsell",
-		validateParams = tModule.strictInterface({ hiddenUpsellPermissions = var1, upsellStatus = var3 })
+		validateParams = TModule.strictInterface({
+			hiddenUpsellPermissions = ArrayResult,
+			upsellStatus = ValueOfResult1
+		})
 	},
 	SHOULD_SHOW_PERMISSION_RATIONALE_PROTOCOL_METHOD_REQUEST_DESCRIPTOR = {
 		protocolName = "PermissionsProtocol",
 		methodName = "ShouldShowRequestPermissionRationale",
-		validateParams = tModule.strictInterface({ permissions = var1 })
+		validateParams = TModule.strictInterface({ permissions = ArrayResult })
 	},
 	SHOULD_SHOW_PERMISSION_RATIONALE_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR = {
 		protocolName = "PermissionsProtocol",
 		methodName = "ShouldShowRequestPermissionRationale",
-		validateParams = tModule.strictInterface({ hiddenUpsellPermissions = var1, upsellStatus = var3 })
+		validateParams = TModule.strictInterface({
+			hiddenUpsellPermissions = ArrayResult,
+			upsellStatus = ValueOfResult1
+		})
 	}
 }
-t_3.__index = t_3
+PermissionsProtocolModule.__index = PermissionsProtocolModule
 
-local function getPermissionRequestTelemetryData(p1)
-	-- upvalues: t_3 (ref)
+local function getPermissionRequestTelemetryData(Permissions) --[[ Line: 145 ]]
+	-- upvalues: PermissionsProtocolModule (copy)
 	local t = {}
 	
-	for i, v in pairs(p1) do
-		if v == t_3.Permissions.CAMERA_ACCESS then
+	for _, permission in pairs(Permissions) do
+		if permission == PermissionsProtocolModule.Permissions.CAMERA_ACCESS then
 			t.camera_access_requested = ""
 		end
-		if v == t_3.Permissions.MICROPHONE_ACCESS then
+		if permission == PermissionsProtocolModule.Permissions.MICROPHONE_ACCESS then
 			t.microphone_access_requested = ""
 		end
-		if v == t_3.Permissions.LOCAL_NETWORK then
+		if permission == PermissionsProtocolModule.Permissions.LOCAL_NETWORK then
 			t.local_network_requested = ""
 		end
-		if v == t_3.Permissions.CONTACTS_ACCESS then
+		if permission == PermissionsProtocolModule.Permissions.CONTACTS_ACCESS then
 			t.contacts_access_requested = ""
 		end
 	end
 	return t
 end
 
-local function createSequencedProtocolMethodCall(p2, p3, p4, p5, p6)
-	-- upvalues: promiseModule (ref), messageBus (ref)
-	assert(p4.validateParams(p5))
-	local var4 = (p2[p3] or promiseModule.resolve()):finally(function()
-		-- upvalues: promiseModule (copy), messageBus (copy), p3 (ref), p4 (ref), p5 (ref), p6 (ref)
-		return promiseModule.new(function(p7)
-			-- upvalues: messageBus (copy), p3 (copy), p4 (copy), p5 (copy), p6 (copy)
-			local var5 = messageBus.Subscriber.new()
-			var5:subscribeProtocolMethodResponse(p3, function(p8)
-				-- upvalues: var5 (ref), p3 (copy), p7 (ref)
-				var5:unsubscribeToProtocolMethodResponse(p3)
-				p7(p8)
+local function createSequencedProtocolMethodCall(ActiveCalls, HASPERMISSIONSPROTOCOLMETHODRESPONSEDESCRIPTOR, HASPERMISSIONSPROTOCOLMETHODREQUESTDESCRIPTOR, p1, p2) --[[ Line: 164 ]]
+	-- upvalues: PromiseModule (copy), MessageBus (copy)
+	assert(HASPERMISSIONSPROTOCOLMETHODREQUESTDESCRIPTOR.validateParams(p1))
+	local v1 = (ActiveCalls[HASPERMISSIONSPROTOCOLMETHODRESPONSEDESCRIPTOR] or PromiseModule.resolve()):finally(function() --[[ Line: 175 ]]
+		-- upvalues: PromiseModule (upval), MessageBus (upval), HASPERMISSIONSPROTOCOLMETHODRESPONSEDESCRIPTOR (copy), HASPERMISSIONSPROTOCOLMETHODREQUESTDESCRIPTOR (copy), p1 (copy), p2 (copy)
+		return PromiseModule.new(function(Callback) --[[ Line: 176 ]]
+			-- upvalues: MessageBus (upval), HASPERMISSIONSPROTOCOLMETHODRESPONSEDESCRIPTOR (upval), HASPERMISSIONSPROTOCOLMETHODREQUESTDESCRIPTOR (upval), p1 (upval), p2 (upval)
+			local NewResult = MessageBus.Subscriber.new()
+			NewResult:subscribeProtocolMethodResponse(HASPERMISSIONSPROTOCOLMETHODRESPONSEDESCRIPTOR, function(p3) --[[ Line: 178 ]]
+				-- upvalues: NewResult (copy), HASPERMISSIONSPROTOCOLMETHODRESPONSEDESCRIPTOR (upval), Callback (copy)
+				NewResult:unsubscribeToProtocolMethodResponse(HASPERMISSIONSPROTOCOLMETHODRESPONSEDESCRIPTOR)
+				Callback(p3)
 			end)
-			messageBus.publishProtocolMethodRequest(p4, p5, p6)
+			MessageBus.publishProtocolMethodRequest(HASPERMISSIONSPROTOCOLMETHODREQUESTDESCRIPTOR, p1, p2)
 		end)
 	end)
-	p2[p3] = var4
+	ActiveCalls[HASPERMISSIONSPROTOCOLMETHODRESPONSEDESCRIPTOR] = v1
 	
-	return var4
+	return v1
 end
 
-function t_3.new()
-	-- upvalues: scopedSubscribersForPermissionsProtocol2 (ref), messageBus (ref), t_3 (ref)
-	return setmetatable({
-		activeCalls = if scopedSubscribersForPermissionsProtocol2 then {} else nil,
-		subscriber = if scopedSubscribersForPermissionsProtocol2 then nil else messageBus.Subscriber.new()
-	}, t_3)
+function PermissionsProtocolModule.new() --[[ Line: 190 ]]
+	-- upvalues: ScopedSubscribersForPermissionsProtocol2 (copy), MessageBus (copy), PermissionsProtocolModule (copy)
+	return (setmetatable({
+		activeCalls = if ScopedSubscribersForPermissionsProtocol2 then {} else nil,
+		subscriber = if ScopedSubscribersForPermissionsProtocol2 then nil else MessageBus.Subscriber.new()
+	}, PermissionsProtocolModule))
 end
 
-function t_3:hasPermissions(p2)
-	-- upvalues: scopedSubscribersForPermissionsProtocol2 (ref), createSequencedProtocolMethodCall (ref), getPermissionRequestTelemetryData (ref), promiseModule (ref), messageBus (ref)
-	if scopedSubscribersForPermissionsProtocol2 then
-		return createSequencedProtocolMethodCall(self.activeCalls, self.HAS_PERMISSIONS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR, self.HAS_PERMISSIONS_PROTOCOL_METHOD_REQUEST_DESCRIPTOR, { permissions = p2 }, getPermissionRequestTelemetryData(p2))
-	end
-	local var4 = promiseModule.new(function(p3, _)
-		-- upvalues: self (ref)
-		local HAS_PERMISSIONS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR = self.HAS_PERMISSIONS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR
-		self.subscriber:subscribeProtocolMethodResponse(HAS_PERMISSIONS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR, function(p4)
-			-- upvalues: self (copy), HAS_PERMISSIONS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR (ref), p3 (ref)
-			self.subscriber:unsubscribeToProtocolMethodResponse(HAS_PERMISSIONS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR)
-			p3(p4)
+function PermissionsProtocolModule:hasPermissions(Permissions) --[[ Line: 208 ]]
+	-- upvalues: ScopedSubscribersForPermissionsProtocol2 (copy), createSequencedProtocolMethodCall (copy), getPermissionRequestTelemetryData (copy), PromiseModule (copy), MessageBus (copy)
+	if ScopedSubscribersForPermissionsProtocol2 then
+		return (createSequencedProtocolMethodCall(self.activeCalls, self.HAS_PERMISSIONS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR, self.HAS_PERMISSIONS_PROTOCOL_METHOD_REQUEST_DESCRIPTOR, { permissions = Permissions }, (getPermissionRequestTelemetryData(Permissions))))
+	else
+		local NewPromise = PromiseModule.new(function(Callback, _) --[[ Line: 217 ]]
+			-- upvalues: self (copy)
+			local HASPERMISSIONSPROTOCOLMETHODRESPONSEDESCRIPTOR = self.HAS_PERMISSIONS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR
+			self.subscriber:subscribeProtocolMethodResponse(HASPERMISSIONSPROTOCOLMETHODRESPONSEDESCRIPTOR, function(p1) --[[ Line: 219 ]]
+				-- upvalues: self (upval), HASPERMISSIONSPROTOCOLMETHODRESPONSEDESCRIPTOR (copy), Callback (copy)
+				self.subscriber:unsubscribeToProtocolMethodResponse(HASPERMISSIONSPROTOCOLMETHODRESPONSEDESCRIPTOR)
+				Callback(p1)
+			end)
 		end)
-	end)
-	messageBus.publishProtocolMethodRequest(self.HAS_PERMISSIONS_PROTOCOL_METHOD_REQUEST_DESCRIPTOR, { permissions = p2 }, getPermissionRequestTelemetryData(p2))
-	
-	return var4
-end
-
-function t_3:requestPermissions(p2)
-	-- upvalues: t_3 (ref), promiseModule (ref), scopedSubscribersForPermissionsProtocol2 (ref), createSequencedProtocolMethodCall (ref), getPermissionRequestTelemetryData (ref), messageBus (ref)
-	if game:GetFastFlag("DebugRomarkAudioPermissionsBypass") then
-		return promiseModule.resolve({ missingPermissions = {}, status = t_3.Status.AUTHORIZED })
-	elseif scopedSubscribersForPermissionsProtocol2 then
-		return createSequencedProtocolMethodCall(self.activeCalls, self.PERMISSION_REQUEST_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR, self.PERMISSION_REQUEST_PROTOCOL_METHOD_REQUEST_DESCRIPTOR, { permissions = p2 }, getPermissionRequestTelemetryData(p2))
-	end
-	local var4 = promiseModule.new(function(p3, _)
-		-- upvalues: self (ref)
-		local PERMISSION_REQUEST_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR = self.PERMISSION_REQUEST_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR
-		self.subscriber:subscribeProtocolMethodResponse(PERMISSION_REQUEST_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR, function(p4)
-			-- upvalues: self (copy), PERMISSION_REQUEST_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR (ref), p3 (ref)
-			self.subscriber:unsubscribeToProtocolMethodResponse(PERMISSION_REQUEST_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR)
-			p3(p4)
-		end)
-	end)
-	messageBus.publishProtocolMethodRequest(self.PERMISSION_REQUEST_PROTOCOL_METHOD_REQUEST_DESCRIPTOR, { permissions = p2 }, getPermissionRequestTelemetryData(p2))
-	
-	return var4
-end
-
-function t_3:getSupportedPermissionsList()
-	-- upvalues: scopedSubscribersForPermissionsProtocol2 (ref), createSequencedProtocolMethodCall (ref), promiseModule (ref), messageBus (ref)
-	if scopedSubscribersForPermissionsProtocol2 then
-		return createSequencedProtocolMethodCall(self.activeCalls, self.SUPPORTS_PERMISSIONS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR, self.SUPPORTS_PERMISSIONS_PROTOCOL_METHOD_REQUEST_DESCRIPTOR, { includeStatus = false }, {})
-	end
-	local var4 = promiseModule.new(function(p2, _)
-		-- upvalues: self (ref)
-		local SUPPORTS_PERMISSIONS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR = self.SUPPORTS_PERMISSIONS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR
-		self.subscriber:subscribeProtocolMethodResponse(SUPPORTS_PERMISSIONS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR, function(p3)
-			-- upvalues: self (copy), SUPPORTS_PERMISSIONS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR (ref), p2 (ref)
-			self.subscriber:unsubscribeToProtocolMethodResponse(SUPPORTS_PERMISSIONS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR)
-			p2(p3)
-		end)
-	end)
-	messageBus.publishProtocolMethodRequest(self.SUPPORTS_PERMISSIONS_PROTOCOL_METHOD_REQUEST_DESCRIPTOR, { includeStatus = false }, {})
-	
-	return var4
-end
-
-function t_3:supportsPermissions(p2)
-	-- upvalues: var1 (ref), promiseModule (ref)
-	assert(var1(p2))
-	
-	return self:getSupportedPermissionsList():andThen(function(p3)
-		-- upvalues: p2 (ref), promiseModule (copy)
-		local permissions = p3 and p3.permissions
+		MessageBus.publishProtocolMethodRequest(self.HAS_PERMISSIONS_PROTOCOL_METHOD_REQUEST_DESCRIPTOR, { permissions = Permissions }, (getPermissionRequestTelemetryData(Permissions)))
 		
-		if not permissions then
-			return promiseModule.reject()
+		return NewPromise
+	end
+end
+
+function PermissionsProtocolModule:requestPermissions(Permissions) --[[ Line: 239 ]]
+	-- upvalues: PermissionsProtocolModule (copy), PromiseModule (copy), ScopedSubscribersForPermissionsProtocol2 (copy), createSequencedProtocolMethodCall (copy), getPermissionRequestTelemetryData (copy), MessageBus (copy)
+	if game:GetFastFlag("DebugRomarkAudioPermissionsBypass") then
+		return PromiseModule.resolve({
+			missingPermissions = {},
+			status = PermissionsProtocolModule.Status.AUTHORIZED
+		})
+	elseif ScopedSubscribersForPermissionsProtocol2 then
+		return (createSequencedProtocolMethodCall(self.activeCalls, self.PERMISSION_REQUEST_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR, self.PERMISSION_REQUEST_PROTOCOL_METHOD_REQUEST_DESCRIPTOR, { permissions = Permissions }, (getPermissionRequestTelemetryData(Permissions))))
+	else
+		local NewPromise = PromiseModule.new(function(Callback, _) --[[ Line: 256 ]]
+			-- upvalues: self (copy)
+			local PERMISSIONREQUESTPROTOCOLMETHODRESPONSEDESCRIPTOR = self.PERMISSION_REQUEST_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR
+			self.subscriber:subscribeProtocolMethodResponse(PERMISSIONREQUESTPROTOCOLMETHODRESPONSEDESCRIPTOR, function(p1) --[[ Line: 258 ]]
+				-- upvalues: self (upval), PERMISSIONREQUESTPROTOCOLMETHODRESPONSEDESCRIPTOR (copy), Callback (copy)
+				self.subscriber:unsubscribeToProtocolMethodResponse(PERMISSIONREQUESTPROTOCOLMETHODRESPONSEDESCRIPTOR)
+				Callback(p1)
+			end)
+		end)
+		MessageBus.publishProtocolMethodRequest(self.PERMISSION_REQUEST_PROTOCOL_METHOD_REQUEST_DESCRIPTOR, { permissions = Permissions }, (getPermissionRequestTelemetryData(Permissions)))
+		
+		return NewPromise
+	end
+end
+
+function PermissionsProtocolModule:getSupportedPermissionsList() --[[ Line: 276 ]]
+	-- upvalues: ScopedSubscribersForPermissionsProtocol2 (copy), createSequencedProtocolMethodCall (copy), PromiseModule (copy), MessageBus (copy)
+	if ScopedSubscribersForPermissionsProtocol2 then
+		return (createSequencedProtocolMethodCall(self.activeCalls, self.SUPPORTS_PERMISSIONS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR, self.SUPPORTS_PERMISSIONS_PROTOCOL_METHOD_REQUEST_DESCRIPTOR, { includeStatus = false }, {}))
+	else
+		local NewPromise = PromiseModule.new(function(Callback, _) --[[ Line: 285 ]]
+			-- upvalues: self (copy)
+			local SUPPORTSPERMISSIONSPROTOCOLMETHODRESPONSEDESCRIPTOR = self.SUPPORTS_PERMISSIONS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR
+			self.subscriber:subscribeProtocolMethodResponse(SUPPORTSPERMISSIONSPROTOCOLMETHODRESPONSEDESCRIPTOR, function(p1) --[[ Line: 287 ]]
+				-- upvalues: self (upval), SUPPORTSPERMISSIONSPROTOCOLMETHODRESPONSEDESCRIPTOR (copy), Callback (copy)
+				self.subscriber:unsubscribeToProtocolMethodResponse(SUPPORTSPERMISSIONSPROTOCOLMETHODRESPONSEDESCRIPTOR)
+				Callback(p1)
+			end)
+		end)
+		MessageBus.publishProtocolMethodRequest(self.SUPPORTS_PERMISSIONS_PROTOCOL_METHOD_REQUEST_DESCRIPTOR, { includeStatus = false }, {})
+		
+		return NewPromise
+	end
+end
+
+function PermissionsProtocolModule:supportsPermissions(p1) --[[ Line: 306 ]]
+	-- upvalues: ArrayResult (copy), PromiseModule (copy)
+	assert(ArrayResult(p1))
+	
+	return (self:getSupportedPermissionsList():andThen(function(Result) --[[ Line: 309 ]]
+		-- upvalues: p1 (copy), PromiseModule (upval)
+		local Permissions = Result and Result.permissions
+		
+		if not Permissions then
+			return PromiseModule.reject()
 		end
-		local var4
-		for i, v in pairs(p2) do
-			var4 = false
+		local Flag = nil
+		for _, value in pairs(p1) do
+			Flag = false
 			
-			for i_1, v_1 in pairs(permissions) do
-				if v == v_1 then
-					var4 = true
+			for _, permission in pairs(Permissions) do
+				if value == permission then
+					Flag = true
 					break
 				end
 			end
-			if not var4 then
-				return promiseModule.resolve(false)
+			if not Flag then
+				return PromiseModule.resolve(false)
 			end
 		end
-		return promiseModule.resolve(true)
-	end)
+		return PromiseModule.resolve(true)
+	end))
 end
 
-function t_3:checkOrRequestPermissions(p4)
-	-- upvalues: var1 (ref), promiseModule (ref), t_3 (ref)
-	assert(var1(p4))
+function PermissionsProtocolModule:checkOrRequestPermissions(Permissions) --[[ Line: 348 ]]
+	-- upvalues: ArrayResult (copy), PromiseModule (copy), PermissionsProtocolModule (copy)
+	assert(ArrayResult(Permissions))
 	
-	return self:supportsPermissions(p4):andThen(function(p5)
-		-- upvalues: promiseModule (copy), t_3 (copy), self (ref), p4 (ref)
-		return if p5 then self:hasPermissions(p4):andThen(function(p6)
-			-- upvalues: t_3 (copy), promiseModule (copy), self (copy), p4 (copy)
-			return if p6.status == t_3.Status.AUTHORIZED then promiseModule.resolve(p6.status) else self:requestPermissions(p4):andThen(function(p7)
-				-- upvalues: promiseModule (copy)
-				return promiseModule.resolve(p7.status)
+	return self:supportsPermissions(Permissions):andThen(function(Result) --[[ Line: 351 ]]
+		-- upvalues: PromiseModule (upval), PermissionsProtocolModule (upval), self (copy), Permissions (copy)
+		return if Result then self:hasPermissions(Permissions):andThen(function(Result) --[[ Line: 358 ]]
+			-- upvalues: PermissionsProtocolModule (upval), PromiseModule (upval), self (upval), Permissions (upval)
+			return if Result.status == PermissionsProtocolModule.Status.AUTHORIZED then PromiseModule.resolve(Result.status) else self:requestPermissions(Permissions):andThen(function(Result) --[[ Line: 364 ]]
+				-- upvalues: PromiseModule (upval)
+				return PromiseModule.resolve(Result.status)
 			end)
-		end) else promiseModule.resolve(t_3.Status.UNSUPPORTED)
-	end, function(_)
-		-- upvalues: promiseModule (copy), t_3 (copy)
-		return promiseModule.resolve(t_3.Status.UNSUPPORTED)
+		end) else PromiseModule.resolve(PermissionsProtocolModule.Status.UNSUPPORTED)
+	end, function(_) --[[ Line: 370 ]]
+		-- upvalues: PromiseModule (upval), PermissionsProtocolModule (upval)
+		return PromiseModule.resolve(PermissionsProtocolModule.Status.UNSUPPORTED)
 	end)
 end
 
-function t_3:shouldShowUpsell(p4)
-	-- upvalues: getFFlagLuaEnableShowUpsellMethod (ref), promiseModule (ref), scopedSubscribersForPermissionsProtocol2 (ref), createSequencedProtocolMethodCall (ref), getPermissionRequestTelemetryData (ref), messageBus (ref)
-	if not getFFlagLuaEnableShowUpsellMethod() then
-		return promiseModule.resolve({})
-	elseif scopedSubscribersForPermissionsProtocol2 then
-		return createSequencedProtocolMethodCall(self.activeCalls, self.SHOULD_SHOW_PERMISSION_UPSELL_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR, self.SHOULD_SHOW_PERMISSION_UPSELL_PROTOCOL_METHOD_REQUEST_DESCRIPTOR, { permissions = p4 }, getPermissionRequestTelemetryData(p4))
-	end
-	local var5 = promiseModule.new(function(p5, _)
-		-- upvalues: self (ref)
-		local SHOULD_SHOW_PERMISSION_UPSELL_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR = self.SHOULD_SHOW_PERMISSION_UPSELL_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR
-		self.subscriber:subscribeProtocolMethodResponse(SHOULD_SHOW_PERMISSION_UPSELL_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR, function(p6)
-			-- upvalues: self (copy), SHOULD_SHOW_PERMISSION_UPSELL_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR (ref), p5 (ref)
-			self.subscriber:unsubscribeToProtocolMethodResponse(SHOULD_SHOW_PERMISSION_UPSELL_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR)
-			p5(p6)
+function PermissionsProtocolModule:shouldShowUpsell(Permissions) --[[ Line: 385 ]]
+	-- upvalues: GetFFlagLuaEnableShowUpsellMethodFunction (copy), PromiseModule (copy), ScopedSubscribersForPermissionsProtocol2 (copy), createSequencedProtocolMethodCall (copy), getPermissionRequestTelemetryData (copy), MessageBus (copy)
+	if not GetFFlagLuaEnableShowUpsellMethodFunction() then
+		return PromiseModule.resolve({})
+	elseif ScopedSubscribersForPermissionsProtocol2 then
+		return (createSequencedProtocolMethodCall(self.activeCalls, self.SHOULD_SHOW_PERMISSION_UPSELL_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR, self.SHOULD_SHOW_PERMISSION_UPSELL_PROTOCOL_METHOD_REQUEST_DESCRIPTOR, { permissions = Permissions }, (getPermissionRequestTelemetryData(Permissions))))
+	else
+		local NewPromise = PromiseModule.new(function(Callback, _) --[[ Line: 398 ]]
+			-- upvalues: self (copy)
+			local SHOULDSHOWPERMISSIONUPSELLPROTOCOLMETHODRESPONSEDESCRIPTOR = self.SHOULD_SHOW_PERMISSION_UPSELL_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR
+			self.subscriber:subscribeProtocolMethodResponse(SHOULDSHOWPERMISSIONUPSELLPROTOCOLMETHODRESPONSEDESCRIPTOR, function(p2) --[[ Line: 400 ]]
+				-- upvalues: self (upval), SHOULDSHOWPERMISSIONUPSELLPROTOCOLMETHODRESPONSEDESCRIPTOR (copy), Callback (copy)
+				self.subscriber:unsubscribeToProtocolMethodResponse(SHOULDSHOWPERMISSIONUPSELLPROTOCOLMETHODRESPONSEDESCRIPTOR)
+				Callback(p2)
+			end)
 		end)
-	end)
-	messageBus.publishProtocolMethodRequest(self.SHOULD_SHOW_PERMISSION_UPSELL_PROTOCOL_METHOD_REQUEST_DESCRIPTOR, { permissions = p4 }, getPermissionRequestTelemetryData(p4))
-	
-	return var5
-end
-
-function t_3:shouldShowRationale(p4)
-	-- upvalues: scopedSubscribersForPermissionsProtocol2 (ref), createSequencedProtocolMethodCall (ref), getPermissionRequestTelemetryData (ref), promiseModule (ref), messageBus (ref)
-	if scopedSubscribersForPermissionsProtocol2 then
-		return createSequencedProtocolMethodCall(self.activeCalls, self.SHOULD_SHOW_PERMISSION_RATIONALE_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR, self.SHOULD_SHOW_PERMISSION_RATIONALE_PROTOCOL_METHOD_REQUEST_DESCRIPTOR, { permissions = p4 }, getPermissionRequestTelemetryData(p4))
+		MessageBus.publishProtocolMethodRequest(self.SHOULD_SHOW_PERMISSION_UPSELL_PROTOCOL_METHOD_REQUEST_DESCRIPTOR, { permissions = Permissions }, (getPermissionRequestTelemetryData(Permissions)))
+		
+		return NewPromise
 	end
-	local var5 = promiseModule.new(function(p5, _)
-		-- upvalues: self (ref)
-		local SHOULD_SHOW_PERMISSION_RATIONALE_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR = self.SHOULD_SHOW_PERMISSION_RATIONALE_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR
-		self.subscriber:subscribeProtocolMethodResponse(SHOULD_SHOW_PERMISSION_RATIONALE_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR, function(p6)
-			-- upvalues: self (copy), SHOULD_SHOW_PERMISSION_RATIONALE_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR (ref), p5 (ref)
-			self.subscriber:unsubscribeToProtocolMethodResponse(SHOULD_SHOW_PERMISSION_RATIONALE_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR)
-			p5(p6)
-		end)
-	end)
-	messageBus.publishProtocolMethodRequest(self.SHOULD_SHOW_PERMISSION_RATIONALE_PROTOCOL_METHOD_REQUEST_DESCRIPTOR, { permissions = p4 }, getPermissionRequestTelemetryData(p4))
-	
-	return var5
 end
 
-t_3.default = t_3.new()
+function PermissionsProtocolModule:shouldShowRationale(Permissions) --[[ Line: 421 ]]
+	-- upvalues: ScopedSubscribersForPermissionsProtocol2 (copy), createSequencedProtocolMethodCall (copy), getPermissionRequestTelemetryData (copy), PromiseModule (copy), MessageBus (copy)
+	if ScopedSubscribersForPermissionsProtocol2 then
+		return (createSequencedProtocolMethodCall(self.activeCalls, self.SHOULD_SHOW_PERMISSION_RATIONALE_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR, self.SHOULD_SHOW_PERMISSION_RATIONALE_PROTOCOL_METHOD_REQUEST_DESCRIPTOR, { permissions = Permissions }, (getPermissionRequestTelemetryData(Permissions))))
+	else
+		local NewPromise = PromiseModule.new(function(Callback, _) --[[ Line: 430 ]]
+			-- upvalues: self (copy)
+			local SHOULDSHOWPERMISSIONRATIONALEPROTOCOLMETHODRESPONSEDESCRIPTOR = self.SHOULD_SHOW_PERMISSION_RATIONALE_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR
+			self.subscriber:subscribeProtocolMethodResponse(SHOULDSHOWPERMISSIONRATIONALEPROTOCOLMETHODRESPONSEDESCRIPTOR, function(p2) --[[ Line: 432 ]]
+				-- upvalues: self (upval), SHOULDSHOWPERMISSIONRATIONALEPROTOCOLMETHODRESPONSEDESCRIPTOR (copy), Callback (copy)
+				self.subscriber:unsubscribeToProtocolMethodResponse(SHOULDSHOWPERMISSIONRATIONALEPROTOCOLMETHODRESPONSEDESCRIPTOR)
+				Callback(p2)
+			end)
+		end)
+		MessageBus.publishProtocolMethodRequest(self.SHOULD_SHOW_PERMISSION_RATIONALE_PROTOCOL_METHOD_REQUEST_DESCRIPTOR, { permissions = Permissions }, (getPermissionRequestTelemetryData(Permissions)))
+		
+		return NewPromise
+	end
+end
 
-return t_3
+PermissionsProtocolModule.default = PermissionsProtocolModule.new()
+
+return PermissionsProtocolModule

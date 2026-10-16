@@ -1,23 +1,25 @@
-﻿local parent = script:FindFirstAncestor("RoactUtils").Parent
-local reactUtilsModule = require(parent.ReactUtils)
+﻿local Parent = script:FindFirstAncestor("RoactUtils").Parent
+local ReactUtilsModule = require(Parent.ReactUtils)
 
-if require(parent.SharedFlags).GetFFlagMigrateRoactUtilsToReactUtils() then
-	return reactUtilsModule.useEventConnection
-end
-local reactModule = require(parent.React)
-
-return function(p1, p2)
-	-- upvalues: reactModule (ref)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), p2 (ref)
-		if p1 == nil then
-			return nil
-		end
-		local var1 = p1:Connect(p2)
-		
-		return function()
-			-- upvalues: var1 (ref)
-			var1:Disconnect()
-		end
-	end, { p1, p2 })
+if require(Parent.SharedFlags).GetFFlagMigrateRoactUtilsToReactUtils() then
+	return ReactUtilsModule.useEventConnection
+else
+	local ReactModule = require(Parent.React)
+	
+	return function(Signal, Callback) --[[ Line: 17 | Named "useExternalEvent" ]]
+		-- upvalues: ReactModule (copy)
+		ReactModule.useEffect(function() --[[ Line: 18 ]]
+			-- upvalues: Signal (copy), Callback (copy)
+			if Signal == nil then
+				return nil
+			else
+				local Connection = Signal:Connect(Callback)
+				
+				return function() --[[ Line: 24 ]]
+					-- upvalues: Connection (copy)
+					Connection:Disconnect()
+				end
+			end
+		end, { Signal, Callback })
+	end
 end

@@ -1,7 +1,7 @@
-﻿local friendCarouselHas10ftPolicies = game:DefineFastFlag("FriendCarouselHas10ftPolicies", false)
-local isTenFootInterface = require(script:FindFirstAncestor("FriendsCarousel").Parent.AppCommonLib).isTenFootInterface
+﻿local FriendCarouselHas10ftPolicies = game:DefineFastFlag("FriendCarouselHas10ftPolicies", false)
+local IsTenFootInterfaceFunction = require(script:FindFirstAncestor("FriendsCarousel").Parent.AppCommonLib).isTenFootInterface
 
-return function()
-	-- upvalues: friendCarouselHas10ftPolicies (ref), isTenFootInterface (ref)
-	return if friendCarouselHas10ftPolicies then isTenFootInterface() else false
+return function() --[[ Line: 5 ]]
+	-- upvalues: FriendCarouselHas10ftPolicies (copy), IsTenFootInterfaceFunction (copy)
+	return if FriendCarouselHas10ftPolicies then IsTenFootInterfaceFunction() else false
 end

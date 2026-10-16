@@ -1,94 +1,93 @@
-﻿local parent = script.Parent.Parent.Parent
-local constantsModule = require(parent.Constants)
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local getFFlagUGCValidateCurveAnimAttributesModule = require(parent.flags.getFFlagUGCValidateCurveAnimAttributes)
-local getFFlagUGCValidateMakeupCategoryParityModule = require(parent.flags.getFFlagUGCValidateMakeupCategoryParity)
-local getFFlagUGCValidateR15FixedAttributesModule = require(parent.flags.getFFlagUGCValidateR15FixedAttributes)
+﻿local Parent = script.Parent.Parent.Parent
+local ConstantsModule = require(Parent.Constants)
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local GetFFlagUGCValidateCurveAnimAttributesModule = require(Parent.flags.getFFlagUGCValidateCurveAnimAttributes)
+local GetFFlagUGCValidateMakeupCategoryParityModule = require(Parent.flags.getFFlagUGCValidateMakeupCategoryParity)
+local GetFFlagUGCValidateR15FixedAttributesModule = require(Parent.flags.getFFlagUGCValidateR15FixedAttributes)
 game:DefineFastFlag("UGCValidateAllowEmoteAttributes", false)
-local t = {
-	categories = if getFFlagUGCValidateMakeupCategoryParityModule() then constantsModule.AllAssetUploadCategories else constantsModule.AllAssetUploadCategoriesIncludingMakeup,
+local config = {
+	[ConstantsModule.EmoteIsUGCAttributeName] = true,
+	[ConstantsModule.EmoteMaxPartTranslationAttributeName] = true
+}
+local AttributesAllowedModule = {
+	categories = if GetFFlagUGCValidateMakeupCategoryParityModule() then ConstantsModule.AllAssetUploadCategories else ConstantsModule.AllAssetUploadCategoriesIncludingMakeup,
 	requiredData = {
-		validationEnumsModule.SharedDataMember.rootInstance,
-		validationEnumsModule.SharedDataMember.consumerConfig,
-		validationEnumsModule.SharedDataMember.hsrAssets
+		ValidationEnumsModule.SharedDataMember.rootInstance,
+		ValidationEnumsModule.SharedDataMember.consumerConfig,
+		ValidationEnumsModule.SharedDataMember.hsrAssets
 	}
 }
-local t_1 = {
-	[constantsModule.EmoteIsUGCAttributeName] = true,
-	[constantsModule.EmoteMaxPartTranslationAttributeName] = true
-}
 
-if getFFlagUGCValidateCurveAnimAttributesModule() then
-	table.insert(t.requiredData, validationEnumsModule.SharedDataMember.curveAnimations)
+if GetFFlagUGCValidateCurveAnimAttributesModule() then
+	table.insert(AttributesAllowedModule.requiredData, ValidationEnumsModule.SharedDataMember.curveAnimations)
 end
-t.expectedFailures = {}
+AttributesAllowedModule.expectedFailures = {}
 
-local function hasOnlyAllowedAttribute(p1, p2, p3)
-	-- upvalues: constantsModule (ref)
-	for i, v in p1 do
-		if (not p2 or i ~= constantsModule.AlternateMeshIdAttributeName) and (not p3 or not p3[i]) then
-			if i == constantsModule.GUIDAttributeName then
-				if typeof(v) == "string" then
-					if constantsModule.GUIDAttributeMaxLength < string.len(v) then
-						return false
-					end
-				end
+local function hasOnlyAllowedAttribute(Attributes, p1, p2): boolean --[[ Line: 40 ]]
+	-- upvalues: ConstantsModule (copy)
+	for i, attribute in Attributes do
+		if (not p1 or i ~= ConstantsModule.AlternateMeshIdAttributeName) and (not p2 or not p2[i]) then
+			if i ~= ConstantsModule.GUIDAttributeName then
 				return false
 			end
-			return false
+			if typeof(attribute) ~= "string" then
+				return false
+			elseif ConstantsModule.GUIDAttributeMaxLength < string.len(attribute) then
+				return false
+			end
+			continue
 		end
 	end
 	return true
 end
 
-local function _(p4, p5)
-	-- upvalues: errorSourceStringsModule (ref)
-	p4:fail(errorSourceStringsModule.Keys.NoAttributes, {
-		RootInstanceName = p5.Name,
-		InstanceNameList = p5:GetFullName()
+local function _(p3, Object) --[[ Line: 69 | Named "reportInstanceWithDisallowedAttributes" ]]
+	-- upvalues: ErrorSourceStringsModule (copy)
+	p3:fail(ErrorSourceStringsModule.Keys.NoAttributes, {
+		RootInstanceName = Object.Name,
+		InstanceNameList = Object:GetFullName()
 	})
 end
 
-local function walkInstanceTree(p4, p5, p6, p7)
-	-- upvalues: hasOnlyAllowedAttribute (ref), errorSourceStringsModule (ref), constantsModule (ref)
-	if not hasOnlyAllowedAttribute(p5:GetAttributes(), p6, p7) then
-		p4:fail(errorSourceStringsModule.Keys.NoAttributes, {
-			RootInstanceName = p5.Name,
-			InstanceNameList = p5:GetFullName()
+local function walkInstanceTree(p3, Object, IsConsumerEnvMatch, p4) --[[ Line: 77 ]]
+	-- upvalues: hasOnlyAllowedAttribute (copy), ErrorSourceStringsModule (copy), ConstantsModule (copy)
+	if not hasOnlyAllowedAttribute(Object:GetAttributes(), IsConsumerEnvMatch, p4) then
+		p3:fail(ErrorSourceStringsModule.Keys.NoAttributes, {
+			RootInstanceName = Object.Name,
+			InstanceNameList = Object:GetFullName()
 		})
 	end
-	for i, v in p5:GetDescendants() do
-		if (not p6 or not v:GetAttribute(constantsModule.AlternateMeshIdAttributeName)) and next(v:GetAttributes()) ~= nil then
-			p4:fail(errorSourceStringsModule.Keys.NoAttributes, {
-				RootInstanceName = v.Name,
-				InstanceNameList = v:GetFullName()
+	for _, descendant in Object:GetDescendants() do
+		if (not IsConsumerEnvMatch or not descendant:GetAttribute(ConstantsModule.AlternateMeshIdAttributeName)) and next(descendant:GetAttributes()) ~= nil then
+			p3:fail(ErrorSourceStringsModule.Keys.NoAttributes, {
+				RootInstanceName = descendant.Name,
+				InstanceNameList = descendant:GetFullName()
 			})
 		end
 	end
 end
 
-function t.run(p8, p9)
-	-- upvalues: validationEnumsModule (ref), walkInstanceTree (ref), getFFlagUGCValidateR15FixedAttributesModule (ref), getFFlagUGCValidateCurveAnimAttributesModule (ref), t_1 (ref)
-	local var1 = p9.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.IEC
-	walkInstanceTree(p8, p9.rootInstance, var1)
+function AttributesAllowedModule.run(p5, p6) --[[ Line: 97 ]]
+	-- upvalues: ValidationEnumsModule (copy), walkInstanceTree (copy), GetFFlagUGCValidateR15FixedAttributesModule (copy), GetFFlagUGCValidateCurveAnimAttributesModule (copy), config (copy)
+	local IsConsumerEnvMatch = p6.consumerConfig.consumerEnv == ValidationEnumsModule.ConsumerEnv.IEC
+	walkInstanceTree(p5, p6.rootInstance, IsConsumerEnvMatch)
 	
-	if getFFlagUGCValidateR15FixedAttributesModule() and p9.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.Backend and p9.r15LegacyDuplicateRoot ~= nil then
-		walkInstanceTree(p8, p9.r15LegacyDuplicateRoot, var1)
+	if GetFFlagUGCValidateR15FixedAttributesModule() and p6.consumerConfig.consumerEnv == ValidationEnumsModule.ConsumerEnv.Backend and p6.r15LegacyDuplicateRoot ~= nil then
+		walkInstanceTree(p5, p6.r15LegacyDuplicateRoot, IsConsumerEnvMatch)
 	end
-	for i, v in p9.hsrAssets do
-		for i_1, v_1 in v do
-			walkInstanceTree(p8, v_1, var1)
+	for _, hsrAsset in p6.hsrAssets do
+		for _, value in hsrAsset do
+			walkInstanceTree(p5, value, IsConsumerEnvMatch)
 		end
 	end
-	if getFFlagUGCValidateCurveAnimAttributesModule() then
-		local var2 = if game:GetFastFlag("UGCValidateAllowEmoteAttributes") and p9.uploadCategory == validationEnumsModule.UploadCategory.EMOTE_ANIMATION then t_1 else nil
-		
-		for i_1, v_1 in p9.curveAnimations do
-			walkInstanceTree(p8, v_1, var1, var2)
+	if GetFFlagUGCValidateCurveAnimAttributesModule() then
+		local Config = if game:GetFastFlag("UGCValidateAllowEmoteAttributes") and p6.uploadCategory == ValidationEnumsModule.UploadCategory.EMOTE_ANIMATION then config else nil
+		for _, curveAnimation in p6.curveAnimations do
+			walkInstanceTree(p5, curveAnimation, IsConsumerEnvMatch, Config)
 		end
 	end
 end
 
-return t
+return AttributesAllowedModule

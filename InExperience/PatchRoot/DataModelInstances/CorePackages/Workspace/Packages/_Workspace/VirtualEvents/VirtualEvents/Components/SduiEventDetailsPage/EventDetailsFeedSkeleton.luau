@@ -1,61 +1,61 @@
-﻿local parent = script:FindFirstAncestor("VirtualEvents").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local skeleton = foundationModule.Skeleton
-local radius = foundationModule.Enums.Radius
-local useTokens = foundationModule.Hooks.useTokens
-local eventDetailsActionBarSkeletonModule = require(script.Parent.EventDetailsActionBarSkeleton)
-local fFlagLuaAppSduiEventDetailsActionBarInFeed = require(parent.SharedFlags).FFlagLuaAppSduiEventDetailsActionBarInFeed
+﻿local Parent = script:FindFirstAncestor("VirtualEvents").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local Skeleton = FoundationModule.Skeleton
+local Radius = FoundationModule.Enums.Radius
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local EventDetailsActionBarSkeletonModule = require(script.Parent.EventDetailsActionBarSkeleton)
+local FFlagLuaAppSduiEventDetailsActionBarInFeed = require(Parent.SharedFlags).FFlagLuaAppSduiEventDetailsActionBarInFeed
 
-return reactModule.memo(function()
-	-- upvalues: useTokens (ref), reactModule (ref), view (ref), skeleton (ref), radius (ref), fFlagLuaAppSduiEventDetailsActionBarInFeed (ref), eventDetailsActionBarSkeletonModule (ref)
-	local var1 = useTokens()
-	local size1400 = var1.Size.Size_1400
-	local var2 = var1.Typography.CaptionLarge.LineHeight * var1.Typography.CaptionLarge.FontSize
+return ReactModule.memo(function() --[[ Line: 19 | Named "EventDetailsFeedSkeleton" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Skeleton (copy), Radius (copy), FFlagLuaAppSduiEventDetailsActionBarInFeed (copy), EventDetailsActionBarSkeletonModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	local Size1400 = UseTokensResult.Size.Size_1400
+	local ScaledLineHeight = UseTokensResult.Typography.CaptionLarge.LineHeight * UseTokensResult.Typography.CaptionLarge.FontSize
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col gap-large size-full auto-y padding-top-medium",
 		testId = "--event-details-feed-skeleton"
 	}, {
-		AttributionRow = reactModule.createElement(view, {
+		AttributionRow = ReactModule.createElement(View, {
 			tag = "row align-y-center gap-medium size-full-0 auto-y",
 			LayoutOrder = 1
 		}, {
-			Icon = reactModule.createElement(skeleton, {
+			Icon = ReactModule.createElement(Skeleton, {
 				LayoutOrder = 1,
-				Size = UDim2.fromOffset(size1400, size1400),
-				radius = radius.Medium
+				Size = UDim2.fromOffset(Size1400, Size1400),
+				radius = Radius.Medium
 			}),
-			TextColumn = reactModule.createElement(view, { tag = "col fill gap-small auto-xy", LayoutOrder = 2 }, {
-				Title = reactModule.createElement(skeleton, {
+			TextColumn = ReactModule.createElement(View, { tag = "col fill gap-small auto-xy", LayoutOrder = 2 }, {
+				Title = ReactModule.createElement(Skeleton, {
 					LayoutOrder = 1,
-					Size = UDim2.fromOffset(var1.Size.Size_2800 * 2, var2),
-					radius = radius.Small
+					Size = UDim2.fromOffset(UseTokensResult.Size.Size_2800 * 2, ScaledLineHeight),
+					radius = Radius.Small
 				}),
-				Host = reactModule.createElement(skeleton, {
+				Host = ReactModule.createElement(Skeleton, {
 					LayoutOrder = 2,
-					Size = UDim2.fromOffset(var1.Size.Size_2800, var2),
-					radius = radius.Small
+					Size = UDim2.fromOffset(UseTokensResult.Size.Size_2800, ScaledLineHeight),
+					radius = Radius.Small
 				})
 			})
 		}),
-		ActionBar = if fFlagLuaAppSduiEventDetailsActionBarInFeed then reactModule.createElement(view, { tag = "size-full-0 auto-y", LayoutOrder = 2 }, {
-			Skeleton = reactModule.createElement(eventDetailsActionBarSkeletonModule)
+		ActionBar = if FFlagLuaAppSduiEventDetailsActionBarInFeed then ReactModule.createElement(View, { tag = "size-full-0 auto-y", LayoutOrder = 2 }, {
+			Skeleton = ReactModule.createElement(EventDetailsActionBarSkeletonModule)
 		}) else nil,
-		Description = reactModule.createElement(view, {
+		Description = ReactModule.createElement(View, {
 			tag = "col gap-medium size-full-0 auto-y",
 			LayoutOrder = 3
 		}, {
-			Header = reactModule.createElement(skeleton, {
+			Header = ReactModule.createElement(Skeleton, {
 				LayoutOrder = 1,
-				Size = UDim2.fromOffset(var1.Size.Size_2800 * 2, var1.Typography.HeadingSmall.LineHeight * var1.Typography.HeadingSmall.FontSize),
-				radius = radius.Small
+				Size = UDim2.fromOffset(UseTokensResult.Size.Size_2800 * 2, UseTokensResult.Typography.HeadingSmall.LineHeight * UseTokensResult.Typography.HeadingSmall.FontSize),
+				radius = Radius.Small
 			}),
-			Text = reactModule.createElement(skeleton, {
+			Text = ReactModule.createElement(Skeleton, {
 				LayoutOrder = 2,
-				Size = UDim2.new(1, 0, 0, var1.Typography.CaptionMedium.LineHeight * var1.Typography.CaptionMedium.FontSize * 3),
-				radius = radius.Small
+				Size = UDim2.new(1, 0, 0, UseTokensResult.Typography.CaptionMedium.LineHeight * UseTokensResult.Typography.CaptionMedium.FontSize * 3),
+				radius = Radius.Small
 			})
 		})
 	})

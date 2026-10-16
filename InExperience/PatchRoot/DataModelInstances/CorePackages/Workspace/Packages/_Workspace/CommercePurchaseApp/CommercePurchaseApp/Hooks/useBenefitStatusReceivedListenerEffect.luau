@@ -1,38 +1,38 @@
-﻿local commerceService = game:GetService("CommerceService")
-local parent = script:FindFirstAncestor("CommercePurchaseApp").Parent
-local reactModule = require(parent.React)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local toastRoduxModule = require(parent.ToastRodux)
-local toastType = toastRoduxModule.Enums.ToastType
-local setCurrentToastMessage = toastRoduxModule.Actions.SetCurrentToastMessage
+﻿local CommerceService = game:GetService("CommerceService")
+local Parent = script:FindFirstAncestor("CommercePurchaseApp").Parent
+local ReactModule = require(Parent.React)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local ToastRoduxModule = require(Parent.ToastRodux)
+local ToastType = ToastRoduxModule.Enums.ToastType
+local SetCurrentToastMessageFunction = ToastRoduxModule.Actions.SetCurrentToastMessage
 
-return function()
-	-- upvalues: useDispatch (ref), useLocalization (ref), reactModule (ref), commerceService (ref), toastType (ref), setCurrentToastMessage (ref)
-	local var1 = useDispatch()
-	local var2 = useLocalization({
+return function() --[[ Line: 13 | Named "useBenefitStatusReceivedListenerEffect" ]]
+	-- upvalues: UseDispatchFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), CommerceService (copy), ToastType (copy), SetCurrentToastMessageFunction (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseLocalizationResult = UseLocalizationFunction({
 		granted = "CoreScripts.CommercePurchasePrompt.SuccessToast.Granted",
 		pending = "CoreScripts.CommercePurchasePrompt.SuccessToast.GrantPending"
 	})
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), commerceService (copy), toastType (copy), var2 (ref), setCurrentToastMessage (copy)
-		local var3 = if var1 then commerceService.BenefitStatusReceived:Connect(function(p1)
-			-- upvalues: toastType (copy), var2 (copy), var1 (copy), setCurrentToastMessage (copy)
-			var1(setCurrentToastMessage(if p1 then {
-				toastType = toastType.SuccessConfirmation,
-				toastTitle = var2.granted
+	ReactModule.useEffect(function() --[[ Line: 19 ]]
+		-- upvalues: UseDispatchResult (copy), CommerceService (upval), ToastType (upval), UseLocalizationResult (copy), SetCurrentToastMessageFunction (upval)
+		local BenefitStatusReceivedConnection = if UseDispatchResult then CommerceService.BenefitStatusReceived:Connect(function(IsGranted) --[[ Line: 22 ]]
+			-- upvalues: ToastType (upval), UseLocalizationResult (upval), UseDispatchResult (upval), SetCurrentToastMessageFunction (upval)
+			UseDispatchResult(SetCurrentToastMessageFunction(if IsGranted then {
+				toastType = ToastType.SuccessConfirmation,
+				toastTitle = UseLocalizationResult.granted
 			} else {
-				toastType = toastType.NetworkingError,
-				toastTitle = var2.pending
+				toastType = ToastType.NetworkingError,
+				toastTitle = UseLocalizationResult.pending
 			}))
 		end) else nil
 		
-		return function()
-			-- upvalues: var3 (write)
-			if var3 then
-				var3:Disconnect()
-				var3 = nil
+		return function() --[[ Line: 29 ]]
+			-- upvalues: BenefitStatusReceivedConnection (ref)
+			if BenefitStatusReceivedConnection then
+				BenefitStatusReceivedConnection:Disconnect()
+				BenefitStatusReceivedConnection = nil
 			end
 		end
-	end, { var1, var2 })
+	end, { UseDispatchResult, UseLocalizationResult })
 end

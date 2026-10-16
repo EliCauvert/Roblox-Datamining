@@ -1,12 +1,12 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local inputSizeModule = require(foundation.Enums.InputSize)
-local _ = require(foundation.Components.Types)
-local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant)
-local _ = require(foundation.Providers.Style.Tokens)
-local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local InputSizeModule = require(Foundation.Enums.InputSize)
+local _ = require(Foundation.Components.Types)
+local ComposeStyleVariantModule = require(Foundation.Utility.composeStyleVariant)
+local _ = require(Foundation.Providers.Style.Tokens)
+local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
 
-local function variantsFactory(p1)
-	-- upvalues: inputSizeModule (ref)
+local function variantsFactory(p1) --[[ Line: 37 ]]
+	-- upvalues: InputSizeModule (copy)
 	return {
 		common = {
 			container = {
@@ -19,7 +19,7 @@ local function variantsFactory(p1)
 			close = { tag = "auto-xy" }
 		},
 		sizes = {
-			[inputSizeModule.XSmall] = {
+			[InputSizeModule.XSmall] = {
 				container = { tag = "size-0-400" },
 				text = {
 					tag = "text-caption-small",
@@ -30,7 +30,7 @@ local function variantsFactory(p1)
 				},
 				close = { padding = { right = UDim.new(0, p1.Size.Size_150) } }
 			},
-			[inputSizeModule.Small] = {
+			[InputSizeModule.Small] = {
 				container = { tag = "size-0-500" },
 				text = {
 					tag = "text-label-small",
@@ -41,7 +41,7 @@ local function variantsFactory(p1)
 				},
 				close = { padding = { right = UDim.new(0, p1.Padding.Small) } }
 			},
-			[inputSizeModule.Medium] = {
+			[InputSizeModule.Medium] = {
 				container = { tag = "size-0-600" },
 				text = {
 					tag = "text-label-small",
@@ -52,7 +52,7 @@ local function variantsFactory(p1)
 				},
 				close = { padding = { right = UDim.new(0, p1.Padding.Small) } }
 			},
-			[inputSizeModule.Large] = {
+			[InputSizeModule.Large] = {
 				container = { tag = "size-0-800" },
 				text = {
 					tag = "text-label-medium",
@@ -67,9 +67,9 @@ local function variantsFactory(p1)
 	}
 end
 
-return function(p1, p2)
-	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref)
-	local inputChip = variantsContextModule.useVariants("InputChip", variantsFactory, p1)
+return function(p1, p2) --[[ Line: 116 ]]
+	-- upvalues: VariantsContextModule (copy), variantsFactory (copy), ComposeStyleVariantModule (copy)
+	local InputChip = VariantsContextModule.useVariants("InputChip", variantsFactory, p1)
 	
-	return composeStyleVariantModule(inputChip.common, inputChip.sizes[p2])
+	return ComposeStyleVariantModule(InputChip.common, InputChip.sizes[p2])
 end

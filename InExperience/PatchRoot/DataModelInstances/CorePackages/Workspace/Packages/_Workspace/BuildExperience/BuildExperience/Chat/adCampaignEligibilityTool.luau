@@ -1,36 +1,37 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local httpService = game:GetService("HttpService")
-local creatorAgentChatModule = require(buildExperience.Parent.DataHydration.CreatorAgentChat)
-local adCampaignEligibilityUtilsModule = require(buildExperience.Components.Ads.adCampaignEligibilityUtils)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local HttpService = game:GetService("HttpService")
+local CreatorAgentChatModule = require(BuildExperience.Parent.DataHydration.CreatorAgentChat)
+local AdCampaignEligibilityUtilsModule = require(BuildExperience.Components.Ads.adCampaignEligibilityUtils)
 
 return {
-	isCompletedEligibilityToolCall = function(p1)
-		return p1 ~= nil and (p1.title == "check_ad_campaign_eligibility" and (p1.status == "completed" and (type(p1.toolCallId) == "string" and p1.toolCallId ~= "")))
+	isCompletedEligibilityToolCall = function(p1): boolean --[[ Line: 12 ]]
+		return p1 ~= nil and (p1.title == "check_ad_campaign_eligibility" and (p1.status == "completed" and type(p1.toolCallId) == "string") and p1.toolCallId ~= "")
 	end,
-	decodeCompletedEligibility = function(p1)
-		-- upvalues: httpService (ref), creatorAgentChatModule (ref)
-		if not (p1 ~= nil and (p1.title == "check_ad_campaign_eligibility" and (p1.status == "completed" and (type(p1.toolCallId) == "string" and p1.toolCallId ~= "")))) or p1.content == nil then
+	decodeCompletedEligibility = function(p1) --[[ Line: 20 ]]
+		-- upvalues: HttpService (copy), CreatorAgentChatModule (copy)
+		if p1 == nil or (p1.title ~= "check_ad_campaign_eligibility" or (p1.status ~= "completed" or (type(p1.toolCallId) ~= "string" or p1.toolCallId == ""))) or p1.content == nil then
 			return nil
 		end
-		for i, v in p1.content do
-			local content = v.content
+		local DecodeAdCampaignEligibilityResultResult = nil
+		for _, value in p1.content do
+			local Content = value.content
 			
-			if v.type == "content" and content ~= nil and (content.type == "text" and type(content.text) == "string") then
-				local ok, status = pcall(httpService.JSONDecode, httpService, content.text)
+			if value.type == "content" and Content ~= nil and Content.type == "text" and type(Content.text) == "string" then
+				local Success, Result = pcall(HttpService.JSONDecode, HttpService, Content.text)
 				
-				if ok then
-					local var1 = creatorAgentChatModule.decodeAdCampaignEligibilityResult(status)
+				if Success then
+					DecodeAdCampaignEligibilityResultResult = CreatorAgentChatModule.decodeAdCampaignEligibilityResult(Result)
 					
-					if var1 ~= nil then
-						return var1
+					if DecodeAdCampaignEligibilityResultResult ~= nil then
+						return DecodeAdCampaignEligibilityResultResult
 					end
 				end
 			end
 		end
 		return nil
 	end,
-	getCardOffers = function(p2)
-		-- upvalues: adCampaignEligibilityUtilsModule (ref)
-		return if p2 == nil or not p2.userEligible or (not p2.universeEligible or p2.cardType == "none") then nil else adCampaignEligibilityUtilsModule.getSelectableOffers(p2)
+	getCardOffers = function(p2) --[[ Line: 41 ]]
+		-- upvalues: AdCampaignEligibilityUtilsModule (copy)
+		return if p2 == nil or not p2.userEligible or not p2.universeEligible or p2.cardType == "none" then nil else AdCampaignEligibilityUtilsModule.getSelectableOffers(p2)
 	end
 }

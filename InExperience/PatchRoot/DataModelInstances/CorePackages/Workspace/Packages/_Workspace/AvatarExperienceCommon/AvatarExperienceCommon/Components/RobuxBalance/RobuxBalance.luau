@@ -1,60 +1,60 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
-local cursorType = foundationModule.Enums.CursorType
-local useCursor = foundationModule.Hooks.useCursor
-local fFlagAXResetAvatarButton = avatarExperienceFlagsModule.FFlagAXResetAvatarButton
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local CursorType = FoundationModule.Enums.CursorType
+local UseCursorFunction = FoundationModule.Hooks.useCursor
+local FFlagAXResetAvatarButton = require(Parent.AvatarExperienceFlags).FFlagAXResetAvatarButton
 
-return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: foundationModule (ref), useCursor (ref), cursorType (ref), reactModule (ref), fFlagAXResetAvatarButton (ref)
-	local var1 = foundationModule.Hooks.useTokens()
-	local var2 = useCursor(cursorType.SmallPill)
-	local var3, var4 = reactModule.useBinding(false)
+return (ReactModule.forwardRef(function(p1, Ref) --[[ Line: 21 ]]
+	-- upvalues: FoundationModule (copy), UseCursorFunction (copy), CursorType (copy), ReactModule (copy), FFlagAXResetAvatarButton (copy)
+	local UseTokensResult = FoundationModule.Hooks.useTokens()
+	local UseCursorResult = UseCursorFunction(CursorType.SmallPill)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(false)
 	
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		testId = "RobuxBalance",
-		tag = if fFlagAXResetAvatarButton then "row auto-xy align-y-center radius-circle padding-x-large gap-xsmall size-0-1000" else "row auto-xy align-y-center radius-circle padding-x-large gap-xsmall size-0-1100",
-		ref = p2,
+		tag = if FFlagAXResetAvatarButton then "row auto-xy align-y-center radius-circle padding-x-large gap-xsmall size-0-1000" else "row auto-xy align-y-center radius-circle padding-x-large gap-xsmall size-0-1100",
+		ref = Ref,
 		onActivated = p1.onActivated,
-		onStateChanged = reactModule.useCallback(function(p3)
-			-- upvalues: foundationModule (copy), var4 (ref)
-			if p3 == foundationModule.Enums.ControlState.Default then
-				var4(false)
+		onStateChanged = ReactModule.useCallback(function(Default) --[[ Line: 28 ]]
+			-- upvalues: FoundationModule (upval), UseBindingResult2 (copy)
+			if Default == FoundationModule.Enums.ControlState.Default then
+				UseBindingResult2(false)
 				
 				return
-			elseif p3 == foundationModule.Enums.ControlState.Hover then
-				var4(true)
+			end
+			if Default == FoundationModule.Enums.ControlState.Hover then
+				UseBindingResult2(true)
 			end
 		end, {}),
-		backgroundStyle = var3:map(function(p3)
-			-- upvalues: var1 (ref)
-			return if p3 then var1.Color.Shift.Shift_200 else var1.Color.Surface.Surface_0
+		backgroundStyle = UseBindingResult:map(function(p2) --[[ Line: 46 ]]
+			-- upvalues: UseTokensResult (copy)
+			return if p2 then UseTokensResult.Color.Shift.Shift_200 else UseTokensResult.Color.Surface.Surface_0
 		end),
 		stateLayer = {
-			affordance = foundationModule.Enums.StateLayerAffordance.None
+			affordance = FoundationModule.Enums.StateLayerAffordance.None
 		},
 		selection = {
 			Selectable = true,
-			SelectionImageObject = var2,
+			SelectionImageObject = UseCursorResult,
 			NextSelectionLeft = p1.NextSelectionLeft
 		}
 	}, {
-		RobuxBalanceIcon = reactModule.createElement(foundationModule.Icon, {
+		RobuxBalanceIcon = ReactModule.createElement(FoundationModule.Icon, {
 			name = "robux",
 			LayoutOrder = 1,
 			testId = "RobuxBalanceIcon",
-			style = var1.Color.ActionStandard.Foreground,
-			size = foundationModule.Enums.IconSize.Small
+			style = UseTokensResult.Color.ActionStandard.Foreground,
+			size = FoundationModule.Enums.IconSize.Small
 		}),
-		RobuxBalanceText = reactModule.createElement(foundationModule.Text, {
+		RobuxBalanceText = ReactModule.createElement(FoundationModule.Text, {
 			tag = "auto-xy",
 			testId = "RobuxBalanceText",
 			LayoutOrder = 2,
 			Text = p1.text,
-			textStyle = var1.Color.Content.Emphasis,
-			fontStyle = var1.Typography.LabelMedium,
+			textStyle = UseTokensResult.Color.Content.Emphasis,
+			fontStyle = UseTokensResult.Typography.LabelMedium,
 			selection = { Selectable = false }
 		})
 	})
-end)
+end))

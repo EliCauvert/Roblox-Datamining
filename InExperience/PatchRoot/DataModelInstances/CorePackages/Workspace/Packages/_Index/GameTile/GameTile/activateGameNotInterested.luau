@@ -1,218 +1,221 @@
-﻿local httpService = game:GetService("HttpService")
-local gameTile = script:FindFirstAncestor("GameTile")
-local parent = gameTile.Parent
-local centralOverlayModule = require(parent.CentralOverlay)
-local foundationModule = require(parent.Foundation)
-local loggersModule = require(parent.Loggers)
-local loggingProtocolModule = require(parent.LoggingProtocol)
-local robloxAppEnumsModule = require(parent.RobloxAppEnums)
-local robloxAppToastsRoduxModule = require(parent.RobloxAppToastsRodux)
-local sharedFlagsModule = require(parent.SharedFlags)
-local userSignalsModule = require(parent.UserSignals)
-local abuseVectorModule = require(parent.GenericAbuseReporting.AbuseVector)
-local circleMinus = foundationModule.Enums.IconName.CircleMinus
-local centralOverlayType = robloxAppEnumsModule.CentralOverlayType
-local closeCentralOverlay = centralOverlayModule.Thunks.CloseCentralOverlay
-local default = loggingProtocolModule.default
-local openDynamicAbuseReportModule = require(parent.GenericAbuseReporting.OpenDynamicAbuseReport)
-local postSendUserSignal = userSignalsModule.PostSendUserSignal
-local setCentralOverlay = centralOverlayModule.Actions.SetCentralOverlay
-local setNetworkingErrorToast = robloxAppToastsRoduxModule.Thunks.SetNetworkingErrorToast
-local userSignalTypes = userSignalsModule.UserSignalTypes
-local flaggedMutedError = loggersModule.flaggedMutedError
-local mutedError = loggersModule.mutedError
-local notInterestedUserSignalTelemetryEventConfigsModule = require(gameTile.NotInterestedUserSignalTelemetryEventConfigs)
-local sendNotInterestedFeedbackFormAnalyticsModule = require(gameTile.sendNotInterestedFeedbackFormAnalytics)
-local fFlagLuaAppMakeDisclaimerOptInForFeedbackForm = sharedFlagsModule.FFlagLuaAppMakeDisclaimerOptInForFeedbackForm
-local fFlagLuaAppNotInterestedFeedbackFormTelemetry = sharedFlagsModule.FFlagLuaAppNotInterestedFeedbackFormTelemetry
-local fFlagLuaAppNotInterestedReportPlaceId = sharedFlagsModule.FFlagLuaAppNotInterestedReportPlaceId
+﻿local HttpService = game:GetService("HttpService")
+local GameTile = script:FindFirstAncestor("GameTile")
+local Parent = GameTile.Parent
+local CentralOverlayModule = require(Parent.CentralOverlay)
+local LoggersModule = require(Parent.Loggers)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local UserSignalsModule = require(Parent.UserSignals)
+local AbuseVectorModule = require(Parent.GenericAbuseReporting.AbuseVector)
+local CircleMinus = require(Parent.Foundation).Enums.IconName.CircleMinus
+local CentralOverlayType = require(Parent.RobloxAppEnums).CentralOverlayType
+local CloseCentralOverlayFunction = CentralOverlayModule.Thunks.CloseCentralOverlay
+local Default = require(Parent.LoggingProtocol).default
+local OpenDynamicAbuseReportModule = require(Parent.GenericAbuseReporting.OpenDynamicAbuseReport)
+local PostSendUserSignalFunction = UserSignalsModule.PostSendUserSignal
+local SetCentralOverlayFunction = CentralOverlayModule.Actions.SetCentralOverlay
+local SetNetworkingErrorToastFunction = require(Parent.RobloxAppToastsRodux).Thunks.SetNetworkingErrorToast
+local UserSignalTypes = UserSignalsModule.UserSignalTypes
+local FlaggedMutedErrorFunction = LoggersModule.flaggedMutedError
+local MutedErrorFunction = LoggersModule.mutedError
+local NotInterestedUserSignalTelemetryEventConfigsModule = require(GameTile.NotInterestedUserSignalTelemetryEventConfigs)
+local SendNotInterestedFeedbackFormAnalyticsModule = require(GameTile.sendNotInterestedFeedbackFormAnalytics)
+local FFlagLuaAppMakeDisclaimerOptInForFeedbackForm = SharedFlagsModule.FFlagLuaAppMakeDisclaimerOptInForFeedbackForm
+local FFlagLuaAppNotInterestedFeedbackFormTelemetry = SharedFlagsModule.FFlagLuaAppNotInterestedFeedbackFormTelemetry
 
-local function _(p1, p2, p3, p4)
-	-- upvalues: fFlagLuaAppNotInterestedFeedbackFormTelemetry (ref), sendNotInterestedFeedbackFormAnalyticsModule (ref)
-	if fFlagLuaAppNotInterestedFeedbackFormTelemetry then
-		sendNotInterestedFeedbackFormAnalyticsModule({ universeId = p2, sortId = p3, actionType = p4 }, p1)
+local function _(p1, UniverseId, SortId, ActionType) --[[ Line: 63 | Named "sendFeedbackFormAnalytics" ]]
+	-- upvalues: FFlagLuaAppNotInterestedFeedbackFormTelemetry (copy), SendNotInterestedFeedbackFormAnalyticsModule (copy)
+	if FFlagLuaAppNotInterestedFeedbackFormTelemetry then
+		SendNotInterestedFeedbackFormAnalyticsModule({
+			universeId = UniverseId,
+			sortId = SortId,
+			actionType = ActionType
+		}, p1)
 		
 		return
 	end
 end
 
-local _ = function(p1, p2, p3, p4)
-	-- upvalues: fFlagLuaAppNotInterestedFeedbackFormTelemetry (ref), sendNotInterestedFeedbackFormAnalyticsModule (ref)
+local _ = function(p1, p2, UniverseId, SortId) --[[ Line: 74 | Named "onFeedbackFormClosed" ]]
+	-- upvalues: FFlagLuaAppNotInterestedFeedbackFormTelemetry (copy), SendNotInterestedFeedbackFormAnalyticsModule (copy)
 	if p1 then return end
-	if fFlagLuaAppNotInterestedFeedbackFormTelemetry then
-		sendNotInterestedFeedbackFormAnalyticsModule({
+	if FFlagLuaAppNotInterestedFeedbackFormTelemetry then
+		SendNotInterestedFeedbackFormAnalyticsModule({
 			actionType = "NotInterestedFeedbackFormClosedWithoutSubmit",
-			universeId = p3,
-			sortId = p4
+			universeId = UniverseId,
+			sortId = SortId
 		}, p2)
 		
 		return
 	end
 end
 
-local function onFeedbackFormSubmitted(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
-	-- upvalues: userSignalTypes (ref), fFlagLuaAppNotInterestedReportPlaceId (ref), flaggedMutedError (ref), openDynamicAbuseReportModule (ref), abuseVectorModule (ref), closeCentralOverlay (ref), postSendUserSignal (ref), httpService (ref), setNetworkingErrorToast (ref), default (ref), notInterestedUserSignalTelemetryEventConfigsModule (ref), mutedError (ref), fFlagLuaAppNotInterestedFeedbackFormTelemetry (ref), sendNotInterestedFeedbackFormAnalyticsModule (ref)
-	local var1 = if p9 then userSignalTypes.AssetType.SponsoredGame else userSignalTypes.AssetType.Game
-	local t = {}
-	local var2 = false
+local function onFeedbackFormSubmitted(p1, TextResponse, CheckboxItems, ProductSurface, SortId, Callback: (any) -> (), Networking, TargetId, IsSponsored, UniverseId) --[[ Line: 86 ]]
+	-- upvalues: UserSignalTypes (copy), FlaggedMutedErrorFunction (copy), OpenDynamicAbuseReportModule (copy), AbuseVectorModule (copy), CloseCentralOverlayFunction (copy), PostSendUserSignalFunction (copy), HttpService (copy), SetNetworkingErrorToastFunction (copy), Default (copy), NotInterestedUserSignalTelemetryEventConfigsModule (copy), MutedErrorFunction (copy), FFlagLuaAppNotInterestedFeedbackFormTelemetry (copy), SendNotInterestedFeedbackFormAnalyticsModule (copy)
+	local SponsoredGame = if IsSponsored then UserSignalTypes.AssetType.SponsoredGame else UserSignalTypes.AssetType.Game
+	local Items = {}
+	local Flag = false
 	
-	for i, v in p3 do
-		local id = p1[v.id] or false
-		table.insert(t, { id = v.id, selected = id })
+	for _, checkboxItem in CheckboxItems do
+		local Selected = p1[checkboxItem.id] or false
+		table.insert(Items, { id = checkboxItem.id, selected = Selected })
 		
-		if v.id == userSignalTypes.NotInterestedFeedbackItem.InappropriateContent and id then
-			var2 = true
+		if checkboxItem.id == UserSignalTypes.NotInterestedFeedbackItem.InappropriateContent and Selected then
+			Flag = true
 		end
 	end
-	if var2 then
-		if fFlagLuaAppNotInterestedReportPlaceId and (p8 == nil or p8 == "") then
-			flaggedMutedError("NotInterestedReportPlaceIdMissing", "Place report opened without a place id")
+	if Flag then
+		if TargetId == nil or TargetId == "" then
+			FlaggedMutedErrorFunction("NotInterestedReportPlaceIdMissing", "Place report opened without a place id")
 		else
-			p6(openDynamicAbuseReportModule({
-				abuseVector = abuseVectorModule.Place,
-				targetId = if fFlagLuaAppNotInterestedReportPlaceId then p8 else p10,
-				onClose = function()
-					-- upvalues: p6 (ref), closeCentralOverlay (copy)
-					p6(closeCentralOverlay())
+			Callback(OpenDynamicAbuseReportModule({
+				abuseVector = AbuseVectorModule.Place,
+				targetId = TargetId,
+				onClose = function() --[[ Line: 121 ]]
+					-- upvalues: Callback (copy), CloseCentralOverlayFunction (upval)
+					Callback(CloseCentralOverlayFunction())
 				end
 			}))
 		end
 	end
-	local ok, status = pcall(function()
-		-- upvalues: postSendUserSignal (copy), p7 (ref), httpService (copy), userSignalTypes (copy), p2 (ref), t (ref), p10 (ref), var1 (ref), p4 (ref), p5 (ref), p6 (ref), setNetworkingErrorToast (copy), default (copy), notInterestedUserSignalTelemetryEventConfigsModule (copy)
-		postSendUserSignal(p7, {
-			stringValue = httpService:JSONEncode({
-				formId = userSignalTypes.NotInterestedFeedbackFormId.NotInterestedFeedback1,
-				titleId = userSignalTypes.NotInterestedFeedbackFormTitleId.WhyHideExperience,
-				textResponse = p2,
-				items = t
+	local Success, Result = pcall(function() --[[ Line: 128 ]]
+		-- upvalues: PostSendUserSignalFunction (upval), Networking (copy), HttpService (upval), UserSignalTypes (upval), TextResponse (copy), Items (copy), UniverseId (copy), SponsoredGame (copy), ProductSurface (copy), SortId (copy), Callback (copy), SetNetworkingErrorToastFunction (upval), Default (upval), NotInterestedUserSignalTelemetryEventConfigsModule (upval)
+		PostSendUserSignalFunction(Networking, {
+			stringValue = HttpService:JSONEncode({
+				formId = UserSignalTypes.NotInterestedFeedbackFormId.NotInterestedFeedback1,
+				titleId = UserSignalTypes.NotInterestedFeedbackFormTitleId.WhyHideExperience,
+				textResponse = TextResponse,
+				items = Items
 			})
 		}, {
-			id = p10,
-			assetType = var1,
-			signalOrigin = { productSurface = p4, topicId = p5, subIds = { p5 } }
-		}, userSignalTypes.SignalValueType.String, userSignalTypes.SignalType.NotInterestedFeedback):catch(function(p11)
-			-- upvalues: p6 (copy), setNetworkingErrorToast (copy), default (copy), notInterestedUserSignalTelemetryEventConfigsModule (copy)
-			p6(setNetworkingErrorToast(p11))
-			default:logRobloxTelemetryCounter(notInterestedUserSignalTelemetryEventConfigsModule.NotInterestedUserSignalFailed, 1)
+			id = UniverseId,
+			assetType = SponsoredGame,
+			signalOrigin = {
+				productSurface = ProductSurface,
+				topicId = SortId,
+				subIds = { SortId }
+			}
+		}, UserSignalTypes.SignalValueType.String, UserSignalTypes.SignalType.NotInterestedFeedback):catch(function(Err) --[[ Line: 145 ]]
+			-- upvalues: Callback (upval), SetNetworkingErrorToastFunction (upval), Default (upval), NotInterestedUserSignalTelemetryEventConfigsModule (upval)
+			Callback(SetNetworkingErrorToastFunction(Err))
+			Default:logRobloxTelemetryCounter(NotInterestedUserSignalTelemetryEventConfigsModule.NotInterestedUserSignalFailed, 1)
 		end)
 	end)
 	
-	if not ok then
-		mutedError(status)
+	if not Success then
+		MutedErrorFunction(Result)
 	end
-	if fFlagLuaAppNotInterestedFeedbackFormTelemetry then
-		sendNotInterestedFeedbackFormAnalyticsModule({
+	if FFlagLuaAppNotInterestedFeedbackFormTelemetry then
+		SendNotInterestedFeedbackFormAnalyticsModule({
 			actionType = "NotInterestedFeedbackFormSubmitted",
-			universeId = p10,
-			sortId = p5
-		}, p4)
+			universeId = UniverseId,
+			sortId = SortId
+		}, ProductSurface)
 		
 		return
 	end
 end
 
-return function(p11)
-	-- upvalues: default (ref), notInterestedUserSignalTelemetryEventConfigsModule (ref), setNetworkingErrorToast (ref), userSignalTypes (ref), setCentralOverlay (ref), centralOverlayType (ref), onFeedbackFormSubmitted (ref), fFlagLuaAppNotInterestedFeedbackFormTelemetry (ref), sendNotInterestedFeedbackFormAnalyticsModule (ref), fFlagLuaAppMakeDisclaimerOptInForFeedbackForm (ref), circleMinus (ref), postSendUserSignal (ref), mutedError (ref)
-	local appPage = p11.appPage
+return function(p2): boolean --[[ Line: 161 | Named "activateGameNotInterested" ]]
+	-- upvalues: Default (copy), NotInterestedUserSignalTelemetryEventConfigsModule (copy), SetNetworkingErrorToastFunction (copy), UserSignalTypes (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), onFeedbackFormSubmitted (copy), FFlagLuaAppNotInterestedFeedbackFormTelemetry (copy), SendNotInterestedFeedbackFormAnalyticsModule (copy), FFlagLuaAppMakeDisclaimerOptInForFeedbackForm (copy), CircleMinus (copy), PostSendUserSignalFunction (copy), MutedErrorFunction (copy)
+	local AppPage = p2.appPage
 	
-	if not appPage then
-		default:logRobloxTelemetryCounter(notInterestedUserSignalTelemetryEventConfigsModule.NotInterestedMissingAppPage, 1)
-		p11.dispatch(setNetworkingErrorToast())
+	if not AppPage then
+		Default:logRobloxTelemetryCounter(NotInterestedUserSignalTelemetryEventConfigsModule.NotInterestedMissingAppPage, 1)
+		p2.dispatch(SetNetworkingErrorToastFunction())
 		
 		return false
 	end
-	local collectionId = p11.collectionId
-	local dispatch = p11.dispatch
-	local networking = p11.networking
-	local placeId = p11.placeId
-	local universeId = p11.universeId
-	local var3 = if p11.isSponsored then userSignalTypes.AssetType.SponsoredGame else userSignalTypes.AssetType.Game
-	local localizedStrings = p11.localizedStrings
-	local list = {
+	local CollectionId = p2.collectionId
+	local DispatchFunction: (any) -> () = p2.dispatch
+	local Networking = p2.networking
+	local PlaceId = p2.placeId
+	local UniverseId = p2.universeId
+	local SponsoredGame = if p2.isSponsored then UserSignalTypes.AssetType.SponsoredGame else UserSignalTypes.AssetType.Game
+	local LocalizedStrings = p2.localizedStrings
+	local CheckboxItems = {
 		{
-			id = userSignalTypes.NotInterestedFeedbackItem.TooRepetitive,
-			text = localizedStrings.tooRepetitive
+			id = UserSignalTypes.NotInterestedFeedbackItem.TooRepetitive,
+			text = LocalizedStrings.tooRepetitive
 		},
 		{
-			id = userSignalTypes.NotInterestedFeedbackItem.DontLikeGame,
-			text = localizedStrings.dontLikeGame
+			id = UserSignalTypes.NotInterestedFeedbackItem.DontLikeGame,
+			text = LocalizedStrings.dontLikeGame
 		},
 		{
-			id = userSignalTypes.NotInterestedFeedbackItem.DontLikeImage,
-			text = localizedStrings.dontLikeImage
+			id = UserSignalTypes.NotInterestedFeedbackItem.DontLikeImage,
+			text = LocalizedStrings.dontLikeImage
 		},
 		{
-			id = userSignalTypes.NotInterestedFeedbackItem.InappropriateContent,
-			text = localizedStrings.inappropriateContent
+			id = UserSignalTypes.NotInterestedFeedbackItem.InappropriateContent,
+			text = LocalizedStrings.inappropriateContent
 		},
 		{
 			triggersOtherTextbox = true,
-			id = userSignalTypes.NotInterestedFeedbackItem.SomethingElse,
-			text = localizedStrings.somethingElse
+			id = UserSignalTypes.NotInterestedFeedbackItem.SomethingElse,
+			text = LocalizedStrings.somethingElse
 		}
 	}
-	p11.setGameHidden(universeId, true)
-	dispatch(setCentralOverlay(centralOverlayType.ProvideFeedbackToast, {
+	p2.setGameHidden(UniverseId, true)
+	DispatchFunction(SetCentralOverlayFunction(CentralOverlayType.ProvideFeedbackToast, {
 		feedbackFormProps = {
-			dialogTitle = localizedStrings.dialogTitle,
-			dialogText = localizedStrings.dialogText,
-			checkboxListTitle = localizedStrings.checkboxListTitle,
-			checkboxItems = list,
-			onSubmit = function(p12, p13)
-				-- upvalues: onFeedbackFormSubmitted (copy), list (ref), appPage (ref), collectionId (ref), dispatch (ref), networking (ref), placeId (ref), p11 (ref), universeId (ref)
-				onFeedbackFormSubmitted(p12, p13, list, appPage, collectionId, dispatch, networking, placeId, p11.isSponsored, universeId)
+			dialogTitle = LocalizedStrings.dialogTitle,
+			dialogText = LocalizedStrings.dialogText,
+			checkboxListTitle = LocalizedStrings.checkboxListTitle,
+			checkboxItems = CheckboxItems,
+			onSubmit = function(p3, TextResponse) --[[ Line: 213 ]]
+				-- upvalues: onFeedbackFormSubmitted (upval), CheckboxItems (copy), AppPage (copy), CollectionId (copy), DispatchFunction (copy), Networking (copy), PlaceId (copy), p2 (copy), UniverseId (copy)
+				onFeedbackFormSubmitted(p3, TextResponse, CheckboxItems, AppPage, CollectionId, DispatchFunction, Networking, PlaceId, p2.isSponsored, UniverseId)
 			end,
-			onClose = if fFlagLuaAppNotInterestedFeedbackFormTelemetry then function(p12)
-				-- upvalues: appPage (ref), universeId (ref), collectionId (ref), fFlagLuaAppNotInterestedFeedbackFormTelemetry (copy), sendNotInterestedFeedbackFormAnalyticsModule (copy)
-				if p12 then return end
-				if fFlagLuaAppNotInterestedFeedbackFormTelemetry then
-					sendNotInterestedFeedbackFormAnalyticsModule({
+			onClose = if FFlagLuaAppNotInterestedFeedbackFormTelemetry then function(p3) --[[ Line: 228 ]]
+				-- upvalues: AppPage (copy), UniverseId (copy), CollectionId (copy), FFlagLuaAppNotInterestedFeedbackFormTelemetry (upval), SendNotInterestedFeedbackFormAnalyticsModule (upval)
+				if p3 then return end
+				if FFlagLuaAppNotInterestedFeedbackFormTelemetry then
+					SendNotInterestedFeedbackFormAnalyticsModule({
 						actionType = "NotInterestedFeedbackFormClosedWithoutSubmit",
-						universeId = universeId,
-						sortId = collectionId
-					}, appPage)
+						universeId = UniverseId,
+						sortId = CollectionId
+					}, AppPage)
 					
 					return
 				end
 			end else nil,
-			showTermsOfUseDisclaimer = if fFlagLuaAppMakeDisclaimerOptInForFeedbackForm then false else nil
+			showTermsOfUseDisclaimer = not FFlagLuaAppMakeDisclaimerOptInForFeedbackForm and nil
 		},
-		toastIcon = circleMinus,
-		onToastActivated = if fFlagLuaAppNotInterestedFeedbackFormTelemetry then function()
-			-- upvalues: appPage (ref), universeId (ref), collectionId (ref), fFlagLuaAppNotInterestedFeedbackFormTelemetry (copy), sendNotInterestedFeedbackFormAnalyticsModule (copy)
-			if fFlagLuaAppNotInterestedFeedbackFormTelemetry then
-				sendNotInterestedFeedbackFormAnalyticsModule({
+		toastIcon = CircleMinus,
+		onToastActivated = if FFlagLuaAppNotInterestedFeedbackFormTelemetry then function() --[[ Line: 236 ]]
+			-- upvalues: AppPage (copy), UniverseId (copy), CollectionId (copy), FFlagLuaAppNotInterestedFeedbackFormTelemetry (upval), SendNotInterestedFeedbackFormAnalyticsModule (upval)
+			if FFlagLuaAppNotInterestedFeedbackFormTelemetry then
+				SendNotInterestedFeedbackFormAnalyticsModule({
 					actionType = "NotInterestedFeedbackFormOpened",
-					universeId = universeId,
-					sortId = collectionId
-				}, appPage)
+					universeId = UniverseId,
+					sortId = CollectionId
+				}, AppPage)
 				
 				return
 			end
 		end else nil
 	}))
-	local ok, status = pcall(function()
-		-- upvalues: postSendUserSignal (copy), networking (ref), universeId (ref), var3 (ref), appPage (ref), collectionId (ref), userSignalTypes (copy), p11 (ref), dispatch (ref), setNetworkingErrorToast (copy), default (copy), notInterestedUserSignalTelemetryEventConfigsModule (copy)
-		postSendUserSignal(networking, { boolValue = true }, {
-			id = universeId,
-			assetType = var3,
+	local Success, Result = pcall(function() --[[ Line: 242 ]]
+		-- upvalues: PostSendUserSignalFunction (upval), Networking (copy), UniverseId (copy), SponsoredGame (copy), AppPage (copy), CollectionId (copy), UserSignalTypes (upval), p2 (copy), DispatchFunction (copy), SetNetworkingErrorToastFunction (upval), Default (upval), NotInterestedUserSignalTelemetryEventConfigsModule (upval)
+		PostSendUserSignalFunction(Networking, { boolValue = true }, {
+			id = UniverseId,
+			assetType = SponsoredGame,
 			signalOrigin = {
-				productSurface = appPage,
-				topicId = collectionId,
-				subIds = { collectionId }
+				productSurface = AppPage,
+				topicId = CollectionId,
+				subIds = { CollectionId }
 			}
-		}, userSignalTypes.SignalValueType.Bool, userSignalTypes.SignalType.NotInterested):catch(function(p12)
-			-- upvalues: p11 (copy), universeId (copy), dispatch (copy), setNetworkingErrorToast (copy), default (copy), notInterestedUserSignalTelemetryEventConfigsModule (copy)
-			p11.setGameHidden(universeId, false)
-			dispatch(setNetworkingErrorToast(p12))
-			default:logRobloxTelemetryCounter(notInterestedUserSignalTelemetryEventConfigsModule.NotInterestedUserSignalFailed, 1)
+		}, UserSignalTypes.SignalValueType.Bool, UserSignalTypes.SignalType.NotInterested):catch(function(Err) --[[ Line: 254 ]]
+			-- upvalues: p2 (upval), UniverseId (upval), DispatchFunction (upval), SetNetworkingErrorToastFunction (upval), Default (upval), NotInterestedUserSignalTelemetryEventConfigsModule (upval)
+			p2.setGameHidden(UniverseId, false)
+			DispatchFunction(SetNetworkingErrorToastFunction(Err))
+			Default:logRobloxTelemetryCounter(NotInterestedUserSignalTelemetryEventConfigsModule.NotInterestedUserSignalFailed, 1)
 		end)
 	end)
 	
-	if not ok then
-		p11.setGameHidden(universeId, false)
-		mutedError(status)
+	if not Success then
+		p2.setGameHidden(UniverseId, false)
+		MutedErrorFunction(Result)
 	end
 	return true
 end

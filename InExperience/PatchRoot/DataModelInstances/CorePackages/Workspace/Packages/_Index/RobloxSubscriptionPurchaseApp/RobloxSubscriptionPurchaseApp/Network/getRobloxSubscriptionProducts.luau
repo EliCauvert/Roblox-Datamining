@@ -1,25 +1,26 @@
-﻿local robloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
-local parent = robloxSubscriptionPurchaseApp.Parent
-local promiseModule = require(parent.Promise)
-local getRobloxSubscriptionProductsModelModule = require(robloxSubscriptionPurchaseApp.Models.GetRobloxSubscriptionProductsModel)
-local _ = require(parent.LuauPolyfill)
-local constantsModule = require(robloxSubscriptionPurchaseApp.Constants)
-local marketplaceService = game:GetService("MarketplaceService")
+﻿local RobloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
+local Parent = RobloxSubscriptionPurchaseApp.Parent
+local PromiseModule = require(Parent.Promise)
+local GetRobloxSubscriptionProductsModelModule = require(RobloxSubscriptionPurchaseApp.Models.GetRobloxSubscriptionProductsModel)
+local _ = require(Parent.LuauPolyfill)
+local ConstantsModule = require(RobloxSubscriptionPurchaseApp.Constants)
+local MarketplaceService = game:GetService("MarketplaceService")
 
-return function()
-	-- upvalues: promiseModule (ref), marketplaceService (ref), constantsModule (ref), getRobloxSubscriptionProductsModelModule (ref)
-	return promiseModule.new(function(p1, p2)
-		-- upvalues: marketplaceService (copy), constantsModule (copy), getRobloxSubscriptionProductsModelModule (copy)
-		local ok, status = pcall(function()
-			-- upvalues: marketplaceService (copy), constantsModule (copy)
-			return marketplaceService:GetAvailableSubscriptionProductsAsync(constantsModule.ROBLOX_SUBSCRIPTION_PRODUCT_TYPE)
+return function() --[[ Line: 15 ]]
+	-- upvalues: PromiseModule (copy), MarketplaceService (copy), ConstantsModule (copy), GetRobloxSubscriptionProductsModelModule (copy)
+	return PromiseModule.new(function(Callback: (any) -> (), Callback1: (any) -> ()) --[[ Line: 16 ]]
+		-- upvalues: MarketplaceService (upval), ConstantsModule (upval), GetRobloxSubscriptionProductsModelModule (upval)
+		local Success, Result = pcall(function() --[[ Line: 17 ]]
+			-- upvalues: MarketplaceService (upval), ConstantsModule (upval)
+			return MarketplaceService:GetAvailableSubscriptionProductsAsync(ConstantsModule.ROBLOX_SUBSCRIPTION_PRODUCT_TYPE)
 		end)
 		
-		if ok then
-			p1(getRobloxSubscriptionProductsModelModule.format(status or {}))
+		if Success then
+			Callback((GetRobloxSubscriptionProductsModelModule.format(Result or {})))
 			
 			return
+		else
+			Callback1((tostring(Result)))
 		end
-		p2(tostring(status))
 	end)
 end

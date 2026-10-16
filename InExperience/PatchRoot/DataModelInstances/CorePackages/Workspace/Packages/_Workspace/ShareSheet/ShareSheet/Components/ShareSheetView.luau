@@ -1,158 +1,160 @@
-﻿local shareSheet = script:FindFirstAncestor("ShareSheet")
-local parent = shareSheet.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local dialogSize = foundationModule.Enums.DialogSize
-local divider = foundationModule.Divider
-local sheet = foundationModule.Sheet
-local text = foundationModule.Text
-local view = foundationModule.View
-local useOverlay = foundationModule.Hooks.useOverlay
-local useScaledValue = foundationModule.Hooks.useScaledValue
-local useTokens = foundationModule.Hooks.useTokens
-local fFlagShareSheetDesktopReadinessModule = require(shareSheet.Flags.FFlagShareSheetDesktopReadiness)
-local fFlagShareSheetFixPeoplePickerCenterSheetOverflowModule = require(shareSheet.Flags.FFlagShareSheetFixPeoplePickerCenterSheetOverflow)
-local fFlagShareSheetPeoplePickerEnabledModule = require(shareSheet.Flags.FFlagShareSheetPeoplePickerEnabled)
-local fIntShareSheetPeoplePickerEnabledSnapPointHundredthsPercent = require(shareSheet.ShareSheetConstants).FIntShareSheetPeoplePickerEnabledSnapPointHundredthsPercent
-local var1 = fFlagShareSheetFixPeoplePickerCenterSheetOverflowModule and not require(shareSheet.Flags.FFlagShareSheetUseFoundationCenterSheetHeightFix)
-local getCenterSheetHeightModule = require(script.Parent.getCenterSheetHeight)
-local peoplePickerModule = require(shareSheet.Components.PeoplePicker)
-local shareSheetActionRowModule = require(script.Parent.ShareSheetActionRow)
-local shareSheetSocialRowModule = require(script.Parent.ShareSheetSocialRow)
-local shareSendRowModule = require(script.Parent.ShareSendRow)
-local shareSheetTelemetryModule = require(shareSheet.telemetry.ShareSheetTelemetry)
+﻿local ShareSheet = script:FindFirstAncestor("ShareSheet")
+local Parent = ShareSheet.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local DialogSize = FoundationModule.Enums.DialogSize
+local Divider = FoundationModule.Divider
+local Sheet = FoundationModule.Sheet
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local UseOverlayFunction = FoundationModule.Hooks.useOverlay
+local UseScaledValueFunction = FoundationModule.Hooks.useScaledValue
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local FFlagShareSheetDesktopReadinessModule = require(ShareSheet.Flags.FFlagShareSheetDesktopReadiness)
+local FFlagShareSheetPeoplePickerEnabledModule = require(ShareSheet.Flags.FFlagShareSheetPeoplePickerEnabled)
+local FFlagShareSheetUseFoundationCenterSheetHeightFixModule = require(ShareSheet.Flags.FFlagShareSheetUseFoundationCenterSheetHeightFix)
+local FIntShareSheetPeoplePickerEnabledSnapPointHundredthsPercent = require(ShareSheet.ShareSheetConstants).FIntShareSheetPeoplePickerEnabledSnapPointHundredthsPercent
+local GetCenterSheetHeightModule = require(script.Parent.getCenterSheetHeight)
+local PeoplePickerModule = require(ShareSheet.Components.PeoplePicker)
+local ShareSheetActionRowModule = require(script.Parent.ShareSheetActionRow)
+local ShareSheetSocialRowModule = require(script.Parent.ShareSheetSocialRow)
+local ShareSendRowModule = require(script.Parent.ShareSendRow)
+local _ = require(ShareSheet.Recipients.RecipientSource)
+local ShareSheetTelemetryModule = require(ShareSheet.telemetry.ShareSheetTelemetry)
+local _ = require(ShareSheet.Types)
 
-local function setDefaultContentScrollingFrameRef(value)
-	if value then
-		value.AutomaticSize = Enum.AutomaticSize.Y
-		value.ScrollBarThickness = 0
+local function setDefaultContentScrollingFrameRef(p1) --[[ Line: 59 ]]
+	if p1 then
+		p1.AutomaticSize = Enum.AutomaticSize.Y
+		p1.ScrollBarThickness = 0
 	end
 end
 
-local function setPeoplePickerContentScrollingFrameRef(value)
-	if value then
-		value.AutomaticSize = Enum.AutomaticSize.None
-		value.ScrollBarThickness = 0
+local function setPeoplePickerContentScrollingFrameRef(p1) --[[ Line: 66 ]]
+	if p1 then
+		p1.AutomaticSize = Enum.AutomaticSize.None
+		p1.ScrollBarThickness = 0
 	end
 end
 
-local function useOverlaySize()
-	-- upvalues: useOverlay (ref), reactModule (ref)
-	local var2 = useOverlay()
-	local var3, var4 = reactModule.useState(Vector2.zero)
-	local var5 = if var2 then var2.AbsoluteSize else var3
-	reactModule.useLayoutEffect(function()
-		-- upvalues: var2 (ref), var4 (ref)
-		if var2 == nil then
-			return
-		end
-		local var6 = var2:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
-			-- upvalues: var2 (copy), var4 (copy)
-			local absoluteSize = var2.AbsoluteSize
-			var4(function(p1)
-				-- upvalues: absoluteSize (ref)
-				return if p1 == absoluteSize then p1 else absoluteSize
+local function useOverlaySize() --[[ Line: 73 ]]
+	-- upvalues: UseOverlayFunction (copy), ReactModule (copy)
+	local UseOverlayResult = UseOverlayFunction()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.zero)
+	local AbsoluteSize = if UseOverlayResult then UseOverlayResult.AbsoluteSize else UseStateResult
+	ReactModule.useLayoutEffect(function() --[[ Line: 78 ]]
+		-- upvalues: UseOverlayResult (copy), UseStateResult2 (copy)
+		if UseOverlayResult == nil then return end
+		local Connection = UseOverlayResult:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 83 | Named "updateSize" ]]
+			-- upvalues: UseOverlayResult (upval), UseStateResult2 (upval)
+			local AbsoluteSize = UseOverlayResult.AbsoluteSize
+			UseStateResult2(function(AbsoluteSize1) --[[ Line: 85 ]]
+				-- upvalues: AbsoluteSize (copy)
+				return if AbsoluteSize1 == AbsoluteSize then AbsoluteSize1 else AbsoluteSize
 			end)
 		end)
 		
-		return function()
-			-- upvalues: var6 (ref)
-			var6:Disconnect()
+		return function() --[[ Line: 91 ]]
+			-- upvalues: Connection (copy)
+			Connection:Disconnect()
 		end
-	end, { var2 })
+	end, { UseOverlayResult })
 	
-	return var5
+	return AbsoluteSize
 end
 
-return function(p1)
-	-- upvalues: var1 (ref), useTokens (ref), useOverlaySize (ref), useScaledValue (ref), fFlagShareSheetPeoplePickerEnabledModule (ref), fIntShareSheetPeoplePickerEnabledSnapPointHundredthsPercent (ref), getCenterSheetHeightModule (ref), reactModule (ref), shareSheetTelemetryModule (ref), sheet (ref), fFlagShareSheetDesktopReadinessModule (ref), dialogSize (ref), peoplePickerModule (ref), text (ref), setPeoplePickerContentScrollingFrameRef (ref), setDefaultContentScrollingFrameRef (ref), view (ref), shareSheetSocialRowModule (ref), divider (ref), shareSendRowModule (ref), shareSheetActionRowModule (ref)
-	local var2 = nil
-	local var3 = nil
-	local var4 = nil
+return function(p1) --[[ Line: 99 | Named "ShareSheetView" ]]
+	-- upvalues: FFlagShareSheetUseFoundationCenterSheetHeightFixModule (copy), UseTokensFunction (copy), useOverlaySize (copy), UseScaledValueFunction (copy), FFlagShareSheetPeoplePickerEnabledModule (copy), FIntShareSheetPeoplePickerEnabledSnapPointHundredthsPercent (copy), GetCenterSheetHeightModule (copy), ReactModule (copy), ShareSheetTelemetryModule (copy), Sheet (copy), FFlagShareSheetDesktopReadinessModule (copy), DialogSize (copy), PeoplePickerModule (copy), Text (copy), setPeoplePickerContentScrollingFrameRef (copy), setDefaultContentScrollingFrameRef (copy), View (copy), ShareSheetSocialRowModule (copy), Divider (copy), ShareSendRowModule (copy), ShareSheetActionRowModule (copy)
+	local v1 = nil
+	local v2 = nil
+	local v3 = nil
 	
-	if var1 then
-		var2 = useTokens()
-		var3 = useOverlaySize()
-		var4 = useScaledValue(600)
+	if not FFlagShareSheetUseFoundationCenterSheetHeightFixModule then
+		v1 = UseTokensFunction()
+		v2 = useOverlaySize()
+		v3 = UseScaledValueFunction(600)
 	end
-	local var5 = next(p1.selectedConversationIds) ~= nil or p1.isSending == true
-	local peoplePicker = nil
-	local var6 = false
-	local list = nil
-	local var7 = nil
+	local HasNextEntry: boolean = next(p1.selectedConversationIds) ~= nil or p1.isSending == true
+	local PeoplePicker = nil
+	local IsIsPeoplePickerDisplayed = false
+	local v4 = nil
+	local v5 = nil
 	
-	if fFlagShareSheetPeoplePickerEnabledModule then
-		peoplePicker = p1.peoplePicker
-		var6 = p1.isPeoplePickerDisplayed == true
+	if FFlagShareSheetPeoplePickerEnabledModule then
+		PeoplePicker = p1.peoplePicker
+		IsIsPeoplePickerDisplayed = p1.isPeoplePickerDisplayed == true
 		
-		if var6 then
-			local var8 = fIntShareSheetPeoplePickerEnabledSnapPointHundredthsPercent / 10000
-			list = { var8 }
-			var7 = if var1 then getCenterSheetHeightModule(var3.Y, var2.Margin.Medium * 2, var4, var8) else var8
+		if IsIsPeoplePickerDisplayed then
+			local FIntShareSheetPeoplePickerEnabledSnapPointHundredthsPercentRatio = FIntShareSheetPeoplePickerEnabledSnapPointHundredthsPercent / 10000
+			v4 = {
+				FIntShareSheetPeoplePickerEnabledSnapPointHundredthsPercentRatio
+			}
+			v5 = if FFlagShareSheetUseFoundationCenterSheetHeightFixModule then FIntShareSheetPeoplePickerEnabledSnapPointHundredthsPercentRatio else GetCenterSheetHeightModule(v2.Y, v1.Margin.Medium * 2, v3, FIntShareSheetPeoplePickerEnabledSnapPointHundredthsPercentRatio)
 		end
 	end
-	return reactModule.createElement(sheet.Root, {
+	return ReactModule.createElement(Sheet.Root, {
 		preferCenterSheet = true,
-		centerSheetHeight = if fFlagShareSheetPeoplePickerEnabledModule then var7 else nil,
+		centerSheetHeight = if FFlagShareSheetPeoplePickerEnabledModule then v5 else nil,
 		isOpen = p1.isOpen,
-		onClose = reactModule.useCallback(function()
-			-- upvalues: p1 (ref), shareSheetTelemetryModule (copy)
-			p1.onCloseWithReason(shareSheetTelemetryModule.CloseReason.UserDismissed)
+		onClose = ReactModule.useCallback(function() --[[ Line: 130 ]]
+			-- upvalues: p1 (copy), ShareSheetTelemetryModule (upval)
+			p1.onCloseWithReason(ShareSheetTelemetryModule.CloseReason.UserDismissed)
 		end, { p1.onCloseWithReason }),
-		size = if fFlagShareSheetDesktopReadinessModule then dialogSize.Large else nil,
-		snapPoints = if fFlagShareSheetPeoplePickerEnabledModule then list else nil
+		size = if FFlagShareSheetDesktopReadinessModule then DialogSize.Large else nil,
+		snapPoints = if FFlagShareSheetPeoplePickerEnabledModule then v4 else nil
 	}, {
-		Header = reactModule.createElement(sheet.Header, {
-			hasCloseAffordance = if fFlagShareSheetPeoplePickerEnabledModule then not var6 else true
-		}, if fFlagShareSheetPeoplePickerEnabledModule and var6 then {
-			Picker = reactModule.createElement(peoplePickerModule.PeoplePickerHeader, peoplePicker.headerProps)
+		Header = ReactModule.createElement(Sheet.Header, {
+			hasCloseAffordance = not FFlagShareSheetPeoplePickerEnabledModule or not IsIsPeoplePickerDisplayed
+		}, if FFlagShareSheetPeoplePickerEnabledModule and IsIsPeoplePickerDisplayed then {
+			Picker = ReactModule.createElement(PeoplePickerModule.PeoplePickerHeader, PeoplePicker.headerProps)
 		} else {
-			Title = reactModule.createElement(text, {
+			Title = ReactModule.createElement(Text, {
 				LayoutOrder = 1,
 				tag = "auto-xy text-heading-small content-emphasis",
 				Text = p1.shareLabel
 			})
 		}),
-		Content = reactModule.createElement(sheet.Content, {
-			scrollingFrameRef = if fFlagShareSheetPeoplePickerEnabledModule and var6 then setPeoplePickerContentScrollingFrameRef else setDefaultContentScrollingFrameRef,
-			isContentFullBleed = if fFlagShareSheetPeoplePickerEnabledModule then not var6 else true
+		Content = ReactModule.createElement(Sheet.Content, {
+			scrollingFrameRef = if FFlagShareSheetPeoplePickerEnabledModule and IsIsPeoplePickerDisplayed then setPeoplePickerContentScrollingFrameRef else setDefaultContentScrollingFrameRef,
+			isContentFullBleed = not FFlagShareSheetPeoplePickerEnabledModule or not IsIsPeoplePickerDisplayed
 		}, {
-			ContentLayout = reactModule.createElement(view, {
+			ContentLayout = ReactModule.createElement(View, {
 				tag = {
-					["col size-full"] = fFlagShareSheetPeoplePickerEnabledModule and var6,
-					["col size-full-0 auto-y"] = not (fFlagShareSheetPeoplePickerEnabledModule and var6),
-					["gap-xlarge"] = if fFlagShareSheetPeoplePickerEnabledModule then not var6 else true
+					["col size-full"] = FFlagShareSheetPeoplePickerEnabledModule and IsIsPeoplePickerDisplayed,
+					["col size-full-0 auto-y"] = not (FFlagShareSheetPeoplePickerEnabledModule and IsIsPeoplePickerDisplayed),
+					["gap-xlarge"] = not FFlagShareSheetPeoplePickerEnabledModule or not IsIsPeoplePickerDisplayed
 				}
-			}, if fFlagShareSheetPeoplePickerEnabledModule and var6 then {
-				PeoplePicker = reactModule.createElement(peoplePickerModule.PeoplePickerList, peoplePicker.listProps)
+			}, if FFlagShareSheetPeoplePickerEnabledModule and IsIsPeoplePickerDisplayed then {
+				PeoplePicker = ReactModule.createElement(PeoplePickerModule.PeoplePickerList, PeoplePicker.listProps)
 			} else {
-				SocialRow = if p1.shouldShowSocialRow then reactModule.createElement(shareSheetSocialRowModule, {
+				SocialRow = if p1.shouldShowSocialRow then ReactModule.createElement(ShareSheetSocialRowModule, {
 					LayoutOrder = 1,
 					conversationEligibility = p1.conversationEligibility,
 					isLoading = p1.isSocialRowLoading,
 					onConversationActivated = p1.onConversationActivated,
-					onMoreActivated = if fFlagShareSheetPeoplePickerEnabledModule then p1.onMoreActivated else nil,
+					onMoreActivated = if FFlagShareSheetPeoplePickerEnabledModule then p1.onMoreActivated else nil,
 					selectedConversationIds = p1.selectedConversationIds
 				}) else nil,
-				RowDivider = if p1.shouldShowSocialRow then reactModule.createElement(divider, { LayoutOrder = 2, testId = "share-sheet-row-divider" }) else nil,
-				ActionsRow = if fFlagShareSheetPeoplePickerEnabledModule then nil elseif var5 then reactModule.createElement(shareSendRowModule, {
+				RowDivider = if p1.shouldShowSocialRow then ReactModule.createElement(Divider, { LayoutOrder = 2, testId = "share-sheet-row-divider" }) else nil,
+				ActionsRow = if FFlagShareSheetPeoplePickerEnabledModule then nil elseif HasNextEntry then ReactModule.createElement(ShareSendRowModule, {
 					LayoutOrder = 3,
 					isLoading = p1.isSending,
 					label = p1.sendLabel,
 					messagePlaceholder = p1.messagePlaceholder,
 					onActivated = p1.onSendActivated,
 					onFocusGained = p1.onComposerFocused
-				}) else reactModule.createElement(shareSheetActionRowModule, {
+				}) else ReactModule.createElement(ShareSheetActionRowModule, {
 					LayoutOrder = 3,
 					canShare = p1.canShareLink,
 					context = p1.context,
+					recipientSource = p1.recipientSource,
 					telemetryId = p1.telemetryId,
 					url = p1.url
 				})
 			})
 		}),
-		Actions = if fFlagShareSheetPeoplePickerEnabledModule then reactModule.createElement(sheet.Actions, nil, {
-			Footer = if var5 then reactModule.createElement(shareSendRowModule, {
+		Actions = if FFlagShareSheetPeoplePickerEnabledModule then ReactModule.createElement(Sheet.Actions, nil, {
+			Footer = if HasNextEntry then ReactModule.createElement(ShareSendRowModule, {
 				hasHorizontalPadding = false,
 				shouldFillButton = false,
 				isLoading = p1.isSending,
@@ -160,13 +162,14 @@ return function(p1)
 				messagePlaceholder = p1.messagePlaceholder,
 				onActivated = p1.onSendActivated,
 				onFocusGained = p1.onComposerFocused
-			}) elseif not var6 then reactModule.createElement(shareSheetActionRowModule, {
+			}) elseif IsIsPeoplePickerDisplayed then nil else ReactModule.createElement(ShareSheetActionRowModule, {
 				hasHorizontalPadding = false,
 				canShare = p1.canShareLink,
 				context = p1.context,
+				recipientSource = p1.recipientSource,
 				telemetryId = p1.telemetryId,
 				url = p1.url
-			}) else nil
+			})
 		}) else nil
 	})
 end

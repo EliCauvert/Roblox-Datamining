@@ -1,25 +1,25 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local tModule = require(parent.t)
-local sendRequestRefundClickEvent = require(parent.DiscoveryAnalytics).Events.sendRequestRefundClickEvent
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
-local getActionTelemetryFieldValue = sduiCoreSystemModule.getActionTelemetryFieldValue
-local var1 = tModule.strictInterface({
-	placeId = tModule.union(tModule.string, tModule.number),
-	eventContext = tModule.string
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local TModule = require(Parent.t)
+local SendRequestRefundClickEventFunction = require(Parent.DiscoveryAnalytics).Events.sendRequestRefundClickEvent
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
+local GetActionTelemetryFieldValueFunction = SduiCoreSystemModule.getActionTelemetryFieldValue
+local StrictInterfaceResult = TModule.strictInterface({
+	placeId = TModule.union(TModule.string, TModule.number),
+	eventContext = TModule.string
 })
 
-return function(p1, p2, p3)
-	-- upvalues: getActionTelemetryFieldValue (ref), var1 (ref), sduiErrorType (ref), sendRequestRefundClickEvent (ref)
-	local var2 = getActionTelemetryFieldValue(p1, p2, "placeId")
-	local var3 = getActionTelemetryFieldValue(p1, p2, "eventContext")
-	local var4, var5 = var1({ placeId = var2, eventContext = var3 })
+return function(p1, p2, p3) --[[ Line: 20 ]]
+	-- upvalues: GetActionTelemetryFieldValueFunction (copy), StrictInterfaceResult (copy), SduiErrorType (copy), SendRequestRefundClickEventFunction (copy)
+	local PlaceId = GetActionTelemetryFieldValueFunction(p1, p2, "placeId")
+	local EventContext = GetActionTelemetryFieldValueFunction(p1, p2, "eventContext")
+	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult({ placeId = PlaceId, eventContext = EventContext })
 	
-	if not var4 then
-		p3.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if not StrictInterfaceResultResult then
+		p3.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			name = "SduiRequestRefundClickTelemetryHandler",
-			message = var5
+			message = StrictInterfaceResultResult2
 		}, p3.appPage)
 	end
-	sendRequestRefundClickEvent({ placeId = if var2 then tostring(var2) else "" }, if var3 then tostring(var3) else "")
+	SendRequestRefundClickEventFunction({ placeId = if PlaceId then tostring(PlaceId) else "" }, if EventContext then tostring(EventContext) else "")
 end

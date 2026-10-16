@@ -1,33 +1,33 @@
-﻿local gameTile = script:FindFirstAncestor("GameTile")
-local gridTileGameStatsModule = require(gameTile.Footer.GridTileGameStats)
-local gridTileIconTextFooterModule = require(gameTile.Footer.GridTileIconTextFooter)
-local getGameStatsRatingPercentageTextModule = require(gameTile.Footer.getGameStatsRatingPercentageText)
-local usePlayerCountTextModule = require(gameTile.Footer.usePlayerCountText)
-local getUserInputIsSelectionOnlyModule = require(gameTile.Footer.getUserInputIsSelectionOnly)
-local parent = gameTile.Parent
-local roactModule = require(parent.Roact)
-local colors = require(parent.Style).Colors
-local cryoModule = require(parent.Cryo)
-local UIBloxModule = require(parent.UIBlox)
-local foundationModule = require(parent.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local withStyle = UIBloxModule.Style.withStyle
-local withTextSizeOffset = UIBloxModule.Core.Style.withTextSizeOffset
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local images = UIBloxModule.App.ImageSet.Images
-local interactable = UIBloxModule.Core.Control.Interactable
-local tooltipOrientation = UIBloxModule.App.Dialog.Enum.TooltipOrientation
-local withLocalization = require(parent.Localization).withLocalization
-local sponsoredTooltipHover = require(parent.Ads).SponsoredTooltipHover
-local fFlagLuaAppNarrowTileHideRating = require(parent.SharedFlags).FFlagLuaAppNarrowTileHideRating
-local fFlagLuaAppNarrowTileHidePlayerCount = require(parent.SharedFlags).FFlagLuaAppNarrowTileHidePlayerCount
-local fFlagLuaAppGenreRatingFooter = require(parent.SharedFlags).FFlagLuaAppGenreRatingFooter
-local ratingSmall = images["icons/status/games/rating_small"]
-local var1 = images["icons/status/games/people-playing_small"]
-local gameStats = roactModule.PureComponent:extend("GameStats")
-local var2 = if not fFlagLuaAppGenreRatingFooter then function(p1, p2)
-	local var3 = "--"
+﻿local GameTile = script:FindFirstAncestor("GameTile")
+local GridTileGameStatsModule = require(GameTile.Footer.GridTileGameStats)
+local GridTileIconTextFooterModule = require(GameTile.Footer.GridTileIconTextFooter)
+local GetGameStatsRatingPercentageTextModule = require(GameTile.Footer.getGameStatsRatingPercentageText)
+local UsePlayerCountTextModule = require(GameTile.Footer.usePlayerCountText)
+local GetUserInputIsSelectionOnlyModule = require(GameTile.Footer.getUserInputIsSelectionOnly)
+local Parent = GameTile.Parent
+local RoactModule = require(Parent.Roact)
+local Colors = require(Parent.Style).Colors
+local CryoModule = require(Parent.Cryo)
+local UIBloxModule = require(Parent.UIBlox)
+local FoundationModule = require(Parent.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local WithStyleFunction = UIBloxModule.Style.withStyle
+local WithTextSizeOffsetFunction = UIBloxModule.Core.Style.withTextSizeOffset
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local Images = UIBloxModule.App.ImageSet.Images
+local Interactable = UIBloxModule.Core.Control.Interactable
+local TooltipOrientation = UIBloxModule.App.Dialog.Enum.TooltipOrientation
+local WithLocalizationFunction = require(Parent.Localization).withLocalization
+local SponsoredTooltipHover = require(Parent.Ads).SponsoredTooltipHover
+local FFlagLuaAppNarrowTileHideRating = require(Parent.SharedFlags).FFlagLuaAppNarrowTileHideRating
+local FFlagLuaAppNarrowTileHidePlayerCount = require(Parent.SharedFlags).FFlagLuaAppNarrowTileHidePlayerCount
+local FFlagLuaAppGenreRatingFooter = require(Parent.SharedFlags).FFlagLuaAppGenreRatingFooter
+local IconsStatusGamesRatingSmall = Images["icons/status/games/rating_small"]
+local IconsStatusGamesPeoplePlayingSmall = Images["icons/status/games/people-playing_small"]
+local GameStats = RoactModule.PureComponent:extend("GameStats")
+local Callback = if FFlagLuaAppGenreRatingFooter then nil else function(p1: number, p2: number): string --[[ Line: 36 ]]
+	local v1 = "--"
 	
 	if p1 == nil or p1 < 0 then
 		p1 = 0
@@ -35,68 +35,68 @@ local var2 = if not fFlagLuaAppGenreRatingFooter then function(p1, p2)
 	if p2 == nil or p2 < 0 then
 		p2 = 0
 	end
-	local var4 = p1 + p2
+	local v2 = p1 + p2
 	
-	if var4 > 0 then
-		var3 = tostring(math.floor(p1 / var4 * 100))
+	if v2 > 0 then
+		v1 = tostring((math.floor(p1 / v2 * 100)))
 	end
-	return var3
-end else nil
+	return v1
+end
 
-function gameStats.renderSponsored(p1, p2)
-	-- upvalues: roactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), sponsoredTooltipHover (ref), tooltipOrientation (ref), getUserInputIsSelectionOnlyModule (ref), interactable (ref), withLocalization (ref)
-	local theme = p2.Theme
-	local font = p2.Font
-	local var3 = if p1.props.useLargerFont then font.Body else font.CaptionHeader
-	local var4 = var3.RelativeSize * font.BaseSize
+function GameStats.renderSponsored(p1, p2) --[[ Line: 57 ]]
+	-- upvalues: RoactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), SponsoredTooltipHover (copy), TooltipOrientation (copy), GetUserInputIsSelectionOnlyModule (copy), Interactable (copy), WithLocalizationFunction (copy)
+	local Theme = p2.Theme
+	local _Font = p2.Font
+	local Body = if p1.props.useLargerFont then _Font.Body else _Font.CaptionHeader
+	local ScaledRelativeSize = Body.RelativeSize * _Font.BaseSize
 	
-	return withLocalization({ sponsoredText = "Feature.GamePage.Label.Sponsored" })(function(p3)
-		-- upvalues: roactModule (copy), var4 (ref), theme (ref), foundationFontFaceMigration (copy), var3 (ref), normalizeFontFace (copy), p1 (ref), p2 (ref), sponsoredTooltipHover (copy), tooltipOrientation (copy), getUserInputIsSelectionOnlyModule (copy), interactable (copy)
-		return roactModule.createElement("Frame", {
+	return WithLocalizationFunction({ sponsoredText = "Feature.GamePage.Label.Sponsored" })(function(p3) --[[ Line: 64 ]]
+		-- upvalues: RoactModule (upval), ScaledRelativeSize (copy), Theme (copy), FoundationFontFaceMigration (upval), Body (copy), NormalizeFontFaceFunction (upval), p1 (copy), p2 (copy), SponsoredTooltipHover (upval), TooltipOrientation (upval), GetUserInputIsSelectionOnlyModule (upval), Interactable (upval)
+		return RoactModule.createElement("Frame", {
 			BorderSizePixel = 0,
-			Size = UDim2.new(1, 0, 0, math.ceil(var4)),
+			Size = UDim2.new(1, 0, 0, (math.ceil(ScaledRelativeSize))),
 			Position = UDim2.new(0, 0, 1, 0),
 			AnchorPoint = Vector2.new(0, 1),
-			BackgroundColor3 = theme.UIDefault.Color,
-			BackgroundTransparency = theme.UIDefault.Transparency
+			BackgroundColor3 = Theme.UIDefault.Color,
+			BackgroundTransparency = Theme.UIDefault.Transparency
 		}, {
-			SponsoredBlock = roactModule.createElement(interactable, {
+			SponsoredBlock = RoactModule.createElement(Interactable, {
 				Size = UDim2.new(1, 0, 1, 0),
 				BackgroundTransparency = 1,
-				onStateChanged = function() end,
-				[roactModule.Event.Activated] = p1.props.onActivateSponsoredTooltip
+				onStateChanged = function() --[[ Line: 119 ]] end,
+				[RoactModule.Event.Activated] = p1.props.onActivateSponsoredTooltip
 			}, {
-				SponsoredBlockFrame = roactModule.createElement("Frame", {
+				SponsoredBlockFrame = RoactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					BorderSizePixel = 0,
 					Size = UDim2.new(1, 0, 1, 0)
 				}, {
-					Layout = roactModule.createElement("UIListLayout", {
+					Layout = RoactModule.createElement("UIListLayout", {
 						SortOrder = Enum.SortOrder.LayoutOrder,
 						FillDirection = Enum.FillDirection.Horizontal,
 						VerticalAlignment = Enum.VerticalAlignment.Center,
 						HorizontalAlignment = Enum.HorizontalAlignment.Center,
 						Padding = UDim.new(0, 4)
 					}),
-					SponsoredText = roactModule.createElement("TextLabel", {
+					SponsoredText = RoactModule.createElement("TextLabel", {
 						BackgroundTransparency = 1,
 						BorderSizePixel = 0,
 						LayoutOrder = 1,
-						TextSize = var4,
-						TextColor3 = theme.TextEmphasis.Color,
-						TextTransparency = theme.TextEmphasis.Transparency,
-						Font = if foundationFontFaceMigration then nil else var3.Font,
-						FontFace = if foundationFontFaceMigration then normalizeFontFace(if p1.props.useLargerFont then p2.Tokens.Typography.BodyLarge.Font else p2.Tokens.Typography.CaptionLarge.Font) else nil,
+						TextSize = ScaledRelativeSize,
+						TextColor3 = Theme.TextEmphasis.Color,
+						TextTransparency = Theme.TextEmphasis.Transparency,
+						Font = if FoundationFontFaceMigration then nil else Body.Font,
+						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(if p1.props.useLargerFont then p2.Tokens.Typography.BodyLarge.Font else p2.Tokens.Typography.CaptionLarge.Font) else nil,
 						Text = p3.sponsoredText,
 						AutomaticSize = Enum.AutomaticSize.XY
 					}),
-					SponsoredTooltip = roactModule.createElement(sponsoredTooltipHover, {
+					SponsoredTooltip = RoactModule.createElement(SponsoredTooltipHover, {
 						layoutOrder = 2,
-						tooltipOrientation = tooltipOrientation.Bottom,
+						tooltipOrientation = TooltipOrientation.Bottom,
 						onActivateTooltip = p1.props.onActivateSponsoredTooltip,
 						size = UDim2.new(0, 16, 0, 16),
-						color = theme.TextEmphasis.Color,
-						selectable = getUserInputIsSelectionOnlyModule()
+						color = Theme.TextEmphasis.Color,
+						selectable = GetUserInputIsSelectionOnlyModule()
 					})
 				})
 			})
@@ -104,192 +104,197 @@ function gameStats.renderSponsored(p1, p2)
 	end)
 end
 
-function gameStats.renderGameStats(p1, p2, p3, p4)
-	-- upvalues: fFlagLuaAppGenreRatingFooter (ref), getGameStatsRatingPercentageTextModule (ref), var2 (write), roactModule (ref), gridTileGameStatsModule (ref), fFlagLuaAppNarrowTileHideRating (ref), fFlagLuaAppNarrowTileHidePlayerCount (ref), withLocalization (ref), gridTileIconTextFooterModule (ref), images (ref)
-	local stats = p3.stats
-	local var3 = if fFlagLuaAppGenreRatingFooter then getGameStatsRatingPercentageTextModule(stats.totalUpVotes, stats.totalDownVotes) else var2(stats.totalUpVotes, stats.totalDownVotes)
+function GameStats.renderGameStats(p1, p2, Props, p3) --[[ Line: 132 ]]
+	-- upvalues: FFlagLuaAppGenreRatingFooter (copy), GetGameStatsRatingPercentageTextModule (copy), Callback (ref), RoactModule (copy), GridTileGameStatsModule (copy), FFlagLuaAppNarrowTileHideRating (copy), FFlagLuaAppNarrowTileHidePlayerCount (copy), WithLocalizationFunction (copy), GridTileIconTextFooterModule (copy), Images (copy)
+	local Stats = Props.stats
+	local GameStatsRatingPercentageTextModule = if FFlagLuaAppGenreRatingFooter then GetGameStatsRatingPercentageTextModule(Stats.totalUpVotes, Stats.totalDownVotes) else Callback(Stats.totalUpVotes, Stats.totalDownVotes)
 	
-	if stats.playerCount ~= nil then
-		return withLocalization({
+	if Stats.playerCount == nil then
+		return WithLocalizationFunction({
 			longRatingText = {
 				"Feature.GameDetails.RatingPercentOnly",
-				percentRating = var3
+				percentRating = GameStatsRatingPercentageTextModule
 			}
-		})(function(p5)
-			-- upvalues: roactModule (copy), gridTileIconTextFooterModule (copy), images (copy), p1 (ref), p3 (ref)
-			return roactModule.createElement(gridTileIconTextFooterModule, {
-				icon = images["icons/status/games/rating_small"],
-				text = p5.longRatingText,
+		})(function(p4) --[[ Line: 160 ]]
+			-- upvalues: RoactModule (upval), GridTileIconTextFooterModule (upval), Images (upval), p1 (copy), Props (copy)
+			return RoactModule.createElement(GridTileIconTextFooterModule, {
+				icon = Images["icons/status/games/rating_small"],
+				text = p4.longRatingText,
 				styleProps = { iconSize = 15, padding = 4 },
 				useLargerFont = p1.props.useLargerFont,
-				isUnifiedGameTile = p3.isUnifiedGameTile
+				isUnifiedGameTile = Props.isUnifiedGameTile
 			})
 		end)
-	elseif stats.totalUpVotes + stats.totalDownVotes > 0 then
-		var3 ..= "%"
 	end
-	return if p3.isGridTile or p3.isUnifiedGameTile then roactModule.createElement(gridTileGameStatsModule, {
-		playerCountText = p3.playerCountText,
-		ratingText = var3,
+	if Stats.totalUpVotes + Stats.totalDownVotes > 0 then
+		GameStatsRatingPercentageTextModule ..= "%"
+	end
+	return if Props.isGridTile or Props.isUnifiedGameTile then RoactModule.createElement(GridTileGameStatsModule, {
+		playerCountText = Props.playerCountText,
+		ratingText = GameStatsRatingPercentageTextModule,
 		useLargerFont = p1.props.useLargerFont,
-		isUnifiedGameTile = p3.isUnifiedGameTile,
-		gameTileLayoutType = p3.gameTileLayoutType,
+		isUnifiedGameTile = Props.isUnifiedGameTile,
+		gameTileLayoutType = Props.gameTileLayoutType,
 		LayoutOrder = p1.props.LayoutOrder,
-		compactMetadataFormat = p3.compactMetadataFormat,
-		hideRating = if fFlagLuaAppNarrowTileHideRating then p3.hideRating else nil,
-		hidePlayerCount = if fFlagLuaAppNarrowTileHidePlayerCount then p3.hidePlayerCount else nil
-	}) else p1:renderFullGameStats(p2, p3, var3, p4)
+		compactMetadataFormat = Props.compactMetadataFormat,
+		hideRating = if FFlagLuaAppNarrowTileHideRating then Props.hideRating else nil,
+		hidePlayerCount = if FFlagLuaAppNarrowTileHidePlayerCount then Props.hidePlayerCount else nil
+	}) else p1:renderFullGameStats(p2, Props, GameStatsRatingPercentageTextModule, p3)
 end
 
-function gameStats.renderFullGameStats(_, p1, p2, p3, p4)
-	-- upvalues: roactModule (ref), imageSetLabel (ref), ratingSmall (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), var1 (ref)
-	local var3 = if p2.stats.playerCount then p2.playerCountText else nil
-	local theme = p1.Theme
-	local font = p1.Font
-	local font_1 = font.CaptionSubHeader.Font
-	local var4 = font.BaseSize * font.CaptionSubHeader.RelativeSize
-	local var5 = var4 + p1.Tokens.Size.Size_150
-	local minValue = math.min(math.ceil(var4) + (p4 or 0), var5)
+function GameStats:renderFullGameStats(p1, p2, Text, p3) --[[ Line: 175 ]]
+	-- upvalues: RoactModule (copy), ImageSetLabel (copy), IconsStatusGamesRatingSmall (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), IconsStatusGamesPeoplePlayingSmall (copy)
+	local PlayerCountText = if p2.stats.playerCount then p2.playerCountText else nil
+	local Theme = p1.Theme
+	local _Font = p1.Font
+	local CaptionSubHeaderFont = _Font.CaptionSubHeader.Font
+	local ScaledBaseSize = _Font.BaseSize * _Font.CaptionSubHeader.RelativeSize
+	local NewScaledBaseSize = ScaledBaseSize + p1.Tokens.Size.Size_150
+	local Smallest = math.min(math.ceil(ScaledBaseSize) + (p3 or 0), NewScaledBaseSize)
 	
-	return roactModule.createElement("Frame", {
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		Size = UDim2.new(1, 0, 1, 0)
 	}, {
-		VoteIcon = roactModule.createElement(imageSetLabel, {
+		VoteIcon = RoactModule.createElement(ImageSetLabel, {
 			BackgroundTransparency = 1,
-			Size = UDim2.new(0.125, 0, 0, minValue),
+			Size = UDim2.new(0.125, 0, 0, Smallest),
 			AnchorPoint = Vector2.new(0, 0.5),
 			Position = UDim2.fromScale(0, 0.5),
-			Image = ratingSmall,
-			ImageColor3 = theme.TextDefault.Color,
-			ImageTransparency = theme.TextDefault.Transparency,
+			Image = IconsStatusGamesRatingSmall,
+			ImageColor3 = Theme.TextDefault.Color,
+			ImageTransparency = Theme.TextDefault.Transparency,
 			ScaleType = Enum.ScaleType.Fit
 		}),
-		Vote = roactModule.createElement("TextLabel", {
+		Vote = RoactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
-			Size = UDim2.new(0.35, 0, 0, minValue),
+			Size = UDim2.new(0.35, 0, 0, Smallest),
 			AnchorPoint = Vector2.new(0, 0.5),
 			Position = UDim2.fromScale(0.15, 0.5),
-			Text = p3,
-			Font = if foundationFontFaceMigration then nil else font_1,
-			FontFace = if foundationFontFaceMigration then normalizeFontFace(p1.Tokens.Typography.CaptionLarge.Font) else nil,
-			TextColor3 = theme.TextDefault.Color,
-			TextTransparency = theme.TextDefault.Transparency,
-			TextSize = var4,
+			Text = Text,
+			Font = if FoundationFontFaceMigration then nil else CaptionSubHeaderFont,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p1.Tokens.Typography.CaptionLarge.Font) else nil,
+			TextColor3 = Theme.TextDefault.Color,
+			TextTransparency = Theme.TextDefault.Transparency,
+			TextSize = ScaledBaseSize,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Bottom,
 			TextTruncate = Enum.TextTruncate.AtEnd
 		}, {
-			UiTextSizeConstraint = roactModule.createElement("UITextSizeConstraint", { MaxTextSize = var5 })
+			UiTextSizeConstraint = RoactModule.createElement("UITextSizeConstraint", { MaxTextSize = NewScaledBaseSize })
 		}),
-		PlayerIcon = if var3 ~= nil then nil else roactModule.createElement(imageSetLabel, {
+		PlayerIcon = if PlayerCountText == nil then nil else RoactModule.createElement(ImageSetLabel, {
 			BackgroundTransparency = 1,
-			Size = UDim2.new(0.125, 0, 0, minValue),
+			Size = UDim2.new(0.125, 0, 0, Smallest),
 			Position = UDim2.fromScale(0.5, 0.5),
 			AnchorPoint = Vector2.new(0, 0.5),
-			Image = var1,
-			ImageColor3 = theme.TextDefault.Color,
-			ImageTransparency = theme.TextDefault.Transparency,
+			Image = IconsStatusGamesPeoplePlayingSmall,
+			ImageColor3 = Theme.TextDefault.Color,
+			ImageTransparency = Theme.TextDefault.Transparency,
 			ScaleType = Enum.ScaleType.Fit
 		}),
-		PlayerCount = if var3 ~= nil then nil else roactModule.createElement("TextLabel", {
+		PlayerCount = if PlayerCountText == nil then nil else RoactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
-			Size = UDim2.new(0.35, 0, 0, minValue),
+			Size = UDim2.new(0.35, 0, 0, Smallest),
 			AnchorPoint = Vector2.new(0, 0.5),
 			Position = UDim2.fromScale(0.65, 0.5),
-			Text = var3,
-			Font = if foundationFontFaceMigration then nil else font_1,
-			FontFace = if foundationFontFaceMigration then normalizeFontFace(p1.Tokens.Typography.CaptionLarge.Font) else nil,
-			TextColor3 = theme.TextDefault.Color,
-			TextTransparency = theme.TextDefault.Transparency,
-			TextSize = var4,
+			Text = PlayerCountText,
+			Font = if FoundationFontFaceMigration then nil else CaptionSubHeaderFont,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p1.Tokens.Typography.CaptionLarge.Font) else nil,
+			TextColor3 = Theme.TextDefault.Color,
+			TextTransparency = Theme.TextDefault.Transparency,
+			TextSize = ScaledBaseSize,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Bottom,
 			TextTruncate = Enum.TextTruncate.AtEnd
 		}, {
-			UiTextSizeConstraint = roactModule.createElement("UITextSizeConstraint", { MaxTextSize = var5 })
+			UiTextSizeConstraint = RoactModule.createElement("UITextSizeConstraint", { MaxTextSize = NewScaledBaseSize })
 		})
 	})
 end
 
-function gameStats.renderConcurrentUsersPill(_, p1, p2)
-	-- upvalues: roactModule (ref), colors (ref), imageSetLabel (ref), var1 (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
-	local font = p1.Font
+function GameStats:renderConcurrentUsersPill(p1, Props) --[[ Line: 266 ]]
+	-- upvalues: RoactModule (copy), Colors (copy), ImageSetLabel (copy), IconsStatusGamesPeoplePlayingSmall (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	local _Font = p1.Font
+	local FooterFont = _Font.Footer.Font
 	
-	return roactModule.createElement("Frame", {
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 0,
 		Size = UDim2.new(0, 0, 0, 23),
 		Position = UDim2.new(1, -8, 1, -8),
 		AnchorPoint = Vector2.new(1, 1),
 		AutomaticSize = Enum.AutomaticSize.X,
-		BackgroundColor3 = colors.Black
+		BackgroundColor3 = Colors.Black
 	}, {
-		Corner = roactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) }),
-		Padding = roactModule.createElement("UIPadding", {
+		Corner = RoactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) }),
+		Padding = RoactModule.createElement("UIPadding", {
 			PaddingTop = UDim.new(0, 2),
 			PaddingRight = UDim.new(0, 8),
 			PaddingBottom = UDim.new(0, 2),
 			PaddingLeft = UDim.new(0, 15)
 		}),
-		Layout = roactModule.createElement("UIListLayout", {
+		Layout = RoactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			FillDirection = Enum.FillDirection.Horizontal,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
 			HorizontalAlignment = Enum.HorizontalAlignment.Right,
 			Padding = UDim.new(0.15, 0)
 		}),
-		PillIcon = roactModule.createElement(imageSetLabel, {
+		PillIcon = RoactModule.createElement(ImageSetLabel, {
 			BackgroundTransparency = 1,
 			LayoutOrder = 1,
 			ImageTransparency = 0,
 			Size = UDim2.new(0.7, 0, 0.7, 0),
 			SizeConstraint = Enum.SizeConstraint.RelativeYY,
-			Image = var1,
-			ImageColor3 = colors.White,
+			Image = IconsStatusGamesPeoplePlayingSmall,
+			ImageColor3 = Colors.White,
 			ScaleType = Enum.ScaleType.Fit
 		}),
-		PillPlayerCount = roactModule.createElement("TextLabel", {
+		PillPlayerCount = RoactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 2,
 			TextTransparency = 0,
 			Size = UDim2.new(0, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.XY,
-			Text = p2.playerCountText,
-			Font = if foundationFontFaceMigration then nil else font.Footer.Font,
-			FontFace = if foundationFontFaceMigration then normalizeFontFace(p1.Tokens.Typography.CaptionSmall.Font) else nil,
-			TextColor3 = colors.White,
-			TextSize = font.BaseSize * font.Footer.RelativeSize,
+			Text = Props.playerCountText,
+			Font = if FoundationFontFaceMigration then nil else FooterFont,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p1.Tokens.Typography.CaptionSmall.Font) else nil,
+			TextColor3 = Colors.White,
+			TextSize = _Font.BaseSize * _Font.Footer.RelativeSize,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Bottom
 		})
 	})
 end
 
-function gameStats.render(p1)
-	-- upvalues: withTextSizeOffset (ref), withStyle (ref)
-	local stats = p1.props.stats
+function GameStats.render(p1) --[[ Line: 325 ]]
+	-- upvalues: WithTextSizeOffsetFunction (copy), WithStyleFunction (copy)
+	local Stats = p1.props.stats
 	
-	if stats == nil then
+	if Stats == nil then
 		return nil
-	end
-	local var3 = function(p2, p3)
-		-- upvalues: stats (ref), p1 (ref)
-		return if stats.isSponsored and stats.isShowSponsoredLabel then p1:renderSponsored(p2) elseif stats.displayConcurrentUsersPill then p1:renderConcurrentUsersPill(p2, p1.props) elseif p1.props.hideGameStats then nil else p1:renderGameStats(p2, p1.props, p3)
-	end
-	
-	return withTextSizeOffset(function(p2)
-		-- upvalues: withStyle (copy), var3 (ref)
-		return withStyle(function(p3)
-			-- upvalues: var3 (copy), p2 (ref)
-			return var3(p3, p2)
+	else
+		local function v42(p2, p3) --[[ Line: 331 ]]
+			-- upvalues: Stats (copy), p1 (copy)
+			local IsShowSponsoredLabel = Stats.isSponsored and Stats.isShowSponsoredLabel
+			
+			return if IsShowSponsoredLabel then p1:renderSponsored(p2) elseif Stats.displayConcurrentUsersPill then p1:renderConcurrentUsersPill(p2, p1.props) elseif p1.props.hideGameStats then nil else p1:renderGameStats(p2, p1.props, p3)
+		end
+		
+		return WithTextSizeOffsetFunction(function(p2) --[[ Line: 346 ]]
+			-- upvalues: WithStyleFunction (upval), v42 (copy)
+			return WithStyleFunction(function(p3) --[[ Line: 347 ]]
+				-- upvalues: v42 (upval), p2 (copy)
+				return v42(p3, p2)
+			end)
 		end)
-	end)
+	end
 end
 
-return function(p1)
-	-- upvalues: usePlayerCountTextModule (ref), roactModule (ref), gameStats (ref), cryoModule (ref)
-	return roactModule.createElement(gameStats, cryoModule.Dictionary.join(p1, {
-		playerCountText = usePlayerCountTextModule(if p1.stats then p1.stats.playerCount else nil)
+return function(p1) --[[ Line: 354 ]]
+	-- upvalues: UsePlayerCountTextModule (copy), RoactModule (copy), GameStats (copy), CryoModule (copy)
+	return RoactModule.createElement(GameStats, CryoModule.Dictionary.join(p1, {
+		playerCountText = UsePlayerCountTextModule(p1.stats and p1.stats.playerCount or nil)
 	}))
 end

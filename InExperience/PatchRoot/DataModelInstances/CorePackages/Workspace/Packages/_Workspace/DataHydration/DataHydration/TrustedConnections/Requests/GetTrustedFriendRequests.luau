@@ -1,24 +1,24 @@
-﻿local httpService = game:GetService("HttpService")
-local dataHydration = script:FindFirstAncestor("DataHydration")
-local url = require(dataHydration.Parent.Http).Url
-local myHttpRequestModule = require(dataHydration.TrustedConnections.Networking.myHttpRequest)
+﻿local HttpService = game:GetService("HttpService")
+local DataHydration = script:FindFirstAncestor("DataHydration")
+local Url = require(DataHydration.Parent.Http).Url
+local MyHttpRequestModule = require(DataHydration.TrustedConnections.Networking.myHttpRequest)
 
-return function(p1, p2)
-	-- upvalues: httpService (ref), url (ref), myHttpRequestModule (ref)
-	local t = {}
+return function(Input, p1) --[[ Line: 10 ]]
+	-- upvalues: HttpService (copy), Url (copy), MyHttpRequestModule (copy)
+	local List = {}
 	
+	if Input ~= nil then
+		table.insert(List, string.format("cursor=%s", HttpService:UrlEncode(Input)))
+	end
 	if p1 ~= nil then
-		table.insert(t, string.format("cursor=%s", httpService:UrlEncode(p1)))
+		table.insert(List, string.format("limit=%d", p1))
 	end
-	if p2 ~= nil then
-		table.insert(t, string.format("limit=%d", p2))
-	end
-	local formattedText = string.format("%s/my/trusted-friends/requests", url.FRIEND_URL)
+	local Formatted = string.format("%s/my/trusted-friends/requests", Url.FRIEND_URL)
 	
-	if #t > 0 then
-		formattedText = string.format("%s?%s", formattedText, table.concat(t, "&"))
+	if #List > 0 then
+		Formatted = string.format("%s?%s", Formatted, table.concat(List, "&"))
 	end
-	return myHttpRequestModule(formattedText, "GET"):andThen(function(p3)
-		return p3 and p3.responseBody
+	return MyHttpRequestModule(Formatted, "GET"):andThen(function(Result) --[[ Line: 24 ]]
+		return Result and Result.responseBody
 	end)
 end

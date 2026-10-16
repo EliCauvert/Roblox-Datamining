@@ -1,69 +1,69 @@
-﻿local bulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
-local loggingProtocolModule = require(bulkPurchaseApp.Parent.LoggingProtocol)
-local bulkPurchaseCountersEnumModule = require(bulkPurchaseApp.Enums.BulkPurchaseCountersEnum)
-local fFlagAXAddPlusUpsellToBulkPurchaseModule = require(bulkPurchaseApp.Flags.FFlagAXAddPlusUpsellToBulkPurchase)
-local t = {
-	[bulkPurchaseCountersEnumModule.BulkPurchaseRequestedCounter] = {
+﻿local BulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
+local LoggingProtocolModule = require(BulkPurchaseApp.Parent.LoggingProtocol)
+local BulkPurchaseCountersEnumModule = require(BulkPurchaseApp.Enums.BulkPurchaseCountersEnum)
+local FFlagAXAddPlusUpsellToBulkPurchaseModule = require(BulkPurchaseApp.Flags.FFlagAXAddPlusUpsellToBulkPurchase)
+local config = {
+	[BulkPurchaseCountersEnumModule.BulkPurchaseRequestedCounter] = {
 		throttlingPercentage = 100,
 		description = "Counter fired when bulk purchase is requested",
 		links = "",
-		eventName = bulkPurchaseCountersEnumModule.BulkPurchaseRequestedCounter,
-		backends = { loggingProtocolModule.TelemetryBackends.Counter },
+		eventName = BulkPurchaseCountersEnumModule.BulkPurchaseRequestedCounter,
+		backends = { LoggingProtocolModule.TelemetryBackends.Counter },
 		lastUpdated = { 2026, 9, 23 }
 	},
-	[bulkPurchaseCountersEnumModule.BulkPurchaseSucceededCounter] = {
+	[BulkPurchaseCountersEnumModule.BulkPurchaseSucceededCounter] = {
 		throttlingPercentage = 100,
 		description = "Counter fired when bulk purchase has succeeded",
 		links = "",
-		eventName = bulkPurchaseCountersEnumModule.BulkPurchaseSucceededCounter,
-		backends = { loggingProtocolModule.TelemetryBackends.Counter },
+		eventName = BulkPurchaseCountersEnumModule.BulkPurchaseSucceededCounter,
+		backends = { LoggingProtocolModule.TelemetryBackends.Counter },
 		lastUpdated = { 2026, 9, 23 }
 	},
-	[bulkPurchaseCountersEnumModule.BulkPurchaseFailedCounter] = {
+	[BulkPurchaseCountersEnumModule.BulkPurchaseFailedCounter] = {
 		throttlingPercentage = 100,
 		description = "Counter fired when bulk purchase has failed",
 		links = "",
-		eventName = bulkPurchaseCountersEnumModule.BulkPurchaseFailedCounter,
-		backends = { loggingProtocolModule.TelemetryBackends.Counter },
+		eventName = BulkPurchaseCountersEnumModule.BulkPurchaseFailedCounter,
+		backends = { LoggingProtocolModule.TelemetryBackends.Counter },
 		lastUpdated = { 2026, 9, 23 }
 	},
-	[bulkPurchaseCountersEnumModule.BulkPurchaseRefreshFailedCounter] = {
+	[BulkPurchaseCountersEnumModule.BulkPurchaseRefreshFailedCounter] = {
 		throttlingPercentage = 100,
 		description = "Counter fired when bulk purchase refresh has failed",
 		links = "",
-		eventName = bulkPurchaseCountersEnumModule.BulkPurchaseRefreshFailedCounter,
-		backends = { loggingProtocolModule.TelemetryBackends.Counter },
+		eventName = BulkPurchaseCountersEnumModule.BulkPurchaseRefreshFailedCounter,
+		backends = { LoggingProtocolModule.TelemetryBackends.Counter },
 		lastUpdated = { 2026, 9, 23 }
 	},
-	[bulkPurchaseCountersEnumModule.BulkPurchasePlusUpsellInitatedCounter] = {
+	[BulkPurchaseCountersEnumModule.BulkPurchasePlusUpsellInitatedCounter] = {
 		throttlingPercentage = 100,
 		description = "Counter fired when bulk purchase server plus upsell is initiated",
 		links = "",
-		eventName = bulkPurchaseCountersEnumModule.BulkPurchasePlusUpsellInitatedCounter,
-		backends = { loggingProtocolModule.TelemetryBackends.Counter },
+		eventName = BulkPurchaseCountersEnumModule.BulkPurchasePlusUpsellInitatedCounter,
+		backends = { LoggingProtocolModule.TelemetryBackends.Counter },
 		lastUpdated = { 2026, 9, 23 }
 	},
-	[bulkPurchaseCountersEnumModule.BulkPurchasePlusUpsellSucceededCounter] = {
+	[BulkPurchaseCountersEnumModule.BulkPurchasePlusUpsellSucceededCounter] = {
 		throttlingPercentage = 100,
 		description = "Counter fired when bulk purchase server plus upsell is successful",
 		links = "",
-		eventName = bulkPurchaseCountersEnumModule.BulkPurchasePlusUpsellSucceededCounter,
-		backends = { loggingProtocolModule.TelemetryBackends.Counter },
+		eventName = BulkPurchaseCountersEnumModule.BulkPurchasePlusUpsellSucceededCounter,
+		backends = { LoggingProtocolModule.TelemetryBackends.Counter },
 		lastUpdated = { 2026, 9, 23 }
 	},
-	[bulkPurchaseCountersEnumModule.BulkPurchasePlusUpsellFailedCounter] = {
+	[BulkPurchaseCountersEnumModule.BulkPurchasePlusUpsellFailedCounter] = {
 		throttlingPercentage = 100,
 		description = "Counter fired when bulk purchase server plus upsell has failed",
 		links = "",
-		eventName = bulkPurchaseCountersEnumModule.BulkPurchasePlusUpsellFailedCounter,
-		backends = { loggingProtocolModule.TelemetryBackends.Counter },
+		eventName = BulkPurchaseCountersEnumModule.BulkPurchasePlusUpsellFailedCounter,
+		backends = { LoggingProtocolModule.TelemetryBackends.Counter },
 		lastUpdated = { 2026, 9, 23 }
 	}
 }
 
-return function(p1)
-	-- upvalues: loggingProtocolModule (ref), t (ref), fFlagAXAddPlusUpsellToBulkPurchaseModule (ref)
-	loggingProtocolModule.default:logRobloxTelemetryCounter(t[p1], 1, {
-		FFlagAXAddPlusUpsellToBulkPurchase = tostring(fFlagAXAddPlusUpsellToBulkPurchaseModule)
+return function(p1) --[[ Line: 70 | Named "reportBulkPurchaseRequestCounters" ]]
+	-- upvalues: LoggingProtocolModule (copy), config (copy), FFlagAXAddPlusUpsellToBulkPurchaseModule (copy)
+	LoggingProtocolModule.default:logRobloxTelemetryCounter(config[p1], 1, {
+		FFlagAXAddPlusUpsellToBulkPurchase = tostring(FFlagAXAddPlusUpsellToBulkPurchaseModule)
 	})
 end

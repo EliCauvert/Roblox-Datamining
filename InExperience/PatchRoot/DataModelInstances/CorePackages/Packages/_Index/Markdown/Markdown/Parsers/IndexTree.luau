@@ -1,23 +1,23 @@
 ﻿local _ = require(script:FindFirstAncestor("Markdown").Types)
 
-local function assignIndex(value, p1)
-	-- upvalues: assignIndex (ref)
-	value.index = p1
+local function assignIndex(p1, Index) --[[ Line: 4 ]]
+	-- upvalues: assignIndex (copy)
+	p1.index = Index
 	
-	if value.children then
-		for i, v in value.children do
-			assignIndex(v, i)
+	if p1.children then
+		for i, child in p1.children do
+			assignIndex(child, i)
 		end
 	end
 end
 
-return function(p2)
-	-- upvalues: assignIndex (ref)
+return function(p2) --[[ Line: 13 | Named "indexTree" ]]
+	-- upvalues: assignIndex (copy)
 	p2.index = 1
 	
 	if p2.children then
-		for i, v in p2.children do
-			assignIndex(v, i)
+		for i, child in p2.children do
+			assignIndex(child, i)
 		end
 	end
 	return p2

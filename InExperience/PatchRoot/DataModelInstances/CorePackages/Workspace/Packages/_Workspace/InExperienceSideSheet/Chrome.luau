@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Workspace.Chrome.Chrome)
+﻿return (require(script.Parent.Parent.Parent._Workspace.Chrome.Chrome))

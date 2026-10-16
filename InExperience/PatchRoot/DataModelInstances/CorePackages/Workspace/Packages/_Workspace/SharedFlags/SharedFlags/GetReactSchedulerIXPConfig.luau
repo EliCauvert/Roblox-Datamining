@@ -1,33 +1,37 @@
-﻿local appStorageService = game:GetService("AppStorageService")
-local httpService = game:GetService("HttpService")
-local appStorageJsonCacheUtils = require(script:FindFirstAncestor("SharedFlags").Parent.AppCommonLib).Utils.AppStorageJsonCacheUtils
-local getFFlagEnableAppStorageJsonCacheInABTestModule = require(script.Parent.GetFFlagEnableAppStorageJsonCacheInABTest)
-local experienceReactDeferredSchedulerLayerName = game:DefineFastString("ExperienceReactDeferredScheduler_LayerName", "UIEcosystem.User")
-local enableReactSchedulerIXP = game:DefineFastFlag("EnableReactSchedulerIXP", false)
+﻿local AppStorageService = game:GetService("AppStorageService")
+local HttpService = game:GetService("HttpService")
+local AppStorageJsonCacheUtils = require(script:FindFirstAncestor("SharedFlags").Parent.AppCommonLib).Utils.AppStorageJsonCacheUtils
+local GetFFlagEnableAppStorageJsonCacheInABTestModule = require(script.Parent.GetFFlagEnableAppStorageJsonCacheInABTest)
+local ExperienceReactDeferredSchedulerLayerName = game:DefineFastString("ExperienceReactDeferredScheduler_LayerName", "UIEcosystem.User")
+local EnableReactSchedulerIXP = game:DefineFastFlag("EnableReactSchedulerIXP", false)
 
-return function()
-	-- upvalues: enableReactSchedulerIXP (ref), getFFlagEnableAppStorageJsonCacheInABTestModule (ref), appStorageJsonCacheUtils (ref), experienceReactDeferredSchedulerLayerName (ref), appStorageService (ref), httpService (ref)
-	if not enableReactSchedulerIXP then
+return function() --[[ Line: 28 ]]
+	-- upvalues: EnableReactSchedulerIXP (copy), GetFFlagEnableAppStorageJsonCacheInABTestModule (copy), AppStorageJsonCacheUtils (copy), ExperienceReactDeferredSchedulerLayerName (copy), AppStorageService (copy), HttpService (copy)
+	if not EnableReactSchedulerIXP then
 		return nil
-	elseif getFFlagEnableAppStorageJsonCacheInABTestModule() then
-		local experimentCacheCachedJsonForKey = appStorageJsonCacheUtils.default:getCachedJsonForKey("ExperimentCache")
+	end
+	if GetFFlagEnableAppStorageJsonCacheInABTestModule() then
+		local ExperimentCacheCachedJsonForKey = AppStorageJsonCacheUtils.default:getCachedJsonForKey("ExperimentCache")
 		
-		if experimentCacheCachedJsonForKey then
-			return experimentCacheCachedJsonForKey[experienceReactDeferredSchedulerLayerName]
+		if ExperimentCacheCachedJsonForKey then
+			return ExperimentCacheCachedJsonForKey[ExperienceReactDeferredSchedulerLayerName]
 		end
 	else
-		local ok, status = pcall(function()
-			-- upvalues: appStorageService (copy)
-			return appStorageService:GetItem("ExperimentCache")
+		local Success, Result = pcall(function() --[[ Line: 39 ]]
+			-- upvalues: AppStorageService (upval)
+			return AppStorageService:GetItem("ExperimentCache")
 		end)
 		
-		if ok then
-			local ok_1, status_1 = pcall(function()
-				-- upvalues: httpService (copy), status (ref)
-				return httpService:JSONDecode(status)
+		if Success then
+			local Success1, Result1 = pcall(function() --[[ Line: 43 ]]
+				-- upvalues: HttpService (upval), Result (copy)
+				return HttpService:JSONDecode(Result)
 			end)
 			
-			return if ok_1 and status_1 then status_1[experienceReactDeferredSchedulerLayerName] else nil
+			if Success1 and Result1 then
+				return Result1[ExperienceReactDeferredSchedulerLayerName]
+			end
 		end
 	end
+	return nil
 end

@@ -1,18 +1,18 @@
-﻿local inExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
-local parent = inExperienceSideSheet.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local getUniverseIdModule = require(inExperienceSideSheet.Utils.getUniverseId)
-local getRbxThumb = foundationModule.Utility.getRbxThumb
-local thumbnailType = foundationModule.Enums.ThumbnailType
-local thumbnailSize = foundationModule.Enums.ThumbnailSize
+﻿local InExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
+local Parent = InExperienceSideSheet.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local GetUniverseIdModule = require(InExperienceSideSheet.Utils.getUniverseId)
+local GetRbxThumbFunction = FoundationModule.Utility.getRbxThumb
+local ThumbnailType = FoundationModule.Enums.ThumbnailType
+local ThumbnailSize = FoundationModule.Enums.ThumbnailSize
 
-return function()
-	-- upvalues: getUniverseIdModule (ref), reactModule (ref), getRbxThumb (ref), thumbnailType (ref), thumbnailSize (ref)
-	local var1 = getUniverseIdModule()
+return function() --[[ Line: 13 | Named "useExperienceIcon" ]]
+	-- upvalues: GetUniverseIdModule (copy), ReactModule (copy), GetRbxThumbFunction (copy), ThumbnailType (copy), ThumbnailSize (copy)
+	local UniverseIdModule = GetUniverseIdModule()
 	
-	return reactModule.useMemo(function()
-		-- upvalues: var1 (ref), getRbxThumb (copy), thumbnailType (copy), thumbnailSize (copy)
-		return if var1 then getRbxThumb(thumbnailType.GameIcon, var1, thumbnailSize.Small) else nil
-	end, { var1 })
+	return ReactModule.useMemo(function() --[[ Line: 16 ]]
+		-- upvalues: UniverseIdModule (copy), GetRbxThumbFunction (upval), ThumbnailType (upval), ThumbnailSize (upval)
+		return if UniverseIdModule then GetRbxThumbFunction(ThumbnailType.GameIcon, UniverseIdModule, ThumbnailSize.Small) else nil
+	end, { UniverseIdModule })
 end

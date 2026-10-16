@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.LegallySensitiveContent.LegallySensitiveContent)
+﻿return (require(script.Parent.Parent.Parent._Index.LegallySensitiveContent.LegallySensitiveContent))

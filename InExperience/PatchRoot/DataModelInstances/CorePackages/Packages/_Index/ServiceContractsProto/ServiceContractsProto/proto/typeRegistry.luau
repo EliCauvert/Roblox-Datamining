@@ -1,23 +1,23 @@
-﻿local t = {}
-t.__index = t
+﻿local Module = {}
+Module.__index = Module
 local _ = require(script.Parent.message)
 
-function t.new(p1)
-	-- upvalues: t (ref)
-	local t_1 = {}
+function Module.new(List) --[[ Line: 14 ]]
+	-- upvalues: Module (copy)
+	local _types = {}
 	
-	for i, v in p1 do
-		t_1[v.descriptor.fullName] = v
+	for _, value in List do
+		_types[value.descriptor.fullName] = value
 	end
-	return setmetatable({ _types = t_1 }, t)
+	return (setmetatable({ _types = _types }, Module))
 end
 
-function t:findMessage(p2)
-	return self._types[p2]
+function Module:findMessage(p1) --[[ Line: 26 ]]
+	return self._types[p1]
 end
 
-function t:register(p2)
-	self._types[p2.descriptor.fullName] = p2
+function Module:register(p1) --[[ Line: 30 ]]
+	self._types[p1.descriptor.fullName] = p1
 end
 
-return { TypeRegistry = t, default = t.new({}) }
+return { TypeRegistry = Module, default = Module.new({}) }

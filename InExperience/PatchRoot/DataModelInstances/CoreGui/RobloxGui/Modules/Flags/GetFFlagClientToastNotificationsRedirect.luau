@@ -1,23 +1,21 @@
 ﻿local IXPServiceWrapper = require(game:GetService("CorePackages").Workspace.Packages.IxpServiceWrapper).IXPServiceWrapper
-local clientToastNotificationsRedirect4 = game:DefineFastFlag("ClientToastNotificationsRedirect4", false)
-local enableClientToastNotificationsRedirectExperiment = game:DefineFastFlag("EnableClientToastNotificationsRedirectExperiment", false)
-local clientToastNotificationsRedirectLayerName = game:DefineFastString("ClientToastNotificationsRedirectLayerName", "Notification.Toast")
-local clientToastNotificationsRedirectLayerValue = game:DefineFastString("ClientToastNotificationsRedirectLayerValue", "NotificationRedirect")
-local var1 = false
-local var2 = nil
-local var3 = nil
+local ClientToastNotificationsRedirect4 = game:DefineFastFlag("ClientToastNotificationsRedirect4", false)
+local EnableClientToastNotificationsRedirectExperiment = game:DefineFastFlag("EnableClientToastNotificationsRedirectExperiment", false)
+local ClientToastNotificationsRedirectLayerName = game:DefineFastString("ClientToastNotificationsRedirectLayerName", "Notification.Toast")
+local ClientToastNotificationsRedirectLayerValue = game:DefineFastString("ClientToastNotificationsRedirectLayerValue", "NotificationRedirect")
+local Flag = false
+local v1 = nil
+local v2 = nil
 
-return function()
-	-- upvalues: enableClientToastNotificationsRedirectExperiment (ref), var1 (write), var2 (write), var3 (write), IXPServiceWrapper (ref), clientToastNotificationsRedirectLayerName (ref), clientToastNotificationsRedirect4 (ref), clientToastNotificationsRedirectLayerValue (ref)
-	if enableClientToastNotificationsRedirectExperiment and not var1 then
-		local ok, status = pcall(function()
-			-- upvalues: var1 (copy), IXPServiceWrapper (copy), clientToastNotificationsRedirectLayerName (copy)
-			var1 = true
+return function() --[[ Line: 12 ]]
+	-- upvalues: EnableClientToastNotificationsRedirectExperiment (copy), Flag (ref), v1 (ref), v2 (ref), IXPServiceWrapper (copy), ClientToastNotificationsRedirectLayerName (copy), ClientToastNotificationsRedirect4 (copy), ClientToastNotificationsRedirectLayerValue (copy)
+	if EnableClientToastNotificationsRedirectExperiment and not Flag then
+		v1, v7 = pcall(function() --[[ Line: 14 ]]
+			-- upvalues: Flag (upval), IXPServiceWrapper (upval), ClientToastNotificationsRedirectLayerName (upval)
+			Flag = true
 			
-			return IXPServiceWrapper:GetLayerData(clientToastNotificationsRedirectLayerName)
+			return IXPServiceWrapper:GetLayerData(ClientToastNotificationsRedirectLayerName)
 		end)
-		var2 = ok
-		var3 = status
 	end
-	return clientToastNotificationsRedirect4 or var2 and (var3 and var3[clientToastNotificationsRedirectLayerValue])
+	return ClientToastNotificationsRedirect4 or v1 and (v2 and v2[ClientToastNotificationsRedirectLayerValue])
 end

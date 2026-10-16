@@ -1,81 +1,75 @@
-﻿local httpService = game:GetService("HttpService")
-local playersService = game:GetService("Players")
-local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local parent = avatarExperienceCatalog.Parent
-local safeAppStorageService = require(parent.AvatarExperienceCommon).Lib.SafeAppStorageService
-local fFlagAXCatalogOffersDismissedStorageKeyFix = require(parent.AvatarExperienceFlags).FFlagAXCatalogOffersDismissedStorageKeyFix
-local _ = require(avatarExperienceCatalog.Api.GetMarketplaceOffersBanner.MarketplaceOffersBannerTypes)
-local marketplaceOffersBannerDisplayModule = require(avatarExperienceCatalog.Api.GetMarketplaceOffersBanner.marketplaceOffersBannerDisplay)
-local getLocalUserIdModule = require(script.Parent.getLocalUserId)
-local getMarketplaceOffersBannerOfferDisplayId = marketplaceOffersBannerDisplayModule.getMarketplaceOffersBannerOfferDisplayId
-local getMarketplaceOffersBannerOfferDisplayTitle = marketplaceOffersBannerDisplayModule.getMarketplaceOffersBannerOfferDisplayTitle
-local var1 = if fFlagAXCatalogOffersDismissedStorageKeyFix then "AXCatalogOffersDismissed" else "AXCatalogOffersBannerDismissed"
+﻿local HttpService = game:GetService("HttpService")
+local Players = game:GetService("Players")
+local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local Parent = AvatarExperienceCatalog.Parent
+local SafeAppStorageService = require(Parent.AvatarExperienceCommon).Lib.SafeAppStorageService
+local _ = require(AvatarExperienceCatalog.Api.GetMarketplaceOffersBanner.MarketplaceOffersBannerTypes)
+local MarketplaceOffersBannerDisplayModule = require(AvatarExperienceCatalog.Api.GetMarketplaceOffersBanner.marketplaceOffersBannerDisplay)
+local GetLocalUserIdModule = require(script.Parent.getLocalUserId)
+local GetMarketplaceOffersBannerOfferDisplayIdFunction = MarketplaceOffersBannerDisplayModule.getMarketplaceOffersBannerOfferDisplayId
+local GetMarketplaceOffersBannerOfferDisplayTitleFunction = MarketplaceOffersBannerDisplayModule.getMarketplaceOffersBannerOfferDisplayTitle
+local AXCatalogOffersDismissed: string = if require(Parent.AvatarExperienceFlags).FFlagAXCatalogOffersDismissedStorageKeyFix then "AXCatalogOffersDismissed" else "AXCatalogOffersBannerDismissed"
 local AXCatalogOffersBannerAppStorageUseMemStorage = game:DefineFastFlag("AXCatalogOffersBannerAppStorageUseMemStorage", false)
 
-local function normalizeOfferId(p1)
-	return p1 or ""
-end
-
-local function offerIdMapContains(p1, p2)
-	return p1[p2] == true
-end
-
-local function coerceDecodedToOfferIdMapStorage(p1)
-	if typeof(p1) ~= "table" then
+local function coerceDecodedToOfferIdMapStorage(List) --[[ Line: 61 ]]
+	if typeof(List) ~= "table" then
 		return nil
 	end
 	local t = {}
-	local var2 = false
+	local Flag = false
 	
-	for i, v in p1 do
-		if typeof(i) == "string" and typeof(v) == "table" then
-			local t_1 = {}
+	for i, value in List do
+		if typeof(i) == "string" and typeof(value) == "table" then
+			local t1 = {}
 			
-			for i_1, v_1 in v do
-				if typeof(i_1) == "string" and v_1 == true then
-					t_1[i_1] = true
+			for i1, value1 in value do
+				if typeof(i1) == "string" and value1 == true then
+					t1[i1] = true
 				end
 			end
-			t[i] = t_1
-			var2 = true
+			t[i] = t1
+			Flag = true
 		end
 	end
-	return if var2 then t else nil
+	return if Flag then t else nil
 end
 
-local function readStorageRecord(p2, p3)
-	-- upvalues: safeAppStorageService (ref), AXCatalogOffersBannerAppStorageUseMemStorage (ref), httpService (ref)
-	local item = safeAppStorageService.getItem(p2, AXCatalogOffersBannerAppStorageUseMemStorage)
+local function readStorageRecord(AXCatalogOffersDismissed, Callback) --[[ Line: 85 ]]
+	-- upvalues: SafeAppStorageService (copy), AXCatalogOffersBannerAppStorageUseMemStorage (copy), HttpService (copy)
+	local Item = SafeAppStorageService.getItem(AXCatalogOffersDismissed, AXCatalogOffersBannerAppStorageUseMemStorage)
 	
-	if not item or item == "" then
+	if Item and Item ~= "" then
+		local Success, Result = pcall(function() --[[ Line: 90 ]]
+			-- upvalues: HttpService (upval), Item (copy)
+			return HttpService:JSONDecode(Item)
+		end)
+		
+		return if Success then Callback(Result) else nil
+	else
 		return nil
 	end
-	local ok, status = pcall(function()
-		-- upvalues: httpService (copy), item (ref)
-		return httpService:JSONDecode(item)
-	end)
-	
-	return if ok then p3(status) else nil
 end
 
-local function resolveVisibleOffer(p2)
-	-- upvalues: getLocalUserIdModule (ref), playersService (ref), readStorageRecord (ref), var1 (ref), coerceDecodedToOfferIdMapStorage (ref), getMarketplaceOffersBannerOfferDisplayTitle (ref), getMarketplaceOffersBannerOfferDisplayId (ref)
-	local var3 = getLocalUserIdModule(playersService)
+local function resolveVisibleOffer(p1) --[[ Line: 118 ]]
+	-- upvalues: GetLocalUserIdModule (copy), Players (copy), readStorageRecord (copy), AXCatalogOffersDismissed (copy), coerceDecodedToOfferIdMapStorage (copy), GetMarketplaceOffersBannerOfferDisplayTitleFunction (copy), GetMarketplaceOffersBannerOfferDisplayIdFunction (copy)
+	local LocalUserIdModule = GetLocalUserIdModule(Players)
 	local t = {}
 	
-	if var3 ~= nil then
-		local var4 = readStorageRecord(var1, coerceDecodedToOfferIdMapStorage)
+	if LocalUserIdModule ~= nil then
+		local StorageRecord = readStorageRecord(AXCatalogOffersDismissed, coerceDecodedToOfferIdMapStorage)
 		
-		if var4 and var4[var3] then
-			t = var4[var3]
+		if StorageRecord and StorageRecord[LocalUserIdModule] then
+			t = StorageRecord[LocalUserIdModule]
 		end
 	end
-	for i, v in p2.offers do
-		local var5 = getMarketplaceOffersBannerOfferDisplayTitle(v)
+	for _, offer in p1.offers do
+		local MarketplaceOffersBannerOfferDisplayTitle = GetMarketplaceOffersBannerOfferDisplayTitleFunction(offer)
 		
-		if var5 and var5 ~= "" then
-			if var3 == nil or t[getMarketplaceOffersBannerOfferDisplayId(v) or ""] ~= true then
-				return v
+		if MarketplaceOffersBannerOfferDisplayTitle and MarketplaceOffersBannerOfferDisplayTitle ~= "" then
+			local MarketplaceOffersBannerOfferDisplayId = GetMarketplaceOffersBannerOfferDisplayIdFunction(offer) or ""
+			
+			if LocalUserIdModule == nil or t[MarketplaceOffersBannerOfferDisplayId] ~= true then
+				return offer
 			end
 		end
 	end
@@ -84,74 +78,81 @@ end
 
 return {
 	SHEET_FTUX_STORAGE_KEY = "AXCatalogOffersSheetFTUX",
-	STORAGE_KEY = var1,
-	readDismissStorage = function()
-		-- upvalues: readStorageRecord (ref), var1 (ref), coerceDecodedToOfferIdMapStorage (ref)
-		return readStorageRecord(var1, coerceDecodedToOfferIdMapStorage)
+	STORAGE_KEY = AXCatalogOffersDismissed,
+	readDismissStorage = function() --[[ Line: 99 ]]
+		-- upvalues: readStorageRecord (copy), AXCatalogOffersDismissed (copy), coerceDecodedToOfferIdMapStorage (copy)
+		return readStorageRecord(AXCatalogOffersDismissed, coerceDecodedToOfferIdMapStorage)
 	end,
-	readSheetFtuxStorage = function()
-		-- upvalues: readStorageRecord (ref), coerceDecodedToOfferIdMapStorage (ref)
+	readSheetFtuxStorage = function() --[[ Line: 103 ]]
+		-- upvalues: readStorageRecord (copy), coerceDecodedToOfferIdMapStorage (copy)
 		return readStorageRecord("AXCatalogOffersSheetFTUX", coerceDecodedToOfferIdMapStorage)
 	end,
-	dismissRecordMatchesPayload = function(p3, p4)
-		return p3[p4.userId] ~= nil and p3[p4.userId][p4.offerId or ""] == true
+	dismissRecordMatchesPayload = function(p2, p3): boolean --[[ Line: 107 ]]
+		local OfferId = p3.offerId or ""
+		
+		return p2[p3.userId] ~= nil and p2[p3.userId][OfferId] == true
 	end,
-	dismissedOfferIdsContains = offerIdMapContains,
-	normalizeOfferIdForStorage = normalizeOfferId,
+	dismissedOfferIdsContains = function(p2, p3): boolean --[[ Line: 57 ]]
+		return p2[p3] == true
+	end,
+	normalizeOfferIdForStorage = function(p2) --[[ Line: 53 ]]
+		return p2 or ""
+	end,
 	resolveVisibleOffer = resolveVisibleOffer,
-	shouldHydrateDismissed = function(p3)
-		-- upvalues: getLocalUserIdModule (ref), playersService (ref), resolveVisibleOffer (ref)
-		return if getLocalUserIdModule(playersService) == nil then false else resolveVisibleOffer(p3) == nil
+	shouldHydrateDismissed = function(p2): boolean --[[ Line: 142 ]]
+		-- upvalues: GetLocalUserIdModule (copy), Players (copy), resolveVisibleOffer (copy)
+		return GetLocalUserIdModule(Players) ~= nil and resolveVisibleOffer(p2) == nil
 	end,
-	shouldAutoOpenOfferSheetForCurrentOffer = function(p3)
-		-- upvalues: getLocalUserIdModule (ref), playersService (ref), readStorageRecord (ref), coerceDecodedToOfferIdMapStorage (ref)
-		local var6 = getLocalUserIdModule(playersService)
+	shouldAutoOpenOfferSheetForCurrentOffer = function(p2): boolean --[[ Line: 169 ]]
+		-- upvalues: GetLocalUserIdModule (copy), Players (copy), readStorageRecord (copy), coerceDecodedToOfferIdMapStorage (copy)
+		local LocalUserIdModule = GetLocalUserIdModule(Players)
 		
-		if var6 == nil then
+		if LocalUserIdModule == nil then
 			return false
+		else
+			local AXCatalogOffersSheetFTUX = readStorageRecord("AXCatalogOffersSheetFTUX", coerceDecodedToOfferIdMapStorage)
+			
+			return AXCatalogOffersSheetFTUX == nil or AXCatalogOffersSheetFTUX[LocalUserIdModule] == nil or not (AXCatalogOffersSheetFTUX[LocalUserIdModule][p2 or ""] == true)
 		end
-		local var7 = readStorageRecord("AXCatalogOffersSheetFTUX", coerceDecodedToOfferIdMapStorage)
-		
-		return var7 == nil or var7[var6] == nil or not (var7[var6][p3 or ""] == true)
 	end,
-	writeDismissedForCurrentOffer = function(p3)
-		-- upvalues: getLocalUserIdModule (ref), playersService (ref), readStorageRecord (ref), var1 (ref), coerceDecodedToOfferIdMapStorage (ref), httpService (ref), safeAppStorageService (ref), AXCatalogOffersBannerAppStorageUseMemStorage (ref)
-		local var6 = getLocalUserIdModule(playersService)
+	writeDismissedForCurrentOffer = function(p2) --[[ Line: 149 ]]
+		-- upvalues: GetLocalUserIdModule (copy), Players (copy), readStorageRecord (copy), AXCatalogOffersDismissed (copy), coerceDecodedToOfferIdMapStorage (copy), HttpService (copy), SafeAppStorageService (copy), AXCatalogOffersBannerAppStorageUseMemStorage (copy)
+		local LocalUserIdModule = GetLocalUserIdModule(Players)
 		
-		if var6 == nil then return end
-		p3 = p3 or ""
-		local var7 = readStorageRecord(var1, coerceDecodedToOfferIdMapStorage) or {}
-		local var8 = var7[var6]
+		if LocalUserIdModule == nil then return end
+		local P9 = p2 or ""
+		local StorageRecord = readStorageRecord(AXCatalogOffersDismissed, coerceDecodedToOfferIdMapStorage) or {}
+		local StorageRecordEntry = StorageRecord[LocalUserIdModule]
 		
-		if var8 == nil then
-			var8 = {}
-			var7[var6] = var8
+		if StorageRecordEntry == nil then
+			StorageRecordEntry = {}
+			StorageRecord[LocalUserIdModule] = StorageRecordEntry
 		end
-		var8[p3] = true
-		pcall(function()
-			-- upvalues: httpService (copy), var7 (ref), safeAppStorageService (copy), var1 (copy), AXCatalogOffersBannerAppStorageUseMemStorage (copy)
-			safeAppStorageService.setItem(var1, httpService:JSONEncode(var7), AXCatalogOffersBannerAppStorageUseMemStorage)
-			safeAppStorageService.flush()
+		StorageRecordEntry[P9] = true
+		pcall(function() --[[ Line: 162 ]]
+			-- upvalues: HttpService (upval), StorageRecord (copy), SafeAppStorageService (upval), AXCatalogOffersDismissed (upval), AXCatalogOffersBannerAppStorageUseMemStorage (upval)
+			SafeAppStorageService.setItem(AXCatalogOffersDismissed, HttpService:JSONEncode(StorageRecord), AXCatalogOffersBannerAppStorageUseMemStorage)
+			SafeAppStorageService.flush()
 		end)
 	end,
-	writeSeenOfferSheetForCurrentOffer = function(p3)
-		-- upvalues: getLocalUserIdModule (ref), playersService (ref), readStorageRecord (ref), coerceDecodedToOfferIdMapStorage (ref), httpService (ref), safeAppStorageService (ref), AXCatalogOffersBannerAppStorageUseMemStorage (ref)
-		local var6 = getLocalUserIdModule(playersService)
+	writeSeenOfferSheetForCurrentOffer = function(p2) --[[ Line: 181 ]]
+		-- upvalues: GetLocalUserIdModule (copy), Players (copy), readStorageRecord (copy), coerceDecodedToOfferIdMapStorage (copy), HttpService (copy), SafeAppStorageService (copy), AXCatalogOffersBannerAppStorageUseMemStorage (copy)
+		local LocalUserIdModule = GetLocalUserIdModule(Players)
 		
-		if var6 == nil then return end
-		p3 = p3 or ""
+		if LocalUserIdModule == nil then return end
+		local P11 = p2 or ""
 		local AXCatalogOffersSheetFTUX = readStorageRecord("AXCatalogOffersSheetFTUX", coerceDecodedToOfferIdMapStorage) or {}
-		local var7 = AXCatalogOffersSheetFTUX[var6]
+		local AXCatalogOffersSheetFTUXEntry = AXCatalogOffersSheetFTUX[LocalUserIdModule]
 		
-		if var7 == nil then
-			var7 = {}
-			AXCatalogOffersSheetFTUX[var6] = var7
+		if AXCatalogOffersSheetFTUXEntry == nil then
+			AXCatalogOffersSheetFTUXEntry = {}
+			AXCatalogOffersSheetFTUX[LocalUserIdModule] = AXCatalogOffersSheetFTUXEntry
 		end
-		var7[p3] = true
-		pcall(function()
-			-- upvalues: httpService (copy), AXCatalogOffersSheetFTUX (ref), safeAppStorageService (copy), AXCatalogOffersBannerAppStorageUseMemStorage (copy)
-			safeAppStorageService.setItem("AXCatalogOffersSheetFTUX", httpService:JSONEncode(AXCatalogOffersSheetFTUX), AXCatalogOffersBannerAppStorageUseMemStorage)
-			safeAppStorageService.flush()
+		AXCatalogOffersSheetFTUXEntry[P11] = true
+		pcall(function() --[[ Line: 194 ]]
+			-- upvalues: HttpService (upval), AXCatalogOffersSheetFTUX (copy), SafeAppStorageService (upval), AXCatalogOffersBannerAppStorageUseMemStorage (upval)
+			SafeAppStorageService.setItem("AXCatalogOffersSheetFTUX", HttpService:JSONEncode(AXCatalogOffersSheetFTUX), AXCatalogOffersBannerAppStorageUseMemStorage)
+			SafeAppStorageService.flush()
 		end)
 	end
 }

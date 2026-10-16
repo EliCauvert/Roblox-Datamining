@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CorePackages").Packages.Roact)
+﻿return (require(game:GetService("CorePackages").Packages.Roact))

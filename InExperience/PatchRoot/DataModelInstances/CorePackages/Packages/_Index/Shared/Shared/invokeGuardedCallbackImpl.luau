@@ -1,30 +1,26 @@
-﻿local reactGlobalsModule = require(script.Parent.Parent.ReactGlobals)
-local describeError = require(script.Parent["ErrorHandling.roblox"]).describeError
+﻿local ReactGlobalsModule = require(script.Parent.Parent.ReactGlobals)
+local DescribeError = require(script.Parent["ErrorHandling.roblox"]).describeError
+local _ = ReactGlobalsModule.__DEV__
 
-return function(p1, _, p2, p3, ...)
-	-- upvalues: reactGlobalsModule (ref), describeError (ref)
-	local var1
-	local _ = nil
-	local var2 = nil
+return function(p1, _, Callback: (any, any) -> (), p2, ...) --[[ Line: 19 | Named "invokeGuardedCallbackProd" ]]
+	-- upvalues: ReactGlobalsModule (copy), DescribeError (copy)
+	local v1 = nil
+	local v2 = nil
 	
-	if reactGlobalsModule.__YOLO__ then
-		var1 = true
+	if ReactGlobalsModule.__YOLO__ then
+		v2 = true
 		
-		if p3 == nil then
-			p2(...)
+		if p2 == nil then
+			Callback(...)
 		else
-			p2(p3, ...)
+			Callback(p2, ...)
 		end
-	elseif p3 == nil then
-		local ok, status = xpcall(p2, describeError, ...)
-		var1 = ok
-		var2 = status
+	elseif p2 == nil then
+		v2, v3 = xpcall(Callback, DescribeError, ...)
 	else
-		local ok, status = xpcall(p2, describeError, p3, ...)
-		var1 = ok
-		var2 = status
+		v2, v3 = xpcall(Callback, DescribeError, p2, ...)
 	end
-	if not var1 then
-		p1.onError(var2)
+	if not v2 then
+		p1.onError(v1)
 	end
 end

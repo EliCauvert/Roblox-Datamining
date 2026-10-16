@@ -1,31 +1,31 @@
-﻿local constantsModule = require(game:GetService("CoreGui").RobloxGui.Modules.Settings.Pages.ShareGame.Constants)
-local fFlagFixPromptGameInviteUIMissingDisplayName = require(game:GetService("CorePackages").Workspace.Packages.SharedFlags).FFlagFixPromptGameInviteUIMissingDisplayName
+﻿local ConstantsModule = require(game:GetService("CoreGui").RobloxGui.Modules.Settings.Pages.ShareGame.Constants)
+local FFlagFixPromptGameInviteUIMissingDisplayName = require(game:GetService("CorePackages").Workspace.Packages.SharedFlags).FFlagFixPromptGameInviteUIMissingDisplayName
 
-return function(p1, p2)
-	-- upvalues: constantsModule (ref), fFlagFixPromptGameInviteUIMissingDisplayName (ref)
-	local var1 = if p1 and p1.InviteUser ~= 0 then p1.InviteUser else nil
-	local var2, var3 = p2(if var1 then constantsModule.Triggers.DeveloperSingle else constantsModule.Triggers.DeveloperMultiple, var1)
+return function(ExperienceInviteOptions, Callback) --[[ Line: 12 ]]
+	-- upvalues: ConstantsModule (copy), FFlagFixPromptGameInviteUIMissingDisplayName (copy)
+	local InviteUser = if ExperienceInviteOptions and ExperienceInviteOptions.InviteUser ~= 0 then ExperienceInviteOptions.InviteUser else nil
+	local CallbackResult, CallbackResult2 = Callback(if InviteUser then ConstantsModule.Triggers.DeveloperSingle else ConstantsModule.Triggers.DeveloperMultiple, InviteUser)
 	
-	if not var2 then
+	if not CallbackResult then
 		return nil
 	end
 	local t = {}
 	
-	if fFlagFixPromptGameInviteUIMissingDisplayName and var1 then
-		t.inviteUserId = var1
+	if FFlagFixPromptGameInviteUIMissingDisplayName and InviteUser then
+		t.inviteUserId = InviteUser
 	end
-	if var3 and p1 then
-		if p1.InviteMessageId ~= "" then
-			t.inviteMessageId = p1.InviteMessageId
+	if CallbackResult2 and ExperienceInviteOptions then
+		if ExperienceInviteOptions.InviteMessageId ~= "" then
+			t.inviteMessageId = ExperienceInviteOptions.InviteMessageId
 		end
-		if p1.InviteUser ~= 0 then
-			t.inviteUserId = p1.InviteUser
+		if ExperienceInviteOptions.InviteUser ~= 0 then
+			t.inviteUserId = ExperienceInviteOptions.InviteUser
 		end
-		if p1.PromptMessage ~= "" then
-			t.promptMessage = p1.PromptMessage
+		if ExperienceInviteOptions.PromptMessage ~= "" then
+			t.promptMessage = ExperienceInviteOptions.PromptMessage
 		end
-		if p1.LaunchData ~= "" then
-			t.launchData = p1.LaunchData
+		if ExperienceInviteOptions.LaunchData ~= "" then
+			t.launchData = ExperienceInviteOptions.LaunchData
 		end
 	end
 	return t

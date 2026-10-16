@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent._Workspace.BuildExperience.BuildExperience.Components.ChatSheet.InstanceSelectionProtocol)
+﻿return (require(script.Parent.Parent._Workspace.BuildExperience.BuildExperience.Components.ChatSheet.InstanceSelectionProtocol))

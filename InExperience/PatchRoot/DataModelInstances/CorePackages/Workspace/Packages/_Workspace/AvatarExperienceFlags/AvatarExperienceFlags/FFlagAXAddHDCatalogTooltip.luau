@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("AXAddHDCatalogTooltip", false) and require(script.Parent.FFlagAXAddHDCatalogTab)
+﻿local FFlagAXAddHDCatalogTabModule = require(script.Parent.FFlagAXAddHDCatalogTab)
+
+return game:DefineFastFlag("AXAddHDCatalogTooltip", false) and FFlagAXAddHDCatalogTabModule

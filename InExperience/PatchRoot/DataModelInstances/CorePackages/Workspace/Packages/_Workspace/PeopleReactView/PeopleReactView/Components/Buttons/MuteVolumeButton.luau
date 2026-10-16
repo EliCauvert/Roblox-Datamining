@@ -1,175 +1,168 @@
-﻿local peopleReactView = script:FindFirstAncestor("PeopleReactView")
-local parent = peopleReactView.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local signalsModule = require(parent.Signals)
-local peopleServiceModule = require(parent.PeopleService)
-local fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry = peopleServiceModule.getService("Flags").FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry
-local ENTRY_POINT = peopleServiceModule.getService("Constants").ANALYTICS.ENTRY_POINT
-local view = foundationModule.View
-local iconName = foundationModule.Enums.IconName
-local iconSize = foundationModule.Enums.IconSize
-local controlState = foundationModule.Enums.ControlState
-local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
-local useTokens = foundationModule.Hooks.useTokens
-local useCursor = foundationModule.Hooks.useCursor
-local useSignalState = signalsReactModule.useSignalState
-local voiceVolumePopoverModule = require(peopleReactView.Components.Buttons.VoiceVolumePopover)
-local var1 = signalsModule.createSignal("")
-local var2 = signalsModule.createSignal(false)
-local var3 = reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), useSignalState (ref), var1 (ref), var2 (ref), reactModule (ref), foundationModule (ref), iconSize (ref)
-	local var4 = useSignalState(p1.animatedIcon or var1)
+﻿local PeopleReactView = script:FindFirstAncestor("PeopleReactView")
+local Parent = PeopleReactView.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local PeopleServiceModule = require(Parent.PeopleService)
+local FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry = PeopleServiceModule.getService("Flags").FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry
+local ENTRYPOINT = PeopleServiceModule.getService("Constants").ANALYTICS.ENTRY_POINT
+local View = FoundationModule.View
+local IconName = FoundationModule.Enums.IconName
+local IconSize = FoundationModule.Enums.IconSize
+local ControlState = FoundationModule.Enums.ControlState
+local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseCursorFunction = FoundationModule.Hooks.useCursor
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local VoiceVolumePopoverModule = require(PeopleReactView.Components.Buttons.VoiceVolumePopover)
+local Signal = SignalsModule.createSignal("")
+local Signal1 = SignalsModule.createSignal(false)
+local MemoResult = ReactModule.memo(function(p1) --[[ Line: 46 ]]
+	-- upvalues: UseTokensFunction (copy), UseSignalStateFunction (copy), Signal (copy), Signal1 (copy), ReactModule (copy), FoundationModule (copy), IconSize (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseSignalStateResult = UseSignalStateFunction(p1.animatedIcon or Signal)
+	local UseSignalStateResult1 = UseSignalStateFunction(p1.isGrayedOut or Signal1)
 	
-	return if var4 == "" then nil else reactModule.createElement(foundationModule.Icon, {
-		name = var4,
-		size = iconSize.Medium,
+	return if UseSignalStateResult == "" then nil else ReactModule.createElement(FoundationModule.Icon, {
+		name = UseSignalStateResult,
+		size = IconSize.Medium,
 		style = {
-			Transparency = if useSignalState(p1.isGrayedOut or var2) then useTokens().Color.Common.Shadow.Transparency else nil
+			Transparency = if UseSignalStateResult1 then UseTokensResult.Color.Common.Shadow.Transparency else nil
 		}
 	})
 end)
 
-return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (ref), controlState (ref), useCursor (ref), peopleServiceModule (ref), ENTRY_POINT (ref), view (ref), stateLayerAffordance (ref), var3 (ref), foundationModule (ref), iconName (ref), iconSize (ref), voiceVolumePopoverModule (ref)
-	local var4 = useTokens()
-	local XXSmall = var4.Gap.XXSmall
-	local config = p1.config
-	local var5, var6 = reactModule.useState(false)
-	local var7 = if fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then reactModule.useRef(false) else nil
-	local var8, var9 = reactModule.useState(controlState.Initialize)
-	local var10, var11 = reactModule.useState(controlState.Initialize)
-	local var12 = useCursor({
-		radius = UDim.new(0, var4.Radius.Medium),
-		offset = var4.Size.Size_150,
-		borderWidth = var4.Stroke.Thicker
+return function(Frame) --[[ Line: 65 | Named "MuteVolumeButton" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (copy), ControlState (copy), UseCursorFunction (copy), PeopleServiceModule (copy), ENTRYPOINT (copy), View (copy), StateLayerAffordance (copy), MemoResult (copy), FoundationModule (copy), IconName (copy), IconSize (copy), VoiceVolumePopoverModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	local XXSmall: number = UseTokensResult.Gap.XXSmall
+	local Config = Frame.config
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseRefResult = if FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then ReactModule.useRef(false) else nil
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(ControlState.Initialize)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(ControlState.Initialize)
+	local UseCursorResult = UseCursorFunction({
+		radius = UDim.new(0, UseTokensResult.Radius.Medium),
+		offset = UseTokensResult.Size.Size_150,
+		borderWidth = UseTokensResult.Stroke.Thicker
 	})
-	local var13 = reactModule.useCallback(function()
-		-- upvalues: config (ref), p1 (ref)
-		config.onActivated(p1.entryPoint)
-	end, { config.onActivated, p1.entryPoint })
-	local var14 = if fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then reactModule.useCallback(function()
-		-- upvalues: p1 (ref), var7 (write), peopleServiceModule (copy), ENTRY_POINT (copy), var6 (ref)
-		if p1.userId == nil or not var7 then return end
-		local var15 = not var7.current
-		var7.current = var15
-		
-		if var15 then
-			peopleServiceModule.getService("PeopleAnalyticsManager"):recordPerUserVoiceVolumeUiOpened(p1.entryPoint or ENTRY_POINT.PEOPLE_LIST)
-		end
-		var6(var15)
-	end, { p1.entryPoint, p1.userId }) else reactModule.useCallback(function()
-		-- upvalues: var6 (ref)
-		var6(function(p2)
-			return not p2
-		end)
-	end, {})
-	local var15 = reactModule.useCallback(function()
-		-- upvalues: fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (copy), var7 (write), var6 (ref)
-		if fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry and var7 then
-			var7.current = false
-		end
-		var6(false)
-	end, {})
-	local var16 = reactModule.useCallback(function(p2)
-		-- upvalues: p1 (ref)
-		if p1.onButtonMount then
-			p1.onButtonMount(p2, p1.muteButtonName)
-		end
-	end, { p1.onButtonMount, p1.muteButtonName })
-	local var17 = reactModule.useCallback(function(p2)
-		-- upvalues: p1 (ref)
-		if p1.onButtonMount then
-			p1.onButtonMount(p2, p1.volumeButtonName)
-		end
-	end, { p1.onButtonMount, p1.volumeButtonName })
-	local var18 = reactModule.useCallback(function(p2)
-		-- upvalues: var9 (ref)
-		var9(p2)
-	end, {})
-	local var19 = reactModule.useCallback(function(p2)
-		-- upvalues: var11 (ref)
-		var11(p2)
-	end, {})
-	local var20 = var5 and p1.userId ~= nil
-	local size1000 = var4.Size.Size_1000
-	local size1000_1 = var4.Size.Size_1000
-	local layoutOrder = p1.LayoutOrder or config.layoutOrder
+	local HasUserId: boolean = UseStateResult and Frame.userId ~= nil
+	local Size1000: number = UseTokensResult.Size.Size_1000
+	local LayoutOrder = Frame.LayoutOrder or Config.layoutOrder
 	
-	local function _(p2)
-		-- upvalues: controlState (copy), var4 (ref)
-		return if p2 == controlState.Pressed then var4.Color.State.Press elseif p2 == controlState.Hover then var4.Color.State.Hover else nil
+	local function _(Hover) --[[ Line: 144 | Named "getInteractionOverlayStyle" ]]
+		-- upvalues: ControlState (upval), UseTokensResult (copy)
+		return if Hover == ControlState.Pressed then UseTokensResult.Color.State.Press elseif Hover == ControlState.Hover then UseTokensResult.Color.State.Hover else nil
 	end
 	
-	local var21 = if var8 == controlState.Pressed then var4.Color.State.Press elseif var8 == controlState.Hover then var4.Color.State.Hover else nil
-	local var22 = if var10 == controlState.Pressed then var4.Color.State.Press elseif var10 == controlState.Hover then var4.Color.State.Hover else nil
+	local Press = if UseStateResult1 == ControlState.Pressed then UseTokensResult.Color.State.Press elseif UseStateResult1 == ControlState.Hover then UseTokensResult.Color.State.Hover else nil
+	local Press1 = if UseStateResult3 == ControlState.Pressed then UseTokensResult.Color.State.Press elseif UseStateResult3 == ControlState.Hover then UseTokensResult.Color.State.Hover else nil
 	
-	return reactModule.createElement(voiceVolumePopoverModule, {
-		userId = p1.userId,
-		isOpen = var20,
-		onClose = var15,
-		layoutOrder = layoutOrder,
-		muteHalf = reactModule.createElement(view, {
+	return ReactModule.createElement(VoiceVolumePopoverModule, {
+		userId = Frame.userId,
+		isOpen = HasUserId,
+		onClose = ReactModule.useCallback(function() --[[ Line: 111 ]]
+			-- upvalues: FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (upval), UseRefResult (ref), UseStateResult2 (copy)
+			if FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry and UseRefResult then
+				UseRefResult.current = false
+			end
+			UseStateResult2(false)
+		end, {}),
+		layoutOrder = LayoutOrder,
+		muteHalf = ReactModule.createElement(View, {
 			tag = "size-1000-1000",
-			onActivated = var13,
-			onStateChanged = var18,
-			selection = { SelectionImageObject = var12 },
-			LayoutOrder = layoutOrder,
-			ref = var16,
-			stateLayer = { affordance = stateLayerAffordance.None }
+			onActivated = ReactModule.useCallback(function() --[[ Line: 84 ]]
+				-- upvalues: Config (copy), Frame (copy)
+				Config.onActivated(Frame.entryPoint)
+			end, { Config.onActivated, Frame.entryPoint }),
+			onStateChanged = ReactModule.useCallback(function(p1) --[[ Line: 130 ]]
+				-- upvalues: UseStateResult2_1 (copy)
+				UseStateResult2_1(p1)
+			end, {}),
+			selection = { SelectionImageObject = UseCursorResult },
+			LayoutOrder = LayoutOrder,
+			ref = ReactModule.useCallback(function(p1) --[[ Line: 118 ]]
+				-- upvalues: Frame (copy)
+				if Frame.onButtonMount then
+					Frame.onButtonMount(p1, Frame.muteButtonName)
+				end
+			end, { Frame.onButtonMount, Frame.muteButtonName }),
+			stateLayer = { affordance = StateLayerAffordance.None }
 		}, {
-			Background = reactModule.createElement(view, {
+			Background = ReactModule.createElement(View, {
 				tag = "radius-left-medium size-1000-1000 bg-action-standard"
 			}, {
-				StateOverlay = if var21 then reactModule.createElement(view, {
+				StateOverlay = if Press then ReactModule.createElement(View, {
 					tag = "radius-left-medium size-full",
-					backgroundStyle = var21
+					backgroundStyle = Press
 				}) else nil
 			}),
-			IconOverlay = reactModule.createElement(view, {
+			IconOverlay = ReactModule.createElement(View, {
 				tag = "row align-x-center align-y-center size-full",
 				ZIndex = 2,
 				Active = false
 			}, {
-				Icon = reactModule.createElement(var3, {
-					animatedIcon = config.animatedIcon,
-					isGrayedOut = config.isGrayedOut
+				Icon = ReactModule.createElement(MemoResult, {
+					animatedIcon = Config.animatedIcon,
+					isGrayedOut = Config.isGrayedOut
 				})
 			})
 		}),
-		chevronHalf = reactModule.createElement(view, {
+		chevronHalf = ReactModule.createElement(View, {
 			tag = "size-1000-1000",
-			onActivated = var14,
-			onStateChanged = var19,
-			selection = { SelectionImageObject = var12 },
-			LayoutOrder = layoutOrder + 1,
-			ref = var17,
-			stateLayer = { affordance = stateLayerAffordance.None }
+			onActivated = if FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then ReactModule.useCallback(function() --[[ Line: 90 ]]
+				-- upvalues: Frame (copy), UseRefResult (ref), PeopleServiceModule (upval), ENTRYPOINT (upval), UseStateResult2 (copy)
+				if Frame.userId == nil or not UseRefResult then return end
+				local NoCurrent = not UseRefResult.current
+				UseRefResult.current = NoCurrent
+				
+				if NoCurrent then
+					PeopleServiceModule.getService("PeopleAnalyticsManager"):recordPerUserVoiceVolumeUiOpened(Frame.entryPoint or ENTRYPOINT.PEOPLE_LIST)
+				end
+				UseStateResult2(NoCurrent)
+			end, { Frame.entryPoint, Frame.userId }) else ReactModule.useCallback(function() --[[ Line: 104 ]]
+				-- upvalues: UseStateResult2 (copy)
+				UseStateResult2(function(p1): boolean --[[ Line: 105 ]]
+					return not p1
+				end)
+			end, {}),
+			onStateChanged = ReactModule.useCallback(function(p1) --[[ Line: 134 ]]
+				-- upvalues: UseStateResult2_2 (copy)
+				UseStateResult2_2(p1)
+			end, {}),
+			selection = { SelectionImageObject = UseCursorResult },
+			LayoutOrder = LayoutOrder + 1,
+			ref = ReactModule.useCallback(function(p1) --[[ Line: 124 ]]
+				-- upvalues: Frame (copy)
+				if Frame.onButtonMount then
+					Frame.onButtonMount(p1, Frame.volumeButtonName)
+				end
+			end, { Frame.onButtonMount, Frame.volumeButtonName }),
+			stateLayer = { affordance = StateLayerAffordance.None }
 		}, {
-			Background = reactModule.createElement(view, {
+			Background = ReactModule.createElement(View, {
 				tag = "radius-right-medium size-1000-1000 bg-action-standard"
 			}, {
-				StateOverlay = if var22 then reactModule.createElement(view, {
+				StateOverlay = if Press1 then ReactModule.createElement(View, {
 					tag = "radius-right-medium size-full",
-					backgroundStyle = var22
+					backgroundStyle = Press1
 				}) else nil
 			}),
-			IconOverlay = reactModule.createElement(view, {
+			IconOverlay = ReactModule.createElement(View, {
 				tag = "row align-x-center align-y-center size-full padding-right-xxsmall",
 				ZIndex = 2,
 				Active = false
 			}, {
-				ChevronIcon = reactModule.createElement(foundationModule.Icon, {
-					name = if var20 then iconName.ChevronSmallUp else iconName.ChevronSmallDown,
-					size = iconSize.Large
+				ChevronIcon = ReactModule.createElement(FoundationModule.Icon, {
+					name = if HasUserId then IconName.ChevronSmallUp else IconName.ChevronSmallDown,
+					size = IconSize.Large
 				})
 			})
 		}),
-		pillWidth = size1000 * 2 + XXSmall,
-		pillHeight = size1000_1,
-		alignOffset = size1000 + XXSmall,
-		isMutedByLocalUser = config.isGrayedOut,
-		entryPoint = if fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then p1.entryPoint else nil
+		pillWidth = Size1000 * 2 + XXSmall,
+		pillHeight = UseTokensResult.Size.Size_1000,
+		alignOffset = Size1000 + XXSmall,
+		isMutedByLocalUser = Config.isGrayedOut,
+		entryPoint = if FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then Frame.entryPoint else nil
 	})
 end

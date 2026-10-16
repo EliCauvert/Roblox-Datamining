@@ -1,14 +1,14 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local enumsModule = require(profilePlatform.Common.Enums)
-local getProfilePlatformModule = require(profilePlatform.Networking.getProfilePlatform)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local GetProfilePlatformModule = require(ProfilePlatform.Networking.getProfilePlatform)
 
-function GetProfilePlatform(p1)
-	-- upvalues: getProfilePlatformModule (ref), enumsModule (ref)
-	return getProfilePlatformModule.API({
+function GetProfilePlatform(ProfileId) --[[ Line: 7 ]]
+	-- upvalues: GetProfilePlatformModule (copy), EnumsModule (copy)
+	return GetProfilePlatformModule.API({
 		includeComponentOrdering = false,
-		profileId = p1,
-		profileType = enumsModule.ProfileTypes.User,
-		components = { { component = enumsModule.Components.UserProfileHeader } }
+		profileId = ProfileId,
+		profileType = EnumsModule.ProfileTypes.User,
+		components = { { component = EnumsModule.Components.UserProfileHeader } }
 	})
 end
 

@@ -1,36 +1,34 @@
-﻿local sduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
-local unifiedLoggingModule = require(sduiCoreSystem.Parent.UnifiedLogging)
-local sduiCollectionAnalyticsBuilderModule = require(sduiCoreSystem.Analytics.SduiCollectionAnalyticsBuilder)
-local _ = require(sduiCoreSystem.SduiBuilderTypes)
-local _ = require(sduiCoreSystem.SduiConfigTypes)
-local sduiErrorsModule = require(sduiCoreSystem.SduiErrors)
-local getSduiImpressionHandlerRegistryModule = require(sduiCoreSystem.getSduiImpressionHandlerRegistry)
-local _ = require(sduiCoreSystem.SduiImpressionEventType)
+﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
+local UnifiedLoggingModule = require(SduiCoreSystem.Parent.UnifiedLogging)
+local SduiCollectionAnalyticsBuilderModule = require(SduiCoreSystem.Analytics.SduiCollectionAnalyticsBuilder)
+local _ = require(SduiCoreSystem.SduiBuilderTypes)
+local _ = require(SduiCoreSystem.SduiConfigTypes)
+local SduiErrorsModule = require(SduiCoreSystem.SduiErrors)
+local GetSduiImpressionHandlerRegistryModule = require(SduiCoreSystem.getSduiImpressionHandlerRegistry)
+local _ = require(SduiCoreSystem.SduiImpressionEventType)
 
-return function(p1, p2, p3, p4, p5, p6, p7, p8)
-	-- upvalues: sduiErrorsModule (ref), sduiCollectionAnalyticsBuilderModule (ref), getSduiImpressionHandlerRegistryModule (ref), unifiedLoggingModule (ref)
+return function(p1, p2, p3, p4, p5, p6, p7, p8) --[[ Line: 26 | Named "reportUnifiedLoggingImpressions" ]]
+	-- upvalues: SduiErrorsModule (copy), SduiCollectionAnalyticsBuilderModule (copy), GetSduiImpressionHandlerRegistryModule (copy), UnifiedLoggingModule (copy)
 	if not p4 then
-		p1.dependencies.logger.reportError(sduiErrorsModule.SduiErrorType.LogImpressionsMissingCollectionData, {}, p1.appPage)
+		p1.dependencies.logger.reportError(SduiErrorsModule.SduiErrorType.LogImpressionsMissingCollectionData, {}, p1.appPage)
 	end
-	p4 = p4 or sduiCollectionAnalyticsBuilderModule.DUMMY_COLLECTION_DATA
-	assert(p4, "collectionAnalyticsData must exist")
-	local impressionHandlerConfig = nil
+	local P3 = p4 or SduiCollectionAnalyticsBuilderModule.DUMMY_COLLECTION_DATA
+	assert(P3, "collectionAnalyticsData must exist")
+	local ImpressionHandlerConfig = nil
 	
 	if p6 then
-		impressionHandlerConfig = getSduiImpressionHandlerRegistryModule().getImpressionHandlerConfig(p6)
+		ImpressionHandlerConfig = GetSduiImpressionHandlerRegistryModule().getImpressionHandlerConfig(p6)
 		
-		if not impressionHandlerConfig then
-			unifiedLoggingModule.SendItemImpressions.sendFromServerDrivenUi(p1.dependencies.eventIngest, p2, p3, p4, p1.appPage, p4.collectionId, p4.contentType, p4.itemsPerRow, p4.collectionPosition, p5, p6)
-		elseif impressionHandlerConfig.handler then
-			impressionHandlerConfig.handler(p1, p2, p3, p4, p5, p8)
+		if ImpressionHandlerConfig then
+			if ImpressionHandlerConfig.handler then
+				ImpressionHandlerConfig.handler(p1, p2, p3, P3, p5, p8)
+			end
+		else
+			UnifiedLoggingModule.SendItemImpressions.sendFromServerDrivenUi(p1.dependencies.eventIngest, p2, p3, P3, p1.appPage, P3.collectionId, P3.contentType, P3.itemsPerRow, P3.collectionPosition, p5, p6)
 		end
 	end
 	if p7 == nil then
-		if impressionHandlerConfig and impressionHandlerConfig.skipItemImpressionsLog then
-			return
-		end
-	elseif p7 then
-		return
-	end
-	unifiedLoggingModule.SendItemImpressions.sendFromServerDrivenUi(p1.dependencies.eventIngest, p2, p3, p4, p1.appPage, p4.collectionId, p4.contentType, p4.itemsPerRow, p4.collectionPosition, p5)
+		if ImpressionHandlerConfig and ImpressionHandlerConfig.skipItemImpressionsLog then return end
+	elseif p7 then return end
+	UnifiedLoggingModule.SendItemImpressions.sendFromServerDrivenUi(p1.dependencies.eventIngest, p2, p3, P3, p1.appPage, P3.collectionId, P3.contentType, P3.itemsPerRow, P3.collectionPosition, p5)
 end

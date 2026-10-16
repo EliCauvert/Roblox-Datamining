@@ -1,11 +1,11 @@
-﻿local jestConfigsModule = require(script.Parent.Parent.Dev.JestConfigs)
+﻿local JestConfigsModule = require(script.Parent.Parent.Dev.JestConfigs)
 
 return {
 	displayName = "Home",
 	mockDataModel = true,
 	setupFilesAfterEnv = {
-		jestConfigsModule.setupFiles.LogHandler,
-		jestConfigsModule.setupFiles.UIBloxInitializer,
-		jestConfigsModule.setupFiles.createPromiseRejectionHandler()
+		JestConfigsModule.setupFiles.LogHandler,
+		JestConfigsModule.setupFiles.UIBloxInitializer,
+		JestConfigsModule.setupFiles.createPromiseRejectionHandler()
 	}
 }

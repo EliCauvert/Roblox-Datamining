@@ -1,17 +1,17 @@
-﻿local var1 = 1
-local tbl = setmetatable({}, { __mode = "k" })
+﻿local Count = 1
+local self = setmetatable({}, { __mode = "k" })
 
-return function(p1)
-	-- upvalues: tbl (ref), var1 (write)
-	if p1 == nil then
+return function(Key) --[[ Line: 15 | Named "idFor" ]]
+	-- upvalues: self (copy), Count (ref)
+	if Key == nil then
 		return 0
 	end
-	local var2 = tbl[p1]
+	local SelfEntry = self[Key]
 	
-	if not var2 then
-		var2 = var1
-		var1 += 1
-		tbl[p1] = var2
+	if not SelfEntry then
+		SelfEntry = Count
+		Count += 1
+		self[Key] = SelfEntry
 	end
-	return var2
+	return SelfEntry
 end

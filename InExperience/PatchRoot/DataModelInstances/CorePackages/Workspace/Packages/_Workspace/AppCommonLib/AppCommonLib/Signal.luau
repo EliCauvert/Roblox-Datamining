@@ -1,52 +1,52 @@
-﻿local immutableModule = require(script.Parent.Immutable)
-local t = {}
-t.__index = t
+﻿local ImmutableModule = require(script.Parent.Immutable)
+local SignalModule = {}
+SignalModule.__index = SignalModule
 
-function t.new()
-	-- upvalues: t (ref)
-	local t_1 = { _listeners = {} }
-	setmetatable(t_1, t)
+function SignalModule.new() --[[ Line: 32 ]]
+	-- upvalues: SignalModule (copy)
+	local config = { _listeners = {} }
+	setmetatable(config, SignalModule)
 	
-	return t_1
+	return config
 end
 
-function t:connect(p1)
-	-- upvalues: immutableModule (ref)
-	local t = { isConnected = true, callback = p1 }
-	self._listeners = immutableModule.Append(self._listeners, t)
+function SignalModule:connect(Callback) --[[ Line: 42 ]]
+	-- upvalues: ImmutableModule (copy)
+	local config = { isConnected = true, callback = Callback }
+	self._listeners = ImmutableModule.Append(self._listeners, config)
 	
 	return {
-		Disconnect = function()
-			-- upvalues: t (ref), self (ref), immutableModule (copy)
+		Disconnect = function() --[[ Line: 55 ]]
+			-- upvalues: config (copy), self (copy), ImmutableModule (upval)
 			warn(string.format("Connection:Disconnect() has been deprecated, use Connection:disconnect()\n%s]", debug.traceback()))
-			t.isConnected = false
-			self._listeners = immutableModule.RemoveValueFromList(self._listeners, t)
+			config.isConnected = false
+			self._listeners = ImmutableModule.RemoveValueFromList(self._listeners, config)
 		end,
-		disconnect = function()
-			-- upvalues: t (ref), self (ref), immutableModule (copy)
-			t.isConnected = false
-			self._listeners = immutableModule.RemoveValueFromList(self._listeners, t)
+		disconnect = function() --[[ Line: 49 ]]
+			-- upvalues: config (copy), self (copy), ImmutableModule (upval)
+			config.isConnected = false
+			self._listeners = ImmutableModule.RemoveValueFromList(self._listeners, config)
 		end
 	}
 end
 
-function t:fire(...)
-	for i, v in ipairs(self._listeners) do
-		if v.isConnected then
-			v.callback(...)
+function SignalModule.fire(p1, ...) --[[ Line: 68 ]]
+	for _, listener in ipairs(p1._listeners) do
+		if listener.isConnected then
+			listener.callback(...)
 		end
 	end
 end
 
-function t:Connect(...)
+function SignalModule:Connect(...) --[[ Line: 76 ]]
 	warn(string.format("Signal:Connect() has been deprecated, use Signal:connect()\n%s]", debug.traceback()))
 	
 	return self:connect(...)
 end
 
-function t:Fire(...)
+function SignalModule:Fire(...) --[[ Line: 81 ]]
 	warn(string.format("Signal:Fire() has been deprecated, use Signal:fire()\n%s]", debug.traceback()))
 	self:fire(...)
 end
 
-return t
+return SignalModule

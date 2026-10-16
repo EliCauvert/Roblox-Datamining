@@ -1,24 +1,24 @@
-﻿local parent = script.Parent.Parent
-local openPublishAssetPromptModule = require(parent.Actions.OpenPublishAssetPrompt)
-local promptTypeModule = require(parent.PromptType)
+﻿local Parent = script.Parent.Parent
+local OpenPublishAssetPromptModule = require(Parent.Actions.OpenPublishAssetPrompt)
+local PromptTypeModule = require(Parent.PromptType)
 
-return function(p1, p2, p3, p4)
-	-- upvalues: openPublishAssetPromptModule (ref), promptTypeModule (ref)
-	return function(p5)
-		-- upvalues: p1 (write), openPublishAssetPromptModule (copy), promptTypeModule (copy), p2 (ref), p3 (ref), p4 (ref)
-		if p1:IsA("Accessory") then
-			local model = Instance.new("Model")
-			model.Parent = p1.Parent
-			p1.Parent = model
-			local basePart = p1:FindFirstChildWhichIsA("BasePart", true)
+return function(Object, p1, p2, p3) --[[ Line: 12 ]]
+	-- upvalues: OpenPublishAssetPromptModule (copy), PromptTypeModule (copy)
+	return function(p4) --[[ Line: 13 ]]
+		-- upvalues: Object (ref), OpenPublishAssetPromptModule (upval), PromptTypeModule (upval), p1 (copy), p2 (copy), p3 (copy)
+		if Object:IsA("Accessory") then
+			local Model = Instance.new("Model")
+			Model.Parent = Object.Parent
+			Object.Parent = Model
+			local BasePart = Object:FindFirstChildWhichIsA("BasePart", true)
 			
-			if basePart == nil then
+			if BasePart == nil then
 				print("Error: accessory to be published does not contain a BasePart")
 			else
-				model.PrimaryPart = basePart
-				p1 = model
+				Model.PrimaryPart = BasePart
+				Object = Model
 			end
 		end
-		p5:dispatch(openPublishAssetPromptModule(promptTypeModule.PublishAssetSingleStep, p1, p2, p3, p4))
+		p4:dispatch(OpenPublishAssetPromptModule(PromptTypeModule.PublishAssetSingleStep, Object, p1, p2, p3))
 	end
 end

@@ -1,5 +1,14 @@
-﻿local t = {
-	new = function()
+﻿local function _(p1) --[[ Line: 9 | Named "closeAttempt" ]]
+	local Attempts = p1.attempts
+	local Attempt = Attempts and Attempts[#Attempts]
+	
+	if Attempt and not Attempt.finish then
+		Attempt.finish = tick()
+	end
+end
+
+local RequestOrchestratorDataModule = {
+	new = function() --[[ Line: 17 ]]
 		return {
 			now = tick(),
 			allTypes = {},
@@ -11,50 +20,42 @@
 			cacheByType = {}
 		}
 	end,
-	observeType = function(p1, p2)
+	observeType = function(p1, p2): number? --[[ Line: 37 ]]
 		if p1.typeSeen[p2] then
 			return nil
+		else
+			p1.typeSeen[p2] = true
+			table.insert(p1.allTypes, p2)
+			
+			return #p1.allTypes
 		end
-		p1.typeSeen[p2] = true
-		table.insert(p1.allTypes, p2)
-		
-		return #p1.allTypes
 	end
 }
 
-local function _(p1)
-	local attempts = p1.attempts
-	local var1 = attempts and attempts[#attempts]
+function RequestOrchestratorDataModule.observeTypes(p1, List) --[[ Line: 47 ]]
+	-- upvalues: RequestOrchestratorDataModule (copy)
+	local List1 = {}
 	
-	if var1 and not var1.finish then
-		var1.finish = tick()
-	end
-end
-
-function t.observeTypes(p1, p2)
-	-- upvalues: t (ref)
-	local t_1 = {}
-	
-	for i, v in ipairs(p2) do
-		local var1 = t.observeType(p1, v)
+	for _, value in ipairs(List) do
+		local ObserveTypeResult = RequestOrchestratorDataModule.observeType(p1, value)
 		
-		if var1 then
-			table.insert(t_1, var1)
+		if ObserveTypeResult then
+			table.insert(List1, ObserveTypeResult)
 		end
 	end
-	return t_1
+	return List1
 end
 
-function t.batchesFor(p3, p4)
-	if not p3.batchesByType[p4] then
-		p3.batchesByType[p4] = {}
+function RequestOrchestratorDataModule.batchesFor(p2, p3) --[[ Line: 58 ]]
+	if not p2.batchesByType[p3] then
+		p2.batchesByType[p3] = {}
 	end
-	return p3.batchesByType[p4]
+	return p2.batchesByType[p3]
 end
 
-function t.registerBatch(p3, p4, p5)
-	-- upvalues: t (ref)
-	t.batchesFor(p3, p4)[tostring(p5.batchId)] = {
+function RequestOrchestratorDataModule.registerBatch(p2, p3, p4) --[[ Line: 65 ]]
+	-- upvalues: RequestOrchestratorDataModule (copy)
+	RequestOrchestratorDataModule.batchesFor(p2, p3)[tostring(p4.batchId)] = {
 		state = "pending",
 		sentTime = nil,
 		settleTime = nil,
@@ -63,226 +64,223 @@ function t.registerBatch(p3, p4, p5)
 	}
 end
 
-function t.openSendAttempt(p3, p4, p5)
-	-- upvalues: t (ref)
-	local var2 = t.batchesFor(p3, p4)
-	local var3 = tostring(p5.batchId)
-	local var4 = var2[var3]
+function RequestOrchestratorDataModule.openSendAttempt(p2, p3, p4) --[[ Line: 77 ]]
+	-- upvalues: RequestOrchestratorDataModule (copy)
+	local BatchesForResult = RequestOrchestratorDataModule.batchesFor(p2, p3)
+	local Text = tostring(p4.batchId)
+	local BatchesForResultEntry = BatchesForResult[Text]
 	
-	if not var4 then
-		var4 = { attempts = {} }
-		var2[var3] = var4
+	if not BatchesForResultEntry then
+		BatchesForResultEntry = { attempts = {} }
+		BatchesForResult[Text] = BatchesForResultEntry
 	end
-	var4.state = "inflight"
-	local currentTime = tick()
-	var4.attempts = var4.attempts or {}
-	table.insert(var4.attempts, { finish = nil, start = currentTime })
-	var4.sentTime = var4.sentTime or currentTime
-	var4.operationCount = p5.operationCount or 0
+	BatchesForResultEntry.state = "inflight"
+	local CurrentTime = tick()
+	BatchesForResultEntry.attempts = BatchesForResultEntry.attempts or {}
+	table.insert(BatchesForResultEntry.attempts, { finish = nil, start = CurrentTime })
+	BatchesForResultEntry.sentTime = BatchesForResultEntry.sentTime or CurrentTime
+	BatchesForResultEntry.operationCount = p4.operationCount or 0
 end
 
-function t.settleBatch(value, p3, p4)
-	local var2 = value.batchesByType[p3]
+function RequestOrchestratorDataModule.settleBatch(p2, p3, p4) --[[ Line: 93 ]]
+	local BatchesByTypeEntry = p2.batchesByType[p3]
 	
-	if not var2 then return end
-	local batchId = var2[tostring(p4.batchId)]
+	if not BatchesByTypeEntry then return end
+	local BatchesByTypeEntry1 = BatchesByTypeEntry[tostring(p4.batchId)]
 	
-	if not batchId then return end
-	local attempts = batchId.attempts
-	local var3 = attempts and attempts[#attempts]
+	if not BatchesByTypeEntry1 then return end
+	local Attempts = BatchesByTypeEntry1.attempts
+	local Attempt = Attempts and Attempts[#Attempts]
 	
-	if var3 and not var3.finish then
-		var3.finish = tick()
+	if Attempt and not Attempt.finish then
+		Attempt.finish = tick()
 	end
-	batchId.settleTime = tick()
-	batchId.state = if p4.success then "success" else "failure"
-	batchId.httpStatus = p4.httpStatus
+	BatchesByTypeEntry1.settleTime = tick()
+	BatchesByTypeEntry1.state = if p4.success then "success" else "failure"
+	BatchesByTypeEntry1.httpStatus = p4.httpStatus
 end
 
-function t.reclassifyOnRetry(p3, p4, p5)
-	local var2 = p3.batchesByType[p4]
+function RequestOrchestratorDataModule.reclassifyOnRetry(p2, p3, p4) --[[ Line: 108 ]]
+	local BatchesByTypeEntry = p2.batchesByType[p3]
 	
-	if not var2 then return end
-	local batchId = var2[tostring(p5.batchId)]
+	if not BatchesByTypeEntry then return end
+	local BatchesByTypeEntry1 = BatchesByTypeEntry[tostring(p4.batchId)]
 	
-	if not batchId then return end
-	local attempts = batchId.attempts
-	local var3 = attempts and attempts[#attempts]
+	if not BatchesByTypeEntry1 then return end
+	local Attempts = BatchesByTypeEntry1.attempts
+	local Attempt = Attempts and Attempts[#Attempts]
 	
-	if var3 and not var3.finish then
-		var3.finish = tick()
+	if Attempt and not Attempt.finish then
+		Attempt.finish = tick()
 	end
-	if batchId.state == "pending" and not batchId.sentTime then
-		local var4 = var2[tostring(p5.batchId - 1)]
+	if BatchesByTypeEntry1.state == "pending" and not BatchesByTypeEntry1.sentTime then
+		local BatchesByTypeEntry2 = BatchesByTypeEntry[tostring(p4.batchId - 1)]
 		
-		if var4 and var4.state == "failure" then
-			var4.state = "retrying"
+		if BatchesByTypeEntry2 and BatchesByTypeEntry2.state == "failure" then
+			BatchesByTypeEntry2.state = "retrying"
 		end
 	end
-	batchId.state = "retrying"
-	batchId.attemptNumber = p5.attemptNumber
+	BatchesByTypeEntry1.state = "retrying"
+	BatchesByTypeEntry1.attemptNumber = p4.attemptNumber
 end
 
-function t.markExhausted(p3, p4, p5)
-	local var2 = p3.batchesByType[p4]
+function RequestOrchestratorDataModule.markExhausted(p2, p3, p4) --[[ Line: 130 ]]
+	local BatchesByTypeEntry = p2.batchesByType[p3]
 	
-	if not var2 then return end
-	local batchId = var2[tostring(p5.batchId)]
+	if not BatchesByTypeEntry then return end
+	local BatchesByTypeEntry1 = BatchesByTypeEntry[tostring(p4.batchId)]
 	
-	if batchId then
-		local attempts = batchId.attempts
-		local var3 = attempts and attempts[#attempts]
+	if BatchesByTypeEntry1 then
+		local Attempts = BatchesByTypeEntry1.attempts
+		local Attempt = Attempts and Attempts[#Attempts]
 		
-		if var3 and not var3.finish then
-			var3.finish = tick()
+		if Attempt and not Attempt.finish then
+			Attempt.finish = tick()
 		end
-		batchId.state = "exhausted"
-		batchId.settleTime = tick()
+		BatchesByTypeEntry1.state = "exhausted"
+		BatchesByTypeEntry1.settleTime = tick()
 	end
 end
 
-function t.trackQueueOnCreated(p3, p4, p5)
-	if p5.maxBatchSize then
-		p3.observedMaxByType[p4] = p5.maxBatchSize
+function RequestOrchestratorDataModule.trackQueueOnCreated(p2, p3, p4) --[[ Line: 143 ]]
+	if p4.maxBatchSize then
+		p2.observedMaxByType[p3] = p4.maxBatchSize
 	end
-	local var2 = p3.queues[p4]
+	local Queue = p2.queues[p3]
 	
-	if var2 then
-		var2.batchId = p5.batchId
+	if Queue then
+		Queue.batchId = p4.batchId
 		
 		return
+	else
+		p2.queues[p3] = {
+			batchId = p4.batchId,
+			ops = {},
+			createdTime = tick(),
+			retryOps = {}
+		}
 	end
-	p3.queues[p4] = {
-		batchId = p5.batchId,
-		ops = {},
-		createdTime = tick(),
-		retryOps = {}
-	}
 end
 
-function t.drainQueueOnSent(p3, p4, p5)
-	local var2 = p3.queues[p4]
-	local operationCount = p5.operationCount or (if var2 then #var2.retryOps + #var2.ops else 0)
-	p3.lastBatchSizeByType[p4] = operationCount
+function RequestOrchestratorDataModule.drainQueueOnSent(p2, p3, p4) --[[ Line: 162 ]]
+	local Queue = p2.queues[p3]
+	local OperationCount = p4.operationCount or (Queue and #Queue.retryOps + #Queue.ops or 0)
+	p2.lastBatchSizeByType[p3] = OperationCount
 	
-	if var2 then
-		for _ = 1, operationCount do
-			if #var2.retryOps > 0 then
-				table.remove(var2.retryOps, 1)
-				continue
-			elseif #var2.ops <= 0 then
-				break
+	if Queue then
+		for _ = 1, OperationCount do
+			if #Queue.retryOps > 0 then
+				table.remove(Queue.retryOps, 1)
+			else
+				if #Queue.ops <= 0 then break end
+				table.remove(Queue.ops, 1)
 			end
-			table.remove(var2.ops, 1)
-			continue
 		end
-		if #var2.ops == 0 and #var2.retryOps == 0 then
-			p3.queues[p4] = nil
+		if #Queue.ops == 0 and #Queue.retryOps == 0 then
+			p2.queues[p3] = nil
 		end
 	end
 end
 
-function t.requeueRetryOps(p6, p7, p8)
-	local var3 = p6.queues[p7]
+function RequestOrchestratorDataModule.requeueRetryOps(p5, p6, p7) --[[ Line: 184 ]]
+	local Queue = p5.queues[p6]
 	
-	if not var3 then
-		var3 = {
-			batchId = p8.batchId,
+	if not Queue then
+		Queue = {
+			batchId = p7.batchId,
 			ops = {},
 			createdTime = tick(),
 			retryOps = {}
 		}
-		p6.queues[p7] = var3
+		p5.queues[p6] = Queue
 	end
-	local var4 = p6.lastBatchSizeByType[p7] or (p8.operationCount or 0)
-	var3.retryOps = {}
+	Queue.retryOps = {}
 	
-	for i = 1, var4 do
-		table.insert(var3.retryOps, "retry-" .. i)
+	for i = 1, p5.lastBatchSizeByType[p6] or (p7.operationCount or 0) do
+		table.insert(Queue.retryOps, "retry-" .. i)
 	end
 end
 
-function t.clearQueueOnExhausted(p9, p10)
-	local var5 = p9.queues[p10]
+function RequestOrchestratorDataModule.clearQueueOnExhausted(p8, p9) --[[ Line: 203 ]]
+	local Queue = p8.queues[p9]
 	
-	if var5 then
-		var5.retryOps = {}
+	if Queue then
+		Queue.retryOps = {}
 		
-		if #var5.ops == 0 then
-			p9.queues[p10] = nil
+		if #Queue.ops == 0 then
+			p8.queues[p9] = nil
 		end
 	end
 end
 
-function t.enqueueOperation(p9, p10, p11)
-	local var5 = p9.queues[p10]
+function RequestOrchestratorDataModule.enqueueOperation(p8, p9, p10) --[[ Line: 214 ]]
+	local Queue = p8.queues[p9]
 	
-	if not var5 then
-		var5 = {
-			batchId = p11.batchId,
+	if not Queue then
+		Queue = {
+			batchId = p10.batchId,
 			ops = {},
 			createdTime = tick(),
 			retryOps = {}
 		}
-		p9.queues[p10] = var5
+		p8.queues[p9] = Queue
 	end
-	table.insert(var5.ops, p11.message or "?")
+	table.insert(Queue.ops, p10.message or "?")
 end
 
-function t.recordCacheItemAdded(p9, p10, p11)
-	local var5 = p9.cacheByType[p10]
+function RequestOrchestratorDataModule.recordCacheItemAdded(p8, p9, p10) --[[ Line: 224 ]]
+	local CacheByTypeEntry = p8.cacheByType[p9]
 	
-	if not var5 then
-		var5 = { items = {} }
-		p9.cacheByType[p10] = var5
+	if not CacheByTypeEntry then
+		CacheByTypeEntry = { items = {} }
+		p8.cacheByType[p9] = CacheByTypeEntry
 	end
-	local message = p11.message or ""
+	local Message = p10.message or ""
 	
-	for i, v in ipairs(var5.items) do
-		if v.key == message then return end
+	for _, item in ipairs(CacheByTypeEntry.items) do
+		if item.key == Message then return end
 	end
-	table.insert(var5.items, { lastHitTime = nil, key = message })
+	table.insert(CacheByTypeEntry.items, { lastHitTime = nil, key = Message })
 	
-	if #var5.items > 48 then
-		table.remove(var5.items, 1)
+	if #CacheByTypeEntry.items > 48 then
+		table.remove(CacheByTypeEntry.items, 1)
 	end
 end
 
-function t.recordCacheHit(p12, p13, p14)
-	local var6 = p12.cacheByType[p13]
+function RequestOrchestratorDataModule.recordCacheHit(p11, p12, p13) --[[ Line: 242 ]]
+	local CacheByTypeEntry = p11.cacheByType[p12]
 	
-	if not var6 then
-		var6 = { items = {} }
-		p12.cacheByType[p13] = var6
+	if not CacheByTypeEntry then
+		CacheByTypeEntry = { items = {} }
+		p11.cacheByType[p12] = CacheByTypeEntry
 	end
-	local message = p14.message or ""
+	local Message = p13.message or ""
 	
-	for i = #var6.items, 1, -1 do
-		if var6.items[i].key ~= message then
-			continue
+	for i = #CacheByTypeEntry.items, 1, -1 do
+		if CacheByTypeEntry.items[i].key == Message then
+			CacheByTypeEntry.items[i].lastHitTime = tick()
+			
+			return
 		end
-		var6.items[i].lastHitTime = tick()
-		
-		return
 	end
-	table.insert(var6.items, { key = message, lastHitTime = tick() })
+	table.insert(CacheByTypeEntry.items, { key = Message, lastHitTime = tick() })
 	
-	if #var6.items > 48 then
-		table.remove(var6.items, 1)
+	if #CacheByTypeEntry.items > 48 then
+		table.remove(CacheByTypeEntry.items, 1)
 	end
 end
 
-function t.advanceTime(p15)
-	p15.now = tick()
-	local var7 = p15.now - 30
+function RequestOrchestratorDataModule.advanceTime(p14) --[[ Line: 263 ]]
+	p14.now = tick()
+	local NowDelta = p14.now - 30
 	
-	for i, v in pairs(p15.batchesByType) do
-		for i_1, v_1 in pairs(v) do
-			if v_1.settleTime and v_1.settleTime < var7 then
-				v[i_1] = nil
+	for _, value in pairs(p14.batchesByType) do
+		for i, value1 in pairs(value) do
+			if value1.settleTime and value1.settleTime < NowDelta then
+				value[i] = nil
 			end
 		end
 	end
 end
 
-return t
+return RequestOrchestratorDataModule

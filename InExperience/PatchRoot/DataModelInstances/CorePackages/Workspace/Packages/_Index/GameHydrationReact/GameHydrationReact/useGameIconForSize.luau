@@ -1,21 +1,21 @@
-﻿local parent = script:FindFirstAncestor("GameHydrationReact").Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local dataHydrationModule = require(parent.DataHydration)
+﻿local Parent = script:FindFirstAncestor("GameHydrationReact").Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local DataHydrationModule = require(Parent.DataHydration)
 
-return function(p1, p2)
-	-- upvalues: reactModule (ref), dataHydrationModule (ref), signalsReactModule (ref)
-	local var1 = tostring(p1)
+return function(p1, p2) --[[ Line: 17 | Named "useGameIconForSize" ]]
+	-- upvalues: ReactModule (copy), DataHydrationModule (copy), SignalsReactModule (copy)
+	local Text = tostring(p1)
 	
-	return signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: dataHydrationModule (copy), var1 (ref), p2 (ref)
-		local gameIcon = dataHydrationModule.Game.getGameIconStore(false).getGameIcon(var1, p2)
+	return SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 20 ]]
+		-- upvalues: DataHydrationModule (upval), Text (copy), p2 (copy)
+		local GameIcon = DataHydrationModule.Game.getGameIconStore(false).getGameIcon(Text, p2)
 		
-		return function(p3)
-			-- upvalues: gameIcon (ref)
-			local var2 = gameIcon.data(p3)
+		return function(p3) --[[ Line: 22 ]]
+			-- upvalues: GameIcon (copy)
+			local DataResult = GameIcon.data(p3)
 			
-			return if var2 then var2.url else nil
+			return if DataResult then DataResult.url else nil
 		end
-	end, { var1, p2 }))
+	end, { Text, p2 })))
 end

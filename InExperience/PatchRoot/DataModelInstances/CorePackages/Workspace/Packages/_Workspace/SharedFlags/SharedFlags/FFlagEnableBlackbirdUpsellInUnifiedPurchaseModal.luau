@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("EnableBlackbirdUpsellInUnifiedPurchaseModal7", false) and require(script.Parent.FFlagBlackbirdUpsellVersion)

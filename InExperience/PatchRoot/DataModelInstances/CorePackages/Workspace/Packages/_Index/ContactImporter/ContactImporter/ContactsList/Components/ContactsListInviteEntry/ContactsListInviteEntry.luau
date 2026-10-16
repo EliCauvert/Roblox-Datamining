@@ -1,102 +1,102 @@
-﻿local contactImporter = script:FindFirstAncestor("ContactImporter")
-local dependenciesModule = require(contactImporter.dependencies)
-local roact = dependenciesModule.Roact
-local UIBlox = dependenciesModule.UIBlox
-local react = dependenciesModule.React
-local button = UIBlox.App.Button.Button
-local buttonType = UIBlox.App.Button.Enum.ButtonType
-local styledTextLabel = UIBlox.App.Text.StyledTextLabel
-local textKeysModule = require(contactImporter.Common.TextKeys)
-local standardButtonSize = UIBlox.App.Button.Enum.StandardButtonSize
-local SMSProtocol = dependenciesModule.SMSProtocol
-local dash = dependenciesModule.Dash
-local useStyle = dependenciesModule.useStyle
-local useLocalization = dependenciesModule.useLocalization
-local getFFlagContactsListEntryUpdatedTruncationFixModule = require(contactImporter.Flags.getFFlagContactsListEntryUpdatedTruncationFix)
-local sendInviteLinkModule = require(script.Parent.sendInviteLink)
-local t = { smsProtocol = SMSProtocol.default }
+﻿local ContactImporter = script:FindFirstAncestor("ContactImporter")
+local DependenciesModule = require(ContactImporter.dependencies)
+local Roact = DependenciesModule.Roact
+local UIBlox = DependenciesModule.UIBlox
+local React = DependenciesModule.React
+local Button = UIBlox.App.Button.Button
+local ButtonType = UIBlox.App.Button.Enum.ButtonType
+local StyledTextLabel = UIBlox.App.Text.StyledTextLabel
+local TextKeysModule = require(ContactImporter.Common.TextKeys)
+local StandardButtonSize = UIBlox.App.Button.Enum.StandardButtonSize
+local SMSProtocol = DependenciesModule.SMSProtocol
+local Dash = DependenciesModule.Dash
+local UseStyleFunction = DependenciesModule.useStyle
+local UseLocalizationFunction = DependenciesModule.useLocalization
+local GetFFlagContactsListEntryUpdatedTruncationFixModule = require(ContactImporter.Flags.getFFlagContactsListEntryUpdatedTruncationFix)
+local SendInviteLinkModule = require(script.Parent.sendInviteLink)
+local config = { smsProtocol = SMSProtocol.default }
 
-function ContactsListInviteEntry(p1)
-	-- upvalues: dash (ref), t (ref), useLocalization (ref), textKeysModule (ref), useStyle (ref), sendInviteLinkModule (ref), SMSProtocol (ref), react (ref), roact (ref), getFFlagContactsListEntryUpdatedTruncationFixModule (ref), styledTextLabel (ref), button (ref), buttonType (ref), standardButtonSize (ref)
-	local var1 = dash.join(t, p1)
-	local var2 = useLocalization({ invite = textKeysModule.INVITE_BUTTON_TEXT })
-	local var3 = useStyle()
-	local var4 = sendInviteLinkModule({
-		address = var1.phoneNumber,
-		deviceContactId = var1.deviceContactId,
+function ContactsListInviteEntry(p1) --[[ Line: 42 ]]
+	-- upvalues: Dash (copy), config (copy), UseLocalizationFunction (copy), TextKeysModule (copy), UseStyleFunction (copy), SendInviteLinkModule (copy), SMSProtocol (copy), React (copy), Roact (copy), GetFFlagContactsListEntryUpdatedTruncationFixModule (copy), StyledTextLabel (copy), Button (copy), ButtonType (copy), StandardButtonSize (copy)
+	local JoinResult = Dash.join(config, p1)
+	local UseLocalizationResult = UseLocalizationFunction({ invite = TextKeysModule.INVITE_BUTTON_TEXT })
+	local UseStyleResult = UseStyleFunction()
+	local SendInviteLinkModuleResult = SendInviteLinkModule({
+		address = JoinResult.phoneNumber,
+		deviceContactId = JoinResult.deviceContactId,
 		smsProtocol = SMSProtocol.default
 	})
-	local var5, var6 = react.useState(0)
+	local UseStateResult, UseStateResult2 = React.useState(0)
 	
-	return roact.createElement("Frame", {
+	return Roact.createElement("Frame", {
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
-		Name = var1.deviceContactId,
+		Name = JoinResult.deviceContactId,
 		Size = UDim2.new(1, 0, 0, 72)
 	}, {
-		entryContent = roact.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
-			padding = roact.createElement("UIPadding", {
+		entryContent = Roact.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
+			padding = Roact.createElement("UIPadding", {
 				PaddingTop = UDim.new(0, 26),
 				PaddingBottom = UDim.new(0, 26)
 			}),
-			contactNameLabel = if getFFlagContactsListEntryUpdatedTruncationFixModule() then roact.createElement(styledTextLabel, {
+			contactNameLabel = if GetFFlagContactsListEntryUpdatedTruncationFixModule() then Roact.createElement(StyledTextLabel, {
 				lineHeight = 1,
 				fluidSizing = false,
 				richText = false,
 				textWrapped = false,
-				size = UDim2.new(1, var5, 0, 20),
-				colorStyle = var3.Theme.TextEmphasis,
-				fontStyle = var3.Font.Header2,
-				text = var1.contactName,
+				size = UDim2.new(1, UseStateResult, 0, 20),
+				colorStyle = UseStyleResult.Theme.TextEmphasis,
+				fontStyle = UseStyleResult.Font.Header2,
+				text = JoinResult.contactName,
 				textXAlignment = Enum.TextXAlignment.Left,
 				textYAlignment = Enum.TextYAlignment.Bottom,
 				textTruncate = Enum.TextTruncate.AtEnd
-			}) else roact.createElement(styledTextLabel, {
+			}) else Roact.createElement(StyledTextLabel, {
 				lineHeight = 1,
 				automaticSize = Enum.AutomaticSize.Y,
-				colorStyle = var3.Theme.TextEmphasis,
-				fontStyle = var3.Font.Header2,
-				text = var1.contactName,
+				colorStyle = UseStyleResult.Theme.TextEmphasis,
+				fontStyle = UseStyleResult.Font.Header2,
+				text = JoinResult.contactName,
 				textXAlignment = Enum.TextXAlignment.Left,
 				textYAlignment = Enum.TextYAlignment.Bottom
 			}),
-			sendInviteButton = if not var1.hasSentRequest then roact.createElement(button, {
-				buttonType = buttonType.PrimarySystem,
+			sendInviteButton = if JoinResult.hasSentRequest then Roact.createElement(Button, {
+				buttonType = ButtonType.Secondary,
 				position = UDim2.new(1, -1, 0.5, 0),
 				anchorPoint = Vector2.new(1, 0.5),
-				standardSize = standardButtonSize.XSmall,
-				fitContent = true,
-				text = var2.invite,
-				isDisabled = var4.isLoading,
-				onActivated = var4.sendInvite,
-				[react.Change.AbsoluteSize] = function(p2)
-					-- upvalues: getFFlagContactsListEntryUpdatedTruncationFixModule (copy), var6 (ref)
-					if getFFlagContactsListEntryUpdatedTruncationFixModule() then
-						var6(0 - (p2.AbsoluteSize.X + 10))
+				standardSize = StandardButtonSize.XSmall,
+				isDisabled = true,
+				text = UseLocalizationResult.invite,
+				onActivated = Dash.noop,
+				[React.Change.AbsoluteSize] = function(Frame) --[[ Line: 122 ]]
+					-- upvalues: GetFFlagContactsListEntryUpdatedTruncationFixModule (upval), UseStateResult2 (copy)
+					if GetFFlagContactsListEntryUpdatedTruncationFixModule() then
+						UseStateResult2(0 - (Frame.AbsoluteSize.X + 10))
 					end
 				end
-			}) else roact.createElement(button, {
-				buttonType = buttonType.Secondary,
+			}) else Roact.createElement(Button, {
+				buttonType = ButtonType.PrimarySystem,
 				position = UDim2.new(1, -1, 0.5, 0),
 				anchorPoint = Vector2.new(1, 0.5),
-				standardSize = standardButtonSize.XSmall,
-				isDisabled = true,
-				text = var2.invite,
-				onActivated = dash.noop,
-				[react.Change.AbsoluteSize] = function(p2)
-					-- upvalues: getFFlagContactsListEntryUpdatedTruncationFixModule (copy), var6 (ref)
-					if getFFlagContactsListEntryUpdatedTruncationFixModule() then
-						var6(0 - (p2.AbsoluteSize.X + 10))
+				standardSize = StandardButtonSize.XSmall,
+				fitContent = true,
+				text = UseLocalizationResult.invite,
+				isDisabled = SendInviteLinkModuleResult.isLoading,
+				onActivated = SendInviteLinkModuleResult.sendInvite,
+				[React.Change.AbsoluteSize] = function(Frame) --[[ Line: 108 ]]
+					-- upvalues: GetFFlagContactsListEntryUpdatedTruncationFixModule (upval), UseStateResult2 (copy)
+					if GetFFlagContactsListEntryUpdatedTruncationFixModule() then
+						UseStateResult2(0 - (Frame.AbsoluteSize.X + 10))
 					end
 				end
 			})
 		}),
-		divider = if var1.hasDivider then roact.createElement("Frame", {
+		divider = if JoinResult.hasDivider then Roact.createElement("Frame", {
 			BorderSizePixel = 0,
 			Size = UDim2.new(1, 0, 0, 1),
 			Position = UDim2.new(0, 0, 1, 0),
-			BackgroundColor3 = var3.Theme.Divider.Color,
-			BackgroundTransparency = var3.Theme.Divider.Transparency
+			BackgroundColor3 = UseStyleResult.Theme.Divider.Color,
+			BackgroundTransparency = UseStyleResult.Theme.Divider.Transparency
 		}) else nil
 	})
 end

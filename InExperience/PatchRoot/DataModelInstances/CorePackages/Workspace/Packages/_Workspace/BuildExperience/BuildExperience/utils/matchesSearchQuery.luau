@@ -1,3 +1,3 @@
-﻿return function(p1, p2)
-	return p2 == "" or (if p1 == nil or p1 == "" then false else string.find(string.lower(p1), string.lower(p2), 1, true) ~= nil)
+﻿return function(Text: string, Text1: string): boolean --[[ Line: 11 | Named "matchesSearchQuery" ]]
+	return Text1 == "" or Text ~= nil and Text ~= "" and string.find(string.lower(Text), string.lower(Text1), 1, true) ~= nil
 end

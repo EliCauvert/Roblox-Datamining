@@ -1,26 +1,28 @@
-﻿local parent = script:FindFirstAncestor("UserList").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local enums = foundationModule.Enums
-local view = foundationModule.View
-local button = foundationModule.Button
-local inputSize = enums.InputSize
-local fFlagUserListFooterViewMore = require(parent.SharedFlags).FFlagUserListFooterViewMore
+﻿local Parent = script:FindFirstAncestor("UserList").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local Enums = FoundationModule.Enums
+local View = FoundationModule.View
+local Button = FoundationModule.Button
+local InputSize = Enums.InputSize
+local FFlagUserListFooterViewMore = require(Parent.SharedFlags).FFlagUserListFooterViewMore
 
-return function(p1)
-	-- upvalues: useLocalization (ref), fFlagUserListFooterViewMore (ref), reactModule (ref), view (ref), button (ref), inputSize (ref), enums (ref)
-	return reactModule.createElement(view, {
+return function(p1) --[[ Line: 21 | Named "UserListFooter" ]]
+	-- upvalues: UseLocalizationFunction (copy), FFlagUserListFooterViewMore (copy), ReactModule (copy), View (copy), Button (copy), InputSize (copy), Enums (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
+		showMore = if FFlagUserListFooterViewMore then "Feature.Friends.Action.ViewMore" else "Feature.Friends.Action.ShowMore"
+	})
+	
+	return ReactModule.createElement(View, {
 		tag = "size-full-0 auto-y padding-top-medium padding-bottom-medium",
 		LayoutOrder = p1.layoutOrder
 	}, {
-		ShowMoreButton = if p1.hasMore and p1.onLoadMore then reactModule.createElement(button, {
-			size = inputSize.Small,
+		ShowMoreButton = if p1.hasMore and p1.onLoadMore then ReactModule.createElement(Button, {
+			size = InputSize.Small,
 			onActivated = p1.onLoadMore,
-			text = useLocalization({
-				showMore = if fFlagUserListFooterViewMore then "Feature.Friends.Action.ViewMore" else "Feature.Friends.Action.ShowMore"
-			}).showMore,
-			fillBehavior = enums.FillBehavior.Fill
+			text = UseLocalizationResult.showMore,
+			fillBehavior = Enums.FillBehavior.Fill
 		}) else nil
 	})
 end

@@ -1,38 +1,38 @@
-﻿local parent = script.Parent.Parent
-local requestAvatarCreationFeePurchaseModule = require(parent.Actions.RequestAvatarCreationFeePurchase)
-local promiseModule = require(parent.Promise)
-local thunkModule = require(parent.Thunk)
-local networkModule = require(parent.Services.Network)
-local externalSettingsModule = require(parent.Services.ExternalSettings)
-local getBalanceInfoModule = require(parent.Network.getBalanceInfo)
-local getAccountInfoModule = require(parent.Network.getAccountInfo)
-local errorOccurredModule = require(parent.Actions.ErrorOccurred)
-local getUnifiedPurchaseFlowEligibilityModule = require(parent.Network.getUnifiedPurchaseFlowEligibility)
-local resolvePromptStateModule = require(script.Parent.resolvePromptState)
-local list = { networkModule, externalSettingsModule }
+﻿local Parent = script.Parent.Parent
+local RequestAvatarCreationFeePurchaseModule = require(Parent.Actions.RequestAvatarCreationFeePurchase)
+local PromiseModule = require(Parent.Promise)
+local ThunkModule = require(Parent.Thunk)
+local NetworkModule = require(Parent.Services.Network)
+local ExternalSettingsModule = require(Parent.Services.ExternalSettings)
+local GetBalanceInfoModule = require(Parent.Network.getBalanceInfo)
+local GetAccountInfoModule = require(Parent.Network.getAccountInfo)
+local ErrorOccurredModule = require(Parent.Actions.ErrorOccurred)
+local GetUnifiedPurchaseFlowEligibilityModule = require(Parent.Network.getUnifiedPurchaseFlowEligibility)
+local ResolvePromptStateModule = require(script.Parent.resolvePromptState)
+local list = { NetworkModule, ExternalSettingsModule }
 
-return function(p1, p2, p3, p4)
-	-- upvalues: thunkModule (ref), list (ref), networkModule (ref), externalSettingsModule (ref), requestAvatarCreationFeePurchaseModule (ref), promiseModule (ref), getAccountInfoModule (ref), getBalanceInfoModule (ref), getUnifiedPurchaseFlowEligibilityModule (ref), resolvePromptStateModule (ref), errorOccurredModule (ref)
-	return thunkModule.new(script.Name, list, function(p5, p6)
-		-- upvalues: networkModule (copy), externalSettingsModule (copy), requestAvatarCreationFeePurchaseModule (copy), p3 (ref), p2 (ref), promiseModule (copy), getAccountInfoModule (copy), getBalanceInfoModule (copy), getUnifiedPurchaseFlowEligibilityModule (copy), p4 (ref), p1 (ref), resolvePromptStateModule (copy), errorOccurredModule (copy)
-		local var1 = p6[networkModule]
-		local var2 = p6[externalSettingsModule]
-		p5:dispatch(requestAvatarCreationFeePurchaseModule(p3, p2))
+return function(p1, p2, p3, PriceInRobux) --[[ Line: 24 | Named "initiateAvatarCreationFeePurchase" ]]
+	-- upvalues: ThunkModule (copy), list (copy), NetworkModule (copy), ExternalSettingsModule (copy), RequestAvatarCreationFeePurchaseModule (copy), PromiseModule (copy), GetAccountInfoModule (copy), GetBalanceInfoModule (copy), GetUnifiedPurchaseFlowEligibilityModule (copy), ResolvePromptStateModule (copy), ErrorOccurredModule (copy)
+	return ThunkModule.new(script.Name, list, function(p4, p5) --[[ Line: 25 ]]
+		-- upvalues: NetworkModule (upval), ExternalSettingsModule (upval), RequestAvatarCreationFeePurchaseModule (upval), p3 (copy), p2 (copy), PromiseModule (upval), GetAccountInfoModule (upval), GetBalanceInfoModule (upval), GetUnifiedPurchaseFlowEligibilityModule (upval), PriceInRobux (copy), p1 (copy), ResolvePromptStateModule (upval), ErrorOccurredModule (upval)
+		local v1 = p5[NetworkModule]
+		local v2 = p5[ExternalSettingsModule]
+		p4:dispatch(RequestAvatarCreationFeePurchaseModule(p3, p2))
 		
-		return promiseModule.all({
-			accountInfo = getAccountInfoModule(var1, var2),
-			balanceInfo = getBalanceInfoModule(var1, var2, true),
-			isUserEligibleForUnifiedPurchaseFlow = getUnifiedPurchaseFlowEligibilityModule(var1)
-		}):andThen(function(p7)
-			-- upvalues: p4 (copy), p1 (copy), p5 (ref), resolvePromptStateModule (copy)
-			p5:dispatch(resolvePromptStateModule({
-				PriceInRobux = p4,
+		return PromiseModule.all({
+			accountInfo = GetAccountInfoModule(v1, v2),
+			balanceInfo = GetBalanceInfoModule(v1, v2, true),
+			isUserEligibleForUnifiedPurchaseFlow = GetUnifiedPurchaseFlowEligibilityModule(v1)
+		}):andThen(function(Result) --[[ Line: 36 ]]
+			-- upvalues: PriceInRobux (upval), p1 (upval), p4 (copy), ResolvePromptStateModule (upval)
+			p4:dispatch(ResolvePromptStateModule({
+				PriceInRobux = PriceInRobux,
 				Name = p1.name,
 				Description = p1.description
-			}, p7.accountInfo, p7.balanceInfo, false, true, p4, p7.isUserEligibleForUnifiedPurchaseFlow))
-		end):catch(function(p7)
-			-- upvalues: p5 (ref), errorOccurredModule (copy)
-			p5:dispatch(errorOccurredModule(p7))
+			}, Result.accountInfo, Result.balanceInfo, false, true, PriceInRobux, Result.isUserEligibleForUnifiedPurchaseFlow))
+		end):catch(function(Err) --[[ Line: 54 ]]
+			-- upvalues: p4 (copy), ErrorOccurredModule (upval)
+			p4:dispatch(ErrorOccurredModule(Err))
 		end)
 	end)
 end

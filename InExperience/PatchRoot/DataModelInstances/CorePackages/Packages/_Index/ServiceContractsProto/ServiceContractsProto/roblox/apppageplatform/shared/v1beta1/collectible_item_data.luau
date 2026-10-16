@@ -1,130 +1,102 @@
-﻿local protoModule = require(script.Parent.Parent.Parent.Parent.Parent.proto)
-local typeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.proto.typeRegistry)
-local t = {}
-local t_1 = {}
-t_1.__index = t_1
+﻿local ProtoModule = require(script.Parent.Parent.Parent.Parent.Parent.proto)
+local TypeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.proto.typeRegistry)
+local Module = {}
+Module.__index = Module
 
-function t_1.new(p1)
-	-- upvalues: t_1 (ref)
-	return setmetatable({
+function Module.new(p1) --[[ Line: 138 ]]
+	-- upvalues: Module (copy)
+	return (setmetatable({
 		id = if p1 == nil or p1.id == nil then nil else p1.id,
 		name = if p1 == nil or p1.name == nil then nil else p1.name,
 		type = if p1 == nil or p1.type == nil then nil else p1.type,
 		target_id = if p1 == nil or p1.target_id == nil then nil else p1.target_id,
 		has_verified_badge = if p1 == nil or p1.has_verified_badge == nil then nil else p1.has_verified_badge
-	}, t_1)
+	}, Module))
 end
 
-function t_1:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var1 = 0
+function Module:encode() --[[ Line: 148 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.id ~= nil then
-		local var2, var3 = protoModule.writeTag(buff, var1, 1, protoModule.wireTypes.lengthDelimited)
-		var2, var9 = protoModule.writeString(var2, var3, self.id)
-		buff = var2
-		var1 = var3
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult, WriteTagResult2, self.id)
 	end
 	if self.name ~= nil then
-		local var4, var5 = protoModule.writeTag(buff, var1, 2, protoModule.wireTypes.lengthDelimited)
-		var4, var11 = protoModule.writeString(var4, var5, self.name)
-		buff = var4
-		var1 = var5
+		local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult1, WriteTagResult2_1, self.name)
 	end
 	if self.type ~= nil then
-		local var6, var7 = protoModule.writeTag(buff, var1, 3, protoModule.wireTypes.lengthDelimited)
-		var6, var13 = protoModule.writeString(var6, var7, self.type)
-		buff = var6
-		var1 = var7
+		local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult3, WriteTagResult2_2, self.type)
 	end
 	if self.target_id ~= nil then
-		local var8, var9 = protoModule.writeTag(buff, var1, 4, protoModule.wireTypes.lengthDelimited)
-		var8, var15 = protoModule.writeString(var8, var9, self.target_id)
-		buff = var8
-		var1 = var9
+		local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult4, WriteTagResult2_3, self.target_id)
 	end
 	if self.has_verified_badge ~= nil then
-		local var10, var11 = protoModule.writeTag(buff, var1, 5, protoModule.wireTypes.varint)
-		var10, var17 = protoModule.writeVarInt(var10, var11, if self.has_verified_badge then 1 else 0)
-		buff = var10
-		var1 = var11
+		local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 5, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult5, WriteTagResult2_4, if self.has_verified_badge then 1 else 0)
 	end
-	local buff_1 = buffer.create(var1)
-	buffer.copy(buff_1, 0, buff, 0, var1)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_1.decode(p1)
-	-- upvalues: t_1 (ref), protoModule (ref)
-	local var1 = t_1.new()
-	local var2 = 0
-	while var2 < buffer.len(p1) do
-		local _ = nil
-		local var3 = nil
-		local var4, var5, var6 = protoModule.readTag(p1, var2)
-		local var7 = var4
-		var3 = var5
-		var2 = var6
+function Module.decode(Buf) --[[ Line: 182 ]]
+	-- upvalues: Module (copy), ProtoModule (copy)
+	local NewModule = Module.new()
+	local v1 = 0
+	while v1 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v19 = ProtoModule.readTag(Buf, v1)
 		
-		if var3 == protoModule.wireTypes.varint then
-			if var7 == 5 then
-				local _ = nil
-				local var8, var9 = protoModule.readVarInt(p1, var2)
-				var2 = var9
-				var1.has_verified_badge = var8 ~= 0
+		if Tag2 == ProtoModule.wireTypes.varint then
+			if Tag == 5 then
+				local VarInt
+				VarInt, v19 = ProtoModule.readVarInt(Buf, v1)
+				NewModule.has_verified_badge = VarInt ~= 0
 			else
-				local _ = nil
-				local var10, var11 = protoModule.readVarInt(p1, var2)
-				local _ = var10
-				var2 = var11
+				local _
+				_, v19 = ProtoModule.readVarInt(Buf, v1)
 			end
-		end
-		if var3 == protoModule.wireTypes.lengthDelimited then
-			if var7 == 1 then
-				local _ = nil
-				local var12, var13 = protoModule.readBuffer(p1, var2)
-				var2 = var13
-				var1.id = buffer.tostring(var12)
-			elseif var7 == 2 then
-				local _ = nil
-				local var14, var15 = protoModule.readBuffer(p1, var2)
-				var2 = var15
-				var1.name = buffer.tostring(var14)
-			elseif var7 == 3 then
-				local _ = nil
-				local var16, var17 = protoModule.readBuffer(p1, var2)
-				var2 = var17
-				var1.type = buffer.tostring(var16)
-			elseif var7 == 4 then
-				local _ = nil
-				local var18, var19 = protoModule.readBuffer(p1, var2)
-				var2 = var19
-				var1.target_id = buffer.tostring(var18)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v19 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.id = buffer.tostring(Buffer1)
+			elseif Tag == 2 then
+				local Buffer2
+				Buffer2, v19 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.name = buffer.tostring(Buffer2)
+			elseif Tag == 3 then
+				local Buffer3
+				Buffer3, v19 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.type = buffer.tostring(Buffer3)
+			elseif Tag == 4 then
+				local Buffer4
+				Buffer4, v19 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.target_id = buffer.tostring(Buffer4)
 			else
-				local _ = nil
-				local var20, var21 = protoModule.readVarInt(p1, var2)
-				var2 = var21 + var20
+				local VarInt1, VarInt2 = ProtoModule.readVarInt(Buf, v1)
+				v1 = VarInt2 + VarInt1
 			end
-		elseif var3 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var22, var23 = protoModule.readFixed32(p1, var2)
-			local _ = var22
-			var2 = var23
-		elseif var3 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var24, var25 = protoModule.readFixed64(p1, var2)
-			local _ = var24
-			var2 = var25
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v19 = ProtoModule.readFixed32(Buf, v1)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v19 = ProtoModule.readFixed64(Buf, v1)
 		else
-			error("Unsupported wire type: " .. var21)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var1
+	return NewModule
 end
 
-function t_1:jsonEncode()
+function Module:jsonEncode() --[[ Line: 245 ]]
 	local t = {}
 	
 	if self.id ~= nil then
@@ -145,139 +117,117 @@ function t_1:jsonEncode()
 	return t
 end
 
-function t_1:jsonDecode()
-	-- upvalues: t_1 (ref)
-	local var26 = t_1.new()
+function Module:jsonDecode() --[[ Line: 271 ]]
+	-- upvalues: Module (copy)
+	local NewModule = Module.new()
 	
 	if self.id ~= nil then
-		var26.id = self.id
+		NewModule.id = self.id
 	end
 	if self.name ~= nil then
-		var26.name = self.name
+		NewModule.name = self.name
 	end
 	if self.type ~= nil then
-		var26.type = self.type
+		NewModule.type = self.type
 	end
 	if self.target_id ~= nil then
-		var26.target_id = self.target_id
+		NewModule.target_id = self.target_id
 	end
 	if self.targetId ~= nil then
-		var26.target_id = self.targetId
+		NewModule.target_id = self.targetId
 	end
 	if self.has_verified_badge ~= nil then
-		var26.has_verified_badge = self.has_verified_badge
+		NewModule.has_verified_badge = self.has_verified_badge
 	end
 	if self.hasVerifiedBadge ~= nil then
-		var26.has_verified_badge = self.hasVerifiedBadge
+		NewModule.has_verified_badge = self.hasVerifiedBadge
 	end
-	return var26
+	return NewModule
 end
 
-t_1.descriptor = {
+Module.descriptor = {
 	name = "CollectibleItemCreator",
 	fullName = "roblox.apppageplatform.shared.v1beta1.CollectibleItemCreator"
 }
-t.CollectibleItemCreator = t_1
-typeRegistryModule.default:register(t.CollectibleItemCreator)
-local t_2 = {}
-t_2.__index = t_2
+local config = { CollectibleItemCreator = Module }
+TypeRegistryModule.default:register(config.CollectibleItemCreator)
+local Module1 = {}
+Module1.__index = Module1
 
-function t_2.new(p2)
-	-- upvalues: t_2 (ref)
-	return setmetatable({
-		id = if p2 == nil or p2.id == nil then "" else p2.id,
-		name = if p2 == nil or p2.name == nil then nil else p2.name,
-		detail_page_link = if p2 == nil or p2.detail_page_link == nil then nil else p2.detail_page_link
-	}, t_2)
+function Module1.new(p1) --[[ Line: 319 ]]
+	-- upvalues: Module1 (copy)
+	return (setmetatable({
+		id = if p1 == nil or p1.id == nil then "" else p1.id,
+		name = if p1 == nil or p1.name == nil then nil else p1.name,
+		detail_page_link = if p1 == nil or p1.detail_page_link == nil then nil else p1.detail_page_link
+	}, Module1))
 end
 
-function t_2:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var26 = 0
+function Module1:encode() --[[ Line: 329 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.id ~= nil and self.id ~= "" then
-		local var27, var28 = protoModule.writeTag(buff, var26, 1, protoModule.wireTypes.lengthDelimited)
-		var27, var49 = protoModule.writeString(var27, var28, self.id)
-		buff = var27
-		var26 = var28
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult, WriteTagResult2, self.id)
 	end
 	if self.name ~= nil then
-		local var29, var30 = protoModule.writeTag(buff, var26, 2, protoModule.wireTypes.lengthDelimited)
-		var29, var51 = protoModule.writeString(var29, var30, self.name)
-		buff = var29
-		var26 = var30
+		local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult1, WriteTagResult2_1, self.name)
 	end
 	if self.detail_page_link ~= nil then
-		local var31, var32 = protoModule.writeTag(buff, var26, 3, protoModule.wireTypes.lengthDelimited)
-		var31, var53 = protoModule.writeString(var31, var32, self.detail_page_link)
-		buff = var31
-		var26 = var32
+		local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult3, WriteTagResult2_2, self.detail_page_link)
 	end
-	local buff_1 = buffer.create(var26)
-	buffer.copy(buff_1, 0, buff, 0, var26)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_2.decode(p2)
-	-- upvalues: t_2 (ref), protoModule (ref)
-	local var26 = t_2.new()
-	local var27 = 0
-	while var27 < buffer.len(p2) do
-		local _ = nil
-		local var28 = nil
-		local var29, var30, var31 = protoModule.readTag(p2, var27)
-		local var32 = var29
-		var28 = var30
-		var27 = var31
+function Module1.decode(Buf) --[[ Line: 353 ]]
+	-- upvalues: Module1 (copy), ProtoModule (copy)
+	local NewModule = Module1.new()
+	local v2 = 0
+	while v2 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v43 = ProtoModule.readTag(Buf, v2)
 		
-		if var28 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var33, var34 = protoModule.readVarInt(p2, var27)
-			local _ = var33
-			var27 = var34
-			continue
-		end
-		if var28 == protoModule.wireTypes.lengthDelimited then
-			if var32 == 1 then
-				local _ = nil
-				local var35, var36 = protoModule.readBuffer(p2, var27)
-				var27 = var36
-				var26.id = buffer.tostring(var35)
-			elseif var32 == 2 then
-				local _ = nil
-				local var37, var38 = protoModule.readBuffer(p2, var27)
-				var27 = var38
-				var26.name = buffer.tostring(var37)
-			elseif var32 == 3 then
-				local _ = nil
-				local var39, var40 = protoModule.readBuffer(p2, var27)
-				var27 = var40
-				var26.detail_page_link = buffer.tostring(var39)
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v43 = ProtoModule.readVarInt(Buf, v2)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v43 = ProtoModule.readBuffer(Buf, v2)
+				NewModule.id = buffer.tostring(Buffer1)
+			elseif Tag == 2 then
+				local Buffer2
+				Buffer2, v43 = ProtoModule.readBuffer(Buf, v2)
+				NewModule.name = buffer.tostring(Buffer2)
+			elseif Tag == 3 then
+				local Buffer3
+				Buffer3, v43 = ProtoModule.readBuffer(Buf, v2)
+				NewModule.detail_page_link = buffer.tostring(Buffer3)
 			else
-				local _ = nil
-				local var41, var42 = protoModule.readVarInt(p2, var27)
-				var27 = var42 + var41
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v2)
+				v2 = VarInt2 + VarInt
 			end
-		elseif var28 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var43, var44 = protoModule.readFixed32(p2, var27)
-			local _ = var43
-			var27 = var44
-		elseif var28 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var45, var46 = protoModule.readFixed64(p2, var27)
-			local _ = var45
-			var27 = var46
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v43 = ProtoModule.readFixed32(Buf, v2)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v43 = ProtoModule.readFixed64(Buf, v2)
 		else
-			error("Unsupported wire type: " .. var57)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var26
+	return NewModule
 end
 
-function t_2:jsonEncode()
+function Module1:jsonEncode() --[[ Line: 406 ]]
 	local t = {}
 	
 	if self.id ~= nil and self.id ~= "" then
@@ -292,317 +242,239 @@ function t_2:jsonEncode()
 	return t
 end
 
-function t_2:jsonDecode()
-	-- upvalues: t_2 (ref)
-	local var47 = t_2.new()
+function Module1:jsonDecode() --[[ Line: 424 ]]
+	-- upvalues: Module1 (copy)
+	local NewModule = Module1.new()
 	
 	if self.id ~= nil then
-		var47.id = self.id
+		NewModule.id = self.id
 	end
 	if self.name ~= nil then
-		var47.name = self.name
+		NewModule.name = self.name
 	end
 	if self.detail_page_link ~= nil then
-		var47.detail_page_link = self.detail_page_link
+		NewModule.detail_page_link = self.detail_page_link
 	end
 	if self.detailPageLink ~= nil then
-		var47.detail_page_link = self.detailPageLink
+		NewModule.detail_page_link = self.detailPageLink
 	end
-	return var47
+	return NewModule
 end
 
-t_2.descriptor = {
+Module1.descriptor = {
 	name = "CollectibleItemExperience",
 	fullName = "roblox.apppageplatform.shared.v1beta1.CollectibleItemExperience"
 }
-t.CollectibleItemExperience = t_2
-typeRegistryModule.default:register(t.CollectibleItemExperience)
-local t_3 = {}
-t_3.__index = t_3
+config.CollectibleItemExperience = Module1
+TypeRegistryModule.default:register(config.CollectibleItemExperience)
+local Module2 = {}
+Module2.__index = Module2
 
-function t_3.new(p3)
-	-- upvalues: t_3 (ref)
-	return setmetatable({
-		id = if p3 == nil or p3.id == nil then "" else p3.id,
-		collectible_product_id = if p3 == nil or p3.collectible_product_id == nil then nil else p3.collectible_product_id,
-		name = if p3 == nil or p3.name == nil then nil else p3.name,
-		description = if p3 == nil or p3.description == nil then nil else p3.description,
-		creator = if p3 == nil or p3.creator == nil then nil else p3.creator,
-		price = if p3 == nil or p3.price == nil then nil else p3.price,
-		lowest_price = if p3 == nil or p3.lowest_price == nil then nil else p3.lowest_price,
-		units_available_for_consumption = if p3 == nil or p3.units_available_for_consumption == nil then nil else p3.units_available_for_consumption,
-		offsale_deadline = if p3 == nil or p3.offsale_deadline == nil then nil else p3.offsale_deadline,
-		asset_stock = if p3 == nil or p3.asset_stock == nil then nil else p3.asset_stock,
-		has_resellers = if p3 == nil or p3.has_resellers == nil then nil else p3.has_resellers,
-		universe_ids = if p3 == nil or p3.universe_ids == nil then {} else p3.universe_ids,
-		sale_location_type = if p3 == nil or p3.sale_location_type == nil then nil else p3.sale_location_type,
-		quantity_limit_per_user = if p3 == nil or p3.quantity_limit_per_user == nil then nil else p3.quantity_limit_per_user,
-		resale_restriction = if p3 == nil or p3.resale_restriction == nil then nil else p3.resale_restriction,
-		lowest_available_resale_product_id = if p3 == nil or p3.lowest_available_resale_product_id == nil then nil else p3.lowest_available_resale_product_id,
-		lowest_available_resale_item_instance_id = if p3 == nil or p3.lowest_available_resale_item_instance_id == nil then nil else p3.lowest_available_resale_item_instance_id,
-		experiences = if p3 == nil or p3.experiences == nil then {} else p3.experiences
-	}, t_3)
+function Module2.new(p1) --[[ Line: 460 ]]
+	-- upvalues: Module2 (copy)
+	return (setmetatable({
+		id = if p1 == nil or p1.id == nil then "" else p1.id,
+		collectible_product_id = if p1 == nil or p1.collectible_product_id == nil then nil else p1.collectible_product_id,
+		name = if p1 == nil or p1.name == nil then nil else p1.name,
+		description = if p1 == nil or p1.description == nil then nil else p1.description,
+		creator = if p1 == nil or p1.creator == nil then nil else p1.creator,
+		price = if p1 == nil or p1.price == nil then nil else p1.price,
+		lowest_price = if p1 == nil or p1.lowest_price == nil then nil else p1.lowest_price,
+		units_available_for_consumption = if p1 == nil or p1.units_available_for_consumption == nil then nil else p1.units_available_for_consumption,
+		offsale_deadline = if p1 == nil or p1.offsale_deadline == nil then nil else p1.offsale_deadline,
+		asset_stock = if p1 == nil or p1.asset_stock == nil then nil else p1.asset_stock,
+		has_resellers = if p1 == nil or p1.has_resellers == nil then nil else p1.has_resellers,
+		universe_ids = if p1 == nil or p1.universe_ids == nil then {} else p1.universe_ids,
+		sale_location_type = if p1 == nil or p1.sale_location_type == nil then nil else p1.sale_location_type,
+		quantity_limit_per_user = if p1 == nil or p1.quantity_limit_per_user == nil then nil else p1.quantity_limit_per_user,
+		resale_restriction = if p1 == nil or p1.resale_restriction == nil then nil else p1.resale_restriction,
+		lowest_available_resale_product_id = if p1 == nil or p1.lowest_available_resale_product_id == nil then nil else p1.lowest_available_resale_product_id,
+		lowest_available_resale_item_instance_id = if p1 == nil or p1.lowest_available_resale_item_instance_id == nil then nil else p1.lowest_available_resale_item_instance_id,
+		experiences = if p1 == nil or p1.experiences == nil then {} else p1.experiences
+	}, Module2))
 end
 
-function t_3:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var47 = 0
+function Module2:encode() --[[ Line: 495 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.id ~= nil and self.id ~= "" then
-		local var48, var49 = protoModule.writeTag(buff, var47, 1, protoModule.wireTypes.lengthDelimited)
-		var48, var81 = protoModule.writeString(var48, var49, self.id)
-		buff = var48
-		var47 = var49
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult, WriteTagResult2, self.id)
 	end
 	if self.collectible_product_id ~= nil then
-		local var50, var51 = protoModule.writeTag(buff, var47, 2, protoModule.wireTypes.lengthDelimited)
-		var50, var83 = protoModule.writeString(var50, var51, self.collectible_product_id)
-		buff = var50
-		var47 = var51
+		local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult1, WriteTagResult2_1, self.collectible_product_id)
 	end
 	if self.name ~= nil then
-		local var52, var53 = protoModule.writeTag(buff, var47, 3, protoModule.wireTypes.lengthDelimited)
-		var52, var85 = protoModule.writeString(var52, var53, self.name)
-		buff = var52
-		var47 = var53
+		local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult3, WriteTagResult2_2, self.name)
 	end
 	if self.description ~= nil then
-		local var54, var55 = protoModule.writeTag(buff, var47, 4, protoModule.wireTypes.lengthDelimited)
-		var54, var87 = protoModule.writeString(var54, var55, self.description)
-		buff = var54
-		var47 = var55
+		local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult4, WriteTagResult2_3, self.description)
 	end
 	if self.creator ~= nil then
-		local var56 = self.creator:encode()
-		local var57, var58 = protoModule.writeTag(buff, var47, 5, protoModule.wireTypes.lengthDelimited)
-		var57, var90 = protoModule.writeBuffer(var57, var58, var56, buffer.len(var56))
-		buff = var57
-		var47 = var58
+		local EncodeResult = self.creator:encode()
+		local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 5, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult5, WriteTagResult2_4, EncodeResult, buffer.len(EncodeResult))
 	end
 	if self.price ~= nil then
-		local var59, var60 = protoModule.writeTag(buff, var47, 6, protoModule.wireTypes.varint)
-		var59, var92 = protoModule.writeVarInt(var59, var60, self.price)
-		buff = var59
-		var47 = var60
+		local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult6, WriteTagResult2_5, self.price)
 	end
 	if self.lowest_price ~= nil then
-		local var61, var62 = protoModule.writeTag(buff, var47, 7, protoModule.wireTypes.varint)
-		var61, var94 = protoModule.writeVarInt(var61, var62, self.lowest_price)
-		buff = var61
-		var47 = var62
+		local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult7, WriteTagResult2_6, self.lowest_price)
 	end
 	if self.units_available_for_consumption ~= nil then
-		local var63, var64 = protoModule.writeTag(buff, var47, 8, protoModule.wireTypes.varint)
-		var63, var96 = protoModule.writeVarInt(var63, var64, self.units_available_for_consumption)
-		buff = var63
-		var47 = var64
+		local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult8, WriteTagResult2_7, self.units_available_for_consumption)
 	end
 	if self.offsale_deadline ~= nil then
-		local var65, var66 = protoModule.writeTag(buff, var47, 9, protoModule.wireTypes.lengthDelimited)
-		var65, var98 = protoModule.writeString(var65, var66, self.offsale_deadline)
-		buff = var65
-		var47 = var66
+		local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult9, WriteTagResult2_8, self.offsale_deadline)
 	end
 	if self.asset_stock ~= nil then
-		local var67, var68 = protoModule.writeTag(buff, var47, 10, protoModule.wireTypes.varint)
-		var67, var100 = protoModule.writeVarInt(var67, var68, self.asset_stock)
-		buff = var67
-		var47 = var68
+		local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult10, WriteTagResult2_9, self.asset_stock)
 	end
 	if self.has_resellers ~= nil then
-		local var69, var70 = protoModule.writeTag(buff, var47, 11, protoModule.wireTypes.varint)
-		var69, var102 = protoModule.writeVarInt(var69, var70, if self.has_resellers then 1 else 0)
-		buff = var69
-		var47 = var70
+		local WriteTagResult11, WriteTagResult2_10 = ProtoModule.writeTag(Buf, Count, 11, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult11, WriteTagResult2_10, if self.has_resellers then 1 else 0)
 	end
 	if self.universe_ids ~= nil and #self.universe_ids > 0 then
-		for i, v in self.universe_ids do
-			local var71, var72 = protoModule.writeTag(buff, var47, 12, protoModule.wireTypes.lengthDelimited)
-			var71, var104 = protoModule.writeString(var71, var72, v)
-			buff = var71
-			var47 = var72
+		for _, universeId in self.universe_ids do
+			local WriteTagResult12, WriteTagResult2_11 = ProtoModule.writeTag(Buf, Count, 12, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult12, WriteTagResult2_11, universeId)
 		end
 	end
 	if self.sale_location_type ~= nil then
-		local var73, var74 = protoModule.writeTag(buff, var47, 13, protoModule.wireTypes.lengthDelimited)
-		var73, var106 = protoModule.writeString(var73, var74, self.sale_location_type)
-		buff = var73
-		var47 = var74
+		local WriteTagResult13, WriteTagResult2_12 = ProtoModule.writeTag(Buf, Count, 13, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult13, WriteTagResult2_12, self.sale_location_type)
 	end
 	if self.quantity_limit_per_user ~= nil then
-		local var75, var76 = protoModule.writeTag(buff, var47, 14, protoModule.wireTypes.varint)
-		var75, var108 = protoModule.writeVarInt(var75, var76, self.quantity_limit_per_user)
-		buff = var75
-		var47 = var76
+		local WriteTagResult14, WriteTagResult2_13 = ProtoModule.writeTag(Buf, Count, 14, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult14, WriteTagResult2_13, self.quantity_limit_per_user)
 	end
 	if self.resale_restriction ~= nil then
-		local var77, var78 = protoModule.writeTag(buff, var47, 15, protoModule.wireTypes.varint)
-		var77, var110 = protoModule.writeVarInt(var77, var78, self.resale_restriction)
-		buff = var77
-		var47 = var78
+		local WriteTagResult15, WriteTagResult2_14 = ProtoModule.writeTag(Buf, Count, 15, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult15, WriteTagResult2_14, self.resale_restriction)
 	end
 	if self.lowest_available_resale_product_id ~= nil then
-		local var79, var80 = protoModule.writeTag(buff, var47, 16, protoModule.wireTypes.lengthDelimited)
-		var79, var112 = protoModule.writeString(var79, var80, self.lowest_available_resale_product_id)
-		buff = var79
-		var47 = var80
+		local WriteTagResult16, WriteTagResult2_15 = ProtoModule.writeTag(Buf, Count, 16, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult16, WriteTagResult2_15, self.lowest_available_resale_product_id)
 	end
 	if self.lowest_available_resale_item_instance_id ~= nil then
-		local var81, var82 = protoModule.writeTag(buff, var47, 17, protoModule.wireTypes.lengthDelimited)
-		var81, var114 = protoModule.writeString(var81, var82, self.lowest_available_resale_item_instance_id)
-		buff = var81
-		var47 = var82
+		local WriteTagResult17, WriteTagResult2_16 = ProtoModule.writeTag(Buf, Count, 17, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult17, WriteTagResult2_16, self.lowest_available_resale_item_instance_id)
 	end
 	if self.experiences ~= nil and #self.experiences > 0 then
-		for i, v in self.experiences do
-			local var83 = v:encode()
-			local var84, var85 = protoModule.writeTag(buff, var47, 18, protoModule.wireTypes.lengthDelimited)
-			var84, var117 = protoModule.writeBuffer(var84, var85, var83, buffer.len(var83))
-			buff = var84
-			var47 = var85
+		for _, experience in self.experiences do
+			local EncodeResult = experience:encode()
+			local WriteTagResult18, WriteTagResult2_17 = ProtoModule.writeTag(Buf, Count, 18, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult18, WriteTagResult2_17, EncodeResult, buffer.len(EncodeResult))
 		end
 	end
-	local buff_1 = buffer.create(var47)
-	buffer.copy(buff_1, 0, buff, 0, var47)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_3.decode(p3)
-	-- upvalues: t_3 (ref), protoModule (ref), t (ref)
-	local var86 = t_3.new()
-	local var87 = 0
-	while var87 < buffer.len(p3) do
-		local _ = nil
-		local var88 = nil
-		local var89, var90, var91 = protoModule.readTag(p3, var87)
-		local var92 = var89
-		var88 = var90
-		var87 = var91
+function Module2.decode(Buf) --[[ Line: 600 ]]
+	-- upvalues: Module2 (copy), ProtoModule (copy), config (copy)
+	local NewModule = Module2.new()
+	local v3 = 0
+	while v3 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v97 = ProtoModule.readTag(Buf, v3)
 		
-		if var88 == protoModule.wireTypes.varint then
-			if var92 == 6 then
-				local _ = nil
-				local var93, var94 = protoModule.readVarIntI64(p3, var87)
-				var87 = var94
-				var86.price = var93
-			elseif var92 == 7 then
-				local _ = nil
-				local var95, var96 = protoModule.readVarIntI64(p3, var87)
-				var87 = var96
-				var86.lowest_price = var95
-			elseif var92 == 8 then
-				local _ = nil
-				local var97, var98 = protoModule.readVarIntI64(p3, var87)
-				var87 = var98
-				var86.units_available_for_consumption = var97
-			elseif var92 == 10 then
-				local _ = nil
-				local var99, var100 = protoModule.readVarIntI64(p3, var87)
-				var87 = var100
-				var86.asset_stock = var99
-			elseif var92 == 11 then
-				local _ = nil
-				local var101, var102 = protoModule.readVarInt(p3, var87)
-				var87 = var102
-				var86.has_resellers = var101 ~= 0
-			elseif var92 == 14 then
-				local _ = nil
-				local var103, var104 = protoModule.readVarIntI32(p3, var87)
-				var87 = var104
-				var86.quantity_limit_per_user = var103
-			elseif var92 == 15 then
-				local _ = nil
-				local var105, var106 = protoModule.readVarIntI32(p3, var87)
-				var87 = var106
-				var86.resale_restriction = var105
+		if Tag2 == ProtoModule.wireTypes.varint then
+			if Tag == 6 then
+				NewModule.price, v97 = ProtoModule.readVarIntI64(Buf, v3)
+			elseif Tag == 7 then
+				NewModule.lowest_price, v97 = ProtoModule.readVarIntI64(Buf, v3)
+			elseif Tag == 8 then
+				NewModule.units_available_for_consumption, v97 = ProtoModule.readVarIntI64(Buf, v3)
+			elseif Tag == 10 then
+				NewModule.asset_stock, v97 = ProtoModule.readVarIntI64(Buf, v3)
+			elseif Tag == 11 then
+				local VarInt
+				VarInt, v97 = ProtoModule.readVarInt(Buf, v3)
+				NewModule.has_resellers = VarInt ~= 0
+			elseif Tag == 14 then
+				NewModule.quantity_limit_per_user, v97 = ProtoModule.readVarIntI32(Buf, v3)
+			elseif Tag == 15 then
+				NewModule.resale_restriction, v97 = ProtoModule.readVarIntI32(Buf, v3)
 			else
-				local _ = nil
-				local var107, var108 = protoModule.readVarInt(p3, var87)
-				local _ = var107
-				var87 = var108
+				local _
+				_, v97 = ProtoModule.readVarInt(Buf, v3)
 			end
-		end
-		if var88 == protoModule.wireTypes.lengthDelimited then
-			if var92 == 1 then
-				local _ = nil
-				local var109, var110 = protoModule.readBuffer(p3, var87)
-				var87 = var110
-				var86.id = buffer.tostring(var109)
-			elseif var92 == 2 then
-				local _ = nil
-				local var111, var112 = protoModule.readBuffer(p3, var87)
-				var87 = var112
-				var86.collectible_product_id = buffer.tostring(var111)
-			elseif var92 == 3 then
-				local _ = nil
-				local var113, var114 = protoModule.readBuffer(p3, var87)
-				var87 = var114
-				var86.name = buffer.tostring(var113)
-			elseif var92 == 4 then
-				local _ = nil
-				local var115, var116 = protoModule.readBuffer(p3, var87)
-				var87 = var116
-				var86.description = buffer.tostring(var115)
-			elseif var92 == 5 then
-				local _ = nil
-				local var117, var118 = protoModule.readBuffer(p3, var87)
-				var87 = var118
-				var86.creator = t.CollectibleItemCreator.decode(var117)
-			elseif var92 == 9 then
-				local _ = nil
-				local var119, var120 = protoModule.readBuffer(p3, var87)
-				var87 = var120
-				var86.offsale_deadline = buffer.tostring(var119)
-			elseif var92 == 12 then
-				local _ = nil
-				local var121, var122 = protoModule.readBuffer(p3, var87)
-				var87 = var122
-				table.insert(var86.universe_ids, buffer.tostring(var121))
-			elseif var92 == 13 then
-				local _ = nil
-				local var123, var124 = protoModule.readBuffer(p3, var87)
-				var87 = var124
-				var86.sale_location_type = buffer.tostring(var123)
-			elseif var92 == 16 then
-				local _ = nil
-				local var125, var126 = protoModule.readBuffer(p3, var87)
-				var87 = var126
-				var86.lowest_available_resale_product_id = buffer.tostring(var125)
-			elseif var92 == 17 then
-				local _ = nil
-				local var127, var128 = protoModule.readBuffer(p3, var87)
-				var87 = var128
-				var86.lowest_available_resale_item_instance_id = buffer.tostring(var127)
-			elseif var92 == 18 then
-				local _ = nil
-				local var129, var130 = protoModule.readBuffer(p3, var87)
-				var87 = var130
-				table.insert(var86.experiences, t.CollectibleItemExperience.decode(var129))
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v97 = ProtoModule.readBuffer(Buf, v3)
+				NewModule.id = buffer.tostring(Buffer1)
+			elseif Tag == 2 then
+				local Buffer2
+				Buffer2, v97 = ProtoModule.readBuffer(Buf, v3)
+				NewModule.collectible_product_id = buffer.tostring(Buffer2)
+			elseif Tag == 3 then
+				local Buffer3
+				Buffer3, v97 = ProtoModule.readBuffer(Buf, v3)
+				NewModule.name = buffer.tostring(Buffer3)
+			elseif Tag == 4 then
+				local Buffer4
+				Buffer4, v97 = ProtoModule.readBuffer(Buf, v3)
+				NewModule.description = buffer.tostring(Buffer4)
+			elseif Tag == 5 then
+				local Buffer5
+				Buffer5, v97 = ProtoModule.readBuffer(Buf, v3)
+				NewModule.creator = config.CollectibleItemCreator.decode(Buffer5)
+			elseif Tag == 9 then
+				local Buffer6
+				Buffer6, v97 = ProtoModule.readBuffer(Buf, v3)
+				NewModule.offsale_deadline = buffer.tostring(Buffer6)
+			elseif Tag == 12 then
+				local Buffer7
+				Buffer7, v97 = ProtoModule.readBuffer(Buf, v3)
+				table.insert(NewModule.universe_ids, buffer.tostring(Buffer7))
+			elseif Tag == 13 then
+				local Buffer8
+				Buffer8, v97 = ProtoModule.readBuffer(Buf, v3)
+				NewModule.sale_location_type = buffer.tostring(Buffer8)
+			elseif Tag == 16 then
+				local Buffer9
+				Buffer9, v97 = ProtoModule.readBuffer(Buf, v3)
+				NewModule.lowest_available_resale_product_id = buffer.tostring(Buffer9)
+			elseif Tag == 17 then
+				local Buffer10
+				Buffer10, v97 = ProtoModule.readBuffer(Buf, v3)
+				NewModule.lowest_available_resale_item_instance_id = buffer.tostring(Buffer10)
+			elseif Tag == 18 then
+				local Buffer11
+				Buffer11, v97 = ProtoModule.readBuffer(Buf, v3)
+				table.insert(NewModule.experiences, config.CollectibleItemExperience.decode(Buffer11))
 			else
-				local _ = nil
-				local var131, var132 = protoModule.readVarInt(p3, var87)
-				var87 = var132 + var131
+				local VarInt1, VarInt2 = ProtoModule.readVarInt(Buf, v3)
+				v3 = VarInt2 + VarInt1
 			end
-		elseif var88 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var133, var134 = protoModule.readFixed32(p3, var87)
-			local _ = var133
-			var87 = var134
-		elseif var88 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var135, var136 = protoModule.readFixed64(p3, var87)
-			local _ = var135
-			var87 = var136
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v97 = ProtoModule.readFixed32(Buf, v3)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v97 = ProtoModule.readFixed64(Buf, v3)
 		else
-			error("Unsupported wire type: " .. var121)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var86
+	return NewModule
 end
 
-function t_3:jsonEncode()
+function Module2:jsonEncode() --[[ Line: 728 ]]
 	local t = {}
 	
 	if self.id ~= nil and self.id ~= "" then
@@ -639,12 +511,12 @@ function t_3:jsonEncode()
 		t.hasResellers = self.has_resellers
 	end
 	if self.universe_ids ~= nil and #self.universe_ids > 0 then
-		local t_1 = {}
+		local UniverseIds = {}
 		
-		for i, v in self.universe_ids do
-			table.insert(t_1, v)
+		for _, universeId in self.universe_ids do
+			table.insert(UniverseIds, universeId)
 		end
-		t.universeIds = t_1
+		t.universeIds = UniverseIds
 	end
 	if self.sale_location_type ~= nil then
 		t.saleLocationType = self.sale_location_type
@@ -662,137 +534,137 @@ function t_3:jsonEncode()
 		t.lowestAvailableResaleItemInstanceId = self.lowest_available_resale_item_instance_id
 	end
 	if self.experiences ~= nil and #self.experiences > 0 then
-		local t_1 = {}
+		local Experiences = {}
 		
-		for i, v in self.experiences do
-			table.insert(t_1, v:jsonEncode())
+		for _, experience in self.experiences do
+			table.insert(Experiences, experience:jsonEncode())
 		end
-		t.experiences = t_1
+		t.experiences = Experiences
 	end
 	return t
 end
 
-function t_3:jsonDecode()
-	-- upvalues: t_3 (ref), t (ref)
-	local var137 = t_3.new()
+function Module2:jsonDecode() --[[ Line: 814 ]]
+	-- upvalues: Module2 (copy), config (copy)
+	local NewModule = Module2.new()
 	
 	if self.id ~= nil then
-		var137.id = self.id
+		NewModule.id = self.id
 	end
 	if self.collectible_product_id ~= nil then
-		var137.collectible_product_id = self.collectible_product_id
+		NewModule.collectible_product_id = self.collectible_product_id
 	end
 	if self.collectibleProductId ~= nil then
-		var137.collectible_product_id = self.collectibleProductId
+		NewModule.collectible_product_id = self.collectibleProductId
 	end
 	if self.name ~= nil then
-		var137.name = self.name
+		NewModule.name = self.name
 	end
 	if self.description ~= nil then
-		var137.description = self.description
+		NewModule.description = self.description
 	end
 	if self.creator ~= nil then
-		var137.creator = t.CollectibleItemCreator.jsonDecode(self.creator)
+		NewModule.creator = config.CollectibleItemCreator.jsonDecode(self.creator)
 	end
 	if self.price ~= nil then
-		var137.price = self.price
+		NewModule.price = self.price
 	end
 	if self.lowest_price ~= nil then
-		var137.lowest_price = self.lowest_price
+		NewModule.lowest_price = self.lowest_price
 	end
 	if self.lowestPrice ~= nil then
-		var137.lowest_price = self.lowestPrice
+		NewModule.lowest_price = self.lowestPrice
 	end
 	if self.units_available_for_consumption ~= nil then
-		var137.units_available_for_consumption = self.units_available_for_consumption
+		NewModule.units_available_for_consumption = self.units_available_for_consumption
 	end
 	if self.unitsAvailableForConsumption ~= nil then
-		var137.units_available_for_consumption = self.unitsAvailableForConsumption
+		NewModule.units_available_for_consumption = self.unitsAvailableForConsumption
 	end
 	if self.offsale_deadline ~= nil then
-		var137.offsale_deadline = self.offsale_deadline
+		NewModule.offsale_deadline = self.offsale_deadline
 	end
 	if self.offsaleDeadline ~= nil then
-		var137.offsale_deadline = self.offsaleDeadline
+		NewModule.offsale_deadline = self.offsaleDeadline
 	end
 	if self.asset_stock ~= nil then
-		var137.asset_stock = self.asset_stock
+		NewModule.asset_stock = self.asset_stock
 	end
 	if self.assetStock ~= nil then
-		var137.asset_stock = self.assetStock
+		NewModule.asset_stock = self.assetStock
 	end
 	if self.has_resellers ~= nil then
-		var137.has_resellers = self.has_resellers
+		NewModule.has_resellers = self.has_resellers
 	end
 	if self.hasResellers ~= nil then
-		var137.has_resellers = self.hasResellers
+		NewModule.has_resellers = self.hasResellers
 	end
 	if self.universe_ids ~= nil then
-		local t_1 = {}
+		local Universe_ids = {}
 		
-		for i, v in self.universe_ids do
-			table.insert(t_1, v)
+		for _, universeId in self.universe_ids do
+			table.insert(Universe_ids, universeId)
 		end
-		var137.universe_ids = t_1
+		NewModule.universe_ids = Universe_ids
 	end
 	if self.universeIds ~= nil then
-		local t_1 = {}
+		local Universe_ids = {}
 		
-		for i, v in self.universeIds do
-			table.insert(t_1, v)
+		for _, universeId1 in self.universeIds do
+			table.insert(Universe_ids, universeId1)
 		end
-		var137.universe_ids = t_1
+		NewModule.universe_ids = Universe_ids
 	end
 	if self.sale_location_type ~= nil then
-		var137.sale_location_type = self.sale_location_type
+		NewModule.sale_location_type = self.sale_location_type
 	end
 	if self.saleLocationType ~= nil then
-		var137.sale_location_type = self.saleLocationType
+		NewModule.sale_location_type = self.saleLocationType
 	end
 	if self.quantity_limit_per_user ~= nil then
-		var137.quantity_limit_per_user = self.quantity_limit_per_user
+		NewModule.quantity_limit_per_user = self.quantity_limit_per_user
 	end
 	if self.quantityLimitPerUser ~= nil then
-		var137.quantity_limit_per_user = self.quantityLimitPerUser
+		NewModule.quantity_limit_per_user = self.quantityLimitPerUser
 	end
 	if self.resale_restriction ~= nil then
-		var137.resale_restriction = self.resale_restriction
+		NewModule.resale_restriction = self.resale_restriction
 	end
 	if self.resaleRestriction ~= nil then
-		var137.resale_restriction = self.resaleRestriction
+		NewModule.resale_restriction = self.resaleRestriction
 	end
 	if self.lowest_available_resale_product_id ~= nil then
-		var137.lowest_available_resale_product_id = self.lowest_available_resale_product_id
+		NewModule.lowest_available_resale_product_id = self.lowest_available_resale_product_id
 	end
 	if self.lowestAvailableResaleProductId ~= nil then
-		var137.lowest_available_resale_product_id = self.lowestAvailableResaleProductId
+		NewModule.lowest_available_resale_product_id = self.lowestAvailableResaleProductId
 	end
 	if self.lowest_available_resale_item_instance_id ~= nil then
-		var137.lowest_available_resale_item_instance_id = self.lowest_available_resale_item_instance_id
+		NewModule.lowest_available_resale_item_instance_id = self.lowest_available_resale_item_instance_id
 	end
 	if self.lowestAvailableResaleItemInstanceId ~= nil then
-		var137.lowest_available_resale_item_instance_id = self.lowestAvailableResaleItemInstanceId
+		NewModule.lowest_available_resale_item_instance_id = self.lowestAvailableResaleItemInstanceId
 	end
 	if self.experiences ~= nil then
-		local t_1 = {}
+		local Experiences = {}
 		
-		for i, v in self.experiences do
-			table.insert(t_1, t.CollectibleItemExperience.jsonDecode(v))
+		for _, experience in self.experiences do
+			table.insert(Experiences, config.CollectibleItemExperience.jsonDecode(experience))
 		end
-		var137.experiences = t_1
+		NewModule.experiences = Experiences
 	end
-	return var137
+	return NewModule
 end
 
-t_3.descriptor = {
+Module2.descriptor = {
 	name = "CollectibleItemData",
 	fullName = "roblox.apppageplatform.shared.v1beta1.CollectibleItemData"
 }
-t.CollectibleItemData = t_3
-typeRegistryModule.default:register(t.CollectibleItemData)
+config.CollectibleItemData = Module2
+TypeRegistryModule.default:register(config.CollectibleItemData)
 
 return {
-	CollectibleItemCreator = t.CollectibleItemCreator,
-	CollectibleItemExperience = t.CollectibleItemExperience,
-	CollectibleItemData = t.CollectibleItemData
+	CollectibleItemCreator = config.CollectibleItemCreator,
+	CollectibleItemExperience = config.CollectibleItemExperience,
+	CollectibleItemData = config.CollectibleItemData
 }

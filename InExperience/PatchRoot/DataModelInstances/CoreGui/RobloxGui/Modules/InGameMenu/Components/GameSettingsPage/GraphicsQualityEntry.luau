@@ -1,92 +1,92 @@
-﻿local inGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
-local roact = inGameMenuDependenciesModule.Roact
-local t = inGameMenuDependenciesModule.t
-local userGameSettingsService = UserSettings():GetService("UserGameSettings")
-local rendering = settings().Rendering
-local savedQualityLevelPropertyChangedSignal = userGameSettingsService:GetPropertyChangedSignal("SavedQualityLevel")
-local parent = script.Parent.Parent.Parent
-local toggleEntryModule = require(script.Parent.ToggleEntry)
-local externalEventConnectionModule = require(parent.Utility.ExternalEventConnection)
-local sliderEntryModule = require(script.Parent.SliderEntry)
-local sendAnalyticsModule = require(parent.Utility.SendAnalytics)
-local constantsModule = require(parent.Resources.Constants)
-local var1 = #Enum.SavedQualitySetting:GetEnumItems() - 1
+﻿local InGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
+local Roact = InGameMenuDependenciesModule.Roact
+local T = InGameMenuDependenciesModule.t
+local UserGameSettings = UserSettings():GetService("UserGameSettings")
+local Rendering = settings().Rendering
+local SavedQualityLevelPropertyChangedSignal = UserGameSettings:GetPropertyChangedSignal("SavedQualityLevel")
+local Parent = script.Parent.Parent.Parent
+local ToggleEntryModule = require(script.Parent.ToggleEntry)
+local ExternalEventConnectionModule = require(Parent.Utility.ExternalEventConnection)
+local SliderEntryModule = require(script.Parent.SliderEntry)
+local SendAnalyticsModule = require(Parent.Utility.SendAnalytics)
+local ConstantsModule = require(Parent.Resources.Constants)
+local v1 = #Enum.SavedQualitySetting:GetEnumItems() - 1
 
-local function _(p1, p2, p3, p4, p5)
-	return math.clamp(math.floor(p4 + (p1 - p2) * (p5 - p4) / (p3 - p2)), p4, p5)
+local function _(p1, p2, p3, MinValue: number, MaxValue: number): number --[[ Line: 30 | Named "mapInteger" ]]
+	return (math.clamp(math.floor(MinValue + (p1 - p2) * (MaxValue - MinValue) / (p3 - p2)), MinValue, MaxValue))
 end
 
-local graphicsQualityEntry = roact.PureComponent:extend("GraphicsQualityEntry")
-graphicsQualityEntry.validateProps = t.strictInterface({
-	LayoutOrder = t.integer,
-	canCaptureFocus = t.optional(t.boolean),
-	isMenuOpen = t.optional(t.boolean)
+local GraphicsQualityEntry = Roact.PureComponent:extend("GraphicsQualityEntry")
+GraphicsQualityEntry.validateProps = T.strictInterface({
+	LayoutOrder = T.integer,
+	canCaptureFocus = T.optional(T.boolean),
+	isMenuOpen = T.optional(T.boolean)
 })
 
-function graphicsQualityEntry.init(p1)
-	-- upvalues: userGameSettingsService (ref)
-	local var2 = userGameSettingsService.SavedQualityLevel == Enum.SavedQualitySetting.Automatic
+function GraphicsQualityEntry.init(p1) --[[ Line: 41 ]]
+	-- upvalues: UserGameSettings (copy)
+	local IsSavedQualityLevelMatch = UserGameSettings.SavedQualityLevel == Enum.SavedQualitySetting.Automatic
 	p1:setState({
-		quality = if var2 then 5 else userGameSettingsService.SavedQualityLevel.Value,
-		automatic = var2
+		quality = if IsSavedQualityLevelMatch then 5 else UserGameSettings.SavedQualityLevel.Value,
+		automatic = IsSavedQualityLevelMatch
 	})
 	
-	function p5.onQualityChanged()
-		-- upvalues: userGameSettingsService (copy), p1 (ref)
-		local savedQualityLevel = userGameSettingsService.SavedQualityLevel
+	function p1.onQualityChanged() --[[ Line: 48 ]]
+		-- upvalues: UserGameSettings (upval), p1 (copy)
+		local SavedQualityLevel = UserGameSettings.SavedQualityLevel
 		p1:setState({
-			quality = if not (savedQualityLevel == Enum.SavedQualitySetting.Automatic) then savedQualityLevel.Value else nil,
-			automatic = savedQualityLevel == Enum.SavedQualitySetting.Automatic
+			quality = if SavedQualityLevel == Enum.SavedQualitySetting.Automatic then nil else SavedQualityLevel.Value or nil,
+			automatic = SavedQualityLevel == Enum.SavedQualitySetting.Automatic
 		})
 	end
 	
-	if var2 then
+	if IsSavedQualityLevelMatch then
 		p1:setAutomaticQualityLevel()
 		
 		return
+	else
+		p1:setManualQualityLevel(p1.state.quality)
 	end
-	p1:setManualQualityLevel(p1.state.quality)
 end
 
-function graphicsQualityEntry.setAutomaticQualityLevel(_)
-	-- upvalues: userGameSettingsService (ref), rendering (ref)
-	userGameSettingsService.SavedQualityLevel = Enum.SavedQualitySetting.Automatic
-	rendering.QualityLevel = 0
+function GraphicsQualityEntry:setAutomaticQualityLevel() --[[ Line: 65 ]]
+	-- upvalues: UserGameSettings (copy), Rendering (copy)
+	UserGameSettings.SavedQualityLevel = Enum.SavedQualitySetting.Automatic
+	Rendering.QualityLevel = 0
 end
 
-function graphicsQualityEntry.setManualQualityLevel(_, p1)
-	-- upvalues: var1 (ref), rendering (ref), userGameSettingsService (ref)
-	local var2 = rendering:GetMaxQualityLevel() - 1
-	local clampedValue = math.clamp(math.floor(1 + (p1 - 1) * (var2 - 1) / (var1 - 1)), 1, var2)
-	userGameSettingsService.SavedQualityLevel = p1
-	rendering.QualityLevel = clampedValue
+function GraphicsQualityEntry:setManualQualityLevel(SavedQualityLevel: number) --[[ Line: 70 ]]
+	-- upvalues: v1 (copy), Rendering (copy), UserGameSettings (copy)
+	local MaxQualityLevelDelta = Rendering:GetMaxQualityLevel() - 1
+	UserGameSettings.SavedQualityLevel = SavedQualityLevel
+	Rendering.QualityLevel = math.clamp(math.floor(1 + (SavedQualityLevel - 1) * (MaxQualityLevelDelta - 1) / (v1 - 1)), 1, MaxQualityLevelDelta)
 	
 	return nil
 end
 
-function graphicsQualityEntry.render(p1)
-	-- upvalues: roact (ref), toggleEntryModule (ref), sendAnalyticsModule (ref), constantsModule (ref), sliderEntryModule (ref), externalEventConnectionModule (ref), savedQualityLevelPropertyChangedSignal (ref)
-	return roact.createElement("Frame", {
+function GraphicsQualityEntry.render(p1) --[[ Line: 85 ]]
+	-- upvalues: Roact (copy), ToggleEntryModule (copy), SendAnalyticsModule (copy), ConstantsModule (copy), SliderEntryModule (copy), ExternalEventConnectionModule (copy), SavedQualityLevelPropertyChangedSignal (copy)
+	return Roact.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 0, 156),
 		LayoutOrder = p1.props.LayoutOrder
 	}, {
-		Layout = roact.createElement("UIListLayout", { SortOrder = Enum.SortOrder.LayoutOrder }),
-		AutoToggle = roact.createElement(toggleEntryModule, {
+		Layout = Roact.createElement("UIListLayout", { SortOrder = Enum.SortOrder.LayoutOrder }),
+		AutoToggle = Roact.createElement(ToggleEntryModule, {
 			LayoutOrder = 1,
 			labelKey = "CoreScripts.InGameMenu.GameSettings.AutoGraphicsQuality",
 			checked = p1.state.automatic,
-			onToggled = function()
-				-- upvalues: p1 (ref), sendAnalyticsModule (copy), constantsModule (copy)
+			onToggled = function() --[[ Line: 98 ]]
+				-- upvalues: p1 (copy), SendAnalyticsModule (upval), ConstantsModule (upval)
 				if p1.state.automatic then
 					p1:setManualQualityLevel(p1.state.quality)
 				else
 					p1:setAutomaticQualityLevel()
 				end
-				sendAnalyticsModule(constantsModule.AnalyticsSettingsChangeName, nil, {}, true)
+				SendAnalyticsModule(ConstantsModule.AnalyticsSettingsChangeName, nil, {}, true)
 			end
 		}),
-		Slider = roact.createElement(sliderEntryModule, {
+		Slider = Roact.createElement(SliderEntryModule, {
 			LayoutOrder = 2,
 			labelKey = "CoreScripts.InGameMenu.GameSettings.ManualGraphicsQuality",
 			min = 1,
@@ -94,19 +94,19 @@ function graphicsQualityEntry.render(p1)
 			stepInterval = 1,
 			value = p1.state.quality,
 			disabled = p1.state.automatic,
-			valueChanged = function(p2)
-				-- upvalues: p1 (ref), sendAnalyticsModule (copy), constantsModule (copy)
-				p1:setManualQualityLevel(p2)
-				sendAnalyticsModule(constantsModule.AnalyticsSettingsChangeName, nil, {}, true)
+			valueChanged = function(SavedQualityLevel) --[[ Line: 115 ]]
+				-- upvalues: p1 (copy), SendAnalyticsModule (upval), ConstantsModule (upval)
+				p1:setManualQualityLevel(SavedQualityLevel)
+				SendAnalyticsModule(ConstantsModule.AnalyticsSettingsChangeName, nil, {}, true)
 			end,
 			canCaptureFocus = p1.props.canCaptureFocus,
 			isMenuOpen = p1.props.isMenuOpen
 		}),
-		QualityListener = roact.createElement(externalEventConnectionModule, {
-			event = savedQualityLevelPropertyChangedSignal,
+		QualityListener = Roact.createElement(ExternalEventConnectionModule, {
+			event = SavedQualityLevelPropertyChangedSignal,
 			callback = p1.onQualityChanged
 		})
 	})
 end
 
-return graphicsQualityEntry
+return GraphicsQualityEntry

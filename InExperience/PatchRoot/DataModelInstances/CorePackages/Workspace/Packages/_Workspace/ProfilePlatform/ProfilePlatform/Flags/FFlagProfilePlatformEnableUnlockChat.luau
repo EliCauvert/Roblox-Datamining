@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("ProfilePlatformEnableUnlockChat_V2", false) and require(script.Parent.FFlagProfilePlatformCTAsRefactor)

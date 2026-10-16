@@ -1,76 +1,78 @@
-﻿local getFFlagEnableUnifiedWebViews = require(script:FindFirstAncestor("AmpUpsell").Parent.SharedFlags).GetFFlagEnableUnifiedWebViews
-local browserService = game:GetService("BrowserService")
-local httpService = game:GetService("HttpService")
-local webViewService = game:GetService("WebViewService")
-local t = {}
-t.__index = t
+﻿local GetFFlagEnableUnifiedWebViewsFunction = require(script:FindFirstAncestor("AmpUpsell").Parent.SharedFlags).GetFFlagEnableUnifiedWebViews
+local BrowserService = game:GetService("BrowserService")
+local HttpService = game:GetService("HttpService")
+local WebViewService = game:GetService("WebViewService")
+local WebViewServiceWrapperModule = {}
+WebViewServiceWrapperModule.__index = WebViewServiceWrapperModule
 
-function t.new(p1)
-	-- upvalues: getFFlagEnableUnifiedWebViews (ref), webViewService (ref), t (ref)
-	local t_1 = {}
+function WebViewServiceWrapperModule.new(p1) --[[ Line: 47 ]]
+	-- upvalues: GetFFlagEnableUnifiedWebViewsFunction (copy), WebViewService (copy), WebViewServiceWrapperModule (copy)
+	local t = {}
 	
-	if getFFlagEnableUnifiedWebViews() then
-		t_1.webViewService = p1.webViewService or webViewService
+	if GetFFlagEnableUnifiedWebViewsFunction() then
+		t.webViewService = p1.webViewService or WebViewService
 	end
-	t_1.title = p1.title
-	t_1.url = p1.url
-	t_1.closeCallbackConnection = nil
-	local tbl = setmetatable(t_1, t)
-	tbl:setCloseCallback(p1.closeCallback or function() end)
+	t.title = p1.title
+	t.url = p1.url
+	t.closeCallbackConnection = nil
+	local self = setmetatable(t, WebViewServiceWrapperModule)
+	self:setCloseCallback(p1.closeCallback or function() --[[ Line: 62 ]] end)
 	
-	return tbl
+	return self
 end
 
-function t:setCloseCallback(p1)
-	-- upvalues: getFFlagEnableUnifiedWebViews (ref)
-	if getFFlagEnableUnifiedWebViews() then
-		function self.closeCallback()
-			-- upvalues: self (ref), p1 (ref)
+function WebViewServiceWrapperModule:setCloseCallback(Callback) --[[ Line: 67 ]]
+	-- upvalues: GetFFlagEnableUnifiedWebViewsFunction (copy)
+	if GetFFlagEnableUnifiedWebViewsFunction() then
+		function self.closeCallback() --[[ Line: 72 ]]
+			-- upvalues: self (copy), Callback (copy)
 			self:close()
 			
-			if p1 ~= nil then
-				p1()
+			if Callback ~= nil then
+				Callback()
 			end
 		end
 		
 		return
+	else
+		self.closeCallback = Callback
 	end
-	self.closeCallback = p1
 end
 
-function t:setOpenCallback(p1)
-	self.openCallback = p1
+function WebViewServiceWrapperModule:setOpenCallback(OpenCallback) --[[ Line: 85 ]]
+	self.openCallback = OpenCallback
 end
 
-function t:open()
-	-- upvalues: getFFlagEnableUnifiedWebViews (ref), browserService (ref), httpService (ref)
+function WebViewServiceWrapperModule:open() --[[ Line: 89 ]]
+	-- upvalues: GetFFlagEnableUnifiedWebViewsFunction (copy), BrowserService (copy), HttpService (copy)
 	if self.openCallback ~= nil then
 		self.openCallback()
 	end
-	if self.closeCallback ~= nil and getFFlagEnableUnifiedWebViews() then
+	if self.closeCallback ~= nil and GetFFlagEnableUnifiedWebViewsFunction() then
 		self.closeCallbackConnection = self.webViewService.OnWindowClosed:Connect(self.closeCallback)
 	end
-	if self.closeCallback ~= nil and not getFFlagEnableUnifiedWebViews() then
-		self.closeCallbackConnection = browserService.BrowserWindowClosed:Connect(self.closeCallback)
+	if self.closeCallback ~= nil and not GetFFlagEnableUnifiedWebViewsFunction() then
+		self.closeCallbackConnection = BrowserService.BrowserWindowClosed:Connect(self.closeCallback)
 	end
-	if getFFlagEnableUnifiedWebViews() then
+	if GetFFlagEnableUnifiedWebViewsFunction() then
 		self.webViewService:OpenWindow(self.url, self.title, true)
 		
 		return
+	else
+		BrowserService:SendCommand((HttpService:JSONEncode({
+			command = "open",
+			visible = true,
+			isGenericWebview = true,
+			enableOverlayReplacement = true,
+			url = self.url,
+			title = self.title
+		})))
 	end
-	browserService:SendCommand(httpService:JSONEncode({
-		command = "open",
-		visible = true,
-		isGenericWebview = true,
-		enableOverlayReplacement = true,
-		url = self.url,
-		title = self.title
-	}))
 end
 
-function t:close()
-	-- upvalues: getFFlagEnableUnifiedWebViews (ref)
-	if getFFlagEnableUnifiedWebViews() then
+function WebViewServiceWrapperModule:close() --[[ Line: 117 ]]
+	-- upvalues: GetFFlagEnableUnifiedWebViewsFunction (copy)
+	if GetFFlagEnableUnifiedWebViewsFunction() then
 		self.webViewService:CloseWindow()
 	end
 	if self.closeCallbackConnection ~= nil then
@@ -78,4 +80,4 @@ function t:close()
 	end
 end
 
-return t
+return WebViewServiceWrapperModule

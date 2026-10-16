@@ -1,34 +1,33 @@
-﻿local dsaIllegalContentReporting = script:FindFirstAncestor("DsaIllegalContentReporting")
-local constantsModule = require(dsaIllegalContentReporting.Utility.Constants)
-local isInDSAFeaturesOverrideListModule = require(dsaIllegalContentReporting.Utility.isInDSAFeaturesOverrideList)
-local getFFlagDSAIllegalContentReporting = require(dsaIllegalContentReporting.Parent.SharedFlags).GetFFlagDSAIllegalContentReporting
-local localizationService = game:GetService("LocalizationService")
-local playersService = game:GetService("Players")
-local var1 = false
+﻿local DsaIllegalContentReporting = script:FindFirstAncestor("DsaIllegalContentReporting")
+local ConstantsModule = require(DsaIllegalContentReporting.Utility.Constants)
+local IsInDSAFeaturesOverrideListModule = require(DsaIllegalContentReporting.Utility.isInDSAFeaturesOverrideList)
+local GetFFlagDSAIllegalContentReportingFunction = require(DsaIllegalContentReporting.Parent.SharedFlags).GetFFlagDSAIllegalContentReporting
+local LocalizationService = game:GetService("LocalizationService")
+local Players = game:GetService("Players")
+local Flag = false
 
-if getFFlagDSAIllegalContentReporting() then
-	task.spawn(function()
-		-- upvalues: playersService (ref), localizationService (ref), constantsModule (ref), var1 (write)
-		local localPlayer = playersService.LocalPlayer
-		while not localPlayer do
-			playersService:GetPropertyChangedSignal("LocalPlayer"):Wait()
-			localPlayer = playersService.LocalPlayer
+if GetFFlagDSAIllegalContentReportingFunction() then
+	task.spawn(function() --[[ Line: 18 ]]
+		-- upvalues: Players (copy), LocalizationService (copy), ConstantsModule (copy), Flag (ref)
+		local LocalPlayer = Players.LocalPlayer
+		while not LocalPlayer do
+			Players:GetPropertyChangedSignal("LocalPlayer"):Wait()
+			LocalPlayer = Players.LocalPlayer
 		end
-		local ok, status = pcall(localizationService.GetCountryRegionForPlayerAsync, localizationService, localPlayer)
+		local Success, Result = pcall(LocalizationService.GetCountryRegionForPlayerAsync, LocalizationService, LocalPlayer)
 		
-		if not ok then return end
-		for i, v in ipairs(constantsModule.ELIGIBLE_COUNTRY_REGION_CODES) do
-			if status == v then
-				var1 = true
-				
-				return
+		if not Success then return end
+		for _, eLIGIBLECOUNTRYREGIONCODE in ipairs(ConstantsModule.ELIGIBLE_COUNTRY_REGION_CODES) do
+			if Result == eLIGIBLECOUNTRYREGIONCODE then
+				Flag = true
+				break
 			end
 		end
 	end)
 end
-function isShowEUDSAIllegalContentReportingLink()
-	-- upvalues: isInDSAFeaturesOverrideListModule (ref), getFFlagDSAIllegalContentReporting (ref), var1 (write)
-	return if isInDSAFeaturesOverrideListModule() then true else getFFlagDSAIllegalContentReporting() and var1
+function isShowEUDSAIllegalContentReportingLink() --[[ Line: 41 ]]
+	-- upvalues: IsInDSAFeaturesOverrideListModule (copy), GetFFlagDSAIllegalContentReportingFunction (copy), Flag (ref)
+	return if IsInDSAFeaturesOverrideListModule() then true else GetFFlagDSAIllegalContentReportingFunction() and Flag
 end
 
 return isShowEUDSAIllegalContentReportingLink

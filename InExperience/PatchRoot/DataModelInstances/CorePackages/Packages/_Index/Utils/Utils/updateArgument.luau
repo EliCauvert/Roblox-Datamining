@@ -1,53 +1,51 @@
-﻿local parent = script.Parent.Parent
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local object = luauPolyfillModule.Object
-local t = {}
-local kind = require(parent.GraphQL).Kind
-local astFromType = require(script.Parent.astFromType).astFromType
+﻿local Parent = script.Parent.Parent
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Object = LuauPolyfillModule.Object
+local Kind = require(Parent.GraphQL).Kind
+local AstFromTypeFunction = require(script.Parent.astFromType).astFromType
 
-function t.updateArgument(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: kind (ref), astFromType (ref), array (ref), object (ref)
-	p1[tostring(p4)] = {
-		kind = kind.ARGUMENT,
-		name = { kind = kind.NAME, value = p4 },
-		value = {
-			kind = kind.VARIABLE,
-			name = { kind = kind.NAME, value = p5 }
+return {
+	updateArgument = function(p1, p2, p3, Value, Value1, p4, p5) --[[ Line: 22 ]]
+		-- upvalues: Kind (copy), AstFromTypeFunction (copy), Array (copy), Object (copy)
+		p1[tostring(Value)] = {
+			kind = Kind.ARGUMENT,
+			name = { kind = Kind.NAME, value = Value },
+			value = {
+				kind = Kind.VARIABLE,
+				name = { kind = Kind.NAME, value = Value1 }
+			}
 		}
-	}
-	p2[tostring(p5)] = {
-		kind = kind.VARIABLE_DEFINITION,
-		variable = {
-			kind = kind.VARIABLE,
-			name = { kind = kind.NAME, value = p5 }
-		},
-		type = astFromType(p6)
-	}
-	
-	if p7 ~= nil then
-		p3[tostring(p5)] = p7
+		p2[tostring(Value1)] = {
+			kind = Kind.VARIABLE_DEFINITION,
+			variable = {
+				kind = Kind.VARIABLE,
+				name = { kind = Kind.NAME, value = Value1 }
+			},
+			type = AstFromTypeFunction(p4)
+		}
 		
-		return
-	elseif array.indexOf(object.keys(p3), tostring(p5)) ~= -1 then
-		p3[tostring(p5)] = nil
+		if p5 ~= nil then
+			p3[tostring(Value1)] = p5
+			
+			return
+		end
+		if Array.indexOf(Object.keys(p3), (tostring(Value1))) ~= -1 then
+			p3[tostring(Value1)] = nil
+		end
+	end,
+	createVariableNameGenerator = function(p1) --[[ Line: 55 ]]
+		-- upvalues: Array (copy), Object (copy)
+		local Count = 0
+		
+		return function(p2): string --[[ Line: 59 ]]
+			-- upvalues: Count (ref), Array (upval), Object (upval), p1 (copy)
+			local Text = nil
+			repeat
+				Text = ("_v%s_%s"):format(tostring(Count), p2)
+				Count += 1
+			until Array.indexOf(Object.keys(p1), (tostring(Text))) == -1
+			return Text
+		end
 	end
-end
-
-function t.createVariableNameGenerator(p1)
-	-- upvalues: array (ref), object (ref)
-	local var1 = 0
-	
-	return function(p2)
-		-- upvalues: var1 (write), array (copy), object (copy), p1 (ref)
-		local var2
-		local _ = nil
-		repeat
-			var2 = ("_v%s_%s"):format(tostring(var1), p2)
-			var1 += 1
-		until array.indexOf(object.keys(p1), tostring(var2)) == -1
-		return var2
-	end
-end
-
-return t
+}

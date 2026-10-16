@@ -1,12 +1,12 @@
-﻿local reactModule = require(script:FindFirstAncestor("RoactUtils").Parent.React)
-local useStoreModule = require(script.Parent.useStore)
+﻿local ReactModule = require(script:FindFirstAncestor("RoactUtils").Parent.React)
+local UseStoreModule = require(script.Parent.useStore)
 
-return function()
-	-- upvalues: useStoreModule (ref), reactModule (ref)
-	local var1 = useStoreModule()
+return function() --[[ Line: 10 | Named "useDispatch" ]]
+	-- upvalues: UseStoreModule (copy), ReactModule (copy)
+	local UseStoreModuleResult = UseStoreModule()
 	
-	return reactModule.useCallback(function(...)
-		-- upvalues: var1 (ref)
-		return var1:dispatch(...)
-	end, { var1 })
+	return (ReactModule.useCallback(function(...) --[[ Line: 13 ]]
+		-- upvalues: UseStoreModuleResult (copy)
+		return UseStoreModuleResult:dispatch(...)
+	end, { UseStoreModuleResult }))
 end

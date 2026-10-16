@@ -1,47 +1,56 @@
-﻿local reactModule = require(script:FindFirstAncestor("AppChat").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("AppChat").Parent.React)
 
-return function(p1)
-	-- upvalues: reactModule (ref)
-	local var1 = reactModule.useRef(false)
-	local var2 = reactModule.useRef(nil)
-	local var3 = reactModule.useRef(nil)
-	local var4 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref), var3 (ref), var1 (ref)
-		if var2.current then
-			var2.current:Disconnect()
-			var2.current = nil
+return function(p1) --[[ Line: 13 | Named "useInputConnections" ]]
+	-- upvalues: ReactModule (copy)
+	local UseRefResult = ReactModule.useRef(false)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseRefResult2 = ReactModule.useRef(nil)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 18 ]]
+		-- upvalues: UseRefResult1 (copy), UseRefResult2 (copy), UseRefResult (copy)
+		if UseRefResult1.current then
+			UseRefResult1.current:Disconnect()
+			UseRefResult1.current = nil
 		end
-		if var3.current then
-			var3.current:Disconnect()
-			var3.current = nil
+		if UseRefResult2.current then
+			UseRefResult2.current:Disconnect()
+			UseRefResult2.current = nil
 		end
-		var1.current = false
+		UseRefResult.current = false
 	end, {})
-	local var5 = reactModule.useCallback(function(p2)
-		-- upvalues: var1 (ref), var2 (ref), p1 (ref), var3 (ref), var4 (ref)
-		if p2 and not var1.current then
-			var2.current = p1.userInputService.InputBegan:Connect(p1.onInputBegan)
-			var3.current = p1.userInputService.InputEnded:Connect(p1.onInputEnded)
-			var1.current = true
+	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 32 ]]
+		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), p1 (copy), UseRefResult2 (copy), UseResult (copy)
+		if p2 and not UseRefResult.current then
+			UseRefResult1.current = p1.userInputService.InputBegan:Connect(p1.onInputBegan)
+			UseRefResult2.current = p1.userInputService.InputEnded:Connect(p1.onInputEnded)
+			UseRefResult.current = true
 			
 			return
-		elseif not p2 and var1.current then
-			var4()
+		end
+		if not p2 and UseRefResult.current then
+			UseResult()
 			
 			if p1.onFocusLost then
 				p1.onFocusLost()
 			end
 		end
-	end, { p1.onInputBegan, p1.onInputEnded, var4, p1.onFocusLost })
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), var4 (ref)
-		return function()
-			-- upvalues: var1 (copy), var4 (copy)
-			if var1.current then
-				var4()
+	end, {
+		p1.onInputBegan,
+		p1.onInputEnded,
+		UseResult,
+		p1.onFocusLost
+	})
+	ReactModule.useEffect(function() --[[ Line: 53 ]]
+		-- upvalues: UseRefResult (copy), UseResult (copy)
+		return function() --[[ Line: 54 ]]
+			-- upvalues: UseRefResult (upval), UseResult (upval)
+			if UseRefResult.current then
+				UseResult()
 			end
 		end
-	end, { var4 })
+	end, { UseResult })
 	
-	return { focusChanged = var5, disconnectInputConnection = var4 }
+	return {
+		focusChanged = UseResult1,
+		disconnectInputConnection = UseResult
+	}
 end

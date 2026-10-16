@@ -1,31 +1,31 @@
-﻿local telemetryService = game:GetService("TelemetryService")
-local parent = script:FindFirstAncestor("DiscoveryAnalytics").Parent
-local tModule = require(parent.t)
-local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventErrorLogger
-local gameConnectionsPlayedChipClickedThrottleHundredthsPercent = game:DefineFastInt("GameConnectionsPlayedChipClickedThrottleHundredthsPercent", 10000)
-local var1 = tModule.strictInterface({
-	universeId = tModule.string,
-	placeId = tModule.string,
-	uid = tModule.string,
-	totalConnections = tModule.number
+﻿local TelemetryService = game:GetService("TelemetryService")
+local Parent = script:FindFirstAncestor("DiscoveryAnalytics").Parent
+local TModule = require(Parent.t)
+local DiscoveryEventErrorLogger = require(Parent.DiscoveryUtils).DiscoveryEventErrorLogger
+local GameConnectionsPlayedChipClickedThrottleHundredthsPercent = game:DefineFastInt("GameConnectionsPlayedChipClickedThrottleHundredthsPercent", 10000)
+local StrictInterfaceResult = TModule.strictInterface({
+	universeId = TModule.string,
+	placeId = TModule.string,
+	uid = TModule.string,
+	totalConnections = TModule.number
 })
 
-return function(p1, p2)
-	-- upvalues: var1 (ref), discoveryEventErrorLogger (ref), gameConnectionsPlayedChipClickedThrottleHundredthsPercent (ref), telemetryService (ref)
-	local var2, var3 = var1(p1)
+return function(CustomFields, EventContext) --[[ Line: 18 ]]
+	-- upvalues: StrictInterfaceResult (copy), DiscoveryEventErrorLogger (copy), GameConnectionsPlayedChipClickedThrottleHundredthsPercent (copy), TelemetryService (copy)
+	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(CustomFields)
 	
-	if not var2 then
-		discoveryEventErrorLogger.reportError("GameConnectionsPlayedChipClickedInvalidInterface", var3)
+	if not StrictInterfaceResultResult then
+		DiscoveryEventErrorLogger.reportError("GameConnectionsPlayedChipClickedInvalidInterface", StrictInterfaceResultResult2)
 	end
-	telemetryService:LogEvent({
+	TelemetryService:LogEvent({
 		eventName = "gameConnectionsPlayedChipClicked",
 		description = "User has clicked the connections played chip to open the user list",
 		backends = { "EventIngest" },
-		throttlingPercentage = gameConnectionsPlayedChipClickedThrottleHundredthsPercent,
+		throttlingPercentage = GameConnectionsPlayedChipClickedThrottleHundredthsPercent,
 		lastUpdated = { 26, 2, 10 }
 	}, {
-		eventContext = p2,
+		eventContext = EventContext,
 		standardizedFields = { "addSessionInfo" },
-		customFields = p1
+		customFields = CustomFields
 	})
 end

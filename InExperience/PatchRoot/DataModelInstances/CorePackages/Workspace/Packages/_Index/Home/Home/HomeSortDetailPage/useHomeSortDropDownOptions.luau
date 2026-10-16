@@ -1,16 +1,16 @@
-﻿local home = script:FindFirstAncestor("Home")
-local parent = home.Parent
-local reactModule = require(parent.React)
-local sduiSharedUtilitiesModule = require(parent.SduiSharedUtilities)
-local buildHomeSortDropDownOptionsModule = require(home.HomeSortDetailPage.buildHomeSortDropDownOptions)
-local homeConstantsModule = require(home.HomeConstants)
+﻿local Home = script:FindFirstAncestor("Home")
+local Parent = Home.Parent
+local ReactModule = require(Parent.React)
+local SduiSharedUtilitiesModule = require(Parent.SduiSharedUtilities)
+local BuildHomeSortDropDownOptionsModule = require(Home.HomeSortDetailPage.buildHomeSortDropDownOptions)
+local HomeConstantsModule = require(Home.HomeConstants)
 
-return function()
-	-- upvalues: sduiSharedUtilitiesModule (ref), homeConstantsModule (ref), reactModule (ref), buildHomeSortDropDownOptionsModule (ref)
-	local var1 = sduiSharedUtilitiesModule.useInputData(homeConstantsModule.ConfigKey, homeConstantsModule.ContentIdentifier)
+return function() --[[ Line: 10 | Named "useHomeSortDropDownOptions" ]]
+	-- upvalues: SduiSharedUtilitiesModule (copy), HomeConstantsModule (copy), ReactModule (copy), BuildHomeSortDropDownOptionsModule (copy)
+	local UseInputDataResult = SduiSharedUtilitiesModule.useInputData(HomeConstantsModule.ConfigKey, HomeConstantsModule.ContentIdentifier)
 	
-	return reactModule.useMemo(function()
-		-- upvalues: buildHomeSortDropDownOptionsModule (copy), var1 (ref)
-		return buildHomeSortDropDownOptionsModule(var1)
-	end, { var1 })
+	return ReactModule.useMemo(function() --[[ Line: 12 ]]
+		-- upvalues: BuildHomeSortDropDownOptionsModule (upval), UseInputDataResult (copy)
+		return BuildHomeSortDropDownOptionsModule(UseInputDataResult)
+	end, { UseInputDataResult })
 end

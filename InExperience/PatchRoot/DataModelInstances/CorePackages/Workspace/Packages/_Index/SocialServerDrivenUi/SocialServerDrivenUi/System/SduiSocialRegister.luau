@@ -1,21 +1,21 @@
-﻿local socialServerDrivenUi = script:FindFirstAncestor("SocialServerDrivenUi")
-local reactModule = require(socialServerDrivenUi.Parent.React)
-local registerSocialActionsModule = require(socialServerDrivenUi.Actions.registerSocialActions)
-local registerSocialActionTelemetryHandlersModule = require(socialServerDrivenUi.Actions.TelemetryHandlers.registerSocialActionTelemetryHandlers)
-local registerSocialComponentsModule = require(socialServerDrivenUi.System.registerSocialComponents)
-local registerSocialImpressionsModule = require(socialServerDrivenUi.Impressions.registerSocialImpressions)
-local fFlagSduiCreateSocialTelemetryRegistriesModule = require(socialServerDrivenUi.Flags.FFlagSduiCreateSocialTelemetryRegistries)
+﻿local SocialServerDrivenUi = script:FindFirstAncestor("SocialServerDrivenUi")
+local ReactModule = require(SocialServerDrivenUi.Parent.React)
+local RegisterSocialActionsModule = require(SocialServerDrivenUi.Actions.registerSocialActions)
+local RegisterSocialActionTelemetryHandlersModule = require(SocialServerDrivenUi.Actions.TelemetryHandlers.registerSocialActionTelemetryHandlers)
+local RegisterSocialComponentsModule = require(SocialServerDrivenUi.System.registerSocialComponents)
+local RegisterSocialImpressionsModule = require(SocialServerDrivenUi.Impressions.registerSocialImpressions)
+local FFlagSduiCreateSocialTelemetryRegistriesModule = require(SocialServerDrivenUi.Flags.FFlagSduiCreateSocialTelemetryRegistries)
 
-return reactModule.memo(function()
-	-- upvalues: reactModule (ref), registerSocialComponentsModule (ref), registerSocialActionsModule (ref), fFlagSduiCreateSocialTelemetryRegistriesModule (ref), registerSocialImpressionsModule (ref), registerSocialActionTelemetryHandlersModule (ref)
-	reactModule.useEffect(function()
-		-- upvalues: registerSocialComponentsModule (copy), registerSocialActionsModule (copy), fFlagSduiCreateSocialTelemetryRegistriesModule (copy), registerSocialImpressionsModule (copy), registerSocialActionTelemetryHandlersModule (copy)
-		registerSocialComponentsModule()
-		registerSocialActionsModule()
+return ReactModule.memo(function() --[[ Line: 15 | Named "SduiSocialRegister" ]]
+	-- upvalues: ReactModule (copy), RegisterSocialComponentsModule (copy), RegisterSocialActionsModule (copy), FFlagSduiCreateSocialTelemetryRegistriesModule (copy), RegisterSocialImpressionsModule (copy), RegisterSocialActionTelemetryHandlersModule (copy)
+	ReactModule.useEffect(function() --[[ Line: 16 ]]
+		-- upvalues: RegisterSocialComponentsModule (upval), RegisterSocialActionsModule (upval), FFlagSduiCreateSocialTelemetryRegistriesModule (upval), RegisterSocialImpressionsModule (upval), RegisterSocialActionTelemetryHandlersModule (upval)
+		RegisterSocialComponentsModule()
+		RegisterSocialActionsModule()
 		
-		if fFlagSduiCreateSocialTelemetryRegistriesModule then
-			registerSocialImpressionsModule()
-			registerSocialActionTelemetryHandlersModule()
+		if FFlagSduiCreateSocialTelemetryRegistriesModule then
+			RegisterSocialImpressionsModule()
+			RegisterSocialActionTelemetryHandlersModule()
 		end
 	end, {})
 	

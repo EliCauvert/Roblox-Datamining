@@ -1,6 +1,6 @@
-﻿local createOutfitLookStoreModule = require(script.Parent.createOutfitLookStore)
+﻿local CreateOutfitLookStoreModule = require(script.Parent.createOutfitLookStore)
 
-return require(script:FindFirstAncestor("DataHydration").Parent.Signals).createComputed(function(_)
-	-- upvalues: createOutfitLookStoreModule (ref)
-	return createOutfitLookStoreModule()
+return require(script:FindFirstAncestor("DataHydration").Parent.Signals).createComputed(function(_) --[[ Line: 10 ]]
+	-- upvalues: CreateOutfitLookStoreModule (copy)
+	return CreateOutfitLookStoreModule()
 end)

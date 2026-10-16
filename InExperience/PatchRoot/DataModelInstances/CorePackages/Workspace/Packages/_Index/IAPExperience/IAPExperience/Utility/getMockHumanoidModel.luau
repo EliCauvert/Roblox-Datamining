@@ -1,24 +1,24 @@
-﻿return function()
-	local model = Instance.new("Model")
-	Instance.new("Humanoid").Parent = model
-	local humanoidRootPart = Instance.new("Part")
-	humanoidRootPart.Name = "HumanoidRootPart"
-	humanoidRootPart.Size = Vector3.new(2, 2, 1)
-	humanoidRootPart.Position = Vector3.new(0, 2, 0)
-	humanoidRootPart.Transparency = 1
-	humanoidRootPart.Parent = model
-	local head = Instance.new("Part")
-	head.Name = "Head"
-	head.Size = Vector3.new(2, 1, 1)
-	head.Position = Vector3.new(0, 5, 0)
-	head.Shape = Enum.PartType.Ball
-	head.Parent = model
-	local torso = Instance.new("Part")
-	torso.Name = "Torso"
-	torso.Size = Vector3.new(2, 2, 1)
-	torso.Position = Vector3.new(0, 3.5, 0)
-	torso.Parent = model
-	model.PrimaryPart = humanoidRootPart
+﻿return function() --[[ Line: 4 ]]
+	local Model = Instance.new("Model")
+	Instance.new("Humanoid").Parent = Model
+	local HumanoidRootPart = Instance.new("Part")
+	HumanoidRootPart.Name = "HumanoidRootPart"
+	HumanoidRootPart.Size = vector.create(2, 2, 1)
+	HumanoidRootPart.Position = vector.create(0, 2, 0)
+	HumanoidRootPart.Transparency = 1
+	HumanoidRootPart.Parent = Model
+	local Head = Instance.new("Part")
+	Head.Name = "Head"
+	Head.Size = vector.create(2, 1, 1)
+	Head.Position = vector.create(0, 5, 0)
+	Head.Shape = Enum.PartType.Ball
+	Head.Parent = Model
+	local Torso = Instance.new("Part")
+	Torso.Name = "Torso"
+	Torso.Size = vector.create(2, 2, 1)
+	Torso.Position = vector.create(0, 3.5, 0)
+	Torso.Parent = Model
+	Model.PrimaryPart = HumanoidRootPart
 	
-	return model
+	return Model
 end

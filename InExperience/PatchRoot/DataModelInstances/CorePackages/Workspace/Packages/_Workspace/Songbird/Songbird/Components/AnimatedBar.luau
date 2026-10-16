@@ -1,54 +1,57 @@
-﻿local songbird = script:FindFirstAncestor("Songbird")
-local cryoModule = require(songbird.Parent.Cryo)
-local reactModule = require(songbird.Parent.React)
-local reactOtterModule = require(songbird.Parent.ReactOtter)
-local foundationModule = require(songbird.Parent.Foundation)
-local useCallback = reactModule.useCallback
-local useEffect = reactModule.useEffect
-local useTokens = foundationModule.Hooks.useTokens
-local t = {
+﻿local Songbird = script:FindFirstAncestor("Songbird")
+local CryoModule = require(Songbird.Parent.Cryo)
+local ReactModule = require(Songbird.Parent.React)
+local ReactOtterModule = require(Songbird.Parent.ReactOtter)
+local UseCallbackFunction = ReactModule.useCallback
+local UseEffectFunction = ReactModule.useEffect
+local UseTokensFunction = require(Songbird.Parent.Foundation).Hooks.useTokens
+local config = {
 	isMoving = true,
 	staticHeight = 0.5,
 	heightRange = NumberRange.new(0.3, 1),
 	width = UDim.new(1, 0)
 }
-local random = Random.new()
+local _Random = Random.new()
 
-return function(p1)
-	-- upvalues: cryoModule (ref), t (ref), useTokens (ref), useCallback (ref), random (ref), reactOtterModule (ref), useEffect (ref), reactModule (ref)
-	local var1 = cryoModule.Dictionary.join(t, p1)
-	local var2 = useTokens()
-	local var3 = useCallback(function()
-		-- upvalues: random (copy), var1 (ref)
-		return random:NextNumber(var1.heightRange.Min, var1.heightRange.Max)
-	end, { var1.heightRange })
-	local var4, var5 = reactOtterModule.useAnimatedBinding(var3())
-	useEffect(function()
-		-- upvalues: var1 (ref), var3 (ref), var5 (ref), reactOtterModule (copy)
-		local var6 = true
-		task.spawn(function()
-			-- upvalues: var6 (write), var1 (copy), var3 (copy), var5 (copy), reactOtterModule (copy)
-			while var6 do
-				var5(reactOtterModule.ease(if var1.isMoving then var3() else var1.staticHeight, { duration = 0.25, easingStyle = Enum.EasingStyle.Linear }))
+return function(p1) --[[ Line: 34 | Named "AnimatedBar" ]]
+	-- upvalues: CryoModule (copy), config (copy), UseTokensFunction (copy), UseCallbackFunction (copy), _Random (copy), ReactOtterModule (copy), UseEffectFunction (copy), ReactModule (copy)
+	local JoinResult = CryoModule.Dictionary.join(config, p1)
+	local UseTokensResult = UseTokensFunction()
+	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 38 ]]
+		-- upvalues: _Random (upval), JoinResult (copy)
+		return _Random:NextNumber(JoinResult.heightRange.Min, JoinResult.heightRange.Max)
+	end, { JoinResult.heightRange })
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(UseCallbackResult())
+	UseEffectFunction(function() --[[ Line: 44 ]]
+		-- upvalues: JoinResult (copy), UseCallbackResult (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval)
+		local Flag = true
+		task.spawn(function() --[[ Line: 47 ]]
+			-- upvalues: Flag (ref), JoinResult (upval), UseCallbackResult (upval), UseAnimatedBindingResult2 (upval), ReactOtterModule (upval)
+			while Flag do
+				UseAnimatedBindingResult2(ReactOtterModule.ease(if JoinResult.isMoving then UseCallbackResult() else JoinResult.staticHeight, { duration = 0.25, easingStyle = Enum.EasingStyle.Linear }))
 				task.wait(0.25)
 			end
 		end)
 		
-		return function()
-			-- upvalues: var6 (write)
-			var6 = false
+		return function() --[[ Line: 60 ]]
+			-- upvalues: Flag (ref)
+			Flag = false
 		end
-	end, { var5, var1.isMoving, var1.staticHeight })
+	end, {
+		UseAnimatedBindingResult2,
+		JoinResult.isMoving,
+		JoinResult.staticHeight
+	})
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
-		LayoutOrder = var1.layoutOrder,
-		Size = var4:map(function(p2)
-			-- upvalues: var1 (ref)
-			return UDim2.new(var1.width, UDim.new(p2, 0))
+		LayoutOrder = JoinResult.layoutOrder,
+		Size = UseAnimatedBindingResult:map(function(Scale): UDim2 --[[ Line: 67 ]]
+			-- upvalues: JoinResult (copy)
+			return UDim2.new(JoinResult.width, UDim.new(Scale, 0))
 		end),
-		BackgroundColor3 = var2.Color.ActionSubEmphasis.Background.Color3
+		BackgroundColor3 = UseTokensResult.Color.ActionSubEmphasis.Background.Color3
 	}, {
-		Corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0.5, 0) })
+		Corner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0.5, 0) })
 	})
 end

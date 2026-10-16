@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("UserLib").Parent.Signals).createComputed(require(script.createIsLocalUserUnder13Store))
+﻿return require(script:FindFirstAncestor("UserLib").Parent.Signals).createComputed((require(script.createIsLocalUserUnder13Store)))

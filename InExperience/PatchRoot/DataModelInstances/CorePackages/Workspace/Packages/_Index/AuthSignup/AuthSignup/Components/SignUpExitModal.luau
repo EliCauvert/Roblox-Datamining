@@ -1,84 +1,88 @@
-﻿local parent = script:FindFirstAncestor("AuthSignup").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
-local authAnalyticsModule = require(parent.AuthAnalytics)
-local authModalShown = authAnalyticsModule.Events.authModalShown
-local authButtonClick = authAnalyticsModule.Events.authButtonClick
-local eventStreamConstants = authAnalyticsModule.EventStreamConstants
-local inputSize = foundationModule.Enums.InputSize
-local dialog = foundationModule.Dialog
-local dialogSize = foundationModule.Enums.DialogSize
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useFocusGuiObject = reactFocusNavigationModule.useFocusGuiObject
-local focusNavigationEventNameEnum = require(parent.FocusNavigationUtils).FocusNavigationEventNameEnum
-local inputHandlersModule = require(parent.InputHandlers)
-local t = {
-	[Enum.KeyCode.ButtonA] = focusNavigationEventNameEnum.Confirm,
-	[Enum.KeyCode.Return] = focusNavigationEventNameEnum.Confirm
+﻿local Parent = script:FindFirstAncestor("AuthSignup").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
+local AuthAnalyticsModule = require(Parent.AuthAnalytics)
+local AuthModalShownFunction = AuthAnalyticsModule.Events.authModalShown
+local AuthButtonClickFunction = AuthAnalyticsModule.Events.authButtonClick
+local EventStreamConstants = AuthAnalyticsModule.EventStreamConstants
+local InputSize = FoundationModule.Enums.InputSize
+local Dialog = FoundationModule.Dialog
+local DialogSize = FoundationModule.Enums.DialogSize
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseFocusGuiObjectFunction = ReactFocusNavigationModule.useFocusGuiObject
+local FocusNavigationEventNameEnum = require(Parent.FocusNavigationUtils).FocusNavigationEventNameEnum
+local InputHandlersModule = require(Parent.InputHandlers)
+local config = {
+	[Enum.KeyCode.ButtonA] = FocusNavigationEventNameEnum.Confirm,
+	[Enum.KeyCode.Return] = FocusNavigationEventNameEnum.Confirm
 }
 
-local function useFocusNavigationBindings(p1)
-	-- upvalues: reactFocusNavigationModule (ref), t (ref), reactModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref)
-	return reactFocusNavigationModule.useEventHandlerMap(reactModule.useMemo(function()
-		-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy)
+local function useFocusNavigationBindings(p1) --[[ Line: 29 ]]
+	-- upvalues: ReactFocusNavigationModule (copy), config (copy), ReactModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy)
+	return ReactFocusNavigationModule.useEventHandlerMap(ReactModule.useMemo(function() --[[ Line: 31 ]]
+		-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval)
 		return {
-			[focusNavigationEventNameEnum.Confirm] = {
-				handler = inputHandlersModule.onRelease(function() end)
+			[FocusNavigationEventNameEnum.Confirm] = {
+				handler = InputHandlersModule.onRelease(function() --[[ Line: 34 ]] end)
 			}
 		}
-	end, {}), reactFocusNavigationModule.useEventMap(t, p1))
+	end, {}), (ReactFocusNavigationModule.useEventMap(config, p1)))
 end
 
-return function(value)
-	-- upvalues: useLocalization (ref), useFocusGuiObject (ref), reactModule (ref), useFocusNavigationBindings (ref), authModalShown (ref), eventStreamConstants (ref), authButtonClick (ref), dialog (ref), dialogSize (ref), foundationModule (ref), buttonVariant (ref), inputSize (ref)
-	local var1 = useLocalization({
+return function(p1) --[[ Line: 46 | Named "SignUpExitModal" ]]
+	-- upvalues: UseLocalizationFunction (copy), UseFocusGuiObjectFunction (copy), ReactModule (copy), useFocusNavigationBindings (copy), AuthModalShownFunction (copy), EventStreamConstants (copy), AuthButtonClickFunction (copy), Dialog (copy), DialogSize (copy), FoundationModule (copy), ButtonVariant (copy), InputSize (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
 		cancel = "Authentication.SignUp.Action.Cancel",
 		confirm = "Authentication.SignUp.Action.ExitModalLeave",
 		title = "Authentication.SignUp.Label.ExitModalTitle",
 		subtitle = "Authentication.SignUp.Label.ExitModalSubtitle"
 	})
-	local var2 = useFocusGuiObject()
-	local var3 = reactModule.useRef(nil)
-	local var4 = useFocusNavigationBindings(nil)
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), var3 (ref), authModalShown (copy), eventStreamConstants (copy)
-		var2(var3.current)
-		authModalShown(eventStreamConstants.Context.SignUpExitModal, eventStreamConstants.State.Success)
+	local UseFocusGuiObjectResult = UseFocusGuiObjectFunction()
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseFocusNavigationBindingsResult = useFocusNavigationBindings(nil)
+	ReactModule.useEffect(function() --[[ Line: 58 ]]
+		-- upvalues: UseFocusGuiObjectResult (copy), UseRefResult (copy), AuthModalShownFunction (upval), EventStreamConstants (upval)
+		UseFocusGuiObjectResult(UseRefResult.current)
+		AuthModalShownFunction(EventStreamConstants.Context.SignUpExitModal, EventStreamConstants.State.Success)
 	end, {})
 	
-	return reactModule.createElement(dialog.Root, { hasBackdrop = true, size = dialogSize.Small, ref = var4 }, {
-		DialogTitle = reactModule.createElement(dialog.Title, { text = var1.title }),
-		DialogContent = reactModule.createElement(dialog.Content, {}, {
-			DialogView = reactModule.createElement(foundationModule.View, { tag = "col fill auto-xy items-start gap-medium" }, {
-				DialogText = reactModule.createElement(dialog.Text, { LayoutOrder = 1, Text = var1.subtitle }),
-				PrimaryButton = reactModule.createElement(foundationModule.Button, {
+	return ReactModule.createElement(Dialog.Root, {
+		hasBackdrop = true,
+		size = DialogSize.Small,
+		ref = UseFocusNavigationBindingsResult
+	}, {
+		DialogTitle = ReactModule.createElement(Dialog.Title, { text = UseLocalizationResult.title }),
+		DialogContent = ReactModule.createElement(Dialog.Content, {}, {
+			DialogView = ReactModule.createElement(FoundationModule.View, { tag = "col fill auto-xy items-start gap-medium" }, {
+				DialogText = ReactModule.createElement(Dialog.Text, { LayoutOrder = 1, Text = UseLocalizationResult.subtitle }),
+				PrimaryButton = ReactModule.createElement(FoundationModule.Button, {
 					LayoutOrder = 2,
-					text = var1.confirm,
-					variant = buttonVariant.Alert,
-					size = inputSize.Small,
+					text = UseLocalizationResult.confirm,
+					variant = ButtonVariant.Alert,
+					size = InputSize.Small,
 					width = UDim.new(1, 0),
 					TextTruncate = Enum.TextTruncate.None,
-					onActivated = reactModule.useCallback(function()
-						-- upvalues: authButtonClick (copy), eventStreamConstants (copy), value (ref)
-						authButtonClick(eventStreamConstants.Context.SignUpExitModal, eventStreamConstants.Button.SignUpExitModalLeave)
-						value.onConfirm()
-					end, { value.onConfirm })
+					onActivated = ReactModule.useCallback(function() --[[ Line: 63 ]]
+						-- upvalues: AuthButtonClickFunction (upval), EventStreamConstants (upval), p1 (copy)
+						AuthButtonClickFunction(EventStreamConstants.Context.SignUpExitModal, EventStreamConstants.Button.SignUpExitModalLeave)
+						p1.onConfirm()
+					end, { p1.onConfirm })
 				}),
-				SecondaryButton = reactModule.createElement(foundationModule.Button, {
+				SecondaryButton = ReactModule.createElement(FoundationModule.Button, {
 					LayoutOrder = 3,
-					text = var1.cancel,
-					variant = buttonVariant.Standard,
-					size = inputSize.Small,
+					text = UseLocalizationResult.cancel,
+					variant = ButtonVariant.Standard,
+					size = InputSize.Small,
 					width = UDim.new(1, 0),
 					TextTruncate = Enum.TextTruncate.None,
-					onActivated = reactModule.useCallback(function()
-						-- upvalues: authButtonClick (copy), eventStreamConstants (copy), value (ref)
-						authButtonClick(eventStreamConstants.Context.SignUpExitModal, eventStreamConstants.Button.SignUpExitModalCancel)
-						value.onClose()
-					end, { value.onClose }),
-					ref = var3
+					onActivated = ReactModule.useCallback(function() --[[ Line: 71 ]]
+						-- upvalues: AuthButtonClickFunction (upval), EventStreamConstants (upval), p1 (copy)
+						AuthButtonClickFunction(EventStreamConstants.Context.SignUpExitModal, EventStreamConstants.Button.SignUpExitModalCancel)
+						p1.onClose()
+					end, { p1.onClose }),
+					ref = UseRefResult
 				})
 			})
 		})

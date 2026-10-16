@@ -1,10 +1,7 @@
-﻿local avatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
-local assetPickerCarouselModule = require(script.AssetPickerCarousel)
-local assetPickerGridModule = require(script.AssetPickerGrid)
-local _ = require(script.AssetPickerTile)
-local _ = require(avatarExperienceProfilePictureEditor.Utils.getAssetPickerStatus)
+﻿local _ = require(script.AssetPickerTile)
+local _ = require(script:FindFirstAncestor("AvatarExperienceProfilePictureEditor").Utils.getAssetPickerStatus)
 
 return {
-	AssetPickerCarousel = assetPickerCarouselModule,
-	AssetPickerGrid = assetPickerGridModule
+	AssetPickerCarousel = require(script.AssetPickerCarousel),
+	AssetPickerGrid = require(script.AssetPickerGrid)
 }

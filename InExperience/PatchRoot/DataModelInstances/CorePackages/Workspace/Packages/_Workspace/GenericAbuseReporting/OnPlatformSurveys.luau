@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Workspace.OnPlatformSurveys.OnPlatformSurveys)
+﻿return (require(script.Parent.Parent.Parent._Workspace.OnPlatformSurveys.OnPlatformSurveys))

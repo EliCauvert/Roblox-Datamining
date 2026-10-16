@@ -1,11 +1,11 @@
-﻿local toastLite = script:FindFirstAncestor("ToastLite")
-local parent = toastLite.Parent
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-local reactRobloxModule = require(parent.Dev.ReactRoblox)
-UIBloxModule.init(require(parent.Dev.RobloxAppUIBloxConfig))
-local appStyleProvider = UIBloxModule.App.Style.AppStyleProvider
-local t = {
+﻿local ToastLite = script:FindFirstAncestor("ToastLite")
+local Parent = ToastLite.Parent
+local ReactModule = require(Parent.React)
+local UIBloxModule = require(Parent.UIBlox)
+local ReactRobloxModule = require(Parent.Dev.ReactRoblox)
+UIBloxModule.init((require(Parent.Dev.RobloxAppUIBloxConfig)))
+local AppStyleProvider = UIBloxModule.App.Style.AppStyleProvider
+local config = {
 	Default = { themeName = "Dark", fontName = "Gotham" },
 	Light = { themeName = "Light", fontName = "Gotham" },
 	Dark = { themeName = "Dark", fontName = "Gotham" }
@@ -13,14 +13,14 @@ local t = {
 
 return {
 	name = "ToastLite",
-	storyRoot = toastLite,
-	roact = reactModule,
-	reactRoblox = reactRobloxModule,
-	mapStory = function(p1)
-		-- upvalues: reactModule (ref), appStyleProvider (ref), t (ref)
-		return function(p2)
-			-- upvalues: reactModule (copy), appStyleProvider (copy), t (copy), p1 (ref)
-			return reactModule.createElement(appStyleProvider, { style = if p2 then t[p2.theme] else t.Default }, { Child = reactModule.createElement(p1, p2) })
+	storyRoot = ToastLite,
+	roact = ReactModule,
+	reactRoblox = ReactRobloxModule,
+	mapStory = function(p1) --[[ Line: 34 ]]
+		-- upvalues: ReactModule (copy), AppStyleProvider (copy), config (copy)
+		return function(p2) --[[ Line: 35 ]]
+			-- upvalues: ReactModule (upval), AppStyleProvider (upval), config (upval), p1 (copy)
+			return ReactModule.createElement(AppStyleProvider, { style = p2 and config[p2.theme] or config.Default }, { Child = ReactModule.createElement(p1, p2) })
 		end
 	end
 }

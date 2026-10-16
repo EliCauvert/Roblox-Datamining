@@ -1,12 +1,12 @@
-﻿local parent = script:FindFirstAncestor("CollectionViews").Parent
-local reactModule = require(parent.React)
-local styleModule = require(parent.Style)
-local uiModeStyleProvider = styleModule.UiModeStyleProvider
-local designTokenProvider = styleModule.DesignTokenProvider
+﻿local Parent = script:FindFirstAncestor("CollectionViews").Parent
+local ReactModule = require(Parent.React)
+local StyleModule = require(Parent.Style)
+local UiModeStyleProvider = StyleModule.UiModeStyleProvider
+local DesignTokenProvider = StyleModule.DesignTokenProvider
 
-return function(p1, p2)
-	-- upvalues: reactModule (ref), uiModeStyleProvider (ref), designTokenProvider (ref)
-	return if p2 then reactModule.createElement(uiModeStyleProvider, { style = { themeName = "Dark", fontName = nil } }, {
-		DesignTokenProvider = reactModule.createElement(designTokenProvider, { tokenMappers = {} }, { Content = p1 })
-	}) else p1
+return function(Content, p1) --[[ Line: 9 | Named "maybeForceDarkTheme" ]]
+	-- upvalues: ReactModule (copy), UiModeStyleProvider (copy), DesignTokenProvider (copy)
+	return if p1 then ReactModule.createElement(UiModeStyleProvider, { style = { themeName = "Dark", fontName = nil } }, {
+		DesignTokenProvider = ReactModule.createElement(DesignTokenProvider, { tokenMappers = {} }, { Content = Content })
+	}) else Content
 end

@@ -1,11 +1,11 @@
-﻿local home = script:FindFirstAncestor("Home")
-local parent = home.Parent
-local var1 = require(parent.UrlBuilder).UrlBuilder.new({
-	base = require(parent.Http).Url.APIS_URL,
-	path = require(home.HomeConstants).ApiName
+﻿local Home = script:FindFirstAncestor("Home")
+local Parent = Home.Parent
+local NewResult = require(Parent.UrlBuilder).UrlBuilder.new({
+	base = require(Parent.Http).Url.APIS_URL,
+	path = require(Home.HomeConstants).ApiName
 })
 
-return function()
-	-- upvalues: var1 (ref)
-	return var1()
+return function() --[[ Line: 13 | Named "getHomePageUrl" ]]
+	-- upvalues: NewResult (copy)
+	return NewResult()
 end

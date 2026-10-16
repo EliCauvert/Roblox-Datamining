@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.EditProfileBackground.EditProfileBackground)
+﻿return (require(script.Parent.Parent.Parent._Index.EditProfileBackground.EditProfileBackground))

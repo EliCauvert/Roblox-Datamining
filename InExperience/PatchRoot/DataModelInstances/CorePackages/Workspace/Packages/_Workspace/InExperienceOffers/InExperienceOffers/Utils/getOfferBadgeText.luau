@@ -1,19 +1,20 @@
-﻿local inExperienceOffers = script:FindFirstAncestor("InExperienceOffers")
-local getOffersForKeyModule = require(inExperienceOffers.Utils.getOffersForKey)
-local selectActiveOfferModule = require(inExperienceOffers.Utils.selectActiveOffer)
-local _ = require(inExperienceOffers.Types)
+﻿local InExperienceOffers = script:FindFirstAncestor("InExperienceOffers")
+local GetOffersForKeyModule = require(InExperienceOffers.Utils.getOffersForKey)
+local SelectActiveOfferModule = require(InExperienceOffers.Utils.selectActiveOffer)
+local _ = require(InExperienceOffers.Types)
 
-return function(p1, p2)
-	-- upvalues: getOffersForKeyModule (ref), selectActiveOfferModule (ref)
+return function(p1, p2) --[[ Line: 9 | Named "getOfferBadgeText" ]]
+	-- upvalues: GetOffersForKeyModule (copy), SelectActiveOfferModule (copy)
 	if p2 == nil then
 		return nil
 	end
-	local var1 = selectActiveOfferModule(getOffersForKeyModule(p1, p2), "menuBadge")
+	local MenuBadge = SelectActiveOfferModule(GetOffersForKeyModule(p1, p2), "menuBadge")
 	
-	if var1 == nil then
+	if MenuBadge == nil then
 		return nil
+	else
+		local MenuBadge1 = MenuBadge.presentationData.menuBadge
+		
+		return if MenuBadge1 == nil then nil else MenuBadge1.title
 	end
-	local menuBadge = var1.presentationData.menuBadge
-	
-	return if menuBadge == nil then nil else menuBadge.title
 end

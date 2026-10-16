@@ -1,20 +1,22 @@
-﻿local currencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
-local _ = require(currencyTransfers.types)
-local tModule = require(currencyTransfers.Parent.t)
-local t = {}
+﻿local CurrencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
+local _ = require(CurrencyTransfers.types)
+local TModule = require(CurrencyTransfers.Parent.t)
+local GetTransferByIdModelModule = {}
 
-function t.new(p1)
-	-- upvalues: t (ref)
-	assert(t.isValid(p1))
-	t.__index = t
-	setmetatable(p1, t)
+function GetTransferByIdModelModule.new(p1) --[[ Line: 14 ]]
+	-- upvalues: GetTransferByIdModelModule (copy)
+	assert(GetTransferByIdModelModule.isValid(p1))
+	GetTransferByIdModelModule.__index = GetTransferByIdModelModule
+	setmetatable(p1, GetTransferByIdModelModule)
 	
 	return p1
 end
 
-function t.mock(p1)
-	-- upvalues: currencyTransfers (ref), t (ref)
-	return t.new({
+function GetTransferByIdModelModule.mock(p1) --[[ Line: 26 ]]
+	-- upvalues: CurrencyTransfers (copy), GetTransferByIdModelModule (copy)
+	local TransferStatusModule = require(CurrencyTransfers.Enums.TransferStatus)
+	
+	return (GetTransferByIdModelModule.new({
 		transfer = (p1 or {}).transfer or {
 			transferId = 123456,
 			transferAmount = 100,
@@ -32,48 +34,48 @@ function t.mock(p1)
 				targetName = "RecipientUser",
 				targetDisplayName = "Recipient Display"
 			},
-			status = require(currencyTransfers.Enums.TransferStatus).Completed
+			status = TransferStatusModule.Completed
 		}
-	})
+	}))
 end
 
-local function formatRobuxTransfer(p1)
-	-- upvalues: currencyTransfers (ref)
-	local transferStatusModule = require(currencyTransfers.Enums.TransferStatus)
-	local sender = p1.sender
-	local recipient = p1.recipient
+local function formatRobuxTransfer(Transfer) --[[ Line: 56 ]]
+	-- upvalues: CurrencyTransfers (copy)
+	local TransferStatusModule = require(CurrencyTransfers.Enums.TransferStatus)
+	local Sender = Transfer.sender
+	local Recipient = Transfer.recipient
 	
 	return {
-		transferId = p1.transferId,
+		transferId = Transfer.transferId,
 		sender = {
-			type = sender.type,
-			targetId = sender.targetId,
-			targetName = sender.targetName,
-			targetDisplayName = sender.targetDisplayName
+			type = Sender.type,
+			targetId = Sender.targetId,
+			targetName = Sender.targetName,
+			targetDisplayName = Sender.targetDisplayName
 		},
 		recipient = {
-			type = recipient.type,
-			targetId = recipient.targetId,
-			targetName = recipient.targetName,
-			targetDisplayName = recipient.targetDisplayName
+			type = Recipient.type,
+			targetId = Recipient.targetId,
+			targetName = Recipient.targetName,
+			targetDisplayName = Recipient.targetDisplayName
 		},
-		transferAmount = p1.transferAmount,
-		creationTime = p1.creationTime,
-		requireRecipientAction = p1.requireRecipientAction,
-		status = transferStatusModule.fromValue(p1.status) or transferStatusModule.Completed
+		transferAmount = Transfer.transferAmount,
+		creationTime = Transfer.creationTime,
+		requireRecipientAction = Transfer.requireRecipientAction,
+		status = TransferStatusModule.fromValue(Transfer.status) or TransferStatusModule.Completed
 	}
 end
 
-function t.format(p1)
-	-- upvalues: t (ref), formatRobuxTransfer (ref)
-	local transfer = p1.transfer
+function GetTransferByIdModelModule.format(p1) --[[ Line: 81 ]]
+	-- upvalues: GetTransferByIdModelModule (copy), formatRobuxTransfer (copy)
+	local Transfer = p1.transfer
 	
-	if not transfer then
+	if not Transfer then
 		error("GetTransferByIdModel.format: transfer is missing from response")
 	end
-	return t.new({ transfer = formatRobuxTransfer(transfer) })
+	return (GetTransferByIdModelModule.new({ transfer = formatRobuxTransfer(Transfer) }))
 end
 
-t.isValid = tModule.strictInterface({ transfer = tModule.table })
+GetTransferByIdModelModule.isValid = TModule.strictInterface({ transfer = TModule.table })
 
-return t
+return GetTransferByIdModelModule

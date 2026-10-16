@@ -1,20 +1,20 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local cryoModule = require(corePackagesService.Packages.Cryo)
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-require(corePackagesService.Packages.UIBlox).init(require(corePackagesService.Workspace.Packages.RobloxAppUIBloxConfig))
-local storyStoreModule = require(script.Parent.Helpers.StoryStore)
-local chatSettingsModule = require(script.Parent.ChatSettings)
-roactModule.setGlobalConfig({ elementTracing = true, propValidation = true })
+﻿local CorePackages = game:GetService("CorePackages")
+local CryoModule = require(CorePackages.Packages.Cryo)
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+require(CorePackages.Packages.UIBlox).init(require(CorePackages.Workspace.Packages.RobloxAppUIBloxConfig))
+local StoryStoreModule = require(script.Parent.Helpers.StoryStore)
+local ChatSettingsModule = require(script.Parent.ChatSettings)
+RoactModule.setGlobalConfig({ elementTracing = true, propValidation = true })
 
 return {
-	roact = roactModule,
-	mapStory = function(p1)
-		-- upvalues: roactModule (ref), roactRoduxModule (ref), storyStoreModule (ref), cryoModule (ref), chatSettingsModule (ref)
-		return function(p2)
-			-- upvalues: roactModule (copy), roactRoduxModule (copy), storyStoreModule (copy), p1 (ref), cryoModule (copy), chatSettingsModule (copy)
-			return roactModule.createElement(roactRoduxModule.StoreProvider, { store = storyStoreModule }, {
-				Story = roactModule.createElement(p1, cryoModule.Dictionary.join(p2, { chatSettings = chatSettingsModule }))
+	roact = RoactModule,
+	mapStory = function(p1) --[[ Line: 19 ]]
+		-- upvalues: RoactModule (copy), RoactRoduxModule (copy), StoryStoreModule (copy), CryoModule (copy), ChatSettingsModule (copy)
+		return function(p2) --[[ Line: 20 ]]
+			-- upvalues: RoactModule (upval), RoactRoduxModule (upval), StoryStoreModule (upval), p1 (copy), CryoModule (upval), ChatSettingsModule (upval)
+			return RoactModule.createElement(RoactRoduxModule.StoreProvider, { store = StoryStoreModule }, {
+				Story = RoactModule.createElement(p1, CryoModule.Dictionary.join(p2, { chatSettings = ChatSettingsModule }))
 			})
 		end
 	end

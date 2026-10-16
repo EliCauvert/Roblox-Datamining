@@ -1,54 +1,54 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local parent = momentsCreation.Parent
-local builderIconsModule = require(parent.BuilderIcons)
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local fFlagMomentsTextOverlayColorPickerIconModule = require(momentsCreation.Flags.FFlagMomentsTextOverlayColorPickerIcon)
-local image = foundationModule.Image
-local iconButton = foundationModule.IconButton
-local view = foundationModule.View
-local useTokens = foundationModule.Hooks.useTokens
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local Parent = MomentsCreation.Parent
+local BuilderIconsModule = require(Parent.BuilderIcons)
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local FFlagMomentsTextOverlayColorPickerIconModule = require(MomentsCreation.Flags.FFlagMomentsTextOverlayColorPickerIcon)
+local Image = FoundationModule.Image
+local IconButton = FoundationModule.IconButton
+local View = FoundationModule.View
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return function(p1)
-	-- upvalues: useTokens (ref), fFlagMomentsTextOverlayColorPickerIconModule (ref), reactModule (ref), view (ref), iconButton (ref), builderIconsModule (ref), foundationModule (ref), image (ref)
-	local var1 = useTokens()
+return function(Frame: Frame) --[[ Line: 35 | Named "TextColorButton" ]]
+	-- upvalues: UseTokensFunction (copy), FFlagMomentsTextOverlayColorPickerIconModule (copy), ReactModule (copy), View (copy), IconButton (copy), BuilderIconsModule (copy), FoundationModule (copy), Image (copy)
+	local UseTokensResult = UseTokensFunction()
 	
-	return if fFlagMomentsTextOverlayColorPickerIconModule then reactModule.createElement(view, {
+	return if FFlagMomentsTextOverlayColorPickerIconModule then ReactModule.createElement(View, {
 		tag = "radius-circle",
-		LayoutOrder = p1.LayoutOrder,
-		Size = UDim2.fromOffset(var1.Size.Size_1000, var1.Size.Size_1000),
-		onActivated = p1.onToggle,
+		LayoutOrder = Frame.LayoutOrder,
+		Size = UDim2.fromOffset(UseTokensResult.Size.Size_1000, UseTokensResult.Size.Size_1000),
+		onActivated = Frame.onToggle,
 		cursor = {
-			radius = UDim.new(0, var1.Radius.Circle),
-			offset = var1.Size.Size_150,
-			borderWidth = var1.Stroke.Thicker
+			radius = UDim.new(0, UseTokensResult.Radius.Circle),
+			offset = UseTokensResult.Size.Size_150,
+			borderWidth = UseTokensResult.Stroke.Thicker
 		}
 	}, {
-		Highlight = if p1.expanded then reactModule.createElement(view, {
+		Highlight = if Frame.expanded then ReactModule.createElement(View, {
 			ZIndex = 1,
 			tag = "size-full radius-circle",
-			backgroundStyle = var1.Color.State.Hover
+			backgroundStyle = UseTokensResult.Color.State.Hover
 		}) else nil,
-		Icon = reactModule.createElement(image, {
+		Icon = ReactModule.createElement(Image, {
 			ZIndex = 2,
 			Image = "rbxasset://textures/ui/Moments/text-color-picker.png",
 			tag = "position-center-center anchor-center-center",
-			Size = UDim2.fromOffset(var1.Size.Size_600, var1.Size.Size_600)
+			Size = UDim2.fromOffset(UseTokensResult.Size.Size_600, UseTokensResult.Size.Size_600)
 		})
-	}) else reactModule.createElement(view, {
+	}) else ReactModule.createElement(View, {
 		tag = "auto-xy radius-circle",
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Icon = reactModule.createElement(iconButton, {
+		Icon = ReactModule.createElement(IconButton, {
 			isCircular = true,
-			icon = builderIconsModule.Icon.PaintBucket,
-			onActivated = p1.onToggle,
-			size = foundationModule.Enums.InputSize.Medium
+			icon = BuilderIconsModule.Icon.PaintBucket,
+			onActivated = Frame.onToggle,
+			size = FoundationModule.Enums.InputSize.Medium
 		}),
-		Highlight = if p1.expanded then reactModule.createElement(view, {
+		Highlight = if Frame.expanded then ReactModule.createElement(View, {
 			ZIndex = 2,
 			tag = "size-full radius-circle",
-			backgroundStyle = var1.Color.State.Hover
+			backgroundStyle = UseTokensResult.Color.State.Hover
 		}) else nil
 	})
 end

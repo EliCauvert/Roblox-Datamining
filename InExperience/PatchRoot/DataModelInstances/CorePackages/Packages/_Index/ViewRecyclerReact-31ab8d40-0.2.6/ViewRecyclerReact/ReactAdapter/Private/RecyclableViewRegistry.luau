@@ -1,20 +1,20 @@
-﻿local viewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
-local _ = require(viewRecyclerReact.Parent.React)
-local _ = require(viewRecyclerReact.ReactAdapter.RecyclableViewReadiness)
-local _ = require(viewRecyclerReact.Parent.Signals)
-local tbl = setmetatable({}, { __mode = "k" })
+﻿local ViewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
+local _ = require(ViewRecyclerReact.Parent.React)
+local _ = require(ViewRecyclerReact.ReactAdapter.RecyclableViewReadiness)
+local _ = require(ViewRecyclerReact.Parent.Signals)
+local self = setmetatable({}, { __mode = "k" })
 
 return {
-	register = function(p1, p2)
-		-- upvalues: tbl (ref)
-		tbl[p1] = p2
+	register = function(Key, p1) --[[ Line: 23 ]]
+		-- upvalues: self (copy)
+		self[Key] = p1
 	end,
-	isRegistered = function(p1)
-		-- upvalues: tbl (ref)
-		return tbl[p1] ~= nil
+	isRegistered = function(p1): boolean --[[ Line: 27 ]]
+		-- upvalues: self (copy)
+		return self[p1] ~= nil
 	end,
-	getMetadata = function(p1)
-		-- upvalues: tbl (ref)
-		return tbl[p1]
+	getMetadata = function(p1) --[[ Line: 31 ]]
+		-- upvalues: self (copy)
+		return self[p1]
 	end
 }

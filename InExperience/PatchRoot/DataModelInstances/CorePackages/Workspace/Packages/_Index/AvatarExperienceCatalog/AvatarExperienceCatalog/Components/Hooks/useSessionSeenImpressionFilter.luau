@@ -1,19 +1,20 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
-local reactModule = require(parent.React)
-local seenImpressionsStore = require(parent.AvatarExperienceAnalytics).Store.SeenImpressionsStore
-local category = seenImpressionsStore.Category
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
+local ReactModule = require(Parent.React)
+local SeenImpressionsStore = require(Parent.AvatarExperienceAnalytics).Store.SeenImpressionsStore
+local Category = SeenImpressionsStore.Category
 
-return function(p1)
-	-- upvalues: reactModule (ref), seenImpressionsStore (ref), category (ref)
-	return reactModule.useCallback(function(p2)
-		-- upvalues: p1 (ref), seenImpressionsStore (copy), category (copy)
-		local text = "CatalogSort_" .. p0 .. "_" .. p1
+return function(p1) --[[ Line: 33 | Named "useSessionSeenImpressionFilter" ]]
+	-- upvalues: ReactModule (copy), SeenImpressionsStore (copy), Category (copy)
+	return ReactModule.useCallback(function(Text): boolean --[[ Line: 34 ]]
+		-- upvalues: p1 (copy), SeenImpressionsStore (upval), Category (upval)
+		local Text1 = "CatalogSort_" .. p1 .. "_" .. Text
 		
-		if seenImpressionsStore.hasSeen(category.WidgetItems, text) then
+		if SeenImpressionsStore.hasSeen(Category.WidgetItems, Text1) then
 			return false
+		else
+			SeenImpressionsStore.markSeen(Category.WidgetItems, Text1)
+			
+			return true
 		end
-		seenImpressionsStore.markSeen(category.WidgetItems, text)
-		
-		return true
 	end, { p1 })
 end

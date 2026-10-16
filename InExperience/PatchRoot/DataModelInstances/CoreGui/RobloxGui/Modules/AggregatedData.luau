@@ -1,29 +1,32 @@
-﻿local t = {}
-t.__index = t
+﻿local AggregatedDataModule = {}
+AggregatedDataModule.__index = AggregatedDataModule
 
-function t.new()
-	-- upvalues: t (ref)
-	local t_1 = {}
-	setmetatable(t_1, t)
+function AggregatedDataModule.new() --[[ Line: 4 ]]
+	-- upvalues: AggregatedDataModule (copy)
+	local t = {}
+	setmetatable(t, AggregatedDataModule)
 	
-	return t_1
+	return t
 end
 
-local function _(value)
-	return value:find("rbxassetid://")
+local function _(p1: string): number --[[ Line: 10 | Named "isRbxAssetId" ]]
+	return p1:find("rbxassetid://")
 end
 
-function t:addPlay(p1, p2, p3)
-	if not p1:find("rbxassetid://") then return end
-	local var1 = p1:sub(14)
+function AggregatedDataModule:addPlay(Text: string, Playtime, Loopcount) --[[ Line: 14 ]]
+	if not Text:find("rbxassetid://") then return end
+	local Segment: string = Text:sub(14)
 	
-	if self[var1] == nil then
-		self[var1] = { playtime = p2, loopcount = p3 }
+	if self[Segment] == nil then
+		self[Segment] = { playtime = Playtime, loopcount = Loopcount }
 		
 		return
+	else
+		local v1 = self[Segment]
+		v1.playtime += Playtime
+		local v2 = self[Segment]
+		v2.loopcount += Loopcount
 	end
-	self[var1].playtime += p2
-	self[var1].loopcount += p3
 end
 
-return t
+return AggregatedDataModule

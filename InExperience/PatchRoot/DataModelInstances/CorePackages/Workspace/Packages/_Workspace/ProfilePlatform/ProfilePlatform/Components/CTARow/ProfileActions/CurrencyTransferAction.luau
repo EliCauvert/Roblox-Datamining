@@ -1,34 +1,33 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local sharedFlagsModule = require(parent.SharedFlags)
-local enums = require(parent.CurrencyTransfers).Enums
-local transferDirection = enums.TransferDirection
-local transferOrigination = enums.TransferOrigination
-local enumsModule = require(profilePlatform.Common.Enums)
-local _ = require(profilePlatform.Components.CTARow.Types)
-local eventNamesModule = require(profilePlatform.Analytics.EventNames)
-local profileTypes = enumsModule.ProfileTypes
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local Enums = require(Parent.CurrencyTransfers).Enums
+local TransferDirection = Enums.TransferDirection
+local TransferOrigination = Enums.TransferOrigination
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local _ = require(ProfilePlatform.Components.CTARow.Types)
+local EventNamesModule = require(ProfilePlatform.Analytics.EventNames)
+local ProfileTypes = EnumsModule.ProfileTypes
 
 return {
-	[enumsModule.ProfileActions.CurrencyTransfer] = if sharedFlagsModule.FFlagProfilePlatformEnableCurrencyTransfer then function(p1)
-		-- upvalues: enumsModule (ref), profileTypes (ref), eventNamesModule (ref), transferDirection (ref), transferOrigination (ref)
+	[EnumsModule.ProfileActions.CurrencyTransfer] = if require(Parent.SharedFlags).FFlagProfilePlatformEnableCurrencyTransfer then function(p1) --[[ Line: 18 ]]
+		-- upvalues: EnumsModule (copy), ProfileTypes (copy), EventNamesModule (copy), TransferDirection (copy), TransferOrigination (copy)
 		return {
-			text = p1.localized[enumsModule.ProfileActions.CurrencyTransfer],
+			text = p1.localized[EnumsModule.ProfileActions.CurrencyTransfer],
 			onActivated = {
-				[profileTypes.User] = function()
-					-- upvalues: p1 (ref), enumsModule (copy), eventNamesModule (copy), transferDirection (copy), transferOrigination (copy)
-					if p1.buttonSurface == enumsModule.ButtonSurface.ContextualMenu then
-						p1.analytics.fireAnalyticsEvent(eventNamesModule.ContextualMenuButtonCurrencyTransfer, { buttonSurface = p1.buttonSurface })
+				[ProfileTypes.User] = function() --[[ Line: 22 ]]
+					-- upvalues: p1 (copy), EnumsModule (upval), EventNamesModule (upval), TransferDirection (upval), TransferOrigination (upval)
+					if p1.buttonSurface == EnumsModule.ButtonSurface.ContextualMenu then
+						p1.analytics.fireAnalyticsEvent(EventNamesModule.ContextualMenuButtonCurrencyTransfer, { buttonSurface = p1.buttonSurface })
 					else
-						p1.analytics.fireAnalyticsEvent(eventNamesModule.CTAButtonCurrencyTransfer, { buttonSurface = p1.buttonSurface })
+						p1.analytics.fireAnalyticsEvent(EventNamesModule.CTAButtonCurrencyTransfer, { buttonSurface = p1.buttonSurface })
 					end
-					local navigateToTransfer = p1.navigateTo and p1.navigateTo.navigateToTransfer
+					local NavigateToTransfer: (any) -> () = p1.navigateTo and p1.navigateTo.navigateToTransfer
 					
-					if navigateToTransfer then
-						navigateToTransfer({
+					if NavigateToTransfer then
+						NavigateToTransfer({
 							recipientUserId = p1.profileId,
-							direction = transferDirection.Send,
-							transferOrigination = transferOrigination.Profile
+							direction = TransferDirection.Send,
+							transferOrigination = TransferOrigination.Profile
 						})
 					end
 				end

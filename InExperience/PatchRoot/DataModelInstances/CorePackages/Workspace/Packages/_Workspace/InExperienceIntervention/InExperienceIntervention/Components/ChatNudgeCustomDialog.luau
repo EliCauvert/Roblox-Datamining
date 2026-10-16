@@ -1,117 +1,117 @@
-﻿local inExperienceIntervention = script:FindFirstAncestor("InExperienceIntervention")
-local playersService = game:GetService("Players")
-local parent = inExperienceIntervention.Parent
-local constants = require(parent.InterventionShared).Utils.Constants
-local reactModule = require(parent.React)
-local interventionContestFeedbackFooterModule = require(inExperienceIntervention.Components.InterventionContestFeedbackFooter)
-local UIBloxModule = require(parent.UIBlox)
-local foundationModule = require(parent.Foundation)
-local partialPageModal = UIBloxModule.App.Dialog.Modal.PartialPageModal
-local text = foundationModule.Text
-local view = foundationModule.View
-local button = foundationModule.Button
-local useTokens = foundationModule.Hooks.useTokens
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useStyle = UIBloxModule.Core.Style.useStyle
-local useLayerCollector = UIBloxModule.Core.Layout.LayerCollector.useLayerCollector
-local localPlayer = playersService.LocalPlayer
-local inExperienceInterventionAnalyticsModule = require(inExperienceIntervention.InExperienceInterventionAnalytics)
-local scrollView = foundationModule.ScrollView
-local scrollBarVisibility = foundationModule.Enums.ScrollBarVisibility
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local fillBehavior = foundationModule.Enums.FillBehavior
-local useProperty = require(parent.GuiObjectUtils).useProperty
-local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local focusRoot = focusNavigationUtilsModule.FocusRoot
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local var1 = reactFocusNavigationModule.FocusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui)
+﻿local InExperienceIntervention = script:FindFirstAncestor("InExperienceIntervention")
+local Parent = InExperienceIntervention.Parent
+local Constants = require(Parent.InterventionShared).Utils.Constants
+local ReactModule = require(Parent.React)
+local InterventionContestFeedbackFooterModule = require(InExperienceIntervention.Components.InterventionContestFeedbackFooter)
+local UIBloxModule = require(Parent.UIBlox)
+local FoundationModule = require(Parent.Foundation)
+local PartialPageModal = UIBloxModule.App.Dialog.Modal.PartialPageModal
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local Button = FoundationModule.Button
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local UseLayerCollectorFunction = UIBloxModule.Core.Layout.LayerCollector.useLayerCollector
+local LocalPlayer = game:GetService("Players").LocalPlayer
+local InExperienceInterventionAnalyticsModule = require(InExperienceIntervention.InExperienceInterventionAnalytics)
+local ScrollView = FoundationModule.ScrollView
+local ScrollBarVisibility = FoundationModule.Enums.ScrollBarVisibility
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local FillBehavior = FoundationModule.Enums.FillBehavior
+local UsePropertyFunction = require(Parent.GuiObjectUtils).useProperty
+local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local FocusRoot = FocusNavigationUtilsModule.FocusRoot
+local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+local NewResult = ReactFocusNavigationModule.FocusNavigationService.new(ReactFocusNavigationModule.EngineInterface.CoreGui)
 
-function ChatNudgeCustomDialog(p1)
-	-- upvalues: reactModule (ref), inExperienceInterventionAnalyticsModule (ref), useLocalization (ref), constants (ref), useStyle (ref), useLayerCollector (ref), useTokens (ref), useProperty (ref), localPlayer (ref), view (ref), text (ref), partialPageModal (ref), scrollView (ref), scrollBarVisibility (ref), reactFocusNavigationModule (ref), var1 (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), button (ref), buttonVariant (ref), fillBehavior (ref), interventionContestFeedbackFooterModule (ref)
-	local var2 = reactModule.useRef(DateTime.now().UnixTimestampMillis)
-	local var3 = reactModule.useRef(nil)
-	local var4, var5 = reactModule.useState(0)
-	reactModule.useEffect(function()
-		-- upvalues: inExperienceInterventionAnalyticsModule (copy), var2 (ref), p1 (ref)
-		inExperienceInterventionAnalyticsModule.sendAnalyticsEvent(inExperienceInterventionAnalyticsModule.Constants.EventTypes.ModalAppeared, inExperienceInterventionAnalyticsModule.Constants.InterventionTypes.Nudge, var2.current, p1.eventId, p1.violatingChatLine, nil)
-	end, { var2 })
-	local var6 = useLocalization(constants.localizationKeys)
-	local var7 = useStyle()
-	local var8 = useLayerCollector()
-	local var9 = useTokens()
-	local var10 = useProperty(var3, "AbsoluteSize")
-	reactModule.useEffect(function()
-		-- upvalues: var10 (ref), var8 (ref), constants (copy), var5 (ref)
-		var5(math.min(var8.absoluteSize.Y - constants.UNIBAR_HEIGHT - constants.DIALOG_HEADER_HEIGHT, if var10 then var10.Y else 0))
-	end, { var8.absoluteSize.Y, var10 })
+function ChatNudgeCustomDialog(p1) --[[ Line: 41 ]]
+	-- upvalues: ReactModule (copy), InExperienceInterventionAnalyticsModule (copy), UseLocalizationFunction (copy), Constants (copy), UseStyleFunction (copy), UseLayerCollectorFunction (copy), UseTokensFunction (copy), UsePropertyFunction (copy), LocalPlayer (copy), View (copy), Text (copy), PartialPageModal (copy), ScrollView (copy), ScrollBarVisibility (copy), ReactFocusNavigationModule (copy), NewResult (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), Button (copy), ButtonVariant (copy), FillBehavior (copy), InterventionContestFeedbackFooterModule (copy)
+	local UseRefResult = ReactModule.useRef(DateTime.now().UnixTimestampMillis)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
+	ReactModule.useEffect(function() --[[ Line: 45 ]]
+		-- upvalues: InExperienceInterventionAnalyticsModule (upval), UseRefResult (copy), p1 (copy)
+		InExperienceInterventionAnalyticsModule.sendAnalyticsEvent(InExperienceInterventionAnalyticsModule.Constants.EventTypes.ModalAppeared, InExperienceInterventionAnalyticsModule.Constants.InterventionTypes.Nudge, UseRefResult.current, p1.eventId, p1.violatingChatLine, nil)
+	end, { UseRefResult })
+	local UseLocalizationResult = UseLocalizationFunction(Constants.localizationKeys)
+	local UseStyleResult = UseStyleFunction()
+	local UseLayerCollectorResult = UseLayerCollectorFunction()
+	local UseTokensResult = UseTokensFunction()
+	local AbsoluteSize = UsePropertyFunction(UseRefResult1, "AbsoluteSize")
+	ReactModule.useEffect(function() --[[ Line: 64 ]]
+		-- upvalues: AbsoluteSize (copy), UseLayerCollectorResult (copy), Constants (upval), UseStateResult2 (copy)
+		UseStateResult2((math.min(UseLayerCollectorResult.absoluteSize.Y - Constants.UNIBAR_HEIGHT - Constants.DIALOG_HEADER_HEIGHT, if AbsoluteSize then AbsoluteSize.Y else 0)))
+	end, { UseLayerCollectorResult.absoluteSize.Y, AbsoluteSize })
+	local Text1 = if LocalPlayer then `{LocalPlayer.DisplayName}: {p1.violatingChatLine}` else p1.violatingChatLine
 	
-	return reactModule.createElement(partialPageModal, {
-		title = var6.ChatBreaksRulesText,
-		screenSize = var8.absoluteSize
+	return ReactModule.createElement(PartialPageModal, {
+		title = UseLocalizationResult.ChatBreaksRulesText,
+		screenSize = UseLayerCollectorResult.absoluteSize
 	}, {
-		ScrollView = reactModule.createElement(scrollView, {
-			Size = UDim2.new(1, 0, 0, var4),
+		ScrollView = ReactModule.createElement(ScrollView, {
+			Size = UDim2.new(1, 0, 0, UseStateResult),
 			scroll = {
 				AutomaticCanvasSize = Enum.AutomaticSize.Y,
 				CanvasSize = UDim2.new(1, 0, 1, 0),
-				scrollBarVisibility = scrollBarVisibility.Always,
+				scrollBarVisibility = ScrollBarVisibility.Always,
 				ScrollingDirection = Enum.ScrollingDirection.Y
 			}
 		}, {
-			FocusNavigationCoreScriptsProvider = reactModule.createElement(reactFocusNavigationModule.FocusNavigationContext.Provider, { value = var1 }, {
-				FocusNavigationCoreScriptsWrapper = reactModule.createElement(focusRoot, {
+			FocusNavigationCoreScriptsProvider = ReactModule.createElement(ReactFocusNavigationModule.FocusNavigationContext.Provider, { value = NewResult }, {
+				FocusNavigationCoreScriptsWrapper = ReactModule.createElement(FocusRoot, {
 					isIsolated = true,
 					isAutoFocusRoot = true,
-					surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.PopUp,
+					surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.PopUp,
 					frameProps = {
 						Size = UDim2.new(1, 0, 0, 0),
 						AutomaticSize = Enum.AutomaticSize.Y
 					}
 				}, {
-					InnerContent = reactModule.createElement(view, {
+					InnerContent = ReactModule.createElement(View, {
 						tag = "col gap-large align-x-center align-y-center padding-x-small padding-top-large",
-						ref = var3,
-						Size = UDim2.new(1, -constants.SCROLL_BAR_WIDTH, 0, 0),
+						ref = UseRefResult1,
+						Size = UDim2.new(1, -Constants.SCROLL_BAR_WIDTH, 0, 0),
 						AutomaticSize = Enum.AutomaticSize.Y
 					}, {
-						MiddleContent = if p1.violatingChatLine then reactModule.createElement(view, {
+						MiddleContent = if p1.violatingChatLine then ReactModule.createElement(View, {
 							LayoutOrder = 1,
 							Size = UDim2.new(1, 0, 0, 0),
 							AutomaticSize = Enum.AutomaticSize.Y
 						}, {
-							Layout = reactModule.createElement("UIListLayout", {
+							Layout = ReactModule.createElement("UIListLayout", {
 								HorizontalAlignment = Enum.HorizontalAlignment.Center,
 								FillDirection = Enum.FillDirection.Vertical,
 								SortOrder = Enum.SortOrder.LayoutOrder,
-								Padding = UDim.new(0, constants.STANDARD_PADDING / 2)
+								Padding = UDim.new(0, Constants.STANDARD_PADDING / 2)
 							}),
-							ChatIncludesTextFrame = reactModule.createElement(view, {
+							ChatIncludesTextFrame = ReactModule.createElement(View, {
 								LayoutOrder = 1,
 								Size = UDim2.new(1, 0, 0, 0),
 								AutomaticSize = Enum.AutomaticSize.Y
 							}, {
-								ChatIncludesText = reactModule.createElement(text, {
-									Text = var6.ChatIncludesText,
-									fontStyle = var9.Typography.BodySmall,
+								ChatIncludesText = ReactModule.createElement(Text, {
+									Text = UseLocalizationResult.ChatIncludesText,
+									fontStyle = UseTokensResult.Typography.BodySmall,
 									TextXAlignment = Enum.TextXAlignment.Left,
 									AnchorPoint = Vector2.new(0, 0),
 									AutomaticSize = Enum.AutomaticSize.XY
 								})
 							}),
-							ViolatingTextFrame = reactModule.createElement(view, {
+							ViolatingTextFrame = ReactModule.createElement(View, {
 								LayoutOrder = 2,
 								BackgroundTransparency = 0,
 								tag = "col gap-small align-x-center align-y-center padding-x-large radius-medium stroke-default",
-								Size = UDim2.new(1, 0, 0, constants.VIOLATION_HEIGHT),
-								BackgroundColor3 = var7.Theme.BackgroundUIDefault.Color
+								Size = UDim2.new(1, 0, 0, Constants.VIOLATION_HEIGHT),
+								BackgroundColor3 = UseStyleResult.Theme.BackgroundUIDefault.Color
 							}, {
-								ViolationText = reactModule.createElement(text, {
+								ViolationText = ReactModule.createElement(Text, {
 									LayoutOrder = 2,
 									TextWrapped = true,
-									Text = if localPlayer then `{localPlayer.DisplayName}: {p1.violatingChatLine}` else p1.violatingChatLine,
-									textStyle = var7.Theme.TextMuted,
-									fontStyle = var7.Font.Body,
+									Text = Text1,
+									textStyle = UseStyleResult.Theme.TextMuted,
+									fontStyle = UseStyleResult.Font.Body,
 									Size = UDim2.new(1, 0, 0, 0),
 									TextXAlignment = Enum.TextXAlignment.Left,
 									TextYAlignment = Enum.TextYAlignment.Center,
@@ -120,44 +120,44 @@ function ChatNudgeCustomDialog(p1)
 								})
 							})
 						}) else nil,
-						WarningText = reactModule.createElement(text, {
+						WarningText = ReactModule.createElement(Text, {
 							LayoutOrder = 3,
 							TextWrapped = true,
-							Text = var6.TextChatMayBeSuspendedText,
-							textStyle = var7.Theme.TextEmphasis,
-							fontStyle = var7.Font.Body,
+							Text = UseLocalizationResult.TextChatMayBeSuspendedText,
+							textStyle = UseStyleResult.Theme.TextEmphasis,
+							fontStyle = UseStyleResult.Font.Body,
 							Size = UDim2.new(1, 0, 0, 0),
 							TextXAlignment = Enum.TextXAlignment.Center,
 							TextYAlignment = Enum.TextYAlignment.Center,
 							AutomaticSize = Enum.AutomaticSize.Y
 						}),
-						UnderstandButtonFrame = reactModule.createElement(view, {
+						UnderstandButtonFrame = ReactModule.createElement(View, {
 							LayoutOrder = 4,
 							Size = UDim2.new(1, 0, 0, 0),
 							AutomaticSize = Enum.AutomaticSize.Y
 						}, {
-							UnderstandButton = reactModule.createElement(button, {
-								text = var6.IUnderstandText,
-								variant = buttonVariant.Standard,
-								onActivated = reactModule.useCallback(function()
-									-- upvalues: inExperienceInterventionAnalyticsModule (copy), var2 (ref), p1 (ref)
-									inExperienceInterventionAnalyticsModule.sendAnalyticsEvent(inExperienceInterventionAnalyticsModule.Constants.EventTypes.CtaClicked, inExperienceInterventionAnalyticsModule.Constants.InterventionTypes.Nudge, var2.current, p1.eventId, p1.violatingChatLine, nil)
+							UnderstandButton = ReactModule.createElement(Button, {
+								text = UseLocalizationResult.IUnderstandText,
+								variant = ButtonVariant.Standard,
+								onActivated = ReactModule.useCallback(function() --[[ Line: 75 ]]
+									-- upvalues: InExperienceInterventionAnalyticsModule (upval), UseRefResult (copy), p1 (copy)
+									InExperienceInterventionAnalyticsModule.sendAnalyticsEvent(InExperienceInterventionAnalyticsModule.Constants.EventTypes.CtaClicked, InExperienceInterventionAnalyticsModule.Constants.InterventionTypes.Nudge, UseRefResult.current, p1.eventId, p1.violatingChatLine, nil)
 									p1.onDismiss()
-								end, { var2 }),
-								fillBehavior = fillBehavior.Fill,
+								end, { UseRefResult }),
+								fillBehavior = FillBehavior.Fill,
 								FillDirection = Enum.FillDirection.Horizontal
 							})
 						}),
-						FeedbackFrame = reactModule.createElement(view, {
+						FeedbackFrame = ReactModule.createElement(View, {
 							LayoutOrder = 5,
 							Size = UDim2.new(1, 0, 0, 0),
 							AutomaticSize = Enum.AutomaticSize.Y
 						}, {
-							FeedbackFooter = reactModule.createElement(interventionContestFeedbackFooterModule, {
+							FeedbackFooter = ReactModule.createElement(InterventionContestFeedbackFooterModule, {
 								duration = nil,
 								onDismiss = p1.onDismiss,
-								renderTimestamp = var2.current,
-								interventionType = inExperienceInterventionAnalyticsModule.Constants.InterventionTypes.Nudge,
+								renderTimestamp = UseRefResult.current,
+								interventionType = InExperienceInterventionAnalyticsModule.Constants.InterventionTypes.Nudge,
 								eventId = p1.eventId,
 								violatingChatLine = p1.violatingChatLine
 							})

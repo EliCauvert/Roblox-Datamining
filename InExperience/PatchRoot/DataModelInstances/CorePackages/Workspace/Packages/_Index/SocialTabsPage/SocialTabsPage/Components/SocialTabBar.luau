@@ -1,39 +1,39 @@
-﻿local parent = script:FindFirstAncestor("SocialTabsPage").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local tabs = foundationModule.Tabs
-local fillBehavior = foundationModule.Enums.FillBehavior
-local inputSize = foundationModule.Enums.InputSize
-local view = foundationModule.View
-local useNavigation = require(parent.Navigation).useNavigation
+﻿local Parent = script:FindFirstAncestor("SocialTabsPage").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local Tabs = FoundationModule.Tabs
+local FillBehavior = FoundationModule.Enums.FillBehavior
+local InputSize = FoundationModule.Enums.InputSize
+local View = FoundationModule.View
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
 
-return function(p1)
-	-- upvalues: useNavigation (ref), reactModule (ref), view (ref), tabs (ref), inputSize (ref), fillBehavior (ref)
-	local var1 = useNavigation()
-	local routeName = var1.state.routes[var1.state.index].routeName
-	local var2, var3 = reactModule.useState(routeName)
-	local var4 = reactModule.useCallback(function(p2)
-		-- upvalues: var3 (ref), var1 (ref)
-		var3(p2)
-		var1.navigate(p2)
-	end, { var1 })
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), routeName (ref)
-		var3(function(p2)
-			-- upvalues: routeName (copy)
-			return if p2 == routeName then p2 else routeName
+return function(p1) --[[ Line: 19 | Named "SocialTabBar" ]]
+	-- upvalues: UseNavigationFunction (copy), ReactModule (copy), View (copy), Tabs (copy), InputSize (copy), FillBehavior (copy)
+	local UseNavigationResult = UseNavigationFunction()
+	local RouteName = UseNavigationResult.state.routes[UseNavigationResult.state.index].routeName
+	local UseStateResult, UseStateResult2 = ReactModule.useState(RouteName)
+	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 24 ]]
+		-- upvalues: UseStateResult2 (copy), UseNavigationResult (copy)
+		UseStateResult2(p2)
+		UseNavigationResult.navigate(p2)
+	end, { UseNavigationResult })
+	ReactModule.useEffect(function() --[[ Line: 29 ]]
+		-- upvalues: UseStateResult2 (copy), RouteName (copy)
+		UseStateResult2(function(RouteName1) --[[ Line: 30 ]]
+			-- upvalues: RouteName (upval)
+			return if RouteName1 == RouteName then RouteName1 else RouteName
 		end)
-	end, { routeName })
+	end, { RouteName })
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "size-full-0 auto-y bg-surface-0",
 		LayoutOrder = p1.layoutOrder
 	}, {
-		SocialTabs = reactModule.createElement(tabs, {
-			activeTabId = var2,
-			size = inputSize.Medium,
-			fillBehavior = fillBehavior.Fill,
-			onActivated = var4,
+		SocialTabs = ReactModule.createElement(Tabs, {
+			activeTabId = UseStateResult,
+			size = InputSize.Medium,
+			fillBehavior = FillBehavior.Fill,
+			onActivated = UseResult,
 			tabs = p1.tabs
 		})
 	})

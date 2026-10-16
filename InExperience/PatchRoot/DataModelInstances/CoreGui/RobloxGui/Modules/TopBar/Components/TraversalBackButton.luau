@@ -1,187 +1,197 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local teleportService = game:GetService("TeleportService")
-local userGameSettingsService = UserSettings():GetService("UserGameSettings")
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local reactModule = require(corePackagesService.Packages.React)
-local reactOtterModule = require(corePackagesService.Packages.ReactOtter)
-local signalsReactModule = require(corePackagesService.Packages.SignalsReact)
-local coreScriptsCommonModule = require(corePackagesService.Workspace.Packages.CoreScriptsCommon)
-local coreScriptsRoactCommonModule = require(corePackagesService.Workspace.Packages.CoreScriptsRoactCommon)
-local dataHydrationModule = require(corePackagesService.Workspace.Packages.DataHydration)
-local localizationModule = require(corePackagesService.Workspace.Packages.Localization)
-local view = foundationModule.View
-local useTokens = foundationModule.Hooks.useTokens
-local settingsShowSignal = coreScriptsCommonModule.SettingsShowSignal
-local traversal = coreScriptsRoactCommonModule.Traversal
-local dataHydrationTypes = dataHydrationModule.DataHydrationTypes
-local getGameInfoStore = dataHydrationModule.Game.getGameInfoStore
-local constants = traversal.Constants
-local teleportBackButton = traversal.TeleportBackButton
-local traversalTelemetry = traversal.TraversalTelemetry
-local _ = traversal.useHistoryItems
-local useLocalization = localizationModule.Hooks.useLocalization
-local _ = traversal.Flags.FFlagUseTeleportTraversalHistory
-local _ = traversal.Flags.FFlagUseLocalTraversalHistory
-local fFlagAddTraversalBackButtonAnimation = traversal.Flags.FFlagAddTraversalBackButtonAnimation
-local fixTraversalBackButtonAnimation = game:DefineFastFlag("FixTraversalBackButtonAnimation", false)
+﻿local CorePackages = game:GetService("CorePackages")
+local TeleportService = game:GetService("TeleportService")
+local UserGameSettings = UserSettings():GetService("UserGameSettings")
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local ReactModule = require(CorePackages.Packages.React)
+local ReactOtterModule = require(CorePackages.Packages.ReactOtter)
+local SignalsReactModule = require(CorePackages.Packages.SignalsReact)
+local DataHydrationModule = require(CorePackages.Workspace.Packages.DataHydration)
+local View = FoundationModule.View
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local SettingsShowSignal = require(CorePackages.Workspace.Packages.CoreScriptsCommon).SettingsShowSignal
+local Traversal = require(CorePackages.Workspace.Packages.CoreScriptsRoactCommon).Traversal
+local DataHydrationTypes = DataHydrationModule.DataHydrationTypes
+local GetGameInfoStoreFunction = DataHydrationModule.Game.getGameInfoStore
+local Constants = Traversal.Constants
+local TeleportBackButton = Traversal.TeleportBackButton
+local TraversalTelemetry = Traversal.TraversalTelemetry
+local _ = Traversal.useHistoryItems
+local UseLocalizationFunction = require(CorePackages.Workspace.Packages.Localization).Hooks.useLocalization
+local _ = Traversal.Flags.FFlagUseTeleportTraversalHistory
+local _ = Traversal.Flags.FFlagUseLocalTraversalHistory
+local FFlagAddTraversalBackButtonAnimation = Traversal.Flags.FFlagAddTraversalBackButtonAnimation
+local FixTraversalBackButtonAnimation = game:DefineFastFlag("FixTraversalBackButtonAnimation", false)
 
-return reactModule.memo(function(_)
-	-- upvalues: useTokens (ref), reactModule (ref), teleportService (ref), constants (ref), settingsShowSignal (ref), traversalTelemetry (ref), useLocalization (ref), getGameInfoStore (ref), dataHydrationTypes (ref), signalsReactModule (ref), fixTraversalBackButtonAnimation (ref), fFlagAddTraversalBackButtonAnimation (ref), reactOtterModule (ref), userGameSettingsService (ref), view (ref), teleportBackButton (ref)
-	local var1 = useTokens()
-	local var2 = reactModule.useRef(nil)
-	local var3, var4 = teleportService:GetThirdPartyTeleportInfo(false)
+return ReactModule.memo(function(_) --[[ Line: 36 | Named "TraversalBackButton" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), TeleportService (copy), Constants (copy), SettingsShowSignal (copy), TraversalTelemetry (copy), UseLocalizationFunction (copy), GetGameInfoStoreFunction (copy), DataHydrationTypes (copy), SignalsReactModule (copy), FixTraversalBackButtonAnimation (copy), FFlagAddTraversalBackButtonAnimation (copy), ReactOtterModule (copy), UserGameSettings (copy), View (copy), TeleportBackButton (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseRefResult = ReactModule.useRef(nil)
+	local ThirdPartyTeleportInfo, ThirdPartyTeleportInfo2 = TeleportService:GetThirdPartyTeleportInfo(false)
 	
-	if var3 <= constants.NO_UNIVERSE_ID or var4 <= constants.NO_PLACE_ID then
+	if ThirdPartyTeleportInfo <= Constants.NO_UNIVERSE_ID or ThirdPartyTeleportInfo2 <= Constants.NO_PLACE_ID then
 		return nil
 	end
-	local var5, var6 = reactModule.useState(false)
-	reactModule.useEffect(function()
-		-- upvalues: settingsShowSignal (copy), var6 (ref)
-		local var7 = settingsShowSignal:connect(function(p1)
-			-- upvalues: var6 (copy)
-			var6(p1)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	ReactModule.useEffect(function() --[[ Line: 46 ]]
+		-- upvalues: SettingsShowSignal (upval), UseStateResult2 (copy)
+		local Connection = SettingsShowSignal:connect(function(p1) --[[ Line: 47 ]]
+			-- upvalues: UseStateResult2 (upval)
+			UseStateResult2(p1)
 		end)
 		
-		return function()
-			-- upvalues: var7 (ref)
-			var7:Disconnect()
+		return function() --[[ Line: 50 ]]
+			-- upvalues: Connection (copy)
+			Connection:Disconnect()
 		end
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), traversalTelemetry (copy), var3 (ref)
-		if var5 then
-			traversalTelemetry.sendBackButtonActionEvent({
+	ReactModule.useEffect(function() --[[ Line: 55 ]]
+		-- upvalues: UseStateResult (copy), TraversalTelemetry (upval), ThirdPartyTeleportInfo (copy)
+		if UseStateResult then
+			TraversalTelemetry.sendBackButtonActionEvent({
 				integration_id = "back_button",
 				event_type = "impression",
-				destination_universe_id = var3
+				destination_universe_id = ThirdPartyTeleportInfo
 			})
 		end
-	end, { var5, var3 })
-	local var7 = useLocalization({
+	end, { UseStateResult, ThirdPartyTeleportInfo })
+	local UseLocalizationResult = UseLocalizationFunction({
 		defaultBackButtonText = "CoreScripts.TopBar.Traversal.BackButtonDefault"
 	})
-	local var8 = signalsReactModule.useSignalState(reactModule.useCallback(function(p1)
-		-- upvalues: getGameInfoStore (copy), var3 (ref), dataHydrationTypes (copy), var7 (ref)
-		local andFetchGameInfo = getGameInfoStore(p1).getAndFetchGameInfo(tostring(var3))
-		local var9 = andFetchGameInfo.data(p1)
+	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useCallback(function(p1) --[[ Line: 69 ]]
+		-- upvalues: GetGameInfoStoreFunction (upval), ThirdPartyTeleportInfo (copy), DataHydrationTypes (upval), UseLocalizationResult (copy)
+		local AndFetchGameInfo = GetGameInfoStoreFunction(p1).getAndFetchGameInfo((tostring(ThirdPartyTeleportInfo)))
+		local DataResult = AndFetchGameInfo.data(p1)
+		local StatusResult = AndFetchGameInfo.status(p1)
 		
-		return if var9 and andFetchGameInfo.status(p1) == dataHydrationTypes.DataStatus.Ready then var9.name else var7.defaultBackButtonText
-	end, { var3, getGameInfoStore }))
-	local var9 = if fixTraversalBackButtonAnimation then reactModule.useRef(nil) else nil
-	local var10 = var1.Size.Size_2500 * 2
-	local _ = nil
-	local _ = nil
-	local var11 = nil
-	local var12 = nil
-	local _ = nil
-	local var13 = nil
-	local var14 = nil
+		return if DataResult and StatusResult == DataHydrationTypes.DataStatus.Ready then DataResult.name else UseLocalizationResult.defaultBackButtonText
+	end, { ThirdPartyTeleportInfo, GetGameInfoStoreFunction })))
+	local UseRefResult1 = if FixTraversalBackButtonAnimation then ReactModule.useRef(nil) else nil
+	local ScaledSize = UseTokensResult.Size.Size_2500 * 2
+	local UseRefResult3 = nil
+	local UseRefResult4 = nil
+	local UseRefResult2 = nil
+	local v1 = nil
+	local UseAnimatedBindingResult2 = nil
+	local UseResult = nil
+	local UseResult1 = nil
 	
-	if fFlagAddTraversalBackButtonAnimation then
-		local var15 = reactModule.useRef(nil)
-		local var16 = reactModule.useRef(nil)
+	if FFlagAddTraversalBackButtonAnimation then
+		UseRefResult3 = ReactModule.useRef(nil)
+		UseRefResult4 = ReactModule.useRef(nil)
 		
-		if fixTraversalBackButtonAnimation then
-			var11 = reactModule.useRef(nil)
+		if FixTraversalBackButtonAnimation then
+			UseRefResult2 = ReactModule.useRef(nil)
 		end
-		local var17 = reactModule.useMemo(function()
-			-- upvalues: var1 (ref)
+		local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 100 ]]
+			-- upvalues: UseTokensResult (copy)
 			return {
-				duration = var1.Time.Time_300,
-				easingStyle = var1.Ease.StandardOut
+				duration = UseTokensResult.Time.Time_300,
+				easingStyle = UseTokensResult.Ease.StandardOut
 			}
-		end, { var1 })
-		local var18, var19 = reactOtterModule.useAnimatedBinding(0, function(p1)
-			-- upvalues: var15 (write), fixTraversalBackButtonAnimation (copy), var11 (write), var16 (write)
-			var15.current = nil
+		end, { UseTokensResult })
+		v1, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0, function(p1) --[[ Line: 106 ]]
+			-- upvalues: UseRefResult3 (ref), FixTraversalBackButtonAnimation (upval), UseRefResult2 (ref), UseRefResult4 (ref)
+			UseRefResult3.current = nil
 			
-			if fixTraversalBackButtonAnimation then
-				if not var11.current and var16.current and p1 == 1 then
-					var11.current = var16.current
+			if FixTraversalBackButtonAnimation then
+				if not UseRefResult2.current and UseRefResult4.current and p1 == 1 then
+					UseRefResult2.current = UseRefResult4.current
 				end
 				if p1 == 0 then
-					var16.current = 0
+					UseRefResult4.current = 0
 					
 					return
 				end
 			else
-				var16.current = nil
+				UseRefResult4.current = nil
 			end
 		end)
-		var12 = var18
-		local var20 = var19
-		reactModule.useEffect(function()
-			-- upvalues: var5 (ref), fixTraversalBackButtonAnimation (copy), var9 (write), var8 (ref), var11 (write), var2 (ref), var20 (write), reactOtterModule (copy), var17 (ref)
-			if not var5 then
-				var20(reactOtterModule.ease(0, var17))
-			elseif not fixTraversalBackButtonAnimation then
-				var20(reactOtterModule.ease(1, var17))
-			elseif var9.current == var8 then
-				var20(reactOtterModule.ease(1, var17))
-			else
-				var11.current = nil
-				var9.current = var8
-				
-				if var2.current then
-					var20(reactOtterModule.ease(0.99, var17))
-				end
-			end
-			if fixTraversalBackButtonAnimation and var9.current == nil then
-				var9.current = var8
-			end
-		end, { var5, var17, var8 })
-		var13 = reactModule.useCallback(function(p1)
-			-- upvalues: fixTraversalBackButtonAnimation (copy), var11 (write), var5 (ref), var2 (ref), var15 (write), var16 (write), var10 (ref)
-			if fixTraversalBackButtonAnimation then
-				if var11.current then
-					return UDim2.new(0, p1 * var11.current, 0, 0)
-				end
-				local var21
-				local _ = nil
-				
-				if var5 and var2.current then
-					local x = var2.current.AbsoluteSize.X
-					
-					if not var15.current then
-						var15.current = var2.current.AbsoluteSize.X
+		ReactModule.useEffect(function() --[[ Line: 119 ]]
+			-- upvalues: UseStateResult (copy), FixTraversalBackButtonAnimation (upval), UseRefResult1 (ref), UseSignalStateResult (copy), UseRefResult2 (ref), UseRefResult (copy), UseAnimatedBindingResult2 (ref), ReactOtterModule (upval), UseMemoResult (copy)
+			if UseStateResult then
+				if FixTraversalBackButtonAnimation then
+					if UseRefResult1.current == UseSignalStateResult then
+						UseAnimatedBindingResult2(ReactOtterModule.ease(1, UseMemoResult))
+					else
+						UseRefResult2.current = nil
+						UseRefResult1.current = UseSignalStateResult
+						
+						if UseRefResult.current then
+							UseAnimatedBindingResult2(ReactOtterModule.ease(0.99, UseMemoResult))
+						end
 					end
-					if var16.current and x <= var16.current then
-						return UDim2.new(0, if fixTraversalBackButtonAnimation then x else var16.current, 0, 0)
-					elseif var15.current and var15.current ~= x then
-						var16.current = x
-					end
-					var21 = p1 * var10
 				else
-					var21 = p1 * (var16.current or var10)
+					UseAnimatedBindingResult2(ReactOtterModule.ease(1, UseMemoResult))
 				end
-				return UDim2.new(0, var21, 0, 0)
-			elseif var5 and var2.current then
-				local x = var2.current.AbsoluteSize.X
-				
-				if not var15.current then
-					var15.current = var2.current.AbsoluteSize.X
-				end
-				if var16.current and x <= var16.current then
-					return UDim2.new(0, var16.current, 0, 0)
-				elseif var15.current and var15.current ~= x then
-					var16.current = x
-				end
+			else
+				UseAnimatedBindingResult2(ReactOtterModule.ease(0, UseMemoResult))
 			end
-			return UDim2.new(0, p1 * var10, 0, 0)
-		end, { var5 })
-		var14 = reactModule.useCallback(function(p1)
-			-- upvalues: var5 (ref)
-			return if p1 <= 0 then var5 else true
-		end, { var5 })
+			if FixTraversalBackButtonAnimation and UseRefResult1.current == nil then
+				UseRefResult1.current = UseSignalStateResult
+			end
+		end, { UseStateResult, UseMemoResult, UseSignalStateResult })
+		UseResult = ReactModule.useCallback(function(p1): UDim2 --[[ Line: 142 ]]
+			-- upvalues: FixTraversalBackButtonAnimation (upval), UseRefResult2 (ref), UseStateResult (copy), UseRefResult (copy), UseRefResult3 (ref), UseRefResult4 (ref), ScaledSize (copy)
+			if FixTraversalBackButtonAnimation then
+				if UseRefResult2.current then
+					return UDim2.new(0, p1 * UseRefResult2.current, 0, 0)
+				end
+				local XOffset = nil
+				if UseStateResult and UseRefResult.current then
+					local X = UseRefResult.current.AbsoluteSize.X
+					
+					if not UseRefResult3.current then
+						UseRefResult3.current = UseRefResult.current.AbsoluteSize.X
+					end
+					if UseRefResult4.current and X <= UseRefResult4.current then
+						return UDim2.new(0, if FixTraversalBackButtonAnimation then X else UseRefResult4.current, 0, 0)
+					end
+					if UseRefResult3.current and UseRefResult3.current ~= X then
+						UseRefResult4.current = X
+					end
+					XOffset = p1 * ScaledSize
+				else
+					XOffset = p1 * (UseRefResult4.current or ScaledSize)
+				end
+				return UDim2.new(0, XOffset, 0, 0)
+			else
+				if UseStateResult and UseRefResult.current then
+					local X = UseRefResult.current.AbsoluteSize.X
+					
+					if not UseRefResult3.current then
+						UseRefResult3.current = UseRefResult.current.AbsoluteSize.X
+					end
+					if UseRefResult4.current and X <= UseRefResult4.current then
+						return UDim2.new(0, UseRefResult4.current, 0, 0)
+					end
+					if UseRefResult3.current and UseRefResult3.current ~= X then
+						UseRefResult4.current = X
+					end
+				end
+				return UDim2.new(0, p1 * ScaledSize, 0, 0)
+			end
+		end, { UseStateResult })
+		UseResult1 = ReactModule.useCallback(function(p1: number) --[[ Line: 182 ]]
+			-- upvalues: UseStateResult (copy)
+			return p1 > 0 or UseStateResult
+		end, { UseStateResult })
 	end
-	return if fFlagAddTraversalBackButtonAnimation and not userGameSettingsService.ReducedMotion then reactModule.createElement(view, {
+	return if FFlagAddTraversalBackButtonAnimation and not UserGameSettings.ReducedMotion then ReactModule.createElement(View, {
 		tag = "auto-y",
 		ZIndex = -1,
-		Visible = var12:map(var14),
-		Size = var12:map(var13)
+		Visible = v1:map(UseResult1),
+		Size = v1:map(UseResult)
 	}, {
-		TraversalBackButton = reactModule.createElement(teleportBackButton, { text = var8, textLimitWidth = var10, ref = var2 })
-	}) else var5 and reactModule.createElement(view, { tag = "auto-xy shrink" }, {
-		TraversalBackButton = reactModule.createElement(teleportBackButton, { text = var8, textLimitWidth = var10, ref = var2 })
+		TraversalBackButton = ReactModule.createElement(TeleportBackButton, {
+			text = UseSignalStateResult,
+			textLimitWidth = ScaledSize,
+			ref = UseRefResult
+		})
+	}) else UseStateResult and ReactModule.createElement(View, { tag = "auto-xy shrink" }, {
+		TraversalBackButton = ReactModule.createElement(TeleportBackButton, {
+			text = UseSignalStateResult,
+			textLimitWidth = ScaledSize,
+			ref = UseRefResult
+		})
 	})
 end)

@@ -1,42 +1,41 @@
-﻿local starterGuiService = game:GetService("StarterGui")
-local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
-local eventStream = require(game:GetService("CorePackages").Workspace.Packages.Analytics).AnalyticsReporters.EventStream
-local t = {}
-t.__index = t
+﻿local StarterGui = game:GetService("StarterGui")
+local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
+local EventStream = require(game:GetService("CorePackages").Workspace.Packages.Analytics).AnalyticsReporters.EventStream
+local CoreScriptsCoreGuiEnableAnalyticsModule = {}
+CoreScriptsCoreGuiEnableAnalyticsModule.__index = CoreScriptsCoreGuiEnableAnalyticsModule
 
-function t.new()
-	-- upvalues: eventStream (ref), rbxAnalyticsService (ref), starterGuiService (ref), t (ref)
-	local t_1 = {
-		evenStream = eventStream.new(rbxAnalyticsService),
+function CoreScriptsCoreGuiEnableAnalyticsModule.new() --[[ Line: 19 ]]
+	-- upvalues: EventStream (copy), RbxAnalyticsService (copy), StarterGui (copy), CoreScriptsCoreGuiEnableAnalyticsModule (copy)
+	local config = {
+		evenStream = EventStream.new(RbxAnalyticsService),
 		playSessionStart = os.clock()
 	}
 	
-	function t_1.sendCoreGuiAnalytic(p1, p2)
-		-- upvalues: t_1 (ref), rbxAnalyticsService (copy)
-		local _ = nil
-		t_1.evenStream:sendEventDeferred("core_gui_type", "core_gui_type", {
+	function config.sendCoreGuiAnalytic(p1, p2) --[[ Line: 25 ]]
+		-- upvalues: config (copy), RbxAnalyticsService (upval)
+		config.evenStream:sendEventDeferred("core_gui_type", "core_gui_type", {
 			placeid = tostring(game.PlaceId),
 			universeid = tostring(game.GameId),
 			type = tostring(p1.Name),
 			enabled = tostring(p2),
-			sessionid = rbxAnalyticsService:GetSessionId(),
-			playSessionDurationMs = tostring(math.round((os.clock() - t_1.playSessionStart) * 1000))
+			sessionid = RbxAnalyticsService:GetSessionId(),
+			playSessionDurationMs = tostring((math.round((os.clock() - config.playSessionStart) * 1000)))
 		})
 	end
 	
-	t_1.signalConnection = starterGuiService.CoreGuiChangedSignal:Connect(function(p1, p2)
-		-- upvalues: t_1 (ref)
-		t_1.sendCoreGuiAnalytic(p1, p2)
+	config.signalConnection = StarterGui.CoreGuiChangedSignal:Connect(function(CoreGuiType, Enabled) --[[ Line: 42 ]]
+		-- upvalues: config (copy)
+		config.sendCoreGuiAnalytic(CoreGuiType, Enabled)
 	end)
-	setmetatable(t_1, t)
+	setmetatable(config, CoreScriptsCoreGuiEnableAnalyticsModule)
 	
-	return t_1
+	return config
 end
 
-function t:DisconnectSignal()
+function CoreScriptsCoreGuiEnableAnalyticsModule:DisconnectSignal() --[[ Line: 50 ]]
 	self.signalConnection:Disconnect()
 end
 
-local _ = t.new()
+local _ = CoreScriptsCoreGuiEnableAnalyticsModule.new()
 
-return t
+return CoreScriptsCoreGuiEnableAnalyticsModule

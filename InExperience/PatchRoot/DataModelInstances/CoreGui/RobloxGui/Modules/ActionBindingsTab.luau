@@ -1,128 +1,127 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local contextActionService = game:GetService("ContextActionService")
-local tweenService = game:GetService("TweenService")
-local _ = coreGuiService:WaitForChild("RobloxGui")
-local create = require(game:GetService("CorePackages").Workspace.Packages.AppCommonLib).Create
-local color3 = Color3.new(0.1, 0, 0)
-local color3_1 = Color3.new(0, 0, 0)
+﻿local ContextActionService = game:GetService("ContextActionService")
+local TweenService = game:GetService("TweenService")
+local _ = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+local CreateFunction = require(game:GetService("CorePackages").Workspace.Packages.AppCommonLib).Create
+local _Color3 = Color3.new(0.1, 0, 0)
+local _Color3_1 = Color3.new(0, 0, 0)
 local _ = TweenInfo.new(0.15, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut)
 local _ = TweenInfo.new(0.15, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut)
-local tweenInfo = TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut, 0, true, 0)
-local tweenInfo_1 = TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut)
-local var1 = nil
+local _TweenInfo = TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut, 0, true, 0)
+local _TweenInfo1 = TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut)
+local Parent = nil
+local BoundInputTypes = {}
+local Keys = {}
 local t = {}
-local t_1 = {}
-local t_2 = {}
-local t_3 = {}
-local t_4 = {}
-local t_5 = {}
-local t_6 = {}
-local t_7 = {}
-local var2 = true
-local _ = { BoundInputType = 3, TableHeader = 2, BoundAction = 1 }
+local t1 = {}
+local Keys1 = {}
+local Keys2 = {}
+local TableHeaders = {}
+local t2 = {}
+local Flag = true
 
-local function sortInputTypeRows(p1, p2)
-	-- upvalues: t_1 (ref)
-	return tostring(t_1[p1]) < tostring(t_1[p2])
+local function sortInputTypeRows(A, B): boolean --[[ Line: 43 ]]
+	-- upvalues: Keys (copy)
+	return tostring(Keys[A]) < tostring(Keys[B])
 end
 
-local function sortActionRows(p1, p2)
-	-- upvalues: t_3 (ref), t_4 (ref)
-	local var3 = t_3[p1]
-	local var4 = t_3[p2]
+local function sortActionRows(A, B): boolean --[[ Line: 49 ]]
+	-- upvalues: t1 (copy), Keys1 (copy)
+	local Entry = t1[A]
+	local Entry1 = t1[B]
 	
-	if not var3 or not var4 then
+	if not Entry or not Entry1 then
 		return true
 	end
-	local var5 = t_4[p1]
-	local var6 = t_4[p2]
+	local Key = Keys1[A]
+	local Key1 = Keys1[B]
 	
-	if var5 ~= var6 then
-		return tostring(var5) < tostring(var6)
-	elseif var3.isCore and not var4.isCore then
+	if Key ~= Key1 then
+		return tostring(Key) < tostring(Key1)
+	elseif Entry.isCore and not Entry1.isCore then
 		return true
-	elseif not var3.isCore and var4.isCore then
+	elseif Entry.isCore or not Entry1.isCore then
+		local StackOrder = Entry.stackOrder
+		local StackOrder1 = Entry1.stackOrder
+		
+		return not StackOrder or not StackOrder1 or StackOrder1 < StackOrder
+	else
 		return false
 	end
-	local stackOrder = var3.stackOrder
-	local stackOrder_1 = var4.stackOrder
-	
-	return if stackOrder and stackOrder_1 then stackOrder_1 < stackOrder else true
 end
 
-local function createEmptyRow(p1, p2)
-	-- upvalues: create (ref)
-	local var3 = create("Frame")({
+local function createEmptyRow(Name, p1) --[[ Line: 75 ]]
+	-- upvalues: CreateFunction (copy)
+	local Parent = CreateFunction("Frame")({
 		BackgroundTransparency = 1,
 		ZIndex = 6,
-		Name = p1,
-		Size = UDim2.new(1, 0, 0, p2 or 0)
+		Name = Name,
+		Size = UDim2.new(1, 0, 0, p1 or 0)
 	})
-	local _ = create("UIListLayout")({
+	local _ = CreateFunction("UIListLayout")({
 		FillDirection = Enum.FillDirection.Horizontal,
 		SortOrder = Enum.SortOrder.LayoutOrder,
 		Padding = UDim.new(0, 5),
-		Parent = var3
+		Parent = Parent
 	})
 	
-	return var3
+	return Parent
 end
 
-local function createButtonRow(p1, p2)
-	-- upvalues: create (ref)
-	local var3 = create("TextButton")({
+local function createButtonRow(Name, p1) --[[ Line: 91 ]]
+	-- upvalues: CreateFunction (copy)
+	local Parent = CreateFunction("TextButton")({
 		BackgroundTransparency = 1,
 		ZIndex = 6,
 		Text = "",
-		Name = p1,
-		Size = UDim2.new(1, 0, 0, p2 or 0)
+		Name = Name,
+		Size = UDim2.new(1, 0, 0, p1 or 0)
 	})
-	local _ = create("UIListLayout")({
+	local _ = CreateFunction("UIListLayout")({
 		FillDirection = Enum.FillDirection.Horizontal,
 		SortOrder = Enum.SortOrder.LayoutOrder,
 		Padding = UDim.new(0, 5),
-		Parent = var3
+		Parent = Parent
 	})
 	
-	return var3
+	return Parent
 end
 
-local function createEmptyColumn(p1, p2)
-	-- upvalues: create (ref)
-	return create("Frame")({
+local function createEmptyColumn(Parent, Name) --[[ Line: 108 ]]
+	-- upvalues: CreateFunction (copy)
+	return (CreateFunction("Frame")({
 		BackgroundTransparency = 0.75,
 		BorderSizePixel = 0,
 		ZIndex = 6,
 		ClipsDescendants = true,
-		Name = p2,
+		Name = Name,
 		BackgroundColor3 = Color3.new(0, 0, 0),
 		Size = UDim2.new(1, 0, 1, 0),
-		Parent = p1
-	})
+		Parent = Parent
+	}))
 end
 
-local function createImageColumn(p1, p2, p3, p4, p5)
-	-- upvalues: createEmptyColumn (ref), create (ref)
-	local var3 = createEmptyColumn(p1, p2)
-	local _ = create("UIAspectRatioConstraint")({ AspectRatio = p4 or 1, Parent = var3 })
-	local _ = create("ImageLabel")({
+local function createImageColumn(BoundInputType, Name, Image, p1, p2) --[[ Line: 123 ]]
+	-- upvalues: createEmptyColumn (copy), CreateFunction (copy)
+	local EmptyColumn = createEmptyColumn(BoundInputType, Name)
+	local _ = CreateFunction("UIAspectRatioConstraint")({ AspectRatio = p1 or 1, Parent = EmptyColumn })
+	local _ = CreateFunction("ImageLabel")({
 		Name = "ColumnImage",
 		BackgroundTransparency = 1,
 		ZIndex = 6,
 		Position = UDim2.new(0.5, 0, 0.5, 0),
-		Size = UDim2.new(p5 or 1, 0, p5 or 1, 0),
+		Size = UDim2.new(p2 or 1, 0, p2 or 1, 0),
 		AnchorPoint = Vector2.new(0.5, 0.5),
-		Image = p3,
-		Parent = var3
+		Image = Image,
+		Parent = EmptyColumn
 	})
 	
-	return var3
+	return EmptyColumn
 end
 
-local function createTextColumn(p1, p2, p3)
-	-- upvalues: createEmptyColumn (ref), create (ref)
-	local var3 = createEmptyColumn(p1, p2)
-	local _ = create("TextLabel")({
+local function createTextColumn(Parent, Name, Text) --[[ Line: 145 ]]
+	-- upvalues: createEmptyColumn (copy), CreateFunction (copy)
+	local EmptyColumn = createEmptyColumn(Parent, Name)
+	local _ = CreateFunction("TextLabel")({
 		Name = "ColumnText",
 		BackgroundTransparency = 1,
 		ZIndex = 6,
@@ -130,83 +129,82 @@ local function createTextColumn(p1, p2, p3)
 		Position = UDim2.new(0.5, 0, 0.5, 0),
 		Size = UDim2.new(1, -10, 1, -10),
 		AnchorPoint = Vector2.new(0.5, 0.5),
-		Text = p3,
+		Text = Text,
 		TextColor3 = Color3.new(1, 1, 1),
 		TextXAlignment = Enum.TextXAlignment.Left,
 		Font = Enum.Font.SourceSans,
-		Parent = var3
+		Parent = EmptyColumn
 	})
 	
-	return var3
+	return EmptyColumn
 end
 
-local function createActionColumns(p1, p2)
-	-- upvalues: createEmptyColumn (ref), createTextColumn (ref)
-	local var3 = 0
-	local var4 = createEmptyColumn(p1, "Inset")
-	var4.LayoutOrder = 0
-	var4.BackgroundTransparency = 1
-	var4.Size = UDim2.new(0, 30, 1, 0)
-	var3 = var3 + 30 + 5
-	local var5 = createTextColumn(p1, "Priority", "Priority")
-	var5.LayoutOrder = 1
-	var5.BackgroundColor3 = p2
-	var5.Size = UDim2.new(0, 80, 1, 0)
-	var3 = var3 + 80 + 5
-	local var6 = createTextColumn(p1, "Security", "Security")
-	var6.LayoutOrder = 2
-	var6.BackgroundColor3 = p2
-	var6.Size = UDim2.new(0, 80, 1, 0)
-	var3 = var3 + 80 + 5
-	local var7 = createTextColumn(p1, "ActionName", "Action Name")
-	var7.LayoutOrder = 3
-	var7.BackgroundColor3 = p2
-	var7.Size = UDim2.new(0.25, 0, 1, 0)
-	local var8 = createTextColumn(p1, "InputTypes", "Input Types")
-	var8.LayoutOrder = 4
-	var8.BackgroundColor3 = p2
-	var8.Size = UDim2.new(0.75, (-var3) - 5, 1, 0)
+local function createActionColumns(BoundAction, BackgroundColor3) --[[ Line: 166 ]]
+	-- upvalues: createEmptyColumn (copy), createTextColumn (copy)
+	local Inset = createEmptyColumn(BoundAction, "Inset")
+	Inset.LayoutOrder = 0
+	Inset.BackgroundTransparency = 1
+	Inset.Size = UDim2.new(0, 30, 1, 0)
+	local v1 = 0 + 30 + 5
+	local Priority = createTextColumn(BoundAction, "Priority", "Priority")
+	Priority.LayoutOrder = 1
+	Priority.BackgroundColor3 = BackgroundColor3
+	Priority.Size = UDim2.new(0, 80, 1, 0)
+	local v2 = v1 + 80 + 5
+	local Security = createTextColumn(BoundAction, "Security", "Security")
+	Security.LayoutOrder = 2
+	Security.BackgroundColor3 = BackgroundColor3
+	Security.Size = UDim2.new(0, 80, 1, 0)
+	local v3 = v2 + 80 + 5
+	local ActionName = createTextColumn(BoundAction, "ActionName", "Action Name")
+	ActionName.LayoutOrder = 3
+	ActionName.BackgroundColor3 = BackgroundColor3
+	ActionName.Size = UDim2.new(0.25, 0, 1, 0)
+	local InputTypes = createTextColumn(BoundAction, "InputTypes", "Input Types")
+	InputTypes.LayoutOrder = 4
+	InputTypes.BackgroundColor3 = BackgroundColor3
+	InputTypes.Size = UDim2.new(0.75, -v3 - 5, 1, 0)
 	
-	return var4, var5, var6, var7, var8
+	return Inset, Priority, Security, ActionName, InputTypes
 end
 
-local function updateContainerCanvas()
-	-- upvalues: var2 (write), t (ref), sortInputTypeRows (ref), t_1 (ref), t_6 (ref), t_2 (ref), sortActionRows (ref)
+local function updateContainerCanvas() --[[ Line: 203 ]]
+	-- upvalues: Flag (ref), BoundInputTypes (copy), sortInputTypeRows (copy), Keys (copy), TableHeaders (copy), t (copy), sortActionRows (copy)
 	debug.profilebegin("updateContainerCanvas")
 	
-	if var2 then
-		var2 = false
-		local var3 = 1
-		local t_3 = {}
+	if Flag then
+		Flag = false
+		local LayoutOrder = 1
+		local List = {}
 		
-		for i, v in pairs(t) do
-			table.insert(t_3, v)
+		for _, boundInputType in pairs(BoundInputTypes) do
+			table.insert(List, boundInputType)
 		end
-		table.sort(t_3, sortInputTypeRows)
+		table.sort(List, sortInputTypeRows)
 		
-		for i, v_1 in pairs(t_3) do
-			local var4 = t_1[v_1]
-			v_1.LayoutOrder = var3
-			var3 += 1
-			local var5 = t_6[var4]
+		for _, value in pairs(List) do
+			local Key = Keys[value]
+			value.LayoutOrder = LayoutOrder
+			LayoutOrder += 1
+			local TableHeader = TableHeaders[Key]
 			
-			if var5 then
-				var5.LayoutOrder = var3
-				var3 += 1
+			if TableHeader then
+				TableHeader.LayoutOrder = LayoutOrder
+				LayoutOrder += 1
 			end
-			local var6 = t_2[var4]
+			local Entry = t[Key]
 			
-			if var6 then
-				local t_4 = {}
+			if Entry then
+				local List1 = {}
 				
-				for i_2, v_2 in pairs(var6) do
-					table.insert(t_4, v_2)
+				for _, value1 in pairs(Entry) do
+					table.insert(List1, value1)
 				end
-				table.sort(t_4, sortActionRows)
+				table.sort(List1, sortActionRows)
 				
-				for i_2, v_2 in pairs(t_4) do
-					v_2.LayoutOrder = var3
-					var3 += 1
+				for _, value2 in pairs(List1) do
+					value2.LayoutOrder = LayoutOrder
+					LayoutOrder += 1
 				end
 			end
 		end
@@ -214,18 +212,18 @@ local function updateContainerCanvas()
 	debug.profileend()
 end
 
-local function scrollContainerToRow(p1)
-	-- upvalues: var1 (write), tweenService (ref), tweenInfo_1 (ref)
-	tweenService:Create(var1, tweenInfo_1, {
-		CanvasPosition = var1.CanvasPosition + Vector2.new(0, p1.AbsolutePosition.Y - var1.AbsolutePosition.Y)
+local function scrollContainerToRow(Frame) --[[ Line: 245 ]]
+	-- upvalues: Parent (ref), TweenService (copy), _TweenInfo1 (copy)
+	TweenService:Create(Parent, _TweenInfo1, {
+		CanvasPosition = Parent.CanvasPosition + Vector2.new(0, Frame.AbsolutePosition.Y - Parent.AbsolutePosition.Y)
 	}):Play()
 end
 
-local t_8 = {}
+local ActionBindingsTabModule = {}
 
-function t_8.initializeGui(p1)
-	-- upvalues: create (ref), var1 (write), t_8 (ref), contextActionService (ref), var2 (write), updateContainerCanvas (ref)
-	local var7 = create("ScrollingFrame")({
+function ActionBindingsTabModule.initializeGui(Parent1) --[[ Line: 253 ]]
+	-- upvalues: CreateFunction (copy), Parent (ref), ActionBindingsTabModule (copy), ContextActionService (copy), Flag (ref), updateContainerCanvas (copy)
+	local Parent2 = CreateFunction("ScrollingFrame")({
 		BorderSizePixel = 0,
 		ScrollBarThickness = 4,
 		BackgroundTransparency = 1,
@@ -233,193 +231,192 @@ function t_8.initializeGui(p1)
 		Position = UDim2.new(0.5, 0, 0.5, 0),
 		Size = UDim2.new(1, -10, 1, -10),
 		AnchorPoint = Vector2.new(0.5, 0.5),
-		Parent = p1
+		Parent = Parent1
 	})
-	var1 = var7
-	local var8 = create("UIListLayout")({ Padding = UDim.new(0, 5), Parent = var7 })
-	var8.SortOrder = Enum.SortOrder.LayoutOrder
-	var8:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
-		-- upvalues: var1 (copy), var8 (ref)
-		var1.CanvasSize = UDim2.new(0, 0, 0, var8.AbsoluteContentSize.Y)
+	Parent = Parent2
+	local Object = CreateFunction("UIListLayout")({ Padding = UDim.new(0, 5), Parent = Parent2 })
+	Object.SortOrder = Enum.SortOrder.LayoutOrder
+	Object:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function() --[[ Line: 271 ]]
+		-- upvalues: Parent (upval), Object (copy)
+		Parent.CanvasSize = UDim2.new(0, 0, 0, Object.AbsoluteContentSize.Y)
 	end)
-	t_8.updateGuis()
-	contextActionService.BoundActionAdded:connect(function(p2, _, p3, p4)
-		-- upvalues: t_8 (copy), var2 (copy), updateContainerCanvas (copy)
-		p3.isCore = p4
-		t_8.updateActionRows(p2, p3)
-		var2 = true
+	ActionBindingsTabModule.updateGuis()
+	ContextActionService.BoundActionAdded:connect(function(ActionAdded, _, FunctionInfoTable, IsCore) --[[ Line: 275 ]]
+		-- upvalues: ActionBindingsTabModule (upval), Flag (upval), updateContainerCanvas (upval)
+		FunctionInfoTable.isCore = IsCore
+		ActionBindingsTabModule.updateActionRows(ActionAdded, FunctionInfoTable)
+		Flag = true
 		updateContainerCanvas()
 	end)
-	contextActionService.BoundActionRemoved:connect(function(p2, p3, p4)
-		-- upvalues: t_8 (copy), var2 (copy), updateContainerCanvas (copy)
-		p3.isCore = p4
-		t_8.removeActionRows(p2, p3)
-		var2 = true
+	ContextActionService.BoundActionRemoved:connect(function(ActionRemoved, FunctionInfoTable, IsCore) --[[ Line: 282 ]]
+		-- upvalues: ActionBindingsTabModule (upval), Flag (upval), updateContainerCanvas (upval)
+		FunctionInfoTable.isCore = IsCore
+		ActionBindingsTabModule.removeActionRows(ActionRemoved, FunctionInfoTable)
+		Flag = true
 		updateContainerCanvas()
 	end)
 end
 
-function t_8.updateBoundInputTypeRow(p1)
-	-- upvalues: t (ref), createButtonRow (ref), createImageColumn (ref), createTextColumn (ref), createEmptyRow (ref), createActionColumns (ref), color3_1 (ref), t_1 (ref), t_5 (ref), t_6 (ref), var1 (write), tweenService (ref), tweenInfo (ref), t_7 (ref), t_2 (ref), updateContainerCanvas (ref), scrollContainerToRow (ref)
-	if not t[p1] then
-		local var7 = createButtonRow("BoundInputType", 30)
-		local var8 = createImageColumn(var7, "ExpandImage", "rbxasset://textures/ui/ExpandArrowSheet.png", 1, 0.35)
-		var8.ColumnImage.ImageRectSize = Vector2.new(21, 21)
-		var8.ColumnImage.ImageRectOffset = Vector2.new(0, 0)
-		local var9 = createTextColumn(var7, "InputType", tostring(p1))
-		var9.Size = UDim2.new(1, -35, 1, 0)
-		var9.ColumnText.Font = Enum.Font.SourceSansBold
-		local var10 = createEmptyRow("TableHeader", 20)
-		var10.Visible = false
-		local _, var11, var12, var13, var14 = createActionColumns(var10, color3_1)
-		var11.ColumnText.Font = Enum.Font.SourceSansBold
-		var12.ColumnText.Font = Enum.Font.SourceSansBold
-		var13.ColumnText.Font = Enum.Font.SourceSansBold
-		var14.ColumnText.Font = Enum.Font.SourceSansBold
-		t[p1] = var7
-		t_1[var7] = p1
-		t_5[var10] = p1
-		t_6[p1] = var10
-		var10.Parent = var1
-		var7.Parent = var1
-		tweenService:Create(var9, tweenInfo, { BackgroundColor3 = Color3.new(0.5, 0.5, 0.5) }):Play()
-		t_7[p1] = false
-		var7.MouseButton1Click:connect(function()
-			-- upvalues: t_7 (copy), p1 (ref), t_2 (copy), var8 (ref), var10 (ref), updateContainerCanvas (copy), tweenService (copy), var9 (ref), tweenInfo (copy), scrollContainerToRow (copy), var7 (ref)
-			t_7[p1] = not t_7[p1]
-			local var15 = t_2[p1]
+function ActionBindingsTabModule.updateBoundInputTypeRow(Key) --[[ Line: 291 ]]
+	-- upvalues: BoundInputTypes (copy), createButtonRow (copy), createImageColumn (copy), createTextColumn (copy), createEmptyRow (copy), createActionColumns (copy), _Color3_1 (copy), Keys (copy), Keys2 (copy), TableHeaders (copy), Parent (ref), TweenService (copy), _TweenInfo (copy), t2 (copy), t (copy), updateContainerCanvas (copy), scrollContainerToRow (copy)
+	if not BoundInputTypes[Key] then
+		local BoundInputType = createButtonRow("BoundInputType", 30)
+		local ExpandImage = createImageColumn(BoundInputType, "ExpandImage", "rbxasset://textures/ui/ExpandArrowSheet.png", 1, 0.35)
+		ExpandImage.ColumnImage.ImageRectSize = Vector2.new(21, 21)
+		ExpandImage.ColumnImage.ImageRectOffset = Vector2.new(0, 0)
+		local InputType = createTextColumn(BoundInputType, "InputType", (tostring(Key)))
+		InputType.Size = UDim2.new(1, -35, 1, 0)
+		InputType.ColumnText.Font = Enum.Font.SourceSansBold
+		local TableHeader = createEmptyRow("TableHeader", 20)
+		TableHeader.Visible = false
+		local _, ActionColumns2, ActionColumns3, ActionColumns4, ActionColumns5 = createActionColumns(TableHeader, _Color3_1)
+		ActionColumns2.ColumnText.Font = Enum.Font.SourceSansBold
+		ActionColumns3.ColumnText.Font = Enum.Font.SourceSansBold
+		ActionColumns4.ColumnText.Font = Enum.Font.SourceSansBold
+		ActionColumns5.ColumnText.Font = Enum.Font.SourceSansBold
+		BoundInputTypes[Key] = BoundInputType
+		Keys[BoundInputType] = Key
+		Keys2[TableHeader] = Key
+		TableHeaders[Key] = TableHeader
+		TableHeader.Parent = Parent
+		BoundInputType.Parent = Parent
+		TweenService:Create(InputType, _TweenInfo, { BackgroundColor3 = Color3.new(0.5, 0.5, 0.5) }):Play()
+		t2[Key] = false
+		BoundInputType.MouseButton1Click:connect(function() --[[ Line: 323 ]]
+			-- upvalues: t2 (upval), Key (copy), t (upval), ExpandImage (copy), TableHeader (copy), updateContainerCanvas (upval), TweenService (upval), InputType (copy), _TweenInfo (upval), scrollContainerToRow (upval), BoundInputType (copy)
+			t2[Key] = not t2[Key]
+			local Entry = t[Key]
 			
-			if t_7[p1] then
-				var8.ColumnImage.ImageRectOffset = Vector2.new(21, 0)
-				var10.Visible = true
+			if t2[Key] then
+				ExpandImage.ColumnImage.ImageRectOffset = Vector2.new(21, 0)
+				TableHeader.Visible = true
 				
-				if var15 then
-					for i, v in pairs(var15) do
-						v.Visible = true
+				if Entry then
+					for _, value1 in pairs(Entry) do
+						value1.Visible = true
 					end
 				end
 			else
-				var8.ColumnImage.ImageRectOffset = Vector2.new(0, 0)
-				var10.Visible = false
+				ExpandImage.ColumnImage.ImageRectOffset = Vector2.new(0, 0)
+				TableHeader.Visible = false
 				
-				if var15 then
-					for i, v in pairs(var15) do
-						v.Visible = false
+				if Entry then
+					for _, value in pairs(Entry) do
+						value.Visible = false
 					end
 				end
 			end
 			updateContainerCanvas()
 			
-			if t_7[p1] then
-				tweenService:Create(var9, tweenInfo, { BackgroundColor3 = Color3.new(0.5, 0.5, 0.5) }):Play()
-				scrollContainerToRow(var7)
+			if t2[Key] then
+				TweenService:Create(InputType, _TweenInfo, { BackgroundColor3 = Color3.new(0.5, 0.5, 0.5) }):Play()
+				scrollContainerToRow(BoundInputType)
 			end
 		end)
 	end
 end
 
-function t_8.updateActionRowForInputType(p2, p3, p4)
-	-- upvalues: t_2 (ref), createEmptyRow (ref), t_7 (ref), createActionColumns (ref), color3 (ref), color3_1 (ref), t_4 (ref), t_3 (ref), var1 (write), tweenService (ref), tweenInfo (ref), t (ref)
-	local var15 = t_2[p4]
+function ActionBindingsTabModule.updateActionRowForInputType(Text, p1, Key) --[[ Line: 354 ]]
+	-- upvalues: t (copy), createEmptyRow (copy), t2 (copy), createActionColumns (copy), _Color3 (copy), _Color3_1 (copy), Keys1 (copy), t1 (copy), Parent (ref), TweenService (copy), _TweenInfo (copy), BoundInputTypes (copy)
+	local Entry = t[Key]
 	
-	if not var15 then
-		var15 = {}
-		t_2[p4] = var15
+	if not Entry then
+		Entry = {}
+		t[Key] = Entry
 	end
-	if not var15[p2] then
-		local var16 = createEmptyRow("BoundAction", 20)
-		var16.Visible = t_7[p4]
-		local t_1 = {}
+	if not Entry[Text] then
+		local BoundAction = createEmptyRow("BoundAction", 20)
+		BoundAction.Visible = t2[Key]
+		local List = {}
 		
-		for i, v in pairs(p3.inputTypes) do
-			t_1[i] = tostring(v)
+		for i, inputType in pairs(p1.inputTypes) do
+			List[i] = tostring(inputType)
 		end
-		local _, var17, var18, var19, var20 = createActionColumns(var16, if p3.isCore then color3 else color3_1)
-		var17.ColumnText.Text = p3.priorityLevel or "Default"
-		var18.ColumnText.Text = if p3.isCore then "Core" else "Developer"
-		var19.ColumnText.Text = p2
-		var20.ColumnText.Text = table.concat(t_1, ", ")
+		local _, ActionColumns2, ActionColumns3, ActionColumns4, ActionColumns5 = createActionColumns(BoundAction, p1.isCore and _Color3 or _Color3_1)
+		ActionColumns2.ColumnText.Text = p1.priorityLevel or "Default"
+		ActionColumns3.ColumnText.Text = if p1.isCore then "Core" else "Developer"
+		ActionColumns4.ColumnText.Text = Text
+		ActionColumns5.ColumnText.Text = table.concat(List, ", ")
 		
-		if p3.isCore then
-			var17.ColumnText.Font = Enum.Font.SourceSansItalic
-			var18.ColumnText.Font = Enum.Font.SourceSansItalic
-			var19.ColumnText.Font = Enum.Font.SourceSansItalic
-			var20.ColumnText.Font = Enum.Font.SourceSansItalic
+		if p1.isCore then
+			ActionColumns2.ColumnText.Font = Enum.Font.SourceSansItalic
+			ActionColumns3.ColumnText.Font = Enum.Font.SourceSansItalic
+			ActionColumns4.ColumnText.Font = Enum.Font.SourceSansItalic
+			ActionColumns5.ColumnText.Font = Enum.Font.SourceSansItalic
 		end
-		var15[p2] = var16
-		t_4[var16] = p4
-		t_3[var16] = p3
-		var16.Parent = var1
+		Entry[Text] = BoundAction
+		Keys1[BoundAction] = Key
+		t1[BoundAction] = p1
+		BoundAction.Parent = Parent
 		
-		if var16.Visible then
-			tweenService:Create(var19, tweenInfo, { BackgroundColor3 = Color3.new(0.5, 0.5, 0.5) }):Play()
+		if BoundAction.Visible then
+			TweenService:Create(ActionColumns4, _TweenInfo, { BackgroundColor3 = Color3.new(0.5, 0.5, 0.5) }):Play()
 		else
-			local var21 = t[p4]
+			local BoundInputType = BoundInputTypes[Key]
 			
-			if var21 then
-				tweenService:Create(var21.InputType, tweenInfo, { BackgroundColor3 = Color3.new(0.5, 0.5, 0.5) }):Play()
+			if BoundInputType then
+				TweenService:Create(BoundInputType.InputType, _TweenInfo, { BackgroundColor3 = Color3.new(0.5, 0.5, 0.5) }):Play()
 			end
 		end
-		local _ = var16
 	end
 end
 
-function t_8.updateActionRows(p5, p6)
-	-- upvalues: t_8 (ref)
-	for i, v in pairs(p6.inputTypes) do
-		t_8.updateBoundInputTypeRow(v)
-		t_8.updateActionRowForInputType(p5, p6, v)
+function ActionBindingsTabModule.updateActionRows(p2, p3) --[[ Line: 402 ]]
+	-- upvalues: ActionBindingsTabModule (copy)
+	for _, inputType in pairs(p3.inputTypes) do
+		ActionBindingsTabModule.updateBoundInputTypeRow(inputType)
+		ActionBindingsTabModule.updateActionRowForInputType(p2, p3, inputType)
 	end
 end
 
-function t_8.removeActionRows(p7, p8)
-	-- upvalues: t_2 (ref), t (ref), t_6 (ref), updateContainerCanvas (ref), var1 (write)
-	local var22
-	for i, v in pairs(p8.inputTypes) do
-		local var23 = t_2[v]
+function ActionBindingsTabModule.removeActionRows(Key, p4) --[[ Line: 409 ]]
+	-- upvalues: t (copy), BoundInputTypes (copy), TableHeaders (copy), updateContainerCanvas (copy), Parent (ref)
+	local Flag = nil
+	for _, inputType in pairs(p4.inputTypes) do
+		local Entry = t[inputType]
 		
-		if var23 then
-			var23[p7]:Destroy()
-			var23[p7] = nil
-			var22 = true
+		if Entry then
+			Entry[Key]:Destroy()
+			Entry[Key] = nil
+			Flag = true
 			
-			for i_1, v_1 in pairs(var23) do
-				var22 = false
+			for _, _ in pairs(Entry) do
+				Flag = false
 				break
 			end
-			if var22 then
-				local var24 = t[v]
+			if Flag then
+				local BoundInputType = BoundInputTypes[inputType]
 				
-				if var24 then
-					var24:Destroy()
-					t[v] = nil
+				if BoundInputType then
+					BoundInputType:Destroy()
+					BoundInputTypes[inputType] = nil
 				end
-				local var25 = t_6[v]
+				local TableHeader = TableHeaders[inputType]
 				
-				if var25 then
-					t_6[var25] = nil
-					var25:Destroy()
-					t_6[v] = nil
+				if TableHeader then
+					TableHeaders[TableHeader] = nil
+					TableHeader:Destroy()
+					TableHeaders[inputType] = nil
 				end
 			end
 		end
 	end
 	updateContainerCanvas()
-	var1.UIListLayout:ApplyLayout()
+	Parent.UIListLayout:ApplyLayout()
 end
 
-function t_8.updateGuis()
-	-- upvalues: contextActionService (ref), t_8 (ref), var2 (write), updateContainerCanvas (ref)
-	for i, v in pairs(contextActionService:GetAllBoundCoreActionInfo()) do
-		v.isCore = true
-		t_8.updateActionRows(i, v)
+function ActionBindingsTabModule.updateGuis() --[[ Line: 446 ]]
+	-- upvalues: ContextActionService (copy), ActionBindingsTabModule (copy), Flag (ref), updateContainerCanvas (copy)
+	for i, value in pairs((ContextActionService:GetAllBoundCoreActionInfo())) do
+		value.isCore = true
+		ActionBindingsTabModule.updateActionRows(i, value)
 	end
-	for i_1, v_1 in pairs(contextActionService:GetAllBoundActionInfo()) do
-		v_1.isCore = false
-		t_8.updateActionRows(i_1, v_1)
+	for i1, value1 in pairs((ContextActionService:GetAllBoundActionInfo())) do
+		value1.isCore = false
+		ActionBindingsTabModule.updateActionRows(i1, value1)
 	end
-	var2 = true
+	Flag = true
 	updateContainerCanvas()
 end
 
-return t_8
+return ActionBindingsTabModule

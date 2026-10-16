@@ -1,34 +1,34 @@
-﻿local avatarExperienceSlotBasedEditor = script:FindFirstAncestor("AvatarExperienceSlotBasedEditor")
-local parent = avatarExperienceSlotBasedEditor.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local constantsModule = require(avatarExperienceSlotBasedEditor.Constants)
+﻿local AvatarExperienceSlotBasedEditor = script:FindFirstAncestor("AvatarExperienceSlotBasedEditor")
+local Parent = AvatarExperienceSlotBasedEditor.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local ConstantsModule = require(AvatarExperienceSlotBasedEditor.Constants)
 
-return function(p1)
-	-- upvalues: reactModule (ref), foundationModule (ref), constantsModule (ref)
-	return reactModule.createElement(foundationModule.View, {
+return function(Frame) --[[ Line: 17 | Named "OutfitDetailsActionBar" ]]
+	-- upvalues: ReactModule (copy), FoundationModule (copy), ConstantsModule (copy)
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "col bg-surface-0",
-		Size = UDim2.new(1, 0, 0, constantsModule.ActionBarHeight),
-		LayoutOrder = p1.LayoutOrder
+		Size = UDim2.new(1, 0, 0, ConstantsModule.ActionBarHeight),
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Divider = reactModule.createElement(foundationModule.Divider, { LayoutOrder = 1 }),
-		Buttons = reactModule.createElement(foundationModule.View, {
+		Divider = ReactModule.createElement(FoundationModule.Divider, { LayoutOrder = 1 }),
+		Buttons = ReactModule.createElement(FoundationModule.View, {
 			tag = "row align-x-right align-y-center fill gap-small size-full-0 padding-x-medium",
 			LayoutOrder = 2
 		}, {
-			RenameButton = reactModule.createElement(foundationModule.Button, {
+			RenameButton = ReactModule.createElement(FoundationModule.Button, {
 				LayoutOrder = 1,
-				text = p1.renameText,
-				variant = foundationModule.Enums.ButtonVariant.Standard,
-				size = foundationModule.Enums.ButtonSize.Medium,
-				onActivated = p1.onRenameOutfit
+				text = Frame.renameText,
+				variant = FoundationModule.Enums.ButtonVariant.Standard,
+				size = FoundationModule.Enums.ButtonSize.Medium,
+				onActivated = Frame.onRenameOutfit
 			}),
-			DeleteButton = reactModule.createElement(foundationModule.Button, {
+			DeleteButton = ReactModule.createElement(FoundationModule.Button, {
 				LayoutOrder = 2,
-				text = p1.deleteText,
-				variant = foundationModule.Enums.ButtonVariant.Standard,
-				size = foundationModule.Enums.ButtonSize.Medium,
-				onActivated = p1.onDeleteOutfit
+				text = Frame.deleteText,
+				variant = FoundationModule.Enums.ButtonVariant.Standard,
+				size = FoundationModule.Enums.ButtonSize.Medium,
+				onActivated = Frame.onDeleteOutfit
 			})
 		})
 	})

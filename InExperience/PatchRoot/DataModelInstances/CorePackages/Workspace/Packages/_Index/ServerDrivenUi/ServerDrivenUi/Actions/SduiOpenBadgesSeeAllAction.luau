@@ -1,36 +1,37 @@
 ﻿local IXPService = game:GetService("IXPService")
-local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local navigateToBadgesSeeAll = require(parent.Badges).navigateToBadgesSeeAll
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local sduiActionType = sduiCoreSystemModule.SduiActionType
-local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
-local fFlagLuaAppBadgesSeeAllLogExposure = require(parent.SharedFlags).FFlagLuaAppBadgesSeeAllLogExposure
-local fStringLuaAppBadgesSeeAllIxpLayer = require(parent.SharedFlags).FStringLuaAppBadgesSeeAllIxpLayer
+local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local NavigateToBadgesSeeAllFunction = require(Parent.Badges).navigateToBadgesSeeAll
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiActionType = SduiCoreSystemModule.SduiActionType
+local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
+local FFlagLuaAppBadgesSeeAllLogExposure = require(Parent.SharedFlags).FFlagLuaAppBadgesSeeAllLogExposure
+local FStringLuaAppBadgesSeeAllIxpLayer = require(Parent.SharedFlags).FStringLuaAppBadgesSeeAllIxpLayer
 
-return function(p1, _, p2, _)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref), fFlagLuaAppBadgesSeeAllLogExposure (ref), IXPService (ref), fStringLuaAppBadgesSeeAllIxpLayer (ref), navigateToBadgesSeeAll (ref)
-	local var1 = if p1 then p1.actionParams else nil
+return function(p1, _, p2, _) --[[ Line: 18 ]]
+	-- upvalues: SduiErrorType (copy), SduiActionType (copy), FFlagLuaAppBadgesSeeAllLogExposure (copy), IXPService (copy), FStringLuaAppBadgesSeeAllIxpLayer (copy), NavigateToBadgesSeeAllFunction (copy)
+	local ActionParams = p1 and p1.actionParams or nil
 	
-	if var1 == nil then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if ActionParams == nil then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
-			name = sduiActionType.OpenBadgesSeeAll
+			name = SduiActionType.OpenBadgesSeeAll
 		}, p2.appPage)
 		
 		return
 	end
-	local universeId = var1.universeId
+	local UniverseId = ActionParams.universeId
 	
-	if typeof(universeId) ~= "string" or universeId == "" then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if typeof(UniverseId) ~= "string" or UniverseId == "" then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			propName = "universeId",
-			name = sduiActionType.OpenBadgesSeeAll,
-			message = `Invalid or missing universeId: {tostring(universeId)}`
+			name = SduiActionType.OpenBadgesSeeAll,
+			message = `Invalid or missing universeId: {tostring(UniverseId)}`
 		}, p2.appPage)
 		
 		return
-	elseif fFlagLuaAppBadgesSeeAllLogExposure then
-		IXPService:LogFlagLinkedUserLayerExposure(fStringLuaAppBadgesSeeAllIxpLayer)
 	end
-	navigateToBadgesSeeAll(p2.dependencies.getNavigation(), universeId)
+	if FFlagLuaAppBadgesSeeAllLogExposure then
+		IXPService:LogFlagLinkedUserLayerExposure(FStringLuaAppBadgesSeeAllIxpLayer)
+	end
+	NavigateToBadgesSeeAllFunction(p2.dependencies.getNavigation(), UniverseId)
 end

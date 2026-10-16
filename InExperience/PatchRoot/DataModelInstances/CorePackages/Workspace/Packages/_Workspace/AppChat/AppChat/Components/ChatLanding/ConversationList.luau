@@ -1,51 +1,50 @@
 ﻿local IXPService = game:GetService("IXPService")
-local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local appChatPerfExperimentation = require(parent.SocialExperiments).AppChatPerfExperimentation
-local visibilityControl = require(parent.AppNavBar).VisibilityControl
-local appPage = require(parent.RobloxAppEnums).AppPage
-local bidirectionalFlatList = require(parent.VirtualizedList).BidirectionalFlatList
-local coreGui = require(parent.ReactFocusNavigation).EngineInterface.CoreGui
-local cryoModule = require(parent.Cryo)
-local focusNavigationService = require(parent.ReactFocusNavigation).FocusNavigationService
-local memoize = require(parent.AppCommonLib).memoize
-local reactModule = require(parent.React)
-local roactModule = require(parent.Roact)
-local promiseModule = require(parent.Promise)
-local sharedFlagsModule = require(parent.SharedFlags)
-local signal = require(parent.AppCommonLib).Signal
-local socialCarouselModule = require(parent.SocialCarousel)
-local socialExperimentsModule = require(parent.SocialExperiments)
-local withStyle = require(parent.UIBlox).Style.withStyle
-local fFlagAppChatPerfTrackingModule = require(appChat.Flags.FFlagAppChatPerfTracking)
-local appChatPerfTrackerModule = require(appChat.Telemetry.AppChatPerfTracker)
-local createScrollIntervalTrackerModule = require(appChat.Telemetry.createScrollIntervalTracker)
-local constants = socialCarouselModule.Constants
-local enums = socialCarouselModule.Enums
-local squadQuickStartExperimentation = socialExperimentsModule.SquadQuickStartExperimentation
-local chatLandingModalContainerModule = require(script.Parent.ChatLandingModal.ChatLandingModalContainer)
-local conversationEntryModule = require(script.Parent.ConversationEntry)
-local conversationRowModule = require(script.Parent.ConversationRow)
-local conversationGroupsEntryContainerModule = require(script.Parent.ConversationGroupsEntryContainer)
-local partyQuickStartContainerModule = require(script.Parent.PartyQuickStartContainer)
-local appChatChatLandingInitialFetchLimit = game:DefineFastInt("AppChatChatLandingInitialFetchLimit", 5)
-local fFlagAppIaScrollAway = sharedFlagsModule.FFlagAppIaScrollAway
-local fFlagEnableScrollAwayContentScrollableFix = sharedFlagsModule.FFlagEnableScrollAwayContentScrollableFix
-local appChatChatLandingInitialFetchMinimumConversations = game:DefineFastInt("AppChatChatLandingInitialFetchMinimumConversations", 30)
-local fFlagAppChatRemoveConversationListDividerIxpEnabledModule = require(appChat.Flags.FFlagAppChatRemoveConversationListDividerIxpEnabled)
-local fStringAppChatRemoveConversationListDividerIxpLayerModule = require(appChat.Flags.FStringAppChatRemoveConversationListDividerIxpLayer)
-local fFlagAppChatTimestampInSubtitleIxpEnabledModule = require(appChat.Flags.FFlagAppChatTimestampInSubtitleIxpEnabled)
-local fStringAppChatTimestampInSubtitleIxpLayerModule = require(appChat.Flags.FStringAppChatTimestampInSubtitleIxpLayer)
-local appChatPerfChatLandingPaginationWindowSize = game:DefineFastInt("AppChatPerfChatLandingPaginationWindowSize", 2)
-local appChatPerfChatLandingPaginationInitialRender = game:DefineFastInt("AppChatPerfChatLandingPaginationInitialRender", 8)
-local appChatPerfChatLandingPaginationOnStartReachedUnits = game:DefineFastInt("AppChatPerfChatLandingPaginationOnStartReachedUnits", 1)
-local appChatPerfChatLandingPaginationOnEndReachedUnits = game:DefineFastInt("AppChatPerfChatLandingPaginationOnEndReachedUnits", 10)
-local partyPageCarouselExperimentation = require(parent.SocialExperiments).PartyPageCarouselExperimentation
-local name = require(script.Parent.Logger):new(script.Name)
-local shouldUseFoundationConversationRow = require(appChat.Flags.SignalsMigrationConfig).shouldUseFoundationConversationRow
-local fFlagAppChatConsoleFocusFixesModule = require(appChat.Flags.FFlagAppChatConsoleFocusFixes)
-local conversationList = roactModule.PureComponent:extend("ConversationList")
-conversationList.defaultProps = {
+local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local AppChatPerfExperimentation = require(Parent.SocialExperiments).AppChatPerfExperimentation
+local VisibilityControl = require(Parent.AppNavBar).VisibilityControl
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local BidirectionalFlatList = require(Parent.VirtualizedList).BidirectionalFlatList
+local CoreGui = require(Parent.ReactFocusNavigation).EngineInterface.CoreGui
+local CryoModule = require(Parent.Cryo)
+local FocusNavigationService = require(Parent.ReactFocusNavigation).FocusNavigationService
+local MemoizeFunction = require(Parent.AppCommonLib).memoize
+local ReactModule = require(Parent.React)
+local RoactModule = require(Parent.Roact)
+local PromiseModule = require(Parent.Promise)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local Signal = require(Parent.AppCommonLib).Signal
+local SocialCarouselModule = require(Parent.SocialCarousel)
+local WithStyleFunction = require(Parent.UIBlox).Style.withStyle
+local FFlagAppChatPerfTrackingModule = require(AppChat.Flags.FFlagAppChatPerfTracking)
+local AppChatPerfTrackerModule = require(AppChat.Telemetry.AppChatPerfTracker)
+local CreateScrollIntervalTrackerModule = require(AppChat.Telemetry.createScrollIntervalTracker)
+local Constants = SocialCarouselModule.Constants
+local Enums = SocialCarouselModule.Enums
+local SquadQuickStartExperimentation = require(Parent.SocialExperiments).SquadQuickStartExperimentation
+local ChatLandingModalContainerModule = require(script.Parent.ChatLandingModal.ChatLandingModalContainer)
+local ConversationEntryModule = require(script.Parent.ConversationEntry)
+local ConversationRowModule = require(script.Parent.ConversationRow)
+local ConversationGroupsEntryContainerModule = require(script.Parent.ConversationGroupsEntryContainer)
+local PartyQuickStartContainerModule = require(script.Parent.PartyQuickStartContainer)
+local AppChatChatLandingInitialFetchLimit = game:DefineFastInt("AppChatChatLandingInitialFetchLimit", 5)
+local FFlagAppIaScrollAway = SharedFlagsModule.FFlagAppIaScrollAway
+local FFlagEnableScrollAwayContentScrollableFix = SharedFlagsModule.FFlagEnableScrollAwayContentScrollableFix
+local AppChatChatLandingInitialFetchMinimumConversations = game:DefineFastInt("AppChatChatLandingInitialFetchMinimumConversations", 30)
+local FFlagAppChatRemoveConversationListDividerIxpEnabledModule = require(AppChat.Flags.FFlagAppChatRemoveConversationListDividerIxpEnabled)
+local FStringAppChatRemoveConversationListDividerIxpLayerModule = require(AppChat.Flags.FStringAppChatRemoveConversationListDividerIxpLayer)
+local FFlagAppChatTimestampInSubtitleIxpEnabledModule = require(AppChat.Flags.FFlagAppChatTimestampInSubtitleIxpEnabled)
+local FStringAppChatTimestampInSubtitleIxpLayerModule = require(AppChat.Flags.FStringAppChatTimestampInSubtitleIxpLayer)
+local AppChatPerfChatLandingPaginationWindowSize = game:DefineFastInt("AppChatPerfChatLandingPaginationWindowSize", 2)
+local AppChatPerfChatLandingPaginationInitialRender = game:DefineFastInt("AppChatPerfChatLandingPaginationInitialRender", 8)
+local AppChatPerfChatLandingPaginationOnStartReachedUnits = game:DefineFastInt("AppChatPerfChatLandingPaginationOnStartReachedUnits", 1)
+local AppChatPerfChatLandingPaginationOnEndReachedUnits = game:DefineFastInt("AppChatPerfChatLandingPaginationOnEndReachedUnits", 10)
+local PartyPageCarouselExperimentation = require(Parent.SocialExperiments).PartyPageCarouselExperimentation
+local NewResult = require(script.Parent.Logger):new(script.Name)
+local ShouldUseFoundationConversationRow = require(AppChat.Flags.SignalsMigrationConfig).shouldUseFoundationConversationRow
+local FFlagAppChatConsoleFocusFixesModule = require(AppChat.Flags.FFlagAppChatConsoleFocusFixes)
+local ConversationList = RoactModule.PureComponent:extend("ConversationList")
+ConversationList.defaultProps = {
 	focusIndex = 1,
 	loadNext = nil,
 	loadPrevious = nil,
@@ -60,235 +59,237 @@ conversationList.defaultProps = {
 	canAccessParty = false,
 	focusLock = {},
 	itemList = {},
-	navigateToQuickStartSquadInviteFriends = function() end,
-	navigateToSquadLobby = function() end,
+	navigateToQuickStartSquadInviteFriends = function() --[[ Line: 76 ]] end,
+	navigateToSquadLobby = function() --[[ Line: 77 ]] end,
 	Size = UDim2.fromScale(1, 1),
-	onScrollUpdate = function() end,
-	dismissUnfilteredThreadsFtux = function() end,
-	canvasTopPadding = if fFlagAppIaScrollAway then 0 else nil,
-	fireConversationImpressionEvent = function() end,
-	fireConversationClickedEvent = function() end
+	onScrollUpdate = function() --[[ Line: 81 ]] end,
+	dismissUnfilteredThreadsFtux = function() --[[ Line: 86 ]] end,
+	canvasTopPadding = if FFlagAppIaScrollAway then 0 else nil,
+	fireConversationImpressionEvent = function() --[[ Line: 88 ]] end,
+	fireConversationClickedEvent = function() --[[ Line: 90 ]] end
 }
 
-local function _(p1)
+local function _(p1): boolean --[[ Line: 94 | Named "getIsSquadEnabledForRows" ]]
 	return p1.canAccessParty == true
 end
 
-function conversationList.init(p1)
-	-- upvalues: conversationList (ref), fFlagAppChatPerfTrackingModule (ref), signal (ref), appPage (ref), constants (ref), fFlagAppIaScrollAway (ref), fFlagEnableScrollAwayContentScrollableFix (ref), visibilityControl (ref), partyPageCarouselExperimentation (ref), memoize (ref), enums (ref), roactModule (ref), chatLandingModalContainerModule (ref), conversationGroupsEntryContainerModule (ref), partyQuickStartContainerModule (ref), reactModule (ref), socialCarouselModule (ref), fFlagAppChatConsoleFocusFixesModule (ref), shouldUseFoundationConversationRow (ref), conversationRowModule (ref), conversationEntryModule (ref), focusNavigationService (ref), coreGui (ref), appChatPerfExperimentation (ref), squadQuickStartExperimentation (ref), fFlagAppChatRemoveConversationListDividerIxpEnabledModule (ref), IXPService (ref), fStringAppChatRemoveConversationListDividerIxpLayerModule (ref), fFlagAppChatTimestampInSubtitleIxpEnabledModule (ref), fStringAppChatTimestampInSubtitleIxpLayerModule (ref)
-	conversationList.ENTRY_HEIGHT = p1.props.entryHeight
+function ConversationList.init(p1) --[[ Line: 98 ]]
+	-- upvalues: ConversationList (copy), FFlagAppChatPerfTrackingModule (copy), Signal (copy), AppPage (copy), Constants (copy), FFlagAppIaScrollAway (copy), FFlagEnableScrollAwayContentScrollableFix (copy), VisibilityControl (copy), PartyPageCarouselExperimentation (copy), MemoizeFunction (copy), Enums (copy), RoactModule (copy), ChatLandingModalContainerModule (copy), ConversationGroupsEntryContainerModule (copy), PartyQuickStartContainerModule (copy), ReactModule (copy), SocialCarouselModule (copy), FFlagAppChatConsoleFocusFixesModule (copy), ShouldUseFoundationConversationRow (copy), ConversationRowModule (copy), ConversationEntryModule (copy), FocusNavigationService (copy), CoreGui (copy), AppChatPerfExperimentation (copy), SquadQuickStartExperimentation (copy), FFlagAppChatRemoveConversationListDividerIxpEnabledModule (copy), IXPService (copy), FStringAppChatRemoveConversationListDividerIxpLayerModule (copy), FFlagAppChatTimestampInSubtitleIxpEnabledModule (copy), FStringAppChatTimestampInSubtitleIxpLayerModule (copy)
+	ConversationList.ENTRY_HEIGHT = p1.props.entryHeight
 	
-	if fFlagAppChatPerfTrackingModule then
+	if FFlagAppChatPerfTrackingModule then
 		p1.scrollIntervalTracker = nil
 	end
-	p1.scrollViewPositionChangedSignal = signal.new()
+	p1.scrollViewPositionChangedSignal = Signal.new()
 	p1.unifiedLogging = {
 		sortId = 0,
 		sortIndex = 1,
-		appPage = appPage.Chat,
-		impressionTag = if p1.props.isInExperience then constants.ANALYTICS.SRC.PARTY_PAGE_IN_EXP else constants.ANALYTICS.SRC.PARTY_PAGE_UA,
+		appPage = AppPage.Chat,
+		impressionTag = if p1.props.isInExperience then Constants.ANALYTICS.SRC.PARTY_PAGE_IN_EXP else Constants.ANALYTICS.SRC.PARTY_PAGE_UA,
 		scrollViewPositionChangedSignal = p1.scrollViewPositionChangedSignal
 	}
 	
-	function p1.onScrollUpdate(p2)
-		-- upvalues: fFlagAppChatPerfTrackingModule (copy), p1 (ref)
-		if fFlagAppChatPerfTrackingModule and p1.scrollIntervalTracker then
+	function p1.onScrollUpdate(ScrollFrame) --[[ Line: 115 ]]
+		-- upvalues: FFlagAppChatPerfTrackingModule (upval), p1 (copy)
+		if FFlagAppChatPerfTrackingModule and p1.scrollIntervalTracker then
 			p1.scrollIntervalTracker.onScrollTick()
 		end
-		p1.currentAnchor = math.floor(p2.CanvasPosition.Y / 64)
+		p1.currentAnchor = math.floor(ScrollFrame.CanvasPosition.Y / 64)
 		p1.scrollViewPositionChangedSignal:fire()
-		p1.props.onScrollUpdate(p2)
+		p1.props.onScrollUpdate(ScrollFrame)
 	end
 	
-	if fFlagAppIaScrollAway and fFlagEnableScrollAwayContentScrollableFix then
+	if FFlagAppIaScrollAway and FFlagEnableScrollAwayContentScrollableFix then
 		p1.lastContentHeight = 0
 		
-		function p1.onViewportAbsoluteSizeChange(p2)
-			-- upvalues: visibilityControl (copy), p1 (ref)
-			visibilityControl.setContentScrollable(p2.AbsoluteSize.Y < p1.lastContentHeight)
+		function p1.onViewportAbsoluteSizeChange(Frame) --[[ Line: 128 ]]
+			-- upvalues: VisibilityControl (upval), p1 (copy)
+			VisibilityControl.setContentScrollable(Frame.AbsoluteSize.Y < p1.lastContentHeight)
 		end
 	end
 	p1.focusLock = p1.props.focusLock
 	
-	if partyPageCarouselExperimentation.getPartyPageCarouselEnabled() then
-		function p1.navigateToConversationFromSocialCarousel(p2)
-			-- upvalues: p1 (ref)
+	if PartyPageCarouselExperimentation.getPartyPageCarouselEnabled() then
+		function p1.navigateToConversationFromSocialCarousel(p2) --[[ Line: 136 ]]
+			-- upvalues: p1 (copy)
 			p1.props.navigateToConversationFromUserId(p2.id)
 		end
 	end
-	function p1.identifier(p2)
+	function p1.identifier(p2) --[[ Line: 141 ]]
 		return if p2 then p2.id .. tostring(p2.unixTime) else nil
 	end
 	
-	local var1 = memoize(function()
-		-- upvalues: enums (copy), p1 (ref)
+	local MemoizeResult = MemoizeFunction(function() --[[ Line: 149 ]]
+		-- upvalues: Enums (upval), p1 (copy)
 		return {
 			{
-				tileGroup = enums.TileGroup.StartSquad,
+				tileGroup = Enums.TileGroup.StartSquad,
 				onActivated = p1.props.navigateToQuickStartSquadInviteFriends
 			},
 			{
-				tileGroup = enums.TileGroup.FriendsList,
+				tileGroup = Enums.TileGroup.FriendsList,
 				onActivated = p1.navigateToConversationFromSocialCarousel
 			}
 		}
 	end)
 	
-	function p1.isPartyQuickStartEnabled()
-		-- upvalues: p1 (ref)
+	function p1.isPartyQuickStartEnabled() --[[ Line: 162 ]]
+		-- upvalues: p1 (copy)
 		return p1.props.isPartyQuickStartEnabled
 	end
 	
-	function p1.renderItem(p2, _)
-		-- upvalues: roactModule (copy), chatLandingModalContainerModule (copy), conversationGroupsEntryContainerModule (copy), p1 (ref), partyQuickStartContainerModule (copy), partyPageCarouselExperimentation (copy), reactModule (copy), socialCarouselModule (copy), var1 (ref), constants (copy), fFlagAppIaScrollAway (copy), fFlagAppChatConsoleFocusFixesModule (copy), shouldUseFoundationConversationRow (copy), conversationRowModule (copy), conversationEntryModule (copy)
-		local item = p2.item
+	function p1.renderItem(p2, _) --[[ Line: 167 ]]
+		-- upvalues: RoactModule (upval), ChatLandingModalContainerModule (upval), ConversationGroupsEntryContainerModule (upval), p1 (copy), PartyQuickStartContainerModule (upval), PartyPageCarouselExperimentation (upval), ReactModule (upval), SocialCarouselModule (upval), MemoizeResult (copy), Constants (upval), FFlagAppIaScrollAway (upval), FFlagAppChatConsoleFocusFixesModule (upval), ShouldUseFoundationConversationRow (upval), ConversationRowModule (upval), ConversationEntryModule (upval)
+		local Item = p2.item
 		
-		return if item.isChatLandingModal then roactModule.createElement(chatLandingModalContainerModule, {}) elseif item.isGroupLink then roactModule.createElement(conversationGroupsEntryContainerModule, { entryHeight = p1.ENTRY_HEIGHT }) elseif p1.isPartyQuickStartEnabled() and item.isQuickStartLink then roactModule.createElement(partyQuickStartContainerModule, { entryHeight = p1.ENTRY_HEIGHT }) elseif partyPageCarouselExperimentation.getPartyPageCarouselEnabled() and item.isSocialCarousel then reactModule.createElement(socialCarouselModule.Entry, {
+		return if Item.isChatLandingModal then RoactModule.createElement(ChatLandingModalContainerModule, {}) elseif Item.isGroupLink then RoactModule.createElement(ConversationGroupsEntryContainerModule, { entryHeight = p1.ENTRY_HEIGHT }) elseif p1.isPartyQuickStartEnabled() and Item.isQuickStartLink then RoactModule.createElement(PartyQuickStartContainerModule, { entryHeight = p1.ENTRY_HEIGHT }) elseif PartyPageCarouselExperimentation.getPartyPageCarouselEnabled() and Item.isSocialCarousel then ReactModule.createElement(SocialCarouselModule.Entry, {
 			roduxKey = "ChatAppReducer",
 			hideCarouselHeader = true,
-			customTileList = var1(),
-			source = if p1.props.isInExperience then constants.ANALYTICS.SRC.PARTY_PAGE_IN_EXP else constants.ANALYTICS.SRC.PARTY_PAGE_UA,
+			customTileList = MemoizeResult(),
+			source = if p1.props.isInExperience then Constants.ANALYTICS.SRC.PARTY_PAGE_IN_EXP else Constants.ANALYTICS.SRC.PARTY_PAGE_UA,
 			unifiedLogging = p1.unifiedLogging
-		}) elseif fFlagAppIaScrollAway and item.isCanvasTopPadding then roactModule.createElement("Frame", {
+		}) elseif FFlagAppIaScrollAway and Item.isCanvasTopPadding then RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
-			Size = UDim2.new(1, 0, 0, item.height)
-		}) elseif fFlagAppChatConsoleFocusFixesModule and item.isCanvasBottomPadding then roactModule.createElement("Frame", {
+			Size = UDim2.new(1, 0, 0, Item.height)
+		}) elseif FFlagAppChatConsoleFocusFixesModule and Item.isCanvasBottomPadding then RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
-			Size = UDim2.new(1, 0, 0, item.height)
-		}) elseif shouldUseFoundationConversationRow then reactModule.createElement(conversationRowModule, {
+			Size = UDim2.new(1, 0, 0, Item.height)
+		}) elseif ShouldUseFoundationConversationRow then ReactModule.createElement(ConversationRowModule, {
 			entryHeight = p1.ENTRY_HEIGHT,
-			conversationId = tostring(item.id),
+			conversationId = tostring(Item.id),
 			isSquadEnabled = p1.props.canAccessParty == true,
 			isWideMode = p1.props.isWideMode,
 			onActivated = p1.props.onActivated,
 			onSquadJoinButtonActivated = p1.props.navigateToSquadLobby,
-			key = "ConversationEntry" .. tostring(item.id),
+			key = "ConversationEntry" .. tostring(Item.id),
 			fireImpressionEvent = p1.props.fireConversationImpressionEvent,
 			fireClickEvent = p1.props.fireConversationClickedEvent,
 			localUserId = p1.props.localUserId,
-			debugCellValue = if p1.props.isDebugEnabled then tostring(item.id) else nil
-		}) else roactModule.createElement(conversationEntryModule, {
+			debugCellValue = if p1.props.isDebugEnabled then tostring(Item.id) else nil
+		}) else RoactModule.createElement(ConversationEntryModule, {
 			boldTitle = false,
 			entryHeight = p1.ENTRY_HEIGHT,
-			conversation = item,
+			conversation = Item,
 			onActivated = p1.props.onActivated,
 			onSquadJoinButtonActivated = p1.props.navigateToSquadLobby,
-			key = "ConversationEntry" .. tostring(item.id),
+			key = "ConversationEntry" .. tostring(Item.id),
 			fireImpressionEvent = p1.props.fireConversationImpressionEvent,
 			fireClickEvent = p1.props.fireConversationClickedEvent
 		}, p1.props.isDebugEnabled and {
-			debugCell = roactModule.createElement("StringValue", { Value = tostring(item.id) })
+			debugCell = RoactModule.createElement("StringValue", { Value = tostring(Item.id) })
 		})
 	end
 	
-	p1.ref = if fFlagAppChatConsoleFocusFixesModule and p1.props.listRef then p1.props.listRef else roactModule.createRef()
-	p1.viewRef = roactModule.createRef()
+	p1.ref = if FFlagAppChatConsoleFocusFixesModule and p1.props.listRef then p1.props.listRef else RoactModule.createRef()
+	p1.viewRef = RoactModule.createRef()
 	p1.initialFetchesAttempted = 0
-	p1.focusNavigationService = focusNavigationService.new(coreGui)
+	p1.focusNavigationService = FocusNavigationService.new(CoreGui)
 	
-	function p1.getScrollRef()
-		-- upvalues: p1 (ref)
+	function p1.getScrollRef() --[[ Line: 245 ]]
+		-- upvalues: p1 (copy)
 		if p1.ref.current == nil then
 			return nil
+		else
+			local NativeScrollRef = p1.ref.current._listRef._scrollRef.getNativeScrollRef()
+			
+			return if NativeScrollRef == nil then nil else NativeScrollRef._nativeRef.current
 		end
-		local nativeScrollRef = p1.ref.current._listRef._scrollRef.getNativeScrollRef()
-		
-		return if nativeScrollRef == nil then nil else nativeScrollRef._nativeRef.current
 	end
 	
-	appChatPerfExperimentation.logExposure()
-	partyPageCarouselExperimentation.logExposure()
-	squadQuickStartExperimentation.logExposure()
+	AppChatPerfExperimentation.logExposure()
+	PartyPageCarouselExperimentation.logExposure()
+	SquadQuickStartExperimentation.logExposure()
 	
-	if fFlagAppChatRemoveConversationListDividerIxpEnabledModule then
-		IXPService:LogFlagLinkedUserLayerExposure(fStringAppChatRemoveConversationListDividerIxpLayerModule)
+	if FFlagAppChatRemoveConversationListDividerIxpEnabledModule then
+		IXPService:LogFlagLinkedUserLayerExposure(FStringAppChatRemoveConversationListDividerIxpLayerModule)
 	end
-	if fFlagAppChatTimestampInSubtitleIxpEnabledModule and game:GetEngineFeature("EnableLogFlagLinkedUserLayerExposure") then
-		IXPService:LogFlagLinkedUserLayerExposure(fStringAppChatTimestampInSubtitleIxpLayerModule)
+	if FFlagAppChatTimestampInSubtitleIxpEnabledModule and game:GetEngineFeature("EnableLogFlagLinkedUserLayerExposure") then
+		IXPService:LogFlagLinkedUserLayerExposure(FStringAppChatTimestampInSubtitleIxpLayerModule)
 	end
 end
 
-function conversationList.didMount(p1)
-	-- upvalues: fFlagAppChatPerfTrackingModule (ref), createScrollIntervalTrackerModule (ref), appChatPerfTrackerModule (ref)
-	if fFlagAppChatPerfTrackingModule and p1.getScrollRef then
-		local scrollRef = p1.getScrollRef()
+function ConversationList.didMount(p1) --[[ Line: 272 ]]
+	-- upvalues: FFlagAppChatPerfTrackingModule (copy), CreateScrollIntervalTrackerModule (copy), AppChatPerfTrackerModule (copy)
+	if FFlagAppChatPerfTrackingModule and p1.getScrollRef then
+		local ScrollRef1 = p1.getScrollRef()
 		
-		if scrollRef ~= nil then
-			p1.scrollIntervalTracker = createScrollIntervalTrackerModule(appChatPerfTrackerModule.Events.ScrollConversationList, scrollRef)
+		if ScrollRef1 ~= nil then
+			p1.scrollIntervalTracker = CreateScrollIntervalTrackerModule(AppChatPerfTrackerModule.Events.ScrollConversationList, ScrollRef1)
 		end
 	end
-	local scrollRef = p1.getScrollRef()
+	local ScrollRef = p1.getScrollRef()
 	
-	if scrollRef ~= nil then
-		scrollRef.Selectable = false
+	if ScrollRef ~= nil then
+		ScrollRef.Selectable = false
 	end
 end
 
-function conversationList.willUnmount(p1)
-	-- upvalues: fFlagAppChatPerfTrackingModule (ref), fFlagAppIaScrollAway (ref), fFlagEnableScrollAwayContentScrollableFix (ref), visibilityControl (ref)
-	if fFlagAppChatPerfTrackingModule and p1.scrollIntervalTracker then
+function ConversationList.willUnmount(p1) --[[ Line: 286 ]]
+	-- upvalues: FFlagAppChatPerfTrackingModule (copy), FFlagAppIaScrollAway (copy), FFlagEnableScrollAwayContentScrollableFix (copy), VisibilityControl (copy)
+	if FFlagAppChatPerfTrackingModule and p1.scrollIntervalTracker then
 		p1.scrollIntervalTracker.cleanup()
 	end
-	if fFlagAppIaScrollAway and fFlagEnableScrollAwayContentScrollableFix then
-		visibilityControl.setContentScrollable(true)
+	if FFlagAppIaScrollAway and FFlagEnableScrollAwayContentScrollableFix then
+		VisibilityControl.setContentScrollable(true)
 	end
 	p1.focusNavigationService:teardown()
 end
 
-function conversationList.willUpdate(p1, p2, _)
-	-- upvalues: appChatChatLandingInitialFetchLimit (ref), appChatChatLandingInitialFetchMinimumConversations (ref), name (ref), conversationList (ref)
-	if p2.filterText and p2.filterText ~= "" and p2.filterText ~= p1.props.filterText then
-		p1.focusLock = p2.filterText
-	elseif p2.itemList[1] and p1.props.itemList[1] and (p2.itemList[1].id ~= p1.props.itemList[1].id and p1.currentAnchor == 1) then
+function ConversationList.willUpdate(p1, DefaultProps, _) --[[ Line: 296 ]]
+	-- upvalues: AppChatChatLandingInitialFetchLimit (copy), AppChatChatLandingInitialFetchMinimumConversations (copy), NewResult (copy), ConversationList (copy)
+	if DefaultProps.filterText and DefaultProps.filterText ~= "" and DefaultProps.filterText ~= p1.props.filterText then
+		p1.focusLock = DefaultProps.filterText
+	elseif DefaultProps.itemList[1] and p1.props.itemList[1] and DefaultProps.itemList[1].id ~= p1.props.itemList[1].id and p1.currentAnchor == 1 then
 		p1.focusLock = {}
 	end
-	if p2.itemList and p1.props.itemList ~= p2.itemList and (p1.initialFetchesAttempted < appChatChatLandingInitialFetchLimit and #p2.itemList < appChatChatLandingInitialFetchMinimumConversations) then
+	if DefaultProps.itemList and p1.props.itemList ~= DefaultProps.itemList and p1.initialFetchesAttempted < AppChatChatLandingInitialFetchLimit and #DefaultProps.itemList < AppChatChatLandingInitialFetchMinimumConversations then
 		p1.initialFetchesAttempted += 1
-		name:info("Loading more conversations because the list (count: {} out of {}) is not enough (attempt {} out of {})", #p2.itemList, appChatChatLandingInitialFetchMinimumConversations, p1.initialFetchesAttempted, appChatChatLandingInitialFetchLimit)
+		NewResult:info("Loading more conversations because the list (count: {} out of {}) is not enough (attempt {} out of {})", #DefaultProps.itemList, AppChatChatLandingInitialFetchMinimumConversations, p1.initialFetchesAttempted, AppChatChatLandingInitialFetchLimit)
 		p1.props.loadNext()
 	end
-	if p2.entryHeight ~= p1.props.entryHeight then
-		conversationList.ENTRY_HEIGHT = p2.entryHeight
+	if DefaultProps.entryHeight ~= p1.props.entryHeight then
+		ConversationList.ENTRY_HEIGHT = DefaultProps.entryHeight
 	end
 end
 
-function conversationList.render(p1)
-	-- upvalues: cryoModule (ref), partyPageCarouselExperimentation (ref), fFlagAppIaScrollAway (ref), fFlagAppChatConsoleFocusFixesModule (ref), roactModule (ref), fFlagEnableScrollAwayContentScrollableFix (ref), bidirectionalFlatList (ref), appChatPerfChatLandingPaginationWindowSize (ref), appChatPerfChatLandingPaginationInitialRender (ref), name (ref), promiseModule (ref), appChatPerfChatLandingPaginationOnEndReachedUnits (ref), appChatPerfChatLandingPaginationOnStartReachedUnits (ref), withStyle (ref)
-	local itemList = p1.props.itemList
-	local var1 = if p1.props.filterText ~= "" then p1.props.filterText == nil else true
+function ConversationList.render(p1) --[[ Line: 331 ]]
+	-- upvalues: CryoModule (copy), PartyPageCarouselExperimentation (copy), FFlagAppIaScrollAway (copy), FFlagAppChatConsoleFocusFixesModule (copy), RoactModule (copy), FFlagEnableScrollAwayContentScrollableFix (copy), BidirectionalFlatList (copy), AppChatPerfChatLandingPaginationWindowSize (copy), AppChatPerfChatLandingPaginationInitialRender (copy), NewResult (copy), PromiseModule (copy), AppChatPerfChatLandingPaginationOnEndReachedUnits (copy), AppChatPerfChatLandingPaginationOnStartReachedUnits (copy), WithStyleFunction (copy)
+	local ItemList = p1.props.itemList
+	local IsFilterTextMatch: boolean = p1.props.filterText == "" or p1.props.filterText == nil
+	local ShowGroupsLink = p1.props.showGroupsLink
 	
-	if var1 and p1.props.showGroupsLink then
-		itemList = cryoModule.List.join({
+	if IsFilterTextMatch and ShowGroupsLink then
+		ItemList = CryoModule.List.join({
 			{
 				id = "ConversationGroupsEntryContainer",
 				isGroupLink = true
 			}
-		}, itemList)
+		}, ItemList)
 	end
-	if not partyPageCarouselExperimentation.getPartyPageCarouselEnabled() and p1.isPartyQuickStartEnabled() then
-		itemList = cryoModule.List.join({
+	if not PartyPageCarouselExperimentation.getPartyPageCarouselEnabled() and p1.isPartyQuickStartEnabled() then
+		ItemList = CryoModule.List.join({
 			{ id = "PartyQuickStartContainer", isQuickStartLink = true }
-		}, itemList)
+		}, ItemList)
 	end
-	if var1 then
-		if p1.isPartyQuickStartEnabled() and partyPageCarouselExperimentation.getPartyPageCarouselEnabled() and (p1.props.isWideMode or not p1.props.isInExperience) then
-			itemList = cryoModule.List.join({ { id = "SocialCarousel", isSocialCarousel = true } }, itemList)
+	if IsFilterTextMatch then
+		if p1.isPartyQuickStartEnabled() and PartyPageCarouselExperimentation.getPartyPageCarouselEnabled() and (p1.props.isWideMode or not p1.props.isInExperience) then
+			ItemList = CryoModule.List.join({ { id = "SocialCarousel", isSocialCarousel = true } }, ItemList)
 		end
-		itemList = cryoModule.List.join({
+		ItemList = CryoModule.List.join({
 			{ id = "UnfilteredThreadsFtux", isChatLandingModal = true }
-		}, itemList)
+		}, ItemList)
 	end
-	if fFlagAppIaScrollAway and p1.props.canvasTopPadding > 0 then
-		itemList = cryoModule.List.join({
+	if FFlagAppIaScrollAway and p1.props.canvasTopPadding > 0 then
+		ItemList = CryoModule.List.join({
 			{
 				id = "CanvasTopPadding",
 				isCanvasTopPadding = true,
 				height = p1.props.canvasTopPadding
 			}
-		}, itemList)
+		}, ItemList)
 	end
-	if fFlagAppChatConsoleFocusFixesModule and (p1.props.canvasBottomPadding or 0) > 0 then
-		itemList = cryoModule.List.join(itemList, {
+	if FFlagAppChatConsoleFocusFixesModule and (p1.props.canvasBottomPadding or 0) > 0 then
+		ItemList = CryoModule.List.join(ItemList, {
 			{
 				id = "CanvasBottomPadding",
 				isCanvasBottomPadding = true,
@@ -296,42 +297,46 @@ function conversationList.render(p1)
 			}
 		})
 	end
-	local var2 = if fFlagAppIaScrollAway then function(_, p2)
-		-- upvalues: p1 (ref)
-		local canvasTopPadding, var3
-		local _ = nil
-		local _ = nil
-		
-		if p1.props.canvasTopPadding <= 0 then
-			canvasTopPadding = p1.ENTRY_HEIGHT
-			var3 = p1.ENTRY_HEIGHT * (p2 - 1)
-		elseif p2 == 1 then
-			canvasTopPadding = p1.props.canvasTopPadding
-			var3 = 0
+	local v1 = if FFlagAppIaScrollAway then function(_, Index: number) --[[ Line: 399 ]]
+		-- upvalues: p1 (copy)
+		local ENTRYHEIGHT = nil
+		local ScaledENTRYHEIGHT = nil
+		if p1.props.canvasTopPadding > 0 then
+			if Index == 1 then
+				ENTRYHEIGHT = p1.props.canvasTopPadding
+				ScaledENTRYHEIGHT = 0
+			else
+				ENTRYHEIGHT = p1.ENTRY_HEIGHT
+				ScaledENTRYHEIGHT = p1.props.canvasTopPadding + p1.ENTRY_HEIGHT * (Index - 2)
+			end
 		else
-			canvasTopPadding = p1.ENTRY_HEIGHT
-			var3 = p1.props.canvasTopPadding + p1.ENTRY_HEIGHT * (p2 - 2)
+			ENTRYHEIGHT = p1.ENTRY_HEIGHT
+			ScaledENTRYHEIGHT = p1.ENTRY_HEIGHT * (Index - 1)
 		end
-		return { length = canvasTopPadding, offset = var3, index = p2 }
+		return {
+			length = ENTRYHEIGHT,
+			offset = ScaledENTRYHEIGHT,
+			index = Index
+		}
 	end else nil
 	
-	local function renderScroller(p2)
-		-- upvalues: roactModule (copy), p1 (ref), fFlagAppIaScrollAway (copy), fFlagEnableScrollAwayContentScrollableFix (copy), bidirectionalFlatList (copy), itemList (write), var2 (ref), appChatPerfChatLandingPaginationWindowSize (copy), appChatPerfChatLandingPaginationInitialRender (copy), name (copy), promiseModule (copy), appChatPerfChatLandingPaginationOnEndReachedUnits (copy), appChatPerfChatLandingPaginationOnStartReachedUnits (copy), fFlagAppChatConsoleFocusFixesModule (copy)
-		return roactModule.createElement("Frame", {
+	local function renderScroller(p2) --[[ Line: 423 ]]
+		-- upvalues: RoactModule (upval), p1 (copy), FFlagAppIaScrollAway (upval), FFlagEnableScrollAwayContentScrollableFix (upval), BidirectionalFlatList (upval), ItemList (ref), v1 (copy), AppChatPerfChatLandingPaginationWindowSize (upval), AppChatPerfChatLandingPaginationInitialRender (upval), NewResult (upval), PromiseModule (upval), AppChatPerfChatLandingPaginationOnEndReachedUnits (upval), AppChatPerfChatLandingPaginationOnStartReachedUnits (upval), FFlagAppChatConsoleFocusFixesModule (upval)
+		return RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = p1.props.Size,
-			[roactModule.Ref] = p1.viewRef,
-			[roactModule.Change.AbsoluteSize] = if fFlagAppIaScrollAway and fFlagEnableScrollAwayContentScrollableFix then p1.onViewportAbsoluteSizeChange else nil
+			[RoactModule.Ref] = p1.viewRef,
+			[RoactModule.Change.AbsoluteSize] = if FFlagAppIaScrollAway and FFlagEnableScrollAwayContentScrollableFix then p1.onViewportAbsoluteSizeChange else nil
 		}, {
-			scroller = roactModule.createElement(bidirectionalFlatList, {
-				data = itemList,
+			scroller = RoactModule.createElement(BidirectionalFlatList, {
+				data = ItemList,
 				renderItem = p1.renderItem,
-				getItemLayout = if fFlagAppIaScrollAway then var2 else function(_, p3)
-					-- upvalues: p1 (copy)
+				getItemLayout = if FFlagAppIaScrollAway then v1 else function(_, Index: number) --[[ Line: 437 ]]
+					-- upvalues: p1 (upval)
 					return {
 						length = p1.ENTRY_HEIGHT,
-						offset = p1.ENTRY_HEIGHT * (p3 - 1),
-						index = p3
+						offset = p1.ENTRY_HEIGHT * (Index - 1),
+						index = Index
 					}
 				end,
 				style = {
@@ -345,60 +350,60 @@ function conversationList.render(p1)
 					BackgroundColor3 = p2.Theme.BackgroundDefault.Color,
 					BackgroundTransparency = p2.Tokens.Color.None.Transparency
 				},
-				windowSize = appChatPerfChatLandingPaginationWindowSize,
-				initialNumToRender = appChatPerfChatLandingPaginationInitialRender,
+				windowSize = AppChatPerfChatLandingPaginationWindowSize,
+				initialNumToRender = AppChatPerfChatLandingPaginationInitialRender,
 				onScroll = p1.onScrollUpdate,
-				onContentSizeChange = function(_, p3)
-					-- upvalues: p1 (copy), name (copy), fFlagAppIaScrollAway (copy), fFlagEnableScrollAwayContentScrollableFix (copy)
-					local current = p1.viewRef.current
+				onContentSizeChange = function(_, LastContentHeight) --[[ Line: 459 ]]
+					-- upvalues: p1 (upval), NewResult (upval), FFlagAppIaScrollAway (upval), FFlagEnableScrollAwayContentScrollableFix (upval)
+					local Current = p1.viewRef.current
 					
-					if current then
-						name:debug("onContentSizeChange - Window height: {} vs Content height: {}", current.AbsoluteSize.Y, p3)
+					if Current then
+						NewResult:debug("onContentSizeChange - Window height: {} vs Content height: {}", Current.AbsoluteSize.Y, LastContentHeight)
 						
-						if fFlagAppIaScrollAway and fFlagEnableScrollAwayContentScrollableFix then
-							p1.lastContentHeight = p3
-							p1.onViewportAbsoluteSizeChange(current)
+						if FFlagAppIaScrollAway and FFlagEnableScrollAwayContentScrollableFix then
+							p1.lastContentHeight = LastContentHeight
+							p1.onViewportAbsoluteSizeChange(Current)
 						end
-						if p3 <= current.AbsoluteSize.Y then
-							name:info("Not enough content to fill the view, loading more conversations")
+						if LastContentHeight <= Current.AbsoluteSize.Y then
+							NewResult:info("Not enough content to fill the view, loading more conversations")
 							p1.props.loadNext()
 						end
 					end
 				end,
-				onEndReached = function()
-					-- upvalues: name (copy), p1 (copy), promiseModule (copy)
-					name:debug("onEndReached - Loading more conversations")
+				onEndReached = function() --[[ Line: 477 ]]
+					-- upvalues: NewResult (upval), p1 (upval), PromiseModule (upval)
+					NewResult:debug("onEndReached - Loading more conversations")
 					p1.props.loadNext()
 					
-					return promiseModule.resolve()
+					return PromiseModule.resolve()
 				end,
-				onStartReached = function()
-					-- upvalues: name (copy), p1 (copy), promiseModule (copy)
-					name:debug("onStartReached - Loading previous conversations")
+				onStartReached = function() --[[ Line: 482 ]]
+					-- upvalues: NewResult (upval), p1 (upval), PromiseModule (upval)
+					NewResult:debug("onStartReached - Loading previous conversations")
 					
 					if p1.props.loadPrevious then
 						p1.props.loadPrevious()
 					end
-					return promiseModule.resolve()
+					return PromiseModule.resolve()
 				end,
 				AutomaticCanvasSize = Enum.AutomaticSize.XY,
 				CanvasSize = UDim2.fromScale(0, 0),
-				onEndReachedThreshold = p1.ENTRY_HEIGHT * appChatPerfChatLandingPaginationOnEndReachedUnits,
-				onStartReachedThreshold = p1.ENTRY_HEIGHT * appChatPerfChatLandingPaginationOnStartReachedUnits,
-				compareItemData = function(p3, p4)
+				onEndReachedThreshold = p1.ENTRY_HEIGHT * AppChatPerfChatLandingPaginationOnEndReachedUnits,
+				onStartReachedThreshold = p1.ENTRY_HEIGHT * AppChatPerfChatLandingPaginationOnStartReachedUnits,
+				compareItemData = function(p3, p4): boolean --[[ Line: 493 ]]
 					return p3.id == p4.id
 				end,
-				[roactModule.Ref] = p1.ref,
+				[RoactModule.Ref] = p1.ref,
 				autoscrollToTopThreshold = 33,
 				enableAutoscrollToTop = true,
-				scrollEnabled = if fFlagAppChatConsoleFocusFixesModule then p1.props.scrollEnabled else nil
+				scrollEnabled = if FFlagAppChatConsoleFocusFixesModule then p1.props.scrollEnabled else nil
 			})
 		})
 	end
 	
-	return withStyle(function(p2)
-		-- upvalues: itemList (write), roactModule (copy), p1 (ref), renderScroller (ref)
-		return if #itemList == 0 then roactModule.createElement("Frame", {
+	return WithStyleFunction(function(p2) --[[ Line: 504 ]]
+		-- upvalues: ItemList (ref), RoactModule (upval), p1 (copy), renderScroller (copy)
+		return if #ItemList == 0 then RoactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			Size = p1.props.Size,
 			BackgroundColor3 = p2.Theme.BackgroundDefault.Color,
@@ -408,4 +413,4 @@ function conversationList.render(p1)
 	end)
 end
 
-return conversationList
+return ConversationList

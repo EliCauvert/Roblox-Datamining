@@ -1,47 +1,48 @@
-﻿local parent = script.Parent.Parent
-local reactGlobalsModule = require(parent.ReactGlobals)
-local console = require(parent.Shared).console
-local reactSymbols = require(parent.Shared).ReactSymbols
-local _ = require(parent.Shared)
-local REACT_FORWARD_REF_TYPE = reactSymbols.REACT_FORWARD_REF_TYPE
-local REACT_MEMO_TYPE = reactSymbols.REACT_MEMO_TYPE
+﻿local Parent = script.Parent.Parent
+local ReactGlobalsModule = require(Parent.ReactGlobals)
+local Console = require(Parent.Shared).console
+local ReactSymbols = require(Parent.Shared).ReactSymbols
+local _ = require(Parent.Shared)
+local REACTFORWARDREFTYPE = ReactSymbols.REACT_FORWARD_REF_TYPE
+local REACTMEMOTYPE = ReactSymbols.REACT_MEMO_TYPE
 
 return {
-	forwardRef = function(p1)
-		-- upvalues: reactGlobalsModule (ref), REACT_MEMO_TYPE (ref), console (ref), REACT_FORWARD_REF_TYPE (ref)
-		if reactGlobalsModule.__DEV__ then
-			if typeof(p1) == "table" and p1["$$typeof"] == REACT_MEMO_TYPE then
-				console.error("forwardRef requires a render function but received a `memo` component. Instead of forwardRef(memo(...)), use memo(forwardRef(...)).")
-			elseif typeof(p1) == "function" then
-				local debugInfo, _ = debug.info(p1, "a")
+	forwardRef = function(Render) --[[ Line: 33 ]]
+		-- upvalues: ReactGlobalsModule (copy), REACTMEMOTYPE (copy), Console (copy), REACTFORWARDREFTYPE (copy)
+		if ReactGlobalsModule.__DEV__ then
+			if typeof(Render) == "table" and Render["$$typeof"] == REACTMEMOTYPE then
+				Console.error("forwardRef requires a render function but received a `memo` component. Instead of forwardRef(memo(...)), use memo(forwardRef(...)).")
+			elseif typeof(Render) == "function" then
+				local DebugInfo, _ = debug.info(Render, "a")
 				
-				if debugInfo ~= 0 and debugInfo ~= 2 then
-					console.error("forwardRef render functions accept exactly two parameters: props and ref. %s", if debugInfo == 1 then "Did you forget to use the ref parameter?" else "Any additional parameter will be undefined.")
+				if DebugInfo ~= 0 and DebugInfo ~= 2 then
+					Console.error("forwardRef render functions accept exactly two parameters: props and ref. %s", if DebugInfo == 1 then "Did you forget to use the ref parameter?" else "Any additional parameter will be undefined.")
 				end
 			else
-				console.error("forwardRef requires a render function but was given %s.", typeof(p1))
+				Console.error("forwardRef requires a render function but was given %s.", (typeof(Render)))
 			end
 		end
-		local t = { ["$$typeof"] = REACT_FORWARD_REF_TYPE, render = p1 }
+		local config = { ["$$typeof"] = REACTFORWARDREFTYPE, render = Render }
 		
-		if reactGlobalsModule.__DEV__ then
-			local var1 = nil
-			setmetatable(t, {
-				__index = function(p2, p3)
-					-- upvalues: var1 (write)
-					return if p3 == "displayName" then var1 else rawget(p2, p3)
+		if ReactGlobalsModule.__DEV__ then
+			local v1 = nil
+			setmetatable(config, {
+				__index = function(p1, p2) --[[ Line: 96 ]]
+					-- upvalues: v1 (ref)
+					return if p2 == "displayName" then v1 else rawget(p1, p2)
 				end,
-				__newindex = function(p2, p3, p4)
-					-- upvalues: var1 (write)
-					if p3 == "displayName" then
-						var1 = p4
+				__newindex = function(p1, p2, p3) --[[ Line: 102 ]]
+					-- upvalues: v1 (ref)
+					if p2 == "displayName" then
+						v1 = p3
 						
 						return
+					else
+						rawset(p1, p2, p3)
 					end
-					rawset(p2, p3, p4)
 				end
 			})
 		end
-		return t
+		return config
 	end
 }

@@ -1,57 +1,59 @@
-﻿local promiseModule = require(script:FindFirstAncestor("RobloxSubscriptionPurchaseApp").Parent.Promise)
-local t = {}
-t.__index = t
+﻿local PromiseModule = require(script:FindFirstAncestor("RobloxSubscriptionPurchaseApp").Parent.Promise)
+local HttpRequestModule = {}
+HttpRequestModule.__index = HttpRequestModule
 
-function t.new(p1)
-	-- upvalues: t (ref)
-	local tbl = setmetatable({}, t)
-	tbl.http = p1 or game:GetService("HttpService")
+function HttpRequestModule.new(p1) --[[ Line: 9 ]]
+	-- upvalues: HttpRequestModule (copy)
+	local self = setmetatable({}, HttpRequestModule)
+	self.http = p1 or game:GetService("HttpService")
 	
-	return tbl
+	return self
 end
 
-function t.get(p1, p2)
-	-- upvalues: promiseModule (ref)
-	return promiseModule.new(function(p3, p4)
-		-- upvalues: p1 (ref), p2 (ref)
+function HttpRequestModule.get(p1, Url) --[[ Line: 15 ]]
+	-- upvalues: PromiseModule (copy)
+	return PromiseModule.new(function(Callback, Callback1) --[[ Line: 16 ]]
+		-- upvalues: p1 (copy), Url (copy)
 		p1.http:RequestInternal({
 			Method = "GET",
-			Url = p2,
+			Url = Url,
 			Headers = { Accept = "application/json" }
-		}):Start(function(_, p5)
-			-- upvalues: p3 (ref), p1 (copy), p4 (ref)
-			if p5.StatusCode == 200 then
-				p3(p1.http:JSONDecode(p5.Body))
+		}):Start(function(_, p2) --[[ Line: 25 ]]
+			-- upvalues: Callback (copy), p1 (upval), Callback1 (copy)
+			if p2.StatusCode == 200 then
+				Callback(p1.http:JSONDecode(p2.Body))
 				
 				return
+			else
+				Callback1({ status = p2.StatusCode, body = p2.Body })
 			end
-			p4({ status = p5.StatusCode, body = p5.Body })
 		end)
 	end)
 end
 
-function t.post(p1, p2, p3)
-	-- upvalues: promiseModule (ref)
-	return promiseModule.new(function(p4, p5)
-		-- upvalues: p1 (ref), p2 (ref), p3 (ref)
+function HttpRequestModule.post(p1, Url, Input) --[[ Line: 38 ]]
+	-- upvalues: PromiseModule (copy)
+	return PromiseModule.new(function(Callback1, Callback) --[[ Line: 39 ]]
+		-- upvalues: p1 (copy), Url (copy), Input (copy)
 		p1.http:RequestInternal({
 			Method = "POST",
-			Url = p2,
+			Url = Url,
 			Headers = {
 				["Content-Type"] = "application/json",
 				Accept = "application/json"
 			},
-			Body = p1.http:JSONEncode(p3)
-		}):Start(function(_, p6)
-			-- upvalues: p4 (ref), p1 (copy), p5 (ref)
-			if p6.StatusCode == 200 then
-				p4(p1.http:JSONDecode(p6.Body))
+			Body = p1.http:JSONEncode(Input)
+		}):Start(function(_, p2) --[[ Line: 50 ]]
+			-- upvalues: Callback1 (copy), p1 (upval), Callback (copy)
+			if p2.StatusCode == 200 then
+				Callback1(p1.http:JSONDecode(p2.Body))
 				
 				return
+			else
+				Callback({ status = p2.StatusCode, body = p2.Body })
 			end
-			p5({ status = p6.StatusCode, body = p6.Body })
 		end)
 	end)
 end
 
-return t
+return HttpRequestModule

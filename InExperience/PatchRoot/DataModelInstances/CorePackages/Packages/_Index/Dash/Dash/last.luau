@@ -1,14 +1,15 @@
-﻿return function(p1, p2)
+﻿return function(p1, Callback) --[[ Line: 13 | Named "last" ]]
+	local v1 = nil
 	for i = #p1, 1, -1 do
-		local var1 = p1[i]
+		v1 = p1[i]
 		
-		if p2 then
-			if not p2 or not p2(var1, i) then
-				continue
-			end
-			return var1
+		if not Callback then
+			return v1
+		elseif not Callback or not Callback(v1, i) then
+			continue
+		else
+			return v1
 		end
-		return var1
 	end
 	return nil
 end

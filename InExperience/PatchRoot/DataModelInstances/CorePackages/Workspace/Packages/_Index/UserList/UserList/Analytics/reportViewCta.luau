@@ -1,19 +1,19 @@
-﻿local userList = script:FindFirstAncestor("UserList")
-local enumsModule = require(userList.Common.Enums)
-local _ = require(userList.Common.Types)
-local telemetryEmitterModule = require(userList.Analytics.telemetryEmitter)
-local userListInteractionEventModule = require(userList.Analytics.userListInteractionEvent)
-local buttonTypes = enumsModule.ButtonTypes
+﻿local UserList = script:FindFirstAncestor("UserList")
+local _ = require(UserList.Common.Types)
+local TelemetryEmitterModule = require(UserList.Analytics.telemetryEmitter)
+local UserListInteractionEventModule = require(UserList.Analytics.userListInteractionEvent)
+local ButtonTypes = require(UserList.Common.Enums).ButtonTypes
 
-return function(p1)
-	-- upvalues: buttonTypes (ref), telemetryEmitterModule (ref), userListInteractionEventModule (ref)
-	if p1 == nil then
+return function(p1) --[[ Line: 24 | Named "reportViewCta" ]]
+	-- upvalues: ButtonTypes (copy), TelemetryEmitterModule (copy), UserListInteractionEventModule (copy)
+	if p1 ~= nil then
+		pcall(TelemetryEmitterModule.emit, UserListInteractionEventModule, {
+			eventName = "ViewCta",
+			eventContext = p1.surface,
+			subpage = p1.subpage,
+			buttonType = ButtonTypes.View
+		})
+		
 		return
 	end
-	pcall(telemetryEmitterModule.emit, userListInteractionEventModule, {
-		eventName = "ViewCta",
-		eventContext = p1.surface,
-		subpage = p1.subpage,
-		buttonType = buttonTypes.View
-	})
 end

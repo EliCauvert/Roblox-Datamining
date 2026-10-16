@@ -1,16 +1,16 @@
-﻿local dependenciesModule = require(script.Parent.Parent.dependencies)
-local rodux = dependenciesModule.Rodux
-local roduxNetworking = dependenciesModule.RoduxNetworking
-local contactsModule = require(script.Parent.Contacts)
-local showContactImporterParamsModule = require(script.Parent.ShowContactImporterParams)
-local roduxUserPermissions = dependenciesModule.RoduxUserPermissions
+﻿local DependenciesModule = require(script.Parent.Parent.dependencies)
+local Rodux = DependenciesModule.Rodux
+local RoduxNetworking = DependenciesModule.RoduxNetworking
+local ContactsModule = require(script.Parent.Contacts)
+local ShowContactImporterParamsModule = require(script.Parent.ShowContactImporterParams)
+local RoduxUserPermissions = DependenciesModule.RoduxUserPermissions
 
-return function()
-	-- upvalues: rodux (ref), contactsModule (ref), roduxUserPermissions (ref), roduxNetworking (ref), showContactImporterParamsModule (ref)
-	return rodux.combineReducers({
-		Contacts = contactsModule,
-		UserPermissions = roduxUserPermissions.installReducer(),
-		NetworkStatus = roduxNetworking.installReducer(),
-		ShowContactImporterParams = showContactImporterParamsModule
+return function() --[[ Line: 11 ]]
+	-- upvalues: Rodux (copy), ContactsModule (copy), RoduxUserPermissions (copy), RoduxNetworking (copy), ShowContactImporterParamsModule (copy)
+	return Rodux.combineReducers({
+		Contacts = ContactsModule,
+		UserPermissions = RoduxUserPermissions.installReducer(),
+		NetworkStatus = RoduxNetworking.installReducer(),
+		ShowContactImporterParams = ShowContactImporterParamsModule
 	})
 end

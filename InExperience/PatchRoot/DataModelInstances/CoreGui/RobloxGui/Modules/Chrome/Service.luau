@@ -1,4 +1,4 @@
-﻿local chrome = script:FindFirstAncestor("Chrome")
+﻿local Chrome = script:FindFirstAncestor("Chrome")
 assert(require(game:GetService("CorePackages").Workspace.Packages.Chrome).Enabled(), "Chrome.Service should not be initialized when Chrome is not enabled")
 
-return require(chrome.ChromeShared.Service)
+return (require(Chrome.ChromeShared.Service))

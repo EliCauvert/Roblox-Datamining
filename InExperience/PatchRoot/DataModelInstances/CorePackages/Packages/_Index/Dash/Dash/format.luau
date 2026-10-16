@@ -1,53 +1,52 @@
-﻿local parent = script.Parent
-local formatValueModule = require(parent.formatValue)
-local splitOnModule = require(parent.splitOn)
-local startsWithModule = require(parent.startsWith)
-local concat = table.concat
-local insert = table.insert
+﻿local Parent = script.Parent
+local FormatValueModule = require(Parent.formatValue)
+local SplitOnModule = require(Parent.splitOn)
+local StartsWithModule = require(Parent.startsWith)
+local ConcatFunction = table.concat
+local InsertFunction = table.insert
 
-return function(p1, ...)
-	-- upvalues: splitOnModule (ref), insert (ref), startsWithModule (ref), formatValueModule (ref), concat (ref)
-	local var1
+return function(p1, ...) --[[ Line: 43 | Named "format" ]]
+	-- upvalues: SplitOnModule (copy), InsertFunction (copy), StartsWithModule (copy), FormatValueModule (copy), ConcatFunction (copy)
 	local list = { ... }
-	local var2 = 1
-	local var3, var4 = splitOnModule(p1, "{[^{}]*}")
+	local Count = 1
+	local v1, v2 = SplitOnModule(p1, "{[^{}]*}")
 	local t = {}
 	
-	for i, v in var3 do
-		insert(t, v:gsub("{{", "{"):gsub("}}", "}"))
-		var1 = var4[i] and var4[i]:sub(2, -2)
+	for i, Text in v1 do
+		InsertFunction(t, (Text:gsub("{{", "{"):gsub("}}", "}")))
+		local Segment = v2[i] and v2[i]:sub(2, -2)
 		
-		if var1 then
-			local var5 = v:gmatch("{+$")()
+		if Segment then
+			local v3 = Text:gmatch("{+$")()
 			
-			if var5 and #var5 % 2 == 1 then
-				insert(t, var1)
+			if v3 and #v3 % 2 == 1 then
+				InsertFunction(t, Segment)
 				continue
 			end
-			local var6 = splitOnModule(var1, ":")
-			local var7 = startsWithModule(var6[1], "#")
-			local var8 = var7 and var6[1]:sub(2) or var6[1]
-			local var9 = tonumber(var8)
-			local var10 = var6[2]
-			local var11 = "nil"
+			local v4 = SplitOnModule(Segment, ":")
+			local v5 = StartsWithModule(v4[1], "#")
+			local Segment1 = v5 and v4[1]:sub(2) or v4[1]
+			local Number: number? = tonumber(Segment1)
+			local v6 = v4[2]
+			local Count1 = "nil"
 			
-			if var9 then
-				var11 = list[var9]
-			elseif var8:len() > 0 then
-				local var12 = list[1] and list[1][var8]
+			if Number then
+				Count1 = list[Number]
+			elseif Segment1:len() > 0 then
+				local Entry = list[1] and list[1][Segment1]
 				
-				if var12 ~= nil then
-					var11 = var12
+				if Entry ~= nil then
+					Count1 = Entry
 				end
 			else
-				var11 = list[var2]
-				var2 += 1
+				Count1 = list[Count]
+				Count += 1
 			end
-			if var7 then
-				var11 = #var11
+			if v5 then
+				Count1 = #Count1
 			end
-			insert(t, formatValueModule(var11, var10 or ""))
+			InsertFunction(t, FormatValueModule(Count1, v6 or ""))
 		end
 	end
-	return concat(t, "")
+	return ConcatFunction(t, "")
 end

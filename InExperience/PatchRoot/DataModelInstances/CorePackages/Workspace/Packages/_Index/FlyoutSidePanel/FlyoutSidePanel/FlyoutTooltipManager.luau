@@ -1,107 +1,108 @@
-﻿local appStorageService = game:GetService("AppStorageService")
+﻿local AppStorageService = game:GetService("AppStorageService")
 local IAFlyoutTooltipMaxShownCount = game:DefineFastInt("IAFlyoutTooltipMaxShownCount", 5)
 local IAFlyoutDailyTooltipMaxShownCount = game:DefineFastInt("IAFlyoutDailyTooltipMaxShownCount", 3)
-local t = {}
-t.__index = t
+local Module = {}
+Module.__index = Module
 
-local function _(p1, p2)
-	local dateString = os.date("*t", p1)
-	local dateString_1 = os.date("*t", p2)
+local function _(p1, p2): boolean --[[ Line: 23 | Named "isSameDate" ]]
+	local DateInfo = os.date("*t", p1)
+	local DateInfo1 = os.date("*t", p2)
 	
-	return dateString.year == dateString_1.year and (dateString.month == dateString_1.month and dateString.day == dateString_1.day)
+	return DateInfo.year == DateInfo1.year and DateInfo.month == DateInfo1.month and DateInfo.day == DateInfo1.day
 end
 
-local function readStorage()
-	-- upvalues: appStorageService (ref)
-	local ok, status = pcall(function()
-		-- upvalues: appStorageService (copy)
-		return appStorageService:GetItem("IAFlyoutEntryPointTooltip")
+local function readStorage() --[[ Line: 29 ]]
+	-- upvalues: AppStorageService (copy)
+	local Success, Result = pcall(function() --[[ Line: 30 ]]
+		-- upvalues: AppStorageService (upval)
+		return AppStorageService:GetItem("IAFlyoutEntryPointTooltip")
 	end)
 	
-	if ok and status then
-		if status == "FLYOUT_OPENED" then
+	if Success and Result then
+		if Result == "FLYOUT_OPENED" then
 			return 0, 0, 0
-		elseif string.find(status, ",") then
-			local match, match_1, match_2 = string.match(status, "(%d+),(%d+),(%d+)")
-			local var1 = tonumber(match) or 0
-			local var2 = tonumber(match_1) or 0
-			local var3 = tonumber(match_2)
+		end
+		if string.find(Result, ",") then
+			local Match, Match2, Match3 = string.match(Result, "(%d+),(%d+),(%d+)")
+			local Number: number = tonumber(Match) or 0
+			local Number1: number = tonumber(Match2) or 0
+			local Number2: number? = tonumber(Match3)
 			
-			if var3 then
-				return var1, var2, var3
+			if Number2 then
+				return Number, Number1, Number2
 			end
 		end
 	end
 	return 0, 0, 0
 end
 
-function t.new()
-	-- upvalues: t (ref)
-	return setmetatable({
+function Module.new() --[[ Line: 51 ]]
+	-- upvalues: Module (copy)
+	return (setmetatable({
 		_hasChecked = false,
 		_dailyCount = 0,
 		_totalCount = 0,
-		_getTime = function()
+		_getTime = function(): number --[[ Line: 56 ]]
 			return os.time()
 		end
-	}, t)
+	}, Module))
 end
 
-function t:setTimeProvider(p1)
-	self._getTime = p1
+function Module:setTimeProvider(_getTime) --[[ Line: 63 ]]
+	self._getTime = _getTime
 end
 
-function t:flyoutSidePanelOpened()
-	-- upvalues: IAFlyoutTooltipMaxShownCount (ref), appStorageService (ref)
+function Module:flyoutSidePanelOpened() --[[ Line: 67 ]]
+	-- upvalues: IAFlyoutTooltipMaxShownCount (copy), AppStorageService (copy)
 	if self._dailyCount < IAFlyoutTooltipMaxShownCount then
 		self._dailyCount = IAFlyoutTooltipMaxShownCount
-		appStorageService:SetItem("IAFlyoutEntryPointTooltip", string.format("%d,%d,%d", self:_getTime(), self._dailyCount, self._totalCount))
-		appStorageService:Flush()
+		AppStorageService:SetItem("IAFlyoutEntryPointTooltip", (string.format("%d,%d,%d", self:_getTime(), self._dailyCount, self._totalCount)))
+		AppStorageService:Flush()
 	end
 end
 
-function t:getTooltipCount()
+function Module:getTooltipCount() --[[ Line: 78 ]]
 	return self._totalCount
 end
 
-function t:tooltipSeenTimeHelper(p1)
-	-- upvalues: IAFlyoutDailyTooltipMaxShownCount (ref), IAFlyoutTooltipMaxShownCount (ref)
-	local dateString = os.date("*t", self:_getTime())
-	local dateString_1 = os.date("*t", p1)
+function Module:tooltipSeenTimeHelper(p1): boolean --[[ Line: 82 ]]
+	-- upvalues: IAFlyoutDailyTooltipMaxShownCount (copy), IAFlyoutTooltipMaxShownCount (copy)
+	local DateInfo = os.date("*t", (self:_getTime()))
+	local DateInfo1 = os.date("*t", p1)
 	
-	if not (dateString.year == dateString_1.year and (dateString.month == dateString_1.month and dateString.day == dateString_1.day)) then
+	if DateInfo.year ~= DateInfo1.year or (DateInfo.month ~= DateInfo1.month or DateInfo.day ~= DateInfo1.day) then
 		self._dailyCount = 0
 	end
 	return self._dailyCount < IAFlyoutDailyTooltipMaxShownCount and self._totalCount < IAFlyoutTooltipMaxShownCount
 end
 
-function t:updateTooltipAppStorageValue()
-	-- upvalues: appStorageService (ref)
+function Module:updateTooltipAppStorageValue() --[[ Line: 92 ]]
+	-- upvalues: AppStorageService (copy)
 	self._dailyCount += 1
 	self._totalCount += 1
-	appStorageService:SetItem("IAFlyoutEntryPointTooltip", string.format("%d,%d,%d", self:_getTime(), self._dailyCount, self._totalCount))
-	appStorageService:Flush()
+	AppStorageService:SetItem("IAFlyoutEntryPointTooltip", (string.format("%d,%d,%d", self:_getTime(), self._dailyCount, self._totalCount)))
+	AppStorageService:Flush()
 end
 
-function t:isTooltipActive()
-	-- upvalues: readStorage (ref), IAFlyoutTooltipMaxShownCount (ref)
+function Module:isTooltipActive(): boolean --[[ Line: 101 ]]
+	-- upvalues: readStorage (copy), IAFlyoutTooltipMaxShownCount (copy)
 	if self._hasChecked then
 		return false
 	end
 	self._hasChecked = true
-	local _ = 0
-	local var1, var2, var3 = readStorage()
-	self._dailyCount = var2
-	self._totalCount = var3
+	local Storage, Storage2, Storage3 = readStorage()
+	self._dailyCount = Storage2
+	self._totalCount = Storage3
 	
 	if IAFlyoutTooltipMaxShownCount <= self._dailyCount or IAFlyoutTooltipMaxShownCount <= self._totalCount then
 		return false
-	elseif self:tooltipSeenTimeHelper(var1) then
+	elseif self:tooltipSeenTimeHelper(Storage) then
 		self:updateTooltipAppStorageValue()
 		
 		return true
+	else
+		return false
 	end
-	return false
 end
 
-return t.new()
+return Module.new()

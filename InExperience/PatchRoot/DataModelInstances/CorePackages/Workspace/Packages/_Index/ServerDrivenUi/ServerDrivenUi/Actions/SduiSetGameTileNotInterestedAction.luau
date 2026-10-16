@@ -1,55 +1,54 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local gameTileModule = require(parent.GameTile)
-local localizationModule = require(parent.Localization)
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local sduiActionType = sduiCoreSystemModule.SduiActionType
-local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
-local activateGameNotInterested = gameTileModule.activateGameNotInterested
-local getGameTileHiddenStore = gameTileModule.getGameTileHiddenStore
-local localizeStrings = localizationModule.localizeStrings
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local GameTileModule = require(Parent.GameTile)
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiActionType = SduiCoreSystemModule.SduiActionType
+local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
+local ActivateGameNotInterestedFunction = GameTileModule.activateGameNotInterested
+local GetGameTileHiddenStoreFunction = GameTileModule.getGameTileHiddenStore
+local LocalizeStringsFunction = require(Parent.Localization).localizeStrings
 
-local function _(p1, p2, p3)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref)
-	p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
-		name = sduiActionType.SetGameTileNotInterested,
-		message = p2,
-		propName = p3
+local function _(p1, Message, PropName) --[[ Line: 18 | Named "reportInvalidParam" ]]
+	-- upvalues: SduiErrorType (copy), SduiActionType (copy)
+	p1.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
+		name = SduiActionType.SetGameTileNotInterested,
+		message = Message,
+		propName = PropName
 	}, p1.appPage)
 end
 
-return function(value, _, p1)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref), localizeStrings (ref), activateGameNotInterested (ref), getGameTileHiddenStore (ref)
-	local var1 = if value then value.actionParams else nil
+return function(p1, _, p2) --[[ Line: 26 | Named "SduiSetGameTileNotInterestedAction" ]]
+	-- upvalues: SduiErrorType (copy), SduiActionType (copy), LocalizeStringsFunction (copy), ActivateGameNotInterestedFunction (copy), GetGameTileHiddenStoreFunction (copy)
+	local ActionParams = if p1 then p1.actionParams else nil
 	
-	if var1 == nil then
-		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if ActionParams == nil then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
 			propName = nil,
-			name = sduiActionType.SetGameTileNotInterested
-		}, p1.appPage)
+			name = SduiActionType.SetGameTileNotInterested
+		}, p2.appPage)
 		
 		return
 	end
-	local universeId = var1.universeId
+	local UniverseId = ActionParams.universeId
 	
-	if typeof(universeId) ~= "string" or universeId == "" then
-		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if typeof(UniverseId) ~= "string" or UniverseId == "" then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing or invalid actionParam: universeId",
 			propName = "universeId",
-			name = sduiActionType.SetGameTileNotInterested
-		}, p1.appPage)
+			name = SduiActionType.SetGameTileNotInterested
+		}, p2.appPage)
 		
 		return
 	end
-	local collectionId = var1.collectionId
+	local CollectionId = ActionParams.collectionId
 	
-	if typeof(collectionId) == "string" and collectionId ~= "" then
-		activateGameNotInterested({
-			appPage = p1.appPage,
-			collectionId = collectionId,
-			dispatch = p1.dependencies.dispatch,
-			isSponsored = if typeof(var1.isSponsored) == "boolean" then var1.isSponsored else nil,
-			localizedStrings = localizeStrings(p1.dependencies.localization, {
+	if typeof(CollectionId) == "string" and CollectionId ~= "" then
+		ActivateGameNotInterestedFunction({
+			appPage = p2.appPage,
+			collectionId = CollectionId,
+			dispatch = p2.dependencies.dispatch,
+			isSponsored = if typeof(ActionParams.isSponsored) == "boolean" then ActionParams.isSponsored else nil,
+			localizedStrings = LocalizeStringsFunction(p2.dependencies.localization, {
 				checkboxListTitle = "Feature.GameDetails.Message.HidingExperienceQuestion",
 				dialogText = "Feature.GameDetails.Message.HelpImproveExperience",
 				dialogTitle = "Feature.GameDetails.Label.ProvideFeedbackTitle",
@@ -59,17 +58,18 @@ return function(value, _, p1)
 				somethingElse = "Feature.GameDetails.Label.SomethingElse",
 				tooRepetitive = "Feature.GameDetails.Label.TooRepetitive"
 			}),
-			networking = p1.dependencies.networking,
-			placeId = var1.placeId,
-			setGameHidden = getGameTileHiddenStore(collectionId).setGameHidden,
-			universeId = universeId
+			networking = p2.dependencies.networking,
+			placeId = ActionParams.placeId,
+			setGameHidden = GetGameTileHiddenStoreFunction(CollectionId).setGameHidden,
+			universeId = UniverseId
 		})
 		
 		return
+	else
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
+			message = "Missing or invalid actionParam: collectionId",
+			propName = "collectionId",
+			name = SduiActionType.SetGameTileNotInterested
+		}, p2.appPage)
 	end
-	p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
-		message = "Missing or invalid actionParam: collectionId",
-		propName = "collectionId",
-		name = sduiActionType.SetGameTileNotInterested
-	}, p1.appPage)
 end

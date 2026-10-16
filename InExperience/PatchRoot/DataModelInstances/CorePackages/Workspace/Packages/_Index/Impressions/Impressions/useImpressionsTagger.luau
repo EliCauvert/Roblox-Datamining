@@ -1,15 +1,15 @@
-﻿local reactModule = require(script:FindFirstAncestor("Impressions").Parent.React)
-local impressionsTagUtilityModule = require(script.Parent.ImpressionsTagUtility)
+﻿local ReactModule = require(script:FindFirstAncestor("Impressions").Parent.React)
+local ImpressionsTagUtilityModule = require(script.Parent.ImpressionsTagUtility)
 
-return function(p1, p2, p3)
-	-- upvalues: reactModule (ref), impressionsTagUtilityModule (ref)
-	reactModule.useEffect(function()
-		-- upvalues: impressionsTagUtilityModule (copy), p1 (ref), p2 (ref), p3 (ref)
-		impressionsTagUtilityModule.AddTag(p1, p2, p3)
+return function(p1, p2, p3) --[[ Line: 8 ]]
+	-- upvalues: ReactModule (copy), ImpressionsTagUtilityModule (copy)
+	ReactModule.useEffect(function() --[[ Line: 9 ]]
+		-- upvalues: ImpressionsTagUtilityModule (upval), p1 (copy), p2 (copy), p3 (copy)
+		ImpressionsTagUtilityModule.AddTag(p1, p2, p3)
 		
-		return function()
-			-- upvalues: impressionsTagUtilityModule (copy), p1 (copy), p2 (copy), p3 (copy)
-			impressionsTagUtilityModule.RemoveTag(p1, p2, p3)
+		return function() --[[ Line: 12 ]]
+			-- upvalues: ImpressionsTagUtilityModule (upval), p1 (upval), p2 (upval), p3 (upval)
+			ImpressionsTagUtilityModule.RemoveTag(p1, p2, p3)
 		end
 	end, { p1, p2, p3 })
 end

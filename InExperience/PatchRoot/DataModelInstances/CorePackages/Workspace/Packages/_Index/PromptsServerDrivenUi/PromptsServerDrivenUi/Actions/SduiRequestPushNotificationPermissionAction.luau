@@ -1,36 +1,37 @@
-﻿local parent = script:FindFirstAncestor("PromptsServerDrivenUi").Parent
-local requestPushNotificationPermission = require(parent.NotificationsUpsell).requestPushNotificationPermission
-local default = require(parent.LoggingProtocol).default
-local sduiErrorType = require(parent.SduiCoreSystem).SduiErrors.SduiErrorType
-local modalEventConstants = require(parent.NotificationsUpsell).ModalEventConstants
-local pushUpsellEventConfig = require(parent.NotificationsUpsell).PushUpsellEventConfig
+﻿local Parent = script:FindFirstAncestor("PromptsServerDrivenUi").Parent
+local RequestPushNotificationPermissionFunction = require(Parent.NotificationsUpsell).requestPushNotificationPermission
+local Default = require(Parent.LoggingProtocol).default
+local SduiErrorType = require(Parent.SduiCoreSystem).SduiErrors.SduiErrorType
+local ModalEventConstants = require(Parent.NotificationsUpsell).ModalEventConstants
+local PushUpsellEventConfig = require(Parent.NotificationsUpsell).PushUpsellEventConfig
 
-return function(p1, _, p2, _)
-	-- upvalues: sduiErrorType (ref), default (ref), pushUpsellEventConfig (ref), modalEventConstants (ref), requestPushNotificationPermission (ref)
-	local source = (if p1 then p1.actionParams else {}).source
+return function(p1, _, p2, _) --[[ Line: 17 ]]
+	-- upvalues: SduiErrorType (copy), Default (copy), PushUpsellEventConfig (copy), ModalEventConstants (copy), RequestPushNotificationPermissionFunction (copy)
+	local Source = (p1 and p1.actionParams or {}).source
 	
-	if source == nil or type(source) == "string" then
-		default:logRobloxTelemetryEvent(pushUpsellEventConfig, {}, {
-			[modalEventConstants.ActionType] = modalEventConstants.Opened,
-			[modalEventConstants.EntryPoint] = source or "SDUI"
-		}, modalEventConstants.ModalContextSysUpsell)
-		requestPushNotificationPermission():andThen(function()
-			-- upvalues: default (copy), pushUpsellEventConfig (copy), modalEventConstants (copy)
-			default:logRobloxTelemetryEvent(pushUpsellEventConfig, {}, {
-				[modalEventConstants.ActionType] = modalEventConstants.RequestSuccess
-			}, modalEventConstants.ModalContextSysUpsell)
-		end, function()
-			-- upvalues: default (copy), pushUpsellEventConfig (copy), modalEventConstants (copy)
-			default:logRobloxTelemetryEvent(pushUpsellEventConfig, {}, {
-				[modalEventConstants.ActionType] = modalEventConstants.RequestFailed
-			}, modalEventConstants.ModalContextSysUpsell)
+	if Source == nil or type(Source) == "string" then
+		Default:logRobloxTelemetryEvent(PushUpsellEventConfig, {}, {
+			[ModalEventConstants.ActionType] = ModalEventConstants.Opened,
+			[ModalEventConstants.EntryPoint] = Source or "SDUI"
+		}, ModalEventConstants.ModalContextSysUpsell)
+		RequestPushNotificationPermissionFunction():andThen(function() --[[ Line: 40 ]]
+			-- upvalues: Default (upval), PushUpsellEventConfig (upval), ModalEventConstants (upval)
+			Default:logRobloxTelemetryEvent(PushUpsellEventConfig, {}, {
+				[ModalEventConstants.ActionType] = ModalEventConstants.RequestSuccess
+			}, ModalEventConstants.ModalContextSysUpsell)
+		end, function() --[[ Line: 47 ]]
+			-- upvalues: Default (upval), PushUpsellEventConfig (upval), ModalEventConstants (upval)
+			Default:logRobloxTelemetryEvent(PushUpsellEventConfig, {}, {
+				[ModalEventConstants.ActionType] = ModalEventConstants.RequestFailed
+			}, ModalEventConstants.ModalContextSysUpsell)
 		end)
 		
 		return
+	else
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
+			name = "RequestPushNotificationPermission",
+			message = "Invalid source",
+			propName = "source"
+		}, p2.appPage)
 	end
-	p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
-		name = "RequestPushNotificationPermission",
-		message = "Invalid source",
-		propName = "source"
-	}, p2.appPage)
 end

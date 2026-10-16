@@ -1,33 +1,34 @@
-﻿local focusNavigationUtils = script:FindFirstAncestor("FocusNavigationUtils")
-local parent = focusNavigationUtils.Parent
-local reactModule = require(parent.React)
-local _ = require(parent.ReactFocusNavigation)
-local cryoModule = require(parent.Cryo)
-local navigationModule = require(parent.Navigation)
-local useAppFocusRootModule = require(script.Parent.useAppFocusRoot)
-local baseFocusRootModule = require(focusNavigationUtils.BaseFocusRoot)
-local fFlagFocusRootUseHooksModule = require(script.Parent.FFlagFocusRootUseHooks)
-local focusRootModule = require(focusNavigationUtils.FocusRoot)
-local useDefaultAppEventHandlersModule = require(focusNavigationUtils.useDefaultAppEventHandlers)
-local focusNavigationDefaultEventMapModule = require(focusNavigationUtils.FocusNavigationDefaultEventMap)
+﻿local FocusNavigationUtils = script:FindFirstAncestor("FocusNavigationUtils")
+local Parent = FocusNavigationUtils.Parent
+local ReactModule = require(Parent.React)
+local _ = require(Parent.ReactFocusNavigation)
+local CryoModule = require(Parent.Cryo)
+local NavigationModule = require(Parent.Navigation)
+local UseAppFocusRootModule = require(script.Parent.useAppFocusRoot)
+local BaseFocusRootModule = require(FocusNavigationUtils.BaseFocusRoot)
+local FFlagFocusRootUseHooksModule = require(script.Parent.FFlagFocusRootUseHooks)
+local FocusRootModule = require(FocusNavigationUtils.FocusRoot)
+local UseDefaultAppEventHandlersModule = require(FocusNavigationUtils.useDefaultAppEventHandlers)
+local FocusNavigationDefaultEventMapModule = require(FocusNavigationUtils.FocusNavigationDefaultEventMap)
 local t = {}
 
-return function(p1)
-	-- upvalues: fFlagFocusRootUseHooksModule (ref), useAppFocusRootModule (ref), reactModule (ref), baseFocusRootModule (ref), t (ref), navigationModule (ref), useDefaultAppEventHandlersModule (ref), cryoModule (ref), focusNavigationDefaultEventMapModule (ref), focusRootModule (ref)
-	if fFlagFocusRootUseHooksModule then
-		return reactModule.createElement(baseFocusRootModule, {
-			ref = useAppFocusRootModule(p1),
+return function(p1) --[[ Line: 26 | Named "AppFocusRoot" ]]
+	-- upvalues: FFlagFocusRootUseHooksModule (copy), UseAppFocusRootModule (copy), ReactModule (copy), BaseFocusRootModule (copy), t (copy), NavigationModule (copy), UseDefaultAppEventHandlersModule (copy), CryoModule (copy), FocusNavigationDefaultEventMapModule (copy), FocusRootModule (copy)
+	if FFlagFocusRootUseHooksModule then
+		return ReactModule.createElement(BaseFocusRootModule, {
+			ref = UseAppFocusRootModule(p1),
 			isIsolated = p1.isIsolated,
 			frameProps = p1.frameProps
 		}, p1.children)
+	else
+		local UseNavigationFocusResult = NavigationModule.useNavigationFocus()
+		
+		return ReactModule.createElement(FocusRootModule, CryoModule.Dictionary.union(p1, {
+			customEventHandlers = CryoModule.None,
+			eventHandlers = CryoModule.Dictionary.union(UseDefaultAppEventHandlersModule(), p1.customEventHandlers or t),
+			eventMap = CryoModule.Dictionary.union(FocusNavigationDefaultEventMapModule, p1.customEventMap or t),
+			isFocusable = (p1.isFocusable == nil or p1.isFocusable) and (UseNavigationFocusResult == nil or UseNavigationFocusResult),
+			isAutoFocusRoot = p1.isAutoFocusRoot ~= nil and p1.isAutoFocusRoot
+		}), p1.children)
 	end
-	local var1 = navigationModule.useNavigationFocus()
-	
-	return reactModule.createElement(focusRootModule, cryoModule.Dictionary.union(p1, {
-		customEventHandlers = cryoModule.None,
-		eventHandlers = cryoModule.Dictionary.union(useDefaultAppEventHandlersModule(), p1.customEventHandlers or t),
-		eventMap = cryoModule.Dictionary.union(focusNavigationDefaultEventMapModule, p1.customEventMap or t),
-		isFocusable = (p1.isFocusable == nil or p1.isFocusable) and (var1 == nil or var1),
-		isAutoFocusRoot = if p1.isAutoFocusRoot == nil then false else p1.isAutoFocusRoot
-	}), p1.children)
 end

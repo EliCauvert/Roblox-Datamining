@@ -1,99 +1,99 @@
-﻿local roactModule = require(game:GetService("CorePackages").Packages.Roact)
-local components = script.Parent.Parent.Parent.Components
-local cellLabelModule = require(components.CellLabel)
-local bannerButtonModule = require(components.BannerButton)
+﻿local RoactModule = require(game:GetService("CorePackages").Packages.Roact)
+local Components = script.Parent.Parent.Parent.Components
+local CellLabelModule = require(Components.CellLabel)
+local BannerButtonModule = require(Components.BannerButton)
 local _ = require(script.Parent.LuauHeapTypes)
-local constantsModule = require(script.Parent.Parent.Parent.Constants)
-local lineWidth = constantsModule.GeneralFormatting.LineWidth
-local lineColor = constantsModule.GeneralFormatting.LineColor
-local statEntryFrameHeight = constantsModule.LuauHeapFormatting.StatEntryFrameHeight
-local _ = constantsModule.LuauHeapFormatting.DepthIndent
-local valueCellWidth = constantsModule.LuauHeapFormatting.ValueCellWidth
-local cellPadding = constantsModule.LuauHeapFormatting.CellPadding
-local valuePadding = constantsModule.LuauHeapFormatting.ValuePadding
-local luauHeapViewStatEntry = roactModule.PureComponent:extend("LuauHeapViewStatEntry")
+local ConstantsModule = require(script.Parent.Parent.Parent.Constants)
+local LineWidth = ConstantsModule.GeneralFormatting.LineWidth
+local LineColor = ConstantsModule.GeneralFormatting.LineColor
+local StatEntryFrameHeight = ConstantsModule.LuauHeapFormatting.StatEntryFrameHeight
+local _ = ConstantsModule.LuauHeapFormatting.DepthIndent
+local ValueCellWidth = ConstantsModule.LuauHeapFormatting.ValueCellWidth
+local CellPadding = ConstantsModule.LuauHeapFormatting.CellPadding
+local ValuePadding = ConstantsModule.LuauHeapFormatting.ValuePadding
+local LuauHeapViewStatEntry = RoactModule.PureComponent:extend("LuauHeapViewStatEntry")
 
-local function BorderedCellLabel(p1)
-	-- upvalues: roactModule (ref), cellLabelModule (ref), lineWidth (ref), valuePadding (ref), lineColor (ref)
-	return roactModule.createFragment({
-		Label = roactModule.createElement(cellLabelModule, {
+local function BorderedCellLabel(p1) --[[ Line: 31 ]]
+	-- upvalues: RoactModule (copy), CellLabelModule (copy), LineWidth (copy), ValuePadding (copy), LineColor (copy)
+	return RoactModule.createFragment({
+		Label = RoactModule.createElement(CellLabelModule, {
 			richText = true,
 			text = p1.text,
 			size = p1.size,
 			pos = p1.pos
 		}),
-		LeftBorder = roactModule.createElement("Frame", {
+		LeftBorder = RoactModule.createElement("Frame", {
 			BorderSizePixel = 0,
-			Size = UDim2.new(UDim.new(0, lineWidth), p1.size.Y),
-			Position = UDim2.fromOffset(-valuePadding, 0) + p1.pos,
+			Size = UDim2.new(UDim.new(0, LineWidth), p1.size.Y),
+			Position = UDim2.fromOffset(-ValuePadding, 0) + p1.pos,
 			AnchorPoint = Vector2.new(0, 0),
-			BackgroundColor3 = lineColor
+			BackgroundColor3 = LineColor
 		})
 	})
 end
 
-function luauHeapViewStatEntry.renderValues(_, p1)
-	-- upvalues: valueCellWidth (ref), valuePadding (ref), statEntryFrameHeight (ref), roactModule (ref), BorderedCellLabel (ref)
-	local t = {}
-	local uDim2 = UDim2.new(valueCellWidth, -valuePadding, 0, statEntryFrameHeight)
-	local uDim2_1 = UDim2.new(1 - valueCellWidth * #p1, valuePadding, 0, 0)
+function LuauHeapViewStatEntry:renderValues(List) --[[ Line: 49 ]]
+	-- upvalues: ValueCellWidth (copy), ValuePadding (copy), StatEntryFrameHeight (copy), RoactModule (copy), BorderedCellLabel (copy)
+	local Elements = {}
+	local _UDim2 = UDim2.new(ValueCellWidth, -ValuePadding, 0, StatEntryFrameHeight)
+	local _UDim2_1 = UDim2.new(1 - ValueCellWidth * #List, ValuePadding, 0, 0)
 	
-	for i, v in p1 do
-		t[tostring(i)] = roactModule.createElement(BorderedCellLabel, {
-			text = tostring(v),
-			size = uDim2,
-			pos = uDim2_1 + UDim2.fromScale(valueCellWidth * (i - 1), 0)
+	for i, value in List do
+		Elements[tostring(i)] = RoactModule.createElement(BorderedCellLabel, {
+			text = tostring(value),
+			size = _UDim2,
+			pos = _UDim2_1 + UDim2.fromScale(ValueCellWidth * (i - 1), 0)
 		})
 	end
-	return t
+	return Elements
 end
 
-function luauHeapViewStatEntry.render(p2)
-	-- upvalues: statEntryFrameHeight (ref), valueCellWidth (ref), roactModule (ref), bannerButtonModule (ref), cellLabelModule (ref), cellPadding (ref)
-	local props = p2.props
-	local size = props.size or UDim2.new(1, 0, 0, statEntryFrameHeight)
-	local layoutOrder = props.layoutOrder or 0
-	local data = props.data
-	local compare = props.compare
-	local formattedText = string.format("%.0f", data.Size)
-	local formattedText_1 = string.format("%.0f", data.Count)
+function LuauHeapViewStatEntry.render(p1) --[[ Line: 64 ]]
+	-- upvalues: StatEntryFrameHeight (copy), ValueCellWidth (copy), RoactModule (copy), BannerButtonModule (copy), CellLabelModule (copy), CellPadding (copy)
+	local Props = p1.props
+	local Size = Props.size or UDim2.new(1, 0, 0, StatEntryFrameHeight)
+	local LayoutOrder = Props.layoutOrder or 0
+	local Data = Props.data
+	local Compare = Props.compare
+	local Formatted = string.format("%.0f", Data.Size)
+	local Formatted1 = string.format("%.0f", Data.Count)
 	
-	if compare then
-		if compare.Size ~= data.Size then
-			formattedText = string.format("%d <font color=\"#%s\">(%s%d)</font>", data.Size, if data.Size < compare.Size then "0f0" else "f00", if data.Size < compare.Size then "" else "+", data.Size - compare.Size)
+	if Compare then
+		if Compare.Size ~= Data.Size then
+			Formatted = string.format("%d <font color=\"#%s\">(%s%d)</font>", Data.Size, if Data.Size < Compare.Size then "0f0" else "f00", if Data.Size < Compare.Size then "" else "+", Data.Size - Compare.Size)
 		end
-		if compare.Count ~= data.Count then
-			formattedText_1 = string.format("%d <font color=\"#%s\">(%s%d)</font>", data.Count, if data.Count < compare.Count then "0f0" else "f00", if data.Count < compare.Count then "" else "+", data.Count - compare.Count)
+		if Compare.Count ~= Data.Count then
+			Formatted1 = string.format("%d <font color=\"#%s\">(%s%d)</font>", Data.Count, if Data.Count < Compare.Count then "0f0" else "f00", if Data.Count < Compare.Count then "" else "+", Data.Count - Compare.Count)
 		end
 	end
-	local list = { formattedText, formattedText_1 }
+	local list = { Formatted, Formatted1 }
 	
-	return roactModule.createElement("Frame", {
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Size = size,
-		LayoutOrder = layoutOrder,
+		Size = Size,
+		LayoutOrder = LayoutOrder,
 		AutomaticSize = Enum.AutomaticSize.Y
 	}, {
-		layout = roactModule.createElement("UIListLayout", {
+		layout = RoactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			HorizontalAlignment = Enum.HorizontalAlignment.Right,
 			SortOrder = Enum.SortOrder.LayoutOrder
 		}),
-		button = roactModule.createElement(bannerButtonModule, {
+		button = RoactModule.createElement(BannerButtonModule, {
 			inset = 0,
 			isExpanded = false,
 			isExpandable = false,
 			layoutOrder = -1,
-			size = UDim2.new(1, 0, 0, statEntryFrameHeight)
+			size = UDim2.new(1, 0, 0, StatEntryFrameHeight)
 		}, {
-			name = roactModule.createElement(cellLabelModule, {
-				text = data.Name,
-				size = UDim2.new(UDim.new(1 - valueCellWidth * #list, 0), UDim.new(1, 0)),
-				pos = UDim2.new(0, cellPadding, 0, 0)
+			name = RoactModule.createElement(CellLabelModule, {
+				text = Data.Name,
+				size = UDim2.new(UDim.new(1 - ValueCellWidth * #list, 0), UDim.new(1, 0)),
+				pos = UDim2.new(0, CellPadding, 0, 0)
 			}),
-			values = roactModule.createFragment(p2:renderValues(list))
+			values = RoactModule.createFragment(p1:renderValues(list))
 		})
 	})
 end
 
-return luauHeapViewStatEntry
+return LuauHeapViewStatEntry

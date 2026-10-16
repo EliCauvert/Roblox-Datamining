@@ -1,1 +1,1 @@
-﻿return require(script.Rating)
+﻿return (require(script.Rating))

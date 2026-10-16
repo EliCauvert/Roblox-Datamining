@@ -1,11 +1,11 @@
-﻿local commandsModule = require(script.Parent.Commands)
+﻿local CommandsModule = require(script.Parent.Commands)
 
-return function(p1, p2)
-	-- upvalues: commandsModule (ref)
-	for i, v in commandsModule do
-		for i_1, v_1 in v.aliases do
-			if p1 == v_1 or string.find(p1, "^" .. v_1 .. "%s") ~= nil then
-				return v.run(p1, p2)
+return function(Text: string, p1) --[[ Line: 11 ]]
+	-- upvalues: CommandsModule (copy)
+	for _, value in CommandsModule do
+		for _, alias in value.aliases do
+			if Text == alias or string.find(Text, "^" .. alias .. "%s") ~= nil then
+				return value.run(Text, p1)
 			end
 		end
 	end

@@ -1,21 +1,22 @@
-﻿local parent = script.Parent.Parent
-local capturesActivatedModule = require(parent.Actions.CapturesActivated)
-local capturesDeactivatedModule = require(parent.Actions.CapturesDeactivated)
-local capturesToastTypeModule = require(parent.Enums.CapturesToastType)
-local toastDismissedModule = require(parent.Actions.ToastDismissed)
-local toastTriggeredModule = require(parent.Actions.ToastTriggered)
+﻿local Parent = script.Parent.Parent
+local CapturesActivatedModule = require(Parent.Actions.CapturesActivated)
+local CapturesDeactivatedModule = require(Parent.Actions.CapturesDeactivated)
+local CapturesToastTypeModule = require(Parent.Enums.CapturesToastType)
+local ToastDismissedModule = require(Parent.Actions.ToastDismissed)
+local ToastTriggeredModule = require(Parent.Actions.ToastTriggered)
 
-return function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: capturesActivatedModule (ref), toastTriggeredModule (ref), capturesToastTypeModule (ref), capturesDeactivatedModule (ref), toastDismissedModule (ref)
+return function(p1, p2, Callback: (any) -> (), Callback1: (any) -> (), p3, p4) --[[ Line: 9 ]]
+	-- upvalues: CapturesActivatedModule (copy), ToastTriggeredModule (copy), CapturesToastTypeModule (copy), CapturesDeactivatedModule (copy), ToastDismissedModule (copy)
 	if (not p2 or p2 == 1) and not p1 then
-		p3(p5)
-		p4(capturesActivatedModule())
-		p4(toastTriggeredModule(capturesToastTypeModule.CapturesActivated))
+		Callback(p3)
+		Callback1(CapturesActivatedModule())
+		Callback1(ToastTriggeredModule(CapturesToastTypeModule.CapturesActivated))
 		
 		return
-	elseif p1 then
-		p3(p6)
-		p4(capturesDeactivatedModule())
-		p4(toastDismissedModule())
+	end
+	if p1 then
+		Callback(p4)
+		Callback1(CapturesDeactivatedModule())
+		Callback1(ToastDismissedModule())
 	end
 end

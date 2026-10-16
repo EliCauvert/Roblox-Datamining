@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.Groups.Groups)
+﻿return (require(script.Parent._Workspace.Groups.Groups))

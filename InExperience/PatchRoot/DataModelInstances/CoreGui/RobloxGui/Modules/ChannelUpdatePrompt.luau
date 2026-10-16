@@ -1,72 +1,72 @@
-﻿local robloxGui = game:GetService("CoreGui").RobloxGui
-local corePackagesService = game:GetService("CorePackages")
-local notificationService = game:GetService("NotificationService")
-local httpService = game:GetService("HttpService")
-local appUpdateService = game:GetService("AppUpdateService")
-local errorPromptModule = require(robloxGui.Modules.ErrorPrompt)
-local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
+﻿local RobloxGui = game:GetService("CoreGui").RobloxGui
+local NotificationService = game:GetService("NotificationService")
+local HttpService = game:GetService("HttpService")
+local AppUpdateService = game:GetService("AppUpdateService")
+local ErrorPromptModule = require(RobloxGui.Modules.ErrorPrompt)
+local RobloxTranslatorModule = require(game:GetService("CorePackages").Workspace.Packages.RobloxTranslator)
 
-local function _(p1, p2, p3)
-	-- upvalues: robloxTranslatorModule (ref)
-	local ok, status = pcall(function()
-		-- upvalues: robloxTranslatorModule (copy), p1 (ref), p3 (ref)
-		return robloxTranslatorModule:FormatByKey(p1, p3)
+local function _(p1, p2, p3) --[[ Line: 21 | Named "translateOrFallback" ]]
+	-- upvalues: RobloxTranslatorModule (copy)
+	local Success, Result = pcall(function() --[[ Line: 22 ]]
+		-- upvalues: RobloxTranslatorModule (upval), p1 (copy), p3 (copy)
+		return RobloxTranslatorModule:FormatByKey(p1, p3)
 	end)
 	
-	return if ok then status else p2
+	return Success and Result or p2
 end
 
-local function performUpdate()
-	-- upvalues: appUpdateService (ref)
-	appUpdateService:PerformManagedUpdate()
+local function performUpdate() --[[ Line: 28 ]]
+	-- upvalues: AppUpdateService (copy)
+	AppUpdateService:PerformManagedUpdate()
 end
 
-local _ = function(p1, p2)
+local _ = function(p1, p2) --[[ Line: 32 | Named "resolveUpdateName" ]]
 	return if p1 == "BetaProgram" then p2.betaProgramName elseif p1 == "BoundChannel" then p2.channelName else nil
 end
 
 return {
-	init = function()
-		-- upvalues: errorPromptModule (ref), robloxGui (ref), robloxTranslatorModule (ref), performUpdate (ref), notificationService (ref), httpService (ref), appUpdateService (ref)
-		local default = errorPromptModule.new("Default", {
+	init = function() --[[ Line: 43 ]]
+		-- upvalues: ErrorPromptModule (copy), RobloxGui (copy), RobloxTranslatorModule (copy), performUpdate (copy), NotificationService (copy), HttpService (copy), AppUpdateService (copy)
+		local Default = ErrorPromptModule.new("Default", {
 			MessageTextScaled = true,
 			HideErrorCode = true,
 			MenuIsOpenKey = "ChannelUpdatePrompt"
 		})
-		default:setParent(robloxGui)
+		Default:setParent(RobloxGui)
 		
-		local function showUpdatePrompt(p1, p2)
-			-- upvalues: robloxTranslatorModule (copy), default (ref)
-			p2 = p2 or ""
-			local var1 = nil
+		local function showUpdatePrompt(UpdateType, BetaProgramName) --[[ Line: 57 ]]
+			-- upvalues: RobloxTranslatorModule (upval), Default (copy)
+			local BetaProgramName1 = BetaProgramName or ""
+			local v1 = nil
 			
-			if p1 == "BetaProgram" then
-				local text = "An update is required for the Beta Program you are in: \"" .. p6 .. "\"."
-				local t = { RBX_NAME = p2 }
-				local var2 = "InGame.ChannelUpdatePrompt.Message.BetaProgram"
-				local ok, status = pcall(function()
-					-- upvalues: robloxTranslatorModule (copy), var2 (ref), t (ref)
-					return robloxTranslatorModule:FormatByKey(var2, t)
+			if UpdateType == "BetaProgram" then
+				local Text = "An update is required for the Beta Program you are in: \"" .. BetaProgramName1 .. "\"."
+				local config = { RBX_NAME = BetaProgramName1 }
+				local v2 = "InGame.ChannelUpdatePrompt.Message.BetaProgram"
+				local Success, Result = pcall(function() --[[ Line: 22 ]]
+					-- upvalues: RobloxTranslatorModule (upval), v2 (copy), config (copy)
+					return RobloxTranslatorModule:FormatByKey(v2, config)
 				end)
-				var1 = if ok then status else text
-			elseif p1 == "BoundChannel" then
-				local text = "An update is required for the channel you are bound to: \"" .. p6 .. "\"."
-				local t = { RBX_NAME = p2 }
-				local var3 = "InGame.ChannelUpdatePrompt.Message.BoundChannel"
-				local ok, status = pcall(function()
-					-- upvalues: robloxTranslatorModule (copy), var3 (ref), t (ref)
-					return robloxTranslatorModule:FormatByKey(var3, t)
-				end)
-				var1 = if ok then status else text
+				v1 = Success and Result or Text
 			else
-				warn("ChannelUpdatePrompt: unknown updateType '" .. tostring(p1) .. "', skipping prompt")
-				
-				return
+				if UpdateType ~= "BoundChannel" then
+					warn("ChannelUpdatePrompt: unknown updateType '" .. tostring(UpdateType) .. "', skipping prompt")
+					
+					return
+				end
+				local Text = "An update is required for the channel you are bound to: \"" .. BetaProgramName1 .. "\"."
+				local config1 = { RBX_NAME = BetaProgramName1 }
+				local v3 = "InGame.ChannelUpdatePrompt.Message.BoundChannel"
+				local Success1, Result1 = pcall(function() --[[ Line: 22 ]]
+					-- upvalues: RobloxTranslatorModule (upval), v3 (copy), config1 (copy)
+					return RobloxTranslatorModule:FormatByKey(v3, config1)
+				end)
+				v1 = Success1 and Result1 or Text
 			end
-			default:_open(var1)
+			Default:_open(v1)
 		end
 		
-		default:updateButtons({
+		Default:updateButtons({
 			{
 				Text = "Restart Now",
 				LocalizationKey = "InGame.CommonUI.Button.RestartNow",
@@ -75,45 +75,47 @@ return {
 				Callback = performUpdate
 			}
 		})
-		default:setErrorTitle("Update Required", "InGame.CommonUI.Title.UpdateRequired")
-		local x = robloxGui.AbsoluteSize.X
-		local y = robloxGui.AbsoluteSize.Y
-		robloxGui:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
-			-- upvalues: robloxGui (copy), x (write), y (write), default (ref)
-			local x_1 = robloxGui.AbsoluteSize.X
-			local y_1 = robloxGui.AbsoluteSize.Y
+		Default:setErrorTitle("Update Required", "InGame.CommonUI.Title.UpdateRequired")
+		local X = RobloxGui.AbsoluteSize.X
+		local Y = RobloxGui.AbsoluteSize.Y
+		RobloxGui:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 95 | Named "onScreenSizeChanged" ]]
+			-- upvalues: RobloxGui (upval), X (ref), Y (ref), Default (copy)
+			local X1 = RobloxGui.AbsoluteSize.X
+			local Y1 = RobloxGui.AbsoluteSize.Y
 			
-			if x ~= x_1 or y ~= y_1 then
-				x = x_1
-				y = y_1
-				default:resizeWidthAndHeight(x, y)
+			if X ~= X1 or Y ~= Y1 then
+				X = X1
+				Y = Y1
+				Default:resizeWidthAndHeight(X, Y)
 			end
 		end)
-		local ok = robloxGui.AbsoluteSize.X
-		local y_1 = robloxGui.AbsoluteSize.Y
+		local X1 = RobloxGui.AbsoluteSize.X
+		local Y1 = RobloxGui.AbsoluteSize.Y
 		
-		if x ~= ok or y ~= y_1 then
-			default:resizeWidthAndHeight(ok, y_1)
+		if X ~= X1 or Y ~= Y1 then
+			X = X1
+			Y = Y1
+			Default:resizeWidthAndHeight(X, Y)
 		end
-		notificationService.RobloxEventReceived:Connect(function(p1)
-			-- upvalues: httpService (copy), showUpdatePrompt (ref)
-			if p1.namespace == "ChannelUpdateRequired" then
-				local detail = httpService:JSONDecode(p1.detail)
-				local updateType = detail.updateType
-				showUpdatePrompt(detail.updateType, if updateType == "BetaProgram" then detail.betaProgramName elseif updateType == "BoundChannel" then detail.channelName else nil)
+		NotificationService.RobloxEventReceived:Connect(function(EventData) --[[ Line: 108 ]]
+			-- upvalues: HttpService (upval), showUpdatePrompt (copy)
+			if EventData.namespace == "ChannelUpdateRequired" then
+				local Data = HttpService:JSONDecode(EventData.detail)
+				local UpdateType = Data.updateType
+				showUpdatePrompt(Data.updateType, if UpdateType == "BetaProgram" then Data.betaProgramName elseif UpdateType == "BoundChannel" then Data.channelName else nil)
 			end
 		end)
-		ok, status = pcall(function()
-			-- upvalues: appUpdateService (copy)
-			return appUpdateService:GetProtocolLaunchUpdateType()
+		local Success, Result = pcall(function() --[[ Line: 117 ]]
+			-- upvalues: AppUpdateService (upval)
+			return AppUpdateService:GetProtocolLaunchUpdateType()
 		end)
-		local ok_1, status_1 = pcall(function()
-			-- upvalues: appUpdateService (copy)
-			return appUpdateService:GetProtocolLaunchUpdateName()
+		local Success1, Result1 = pcall(function() --[[ Line: 120 ]]
+			-- upvalues: AppUpdateService (upval)
+			return AppUpdateService:GetProtocolLaunchUpdateName()
 		end)
 		
-		if ok and status ~= "" then
-			showUpdatePrompt(status, if ok_1 then status_1 else "")
+		if Success and Result ~= "" then
+			showUpdatePrompt(Result, Success1 and Result1 or "")
 		end
 	end
 }

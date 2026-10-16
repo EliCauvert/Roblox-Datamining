@@ -1,23 +1,24 @@
-﻿local expChatShared = script:FindFirstAncestor("ExpChatShared")
-local team = require(expChatShared.Logger):new("ExpChat/Command/Team")
-local chatInputBarActivatedTeamModeModule = require(expChatShared.Actions.ChatInputBarActivatedTeamMode)
+﻿local ExpChatShared = script:FindFirstAncestor("ExpChatShared")
+local Team = require(ExpChatShared.Logger):new("ExpChat/Command/Team")
+local ChatInputBarActivatedTeamModeModule = require(ExpChatShared.Actions.ChatInputBarActivatedTeamMode)
 local _ = require(script.Parent.types)
 
 return {
 	name = script.Name,
 	alias = { "/team", "/t", "%%" },
-	clientRun = function(p1, _, _)
-		-- upvalues: chatInputBarActivatedTeamModeModule (ref), team (ref)
+	clientRun = function(p1, _, _) --[[ Line: 12 ]]
+		-- upvalues: ChatInputBarActivatedTeamModeModule (copy), Team (copy)
 		if p1:getState().LocalTeam then
-			p1:dispatch(chatInputBarActivatedTeamModeModule())
+			p1:dispatch(ChatInputBarActivatedTeamModeModule())
 			
 			return { key = "", metadata = "Roblox.Team.Info.Success" }
+		else
+			Team:debug("Could not team chat because not in team")
+			
+			return {
+				key = "CoreScripts.TextChat.TeamChat.Error.NotOnTeam",
+				metadata = "Roblox.Team.Error.CannotTeamChatIfNotInTeam"
+			}
 		end
-		team:debug("Could not team chat because not in team")
-		
-		return {
-			key = "CoreScripts.TextChat.TeamChat.Error.NotOnTeam",
-			metadata = "Roblox.Team.Error.CannotTeamChatIfNotInTeam"
-		}
 	end
 }

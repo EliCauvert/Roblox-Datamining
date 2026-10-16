@@ -1,52 +1,51 @@
-﻿local inExperienceIntervention = script:FindFirstAncestor("InExperienceIntervention")
-local parent = inExperienceIntervention.Parent
+﻿local InExperienceIntervention = script:FindFirstAncestor("InExperienceIntervention")
+local Parent = InExperienceIntervention.Parent
 local IXPService = game:GetService("IXPService")
-local localizationService = game:GetService("LocalizationService")
-local reactModule = require(parent.React)
-local appUserLayers = require(parent.ExperimentLayers).AppUserLayers
-local genericInterventionDialog = require(parent.InterventionShared).Components.GenericInterventionDialog
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local interventionAnalytics = require(parent.InterventionShared).InterventionAnalytics
-local useParsedBadUtterances = require(parent.InterventionShared).Hooks.useParsedBadUtterances
-local var1 = require(parent.RobloxAppLocales).Localization.new(localizationService.RobloxLocaleId)
-local fFlagNotApprovedPageIXPExposure = require(parent.SharedFlags).FFlagNotApprovedPageIXPExposure
-local fFlagScopeBadUtterancePlayerNameToChatDialogsModule = require(parent.InterventionShared.FFlagScopeBadUtterancePlayerNameToChatDialogs)
-local constants = require(parent.InterventionShared).Utils.Constants
-local _ = require(inExperienceIntervention.Utils.Types)
+local ReactModule = require(Parent.React)
+local AppUserLayers = require(Parent.ExperimentLayers).AppUserLayers
+local GenericInterventionDialog = require(Parent.InterventionShared).Components.GenericInterventionDialog
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local InterventionAnalytics = require(Parent.InterventionShared).InterventionAnalytics
+local UseParsedBadUtterancesFunction = require(Parent.InterventionShared).Hooks.useParsedBadUtterances
+local NewResult = require(Parent.RobloxAppLocales).Localization.new(game:GetService("LocalizationService").RobloxLocaleId)
+local FFlagNotApprovedPageIXPExposure = require(Parent.SharedFlags).FFlagNotApprovedPageIXPExposure
+local FFlagScopeBadUtterancePlayerNameToChatDialogsModule = require(Parent.InterventionShared.FFlagScopeBadUtterancePlayerNameToChatDialogs)
+local Constants = require(Parent.InterventionShared).Utils.Constants
+local _ = require(InExperienceIntervention.Utils.Types)
 
-return reactModule.memo(function(p1)
-	-- upvalues: useLocalization (ref), constants (ref), reactModule (ref), fFlagNotApprovedPageIXPExposure (ref), IXPService (ref), appUserLayers (ref), useParsedBadUtterances (ref), fFlagScopeBadUtterancePlayerNameToChatDialogsModule (ref), var1 (ref), genericInterventionDialog (ref), interventionAnalytics (ref)
-	local var2 = useLocalization(constants.localizationKeys)
-	reactModule.useEffect(function()
-		-- upvalues: fFlagNotApprovedPageIXPExposure (copy), IXPService (copy), appUserLayers (copy)
-		if fFlagNotApprovedPageIXPExposure and game:GetEngineFeature("EnableLogFlagLinkedUserLayerExposure") then
-			IXPService:LogFlagLinkedUserLayerExposure(appUserLayers.NotApprovedPageUserIDLayer)
+return ReactModule.memo(function(p1) --[[ Line: 33 | Named "ChatNudgeCustomDialogV2" ]]
+	-- upvalues: UseLocalizationFunction (copy), Constants (copy), ReactModule (copy), FFlagNotApprovedPageIXPExposure (copy), IXPService (copy), AppUserLayers (copy), UseParsedBadUtterancesFunction (copy), FFlagScopeBadUtterancePlayerNameToChatDialogsModule (copy), NewResult (copy), GenericInterventionDialog (copy), InterventionAnalytics (copy)
+	local UseLocalizationResult = UseLocalizationFunction(Constants.localizationKeys)
+	ReactModule.useEffect(function() --[[ Line: 36 ]]
+		-- upvalues: FFlagNotApprovedPageIXPExposure (upval), IXPService (upval), AppUserLayers (upval)
+		if FFlagNotApprovedPageIXPExposure and game:GetEngineFeature("EnableLogFlagLinkedUserLayerExposure") then
+			IXPService:LogFlagLinkedUserLayerExposure(AppUserLayers.NotApprovedPageUserIDLayer)
 		end
 	end, {})
-	local moderationDetail = p1.moderationDetail
-	local consequenceTransparencyMessage = moderationDetail.consequenceTransparencyMessage
-	local interventionId = moderationDetail.interventionId
-	local acknowledgeable = moderationDetail.acknowledgeable
-	local var3 = useParsedBadUtterances(moderationDetail.badUtterances or {}, {
-		shouldAddPlayerName = fFlagScopeBadUtterancePlayerNameToChatDialogsModule
+	local ModerationDetail = p1.moderationDetail
+	local ConsequenceTransparencyMessage = ModerationDetail.consequenceTransparencyMessage
+	local InterventionId = ModerationDetail.interventionId
+	local Acknowledgeable = ModerationDetail.acknowledgeable
+	local UseParsedBadUtterancesResult = UseParsedBadUtterancesFunction(ModerationDetail.badUtterances or {}, {
+		shouldAddPlayerName = FFlagScopeBadUtterancePlayerNameToChatDialogsModule
 	})
-	local joined = table.concat(var3.textItems, "\n")
-	local joined_1 = table.concat(var3.abuseTypes, ", ")
+	local Joined = table.concat(UseParsedBadUtterancesResult.textItems, "\n")
+	local Joined1 = table.concat(UseParsedBadUtterancesResult.abuseTypes, ", ")
 	
-	if joined_1 == "" then
-		joined_1 = var1:Format("Feature.NotApproved.Label.AbuseType.Other")
+	if Joined1 == "" then
+		Joined1 = NewResult:Format("Feature.NotApproved.Label.AbuseType.Other")
 	end
-	return reactModule.createElement(genericInterventionDialog, {
+	return ReactModule.createElement(GenericInterventionDialog, {
 		isAppealable = true,
-		titleText = var2.ChatBreaksRulesText,
-		bodyText = var2.TextChatMayBeSuspendedText,
-		evidence = joined,
-		violationReason = joined_1,
+		titleText = UseLocalizationResult.ChatBreaksRulesText,
+		bodyText = UseLocalizationResult.TextChatMayBeSuspendedText,
+		evidence = Joined,
+		violationReason = Joined1,
 		onDismiss = p1.onDismiss,
-		dsaMessage = consequenceTransparencyMessage,
-		interventionId = interventionId,
-		acknowledgeable = acknowledgeable,
-		eventId = interventionId,
-		interventionTypeForAnalytics = interventionAnalytics.Constants.InterventionTypes.Nudge
+		dsaMessage = ConsequenceTransparencyMessage,
+		interventionId = InterventionId,
+		acknowledgeable = Acknowledgeable,
+		eventId = InterventionId,
+		interventionTypeForAnalytics = InterventionAnalytics.Constants.InterventionTypes.Nudge
 	})
 end)

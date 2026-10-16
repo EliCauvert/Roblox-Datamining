@@ -1,16 +1,16 @@
-﻿local videoCaptureService = game:GetService("VideoCaptureService")
-local var1 = nil
-videoCaptureService.DevicesChanged:Connect(function()
-	-- upvalues: var1 (write), videoCaptureService (ref)
-	var1 = videoCaptureService:GetCameraDevices()
+﻿local VideoCaptureService = game:GetService("VideoCaptureService")
+local CameraDevices = nil
+VideoCaptureService.DevicesChanged:Connect(function() --[[ Line: 4 ]]
+	-- upvalues: CameraDevices (ref), VideoCaptureService (copy)
+	CameraDevices = VideoCaptureService:GetCameraDevices()
 end)
 
 return {
-	GetDevices = function()
-		-- upvalues: var1 (write), videoCaptureService (ref)
-		if not var1 then
-			var1 = videoCaptureService:GetCameraDevices()
+	GetDevices = function() --[[ Line: 8 ]]
+		-- upvalues: CameraDevices (ref), VideoCaptureService (copy)
+		if not CameraDevices then
+			CameraDevices = VideoCaptureService:GetCameraDevices()
 		end
-		return var1
+		return CameraDevices
 	end
 }

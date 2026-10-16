@@ -1,25 +1,25 @@
-﻿local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
-local reactModule = require(genericAbuseReporting.Parent.React)
-local _ = require(genericAbuseReporting.BeduiV2.Analytics.analyticsService)
-local var1 = reactModule.createContext(nil)
+﻿local GenericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
+local ReactModule = require(GenericAbuseReporting.Parent.React)
+local _ = require(GenericAbuseReporting.BeduiV2.Analytics.analyticsService)
+local Context = ReactModule.createContext(nil)
 
 return {
-	AbuseReportAnalyticsContext = var1,
-	AbuseReportAnalyticsProvider = function(p1)
-		-- upvalues: reactModule (ref), var1 (ref)
-		return reactModule.createElement(var1.Provider, { value = p1.analytics }, p1.children)
+	AbuseReportAnalyticsContext = Context,
+	AbuseReportAnalyticsProvider = function(p1) --[[ Line: 25 ]]
+		-- upvalues: ReactModule (copy), Context (copy)
+		return ReactModule.createElement(Context.Provider, { value = p1.analytics }, p1.children)
 	end,
-	useAbuseReportAnalytics = function()
-		-- upvalues: reactModule (ref), var1 (ref)
-		local var2 = reactModule.useContext(var1)
+	useAbuseReportAnalytics = function() --[[ Line: 36 ]]
+		-- upvalues: ReactModule (copy), Context (copy)
+		local UseContextResult = ReactModule.useContext(Context)
 		
-		if not var2 then
+		if not UseContextResult then
 			error("Invalid use of `useAbuseReportAnalytics` hook. Ensure your component has an ancestor wrapped in `AbuseReportAnalyticsProvider`")
 		end
-		return var2
+		return UseContextResult
 	end,
-	useOptionalAbuseReportAnalytics = function()
-		-- upvalues: reactModule (ref), var1 (ref)
-		return reactModule.useContext(var1)
+	useOptionalAbuseReportAnalytics = function() --[[ Line: 52 ]]
+		-- upvalues: ReactModule (copy), Context (copy)
+		return ReactModule.useContext(Context)
 	end
 }

@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("BuildExperience").Parent.Signals).createComputed(require(script.createBuildPillMenuPortalStore))
+﻿return require(script:FindFirstAncestor("BuildExperience").Parent.Signals).createComputed((require(script.createBuildPillMenuPortalStore)))

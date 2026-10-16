@@ -1,30 +1,28 @@
-﻿local coreScriptsRoactCommon = script:FindFirstAncestor("CoreScriptsRoactCommon")
-local parent = coreScriptsRoactCommon.Parent
-local reactModule = require(parent.React)
-local reactRobloxModule = require(parent.ReactRoblox)
-local localization = require(parent.InExperienceLocales).Localization
-local localizationProvider = require(parent.Localization).LocalizationProvider
-local foundationStorybookMiddlewareModule = require(script.Parent.FoundationStorybookMiddleware)
-local var1 = localization.new("en-us")
+﻿local CoreScriptsRoactCommon = script:FindFirstAncestor("CoreScriptsRoactCommon")
+local Parent = CoreScriptsRoactCommon.Parent
+local ReactModule = require(Parent.React)
+local LocalizationProvider = require(Parent.Localization).LocalizationProvider
+local FoundationStorybookMiddlewareModule = require(script.Parent.FoundationStorybookMiddleware)
+local EnUs = require(Parent.InExperienceLocales).Localization.new("en-us")
 
-local function _(p1)
-	-- upvalues: reactModule (ref), localizationProvider (ref), var1 (ref)
-	return function(p2)
-		-- upvalues: reactModule (copy), localizationProvider (copy), var1 (copy), p1 (ref)
-		return reactModule.createElement(localizationProvider, { localization = var1 }, { Child = reactModule.createElement(p1, p2) })
+local function _(p1) --[[ Line: 12 | Named "wrapWithProviders" ]]
+	-- upvalues: ReactModule (copy), LocalizationProvider (copy), EnUs (copy)
+	return function(p2) --[[ Line: 13 ]]
+		-- upvalues: ReactModule (upval), LocalizationProvider (upval), EnUs (upval), p1 (copy)
+		return ReactModule.createElement(LocalizationProvider, { localization = EnUs }, { Child = ReactModule.createElement(p1, p2) })
 	end
 end
 
 return {
-	name = coreScriptsRoactCommon.Name,
-	storyRoot = coreScriptsRoactCommon,
-	roact = reactModule,
-	reactRoblox = reactRobloxModule,
-	mapStory = function(p1)
-		-- upvalues: foundationStorybookMiddlewareModule (ref), reactModule (ref), localizationProvider (ref), var1 (ref)
-		return foundationStorybookMiddlewareModule(function(p2)
-			-- upvalues: reactModule (copy), localizationProvider (copy), var1 (copy), p1 (ref)
-			return reactModule.createElement(localizationProvider, { localization = var1 }, { Child = reactModule.createElement(p1, p2) })
+	name = CoreScriptsRoactCommon.Name,
+	storyRoot = CoreScriptsRoactCommon,
+	roact = ReactModule,
+	reactRoblox = require(Parent.ReactRoblox),
+	mapStory = function(p1) --[[ Line: 22 ]]
+		-- upvalues: FoundationStorybookMiddlewareModule (copy), ReactModule (copy), LocalizationProvider (copy), EnUs (copy)
+		return FoundationStorybookMiddlewareModule(function(p2) --[[ Line: 13 ]]
+			-- upvalues: ReactModule (upval), LocalizationProvider (upval), EnUs (upval), p1 (copy)
+			return ReactModule.createElement(LocalizationProvider, { localization = EnUs }, { Child = ReactModule.createElement(p1, p2) })
 		end)
 	end
 }

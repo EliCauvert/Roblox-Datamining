@@ -1,3 +1,3 @@
-﻿local dependenciesModule = require(script:FindFirstAncestor("PYMKCarousel").dependencies)
+﻿local DependenciesModule = require(script:FindFirstAncestor("PYMKCarousel").dependencies)
 
-return dependenciesModule.Roact.createContext({ fireEvent = dependenciesModule.Dash.noop })
+return DependenciesModule.Roact.createContext({ fireEvent = DependenciesModule.Dash.noop })

@@ -1,4 +1,4 @@
-﻿local loadWhatsNewRegistryModule = require(script.registry.LoadWhatsNewRegistry)
+﻿local LoadWhatsNewRegistryModule = require(script.registry.LoadWhatsNewRegistry)
 
 return {
 	["jest.config"] = script["jest.config"],
@@ -7,8 +7,8 @@ return {
 	scopeActions = require(script.registry.ScopeActions),
 	Loader = {
 		validateRegistry = require(script.registry.validateRegistry),
-		loadWhatsNewRegistry = loadWhatsNewRegistryModule.loadWhatsNewRegistry,
-		loadBundledRegistry = loadWhatsNewRegistryModule.loadBundledRegistry
+		loadWhatsNewRegistry = LoadWhatsNewRegistryModule.loadWhatsNewRegistry,
+		loadBundledRegistry = LoadWhatsNewRegistryModule.loadBundledRegistry
 	},
 	GetWhatsNewStore = require(script.store.GetWhatsNewStore),
 	useWhatsNewRuntimeState = require(script.hooks.useWhatsNewRuntimeState),

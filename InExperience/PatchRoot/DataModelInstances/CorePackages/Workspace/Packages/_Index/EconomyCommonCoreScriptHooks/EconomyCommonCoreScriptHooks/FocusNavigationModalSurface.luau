@@ -1,16 +1,16 @@
-﻿local parent = script:FindFirstAncestor("EconomyCommonCoreScriptHooks").Parent
-local reactModule = require(parent.React)
-local focusNavigableSurfaceIdentifierEnum = require(parent.FocusNavigationUtils).FocusNavigableSurfaceIdentifierEnum
-local useFocusNavigationSurfaceModule = require(script.Parent.useFocusNavigationSurface)
+﻿local Parent = script:FindFirstAncestor("EconomyCommonCoreScriptHooks").Parent
+local ReactModule = require(Parent.React)
+local FocusNavigableSurfaceIdentifierEnum = require(Parent.FocusNavigationUtils).FocusNavigableSurfaceIdentifierEnum
+local UseFocusNavigationSurfaceModule = require(script.Parent.useFocusNavigationSurface)
 
-return function(p1)
-	-- upvalues: useFocusNavigationSurfaceModule (ref), focusNavigableSurfaceIdentifierEnum (ref), reactModule (ref)
-	return reactModule.createElement("Frame", {
+return function(p1) --[[ Line: 16 | Named "FocusNavigationModalSurface" ]]
+	-- upvalues: UseFocusNavigationSurfaceModule (copy), FocusNavigableSurfaceIdentifierEnum (copy), ReactModule (copy)
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
-		ref = useFocusNavigationSurfaceModule({
+		ref = UseFocusNavigationSurfaceModule({
 			selectionGroupName = p1.selectionGroupName,
-			focusNavigableSurfaceIdentifier = if p1.surfaceIdentifier then p1.surfaceIdentifier else focusNavigableSurfaceIdentifierEnum.CentralOverlay
+			focusNavigableSurfaceIdentifier = if p1.surfaceIdentifier then p1.surfaceIdentifier else FocusNavigableSurfaceIdentifierEnum.CentralOverlay
 		}),
 		Size = UDim2.fromScale(1, 1),
 		SelectionBehaviorDown = Enum.SelectionBehavior.Stop,

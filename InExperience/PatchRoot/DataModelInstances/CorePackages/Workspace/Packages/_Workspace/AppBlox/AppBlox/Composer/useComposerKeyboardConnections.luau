@@ -1,45 +1,45 @@
-﻿local userInputService = game:GetService("UserInputService")
-local reactModule = require(game:GetService("CorePackages").Packages._Index.Foundation.Foundation.Parent.React)
+﻿local UserInputService = game:GetService("UserInputService")
+local ReactModule = require(game:GetService("CorePackages").Packages._Index.Foundation.Foundation.Parent.React)
 
-local function _(p1)
-	return if p1 ~= Enum.KeyCode.Return then p1 == Enum.KeyCode.KeypadEnter else true
+local function _(KeyCode): boolean --[[ Line: 13 | Named "isReturnKey" ]]
+	return KeyCode == Enum.KeyCode.Return or KeyCode == Enum.KeyCode.KeypadEnter
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), userInputService (ref)
-	local var1 = reactModule.useRef(false)
-	local var2 = reactModule.useRef(nil)
-	local var3 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref), var1 (ref)
-		if var2.current then
-			var2.current:Disconnect()
-			var2.current = nil
+return function(p1) --[[ Line: 17 | Named "useComposerKeyboardConnections" ]]
+	-- upvalues: ReactModule (copy), UserInputService (copy)
+	local UseRefResult = ReactModule.useRef(false)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 21 ]]
+		-- upvalues: UseRefResult1 (copy), UseRefResult (copy)
+		if UseRefResult1.current then
+			UseRefResult1.current:Disconnect()
+			UseRefResult1.current = nil
 		end
-		var1.current = false
+		UseRefResult.current = false
 	end, {})
-	local var4 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref), var1 (ref), var2 (ref), userInputService (copy)
-		if p1.enabled and not var1.current then
-			var2.current = userInputService.InputBegan:Connect(function(p2, p3)
-				-- upvalues: p1 (copy), userInputService (copy)
-				local keyCode = p2.KeyCode
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 29 ]]
+		-- upvalues: p1 (copy), UseRefResult (copy), UseRefResult1 (copy), UserInputService (upval)
+		if p1.enabled and not UseRefResult.current then
+			UseRefResult1.current = UserInputService.InputBegan:Connect(function(Input, GameProcessed) --[[ Line: 35 ]]
+				-- upvalues: p1 (upval), UserInputService (upval)
+				local KeyCode = Input.KeyCode
 				
-				if if keyCode ~= Enum.KeyCode.Return then keyCode == Enum.KeyCode.KeypadEnter else true then
-					p1.onReturnPressed(p3, userInputService:IsKeyDown(Enum.KeyCode.LeftShift) or userInputService:IsKeyDown(Enum.KeyCode.RightShift))
+				if KeyCode == Enum.KeyCode.Return or KeyCode == Enum.KeyCode.KeypadEnter then
+					p1.onReturnPressed(GameProcessed, UserInputService:IsKeyDown(Enum.KeyCode.LeftShift) or UserInputService:IsKeyDown(Enum.KeyCode.RightShift))
 				end
 			end)
-			var1.current = true
+			UseRefResult.current = true
 			
 			return
 		end
 	end, { p1.enabled, p1.onReturnPressed })
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref)
-		return function()
-			-- upvalues: var3 (copy)
-			var3()
+	ReactModule.useEffect(function() --[[ Line: 48 ]]
+		-- upvalues: UseResult (copy)
+		return function() --[[ Line: 49 ]]
+			-- upvalues: UseResult (upval)
+			UseResult()
 		end
-	end, { var3 })
+	end, { UseResult })
 	
-	return { connect = var4, disconnect = var3 }
+	return { connect = UseResult1, disconnect = UseResult }
 end

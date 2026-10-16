@@ -1,31 +1,31 @@
-﻿local mutedErrorModule = require(script.Parent.mutedError)
+﻿local MutedErrorModule = require(script.Parent.mutedError)
 game:DefineFastString("SuppressMutedErrorKeys", "")
 
-local function _()
+local function _() --[[ Line: 32 | Named "getFStringSuppressMutedErrorKeys" ]]
 	return game:GetFastString("SuppressMutedErrorKeys")
 end
 
-local var1 = ""
+local SuppressMutedErrorKeysFastString = ""
 local t = {}
 
-local function shouldSuppressMutedError(p1)
-	-- upvalues: var1 (write), t (write)
-	local suppressMutedErrorKeysFastString = game:GetFastString("SuppressMutedErrorKeys")
+local function shouldSuppressMutedError(p1) --[[ Line: 39 ]]
+	-- upvalues: SuppressMutedErrorKeysFastString (ref), t (ref)
+	local SuppressMutedErrorKeysFastString1: string = game:GetFastString("SuppressMutedErrorKeys")
 	
-	if suppressMutedErrorKeysFastString ~= var1 then
-		var1 = suppressMutedErrorKeysFastString
+	if SuppressMutedErrorKeysFastString1 ~= SuppressMutedErrorKeysFastString then
+		SuppressMutedErrorKeysFastString = SuppressMutedErrorKeysFastString1
 		t = {}
 		
-		for i, v in suppressMutedErrorKeysFastString:split(",") do
-			t[v] = true
+		for _, value in SuppressMutedErrorKeysFastString1:split(",") do
+			t[value] = true
 		end
 	end
 	return t[p1] or false
 end
 
-return function(p2, p3, p4)
-	-- upvalues: shouldSuppressMutedError (ref), mutedErrorModule (ref)
+return function(p2, p3, p4) --[[ Line: 53 | Named "flaggedMutedError" ]]
+	-- upvalues: shouldSuppressMutedError (copy), MutedErrorModule (copy)
 	if not shouldSuppressMutedError(p2) then
-		mutedErrorModule(p3, p4)
+		MutedErrorModule(p3, p4)
 	end
 end

@@ -1,35 +1,37 @@
-﻿local sduiConditionKey = require(script:FindFirstAncestor("SduiCoreSystem").ConditionalProps.SduiConditionalPropTypes).SduiConditionKey
+﻿local SduiConditionKey = require(script:FindFirstAncestor("SduiCoreSystem").ConditionalProps.SduiConditionalPropTypes).SduiConditionKey
 
-return function(p1, p2)
-	-- upvalues: sduiConditionKey (ref)
+return function(List, p1) --[[ Line: 10 | Named "checkPresenceConditions" ]]
+	-- upvalues: SduiConditionKey (copy)
 	local t = {}
 	
-	if not p1 then
+	if not List then
 		return t
 	end
-	assert(p1, "allConditionalProps must exist")
+	assert(List, "allConditionalProps must exist")
+	local Flag = nil
 	
-	for i, v in p1 do
-		local var1 = nil
+	for i, value in List do
+		Flag = nil
 		
-		if v.conditions then
-			for i_1, v_1 in v.conditions do
-				if i_1 == sduiConditionKey.friendInGame then
-					var1 = true
-					local var2 = p2[tostring(v_1)]
+		if value.conditions then
+			for i1, condition in value.conditions do
+				if i1 == SduiConditionKey.friendInGame then
+					Flag = true
+					local v1 = p1[tostring(condition)]
 					
-					if var2 then
-						for i_2 in var2 do
-							var1 = false
+					if v1 then
+						for _ in v1 do
+							Flag = false
 							break
 						end
 					end
-					if var1 then break end
+					if Flag then break end
+				else
+					continue
 				end
 			end
 		end
-		t[i] = var1
-		continue
+		t[i] = Flag
 	end
 	return t
 end

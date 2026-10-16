@@ -1,21 +1,21 @@
-﻿local constants = require(game:GetService("CorePackages").Workspace.Packages.CoreScriptsCommon).Constants
-local robloxReplicatedStorageService = game:GetService("RobloxReplicatedStorage")
-local getJoinDataRemoteFunctionEnabled = game:DefineFastFlag("GetJoinDataRemoteFunctionEnabled", false)
-local getServerType = Instance.new("RemoteFunction")
-getServerType.Name = "GetServerType"
-getServerType.Parent = robloxReplicatedStorageService
+﻿local Constants = require(game:GetService("CorePackages").Workspace.Packages.CoreScriptsCommon).Constants
+local RobloxReplicatedStorage = game:GetService("RobloxReplicatedStorage")
+local GetJoinDataRemoteFunctionEnabled = game:DefineFastFlag("GetJoinDataRemoteFunctionEnabled", false)
+local GetServerType = Instance.new("RemoteFunction")
+GetServerType.Name = "GetServerType"
+GetServerType.Parent = RobloxReplicatedStorage
 
-function getServerType.getServerType()
-	-- upvalues: constants (ref)
-	return if game.PrivateServerId == "" then constants.STANDARD_SERVER elseif game.PrivateServerOwnerId == 0 then constants.RESERVED_SERVER else constants.VIP_SERVER
+function GetServerType.OnServerInvoke() --[[ Line: 12 ]]
+	-- upvalues: Constants (copy)
+	return if game.PrivateServerId == "" then Constants.STANDARD_SERVER elseif game.PrivateServerOwnerId == 0 then Constants.RESERVED_SERVER else Constants.VIP_SERVER
 end
 
-if getJoinDataRemoteFunctionEnabled then
-	local getJoinData = Instance.new("RemoteFunction")
-	getJoinData.Name = "GetJoinData"
-	getJoinData.Parent = robloxReplicatedStorageService
+if GetJoinDataRemoteFunctionEnabled then
+	local GetJoinData = Instance.new("RemoteFunction")
+	GetJoinData.Name = "GetJoinData"
+	GetJoinData.Parent = RobloxReplicatedStorage
 	
-	function getJoinData.getJoinData(p1)
-		return p1:GetJoinData()
+	function GetJoinData.OnServerInvoke(Player: Player) --[[ Line: 32 ]]
+		return Player:GetJoinData()
 	end
 end

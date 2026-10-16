@@ -1,3 +1,3 @@
-﻿return require(script.Parent.Parent.ActionCreator)("SetPlayerListEnabled", function(p1)
-	return { isEnabled = p1 }
+﻿return require(script.Parent.Parent.ActionCreator)("SetPlayerListEnabled", function(IsEnabled) --[[ Line: 5 ]]
+	return { isEnabled = IsEnabled }
 end)

@@ -1,70 +1,74 @@
-﻿local appStorageService = game:GetService("AppStorageService")
-local httpService = game:GetService("HttpService")
-local telemetryService = game:GetService("TelemetryService")
-local discoveryUtils = script:FindFirstAncestor("DiscoveryUtils")
-local discoveryEventErrorLoggerModule = require(discoveryUtils.Telemetry.DiscoveryEventErrorLogger)
-local localStorageKey = require(discoveryUtils.Parent.LocalStorage).Enums.LocalStorageKey
-local luaAppDiscoveryClientAppStorageCacheTtlDays = game:DefineFastInt("LuaAppDiscoveryClientAppStorageCacheTtlDays", 30)
-local luaAppDiscoveryClientAppStorageEmptyCacheTelemetry = game:DefineFastFlag("LuaAppDiscoveryClientAppStorageEmptyCacheTelemetry", false)
-local t = {
-	HomeOmniFeedCache = localStorageKey.DiscoveryClientFallbackCache
+﻿local AppStorageService = game:GetService("AppStorageService")
+local HttpService = game:GetService("HttpService")
+local TelemetryService = game:GetService("TelemetryService")
+local DiscoveryUtils = script:FindFirstAncestor("DiscoveryUtils")
+local DiscoveryEventErrorLoggerModule = require(DiscoveryUtils.Telemetry.DiscoveryEventErrorLogger)
+local LuaAppDiscoveryClientAppStorageCacheTtlDays = game:DefineFastInt("LuaAppDiscoveryClientAppStorageCacheTtlDays", 30)
+local LuaAppDiscoveryClientAppStorageEmptyCacheTelemetry = game:DefineFastFlag("LuaAppDiscoveryClientAppStorageEmptyCacheTelemetry", false)
+local DiscoveryClientAppStorageGetItemErrorThrottleHundredthsPercent = game:DefineFastInt("DiscoveryClientAppStorageGetItemErrorThrottleHundredthsPercent", 10000)
+local CacheKey = {
+	HomeOmniFeedCache = require(DiscoveryUtils.Parent.LocalStorage).Enums.LocalStorageKey.DiscoveryClientFallbackCache
 }
-local var1 = luaAppDiscoveryClientAppStorageEmptyCacheTelemetry and ({
+local Config = LuaAppDiscoveryClientAppStorageEmptyCacheTelemetry and {
 	eventName = "discoveryClientAppStorageEmptyCache",
 	description = "Cached data not found after omni recommendations fetch fails",
 	backends = { "EventIngest" },
-	throttlingPercentage = game:DefineFastInt("DiscoveryClientAppStorageGetItemErrorThrottleHundredthsPercent", 10000),
+	throttlingPercentage = DiscoveryClientAppStorageGetItemErrorThrottleHundredthsPercent,
 	lastUpdated = { 25, 11, 19 }
-} or nil)
+} or nil
 
-function getJsonStorageData(p1, p2)
-	-- upvalues: appStorageService (ref), luaAppDiscoveryClientAppStorageEmptyCacheTelemetry (ref), telemetryService (ref), var1 (ref), httpService (ref), discoveryEventErrorLoggerModule (ref), luaAppDiscoveryClientAppStorageCacheTtlDays (ref)
+function getJsonStorageData(CacheKey, Version) --[[ Line: 54 ]]
+	-- upvalues: AppStorageService (copy), LuaAppDiscoveryClientAppStorageEmptyCacheTelemetry (copy), TelemetryService (copy), Config (copy), HttpService (copy), DiscoveryEventErrorLoggerModule (copy), LuaAppDiscoveryClientAppStorageCacheTtlDays (copy)
 	if not game:GetEngineFeature("UniversalAppDiscoveryClientFallbackCacheStorageKey") then
 		return nil
 	end
-	local var2 = appStorageService:GetItem(p1)
+	local Item = AppStorageService:GetItem(CacheKey)
 	
-	if var2 == nil or var2 == "" then
-		if luaAppDiscoveryClientAppStorageEmptyCacheTelemetry then
-			telemetryService:LogEvent(var1, {
+	if Item == nil or Item == "" then
+		if LuaAppDiscoveryClientAppStorageEmptyCacheTelemetry then
+			TelemetryService:LogEvent(Config, {
 				standardizedFields = { "addSessionInfo" },
-				customFields = { cacheKey = p1 }
+				customFields = { cacheKey = CacheKey }
 			})
 		end
 		return nil
 	else
-		local ok, status = pcall(function()
-			-- upvalues: httpService (copy), var2 (ref)
-			return httpService:JSONDecode(var2)
+		local Success, Result = pcall(function() --[[ Line: 74 ]]
+			-- upvalues: HttpService (upval), Item (copy)
+			return HttpService:JSONDecode(Item)
 		end)
 		
-		if not ok then
-			discoveryEventErrorLoggerModule.reportError("DiscoveryClientAppStorageDataError", status)
-			error(`Failed to decode cache data for key: {p1}`)
+		if not Success then
+			DiscoveryEventErrorLoggerModule.reportError("DiscoveryClientAppStorageDataError", Result)
+			error(`Failed to decode cache data for key: {CacheKey}`)
 		end
-		if not status.version then
-			discoveryEventErrorLoggerModule.reportError("DiscoveryClientAppStorageDataError", `Cached data version not found for key: {p1}`)
-			error(`Cached data version not found for key: {p1}`)
+		if not Result.version then
+			DiscoveryEventErrorLoggerModule.reportError("DiscoveryClientAppStorageDataError", `Cached data version not found for key: {CacheKey}`)
+			error(`Cached data version not found for key: {CacheKey}`)
 		end
-		if not status.lastUpdatedTime then
-			discoveryEventErrorLoggerModule.reportError("DiscoveryClientAppStorageDataError", `Cached data time not found for key: {p1}`)
-			error(`Cached data time not found for key: {p1}`)
+		if not Result.lastUpdatedTime then
+			DiscoveryEventErrorLoggerModule.reportError("DiscoveryClientAppStorageDataError", `Cached data time not found for key: {CacheKey}`)
+			error(`Cached data time not found for key: {CacheKey}`)
 		end
-		return if status.version == p2 and (not status.lastUpdatedTime or status.lastUpdatedTime >= os.time() - 86400 * luaAppDiscoveryClientAppStorageCacheTtlDays) then status.data else nil
+		return if Result.version == Version and (not Result.lastUpdatedTime or Result.lastUpdatedTime >= os.time() - 86400 * LuaAppDiscoveryClientAppStorageCacheTtlDays) then Result.data else nil
 	end
 end
 
-function setJsonStorageData(value, p3, p4)
-	-- upvalues: httpService (ref), appStorageService (ref)
+function setJsonStorageData(Key, Data, Version) --[[ Line: 120 ]]
+	-- upvalues: HttpService (copy), AppStorageService (copy)
 	if game:GetEngineFeature("UniversalAppDiscoveryClientFallbackCacheStorageKey") then
-		appStorageService:SetItem(value, httpService:JSONEncode({ data = p3, lastUpdatedTime = os.time(), version = p4 }))
+		AppStorageService:SetItem(Key, (HttpService:JSONEncode({
+			data = Data,
+			lastUpdatedTime = os.time(),
+			version = Version
+		})))
 		
 		return
 	end
 end
 
 return {
-	CacheKey = t,
+	CacheKey = CacheKey,
 	getJsonStorageData = getJsonStorageData,
 	setJsonStorageData = setJsonStorageData
 }

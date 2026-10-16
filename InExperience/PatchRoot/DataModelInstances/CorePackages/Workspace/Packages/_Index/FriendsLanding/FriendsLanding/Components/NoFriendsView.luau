@@ -1,139 +1,142 @@
-﻿local friendsLanding = script:FindFirstAncestor("FriendsLanding")
-local parent = friendsLanding.Parent
-local fFlagConnectionsToFriendsRename = require(parent.SharedFlags).FFlagConnectionsToFriendsRename
-local dependenciesModule = require(friendsLanding.dependencies)
-local react = dependenciesModule.React
-local dash = dependenciesModule.Dash
-local UIBlox = dependenciesModule.UIBlox
-local images = UIBlox.App.ImageSet.Images
-local imageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
-local button = UIBlox.App.Button.Button
-local buttonType = UIBlox.App.Button.Enum.ButtonType
-local standardButtonSize = UIBlox.App.Button.Enum.StandardButtonSize
-local colors = UIBlox.App.Style.Colors
-local useStyle = UIBlox.Core.Style.useStyle
-local styledTextLabel = UIBlox.App.Text.StyledTextLabel
-local useLocalization = dependenciesModule.Hooks.useLocalization
-local textKeysModule = require(friendsLanding.Common.TextKeys)
-local appFonts = require(parent.Style).AppFonts
-local foundationModule = require(parent.Foundation)
-local image = foundationModule.Image
-local useTokens = foundationModule.Hooks.useTokens
-local foundationCloudAssetsModule = require(parent.FoundationCloudAssets)
-local assets = foundationCloudAssetsModule.Assets
-local preloadAsset = foundationCloudAssetsModule.preloadAsset
-local migrateNoFriendsViewToFoundation = game:DefineFastFlag("MigrateNoFriendsViewToFoundation", false)
-local fFlagFriendsEmptyStateIllustrationThemingModule = require(friendsLanding.Flags.FFlagFriendsEmptyStateIllustrationTheming)
-local t = {
+﻿local FriendsLanding = script:FindFirstAncestor("FriendsLanding")
+local Parent = FriendsLanding.Parent
+local FoundationFontFaceMigration = require(Parent.SharedFlags).FFlagFontFaceSocialFriends and require(Parent.Foundation).Utility.Flags.FoundationFontFaceMigration
+local DependenciesModule = require(FriendsLanding.dependencies)
+local React = DependenciesModule.React
+local Dash = DependenciesModule.Dash
+local UIBlox = DependenciesModule.UIBlox
+local Images = UIBlox.App.ImageSet.Images
+local ImageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
+local Button = UIBlox.App.Button.Button
+local ButtonType = UIBlox.App.Button.Enum.ButtonType
+local StandardButtonSize = UIBlox.App.Button.Enum.StandardButtonSize
+local Colors = UIBlox.App.Style.Colors
+local UseStyleFunction = UIBlox.Core.Style.useStyle
+local StyledTextLabel = UIBlox.App.Text.StyledTextLabel
+local UseLocalizationFunction = DependenciesModule.Hooks.useLocalization
+local TextKeysModule = require(FriendsLanding.Common.TextKeys)
+local AppFonts = require(Parent.Style).AppFonts
+local FoundationModule = require(Parent.Foundation)
+local Image = FoundationModule.Image
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationCloudAssetsModule = require(Parent.FoundationCloudAssets)
+local Assets = FoundationCloudAssetsModule.Assets
+local PreloadAssetFunction = FoundationCloudAssetsModule.preloadAsset
+local MigrateNoFriendsViewToFoundation = game:DefineFastFlag("MigrateNoFriendsViewToFoundation", false)
+local FFlagFriendsEmptyStateIllustrationThemingModule = require(FriendsLanding.Flags.FFlagFriendsEmptyStateIllustrationTheming)
+local config = {
 	layoutOrder = 0,
 	pageLoadingTimeReport = nil,
 	pageRenderReport = nil,
 	addFriendsBtnEnabled = true,
-	openAddFriendsPage = dash.noop,
-	addFriendsBtnLabelKey = if fFlagConnectionsToFriendsRename then textKeysModule.ADD_FRIENDS_BTN else textKeysModule.ADD_CONNECTIONS_BTN,
-	noFriendsTextLabelKey = if fFlagConnectionsToFriendsRename then textKeysModule.NO_FRIENDS_TEXT else textKeysModule.NO_CONNECTIONS_TEXT
+	openAddFriendsPage = Dash.noop,
+	addFriendsBtnLabelKey = TextKeysModule.ADD_FRIENDS_BTN,
+	noFriendsTextLabelKey = TextKeysModule.NO_FRIENDS_TEXT
 }
 
-local function _(value)
-	-- upvalues: preloadAsset (ref), assets (ref)
-	preloadAsset(value)
-	local var1 = assets[value]
+local function _(p1) --[[ Line: 65 | Named "loadFoundationCloudAsset" ]]
+	-- upvalues: PreloadAssetFunction (copy), Assets (copy)
+	PreloadAssetFunction(p1)
+	local Asset = Assets[p1]
 	
-	return var1.assetId, var1.size
+	return Asset.assetId, Asset.size
 end
 
-return function(p1)
-	-- upvalues: dash (ref), t (ref), migrateNoFriendsViewToFoundation (ref), preloadAsset (ref), assets (ref), react (ref), useLocalization (ref), useStyle (ref), fFlagFriendsEmptyStateIllustrationThemingModule (ref), useTokens (ref), image (ref), imageSetLabel (ref), images (ref), colors (ref), styledTextLabel (ref), appFonts (ref), button (ref), buttonType (ref), standardButtonSize (ref)
-	local var1 = dash.join(t, p1 or {})
-	local var2 = if migrateNoFriendsViewToFoundation then "pictograms/collaborators" else nil
-	local assetId = nil
-	local size = nil
+return function(p1) --[[ Line: 71 | Named "NoFriendsView" ]]
+	-- upvalues: Dash (copy), config (copy), MigrateNoFriendsViewToFoundation (copy), PreloadAssetFunction (copy), Assets (copy), React (copy), UseLocalizationFunction (copy), UseStyleFunction (copy), FFlagFriendsEmptyStateIllustrationThemingModule (copy), UseTokensFunction (copy), Image (copy), ImageSetLabel (copy), Images (copy), Colors (copy), StyledTextLabel (copy), FoundationFontFaceMigration (copy), AppFonts (copy), NormalizeFontFaceFunction (copy), Button (copy), ButtonType (copy), StandardButtonSize (copy)
+	local JoinResult = Dash.join(config, p1 or {})
+	local Collaborators = if MigrateNoFriendsViewToFoundation then "pictograms/collaborators" else nil
+	local AssetId = nil
+	local Size = nil
 	
-	if migrateNoFriendsViewToFoundation then
-		preloadAsset(var2)
-		local var3 = assets[var2]
-		assetId = var3.assetId
-		size = var3.size
+	if MigrateNoFriendsViewToFoundation then
+		PreloadAssetFunction(Collaborators)
+		local Asset = Assets[Collaborators]
+		AssetId = Asset.assetId
+		Size = Asset.size
 	end
-	local var4 = if migrateNoFriendsViewToFoundation then size / 3 else nil
-	react.useEffect(function()
-		-- upvalues: var1 (ref)
-		if var1.pageLoadingTimeReport then
-			var1.pageLoadingTimeReport()
+	local SizeRatio = if MigrateNoFriendsViewToFoundation then Size / 3 else nil
+	React.useEffect(function() --[[ Line: 84 ]]
+		-- upvalues: JoinResult (copy)
+		if JoinResult.pageLoadingTimeReport then
+			JoinResult.pageLoadingTimeReport()
 		end
-		if var1.pageRenderReport then
-			var1.pageRenderReport()
+		if JoinResult.pageRenderReport then
+			JoinResult.pageRenderReport()
 		end
 	end, {})
-	local var5 = useLocalization({
-		addFriendsBtn = var1.addFriendsBtnLabelKey,
-		noFriendsText = var1.noFriendsTextLabelKey,
-		noFriendsHeader = var1.noFriendsHeaderKey
+	local UseLocalizationResult = UseLocalizationFunction({
+		addFriendsBtn = JoinResult.addFriendsBtnLabelKey,
+		noFriendsText = JoinResult.noFriendsTextLabelKey,
+		noFriendsHeader = JoinResult.noFriendsHeaderKey
 	})
-	local var6 = useStyle()
+	local UseStyleResult = UseStyleFunction()
+	local UseTokensResult = if FFlagFriendsEmptyStateIllustrationThemingModule then UseTokensFunction() else nil
 	
-	return react.createElement("Frame", {
+	return React.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.fromScale(1, 1),
-		LayoutOrder = var1.layoutOrder
+		LayoutOrder = JoinResult.layoutOrder
 	}, {
-		IndicatorInner = react.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
-			SidePadding = react.createElement("UIPadding", {
+		IndicatorInner = React.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
+			SidePadding = React.createElement("UIPadding", {
 				PaddingRight = UDim.new(0, 30),
 				PaddingLeft = UDim.new(0, 30)
 			}),
-			UIList = react.createElement("UIListLayout", {
+			UIList = React.createElement("UIListLayout", {
 				VerticalAlignment = Enum.VerticalAlignment.Center,
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				FillDirection = Enum.FillDirection.Vertical,
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
 				Padding = UDim.new(0, 15)
 			}),
-			Imagelabel = if migrateNoFriendsViewToFoundation then react.createElement(image, {
+			Imagelabel = if MigrateNoFriendsViewToFoundation then React.createElement(Image, {
 				LayoutOrder = 1,
-				Image = assetId,
-				imageStyle = if fFlagFriendsEmptyStateIllustrationThemingModule then (if fFlagFriendsEmptyStateIllustrationThemingModule then useTokens() else nil).Color.Content.Emphasis else nil,
-				Size = UDim2.fromOffset(var4.X, var4.Y)
-			}) else react.createElement(imageSetLabel, {
+				Image = AssetId,
+				imageStyle = if FFlagFriendsEmptyStateIllustrationThemingModule then UseTokensResult.Color.Content.Emphasis else nil,
+				Size = UDim2.fromOffset(SizeRatio.X, SizeRatio.Y)
+			}) else React.createElement(ImageSetLabel, {
 				BackgroundTransparency = 1,
 				LayoutOrder = 1,
-				Image = images["icons/graphic/findfriends_xlarge"],
-				ImageColor3 = colors.White,
+				Image = Images["icons/graphic/findfriends_xlarge"],
+				ImageColor3 = Colors.White,
 				Size = UDim2.fromOffset(96, 96)
 			}),
-			Headerlabel = if var1.noFriendsHeaderKey and var5.noFriendsHeader then react.createElement(styledTextLabel, {
+			Headerlabel = if JoinResult.noFriendsHeaderKey and UseLocalizationResult.noFriendsHeader then React.createElement(StyledTextLabel, {
 				layoutOrder = 2,
-				text = var5.noFriendsHeader,
-				fontStyle = var6.Font.Header1,
-				colorStyle = var6.Theme.TextEmphasis,
+				text = UseLocalizationResult.noFriendsHeader,
+				fontStyle = UseStyleResult.Font.Header1,
+				colorStyle = UseStyleResult.Theme.TextEmphasis,
 				automaticSize = Enum.AutomaticSize.Y,
 				size = UDim2.new(1, 0, 0, 0),
 				textXAlignment = Enum.TextXAlignment.Center,
 				textYAlignment = Enum.TextYAlignment.Center
 			}) else nil,
-			Textlabel = react.createElement("TextLabel", {
+			Textlabel = React.createElement("TextLabel", {
 				TextWrapped = true,
 				BackgroundTransparency = 1,
 				LayoutOrder = 3,
 				AutomaticSize = Enum.AutomaticSize.Y,
-				Font = appFonts.default:getDefault(),
+				Font = if FoundationFontFaceMigration then nil else AppFonts.default:getDefault(),
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodySmall.Font) else nil,
 				Size = UDim2.new(1, 0, 0, 0),
-				Text = var5.noFriendsText,
-				TextColor3 = var6.Theme.TextMuted.Color,
-				TextSize = var6.Font.Header2.RelativeSize * var6.Font.BaseSize,
-				TextTransparency = var6.Theme.TextMuted.Transparency
+				Text = UseLocalizationResult.noFriendsText,
+				TextColor3 = UseStyleResult.Theme.TextMuted.Color,
+				TextSize = UseStyleResult.Font.Header2.RelativeSize * UseStyleResult.Font.BaseSize,
+				TextTransparency = UseStyleResult.Theme.TextMuted.Transparency
 			}),
-			Padding = react.createElement("Frame", {
+			Padding = React.createElement("Frame", {
 				LayoutOrder = 4,
 				BackgroundTransparency = 1,
 				Size = UDim2.new(0, 0, 0, 10)
 			}),
-			AddFriendsButton = var1.addFriendsBtnEnabled and react.createElement(button, {
+			AddFriendsButton = JoinResult.addFriendsBtnEnabled and React.createElement(Button, {
 				layoutOrder = 5,
-				buttonType = buttonType.PrimarySystem,
-				text = var5.addFriendsBtn,
-				standardSize = standardButtonSize.Regular,
-				onActivated = var1.openAddFriendsPage
+				buttonType = ButtonType.PrimarySystem,
+				text = UseLocalizationResult.addFriendsBtn,
+				standardSize = StandardButtonSize.Regular,
+				onActivated = JoinResult.openAddFriendsPage
 			})
 		})
 	})

@@ -1,10 +1,10 @@
-﻿local toRectModule = require(script.Parent.toRect)
-local returnValueModule = require(script.Parent.returnValue)
+﻿local ToRectModule = require(script.Parent.toRect)
+local ReturnValueModule = require(script.Parent.returnValue)
 
-return function(p1, p2, p3)
-	-- upvalues: toRectModule (ref), returnValueModule (ref)
-	local var1 = toRectModule(p1)
-	local var2 = toRectModule(p2)
+return function(p1, p2, VerticalAlignment) --[[ Line: 29 | Named "alignedVertically" ]]
+	-- upvalues: ToRectModule (copy), ReturnValueModule (copy)
+	local RectModule = ToRectModule(p1)
+	local RectModule1 = ToRectModule(p2)
 	
-	return if p3 == Enum.VerticalAlignment.Top then returnValueModule(var1.Min.Y == var2.Min.Y, "", "") elseif p3 == Enum.VerticalAlignment.Center then returnValueModule(((var1.Min + var1.Max) / 2).Y == ((var2.Min + var2.Max) / 2).Y, "", "") elseif p3 == Enum.VerticalAlignment.Bottom then returnValueModule(var1.Max.Y == var2.Max.Y, "", "") else returnValueModule(false, "Invalid VerticalAlignment!")
+	return if VerticalAlignment == Enum.VerticalAlignment.Top then ReturnValueModule(RectModule.Min.Y == RectModule1.Min.Y, "", "") elseif VerticalAlignment == Enum.VerticalAlignment.Center then ReturnValueModule(((RectModule.Min + RectModule.Max) / 2).Y == ((RectModule1.Min + RectModule1.Max) / 2).Y, "", "") elseif VerticalAlignment == Enum.VerticalAlignment.Bottom then ReturnValueModule(RectModule.Max.Y == RectModule1.Max.Y, "", "") else ReturnValueModule(false, "Invalid VerticalAlignment!")
 end

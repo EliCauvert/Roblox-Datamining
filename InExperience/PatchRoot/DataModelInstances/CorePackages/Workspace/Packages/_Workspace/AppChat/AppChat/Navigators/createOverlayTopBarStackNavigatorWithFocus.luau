@@ -1,106 +1,114 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local focusNavigableSurfaceIdentifierEnum = require(parent.FocusNavigationUtils).FocusNavigableSurfaceIdentifierEnum
-local reactModule = require(parent.React)
-local roactNavigationModule = require(parent.RoactNavigation)
-local foundationModule = require(parent.Foundation)
-local responsiveModule = require(parent.Responsive)
-local enumScreensModule = require(appChat.EnumScreens)
-local systemMenuTopBarModule = require(appChat.Components.TopBar.SystemMenuTopBar)
-local configureTopBarWithNavigationOptionsModule = require(appChat.configureTopBarWithNavigationOptions)
-local isolatedAutoFocusNavigationModule = require(appChat.Navigators.isolatedAutoFocusNavigation)
-local fFlagAppChatPerfTrackingModule = require(appChat.Flags.FFlagAppChatPerfTracking)
-local appChatPerfTrackerModule = require(appChat.Telemetry.AppChatPerfTracker)
-local fFlagFixPaginatedChatMembersCutoffModule = require(appChat.Flags.FFlagFixPaginatedChatMembersCutoff)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local FocusNavigableSurfaceIdentifierEnum = require(Parent.FocusNavigationUtils).FocusNavigableSurfaceIdentifierEnum
+local ReactModule = require(Parent.React)
+local RoactNavigationModule = require(Parent.RoactNavigation)
+local FoundationModule = require(Parent.Foundation)
+local ResponsiveModule = require(Parent.Responsive)
+local EnumScreensModule = require(AppChat.EnumScreens)
+local SystemMenuTopBarModule = require(AppChat.Components.TopBar.SystemMenuTopBar)
+local ConfigureTopBarWithNavigationOptionsModule = require(AppChat.configureTopBarWithNavigationOptions)
+local IsolatedAutoFocusNavigationModule = require(AppChat.Navigators.isolatedAutoFocusNavigation)
+local FFlagAppChatPerfTrackingModule = require(AppChat.Flags.FFlagAppChatPerfTracking)
+local AppChatPerfTrackerModule = require(AppChat.Telemetry.AppChatPerfTracker)
+local FFlagFixPaginatedChatMembersCutoffModule = require(AppChat.Flags.FFlagFixPaginatedChatMembersCutoff)
 
-local function getActiveRouteName(p1)
-	local index
-	local state = p1 and p1.state
+local function getActiveRouteName(Navigation) --[[ Line: 25 ]]
+	local State = Navigation and Navigation.state
+	local Route = nil
 	
-	if not state or not state.routes or not state.index then
+	if not State or not State.routes or not State.index then
 		return nil
 	end
-	while state and state.routes and state.index do
-		index = state.routes[state.index]
+	while State and State.routes and State.index do
+		Route = State.routes[State.index]
 		
-		if not index then break end
-		if not index.routes or not index.index then
-			return index.routeName
+		if not Route then break end
+		if not Route.routes or not Route.index then
+			return Route.routeName
 		end
-		state = index
+		State = Route
 	end
 	return nil
 end
 
-local function _(p2)
-	-- upvalues: responsiveModule (ref), fFlagAppChatPerfTrackingModule (ref), appChatPerfTrackerModule (ref), getActiveRouteName (ref), enumScreensModule (ref), reactModule (ref), systemMenuTopBarModule (ref), configureTopBarWithNavigationOptionsModule (ref), foundationModule (ref)
-	return function(p3)
-		-- upvalues: responsiveModule (copy), fFlagAppChatPerfTrackingModule (copy), appChatPerfTrackerModule (copy), getActiveRouteName (copy), enumScreensModule (copy), reactModule (copy), systemMenuTopBarModule (copy), configureTopBarWithNavigationOptionsModule (copy), foundationModule (copy), p2 (ref)
-		local uDim2 = UDim2.new(1, if responsiveModule.useBreakpointXOrSmaller(responsiveModule.Keys.Small) then -24 else -360, 1, if responsiveModule.useBreakpointYOrSmaller(responsiveModule.Keys.Small) then -24 else -72)
-		local var1 = nil
+local function _(p1) --[[ Line: 52 | Named "wrapInOverlay" ]]
+	-- upvalues: ResponsiveModule (copy), FFlagAppChatPerfTrackingModule (copy), AppChatPerfTrackerModule (copy), getActiveRouteName (copy), EnumScreensModule (copy), ReactModule (copy), SystemMenuTopBarModule (copy), ConfigureTopBarWithNavigationOptionsModule (copy), FoundationModule (copy)
+	return function(p2) --[[ Line: 53 ]]
+		-- upvalues: ResponsiveModule (upval), FFlagAppChatPerfTrackingModule (upval), AppChatPerfTrackerModule (upval), getActiveRouteName (upval), EnumScreensModule (upval), ReactModule (upval), SystemMenuTopBarModule (upval), ConfigureTopBarWithNavigationOptionsModule (upval), FoundationModule (upval), p1 (copy)
+		local UseBreakpointYOrSmallerResult = ResponsiveModule.useBreakpointYOrSmaller(ResponsiveModule.Keys.Small)
+		local _UDim2 = UDim2.new(1, if ResponsiveModule.useBreakpointXOrSmaller(ResponsiveModule.Keys.Small) then -24 else -360, 1, if UseBreakpointYOrSmallerResult then -24 else -72)
+		local Element = nil
 		
-		if fFlagAppChatPerfTrackingModule then
-			appChatPerfTrackerModule.start(appChatPerfTrackerModule.Events.TopBarRenderInterval)
+		if FFlagAppChatPerfTrackingModule then
+			AppChatPerfTrackerModule.start(AppChatPerfTrackerModule.Events.TopBarRenderInterval)
 		end
-		local var2 = getActiveRouteName(p3.navigation)
+		local ScreenName = getActiveRouteName(p2.navigation)
 		
-		if var2 == enumScreensModule.CreateNewChat or var2 == enumScreensModule.EditChatMembers or var2 == enumScreensModule.QuickStartSquadInviteFriends then
-			var1 = reactModule.createElement(systemMenuTopBarModule, { screenName = var2, navigation = p3.navigation })
+		if ScreenName == EnumScreensModule.CreateNewChat or ScreenName == EnumScreensModule.EditChatMembers or ScreenName == EnumScreensModule.QuickStartSquadInviteFriends then
+			Element = ReactModule.createElement(SystemMenuTopBarModule, { screenName = ScreenName, navigation = p2.navigation })
 		end
-		return reactModule.createElement(foundationModule.View, {
+		if not Element then
+			Element = ConfigureTopBarWithNavigationOptionsModule(p2.navigation)
+		end
+		return ReactModule.createElement(FoundationModule.View, {
 			tag = "col position-center-center anchor-center-center radius-large clip bg-surface-0",
-			Size = uDim2,
+			Size = _UDim2,
 			sizeConstraint = {
 				MaxSize = Vector2.new(1000, 800),
 				MinSize = Vector2.new(0, 0)
 			}
 		}, {
-			topBar = var1 or configureTopBarWithNavigationOptionsModule(p3.navigation),
-			overlayContent = reactModule.createElement(p2, p3)
+			topBar = Element,
+			overlayContent = ReactModule.createElement(p1, p2)
 		})
 	end
 end
 
-return function(p2)
-	-- upvalues: roactNavigationModule (ref), fFlagFixPaginatedChatMembersCutoffModule (ref), reactModule (ref), isolatedAutoFocusNavigationModule (ref), responsiveModule (ref), fFlagAppChatPerfTrackingModule (ref), appChatPerfTrackerModule (ref), getActiveRouteName (ref), enumScreensModule (ref), systemMenuTopBarModule (ref), configureTopBarWithNavigationOptionsModule (ref), foundationModule (ref), focusNavigableSurfaceIdentifierEnum (ref)
-	local var1 = roactNavigationModule.createRobloxStackNavigator(p2, {
+return function(p1) --[[ Line: 98 ]]
+	-- upvalues: RoactNavigationModule (copy), FFlagFixPaginatedChatMembersCutoffModule (copy), ReactModule (copy), IsolatedAutoFocusNavigationModule (copy), ResponsiveModule (copy), FFlagAppChatPerfTrackingModule (copy), AppChatPerfTrackerModule (copy), getActiveRouteName (copy), EnumScreensModule (copy), SystemMenuTopBarModule (copy), ConfigureTopBarWithNavigationOptionsModule (copy), FoundationModule (copy), FocusNavigableSurfaceIdentifierEnum (copy)
+	local RobloxStackNavigator = RoactNavigationModule.createRobloxStackNavigator(p1, {
 		defaultNavigationOptions = {
 			isDialog = true,
-			absorbInputSelectable = if fFlagFixPaginatedChatMembersCutoffModule then false else nil
+			absorbInputSelectable = not FFlagFixPaginatedChatMembersCutoffModule and nil
 		}
 	})
-	local overlayNavigatorConnector = reactModule.PureComponent:extend("OverlayNavigatorConnector")
-	overlayNavigatorConnector.router = var1.router
-	local var2 = isolatedAutoFocusNavigationModule(function(p3)
-		-- upvalues: responsiveModule (copy), fFlagAppChatPerfTrackingModule (copy), appChatPerfTrackerModule (copy), getActiveRouteName (copy), enumScreensModule (copy), reactModule (copy), systemMenuTopBarModule (copy), configureTopBarWithNavigationOptionsModule (copy), foundationModule (copy), var1 (ref)
-		local uDim2 = UDim2.new(1, if responsiveModule.useBreakpointXOrSmaller(responsiveModule.Keys.Small) then -24 else -360, 1, if responsiveModule.useBreakpointYOrSmaller(responsiveModule.Keys.Small) then -24 else -72)
-		local var3 = nil
+	local OverlayNavigatorConnector = ReactModule.PureComponent:extend("OverlayNavigatorConnector")
+	OverlayNavigatorConnector.router = RobloxStackNavigator.router
+	local IsolatedAutoFocusNavigationModuleResult = IsolatedAutoFocusNavigationModule(function(p2) --[[ Line: 53 ]]
+		-- upvalues: ResponsiveModule (upval), FFlagAppChatPerfTrackingModule (upval), AppChatPerfTrackerModule (upval), getActiveRouteName (upval), EnumScreensModule (upval), ReactModule (upval), SystemMenuTopBarModule (upval), ConfigureTopBarWithNavigationOptionsModule (upval), FoundationModule (upval), RobloxStackNavigator (copy)
+		local UseBreakpointYOrSmallerResult = ResponsiveModule.useBreakpointYOrSmaller(ResponsiveModule.Keys.Small)
+		local _UDim2 = UDim2.new(1, if ResponsiveModule.useBreakpointXOrSmaller(ResponsiveModule.Keys.Small) then -24 else -360, 1, if UseBreakpointYOrSmallerResult then -24 else -72)
+		local Element = nil
 		
-		if fFlagAppChatPerfTrackingModule then
-			appChatPerfTrackerModule.start(appChatPerfTrackerModule.Events.TopBarRenderInterval)
+		if FFlagAppChatPerfTrackingModule then
+			AppChatPerfTrackerModule.start(AppChatPerfTrackerModule.Events.TopBarRenderInterval)
 		end
-		local var4 = getActiveRouteName(p3.navigation)
+		local ScreenName = getActiveRouteName(p2.navigation)
 		
-		if var4 == enumScreensModule.CreateNewChat or var4 == enumScreensModule.EditChatMembers or var4 == enumScreensModule.QuickStartSquadInviteFriends then
-			var3 = reactModule.createElement(systemMenuTopBarModule, { screenName = var4, navigation = p3.navigation })
+		if ScreenName == EnumScreensModule.CreateNewChat or ScreenName == EnumScreensModule.EditChatMembers or ScreenName == EnumScreensModule.QuickStartSquadInviteFriends then
+			Element = ReactModule.createElement(SystemMenuTopBarModule, { screenName = ScreenName, navigation = p2.navigation })
 		end
-		return reactModule.createElement(foundationModule.View, {
+		if not Element then
+			Element = ConfigureTopBarWithNavigationOptionsModule(p2.navigation)
+		end
+		return ReactModule.createElement(FoundationModule.View, {
 			tag = "col position-center-center anchor-center-center radius-large clip bg-surface-0",
-			Size = uDim2,
+			Size = _UDim2,
 			sizeConstraint = {
 				MaxSize = Vector2.new(1000, 800),
 				MinSize = Vector2.new(0, 0)
 			}
 		}, {
-			topBar = var3 or configureTopBarWithNavigationOptionsModule(p3.navigation),
-			overlayContent = reactModule.createElement(var1, p3)
+			topBar = Element,
+			overlayContent = ReactModule.createElement(RobloxStackNavigator, p2)
 		})
-	end, focusNavigableSurfaceIdentifierEnum.PopUp)
+	end, FocusNavigableSurfaceIdentifierEnum.PopUp)
 	
-	function overlayNavigatorConnector.render(p3)
-		-- upvalues: reactModule (copy), var2 (ref)
-		return reactModule.createElement(var2, p3.props)
+	function OverlayNavigatorConnector.render(p2) --[[ Line: 112 ]]
+		-- upvalues: ReactModule (upval), IsolatedAutoFocusNavigationModuleResult (copy)
+		return ReactModule.createElement(IsolatedAutoFocusNavigationModuleResult, p2.props)
 	end
 	
-	return overlayNavigatorConnector
+	return OverlayNavigatorConnector
 end

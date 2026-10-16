@@ -1,43 +1,45 @@
-﻿local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
-local parent = genericAbuseReporting.Parent
-local dashModule = require(parent.Dash)
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local view = foundationModule.View
-local _ = require(genericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.AbuseSheetFlowTypes)
-local listNodeV2Module = require(genericAbuseReporting.BeduiV2.Components.Nodes.ListNodeV2)
-local recentlyLeftBadgeModule = require(genericAbuseReporting.BeduiV2.Components.Shared.RecentlyLeftBadge)
-local recentlyLeftSignalsModule = require(genericAbuseReporting.BeduiV2.Utils.Signals.recentlyLeftSignals)
-local voiceSpeakingIconModule = require(genericAbuseReporting.BeduiV2.Components.Shared.VoiceSpeakingIcon)
-local voiceSpeakingSignalsModule = require(genericAbuseReporting.BeduiV2.Utils.Signals.voiceSpeakingSignals)
+﻿local GenericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
+local Parent = GenericAbuseReporting.Parent
+local DashModule = require(Parent.Dash)
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local View = require(Parent.Foundation).View
+local _ = require(GenericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.AbuseSheetFlowTypes)
+local ListNodeV2Module = require(GenericAbuseReporting.BeduiV2.Components.Nodes.ListNodeV2)
+local RecentlyLeftBadgeModule = require(GenericAbuseReporting.BeduiV2.Components.Shared.RecentlyLeftBadge)
+local RecentlyLeftSignalsModule = require(GenericAbuseReporting.BeduiV2.Utils.Signals.recentlyLeftSignals)
+local VoiceSpeakingIconModule = require(GenericAbuseReporting.BeduiV2.Components.Shared.VoiceSpeakingIcon)
+local VoiceSpeakingSignalsModule = require(GenericAbuseReporting.BeduiV2.Utils.Signals.voiceSpeakingSignals)
 
-return reactModule.memo(function(p1)
-	-- upvalues: dashModule (ref), voiceSpeakingSignalsModule (ref), signalsReactModule (ref), recentlyLeftSignalsModule (ref), reactModule (ref), voiceSpeakingIconModule (ref), recentlyLeftBadgeModule (ref), view (ref), listNodeV2Module (ref)
-	local trailingAccessories = p1.trailingAccessories
-	local var1 = dashModule.join(p1, { trailingAccessories = dashModule.None })
-	local var2 = voiceSpeakingSignalsModule.useVoiceSpeakingStore()
-	local var3 = signalsReactModule.useSignalState(recentlyLeftSignalsModule.getRecentlyLeftIds())
+return ReactModule.memo(function(p1) --[[ Line: 26 | Named "InExpUserSelectionNode" ]]
+	-- upvalues: DashModule (copy), VoiceSpeakingSignalsModule (copy), SignalsReactModule (copy), RecentlyLeftSignalsModule (copy), ReactModule (copy), VoiceSpeakingIconModule (copy), RecentlyLeftBadgeModule (copy), View (copy), ListNodeV2Module (copy)
+	local TrailingAccessories = p1.trailingAccessories
+	local UseVoiceSpeakingStoreResult = VoiceSpeakingSignalsModule.useVoiceSpeakingStore()
+	local UseSignalStateResult = SignalsReactModule.useSignalState(RecentlyLeftSignalsModule.getRecentlyLeftIds())
 	
-	return reactModule.createElement(listNodeV2Module, dashModule.join(var1, {
-		renderTrailingAccessory = reactModule.useCallback(function(p2)
-			-- upvalues: trailingAccessories (ref), reactModule (copy), voiceSpeakingIconModule (copy), var2 (ref), var3 (ref), recentlyLeftBadgeModule (copy), view (copy)
-			if not trailingAccessories or #trailingAccessories == 0 then
+	return ReactModule.createElement(ListNodeV2Module, DashModule.join(DashModule.join(p1, { trailingAccessories = DashModule.None }), {
+		renderTrailingAccessory = ReactModule.useCallback(function(p2) --[[ Line: 34 ]]
+			-- upvalues: TrailingAccessories (copy), ReactModule (upval), VoiceSpeakingIconModule (upval), UseVoiceSpeakingStoreResult (copy), UseSignalStateResult (copy), RecentlyLeftBadgeModule (upval), View (upval)
+			if not TrailingAccessories or #TrailingAccessories == 0 then
 				return nil
 			end
-			local t = {}
+			local Elements = {}
 			
-			for i, v in trailingAccessories do
-				if v.type == "voiceSpeakingIndicator" then
-					table.insert(t, reactModule.createElement(voiceSpeakingIconModule, {
-						isSpeakingSignal = var2.getIsSpeaking(p2.id),
-						layoutOrder = i
+			for LayoutOrder, trailingAccessory in TrailingAccessories do
+				if trailingAccessory.type == "voiceSpeakingIndicator" then
+					table.insert(Elements, ReactModule.createElement(VoiceSpeakingIconModule, {
+						isSpeakingSignal = UseVoiceSpeakingStoreResult.getIsSpeaking(p2.id),
+						layoutOrder = LayoutOrder
 					}))
-				elseif v.type == "recentlyLeftIndicator" and var3[p2.id] then
-					table.insert(t, reactModule.createElement(recentlyLeftBadgeModule, { text = v.text, layoutOrder = i }))
+				elseif trailingAccessory.type == "recentlyLeftIndicator" and UseSignalStateResult[p2.id] then
+					table.insert(Elements, ReactModule.createElement(RecentlyLeftBadgeModule, { text = trailingAccessory.text, layoutOrder = LayoutOrder }))
 				end
 			end
-			return if next(t) == nil then nil else reactModule.createElement(view, { tag = "row align-y-center gap-small auto-xy" }, t)
-		end, { trailingAccessories, var2, var3 })
+			return if next(Elements) == nil then nil else ReactModule.createElement(View, { tag = "row align-y-center gap-small auto-xy" }, Elements)
+		end, {
+			TrailingAccessories,
+			UseVoiceSpeakingStoreResult,
+			UseSignalStateResult
+		})
 	}))
 end)

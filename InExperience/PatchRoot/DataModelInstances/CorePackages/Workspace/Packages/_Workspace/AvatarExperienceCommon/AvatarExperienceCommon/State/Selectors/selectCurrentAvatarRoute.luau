@@ -1,13 +1,13 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
-local fFlagUseNavigationSelectors = require(parent.SharedFlags).FFlagUseNavigationSelectors
-local fFlagSignalsNavP3gAvatarExperience = require(parent.SharedFlags).FFlagSignalsNavP3gAvatarExperience
-local selectors = require(parent.NavigationRodux).Selectors
-local getLegacyNavigationStore = require(parent.NavigationRodux).GetLegacyNavigationStore
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
+local FFlagUseNavigationSelectors = require(Parent.SharedFlags).FFlagUseNavigationSelectors
+local FFlagSignalsNavP3gAvatarExperience = require(Parent.SharedFlags).FFlagSignalsNavP3gAvatarExperience
+local Selectors = require(Parent.NavigationRodux).Selectors
+local GetLegacyNavigationStoreFunction = require(Parent.NavigationRodux).GetLegacyNavigationStore
 
-return function(p1)
-	-- upvalues: fFlagSignalsNavP3gAvatarExperience (ref), getLegacyNavigationStore (ref), fFlagUseNavigationSelectors (ref), selectors (ref)
-	local var1 = if fFlagSignalsNavP3gAvatarExperience then getLegacyNavigationStore(false).getCurrentRoute(false) elseif fFlagUseNavigationSelectors then p1.Navigation and selectors.selectCurrentRoactNavigationRoute(p1) else p1.Navigation and p1.Navigation.currentRoute
-	local fromAvatarRoute = var1 and (var1.params and var1.params.fromAvatarRoute)
+return function(p1) --[[ Line: 8 | Named "selectCurrentAvatarRoute" ]]
+	-- upvalues: FFlagSignalsNavP3gAvatarExperience (copy), GetLegacyNavigationStoreFunction (copy), FFlagUseNavigationSelectors (copy), Selectors (copy)
+	local CurrentRoute = if FFlagSignalsNavP3gAvatarExperience then GetLegacyNavigationStoreFunction(false).getCurrentRoute(false) elseif FFlagUseNavigationSelectors then p1.Navigation and Selectors.selectCurrentRoactNavigationRoute(p1) else p1.Navigation and p1.Navigation.currentRoute
+	local FromAvatarRoute = CurrentRoute and (CurrentRoute.params and CurrentRoute.params.fromAvatarRoute)
 	
-	return fromAvatarRoute and fromAvatarRoute.current
+	return FromAvatarRoute and FromAvatarRoute.current
 end

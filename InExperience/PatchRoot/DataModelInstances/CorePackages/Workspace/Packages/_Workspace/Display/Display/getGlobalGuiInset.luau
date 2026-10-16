@@ -1,13 +1,13 @@
-﻿local guiService = game:GetService("GuiService")
+﻿local GuiService = game:GetService("GuiService")
 
-return function()
-	-- upvalues: guiService (ref)
-	local guiInset, guiInset_1 = guiService:GetGuiInset()
+return function() --[[ Line: 10 | Named "getGlobalGuiInset" ]]
+	-- upvalues: GuiService (copy)
+	local GuiInset, GuiInset2 = GuiService:GetGuiInset()
 	
 	return {
-		top = guiInset.Y,
-		left = guiInset.X,
-		bottom = guiInset_1.Y,
-		right = guiInset_1.X
+		top = GuiInset.Y,
+		left = GuiInset.X,
+		bottom = GuiInset2.Y,
+		right = GuiInset2.X
 	}
 end

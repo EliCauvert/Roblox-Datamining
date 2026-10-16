@@ -1,65 +1,65 @@
-﻿local socialUpsell = script:FindFirstAncestor("SocialUpsell")
-local parent = socialUpsell.Parent
-local cryoModule = require(parent.Cryo)
-local signalsModule = require(parent.Signals)
-local _ = require(socialUpsell.Analytics.Enum.UpsellEntrySurfaceType)
-local _ = require(socialUpsell.Enum.SocialUpsellType)
-local _ = require(socialUpsell.Types)
-local var1 = nil
+﻿local SocialUpsell = script:FindFirstAncestor("SocialUpsell")
+local Parent = SocialUpsell.Parent
+local CryoModule = require(Parent.Cryo)
+local SignalsModule = require(Parent.Signals)
+local _ = require(SocialUpsell.Analytics.Enum.UpsellEntrySurfaceType)
+local _ = require(SocialUpsell.Enum.SocialUpsellType)
+local _ = require(SocialUpsell.Types)
+local v1 = nil
 
-local function createUpsellSignalStore()
-	-- upvalues: signalsModule (ref), cryoModule (ref)
+local function createUpsellSignalStore() --[[ Line: 37 ]]
+	-- upvalues: SignalsModule (copy), CryoModule (copy)
 	local t = {}
 	
-	local function _(p1)
-		-- upvalues: t (ref), signalsModule (copy)
-		local var2 = t[p1]
+	local function _(Key) --[[ Line: 40 | Named "getOrCreateUpsellBannerDataStore" ]]
+		-- upvalues: t (copy), SignalsModule (upval)
+		local Entry = t[Key]
 		
-		if var2 == nil then
-			local var3, var4 = signalsModule.createSignal(nil)
-			var2 = { getBannerData = var3, setBannerData = var4 }
-			t[p1] = var2
+		if Entry == nil then
+			local Signal, Signal2 = SignalsModule.createSignal(nil)
+			Entry = { getBannerData = Signal, setBannerData = Signal2 }
+			t[Key] = Entry
 		end
-		return var2
+		return Entry
 	end
 	
 	return {
-		getUpsellBannerDataGetter = function(p1)
-			-- upvalues: t (ref), signalsModule (copy)
-			local var2 = t[p1]
+		getUpsellBannerDataGetter = function(Key) --[[ Line: 53 ]]
+			-- upvalues: t (copy), SignalsModule (upval)
+			local Entry = t[Key]
 			
-			if var2 == nil then
-				local var3, var4 = signalsModule.createSignal(nil)
-				var2 = { getBannerData = var3, setBannerData = var4 }
-				t[p1] = var2
+			if Entry == nil then
+				local Signal, Signal2 = SignalsModule.createSignal(nil)
+				Entry = { getBannerData = Signal, setBannerData = Signal2 }
+				t[Key] = Entry
 			end
-			return var2.getBannerData
+			return Entry.getBannerData
 		end,
-		setUpsellBannerData = function(value, p1, p2)
-			-- upvalues: t (ref), signalsModule (copy), cryoModule (copy)
-			local var2 = t[value]
+		setUpsellBannerData = function(Key, p1, p2) --[[ Line: 57 ]]
+			-- upvalues: t (copy), SignalsModule (upval), CryoModule (upval)
+			local Entry = t[Key]
 			
-			if var2 == nil then
-				local var3, var4 = signalsModule.createSignal(nil)
-				var2 = { getBannerData = var3, setBannerData = var4 }
-				t[value] = var2
+			if Entry == nil then
+				local Signal, Signal2 = SignalsModule.createSignal(nil)
+				Entry = { getBannerData = Signal, setBannerData = Signal2 }
+				t[Key] = Entry
 			end
-			var2.setBannerData(function(p3)
-				-- upvalues: p2 (ref), cryoModule (copy), p1 (ref)
-				local var5 = cryoModule.Dictionary.join(p3 or {}, {
-					[p1] = if p2 ~= nil then cryoModule.None else { isVisible = true }
+			Entry.setBannerData(function(p3) --[[ Line: 62 ]]
+				-- upvalues: p2 (copy), CryoModule (upval), p1 (copy)
+				local JoinResult = CryoModule.Dictionary.join(p3 or {}, {
+					[p1] = if p2 == nil then CryoModule.None else { isVisible = true }
 				})
 				
-				return if next(var5) == nil then nil else var5
+				return if next(JoinResult) == nil then nil else JoinResult
 			end)
 		end
 	}
 end
 
-return function()
-	-- upvalues: var1 (write), signalsModule (ref), createUpsellSignalStore (ref)
-	if var1 == nil then
-		var1 = signalsModule.createComputed(createUpsellSignalStore)(false)
+return function() --[[ Line: 75 ]]
+	-- upvalues: v1 (ref), SignalsModule (copy), createUpsellSignalStore (copy)
+	if v1 == nil then
+		v1 = SignalsModule.createComputed(createUpsellSignalStore)(false)
 	end
-	return var1
+	return v1
 end

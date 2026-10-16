@@ -1,33 +1,36 @@
-﻿local httpService = game:GetService("HttpService")
+﻿local HttpService = game:GetService("HttpService")
 
-return function(p1, p2)
-	-- upvalues: httpService (ref)
+return function(StatusCode, p1) --[[ Line: 3 | Named "makeHttpServiceMock" ]]
+	-- upvalues: HttpService (copy)
 	return {
 		lastRequestParams = nil,
 		lastEncodedBody = nil,
-		RequestInternal = function(p3, p4)
-			-- upvalues: httpService (copy), p2 (ref), p1 (ref)
-			p3.lastRequestParams = p4
+		RequestInternal = function(p2, LastRequestParams) --[[ Line: 9 ]]
+			-- upvalues: HttpService (upval), p1 (copy), StatusCode (copy)
+			p2.lastRequestParams = LastRequestParams
 			
 			return {
-				Start = function(_, p5)
-					-- upvalues: httpService (copy), p2 (copy), p1 (copy)
-					task.defer(function()
-						-- upvalues: httpService (copy), p2 (copy), p1 (copy), p5 (ref)
-						p5(true, { Body = httpService:JSONEncode(p2 or {}), StatusCode = p1 })
+				Start = function(_, Callback) --[[ Line: 12 ]]
+					-- upvalues: HttpService (upval), p1 (upval), StatusCode (upval)
+					task.defer(function() --[[ Line: 13 ]]
+						-- upvalues: HttpService (upval), p1 (upval), StatusCode (upval), Callback (copy)
+						Callback(true, {
+							Body = HttpService:JSONEncode(p1 or {}),
+							StatusCode = StatusCode
+						})
 					end)
 				end
 			}
 		end,
-		JSONEncode = function(p3, p4)
-			-- upvalues: httpService (copy)
-			p3.lastEncodedBody = p4
+		JSONEncode = function(p2, LastEncodedBody) --[[ Line: 24 ]]
+			-- upvalues: HttpService (upval)
+			p2.lastEncodedBody = LastEncodedBody
 			
-			return httpService:JSONEncode(p4)
+			return HttpService:JSONEncode(LastEncodedBody)
 		end,
-		JSONDecode = function(_, p3)
-			-- upvalues: httpService (copy)
-			return httpService:JSONDecode(p3)
+		JSONDecode = function(_, Input) --[[ Line: 29 ]]
+			-- upvalues: HttpService (upval)
+			return HttpService:JSONDecode(Input)
 		end
 	}
 end

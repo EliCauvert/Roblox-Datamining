@@ -1,109 +1,112 @@
-﻿local inExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
-local parent = inExperienceSideSheet.Parent
-local reactModule = require(parent.React)
-local view = require(parent.Foundation).View
-local enumsModule = require(inExperienceSideSheet.Common.Enums)
-local _ = require(inExperienceSideSheet.Common.Types)
-local shortcutButtonModule = require(inExperienceSideSheet.Components.ShortcutButton)
-local buttonWidth = enumsModule.ButtonWidth
+﻿local InExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
+local Parent = InExperienceSideSheet.Parent
+local ReactModule = require(Parent.React)
+local View = require(Parent.Foundation).View
+local _ = require(InExperienceSideSheet.Common.Types)
+local ShortcutButtonModule = require(InExperienceSideSheet.Components.ShortcutButton)
+local ButtonWidth = require(InExperienceSideSheet.Common.Enums).ButtonWidth
 
-local function _(p1, p2, p3)
-	-- upvalues: reactModule (ref), shortcutButtonModule (ref)
-	return reactModule.createElement(shortcutButtonModule, {
+local function _(p1, LayoutOrder, Width) --[[ Line: 22 | Named "createShortcutButton" ]]
+	-- upvalues: ReactModule (copy), ShortcutButtonModule (copy)
+	return ReactModule.createElement(ShortcutButtonModule, {
 		label = p1.label,
 		getShortcutIcon = p1.getShortcutIcon,
 		getOnActivated = p1.getOnActivated,
 		getIsEnabled = p1.getIsEnabled,
-		width = p3,
-		layoutOrder = p2
+		width = Width,
+		layoutOrder = LayoutOrder
 	})
 end
 
-local function buildHalfWidthRowLayoutItem(p1, p2)
-	-- upvalues: buttonWidth (ref), reactModule (ref), shortcutButtonModule (ref), view (ref)
-	if #p1 == 1 then
-		local var1 = p1[1]
+local function buildHalfWidthRowLayoutItem(Entry, LayoutOrder) --[[ Line: 37 ]]
+	-- upvalues: ButtonWidth (copy), ReactModule (copy), ShortcutButtonModule (copy), View (copy)
+	if #Entry == 1 then
+		local Entry1 = Entry[1]
 		
 		return {
-			key = var1.name,
-			node = reactModule.createElement(shortcutButtonModule, {
-				label = var1.label,
-				getShortcutIcon = var1.getShortcutIcon,
-				getOnActivated = var1.getOnActivated,
-				getIsEnabled = var1.getIsEnabled,
-				width = buttonWidth.Full,
-				layoutOrder = p2
+			key = Entry1.name,
+			node = ReactModule.createElement(ShortcutButtonModule, {
+				label = Entry1.label,
+				getShortcutIcon = Entry1.getShortcutIcon,
+				getOnActivated = Entry1.getOnActivated,
+				getIsEnabled = Entry1.getIsEnabled,
+				width = ButtonWidth.Full,
+				layoutOrder = LayoutOrder
 			})
 		}
 	end
-	local t = {}
+	local Elements = {}
 	
-	for i, v in p1 do
-		t[v.name] = reactModule.createElement(shortcutButtonModule, {
-			label = v.label,
-			getShortcutIcon = v.getShortcutIcon,
-			getOnActivated = v.getOnActivated,
-			getIsEnabled = v.getIsEnabled,
-			width = buttonWidth.Half,
-			layoutOrder = i
+	for LayoutOrder1, value in Entry do
+		Elements[value.name] = ReactModule.createElement(ShortcutButtonModule, {
+			label = value.label,
+			getShortcutIcon = value.getShortcutIcon,
+			getOnActivated = value.getOnActivated,
+			getIsEnabled = value.getIsEnabled,
+			width = ButtonWidth.Half,
+			layoutOrder = LayoutOrder1
 		})
 	end
 	return {
-		key = "HalfWidthRow_" .. p4,
-		node = reactModule.createElement(view, {
+		key = "HalfWidthRow_" .. LayoutOrder,
+		node = ReactModule.createElement(View, {
 			tag = "row gap-small size-full-0 auto-y",
-			LayoutOrder = p2
-		}, t)
+			LayoutOrder = LayoutOrder
+		}, Elements)
 	}
 end
 
-return function(p3)
-	-- upvalues: buildHalfWidthRowLayoutItem (ref), buttonWidth (ref), reactModule (ref), shortcutButtonModule (ref)
-	local t = {}
-	local var2 = 0
-	local t_1 = {}
+return function(List) --[[ Line: 63 | Named "buildSessionActionButtonLayout" ]]
+	-- upvalues: buildHalfWidthRowLayoutItem (copy), ButtonWidth (copy), ReactModule (copy), ShortcutButtonModule (copy)
+	local Nodes = {}
+	local LayoutOrder = 0
+	local Tbl = {}
 	
-	local function _()
-		-- upvalues: t_1 (ref), var2 (write), buildHalfWidthRowLayoutItem (copy), t (ref)
-		if #t_1 == 0 then
+	local function _() --[[ Line: 68 | Named "flushHalfRow" ]]
+		-- upvalues: Tbl (copy), LayoutOrder (ref), buildHalfWidthRowLayoutItem (upval), Nodes (copy)
+		if #Tbl ~= 0 then
+			LayoutOrder += 1
+			local HalfWidthRowLayoutItem = buildHalfWidthRowLayoutItem(Tbl, LayoutOrder)
+			Nodes[HalfWidthRowLayoutItem.key] = HalfWidthRowLayoutItem.node
+			table.clear(Tbl)
+			
 			return
 		end
-		var2 += 1
-		local var3 = buildHalfWidthRowLayoutItem(t_1, var2)
-		t[var3.key] = var3.node
-		table.clear(t_1)
 	end
 	
-	for i, v in p3 do
-		if (v.width or buttonWidth.Full) == buttonWidth.Half then
-			table.insert(t_1, v)
+	for _, value in List do
+		if (value.width or ButtonWidth.Full) == ButtonWidth.Half then
+			table.insert(Tbl, value)
 			
-			if #t_1 == 2 and #t_1 ~= 0 then
-				var2 += 1
-				local var3 = buildHalfWidthRowLayoutItem(t_1, var2)
-				t[var3.key] = var3.node
-				table.clear(t_1)
+			if #Tbl == 2 and #Tbl ~= 0 then
+				LayoutOrder += 1
+				local HalfWidthRowLayoutItem = buildHalfWidthRowLayoutItem(Tbl, LayoutOrder)
+				Nodes[HalfWidthRowLayoutItem.key] = HalfWidthRowLayoutItem.node
+				table.clear(Tbl)
 			end
-		elseif #t_1 ~= 0 then
-			var2 += 1
-			local var4 = buildHalfWidthRowLayoutItem(t_1, var2)
-			t[var4.key] = var4.node
-			table.clear(t_1)
+		else
+			if #Tbl ~= 0 then
+				LayoutOrder += 1
+				local HalfWidthRowLayoutItem = buildHalfWidthRowLayoutItem(Tbl, LayoutOrder)
+				Nodes[HalfWidthRowLayoutItem.key] = HalfWidthRowLayoutItem.node
+				table.clear(Tbl)
+			end
+			LayoutOrder += 1
+			Nodes[value.name] = ReactModule.createElement(ShortcutButtonModule, {
+				label = value.label,
+				getShortcutIcon = value.getShortcutIcon,
+				getOnActivated = value.getOnActivated,
+				getIsEnabled = value.getIsEnabled,
+				width = ButtonWidth.Full,
+				layoutOrder = LayoutOrder
+			})
 		end
-		var2 += 1
-		t[v.name] = reactModule.createElement(shortcutButtonModule, {
-			label = v.label,
-			getShortcutIcon = v.getShortcutIcon,
-			getOnActivated = v.getOnActivated,
-			getIsEnabled = v.getIsEnabled,
-			width = buttonWidth.Full,
-			layoutOrder = var2
-		})
 	end
-	if #t_1 ~= 0 then
-		local var5 = buildHalfWidthRowLayoutItem(t_1, var2 + 1)
-		t[var5.key] = var5.node
-		table.clear(t_1)
+	if #Tbl ~= 0 then
+		LayoutOrder += 1
+		local HalfWidthRowLayoutItem = buildHalfWidthRowLayoutItem(Tbl, LayoutOrder)
+		Nodes[HalfWidthRowLayoutItem.key] = HalfWidthRowLayoutItem.node
+		table.clear(Tbl)
 	end
-	return t
+	return Nodes
 end

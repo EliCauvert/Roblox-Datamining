@@ -1,90 +1,89 @@
-﻿local socialCarousel = script:FindFirstAncestor("SocialCarousel")
-local parent = socialCarousel.Parent
-local roactModule = require(parent.Dev.Roact)
-local roactRoduxModule = require(parent.RoactRodux)
-local roduxModule = require(parent.Rodux)
-local UIBloxModule = require(parent.UIBlox)
-local cryoModule = require(parent.Cryo)
-local styleModule = require(parent.Style)
-local apolloClientModule = require(parent.ApolloClient)
-local foundationModule = require(parent.Foundation)
-local roactNavigationModule = require(parent.RoactNavigation)
-local mockLocale = require(parent.Dev.SocialTestHelpers).StoryHelpers.mockLocale
-local universalAppPolicy = require(parent.UniversalAppPolicy).UniversalAppPolicy
-UIBloxModule.init(require(parent.Dev.RobloxAppUIBloxConfig))
-local foundationProvider = foundationModule.FoundationProvider
-local styleProviderWithDefaultTheme = styleModule.StyleProviderWithDefaultTheme
-local designTokenProvider = require(parent.Style).DesignTokenProvider
-local mockApolloClient = require(parent.GraphQLServer).ApolloClientTestUtils.mockApolloClient
-local colorMode = foundationModule.Enums.ColorMode
-local device = foundationModule.Enums.Device
-roactModule.setGlobalConfig({ elementTracing = true })
-local t = { language = "en-us" }
-local t_1 = { Light = colorMode.Light, Dark = colorMode.Dark }
-local t_2 = { Console = device.Console, Desktop = device.Desktop }
+﻿local SocialCarousel = script:FindFirstAncestor("SocialCarousel")
+local Parent = SocialCarousel.Parent
+local RoactModule = require(Parent.Dev.Roact)
+local RoactRoduxModule = require(Parent.RoactRodux)
+local RoduxModule = require(Parent.Rodux)
+local CryoModule = require(Parent.Cryo)
+local StyleModule = require(Parent.Style)
+local ApolloClientModule = require(Parent.ApolloClient)
+local FoundationModule = require(Parent.Foundation)
+local RoactNavigationModule = require(Parent.RoactNavigation)
+local MockLocaleFunction = require(Parent.Dev.SocialTestHelpers).StoryHelpers.mockLocale
+local UniversalAppPolicy = require(Parent.UniversalAppPolicy).UniversalAppPolicy
+require(Parent.UIBlox).init((require(Parent.Dev.RobloxAppUIBloxConfig)))
+local FoundationProvider = FoundationModule.FoundationProvider
+local StyleProviderWithDefaultTheme = StyleModule.StyleProviderWithDefaultTheme
+local DesignTokenProvider = require(Parent.Style).DesignTokenProvider
+local MockApolloClientFunction = require(Parent.GraphQLServer).ApolloClientTestUtils.mockApolloClient
+local ColorMode = FoundationModule.Enums.ColorMode
+local Device = FoundationModule.Enums.Device
+RoactModule.setGlobalConfig({ elementTracing = true })
+local config = { language = "en-us" }
+local config1 = { Light = ColorMode.Light, Dark = ColorMode.Dark }
+local config2 = { Console = Device.Console, Desktop = Device.Desktop }
 
-local var1 = function(p1)
-	-- upvalues: roduxModule (ref), cryoModule (ref)
-	return roduxModule.Store.new(function()
-		-- upvalues: cryoModule (copy), p1 (ref)
-		return cryoModule.Dictionary.join(p1, {
+local function v19(State) --[[ Line: 44 ]]
+	-- upvalues: RoduxModule (copy), CryoModule (copy)
+	return RoduxModule.Store.new(function() --[[ Line: 45 ]]
+		-- upvalues: CryoModule (upval), State (copy)
+		return CryoModule.Dictionary.join(State, {
 			ScreenSize = Vector2.new(600, 600),
 			TopBar = { topBarHeight = 0 },
 			GlobalGuiInset = { left = 0, top = 0, right = 0, bottom = 0 }
 		})
-	end, {}, { roduxModule.thunkMiddleware })
+	end, {}, { RoduxModule.thunkMiddleware })
 end
 
 return {
 	name = "SocialCarousel",
-	storyRoot = socialCarousel,
-	roact = roactModule,
-	roactRodux = roactRoduxModule,
-	mapDefinition = function(p1)
-		-- upvalues: cryoModule (ref), t (ref)
-		return cryoModule.Dictionary.join(p1, {
-			controls = cryoModule.Dictionary.join(t, p1.controls or {})
+	storyRoot = SocialCarousel,
+	roact = RoactModule,
+	roactRodux = RoactRoduxModule,
+	mapDefinition = function(p1) --[[ Line: 66 ]]
+		-- upvalues: CryoModule (copy), config (copy)
+		return CryoModule.Dictionary.join(p1, {
+			controls = CryoModule.Dictionary.join(config, p1.controls or {})
 		})
 	end,
-	mapStory = function(p1)
-		-- upvalues: t_1 (ref), roactModule (ref), styleProviderWithDefaultTheme (ref), universalAppPolicy (ref), roactNavigationModule (ref), roactRoduxModule (ref), var1 (ref), apolloClientModule (ref), mockApolloClient (ref), foundationProvider (ref), t_2 (ref), designTokenProvider (ref), mockLocale (ref)
-		return function(p2)
-			-- upvalues: t_1 (copy), roactModule (copy), styleProviderWithDefaultTheme (copy), universalAppPolicy (copy), roactNavigationModule (copy), roactRoduxModule (copy), var1 (copy), apolloClientModule (copy), mockApolloClient (copy), foundationProvider (copy), t_2 (copy), designTokenProvider (copy), mockLocale (copy), p1 (ref)
-			return roactModule.createElement(styleProviderWithDefaultTheme, { withDarkTheme = true, withUiModeSupport = false }, {
-				roactModule.createElement(universalAppPolicy.Provider, {
+	mapStory = function(p1) --[[ Line: 70 ]]
+		-- upvalues: config1 (copy), RoactModule (copy), StyleProviderWithDefaultTheme (copy), UniversalAppPolicy (copy), RoactNavigationModule (copy), RoactRoduxModule (copy), v19 (copy), ApolloClientModule (copy), MockApolloClientFunction (copy), FoundationProvider (copy), config2 (copy), DesignTokenProvider (copy), MockLocaleFunction (copy)
+		return function(p2) --[[ Line: 71 ]]
+			-- upvalues: config1 (upval), RoactModule (upval), StyleProviderWithDefaultTheme (upval), UniversalAppPolicy (upval), RoactNavigationModule (upval), RoactRoduxModule (upval), v19 (upval), ApolloClientModule (upval), MockApolloClientFunction (upval), FoundationProvider (upval), config2 (upval), DesignTokenProvider (upval), MockLocaleFunction (upval), p1 (copy)
+			return RoactModule.createElement(StyleProviderWithDefaultTheme, { withDarkTheme = true, withUiModeSupport = false }, {
+				RoactModule.createElement(UniversalAppPolicy.Provider, {
 					policy = {
-						function()
+						function() --[[ Line: 80 ]]
 							return {
-								useGridPageLayout = function()
+								useGridPageLayout = function(): boolean --[[ Line: 82 ]]
 									return true
 								end
 							}
 						end
 					}
 				}, {
-					navigationProvider = roactModule.createElement(roactNavigationModule.Provider, {
+					navigationProvider = RoactModule.createElement(RoactNavigationModule.Provider, {
 						value = {
 							state = { routeName = "appPage" },
-							isFocused = function()
+							isFocused = function(): boolean --[[ Line: 94 ]]
 								return false
 							end,
-							addListener = function()
-								return { remove = function() end }
+							addListener = function() --[[ Line: 97 ]]
+								return { remove = function() --[[ Line: 99 ]] end }
 							end,
-							getParam = function(_, p3)
+							getParam = function(_, p3) --[[ Line: 102 ]]
 								return p3
 							end,
-							navigate = function() end
+							navigate = function() --[[ Line: 105 ]] end
 						}
 					}, {
-						storeProvider = roactModule.createElement(roactRoduxModule.StoreProvider, { store = var1(p2.definition.state or {}) }, {
-							apolloClient = roactModule.createElement(apolloClientModule.ApolloProvider, { client = mockApolloClient({}) }, {
-								foundationProvider = roactModule.createElement(foundationProvider, {
-									colorMode = t_1[p2.theme],
-									device = t_2[p2.platform],
+						storeProvider = RoactModule.createElement(RoactRoduxModule.StoreProvider, { store = v19(p2.definition.state or {}) }, {
+							apolloClient = RoactModule.createElement(ApolloClientModule.ApolloProvider, { client = MockApolloClientFunction({}) }, {
+								foundationProvider = RoactModule.createElement(FoundationProvider, {
+									colorMode = config1[p2.theme],
+									device = config2[p2.platform],
 									preferences = p2.settings
 								}, {
-									designTokenProvider = roactModule.createElement(designTokenProvider, { tokenMappers = {} }, { Child = mockLocale(p1, p2) })
+									designTokenProvider = RoactModule.createElement(DesignTokenProvider, { tokenMappers = {} }, { Child = MockLocaleFunction(p1, p2) })
 								})
 							})
 						})

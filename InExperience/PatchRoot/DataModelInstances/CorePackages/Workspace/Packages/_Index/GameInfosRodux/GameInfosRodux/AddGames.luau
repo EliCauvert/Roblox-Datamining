@@ -1,8 +1,8 @@
-﻿local parent = script:FindFirstAncestor("GameInfosRodux").Parent
-local _ = require(parent.DiscoveryTypes)
+﻿local Parent = script:FindFirstAncestor("GameInfosRodux").Parent
+local _ = require(Parent.DiscoveryTypes)
 
-return require(parent.Rodux).makeActionCreator(script.Name, function(p1)
-	assert(type(p1) == "table", string.format("AddGames action expects games to be a table, was %s", type(p1)))
+return require(Parent.Rodux).makeActionCreator(script.Name, function(Games) --[[ Line: 9 ]]
+	assert(type(Games) == "table", string.format("AddGames action expects games to be a table, was %s", (type(Games))))
 	
-	return { games = p1 }
+	return { games = Games }
 end)

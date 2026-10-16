@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.RobloxSubscriptionPurchaseApp.RobloxSubscriptionPurchaseApp)
+﻿return (require(script.Parent.Parent.Parent._Index.RobloxSubscriptionPurchaseApp.RobloxSubscriptionPurchaseApp))

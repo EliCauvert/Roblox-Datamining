@@ -1,20 +1,20 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
-local constantsModule = require(parent_1.Constants)
-local validateThemeModule = require(parent_1.Validator.validateTheme)
-local t = {
-	[constantsModule.ThemeName.Dark:lower()] = require(parent.DarkTheme),
-	[constantsModule.ThemeName.Light:lower()] = require(parent.LightTheme)
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
+local ConstantsModule = require(Parent1.Constants)
+local ValidateThemeModule = require(Parent1.Validator.validateTheme)
+local config = {
+	[ConstantsModule.ThemeName.Dark:lower()] = require(Parent.DarkTheme),
+	[ConstantsModule.ThemeName.Light:lower()] = require(Parent.LightTheme)
 }
 
-return function(p1)
-	-- upvalues: t (ref), constantsModule (ref), validateThemeModule (ref)
-	local var1 = if not (p1 == nil or #p1 <= 0) then t[p1:lower()] else nil
+return function(Text: string) --[[ Line: 15 ]]
+	-- upvalues: config (copy), ConstantsModule (copy), ValidateThemeModule (copy)
+	local Entry = if Text ~= nil and #Text > 0 then config[Text:lower()] else nil
 	
-	if var1 == nil then
-		var1 = t[constantsModule.DefaultThemeName:lower()]
+	if Entry == nil then
+		Entry = config[ConstantsModule.DefaultThemeName:lower()]
 	end
-	assert(validateThemeModule(var1))
+	assert(ValidateThemeModule(Entry))
 	
-	return var1
+	return Entry
 end

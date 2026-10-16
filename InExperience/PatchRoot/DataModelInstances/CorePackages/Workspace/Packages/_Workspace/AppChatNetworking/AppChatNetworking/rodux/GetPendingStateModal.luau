@@ -1,10 +1,10 @@
-﻿local CHAT_PLATFORM_BASE_URLModule = require(script:FindFirstAncestor("AppChatNetworking").url.CHAT_PLATFORM_BASE_URL)
+﻿local CHATPLATFORMBASEURLModule = require(script:FindFirstAncestor("AppChatNetworking").url.CHAT_PLATFORM_BASE_URL)
 
-return require(script.Parent.RoduxNetworking).POST(script.Name, function(p1, p2, p3)
-	-- upvalues: CHAT_PLATFORM_BASE_URLModule (ref)
-	return p1(CHAT_PLATFORM_BASE_URLModule):path("v2"):path("get-modal-sequence"):body({
+return require(script.Parent.RoduxNetworking).POST(script.Name, function(Callback, Conversation_id, Is_in_experience) --[[ Line: 6 ]]
+	-- upvalues: CHATPLATFORMBASEURLModule (copy)
+	return Callback(CHATPLATFORMBASEURLModule):path("v2"):path("get-modal-sequence"):body({
 		modal_sequence = "pending_state_modal",
-		is_in_experience = p3,
-		conversation_id = p2
+		is_in_experience = Is_in_experience,
+		conversation_id = Conversation_id
 	})
 end)

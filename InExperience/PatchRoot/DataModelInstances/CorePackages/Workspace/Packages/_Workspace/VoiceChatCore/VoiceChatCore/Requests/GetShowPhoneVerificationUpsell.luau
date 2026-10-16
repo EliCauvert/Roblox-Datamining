@@ -1,12 +1,12 @@
-﻿local constantsModule = require(script:FindFirstAncestor("VoiceChatCore").Constants)
+﻿local ConstantsModule = require(script:FindFirstAncestor("VoiceChatCore").Constants)
 
-return function(p1, p2, p3, p4)
-	-- upvalues: constantsModule (ref)
-	assert(type(p2) == "string", "GetShowPhoneVerificationUpsell request expects universeId to be a string")
-	local formattedText = string.format("%s/v1/phone-verification/configuration?layerName=%s&experienceId=%s", constantsModule.UPSELL_CARD_URL, p3, p2)
+return function(Callback, p1, p2, Text: number) --[[ Line: 4 ]]
+	-- upvalues: ConstantsModule (copy)
+	assert(type(p1) == "string", "GetShowPhoneVerificationUpsell request expects universeId to be a string")
+	local Formatted = string.format("%s/v1/phone-verification/configuration?layerName=%s&experienceId=%s", ConstantsModule.UPSELL_CARD_URL, p2, p1)
 	
-	if p4 and p4 > 0 then
-		formattedText ..= "&sessionStartTime=" .. p3
+	if Text and Text > 0 then
+		Formatted ..= "&sessionStartTime=" .. Text
 	end
-	return p1(formattedText, "GET")
+	return Callback(Formatted, "GET")
 end

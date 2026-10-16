@@ -1,148 +1,147 @@
-﻿local gameTile = script:FindFirstAncestor("GameTile")
-local parent = gameTile.Parent
-local reactModule = require(parent.React)
-local useDesignTokens = require(parent.Style).useDesignTokens
-local colors = require(parent.Style).Colors
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local array = require(parent.LuauPolyfill).Array
-local UIBloxModule = require(parent.UIBlox)
-local useStyle = UIBloxModule.Core.Style.useStyle
-local useTextSizeOffset = UIBloxModule.Core.Style.useTextSizeOffset
-local coPlayFooter = UIBloxModule.App.Tile.ExperienceTileMetadata.CoPlayFooter
-local userProfilesModule = require(parent.UserProfiles)
-local useUserProfilesFetch = userProfilesModule.Hooks.useUserProfilesFetch
-local sortFriendsByPresenceAndRecencyFactoryModule = require(gameTile.sortFriendsByPresenceAndRecencyFactory)
-local fFlagLuaAppMigrateGameTileActiveFriendsHydrationFix = require(parent.SharedFlags).FFlagLuaAppMigrateGameTileActiveFriendsHydrationFix
+﻿local GameTile = script:FindFirstAncestor("GameTile")
+local Parent = GameTile.Parent
+local ReactModule = require(Parent.React)
+local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
+local Colors = require(Parent.Style).Colors
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local Array = require(Parent.LuauPolyfill).Array
+local UIBloxModule = require(Parent.UIBlox)
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local UseTextSizeOffsetFunction = UIBloxModule.Core.Style.useTextSizeOffset
+local CoPlayFooter = UIBloxModule.App.Tile.ExperienceTileMetadata.CoPlayFooter
+local UserProfilesModule = require(Parent.UserProfiles)
+local UseUserProfilesFetchFunction = UserProfilesModule.Hooks.useUserProfilesFetch
+local SortFriendsByPresenceAndRecencyFactoryModule = require(GameTile.sortFriendsByPresenceAndRecencyFactory)
+local FFlagLuaAppMigrateGameTileActiveFriendsHydrationFix = require(Parent.SharedFlags).FFlagLuaAppMigrateGameTileActiveFriendsHydrationFix
 
-local function useFetchSortedDisplayNames(p1)
-	-- upvalues: useUserProfilesFetch (ref), userProfilesModule (ref), sortFriendsByPresenceAndRecencyFactoryModule (ref)
-	local t = {}
-	local var1 = useUserProfilesFetch({
-		userIds = p1,
-		query = userProfilesModule.Queries.userProfilesCombinedNameByUserIds,
-		skip = not p1 or #p1 == 0
+local function useFetchSortedDisplayNames(UserIds) --[[ Line: 55 ]]
+	-- upvalues: UseUserProfilesFetchFunction (copy), UserProfilesModule (copy), SortFriendsByPresenceAndRecencyFactoryModule (copy)
+	local List = {}
+	local UseUserProfilesFetchResult = UseUserProfilesFetchFunction({
+		userIds = UserIds,
+		query = UserProfilesModule.Queries.userProfilesCombinedNameByUserIds,
+		skip = not UserIds or #UserIds == 0
 	})
 	
-	if var1 and var1.data and p1 then
-		for i, v in p1 do
-			table.insert(t, {
-				userId = v,
-				displayName = userProfilesModule.Selectors.getCombinedNameFromId(var1.data, v)
+	if UseUserProfilesFetchResult and UseUserProfilesFetchResult.data and UserIds then
+		for _, userId in UserIds do
+			table.insert(List, {
+				userId = userId,
+				displayName = UserProfilesModule.Selectors.getCombinedNameFromId(UseUserProfilesFetchResult.data, userId)
 			})
 		end
 	end
-	table.sort(t, sortFriendsByPresenceAndRecencyFactoryModule("displayName"))
+	table.sort(List, SortFriendsByPresenceAndRecencyFactoryModule("displayName"))
 	
-	return t
+	return List
 end
 
 return {
-	GridTileFriendFooter = function(p2)
-		-- upvalues: useStyle (ref), useDesignTokens (ref), useTextSizeOffset (ref), useLocalization (ref), fFlagLuaAppMigrateGameTileActiveFriendsHydrationFix (ref), useFetchSortedDisplayNames (ref), reactModule (ref), coPlayFooter (ref), array (ref), colors (ref)
-		local var2 = if p2.useLargerFont then useStyle().Font.Body else useStyle().Font.CaptionHeader
-		local global = useDesignTokens().Global
-		local var3 = useTextSizeOffset()
-		local var4 = useLocalization({
+	GridTileFriendFooter = function(p1) --[[ Line: 77 ]]
+		-- upvalues: UseStyleFunction (copy), UseDesignTokensFunction (copy), UseTextSizeOffsetFunction (copy), UseLocalizationFunction (copy), FFlagLuaAppMigrateGameTileActiveFriendsHydrationFix (copy), useFetchSortedDisplayNames (copy), ReactModule (copy), CoPlayFooter (copy), Array (copy), Colors (copy)
+		local Body = if p1.useLargerFont then UseStyleFunction().Font.Body else UseStyleFunction().Font.CaptionHeader
+		local Size = UseDesignTokensFunction().Size
+		local UseTextSizeOffsetResult = UseTextSizeOffsetFunction()
+		local UseLocalizationResult = UseLocalizationFunction({
 			friendsSeparator = "Feature.GameDetails.Label.FriendsSeparator"
 		})
-		local space50 = global.Space_50
+		local Size100 = Size.Size_100
 		
-		if not p2.showOnlineBorder then
-			space50 -= 3
+		if not p1.showOnlineBorder then
+			Size100 -= 3
 		end
-		if fFlagLuaAppMigrateGameTileActiveFriendsHydrationFix then
-			local var5 = useFetchSortedDisplayNames(p2.friendUserIds or {})
-			local createElement = reactModule.createElement
-			local var6 = "TextButton"
-			local t = {
-				Size = UDim2.new(1, 0, 0, global.Space_250 + var3),
+		if FFlagLuaAppMigrateGameTileActiveFriendsHydrationFix then
+			local UseFetchSortedDisplayNamesResult = useFetchSortedDisplayNames(p1.friendUserIds or {})
+			local CreateElementFunction1 = ReactModule.createElement
+			local v1 = "TextButton"
+			local config = {
+				Size = UDim2.new(1, 0, 0, Size.Size_500 + UseTextSizeOffsetResult),
 				BackgroundTransparency = 1,
 				Text = "",
 				AutoButtonColor = false,
-				[reactModule.Event.Activated] = p2.onFriendFooterActivated,
+				[ReactModule.Event.Activated] = p1.onFriendFooterActivated,
 				Selectable = false
 			}
-			local t_1 = {}
-			local createElement_1 = reactModule.createElement
-			local var7 = coPlayFooter
-			local t_2 = { faceGroupCount = 2 }
-			local t_3 = {}
+			local t = {}
+			local CreateElementFunction = ReactModule.createElement
+			local config1 = { faceGroupCount = 2 }
+			local Users = {}
 			
-			for i = 1, #var5 do
-				t_3[i] = var5[i].userId
+			for i = 1, #UseFetchSortedDisplayNamesResult do
+				Users[i] = UseFetchSortedDisplayNamesResult[i].userId
 			end
-			t_2.users = t_3
-			t_2.labelText = array.join(array.map(var5, function(p3)
-				return p3.displayName
-			end), var4.friendsSeparator)
-			t_2.showEmphasisBorder = p2.showOnlineBorder
-			t_2.styleProps = {
+			config1.users = Users
+			config1.labelText = Array.join(Array.map(UseFetchSortedDisplayNamesResult, function(p2) --[[ Line: 48 ]]
+				return p2.displayName
+			end), UseLocalizationResult.friendsSeparator)
+			config1.showEmphasisBorder = p1.showOnlineBorder
+			config1.styleProps = {
 				badgeBorderWidth = 3,
-				faceWidth = global.Size_250,
-				faceHeight = global.Size_250,
-				faceGroupGap = -global.Space_75,
-				containerGap = space50,
-				badgeHeight = global.Size_250,
-				fontStyle = var2,
-				badgeSpacingLeading = global.Space_50,
-				badgeSpacingTrailing = global.Space_50,
-				badgeBackgroundColor = { Transparency = 0, Color = colors.Smoke },
-				badgeContentColor = { Transparency = 0, Color = colors.White }
+				faceWidth = Size.Size_500,
+				faceHeight = Size.Size_500,
+				faceGroupGap = -Size.Size_150,
+				containerGap = Size100,
+				badgeHeight = Size.Size_500,
+				fontStyle = Body,
+				badgeSpacingLeading = Size.Size_100,
+				badgeSpacingTrailing = Size.Size_100,
+				badgeBackgroundColor = { Transparency = 0, Color = Colors.Smoke },
+				badgeContentColor = { Transparency = 0, Color = Colors.White }
 			}
-			t_1.OnlineFriends = createElement_1(var7, t_2)
+			t.OnlineFriends = CreateElementFunction(CoPlayFooter, config1)
 			
-			return createElement(var6, t, t_1)
+			return (CreateElementFunction1(v1, config, t))
 		else
-			local createElement = reactModule.createElement
-			local var8 = "Frame"
-			local t = {
+			local CreateElementFunction3 = ReactModule.createElement
+			local v2 = "Frame"
+			local config2 = {
 				BackgroundTransparency = 1,
-				Size = UDim2.new(1, 0, 0, global.Space_250 + var3)
+				Size = UDim2.new(1, 0, 0, Size.Size_500 + UseTextSizeOffsetResult)
 			}
-			local t_1 = {}
-			local createElement_1 = reactModule.createElement
-			local t_2 = { faceGroupCount = 2 }
-			local friends = p2.friends or {}
-			local t_3 = {}
+			local t1 = {}
+			local CreateElementFunction2 = ReactModule.createElement
+			local config3 = { faceGroupCount = 2 }
+			local Friends = p1.friends or {}
+			local Users1 = {}
 			
-			for i_1 = 1, #friends do
-				t_3[i_1] = friends[i_1].userId
+			for i1 = 1, #Friends do
+				Users1[i1] = Friends[i1].userId
 			end
-			t_2.users = t_3
-			t_2.labelText = array.join(array.map(p2.friends or {}, function(p3)
-				return p3.displayName
-			end), var4.friendsSeparator)
-			t_2.showEmphasisBorder = p2.showOnlineBorder
-			t_2.styleProps = {
+			config3.users = Users1
+			config3.labelText = Array.join(Array.map(p1.friends or {}, function(p2) --[[ Line: 48 ]]
+				return p2.displayName
+			end), UseLocalizationResult.friendsSeparator)
+			config3.showEmphasisBorder = p1.showOnlineBorder
+			config3.styleProps = {
 				badgeBorderWidth = 3,
-				faceWidth = global.Size_250,
-				faceHeight = global.Size_250,
-				faceGroupGap = -global.Space_75,
-				containerGap = space50,
-				badgeHeight = global.Size_250,
-				fontStyle = var2,
-				badgeSpacingLeading = global.Space_50,
-				badgeSpacingTrailing = global.Space_50,
-				badgeBackgroundColor = { Transparency = 0, Color = colors.Smoke },
-				badgeContentColor = { Transparency = 0, Color = colors.White }
+				faceWidth = Size.Size_500,
+				faceHeight = Size.Size_500,
+				faceGroupGap = -Size.Size_150,
+				containerGap = Size100,
+				badgeHeight = Size.Size_500,
+				fontStyle = Body,
+				badgeSpacingLeading = Size.Size_100,
+				badgeSpacingTrailing = Size.Size_100,
+				badgeBackgroundColor = { Transparency = 0, Color = Colors.Smoke },
+				badgeContentColor = { Transparency = 0, Color = Colors.White }
 			}
-			t_1.OnlineFriends = createElement_1(coPlayFooter, t_2)
+			t1.OnlineFriends = CreateElementFunction2(CoPlayFooter, config3)
 			
-			return createElement(var8, t, t_1)
+			return CreateElementFunction3(v2, config2, t1)
 		end
 	end,
-	getUserIdsForFacePile = function(p3)
-		local t = {}
+	getUserIdsForFacePile = function(p2) --[[ Line: 37 ]]
+		local UserIds = {}
 		
-		for i = 1, #p3 do
-			t[i] = p3[i].userId
+		for i = 1, #p2 do
+			UserIds[i] = p2[i].userId
 		end
-		return t
+		return UserIds
 	end,
-	getDisplayName = function(p4, p5)
-		-- upvalues: array (ref)
-		return array.join(array.map(p4, function(p6)
-			return p6.displayName
-		end), p5)
+	getDisplayName = function(p3, p4) --[[ Line: 46 ]]
+		-- upvalues: Array (copy)
+		return Array.join(Array.map(p3, function(p5) --[[ Line: 48 ]]
+			return p5.displayName
+		end), p4)
 	end
 }

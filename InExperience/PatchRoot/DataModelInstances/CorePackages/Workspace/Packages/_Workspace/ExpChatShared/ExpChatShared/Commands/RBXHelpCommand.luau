@@ -1,13 +1,13 @@
 ﻿local _ = require(script.Parent.types)
-local expChatLocalUserCountEnabledEngineFeature = game:GetEngineFeature("ExpChatLocalUserCountEnabled")
-local expChatEnableVirtualLocalOnlineCommand = game:DefineFastFlag("ExpChatEnableVirtualLocalOnlineCommand", false)
+local ExpChatLocalUserCountEnabledEngineFeature = game:GetEngineFeature("ExpChatLocalUserCountEnabled")
+local ExpChatEnableVirtualLocalOnlineCommand = game:DefineFastFlag("ExpChatEnableVirtualLocalOnlineCommand", false)
 
 return {
 	name = script.Name,
 	alias = { "/help", "/?" },
-	clientRun = function()
-		-- upvalues: expChatLocalUserCountEnabledEngineFeature (ref), expChatEnableVirtualLocalOnlineCommand (ref)
-		return if expChatLocalUserCountEnabledEngineFeature and expChatEnableVirtualLocalOnlineCommand then {
+	clientRun = function() --[[ Line: 9 ]]
+		-- upvalues: ExpChatLocalUserCountEnabledEngineFeature (copy), ExpChatEnableVirtualLocalOnlineCommand (copy)
+		return if ExpChatLocalUserCountEnabledEngineFeature and ExpChatEnableVirtualLocalOnlineCommand then {
 			metadata = "Roblox.Help.Info",
 			args = nil,
 			key = {

@@ -1,177 +1,190 @@
-﻿local httpService = game:GetService("HttpService")
-local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local cryoModule = require(parent.Cryo)
-local _ = require(parent.HttpClient)
-local fFlagBuildExperienceAnalyticsBreakdownsModule = require(dataHydration.ExperienceAnalytics.FFlagBuildExperienceAnalyticsBreakdowns)
-local createDataCacheModule = require(dataHydration.createDataCache)
-local createDataResolverModule = require(dataHydration.createDataResolver)
-local _ = require(dataHydration.DataHydrationTypes)
-local fetchExperienceMetricModule = require(script.Parent.fetchExperienceMetric)
-local fetchMetricMetadataModule = require(script.Parent.fetchMetricMetadata)
+﻿local HttpService = game:GetService("HttpService")
+local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local CryoModule = require(Parent.Cryo)
+local _ = require(Parent.HttpClient)
+local FFlagBuildExperienceAnalyticsBreakdownsModule = require(DataHydration.ExperienceAnalytics.FFlagBuildExperienceAnalyticsBreakdowns)
+local CreateDataCacheModule = require(DataHydration.createDataCache)
+local CreateDataResolverModule = require(DataHydration.createDataResolver)
+local _ = require(DataHydration.DataHydrationTypes)
+local FetchExperienceMetricModule = require(script.Parent.fetchExperienceMetric)
+local FetchMetricMetadataModule = require(script.Parent.fetchMetricMetadata)
 local _ = require(script.Parent.ExperienceAnalyticsStoreTypes)
 
-local function encodeFilters(p1)
-	-- upvalues: cryoModule (ref)
-	local t = {}
+local function encodeFilters(Filters) --[[ Line: 44 ]]
+	-- upvalues: CryoModule (copy)
+	local List = {}
 	
-	for i, v in cryoModule.List.sort(p1, function(p2, p3)
-		return if p2.dimension == p3.dimension then p2.operation < p3.operation else p2.dimension < p3.dimension
+	for _, value in CryoModule.List.sort(Filters, function(p1, p2): boolean --[[ Line: 46 ]]
+		return if p1.dimension == p2.dimension then p1.operation < p2.operation else p1.dimension < p2.dimension
 	end) do
-		table.insert(t, { v.dimension, cryoModule.List.sort(v.values), v.operation })
+		table.insert(List, {
+			value.dimension,
+			CryoModule.List.sort(value.values),
+			value.operation
+		})
 	end
-	return t
+	return List
 end
 
-local function decodeFilters(p2)
-	local t = {}
+local function decodeFilters(List) --[[ Line: 63 ]]
+	local List1 = {}
 	
-	for i, v in p2 do
-		table.insert(t, { dimension = v[1], values = v[2], operation = v[3] })
+	for _, value in List do
+		table.insert(List1, {
+			dimension = value[1],
+			values = value[2],
+			operation = value[3]
+		})
 	end
-	return t
+	return List1
 end
 
-local function encodeBreakdowns(p3)
-	local t = {}
+local function encodeBreakdowns(Breakdowns) --[[ Line: 72 ]]
+	local List = {}
 	
-	for i, v in p3 do
-		table.insert(t, { v.dimensions })
+	for _, breakdown in Breakdowns do
+		table.insert(List, { breakdown.dimensions })
 	end
-	return t
+	return List
 end
 
-local function decodeBreakdowns(p4)
-	local t = {}
+local function decodeBreakdowns(List) --[[ Line: 83 ]]
+	local List1 = {}
 	
-	for i, v in p4 do
-		table.insert(t, { dimensions = v[1] })
+	for _, value in List do
+		table.insert(List1, { dimensions = value[1] })
 	end
-	return t
+	return List1
 end
 
-local function paramsKey(p5)
-	-- upvalues: fFlagBuildExperienceAnalyticsBreakdownsModule (ref), encodeFilters (ref), encodeBreakdowns (ref), httpService (ref)
-	local list = {
-		p5.universeId,
-		p5.metric,
-		p5.granularity,
-		p5.lookbackSeconds,
-		p5.endTime
+local function paramsKey(p1) --[[ Line: 92 ]]
+	-- upvalues: FFlagBuildExperienceAnalyticsBreakdownsModule (copy), encodeFilters (copy), encodeBreakdowns (copy), HttpService (copy)
+	local List = {
+		p1.universeId,
+		p1.metric,
+		p1.granularity,
+		p1.lookbackSeconds,
+		p1.endTime
 	}
 	
-	if fFlagBuildExperienceAnalyticsBreakdownsModule then
-		table.insert(list, encodeFilters(p5.filters or {}))
-		table.insert(list, encodeBreakdowns(p5.breakdowns or {}))
+	if FFlagBuildExperienceAnalyticsBreakdownsModule then
+		table.insert(List, (encodeFilters(p1.filters or {})))
+		table.insert(List, (encodeBreakdowns(p1.breakdowns or {})))
 	end
-	return httpService:JSONEncode(list)
+	return HttpService:JSONEncode(List)
 end
 
-local function paramsFromKey(p5)
-	-- upvalues: httpService (ref), fFlagBuildExperienceAnalyticsBreakdownsModule (ref), decodeFilters (ref), decodeBreakdowns (ref)
-	local var1 = httpService:JSONDecode(p5)
+local function paramsFromKey(Input) --[[ Line: 107 ]]
+	-- upvalues: HttpService (copy), FFlagBuildExperienceAnalyticsBreakdownsModule (copy), decodeFilters (copy), decodeBreakdowns (copy)
+	local Data = HttpService:JSONDecode(Input)
 	
 	return {
-		universeId = var1[1],
-		metric = var1[2],
-		granularity = var1[3],
-		lookbackSeconds = var1[4],
-		endTime = var1[5],
-		filters = if fFlagBuildExperienceAnalyticsBreakdownsModule and var1[6] then decodeFilters(var1[6]) else nil,
-		breakdowns = if fFlagBuildExperienceAnalyticsBreakdownsModule and var1[7] then decodeBreakdowns(var1[7]) else nil
+		universeId = Data[1],
+		metric = Data[2],
+		granularity = Data[3],
+		lookbackSeconds = Data[4],
+		endTime = Data[5],
+		filters = if FFlagBuildExperienceAnalyticsBreakdownsModule and Data[6] then decodeFilters(Data[6]) else nil,
+		breakdowns = if FFlagBuildExperienceAnalyticsBreakdownsModule and Data[7] then decodeBreakdowns(Data[7]) else nil
 	}
 end
 
-local function metricsKey(p5)
-	-- upvalues: httpService (ref)
-	local cloned = table.clone(p5)
-	table.sort(cloned)
+local function metricsKey(Tbl) --[[ Line: 122 ]]
+	-- upvalues: HttpService (copy)
+	local Copy = table.clone(Tbl)
+	table.sort(Copy)
 	
-	return httpService:JSONEncode(cloned)
+	return HttpService:JSONEncode(Copy)
 end
 
-return function(p5)
-	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), paramsFromKey (ref), fetchExperienceMetricModule (ref), paramsKey (ref), fetchMetricMetadataModule (ref), httpService (ref), metricsKey (ref)
-	p5 = p5 or {}
+return function(p1) --[[ Line: 128 | Named "createExperienceAnalyticsStore" ]]
+	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), paramsFromKey (copy), FetchExperienceMetricModule (copy), paramsKey (copy), FetchMetricMetadataModule (copy), HttpService (copy), metricsKey (copy)
+	local P8 = p1 or {}
 	local t = {}
 	
-	local function _(p6)
-		-- upvalues: t (write)
-		t[p6] = true
-		p6:finally(function()
-			-- upvalues: t (copy), p6 (ref)
-			t[p6] = nil
+	local function _(Promise) --[[ Line: 136 | Named "trackPoll" ]]
+		-- upvalues: t (ref)
+		t[Promise] = true
+		Promise:finally(function() --[[ Line: 138 ]]
+			-- upvalues: t (upval), Promise (copy)
+			t[Promise] = nil
 		end)
 		
-		return p6
+		return Promise
 	end
 	
-	local var1 = createDataResolverModule({
+	local DataResolverModule = CreateDataResolverModule({
 		supportsMultiGet = false,
-		cache = createDataCacheModule(p5.seriesTtlSeconds or 86400, p5.failedTtlSeconds),
-		fetchFn = function(p6, _)
-			-- upvalues: paramsFromKey (copy), fetchExperienceMetricModule (copy), p5 (ref), t (write)
-			local var2 = fetchExperienceMetricModule(paramsFromKey(p6), {
-				network = p5.network,
-				baseUrl = p5.baseUrl,
-				delay = p5.delay
+		cache = CreateDataCacheModule(P8.seriesTtlSeconds or 86400, P8.failedTtlSeconds),
+		fetchFn = function(p2, _) --[[ Line: 149 ]]
+			-- upvalues: paramsFromKey (upval), FetchExperienceMetricModule (upval), P8 (copy), t (ref)
+			local ExperienceMetricModule = FetchExperienceMetricModule(paramsFromKey(p2), {
+				network = P8.network,
+				baseUrl = P8.baseUrl,
+				delay = P8.delay
 			})
-			t[var2] = true
-			var2:finally(function()
-				-- upvalues: t (copy), var2 (ref)
-				t[var2] = nil
+			t[ExperienceMetricModule] = true
+			ExperienceMetricModule:finally(function() --[[ Line: 138 ]]
+				-- upvalues: t (upval), ExperienceMetricModule (copy)
+				t[ExperienceMetricModule] = nil
 			end)
 			
-			return var2
+			return ExperienceMetricModule
 		end
 	})
-	local var2 = createDataResolverModule({
+	
+	local function getAndFetchMetric(p2) --[[ Line: 159 ]]
+		-- upvalues: DataResolverModule (copy), paramsKey (upval)
+		return (DataResolverModule.getAndFetchItem(paramsKey(p2)))
+	end
+	
+	local function refetchMetric(p2) --[[ Line: 172 ]]
+		-- upvalues: DataResolverModule (copy), paramsKey (upval)
+		DataResolverModule.fetchItem(paramsKey(p2))
+	end
+	
+	local DataResolverModule1 = CreateDataResolverModule({
 		supportsMultiGet = false,
-		cache = createDataCacheModule(p5.metadataTtlSeconds or 600, p5.failedTtlSeconds),
-		fetchFn = function(p6, _)
-			-- upvalues: fetchMetricMetadataModule (copy), httpService (copy), p5 (ref), t (write)
-			local var3 = fetchMetricMetadataModule(httpService:JSONDecode(p6), {
-				network = p5.network,
-				baseUrl = p5.baseUrl,
-				delay = p5.delay
+		cache = CreateDataCacheModule(P8.metadataTtlSeconds or 600, P8.failedTtlSeconds),
+		fetchFn = function(Input, _) --[[ Line: 184 ]]
+			-- upvalues: FetchMetricMetadataModule (upval), HttpService (upval), P8 (copy), t (ref)
+			local MetricMetadataModule = FetchMetricMetadataModule(HttpService:JSONDecode(Input), {
+				network = P8.network,
+				baseUrl = P8.baseUrl,
+				delay = P8.delay
 			})
-			t[var3] = true
-			var3:finally(function()
-				-- upvalues: t (copy), var3 (ref)
-				t[var3] = nil
+			t[MetricMetadataModule] = true
+			MetricMetadataModule:finally(function() --[[ Line: 138 ]]
+				-- upvalues: t (upval), MetricMetadataModule (copy)
+				t[MetricMetadataModule] = nil
 			end)
 			
-			return var3
+			return MetricMetadataModule
 		end
 	})
 	
 	return {
-		getAndFetchMetric = function(p6)
-			-- upvalues: var1 (ref), paramsKey (copy)
-			return var1.getAndFetchItem(paramsKey(p6))
+		getAndFetchMetric = getAndFetchMetric,
+		refetchMetric = refetchMetric,
+		getAndFetchMetricMetadata = function(p2) --[[ Line: 196 ]]
+			-- upvalues: DataResolverModule1 (copy), metricsKey (upval)
+			return (DataResolverModule1.getAndFetchItem(metricsKey(p2)))
 		end,
-		refetchMetric = function(p6)
-			-- upvalues: var1 (ref), paramsKey (copy)
-			var1.fetchItem(paramsKey(p6))
-		end,
-		getAndFetchMetricMetadata = function(p6)
-			-- upvalues: var2 (ref), metricsKey (copy)
-			return var2.getAndFetchItem(metricsKey(p6))
-		end,
-		dispose = function()
-			-- upvalues: t (write), var1 (ref), var2 (ref)
-			local t_1 = {}
+		dispose = function() --[[ Line: 201 ]]
+			-- upvalues: t (ref), DataResolverModule (copy), DataResolverModule1 (copy)
+			local List = {}
 			
 			for i in t do
-				table.insert(t_1, i)
+				table.insert(List, i)
 			end
 			t = {}
 			
-			for i_1, v in t_1 do
-				v:cancel()
+			for _, value in List do
+				value:cancel()
 			end
-			var1.dispose()
-			var2.dispose()
+			DataResolverModule.dispose()
+			DataResolverModule1.dispose()
 		end
 	}
 end

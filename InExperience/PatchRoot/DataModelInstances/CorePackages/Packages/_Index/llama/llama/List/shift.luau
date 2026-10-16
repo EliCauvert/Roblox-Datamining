@@ -1,13 +1,13 @@
-﻿return function(p1, p2)
-	local var1 = type(p1)
-	assert(var1 == "table", "expected a table for first argument, got " .. var0)
-	p2 = p2 or 1
-	local var2 = type(p2)
-	assert(var2 == "number" and p2 % 1 == 0, "expected an integer for second argument, got " .. var1)
+﻿return function(p1, p2) --[[ Line: 2 | Named "shift" ]]
+	local ValueType = type(p1)
+	assert(ValueType == "table", "expected a table for first argument, got " .. ValueType)
+	local P1 = p2 or 1
+	local ValueType1 = type(P1)
+	assert(ValueType1 == "number" and P1 % 1 == 0, "expected an integer for second argument, got " .. ValueType1)
 	local t = {}
 	
-	for i = 1 + p2, #p1 do
-		t[i - p2] = p1[i]
+	for i = 1 + P1, #p1 do
+		t[i - P1] = p1[i]
 	end
 	return t
 end

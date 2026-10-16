@@ -1,371 +1,379 @@
-﻿local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-local corePackagesService = game:GetService("CorePackages")
-local promiseModule = require(corePackagesService.Packages.Promise)
-local name = require(corePackagesService.Workspace.Packages.CoreScriptsInitializer).CoreLogger:new(script.Name)
-local getFFlagFixSeamlessVoiceIntegrationWithPrivateVoice = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoice
-local constantsModule = require(robloxGui.Modules.VoiceChat.Constants)
-local default = require(robloxGui.Modules.VoiceChat.VoiceChatServiceManager).default
-local constants = require(corePackagesService.Workspace.Packages.CrossExperience).Constants
-local fIntPartyVoiceUndeafenDelayMS = require(corePackagesService.Workspace.Packages.SharedFlags).FIntPartyVoiceUndeafenDelayMS
-local fixJoinVoiceDelayedAFMInit = game:DefineFastFlag("FixJoinVoiceDelayedAFMInit", false)
-local var1 = false
-local var2 = nil
-local var3 = false
-local var4 = false
-local var5 = false
-local var6 = false
-local var7 = nil
+﻿local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+local CorePackages = game:GetService("CorePackages")
+local PromiseModule = require(CorePackages.Packages.Promise)
+local NewResult = require(CorePackages.Workspace.Packages.CoreScriptsInitializer).CoreLogger:new(script.Name)
+local ConstantsModule = require(RobloxGui.Modules.VoiceChat.Constants)
+local Default = require(RobloxGui.Modules.VoiceChat.VoiceChatServiceManager).default
+local Constants = require(CorePackages.Workspace.Packages.CrossExperience).Constants
+local FIntPartyVoiceUndeafenDelayMS = require(CorePackages.Workspace.Packages.SharedFlags).FIntPartyVoiceUndeafenDelayMS
+local FixJoinVoiceDelayedAFMInit = game:DefineFastFlag("FixJoinVoiceDelayedAFMInit", false)
+local Flag = false
+local VoiceChatState = nil
+local Flag1 = false
+local Flag2 = false
+local Flag3 = false
+local Flag4 = false
+local DelayedThread = nil
 
-if getFFlagFixSeamlessVoiceIntegrationWithPrivateVoice() then
-	default:subscribe("OnStateChanged", function(_, p1)
-		-- upvalues: var2 (write), var4 (write)
-		var2 = p1
+if require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoice() then
+	Default:subscribe("OnStateChanged", function(_, VoiceChatState1) --[[ Line: 28 ]]
+		-- upvalues: VoiceChatState (ref), Flag2 (ref)
+		VoiceChatState = VoiceChatState1
 		
-		if p1 == Enum.VoiceChatState.Ended then
-			var4 = false
+		if VoiceChatState1 == Enum.VoiceChatState.Ended then
+			Flag2 = false
 		end
 	end)
-	default.VoiceJoinProgressChanged.Event:Connect(function(p1)
-		-- upvalues: constantsModule (ref), var1 (write)
-		if p1 == constantsModule.VOICE_JOIN_PROGRESS.Suspended then
-			var1 = true
+	Default.VoiceJoinProgressChanged.Event:Connect(function(Suspended) --[[ Line: 34 ]]
+		-- upvalues: ConstantsModule (copy), Flag (ref)
+		if Suspended == ConstantsModule.VOICE_JOIN_PROGRESS.Suspended then
+			Flag = true
 		end
 	end)
 	
-	function performVoiceOperationWhenReady(p1)
-		-- upvalues: default (ref), name (ref)
-		default:asyncInit():andThen(function()
-			-- upvalues: p1 (ref)
-			p1()
-		end):catch(function()
-			-- upvalues: name (copy)
-			name:info("VCSM was not initialized to perform operation [CEV ExperienceAudioFocusBinder]")
+	function performVoiceOperationWhenReady(Callback) --[[ Line: 40 ]]
+		-- upvalues: Default (copy), NewResult (copy)
+		Default:asyncInit():andThen(function() --[[ Line: 42 ]]
+			-- upvalues: Callback (copy)
+			Callback()
+		end):catch(function() --[[ Line: 45 ]]
+			-- upvalues: NewResult (upval)
+			NewResult:info("VCSM was not initialized to perform operation [CEV ExperienceAudioFocusBinder]")
 		end)
 	end
 	
-	function isConnectedToPublicVoice()
-		-- upvalues: default (ref), var2 (write)
-		return not default:ShouldShowJoinVoice() or var2 == Enum.VoiceChatState.Joined
+	function isConnectedToPublicVoice(): boolean --[[ Line: 50 ]]
+		-- upvalues: Default (copy), VoiceChatState (ref)
+		return not Default:ShouldShowJoinVoice() or VoiceChatState == Enum.VoiceChatState.Joined
 	end
 	
-	function initializeAFM()
-		-- upvalues: fixJoinVoiceDelayedAFMInit (ref), var3 (write), name (ref), constants (ref), fIntPartyVoiceUndeafenDelayMS (ref), var7 (write), default (ref), promiseModule (ref), var4 (write), var1 (write), var6 (write)
-		if fixJoinVoiceDelayedAFMInit and var3 then
-			name:info("VCSM was already initialized [CEV ExperienceAudioFocusBinder]")
+	function initializeAFM() --[[ Line: 55 ]]
+		-- upvalues: FixJoinVoiceDelayedAFMInit (copy), Flag1 (ref), NewResult (copy), Constants (copy), FIntPartyVoiceUndeafenDelayMS (copy), DelayedThread (ref), Default (copy), PromiseModule (copy), Flag2 (ref), Flag (ref), Flag4 (ref)
+		if FixJoinVoiceDelayedAFMInit and Flag1 then
+			NewResult:info("VCSM was already initialized [CEV ExperienceAudioFocusBinder]")
 			
 			return
-		elseif fixJoinVoiceDelayedAFMInit then
-			var3 = true
 		end
-		local ok, status = pcall(function()
+		if FixJoinVoiceDelayedAFMInit then
+			Flag1 = true
+		end
+		local Success, Result = pcall(function() --[[ Line: 63 ]]
 			return game:GetService("AudioFocusService")
 		end)
 		
-		if ok and status then
-			local CONTEXT_ID = constants.AUDIO_FOCUS_MANAGEMENT.UGC.CONTEXT_ID
-			local FOCUS_PRIORITY = constants.AUDIO_FOCUS_MANAGEMENT.UGC.FOCUS_PRIORITY
-			status:RegisterContextIdFromLua(CONTEXT_ID)
+		if Success and Result then
+			local CONTEXTID = Constants.AUDIO_FOCUS_MANAGEMENT.UGC.CONTEXT_ID
+			local FOCUSPRIORITY = Constants.AUDIO_FOCUS_MANAGEMENT.UGC.FOCUS_PRIORITY
+			Result:RegisterContextIdFromLua(CONTEXTID)
 			
-			local var8 = function()
-				-- upvalues: fIntPartyVoiceUndeafenDelayMS (copy), var7 (copy), default (copy)
+			local function v21() --[[ Line: 72 ]]
+				-- upvalues: FIntPartyVoiceUndeafenDelayMS (upval), DelayedThread (upval), Default (upval)
 				if isConnectedToPublicVoice() then
-					if fIntPartyVoiceUndeafenDelayMS > 0 and var7 then
-						task.cancel(var7)
-						var7 = nil
+					if FIntPartyVoiceUndeafenDelayMS > 0 and DelayedThread then
+						task.cancel(DelayedThread)
+						DelayedThread = nil
 					end
-					default:MuteAll(true, "AudioFocusManagement UGC")
+					Default:MuteAll(true, "AudioFocusManagement UGC")
 					
-					if not default.localMuted then
-						default:ToggleMic("AudioFocusManagement - UGC deafenAll")
+					if not Default.localMuted then
+						Default:ToggleMic("AudioFocusManagement - UGC deafenAll")
 					end
-					default:HideVoiceUI()
+					Default:HideVoiceUI()
 				end
 			end
 			
-			local var9 = function()
-				-- upvalues: fIntPartyVoiceUndeafenDelayMS (copy), var7 (copy), default (copy)
+			local function v22() --[[ Line: 89 ]]
+				-- upvalues: FIntPartyVoiceUndeafenDelayMS (upval), DelayedThread (upval), Default (upval)
 				if isConnectedToPublicVoice() then
-					if fIntPartyVoiceUndeafenDelayMS > 0 and var7 then
-						task.cancel(var7)
-						var7 = nil
+					if FIntPartyVoiceUndeafenDelayMS > 0 and DelayedThread then
+						task.cancel(DelayedThread)
+						DelayedThread = nil
 					end
-					default:MuteAll(false, "AudioFocusManagement UGC")
+					Default:MuteAll(false, "AudioFocusManagement UGC")
 					
-					if not default.localMuted then
-						default:ToggleMic("AudioFocusManagement - UGC undeafenAll")
+					if not Default.localMuted then
+						Default:ToggleMic("AudioFocusManagement - UGC undeafenAll")
 					end
-					default:ShowVoiceUI()
+					Default:ShowVoiceUI()
 				end
 			end
 			
-			status.OnDeafenVoiceAudio:Connect(function(p1)
-				-- upvalues: CONTEXT_ID (ref), fIntPartyVoiceUndeafenDelayMS (copy), var7 (copy), name (copy), var8 (ref)
-				if p1 == CONTEXT_ID then
-					if fIntPartyVoiceUndeafenDelayMS > 0 and var7 then
-						task.cancel(var7)
-						var7 = nil
+			Result.OnDeafenVoiceAudio:Connect(function(ContextId) --[[ Line: 105 ]]
+				-- upvalues: CONTEXTID (copy), FIntPartyVoiceUndeafenDelayMS (upval), DelayedThread (upval), NewResult (upval), v21 (copy)
+				if ContextId == CONTEXTID then
+					if FIntPartyVoiceUndeafenDelayMS > 0 and DelayedThread then
+						task.cancel(DelayedThread)
+						DelayedThread = nil
 					end
-					name:info("UGC OnDeafenVoiceAudio fired" .. p3)
-					performVoiceOperationWhenReady(var8)
+					NewResult:info("UGC OnDeafenVoiceAudio fired" .. ContextId)
+					performVoiceOperationWhenReady(v21)
 				end
 			end)
-			status.OnUndeafenVoiceAudio:Connect(function(p1)
-				-- upvalues: CONTEXT_ID (ref), fIntPartyVoiceUndeafenDelayMS (copy), var7 (copy), name (copy), var9 (ref)
-				if p1 == CONTEXT_ID then
-					if fIntPartyVoiceUndeafenDelayMS > 0 then
-						if var7 then
-							task.cancel(var7)
+			Result.OnUndeafenVoiceAudio:Connect(function(ContextId) --[[ Line: 116 ]]
+				-- upvalues: CONTEXTID (copy), FIntPartyVoiceUndeafenDelayMS (upval), DelayedThread (upval), NewResult (upval), v22 (copy)
+				if ContextId == CONTEXTID then
+					if FIntPartyVoiceUndeafenDelayMS > 0 then
+						if DelayedThread then
+							task.cancel(DelayedThread)
 						end
-						var7 = task.delay(fIntPartyVoiceUndeafenDelayMS / 1000, function()
-							-- upvalues: var7 (copy), name (copy), p1 (ref), var9 (copy)
-							var7 = nil
-							name:info("UGC OnUndeafenVoiceAudio fired delayed" .. p4)
-							performVoiceOperationWhenReady(var9)
+						DelayedThread = task.delay(FIntPartyVoiceUndeafenDelayMS / 1000, function() --[[ Line: 122 ]]
+							-- upvalues: DelayedThread (upval), NewResult (upval), ContextId (copy), v22 (upval)
+							DelayedThread = nil
+							NewResult:info("UGC OnUndeafenVoiceAudio fired delayed" .. ContextId)
+							performVoiceOperationWhenReady(v22)
 						end)
 						
 						return
 					else
-						name:info("UGC OnUndeafenVoiceAudio fired" .. p4)
-						performVoiceOperationWhenReady(var9)
+						NewResult:info("UGC OnUndeafenVoiceAudio fired" .. ContextId)
+						performVoiceOperationWhenReady(v22)
 					end
 				end
 			end)
 			
-			local _ = function(p1, p2)
-				-- upvalues: name (copy), promiseModule (copy), status (ref)
-				name:info("UGC requestAudioFocusWithPromise - id: {} - priority: {}", p1, p2)
+			local function _(p1, p2) --[[ Line: 134 ]]
+				-- upvalues: NewResult (upval), PromiseModule (upval), Result (copy)
+				NewResult:info("UGC requestAudioFocusWithPromise - id: {} - priority: {}", p1, p2)
 				
-				return promiseModule.new(function(p3, p4)
-					-- upvalues: status (copy), p1 (ref), p2 (ref), name (copy)
-					local ok, status_1 = pcall(status.RequestFocus, status, p1, p2)
+				return PromiseModule.new(function(Callback: (any) -> (), Callback1: (any) -> ()) --[[ Line: 136 ]]
+					-- upvalues: Result (upval), p1 (copy), p2 (copy), NewResult (upval)
+					local Success, Result1 = pcall(Result.RequestFocus, Result, p1, p2)
 					
-					if ok then
-						name:info("UGC requestAudioFocusWithPromise - focusGranted: {}", status_1)
-						p3(status_1)
+					if Success then
+						NewResult:info("UGC requestAudioFocusWithPromise - focusGranted: {}", Result1)
+						Callback(Result1)
 						
 						return
+					else
+						NewResult:info("UGC requestAudioFocusWithPromise - rejected")
+						Callback1("Failed to call RequestFocus due to an error")
 					end
-					name:info("UGC requestAudioFocusWithPromise - rejected")
-					p4("Failed to call RequestFocus due to an error")
 				end)
 			end
 			
-			local var10 = function(p1, p2)
-				-- upvalues: name (copy), default (copy)
+			local function v24(p1, IsConnectedToPublicVoice1) --[[ Line: 149 ]]
+				-- upvalues: NewResult (upval), Default (upval)
 				if p1 ~= nil then
-					if p2 then
-						name:info("UGC audio focus request granted, preparing to undeafen.")
-						default:MuteAll(false, "AudioFocusManagement UGC")
-						default:ShowVoiceUI()
+					if IsConnectedToPublicVoice1 then
+						NewResult:info("UGC audio focus request granted, preparing to undeafen.")
+						Default:MuteAll(false, "AudioFocusManagement UGC")
+						Default:ShowVoiceUI()
 						
 						return
 					end
-					name:info("UGC audio focus requested denied, preparing to deafen.")
-					default:MuteAll(true, "AudioFocusManagement UGC")
-					default:HideVoiceUI()
+					NewResult:info("UGC audio focus requested denied, preparing to deafen.")
+					Default:MuteAll(true, "AudioFocusManagement UGC")
+					Default:HideVoiceUI()
 				end
 			end
 			
-			local _ = function(p1, p2)
-				-- upvalues: var4 (copy), var1 (copy), var10 (ref)
-				if not var4 then
-					performVoiceOperationWhenReady(function()
-						-- upvalues: var1 (copy), var10 (copy), p1 (ref), p2 (ref)
-						if not var1 then
-							var10(p1, p2)
+			local _ = function(p1, p2) --[[ Line: 163 ]]
+				-- upvalues: Flag2 (upval), Flag (upval), v24 (copy)
+				if not Flag2 then
+					performVoiceOperationWhenReady(function() --[[ Line: 165 ]]
+						-- upvalues: Flag (upval), v24 (upval), p1 (copy), p2 (copy)
+						if not Flag then
+							v24(p1, p2)
 						end
 					end)
-					var4 = true
+					Flag2 = true
 				end
 			end
 			
-			name:info("UGC requestAudioFocusWithPromise - id: {} - priority: {}", CONTEXT_ID, FOCUS_PRIORITY)
-			promiseModule.new(function(p1, p2)
-				-- upvalues: status (ref), CONTEXT_ID (ref), FOCUS_PRIORITY (ref), name (copy)
-				local ok, status_1 = pcall(status.RequestFocus, status, CONTEXT_ID, FOCUS_PRIORITY)
+			NewResult:info("UGC requestAudioFocusWithPromise - id: {} - priority: {}", CONTEXTID, FOCUSPRIORITY)
+			PromiseModule.new(function(Callback: (any) -> (), Callback1: (any) -> ()) --[[ Line: 136 ]]
+				-- upvalues: Result (copy), CONTEXTID (copy), FOCUSPRIORITY (copy), NewResult (upval)
+				local Success, Result1 = pcall(Result.RequestFocus, Result, CONTEXTID, FOCUSPRIORITY)
 				
-				if ok then
-					name:info("UGC requestAudioFocusWithPromise - focusGranted: {}", status_1)
-					p1(status_1)
+				if Success then
+					NewResult:info("UGC requestAudioFocusWithPromise - focusGranted: {}", Result1)
+					Callback(Result1)
 					
 					return
+				else
+					NewResult:info("UGC requestAudioFocusWithPromise - rejected")
+					Callback1("Failed to call RequestFocus due to an error")
 				end
-				name:info("UGC requestAudioFocusWithPromise - rejected")
-				p2("Failed to call RequestFocus due to an error")
-			end):andThen(function(p1)
-				-- upvalues: default (copy), var6 (copy), var4 (copy), var1 (copy), var10 (ref)
-				default.muteChanged.Event:Connect(function(p2)
-					-- upvalues: var6 (copy), p1 (ref), var4 (copy), var1 (copy), var10 (copy)
-					if var6 then
-						local var11 = isConnectedToPublicVoice()
+			end):andThen(function(Result) --[[ Line: 175 ]]
+				-- upvalues: Default (upval), Flag4 (upval), Flag2 (upval), Flag (upval), v24 (copy)
+				Default.muteChanged.Event:Connect(function(p1) --[[ Line: 176 ]]
+					-- upvalues: Flag4 (upval), Result (copy), Flag2 (upval), Flag (upval), v24 (upval)
+					if Flag4 then
+						local IsConnectedToPublicVoice1 = isConnectedToPublicVoice()
 						
-						if not var4 then
-							performVoiceOperationWhenReady(function()
-								-- upvalues: var1 (copy), var10 (copy), p2 (ref), var11 (ref)
-								if not var1 then
-									var10(p2, var11)
+						if not Flag2 then
+							performVoiceOperationWhenReady(function() --[[ Line: 165 ]]
+								-- upvalues: Flag (upval), v24 (upval), p1 (copy), IsConnectedToPublicVoice1 (copy)
+								if not Flag then
+									v24(p1, IsConnectedToPublicVoice1)
 								end
 							end)
-							var4 = true
+							Flag2 = true
 						end
 						return
-					elseif not var4 then
-						performVoiceOperationWhenReady(function()
-							-- upvalues: var1 (copy), var10 (copy), p2 (ref), p1 (ref)
-							if not var1 then
-								var10(p2, p1)
-							end
-						end)
-						var4 = true
+					else
+						if not Flag2 then
+							performVoiceOperationWhenReady(function() --[[ Line: 165 ]]
+								-- upvalues: Flag (upval), v24 (upval), p1 (copy), Result (copy)
+								if not Flag then
+									v24(p1, Result)
+								end
+							end)
+							Flag2 = true
+						end
+						Flag4 = true
 					end
-					var6 = true
 				end)
-			end):catch(function()
-				-- upvalues: name (copy)
-				name:info("[UGC] Error requesting focus inside UGCdatamodel")
+			end):catch(function() --[[ Line: 185 ]]
+				-- upvalues: NewResult (upval)
+				NewResult:info("[UGC] Error requesting focus inside UGCdatamodel")
 			end)
 		end
 	end
 	
-	local canUseServiceResult = default.canUseServiceResult
+	local CanUseServiceResult = Default.canUseServiceResult
 	
-	if canUseServiceResult then
+	if CanUseServiceResult then
 		initializeAFM()
-	elseif canUseServiceResult == nil then
-		if fixJoinVoiceDelayedAFMInit then
-			default:subscribe("OnVoiceChatServiceInitialized", function()
-				-- upvalues: var5 (write)
-				if var5 then
+	elseif CanUseServiceResult == nil then
+		if FixJoinVoiceDelayedAFMInit then
+			Default:subscribe("OnVoiceChatServiceInitialized", function() --[[ Line: 196 ]]
+				-- upvalues: Flag3 (ref)
+				if Flag3 then
 					initializeAFM()
-					var5 = false
+					Flag3 = false
 				end
 			end)
 		end
-		default:subscribe("OnCanUseServiceResult", function(p1)
-			-- upvalues: fixJoinVoiceDelayedAFMInit (ref), var5 (write), name (ref)
+		Default:subscribe("OnCanUseServiceResult", function(p1) --[[ Line: 204 ]]
+			-- upvalues: FixJoinVoiceDelayedAFMInit (copy), Flag3 (ref), NewResult (copy)
 			if p1 then
 				initializeAFM()
 				
 				return
-			elseif fixJoinVoiceDelayedAFMInit then
-				var5 = true
 			end
-			name:info("VCSM cannot be used [CEV ExperienceAudioFocusBinder]")
+			if FixJoinVoiceDelayedAFMInit then
+				Flag3 = true
+			end
+			NewResult:info("VCSM cannot be used [CEV ExperienceAudioFocusBinder]")
 		end)
 	else
-		name:info("VCSM cannot be used [CEV ExperienceAudioFocusBinder]")
+		NewResult:info("VCSM cannot be used [CEV ExperienceAudioFocusBinder]")
 	end
 else
-	default:asyncInit():andThen(function()
-		-- upvalues: constants (ref), default (ref), name (ref), promiseModule (ref)
-		local ok, status = pcall(function()
+	Default:asyncInit():andThen(function() --[[ Line: 219 ]]
+		-- upvalues: Constants (copy), Default (copy), NewResult (copy), PromiseModule (copy)
+		local Success, Result = pcall(function() --[[ Line: 220 ]]
 			return game:GetService("AudioFocusService")
 		end)
 		
-		if ok and status then
-			local CONTEXT_ID = constants.AUDIO_FOCUS_MANAGEMENT.UGC.CONTEXT_ID
-			local FOCUS_PRIORITY = constants.AUDIO_FOCUS_MANAGEMENT.UGC.FOCUS_PRIORITY
-			status:RegisterContextIdFromLua(CONTEXT_ID)
+		if Success and Result then
+			local CONTEXTID = Constants.AUDIO_FOCUS_MANAGEMENT.UGC.CONTEXT_ID
+			local FOCUSPRIORITY = Constants.AUDIO_FOCUS_MANAGEMENT.UGC.FOCUS_PRIORITY
+			Result:RegisterContextIdFromLua(CONTEXTID)
 			
-			local _ = function()
-				-- upvalues: default (copy)
-				default:MuteAll(true, "AudioFocusManagement UGC")
+			local function _() --[[ Line: 229 ]]
+				-- upvalues: Default (upval)
+				Default:MuteAll(true, "AudioFocusManagement UGC")
 				
-				if not default.localMuted then
-					default:ToggleMic("AudioFocusManagement - UGC deafenAll")
+				if not Default.localMuted then
+					Default:ToggleMic("AudioFocusManagement - UGC deafenAll")
 				end
-				default:HideVoiceUI()
+				Default:HideVoiceUI()
 			end
 			
-			local _ = function()
-				-- upvalues: default (copy)
-				default:MuteAll(false, "AudioFocusManagement UGC")
+			local _ = function() --[[ Line: 239 ]]
+				-- upvalues: Default (upval)
+				Default:MuteAll(false, "AudioFocusManagement UGC")
 				
-				if not default.localMuted then
-					default:ToggleMic("AudioFocusManagement - UGC undeafenAll")
+				if not Default.localMuted then
+					Default:ToggleMic("AudioFocusManagement - UGC undeafenAll")
 				end
-				default:ShowVoiceUI()
+				Default:ShowVoiceUI()
 			end
 			
-			status.OnDeafenVoiceAudio:Connect(function(p1)
-				-- upvalues: CONTEXT_ID (ref), name (copy), default (copy)
-				if p1 == CONTEXT_ID then
-					name:info("UGC OnDeafenVoiceAudio fired" .. p18)
-					default:MuteAll(true, "AudioFocusManagement UGC")
+			Result.OnDeafenVoiceAudio:Connect(function(ContextId) --[[ Line: 249 ]]
+				-- upvalues: CONTEXTID (copy), NewResult (upval), Default (upval)
+				if ContextId == CONTEXTID then
+					NewResult:info("UGC OnDeafenVoiceAudio fired" .. ContextId)
+					Default:MuteAll(true, "AudioFocusManagement UGC")
 					
-					if not default.localMuted then
-						default:ToggleMic("AudioFocusManagement - UGC deafenAll")
+					if not Default.localMuted then
+						Default:ToggleMic("AudioFocusManagement - UGC deafenAll")
 					end
-					default:HideVoiceUI()
+					Default:HideVoiceUI()
 				end
 			end)
-			status.OnUndeafenVoiceAudio:Connect(function(p1)
-				-- upvalues: CONTEXT_ID (ref), name (copy), default (copy)
-				if p1 == CONTEXT_ID then
-					name:info("UGC OnUndeafenVoiceAudio fired" .. p19)
-					default:MuteAll(false, "AudioFocusManagement UGC")
+			Result.OnUndeafenVoiceAudio:Connect(function(ContextId) --[[ Line: 256 ]]
+				-- upvalues: CONTEXTID (copy), NewResult (upval), Default (upval)
+				if ContextId == CONTEXTID then
+					NewResult:info("UGC OnUndeafenVoiceAudio fired" .. ContextId)
+					Default:MuteAll(false, "AudioFocusManagement UGC")
 					
-					if not default.localMuted then
-						default:ToggleMic("AudioFocusManagement - UGC undeafenAll")
+					if not Default.localMuted then
+						Default:ToggleMic("AudioFocusManagement - UGC undeafenAll")
 					end
-					default:ShowVoiceUI()
+					Default:ShowVoiceUI()
 				end
 			end)
 			
-			local _ = function(p1, p2)
-				-- upvalues: promiseModule (copy), status (ref)
-				return promiseModule.new(function(p3, p4)
-					-- upvalues: status (copy), p1 (ref), p2 (ref)
-					local ok, status_1 = pcall(status.RequestFocus, status, p1, p2)
+			local _ = function(p1, p2) --[[ Line: 263 ]]
+				-- upvalues: PromiseModule (upval), Result (copy)
+				return PromiseModule.new(function(Callback: (any) -> (), Callback1: (any) -> ()) --[[ Line: 264 ]]
+					-- upvalues: Result (upval), p1 (copy), p2 (copy)
+					local Success, Result1 = pcall(Result.RequestFocus, Result, p1, p2)
 					
-					if ok then
-						p3(status_1)
+					if Success then
+						Callback(Result1)
 						
 						return
+					else
+						Callback1("Failed to call RequestFocus due to an error")
 					end
-					p4("Failed to call RequestFocus due to an error")
 				end)
 			end
 			
-			promiseModule.new(function(p1, p2)
-				-- upvalues: status (ref), CONTEXT_ID (ref), FOCUS_PRIORITY (ref)
-				local ok, status_1 = pcall(status.RequestFocus, status, CONTEXT_ID, FOCUS_PRIORITY)
+			PromiseModule.new(function(Callback: (any) -> (), Callback1: (any) -> ()) --[[ Line: 264 ]]
+				-- upvalues: Result (copy), CONTEXTID (copy), FOCUSPRIORITY (copy)
+				local Success, Result1 = pcall(Result.RequestFocus, Result, CONTEXTID, FOCUSPRIORITY)
 				
-				if ok then
-					p1(status_1)
+				if Success then
+					Callback(Result1)
 					
 					return
+				else
+					Callback1("Failed to call RequestFocus due to an error")
 				end
-				p2("Failed to call RequestFocus due to an error")
-			end):andThen(function(p1)
-				-- upvalues: name (copy), default (copy)
-				if p1 then
-					name:info("UGC audio focus request granted, preparing to undeafen.")
-					default.muteChanged.Event:Once(function(p2)
-						-- upvalues: default (copy)
-						if p2 ~= nil then
-							default:MuteAll(false, "AudioFocusManagement UGC")
+			end):andThen(function(Result) --[[ Line: 276 ]]
+				-- upvalues: NewResult (upval), Default (upval)
+				if Result then
+					NewResult:info("UGC audio focus request granted, preparing to undeafen.")
+					Default.muteChanged.Event:Once(function(p1) --[[ Line: 279 ]]
+						-- upvalues: Default (upval)
+						if p1 ~= nil then
+							Default:MuteAll(false, "AudioFocusManagement UGC")
 						end
 					end)
-					default:ShowVoiceUI()
+					Default:ShowVoiceUI()
 					
 					return
+				else
+					NewResult:info("UGC audio focus requested denied, preparing to deafen.")
+					Default.muteChanged.Event:Once(function(p1) --[[ Line: 287 ]]
+						-- upvalues: Default (upval)
+						if p1 ~= nil then
+							Default:MuteAll(true, "AudioFocusManagement UGC")
+						end
+					end)
+					Default:HideVoiceUI()
 				end
-				name:info("UGC audio focus requested denied, preparing to deafen.")
-				default.muteChanged.Event:Once(function(p2)
-					-- upvalues: default (copy)
-					if p2 ~= nil then
-						default:MuteAll(true, "AudioFocusManagement UGC")
-					end
-				end)
-				default:HideVoiceUI()
-			end):catch(function()
-				-- upvalues: name (copy)
-				name:info("[UGC] Error requesting focus inside UGCdatamodel")
+			end):catch(function() --[[ Line: 295 ]]
+				-- upvalues: NewResult (upval)
+				NewResult:info("[UGC] Error requesting focus inside UGCdatamodel")
 			end)
 		end
-	end):catch(function()
-		-- upvalues: name (ref)
-		name:info("VCSM was not initialized [CEV ExperienceAudioFocusBinder]")
+	end):catch(function() --[[ Line: 300 ]]
+		-- upvalues: NewResult (copy)
+		NewResult:info("VCSM was not initialized [CEV ExperienceAudioFocusBinder]")
 	end)
 end

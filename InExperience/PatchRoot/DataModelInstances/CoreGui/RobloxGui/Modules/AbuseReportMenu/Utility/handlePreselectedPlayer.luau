@@ -1,51 +1,50 @@
-﻿local abuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
-local robloxGui = game:GetService("CoreGui").RobloxGui
-local constantsModule = require(abuseReportMenu.Components.Constants)
-local tnSIXPWrapperModule = require(abuseReportMenu.IXP.TnSIXPWrapper)
-local default = require(robloxGui.Modules.VoiceChat.VoiceChatServiceManager).default
+﻿local AbuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
+local ConstantsModule = require(AbuseReportMenu.Components.Constants)
+local TnSIXPWrapperModule = require(AbuseReportMenu.IXP.TnSIXPWrapper)
+local Default = require(game:GetService("CoreGui").RobloxGui.Modules.VoiceChat.VoiceChatServiceManager).default
 
-local _ = function(p1)
-	-- upvalues: default (ref)
-	return default:getRecentUsersInteractionData()[tostring(p1.UserId)] ~= nil
+local function _(Player): boolean --[[ Line: 11 ]]
+	-- upvalues: Default (copy)
+	return Default:getRecentUsersInteractionData()[tostring(Player.UserId)] ~= nil
 end
 
-function handlePreselectedPlayer(p1, p2, p3, p4)
-	-- upvalues: default (ref), constantsModule (ref), tnSIXPWrapperModule (ref)
-	if p2 and default:getRecentUsersInteractionData()[tostring(p1.UserId)] ~= nil then
-		p3({
-			type = constantsModule.PlayerMenuActions.UpdateMethodOfAbuse,
-			methodOfAbuse = constantsModule.AbuseMethods.VoiceChat
+function handlePreselectedPlayer(Player: Player, p1, Callback: (any) -> (), Callback1: (any) -> ()) --[[ Line: 16 ]]
+	-- upvalues: Default (copy), ConstantsModule (copy), TnSIXPWrapperModule (copy)
+	if p1 and Default:getRecentUsersInteractionData()[tostring(Player.UserId)] ~= nil then
+		Callback({
+			type = ConstantsModule.PlayerMenuActions.UpdateMethodOfAbuse,
+			methodOfAbuse = ConstantsModule.AbuseMethods.VoiceChat
 		})
-		p4({
-			type = constantsModule.AnalyticsActions.SetTypeOfAbuseSelection,
-			selection = constantsModule.AbuseMethods.VoiceChat
+		Callback1({
+			type = ConstantsModule.AnalyticsActions.SetTypeOfAbuseSelection,
+			selection = ConstantsModule.AbuseMethods.VoiceChat
 		})
-		p4({
-			type = constantsModule.AnalyticsActions.SetPreselectedAbuseSelection,
-			selection = constantsModule.AbuseMethods.VoiceChat
+		Callback1({
+			type = ConstantsModule.AnalyticsActions.SetPreselectedAbuseSelection,
+			selection = ConstantsModule.AbuseMethods.VoiceChat
 		})
-	elseif tnSIXPWrapperModule.getReportAnythingAvatarEnabled() then
-		p3({
-			type = constantsModule.PlayerMenuActions.UpdateMethodOfAbuse,
-			methodOfAbuse = constantsModule.AbuseMethods.TextChat
+	elseif TnSIXPWrapperModule.getReportAnythingAvatarEnabled() then
+		Callback({
+			type = ConstantsModule.PlayerMenuActions.UpdateMethodOfAbuse,
+			methodOfAbuse = ConstantsModule.AbuseMethods.TextChat
 		})
-		p4({
-			type = constantsModule.AnalyticsActions.SetTypeOfAbuseSelection,
-			selection = constantsModule.AbuseMethods.TextChat
+		Callback1({
+			type = ConstantsModule.AnalyticsActions.SetTypeOfAbuseSelection,
+			selection = ConstantsModule.AbuseMethods.TextChat
 		})
-		p4({
-			type = constantsModule.AnalyticsActions.SetPreselectedAbuseSelection,
-			selection = constantsModule.AbuseMethods.TextChat
+		Callback1({
+			type = ConstantsModule.AnalyticsActions.SetPreselectedAbuseSelection,
+			selection = ConstantsModule.AbuseMethods.TextChat
 		})
 	else
-		p4({
+		Callback1({
 			selection = "None",
-			type = constantsModule.AnalyticsActions.SetPreselectedAbuseSelection
+			type = ConstantsModule.AnalyticsActions.SetPreselectedAbuseSelection
 		})
 	end
-	p3({
-		type = constantsModule.PlayerMenuActions.SetPreselectedPlayer,
-		player = p1
+	Callback({
+		type = ConstantsModule.PlayerMenuActions.SetPreselectedPlayer,
+		player = Player
 	})
 end
 

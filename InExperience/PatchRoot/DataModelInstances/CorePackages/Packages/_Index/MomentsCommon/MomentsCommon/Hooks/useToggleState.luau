@@ -1,25 +1,25 @@
-﻿local reactModule = require(script:FindFirstAncestor("MomentsCommon").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("MomentsCommon").Parent.React)
 
-return function(value)
-	-- upvalues: reactModule (ref)
-	local var1, var2 = reactModule.useState(value or false)
+return function(p1) --[[ Line: 14 | Named "useToggleState" ]]
+	-- upvalues: ReactModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(p1 or false)
 	
 	return {
-		enabled = var1,
-		enable = reactModule.useCallback(function()
-			-- upvalues: var2 (ref)
-			var2(true)
+		enabled = UseStateResult,
+		enable = ReactModule.useCallback(function() --[[ Line: 17 ]]
+			-- upvalues: UseStateResult2 (copy)
+			UseStateResult2(true)
 		end, {}),
-		disable = reactModule.useCallback(function()
-			-- upvalues: var2 (ref)
-			var2(false)
+		disable = ReactModule.useCallback(function() --[[ Line: 21 ]]
+			-- upvalues: UseStateResult2 (copy)
+			UseStateResult2(false)
 		end, {}),
-		toggle = reactModule.useCallback(function()
-			-- upvalues: var2 (ref)
-			var2(function(p1)
-				return not p1
+		toggle = ReactModule.useCallback(function() --[[ Line: 25 ]]
+			-- upvalues: UseStateResult2 (copy)
+			UseStateResult2(function(p2): boolean --[[ Line: 26 ]]
+				return not p2
 			end)
 		end, {}),
-		set = var2
+		set = UseStateResult2
 	}
 end

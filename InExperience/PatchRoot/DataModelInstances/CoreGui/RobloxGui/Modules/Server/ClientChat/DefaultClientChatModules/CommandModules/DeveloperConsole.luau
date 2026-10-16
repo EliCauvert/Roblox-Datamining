@@ -1,30 +1,30 @@
-﻿local starterGuiService = game:GetService("StarterGui")
-local utilModule = require(script.Parent:WaitForChild("Util"))
+﻿local StarterGui = game:GetService("StarterGui")
+local UtilModule = require(script.Parent:WaitForChild("Util"))
 
-function ProcessMessage(p1, _, _)
-	-- upvalues: starterGuiService (ref)
-	if string.sub(p1, 1, 8):lower() ~= "/console" and string.sub(p1, 1, 11):lower() ~= "/newconsole" then
+function ProcessMessage(Text: string, _, _): boolean --[[ Line: 9 ]]
+	-- upvalues: StarterGui (copy)
+	if string.sub(Text, 1, 8):lower() ~= "/console" and string.sub(Text, 1, 11):lower() ~= "/newconsole" then
 		return false
 	end
-	local ok, status = pcall(function()
-		-- upvalues: starterGuiService (copy)
-		return starterGuiService:GetCore("DevConsoleVisible")
+	local Success, Result = pcall(function() --[[ Line: 11 ]]
+		-- upvalues: StarterGui (upval)
+		return StarterGui:GetCore("DevConsoleVisible")
 	end)
 	
-	if ok then
-		local ok_1, status_1 = pcall(function()
-			-- upvalues: starterGuiService (copy), status (ref)
-			starterGuiService:SetCore("DevConsoleVisible", not status)
+	if Success then
+		local Success1, Result1 = pcall(function() --[[ Line: 13 ]]
+			-- upvalues: StarterGui (upval), Result (copy)
+			StarterGui:SetCore("DevConsoleVisible", not Result)
 		end)
 		
-		if not ok_1 and status_1 then
-			print("Error making developer console visible: " .. status_1)
+		if not Success1 and Result1 then
+			print("Error making developer console visible: " .. Result1)
 		end
 	end
 	return true
 end
 
 return {
-	[utilModule.KEY_COMMAND_PROCESSOR_TYPE] = utilModule.COMPLETED_MESSAGE_PROCESSOR,
-	[utilModule.KEY_PROCESSOR_FUNCTION] = ProcessMessage
+	[UtilModule.KEY_COMMAND_PROCESSOR_TYPE] = UtilModule.COMPLETED_MESSAGE_PROCESSOR,
+	[UtilModule.KEY_PROCESSOR_FUNCTION] = ProcessMessage
 }

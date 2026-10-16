@@ -1,18 +1,18 @@
-﻿local rccInExperienceNameSettingsEnabledAllowList = game:DefineFastString("RccInExperienceNameSettingsEnabledAllowList", "")
-local var1 = nil
+﻿local RccInExperienceNameSettingsEnabledAllowList = game:DefineFastString("RccInExperienceNameSettingsEnabledAllowList", "")
+local T = nil
 
 return {
-	isAllowListedUserId = function(p1)
-		-- upvalues: var1 (write), rccInExperienceNameSettingsEnabledAllowList (ref)
-		local var2 = tostring(p1)
+	isAllowListedUserId = function(p1): boolean --[[ Line: 7 ]]
+		-- upvalues: T (ref), RccInExperienceNameSettingsEnabledAllowList (copy)
+		local Text = tostring(p1)
 		
-		if var1 == nil then
-			var1 = {}
+		if T == nil then
+			T = {}
 			
-			for i in string.gmatch(rccInExperienceNameSettingsEnabledAllowList, "[^,]+") do
-				var1[i] = true
+			for i in string.gmatch(RccInExperienceNameSettingsEnabledAllowList, "[^,]+") do
+				T[i] = true
 			end
 		end
-		return var1[var2] == true
+		return T[Text] == true
 	end
 }

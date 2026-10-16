@@ -1,38 +1,41 @@
 ﻿local IAPExperience = script:FindFirstAncestor("IAPExperience")
-local parent = IAPExperience.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local text = foundationModule.Text
-local combineReactTags = require(parent.RoactUtils).combineReactTags
-local fFlagPurchasePromptFetchCartPricing = require(parent.SharedFlags).FFlagPurchasePromptFetchCartPricing
-local fFlagAXFixDiscountSummaryTextWrapPlusModule = require(IAPExperience.Flags.FFlagAXFixDiscountSummaryTextWrapPlus)
-local var1 = if fFlagAXFixDiscountSummaryTextWrapPlusModule then "row size-full-0 auto-y align-y-top padding-x-xsmall" else "row size-full-0 auto-y align-y-center padding-x-xsmall"
+local Parent = IAPExperience.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local CombineReactTagsFunction = require(Parent.RoactUtils).combineReactTags
+local FFlagPurchasePromptFetchCartPricing = require(Parent.SharedFlags).FFlagPurchasePromptFetchCartPricing
+local FFlagAXFixDiscountSummaryTextWrapPlusModule = require(IAPExperience.Flags.FFlagAXFixDiscountSummaryTextWrapPlus)
+local RowSizeFull0AutoYAlignYTopPaddingXXsmall: string = if FFlagAXFixDiscountSummaryTextWrapPlusModule then "row size-full-0 auto-y align-y-top padding-x-xsmall" else "row size-full-0 auto-y align-y-center padding-x-xsmall"
 
-return function(p1)
-	-- upvalues: reactModule (ref), fFlagAXFixDiscountSummaryTextWrapPlusModule (ref), combineReactTags (ref), view (ref), var1 (ref), text (ref), fFlagPurchasePromptFetchCartPricing (ref)
-	local textStyle = p1.textStyle or "text-body-small content-emphasis"
+return function(Frame) --[[ Line: 29 | Named "PriceLineItem" ]]
+	-- upvalues: ReactModule (copy), FFlagAXFixDiscountSummaryTextWrapPlusModule (copy), CombineReactTagsFunction (copy), View (copy), RowSizeFull0AutoYAlignYTopPaddingXXsmall (copy), Text (copy), FFlagPurchasePromptFetchCartPricing (copy)
+	local TextStyle = Frame.textStyle or "text-body-small content-emphasis"
 	
-	return reactModule.createElement(view, { LayoutOrder = p1.LayoutOrder, tag = p1.tag or var1 }, {
-		Label = reactModule.createElement(text, {
+	return ReactModule.createElement(View, {
+		LayoutOrder = Frame.LayoutOrder,
+		tag = Frame.tag or RowSizeFull0AutoYAlignYTopPaddingXXsmall
+	}, {
+		Label = ReactModule.createElement(Text, {
 			LayoutOrder = 1,
-			Text = p1.label,
-			Size = if fFlagAXFixDiscountSummaryTextWrapPlusModule then UDim2.new(0.8, 0, 0, 0) else UDim2.new(0.5, 0, 0, 0),
-			tag = reactModule.useMemo(function()
-				-- upvalues: fFlagAXFixDiscountSummaryTextWrapPlusModule (copy), combineReactTags (copy), textStyle (ref)
-				return if fFlagAXFixDiscountSummaryTextWrapPlusModule then combineReactTags("auto-y", textStyle, "content-emphasis", "text-align-x-left", "text-wrap") else combineReactTags("auto-y", textStyle, "content-emphasis", "text-align-x-left")
-			end, { textStyle }),
-			RichText = if fFlagPurchasePromptFetchCartPricing then true else nil
+			Text = Frame.label,
+			Size = if FFlagAXFixDiscountSummaryTextWrapPlusModule then UDim2.new(0.8, 0, 0, 0) else UDim2.new(0.5, 0, 0, 0),
+			tag = ReactModule.useMemo(function() --[[ Line: 31 ]]
+				-- upvalues: FFlagAXFixDiscountSummaryTextWrapPlusModule (upval), CombineReactTagsFunction (upval), TextStyle (copy)
+				return if FFlagAXFixDiscountSummaryTextWrapPlusModule then CombineReactTagsFunction("auto-y", TextStyle, "content-emphasis", "text-align-x-left", "text-wrap") else CombineReactTagsFunction("auto-y", TextStyle, "content-emphasis", "text-align-x-left")
+			end, { TextStyle }),
+			RichText = if FFlagPurchasePromptFetchCartPricing then true else nil
 		}),
-		Amount = reactModule.createElement(text, {
+		Amount = ReactModule.createElement(Text, {
 			LayoutOrder = 2,
 			RichText = true,
-			Text = p1.amount,
-			Size = if fFlagAXFixDiscountSummaryTextWrapPlusModule then UDim2.new(0.2, 0, 0, 0) else UDim2.new(0.5, 0, 0, 0),
-			tag = reactModule.useMemo(function()
-				-- upvalues: combineReactTags (copy), textStyle (ref)
-				return combineReactTags("auto-y", textStyle, "content-emphasis", "text-align-x-right")
-			end, { textStyle })
+			Text = Frame.amount,
+			Size = if FFlagAXFixDiscountSummaryTextWrapPlusModule then UDim2.new(0.2, 0, 0, 0) else UDim2.new(0.5, 0, 0, 0),
+			tag = ReactModule.useMemo(function() --[[ Line: 37 ]]
+				-- upvalues: CombineReactTagsFunction (upval), TextStyle (copy)
+				return CombineReactTagsFunction("auto-y", TextStyle, "content-emphasis", "text-align-x-right")
+			end, { TextStyle })
 		})
 	})
 end

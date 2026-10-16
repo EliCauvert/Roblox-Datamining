@@ -1,28 +1,29 @@
-﻿local purchasePrompt = script:FindFirstAncestor("PurchasePrompt")
-local parent = purchasePrompt.Parent
-local productPurchasePromptCounter = require(parent.IAPExperience).Counters.ProductPurchasePromptCounter.ProductPurchasePromptCounter
-local default = require(parent.LoggingProtocol).default
-local promptStateModule = require(purchasePrompt.Enums.PromptState)
-local purchaseErrorModule = require(purchasePrompt.Enums.PurchaseError)
-local fFlagFixPurchasingErrorCounterModule = require(purchasePrompt.Flags.FFlagFixPurchasingErrorCounter)
-local fFlagAddSurfaceAndProductTypeToPromptCounterModule = require(purchasePrompt.Flags.FFlagAddSurfaceAndProductTypeToPromptCounter)
+﻿local PurchasePrompt = script:FindFirstAncestor("PurchasePrompt")
+local Parent = PurchasePrompt.Parent
+local ProductPurchasePromptCounter = require(Parent.IAPExperience).Counters.ProductPurchasePromptCounter.ProductPurchasePromptCounter
+local Default = require(Parent.LoggingProtocol).default
+local PromptStateModule = require(PurchasePrompt.Enums.PromptState)
+local PurchaseErrorModule = require(PurchasePrompt.Enums.PurchaseError)
+local FFlagFixPurchasingErrorCounterModule = require(PurchasePrompt.Flags.FFlagFixPurchasingErrorCounter)
+local FFlagAddSurfaceAndProductTypeToPromptCounterModule = require(PurchasePrompt.Flags.FFlagAddSurfaceAndProductTypeToPromptCounter)
 
-return function(p1, p2, p3, p4)
-	-- upvalues: fFlagFixPurchasingErrorCounterModule (ref), default (ref), productPurchasePromptCounter (ref), purchaseErrorModule (ref), fFlagAddSurfaceAndProductTypeToPromptCounterModule (ref), promptStateModule (ref)
-	if fFlagFixPurchasingErrorCounterModule then
-		default:logRobloxTelemetryCounter(productPurchasePromptCounter, 1, {
-			promptState = tostring(p1),
-			purchaseError = if purchaseErrorModule.isMember(p2) then tostring(p2) else tostring(purchaseErrorModule.UnknownFailure),
-			surface = if fFlagAddSurfaceAndProductTypeToPromptCounterModule then p3 or "Unknown" else nil,
-			productType = if fFlagAddSurfaceAndProductTypeToPromptCounterModule then p4 or "Unknown" else nil
+return function(Error, p1, p2, p3) --[[ Line: 12 | Named "logProductPurchasePromptCounter" ]]
+	-- upvalues: FFlagFixPurchasingErrorCounterModule (copy), Default (copy), ProductPurchasePromptCounter (copy), PurchaseErrorModule (copy), FFlagAddSurfaceAndProductTypeToPromptCounterModule (copy), PromptStateModule (copy)
+	if FFlagFixPurchasingErrorCounterModule then
+		Default:logRobloxTelemetryCounter(ProductPurchasePromptCounter, 1, {
+			promptState = tostring(Error),
+			purchaseError = if PurchaseErrorModule.isMember(p1) then tostring(p1) else tostring(PurchaseErrorModule.UnknownFailure),
+			surface = if FFlagAddSurfaceAndProductTypeToPromptCounterModule then p2 or "Unknown" else nil,
+			productType = if FFlagAddSurfaceAndProductTypeToPromptCounterModule then p3 or "Unknown" else nil
 		})
 		
 		return
+	else
+		Default:logRobloxTelemetryCounter(ProductPurchasePromptCounter, 1, {
+			promptState = tostring(Error),
+			purchaseError = if Error == PromptStateModule.Error then tostring(p1) else "",
+			surface = if FFlagAddSurfaceAndProductTypeToPromptCounterModule then p2 or "Unknown" else nil,
+			productType = if FFlagAddSurfaceAndProductTypeToPromptCounterModule then p3 or "Unknown" else nil
+		})
 	end
-	default:logRobloxTelemetryCounter(productPurchasePromptCounter, 1, {
-		promptState = tostring(p1),
-		purchaseError = if p1 == promptStateModule.Error then tostring(p2) else "",
-		surface = if fFlagAddSurfaceAndProductTypeToPromptCounterModule then p3 or "Unknown" else nil,
-		productType = if fFlagAddSurfaceAndProductTypeToPromptCounterModule then p4 or "Unknown" else nil
-	})
 end

@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Workspace.CoreGuiCommon.CoreGuiCommon)
+﻿return (require(script.Parent.Parent.Parent._Workspace.CoreGuiCommon.CoreGuiCommon))

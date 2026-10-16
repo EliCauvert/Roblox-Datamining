@@ -1,59 +1,56 @@
-﻿local parent = script:FindFirstAncestor("ProfilePlatform").Parent
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-local peekViewModule = require(parent.PeekView)
-local peekViewState = peekViewModule.PeekViewState
-local peekView = peekViewModule.PeekView
-local useStyle = UIBloxModule.Core.Style.useStyle
+﻿local Parent = script:FindFirstAncestor("ProfilePlatform").Parent
+local ReactModule = require(Parent.React)
+local PeekViewModule = require(Parent.PeekView)
+local PeekViewState = PeekViewModule.PeekViewState
+local PeekView = PeekViewModule.PeekView
+local UseStyleFunction = require(Parent.UIBlox).Core.Style.useStyle
 
-return function(p1)
-	-- upvalues: useStyle (ref), reactModule (ref), peekViewState (ref), peekView (ref)
-	local var1 = useStyle()
-	local var2, var3 = reactModule.useState(0)
-	local var4 = reactModule.useCallback(function(p2)
-		-- upvalues: var3 (ref)
-		var3(p2)
-	end, {})
-	local var5 = reactModule.useCallback(function(p2, _)
-		-- upvalues: p1 (ref), peekViewState (copy)
-		local onPeekViewClosed = p1.onPeekViewClosed
-		
-		if p2 == peekViewState.Closed and onPeekViewClosed then
-			onPeekViewClosed()
-		end
-	end, { p1.onPeekViewClosed })
-	local uDim2 = UDim2.new(0, p1.viewWidth, 1, 0)
-	local topBarHeight = p1.topBarHeight
-	local var6 = var2 > 0.95
+return function(p1) --[[ Line: 25 ]]
+	-- upvalues: UseStyleFunction (copy), ReactModule (copy), PeekViewState (copy), PeekView (copy)
+	local UseStyleResult = UseStyleFunction()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
+	local TopBarHeight: number = p1.topBarHeight
+	local IsUseStateResultAbove = UseStateResult > 0.95
+	local NoIsUseStateResultAbove: boolean = UseStateResult > 0 and not IsUseStateResultAbove
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		Position = UDim2.fromOffset(0, 0),
-		Size = uDim2
+		Size = UDim2.new(0, p1.viewWidth, 1, 0)
 	}, {
-		PeekViewTopBar = if var6 then p1.renderTopBar() else nil,
-		PeekViewTopBarEffectHolder = if var2 > 0 and not var6 then reactModule.createElement("Frame", {
+		PeekViewTopBar = if IsUseStateResultAbove then p1.renderTopBar() else nil,
+		PeekViewTopBarEffectHolder = if NoIsUseStateResultAbove then ReactModule.createElement("Frame", {
 			BorderSizePixel = 0,
-			Size = UDim2.new(1, 0, 0, topBarHeight),
+			Size = UDim2.new(1, 0, 0, TopBarHeight),
 			Position = UDim2.new(0, 0, 0, 0),
-			BackgroundColor3 = var1.Theme.BackgroundDefault.Color,
-			BackgroundTransparency = 1 - var2
+			BackgroundColor3 = UseStyleResult.Theme.BackgroundDefault.Color,
+			BackgroundTransparency = 1 - UseStateResult
 		}) else nil,
-		PeekViewContainer = reactModule.createElement("Frame", {
+		PeekViewContainer = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			ClipsDescendants = true,
-			Size = UDim2.new(1, 0, 1, -topBarHeight + 6),
-			Position = UDim2.new(0, 0, 0, topBarHeight - 6)
+			Size = UDim2.new(1, 0, 1, -TopBarHeight + 6),
+			Position = UDim2.new(0, 0, 0, TopBarHeight - 6)
 		}, {
-			PeekView = reactModule.createElement(peekView, {
+			PeekView = ReactModule.createElement(PeekView, {
 				bottomDockedContainerHeight = 0,
 				briefViewContentHeight = p1.briefViewContentHeight,
 				mountAsFullView = p1.mountAsFullView,
-				viewStateChanged = var5,
-				briefToFullTransitionPercent = var4
+				viewStateChanged = ReactModule.useCallback(function(Closed, _) --[[ Line: 33 ]]
+					-- upvalues: p1 (copy), PeekViewState (upval)
+					local OnPeekViewClosedFunction: () -> () = p1.onPeekViewClosed
+					
+					if Closed == PeekViewState.Closed and OnPeekViewClosedFunction then
+						OnPeekViewClosedFunction()
+					end
+				end, { p1.onPeekViewClosed }),
+				briefToFullTransitionPercent = ReactModule.useCallback(function(p2) --[[ Line: 29 ]]
+					-- upvalues: UseStateResult2 (copy)
+					UseStateResult2(p2)
+				end, {})
 			}, {
-				UIListLayout = reactModule.createElement("UIListLayout", {
+				UIListLayout = ReactModule.createElement("UIListLayout", {
 					Padding = UDim.new(0, 0),
 					SortOrder = Enum.SortOrder.LayoutOrder,
 					HorizontalAlignment = Enum.HorizontalAlignment.Left,

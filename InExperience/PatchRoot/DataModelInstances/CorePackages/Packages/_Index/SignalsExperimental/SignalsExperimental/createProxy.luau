@@ -1,158 +1,172 @@
-﻿local parent = script.Parent.Parent
-local signalsModule = require(parent.Signals)
-local createSignal = signalsModule.createSignal
-local createComputed = signalsModule.createComputed
-local batch = require(parent.SignalsScheduler).batch
+﻿local Parent = script.Parent.Parent
+local SignalsModule = require(Parent.Signals)
+local CreateSignalFunction = SignalsModule.createSignal
+local CreateComputedFunction = SignalsModule.createComputed
+local BatchFunction = require(Parent.SignalsScheduler).batch
 
-local function _(value)
-	-- upvalues: createSignal (ref)
-	local var1, var2 = createSignal(function()
-		-- upvalues: value (ref)
-		return value
+local function _(p1) --[[ Line: 21 | Named "createWrappedSignal" ]]
+	-- upvalues: CreateSignalFunction (copy)
+	local Signal, Signal2 = CreateSignalFunction(function() --[[ Line: 22 ]]
+		-- upvalues: p1 (copy)
+		return p1
 	end)
 	
-	return { getter = var1, setter = var2 }
+	return { getter = Signal, setter = Signal2 }
 end
 
-return function(p1)
-	-- upvalues: createSignal (ref), createComputed (ref), batch (ref)
+return function(List) --[[ Line: 28 | Named "createProxy" ]]
+	-- upvalues: CreateSignalFunction (copy), CreateComputedFunction (copy), BatchFunction (copy)
 	local t = {}
 	
-	for i, v in p1 do
-		local var1, var2 = createSignal(function()
-			-- upvalues: v (ref)
-			return v
+	for i, value in List do
+		local Signal, Signal2 = CreateSignalFunction(function() --[[ Line: 22 ]]
+			-- upvalues: value (copy)
+			return value
 		end)
-		t[i] = { getter = var1, setter = var2 }
+		t[i] = { getter = Signal, setter = Signal2 }
 	end
-	local var3, var4 = createSignal(nil, function()
+	local Signal1, Signal2_1 = CreateSignalFunction(nil, function(): boolean --[[ Line: 35 ]]
 		return false
 	end)
-	local var5 = createComputed(function(p2)
-		-- upvalues: var3 (ref), t (ref)
-		var3(p2)
-		local var6 = 0
+	local Computed = CreateComputedFunction(function(p1): number --[[ Line: 39 ]]
+		-- upvalues: Signal1 (copy), t (copy)
+		Signal1(p1)
+		local Count = 0
 		
-		for i, v in ipairs(t) do
-			if v.getter(false) ~= nil then
-				var6 += 1
+		for _, value in ipairs(t) do
+			if value.getter(false) ~= nil then
+				Count += 1
 			end
 		end
-		return var6
+		return Count
 	end)
 	
-	local function nextSignal(value, p3)
+	local function nextSignal(p2, p3) --[[ Line: 107 ]]
+		local Key = nil
+		local Ter = nil
 		while true do
-			local var7, var8 = next(value, p3)
-			if var7 ~= nil then
-				if var8 == nil then continue end
-				local ter = var8.getter(false)
-				
-				if ter ~= nil then
-					return var7, ter
-				end
+			local Value
+			Key, Value = next(p2, p3)
+			if Key == nil then
+				return nil
 			end
-			return nil
+			local NoValue = Value == nil
+			
+			if not NoValue then
+				Ter = Value.getter(false)
+				NoValue = Ter == nil
+			end
+			if not NoValue then
+				return Key, Ter
+			end
+			p3 = Key
 		end
 	end
 	
-	return setmetatable({}, table.freeze({
+	return (setmetatable({}, (table.freeze({
 		__metatable = false,
-		__len = function()
-			-- upvalues: var5 (ref)
-			return var5(false)
+		__len = function() --[[ Line: 103 ]]
+			-- upvalues: Computed (copy)
+			return Computed(false)
 		end,
-		__call = function(_, p4)
-			-- upvalues: var5 (ref), var3 (ref), t (ref), createSignal (copy)
-			local function nextSignal(value, p5)
-				-- upvalues: p4 (ref)
+		__call = function(_, p4) --[[ Line: 50 ]]
+			-- upvalues: Computed (copy), Signal1 (copy), t (copy), CreateSignalFunction (upval)
+			local function nextSignal(p5, p6) --[[ Line: 55 ]]
+				-- upvalues: p4 (copy)
+				local Key = nil
+				local Ter = nil
 				while true do
-					local var9, var10 = next(value, p5)
-					if var9 ~= nil then
-						if var10 == nil then continue end
-						local ter = var10.getter(p4)
-						
-						if ter ~= nil then
-							return var9, ter
-						end
+					local Value
+					Key, Value = next(p5, p6)
+					if Key == nil then
+						return nil
 					end
-					return nil
+					local NoValue = Value == nil
+					
+					if not NoValue then
+						Ter = Value.getter(p4)
+						NoValue = Ter == nil
+					end
+					if not NoValue then
+						return Key, Ter
+					end
+					p6 = Key
 				end
 			end
 			
-			return setmetatable({}, table.freeze({
+			return (setmetatable({}, (table.freeze({
 				__metatable = false,
-				__len = function()
-					-- upvalues: var5 (copy), p4 (ref)
-					return var5(p4)
+				__len = function() --[[ Line: 51 ]]
+					-- upvalues: Computed (upval), p4 (copy)
+					return Computed(p4)
 				end,
-				__iter = function()
-					-- upvalues: var3 (copy), p4 (ref), nextSignal (ref), t (copy)
-					var3(p4)
+				__iter = function() --[[ Line: 71 ]]
+					-- upvalues: Signal1 (upval), p4 (copy), nextSignal (copy), t (upval)
+					Signal1(p4)
 					
 					return nextSignal, t
 				end,
-				__index = function(_, p6)
-					-- upvalues: t (copy), p4 (ref), createSignal (copy)
-					local var11 = t[p6]
+				__index = function(_, Key) --[[ Line: 76 ]]
+					-- upvalues: t (upval), p4 (copy), CreateSignalFunction (upval)
+					local Entry = t[Key]
 					
-					if var11 == nil then
+					if Entry == nil then
 						if p4 == nil then
 							return nil
 						end
-						local var12 = nil
-						local var13, var14 = createSignal(function()
-							-- upvalues: var12 (ref)
-							return var12
+						local v1 = nil
+						local Signal, Signal2 = CreateSignalFunction(function() --[[ Line: 22 ]]
+							-- upvalues: v1 (copy)
+							return v1
 						end)
-						var11 = { getter = var13, setter = var14 }
-						t[p6] = var11
+						Entry = { getter = Signal, setter = Signal2 }
+						t[Key] = Entry
 					end
-					return var11.getter(p4)
+					return Entry.getter(p4)
 				end,
-				__newindex = function(_, p6, p7)
-					error(`attempt to update read-only store at {p6} with {p7}`, 2)
+				__newindex = function(_, p7, p8) --[[ Line: 88 ]]
+					error(`attempt to update read-only store at {p7} with {p8}`, 2)
 				end
-			}))
+			}))))
 		end,
-		__iter = function()
-			-- upvalues: nextSignal (ref), t (ref)
+		__iter = function() --[[ Line: 123 ]]
+			-- upvalues: nextSignal (copy), t (copy)
 			return nextSignal, t
 		end,
-		__index = function(_, p5)
-			-- upvalues: t (ref)
-			local var9 = t[p5]
+		__index = function(_, p5) --[[ Line: 127 ]]
+			-- upvalues: t (copy)
+			local Entry = t[p5]
 			
-			return if var9 == nil then nil else var9.getter(false)
+			return if Entry == nil then nil else Entry.getter(false)
 		end,
-		__newindex = function(_, p5, p6)
-			-- upvalues: t (ref), createSignal (copy), var4 (ref), batch (copy)
-			local var9 = t[p5]
+		__newindex = function(_, Key, Ter) --[[ Line: 135 ]]
+			-- upvalues: t (copy), CreateSignalFunction (upval), Signal2_1 (copy), BatchFunction (upval)
+			local Entry = t[Key]
 			
-			if var9 ~= nil then
-				local ter = var9.getter(false)
+			if Entry ~= nil then
+				local Ter1 = Entry.getter(false)
 				
-				if ter ~= p6 then
-					batch(function()
-						-- upvalues: var9 (write), p6 (ref), ter (ref), var4 (copy)
-						var9.setter(function()
-							-- upvalues: p6 (copy)
-							return p6
+				if Ter1 ~= Ter then
+					BatchFunction(function() --[[ Line: 146 ]]
+						-- upvalues: Entry (ref), Ter (copy), Ter1 (copy), Signal2_1 (upval)
+						Entry.setter(function() --[[ Line: 147 ]]
+							-- upvalues: Ter (upval)
+							return Ter
 						end)
 						
-						if ter == nil or p6 == nil then
-							var4()
+						if Ter1 == nil or Ter == nil then
+							Signal2_1()
 						end
 					end)
 				end
-			elseif p6 ~= nil then
-				local var10, var11 = createSignal(function()
-					-- upvalues: p6 (ref)
-					return p6
+			elseif Ter ~= nil then
+				local Signal, Signal2 = CreateSignalFunction(function() --[[ Line: 22 ]]
+					-- upvalues: Ter (copy)
+					return Ter
 				end)
-				t[p5] = { getter = var10, setter = var11 }
-				var4()
+				t[Key] = { getter = Signal, setter = Signal2 }
+				Signal2_1()
 			end
 		end
-	}))
+	}))))
 end

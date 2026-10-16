@@ -1,13 +1,13 @@
-﻿local bulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
-local parent = bulkPurchaseApp.Parent
-local reactModule = require(parent.React)
-local useDesignTokens = require(parent.Style).useDesignTokens
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local styledTextLabel = require(parent.UIBlox).App.Text.StyledTextLabel
-local itemStatusToItemStatusKeyModule = require(bulkPurchaseApp.Enums.ItemStatusToItemStatusKey)
-local itemStatusKeyToLocalizationKeyModule = require(bulkPurchaseApp.Enums.ItemStatusKeyToLocalizationKey)
+﻿local BulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
+local Parent = BulkPurchaseApp.Parent
+local ReactModule = require(Parent.React)
+local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local StyledTextLabel = require(Parent.UIBlox).App.Text.StyledTextLabel
+local ItemStatusToItemStatusKeyModule = require(BulkPurchaseApp.Enums.ItemStatusToItemStatusKey)
+local ItemStatusKeyToLocalizationKeyModule = require(BulkPurchaseApp.Enums.ItemStatusKeyToLocalizationKey)
 
-local function mapTokens(p1)
+local function mapTokens(p1) --[[ Line: 12 ]]
 	return {
 		successColor = p1.Color.System.Success,
 		failureColor = p1.Color.System.Alert,
@@ -15,18 +15,18 @@ local function mapTokens(p1)
 	}
 end
 
-return function(p1)
-	-- upvalues: useDesignTokens (ref), mapTokens (ref), useLocalization (ref), itemStatusKeyToLocalizationKeyModule (ref), itemStatusToItemStatusKeyModule (ref), reactModule (ref), styledTextLabel (ref)
-	local var1 = useDesignTokens(mapTokens)
+return function(p1) --[[ Line: 24 | Named "ItemStatus" ]]
+	-- upvalues: UseDesignTokensFunction (copy), mapTokens (copy), UseLocalizationFunction (copy), ItemStatusKeyToLocalizationKeyModule (copy), ItemStatusToItemStatusKeyModule (copy), ReactModule (copy), StyledTextLabel (copy)
+	local UseDesignTokensResult = UseDesignTokensFunction(mapTokens)
 	
-	return reactModule.createElement(styledTextLabel, {
+	return ReactModule.createElement(StyledTextLabel, {
 		textWrapped = true,
-		fontStyle = var1.fontStyle,
-		colorStyle = if p1.status == Enum.MarketplaceItemPurchaseStatus.Success then var1.successColor else var1.failureColor,
-		text = useLocalization(itemStatusKeyToLocalizationKeyModule)[itemStatusToItemStatusKeyModule[p1.status]],
+		fontStyle = UseDesignTokensResult.fontStyle,
+		colorStyle = if p1.status == Enum.MarketplaceItemPurchaseStatus.Success then UseDesignTokensResult.successColor else UseDesignTokensResult.failureColor,
+		text = UseLocalizationFunction(ItemStatusKeyToLocalizationKeyModule)[ItemStatusToItemStatusKeyModule[p1.status]],
 		size = UDim2.fromScale(1, 1),
 		textXAlignment = Enum.TextXAlignment.Right,
 		textYAlignment = Enum.TextYAlignment.Top,
-		lineHeight = var1.fontStyle.LineHeight
+		lineHeight = UseDesignTokensResult.fontStyle.LineHeight
 	})
 end

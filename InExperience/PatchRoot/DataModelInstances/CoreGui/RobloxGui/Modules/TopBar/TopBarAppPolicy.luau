@@ -1,16 +1,16 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local policyProviderModule = require(corePackagesService.Packages.PolicyProvider)
-local fFlagShowGameAgeRating = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagShowGameAgeRating
-local var1 = policyProviderModule.withGetPolicyImplementation(policyProviderModule.GetPolicyImplementations.MemStorageService("app-policy"))
+﻿local CorePackages = game:GetService("CorePackages")
+local PolicyProviderModule = require(CorePackages.Packages.PolicyProvider)
+local FFlagShowGameAgeRating = require(CorePackages.Workspace.Packages.SharedFlags).FFlagShowGameAgeRating
+local WithGetPolicyImplementationResult = PolicyProviderModule.withGetPolicyImplementation((PolicyProviderModule.GetPolicyImplementations.MemStorageService("app-policy")))
 
-function var2.Mapper(p1)
-	-- upvalues: fFlagShowGameAgeRating (ref)
+function WithGetPolicyImplementationResult.Mapper(p1) --[[ Line: 10 ]]
+	-- upvalues: FFlagShowGameAgeRating (copy)
 	return {
-		showBadgeOver12 = if not fFlagShowGameAgeRating then function()
-			-- upvalues: p1 (ref)
+		showBadgeOver12 = if FFlagShowGameAgeRating then nil else function() --[[ Line: 13 ]]
+			-- upvalues: p1 (copy)
 			return p1.ShowBadgeOver12 or false
-		end else nil
+		end
 	}
 end
 
-return var1
+return WithGetPolicyImplementationResult

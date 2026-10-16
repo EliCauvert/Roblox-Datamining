@@ -1,42 +1,42 @@
-﻿local purchasePrompt = script:FindFirstAncestor("PurchasePrompt")
-local parent = purchasePrompt.Parent
-local localizationService = game:GetService("LocalizationService")
-local purchasePromptDepsModule = require(parent.PurchasePromptDeps)
-local roact = purchasePromptDepsModule.Roact
-local rodux = purchasePromptDepsModule.Rodux
-local roactRodux = purchasePromptDepsModule.RoactRodux
-local localeProvider = require(parent.IAPExperience).Locale.LocaleProvider
-local layoutValuesProviderModule = require(purchasePrompt.Components.Connection.LayoutValuesProvider)
-local localizationContextProviderModule = require(purchasePrompt.Components.Connection.LocalizationContextProvider)
-local reducerModule = require(purchasePrompt.Reducers.Reducer)
-local layoutValuesModule = require(purchasePrompt.Services.LayoutValues)
-local styleProviderWithDefaultTheme = require(parent.Style).StyleProviderWithDefaultTheme
-local localization = require(parent.RobloxAppLocales).Localization
-local unitTestContainer = roact.Component:extend("UnitTestContainer")
+﻿local PurchasePrompt = script:FindFirstAncestor("PurchasePrompt")
+local Parent = PurchasePrompt.Parent
+local LocalizationService = game:GetService("LocalizationService")
+local PurchasePromptDepsModule = require(Parent.PurchasePromptDeps)
+local Roact = PurchasePromptDepsModule.Roact
+local Rodux = PurchasePromptDepsModule.Rodux
+local RoactRodux = PurchasePromptDepsModule.RoactRodux
+local LocaleProvider = require(Parent.IAPExperience).Locale.LocaleProvider
+local LayoutValuesProviderModule = require(PurchasePrompt.Components.Connection.LayoutValuesProvider)
+local LocalizationContextProviderModule = require(PurchasePrompt.Components.Connection.LocalizationContextProvider)
+local ReducerModule = require(PurchasePrompt.Reducers.Reducer)
+local LayoutValuesModule = require(PurchasePrompt.Services.LayoutValues)
+local StyleProviderWithDefaultTheme = require(Parent.Style).StyleProviderWithDefaultTheme
+local Localization = require(Parent.RobloxAppLocales).Localization
+local UnitTestContainer = Roact.Component:extend("UnitTestContainer")
 
-function unitTestContainer.init(p1)
-	-- upvalues: layoutValuesModule (ref), rodux (ref), reducerModule (ref), localizationService (ref), localization (ref)
-	p1.layoutValues = layoutValuesModule.new(false).layout
-	p1.store = p1.props.overrideStore or rodux.Store.new(reducerModule, {})
-	p1.localizationContext = localization.new(p1.props.overrideLocale or localizationService.RobloxLocaleId)
+function UnitTestContainer.init(p1) --[[ Line: 26 ]]
+	-- upvalues: LayoutValuesModule (copy), Rodux (copy), ReducerModule (copy), LocalizationService (copy), Localization (copy)
+	p1.layoutValues = LayoutValuesModule.new(false).layout
+	p1.store = p1.props.overrideStore or Rodux.Store.new(ReducerModule, {})
+	p1.localizationContext = Localization.new(p1.props.overrideLocale or LocalizationService.RobloxLocaleId)
 end
 
-function unitTestContainer.render(p1)
-	-- upvalues: roact (ref), roactRodux (ref), localeProvider (ref), localizationService (ref), styleProviderWithDefaultTheme (ref), localizationContextProviderModule (ref), layoutValuesProviderModule (ref)
-	assert(p1.props[roact.Children] ~= nil and #p1.props[roact.Children] > 0, "UnitTestContainer: no children provided, nothing will be tested")
+function UnitTestContainer.render(p1) --[[ Line: 34 ]]
+	-- upvalues: Roact (copy), RoactRodux (copy), LocaleProvider (copy), LocalizationService (copy), StyleProviderWithDefaultTheme (copy), LocalizationContextProviderModule (copy), LayoutValuesProviderModule (copy)
+	assert(p1.props[Roact.Children] ~= nil and #p1.props[Roact.Children] > 0, "UnitTestContainer: no children provided, nothing will be tested")
 	
-	return roact.createElement(roactRodux.StoreProvider, { store = p1.store }, {
-		LocaleProvider = roact.createElement(localeProvider, { locale = localizationService.RobloxLocaleId }, {
-			StyleProvider = roact.createElement(styleProviderWithDefaultTheme, {
-				LocalizationContextProvider = roact.createElement(localizationContextProviderModule, {
+	return Roact.createElement(RoactRodux.StoreProvider, { store = p1.store }, {
+		LocaleProvider = Roact.createElement(LocaleProvider, { locale = LocalizationService.RobloxLocaleId }, {
+			StyleProvider = Roact.createElement(StyleProviderWithDefaultTheme, {
+				LocalizationContextProvider = Roact.createElement(LocalizationContextProviderModule, {
 					localizationContext = p1.localizationContext,
-					render = function()
-						-- upvalues: roact (copy), layoutValuesProviderModule (copy), p1 (ref)
-						return roact.createElement(layoutValuesProviderModule, {
+					render = function() --[[ Line: 49 ]]
+						-- upvalues: Roact (upval), LayoutValuesProviderModule (upval), p1 (copy)
+						return Roact.createElement(LayoutValuesProviderModule, {
 							isTenFootInterface = false,
-							render = function()
-								-- upvalues: roact (copy), p1 (copy)
-								return roact.createElement("ScreenGui", { AutoLocalize = false, IgnoreGuiInset = true }, p1.props[roact.Children])
+							render = function() --[[ Line: 52 ]]
+								-- upvalues: Roact (upval), p1 (upval)
+								return Roact.createElement("ScreenGui", { AutoLocalize = false, IgnoreGuiInset = true }, p1.props[Roact.Children])
 							end
 						})
 					end
@@ -46,4 +46,4 @@ function unitTestContainer.render(p1)
 	})
 end
 
-return unitTestContainer
+return UnitTestContainer

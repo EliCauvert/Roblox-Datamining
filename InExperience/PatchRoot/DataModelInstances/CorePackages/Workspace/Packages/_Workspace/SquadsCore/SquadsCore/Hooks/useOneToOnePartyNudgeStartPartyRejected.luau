@@ -1,18 +1,18 @@
-﻿local squadsCore = script:FindFirstAncestor("SquadsCore")
-local parent = squadsCore.Parent
-local playersService = game:GetService("Players")
-local constantsModule = require(squadsCore.Common.Constants)
-local realtimeDeliveryModule = require(parent.RealtimeDelivery)
-local fFlagEnablePartyNudgeAfterJoin = require(parent.SharedFlags).FFlagEnablePartyNudgeAfterJoin
+﻿local SquadsCore = script:FindFirstAncestor("SquadsCore")
+local Parent = SquadsCore.Parent
+local Players = game:GetService("Players")
+local ConstantsModule = require(SquadsCore.Common.Constants)
+local RealtimeDeliveryModule = require(Parent.RealtimeDelivery)
+local FFlagEnablePartyNudgeAfterJoin = require(Parent.SharedFlags).FFlagEnablePartyNudgeAfterJoin
 
-return function(p1)
-	-- upvalues: fFlagEnablePartyNudgeAfterJoin (ref), realtimeDeliveryModule (ref), constantsModule (ref), playersService (ref)
-	if fFlagEnablePartyNudgeAfterJoin then
-		realtimeDeliveryModule.useRealtimeNamespace(constantsModule.PARTY_NUDGE_RTN_NAMESPACE, function(p2)
-			-- upvalues: playersService (copy), constantsModule (copy), p1 (ref)
-			if playersService.LocalPlayer and p2.nudgeType == constantsModule.ONE_TO_ONE_NUDGE_IN_EXPERIENCE_TYPE and (p2.inviteeId == playersService.LocalPlayer.UserId and p2.status == constantsModule.START_PARTY_REJECTED_STATUS) then
-				p1(p2)
+return function(Callback) --[[ Line: 13 | Named "useOneToOnePartyNudgeStartPartyRejected" ]]
+	-- upvalues: FFlagEnablePartyNudgeAfterJoin (copy), RealtimeDeliveryModule (copy), ConstantsModule (copy), Players (copy)
+	if FFlagEnablePartyNudgeAfterJoin then
+		RealtimeDeliveryModule.useRealtimeNamespace(ConstantsModule.PARTY_NUDGE_RTN_NAMESPACE, function(p1) --[[ Line: 15 ]]
+			-- upvalues: Players (upval), ConstantsModule (upval), Callback (copy)
+			if Players.LocalPlayer and p1.nudgeType == ConstantsModule.ONE_TO_ONE_NUDGE_IN_EXPERIENCE_TYPE and p1.inviteeId == Players.LocalPlayer.UserId and p1.status == ConstantsModule.START_PARTY_REJECTED_STATUS then
+				Callback(p1)
 			end
-		end, { p1 })
+		end, { Callback })
 	end
 end

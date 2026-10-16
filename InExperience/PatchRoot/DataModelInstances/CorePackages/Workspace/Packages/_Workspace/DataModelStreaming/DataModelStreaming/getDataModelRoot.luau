@@ -1,78 +1,79 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local guiService = game:GetService("GuiService")
-local getInstancePropertiesModule = require(script.Parent.getInstanceProperties)
+﻿local CoreGui = game:GetService("CoreGui")
+local GuiService = game:GetService("GuiService")
+local GetInstancePropertiesModule = require(script.Parent.getInstanceProperties)
 
-local function hasGuiBase2dChildren(p1)
-	-- upvalues: hasGuiBase2dChildren (ref)
-	if p1 == nil then
+local function hasGuiBase2dChildren(Gui): boolean --[[ Line: 10 ]]
+	-- upvalues: hasGuiBase2dChildren (copy)
+	if Gui == nil then
 		return false
 	end
-	for i, v in p1:GetChildren() do
-		if not v:IsA("GuiBase2d") then
-			if hasGuiBase2dChildren(v) then
-				return true
-			end
+	for _, Gui1 in Gui:GetChildren() do
+		if Gui1:IsA("GuiBase2d") then
+			return true
+		elseif hasGuiBase2dChildren(Gui1) then
+			return true
 		end
-		return true
 	end
 	return false
 end
 
-local function getDataModelNode(p2, p3)
-	-- upvalues: hasGuiBase2dChildren (ref), getDataModelNode (ref), getInstancePropertiesModule (ref)
-	if p2 == nil then
+local function getDataModelNode(Object, p1) --[[ Line: 28 ]]
+	-- upvalues: hasGuiBase2dChildren (copy), getDataModelNode (copy), GetInstancePropertiesModule (copy)
+	if Object == nil then
 		return nil
 	end
-	local folder = p2:IsA("Folder")
+	local IsFolder = Object:IsA("Folder")
+	local IsGuiBase2d = Object:IsA("GuiBase2d")
 	
-	if not folder and not p2:IsA("GuiBase2d") then
-		return nil
-	elseif folder and not hasGuiBase2dChildren(p2) then
+	if not IsFolder and not IsGuiBase2d then
 		return nil
 	end
-	local t = {}
+	if IsFolder and not hasGuiBase2dChildren(Object) then
+		return nil
+	end
+	local Children = {}
 	
-	for i, v in p2:GetChildren() do
-		local var1 = getDataModelNode(v, p3)
+	for _, child in Object:GetChildren() do
+		local DataModelNode = getDataModelNode(child, p1)
 		
-		if var1 ~= nil then
-			table.insert(t, var1)
+		if DataModelNode ~= nil then
+			table.insert(Children, DataModelNode)
 		end
 	end
 	return {
-		Children = t,
-		Properties = getInstancePropertiesModule(p2, p3)
+		Children = Children,
+		Properties = GetInstancePropertiesModule(Object, p1)
 	}
 end
 
-return function(p4)
-	-- upvalues: coreGuiService (ref), getDataModelNode (ref), guiService (ref)
-	local list = { 0, 0 }
-	local currentCamera = game.Workspace.CurrentCamera
+return function(p2) --[[ Line: 58 | Named "getDataModelRoot" ]]
+	-- upvalues: CoreGui (copy), getDataModelNode (copy), GuiService (copy)
+	local Viewport = { 0, 0 }
+	local CurrentCamera = game.Workspace.CurrentCamera
 	
-	if currentCamera then
-		list = {
-			currentCamera.ViewportSize.X,
-			currentCamera.ViewportSize.Y
+	if CurrentCamera then
+		Viewport = {
+			CurrentCamera.ViewportSize.X,
+			CurrentCamera.ViewportSize.Y
 		}
 	end
-	local t = {}
+	local Children = {}
 	
-	for i, v in coreGuiService:GetChildren() do
-		local var2 = getDataModelNode(v, p4)
+	for _, child in CoreGui:GetChildren() do
+		local DataModelNode = getDataModelNode(child, p2)
 		
-		if var2 ~= nil then
-			table.insert(t, var2)
+		if DataModelNode ~= nil then
+			table.insert(Children, DataModelNode)
 		end
 	end
-	local guiInset, guiInset_1 = guiService:GetGuiInset()
+	local GuiInset, GuiInset2 = GuiService:GetGuiInset()
 	
 	return {
-		Children = t,
+		Children = Children,
 		Properties = {
 			Name = "CoreGui",
-			Viewport = list,
-			GuiInset = { guiInset.X, guiInset.Y, guiInset_1.X, guiInset_1.Y }
+			Viewport = Viewport,
+			GuiInset = { GuiInset.X, GuiInset.Y, GuiInset2.X, GuiInset2.Y }
 		}
 	}
 end

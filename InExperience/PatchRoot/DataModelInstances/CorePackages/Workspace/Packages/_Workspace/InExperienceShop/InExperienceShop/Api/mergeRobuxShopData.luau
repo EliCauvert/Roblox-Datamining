@@ -1,62 +1,65 @@
-﻿local inExperienceShop = script:FindFirstAncestor("InExperienceShop")
-local _ = require(inExperienceShop.Types)
-local ROBUX_CATEGORY_NAME = require(inExperienceShop.Constants).ROBUX_CATEGORY_NAME
+﻿local InExperienceShop = script:FindFirstAncestor("InExperienceShop")
+local _ = require(InExperienceShop.Types)
+local ROBUXCATEGORYNAME = require(InExperienceShop.Constants).ROBUX_CATEGORY_NAME
 
-local function _(p1)
-	-- upvalues: ROBUX_CATEGORY_NAME (ref)
-	return p1.name == ROBUX_CATEGORY_NAME
+local function _(p1): boolean --[[ Line: 12 | Named "isRobuxNamed" ]]
+	-- upvalues: ROBUXCATEGORYNAME (copy)
+	return p1.name == ROBUXCATEGORYNAME
 end
 
-local _ = function(p1)
-	-- upvalues: ROBUX_CATEGORY_NAME (ref)
-	for i, v in ipairs(p1) do
-		if v.name == ROBUX_CATEGORY_NAME then
-			return v
+local _ = function(List) --[[ Line: 16 | Named "findRobux" ]]
+	-- upvalues: ROBUXCATEGORYNAME (copy)
+	for _, value in ipairs(List) do
+		if value.name == ROBUXCATEGORYNAME then
+			return value
 		end
 	end
 	return nil
 end
 
-local function replaceOrRemoveRobux(p2, p3)
-	-- upvalues: ROBUX_CATEGORY_NAME (ref)
-	local list = table.create(#p2)
-	local var1 = false
+local function replaceOrRemoveRobux(List, p1) --[[ Line: 28 ]]
+	-- upvalues: ROBUXCATEGORYNAME (copy)
+	local Buffer = table.create(#List)
+	local Flag = false
 	
-	for i, v in ipairs(p2) do
-		if v.name == ROBUX_CATEGORY_NAME then
-			if p3 ~= nil then
-				table.insert(list, p3)
-			end
-			var1 = true
-		else
-			table.insert(list, v)
+	for _, value in ipairs(List) do
+		if value.name ~= ROBUXCATEGORYNAME then
+			table.insert(Buffer, value)
+			continue
 		end
+		if p1 ~= nil then
+			table.insert(Buffer, p1)
+		end
+		Flag = true
 	end
-	if not var1 and p3 ~= nil then
-		table.insert(list, p3)
+	if not Flag and p1 ~= nil then
+		table.insert(Buffer, p1)
 	end
-	return list
+	return Buffer
 end
 
-return function(p4, p5, p6)
-	-- upvalues: ROBUX_CATEGORY_NAME (ref), replaceOrRemoveRobux (ref)
-	local var2
-	for i, v in ipairs(p6.sections) do
-		if v.name == ROBUX_CATEGORY_NAME then
-			var2 = v
-			local var3
-			if var2 == nil then
-				var3 = nil
-			else
-				for v, v_1 in ipairs(p6.categories) do
-					if v_1.name == ROBUX_CATEGORY_NAME then
-						var3 = v_1
-					end
-				end
-				var3 = nil
-			end
-			return replaceOrRemoveRobux(p4, var3), replaceOrRemoveRobux(p5, var2)
+return function(p2, p3, p4) --[[ Line: 51 | Named "mergeRobuxShopData" ]]
+	-- upvalues: ROBUXCATEGORYNAME (copy), replaceOrRemoveRobux (copy)
+	local v1 = nil
+	
+	for _, section in ipairs(p4.sections) do
+		if section.name == ROBUXCATEGORYNAME then
+			v1 = section
+			break
 		end
 	end
-	var2 = nil
+	local v2 = nil
+	if v1 == nil then
+		v2 = nil
+	else
+		v2 = nil
+		
+		for _, category in ipairs(p4.categories) do
+			if category.name == ROBUXCATEGORYNAME then
+				v2 = category
+				break
+			end
+		end
+	end
+	return replaceOrRemoveRobux(p2, v2), (replaceOrRemoveRobux(p3, v1))
 end

@@ -1,119 +1,119 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local userInputService = game:GetService("UserInputService")
-local inGameMenuDependenciesModule = require(corePackagesService.Packages.InGameMenuDependencies)
-local roact = inGameMenuDependenciesModule.Roact
-local t = inGameMenuDependenciesModule.t
-local UIBlox = inGameMenuDependenciesModule.UIBlox
-local cryo = inGameMenuDependenciesModule.Cryo
-local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
-local imageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
-local images = UIBlox.App.ImageSet.Images
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local icon = foundationModule.Icon
-local iconSize = foundationModule.Enums.IconSize
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local fFlagCoreUiMigrateUIBloxToFoundation = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local withLocalizationModule = require(script.Parent.Parent.Localization.withLocalization)
-local searchBar = roact.PureComponent:extend("SearchBar")
-searchBar.validateProps = t.interface({
-	size = t.UDim2,
-	text = t.optional(t.string),
-	onTextChanged = t.optional(t.callback),
-	onFocused = t.optional(t.callback),
-	onCancelled = t.optional(t.callback),
-	onFocusLost = t.optional(t.callback),
-	autoCaptureFocus = t.optional(t.boolean),
-	zIndex = t.optional(t.number),
-	visible = t.optional(t.boolean)
+﻿local CorePackages = game:GetService("CorePackages")
+local UserInputService = game:GetService("UserInputService")
+local InGameMenuDependenciesModule = require(CorePackages.Packages.InGameMenuDependencies)
+local Roact = InGameMenuDependenciesModule.Roact
+local T = InGameMenuDependenciesModule.t
+local UIBlox = InGameMenuDependenciesModule.UIBlox
+local Cryo = InGameMenuDependenciesModule.Cryo
+local WithFoundationOrUIBloxStyleFunction = require(CorePackages.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
+local ImageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
+local Images = UIBlox.App.ImageSet.Images
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local Icon = FoundationModule.Icon
+local IconSize = FoundationModule.Enums.IconSize
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FFlagCoreUiMigrateUIBloxToFoundation = require(CorePackages.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local WithLocalizationModule = require(script.Parent.Parent.Localization.withLocalization)
+local SearchBar = Roact.PureComponent:extend("SearchBar")
+SearchBar.validateProps = T.interface({
+	size = T.UDim2,
+	text = T.optional(T.string),
+	onTextChanged = T.optional(T.callback),
+	onFocused = T.optional(T.callback),
+	onCancelled = T.optional(T.callback),
+	onFocusLost = T.optional(T.callback),
+	autoCaptureFocus = T.optional(T.boolean),
+	zIndex = T.optional(T.number),
+	visible = T.optional(T.boolean)
 })
-searchBar.defaultProps = {
+SearchBar.defaultProps = {
 	autoCaptureFocus = false,
 	visible = true,
 	size = UDim2.fromScale(1, 1)
 }
 
-function searchBar.init(p1)
-	-- upvalues: roact (ref)
-	p1.textboxRef = roact.createRef()
+function SearchBar.init(p1) --[[ Line: 54 ]]
+	-- upvalues: Roact (copy)
+	p1.textboxRef = Roact.createRef()
 	
-	function p0.onAbsoluteSizeChanged(p2)
-		-- upvalues: p1 (ref)
-		local var1 = false
+	function p1.onAbsoluteSizeChanged(Frame: Frame) --[[ Line: 57 ]]
+		-- upvalues: p1 (copy)
+		local Flag = false
 		
-		if p1.width ~= p2.AbsoluteSize.X then
-			p1.width = p2.AbsoluteSize.X
-			var1 = true
+		if p1.width ~= Frame.AbsoluteSize.X then
+			p1.width = Frame.AbsoluteSize.X
+			Flag = true
 		end
-		if p1.height ~= p2.AbsoluteSize.Y then
-			p1.height = p2.AbsoluteSize.Y
-			var1 = true
+		if p1.height ~= Frame.AbsoluteSize.Y then
+			p1.height = Frame.AbsoluteSize.Y
+			Flag = true
 		end
-		if var1 then
+		if Flag then
 			p1:setState({ width = p1.width - 2, height = p1.height - 2 })
 		end
 	end
 	
-	function p0.searchTextChanged(p2)
-		-- upvalues: p1 (ref)
+	function p1.searchTextChanged(p2) --[[ Line: 78 ]]
+		-- upvalues: p1 (copy)
 		if p1.props.onTextChanged then
 			p1.props.onTextChanged(p2.Text)
 		end
 	end
 	
-	function p0.searchBoxFocused(_)
-		-- upvalues: p1 (ref)
+	function p1:searchBoxFocused() --[[ Line: 84 ]]
+		-- upvalues: p1 (copy)
 		if p1.props.onFocused then
 			p1.props.onFocused()
 		end
 	end
 	
-	function p0.searchCancel()
-		-- upvalues: p1 (ref)
+	function p1.searchCancel() --[[ Line: 90 ]]
+		-- upvalues: p1 (copy)
 		if p1.props.onCancelled then
 			p1.props.onCancelled()
 		end
 	end
 	
-	function p0.onFocusLost()
-		-- upvalues: p1 (ref)
+	function p1.onFocusLost() --[[ Line: 96 ]]
+		-- upvalues: p1 (copy)
 		if p1.props.onFocusLost then
 			p1.props.onFocusLost()
 		end
 	end
 	
-	function p0.onTextboxTouchTap()
-		-- upvalues: p1 (ref)
+	function p1.onTextboxTouchTap() --[[ Line: 102 ]]
+		-- upvalues: p1 (copy)
 		if p1.props.onTextboxTouchTap then
 			p1.props.onTextboxTouchTap()
 		end
 	end
 end
 
-function searchBar.willUpdate(p1, p2)
+function SearchBar.willUpdate(p1, p2) --[[ Line: 109 ]]
 	if p1.props.autoCaptureFocus and p1.props.visible == false and p2.visible then
 		p1:focus()
 	end
 end
 
-function searchBar.didMount(p1)
+function SearchBar.didMount(p1) --[[ Line: 115 ]]
 	if p1.props.autoCaptureFocus and p1.props.visible then
 		p1:focus()
 	end
 end
 
-function searchBar.focus(p1)
+function SearchBar.focus(p1) --[[ Line: 121 ]]
 	if p1.textboxRef then
 		p1.textboxRef.current:CaptureFocus()
 	end
 end
 
-function searchBar.render(p1)
-	-- upvalues: withFoundationOrUIBloxStyle (ref), foundationFontFaceMigration (ref), withLocalizationModule (ref), roact (ref), userInputService (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), icon (ref), iconSize (ref), imageSetLabel (ref), images (ref), normalizeFontFace (ref)
-	return withFoundationOrUIBloxStyle(function(p2)
-		-- upvalues: foundationFontFaceMigration (copy)
+function SearchBar.render(p1) --[[ Line: 127 ]]
+	-- upvalues: WithFoundationOrUIBloxStyleFunction (copy), FoundationFontFaceMigration (copy), WithLocalizationModule (copy), Roact (copy), UserInputService (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), Icon (copy), IconSize (copy), ImageSetLabel (copy), Images (copy), NormalizeFontFaceFunction (copy)
+	return WithFoundationOrUIBloxStyleFunction(function(p2) --[[ Line: 128 ]]
+		-- upvalues: FoundationFontFaceMigration (upval)
 		return {
-			Tokens = if foundationFontFaceMigration then p2 else nil,
+			Tokens = if FoundationFontFaceMigration then p2 else nil,
 			Theme = {
 				TextEmphasis = {
 					Color = p2.Color.Content.Emphasis.Color3,
@@ -132,106 +132,106 @@ function searchBar.render(p1)
 				}
 			}
 		}
-	end, function(p2)
-		-- upvalues: withLocalizationModule (copy), p1 (ref), roact (copy), userInputService (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), icon (copy), iconSize (copy), imageSetLabel (copy), images (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy)
-		return withLocalizationModule({
+	end, function(p2) --[[ Line: 149 ]]
+		-- upvalues: WithLocalizationModule (upval), p1 (copy), Roact (upval), UserInputService (upval), FFlagCoreUiMigrateUIBloxToFoundation (upval), Icon (upval), IconSize (upval), ImageSetLabel (upval), Images (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
+		return WithLocalizationModule({
 			search = "CoreScripts.InGameMenu.InviteFriends.Search",
 			cancel = "CoreScripts.InGameMenu.Cancel"
-		})(function(p3)
-			-- upvalues: p2 (ref), p1 (copy), roact (copy), userInputService (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), icon (copy), iconSize (copy), imageSetLabel (copy), images (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy)
-			local body = p2.Font.Body
-			local body_1 = p2.Font.Body
+		})(function(p3) --[[ Line: 153 ]]
+			-- upvalues: p2 (copy), p1 (upval), Roact (upval), UserInputService (upval), FFlagCoreUiMigrateUIBloxToFoundation (upval), Icon (upval), IconSize (upval), ImageSetLabel (upval), Images (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
+			local Body = p2.Font.Body
+			local Body1 = p2.Font.Body
 			
-			return roact.createElement("CanvasGroup", {
+			return Roact.createElement("CanvasGroup", {
 				BackgroundTransparency = 1,
 				GroupTransparency = 0.5,
 				Size = p1.props.size,
 				ZIndex = p1.props.zIndex,
 				Visible = p1.props.visible,
-				[roact.Ref] = p1.props.forwardRef or roact.createRef()
+				[Roact.Ref] = p1.props.forwardRef or Roact.createRef()
 			}, {
-				SearchPanelLayout = roact.createElement("UIListLayout", {
+				SearchPanelLayout = Roact.createElement("UIListLayout", {
 					FillDirection = Enum.FillDirection.Horizontal,
 					HorizontalAlignment = Enum.HorizontalAlignment.Left,
 					SortOrder = Enum.SortOrder.LayoutOrder,
 					VerticalAlignment = Enum.VerticalAlignment.Center,
 					Padding = UDim.new(0, 9)
 				}),
-				SearchBorder = roact.createElement("Frame", {
+				SearchBorder = Roact.createElement("Frame", {
 					Size = UDim2.new(1, -66, 0, 38),
 					BackgroundColor3 = Color3.new(136, 136, 136),
 					BackgroundTransparency = 0.8,
-					[roact.Change.AbsoluteSize] = p1.onAbsoluteSizeChanged
+					[Roact.Change.AbsoluteSize] = p1.onAbsoluteSizeChanged
 				}, {
-					BorderRadius = roact.createElement("UICorner", { CornerRadius = UDim.new(0, 4) }),
-					SearchContainer = roact.createElement("Frame", {
+					BorderRadius = Roact.createElement("UICorner", { CornerRadius = UDim.new(0, 4) }),
+					SearchContainer = Roact.createElement("Frame", {
 						BackgroundTransparency = 0,
 						Size = UDim2.fromOffset(p1.state.width, p1.state.height),
 						BackgroundColor3 = Color3.new(0, 0, 0),
 						Position = UDim2.fromOffset(1, 1)
 					}, {
-						SearchContainerLayout = roact.createElement("UIListLayout", {
+						SearchContainerLayout = Roact.createElement("UIListLayout", {
 							FillDirection = Enum.FillDirection.Horizontal,
 							HorizontalAlignment = Enum.HorizontalAlignment.Left,
 							SortOrder = Enum.SortOrder.LayoutOrder,
 							VerticalAlignment = Enum.VerticalAlignment.Center,
 							Padding = UDim.new(0, 10)
 						}),
-						Padding = roact.createElement("UIPadding", {
+						Padding = Roact.createElement("UIPadding", {
 							PaddingLeft = UDim.new(0, 12),
 							PaddingRight = UDim.new(0, 12)
 						}),
-						BorderRadius = roact.createElement("UICorner", { CornerRadius = UDim.new(0, 4) }),
-						SearchImage = if fFlagCoreUiMigrateUIBloxToFoundation then roact.createElement(icon, {
+						BorderRadius = Roact.createElement("UICorner", { CornerRadius = UDim.new(0, 4) }),
+						SearchImage = if FFlagCoreUiMigrateUIBloxToFoundation then Roact.createElement(Icon, {
 							name = "icons/common/search_small",
 							LayoutOrder = 1,
-							size = iconSize.Medium
-						}) else roact.createElement(imageSetLabel, {
+							size = IconSize.Medium
+						}) else Roact.createElement(ImageSetLabel, {
 							LayoutOrder = 1,
 							BackgroundTransparency = 1,
-							Image = images["icons/common/search_small"],
+							Image = Images["icons/common/search_small"],
 							Size = UDim2.fromOffset(18, 18)
 						}),
-						SearchInput = roact.createElement("TextBox", {
+						SearchInput = Roact.createElement("TextBox", {
 							LayoutOrder = 2,
 							BackgroundTransparency = 1,
 							Size = UDim2.new(1, -28, 0, 20),
-							Font = if foundationFontFaceMigration then nil else body_1.Font,
-							FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.BodyLarge.Font) else nil,
+							Font = if FoundationFontFaceMigration then nil else Body1.Font,
+							FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.BodyLarge.Font) else nil,
 							Text = p1.props.text or "",
-							TextInputType = if userInputService:GetPlatform() == Enum.Platform.Android then Enum.TextInputType.PasswordShown else Enum.TextInputType.NoSuggestions,
-							TextSize = p2.Font.BaseSize * body_1.RelativeSize,
+							TextInputType = if UserInputService:GetPlatform() == Enum.Platform.Android then Enum.TextInputType.PasswordShown else Enum.TextInputType.NoSuggestions,
+							TextSize = p2.Font.BaseSize * Body1.RelativeSize,
 							TextColor3 = p2.Theme.TextEmphasis.Color,
 							TextXAlignment = Enum.TextXAlignment.Left,
 							PlaceholderText = p3.search,
 							PlaceholderColor3 = p2.Theme.TextDefault.Color,
 							ClearTextOnFocus = false,
 							ClipsDescendants = true,
-							[roact.Change.Text] = p1.searchTextChanged,
-							[roact.Event.Focused] = p1.searchBoxFocused,
-							[roact.Event.FocusLost] = p1.onFocusLost,
-							[roact.Ref] = p1.textboxRef,
-							[roact.Event.TouchTap] = p1.onTextboxTouchTap
+							[Roact.Change.Text] = p1.searchTextChanged,
+							[Roact.Event.Focused] = p1.searchBoxFocused,
+							[Roact.Event.FocusLost] = p1.onFocusLost,
+							[Roact.Ref] = p1.textboxRef,
+							[Roact.Event.TouchTap] = p1.onTextboxTouchTap
 						})
 					})
 				}),
-				CancelButton = roact.createElement("TextButton", {
+				CancelButton = Roact.createElement("TextButton", {
 					LayoutOrder = 2,
 					BackgroundTransparency = 1,
 					Size = UDim2.fromOffset(57, 20),
-					Font = if foundationFontFaceMigration then nil else body.Font,
-					FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.BodyLarge.Font) else nil,
-					TextSize = p2.Font.BaseSize * body.RelativeSize,
+					Font = if FoundationFontFaceMigration then nil else Body.Font,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.BodyLarge.Font) else nil,
+					TextSize = p2.Font.BaseSize * Body.RelativeSize,
 					Text = p3.cancel,
 					TextColor3 = p2.Theme.TextEmphasis.Color,
-					[roact.Event.Activated] = p1.searchCancel
+					[Roact.Event.Activated] = p1.searchCancel
 				})
 			})
 		end)
 	end)
 end
 
-return roact.forwardRef(function(p1, p2)
-	-- upvalues: roact (ref), searchBar (ref), cryo (ref)
-	return roact.createElement(searchBar, cryo.Dictionary.join(p1, { forwardRef = p2 }))
+return Roact.forwardRef(function(p1, ForwardRef) --[[ Line: 277 ]]
+	-- upvalues: Roact (copy), SearchBar (copy), Cryo (copy)
+	return Roact.createElement(SearchBar, Cryo.Dictionary.join(p1, { forwardRef = ForwardRef }))
 end)

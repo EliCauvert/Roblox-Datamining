@@ -1,54 +1,53 @@
-﻿local gameTile = script:FindFirstAncestor("GameTile")
-local parent = gameTile.Parent
-local reactModule = require(parent.React)
-local useDesignTokens = require(parent.Style).useDesignTokens
-local foundationModule = require(parent.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local useTextSizeOffset = require(parent.UIBlox).Core.Style.useTextSizeOffset
-local getGameTileMetadataFontModule = require(gameTile.Footer.getGameTileMetadataFont)
+﻿local GameTile = script:FindFirstAncestor("GameTile")
+local Parent = GameTile.Parent
+local ReactModule = require(Parent.React)
+local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
+local FoundationModule = require(Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local UseTextSizeOffsetFunction = require(Parent.UIBlox).Core.Style.useTextSizeOffset
+local GetGameTileMetadataFontModule = require(GameTile.Footer.getGameTileMetadataFont)
 
-local _ = function(p1, p2)
+local function _(p1, p2) --[[ Line: 46 ]]
 	return p1 * (p2 or 1)
 end
 
-return function(p1)
-	-- upvalues: useDesignTokens (ref), useTextSizeOffset (ref), useTokens (ref), getGameTileMetadataFontModule (ref), reactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
-	local var1 = useDesignTokens()
-	local var2 = useTextSizeOffset()
-	local var3 = useTokens()
-	local var4 = if p1.isUnifiedGameTile then var3.Size.Size_500 else var1.Size.Size_500
-	local var5 = if p1.isUnifiedGameTile then var3.Color.Content.Default else var1.Color.Content.Default
-	local var6 = getGameTileMetadataFontModule(p1.useLargerFont, var1, var3, if p1.isUnifiedGameTile then true else nil)
+return function(Frame: Frame) --[[ Line: 50 | Named "GridTileTextFooter" ]]
+	-- upvalues: UseDesignTokensFunction (copy), UseTextSizeOffsetFunction (copy), UseTokensFunction (copy), GetGameTileMetadataFontModule (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	local UseDesignTokensResult = UseDesignTokensFunction()
+	local UseTextSizeOffsetResult = UseTextSizeOffsetFunction()
+	local UseTokensResult = UseTokensFunction()
+	local Default = if Frame.isUnifiedGameTile then UseTokensResult.Color.Content.Default else UseDesignTokensResult.Color.Content.Default
+	local GameTileMetadataFontModule = GetGameTileMetadataFontModule(Frame.useLargerFont, UseDesignTokensResult, UseTokensResult, if Frame.isUnifiedGameTile then true else nil)
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		ClipsDescendants = false,
 		BackgroundTransparency = 1,
-		LayoutOrder = p1.LayoutOrder,
-		Size = UDim2.new(if p1.shouldSizeToContentWidth then 0 else 1, 0, 0, (var4 + var2) * (p1.linesOfText or 1)),
-		AutomaticSize = if p1.shouldSizeToContentWidth then Enum.AutomaticSize.X else Enum.AutomaticSize.None,
-		Position = p1.Position,
-		AnchorPoint = p1.AnchorPoint
+		LayoutOrder = Frame.LayoutOrder,
+		Size = UDim2.new(if Frame.shouldSizeToContentWidth then 0 else 1, 0, 0, ((if Frame.isUnifiedGameTile then UseTokensResult.Size.Size_500 else UseDesignTokensResult.Size.Size_500) + UseTextSizeOffsetResult) * (Frame.linesOfText or 1)),
+		AutomaticSize = if Frame.shouldSizeToContentWidth then Enum.AutomaticSize.X else Enum.AutomaticSize.None,
+		Position = Frame.Position,
+		AnchorPoint = Frame.AnchorPoint
 	}, {
-		Text = reactModule.createElement("TextLabel", {
+		Text = ReactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
-			Text = p1.text,
-			Size = UDim2.new(if p1.shouldSizeToContentWidth then 0 else 1, 0, 0, (var6.FontSize + var2) * (p1.linesOfText or 1)),
-			AutomaticSize = if p1.shouldSizeToContentWidth then Enum.AutomaticSize.X else Enum.AutomaticSize.None,
+			Text = Frame.text,
+			Size = UDim2.new(if Frame.shouldSizeToContentWidth then 0 else 1, 0, 0, (GameTileMetadataFontModule.FontSize + UseTextSizeOffsetResult) * (Frame.linesOfText or 1)),
+			AutomaticSize = if Frame.shouldSizeToContentWidth then Enum.AutomaticSize.X else Enum.AutomaticSize.None,
 			Position = UDim2.new(0, 0, 0.5, 0),
 			AnchorPoint = Vector2.new(0, 0.5),
-			TextSize = var6.FontSize,
-			Font = if foundationFontFaceMigration then nil else var6.Font,
-			FontFace = if foundationFontFaceMigration then normalizeFontFace(var6.Font) else nil,
-			TextTransparency = var5.Transparency,
-			TextColor3 = var5.Color3,
-			TextWrapped = p1.TextWrapped or false,
+			TextSize = GameTileMetadataFontModule.FontSize,
+			Font = if FoundationFontFaceMigration then nil else GameTileMetadataFontModule.Font,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(GameTileMetadataFontModule.Font) else nil,
+			TextTransparency = Default.Transparency,
+			TextColor3 = Default.Color3,
+			TextWrapped = Frame.TextWrapped or false,
 			TextTruncate = Enum.TextTruncate.AtEnd,
 			TextXAlignment = Enum.TextXAlignment.Left,
-			TextYAlignment = p1.TextYAlignment or Enum.TextYAlignment.Center,
-			ClipsDescendants = p1.ClipsDescendants,
-			RichText = p1.RichText
+			TextYAlignment = Frame.TextYAlignment or Enum.TextYAlignment.Center,
+			ClipsDescendants = Frame.ClipsDescendants,
+			RichText = Frame.RichText
 		})
 	})
 end

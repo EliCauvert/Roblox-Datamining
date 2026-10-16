@@ -1,132 +1,137 @@
-﻿local robloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
-local parent = robloxSubscriptionPurchaseApp.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local inlineRichTextModule = require(parent.InlineRichText)
-local renderer = inlineRichTextModule.Renderer
-local linkBehavior = inlineRichTextModule.Enums.LinkBehavior
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local getPeriodTypeDisplayLabelModule = require(robloxSubscriptionPurchaseApp.Utils.getPeriodTypeDisplayLabel)
-local isSupportedTrialPeriodTypeModule = require(robloxSubscriptionPurchaseApp.Utils.isSupportedTrialPeriodType)
-local fFlagSupportFreeTrialModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagSupportFreeTrial)
-local fFlagRobloxPlusDynamicFreeTrialLengthModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagRobloxPlusDynamicFreeTrialLength)
-local robloxSubscriptionTermsOfUseLink = game:DefineFastString("RobloxSubscriptionTermsOfUseLink", "https://en.help.roblox.com/hc/articles/46804865425300")
+﻿local RobloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
+local Parent = RobloxSubscriptionPurchaseApp.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local InlineRichTextModule = require(Parent.InlineRichText)
+local Renderer = InlineRichTextModule.Renderer
+local LinkBehavior = InlineRichTextModule.Enums.LinkBehavior
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local GetPeriodTypeDisplayLabelModule = require(RobloxSubscriptionPurchaseApp.Utils.getPeriodTypeDisplayLabel)
+local IsSupportedTrialPeriodTypeModule = require(RobloxSubscriptionPurchaseApp.Utils.isSupportedTrialPeriodType)
+local FFlagSupportFreeTrialModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagSupportFreeTrial)
+local FFlagRobloxPlusDynamicFreeTrialLengthModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagRobloxPlusDynamicFreeTrialLength)
+local FFlagEnablePlusReferralLegalDisclosureModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagEnablePlusReferralLegalDisclosure)
+local RobloxSubscriptionTermsOfUseLink = game:DefineFastString("RobloxSubscriptionTermsOfUseLink", "https://en.help.roblox.com/hc/articles/46804865425300")
+local PlusReferralProgramTermsURL2 = game:DefineFastString("PlusReferralProgramTermsURL2", "https://en.help.roblox.com/hc/en-us/articles/52737229124628")
 
-local function _(p1)
-	return p1:gsub("\\u{(%x+)}", function(p2)
-		local var1 = tonumber(p2, 16)
+local function _(Text: string): string --[[ Line: 23 | Named "decodeLuauUnicodeEscapes" ]]
+	return (Text:gsub("\\u{(%x+)}", function(p1): string --[[ Line: 25 ]]
+		local Number: number? = tonumber(p1, 16)
 		
-		return if var1 == nil or var1 < 0 or var1 > 1114111 then "" else utf8.char(var1)
-	end)
-end
-
-local function decodeInlineRichTextEntities(p1)
-	return p1:gsub("&amp;lt;", "<"):gsub("&amp;gt;", ">"):gsub("&amp;quot;", "\""):gsub("&amp;apos;", "'"):gsub("&amp;amp;", "&"):gsub("&lt;", "<"):gsub("&gt;", ">"):gsub("&quot;", "\""):gsub("&apos;", "'"):gsub("&amp;", "&")
-end
-
-local function replaceQuotesOutsideTags(p1)
-	local var1
-	local t = {}
-	local var2 = false
-	local var3 = true
-	
-	for i = 1, #p1 do
-		var1 = p1:sub(i, i)
-		
-		if var1 == "<" then
-			var2 = true
-			table.insert(t, var1)
-			continue
-		end
-		if var1 == ">" then
-			var2 = false
-			table.insert(t, var1)
-		elseif var1 == "\"" and not var2 then
-			table.insert(t, if var3 then utf8.char(8220) else utf8.char(8221))
-			var3 = not var3
-		else
-			table.insert(t, var1)
-		end
-	end
-	return table.concat(t)
-end
-
-local _ = function(p2)
-	-- upvalues: fFlagSupportFreeTrialModule (ref), replaceQuotesOutsideTags (ref), decodeInlineRichTextEntities (ref)
-	return if fFlagSupportFreeTrialModule then replaceQuotesOutsideTags(decodeInlineRichTextEntities(p2:gsub("\\u{(%x+)}", function(p3)
-		local var4 = tonumber(p3, 16)
-		
-		return if var4 == nil or var4 < 0 or var4 > 1114111 then "" else utf8.char(var4)
-	end))) else decodeInlineRichTextEntities(p2:gsub("\\u{(%x+)}", function(p3)
-		local var4 = tonumber(p3, 16)
-		
-		return if var4 == nil or var4 < 0 or var4 > 1114111 then "" else utf8.char(var4)
+		return if Number == nil or Number < 0 or Number > 1114111 then "" else utf8.char(Number)
 	end))
 end
 
-return function(p2)
-	-- upvalues: foundationModule (ref), fFlagSupportFreeTrialModule (ref), fFlagRobloxPlusDynamicFreeTrialLengthModule (ref), isSupportedTrialPeriodTypeModule (ref), getPeriodTypeDisplayLabelModule (ref), useLocalization (ref), robloxSubscriptionTermsOfUseLink (ref), reactModule (ref), linkBehavior (ref), renderer (ref), replaceQuotesOutsideTags (ref), decodeInlineRichTextEntities (ref)
-	local var4 = foundationModule.Hooks.useTokens()
-	local trialDuration = p2.trialDuration or 1
-	local var5 = fFlagSupportFreeTrialModule and (fFlagRobloxPlusDynamicFreeTrialLengthModule and (p2.isFreeTrial == true and (p2.trialDuration ~= nil and isSupportedTrialPeriodTypeModule(p2.trialPeriodType))))
-	local t = {
+local function decodeInlineRichTextEntities(UX: string) --[[ Line: 37 ]]
+	return UX:gsub("&amp;lt;", "<"):gsub("&amp;gt;", ">"):gsub("&amp;quot;", "\""):gsub("&amp;apos;", "'"):gsub("&amp;amp;", "&"):gsub("&lt;", "<"):gsub("&gt;", ">"):gsub("&quot;", "\""):gsub("&apos;", "'"):gsub("&amp;", "&")
+end
+
+local function replaceQuotesOutsideTags(Text: string): string --[[ Line: 53 ]]
+	local List = {}
+	local Flag = false
+	local v1 = true
+	
+	for i = 1, #Text do
+		local Segment = Text:sub(i, i)
+		
+		if Segment == "<" then
+			Flag = true
+			table.insert(List, Segment)
+		elseif Segment == ">" then
+			Flag = false
+			table.insert(List, Segment)
+		elseif Segment == "\"" and not Flag then
+			table.insert(List, if v1 then utf8.char(8220) else utf8.char(8221))
+			v1 = not v1
+		else
+			table.insert(List, Segment)
+		end
+	end
+	return table.concat(List)
+end
+
+local _ = function(Text: string) --[[ Line: 75 | Named "prepareTermsAgreementRichText" ]]
+	-- upvalues: FFlagSupportFreeTrialModule (copy), replaceQuotesOutsideTags (copy), decodeInlineRichTextEntities (copy)
+	return if FFlagSupportFreeTrialModule then replaceQuotesOutsideTags(decodeInlineRichTextEntities((Text:gsub("\\u{(%x+)}", function(p1): string --[[ Line: 25 ]]
+		local Number: number? = tonumber(p1, 16)
+		
+		return if Number == nil or Number < 0 or Number > 1114111 then "" else utf8.char(Number)
+	end)))) else decodeInlineRichTextEntities((Text:gsub("\\u{(%x+)}", function(p1): string --[[ Line: 25 ]]
+		local Number: number? = tonumber(p1, 16)
+		
+		return if Number == nil or Number < 0 or Number > 1114111 then "" else utf8.char(Number)
+	end)))
+end
+
+return function(p1) --[[ Line: 95 | Named "LegalDisclosure" ]]
+	-- upvalues: FoundationModule (copy), FFlagSupportFreeTrialModule (copy), FFlagRobloxPlusDynamicFreeTrialLengthModule (copy), IsSupportedTrialPeriodTypeModule (copy), GetPeriodTypeDisplayLabelModule (copy), UseLocalizationFunction (copy), RobloxSubscriptionTermsOfUseLink (copy), FFlagEnablePlusReferralLegalDisclosureModule (copy), PlusReferralProgramTermsURL2 (copy), ReactModule (copy), LinkBehavior (copy), Renderer (copy), replaceQuotesOutsideTags (copy), decodeInlineRichTextEntities (copy)
+	local UseTokensResult = FoundationModule.Hooks.useTokens()
+	local TrialDuration = p1.trialDuration or 1
+	local IsSupportedTrialPeriodTypeModule1 = FFlagSupportFreeTrialModule and (FFlagRobloxPlusDynamicFreeTrialLengthModule and (p1.isFreeTrial == true and (p1.trialDuration ~= nil and IsSupportedTrialPeriodTypeModule(p1.trialPeriodType))))
+	local config = {
 		subscribe = "Feature.RobloxSubscription.Action.Subscribe"
 	}
 	
-	if var5 then
-		t.trialPeriodLabel = getPeriodTypeDisplayLabelModule(p2.trialPeriodType or "", trialDuration > 1)
-		t.billingPeriodLabel = getPeriodTypeDisplayLabelModule(p2.billingPeriodType or "", false)
+	if IsSupportedTrialPeriodTypeModule1 then
+		config.trialPeriodLabel = GetPeriodTypeDisplayLabelModule(p1.trialPeriodType or "", TrialDuration > 1)
+		config.billingPeriodLabel = GetPeriodTypeDisplayLabelModule(p1.billingPeriodType or "", false)
 	end
-	local var6 = useLocalization(t)
-	local var7 = useLocalization({
+	local UseLocalizationResult = UseLocalizationFunction(config)
+	local UseLocalizationResult1 = UseLocalizationFunction({
 		termsAgreement = {
 			"Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement",
-			termsUrl = robloxSubscriptionTermsOfUseLink,
-			ctaText = if p2.ctaText and p2.ctaText ~= "" then p2.ctaText else var6.subscribe
+			termsUrl = RobloxSubscriptionTermsOfUseLink,
+			ctaText = if p1.ctaText and p1.ctaText ~= "" then p1.ctaText else UseLocalizationResult.subscribe
 		},
-		freeTrialTermsAgreement = if fFlagSupportFreeTrialModule then {
+		freeTrialTermsAgreement = if FFlagSupportFreeTrialModule then {
 			"Feature.RobloxSubscription.Label.FreeTrialDisclosureV2",
-			linkStart = "<a href=\"" .. robloxSubscriptionTermsOfUseLink .. "\">",
+			linkStart = "<a href=\"" .. RobloxSubscriptionTermsOfUseLink .. "\">",
 			linkEnd = "</a>"
 		} else nil,
-		freeTrialTermsAgreementV3 = if var5 then {
+		freeTrialTermsAgreementV3 = if IsSupportedTrialPeriodTypeModule1 then {
 			"Feature.RobloxSubscription.Label.FreeTrialDisclosureV3",
-			linkStart = "<a href=\"" .. robloxSubscriptionTermsOfUseLink .. "\">",
+			linkStart = "<a href=\"" .. RobloxSubscriptionTermsOfUseLink .. "\">",
 			linkEnd = "</a>",
-			trialDuration = trialDuration,
-			trialPeriodLabel = var6.trialPeriodLabel,
-			billingPeriodLabel = var6.billingPeriodLabel
+			trialDuration = TrialDuration,
+			trialPeriodLabel = UseLocalizationResult.trialPeriodLabel,
+			billingPeriodLabel = UseLocalizationResult.billingPeriodLabel
 		} else nil,
 		shortFreeTrialTermsAgreement = {
 			"Feature.RobloxSubscription.Label.FreeTrialDisclosureShort",
-			linkStart = "<a href=\"" .. robloxSubscriptionTermsOfUseLink .. "\">",
+			linkStart = "<a href=\"" .. RobloxSubscriptionTermsOfUseLink .. "\">",
 			linkEnd = "</a>"
-		}
+		},
+		referralTermsAgreement = if FFlagEnablePlusReferralLegalDisclosureModule then {
+			"Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase",
+			referralTermsUrl = PlusReferralProgramTermsURL2,
+			termsUrl = RobloxSubscriptionTermsOfUseLink,
+			ctaText = if p1.ctaText and p1.ctaText ~= "" then p1.ctaText else UseLocalizationResult.subscribe
+		} else nil
 	})
-	local var8 = if p2.shortenFreeTrialTerms then var7.shortFreeTrialTermsAgreement elseif var5 then var7.freeTrialTermsAgreementV3 elseif fFlagSupportFreeTrialModule and p2.isFreeTrial then var7.freeTrialTermsAgreement else var7.termsAgreement
+	local ReferralTermsAgreement = if FFlagEnablePlusReferralLegalDisclosureModule and p1.isReferral then UseLocalizationResult1.referralTermsAgreement elseif p1.shortenFreeTrialTerms then UseLocalizationResult1.shortFreeTrialTermsAgreement elseif IsSupportedTrialPeriodTypeModule1 then UseLocalizationResult1.freeTrialTermsAgreementV3 elseif FFlagSupportFreeTrialModule and p1.isFreeTrial then UseLocalizationResult1.freeTrialTermsAgreement else UseLocalizationResult1.termsAgreement
 	
-	return reactModule.createElement(renderer, {
-		text = if fFlagSupportFreeTrialModule then replaceQuotesOutsideTags(decodeInlineRichTextEntities(var8:gsub("\\u{(%x+)}", function(p3)
-			local var9 = tonumber(p3, 16)
+	return ReactModule.createElement(Renderer, {
+		text = if FFlagSupportFreeTrialModule then replaceQuotesOutsideTags(decodeInlineRichTextEntities((ReferralTermsAgreement:gsub("\\u{(%x+)}", function(p2): string --[[ Line: 25 ]]
+			local Number: number? = tonumber(p2, 16)
 			
-			return if var9 == nil or var9 < 0 or var9 > 1114111 then "" else utf8.char(var9)
-		end))) else decodeInlineRichTextEntities(var8:gsub("\\u{(%x+)}", function(p3)
-			local var9 = tonumber(p3, 16)
+			return if Number == nil or Number < 0 or Number > 1114111 then "" else utf8.char(Number)
+		end)))) else decodeInlineRichTextEntities((ReferralTermsAgreement:gsub("\\u{(%x+)}", function(p2): string --[[ Line: 25 ]]
+			local Number: number? = tonumber(p2, 16)
 			
-			return if var9 == nil or var9 < 0 or var9 > 1114111 then "" else utf8.char(var9)
-		end)),
-		textStyle = var4.Color.Content.Default,
-		fontStyle = var4.Typography.BodySmall,
-		linkerOptions = reactModule.useMemo(function()
-			-- upvalues: linkBehavior (copy)
+			return if Number == nil or Number < 0 or Number > 1114111 then "" else utf8.char(Number)
+		end))),
+		textStyle = UseTokensResult.Color.Content.Default,
+		fontStyle = UseTokensResult.Typography.BodySmall,
+		linkerOptions = ReactModule.useMemo(function() --[[ Line: 154 ]]
+			-- upvalues: LinkBehavior (upval)
 			return {
-				evaluateLinkBehavior = function(_, _)
-					-- upvalues: linkBehavior (copy)
-					return linkBehavior.Webview
+				evaluateLinkBehavior = function(_, _) --[[ Line: 156 ]]
+					-- upvalues: LinkBehavior (upval)
+					return LinkBehavior.Webview
 				end
 			}
 		end, {}),
-		wrapperProps = { tag = "size-full-0 auto-y", LayoutOrder = p2.layoutOrder },
+		wrapperProps = { tag = "size-full-0 auto-y", LayoutOrder = p1.layoutOrder },
 		nodeProps = { LINK = { showUnderline = true } }
 	})
 end

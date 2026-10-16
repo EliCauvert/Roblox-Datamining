@@ -1,42 +1,41 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local reactUtilsModule = require(parent_1.ReactUtils)
-local captureService = game:GetService("CaptureService")
-local reactModule = require(parent_1.React)
-local roactUtilsModule = require(parent_1.RoactUtils)
-local captureControlsViewModule = require(parent.Components.CoreUI.CaptureControlsView)
-local constantsModule = require(parent.Constants)
-local makeVideoCaptureFailedHandlerModule = require(parent.Utils.makeVideoCaptureFailedHandler)
-local makeVideoCaptureStartFailedHandlerModule = require(parent.Utils.makeVideoCaptureStartFailedHandler)
-local toastContainerModule = require(parent.Components.Common.ToastContainer)
-local useCallback = reactModule.useCallback
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local useEventConnection = reactUtilsModule.useEventConnection
-local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local CaptureService = game:GetService("CaptureService")
+local ReactModule = require(Parent1.React)
+local RoactUtilsModule = require(Parent1.RoactUtils)
+local CaptureControlsViewModule = require(Parent.Components.CoreUI.CaptureControlsView)
+local ConstantsModule = require(Parent.Constants)
+local MakeVideoCaptureFailedHandlerModule = require(Parent.Utils.makeVideoCaptureFailedHandler)
+local MakeVideoCaptureStartFailedHandlerModule = require(Parent.Utils.makeVideoCaptureStartFailedHandler)
+local ToastContainerModule = require(Parent.Components.Common.ToastContainer)
+local UseCallbackFunction = ReactModule.useCallback
+local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
+local UseEventConnectionFunction = require(Parent1.ReactUtils).useEventConnection
+local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
 
-return function(_)
-	-- upvalues: useDispatch (ref), useSelector (ref), constantsModule (ref), useCallback (ref), makeVideoCaptureStartFailedHandlerModule (ref), useEventConnection (ref), captureService (ref), makeVideoCaptureFailedHandlerModule (ref), reactModule (ref), captureControlsViewModule (ref), toastContainerModule (ref)
-	local var1 = useDispatch()
-	local var2 = useSelector(function(p1)
-		-- upvalues: constantsModule (copy)
-		return p1[constantsModule.RoduxKey].Carousel.IsOpen
+return function(_) --[[ Line: 23 ]]
+	-- upvalues: UseDispatchFunction (copy), UseSelectorFunction (copy), ConstantsModule (copy), UseCallbackFunction (copy), MakeVideoCaptureStartFailedHandlerModule (copy), UseEventConnectionFunction (copy), CaptureService (copy), MakeVideoCaptureFailedHandlerModule (copy), ReactModule (copy), CaptureControlsViewModule (copy), ToastContainerModule (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 26 ]]
+		-- upvalues: ConstantsModule (upval)
+		return p1[ConstantsModule.RoduxKey].Carousel.IsOpen
 	end)
-	local var3 = useSelector(function(p1)
-		-- upvalues: constantsModule (copy)
-		return p1[constantsModule.RoduxKey].IsCapturesCoreGuiEnabled
+	local UseSelectorResult1 = UseSelectorFunction(function(p1) --[[ Line: 30 ]]
+		-- upvalues: ConstantsModule (upval)
+		return p1[ConstantsModule.RoduxKey].IsCapturesCoreGuiEnabled
 	end)
-	useEventConnection(captureService.UserVideoCaptureStartFailed, useCallback(makeVideoCaptureStartFailedHandlerModule(var1), {}))
-	useEventConnection(captureService.UserVideoCaptureFailed, useCallback(makeVideoCaptureFailedHandlerModule(var1), {}))
+	UseEventConnectionFunction(CaptureService.UserVideoCaptureStartFailed, (UseCallbackFunction(MakeVideoCaptureStartFailedHandlerModule(UseDispatchResult), {})))
+	UseEventConnectionFunction(CaptureService.UserVideoCaptureFailed, (UseCallbackFunction(MakeVideoCaptureFailedHandlerModule(UseDispatchResult), {})))
 	
-	return reactModule.createElement(reactModule.Fragment, {}, {
-		CaptureControlsView = if var3 then reactModule.createElement(captureControlsViewModule) else nil,
-		ToastsFrame = if not var2 then reactModule.createElement("Frame", {
+	return ReactModule.createElement(ReactModule.Fragment, {}, {
+		CaptureControlsView = if UseSelectorResult1 then ReactModule.createElement(CaptureControlsViewModule) else nil,
+		ToastsFrame = if UseSelectorResult then nil else ReactModule.createElement("Frame", {
 			Active = false,
 			BackgroundTransparency = 1,
 			Size = UDim2.fromScale(1, 1),
-			ZIndex = constantsModule.ZIndex.Toasts
+			ZIndex = ConstantsModule.ZIndex.Toasts
 		}, {
-			ToastContainer = reactModule.createElement(toastContainerModule)
-		}) else nil
+			ToastContainer = ReactModule.createElement(ToastContainerModule)
+		})
 	})
 end

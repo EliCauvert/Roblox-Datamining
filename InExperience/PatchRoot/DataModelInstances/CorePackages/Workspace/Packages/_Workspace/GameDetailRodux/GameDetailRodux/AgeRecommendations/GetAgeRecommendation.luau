@@ -1,11 +1,13 @@
-﻿local parent = script:FindFirstAncestor("GameDetailRodux").Parent
-local httpService = game:GetService("HttpService")
-local var1 = require(parent.UrlBuilder).UrlBuilder.new({
+﻿local Parent = script:FindFirstAncestor("GameDetailRodux").Parent
+local HttpService = game:GetService("HttpService")
+local NewResult = require(Parent.UrlBuilder).UrlBuilder.new({
 	path = "experience-guidelines-api/experience-guidelines/get-age-recommendation",
-	base = require(parent.Http).Url.APIS_URL
+	base = require(Parent.Http).Url.APIS_URL
 })
 
-return function(p1, p2)
-	-- upvalues: var1 (ref), httpService (ref)
-	return p1(var1(), "POST", { postBody = httpService:JSONEncode({ universeId = p2 }) })
+return function(Callback, UniverseId) --[[ Line: 29 ]]
+	-- upvalues: NewResult (copy), HttpService (copy)
+	return Callback(NewResult(), "POST", {
+		postBody = HttpService:JSONEncode({ universeId = UniverseId })
+	})
 end

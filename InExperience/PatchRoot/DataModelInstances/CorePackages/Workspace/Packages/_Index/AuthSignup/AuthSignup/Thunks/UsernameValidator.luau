@@ -1,225 +1,261 @@
-﻿local authSignup = script:FindFirstAncestor("AuthSignup")
-local parent = authSignup.Parent
-local authCommonModule = require(parent.AuthCommon)
-local cryoModule = require(parent.Cryo)
-local argCheckModule = require(parent.ArgCheck)
-local promiseModule = require(parent.Promise)
-local usernameIssue = authCommonModule.Enums.UsernameIssue
-local issueCondition = authCommonModule.Enums.IssueCondition
-local postUsernameValid = authCommonModule.Http.Requests.PostUsernameValid
-local sharedFlagsModule = require(parent.SharedFlags)
-local localSignUpUsernameValidatorModule = require(authSignup.Util.LocalSignUpUsernameValidator)
-local fFlagAllowCurrentUsernameOnSignup = sharedFlagsModule.FFlagAllowCurrentUsernameOnSignup
-local getFFlagFixUsernameValidationAlreadyInUse = sharedFlagsModule.GetFFlagFixUsernameValidationAlreadyInUse
-local getFFlagFixUsernameValidationBackendCriteria = sharedFlagsModule.GetFFlagFixUsernameValidationBackendCriteria
-local t = {
-	[0] = usernameIssue.None,
-	[1] = usernameIssue.AlreadyInUse,
-	[2] = usernameIssue.Inappropriate,
-	[3] = usernameIssue.LengthTooShortOrTooLong,
-	[4] = usernameIssue.BoundingUnderscore,
-	[5] = usernameIssue.MultipleUnderscores,
-	[6] = usernameIssue.ContainsSpaces,
-	[7] = usernameIssue.ContainsInvalidCharacter,
-	[10] = usernameIssue.ContainsPII
+﻿local AuthSignup = script:FindFirstAncestor("AuthSignup")
+local Parent = AuthSignup.Parent
+local AuthCommonModule = require(Parent.AuthCommon)
+local CryoModule = require(Parent.Cryo)
+local ArgCheckModule = require(Parent.ArgCheck)
+local PromiseModule = require(Parent.Promise)
+local UsernameIssue = AuthCommonModule.Enums.UsernameIssue
+local IssueCondition = AuthCommonModule.Enums.IssueCondition
+local PostUsernameValidFunction = AuthCommonModule.Http.Requests.PostUsernameValid
+local SharedFlagsModule = require(Parent.SharedFlags)
+local LocalSignUpUsernameValidatorModule = require(AuthSignup.Util.LocalSignUpUsernameValidator)
+local FFlagAllowCurrentUsernameOnSignup = SharedFlagsModule.FFlagAllowCurrentUsernameOnSignup
+local GetFFlagFixUsernameValidationAlreadyInUseFunction = SharedFlagsModule.GetFFlagFixUsernameValidationAlreadyInUse
+local GetFFlagFixUsernameValidationBackendCriteriaFunction = SharedFlagsModule.GetFFlagFixUsernameValidationBackendCriteria
+local config = {
+	[0] = UsernameIssue.None,
+	[1] = UsernameIssue.AlreadyInUse,
+	[2] = UsernameIssue.Inappropriate,
+	[3] = UsernameIssue.LengthTooShortOrTooLong,
+	[4] = UsernameIssue.BoundingUnderscore,
+	[5] = UsernameIssue.MultipleUnderscores,
+	[6] = UsernameIssue.ContainsSpaces,
+	[7] = UsernameIssue.ContainsInvalidCharacter,
+	[10] = UsernameIssue.ContainsPII
 }
-local t_1 = {
-	[usernameIssue.ContainsInvalidCharacter] = "Authentication.SignUp.Label.UsernameError1",
-	[usernameIssue.LengthTooShortOrTooLong] = "Authentication.SignUp.Label.UsernameError2",
-	[usernameIssue.AlreadyInUse] = "Authentication.SignUp.Label.UsernameError3",
-	[usernameIssue.Inappropriate] = "Authentication.SignUp.Label.UsernameError4",
-	[usernameIssue.BoundingUnderscore] = "Authentication.SignUp.Label.UsernameError5",
-	[usernameIssue.MultipleUnderscores] = "Authentication.SignUp.Label.UsernameError6",
-	[usernameIssue.ContainsPII] = "Authentication.SignUp.Label.UsernameError7"
+local config1 = {
+	[UsernameIssue.ContainsInvalidCharacter] = "Authentication.SignUp.Label.UsernameError1",
+	[UsernameIssue.LengthTooShortOrTooLong] = "Authentication.SignUp.Label.UsernameError2",
+	[UsernameIssue.AlreadyInUse] = "Authentication.SignUp.Label.UsernameError3",
+	[UsernameIssue.Inappropriate] = "Authentication.SignUp.Label.UsernameError4",
+	[UsernameIssue.BoundingUnderscore] = "Authentication.SignUp.Label.UsernameError5",
+	[UsernameIssue.MultipleUnderscores] = "Authentication.SignUp.Label.UsernameError6",
+	[UsernameIssue.ContainsPII] = "Authentication.SignUp.Label.UsernameError7"
 }
 
-local function getIssueMessageList()
-	-- upvalues: t_1 (ref)
-	return t_1
-end
-
-local function getDefaultIssues()
-	-- upvalues: t_1 (ref), usernameIssue (ref), issueCondition (ref)
-	local t = {}
+local function resetNonHiddenIssuesToProblematic(Hiddens) --[[ Line: 64 ]]
+	-- upvalues: CryoModule (copy), IssueCondition (copy)
+	local JoinResult = CryoModule.Dictionary.join(Hiddens)
 	
-	for i in pairs(t_1) do
-		if i == usernameIssue.ContainsInvalidCharacter or i == usernameIssue.LengthTooShortOrTooLong or i == usernameIssue.AlreadyInUse then
-			t[i] = issueCondition.Problematic
-		else
-			t[i] = issueCondition.Hidden
+	for i, value in pairs(JoinResult) do
+		if value ~= IssueCondition.Hidden then
+			JoinResult[i] = IssueCondition.Problematic
 		end
 	end
-	return t
+	return JoinResult
 end
 
-local function resetNonHiddenIssuesToProblematic(value)
-	-- upvalues: cryoModule (ref), issueCondition (ref)
-	local var1 = cryoModule.Dictionary.join(value)
-	
-	for i, v in pairs(var1) do
-		if v ~= issueCondition.Hidden then
-			var1[i] = issueCondition.Problematic
-		end
-	end
-	return var1
-end
-
-local function _(p1, p2, p3, p4, p5)
-	-- upvalues: argCheckModule (ref), promiseModule (ref), resetNonHiddenIssuesToProblematic (ref), cryoModule (ref), localSignUpUsernameValidatorModule (ref), issueCondition (ref), getFFlagFixUsernameValidationBackendCriteria (ref), getFFlagFixUsernameValidationAlreadyInUse (ref), postUsernameValid (ref), t (ref), usernameIssue (ref)
-	return function(_)
-		-- upvalues: argCheckModule (copy), p2 (ref), p3 (ref), p4 (ref), promiseModule (copy), resetNonHiddenIssuesToProblematic (copy), cryoModule (copy), localSignUpUsernameValidatorModule (copy), issueCondition (copy), getFFlagFixUsernameValidationBackendCriteria (copy), getFFlagFixUsernameValidationAlreadyInUse (copy), postUsernameValid (copy), p1 (ref), p5 (ref), t (copy), usernameIssue (copy)
-		argCheckModule.isType(p2, "string", "username passed into UsernameValidator.validateFunction")
-		argCheckModule.isType(p3, "string", "birthday passed into UsernameValidator.validateFunction")
-		argCheckModule.isType(p4, "table", "previousIssues passed into UsernameValidator.validateFunction")
+local function _(p1, Input, p2, p3, p4) --[[ Line: 76 | Named "validateFunction" ]]
+	-- upvalues: ArgCheckModule (copy), PromiseModule (copy), resetNonHiddenIssuesToProblematic (copy), CryoModule (copy), LocalSignUpUsernameValidatorModule (copy), IssueCondition (copy), GetFFlagFixUsernameValidationBackendCriteriaFunction (copy), GetFFlagFixUsernameValidationAlreadyInUseFunction (copy), PostUsernameValidFunction (copy), config (copy), UsernameIssue (copy)
+	return function(_) --[[ Line: 77 ]]
+		-- upvalues: ArgCheckModule (upval), Input (copy), p2 (copy), p3 (copy), PromiseModule (upval), resetNonHiddenIssuesToProblematic (upval), CryoModule (upval), LocalSignUpUsernameValidatorModule (upval), IssueCondition (upval), GetFFlagFixUsernameValidationBackendCriteriaFunction (upval), GetFFlagFixUsernameValidationAlreadyInUseFunction (upval), PostUsernameValidFunction (upval), p1 (copy), p4 (copy), config (upval), UsernameIssue (upval)
+		ArgCheckModule.isType(Input, "string", "username passed into UsernameValidator.validateFunction")
+		ArgCheckModule.isType(p2, "string", "birthday passed into UsernameValidator.validateFunction")
+		ArgCheckModule.isType(p3, "table", "previousIssues passed into UsernameValidator.validateFunction")
 		
-		if p2 == "" then
-			return promiseModule.resolve({
+		if Input == "" then
+			return PromiseModule.resolve({
 				InputValid = false,
-				Input = p2,
-				IssueCondition = resetNonHiddenIssuesToProblematic(p4)
+				Input = Input,
+				IssueCondition = resetNonHiddenIssuesToProblematic(p3)
 			})
 		end
-		local var2 = cryoModule.Dictionary.join(p4)
-		local var3 = localSignUpUsernameValidatorModule:locallyValidateUsername(p2)
-		local var4 = false
+		local JoinResult = CryoModule.Dictionary.join(p3)
+		local LocallyValidateUsernameResult = LocalSignUpUsernameValidatorModule:locallyValidateUsername(Input)
+		local Flag = false
 		
-		for i, v in pairs(var3) do
-			if v then
-				var4 = true
+		for _, value in pairs(LocallyValidateUsernameResult) do
+			if value then
+				Flag = true
 				break
 			end
 		end
-		if var4 then
-			for i_1, v in pairs(p4) do
-				local var5 = var3[i_1]
+		if Flag then
+			for i, Hidden in pairs(p3) do
+				local LocallyValidateUsernameResultEntry = LocallyValidateUsernameResult[i]
 				
-				if v == issueCondition.Hidden and var5 then
-					var2[i_1] = issueCondition.Problematic
-				elseif v ~= issueCondition.Hidden then
-					if getFFlagFixUsernameValidationBackendCriteria() and var5 == nil then
-						var2[i_1] = issueCondition.Hidden
-					elseif not getFFlagFixUsernameValidationAlreadyInUse() or var5 ~= nil then
-						var2[i_1] = if var5 == false then issueCondition.Resolved else issueCondition.Problematic
+				if Hidden == IssueCondition.Hidden and LocallyValidateUsernameResultEntry then
+					JoinResult[i] = IssueCondition.Problematic
+				elseif Hidden ~= IssueCondition.Hidden then
+					if GetFFlagFixUsernameValidationBackendCriteriaFunction() and LocallyValidateUsernameResultEntry == nil then
+						JoinResult[i] = IssueCondition.Hidden
+					elseif not GetFFlagFixUsernameValidationAlreadyInUseFunction() or LocallyValidateUsernameResultEntry ~= nil then
+						JoinResult[i] = LocallyValidateUsernameResultEntry == false and IssueCondition.Resolved or IssueCondition.Problematic
 					end
 				end
 			end
-			return promiseModule.resolve({ InputValid = false, Input = p2, IssueCondition = var2 })
+			return PromiseModule.resolve({
+				InputValid = false,
+				Input = Input,
+				IssueCondition = JoinResult
+			})
 		else
-			for i_1, v in pairs(var2) do
-				var2[i_1] = if v == issueCondition.Hidden then issueCondition.Hidden else issueCondition.Resolved
+			for i1, value1 in pairs(JoinResult) do
+				JoinResult[i1] = value1 == IssueCondition.Hidden and IssueCondition.Hidden or IssueCondition.Resolved
 			end
-			return postUsernameValid(p1, p2, p3, p5):andThen(function(p6)
-				-- upvalues: t (copy), usernameIssue (copy), var2 (ref), issueCondition (copy), promiseModule (copy), p2 (copy)
-				local code = p6 and (p6.responseBody and p6.responseBody.code)
-				local var6 = t[code]
+			return PostUsernameValidFunction(p1, Input, p2, p4):andThen(function(Result) --[[ Line: 136 ]]
+				-- upvalues: config (upval), UsernameIssue (upval), JoinResult (copy), IssueCondition (upval), PromiseModule (upval), Input (upval)
+				local Code = Result and (Result.responseBody and Result.responseBody.code)
+				local None = config[Code]
 				
-				if not var6 then
-					warn("UsernameValidator.validateFunction() Received unrecognized response code: ", code)
-				elseif var6 == usernameIssue.ContainsSpaces then
-					var2[usernameIssue.ContainsInvalidCharacter] = issueCondition.Problematic
-				elseif var6 ~= usernameIssue.None then
-					var2[var6] = issueCondition.Problematic
+				if None then
+					if None == UsernameIssue.ContainsSpaces then
+						JoinResult[UsernameIssue.ContainsInvalidCharacter] = IssueCondition.Problematic
+					elseif None ~= UsernameIssue.None then
+						JoinResult[None] = IssueCondition.Problematic
+					end
+				else
+					warn("UsernameValidator.validateFunction() Received unrecognized response code: ", Code)
 				end
-				return promiseModule.resolve({
-					Input = p2,
-					InputValid = var6 == usernameIssue.None,
-					IssueCondition = var2
+				return PromiseModule.resolve({
+					Input = Input,
+					InputValid = None == UsernameIssue.None,
+					IssueCondition = JoinResult
 				})
-			end, function(_)
-				-- upvalues: promiseModule (copy), p2 (copy), var2 (ref)
-				return promiseModule.resolve({ InputValid = true, Input = p2, IssueCondition = var2 })
+			end, function(_) --[[ Line: 158 ]]
+				-- upvalues: PromiseModule (upval), Input (upval), JoinResult (copy)
+				return PromiseModule.resolve({
+					InputValid = true,
+					Input = Input,
+					IssueCondition = JoinResult
+				})
 			end)
 		end
 	end
 end
 
-local _ = function(p6, p7)
-	return p7 ~= nil and (p7 ~= "" and string.lower(p6) == string.lower(p7))
+local _ = function(Text: string, Text1: string): boolean --[[ Line: 169 | Named "isKeptCurrentUsername" ]]
+	return Text1 ~= nil and (Text1 ~= "" and string.lower(Text) == string.lower(Text1))
 end
 
-local function resolveAlreadyInUseIfKeptCurrentUsername(p6)
-	-- upvalues: usernameIssue (ref), issueCondition (ref), cryoModule (ref)
-	if p6.IssueCondition[usernameIssue.AlreadyInUse] ~= issueCondition.Problematic then
-		return p6
+local function resolveAlreadyInUseIfKeptCurrentUsername(Result) --[[ Line: 175 ]]
+	-- upvalues: UsernameIssue (copy), IssueCondition (copy), CryoModule (copy)
+	if Result.IssueCondition[UsernameIssue.AlreadyInUse] ~= IssueCondition.Problematic then
+		return Result
 	end
-	local var6 = cryoModule.Dictionary.join(p6.IssueCondition)
-	var6[usernameIssue.AlreadyInUse] = issueCondition.Resolved
-	local var7 = true
+	local JoinResult = CryoModule.Dictionary.join(Result.IssueCondition)
+	JoinResult[UsernameIssue.AlreadyInUse] = IssueCondition.Resolved
+	local InputValid = true
 	
-	for i, v in pairs(var6) do
-		if v == issueCondition.Problematic then
-			var7 = false
+	for _, value in pairs(JoinResult) do
+		if value == IssueCondition.Problematic then
+			InputValid = false
 			break
 		end
 	end
-	return cryoModule.Dictionary.join(p6, { InputValid = var7, IssueCondition = var6 })
+	return CryoModule.Dictionary.join(Result, { InputValid = InputValid, IssueCondition = JoinResult })
 end
 
 return {
-	validateFunction = function(p7, p8, p9, p10)
-		-- upvalues: argCheckModule (ref), promiseModule (ref), resetNonHiddenIssuesToProblematic (ref), cryoModule (ref), localSignUpUsernameValidatorModule (ref), issueCondition (ref), getFFlagFixUsernameValidationBackendCriteria (ref), getFFlagFixUsernameValidationAlreadyInUse (ref), postUsernameValid (ref), t (ref), usernameIssue (ref), fFlagAllowCurrentUsernameOnSignup (ref), resolveAlreadyInUseIfKeptCurrentUsername (ref)
-		p10 = p10 or {}
-		p10 = p10.birthday
-		local context = p10.context
+	validateFunction = function(p5, Text: string, Hiddens, p6) --[[ Line: 197 ]]
+		-- upvalues: ArgCheckModule (copy), PromiseModule (copy), resetNonHiddenIssuesToProblematic (copy), CryoModule (copy), LocalSignUpUsernameValidatorModule (copy), IssueCondition (copy), GetFFlagFixUsernameValidationBackendCriteriaFunction (copy), GetFFlagFixUsernameValidationAlreadyInUseFunction (copy), PostUsernameValidFunction (copy), config (copy), UsernameIssue (copy), FFlagAllowCurrentUsernameOnSignup (copy), resolveAlreadyInUseIfKeptCurrentUsername (copy)
+		local P12 = p6 or {}
+		local Birthday = P12.birthday
+		local Context = P12.context
 		
-		local var8 = function(_)
-			-- upvalues: argCheckModule (copy), p8 (ref), p10 (ref), p9 (ref), promiseModule (copy), resetNonHiddenIssuesToProblematic (copy), cryoModule (copy), localSignUpUsernameValidatorModule (copy), issueCondition (copy), getFFlagFixUsernameValidationBackendCriteria (copy), getFFlagFixUsernameValidationAlreadyInUse (copy), postUsernameValid (copy), p7 (ref), context (ref), t (copy), usernameIssue (copy)
-			argCheckModule.isType(p8, "string", "username passed into UsernameValidator.validateFunction")
-			argCheckModule.isType(p10, "string", "birthday passed into UsernameValidator.validateFunction")
-			argCheckModule.isType(p9, "table", "previousIssues passed into UsernameValidator.validateFunction")
+		local function v30(_) --[[ Line: 77 ]]
+			-- upvalues: ArgCheckModule (upval), Text (copy), Birthday (copy), Hiddens (copy), PromiseModule (upval), resetNonHiddenIssuesToProblematic (upval), CryoModule (upval), LocalSignUpUsernameValidatorModule (upval), IssueCondition (upval), GetFFlagFixUsernameValidationBackendCriteriaFunction (upval), GetFFlagFixUsernameValidationAlreadyInUseFunction (upval), PostUsernameValidFunction (upval), p5 (copy), Context (copy), config (upval), UsernameIssue (upval)
+			ArgCheckModule.isType(Text, "string", "username passed into UsernameValidator.validateFunction")
+			ArgCheckModule.isType(Birthday, "string", "birthday passed into UsernameValidator.validateFunction")
+			ArgCheckModule.isType(Hiddens, "table", "previousIssues passed into UsernameValidator.validateFunction")
 			
-			if p8 == "" then
-				return promiseModule.resolve({
+			if Text == "" then
+				return PromiseModule.resolve({
 					InputValid = false,
-					Input = p8,
-					IssueCondition = resetNonHiddenIssuesToProblematic(p9)
+					Input = Text,
+					IssueCondition = resetNonHiddenIssuesToProblematic(Hiddens)
 				})
 			end
-			local var9 = cryoModule.Dictionary.join(p9)
-			local var10 = localSignUpUsernameValidatorModule:locallyValidateUsername(p8)
-			local var11 = false
+			local JoinResult = CryoModule.Dictionary.join(Hiddens)
+			local LocallyValidateUsernameResult = LocalSignUpUsernameValidatorModule:locallyValidateUsername(Text)
+			local Flag = false
 			
-			for i, v in pairs(var10) do
-				if v then
-					var11 = true
+			for _, value in pairs(LocallyValidateUsernameResult) do
+				if value then
+					Flag = true
 					break
 				end
 			end
-			for i_1, v in pairs(var9) do
-				var9[i_1] = if v == issueCondition.Hidden then issueCondition.Hidden else issueCondition.Resolved
-			end
-			return postUsernameValid(p7, p8, p10, context):andThen(function(p11)
-				-- upvalues: t (copy), usernameIssue (copy), var9 (ref), issueCondition (copy), promiseModule (copy), p8 (copy)
-				local code = p11 and (p11.responseBody and p11.responseBody.code)
-				local var12 = t[code]
-				
-				if not var12 then
-					warn("UsernameValidator.validateFunction() Received unrecognized response code: ", code)
-				elseif var12 == usernameIssue.ContainsSpaces then
-					var9[usernameIssue.ContainsInvalidCharacter] = issueCondition.Problematic
-				elseif var12 ~= usernameIssue.None then
-					var9[var12] = issueCondition.Problematic
+			if Flag then
+				for i, Hidden in pairs(Hiddens) do
+					local LocallyValidateUsernameResultEntry = LocallyValidateUsernameResult[i]
+					
+					if Hidden == IssueCondition.Hidden and LocallyValidateUsernameResultEntry then
+						JoinResult[i] = IssueCondition.Problematic
+					elseif Hidden ~= IssueCondition.Hidden then
+						if GetFFlagFixUsernameValidationBackendCriteriaFunction() and LocallyValidateUsernameResultEntry == nil then
+							JoinResult[i] = IssueCondition.Hidden
+						elseif not GetFFlagFixUsernameValidationAlreadyInUseFunction() or LocallyValidateUsernameResultEntry ~= nil then
+							JoinResult[i] = LocallyValidateUsernameResultEntry == false and IssueCondition.Resolved or IssueCondition.Problematic
+						end
+					end
 				end
-				return promiseModule.resolve({
-					Input = p8,
-					InputValid = var12 == usernameIssue.None,
-					IssueCondition = var9
+				return PromiseModule.resolve({
+					InputValid = false,
+					Input = Text,
+					IssueCondition = JoinResult
 				})
-			end, function(_)
-				-- upvalues: promiseModule (copy), p8 (copy), var9 (ref)
-				return promiseModule.resolve({ InputValid = true, Input = p8, IssueCondition = var9 })
-			end)
+			else
+				for i1, value1 in pairs(JoinResult) do
+					JoinResult[i1] = value1 == IssueCondition.Hidden and IssueCondition.Hidden or IssueCondition.Resolved
+				end
+				return PostUsernameValidFunction(p5, Text, Birthday, Context):andThen(function(Result) --[[ Line: 136 ]]
+					-- upvalues: config (upval), UsernameIssue (upval), JoinResult (copy), IssueCondition (upval), PromiseModule (upval), Text (upval)
+					local Code = Result and (Result.responseBody and Result.responseBody.code)
+					local None = config[Code]
+					
+					if None then
+						if None == UsernameIssue.ContainsSpaces then
+							JoinResult[UsernameIssue.ContainsInvalidCharacter] = IssueCondition.Problematic
+						elseif None ~= UsernameIssue.None then
+							JoinResult[None] = IssueCondition.Problematic
+						end
+					else
+						warn("UsernameValidator.validateFunction() Received unrecognized response code: ", Code)
+					end
+					return PromiseModule.resolve({
+						Input = Text,
+						InputValid = None == UsernameIssue.None,
+						IssueCondition = JoinResult
+					})
+				end, function(_) --[[ Line: 158 ]]
+					-- upvalues: PromiseModule (upval), Text (upval), JoinResult (copy)
+					return PromiseModule.resolve({
+						InputValid = true,
+						Input = Text,
+						IssueCondition = JoinResult
+					})
+				end)
+			end
 		end
 		
-		if fFlagAllowCurrentUsernameOnSignup then
-			local currentUsername = p10.currentUsername
+		if FFlagAllowCurrentUsernameOnSignup then
+			local CurrentUsername: string = P12.currentUsername
 			
-			return if currentUsername ~= nil and (currentUsername ~= "" and string.lower(p8) == string.lower(currentUsername)) then function(p11)
-				-- upvalues: var8 (ref), resolveAlreadyInUseIfKeptCurrentUsername (copy)
-				return var8(p11):andThen(resolveAlreadyInUseIfKeptCurrentUsername)
-			end else var8
+			if CurrentUsername ~= nil and (CurrentUsername ~= "" and string.lower(Text) == string.lower(CurrentUsername)) then
+				return function(p7) --[[ Line: 206 ]]
+					-- upvalues: v30 (copy), resolveAlreadyInUseIfKeptCurrentUsername (upval)
+					return v30(p7):andThen(resolveAlreadyInUseIfKeptCurrentUsername)
+				end
+			end
 		end
+		return v30
 	end,
-	getIssueMessageList = getIssueMessageList,
-	getDefaultIssues = getDefaultIssues
+	getIssueMessageList = function() --[[ Line: 42 ]]
+		-- upvalues: config1 (copy)
+		return config1
+	end,
+	getDefaultIssues = function() --[[ Line: 46 ]]
+		-- upvalues: config1 (copy), UsernameIssue (copy), IssueCondition (copy)
+		local Hiddens = {}
+		
+		for i in pairs(config1) do
+			if i == UsernameIssue.ContainsInvalidCharacter or i == UsernameIssue.LengthTooShortOrTooLong or i == UsernameIssue.AlreadyInUse then
+				Hiddens[i] = IssueCondition.Problematic
+			else
+				Hiddens[i] = IssueCondition.Hidden
+			end
+		end
+		return Hiddens
+	end
 }

@@ -1,14 +1,14 @@
-﻿local trustedContacts = script:FindFirstAncestor("TrustedContacts")
-local parent = trustedContacts.Parent
-local roactNavigationModule = require(parent.RoactNavigation)
-local appPage = require(parent.RobloxAppEnums).AppPage
+﻿local TrustedContacts = script:FindFirstAncestor("TrustedContacts")
+local Parent = TrustedContacts.Parent
+local RoactNavigationModule = require(Parent.RoactNavigation)
+local AppPage = require(Parent.RobloxAppEnums).AppPage
 
-return roactNavigationModule.createRobloxStackNavigator({
+return (RoactNavigationModule.createRobloxStackNavigator({
 	{
-		[appPage.TrustedFriendsUserModal] = {
-			getScreen = function()
-				-- upvalues: trustedContacts (ref)
-				return require(trustedContacts.Components.TrustedContactsModal).Screen
+		[AppPage.TrustedFriendsUserModal] = {
+			getScreen = function() --[[ Line: 15 ]]
+				-- upvalues: TrustedContacts (copy)
+				return require(TrustedContacts.Components.TrustedContactsModal).Screen
 			end,
 			navigationOptions = {
 				renderUnderlyingPage = true,
@@ -18,10 +18,10 @@ return roactNavigationModule.createRobloxStackNavigator({
 		}
 	},
 	{
-		[appPage.TrustedFriendsVPCPrologue] = {
-			getScreen = function()
-				-- upvalues: trustedContacts (ref)
-				return require(trustedContacts.Components.TrustedFriendsVPCPrologue).Screen
+		[AppPage.TrustedFriendsVPCPrologue] = {
+			getScreen = function() --[[ Line: 27 ]]
+				-- upvalues: TrustedContacts (copy)
+				return require(TrustedContacts.Components.TrustedFriendsVPCPrologue).Screen
 			end,
 			navigationOptions = {
 				renderUnderlyingPage = true,
@@ -32,6 +32,6 @@ return roactNavigationModule.createRobloxStackNavigator({
 	}
 }, {
 	keepVisitedScreensMounted = false,
-	initialRouteName = appPage.TrustedFriendsUserModal,
-	backBehavior = roactNavigationModule.BackBehavior.History
-})
+	initialRouteName = AppPage.TrustedFriendsUserModal,
+	backBehavior = RoactNavigationModule.BackBehavior.History
+}))

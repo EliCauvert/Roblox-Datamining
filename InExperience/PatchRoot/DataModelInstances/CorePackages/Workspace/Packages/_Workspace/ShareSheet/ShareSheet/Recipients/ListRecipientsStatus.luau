@@ -1,0 +1,1 @@
+﻿return { Loading = "loading", Ready = "ready", Failed = "failed" }

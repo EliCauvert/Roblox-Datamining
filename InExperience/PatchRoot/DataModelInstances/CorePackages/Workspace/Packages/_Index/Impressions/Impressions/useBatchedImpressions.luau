@@ -1,66 +1,66 @@
-﻿local reactModule = require(script:FindFirstAncestor("Impressions").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("Impressions").Parent.React)
 
-return function(p1)
-	-- upvalues: reactModule (ref)
-	local var1 = reactModule.useRef({})
-	local var2 = reactModule.useRef(nil)
-	local var3 = reactModule.useRef({})
-	local var4 = reactModule.useRef({})
-	local var5 = reactModule.useRef(0)
-	local var6 = reactModule.useRef(p1.onFlush)
-	var6.current = p1.onFlush
-	local var7 = reactModule.useCallback(function()
-		-- upvalues: var1 (ref), var6 (ref), var4 (ref), var3 (ref), var5 (ref)
-		if #var1.current == 0 then return end
-		local current = var6.current
+return function(p1) --[[ Line: 17 | Named "useBatchedImpressions" ]]
+	-- upvalues: ReactModule (copy)
+	local UseRefResult = ReactModule.useRef({})
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseRefResult2 = ReactModule.useRef({})
+	local UseRefResult3 = ReactModule.useRef({})
+	local UseRefResult4 = ReactModule.useRef(0)
+	local UseRefResult5 = ReactModule.useRef(p1.onFlush)
+	UseRefResult5.current = p1.onFlush
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 26 ]]
+		-- upvalues: UseRefResult (copy), UseRefResult5 (copy), UseRefResult3 (copy), UseRefResult2 (copy), UseRefResult4 (copy)
+		if #UseRefResult.current == 0 then return end
+		local CurrentFunction: (any, any) -> () = UseRefResult5.current
 		
-		if not current then
-			var1.current = {}
-			var4.current = {}
+		if not CurrentFunction then
+			UseRefResult.current = {}
+			UseRefResult3.current = {}
 			
 			return
 		end
-		local t = {}
+		local Items = {}
 		
-		for i, v in var1.current do
-			var3.current[v.key] = true
-			table.insert(t, v.item)
+		for _, value in UseRefResult.current do
+			UseRefResult2.current[value.key] = true
+			table.insert(Items, value.item)
 		end
-		if #t > 0 then
-			var5.current += 1
-			current(t, var5.current)
+		if #Items > 0 then
+			UseRefResult4.current += 1
+			CurrentFunction(Items, UseRefResult4.current)
 		end
-		var1.current = {}
-		var4.current = {}
+		UseRefResult.current = {}
+		UseRefResult3.current = {}
 	end, {})
-	local var8 = reactModule.useCallback(function(p2, p3, p4)
-		-- upvalues: var3 (ref), var4 (ref), p1 (ref), var1 (ref), var2 (ref), var7 (ref)
-		if not p2 or not p3 or (var3.current[p2] or var4.current[p2]) then return end
-		local var9 = p1.mapItem(p2, p3, p4)
+	local UseResult1 = ReactModule.useCallback(function(Key, p2, p3) --[[ Line: 53 ]]
+		-- upvalues: UseRefResult2 (copy), UseRefResult3 (copy), p1 (copy), UseRefResult (copy), UseRefResult1 (copy), UseResult (copy)
+		if not Key or not p2 or UseRefResult2.current[Key] or UseRefResult3.current[Key] then return end
+		local MapItemResult = p1.mapItem(Key, p2, p3)
 		
-		if not var9 then return end
-		var4.current[p2] = true
-		table.insert(var1.current, { key = p2, item = var9 })
+		if not MapItemResult then return end
+		UseRefResult3.current[Key] = true
+		table.insert(UseRefResult.current, { key = Key, item = MapItemResult })
 		
-		if var2.current then
-			pcall(task.cancel, var2.current)
+		if UseRefResult1.current then
+			pcall(task.cancel, UseRefResult1.current)
 		end
-		var2.current = task.delay(p1.batchTimeMs * 0.001, var7)
-	end, { p1.batchTimeMs, p1.mapItem, var7 })
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), var7 (ref)
-		return function()
-			-- upvalues: var2 (copy), var7 (copy)
-			if var2.current then
-				pcall(task.cancel, var2.current)
+		UseRefResult1.current = task.delay(p1.batchTimeMs * 0.001, UseResult)
+	end, { p1.batchTimeMs, p1.mapItem, UseResult })
+	ReactModule.useEffect(function() --[[ Line: 75 ]]
+		-- upvalues: UseRefResult1 (copy), UseResult (copy)
+		return function() --[[ Line: 76 ]]
+			-- upvalues: UseRefResult1 (upval), UseResult (upval)
+			if UseRefResult1.current then
+				pcall(task.cancel, UseRefResult1.current)
 			end
-			var2.current = nil
-			var7()
+			UseRefResult1.current = nil
+			UseResult()
 		end
-	end, { var7 })
+	end, { UseResult })
 	
-	return reactModule.useMemo(function()
-		-- upvalues: var8 (ref)
-		return { addImpression = var8 }
-	end, { var8 })
+	return ReactModule.useMemo(function() --[[ Line: 85 ]]
+		-- upvalues: UseResult1 (copy)
+		return { addImpression = UseResult1 }
+	end, { UseResult1 })
 end

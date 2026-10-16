@@ -1,86 +1,82 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local _ = require(moments.Components.Feed.FeedTypes)
-local momentsMomentFixturesModule = require(moments.Parent.DataHydration.MomentsMomentFixtures)
+﻿local Moments = script:FindFirstAncestor("Moments")
+local _ = require(Moments.Components.Feed.FeedTypes)
+local MomentsMomentFixturesModule = require(Moments.Parent.DataHydration.MomentsMomentFixtures)
 
-return function(p1)
-	-- upvalues: momentsMomentFixturesModule (ref)
-	p1 = p1 or {}
-	local pageSize = p1.pageSize or 5
-	local total = p1.total
-	local latencySeconds = p1.latencySeconds or 0
-	local failAfterPages = p1.failAfterPages
-	local var1 = p1.deferred == true
-	local var2 = 0
-	local t = {}
+return function(p1) --[[ Line: 58 | Named "createMockFeedSource" ]]
+	-- upvalues: MomentsMomentFixturesModule (copy)
+	local P0 = p1 or {}
+	local PageSize = P0.pageSize or 5
+	local Total = P0.total
+	local LatencySeconds = P0.latencySeconds or 0
+	local FailAfterPages = P0.failAfterPages
+	local IsDeferred = P0.deferred == true
+	local Count = 0
+	local List = {}
 	
-	local function buildPage(p2)
-		-- upvalues: total (ref), pageSize (ref), momentsMomentFixturesModule (copy)
-		local var3
-		local minValue = math.min(pageSize, if total ~= nil then pageSize else math.max(total - (p2 - 1), 0))
-		local var4 = p2 + minValue
+	local function buildPage(p2: number) --[[ Line: 71 ]]
+		-- upvalues: Total (copy), PageSize (copy), MomentsMomentFixturesModule (upval)
+		local Smallest = math.min(PageSize, if Total == nil then PageSize else math.max(Total - (p2 - 1), 0))
+		local NewSmallest = p2 + Smallest
+		local NoTotal: boolean = Total == nil or NewSmallest <= Total
 		
-		if total == nil then
-			var3 = true
-		else
-			var3 = var4 <= total
-			var3 = nil
-		end
 		return {
-			items = momentsMomentFixturesModule.buildMomentFeedItems(p2, minValue),
-			nextCursor = if var3 then var4 else nil
+			items = MomentsMomentFixturesModule.buildMomentFeedItems(p2, Smallest),
+			nextCursor = if NoTotal then NewSmallest else nil
 		}
 	end
 	
 	return {
-		fetchAsync = function(p2)
-			-- upvalues: var2 (write), var1 (ref), t (ref), latencySeconds (ref), failAfterPages (ref), buildPage (ref)
-			p2 = p2 or 1
-			var2 += 1
-			local var3 = var2
+		fetchAsync = function(p2) --[[ Line: 82 ]]
+			-- upvalues: Count (ref), IsDeferred (copy), List (copy), LatencySeconds (copy), FailAfterPages (copy), buildPage (copy)
+			local P2 = p2 or 1
+			Count += 1
+			local Count1: number = Count
 			
-			if var1 then
-				table.insert(t, coroutine.running())
-				local yieldResult, yieldResult_1 = coroutine.yield()
+			if IsDeferred then
+				table.insert(List, coroutine.running())
+				local YieldResult, YieldResult2 = coroutine.yield()
 				
-				if not yieldResult then
-					error(yieldResult_1 or "mock feed source fetch rejected")
+				if not YieldResult then
+					error(YieldResult2 or "mock feed source fetch rejected")
 				end
-			elseif latencySeconds > 0 then
-				task.wait(latencySeconds)
-			end
-			if failAfterPages ~= nil and failAfterPages < var3 then
-				error(`mock feed source failed on page {var3}`)
-			end
-			return buildPage(p2)
-		end,
-		id = p1.id or "mock",
-		recommendationSource = p1.recommendationSource or "Trending",
-		dispose = function() end,
-		getPendingCount = function()
-			-- upvalues: t (ref)
-			return #t
-		end,
-		resolveNext = function()
-			-- upvalues: t (ref)
-			local removed = table.remove(t, 1)
-			
-			if removed ~= nil then
-				local var3, var4 = coroutine.resume(removed, true)
-				
-				if not var3 then
-					error(var4)
+			else
+				if LatencySeconds > 0 then
+					task.wait(LatencySeconds)
+				end
+				if FailAfterPages ~= nil and FailAfterPages < Count1 then
+					error(`mock feed source failed on page {Count1}`)
 				end
 			end
+			return (buildPage(P2))
 		end,
-		rejectNext = function(p2)
-			-- upvalues: t (ref)
-			local removed = table.remove(t, 1)
+		id = P0.id or "mock",
+		recommendationSource = P0.recommendationSource or "Trending",
+		dispose = function() --[[ Line: 134 ]] end,
+		getPendingCount = function(): number --[[ Line: 108 ]]
+			-- upvalues: List (copy)
+			return #List
+		end,
+		resolveNext = function() --[[ Line: 112 ]]
+			-- upvalues: List (copy)
+			local Removed = table.remove(List, 1)
 			
-			if removed ~= nil then
-				local var3, var4 = coroutine.resume(removed, false, p2)
+			if Removed ~= nil then
+				local Success, Result = coroutine.resume(Removed, true)
 				
-				if not var3 then
-					error(var4)
+				if not Success then
+					error(Result)
+				end
+			end
+		end,
+		rejectNext = function(p2) --[[ Line: 124 ]]
+			-- upvalues: List (copy)
+			local Removed = table.remove(List, 1)
+			
+			if Removed ~= nil then
+				local Success, Result = coroutine.resume(Removed, false, p2)
+				
+				if not Success then
+					error(Result)
 				end
 			end
 		end

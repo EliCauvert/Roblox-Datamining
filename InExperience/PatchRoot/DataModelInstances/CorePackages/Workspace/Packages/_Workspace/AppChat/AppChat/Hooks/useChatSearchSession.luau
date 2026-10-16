@@ -1,58 +1,60 @@
-﻿local httpService = game:GetService("HttpService")
-local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local chatActiveFilterModule = require(appChat.Analytics.Enums.ChatActiveFilter)
-local chatLandingTelemetryEventsModule = require(appChat.Components.ChatLanding.ChatLandingTelemetryEvents)
-local chatLandingTelemetryLayerModule = require(appChat.Telemetry.Layers.ChatLandingTelemetryLayer)
-local chatLandingTelemetryStateModule = require(appChat.Contexts.TelemetryState.ChatLandingTelemetryState)
-local useTelemetryModule = require(appChat.Telemetry.useTelemetry)
+﻿local HttpService = game:GetService("HttpService")
+local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local ChatActiveFilterModule = require(AppChat.Analytics.Enums.ChatActiveFilter)
+local ChatLandingTelemetryEventsModule = require(AppChat.Components.ChatLanding.ChatLandingTelemetryEvents)
+local ChatLandingTelemetryLayerModule = require(AppChat.Telemetry.Layers.ChatLandingTelemetryLayer)
+local ChatLandingTelemetryStateModule = require(AppChat.Contexts.TelemetryState.ChatLandingTelemetryState)
+local UseTelemetryModule = require(AppChat.Telemetry.useTelemetry)
 
-return function(p1, p2)
-	-- upvalues: chatLandingTelemetryStateModule (ref), useTelemetryModule (ref), chatLandingTelemetryLayerModule (ref), reactModule (ref), cryoModule (ref), httpService (ref), chatActiveFilterModule (ref), chatLandingTelemetryEventsModule (ref)
-	local var1 = chatLandingTelemetryStateModule.useMergeState()
-	local var2 = useTelemetryModule(chatLandingTelemetryLayerModule.Context)
-	local var3 = reactModule.useRef(nil)
-	local var4 = reactModule.useRef(nil)
-	local var5 = reactModule.useRef(var2.emit)
-	var5.current = var2.emit
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref), var1 (ref), cryoModule (copy)
-		if var3.current == nil then
+return function(p1, p2) --[[ Line: 25 | Named "useChatSearchSession" ]]
+	-- upvalues: ChatLandingTelemetryStateModule (copy), UseTelemetryModule (copy), ChatLandingTelemetryLayerModule (copy), ReactModule (copy), CryoModule (copy), HttpService (copy), ChatActiveFilterModule (copy), ChatLandingTelemetryEventsModule (copy)
+	local UseMergeStateResult: (any) -> () = ChatLandingTelemetryStateModule.useMergeState()
+	local UseTelemetryModuleResult = UseTelemetryModule(ChatLandingTelemetryLayerModule.Context)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseRefResult2 = ReactModule.useRef(UseTelemetryModuleResult.emit)
+	UseRefResult2.current = UseTelemetryModuleResult.emit
+	local UseResult: () -> () = ReactModule.useCallback(function() --[[ Line: 35 ]]
+		-- upvalues: UseRefResult (copy), UseMergeStateResult (copy), CryoModule (upval)
+		if UseRefResult.current ~= nil then
+			UseRefResult.current = nil
+			UseMergeStateResult({
+				searchSessionId = CryoModule.None,
+				activeFilters = CryoModule.None
+			})
+			
 			return
 		end
-		var3.current = nil
-		var1({
-			searchSessionId = cryoModule.None,
-			activeFilters = cryoModule.None
-		})
-	end, { var1 })
+	end, { UseMergeStateResult })
 	
-	if p1 and var3.current == nil then
-		var3.current = httpService:GenerateGUID(false)
-		var1({
-			searchSessionId = var3.current,
+	if p1 and UseRefResult.current == nil then
+		UseRefResult.current = HttpService:GenerateGUID(false)
+		UseMergeStateResult({
+			searchSessionId = UseRefResult.current,
 			activeFilters = {
-				if p2 then chatActiveFilterModule.SearchServer else chatActiveFilterModule.SearchClient
+				if p2 then ChatActiveFilterModule.SearchServer else ChatActiveFilterModule.SearchClient
 			}
 		})
 	elseif not p1 then
-		var6()
+		UseResult()
 	end
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var3 (ref), var4 (ref), var5 (ref), chatLandingTelemetryEventsModule (copy)
+	ReactModule.useEffect(function() --[[ Line: 59 ]]
+		-- upvalues: p1 (copy), UseRefResult (copy), UseRefResult1 (copy), UseRefResult2 (copy), ChatLandingTelemetryEventsModule (upval)
 		if not p1 then return end
-		local current = var3.current
+		local Current = UseRefResult.current
 		
-		if current == nil or var4.current == current then
+		if Current ~= nil and UseRefResult1.current ~= Current then
+			UseRefResult1.current = Current
+			UseRefResult2.current(ChatLandingTelemetryEventsModule.SearchStarted, {})
+			
 			return
 		end
-		var4.current = current
-		var5.current(chatLandingTelemetryEventsModule.SearchStarted, {})
-	end, { p1, p2, var1, var6 })
-	reactModule.useEffect(function()
-		-- upvalues: var6 (ref)
-		return var6
+	end, { p1, p2, UseMergeStateResult, UseResult })
+	ReactModule.useEffect(function() --[[ Line: 76 ]]
+		-- upvalues: UseResult (copy)
+		return UseResult
 	end, {})
 end

@@ -1,23 +1,23 @@
-﻿local parent = script:FindFirstAncestor("GenericAbuseReporting").Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local controlState = foundationModule.Enums.ControlState
-local getIconRichText = foundationModule.Utility.getIconRichText
-local iconName = foundationModule.Enums.IconName
-local text = foundationModule.Text
+﻿local Parent = script:FindFirstAncestor("GenericAbuseReporting").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local ControlState = FoundationModule.Enums.ControlState
+local GetIconRichTextFunction = FoundationModule.Utility.getIconRichText
+local IconName = FoundationModule.Enums.IconName
+local Text = FoundationModule.Text
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), getIconRichText (ref), iconName (ref), controlState (ref), text (ref)
-	local var1, var2 = reactModule.useState(false)
-	local var3 = getIconRichText(iconName.ArrowUpRightFromSquare)
+return ReactModule.memo(function(p1) --[[ Line: 21 | Named "TextLink" ]]
+	-- upvalues: ReactModule (copy), GetIconRichTextFunction (copy), IconName (copy), ControlState (copy), Text (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local IconRichText = GetIconRichTextFunction(IconName.ArrowUpRightFromSquare)
 	
-	return reactModule.createElement(text, {
+	return ReactModule.createElement(Text, {
 		RichText = true,
-		Text = if var1 then `<u>{p1.text}</u> {var3}` else `{p1.text} {var3}`,
+		Text = if UseStateResult then `<u>{p1.text}</u> {IconRichText}` else `{p1.text} {IconRichText}`,
 		onActivated = p1.onActivated,
-		onStateChanged = reactModule.useCallback(function(p2)
-			-- upvalues: var2 (ref), controlState (copy)
-			var2(p2 == controlState.Hover)
+		onStateChanged = ReactModule.useCallback(function(Hover) --[[ Line: 25 ]]
+			-- upvalues: UseStateResult2 (copy), ControlState (upval)
+			UseStateResult2(Hover == ControlState.Hover)
 		end, {}),
 		tag = p1.tag or "auto-xy text-body-medium text-wrap text-align-x-left radius-small content-emphasis",
 		LayoutOrder = p1.layoutOrder

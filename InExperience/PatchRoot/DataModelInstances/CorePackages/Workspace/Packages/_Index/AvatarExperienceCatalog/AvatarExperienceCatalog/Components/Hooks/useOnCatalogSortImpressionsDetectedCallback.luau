@@ -1,80 +1,81 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local parent = avatarExperienceCatalog.Parent
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local _ = require(parent.AvatarExperienceCommon)
-local itemTypeEnum = require(parent.AvatarExperienceModel).Enums.ItemTypeEnum
-local avatarExperienceAnalyticsModule = require(parent.AvatarExperienceAnalytics)
-local impressionEnums = avatarExperienceAnalyticsModule.Enums.ImpressionEnums
-local sendAXCounterV2 = avatarExperienceAnalyticsModule.sendAXCounterV2
-local fFlagAXDeferLookImpressionsForHydration = require(parent.AvatarExperienceFlags).FFlagAXDeferLookImpressionsForHydration
-local useStore = require(parent.RoactUtils).Hooks.RoactRodux.useStore
-local _ = require(avatarExperienceCatalog.Components.ResultsList.WidgetListInfoViewModel)
-local selectHydratedWidgetDataModule = require(avatarExperienceCatalog.State.Selectors.selectHydratedWidgetData)
-local constantsModule = require(avatarExperienceCatalog.Constants)
-local useCatalogPageMonolithDependenciesModule = require(avatarExperienceCatalog.Providers.useCatalogPageMonolithDependencies)
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local Parent = AvatarExperienceCatalog.Parent
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local _ = require(Parent.AvatarExperienceCommon)
+local ItemTypeEnum = require(Parent.AvatarExperienceModel).Enums.ItemTypeEnum
+local AvatarExperienceAnalyticsModule = require(Parent.AvatarExperienceAnalytics)
+local ImpressionEnums = AvatarExperienceAnalyticsModule.Enums.ImpressionEnums
+local SendAXCounterV2Function = AvatarExperienceAnalyticsModule.sendAXCounterV2
+local FFlagAXDeferLookImpressionsForHydration = require(Parent.AvatarExperienceFlags).FFlagAXDeferLookImpressionsForHydration
+local UseStoreFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useStore
+local _ = require(AvatarExperienceCatalog.Components.ResultsList.WidgetListInfoViewModel)
+local SelectHydratedWidgetDataModule = require(AvatarExperienceCatalog.State.Selectors.selectHydratedWidgetData)
+local ConstantsModule = require(AvatarExperienceCatalog.Constants)
+local UseCatalogPageMonolithDependenciesModule = require(AvatarExperienceCatalog.Providers.useCatalogPageMonolithDependencies)
 
-return function(p1)
-	-- upvalues: useCatalogPageMonolithDependenciesModule (ref), useStore (ref), reactModule (ref), selectHydratedWidgetDataModule (ref), itemTypeEnum (ref), fFlagAXDeferLookImpressionsForHydration (ref), sendAXCounterV2 (ref), constantsModule (ref), cryoModule (ref), impressionEnums (ref)
-	local catalogAnalytics = useCatalogPageMonolithDependenciesModule().catalogAnalytics
-	local widgetInfo = p1.widgetInfo
-	local widgetAnalyticsInfo = p1.widgetAnalyticsInfo
-	local widgetRow = p1.widgetRow
-	local itemsPerRow = p1.itemsPerRow
-	local uiTreatmentType = p1.uiTreatmentType
-	local var1 = useStore()
-	local var2 = if widgetInfo then widgetInfo.id else ""
-	local var3 = if widgetInfo then widgetInfo.content else nil
+return function(p1) --[[ Line: 61 | Named "useOnCatalogSortImpressionsDetectedCallback" ]]
+	-- upvalues: UseCatalogPageMonolithDependenciesModule (copy), UseStoreFunction (copy), ReactModule (copy), SelectHydratedWidgetDataModule (copy), ItemTypeEnum (copy), FFlagAXDeferLookImpressionsForHydration (copy), SendAXCounterV2Function (copy), ConstantsModule (copy), CryoModule (copy), ImpressionEnums (copy)
+	local CatalogAnalytics = UseCatalogPageMonolithDependenciesModule().catalogAnalytics
+	local WidgetInfo = p1.widgetInfo
+	local WidgetAnalyticsInfo = p1.widgetAnalyticsInfo
+	local WidgetRow = p1.widgetRow
+	local ItemsPerRow = p1.itemsPerRow
+	local UiTreatmentType = p1.uiTreatmentType
+	local UseStoreResult = UseStoreFunction()
+	local Id = WidgetInfo and WidgetInfo.id or ""
+	local Content = if WidgetInfo then WidgetInfo.content else nil
 	
-	return reactModule.useCallback(function(p2)
-		-- upvalues: selectHydratedWidgetDataModule (copy), var1 (ref), itemTypeEnum (copy), var3 (ref), fFlagAXDeferLookImpressionsForHydration (copy), sendAXCounterV2 (copy), constantsModule (copy), widgetRow (ref), var2 (ref), itemsPerRow (ref), uiTreatmentType (ref), catalogAnalytics (ref), cryoModule (copy), widgetAnalyticsInfo (ref), impressionEnums (copy)
-		local var4 = nil
+	return ReactModule.useCallback(function(ItemPositions) --[[ Line: 80 ]]
+		-- upvalues: SelectHydratedWidgetDataModule (upval), UseStoreResult (copy), ItemTypeEnum (upval), Content (copy), FFlagAXDeferLookImpressionsForHydration (upval), SendAXCounterV2Function (upval), ConstantsModule (upval), WidgetRow (copy), Id (copy), ItemsPerRow (copy), UiTreatmentType (copy), CatalogAnalytics (copy), CryoModule (upval), WidgetAnalyticsInfo (copy), ImpressionEnums (upval)
+		local v1 = nil
 		
-		local function _()
-			-- upvalues: var4 (write), selectHydratedWidgetDataModule (copy), var1 (copy), itemTypeEnum (copy)
-			if var4 == nil then
-				local var5 = selectHydratedWidgetDataModule(var1:getState())
-				var4 = if var5 then var5[itemTypeEnum.Look] else false
+		local function _() --[[ Line: 86 | Named "getHydratedLooks" ]]
+			-- upvalues: v1 (ref), SelectHydratedWidgetDataModule (upval), UseStoreResult (upval), ItemTypeEnum (upval)
+			if v1 == nil then
+				local SelectHydratedWidgetDataModuleResult = SelectHydratedWidgetDataModule(UseStoreResult:getState())
+				v1 = SelectHydratedWidgetDataModuleResult and SelectHydratedWidgetDataModuleResult[ItemTypeEnum.Look] or false
 				
-				return var4
+				return v1
+			else
+				return v1
 			end
-			return var4
 		end
 		
-		for i, v in p2 do
-			local var5, var6
-			local var7 = if var3 then var3[v] else {}
-			local var8 = if var7.id ~= nil then nil else tostring(var7.id)
-			local var9 = var7.type == itemTypeEnum.Look
-			local var10 = nil
+		for _, itemPosition in ItemPositions do
+			local ContentEntry = Content and Content[itemPosition] or {}
+			local Text = if ContentEntry.id == nil then nil else tostring(ContentEntry.id)
+			local IsTypeMatch = ContentEntry.type == ItemTypeEnum.Look
+			local LookType = nil
 			
-			if not var9 then
-				if fFlagAXDeferLookImpressionsForHydration and var9 and var10 == nil then
-					sendAXCounterV2(constantsModule.COUNTERS.LookImpressionMissingLookType)
+			if IsTypeMatch then
+				local v2 = nil
+				if v1 == nil then
+					local SelectHydratedWidgetDataModuleResult = SelectHydratedWidgetDataModule(UseStoreResult:getState())
+					v1 = SelectHydratedWidgetDataModuleResult and SelectHydratedWidgetDataModuleResult[ItemTypeEnum.Look] or false
+					v2 = v1
+				else
+					v2 = v1
 				end
-				catalogAnalytics.widgetInteractionV2(cryoModule.Dictionary.join(widgetAnalyticsInfo, {
-					widgetPosition = widgetRow,
-					widgetId = var2,
-					itemPosition = v,
-					itemId = var8,
-					itemType = var7.type,
-					lookType = var10,
-					widgetAbsPosition = (widgetRow - 1) * itemsPerRow,
-					uiTreatmentType = uiTreatmentType
-				}), impressionEnums.ActionType.ITEM_IMPRESSION)
+				local v3 = v2 and v2[Text]
+				LookType = if v3 and v3.lookType then v3.lookType else nil
 			end
-			if var4 == nil then
-				var6 = selectHydratedWidgetDataModule(var1:getState())
-				var4 = if var6 then var6[itemTypeEnum.Look] else false
-				var5 = var4
-			else
-				var5 = var4
+			if FFlagAXDeferLookImpressionsForHydration and IsTypeMatch and LookType == nil then
+				SendAXCounterV2Function(ConstantsModule.COUNTERS.LookImpressionMissingLookType)
 			end
-			var6 = var5 and var5[var8]
-			var10 = if var6 and var6.lookType then var6.lookType else nil
+			CatalogAnalytics.widgetInteractionV2(CryoModule.Dictionary.join(WidgetAnalyticsInfo, {
+				widgetPosition = WidgetRow,
+				widgetId = Id,
+				itemPosition = itemPosition,
+				itemId = Text,
+				itemType = ContentEntry.type,
+				lookType = LookType,
+				widgetAbsPosition = (WidgetRow - 1) * ItemsPerRow,
+				uiTreatmentType = UiTreatmentType
+			}), ImpressionEnums.ActionType.ITEM_IMPRESSION)
 		end
 	end, {
-		var2, var3, widgetAnalyticsInfo, widgetRow, itemsPerRow, uiTreatmentType, var1,
-		catalogAnalytics
+		Id, Content, WidgetAnalyticsInfo, WidgetRow, ItemsPerRow, UiTreatmentType,
+		UseStoreResult, CatalogAnalytics
 	})
 end

@@ -1,84 +1,84 @@
-﻿local editProfileBackground = script:FindFirstAncestor("EditProfileBackground")
-local parent = editProfileBackground.Parent
-local reactModule = require(parent.React)
-local view = require(parent.Foundation).View
-local profileBackgroundButtonModule = require(editProfileBackground.Components.ProfileBackgroundButton)
-local constantsModule = require(editProfileBackground.Common.Constants)
+﻿local EditProfileBackground = script:FindFirstAncestor("EditProfileBackground")
+local Parent = EditProfileBackground.Parent
+local ReactModule = require(Parent.React)
+local View = require(Parent.Foundation).View
+local ProfileBackgroundButtonModule = require(EditProfileBackground.Components.ProfileBackgroundButton)
+local ConstantsModule = require(EditProfileBackground.Common.Constants)
 
-return function(p1)
-	-- upvalues: reactModule (ref), constantsModule (ref), profileBackgroundButtonModule (ref), view (ref)
-	local var1, var2 = reactModule.useState(p1.currentBackgroundId or constantsModule.BACKGROUND_ASSET_IDS[1])
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var2 (ref)
+return function(p1) --[[ Line: 19 | Named "SelectionCarousel" ]]
+	-- upvalues: ReactModule (copy), ConstantsModule (copy), ProfileBackgroundButtonModule (copy), View (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(p1.currentBackgroundId or ConstantsModule.BACKGROUND_ASSET_IDS[1])
+	ReactModule.useEffect(function() --[[ Line: 23 ]]
+		-- upvalues: p1 (copy), UseStateResult2 (copy)
 		if p1.currentBackgroundId then
-			var2(p1.currentBackgroundId)
+			UseStateResult2(p1.currentBackgroundId)
 		end
 	end, { p1.currentBackgroundId })
-	local BACKGROUND_ASSET_IDS = constantsModule.BACKGROUND_ASSET_IDS
-	local buttonsPerRow = p1.buttonsPerRow
-	local numRows = p1.numRows
-	local buttonSize = p1.buttonSize
-	local var3 = reactModule.useCallback(function(p2)
-		-- upvalues: var2 (ref), p1 (ref)
-		var2(p2)
-		task.delay(0.1, function()
-			-- upvalues: p1 (copy), p2 (ref)
+	local BACKGROUNDASSETIDS = ConstantsModule.BACKGROUND_ASSET_IDS
+	local ButtonsPerRow = p1.buttonsPerRow
+	local NumRows = p1.numRows
+	local ButtonSize = p1.buttonSize
+	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 38 ]]
+		-- upvalues: UseStateResult2 (copy), p1 (copy)
+		UseStateResult2(p2)
+		task.delay(0.1, function() --[[ Line: 42 ]]
+			-- upvalues: p1 (upval), p2 (copy)
 			if p1.onBackgroundSelected then
 				p1.onBackgroundSelected(p2)
 			end
 		end)
 	end, { p1.onBackgroundSelected })
 	
-	local function renderRow(p2, p3, p4)
-		-- upvalues: reactModule (copy), BACKGROUND_ASSET_IDS (ref), var1 (ref), profileBackgroundButtonModule (copy), var3 (ref), buttonSize (ref), view (copy), buttonSize (ref)
-		local t = {}
-		table.insert(t, reactModule.createElement("UIListLayout", {
+	local function renderRow(LayoutOrder, Total, ButtonsPerRow) --[[ Line: 49 ]]
+		-- upvalues: ReactModule (upval), BACKGROUNDASSETIDS (copy), UseStateResult (copy), ProfileBackgroundButtonModule (upval), UseResult (copy), ButtonSize (copy), View (upval), ButtonSize (copy)
+		local List = {}
+		table.insert(List, ReactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Horizontal,
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			Padding = UDim.new(0, 16)
 		}))
-		table.insert(t, reactModule.createElement("UIPadding", {
+		table.insert(List, ReactModule.createElement("UIPadding", {
 			PaddingLeft = UDim.new(0, 0),
 			PaddingRight = UDim.new(0, 0)
 		}))
 		
-		for i = p3, p3 + p4 - 1 do
-			local var4 = BACKGROUND_ASSET_IDS[i]
-			table.insert(t, reactModule.createElement(profileBackgroundButtonModule, {
+		for i = Total, Total + ButtonsPerRow - 1 do
+			local BACKGROUNDASSETID = BACKGROUNDASSETIDS[i]
+			table.insert(List, ReactModule.createElement(ProfileBackgroundButtonModule, {
 				LayoutOrder = i,
-				profileBackgroundId = var4,
-				selected = var1 == var4,
-				onActivated = var3,
-				buttonSize = buttonSize
+				profileBackgroundId = BACKGROUNDASSETID,
+				selected = UseStateResult == BACKGROUNDASSETID,
+				onActivated = UseResult,
+				buttonSize = ButtonSize
 			}))
 		end
-		return reactModule.createElement(view, {
-			LayoutOrder = p2,
-			Size = UDim2.new(1, -32, 0, buttonSize)
-		}, t)
+		return ReactModule.createElement(View, {
+			LayoutOrder = LayoutOrder,
+			Size = UDim2.new(1, -32, 0, ButtonSize)
+		}, List)
 	end
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "bg-surface-0",
 		Size = UDim2.new(1, 0, 0, p1.height)
-	}, reactModule.useMemo(function()
-		-- upvalues: reactModule (copy), view (copy), numRows (ref), renderRow (ref), buttonsPerRow (ref)
-		local t = {}
-		table.insert(t, reactModule.createElement("UIListLayout", {
+	}, (ReactModule.useMemo(function() --[[ Line: 93 ]]
+		-- upvalues: ReactModule (upval), View (upval), NumRows (copy), renderRow (copy), ButtonsPerRow (copy)
+		local List = {}
+		table.insert(List, ReactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
 			VerticalAlignment = Enum.VerticalAlignment.Top,
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			Padding = UDim.new(0, 16)
 		}))
-		table.insert(t, reactModule.createElement(view, { LayoutOrder = 0, Size = UDim2.new(1, 0, 0, 0) }))
-		local var5 = 1
+		table.insert(List, ReactModule.createElement(View, { LayoutOrder = 0, Size = UDim2.new(1, 0, 0, 0) }))
+		local Total = 1
 		
-		for i = 1, numRows do
-			table.insert(t, renderRow(i, var5, buttonsPerRow))
-			var5 += buttonsPerRow
+		for i = 1, NumRows do
+			table.insert(List, renderRow(i, Total, ButtonsPerRow))
+			Total += ButtonsPerRow
 		end
-		return t
-	end, { var1 }))
+		return List
+	end, { UseStateResult })))
 end

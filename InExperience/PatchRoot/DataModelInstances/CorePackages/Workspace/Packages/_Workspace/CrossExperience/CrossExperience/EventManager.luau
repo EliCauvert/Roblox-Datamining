@@ -1,96 +1,96 @@
-﻿local httpService = game:GetService("HttpService")
-local crossExperience = script:FindFirstAncestor("CrossExperience")
-local dependenciesModule = require(crossExperience.dependencies)
-local _ = require(crossExperience.Types)
-local communicationModule = require(crossExperience.Communication)
-local constantsModule = require(crossExperience.Constants)
-local actionsModule = require(crossExperience.Actions)
-local modelsModule = require(crossExperience.Models)
-local utilsModule = require(crossExperience.Utils)
-local eventQueueModule = require(crossExperience.Utils.EventQueue)
-local createPersistenceMiddlewareModule = require(crossExperience.Middlewares.createPersistenceMiddleware)
-local enableCrossExpEventLogging = game:DefineFastFlag("EnableCrossExpEventLogging", false)
-local sharedFlags = dependenciesModule.SharedFlags
-local fFlagPartyVoiceBlockSync = sharedFlags.FFlagPartyVoiceBlockSync
-local fFlagEnablePartyVoiceChangersInLua = sharedFlags.FFlagEnablePartyVoiceChangersInLua
-local cryo = dependenciesModule.Cryo
-local var1 = 0
-local var2 = httpService:GenerateGUID(false)
-local t = {}
-t.__index = t
+﻿local HttpService = game:GetService("HttpService")
+local CrossExperience = script:FindFirstAncestor("CrossExperience")
+local DependenciesModule = require(CrossExperience.dependencies)
+local _ = require(CrossExperience.Types)
+local CommunicationModule = require(CrossExperience.Communication)
+local ConstantsModule = require(CrossExperience.Constants)
+local ActionsModule = require(CrossExperience.Actions)
+local ModelsModule = require(CrossExperience.Models)
+local UtilsModule = require(CrossExperience.Utils)
+local EventQueueModule = require(CrossExperience.Utils.EventQueue)
+local CreatePersistenceMiddlewareModule = require(CrossExperience.Middlewares.createPersistenceMiddleware)
+local EnableCrossExpEventLogging = game:DefineFastFlag("EnableCrossExpEventLogging", false)
+local SharedFlags = DependenciesModule.SharedFlags
+local FFlagPartyVoiceBlockSync = SharedFlags.FFlagPartyVoiceBlockSync
+local FFlagEnablePartyVoiceChangersInLua = SharedFlags.FFlagEnablePartyVoiceChangersInLua
+local Cryo = DependenciesModule.Cryo
+local _seq = 0
+local Guid = HttpService:GenerateGUID(false)
+local EventManager = {}
+EventManager.__index = EventManager
 
-function t.new(p1, p2)
-	-- upvalues: eventQueueModule (ref), t (ref)
-	local t_1 = {
+function EventManager.new(ExperienceType, ExperienceType1) --[[ Line: 105 ]]
+	-- upvalues: EventQueueModule (copy), EventManager (copy)
+	local config = {
 		isSubscribed = false,
 		observers = {},
-		experienceType = p1,
-		eventQueue = eventQueueModule.new(p2)
+		experienceType = ExperienceType,
+		eventQueue = EventQueueModule.new(ExperienceType1)
 	}
-	setmetatable(t_1, t)
+	setmetatable(config, EventManager)
 	
-	return t_1
+	return config
 end
 
-local _ = function(p1)
+local function _(p1) --[[ Line: 116 ]]
 	return {
 		userId = tonumber(p1.userId) or -1,
 		isLocalUser = p1.isLocalUser
 	}
 end
 
-function t.notify(_, p1, p2)
-	-- upvalues: var1 (write), var2 (ref), communicationModule (ref)
+function EventManager:notify(p1, p2) --[[ Line: 123 ]]
+	-- upvalues: _seq (ref), Guid (copy), CommunicationModule (copy)
 	if not p2 then
 		p2 = {}
 	end
-	var1 += 1
-	p2._seq = var1
-	p2._origin = var2
-	communicationModule.notify(p1, p2)
+	_seq += 1
+	p2._seq = _seq
+	p2._origin = Guid
+	CommunicationModule.notify(p1, p2)
 end
 
-function t:removeObserver(p1, p2)
-	-- upvalues: communicationModule (ref)
-	communicationModule.removeObserver(self.experienceType, p2, p1)
+function EventManager:removeObserver(Id, Event) --[[ Line: 134 ]]
+	-- upvalues: CommunicationModule (copy)
+	CommunicationModule.removeObserver(self.experienceType, Event, Id)
 end
 
-function t:addObserver(p1, p2)
-	-- upvalues: communicationModule (ref)
+function EventManager:addObserver(Event, p1) --[[ Line: 138 ]]
+	-- upvalues: CommunicationModule (copy)
 	table.insert(self.observers, {
-		id = communicationModule.addObserver(self.experienceType, p1, function(p3)
-			-- upvalues: self (ref), p1 (ref), p2 (ref)
-			self.eventQueue:process(p1, p3, p2)
+		id = CommunicationModule.addObserver(self.experienceType, Event, function(p2) --[[ Line: 139 ]]
+			-- upvalues: self (copy), Event (copy), p1 (copy)
+			self.eventQueue:process(Event, p2, p1)
 		end),
-		event = p1
+		event = Event
 	})
 end
 
-local var3 = createPersistenceMiddlewareModule({ storeKey = constantsModule.STORAGE_CEV_STORE_KEY })
+local PersistenceMiddlewareModule = CreatePersistenceMiddlewareModule({ storeKey = ConstantsModule.STORAGE_CEV_STORE_KEY })
 
-function t:subscribe(p1, p2)
-	-- upvalues: enableCrossExpEventLogging (ref), constantsModule (ref), actionsModule (ref), cryo (ref), modelsModule (ref), fFlagEnablePartyVoiceChangersInLua (ref), fFlagPartyVoiceBlockSync (ref)
+function EventManager:subscribe(p1, p2) --[[ Line: 154 ]]
+	-- upvalues: EnableCrossExpEventLogging (copy), ConstantsModule (copy), ActionsModule (copy), Cryo (copy), ModelsModule (copy), FFlagEnablePartyVoiceChangersInLua (copy), FFlagPartyVoiceBlockSync (copy)
 	if self.isSubscribed then return end
 	self.isSubscribed = true
 	
-	if p2 and enableCrossExpEventLogging then
+	if p2 and EnableCrossExpEventLogging then
 		p2:info("{}: Subscribing to the CEV Store", self.experienceType)
 	end
-	self:addObserver(constantsModule.EVENTS.PARTY_VOICE_GAME_JOIN_FAILED, function(p3)
-		-- upvalues: p2 (ref), enableCrossExpEventLogging (copy), self (ref), p1 (ref), actionsModule (copy), constantsModule (copy)
-		if p2 and enableCrossExpEventLogging then
+	self:addObserver(ConstantsModule.EVENTS.PARTY_VOICE_GAME_JOIN_FAILED, function(p3) --[[ Line: 167 ]]
+		-- upvalues: p2 (copy), EnableCrossExpEventLogging (upval), self (copy), p1 (copy), ActionsModule (upval), ConstantsModule (upval)
+		if p2 and EnableCrossExpEventLogging then
 			p2:info("{}: Experience Party Voice Game Join Failed: {}", self.experienceType, p3.state)
 		end
-		p1:dispatch(actionsModule.VoiceStatusChanged({
-			status = constantsModule.VOICE_STATUS.ERROR_RCC_CONNECTING
+		p1:dispatch(ActionsModule.VoiceStatusChanged({
+			status = ConstantsModule.VOICE_STATUS.ERROR_RCC_CONNECTING
 		}))
 	end)
-	self:addObserver(constantsModule.EVENTS.PARTY_VOICE_STATUS_CHANGED, function(p3)
-		-- upvalues: p2 (ref), enableCrossExpEventLogging (copy), self (ref), constantsModule (copy), p1 (ref), actionsModule (copy)
-		if p2 and enableCrossExpEventLogging then
+	self:addObserver(ConstantsModule.EVENTS.PARTY_VOICE_STATUS_CHANGED, function(p3) --[[ Line: 180 ]]
+		-- upvalues: p2 (copy), EnableCrossExpEventLogging (upval), self (copy), ConstantsModule (upval), p1 (copy), ActionsModule (upval)
+		if p2 and EnableCrossExpEventLogging then
 			p2:info("{}: Experience Voice Status Changed: {}, {}, {}, {}", self.experienceType, p3.status, p3.detail, p3.voiceChannelId, p3.voiceSessionId)
 		end
-		if p3.status == constantsModule.VOICE_STATUS.VOICE_CONNECTED then
+		if p3.status == ConstantsModule.VOICE_STATUS.VOICE_CONNECTED then
 			if not p3.voiceChannelId and p2 then
 				p2:warning("Voice channel id is expected")
 			end
@@ -98,42 +98,42 @@ function t:subscribe(p1, p2)
 				p2:warning("Voice session id is expected")
 			end
 		end
-		p1:dispatch(actionsModule.VoiceStatusChanged({
+		p1:dispatch(ActionsModule.VoiceStatusChanged({
 			status = p3.status,
 			voiceChannelId = p3.voiceChannelId,
 			voiceSessionId = p3.voiceSessionId
 		}))
 	end)
-	self:addObserver(constantsModule.EVENTS.PARTY_VOICE_EXPERIENCE_JOINED, function(p3)
-		-- upvalues: p2 (ref), enableCrossExpEventLogging (copy), self (ref), cryo (copy), p1 (ref), actionsModule (copy)
-		if p2 and enableCrossExpEventLogging then
-			p2:info("{}: Experience joined JobID: {}, GameID: {}, PlaceId: {}", self.experienceType, p3.jobId, p3.gameId, p3.placeId)
+	self:addObserver(ConstantsModule.EVENTS.PARTY_VOICE_EXPERIENCE_JOINED, function(JoinResult) --[[ Line: 212 ]]
+		-- upvalues: p2 (copy), EnableCrossExpEventLogging (upval), self (copy), Cryo (upval), p1 (copy), ActionsModule (upval)
+		if p2 and EnableCrossExpEventLogging then
+			p2:info("{}: Experience joined JobID: {}, GameID: {}, PlaceId: {}", self.experienceType, JoinResult.jobId, JoinResult.gameId, JoinResult.placeId)
 		end
-		local backgroundStateSnapshot = self:getBackgroundStateSnapshot()
-		local var4 = p3
+		local BackgroundStateSnapshot = self:getBackgroundStateSnapshot()
+		local JoinResult1 = JoinResult
 		
-		if backgroundStateSnapshot and backgroundStateSnapshot.Participants then
-			var4 = cryo.Dictionary.join(var4, backgroundStateSnapshot.Participants)
+		if BackgroundStateSnapshot and BackgroundStateSnapshot.Participants then
+			JoinResult1 = Cryo.Dictionary.join(JoinResult1, BackgroundStateSnapshot.Participants)
 		end
-		p1:dispatch(actionsModule.ExperienceJoined(var4))
+		p1:dispatch(ActionsModule.ExperienceJoined(JoinResult1))
 	end)
-	self:addObserver(constantsModule.EVENTS.PARTY_VOICE_PARTICIPANT_AUDIO_FOCUS_CHANGED, function(p3)
-		-- upvalues: p2 (ref), enableCrossExpEventLogging (copy), self (ref), p1 (ref), actionsModule (copy)
-		if p2 and enableCrossExpEventLogging then
+	self:addObserver(ConstantsModule.EVENTS.PARTY_VOICE_PARTICIPANT_AUDIO_FOCUS_CHANGED, function(p3) --[[ Line: 234 ]]
+		-- upvalues: p2 (copy), EnableCrossExpEventLogging (upval), self (copy), p1 (copy), ActionsModule (upval)
+		if p2 and EnableCrossExpEventLogging then
 			p2:info("{}: Participant Audio Focus Changed {} = {}", self.experienceType, p3.userId, p3.contextId)
 		end
-		p1:dispatch(actionsModule.ParticipantAudioFocusChanged({
+		p1:dispatch(ActionsModule.ParticipantAudioFocusChanged({
 			userId = p3.userId,
 			contextId = p3.contextId,
 			contextIds = p3.contextIds
 		}))
 	end)
-	self:addObserver(constantsModule.EVENTS.PARTY_VOICE_PARTICIPANT_ADDED, function(p3)
-		-- upvalues: p2 (ref), enableCrossExpEventLogging (copy), self (ref), modelsModule (copy), fFlagEnablePartyVoiceChangersInLua (copy), p1 (ref), actionsModule (copy)
-		if p2 and enableCrossExpEventLogging then
+	self:addObserver(ConstantsModule.EVENTS.PARTY_VOICE_PARTICIPANT_ADDED, function(p3) --[[ Line: 254 ]]
+		-- upvalues: p2 (copy), EnableCrossExpEventLogging (upval), self (copy), ModelsModule (upval), FFlagEnablePartyVoiceChangersInLua (upval), p1 (copy), ActionsModule (upval)
+		if p2 and EnableCrossExpEventLogging then
 			p2:info("{}: Participant added {}", self.experienceType, p3.userId)
 		end
-		p1:dispatch(actionsModule.ParticipantAdded(modelsModule.ParticipantModel.format({
+		p1:dispatch(ActionsModule.ParticipantAdded((ModelsModule.ParticipantModel.format({
 			isActive = false,
 			isMuted = false,
 			isMutedLocally = false,
@@ -141,191 +141,191 @@ function t:subscribe(p1, p2)
 			isLocalUser = p3.isLocalUser,
 			username = p3.username,
 			displayname = p3.displayname,
-			isVoiceChangerActive = if fFlagEnablePartyVoiceChangersInLua then false else nil,
-			isVoiceChangerHearMyselfActive = if fFlagEnablePartyVoiceChangersInLua then false else nil,
-			selectedVoicePack = if fFlagEnablePartyVoiceChangersInLua then p3.selectedVoicePack else nil
-		})))
+			isVoiceChangerActive = not FFlagEnablePartyVoiceChangersInLua and nil,
+			isVoiceChangerHearMyselfActive = not FFlagEnablePartyVoiceChangersInLua and nil,
+			selectedVoicePack = if FFlagEnablePartyVoiceChangersInLua then p3.selectedVoicePack else nil
+		}))))
 	end)
-	self:addObserver(constantsModule.EVENTS.PARTY_VOICE_PARTICIPANT_REMOVED, function(p3)
-		-- upvalues: p2 (ref), enableCrossExpEventLogging (copy), self (ref), p1 (ref), actionsModule (copy)
-		if p2 and enableCrossExpEventLogging then
+	self:addObserver(ConstantsModule.EVENTS.PARTY_VOICE_PARTICIPANT_REMOVED, function(p3) --[[ Line: 276 ]]
+		-- upvalues: p2 (copy), EnableCrossExpEventLogging (upval), self (copy), p1 (copy), ActionsModule (upval)
+		if p2 and EnableCrossExpEventLogging then
 			p2:info("{}: Participant removed {}", self.experienceType, p3.userId)
 		end
-		p1:dispatch(actionsModule.ParticipantRemoved({
+		p1:dispatch(ActionsModule.ParticipantRemoved({
 			userId = tonumber(p3.userId) or -1,
 			isLocalUser = p3.isLocalUser
 		}))
 	end)
-	self:addObserver(constantsModule.EVENTS.PARTY_VOICE_PARTICIPANT_IS_ACTIVE, function(p3)
-		-- upvalues: p2 (ref), enableCrossExpEventLogging (copy), self (ref), p1 (ref), actionsModule (copy)
-		if p2 and enableCrossExpEventLogging then
+	self:addObserver(ConstantsModule.EVENTS.PARTY_VOICE_PARTICIPANT_IS_ACTIVE, function(p3) --[[ Line: 286 ]]
+		-- upvalues: p2 (copy), EnableCrossExpEventLogging (upval), self (copy), p1 (copy), ActionsModule (upval)
+		if p2 and EnableCrossExpEventLogging then
 			p2:info("{}: Participant is active {}", self.experienceType, p3.userId)
 		end
-		p1:dispatch(actionsModule.ParticipantIsActive({
+		p1:dispatch(ActionsModule.ParticipantIsActive({
 			userId = tonumber(p3.userId) or -1,
 			isLocalUser = p3.isLocalUser
 		}))
 	end)
-	self:addObserver(constantsModule.EVENTS.PARTY_VOICE_PARTICIPANT_IS_INACTIVE, function(p3)
-		-- upvalues: p2 (ref), enableCrossExpEventLogging (copy), self (ref), p1 (ref), actionsModule (copy)
-		if p2 and enableCrossExpEventLogging then
+	self:addObserver(ConstantsModule.EVENTS.PARTY_VOICE_PARTICIPANT_IS_INACTIVE, function(p3) --[[ Line: 296 ]]
+		-- upvalues: p2 (copy), EnableCrossExpEventLogging (upval), self (copy), p1 (copy), ActionsModule (upval)
+		if p2 and EnableCrossExpEventLogging then
 			p2:info("{}: Participant is inactive {}", self.experienceType, p3.userId)
 		end
-		p1:dispatch(actionsModule.ParticipantIsInactive({
+		p1:dispatch(ActionsModule.ParticipantIsInactive({
 			userId = tonumber(p3.userId) or -1,
 			isLocalUser = p3.isLocalUser
 		}))
 	end)
-	self:addObserver(constantsModule.EVENTS.PARTY_VOICE_PARTICIPANT_WAS_MUTED, function(p3)
-		-- upvalues: p2 (ref), enableCrossExpEventLogging (copy), self (ref), p1 (ref), actionsModule (copy)
-		if p2 and enableCrossExpEventLogging then
+	self:addObserver(ConstantsModule.EVENTS.PARTY_VOICE_PARTICIPANT_WAS_MUTED, function(p3) --[[ Line: 306 ]]
+		-- upvalues: p2 (copy), EnableCrossExpEventLogging (upval), self (copy), p1 (copy), ActionsModule (upval)
+		if p2 and EnableCrossExpEventLogging then
 			p2:info("{}: Participant is was muted {}", self.experienceType, p3.userId)
 		end
-		p1:dispatch(actionsModule.ParticipantWasMuted({
+		p1:dispatch(ActionsModule.ParticipantWasMuted({
 			userId = tonumber(p3.userId) or -1,
 			isLocalUser = p3.isLocalUser
 		}))
 	end)
-	self:addObserver(constantsModule.EVENTS.PARTY_VOICE_PARTICIPANT_WAS_UNMUTED, function(p3)
-		-- upvalues: p2 (ref), enableCrossExpEventLogging (copy), self (ref), p1 (ref), actionsModule (copy)
-		if p2 and enableCrossExpEventLogging then
+	self:addObserver(ConstantsModule.EVENTS.PARTY_VOICE_PARTICIPANT_WAS_UNMUTED, function(p3) --[[ Line: 316 ]]
+		-- upvalues: p2 (copy), EnableCrossExpEventLogging (upval), self (copy), p1 (copy), ActionsModule (upval)
+		if p2 and EnableCrossExpEventLogging then
 			p2:info("{}: Participant is was unmuted {}", self.experienceType, p3.userId)
 		end
-		p1:dispatch(actionsModule.ParticipantWasUnmuted({
+		p1:dispatch(ActionsModule.ParticipantWasUnmuted({
 			userId = tonumber(p3.userId) or -1,
 			isLocalUser = p3.isLocalUser
 		}))
 	end)
 	
-	if fFlagEnablePartyVoiceChangersInLua then
-		self:addObserver(constantsModule.EVENTS.PARTY_VOICE_CHANGER_WAS_ENABLED, function(p3)
-			-- upvalues: p2 (ref), enableCrossExpEventLogging (copy), self (ref), p1 (ref), actionsModule (copy)
-			if p2 and enableCrossExpEventLogging then
+	if FFlagEnablePartyVoiceChangersInLua then
+		self:addObserver(ConstantsModule.EVENTS.PARTY_VOICE_CHANGER_WAS_ENABLED, function(p3) --[[ Line: 327 ]]
+			-- upvalues: p2 (copy), EnableCrossExpEventLogging (upval), self (copy), p1 (copy), ActionsModule (upval)
+			if p2 and EnableCrossExpEventLogging then
 				p2:info("{}: Participant voice changer was enabled {}", self.experienceType, p3.userId)
 			end
-			p1:dispatch(actionsModule.VoiceChangerWasEnabled({
+			p1:dispatch(ActionsModule.VoiceChangerWasEnabled({
 				userId = tonumber(p3.userId) or -1,
 				isLocalUser = p3.isLocalUser
 			}))
 		end)
-		self:addObserver(constantsModule.EVENTS.PARTY_VOICE_CHANGER_WAS_DISABLED, function(p3)
-			-- upvalues: p2 (ref), enableCrossExpEventLogging (copy), self (ref), p1 (ref), actionsModule (copy)
-			if p2 and enableCrossExpEventLogging then
+		self:addObserver(ConstantsModule.EVENTS.PARTY_VOICE_CHANGER_WAS_DISABLED, function(p3) --[[ Line: 337 ]]
+			-- upvalues: p2 (copy), EnableCrossExpEventLogging (upval), self (copy), p1 (copy), ActionsModule (upval)
+			if p2 and EnableCrossExpEventLogging then
 				p2:info("{}: Participant voice changer was disabled {}", self.experienceType, p3.userId)
 			end
-			p1:dispatch(actionsModule.VoiceChangerWasDisabled({
+			p1:dispatch(ActionsModule.VoiceChangerWasDisabled({
 				userId = tonumber(p3.userId) or -1,
 				isLocalUser = p3.isLocalUser
 			}))
 		end)
-		self:addObserver(constantsModule.EVENTS.PARTY_VOICE_PACK_WAS_SET, function(p3)
-			-- upvalues: p2 (ref), enableCrossExpEventLogging (copy), self (ref), p1 (ref), actionsModule (copy)
-			if p2 and enableCrossExpEventLogging then
+		self:addObserver(ConstantsModule.EVENTS.PARTY_VOICE_PACK_WAS_SET, function(p3) --[[ Line: 347 ]]
+			-- upvalues: p2 (copy), EnableCrossExpEventLogging (upval), self (copy), p1 (copy), ActionsModule (upval)
+			if p2 and EnableCrossExpEventLogging then
 				p2:info("{}: Participant {} voice pack was set to {}", self.experienceType, p3.userId, p3.voicePackName)
 			end
-			p1:dispatch(actionsModule.VoicePackWasSet({
+			p1:dispatch(ActionsModule.VoicePackWasSet({
 				userId = tonumber(p3.userId) or -1,
 				isLocalUser = p3.isLocalUser,
 				voicePackName = p3.voicePackName
 			}))
 		end)
-		self:addObserver(constantsModule.EVENTS.PARTY_VOICE_CHANGER_FEEDBACK_WAS_ENABLED, function(p3)
-			-- upvalues: p2 (ref), enableCrossExpEventLogging (copy), self (ref), p1 (ref), actionsModule (copy)
-			if p2 and enableCrossExpEventLogging then
+		self:addObserver(ConstantsModule.EVENTS.PARTY_VOICE_CHANGER_FEEDBACK_WAS_ENABLED, function(p3) --[[ Line: 366 ]]
+			-- upvalues: p2 (copy), EnableCrossExpEventLogging (upval), self (copy), p1 (copy), ActionsModule (upval)
+			if p2 and EnableCrossExpEventLogging then
 				p2:info("{}: Participant voice changer feedback was enabled {}", self.experienceType, p3.userId)
 			end
-			p1:dispatch(actionsModule.VoiceChangerFeedbackWasEnabled({
+			p1:dispatch(ActionsModule.VoiceChangerFeedbackWasEnabled({
 				userId = tonumber(p3.userId) or -1,
 				isLocalUser = p3.isLocalUser
 			}))
 		end)
-		self:addObserver(constantsModule.EVENTS.PARTY_VOICE_CHANGER_FEEDBACK_WAS_DISABLED, function(p3)
-			-- upvalues: p2 (ref), enableCrossExpEventLogging (copy), self (ref), p1 (ref), actionsModule (copy)
-			if p2 and enableCrossExpEventLogging then
+		self:addObserver(ConstantsModule.EVENTS.PARTY_VOICE_CHANGER_FEEDBACK_WAS_DISABLED, function(p3) --[[ Line: 380 ]]
+			-- upvalues: p2 (copy), EnableCrossExpEventLogging (upval), self (copy), p1 (copy), ActionsModule (upval)
+			if p2 and EnableCrossExpEventLogging then
 				p2:info("{}: Participant voice changer feedback was disabled {}", self.experienceType, p3.userId)
 			end
-			p1:dispatch(actionsModule.VoiceChangerFeedbackWasDisabled({
+			p1:dispatch(ActionsModule.VoiceChangerFeedbackWasDisabled({
 				userId = tonumber(p3.userId) or -1,
 				isLocalUser = p3.isLocalUser
 			}))
 		end)
 	end
-	self:addObserver(constantsModule.EVENTS.MUTE_PARTY_VOICE_PARTICIPANT, function(p3)
-		-- upvalues: p2 (ref), enableCrossExpEventLogging (copy), self (ref), p1 (ref), actionsModule (copy)
-		if p2 and enableCrossExpEventLogging then
+	self:addObserver(ConstantsModule.EVENTS.MUTE_PARTY_VOICE_PARTICIPANT, function(p3) --[[ Line: 395 ]]
+		-- upvalues: p2 (copy), EnableCrossExpEventLogging (upval), self (copy), p1 (copy), ActionsModule (upval)
+		if p2 and EnableCrossExpEventLogging then
 			p2:info("{}: Participant is muted locally {}", self.experienceType, p3.userId)
 		end
-		p1:dispatch(actionsModule.MuteParticipant({
+		p1:dispatch(ActionsModule.MuteParticipant({
 			userId = tonumber(p3.userId) or -1,
 			isLocalUser = p3.isLocalUser
 		}))
 	end)
-	self:addObserver(constantsModule.EVENTS.UNMUTE_PARTY_VOICE_PARTICIPANT, function(p3)
-		-- upvalues: p2 (ref), enableCrossExpEventLogging (copy), self (ref), p1 (ref), actionsModule (copy)
-		if p2 and enableCrossExpEventLogging then
+	self:addObserver(ConstantsModule.EVENTS.UNMUTE_PARTY_VOICE_PARTICIPANT, function(p3) --[[ Line: 405 ]]
+		-- upvalues: p2 (copy), EnableCrossExpEventLogging (upval), self (copy), p1 (copy), ActionsModule (upval)
+		if p2 and EnableCrossExpEventLogging then
 			p2:info("{}: Participant is unmuted locally {}", self.experienceType, p3.userId)
 		end
-		p1:dispatch(actionsModule.UnmuteParticipant({
+		p1:dispatch(ActionsModule.UnmuteParticipant({
 			userId = tonumber(p3.userId) or -1,
 			isLocalUser = p3.isLocalUser
 		}))
 	end)
 	
-	if fFlagPartyVoiceBlockSync then
-		self:addObserver(constantsModule.EVENTS.PARTY_VOICE_BLOCK_PARTICIPANT, function(p3)
-			-- upvalues: p2 (ref), enableCrossExpEventLogging (copy), self (ref)
-			if p2 and enableCrossExpEventLogging then
+	if FFlagPartyVoiceBlockSync then
+		self:addObserver(ConstantsModule.EVENTS.PARTY_VOICE_BLOCK_PARTICIPANT, function(p3) --[[ Line: 416 ]]
+			-- upvalues: p2 (copy), EnableCrossExpEventLogging (upval), self (copy)
+			if p2 and EnableCrossExpEventLogging then
 				p2:info("{}: Participant was blocked {} from party voice", self.experienceType, p3.userId)
 			end
 		end)
-		self:addObserver(constantsModule.EVENTS.PARTY_VOICE_UNBLOCK_PARTICIPANT, function(p3)
-			-- upvalues: p2 (ref), enableCrossExpEventLogging (copy), self (ref)
-			if p2 and enableCrossExpEventLogging then
+		self:addObserver(ConstantsModule.EVENTS.PARTY_VOICE_UNBLOCK_PARTICIPANT, function(p3) --[[ Line: 425 ]]
+			-- upvalues: p2 (copy), EnableCrossExpEventLogging (upval), self (copy)
+			if p2 and EnableCrossExpEventLogging then
 				p2:info("{}: Participant was unblocked {} from party voice", self.experienceType, p3.userId)
 			end
 		end)
 	end
 end
 
-function t.getBackgroundStateSnapshot(_)
-	-- upvalues: var3 (ref), utilsModule (ref)
-	local var4 = var3.restore()
+function EventManager:getBackgroundStateSnapshot() --[[ Line: 434 ]]
+	-- upvalues: PersistenceMiddlewareModule (copy), UtilsModule (copy)
+	local RestoreResult = PersistenceMiddlewareModule.restore()
 	
-	return if var4 and var4.Squad and var4.Squad.CrossExperienceVoice then {
-		Experience = var4.Squad.CrossExperienceVoice.Experience,
+	return if RestoreResult and RestoreResult.Squad and RestoreResult.Squad.CrossExperienceVoice then {
+		Experience = RestoreResult.Squad.CrossExperienceVoice.Experience,
 		Participants = {
-			participants = utilsModule.stringMapToNumberMap(var4.Squad.CrossExperienceVoice.Participants.participants),
-			activeUserIds = var4.Squad.CrossExperienceVoice.Participants.activeUserIds,
-			publicVoiceFocusedUserIds = utilsModule.stringMapToNumberMap(var4.Squad.CrossExperienceVoice.Participants.publicVoiceFocusedUserIds)
+			participants = UtilsModule.stringMapToNumberMap(RestoreResult.Squad.CrossExperienceVoice.Participants.participants),
+			activeUserIds = RestoreResult.Squad.CrossExperienceVoice.Participants.activeUserIds,
+			publicVoiceFocusedUserIds = UtilsModule.stringMapToNumberMap(RestoreResult.Squad.CrossExperienceVoice.Participants.publicVoiceFocusedUserIds)
 		}
 	} else nil
 end
 
-function t:restoreStateFromBackground(p1, p2)
-	-- upvalues: enableCrossExpEventLogging (ref), httpService (ref), actionsModule (ref)
-	local backgroundStateSnapshot = self:getBackgroundStateSnapshot()
+function EventManager:restoreStateFromBackground(p1, p2) --[[ Line: 452 ]]
+	-- upvalues: EnableCrossExpEventLogging (copy), HttpService (copy), ActionsModule (copy)
+	local BackgroundStateSnapshot = self:getBackgroundStateSnapshot()
 	
-	if backgroundStateSnapshot then
-		if p2 and enableCrossExpEventLogging then
-			p2:info("{}: Restoring state from background {}", self.experienceType, httpService:JSONEncode(backgroundStateSnapshot))
+	if BackgroundStateSnapshot then
+		if p2 and EnableCrossExpEventLogging then
+			p2:info("{}: Restoring state from background {}", self.experienceType, HttpService:JSONEncode(BackgroundStateSnapshot))
 		end
-		p1:dispatch(actionsModule.RestoreState(backgroundStateSnapshot))
+		p1:dispatch(ActionsModule.RestoreState(BackgroundStateSnapshot))
 	end
 end
 
-function t:unsubscribe(p1, p2)
-	-- upvalues: enableCrossExpEventLogging (ref), actionsModule (ref)
-	if p2 and enableCrossExpEventLogging then
+function EventManager:unsubscribe(p1, p2) --[[ Line: 462 ]]
+	-- upvalues: EnableCrossExpEventLogging (copy), ActionsModule (copy)
+	if p2 and EnableCrossExpEventLogging then
 		p2:info("{}: Unsubscribing from the CEV Store", self.experienceType)
 	end
-	p1:dispatch(actionsModule.ExperienceLeft())
+	p1:dispatch(ActionsModule.ExperienceLeft())
 	
-	for i, v in ipairs(self.observers) do
-		self:removeObserver(v.id, v.event)
+	for _, observer in ipairs(self.observers) do
+		self:removeObserver(observer.id, observer.event)
 	end
 	self.isSubscribed = false
 	self.observers = {}
 	self.eventQueue:reset()
 end
 
-return t
+return EventManager

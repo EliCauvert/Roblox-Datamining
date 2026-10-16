@@ -1,28 +1,86 @@
-﻿local _ = require(script:FindFirstAncestor("GameTile").GameTileTypes)
+﻿local GameTile = script:FindFirstAncestor("GameTile")
+local Parent = GameTile.Parent
+local _ = require(GameTile.GameTileTypes)
+local FFlagLuaAppHomeMomentVideoPrecedence = require(Parent.SharedFlags).FFlagLuaAppHomeMomentVideoPrecedence
+local FFlagLuaAppDiscoveryMomentVideoTelemetry = require(Parent.SharedFlags).FFlagLuaAppDiscoveryMomentVideoTelemetry
 
-local function _(p1)
+local function _(p1): boolean --[[ Line: 17 | Named "isNonEmptyString" ]]
 	return type(p1) == "string" and p1 ~= ""
 end
 
-return function(p1, p2)
-	if p2 then
-		return { assetId = p2 }
-	end
-	local primaryMediaAsset = p1 and p1.primaryMediaAsset
+local _ = function(p1) --[[ Line: 21 | Named "getMomentVideo" ]]
+	-- upvalues: FFlagLuaAppDiscoveryMomentVideoTelemetry (copy)
+	local MomentVideoAssetId = p1.momentVideoAssetId
 	
-	if not primaryMediaAsset then
-		return nil
-	elseif primaryMediaAsset.wideVideoAssetId then
-		return { assetId = primaryMediaAsset.wideVideoAssetId }
-	end
-	local momentVideoAssetId = primaryMediaAsset.momentVideoAssetId
-	
-	if type(momentVideoAssetId) == "string" and momentVideoAssetId ~= "" then
-		momentVideoAssetId = primaryMediaAsset.momentVideoAssetAccessContext
+	if type(MomentVideoAssetId) == "string" and MomentVideoAssetId ~= "" then
+		local MomentVideoAssetAccessContext = p1.momentVideoAssetAccessContext
 		
-		return if type(momentVideoAssetId) == "string" and momentVideoAssetId ~= "" then {
-			assetId = primaryMediaAsset.momentVideoAssetId,
-			accessContext = primaryMediaAsset.momentVideoAssetAccessContext
-		} else nil
+		if type(MomentVideoAssetAccessContext) == "string" and MomentVideoAssetAccessContext ~= "" then
+			return {
+				assetId = p1.momentVideoAssetId,
+				accessContext = p1.momentVideoAssetAccessContext,
+				isMoment = if FFlagLuaAppDiscoveryMomentVideoTelemetry then true else nil
+			}
+		end
 	end
+	return nil
+end
+
+return function(p1, AssetId) --[[ Line: 38 | Named "getLayoutDataVideo" ]]
+	-- upvalues: FFlagLuaAppHomeMomentVideoPrecedence (copy), FFlagLuaAppDiscoveryMomentVideoTelemetry (copy)
+	local PrimaryMediaAsset = p1 and p1.primaryMediaAsset
+	local v1 = nil
+	
+	if FFlagLuaAppHomeMomentVideoPrecedence then
+		repeat
+			if PrimaryMediaAsset then
+				local MomentVideoAssetId = PrimaryMediaAsset.momentVideoAssetId
+				
+				if type(MomentVideoAssetId) == "string" and MomentVideoAssetId ~= "" then
+					local MomentVideoAssetAccessContext = PrimaryMediaAsset.momentVideoAssetAccessContext
+					
+					if type(MomentVideoAssetAccessContext) == "string" and MomentVideoAssetAccessContext ~= "" then
+						v1 = {
+							assetId = PrimaryMediaAsset.momentVideoAssetId,
+							accessContext = PrimaryMediaAsset.momentVideoAssetAccessContext,
+							isMoment = if FFlagLuaAppDiscoveryMomentVideoTelemetry then true else nil
+						}
+						break
+					end
+				end
+				v1 = nil
+				break
+			end
+			v1 = nil
+		until true
+		if v1 then
+			return v1
+		end
+	end
+	if AssetId then
+		return { assetId = AssetId }
+	end
+	if not PrimaryMediaAsset then
+		return nil
+	end
+	if PrimaryMediaAsset.wideVideoAssetId then
+		return { assetId = PrimaryMediaAsset.wideVideoAssetId }
+	end
+	if FFlagLuaAppHomeMomentVideoPrecedence then
+		return nil
+	end
+	local MomentVideoAssetId = PrimaryMediaAsset.momentVideoAssetId
+	
+	if type(MomentVideoAssetId) == "string" and MomentVideoAssetId ~= "" then
+		local MomentVideoAssetAccessContext = PrimaryMediaAsset.momentVideoAssetAccessContext
+		
+		if type(MomentVideoAssetAccessContext) == "string" and MomentVideoAssetAccessContext ~= "" then
+			return {
+				assetId = PrimaryMediaAsset.momentVideoAssetId,
+				accessContext = PrimaryMediaAsset.momentVideoAssetAccessContext,
+				isMoment = if FFlagLuaAppDiscoveryMomentVideoTelemetry then true else nil
+			}
+		end
+	end
+	return nil
 end

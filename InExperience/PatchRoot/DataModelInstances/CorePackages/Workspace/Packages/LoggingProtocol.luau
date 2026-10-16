@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.LoggingProtocol.LoggingProtocol)
+﻿return (require(script.Parent._Workspace.LoggingProtocol.LoggingProtocol))

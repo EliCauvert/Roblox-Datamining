@@ -1,55 +1,55 @@
-﻿local parent = script:FindFirstAncestor("CoreScriptsPlayerFeedback").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local icon = foundationModule.Icon
-local text = foundationModule.Text
-local view = foundationModule.View
-local iconSize = foundationModule.Enums.IconSize
-local useTokens = foundationModule.Hooks.useTokens
-local builderIconsModule = require(parent.BuilderIcons)
+﻿local Parent = script:FindFirstAncestor("CoreScriptsPlayerFeedback").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local Icon = FoundationModule.Icon
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local IconSize = FoundationModule.Enums.IconSize
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local BuilderIconsModule = require(Parent.BuilderIcons)
 
-return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), view (ref), icon (ref), builderIconsModule (ref), iconSize (ref), text (ref)
-	local var1 = useTokens()
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref)
-		local var2 = false
-		task.delay(4, function()
-			-- upvalues: var2 (write), p1 (copy)
-			if not var2 then
+return (ReactModule.memo(function(p1) --[[ Line: 29 ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Icon (copy), BuilderIconsModule (copy), IconSize (copy), Text (copy)
+	local UseTokensResult = UseTokensFunction()
+	ReactModule.useEffect(function() --[[ Line: 32 ]]
+		-- upvalues: p1 (copy)
+		local Flag = false
+		task.delay(4, function() --[[ Line: 34 ]]
+			-- upvalues: Flag (ref), p1 (upval)
+			if not Flag then
 				p1.onDismiss()
 			end
 		end)
 		
-		return function()
-			-- upvalues: var2 (write)
-			var2 = true
+		return function() --[[ Line: 39 ]]
+			-- upvalues: Flag (ref)
+			Flag = true
 		end
 	end, { p1.onDismiss })
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "row align-y-center gap-medium auto-xy bg-system-contrast",
-		Position = UDim2.new(0.5, 0, 1, -var1.Padding.XLarge * 4),
+		Position = UDim2.new(0.5, 0, 1, -UseTokensResult.Padding.XLarge * 4),
 		AnchorPoint = Vector2.new(0.5, 1),
 		padding = {
-			left = UDim.new(0, var1.Padding.Large),
-			right = UDim.new(0, var1.Padding.Large),
-			top = UDim.new(0, var1.Padding.Medium),
-			bottom = UDim.new(0, var1.Padding.Medium)
+			left = UDim.new(0, UseTokensResult.Padding.Large),
+			right = UDim.new(0, UseTokensResult.Padding.Large),
+			top = UDim.new(0, UseTokensResult.Padding.Medium),
+			bottom = UDim.new(0, UseTokensResult.Padding.Medium)
 		},
-		cornerRadius = UDim.new(0, var1.Radius.Large)
+		cornerRadius = UDim.new(0, UseTokensResult.Radius.Large)
 	}, {
-		CheckIcon = reactModule.createElement(icon, {
+		CheckIcon = ReactModule.createElement(Icon, {
 			LayoutOrder = 1,
-			name = builderIconsModule.Icon.CircleCheck,
-			size = iconSize.Medium,
-			style = var1.Inverse.Content.Emphasis
+			name = BuilderIconsModule.Icon.CircleCheck,
+			size = IconSize.Medium,
+			style = UseTokensResult.Inverse.Content.Emphasis
 		}),
-		Label = reactModule.createElement(text, {
+		Label = ReactModule.createElement(Text, {
 			tag = "auto-xy text-title-medium text-align-x-left",
 			LayoutOrder = 2,
 			Text = p1.text,
-			textStyle = var1.Inverse.Content.Emphasis
+			textStyle = UseTokensResult.Inverse.Content.Emphasis
 		})
 	})
-end)
+end))

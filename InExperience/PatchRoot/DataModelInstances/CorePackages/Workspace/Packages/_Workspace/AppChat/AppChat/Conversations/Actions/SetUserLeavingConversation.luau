@@ -1,3 +1,3 @@
-﻿return require(script:FindFirstAncestor("AppChat").Parent.Rodux).makeActionCreator(script.Name, function(p1, p2)
-	return { id = p1, isLeaving = p2 }
+﻿return require(script:FindFirstAncestor("AppChat").Parent.Rodux).makeActionCreator(script.Name, function(Id, IsLeaving) --[[ Line: 6 ]]
+	return { id = Id, isLeaving = IsLeaving }
 end)

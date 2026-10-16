@@ -1,55 +1,55 @@
-﻿local navigationSymbolModule = require(script.Parent.NavigationSymbol)
-local var1 = navigationSymbolModule("BACK")
-local var2 = navigationSymbolModule("INIT")
-local var3 = navigationSymbolModule("NAVIGATE")
-local var4 = navigationSymbolModule("SET_PARAMS")
-local t = {
-	Back = var1,
-	Init = var2,
-	Navigate = var3,
-	SetParams = var4
+﻿local NavigationSymbolModule = require(script.Parent.NavigationSymbol)
+local BACK = NavigationSymbolModule("BACK")
+local INIT = NavigationSymbolModule("INIT")
+local NAVIGATE = NavigationSymbolModule("NAVIGATE")
+local SETPARAMS = NavigationSymbolModule("SET_PARAMS")
+local NavigationActionsModule = {
+	Back = BACK,
+	Init = INIT,
+	Navigate = NAVIGATE,
+	SetParams = SETPARAMS
 }
-setmetatable(t, {
-	__index = function(_, p1)
-		error(("%q is not a valid member of NavigationActions"):format(tostring(p1)), 2)
+setmetatable(NavigationActionsModule, {
+	__index = function(_, p1) --[[ Line: 24 ]]
+		error(("%q is not a valid member of NavigationActions"):format((tostring(p1))), 2)
 	end
 })
 
-function t.back(p1)
-	-- upvalues: var1 (ref)
-	p1 = p1 or {}
+function NavigationActionsModule.back(p1) --[[ Line: 30 ]]
+	-- upvalues: BACK (copy)
+	local P2 = p1 or {}
 	
-	return { type = var1, key = p1.key, immediate = p1.immediate }
+	return { type = BACK, key = P2.key, immediate = P2.immediate }
 end
 
-function t.init(p1)
-	-- upvalues: var2 (ref)
-	return { type = var2, params = (p1 or {}).params }
+function NavigationActionsModule.init(p1) --[[ Line: 40 ]]
+	-- upvalues: INIT (copy)
+	return { type = INIT, params = (p1 or {}).params }
 end
 
-function t.navigate(p1)
-	-- upvalues: var3 (ref)
-	p1 = p1 or {}
+function NavigationActionsModule.navigate(p1) --[[ Line: 49 ]]
+	-- upvalues: NAVIGATE (copy)
+	local P4 = p1 or {}
 	
 	return {
-		type = var3,
-		routeName = p1.routeName,
-		params = p1.params,
-		action = p1.action,
-		key = p1.key
+		type = NAVIGATE,
+		routeName = P4.routeName,
+		params = P4.params,
+		action = P4.action,
+		key = P4.key
 	}
 end
 
-function t.setParams(value)
-	-- upvalues: var4 (ref)
-	local value_1 = value or {}
+function NavigationActionsModule.setParams(p1) --[[ Line: 61 ]]
+	-- upvalues: SETPARAMS (copy)
+	local P5 = p1 or {}
 	
 	return {
 		preserveFocus = true,
-		type = var4,
-		key = value_1.key,
-		params = value_1.params
+		type = SETPARAMS,
+		key = P5.key,
+		params = P5.params
 	}
 end
 
-return t
+return NavigationActionsModule

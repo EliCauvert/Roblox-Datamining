@@ -1,4 +1,4 @@
-﻿return require(script:FindFirstAncestor("AvatarExperienceCatalog").Parent.Rodux).makeActionCreator(script.Name, function(p1)
+﻿return require(script:FindFirstAncestor("AvatarExperienceCatalog").Parent.Rodux).makeActionCreator(script.Name, function(p1) --[[ Line: 16 ]]
 	return {
 		hydratedBundles = p1.hydratedBundles,
 		assetsInBundle = p1.assetsInBundle,

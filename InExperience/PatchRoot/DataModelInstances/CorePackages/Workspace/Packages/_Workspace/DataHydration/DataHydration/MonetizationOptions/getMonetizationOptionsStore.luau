@@ -1,6 +1,6 @@
-﻿local createMonetizationOptionsStoreModule = require(script.Parent.createMonetizationOptionsStore)
+﻿local CreateMonetizationOptionsStoreModule = require(script.Parent.createMonetizationOptionsStore)
 
-return require(script:FindFirstAncestor("DataHydration").Parent.Signals).createComputed(function()
-	-- upvalues: createMonetizationOptionsStoreModule (ref)
-	return createMonetizationOptionsStoreModule()
+return require(script:FindFirstAncestor("DataHydration").Parent.Signals).createComputed(function() --[[ Line: 8 ]]
+	-- upvalues: CreateMonetizationOptionsStoreModule (copy)
+	return CreateMonetizationOptionsStoreModule()
 end)

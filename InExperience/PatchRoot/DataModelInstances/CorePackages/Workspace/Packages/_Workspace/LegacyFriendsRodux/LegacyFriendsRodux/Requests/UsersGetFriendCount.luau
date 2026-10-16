@@ -1,9 +1,9 @@
-﻿local parent = script:FindFirstAncestor("LegacyFriendsRodux").Parent
-local playersService = game:GetService("Players")
-local url = require(parent.Http).Url
-local isNewFriendsEndpointsEnabled = require(parent.SharedFlags).isNewFriendsEndpointsEnabled
+﻿local Parent = script:FindFirstAncestor("LegacyFriendsRodux").Parent
+local Players = game:GetService("Players")
+local Url = require(Parent.Http).Url
+local IsNewFriendsEndpointsEnabledFunction = require(Parent.SharedFlags).isNewFriendsEndpointsEnabled
 
-return function(p1)
-	-- upvalues: url (ref), playersService (ref), isNewFriendsEndpointsEnabled (ref)
-	return p1(if isNewFriendsEndpointsEnabled() then string.format("%s/my/friends/count", url.FRIEND_URL) else string.format("%s/user/get-friendship-count?%s", url.API_URL, tostring(playersService.LocalPlayer.UserId)), "GET")
+return function(Callback) --[[ Line: 22 ]]
+	-- upvalues: Url (copy), Players (copy), IsNewFriendsEndpointsEnabledFunction (copy)
+	return Callback(if IsNewFriendsEndpointsEnabledFunction() then string.format("%s/my/friends/count", Url.FRIEND_URL) else string.format("%s/user/get-friendship-count?%s", Url.API_URL, (tostring(Players.LocalPlayer.UserId))), "GET")
 end

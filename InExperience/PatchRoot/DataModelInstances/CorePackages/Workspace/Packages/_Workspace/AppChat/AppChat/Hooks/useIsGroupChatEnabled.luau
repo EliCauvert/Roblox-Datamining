@@ -1,11 +1,11 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local useSelector = require(appChat.Parent.RoactUtils).Hooks.RoactRodux.useSelector
-local getDeepValueModule = require(appChat.Utils.getDeepValue)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local UseSelectorFunction = require(AppChat.Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local GetDeepValueModule = require(AppChat.Utils.getDeepValue)
 
-return function()
-	-- upvalues: useSelector (ref), getDeepValueModule (ref)
-	return useSelector(function(p1)
-		-- upvalues: getDeepValueModule (copy)
-		return getDeepValueModule(p1, "ChatAppReducer.ChatSettings.groupChatEnabled") or false
+return function() --[[ Line: 7 ]]
+	-- upvalues: UseSelectorFunction (copy), GetDeepValueModule (copy)
+	return UseSelectorFunction(function(p1) --[[ Line: 8 ]]
+		-- upvalues: GetDeepValueModule (upval)
+		return GetDeepValueModule(p1, "ChatAppReducer.ChatSettings.groupChatEnabled") or false
 	end)
 end

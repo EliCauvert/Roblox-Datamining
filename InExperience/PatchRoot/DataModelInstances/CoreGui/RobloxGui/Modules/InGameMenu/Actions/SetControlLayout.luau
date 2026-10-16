@@ -1,3 +1,3 @@
-﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator("SET_CONTROL_LAYOUT", function(p1)
-	return { controlLayout = p1 }
+﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator("SET_CONTROL_LAYOUT", function(ControlLayout) --[[ Line: 5 ]]
+	return { controlLayout = ControlLayout }
 end)

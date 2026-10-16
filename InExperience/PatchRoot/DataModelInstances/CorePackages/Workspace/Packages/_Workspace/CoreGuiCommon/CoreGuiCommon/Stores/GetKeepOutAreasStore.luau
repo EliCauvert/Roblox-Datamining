@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("CoreGuiCommon").Parent.Signals).createComputed(require(script.createKeepOutAreasStore))
+﻿return require(script:FindFirstAncestor("CoreGuiCommon").Parent.Signals).createComputed((require(script.createKeepOutAreasStore)))

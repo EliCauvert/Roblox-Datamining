@@ -1,6 +1,6 @@
-﻿local parent = script.Parent.Parent.Parent
+﻿local Parent = script.Parent.Parent.Parent
 
-return require(parent.React).createContext({
+return require(Parent.React).createContext({
 	chromeEnabled = nil,
-	fireAnalyticsEvent = require(parent.Dash).noop
+	fireAnalyticsEvent = require(Parent.Dash).noop
 })

@@ -1,14 +1,14 @@
-﻿local guiService = game:GetService("GuiService")
-local userInputService = game:GetService("UserInputService")
+﻿local GuiService = game:GetService("GuiService")
+local UserInputService = game:GetService("UserInputService")
 
-return function()
-	-- upvalues: userInputService (ref), guiService (ref)
-	local focusedTextBox = userInputService:GetFocusedTextBox()
+return function() --[[ Line: 4 | Named "releaseAnyFocus" ]]
+	-- upvalues: UserInputService (copy), GuiService (copy)
+	local FocusedTextBox = UserInputService:GetFocusedTextBox()
 	
-	if focusedTextBox then
-		focusedTextBox:ReleaseFocus()
+	if FocusedTextBox then
+		FocusedTextBox:ReleaseFocus()
 	end
-	if guiService.SelectedObject ~= nil then
-		guiService.SelectedObject = nil
+	if GuiService.SelectedObject ~= nil then
+		GuiService.SelectedObject = nil
 	end
 end

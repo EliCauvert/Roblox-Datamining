@@ -1,17 +1,17 @@
-﻿local parent = script:FindFirstAncestor("AccountUpgrade").Parent
-local useBrowserTrackerExperiment = require(parent.RoactAppExperiment).useBrowserTrackerExperiment
-local appBtidLayers = require(parent.ExperimentLayers).AppBtidLayers
-local sharedFlagsModule = require(parent.SharedFlags)
-local resolveBirthdaySelectVariant = require(parent.AuthSignup).Util.resolveBirthdaySelectVariant
-local getFFlagSignUpBirthdayPickerRequireManualSelection = sharedFlagsModule.GetFFlagSignUpBirthdayPickerRequireManualSelection
-local getFIntSignUpBirthdayPickerManualSelectVariantOverride = sharedFlagsModule.GetFIntSignUpBirthdayPickerManualSelectVariantOverride
+﻿local Parent = script:FindFirstAncestor("AccountUpgrade").Parent
+local UseBrowserTrackerExperimentFunction = require(Parent.RoactAppExperiment).useBrowserTrackerExperiment
+local AppBtidLayers = require(Parent.ExperimentLayers).AppBtidLayers
+local SharedFlagsModule = require(Parent.SharedFlags)
+local ResolveBirthdaySelectVariantFunction = require(Parent.AuthSignup).Util.resolveBirthdaySelectVariant
+local GetFFlagSignUpBirthdayPickerRequireManualSelectionFunction = SharedFlagsModule.GetFFlagSignUpBirthdayPickerRequireManualSelection
+local GetFIntSignUpBirthdayPickerManualSelectVariantOverrideFunction = SharedFlagsModule.GetFIntSignUpBirthdayPickerManualSelectVariantOverride
 
-return function()
-	-- upvalues: useBrowserTrackerExperiment (ref), appBtidLayers (ref), resolveBirthdaySelectVariant (ref), getFFlagSignUpBirthdayPickerRequireManualSelection (ref), getFIntSignUpBirthdayPickerManualSelectVariantOverride (ref)
-	return resolveBirthdaySelectVariant(getFFlagSignUpBirthdayPickerRequireManualSelection(), getFIntSignUpBirthdayPickerManualSelectVariantOverride(), useBrowserTrackerExperiment({ appBtidLayers.SignupLayer }, function(p1)
-		-- upvalues: appBtidLayers (copy)
+return function() --[[ Line: 17 | Named "useRequireManualSelection" ]]
+	-- upvalues: UseBrowserTrackerExperimentFunction (copy), AppBtidLayers (copy), ResolveBirthdaySelectVariantFunction (copy), GetFFlagSignUpBirthdayPickerRequireManualSelectionFunction (copy), GetFIntSignUpBirthdayPickerManualSelectVariantOverrideFunction (copy)
+	return ResolveBirthdaySelectVariantFunction(GetFFlagSignUpBirthdayPickerRequireManualSelectionFunction(), GetFIntSignUpBirthdayPickerManualSelectVariantOverrideFunction(), UseBrowserTrackerExperimentFunction({ AppBtidLayers.SignupLayer }, function(p1) --[[ Line: 23 ]]
+		-- upvalues: AppBtidLayers (upval)
 		return {
-			birthdayManualSelectVariant = (p1[appBtidLayers.SignupLayer] or {}).birthdayManualSelectVariant
+			birthdayManualSelectVariant = (p1[AppBtidLayers.SignupLayer] or {}).birthdayManualSelectVariant
 		}
 	end, false).birthdayManualSelectVariant)
 end

@@ -1,96 +1,95 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local signalsModule = require(parent_1.Signals)
-local signalsReactModule = require(parent_1.SignalsReact)
-local reactFocusNavigationModule = require(parent_1.ReactFocusNavigation)
-local _ = require(parent_1.LeaderboardStore)
-local localizationService = game:GetService("LocalizationService")
-local inExperienceLocalesModule = require(parent_1.InExperienceLocales)
-local localizationProvider = require(parent_1.Localization).LocalizationProvider
-local leaderboardStoreContextModule = require(parent.Common.LeaderboardStoreContext)
-local layoutValuesContextModule = require(parent.Common.LayoutValuesContext)
-local gameTextTranslatorContextModule = require(parent.Common.GameTextTranslatorContext)
-local playerListVisibilityStoreModule = require(parent.Common.PlayerListVisibilityStore)
-local createLayoutValuesModule = require(parent.Common.CreateLayoutValues)
-local platformLeaderboardContainerModule = require(parent.Components.Containers.PlatformLeaderboardContainer)
-local focusNavigationContext = reactFocusNavigationModule.FocusNavigationContext
-local focusNavigationService = reactFocusNavigationModule.FocusNavigationService
-local fFlagAddNewPlayerListFocusNavModule = require(parent.Flags.FFlagAddNewPlayerListFocusNav)
-local fFlagEnablePlayerListExposureEventsModule = require(parent.Flags.FFlagEnablePlayerListExposureEvents)
-local fFlagPlayerListLocalizeGameTextModule = require(parent.Flags.FFlagPlayerListLocalizeGameText)
-local fFlagPlayerListReskinModule = require(parent.Flags.FFlagPlayerListReskin)
-local fStringPlayerListIXPLayerModule = require(parent.Flags.FStringPlayerListIXPLayer)
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local SignalsModule = require(Parent1.Signals)
+local SignalsReactModule = require(Parent1.SignalsReact)
+local ReactFocusNavigationModule = require(Parent1.ReactFocusNavigation)
+local _ = require(Parent1.LeaderboardStore)
+local LocalizationService = game:GetService("LocalizationService")
+local InExperienceLocalesModule = require(Parent1.InExperienceLocales)
+local LocalizationProvider = require(Parent1.Localization).LocalizationProvider
+local LeaderboardStoreContextModule = require(Parent.Common.LeaderboardStoreContext)
+local LayoutValuesContextModule = require(Parent.Common.LayoutValuesContext)
+local GameTextTranslatorContextModule = require(Parent.Common.GameTextTranslatorContext)
+local PlayerListVisibilityStoreModule = require(Parent.Common.PlayerListVisibilityStore)
+local CreateLayoutValuesModule = require(Parent.Common.CreateLayoutValues)
+local PlatformLeaderboardContainerModule = require(Parent.Components.Containers.PlatformLeaderboardContainer)
+local FocusNavigationContext = ReactFocusNavigationModule.FocusNavigationContext
+local FocusNavigationService = ReactFocusNavigationModule.FocusNavigationService
+local FFlagAddNewPlayerListFocusNavModule = require(Parent.Flags.FFlagAddNewPlayerListFocusNav)
+local FFlagEnablePlayerListExposureEventsModule = require(Parent.Flags.FFlagEnablePlayerListExposureEvents)
+local FFlagPlayerListLocalizeGameTextModule = require(Parent.Flags.FFlagPlayerListLocalizeGameText)
+local FFlagPlayerListReskinModule = require(Parent.Flags.FFlagPlayerListReskin)
+local FStringPlayerListIXPLayerModule = require(Parent.Flags.FStringPlayerListIXPLayer)
 local IXPService = game:GetService("IXPService")
-local var1 = nil
+local LeaderboardViewChangeTelemetryModule = nil
 
-local function _()
-	-- upvalues: var1 (write), parent (ref)
-	if var1 == nil then
-		var1 = require(parent.Common.LeaderboardViewChangeTelemetry)
+local function _() --[[ Line: 35 | Named "getLeaderboardViewChangeTelemetry" ]]
+	-- upvalues: LeaderboardViewChangeTelemetryModule (ref), Parent (copy)
+	if LeaderboardViewChangeTelemetryModule == nil then
+		LeaderboardViewChangeTelemetryModule = require(Parent.Common.LeaderboardViewChangeTelemetry)
 	end
-	return var1
+	return LeaderboardViewChangeTelemetryModule
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: fFlagPlayerListReskinModule (ref), reactModule (ref), createLayoutValuesModule (ref), focusNavigationService (ref), reactFocusNavigationModule (ref), signalsReactModule (ref), fFlagEnablePlayerListExposureEventsModule (ref), IXPService (ref), fStringPlayerListIXPLayerModule (ref), fFlagPlayerListLocalizeGameTextModule (ref), inExperienceLocalesModule (ref), localizationService (ref), signalsModule (ref), playerListVisibilityStoreModule (ref), var1 (write), parent (ref), platformLeaderboardContainerModule (ref), leaderboardStoreContextModule (ref), layoutValuesContextModule (ref), fFlagAddNewPlayerListFocusNavModule (ref), focusNavigationContext (ref), gameTextTranslatorContextModule (ref), localizationProvider (ref)
-	local var2, var3
-	local _ = nil
-	local _ = nil
-	
-	if fFlagPlayerListReskinModule then
-		var2 = reactModule.useMemo(function()
-			-- upvalues: createLayoutValuesModule (copy), p1 (ref)
-			return createLayoutValuesModule(p1.isTenFoot or false, p1.TopBarConstants)
+return ReactModule.memo(function(p1) --[[ Line: 50 ]]
+	-- upvalues: FFlagPlayerListReskinModule (copy), ReactModule (copy), CreateLayoutValuesModule (copy), FocusNavigationService (copy), ReactFocusNavigationModule (copy), SignalsReactModule (copy), FFlagEnablePlayerListExposureEventsModule (copy), IXPService (copy), FStringPlayerListIXPLayerModule (copy), FFlagPlayerListLocalizeGameTextModule (copy), InExperienceLocalesModule (copy), LocalizationService (copy), SignalsModule (copy), PlayerListVisibilityStoreModule (copy), LeaderboardViewChangeTelemetryModule (ref), Parent (copy), PlatformLeaderboardContainerModule (copy), LeaderboardStoreContextModule (copy), LayoutValuesContextModule (copy), FFlagAddNewPlayerListFocusNavModule (copy), FocusNavigationContext (copy), GameTextTranslatorContextModule (copy), LocalizationProvider (copy)
+	local UseMemoResult = nil
+	local UseMemoResult1 = nil
+	if FFlagPlayerListReskinModule then
+		UseMemoResult = ReactModule.useMemo(function() --[[ Line: 54 ]]
+			-- upvalues: CreateLayoutValuesModule (upval), p1 (copy)
+			return CreateLayoutValuesModule(p1.isTenFoot or false, p1.TopBarConstants)
 		end, { p1.isTenFoot, p1.TopBarConstants })
-		var3 = reactModule.useMemo(function()
-			-- upvalues: focusNavigationService (copy), reactFocusNavigationModule (copy)
-			return focusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui)
+		UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 57 ]]
+			-- upvalues: FocusNavigationService (upval), ReactFocusNavigationModule (upval)
+			return FocusNavigationService.new(ReactFocusNavigationModule.EngineInterface.CoreGui)
 		end, {})
 	else
-		var2 = createLayoutValuesModule(p1.isTenFoot or false, p1.TopBarConstants)
-		var3 = focusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui)
+		UseMemoResult = CreateLayoutValuesModule(p1.isTenFoot or false, p1.TopBarConstants)
+		UseMemoResult1 = FocusNavigationService.new(ReactFocusNavigationModule.EngineInterface.CoreGui)
 	end
-	local var4 = signalsReactModule.useSignalState(p1.leaderboardStore)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(p1.leaderboardStore)
 	
-	if fFlagEnablePlayerListExposureEventsModule then
-		reactModule.useEffect(function()
-			-- upvalues: IXPService (copy), fStringPlayerListIXPLayerModule (copy)
-			IXPService:LogFlagLinkedUserLayerExposure(fStringPlayerListIXPLayerModule)
+	if FFlagEnablePlayerListExposureEventsModule then
+		ReactModule.useEffect(function() --[[ Line: 67 ]]
+			-- upvalues: IXPService (upval), FStringPlayerListIXPLayerModule (upval)
+			IXPService:LogFlagLinkedUserLayerExposure(FStringPlayerListIXPLayerModule)
 		end, {})
 	end
-	local var5 = if fFlagPlayerListLocalizeGameTextModule then reactModule.useMemo(function()
-		-- upvalues: inExperienceLocalesModule (copy), localizationService (copy)
-		return inExperienceLocalesModule.Localization.new(localizationService.RobloxLocaleId)
+	local UseMemoResult2 = if FFlagPlayerListLocalizeGameTextModule then ReactModule.useMemo(function() --[[ Line: 74 ]]
+		-- upvalues: InExperienceLocalesModule (upval), LocalizationService (upval)
+		return InExperienceLocalesModule.Localization.new(LocalizationService.RobloxLocaleId)
 	end, {}) else nil
 	
-	if fFlagPlayerListReskinModule then
-		reactModule.useEffect(function()
-			-- upvalues: signalsModule (copy), playerListVisibilityStoreModule (copy), var1 (copy), parent (copy)
-			local var6 = false
+	if FFlagPlayerListReskinModule then
+		ReactModule.useEffect(function() --[[ Line: 82 ]]
+			-- upvalues: SignalsModule (upval), PlayerListVisibilityStoreModule (upval), LeaderboardViewChangeTelemetryModule (upval), Parent (upval)
+			local Flag = false
 			
-			return signalsModule.createEffect(function(p2)
-				-- upvalues: playerListVisibilityStoreModule (copy), var6 (write), var1 (copy), parent (copy)
-				local effectiveVisible = playerListVisibilityStoreModule.getEffectiveVisible(p2)
+			return SignalsModule.createEffect(function(p2) --[[ Line: 84 ]]
+				-- upvalues: PlayerListVisibilityStoreModule (upval), Flag (ref), LeaderboardViewChangeTelemetryModule (upval), Parent (upval)
+				local EffectiveVisible = PlayerListVisibilityStoreModule.getEffectiveVisible(p2)
 				
-				if not var6 then
-					var6 = true
+				if not Flag then
+					Flag = true
 					
 					return
-				elseif var1 == nil then
-					var1 = require(parent.Common.LeaderboardViewChangeTelemetry)
 				end
-				var1.logVisibility(effectiveVisible, true)
+				if LeaderboardViewChangeTelemetryModule == nil then
+					LeaderboardViewChangeTelemetryModule = require(Parent.Common.LeaderboardViewChangeTelemetry)
+				end
+				LeaderboardViewChangeTelemetryModule.logVisibility(EffectiveVisible, true)
 			end)
 		end, {})
 	end
-	local var6 = if fFlagPlayerListReskinModule then reactModule.createElement(platformLeaderboardContainerModule, {}, p1.children) else p1.children
-	local var7 = reactModule.createElement(leaderboardStoreContextModule.Provider, { value = var4 }, {
-		LayoutValuesProvider = reactModule.createElement(layoutValuesContextModule.Provider, { value = var2 }, if fFlagAddNewPlayerListFocusNavModule then {
-			FocusNavigationProvider = reactModule.createElement(focusNavigationContext.Provider, { value = var3 }, var6)
-		} else var6)
+	local Element = if FFlagPlayerListReskinModule then ReactModule.createElement(PlatformLeaderboardContainerModule, {}, p1.children) else p1.children
+	local Element1 = ReactModule.createElement(LeaderboardStoreContextModule.Provider, { value = UseSignalStateResult }, {
+		LayoutValuesProvider = ReactModule.createElement(LayoutValuesContextModule.Provider, { value = UseMemoResult }, if FFlagAddNewPlayerListFocusNavModule then {
+			FocusNavigationProvider = ReactModule.createElement(FocusNavigationContext.Provider, { value = UseMemoResult1 }, Element)
+		} else Element)
 	})
-	local var8 = if fFlagPlayerListLocalizeGameTextModule and p1.translateGameText then reactModule.createElement(gameTextTranslatorContextModule.Provider, { value = p1.translateGameText }, { LeaderboardStoreProvider = var7 }) else var7
+	local Element2 = if FFlagPlayerListLocalizeGameTextModule and p1.translateGameText then ReactModule.createElement(GameTextTranslatorContextModule.Provider, { value = p1.translateGameText }, { LeaderboardStoreProvider = Element1 }) else Element1
 	
-	return if fFlagPlayerListLocalizeGameTextModule then reactModule.createElement(localizationProvider, { localization = var5 }, { LeaderboardTree = var8 }) else var8
+	return if FFlagPlayerListLocalizeGameTextModule then ReactModule.createElement(LocalizationProvider, { localization = UseMemoResult2 }, { LeaderboardTree = Element2 }) else Element2
 end)

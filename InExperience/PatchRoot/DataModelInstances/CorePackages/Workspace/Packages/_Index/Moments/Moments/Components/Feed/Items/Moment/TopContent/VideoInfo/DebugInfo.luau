@@ -1,39 +1,38 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local momentContextModule = require(script.Parent.Parent.Parent.MomentContext)
-local getMomentsPreferencesStoreModule = require(moments.Stores.GetMomentsPreferencesStore)
-local textInput = foundationModule.TextInput
-local view = foundationModule.View
-local inputSize = foundationModule.Enums.InputSize
-local useSignalState = signalsReactModule.useSignalState
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local MomentContextModule = require(script.Parent.Parent.Parent.MomentContext)
+local GetMomentsPreferencesStoreModule = require(Moments.Stores.GetMomentsPreferencesStore)
+local TextInput = FoundationModule.TextInput
+local View = FoundationModule.View
+local InputSize = FoundationModule.Enums.InputSize
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 
-local function noop() end
+local function noop() --[[ Line: 26 ]] end
 
-return reactModule.memo(function(p1)
-	-- upvalues: getMomentsPreferencesStoreModule (ref), useSignalState (ref), momentContextModule (ref), reactModule (ref), view (ref), textInput (ref), noop (ref), inputSize (ref)
-	local var1 = momentContextModule.useMoment()
+return ReactModule.memo(function(Frame) --[[ Line: 32 | Named "DebugInfo" ]]
+	-- upvalues: GetMomentsPreferencesStoreModule (copy), UseSignalStateFunction (copy), MomentContextModule (copy), ReactModule (copy), View (copy), TextInput (copy), noop (copy), InputSize (copy)
+	local UseMomentResult = MomentContextModule.useMoment()
 	
-	return if useSignalState(getMomentsPreferencesStoreModule(false).getDebugModeEnabled) then reactModule.createElement(view, {
+	return if UseSignalStateFunction(GetMomentsPreferencesStoreModule(false).getDebugModeEnabled) then ReactModule.createElement(View, {
 		tag = "col align-x-left gap-small size-full-0 auto-y",
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		DebugMomentId = reactModule.createElement(textInput, {
+		DebugMomentId = ReactModule.createElement(TextInput, {
 			label = "momentId",
 			LayoutOrder = 1,
 			onChanged = noop,
-			size = inputSize.Medium,
-			text = var1.momentId,
+			size = InputSize.Medium,
+			text = UseMomentResult.momentId,
 			width = UDim.new(1, 0)
 		}),
-		DebugFeedItemId = reactModule.createElement(textInput, {
+		DebugFeedItemId = ReactModule.createElement(TextInput, {
 			label = "feedItemId",
 			LayoutOrder = 2,
 			onChanged = noop,
-			size = inputSize.Medium,
-			text = var1.store.getData(false).feedItemId or "",
+			size = InputSize.Medium,
+			text = UseMomentResult.store.getData(false).feedItemId or "",
 			width = UDim.new(1, 0)
 		})
 	}) else nil

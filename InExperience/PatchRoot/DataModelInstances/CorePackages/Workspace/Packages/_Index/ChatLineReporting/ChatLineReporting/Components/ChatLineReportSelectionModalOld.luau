@@ -1,135 +1,179 @@
-﻿local chatLineReporting = script:FindFirstAncestor("ChatLineReporting")
-local parent = chatLineReporting.Parent
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local UIBloxModule = require(parent.UIBlox)
-local useLayerCollector = UIBloxModule.Core.Layout.LayerCollector.useLayerCollector
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local constantsModule = require(chatLineReporting.Common.Constants)
-local chatLineReportInfoModule = require(chatLineReporting.Components.ChatLineReportInfo)
-local chatLineReportModalWindowModule = require(chatLineReporting.Components.ChatLineReportModalWindow)
-local chatLineReportSelectableLineModule = require(chatLineReporting.Components.ChatLineReportSelectableLine)
-local isSystemMessageModule = require(chatLineReporting.Common.isSystemMessage)
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local foundationModule = require(parent.Foundation)
-local empty = foundationModule.Empty
-local radioGroup = foundationModule.RadioGroup
-local scrollView = foundationModule.ScrollView
-local scrollBarVisibility = foundationModule.Enums.ScrollBarVisibility
+﻿local ChatLineReporting = script:FindFirstAncestor("ChatLineReporting")
+local Parent = ChatLineReporting.Parent
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local UIBloxModule = require(Parent.UIBlox)
+local UseLayerCollectorFunction = UIBloxModule.Core.Layout.LayerCollector.useLayerCollector
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local ConstantsModule = require(ChatLineReporting.Common.Constants)
+local ChatLineReportInfoModule = require(ChatLineReporting.Components.ChatLineReportInfo)
+local ChatLineReportModalWindowModule = require(ChatLineReporting.Components.ChatLineReportModalWindow)
+local ChatLineReportSelectableLineModule = require(ChatLineReporting.Components.ChatLineReportSelectableLine)
+local IsSystemMessageModule = require(ChatLineReporting.Common.isSystemMessage)
+local FFlagChatLineSelectionModalCleanupSizeListenersModule = require(ChatLineReporting.Flags.FFlagChatLineSelectionModalCleanupSizeListeners)
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local FoundationModule = require(Parent.Foundation)
+local Empty = FoundationModule.Empty
+local RadioGroup = FoundationModule.RadioGroup
+local ScrollView = FoundationModule.ScrollView
+local ScrollBarVisibility = FoundationModule.Enums.ScrollBarVisibility
 
-local function createChildren(p1, _, p2, p3)
-	-- upvalues: isSystemMessageModule (ref), reactModule (ref), radioGroup (ref), chatLineReportSelectableLineModule (ref)
+local function createChildren(Messages, _, LocalizedText, ScrollViewSizeX) --[[ Line: 38 ]]
+	-- upvalues: IsSystemMessageModule (copy), ReactModule (copy), RadioGroup (copy), ChatLineReportSelectableLineModule (copy)
+	local Elements = {}
 	local t = {}
-	local t_1 = {}
-	local var1 = -1
+	local Count = -1
 	
-	for i, v in pairs(p1) do
-		if not isSystemMessageModule(v) then
-			var1 += 1
-			t_1[i] = var1
-			table.insert(t, reactModule.createElement(radioGroup.Item, {
-				value = i,
-				label = reactModule.createElement(chatLineReportSelectableLineModule, { message = v, localizedText = p2, scrollViewSizeX = p3 })
+	for Value, message in pairs(Messages) do
+		if not IsSystemMessageModule(message) then
+			Count += 1
+			t[Value] = Count
+			table.insert(Elements, ReactModule.createElement(RadioGroup.Item, {
+				value = Value,
+				label = ReactModule.createElement(ChatLineReportSelectableLineModule, {
+					message = message,
+					localizedText = LocalizedText,
+					scrollViewSizeX = ScrollViewSizeX
+				})
 			}))
 		end
 	end
-	return t, t_1
+	return Elements, t
 end
 
-return function(p4)
-	-- upvalues: reactModule (ref), useLocalization (ref), constantsModule (ref), createChildren (ref), cryoModule (ref), useLayerCollector (ref), chatLineReportModalWindowModule (ref), buttonType (ref), chatLineReportInfoModule (ref), empty (ref), scrollView (ref), scrollBarVisibility (ref), radioGroup (ref)
-	local var2, var3 = reactModule.useState(false)
-	local var4 = reactModule.useRef(nil)
-	local var5, var6 = reactModule.useState(0)
-	local var7 = reactModule.useRef(nil)
-	local var8, var9 = reactModule.useState(0)
-	local var10 = reactModule.useRef(nil)
-	local var11 = useLocalization(constantsModule.ChatLineLocalizationKeys)
-	local var12, var13 = createChildren(p4.messages, p4.setSelectedMessage, var11, var8)
-	local var14 = cryoModule.isEmpty(var12)
-	local var15 = useLayerCollector()
-	local absoluteSize = var15.absoluteSize
-	reactModule.useEffect(function()
-		-- upvalues: var4 (ref), var6 (ref)
-		if var4.current then
-			var4.current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
-				-- upvalues: var6 (copy), var4 (copy)
-				var6(var4.current.AbsoluteSize.Y)
+local function useAbsoluteSizeListener(Current, UseRefResult) --[[ Line: 65 ]]
+	-- upvalues: ReactModule (copy)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseRefResult2 = ReactModule.useRef(Current)
+	UseRefResult2.current = Current
+	
+	return ReactModule.useCallback(function(Current) --[[ Line: 73 ]]
+		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), UseRefResult2 (copy)
+		if UseRefResult then
+			UseRefResult.current = Current
+		end
+		if UseRefResult1.current then
+			UseRefResult1.current:Disconnect()
+			UseRefResult1.current = nil
+		end
+		if Current then
+			UseRefResult1.current = Current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 82 ]]
+				-- upvalues: UseRefResult2 (upval), Current (copy)
+				UseRefResult2.current(Current)
 			end)
 		end
-	end, { var4.current, absoluteSize })
-	reactModule.useEffect(function()
-		-- upvalues: var7 (ref), var9 (ref)
-		if var7.current then
-			var7.current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
-				-- upvalues: var9 (copy), var7 (copy)
-				var9(var7.current.AbsoluteSize.X)
+	end, {})
+end
+
+return function(p1) --[[ Line: 89 | Named "ChatLineReportSelectionModalOld" ]]
+	-- upvalues: ReactModule (copy), UseLocalizationFunction (copy), ConstantsModule (copy), createChildren (copy), CryoModule (copy), UseLayerCollectorFunction (copy), FFlagChatLineSelectionModalCleanupSizeListenersModule (copy), useAbsoluteSizeListener (copy), ChatLineReportModalWindowModule (copy), ButtonType (copy), ChatLineReportInfoModule (copy), Empty (copy), ScrollView (copy), ScrollBarVisibility (copy), RadioGroup (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(0)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(0)
+	local UseRefResult2 = ReactModule.useRef(nil)
+	local UseLocalizationResult = UseLocalizationFunction(ConstantsModule.ChatLineLocalizationKeys)
+	local Children, Children2 = createChildren(p1.messages, p1.setSelectedMessage, UseLocalizationResult, UseStateResult3)
+	local IsEmpty = CryoModule.isEmpty(Children)
+	local UseLayerCollectorResult = UseLayerCollectorFunction()
+	local AbsoluteSize = UseLayerCollectorResult.absoluteSize
+	local v1 = nil
+	local v2 = nil
+	
+	if FFlagChatLineSelectionModalCleanupSizeListenersModule then
+		v1 = useAbsoluteSizeListener(function(Frame) --[[ Line: 107 ]]
+			-- upvalues: UseStateResult2_1 (copy)
+			UseStateResult2_1(Frame.AbsoluteSize.Y)
+		end)
+		v2 = useAbsoluteSizeListener(function(Frame) --[[ Line: 110 ]]
+			-- upvalues: UseStateResult2_2 (copy)
+			UseStateResult2_2(Frame.AbsoluteSize.X)
+		end, UseRefResult1)
+	end
+	ReactModule.useEffect(function() --[[ Line: 115 ]]
+		-- upvalues: FFlagChatLineSelectionModalCleanupSizeListenersModule (upval), UseRefResult (copy), UseStateResult2_1 (copy)
+		if FFlagChatLineSelectionModalCleanupSizeListenersModule then return end
+		if UseRefResult.current then
+			UseRefResult.current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 121 ]]
+				-- upvalues: UseStateResult2_1 (upval), UseRefResult (upval)
+				UseStateResult2_1(UseRefResult.current.AbsoluteSize.Y)
 			end)
 		end
-	end, { var7.current, absoluteSize })
-	reactModule.useEffect(function()
-		-- upvalues: var7 (ref), var10 (ref), constantsModule (copy)
-		if var7.current then
-			local scrollingFrame = var7.current:FindFirstChildWhichIsA("ScrollingFrame", true)
+	end, { UseRefResult.current, AbsoluteSize })
+	ReactModule.useEffect(function() --[[ Line: 127 ]]
+		-- upvalues: FFlagChatLineSelectionModalCleanupSizeListenersModule (upval), UseRefResult1 (copy), UseStateResult2_2 (copy)
+		if FFlagChatLineSelectionModalCleanupSizeListenersModule then return end
+		if UseRefResult1.current then
+			UseRefResult1.current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 133 ]]
+				-- upvalues: UseStateResult2_2 (upval), UseRefResult1 (upval)
+				UseStateResult2_2(UseRefResult1.current.AbsoluteSize.X)
+			end)
+		end
+	end, { UseRefResult1.current, AbsoluteSize })
+	ReactModule.useEffect(function() --[[ Line: 140 ]]
+		-- upvalues: UseRefResult1 (copy), UseRefResult2 (copy), ConstantsModule (upval)
+		if UseRefResult1.current then
+			local ScrollingFrame = UseRefResult1.current:FindFirstChildWhichIsA("ScrollingFrame", true)
 			
-			if scrollingFrame then
-				var10.current = scrollingFrame
-				var10.current.CanvasPosition = Vector2.new(0, constantsModule.SelectionModalCanvasPositionTopPadding)
-				var10.current.Selectable = false
+			if ScrollingFrame then
+				UseRefResult2.current = ScrollingFrame
+				UseRefResult2.current.CanvasPosition = Vector2.new(0, ConstantsModule.SelectionModalCanvasPositionTopPadding)
+				UseRefResult2.current.Selectable = false
 			end
 		end
-	end, { var7.current })
+	end, { UseRefResult1.current })
 	
-	return reactModule.createElement(chatLineReportModalWindowModule, {
-		screenSize = Vector2.new(absoluteSize.X, absoluteSize.Y - var15.insets.top),
-		position = UDim2.new(0.5, 0, 0, var15.insets.top + constantsModule.SelectionModalPositionOffset),
+	return ReactModule.createElement(ChatLineReportModalWindowModule, {
+		screenSize = Vector2.new(AbsoluteSize.X, AbsoluteSize.Y - UseLayerCollectorResult.insets.top),
+		position = UDim2.new(0.5, 0, 0, UseLayerCollectorResult.insets.top + ConstantsModule.SelectionModalPositionOffset),
 		anchorPoint = Vector2.new(0.5, 0),
-		title = var11.ChatSelectionModalTitle,
-		onCloseClicked = p4.onBack,
-		onInfoClicked = reactModule.useCallback(function()
-			-- upvalues: var3 (ref), var2 (ref)
-			var3(not var2)
-		end, { var2, var3 }),
+		title = UseLocalizationResult.ChatSelectionModalTitle,
+		onCloseClicked = p1.onBack,
+		onInfoClicked = ReactModule.useCallback(function() --[[ Line: 152 ]]
+			-- upvalues: UseStateResult2 (copy), UseStateResult (copy)
+			UseStateResult2(not UseStateResult)
+		end, { UseStateResult, UseStateResult2 }),
 		buttonStackProps = {
 			buttons = {
 				{
-					buttonType = buttonType.Secondary,
+					buttonType = ButtonType.Secondary,
 					props = {
-						onActivated = p4.onContinue,
-						text = var11.ChatSelectionModalButton,
-						isDisabled = var14 or p4.selectedMessage == nil
+						onActivated = p1.onContinue,
+						text = UseLocalizationResult.ChatSelectionModalButton,
+						isDisabled = IsEmpty or p1.selectedMessage == nil
 					}
 				}
 			}
 		}
 	}, {
-		infoView = reactModule.createElement(chatLineReportInfoModule, { visible = var2 }),
-		messageView = if var14 then reactModule.createElement(empty, {}) else reactModule.createElement(scrollView, {
+		infoView = ReactModule.createElement(ChatLineReportInfoModule, { visible = UseStateResult }),
+		messageView = if IsEmpty then ReactModule.createElement(Empty, {}) else ReactModule.createElement(ScrollView, {
 			LayoutOrder = 1,
-			Size = UDim2.new(1, 0, 0, math.min(absoluteSize.Y - var15.insets.top - constantsModule.SelectionModalScreenSizeOffset, var5 + constantsModule.SelectionModalRadioGroupOffset, if p4.maxContentHeight then p4.maxContentHeight else 1e999)),
+			Size = UDim2.new(1, 0, 0, (math.min(AbsoluteSize.Y - UseLayerCollectorResult.insets.top - ConstantsModule.SelectionModalScreenSizeOffset, UseStateResult1 + ConstantsModule.SelectionModalRadioGroupOffset, if p1.maxContentHeight then p1.maxContentHeight else 1e999))),
 			scroll = {
 				AutomaticCanvasSize = Enum.AutomaticSize.Y,
 				CanvasSize = UDim2.new(1, 0, 0, 0),
-				scrollBarVisibility = scrollBarVisibility.Always,
+				scrollBarVisibility = ScrollBarVisibility.Always,
 				ScrollingDirection = Enum.ScrollingDirection.Y
 			},
-			ref = var7
+			ref = if FFlagChatLineSelectionModalCleanupSizeListenersModule then v2 else UseRefResult1
 		}, {
-			UIPadding = reactModule.createElement("UIPadding", {
+			UIPadding = ReactModule.createElement("UIPadding", {
 				PaddingTop = UDim.new(0, 12),
 				PaddingBottom = UDim.new(0, 12)
 			}),
-			RadioGroup = reactModule.createElement(radioGroup.Root, {
-				onValueChanged = function(p5)
-					-- upvalues: p4 (ref), constantsModule (copy), var13 (ref)
-					p4.setSelectedMessage(p4.messages[p5])
-					p4.analyticsDispatch({
-						type = constantsModule.AnalyticsActions.SetChatLineSelected,
-						selected_chat_line_index = var13[p5]
+			RadioGroup = ReactModule.createElement(RadioGroup.Root, {
+				onValueChanged = function(p2) --[[ Line: 206 ]]
+					-- upvalues: p1 (copy), ConstantsModule (upval), Children2 (copy)
+					p1.setSelectedMessage(p1.messages[p2])
+					p1.analyticsDispatch({
+						type = ConstantsModule.AnalyticsActions.SetChatLineSelected,
+						selected_chat_line_index = Children2[p2]
 					})
 				end,
-				ref = var4
-			}, var12)
+				ref = if FFlagChatLineSelectionModalCleanupSizeListenersModule then v1 else UseRefResult
+			}, Children)
 		})
 	})
 end

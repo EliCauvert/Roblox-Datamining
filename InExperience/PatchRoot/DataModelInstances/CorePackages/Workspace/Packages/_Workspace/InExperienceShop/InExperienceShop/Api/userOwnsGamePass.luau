@@ -1,31 +1,32 @@
-﻿local marketplaceService = game:GetService("MarketplaceService")
-local playersService = game:GetService("Players")
-local promiseModule = require(script:FindFirstAncestor("InExperienceShop").Parent.Promise)
+﻿local MarketplaceService = game:GetService("MarketplaceService")
+local Players = game:GetService("Players")
+local PromiseModule = require(script:FindFirstAncestor("InExperienceShop").Parent.Promise)
 
-return function(p1)
-	-- upvalues: promiseModule (ref), playersService (ref), marketplaceService (ref)
-	return promiseModule.new(function(p2, p3)
-		-- upvalues: playersService (copy), marketplaceService (copy), p1 (ref)
-		task.spawn(function()
-			-- upvalues: playersService (copy), p3 (ref), marketplaceService (copy), p1 (copy), p2 (ref)
-			local localPlayer = playersService.LocalPlayer
+return function(GamePassId) --[[ Line: 21 | Named "userOwnsGamePass" ]]
+	-- upvalues: PromiseModule (copy), Players (copy), MarketplaceService (copy)
+	return PromiseModule.new(function(Callback1, Callback) --[[ Line: 22 ]]
+		-- upvalues: Players (upval), MarketplaceService (upval), GamePassId (copy)
+		task.spawn(function() --[[ Line: 23 ]]
+			-- upvalues: Players (upval), Callback (copy), MarketplaceService (upval), GamePassId (upval), Callback1 (copy)
+			local LocalPlayer = Players.LocalPlayer
 			
-			if localPlayer == nil then
-				p3("userOwnsGamePass: no LocalPlayer")
+			if LocalPlayer == nil then
+				Callback("userOwnsGamePass: no LocalPlayer")
 				
 				return
 			end
-			local ok, status = pcall(function()
-				-- upvalues: marketplaceService (copy), localPlayer (ref), p1 (copy)
-				return marketplaceService:UserOwnsGamePassAsync(localPlayer.UserId, p1)
+			local Success, Result = pcall(function() --[[ Line: 29 ]]
+				-- upvalues: MarketplaceService (upval), LocalPlayer (copy), GamePassId (upval)
+				return MarketplaceService:UserOwnsGamePassAsync(LocalPlayer.UserId, GamePassId)
 			end)
 			
-			if ok then
-				p2(status == true)
+			if Success then
+				Callback1(Result == true)
 				
 				return
+			else
+				Callback((tostring(Result)))
 			end
-			p3(tostring(status))
 		end)
 	end)
 end

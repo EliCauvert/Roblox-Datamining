@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Index.UIBlox.UIBlox)
+﻿return (require(script.Parent._Index.UIBlox.UIBlox))

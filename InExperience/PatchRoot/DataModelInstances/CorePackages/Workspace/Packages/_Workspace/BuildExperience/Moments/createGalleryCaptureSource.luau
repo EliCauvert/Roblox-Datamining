@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent.Parent._Index.Moments.Moments.Capture.createGalleryCaptureSource)
+﻿return (require(script.Parent.Parent.Parent.Parent._Index.Moments.Moments.Capture.createGalleryCaptureSource))

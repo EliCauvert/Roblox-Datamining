@@ -1,8 +1,8 @@
-﻿local guiService = game:GetService("GuiService")
-local runService = game:GetService("RunService")
-local coreGuiService = game:GetService("CoreGui")
-local utilityModule = require(coreGuiService:FindFirstChild("RobloxGui"):FindFirstChild("Modules"):FindFirstChild("Shell"):FindFirstChild("Utility"))
-local t = {
+﻿local GuiService = game:GetService("GuiService")
+local RunService = game:GetService("RunService")
+local CoreGui = game:GetService("CoreGui")
+local UtilityModule = require(CoreGui:FindFirstChild("RobloxGui"):FindFirstChild("Modules"):FindFirstChild("Shell"):FindFirstChild("Utility"))
+local config = {
 	BackgroundLoop = "RobloxMusic.ogg",
 	Error = "Error.mp3",
 	ButtonPress = "ButtonPress.mp3",
@@ -13,169 +13,171 @@ local t = {
 	ScreenChange = "ScreenChange.mp3",
 	SideMenuSlideIn = "SideMenuSlideIn.mp3"
 }
-local t_1 = {}
+local t = {}
 
-local function _(p1, p2, p3, p4)
-	p1 = p1 / p4 - 1
+local function _(p1, p2, p3, p4) --[[ Line: 33 | Named "EaseOutCirc" ]]
+	local v1 = p1 / p4 - 1
 	
-	return p3 * math.sqrt(1 - p1 * p1) + p2
+	return p3 * math.sqrt(1 - v1 * v1) + p2
 end
 
-local function IsGameRunning()
-	-- upvalues: runService (ref)
-	return if UserSettings().GameSettings:InStudioMode() and game:GetService("UserInputService"):GetPlatform() ~= Enum.Platform.Windows then runService:IsRunning() else true
+local function IsGameRunning() --[[ Line: 39 ]]
+	-- upvalues: RunService (copy)
+	return not UserSettings().GameSettings:InStudioMode() or game:GetService("UserInputService"):GetPlatform() == Enum.Platform.Windows or RunService:IsRunning()
 end
 
-function GetSoundManager()
-	-- upvalues: t_1 (ref), t (ref), IsGameRunning (ref), utilityModule (ref), coreGuiService (ref), guiService (ref)
-	local t_2 = {
-		SoundHolder = nil,
-		CreateSound = function(_, p1)
-			-- upvalues: t (copy)
-			local text = "rbxasset://sounds/ui/Shell/" .. t[p1]
-			local sound = Instance.new("Sound")
-			sound.Name = p1
-			sound.SoundId = text
+function GetSoundManager() --[[ Line: 46 ]]
+	-- upvalues: t (copy), config (copy), IsGameRunning (copy), UtilityModule (copy), CoreGui (copy), GuiService (copy)
+	local Volumes = {}
+	
+	local function _(p1) --[[ Line: 53 | Named "FindSoundObjectForName" ]]
+		-- upvalues: t (upval)
+		if t[p1] then
+			local Removed = table.remove(t[p1], 1)
 			
-			return sound
+			if Removed then
+				table.insert(t[p1], Removed)
+				
+				return Removed
+			end
+		end
+	end
+	
+	local config1 = {
+		SoundHolder = nil,
+		CreateSound = function(_, Name) --[[ Line: 63 ]]
+			-- upvalues: config (upval)
+			local Sound = Instance.new("Sound")
+			Sound.Name = Name
+			Sound.SoundId = "rbxasset://sounds/ui/Shell/" .. config[Name]
+			
+			return Sound
+		end,
+		Play = function(_, p1, p2, p3, p4, ...) --[[ Line: 74 ]]
+			-- upvalues: config (upval), t (upval), Volumes (copy), IsGameRunning (upval)
+			local v1 = nil
+			local Sound = nil
+			repeat
+				if config[p1] then
+					repeat
+						if t[p1] then
+							local Removed = table.remove(t[p1], 1)
+							
+							if Removed then
+								table.insert(t[p1], Removed)
+								Sound = Removed
+								break
+							end
+						end
+						Sound = nil
+					until true
+					if not Sound then break end
+					Sound.Volume = p2 or 1
+					Sound.Looped = p3 or false
+					Sound.Pitch = p4 or 1
+					Sound:Play(...)
+					Volumes[Sound] = Sound.Volume
+					
+					if not IsGameRunning() then
+						Sound.Volume = 0
+					end
+					v1 = Sound
+					
+					return v1
+				else
+					spawn(function() --[[ Line: 95 ]]
+						-- upvalues: p1 (copy)
+						error("Unable to find sound: " .. tostring(p1))
+					end)
+					continue
+				end
+			until true
+			return v1
 		end
 	}
-	local t_3 = {}
 	
-	local function _(p1)
-		-- upvalues: t_1 (copy)
-		if t_1[p1] then
-			local removed = table.remove(t_1[p1], 1)
-			
-			if removed then
-				table.insert(t_1[p1], removed)
-				
-				return removed
-			end
-		end
-	end
-	
-	function t_2.Play(_, p1, p2, p3, p4, ...)
-		-- upvalues: t (copy), t_1 (copy), t_3 (ref), IsGameRunning (copy)
-		local var1 = nil
+	function config1:IsPlaying(ChildName) --[[ Line: 103 ]]
+		-- upvalues: config1 (copy)
+		local ChildName1 = config1.SoundHolder:FindFirstChild(ChildName)
 		
-		if t[p1] then
-			local var2
-			if t_1[p1] then
-				local removed = table.remove(t_1[p1], 1)
-				
-				if removed then
-					table.insert(t_1[p1], removed)
-					var2 = removed
-				else
-					var2 = nil
-				end
-				if not var2 then
-					return var1
-				end
-				var2.Volume = p2 or 1
-				var2.Looped = p3 or false
-				var2.Pitch = p4 or 1
-				var2:Play(...)
-				t_3[var2] = var2.Volume
-				
-				if not IsGameRunning() then
-					var2.Volume = 0
-				end
-				var1 = var2
-				
-				return var1
-			end
-		else
-			spawn(function()
-				-- upvalues: p1 (ref)
-				error("Unable to find sound: " .. tostring(p1))
-			end)
-		end
+		return if ChildName1 then ChildName1.IsPlaying else false
 	end
 	
-	function t_2.IsPlaying(_, p1)
-		-- upvalues: t_2 (ref)
-		local var1 = t_2.SoundHolder:FindFirstChild(p1)
-		
-		return if var1 then var1.IsPlaying else false
-	end
-	
-	function t_2.Stop(_, p1, ...)
-		-- upvalues: t_2 (ref), t (copy)
-		if t_2.SoundHolder and t[p1] then
-			local var1 = t_2.SoundHolder:FindFirstChild(p1)
+	function config1:Stop(ChildName, ...) --[[ Line: 111 ]]
+		-- upvalues: config1 (copy), config (upval)
+		if config1.SoundHolder and config[ChildName] then
+			local ChildName1 = config1.SoundHolder:FindFirstChild(ChildName)
 			
-			if var1 then
-				var1:Stop()
+			if ChildName1 then
+				ChildName1:Stop()
 			end
 		end
 	end
 	
-	function t_2.TweenSound(_, p1, p2, p3)
-		-- upvalues: t_3 (ref), utilityModule (copy), IsGameRunning (copy)
-		t_3[p1] = nil
-		utilityModule.PropertyTweener(p1, "Volume", p1.Volume, p2, p3, function(...)
-			-- upvalues: IsGameRunning (copy), utilityModule (copy)
-			return IsGameRunning() and utilityModule.EaseInOutQuad(...) or 0
-		end, true, function()
-			-- upvalues: t_3 (copy), p1 (ref), p2 (ref)
-			t_3[p1] = p2
+	function config1:TweenSound(Sound, p1, p2) --[[ Line: 120 ]]
+		-- upvalues: Volumes (copy), UtilityModule (upval), IsGameRunning (upval)
+		Volumes[Sound] = nil
+		UtilityModule.PropertyTweener(Sound, "Volume", Sound.Volume, p1, p2, function(...) --[[ Line: 123 ]]
+			-- upvalues: IsGameRunning (upval), UtilityModule (upval)
+			return IsGameRunning() and UtilityModule.EaseInOutQuad(...) or 0
+		end, true, function() --[[ Line: 127 ]]
+			-- upvalues: Volumes (upval), Sound (copy), p1 (copy)
+			Volumes[Sound] = p1
 		end)
 	end
 	
-	;(function()
-		-- upvalues: coreGuiService (copy), t_2 (ref), t (copy), t_1 (copy), guiService (copy), IsGameRunning (copy), t_3 (ref)
-		local appShellSounds = Instance.new("Folder")
-		appShellSounds.Name = "AppShellSounds"
-		appShellSounds.Parent = coreGuiService
-		t_2.SoundHolder = appShellSounds
+	;(function() --[[ Line: 138 | Named "Initialize" ]]
+		-- upvalues: CoreGui (upval), config1 (copy), config (upval), t (upval), GuiService (upval), IsGameRunning (upval), Volumes (copy)
+		local AppShellSounds = Instance.new("Folder")
+		AppShellSounds.Name = "AppShellSounds"
+		AppShellSounds.Parent = CoreGui
+		config1.SoundHolder = AppShellSounds
 		
-		for i, v in pairs(t) do
-			local folder_1 = Instance.new("Folder")
-			folder_1.Name = i
-			folder_1.Parent = t_2.SoundHolder
-			t_1[i] = {}
-			local var1 = t_2:CreateSound(i)
-			var1.Parent = folder_1
-			table.insert(t_1[i], var1)
-			local var2 = t_2:CreateSound(i)
-			var2.Parent = folder_1
-			table.insert(t_1[i], var2)
-			local var3 = t_2:CreateSound(i)
-			var3.Parent = folder_1
-			table.insert(t_1[i], var3)
+		for Name, _ in pairs(config) do
+			local Folder = Instance.new("Folder")
+			Folder.Name = Name
+			Folder.Parent = config1.SoundHolder
+			t[Name] = {}
+			local Sound = config1:CreateSound(Name)
+			Sound.Parent = Folder
+			table.insert(t[Name], Sound)
+			local Sound1 = config1:CreateSound(Name)
+			Sound1.Parent = Folder
+			table.insert(t[Name], Sound1)
+			local Sound2 = config1:CreateSound(Name)
+			Sound2.Parent = Folder
+			table.insert(t[Name], Sound2)
 		end
-		local var4 = nil
-		guiService:GetPropertyChangedSignal("SelectedCoreObject"):connect(function()
-			-- upvalues: guiService (copy), var4 (write)
-			local selectedCoreObject = guiService.SelectedCoreObject
+		local v1 = nil
+		GuiService:GetPropertyChangedSignal("SelectedCoreObject"):connect(function() --[[ Line: 159 ]]
+			-- upvalues: GuiService (upval), v1 (ref)
+			local SelectedCoreObject = GuiService.SelectedCoreObject
 			
-			if selectedCoreObject and var4 then
-				local moveSelection = selectedCoreObject:FindFirstChild("MoveSelection")
+			if SelectedCoreObject and v1 then
+				local MoveSelection = SelectedCoreObject:FindFirstChild("MoveSelection")
 				
-				if moveSelection and moveSelection:IsA("Sound") then
-					moveSelection.Volume = 0.35
-					moveSelection:Play()
+				if MoveSelection and MoveSelection:IsA("Sound") then
+					MoveSelection.Volume = 0.35
+					MoveSelection:Play()
 				end
 			end
-			var4 = selectedCoreObject
+			v1 = SelectedCoreObject
 		end)
 		
 		if not IsGameRunning() then
-			spawn(function()
-				-- upvalues: IsGameRunning (copy), t_3 (copy)
+			spawn(function() --[[ Line: 172 ]]
+				-- upvalues: IsGameRunning (upval), Volumes (upval)
 				while not IsGameRunning() do
 					wait(0.1)
 				end
-				for i, v in pairs(t_3) do
-					i.Volume = v
+				for i, volume in pairs(Volumes) do
+					i.Volume = volume
 				end
 			end)
 		end
 	end)()
 	
-	return t_2
+	return config1
 end
 
 return GetSoundManager()

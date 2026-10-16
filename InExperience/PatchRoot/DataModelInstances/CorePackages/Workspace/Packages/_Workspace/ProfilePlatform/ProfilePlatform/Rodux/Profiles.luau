@@ -1,7 +1,7 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
 
-return require(profilePlatform.Parent.Rodux).combineReducers({
-	Community = require(profilePlatform.Rodux.ProfileTypes.Community),
-	User = require(profilePlatform.Rodux.ProfileTypes.User),
-	Contact = require(profilePlatform.Rodux.ProfileTypes.Contact)
+return require(ProfilePlatform.Parent.Rodux).combineReducers({
+	Community = require(ProfilePlatform.Rodux.ProfileTypes.Community),
+	User = require(ProfilePlatform.Rodux.ProfileTypes.User),
+	Contact = require(ProfilePlatform.Rodux.ProfileTypes.Contact)
 })

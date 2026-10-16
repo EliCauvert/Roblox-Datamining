@@ -1,13 +1,13 @@
-﻿return function(...)
+﻿return function(...) --[[ Line: 3 | Named "composeRefs" ]]
 	local list = { ... }
 	
-	return function(p1)
-		-- upvalues: list (ref)
-		for i, v in list do
-			if type(v) == "function" then
-				v(p1)
-			elseif v ~= nil then
-				v.current = p1
+	return function(Current) --[[ Line: 5 ]]
+		-- upvalues: list (copy)
+		for _, value in list do
+			if type(value) == "function" then
+				value(Current)
+			elseif value ~= nil then
+				value.current = Current
 			end
 		end
 	end

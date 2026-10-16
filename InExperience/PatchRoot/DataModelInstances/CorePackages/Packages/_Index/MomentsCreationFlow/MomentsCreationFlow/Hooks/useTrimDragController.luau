@@ -1,219 +1,222 @@
-﻿local momentsCreationFlow = script:FindFirstAncestor("MomentsCreationFlow")
-local parent = momentsCreationFlow.Parent
-local momentsCommonModule = require(parent.MomentsCommon)
-local reactModule = require(parent.React)
-local reactOtterModule = require(parent.ReactOtter)
-local useAnimatedBinding = reactOtterModule.useAnimatedBinding
-local useCallback = reactModule.useCallback
-local useEffect = reactModule.useEffect
-local useRef = reactModule.useRef
-local validateRefsModule = require(momentsCreationFlow.Utils.validateRefs)
-local dragHandleModule = require(momentsCreationFlow.Enums.DragHandle)
+﻿local MomentsCreationFlow = script:FindFirstAncestor("MomentsCreationFlow")
+local Parent = MomentsCreationFlow.Parent
+local MomentsCommonModule = require(Parent.MomentsCommon)
+local ReactModule = require(Parent.React)
+local ReactOtterModule = require(Parent.ReactOtter)
+local UseAnimatedBindingFunction = ReactOtterModule.useAnimatedBinding
+local UseCallbackFunction = ReactModule.useCallback
+local UseEffectFunction = ReactModule.useEffect
+local UseRefFunction = ReactModule.useRef
+local ValidateRefsModule = require(MomentsCreationFlow.Utils.validateRefs)
+local DragHandleModule = require(MomentsCreationFlow.Enums.DragHandle)
 
-return function(value, p1, p2, p3, p4, p5, p6)
-	-- upvalues: useRef (ref), useAnimatedBinding (ref), useCallback (ref), validateRefsModule (ref), dragHandleModule (ref), momentsCommonModule (ref), reactOtterModule (ref), useEffect (ref)
-	local var1 = useRef(nil)
-	local var2 = useRef(nil)
-	local var3 = useRef(nil)
-	local var4 = useRef(nil)
-	local var5 = useRef(nil)
-	local var6 = useRef(nil)
-	local var7, var8 = useAnimatedBinding(if p5 then p5.startTime / p6 else 0)
-	local var9, var10 = useAnimatedBinding(if p5 then p5.endTime / p6 else 1)
-	local var11 = useRef(nil)
-	local var12 = useRef(nil)
-	local var13 = useRef(nil)
-	local var14 = useRef(nil)
-	local var15 = useCallback(function()
-		-- upvalues: validateRefsModule (copy), var2 (ref), var14 (ref), dragHandleModule (copy), var11 (ref), var7 (ref), p2 (ref)
-		if validateRefsModule({ var2 }) and not var14.current then
-			assert(var2.current ~= nil, "Left handle ref is nil")
-			var14.current = dragHandleModule.LeftHandle
-			var11.current = var7:getValue()
-			p2(dragHandleModule.LeftHandle)
+return function(p1, Callback2, Callback, Callback1, Callback3, p2, p3) --[[ Line: 20 | Named "useTrimDragController" ]]
+	-- upvalues: UseRefFunction (copy), UseAnimatedBindingFunction (copy), UseCallbackFunction (copy), ValidateRefsModule (copy), DragHandleModule (copy), MomentsCommonModule (copy), ReactOtterModule (copy), UseEffectFunction (copy)
+	local UseRefResult = UseRefFunction(nil)
+	local UseRefResult1 = UseRefFunction(nil)
+	local UseRefResult2 = UseRefFunction(nil)
+	local UseRefResult3 = UseRefFunction(nil)
+	local UseRefResult4 = UseRefFunction(nil)
+	local UseRefResult5 = UseRefFunction(nil)
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = UseAnimatedBindingFunction(p2 and p2.startTime / p3 or 0)
+	local UseAnimatedBindingResult1, UseAnimatedBindingResult2_1 = UseAnimatedBindingFunction(p2 and p2.endTime / p3 or 1)
+	local UseRefResult6 = UseRefFunction(nil)
+	local UseRefResult7 = UseRefFunction(nil)
+	local UseRefResult8 = UseRefFunction(nil)
+	local UseRefResult9 = UseRefFunction(nil)
+	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 47 ]]
+		-- upvalues: ValidateRefsModule (upval), UseRefResult1 (copy), UseRefResult9 (copy), DragHandleModule (upval), UseRefResult6 (copy), UseAnimatedBindingResult (copy), Callback (copy)
+		if ValidateRefsModule({ UseRefResult1 }) and not UseRefResult9.current then
+			assert(UseRefResult1.current ~= nil, "Left handle ref is nil")
+			UseRefResult9.current = DragHandleModule.LeftHandle
+			UseRefResult6.current = UseAnimatedBindingResult:getValue()
+			Callback(DragHandleModule.LeftHandle)
 			
 			return
 		end
-	end, { p2 })
-	local var16 = useCallback(function()
-		-- upvalues: validateRefsModule (copy), var11 (ref), var2 (ref), var9 (ref), momentsCommonModule (copy), p6 (ref), var8 (ref), reactOtterModule (copy)
-		if validateRefsModule({ var11, var2 }) then
-			assert(var11.current ~= nil, "Left handle initial position ref is nil")
-			assert(var2.current ~= nil, "Left handle ref is nil")
-			var8(reactOtterModule.instant(math.clamp(var11.current + var2.current.DragUDim2.X.Scale, 0, var9:getValue() - momentsCommonModule.Constants.MinimumVideoLength / p6)))
+	end, { Callback })
+	local UseCallbackResult1 = UseCallbackFunction(function() --[[ Line: 58 ]]
+		-- upvalues: ValidateRefsModule (upval), UseRefResult6 (copy), UseRefResult1 (copy), UseAnimatedBindingResult1 (copy), MomentsCommonModule (upval), p3 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval)
+		if ValidateRefsModule({ UseRefResult6, UseRefResult1 }) then
+			assert(UseRefResult6.current ~= nil, "Left handle initial position ref is nil")
+			assert(UseRefResult1.current ~= nil, "Left handle ref is nil")
+			UseAnimatedBindingResult2(ReactOtterModule.instant((math.clamp(UseRefResult6.current + UseRefResult1.current.DragUDim2.X.Scale, 0, UseAnimatedBindingResult1:getValue() - MomentsCommonModule.Constants.MinimumVideoLength / p3))))
 			
 			return
 		end
-	end, { p6 })
-	local var17 = useCallback(function()
-		-- upvalues: var14 (ref), dragHandleModule (copy), p3 (ref), var7 (ref), p6 (ref), var11 (ref), p1 (ref)
-		if var14.current == dragHandleModule.LeftHandle then
-			p3(var7:getValue() * p6, nil)
-			var14.current = nil
-			var11.current = nil
-			p1()
+	end, { p3 })
+	local UseCallbackResult2 = UseCallbackFunction(function() --[[ Line: 75 ]]
+		-- upvalues: UseRefResult9 (copy), DragHandleModule (upval), Callback1 (copy), UseAnimatedBindingResult (copy), p3 (copy), UseRefResult6 (copy), Callback2 (copy)
+		if UseRefResult9.current == DragHandleModule.LeftHandle then
+			Callback1(UseAnimatedBindingResult:getValue() * p3, nil)
+			UseRefResult9.current = nil
+			UseRefResult6.current = nil
+			Callback2()
 			
 			return
 		end
-	end, { p1, p3, p6 })
-	local var18 = useCallback(function()
-		-- upvalues: validateRefsModule (copy), var3 (ref), var14 (ref), dragHandleModule (copy), var12 (ref), var9 (ref), p2 (ref)
-		if validateRefsModule({ var3 }) and not var14.current then
-			assert(var3.current ~= nil, "Right handle ref is nil")
-			var14.current = dragHandleModule.RightHandle
-			var12.current = var9:getValue()
-			p2(dragHandleModule.RightHandle)
+	end, { Callback2, Callback1, p3 })
+	local UseCallbackResult3 = UseCallbackFunction(function() --[[ Line: 86 ]]
+		-- upvalues: ValidateRefsModule (upval), UseRefResult2 (copy), UseRefResult9 (copy), DragHandleModule (upval), UseRefResult7 (copy), UseAnimatedBindingResult1 (copy), Callback (copy)
+		if ValidateRefsModule({ UseRefResult2 }) and not UseRefResult9.current then
+			assert(UseRefResult2.current ~= nil, "Right handle ref is nil")
+			UseRefResult9.current = DragHandleModule.RightHandle
+			UseRefResult7.current = UseAnimatedBindingResult1:getValue()
+			Callback(DragHandleModule.RightHandle)
 			
 			return
 		end
-	end, { p2 })
-	local var19 = useCallback(function()
-		-- upvalues: validateRefsModule (copy), var12 (ref), var3 (ref), var7 (ref), momentsCommonModule (copy), p6 (ref), var10 (ref), reactOtterModule (copy)
-		if validateRefsModule({ var12, var3 }) then
-			assert(var3.current ~= nil, "Right handle ref is nil")
-			var10(reactOtterModule.instant(math.clamp(var12.current + var3.current.DragUDim2.X.Scale, var7:getValue() + momentsCommonModule.Constants.MinimumVideoLength / p6, 1)))
+	end, { Callback })
+	local UseCallbackResult4 = UseCallbackFunction(function() --[[ Line: 97 ]]
+		-- upvalues: ValidateRefsModule (upval), UseRefResult7 (copy), UseRefResult2 (copy), UseAnimatedBindingResult (copy), MomentsCommonModule (upval), p3 (copy), UseAnimatedBindingResult2_1 (copy), ReactOtterModule (upval)
+		if ValidateRefsModule({ UseRefResult7, UseRefResult2 }) then
+			assert(UseRefResult2.current ~= nil, "Right handle ref is nil")
+			UseAnimatedBindingResult2_1(ReactOtterModule.instant((math.clamp(UseRefResult7.current + UseRefResult2.current.DragUDim2.X.Scale, UseAnimatedBindingResult:getValue() + MomentsCommonModule.Constants.MinimumVideoLength / p3, 1))))
 			
 			return
 		end
-	end, { p6 })
-	local var20 = useCallback(function()
-		-- upvalues: var14 (ref), dragHandleModule (copy), p3 (ref), var9 (ref), p6 (ref), var12 (ref), p1 (ref)
-		if var14.current == dragHandleModule.RightHandle then
-			p3(nil, var9:getValue() * p6)
-			var14.current = nil
-			var12.current = nil
-			p1()
+	end, { p3 })
+	local UseCallbackResult5 = UseCallbackFunction(function() --[[ Line: 113 ]]
+		-- upvalues: UseRefResult9 (copy), DragHandleModule (upval), Callback1 (copy), UseAnimatedBindingResult1 (copy), p3 (copy), UseRefResult7 (copy), Callback2 (copy)
+		if UseRefResult9.current == DragHandleModule.RightHandle then
+			Callback1(nil, UseAnimatedBindingResult1:getValue() * p3)
+			UseRefResult9.current = nil
+			UseRefResult7.current = nil
+			Callback2()
 			
 			return
 		end
-	end, { p1, p3, p6 })
-	local var21 = useCallback(function()
-		-- upvalues: validateRefsModule (copy), var6 (ref), var5 (ref), var14 (ref), dragHandleModule (copy), var13 (ref), p2 (ref)
-		if validateRefsModule({ var6, var5 }) and not var14.current then
-			assert(var6.current ~= nil, "Scrubber ref is nil")
-			assert(var5.current ~= nil, "Scrubber display ref is nil")
-			var14.current = dragHandleModule.Scrubber
-			var13.current = var5.current.Position.X.Scale
-			p2(dragHandleModule.Scrubber)
+	end, { Callback2, Callback1, p3 })
+	local UseCallbackResult6 = UseCallbackFunction(function() --[[ Line: 124 ]]
+		-- upvalues: ValidateRefsModule (upval), UseRefResult5 (copy), UseRefResult4 (copy), UseRefResult9 (copy), DragHandleModule (upval), UseRefResult8 (copy), Callback (copy)
+		if ValidateRefsModule({ UseRefResult5, UseRefResult4 }) and not UseRefResult9.current then
+			assert(UseRefResult5.current ~= nil, "Scrubber ref is nil")
+			assert(UseRefResult4.current ~= nil, "Scrubber display ref is nil")
+			UseRefResult9.current = DragHandleModule.Scrubber
+			UseRefResult8.current = UseRefResult4.current.Position.X.Scale
+			Callback(DragHandleModule.Scrubber)
 			
 			return
 		end
-	end, { p2 })
-	local var22 = useCallback(function()
-		-- upvalues: validateRefsModule (copy), var13 (ref), var6 (ref), p4 (ref)
-		if validateRefsModule({ var13, var6 }) then
-			assert(var13.current ~= nil, "Scrubber initial position ref is nil")
-			assert(var6.current ~= nil, "Scrubber ref is nil")
-			p4(math.clamp(var13.current + var6.current.DragUDim2.X.Scale, 0, 1))
+	end, { Callback })
+	local UseCallbackResult7 = UseCallbackFunction(function() --[[ Line: 136 ]]
+		-- upvalues: ValidateRefsModule (upval), UseRefResult8 (copy), UseRefResult5 (copy), Callback3 (copy)
+		if ValidateRefsModule({ UseRefResult8, UseRefResult5 }) then
+			assert(UseRefResult8.current ~= nil, "Scrubber initial position ref is nil")
+			assert(UseRefResult5.current ~= nil, "Scrubber ref is nil")
+			Callback3((math.clamp(UseRefResult8.current + UseRefResult5.current.DragUDim2.X.Scale, 0, 1)))
 			
 			return
 		end
-	end, { p4 })
-	local var23 = useCallback(function()
-		-- upvalues: var14 (ref), dragHandleModule (copy), var13 (ref), p1 (ref)
-		if var14.current == dragHandleModule.Scrubber then
-			var14.current = nil
-			var13.current = nil
-			p1()
+	end, { Callback3 })
+	local UseCallbackResult8 = UseCallbackFunction(function() --[[ Line: 149 ]]
+		-- upvalues: UseRefResult9 (copy), DragHandleModule (upval), UseRefResult8 (copy), Callback2 (copy)
+		if UseRefResult9.current == DragHandleModule.Scrubber then
+			UseRefResult9.current = nil
+			UseRefResult8.current = nil
+			Callback2()
 			
 			return
 		end
-	end, { p1 })
-	local var24 = useCallback(function()
-		-- upvalues: validateRefsModule (copy), var4 (ref), var14 (ref), dragHandleModule (copy), var11 (ref), var7 (ref), var12 (ref), var9 (ref), p2 (ref)
-		if validateRefsModule({ var4 }) and not var14.current then
-			assert(var4.current ~= nil, "Selected outline ref is nil")
-			var14.current = dragHandleModule.Segment
-			var11.current = var7:getValue()
-			var12.current = var9:getValue()
-			p2(dragHandleModule.Segment)
+	end, { Callback2 })
+	local UseCallbackResult9 = UseCallbackFunction(function() --[[ Line: 159 ]]
+		-- upvalues: ValidateRefsModule (upval), UseRefResult3 (copy), UseRefResult9 (copy), DragHandleModule (upval), UseRefResult6 (copy), UseAnimatedBindingResult (copy), UseRefResult7 (copy), UseAnimatedBindingResult1 (copy), Callback (copy)
+		if ValidateRefsModule({ UseRefResult3 }) and not UseRefResult9.current then
+			assert(UseRefResult3.current ~= nil, "Selected outline ref is nil")
+			UseRefResult9.current = DragHandleModule.Segment
+			UseRefResult6.current = UseAnimatedBindingResult:getValue()
+			UseRefResult7.current = UseAnimatedBindingResult1:getValue()
+			Callback(DragHandleModule.Segment)
 			
 			return
 		end
-	end, { p2 })
-	local var25 = useCallback(function()
-		-- upvalues: validateRefsModule (copy), var4 (ref), var11 (ref), var2 (ref), var12 (ref), var3 (ref), var8 (ref), reactOtterModule (copy), var10 (ref), p3 (ref), p6 (ref)
-		if not validateRefsModule({
-			var4,
-			var11,
-			var2,
-			var12,
-			var3
+	end, { Callback })
+	local UseCallbackResult10 = UseCallbackFunction(function() --[[ Line: 171 ]]
+		-- upvalues: ValidateRefsModule (upval), UseRefResult3 (copy), UseRefResult6 (copy), UseRefResult1 (copy), UseRefResult7 (copy), UseRefResult2 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), UseAnimatedBindingResult2_1 (copy), Callback1 (copy), p3 (copy)
+		if not ValidateRefsModule({
+			UseRefResult3,
+			UseRefResult6,
+			UseRefResult1,
+			UseRefResult7,
+			UseRefResult2
 		}) then return end
-		assert(var4.current ~= nil, "Selected outline ref is nil")
-		assert(var11.current ~= nil, "Left handle initial position ref is nil")
-		assert(var2.current ~= nil, "Left handle ref is nil")
-		assert(var12.current ~= nil, "Right handle initial position ref is nil")
-		assert(var3.current ~= nil, "Right handle ref is nil")
-		local scale = var4.current.DragUDim2.X.Scale
-		local current = var11.current
-		local current_1 = var12.current
+		assert(UseRefResult3.current ~= nil, "Selected outline ref is nil")
+		assert(UseRefResult6.current ~= nil, "Left handle initial position ref is nil")
+		assert(UseRefResult1.current ~= nil, "Left handle ref is nil")
+		assert(UseRefResult7.current ~= nil, "Right handle initial position ref is nil")
+		assert(UseRefResult2.current ~= nil, "Right handle ref is nil")
+		local Scale: number = UseRefResult3.current.DragUDim2.X.Scale
+		local Current: number = UseRefResult6.current
+		local Current1: number = UseRefResult7.current
 		
-		if current <= 0 and current_1 >= 1 then
-			return
-		end
-		local clampedValue = math.clamp(scale, -current, 1 - current_1)
-		local var26 = current + clampedValue
-		local var27 = current_1 + clampedValue
-		var8(reactOtterModule.instant(var26))
-		var10(reactOtterModule.instant(var27))
-		p3(var26 * p6, var27 * p6)
-	end, { p3, p6 })
-	local var26 = useCallback(function()
-		-- upvalues: var14 (ref), dragHandleModule (copy), var11 (ref), var12 (ref), p1 (ref)
-		if var14.current == dragHandleModule.Segment then
-			var14.current = nil
-			var11.current = nil
-			var12.current = nil
-			p1()
+		if Current > 0 or Current1 < 1 then
+			local ClampedValue = math.clamp(Scale, -Current, 1 - Current1)
+			local NewCurrent = Current + ClampedValue
+			local NewCurrent1 = Current1 + ClampedValue
+			UseAnimatedBindingResult2(ReactOtterModule.instant(NewCurrent))
+			UseAnimatedBindingResult2_1(ReactOtterModule.instant(NewCurrent1))
+			Callback1(NewCurrent * p3, NewCurrent1 * p3)
 			
 			return
 		end
-	end, { p1 })
-	useEffect(function()
-		-- upvalues: value (ref), var2 (ref), var15 (ref), var16 (ref), var17 (ref), var3 (ref), var18 (ref), var19 (ref), var20 (ref), var6 (ref), var21 (ref), var22 (ref), var23 (ref), var4 (ref), var24 (ref), var25 (ref), var26 (ref)
-		if not value then return end
-		local t = {}
+	end, { Callback1, p3 })
+	local UseCallbackResult11 = UseCallbackFunction(function() --[[ Line: 209 ]]
+		-- upvalues: UseRefResult9 (copy), DragHandleModule (upval), UseRefResult6 (copy), UseRefResult7 (copy), Callback2 (copy)
+		if UseRefResult9.current == DragHandleModule.Segment then
+			UseRefResult9.current = nil
+			UseRefResult6.current = nil
+			UseRefResult7.current = nil
+			Callback2()
+			
+			return
+		end
+	end, { Callback2 })
+	UseEffectFunction(function() --[[ Line: 220 ]]
+		-- upvalues: p1 (copy), UseRefResult1 (copy), UseCallbackResult (copy), UseCallbackResult1 (copy), UseCallbackResult2 (copy), UseRefResult2 (copy), UseCallbackResult3 (copy), UseCallbackResult4 (copy), UseCallbackResult5 (copy), UseRefResult5 (copy), UseCallbackResult6 (copy), UseCallbackResult7 (copy), UseCallbackResult8 (copy), UseRefResult3 (copy), UseCallbackResult9 (copy), UseCallbackResult10 (copy), UseCallbackResult11 (copy)
+		if not p1 then return end
+		local List = {}
 		
-		if var2.current then
-			table.insert(t, var2.current.DragStart:Connect(var15))
-			table.insert(t, var2.current.DragContinue:Connect(var16))
-			table.insert(t, var2.current.DragEnd:Connect(var17))
+		if UseRefResult1.current then
+			table.insert(List, UseRefResult1.current.DragStart:Connect(UseCallbackResult))
+			table.insert(List, UseRefResult1.current.DragContinue:Connect(UseCallbackResult1))
+			table.insert(List, UseRefResult1.current.DragEnd:Connect(UseCallbackResult2))
 		end
-		if var3.current then
-			table.insert(t, var3.current.DragStart:Connect(var18))
-			table.insert(t, var3.current.DragContinue:Connect(var19))
-			table.insert(t, var3.current.DragEnd:Connect(var20))
+		if UseRefResult2.current then
+			table.insert(List, UseRefResult2.current.DragStart:Connect(UseCallbackResult3))
+			table.insert(List, UseRefResult2.current.DragContinue:Connect(UseCallbackResult4))
+			table.insert(List, UseRefResult2.current.DragEnd:Connect(UseCallbackResult5))
 		end
-		if var6.current then
-			table.insert(t, var6.current.DragStart:Connect(var21))
-			table.insert(t, var6.current.DragContinue:Connect(var22))
-			table.insert(t, var6.current.DragEnd:Connect(var23))
+		if UseRefResult5.current then
+			table.insert(List, UseRefResult5.current.DragStart:Connect(UseCallbackResult6))
+			table.insert(List, UseRefResult5.current.DragContinue:Connect(UseCallbackResult7))
+			table.insert(List, UseRefResult5.current.DragEnd:Connect(UseCallbackResult8))
 		end
-		if var4.current then
-			table.insert(t, var4.current.DragStart:Connect(var24))
-			table.insert(t, var4.current.DragContinue:Connect(var25))
-			table.insert(t, var4.current.DragEnd:Connect(var26))
+		if UseRefResult3.current then
+			table.insert(List, UseRefResult3.current.DragStart:Connect(UseCallbackResult9))
+			table.insert(List, UseRefResult3.current.DragContinue:Connect(UseCallbackResult10))
+			table.insert(List, UseRefResult3.current.DragEnd:Connect(UseCallbackResult11))
 		end
-		return function()
-			-- upvalues: t (ref)
-			for i, v in t do
-				v:Disconnect()
+		return function() --[[ Line: 251 ]]
+			-- upvalues: List (copy)
+			for _, Connection in List do
+				Connection:Disconnect()
 			end
 		end
 	end, {
-		value, var15, var16, var17, var18, var19, var20, var21, var22, var23, var24,
-		var25, var26
+		p1, UseCallbackResult, UseCallbackResult1, UseCallbackResult2,
+		UseCallbackResult3, UseCallbackResult4, UseCallbackResult5, UseCallbackResult6,
+		UseCallbackResult7, UseCallbackResult8, UseCallbackResult9,
+		UseCallbackResult10, UseCallbackResult11
 	})
 	
 	return {
-		dragContainerRef = var1,
-		leftHandleRef = var2,
-		rightHandleRef = var3,
-		scrubberDisplayRef = var5,
-		scrubberRef = var6,
-		segmentRef = var4,
-		leftHandlePosition = var7,
-		rightHandlePosition = var9
+		dragContainerRef = UseRefResult,
+		leftHandleRef = UseRefResult1,
+		rightHandleRef = UseRefResult2,
+		scrubberDisplayRef = UseRefResult4,
+		scrubberRef = UseRefResult5,
+		segmentRef = UseRefResult3,
+		leftHandlePosition = UseAnimatedBindingResult,
+		rightHandlePosition = UseAnimatedBindingResult1
 	}
 end

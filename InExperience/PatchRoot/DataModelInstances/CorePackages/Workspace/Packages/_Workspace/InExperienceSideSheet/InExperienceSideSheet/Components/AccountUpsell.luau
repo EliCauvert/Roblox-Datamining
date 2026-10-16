@@ -1,74 +1,73 @@
-﻿local inExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
-local parent = inExperienceSideSheet.Parent
-local _ = require(parent.Chrome)
-local foundationModule = require(parent.Foundation)
-local localizationModule = require(parent.Localization)
-local reactModule = require(parent.React)
-local icon = foundationModule.Icon
-local text = foundationModule.Text
-local view = foundationModule.View
-local iconName = foundationModule.Enums.IconName
-local iconVariant = foundationModule.Enums.IconVariant
-local useTokens = foundationModule.Hooks.useTokens
-local useLocalization = localizationModule.Hooks.useLocalization
-local analyticsConstantsModule = require(inExperienceSideSheet.Analytics.AnalyticsConstants)
-local sidesheetAnalyticsModule = require(inExperienceSideSheet.Analytics.SidesheetAnalytics)
-local closePeoplePageOpenedWithSideSheetModule = require(inExperienceSideSheet.Utils.closePeoplePageOpenedWithSideSheet)
-local toggleSideSheetModule = require(inExperienceSideSheet.Utils.toggleSideSheet)
-local fFlagSideSheetOpenPeoplePage = require(inExperienceSideSheet.Flags).FFlagSideSheetOpenPeoplePage
+﻿local InExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
+local Parent = InExperienceSideSheet.Parent
+local _ = require(Parent.Chrome)
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local Icon = FoundationModule.Icon
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local IconName = FoundationModule.Enums.IconName
+local IconVariant = FoundationModule.Enums.IconVariant
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local AnalyticsConstantsModule = require(InExperienceSideSheet.Analytics.AnalyticsConstants)
+local SidesheetAnalyticsModule = require(InExperienceSideSheet.Analytics.SidesheetAnalytics)
+local ClosePeoplePageOpenedWithSideSheetModule = require(InExperienceSideSheet.Utils.closePeoplePageOpenedWithSideSheet)
+local ToggleSideSheetModule = require(InExperienceSideSheet.Utils.toggleSideSheet)
+local FFlagSideSheetOpenPeoplePage = require(InExperienceSideSheet.Flags).FFlagSideSheetOpenPeoplePage
 
-return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), useLocalization (ref), reactModule (ref), fFlagSideSheetOpenPeoplePage (ref), closePeoplePageOpenedWithSideSheetModule (ref), toggleSideSheetModule (ref), sidesheetAnalyticsModule (ref), analyticsConstantsModule (ref), view (ref), icon (ref), iconName (ref), iconVariant (ref), text (ref)
-	local var1 = useTokens()
-	local var2 = useLocalization({
+return ReactModule.memo(function(p1) --[[ Line: 31 | Named "AccountUpsell" ]]
+	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), FFlagSideSheetOpenPeoplePage (copy), ClosePeoplePageOpenedWithSideSheetModule (copy), ToggleSideSheetModule (copy), SidesheetAnalyticsModule (copy), AnalyticsConstantsModule (copy), View (copy), Icon (copy), IconName (copy), IconVariant (copy), Text (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseLocalizationResult = UseLocalizationFunction({
 		title = "CoreScripts.InGameMenu.UnlockMore.Title",
 		description = "CoreScripts.InGameMenu.UnlockMore.Description"
 	})
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "size-full-0 auto-y padding-bottom-medium padding-top-small",
 		testId = "account-upsell-container",
 		LayoutOrder = p1.layoutOrder
 	}, {
-		Card = reactModule.createElement(view, {
+		Card = ReactModule.createElement(View, {
 			tag = "row align-y-center size-full-0 auto-y padding-medium radius-medium bg-shift-200",
 			testId = "account-upsell-card",
-			onActivated = reactModule.useCallback(function()
-				-- upvalues: p1 (ref), fFlagSideSheetOpenPeoplePage (copy), closePeoplePageOpenedWithSideSheetModule (copy), toggleSideSheetModule (copy), sidesheetAnalyticsModule (copy), analyticsConstantsModule (copy)
+			onActivated = ReactModule.useCallback(function() --[[ Line: 37 ]]
+				-- upvalues: p1 (copy), FFlagSideSheetOpenPeoplePage (upval), ClosePeoplePageOpenedWithSideSheetModule (upval), ToggleSideSheetModule (upval), SidesheetAnalyticsModule (upval), AnalyticsConstantsModule (upval)
 				p1.onActivated()
 				
-				if fFlagSideSheetOpenPeoplePage then
-					closePeoplePageOpenedWithSideSheetModule()
+				if FFlagSideSheetOpenPeoplePage then
+					ClosePeoplePageOpenedWithSideSheetModule()
 				end
-				toggleSideSheetModule(false)
-				sidesheetAnalyticsModule.logSidesheetClosed(analyticsConstantsModule.Source.AccountUpsell)
+				ToggleSideSheetModule(false)
+				SidesheetAnalyticsModule.logSidesheetClosed(AnalyticsConstantsModule.Source.AccountUpsell)
 			end, { p1.onActivated })
 		}, {
-			LeadingAccessory = reactModule.createElement(view, {
+			LeadingAccessory = ReactModule.createElement(View, {
 				LayoutOrder = 1,
 				tag = "row align-x-center align-y-center size-1200-1200 radius-medium clip bg-system-emphasis"
 			}, {
-				Logo = reactModule.createElement(icon, {
+				Logo = ReactModule.createElement(Icon, {
 					testId = "account-upsell-logo",
-					name = iconName.Tilt,
-					size = var1.Size.Size_1000,
-					style = var1.DarkMode.Content.Emphasis,
-					variant = iconVariant.Filled
+					name = IconName.Tilt,
+					size = UseTokensResult.Size.Size_1000,
+					style = UseTokensResult.DarkMode.Content.Emphasis,
+					variant = IconVariant.Filled
 				})
 			}),
-			Content = reactModule.createElement(view, {
+			Content = ReactModule.createElement(View, {
 				LayoutOrder = 2,
 				tag = "col fill auto-y padding-left-medium"
 			}, {
-				Title = reactModule.createElement(text, {
+				Title = ReactModule.createElement(Text, {
 					LayoutOrder = 1,
 					tag = "size-full-0 auto-y text-title-medium text-align-x-left text-truncate-end content-emphasis",
-					Text = var2.title
+					Text = UseLocalizationResult.title
 				}),
-				Description = reactModule.createElement(text, {
+				Description = ReactModule.createElement(Text, {
 					LayoutOrder = 2,
 					tag = "size-full-0 auto-y text-body-small text-align-x-left text-truncate-end content-emphasis",
-					Text = var2.description
+					Text = UseLocalizationResult.description
 				})
 			})
 		})

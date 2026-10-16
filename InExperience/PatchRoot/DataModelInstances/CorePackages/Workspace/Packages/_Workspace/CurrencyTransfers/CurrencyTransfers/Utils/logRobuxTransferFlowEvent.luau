@@ -1,16 +1,16 @@
-﻿local currencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
-local _ = require(currencyTransfers.Stores.createTransferStore)
-local buildRobuxTransferFlowPayloadModule = require(currencyTransfers.Utils.buildRobuxTransferFlowPayload)
-local sendRobuxTransferFlowEventModule = require(currencyTransfers.Utils.sendRobuxTransferFlowEvent)
+﻿local CurrencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
+local _ = require(CurrencyTransfers.Stores.createTransferStore)
+local BuildRobuxTransferFlowPayloadModule = require(CurrencyTransfers.Utils.buildRobuxTransferFlowPayload)
+local SendRobuxTransferFlowEventModule = require(CurrencyTransfers.Utils.sendRobuxTransferFlowEvent)
 
-return function(p1, p2, p3)
-	-- upvalues: buildRobuxTransferFlowPayloadModule (ref), sendRobuxTransferFlowEventModule (ref)
-	local var1 = buildRobuxTransferFlowPayloadModule(p1, p2)
+return function(p1, p2, List) --[[ Line: 12 | Named "logRobuxTransferFlowEvent" ]]
+	-- upvalues: BuildRobuxTransferFlowPayloadModule (copy), SendRobuxTransferFlowEventModule (copy)
+	local RobuxTransferFlowPayloadModule = BuildRobuxTransferFlowPayloadModule(p1, p2)
 	
-	if p3 then
-		for i, v in pairs(p3) do
-			var1[i] = v
+	if List then
+		for i, value in pairs(List) do
+			RobuxTransferFlowPayloadModule[i] = value
 		end
 	end
-	sendRobuxTransferFlowEventModule(var1)
+	SendRobuxTransferFlowEventModule(RobuxTransferFlowPayloadModule)
 end

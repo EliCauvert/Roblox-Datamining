@@ -1,7 +1,7 @@
-﻿local t = {}
-local luauPolyfillModule = require(script.Parent.Parent.Parent.Parent.LuauPolyfill)
-local boolean = luauPolyfillModule.Boolean
-local var1 = luauPolyfillModule.Map.new(nil)
+﻿local MakeUniqueIdModule = {}
+local LuauPolyfillModule = require(script.Parent.Parent.Parent.Parent.LuauPolyfill)
+local Boolean = LuauPolyfillModule.Boolean
+local NewResult = LuauPolyfillModule.Map.new(nil)
 local list = {
 	"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f",
 	"g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v",
@@ -9,26 +9,25 @@ local list = {
 }
 math.randomseed(os.clock())
 
-local function uuid()
-	-- upvalues: list (ref)
-	local var2 = ""
+local function uuid(): string --[[ Line: 59 ]]
+	-- upvalues: list (copy)
+	local Text = ""
 	
 	for _ = 1, 11 do
-		var2 ..= list[math.random(1, 36)]
+		Text ..= list[math.random(1, 36)]
 	end
-	return var2
+	return Text
 end
 
-local function makeUniqueId(p1)
-	-- upvalues: uuid (ref), boolean (ref), var1 (ref)
-	local var3 = uuid()
-	local var4 = boolean.toJSBoolean(var1:get(p1)) and var1:get(p1) or 1
-	var1:set(p1, var4 + 1)
+MakeUniqueIdModule.uuid = uuid
+
+function MakeUniqueIdModule.makeUniqueId(p1): string --[[ Line: 68 ]]
+	-- upvalues: uuid (copy), Boolean (copy), NewResult (copy)
+	local UuidResult = uuid()
+	local GetResult = Boolean.toJSBoolean(NewResult:get(p1)) and NewResult:get(p1) or 1
+	NewResult:set(p1, GetResult + 1)
 	
-	return ("%s:%s:%s"):format(p1, tostring(var4), var3)
+	return ("%s:%s:%s"):format(p1, tostring(GetResult), UuidResult)
 end
 
-t.uuid = uuid
-t.makeUniqueId = makeUniqueId
-
-return t
+return MakeUniqueIdModule

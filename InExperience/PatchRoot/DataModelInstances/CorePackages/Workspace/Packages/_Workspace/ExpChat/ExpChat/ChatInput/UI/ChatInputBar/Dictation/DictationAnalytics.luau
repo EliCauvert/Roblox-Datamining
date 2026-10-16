@@ -1,23 +1,8 @@
-﻿local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
-local telemetryService = game:GetService("TelemetryService")
-local analytics = require(script:FindFirstAncestor("ExpChat").Parent.ExpChatShared).Analytics
-local rbxAnalyticsServiceExposePlaySessionIdEngineFeature = game:GetEngineFeature("RbxAnalyticsServiceExposePlaySessionId")
-local t = {
-	MicClick = "dictation_mic_click",
-	PermissionPrompt = "dictation_permission_prompt",
-	RecordingStart = "dictation_recording_start",
-	RecordingStop = "dictation_recording_stop",
-	VadStop = "dictation_vad_stop",
-	TranscriptionDone = "transcription_done",
-	TextEdit = "text_edit",
-	MessageSent = "dictation_message_sent",
-	FtuxShown = "dictation_ftux_shown",
-	FtuxDismiss = "dictation_ftux_dismiss",
-	MicToastShown = "dictation_mic_toast_shown",
-	MicToastActivated = "dictation_mic_toast_activated",
-	MicToastDismiss = "dictation_mic_toast_dismiss"
-}
-local t_1 = {
+﻿local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
+local TelemetryService = game:GetService("TelemetryService")
+local Analytics = require(script:FindFirstAncestor("ExpChat").Parent.ExpChatShared).Analytics
+local RbxAnalyticsServiceExposePlaySessionIdEngineFeature = game:GetEngineFeature("RbxAnalyticsServiceExposePlaySessionId")
+local Properties = {
 	SttMode = "stt_mode",
 	SttOutcome = "stt_outcome",
 	EntryPoint = "entry_point",
@@ -41,48 +26,13 @@ local t_1 = {
 	DismissReason = "dismiss_reason",
 	CanDeepLink = "can_deep_link"
 }
-local t_2 = { Standard = "standard", Continuous = "continuous" }
-local t_3 = { Tap = "tap", LongPress = "long_press" }
-local t_4 = {
-	UserManual = "user_manual",
-	TimeUp = "time_up",
-	AutoPause = "auto_pause",
-	AutoChunk = "auto_chunk"
-}
-local t_5 = {
-	Granted = "granted",
-	Denied = "denied",
-	AlreadyAllowed = "already_allowed"
-}
-local t_6 = {
-	Addition = "addition",
-	Deletion = "deletion",
-	FullClear = "full_clear",
-	Mixed = "mixed"
-}
-local t_7 = { Full = "stt_full", Partial = "stt_partial" }
-local t_8 = {
-	Visibility = "visibility",
-	UserInteraction = "user_interaction"
-}
 
-local function _()
-	-- upvalues: rbxAnalyticsServiceExposePlaySessionIdEngineFeature (ref), rbxAnalyticsService (ref)
-	return if rbxAnalyticsServiceExposePlaySessionIdEngineFeature then rbxAnalyticsService:GetPlaySessionId() else ""
+local function _() --[[ Line: 139 | Named "getPlaySessionId" ]]
+	-- upvalues: RbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), RbxAnalyticsService (copy)
+	return if RbxAnalyticsServiceExposePlaySessionIdEngineFeature then RbxAnalyticsService:GetPlaySessionId() else ""
 end
 
-local function fire(p1, p2)
-	-- upvalues: t_1 (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (ref), rbxAnalyticsService (ref), analytics (ref)
-	local var1 = if p2 then table.clone(p2) else {}
-	var1[t_1.PlaySessionId] = if rbxAnalyticsServiceExposePlaySessionIdEngineFeature then rbxAnalyticsService:GetPlaySessionId() else ""
-	
-	if var1[t_1.Timestamp] == nil then
-		var1[t_1.Timestamp] = os.clock()
-	end
-	analytics.FireClientAnalyticsWithEventName(p1, var1)
-end
-
-local t_9 = {
+local Counters = {
 	Started = {
 		eventName = "ExpChatDictationStarted",
 		description = "A user initiated a dictation session from the chat input mic. customFields: mode (standard/continuous), entry_point (tap/long_press).",
@@ -118,6 +68,13 @@ local t_9 = {
 		backends = { "RobloxTelemetryCounter" },
 		lastUpdated = { 2026, 9, 9 }
 	},
+	SafetyReminder = {
+		eventName = "ExpChatDictationSafetyReminder",
+		description = "A continuous-dictation message came back fully text-filtered and the once-per-session \"use kind words\" reminder was requested.",
+		links = "",
+		backends = { "RobloxTelemetryCounter" },
+		lastUpdated = { 2026, 9, 30 }
+	},
 	MessageSent = {
 		eventName = "ExpChatDictationMessageSent",
 		description = "A chat message produced via dictation was sent. customFields: mode.",
@@ -126,86 +83,137 @@ local t_9 = {
 		lastUpdated = { 2026, 9, 9 }
 	}
 }
-local var1 = telemetryService
+local TelemetryService1 = TelemetryService
 
-local _ = function(p1, p2)
-	-- upvalues: var1 (write)
-	if var1 then
-		var1:LogCounter(p1, { customFields = p2 }, 1)
+local _ = function(Config, CustomFields) --[[ Line: 215 | Named "logDictationCounter" ]]
+	-- upvalues: TelemetryService1 (ref)
+	if TelemetryService1 then
+		TelemetryService1:LogCounter(Config, { customFields = CustomFields }, 1)
 	end
 end
 
 return {
-	Events = t,
-	Properties = t_1,
-	Modes = t_2,
-	EntryPoints = t_3,
-	TriggerTypes = t_4,
-	PermissionStatuses = t_5,
-	EditTypes = t_6,
-	Outcomes = t_7,
-	DismissReasons = t_8,
-	Counters = t_9,
-	fire = fire,
-	withTelemetryService = function(p1)
-		-- upvalues: var1 (write), telemetryService (ref)
-		var1 = p1 or telemetryService
-	end,
-	reportStartedCounter = function(p1, p2)
-		-- upvalues: t_9 (ref), var1 (write)
-		local started = t_9.Started
-		local t = { mode = p1, entry_point = p2 }
+	Events = {
+		MicClick = "dictation_mic_click",
+		PermissionPrompt = "dictation_permission_prompt",
+		RecordingStart = "dictation_recording_start",
+		RecordingStop = "dictation_recording_stop",
+		VadStop = "dictation_vad_stop",
+		TranscriptionDone = "transcription_done",
+		TextEdit = "text_edit",
+		MessageSent = "dictation_message_sent",
+		FtuxShown = "dictation_ftux_shown",
+		FtuxDismiss = "dictation_ftux_dismiss",
+		MicToastShown = "dictation_mic_toast_shown",
+		MicToastActivated = "dictation_mic_toast_activated",
+		MicToastDismiss = "dictation_mic_toast_dismiss",
+		SafetyReminderTriggered = "dictation_safety_reminder_triggered"
+	},
+	Properties = Properties,
+	Modes = { Standard = "standard", Continuous = "continuous" },
+	EntryPoints = { Tap = "tap", LongPress = "long_press" },
+	TriggerTypes = {
+		UserManual = "user_manual",
+		TimeUp = "time_up",
+		AutoPause = "auto_pause",
+		AutoChunk = "auto_chunk",
+		SafetyIntervention = "safety_intervention"
+	},
+	PermissionStatuses = {
+		Granted = "granted",
+		Denied = "denied",
+		AlreadyAllowed = "already_allowed"
+	},
+	EditTypes = {
+		Addition = "addition",
+		Deletion = "deletion",
+		FullClear = "full_clear",
+		Mixed = "mixed"
+	},
+	Outcomes = { Full = "stt_full", Partial = "stt_partial" },
+	DismissReasons = {
+		Visibility = "visibility",
+		UserInteraction = "user_interaction"
+	},
+	Counters = Counters,
+	fire = function(p1, Tbl) --[[ Line: 146 ]]
+		-- upvalues: Properties (copy), RbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), RbxAnalyticsService (copy), Analytics (copy)
+		local Copy = if Tbl then table.clone(Tbl) else {}
+		Copy[Properties.PlaySessionId] = if RbxAnalyticsServiceExposePlaySessionIdEngineFeature then RbxAnalyticsService:GetPlaySessionId() else ""
 		
-		if var1 then
-			var1:LogCounter(started, { customFields = t }, 1)
+		if Copy[Properties.Timestamp] == nil then
+			Copy[Properties.Timestamp] = os.clock()
+		end
+		Analytics.FireClientAnalyticsWithEventName(p1, Copy)
+	end,
+	withTelemetryService = function(p1) --[[ Line: 211 ]]
+		-- upvalues: TelemetryService1 (ref), TelemetryService (copy)
+		TelemetryService1 = p1 or TelemetryService
+	end,
+	reportStartedCounter = function(Mode, Entry_point) --[[ Line: 221 ]]
+		-- upvalues: Counters (copy), TelemetryService1 (ref)
+		local Started = Counters.Started
+		local CustomFields = { mode = Mode, entry_point = Entry_point }
+		
+		if TelemetryService1 then
+			TelemetryService1:LogCounter(Started, { customFields = CustomFields }, 1)
 		end
 	end,
-	reportEndedCounter = function(p1, p2)
-		-- upvalues: t_9 (ref), var1 (write)
-		local ended = t_9.Ended
-		local t = { mode = p1, reason = p2 }
+	reportEndedCounter = function(Mode, Reason) --[[ Line: 225 ]]
+		-- upvalues: Counters (copy), TelemetryService1 (ref)
+		local Ended = Counters.Ended
+		local CustomFields = { mode = Mode, reason = Reason }
 		
-		if var1 then
-			var1:LogCounter(ended, { customFields = t }, 1)
+		if TelemetryService1 then
+			TelemetryService1:LogCounter(Ended, { customFields = CustomFields }, 1)
 		end
 	end,
-	reportVadStopCounter = function(p1)
-		-- upvalues: t_9 (ref), var1 (write)
-		local vadStop = t_9.VadStop
-		local t = { mode = p1 }
+	reportVadStopCounter = function(Mode) --[[ Line: 229 ]]
+		-- upvalues: Counters (copy), TelemetryService1 (ref)
+		local VadStop = Counters.VadStop
+		local CustomFields = { mode = Mode }
 		
-		if var1 then
-			var1:LogCounter(vadStop, { customFields = t }, 1)
+		if TelemetryService1 then
+			TelemetryService1:LogCounter(VadStop, { customFields = CustomFields }, 1)
 		end
 	end,
-	reportPermissionCounter = function(p1, p2)
-		-- upvalues: t_9 (ref), var1 (write)
-		local permission = t_9.Permission
-		local t = { mode = p1, result = p2 }
+	reportPermissionCounter = function(Mode, Result) --[[ Line: 233 ]]
+		-- upvalues: Counters (copy), TelemetryService1 (ref)
+		local Permission = Counters.Permission
+		local CustomFields = { mode = Mode, result = Result }
 		
-		if var1 then
-			var1:LogCounter(permission, { customFields = t }, 1)
+		if TelemetryService1 then
+			TelemetryService1:LogCounter(Permission, { customFields = CustomFields }, 1)
 		end
 	end,
-	reportTranscriptionCounter = function(p1, p2)
-		-- upvalues: t_9 (ref), var1 (write)
-		local transcription = t_9.Transcription
-		local t = {
+	reportTranscriptionCounter = function(p1, p2) --[[ Line: 237 ]]
+		-- upvalues: Counters (copy), TelemetryService1 (ref)
+		local Transcription = Counters.Transcription
+		local CustomFields = {
 			mode = p1 or "unknown",
 			result = if p2 then "success" else "failure"
 		}
 		
-		if var1 then
-			var1:LogCounter(transcription, { customFields = t }, 1)
+		if TelemetryService1 then
+			TelemetryService1:LogCounter(Transcription, { customFields = CustomFields }, 1)
 		end
 	end,
-	reportMessageSentCounter = function(p1)
-		-- upvalues: t_9 (ref), var1 (write)
-		local messageSent = t_9.MessageSent
-		local t = { mode = p1 }
+	reportMessageSentCounter = function(Mode) --[[ Line: 244 ]]
+		-- upvalues: Counters (copy), TelemetryService1 (ref)
+		local MessageSent = Counters.MessageSent
+		local CustomFields = { mode = Mode }
 		
-		if var1 then
-			var1:LogCounter(messageSent, { customFields = t }, 1)
+		if TelemetryService1 then
+			TelemetryService1:LogCounter(MessageSent, { customFields = CustomFields }, 1)
+		end
+	end,
+	reportSafetyReminderCounter = function() --[[ Line: 248 ]]
+		-- upvalues: Counters (copy), TelemetryService1 (ref)
+		local SafetyReminder = Counters.SafetyReminder
+		local CustomFields = {}
+		
+		if TelemetryService1 then
+			TelemetryService1:LogCounter(SafetyReminder, { customFields = CustomFields }, 1)
 		end
 	end
 }

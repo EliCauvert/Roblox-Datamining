@@ -1,102 +1,89 @@
-﻿local avatarExperienceAnalytics = script:FindFirstAncestor("AvatarExperienceAnalytics")
-local parent = avatarExperienceAnalytics.Parent
-local cryoModule = require(parent.Cryo)
-local _ = require(parent.AvatarExperienceCommon)
-local itemTypeEnum = require(parent.AvatarExperienceModel).Enums.ItemTypeEnum
-local getMarketplaceUnifiedItemTypeModule = require(avatarExperienceAnalytics.Utils.getMarketplaceUnifiedItemType)
-local getItemSelectionActionModule = require(avatarExperienceAnalytics.Utils.getItemSelectionAction)
-local getTimedOptionForItemDataModule = require(avatarExperienceAnalytics.Utils.getTimedOptionForItemData)
-local unifiedEventLoggingUtilsModule = require(avatarExperienceAnalytics.Utils.UnifiedEventLoggingUtils)
-local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
-local fFlagAXOrganicItemPosition = avatarExperienceFlagsModule.FFlagAXOrganicItemPosition
-local fFlagAXEditorRecommendedItemsUnifiedImpressions = avatarExperienceFlagsModule.FFlagAXEditorRecommendedItemsUnifiedImpressions
+﻿local AvatarExperienceAnalytics = script:FindFirstAncestor("AvatarExperienceAnalytics")
+local Parent = AvatarExperienceAnalytics.Parent
+local CryoModule = require(Parent.Cryo)
+local _ = require(Parent.AvatarExperienceCommon)
+local ItemTypeEnum = require(Parent.AvatarExperienceModel).Enums.ItemTypeEnum
+local GetMarketplaceUnifiedItemTypeModule = require(AvatarExperienceAnalytics.Utils.getMarketplaceUnifiedItemType)
+local GetItemSelectionActionModule = require(AvatarExperienceAnalytics.Utils.getItemSelectionAction)
+local GetTimedOptionForItemDataModule = require(AvatarExperienceAnalytics.Utils.getTimedOptionForItemData)
+local UnifiedEventLoggingUtilsModule = require(AvatarExperienceAnalytics.Utils.UnifiedEventLoggingUtils)
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
+local FFlagAXOrganicItemPosition = AvatarExperienceFlagsModule.FFlagAXOrganicItemPosition
+local FFlagAXEditorRecommendedItemsUnifiedImpressions = AvatarExperienceFlagsModule.FFlagAXEditorRecommendedItemsUnifiedImpressions
 
-local function isReadyToLog(p1)
-	-- upvalues: itemTypeEnum (ref)
-	local itemType = p1.itemType
-	local itemData = p1.itemData
-	local lookData = p1.lookData
-	local hydratedContent = p1.hydratedContent
-	local var1 = nil
-	local var2 = nil
-	local var3 = nil
+local function isReadyToLog(p1): boolean --[[ Line: 94 ]]
+	-- upvalues: ItemTypeEnum (copy)
+	local ItemType = p1.itemType
+	local ItemData = p1.itemData
+	local LookData = p1.lookData
+	local HydratedContent = p1.hydratedContent
+	local Enabled: boolean? = nil
+	local Enabled1: boolean? = nil
+	local Enabled2: boolean? = nil
 	
 	if p1.widgetAnalyticsInfo then
-		if itemType == itemTypeEnum.Look then
-			if lookData then
-				var1 = lookData.totalPrice ~= nil
-				var1 = nil
-			else
-				var1 = false
-			end
-			var2 = p1.widgetAnalyticsInfo.itemId ~= nil
-			var3 = true
-		elseif hydratedContent then
-			var1 = hydratedContent.price ~= nil
-			var1 = nil
+		if ItemType == ItemTypeEnum.Look then
+			Enabled = if LookData then LookData.totalPrice ~= nil else false
+			Enabled1 = p1.widgetAnalyticsInfo.itemId ~= nil
+			Enabled2 = true
 		else
-			var1 = false
+			Enabled = if HydratedContent then HydratedContent.price ~= nil else false
+			Enabled1 = p1.widgetAnalyticsInfo.itemId ~= nil
+			Enabled2 = true
 		end
-		var2 = p1.widgetAnalyticsInfo.itemId ~= nil
-		var3 = true
 	elseif p1.isOrganic then
-		if itemType == itemTypeEnum.Look then
-			if lookData then
-				var1 = lookData.totalPrice ~= nil
-				var1 = nil
-			else
-				var1 = false
-			end
-			var2 = p1.itemId ~= nil
-			var3 = true
+		if ItemType == ItemTypeEnum.Look then
+			Enabled = if LookData then LookData.totalPrice ~= nil else false
+			Enabled1 = p1.itemId ~= nil
+			Enabled2 = true
 		else
-			var1 = if itemData then if itemData.lowestPrice == nil then itemData.priceInRobux ~= nil else true else false
-			var2 = p1.itemId ~= nil
-			var3 = if itemData then if itemData.assetType == nil then itemData.bundleType ~= nil and itemData.bundleType ~= "AvatarAnimations" else true else false
+			Enabled = if ItemData then ItemData.lowestPrice ~= nil or ItemData.priceInRobux ~= nil else false
+			Enabled1 = p1.itemId ~= nil
+			Enabled2 = if ItemData then ItemData.assetType ~= nil or ItemData.bundleType ~= nil and ItemData.bundleType ~= "AvatarAnimations" else false
 		end
 	end
-	return var1 == true and (var2 == true and var3 == true)
+	return Enabled == true and Enabled1 == true and Enabled2 == true
 end
 
-local function buildFields(p1)
-	-- upvalues: fFlagAXOrganicItemPosition (ref), getMarketplaceUnifiedItemTypeModule (ref), getItemSelectionActionModule (ref), fFlagAXEditorRecommendedItemsUnifiedImpressions (ref), unifiedEventLoggingUtilsModule (ref), getTimedOptionForItemDataModule (ref), cryoModule (ref)
-	local itemData = p1.itemData
-	local lookData = p1.lookData
-	local hydratedContent = p1.hydratedContent
-	local assetAndBundleIds = p1.assetAndBundleIds
-	local isOrganic = p1.isOrganic
-	local widgetAnalyticsInfo = p1.widgetAnalyticsInfo
+local function buildFields(p1) --[[ Line: 130 ]]
+	-- upvalues: FFlagAXOrganicItemPosition (copy), GetMarketplaceUnifiedItemTypeModule (copy), GetItemSelectionActionModule (copy), FFlagAXEditorRecommendedItemsUnifiedImpressions (copy), UnifiedEventLoggingUtilsModule (copy), GetTimedOptionForItemDataModule (copy), CryoModule (copy)
+	local ItemData = p1.itemData
+	local LookData = p1.lookData
+	local HydratedContent = p1.hydratedContent
+	local AssetAndBundleIds = p1.assetAndBundleIds
+	local IsOrganic = p1.isOrganic
+	local WidgetAnalyticsInfo = p1.widgetAnalyticsInfo
 	
-	return cryoModule.Dictionary.join(widgetAnalyticsInfo or {
+	return CryoModule.Dictionary.join(WidgetAnalyticsInfo or {
 		itemId = p1.itemId,
-		assetType = if itemData then itemData.assetType else nil,
-		bundleType = if itemData then itemData.bundleType else nil,
+		assetType = if ItemData then ItemData.assetType else nil,
+		bundleType = if ItemData then ItemData.bundleType else nil,
 		gridPositionRow = p1.gridPositionRow,
 		gridPositionColumn = p1.gridPositionColumn,
-		itemPosition = if fFlagAXOrganicItemPosition then p1.itemPosition else nil
+		itemPosition = if FFlagAXOrganicItemPosition then p1.itemPosition else nil
 	}, {
-		itemType = getMarketplaceUnifiedItemTypeModule(p1.itemType),
-		action = getItemSelectionActionModule(p1.isSelected == true),
+		itemType = GetMarketplaceUnifiedItemTypeModule(p1.itemType),
+		action = GetItemSelectionActionModule(p1.isSelected == true),
 		category = p1.impressionsCategory,
 		subcategory = p1.impressionsSubcategory,
 		taxonomyId = p1.impressionsTaxonomyId,
-		section = if fFlagAXEditorRecommendedItemsUnifiedImpressions then p1.section else nil,
-		assetIds = if widgetAnalyticsInfo and assetAndBundleIds then assetAndBundleIds.assetIds else nil,
-		bundleIds = if widgetAnalyticsInfo and assetAndBundleIds then assetAndBundleIds.bundleIds else nil,
-		organicAssetIds = if isOrganic and assetAndBundleIds then assetAndBundleIds.assetIds else nil,
-		organicBundleIds = if isOrganic and assetAndBundleIds then assetAndBundleIds.bundleIds else nil,
-		organicLookType = if isOrganic and lookData and lookData.lookType then unifiedEventLoggingUtilsModule.formatLookTypeAttribute(lookData.lookType) else nil,
-		widgetLookType = if lookData and lookData.lookType and not isOrganic then unifiedEventLoggingUtilsModule.formatLookTypeAttribute(lookData.lookType) else nil,
-		organicItemPrice = if isOrganic then if lookData then lookData.totalPrice elseif itemData then itemData.lowestPrice or itemData.priceInRobux else nil else nil,
-		widgetItemPrice = if widgetAnalyticsInfo then if lookData then lookData.totalPrice elseif hydratedContent then hydratedContent.price else nil else nil,
-		organicTimedOption = if isOrganic and itemData then getTimedOptionForItemDataModule(itemData) else nil,
-		widgetTimedOption = if isOrganic or not itemData then nil else getTimedOptionForItemDataModule(itemData),
-		widgetAssetType = if isOrganic or not itemData then nil else itemData.assetType,
-		widgetBundleType = if isOrganic or not itemData then nil else itemData.bundleType
+		section = if FFlagAXEditorRecommendedItemsUnifiedImpressions then p1.section else nil,
+		assetIds = if WidgetAnalyticsInfo and AssetAndBundleIds then AssetAndBundleIds.assetIds else nil,
+		bundleIds = if WidgetAnalyticsInfo and AssetAndBundleIds then AssetAndBundleIds.bundleIds else nil,
+		organicAssetIds = if IsOrganic and AssetAndBundleIds then AssetAndBundleIds.assetIds else nil,
+		organicBundleIds = if IsOrganic and AssetAndBundleIds then AssetAndBundleIds.bundleIds else nil,
+		organicLookType = if IsOrganic and LookData and LookData.lookType then UnifiedEventLoggingUtilsModule.formatLookTypeAttribute(LookData.lookType) else nil,
+		widgetLookType = if LookData and LookData.lookType and not IsOrganic then UnifiedEventLoggingUtilsModule.formatLookTypeAttribute(LookData.lookType) else nil,
+		organicItemPrice = if IsOrganic then if LookData then LookData.totalPrice elseif ItemData then ItemData.lowestPrice or ItemData.priceInRobux else nil else nil,
+		widgetItemPrice = if WidgetAnalyticsInfo then if LookData then LookData.totalPrice elseif HydratedContent then HydratedContent.price else nil else nil,
+		organicTimedOption = if IsOrganic and ItemData then GetTimedOptionForItemDataModule(ItemData) else nil,
+		widgetTimedOption = if IsOrganic or not ItemData then nil else GetTimedOptionForItemDataModule(ItemData),
+		widgetAssetType = if IsOrganic or not ItemData then nil else ItemData.assetType,
+		widgetBundleType = if IsOrganic or not ItemData then nil else ItemData.bundleType
 	})
 end
 
-return function(p1)
-	-- upvalues: isReadyToLog (ref), buildFields (ref)
+return function(p1) --[[ Line: 199 | Named "getCatalogItemUnifiedLoggingFields" ]]
+	-- upvalues: isReadyToLog (copy), buildFields (copy)
 	return if isReadyToLog(p1) then buildFields(p1) else nil
 end

@@ -1,12 +1,13 @@
-﻿return function(p1, p2)
-	if p1 == nil or p2 == nil then
+﻿return function(List, LanguageCode) --[[ Line: 19 ]]
+	if List == nil or LanguageCode == nil then
 		return nil
 	end
-	for i, v in pairs(p1) do
-		local locale = v.locale
+	local Locale = nil
+	for _, value in pairs(List) do
+		Locale = value.locale
 		
-		if locale and locale.language and locale.language.languageCode == p2 then
-			return locale.language.name
+		if Locale and Locale.language and Locale.language.languageCode == LanguageCode then
+			return Locale.language.name
 		end
 	end
 	return nil

@@ -1,90 +1,88 @@
-﻿local roactModule = require(script.Parent.Parent.Parent.Parent.Parent.Roact)
-local layerCollectorContextModule = require(script.Parent.LayerCollectorContext)
-local guiService = game:GetService("GuiService")
-local layerCollectorProvider = roactModule.PureComponent:extend("LayerCollectorProvider")
+﻿local RoactModule = require(script.Parent.Parent.Parent.Parent.Parent.Roact)
+local LayerCollectorContextModule = require(script.Parent.LayerCollectorContext)
+local GuiService = game:GetService("GuiService")
+local LayerCollectorProvider = RoactModule.PureComponent:extend("LayerCollectorProvider")
 
-function layerCollectorProvider.init(p1)
-	-- upvalues: roactModule (ref)
-	p1.rootRef = roactModule.createRef()
+function LayerCollectorProvider.init(p1) --[[ Line: 11 ]]
+	-- upvalues: RoactModule (copy)
+	p1.rootRef = RoactModule.createRef()
 	p1.state = {
 		absoluteSize = Vector2.new(0, 0),
 		insets = { top = 0, left = 0, bottom = 0, right = 0 }
 	}
 end
 
-function layerCollectorProvider.watchLayerCollector(p1, p2)
-	-- upvalues: guiService (ref)
-	local absoluteSize = p2.AbsoluteSize
-	local vector2 = Vector2.new(0, 0)
-	local vector2_1 = Vector2.new(0, 0)
+function LayerCollectorProvider.watchLayerCollector(p1, ScreenGui) --[[ Line: 24 ]]
+	-- upvalues: GuiService (copy)
+	local AbsoluteSize = ScreenGui.AbsoluteSize
+	local _Vector2 = Vector2.new(0, 0)
+	local _Vector2_1 = Vector2.new(0, 0)
 	
-	if p2:IsA("ScreenGui") then
-		local ok, status = pcall(function()
-			-- upvalues: p2 (ref)
-			return p2.IgnoreGuiInset
+	if ScreenGui:IsA("ScreenGui") then
+		local Success, Result = pcall(function() --[[ Line: 30 ]]
+			-- upvalues: ScreenGui (copy)
+			return ScreenGui.IgnoreGuiInset
 		end)
 		
-		if ok and status then
-			local guiInset, guiInset_1 = guiService:GetGuiInset()
-			vector2 = guiInset
-			vector2_1 = guiInset_1
+		if Success and Result then
+			_Vector2, _Vector2_1 = GuiService:GetGuiInset()
 		end
 	end
 	p1:setState({
-		absoluteSize = absoluteSize,
+		absoluteSize = AbsoluteSize,
 		insets = {
-			top = vector2.Y,
-			left = vector2.X,
-			bottom = vector2_1.Y,
-			right = vector2_1.X
+			top = _Vector2.Y,
+			left = _Vector2.X,
+			bottom = _Vector2_1.Y,
+			right = _Vector2_1.X
 		}
 	})
-	p1.absoluteSizeConnection = p2:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
-		-- upvalues: absoluteSize (write), p2 (ref), p1 (ref), vector2 (write), vector2_1 (write)
-		absoluteSize = p2.AbsoluteSize
+	p1.absoluteSizeConnection = ScreenGui:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 48 ]]
+		-- upvalues: AbsoluteSize (ref), ScreenGui (copy), p1 (copy), _Vector2 (ref), _Vector2_1 (ref)
+		AbsoluteSize = ScreenGui.AbsoluteSize
 		p1:setState({
-			absoluteSize = absoluteSize,
+			absoluteSize = AbsoluteSize,
 			insets = {
-				top = vector2.Y,
-				left = vector2.X,
-				bottom = vector2_1.Y,
-				right = vector2_1.X
+				top = _Vector2.Y,
+				left = _Vector2.X,
+				bottom = _Vector2_1.Y,
+				right = _Vector2_1.X
 			}
 		})
 	end)
 end
 
-function layerCollectorProvider.didMount(p1)
-	local current = p1.rootRef.current
-	local layerCollector = current:FindFirstAncestorWhichIsA("LayerCollector")
+function LayerCollectorProvider.didMount(p1) --[[ Line: 64 ]]
+	local Current = p1.rootRef.current
+	local LayerCollector = Current:FindFirstAncestorWhichIsA("LayerCollector")
 	
-	if layerCollector == nil then
-		p1.ancestryConnection = current.AncestryChanged:Connect(function()
-			-- upvalues: layerCollector (write), current (ref), p1 (ref)
-			layerCollector = current:FindFirstAncestorWhichIsA("LayerCollector")
+	if LayerCollector == nil then
+		p1.ancestryConnection = Current.AncestryChanged:Connect(function() --[[ Line: 69 ]]
+			-- upvalues: LayerCollector (ref), Current (copy), p1 (copy)
+			LayerCollector = Current:FindFirstAncestorWhichIsA("LayerCollector")
 			
-			if layerCollector ~= nil then
+			if LayerCollector ~= nil then
 				p1.ancestryConnection:Disconnect()
 				p1.ancestryConnection = nil
-				p1:watchLayerCollector(layerCollector)
+				p1:watchLayerCollector(LayerCollector)
 			end
 		end)
 	else
-		p1:watchLayerCollector(layerCollector)
+		p1:watchLayerCollector(LayerCollector)
 	end
 end
 
-function layerCollectorProvider.render(p1)
-	-- upvalues: roactModule (ref), layerCollectorContextModule (ref)
-	return roactModule.createElement(layerCollectorContextModule.Provider, {
+function LayerCollectorProvider.render(p1) --[[ Line: 82 ]]
+	-- upvalues: RoactModule (copy), LayerCollectorContextModule (copy)
+	return RoactModule.createElement(LayerCollectorContextModule.Provider, {
 		value = {
 			absoluteSize = p1.state.absoluteSize,
 			insets = p1.state.insets
 		}
 	}, {
-		LayerCollectorChildRef = roactModule.createElement("Frame", { Visible = false, [roactModule.Ref] = p1.rootRef }),
-		Children = roactModule.createFragment(p1.props[roactModule.Children])
+		LayerCollectorChildRef = RoactModule.createElement("Frame", { Visible = false, [RoactModule.Ref] = p1.rootRef }),
+		Children = RoactModule.createFragment(p1.props[RoactModule.Children])
 	})
 end
 
-return layerCollectorProvider
+return LayerCollectorProvider

@@ -1,9 +1,9 @@
-﻿local gameDetailRodux = require(script:FindFirstAncestor("GameDetailRodux").Parent.Lumberyak).Logger.new(nil, "GameDetailRodux")
-gameDetailRodux:addSink({
-	maxLevel = gameDetailRodux.Levels.Warning,
-	log = function(_, p1, _)
+﻿local GameDetailRodux = require(script:FindFirstAncestor("GameDetailRodux").Parent.Lumberyak).Logger.new(nil, "GameDetailRodux")
+GameDetailRodux:addSink({
+	maxLevel = GameDetailRodux.Levels.Warning,
+	log = function(_, p1, _) --[[ Line: 10 ]]
 		print(p1)
 	end
 })
 
-return gameDetailRodux
+return GameDetailRodux

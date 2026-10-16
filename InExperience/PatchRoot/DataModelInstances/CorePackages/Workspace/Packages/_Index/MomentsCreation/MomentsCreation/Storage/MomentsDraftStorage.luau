@@ -1,114 +1,116 @@
-﻿local httpService = game:GetService("HttpService")
-local appStorageService = game:GetService("AppStorageService")
-local playersService = game:GetService("Players")
-local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local parent = momentsCreation.Parent
-local _ = require(parent.MomentsTypes)
-local momentsDraftSerializerModule = require(momentsCreation.Utils.MomentsDraftSerializer)
-local getLocalUserIdModule = require(momentsCreation.Utils.getLocalUserId)
-local failureReasonModule = require(momentsCreation.Enums.FailureReason)
-local var1 = require(parent.Loggers).Logger:new("Moments.DraftStorage")
-local var2 = game:DefineFastInt("MomentDraftTTLDays", 14) * 24 * 60 * 60 * 1000
+﻿local HttpService = game:GetService("HttpService")
+local AppStorageService = game:GetService("AppStorageService")
+local Players = game:GetService("Players")
+local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local Parent = MomentsCreation.Parent
+local _ = require(Parent.MomentsTypes)
+local MomentsDraftSerializerModule = require(MomentsCreation.Utils.MomentsDraftSerializer)
+local GetLocalUserIdModule = require(MomentsCreation.Utils.getLocalUserId)
+local FailureReasonModule = require(MomentsCreation.Enums.FailureReason)
+local MomentsDraftStorage = require(Parent.Loggers).Logger:new("Moments.DraftStorage")
+local ScaledMomentDraftTTLDays = game:DefineFastInt("MomentDraftTTLDays", 14) * 24 * 60 * 60 * 1000
 
 return {
-	save = function(p1)
-		-- upvalues: getLocalUserIdModule (ref), playersService (ref), var1 (ref), momentsDraftSerializerModule (ref), appStorageService (ref), httpService (ref)
-		local var3 = getLocalUserIdModule(playersService)
+	save = function(p1) --[[ Line: 47 ]]
+		-- upvalues: GetLocalUserIdModule (copy), Players (copy), MomentsDraftStorage (copy), MomentsDraftSerializerModule (copy), AppStorageService (copy), HttpService (copy)
+		local LocalUserIdModule = GetLocalUserIdModule(Players)
 		
-		if var3 == nil then
-			var1:debug("event=save_skipped reason=no_local_player")
+		if LocalUserIdModule == nil then
+			MomentsDraftStorage:debug("event=save_skipped reason=no_local_player")
 			
 			return false
 		end
-		local t = {
-			userId = var3,
+		local config = {
+			userId = LocalUserIdModule,
 			captureRef = p1.captureRef,
 			description = p1.description,
 			commentsEnabled = p1.commentsEnabled,
 			edits = p1.edits,
 			lastSaveTime = DateTime.now().UnixTimestampMillis
 		}
-		local ok, status = pcall(function()
-			-- upvalues: momentsDraftSerializerModule (copy), t (ref), appStorageService (copy), httpService (copy)
-			appStorageService:SetItem("MomentsDraftStorage", httpService:JSONEncode(momentsDraftSerializerModule.serialize(t)))
-			appStorageService:Flush()
+		local Success, Result = pcall(function() --[[ Line: 64 ]]
+			-- upvalues: MomentsDraftSerializerModule (upval), config (copy), AppStorageService (upval), HttpService (upval)
+			AppStorageService:SetItem("MomentsDraftStorage", HttpService:JSONEncode((MomentsDraftSerializerModule.serialize(config))))
+			AppStorageService:Flush()
 		end)
 		
-		if not ok then
-			var1:error("event=save_failed reason=app_storage_write_error error={}", tostring(status))
+		if not Success then
+			MomentsDraftStorage:error("event=save_failed reason=app_storage_write_error error={}", (tostring(Result)))
 		end
-		return ok
+		return Success
 	end,
-	load = function()
-		-- upvalues: getLocalUserIdModule (ref), playersService (ref), var1 (ref), appStorageService (ref), httpService (ref), failureReasonModule (ref), momentsDraftSerializerModule (ref), var2 (ref)
-		local var3 = getLocalUserIdModule(playersService)
+	load = function() --[[ Line: 84 ]]
+		-- upvalues: GetLocalUserIdModule (copy), Players (copy), MomentsDraftStorage (copy), AppStorageService (copy), HttpService (copy), FailureReasonModule (copy), MomentsDraftSerializerModule (copy), ScaledMomentDraftTTLDays (copy)
+		local LocalUserIdModule = GetLocalUserIdModule(Players)
 		
-		if var3 == nil then
-			var1:debug("event=load_failed reason=no_local_player")
+		if LocalUserIdModule == nil then
+			MomentsDraftStorage:debug("event=load_failed reason=no_local_player")
 			
 			return nil, nil
 		end
-		local ok, status = pcall(function()
-			-- upvalues: appStorageService (copy)
-			return appStorageService:GetItem("MomentsDraftStorage")
+		local Success, Result = pcall(function() --[[ Line: 91 ]]
+			-- upvalues: AppStorageService (upval)
+			return AppStorageService:GetItem("MomentsDraftStorage")
 		end)
 		
-		if not ok then
-			var1:debug("event=load_failed reason=app_storage_read_error")
+		if not Success then
+			MomentsDraftStorage:debug("event=load_failed reason=app_storage_read_error")
 			
 			return nil, nil
-		elseif status == nil or status == "" then
+		elseif Result == nil or Result == "" then
 			return nil, nil
+		else
+			local Success1, Result1 = pcall(function() --[[ Line: 105 ]]
+				-- upvalues: HttpService (upval), Result (copy)
+				return HttpService:JSONDecode(Result)
+			end)
+			
+			if not Success1 or type(Result1) ~= "table" then
+				pcall(function() --[[ Line: 78 ]]
+					-- upvalues: AppStorageService (upval)
+					AppStorageService:SetItem("MomentsDraftStorage", "")
+					AppStorageService:Flush()
+				end)
+				
+				return nil, FailureReasonModule.CorruptShape
+			end
+			local DeserializeResult = MomentsDraftSerializerModule.deserialize(Result1)
+			
+			if DeserializeResult == nil then
+				pcall(function() --[[ Line: 78 ]]
+					-- upvalues: AppStorageService (upval)
+					AppStorageService:SetItem("MomentsDraftStorage", "")
+					AppStorageService:Flush()
+				end)
+				
+				return nil, FailureReasonModule.CorruptShape
+			elseif DeserializeResult.userId ~= LocalUserIdModule then
+				pcall(function() --[[ Line: 78 ]]
+					-- upvalues: AppStorageService (upval)
+					AppStorageService:SetItem("MomentsDraftStorage", "")
+					AppStorageService:Flush()
+				end)
+				
+				return nil, FailureReasonModule.WrongUser
+			elseif ScaledMomentDraftTTLDays < DateTime.now().UnixTimestampMillis - DeserializeResult.lastSaveTime then
+				pcall(function() --[[ Line: 78 ]]
+					-- upvalues: AppStorageService (upval)
+					AppStorageService:SetItem("MomentsDraftStorage", "")
+					AppStorageService:Flush()
+				end)
+				
+				return nil, FailureReasonModule.ExpiredDraft
+			else
+				return DeserializeResult, nil
+			end
 		end
-		local ok_1, status_1 = pcall(function()
-			-- upvalues: httpService (copy), status (ref)
-			return httpService:JSONDecode(status)
-		end)
-		
-		if not ok_1 or type(status_1) ~= "table" then
-			pcall(function()
-				-- upvalues: appStorageService (copy)
-				appStorageService:SetItem("MomentsDraftStorage", "")
-				appStorageService:Flush()
-			end)
-			
-			return nil, failureReasonModule.CorruptShape
-		end
-		local var4 = momentsDraftSerializerModule.deserialize(status_1)
-		
-		if var4 == nil then
-			pcall(function()
-				-- upvalues: appStorageService (copy)
-				appStorageService:SetItem("MomentsDraftStorage", "")
-				appStorageService:Flush()
-			end)
-			
-			return nil, failureReasonModule.CorruptShape
-		elseif var4.userId ~= var3 then
-			pcall(function()
-				-- upvalues: appStorageService (copy)
-				appStorageService:SetItem("MomentsDraftStorage", "")
-				appStorageService:Flush()
-			end)
-			
-			return nil, failureReasonModule.WrongUser
-		elseif var2 < DateTime.now().UnixTimestampMillis - var4.lastSaveTime then
-			pcall(function()
-				-- upvalues: appStorageService (copy)
-				appStorageService:SetItem("MomentsDraftStorage", "")
-				appStorageService:Flush()
-			end)
-			
-			return nil, failureReasonModule.ExpiredDraft
-		end
-		return var4, nil
 	end,
-	clear = function()
-		-- upvalues: appStorageService (ref)
-		pcall(function()
-			-- upvalues: appStorageService (copy)
-			appStorageService:SetItem("MomentsDraftStorage", "")
-			appStorageService:Flush()
+	clear = function() --[[ Line: 77 ]]
+		-- upvalues: AppStorageService (copy)
+		pcall(function() --[[ Line: 78 ]]
+			-- upvalues: AppStorageService (upval)
+			AppStorageService:SetItem("MomentsDraftStorage", "")
+			AppStorageService:Flush()
 		end)
 	end
 }

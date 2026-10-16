@@ -1,49 +1,47 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local parent_2 = parent_1.Parent
-local core = parent_1.Core
-local roactModule = require(parent_2.Roact)
-local tModule = require(parent_2.t)
-local cryoModule = require(parent_2.Cryo)
-local fitFrameOnAxis = require(parent_2.FitFrame).FitFrameOnAxis
-local genericTextLabelModule = require(parent_1.Core.Text.GenericTextLabel.GenericTextLabel)
-local withStyleModule = require(parent_1.Core.Style.withStyle)
-local imagesModule = require(parent.ImageSet.Images)
-local imageSetComponentModule = require(core.ImageSet.ImageSetComponent)
-local useCursorModule = require(parent_1.App.SelectionCursor.useCursor)
-local UIBloxConfigModule = require(parent_1.UIBloxConfig)
-local uDim = UDim.new(0, 8)
-local alertTitle = roactModule.PureComponent:extend("AlertTitle")
-alertTitle.validateProps = tModule.strictInterface({
-	layoutOrder = tModule.optional(tModule.number),
-	margin = tModule.optional(tModule.table),
-	maxWidth = tModule.optional(tModule.number),
-	minWidth = tModule.optional(tModule.number),
-	screenSize = tModule.Vector2,
-	title = tModule.string,
-	titlePadding = tModule.optional(tModule.number),
-	titleContent = tModule.optional(tModule.callback),
-	onCloseClicked = tModule.optional(tModule.callback),
-	closeCursor = tModule.optional(tModule.table)
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local Parent2 = Parent1.Parent
+local RoactModule = require(Parent2.Roact)
+local TModule = require(Parent2.t)
+local CryoModule = require(Parent2.Cryo)
+local FitFrameOnAxis = require(Parent2.FitFrame).FitFrameOnAxis
+local GenericTextLabelModule = require(Parent1.Core.Text.GenericTextLabel.GenericTextLabel)
+local WithStyleModule = require(Parent1.Core.Style.withStyle)
+local ImagesModule = require(Parent.ImageSet.Images)
+local ImageSetComponentModule = require(Parent1.Core.ImageSet.ImageSetComponent)
+local UseCursorModule = require(Parent1.App.SelectionCursor.useCursor)
+local _UDim = UDim.new(0, 8)
+local AlertTitle = RoactModule.PureComponent:extend("AlertTitle")
+AlertTitle.validateProps = TModule.strictInterface({
+	layoutOrder = TModule.optional(TModule.number),
+	margin = TModule.optional(TModule.table),
+	maxWidth = TModule.optional(TModule.number),
+	minWidth = TModule.optional(TModule.number),
+	screenSize = TModule.Vector2,
+	title = TModule.string,
+	titlePadding = TModule.optional(TModule.number),
+	titleContent = TModule.optional(TModule.callback),
+	onCloseClicked = TModule.optional(TModule.callback),
+	closeCursor = TModule.optional(TModule.table)
 })
-alertTitle.defaultProps = {
+AlertTitle.defaultProps = {
 	maxWidth = 400,
 	minWidth = 272,
 	titlePadding = 12,
 	margin = { top = 0, bottom = 24, left = 24, right = 24 }
 }
 
-function alertTitle.render(p1)
-	-- upvalues: withStyleModule (ref), UIBloxConfigModule (ref), roactModule (ref), fitFrameOnAxis (ref), imageSetComponentModule (ref), imagesModule (ref), genericTextLabelModule (ref)
-	local var1 = math.clamp(p1.props.screenSize.X - p1.props.margin.left - p1.props.margin.right, p1.props.minWidth, p1.props.maxWidth) - p1.props.margin.left - p1.props.margin.right
+function AlertTitle.render(p1) --[[ Line: 57 ]]
+	-- upvalues: WithStyleModule (copy), RoactModule (copy), FitFrameOnAxis (copy), ImageSetComponentModule (copy), ImagesModule (copy), GenericTextLabelModule (copy)
+	local ClampedValueDelta = math.clamp(p1.props.screenSize.X - p1.props.margin.left - p1.props.margin.right, p1.props.minWidth, p1.props.maxWidth) - p1.props.margin.left - p1.props.margin.right
 	
-	return withStyleModule(function(p2)
-		-- upvalues: UIBloxConfigModule (copy), roactModule (copy), fitFrameOnAxis (copy), p1 (ref), imageSetComponentModule (copy), imagesModule (copy), genericTextLabelModule (copy), var1 (ref)
-		local theme = p2.Theme
-		local var2 = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p2.Tokens.Typography.HeadingSmall else p2.Tokens.Semantic.Typography.Header
-		local fontSize = var2.FontSize
+	return WithStyleModule(function(p2) --[[ Line: 65 ]]
+		-- upvalues: RoactModule (upval), FitFrameOnAxis (upval), p1 (copy), ImageSetComponentModule (upval), ImagesModule (upval), GenericTextLabelModule (upval), ClampedValueDelta (copy)
+		local Theme = p2.Theme
+		local HeadingSmall = p2.Tokens.Typography.HeadingSmall
+		local FontSize: number = HeadingSmall.FontSize
 		
-		return roactModule.createElement(fitFrameOnAxis, {
+		return RoactModule.createElement(FitFrameOnAxis, {
 			BackgroundTransparency = 1,
 			contentPadding = UDim.new(0, 8),
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
@@ -51,59 +49,59 @@ function alertTitle.render(p1)
 			margin = { top = 12, bottom = 0, left = 0, right = 0 },
 			minimumSize = UDim2.new(1, 0, 0, 0)
 		}, {
-			TitleContent = p1.props.titleContent and roactModule.createElement(fitFrameOnAxis, {
+			TitleContent = p1.props.titleContent and RoactModule.createElement(FitFrameOnAxis, {
 				BackgroundTransparency = 1,
 				LayoutOrder = 0,
 				minimumSize = UDim2.new(1, 0, 0, 0)
 			}, { Content = p1.props.titleContent() }),
-			TitleArea = roactModule.createElement(fitFrameOnAxis, {
+			TitleArea = RoactModule.createElement(FitFrameOnAxis, {
 				BackgroundTransparency = 1,
 				LayoutOrder = 1,
 				contentPadding = UDim.new(0, 12),
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
 				minimumSize = UDim2.new(1, 0, 0, 0)
 			}, {
-				Title = if p1.props.onCloseClicked then roactModule.createElement("Frame", {
+				Title = if p1.props.onCloseClicked then RoactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 1,
-					Size = UDim2.new(1, 0, 0, fontSize)
+					Size = UDim2.new(1, 0, 0, FontSize)
 				}, {
-					CloseButton = roactModule.createElement(imageSetComponentModule.Button, {
+					CloseButton = RoactModule.createElement(ImageSetComponentModule.Button, {
 						BackgroundTransparency = 1,
 						Size = UDim2.new(0, 36, 0, 36),
-						Image = imagesModule["icons/navigation/close"],
-						ImageColor3 = theme.IconEmphasis.Color,
-						ImageTransparency = theme.IconEmphasis.Transparency,
+						Image = ImagesModule["icons/navigation/close"],
+						ImageColor3 = Theme.IconEmphasis.Color,
+						ImageTransparency = Theme.IconEmphasis.Transparency,
 						AnchorPoint = Vector2.new(0, 0.5),
 						Position = UDim2.new(0, 0, 0.5, 0),
-						[roactModule.Event.Activated] = p1.props.onCloseClicked,
+						[RoactModule.Event.Activated] = p1.props.onCloseClicked,
 						SelectionImageObject = p1.props.closeCursor
 					}),
-					TitleText = roactModule.createElement(genericTextLabelModule, {
+					TitleText = RoactModule.createElement(GenericTextLabelModule, {
 						LayoutOrder = 1,
 						AnchorPoint = Vector2.new(0.5, 0.5),
 						Position = UDim2.new(0.5, 0, 0.5, 0),
-						colorStyle = theme.TextEmphasis,
-						fontStyle = var2,
-						Size = UDim2.new(1, -(2 * (36 + p1.props.titlePadding)), 0, fontSize * 2),
+						colorStyle = Theme.TextEmphasis,
+						fontStyle = HeadingSmall,
+						Size = UDim2.new(1, -(2 * (36 + p1.props.titlePadding)), 0, FontSize * 2),
 						Text = p1.props.title,
-						TextSize = fontSize,
+						TextSize = FontSize,
 						TextTruncate = Enum.TextTruncate.AtEnd
 					})
-				}) else roactModule.createElement(genericTextLabelModule, {
+				}) else RoactModule.createElement(GenericTextLabelModule, {
 					LayoutOrder = 1,
-					colorStyle = theme.TextEmphasis,
-					fontStyle = var2,
-					maxSize = Vector2.new(var1, fontSize * 2),
+					colorStyle = Theme.TextEmphasis,
+					fontStyle = HeadingSmall,
+					maxSize = Vector2.new(ClampedValueDelta, FontSize * 2),
 					Text = p1.props.title,
-					TextSize = fontSize,
+					TextSize = FontSize,
 					TextTruncate = Enum.TextTruncate.AtEnd
 				}),
-				Underline = roactModule.createElement("Frame", {
+				Underline = RoactModule.createElement("Frame", {
 					BorderSizePixel = 0,
 					LayoutOrder = 2,
-					BackgroundColor3 = theme.Divider.Color,
-					BackgroundTransparency = theme.Divider.Transparency,
+					BackgroundColor3 = Theme.Divider.Color,
+					BackgroundTransparency = Theme.Divider.Transparency,
 					Size = UDim2.new(1, 0, 0, 1)
 				})
 			})
@@ -111,7 +109,7 @@ function alertTitle.render(p1)
 	end)
 end
 
-return function(p1)
-	-- upvalues: useCursorModule (ref), uDim (ref), roactModule (ref), alertTitle (ref), cryoModule (ref)
-	return roactModule.createElement(alertTitle, cryoModule.Dictionary.join(p1, { closeCursor = useCursorModule(uDim) }))
+return function(p1) --[[ Line: 149 | Named "AlertTitleFunctionalWrapper" ]]
+	-- upvalues: UseCursorModule (copy), _UDim (copy), RoactModule (copy), AlertTitle (copy), CryoModule (copy)
+	return RoactModule.createElement(AlertTitle, CryoModule.Dictionary.join(p1, { closeCursor = UseCursorModule(_UDim) }))
 end

@@ -1,34 +1,34 @@
-﻿local telemetryService = game:GetService("TelemetryService")
-local parent = script:FindFirstAncestor("DiscoveryAnalytics").Parent
-local tModule = require(parent.t)
-local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventErrorLogger
-local fFlagLuaAppIedpSendPoints = require(parent.SharedFlags).FFlagLuaAppIedpSendPoints
-local var1 = tModule.strictInterface({
-	targetUniverseId = tModule.string,
-	gameInfoRetrievalStatus = tModule.string,
-	playabilityRetrievalStatus = tModule.string,
-	targetRootPlaceId = tModule.optional(tModule.number),
-	isPlayable = tModule.optional(tModule.boolean),
-	playabilityStatus = tModule.optional(tModule.string),
-	gameInfoErrorType = tModule.optional(tModule.string)
+﻿local TelemetryService = game:GetService("TelemetryService")
+local Parent = script:FindFirstAncestor("DiscoveryAnalytics").Parent
+local TModule = require(Parent.t)
+local DiscoveryEventErrorLogger = require(Parent.DiscoveryUtils).DiscoveryEventErrorLogger
+local FFlagLuaAppIedpSendPoints = require(Parent.SharedFlags).FFlagLuaAppIedpSendPoints
+local StrictInterfaceResult = TModule.strictInterface({
+	targetUniverseId = TModule.string,
+	gameInfoRetrievalStatus = TModule.string,
+	playabilityRetrievalStatus = TModule.string,
+	targetRootPlaceId = TModule.optional(TModule.number),
+	isPlayable = TModule.optional(TModule.boolean),
+	playabilityStatus = TModule.optional(TModule.string),
+	gameInfoErrorType = TModule.optional(TModule.string)
 })
-local t = {
+local config = {
 	eventName = "inExperienceDetailsPromptLoaded",
 	description = "Fires when the in-experience details prompt gameInfo and playability are loaded",
-	backends = if fFlagLuaAppIedpSendPoints then { "EventIngest", "Points" } else { "EventIngest" },
+	backends = if FFlagLuaAppIedpSendPoints then { "EventIngest", "Points" } else { "EventIngest" },
 	throttlingPercentage = game:DefineFastInt("InExperienceDetailsPromptLoadedHundredthsPercent", 0),
-	lastUpdated = if fFlagLuaAppIedpSendPoints then { 25, 11, 19 } else { 25, 11, 11 }
+	lastUpdated = if FFlagLuaAppIedpSendPoints then { 25, 11, 19 } else { 25, 11, 11 }
 }
 
-return function(p1)
-	-- upvalues: var1 (ref), discoveryEventErrorLogger (ref), telemetryService (ref), t (ref)
-	local var2, var3 = var1(p1)
+return function(CustomFields) --[[ Line: 30 | Named "fireInExperienceDetailsPromptLoadedEvent" ]]
+	-- upvalues: StrictInterfaceResult (copy), DiscoveryEventErrorLogger (copy), TelemetryService (copy), config (copy)
+	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(CustomFields)
 	
-	if not var2 then
-		discoveryEventErrorLogger.reportError("InExperienceDetailsPromptLoadedInvalidInterface", var3)
+	if not StrictInterfaceResultResult then
+		DiscoveryEventErrorLogger.reportError("InExperienceDetailsPromptLoadedInvalidInterface", StrictInterfaceResultResult2)
 	end
-	telemetryService:LogEvent(t, {
+	TelemetryService:LogEvent(config, {
 		standardizedFields = { "addUniverseId", "addOSInfo" },
-		customFields = p1
+		customFields = CustomFields
 	})
 end

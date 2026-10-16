@@ -1,62 +1,61 @@
-﻿local parent = script:FindFirstAncestor("SplitPane").Parent
-local appSplitViewModule = require(parent.AppSplitView)
-local navigationModule = require(parent.Navigation)
-local constants = require(parent.NavigationRodux).Constants
+﻿local Parent = script:FindFirstAncestor("SplitPane").Parent
 local _ = require(script.Parent.Parent.Hooks.useSplitLayoutStatus)
-local getCurrentNavigationState = navigationModule.getCurrentNavigationState
-local supportPaneMode = appSplitViewModule.Enums.SupportPaneMode
-local tempRnSwitchNavigatorName = constants.TempRnSwitchNavigatorName
-local t = { isOnScreen = false }
+local GetCurrentNavigationStateFunction = require(Parent.Navigation).getCurrentNavigationState
+local SupportPaneMode = require(Parent.AppSplitView).Enums.SupportPaneMode
+local TempRnSwitchNavigatorName = require(Parent.NavigationRodux).Constants.TempRnSwitchNavigatorName
+local config = { isOnScreen = false }
 
-local function _(p1)
-	-- upvalues: tempRnSwitchNavigatorName (ref), getCurrentNavigationState (ref)
-	local descriptor = p1.descriptor
-	local state = descriptor.state
+local function _(p1) --[[ Line: 20 | Named "onScreenRouteKeyForScreen" ]]
+	-- upvalues: TempRnSwitchNavigatorName (copy), GetCurrentNavigationStateFunction (copy)
+	local Descriptor = p1.descriptor
+	local State = Descriptor.state
 	
-	if state == nil or state.routeName ~= tempRnSwitchNavigatorName then
-		return descriptor.key
+	if State == nil or State.routeName ~= TempRnSwitchNavigatorName then
+		return Descriptor.key
+	else
+		local CurrentNavigationState = GetCurrentNavigationStateFunction(State)
+		
+		return if CurrentNavigationState == nil or CurrentNavigationState.key == nil then Descriptor.key else CurrentNavigationState.key
 	end
-	local var1 = getCurrentNavigationState(state)
-	
-	return if var1 == nil or var1.key == nil then descriptor.key else var1.key
 end
 
-return function(p1, p2, p3)
-	-- upvalues: supportPaneMode (ref), t (ref), tempRnSwitchNavigatorName (ref), getCurrentNavigationState (ref)
-	local var1 = false
-	local contentTopCandidate = nil
-	local var2 = nil
-	local supportPaneMode_1 = nil
+return function(p1, ContentTopCandidate, p2) --[[ Line: 30 | Named "getOnScreenContextValue" ]]
+	-- upvalues: SupportPaneMode (copy), config (copy), TempRnSwitchNavigatorName (copy), GetCurrentNavigationStateFunction (copy)
+	local v1 = false
+	local ContentTopCandidate1 = nil
+	local PaneIndice = nil
+	local SupportPaneMode1 = nil
 	
 	if p1 ~= nil then
-		supportPaneMode_1 = p1.supportPaneMode
+		SupportPaneMode1 = p1.supportPaneMode
 		
 		if p1.isRootAppStack and p1.isSplitEnabled then
-			contentTopCandidate = p1.contentTopCandidate or p1.splitPrimaryIndex
+			ContentTopCandidate1 = p1.contentTopCandidate or p1.splitPrimaryIndex
 			
 			if p1.isRouteActiveOnPane then
-				var2 = p1.paneIndices[#p1.paneIndices]
+				PaneIndice = p1.paneIndices[#p1.paneIndices]
 			end
-			var1 = if contentTopCandidate == nil then var2 ~= nil else true
+			v1 = ContentTopCandidate1 ~= nil or PaneIndice ~= nil
 		end
 	end
-	if not var1 then
+	if not v1 then
 		return nil
-	elseif not (if p2 ~= var2 then p2 == contentTopCandidate and supportPaneMode_1 ~= supportPaneMode.Expanded else true) then
-		return t
 	end
-	local var3
-	local t_1 = { isOnScreen = true }
-	local descriptor = p3.descriptor
-	local state = descriptor.state
+	if ContentTopCandidate ~= PaneIndice and (ContentTopCandidate ~= ContentTopCandidate1 or SupportPaneMode1 == SupportPaneMode.Expanded) then
+		return config
+	end
+	local config1 = { isOnScreen = true }
+	local Descriptor = p2.descriptor
+	local State = Descriptor.state
+	local Key = nil
 	
-	if state == nil or state.routeName ~= tempRnSwitchNavigatorName then
-		var3 = descriptor.key
+	if State == nil or State.routeName ~= TempRnSwitchNavigatorName then
+		Key = Descriptor.key
 	else
-		local var4 = getCurrentNavigationState(state)
-		var3 = if var4 == nil or var4.key == nil then descriptor.key else var4.key
+		local CurrentNavigationState = GetCurrentNavigationStateFunction(State)
+		Key = if CurrentNavigationState == nil or CurrentNavigationState.key == nil then Descriptor.key else CurrentNavigationState.key
 	end
-	t_1.currentRouteKey = var3
+	config1.currentRouteKey = Key
 	
-	return t_1
+	return config1
 end

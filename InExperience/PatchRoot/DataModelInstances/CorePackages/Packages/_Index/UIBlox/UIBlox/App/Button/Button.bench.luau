@@ -1,18 +1,15 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent.Parent
-local parent_2 = parent_1.Parent
-local reactModule = require(parent_2.React)
-local buttonModule = require(parent.Button)
-local describe = require(parent_2.Dev.JestGlobals).describe
-local benchmarksModule = require(parent_1.Utility.benchmarks)
-local mountComponentTimes = benchmarksModule.mountComponentTimes
-local scrollComponentTimes = benchmarksModule.scrollComponentTimes
-local var1 = reactModule.createElement(buttonModule, {
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent.Parent
+local Parent2 = Parent1.Parent
+local BenchmarksModule = require(Parent1.Utility.benchmarks)
+local MountComponentTimesFunction = BenchmarksModule.mountComponentTimes
+local ScrollComponentTimesFunction = BenchmarksModule.scrollComponentTimes
+local Element = require(Parent2.React).createElement(require(Parent.Button), {
 	text = "Button",
-	onActivated = function() end
+	onActivated = function() --[[ Line: 17 ]] end
 })
-describe("Button", function()
-	-- upvalues: mountComponentTimes (ref), var1 (ref), scrollComponentTimes (ref)
-	mountComponentTimes(var1, 100, "Button")
-	scrollComponentTimes(var1, 100, "Button")
+require(Parent2.Dev.JestGlobals).describe("Button", function() --[[ Line: 21 ]]
+	-- upvalues: MountComponentTimesFunction (copy), Element (copy), ScrollComponentTimesFunction (copy)
+	MountComponentTimesFunction(Element, 100, "Button")
+	ScrollComponentTimesFunction(Element, 100, "Button")
 end)

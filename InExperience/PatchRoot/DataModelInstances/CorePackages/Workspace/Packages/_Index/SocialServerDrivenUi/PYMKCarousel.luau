@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.PYMKCarousel.PYMKCarousel)
+﻿return (require(script.Parent.Parent.Parent._Index.PYMKCarousel.PYMKCarousel))

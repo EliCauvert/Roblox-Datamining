@@ -1,20 +1,20 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local set = require(expChat.Parent.llama).Set
-local getOtherDisplayNameInWhisperChannelModule = require(expChat.getOtherDisplayNameInWhisperChannel)
-local t = {}
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local Set = require(ExpChat.Parent.llama).Set
+local GetOtherDisplayNameInWhisperChannelModule = require(ExpChat.getOtherDisplayNameInWhisperChannel)
+local AddResult = {}
 
-return function(p1, p2)
-	-- upvalues: set (ref), t (write), getOtherDisplayNameInWhisperChannelModule (ref)
-	if p1.TextChannel and string.find(p1.TextChannel.Name, "^RBXWhisper") and not set.has(t, p1.TextChannel) then
-		local var1 = getOtherDisplayNameInWhisperChannelModule(p1.TextChannel, p2)
+return function(p1, p2) --[[ Line: 14 ]]
+	-- upvalues: Set (copy), AddResult (ref), GetOtherDisplayNameInWhisperChannelModule (copy)
+	if p1.TextChannel and string.find(p1.TextChannel.Name, "^RBXWhisper") and not Set.has(AddResult, p1.TextChannel) then
+		local OtherDisplayNameInWhisperChannelModule = GetOtherDisplayNameInWhisperChannelModule(p1.TextChannel, p2)
 		
-		if var1 then
-			t = set.add(t, p1.TextChannel)
+		if OtherDisplayNameInWhisperChannelModule then
+			AddResult = Set.add(AddResult, p1.TextChannel)
 			
 			return {
 				key = "CoreScripts.TextChat.Notification.WhisperChat.Created",
 				metadata = "Roblox.Whisper.Welcome.Sent",
-				args = { RBX_NAME = var1 }
+				args = { RBX_NAME = OtherDisplayNameInWhisperChannelModule }
 			}
 		end
 	end

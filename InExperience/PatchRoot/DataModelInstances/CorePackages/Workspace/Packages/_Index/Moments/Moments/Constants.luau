@@ -1,5 +1,5 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local recommendationConfigTypeModule = require(moments.Enums.RecommendationConfigType)
+﻿local Moments = script:FindFirstAncestor("Moments")
+local RecommendationConfigTypeModule = require(Moments.Enums.RecommendationConfigType)
 
 return {
 	PointerPanVerticalDominatesRatio = 1.25,
@@ -15,19 +15,19 @@ return {
 	ZIndex = { Toasts = 10, Dialog = 20 },
 	MaxSize = { BottomUI = Vector2.new(600, 1e999) },
 	RecommendationConfig = {
-		[recommendationConfigTypeModule.Default] = { ConfigName = "RecentlyAdded", LocationId = "Trending" },
-		[recommendationConfigTypeModule.Trending] = { ConfigName = "MaximizeJoins", LocationId = "Trending" },
-		[recommendationConfigTypeModule.PlayerOwnedItems] = {
+		[RecommendationConfigTypeModule.Default] = { ConfigName = "RecentlyAdded", LocationId = "Trending" },
+		[RecommendationConfigTypeModule.Trending] = { ConfigName = "MaximizeJoins", LocationId = "Trending" },
+		[RecommendationConfigTypeModule.PlayerOwnedItems] = {
 			ConfigName = "PlayerOwnedItems",
 			LocationId = "My Moments"
 		},
-		[recommendationConfigTypeModule.PlayerSpecific] = {
+		[RecommendationConfigTypeModule.PlayerSpecific] = {
 			ConfigName = "PlayerSpecific",
 			LocationId = "User Profile"
 		}
 	},
 	ImmersiveFeedKind = { Trending = "trending", User = "user" },
-	DefaultReaction = require(moments.Parent.MomentsTypes).Enums.ReactionType.ThumbsUp,
+	DefaultReaction = require(Moments.Parent.MomentsTypes).Enums.ReactionType.ThumbsUp,
 	PlaceholderTracingId = {
 		DeepLinked = "deep-linked-placeholder",
 		RecentlyUploaded = "recently-uploaded-placeholder"

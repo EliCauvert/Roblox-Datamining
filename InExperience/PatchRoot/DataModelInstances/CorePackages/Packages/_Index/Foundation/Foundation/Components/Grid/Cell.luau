@@ -1,1 +1,1 @@
-﻿return require(script.GridCell)
+﻿return (require(script.GridCell))

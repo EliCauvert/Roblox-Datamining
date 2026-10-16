@@ -1,4 +1,4 @@
-﻿local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-local corePackagesService = game:GetService("CorePackages")
+﻿local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+local CorePackages = game:GetService("CorePackages")
 
-return if require(corePackagesService.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled then true elseif require(robloxGui.Modules.Flags.FFlagEnableSpatialRobloxGui) then require(corePackagesService.Workspace.Packages.IxpServiceWrapper).IXPServiceWrapper:GetLayerData(require(robloxGui.Modules.Flags.FStringSpatialRobloxUIIXPLayerName))[require(robloxGui.Modules.Flags.FStringSpatialRobloxUIIXPUITypeVariableName)] == require(robloxGui.Modules.Flags.FStringSpatialRobloxUIIXPSpatialUIVariantValue) else false
+return if require(CorePackages.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled then true elseif require(RobloxGui.Modules.Flags.FFlagEnableSpatialRobloxGui) then require(CorePackages.Workspace.Packages.IxpServiceWrapper).IXPServiceWrapper:GetLayerData((require(RobloxGui.Modules.Flags.FStringSpatialRobloxUIIXPLayerName)))[require(RobloxGui.Modules.Flags.FStringSpatialRobloxUIIXPUITypeVariableName)] == require(RobloxGui.Modules.Flags.FStringSpatialRobloxUIIXPSpatialUIVariantValue) else false

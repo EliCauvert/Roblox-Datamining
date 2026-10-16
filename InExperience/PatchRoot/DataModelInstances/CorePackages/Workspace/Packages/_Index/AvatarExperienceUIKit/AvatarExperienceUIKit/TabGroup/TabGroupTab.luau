@@ -1,43 +1,43 @@
-﻿local avatarExperienceUIKit = script:FindFirstAncestor("AvatarExperienceUIKit")
-local parent = avatarExperienceUIKit.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local getFixedTabHeightModule = require(avatarExperienceUIKit.Utils.getFixedTabHeight)
-local fFlagAXCategoryMenuVisualFixes = require(parent.AvatarExperienceFlags).FFlagAXCategoryMenuVisualFixes
-local text = foundationModule.Text
-local view = foundationModule.View
-local t = { Transparency = 1 }
-local t_1 = {
+﻿local AvatarExperienceUIKit = script:FindFirstAncestor("AvatarExperienceUIKit")
+local Parent = AvatarExperienceUIKit.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local GetFixedTabHeightModule = require(AvatarExperienceUIKit.Utils.getFixedTabHeight)
+local FFlagAXCategoryMenuVisualFixes = require(Parent.AvatarExperienceFlags).FFlagAXCategoryMenuVisualFixes
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local BackgroundStyle = { Transparency = 1 }
+local config = {
 	FillDirection = Enum.FillDirection.Vertical,
 	HorizontalAlignment = Enum.HorizontalAlignment.Left,
 	VerticalAlignment = Enum.VerticalAlignment.Center,
 	SortOrder = Enum.SortOrder.LayoutOrder
 }
-local t_2 = { Transparency = 1 }
+local BackgroundStyle1 = { Transparency = 1 }
 
-return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useTokens (ref), reactModule (ref), view (ref), t (ref), fFlagAXCategoryMenuVisualFixes (ref), getFixedTabHeightModule (ref), t_1 (ref), text (ref), t_2 (ref)
-	local var1 = useTokens()
-	local padding = p1.padding or Vector2.new(var1.Padding.Small, var1.Padding.Medium)
+return (ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 48 | Named "TabGroupTabComponent" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), BackgroundStyle (copy), FFlagAXCategoryMenuVisualFixes (copy), GetFixedTabHeightModule (copy), config (copy), Text (copy), BackgroundStyle1 (copy)
+	local UseTokensResult = UseTokensFunction()
+	local Padding = Frame.padding or Vector2.new(UseTokensResult.Padding.Small, UseTokensResult.Padding.Medium)
 	
-	return reactModule.createElement(view, {
-		ref = p2,
-		onActivated = p1.onActivated,
-		backgroundStyle = t,
-		padding = if fFlagAXCategoryMenuVisualFixes then Vector2.new(padding.X, 0) else padding,
-		Size = if fFlagAXCategoryMenuVisualFixes then UDim2.fromOffset(0, getFixedTabHeightModule(var1)) else UDim2.fromScale(0, 0),
-		AutomaticSize = if fFlagAXCategoryMenuVisualFixes then Enum.AutomaticSize.X else Enum.AutomaticSize.XY,
-		layout = if fFlagAXCategoryMenuVisualFixes then t_1 else nil,
-		LayoutOrder = p1.LayoutOrder
+	return ReactModule.createElement(View, {
+		ref = Ref,
+		onActivated = Frame.onActivated,
+		backgroundStyle = BackgroundStyle,
+		padding = if FFlagAXCategoryMenuVisualFixes then Vector2.new(Padding.X, 0) else Padding,
+		Size = if FFlagAXCategoryMenuVisualFixes then UDim2.fromOffset(0, GetFixedTabHeightModule(UseTokensResult)) else UDim2.fromScale(0, 0),
+		AutomaticSize = if FFlagAXCategoryMenuVisualFixes then Enum.AutomaticSize.X else Enum.AutomaticSize.XY,
+		layout = if FFlagAXCategoryMenuVisualFixes then config else nil,
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Text = reactModule.createElement(text, {
-			Text = p1.text,
-			textStyle = if p1.isActive then p1.activeTextStyle or var1.Color.Content.Emphasis else p1.textStyle or var1.Color.Content.Muted,
-			fontStyle = p1.fontStyle or var1.Typography.TitleLarge,
+		Text = ReactModule.createElement(Text, {
+			Text = Frame.text,
+			textStyle = if Frame.isActive then Frame.activeTextStyle or UseTokensResult.Color.Content.Emphasis else Frame.textStyle or UseTokensResult.Color.Content.Muted,
+			fontStyle = Frame.fontStyle or UseTokensResult.Typography.TitleLarge,
 			Size = UDim2.fromScale(0, 0),
 			AutomaticSize = Enum.AutomaticSize.XY,
-			backgroundStyle = t_2
+			backgroundStyle = BackgroundStyle1
 		})
 	})
-end)
+end))

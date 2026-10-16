@@ -1,38 +1,38 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local dashModule = require(parent.Dash)
-local _ = require(profilePlatform.Common.Types)
-local inspectAvatarUtilsModule = require(profilePlatform.Components.InspectAvatar.InspectAvatarUtils)
-local _ = require(profilePlatform.Analytics.sendProfilePurchaseEvents)
-local fFlagProfileUnifiedPurchaseLoggingModule = require(profilePlatform.Flags.FFlagProfileUnifiedPurchaseLogging)
-local isItemPurchasable = inspectAvatarUtilsModule.isItemPurchasable
-local getPriceStatus = inspectAvatarUtilsModule.getPriceStatus
-local priceStatusEnum = inspectAvatarUtilsModule.PriceStatusEnum
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local DashModule = require(Parent.Dash)
+local _ = require(ProfilePlatform.Common.Types)
+local InspectAvatarUtilsModule = require(ProfilePlatform.Components.InspectAvatar.InspectAvatarUtils)
+local _ = require(ProfilePlatform.Analytics.sendProfilePurchaseEvents)
+local FFlagProfileUnifiedPurchaseLoggingModule = require(ProfilePlatform.Flags.FFlagProfileUnifiedPurchaseLogging)
+local IsItemPurchasableFunction = InspectAvatarUtilsModule.isItemPurchasable
+local GetPriceStatusFunction = InspectAvatarUtilsModule.getPriceStatus
+local PriceStatusEnum = InspectAvatarUtilsModule.PriceStatusEnum
 
-return function(p1)
-	-- upvalues: reactModule (ref), isItemPurchasable (ref), dashModule (ref), fFlagProfileUnifiedPurchaseLoggingModule (ref), inspectAvatarUtilsModule (ref), getPriceStatus (ref), priceStatusEnum (ref)
-	local var1, var2 = reactModule.useState({})
-	local var3 = reactModule.useRef({})
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), isItemPurchasable (copy), var3 (ref), var2 (ref), dashModule (copy)
+return function(p1) --[[ Line: 40 | Named "useRecentActivityPurchaseSelection" ]]
+	-- upvalues: ReactModule (copy), IsItemPurchasableFunction (copy), DashModule (copy), FFlagProfileUnifiedPurchaseLoggingModule (copy), InspectAvatarUtilsModule (copy), GetPriceStatusFunction (copy), PriceStatusEnum (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState({})
+	local UseRefResult = ReactModule.useRef({})
+	ReactModule.useEffect(function() --[[ Line: 46 ]]
+		-- upvalues: p1 (copy), IsItemPurchasableFunction (upval), UseRefResult (copy), UseStateResult2 (copy), DashModule (upval)
 		if #p1 == 0 then return end
 		local t = {}
-		local var4 = false
+		local Flag = false
 		
-		for i, v in p1 do
-			local id = v.id
+		for _, value in p1 do
+			local Id = value.id
 			
-			if isItemPurchasable(v) and not var3.current[id] then
-				var3.current[id] = true
-				t[id] = true
-				var4 = true
+			if IsItemPurchasableFunction(value) and not UseRefResult.current[Id] then
+				UseRefResult.current[Id] = true
+				t[Id] = true
+				Flag = true
 			end
 		end
-		if var4 then
-			var2(function(p2)
-				-- upvalues: dashModule (copy), t (ref)
-				return dashModule.join(p2, t)
+		if Flag then
+			UseStateResult2(function(p2) --[[ Line: 63 ]]
+				-- upvalues: DashModule (upval), t (copy)
+				return DashModule.join(p2, t)
 			end)
 			
 			return
@@ -40,51 +40,51 @@ return function(p1)
 	end, { p1 })
 	
 	return {
-		selectedItems = var1,
-		onToggleItem = reactModule.useCallback(function(p2)
-			-- upvalues: var2 (ref), dashModule (copy)
-			var2(function(p3)
-				-- upvalues: dashModule (copy), p2 (ref)
-				return dashModule.join(p3, { [p2] = not p3[p2] })
+		selectedItems = UseStateResult,
+		onToggleItem = ReactModule.useCallback(function(p2) --[[ Line: 68 ]]
+			-- upvalues: UseStateResult2 (copy), DashModule (upval)
+			UseStateResult2(function(p3) --[[ Line: 69 ]]
+				-- upvalues: DashModule (upval), p2 (copy)
+				return DashModule.join(p3, { [p2] = not p3[p2] })
 			end)
 		end, {}),
-		purchaseData = reactModule.useMemo(function()
-			-- upvalues: fFlagProfileUnifiedPurchaseLoggingModule (copy), p1 (ref), var1 (ref), isItemPurchasable (copy), inspectAvatarUtilsModule (copy), getPriceStatus (copy), priceStatusEnum (copy)
-			local t = {}
-			local var5 = if fFlagProfileUnifiedPurchaseLoggingModule then {} else nil
-			local var6 = 0
-			local var7 = 0
+		purchaseData = ReactModule.useMemo(function() --[[ Line: 74 ]]
+			-- upvalues: FFlagProfileUnifiedPurchaseLoggingModule (upval), p1 (copy), UseStateResult (copy), IsItemPurchasableFunction (upval), InspectAvatarUtilsModule (upval), GetPriceStatusFunction (upval), PriceStatusEnum (upval)
+			local LineItems = {}
+			local T = if FFlagProfileUnifiedPurchaseLoggingModule then {} else nil
+			local TotalPrice = 0
+			local Count = 0
 			
-			for i, v in p1 do
-				if v.id then
-					local id = v.id
+			for _, value in p1 do
+				if value.id then
+					local Id = value.id
 					
-					if var1[id] and isItemPurchasable(v) then
-						local effectivePrice = inspectAvatarUtilsModule.getEffectivePrice(v)
-						table.insert(t, {
-							collectibleProductId = if getPriceStatus(v) == priceStatusEnum.PurchaseFromResale and v.collectibleItemDetails then v.collectibleItemDetails.collectibleLowestAvailableResaleProductId or v.collectibleProductId else v.collectibleProductId,
-							agreedPriceRobux = effectivePrice
+					if UseStateResult[Id] and IsItemPurchasableFunction(value) then
+						local EffectivePrice: number = InspectAvatarUtilsModule.getEffectivePrice(value)
+						table.insert(LineItems, {
+							collectibleProductId = GetPriceStatusFunction(value) == PriceStatusEnum.PurchaseFromResale and value.collectibleItemDetails and value.collectibleItemDetails.collectibleLowestAvailableResaleProductId or value.collectibleProductId,
+							agreedPriceRobux = EffectivePrice
 						})
 						
-						if fFlagProfileUnifiedPurchaseLoggingModule and var5 then
-							table.insert(var5, {
-								itemId = id,
-								itemType = v.itemType,
-								itemSubType = tonumber(v.itemSubType),
-								priceInRobux = effectivePrice
+						if FFlagProfileUnifiedPurchaseLoggingModule and T then
+							table.insert(T, {
+								itemId = Id,
+								itemType = value.itemType,
+								itemSubType = tonumber(value.itemSubType),
+								priceInRobux = EffectivePrice
 							})
 						end
-						var6 += effectivePrice
-						var7 += 1
+						TotalPrice += EffectivePrice
+						Count += 1
 					end
 				end
 			end
 			return {
-				lineItems = t,
-				totalPrice = var6,
-				count = var7,
-				purchasedItems = var5
+				lineItems = LineItems,
+				totalPrice = TotalPrice,
+				count = Count,
+				purchasedItems = T
 			}
-		end, { p1, var1 })
+		end, { p1, UseStateResult })
 	}
 end

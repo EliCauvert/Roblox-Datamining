@@ -1,32 +1,32 @@
-﻿local trustedContacts = script:FindFirstAncestor("TrustedContacts")
-local reactModule = require(trustedContacts.Parent.React)
-local getTFActionModule = require(trustedContacts.Requests.getTFAction)
+﻿local TrustedContacts = script:FindFirstAncestor("TrustedContacts")
+local ReactModule = require(TrustedContacts.Parent.React)
+local GetTFActionModule = require(TrustedContacts.Requests.getTFAction)
 local _ = require(script.Parent.TFActionsEnum)
-local fFlagTFPassQRCodeSourceModule = require(trustedContacts.Flags.FFlagTFPassQRCodeSource)
+local FFlagTFPassQRCodeSourceModule = require(TrustedContacts.Flags.FFlagTFPassQRCodeSource)
 
-return function(value)
-	-- upvalues: fFlagTFPassQRCodeSourceModule (ref), reactModule (ref), getTFActionModule (ref)
-	local userId = value.userId
-	local tokens = value.tokens
-	local var1 = if fFlagTFPassQRCodeSourceModule then value.sentFromQrCode else nil
-	local var2, var3 = reactModule.useState({ isLoading = true, enum = nil })
-	reactModule.useEffect(function()
-		-- upvalues: getTFActionModule (copy), userId (ref), tokens (ref), fFlagTFPassQRCodeSourceModule (copy), var1 (ref), var3 (ref)
-		getTFActionModule(userId, {
-			friendRequestToken = tokens,
-			sentFromQrCode = if fFlagTFPassQRCodeSourceModule then var1 else nil
-		}):andThen(function(p1)
-			-- upvalues: var3 (copy)
-			var3({ isLoading = false, enum = p1 })
-		end):catch(function(_)
-			-- upvalues: var3 (copy)
-			var3({ isLoading = false, enum = nil })
+return function(p1) --[[ Line: 23 | Named "useTrustedFriendAction" ]]
+	-- upvalues: FFlagTFPassQRCodeSourceModule (copy), ReactModule (copy), GetTFActionModule (copy)
+	local UserId = p1.userId
+	local Tokens = p1.tokens
+	local SentFromQrCode = if FFlagTFPassQRCodeSourceModule then p1.sentFromQrCode else nil
+	local UseStateResult, UseStateResult2 = ReactModule.useState({ isLoading = true, enum = nil })
+	ReactModule.useEffect(function() --[[ Line: 33 ]]
+		-- upvalues: GetTFActionModule (upval), UserId (copy), Tokens (copy), FFlagTFPassQRCodeSourceModule (upval), SentFromQrCode (copy), UseStateResult2 (copy)
+		GetTFActionModule(UserId, {
+			friendRequestToken = Tokens,
+			sentFromQrCode = if FFlagTFPassQRCodeSourceModule then SentFromQrCode else nil
+		}):andThen(function(Result) --[[ Line: 38 ]]
+			-- upvalues: UseStateResult2 (upval)
+			UseStateResult2({ isLoading = false, enum = Result })
+		end):catch(function(_) --[[ Line: 44 ]]
+			-- upvalues: UseStateResult2 (upval)
+			UseStateResult2({ isLoading = false, enum = nil })
 		end)
 	end, {
-		userId,
-		tokens,
-		if fFlagTFPassQRCodeSourceModule then var1 else nil
+		UserId,
+		Tokens,
+		if FFlagTFPassQRCodeSourceModule then SentFromQrCode else nil
 	})
 	
-	return var2
+	return UseStateResult
 end

@@ -1,11 +1,11 @@
-﻿local sduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
-local parent = sduiCoreSystem.Parent
-local _ = require(parent.ServiceContractsProto)
-local _ = require(parent.Signals)
-local _ = require(sduiCoreSystem.SduiBuilderTypes)
-local _ = require(sduiCoreSystem.SduiActionType)
-local _ = require(sduiCoreSystem.SduiComponentType)
-local _ = require(sduiCoreSystem.ClientBinding.SduiDataBindingContentType)
+﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
+local Parent = SduiCoreSystem.Parent
+local _ = require(Parent.ServiceContractsProto)
+local _ = require(Parent.Signals)
+local _ = require(SduiCoreSystem.SduiBuilderTypes)
+local _ = require(SduiCoreSystem.SduiActionType)
+local _ = require(SduiCoreSystem.SduiComponentType)
+local _ = require(SduiCoreSystem.ClientBinding.SduiDataBindingContentType)
 
 return {
 	PropResultCategory = {

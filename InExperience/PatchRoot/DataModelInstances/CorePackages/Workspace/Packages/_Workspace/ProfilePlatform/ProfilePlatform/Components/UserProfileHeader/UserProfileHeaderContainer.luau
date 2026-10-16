@@ -1,132 +1,139 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local userLibModule = require(parent.UserLib)
-local navigationModule = require(parent.Navigation)
-local roactUtilsModule = require(parent.RoactUtils)
-local setAliasModule = require(parent.SetAlias)
-local networkingUsersModule = require(profilePlatform.Networking.NetworkingUsers)
-local useEffectOnce = roactUtilsModule.Hooks.useEffectOnce
-local constants = userLibModule.Utils.Constants
-local getRbxthumbWithTypeSizeAndOptions = userLibModule.Utils.getRbxthumbWithTypeSizeAndOptions
-local useNavigation = navigationModule.useNavigation
-local _ = require(profilePlatform.Contexts.ProfileWrapperContext)
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local socialStopwatchModule = require(parent.SocialStopwatch)
-local constantsModule = require(profilePlatform.Common.Constants)
-local enumsModule = require(profilePlatform.Common.Enums)
-local useProfileAnalyticsContextModule = require(profilePlatform.Contexts.useProfileAnalyticsContext)
-local eventNamesModule = require(profilePlatform.Analytics.EventNames)
-local useProfileJsonComponentModule = require(profilePlatform.Hooks.useProfileJsonComponent)
-local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfileWrapperContext)
-local userProfileHeaderModule = require(profilePlatform.Components.UserProfileHeader.UserProfileHeader)
-local fFlagMoveInExperienceModeToEditProfile = require(parent.SharedFlags).FFlagMoveInExperienceModeToEditProfile
-local enumsModule_1 = require(parent.EditProfile.Enums)
-local fFlagAddPlatformNameToProfileHeader = require(parent.SharedFlags).FFlagAddPlatformNameToProfileHeader
-local userProfilesModule = require(parent.UserProfiles)
-local useUserProfilesFetch = userProfilesModule.Hooks.useUserProfilesFetch
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local UserLibModule = require(Parent.UserLib)
+local RoactUtilsModule = require(Parent.RoactUtils)
+local SetAliasModule = require(Parent.SetAlias)
+local NetworkingUsersModule = require(ProfilePlatform.Networking.NetworkingUsers)
+local UseEffectOnceFunction = RoactUtilsModule.Hooks.useEffectOnce
+local Constants = UserLibModule.Utils.Constants
+local GetRbxthumbWithTypeSizeAndOptionsFunction = UserLibModule.Utils.getRbxthumbWithTypeSizeAndOptions
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local _ = require(ProfilePlatform.Contexts.ProfileWrapperContext)
+local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
+local SocialStopwatchModule = require(Parent.SocialStopwatch)
+local ConstantsModule = require(ProfilePlatform.Common.Constants)
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local UseProfileAnalyticsContextModule = require(ProfilePlatform.Contexts.useProfileAnalyticsContext)
+local EventNamesModule = require(ProfilePlatform.Analytics.EventNames)
+local UseProfileJsonComponentModule = require(ProfilePlatform.Hooks.useProfileJsonComponent)
+local UseProfileWrapperContextModule = require(ProfilePlatform.Contexts.useProfileWrapperContext)
+local UserProfileHeaderModule = require(ProfilePlatform.Components.UserProfileHeader.UserProfileHeader)
+local FFlagMoveInExperienceModeToEditProfile = require(Parent.SharedFlags).FFlagMoveInExperienceModeToEditProfile
+local EnumsModule1 = require(Parent.EditProfile.Enums)
+local FFlagAddPlatformNameToProfileHeader = require(Parent.SharedFlags).FFlagAddPlatformNameToProfileHeader
+local UserProfilesModule = require(Parent.UserProfiles)
+local UseUserProfilesFetchFunction = UserProfilesModule.Hooks.useUserProfilesFetch
 
-local _ = function(p1, p2, p3)
-	local primaryName = p1.names.primaryName or ""
+local function _(p1, p2, p3) --[[ Line: 67 ]]
+	local PrimaryName = p1.names.primaryName or ""
 	
-	return if p2.profileUserNickname and p3 and p2.profileUserNickname ~= "" then p2.profileUserNickname .. " (" .. primaryName .. ")" else primaryName
+	return if p2.profileUserNickname and p3 and p2.profileUserNickname ~= "" then p2.profileUserNickname .. " (" .. PrimaryName .. ")" else PrimaryName
 end
 
-return function(p1)
-	-- upvalues: useProfileWrapperContextModule (ref), useNavigation (ref), useDispatch (ref), reactModule (ref), useProfileAnalyticsContextModule (ref), getRbxthumbWithTypeSizeAndOptions (ref), constants (ref), constantsModule (ref), useProfileJsonComponentModule (ref), enumsModule (ref), fFlagAddPlatformNameToProfileHeader (ref), useUserProfilesFetch (ref), userProfilesModule (ref), eventNamesModule (ref), enumsModule_1 (ref), socialStopwatchModule (ref), setAliasModule (ref), useEffectOnce (ref), networkingUsersModule (ref), fFlagMoveInExperienceModeToEditProfile (ref), userProfileHeaderModule (ref)
-	local var1 = useProfileWrapperContextModule()
-	local var2 = useNavigation()
-	local var3 = useDispatch()
-	local var4 = reactModule.useRef(false)
-	local var5 = useProfileAnalyticsContextModule()
-	local profileId = var1.profileId
-	local var6 = getRbxthumbWithTypeSizeAndOptions(profileId, constants.RbxthumbTypes.Avatar, constantsModule.AVATAR_THUMBNAIL_SIZE)
-	local var7 = useProfileJsonComponentModule(enumsModule.Components.UserProfileHeader)
-	local var8 = nil
+return function(p1) --[[ Line: 84 | Named "UserProfileHeaderContainer" ]]
+	-- upvalues: UseProfileWrapperContextModule (copy), UseNavigationFunction (copy), UseDispatchFunction (copy), ReactModule (copy), UseProfileAnalyticsContextModule (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), Constants (copy), ConstantsModule (copy), UseProfileJsonComponentModule (copy), EnumsModule (copy), FFlagAddPlatformNameToProfileHeader (copy), UseUserProfilesFetchFunction (copy), UserProfilesModule (copy), EventNamesModule (copy), EnumsModule1 (copy), SocialStopwatchModule (copy), SetAliasModule (copy), UseEffectOnceFunction (copy), NetworkingUsersModule (copy), FFlagMoveInExperienceModeToEditProfile (copy), UserProfileHeaderModule (copy)
+	local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
+	local UseNavigationResult = UseNavigationFunction()
+	local UseDispatchResult = UseDispatchFunction()
+	local UseRefResult = ReactModule.useRef(false)
+	local UseProfileAnalyticsContextModuleResult = UseProfileAnalyticsContextModule()
+	local ProfileId = UseProfileWrapperContextModuleResult.profileId
+	local RbxthumbWithTypeSizeAndOptions = GetRbxthumbWithTypeSizeAndOptionsFunction(ProfileId, Constants.RbxthumbTypes.Avatar, ConstantsModule.AVATAR_THUMBNAIL_SIZE)
+	local UseProfileJsonComponentModuleResult = UseProfileJsonComponentModule(EnumsModule.Components.UserProfileHeader)
+	local v1 = nil
 	
-	if fFlagAddPlatformNameToProfileHeader then
-		local var9 = useUserProfilesFetch({
-			userIds = { profileId },
-			query = userProfilesModule.Queries.userProfilesDisplayUserPlatformNamesByUserIds
+	if FFlagAddPlatformNameToProfileHeader then
+		local UseUserProfilesFetchResult = UseUserProfilesFetchFunction({
+			userIds = { ProfileId },
+			query = UserProfilesModule.Queries.userProfilesDisplayUserPlatformNamesByUserIds
 		})
 		
-		if var9.data then
-			local platformNameFromId = userProfilesModule.Selectors.getPlatformNameFromId(var9.data, profileId)
+		if UseUserProfilesFetchResult.data then
+			local PlatformNameFromId = UserProfilesModule.Selectors.getPlatformNameFromId(UseUserProfilesFetchResult.data, ProfileId)
 			
-			if platformNameFromId and platformNameFromId ~= "" then
-				var8 = platformNameFromId
+			if PlatformNameFromId and PlatformNameFromId ~= "" then
+				v1 = PlatformNameFromId
 			end
 		end
 	end
-	local var10 = reactModule.useCallback(function()
-		-- upvalues: var7 (ref), enumsModule (copy), var5 (ref), eventNamesModule (copy), var4 (ref), var2 (ref), enumsModule_1 (copy), socialStopwatchModule (copy), profileId (ref), setAliasModule (copy)
-		if not var7.editName then return end
-		if var7.editName.field ~= enumsModule.NameTypes.DisplayName then
-			socialStopwatchModule.Stopwatch.start(socialStopwatchModule.Events.CustomizeNameOpened)
-			var5.fireAnalyticsEvent(eventNamesModule.SetAliasButton)
-			var2.navigate(enumsModule.Screens.SetAliasModal, {
-				profileUserId = profileId,
-				origin = setAliasModule.Analytics.EntryPoints.ProfileCardName
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 117 ]]
+		-- upvalues: UseProfileJsonComponentModuleResult (copy), EnumsModule (upval), UseProfileAnalyticsContextModuleResult (copy), EventNamesModule (upval), UseRefResult (copy), UseNavigationResult (copy), EnumsModule1 (upval), SocialStopwatchModule (upval), ProfileId (copy), SetAliasModule (upval)
+		if not UseProfileJsonComponentModuleResult.editName then return end
+		if UseProfileJsonComponentModuleResult.editName.field ~= EnumsModule.NameTypes.DisplayName then
+			SocialStopwatchModule.Stopwatch.start(SocialStopwatchModule.Events.CustomizeNameOpened)
+			UseProfileAnalyticsContextModuleResult.fireAnalyticsEvent(EventNamesModule.SetAliasButton)
+			UseNavigationResult.navigate(EnumsModule.Screens.SetAliasModal, {
+				profileUserId = ProfileId,
+				origin = SetAliasModule.Analytics.EntryPoints.ProfileCardName
 			})
 			
 			return
 		end
-		var5.fireAnalyticsEvent(eventNamesModule.EditDisplayNameButton, { canSetDisplayName = var4.current })
+		UseProfileAnalyticsContextModuleResult.fireAnalyticsEvent(EventNamesModule.EditDisplayNameButton, { canSetDisplayName = UseRefResult.current })
 		
-		if var4.current then
-			var2.navigate(enumsModule_1.Screens.EditProfileSubScreen, {
-				screen = enumsModule_1.Screens.EditDisplayName,
-				initialDisplayName = var7.names.primaryName
+		if UseRefResult.current then
+			UseNavigationResult.navigate(EnumsModule1.Screens.EditProfileSubScreen, {
+				screen = EnumsModule1.Screens.EditDisplayName,
+				initialDisplayName = UseProfileJsonComponentModuleResult.names.primaryName
 			})
 			
 			return
+		else
+			UseNavigationResult.navigate(EnumsModule.Screens.EditDisplayNameErrorModal)
 		end
-		var2.navigate(enumsModule.Screens.EditDisplayNameErrorModal)
-	end, { var2, var7.editName, var7.names })
-	useEffectOnce(function()
-		-- upvalues: var3 (ref), networkingUsersModule (copy), profileId (ref), var4 (ref)
-		local _ = function()
-			-- upvalues: var3 (copy), networkingUsersModule (copy), profileId (copy)
-			return var3(networkingUsersModule.GetDisplayNameValidation.API(profileId, "testName"))
+	end, {
+		UseNavigationResult,
+		UseProfileJsonComponentModuleResult.editName,
+		UseProfileJsonComponentModuleResult.names
+	})
+	UseEffectOnceFunction(function() --[[ Line: 145 ]]
+		-- upvalues: UseDispatchResult (copy), NetworkingUsersModule (upval), ProfileId (copy), UseRefResult (copy)
+		local function _() --[[ Line: 146 ]]
+			-- upvalues: UseDispatchResult (upval), NetworkingUsersModule (upval), ProfileId (upval)
+			return UseDispatchResult(NetworkingUsersModule.GetDisplayNameValidation.API(ProfileId, "testName"))
 		end
 		
-		var3(networkingUsersModule.GetDisplayNameValidation.API(profileId, "testName")):andThen(function()
-			-- upvalues: var4 (copy)
-			var4.current = true
-		end):catch(function()
-			-- upvalues: var4 (copy)
-			var4.current = false
+		UseDispatchResult(NetworkingUsersModule.GetDisplayNameValidation.API(ProfileId, "testName")):andThen(function() --[[ Line: 151 ]]
+			-- upvalues: UseRefResult (upval)
+			UseRefResult.current = true
+		end):catch(function() --[[ Line: 154 ]]
+			-- upvalues: UseRefResult (upval)
+			UseRefResult.current = false
 		end)
-	end, var7.editName and var7.editName.field == enumsModule.NameTypes.DisplayName)
-	local var11 = var7.counts ~= nil
-	local var12 = nil
-	local isInExperienceNameEnabled = nil
+	end, UseProfileJsonComponentModuleResult.editName and UseProfileJsonComponentModuleResult.editName.field == EnumsModule.NameTypes.DisplayName)
+	local HasCounts = UseProfileJsonComponentModuleResult.counts ~= nil
+	local HasUserProfileSettings: boolean? = nil
+	local IsInExperienceNameEnabled = nil
 	
-	if not fFlagMoveInExperienceModeToEditProfile then
-		var12 = var7.userProfileSettings ~= nil
+	if not FFlagMoveInExperienceModeToEditProfile then
+		HasUserProfileSettings = UseProfileJsonComponentModuleResult.userProfileSettings ~= nil
 		
-		if var12 then
-			isInExperienceNameEnabled = var7.userProfileSettings.isInExperienceNameEnabled
+		if HasUserProfileSettings then
+			IsInExperienceNameEnabled = UseProfileJsonComponentModuleResult.userProfileSettings.isInExperienceNameEnabled
 		end
 	end
-	local createElement = reactModule.createElement
-	local t = {
-		userThumbnail = var6,
+	local CreateElementFunction = ReactModule.createElement
+	local config = {
+		userThumbnail = RbxthumbWithTypeSizeAndOptions,
 		layoutOrder = p1.layoutOrder,
-		userId = tonumber(profileId),
-		openEditName = if var7.editName then var10 else nil
+		userId = tonumber(ProfileId),
+		openEditName = if UseProfileJsonComponentModuleResult.editName then UseResult else nil
 	}
-	local primaryName = var7.names.primaryName or ""
-	t.primaryName = primaryName
-	t.username = var7.names.username
-	t.isPremium = var7.isPremium
-	t.isVerified = var7.isVerified
-	t.isRobloxAdmin = var7.isRobloxAdmin
-	t.isEdited = var7.editName and var7.editName.isEdited
-	t.shouldDisplayUserProfileSettings = if fFlagMoveInExperienceModeToEditProfile then nil else var12
-	t.isInExperienceNameEnabled = if fFlagMoveInExperienceModeToEditProfile then nil else isInExperienceNameEnabled
-	t.shouldDisplayCounts = var11
-	t.platformName = if fFlagAddPlatformNameToProfileHeader then var8 else nil
+	local PrimaryName = UseProfileJsonComponentModuleResult.names.primaryName or ""
 	
-	return createElement(userProfileHeaderModule, t)
+	if UseProfileWrapperContextModuleResult.profileUserNickname then
+	end
+	config.primaryName = PrimaryName
+	config.username = UseProfileJsonComponentModuleResult.names.username
+	config.isPremium = UseProfileJsonComponentModuleResult.isPremium
+	config.isVerified = UseProfileJsonComponentModuleResult.isVerified
+	config.isRobloxAdmin = UseProfileJsonComponentModuleResult.isRobloxAdmin
+	config.isEdited = UseProfileJsonComponentModuleResult.editName and UseProfileJsonComponentModuleResult.editName.isEdited
+	config.shouldDisplayUserProfileSettings = if FFlagMoveInExperienceModeToEditProfile then nil else HasUserProfileSettings
+	config.isInExperienceNameEnabled = if FFlagMoveInExperienceModeToEditProfile then nil else IsInExperienceNameEnabled
+	config.shouldDisplayCounts = HasCounts
+	config.platformName = if FFlagAddPlatformNameToProfileHeader then v1 else nil
+	
+	return CreateElementFunction(UserProfileHeaderModule, config)
 end

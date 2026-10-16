@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.PrefetchProtocol.PrefetchProtocol)
+﻿return (require(script.Parent.Parent.Parent._Index.PrefetchProtocol.PrefetchProtocol))

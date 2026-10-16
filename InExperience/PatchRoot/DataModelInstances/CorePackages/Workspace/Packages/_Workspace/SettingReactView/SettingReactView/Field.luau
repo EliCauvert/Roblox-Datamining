@@ -1,21 +1,22 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
-local settingEnum = require(parent_1.SettingsService).SettingEnum
-local reactModule = require(parent_1.React)
-local fields = parent.Fields
-local toggleModule = require(fields.Toggle)
-local textButtonModule = require(fields.TextButton)
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
+local SettingEnum = require(Parent1.SettingsService).SettingEnum
+local ReactModule = require(Parent1.React)
+local Fields = Parent.Fields
+local ToggleModule = require(Fields.Toggle)
+local TextButtonModule = require(Fields.TextButton)
 
-return function(p1)
-	-- upvalues: settingEnum (ref), reactModule (ref), toggleModule (ref), textButtonModule (ref)
-	local t = {}
+return function(p1) --[[ Line: 19 ]]
+	-- upvalues: SettingEnum (copy), ReactModule (copy), ToggleModule (copy), TextButtonModule (copy)
+	local Element = {}
 	
-	if p1.field_type == settingEnum.Toggle then
-		t = reactModule.createElement(toggleModule, p1)
+	if p1.field_type == SettingEnum.Toggle then
+		Element = ReactModule.createElement(ToggleModule, p1)
 		
-		return t
-	elseif p1.field_type == settingEnum.TextButton then
-		t = reactModule.createElement(textButtonModule, p1)
+		return Element
 	end
-	return t
+	if p1.field_type == SettingEnum.TextButton then
+		Element = ReactModule.createElement(TextButtonModule, p1)
+	end
+	return Element
 end

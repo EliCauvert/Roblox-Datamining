@@ -1,73 +1,71 @@
-﻿local avatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
-local parent = avatarExperienceCommon.Parent
-local mutedError = require(parent.Loggers).mutedError
-local ASSET_TYPE_NAME_TO_ID_STRING = require(avatarExperienceCommon.Constants).ASSET_TYPE_NAME_TO_ID_STRING
-local ASSET_TYPE_TO_ACCESSORY_TYPE = require(avatarExperienceCommon.Constants).ASSET_TYPE_TO_ACCESSORY_TYPE
-local ASSET_TYPE_ID_STRING_TO_HUMANOID_DESCRIPTION_PROP = require(avatarExperienceCommon.Constants).ASSET_TYPE_ID_STRING_TO_HUMANOID_DESCRIPTION_PROP
-local HUMANOID_DESCRIPTION_SCALE_TO_NAME = require(avatarExperienceCommon.Constants).HUMANOID_DESCRIPTION_SCALE_TO_NAME
-local setHumanoidDescriptionColorsFromBodyColor3sModule = require(script.Parent.setHumanoidDescriptionColorsFromBodyColor3s)
-local createHumanoidDescriptionAccessoryInfoModule = require(script.Parent.createHumanoidDescriptionAccessoryInfo)
-local setMakeupDescriptionsModule = require(script.Parent.setMakeupDescriptions)
-local isMakeupAssetTypeModule = require(avatarExperienceCommon.Utils.isMakeupAssetType)
-local fFlagAXOutfitPageRevamp = require(parent.AvatarExperienceFlags).FFlagAXOutfitPageRevamp
-local getHumanoidDescriptionFromStateForOutfitTypeModule = require(avatarExperienceCommon.Utils.Humanoid.getHumanoidDescriptionFromStateForOutfitType)
+﻿local AvatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
+local Parent = AvatarExperienceCommon.Parent
+local MutedErrorFunction = require(Parent.Loggers).mutedError
+local ASSETTYPENAMETOIDSTRING = require(AvatarExperienceCommon.Constants).ASSET_TYPE_NAME_TO_ID_STRING
+local ASSETTYPETOACCESSORYTYPE = require(AvatarExperienceCommon.Constants).ASSET_TYPE_TO_ACCESSORY_TYPE
+local ASSETTYPEIDSTRINGTOHUMANOIDDESCRIPTIONPROP = require(AvatarExperienceCommon.Constants).ASSET_TYPE_ID_STRING_TO_HUMANOID_DESCRIPTION_PROP
+local HUMANOIDDESCRIPTIONSCALETONAME = require(AvatarExperienceCommon.Constants).HUMANOID_DESCRIPTION_SCALE_TO_NAME
+local SetHumanoidDescriptionColorsFromBodyColor3sModule = require(script.Parent.setHumanoidDescriptionColorsFromBodyColor3s)
+local CreateHumanoidDescriptionAccessoryInfoModule = require(script.Parent.createHumanoidDescriptionAccessoryInfo)
+local SetMakeupDescriptionsModule = require(script.Parent.setMakeupDescriptions)
+local IsMakeupAssetTypeModule = require(AvatarExperienceCommon.Utils.isMakeupAssetType)
+local FFlagAXOutfitPageRevamp = require(Parent.AvatarExperienceFlags).FFlagAXOutfitPageRevamp
+local GetHumanoidDescriptionFromStateForOutfitTypeModule = require(AvatarExperienceCommon.Utils.Humanoid.getHumanoidDescriptionFromStateForOutfitType)
 
-return function(p1)
-	-- upvalues: fFlagAXOutfitPageRevamp (ref), getHumanoidDescriptionFromStateForOutfitTypeModule (ref), ASSET_TYPE_TO_ACCESSORY_TYPE (ref), createHumanoidDescriptionAccessoryInfoModule (ref), ASSET_TYPE_ID_STRING_TO_HUMANOID_DESCRIPTION_PROP (ref), ASSET_TYPE_NAME_TO_ID_STRING (ref), isMakeupAssetTypeModule (ref), mutedError (ref), setMakeupDescriptionsModule (ref), HUMANOID_DESCRIPTION_SCALE_TO_NAME (ref), setHumanoidDescriptionColorsFromBodyColor3sModule (ref)
-	local var1
-	local _ = nil
-	
-	if fFlagAXOutfitPageRevamp then
-		var1 = getHumanoidDescriptionFromStateForOutfitTypeModule(p1, nil)
+return function(p1) --[[ Line: 21 ]]
+	-- upvalues: FFlagAXOutfitPageRevamp (copy), GetHumanoidDescriptionFromStateForOutfitTypeModule (copy), ASSETTYPETOACCESSORYTYPE (copy), CreateHumanoidDescriptionAccessoryInfoModule (copy), ASSETTYPEIDSTRINGTOHUMANOIDDESCRIPTIONPROP (copy), ASSETTYPENAMETOIDSTRING (copy), IsMakeupAssetTypeModule (copy), MutedErrorFunction (copy), SetMakeupDescriptionsModule (copy), HUMANOIDDESCRIPTIONSCALETONAME (copy), SetHumanoidDescriptionColorsFromBodyColor3sModule (copy)
+	local HumanoidDescriptionFromStateForOutfitTypeModule = nil
+	if FFlagAXOutfitPageRevamp then
+		HumanoidDescriptionFromStateForOutfitTypeModule = GetHumanoidDescriptionFromStateForOutfitTypeModule(p1, nil)
 	else
-		var1 = Instance.new("HumanoidDescription")
-		local equippedAssets = p1.AvatarEditor.Character.EquippedAssets
-		local avatarScales = p1.AvatarEditor.Character.AvatarScales
+		HumanoidDescriptionFromStateForOutfitTypeModule = Instance.new("HumanoidDescription")
+		local EquippedAssets = p1.AvatarEditor.Character.EquippedAssets
+		local AvatarScales = p1.AvatarEditor.Character.AvatarScales
 		
-		if equippedAssets then
-			local t = {}
+		if EquippedAssets then
+			local List1 = {}
 			
-			for i, v in equippedAssets do
-				local t_1 = {}
-				local var2 = ASSET_TYPE_TO_ACCESSORY_TYPE[i]
+			for i, equippedAsset in EquippedAssets do
+				local List2 = {}
+				local ASSETTYPETOACCESSORYTYPEEntry = ASSETTYPETOACCESSORYTYPE[i]
 				
-				for i_1, v_1 in v do
-					if var2 then
-						table.insert(t, createHumanoidDescriptionAccessoryInfoModule(i, i_1, v_1))
+				for i1, value in equippedAsset do
+					if ASSETTYPETOACCESSORYTYPEEntry then
+						table.insert(List1, CreateHumanoidDescriptionAccessoryInfoModule(i, i1, value))
 					else
-						table.insert(t_1, i_1)
+						table.insert(List2, i1)
 					end
 				end
-				if var2 == nil and #t_1 > 0 then
-					local var3 = ASSET_TYPE_ID_STRING_TO_HUMANOID_DESCRIPTION_PROP[i]
-					local joined = table.concat(t_1, ",")
+				if ASSETTYPETOACCESSORYTYPEEntry == nil and #List2 > 0 then
+					local ASSETTYPEIDSTRINGTOHUMANOIDDESCRIPTIONPROPEntry = ASSETTYPEIDSTRINGTOHUMANOIDDESCRIPTIONPROP[i]
+					local Joined = table.concat(List2, ",")
 					
-					if var3 then
-						var1[var3] = joined
-					elseif i ~= ASSET_TYPE_NAME_TO_ID_STRING.Gear and not isMakeupAssetTypeModule(i) then
-						mutedError(string.format("assetTypeId: %s not recognized as member of humanoidDescription", tostring(i)))
+					if ASSETTYPEIDSTRINGTOHUMANOIDDESCRIPTIONPROPEntry then
+						HumanoidDescriptionFromStateForOutfitTypeModule[ASSETTYPEIDSTRINGTOHUMANOIDDESCRIPTIONPROPEntry] = Joined
+					elseif i ~= ASSETTYPENAMETOIDSTRING.Gear and not IsMakeupAssetTypeModule(i) then
+						MutedErrorFunction(string.format("assetTypeId: %s not recognized as member of humanoidDescription", (tostring(i))))
 					end
 				end
 			end
-			var1:SetAccessories(t, true)
-			setMakeupDescriptionsModule(var1, equippedAssets)
+			HumanoidDescriptionFromStateForOutfitTypeModule:SetAccessories(List1, true)
+			SetMakeupDescriptionsModule(HumanoidDescriptionFromStateForOutfitTypeModule, EquippedAssets)
 		end
-		if avatarScales then
-			for i, v in avatarScales do
-				var1[HUMANOID_DESCRIPTION_SCALE_TO_NAME[i]] = v
+		if AvatarScales then
+			for i2, avatarScale in AvatarScales do
+				HumanoidDescriptionFromStateForOutfitTypeModule[HUMANOIDDESCRIPTIONSCALETONAME[i2]] = avatarScale
 			end
 		end
-		setHumanoidDescriptionColorsFromBodyColor3sModule(var1, p1.AvatarEditor.Character.BodyColor3s)
+		SetHumanoidDescriptionColorsFromBodyColor3sModule(HumanoidDescriptionFromStateForOutfitTypeModule, p1.AvatarEditor.Character.BodyColor3s)
 	end
-	local t = {}
-	local t_1 = {}
+	local Emotes = {}
+	local List = {}
 	
-	for i, v in p1.AvatarEditor.EquippedEmotes.slotInfo do
-		t[tostring(v.assetId)] = { tonumber(v.assetId) }
-		table.insert(t_1, { Slot = v.position, Name = tostring(v.assetId) })
+	for _, value1 in p1.AvatarEditor.EquippedEmotes.slotInfo do
+		Emotes[tostring(value1.assetId)] = { (tonumber(value1.assetId)) }
+		table.insert(List, { Slot = value1.position, Name = tostring(value1.assetId) })
 	end
-	var1:SetEmotes(t)
-	var1:SetEquippedEmotes(t_1)
+	HumanoidDescriptionFromStateForOutfitTypeModule:SetEmotes(Emotes)
+	HumanoidDescriptionFromStateForOutfitTypeModule:SetEquippedEmotes(List)
 	
-	return var1
+	return HumanoidDescriptionFromStateForOutfitTypeModule
 end

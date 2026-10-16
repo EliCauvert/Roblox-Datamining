@@ -1,47 +1,47 @@
-﻿local runService = game:GetService("RunService")
-local corePackagesService = game:GetService("CorePackages")
-local linkingProtocol = require(corePackagesService.Workspace.Packages.LinkingProtocol).LinkingProtocol
-local inGameMenuDependenciesModule = require(corePackagesService.Packages.InGameMenuDependencies)
-local roact = inGameMenuDependenciesModule.Roact
-local roactRodux = inGameMenuDependenciesModule.RoactRodux
-local t = inGameMenuDependenciesModule.t
-local leavePromptModule = require(script.Parent.LeavePrompt)
-local parent = script.Parent.Parent.Parent.Parent
-local withLocalizationModule = require(parent.Localization.withLocalization)
-local closeMenuModule = require(parent.Thunks.CloseMenu)
-local sendAnalyticsModule = require(parent.Utility.SendAnalytics)
-local constantsModule = require(parent.Resources.Constants)
-local leaveToAppPrompt = roact.PureComponent:extend("LeaveToAppPrompt")
-leaveToAppPrompt.validateProps = t.strictInterface({
-	closeMenu = t.callback,
-	canGamepadCaptureFocus = t.optional(t.boolean),
-	canKeyboardCaptureFocus = t.optional(t.boolean),
-	onConfirm = t.optional(t.callback),
-	linkingProtocol = t.table
+﻿local RunService = game:GetService("RunService")
+local CorePackages = game:GetService("CorePackages")
+local LinkingProtocol = require(CorePackages.Workspace.Packages.LinkingProtocol).LinkingProtocol
+local InGameMenuDependenciesModule = require(CorePackages.Packages.InGameMenuDependencies)
+local Roact = InGameMenuDependenciesModule.Roact
+local RoactRodux = InGameMenuDependenciesModule.RoactRodux
+local T = InGameMenuDependenciesModule.t
+local LeavePromptModule = require(script.Parent.LeavePrompt)
+local Parent = script.Parent.Parent.Parent.Parent
+local WithLocalizationModule = require(Parent.Localization.withLocalization)
+local CloseMenuModule = require(Parent.Thunks.CloseMenu)
+local SendAnalyticsModule = require(Parent.Utility.SendAnalytics)
+local ConstantsModule = require(Parent.Resources.Constants)
+local LeaveToAppPrompt = Roact.PureComponent:extend("LeaveToAppPrompt")
+LeaveToAppPrompt.validateProps = T.strictInterface({
+	closeMenu = T.callback,
+	canGamepadCaptureFocus = T.optional(T.boolean),
+	canKeyboardCaptureFocus = T.optional(T.boolean),
+	onConfirm = T.optional(T.callback),
+	linkingProtocol = T.table
 })
-leaveToAppPrompt.defaultProps = { linkingProtocol = linkingProtocol.default }
+LeaveToAppPrompt.defaultProps = { linkingProtocol = LinkingProtocol.default }
 
-function leaveToAppPrompt.init(p1)
-	-- upvalues: sendAnalyticsModule (ref), constantsModule (ref), runService (ref)
-	function p0.goToHomePage()
-		-- upvalues: sendAnalyticsModule (copy), constantsModule (copy), runService (copy), p1 (ref)
-		sendAnalyticsModule(constantsModule.AnalyticsLeaveToHomeName, constantsModule.AnalyticsLeaveToHomeName, { confirmed = constantsModule.AnalyticsLeaveToHomeName })
-		runService.Heartbeat:Wait()
+function LeaveToAppPrompt.init(p1) --[[ Line: 35 ]]
+	-- upvalues: SendAnalyticsModule (copy), ConstantsModule (copy), RunService (copy)
+	function p1.goToHomePage() --[[ Line: 36 ]]
+		-- upvalues: SendAnalyticsModule (upval), ConstantsModule (upval), RunService (upval), p1 (copy)
+		SendAnalyticsModule(ConstantsModule.AnalyticsLeaveToHomeName, ConstantsModule.AnalyticsLeaveToHomeName, { confirmed = ConstantsModule.AnalyticsLeaveToHomeName })
+		RunService.Heartbeat:Wait()
 		p1.props.linkingProtocol:detectURL("roblox://navigation/home")
 		game:Shutdown()
 	end
 end
 
-function leaveToAppPrompt.render(p1)
-	-- upvalues: withLocalizationModule (ref), roact (ref), leavePromptModule (ref)
-	return withLocalizationModule({
+function LeaveToAppPrompt.render(p1) --[[ Line: 57 ]]
+	-- upvalues: WithLocalizationModule (copy), Roact (copy), LeavePromptModule (copy)
+	return WithLocalizationModule({
 		titleText = "CoreScripts.InGameMenu.Prompt.LeaveGameTitle",
 		bodyText = "CoreScripts.InGameMenu.Prompt.LeaveGameBodyText",
 		confirmText = "CoreScripts.InGameMenu.Prompt.BackToHome",
 		cancelText = "CoreScripts.InGameMenu.Prompt.ResumeGame"
-	})(function(p2)
-		-- upvalues: roact (copy), leavePromptModule (copy), p1 (ref)
-		return roact.createElement(leavePromptModule, {
+	})(function(p2) --[[ Line: 63 ]]
+		-- upvalues: Roact (upval), LeavePromptModule (upval), p1 (copy)
+		return Roact.createElement(LeavePromptModule, {
 			titleText = p2.titleText,
 			bodyText = p2.bodyText,
 			confirmText = p2.confirmText,
@@ -54,18 +54,18 @@ function leaveToAppPrompt.render(p1)
 	end)
 end
 
-return roactRodux.UNSTABLE_connect2(function(p1, _)
-	-- upvalues: constantsModule (ref)
+return RoactRodux.UNSTABLE_connect2(function(p1, _) --[[ Line: 77 ]]
+	-- upvalues: ConstantsModule (copy)
 	return {
-		canGamepadCaptureFocus = p1.menuPage == constantsModule.LeaveToAppPromptPageKey and (p1.displayOptions.inputType == constantsModule.InputType.Gamepad and (not p1.respawn.dialogOpen and p1.currentZone == 1)),
-		canKeyboardCaptureFocus = p1.menuPage == constantsModule.LeaveToAppPromptPageKey and (p1.displayOptions.inputType == constantsModule.InputType.MouseAndKeyboard and not p1.respawn.dialogOpen)
+		canGamepadCaptureFocus = p1.menuPage == ConstantsModule.LeaveToAppPromptPageKey and p1.displayOptions.inputType == ConstantsModule.InputType.Gamepad and (not p1.respawn.dialogOpen and p1.currentZone == 1),
+		canKeyboardCaptureFocus = p1.menuPage == ConstantsModule.LeaveToAppPromptPageKey and p1.displayOptions.inputType == ConstantsModule.InputType.MouseAndKeyboard and not p1.respawn.dialogOpen
 	}
-end, function(p1)
-	-- upvalues: closeMenuModule (ref)
+end, function(Callback) --[[ Line: 91 ]]
+	-- upvalues: CloseMenuModule (copy)
 	return {
-		closeMenu = function()
-			-- upvalues: p1 (ref), closeMenuModule (copy)
-			p1(closeMenuModule)
+		closeMenu = function() --[[ Line: 93 ]]
+			-- upvalues: Callback (copy), CloseMenuModule (upval)
+			Callback(CloseMenuModule)
 		end
 	}
-end)(leaveToAppPrompt)
+end)(LeaveToAppPrompt)

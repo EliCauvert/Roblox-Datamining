@@ -1,83 +1,81 @@
-﻿local parent = script.Parent.Parent
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local boolean = luauPolyfillModule.Boolean
-local error = luauPolyfillModule.Error
-local object = luauPolyfillModule.Object
-local t = {
-	asArray = function(p1)
-		-- upvalues: boolean (ref), array (ref)
-		return if boolean.toJSBoolean(array.isArray(p1)) then p1 elseif boolean.toJSBoolean(p1) then { p1 } else {}
-	end
-}
-local parse = require(parent.GraphQL).parse
-local luauRegExpModule = require(parent.LuauRegExp)
-local var1 = luauRegExpModule("\\.[a-zA-Z0-9]+$")
+﻿local Parent = script.Parent.Parent
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Boolean = LuauPolyfillModule.Boolean
+local Error1 = LuauPolyfillModule.Error
+local Object = LuauPolyfillModule.Object
+local ParseFunction = require(Parent.GraphQL).parse
+local LuauRegExpModule = require(Parent.LuauRegExp)
 
-function t.isDocumentString(p1)
-	-- upvalues: boolean (ref), var1 (ref), parse (ref)
+local function asArray(p1) --[[ Line: 23 ]]
+	-- upvalues: Boolean (copy), Array (copy)
+	return if Boolean.toJSBoolean(Array.isArray(p1)) then p1 elseif Boolean.toJSBoolean(p1) then { p1 } else {}
+end
+
+local AZAZ09 = LuauRegExpModule("\\.[a-zA-Z0-9]+$")
+
+local function isDocumentString(p1) --[[ Line: 31 ]]
+	-- upvalues: Boolean (copy), AZAZ09 (copy), ParseFunction (copy)
 	if typeof(p1) ~= "string" then
 		return false
-	elseif boolean.toJSBoolean(var1:test(p1)) then
+	elseif Boolean.toJSBoolean(AZAZ09:test(p1)) then
 		return false
-	end
-	local ok, status = pcall(function()
-		-- upvalues: parse (copy), p1 (ref)
-		parse(p1)
+	else
+		local Success, Result = pcall(function(): boolean --[[ Line: 53 ]]
+			-- upvalues: ParseFunction (upval), p1 (copy)
+			ParseFunction(p1)
+			
+			return true
+		end)
 		
+		return if Success then Result else false
+	end
+end
+
+local v1 = LuauRegExpModule("[‘“!%^<=>`]")
+
+local function nodeToString(p1) --[[ Line: 96 ]]
+	-- upvalues: Array (copy), Object (copy)
+	local Value = if Array.indexOf(Object.keys(p1), "alias") ~= -1 then if typeof(p1.alias) == "table" then p1.alias.value else nil else nil
+	
+	if Value == nil and Array.indexOf(Object.keys(p1), "name") ~= -1 then
+		Value = if typeof(p1.name) == "table" then p1.name.value else nil
+	end
+	if Value == nil then
+		Value = p1.kind
+	end
+	return Value
+end
+
+return {
+	asArray = asArray,
+	isDocumentString = isDocumentString,
+	isValidPath = function(p1): boolean --[[ Line: 68 ]]
+		-- upvalues: Boolean (copy), v1 (copy)
+		return typeof(p1) == "string" and not Boolean.toJSBoolean(v1:test(p1))
+	end,
+	compareStrings = function(p1, p2): number --[[ Line: 72 ]]
+		return if tostring(p1) < tostring(p2) then -1 elseif tostring(p2) < tostring(p1) then 1 else 0
+	end,
+	nodeToString = nodeToString,
+	compareNodes = function(p1, p2, Callback) --[[ Line: 122 ]]
+		-- upvalues: nodeToString (copy)
+		local NodeToStringResult = nodeToString(p1)
+		local NodeToStringResult1 = nodeToString(p2)
+		
+		return if typeof(Callback) == "function" then Callback(NodeToStringResult, NodeToStringResult1) elseif tostring(NodeToStringResult) < tostring(NodeToStringResult1) then -1 elseif tostring(NodeToStringResult1) < tostring(NodeToStringResult) then 1 else 0
+	end,
+	isSome = function(None): boolean --[[ Line: 131 ]]
+		-- upvalues: Object (copy)
+		return None ~= nil and None ~= Object.None
+	end,
+	assertSome = function(p1, p2): boolean --[[ Line: 140 ]]
+		-- upvalues: Error1 (copy)
+		local ValueShouldBeSomething = if p2 == nil then "Value should be something" else p2
+		
+		if p1 == nil then
+			error(Error1.new(ValueShouldBeSomething))
+		end
 		return true
-	end)
-	
-	return if ok then status else false
-end
-
-local var2 = luauRegExpModule("[\226\128\152\226\128\156!%^<=>`]")
-
-function t.isValidPath(p1)
-	-- upvalues: boolean (ref), var2 (ref)
-	return typeof(p1) == "string" and not boolean.toJSBoolean(var2:test(p1))
-end
-
-function t.compareStrings(p1, p2)
-	return if tostring(p1) < tostring(p2) then -1 elseif tostring(p2) < tostring(p1) then 1 else 0
-end
-
-local function nodeToString(p1)
-	-- upvalues: array (ref), object (ref)
-	local var3 = if array.indexOf(object.keys(p1), "alias") ~= -1 then if typeof(p1.alias) == "table" then p1.alias.value else nil else nil
-	
-	if var3 == nil and array.indexOf(object.keys(p1), "name") ~= -1 then
-		var3 = if typeof(p1.name) == "table" then p1.name.value else nil
 	end
-	if var3 == nil then
-		var3 = p1.kind
-	end
-	return var3
-end
-
-t.nodeToString = nodeToString
-
-function t.compareNodes(p1, p2, p3)
-	-- upvalues: nodeToString (ref)
-	local var3 = nodeToString(p1)
-	local var4 = nodeToString(p2)
-	
-	return if typeof(p3) == "function" then p3(var3, var4) elseif tostring(var3) < tostring(var4) then -1 elseif tostring(var4) < tostring(var3) then 1 else 0
-end
-
-function t.isSome(p1)
-	-- upvalues: object (ref)
-	return p1 ~= nil and p1 ~= object.None
-end
-
-function t.assertSome(p1, p2)
-	-- upvalues: error (ref)
-	local var3 = if p2 ~= nil then "Value should be something" else p2
-	
-	if p1 == nil then
-		error(error.new(var3))
-	end
-	return true
-end
-
-return t
+}

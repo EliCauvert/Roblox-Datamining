@@ -1,27 +1,28 @@
-﻿local appNavBarModule = require(script:FindFirstAncestor("Moments").Parent.AppNavBar)
+﻿local AppNavBarModule = require(script:FindFirstAncestor("Moments").Parent.AppNavBar)
 
-return function(p1)
-	-- upvalues: appNavBarModule (ref)
-	p1 = p1 or {}
-	local visibilityControl = p1.visibilityControl or appNavBarModule.VisibilityControl
-	local var1 = (p1.isScrollAwayEnabled or appNavBarModule.getScrollAwayEnabled)()
+return function(p1) --[[ Line: 50 | Named "createNavBarChromeAdapter" ]]
+	-- upvalues: AppNavBarModule (copy)
+	local P0 = p1 or {}
+	local VisibilityControl = P0.visibilityControl or AppNavBarModule.VisibilityControl
+	local IsEnabled = (P0.isScrollAwayEnabled or AppNavBarModule.getScrollAwayEnabled)()
 	
 	return {
-		isEnabled = var1,
-		setVisible = function(value)
-			-- upvalues: var1 (ref), visibilityControl (ref)
-			if not var1 then return end
-			if value then
-				visibilityControl.show()
+		isEnabled = IsEnabled,
+		setVisible = function(p2) --[[ Line: 61 ]]
+			-- upvalues: IsEnabled (copy), VisibilityControl (copy)
+			if not IsEnabled then return end
+			if p2 then
+				VisibilityControl.show()
 				
 				return
+			else
+				VisibilityControl.hide()
 			end
-			visibilityControl.hide()
 		end,
-		dispose = function()
-			-- upvalues: var1 (ref), visibilityControl (ref)
-			if var1 then
-				visibilityControl.show()
+		dispose = function() --[[ Line: 72 ]]
+			-- upvalues: IsEnabled (copy), VisibilityControl (copy)
+			if IsEnabled then
+				VisibilityControl.show()
 				
 				return
 			end

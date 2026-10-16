@@ -1,14 +1,14 @@
-﻿local experienceLoadingScript = script:FindFirstAncestor("ExperienceLoadingScript")
-local cachedPolicyServiceModule = require(experienceLoadingScript.Parent.CachedPolicyService)
-local setIsSubjectToChinaPoliciesModule = require(experienceLoadingScript.Actions.SetIsSubjectToChinaPolicies)
+﻿local ExperienceLoadingScript = script:FindFirstAncestor("ExperienceLoadingScript")
+local CachedPolicyServiceModule = require(ExperienceLoadingScript.Parent.CachedPolicyService)
+local SetIsSubjectToChinaPoliciesModule = require(ExperienceLoadingScript.Actions.SetIsSubjectToChinaPolicies)
 
-return function()
-	-- upvalues: cachedPolicyServiceModule (ref), setIsSubjectToChinaPoliciesModule (ref)
-	return function(p1)
-		-- upvalues: cachedPolicyServiceModule (copy), setIsSubjectToChinaPoliciesModule (copy)
-		coroutine.wrap(function()
-			-- upvalues: cachedPolicyServiceModule (copy), p1 (ref), setIsSubjectToChinaPoliciesModule (copy)
-			p1:dispatch(setIsSubjectToChinaPoliciesModule(cachedPolicyServiceModule:IsSubjectToChinaPolicies()))
+return function() --[[ Line: 7 ]]
+	-- upvalues: CachedPolicyServiceModule (copy), SetIsSubjectToChinaPoliciesModule (copy)
+	return function(p1) --[[ Line: 8 ]]
+		-- upvalues: CachedPolicyServiceModule (upval), SetIsSubjectToChinaPoliciesModule (upval)
+		coroutine.wrap(function() --[[ Line: 9 ]]
+			-- upvalues: CachedPolicyServiceModule (upval), p1 (copy), SetIsSubjectToChinaPoliciesModule (upval)
+			p1:dispatch(SetIsSubjectToChinaPoliciesModule((CachedPolicyServiceModule:IsSubjectToChinaPolicies())))
 		end)()
 	end
 end

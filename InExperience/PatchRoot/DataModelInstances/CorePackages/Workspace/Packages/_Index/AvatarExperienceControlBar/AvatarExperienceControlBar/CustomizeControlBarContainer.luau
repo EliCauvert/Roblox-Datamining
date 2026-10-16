@@ -1,13 +1,13 @@
-﻿local avatarExperienceControlBar = script:FindFirstAncestor("AvatarExperienceControlBar")
-local reactModule = require(avatarExperienceControlBar.Parent.React)
-local useCustomizeControlBarPropsModule = require(avatarExperienceControlBar.useCustomizeControlBarProps)
-local baseControlBarContainerModule = require(avatarExperienceControlBar.BaseControlBarContainer)
+﻿local AvatarExperienceControlBar = script:FindFirstAncestor("AvatarExperienceControlBar")
+local ReactModule = require(AvatarExperienceControlBar.Parent.React)
+local UseCustomizeControlBarPropsModule = require(AvatarExperienceControlBar.useCustomizeControlBarProps)
+local BaseControlBarContainerModule = require(AvatarExperienceControlBar.BaseControlBarContainer)
 
-return reactModule.memo(function(p1)
-	-- upvalues: useCustomizeControlBarPropsModule (ref), reactModule (ref), baseControlBarContainerModule (ref)
-	return reactModule.createElement(baseControlBarContainerModule, {
-		config = useCustomizeControlBarPropsModule(p1).config,
-		onActiveMenuItemChanged = p1.onActiveMenuItemChanged,
-		LayoutOrder = p1.LayoutOrder
+return ReactModule.memo(function(Frame) --[[ Line: 9 | Named "CustomizeControlBarContainer" ]]
+	-- upvalues: UseCustomizeControlBarPropsModule (copy), ReactModule (copy), BaseControlBarContainerModule (copy)
+	return ReactModule.createElement(BaseControlBarContainerModule, {
+		config = UseCustomizeControlBarPropsModule(Frame).config,
+		onActiveMenuItemChanged = Frame.onActiveMenuItemChanged,
+		LayoutOrder = Frame.LayoutOrder
 	})
 end)

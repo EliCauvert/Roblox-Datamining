@@ -1,26 +1,26 @@
-﻿local parent = script:FindFirstAncestor("Moments").Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local getMusicStore = require(parent.MomentsCreation).Stores.GetMusicStore
+﻿local Parent = script:FindFirstAncestor("Moments").Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local GetMusicStoreFunction = require(Parent.MomentsCreation).Stores.GetMusicStore
 
-return function(p1)
-	-- upvalues: getMusicStore (ref), reactModule (ref), signalsModule (ref)
-	local var1 = getMusicStore()
-	local var2, var3 = reactModule.useState(var1.getInfoMap(false))
-	reactModule.useEffect(function()
-		-- upvalues: signalsModule (copy), var3 (ref), var1 (ref)
-		return signalsModule.createEffect(function(p2)
-			-- upvalues: var3 (copy), var1 (copy)
-			var3(var1.getInfoMap(p2))
+return function(p1) --[[ Line: 24 | Named "useMusicInfo" ]]
+	-- upvalues: GetMusicStoreFunction (copy), ReactModule (copy), SignalsModule (copy)
+	local MusicStore = GetMusicStoreFunction()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(MusicStore.getInfoMap(false))
+	ReactModule.useEffect(function() --[[ Line: 28 ]]
+		-- upvalues: SignalsModule (upval), UseStateResult2 (copy), MusicStore (copy)
+		return SignalsModule.createEffect(function(p2) --[[ Line: 29 ]]
+			-- upvalues: UseStateResult2 (upval), MusicStore (upval)
+			UseStateResult2(MusicStore.getInfoMap(p2))
 		end)
-	end, { var1 })
-	local var4 = if p1 ~= nil then nil else var2[p1]
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var4 (ref), var1 (ref)
-		if p1 ~= nil and var4 == nil then
-			var1.fetchInfo(p1)
+	end, { MusicStore })
+	local UseStateResultEntry = if p1 == nil then nil else UseStateResult[p1]
+	ReactModule.useEffect(function() --[[ Line: 36 ]]
+		-- upvalues: p1 (copy), UseStateResultEntry (copy), MusicStore (copy)
+		if p1 ~= nil and UseStateResultEntry == nil then
+			MusicStore.fetchInfo(p1)
 		end
-	end, { p1, var4, var1 })
+	end, { p1, UseStateResultEntry, MusicStore })
 	
-	return var4
+	return UseStateResultEntry
 end

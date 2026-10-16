@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Workspace.FocusNavigationUtils.FocusNavigationUtils)
+﻿return (require(script.Parent.Parent.Parent._Workspace.FocusNavigationUtils.FocusNavigationUtils))

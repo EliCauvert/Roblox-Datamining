@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("AppChat").Parent.Signals).createComputed(require(script.createConversationStore))
+﻿return require(script:FindFirstAncestor("AppChat").Parent.Signals).createComputed((require(script.createConversationStore)))

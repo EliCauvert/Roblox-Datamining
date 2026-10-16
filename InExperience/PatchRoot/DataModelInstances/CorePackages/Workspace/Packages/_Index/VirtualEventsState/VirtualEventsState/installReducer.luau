@@ -1,14 +1,14 @@
-﻿local virtualEventsState = script:FindFirstAncestor("VirtualEventsState")
-local roduxModule = require(virtualEventsState.Parent.Rodux)
-local roduxNetworking = require(virtualEventsState.network).RoduxNetworking
+﻿local VirtualEventsState = script:FindFirstAncestor("VirtualEventsState")
+local RoduxModule = require(VirtualEventsState.Parent.Rodux)
+local RoduxNetworking = require(VirtualEventsState.network).RoduxNetworking
 
-return function()
-	-- upvalues: roduxModule (ref), roduxNetworking (ref), virtualEventsState (ref)
-	return roduxModule.combineReducers({
-		networkStatus = roduxNetworking.installReducer(),
-		events = require(virtualEventsState.Reducers.events),
-		media = require(virtualEventsState.Reducers.media),
-		experienceDetails = require(virtualEventsState.Reducers.experienceDetails),
-		rsvps = require(virtualEventsState.Reducers.rsvps)
+return function() --[[ Line: 7 | Named "installReducer" ]]
+	-- upvalues: RoduxModule (copy), RoduxNetworking (copy), VirtualEventsState (copy)
+	return RoduxModule.combineReducers({
+		networkStatus = RoduxNetworking.installReducer(),
+		events = require(VirtualEventsState.Reducers.events),
+		media = require(VirtualEventsState.Reducers.media),
+		experienceDetails = require(VirtualEventsState.Reducers.experienceDetails),
+		rsvps = require(VirtualEventsState.Reducers.rsvps)
 	})
 end

@@ -1,5 +1,5 @@
-﻿local socialExperienceJoin = script:FindFirstAncestor("SocialExperienceJoin")
+﻿local SocialExperienceJoin = script:FindFirstAncestor("SocialExperienceJoin")
 
-return require(socialExperienceJoin.Parent.LuaSocialLibrariesDeps).NetworkingGames.config({
-	roduxNetworking = require(socialExperienceJoin.Networking.myRoduxNetworking)
-})
+return (require(SocialExperienceJoin.Parent.LuaSocialLibrariesDeps).NetworkingGames.config({
+	roduxNetworking = require(SocialExperienceJoin.Networking.myRoduxNetworking)
+}))

@@ -1,204 +1,204 @@
-﻿local parent = script:FindFirstAncestor("AppShortcutBar").Parent
-local textService = game:GetService("TextService")
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local UIBloxModule = require(parent.UIBlox)
-local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
-local getTextSize = require(parent.Style).GetTextSize
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local useStyle = UIBloxModule.Core.Style.useStyle
-local useTokens = foundationModule.Hooks.useTokens
-local icon = foundationModule.Icon
-local keyLabel = UIBloxModule.App.Menu.KeyLabel
-local keyLabelUtilities = UIBloxModule.App.Menu.KeyLabelUtilities
-local stateLayer = UIBloxModule.Core.Control.StateLayer
-local shortcut = UIBloxModule.App.Navigation.Shortcut
-local iconWithHoldAnimationModule = require(script.Parent.IconWithHoldAnimation)
-local shortcutUseDispatchSyntheticEvent = game:DefineFastFlag("ShortcutUseDispatchSyntheticEvent", false)
+﻿local Parent = script:FindFirstAncestor("AppShortcutBar").Parent
+local TextService = game:GetService("TextService")
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UIBloxModule = require(Parent.UIBlox)
+local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
+local GetTextSizeFunction = require(Parent.Style).GetTextSize
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local Icon = FoundationModule.Icon
+local KeyLabel = UIBloxModule.App.Menu.KeyLabel
+local KeyLabelUtilities = UIBloxModule.App.Menu.KeyLabelUtilities
+local StateLayer = UIBloxModule.Core.Control.StateLayer
+local Shortcut = UIBloxModule.App.Navigation.Shortcut
+local IconWithHoldAnimationModule = require(script.Parent.IconWithHoldAnimation)
+local ShortcutUseDispatchSyntheticEvent = game:DefineFastFlag("ShortcutUseDispatchSyntheticEvent", false)
 
-local function _(p1, p2)
-	-- upvalues: keyLabelUtilities (ref)
-	local var1 = 0
+local function _(List, p1): number --[[ Line: 27 | Named "getKeyLabelsWidth" ]]
+	-- upvalues: KeyLabelUtilities (copy)
+	local NewKeyLabelWidth = 0
 	
-	for i, v in p1 do
-		var1 += keyLabelUtilities.getKeyLabelWidth(v, p2)
+	for _, value in List do
+		NewKeyLabelWidth += KeyLabelUtilities.getKeyLabelWidth(value, p1)
 	end
-	return var1
+	return NewKeyLabelWidth
 end
 
-local function useOnShortcutActivated(p3)
-	-- upvalues: shortcutUseDispatchSyntheticEvent (ref), reactModule (ref), reactFocusNavigationModule (ref)
-	if shortcutUseDispatchSyntheticEvent then
-		local var2 = reactModule.useContext(reactFocusNavigationModule.FocusNavigationContext)
-		local var3 = reactFocusNavigationModule.useDispatchSyntheticEvent()
+local function useOnShortcutActivated(Item) --[[ Line: 35 ]]
+	-- upvalues: ShortcutUseDispatchSyntheticEvent (copy), ReactModule (copy), ReactFocusNavigationModule (copy)
+	if ShortcutUseDispatchSyntheticEvent then
+		local UseContextResult = ReactModule.useContext(ReactFocusNavigationModule.FocusNavigationContext)
+		local UseDispatchSyntheticEventResult = ReactFocusNavigationModule.useDispatchSyntheticEvent()
 		
-		return reactModule.useCallback(function()
-			-- upvalues: p3 (ref), var3 (ref), var2 (ref)
-			if p3.hasProgress then
-				var3(p3.eventName, var2.focusedGuiObject:getValue(), {
+		return (ReactModule.useCallback(function() --[[ Line: 40 ]]
+			-- upvalues: Item (copy), UseDispatchSyntheticEventResult (copy), UseContextResult (copy)
+			if Item.hasProgress then
+				UseDispatchSyntheticEventResult(Item.eventName, UseContextResult.focusedGuiObject:getValue(), {
 					immediateDispatch = true,
 					UserInputState = Enum.UserInputState.Begin,
-					KeyCode = p3.inputKeyCode,
+					KeyCode = Item.inputKeyCode,
 					UserInputType = Enum.UserInputType.None
 				})
 				
 				return
+			else
+				UseDispatchSyntheticEventResult(Item.eventName, UseContextResult.focusedGuiObject:getValue(), {
+					immediateDispatch = true,
+					UserInputState = Enum.UserInputState.End,
+					KeyCode = Item.inputKeyCode,
+					UserInputType = Enum.UserInputType.None
+				})
 			end
-			var3(p3.eventName, var2.focusedGuiObject:getValue(), {
-				immediateDispatch = true,
-				UserInputState = Enum.UserInputState.End,
-				KeyCode = p3.inputKeyCode,
-				UserInputType = Enum.UserInputType.None
-			})
 		end, {
-			p3.hasProgress,
-			p3.eventName,
-			p3.inputKeyCode,
-			var2,
-			var3
-		})
-	end
-	local var4 = reactModule.useContext(reactFocusNavigationModule.FocusNavigationContext)
-	
-	return reactModule.useMemo(function()
-		-- upvalues: var4 (ref), p3 (ref)
-		return function()
-			-- upvalues: var4 (copy), p3 (copy)
-			local selection = var4._engineInterface.getSelection()
-			
-			if not selection then return end
-			local inputKeyCode = var4.activeEventMap:getValue()[p3.inputKeyCode]
-			
-			if inputKeyCode == p3.eventName then
-				var4._eventPropagationService:propagateEvent(selection, inputKeyCode, {
-					KeyCode = p3.inputKeyCode,
-					UserInputState = Enum.UserInputState.Begin
-				}, false)
-				task.wait(0.1)
-				var4._eventPropagationService:propagateEvent(selection, inputKeyCode, {
-					KeyCode = p3.inputKeyCode,
-					UserInputState = Enum.UserInputState.End
-				}, false)
+			Item.hasProgress,
+			Item.eventName,
+			Item.inputKeyCode,
+			UseContextResult,
+			UseDispatchSyntheticEventResult
+		}))
+	else
+		local UseContextResult1 = ReactModule.useContext(ReactFocusNavigationModule.FocusNavigationContext)
+		
+		return (ReactModule.useMemo(function() --[[ Line: 61 ]]
+			-- upvalues: UseContextResult1 (copy), Item (copy)
+			return function() --[[ Line: 62 ]]
+				-- upvalues: UseContextResult1 (upval), Item (upval)
+				local Selection = UseContextResult1._engineInterface.getSelection()
 				
-				return
+				if not Selection then return end
+				local Entry = UseContextResult1.activeEventMap:getValue()[Item.inputKeyCode]
+				
+				if Entry == Item.eventName then
+					UseContextResult1._eventPropagationService:propagateEvent(Selection, Entry, {
+						KeyCode = Item.inputKeyCode,
+						UserInputState = Enum.UserInputState.Begin
+					}, false)
+					task.wait(0.1)
+					UseContextResult1._eventPropagationService:propagateEvent(Selection, Entry, {
+						KeyCode = Item.inputKeyCode,
+						UserInputState = Enum.UserInputState.End
+					}, false)
+					
+					return
+				end
 			end
-		end
-	end, { var4, p3.inputKeyCode, p3.eventName })
+		end, { UseContextResult1, Item.inputKeyCode, Item.eventName }))
+	end
 end
 
-function AppShortcut(p3)
-	-- upvalues: useStyle (ref), useTokens (ref), keyLabelUtilities (ref), reactModule (ref), foundationFontFaceMigration (ref), getTextSize (ref), textService (ref), keyLabel (ref), iconWithHoldAnimationModule (ref), icon (ref), useOnShortcutActivated (ref), shortcut (ref), stateLayer (ref)
-	local var2, size900
-	local layoutOrder = p3.layoutOrder
-	local item = p3.item
-	local var3 = useStyle()
-	local var4 = useTokens()
-	local isTable = typeof(item.icon) == "table"
-	local _ = nil
-	local _ = nil
+function AppShortcut(p2) --[[ Line: 85 ]]
+	-- upvalues: UseStyleFunction (copy), UseTokensFunction (copy), KeyLabelUtilities (copy), ReactModule (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy), KeyLabel (copy), IconWithHoldAnimationModule (copy), Icon (copy), useOnShortcutActivated (copy), Shortcut (copy), StateLayer (copy)
+	local LayoutOrder = p2.layoutOrder
+	local Item = p2.item
+	local UseStyleResult = UseStyleFunction()
+	local UseTokensResult = UseTokensFunction()
+	local IsTable = typeof(Item.icon) == "table"
+	local SizeRatio = nil
+	local SizeRatio1 = nil
 	
-	if item.hasProgress then
-		var2 = var4.Size.Size_1300 / 2
-		size900 = var4.Size.Size_1300 / 2
-	elseif isTable then
-		local icon_1 = item.icon
-		local font = var3.Font
-		local var5 = 0
+	if Item.hasProgress then
+		SizeRatio = UseTokensResult.Size.Size_1300 / 2
+		SizeRatio1 = UseTokensResult.Size.Size_1300 / 2
+	elseif IsTable then
+		local UseStyleResultFont = UseStyleResult.Font
+		local NewKeyLabelWidth = 0
 		
-		for i, v in icon_1 do
-			var5 += keyLabelUtilities.getKeyLabelWidth(v, font)
+		for _, value in Item.icon do
+			NewKeyLabelWidth += KeyLabelUtilities.getKeyLabelWidth(value, UseStyleResultFont)
 		end
-		var2 = var5
-		size900 = var4.Size.Size_900
+		SizeRatio = NewKeyLabelWidth
+		SizeRatio1 = UseTokensResult.Size.Size_900
 	else
-		var2 = var4.Size.Size_600
-		size900 = var4.Size.Size_600
+		SizeRatio = UseTokensResult.Size.Size_600
+		SizeRatio1 = UseTokensResult.Size.Size_600
 	end
-	local var6 = reactModule.useMemo(function()
-		-- upvalues: var4 (ref), foundationFontFaceMigration (copy), getTextSize (copy), item (ref), textService (copy), var2 (write)
-		local xSmall = var4.Gap.XSmall
-		local labelMedium = var4.Typography.LabelMedium
-		local vector2 = Vector2.new(1e999, 1e999)
+	local UseMemoResult = ReactModule.useMemo(function(): UDim2 --[[ Line: 107 ]]
+		-- upvalues: UseTokensResult (copy), FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), Item (copy), TextService (upval), SizeRatio (ref)
+		local LabelMedium = UseTokensResult.Typography.LabelMedium
+		local _Vector2 = Vector2.new(1e999, 1e999)
 		
-		return UDim2.new(0, var2 + xSmall + (if foundationFontFaceMigration then getTextSize(item.text, math.floor(labelMedium.FontSize), labelMedium.Font, vector2, { addTemporaryPadding = false }) else textService:GetTextSize(item.text, math.floor(labelMedium.FontSize), labelMedium.Font, vector2)).X, 1, 0)
-	end, { var4, var2, item.text })
-	local var7 = reactModule.useMemo(function()
-		-- upvalues: isTable (ref), reactModule (copy), item (ref), keyLabel (copy)
-		if not isTable then
+		return UDim2.new(0, SizeRatio + UseTokensResult.Gap.XSmall + (if FoundationFontFaceMigration then GetTextSizeFunction(Item.text, math.floor(LabelMedium.FontSize), LabelMedium.Font, _Vector2, { addTemporaryPadding = false }) else TextService:GetTextSize(Item.text, math.floor(LabelMedium.FontSize), LabelMedium.Font, _Vector2)).X, 1, 0)
+	end, { UseTokensResult, SizeRatio, Item.text })
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 124 ]]
+		-- upvalues: IsTable (copy), ReactModule (upval), Item (copy), KeyLabel (upval)
+		if not IsTable then
 			return nil
 		end
-		local t = {
-			ListLayout = reactModule.createElement("UIListLayout", {
+		local config = {
+			ListLayout = ReactModule.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				FillDirection = Enum.FillDirection.Horizontal,
 				VerticalAlignment = Enum.VerticalAlignment.Center
 			})
 		}
 		
-		for i, v in item.icon do
-			t["KeyLabel_" .. tostring(i)] = reactModule.createElement(keyLabel, {
+		for LayoutOrder, KeyCode in Item.icon do
+			config["KeyLabel_" .. tostring(LayoutOrder)] = ReactModule.createElement(KeyLabel, {
 				iconThemeKey = "IconEmphasis",
-				LayoutOrder = i,
-				keyCode = v
+				LayoutOrder = LayoutOrder,
+				keyCode = KeyCode
 			})
 		end
-		return t
-	end, { isTable, item.icon, var4 })
+		return config
+	end, { IsTable, Item.icon, UseTokensResult })
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		LayoutOrder = layoutOrder,
-		Size = var6
+		LayoutOrder = LayoutOrder,
+		Size = UseMemoResult
 	}, {
-		ShortcutFrame = reactModule.createElement("Frame", {
+		ShortcutFrame = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			ZIndex = 2,
 			Size = UDim2.fromScale(1, 1)
 		}, {
-			Shortcut = reactModule.createElement(shortcut, {
+			Shortcut = ReactModule.createElement(Shortcut, {
 				size = UDim2.fromScale(1, 1),
 				automaticSize = Enum.AutomaticSize.None,
-				iconLabelGap = var4.Gap.XSmall,
-				publicProps = item,
-				labelTextSize = var4.Typography.LabelMedium.FontSize,
-				labelColorStyle = var4.Color.Label,
-				labelFontStyle = var4.Typography.LabelMedium,
-				renderIcon = reactModule.useCallback(function(p4)
-					-- upvalues: item (ref), reactModule (copy), iconWithHoldAnimationModule (copy), var2 (write), size900 (write), var4 (ref), isTable (ref), var7 (ref), icon (copy)
-					return if item.hasProgress then reactModule.createElement(iconWithHoldAnimationModule, {
-						layoutOrder = p4.layoutOrder,
-						size = UDim2.fromOffset(var2, size900),
-						progress = item.progress,
-						icon = item.icon,
-						iconSize = var4.Size.Size_900 / 2
-					}) else reactModule.createElement("Frame", {
+				iconLabelGap = UseTokensResult.Gap.XSmall,
+				publicProps = Item,
+				labelTextSize = UseTokensResult.Typography.LabelMedium.FontSize,
+				labelColorStyle = UseTokensResult.Color.Label,
+				labelFontStyle = UseTokensResult.Typography.LabelMedium,
+				renderIcon = ReactModule.useCallback(function(p3) --[[ Line: 146 ]]
+					-- upvalues: Item (copy), ReactModule (upval), IconWithHoldAnimationModule (upval), SizeRatio (ref), SizeRatio1 (ref), UseTokensResult (copy), IsTable (copy), UseMemoResult1 (copy), Icon (upval)
+					return if Item.hasProgress then ReactModule.createElement(IconWithHoldAnimationModule, {
+						layoutOrder = p3.layoutOrder,
+						size = UDim2.fromOffset(SizeRatio, SizeRatio1),
+						progress = Item.progress,
+						icon = Item.icon,
+						iconSize = UseTokensResult.Size.Size_900 / 2
+					}) else ReactModule.createElement("Frame", {
 						BackgroundTransparency = 1,
-						LayoutOrder = p4.layoutOrder,
-						Size = UDim2.fromOffset(var2, size900)
-					}, if isTable then var7 else {
-						Icon = reactModule.createElement(icon, {
-							name = item.icon,
+						LayoutOrder = p3.layoutOrder,
+						Size = UDim2.fromOffset(SizeRatio, SizeRatio1)
+					}, if IsTable then UseMemoResult1 else {
+						Icon = ReactModule.createElement(Icon, {
+							name = Item.icon,
 							AnchorPoint = Vector2.new(0.5, 0.5),
 							Position = UDim2.fromScale(0.5, 0.5)
 						})
 					})
 				end, {
-					item.hasProgress, item.progress, item.icon, var2, size900, isTable, var7,
-					if foundationFontFaceMigration then var4.Size.Size_900 else nil
+					Item.hasProgress, Item.progress, Item.icon, SizeRatio, SizeRatio1, IsTable,
+					UseMemoResult1,
+					if FoundationFontFaceMigration then UseTokensResult.Size.Size_900 else nil
 				})
 			})
 		}),
-		StateLayer = reactModule.createElement(stateLayer, {
+		StateLayer = ReactModule.createElement(StateLayer, {
 			selectable = false,
 			zIndex = 1,
-			cornerRadius = UDim.new(0, var4.Radius.Medium),
-			size = reactModule.useMemo(function()
-				-- upvalues: var6 (ref), var4 (ref)
-				return var6 + UDim2.fromOffset(var4.Size.Size_100 * 2, 0)
-			end, { var6, var4 }),
-			onActivated = useOnShortcutActivated(item)
+			cornerRadius = UDim.new(0, UseTokensResult.Radius.Medium),
+			size = ReactModule.useMemo(function(): UDim2 --[[ Line: 120 ]]
+				-- upvalues: UseMemoResult (copy), UseTokensResult (copy)
+				return UseMemoResult + UDim2.fromOffset(UseTokensResult.Size.Size_100 * 2, 0)
+			end, { UseMemoResult, UseTokensResult }),
+			onActivated = useOnShortcutActivated(Item)
 		})
 	})
 end
 
-return reactModule.memo(AppShortcut)
+return ReactModule.memo(AppShortcut)

@@ -1,25 +1,25 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local roduxModule = require(profilePlatform.Parent.Rodux)
-local gamesModule = require(profilePlatform.Rodux.Games)
-local itemDetailsModule = require(profilePlatform.Rodux.ItemDetails)
-local bundleDetailsModule = require(profilePlatform.Rodux.BundleDetails)
-local assetDetailsModule = require(profilePlatform.Rodux.AssetDetails)
-local myRoduxNetworkingModule = require(profilePlatform.Networking.myRoduxNetworking)
-local presenceModule = require(profilePlatform.Rodux.Presence)
-local profilePlatformFixPresenceReducer = game:DefineFastFlag("ProfilePlatformFixPresenceReducer", false)
-local var1 = if profilePlatformFixPresenceReducer then require(profilePlatform.Rodux.PresenceReducer) else nil
-local profilesModule = require(profilePlatform.Rodux.Profiles)
-local fFlagProfilePlatformPresenceStoreMigrationModule = require(profilePlatform.Flags.FFlagProfilePlatformPresenceStoreMigration)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local RoduxModule = require(ProfilePlatform.Parent.Rodux)
+local GamesModule = require(ProfilePlatform.Rodux.Games)
+local ItemDetailsModule = require(ProfilePlatform.Rodux.ItemDetails)
+local BundleDetailsModule = require(ProfilePlatform.Rodux.BundleDetails)
+local AssetDetailsModule = require(ProfilePlatform.Rodux.AssetDetails)
+local MyRoduxNetworkingModule = require(ProfilePlatform.Networking.myRoduxNetworking)
+local PresenceModule = require(ProfilePlatform.Rodux.Presence)
+local ProfilePlatformFixPresenceReducer = game:DefineFastFlag("ProfilePlatformFixPresenceReducer", false)
+local PresenceReducerModule = if ProfilePlatformFixPresenceReducer then require(ProfilePlatform.Rodux.PresenceReducer) else nil
+local ProfilesModule = require(ProfilePlatform.Rodux.Profiles)
+local FFlagProfilePlatformPresenceStoreMigrationModule = require(ProfilePlatform.Flags.FFlagProfilePlatformPresenceStoreMigration)
 
-return function()
-	-- upvalues: roduxModule (ref), gamesModule (ref), itemDetailsModule (ref), bundleDetailsModule (ref), assetDetailsModule (ref), myRoduxNetworkingModule (ref), fFlagProfilePlatformPresenceStoreMigrationModule (ref), profilePlatformFixPresenceReducer (ref), var1 (ref), presenceModule (ref), profilesModule (ref)
-	return roduxModule.combineReducers({
-		Games = gamesModule.installReducer(),
-		ItemAssets = itemDetailsModule,
-		BundleDetails = bundleDetailsModule,
-		AssetDetails = assetDetailsModule,
-		NetworkStatus = myRoduxNetworkingModule.installReducer(),
-		Presence = if fFlagProfilePlatformPresenceStoreMigrationModule then nil elseif profilePlatformFixPresenceReducer then var1 else presenceModule.installReducer(),
-		Profiles = profilesModule
+return function() --[[ Line: 23 ]]
+	-- upvalues: RoduxModule (copy), GamesModule (copy), ItemDetailsModule (copy), BundleDetailsModule (copy), AssetDetailsModule (copy), MyRoduxNetworkingModule (copy), FFlagProfilePlatformPresenceStoreMigrationModule (copy), ProfilePlatformFixPresenceReducer (copy), PresenceReducerModule (copy), PresenceModule (copy), ProfilesModule (copy)
+	return RoduxModule.combineReducers({
+		Games = GamesModule.installReducer(),
+		ItemAssets = ItemDetailsModule,
+		BundleDetails = BundleDetailsModule,
+		AssetDetails = AssetDetailsModule,
+		NetworkStatus = MyRoduxNetworkingModule.installReducer(),
+		Presence = if FFlagProfilePlatformPresenceStoreMigrationModule then nil elseif ProfilePlatformFixPresenceReducer then PresenceReducerModule else PresenceModule.installReducer(),
+		Profiles = ProfilesModule
 	})
 end

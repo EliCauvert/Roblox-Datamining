@@ -1,28 +1,28 @@
-﻿local parent = script:FindFirstAncestor("ExpChat").Parent
-local displayModule = require(parent.Display)
-local signalsModule = require(parent.Signals)
-local createSignal = signalsModule.createSignal
+﻿local Parent = script:FindFirstAncestor("ExpChat").Parent
+local DisplayModule = require(Parent.Display)
+local SignalsModule = require(Parent.Signals)
+local CreateSignalFunction = SignalsModule.createSignal
 
-return function()
-	-- upvalues: createSignal (ref), signalsModule (ref), displayModule (ref)
-	local var1, var2 = createSignal(false)
-	local var3, var4 = createSignal(false)
-	local var5, var6 = createSignal(false)
-	local var7, var8 = createSignal(false)
+return function() --[[ Line: 28 ]]
+	-- upvalues: CreateSignalFunction (copy), SignalsModule (copy), DisplayModule (copy)
+	local Signal, Signal2 = CreateSignalFunction(false)
+	local Signal1, Signal2_1 = CreateSignalFunction(false)
+	local Signal3, Signal2_2 = CreateSignalFunction(false)
+	local Signal4, Signal2_3 = CreateSignalFunction(false)
 	
 	return {
-		getShouldShowGlobalChatTooltip = var1,
-		setShouldShowGlobalChatTooltip = var2,
-		getIsChatWindowOpen = var3,
-		setIsChatWindowOpen = var4,
-		getIsGlobalChatTooltipDismissed = var5,
-		setIsGlobalChatTooltipDismissed = var6,
-		getIsGlobalChatTooltipEligible = var7,
-		setIsGlobalChatTooltipEligible = var8,
-		getIsScreenWideEnough = signalsModule.createComputed(function(p1)
-			-- upvalues: displayModule (copy)
-			return displayModule.GetDisplayStore(p1).getViewportSize(p1).X >= 720
+		getShouldShowGlobalChatTooltip = Signal,
+		setShouldShowGlobalChatTooltip = Signal2,
+		getIsChatWindowOpen = Signal1,
+		setIsChatWindowOpen = Signal2_1,
+		getIsGlobalChatTooltipDismissed = Signal3,
+		setIsGlobalChatTooltipDismissed = Signal2_2,
+		getIsGlobalChatTooltipEligible = Signal4,
+		setIsGlobalChatTooltipEligible = Signal2_3,
+		getIsScreenWideEnough = SignalsModule.createComputed(function(p1): boolean --[[ Line: 34 ]]
+			-- upvalues: DisplayModule (upval)
+			return DisplayModule.GetDisplayStore(p1).getViewportSize(p1).X >= 720
 		end),
-		reportImpression = function() end
+		reportImpression = function() --[[ Line: 49 ]] end
 	}
 end

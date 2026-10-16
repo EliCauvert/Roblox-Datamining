@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.SocialModalsCommon.SocialModalsCommon)
+﻿return (require(script.Parent.Parent.Parent._Index.SocialModalsCommon.SocialModalsCommon))

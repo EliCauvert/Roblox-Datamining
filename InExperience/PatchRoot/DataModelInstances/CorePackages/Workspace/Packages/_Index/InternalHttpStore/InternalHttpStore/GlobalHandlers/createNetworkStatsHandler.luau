@@ -1,27 +1,27 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local signalsModule = require(parent_1.Signals)
-local networkProfiler = require(parent_1.Http).NetworkProfiler
-local _ = require(parent.HttpStoreTypes)
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local SignalsModule = require(Parent1.Signals)
+local NetworkProfiler = require(Parent1.Http).NetworkProfiler
+local _ = require(Parent.HttpStoreTypes)
 
-return function(p1)
-	-- upvalues: signalsModule (ref), networkProfiler (ref)
-	return signalsModule.createEffect(function(p2)
-		-- upvalues: p1 (ref), networkProfiler (copy)
-		local var1 = p1(p2)
+return function(Callback) --[[ Line: 13 | Named "createNetworkStatsHandler" ]]
+	-- upvalues: SignalsModule (copy), NetworkProfiler (copy)
+	return SignalsModule.createEffect(function(p1) --[[ Line: 14 ]]
+		-- upvalues: Callback (copy), NetworkProfiler (upval)
+		local CallbackResult = Callback(p1)
 		
-		if var1.status == "Success" then
-			local response = var1.response
+		if CallbackResult.status == "Success" then
+			local Response = CallbackResult.response
 			
-			if response.Stats then
-				local stats = response.Stats
-				networkProfiler:track({
-					queued = stats.DurationInQueue or 0,
-					nameLookup = stats.DurationNameLookup or -1,
-					connect = stats.DurationConnect or -1,
-					sslHandshake = stats.DurationSSLHandshake or -1,
-					makeRequest = stats.DurationMakeRequest or -1,
-					receiveResponse = stats.DurationReceiveResponse or -1
+			if Response.Stats then
+				local Stats = Response.Stats
+				NetworkProfiler:track({
+					queued = Stats.DurationInQueue or 0,
+					nameLookup = Stats.DurationNameLookup or -1,
+					connect = Stats.DurationConnect or -1,
+					sslHandshake = Stats.DurationSSLHandshake or -1,
+					makeRequest = Stats.DurationMakeRequest or -1,
+					receiveResponse = Stats.DurationReceiveResponse or -1
 				})
 			end
 		end

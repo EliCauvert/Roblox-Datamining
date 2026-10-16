@@ -1,18 +1,18 @@
-﻿local parent = script:FindFirstAncestor("Badges").Parent
-local urlBuilder = require(parent.UrlBuilder).UrlBuilder
-local var1 = urlBuilder.new({
+﻿local Parent = script:FindFirstAncestor("Badges").Parent
+local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
+local NewUrlBuilder = UrlBuilder.new({
 	path = "landing-page-api/badge-details-page/v1beta1",
-	base = require(parent.Http).Url.APIS_URL
+	base = require(Parent.Http).Url.APIS_URL
 })
 
-return function(p1, p2)
-	-- upvalues: urlBuilder (ref), var1 (ref)
-	local t = { badgeId = p1 }
+return function(BadgeId, UserId) --[[ Line: 12 | Named "getBadgeDetailsUrl" ]]
+	-- upvalues: UrlBuilder (copy), NewUrlBuilder (copy)
+	local config = { badgeId = BadgeId }
 	
-	if p2 then
-		t.userId = p2
+	if UserId then
+		config.userId = UserId
 	end
-	t.PageEntryFormat = "Universal"
+	config.PageEntryFormat = "Universal"
 	
-	return urlBuilder.addQueryString(var1(), t)
+	return (UrlBuilder.addQueryString(NewUrlBuilder(), config))
 end

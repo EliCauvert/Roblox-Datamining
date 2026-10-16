@@ -1,43 +1,45 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local promiseModule = require(parent.Promise)
-local _ = require(parent.types)
-local _ = require(parent_1.IAPExperience)
-local _ = require(parent_1.PurchasePromptLite)
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local PromiseModule = require(Parent.Promise)
+local _ = require(Parent.types)
+local _ = require(Parent1.IAPExperience)
+local _ = require(Parent1.PurchasePromptLite)
 
-local function _(p1)
-	if p1 == nil then
+local function _(List): boolean --[[ Line: 22 | Named "isOfferDeselected" ]]
+	if List == nil then
 		return false
 	end
-	for i, v in p1 do
-		if v == "be86b44b-462a-41a2-a059-01411756f07d" then
+	for _, value in List do
+		if value == "be86b44b-462a-41a2-a059-01411756f07d" then
 			return true
 		end
 	end
 	return false
 end
 
-local function buildMockResponse(p2)
-	local var1
-	if p2 == nil then
-		var1 = false
+local function buildMockResponse(List) --[[ Line: 34 ]]
+	local Flag = nil
+	if List == nil then
+		Flag = false
 	else
-		for i, v in p2 do
-			if v == "be86b44b-462a-41a2-a059-01411756f07d" then
-				var1 = true
+		Flag = false
+		
+		for _, value in List do
+			if value == "be86b44b-462a-41a2-a059-01411756f07d" then
+				Flag = true
+				break
 			end
 		end
-		var1 = false
 	end
-	local var2 = not var1
-	local t = {
+	local NoFlag = not Flag
+	local config = {
 		regularPriceInRobux = 100,
 		productIdentifier = { namespace = "GamePass", targetIdentifier = "12345" },
-		priceInRobux = if var2 then 80 else 100
+		priceInRobux = if NoFlag then 80 else 100
 	}
 	
-	if var2 then
-		t.discountInformation = {
+	if NoFlag then
+		config.discountInformation = {
 			originalPrice = 100,
 			totalDiscountPercentage = 20,
 			totalDiscountAmount = 20,
@@ -54,20 +56,20 @@ local function buildMockResponse(p2)
 		}
 	end
 	return {
-		items = { t },
-		savingsSummary = if var2 then "Saving R$ XX" else nil,
+		items = { config },
+		savingsSummary = if NoFlag then "Saving R$ XX" else nil,
 		availableOffers = {
 			{
 				offerId = "be86b44b-462a-41a2-a059-01411756f07d",
 				localizedDescription = "XX% off one item up to R$ XX",
 				expirationTimeUtc = DateTime.fromUnixTimestamp(DateTime.now().UnixTimestamp + 259200):ToIsoDate(),
-				selected = var2
+				selected = NoFlag
 			}
 		}
 	}
 end
 
-return function(_, _, _, p3, p4, _, _)
-	-- upvalues: promiseModule (ref), buildMockResponse (ref)
-	return if p3 == nil or #p3 == 0 then promiseModule.resolve(nil) else promiseModule.resolve(buildMockResponse(p4))
+return function(_, _, _, p1, p2, _, _) --[[ Line: 81 | Named "MockPostInGameItemCartPricing" ]]
+	-- upvalues: PromiseModule (copy), buildMockResponse (copy)
+	return if p1 == nil or #p1 == 0 then PromiseModule.resolve(nil) else PromiseModule.resolve((buildMockResponse(p2)))
 end

@@ -1,10 +1,10 @@
-﻿local sduiSharedUtilities = script:FindFirstAncestor("SduiSharedUtilities")
-local reactModule = require(sduiSharedUtilities.Parent.React)
-local sduiFeatureEntryPointModule = require(sduiSharedUtilities.SduiFeatureEntryPoint)
+﻿local SduiSharedUtilities = script:FindFirstAncestor("SduiSharedUtilities")
+local ReactModule = require(SduiSharedUtilities.Parent.React)
+local SduiFeatureEntryPointModule = require(SduiSharedUtilities.SduiFeatureEntryPoint)
 
-return function(p1)
-	-- upvalues: reactModule (ref), sduiFeatureEntryPointModule (ref)
-	return reactModule.createElement(sduiFeatureEntryPointModule, {
+return function(p1) --[[ Line: 12 | Named "SduiOverlayEntryPoint" ]]
+	-- upvalues: ReactModule (copy), SduiFeatureEntryPointModule (copy)
+	return ReactModule.createElement(SduiFeatureEntryPointModule, {
 		shouldDisplayLoading = false,
 		shouldDisplayError = false,
 		configKey = p1.configKey,

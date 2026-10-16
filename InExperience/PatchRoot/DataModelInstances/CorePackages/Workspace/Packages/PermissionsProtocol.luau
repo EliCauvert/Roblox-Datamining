@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.PermissionsProtocol.PermissionsProtocol)
+﻿return (require(script.Parent._Workspace.PermissionsProtocol.PermissionsProtocol))

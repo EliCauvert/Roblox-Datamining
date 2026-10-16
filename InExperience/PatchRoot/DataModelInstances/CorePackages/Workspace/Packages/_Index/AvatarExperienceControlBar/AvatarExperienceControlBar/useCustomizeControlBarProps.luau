@@ -1,281 +1,317 @@
-﻿local avatarExperienceControlBar = script:FindFirstAncestor("AvatarExperienceControlBar")
-local parent = avatarExperienceControlBar.Parent
-local reactModule = require(parent.React)
-local userLibModule = require(parent.UserLib)
-local navigationModule = require(parent.Navigation)
-local avatarExperienceNavigationModule = require(parent.AvatarExperienceNavigation)
-local responsiveModule = require(parent.Responsive)
-local localizationModule = require(parent.Localization)
-local avatarExperienceCommonModule = require(parent.AvatarExperienceCommon)
-local avatarExperienceAnalyticsModule = require(parent.AvatarExperienceAnalytics)
-local foundationModule = require(parent.Foundation)
-local selectColorAdjustmentButtonColor = avatarExperienceCommonModule.State.Selectors.selectColorAdjustmentButtonColor
-local selectHasDynamicHead = avatarExperienceCommonModule.State.Selectors.selectHasDynamicHead
-local slotBasedEditorAnalytics = avatarExperienceAnalyticsModule.Surfaces.SlotBasedEditorAnalytics
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local useNavigation = navigationModule.useNavigation
-local useAvatarRoute = avatarExperienceNavigationModule.AvatarRoute.Hooks.useAvatarRoute
-local useSemanticTokensModule = require(avatarExperienceControlBar.Hooks.useSemanticTokens)
-local useLocalization = localizationModule.Hooks.useLocalization
-local useUndoRedoBarViewModelModule = require(script.Parent.UndoRedoBar.useUndoRedoBarViewModel)
-local iconName = foundationModule.Enums.IconName
-local avatarScreen = avatarExperienceNavigationModule.Enums.AvatarScreen
-local getRbxthumbWithTypeSizeAndOptions = userLibModule.Utils.getRbxthumbWithTypeSizeAndOptions
-local constants = userLibModule.Utils.Constants
-local menuItemEnumModule = require(avatarExperienceControlBar.Enums.MenuItemEnum)
-local _ = require(avatarExperienceControlBar.ControlBarTypes)
-local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
-local fFlagAXAvatarSharingEntryPoint = avatarExperienceFlagsModule.FFlagAXAvatarSharingEntryPoint
-local fFlagAXPhotoboothFunctionality = avatarExperienceFlagsModule.FFlagAXPhotoboothFunctionality
-local fFlagAXMigrateBuilderIcons = avatarExperienceFlagsModule.FFlagAXMigrateBuilderIcons
-local fFlagAXRootSlotBasedEditorFlag = require(parent.AvatarExperienceFlags).FFlagAXRootSlotBasedEditorFlag
-local fFlagAXResetAvatarButton = require(parent.AvatarExperienceFlags).FFlagAXResetAvatarButton
-local fFlagAXHideHeadAdjustmentForDefaultHead = require(parent.AvatarExperienceFlags).FFlagAXHideHeadAdjustmentForDefaultHead
-local fFlagAXFavoritesManagerNavEntry = require(parent.AvatarExperienceFlags).FFlagAXFavoritesManagerNavEntry
-local fFlagAXUseProfileIconEntryPoint = avatarExperienceFlagsModule.FFlagAXUseProfileIconEntryPoint
-local fFlagMeProfileEntryTooltipEnabled = avatarExperienceFlagsModule.FFlagMeProfileEntryTooltipEnabled
-local useMeProfileEntryTooltipModule = require(avatarExperienceControlBar.Hooks.useMeProfileEntryTooltip)
-local fFlagControlBarUseProfileFrameThumbnail = avatarExperienceFlagsModule.FFlagControlBarUseProfileFrameThumbnail
-local fFlagAXPPEReturnToEntrySurface = require(parent.SharedFlags).FFlagAXPPEReturnToEntrySurface
-local fFlagEditProfileImageV2Enabled = require(parent.SharedFlags).FFlagEditProfileImageV2Enabled
-local avatarHeadShot = constants.RbxthumbTypes.AvatarHeadShot
-local t = {
-	[avatarScreen.Catalog] = true,
-	[avatarScreen.AvatarEditor] = true,
-	[avatarScreen.MySharedAvatars] = true,
-	[avatarScreen.CatalogSearch] = true,
-	[avatarScreen.CatalogSearchLanding] = true,
-	[avatarScreen.SearchLandingFocusedWidgetPage] = true
+﻿local AvatarExperienceControlBar = script:FindFirstAncestor("AvatarExperienceControlBar")
+local Parent = AvatarExperienceControlBar.Parent
+local ReactModule = require(Parent.React)
+local UserLibModule = require(Parent.UserLib)
+local AvatarExperienceNavigationModule = require(Parent.AvatarExperienceNavigation)
+local AvatarExperienceCommonModule = require(Parent.AvatarExperienceCommon)
+local SelectColorAdjustmentButtonColor = AvatarExperienceCommonModule.State.Selectors.selectColorAdjustmentButtonColor
+local SelectHasDynamicHead = AvatarExperienceCommonModule.State.Selectors.selectHasDynamicHead
+local SlotBasedEditorAnalytics = require(Parent.AvatarExperienceAnalytics).Surfaces.SlotBasedEditorAnalytics
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local UseAvatarRouteFunction = AvatarExperienceNavigationModule.AvatarRoute.Hooks.useAvatarRoute
+local UseSemanticTokensModule = require(AvatarExperienceControlBar.Hooks.useSemanticTokens)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseUndoRedoBarViewModelModule = require(script.Parent.UndoRedoBar.useUndoRedoBarViewModel)
+local IconName = require(Parent.Foundation).Enums.IconName
+local AvatarScreen = AvatarExperienceNavigationModule.Enums.AvatarScreen
+local GetRbxthumbWithTypeSizeAndOptionsFunction = UserLibModule.Utils.getRbxthumbWithTypeSizeAndOptions
+local MenuItemEnumModule = require(AvatarExperienceControlBar.Enums.MenuItemEnum)
+local _ = require(AvatarExperienceControlBar.ControlBarTypes)
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
+local FFlagAXAvatarSharingEntryPoint = AvatarExperienceFlagsModule.FFlagAXAvatarSharingEntryPoint
+local FFlagAXMigrateBuilderIcons = AvatarExperienceFlagsModule.FFlagAXMigrateBuilderIcons
+local FFlagAXResetAvatarButton = require(Parent.AvatarExperienceFlags).FFlagAXResetAvatarButton
+local FFlagAXHideHeadAdjustmentForDefaultHead = require(Parent.AvatarExperienceFlags).FFlagAXHideHeadAdjustmentForDefaultHead
+local FFlagAXFavoritesManagerNavEntry = require(Parent.AvatarExperienceFlags).FFlagAXFavoritesManagerNavEntry
+local FFlagAXUseProfileIconEntryPoint = AvatarExperienceFlagsModule.FFlagAXUseProfileIconEntryPoint
+local FFlagMeProfileEntryTooltipEnabled = AvatarExperienceFlagsModule.FFlagMeProfileEntryTooltipEnabled
+local UseMeProfileEntryTooltipModule = require(AvatarExperienceControlBar.Hooks.useMeProfileEntryTooltip)
+local FFlagControlBarUseProfileFrameThumbnail = AvatarExperienceFlagsModule.FFlagControlBarUseProfileFrameThumbnail
+local FFlagAXPPEReturnToEntrySurface = require(Parent.SharedFlags).FFlagAXPPEReturnToEntrySurface
+local FFlagEditProfileImageV2Enabled = require(Parent.SharedFlags).FFlagEditProfileImageV2Enabled
+local AvatarHeadShot = UserLibModule.Utils.Constants.RbxthumbTypes.AvatarHeadShot
+local config = {
+	[AvatarScreen.Catalog] = true,
+	[AvatarScreen.AvatarEditor] = true,
+	[AvatarScreen.MySharedAvatars] = true,
+	[AvatarScreen.CatalogSearch] = true,
+	[AvatarScreen.CatalogSearchLanding] = true,
+	[AvatarScreen.SearchLandingFocusedWidgetPage] = true
 }
 
-local function selectUserId(p1)
+local function selectUserId(p1) --[[ Line: 62 ]]
 	return p1.LocalUserId
 end
 
-return function(p1)
-	-- upvalues: useSemanticTokensModule (ref), useNavigation (ref), fFlagAXUseProfileIconEntryPoint (ref), fFlagAXPPEReturnToEntrySurface (ref), useAvatarRoute (ref), avatarScreen (ref), useSelector (ref), selectColorAdjustmentButtonColor (ref), responsiveModule (ref), selectUserId (ref), fFlagMeProfileEntryTooltipEnabled (ref), useMeProfileEntryTooltipModule (ref), fFlagAXRootSlotBasedEditorFlag (ref), t (ref), useLocalization (ref), fFlagAXAvatarSharingEntryPoint (ref), fFlagAXPhotoboothFunctionality (ref), reactModule (ref), slotBasedEditorAnalytics (ref), menuItemEnumModule (ref), fFlagEditProfileImageV2Enabled (ref), fFlagAXFavoritesManagerNavEntry (ref), fFlagAXHideHeadAdjustmentForDefaultHead (ref), selectHasDynamicHead (ref), fFlagAXResetAvatarButton (ref), useUndoRedoBarViewModelModule (ref), getRbxthumbWithTypeSizeAndOptions (ref), avatarHeadShot (ref), fFlagControlBarUseProfileFrameThumbnail (ref), fFlagAXMigrateBuilderIcons (ref), iconName (ref)
-	local var1 = useSemanticTokensModule()
-	local var2 = useNavigation()
-	local var3 = if fFlagAXUseProfileIconEntryPoint or fFlagAXPPEReturnToEntrySurface then useAvatarRoute() else nil
-	local var4 = fFlagAXUseProfileIconEntryPoint and (var3 ~= nil and var3.opaque.name == avatarScreen.Profile)
-	local var5 = useSelector(selectColorAdjustmentButtonColor)
-	local var6 = responsiveModule.useOrientation() == responsiveModule.Keys.Portrait
-	local var7 = useSelector(selectUserId)
-	local var8 = nil
-	
-	if fFlagMeProfileEntryTooltipEnabled then
-		var8 = useMeProfileEntryTooltipModule(fFlagAXRootSlotBasedEditorFlag and (var3 ~= nil and (var3.isVisible and (not var3.isOverlayVisible and (var3.current.key == var2.state.key and t[var3.current.name] == true)))), if var3 then var3.current.key else nil)
-	end
-	local var9 = useLocalization({
+return function(p1) --[[ Line: 79 | Named "useCustomizeControlBarProps" ]]
+	-- upvalues: UseSemanticTokensModule (copy), UseNavigationFunction (copy), FFlagAXUseProfileIconEntryPoint (copy), FFlagAXPPEReturnToEntrySurface (copy), UseAvatarRouteFunction (copy), AvatarScreen (copy), UseSelectorFunction (copy), SelectColorAdjustmentButtonColor (copy), selectUserId (copy), FFlagMeProfileEntryTooltipEnabled (copy), UseMeProfileEntryTooltipModule (copy), config (copy), UseLocalizationFunction (copy), FFlagAXAvatarSharingEntryPoint (copy), ReactModule (copy), SlotBasedEditorAnalytics (copy), MenuItemEnumModule (copy), FFlagEditProfileImageV2Enabled (copy), FFlagAXFavoritesManagerNavEntry (copy), FFlagAXHideHeadAdjustmentForDefaultHead (copy), SelectHasDynamicHead (copy), FFlagAXResetAvatarButton (copy), UseUndoRedoBarViewModelModule (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), AvatarHeadShot (copy), FFlagControlBarUseProfileFrameThumbnail (copy), FFlagAXMigrateBuilderIcons (copy), IconName (copy)
+	local UseSemanticTokensModuleResult = UseSemanticTokensModule()
+	local UseNavigationResult = UseNavigationFunction()
+	local UseAvatarRouteResult = if FFlagAXUseProfileIconEntryPoint or FFlagAXPPEReturnToEntrySurface then UseAvatarRouteFunction() else nil
+	local IsNameMatch: boolean = FFlagAXUseProfileIconEntryPoint and (UseAvatarRouteResult ~= nil and UseAvatarRouteResult.opaque.name == AvatarScreen.Profile)
+	local UseSelectorResult = UseSelectorFunction(SelectColorAdjustmentButtonColor)
+	local UseSelectorResult1 = UseSelectorFunction(selectUserId)
+	local UseMeProfileEntryTooltipModuleResult = if FFlagMeProfileEntryTooltipEnabled then UseMeProfileEntryTooltipModule(UseAvatarRouteResult ~= nil and (UseAvatarRouteResult.isVisible and (not UseAvatarRouteResult.isOverlayVisible and (UseAvatarRouteResult.current.key == UseNavigationResult.state.key and config[UseAvatarRouteResult.current.name] == true))), if UseAvatarRouteResult then UseAvatarRouteResult.current.key else nil) else nil
+	local UseLocalizationResult = UseLocalizationFunction({
 		adjustAccessory = "Feature.Avatar.Label.Title.AccessoryAdjustment",
 		bodyShape = "Feature.Avatar.Label.Title.BodyShape",
 		clothingLayering = "Feature.Avatar.Label.Title.ClothingLayering",
 		makeupLayering = "Feature.Avatar.Label.Title.MakeupLayering",
 		headAdjustment = "Feature.Avatar.Label.Title.HeadAdjustment",
-		inventory = "Feature.Avatar.Label.Title.Inventory",
-		emotes = "Feature.Avatar.Label.Title.Emotes",
 		profilePhoto = "Feature.Avatar.Label.Title.ProfilePhoto",
 		skinColor = "Feature.Avatar.ColorAdjustmentPage.Title",
-		profileTooltip = if fFlagMeProfileEntryTooltipEnabled then "Feature.Avatar.profile.tooltip" else nil,
-		shareAvatar = if fFlagAXAvatarSharingEntryPoint then "Feature.Avatar.Action.ShareAvatar" else nil,
-		myPublishedAvatars = if fFlagAXAvatarSharingEntryPoint then "Feature.Avatar.Action.MyPublishedAvatars" else nil,
-		photobooth = if fFlagAXPhotoboothFunctionality then "Feature.Avatar.Label.Photobooth" else nil
+		profileTooltip = if FFlagMeProfileEntryTooltipEnabled then "Feature.Avatar.profile.tooltip" else nil,
+		shareAvatar = if FFlagAXAvatarSharingEntryPoint then "Feature.Avatar.Action.ShareAvatar" else nil,
+		myPublishedAvatars = if FFlagAXAvatarSharingEntryPoint then "Feature.Avatar.Action.MyPublishedAvatars" else nil
 	})
-	local var10 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref), avatarScreen (copy), slotBasedEditorAnalytics (copy), menuItemEnumModule (copy)
-		var2.navigate(avatarScreen.AvatarSwitcher)
-		slotBasedEditorAnalytics.trackControlBarClick(menuItemEnumModule.Main.AvatarSwitcher)
-	end, { var2 })
-	local var11 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref), avatarScreen (copy), slotBasedEditorAnalytics (copy), menuItemEnumModule (copy)
-		var2.navigate(avatarScreen.AccessoryAdjustment)
-		slotBasedEditorAnalytics.trackControlBarClick(menuItemEnumModule.AvatarRefinement.AdjustAccessory)
-	end, { var2 })
-	local var12 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref), avatarScreen (copy), slotBasedEditorAnalytics (copy), menuItemEnumModule (copy)
-		var2.navigate(avatarScreen.BodyShape)
-		slotBasedEditorAnalytics.trackControlBarClick(menuItemEnumModule.AvatarRefinement.BodyScale)
-	end, { var2 })
-	local var13 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref), avatarScreen (copy), slotBasedEditorAnalytics (copy), menuItemEnumModule (copy)
-		var2.navigate(avatarScreen.HeadRefinement)
-		slotBasedEditorAnalytics.trackControlBarClick(menuItemEnumModule.AvatarRefinement.CustomizeHead)
-	end, { var2 })
-	local var14 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref), avatarScreen (copy), slotBasedEditorAnalytics (copy), menuItemEnumModule (copy)
-		var2.navigate(avatarScreen.LayeredClothingSort)
-		slotBasedEditorAnalytics.trackControlBarClick(menuItemEnumModule.AvatarRefinement.ClothingLayers)
-	end, { var2 })
-	local var15 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref), avatarScreen (copy), slotBasedEditorAnalytics (copy), menuItemEnumModule (copy)
-		var2.navigate(avatarScreen.LayeredMakeupSort)
-		slotBasedEditorAnalytics.trackControlBarClick(menuItemEnumModule.AvatarRefinement.MakeupLayers)
-	end, { var2 })
-	local var16 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref), avatarScreen (copy), slotBasedEditorAnalytics (copy), menuItemEnumModule (copy)
-		var2.navigate(avatarScreen.ColorAdjustment)
-		slotBasedEditorAnalytics.trackControlBarClick(menuItemEnumModule.AvatarRefinement.ColorAdjustment)
-	end, { var2 })
-	local var17 = nil
-	local var18 = nil
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 116 ]]
+		-- upvalues: UseNavigationResult (copy), AvatarScreen (upval), SlotBasedEditorAnalytics (upval), MenuItemEnumModule (upval)
+		UseNavigationResult.navigate(AvatarScreen.AccessoryAdjustment)
+		SlotBasedEditorAnalytics.trackControlBarClick(MenuItemEnumModule.AvatarRefinement.AdjustAccessory)
+	end, { UseNavigationResult })
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 121 ]]
+		-- upvalues: UseNavigationResult (copy), AvatarScreen (upval), SlotBasedEditorAnalytics (upval), MenuItemEnumModule (upval)
+		UseNavigationResult.navigate(AvatarScreen.BodyShape)
+		SlotBasedEditorAnalytics.trackControlBarClick(MenuItemEnumModule.AvatarRefinement.BodyScale)
+	end, { UseNavigationResult })
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 126 ]]
+		-- upvalues: UseNavigationResult (copy), AvatarScreen (upval), SlotBasedEditorAnalytics (upval), MenuItemEnumModule (upval)
+		UseNavigationResult.navigate(AvatarScreen.HeadRefinement)
+		SlotBasedEditorAnalytics.trackControlBarClick(MenuItemEnumModule.AvatarRefinement.CustomizeHead)
+	end, { UseNavigationResult })
+	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 131 ]]
+		-- upvalues: UseNavigationResult (copy), AvatarScreen (upval), SlotBasedEditorAnalytics (upval), MenuItemEnumModule (upval)
+		UseNavigationResult.navigate(AvatarScreen.LayeredClothingSort)
+		SlotBasedEditorAnalytics.trackControlBarClick(MenuItemEnumModule.AvatarRefinement.ClothingLayers)
+	end, { UseNavigationResult })
+	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 136 ]]
+		-- upvalues: UseNavigationResult (copy), AvatarScreen (upval), SlotBasedEditorAnalytics (upval), MenuItemEnumModule (upval)
+		UseNavigationResult.navigate(AvatarScreen.LayeredMakeupSort)
+		SlotBasedEditorAnalytics.trackControlBarClick(MenuItemEnumModule.AvatarRefinement.MakeupLayers)
+	end, { UseNavigationResult })
+	local UseResult5 = ReactModule.useCallback(function() --[[ Line: 141 ]]
+		-- upvalues: UseNavigationResult (copy), AvatarScreen (upval), SlotBasedEditorAnalytics (upval), MenuItemEnumModule (upval)
+		UseNavigationResult.navigate(AvatarScreen.ColorAdjustment)
+		SlotBasedEditorAnalytics.trackControlBarClick(MenuItemEnumModule.AvatarRefinement.ColorAdjustment)
+	end, { UseNavigationResult })
+	local UseResult6 = nil
+	local UseResult7 = nil
 	
-	if fFlagAXAvatarSharingEntryPoint then
-		var17 = reactModule.useCallback(function()
-			-- upvalues: var2 (ref), avatarScreen (copy), slotBasedEditorAnalytics (copy), menuItemEnumModule (copy)
-			var2.navigate(avatarScreen.LookComposerPage, {
-				prevNavPage = if var2.state and var2.state.key then var2.state.key else nil
+	if FFlagAXAvatarSharingEntryPoint then
+		UseResult6 = ReactModule.useCallback(function() --[[ Line: 148 ]]
+			-- upvalues: UseNavigationResult (copy), AvatarScreen (upval), SlotBasedEditorAnalytics (upval), MenuItemEnumModule (upval)
+			UseNavigationResult.navigate(AvatarScreen.LookComposerPage, {
+				prevNavPage = if UseNavigationResult.state and UseNavigationResult.state.key then UseNavigationResult.state.key else nil
 			})
-			slotBasedEditorAnalytics.trackControlBarClick(menuItemEnumModule.SharedCommunityAvatars.ShareAvatar)
-		end, { var2 })
-		var18 = reactModule.useCallback(function()
-			-- upvalues: var2 (ref), avatarScreen (copy), slotBasedEditorAnalytics (copy), menuItemEnumModule (copy)
-			var2.navigate(avatarScreen.MySharedAvatars)
-			slotBasedEditorAnalytics.trackControlBarClick(menuItemEnumModule.SharedCommunityAvatars.MyPublishedAvatars)
-		end, { var2 })
+			SlotBasedEditorAnalytics.trackControlBarClick(MenuItemEnumModule.SharedCommunityAvatars.ShareAvatar)
+		end, { UseNavigationResult })
+		UseResult7 = ReactModule.useCallback(function() --[[ Line: 156 ]]
+			-- upvalues: UseNavigationResult (copy), AvatarScreen (upval), SlotBasedEditorAnalytics (upval), MenuItemEnumModule (upval)
+			UseNavigationResult.navigate(AvatarScreen.MySharedAvatars)
+			SlotBasedEditorAnalytics.trackControlBarClick(MenuItemEnumModule.SharedCommunityAvatars.MyPublishedAvatars)
+		end, { UseNavigationResult })
 	end
-	local var19 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref), slotBasedEditorAnalytics (copy), menuItemEnumModule (copy)
-		if p1.onInventoryActivated then
-			p1.onInventoryActivated()
-		end
-		slotBasedEditorAnalytics.trackControlBarClick(menuItemEnumModule.More.Inventory)
-	end, { p1.onInventoryActivated })
-	local var20 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref), avatarScreen (copy), slotBasedEditorAnalytics (copy), menuItemEnumModule (copy)
-		var2.navigate(avatarScreen.EditEmotes)
-		slotBasedEditorAnalytics.trackControlBarClick(menuItemEnumModule.More.Emotes)
-	end, { var2 })
-	local useCallback = reactModule.useCallback
-	useCallback = useCallback(function()
-		-- upvalues: var2 (ref), fFlagEditProfileImageV2Enabled (copy), var3 (write), fFlagAXUseProfileIconEntryPoint (copy), t (copy), avatarScreen (copy), fFlagMeProfileEntryTooltipEnabled (copy), var8 (write), fFlagAXPPEReturnToEntrySurface (copy), slotBasedEditorAnalytics (copy), menuItemEnumModule (copy)
-		local var21 = if var2.state and var2.state.key then var2.state.key else nil
+	local UseResult8 = ReactModule.useCallback(function() --[[ Line: 162 ]]
+		-- upvalues: UseNavigationResult (copy), FFlagEditProfileImageV2Enabled (upval), UseAvatarRouteResult (ref), FFlagAXUseProfileIconEntryPoint (upval), config (upval), AvatarScreen (upval), FFlagMeProfileEntryTooltipEnabled (upval), UseMeProfileEntryTooltipModuleResult (ref), FFlagAXPPEReturnToEntrySurface (upval), SlotBasedEditorAnalytics (upval), MenuItemEnumModule (upval)
+		local Key = if UseNavigationResult.state and UseNavigationResult.state.key then UseNavigationResult.state.key else nil
 		
-		if fFlagEditProfileImageV2Enabled then
-			local var22 = if var3 then var3.opaque.name else var21
+		if FFlagEditProfileImageV2Enabled then
+			local Name = if UseAvatarRouteResult then UseAvatarRouteResult.opaque.name else Key
 			
-			if fFlagAXUseProfileIconEntryPoint and t[var22] then
-				var2.navigate(avatarScreen.Profile, {
+			if FFlagAXUseProfileIconEntryPoint and config[Name] then
+				UseNavigationResult.navigate(AvatarScreen.Profile, {
 					entryOrigin = {
-						screenName = var22,
-						screenParams = if var3 then var3.opaque.params else nil
+						screenName = Name,
+						screenParams = if UseAvatarRouteResult then UseAvatarRouteResult.opaque.params else nil
 					}
 				})
 				
-				if fFlagMeProfileEntryTooltipEnabled and var8 then
-					var8.dismiss()
+				if FFlagMeProfileEntryTooltipEnabled and UseMeProfileEntryTooltipModuleResult then
+					UseMeProfileEntryTooltipModuleResult.dismiss()
 				end
-			elseif fFlagAXPPEReturnToEntrySurface then
-				var2.navigate(avatarScreen.EditProfileImage, {
-					entryOrigin = if var3 then {
-						screenName = var3.opaque.name,
-						screenParams = var3.opaque.params
+			elseif FFlagAXPPEReturnToEntrySurface then
+				UseNavigationResult.navigate(AvatarScreen.EditProfileImage, {
+					entryOrigin = if UseAvatarRouteResult then {
+						screenName = UseAvatarRouteResult.opaque.name,
+						screenParams = UseAvatarRouteResult.opaque.params
 					} else nil
 				})
 			else
-				var2.navigate(avatarScreen.EditProfileImage, { prevNavPage = var21 })
+				UseNavigationResult.navigate(AvatarScreen.EditProfileImage, { prevNavPage = Key })
 			end
 		else
-			local var23 = if var3 then var3.opaque.name else var21
-			local var24 = if fFlagAXUseProfileIconEntryPoint and t[var23] then avatarScreen.Profile else avatarScreen.ProfilePictureEditorEmotes
-			var2.navigate(var24, if var24 == avatarScreen.Profile then {
+			local Name1 = if UseAvatarRouteResult then UseAvatarRouteResult.opaque.name else Key
+			local Profile = if FFlagAXUseProfileIconEntryPoint and config[Name1] then AvatarScreen.Profile else AvatarScreen.ProfilePictureEditorEmotes
+			UseNavigationResult.navigate(Profile, if Profile == AvatarScreen.Profile then {
 				entryOrigin = {
-					screenName = var23,
-					screenParams = if var3 then var3.opaque.params else nil
+					screenName = Name1,
+					screenParams = if UseAvatarRouteResult then UseAvatarRouteResult.opaque.params else nil
 				}
-			} elseif fFlagAXPPEReturnToEntrySurface then {
-				entryOrigin = if var3 then {
-					screenName = var3.opaque.name,
-					screenParams = var3.opaque.params
+			} elseif FFlagAXPPEReturnToEntrySurface then {
+				entryOrigin = if UseAvatarRouteResult then {
+					screenName = UseAvatarRouteResult.opaque.name,
+					screenParams = UseAvatarRouteResult.opaque.params
 				} else nil
-			} else { prevNavPage = var21 })
+			} else { prevNavPage = Key })
 			
-			if fFlagMeProfileEntryTooltipEnabled and var8 and var24 == avatarScreen.Profile then
-				var8.dismiss()
+			if FFlagMeProfileEntryTooltipEnabled and UseMeProfileEntryTooltipModuleResult and Profile == AvatarScreen.Profile then
+				UseMeProfileEntryTooltipModuleResult.dismiss()
 			end
 		end
-		slotBasedEditorAnalytics.trackControlBarClick(menuItemEnumModule.More.ProfilePhoto)
+		SlotBasedEditorAnalytics.trackControlBarClick(MenuItemEnumModule.More.ProfilePhoto)
 	end, {
-		var2,
-		if fFlagAXUseProfileIconEntryPoint or fFlagAXPPEReturnToEntrySurface then var3 else nil,
-		if fFlagMeProfileEntryTooltipEnabled and var8 then var8.dismiss else nil
+		UseNavigationResult,
+		if FFlagAXUseProfileIconEntryPoint or FFlagAXPPEReturnToEntrySurface then UseAvatarRouteResult else nil,
+		if FFlagMeProfileEntryTooltipEnabled and UseMeProfileEntryTooltipModuleResult then UseMeProfileEntryTooltipModuleResult.dismiss else nil
 	})
-	local var21 = if fFlagAXPhotoboothFunctionality then reactModule.useCallback(function()
-		-- upvalues: var2 (ref), avatarScreen (copy), slotBasedEditorAnalytics (copy), menuItemEnumModule (copy)
-		var2.navigate(avatarScreen.Photobooth)
-		slotBasedEditorAnalytics.trackControlBarClick(menuItemEnumModule.Photobooth.Photobooth)
-	end, { var2 }) else nil
-	local var22 = if fFlagAXFavoritesManagerNavEntry then reactModule.useCallback(function()
-		-- upvalues: var2 (ref), avatarScreen (copy), slotBasedEditorAnalytics (copy), menuItemEnumModule (copy)
-		var2.navigate(avatarScreen.FavoritesSaved)
-		slotBasedEditorAnalytics.trackControlBarClick(menuItemEnumModule.Main.Favorites)
-	end, { var2 }) else nil
-	local var23 = if fFlagAXHideHeadAdjustmentForDefaultHead then useSelector(selectHasDynamicHead) else nil
-	local var24 = if fFlagAXResetAvatarButton then useUndoRedoBarViewModelModule() else nil
+	local UseResult9 = if FFlagAXFavoritesManagerNavEntry then ReactModule.useCallback(function() --[[ Line: 231 ]]
+		-- upvalues: UseNavigationResult (copy), AvatarScreen (upval), SlotBasedEditorAnalytics (upval), MenuItemEnumModule (upval)
+		UseNavigationResult.navigate(AvatarScreen.FavoritesSaved)
+		SlotBasedEditorAnalytics.trackControlBarClick(MenuItemEnumModule.Main.Favorites)
+	end, { UseNavigationResult }) else nil
+	local UseSelectorResult2 = if FFlagAXHideHeadAdjustmentForDefaultHead then UseSelectorFunction(SelectHasDynamicHead) else nil
+	local UseUndoRedoBarViewModelModuleResult = if FFlagAXResetAvatarButton then UseUndoRedoBarViewModelModule() else nil
 	
 	return {
-		config = reactModule.useMemo(function()
-			-- upvalues: menuItemEnumModule (copy), p1 (ref), getRbxthumbWithTypeSizeAndOptions (copy), var7 (ref), avatarHeadShot (copy), fFlagControlBarUseProfileFrameThumbnail (copy), fFlagAXRootSlotBasedEditorFlag (copy), useCallback (ref), var10 (ref), fFlagAXUseProfileIconEntryPoint (copy), var4 (ref), fFlagMeProfileEntryTooltipEnabled (copy), var8 (write), var9 (ref), fFlagAXMigrateBuilderIcons (copy), iconName (copy), slotBasedEditorAnalytics (copy), var1 (ref), var11 (ref), var12 (ref), var13 (ref), fFlagAXHideHeadAdjustmentForDefaultHead (copy), var23 (ref), var14 (ref), var15 (ref), var5 (ref), var16 (ref), fFlagAXAvatarSharingEntryPoint (copy), var17 (write), var18 (write), var19 (ref), var6 (ref), var20 (ref), fFlagAXPhotoboothFunctionality (copy), var21 (write), fFlagAXFavoritesManagerNavEntry (copy), var22 (write), fFlagAXResetAvatarButton (copy), var24 (ref)
-			local var25
-			local t = {}
-			local t_1 = {
-				type = "image",
-				id = menuItemEnumModule.Main.AvatarSwitcher,
-				thumbnailUrl = if p1.thumbnailUrl then p1.thumbnailUrl else getRbxthumbWithTypeSizeAndOptions(var7, avatarHeadShot, 150, true, true, fFlagControlBarUseProfileFrameThumbnail),
-				onActivated = if fFlagAXRootSlotBasedEditorFlag then useCallback else var10,
-				visible = if fFlagAXUseProfileIconEntryPoint then not var4 else nil,
-				hideIndicator = if fFlagAXRootSlotBasedEditorFlag then true else nil,
-				toolTipConfig = if fFlagMeProfileEntryTooltipEnabled and var8 then {
-					compact = true,
-					bodyText = var9.profileTooltip,
-					open = var8.showTooltip,
-					onShown = var8.onShown,
-					onDismiss = var8.dismiss
+		config = ReactModule.useMemo(function() --[[ Line: 247 ]]
+			-- upvalues: MenuItemEnumModule (upval), p1 (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (upval), UseSelectorResult1 (copy), AvatarHeadShot (upval), FFlagControlBarUseProfileFrameThumbnail (upval), UseResult8 (copy), FFlagAXUseProfileIconEntryPoint (upval), IsNameMatch (copy), FFlagMeProfileEntryTooltipEnabled (upval), UseMeProfileEntryTooltipModuleResult (ref), UseLocalizationResult (copy), FFlagAXMigrateBuilderIcons (upval), IconName (upval), SlotBasedEditorAnalytics (upval), UseSemanticTokensModuleResult (copy), UseResult (copy), UseResult1 (copy), UseResult2 (copy), FFlagAXHideHeadAdjustmentForDefaultHead (upval), UseSelectorResult2 (copy), UseResult3 (copy), UseResult4 (copy), UseSelectorResult (copy), UseResult5 (copy), FFlagAXAvatarSharingEntryPoint (upval), UseResult6 (ref), UseResult7 (ref), FFlagAXFavoritesManagerNavEntry (upval), UseResult9 (ref), FFlagAXResetAvatarButton (upval), UseUndoRedoBarViewModelModuleResult (copy)
+			local List = {
+				{
+					type = "image",
+					hideIndicator = true,
+					id = MenuItemEnumModule.Main.AvatarSwitcher,
+					thumbnailUrl = if p1.thumbnailUrl then p1.thumbnailUrl else GetRbxthumbWithTypeSizeAndOptionsFunction(UseSelectorResult1, AvatarHeadShot, 150, true, true, FFlagControlBarUseProfileFrameThumbnail),
+					onActivated = UseResult8,
+					visible = if FFlagAXUseProfileIconEntryPoint then not IsNameMatch else nil,
+					toolTipConfig = if FFlagMeProfileEntryTooltipEnabled and UseMeProfileEntryTooltipModuleResult then {
+						compact = true,
+						bodyText = UseLocalizationResult.profileTooltip,
+						open = UseMeProfileEntryTooltipModuleResult.showTooltip,
+						onShown = UseMeProfileEntryTooltipModuleResult.onShown,
+						onDismiss = UseMeProfileEntryTooltipModuleResult.dismiss
+					} else nil,
+					enableFocusAnimation = if p1.focusAnimation then p1.focusAnimation.enabled and p1.focusAnimation.menuItemId == MenuItemEnumModule.Main.AvatarSwitcher else nil
+				},
+				{
+					type = "icon",
+					id = MenuItemEnumModule.Main.AvatarRefinement,
+					icon = if FFlagAXMigrateBuilderIcons then IconName.PersonStandingGear else "icons/menu/customize",
+					onActivated = function() --[[ Line: 283 ]]
+						-- upvalues: SlotBasedEditorAnalytics (upval), MenuItemEnumModule (upval)
+						SlotBasedEditorAnalytics.trackControlBarClick(MenuItemEnumModule.Main.AvatarRefinement)
+					end,
+					children = {
+						{
+							type = "icon",
+							id = MenuItemEnumModule.AvatarRefinement.AdjustAccessory,
+							text = UseLocalizationResult.adjustAccessory,
+							icon = if FFlagAXMigrateBuilderIcons then IconName.HatFedora else "icons/menu/clothing/hats_off",
+							iconSize = UseSemanticTokensModuleResult.defaultLegacyIconSize,
+							onActivated = UseResult
+						},
+						{
+							type = "icon",
+							id = MenuItemEnumModule.AvatarRefinement.BodyScale,
+							text = UseLocalizationResult.bodyShape,
+							icon = if FFlagAXMigrateBuilderIcons then IconName.PersonStandingDualArrowsVertical else "icons/menu/clothing/build_off",
+							iconSize = UseSemanticTokensModuleResult.defaultLegacyIconSize,
+							onActivated = UseResult1
+						},
+						{
+							type = "icon",
+							id = MenuItemEnumModule.AvatarRefinement.CustomizeHead,
+							text = UseLocalizationResult.headAdjustment,
+							icon = if FFlagAXMigrateBuilderIcons then IconName.HeadBlank else "icons/menu/clothing/classicHead_off",
+							iconSize = UseSemanticTokensModuleResult.defaultLegacyIconSize,
+							onActivated = UseResult2,
+							visible = if FFlagAXHideHeadAdjustmentForDefaultHead then UseSelectorResult2 else nil
+						},
+						{
+							type = "icon",
+							id = MenuItemEnumModule.AvatarRefinement.ClothingLayers,
+							text = UseLocalizationResult.clothingLayering,
+							icon = if FFlagAXMigrateBuilderIcons then IconName.ClothesHanger else "icons/menu/clothing/clothing_off",
+							iconSize = UseSemanticTokensModuleResult.defaultLegacyIconSize,
+							onActivated = UseResult3
+						},
+						{
+							type = "icon",
+							id = MenuItemEnumModule.AvatarRefinement.MakeupLayers,
+							text = UseLocalizationResult.makeupLayering,
+							icon = if FFlagAXMigrateBuilderIcons then IconName.LipsLipstickMakeupBrush else "icons/menu/clothing/eyelash_off",
+							iconSize = UseSemanticTokensModuleResult.defaultLegacyIconSize,
+							onActivated = UseResult4
+						},
+						if UseSelectorResult then {
+							type = "color",
+							id = MenuItemEnumModule.AvatarRefinement.ColorAdjustment,
+							text = UseLocalizationResult.skinColor,
+							colors = { UseSelectorResult },
+							colorSize = UseSemanticTokensModuleResult.defaultLegacyIconSize,
+							onActivated = UseResult5
+						} else nil
+					}
+				},
+				if FFlagAXAvatarSharingEntryPoint then {
+					type = "icon",
+					id = MenuItemEnumModule.Main.SharedCommunityAvatars,
+					icon = if FFlagAXMigrateBuilderIcons then IconName.CirclePlus else "icons/actions/edit/add",
+					onActivated = function() --[[ Line: 355 ]]
+						-- upvalues: SlotBasedEditorAnalytics (upval), MenuItemEnumModule (upval)
+						SlotBasedEditorAnalytics.trackControlBarClick(MenuItemEnumModule.Main.SharedCommunityAvatars)
+					end,
+					children = {
+						{
+							type = "icon",
+							id = MenuItemEnumModule.SharedCommunityAvatars.ShareAvatar,
+							text = UseLocalizationResult.shareAvatar,
+							icon = if FFlagAXMigrateBuilderIcons then IconName.PlusLarge else "icons/common/plus_heavy",
+							iconSize = UseSemanticTokensModuleResult.defaultLegacyIconSize,
+							onActivated = UseResult6
+						},
+						{
+							type = "icon",
+							id = MenuItemEnumModule.SharedCommunityAvatars.MyPublishedAvatars,
+							text = UseLocalizationResult.myPublishedAvatars,
+							icon = if FFlagAXMigrateBuilderIcons then IconName.Person else "icons/actions/friend_sort/my_profile",
+							iconSize = UseSemanticTokensModuleResult.defaultLegacyIconSize,
+							onActivated = UseResult7
+						}
+					}
 				} else nil
 			}
 			
-			if p1.focusAnimation then
-				var25 = p1.focusAnimation.enabled
-				
-				if var25 then
-					var25 = p1.focusAnimation.menuItemId == menuItemEnumModule.Main.AvatarSwitcher
-					var25 = nil
-				end
-			else
-				var25 = nil
-			end
-			t_1.enableFocusAnimation = var25
-			-- Unknown statement at pc 1: <SetList>
-			
-			if fFlagAXFavoritesManagerNavEntry then
-				table.insert(t, {
+			if FFlagAXFavoritesManagerNavEntry then
+				table.insert(List, {
 					type = "icon",
 					isActive = false,
-					id = menuItemEnumModule.Main.Favorites,
-					icon = iconName.Star,
-					onActivated = var22
+					id = MenuItemEnumModule.Main.Favorites,
+					icon = IconName.Star,
+					onActivated = UseResult9
 				})
 			end
-			if fFlagAXResetAvatarButton and p1.showUndoRedo then
-				table.insert(t, {
+			if FFlagAXResetAvatarButton and p1.showUndoRedo then
+				table.insert(List, {
 					type = "divider",
-					id = menuItemEnumModule.UndoRedoDivider
+					id = MenuItemEnumModule.UndoRedoDivider
 				})
 				
-				for i, v in var24.items do
-					table.insert(t, v)
+				for _, item in UseUndoRedoBarViewModelModuleResult.items do
+					table.insert(List, item)
 				end
 			end
-			return t
+			return List
 		end, {
-			var7, var10, var11, var12, var13, var14, var19, var20, useCallback, var16,
-			var5, var6, p1.thumbnailUrl, p1.focusAnimation,
-			if fFlagAXResetAvatarButton then p1.showUndoRedo else nil,
-			if fFlagAXResetAvatarButton then var24 else nil,
-			if fFlagAXHideHeadAdjustmentForDefaultHead then var23 else nil,
-			if fFlagAXUseProfileIconEntryPoint then var4 else nil,
-			if fFlagMeProfileEntryTooltipEnabled and var8 then var8.showTooltip else nil,
-			if fFlagMeProfileEntryTooltipEnabled and var3 then var3.opaque.name else nil,
-			if fFlagMeProfileEntryTooltipEnabled then var9.profileTooltip else nil
+			UseSelectorResult1, UseResult, UseResult1, UseResult2, UseResult3, UseResult8,
+			UseResult5, UseSelectorResult, p1.thumbnailUrl, p1.focusAnimation,
+			if FFlagAXResetAvatarButton then p1.showUndoRedo else nil,
+			if FFlagAXResetAvatarButton then UseUndoRedoBarViewModelModuleResult else nil,
+			if FFlagAXHideHeadAdjustmentForDefaultHead then UseSelectorResult2 else nil,
+			if FFlagAXUseProfileIconEntryPoint then IsNameMatch else nil,
+			if FFlagMeProfileEntryTooltipEnabled and UseMeProfileEntryTooltipModuleResult then UseMeProfileEntryTooltipModuleResult.showTooltip else nil,
+			if FFlagMeProfileEntryTooltipEnabled and UseAvatarRouteResult then UseAvatarRouteResult.opaque.name else nil,
+			if FFlagMeProfileEntryTooltipEnabled then UseLocalizationResult.profileTooltip else nil
 		})
 	}
 end

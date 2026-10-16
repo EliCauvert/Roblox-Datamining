@@ -1,351 +1,391 @@
 ﻿local _ = require(script.Parent.Parent.types)
-local constantsModule = require(script.Parent.constants)
-local historyPageUtilsModule = require(script.Parent.historyPageUtils)
+local ConstantsModule = require(script.Parent.constants)
+local HistoryPageUtilsModule = require(script.Parent.historyPageUtils)
 local _ = require(script.Parent.sessionDeps)
 
 return {
-	createHistoryPolling = function(p1)
-		-- upvalues: historyPageUtilsModule (ref), constantsModule (ref)
-		local function pollSessionHistory(p2, p3, p4, p5)
-			-- upvalues: p1 (ref), historyPageUtilsModule (copy)
-			if p5() then
+	createHistoryPolling = function(p1) --[[ Line: 23 ]]
+		-- upvalues: HistoryPageUtilsModule (copy), ConstantsModule (copy)
+		local function pollSessionHistory(CasSessionId, AfterSequenceId, Callback1: (any) -> (), Callback): boolean --[[ Line: 24 ]]
+			-- upvalues: p1 (copy), HistoryPageUtilsModule (upval)
+			if Callback() then
 				return false
 			end
-			local var1 = p1.deps.sessionLoad(p2, nil)
-			local var2 = historyPageUtilsModule.awaitRequestState(var1.state, os.clock() + p1.rpcTimeoutSeconds)
+			local SessionLoadResult = p1.deps.sessionLoad(CasSessionId, nil)
+			local AwaitRequestStateResult = HistoryPageUtilsModule.awaitRequestState(SessionLoadResult.state, os.clock() + p1.rpcTimeoutSeconds)
 			
-			if var2.status == "pending" then
-				var1.dispose()
+			if AwaitRequestStateResult.status == "pending" then
+				SessionLoadResult.dispose()
 				
 				return false
-			elseif p5() or var2.status ~= "succeeded" then
+			end
+			if Callback() or AwaitRequestStateResult.status ~= "succeeded" then
 				return false
 			end
-			local sessionLoadHistory = historyPageUtilsModule.getSessionLoadHistory(var2.result)
+			local SessionLoadHistory = HistoryPageUtilsModule.getSessionLoadHistory(AwaitRequestStateResult.result)
 			
-			if #sessionLoadHistory == 0 or p5() then
-				return false
-			elseif p5() then
+			if #SessionLoadHistory == 0 or Callback() then
 				return false
 			end
-			p1.mergeHistoryPage(sessionLoadHistory, p1.getNextHistoryPageToken())
-			local var3 = p1.deps.ingestSessionHistory(p2, sessionLoadHistory, p3)
+			if Callback() then
+				return false
+			end
+			p1.mergeHistoryPage(SessionLoadHistory, p1.getNextHistoryPageToken())
+			local IngestSessionHistoryResult = p1.deps.ingestSessionHistory(CasSessionId, SessionLoadHistory, AfterSequenceId)
 			
-			if p4 ~= nil then
-				for i, v in var3 do
-					p4(v)
+			if Callback1 ~= nil then
+				for _, value in IngestSessionHistoryResult do
+					Callback1(value)
 				end
 			end
-			return if p5() then false else #var3 > 0
+			return not Callback() and #IngestSessionHistoryResult > 0
 		end
 		
-		local function startPollingTurnFromHistory(p6, p7, p8)
-			-- upvalues: historyPageUtilsModule (copy), constantsModule (copy), p1 (ref), pollSessionHistory (ref)
-			p8 = p8 or {}
-			local var4 = historyPageUtilsModule.resolveNonNegativeNumber(p8.rtnIdleFallbackSeconds, constantsModule.getRtnIdleFallbackSeconds())
-			local var5 = historyPageUtilsModule.resolveNonNegativeNumber(p8.rtnSequenceGapFallbackSeconds, constantsModule.getRtnSequenceGapFallbackSeconds())
-			local var6 = historyPageUtilsModule.resolvePositiveNumber(p8.pollMinIntervalSeconds, constantsModule.getPollMinIntervalSeconds())
-			local var7 = historyPageUtilsModule.resolvePositiveNumber(p8.pollMaxIntervalSeconds, constantsModule.getPollMaxIntervalSeconds())
+		local function startPollingTurnFromHistory(CasSessionId, ActiveTurnHandle, p2) --[[ Line: 66 ]]
+			-- upvalues: HistoryPageUtilsModule (upval), ConstantsModule (upval), p1 (copy), pollSessionHistory (copy)
+			local P5 = p2 or {}
+			local ResolveNonNegativeNumberResult = HistoryPageUtilsModule.resolveNonNegativeNumber(P5.rtnIdleFallbackSeconds, ConstantsModule.getRtnIdleFallbackSeconds())
+			local ResolveNonNegativeNumberResult1 = HistoryPageUtilsModule.resolveNonNegativeNumber(P5.rtnSequenceGapFallbackSeconds, ConstantsModule.getRtnSequenceGapFallbackSeconds())
+			local ResolvePositiveNumberResult = HistoryPageUtilsModule.resolvePositiveNumber(P5.pollMinIntervalSeconds, ConstantsModule.getPollMinIntervalSeconds())
+			local ResolvePositiveNumberResult1 = HistoryPageUtilsModule.resolvePositiveNumber(P5.pollMaxIntervalSeconds, ConstantsModule.getPollMaxIntervalSeconds())
 			
-			if var7 < var6 then
-				var7 = var6
+			if ResolvePositiveNumberResult1 < ResolvePositiveNumberResult then
+				ResolvePositiveNumberResult1 = ResolvePositiveNumberResult
 			end
-			local afterSequenceId = p8.afterSequenceId
-			local noteProcessedSequenceNumber = p7.noteProcessedSequenceNumber
+			local AfterSequenceId = P5.afterSequenceId
+			local NoteProcessedSequenceNumberFunction: (any) -> () = ActiveTurnHandle.noteProcessedSequenceNumber
 			
-			if afterSequenceId ~= nil and noteProcessedSequenceNumber ~= nil then
-				noteProcessedSequenceNumber(afterSequenceId)
+			if AfterSequenceId ~= nil and NoteProcessedSequenceNumberFunction ~= nil then
+				NoteProcessedSequenceNumberFunction(AfterSequenceId)
 			end
-			local var8 = false
-			local var9 = false
-			local var10 = false
-			local var11 = false
-			local var12 = false
-			local var13 = var6
-			local processTime = os.clock()
-			local var14 = false
-			local var15 = 0
-			local var16 = 0
-			local var17 = 0
+			local Flag = false
+			local Flag1 = false
+			local Flag2 = false
+			local v1 = false
+			local Flag3 = false
+			local Smallest = ResolvePositiveNumberResult
+			local ClockTime = os.clock()
+			local Flag4 = false
+			local Count = 0
+			local Count1 = 0
+			local Count2 = 0
 			
-			local function shouldStopPolling()
-				-- upvalues: var8 (write), p7 (ref), p1 (copy), p6 (ref)
-				return var8 or (p7.state(false).isDone or p1.getCasSessionId() ~= p6)
+			local function shouldStopPolling() --[[ Line: 110 ]]
+				-- upvalues: Flag (ref), ActiveTurnHandle (copy), p1 (upval), CasSessionId (copy)
+				return Flag or (ActiveTurnHandle.state(false).isDone or p1.getCasSessionId() ~= CasSessionId)
 			end
 			
-			local var18 = nil
+			local Callback = nil
 			
-			local function _()
-				-- upvalues: var9 (write), var13 (write), var6 (ref), var17 (write)
-				if var9 then
-					var9 = false
-					var13 = var6
-					var17 += 1
+			local function _() --[[ Line: 116 | Named "stopPolling" ]]
+				-- upvalues: Flag1 (ref), Smallest (ref), ResolvePositiveNumberResult (copy), Count2 (ref)
+				if Flag1 then
+					Flag1 = false
+					Smallest = ResolvePositiveNumberResult
+					Count2 += 1
 					
 					return
 				end
 			end
 			
-			local _ = function()
-				-- upvalues: var9 (write), var8 (write), p7 (ref), p1 (copy), p6 (ref), var13 (write), var6 (ref), var18 (write)
-				if var9 or (var8 or (p7.state(false).isDone or p1.getCasSessionId() ~= p6)) then
-					return
-				end
-				var9 = true
-				var13 = var6
-				var18(0)
-			end
-			
-			local _ = function()
-				-- upvalues: var8 (write), p7 (ref), p1 (copy), p6 (ref), var9 (write), var13 (write), var6 (ref), var17 (write), var10 (write), var12 (write), var18 (write)
-				if var8 or (p7.state(false).isDone or p1.getCasSessionId() ~= p6) then
-					if var9 then
-						var9 = false
-						var13 = var6
-						var17 += 1
-						
-						return
-					end
-					return
-				elseif var10 or var12 then
-					if var9 then return end
-					if var8 or (p7.state(false).isDone or p1.getCasSessionId() ~= p6) then
-						return
-					end
-					var9 = true
-					var13 = var6
-					var18(0)
+			local _ = function() --[[ Line: 125 | Named "startPolling" ]]
+				-- upvalues: Flag1 (ref), Flag (ref), ActiveTurnHandle (copy), p1 (upval), CasSessionId (copy), Smallest (ref), ResolvePositiveNumberResult (copy), Callback (ref)
+				if not Flag1 and (not Flag and (not ActiveTurnHandle.state(false).isDone and p1.getCasSessionId() == CasSessionId)) then
+					Flag1 = true
+					Smallest = ResolvePositiveNumberResult
+					Callback(0)
 					
 					return
-				elseif not var9 then return end
-				var9 = false
-				var13 = var6
-				var17 += 1
+				end
 			end
 			
-			local function refreshSequenceGapState()
-				-- upvalues: p7 (ref), var11 (write), var12 (write), var16 (write), var5 (ref), var8 (write), p1 (copy), p6 (ref), var9 (write), var13 (write), var6 (ref), var17 (write), var10 (write), var18 (write)
-				local hasSequenceGap = p7.hasSequenceGap
-				local var19 = hasSequenceGap ~= nil and hasSequenceGap()
-				
-				if var19 == var11 then return end
-				var11 = var19
-				var12 = false
-				var16 += 1
-				local var20 = var16
-				
-				if var19 then
-					task.delay(var5, function()
-						-- upvalues: var20 (ref), var16 (copy), var8 (copy), p7 (copy), p1 (copy), p6 (copy), var11 (copy), var12 (copy), var9 (copy), var13 (copy), var6 (copy), var17 (copy), var10 (copy), var18 (copy)
-						if var20 ~= var16 or (var8 or (p7.state(false).isDone or p1.getCasSessionId() ~= p6)) or not var11 then return end
-						var12 = true
+			local _ = function() --[[ Line: 134 | Named "updatePollingState" ]]
+				-- upvalues: Flag (ref), ActiveTurnHandle (copy), p1 (upval), CasSessionId (copy), Flag1 (ref), Smallest (ref), ResolvePositiveNumberResult (copy), Count2 (ref), Flag2 (ref), Flag3 (ref), Callback (ref)
+				if Flag or (ActiveTurnHandle.state(false).isDone or p1.getCasSessionId() ~= CasSessionId) then
+					if Flag1 then
+						Flag1 = false
+						Smallest = ResolvePositiveNumberResult
+						Count2 += 1
 						
-						if var8 or (p7.state(false).isDone or p1.getCasSessionId() ~= p6) then
-							if var9 then
-								var9 = false
-								var13 = var6
-								var17 += 1
+						return
+					end
+					return
+				elseif Flag2 or Flag3 then
+					if not Flag1 then
+						if not Flag and (not ActiveTurnHandle.state(false).isDone and p1.getCasSessionId() == CasSessionId) then
+							Flag1 = true
+							Smallest = ResolvePositiveNumberResult
+							Callback(0)
+							
+							return
+						end
+						return
+					end
+				elseif not Flag1 then return end
+				Flag1 = false
+				Smallest = ResolvePositiveNumberResult
+				Count2 += 1
+			end
+			
+			local function refreshSequenceGapState() --[[ Line: 144 ]]
+				-- upvalues: ActiveTurnHandle (copy), v1 (ref), Flag3 (ref), Count1 (ref), ResolveNonNegativeNumberResult1 (copy), Flag (ref), p1 (upval), CasSessionId (copy), Flag1 (ref), Smallest (ref), ResolvePositiveNumberResult (copy), Count2 (ref), Flag2 (ref), Callback (ref)
+				local HasSequenceGapFunction = ActiveTurnHandle.hasSequenceGap
+				local HasSequenceGap = HasSequenceGapFunction ~= nil and HasSequenceGapFunction()
+				
+				if HasSequenceGap == v1 then return end
+				v1 = HasSequenceGap
+				Flag3 = false
+				Count1 += 1
+				local Count: number = Count1
+				
+				if HasSequenceGap then
+					task.delay(ResolveNonNegativeNumberResult1, function() --[[ Line: 156 ]]
+						-- upvalues: Count (copy), Count1 (upval), Flag (upval), ActiveTurnHandle (upval), p1 (upval), CasSessionId (upval), v1 (upval), Flag3 (upval), Flag1 (upval), Smallest (upval), ResolvePositiveNumberResult (upval), Count2 (upval), Flag2 (upval), Callback (upval)
+						if Count ~= Count1 or (Flag or (ActiveTurnHandle.state(false).isDone or p1.getCasSessionId() ~= CasSessionId) or not v1) then return end
+						Flag3 = true
+						
+						if Flag or (ActiveTurnHandle.state(false).isDone or p1.getCasSessionId() ~= CasSessionId) then
+							if Flag1 then
+								Flag1 = false
+								Smallest = ResolvePositiveNumberResult
+								Count2 += 1
 								
 								return
 							end
 							return
-						end
-						if not var9 then
-							if var8 or (p7.state(false).isDone or p1.getCasSessionId() ~= p6) then return end
-							var9 = true
-							var13 = var6
-							var18(0)
-							
-							return
-						end
+						elseif Flag2 or Flag3 then
+							if not Flag1 then
+								if not Flag and (not ActiveTurnHandle.state(false).isDone and p1.getCasSessionId() == CasSessionId) then
+									Flag1 = true
+									Smallest = ResolvePositiveNumberResult
+									Callback(0)
+									
+									return
+								end
+								return
+							end
+						elseif not Flag1 then return end
+						Flag1 = false
+						Smallest = ResolvePositiveNumberResult
+						Count2 += 1
 					end)
 				end
-				if var8 or (p7.state(false).isDone or p1.getCasSessionId() ~= p6) then
-					if var9 then
-						var9 = false
-						var13 = var6
-						var17 += 1
+				if Flag or (ActiveTurnHandle.state(false).isDone or p1.getCasSessionId() ~= CasSessionId) then
+					if Flag1 then
+						Flag1 = false
+						Smallest = ResolvePositiveNumberResult
+						Count2 += 1
 						
 						return
 					end
 					return
-				elseif var10 then
-					if var9 then return end
-					if var8 or (p7.state(false).isDone or p1.getCasSessionId() ~= p6) then
+				elseif Flag2 or Flag3 then
+					if not Flag1 then
+						if not Flag and (not ActiveTurnHandle.state(false).isDone and p1.getCasSessionId() == CasSessionId) then
+							Flag1 = true
+							Smallest = ResolvePositiveNumberResult
+							Callback(0)
+							
+							return
+						end
 						return
 					end
-					var9 = true
-					var13 = var6
-					var18(0)
-					
-					return
-				elseif not var9 then return end
-				var9 = false
-				var13 = var6
-				var17 += 1
+				elseif not Flag1 then return end
+				Flag1 = false
+				Smallest = ResolvePositiveNumberResult
+				Count2 += 1
 			end
 			
 			local _ = nil
 			
-			local var19 = function(p9)
-				-- upvalues: var14 (write), var15 (write), var8 (write), p7 (ref), p1 (copy), p6 (ref), var4 (ref), processTime (write), var19 (write), var10 (write), var9 (write), var13 (write), var6 (ref), var17 (write), var12 (write), var18 (write)
-				if var14 then
+			local function v33(Delay) --[[ Line: 168 ]]
+				-- upvalues: Flag4 (ref), Count (ref), Flag (ref), ActiveTurnHandle (copy), p1 (upval), CasSessionId (copy), ResolveNonNegativeNumberResult (copy), ClockTime (ref), v33 (ref), Flag2 (ref), Flag1 (ref), Smallest (ref), ResolvePositiveNumberResult (copy), Count2 (ref), Flag3 (ref), Callback (ref)
+				if not Flag4 then
+					Flag4 = true
+					local Count1 = Count
+					task.delay(Delay, function() --[[ Line: 174 ]]
+						-- upvalues: Flag4 (upval), Count1 (copy), Count (upval), Flag (upval), ActiveTurnHandle (upval), p1 (upval), CasSessionId (upval), ResolveNonNegativeNumberResult (upval), ClockTime (upval), v33 (upval), Flag2 (upval), Flag1 (upval), Smallest (upval), ResolvePositiveNumberResult (upval), Count2 (upval), Flag3 (upval), Callback (upval)
+						Flag4 = false
+						
+						if Count1 ~= Count or (Flag or (ActiveTurnHandle.state(false).isDone or p1.getCasSessionId() ~= CasSessionId)) then return end
+						local ResolveNonNegativeNumberResultDelta = ResolveNonNegativeNumberResult - (os.clock() - ClockTime)
+						
+						if ResolveNonNegativeNumberResultDelta > 0 then
+							v33(ResolveNonNegativeNumberResultDelta)
+							
+							return
+						end
+						Flag2 = true
+						
+						if Flag or (ActiveTurnHandle.state(false).isDone or p1.getCasSessionId() ~= CasSessionId) then
+							if Flag1 then
+								Flag1 = false
+								Smallest = ResolvePositiveNumberResult
+								Count2 += 1
+								
+								return
+							end
+							return
+						elseif Flag2 or Flag3 then
+							if not Flag1 then
+								if not Flag and (not ActiveTurnHandle.state(false).isDone and p1.getCasSessionId() == CasSessionId) then
+									Flag1 = true
+									Smallest = ResolvePositiveNumberResult
+									Callback(0)
+									
+									return
+								end
+								return
+							end
+						elseif not Flag1 then return end
+						Flag1 = false
+						Smallest = ResolvePositiveNumberResult
+						Count2 += 1
+					end)
+					
 					return
 				end
-				var14 = true
-				task.delay(p9, function()
-					-- upvalues: var14 (copy), var15 (ref), var15 (copy), var8 (copy), p7 (copy), p1 (copy), p6 (copy), var4 (copy), processTime (copy), var19 (copy), var10 (copy), var9 (copy), var13 (copy), var6 (copy), var17 (copy), var12 (copy), var18 (copy)
-					var14 = false
-					
-					if var15 ~= var15 or (var8 or (p7.state(false).isDone or p1.getCasSessionId() ~= p6)) then return end
-					local var20 = var4 - (os.clock() - processTime)
-					
-					if var20 > 0 then
-						var19(var20)
-						
-						return
-					end
-					var10 = true
-					
-					if var8 or (p7.state(false).isDone or p1.getCasSessionId() ~= p6) then
-						if var9 then
-							var9 = false
-							var13 = var6
-							var17 += 1
-							
-							return
-						end
-						return
-					elseif var9 then return end
-					if var8 or (p7.state(false).isDone or p1.getCasSessionId() ~= p6) then
-						return
-					end
-					var9 = true
-					var13 = var6
-					var18(0)
-				end)
 			end
 			
-			local _ = function()
-				-- upvalues: processTime (write), var10 (write), var8 (write), p7 (ref), p1 (copy), p6 (ref), var9 (write), var13 (write), var6 (ref), var17 (write), var12 (write), var18 (write), var19 (write), var4 (ref)
-				processTime = os.clock()
-				var10 = false
+			local _ = function() --[[ Line: 190 | Named "noteRtnActivity" ]]
+				-- upvalues: ClockTime (ref), Flag2 (ref), Flag (ref), ActiveTurnHandle (copy), p1 (upval), CasSessionId (copy), Flag1 (ref), Smallest (ref), ResolvePositiveNumberResult (copy), Count2 (ref), Flag3 (ref), Callback (ref), v33 (ref), ResolveNonNegativeNumberResult (copy)
+				ClockTime = os.clock()
+				Flag2 = false
 				
-				if var8 or (p7.state(false).isDone or p1.getCasSessionId() ~= p6) then
-					if var9 then
-						var9 = false
-						var13 = var6
-						var17 += 1
+				if Flag or (ActiveTurnHandle.state(false).isDone or p1.getCasSessionId() ~= CasSessionId) then
+					if Flag1 then
+						Flag1 = false
+						Smallest = ResolvePositiveNumberResult
+						Count2 += 1
 					end
-				elseif var12 then
-					if not var9 and (not var8 and (not p7.state(false).isDone and p1.getCasSessionId() == p6)) then
-						var9 = true
-						var13 = var6
-						var18(0)
+				elseif Flag2 or Flag3 then
+					if not Flag1 and (not Flag and (not ActiveTurnHandle.state(false).isDone and p1.getCasSessionId() == CasSessionId)) then
+						Flag1 = true
+						Smallest = ResolvePositiveNumberResult
+						Callback(0)
 					end
-				elseif var9 then
-					var9 = false
-					var13 = var6
-					var17 += 1
+				elseif Flag1 then
+					Flag1 = false
+					Smallest = ResolvePositiveNumberResult
+					Count2 += 1
 				end
-				var19(var4)
+				v33(ResolveNonNegativeNumberResult)
 			end
 			
-			var18 = function(p9)
-				-- upvalues: var17 (write), var9 (write), var8 (write), p7 (ref), p1 (copy), p6 (ref), pollSessionHistory (copy), afterSequenceId (ref), p8 (ref), shouldStopPolling (ref), var13 (write), var6 (ref), refreshSequenceGapState (ref), var10 (write), var12 (write), var18 (write), var7 (write), constantsModule (copy)
-				var17 += 1
-				local var20 = var17
-				task.delay(p9, function()
-					-- upvalues: var20 (ref), var17 (copy), var9 (copy), var8 (copy), p7 (copy), p1 (copy), p6 (copy), pollSessionHistory (copy), afterSequenceId (copy), p8 (copy), shouldStopPolling (copy), var13 (copy), var6 (copy), refreshSequenceGapState (copy), var10 (copy), var12 (copy), var18 (copy), var7 (copy), constantsModule (copy)
-					if var20 ~= var17 or not var9 or (var8 or (p7.state(false).isDone or p1.getCasSessionId() ~= p6)) then return end
-					local var21 = pollSessionHistory(p6, afterSequenceId, p8.onDroppedChatMessage, shouldStopPolling)
+			Callback = function(Delay) --[[ Line: 197 ]]
+				-- upvalues: Count2 (ref), Flag1 (ref), Flag (ref), ActiveTurnHandle (copy), p1 (upval), CasSessionId (copy), pollSessionHistory (upval), AfterSequenceId (copy), P5 (copy), shouldStopPolling (copy), Smallest (ref), ResolvePositiveNumberResult (copy), refreshSequenceGapState (copy), Flag2 (ref), Flag3 (ref), Callback (ref), ResolvePositiveNumberResult1 (ref), ConstantsModule (upval)
+				Count2 += 1
+				local Count: number = Count2
+				task.delay(Delay, function() --[[ Line: 200 ]]
+					-- upvalues: Count (copy), Count2 (upval), Flag1 (upval), Flag (upval), ActiveTurnHandle (upval), p1 (upval), CasSessionId (upval), pollSessionHistory (upval), AfterSequenceId (upval), P5 (upval), shouldStopPolling (upval), Smallest (upval), ResolvePositiveNumberResult (upval), refreshSequenceGapState (upval), Flag2 (upval), Flag3 (upval), Callback (upval), ResolvePositiveNumberResult1 (upval), ConstantsModule (upval)
+					if Count ~= Count2 or not Flag1 or (Flag or (ActiveTurnHandle.state(false).isDone or p1.getCasSessionId() ~= CasSessionId)) then return end
+					local PollSessionHistoryResult = pollSessionHistory(CasSessionId, AfterSequenceId, P5.onDroppedChatMessage, shouldStopPolling)
 					
-					if var8 or (p7.state(false).isDone or p1.getCasSessionId() ~= p6) then
-						if var9 then
-							var9 = false
-							var13 = var6
-							var17 += 1
-							
-							return
-						end
-						return
-					else
+					if not Flag and (not ActiveTurnHandle.state(false).isDone and p1.getCasSessionId() == CasSessionId) then
 						refreshSequenceGapState()
 						
-						if var8 or (p7.state(false).isDone or p1.getCasSessionId() ~= p6) then
-							if var9 then
-								var9 = false
-								var13 = var6
-								var17 += 1
+						if Flag or (ActiveTurnHandle.state(false).isDone or p1.getCasSessionId() ~= CasSessionId) then
+							if Flag1 then
+								Flag1 = false
+								Smallest = ResolvePositiveNumberResult
+								Count2 += 1
 							end
-						elseif var10 or var12 then
-							if not var9 and (not var8 and (not p7.state(false).isDone and p1.getCasSessionId() == p6)) then
-								var9 = true
-								var13 = var6
-								var18(0)
+						elseif Flag2 or Flag3 then
+							if not Flag1 and (not Flag and (not ActiveTurnHandle.state(false).isDone and p1.getCasSessionId() == CasSessionId)) then
+								Flag1 = true
+								Smallest = ResolvePositiveNumberResult
+								Callback(0)
 							end
-						elseif var9 then
-							var9 = false
-							var13 = var6
-							var17 += 1
+						elseif Flag1 then
+							Flag1 = false
+							Smallest = ResolvePositiveNumberResult
+							Count2 += 1
 						end
-						if var9 then
-							var13 = if var21 then var6 else math.min(var7, var13 * constantsModule.getPollBackoffMultiplier())
-							var18(var13)
-							
-							return
+						if not Flag1 then return end
+						if PollSessionHistoryResult then
+							Smallest = ResolvePositiveNumberResult
+						else
+							Smallest = math.min(ResolvePositiveNumberResult1, Smallest * ConstantsModule.getPollBackoffMultiplier())
 						end
+						Callback(Smallest)
+						
+						return
+					elseif Flag1 then
+						Flag1 = false
+						Smallest = ResolvePositiveNumberResult
+						Count2 += 1
+						
+						return
+					else
 					end
 				end)
 			end
 			
-			local var20 = p7.onNotification(function()
-				-- upvalues: processTime (write), var10 (write), var8 (write), p7 (ref), p1 (copy), p6 (ref), var9 (write), var13 (write), var6 (ref), var17 (write), var12 (write), var18 (write), var19 (write), var4 (ref), refreshSequenceGapState (ref)
-				processTime = os.clock()
-				var10 = false
+			local OnNotificationResult = ActiveTurnHandle.onNotification(function() --[[ Line: 232 ]]
+				-- upvalues: ClockTime (ref), Flag2 (ref), Flag (ref), ActiveTurnHandle (copy), p1 (upval), CasSessionId (copy), Flag1 (ref), Smallest (ref), ResolvePositiveNumberResult (copy), Count2 (ref), Flag3 (ref), Callback (ref), v33 (ref), ResolveNonNegativeNumberResult (copy), refreshSequenceGapState (copy)
+				ClockTime = os.clock()
+				Flag2 = false
 				
-				if var8 or (p7.state(false).isDone or p1.getCasSessionId() ~= p6) then
-					if var9 then
-						var9 = false
-						var13 = var6
-						var17 += 1
+				if Flag or (ActiveTurnHandle.state(false).isDone or p1.getCasSessionId() ~= CasSessionId) then
+					if Flag1 then
+						Flag1 = false
+						Smallest = ResolvePositiveNumberResult
+						Count2 += 1
 					end
-				elseif var12 then
-					if not var9 and (not var8 and (not p7.state(false).isDone and p1.getCasSessionId() == p6)) then
-						var9 = true
-						var13 = var6
-						var18(0)
+				elseif Flag2 or Flag3 then
+					if not Flag1 and (not Flag and (not ActiveTurnHandle.state(false).isDone and p1.getCasSessionId() == CasSessionId)) then
+						Flag1 = true
+						Smallest = ResolvePositiveNumberResult
+						Callback(0)
 					end
-				elseif var9 then
-					var9 = false
-					var13 = var6
-					var17 += 1
+				elseif Flag1 then
+					Flag1 = false
+					Smallest = ResolvePositiveNumberResult
+					Count2 += 1
 				end
-				var19(var4)
+				v33(ResolveNonNegativeNumberResult)
 				refreshSequenceGapState()
 			end)
 			refreshSequenceGapState()
-			processTime = os.clock()
-			var10 = false
-			var19(var4)
+			ClockTime = os.clock()
+			Flag2 = false
 			
-			return function()
-				-- upvalues: var8 (write), var15 (write), var16 (write), var17 (write), var20 (ref)
-				var8 = true
-				var15 += 1
-				var16 += 1
-				var17 += 1
-				var20()
+			if Flag or (ActiveTurnHandle.state(false).isDone or p1.getCasSessionId() ~= CasSessionId) then
+				if Flag1 then
+					Flag1 = false
+					Smallest = ResolvePositiveNumberResult
+					Count2 += 1
+				end
+			elseif Flag2 or Flag3 then
+				if not Flag1 and (not Flag and (not ActiveTurnHandle.state(false).isDone and p1.getCasSessionId() == CasSessionId)) then
+					Flag1 = true
+					Smallest = ResolvePositiveNumberResult
+					Callback(0)
+				end
+			elseif Flag1 then
+				Flag1 = false
+				Smallest = ResolvePositiveNumberResult
+				Count2 += 1
+			end
+			v33(ResolveNonNegativeNumberResult)
+			
+			return function() --[[ Line: 240 ]]
+				-- upvalues: Flag (ref), Count (ref), Count1 (ref), Count2 (ref), OnNotificationResult (copy)
+				Flag = true
+				Count += 1
+				Count1 += 1
+				Count2 += 1
+				OnNotificationResult()
 			end
 		end
 		
 		return {
 			startPollingTurnFromHistory = startPollingTurnFromHistory,
-			startPollingActiveTurn = function(p6, p7)
-				-- upvalues: p1 (ref), startPollingTurnFromHistory (ref)
-				local activeTurnHandle = p1.deps.getActiveTurnHandle(p6)
+			startPollingActiveTurn = function(CasSessionId, p2) --[[ Line: 249 ]]
+				-- upvalues: p1 (copy), startPollingTurnFromHistory (copy)
+				local ActiveTurnHandle = p1.deps.getActiveTurnHandle(CasSessionId)
 				
-				return if activeTurnHandle == nil then function() end else startPollingTurnFromHistory(p6, activeTurnHandle, p7)
+				return if ActiveTurnHandle == nil then function() --[[ Line: 252 ]] end else startPollingTurnFromHistory(CasSessionId, ActiveTurnHandle, p2)
 			end
 		}
 	end

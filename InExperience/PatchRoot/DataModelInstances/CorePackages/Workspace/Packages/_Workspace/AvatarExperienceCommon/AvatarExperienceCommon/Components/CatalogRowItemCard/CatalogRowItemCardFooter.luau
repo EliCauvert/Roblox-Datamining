@@ -1,335 +1,323 @@
-﻿local avatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
-local parent = avatarExperienceCommon.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local text = foundationModule.Text
-local verifiedBadgesModule = require(parent.VerifiedBadges)
-local avatarExperienceUIKitModule = require(parent.AvatarExperienceUIKit)
-local itemCardPriceLine = avatarExperienceUIKitModule.ItemCardComponents.ItemCardPriceLine
-local itemCardTitle = avatarExperienceUIKitModule.ItemCardComponents.ItemCardTitle
-local cryoModule = require(parent.Cryo)
-local _ = require(avatarExperienceCommon.Types.TimedOptionType)
-local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
-local fFlagAXEnableTimedOptionsForCatalogRowCard = avatarExperienceFlagsModule.FFlagAXEnableTimedOptionsForCatalogRowCard
-local fFlagAXDurablesForMIS = avatarExperienceFlagsModule.FFlagAXDurablesForMIS
-local fFlagAXMISSmallUIChanges = avatarExperienceFlagsModule.FFlagAXMISSmallUIChanges
-local fFlagAXMISWithOffers = avatarExperienceFlagsModule.FFlagAXMISWithOffers
-local fFlagAXDurables2Option = avatarExperienceFlagsModule.FFlagAXDurables2Option
-local icon = foundationModule.Icon
-local iconSize = foundationModule.Enums.IconSize
+﻿local AvatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
+local Parent = AvatarExperienceCommon.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local Text = FoundationModule.Text
+local VerifiedBadgesModule = require(Parent.VerifiedBadges)
+local AvatarExperienceUIKitModule = require(Parent.AvatarExperienceUIKit)
+local ItemCardPriceLine = AvatarExperienceUIKitModule.ItemCardComponents.ItemCardPriceLine
+local ItemCardTitle = AvatarExperienceUIKitModule.ItemCardComponents.ItemCardTitle
+local CryoModule = require(Parent.Cryo)
+local _ = require(AvatarExperienceCommon.Types.TimedOptionType)
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
+local FFlagAXEnableTimedOptionsForCatalogRowCard = AvatarExperienceFlagsModule.FFlagAXEnableTimedOptionsForCatalogRowCard
+local FFlagAXDurablesForMIS = AvatarExperienceFlagsModule.FFlagAXDurablesForMIS
+local FFlagAXMISSmallUIChanges = AvatarExperienceFlagsModule.FFlagAXMISSmallUIChanges
+local FFlagAXMISWithOffers = AvatarExperienceFlagsModule.FFlagAXMISWithOffers
+local FFlagAXDurables2Option = AvatarExperienceFlagsModule.FFlagAXDurables2Option
+local FFlagAXGifting = AvatarExperienceFlagsModule.FFlagAXGifting
+local FFlagAXMISOffersChip = AvatarExperienceFlagsModule.FFlagAXMISOffersChip
+local Icon = FoundationModule.Icon
+local IconSize = FoundationModule.Enums.IconSize
 
-return function(p1)
-	-- upvalues: useTokens (ref), fFlagAXDurablesForMIS (ref), fFlagAXEnableTimedOptionsForCatalogRowCard (ref), reactModule (ref), cryoModule (ref), fFlagAXMISWithOffers (ref), iconSize (ref), foundationModule (ref), itemCardPriceLine (ref), fFlagAXMISSmallUIChanges (ref), fFlagAXDurables2Option (ref), itemCardTitle (ref), text (ref), icon (ref), verifiedBadgesModule (ref)
-	local var1 = useTokens()
-	local selectedTimedOptionPrice = nil
-	local setSelectedTimedOptionPrice = nil
+return function(Frame: Frame) --[[ Line: 79 | Named "CatalogRowItemCardFooter" ]]
+	-- upvalues: UseTokensFunction (copy), FFlagAXDurablesForMIS (copy), FFlagAXEnableTimedOptionsForCatalogRowCard (copy), ReactModule (copy), CryoModule (copy), FFlagAXMISWithOffers (copy), IconSize (copy), FoundationModule (copy), ItemCardPriceLine (copy), FFlagAXMISSmallUIChanges (copy), FFlagAXGifting (copy), FFlagAXDurables2Option (copy), ItemCardTitle (copy), Text (copy), Icon (copy), VerifiedBadgesModule (copy), FFlagAXMISOffersChip (copy)
+	local UseTokensResult = UseTokensFunction()
+	local Price = nil
+	local SetSelectedTimedOptionPriceFunction = nil
 	
-	if fFlagAXDurablesForMIS or fFlagAXEnableTimedOptionsForCatalogRowCard then
-		selectedTimedOptionPrice = p1.selectedTimedOptionPrice
-		setSelectedTimedOptionPrice = p1.setSelectedTimedOptionPrice
+	if FFlagAXDurablesForMIS or FFlagAXEnableTimedOptionsForCatalogRowCard then
+		Price = Frame.selectedTimedOptionPrice
+		SetSelectedTimedOptionPriceFunction = Frame.setSelectedTimedOptionPrice
 	end
-	local createElement_1
-	local useMemo = reactModule.useMemo
-	useMemo = useMemo(function()
-		-- upvalues: p1 (ref), cryoModule (copy), fFlagAXDurablesForMIS (copy), fFlagAXEnableTimedOptionsForCatalogRowCard (copy), selectedTimedOptionPrice (write), fFlagAXMISWithOffers (copy), var1 (ref), iconSize (copy), reactModule (copy), foundationModule (copy), itemCardPriceLine (copy), fFlagAXMISSmallUIChanges (copy)
-		local t = {}
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 90 ]]
+		-- upvalues: Frame (copy), CryoModule (upval), FFlagAXDurablesForMIS (upval), FFlagAXEnableTimedOptionsForCatalogRowCard (upval), Price (ref), FFlagAXMISWithOffers (upval), UseTokensResult (copy), IconSize (upval), ReactModule (upval), FoundationModule (upval), ItemCardPriceLine (upval), FFlagAXMISSmallUIChanges (upval)
+		local Elements = {}
 		
-		if p1.priceLineContent and #p1.priceLineContent > 0 then
-			local var2
-			for i, v in p1.priceLineContent do
-				local var3 = cryoModule.Dictionary.omit(v, { "strikethrough" })
+		if Frame.priceLineContent and #Frame.priceLineContent > 0 then
+			local Price1 = nil
+			for LayoutOrder, value in Frame.priceLineContent do
+				local OmitResult = CryoModule.Dictionary.omit(value, { "strikethrough" })
 				
-				if (fFlagAXDurablesForMIS or fFlagAXEnableTimedOptionsForCatalogRowCard) and (selectedTimedOptionPrice and v.type == "price") then
-					if v.isOriginalPrice and p1.timedOptions then
-						var2 = selectedTimedOptionPrice
+				if (FFlagAXDurablesForMIS or FFlagAXEnableTimedOptionsForCatalogRowCard) and (Price and value.type == "price") then
+					if value.isOriginalPrice and Frame.timedOptions then
+						Price1 = Price
 						
-						for i_1, v_1 in p1.timedOptions do
-							if v_1.price == selectedTimedOptionPrice and v_1.discountInformation then
-								var2 = v_1.discountInformation.originalPrice
+						for _, timedOption in Frame.timedOptions do
+							if timedOption.price == Price and timedOption.discountInformation then
+								Price1 = timedOption.discountInformation.originalPrice
 								break
 							end
 						end
-						var3 = cryoModule.Dictionary.join(var3, { price = var2 })
+						OmitResult = CryoModule.Dictionary.join(OmitResult, { price = Price1 })
 						
-						if var2 ~= selectedTimedOptionPrice or fFlagAXMISWithOffers and (not fFlagAXMISWithOffers or v.shouldShowOriginalPrice) then
-							if fFlagAXMISWithOffers and v.priceInRobuxDiscountedByOffers then
-								var3 = cryoModule.Dictionary.join(var3, { price = v.priceInRobuxDiscountedByOffers })
-							end
-							if (fFlagAXDurablesForMIS or fFlagAXEnableTimedOptionsForCatalogRowCard) and v.strikethrough then
-								var3 = cryoModule.Dictionary.join(var3, {
-									colorStyle = var1.Color.Content.Muted,
-									iconSize = iconSize.XSmall,
-									fontStyle = var1.Typography.BodySmall
-								})
-							end
-							t[`PriceLine{i}`] = reactModule.createElement(foundationModule.View, { tag = "auto-xy", LayoutOrder = i }, {
-								ItemCardPriceLine = reactModule.createElement(itemCardPriceLine, { content = var3 }),
-								Strikethrough = if v.strikethrough then reactModule.createElement(foundationModule.View, {
-									tag = "bg-system-neutral anchor-center-center position-center-center size-full-50",
-									Size = if fFlagAXMISSmallUIChanges then UDim2.new(1, 0, 0, 1) else nil
-								}) else nil
-							})
+						if Price1 == Price and (not FFlagAXMISWithOffers or FFlagAXMISWithOffers and not value.shouldShowOriginalPrice) then
+							continue
 						end
 					else
-						var3 = cryoModule.Dictionary.join(var3, { price = selectedTimedOptionPrice })
+						OmitResult = CryoModule.Dictionary.join(OmitResult, { price = Price })
 					end
 				end
+				if FFlagAXMISWithOffers and value.priceInRobuxDiscountedByOffers then
+					OmitResult = CryoModule.Dictionary.join(OmitResult, { price = value.priceInRobuxDiscountedByOffers })
+				end
+				if (FFlagAXDurablesForMIS or FFlagAXEnableTimedOptionsForCatalogRowCard) and value.strikethrough then
+					OmitResult = CryoModule.Dictionary.join(OmitResult, {
+						colorStyle = UseTokensResult.Color.Content.Muted,
+						iconSize = IconSize.XSmall,
+						fontStyle = UseTokensResult.Typography.BodySmall
+					})
+				end
+				Elements[`PriceLine{LayoutOrder}`] = ReactModule.createElement(FoundationModule.View, { tag = "auto-xy", LayoutOrder = LayoutOrder }, {
+					ItemCardPriceLine = ReactModule.createElement(ItemCardPriceLine, { content = OmitResult }),
+					Strikethrough = if value.strikethrough then ReactModule.createElement(FoundationModule.View, {
+						tag = "bg-system-neutral anchor-center-center position-center-center size-full-50",
+						Size = if FFlagAXMISSmallUIChanges then UDim2.new(1, 0, 0, 1) else nil
+					}) else nil
+				})
 			end
 		end
-		return t
+		return Elements
 	end, {
-		p1.priceLineContent,
-		if fFlagAXDurablesForMIS or fFlagAXEnableTimedOptionsForCatalogRowCard then selectedTimedOptionPrice else nil,
-		if fFlagAXDurablesForMIS or fFlagAXEnableTimedOptionsForCatalogRowCard then p1.timedOptions else nil,
-		if fFlagAXDurablesForMIS or fFlagAXEnableTimedOptionsForCatalogRowCard then var1 else nil
+		Frame.priceLineContent,
+		if FFlagAXDurablesForMIS or FFlagAXEnableTimedOptionsForCatalogRowCard then Price else nil,
+		if FFlagAXDurablesForMIS or FFlagAXEnableTimedOptionsForCatalogRowCard then Frame.timedOptions else nil,
+		if FFlagAXDurablesForMIS or FFlagAXEnableTimedOptionsForCatalogRowCard then UseTokensResult else nil
 	})
-	local var4 = if fFlagAXDurablesForMIS or fFlagAXEnableTimedOptionsForCatalogRowCard then if p1.priceLineContent then true else p1.timedOptions else nil
-	local createElement = reactModule.createElement
-	local view = foundationModule.View
-	local t = {
-		tag = "fill self-stretch",
-		Size = p1.Size,
-		AutomaticSize = p1.AutomaticSize,
-		LayoutOrder = p1.LayoutOrder
-	}
-	local t_1 = {}
+	local v1 = if FFlagAXDurablesForMIS or FFlagAXEnableTimedOptionsForCatalogRowCard then Frame.priceLineContent and #Frame.priceLineContent > 0 or Frame.timedOptions else nil
 	
-	if fFlagAXDurables2Option and p1.onRemove then
-		local var5
-		createElement_1 = reactModule.createElement
-		local view_1 = foundationModule.View
-		local t_2 = { tag = "row size-full-0 auto-y" }
-		local t_3 = {}
-		local createElement_2 = reactModule.createElement
-		local view_2 = foundationModule.View
-		local t_4 = {
-			tag = "col align-x-left fill gap-xsmall size-full-0 auto-y",
-			LayoutOrder = 1
-		}
-		local t_5 = {
-			ItemCardFooterTitle = reactModule.createElement(itemCardTitle, { LayoutOrder = 1, title = p1.title or "" })
-		}
-		
-		if p1.itemSubType or p1.creatorName then
-			var5 = reactModule.createElement
-			var5 = var5(foundationModule.View, {
-				tag = "row align-x-left gap-xxsmall size-full-0 auto-y",
-				LayoutOrder = 2
+	return ReactModule.createElement(FoundationModule.View, {
+		tag = "fill self-stretch",
+		Size = Frame.Size,
+		AutomaticSize = Frame.AutomaticSize,
+		LayoutOrder = Frame.LayoutOrder
+	}, {
+		TopSection = if if FFlagAXGifting then Frame.onRemove or Frame.giftButton else FFlagAXDurables2Option and Frame.onRemove then ReactModule.createElement(FoundationModule.View, { tag = "row size-full-0 auto-y" }, {
+			Left = ReactModule.createElement(FoundationModule.View, {
+				tag = "col align-x-left fill gap-xsmall size-full-0 auto-y",
+				LayoutOrder = 1
 			}, {
-				ItemSubType = if p1.itemSubType then reactModule.createElement(text, {
-					LayoutOrder = 1,
-					textStyle = var1.Color.Content.Default,
-					fontStyle = var1.Typography.BodyMedium,
-					Text = p1.itemSubType,
-					TextXAlignment = Enum.TextXAlignment.Left,
-					AutomaticSize = Enum.AutomaticSize.XY,
-					TextTruncate = Enum.TextTruncate.SplitWord
+				ItemCardFooterTitle = ReactModule.createElement(ItemCardTitle, { LayoutOrder = 1, title = Frame.title or "" }),
+				ItemCardFooterInfo = if Frame.itemSubType or Frame.creatorName then ReactModule.createElement(FoundationModule.View, {
+					tag = "row align-x-left gap-xxsmall size-full-0 auto-y",
+					LayoutOrder = 2
+				}, {
+					ItemSubType = if Frame.itemSubType then ReactModule.createElement(Text, {
+						LayoutOrder = 1,
+						textStyle = UseTokensResult.Color.Content.Default,
+						fontStyle = UseTokensResult.Typography.BodyMedium,
+						Text = Frame.itemSubType,
+						TextXAlignment = Enum.TextXAlignment.Left,
+						AutomaticSize = Enum.AutomaticSize.XY,
+						TextTruncate = Enum.TextTruncate.SplitWord
+					}) else nil,
+					Spacer = if Frame.itemSubType and not FFlagAXMISSmallUIChanges then ReactModule.createElement(Icon, {
+						name = "icons/controls/keys/period",
+						LayoutOrder = 2,
+						size = IconSize.Small
+					}) else nil,
+					Divider = if Frame.creatorName and FFlagAXMISSmallUIChanges then ReactModule.createElement(Icon, {
+						name = "icons/controls/keys/period",
+						LayoutOrder = 2,
+						size = IconSize.Small
+					}) else nil,
+					CreatorName = if Frame.creatorName then ReactModule.createElement(Text, {
+						tag = "fill self-stretch",
+						LayoutOrder = 3,
+						textStyle = UseTokensResult.Color.Content.Default,
+						fontStyle = UseTokensResult.Typography.BodyMedium,
+						Text = if Frame.creatorHasVerifiedBadge then `{Frame.creatorName}{VerifiedBadgesModule.emoji.verified}` else Frame.creatorName,
+						TextXAlignment = Enum.TextXAlignment.Left,
+						AutomaticSize = Enum.AutomaticSize.XY,
+						TextTruncate = Enum.TextTruncate.SplitWord
+					}) else nil
 				}) else nil,
-				Spacer = if p1.itemSubType and not fFlagAXMISSmallUIChanges then reactModule.createElement(icon, {
-					name = "icons/controls/keys/period",
-					LayoutOrder = 2,
-					size = iconSize.Small
-				}) else nil,
-				Divider = if p1.creatorName and fFlagAXMISSmallUIChanges then reactModule.createElement(icon, {
-					name = "icons/controls/keys/period",
-					LayoutOrder = 2,
-					size = iconSize.Small
-				}) else nil,
-				CreatorName = if p1.creatorName then reactModule.createElement(text, {
-					tag = "fill self-stretch",
-					LayoutOrder = 3,
-					textStyle = var1.Color.Content.Default,
-					fontStyle = var1.Typography.BodyMedium,
-					Text = if p1.creatorHasVerifiedBadge then `{p1.creatorName}{verifiedBadgesModule.emoji.verified}` else p1.creatorName,
-					TextXAlignment = Enum.TextXAlignment.Left,
-					AutomaticSize = Enum.AutomaticSize.XY,
-					TextTruncate = Enum.TextTruncate.SplitWord
+				BundleParts = if Frame.bundlePartsText and not Frame.timedOptions then ReactModule.createElement(FoundationModule.View, {
+					tag = "auto-xy padding-xsmall radius-small bg-surface-100",
+					LayoutOrder = 3
+				}, {
+					Text = ReactModule.createElement(Text, {
+						textStyle = UseTokensResult.Color.Content.Default,
+						fontStyle = UseTokensResult.Typography.BodySmall,
+						Text = Frame.bundlePartsText,
+						TextXAlignment = Enum.TextXAlignment.Left,
+						AutomaticSize = Enum.AutomaticSize.XY,
+						TextTruncate = Enum.TextTruncate.SplitWord
+					})
 				}) else nil
-			})
-		else
-			var5 = nil
-		end
-		t_5.ItemCardFooterInfo = var5
-		t_5.BundleParts = if p1.bundlePartsText and not p1.timedOptions then reactModule.createElement(foundationModule.View, {
-			tag = "auto-xy padding-xsmall radius-small bg-surface-100",
-			LayoutOrder = 3
-		}, {
-			Text = reactModule.createElement(text, {
-				textStyle = var1.Color.Content.Default,
-				fontStyle = var1.Typography.BodySmall,
-				Text = p1.bundlePartsText,
-				TextXAlignment = Enum.TextXAlignment.Left,
-				AutomaticSize = Enum.AutomaticSize.XY,
-				TextTruncate = Enum.TextTruncate.SplitWord
-			})
-		}) else nil
-		t_3.Left = createElement_2(view_2, t_4, t_5)
-		t_3.Right = if p1.onRemove then reactModule.createElement(foundationModule.View, { tag = "auto-xy", LayoutOrder = 2 }, reactModule.createElement(foundationModule.IconButton, {
-			icon = "x",
-			isCircular = true,
-			testId = "catalogRowItemCardRemoveButton",
-			variant = foundationModule.Enums.ButtonVariant.Standard,
-			onActivated = p1.onRemove
-		})) else nil
-		createElement_1 = createElement_1(view_1, t_2, t_3)
-	else
-		local var6
-		createElement_1 = reactModule.createElement
-		local var7 = "Frame"
-		local t_2 = {
+			}),
+			Right = if Frame.onRemove or FFlagAXGifting and Frame.giftButton then ReactModule.createElement(FoundationModule.View, {
+				LayoutOrder = 2,
+				tag = if FFlagAXGifting then {
+					["auto-xy"] = true,
+					["row gap-small"] = Frame.giftButton ~= nil
+				} else "auto-xy"
+			}, if FFlagAXGifting then {
+				GiftButton = if Frame.giftButton == nil then nil else ReactModule.createElement(FoundationModule.View, {
+					tag = "auto-xy",
+					LayoutOrder = 1,
+					testId = "catalogRowItemCardGiftButton"
+				}, Frame.giftButton),
+				RemoveButton = if Frame.onRemove then ReactModule.createElement(FoundationModule.IconButton, {
+					icon = "x",
+					isCircular = true,
+					testId = "catalogRowItemCardRemoveButton",
+					LayoutOrder = 2,
+					variant = FoundationModule.Enums.ButtonVariant.Standard,
+					onActivated = Frame.onRemove
+				}) else nil
+			} elseif Frame.onRemove then ReactModule.createElement(FoundationModule.IconButton, {
+				icon = "x",
+				isCircular = true,
+				testId = "catalogRowItemCardRemoveButton",
+				variant = FoundationModule.Enums.ButtonVariant.Standard,
+				onActivated = Frame.onRemove
+			}) else nil) else nil
+		}) else ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			AutomaticSize = Enum.AutomaticSize.XY
-		}
-		local t_3 = {
-			TopLayout = reactModule.createElement("UIListLayout", {
+		}, {
+			TopLayout = ReactModule.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				FillDirection = Enum.FillDirection.Vertical,
 				HorizontalAlignment = Enum.HorizontalAlignment.Left,
-				Padding = UDim.new(0, var1.Gap.XSmall)
+				Padding = UDim.new(0, UseTokensResult.Gap.XSmall)
 			}),
-			ItemCardFooterTitle = reactModule.createElement(itemCardTitle, { LayoutOrder = 1, title = p1.title or "" })
-		}
-		
-		if p1.itemSubType or p1.creatorName then
-			var6 = reactModule.createElement
-			var6 = var6("Frame", {
+			ItemCardFooterTitle = ReactModule.createElement(ItemCardTitle, { LayoutOrder = 1, title = Frame.title or "" }),
+			ItemCardFooterInfo = if Frame.itemSubType or Frame.creatorName then ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
 				LayoutOrder = 2,
 				Size = UDim2.fromScale(1, 0),
 				AutomaticSize = Enum.AutomaticSize.Y
 			}, {
-				ItemCardFooterInfoLayout = reactModule.createElement("UIListLayout", {
+				ItemCardFooterInfoLayout = ReactModule.createElement("UIListLayout", {
 					SortOrder = Enum.SortOrder.LayoutOrder,
 					FillDirection = Enum.FillDirection.Horizontal,
 					HorizontalAlignment = Enum.HorizontalAlignment.Left,
-					Padding = UDim.new(0, var1.Gap.XXSmall)
+					Padding = UDim.new(0, UseTokensResult.Gap.XXSmall)
 				}),
-				ItemSubType = if p1.itemSubType then reactModule.createElement(text, {
+				ItemSubType = if Frame.itemSubType then ReactModule.createElement(Text, {
 					LayoutOrder = 1,
-					textStyle = var1.Color.Content.Default,
-					fontStyle = var1.Typography.BodyMedium,
-					Text = p1.itemSubType,
+					textStyle = UseTokensResult.Color.Content.Default,
+					fontStyle = UseTokensResult.Typography.BodyMedium,
+					Text = Frame.itemSubType,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					AutomaticSize = Enum.AutomaticSize.XY,
 					TextTruncate = Enum.TextTruncate.SplitWord
 				}) else nil,
-				Spacer = if p1.itemSubType and not fFlagAXMISSmallUIChanges then reactModule.createElement(icon, {
+				Spacer = if Frame.itemSubType and not FFlagAXMISSmallUIChanges then ReactModule.createElement(Icon, {
 					name = "icons/controls/keys/period",
 					LayoutOrder = 2,
-					size = iconSize.Small
+					size = IconSize.Small
 				}) else nil,
-				Divider = if p1.creatorName and fFlagAXMISSmallUIChanges then reactModule.createElement(icon, {
+				Divider = if Frame.creatorName and FFlagAXMISSmallUIChanges then ReactModule.createElement(Icon, {
 					name = "icons/controls/keys/period",
 					LayoutOrder = 2,
-					size = iconSize.Small
+					size = IconSize.Small
 				}) else nil,
-				CreatorName = if p1.creatorName then reactModule.createElement(text, {
+				CreatorName = if Frame.creatorName then ReactModule.createElement(Text, {
 					tag = "fill self-stretch",
 					LayoutOrder = 3,
-					textStyle = var1.Color.Content.Default,
-					fontStyle = var1.Typography.BodyMedium,
-					Text = if p1.creatorHasVerifiedBadge then `{p1.creatorName}{verifiedBadgesModule.emoji.verified}` else p1.creatorName,
+					textStyle = UseTokensResult.Color.Content.Default,
+					fontStyle = UseTokensResult.Typography.BodyMedium,
+					Text = if Frame.creatorHasVerifiedBadge then `{Frame.creatorName}{VerifiedBadgesModule.emoji.verified}` else Frame.creatorName,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					AutomaticSize = Enum.AutomaticSize.XY,
 					TextTruncate = Enum.TextTruncate.SplitWord
 				}) else nil
-			})
-		else
-			var6 = nil
-		end
-		t_3.ItemCardFooterInfo = var6
-		t_3.BundleParts = if p1.bundlePartsText then reactModule.createElement("Frame", {
-			LayoutOrder = 3,
-			BackgroundColor3 = var1.Color.Surface.Surface_100.Color3,
-			BackgroundTransparency = var1.Color.Surface.Surface_100.Transparency,
-			AutomaticSize = Enum.AutomaticSize.XY
-		}, {
-			UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, var1.Radius.Small) }),
-			UIPadding = reactModule.createElement("UIPadding", {
-				PaddingTop = UDim.new(0, var1.Padding.XSmall),
-				PaddingLeft = UDim.new(0, var1.Padding.XSmall),
-				PaddingRight = UDim.new(0, var1.Padding.XSmall),
-				PaddingBottom = UDim.new(0, var1.Padding.XSmall)
-			}),
-			Text = reactModule.createElement(text, {
-				textStyle = var1.Color.Content.Default,
-				fontStyle = var1.Typography.BodySmall,
-				Text = p1.bundlePartsText,
-				TextXAlignment = Enum.TextXAlignment.Left,
-				AutomaticSize = Enum.AutomaticSize.XY,
-				TextTruncate = Enum.TextTruncate.SplitWord
-			})
-		}) else nil
-		createElement_1 = createElement_1(var7, t_2, t_3)
-	end
-	local var8
-	t_1.TopSection = createElement_1
-	t_1.BottomPrice = if fFlagAXDurablesForMIS or fFlagAXEnableTimedOptionsForCatalogRowCard or (not p1.priceLineContent or #p1.priceLineContent <= 0) then nil else reactModule.createElement(foundationModule.View, {
-		tag = "auto-xy row gap-xsmall position-bottom-left anchor-bottom-left"
-	}, useMemo)
-	
-	if (fFlagAXDurablesForMIS or fFlagAXEnableTimedOptionsForCatalogRowCard) and var4 then
-		var8 = reactModule.createElement
-		var8 = var8(foundationModule.View, {
-			tag = if fFlagAXDurables2Option and p1.hideTimedOptionSelections then "auto-x row gap-xsmall align-y-center position-bottom-left anchor-bottom-left" else "auto-xy row gap-xsmall align-y-center position-bottom-left anchor-bottom-left",
-			Size = if fFlagAXDurables2Option and p1.hideTimedOptionSelections then UDim2.fromOffset(0, var1.Size.Size_1200) else nil
-		}, cryoModule.Dictionary.join(if fFlagAXDurables2Option and p1.hideTimedOptionSelections and p1.timedOptions and ((not p1.isOwned or p1.expirationTime) and p1.itemStatusInCheckout == nil) then {} else useMemo, {
-			WearTimeOptions = if fFlagAXDurables2Option and p1.hideTimedOptionSelections or not p1.timedOptions or p1.isOwned and not p1.expirationTime then nil else reactModule.createElement(foundationModule.View, { tag = "auto-xy padding-left-small", LayoutOrder = 100 }, {
-				WearTimeSelectedOptionInList = if p1.wearTimeSelectedOptionInList then reactModule.createElement(p1.wearTimeSelectedOptionInList, {
-					options = p1.timedOptions,
-					selectedTimedOptionIndexInReducer = if fFlagAXDurablesForMIS then p1.selectedTimedOptionIndexInReducer else nil,
-					onOptionActivated = function(p2)
-						-- upvalues: p1 (ref), setSelectedTimedOptionPrice (write)
-						local var9 = p1.timedOptions[p2]
+			}) else nil,
+			BundleParts = if Frame.bundlePartsText then ReactModule.createElement("Frame", {
+				LayoutOrder = 3,
+				BackgroundColor3 = UseTokensResult.Color.Surface.Surface_100.Color3,
+				BackgroundTransparency = UseTokensResult.Color.Surface.Surface_100.Transparency,
+				AutomaticSize = Enum.AutomaticSize.XY
+			}, {
+				UICorner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, UseTokensResult.Radius.Small) }),
+				UIPadding = ReactModule.createElement("UIPadding", {
+					PaddingTop = UDim.new(0, UseTokensResult.Padding.XSmall),
+					PaddingLeft = UDim.new(0, UseTokensResult.Padding.XSmall),
+					PaddingRight = UDim.new(0, UseTokensResult.Padding.XSmall),
+					PaddingBottom = UDim.new(0, UseTokensResult.Padding.XSmall)
+				}),
+				Text = ReactModule.createElement(Text, {
+					textStyle = UseTokensResult.Color.Content.Default,
+					fontStyle = UseTokensResult.Typography.BodySmall,
+					Text = Frame.bundlePartsText,
+					TextXAlignment = Enum.TextXAlignment.Left,
+					AutomaticSize = Enum.AutomaticSize.XY,
+					TextTruncate = Enum.TextTruncate.SplitWord
+				})
+			}) else nil
+		}),
+		BottomPrice = if FFlagAXDurablesForMIS or FFlagAXEnableTimedOptionsForCatalogRowCard or not Frame.priceLineContent or #Frame.priceLineContent <= 0 then nil else ReactModule.createElement(FoundationModule.View, {
+			tag = "auto-xy row gap-xsmall position-bottom-left anchor-bottom-left"
+		}, UseMemoResult),
+		BottomContent = if (FFlagAXDurablesForMIS or FFlagAXEnableTimedOptionsForCatalogRowCard) and v1 then ReactModule.createElement(FoundationModule.View, {
+			tag = if FFlagAXDurables2Option and Frame.hideTimedOptionSelections then "auto-x row gap-xsmall align-y-center position-bottom-left anchor-bottom-left" else "auto-xy row gap-xsmall align-y-center position-bottom-left anchor-bottom-left",
+			Size = if FFlagAXMISOffersChip then UDim2.fromOffset(0, UseTokensResult.Size.Size_800) else nil
+		}, CryoModule.Dictionary.join(if FFlagAXDurables2Option and Frame.hideTimedOptionSelections and Frame.timedOptions and (not Frame.isOwned or Frame.expirationTime) and Frame.itemStatusInCheckout == nil then {} else UseMemoResult, {
+			WearTimeOptions = if FFlagAXDurables2Option and Frame.hideTimedOptionSelections then nil elseif Frame.timedOptions and (not Frame.isOwned or Frame.expirationTime) then ReactModule.createElement(FoundationModule.View, { tag = "auto-xy padding-left-small", LayoutOrder = 100 }, {
+				WearTimeSelectedOptionInList = if Frame.wearTimeSelectedOptionInList then ReactModule.createElement(Frame.wearTimeSelectedOptionInList, {
+					options = Frame.timedOptions,
+					selectedTimedOptionIndexInReducer = if FFlagAXDurablesForMIS then Frame.selectedTimedOptionIndexInReducer else nil,
+					onOptionActivated = function(p1) --[[ Line: 445 ]]
+						-- upvalues: Frame (copy), SetSelectedTimedOptionPriceFunction (ref)
+						local TimedOption = Frame.timedOptions[p1]
 						
-						if var9 then
-							if setSelectedTimedOptionPrice then
-								setSelectedTimedOptionPrice(var9.price)
+						if TimedOption then
+							if SetSelectedTimedOptionPriceFunction then
+								SetSelectedTimedOptionPriceFunction(TimedOption.price)
 							end
-							if p1.onTimedOptionPriceChanged then
-								p1.onTimedOptionPriceChanged(var9.price, if var9.days == 0 then nil else var9.days)
+							if Frame.onTimedOptionPriceChanged then
+								Frame.onTimedOptionPriceChanged(TimedOption.price, if TimedOption.days == 0 then nil else TimedOption.days)
 							end
 						end
 					end
 				}) else nil
-			}),
-			Badge = if fFlagAXDurables2Option and p1.offerApplied then reactModule.createElement(foundationModule.Popover.Root, { isOpen = p1.showOfferPillTooltip or false }, {
-				Anchor = reactModule.createElement(foundationModule.Popover.Anchor, { LayoutOrder = 101 }, {
-					Badge = reactModule.createElement(foundationModule.Badge, {
+			}) else nil,
+			Badge = if FFlagAXDurables2Option and Frame.offerApplied then ReactModule.createElement(FoundationModule.Popover.Root, { isOpen = Frame.showOfferPillTooltip or false }, {
+				Anchor = ReactModule.createElement(FoundationModule.Popover.Anchor, { LayoutOrder = 101 }, {
+					Badge = ReactModule.createElement(FoundationModule.Badge, {
 						icon = {
-							name = foundationModule.Enums.IconName.TagSparkle,
-							position = foundationModule.Enums.IconPosition.Left
+							name = FoundationModule.Enums.IconName.TagSparkle,
+							position = FoundationModule.Enums.IconPosition.Left
 						},
-						text = p1.offersLocalized and p1.offersLocalized.OfferApplied,
-						variant = foundationModule.Enums.BadgeVariant.Neutral,
-						shape = foundationModule.Enums.BadgeShape.Pill,
-						size = foundationModule.Enums.BadgeSize.XSmall
+						text = Frame.offersLocalized and Frame.offersLocalized.OfferApplied,
+						variant = FoundationModule.Enums.BadgeVariant.Neutral,
+						shape = FoundationModule.Enums.BadgeShape.Pill,
+						size = FoundationModule.Enums.BadgeSize.XSmall
 					})
 				}),
-				Content = reactModule.createElement(foundationModule.Popover.Content, {
-					align = foundationModule.Enums.PopoverAlign.Center,
-					side = foundationModule.Enums.PopoverSide.Top,
-					radius = foundationModule.Enums.Radius.Medium,
-					backgroundStyle = var1.Color.System.Contrast
+				Content = ReactModule.createElement(FoundationModule.Popover.Content, {
+					align = FoundationModule.Enums.PopoverAlign.Center,
+					side = FoundationModule.Enums.PopoverSide.Top,
+					radius = FoundationModule.Enums.Radius.Medium,
+					backgroundStyle = UseTokensResult.Color.System.Contrast
 				}, {
-					TooltipContent = reactModule.createElement(foundationModule.View, {
+					TooltipContent = ReactModule.createElement(FoundationModule.View, {
 						tag = "col gap-xsmall auto-xy padding-x-medium padding-y-small"
 					}, {
-						TooltipText = reactModule.createElement(text, {
+						TooltipText = ReactModule.createElement(Text, {
 							tag = "auto-xy text-title-medium text-truncate-end content-inverse-emphasis",
-							Text = p1.offersLocalized and p1.offersLocalized.OfferAppliedTooltip
+							Text = Frame.offersLocalized and Frame.offersLocalized.OfferAppliedTooltip
 						})
 					})
 				})
+			}) else nil,
+			OfferAppliedBadge = if FFlagAXMISOffersChip and (not FFlagAXDurables2Option and Frame.offerApplied) and (not Frame.timedOptions or Frame.isOwned and not Frame.expirationTime) then ReactModule.createElement(FoundationModule.Badge, {
+				LayoutOrder = 101,
+				icon = {
+					name = FoundationModule.Enums.IconName.TagSparkle,
+					position = FoundationModule.Enums.IconPosition.Left
+				},
+				text = Frame.offersLocalized and Frame.offersLocalized.OfferApplied,
+				variant = FoundationModule.Enums.BadgeVariant.Neutral,
+				shape = FoundationModule.Enums.BadgeShape.Pill,
+				size = FoundationModule.Enums.BadgeSize.XSmall
 			}) else nil
-		}))
-	else
-		var8 = nil
-	end
-	t_1.BottomContent = var8
-	
-	return createElement(view, t, t_1)
+		})) else nil
+	})
 end

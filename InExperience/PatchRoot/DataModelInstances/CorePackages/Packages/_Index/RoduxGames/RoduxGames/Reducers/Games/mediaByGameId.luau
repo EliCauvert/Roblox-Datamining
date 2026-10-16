@@ -1,19 +1,19 @@
-﻿local roduxGames = script:FindFirstAncestor("RoduxGames")
-local parent = roduxGames.Parent
-local roduxModule = require(parent.Rodux)
-local dashModule = require(parent.Dash)
-local gameMediaModelModule = require(roduxGames.Models.GameMediaModel)
+﻿local RoduxGames = script:FindFirstAncestor("RoduxGames")
+local Parent = RoduxGames.Parent
+local RoduxModule = require(Parent.Rodux)
+local DashModule = require(Parent.Dash)
+local GameMediaModelModule = require(RoduxGames.Models.GameMediaModel)
 local t = {}
 
-return function(p1)
-	-- upvalues: roduxModule (ref), t (ref), dashModule (ref), gameMediaModelModule (ref)
-	return roduxModule.createReducer(t, {
-		[p1.networkingGames.GetExperienceMedia.Succeeded.name] = function(p2, p3)
-			-- upvalues: dashModule (copy), gameMediaModelModule (copy)
-			return dashModule.join(p2, {
-				[tostring(p3.ids[1])] = dashModule.map(p3.responseBody.data, function(p4)
-					-- upvalues: gameMediaModelModule (copy)
-					return gameMediaModelModule.format(p4)
+return function(p1) --[[ Line: 13 ]]
+	-- upvalues: RoduxModule (copy), t (copy), DashModule (copy), GameMediaModelModule (copy)
+	return RoduxModule.createReducer(t, {
+		[p1.networkingGames.GetExperienceMedia.Succeeded.name] = function(p2, p3) --[[ Line: 16 ]]
+			-- upvalues: DashModule (upval), GameMediaModelModule (upval)
+			return DashModule.join(p2, {
+				[tostring(p3.ids[1])] = DashModule.map(p3.responseBody.data, function(p4) --[[ Line: 19 ]]
+					-- upvalues: GameMediaModelModule (upval)
+					return GameMediaModelModule.format(p4)
 				end)
 			})
 		end

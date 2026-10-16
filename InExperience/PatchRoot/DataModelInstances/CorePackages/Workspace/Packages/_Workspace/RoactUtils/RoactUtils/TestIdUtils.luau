@@ -1,18 +1,19 @@
-﻿local fFlagLuaAppAddTestIdsForArrow = require(script:FindFirstAncestor("RoactUtils").Parent.SharedFlags).FFlagLuaAppAddTestIdsForArrow
+﻿local FFlagLuaAppAddTestIdsForArrow = require(script:FindFirstAncestor("RoactUtils").Parent.SharedFlags).FFlagLuaAppAddTestIdsForArrow
 
 return {
-	getTestId = function(p1, p2)
-		-- upvalues: fFlagLuaAppAddTestIdsForArrow (ref)
-		if not fFlagLuaAppAddTestIdsForArrow then
-			return nil
-		elseif not p1 then
+	getTestId = function(p1, p2): string? --[[ Line: 19 ]]
+		-- upvalues: FFlagLuaAppAddTestIdsForArrow (copy)
+		if not FFlagLuaAppAddTestIdsForArrow then
 			return nil
 		end
-		local var1 = `data-testid=--{p0}`
+		if not p1 then
+			return nil
+		end
+		local TestidName: string = `data-testid=--{p0}`
 		
 		if p2 then
-			var1 = `{var1}-{tostring(p2)}`
+			TestidName = `{TestidName}-{tostring(p2)}`
 		end
-		return var0
+		return TestidName
 	end
 }

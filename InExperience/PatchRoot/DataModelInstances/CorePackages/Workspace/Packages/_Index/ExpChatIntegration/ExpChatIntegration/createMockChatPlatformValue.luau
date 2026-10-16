@@ -1,26 +1,26 @@
-﻿local signalsModule = require(script:FindFirstAncestor("ExpChatIntegration").Parent.Signals)
+﻿local SignalsModule = require(script:FindFirstAncestor("ExpChatIntegration").Parent.Signals)
 local _ = require(script.Parent.ChatPlatformTypes)
-local createDefaultChatPlatformValueModule = require(script.Parent.createDefaultChatPlatformValue)
+local CreateDefaultChatPlatformValueModule = require(script.Parent.createDefaultChatPlatformValue)
 
-return function(p1)
-	-- upvalues: createDefaultChatPlatformValueModule (ref), signalsModule (ref)
-	p1 = p1 or {}
-	local var1 = createDefaultChatPlatformValueModule()
-	local var2 = if p1.chatInputBarSettings ~= nil then signalsModule.createSignal(p1.chatInputBarSettings) else var1.getChatInputBarSettings
-	local var3 = if p1.interpolators ~= nil then signalsModule.createSignal(p1.interpolators) else var1.getInterpolators
-	local getTransparencyStore = var1.getTransparencyStore
-	local transparencyStore = p1.transparencyStore
+return function(p1) --[[ Line: 29 | Named "createMockChatPlatformValue" ]]
+	-- upvalues: CreateDefaultChatPlatformValueModule (copy), SignalsModule (copy)
+	local P0 = p1 or {}
+	local DefaultChatPlatformValueModule = CreateDefaultChatPlatformValueModule()
+	local GetChatInputBarSettings = if P0.chatInputBarSettings == nil then DefaultChatPlatformValueModule.getChatInputBarSettings else SignalsModule.createSignal(P0.chatInputBarSettings)
+	local GetInterpolators = if P0.interpolators == nil then DefaultChatPlatformValueModule.getInterpolators else SignalsModule.createSignal(P0.interpolators)
+	local GetTransparencyStore: (any) -> any = DefaultChatPlatformValueModule.getTransparencyStore
+	local TransparencyStore = P0.transparencyStore
 	
-	if transparencyStore ~= nil then
-		getTransparencyStore = function(_)
-			-- upvalues: transparencyStore (ref)
-			return transparencyStore
+	if TransparencyStore ~= nil then
+		GetTransparencyStore = function(_) --[[ Line: 46 ]]
+			-- upvalues: TransparencyStore (copy)
+			return TransparencyStore
 		end
 	end
 	return {
-		getChatInputBarSettings = var2,
-		chatWindowSettings = p1.chatWindowSettings or var1.chatWindowSettings,
-		getInterpolators = var3,
-		getTransparencyStore = getTransparencyStore
+		getChatInputBarSettings = GetChatInputBarSettings,
+		chatWindowSettings = P0.chatWindowSettings or DefaultChatPlatformValueModule.chatWindowSettings,
+		getInterpolators = GetInterpolators,
+		getTransparencyStore = GetTransparencyStore
 	}
 end

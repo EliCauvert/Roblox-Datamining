@@ -1,47 +1,49 @@
-﻿local songbird = script:FindFirstAncestor("Songbird")
-local foundationModule = require(songbird.Parent.Foundation)
-local reactModule = require(songbird.Parent.React)
-local reactUtilsModule = require(songbird.Parent.ReactUtils)
-local reactOtterModule = require(songbird.Parent.ReactOtter)
-local useBinding = reactModule.useBinding
-local useCallback = reactModule.useCallback
-local useEffect = reactModule.useEffect
-local usePrevious = reactUtilsModule.usePrevious
-local useAnimatedBinding = reactOtterModule.useAnimatedBinding
-local t = { stiffness = 300, damping = 30, mass = 1 }
-local _ = { isCollapsed = false }
+﻿local Songbird = script:FindFirstAncestor("Songbird")
+local FoundationModule = require(Songbird.Parent.Foundation)
+local ReactModule = require(Songbird.Parent.React)
+local ReactOtterModule = require(Songbird.Parent.ReactOtter)
+local UseBindingFunction = ReactModule.useBinding
+local UseCallbackFunction = ReactModule.useCallback
+local UseEffectFunction = ReactModule.useEffect
+local UsePreviousFunction = require(Songbird.Parent.ReactUtils).usePrevious
+local UseAnimatedBindingFunction = ReactOtterModule.useAnimatedBinding
+local config = { stiffness = 300, damping = 30, mass = 1 }
 
-return function(p1)
-	-- upvalues: usePrevious (ref), useBinding (ref), useAnimatedBinding (ref), useCallback (ref), useEffect (ref), reactOtterModule (ref), t (ref), reactModule (ref), foundationModule (ref)
-	local var1 = usePrevious(p1.isCollapsed)
-	local var2, var3 = useBinding(Vector2.new(1e999, 1e999))
-	local var4, var5 = useAnimatedBinding(if p1.isCollapsed then 0 else 1)
-	local var6 = useCallback(function(p2)
-		-- upvalues: var3 (ref)
-		var3(p2.AbsoluteCanvasSize)
+return function(p1) --[[ Line: 31 | Named "CollapsibleFrame" ]]
+	-- upvalues: UsePreviousFunction (copy), UseBindingFunction (copy), UseAnimatedBindingFunction (copy), UseCallbackFunction (copy), UseEffectFunction (copy), ReactOtterModule (copy), config (copy), ReactModule (copy), FoundationModule (copy)
+	local UsePreviousResult = UsePreviousFunction(p1.isCollapsed)
+	local UseBindingResult, UseBindingResult2 = UseBindingFunction(Vector2.new(1e999, 1e999))
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = UseAnimatedBindingFunction(if p1.isCollapsed then 0 else 1)
+	local UseCallbackResult = UseCallbackFunction(function(ScrollFrame) --[[ Line: 36 ]]
+		-- upvalues: UseBindingResult2 (copy)
+		UseBindingResult2(ScrollFrame.AbsoluteCanvasSize)
 	end, {})
-	useEffect(function()
-		-- upvalues: var1 (ref), p1 (ref), var5 (ref), reactOtterModule (copy), t (copy)
-		if var1 ~= nil then
-			if not p1.isCollapsed and var1 then
-				var5(reactOtterModule.spring(1, t))
+	UseEffectFunction(function() --[[ Line: 40 ]]
+		-- upvalues: UsePreviousResult (copy), p1 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), config (upval)
+		if UsePreviousResult ~= nil then
+			if not p1.isCollapsed and UsePreviousResult then
+				UseAnimatedBindingResult2(ReactOtterModule.spring(1, config))
 				
 				return
-			elseif p1.isCollapsed and not var1 then
-				var5(reactOtterModule.spring(0, t))
+			end
+			if p1.isCollapsed and not UsePreviousResult then
+				UseAnimatedBindingResult2(ReactOtterModule.spring(0, config))
 			end
 		end
-	end, { p1.isCollapsed, var1 })
+	end, { p1.isCollapsed, UsePreviousResult })
 	
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "size-full clip",
 		sizeConstraint = {
-			MaxSize = reactModule.joinBindings({ maxSize = var2, alpha = var4 }):map(function(p2)
-				return Vector2.new(1e999, math.max(p2.maxSize.Y * p2.alpha, 0))
+			MaxSize = ReactModule.joinBindings({
+				maxSize = UseBindingResult,
+				alpha = UseAnimatedBindingResult
+			}):map(function(p2): Vector2 --[[ Line: 53 ]]
+				return Vector2.new(1e999, (math.max(p2.maxSize.Y * p2.alpha, 0)))
 			end)
 		}
 	}, {
-		ScrollingFrame = reactModule.createElement("ScrollingFrame", {
+		ScrollingFrame = ReactModule.createElement("ScrollingFrame", {
 			Size = UDim2.fromScale(1, 0),
 			AutomaticSize = Enum.AutomaticSize.XY,
 			BackgroundTransparency = 1,
@@ -52,9 +54,9 @@ return function(p1)
 			HorizontalScrollBarInset = Enum.ScrollBarInset.None,
 			ScrollBarImageTransparency = 1,
 			Selectable = false,
-			[reactModule.Change.AbsoluteCanvasSize] = var6
+			[ReactModule.Change.AbsoluteCanvasSize] = UseCallbackResult
 		}, {
-			Container = reactModule.createElement(foundationModule.View, { tag = "auto-y size-full-0" }, p1.children)
+			Container = ReactModule.createElement(FoundationModule.View, { tag = "auto-y size-full-0" }, p1.children)
 		})
 	})
 end

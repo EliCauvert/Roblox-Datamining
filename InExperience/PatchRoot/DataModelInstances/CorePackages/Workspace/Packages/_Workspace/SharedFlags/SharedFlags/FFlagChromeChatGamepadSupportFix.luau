@@ -1,1 +1,3 @@
-﻿return require(script.Parent:WaitForChild("FFlagEnableConsoleExpControls")) and game:DefineFastFlag("ChromeChatGamepadSupportFix", false)
+﻿local ChromeChatGamepadSupportFix = game:DefineFastFlag("ChromeChatGamepadSupportFix", false)
+
+return require(script.Parent:WaitForChild("FFlagEnableConsoleExpControls")) and ChromeChatGamepadSupportFix

@@ -1,20 +1,19 @@
-﻿local appChatNetworking = script:FindFirstAncestor("AppChatNetworking")
-local packages = script:FindFirstAncestor("Packages")
-local CHAT_PLATFORM_BASE_URLModule = require(appChatNetworking.url.CHAT_PLATFORM_BASE_URL)
-local _ = require(appChatNetworking.responses.SharedTypes)
-local name = require(packages.Loggers).Logger:new(script.Name)
+﻿local AppChatNetworking = script:FindFirstAncestor("AppChatNetworking")
+local CHATPLATFORMBASEURLModule = require(AppChatNetworking.url.CHAT_PLATFORM_BASE_URL)
+local _ = require(AppChatNetworking.responses.SharedTypes)
+local NewResult = require(script:FindFirstAncestor("Packages").Loggers).Logger:new(script.Name)
 
-return require(script.Parent.RoduxNetworking).POST(script.Name, function(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: name (ref), CHAT_PLATFORM_BASE_URLModule (ref)
-	if p6 and p7 then
-		name:warn("Both conversation ID and friend ID provided to RecordModalSequenceResponse.")
+return require(script.Parent.RoduxNetworking).POST(script.Name, function(Callback, Action_type, Modal_sequence, Modal_id, Modal_variant, Conversation_id, Friend_id) --[[ Line: 11 ]]
+	-- upvalues: NewResult (copy), CHATPLATFORMBASEURLModule (copy)
+	if Conversation_id and Friend_id then
+		NewResult:warn("Both conversation ID and friend ID provided to RecordModalSequenceResponse.")
 	end
-	return p1(CHAT_PLATFORM_BASE_URLModule):path("v1"):path("record-modal-sequence-response"):body({
-		action_type = p2,
-		modal_sequence = p3,
-		modal_id = p4,
-		modal_variant = p5,
-		conversation_id = p6,
-		friend_id = p7
+	return Callback(CHATPLATFORMBASEURLModule):path("v1"):path("record-modal-sequence-response"):body({
+		action_type = Action_type,
+		modal_sequence = Modal_sequence,
+		modal_id = Modal_id,
+		modal_variant = Modal_variant,
+		conversation_id = Conversation_id,
+		friend_id = Friend_id
 	})
 end)

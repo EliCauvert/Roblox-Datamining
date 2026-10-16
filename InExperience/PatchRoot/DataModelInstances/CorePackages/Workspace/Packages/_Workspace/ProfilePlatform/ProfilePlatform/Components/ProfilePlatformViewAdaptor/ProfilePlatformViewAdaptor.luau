@@ -1,155 +1,142 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local inputUiModule = require(parent.InputUi)
-local roactUtilsModule = require(parent.RoactUtils)
-local robloxAppHooksModule = require(parent.RobloxAppHooks)
-local useScreenSize = robloxAppHooksModule.useScreenSize
-local useTopBarHeight = robloxAppHooksModule.useTopBarHeight
-local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
-local profileTopBarModule = require(profilePlatform.Components.ProfileTopBar)
-local useProfileFormFactorModule = require(profilePlatform.Hooks.useProfileFormFactor)
-local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfileWrapperContext)
-local useProfileScrollContextModule = require(profilePlatform.Contexts.ProfileScrollContext.useProfileScrollContext)
-local useProfileCardWidthModule = require(profilePlatform.Hooks.useProfileCardWidth)
-local useProfileCardWidth = require(parent.ProfilePlatformCommon).Hooks.useProfileCardWidth
-local getPeekViewOpenHeightByProfileTypeModule = require(profilePlatform.Utils.getPeekViewOpenHeightByProfileType)
-local getSafeAreaSize = inputUiModule.getSafeAreaSize
-local useProfilePeekViewHeightModule = require(profilePlatform.Hooks.useProfilePeekViewHeight)
-local useShouldShowContextualInformationModule = require(profilePlatform.Hooks.useShouldShowContextualInformation)
-local constantsModule = require(profilePlatform.Common.Constants)
-local presenceModule = require(profilePlatform.Rodux.Presence)
-local networkingPresenceModule = require(profilePlatform.Networking.NetworkingPresence)
-local convertPresenceEnumModule = require(profilePlatform.Utils.convertPresenceEnum)
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local useEffectOnMount = roactUtilsModule.Hooks.useEffectOnMount
-local enumsModule = require(profilePlatform.Common.Enums)
-local profileModalViewModule = require(script.Parent.ProfileModalView)
-local profileFullViewModule = require(script.Parent.ProfileFullView)
-local profilePlatformPageModule = require(profilePlatform.Components.ProfilePlatformPage)
-local profilePeekViewModule = require(script.Parent.ProfilePeekView)
-local fFlagProfilePlatformNewProfileHeader = require(parent.SharedFlags).FFlagProfilePlatformNewProfileHeader
-local fFlagSwitchProfileWidthHookToSocialCommon = require(parent.SharedFlags).FFlagSwitchProfileWidthHookToSocialCommon
-local fFlagEnableMobileGameJoinCard = require(parent.SharedFlags).FFlagEnableMobileGameJoinCard
-local fFlagProfilePlatformPresenceStoreMigrationModule = require(profilePlatform.Flags.FFlagProfilePlatformPresenceStoreMigration)
-local var1 = if fFlagProfilePlatformPresenceStoreMigrationModule then require(parent.FriendsCommon).Hooks.useGetPresenceByUserId else nil
-local var2 = if fFlagProfilePlatformPresenceStoreMigrationModule then require(parent.DataHydration).Presence.PresenceStore.get() else nil
-local fFlagEnableSplitPane = require(parent.SharedFlags).FFlagEnableSplitPane
-local var3 = if fFlagEnableSplitPane then require(parent.SplitPane) else nil
-local useSignalState = require(parent.SignalsReact).useSignalState
-local t = { skipFetch = true }
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local RoactUtilsModule = require(Parent.RoactUtils)
+local RobloxAppHooksModule = require(Parent.RobloxAppHooks)
+local UseScreenSizeFunction = RobloxAppHooksModule.useScreenSize
+local UseTopBarHeightFunction = RobloxAppHooksModule.useTopBarHeight
+local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
+local ProfileTopBarModule = require(ProfilePlatform.Components.ProfileTopBar)
+local UseProfileFormFactorModule = require(ProfilePlatform.Hooks.useProfileFormFactor)
+local UseProfileWrapperContextModule = require(ProfilePlatform.Contexts.useProfileWrapperContext)
+local UseProfileScrollContextModule = require(ProfilePlatform.Contexts.ProfileScrollContext.useProfileScrollContext)
+local UseProfileCardWidthModule = require(ProfilePlatform.Hooks.useProfileCardWidth)
+local UseProfileCardWidthFunction = require(Parent.ProfilePlatformCommon).Hooks.useProfileCardWidth
+local GetPeekViewOpenHeightByProfileTypeModule = require(ProfilePlatform.Utils.getPeekViewOpenHeightByProfileType)
+local GetSafeAreaSizeFunction = require(Parent.InputUi).getSafeAreaSize
+local UseProfilePeekViewHeightModule = require(ProfilePlatform.Hooks.useProfilePeekViewHeight)
+local UseShouldShowContextualInformationModule = require(ProfilePlatform.Hooks.useShouldShowContextualInformation)
+local ConstantsModule = require(ProfilePlatform.Common.Constants)
+local PresenceModule = require(ProfilePlatform.Rodux.Presence)
+local NetworkingPresenceModule = require(ProfilePlatform.Networking.NetworkingPresence)
+local ConvertPresenceEnumModule = require(ProfilePlatform.Utils.convertPresenceEnum)
+local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
+local UseEffectOnMountFunction = RoactUtilsModule.Hooks.useEffectOnMount
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local ProfileModalViewModule = require(script.Parent.ProfileModalView)
+local ProfileFullViewModule = require(script.Parent.ProfileFullView)
+local ProfilePlatformPageModule = require(ProfilePlatform.Components.ProfilePlatformPage)
+local ProfilePeekViewModule = require(script.Parent.ProfilePeekView)
+local FFlagProfilePlatformNewProfileHeader = require(Parent.SharedFlags).FFlagProfilePlatformNewProfileHeader
+local FFlagSwitchProfileWidthHookToSocialCommon = require(Parent.SharedFlags).FFlagSwitchProfileWidthHookToSocialCommon
+local FFlagEnableMobileGameJoinCard = require(Parent.SharedFlags).FFlagEnableMobileGameJoinCard
+local FFlagProfilePlatformPresenceStoreMigrationModule = require(ProfilePlatform.Flags.FFlagProfilePlatformPresenceStoreMigration)
+local UseGetPresenceByUserId = if FFlagProfilePlatformPresenceStoreMigrationModule then require(Parent.FriendsCommon).Hooks.useGetPresenceByUserId else nil
+local GetResult = if FFlagProfilePlatformPresenceStoreMigrationModule then require(Parent.DataHydration).Presence.PresenceStore.get() else nil
+local FFlagEnableSplitPane = require(Parent.SharedFlags).FFlagEnableSplitPane
+local SplitPaneModule = if FFlagEnableSplitPane then require(Parent.SplitPane) else nil
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local config = { skipFetch = true }
 
-return function(_)
-	-- upvalues: useProfileWrapperContextModule (ref), useProfileScrollContextModule (ref), useScreenSize (ref), useTopBarHeight (ref), fFlagEnableMobileGameJoinCard (ref), reactModule (ref), useSelector (ref), useProfileFormFactorModule (ref), enumsModule (ref), fFlagEnableSplitPane (ref), var3 (ref), useSignalState (ref), profilePlatformPageModule (ref), profileTopBarModule (ref), getSafeAreaSize (ref), fFlagProfilePlatformNewProfileHeader (ref), fFlagSwitchProfileWidthHookToSocialCommon (ref), useProfileCardWidth (ref), useProfileCardWidthModule (ref), constantsModule (ref), fFlagProfilePlatformPresenceStoreMigrationModule (ref), useEffectOnMount (ref), var2 (ref), var1 (ref), t (ref), convertPresenceEnumModule (ref), presenceModule (ref), useDispatch (ref), networkingPresenceModule (ref), useShouldShowContextualInformationModule (ref), useProfilePeekViewHeightModule (ref), getPeekViewOpenHeightByProfileTypeModule (ref), profileFullViewModule (ref), profileModalViewModule (ref), profilePeekViewModule (ref)
-	local var4 = useProfileWrapperContextModule()
-	local var5 = useProfileScrollContextModule()
-	local profileType = var4.profileType
-	local previousView = var4.navigateTo.previousView
-	local var6 = useScreenSize()
-	local var7 = useTopBarHeight()
-	local var8 = if fFlagEnableMobileGameJoinCard then var4.mountAsFullView or false else false
-	local var9 = reactModule.useCallback(function()
-		-- upvalues: previousView (ref)
-		previousView(false)
-	end, { previousView })
-	local var10 = reactModule.useCallback(function()
-		-- upvalues: previousView (ref)
-		previousView(true)
-	end, { previousView })
-	local var11 = useSelector(function(p1)
+return function(_) --[[ Line: 56 ]]
+	-- upvalues: UseProfileWrapperContextModule (copy), UseProfileScrollContextModule (copy), UseScreenSizeFunction (copy), UseTopBarHeightFunction (copy), FFlagEnableMobileGameJoinCard (copy), ReactModule (copy), UseSelectorFunction (copy), UseProfileFormFactorModule (copy), EnumsModule (copy), FFlagEnableSplitPane (copy), SplitPaneModule (copy), UseSignalStateFunction (copy), ProfilePlatformPageModule (copy), ProfileTopBarModule (copy), GetSafeAreaSizeFunction (copy), FFlagProfilePlatformNewProfileHeader (copy), FFlagSwitchProfileWidthHookToSocialCommon (copy), UseProfileCardWidthFunction (copy), UseProfileCardWidthModule (copy), ConstantsModule (copy), FFlagProfilePlatformPresenceStoreMigrationModule (copy), UseEffectOnMountFunction (copy), GetResult (copy), UseGetPresenceByUserId (copy), config (copy), ConvertPresenceEnumModule (copy), PresenceModule (copy), UseDispatchFunction (copy), NetworkingPresenceModule (copy), UseShouldShowContextualInformationModule (copy), UseProfilePeekViewHeightModule (copy), GetPeekViewOpenHeightByProfileTypeModule (copy), ProfileFullViewModule (copy), ProfileModalViewModule (copy), ProfilePeekViewModule (copy)
+	local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
+	local UseProfileScrollContextModuleResult = UseProfileScrollContextModule()
+	local ProfileType = UseProfileWrapperContextModuleResult.profileType
+	local PreviousViewFunction = UseProfileWrapperContextModuleResult.navigateTo.previousView
+	local UseScreenSizeResult = UseScreenSizeFunction()
+	local UseTopBarHeightResult = UseTopBarHeightFunction()
+	local MountAsFullView = FFlagEnableMobileGameJoinCard and UseProfileWrapperContextModuleResult.mountAsFullView or false
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 67 ]]
+		-- upvalues: PreviousViewFunction (copy)
+		PreviousViewFunction(false)
+	end, { PreviousViewFunction })
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 72 ]]
+		-- upvalues: PreviousViewFunction (copy)
+		PreviousViewFunction(true)
+	end, { PreviousViewFunction })
+	local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 77 ]]
 		return p1.GlobalGuiInset
 	end)
-	local var12 = useProfileFormFactorModule()
-	local var13 = var12.formFactor == enumsModule.ProfileFormFactor.Wide
-	local var14 = false
+	local UseProfileFormFactorModuleResult = UseProfileFormFactorModule()
+	local IsFormFactorMatch = UseProfileFormFactorModuleResult.formFactor == EnumsModule.ProfileFormFactor.Wide
+	local HasProfileSplitPaneEligibility = false
 	
-	if fFlagEnableSplitPane then
-		local var15 = useSignalState(var3.SplitPaneStore.getStore().getSupportPaneModeIfActive)
-		var14 = var15 ~= nil and var3.SplitPaneVariant.getProfileSplitPaneEligibility(var15) ~= nil
+	if FFlagEnableSplitPane then
+		local UseSignalStateResult = UseSignalStateFunction(SplitPaneModule.SplitPaneStore.getStore().getSupportPaneModeIfActive)
+		HasProfileSplitPaneEligibility = UseSignalStateResult ~= nil and SplitPaneModule.SplitPaneVariant.getProfileSplitPaneEligibility(UseSignalStateResult) ~= nil
 	end
-	local var16 = reactModule.useCallback(function()
-		-- upvalues: reactModule (copy), profilePlatformPageModule (copy)
-		return reactModule.createElement(profilePlatformPageModule, {})
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 92 ]]
+		-- upvalues: ReactModule (upval), ProfilePlatformPageModule (upval)
+		return ReactModule.createElement(ProfilePlatformPageModule, {})
 	end, {})
-	local var17 = fFlagEnableSplitPane and var14
-	local var18 = reactModule.useCallback(function()
-		-- upvalues: reactModule (copy), profileTopBarModule (copy), var9 (ref), fFlagEnableSplitPane (copy), var17 (ref)
-		return reactModule.createElement(profileTopBarModule, {
+	local HasProfileSplitPaneEligibility1: boolean = FFlagEnableSplitPane and HasProfileSplitPaneEligibility
+	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 98 ]]
+		-- upvalues: ReactModule (upval), ProfileTopBarModule (upval), UseResult (copy), FFlagEnableSplitPane (upval), HasProfileSplitPaneEligibility1 (copy)
+		return ReactModule.createElement(ProfileTopBarModule, {
 			transparentBackground = true,
 			backgroundTransparency = nil,
-			navigateBack = var9,
-			hideNavigationButton = if fFlagEnableSplitPane then var17 else nil
+			navigateBack = UseResult,
+			hideNavigationButton = if FFlagEnableSplitPane then HasProfileSplitPaneEligibility1 else nil
 		})
-	end, if fFlagEnableSplitPane then { var9, var17 } else {})
-	local var19 = getSafeAreaSize(var6, var11)
-	local var20 = if fFlagProfilePlatformNewProfileHeader then if fFlagSwitchProfileWidthHookToSocialCommon then useProfileCardWidth() else useProfileCardWidthModule(var13) else math.min(var19.X.Offset, constantsModule.MAXIMUM_CONTAINER_WIDTH)
-	local var21 = nil
+	end, if FFlagEnableSplitPane then { UseResult, HasProfileSplitPaneEligibility1 } else {})
+	local SafeAreaSize = GetSafeAreaSizeFunction(UseScreenSizeResult, UseSelectorResult)
+	local UseProfileCardWidthResult = if FFlagProfilePlatformNewProfileHeader then if FFlagSwitchProfileWidthHookToSocialCommon then UseProfileCardWidthFunction() else UseProfileCardWidthModule(IsFormFactorMatch) else math.min(SafeAreaSize.X.Offset, ConstantsModule.MAXIMUM_CONTAINER_WIDTH)
+	local v1 = nil
 	
-	if fFlagProfilePlatformNewProfileHeader then
-		local var22
-		local profileId = var4.profileId
-		local _ = nil
+	if FFlagProfilePlatformNewProfileHeader then
+		local ProfileId = UseProfileWrapperContextModuleResult.profileId
+		local ConvertPresenceEnumModuleResult = nil
 		
-		if fFlagProfilePlatformPresenceStoreMigrationModule then
-			local var23
-			useEffectOnMount(function()
-				-- upvalues: var2 (copy), profileId (ref)
-				var2.RefreshPresenceByUserId(tostring(profileId))
+		if FFlagProfilePlatformPresenceStoreMigrationModule then
+			UseEffectOnMountFunction(function() --[[ Line: 120 ]]
+				-- upvalues: GetResult (upval), ProfileId (copy)
+				GetResult.RefreshPresenceByUserId((tostring(ProfileId)))
 			end)
-			local var24 = var1(profileId, t)
-			local var25 = if var24 then var24.userPresenceType else presenceModule.Enums.PresenceType.Offline
-			
-			if var24 and var24.universeId ~= "" then
-				var23 = tonumber(var24.universeId)
-				
-				if not var23 then
-					var23 = nil
-				end
-				var22 = convertPresenceEnumModule(var25, var23)
-			end
+			local UseGetPresenceByUserIdResult = UseGetPresenceByUserId(ProfileId, config)
+			ConvertPresenceEnumModuleResult = ConvertPresenceEnumModule(UseGetPresenceByUserIdResult and UseGetPresenceByUserIdResult.userPresenceType or PresenceModule.Enums.PresenceType.Offline, UseGetPresenceByUserIdResult and UseGetPresenceByUserIdResult.universeId ~= "" and tonumber(UseGetPresenceByUserIdResult.universeId) or nil)
 		else
-			local var26 = useDispatch()
-			useEffectOnMount(function()
-				-- upvalues: var26 (ref), networkingPresenceModule (copy), profileId (ref)
-				var26(networkingPresenceModule.GetPresencesFromUserIds.API({ profileId })):catch(function(_) end)
+			local UseDispatchResult = UseDispatchFunction()
+			UseEffectOnMountFunction(function() --[[ Line: 131 ]]
+				-- upvalues: UseDispatchResult (copy), NetworkingPresenceModule (upval), ProfileId (copy)
+				UseDispatchResult(NetworkingPresenceModule.GetPresencesFromUserIds.API({ ProfileId })):catch(function(_) --[[ Line: 132 ]] end)
 			end)
-			local var27 = useSelector(function(p1)
-				-- upvalues: presenceModule (copy), profileId (ref)
-				return presenceModule.Selectors.getUserPresenceByUserId(p1, profileId) or {
+			local UseSelectorResult1 = UseSelectorFunction(function(p1) --[[ Line: 135 ]]
+				-- upvalues: PresenceModule (upval), ProfileId (copy)
+				return PresenceModule.Selectors.getUserPresenceByUserId(p1, ProfileId) or {
 					lastLocation = "",
-					userPresenceType = presenceModule.Enums.PresenceType.Offline
+					userPresenceType = PresenceModule.Enums.PresenceType.Offline
 				}
 			end)
-			var22 = convertPresenceEnumModule(var27.userPresenceType, var27.universeId)
+			ConvertPresenceEnumModuleResult = ConvertPresenceEnumModule(UseSelectorResult1.userPresenceType, UseSelectorResult1.universeId)
 		end
-		var21 = useProfilePeekViewHeightModule(var20, useShouldShowContextualInformationModule(var22))
+		v1 = UseProfilePeekViewHeightModule(UseProfileCardWidthResult, (UseShouldShowContextualInformationModule(ConvertPresenceEnumModuleResult)))
 	end
-	local _ = nil
-	local _ = nil
-	local var28 = if fFlagProfilePlatformNewProfileHeader and profileType == enumsModule.ProfileTypes.User then var21 else getPeekViewOpenHeightByProfileTypeModule(profileType)
+	local PeekViewOpenHeightByProfileTypeModule = if FFlagProfilePlatformNewProfileHeader and ProfileType == EnumsModule.ProfileTypes.User then v1 else GetPeekViewOpenHeightByProfileTypeModule(ProfileType)
+	local _UDim: UDim = if PeekViewOpenHeightByProfileTypeModule > SafeAreaSize.Y.Offset - UseTopBarHeightResult then UDim.new(1, 0) else UDim.new(0, PeekViewOpenHeightByProfileTypeModule)
 	
-	return if var12.isFullView then reactModule.createElement(profileFullViewModule, { renderContent = var16, navigateBack = var9 }) elseif var13 then reactModule.createElement(profileModalViewModule, {
-		renderContent = var16,
-		renderTopBar = var18,
-		topBarHeight = var7,
-		viewWidth = var20,
-		fillPane = var14,
-		navigateBack = var9
-	}) else reactModule.createElement(profilePeekViewModule, {
+	return if UseProfileFormFactorModuleResult.isFullView then ReactModule.createElement(ProfileFullViewModule, { renderContent = UseResult2, navigateBack = UseResult }) elseif IsFormFactorMatch then ReactModule.createElement(ProfileModalViewModule, {
+		renderContent = UseResult2,
+		renderTopBar = UseResult3,
+		topBarHeight = UseTopBarHeightResult,
+		viewWidth = UseProfileCardWidthResult,
+		fillPane = HasProfileSplitPaneEligibility,
+		navigateBack = UseResult
+	}) else ReactModule.createElement(ProfilePeekViewModule, {
 		bottomDockedContainerHeight = 0,
 		onViewStateChanged = nil,
-		briefViewContentHeight = if var19.Y.Offset - var7 < var28 then UDim.new(1, 0) else UDim.new(0, var28),
-		contentSlot = var16(),
+		briefViewContentHeight = _UDim,
+		contentSlot = UseResult2(),
 		fullViewContentHeight = UDim.new(1, 0),
-		mountAsFullView = var8,
-		onClosed = var10,
-		topBarHeight = var7,
-		topBarSlot = var18(),
-		viewWidth = UDim.new(0, var19.X.Offset),
-		transitionPercentCallback = function(p1)
-			-- upvalues: var5 (ref)
-			var5.setPeekViewOpenPercent(p1)
+		mountAsFullView = MountAsFullView,
+		onClosed = UseResult1,
+		topBarHeight = UseTopBarHeightResult,
+		topBarSlot = UseResult3(),
+		viewWidth = UDim.new(0, SafeAreaSize.X.Offset),
+		transitionPercentCallback = function(p1) --[[ Line: 193 ]]
+			-- upvalues: UseProfileScrollContextModuleResult (copy)
+			UseProfileScrollContextModuleResult.setPeekViewOpenPercent(p1)
 		end,
-		profileType = if fFlagProfilePlatformNewProfileHeader then profileType else nil
+		profileType = if FFlagProfilePlatformNewProfileHeader then ProfileType else nil
 	})
 end

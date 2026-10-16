@@ -1,173 +1,183 @@
 ﻿local _ = require(script:FindFirstAncestor("Moments").Parent.MomentsTypes)
 local _ = require(script.Parent.FeedTypes)
 
-local function _(p1, p2)
+local function _(p1, p2): boolean --[[ Line: 17 | Named "matches" ]]
 	if p2 == nil then
 		return false
+	else
+		local FeedItemId = p2.recommendationMetadata.feedItemId
+		
+		return p1.momentId == p2.momentId or FeedItemId ~= nil and (FeedItemId ~= "" and p1.recommendationMetadata.feedItemId == FeedItemId)
 	end
-	local feedItemId = p2.recommendationMetadata.feedItemId
-	
-	return if p1.momentId ~= p2.momentId then feedItemId ~= nil and (feedItemId ~= "" and p1.recommendationMetadata.feedItemId == feedItemId) else true
 end
 
-return function()
+return function() --[[ Line: 26 | Named "createPendingFeedOverlay" ]]
 	local t = {}
-	local t_1 = {}
+	local t1 = {}
 	
-	local function identity(p1)
-		-- upvalues: t (ref)
+	local function identity(p1) --[[ Line: 55 ]]
+		-- upvalues: t (copy)
 		if p1.kind ~= "moment" then
 			return nil
 		end
-		for i, v in t do
+		for i, value in t do
 			if p1.moment.momentId ~= i then
-				local var1
-				local moment = p1.moment
-				local published = v.published
+				local Moment = p1.moment
+				local Published = value.published
+				local IsMomentIdMatch = nil
 				
-				if published == nil then
-					var1 = false
+				if Published == nil then
+					IsMomentIdMatch = false
 				else
-					local feedItemId = published.recommendationMetadata.feedItemId
-					var1 = if moment.momentId ~= published.momentId then feedItemId ~= nil and (feedItemId ~= "" and moment.recommendationMetadata.feedItemId == feedItemId) else true
+					local FeedItemId = Published.recommendationMetadata.feedItemId
+					IsMomentIdMatch = Moment.momentId == Published.momentId or FeedItemId ~= nil and (FeedItemId ~= "" and Moment.recommendationMetadata.feedItemId == FeedItemId)
 				end
-				if var1 then
-					return i
+				if not IsMomentIdMatch then
+					continue
 				end
 			end
+			return i
 		end
 		return p1.moment.momentId
 	end
 	
 	return {
-		update = function(p2, p3)
-			-- upvalues: t_1 (write), t (ref)
-			local var2 = false
-			t_1 = p2
+		update = function(p2, List): boolean --[[ Line: 30 ]]
+			-- upvalues: t1 (ref), t (copy)
+			local Flag = false
+			t1 = p2
 			
-			for i, v in t_1 do
-				local moment = v.moment
-				local momentId = t[moment.momentId]
+			for _, value in t1 do
+				local Moment = value.moment
+				local Entry = t[Moment.momentId]
 				
-				if momentId == nil then
-					momentId = { retired = false, admitted = false }
-					t[moment.momentId] = momentId
-					var2 = true
+				if Entry == nil then
+					Entry = { retired = false, admitted = false }
+					t[Moment.momentId] = Entry
+					Flag = true
 				end
-				if v.publishedMoment ~= nil then
-					momentId.published = v.publishedMoment
-				end
-			end
-			for i, v_1 in t do
-				if v_1.published ~= nil and table.find(p3, v_1.published.momentId) ~= nil then
-					v_1.retired = true
+				if value.publishedMoment ~= nil then
+					Entry.published = value.publishedMoment
 				end
 			end
-			return var2
+			for _, value1 in t do
+				if value1.published ~= nil and table.find(List, value1.published.momentId) ~= nil then
+					value1.retired = true
+				end
+			end
+			return Flag
 		end,
-		retireMissing = function(p4)
-			-- upvalues: identity (ref), t (ref)
-			local t_1 = {}
+		retireMissing = function(List) --[[ Line: 68 ]]
+			-- upvalues: identity (copy), t (copy)
+			local t2 = {}
 			
-			for i, v in p4 do
-				local var3 = identity(v)
+			for i, value in List do
+				local IdentityResult = identity(value)
 				
-				if var3 ~= nil then
-					t_1[var3] = true
+				if IdentityResult ~= nil then
+					t2[IdentityResult] = true
 				end
 			end
-			for i_1, v_1 in t do
-				if v_1.admitted and not t_1[i_1] then
-					v_1.retired = true
+			for i, value1 in t do
+				if value1.admitted and not t2[i] then
+					value1.retired = true
 				end
 			end
 		end,
-		merge = function(p5)
-			-- upvalues: t (ref), t_1 (write), identity (ref)
-			for i, v in t do
-				v.admitted = false
+		merge = function(List) --[[ Line: 83 ]]
+			-- upvalues: t (copy), t2 (ref), identity (copy)
+			for _, value in t do
+				value.admitted = false
 			end
-			local t_2 = {}
+			local t3 = {}
 			
-			for i_1, v_1 in t_1 do
-				t_2[v_1.moment.momentId] = true
+			for _, value1 in t2 do
+				t3[value1.moment.momentId] = true
 			end
-			local t_3 = {}
+			local t4 = {}
 			
-			for i_2, v_2 in p5 do
-				local var4 = identity(v_2)
+			for _, value2 in List do
+				local IdentityResult = identity(value2)
+				local NoIdentityResult = IdentityResult == nil
+				local Entry = nil
 				
-				if var4 ~= nil then
-					t_3[var4] = true
-					local var5 = t[var4]
-					
-					if var5 ~= nil and v_2.kind == "moment" and v_2.moment.momentId ~= var4 then
-						var5.published = v_2.moment
-					end
+				if not NoIdentityResult then
+					t4[IdentityResult] = true
+					Entry = t[IdentityResult]
+					NoIdentityResult = Entry == nil or value2.kind ~= "moment" or value2.moment.momentId == IdentityResult
+				end
+				if not NoIdentityResult then
+					Entry.published = value2.moment
 				end
 			end
-			local var6
-			local t_4 = {}
-			local t_5 = {}
+			local List1 = {}
+			local t5 = {}
 			
-			local function _(p6)
-				-- upvalues: identity (copy), t_5 (ref), t_4 (ref)
-				local var7 = identity(p6)
+			local function _(p3) --[[ Line: 106 | Named "append" ]]
+				-- upvalues: identity (upval), t5 (copy), List1 (copy)
+				local IdentityResult = identity(p3)
 				
-				if var7 ~= nil then
-					if t_5[var7] then return end
-					t_5[var7] = true
+				if IdentityResult ~= nil then
+					if t5[IdentityResult] then return end
+					t5[IdentityResult] = true
 				end
-				table.insert(t_4, p6)
+				table.insert(List1, p3)
 			end
 			
-			for i_3, v_3 in t_1 do
-				local moment = v_3.moment
-				local momentId = moment.momentId
-				local var7 = t[momentId]
+			for _, value3 in t2 do
+				local Moment = value3.moment
+				local MomentId = Moment.momentId
+				local Entry = t[MomentId]
 				
-				if not t_3[momentId] and not var7.retired then
-					local t_6 = { kind = "moment", moment = var7.published or moment }
-					var6 = identity(t_6)
+				if not t4[MomentId] and not Entry.retired then
+					local config = { kind = "moment", moment = Entry.published or Moment }
+					local IdentityResult = identity(config)
 					
-					if var6 ~= nil then
-						if not t_5[var6] then
-							t_5[var6] = true
-						end
-						var7.admitted = true
-					end
-					table.insert(t_4, t_6)
-				end
-			end
-			for i_4, v_4 in p5 do
-				local published
-				local var8 = identity(v_4)
-				local var9 = if var8 ~= nil then nil else t[var8]
-				
-				if var9 == nil or v_4.kind ~= "moment" then
-					published = identity(v_4)
-					
-					if published ~= nil then
-						if not t_5[published] then
-							t_5[published] = true
+					if IdentityResult ~= nil then
+						if not t5[IdentityResult] then
+							t5[IdentityResult] = true
+						else
+							Entry.admitted = true
+							continue
 						end
 					end
-					table.insert(t_4, v_4)
-				elseif not var9.retired and (t_2[var8] or v_4.moment.momentId ~= var8) then
-					published = var9.published or v_4.moment
-					local var10 = if published == v_4.moment then v_4 else { kind = "moment", moment = published }
-					var6 = identity(var10)
-					
-					if var6 ~= nil then
-						if not t_5[var6] then
-							t_5[var6] = true
-						end
-						var9.admitted = true
-					end
-					table.insert(t_4, var10)
+					table.insert(List1, config)
 				end
 			end
-			return t_4
+			for _, value4 in List do
+				local IdentityResult = identity(value4)
+				local Entry = if IdentityResult == nil then nil else t[IdentityResult]
+				
+				if Entry ~= nil and value4.kind == "moment" then
+					if not Entry.retired and (t3[IdentityResult] or value4.moment.momentId ~= IdentityResult) then
+						local Published = Entry.published or value4.moment
+						local Value = if Published == value4.moment then value4 else { kind = "moment", moment = Published }
+						local IdentityResult1 = identity(Value)
+						
+						if IdentityResult1 ~= nil then
+							if not t5[IdentityResult1] then
+								t5[IdentityResult1] = true
+							else
+								Entry.admitted = true
+								continue
+							end
+						end
+						table.insert(List1, Value)
+					end
+					continue
+				end
+				local IdentityResult1 = identity(value4)
+				
+				if IdentityResult1 ~= nil then
+					if not t5[IdentityResult1] then
+						t5[IdentityResult1] = true
+					else
+						continue
+					end
+				end
+				table.insert(List1, value4)
+			end
+			return List1
 		end,
 		identity = identity
 	}

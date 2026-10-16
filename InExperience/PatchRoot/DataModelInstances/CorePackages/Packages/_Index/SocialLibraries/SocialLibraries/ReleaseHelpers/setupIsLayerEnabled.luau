@@ -1,9 +1,9 @@
-﻿local getDeepValueModule = require(script.Parent.Parent.Dictionary.getDeepValue)
+﻿local GetDeepValueModule = require(script.Parent.Parent.Dictionary.getDeepValue)
 
-return function(p1)
-	-- upvalues: getDeepValueModule (ref)
-	return function(p2)
-		-- upvalues: getDeepValueModule (copy), p1 (ref)
-		return getDeepValueModule((p2 or {})[p1.layerName] or {}, p1.variantName) or false
+return function(p1) --[[ Line: 3 ]]
+	-- upvalues: GetDeepValueModule (copy)
+	return function(p2) --[[ Line: 7 ]]
+		-- upvalues: GetDeepValueModule (upval), p1 (copy)
+		return GetDeepValueModule((p2 or {})[p1.layerName] or {}, p1.variantName) or false
 	end
 end

@@ -1,162 +1,163 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local dashModule = require(parent.Dash)
-local reactModule = require(parent.React)
-local fillBehaviorModule = require(foundation.Enums.FillBehavior)
-local flagsModule = require(foundation.Utility.Flags)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local overflowScrollContainerModule = require(foundation.Components.OverflowScrollContainer)
-local tabItemModule = require(script.Parent.TabItem)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local useAnimatedHighlightModule = require(foundation.Utility.useAnimatedHighlight)
-local overflowScrollContainerModule_1 = require(script.Parent.OverflowScrollContainer)
-local t = {
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local DashModule = require(Parent.Dash)
+local ReactModule = require(Parent.React)
+local FillBehaviorModule = require(Foundation.Enums.FillBehavior)
+local FlagsModule = require(Foundation.Utility.Flags)
+local InputSizeModule = require(Foundation.Enums.InputSize)
+local OverflowScrollContainerModule = require(Foundation.Components.OverflowScrollContainer)
+local TabItemModule = require(script.Parent.TabItem)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local UseAnimatedHighlightModule = require(Foundation.Utility.useAnimatedHighlight)
+local OverflowScrollContainerModule1 = require(script.Parent.OverflowScrollContainer)
+local config = {
 	testId = "--foundation-tabs",
 	ZIndex = 1,
-	fillBehavior = fillBehaviorModule.Fill,
-	size = inputSizeModule.Medium
+	fillBehavior = FillBehaviorModule.Fill,
+	size = InputSizeModule.Medium
 }
 
-return reactModule.memo(reactModule.forwardRef(function(value, p1)
-	-- upvalues: useTokensModule (ref), withDefaultsModule (ref), t (ref), reactModule (ref), dashModule (ref), fillBehaviorModule (ref), flagsModule (ref), useAnimatedHighlightModule (ref), viewModule (ref), withCommonPropsModule (ref), overflowScrollContainerModule (ref), overflowScrollContainerModule_1 (ref), inputSizeModule (ref), tabItemModule (ref)
-	local var1 = useTokensModule()
-	local var2 = withDefaultsModule(value, t)
-	local var3, var4 = reactModule.useState(var2.defaultActiveTabId or dashModule.get(var2, { 1, "id" }))
-	local var5 = reactModule.useCallback(function(p2)
-		-- upvalues: var2 (ref), var4 (ref)
-		if var2.onActivated then
-			var2.onActivated(p2)
+return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 45 | Named "Tabs" ]]
+	-- upvalues: UseTokensModule (copy), WithDefaultsModule (copy), config (copy), ReactModule (copy), DashModule (copy), FillBehaviorModule (copy), FlagsModule (copy), UseAnimatedHighlightModule (copy), ViewModule (copy), WithCommonPropsModule (copy), OverflowScrollContainerModule (copy), OverflowScrollContainerModule1 (copy), InputSizeModule (copy), TabItemModule (copy)
+	local UseTokensModuleResult = UseTokensModule()
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(WithDefaultsModuleResult.defaultActiveTabId or DashModule.get(WithDefaultsModuleResult, { 1, "id" }))
+	local UseResult = ReactModule.useCallback(function(p3) --[[ Line: 51 ]]
+		-- upvalues: WithDefaultsModuleResult (copy), UseStateResult2 (copy)
+		if WithDefaultsModuleResult.onActivated then
+			WithDefaultsModuleResult.onActivated(p3)
 		end
-		var4(p2)
+		UseStateResult2(p3)
 	end)
-	local var6 = var2.fillBehavior == fillBehaviorModule.Fill
-	local activeTabId = var2.activeTabId or var3
-	local var7 = dashModule.find(var2.tabs, function(p2)
-		-- upvalues: activeTabId (ref)
-		return p2.id == activeTabId
+	local IsFillBehaviorMatch = WithDefaultsModuleResult.fillBehavior == FillBehaviorModule.Fill
+	local ActiveTabId = WithDefaultsModuleResult.activeTabId or UseStateResult
+	local FindResult = DashModule.find(WithDefaultsModuleResult.tabs, function(p3): boolean --[[ Line: 60 ]]
+		-- upvalues: ActiveTabId (copy)
+		return p3.id == ActiveTabId
 	end)
-	local var8 = reactModule.useRef(nil)
-	local var9 = nil
-	local _ = nil
-	local var10 = nil
+	local UseRefResult = ReactModule.useRef(nil)
+	local v1 = nil
+	local UseBindingResult2 = nil
+	local UseResult1 = nil
 	
-	if flagsModule.FoundationUnifiedScrimScrolling then
-		local var11, var12 = reactModule.useBinding(0)
-		var9 = var11
-		local var13 = var12
-		var10 = reactModule.useCallback(function(p2)
-			-- upvalues: var13 (write)
-			var13(p2.AbsoluteSize.X)
+	if FlagsModule.FoundationUnifiedScrimScrolling then
+		v1, UseBindingResult2 = ReactModule.useBinding(0)
+		UseResult1 = ReactModule.useCallback(function(Frame) --[[ Line: 70 ]]
+			-- upvalues: UseBindingResult2 (ref)
+			UseBindingResult2(Frame.AbsoluteSize.X)
 		end, {})
 	end
-	local _ = nil
-	local var14 = reactModule.useRef({})
-	local var15 = reactModule.useMemo(function()
-		-- upvalues: var14 (ref), var2 (ref), reactModule (copy)
-		local current = var14.current
+	local UseMemoResult = nil
+	local UseRefResult1 = ReactModule.useRef({})
+	UseMemoResult = ReactModule.useMemo(function() --[[ Line: 78 ]]
+		-- upvalues: UseRefResult1 (copy), WithDefaultsModuleResult (copy), ReactModule (upval)
+		local Current = UseRefResult1.current
 		
-		for i, v in var2.tabs do
-			if v.ref then
-				current[v.id] = v.ref
-			elseif not current[v.id] then
-				current[v.id] = reactModule.createRef()
+		for _, tab in WithDefaultsModuleResult.tabs do
+			if tab.ref then
+				Current[tab.id] = tab.ref
+			elseif not Current[tab.id] then
+				Current[tab.id] = ReactModule.createRef()
 			end
 		end
-		return current
-	end, { var2.tabs })
-	local var16 = useAnimatedHighlightModule(activeTabId, p1 or var8, var15, var2.size, var2.fillBehavior)
-	local size = var2.size
+		return Current
+	end, { WithDefaultsModuleResult.tabs })
+	local UseAnimatedHighlightModuleResult = UseAnimatedHighlightModule(ActiveTabId, p2 or UseRefResult, UseMemoResult, WithDefaultsModuleResult.size, WithDefaultsModuleResult.fillBehavior)
+	local Size = WithDefaultsModuleResult.size
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var2, {
-		tag = if flagsModule.FoundationUnifiedScrimScrolling then "auto-y no-clip" else "auto-y clip",
+	return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, {
+		tag = if FlagsModule.FoundationUnifiedScrimScrolling then "auto-y no-clip" else "auto-y clip",
 		Size = UDim2.fromScale(1, 0),
-		sizeConstraint = if flagsModule.FoundationUnifiedScrimScrolling and not var6 then {
-			MaxSize = var9:map(function(p2)
-				return Vector2.new(p2, 1e999)
+		sizeConstraint = if FlagsModule.FoundationUnifiedScrimScrolling and not IsFillBehaviorMatch then {
+			MaxSize = v1:map(function(X): Vector2 --[[ Line: 109 ]]
+				return Vector2.new(X, 1e999)
 			end)
 		} else nil
 	}), {
-		Tabs = reactModule.createElement(viewModule, {
+		Tabs = ReactModule.createElement(ViewModule, {
 			tag = "col auto-y",
-			ref = p1 or var8,
+			ref = p2 or UseRefResult,
 			Size = UDim2.fromScale(1, 0)
 		}, {
-			Wrapper = reactModule.createElement(viewModule, {
+			Wrapper = ReactModule.createElement(ViewModule, {
 				LayoutOrder = 1,
 				tag = "auto-y",
 				Size = UDim2.fromScale(1, 0),
-				testId = `{var2.testId}--wrapper`
+				testId = `{WithDefaultsModuleResult.testId}--wrapper`
 			}, {
-				ScrollContainer = reactModule.createElement(if flagsModule.FoundationUnifiedScrimScrolling then overflowScrollContainerModule else overflowScrollContainerModule_1, if flagsModule.FoundationUnifiedScrimScrolling then {
+				ScrollContainer = ReactModule.createElement(if FlagsModule.FoundationUnifiedScrimScrolling then OverflowScrollContainerModule else OverflowScrollContainerModule1, if FlagsModule.FoundationUnifiedScrimScrolling then {
 					LayoutOrder = 1,
-					size = var2.size,
-					scrimBottomInset = var1.Stroke.Thick,
-					testId = `{var2.testId}--scroll-container`
+					size = WithDefaultsModuleResult.size,
+					scrimBottomInset = UseTokensModuleResult.Stroke.Thick,
+					testId = `{WithDefaultsModuleResult.testId}--scroll-container`
 				} else {
 					LayoutOrder = 1,
-					size = var2.size,
-					testId = `{var2.testId}--scroll-container`
+					size = WithDefaultsModuleResult.size,
+					testId = `{WithDefaultsModuleResult.testId}--scroll-container`
 				}, {
-					TabList = reactModule.createElement(viewModule, {
-						onAbsoluteSizeChanged = if flagsModule.FoundationUnifiedScrimScrolling then var10 else nil,
+					TabList = ReactModule.createElement(ViewModule, {
+						onAbsoluteSizeChanged = if FlagsModule.FoundationUnifiedScrimScrolling then UseResult1 else nil,
 						tag = {
 							["row flex-y-fill auto-xy"] = true,
-							["gap-large"] = not var6 and (if size ~= inputSizeModule.Small then size == inputSizeModule.XSmall else true)
+							["gap-large"] = not IsFillBehaviorMatch and (Size == InputSizeModule.Small or Size == InputSizeModule.XSmall)
 						},
-						Size = if var6 then UDim2.fromScale(1, 0) else nil,
-						testId = `{var2.testId}--list`
-					}, dashModule.map(var2.tabs, function(p2, p3)
-						-- upvalues: reactModule (copy), tabItemModule (copy), activeTabId (ref), var5 (ref), var2 (ref), var15 (write)
-						return reactModule.createElement(tabItemModule, {
-							id = p2.id,
-							text = p2.text,
-							indicator = p2.indicator,
-							key = tostring(p2.id),
-							icon = p2.icon,
-							isActive = p2.id == activeTabId,
-							onActivated = var5,
-							LayoutOrder = p3,
-							fillBehavior = var2.fillBehavior,
-							size = var2.size,
-							isDisabled = p2.isDisabled,
-							testId = `{var2.testId}--item-{p5.id}`,
-							ref = var15[p2.id]
+						Size = if IsFillBehaviorMatch then UDim2.fromScale(1, 0) else nil,
+						testId = `{WithDefaultsModuleResult.testId}--list`
+					}, DashModule.map(WithDefaultsModuleResult.tabs, function(p3, LayoutOrder) --[[ Line: 158 ]]
+						-- upvalues: ReactModule (upval), TabItemModule (upval), ActiveTabId (copy), UseResult (copy), WithDefaultsModuleResult (copy), UseMemoResult (ref)
+						return ReactModule.createElement(TabItemModule, {
+							id = p3.id,
+							text = p3.text,
+							indicator = p3.indicator,
+							key = tostring(p3.id),
+							icon = p3.icon,
+							isActive = p3.id == ActiveTabId,
+							onActivated = UseResult,
+							LayoutOrder = LayoutOrder,
+							fillBehavior = WithDefaultsModuleResult.fillBehavior,
+							size = WithDefaultsModuleResult.size,
+							isDisabled = p3.isDisabled,
+							testId = `{WithDefaultsModuleResult.testId}--item-{p5.id}`,
+							ref = UseMemoResult[p3.id]
 						})
 					end))
 				}),
-				Border = reactModule.createElement(viewModule, {
+				Border = ReactModule.createElement(ViewModule, {
 					LayoutOrder = 2,
 					AnchorPoint = Vector2.new(0, 1),
-					Size = UDim2.new(1, 0, 0, var1.Stroke.Thick),
+					Size = UDim2.new(1, 0, 0, UseTokensModuleResult.Stroke.Thick),
 					Position = UDim2.fromScale(0, 1),
-					backgroundStyle = var1.Color.Stroke.Default,
-					testId = `{var2.testId}--border`
+					backgroundStyle = UseTokensModuleResult.Color.Stroke.Default,
+					testId = `{WithDefaultsModuleResult.testId}--border`
 				})
 			}),
-			Content = if var7 and var7.content then reactModule.createElement(viewModule, {
+			Content = if FindResult and FindResult.content then ReactModule.createElement(ViewModule, {
 				LayoutOrder = 2,
 				tag = "auto-y",
 				Size = UDim2.fromScale(1, 0),
-				testId = `{var2.testId}--content`
-			}, var7.content) else nil
+				testId = `{WithDefaultsModuleResult.testId}--content`
+			}, FindResult.content) else nil
 		}),
-		AnimatedBorder = reactModule.createElement(viewModule, {
+		AnimatedBorder = ReactModule.createElement(ViewModule, {
 			LayoutOrder = 0,
-			ZIndex = var2.ZIndex + 1,
-			Size = var16.highlightWidth:map(function(p2)
-				-- upvalues: var1 (ref)
-				return UDim2.fromOffset(p2, var1.Stroke.Thick)
+			ZIndex = WithDefaultsModuleResult.ZIndex + 1,
+			Size = UseAnimatedHighlightModuleResult.highlightWidth:map(function(XOffset): UDim2 --[[ Line: 199 ]]
+				-- upvalues: UseTokensModuleResult (copy)
+				return UDim2.fromOffset(XOffset, UseTokensModuleResult.Stroke.Thick)
 			end),
 			AnchorPoint = Vector2.new(0, 1),
-			Position = reactModule.joinBindings({ var16.highlightPosition, var16.activeItemHeight }):map(function(p2)
-				return UDim2.fromOffset(p2[1], p2[2])
+			Position = ReactModule.joinBindings({
+				UseAnimatedHighlightModuleResult.highlightPosition,
+				UseAnimatedHighlightModuleResult.activeItemHeight
+			}):map(function(Entry): UDim2 --[[ Line: 203 ]]
+				return UDim2.fromOffset(Entry[1], Entry[2])
 			end),
-			backgroundStyle = var1.Color.System.Contrast,
-			testId = `{var2.testId}--animated-border`
+			backgroundStyle = UseTokensModuleResult.Color.System.Contrast,
+			testId = `{WithDefaultsModuleResult.testId}--animated-border`
 		})
 	})
 end))

@@ -1,33 +1,33 @@
-﻿local parent = script:FindFirstAncestor("AppChat").Parent
-local appChatNetworkingModule = require(parent.AppChatNetworking)
-local cryoModule = require(parent.Cryo)
-local promiseModule = require(parent.Promise)
-local processConversationsModule = require(script.Parent.processConversations)
+﻿local Parent = script:FindFirstAncestor("AppChat").Parent
+local AppChatNetworkingModule = require(Parent.AppChatNetworking)
+local CryoModule = require(Parent.Cryo)
+local PromiseModule = require(Parent.Promise)
+local ProcessConversationsModule = require(script.Parent.processConversations)
 
-return function(p1)
-	-- upvalues: promiseModule (ref), appChatNetworkingModule (ref), cryoModule (ref), processConversationsModule (ref)
-	return function(p2)
-		-- upvalues: p1 (ref), promiseModule (copy), appChatNetworkingModule (copy), cryoModule (copy), processConversationsModule (copy)
+return function(p1) --[[ Line: 15 ]]
+	-- upvalues: PromiseModule (copy), AppChatNetworkingModule (copy), CryoModule (copy), ProcessConversationsModule (copy)
+	return function(p2) --[[ Line: 16 ]]
+		-- upvalues: p1 (copy), PromiseModule (upval), AppChatNetworkingModule (upval), CryoModule (upval), ProcessConversationsModule (upval)
 		if not p1 or #p1 == 0 then
-			return promiseModule.resolve({})
+			return PromiseModule.resolve({})
 		end
-		local t = {}
-		local GET_CONVERSATIONS = appChatNetworkingModule.Constants.PageSize.GET_CONVERSATIONS
+		local DispatchResults = {}
+		local GETCONVERSATIONS: number = AppChatNetworkingModule.Constants.PageSize.GET_CONVERSATIONS
 		
-		for i = 1, #p1, GET_CONVERSATIONS do
-			table.insert(t, p2:dispatch(appChatNetworkingModule.rodux.MultiGetConversationDetails.API(cryoModule.List.getRange(p1, i, i + GET_CONVERSATIONS - 1))))
+		for i = 1, #p1, GETCONVERSATIONS do
+			table.insert(DispatchResults, p2:dispatch(AppChatNetworkingModule.rodux.MultiGetConversationDetails.API((CryoModule.List.getRange(p1, i, i + GETCONVERSATIONS - 1)))))
 		end
-		return promiseModule.all(t):andThen(function(p3)
-			-- upvalues: cryoModule (copy)
-			return cryoModule.List.foldLeft(p3, function(p4, p5)
-				-- upvalues: cryoModule (copy)
-				local conversations = p5 and (p5.responseBody and p5.responseBody.conversations)
+		return PromiseModule.all(DispatchResults):andThen(function(Result) --[[ Line: 26 ]]
+			-- upvalues: CryoModule (upval)
+			return CryoModule.List.foldLeft(Result, function(p3, p4) --[[ Line: 27 ]]
+				-- upvalues: CryoModule (upval)
+				local Conversations = p4 and (p4.responseBody and p4.responseBody.conversations)
 				
-				return if conversations then cryoModule.List.join(p4, conversations) else p4
+				return if Conversations then CryoModule.List.join(p3, Conversations) else p3
 			end, {})
-		end):tap(function(p3)
-			-- upvalues: p2 (ref), processConversationsModule (copy)
-			p2:dispatch(processConversationsModule(p3))
+		end):tap(function(p3) --[[ Line: 35 ]]
+			-- upvalues: p2 (copy), ProcessConversationsModule (upval)
+			p2:dispatch(ProcessConversationsModule(p3))
 		end)
 	end
 end

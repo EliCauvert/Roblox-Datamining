@@ -1,12 +1,12 @@
-﻿local parent = script:FindFirstAncestor("UserProfiles").Parent
-local reactModule = require(parent.React)
-local useSignalState = require(parent.SignalsReact).useSignalState
-local createIsRobloxSubscriberGetterModule = require(script.Parent.createIsRobloxSubscriberGetter)
+﻿local Parent = script:FindFirstAncestor("UserProfiles").Parent
+local ReactModule = require(Parent.React)
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local CreateIsRobloxSubscriberGetterModule = require(script.Parent.createIsRobloxSubscriberGetter)
 
-return function(p1)
-	-- upvalues: reactModule (ref), createIsRobloxSubscriberGetterModule (ref), useSignalState (ref)
-	return useSignalState(reactModule.useMemo(function()
-		-- upvalues: createIsRobloxSubscriberGetterModule (copy), p1 (ref)
-		return createIsRobloxSubscriberGetterModule(p1)
-	end, { p1 }))
+return function(p1) --[[ Line: 10 | Named "useIsRobloxSubscriber" ]]
+	-- upvalues: ReactModule (copy), CreateIsRobloxSubscriberGetterModule (copy), UseSignalStateFunction (copy)
+	return (UseSignalStateFunction((ReactModule.useMemo(function() --[[ Line: 11 ]]
+		-- upvalues: CreateIsRobloxSubscriberGetterModule (upval), p1 (copy)
+		return CreateIsRobloxSubscriberGetterModule(p1)
+	end, { p1 }))))
 end

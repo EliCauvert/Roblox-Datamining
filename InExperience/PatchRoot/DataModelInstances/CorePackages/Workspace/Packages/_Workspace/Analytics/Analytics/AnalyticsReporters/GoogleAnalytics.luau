@@ -1,34 +1,34 @@
-﻿local t = {}
-t.__index = t
+﻿local GoogleAnalyticsModule = {}
+GoogleAnalyticsModule.__index = GoogleAnalyticsModule
 
-function t.new(p1)
-	-- upvalues: t (ref)
-	local var1 = type(p1)
-	assert(if var1 ~= "table" then var1 == "userdata" else true, "Unexpected value for reportingService")
-	local t_1 = { _isEnabled = true, _reporter = p1 }
-	setmetatable(t_1, t)
+function GoogleAnalyticsModule.new(_reporter) --[[ Line: 24 ]]
+	-- upvalues: GoogleAnalyticsModule (copy)
+	local ValueType = type(_reporter)
+	assert(ValueType == "table" or ValueType == "userdata", "Unexpected value for reportingService")
+	local config = { _isEnabled = true, _reporter = _reporter }
+	setmetatable(config, GoogleAnalyticsModule)
 	
-	return t_1
+	return config
 end
 
-function t:setEnabled(p1)
-	assert(type(p1) == "boolean", "Expected isEnabled to be a boolean")
-	self._isEnabled = p1
+function GoogleAnalyticsModule:setEnabled(_isEnabled) --[[ Line: 37 ]]
+	assert(type(_isEnabled) == "boolean", "Expected isEnabled to be a boolean")
+	self._isEnabled = _isEnabled
 end
 
-function t:trackEvent(p1, p2, p3, p4)
-	assert(type(p1) == "string", "Expected category to be a string")
-	assert(type(p2) == "string", "Expected action to be a string")
+function GoogleAnalyticsModule:trackEvent(Category, Action, Label, p1: number) --[[ Line: 46 ]]
+	assert(type(Category) == "string", "Expected category to be a string")
+	assert(type(Action) == "string", "Expected action to be a string")
 	
-	if p3 then
-		assert(type(p3) == "string", "Expected label to be a string")
+	if Label then
+		assert(type(Label) == "string", "Expected label to be a string")
 	end
-	if p4 then
-		assert(type(p4) == "number", "Expected value to be a number")
-		assert(p4 >= 0, "Expected value must not be a negative value")
+	if p1 then
+		assert(type(p1) == "number", "Expected value to be a number")
+		assert(p1 >= 0, "Expected value must not be a negative value")
 	end
 	assert(self._isEnabled, "This reporting service is disabled")
-	self._reporter:TrackEvent(p1, p2, p3, p4)
+	self._reporter:TrackEvent(Category, Action, Label, p1)
 end
 
-return t
+return GoogleAnalyticsModule

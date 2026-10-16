@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CorePackages").Packages.StringUtilities)
+﻿return (require(game:GetService("CorePackages").Packages.StringUtilities))

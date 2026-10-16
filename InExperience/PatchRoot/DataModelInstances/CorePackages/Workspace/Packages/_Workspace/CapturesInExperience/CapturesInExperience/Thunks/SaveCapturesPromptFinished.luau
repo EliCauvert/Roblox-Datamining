@@ -1,11 +1,11 @@
-﻿local captureService = game:GetService("CaptureService")
-local promptDismissedModule = require(script.Parent.Parent.Actions.PromptDismissed)
+﻿local CaptureService = game:GetService("CaptureService")
+local PromptDismissedModule = require(script.Parent.Parent.Actions.PromptDismissed)
 
-return function(p1, p2)
-	-- upvalues: promptDismissedModule (ref), captureService (ref)
-	return function(p3)
-		-- upvalues: promptDismissedModule (copy), p1 (ref), captureService (copy), p2 (ref)
-		p3:dispatch(promptDismissedModule(p1))
-		captureService:OnSavePromptFinished(p1, p2)
+return function(PromptId, Results) --[[ Line: 7 ]]
+	-- upvalues: PromptDismissedModule (copy), CaptureService (copy)
+	return function(p1) --[[ Line: 8 ]]
+		-- upvalues: PromptDismissedModule (upval), PromptId (copy), CaptureService (upval), Results (copy)
+		p1:dispatch(PromptDismissedModule(PromptId))
+		CaptureService:OnSavePromptFinished(PromptId, Results)
 	end
 end

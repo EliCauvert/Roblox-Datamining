@@ -1,10 +1,10 @@
-﻿local reactModule = require(script:FindFirstAncestor("InExperienceTopBar").Parent.React)
-local experienceAgeRatingBadgeViewModule = require(script.Parent.ExperienceAgeRatingBadgeView)
-local useExperienceAgeRatingBadgeViewModelModule = require(script.Parent.useExperienceAgeRatingBadgeViewModel)
+﻿local ReactModule = require(script:FindFirstAncestor("InExperienceTopBar").Parent.React)
+local ExperienceAgeRatingBadgeViewModule = require(script.Parent.ExperienceAgeRatingBadgeView)
+local UseExperienceAgeRatingBadgeViewModelModule = require(script.Parent.useExperienceAgeRatingBadgeViewModel)
 
-return function(p1)
-	-- upvalues: useExperienceAgeRatingBadgeViewModelModule (ref), reactModule (ref), experienceAgeRatingBadgeViewModule (ref)
-	local var1 = useExperienceAgeRatingBadgeViewModelModule(p1)
+return function(p1) --[[ Line: 10 | Named "ExperienceAgeRatingBadgeContainer" ]]
+	-- upvalues: UseExperienceAgeRatingBadgeViewModelModule (copy), ReactModule (copy), ExperienceAgeRatingBadgeViewModule (copy)
+	local UseExperienceAgeRatingBadgeViewModelModuleResult = UseExperienceAgeRatingBadgeViewModelModule(p1)
 	
-	return if var1 then reactModule.createElement(experienceAgeRatingBadgeViewModule, var1) else nil
+	return if UseExperienceAgeRatingBadgeViewModelModuleResult then ReactModule.createElement(ExperienceAgeRatingBadgeViewModule, UseExperienceAgeRatingBadgeViewModelModuleResult) else nil
 end

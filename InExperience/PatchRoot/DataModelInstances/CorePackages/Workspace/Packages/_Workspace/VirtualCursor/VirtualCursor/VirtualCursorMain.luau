@@ -1,118 +1,118 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
-local guiService = game:GetService("GuiService")
-local runService = game:GetService("RunService")
-local userInputService = game:GetService("UserInputService")
-local gamepadService = game:GetService("GamepadService")
+﻿local Parent = script.Parent
+local GuiService = game:GetService("GuiService")
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+local GamepadService = game:GetService("GamepadService")
 local _ = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-local fFlagVCWasDisabledFromMenuOpen = require(parent_1.SharedFlags).FFlagVCWasDisabledFromMenuOpen
-local inputModule = require(parent:WaitForChild("Input"))
-local interfaceModule = require(parent:WaitForChild("Interface"))
-local onRenderStepModule = require(parent:WaitForChild("OnRenderStep"))
-local var1 = nil
-local var2 = nil
-local var3 = nil
-local var4 = false
-local var5 = false
+local FFlagVCWasDisabledFromMenuOpen = require(Parent.Parent.SharedFlags).FFlagVCWasDisabledFromMenuOpen
+local InputModule = require(Parent:WaitForChild("Input"))
+local InterfaceModule = require(Parent:WaitForChild("Interface"))
+local OnRenderStepModule = require(Parent:WaitForChild("OnRenderStep"))
+local TextBox = nil
+local LastInputTypeChangedConnection = nil
+local MenuOpenedConnection = nil
+local Flag = false
+local Flag1 = false
 
-local function enableVirtualCursor(p1)
-	-- upvalues: var1 (write), interfaceModule (ref), gamepadService (ref), inputModule (ref), runService (ref), var3 (write), guiService (ref), fFlagVCWasDisabledFromMenuOpen (ref), var5 (write)
-	if var1 then
-		p1 = p1 or var1.CursorPosition
-		var1.Enabled = true
-		var1.CursorPosition = p1
-		interfaceModule:EnableUI(p1)
-		gamepadService:SetGamepadCursorPosition(p1)
-		inputModule:EnableInput()
-		inputModule:DisablePreview()
-		runService:BindToRenderStep("VirtualCursorStepped", Enum.RenderPriority.Input.Value + 1, var1.OnRenderStep)
-		var3 = guiService.MenuOpened:Connect(function()
-			-- upvalues: fFlagVCWasDisabledFromMenuOpen (copy), var5 (copy), gamepadService (copy)
-			if fFlagVCWasDisabledFromMenuOpen then
-				var5 = true
+local function enableVirtualCursor(MouseLocation) --[[ Line: 38 ]]
+	-- upvalues: TextBox (ref), InterfaceModule (copy), GamepadService (copy), InputModule (copy), RunService (copy), MenuOpenedConnection (ref), GuiService (copy), FFlagVCWasDisabledFromMenuOpen (copy), Flag1 (ref)
+	if TextBox then
+		local MouseLocation1 = MouseLocation or TextBox.CursorPosition
+		TextBox.Enabled = true
+		TextBox.CursorPosition = MouseLocation1
+		InterfaceModule:EnableUI(MouseLocation1)
+		GamepadService:SetGamepadCursorPosition(MouseLocation1)
+		InputModule:EnableInput()
+		InputModule:DisablePreview()
+		RunService:BindToRenderStep("VirtualCursorStepped", Enum.RenderPriority.Input.Value + 1, TextBox.OnRenderStep)
+		MenuOpenedConnection = GuiService.MenuOpened:Connect(function() --[[ Line: 58 ]]
+			-- upvalues: FFlagVCWasDisabledFromMenuOpen (upval), Flag1 (upval), GamepadService (upval)
+			if FFlagVCWasDisabledFromMenuOpen then
+				Flag1 = true
 			end
-			gamepadService.GamepadCursorEnabled = false
+			GamepadService.GamepadCursorEnabled = false
 		end)
 		
 		return
 	end
 end
 
-local function disableVirtualCursor()
-	-- upvalues: var1 (write), var3 (write), interfaceModule (ref), inputModule (ref), runService (ref), fFlagVCWasDisabledFromMenuOpen (ref), var5 (write), guiService (ref)
-	if not var1.Enabled then return end
-	var3:Disconnect()
-	var3 = nil
-	var1.PreviouslySelectedObject = nil
-	interfaceModule:DisableUI()
-	inputModule:DisableInput()
-	inputModule:EnablePreview()
-	runService:UnbindFromRenderStep("VirtualCursorStepped")
+local function disableVirtualCursor() --[[ Line: 66 ]]
+	-- upvalues: TextBox (ref), MenuOpenedConnection (ref), InterfaceModule (copy), InputModule (copy), RunService (copy), FFlagVCWasDisabledFromMenuOpen (copy), Flag1 (ref), GuiService (copy)
+	if not TextBox.Enabled then return end
+	MenuOpenedConnection:Disconnect()
+	MenuOpenedConnection = nil
+	TextBox.PreviouslySelectedObject = nil
+	InterfaceModule:DisableUI()
+	InputModule:DisableInput()
+	InputModule:EnablePreview()
+	RunService:UnbindFromRenderStep("VirtualCursorStepped")
 	
-	if var1.SelectedObject then
-		if fFlagVCWasDisabledFromMenuOpen and not var5 then
-			guiService.SelectedCoreObject = nil
+	if TextBox.SelectedObject then
+		if FFlagVCWasDisabledFromMenuOpen and not Flag1 then
+			GuiService.SelectedCoreObject = nil
 		end
-		guiService.SelectedObject = nil
+		GuiService.SelectedObject = nil
 		
-		if not fFlagVCWasDisabledFromMenuOpen then
-			guiService.SelectedCoreObject = nil
+		if not FFlagVCWasDisabledFromMenuOpen then
+			GuiService.SelectedCoreObject = nil
 		end
-		var1.SelectedObject = nil
+		TextBox.SelectedObject = nil
 	end
-	if fFlagVCWasDisabledFromMenuOpen then
-		var5 = false
+	if FFlagVCWasDisabledFromMenuOpen then
+		Flag1 = false
 	end
-	var1.Enabled = false
+	TextBox.Enabled = false
 end
 
-local t = {}
-t.__index = t
+local Module = {}
+Module.__index = Module
 
-function t:GetEnabled()
+function Module:GetEnabled() --[[ Line: 103 ]]
 	return self.Enabled
 end
 
-function t.new()
-	-- upvalues: onRenderStepModule (ref), var2 (write), userInputService (ref), gamepadService (ref), var4 (write), inputModule (ref), t (ref), var1 (write)
-	local t_1 = {
+function Module.new() --[[ Line: 107 ]]
+	-- upvalues: OnRenderStepModule (copy), LastInputTypeChangedConnection (ref), UserInputService (copy), GamepadService (copy), Flag (ref), InputModule (copy), Module (copy), TextBox (ref)
+	local config = {
 		Enabled = false,
 		SelectedObject = nil,
 		PreviouslySelectedObject = nil,
 		CursorPosition = Vector2.new()
 	}
 	
-	function t_1.OnRenderStep(p1)
-		-- upvalues: onRenderStepModule (copy), t_1 (ref)
-		onRenderStepModule(t_1, p1)
+	function config.OnRenderStep(p1) --[[ Line: 115 ]]
+		-- upvalues: OnRenderStepModule (upval), config (copy)
+		OnRenderStepModule(config, p1)
 	end
 	
-	var2 = userInputService.LastInputTypeChanged:Connect(function(p1)
-		-- upvalues: gamepadService (copy), var4 (copy)
-		if p1 ~= Enum.UserInputType.Gamepad1 and p1 ~= Enum.UserInputType.Focus and gamepadService.GamepadCursorEnabled then
-			gamepadService.GamepadCursorEnabled = false
-			var4 = true
+	LastInputTypeChangedConnection = UserInputService.LastInputTypeChanged:Connect(function(UserInputType) --[[ Line: 119 ]]
+		-- upvalues: GamepadService (upval), Flag (upval)
+		if UserInputType ~= Enum.UserInputType.Gamepad1 and UserInputType ~= Enum.UserInputType.Focus and GamepadService.GamepadCursorEnabled then
+			GamepadService.GamepadCursorEnabled = false
+			Flag = true
 			
 			return
-		elseif p1 == Enum.UserInputType.Gamepad1 and var4 then
-			gamepadService.GamepadCursorEnabled = true
-			var4 = false
+		end
+		if UserInputType == Enum.UserInputType.Gamepad1 and Flag then
+			GamepadService.GamepadCursorEnabled = true
+			Flag = false
 		end
 	end)
-	inputModule:EnablePreview()
-	setmetatable(t_1, t)
-	var1 = t_1
+	InputModule:EnablePreview()
+	setmetatable(config, Module)
+	TextBox = config
 	
-	return t_1
+	return config
 end
 
-gamepadService:GetPropertyChangedSignal("GamepadCursorEnabled"):Connect(function()
-	-- upvalues: gamepadService (ref), var1 (write), userInputService (ref), enableVirtualCursor (ref), disableVirtualCursor (ref)
-	local gamepadCursorEnabled = gamepadService.GamepadCursorEnabled
+GamepadService:GetPropertyChangedSignal("GamepadCursorEnabled"):Connect(function() --[[ Line: 142 ]]
+	-- upvalues: GamepadService (copy), TextBox (ref), UserInputService (copy), enableVirtualCursor (copy), disableVirtualCursor (copy)
+	local GamepadCursorEnabled = GamepadService.GamepadCursorEnabled
 	
-	if var1 then
-		if gamepadCursorEnabled then
-			enableVirtualCursor(userInputService:GetMouseLocation())
+	if TextBox then
+		if GamepadCursorEnabled then
+			enableVirtualCursor((UserInputService:GetMouseLocation()))
 			
 			return
 		end
@@ -120,4 +120,4 @@ gamepadService:GetPropertyChangedSignal("GamepadCursorEnabled"):Connect(function
 	end
 end)
 
-return t.new()
+return Module.new()

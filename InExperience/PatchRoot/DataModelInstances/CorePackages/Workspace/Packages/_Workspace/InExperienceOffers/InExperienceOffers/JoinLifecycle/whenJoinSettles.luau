@@ -1,87 +1,91 @@
-﻿local playersService = game:GetService("Players")
-local inExperienceOffers = script:FindFirstAncestor("InExperienceOffers")
-local fIntOffersPrefetchOnGameJoinFallbackDelayMsModule = require(inExperienceOffers.Flags.FIntOffersPrefetchOnGameJoinFallbackDelayMs)
-local scheduleFallbackModule = require(script.Parent.scheduleFallback)
-local offersDebugLoggerModule = require(inExperienceOffers.Internal.OffersDebugLogger)
-local var1 = fIntOffersPrefetchOnGameJoinFallbackDelayMsModule / 1000
+﻿local Players = game:GetService("Players")
+local InExperienceOffers = script:FindFirstAncestor("InExperienceOffers")
+local ScheduleFallbackModule = require(script.Parent.scheduleFallback)
+local OffersDebugLoggerModule = require(InExperienceOffers.Internal.OffersDebugLogger)
+local FIntOffersPrefetchOnGameJoinFallbackDelayMsModuleRatio = require(InExperienceOffers.Flags.FIntOffersPrefetchOnGameJoinFallbackDelayMs) / 1000
 
-return function(value)
-	-- upvalues: offersDebugLoggerModule (ref), playersService (ref), var1 (ref), scheduleFallbackModule (ref)
-	local var2 = false
+return function(Callback) --[[ Line: 15 | Named "whenJoinSettles" ]]
+	-- upvalues: OffersDebugLoggerModule (copy), Players (copy), FIntOffersPrefetchOnGameJoinFallbackDelayMsModuleRatio (copy), ScheduleFallbackModule (copy)
+	local Flag = false
 	
-	local function _(p1)
-		-- upvalues: var2 (write), offersDebugLoggerModule (copy), value (ref)
-		if var2 then
+	local function _(p1) --[[ Line: 17 | Named "fire" ]]
+		-- upvalues: Flag (ref), OffersDebugLoggerModule (upval), Callback (copy)
+		if not Flag then
+			Flag = true
+			OffersDebugLoggerModule.logLazy(function(): string --[[ Line: 22 ]]
+				-- upvalues: p1 (copy)
+				return "whenJoinSettles: settled path=" .. p1
+			end)
+			Callback(p1)
+			
 			return
 		end
-		var2 = true
-		offersDebugLoggerModule.logLazy(function()
-			-- upvalues: p1 (ref)
-			return "whenJoinSettles: settled path=" .. p0
-		end)
-		value(p1)
 	end
 	
-	task.spawn(function()
-		-- upvalues: playersService (copy), var2 (write), offersDebugLoggerModule (copy), value (ref)
-		xpcall(function()
-			-- upvalues: playersService (copy), var2 (copy), offersDebugLoggerModule (copy), value (copy)
-			while not playersService.LocalPlayer do
-				playersService:GetPropertyChangedSignal("LocalPlayer"):Wait()
+	task.spawn(function() --[[ Line: 28 ]]
+		-- upvalues: Players (upval), Flag (ref), OffersDebugLoggerModule (upval), Callback (copy)
+		xpcall(function() --[[ Line: 30 ]]
+			-- upvalues: Players (upval), Flag (upval), OffersDebugLoggerModule (upval), Callback (upval)
+			while not Players.LocalPlayer do
+				Players:GetPropertyChangedSignal("LocalPlayer"):Wait()
 				
-				if var2 then return end
+				if Flag then return end
 			end
-			local localPlayer = playersService.LocalPlayer
-			assert(localPlayer ~= nil, "LocalPlayer must be non-nil after the wait loop")
+			local LocalPlayer = Players.LocalPlayer
+			assert(LocalPlayer ~= nil, "LocalPlayer must be non-nil after the wait loop")
 			
-			if localPlayer.Character and localPlayer:HasAppearanceLoaded() then
-				if var2 then
+			if LocalPlayer.Character and LocalPlayer:HasAppearanceLoaded() then
+				if not Flag then
+					Flag = true
+					local v1 = "primary"
+					OffersDebugLoggerModule.logLazy(function(): string --[[ Line: 22 ]]
+						-- upvalues: v1 (copy)
+						return "whenJoinSettles: settled path=" .. v1
+					end)
+					Callback("primary")
+					
 					return
 				end
-				var2 = true
-				local var3 = "primary"
-				offersDebugLoggerModule.logLazy(function()
-					-- upvalues: var3 (ref)
-					return "whenJoinSettles: settled path=" .. var7
+				return
+			elseif not Flag then
+				LocalPlayer.CharacterAppearanceLoaded:Once(function() --[[ Line: 51 ]]
+					-- upvalues: Flag (upval), OffersDebugLoggerModule (upval), Callback (upval)
+					if not Flag then
+						Flag = true
+						local v2 = "primary"
+						OffersDebugLoggerModule.logLazy(function(): string --[[ Line: 22 ]]
+							-- upvalues: v2 (copy)
+							return "whenJoinSettles: settled path=" .. v2
+						end)
+						Callback("primary")
+						
+						return
+					end
 				end)
-				value("primary")
 				
 				return
-			elseif var2 then
-				return
+			else
 			end
-			localPlayer.CharacterAppearanceLoaded:Once(function()
-				-- upvalues: var2 (copy), offersDebugLoggerModule (copy), value (copy)
-				if var2 then
-					return
-				end
-				var2 = true
-				local var4 = "primary"
-				offersDebugLoggerModule.logLazy(function()
-					-- upvalues: var4 (ref)
-					return "whenJoinSettles: settled path=" .. var8
-				end)
-				value("primary")
-			end)
-		end, function(p1)
-			warn("[InExperienceOffers] whenJoinSettles path 1 errored: " .. tostring(p1))
+		end, function(Err) --[[ Line: 54 ]]
+			warn("[InExperienceOffers] whenJoinSettles path 1 errored: " .. tostring(Err))
 		end)
 	end)
-	offersDebugLoggerModule.logLazy(function()
-		-- upvalues: var1 (copy)
-		return "whenJoinSettles: scheduled fallback delaySeconds=" .. var5
+	OffersDebugLoggerModule.logLazy(function(): string --[[ Line: 60 ]]
+		-- upvalues: FIntOffersPrefetchOnGameJoinFallbackDelayMsModuleRatio (upval)
+		return "whenJoinSettles: scheduled fallback delaySeconds=" .. FIntOffersPrefetchOnGameJoinFallbackDelayMsModuleRatio
 	end)
-	scheduleFallbackModule(var1, function()
-		-- upvalues: var2 (write), offersDebugLoggerModule (copy), value (ref)
-		if var2 then
+	ScheduleFallbackModule(FIntOffersPrefetchOnGameJoinFallbackDelayMsModuleRatio, function() --[[ Line: 63 ]]
+		-- upvalues: Flag (ref), OffersDebugLoggerModule (upval), Callback (copy)
+		if not Flag then
+			Flag = true
+			local v1 = "fallback"
+			OffersDebugLoggerModule.logLazy(function(): string --[[ Line: 22 ]]
+				-- upvalues: v1 (copy)
+				return "whenJoinSettles: settled path=" .. v1
+			end)
+			Callback("fallback")
+			
 			return
 		end
-		var2 = true
-		local var3 = "fallback"
-		offersDebugLoggerModule.logLazy(function()
-			-- upvalues: var3 (ref)
-			return "whenJoinSettles: settled path=" .. var9
-		end)
-		value("fallback")
 	end)
 end

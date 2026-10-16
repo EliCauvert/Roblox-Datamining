@@ -1,65 +1,63 @@
-﻿local parent = script.Parent.Parent
-local reactGlobalsModule = require(parent.ReactGlobals)
-local sharedModule = require(parent.Shared)
-local console = sharedModule.console
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local object = luauPolyfillModule.Object
-local inspect = luauPolyfillModule.util.inspect
-local reactSymbols = sharedModule.ReactSymbols
-local REACT_MEMO_TYPE = reactSymbols.REACT_MEMO_TYPE
-local REACT_ELEMENT_TYPE = reactSymbols.REACT_ELEMENT_TYPE
-local isValidElementType = sharedModule.isValidElementType
-local getComponentName = sharedModule.getComponentName
+﻿local Parent = script.Parent.Parent
+local ReactGlobalsModule = require(Parent.ReactGlobals)
+local SharedModule = require(Parent.Shared)
+local Console = SharedModule.console
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Object = LuauPolyfillModule.Object
+local InspectFunction = LuauPolyfillModule.util.inspect
+local ReactSymbols = SharedModule.ReactSymbols
+local REACTMEMOTYPE = ReactSymbols.REACT_MEMO_TYPE
+local REACTELEMENTTYPE = ReactSymbols.REACT_ELEMENT_TYPE
+local IsValidElementTypeFunction = SharedModule.isValidElementType
+local GetComponentNameFunction = SharedModule.getComponentName
 
 return {
-	memo = function(p1, p2)
-		-- upvalues: reactGlobalsModule (ref), isValidElementType (ref), object (ref), array (ref), REACT_ELEMENT_TYPE (ref), getComponentName (ref), inspect (ref), console (ref), REACT_MEMO_TYPE (ref)
-		if reactGlobalsModule.__DEV__ and not isValidElementType(p1) then
-			local var1 = ""
+	memo = function(p1, p2) --[[ Line: 47 ]]
+		-- upvalues: ReactGlobalsModule (copy), IsValidElementTypeFunction (copy), Object (copy), Array (copy), REACTELEMENTTYPE (copy), GetComponentNameFunction (copy), InspectFunction (copy), Console (copy), REACTMEMOTYPE (copy)
+		if ReactGlobalsModule.__DEV__ and not IsValidElementTypeFunction(p1) then
+			local Text = ""
 			
-			if p1 == nil or typeof(p1) == "table" and #object.keys(p1) == 0 then
-				var1 ..= " You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports."
+			if p1 == nil or typeof(p1) == "table" and #Object.keys(p1) == 0 then
+				Text ..= " You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports."
 			end
-			local var2
-			local _ = nil
-			
+			local Formatted = nil
 			if p1 == nil then
-				var2 = "nil"
-			elseif array.isArray(p1) then
-				var2 = "array"
-			elseif p1 == nil or typeof(p1) ~= "table" or p1["$$typeof"] ~= REACT_ELEMENT_TYPE then
-				var2 = typeof(p1)
+				Formatted = "nil"
+			elseif Array.isArray(p1) then
+				Formatted = "array"
+			elseif p1 == nil or typeof(p1) ~= "table" or p1["$$typeof"] ~= REACTELEMENTTYPE then
+				Formatted = typeof(p1)
 				
 				if p1 ~= nil then
-					var1 = "\n" .. inspect(p1)
+					Text = "\n" .. InspectFunction(p1)
 				end
 			else
-				var2 = string.format("<%s />", getComponentName(p1.type) or "UNKNOWN")
-				var1 = " Did you accidentally export a JSX literal or Element instead of a component?"
+				Formatted = string.format("<%s />", GetComponentNameFunction(p1.type) or "UNKNOWN")
+				Text = " Did you accidentally export a JSX literal or Element instead of a component?"
 			end
-			console.error("memo: The first argument must be a component. Instead received: `%s`.%s", var2, var1)
+			Console.error("memo: The first argument must be a component. Instead received: `%s`.%s", Formatted, Text)
 		end
-		local t = {
-			["$$typeof"] = REACT_MEMO_TYPE,
+		local config = {
+			["$$typeof"] = REACTMEMOTYPE,
 			type = p1,
 			compare = p2 or nil
 		}
 		
-		if reactGlobalsModule.__DEV__ then
-			local var3 = nil
-			setmetatable(t, {
-				__index = function(p3, p4)
-					-- upvalues: var3 (write)
-					return if p4 == "displayName" then var3 else rawget(p3, p4)
+		if ReactGlobalsModule.__DEV__ then
+			local DisplayName = nil
+			setmetatable(config, {
+				__index = function(p3, p4) --[[ Line: 113 ]]
+					-- upvalues: DisplayName (ref)
+					return if p4 == "displayName" then DisplayName else rawget(p3, p4)
 				end,
-				__newindex = function(p3, p4, p5)
-					-- upvalues: var3 (write), p1 (ref)
+				__newindex = function(p3, p4, p5) --[[ Line: 119 ]]
+					-- upvalues: DisplayName (ref), p1 (copy)
 					if p4 == "displayName" then
-						var3 = p5
+						DisplayName = p5
 						
 						if typeof(p1) == "table" and p1.displayName == nil then
-							p1.displayName = var3
+							p1.displayName = DisplayName
 							
 							return
 						end
@@ -69,6 +67,6 @@ return {
 				end
 			})
 		end
-		return t
+		return config
 	end
 }

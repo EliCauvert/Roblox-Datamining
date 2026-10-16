@@ -1,61 +1,61 @@
-﻿local parent = script:FindFirstAncestor("Moments").Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local momentsCommonModule = require(parent.MomentsCommon)
-local reactOtterModule = require(parent.ReactOtter)
-local view = foundationModule.View
-local useTokens = foundationModule.Hooks.useTokens
+﻿local Parent = script:FindFirstAncestor("Moments").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local MomentsCommonModule = require(Parent.MomentsCommon)
+local ReactOtterModule = require(Parent.ReactOtter)
+local View = FoundationModule.View
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), reactOtterModule (ref), reactModule (ref), momentsCommonModule (ref), view (ref)
-	local var1 = useTokens()
-	local isHovering = p1.isHovering or p1.isPressed
-	local var2, var3 = reactOtterModule.useAnimatedBinding(0)
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), reactOtterModule (copy), isHovering (ref)
-		var3(reactOtterModule.ease(if isHovering then 1 else 0, {
-			duration = if isHovering then 0.12 else 0.08,
+return ReactModule.memo(function(p1) --[[ Line: 18 | Named "Scrubber" ]]
+	-- upvalues: UseTokensFunction (copy), ReactOtterModule (copy), ReactModule (copy), MomentsCommonModule (copy), View (copy)
+	local UseTokensResult = UseTokensFunction()
+	local IsHovering = p1.isHovering or p1.isPressed
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0)
+	ReactModule.useEffect(function() --[[ Line: 24 ]]
+		-- upvalues: UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), IsHovering (copy)
+		UseAnimatedBindingResult2(ReactOtterModule.ease(if IsHovering then 1 else 0, {
+			duration = if IsHovering then 0.12 else 0.08,
 			easingStyle = Enum.EasingStyle.Quad
 		}))
-	end, { isHovering })
-	local var4 = var2:map(function(p2)
-		-- upvalues: momentsCommonModule (copy), var1 (ref)
+	end, { IsHovering })
+	local MapResult = UseAnimatedBindingResult:map(function(Alpha: number) --[[ Line: 31 ]]
+		-- upvalues: MomentsCommonModule (upval), UseTokensResult (copy)
 		return {
-			Color3 = momentsCommonModule.Utils.Oklab.lerp(var1.Color.System.Neutral.Color3, var1.Color.System.Emphasis.Color3, p2),
-			Transparency = math.lerp(var1.Color.System.Neutral.Transparency, var1.Color.System.Emphasis.Transparency, p2)
+			Color3 = MomentsCommonModule.Utils.Oklab.lerp(UseTokensResult.Color.System.Neutral.Color3, UseTokensResult.Color.System.Emphasis.Color3, Alpha),
+			Transparency = math.lerp(UseTokensResult.Color.System.Neutral.Transparency, UseTokensResult.Color.System.Emphasis.Transparency, Alpha)
 		}
 	end)
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "position-center-center anchor-center-center radius-circle bg-shift-100",
-		Size = var2:map(function(p2)
-			-- upvalues: var1 (ref)
-			return UDim2.new(1, 0, 0, math.lerp(var1.Size.Size_100, var1.Size.Size_150, p2))
+		Size = UseAnimatedBindingResult:map(function(Alpha: number): UDim2 --[[ Line: 46 ]]
+			-- upvalues: UseTokensResult (copy)
+			return UDim2.new(1, 0, 0, (math.lerp(UseTokensResult.Size.Size_100, UseTokensResult.Size.Size_150, Alpha)))
 		end)
 	}, {
-		ProgressSegment = reactModule.createElement(view, {
+		ProgressSegment = ReactModule.createElement(View, {
 			tag = "radius-circle clip",
-			Size = p1.progressRatio:map(function(p2)
-				return UDim2.fromScale(p2, 1)
+			Size = p1.progressRatio:map(function(XScale): UDim2 --[[ Line: 62 ]]
+				return UDim2.fromScale(XScale, 1)
 			end),
-			backgroundStyle = var4
+			backgroundStyle = MapResult
 		}, {
-			EndCap = reactModule.createElement(view, {
+			EndCap = ReactModule.createElement(View, {
 				tag = "position-center-right anchor-center-right size-250-full",
-				backgroundStyle = var4
+				backgroundStyle = MapResult
 			})
 		}),
-		Handle = reactModule.createElement(view, {
+		Handle = ReactModule.createElement(View, {
 			tag = "anchor-center-center radius-circle bg-contrast",
 			ZIndex = 2,
-			Size = var2:map(function(p2)
-				-- upvalues: var1 (ref)
-				local lerped = math.lerp(0, var1.Size.Size_300, p2)
+			Size = UseAnimatedBindingResult:map(function(Alpha: number): UDim2 --[[ Line: 51 ]]
+				-- upvalues: UseTokensResult (copy)
+				local Interpolated = math.lerp(0, UseTokensResult.Size.Size_300, Alpha)
 				
-				return UDim2.fromOffset(lerped, lerped)
+				return UDim2.fromOffset(Interpolated, Interpolated)
 			end),
-			Position = p1.progressRatio:map(function(p2)
-				return UDim2.fromScale(p2, 0.5)
+			Position = p1.progressRatio:map(function(XScale): UDim2 --[[ Line: 76 ]]
+				return UDim2.fromScale(XScale, 0.5)
 			end)
 		})
 	})

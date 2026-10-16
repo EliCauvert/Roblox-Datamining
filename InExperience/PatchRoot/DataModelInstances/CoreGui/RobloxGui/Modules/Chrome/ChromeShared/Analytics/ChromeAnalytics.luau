@@ -1,52 +1,45 @@
-﻿local chromeShared = script:FindFirstAncestor("ChromeShared")
-local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
-local corePackagesService = game:GetService("CorePackages")
-local guiService = game:GetService("GuiService")
-local userInputService = game:GetService("UserInputService")
-local rbxAnalyticsServiceExposePlaySessionIdEngineFeature = game:GetEngineFeature("RbxAnalyticsServiceExposePlaySessionId")
-local playerGui = game:GetService("Players").LocalPlayer:FindFirstChildOfClass("PlayerGui")
-local cryoModule = require(corePackagesService.Packages.Cryo)
-local serviceModule = require(chromeShared.Service)
-local constantsModule = require(chromeShared.Unibar.Constants)
-local _ = require(corePackagesService.Workspace.Packages.Chrome)
-local isSideSheetEnabledModule = require(corePackagesService.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
-local fFlagIntegrationsChromeShortcutTelemetryModule = require(chromeShared.Parent.Flags.FFlagIntegrationsChromeShortcutTelemetry)
-local trackerModule = require(chromeShared.Analytics.Tracker)
-local _ = { INACTIVE = 0, ACTIVE = 1 }
-local _ = { NONE = 0, STARTED = 1, DRAGGED = 2 }
-local t = {}
-t.__index = t
+﻿local ChromeShared = script:FindFirstAncestor("ChromeShared")
+local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
+local CorePackages = game:GetService("CorePackages")
+local GuiService = game:GetService("GuiService")
+local UserInputService = game:GetService("UserInputService")
+local RbxAnalyticsServiceExposePlaySessionIdEngineFeature = game:GetEngineFeature("RbxAnalyticsServiceExposePlaySessionId")
+local PlayerGui = game:GetService("Players").LocalPlayer:FindFirstChildOfClass("PlayerGui")
+local CryoModule = require(CorePackages.Packages.Cryo)
+local ServiceModule = require(ChromeShared.Service)
+local ConstantsModule = require(ChromeShared.Unibar.Constants)
+local _ = require(CorePackages.Workspace.Packages.Chrome)
+local IsSideSheetEnabledModule = require(CorePackages.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
+local FFlagIntegrationsChromeShortcutTelemetryModule = require(ChromeShared.Parent.Flags.FFlagIntegrationsChromeShortcutTelemetry)
+local TrackerModule = require(ChromeShared.Analytics.Tracker)
+local ChromeAnalyticsModule = {}
+ChromeAnalyticsModule.__index = ChromeAnalyticsModule
 
-local function getDynamicEventProps()
-	-- upvalues: playerGui (ref), constantsModule (ref), userInputService (ref)
-	local var1 = "Unknown"
-	
-	if playerGui then
-		var1 = constantsModule.ANALYTICS.SCREEN_ORIENTATION_MAP[playerGui.CurrentScreenOrientation] or tostring(playerGui.CurrentScreenOrientation)
-	end
+local function getDynamicEventProps() --[[ Line: 94 ]]
+	-- upvalues: PlayerGui (copy), ConstantsModule (copy), UserInputService (copy)
 	return {
-		screen_orientation = var1,
-		last_input_device = constantsModule.ANALYTICS.INPUT_TYPE_MAP[userInputService:GetLastInputType()] or tostring(userInputService:GetLastInputType())
+		screen_orientation = if PlayerGui then ConstantsModule.ANALYTICS.SCREEN_ORIENTATION_MAP[PlayerGui.CurrentScreenOrientation] or tostring(PlayerGui.CurrentScreenOrientation) else "Unknown",
+		last_input_device = ConstantsModule.ANALYTICS.INPUT_TYPE_MAP[UserInputService:GetLastInputType()] or tostring(UserInputService:GetLastInputType())
 	}
 end
 
-local function _(p1, p2)
-	return p1 .. p1
+local function _(Text, Text1): string --[[ Line: 111 | Named "getTrackerName" ]]
+	return Text .. Text1
 end
 
-local _ = function(p1)
-	-- upvalues: serviceModule (ref)
-	return serviceModule:integrations()[p1]
+local _ = function(p1) --[[ Line: 115 | Named "getIntegration" ]]
+	-- upvalues: ServiceModule (copy)
+	return ServiceModule:integrations()[p1]
 end
 
-local _ = function(p1)
-	-- upvalues: isSideSheetEnabledModule (ref), serviceModule (ref)
-	return if isSideSheetEnabledModule and serviceModule:withinOpenSideSheet(p1) then "sidesheet" elseif serviceModule:withinCurrentSubmenu(p1) then serviceModule:currentSubMenu():get() elseif serviceModule:withinCurrentTopLevelMenu(p1) then "unibar" else "unknown"
+local _ = function(p1) --[[ Line: 119 | Named "getInteractionSource" ]]
+	-- upvalues: IsSideSheetEnabledModule (copy), ServiceModule (copy)
+	return if IsSideSheetEnabledModule and ServiceModule:withinOpenSideSheet(p1) then "sidesheet" elseif ServiceModule:withinCurrentSubmenu(p1) then ServiceModule:currentSubMenu():get() elseif ServiceModule:withinCurrentTopLevelMenu(p1) then "unibar" else "unknown"
 end
 
-function t.new()
-	-- upvalues: rbxAnalyticsService (ref), trackerModule (ref), t (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (ref), serviceModule (ref), cryoModule (ref), getDynamicEventProps (ref), guiService (ref), fFlagIntegrationsChromeShortcutTelemetryModule (ref)
-	local tbl = setmetatable({
+function ChromeAnalyticsModule.new() --[[ Line: 133 ]]
+	-- upvalues: RbxAnalyticsService (copy), TrackerModule (copy), ChromeAnalyticsModule (copy), RbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), ServiceModule (copy), CryoModule (copy), getDynamicEventProps (copy), GuiService (copy), FFlagIntegrationsChromeShortcutTelemetryModule (copy)
+	local self = setmetatable({
 		_target = "client",
 		_context = "chrome",
 		_defaultProps = {
@@ -55,226 +48,237 @@ function t.new()
 			is_game_menu_opened = false,
 			universeid = tostring(game.GameId),
 			placeid = tostring(game.PlaceId),
-			sessionid = rbxAnalyticsService:GetSessionId()
+			sessionid = RbxAnalyticsService:GetSessionId()
 		},
-		_tracker = trackerModule.new()
-	}, t)
+		_tracker = TrackerModule.new()
+	}, ChromeAnalyticsModule)
 	
-	if rbxAnalyticsServiceExposePlaySessionIdEngineFeature then
-		tbl._defaultProps.playsessionid = rbxAnalyticsService:GetPlaySessionId()
+	if RbxAnalyticsServiceExposePlaySessionIdEngineFeature then
+		self._defaultProps.playsessionid = RbxAnalyticsService:GetPlaySessionId()
 	end
-	function tbl._observeIntegration(p1)
-		-- upvalues: serviceModule (copy), tbl (ref)
-		local var1 = serviceModule:integrations()[p1]
+	function self._observeIntegration(Id) --[[ Line: 154 ]]
+		-- upvalues: ServiceModule (upval), self (copy)
+		local IntegrationsResultEntry = ServiceModule:integrations()[Id]
 		
-		if var1 and var1.windowSize then
-			tbl._tracker:set("window_size_" .. p4, var1.windowSize:get())
-			var1.windowSize:connect(function(p2)
-				-- upvalues: var1 (ref), tbl (copy), p1 (ref)
-				if typeof(p2) ~= "UDim2" then return end
-				local var2 = var1.windowSize:get()
-				local text = "window_size_" .. p4
+		if IntegrationsResultEntry and IntegrationsResultEntry.windowSize then
+			self._tracker:set("window_size_" .. Id, IntegrationsResultEntry.windowSize:get())
+			IntegrationsResultEntry.windowSize:connect(function(p1) --[[ Line: 163 ]]
+				-- upvalues: IntegrationsResultEntry (copy), self (upval), Id (copy)
+				if typeof(p1) ~= "UDim2" then return end
+				local GetResult = IntegrationsResultEntry.windowSize:get()
+				local Text = "window_size_" .. Id
 				
-				if tbl._tracker:get("window_status_" .. p4) == 1 then
-					if tbl._tracker:get(text) then
-						tbl:onWindowResize(p1, var2)
+				if self._tracker:get("window_status_" .. Id) == 1 then
+					if self._tracker:get(Text) then
+						self:onWindowResize(Id, GetResult)
 					end
-					tbl._tracker:set(text, var2)
+					self._tracker:set(Text, GetResult)
 				end
 			end)
 		end
 	end
 	
-	function tbl._resetWindowTrackers(p1)
-		-- upvalues: tbl (ref)
-		tbl._tracker:reset("window_dposition_" .. p6)
-		tbl._tracker:reset("window_position_" .. p6)
-		tbl._tracker:reset("window_size_" .. p6)
-		tbl._tracker:reset("window_drag_" .. p6)
-		tbl._tracker:reset("window_status_" .. p6)
+	function self._resetWindowTrackers(Text) --[[ Line: 186 ]]
+		-- upvalues: self (copy)
+		self._tracker:reset("window_dposition_" .. Text)
+		self._tracker:reset("window_position_" .. Text)
+		self._tracker:reset("window_size_" .. Text)
+		self._tracker:reset("window_drag_" .. Text)
+		self._tracker:reset("window_status_" .. Text)
 	end
 	
-	function tbl._defaultWindowTrackers(p1)
-		-- upvalues: tbl (ref)
-		tbl._resetWindowTrackers(p1)
-		tbl._tracker:startTime("window_time_" .. p7)
-		tbl._tracker:set("window_status_" .. p7, 1)
+	function self._defaultWindowTrackers(Text) --[[ Line: 194 ]]
+		-- upvalues: self (copy)
+		self._resetWindowTrackers(Text)
+		self._tracker:startTime("window_time_" .. Text)
+		self._tracker:set("window_status_" .. Text, 1)
 	end
 	
-	function tbl._sendEvent(p1, p2)
-		-- upvalues: cryoModule (copy), getDynamicEventProps (copy), tbl (ref), rbxAnalyticsService (copy)
-		rbxAnalyticsService:SendEventDeferred(tbl._target, tbl._context, p1, cryoModule.Dictionary.join(getDynamicEventProps(), tbl._defaultProps, p2 or {}))
+	function self._sendEvent(ICONACTIVATED, p1) --[[ Line: 200 ]]
+		-- upvalues: CryoModule (upval), getDynamicEventProps (upval), self (copy), RbxAnalyticsService (upval)
+		RbxAnalyticsService:SendEventDeferred(self._target, self._context, ICONACTIVATED, (CryoModule.Dictionary.join(getDynamicEventProps(), self._defaultProps, p1 or {})))
 	end
 	
-	function tbl._calculateWindowAbsolutePosition(p1, p2)
-		-- upvalues: tbl (ref)
-		return Vector2.new(p1.X.Scale * tbl._defaultProps.screen_width + p1.X.Offset - p2.Width.Offset / 2, p1.Y.Scale * tbl._defaultProps.screen_height + p1.Y.Offset - p2.Height.Offset / 2)
+	function self._calculateWindowAbsolutePosition(Vector, GetResult): Vector2 --[[ Line: 205 ]]
+		-- upvalues: self (copy)
+		return Vector2.new(Vector.X.Scale * self._defaultProps.screen_width + Vector.X.Offset - GetResult.Width.Offset / 2, Vector.Y.Scale * self._defaultProps.screen_height + Vector.Y.Offset - GetResult.Height.Offset / 2)
 	end
 	
-	function tbl._setWindowLastPosition(p1, p2)
-		-- upvalues: tbl (ref)
-		tbl._tracker:set("window_position_" .. p12, p2)
+	function self._setWindowLastPosition(Integration_id, Vector) --[[ Line: 214 ]]
+		-- upvalues: self (copy)
+		self._tracker:set("window_position_" .. Integration_id, Vector)
 	end
 	
-	guiService.MenuOpened:Connect(function()
-		-- upvalues: tbl (ref)
-		tbl._defaultProps.is_game_menu_opened = not tbl._defaultProps.is_game_menu_opened
+	GuiService.MenuOpened:Connect(function() --[[ Line: 218 ]]
+		-- upvalues: self (copy)
+		self._defaultProps.is_game_menu_opened = not self._defaultProps.is_game_menu_opened
 	end)
 	
-	for i, v in serviceModule:integrations() do
-		tbl._observeIntegration(v.id)
+	for _, value in ServiceModule:integrations() do
+		self._observeIntegration(value.id)
 	end
-	serviceModule:onIntegrationRegistered():connect(function(p1)
-		-- upvalues: tbl (ref)
-		tbl._observeIntegration(p1)
+	ServiceModule:onIntegrationRegistered():connect(function(p1) --[[ Line: 226 ]]
+		-- upvalues: self (copy)
+		self._observeIntegration(p1)
 	end)
-	serviceModule:onIntegrationActivated():connect(function(p1, p2)
-		-- upvalues: fFlagIntegrationsChromeShortcutTelemetryModule (copy), tbl (ref)
-		if fFlagIntegrationsChromeShortcutTelemetryModule then
-			tbl:onIconActivated(p1, p2)
+	ServiceModule:onIntegrationActivated():connect(function(Integration_id, p1) --[[ Line: 230 ]]
+		-- upvalues: FFlagIntegrationsChromeShortcutTelemetryModule (upval), self (copy)
+		if FFlagIntegrationsChromeShortcutTelemetryModule then
+			self:onIconActivated(Integration_id, p1)
 			
 			return
+		else
+			self:onIconActivated(Integration_id)
 		end
-		tbl:onIconActivated(p1)
 	end)
-	serviceModule:onIntegrationStatusChanged():connect(function(p1, p2)
-		-- upvalues: serviceModule (copy), tbl (ref)
-		local var1 = serviceModule:integrations()[p1]
+	ServiceModule:onIntegrationStatusChanged():connect(function(Integration_id, Window) --[[ Line: 238 ]]
+		-- upvalues: ServiceModule (upval), self (copy)
+		local IntegrationsResultEntry = ServiceModule:integrations()[Integration_id]
 		
-		if var1 and var1.components.Window then
-			if p2 == serviceModule.IntegrationStatus.Window then
-				tbl:onWindowOpened(p1)
+		if IntegrationsResultEntry and IntegrationsResultEntry.components.Window then
+			if Window == ServiceModule.IntegrationStatus.Window then
+				self:onWindowOpened(Integration_id)
 				
 				return
 			end
-			tbl:onWindowClosed(p1)
+			self:onWindowClosed(Integration_id)
 		end
 	end)
 	
-	return tbl
+	return self
 end
 
-function t:setScreenSize(p1)
-	self._defaultProps.screen_width = p1.X
-	self._defaultProps.screen_height = p1.Y
+function ChromeAnalyticsModule:setScreenSize(Vector) --[[ Line: 252 ]]
+	self._defaultProps.screen_width = Vector.X
+	self._defaultProps.screen_height = Vector.Y
 	
 	return nil
 end
 
-function t:onIconActivated(_, _)
-	-- upvalues: serviceModule (ref), constantsModule (ref), isSideSheetEnabledModule (ref), fFlagIntegrationsChromeShortcutTelemetryModule (ref)
--- FATAL: Failed to generate AST for `onIconActivated` function:
-runtime : [KeyError] :11990: 134
-Traceback:
-	runtime : [lunaux]:11990 function decompile_function
-	runtime : [lunaux]:1933 function normalize_cfg
-	runtime : [lunaux]:1320 function match_weird_patterns
-end
-
-function t:onIconTouchBegan(p1)
-	self._tracker:set("icon_drag_" .. p20, 1)
+function ChromeAnalyticsModule:onIconActivated(Integration_id, p1) --[[ Line: 258 ]]
+	-- upvalues: ServiceModule (copy), ConstantsModule (copy), IsSideSheetEnabledModule (copy), FFlagIntegrationsChromeShortcutTelemetryModule (copy)
+	local IntegrationsResultEntry = ServiceModule:integrations()[Integration_id]
 	
-	return nil
-end
-
-function t:onIconDrag(p1)
-	-- upvalues: constantsModule (ref), isSideSheetEnabledModule (ref), serviceModule (ref)
-	local text = "icon_drag_" .. p21
-	
-	if self._tracker:get(text) == 1 then
-		self._tracker:set(text, 2)
-		self._sendEvent(constantsModule.ANALYTICS.ICON_DRAG_START, {
-			integration_id = p1,
-			source = if isSideSheetEnabledModule and serviceModule:withinOpenSideSheet(p1) then "sidesheet" elseif serviceModule:withinCurrentSubmenu(p1) then serviceModule:currentSubMenu():get() elseif serviceModule:withinCurrentTopLevelMenu(p1) then "unibar" else "unknown"
+	if IntegrationsResultEntry then
+		local GetResult = IntegrationsResultEntry.notification:get()
+		self._sendEvent(ConstantsModule.ANALYTICS.ICON_ACTIVATED, {
+			integration_id = Integration_id,
+			source = if IsSideSheetEnabledModule and ServiceModule:withinOpenSideSheet(Integration_id) then "sidesheet" elseif ServiceModule:withinCurrentSubmenu(Integration_id) then ServiceModule:currentSubMenu():get() elseif ServiceModule:withinCurrentTopLevelMenu(Integration_id) then "unibar" else "unknown",
+			notification_count = GetResult.type == "count" and tonumber(GetResult.value) or 0,
+			is_toggle_on = if IntegrationsResultEntry.isActivated then not IntegrationsResultEntry.isActivated:get() else nil,
+			used_shortcut = if FFlagIntegrationsChromeShortcutTelemetryModule and p1 then p1.fromShortcut or false else nil
 		})
 	end
 	return nil
 end
 
-function t:onIconTouchEnded(p1, p2, p3)
-	-- upvalues: serviceModule (ref), constantsModule (ref), isSideSheetEnabledModule (ref)
-	local text = "icon_drag_" .. p22
-	local var1 = serviceModule:integrations()[p1]
+function ChromeAnalyticsModule:onIconTouchBegan(Text) --[[ Line: 286 ]]
+	self._tracker:set("icon_drag_" .. Text, 1)
 	
-	if var1 and var1.windowSize and self._tracker:get(text) == 2 then
-		self._tracker:reset(text)
-		self._setWindowLastPosition(p1, p2)
-		local var2 = var1.windowSize:get()
-		self._sendEvent(constantsModule.ANALYTICS.ICON_DRAG_END, {
-			integration_id = p1,
-			source = if isSideSheetEnabledModule and serviceModule:withinOpenSideSheet(p1) then "sidesheet" elseif serviceModule:withinCurrentSubmenu(p1) then serviceModule:currentSubMenu():get() elseif serviceModule:withinCurrentTopLevelMenu(p1) then "unibar" else "unknown",
-			window_position_x = p2.X,
-			window_position_y = p2.Y,
-			window_width = var2.Width.Offset,
-			window_height = var2.Height.Offset,
-			will_reposition = p3
+	return nil
+end
+
+function ChromeAnalyticsModule:onIconDrag(Integration_id) --[[ Line: 291 ]]
+	-- upvalues: ConstantsModule (copy), IsSideSheetEnabledModule (copy), ServiceModule (copy)
+	local Text = "icon_drag_" .. Integration_id
+	
+	if self._tracker:get(Text) == 1 then
+		self._tracker:set(Text, 2)
+		self._sendEvent(ConstantsModule.ANALYTICS.ICON_DRAG_START, {
+			integration_id = Integration_id,
+			source = if IsSideSheetEnabledModule and ServiceModule:withinOpenSideSheet(Integration_id) then "sidesheet" elseif ServiceModule:withinCurrentSubmenu(Integration_id) then ServiceModule:currentSubMenu():get() elseif ServiceModule:withinCurrentTopLevelMenu(Integration_id) then "unibar" else "unknown"
 		})
 	end
 	return nil
 end
 
-function t:onWindowOpened(p1)
-	-- upvalues: serviceModule (ref), constantsModule (ref)
-	local var1 = serviceModule:integrations()[p1]
+function ChromeAnalyticsModule:onIconTouchEnded(Integration_id, Vector, Will_reposition) --[[ Line: 304 ]]
+	-- upvalues: ServiceModule (copy), ConstantsModule (copy), IsSideSheetEnabledModule (copy)
+	local Text = "icon_drag_" .. Integration_id
+	local GetResult = self._tracker:get(Text)
+	local IntegrationsResultEntry = ServiceModule:integrations()[Integration_id]
 	
-	if var1 and self._tracker:get("window_status_" .. p25) ~= 1 then
-		self._defaultWindowTrackers(p1)
+	if IntegrationsResultEntry and IntegrationsResultEntry.windowSize and GetResult == 2 then
+		self._tracker:reset(Text)
+		self._setWindowLastPosition(Integration_id, Vector)
+		local GetResult1 = IntegrationsResultEntry.windowSize:get()
+		self._sendEvent(ConstantsModule.ANALYTICS.ICON_DRAG_END, {
+			integration_id = Integration_id,
+			source = if IsSideSheetEnabledModule and ServiceModule:withinOpenSideSheet(Integration_id) then "sidesheet" elseif ServiceModule:withinCurrentSubmenu(Integration_id) then ServiceModule:currentSubMenu():get() elseif ServiceModule:withinCurrentTopLevelMenu(Integration_id) then "unibar" else "unknown",
+			window_position_x = Vector.X,
+			window_position_y = Vector.Y,
+			window_width = GetResult1.Width.Offset,
+			window_height = GetResult1.Height.Offset,
+			will_reposition = Will_reposition
+		})
+	end
+	return nil
+end
+
+function ChromeAnalyticsModule:onWindowOpened(Integration_id) --[[ Line: 331 ]]
+	-- upvalues: ServiceModule (copy), ConstantsModule (copy)
+	local IntegrationsResultEntry = ServiceModule:integrations()[Integration_id]
+	local GetResult = self._tracker:get("window_status_" .. Integration_id)
+	
+	if IntegrationsResultEntry and GetResult ~= 1 then
+		self._defaultWindowTrackers(Integration_id)
 		
-		if not self._tracker:get("window_dposition_" .. p25) and var1.windowSize then
-			local var2 = var1.windowSize:get()
+		if not self._tracker:get("window_dposition_" .. Integration_id) and IntegrationsResultEntry.windowSize then
+			local GetResult1 = IntegrationsResultEntry.windowSize:get()
 			
-			if var2 then
-				self:setWindowDefaultPosition(p1, self._calculateWindowAbsolutePosition(serviceModule:windowPosition(var1.id) or (var1.startingWindowPosition or UDim2.fromOffset(0, 0)), var2))
+			if GetResult1 then
+				self:setWindowDefaultPosition(Integration_id, (self._calculateWindowAbsolutePosition(ServiceModule:windowPosition(IntegrationsResultEntry.id) or (IntegrationsResultEntry.startingWindowPosition or UDim2.fromOffset(0, 0)), GetResult1)))
 			end
 		end
-		self._sendEvent(constantsModule.ANALYTICS.WINDOW_OPENED, { integration_id = p1 })
+		self._sendEvent(ConstantsModule.ANALYTICS.WINDOW_OPENED, { integration_id = Integration_id })
 	end
 	return nil
 end
 
-function t:onWindowClosed(p1)
-	-- upvalues: constantsModule (ref)
-	if self._tracker:get("window_status_" .. p26) == 1 then
-		self._sendEvent(constantsModule.ANALYTICS.WINDOW_CLOSED, {
-			integration_id = p1,
-			total_open_time = self._tracker:finishTime("window_time_" .. p26)
+function ChromeAnalyticsModule:onWindowClosed(Integration_id) --[[ Line: 357 ]]
+	-- upvalues: ConstantsModule (copy)
+	if self._tracker:get("window_status_" .. Integration_id) == 1 then
+		self._sendEvent(ConstantsModule.ANALYTICS.WINDOW_CLOSED, {
+			integration_id = Integration_id,
+			total_open_time = self._tracker:finishTime("window_time_" .. Integration_id)
 		})
-		self._resetWindowTrackers(p1)
+		self._resetWindowTrackers(Integration_id)
 	end
 	return nil
 end
 
-function t:onWindowTouchBegan(p1, _)
-	-- upvalues: serviceModule (ref)
-	local var1 = serviceModule:integrations()[p1]
+function ChromeAnalyticsModule:onWindowTouchBegan(Text, _) --[[ Line: 370 ]]
+	-- upvalues: ServiceModule (copy)
+	local IntegrationsResultEntry = ServiceModule:integrations()[Text]
 	
-	if var1 and var1.windowSize then
-		self._tracker:set("window_drag_" .. p27, 1)
+	if IntegrationsResultEntry and IntegrationsResultEntry.windowSize then
+		self._tracker:set("window_drag_" .. Text, 1)
 	end
 	return nil
 end
 
-function t:onWindowDrag(p1, p2)
-	-- upvalues: serviceModule (ref), constantsModule (ref)
-	local text = "window_drag_" .. p28
-	local var1 = serviceModule:integrations()[p1]
+function ChromeAnalyticsModule:onWindowDrag(Text, Vector) --[[ Line: 378 ]]
+	-- upvalues: ServiceModule (copy), ConstantsModule (copy)
+	local Text1 = "window_drag_" .. Text
+	local GetResult = self._tracker:get(Text1)
+	local IntegrationsResultEntry = ServiceModule:integrations()[Text]
 	
-	if var1 and var1.windowSize and self._tracker:get(text) == 1 then
-		local var2 = self._tracker:get("window_position_" .. p28)
+	if IntegrationsResultEntry and IntegrationsResultEntry.windowSize and GetResult == 1 then
+		local GetResult1 = self._tracker:get("window_position_" .. Text)
 		
-		if var2 then
-			local vector2 = Vector2.new(p2.X - var2.X, p2.Y - var2.Y)
+		if GetResult1 then
+			local _Vector2 = Vector2.new(Vector.X - GetResult1.X, Vector.Y - GetResult1.Y)
 			
-			if vector2.X ~= 0 or vector2.Y ~= 0 then
-				self._tracker:set(text, 2)
-				local var3 = var1.windowSize:get()
-				self._sendEvent(constantsModule.ANALYTICS.WINDOW_DRAG_START, {
-					integration_id = p1,
-					position_x = var2.X,
-					position_y = var2.Y,
-					width = var3.Width.Offset,
-					height = var3.Height.Offset,
-					is_starting_position = self._tracker:get("window_dposition_" .. p28) == var2
+			if _Vector2.X ~= 0 or _Vector2.Y ~= 0 then
+				self._tracker:set(Text1, 2)
+				local GetResult11 = IntegrationsResultEntry.windowSize:get()
+				self._sendEvent(ConstantsModule.ANALYTICS.WINDOW_DRAG_START, {
+					integration_id = Text,
+					position_x = GetResult1.X,
+					position_y = GetResult1.Y,
+					width = GetResult11.Width.Offset,
+					height = GetResult11.Height.Offset,
+					is_starting_position = self._tracker:get("window_dposition_" .. Text) == GetResult1
 				})
 			end
 		end
@@ -282,67 +286,68 @@ function t:onWindowDrag(p1, p2)
 	return nil
 end
 
-function t:onWindowTouchEnded(p1, p2, p3)
-	-- upvalues: serviceModule (ref), constantsModule (ref)
-	local var1 = serviceModule:integrations()[p1]
+function ChromeAnalyticsModule:onWindowTouchEnded(Integration_id, Vector, Will_autoposition) --[[ Line: 411 ]]
+	-- upvalues: ServiceModule (copy), ConstantsModule (copy)
+	local IntegrationsResultEntry = ServiceModule:integrations()[Integration_id]
 	
-	if self._tracker:get("icon_drag_" .. p30) == 2 then
-		return self:onIconTouchEnded(p1, p2, p3)
+	if self._tracker:get("icon_drag_" .. Integration_id) == 2 then
+		return self:onIconTouchEnded(Integration_id, Vector, Will_autoposition)
 	end
-	local text = "window_drag_" .. p30
+	local Text = "window_drag_" .. Integration_id
+	local GetResult = self._tracker:get(Text)
 	
-	if var1 and var1.windowSize and self._tracker:get(text) == 2 then
-		local var2 = var1.windowSize:get()
-		self._tracker:reset(text)
-		self._setWindowLastPosition(p1, p2)
-		self._sendEvent(constantsModule.ANALYTICS.WINDOW_DRAG_END, {
-			integration_id = p1,
-			position_x = p2.X,
-			position_y = p2.Y,
-			width = var2.Width.Offset,
-			height = var2.Height.Offset,
-			will_autoposition = p3
+	if IntegrationsResultEntry and IntegrationsResultEntry.windowSize and GetResult == 2 then
+		local GetResult1 = IntegrationsResultEntry.windowSize:get()
+		self._tracker:reset(Text)
+		self._setWindowLastPosition(Integration_id, Vector)
+		self._sendEvent(ConstantsModule.ANALYTICS.WINDOW_DRAG_END, {
+			integration_id = Integration_id,
+			position_x = Vector.X,
+			position_y = Vector.Y,
+			width = GetResult1.Width.Offset,
+			height = GetResult1.Height.Offset,
+			will_autoposition = Will_autoposition
 		})
 	end
 	return nil
 end
 
-function t:setWindowDefaultPosition(p1, p2)
-	self._tracker:set("window_dposition_" .. p33, p2)
-	self._setWindowLastPosition(p1, p2)
+function ChromeAnalyticsModule:setWindowDefaultPosition(Integration_id, WindowAbsolutePosition) --[[ Line: 443 ]]
+	self._tracker:set("window_dposition_" .. Integration_id, WindowAbsolutePosition)
+	self._setWindowLastPosition(Integration_id, WindowAbsolutePosition)
 	
 	return nil
 end
 
-function t:onWindowResize(p1, p2)
-	-- upvalues: serviceModule (ref), constantsModule (ref)
-	local var1 = serviceModule:integrations()[p1]
+function ChromeAnalyticsModule:onWindowResize(Integration_id, GetResult) --[[ Line: 449 ]]
+	-- upvalues: ServiceModule (copy), ConstantsModule (copy)
+	local IntegrationsResultEntry = ServiceModule:integrations()[Integration_id]
 	
-	if var1 and var1.windowSize then
-		local text = "window_size_" .. p35
-		local var2 = self._tracker:get(text)
-		local var3 = self._tracker:get("window_position_" .. p35)
-		local var4 = if var3 then Vector2.new(var3.X + (var2.Width.Offset - p2.Width.Offset) / 2, var3.Y + (var2.Height.Offset - p2.Height.Offset) / 2) else nil
+	if IntegrationsResultEntry and IntegrationsResultEntry.windowSize then
+		local Text = "window_size_" .. Integration_id
+		local GetResult1 = self._tracker:get(Text)
+		local GetResult2 = self._tracker:get("window_position_" .. Integration_id)
+		local _Vector2 = if GetResult2 then Vector2.new(GetResult2.X + (GetResult1.Width.Offset - GetResult.Width.Offset) / 2, GetResult2.Y + (GetResult1.Height.Offset - GetResult.Height.Offset) / 2) else nil
 		
-		if var4 then
-			self._setWindowLastPosition(p1, var4)
+		if _Vector2 then
+			self._setWindowLastPosition(Integration_id, _Vector2)
 		end
-		self._tracker:set(text, p2)
-		self._sendEvent(constantsModule.ANALYTICS.WINDOW_RESIZE, {
-			integration_id = p1,
-			previous_position_x = if var3 then var3.X else nil,
-			previous_position_y = if var3 then var3.Y else nil,
-			previous_width = if var2 then var2.Width.Offset else nil,
-			previous_height = if var2 then var2.Height.Offset else nil,
-			current_position_x = if var4 then var4.X else nil,
-			current_position_y = if var4 then var4.Y else nil,
-			current_width = p2.Width.Offset,
-			current_height = p2.Height.Offset
+		self._tracker:set(Text, GetResult)
+		self._sendEvent(ConstantsModule.ANALYTICS.WINDOW_RESIZE, {
+			integration_id = Integration_id,
+			previous_position_x = GetResult2 and GetResult2.X or nil,
+			previous_position_y = GetResult2 and GetResult2.Y or nil,
+			previous_width = GetResult1 and GetResult1.Width.Offset or nil,
+			previous_height = GetResult1 and GetResult1.Height.Offset or nil,
+			current_position_x = _Vector2 and _Vector2.X or nil,
+			current_position_y = _Vector2 and _Vector2.Y or nil,
+			current_width = GetResult.Width.Offset,
+			current_height = GetResult.Height.Offset
 		})
 	end
 	return nil
 end
 
-t.default = t.new()
+ChromeAnalyticsModule.default = ChromeAnalyticsModule.new()
 
-return t
+return ChromeAnalyticsModule

@@ -1,27 +1,27 @@
-﻿local parent = script:FindFirstAncestor("SduiSharedUtilities").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local systemBanner = foundationModule.SystemBanner
-local alertSeverity = foundationModule.Enums.AlertSeverity
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local useLocalization = require(parent.Localization).Hooks.useLocalization
+﻿local Parent = script:FindFirstAncestor("SduiSharedUtilities").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local SystemBanner = FoundationModule.SystemBanner
+local AlertSeverity = FoundationModule.Enums.AlertSeverity
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-return reactModule.memo(function(p1)
-	-- upvalues: useLocalization (ref), reactModule (ref), systemBanner (ref), alertSeverity (ref), buttonVariant (ref)
-	local var1 = useLocalization({
+return ReactModule.memo(function(p1) --[[ Line: 18 | Named "SduiPageErrorState" ]]
+	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), SystemBanner (copy), AlertSeverity (copy), ButtonVariant (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
 		title = "CommonUI.Messages.Response.PageError",
 		description = "Feature.Toast.NetworkingError.SomethingIsWrong",
 		retry = "InGame.CommonUI.Button.Retry"
 	})
 	
-	return reactModule.createElement(systemBanner, {
-		severity = alertSeverity.Error,
-		title = var1.title,
-		description = var1.description,
+	return ReactModule.createElement(SystemBanner, {
+		severity = AlertSeverity.Error,
+		title = UseLocalizationResult.title,
+		description = UseLocalizationResult.description,
 		actions = {
 			{
-				text = var1.retry,
-				variant = buttonVariant.Standard,
+				text = UseLocalizationResult.retry,
+				variant = ButtonVariant.Standard,
 				onActivated = p1.refresh
 			}
 		}

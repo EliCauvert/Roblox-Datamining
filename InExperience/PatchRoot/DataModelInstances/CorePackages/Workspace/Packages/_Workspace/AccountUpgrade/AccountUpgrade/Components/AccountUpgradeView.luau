@@ -1,86 +1,106 @@
-﻿local accountUpgrade = script:FindFirstAncestor("AccountUpgrade")
-local parent = accountUpgrade.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local accountUpgradeFieldsModule = require(script.Parent.AccountUpgradeFields)
-local accountUpgradeFieldErrorModule = require(script.Parent.AccountUpgradeFieldError)
-local birthdayPickerSheetModule = require(script.Parent.BirthdayPickerSheet)
-local closeConfirmationDialogModule = require(script.Parent.CloseConfirmationDialog)
-local accountUpgradeDialogModule = require(accountUpgrade.SuccessModal.AccountUpgradeDialog)
-local accountUpgradeDialogActionsModule = require(accountUpgrade.SuccessModal.AccountUpgradeDialogActions)
-local accountUpgradeFieldModule = require(accountUpgrade.AccountUpgradeField)
-local view = foundationModule.View
-local text = foundationModule.Text
-local buttonVariant = foundationModule.Enums.ButtonVariant
+﻿local AccountUpgrade = script:FindFirstAncestor("AccountUpgrade")
+local Parent = AccountUpgrade.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local RegisterAuditContent = require(Parent.AuthCommon).Components.RegisterAuditContent
+local LegalTextWithLinks = require(Parent.AuthCommon).Components.LegalTextWithLinks
+local AccountUpgradeFieldsModule = require(script.Parent.AccountUpgradeFields)
+local AccountUpgradeFieldErrorModule = require(script.Parent.AccountUpgradeFieldError)
+local BirthdayPickerSheetModule = require(script.Parent.BirthdayPickerSheet)
+local CloseConfirmationDialogModule = require(script.Parent.CloseConfirmationDialog)
+local AccountUpgradeDialogModule = require(AccountUpgrade.SuccessModal.AccountUpgradeDialog)
+local AccountUpgradeDialogActionsModule = require(AccountUpgrade.SuccessModal.AccountUpgradeDialogActions)
+local AccountUpgradeFieldModule = require(AccountUpgrade.AccountUpgradeField)
+local FFlagAccountUpgradeOAuthTelemetryModule = require(AccountUpgrade.Flags.FFlagAccountUpgradeOAuthTelemetry)
+local View = FoundationModule.View
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
 
-return function(p1)
-	-- upvalues: accountUpgradeFieldModule (ref), reactModule (ref), view (ref), text (ref), accountUpgradeFieldsModule (ref), accountUpgradeDialogActionsModule (ref), buttonVariant (ref), accountUpgradeFieldErrorModule (ref), accountUpgradeDialogModule (ref), birthdayPickerSheetModule (ref), closeConfirmationDialogModule (ref)
-	local var1 = not p1.isSaveEnabled and not p1.isSubmitting
-	local var2 = p1.fieldStates[accountUpgradeFieldModule.Birthday] ~= nil
-	local onClose = p1.onClose
-	local onSignOut = p1.onSignOut
+local function createAuditContent(AuditContent) --[[ Line: 25 ]]
+	-- upvalues: ReactModule (copy), RegisterAuditContent (copy)
+	local Elements = {}
 	
-	return reactModule.createElement(accountUpgradeDialogModule, {
-		title = p1.titleText,
-		onClose = if onClose and not p1.confirmsClose then reactModule.useCallback(function(_)
-			-- upvalues: onClose (ref)
-			if onClose then
-				onClose()
-			end
-		end, { onClose }) else nil,
-		onCloseActivated = if p1.confirmsClose then onClose else nil,
-		hasBackdrop = p1.hasBackdrop,
-		isFocusable = not (p1.isBirthdayPickerOpen or p1.isCloseConfirmationOpen),
+	for _, value in AuditContent do
+		Elements[value.translationKey] = ReactModule.createElement(RegisterAuditContent, value)
+	end
+	return ReactModule.createElement(ReactModule.Fragment, nil, Elements)
+end
+
+return function(Form) --[[ Line: 33 | Named "AccountUpgradeView" ]]
+	-- upvalues: AccountUpgradeFieldModule (copy), ReactModule (copy), View (copy), AccountUpgradeFieldsModule (copy), AccountUpgradeDialogActionsModule (copy), ButtonVariant (copy), AccountUpgradeFieldErrorModule (copy), LegalTextWithLinks (copy), createAuditContent (copy), AccountUpgradeDialogModule (copy), BirthdayPickerSheetModule (copy), FFlagAccountUpgradeOAuthTelemetryModule (copy), CloseConfirmationDialogModule (copy)
+	local NoIsSubmitting: boolean = not Form.isSaveEnabled and not Form.isSubmitting
+	local HasFieldState = Form.fieldStates[AccountUpgradeFieldModule.Birthday] ~= nil
+	local OnCloseFunction = Form.onClose
+	local UseResult = ReactModule.useCallback(function(_) --[[ Line: 40 ]]
+		-- upvalues: OnCloseFunction (copy)
+		if OnCloseFunction then
+			OnCloseFunction()
+		end
+	end, { OnCloseFunction })
+	local OnSignOut = Form.onSignOut
+	
+	return ReactModule.createElement(AccountUpgradeDialogModule, {
+		title = Form.titleText,
+		subtitle = Form.subtitleText,
+		onClose = if OnCloseFunction and not Form.confirmsClose then UseResult else nil,
+		onCloseActivated = if Form.confirmsClose then OnCloseFunction else nil,
+		hasBackdrop = Form.hasBackdrop,
+		fitsContent = Form.fitsDialogToContent,
+		isFocusable = not (Form.isBirthdayPickerOpen or Form.isCloseConfirmationOpen),
 		children = {
-			Content = reactModule.createElement(view, {
-				tag = "col gap-large size-full-0 auto-y",
-				testId = "AccountUpgradeContent"
+			Content = ReactModule.createElement(View, {
+				testId = "AccountUpgradeContent",
+				tag = {
+					["col size-full-0 auto-y"] = true,
+					["padding-top-xsmall"] = Form.subtitleText ~= nil
+				}
 			}, {
-				Subtitle = reactModule.createElement(text, {
-					tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-default",
+				Body = ReactModule.createElement(View, {
+					tag = "col gap-xlarge size-full-0 auto-y",
 					LayoutOrder = 1,
-					testId = "AccountUpgradeSubtitle",
-					Text = p1.subtitleText
-				}),
-				Body = reactModule.createElement(view, {
-					tag = "col gap-xxlarge size-full-0 auto-y",
-					LayoutOrder = 2,
 					testId = "AccountUpgradeBody"
 				}, {
-					Fields = reactModule.createElement(accountUpgradeFieldsModule, { LayoutOrder = 1, form = p1 }),
-					Actions = reactModule.createElement(view, {
+					Fields = ReactModule.createElement(AccountUpgradeFieldsModule, { LayoutOrder = 1, form = Form }),
+					Actions = ReactModule.createElement(View, {
 						tag = "col gap-small size-full-0 auto-y",
 						LayoutOrder = 2
 					}, {
-						Buttons = reactModule.createElement(accountUpgradeDialogActionsModule, {
+						Buttons = ReactModule.createElement(AccountUpgradeDialogActionsModule, {
 							LayoutOrder = 1,
 							buttons = {
 								{
-									text = p1.saveText,
-									variant = if var1 then buttonVariant.Standard else buttonVariant.Emphasis,
-									onActivated = p1.onSaveActivated,
-									isDisabled = var1,
-									isLoading = p1.isSubmitting
+									text = Form.saveText,
+									variant = if NoIsSubmitting then ButtonVariant.Standard else ButtonVariant.Emphasis,
+									onActivated = Form.onSaveActivated,
+									isDisabled = NoIsSubmitting,
+									isLoading = Form.isSubmitting
 								}
 							}
 						}),
-						Error = reactModule.createElement(accountUpgradeFieldErrorModule, {
+						Error = ReactModule.createElement(AccountUpgradeFieldErrorModule, {
 							LayoutOrder = 2,
 							testId = "AccountUpgradeSubmitError",
-							text = p1.submitError
-						})
+							text = Form.submitError
+						}),
+						LegalText = if Form.legalText then ReactModule.createElement(LegalTextWithLinks, {
+							LayoutOrder = 3,
+							testId = "AccountUpgradeLegalText",
+							text = Form.legalText,
+							onLinkActivated = Form.onLegalLinkActivated
+						}) else nil
 					})
-				})
+				}),
+				AuditContent = if Form.auditContent then createAuditContent(Form.auditContent) else nil
 			}),
-			BirthdayPicker = if var2 then reactModule.createElement(birthdayPickerSheetModule, {
-				isOpen = p1.isBirthdayPickerOpen,
-				birthday = p1.birthday,
-				onClose = p1.onBirthdayPickerClosed,
-				onConfirm = p1.onBirthdayConfirmed
+			BirthdayPicker = if HasFieldState then ReactModule.createElement(BirthdayPickerSheetModule, {
+				isOpen = Form.isBirthdayPickerOpen,
+				birthday = Form.birthday,
+				onClose = Form.onBirthdayPickerClosed,
+				onConfirm = Form.onBirthdayConfirmed,
+				onAllPicked = if FFlagAccountUpgradeOAuthTelemetryModule then Form.onBirthdayPickerAllPicked else nil
 			}) else nil,
-			CloseConfirmation = if p1.isCloseConfirmationOpen and onSignOut then reactModule.createElement(closeConfirmationDialogModule, {
-				onBack = p1.onCloseConfirmationBack,
-				onSignOut = onSignOut
+			CloseConfirmation = if Form.isCloseConfirmationOpen and OnSignOut then ReactModule.createElement(CloseConfirmationDialogModule, {
+				onBack = Form.onCloseConfirmationBack,
+				onSignOut = OnSignOut
 			}) else nil
 		}
 	})

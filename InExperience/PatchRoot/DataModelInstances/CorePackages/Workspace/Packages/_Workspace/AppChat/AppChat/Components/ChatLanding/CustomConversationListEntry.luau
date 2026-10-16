@@ -1,151 +1,146 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-local useStyle = UIBloxModule.Core.Style.useStyle
-local useTextSizeOffset = UIBloxModule.Core.Style.useTextSizeOffset
-local useChatPagePaddingModule = require(appChat.Contexts.ChatPagePadding.useChatPagePadding)
-local foundationModule = require(parent.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local getBoldTextThemeModule = require(script.Parent.Utils.getBoldTextTheme)
-local images = UIBloxModule.App.ImageSet.Images
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local iconSize = UIBloxModule.App.Constant.IconSize
-local fFlagDebugAppChatEnableDomLocatorsModule = require(appChat.Flags.FFlagDebugAppChatEnableDomLocators)
-local fFlagAppChatRemoveConversationListDividerModule = require(appChat.Flags.FFlagAppChatRemoveConversationListDivider)
-local pushRight = images["icons/navigation/pushRight"]
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local ReactModule = require(Parent.React)
+local UIBloxModule = require(Parent.UIBlox)
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local UseTextSizeOffsetFunction = UIBloxModule.Core.Style.useTextSizeOffset
+local UseChatPagePaddingModule = require(AppChat.Contexts.ChatPagePadding.useChatPagePadding)
+local FoundationModule = require(Parent.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local GetBoldTextThemeModule = require(script.Parent.Utils.getBoldTextTheme)
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local IconSize = UIBloxModule.App.Constant.IconSize
+local FFlagDebugAppChatEnableDomLocatorsModule = require(AppChat.Flags.FFlagDebugAppChatEnableDomLocators)
+local FFlagAppChatRemoveConversationListDividerModule = require(AppChat.Flags.FFlagAppChatRemoveConversationListDivider)
+local IconsNavigationPushRight = UIBloxModule.App.ImageSet.Images["icons/navigation/pushRight"]
 
-function CustomConversationListEntry(p1)
-	-- upvalues: useStyle (ref), getBoldTextThemeModule (ref), useTextSizeOffset (ref), useChatPagePaddingModule (ref), iconSize (ref), foundationModule (ref), reactModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), imageSetLabel (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), pushRight (ref), fFlagAppChatRemoveConversationListDividerModule (ref)
-	local var1 = useStyle()
-	local var2 = getBoldTextThemeModule(var1)
-	local var3 = useTextSizeOffset()
-	local var4 = useChatPagePaddingModule()
-	local onActivated = p1.onActivated
-	local titleText = p1.titleText
-	local font = var2.Font.Header2.Font
-	local transparency = var2.Theme.TextEmphasis.Transparency
-	local color = var2.Theme.TextEmphasis.Color
-	local var5 = var2.Font.Header2.RelativeSize * var2.Font.BaseSize
-	local var6 = var5 + var3
-	local subTitleText = p1.subTitleText
-	local font_1 = var1.Font.CaptionBody.Font
-	local transparency_1 = var1.Theme.TextDefault.Transparency
-	local color_1 = var1.Theme.TextDefault.Color
-	local var7 = var1.Font.CaptionBody.RelativeSize * var1.Font.BaseSize
-	local var8 = 60 - (60 - iconSize.Regular) / 2
+function CustomConversationListEntry(p1) --[[ Line: 34 ]]
+	-- upvalues: UseStyleFunction (copy), GetBoldTextThemeModule (copy), UseTextSizeOffsetFunction (copy), UseChatPagePaddingModule (copy), IconSize (copy), FoundationModule (copy), ReactModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), ImageSetLabel (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), IconsNavigationPushRight (copy), FFlagAppChatRemoveConversationListDividerModule (copy)
+	local UseStyleResult = UseStyleFunction()
+	local BoldTextThemeModule = GetBoldTextThemeModule(UseStyleResult)
+	local UseTextSizeOffsetResult = UseTextSizeOffsetFunction()
+	local UseChatPagePaddingModuleResult = UseChatPagePaddingModule()
+	local HeaderFont = BoldTextThemeModule.Font.Header2.Font
+	local ScaledRelativeSize = BoldTextThemeModule.Font.Header2.RelativeSize * BoldTextThemeModule.Font.BaseSize
+	local CaptionBodyFont = UseStyleResult.Font.CaptionBody.Font
+	local ScaledRelativeSize1 = UseStyleResult.Font.CaptionBody.RelativeSize * UseStyleResult.Font.BaseSize
+	local XOffset = 60 - (60 - IconSize.Regular) / 2
 	
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		Size = UDim2.new(1, 0, 0, p1.entryHeight),
-		BackgroundColor3 = var1.Theme.BackgroundDefault.Color,
-		BackgroundTransparency = var1.Theme.BackgroundDefault.Transparency,
-		onActivated = onActivated,
-		testId = if fFlagDebugAppChatEnableDomLocatorsModule then p1.testId else nil
+		BackgroundColor3 = UseStyleResult.Theme.BackgroundDefault.Color,
+		BackgroundTransparency = UseStyleResult.Theme.BackgroundDefault.Transparency,
+		onActivated = p1.onActivated,
+		testId = if FFlagDebugAppChatEnableDomLocatorsModule then p1.testId else nil
 	}, {
-		leftAlign = reactModule.createElement("Frame", {
+		leftAlign = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
-			Size = UDim2.new(1, -(iconSize.Regular + 12), 1, 0)
+			Size = UDim2.new(1, -(IconSize.Regular + 12), 1, 0)
 		}, {
-			padding = reactModule.createElement("UIPadding", { PaddingLeft = UDim.new(0, var4.left) }),
-			layout = reactModule.createElement("UIListLayout", {
+			padding = ReactModule.createElement("UIPadding", {
+				PaddingLeft = UDim.new(0, UseChatPagePaddingModuleResult.left)
+			}),
+			layout = ReactModule.createElement("UIListLayout", {
 				VerticalAlignment = Enum.VerticalAlignment.Center,
 				HorizontalAlignment = Enum.HorizontalAlignment.Left,
 				FillDirection = Enum.FillDirection.Horizontal,
 				SortOrder = Enum.SortOrder.LayoutOrder
 			}),
-			iconHolder = reactModule.createElement("Frame", {
+			iconHolder = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 0,
-				Size = UDim2.new(0, var8, 1, 0)
+				Size = UDim2.new(0, XOffset, 1, 0)
 			}, {
-				layout = reactModule.createElement("UIListLayout", {
+				layout = ReactModule.createElement("UIListLayout", {
 					VerticalAlignment = Enum.VerticalAlignment.Center,
 					HorizontalAlignment = Enum.HorizontalAlignment.Left
 				}),
-				icon = reactModule.createElement(imageSetLabel, {
+				icon = ReactModule.createElement(ImageSetLabel, {
 					BorderSizePixel = 0,
-					BackgroundColor3 = var2.Theme.BackgroundUIDefault.Color,
-					BackgroundTransparency = var2.Theme.BackgroundUIDefault.Transparency,
-					Size = UDim2.new(0, iconSize.Regular, 0, iconSize.Regular),
+					BackgroundColor3 = BoldTextThemeModule.Theme.BackgroundUIDefault.Color,
+					BackgroundTransparency = BoldTextThemeModule.Theme.BackgroundUIDefault.Transparency,
+					Size = UDim2.new(0, IconSize.Regular, 0, IconSize.Regular),
 					ScaleType = Enum.ScaleType.Stretch,
 					Image = p1.entryIcon,
-					ImageColor3 = var1.Theme.IconEmphasis.Color,
-					ImageTransparency = var1.Theme.IconEmphasis.Transparency
+					ImageColor3 = UseStyleResult.Theme.IconEmphasis.Color,
+					ImageTransparency = UseStyleResult.Theme.IconEmphasis.Transparency
 				}, {
-					corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) })
+					corner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) })
 				})
 			}),
-			centerContent = reactModule.createElement("Frame", {
+			centerContent = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 1,
 				Size = UDim2.new(1, -60, 1, 0)
 			}, {
-				layout = reactModule.createElement("UIListLayout", {
+				layout = ReactModule.createElement("UIListLayout", {
 					VerticalAlignment = Enum.VerticalAlignment.Center,
 					HorizontalAlignment = Enum.HorizontalAlignment.Left,
 					FillDirection = Enum.FillDirection.Vertical,
 					SortOrder = Enum.SortOrder.LayoutOrder,
 					Padding = UDim.new(0, 2)
 				}),
-				title = reactModule.createElement("TextLabel", {
+				title = ReactModule.createElement("TextLabel", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 1,
-					Size = UDim2.new(1, 0, 0, var6),
-					TextSize = var5,
-					TextColor3 = color,
-					TextTransparency = transparency,
-					Font = if foundationFontFaceMigration then nil else font,
-					FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Tokens.Typography.TitleLarge.Font) else nil,
-					Text = titleText or "",
+					Size = UDim2.new(1, 0, 0, ScaledRelativeSize + UseTextSizeOffsetResult),
+					TextSize = ScaledRelativeSize,
+					TextColor3 = BoldTextThemeModule.Theme.TextEmphasis.Color,
+					TextTransparency = BoldTextThemeModule.Theme.TextEmphasis.Transparency,
+					Font = if FoundationFontFaceMigration then nil else HeaderFont,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.TitleLarge.Font) else nil,
+					Text = p1.titleText or "",
 					TextTruncate = Enum.TextTruncate.AtEnd,
 					TextXAlignment = Enum.TextXAlignment.Left
 				}),
-				subTitle = reactModule.createElement("TextLabel", {
+				subTitle = ReactModule.createElement("TextLabel", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 2,
-					Size = UDim2.new(1, 0, 0, var7 + var3),
-					TextSize = var7,
-					TextColor3 = color_1,
-					TextTransparency = transparency_1,
-					Font = if foundationFontFaceMigration then nil else font_1,
-					FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Tokens.Typography.BodySmall.Font) else nil,
-					Text = subTitleText,
+					Size = UDim2.new(1, 0, 0, ScaledRelativeSize1 + UseTextSizeOffsetResult),
+					TextSize = ScaledRelativeSize1,
+					TextColor3 = UseStyleResult.Theme.TextDefault.Color,
+					TextTransparency = UseStyleResult.Theme.TextDefault.Transparency,
+					Font = if FoundationFontFaceMigration then nil else CaptionBodyFont,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodySmall.Font) else nil,
+					Text = p1.subTitleText,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextTruncate = Enum.TextTruncate.AtEnd
 				})
 			})
 		}),
-		rightAlign = reactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
-			layout = reactModule.createElement("UIListLayout", {
+		rightAlign = ReactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
+			layout = ReactModule.createElement("UIListLayout", {
 				VerticalAlignment = Enum.VerticalAlignment.Center,
 				HorizontalAlignment = Enum.HorizontalAlignment.Right,
 				FillDirection = Enum.FillDirection.Horizontal,
 				SortOrder = Enum.SortOrder.LayoutOrder
 			}),
-			padding = reactModule.createElement("UIPadding", { PaddingRight = UDim.new(0, var4.right) }),
-			icon = reactModule.createElement(imageSetLabel, {
+			padding = ReactModule.createElement("UIPadding", {
+				PaddingRight = UDim.new(0, UseChatPagePaddingModuleResult.right)
+			}),
+			icon = ReactModule.createElement(ImageSetLabel, {
 				LayoutOrder = 0,
 				BackgroundTransparency = 1,
-				Size = UDim2.new(0, iconSize.Regular, 0, iconSize.Regular),
+				Size = UDim2.new(0, IconSize.Regular, 0, IconSize.Regular),
 				ScaleType = Enum.ScaleType.Stretch,
-				Image = pushRight,
-				ImageColor3 = var1.Theme.IconEmphasis.Color,
-				ImageTransparency = var1.Theme.IconEmphasis.Transparency
+				Image = IconsNavigationPushRight,
+				ImageColor3 = UseStyleResult.Theme.IconEmphasis.Color,
+				ImageTransparency = UseStyleResult.Theme.IconEmphasis.Transparency
 			})
 		}),
-		divider = if not fFlagAppChatRemoveConversationListDividerModule then reactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
-			layout = reactModule.createElement("UIListLayout", {
+		divider = if FFlagAppChatRemoveConversationListDividerModule then nil else ReactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
+			layout = ReactModule.createElement("UIListLayout", {
 				VerticalAlignment = Enum.VerticalAlignment.Bottom,
 				HorizontalAlignment = Enum.HorizontalAlignment.Right
 			}),
-			divider = reactModule.createElement("Frame", {
+			divider = ReactModule.createElement("Frame", {
 				BorderSizePixel = 0,
-				BackgroundTransparency = var1.Theme.Divider.Transparency,
-				BackgroundColor3 = var1.Theme.Divider.Color,
-				Size = UDim2.new(1, -var8, 0, 1)
+				BackgroundTransparency = UseStyleResult.Theme.Divider.Transparency,
+				BackgroundColor3 = UseStyleResult.Theme.Divider.Color,
+				Size = UDim2.new(1, -XOffset, 0, 1)
 			})
-		}) else nil
+		})
 	})
 end
 

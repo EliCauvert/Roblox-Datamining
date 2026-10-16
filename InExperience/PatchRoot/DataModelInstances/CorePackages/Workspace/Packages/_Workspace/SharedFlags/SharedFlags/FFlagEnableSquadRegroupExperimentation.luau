@@ -1,1 +1,4 @@
-﻿return require(script.Parent.FFlagForceEnableSquadRegroup) or (game:DefineFastFlag("EnableSquadRegroupExperimentation1", false) or require(script.Parent.FFlagEnableSquadRegroupExperimentationSmallScreenFix))
+﻿local EnableSquadRegroupExperimentation1 = game:DefineFastFlag("EnableSquadRegroupExperimentation1", false)
+local FFlagEnableSquadRegroupExperimentationSmallScreenFixModule = require(script.Parent.FFlagEnableSquadRegroupExperimentationSmallScreenFix)
+
+return require(script.Parent.FFlagForceEnableSquadRegroup) or (EnableSquadRegroupExperimentation1 or FFlagEnableSquadRegroupExperimentationSmallScreenFixModule)

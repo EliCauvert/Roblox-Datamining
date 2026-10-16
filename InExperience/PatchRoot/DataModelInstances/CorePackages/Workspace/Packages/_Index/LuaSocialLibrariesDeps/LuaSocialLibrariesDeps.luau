@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CorePackages").Packages.LuaSocialLibrariesDeps)
+﻿return (require(game:GetService("CorePackages").Packages.LuaSocialLibrariesDeps))

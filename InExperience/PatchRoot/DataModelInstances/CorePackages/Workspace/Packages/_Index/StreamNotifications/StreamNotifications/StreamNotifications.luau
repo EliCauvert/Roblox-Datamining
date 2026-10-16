@@ -1,164 +1,167 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local streamNotifications = script:FindFirstAncestor("StreamNotifications")
-local parent = streamNotifications.Parent
-local currentCamera = workspace.CurrentCamera
-local constantsModule = require(streamNotifications.constants)
-local reactModule = require(parent.React)
-local reactRobloxModule = require(parent.ReactRoblox)
-local useStyle = require(parent.UIBlox).Core.Style.useStyle
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local focusNavigableSurfaceWrapper = focusNavigationUtilsModule.FocusNavigableSurfaceWrapper
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
-local _ = require(parent.ReactFocusNavigation)
-local inputHandlersModule = require(parent.InputHandlers)
-local components = streamNotifications.components
-local streamNotificationsHeaderModule = require(components.StreamNotificationsHeader)
-local streamNotificationsContentModule = require(components.StreamNotificationsContent)
-local eventStream = require(streamNotifications.analytics.analyticsService).EventStream
-local notificationHelper = require(parent.NotificationsCommon).NotificationHelper
-local analyticsConstantsModule = require(streamNotifications.analytics.analyticsConstants)
-local fFlagLuaAppSupportDeviceSafeInsets = require(parent.SharedFlags).FFlagLuaAppSupportDeviceSafeInsets
-local streamNotificationDropdownExperimentationModule = require(streamNotifications.StreamNotificationDropdownExperimentation)
+﻿local CoreGui = game:GetService("CoreGui")
+local StreamNotifications = script:FindFirstAncestor("StreamNotifications")
+local Parent = StreamNotifications.Parent
+local CurrentCamera = workspace.CurrentCamera
+local ConstantsModule = require(StreamNotifications.constants)
+local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.ReactRoblox)
+local UseStyleFunction = require(Parent.UIBlox).Core.Style.useStyle
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local FocusNavigableSurfaceWrapper = FocusNavigationUtilsModule.FocusNavigableSurfaceWrapper
+local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
+local _ = require(Parent.ReactFocusNavigation)
+local InputHandlersModule = require(Parent.InputHandlers)
+local Components = StreamNotifications.components
+local StreamNotificationsHeaderModule = require(Components.StreamNotificationsHeader)
+local StreamNotificationsContentModule = require(Components.StreamNotificationsContent)
+local EventStream = require(StreamNotifications.analytics.analyticsService).EventStream
+local NotificationHelper = require(Parent.NotificationsCommon).NotificationHelper
+local AnalyticsConstantsModule = require(StreamNotifications.analytics.analyticsConstants)
+local FFlagLuaAppSupportDeviceSafeInsets = require(Parent.SharedFlags).FFlagLuaAppSupportDeviceSafeInsets
+local StreamNotificationDropdownExperimentationModule = require(StreamNotifications.StreamNotificationDropdownExperimentation)
 
-local function _(p1)
-	-- upvalues: constantsModule (ref)
-	return math.min(constantsModule.Dropdown.MaxHeight, math.max(p1 - constantsModule.Dropdown.VerticalMargin, constantsModule.Dropdown.MinHeight))
+local function _(p1): number --[[ Line: 36 | Named "calculateDropdownHeight" ]]
+	-- upvalues: ConstantsModule (copy)
+	return (math.min(ConstantsModule.Dropdown.MaxHeight, (math.max(p1 - ConstantsModule.Dropdown.VerticalMargin, ConstantsModule.Dropdown.MinHeight))))
 end
 
-return function(p1)
-	-- upvalues: useStyle (ref), streamNotificationDropdownExperimentationModule (ref), reactModule (ref), currentCamera (ref), constantsModule (ref), inputHandlersModule (ref), notificationHelper (ref), eventStream (ref), analyticsConstantsModule (ref), streamNotificationsHeaderModule (ref), streamNotificationsContentModule (ref), reactRobloxModule (ref), fFlagLuaAppSupportDeviceSafeInsets (ref), focusNavigableSurfaceWrapper (ref), focusNavigableSurfaceIdentifierEnum (ref), focusNavigationEventNameEnum (ref), coreGuiService (ref)
-	local var1 = useStyle()
-	local dropdownEnabled = streamNotificationDropdownExperimentationModule.getDropdownEnabled()
-	local var2, var3 = reactModule.useState(if dropdownEnabled then math.min(constantsModule.Dropdown.MaxHeight, math.max(currentCamera.ViewportSize.Y - constantsModule.Dropdown.VerticalMargin, constantsModule.Dropdown.MinHeight)) else 0)
-	local var4, var5 = reactModule.useState(currentCamera.ViewportSize.X < constantsModule.Modal.WidthLimit)
-	reactModule.useEffect(function()
-		-- upvalues: dropdownEnabled (ref), var3 (ref), currentCamera (copy), constantsModule (copy), var5 (ref)
-		if dropdownEnabled then
-			var3(math.min(constantsModule.Dropdown.MaxHeight, math.max(currentCamera.ViewportSize.Y - constantsModule.Dropdown.VerticalMargin, constantsModule.Dropdown.MinHeight)))
+return function(p1) --[[ Line: 43 ]]
+	-- upvalues: UseStyleFunction (copy), StreamNotificationDropdownExperimentationModule (copy), ReactModule (copy), CurrentCamera (copy), ConstantsModule (copy), InputHandlersModule (copy), NotificationHelper (copy), EventStream (copy), AnalyticsConstantsModule (copy), StreamNotificationsHeaderModule (copy), StreamNotificationsContentModule (copy), ReactRobloxModule (copy), FFlagLuaAppSupportDeviceSafeInsets (copy), FocusNavigableSurfaceWrapper (copy), FocusNavigableSurfaceIdentifierEnum (copy), FocusNavigationEventNameEnum (copy), CoreGui (copy)
+	local UseStyleResult = UseStyleFunction()
+	local DropdownEnabled = StreamNotificationDropdownExperimentationModule.getDropdownEnabled()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(if DropdownEnabled then math.min(ConstantsModule.Dropdown.MaxHeight, (math.max(CurrentCamera.ViewportSize.Y - ConstantsModule.Dropdown.VerticalMargin, ConstantsModule.Dropdown.MinHeight))) else 0)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(CurrentCamera.ViewportSize.X < ConstantsModule.Modal.WidthLimit)
+	ReactModule.useEffect(function() --[[ Line: 56 ]]
+		-- upvalues: DropdownEnabled (copy), UseStateResult2 (copy), CurrentCamera (upval), ConstantsModule (upval), UseStateResult2_1 (copy)
+		if DropdownEnabled then
+			UseStateResult2((math.min(ConstantsModule.Dropdown.MaxHeight, (math.max(CurrentCamera.ViewportSize.Y - ConstantsModule.Dropdown.VerticalMargin, ConstantsModule.Dropdown.MinHeight)))))
 		end
-		local var6 = currentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(function()
-			-- upvalues: dropdownEnabled (copy), var3 (copy), currentCamera (copy), constantsModule (copy), var5 (copy)
-			if dropdownEnabled then
-				var3(math.min(constantsModule.Dropdown.MaxHeight, math.max(currentCamera.ViewportSize.Y - constantsModule.Dropdown.VerticalMargin, constantsModule.Dropdown.MinHeight)))
+		local Connection = CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(function() --[[ Line: 60 ]]
+			-- upvalues: DropdownEnabled (upval), UseStateResult2 (upval), CurrentCamera (upval), ConstantsModule (upval), UseStateResult2_1 (upval)
+			if DropdownEnabled then
+				UseStateResult2((math.min(ConstantsModule.Dropdown.MaxHeight, (math.max(CurrentCamera.ViewportSize.Y - ConstantsModule.Dropdown.VerticalMargin, ConstantsModule.Dropdown.MinHeight)))))
 			end
-			if currentCamera.ViewportSize.X < constantsModule.Modal.WidthLimit then
-				var5(true)
+			if CurrentCamera.ViewportSize.X < ConstantsModule.Modal.WidthLimit then
+				UseStateResult2_1(true)
 				
 				return
+			else
+				UseStateResult2_1(false)
 			end
-			var5(false)
 		end)
 		
-		return function()
-			-- upvalues: var6 (ref)
-			var6:Disconnect()
+		return function() --[[ Line: 70 ]]
+			-- upvalues: Connection (copy)
+			Connection:Disconnect()
 		end
-	end, { dropdownEnabled })
-	local var6, var7 = reactModule.useState(true)
-	local var8 = reactModule.useCallback(function(p2)
-		-- upvalues: var7 (ref)
-		var7(p2)
+	end, { DropdownEnabled })
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(true)
+	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 76 ]]
+		-- upvalues: UseStateResult2_2 (copy)
+		UseStateResult2_2(p2)
 	end)
-	local var9, var10 = reactModule.useState(true)
-	local var11 = reactModule.useRef(nil)
+	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(true)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 83 ]]
+		-- upvalues: InputHandlersModule (upval), p1 (copy), NotificationHelper (upval), EventStream (upval), AnalyticsConstantsModule (upval)
+		return InputHandlersModule.onRelease(function(p2) --[[ Line: 84 ]]
+			-- upvalues: p1 (upval), NotificationHelper (upval), EventStream (upval), AnalyticsConstantsModule (upval)
+			p1.displayStream(false)
+			NotificationHelper.fireEvent(EventStream, AnalyticsConstantsModule.Context.click, AnalyticsConstantsModule.EventNames.closeContent, {
+				closeMethod = AnalyticsConstantsModule.CloseMethod.focusNavigationBack
+			})
+			p2:cancel()
+		end)
+	end, { p1.displayStream })
 	
-	return if dropdownEnabled then reactModule.createElement("Frame", {
+	return if DropdownEnabled then ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		ClipsDescendants = true,
-		Size = UDim2.new(0, constantsModule.Dropdown.Width, 0, var2)
+		Size = UDim2.new(0, ConstantsModule.Dropdown.Width, 0, UseStateResult)
 	}, {
-		UIPadding = reactModule.createElement("UIPadding", {
-			PaddingTop = UDim.new(0, constantsModule.Dropdown.PaddingTop),
-			PaddingBottom = UDim.new(0, constantsModule.Dropdown.PaddingBottom),
-			PaddingLeft = UDim.new(0, constantsModule.Dropdown.HorizontalPadding),
-			PaddingRight = UDim.new(0, constantsModule.Dropdown.HorizontalPadding - constantsModule.Dropdown.ScrollBarThickness)
+		UIPadding = ReactModule.createElement("UIPadding", {
+			PaddingTop = UDim.new(0, ConstantsModule.Dropdown.PaddingTop),
+			PaddingBottom = UDim.new(0, ConstantsModule.Dropdown.PaddingBottom),
+			PaddingLeft = UDim.new(0, ConstantsModule.Dropdown.HorizontalPadding),
+			PaddingRight = UDim.new(0, ConstantsModule.Dropdown.HorizontalPadding - ConstantsModule.Dropdown.ScrollBarThickness)
 		}),
-		UIListLayout = reactModule.createElement("UIListLayout", {
+		UIListLayout = ReactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			FillDirection = Enum.FillDirection.Vertical,
-			Padding = UDim.new(0, constantsModule.Dropdown.HeaderBodyGap)
+			Padding = UDim.new(0, ConstantsModule.Dropdown.HeaderBodyGap)
 		}),
-		Header = reactModule.createElement(streamNotificationsHeaderModule, { isSmallScreen = false, displayStream = p1.displayStream }),
-		StreamNotificationsContent = reactModule.createElement(streamNotificationsContentModule, {
+		Header = ReactModule.createElement(StreamNotificationsHeaderModule, { isSmallScreen = false, displayStream = p1.displayStream }),
+		StreamNotificationsContent = ReactModule.createElement(StreamNotificationsContentModule, {
 			isSmallScreen = false,
-			showOverlay = function() end,
+			showOverlay = function() --[[ Line: 126 ]] end,
 			displayStream = p1.displayStream,
-			setDisplayScreenGuiEnabled = function() end,
-			dropdownHeight = var2
+			setDisplayScreenGuiEnabled = function() --[[ Line: 129 ]] end,
+			dropdownHeight = UseStateResult
 		})
-	}) else reactRobloxModule.createPortal({
-		ScreenGui = reactModule.createElement("ScreenGui", {
+	}) else ReactRobloxModule.createPortal({
+		ScreenGui = ReactModule.createElement("ScreenGui", {
 			DisplayOrder = 10,
 			IgnoreGuiInset = true,
-			Enabled = var9,
+			Enabled = UseStateResult4,
 			ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
-			ScreenInsets = if fFlagLuaAppSupportDeviceSafeInsets then Enum.ScreenInsets.None else nil
+			ScreenInsets = if FFlagLuaAppSupportDeviceSafeInsets then Enum.ScreenInsets.None else nil
 		}, {
-			reactModule.createElement(focusNavigableSurfaceWrapper, {
+			ReactModule.createElement(FocusNavigableSurfaceWrapper, {
 				isIsolated = true,
-				surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.PopUp,
-				frameProps = { ref = var11 },
+				surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.PopUp,
+				frameProps = { ref = UseRefResult },
 				customEventHandlers = {
-					[focusNavigationEventNameEnum.NavigateBack] = {
-						handler = reactModule.useMemo(function()
-							-- upvalues: inputHandlersModule (copy), p1 (ref), notificationHelper (copy), eventStream (copy), analyticsConstantsModule (copy)
-							return inputHandlersModule.onRelease(function(p2)
-								-- upvalues: p1 (copy), notificationHelper (copy), eventStream (copy), analyticsConstantsModule (copy)
-								p1.displayStream(false)
-								notificationHelper.fireEvent(eventStream, analyticsConstantsModule.Context.click, analyticsConstantsModule.EventNames.closeContent, {
-									closeMethod = analyticsConstantsModule.CloseMethod.focusNavigationBack
-								})
-								p2:cancel()
-							end)
-						end, { p1.displayStream })
-					}
+					[FocusNavigationEventNameEnum.NavigateBack] = { handler = UseMemoResult }
 				}
 			}, {
-				TextButtonOverlayBackground = reactModule.createElement("TextButton", {
-					ref = var11,
+				TextButtonOverlayBackground = ReactModule.createElement("TextButton", {
+					ref = UseRefResult,
 					Selectable = false,
 					Size = UDim2.new(1, 0, 1, 0),
 					Position = UDim2.new(0.5, 0, 0.5, 0),
 					AnchorPoint = Vector2.new(0.5, 0.5),
-					BackgroundTransparency = if var6 then var1.Theme.Overlay.Transparency else 1,
-					BackgroundColor3 = var1.Theme.Overlay.Color,
+					BackgroundTransparency = if UseStateResult3 then UseStyleResult.Theme.Overlay.Transparency else 1,
+					BackgroundColor3 = UseStyleResult.Theme.Overlay.Color,
 					AutoButtonColor = false,
 					BorderSizePixel = 0,
 					Text = "",
-					[reactModule.Event.Activated] = function()
-						-- upvalues: p1 (ref), notificationHelper (copy), eventStream (copy), analyticsConstantsModule (copy)
+					[ReactModule.Event.Activated] = function() --[[ Line: 147 ]]
+						-- upvalues: p1 (copy), NotificationHelper (upval), EventStream (upval), AnalyticsConstantsModule (upval)
 						p1.displayStream(false)
-						notificationHelper.fireEvent(eventStream, analyticsConstantsModule.Context.click, analyticsConstantsModule.EventNames.closeContent, {
-							closeMethod = analyticsConstantsModule.CloseMethod.backgroundOverlay
+						NotificationHelper.fireEvent(EventStream, AnalyticsConstantsModule.Context.click, AnalyticsConstantsModule.EventNames.closeContent, {
+							closeMethod = AnalyticsConstantsModule.CloseMethod.backgroundOverlay
 						})
 					end
 				}, {
-					StreamNotificationsFrame = reactModule.createElement("TextButton", {
+					StreamNotificationsFrame = ReactModule.createElement("TextButton", {
 						AutoButtonColor = false,
 						BorderSizePixel = 0,
 						Text = "",
 						Selectable = false,
-						Size = if var4 then UDim2.new(1, 0, 1, 0) else UDim2.new(0, constantsModule.Modal.Width, 0, constantsModule.Modal.Height),
+						Size = if UseStateResult1 then UDim2.new(1, 0, 1, 0) else UDim2.new(0, ConstantsModule.Modal.Width, 0, ConstantsModule.Modal.Height),
 						Position = UDim2.new(0.5, 0, 0.5, 0),
 						AnchorPoint = Vector2.new(0.5, 0.5),
-						BackgroundColor3 = var1.Theme.BackgroundDefault.Color,
-						BackgroundTransparency = var1.Theme.BackgroundDefault.Transparency
+						BackgroundColor3 = UseStyleResult.Theme.BackgroundDefault.Color,
+						BackgroundTransparency = UseStyleResult.Theme.BackgroundDefault.Transparency
 					}, {
-						UICorner = reactModule.createElement("UICorner", {
-							CornerRadius = if not var4 then UDim.new(0, constantsModule.Modal.CornerRadius) else UDim.new(0, 0)
+						UICorner = ReactModule.createElement("UICorner", {
+							CornerRadius = if UseStateResult1 then UDim.new(0, 0) else UDim.new(0, ConstantsModule.Modal.CornerRadius)
 						}),
-						Header = reactModule.createElement(streamNotificationsHeaderModule, { isSmallScreen = var4, displayStream = p1.displayStream }),
-						StreamNotificationsContent = reactModule.createElement(streamNotificationsContentModule, {
-							showOverlay = var8,
-							isSmallScreen = var4,
+						Header = ReactModule.createElement(StreamNotificationsHeaderModule, {
+							isSmallScreen = UseStateResult1,
+							displayStream = p1.displayStream
+						}),
+						StreamNotificationsContent = ReactModule.createElement(StreamNotificationsContentModule, {
+							showOverlay = UseResult,
+							isSmallScreen = UseStateResult1,
 							displayStream = p1.displayStream,
-							setDisplayScreenGuiEnabled = var10
+							setDisplayScreenGuiEnabled = UseStateResult2_3
 						})
 					})
 				})
 			})
 		})
-	}, coreGuiService)
+	}, CoreGui)
 end

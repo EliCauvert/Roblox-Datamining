@@ -1,8 +1,8 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local reactModule = require(parent.React)
-local compositionStyleSheet = require(parent.AppComposition).CompositionStyleSheet
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local ReactModule = require(Parent.React)
+local CompositionStyleSheet = require(Parent.AppComposition).CompositionStyleSheet
 
-return function()
-	-- upvalues: compositionStyleSheet (ref), reactModule (ref)
-	return if compositionStyleSheet then reactModule.createElement(compositionStyleSheet) else nil
+return function() --[[ Line: 9 | Named "BuildExperienceCompositionStyleSheet" ]]
+	-- upvalues: CompositionStyleSheet (copy), ReactModule (copy)
+	return if CompositionStyleSheet then ReactModule.createElement(CompositionStyleSheet) else nil
 end

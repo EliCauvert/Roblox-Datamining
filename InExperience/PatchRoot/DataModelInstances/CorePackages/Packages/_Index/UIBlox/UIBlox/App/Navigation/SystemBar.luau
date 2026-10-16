@@ -1,315 +1,316 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local roactModule = require(parent_1.Roact)
-local tModule = require(parent_1.t)
-local cryoModule = require(parent_1.Cryo)
-local statusIndicator = require(parent_1.Foundation).StatusIndicator
-local withStyleModule = require(parent.Core.Style.withStyle)
-local controlStateModule = require(parent.Core.Control.Enum.ControlState)
-local imageSetComponentModule = require(parent.Core.ImageSet.ImageSetComponent)
-local validateImageSetDataModule = require(parent.Core.ImageSet.Validator.validateImageSetData)
-local badgeVariantModule = require(parent.App.Indicator.Enum.BadgeVariant)
-local badgeStatesModule = require(parent.App.Indicator.Enum.BadgeStates)
-local iconSizeModule = require(parent.App.ImageSet.Enum.IconSize)
-local getIconSizeModule = require(parent.App.ImageSet.getIconSize)
-local interactableListModule = require(parent.Core.Control.InteractableList)
-local withAnimationModule = require(parent.Core.Animation.withAnimation)
-local migrateBadgeVariantModule = require(parent.Utility.migrateBadgeVariant)
-local placementModule = require(script.Parent.Enum.Placement)
-local t = { frequency = 3 }
-local var1 = getIconSizeModule(iconSizeModule.Medium)
-local var2 = var1 + 8
-local var3 = (var2 - var1) / 2
-local var4 = (var2 - var1) / 2
-local var5 = var3 + 4
-local var6 = var4 - 4
-local var7 = 12 + (64 - var2) / 2
-local var8 = 4 + (64 - var2)
-local systemBar = roactModule.PureComponent:extend("SystemBar")
-systemBar.validateProps = tModule.strictInterface({
-	itemList = tModule.array(tModule.strictInterface({
-		iconOn = tModule.optional(validateImageSetDataModule),
-		iconOff = tModule.optional(validateImageSetDataModule),
-		iconImageComponent = tModule.optional(tModule.union(tModule.table, tModule.callback)),
-		iconComponent = tModule.optional(tModule.union(tModule.table, tModule.callback)),
-		onActivated = tModule.callback,
-		badgeValue = tModule.optional(tModule.union(tModule.integer, tModule.string, badgeStatesModule.isEnumValue)),
-		itemSize = tModule.optional(tModule.UDim2),
-		bottomAligned = tModule.optional(tModule.boolean)
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local RoactModule = require(Parent1.Roact)
+local TModule = require(Parent1.t)
+local CryoModule = require(Parent1.Cryo)
+local StatusIndicator = require(Parent1.Foundation).StatusIndicator
+local WithStyleModule = require(Parent.Core.Style.withStyle)
+local ControlStateModule = require(Parent.Core.Control.Enum.ControlState)
+local ImageSetComponentModule = require(Parent.Core.ImageSet.ImageSetComponent)
+local ValidateImageSetDataModule = require(Parent.Core.ImageSet.Validator.validateImageSetData)
+local BadgeVariantModule = require(Parent.App.Indicator.Enum.BadgeVariant)
+local BadgeStatesModule = require(Parent.App.Indicator.Enum.BadgeStates)
+local InteractableListModule = require(Parent.Core.Control.InteractableList)
+local WithAnimationModule = require(Parent.Core.Animation.withAnimation)
+local MigrateBadgeVariantModule = require(Parent.Utility.migrateBadgeVariant)
+local PlacementModule = require(script.Parent.Enum.Placement)
+local config = { frequency = 3 }
+local XOffset: number = require(Parent.App.ImageSet.getIconSize)(require(Parent.App.ImageSet.Enum.IconSize).Medium)
+local NewXOffset = XOffset + 8
+local NewXOffsetRatio = (NewXOffset - XOffset) / 2
+local NewXOffsetRatio1 = (NewXOffset - XOffset) / 2
+local NewNewXOffsetRatio = NewXOffsetRatio + 4
+local NewXOffsetRatioDelta = NewXOffsetRatio1 - 4
+local Offset = 12 + (64 - NewXOffset) / 2
+local Offset1 = 4 + (64 - NewXOffset)
+local SystemBar = RoactModule.PureComponent:extend("SystemBar")
+SystemBar.validateProps = TModule.strictInterface({
+	itemList = TModule.array(TModule.strictInterface({
+		iconOn = TModule.optional(ValidateImageSetDataModule),
+		iconOff = TModule.optional(ValidateImageSetDataModule),
+		iconImageComponent = TModule.optional(TModule.union(TModule.table, TModule.callback)),
+		iconComponent = TModule.optional(TModule.union(TModule.table, TModule.callback)),
+		onActivated = TModule.callback,
+		badgeValue = TModule.optional(TModule.union(TModule.integer, TModule.string, BadgeStatesModule.isEnumValue)),
+		itemSize = TModule.optional(TModule.UDim2),
+		bottomAligned = TModule.optional(TModule.boolean)
 	})),
-	selection = tModule.optional(tModule.integer),
-	placement = tModule.optional(placementModule.isEnumValue),
-	hidden = tModule.optional(tModule.boolean),
-	onSafeAreaChanged = tModule.optional(tModule.callback),
-	size = tModule.optional(tModule.UDim2),
-	position = tModule.optional(tModule.UDim2),
-	layoutOrder = tModule.optional(tModule.integer),
-	layoutPaddingOffset = tModule.optional(tModule.UDim),
-	firstItemPaddingOffset = tModule.optional(tModule.UDim),
-	lastItemPaddingOffset = tModule.optional(tModule.UDim),
-	[roactModule.Children] = tModule.optional(tModule.any),
-	roundCorners = tModule.optional(tModule.boolean),
-	buttonStroke = tModule.optional(tModule.boolean),
-	bgTransparency = tModule.optional(tModule.integer),
-	sortOrder = tModule.optional(tModule.enum(Enum.SortOrder)),
-	clipsDescendants = tModule.optional(tModule.boolean),
-	experimentalTabSizePortraitY = tModule.optional(tModule.number)
+	selection = TModule.optional(TModule.integer),
+	placement = TModule.optional(PlacementModule.isEnumValue),
+	hidden = TModule.optional(TModule.boolean),
+	onSafeAreaChanged = TModule.optional(TModule.callback),
+	size = TModule.optional(TModule.UDim2),
+	position = TModule.optional(TModule.UDim2),
+	layoutOrder = TModule.optional(TModule.integer),
+	layoutPaddingOffset = TModule.optional(TModule.UDim),
+	firstItemPaddingOffset = TModule.optional(TModule.UDim),
+	lastItemPaddingOffset = TModule.optional(TModule.UDim),
+	[RoactModule.Children] = TModule.optional(TModule.any),
+	roundCorners = TModule.optional(TModule.boolean),
+	buttonStroke = TModule.optional(TModule.boolean),
+	bgTransparency = TModule.optional(TModule.integer),
+	sortOrder = TModule.optional(TModule.enum(Enum.SortOrder)),
+	clipsDescendants = TModule.optional(TModule.boolean),
+	experimentalTabSizePortraitY = TModule.optional(TModule.number)
 })
-systemBar.defaultProps = {
+SystemBar.defaultProps = {
 	clipsDescendants = true,
 	experimentalTabSizePortraitY = 48,
-	placement = placementModule.Auto,
+	placement = PlacementModule.Auto,
 	layoutPaddingOffset = UDim.new(0, 0),
 	firstItemPaddingOffset = UDim.new(0, 0),
 	lastItemPaddingOffset = UDim.new(0, 0)
 }
 
-function systemBar.isPortrait(p1)
-	-- upvalues: placementModule (ref)
-	return if p1.props.placement == placementModule.Left then false else p1.props.placement == placementModule.Bottom or p1.state.portrait
+function SystemBar.isPortrait(p1) --[[ Line: 145 ]]
+	-- upvalues: PlacementModule (copy)
+	return p1.props.placement ~= PlacementModule.Left and (p1.props.placement == PlacementModule.Bottom or p1.state.portrait)
 end
 
-function systemBar.renderItem(p1, p2, p3, p4, p5)
-	-- upvalues: controlStateModule (ref), placementModule (ref), roactModule (ref), badgeStatesModule (ref), tModule (ref), var3 (ref), var4 (ref), var6 (ref), var5 (ref), withAnimationModule (ref), withStyleModule (ref), imageSetComponentModule (ref), var1 (ref), var1 (ref), statusIndicator (ref), migrateBadgeVariantModule (ref), badgeVariantModule (ref), t (ref)
-	local var9
-	if p2.iconOn ~= nil then
-		var9 = if p2.iconOff == nil then if p2.iconImageComponent == nil then p2.iconComponent ~= nil else true else true
-	end
-	assert(var9, "items must define either iconOn and iconOff or iconImageComponent or iconComponent")
-	local var10 = p3 == controlStateModule.Pressed
-	local var11 = var10 or p3 == controlStateModule.Hover
+function SystemBar.renderItem(p1, p2, Hover, Selected, LayoutOrder) --[[ Line: 155 ]]
+	-- upvalues: ControlStateModule (copy), PlacementModule (copy), RoactModule (copy), BadgeStatesModule (copy), TModule (copy), NewXOffsetRatio (copy), NewXOffsetRatio1 (copy), NewXOffsetRatioDelta (copy), NewNewXOffsetRatio (copy), WithAnimationModule (copy), WithStyleModule (copy), ImageSetComponentModule (copy), XOffset (copy), XOffset (copy), StatusIndicator (copy), MigrateBadgeVariantModule (copy), BadgeVariantModule (copy), config (copy)
+	assert((if p2.iconOn == nil then p2.iconImageComponent ~= nil else p2.iconOff ~= nil or p2.iconImageComponent ~= nil) or p2.iconComponent ~= nil, "items must define either iconOn and iconOff or iconImageComponent or iconComponent")
+	local IsHoverMatch = Hover == ControlStateModule.Pressed
+	local IsHoverMatch1: boolean = IsHoverMatch or Hover == ControlStateModule.Hover
 	
 	if p2.iconComponent then
-		return roactModule.createElement(p2.iconComponent, {
-			placement = if p1:isPortrait() then placementModule.Bottom else placementModule.Left,
-			hovered = var11,
-			selected = p4,
-			pressed = var10,
+		return RoactModule.createElement(p2.iconComponent, {
+			placement = if p1:isPortrait() then PlacementModule.Bottom else PlacementModule.Left,
+			hovered = IsHoverMatch1,
+			selected = Selected,
+			pressed = IsHoverMatch,
 			badgeValue = p2.badgeValue
-		}), { LayoutOrder = p5 }
+		}), { LayoutOrder = LayoutOrder }
 	end
-	local var12 = if p2.badgeValue then p2.badgeValue == badgeStatesModule.isEmpty or (if tModule.string(p2.badgeValue) then true else p2.badgeValue > 0) else false
-	local var13 = var3
-	local var14 = var4
+	local IsBadgeValueMatch = nil
+	IsBadgeValueMatch = if p2.badgeValue then p2.badgeValue == BadgeStatesModule.isEmpty or (if TModule.string(p2.badgeValue) then true else p2.badgeValue > 0) else false
+	local PositionX = NewXOffsetRatio
+	local PositionY = NewXOffsetRatio1
 	
-	if var11 then
+	if IsHoverMatch1 then
 		if p1:isPortrait() then
-			var14 = var6
+			PositionY = NewXOffsetRatioDelta
 		else
-			var13 = var5
+			PositionX = NewNewXOffsetRatio
 		end
 	end
-	return withAnimationModule({ positionX = var13, positionY = var14 }, function(p6)
-		-- upvalues: withStyleModule (copy), roactModule (copy), p2 (ref), imageSetComponentModule (copy), var1 (copy), var1 (copy), p1 (ref), p4 (ref), var10 (ref), var12 (write), statusIndicator (copy), badgeStatesModule (copy), migrateBadgeVariantModule (copy), badgeVariantModule (copy)
-		return withStyleModule(function(p7)
-			-- upvalues: roactModule (copy), p2 (copy), imageSetComponentModule (copy), p6 (ref), var1 (copy), var1 (copy), p1 (copy), p4 (copy), var10 (copy), var12 (copy), statusIndicator (copy), badgeStatesModule (copy), migrateBadgeVariantModule (copy), badgeVariantModule (copy)
-			return roactModule.createElement(p2.iconImageComponent or imageSetComponentModule.Label, {
-				Position = UDim2.fromOffset(math.floor(p6.positionX + 0.5), math.floor(p6.positionY + 0.5)),
-				Size = UDim2.fromOffset(var1, var1),
+	return WithAnimationModule({ positionX = PositionX, positionY = PositionY }, function(p3) --[[ Line: 208 ]]
+		-- upvalues: WithStyleModule (upval), RoactModule (upval), p2 (copy), ImageSetComponentModule (upval), XOffset (upval), XOffset (upval), p1 (copy), Selected (copy), IsHoverMatch (copy), IsBadgeValueMatch (ref), StatusIndicator (upval), BadgeStatesModule (upval), MigrateBadgeVariantModule (upval), BadgeVariantModule (upval)
+		return WithStyleModule(function(p4) --[[ Line: 209 ]]
+			-- upvalues: RoactModule (upval), p2 (upval), ImageSetComponentModule (upval), p3 (copy), XOffset (upval), XOffset (upval), p1 (upval), Selected (upval), IsHoverMatch (upval), IsBadgeValueMatch (upval), StatusIndicator (upval), BadgeStatesModule (upval), MigrateBadgeVariantModule (upval), BadgeVariantModule (upval)
+			return RoactModule.createElement(p2.iconImageComponent or ImageSetComponentModule.Label, {
+				Position = UDim2.fromOffset(math.floor(p3.positionX + 0.5), (math.floor(p3.positionY + 0.5))),
+				Size = UDim2.fromOffset(XOffset, XOffset),
 				BackgroundTransparency = if p1.props.buttonStroke then 0.99 else 1,
-				Image = if p4 then p2.iconOn else p2.iconOff,
-				ImageColor3 = p7.Theme.IconDefault.Color,
-				ImageTransparency = if var10 then 0.5 else 0
+				Image = Selected and p2.iconOn or p2.iconOff,
+				ImageColor3 = p4.Theme.IconDefault.Color,
+				ImageTransparency = if IsHoverMatch then 0.5 else 0
 			}, {
-				Badge = var12 and roactModule.createElement(statusIndicator, {
-					position = if p2.badgeValue == badgeStatesModule.isEmpty then UDim2.fromOffset(22, 2) else UDim2.fromOffset(18, -2),
+				Badge = IsBadgeValueMatch and RoactModule.createElement(StatusIndicator, {
+					position = if p2.badgeValue == BadgeStatesModule.isEmpty then UDim2.fromOffset(22, 2) else UDim2.fromOffset(18, -2),
 					value = tonumber(p2.badgeValue),
-					variant = migrateBadgeVariantModule(badgeVariantModule.Default),
+					variant = MigrateBadgeVariantModule(BadgeVariantModule.Default),
 					max = if tonumber(p2.badgeValue) then 99 else nil
 				}),
-				UICorner = p1.props.roundCorners and roactModule.createElement("UICorner", { CornerRadius = UDim.new(0.15, 0) }) or nil,
-				UIStroke = p1.props.buttonStroke and roactModule.createElement("UIStroke", {
+				UICorner = p1.props.roundCorners and RoactModule.createElement("UICorner", { CornerRadius = UDim.new(0.15, 0) }) or nil,
+				UIStroke = p1.props.buttonStroke and RoactModule.createElement("UIStroke", {
 					Transparency = 0,
 					Thickness = 1,
 					Color = Color3.new(0.4, 0.4, 0.4)
 				}) or nil
 			})
 		end)
-	end, t), { LayoutOrder = p5 }
+	end, config), { LayoutOrder = LayoutOrder }
 end
 
-function systemBar.renderPortrait(p1, p2, p3)
-	-- upvalues: withAnimationModule (ref), roactModule (ref), cryoModule (ref), var2 (ref), t (ref)
-	return withAnimationModule({
+function SystemBar.renderPortrait(p1, p2, p3) --[[ Line: 244 ]]
+	-- upvalues: WithAnimationModule (copy), RoactModule (copy), CryoModule (copy), NewXOffset (copy), config (copy)
+	return WithAnimationModule({
 		offset = if p1.props.hidden then 0 else -p1.props.experimentalTabSizePortraitY
-	}, function(p4)
-		-- upvalues: roactModule (copy), cryoModule (copy), p2 (ref), p1 (ref), var2 (copy), p3 (ref)
-		return roactModule.createElement("Frame", cryoModule.Dictionary.join(p2, {
+	}, function(p4) --[[ Line: 247 ]]
+		-- upvalues: RoactModule (upval), CryoModule (upval), p2 (copy), p1 (copy), NewXOffset (upval), p3 (copy)
+		return RoactModule.createElement("Frame", CryoModule.Dictionary.join(p2, {
 			ZIndex = 99,
-			Position = UDim2.new(0, 0, 1, math.floor(p4.offset + 0.5)),
+			Position = UDim2.new(0, 0, 1, (math.floor(p4.offset + 0.5))),
 			Size = UDim2.new(1, 0, 0, p1.props.experimentalTabSizePortraitY)
 		}), {
-			Layout = roactModule.createElement("UIListLayout", { HorizontalAlignment = Enum.HorizontalAlignment.Center }),
-			InnerFrame = roactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, cryoModule.Dictionary.join({
-				Constraint = roactModule.createElement("UISizeConstraint", {
+			Layout = RoactModule.createElement("UIListLayout", { HorizontalAlignment = Enum.HorizontalAlignment.Center }),
+			InnerFrame = RoactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, CryoModule.Dictionary.join({
+				Constraint = RoactModule.createElement("UISizeConstraint", {
 					MaxSize = Vector2.new(600, p1.props.experimentalTabSizePortraitY)
 				}),
-				Layout = roactModule.createElement("UIListLayout", {
+				Layout = RoactModule.createElement("UIListLayout", {
 					FillDirection = Enum.FillDirection.Horizontal,
 					HorizontalAlignment = Enum.HorizontalAlignment.Center,
 					VerticalAlignment = Enum.VerticalAlignment.Center,
-					Padding = p1.props.layoutPaddingOffset + UDim.new(1 / #p1.props.itemList, -var2),
+					Padding = p1.props.layoutPaddingOffset + UDim.new(1 / #p1.props.itemList, -NewXOffset),
 					SortOrder = p1.props.sortOrder
 				}, {})
 			}, p3))
 		})
-	end, t)
+	end, config)
 end
 
-function systemBar.renderLandscape(p1, p2, p3, p4)
-	-- upvalues: withAnimationModule (ref), roactModule (ref), cryoModule (ref), var7 (ref), var8 (ref), t (ref)
-	return withAnimationModule({ offset = if p1.props.hidden then -64 else 0 }, function(p5)
-		-- upvalues: roactModule (copy), cryoModule (copy), p2 (ref), p4 (ref), p1 (ref), var7 (copy), var8 (copy), p3 (ref)
-		return roactModule.createElement("Frame", cryoModule.Dictionary.join(p2, {
+function SystemBar.renderLandscape(p1, p2, FilterResult, p3) --[[ Line: 283 ]]
+	-- upvalues: WithAnimationModule (copy), RoactModule (copy), CryoModule (copy), Offset (copy), Offset1 (copy), config (copy)
+	return WithAnimationModule({ offset = if p1.props.hidden then -64 else 0 }, function(p4) --[[ Line: 286 ]]
+		-- upvalues: RoactModule (upval), CryoModule (upval), p2 (copy), p3 (copy), p1 (copy), Offset (upval), Offset1 (upval), FilterResult (copy)
+		return RoactModule.createElement("Frame", CryoModule.Dictionary.join(p2, {
 			ZIndex = 99,
-			Position = UDim2.new(0, math.floor(p5.offset + 0.5), 0, 0),
+			Position = UDim2.new(0, math.floor(p4.offset + 0.5), 0, 0),
 			Size = UDim2.new(0, 64, 1, 0),
-			BackgroundTransparency = if p4 then 1 else nil
-		}), cryoModule.Dictionary.join({
-			Padding = roactModule.createElement("UIPadding", {
-				PaddingTop = if not p4 then p1.props.firstItemPaddingOffset + UDim.new(0, var7) else nil,
-				PaddingBottom = if p4 then p1.props.lastItemPaddingOffset + UDim.new(0, var8) else nil
+			BackgroundTransparency = if p3 then 1 else nil
+		}), CryoModule.Dictionary.join({
+			Padding = RoactModule.createElement("UIPadding", {
+				PaddingTop = if p3 then nil else p1.props.firstItemPaddingOffset + UDim.new(0, Offset),
+				PaddingBottom = if p3 then p1.props.lastItemPaddingOffset + UDim.new(0, Offset1) else nil
 			}),
-			Layout = roactModule.createElement("UIListLayout", {
+			Layout = RoactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Vertical,
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
-				VerticalAlignment = if p4 then Enum.VerticalAlignment.Bottom else nil,
-				Padding = p1.props.layoutPaddingOffset + UDim.new(0, var8),
+				VerticalAlignment = if p3 then Enum.VerticalAlignment.Bottom else nil,
+				Padding = p1.props.layoutPaddingOffset + UDim.new(0, Offset1),
 				SortOrder = p1.props.sortOrder
 			})
-		}, p3))
-	end, t)
+		}, FilterResult))
+	end, config)
 end
 
-function systemBar.renderBackground(value, p1, p2)
-	-- upvalues: cryoModule (ref), roactModule (ref)
-	if value:isPortrait() then
-		return value:renderPortrait(p1, p2)
+function SystemBar.renderBackground(p1, p2, MapResult) --[[ Line: 316 ]]
+	-- upvalues: CryoModule (copy), RoactModule (copy)
+	if p1:isPortrait() then
+		return p1:renderPortrait(p2, MapResult)
 	end
-	local var9 = cryoModule.List.filter(p2, function(_, p3)
-		-- upvalues: value (ref)
-		return value.props.itemList[p3].bottomAligned
+	local FilterResult = CryoModule.List.filter(MapResult, function(_, p3) --[[ Line: 323 ]]
+		-- upvalues: p1 (copy)
+		return p1.props.itemList[p3].bottomAligned
 	end)
-	local var10 = value:renderLandscape(p1, cryoModule.List.filter(p2, function(_, p3)
-		-- upvalues: value (ref)
-		return not value.props.itemList[p3].bottomAligned
-	end))
+	local RenderLandscapeResult = p1:renderLandscape(p2, (CryoModule.List.filter(MapResult, function(_, p3): boolean --[[ Line: 320 ]]
+		-- upvalues: p1 (copy)
+		return not p1.props.itemList[p3].bottomAligned
+	end)))
 	
-	if #var9 > 0 then
-		var10 = roactModule.createFragment({
-			NavBar = var10,
-			BottomAlignedNavBar = value:renderLandscape(p1, var9, true)
+	if #FilterResult > 0 then
+		RenderLandscapeResult = RoactModule.createFragment({
+			NavBar = RenderLandscapeResult,
+			BottomAlignedNavBar = p1:renderLandscape(p2, FilterResult, true)
 		})
 	end
-	return var10
+	return RenderLandscapeResult
 end
 
-function systemBar.renderSafeArea(p1)
-	-- upvalues: roactModule (ref)
-	local uDim2, uDim2_1
-	local _ = nil
-	local _ = nil
-	
+function SystemBar.renderSafeArea(p1) --[[ Line: 337 ]]
+	-- upvalues: RoactModule (copy)
+	local _UDim2 = nil
+	local _UDim2_1 = nil
 	if p1.props.hidden then
-		uDim2 = UDim2.new(0, 0, 0, 0)
-		uDim2_1 = UDim2.new(1, 0, 1, 0)
+		_UDim2 = UDim2.new(0, 0, 0, 0)
+		_UDim2_1 = UDim2.new(1, 0, 1, 0)
 	elseif p1:isPortrait() then
-		uDim2 = UDim2.new(0, 0, 0, 0)
-		uDim2_1 = UDim2.new(1, 0, 1, -p1.props.experimentalTabSizePortraitY)
+		_UDim2 = UDim2.new(0, 0, 0, 0)
+		_UDim2_1 = UDim2.new(1, 0, 1, -p1.props.experimentalTabSizePortraitY)
 	else
-		uDim2 = UDim2.new(0, 64, 0, 0)
-		uDim2_1 = UDim2.new(1, -64, 1, 0)
+		_UDim2 = UDim2.new(0, 64, 0, 0)
+		_UDim2_1 = UDim2.new(1, -64, 1, 0)
 	end
-	return roactModule.createElement("Frame", {
-		Position = uDim2,
-		Size = uDim2_1,
+	return RoactModule.createElement("Frame", {
+		Position = _UDim2,
+		Size = _UDim2_1,
 		BackgroundTransparency = 1,
-		[roactModule.Change.AbsoluteSize] = p1.onSafeAreaEvent,
-		[roactModule.Change.AbsolutePosition] = p1.onSafeAreaEvent
-	}, p1.props[roactModule.Children])
+		[RoactModule.Change.AbsoluteSize] = p1.onSafeAreaEvent,
+		[RoactModule.Change.AbsolutePosition] = p1.onSafeAreaEvent
+	}, p1.props[RoactModule.Children])
 end
 
-function systemBar.renderList(p1, p2, p3)
-	-- upvalues: withStyleModule (ref), cryoModule (ref), roactModule (ref)
-	return withStyleModule(function(p4)
-		-- upvalues: cryoModule (copy), p2 (ref), p3 (ref), roactModule (copy), p1 (ref)
-		local theme = p4.Theme
+function SystemBar.renderList(p1, p2, Callback) --[[ Line: 358 ]]
+	-- upvalues: WithStyleModule (copy), CryoModule (copy), RoactModule (copy)
+	return WithStyleModule(function(p3) --[[ Line: 359 ]]
+		-- upvalues: CryoModule (upval), p2 (copy), Callback (copy), RoactModule (upval), p1 (copy)
+		local Theme = p3.Theme
 		
-		return roactModule.createElement("Frame", {
+		return RoactModule.createElement("Frame", {
 			Position = p1.props.position or UDim2.new(0, 0, 0, 0),
 			Size = p1.props.size or UDim2.new(1, 0, 1, 0),
 			BackgroundColor3 = Color3.new(0, 0, 0),
 			ClipsDescendants = p1.props.clipsDescendants,
 			LayoutOrder = p1.props.layoutOrder,
 			BackgroundTransparency = p1.props.bgTransparency or 1,
-			[roactModule.Change.AbsoluteSize] = function(p5)
-				-- upvalues: p1 (copy)
-				if p1.state.portrait and p5.AbsoluteSize.Y < p5.AbsoluteSize.X then
+			[RoactModule.Change.AbsoluteSize] = function(Frame: Frame) --[[ Line: 371 ]]
+				-- upvalues: p1 (upval)
+				if p1.state.portrait and Frame.AbsoluteSize.Y < Frame.AbsoluteSize.X then
 					p1:setState({ portrait = false })
 					
 					return
-				elseif not p1.state.portrait and p5.AbsoluteSize.X < p5.AbsoluteSize.Y then
+				end
+				if not p1.state.portrait and Frame.AbsoluteSize.X < Frame.AbsoluteSize.Y then
 					p1:setState({ portrait = true })
 				end
 			end
 		}, {
 			NavBar = p1:renderBackground({
 				BorderSizePixel = 0,
-				BackgroundColor3 = theme.NavigationBar.Color,
-				BackgroundTransparency = if p1.props.roundCorners then 1 else theme.NavigationBar.Transparency
-			}, cryoModule.List.map(p2, function(_, p5)
-				-- upvalues: p3 (copy)
-				return p3(p5)
-			end)),
+				BackgroundColor3 = Theme.NavigationBar.Color,
+				BackgroundTransparency = if p1.props.roundCorners then 1 else Theme.NavigationBar.Transparency
+			}, (CryoModule.List.map(p2, function(_, p4) --[[ Line: 361 ]]
+				-- upvalues: Callback (upval)
+				return Callback(p4)
+			end))),
 			SafeArea = p1:renderSafeArea()
 		}, {
-			UICorner = p1.props.roundCorners and roactModule.createElement("UICorner", { CornerRadius = UDim.new(0.15, 0) or nil }) or nil
+			UICorner = p1.props.roundCorners and RoactModule.createElement("UICorner", { CornerRadius = UDim.new(0.15, 0) or nil }) or nil
 		})
 	end)
 end
 
-function systemBar.init(p1)
+function SystemBar.init(p1) --[[ Line: 397 ]]
 	p1:setState({ portrait = true })
 	
-	function p28.onSelectionChanged(p2)
-		-- upvalues: p1 (ref)
-		if #p2 > 0 then
-			local var9 = p1.props.itemList[p2[1]]
+	function p1.onSelectionChanged(Entry) --[[ Line: 401 ]]
+		-- upvalues: p1 (copy)
+		if #Entry > 0 then
+			local Item = p1.props.itemList[Entry[1]]
 			
-			if var9 and var9.onActivated then
-				var9.onActivated()
+			if Item and Item.onActivated then
+				Item.onActivated()
 			end
 		end
 	end
 	
-	function p28.onSafeAreaEvent(p2)
-		-- upvalues: p1 (ref)
+	function p1.onSafeAreaEvent(Frame: Frame) --[[ Line: 409 ]]
+		-- upvalues: p1 (copy)
 		if p1.props.onSafeAreaChanged then
 			p1.props.onSafeAreaChanged({
-				Position = p2.Position,
-				AbsolutePosition = p2.AbsolutePosition,
-				Size = p2.Size,
-				AbsoluteSize = p2.AbsoluteSize
+				Position = Frame.Position,
+				AbsolutePosition = Frame.AbsolutePosition,
+				Size = Frame.Size,
+				AbsoluteSize = Frame.AbsoluteSize
 			})
 		end
 	end
 end
 
-function systemBar.render(p1)
-	-- upvalues: roactModule (ref), interactableListModule (ref), var2 (ref), var2 (ref)
-	local itemList = p1.props.itemList
-	local selection = p1.props.selection
+function SystemBar.render(p1) --[[ Line: 421 ]]
+	-- upvalues: RoactModule (copy), InteractableListModule (copy), NewXOffset (copy), NewXOffset (copy)
+	local ItemList = p1.props.itemList
+	local Selection = p1.props.selection
 	
-	return roactModule.createElement(interactableListModule, {
-		itemList = itemList,
-		selection = selection and (if itemList[selection] == nil then nil else { selection }),
-		itemSize = UDim2.fromOffset(var2, var2),
-		renderList = function(...)
-			-- upvalues: p1 (ref)
+	if Selection then
+		if ItemList[Selection] == nil then
+			Selection = nil
+		else
+			Selection = { Selection }
+		end
+	end
+	return RoactModule.createElement(InteractableListModule, {
+		itemList = ItemList,
+		selection = Selection,
+		itemSize = UDim2.fromOffset(NewXOffset, NewXOffset),
+		renderList = function(...) --[[ Line: 437 ]]
+			-- upvalues: p1 (copy)
 			return p1:renderList(...)
 		end,
-		renderItem = function(...)
-			-- upvalues: p1 (ref)
+		renderItem = function(...) --[[ Line: 440 ]]
+			-- upvalues: p1 (copy)
 			return p1:renderItem(...)
 		end,
 		sortOrder = p1.props.sortOrder,
@@ -317,4 +318,4 @@ function systemBar.render(p1)
 	})
 end
 
-return systemBar
+return SystemBar

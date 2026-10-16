@@ -1,47 +1,47 @@
-﻿local parent = script:FindFirstAncestor("FlyoutSidePanel").Parent
-local reactModule = require(parent.React)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local appPage = require(parent.RobloxAppEnums).AppPage
-local navigateDown = require(parent.NavigationRodux).Thunks.NavigateDown
-local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
-local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
-local foundationModule = require(parent.Foundation)
-local button = foundationModule.Button
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local buttonSize = foundationModule.Enums.ButtonSize
-local flyoutAnalyticsModule = require(script.Parent.Parent.Analytics.FlyoutAnalytics)
-local useRoactService = require(parent.RobloxAppHooks).useRoactService
-local appEventIngestService = require(parent.RoactServiceTags).AppEventIngestService
-local flyoutContentSettingsModule = require(script.Parent.Parent.Config.FlyoutContentSettings)
-local fFlagCTAChangeMorePageFlyoutButtonText = require(parent.SharedFlags).FFlagCTAChangeMorePageFlyoutButtonText
+﻿local Parent = script:FindFirstAncestor("FlyoutSidePanel").Parent
+local ReactModule = require(Parent.React)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local NavigateDownFunction = require(Parent.NavigationRodux).Thunks.NavigateDown
+local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
+local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
+local FoundationModule = require(Parent.Foundation)
+local Button = FoundationModule.Button
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local ButtonSize = FoundationModule.Enums.ButtonSize
+local FlyoutAnalyticsModule = require(script.Parent.Parent.Analytics.FlyoutAnalytics)
+local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
+local AppEventIngestService = require(Parent.RoactServiceTags).AppEventIngestService
+local FlyoutContentSettingsModule = require(script.Parent.Parent.Config.FlyoutContentSettings)
+local FFlagCTAChangeMorePageFlyoutButtonText = require(Parent.SharedFlags).FFlagCTAChangeMorePageFlyoutButtonText
 
-return function(value)
-	-- upvalues: useDispatch (ref), useRoactService (ref), appEventIngestService (ref), reactModule (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), flyoutContentSettingsModule (ref), flyoutAnalyticsModule (ref), useLocalization (ref), fFlagCTAChangeMorePageFlyoutButtonText (ref), button (ref), buttonVariant (ref), buttonSize (ref)
-	local var2 = useDispatch()
-	local var3 = useRoactService(appEventIngestService)
+return function(p1) --[[ Line: 29 | Named "FlyoutQuickSigninButton" ]]
+	-- upvalues: UseDispatchFunction (copy), UseRoactServiceFunction (copy), AppEventIngestService (copy), ReactModule (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), FlyoutContentSettingsModule (copy), FlyoutAnalyticsModule (copy), UseLocalizationFunction (copy), FFlagCTAChangeMorePageFlyoutButtonText (copy), Button (copy), ButtonVariant (copy), ButtonSize (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseRoactServiceResult = UseRoactServiceFunction(AppEventIngestService)
 	
-	return reactModule.createElement(button, {
+	return ReactModule.createElement(Button, {
 		testId = "--core-ui-flyout-button-quick-signin",
 		isDisabled = false,
-		text = useLocalization({
-			title = if fFlagCTAChangeMorePageFlyoutButtonText then "Authentication.Login.Action.QuickSignIn" else "Authentication.CrossDevice.Heading.QuickLogin"
+		text = UseLocalizationFunction({
+			title = if FFlagCTAChangeMorePageFlyoutButtonText then "Authentication.Login.Action.QuickSignIn" else "Authentication.CrossDevice.Heading.QuickLogin"
 		}).title,
-		variant = buttonVariant.Standard,
-		LayoutOrder = value.layoutOrder,
-		onActivated = reactModule.useCallback(function()
-			-- upvalues: value (ref), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var2 (ref), navigateDown (copy), flyoutContentSettingsModule (copy), flyoutAnalyticsModule (copy), var3 (ref)
-			value.closeDrawer()
-			local t = { name = appPage.CrossDeviceLogin }
+		variant = ButtonVariant.Standard,
+		LayoutOrder = p1.layoutOrder,
+		onActivated = ReactModule.useCallback(function() --[[ Line: 33 ]]
+			-- upvalues: p1 (copy), AppPage (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval), FlyoutContentSettingsModule (upval), FlyoutAnalyticsModule (upval), UseRoactServiceResult (copy)
+			p1.closeDrawer()
+			local config = { name = AppPage.CrossDeviceLogin }
 			
-			if fFlagSignalsNavP3Dispatch then
-				var1.down(var1.fromLegacyPage(t))
+			if FFlagSignalsNavP3Dispatch then
+				NavigationCommands.down(NavigationCommands.fromLegacyPage(config))
 			else
-				var2(navigateDown(t))
+				UseDispatchResult(NavigateDownFunction(config))
 			end
-			flyoutAnalyticsModule.sendMoreLegacyAndFlyoutItemClickEvent(var3, flyoutContentSettingsModule.ItemType.QuickSignin)
-		end, { var3, value.closeDrawer }),
-		size = buttonSize.Large,
+			FlyoutAnalyticsModule.sendMoreLegacyAndFlyoutItemClickEvent(UseRoactServiceResult, FlyoutContentSettingsModule.ItemType.QuickSignin)
+		end, { UseRoactServiceResult, p1.closeDrawer }),
+		size = ButtonSize.Large,
 		width = UDim.new(1, 0)
 	})
 end

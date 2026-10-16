@@ -1,207 +1,239 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local coreGuiService = game:GetService("CoreGui")
-local robloxGui = coreGuiService:WaitForChild("RobloxGui")
-local packages = corePackagesService.Packages
-local useLocalization = require(corePackagesService.Workspace.Packages.Localization).Hooks.useLocalization
-local reactModule = require(packages.React)
-local useAppPolicy = require(corePackagesService.Workspace.Packages.UniversalAppPolicy).useAppPolicy
-local useSelector = require(corePackagesService.Workspace.Packages.RoactUtils).Hooks.RoactRodux.useSelector
-local luauPolyfillModule = require(packages.LuauPolyfill)
-local setTimeout = luauPolyfillModule.setTimeout
-local clearTimeout = luauPolyfillModule.clearTimeout
+﻿local CorePackages = game:GetService("CorePackages")
+local CoreGui = game:GetService("CoreGui")
+local Packages = CorePackages.Packages
+local UseLocalizationFunction = require(CorePackages.Workspace.Packages.Localization).Hooks.useLocalization
+local ReactModule = require(Packages.React)
+local UseAppPolicyFunction = require(CorePackages.Workspace.Packages.UniversalAppPolicy).useAppPolicy
+local UseSelectorFunction = require(CorePackages.Workspace.Packages.RoactUtils).Hooks.RoactRodux.useSelector
+local LuauPolyfillModule = require(Packages.LuauPolyfill)
+local SetTimeoutFunction = LuauPolyfillModule.setTimeout
+local ClearTimeoutFunction = LuauPolyfillModule.clearTimeout
 local _ = require(script.Parent.Parent.Parent.Chrome.ChromeShared.Service.WindowSizeSignal)
-local useWindowSizeIsLargeModule = require(script.Parent.Parent.Parent.Chrome.ChromeShared.Hooks.useWindowSizeIsLarge)
-local UIBloxModule = require(packages.UIBlox)
-local interactable = UIBloxModule.Core.Control.Interactable
-local styledTextLabel = UIBloxModule.App.Text.StyledTextLabel
-local useStyle = UIBloxModule.Core.Style.useStyle
-local withTooltip = UIBloxModule.App.Dialog.TooltipV2.withTooltip
-local tooltipOrientation = UIBloxModule.App.Dialog.Enum.TooltipOrientation
-local controlState = UIBloxModule.Core.Control.Enum.ControlState
-local images = UIBloxModule.App.ImageSet.Images
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local cameraStatusIconModule = require(script.Parent.CameraStatusIcon)
-local cameraStatusDotModule = require(script.Parent.CameraStatusDot)
-local sizingUtilsModule = require(script.Parent.Parent.Utils.SizingUtils)
-local faceChatUtilsModule = require(script.Parent.Parent.Utils.FaceChatUtils)
-local modelUtilsModule = require(script.Parent.Parent.Utils.ModelUtils)
-local useCameraOnModule = require(script.Parent.Parent.Hooks.useCameraOn)
-local useLocalPlayerModule = require(script.Parent.Parent.Hooks.useLocalPlayer)
-local useTrackerMessageModule = require(script.Parent.Parent.Hooks.useTrackerMessage)
-local useTooltipDismissalModule = require(script.Parent.Parent.Hooks.useTooltipDismissal)
-local useScreenSizeModule = require(coreGuiService.RobloxGui.Modules.Common.Hooks.useScreenSize)
-local constantsModule = require(script.Parent.Parent.Parent.Chrome.ChromeShared.Unibar.Constants)
-local chrome = script.Parent.Parent.Parent.Chrome
-local var1 = if require(corePackagesService.Workspace.Packages.Chrome).Enabled() then require(chrome.Service) else nil
-local unibarStyle = require(corePackagesService.Workspace.Packages.Chrome).UnibarStyle
-local fFlagTokenizeUnibarConstantsWithStyleProvider = require(chrome.ChromeShared.Flags).FFlagTokenizeUnibarConstantsWithStyleProvider
-local fFlagTopBarSignalizeScreenSize = require(corePackagesService.Workspace.Packages.CoreGuiCommon).Flags.FFlagTopBarSignalizeScreenSize
-local reactDevtoolsFixTopbar = game:DefineFastFlag("ReactDevtoolsFixTopbar", true)
-local var2 = require(robloxGui.Modules.SelfView.Analytics).new()
-local previewShrink = images["icons/actions/previewShrink"]
-local previewExpand = images["icons/actions/previewExpand"]
-local faceCloneModule = require(script.Parent.FaceClone)
+local UseWindowSizeIsLargeModule = require(script.Parent.Parent.Parent.Chrome.ChromeShared.Hooks.useWindowSizeIsLarge)
+local UIBloxModule = require(Packages.UIBlox)
+local Interactable = UIBloxModule.Core.Control.Interactable
+local StyledTextLabel = UIBloxModule.App.Text.StyledTextLabel
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local WithTooltipFunction = UIBloxModule.App.Dialog.TooltipV2.withTooltip
+local TooltipOrientation = UIBloxModule.App.Dialog.Enum.TooltipOrientation
+local ControlState = UIBloxModule.Core.Control.Enum.ControlState
+local Images = UIBloxModule.App.ImageSet.Images
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local CameraStatusIconModule = require(script.Parent.CameraStatusIcon)
+local CameraStatusDotModule = require(script.Parent.CameraStatusDot)
+local SizingUtilsModule = require(script.Parent.Parent.Utils.SizingUtils)
+local FaceChatUtilsModule = require(script.Parent.Parent.Utils.FaceChatUtils)
+local ModelUtilsModule = require(script.Parent.Parent.Utils.ModelUtils)
+local UseCameraOnModule = require(script.Parent.Parent.Hooks.useCameraOn)
+local UseLocalPlayerModule = require(script.Parent.Parent.Hooks.useLocalPlayer)
+local UseTrackerMessageModule = require(script.Parent.Parent.Hooks.useTrackerMessage)
+local UseTooltipDismissalModule = require(script.Parent.Parent.Hooks.useTooltipDismissal)
+local UseScreenSizeModule = require(CoreGui.RobloxGui.Modules.Common.Hooks.useScreenSize)
+local ConstantsModule = require(script.Parent.Parent.Parent.Chrome.ChromeShared.Unibar.Constants)
+local Chrome = script.Parent.Parent.Parent.Chrome
+local ServiceModule = if require(CorePackages.Workspace.Packages.Chrome).Enabled() then require(Chrome.Service) else nil
+local UnibarStyle = require(CorePackages.Workspace.Packages.Chrome).UnibarStyle
+local FFlagTokenizeUnibarConstantsWithStyleProvider = require(Chrome.ChromeShared.Flags).FFlagTokenizeUnibarConstantsWithStyleProvider
+local FFlagTopBarSignalizeScreenSize = require(CorePackages.Workspace.Packages.CoreGuiCommon).Flags.FFlagTopBarSignalizeScreenSize
+local ReactDevtoolsFixTopbar = game:DefineFastFlag("ReactDevtoolsFixTopbar", true)
+local NewResult = require(CoreGui:WaitForChild("RobloxGui").Modules.SelfView.Analytics).new()
+local IconsActionsPreviewShrink = Images["icons/actions/previewShrink"]
+local IconsActionsPreviewExpand = Images["icons/actions/previewExpand"]
+local FaceCloneModule = require(script.Parent.FaceClone)
 
-return function(p1)
-	-- upvalues: useStyle (ref), fFlagTokenizeUnibarConstantsWithStyleProvider (ref), unibarStyle (ref), constantsModule (ref), useAppPolicy (ref), useLocalization (ref), useCameraOnModule (ref), useTrackerMessageModule (ref), useWindowSizeIsLargeModule (ref), useScreenSizeModule (ref), fFlagTopBarSignalizeScreenSize (ref), sizingUtilsModule (ref), useSelector (ref), reactModule (ref), useLocalPlayerModule (ref), faceChatUtilsModule (ref), useTooltipDismissalModule (ref), clearTimeout (ref), setTimeout (ref), modelUtilsModule (ref), var2 (ref), faceCloneModule (ref), controlState (ref), interactable (ref), cameraStatusIconModule (ref), var1 (ref), imageSetLabel (ref), previewShrink (ref), previewExpand (ref), styledTextLabel (ref), reactDevtoolsFixTopbar (ref), withTooltip (ref), coreGuiService (ref), tooltipOrientation (ref), cameraStatusDotModule (ref)
-	local id = p1.id
-	local var3 = useStyle()
-	local _ = nil
-	local theme = var3.Theme
-	local font = var3.Font
-	local var4 = if fFlagTokenizeUnibarConstantsWithStyleProvider then unibarStyle.use().CLOSE_BUTTON_FRAME else constantsModule.CLOSE_BUTTON_FRAME
-	local var5 = useLocalization({
+return function(p1) --[[ Line: 78 | Named "Window" ]]
+	-- upvalues: UseStyleFunction (copy), FFlagTokenizeUnibarConstantsWithStyleProvider (copy), UnibarStyle (copy), ConstantsModule (copy), UseAppPolicyFunction (copy), UseLocalizationFunction (copy), UseCameraOnModule (copy), UseTrackerMessageModule (copy), UseWindowSizeIsLargeModule (copy), UseScreenSizeModule (copy), FFlagTopBarSignalizeScreenSize (copy), SizingUtilsModule (copy), UseSelectorFunction (copy), ReactModule (copy), UseLocalPlayerModule (copy), FaceChatUtilsModule (copy), UseTooltipDismissalModule (copy), ClearTimeoutFunction (copy), SetTimeoutFunction (copy), ModelUtilsModule (copy), NewResult (copy), FaceCloneModule (copy), ControlState (copy), Interactable (copy), CameraStatusIconModule (copy), ServiceModule (copy), ImageSetLabel (copy), IconsActionsPreviewShrink (copy), IconsActionsPreviewExpand (copy), StyledTextLabel (copy), ReactDevtoolsFixTopbar (copy), WithTooltipFunction (copy), CoreGui (copy), TooltipOrientation (copy), CameraStatusDotModule (copy)
+	local Id = p1.id
+	local UseStyleResult = UseStyleFunction()
+	local Theme = UseStyleResult.Theme
+	local UseStyleResultFont = UseStyleResult.Font
+	local CLOSEBUTTONFRAME = if FFlagTokenizeUnibarConstantsWithStyleProvider then UnibarStyle.use().CLOSE_BUTTON_FRAME else ConstantsModule.CLOSE_BUTTON_FRAME
+	local UseLocalizationResult = UseLocalizationFunction({
 		robloxPermissionErrorHeader = "CoreScripts.TopBar.RobloxPermissionErrorHeader",
 		dynamicAvatarMissingErrorHeader = "CoreScripts.TopBar.DynamicAvatarMissingErrorHeader",
 		dynamicAvatarMissingErrorBody = "CoreScripts.TopBar.DynamicAvatarMissingErrorBody",
-		robloxPermissionErrorBody = if useAppPolicy(function(p2)
+		robloxPermissionErrorBody = if UseAppPolicyFunction(function(p2) --[[ Line: 93 ]]
 			return p2.getShowUpdatedCameraPath()
 		end) then "CoreScripts.TopBar.RobloxPermissionErrorBodyTwo" else "CoreScripts.TopBar.RobloxPermissionErrorBody"
 	})
-	local var6 = useCameraOnModule()
-	local var7 = useTrackerMessageModule()
-	local var8 = useWindowSizeIsLargeModule(p1.windowSize)
-	local var9 = if fFlagTopBarSignalizeScreenSize then sizingUtilsModule.getSize(useScreenSizeModule(), var8) else useSelector(function(p2)
-		-- upvalues: sizingUtilsModule (copy), var8 (ref)
-		return sizingUtilsModule.getSize(p2.displayOptions.screenSize, var8)
+	local UseCameraOnModuleResult = UseCameraOnModule()
+	local UseTrackerMessageModuleResult = UseTrackerMessageModule()
+	local UseWindowSizeIsLargeModuleResult = UseWindowSizeIsLargeModule(p1.windowSize)
+	local UseScreenSizeModuleResult = UseScreenSizeModule()
+	local Size = if FFlagTopBarSignalizeScreenSize then SizingUtilsModule.getSize(UseScreenSizeModuleResult, UseWindowSizeIsLargeModuleResult) else UseSelectorFunction(function(p2) --[[ Line: 114 ]]
+		-- upvalues: SizingUtilsModule (upval), UseWindowSizeIsLargeModuleResult (copy)
+		return SizingUtilsModule.getSize(p2.displayOptions.screenSize, UseWindowSizeIsLargeModuleResult)
 	end)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var9 (ref)
-		p1.windowSize:requestSize(var9.X, var9.Y)
-	end, { var9 })
-	local var10 = useLocalPlayerModule()
-	local var11 = reactModule.useMemo(function()
-		-- upvalues: faceChatUtilsModule (copy)
-		return faceChatUtilsModule.getPermissions().userCamEligible and faceChatUtilsModule.getPermissions().placeCamEnabled
+	ReactModule.useEffect(function() --[[ Line: 117 ]]
+		-- upvalues: p1 (copy), Size (copy)
+		p1.windowSize:requestSize(Size.X, Size.Y)
+	end, { Size })
+	local UseLocalPlayerModuleResult = UseLocalPlayerModule()
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 123 ]]
+		-- upvalues: FaceChatUtilsModule (upval)
+		return FaceChatUtilsModule.getPermissions().userCamEligible and FaceChatUtilsModule.getPermissions().placeCamEnabled
 	end)
-	local var12, var13, var14, var15 = useTooltipDismissalModule(2000)
-	local var16, var17 = reactModule.useState(true)
-	local var18, var19 = reactModule.useState(false)
-	local var20, var21 = reactModule.useState(false)
-	local var22, var23 = reactModule.useState(false)
-	local var24 = reactModule.useRef(nil)
+	local UseTooltipDismissalModuleResult, UseTooltipDismissalModuleResult2, UseTooltipDismissalModuleResult3, UseTooltipDismissalModuleResult4 = UseTooltipDismissalModule(2000)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(true)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(false)
+	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(false)
+	local UseRefResult = ReactModule.useRef(nil)
 	
-	local var25 = function()
-		-- upvalues: var24 (ref), clearTimeout (copy), var17 (ref), setTimeout (copy)
-		if var24.current then
-			clearTimeout(var24.current)
+	local function v61() --[[ Line: 136 ]]
+		-- upvalues: UseRefResult (copy), ClearTimeoutFunction (upval), UseStateResult2 (copy), SetTimeoutFunction (upval)
+		if UseRefResult.current then
+			ClearTimeoutFunction(UseRefResult.current)
 		end
-		var17(true)
-		var24.current = setTimeout(function()
-			-- upvalues: var17 (copy)
-			var17(false)
+		UseStateResult2(true)
+		UseRefResult.current = SetTimeoutFunction(function() --[[ Line: 141 ]]
+			-- upvalues: UseStateResult2 (upval)
+			UseStateResult2(false)
 		end, 2000)
 	end
 	
-	reactModule.useEffect(function()
-		-- upvalues: var24 (ref), clearTimeout (copy), var17 (ref), setTimeout (copy)
-		if var24.current then
-			clearTimeout(var24.current)
+	ReactModule.useEffect(function() --[[ Line: 145 ]]
+		-- upvalues: UseRefResult (copy), ClearTimeoutFunction (upval), UseStateResult2 (copy), SetTimeoutFunction (upval)
+		if UseRefResult.current then
+			ClearTimeoutFunction(UseRefResult.current)
 		end
-		var17(true)
-		var24.current = setTimeout(function()
-			-- upvalues: var17 (copy)
-			var17(false)
+		UseStateResult2(true)
+		UseRefResult.current = SetTimeoutFunction(function() --[[ Line: 141 ]]
+			-- upvalues: UseStateResult2 (upval)
+			UseStateResult2(false)
 		end, 2000)
 		
-		return function()
-			-- upvalues: var24 (copy), clearTimeout (copy)
-			if var24.current then
-				clearTimeout(var24.current)
+		return function() --[[ Line: 148 ]]
+			-- upvalues: UseRefResult (upval), ClearTimeoutFunction (upval)
+			if UseRefResult.current then
+				ClearTimeoutFunction(UseRefResult.current)
 			end
 		end
-	end, { var24 })
+	end, { UseRefResult })
 	
-	local var26 = function(p2)
-		-- upvalues: var24 (ref), clearTimeout (copy), var17 (ref), setTimeout (copy), faceChatUtilsModule (copy), var15 (ref), var5 (ref), var10 (ref), modelUtilsModule (copy), var2 (copy)
-		if var24.current then
-			clearTimeout(var24.current)
+	local function v62(p2) --[[ Line: 155 ]]
+		-- upvalues: UseRefResult (copy), ClearTimeoutFunction (upval), UseStateResult2 (copy), SetTimeoutFunction (upval), FaceChatUtilsModule (upval), UseTooltipDismissalModuleResult4 (copy), UseLocalizationResult (copy), UseLocalPlayerModuleResult (copy), ModelUtilsModule (upval), NewResult (upval)
+		if UseRefResult.current then
+			ClearTimeoutFunction(UseRefResult.current)
 		end
-		var17(true)
-		var24.current = setTimeout(function()
-			-- upvalues: var17 (copy)
-			var17(false)
+		UseStateResult2(true)
+		UseRefResult.current = SetTimeoutFunction(function() --[[ Line: 141 ]]
+			-- upvalues: UseStateResult2 (upval)
+			UseStateResult2(false)
 		end, 2000)
 		
-		if not faceChatUtilsModule.getPermissions().userCamEnabled and not p2 then
-			var15(var5.robloxPermissionErrorHeader, var5.robloxPermissionErrorBody)
+		if not FaceChatUtilsModule.getPermissions().userCamEnabled and not p2 then
+			UseTooltipDismissalModuleResult4(UseLocalizationResult.robloxPermissionErrorHeader, UseLocalizationResult.robloxPermissionErrorBody)
 			
 			return
-		elseif var10.Character and not modelUtilsModule.hasDynamicHead(var10.Character) and (not faceChatUtilsModule.isCameraOn() and not p2) then
-			var15(var5.dynamicAvatarMissingErrorHeader, var5.dynamicAvatarMissingErrorBody)
 		end
-		var2:setLastCtx("SelfView")
-		faceChatUtilsModule.toggleVideoAnimation()
+		if UseLocalPlayerModuleResult.Character and not ModelUtilsModule.hasDynamicHead(UseLocalPlayerModuleResult.Character) and not FaceChatUtilsModule.isCameraOn() and not p2 then
+			UseTooltipDismissalModuleResult4(UseLocalizationResult.dynamicAvatarMissingErrorHeader, UseLocalizationResult.dynamicAvatarMissingErrorBody)
+		end
+		NewResult:setLastCtx("SelfView")
+		FaceChatUtilsModule.toggleVideoAnimation()
 	end
 	
-	local var27 = reactModule.useCallback(function()
-		-- upvalues: var26 (ref)
-		var26(false)
-	end, { faceChatUtilsModule, modelUtilsModule, var5, var10 })
-	local var28 = reactModule.useCallback(function()
-		-- upvalues: var24 (ref), clearTimeout (copy), var17 (ref), setTimeout (copy)
-		if var24.current then
-			clearTimeout(var24.current)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 173 ]]
+		-- upvalues: v62 (copy)
+		v62(false)
+	end, {
+		FaceChatUtilsModule,
+		ModelUtilsModule,
+		UseLocalizationResult,
+		UseLocalPlayerModuleResult
+	})
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 177 ]]
+		-- upvalues: UseRefResult (copy), ClearTimeoutFunction (upval), UseStateResult2 (copy), SetTimeoutFunction (upval)
+		if UseRefResult.current then
+			ClearTimeoutFunction(UseRefResult.current)
 		end
-		var17(true)
-		var24.current = setTimeout(function()
-			-- upvalues: var17 (copy)
-			var17(false)
+		UseStateResult2(true)
+		UseRefResult.current = SetTimeoutFunction(function() --[[ Line: 141 ]]
+			-- upvalues: UseStateResult2 (upval)
+			UseStateResult2(false)
 		end, 2000)
-	end, { var25, var16, p1.windowSize })
-	local var29 = reactModule.useRef(nil)
-	reactModule.useEffect(function()
-		-- upvalues: faceCloneModule (copy), var10 (ref), var29 (ref)
-		if _G.__TESTEZ_RUNNING_TEST__ then
-			return
-		end
-		local var30 = faceCloneModule(var10, var29.current)
+	end, { v61, UseStateResult, p1.windowSize })
+	local UseRefResult1 = ReactModule.useRef(nil)
+	ReactModule.useEffect(function() --[[ Line: 182 ]]
+		-- upvalues: FaceCloneModule (upval), UseLocalPlayerModuleResult (copy), UseRefResult1 (copy)
+		if _G.__TESTEZ_RUNNING_TEST__ then return end
+		local FaceCloneModuleResult = FaceCloneModule(UseLocalPlayerModuleResult, UseRefResult1.current)
 		
-		return function()
-			-- upvalues: var30 (ref)
-			if var30 then
-				var30()
+		return function() --[[ Line: 193 ]]
+			-- upvalues: FaceCloneModuleResult (copy)
+			if FaceCloneModuleResult then
+				FaceCloneModuleResult()
 			end
 		end
-	end, { var10, var29 })
-	local var30 = reactModule.useCallback(function(_, p2)
-		-- upvalues: var21 (ref), controlState (copy)
-		var21(p2 == controlState.Hover)
-	end, { var21 })
+	end, { UseLocalPlayerModuleResult, UseRefResult1 })
+	local UseResult2 = ReactModule.useCallback(function(_, Hover) --[[ Line: 200 ]]
+		-- upvalues: UseStateResult2_2 (copy), ControlState (upval)
+		UseStateResult2_2(Hover == ControlState.Hover)
+	end, { UseStateResult2_2 })
+	local UseResult3 = ReactModule.useCallback(function(_, Hover) --[[ Line: 204 ]]
+		-- upvalues: UseStateResult2_1 (copy), ControlState (upval)
+		UseStateResult2_1(Hover == ControlState.Hover)
+	end, { UseStateResult2_1 })
+	local UseResult4 = ReactModule.useCallback(function(_, Hover) --[[ Line: 208 ]]
+		-- upvalues: UseStateResult2_3 (copy), ControlState (upval)
+		UseStateResult2_3(Hover == ControlState.Hover)
+	end, { UseStateResult2_3 })
+	local UseResult5 = ReactModule.useCallback(function(p2) --[[ Line: 212 ]]
+		-- upvalues: ReactModule (upval), Interactable (upval), UseStateResult3 (copy), FaceChatUtilsModule (upval), UseStyleResult (copy), UseResult2 (copy), UseResult (copy), CameraStatusIconModule (upval)
+		return ReactModule.createElement(Interactable, {
+			Size = UDim2.fromOffset(36, 36),
+			BackgroundColor3 = if UseStateResult3 and FaceChatUtilsModule.getPermissions().userCamEnabled then UseStyleResult.Theme.BackgroundOnHover.Color else UseStyleResult.Theme.BackgroundUIContrast.Color,
+			BackgroundTransparency = UseStyleResult.Theme.Overlay.Transparency,
+			onStateChanged = UseResult2,
+			Position = UDim2.fromScale(0.5, 0.5),
+			AnchorPoint = Vector2.new(0.5, 0.5),
+			[ReactModule.Change.AbsoluteSize] = p2,
+			[ReactModule.Change.AbsolutePosition] = p2,
+			[ReactModule.Event.Activated] = UseResult
+		}, {
+			Corner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) }),
+			CameraStatusIcon = ReactModule.createElement(CameraStatusIconModule, {
+				iconSize = UDim2.fromOffset(28, 28),
+				transparency = if FaceChatUtilsModule.getPermissions().userCamEnabled then 0 else 0.5
+			})
+		})
+	end, { UseResult2, UseResult })
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		Name = "SelfieViewFrame",
 		Active = true,
 		Size = UDim2.fromScale(1, 1),
-		BackgroundColor3 = var3.Theme.BackgroundUIDefault.Color,
+		BackgroundColor3 = UseStyleResult.Theme.BackgroundUIDefault.Color,
 		BackgroundTransparency = 0,
-		[reactModule.Event.MouseEnter] = var25,
-		[reactModule.Event.MouseMoved] = var25,
-		ref = var29
+		[ReactModule.Event.MouseEnter] = v61,
+		[ReactModule.Event.MouseMoved] = v61,
+		ref = UseRefResult1
 	}, {}, {
-		CloseButtonWrapper = var16 and reactModule.createElement("Frame", { ZIndex = 2, BackgroundTransparency = 1, Size = var4 }, {
-			CloseButtonLayout = reactModule.createElement("UIListLayout", {
+		CloseButtonWrapper = UseStateResult and ReactModule.createElement("Frame", {
+			ZIndex = 2,
+			BackgroundTransparency = 1,
+			Size = CLOSEBUTTONFRAME
+		}, {
+			CloseButtonLayout = ReactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Horizontal,
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				VerticalAlignment = Enum.VerticalAlignment.Center,
 				HorizontalAlignment = Enum.HorizontalAlignment.Center
 			}),
-			CloseButtonInteractable = reactModule.createElement(interactable, {
+			CloseButtonInteractable = ReactModule.createElement(Interactable, {
 				Size = UDim2.fromOffset(36, 36),
-				BackgroundColor3 = if var18 then var3.Theme.BackgroundOnHover.Color else var3.Theme.BackgroundUIContrast.Color,
+				BackgroundColor3 = if UseStateResult1 then UseStyleResult.Theme.BackgroundOnHover.Color else UseStyleResult.Theme.BackgroundUIContrast.Color,
 				BackgroundTransparency = 0.8,
-				onStateChanged = reactModule.useCallback(function(_, p2)
-					-- upvalues: var19 (ref), controlState (copy)
-					var19(p2 == controlState.Hover)
-				end, { var19 }),
-				[reactModule.Event.Activated] = if var1 then function()
-					-- upvalues: var1 (copy), id (ref)
-					var1:toggleWindow(id)
+				onStateChanged = UseResult3,
+				[ReactModule.Event.Activated] = if ServiceModule then function() --[[ Line: 267 ]]
+					-- upvalues: ServiceModule (upval), Id (copy)
+					ServiceModule:toggleWindow(Id)
 				end else nil
 			}, {
-				Corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) }),
-				Fragment = reactModule.createElement(reactModule.Fragment, nil, {
-					reactModule.createElement("Frame", {
+				Corner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) }),
+				Fragment = ReactModule.createElement(ReactModule.Fragment, nil, {
+					ReactModule.createElement("Frame", {
 						Name = "X1",
 						BorderSizePixel = 0,
 						BackgroundTransparency = 0,
@@ -209,11 +241,11 @@ return function(p1)
 						Position = UDim2.new(0.5, 0, 0.5, 0),
 						AnchorPoint = Vector2.new(0.5, 0.5),
 						Size = UDim2.new(0, 16, 0, 2),
-						BackgroundColor3 = var3.Theme.IconEmphasis.Color
+						BackgroundColor3 = UseStyleResult.Theme.IconEmphasis.Color
 					}, {
-						Corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) })
+						Corner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) })
 					}),
-					reactModule.createElement("Frame", {
+					(ReactModule.createElement("Frame", {
 						Name = "X2",
 						BorderSizePixel = 0,
 						BackgroundTransparency = 0,
@@ -221,150 +253,128 @@ return function(p1)
 						Position = UDim2.new(0.5, 0, 0.5, 0),
 						AnchorPoint = Vector2.new(0.5, 0.5),
 						Size = UDim2.new(0, 16, 0, 2),
-						BackgroundColor3 = var3.Theme.IconEmphasis.Color
+						BackgroundColor3 = UseStyleResult.Theme.IconEmphasis.Color
 					}, {
-						Corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) })
-					})
+						Corner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) })
+					}))
 				})
 			})
 		}),
-		ExpandButtonWrapper = if var16 then reactModule.createElement("Frame", {
+		ExpandButtonWrapper = if UseStateResult then ReactModule.createElement("Frame", {
 			ZIndex = 2,
 			BackgroundTransparency = 1,
-			Size = var4,
+			Size = CLOSEBUTTONFRAME,
 			AnchorPoint = Vector2.new(1, 0),
 			Position = UDim2.new(1, 0, 0, 0)
 		}, {
-			ExpandButtonLayout = reactModule.createElement("UIListLayout", {
+			ExpandButtonLayout = ReactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Horizontal,
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				VerticalAlignment = Enum.VerticalAlignment.Center,
 				HorizontalAlignment = Enum.HorizontalAlignment.Center
 			}),
-			ExpandButtonPadding = reactModule.createElement("UIPadding", {
+			ExpandButtonPadding = ReactModule.createElement("UIPadding", {
 				PaddingTop = UDim.new(0, 4),
 				PaddingLeft = UDim.new(0, 4),
 				PaddingRight = UDim.new(0, 4),
 				PaddingBottom = UDim.new(0, 4)
 			}),
-			ExpandButtonInteractable = reactModule.createElement(interactable, {
+			ExpandButtonInteractable = ReactModule.createElement(Interactable, {
 				Size = UDim2.fromOffset(36, 36),
-				BackgroundColor3 = if var22 then var3.Theme.BackgroundOnHover.Color else var3.Theme.BackgroundUIContrast.Color,
+				BackgroundColor3 = if UseStateResult4 then UseStyleResult.Theme.BackgroundOnHover.Color else UseStyleResult.Theme.BackgroundUIContrast.Color,
 				BackgroundTransparency = 0.8,
-				onStateChanged = reactModule.useCallback(function(_, p2)
-					-- upvalues: var23 (ref), controlState (copy)
-					var23(p2 == controlState.Hover)
-				end, { var23 }),
-				[reactModule.Event.Activated] = if var1 then function()
-					-- upvalues: p1 (ref)
+				onStateChanged = UseResult4,
+				[ReactModule.Event.Activated] = if ServiceModule then function() --[[ Line: 337 ]]
+					-- upvalues: p1 (copy)
 					p1.windowSize:toggleIsLarge()
 				end else nil
 			}, {
-				Corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) }),
-				ExpandImage = reactModule.createElement(imageSetLabel, {
+				Corner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) }),
+				ExpandImage = ReactModule.createElement(ImageSetLabel, {
 					BackgroundTransparency = 1,
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					Size = UDim2.fromOffset(28, 28),
 					Position = UDim2.new(0.5, 0, 0.5, 0),
-					Image = if var8 then previewShrink else previewExpand,
-					ImageColor3 = theme.TextEmphasis.Color,
-					ImageTransparency = theme.TextEmphasis.Transparency
+					Image = if UseWindowSizeIsLargeModuleResult then IconsActionsPreviewShrink else IconsActionsPreviewExpand,
+					ImageColor3 = Theme.TextEmphasis.Color,
+					ImageTransparency = Theme.TextEmphasis.Transparency
 				})
 			})
 		}) else nil,
-		Corners = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) }),
-		ControlMessage = reactModule.createElement("Frame", {
+		Corners = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) }),
+		ControlMessage = ReactModule.createElement("Frame", {
 			ZIndex = 2,
 			BorderSizePixel = 0,
 			AnchorPoint = Vector2.new(0.5, 1),
 			Position = UDim2.new(0.5, 0, 1, -44),
-			BackgroundColor3 = theme.BackgroundUIDefault.Color,
+			BackgroundColor3 = Theme.BackgroundUIDefault.Color,
 			AutomaticSize = Enum.AutomaticSize.XY,
-			Visible = var7.visible
+			Visible = UseTrackerMessageModuleResult.visible
 		}, {
-			Corners = reactModule.createElement("UICorner", {}),
-			UIPadding = reactModule.createElement("UIPadding", {
+			Corners = ReactModule.createElement("UICorner", {}),
+			UIPadding = ReactModule.createElement("UIPadding", {
 				PaddingTop = UDim.new(0, 4),
 				PaddingRight = UDim.new(0, 8),
 				PaddingBottom = UDim.new(0, 4),
 				PaddingLeft = UDim.new(0, 8)
 			}),
-			UIListLayout = reactModule.createElement("UIListLayout", { FillDirection = Enum.FillDirection.Vertical }),
-			Line1 = reactModule.createElement(styledTextLabel, {
+			UIListLayout = ReactModule.createElement("UIListLayout", { FillDirection = Enum.FillDirection.Vertical }),
+			Line1 = ReactModule.createElement(StyledTextLabel, {
 				layoutOrder = 1,
-				text = var7.text,
-				fontStyle = font.Footer,
-				colorStyle = theme.TextDefault,
+				text = UseTrackerMessageModuleResult.text,
+				fontStyle = UseStyleResultFont.Footer,
+				colorStyle = Theme.TextDefault,
 				textXAlignment = Enum.TextXAlignment.Center,
 				size = UDim2.fromOffset(46, 36),
-				TextWrapped = if reactDevtoolsFixTopbar then nil else true,
-				textWrapped = if reactDevtoolsFixTopbar then true else nil
+				TextWrapped = not ReactDevtoolsFixTopbar or nil,
+				textWrapped = if ReactDevtoolsFixTopbar then true else nil
 			}),
-			Line2 = reactModule.createElement(styledTextLabel, {
+			Line2 = ReactModule.createElement(StyledTextLabel, {
 				layoutOrder = 2,
-				text = var7.status,
-				fontStyle = font.Footer,
-				colorStyle = theme.ContextualPrimaryContent,
+				text = UseTrackerMessageModuleResult.status,
+				fontStyle = UseStyleResultFont.Footer,
+				colorStyle = Theme.ContextualPrimaryContent,
 				textXAlignment = Enum.TextXAlignment.Center,
 				size = UDim2.fromOffset(46, 12),
 				automaticSize = Enum.AutomaticSize.Y
 			})
 		}),
-		IconFrame = var16 and (var11 and (reactModule.createElement("Frame", {
+		IconFrame = UseStateResult and UseMemoResult and ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			ZIndex = 2,
-			Size = var4,
+			Size = CLOSEBUTTONFRAME,
 			Position = UDim2.fromScale(0.5, 1),
 			AnchorPoint = Vector2.new(0.5, 1)
 		}, {
-			Tooltip = withTooltip({
-				headerText = var12,
-				bodyText = var13,
+			Tooltip = WithTooltipFunction({
+				headerText = UseTooltipDismissalModuleResult,
+				bodyText = UseTooltipDismissalModuleResult2,
 				textXAlignment = Enum.TextXAlignment.Left
 			}, {
 				DisplayOrder = 101,
-				guiTarget = coreGuiService,
-				active = var14,
-				preferredOrientation = tooltipOrientation.Bottom
-			}, reactModule.useCallback(function(p2)
-				-- upvalues: reactModule (copy), interactable (copy), var20 (ref), faceChatUtilsModule (copy), var3 (ref), var30 (ref), var27 (ref), cameraStatusIconModule (copy)
-				return reactModule.createElement(interactable, {
-					Size = UDim2.fromOffset(36, 36),
-					BackgroundColor3 = if var20 and faceChatUtilsModule.getPermissions().userCamEnabled then var3.Theme.BackgroundOnHover.Color else var3.Theme.BackgroundUIContrast.Color,
-					BackgroundTransparency = var3.Theme.Overlay.Transparency,
-					onStateChanged = var30,
-					Position = UDim2.fromScale(0.5, 0.5),
-					AnchorPoint = Vector2.new(0.5, 0.5),
-					[reactModule.Change.AbsoluteSize] = p2,
-					[reactModule.Change.AbsolutePosition] = p2,
-					[reactModule.Event.Activated] = var27
-				}, {
-					Corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) }),
-					CameraStatusIcon = reactModule.createElement(cameraStatusIconModule, {
-						iconSize = UDim2.fromOffset(28, 28),
-						transparency = if not faceChatUtilsModule.getPermissions().userCamEnabled then 0.5 else 0
-					})
-				})
-			end, { var30, var27 })),
-			Hover = reactModule.createElement("Frame", {
+				guiTarget = CoreGui,
+				active = UseTooltipDismissalModuleResult3,
+				preferredOrientation = TooltipOrientation.Bottom
+			}, UseResult5),
+			Hover = ReactModule.createElement("Frame", {
 				Size = UDim2.fromOffset(32, 32),
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Position = UDim2.fromScale(0.5, 0.5),
-				BackgroundTransparency = var3.Theme.BackgroundOnHover.Transparency,
-				BackgroundColor3 = var3.Theme.BackgroundOnHover.Color
+				BackgroundTransparency = UseStyleResult.Theme.BackgroundOnHover.Transparency,
+				BackgroundColor3 = UseStyleResult.Theme.BackgroundOnHover.Color
 			}, {
-				Corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) })
+				Corner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) })
 			})
-		}) or nil)),
-		CameraStatusDot = if var6 then reactModule.createElement(cameraStatusDotModule, {
+		}) or nil,
+		CameraStatusDot = if UseCameraOnModuleResult then ReactModule.createElement(CameraStatusDotModule, {
 			ZIndex = 2,
 			Position = UDim2.new(1, -12, 1, -12),
 			Size = UDim2.fromOffset(8, 8)
 		}) else nil,
-		Interactable = reactModule.createElement(interactable, {
+		Interactable = ReactModule.createElement(Interactable, {
 			Size = UDim2.fromScale(1, 1),
 			BackgroundTransparency = 1,
-			[reactModule.Event.Activated] = var28
+			[ReactModule.Event.Activated] = UseResult1
 		})
 	})
 end

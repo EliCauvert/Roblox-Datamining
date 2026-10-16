@@ -1,105 +1,107 @@
-﻿local httpService = game:GetService("HttpService")
-local playersService = game:GetService("Players")
-local robloxReplicatedStorageService = game:GetService("RobloxReplicatedStorage")
-local t = {}
-local var1 = 0
-local leaderstatsOrder = Instance.new("StringValue")
-leaderstatsOrder.Name = "LeaderstatsOrder"
-leaderstatsOrder.Parent = robloxReplicatedStorageService
+﻿local HttpService = game:GetService("HttpService")
+local Players = game:GetService("Players")
+local Input = {}
+local Count = 0
+local LeaderstatsOrder = Instance.new("StringValue")
+LeaderstatsOrder.Name = "LeaderstatsOrder"
+LeaderstatsOrder.Parent = game:GetService("RobloxReplicatedStorage")
 
-function updateStats()
-	-- upvalues: leaderstatsOrder (ref), httpService (ref), t (ref)
-	leaderstatsOrder.Value = httpService:JSONEncode(t)
+function updateStats() --[[ Line: 20 ]]
+	-- upvalues: LeaderstatsOrder (copy), HttpService (copy), Input (copy)
+	LeaderstatsOrder.Value = HttpService:JSONEncode(Input)
 end
 
 updateStats()
 
-local function _(p1)
-	-- upvalues: t (ref), var1 (write)
-	if t[p1] then
+local function _(Key) --[[ Line: 26 | Named "addLeaderstat" ]]
+	-- upvalues: Input (copy), Count (ref)
+	if not Input[Key] then
+		Input[Key] = Count
+		Count += 1
+		updateStats()
+		
 		return
 	end
-	t[p1] = var1
-	var1 += 1
-	updateStats()
 end
 
-local function isValidStat(p1)
-	return p1:IsA("StringValue") or (p1:IsA("IntValue") or (p1:IsA("BoolValue") or (p1:IsA("NumberValue") or (p1:IsA("DoubleConstrainedValue") or p1:IsA("IntConstrainedValue")))))
+local function isValidStat(Object) --[[ Line: 35 ]]
+	return Object:IsA("StringValue") or (Object:IsA("IntValue") or (Object:IsA("BoolValue") or (Object:IsA("NumberValue") or (Object:IsA("DoubleConstrainedValue") or Object:IsA("IntConstrainedValue")))))
 end
 
-local _ = function(p1)
-	return p1:IsA("ValueBase") or (p1:IsA("Folder") or (p1:IsA("Configuration") or p1:IsA("Model")))
+local _ = function(Object) --[[ Line: 44 | Named "isValidContainer" ]]
+	return Object:IsA("ValueBase") or (Object:IsA("Folder") or (Object:IsA("Configuration") or Object:IsA("Model")))
 end
 
-local t_1 = {}
+local t = {}
 
-local _ = function(p1, p2)
-	-- upvalues: t_1 (ref)
-	return if t_1[p1] then t_1[p1].leaderstats[p2] else nil
+local _ = function(p1, p2) --[[ Line: 62 | Named "getLeaderstatConnections" ]]
+	-- upvalues: t (copy)
+	return if t[p1] then t[p1].leaderstats[p2] else nil
 end
 
-local function leaderstatChildAdded(p1, p2, p3)
-	-- upvalues: isValidStat (ref), t_1 (ref), t (ref), var1 (write)
-	if not isValidStat(p3) then return end
-	local var2 = if not t_1[p1] then nil else t_1[p1].leaderstats[p2]
+local function leaderstatChildAdded(p1, p2, Object) --[[ Line: 70 ]]
+	-- upvalues: isValidStat (copy), t (copy), Input (copy), Count (ref)
+	if not isValidStat(Object) then return end
+	local Leaderstat = if t[p1] then t[p1].leaderstats[p2] else nil
 	
-	if not var2 then return end
-	assert(var2 ~= nil)
-	var2.leaderStatNameChanged[p3] = p3:GetPropertyChangedSignal("Name"):Connect(function()
-		-- upvalues: p3 (ref), t (copy), var1 (copy)
-		local name = p3.Name
+	if not Leaderstat then return end
+	assert(Leaderstat ~= nil)
+	Leaderstat.leaderStatNameChanged[Object] = Object:GetPropertyChangedSignal("Name"):Connect(function() --[[ Line: 80 ]]
+		-- upvalues: Object (copy), Input (upval), Count (upval)
+		local Name = Object.Name
 		
-		if t[name] then
+		if not Input[Name] then
+			Input[Name] = Count
+			Count += 1
+			updateStats()
+			
 			return
 		end
-		t[name] = var1
-		var1 += 1
-		updateStats()
 	end)
-	local name = p3.Name
+	local Name = Object.Name
 	
-	if t[name] then
-		return
-	end
-	t[name] = var1
-	var1 += 1
-	updateStats()
-end
-
-local _ = function(p1, p2, p3)
-	-- upvalues: t_1 (ref)
-	local var2 = if not t_1[p1] then nil else t_1[p1].leaderstats[p2]
-	
-	if not var2 then return end
-	assert(var2 ~= nil)
-	
-	if var2.leaderStatNameChanged[p3] then
-		var2.leaderStatNameChanged[p3]:Disconnect()
-		var2.leaderStatNameChanged[p3] = nil
+	if not Input[Name] then
+		Input[Name] = Count
+		Count += 1
+		updateStats()
 		
 		return
 	end
 end
 
-local function leaderstatsAdded(p1, p2)
-	-- upvalues: t_1 (ref), leaderstatChildAdded (ref)
-	if not t_1[p1] then return end
-	t_1[p1].leaderstats[p2] = {
-		childAdded = p2.ChildAdded:Connect(function(p3)
-			-- upvalues: leaderstatChildAdded (copy), p1 (ref), p2 (ref)
-			leaderstatChildAdded(p1, p2, p3)
+local _ = function(p1, p2, p3) --[[ Line: 87 | Named "leaderstatChildRemoved" ]]
+	-- upvalues: t (copy)
+	local Leaderstat = if t[p1] then t[p1].leaderstats[p2] else nil
+	
+	if not Leaderstat then return end
+	assert(Leaderstat ~= nil)
+	
+	if Leaderstat.leaderStatNameChanged[p3] then
+		Leaderstat.leaderStatNameChanged[p3]:Disconnect()
+		Leaderstat.leaderStatNameChanged[p3] = nil
+		
+		return
+	end
+end
+
+local function leaderstatsAdded(p1, Object) --[[ Line: 102 ]]
+	-- upvalues: t (copy), leaderstatChildAdded (copy)
+	if not t[p1] then return end
+	t[p1].leaderstats[Object] = {
+		childAdded = Object.ChildAdded:Connect(function(Child) --[[ Line: 107 ]]
+			-- upvalues: leaderstatChildAdded (upval), p1 (copy), Object (copy)
+			leaderstatChildAdded(p1, Object, Child)
 		end),
-		childRemoved = p2.ChildRemoved:Connect(function(p3)
-			-- upvalues: p1 (ref), p2 (ref), t_1 (copy)
-			local var2 = if not t_1[p1] then nil else t_1[p1].leaderstats[p2]
+		childRemoved = Object.ChildRemoved:Connect(function(Child) --[[ Line: 110 ]]
+			-- upvalues: p1 (copy), Object (copy), t (upval)
+			local Leaderstat = if t[p1] then t[p1].leaderstats[Object] else nil
 			
-			if not var2 then return end
-			assert(var2 ~= nil)
+			if not Leaderstat then return end
+			assert(Leaderstat ~= nil)
 			
-			if var2.leaderStatNameChanged[p3] then
-				var2.leaderStatNameChanged[p3]:Disconnect()
-				var2.leaderStatNameChanged[p3] = nil
+			if Leaderstat.leaderStatNameChanged[Child] then
+				Leaderstat.leaderStatNameChanged[Child]:Disconnect()
+				Leaderstat.leaderStatNameChanged[Child] = nil
 				
 				return
 			end
@@ -107,173 +109,176 @@ local function leaderstatsAdded(p1, p2)
 		leaderStatNameChanged = {}
 	}
 	
-	for i, v in p2:GetChildren() do
-		leaderstatChildAdded(p1, p2, v)
+	for _, child in Object:GetChildren() do
+		leaderstatChildAdded(p1, Object, child)
 	end
 end
 
-local _ = function(p3)
-	for i, v in p3 do
-		v:Disconnect()
+local _ = function(Connections) --[[ Line: 125 | Named "disconnectTableOfConnections" ]]
+	for _, connection in Connections do
+		connection:Disconnect()
 	end
 end
 
-local _ = function(p4, p5)
-	-- upvalues: t_1 (ref)
-	if not t_1[p4] then return end
-	local var2 = t_1[p4].leaderstats[p5]
+local _ = function(p2, p3) --[[ Line: 131 | Named "leaderstatsRemoved" ]]
+	-- upvalues: t (copy)
+	if not t[p2] then return end
+	local Leaderstat = t[p2].leaderstats[p3]
 	
-	if not var2 then return end
-	var2.childAdded:Disconnect()
-	var2.childRemoved:Disconnect()
+	if not Leaderstat then return end
+	Leaderstat.childAdded:Disconnect()
+	Leaderstat.childRemoved:Disconnect()
 	
-	for i, v in var2.leaderStatNameChanged do
-		v:Disconnect()
+	for _, Connection in Leaderstat.leaderStatNameChanged do
+		Connection:Disconnect()
 	end
-	t_1[p4].leaderstats[p5] = nil
+	t[p2].leaderstats[p3] = nil
 end
 
-local _ = function(p6, p7)
-	-- upvalues: leaderstatsAdded (ref), t_1 (ref)
-	if p7.Name == "leaderstats" then
-		leaderstatsAdded(p6, p7)
+local _ = function(p4, p5) --[[ Line: 147 | Named "playerChildNameChanged" ]]
+	-- upvalues: leaderstatsAdded (copy), t (copy)
+	if p5.Name == "leaderstats" then
+		leaderstatsAdded(p4, p5)
 		
 		return
-	elseif not t_1[p6] then return end
-	local var3 = t_1[p6].leaderstats[p7]
-	
-	if not var3 then return end
-	var3.childAdded:Disconnect()
-	var3.childRemoved:Disconnect()
-	
-	for i, v in var3.leaderStatNameChanged do
-		v:Disconnect()
 	end
-	t_1[p6].leaderstats[p7] = nil
+	if not t[p4] then return end
+	local Leaderstat = t[p4].leaderstats[p5]
+	
+	if not Leaderstat then return end
+	Leaderstat.childAdded:Disconnect()
+	Leaderstat.childRemoved:Disconnect()
+	
+	for _, Connection in Leaderstat.leaderStatNameChanged do
+		Connection:Disconnect()
+	end
+	t[p4].leaderstats[p5] = nil
 end
 
-local function playerChildAdded(p8, p9)
-	-- upvalues: t_1 (ref), leaderstatsAdded (ref)
-	if not p9:IsA("ValueBase") and (not p9:IsA("Folder") and (not p9:IsA("Configuration") and not p9:IsA("Model"))) then return end
-	if not t_1[p8] then return end
-	t_1[p8].namedChanged[p9] = p9:GetPropertyChangedSignal("Name"):Connect(function()
-		-- upvalues: p8 (ref), p9 (ref), leaderstatsAdded (copy), t_1 (copy)
-		if p9.Name == "leaderstats" then
-			leaderstatsAdded(p8, p9)
+local function playerChildAdded(Key, Object) --[[ Line: 155 ]]
+	-- upvalues: t (copy), leaderstatsAdded (copy)
+	if not Object:IsA("ValueBase") and (not Object:IsA("Folder") and (not Object:IsA("Configuration") and not Object:IsA("Model"))) then return end
+	if not t[Key] then return end
+	t[Key].namedChanged[Object] = Object:GetPropertyChangedSignal("Name"):Connect(function() --[[ Line: 163 ]]
+		-- upvalues: Key (copy), Object (copy), leaderstatsAdded (upval), t (upval)
+		if Object.Name == "leaderstats" then
+			leaderstatsAdded(Key, Object)
 			
 			return
-		elseif not t_1[p8] then return end
-		local var4 = t_1[p8].leaderstats[p9]
-		
-		if not var4 then return end
-		var4.childAdded:Disconnect()
-		var4.childRemoved:Disconnect()
-		
-		for i, v in var4.leaderStatNameChanged do
-			v:Disconnect()
 		end
-		t_1[p8].leaderstats[p9] = nil
+		if not t[Key] then return end
+		local Leaderstat = t[Key].leaderstats[Object]
+		
+		if not Leaderstat then return end
+		Leaderstat.childAdded:Disconnect()
+		Leaderstat.childRemoved:Disconnect()
+		
+		for _, Connection in Leaderstat.leaderStatNameChanged do
+			Connection:Disconnect()
+		end
+		t[Key].leaderstats[Object] = nil
 	end)
 	
-	if p9.Name == "leaderstats" then
-		leaderstatsAdded(p8, p9)
+	if Object.Name == "leaderstats" then
+		leaderstatsAdded(Key, Object)
 		
 		return
-	elseif not t_1[p8] then return end
-	local var5 = t_1[p8].leaderstats[p9]
-	
-	if not var5 then return end
-	var5.childAdded:Disconnect()
-	var5.childRemoved:Disconnect()
-	
-	for i, v in var5.leaderStatNameChanged do
-		v:Disconnect()
 	end
-	t_1[p8].leaderstats[p9] = nil
+	if not t[Key] then return end
+	local Leaderstat = t[Key].leaderstats[Object]
+	
+	if not Leaderstat then return end
+	Leaderstat.childAdded:Disconnect()
+	Leaderstat.childRemoved:Disconnect()
+	
+	for _, Connection in Leaderstat.leaderStatNameChanged do
+		Connection:Disconnect()
+	end
+	t[Key].leaderstats[Object] = nil
 end
 
-local _ = function(p10, p11)
-	-- upvalues: t_1 (ref)
-	if not t_1[p10] then return end
-	if t_1[p10].namedChanged[p11] then
-		t_1[p10].namedChanged[p11]:Disconnect()
-		t_1[p10].namedChanged[p11] = nil
+local _ = function(p6, p7) --[[ Line: 171 | Named "playerChildRemoved" ]]
+	-- upvalues: t (copy)
+	if not t[p6] then return end
+	if t[p6].namedChanged[p7] then
+		t[p6].namedChanged[p7]:Disconnect()
+		t[p6].namedChanged[p7] = nil
 	end
-	if p11.Name == "leaderstats" then
-		if not t_1[p10] then return end
-		local var6 = t_1[p10].leaderstats[p11]
+	if p7.Name == "leaderstats" then
+		if not t[p6] then return end
+		local Leaderstat = t[p6].leaderstats[p7]
 		
-		if not var6 then return end
-		var6.childAdded:Disconnect()
-		var6.childRemoved:Disconnect()
+		if not Leaderstat then return end
+		Leaderstat.childAdded:Disconnect()
+		Leaderstat.childRemoved:Disconnect()
 		
-		for i, v in var6.leaderStatNameChanged do
-			v:Disconnect()
+		for _, Connection in Leaderstat.leaderStatNameChanged do
+			Connection:Disconnect()
 		end
-		t_1[p10].leaderstats[p11] = nil
+		t[p6].leaderstats[p7] = nil
 	end
 end
 
-local function playerAdded(p12)
-	-- upvalues: t_1 (ref), playerChildAdded (ref)
-	t_1[p12] = {
-		childAdded = p12.ChildAdded:Connect(function(p13)
-			-- upvalues: playerChildAdded (copy), p12 (ref)
-			playerChildAdded(p12, p13)
+local function playerAdded(Player) --[[ Line: 186 ]]
+	-- upvalues: t (copy), playerChildAdded (copy)
+	t[Player] = {
+		childAdded = Player.ChildAdded:Connect(function(Child) --[[ Line: 190 ]]
+			-- upvalues: playerChildAdded (upval), Player (copy)
+			playerChildAdded(Player, Child)
 		end),
-		childRemoved = p12.ChildRemoved:Connect(function(p13)
-			-- upvalues: p12 (ref), t_1 (copy)
-			if not t_1[p12] then return end
-			if t_1[p12].namedChanged[p13] then
-				t_1[p12].namedChanged[p13]:Disconnect()
-				t_1[p12].namedChanged[p13] = nil
+		childRemoved = Player.ChildRemoved:Connect(function(Child) --[[ Line: 187 ]]
+			-- upvalues: Player (copy), t (upval)
+			if not t[Player] then return end
+			if t[Player].namedChanged[Child] then
+				t[Player].namedChanged[Child]:Disconnect()
+				t[Player].namedChanged[Child] = nil
 			end
-			if p13.Name == "leaderstats" then
-				if not t_1[p12] then return end
-				local var7 = t_1[p12].leaderstats[p13]
+			if Child.Name == "leaderstats" then
+				if not t[Player] then return end
+				local Leaderstat = t[Player].leaderstats[Child]
 				
-				if not var7 then return end
-				var7.childAdded:Disconnect()
-				var7.childRemoved:Disconnect()
+				if not Leaderstat then return end
+				Leaderstat.childAdded:Disconnect()
+				Leaderstat.childRemoved:Disconnect()
 				
-				for i, v in var7.leaderStatNameChanged do
-					v:Disconnect()
+				for _, Connection in Leaderstat.leaderStatNameChanged do
+					Connection:Disconnect()
 				end
-				t_1[p12].leaderstats[p13] = nil
+				t[Player].leaderstats[Child] = nil
 			end
 		end),
 		namedChanged = {},
 		leaderstats = {}
 	}
 	
-	for i, v in p12:GetChildren() do
-		playerChildAdded(p12, v)
+	for _, child in Player:GetChildren() do
+		playerChildAdded(Player, child)
 	end
 end
 
-local function playerRemoving(p14)
-	-- upvalues: t_1 (ref)
-	if not t_1[p14] then return end
-	t_1[p14].childAdded:Disconnect()
-	t_1[p14].childRemoved:Disconnect()
+local function playerRemoving(Player) --[[ Line: 205 ]]
+	-- upvalues: t (copy)
+	if not t[Player] then return end
+	t[Player].childAdded:Disconnect()
+	t[Player].childRemoved:Disconnect()
 	
-	for i, v in t_1[p14].namedChanged do
-		v:Disconnect()
+	for _, Connection in t[Player].namedChanged do
+		Connection:Disconnect()
 	end
-	for i_1, v_1 in t_1[p14].leaderstats do
-		v_1.childAdded:Disconnect()
-		v_1.childRemoved:Disconnect()
+	for _, leaderstat in t[Player].leaderstats do
+		leaderstat.childAdded:Disconnect()
+		leaderstat.childRemoved:Disconnect()
 		
-		for i_2, v_2 in v_1.leaderStatNameChanged do
-			v_2:Disconnect()
+		for _, Connection1 in leaderstat.leaderStatNameChanged do
+			Connection1:Disconnect()
 		end
 	end
-	t_1[p14] = nil
+	t[Player] = nil
 end
 
-playersService.PlayerAdded:Connect(playerAdded)
-playersService.PlayerRemoving:Connect(playerRemoving)
+Players.PlayerAdded:Connect(playerAdded)
+Players.PlayerRemoving:Connect(playerRemoving)
 
-for i, v in playersService:GetPlayers() do
-	playerAdded(v)
+for _, player in Players:GetPlayers() do
+	playerAdded(player)
 end

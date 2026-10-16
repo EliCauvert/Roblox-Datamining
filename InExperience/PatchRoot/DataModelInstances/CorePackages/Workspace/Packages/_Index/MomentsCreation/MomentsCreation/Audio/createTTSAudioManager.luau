@@ -1,312 +1,326 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local parent = momentsCreation.Parent
-local signalsModule = require(parent.Signals)
-local _ = require(momentsCreation.Types.CreationFlowTypes)
-local classifyTTSErrorModule = require(momentsCreation.Audio.classifyTTSError)
-local normalizeWaveformModule = require(momentsCreation.Audio.normalizeWaveform)
-local getFIntMomentsTTSWaveformSamplesPerSecondModule = require(momentsCreation.Flags.GetFIntMomentsTTSWaveformSamplesPerSecond)
-local getFIntMomentsTTSWaveformMinSamplesModule = require(momentsCreation.Flags.GetFIntMomentsTTSWaveformMinSamples)
-local getFIntMomentsTTSWaveformMaxSamplesModule = require(momentsCreation.Flags.GetFIntMomentsTTSWaveformMaxSamples)
-local audioDuckingFastInts = require(parent.MomentsCommon).Media.audioDuckingFastInts
-local playersService = game:GetService("Players")
-local runService = game:GetService("RunService")
-local createSignal = signalsModule.createSignal
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local Parent = MomentsCreation.Parent
+local _ = require(MomentsCreation.Types.CreationFlowTypes)
+local ClassifyTTSErrorModule = require(MomentsCreation.Audio.classifyTTSError)
+local NormalizeWaveformModule = require(MomentsCreation.Audio.normalizeWaveform)
+local GetFIntMomentsTTSWaveformSamplesPerSecondModule = require(MomentsCreation.Flags.GetFIntMomentsTTSWaveformSamplesPerSecond)
+local GetFIntMomentsTTSWaveformMinSamplesModule = require(MomentsCreation.Flags.GetFIntMomentsTTSWaveformMinSamples)
+local GetFIntMomentsTTSWaveformMaxSamplesModule = require(MomentsCreation.Flags.GetFIntMomentsTTSWaveformMaxSamples)
+local AudioDuckingFastInts = require(Parent.MomentsCommon).Media.audioDuckingFastInts
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local CreateSignalFunction = require(Parent.Signals).createSignal
 
-local function defaultCreateTtsInstance()
-	-- upvalues: playersService (ref), audioDuckingFastInts (ref)
+local function defaultCreateTtsInstance(PlayerGui) --[[ Line: 54 ]]
+	-- upvalues: Players (copy), AudioDuckingFastInts (copy)
 	if not game:GetEngineFeature("TextToSpeechPlatformPreview") then
 		return nil
 	end
-	local localPlayer = playersService.LocalPlayer
-	
-	if localPlayer == nil then
-		return nil
-	end
-	local playerGui = localPlayer:FindFirstChildOfClass("PlayerGui")
-	
-	if playerGui == nil then
-		return nil
+	if PlayerGui == nil then
+		local LocalPlayer = Players.LocalPlayer
+		
+		if LocalPlayer == nil then
+			return nil
+		end
+		PlayerGui = LocalPlayer:FindFirstChildOfClass("PlayerGui")
+		
+		if PlayerGui == nil then
+			return nil
+		end
 	end
 	local TTSSharedGraph = Instance.new("Folder")
 	TTSSharedGraph.Name = "TTSSharedGraph"
-	local audioTextToSpeech = Instance.new("AudioTextToSpeech")
-	audioTextToSpeech.Volume = audioDuckingFastInts.getTtsVolume()
-	audioTextToSpeech.Parent = TTSSharedGraph
-	local audioDeviceOutput = Instance.new("AudioDeviceOutput")
-	audioDeviceOutput.Parent = TTSSharedGraph
-	local wire = Instance.new("Wire")
-	wire.SourceInstance = audioTextToSpeech
-	wire.TargetInstance = audioDeviceOutput
-	wire.Parent = TTSSharedGraph
-	TTSSharedGraph.Parent = playerGui
+	local AudioTextToSpeech = Instance.new("AudioTextToSpeech")
+	AudioTextToSpeech.Volume = AudioDuckingFastInts.getTtsVolume()
+	AudioTextToSpeech.Parent = TTSSharedGraph
+	local AudioDeviceOutput = Instance.new("AudioDeviceOutput")
+	AudioDeviceOutput.Parent = TTSSharedGraph
+	local Wire = Instance.new("Wire")
+	Wire.SourceInstance = AudioTextToSpeech
+	Wire.TargetInstance = AudioDeviceOutput
+	Wire.Parent = TTSSharedGraph
+	TTSSharedGraph.Parent = PlayerGui
 	
-	return audioTextToSpeech
+	return AudioTextToSpeech
 end
 
-return function(p1)
-	-- upvalues: defaultCreateTtsInstance (ref), createSignal (ref), runService (ref), classifyTTSErrorModule (ref), getFIntMomentsTTSWaveformSamplesPerSecondModule (ref), getFIntMomentsTTSWaveformMinSamplesModule (ref), getFIntMomentsTTSWaveformMaxSamplesModule (ref), normalizeWaveformModule (ref)
-	p1 = p1 or defaultCreateTtsInstance
-	local var1, var2 = createSignal("idle")
-	local var3, var4 = createSignal(nil)
-	local var5, var6 = createSignal(0)
-	local var7, var8 = createSignal(0)
-	local var9, var10 = createSignal(false)
-	local var11, var12 = createSignal("")
-	local var13, var14 = createSignal(0)
-	local var15, var16 = createSignal({})
-	local var17 = nil
-	local var18 = nil
-	local var19 = 0
-	local var20 = nil
-	local var21 = nil
-	local var22 = false
+return function(p1, PlayerGui) --[[ Line: 94 | Named "createTTSAudioManager" ]]
+	-- upvalues: defaultCreateTtsInstance (copy), CreateSignalFunction (copy), RunService (copy), ClassifyTTSErrorModule (copy), GetFIntMomentsTTSWaveformSamplesPerSecondModule (copy), GetFIntMomentsTTSWaveformMinSamplesModule (copy), GetFIntMomentsTTSWaveformMaxSamplesModule (copy), NormalizeWaveformModule (copy)
+	local Callback = p1 or function() --[[ Line: 99 ]]
+		-- upvalues: defaultCreateTtsInstance (upval), PlayerGui (copy)
+		return (defaultCreateTtsInstance(PlayerGui))
+	end
+	local Idle, Idle2 = CreateSignalFunction("idle")
+	local Signal, Signal2 = CreateSignalFunction(nil)
+	local Signal1, Signal2_1 = CreateSignalFunction(0)
+	local Signal3, Signal2_2 = CreateSignalFunction(0)
+	local Signal4, Signal2_3 = CreateSignalFunction(false)
+	local Signal5, Signal2_4 = CreateSignalFunction("")
+	local Signal6, Signal2_5 = CreateSignalFunction(0)
+	local Signal7, Signal2_6 = CreateSignalFunction({})
+	local v1 = nil
+	local Parent = nil
+	local Count = 0
+	local RenderSteppedConnection = nil
+	local EndedConnection = nil
+	local Flag = false
 	
-	local function _()
-		-- upvalues: var20 (write)
-		if var20 then
-			var20:Disconnect()
-			var20 = nil
+	local function _() --[[ Line: 119 | Named "stopTimeTracking" ]]
+		-- upvalues: RenderSteppedConnection (ref)
+		if RenderSteppedConnection then
+			RenderSteppedConnection:Disconnect()
+			RenderSteppedConnection = nil
 		end
 	end
 	
-	local _ = function()
-		-- upvalues: var20 (write), runService (copy), var17 (write), var8 (ref)
-		if var20 then
-			var20:Disconnect()
-			var20 = nil
+	local _ = function() --[[ Line: 126 | Named "startTimeTracking" ]]
+		-- upvalues: RenderSteppedConnection (ref), RunService (upval), v1 (ref), Signal2_2 (copy)
+		if RenderSteppedConnection then
+			RenderSteppedConnection:Disconnect()
+			RenderSteppedConnection = nil
 		end
-		var20 = runService.RenderStepped:Connect(function()
-			-- upvalues: var17 (copy), var8 (copy)
-			if var17 then
-				var8(var17.TimePosition)
+		RenderSteppedConnection = RunService.RenderStepped:Connect(function() --[[ Line: 128 ]]
+			-- upvalues: v1 (upval), Signal2_2 (upval)
+			if v1 then
+				Signal2_2(v1.TimePosition)
 			end
 		end)
 	end
 	
-	local _ = function()
-		-- upvalues: var17 (write), p1 (ref), var18 (write), var21 (write), var22 (write), var2 (ref), var8 (ref), var20 (write)
-		if var17 ~= nil then
-			return var17
+	local _ = function() --[[ Line: 135 | Named "ensureGraph" ]]
+		-- upvalues: v1 (ref), Callback (copy), Parent (ref), EndedConnection (ref), Flag (ref), Idle2 (copy), Signal2_2 (copy), RenderSteppedConnection (ref)
+		if v1 ~= nil then
+			return v1
 		end
-		local var23 = p1()
+		local CallbackResult = Callback()
 		
-		if var23 == nil then
+		if CallbackResult == nil then
 			return nil
-		end
-		var17 = var23
-		var18 = var23.Parent
-		var21 = var23.Ended:Connect(function()
-			-- upvalues: var22 (copy), var2 (copy), var8 (copy), var20 (copy)
-			if var22 then return end
-			var2("ready")
-			var8(0)
+		else
+			v1 = CallbackResult
+			Parent = CallbackResult.Parent
+			EndedConnection = CallbackResult.Ended:Connect(function() --[[ Line: 150 ]]
+				-- upvalues: Flag (upval), Idle2 (upval), Signal2_2 (upval), RenderSteppedConnection (upval)
+				if Flag then return end
+				Idle2("ready")
+				Signal2_2(0)
+				
+				if RenderSteppedConnection then
+					RenderSteppedConnection:Disconnect()
+					RenderSteppedConnection = nil
+				end
+			end)
 			
-			if var20 then
-				var20:Disconnect()
-				var20 = nil
-			end
-		end)
-		
-		return var23
+			return CallbackResult
+		end
 	end
 	
-	local function failGeneration(p2)
-		-- upvalues: var12 (ref), var14 (ref), var10 (ref), var6 (ref), var16 (ref), var4 (ref), var2 (ref)
-		var12("")
-		var14(0)
-		var10(false)
-		var6(0)
-		var16({})
-		var4(p2)
-		var2("error")
+	local function failGeneration(p2) --[[ Line: 163 ]]
+		-- upvalues: Signal2_4 (copy), Signal2_5 (copy), Signal2_3 (copy), Signal2_1 (copy), Signal2_6 (copy), Signal2 (copy), Idle2 (copy)
+		Signal2_4("")
+		Signal2_5(0)
+		Signal2_3(false)
+		Signal2_1(0)
+		Signal2_6({})
+		Signal2(p2)
+		Idle2("error")
 	end
 	
 	return {
-		getState = var1,
-		getErrorReason = var3,
-		getTimeLength = var5,
-		getTimePosition = var7,
-		getIsLoaded = var9,
-		getLoadedText = var11,
-		getLoadedVoiceId = var13,
-		getWaveform = var15,
-		generate = function(p2, p3)
-			-- upvalues: var22 (write), var11 (ref), var13 (ref), var1 (ref), var17 (write), p1 (ref), var18 (write), var21 (write), var2 (ref), var8 (ref), var20 (write), var4 (ref), var19 (write), var16 (ref), var12 (ref), var14 (ref), failGeneration (ref), classifyTTSErrorModule (copy), getFIntMomentsTTSWaveformSamplesPerSecondModule (copy), getFIntMomentsTTSWaveformMinSamplesModule (copy), getFIntMomentsTTSWaveformMaxSamplesModule (copy), var6 (ref), var10 (ref), normalizeWaveformModule (copy)
-			local var23
-			if var22 then return end
-			if p2 == var11(false) and p3 == var13(false) and var1(false) ~= "error" then return end
-			if var17 == nil then
-				local var24 = p1()
+		getState = Idle,
+		getErrorReason = Signal,
+		getTimeLength = Signal1,
+		getTimePosition = Signal3,
+		getIsLoaded = Signal4,
+		getLoadedText = Signal5,
+		getLoadedVoiceId = Signal6,
+		getWaveform = Signal7,
+		generate = function(Text, p2) --[[ Line: 173 ]]
+			-- upvalues: Flag (ref), Signal5 (copy), Signal6 (copy), Idle (copy), v1 (ref), Callback (copy), Parent (ref), EndedConnection (ref), Idle2 (copy), Signal2_2 (copy), RenderSteppedConnection (ref), Signal2 (copy), Count (ref), Signal2_6 (copy), Signal2_4 (copy), Signal2_5 (copy), failGeneration (copy), ClassifyTTSErrorModule (upval), GetFIntMomentsTTSWaveformSamplesPerSecondModule (upval), GetFIntMomentsTTSWaveformMinSamplesModule (upval), GetFIntMomentsTTSWaveformMaxSamplesModule (upval), Signal2_1 (copy), Signal2_3 (copy), NormalizeWaveformModule (upval)
+			if Flag then return end
+			if Text == Signal5(false) and p2 == Signal6(false) and Idle(false) ~= "error" then return end
+			local Sound = nil
+			if v1 == nil then
+				local CallbackResult = Callback()
 				
-				if var24 == nil then
-					var23 = nil
+				if CallbackResult == nil then
+					Sound = nil
 				else
-					var17 = var24
-					var18 = var24.Parent
-					var21 = var24.Ended:Connect(function()
-						-- upvalues: var22 (copy), var2 (copy), var8 (copy), var20 (copy)
-						if var22 then return end
-						var2("ready")
-						var8(0)
+					v1 = CallbackResult
+					Parent = CallbackResult.Parent
+					EndedConnection = CallbackResult.Ended:Connect(function() --[[ Line: 150 ]]
+						-- upvalues: Flag (upval), Idle2 (upval), Signal2_2 (upval), RenderSteppedConnection (upval)
+						if Flag then return end
+						Idle2("ready")
+						Signal2_2(0)
 						
-						if var20 then
-							var20:Disconnect()
-							var20 = nil
+						if RenderSteppedConnection then
+							RenderSteppedConnection:Disconnect()
+							RenderSteppedConnection = nil
 						end
 					end)
-					var23 = var24
+					Sound = CallbackResult
 				end
 			else
-				var23 = var17
+				Sound = v1
 			end
-			if not var23 then
-				var4("failure")
-				var2("error")
+			if not Sound then
+				Signal2("failure")
+				Idle2("error")
 				
 				return
 			end
-			var19 += 1
-			local var25 = var19
-			var23:Pause()
+			Count += 1
+			local Count1: number = Count
+			Sound:Pause()
 			
-			if var20 then
-				var20:Disconnect()
-				var20 = nil
+			if RenderSteppedConnection then
+				RenderSteppedConnection:Disconnect()
+				RenderSteppedConnection = nil
 			end
-			var4(nil)
-			var2("loading")
-			var8(0)
-			var16({})
-			var12("")
-			var14(0)
-			task.spawn(function()
-				-- upvalues: var22 (copy), var23 (ref), p2 (ref), p3 (ref), var19 (copy), var25 (ref), failGeneration (copy), classifyTTSErrorModule (copy), getFIntMomentsTTSWaveformSamplesPerSecondModule (copy), getFIntMomentsTTSWaveformMinSamplesModule (copy), getFIntMomentsTTSWaveformMaxSamplesModule (copy), var12 (copy), var14 (copy), var6 (copy), var10 (copy), var8 (copy), var16 (copy), normalizeWaveformModule (copy), var2 (copy)
-				if var22 then return end
-				var23.Text = p2
-				var23.VoiceId = tostring(p3)
-				local ok, status = pcall(function()
-					-- upvalues: var23 (copy)
-					return var23:LoadPlatformAsync()
+			Signal2(nil)
+			Idle2("loading")
+			Signal2_2(0)
+			Signal2_6({})
+			Signal2_4("")
+			Signal2_5(0)
+			task.spawn(function() --[[ Line: 204 ]]
+				-- upvalues: Flag (upval), Sound (copy), Text (copy), p2 (copy), Count (upval), Count1 (copy), failGeneration (upval), ClassifyTTSErrorModule (upval), GetFIntMomentsTTSWaveformSamplesPerSecondModule (upval), GetFIntMomentsTTSWaveformMinSamplesModule (upval), GetFIntMomentsTTSWaveformMaxSamplesModule (upval), Signal2_4 (upval), Signal2_5 (upval), Signal2_1 (upval), Signal2_3 (upval), Signal2_2 (upval), Signal2_6 (upval), NormalizeWaveformModule (upval), Idle2 (upval)
+				if Flag then return end
+				Sound.Text = Text
+				Sound.VoiceId = tostring(p2)
+				local Success, Result = pcall(function() --[[ Line: 212 ]]
+					-- upvalues: Sound (upval)
+					return Sound:LoadPlatformAsync()
 				end)
 				
-				if var22 or var19 ~= var25 then return end
-				if not ok then
-					failGeneration(classifyTTSErrorModule(status))
+				if Flag or Count ~= Count1 then return end
+				if not Success then
+					failGeneration(ClassifyTTSErrorModule(Result))
 					
 					return
-				elseif status ~= Enum.AssetFetchStatus.Success then
+				end
+				if Result ~= Enum.AssetFetchStatus.Success then
 					failGeneration("failure")
 					
 					return
 				end
-				local clampedValue = math.clamp(math.round(var23.TimeLength * getFIntMomentsTTSWaveformSamplesPerSecondModule()), getFIntMomentsTTSWaveformMinSamplesModule(), getFIntMomentsTTSWaveformMaxSamplesModule())
-				local ok_1, status_1 = pcall(function()
-					-- upvalues: var23 (copy), clampedValue (ref)
-					return var23:GetWaveformAsync(NumberRange.new(0, var23.TimeLength), clampedValue)
+				local ClampedValue = math.clamp(math.round(Sound.TimeLength * GetFIntMomentsTTSWaveformSamplesPerSecondModule()), GetFIntMomentsTTSWaveformMinSamplesModule(), GetFIntMomentsTTSWaveformMaxSamplesModule())
+				local Success1, Result1 = pcall(function() --[[ Line: 235 ]]
+					-- upvalues: Sound (upval), ClampedValue (copy)
+					return Sound:GetWaveformAsync(NumberRange.new(0, Sound.TimeLength), ClampedValue)
 				end)
 				
-				if var22 or var19 ~= var25 then return end
-				var12(p2)
-				var14(p3)
-				var6(var23.TimeLength)
-				var10(true)
-				var8(0)
+				if Flag or Count ~= Count1 then return end
+				Signal2_4(Text)
+				Signal2_5(p2)
+				Signal2_1(Sound.TimeLength)
+				Signal2_3(true)
+				Signal2_2(0)
 				
-				if ok_1 and type(status_1) == "table" then
-					var16(normalizeWaveformModule(status_1))
+				if Success1 and type(Result1) == "table" then
+					Signal2_6(NormalizeWaveformModule(Result1))
 				end
-				var2("ready")
+				Idle2("ready")
 			end)
 		end,
-		play = function()
-			-- upvalues: var22 (write), var17 (write), var2 (ref), var20 (write), runService (copy), var8 (ref)
-			if var22 then return end
-			if var17 and var17.IsLoaded then
-				var17:Play()
-				var2("playing")
+		play = function() --[[ Line: 259 ]]
+			-- upvalues: Flag (ref), v1 (ref), Idle2 (copy), RenderSteppedConnection (ref), RunService (upval), Signal2_2 (copy)
+			if Flag then return end
+			local v2 = v1
+			
+			if v2 and v2.IsLoaded then
+				v2:Play()
+				Idle2("playing")
 				
-				if var20 then
-					var20:Disconnect()
-					var20 = nil
+				if RenderSteppedConnection then
+					RenderSteppedConnection:Disconnect()
+					RenderSteppedConnection = nil
 				end
-				var20 = runService.RenderStepped:Connect(function()
-					-- upvalues: var17 (copy), var8 (copy)
-					if var17 then
-						var8(var17.TimePosition)
+				RenderSteppedConnection = RunService.RenderStepped:Connect(function() --[[ Line: 128 ]]
+					-- upvalues: v1 (upval), Signal2_2 (upval)
+					if v1 then
+						Signal2_2(v1.TimePosition)
 					end
 				end)
 			end
 		end,
-		pause = function()
-			-- upvalues: var22 (write), var17 (write), var20 (write), var1 (ref), var2 (ref)
-			if var22 then return end
-			if var17 then
-				var17:Pause()
+		pause = function() --[[ Line: 271 ]]
+			-- upvalues: Flag (ref), v1 (ref), RenderSteppedConnection (ref), Idle (copy), Idle2 (copy)
+			if Flag then return end
+			local v2 = v1
+			
+			if v2 then
+				v2:Pause()
 				
-				if var20 then
-					var20:Disconnect()
-					var20 = nil
+				if RenderSteppedConnection then
+					RenderSteppedConnection:Disconnect()
+					RenderSteppedConnection = nil
 				end
-				if var1(false) == "playing" then
-					var2("ready")
+				if Idle(false) == "playing" then
+					Idle2("ready")
 				end
 			end
 		end,
-		seek = function(p2)
-			-- upvalues: var22 (write), var17 (write), var5 (ref), var8 (ref)
-			if var22 then return end
-			if var17 then
-				local clampedValue = math.clamp(p2, 0, var5(false))
-				var17.TimePosition = clampedValue
-				var8(clampedValue)
-			end
-		end,
-		setVolume = function(value)
-			-- upvalues: var22 (write), var17 (write)
-			if var22 then return end
-			if var17 then
-				var17.Volume = value
-			end
-		end,
-		reset = function()
-			-- upvalues: var22 (write), var19 (write), var17 (write), var20 (write), var4 (ref), var2 (ref), var8 (ref), var6 (ref), var10 (ref), var12 (ref), var14 (ref), var16 (ref)
-			if var22 then return end
-			var19 += 1
+		seek = function(Value: number) --[[ Line: 285 ]]
+			-- upvalues: Flag (ref), v1 (ref), Signal1 (copy), Signal2_2 (copy)
+			if Flag then return end
+			local v2 = v1
 			
-			if var17 then
-				var17:Pause()
+			if v2 then
+				local ClampedValue = math.clamp(Value, 0, (Signal1(false)))
+				v2.TimePosition = ClampedValue
+				Signal2_2(ClampedValue)
 			end
-			if var20 then
-				var20:Disconnect()
-				var20 = nil
-			end
-			var4(nil)
-			var2("idle")
-			var8(0)
-			var6(0)
-			var10(false)
-			var12("")
-			var14(0)
-			var16({})
 		end,
-		destroy = function()
-			-- upvalues: var22 (write), var20 (write), var21 (write), var18 (write), var17 (write)
-			if var22 then return end
-			var22 = true
+		setVolume = function(Volume) --[[ Line: 297 ]]
+			-- upvalues: Flag (ref), v1 (ref)
+			if Flag then return end
+			local v2 = v1
 			
-			if var20 then
-				var20:Disconnect()
-				var20 = nil
+			if v2 then
+				v2.Volume = Volume
 			end
-			if var21 then
-				var21:Disconnect()
-				var21 = nil
+		end,
+		reset = function() --[[ Line: 311 ]]
+			-- upvalues: Flag (ref), Count (ref), v1 (ref), RenderSteppedConnection (ref), Signal2 (copy), Idle2 (copy), Signal2_2 (copy), Signal2_1 (copy), Signal2_3 (copy), Signal2_4 (copy), Signal2_5 (copy), Signal2_6 (copy)
+			if Flag then return end
+			Count += 1
+			
+			if v1 then
+				v1:Pause()
 			end
-			if var18 then
-				var18:Destroy()
-				var18 = nil
+			if RenderSteppedConnection then
+				RenderSteppedConnection:Disconnect()
+				RenderSteppedConnection = nil
 			end
-			var17 = nil
+			Signal2(nil)
+			Idle2("idle")
+			Signal2_2(0)
+			Signal2_1(0)
+			Signal2_3(false)
+			Signal2_4("")
+			Signal2_5(0)
+			Signal2_6({})
+		end,
+		destroy = function() --[[ Line: 331 ]]
+			-- upvalues: Flag (ref), RenderSteppedConnection (ref), EndedConnection (ref), Parent (ref), v1 (ref)
+			if Flag then return end
+			Flag = true
+			
+			if RenderSteppedConnection then
+				RenderSteppedConnection:Disconnect()
+				RenderSteppedConnection = nil
+			end
+			if EndedConnection then
+				EndedConnection:Disconnect()
+				EndedConnection = nil
+			end
+			if Parent then
+				Parent:Destroy()
+				Parent = nil
+			end
+			v1 = nil
 		end
 	}
 end

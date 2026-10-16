@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Workspace.GameInvite.GameInvite)
+﻿return (require(script.Parent.Parent.Parent._Workspace.GameInvite.GameInvite))

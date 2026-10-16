@@ -1,25 +1,25 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local signalsModule = require(parent_1.Signals)
-local _ = require(parent_1.InternalHttpStore)
-local _ = require(parent.Types)
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local SignalsModule = require(Parent1.Signals)
+local _ = require(Parent1.InternalHttpStore)
+local _ = require(Parent.Types)
 
-return function(p1)
-	-- upvalues: signalsModule (ref)
-	return function(p2)
-		-- upvalues: signalsModule (copy), p1 (ref)
-		return signalsModule.createComputed(function(p3)
-			-- upvalues: p2 (ref), p1 (copy)
-			local var1 = p2(p3)
+return function(p1) --[[ Line: 11 | Named "createErrorStatusHandler" ]]
+	-- upvalues: SignalsModule (copy)
+	return function(Callback) --[[ Line: 12 ]]
+		-- upvalues: SignalsModule (upval), p1 (copy)
+		return SignalsModule.createComputed(function(p2) --[[ Line: 13 ]]
+			-- upvalues: Callback (copy), p1 (upval)
+			local CallbackResult = Callback(p2)
 			
-			if var1.status == "Success" then
-				local statusCode = var1.response.StatusCode
+			if CallbackResult.status == "Success" then
+				local StatusCode = CallbackResult.response.StatusCode
 				
-				if p1[statusCode] ~= nil then
-					p1[statusCode](var1)
+				if p1[StatusCode] ~= nil then
+					p1[StatusCode](CallbackResult)
 				end
 			end
-			return var1
+			return CallbackResult
 		end)
 	end
 end

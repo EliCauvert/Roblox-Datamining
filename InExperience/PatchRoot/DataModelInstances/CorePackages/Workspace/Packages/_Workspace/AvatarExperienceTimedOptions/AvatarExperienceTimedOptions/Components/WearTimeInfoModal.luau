@@ -1,79 +1,80 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceTimedOptions").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local modalWindow = require(parent.UIBlox).App.Dialog.Modal.ModalWindow
-local view = foundationModule.View
-local text = foundationModule.Text
-local icon = foundationModule.Icon
-local button = foundationModule.Button
-local inputSize = foundationModule.Enums.InputSize
-local iconName = foundationModule.Enums.IconName
-local useTokens = foundationModule.Hooks.useTokens
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceTimedOptions").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local ModalWindow = require(Parent.UIBlox).App.Dialog.Modal.ModalWindow
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local Icon = FoundationModule.Icon
+local Button = FoundationModule.Button
+local InputSize = FoundationModule.Enums.InputSize
+local IconName = FoundationModule.Enums.IconName
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
 
-return function(p1)
-	-- upvalues: useTokens (ref), useLocalization (ref), useSelector (ref), reactModule (ref), modalWindow (ref), view (ref), icon (ref), iconName (ref), text (ref), button (ref), inputSize (ref)
-	local var1 = useLocalization({
+return function(p1) --[[ Line: 26 ]]
+	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), UseSelectorFunction (copy), ReactModule (copy), ModalWindow (copy), View (copy), Icon (copy), IconName (copy), Text (copy), Button (copy), InputSize (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseLocalizationResult = UseLocalizationFunction({
 		modalTitle = "Feature.Durables.InfoModal.Title",
 		modalDescription = "Feature.Durables.InfoModal.Description",
 		actionOK = "CommonUI.Messages.Action.OK"
 	})
 	
-	return reactModule.createElement(modalWindow, {
+	return ReactModule.createElement(ModalWindow, {
 		isFullHeight = false,
-		screenSize = useSelector(function(p2)
+		screenSize = UseSelectorFunction(function(p2) --[[ Line: 35 ]]
 			return p2.ScreenSize
 		end)
 	}, {
-		Body = reactModule.createElement(view, {
+		Body = ReactModule.createElement(View, {
 			tag = "size-full-0 auto-y padding-large col gap-large",
 			BackgroundTransparency = 1
 		}, {
-			IconContainer = reactModule.createElement(view, {
+			IconContainer = ReactModule.createElement(View, {
 				tag = "size-full-0 auto-y align-x-center margin-top-medium margin-bottom-medium",
 				LayoutOrder = 0
 			}, {
-				InnerContainer = reactModule.createElement(view, {
+				InnerContainer = ReactModule.createElement(View, {
 					tag = "size-2000-2000 auto-xy",
 					BackgroundTransparency = 1
 				}, {
-					RotatedSquare = reactModule.createElement(view, {
+					RotatedSquare = ReactModule.createElement(View, {
 						tag = "size-full radius-small stroke-default stroke-thicker",
 						BackgroundTransparency = 1,
 						Rotation = 25,
 						Position = UDim2.fromScale(0.5, 0.5),
 						AnchorPoint = Vector2.new(0.5, 0.5)
 					}, {
-						IconWrapper = reactModule.createElement(view, { tag = "size-full", BackgroundTransparency = 1 }, {
-							ClockIcon = reactModule.createElement(icon, {
+						IconWrapper = ReactModule.createElement(View, { tag = "size-full", BackgroundTransparency = 1 }, {
+							ClockIcon = ReactModule.createElement(Icon, {
 								Rotation = -25,
-								name = iconName.Clock,
+								name = IconName.Clock,
 								Position = UDim2.fromScale(0.5, 0.5),
 								AnchorPoint = Vector2.new(0.5, 0.5),
-								size = useTokens().Size.Size_600
+								size = UseTokensResult.Size.Size_600
 							})
 						})
 					})
 				})
 			}),
-			Title = reactModule.createElement(text, {
+			Title = ReactModule.createElement(Text, {
 				tag = "size-full-0 auto-y text-align-x-left text-heading-medium",
 				LayoutOrder = 1,
-				Text = var1.modalTitle
+				Text = UseLocalizationResult.modalTitle
 			}),
-			Description = reactModule.createElement(text, {
+			Description = ReactModule.createElement(Text, {
 				tag = "size-full-0 auto-y text-wrap text-truncate-none text-align-x-left text-body-medium",
 				RichText = true,
 				LayoutOrder = 2,
-				Text = var1.modalDescription
+				Text = UseLocalizationResult.modalDescription
 			}),
-			CloseButton = reactModule.createElement(button, {
+			CloseButton = ReactModule.createElement(Button, {
 				LayoutOrder = 5,
 				tag = "size-full-0 auto-y",
 				testId = "theCloseButton",
-				text = var1.actionOK,
-				size = inputSize.Medium,
+				text = UseLocalizationResult.actionOK,
+				size = InputSize.Medium,
 				width = UDim.new(1, 0),
 				onActivated = p1.onClose
 			})

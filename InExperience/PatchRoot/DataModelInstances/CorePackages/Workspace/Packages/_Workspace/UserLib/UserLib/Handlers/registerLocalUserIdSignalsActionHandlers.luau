@@ -1,26 +1,26 @@
-﻿local userLib = script:FindFirstAncestor("UserLib")
-local parent = userLib.Parent
-local actionHandlers = require(parent.SignalsMiddleware).ActionHandlers
-local setLocalUserIdModule = require(userLib.Actions.SetLocalUserId)
-local clearUserSpecificDataModule = require(userLib.Actions.ClearUserSpecificData)
-local localUserIdStore = require(parent.LocalUserIdStore).LocalUserIdStore
+﻿local UserLib = script:FindFirstAncestor("UserLib")
+local Parent = UserLib.Parent
+local ActionHandlers = require(Parent.SignalsMiddleware).ActionHandlers
+local SetLocalUserIdModule = require(UserLib.Actions.SetLocalUserId)
+local ClearUserSpecificDataModule = require(UserLib.Actions.ClearUserSpecificData)
+local LocalUserIdStore = require(Parent.LocalUserIdStore).LocalUserIdStore
 
-local function handleSetLocalUserId(value)
-	-- upvalues: localUserIdStore (ref)
-	localUserIdStore.setCurrentUserId(value.userId)
+local function handleSetLocalUserId(p1): boolean --[[ Line: 21 ]]
+	-- upvalues: LocalUserIdStore (copy)
+	LocalUserIdStore.setCurrentUserId(p1.userId)
 	
 	return false
 end
 
-local function handleClearUserSpecificData(_)
-	-- upvalues: localUserIdStore (ref)
-	localUserIdStore.reset()
+local function handleClearUserSpecificData(_): boolean --[[ Line: 26 ]]
+	-- upvalues: LocalUserIdStore (copy)
+	LocalUserIdStore.reset()
 	
 	return false
 end
 
-return function(p1)
-	-- upvalues: actionHandlers (ref), setLocalUserIdModule (ref), handleSetLocalUserId (ref), clearUserSpecificDataModule (ref), handleClearUserSpecificData (ref)
-	actionHandlers.register(p1, setLocalUserIdModule.name, handleSetLocalUserId)
-	actionHandlers.register(p1, clearUserSpecificDataModule.name, handleClearUserSpecificData)
+return function(p1) --[[ Line: 31 ]]
+	-- upvalues: ActionHandlers (copy), SetLocalUserIdModule (copy), handleSetLocalUserId (copy), ClearUserSpecificDataModule (copy), handleClearUserSpecificData (copy)
+	ActionHandlers.register(p1, SetLocalUserIdModule.name, handleSetLocalUserId)
+	ActionHandlers.register(p1, ClearUserSpecificDataModule.name, handleClearUserSpecificData)
 end

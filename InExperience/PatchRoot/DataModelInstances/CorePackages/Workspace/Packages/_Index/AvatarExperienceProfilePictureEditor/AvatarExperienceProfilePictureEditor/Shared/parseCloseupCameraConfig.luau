@@ -1,40 +1,42 @@
-﻿local constantsModule = require(script.Parent.Parent.Constants)
+﻿local ConstantsModule = require(script.Parent.Parent.Constants)
 
-return function(p1)
-	-- upvalues: constantsModule (ref)
-	local defaultDistanceScale = constantsModule.DefaultDistanceScale
-	local defaultYRotDeg = constantsModule.DefaultYRotDeg
-	local defaultFieldOfViewDeg = constantsModule.DefaultFieldOfViewDeg
-	local var1 = nil
-	local avatarThumbnailCustomizations = p1 and p1.avatarThumbnailCustomizations
+return function(p1) --[[ Line: 15 | Named "parseCloseupCameraConfig" ]]
+	-- upvalues: ConstantsModule (copy)
+	local DefaultDistanceScale = ConstantsModule.DefaultDistanceScale
+	local DefaultYRotDeg = ConstantsModule.DefaultYRotDeg
+	local DefaultFieldOfViewDeg = ConstantsModule.DefaultFieldOfViewDeg
+	local EmoteAssetId: string? = nil
+	local AvatarThumbnailCustomizations = p1 and p1.avatarThumbnailCustomizations
 	
-	if avatarThumbnailCustomizations then
-		for i, v in avatarThumbnailCustomizations do
-			if v.thumbnailType == constantsModule.CloseupThumbnailTypeApi then
-				if v.emoteAssetId and v.emoteAssetId ~= 0 then
-					var1 = tostring(v.emoteAssetId)
+	if AvatarThumbnailCustomizations then
+		for _, avatarThumbnailCustomization in AvatarThumbnailCustomizations do
+			if avatarThumbnailCustomization.thumbnailType == ConstantsModule.CloseupThumbnailTypeApi then
+				if avatarThumbnailCustomization.emoteAssetId and avatarThumbnailCustomization.emoteAssetId ~= 0 then
+					EmoteAssetId = tostring(avatarThumbnailCustomization.emoteAssetId)
 				end
-				local camera = v.camera
+				local Camera = avatarThumbnailCustomization.camera
 				
-				if not camera then break end
-				local distanceScale = camera.distanceScale
+				if not Camera then break end
+				local DistanceScale = Camera.distanceScale
 				
-				if typeof(distanceScale) == "number" and distanceScale ~= -1 then
-					defaultDistanceScale = distanceScale
+				if typeof(DistanceScale) == "number" and DistanceScale ~= -1 then
+					DefaultDistanceScale = DistanceScale
 				end
-				if typeof(camera.yRotDeg) == "number" then
-					defaultYRotDeg = camera.yRotDeg
+				if typeof(Camera.yRotDeg) == "number" then
+					DefaultYRotDeg = Camera.yRotDeg
 				end
-				if typeof(camera.fieldOfViewDeg) ~= "number" or camera.fieldOfViewDeg <= 0 then break end
-				defaultFieldOfViewDeg = camera.fieldOfViewDeg
+				if typeof(Camera.fieldOfViewDeg) ~= "number" or Camera.fieldOfViewDeg <= 0 then break end
+				DefaultFieldOfViewDeg = Camera.fieldOfViewDeg
 				break
+			else
+				continue
 			end
 		end
 	end
 	return {
-		distanceScale = defaultDistanceScale,
-		yRotDeg = defaultYRotDeg,
-		fieldOfViewDeg = defaultFieldOfViewDeg,
-		emoteAssetId = var1
+		distanceScale = DefaultDistanceScale,
+		yRotDeg = DefaultYRotDeg,
+		fieldOfViewDeg = DefaultFieldOfViewDeg,
+		emoteAssetId = EmoteAssetId
 	}
 end

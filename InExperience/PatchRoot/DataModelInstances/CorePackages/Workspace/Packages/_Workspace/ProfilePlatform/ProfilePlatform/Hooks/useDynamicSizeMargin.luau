@@ -1,29 +1,23 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local useTokens = require(parent.Foundation).Hooks.useTokens
-local getPageMargin = require(parent.UIBlox).App.Container.getPageMargin
-local useProfileFormFactorModule = require(profilePlatform.Hooks.useProfileFormFactor)
-local useIsMeTabModule = require(profilePlatform.Hooks.useIsMeTab)
-local enumsModule = require(profilePlatform.Common.Enums)
-local fFlagAXEnableProfileTab = require(parent.SharedFlags).FFlagAXEnableProfileTab
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+local GetPageMarginFunction = require(Parent.UIBlox).App.Container.getPageMargin
+local UseProfileFormFactorModule = require(ProfilePlatform.Hooks.useProfileFormFactor)
+local UseIsMeTabModule = require(ProfilePlatform.Hooks.useIsMeTab)
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local FFlagAXEnableProfileTab = require(Parent.SharedFlags).FFlagAXEnableProfileTab
 
-return function()
-	-- upvalues: fFlagAXEnableProfileTab (ref), useTokens (ref), useIsMeTabModule (ref), useProfileFormFactorModule (ref), enumsModule (ref), reactModule (ref), getPageMargin (ref)
-	local var1
-	local var2 = if fFlagAXEnableProfileTab then useTokens() else nil
-	local var3 = if fFlagAXEnableProfileTab then useIsMeTabModule() else nil
+return function() --[[ Line: 16 ]]
+	-- upvalues: FFlagAXEnableProfileTab (copy), UseTokensFunction (copy), UseIsMeTabModule (copy), UseProfileFormFactorModule (copy), EnumsModule (copy), ReactModule (copy), GetPageMarginFunction (copy)
+	local UseTokensResult = if FFlagAXEnableProfileTab then UseTokensFunction() else nil
+	local UseIsMeTabModuleResult = if FFlagAXEnableProfileTab then UseIsMeTabModule() else nil
+	local IsFormFactorMatch = if FFlagAXEnableProfileTab then UseProfileFormFactorModule().formFactor == EnumsModule.ProfileFormFactor.Wide else nil
+	local UseStateResult, UseStateResult2 = ReactModule.useState(24)
+	local Large = if FFlagAXEnableProfileTab then if IsFormFactorMatch then UseTokensResult.Margin.Large else UseTokensResult.Padding.Large else nil
 	
-	if fFlagAXEnableProfileTab then
-		var1 = useProfileFormFactorModule().formFactor == enumsModule.ProfileFormFactor.Wide
-		var1 = nil
-	else
-		var1 = nil
-	end
-	local var4, var5 = reactModule.useState(24)
-	
-	return if fFlagAXEnableProfileTab and var3 then if fFlagAXEnableProfileTab then if var1 then var2.Margin.Large else var2.Padding.Large else nil else var4, reactModule.useCallback(function(p1)
-		-- upvalues: getPageMargin (copy), var5 (ref)
-		var5(getPageMargin(p1.AbsoluteSize.X))
-	end, {})
+	return if FFlagAXEnableProfileTab and UseIsMeTabModuleResult then Large else UseStateResult, (ReactModule.useCallback(function(Frame) --[[ Line: 25 ]]
+		-- upvalues: GetPageMarginFunction (upval), UseStateResult2 (copy)
+		UseStateResult2((GetPageMarginFunction(Frame.AbsoluteSize.X)))
+	end, {}))
 end

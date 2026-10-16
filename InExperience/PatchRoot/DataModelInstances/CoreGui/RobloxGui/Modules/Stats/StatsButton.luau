@@ -1,38 +1,38 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local styleWidgetsModule = require(coreGuiService.RobloxGui.Modules.StyleWidgets)
-local statsUtilsModule = require(coreGuiService.RobloxGui.Modules.Stats.StatsUtils)
-local statsMiniTextPanelModule = require(coreGuiService.RobloxGui.Modules.Stats.StatsMiniTextPanel)
-local statsAnnotatedGraphModule = require(coreGuiService.RobloxGui.Modules.Stats.StatsAnnotatedGraph)
-local uDim2 = UDim2.new(0, 0, 0, 0)
-local uDim2_1 = UDim2.new(0.5, 0, 1, -styleWidgetsModule.TabSelectionHeight)
-local uDim2_2 = UDim2.new(0.5, 0, 0, 0)
-local uDim2_3 = UDim2.new(0.5, 0, 1, -styleWidgetsModule.TabSelectionHeight)
-local t = {}
-t.__index = t
+﻿local CoreGui = game:GetService("CoreGui")
+local StyleWidgetsModule = require(CoreGui.RobloxGui.Modules.StyleWidgets)
+local StatsUtilsModule = require(CoreGui.RobloxGui.Modules.Stats.StatsUtils)
+local StatsMiniTextPanelModule = require(CoreGui.RobloxGui.Modules.Stats.StatsMiniTextPanel)
+local StatsAnnotatedGraphModule = require(CoreGui.RobloxGui.Modules.Stats.StatsAnnotatedGraph)
+local _UDim2 = UDim2.new(0, 0, 0, 0)
+local _UDim2_1 = UDim2.new(0.5, 0, 1, -StyleWidgetsModule.TabSelectionHeight)
+local _UDim2_2 = UDim2.new(0.5, 0, 0, 0)
+local _UDim2_3 = UDim2.new(0.5, 0, 1, -StyleWidgetsModule.TabSelectionHeight)
+local StatsButtonModule = {}
+StatsButtonModule.__index = StatsButtonModule
 
-function t.new(p1)
-	-- upvalues: t (ref), statsUtilsModule (ref), statsMiniTextPanelModule (ref), uDim2_1 (ref), uDim2 (ref), statsAnnotatedGraphModule (ref), uDim2_3 (ref), uDim2_2 (ref), styleWidgetsModule (ref)
-	local pSButton = {}
-	setmetatable(pSButton, t)
-	pSButton._statType = p1
-	pSButton._button = Instance.new("TextButton")
-	pSButton._button.Name = "PS_Button"
-	pSButton._button.Text = ""
-	statsUtilsModule.StyleButton(pSButton._button)
-	pSButton._textPanel = statsMiniTextPanelModule.new(p1)
-	pSButton._textPanel:PlaceInParent(pSButton._button, uDim2_1, uDim2)
-	pSButton._graph = statsAnnotatedGraphModule.new(p1, false)
-	pSButton._graph:PlaceInParent(pSButton._button, uDim2_3, uDim2_2)
-	pSButton._textPanel:SetZIndex(statsUtilsModule.TextZIndex)
-	pSButton._graph:SetZIndex(statsUtilsModule.GraphZIndex)
-	pSButton._tabSelection = styleWidgetsModule.MakeTabSelectionWidget(pSButton._button)
-	pSButton._isSelected = false
-	pSButton:_updateTabSelectionState()
+function StatsButtonModule.new(StatType) --[[ Line: 30 ]]
+	-- upvalues: StatsButtonModule (copy), StatsUtilsModule (copy), StatsMiniTextPanelModule (copy), _UDim2_1 (copy), _UDim2 (copy), StatsAnnotatedGraphModule (copy), _UDim2_3 (copy), _UDim2_2 (copy), StyleWidgetsModule (copy)
+	local t = {}
+	setmetatable(t, StatsButtonModule)
+	t._statType = StatType
+	t._button = Instance.new("TextButton")
+	t._button.Name = "PS_Button"
+	t._button.Text = ""
+	StatsUtilsModule.StyleButton(t._button)
+	t._textPanel = StatsMiniTextPanelModule.new(StatType)
+	t._textPanel:PlaceInParent(t._button, _UDim2_1, _UDim2)
+	t._graph = StatsAnnotatedGraphModule.new(StatType, false)
+	t._graph:PlaceInParent(t._button, _UDim2_3, _UDim2_2)
+	t._textPanel:SetZIndex(StatsUtilsModule.TextZIndex)
+	t._graph:SetZIndex(StatsUtilsModule.GraphZIndex)
+	t._tabSelection = StyleWidgetsModule.MakeTabSelectionWidget(t._button)
+	t._isSelected = false
+	t:_updateTabSelectionState()
 	
-	return pSButton
+	return t
 end
 
-function t:OnPerformanceStatsShouldBeVisibleChanged()
+function StatsButtonModule:OnPerformanceStatsShouldBeVisibleChanged() --[[ Line: 63 ]]
 	if self._graph then
 		self._graph:OnPerformanceStatsShouldBeVisibleChanged()
 	end
@@ -41,34 +41,34 @@ function t:OnPerformanceStatsShouldBeVisibleChanged()
 	end
 end
 
-function t:SetToggleCallbackFunction(p1)
-	self._button.MouseButton1Click:connect(function()
-		-- upvalues: p1 (ref), self (ref)
-		p1(self._statType)
+function StatsButtonModule:SetToggleCallbackFunction(Callback) --[[ Line: 73 ]]
+	self._button.MouseButton1Click:connect(function() --[[ Line: 74 ]]
+		-- upvalues: Callback (copy), self (copy)
+		Callback(self._statType)
 	end)
 end
 
-function t:SetSizeAndPosition(p1, p2)
-	self._button.Size = p1
-	self._button.Position = p2
+function StatsButtonModule:SetSizeAndPosition(Size, Position) --[[ Line: 79 ]]
+	self._button.Size = Size
+	self._button.Position = Position
 end
 
-function t:SetIsSelected(p1)
-	self._isSelected = p1
+function StatsButtonModule:SetIsSelected(_isSelected) --[[ Line: 84 ]]
+	self._isSelected = _isSelected
 	self:_updateTabSelectionState()
 end
 
-function t:_updateTabSelectionState()
+function StatsButtonModule:_updateTabSelectionState() --[[ Line: 89 ]]
 	self._tabSelection.Visible = self._isSelected
 end
 
-function t:SetParent(p1)
-	self._button.Parent = p1
+function StatsButtonModule:SetParent(Parent) --[[ Line: 93 ]]
+	self._button.Parent = Parent
 end
 
-function t:SetStatsAggregator(p1)
+function StatsButtonModule:SetStatsAggregator(p1) --[[ Line: 97 ]]
 	self._textPanel:SetStatsAggregator(p1)
 	self._graph:SetStatsAggregator(p1)
 end
 
-return t
+return StatsButtonModule

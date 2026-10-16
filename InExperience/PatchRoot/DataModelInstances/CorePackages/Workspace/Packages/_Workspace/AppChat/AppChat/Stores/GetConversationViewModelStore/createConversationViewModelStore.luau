@@ -1,416 +1,547 @@
-﻿local localizationService = game:GetService("LocalizationService")
-local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local signalsModule = require(parent.Signals)
-local domLocatorsModule = require(appChat.Utils.DomLocators)
-local getConversationTitleModule = require(appChat.Conversations.getConversationTitle)
-local useIsUserPendingModule = require(appChat.Hooks.useIsUserPending)
-local shouldShowOSAForConversationModule = require(appChat.Utils.shouldShowOSAForConversation)
-local shouldShowU13ChatOptInForConversationModule = require(appChat.Utils.shouldShowU13ChatOptInForConversation)
-local _ = require(appChat.Stores.GetConversationStore.createConversationStore)
-local _ = require(appChat.Stores.GetConversationMessageStore.createConversationMessageStore)
-local enumsModule = require(appChat.MessageData.Enums)
-local _ = require(appChat.MessageData.Types)
-local localization = require(parent.RobloxAppLocales).Localization
-local messageType = enumsModule.MessageType
-local messageVisibility = enumsModule.MessageVisibility
+﻿local LocalizationService = game:GetService("LocalizationService")
+local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local SignalsModule = require(Parent.Signals)
+local DomLocatorsModule = require(AppChat.Utils.DomLocators)
+local GetConversationTitleModule = require(AppChat.Conversations.getConversationTitle)
+local UseIsUserPendingModule = require(AppChat.Hooks.useIsUserPending)
+local ShouldShowOSAForConversationModule = require(AppChat.Utils.shouldShowOSAForConversation)
+local ShouldShowU13ChatOptInForConversationModule = require(AppChat.Utils.shouldShowU13ChatOptInForConversation)
+local _ = require(AppChat.Stores.GetConversationStore.createConversationStore)
+local _ = require(AppChat.Stores.GetConversationMessageStore.createConversationMessageStore)
+local _ = require(AppChat.Stores.GetConversationMessageListStore.createConversationMessageListStore)
+local GetPreciseUnixTimestampModule = require(AppChat.Utils.getPreciseUnixTimestamp)
+local EnumsModule = require(AppChat.MessageData.Enums)
+local _ = require(AppChat.MessageData.Types)
+local Localization = require(Parent.RobloxAppLocales).Localization
+local FFlagAppChatDerivedConversationLatestActivityModule = require(AppChat.Flags.FFlagAppChatDerivedConversationLatestActivity)
+local MessageType = EnumsModule.MessageType
+local MessageVisibility = EnumsModule.MessageVisibility
 
-local function _(p1)
-	return if not (type(p1) ~= "table" or type(p1[1]) ~= "table") then if type(p1[1].alt_text) == "string" then p1[1].alt_text else nil else nil
+local function _(Entry) --[[ Line: 34 | Named "getFirstCardAltText" ]]
+	return if type(Entry) == "table" and type(Entry[1]) == "table" and type(Entry[1].alt_text) == "string" then Entry[1].alt_text else nil
 end
 
-local _ = function(p1)
-	if type(p1) == "string" then
-		local var1 = p1:split("\n")
+local _ = function(Text: string) --[[ Line: 55 | Named "getContentFirstLine" ]]
+	if type(Text) == "string" then
+		local v1 = Text:split("\n")
 		
-		return if var1 then var1[1] else ""
+		return v1 and v1[1] or ""
+	else
+		return ""
 	end
-	return ""
 end
 
-local _ = function()
-	-- upvalues: localization (ref), localizationService (ref)
-	return localization.new(localizationService.RobloxLocaleId):Format("Feature.Chat.Label.MessageNotAvailable")
+local _ = function() --[[ Line: 63 | Named "getHiddenMessageText" ]]
+	-- upvalues: Localization (copy), LocalizationService (copy)
+	return Localization.new(LocalizationService.RobloxLocaleId):Format("Feature.Chat.Label.MessageNotAvailable")
 end
 
-local _ = function(p1)
+local _ = function(p1) --[[ Line: 67 | Named "getUnixTime" ]]
 	return if p1 == nil then nil elseif typeof(p1) == "DateTime" then p1.UnixTimestamp elseif type(p1) == "table" and p1.GetUnixTimestamp ~= nil then p1:GetUnixTimestamp() else nil
 end
 
-local function getSubtitle(p1, p2)
-	-- upvalues: messageVisibility (ref), localization (ref), localizationService (ref), messageType (ref)
-	local cards
-	if p2 == nil then
-		cards = p1.previewContent
-		
-		if type(cards) == "string" then
-			local var1 = cards:split("\n")
-			
-			return if var1 then var1[1] else ""
-		end
-		return ""
-	else
-		local var2 = if p2.visibility == messageVisibility.Hidden then localization.new(localizationService.RobloxLocaleId):Format("Feature.Chat.Label.MessageNotAvailable") else p2.preview_content or (p2.content_to_display or p2.content)
-		
-		if var2 == nil and p2.type == messageType.System then
-			cards = p2.cards
-			var2 = if type(cards) == "table" and type(cards[1]) == "table" then if type(cards[1].alt_text) == "string" then cards[1].alt_text else nil else nil
-		end
-		local var3 = var2
-		
-		if type(var3) == "string" then
-			local var4 = var3:split("\n")
-			
-			return if var4 then var4[1] else ""
-		end
-		return ""
-	end
-end
-
-local _ = function(p1)
-	-- upvalues: getConversationTitleModule (ref)
-	return getConversationTitleModule(p1) or ""
-end
-
-local _ = function(p1)
-	-- upvalues: getConversationTitleModule (ref)
-	return p1.title or (getConversationTitleModule(p1) or "")
-end
-
-local _ = function(p1, p2, p3, p4)
-	-- upvalues: signalsModule (ref)
-	local var1 = p1[p2]
+local _ = function(p1, p2) --[[ Line: 81 | Named "getLatestUnixTime" ]]
+	-- upvalues: GetPreciseUnixTimestampModule (copy)
+	local PreciseUnixTimestampModule = GetPreciseUnixTimestampModule(p1.lastUpdated)
+	local PreciseUnixTimestampModule1 = if p2 == nil then nil else GetPreciseUnixTimestampModule(p2.created_at)
 	
-	if var1 then
-		local var2 = var1[p3]
+	return if PreciseUnixTimestampModule1 == nil or PreciseUnixTimestampModule ~= nil and PreciseUnixTimestampModule >= PreciseUnixTimestampModule1 then PreciseUnixTimestampModule else PreciseUnixTimestampModule1
+end
+
+local _ = function(p1, p2): boolean --[[ Line: 94 | Named "isNewerPreviewThanServer" ]]
+	-- upvalues: GetPreciseUnixTimestampModule (copy)
+	local PreciseUnixTimestampModule = GetPreciseUnixTimestampModule(p1.lastUpdated)
+	local PreciseUnixTimestampModule1 = GetPreciseUnixTimestampModule(p2.created_at)
+	
+	return PreciseUnixTimestampModule1 ~= nil and (PreciseUnixTimestampModule == nil or PreciseUnixTimestampModule <= PreciseUnixTimestampModule1)
+end
+
+local function getSubtitle(Conversation, Message) --[[ Line: 100 ]]
+	-- upvalues: MessageVisibility (copy), Localization (copy), LocalizationService (copy), MessageType (copy)
+	if Message == nil then
+		local PreviewContent: string = Conversation.previewContent
 		
-		if var2 == nil then
-			local var3 = signalsModule.createComputed(p4)
-			var1[p3] = var3
+		if type(PreviewContent) == "string" then
+			local v1 = PreviewContent:split("\n")
 			
-			return var3
+			return v1 and v1[1] or ""
 		else
-			return var2
+			return ""
 		end
 	else
-		var1 = {}
-		p1[p2] = var1
+		local FeatureChatLabelMessageNotAvailable = if Message.visibility == MessageVisibility.Hidden then Localization.new(LocalizationService.RobloxLocaleId):Format("Feature.Chat.Label.MessageNotAvailable") else Message.preview_content or (Message.content_to_display or Message.content)
+		
+		if FeatureChatLabelMessageNotAvailable == nil and Message.type == MessageType.System then
+			local Cards = Message.cards
+			FeatureChatLabelMessageNotAvailable = if type(Cards) == "table" and type(Cards[1]) == "table" and type(Cards[1].alt_text) == "string" then Cards[1].alt_text else nil
+		end
+		local Text: string = FeatureChatLabelMessageNotAvailable
+		
+		if type(Text) == "string" then
+			local v2 = Text:split("\n")
+			
+			return v2 and v2[1] or ""
+		else
+			return ""
+		end
 	end
 end
 
-return function(p1, p2)
-	-- upvalues: getConversationTitleModule (ref), signalsModule (ref), getSubtitle (ref), useIsUserPendingModule (ref), shouldShowOSAForConversationModule (ref), shouldShowU13ChatOptInForConversationModule (ref), domLocatorsModule (ref)
+local _ = function(p1) --[[ Line: 114 | Named "getTitle" ]]
+	-- upvalues: GetConversationTitleModule (copy)
+	return GetConversationTitleModule(p1) or ""
+end
+
+local _ = function(p1) --[[ Line: 118 | Named "getLocatorTitle" ]]
+	-- upvalues: GetConversationTitleModule (copy)
+	return p1.title or (GetConversationTitleModule(p1) or "")
+end
+
+local _ = function(p1, Key, Key1, p2) --[[ Line: 124 | Named "getCachedGetter" ]]
+	-- upvalues: SignalsModule (copy)
+	local v1 = p1[Key]
+	
+	if v1 then
+		local v2 = v1[Key1]
+		
+		if v2 ~= nil then
+			return v2
+		end
+	else
+		v1 = {}
+		p1[Key] = v1
+	end
+	local Computed = SignalsModule.createComputed(p2)
+	v1[Key1] = Computed
+	
+	return Computed
+end
+
+return function(p1, p2, p3) --[[ Line: 146 | Named "createConversationViewModelStore" ]]
+	-- upvalues: GetConversationTitleModule (copy), SignalsModule (copy), FFlagAppChatDerivedConversationLatestActivityModule (copy), GetPreciseUnixTimestampModule (copy), getSubtitle (copy), UseIsUserPendingModule (copy), ShouldShowOSAForConversationModule (copy), ShouldShowU13ChatOptInForConversationModule (copy), DomLocatorsModule (copy)
 	local t = {}
 	
+	local function _(Key) --[[ Line: 160 | Named "getNewestPreviewableMessageGetter" ]]
+		-- upvalues: t (copy), p3 (copy), p2 (copy), SignalsModule (upval)
+		local function v50(p4) --[[ Line: 161 ]]
+			-- upvalues: p3 (upval), Key (copy), p2 (upval)
+			local Message = nil
+			for _, value in p3.getOrderedIds(Key, p4) do
+				Message = p2.getMessage(value, p4)
+				
+				if Message ~= nil and Message.is_previewable == true then
+					return Message
+				end
+			end
+			return nil
+		end
+		
+		local Entry = t[Key]
+		
+		if Entry then
+			local NewestPreviewableMessage = Entry.newestPreviewableMessage
+			
+			if NewestPreviewableMessage ~= nil then
+				return NewestPreviewableMessage
+			end
+		else
+			Entry = {}
+			t[Key] = Entry
+		end
+		local Computed = SignalsModule.createComputed(v50)
+		Entry.newestPreviewableMessage = Computed
+		
+		return Computed
+	end
+	
 	return {
-		getTitle = function(p3)
-			-- upvalues: t (ref), p1 (ref), getConversationTitleModule (copy), signalsModule (copy)
-			local var1 = function(p4)
-				-- upvalues: p1 (copy), p3 (ref), getConversationTitleModule (copy)
-				local conversation = p1.getConversation(p3, p4)
+		getTitle = function(Key) --[[ Line: 153 ]]
+			-- upvalues: t (copy), p1 (copy), GetConversationTitleModule (upval), SignalsModule (upval)
+			local function v45(p4) --[[ Line: 154 ]]
+				-- upvalues: p1 (upval), Key (copy), GetConversationTitleModule (upval)
+				local Conversation = p1.getConversation(Key, p4)
 				
-				return if conversation == nil then nil else getConversationTitleModule(conversation) or ""
+				return if Conversation == nil then nil else GetConversationTitleModule(Conversation) or ""
 			end
 			
-			local var2 = t[p3]
+			local Entry = t[Key]
 			
-			if var2 then
-				local title = var2.title
+			if Entry then
+				local Title = Entry.title
 				
-				if title == nil then
-					local var3 = signalsModule.createComputed(var1)
-					var2.title = var3
-					
-					return var3
-				else
-					return title
+				if Title ~= nil then
+					return Title
 				end
 			else
-				var2 = {}
-				t[p3] = var2
+				Entry = {}
+				t[Key] = Entry
 			end
+			local Computed = SignalsModule.createComputed(v45)
+			Entry.title = Computed
+			
+			return Computed
 		end,
-		getSubtitle = function(p3)
-			-- upvalues: t (ref), p1 (ref), p2 (ref), getSubtitle (copy), signalsModule (copy)
-			local var1 = function(p4)
-				-- upvalues: p1 (copy), p3 (ref), p2 (copy), getSubtitle (copy)
-				local conversation = p1.getConversation(p3, p4)
+		getSubtitle = function(Key) --[[ Line: 173 ]]
+			-- upvalues: t (copy), p1 (copy), FFlagAppChatDerivedConversationLatestActivityModule (upval), p3 (copy), p2 (copy), SignalsModule (upval), GetPreciseUnixTimestampModule (upval), getSubtitle (upval)
+			local function v55(p4) --[[ Line: 174 ]]
+				-- upvalues: p1 (upval), Key (copy), FFlagAppChatDerivedConversationLatestActivityModule (upval), t (upval), p3 (upval), p2 (upval), SignalsModule (upval), GetPreciseUnixTimestampModule (upval), getSubtitle (upval)
+				local Conversation = p1.getConversation(Key, p4)
 				
-				return if conversation == nil then "" else getSubtitle(conversation, if conversation.previewMessageId ~= nil then nil else p2.getMessage(conversation.previewMessageId, p4))
+				if Conversation == nil then
+					return ""
+				end
+				repeat
+					if not FFlagAppChatDerivedConversationLatestActivityModule then break end
+					local function v60(p5) --[[ Line: 161 ]]
+						-- upvalues: p3 (upval), Key (copy), p2 (upval)
+						local Message = nil
+						for _, value in p3.getOrderedIds(Key, p5) do
+							Message = p2.getMessage(value, p5)
+							
+							if Message ~= nil and Message.is_previewable == true then
+								return Message
+							end
+						end
+						return nil
+					end
+					
+					local Entry = t[Key]
+					local Callback = nil
+					repeat
+						if Entry then
+							local NewestPreviewableMessage = Entry.newestPreviewableMessage
+							
+							if NewestPreviewableMessage ~= nil then
+								Callback = NewestPreviewableMessage
+								break
+							end
+						else
+							Entry = {}
+							t[Key] = Entry
+						end
+						local Computed = SignalsModule.createComputed(v60)
+						Entry.newestPreviewableMessage = Computed
+						Callback = Computed
+					until true
+					local CallbackResult = Callback(p4)
+					
+					if CallbackResult == nil then break end
+					local PreciseUnixTimestampModule = GetPreciseUnixTimestampModule(Conversation.lastUpdated)
+					local PreciseUnixTimestampModule1 = GetPreciseUnixTimestampModule(CallbackResult.created_at)
+					
+					if PreciseUnixTimestampModule1 == nil or PreciseUnixTimestampModule ~= nil and PreciseUnixTimestampModule > PreciseUnixTimestampModule1 then break end
+					return (getSubtitle(Conversation, CallbackResult))
+				until true
+				return (getSubtitle(Conversation, if Conversation.previewMessageId == nil then nil else p2.getMessage(Conversation.previewMessageId, p4)))
 			end
 			
-			local var2 = t[p3]
+			local Entry = t[Key]
 			
-			if var2 then
-				local subtitle = var2.subtitle
+			if Entry then
+				local Subtitle = Entry.subtitle
 				
-				if subtitle == nil then
-					local var3 = signalsModule.createComputed(var1)
-					var2.subtitle = var3
-					
-					return var3
-				else
-					return subtitle
+				if Subtitle ~= nil then
+					return Subtitle
 				end
 			else
-				var2 = {}
-				t[p3] = var2
+				Entry = {}
+				t[Key] = Entry
 			end
+			local Computed = SignalsModule.createComputed(v55)
+			Entry.subtitle = Computed
+			
+			return Computed
 		end,
-		getIsSubtitlePending = function(p3)
-			-- upvalues: t (ref), p1 (ref), useIsUserPendingModule (copy), signalsModule (copy)
-			local var1 = function(p4)
-				-- upvalues: p1 (copy), p3 (ref), useIsUserPendingModule (copy)
-				local conversation = p1.getConversation(p3, p4)
+		getIsSubtitlePending = function(Key) --[[ Line: 197 ]]
+			-- upvalues: t (copy), p1 (copy), UseIsUserPendingModule (upval), SignalsModule (upval)
+			local function v67(p4) --[[ Line: 198 ]]
+				-- upvalues: p1 (upval), Key (copy), UseIsUserPendingModule (upval)
+				local Conversation = p1.getConversation(Key, p4)
 				
-				return if conversation == nil then false else useIsUserPendingModule(conversation)
+				return Conversation ~= nil and UseIsUserPendingModule(Conversation)
 			end
 			
-			local var2 = t[p3]
+			local Entry = t[Key]
 			
-			if var2 then
-				local isSubtitlePending = var2.isSubtitlePending
+			if Entry then
+				local IsSubtitlePending = Entry.isSubtitlePending
 				
-				if isSubtitlePending == nil then
-					local var3 = signalsModule.createComputed(var1)
-					var2.isSubtitlePending = var3
-					
-					return var3
-				else
-					return isSubtitlePending
+				if IsSubtitlePending ~= nil then
+					return IsSubtitlePending
 				end
 			else
-				var2 = {}
-				t[p3] = var2
+				Entry = {}
+				t[Key] = Entry
 			end
+			local Computed = SignalsModule.createComputed(v67)
+			Entry.isSubtitlePending = Computed
+			
+			return Computed
 		end,
-		getHasUnreadMessages = function(p3)
-			-- upvalues: t (ref), p1 (ref), signalsModule (copy)
-			local var1 = function(p4)
-				-- upvalues: p1 (copy), p3 (ref)
-				local conversation = p1.getConversation(p3, p4)
+		getHasUnreadMessages = function(Key) --[[ Line: 204 ]]
+			-- upvalues: t (copy), p1 (copy), SignalsModule (upval)
+			local function v72(p4): boolean --[[ Line: 205 ]]
+				-- upvalues: p1 (upval), Key (copy)
+				local Conversation = p1.getConversation(Key, p4)
 				
-				return conversation ~= nil and conversation.hasUnreadMessages == true
+				return Conversation ~= nil and Conversation.hasUnreadMessages == true
 			end
 			
-			local var2 = t[p3]
+			local Entry = t[Key]
 			
-			if var2 then
-				local hasUnreadMessages = var2.hasUnreadMessages
+			if Entry then
+				local HasUnreadMessages = Entry.hasUnreadMessages
 				
-				if hasUnreadMessages == nil then
-					local var3 = signalsModule.createComputed(var1)
-					var2.hasUnreadMessages = var3
-					
-					return var3
-				else
-					return hasUnreadMessages
+				if HasUnreadMessages ~= nil then
+					return HasUnreadMessages
 				end
 			else
-				var2 = {}
-				t[p3] = var2
+				Entry = {}
+				t[Key] = Entry
 			end
+			local Computed = SignalsModule.createComputed(v72)
+			Entry.hasUnreadMessages = Computed
+			
+			return Computed
 		end,
-		getHasGroupUp = function(p3)
-			-- upvalues: t (ref), p1 (ref), signalsModule (copy)
-			local var1 = function(p4)
-				-- upvalues: p1 (copy), p3 (ref)
-				local conversation = p1.getConversation(p3, p4)
+		getHasGroupUp = function(Key) --[[ Line: 211 ]]
+			-- upvalues: t (copy), p1 (copy), SignalsModule (upval)
+			local function v77(p4): boolean --[[ Line: 212 ]]
+				-- upvalues: p1 (upval), Key (copy)
+				local Conversation = p1.getConversation(Key, p4)
 				
-				return conversation ~= nil and conversation.hasGroupUp == true
+				return Conversation ~= nil and Conversation.hasGroupUp == true
 			end
 			
-			local var2 = t[p3]
+			local Entry = t[Key]
 			
-			if var2 then
-				local hasGroupUp = var2.hasGroupUp
+			if Entry then
+				local HasGroupUp = Entry.hasGroupUp
 				
-				if hasGroupUp == nil then
-					local var3 = signalsModule.createComputed(var1)
-					var2.hasGroupUp = var3
-					
-					return var3
-				else
-					return hasGroupUp
+				if HasGroupUp ~= nil then
+					return HasGroupUp
 				end
 			else
-				var2 = {}
-				t[p3] = var2
+				Entry = {}
+				t[Key] = Entry
 			end
+			local Computed = SignalsModule.createComputed(v77)
+			Entry.hasGroupUp = Computed
+			
+			return Computed
 		end,
-		getShouldShowOSA = function(p3)
-			-- upvalues: t (ref), p1 (ref), shouldShowOSAForConversationModule (copy), signalsModule (copy)
-			local var1 = function(p4)
-				-- upvalues: p1 (copy), p3 (ref), shouldShowOSAForConversationModule (copy)
-				local conversation = p1.getConversation(p3, p4)
+		getShouldShowOSA = function(Key) --[[ Line: 218 ]]
+			-- upvalues: t (copy), p1 (copy), ShouldShowOSAForConversationModule (upval), SignalsModule (upval)
+			local function v82(p4): boolean --[[ Line: 219 ]]
+				-- upvalues: p1 (upval), Key (copy), ShouldShowOSAForConversationModule (upval)
+				local Conversation = p1.getConversation(Key, p4)
 				
-				return conversation ~= nil and shouldShowOSAForConversationModule(conversation) == true
+				return Conversation ~= nil and ShouldShowOSAForConversationModule(Conversation) == true
 			end
 			
-			local var2 = t[p3]
+			local Entry = t[Key]
 			
-			if var2 then
-				local shouldShowOSA = var2.shouldShowOSA
+			if Entry then
+				local ShouldShowOSA = Entry.shouldShowOSA
 				
-				if shouldShowOSA == nil then
-					local var3 = signalsModule.createComputed(var1)
-					var2.shouldShowOSA = var3
-					
-					return var3
-				else
-					return shouldShowOSA
+				if ShouldShowOSA ~= nil then
+					return ShouldShowOSA
 				end
 			else
-				var2 = {}
-				t[p3] = var2
+				Entry = {}
+				t[Key] = Entry
 			end
+			local Computed = SignalsModule.createComputed(v82)
+			Entry.shouldShowOSA = Computed
+			
+			return Computed
 		end,
-		getShouldShowU13ChatOptIn = function(p3)
-			-- upvalues: t (ref), p1 (ref), shouldShowU13ChatOptInForConversationModule (copy), signalsModule (copy)
-			local var1 = function(p4)
-				-- upvalues: p1 (copy), p3 (ref), shouldShowU13ChatOptInForConversationModule (copy)
-				local conversation = p1.getConversation(p3, p4)
+		getShouldShowU13ChatOptIn = function(Key) --[[ Line: 225 ]]
+			-- upvalues: t (copy), p1 (copy), ShouldShowU13ChatOptInForConversationModule (upval), SignalsModule (upval)
+			local function v87(p4): boolean --[[ Line: 226 ]]
+				-- upvalues: p1 (upval), Key (copy), ShouldShowU13ChatOptInForConversationModule (upval)
+				local Conversation = p1.getConversation(Key, p4)
 				
-				return conversation ~= nil and shouldShowU13ChatOptInForConversationModule(conversation) == true
+				return Conversation ~= nil and ShouldShowU13ChatOptInForConversationModule(Conversation) == true
 			end
 			
-			local var2 = t[p3]
+			local Entry = t[Key]
 			
-			if var2 then
-				local shouldShowU13ChatOptIn = var2.shouldShowU13ChatOptIn
+			if Entry then
+				local ShouldShowU13ChatOptIn = Entry.shouldShowU13ChatOptIn
 				
-				if shouldShowU13ChatOptIn == nil then
-					local var3 = signalsModule.createComputed(var1)
-					var2.shouldShowU13ChatOptIn = var3
-					
-					return var3
-				else
-					return shouldShowU13ChatOptIn
+				if ShouldShowU13ChatOptIn ~= nil then
+					return ShouldShowU13ChatOptIn
 				end
 			else
-				var2 = {}
-				t[p3] = var2
+				Entry = {}
+				t[Key] = Entry
 			end
+			local Computed = SignalsModule.createComputed(v87)
+			Entry.shouldShowU13ChatOptIn = Computed
+			
+			return Computed
 		end,
-		getConversationType = function(p3)
-			-- upvalues: t (ref), p1 (ref), signalsModule (copy)
-			local var1 = function(p4)
-				-- upvalues: p1 (copy), p3 (ref)
-				local conversation = p1.getConversation(p3, p4)
+		getConversationType = function(Key) --[[ Line: 232 ]]
+			-- upvalues: t (copy), p1 (copy), SignalsModule (upval)
+			local function v92(p4) --[[ Line: 233 ]]
+				-- upvalues: p1 (upval), Key (copy)
+				local Conversation = p1.getConversation(Key, p4)
 				
-				return if conversation == nil then nil else conversation.conversationType
+				return if Conversation == nil then nil else Conversation.conversationType
 			end
 			
-			local var2 = t[p3]
+			local Entry = t[Key]
 			
-			if var2 then
-				local conversationType = var2.conversationType
+			if Entry then
+				local ConversationType = Entry.conversationType
 				
-				if conversationType == nil then
-					local var3 = signalsModule.createComputed(var1)
-					var2.conversationType = var3
-					
-					return var3
-				else
-					return conversationType
+				if ConversationType ~= nil then
+					return ConversationType
 				end
 			else
-				var2 = {}
-				t[p3] = var2
+				Entry = {}
+				t[Key] = Entry
 			end
+			local Computed = SignalsModule.createComputed(v92)
+			Entry.conversationType = Computed
+			
+			return Computed
 		end,
-		getUnixTime = function(p3)
-			-- upvalues: t (ref), p1 (ref), signalsModule (copy)
-			local var1 = function(p4)
-				-- upvalues: p1 (copy), p3 (ref)
-				local conversation = p1.getConversation(p3, p4)
+		getUnixTime = function(Key) --[[ Line: 239 ]]
+			-- upvalues: t (copy), p1 (copy), FFlagAppChatDerivedConversationLatestActivityModule (upval), p3 (copy), p2 (copy), SignalsModule (upval), GetPreciseUnixTimestampModule (upval)
+			local function v97(p4) --[[ Line: 240 ]]
+				-- upvalues: p1 (upval), Key (copy), FFlagAppChatDerivedConversationLatestActivityModule (upval), t (upval), p3 (upval), p2 (upval), SignalsModule (upval), GetPreciseUnixTimestampModule (upval)
+				local Conversation = p1.getConversation(Key, p4)
 				
-				if conversation == nil then
+				if FFlagAppChatDerivedConversationLatestActivityModule then
+					if Conversation == nil then
+						return nil
+					end
+					local function v102(p5) --[[ Line: 161 ]]
+						-- upvalues: p3 (upval), Key (copy), p2 (upval)
+						local Message = nil
+						for _, value in p3.getOrderedIds(Key, p5) do
+							Message = p2.getMessage(value, p5)
+							
+							if Message ~= nil and Message.is_previewable == true then
+								return Message
+							end
+						end
+						return nil
+					end
+					
+					local Entry = t[Key]
+					local Callback = nil
+					repeat
+						if Entry then
+							local NewestPreviewableMessage = Entry.newestPreviewableMessage
+							
+							if NewestPreviewableMessage ~= nil then
+								Callback = NewestPreviewableMessage
+								break
+							end
+						else
+							Entry = {}
+							t[Key] = Entry
+						end
+						local Computed = SignalsModule.createComputed(v102)
+						Entry.newestPreviewableMessage = Computed
+						Callback = Computed
+					until true
+					local CallbackResult = Callback(p4)
+					local PreciseUnixTimestampModule = GetPreciseUnixTimestampModule(Conversation.lastUpdated)
+					local PreciseUnixTimestampModule1 = if CallbackResult == nil then nil else GetPreciseUnixTimestampModule(CallbackResult.created_at)
+					
+					return if PreciseUnixTimestampModule1 == nil or PreciseUnixTimestampModule ~= nil and PreciseUnixTimestampModule >= PreciseUnixTimestampModule1 then PreciseUnixTimestampModule else PreciseUnixTimestampModule1
+				elseif Conversation == nil then
 					return nil
+				else
+					local LastUpdated = Conversation.lastUpdated
+					
+					return if LastUpdated == nil then nil elseif typeof(LastUpdated) == "DateTime" then LastUpdated.UnixTimestamp elseif type(LastUpdated) == "table" and LastUpdated.GetUnixTimestamp ~= nil then LastUpdated:GetUnixTimestamp() else nil
 				end
-				local lastUpdated = conversation.lastUpdated
-				
-				return if lastUpdated == nil then nil elseif typeof(lastUpdated) == "DateTime" then lastUpdated.UnixTimestamp elseif type(lastUpdated) == "table" and lastUpdated.GetUnixTimestamp ~= nil then lastUpdated:GetUnixTimestamp() else nil
 			end
 			
-			local var2 = t[p3]
+			local Entry = t[Key]
 			
-			if var2 then
-				local unixTime = var2.unixTime
+			if Entry then
+				local UnixTime = Entry.unixTime
 				
-				if unixTime == nil then
-					local var3 = signalsModule.createComputed(var1)
-					var2.unixTime = var3
-					
-					return var3
-				else
-					return unixTime
+				if UnixTime ~= nil then
+					return UnixTime
 				end
 			else
-				var2 = {}
-				t[p3] = var2
+				Entry = {}
+				t[Key] = Entry
 			end
+			local Computed = SignalsModule.createComputed(v97)
+			Entry.unixTime = Computed
+			
+			return Computed
 		end,
-		getTestId = function(p3)
-			-- upvalues: t (ref), p1 (ref), domLocatorsModule (copy), getConversationTitleModule (copy), signalsModule (copy)
-			local var1 = function(p4)
-				-- upvalues: p1 (copy), p3 (ref), domLocatorsModule (copy), getConversationTitleModule (copy)
-				local conversation = p1.getConversation(p3, p4)
+		getTestId = function(Key) --[[ Line: 251 ]]
+			-- upvalues: t (copy), p1 (copy), DomLocatorsModule (upval), GetConversationTitleModule (upval), SignalsModule (upval)
+			local function v110(p4) --[[ Line: 252 ]]
+				-- upvalues: p1 (upval), Key (copy), DomLocatorsModule (upval), GetConversationTitleModule (upval)
+				local Conversation = p1.getConversation(Key, p4)
 				
-				return if conversation == nil then nil else domLocatorsModule.chatLandingConversationEntry(conversation.title or (getConversationTitleModule(conversation) or ""))
+				return if Conversation == nil then nil else DomLocatorsModule.chatLandingConversationEntry(Conversation.title or (GetConversationTitleModule(Conversation) or ""))
 			end
 			
-			local var2 = t[p3]
+			local Entry = t[Key]
 			
-			if var2 then
-				local testId = var2.testId
+			if Entry then
+				local TestId = Entry.testId
 				
-				if testId == nil then
-					local var3 = signalsModule.createComputed(var1)
-					var2.testId = var3
-					
-					return var3
-				else
-					return testId
+				if TestId ~= nil then
+					return TestId
 				end
 			else
-				var2 = {}
-				t[p3] = var2
+				Entry = {}
+				t[Key] = Entry
 			end
+			local Computed = SignalsModule.createComputed(v110)
+			Entry.testId = Computed
+			
+			return Computed
 		end,
-		getLocatorTitle = function(p3)
-			-- upvalues: t (ref), p1 (ref), getConversationTitleModule (copy), signalsModule (copy)
-			local var1 = function(p4)
-				-- upvalues: p1 (copy), p3 (ref), getConversationTitleModule (copy)
-				local title
-				local conversation = p1.getConversation(p3, p4)
+		getLocatorTitle = function(Key) --[[ Line: 261 ]]
+			-- upvalues: t (copy), p1 (copy), GetConversationTitleModule (upval), SignalsModule (upval)
+			local function v115(p4) --[[ Line: 262 ]]
+				-- upvalues: p1 (upval), Key (copy), GetConversationTitleModule (upval)
+				local Conversation = p1.getConversation(Key, p4)
+				local Title = nil
 				
-				if conversation == nil then
-					title = nil
+				if Conversation == nil then
+					Title = nil
 				else
-					title = conversation.title
+					Title = Conversation.title
 					
-					return title or (getConversationTitleModule(conversation) or "")
+					if not Title then
+						return GetConversationTitleModule(Conversation) or ""
+					end
 				end
+				return Title
 			end
 			
-			local var2 = t[p3]
+			local Entry = t[Key]
 			
-			if var2 then
-				local locatorTitle = var2.locatorTitle
+			if Entry then
+				local LocatorTitle = Entry.locatorTitle
 				
-				if locatorTitle == nil then
-					local var3 = signalsModule.createComputed(var1)
-					var2.locatorTitle = var3
-					
-					return var3
-				else
-					return locatorTitle
+				if LocatorTitle ~= nil then
+					return LocatorTitle
 				end
 			else
-				var2 = {}
-				t[p3] = var2
+				Entry = {}
+				t[Key] = Entry
 			end
+			local Computed = SignalsModule.createComputed(v115)
+			Entry.locatorTitle = Computed
+			
+			return Computed
 		end
 	}
 end

@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.VariableItemWidthCarousel.VariableItemWidthCarousel)
+﻿return (require(script.Parent.Parent.Parent._Index.VariableItemWidthCarousel.VariableItemWidthCarousel))

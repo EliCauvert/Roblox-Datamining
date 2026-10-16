@@ -1,24 +1,24 @@
 ﻿local _ = require(script:FindFirstAncestor("AvatarExperienceCatalog").Components.ResultsList.WidgetListInfoViewModel)
 
-return function(p1)
-	local t = {}
+return function(List) --[[ Line: 25 | Named "getOrderedWidgets" ]]
+	local List1 = {}
 	
-	for i in p1 do
-		local var1 = tonumber(i)
+	for i in List do
+		local Number: number? = tonumber(i)
 		
-		if var1 then
-			table.insert(t, var1)
+		if Number then
+			table.insert(List1, Number)
 		end
 	end
-	table.sort(t)
-	local t_1 = {}
+	table.sort(List1)
+	local List2 = {}
 	
-	for i_1, v in t do
-		local var2 = p1[tostring(v)]
+	for _, Position in List1 do
+		local Entry = List[tostring(Position)]
 		
-		if var2.content and #var2.content > 0 then
-			table.insert(t_1, { position = v, widget = var2 })
+		if Entry.content and #Entry.content > 0 then
+			table.insert(List2, { position = Position, widget = Entry })
 		end
 	end
-	return t_1
+	return List2
 end

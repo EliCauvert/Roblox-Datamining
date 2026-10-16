@@ -1,89 +1,95 @@
-﻿local gamePlayButton = script:FindFirstAncestor("GamePlayButton")
-local parent = gamePlayButton.Parent
-local playButtonUpsellBodyModule = require(gamePlayButton.PlayButtonUpsellBody)
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local dialog = foundationModule.Dialog
-local dialogSize = foundationModule.Enums.DialogSize
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local useTokens = foundationModule.Hooks.useTokens
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local useRoactService = require(parent.RobloxAppHooks).useRoactService
-local appLinking = require(parent.RoactServiceTags).AppLinking
-local centralOverlayModule = require(parent.CentralOverlay)
-local setCentralOverlay = centralOverlayModule.Actions.SetCentralOverlay
-local closeCentralOverlay = centralOverlayModule.Thunks.CloseCentralOverlay
-local centralOverlayType = require(parent.RobloxAppEnums).CentralOverlayType
-local extractAndStyleRichTextLinks = require(parent.DiscoveryUtils).extractAndStyleRichTextLinks
-local fFlagEnablePlayButtonWizardVPCPrologueModule = require(gamePlayButton.Flags.FFlagEnablePlayButtonWizardVPCPrologue)
+﻿local GamePlayButton = script:FindFirstAncestor("GamePlayButton")
+local Parent = GamePlayButton.Parent
+local PlayButtonUpsellBodyModule = require(GamePlayButton.PlayButtonUpsellBody)
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local Dialog = FoundationModule.Dialog
+local DialogSize = FoundationModule.Enums.DialogSize
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
+local AppLinking = require(Parent.RoactServiceTags).AppLinking
+local CentralOverlayModule = require(Parent.CentralOverlay)
+local SetCentralOverlayFunction = CentralOverlayModule.Actions.SetCentralOverlay
+local CloseCentralOverlayFunction = CentralOverlayModule.Thunks.CloseCentralOverlay
+local CentralOverlayType = require(Parent.RobloxAppEnums).CentralOverlayType
+local ExtractAndStyleRichTextLinksFunction = require(Parent.DiscoveryUtils).extractAndStyleRichTextLinks
+local FFlagEnablePlayButtonWizardVPCPrologueModule = require(GamePlayButton.Flags.FFlagEnablePlayButtonWizardVPCPrologue)
 
-return function(p1)
-	-- upvalues: useTokens (ref), useDispatch (ref), useRoactService (ref), appLinking (ref), reactModule (ref), extractAndStyleRichTextLinks (ref), setCentralOverlay (ref), centralOverlayType (ref), closeCentralOverlay (ref), dialog (ref), dialogSize (ref), fFlagEnablePlayButtonWizardVPCPrologueModule (ref), playButtonUpsellBodyModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), buttonVariant (ref)
-	local var1 = useTokens()
-	local var2 = useDispatch()
-	local var3 = useRoactService(appLinking)
-	local var4 = reactModule.useMemo(function()
-		-- upvalues: extractAndStyleRichTextLinks (copy), p1 (ref)
-		local var5, var6 = extractAndStyleRichTextLinks(p1.bodyText)
+return function(p1) --[[ Line: 43 | Named "PlayButtonUpsellDialog" ]]
+	-- upvalues: UseTokensFunction (copy), UseDispatchFunction (copy), UseRoactServiceFunction (copy), AppLinking (copy), ReactModule (copy), ExtractAndStyleRichTextLinksFunction (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), CloseCentralOverlayFunction (copy), Dialog (copy), DialogSize (copy), FFlagEnablePlayButtonWizardVPCPrologueModule (copy), PlayButtonUpsellBodyModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ButtonVariant (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseDispatchResult = UseDispatchFunction()
+	local UseRoactServiceResult = UseRoactServiceFunction(AppLinking)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 48 ]]
+		-- upvalues: ExtractAndStyleRichTextLinksFunction (upval), p1 (copy)
+		local ExtractAndStyleRichTextLinksResult, ExtractAndStyleRichTextLinksResult2 = ExtractAndStyleRichTextLinksFunction(p1.bodyText)
 		
 		return {
-			link = if #var5 > 0 then var5[1] else nil,
-			styledText = var6
+			link = if #ExtractAndStyleRichTextLinksResult > 0 then ExtractAndStyleRichTextLinksResult[1] else nil,
+			styledText = ExtractAndStyleRichTextLinksResult2
 		}
 	end, { p1.bodyText })
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 58 ]]
+		-- upvalues: UseMemoResult (copy), p1 (copy), UseDispatchResult (copy), SetCentralOverlayFunction (upval), CentralOverlayType (upval), UseRoactServiceResult (copy), CloseCentralOverlayFunction (upval)
+		if UseMemoResult.link then
+			p1.onCloseModal()
+			UseDispatchResult(SetCentralOverlayFunction(CentralOverlayType.LeaveRobloxAlert, {
+				continueFunc = function() --[[ Line: 67 ]]
+					-- upvalues: UseRoactServiceResult (upval), UseMemoResult (upval), UseDispatchResult (upval), CloseCentralOverlayFunction (upval)
+					UseRoactServiceResult:openURL(UseMemoResult.link)
+					UseDispatchResult(CloseCentralOverlayFunction())
+				end
+			}))
+			
+			return
+		end
+	end, {
+		p1.onCloseModal,
+		UseMemoResult.link,
+		UseDispatchResult,
+		UseRoactServiceResult
+	})
 	
-	return reactModule.createElement(dialog.Root, {
+	return ReactModule.createElement(Dialog.Root, {
 		hasBackdrop = false,
-		size = dialogSize.Medium,
+		size = DialogSize.Medium,
 		onClose = p1.onCloseModal
 	}, {
-		Title = reactModule.createElement(dialog.Title, { LayoutOrder = 1, text = p1.titleText }),
-		Content = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
-			BodyText = if fFlagEnablePlayButtonWizardVPCPrologueModule then reactModule.createElement(playButtonUpsellBodyModule, { bodyText = p1.bodyText, onCloseModal = p1.onCloseModal }) else reactModule.createElement("TextButton", {
+		Title = ReactModule.createElement(Dialog.Title, { LayoutOrder = 1, text = p1.titleText }),
+		Content = ReactModule.createElement(Dialog.Content, { LayoutOrder = 2 }, {
+			BodyText = if FFlagEnablePlayButtonWizardVPCPrologueModule then ReactModule.createElement(PlayButtonUpsellBodyModule, { bodyText = p1.bodyText, onCloseModal = p1.onCloseModal }) else ReactModule.createElement("TextButton", {
 				AutomaticSize = Enum.AutomaticSize.Y,
 				BackgroundTransparency = 1,
 				RichText = true,
 				Size = UDim2.new(1, 0, 0, 0),
-				Text = var4.styledText,
-				TextSize = var1.Typography.BodyLarge.FontSize,
-				Font = if foundationFontFaceMigration then nil else var1.Typography.BodyLarge.Font,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Typography.BodyLarge.Font) else nil,
+				Text = UseMemoResult.styledText,
+				TextSize = UseTokensResult.Typography.BodyLarge.FontSize,
+				Font = if FoundationFontFaceMigration then nil else UseTokensResult.Typography.BodyLarge.Font,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.BodyLarge.Font) else nil,
 				TextWrapped = true,
 				TextXAlignment = Enum.TextXAlignment.Left,
 				TextYAlignment = Enum.TextYAlignment.Center,
-				TextColor3 = var1.Color.Content.Emphasis.Color3,
-				Active = var4.link ~= nil,
-				Selectable = var4.link ~= nil,
-				[reactModule.Event.Activated] = if var4.link then reactModule.useCallback(function()
-					-- upvalues: var4 (ref), p1 (ref), var2 (ref), setCentralOverlay (copy), centralOverlayType (copy), var3 (ref), closeCentralOverlay (copy)
-					if var4.link then
-						p1.onCloseModal()
-						var2(setCentralOverlay(centralOverlayType.LeaveRobloxAlert, {
-							continueFunc = function()
-								-- upvalues: var3 (copy), var4 (copy), var2 (copy), closeCentralOverlay (copy)
-								var3:openURL(var4.link)
-								var2(closeCentralOverlay())
-							end
-						}))
-						
-						return
-					end
-				end, { p1.onCloseModal, var4.link, var2, var3 }) else nil
+				TextColor3 = UseTokensResult.Color.Content.Emphasis.Color3,
+				Active = UseMemoResult.link ~= nil,
+				Selectable = UseMemoResult.link ~= nil,
+				[ReactModule.Event.Activated] = if UseMemoResult.link then UseResult else nil
 			})
 		}),
-		Actions = reactModule.createElement(dialog.Actions, {
+		Actions = ReactModule.createElement(Dialog.Actions, {
 			LayoutOrder = 3,
 			actions = {
 				{
 					text = p1.cancelButtonText,
-					variant = buttonVariant.Standard,
+					variant = ButtonVariant.Standard,
 					onActivated = p1.onCancelButtonClick
 				},
 				{
 					text = p1.actionButtonText,
-					variant = buttonVariant.Emphasis,
+					variant = ButtonVariant.Emphasis,
 					onActivated = p1.onActionButtonClick
 				}
 			}

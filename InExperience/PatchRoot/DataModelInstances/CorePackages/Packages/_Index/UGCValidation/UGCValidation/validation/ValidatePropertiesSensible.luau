@@ -1,66 +1,66 @@
 ﻿local UGCValidationService = game:GetService("UGCValidationService")
-local parent = script.Parent.Parent
-local analyticsModule = require(parent.Analytics)
-local util = parent.util
-local failureReasonsAccumulatorModule = require(util.FailureReasonsAccumulator)
-local _ = require(util.Types)
-local getFIntUGCValidateMaxHSRDataLenModule = require(parent.flags.getFIntUGCValidateMaxHSRDataLen)
-local getEngineFeatureEngineUGCValidatePropertiesSensibleModule = require(parent.flags.getEngineFeatureEngineUGCValidatePropertiesSensible)
-local t = {}
-local var1 = nil
+local Parent = script.Parent.Parent
+local AnalyticsModule = require(Parent.Analytics)
+local Util = Parent.util
+local FailureReasonsAccumulatorModule = require(Util.FailureReasonsAccumulator)
+local _ = require(Util.Types)
+local GetFIntUGCValidateMaxHSRDataLenModule = require(Parent.flags.getFIntUGCValidateMaxHSRDataLen)
+local GetEngineFeatureEngineUGCValidatePropertiesSensibleModule = require(Parent.flags.getEngineFeatureEngineUGCValidatePropertiesSensible)
+local Config = nil
 
-local function _()
-	-- upvalues: var1 (write), getFIntUGCValidateMaxHSRDataLenModule (ref)
-	if var1 then
+local function _() --[[ Line: 23 | Named "createPropertyLengthRestrictions" ]]
+	-- upvalues: Config (ref), GetFIntUGCValidateMaxHSRDataLenModule (copy)
+	if not Config then
+		Config = {
+			HiddenSurfaceRemovalAsset = { HSRData = GetFIntUGCValidateMaxHSRDataLenModule() }
+		}
+		
 		return
 	end
-	var1 = {
-		HiddenSurfaceRemovalAsset = { HSRData = getFIntUGCValidateMaxHSRDataLenModule() }
-	}
 end
 
-function t.resetPropertyLengthRestrictions()
-	-- upvalues: var1 (write)
-	var1 = nil
-end
-
-local function validateIndividual(p1)
-	-- upvalues: UGCValidationService (ref), var1 (write)
-	local var2, var3 = UGCValidationService:ValidatePropertiesSensible(p1, var1[p1.ClassName])
+local function validateIndividual(Object) --[[ Line: 37 ]]
+	-- upvalues: UGCValidationService (copy), Config (ref)
+	local ValidatePropertiesSensibleResult, ValidatePropertiesSensibleResult2 = UGCValidationService:ValidatePropertiesSensible(Object, Config[Object.ClassName])
 	
-	if var2 then
+	if ValidatePropertiesSensibleResult then
 		return true
-	end
-	return false, {
-		string.format("%s %s has invalid properties: %s. These properties may be numeric values with NaNs or Infs, or strings/BinaryStrings longer than the max number of characters.", p1.ClassName, p1:GetFullName(), table.concat(var3, ", "))
-	}
-end
-
-function t.validate(p1, p2)
-	-- upvalues: getEngineFeatureEngineUGCValidatePropertiesSensibleModule (ref), var1 (write), getFIntUGCValidateMaxHSRDataLenModule (ref), failureReasonsAccumulatorModule (ref), validateIndividual (ref), analyticsModule (ref)
-	if not getEngineFeatureEngineUGCValidatePropertiesSensibleModule() then
-		return true
-	end
-	local currentTime = tick()
-	
-	if not var1 then
-		var1 = {
-			HiddenSurfaceRemovalAsset = { HSRData = getFIntUGCValidateMaxHSRDataLenModule() }
+	else
+		return false, {
+			string.format("%s %s has invalid properties: %s. These properties may be numeric values with NaNs or Infs, or strings/BinaryStrings longer than the max number of characters.", Object.ClassName, Object:GetFullName(), table.concat(ValidatePropertiesSensibleResult2, ", "))
 		}
 	end
-	local var2 = failureReasonsAccumulatorModule.new()
-	local descendants = p1:GetDescendants()
-	table.insert(descendants, p1)
-	
-	for i, v in descendants do
-		var2:updateReasons(validateIndividual(v))
-	end
-	if not var2:getFinalResults() then
-		analyticsModule.reportFailure(analyticsModule.ErrorType.validatePropertiesSensible_IncorrectPropertiesFound, nil, p2)
-	end
-	analyticsModule.recordScriptTime(script.Name, currentTime, p2)
-	
-	return var2:getFinalResults()
 end
 
-return t
+return {
+	resetPropertyLengthRestrictions = function() --[[ Line: 33 ]]
+		-- upvalues: Config (ref)
+		Config = nil
+	end,
+	validate = function(Object, p1) --[[ Line: 58 ]]
+		-- upvalues: GetEngineFeatureEngineUGCValidatePropertiesSensibleModule (copy), Config (ref), GetFIntUGCValidateMaxHSRDataLenModule (copy), FailureReasonsAccumulatorModule (copy), validateIndividual (copy), AnalyticsModule (copy)
+		if not GetEngineFeatureEngineUGCValidatePropertiesSensibleModule() then
+			return true
+		end
+		local CurrentTime = tick()
+		
+		if not Config then
+			Config = {
+				HiddenSurfaceRemovalAsset = { HSRData = GetFIntUGCValidateMaxHSRDataLenModule() }
+			}
+		end
+		local NewFailureReasonsAccumulator = FailureReasonsAccumulatorModule.new()
+		local Descendants = Object:GetDescendants()
+		table.insert(Descendants, Object)
+		
+		for _, descendant in Descendants do
+			NewFailureReasonsAccumulator:updateReasons(validateIndividual(descendant))
+		end
+		if not NewFailureReasonsAccumulator:getFinalResults() then
+			AnalyticsModule.reportFailure(AnalyticsModule.ErrorType.validatePropertiesSensible_IncorrectPropertiesFound, nil, p1)
+		end
+		AnalyticsModule.recordScriptTime(script.Name, CurrentTime, p1)
+		
+		return NewFailureReasonsAccumulator:getFinalResults()
+	end
+}

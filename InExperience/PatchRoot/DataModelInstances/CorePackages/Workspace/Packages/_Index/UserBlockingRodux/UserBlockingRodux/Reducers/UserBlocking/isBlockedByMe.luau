@@ -1,23 +1,23 @@
-﻿local parent = script:FindFirstAncestor("UserBlockingRodux").Parent
-local roduxModule = require(parent.Rodux)
-local cryoModule = require(parent.Cryo)
+﻿local Parent = script:FindFirstAncestor("UserBlockingRodux").Parent
+local RoduxModule = require(Parent.Rodux)
+local CryoModule = require(Parent.Cryo)
 
-return function(p1)
-	-- upvalues: roduxModule (ref), cryoModule (ref)
-	local userBlockingNetworking = p1.userBlockingNetworking
+return function(p1) --[[ Line: 9 ]]
+	-- upvalues: RoduxModule (copy), CryoModule (copy)
+	local UserBlockingNetworking = p1.userBlockingNetworking
 	
-	return roduxModule.createReducer({}, {
-		[userBlockingNetworking.BlockUserById.Succeeded.name] = function(p2, p3)
-			-- upvalues: cryoModule (copy)
-			return cryoModule.Dictionary.join(p2, { [tostring(p3.namedIds.users)] = true })
+	return RoduxModule.createReducer({}, {
+		[UserBlockingNetworking.BlockUserById.Succeeded.name] = function(p2, p3) --[[ Line: 13 ]]
+			-- upvalues: CryoModule (upval)
+			return CryoModule.Dictionary.join(p2, { [tostring(p3.namedIds.users)] = true })
 		end,
-		[userBlockingNetworking.UnblockUserById.Succeeded.name] = function(p2, p3)
-			-- upvalues: cryoModule (copy)
-			return cryoModule.Dictionary.join(p2, { [tostring(p3.namedIds.users)] = false })
+		[UserBlockingNetworking.UnblockUserById.Succeeded.name] = function(p2, p3) --[[ Line: 19 ]]
+			-- upvalues: CryoModule (upval)
+			return CryoModule.Dictionary.join(p2, { [tostring(p3.namedIds.users)] = false })
 		end,
-		[userBlockingNetworking.IsBlockedById.Succeeded.name] = function(p2, p3)
-			-- upvalues: cryoModule (copy)
-			return cryoModule.Dictionary.join(p2, { [tostring(p3.namedIds.users)] = p3.responseBody or false })
+		[UserBlockingNetworking.IsBlockedById.Succeeded.name] = function(p2, p3) --[[ Line: 25 ]]
+			-- upvalues: CryoModule (upval)
+			return CryoModule.Dictionary.join(p2, { [tostring(p3.namedIds.users)] = p3.responseBody or false })
 		end
 	})
 end

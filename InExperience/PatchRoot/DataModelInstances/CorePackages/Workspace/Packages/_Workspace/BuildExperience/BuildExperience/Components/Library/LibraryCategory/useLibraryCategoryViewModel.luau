@@ -1,54 +1,50 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local signalsReactModule = require(buildExperience.Parent.SignalsReact)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local SignalsReactModule = require(BuildExperience.Parent.SignalsReact)
 local _ = require(script.Parent.Parent.LibraryCategories)
 local _ = require(script.Parent.LibraryCategoryView)
-local _ = require(buildExperience.Stores.BuildLibrary.createBuildLibraryStore)
+local _ = require(BuildExperience.Stores.BuildLibrary.createBuildLibraryStore)
 local _ = require(script.Parent.Parent.LibraryTypes)
-local useLibraryStringsModule = require(script.Parent.Parent.useLibraryStrings)
-local useLibraryItemsModule = require(script.Parent.Parent.useLibraryItems)
-local getFolderPreviewModule = require(script.Parent.Parent.getFolderPreview)
+local UseLibraryStringsModule = require(script.Parent.Parent.useLibraryStrings)
+local UseLibraryItemsModule = require(script.Parent.Parent.useLibraryItems)
+local GetFolderPreviewModule = require(script.Parent.Parent.getFolderPreview)
 
-return function(p1)
-	-- upvalues: useLibraryStringsModule (ref), signalsReactModule (ref), useLibraryItemsModule (ref), getFolderPreviewModule (ref)
-	local var1 = useLibraryStringsModule()
-	local var2 = signalsReactModule.useSignalState(p1.library.getItems)
-	local var3, var4, var5 = useLibraryItemsModule(p1.library, var2, p1.itemKind, p1.query, 24, p1.categoryKey, p1.folderId)
-	local t = {}
+return function(p1) --[[ Line: 31 | Named "useLibraryCategoryViewModel" ]]
+	-- upvalues: UseLibraryStringsModule (copy), SignalsReactModule (copy), UseLibraryItemsModule (copy), GetFolderPreviewModule (copy)
+	local UseLibraryStringsModuleResult = UseLibraryStringsModule()
+	local UseSignalStateResult = SignalsReactModule.useSignalState(p1.library.getItems)
+	local UseLibraryItemsModuleResult, UseLibraryItemsModuleResult2, UseLibraryItemsModuleResult3 = UseLibraryItemsModule(p1.library, UseSignalStateResult, p1.itemKind, p1.query, 24, p1.categoryKey, p1.folderId)
+	local Items = {}
 	
-	for i, v in var3 do
-		table.insert(t, {
-			tileKey = `library-item-{v.id}`,
-			itemId = v.id,
-			itemKind = v.kind,
-			isFolder = v.className == "Folder",
-			folderPreview = getFolderPreviewModule(v, var2),
-			displayName = v.displayName,
-			unavailableText = var1.modelUnavailable,
-			thumbnail = v.image,
-			model = v.model,
-			onActivated = function()
-				-- upvalues: v (ref), p1 (ref)
-				if v.className == "Folder" then
-					if p1.onOpenCategory == nil then
-						return
-					else
-						p1.onOpenCategory(v.kind, v.id, v.displayName, v.id)
-						
-						return
-					end
-				else
-					p1.onOpenItem(v.id, v.kind)
+	for _, value in UseLibraryItemsModuleResult do
+		table.insert(Items, {
+			tileKey = `library-item-{value.id}`,
+			itemId = value.id,
+			itemKind = value.kind,
+			isFolder = value.className == "Folder",
+			folderPreview = GetFolderPreviewModule(value, UseSignalStateResult),
+			displayName = value.displayName,
+			unavailableText = UseLibraryStringsModuleResult.modelUnavailable,
+			thumbnail = value.image,
+			model = value.model,
+			onActivated = function() --[[ Line: 56 ]]
+				-- upvalues: value (copy), p1 (copy)
+				if value.className ~= "Folder" then
+					p1.onOpenItem(value.id, value.kind)
+				elseif p1.onOpenCategory ~= nil then
+					p1.onOpenCategory(value.kind, value.id, value.displayName, value.id)
+					
+					return
 				end
 			end
 		})
 	end
 	return {
-		items = t,
+		items = Items,
 		status = if p1.isReady then "Ready" else "Loading",
-		hasMore = p1.isReady and var4,
+		hasMore = p1.isReady and UseLibraryItemsModuleResult2,
 		strings = {
-			empty = if p1.query ~= "" then var1.empty else var1.searchEmpty
+			empty = if p1.query == "" then UseLibraryStringsModuleResult.empty else UseLibraryStringsModuleResult.searchEmpty
 		},
-		onLoadMore = var5
+		onLoadMore = UseLibraryItemsModuleResult3
 	}
 end

@@ -1,52 +1,53 @@
-﻿local socialCarousel = script:FindFirstAncestor("SocialCarousel")
-local parent = socialCarousel.Parent
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local roactUtilsModule = require(parent.RoactUtils)
-local navigationRoduxModule = require(parent.NavigationRodux)
-local robloxAppEnumsModule = require(parent.RobloxAppEnums)
-local navigationModule = require(parent.Navigation)
-local socialStopwatchModule = require(parent.SocialStopwatch)
-local appPage = robloxAppEnumsModule.AppPage
-local navigateDown = navigationRoduxModule.Thunks.NavigateDown
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local useNavigation = navigationModule.useNavigation
-local addFriendsTileModule = require(script.Parent.AddFriendsTile)
-local useSocialCarouselAnalyticsModule = require(socialCarousel.Analytics.useSocialCarouselAnalytics)
-local useSocialCarouselContextModule = require(socialCarousel.Contexts.useSocialCarouselContext)
-local constantsModule = require(socialCarousel.Common.Constants)
-local useNewFriendRequestsCountModule = require(socialCarousel.Hooks.useNewFriendRequestsCount)
-local fFlagCreateConnectionsHub = require(parent.SharedFlags).FFlagCreateConnectionsHub
-local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
-local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
+﻿local SocialCarousel = script:FindFirstAncestor("SocialCarousel")
+local Parent = SocialCarousel.Parent
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local SocialStopwatchModule = require(Parent.SocialStopwatch)
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local NavigateDownFunction = require(Parent.NavigationRodux).Thunks.NavigateDown
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local AddFriendsTileModule = require(script.Parent.AddFriendsTile)
+local UseSocialCarouselAnalyticsModule = require(SocialCarousel.Analytics.useSocialCarouselAnalytics)
+local UseSocialCarouselContextModule = require(SocialCarousel.Contexts.useSocialCarouselContext)
+local ConstantsModule = require(SocialCarousel.Common.Constants)
+local UseNewFriendRequestsCountModule = require(SocialCarousel.Hooks.useNewFriendRequestsCount)
+local FFlagCreateConnectionsHub = require(Parent.SharedFlags).FFlagCreateConnectionsHub
+local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
+local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 
-return function(p1)
-	-- upvalues: useNavigation (ref), useDispatch (ref), useSocialCarouselAnalyticsModule (ref), useSocialCarouselContextModule (ref), useNewFriendRequestsCountModule (ref), reactModule (ref), socialStopwatchModule (ref), fFlagCreateConnectionsHub (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), constantsModule (ref), addFriendsTileModule (ref), cryoModule (ref)
-	local var2 = useNavigation()
-	local var3 = useDispatch()
-	local var4 = useSocialCarouselAnalyticsModule()
-	local var5 = useSocialCarouselContextModule()
-	local var6 = useNewFriendRequestsCountModule()
-	local var7 = reactModule.useCallback(function()
-		-- upvalues: var4 (ref), p1 (ref), socialStopwatchModule (copy), fFlagCreateConnectionsHub (copy), var2 (ref), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var3 (ref), navigateDown (copy)
-		var4.addFriendsPressed(p1.index)
-		socialStopwatchModule.Stopwatch.start(socialStopwatchModule.Events.AFPUserTileLoadFromHomeCarousel)
+return function(p1) --[[ Line: 31 | Named "AddFriendsTileContainer" ]]
+	-- upvalues: UseNavigationFunction (copy), UseDispatchFunction (copy), UseSocialCarouselAnalyticsModule (copy), UseSocialCarouselContextModule (copy), UseNewFriendRequestsCountModule (copy), ReactModule (copy), SocialStopwatchModule (copy), FFlagCreateConnectionsHub (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), ConstantsModule (copy), AddFriendsTileModule (copy), CryoModule (copy)
+	local UseNavigationResult = UseNavigationFunction()
+	local UseDispatchResult = UseDispatchFunction()
+	local UseSocialCarouselAnalyticsModuleResult = UseSocialCarouselAnalyticsModule()
+	local UseSocialCarouselContextModuleResult = UseSocialCarouselContextModule()
+	local UseNewFriendRequestsCountModuleResult = UseNewFriendRequestsCountModule()
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 37 ]]
+		-- upvalues: UseSocialCarouselAnalyticsModuleResult (copy), p1 (copy), SocialStopwatchModule (upval), FFlagCreateConnectionsHub (upval), UseNavigationResult (copy), AppPage (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval)
+		UseSocialCarouselAnalyticsModuleResult.addFriendsPressed(p1.index)
+		SocialStopwatchModule.Stopwatch.start(SocialStopwatchModule.Events.AFPUserTileLoadFromHomeCarousel)
 		
-		if fFlagCreateConnectionsHub then
-			var2.navigate(appPage.CoHubAddConnections)
-			
-			return
-		elseif fFlagSignalsNavP3Dispatch then
-			var1.down(var1.fromLegacyPage({ name = appPage.AddFriendsPage }))
+		if FFlagCreateConnectionsHub then
+			UseNavigationResult.navigate(AppPage.CoHubAddConnections)
 			
 			return
 		end
-		var3(navigateDown({ name = appPage.AddFriendsPage }))
-	end, { var3, var2 })
-	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), constantsModule (copy)
-		var5.onSuccessfulRender(constantsModule.ANALYTICS.UI_LOADING_EVENTS.ADD_FRIENDS)
+		if FFlagSignalsNavP3Dispatch then
+			NavigationCommands.down(NavigationCommands.fromLegacyPage({ name = AppPage.AddFriendsPage }))
+			
+			return
+		else
+			UseDispatchResult(NavigateDownFunction({ name = AppPage.AddFriendsPage }))
+		end
+	end, { UseDispatchResult, UseNavigationResult })
+	ReactModule.useEffect(function() --[[ Line: 49 ]]
+		-- upvalues: UseSocialCarouselContextModuleResult (copy), ConstantsModule (upval)
+		UseSocialCarouselContextModuleResult.onSuccessfulRender(ConstantsModule.ANALYTICS.UI_LOADING_EVENTS.ADD_FRIENDS)
 	end, {})
 	
-	return reactModule.createElement(addFriendsTileModule, cryoModule.Dictionary.join(p1, { onActivated = var7, badge = var6 }))
+	return ReactModule.createElement(AddFriendsTileModule, CryoModule.Dictionary.join(p1, {
+		onActivated = UseResult,
+		badge = UseNewFriendRequestsCountModuleResult
+	}))
 end

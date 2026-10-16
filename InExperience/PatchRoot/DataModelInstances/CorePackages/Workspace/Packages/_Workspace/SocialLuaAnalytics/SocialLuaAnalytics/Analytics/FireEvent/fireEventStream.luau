@@ -1,78 +1,77 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local llama = require(parent.dependencies).llama
+﻿local Parent = script.Parent.Parent.Parent
+local Llama = require(Parent.dependencies).llama
 local _ = require(script.Parent.Parent.Types)
-local toStringAdditionalArgsModule = require(script.Parent.toStringAdditionalArgs)
-local getEventInfoModule = require(script.Parent.getEventInfo)
-local optionallyLogModule = require(script.Parent.optionallyLog)
-local isEnumModule = require(script.Parent.Parent.Parent.Utils.isEnum)
-local dashModule = require(parent_1.Dash)
+local ToStringAdditionalArgsModule = require(script.Parent.toStringAdditionalArgs)
+local GetEventInfoModule = require(script.Parent.getEventInfo)
+local OptionallyLogModule = require(script.Parent.optionallyLog)
+local IsEnumModule = require(script.Parent.Parent.Parent.Utils.isEnum)
+local DashModule = require(Parent.Parent.Dash)
 
-local _ = function(p1)
-	-- upvalues: llama (ref), isEnumModule (ref)
-	return llama.Dictionary.map(p1 or {}, function(p2)
-		-- upvalues: isEnumModule (copy)
-		return if isEnumModule(p2) then p2.rawValue() else p2
+local function _(p1) --[[ Line: 15 ]]
+	-- upvalues: Llama (copy), IsEnumModule (copy)
+	return Llama.Dictionary.map(p1 or {}, function(p2) --[[ Line: 16 ]]
+		-- upvalues: IsEnumModule (upval)
+		return if IsEnumModule(p2) then p2.rawValue() else p2
 	end)
 end
 
-local var1 = function(p1, p2)
-	-- upvalues: llama (ref)
-	return if p1 and p2 then llama.Dictionary.map(p1, function(p3, p4)
-		-- upvalues: p2 (ref), llama (copy)
-		local var2 = p2[p4]
+local function v9(p1, FormatRulesForAdditionalInfo) --[[ Line: 27 ]]
+	-- upvalues: Llama (copy)
+	return if p1 and FormatRulesForAdditionalInfo then Llama.Dictionary.map(p1, function(p2, p3) --[[ Line: 32 ]]
+		-- upvalues: FormatRulesForAdditionalInfo (copy), Llama (upval)
+		local FormatRulesForAdditional = FormatRulesForAdditionalInfo[p3]
 		
-		return if var2 then if type(var2) == "function" then var2(p3) else p3 else llama.None
+		return if FormatRulesForAdditional then if type(FormatRulesForAdditional) == "function" then FormatRulesForAdditional(p2) else p2 else Llama.None
 	end) else {}
 end
 
-local var2 = function(p1)
-	-- upvalues: toStringAdditionalArgsModule (ref)
-	return string.format("context: (%s), eventName: (%s), additionalInfo: (%s)", p1.context, p1.eventType, toStringAdditionalArgsModule(p1.additionalInfo))
+local function v10(p1): string --[[ Line: 42 ]]
+	-- upvalues: ToStringAdditionalArgsModule (copy)
+	return string.format("context: (%s), eventName: (%s), additionalInfo: (%s)", p1.context, p1.eventType, ToStringAdditionalArgsModule(p1.additionalInfo))
 end
 
-local var3 = function(p1, p2)
-	return function(p3)
-		-- upvalues: p2 (ref), p1 (ref)
+local function v11(p1, p2) --[[ Line: 51 ]]
+	return function(p3) --[[ Line: 52 ]]
+		-- upvalues: p2 (copy), p1 (copy)
 		if p2 then
 			p1:sendEventDeferred(p3.context, p3.eventType, p3.additionalInfo)
 			
 			return p3
+		else
+			p1:setRBXEventStream(p3.context, p3.eventType, p3.additionalInfo)
+			
+			return p3
 		end
-		p1:setRBXEventStream(p3.context, p3.eventType, p3.additionalInfo)
-		
-		return p3
 	end
 end
 
-return function(p1)
-	-- upvalues: getEventInfoModule (ref), var3 (ref), dashModule (ref), optionallyLogModule (ref), var2 (ref), llama (ref), isEnumModule (ref), var1 (ref)
-	local var4 = getEventInfoModule(p1.eventList)
+return function(p1) --[[ Line: 63 ]]
+	-- upvalues: GetEventInfoModule (copy), v11 (copy), DashModule (copy), OptionallyLogModule (copy), v10 (copy), Llama (copy), IsEnumModule (copy), v9 (copy)
+	local EventInfoModule = GetEventInfoModule(p1.eventList)
 	
-	return function(p2, p3)
-		-- upvalues: var4 (ref), var3 (copy), p1 (ref), dashModule (copy), optionallyLogModule (copy), var2 (copy), llama (copy), isEnumModule (copy), var1 (copy)
-		local var5 = var4(p2)
-		local var6 = if p1.getInfoForAllEvents then p1.getInfoForAllEvents() else p1.infoForAllEvents
-		local pipe = dashModule.pipe
-		local eventStreamImpl = p1.eventStreamImpl
-		local shouldUseSendEventDeferred = p1.shouldUseSendEventDeferred
-		pipe(function(p4)
-			-- upvalues: shouldUseSendEventDeferred (ref), eventStreamImpl (ref)
-			if shouldUseSendEventDeferred then
-				eventStreamImpl:sendEventDeferred(p4.context, p4.eventType, p4.additionalInfo)
+	return function(p2, p3) --[[ Line: 73 ]]
+		-- upvalues: EventInfoModule (copy), v11 (upval), p1 (copy), DashModule (upval), OptionallyLogModule (upval), v10 (upval), Llama (upval), IsEnumModule (upval), v9 (upval)
+		local EventInfoModuleResult = EventInfoModule(p2)
+		local EventStreamImpl = p1.eventStreamImpl
+		local ShouldUseSendEventDeferred = p1.shouldUseSendEventDeferred
+		DashModule.pipe(function(p4) --[[ Line: 52 ]]
+			-- upvalues: ShouldUseSendEventDeferred (copy), EventStreamImpl (copy)
+			if ShouldUseSendEventDeferred then
+				EventStreamImpl:sendEventDeferred(p4.context, p4.eventType, p4.additionalInfo)
+				
+				return p4
+			else
+				EventStreamImpl:setRBXEventStream(p4.context, p4.eventType, p4.additionalInfo)
 				
 				return p4
 			end
-			eventStreamImpl:setRBXEventStream(p4.context, p4.eventType, p4.additionalInfo)
-			
-			return p4
-		end, optionallyLogModule(p1.loggerImpl, var2))({
-			context = var5.context,
-			eventType = var5.eventType,
-			additionalInfo = llama.Dictionary.join(var6 or {}, llama.Dictionary.map(var5.additionalInfo or {}, function(p4)
-				-- upvalues: isEnumModule (copy)
-				return if isEnumModule(p4) then p4.rawValue() else p4
-			end), var1(p3, var5.formatRulesForAdditionalInfo))
+		end, OptionallyLogModule(p1.loggerImpl, v10))({
+			context = EventInfoModuleResult.context,
+			eventType = EventInfoModuleResult.eventType,
+			additionalInfo = Llama.Dictionary.join((if p1.getInfoForAllEvents then p1.getInfoForAllEvents() else p1.infoForAllEvents) or {}, Llama.Dictionary.map(EventInfoModuleResult.additionalInfo or {}, function(p4) --[[ Line: 16 ]]
+				-- upvalues: IsEnumModule (upval)
+				return if IsEnumModule(p4) then p4.rawValue() else p4
+			end), v9(p3, EventInfoModuleResult.formatRulesForAdditionalInfo))
 		})
 		
 		return p2, p3

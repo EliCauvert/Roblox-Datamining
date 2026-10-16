@@ -1,34 +1,35 @@
-﻿local function _(value, minValue, maxValue)
-	return math.max(minValue, math.min(maxValue, value))
+﻿local function _(p1: number, p2: number, p3: number): number --[[ Line: 52 | Named "clamp" ]]
+	return (math.max(p2, (math.min(p3, p1))))
 end
 
-local _ = function(startValue, endValue, alpha)
-	return startValue + (endValue - startValue) * alpha
+local _ = function(p1, p2, p3) --[[ Line: 56 | Named "lerp" ]]
+	return p1 + (p2 - p1) * p3
 end
 
-local _ = function(p1)
+local _ = function(p1: number): number --[[ Line: 60 | Named "easeOutQuint" ]]
 	return 1 - (1 - p1) ^ 5
 end
 
-local _ = function(p1)
+local _ = function(p1: number): number --[[ Line: 64 | Named "easeOutQuad" ]]
 	return 1 - (1 - p1) ^ 2
 end
 
-local _ = function(p1)
+local _ = function(p1) --[[ Line: 68 | Named "easeInQuad" ]]
 	return p1 * p1
 end
 
-local _ = function(p1)
-	return if p1 <= 0 then 0 elseif p1 < 0.15 then (1 - (1 - p1 / 0.15) ^ 2) * 1.15 + 0 elseif p1 < 0.35 then (p1 - 0.15) / 0.2 * -0.15 + 1.15 else 1
+local _ = function(p1: number): number --[[ Line: 73 | Named "popScale" ]]
+	return if p1 <= 0 then 0 elseif p1 < 0.15 then (1 - (1 - p1 / 0.15) ^ 2) * 1.15 + 0 elseif p1 < 0.35 then (p1 - 0.15) / 0.19999999999999998 * -0.1499999999999999 + 1.15 else 1
 end
 
-local _ = function(p1)
+local _ = function(p1: number): number --[[ Line: 85 | Named "fadeTransparency" ]]
 	if p1 <= 0.55 then
 		return 0
+	else
+		local v1 = (p1 - 0.55) / 0.44999999999999996
+		
+		return (math.max(0, (math.min(1, v1 * v1))))
 	end
-	local var1 = (p1 - 0.55) / 0.45
-	
-	return math.max(0, math.min(1, var1 * var1))
 end
 
 return {
@@ -49,26 +50,26 @@ return {
 	MAX_PARTICLES = 16,
 	FADE_START = 0.55,
 	OVERSHOOT = 1.15,
-	solveParticle = function(p1, p2)
-		local var1
-		local maxValue = math.max(0, math.min(1, p1))
-		local var2 = p2.reach * (1 - (1 - maxValue) ^ 5)
-		local var3 = math.sin(p2.angle) * var2
-		local t = {
-			x = math.cos(p2.angle) * var2 * 1.4,
-			y = var3 * (if var3 >= 0 then 1.5 else 0.6) + maxValue * 170 * maxValue,
-			rotation = p2.spin * maxValue,
-			scale = p2.sizeScale * (if maxValue <= 0 then 0 elseif maxValue < 0.15 then (1 - (1 - maxValue / 0.15) ^ 2) * 1.15 + 0 elseif maxValue < 0.35 then (maxValue - 0.15) / 0.2 * -0.15 + 1.15 else 1)
+	solveParticle = function(p1: number, p2) --[[ Line: 92 ]]
+		local Largest = math.max(0, (math.min(1, p1)))
+		local ScaledReach = p2.reach * (1 - (1 - Largest) ^ 5)
+		local ScaledSine = math.sin(p2.angle) * ScaledReach
+		local config = {
+			x = math.cos(p2.angle) * ScaledReach * 1.4,
+			y = ScaledSine * (if ScaledSine >= 0 then 1.5 else 0.6) + Largest * 170 * Largest,
+			rotation = p2.spin * Largest,
+			scale = p2.sizeScale * (if Largest <= 0 then 0 elseif Largest < 0.15 then (1 - (1 - Largest / 0.15) ^ 2) * 1.15 + 0 elseif Largest < 0.35 then (Largest - 0.15) / 0.19999999999999998 * -0.1499999999999999 + 1.15 else 1)
 		}
+		local Largest1 = nil
 		
-		if maxValue <= 0.55 then
-			var1 = 0
+		if Largest <= 0.55 then
+			Largest1 = 0
 		else
-			local var4 = (maxValue - 0.55) / 0.45
-			var1 = math.max(0, math.min(1, var4 * var4))
+			local LargestRatio = (Largest - 0.55) / 0.44999999999999996
+			Largest1 = math.max(0, (math.min(1, LargestRatio * LargestRatio)))
 		end
-		t.transparency = var1
+		config.transparency = Largest1
 		
-		return t
+		return config
 	end
 }

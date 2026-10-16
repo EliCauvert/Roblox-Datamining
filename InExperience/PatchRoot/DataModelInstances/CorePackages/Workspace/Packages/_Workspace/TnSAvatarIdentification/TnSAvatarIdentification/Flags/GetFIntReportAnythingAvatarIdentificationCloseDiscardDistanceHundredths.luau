@@ -1,5 +1,5 @@
 ﻿game:DefineFastInt("ReportAnythingAvatarIdentificationCloseDiscardDistanceHundredths", 50)
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastInt("ReportAnythingAvatarIdentificationCloseDiscardDistanceHundredths")
 end

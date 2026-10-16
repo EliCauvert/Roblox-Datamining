@@ -1,113 +1,100 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local foundationModule = require(parent_1.Foundation)
-local localizationModule = require(parent_1.Localization)
-local icon = foundationModule.Icon
-local view = foundationModule.View
-local text = foundationModule.Text
-local menu = foundationModule.Menu
-local enums = foundationModule.Enums
-local whyThisAdModalModule = require(parent.WhyThisAdModal)
-local adDisclosureTelemetryModule = require(parent.AdDisclosureTelemetry)
-local useLocalization = localizationModule.Hooks.useLocalization
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local FoundationModule = require(Parent1.Foundation)
+local Icon = FoundationModule.Icon
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local Menu = FoundationModule.Menu
+local Enums = FoundationModule.Enums
+local WhyThisAdModalModule = require(Parent.WhyThisAdModal)
+local AdDisclosureTelemetryModule = require(Parent.AdDisclosureTelemetry)
+local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
 
-return reactModule.memo(function(p1)
-	-- upvalues: useLocalization (ref), enums (ref), reactModule (ref), adDisclosureTelemetryModule (ref), view (ref), menu (ref), text (ref), icon (ref), whyThisAdModalModule (ref)
-	local createElement_1
-	local var1 = useLocalization({
+return ReactModule.memo(function(p1) --[[ Line: 23 | Named "AdLabel" ]]
+	-- upvalues: UseLocalizationFunction (copy), Enums (copy), ReactModule (copy), AdDisclosureTelemetryModule (copy), View (copy), Menu (copy), Text (copy), Icon (copy), WhyThisAdModalModule (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
 		adLabel = "Feature.EnhancedVideo.Label.Ad",
 		whyThisAdLabel = "Feature.GameDetails.Action.WhyThisAd",
 		errorAdDisclosureText = "Feature.GameDetails.Message.SponsoredDisclosure.Error"
 	})
-	local list = {
+	local Items = {
 		{
 			id = "whyThisAd",
-			icon = enums.IconName.CircleI,
-			text = var1.whyThisAdLabel
+			icon = Enums.IconName.CircleI,
+			text = UseLocalizationResult.whyThisAdLabel
 		}
 	}
-	local var2, var3 = reactModule.useState(false)
-	local var4, var5 = reactModule.useState(false)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
 	
-	local function _(p2)
-		-- upvalues: adDisclosureTelemetryModule (copy), var3 (ref)
-		adDisclosureTelemetryModule.logAdDisclosureMenuToggled(p2)
-		var3(p2)
+	local function _(p2) --[[ Line: 37 | Named "toggleMenu" ]]
+		-- upvalues: AdDisclosureTelemetryModule (upval), UseStateResult2 (copy)
+		AdDisclosureTelemetryModule.logAdDisclosureMenuToggled(p2)
+		UseStateResult2(p2)
 	end
 	
-	local _ = function(p2)
-		-- upvalues: adDisclosureTelemetryModule (copy), var5 (ref)
-		adDisclosureTelemetryModule.logAdDisclosureWhyThisAdToggled(p2)
-		var5(p2)
+	local _ = function(p2) --[[ Line: 42 | Named "toggleWhyThisAdModal" ]]
+		-- upvalues: AdDisclosureTelemetryModule (upval), UseStateResult2_1 (copy)
+		AdDisclosureTelemetryModule.logAdDisclosureWhyThisAdToggled(p2)
+		UseStateResult2_1(p2)
 	end
 	
-	local createElement = reactModule.createElement
-	local t = { tag = "size-full margin-bottom-medium" }
-	local t_1 = {
-		Menu = reactModule.createElement(menu, {
+	return ReactModule.createElement(View, { tag = "size-full margin-bottom-medium" }, {
+		Menu = ReactModule.createElement(Menu, {
 			AnchorPoint = Vector2.new(1, 1),
 			Position = UDim2.new(1, -10, 1, 0),
-			isOpen = var2,
-			items = list,
-			size = enums.InputSize.Medium,
-			align = enums.PopoverAlign.End,
+			isOpen = UseStateResult,
+			items = Items,
+			size = Enums.InputSize.Medium,
+			align = Enums.PopoverAlign.End,
 			width = UDim.new(0, 180),
-			onPressedOutside = function()
-				-- upvalues: adDisclosureTelemetryModule (copy), var3 (ref)
-				adDisclosureTelemetryModule.logAdDisclosureMenuToggled(false)
-				var3(false)
+			onPressedOutside = function() --[[ Line: 58 ]]
+				-- upvalues: AdDisclosureTelemetryModule (upval), UseStateResult2 (copy)
+				AdDisclosureTelemetryModule.logAdDisclosureMenuToggled(false)
+				UseStateResult2(false)
 			end,
-			onActivated = function(p2)
-				-- upvalues: adDisclosureTelemetryModule (copy), var3 (ref), var5 (ref), p1 (ref)
+			onActivated = function(p2) --[[ Line: 61 ]]
+				-- upvalues: AdDisclosureTelemetryModule (upval), UseStateResult2 (copy), UseStateResult2_1 (copy), p1 (copy)
 				if p2 == "whyThisAd" then
-					adDisclosureTelemetryModule.logAdDisclosureMenuToggled(false)
-					var3(false)
-					adDisclosureTelemetryModule.logAdDisclosureWhyThisAdToggled(true)
-					var5(true)
+					AdDisclosureTelemetryModule.logAdDisclosureMenuToggled(false)
+					UseStateResult2(false)
+					AdDisclosureTelemetryModule.logAdDisclosureWhyThisAdToggled(true)
+					UseStateResult2_1(true)
 					p1.sendPauseEvent()
 				end
 			end
 		}, {
-			AdLabel = reactModule.createElement(view, {
+			AdLabel = ReactModule.createElement(View, {
 				tag = "row align-x-center align-y-center size-1300-600 stroke-standard stroke-default radius-small bg-over-media-100",
-				onActivated = function()
-					-- upvalues: var2 (ref), adDisclosureTelemetryModule (copy), var3 (ref)
-					local var6 = not var2
-					adDisclosureTelemetryModule.logAdDisclosureMenuToggled(var6)
-					var3(var6)
+				onActivated = function() --[[ Line: 71 ]]
+					-- upvalues: UseStateResult (copy), AdDisclosureTelemetryModule (upval), UseStateResult2 (copy)
+					local NoUseStateResult = not UseStateResult
+					AdDisclosureTelemetryModule.logAdDisclosureMenuToggled(NoUseStateResult)
+					UseStateResult2(NoUseStateResult)
 				end
 			}, {
-				AdText = reactModule.createElement(text, {
+				AdText = ReactModule.createElement(Text, {
 					tag = "size-0-full auto-x text-label-small",
 					LayoutOrder = 1,
-					Text = var1.adLabel
+					Text = UseLocalizationResult.adLabel
 				}),
-				TrailingIconWrapper = reactModule.createElement(view, { tag = "auto-xy padding-left-small", LayoutOrder = 2 }, {
-					MoreIcon = reactModule.createElement(icon, {
-						name = enums.IconName.CircleThreeDotsHorizontal,
-						size = enums.IconSize.XSmall
+				TrailingIconWrapper = ReactModule.createElement(View, { tag = "auto-xy padding-left-small", LayoutOrder = 2 }, {
+					MoreIcon = ReactModule.createElement(Icon, {
+						name = Enums.IconName.CircleThreeDotsHorizontal,
+						size = Enums.IconSize.XSmall
 					})
 				})
 			})
-		})
-	}
-	
-	if var4 then
-		createElement_1 = reactModule.createElement
-		createElement_1 = createElement_1(whyThisAdModalModule, {
-			adDisclosureBody = if p1.adDisclosureText == nil or p1.adDisclosureText == "" then var1.errorAdDisclosureText else p1.adDisclosureText,
+		}),
+		WhyThisAdModal = if UseStateResult1 then ReactModule.createElement(WhyThisAdModalModule, {
+			adDisclosureBody = if p1.adDisclosureText == nil or p1.adDisclosureText == "" then UseLocalizationResult.errorAdDisclosureText else p1.adDisclosureText,
 			showAdPreferencesUrl = p1.showAdPreferencesUrl,
-			onClose = function()
-				-- upvalues: adDisclosureTelemetryModule (copy), var5 (ref)
-				adDisclosureTelemetryModule.logAdDisclosureWhyThisAdToggled(false)
-				var5(false)
+			onClose = function() --[[ Line: 97 ]]
+				-- upvalues: AdDisclosureTelemetryModule (upval), UseStateResult2_1 (copy)
+				AdDisclosureTelemetryModule.logAdDisclosureWhyThisAdToggled(false)
+				UseStateResult2_1(false)
 			end
-		})
-	else
-		createElement_1 = nil
-	end
-	t_1.WhyThisAdModal = createElement_1
-	
-	return createElement(view, t, t_1)
+		}) else nil
+	})
 end)

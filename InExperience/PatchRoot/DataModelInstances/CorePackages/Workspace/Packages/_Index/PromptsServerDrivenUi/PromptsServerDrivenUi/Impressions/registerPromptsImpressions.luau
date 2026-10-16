@@ -1,16 +1,16 @@
-﻿local promptsServerDrivenUi = script:FindFirstAncestor("PromptsServerDrivenUi")
-local sduiCoreSystemModule = require(promptsServerDrivenUi.Parent.SduiCoreSystem)
-local sduiImpressionEventType = sduiCoreSystemModule.SduiImpressionEventType
-local getSduiImpressionHandlerRegistry = sduiCoreSystemModule.getSduiImpressionHandlerRegistry
+﻿local PromptsServerDrivenUi = script:FindFirstAncestor("PromptsServerDrivenUi")
+local SduiCoreSystemModule = require(PromptsServerDrivenUi.Parent.SduiCoreSystem)
+local SduiImpressionEventType = SduiCoreSystemModule.SduiImpressionEventType
+local GetSduiImpressionHandlerRegistryFunction = SduiCoreSystemModule.getSduiImpressionHandlerRegistry
 
-return function()
-	-- upvalues: sduiImpressionEventType (ref), promptsServerDrivenUi (ref), getSduiImpressionHandlerRegistry (ref)
-	getSduiImpressionHandlerRegistry().registerImpressionHandlerConfigs({
-		[sduiImpressionEventType.promptImpressions] = {
+return function() --[[ Line: 11 | Named "registerPromptsImpressions" ]]
+	-- upvalues: SduiImpressionEventType (copy), PromptsServerDrivenUi (copy), GetSduiImpressionHandlerRegistryFunction (copy)
+	GetSduiImpressionHandlerRegistryFunction().registerImpressionHandlerConfigs({
+		[SduiImpressionEventType.promptImpressions] = {
 			skipItemImpressionsLog = false,
-			lazyHandler = function()
-				-- upvalues: promptsServerDrivenUi (copy)
-				return require(promptsServerDrivenUi.Impressions.SduiPromptImpressionsHandler)
+			lazyHandler = function() --[[ Line: 14 ]]
+				-- upvalues: PromptsServerDrivenUi (upval)
+				return require(PromptsServerDrivenUi.Impressions.SduiPromptImpressionsHandler)
 			end
 		}
 	})

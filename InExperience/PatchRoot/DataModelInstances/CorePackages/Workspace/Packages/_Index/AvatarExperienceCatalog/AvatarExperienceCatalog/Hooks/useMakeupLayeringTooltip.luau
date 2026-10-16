@@ -1,52 +1,53 @@
-﻿local reactModule = require(script:FindFirstAncestor("AvatarExperienceCatalog").Parent.React)
-local useMakeupFtuxModule = require(script.Parent.useMakeupFtux)
+﻿local ReactModule = require(script:FindFirstAncestor("AvatarExperienceCatalog").Parent.React)
+local UseMakeupFtuxModule = require(script.Parent.useMakeupFtux)
 local AXMakeupLayeringTooltipShowDelayMS = game:DefineFastInt("AXMakeupLayeringTooltipShowDelayMS", 500)
 local AXMakeupLayeringTooltipDismissTimeoutSeconds = game:DefineFastInt("AXMakeupLayeringTooltipDismissTimeoutSeconds", 5)
 
-return function(p1)
-	-- upvalues: useMakeupFtuxModule (ref), reactModule (ref), AXMakeupLayeringTooltipShowDelayMS (ref), AXMakeupLayeringTooltipDismissTimeoutSeconds (ref)
-	local var1 = useMakeupFtuxModule()
-	local var2, var3 = reactModule.useState(false)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var1 (ref), var3 (ref), AXMakeupLayeringTooltipShowDelayMS (copy)
-		if p1 and var1.shouldShowMakeupLayeringTooltip() then
-			local delayedThread = task.delay(AXMakeupLayeringTooltipShowDelayMS / 1000, function()
-				-- upvalues: var3 (copy), var1 (copy)
-				var3(true)
-				var1.markMakeupLayeringTooltipSeen()
-			end)
+return function(p1) --[[ Line: 11 | Named "useMakeupLayeringTooltip" ]]
+	-- upvalues: UseMakeupFtuxModule (copy), ReactModule (copy), AXMakeupLayeringTooltipShowDelayMS (copy), AXMakeupLayeringTooltipDismissTimeoutSeconds (copy)
+	local UseMakeupFtuxModuleResult = UseMakeupFtuxModule()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	ReactModule.useEffect(function() --[[ Line: 15 ]]
+		-- upvalues: p1 (copy), UseMakeupFtuxModuleResult (copy), UseStateResult2 (copy), AXMakeupLayeringTooltipShowDelayMS (upval)
+		if not p1 or not UseMakeupFtuxModuleResult.shouldShowMakeupLayeringTooltip() then
+			UseStateResult2(false)
 			
-			return function()
-				-- upvalues: delayedThread (ref)
-				if delayedThread then
-					task.cancel(delayedThread)
-				end
+			return
+		end
+		local DelayedThread = task.delay(AXMakeupLayeringTooltipShowDelayMS / 1000, function() --[[ Line: 21 ]]
+			-- upvalues: UseStateResult2 (upval), UseMakeupFtuxModuleResult (upval)
+			UseStateResult2(true)
+			UseMakeupFtuxModuleResult.markMakeupLayeringTooltipSeen()
+		end)
+		
+		return function() --[[ Line: 26 ]]
+			-- upvalues: DelayedThread (copy)
+			if DelayedThread then
+				task.cancel(DelayedThread)
 			end
 		end
-		var3(false)
 	end, { p1 })
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), AXMakeupLayeringTooltipDismissTimeoutSeconds (copy), var3 (ref)
-		if var2 then
-			local delayedThread = task.delay(AXMakeupLayeringTooltipDismissTimeoutSeconds, function()
-				-- upvalues: var3 (copy)
-				var3(false)
-			end)
-			
-			return function()
-				-- upvalues: delayedThread (ref)
-				if delayedThread then
-					task.cancel(delayedThread)
-				end
+	ReactModule.useEffect(function() --[[ Line: 33 ]]
+		-- upvalues: UseStateResult (copy), AXMakeupLayeringTooltipDismissTimeoutSeconds (upval), UseStateResult2 (copy)
+		if not UseStateResult then return end
+		local DelayedThread = task.delay(AXMakeupLayeringTooltipDismissTimeoutSeconds, function() --[[ Line: 38 ]]
+			-- upvalues: UseStateResult2 (upval)
+			UseStateResult2(false)
+		end)
+		
+		return function() --[[ Line: 42 ]]
+			-- upvalues: DelayedThread (copy)
+			if DelayedThread then
+				task.cancel(DelayedThread)
 			end
 		end
-	end, { var2 })
+	end, { UseStateResult })
 	
 	return {
-		showTooltip = var2,
-		dismissTooltip = reactModule.useCallback(function()
-			-- upvalues: var3 (ref)
-			var3(false)
+		showTooltip = UseStateResult,
+		dismissTooltip = ReactModule.useCallback(function() --[[ Line: 49 ]]
+			-- upvalues: UseStateResult2 (copy)
+			UseStateResult2(false)
 		end, {})
 	}
 end

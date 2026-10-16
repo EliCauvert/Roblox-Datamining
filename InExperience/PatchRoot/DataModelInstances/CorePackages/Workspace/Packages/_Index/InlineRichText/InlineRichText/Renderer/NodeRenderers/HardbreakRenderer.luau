@@ -1,8 +1,8 @@
-﻿local inlineRichText = script:FindFirstAncestor("InlineRichText")
-local hardBreakElement = require(inlineRichText.Parent.InlineLayout).Components.InlineLayoutElements.HardBreakElement
-local _ = require(inlineRichText.Types)
+﻿local InlineRichText = script:FindFirstAncestor("InlineRichText")
+local HardBreakElement = require(InlineRichText.Parent.InlineLayout).Components.InlineLayoutElements.HardBreakElement
+local _ = require(InlineRichText.Types)
 
-return function(_, _)
-	-- upvalues: hardBreakElement (ref)
-	return { hardBreakElement }
+return function(_, _) --[[ Line: 9 ]]
+	-- upvalues: HardBreakElement (copy)
+	return { HardBreakElement }
 end

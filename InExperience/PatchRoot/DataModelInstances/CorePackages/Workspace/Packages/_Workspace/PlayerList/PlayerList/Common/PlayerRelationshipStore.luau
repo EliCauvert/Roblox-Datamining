@@ -1,7 +1,7 @@
-﻿local createSignal = require(script.Parent.Parent.Parent.Signals).createSignal
+﻿local CreateSignalFunction = require(script.Parent.Parent.Parent.Signals).createSignal
 local t = {}
 
-local function _()
+local function _() --[[ Line: 18 | Named "defaultRelationship" ]]
 	return {
 		isBlocked = false,
 		friendStatus = nil,
@@ -9,56 +9,56 @@ local function _()
 	}
 end
 
-local _ = function(p1)
-	-- upvalues: t (write), createSignal (ref)
-	if not t[p1] then
-		local var1, var2 = createSignal({
+local _ = function(Key) --[[ Line: 26 | Named "getOrCreate" ]]
+	-- upvalues: t (ref), CreateSignalFunction (copy)
+	if not t[Key] then
+		local Signal, Signal2 = CreateSignalFunction({
 			isBlocked = false,
 			friendStatus = nil,
 			isFollowing = false
 		})
-		t[p1] = { getter = var1, setter = var2 }
+		t[Key] = { getter = Signal, setter = Signal2 }
 	end
-	return t[p1]
+	return t[Key]
 end
 
 return {
-	getPlayerRelationshipReactive = function(p1)
-		-- upvalues: t (write), createSignal (ref)
-		if not t[p1] then
-			local var1, var2 = createSignal({
+	getPlayerRelationshipReactive = function(Key) --[[ Line: 34 ]]
+		-- upvalues: t (ref), CreateSignalFunction (copy)
+		if not t[Key] then
+			local Signal, Signal2 = CreateSignalFunction({
 				isBlocked = false,
 				friendStatus = nil,
 				isFollowing = false
 			})
-			t[p1] = { getter = var1, setter = var2 }
+			t[Key] = { getter = Signal, setter = Signal2 }
 		end
-		return t[p1].getter
+		return t[Key].getter
 	end,
-	patchPlayerRelationship = function(p1, p2)
-		-- upvalues: t (write), createSignal (ref)
-		if not t[p1] then
-			local var1, var2 = createSignal({
+	patchPlayerRelationship = function(Key, p1) --[[ Line: 44 ]]
+		-- upvalues: t (ref), CreateSignalFunction (copy)
+		if not t[Key] then
+			local Signal, Signal2 = CreateSignalFunction({
 				isBlocked = false,
 				friendStatus = nil,
 				isFollowing = false
 			})
-			t[p1] = { getter = var1, setter = var2 }
+			t[Key] = { getter = Signal, setter = Signal2 }
 		end
-		local var3 = t[p1]
-		local ter = var3.getter(false)
-		var3.setter({
-			isBlocked = if p2.isBlocked ~= nil then ter.isBlocked else p2.isBlocked,
-			friendStatus = if p2.friendStatus ~= nil then ter.friendStatus else p2.friendStatus,
-			isFollowing = if p2.isFollowing ~= nil then ter.isFollowing else p2.isFollowing
+		local Entry = t[Key]
+		local Ter = Entry.getter(false)
+		Entry.setter({
+			isBlocked = if p1.isBlocked == nil then Ter.isBlocked else p1.isBlocked,
+			friendStatus = if p1.friendStatus == nil then Ter.friendStatus else p1.friendStatus,
+			isFollowing = if p1.isFollowing == nil then Ter.isFollowing else p1.isFollowing
 		})
 	end,
-	removePlayer = function(p1)
-		-- upvalues: t (write)
-		t[p1] = nil
+	removePlayer = function(Key) --[[ Line: 55 ]]
+		-- upvalues: t (ref)
+		t[Key] = nil
 	end,
-	cleanUp = function()
-		-- upvalues: t (write)
+	cleanUp = function() --[[ Line: 59 ]]
+		-- upvalues: t (ref)
 		t = {}
 	end
 }

@@ -1,3 +1,4 @@
-﻿local corePackagesService = game:GetService("CorePackages")
+﻿local CorePackages = game:GetService("CorePackages")
+local ViewRecyclerReact06Module = require(CorePackages.Packages.ViewRecyclerReact06)
 
-return if require(script.Parent.SharedFlags).FFlagViewRecyclerReact06 then require(corePackagesService.Packages.ViewRecyclerReact06) else require(corePackagesService.Packages.ViewRecyclerReact)
+return if require(script.Parent.SharedFlags).FFlagViewRecyclerReact06 then ViewRecyclerReact06Module else require(CorePackages.Packages.ViewRecyclerReact)

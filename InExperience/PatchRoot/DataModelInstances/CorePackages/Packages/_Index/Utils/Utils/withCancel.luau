@@ -1,67 +1,66 @@
-﻿local boolean = require((nil).LuauPolyfill).Boolean
-local promiseModule = require((nil).Promise)
-local t = {}
+﻿local Boolean = require((nil).LuauPolyfill).Boolean
+local PromiseModule = require((nil).Promise)
 local _ = require((nil).Dev.JestGlobals).expect
 
-local function defaultAsyncIteratorReturn(p1)
-	-- upvalues: promiseModule (ref)
-	return promiseModule.resolve():andThen(function()
-		-- upvalues: p1 (ref)
-		return { done = true, value = p1 }
+local function defaultAsyncIteratorReturn(Value) --[[ Line: 14 ]]
+	-- upvalues: PromiseModule (copy)
+	return PromiseModule.resolve():andThen(function() --[[ Line: 15 ]]
+		-- upvalues: Value (copy)
+		return { done = true, value = Value }
 	end)
 end
 
-local var1 = require(script.Parent["memoize.js"]).memoize2(function(p1, p2)
-	return function(...)
-		-- upvalues: p2 (ref), p1 (ref)
+local Memoize2Result = require(script.Parent["memoize.js"]).memoize2(function(p1, p2) --[[ Line: 19 ]]
+	return function(...) --[[ Line: 20 ]]
+		-- upvalues: p2 (copy), p1 (copy)
 		return Reflect:apply(p2, p1, { ... })
 	end
 end)
 
-local function getAsyncIteratorWithCancel(p1, p2)
-	-- upvalues: boolean (ref), defaultAsyncIteratorReturn (ref), promiseModule (ref), var1 (ref)
-	return Proxy.new(p1, {
-		has = function(_, p3, p4)
-			return p4 == "return" or Reflect:has(p3, p4)
+local function getAsyncIteratorWithCancel(ApplyResult, Callback) --[[ Line: 29 ]]
+	-- upvalues: Boolean (copy), defaultAsyncIteratorReturn (copy), PromiseModule (copy), Memoize2Result (copy)
+	return Proxy.new(ApplyResult, {
+		has = function(_, p1, p2) --[[ Line: 35 ]]
+			return p2 == "return" or Reflect:has(p1, p2)
 		end,
-		get = function(_, p3, p4, p5)
-			-- upvalues: boolean (copy), defaultAsyncIteratorReturn (copy), promiseModule (copy), p2 (ref), var1 (copy)
-			local var2 = Reflect:get(p3, p4, p5)
+		get = function(_, p1, p2, p3) --[[ Line: 41 ]]
+			-- upvalues: Boolean (upval), defaultAsyncIteratorReturn (upval), PromiseModule (upval), Callback (copy), Memoize2Result (upval)
+			local GetResult = Reflect:get(p1, p2, p3)
 			
-			if p4 == "return" then
-				local var3 = if boolean.toJSBoolean(var2) then var2 else defaultAsyncIteratorReturn
+			if p2 == "return" then
+				local GetResult1 = Boolean.toJSBoolean(GetResult) and GetResult or defaultAsyncIteratorReturn
 				
-				return function(p6)
-					-- upvalues: promiseModule (copy), p2 (copy), var3 (ref), p3 (ref)
-					return promiseModule.resolve():andThen(function()
-						-- upvalues: p2 (copy), p6 (ref), var3 (copy), p3 (copy)
-						return Reflect:apply(var3, p3, { p2(p6):expect() })
+				return function(p4) --[[ Line: 46 ]]
+					-- upvalues: PromiseModule (upval), Callback (upval), GetResult1 (copy), p1 (copy)
+					return PromiseModule.resolve():andThen(function() --[[ Line: 47 ]]
+						-- upvalues: Callback (upval), p4 (copy), GetResult1 (upval), p1 (upval)
+						return Reflect:apply(GetResult1, p1, { (Callback(p4):expect()) })
 					end)
 				end
+			else
+				return if typeof(GetResult) == "function" then Memoize2Result(p1, GetResult) else GetResult
 			end
-			return if typeof(var2) == "function" then var1(p3, var2) else var2
 		end
 	})
 end
 
-t.getAsyncIteratorWithCancel = getAsyncIteratorWithCancel
-
-local function getAsyncIterableWithCancel(p1, p2)
-	-- upvalues: getAsyncIteratorWithCancel (ref), var1 (ref)
+local function getAsyncIterableWithCancel(p1, p2) --[[ Line: 62 ]]
+	-- upvalues: getAsyncIteratorWithCancel (copy), Memoize2Result (copy)
 	return Proxy.new(p1, {
-		get = function(_, p3, p4, p5)
-			-- upvalues: getAsyncIteratorWithCancel (copy), p2 (ref), var1 (copy)
-			local var2 = Reflect:get(p3, p4, p5)
+		get = function(_, p3, AsyncIterator, p4) --[[ Line: 68 ]]
+			-- upvalues: getAsyncIteratorWithCancel (upval), p2 (copy), Memoize2Result (upval)
+			local GetResult = Reflect:get(p3, AsyncIterator, p4)
 			
-			return if Symbol.asyncIterator == p4 then function()
-				-- upvalues: var2 (ref), p3 (ref), getAsyncIteratorWithCancel (copy), p2 (copy)
-				return getAsyncIteratorWithCancel(Reflect:apply(var2, p3, {}), p2)
-			end elseif typeof(var2) == "function" then var1(p3, var2) else var2
+			return if Symbol.asyncIterator == AsyncIterator then function() --[[ Line: 71 ]]
+				-- upvalues: GetResult (copy), p3 (copy), getAsyncIteratorWithCancel (upval), p2 (upval)
+				return getAsyncIteratorWithCancel(Reflect:apply(GetResult, p3, {}), p2)
+			end elseif typeof(GetResult) == "function" then Memoize2Result(p3, GetResult) else GetResult
 		end
 	})
 end
 
-t.getAsyncIterableWithCancel = getAsyncIterableWithCancel
-t.withCancel = getAsyncIterableWithCancel
-
-return t
+return {
+	getAsyncIteratorWithCancel = getAsyncIteratorWithCancel,
+	getAsyncIterableWithCancel = getAsyncIterableWithCancel,
+	withCancel = getAsyncIterableWithCancel
+}

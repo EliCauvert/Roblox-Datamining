@@ -1,12 +1,12 @@
-﻿local sduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
-local parent = sduiCoreSystem.Parent
-local _ = require(parent.Signals)
-local _ = require(parent.ServiceContractsProto)
-local _ = require(sduiCoreSystem.SduiBuilderTypes)
-local _ = require(sduiCoreSystem.ClientBinding.SduiClientBindingTypes)
-local buildNestedComponentPropModule = require(sduiCoreSystem.ClientBinding.PropBuilder.buildNestedComponentProp)
+﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
+local Parent = SduiCoreSystem.Parent
+local _ = require(Parent.Signals)
+local _ = require(Parent.ServiceContractsProto)
+local _ = require(SduiCoreSystem.SduiBuilderTypes)
+local _ = require(SduiCoreSystem.ClientBinding.SduiClientBindingTypes)
+local BuildNestedComponentPropModule = require(SduiCoreSystem.ClientBinding.PropBuilder.buildNestedComponentProp)
 
-return function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: buildNestedComponentPropModule (ref)
-	return buildNestedComponentPropModule(p1, p2, p3, p4, p5, p6, true)
+return function(p1, p2, p3, p4, p5, p6) --[[ Line: 30 | Named "buildLazyNestedComponentProp" ]]
+	-- upvalues: BuildNestedComponentPropModule (copy)
+	return BuildNestedComponentPropModule(p1, p2, p3, p4, p5, p6, true)
 end

@@ -1,18 +1,17 @@
-﻿local serverDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
-local parent = serverDrivenUi.Parent
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local heroUnitContainer = require(parent.DiscoveryHeroUnit).HeroUnitContainer
-local sduiAttributionRow = require(parent.SduiSharedContent).SduiAttributionRow
-local sduiTextPillModule = require(serverDrivenUi.Content.SduiTextPill)
-local _ = require(parent.SduiCoreSystem)
+﻿local ServerDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
+local Parent = ServerDrivenUi.Parent
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local HeroUnitContainer = require(Parent.DiscoveryHeroUnit).HeroUnitContainer
+local SduiAttributionRow = require(Parent.SduiSharedContent).SduiAttributionRow
+local SduiTextPillModule = require(ServerDrivenUi.Content.SduiTextPill)
+local _ = require(Parent.SduiCoreSystem)
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), sduiAttributionRow (ref), sduiTextPillModule (ref), cryoModule (ref), heroUnitContainer (ref)
-	local children = p1.children
-	local var1 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), reactModule (copy), sduiAttributionRow (copy)
-		return if p1.asset then reactModule.createElement(sduiAttributionRow, {
+return ReactModule.memo(function(p1) --[[ Line: 103 | Named "SduiHeroUnit" ]]
+	-- upvalues: ReactModule (copy), SduiAttributionRow (copy), SduiTextPillModule (copy), CryoModule (copy), HeroUnitContainer (copy)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 108 ]]
+		-- upvalues: p1 (copy), ReactModule (upval), SduiAttributionRow (upval)
+		return if p1.asset then ReactModule.createElement(SduiAttributionRow, {
 			image = p1.asset.image,
 			title = p1.asset.title,
 			subtitle = p1.asset.subtitle,
@@ -26,17 +25,17 @@ return reactModule.memo(function(p1)
 		p1.sduiContext,
 		p1.onActivated
 	})
-	local var2 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), reactModule (copy), sduiTextPillModule (copy)
-		return if p1.badgeText then reactModule.createElement(sduiTextPillModule, { sduiContext = p1.sduiContext, text = p1.badgeText }) else nil
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 124 ]]
+		-- upvalues: p1 (copy), ReactModule (upval), SduiTextPillModule (upval)
+		return if p1.badgeText then ReactModule.createElement(SduiTextPillModule, { sduiContext = p1.sduiContext, text = p1.badgeText }) else nil
 	end, { p1.badgeText, p1.sduiContext })
 	
-	return reactModule.createElement(heroUnitContainer, reactModule.useMemo(function()
-		-- upvalues: cryoModule (copy), var1 (ref), var2 (ref), p1 (ref)
-		return cryoModule.Dictionary.join({
-			bottomRowComponent = var1,
-			overlayComponent = var2,
+	return ReactModule.createElement(HeroUnitContainer, ReactModule.useMemo(function() --[[ Line: 134 ]]
+		-- upvalues: CryoModule (upval), UseMemoResult (copy), UseMemoResult1 (copy), p1 (copy)
+		return (CryoModule.Dictionary.join({
+			bottomRowComponent = UseMemoResult,
+			overlayComponent = UseMemoResult1,
 			sideMargin = p1.pageSideMargin
-		}, p1)
-	end, { p1, var1, var2, p1.pageSideMargin }), children)
+		}, p1))
+	end, { p1, UseMemoResult, UseMemoResult1, p1.pageSideMargin }), p1.children)
 end)

@@ -1,11 +1,11 @@
-﻿local parent = script:FindFirstAncestor("PageSessionRodux").Parent
-local appPage = require(parent.RobloxAppEnums).AppPage
-local mutedError = require(parent.Loggers).mutedError
+﻿local Parent = script:FindFirstAncestor("PageSessionRodux").Parent
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local MutedErrorFunction = require(Parent.Loggers).mutedError
 
-return require(parent.Rodux).makeActionCreator(script.Name, function(p1)
-	-- upvalues: appPage (ref), mutedError (ref)
-	if appPage[p1] == nil then
-		mutedError("SetPageSessionTimestamp action expects page to be a valid page type, %s is not in AppPage", p1)
+return require(Parent.Rodux).makeActionCreator(script.Name, function(Page) --[[ Line: 8 ]]
+	-- upvalues: AppPage (copy), MutedErrorFunction (copy)
+	if AppPage[Page] == nil then
+		MutedErrorFunction("SetPageSessionTimestamp action expects page to be a valid page type, %s is not in AppPage", Page)
 	end
-	return { page = p1, timestamp = tick() }
+	return { page = Page, timestamp = tick() }
 end)

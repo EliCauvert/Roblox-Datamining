@@ -1,38 +1,38 @@
-﻿local text = "([" .. ("$%^()-[].?"):gsub("(.)", "%%%1") .. "])"
+﻿local Text = "([" .. ("$%^()-[].?"):gsub("(.)", "%%%1") .. "])"
 
-return function(p1, p2, p3)
-	-- upvalues: text (ref)
-	local byteOffset = utf8.offset(p1, p3 or 1)
-	local t = {}
+return function(Text1: string, List, p1) --[[ Line: 24 | Named "findOr" ]]
+	-- upvalues: Text (copy)
+	local OffsetResult = utf8.offset(Text1, p1 or 1)
+	local List1 = {}
 	
-	for i, v in p2 do
-		local matchIndex, matchIndex_1 = string.find(p1, v:gsub(text, "%%%1"), byteOffset)
+	for _, Text2 in List do
+		local StartIndex, EndIndex = string.find(Text1, Text2:gsub(Text, "%%%1"), OffsetResult)
 		
-		if matchIndex then
-			local substring = string.sub(p1, 1, matchIndex - 1)
-			local charCount, charCount_1 = utf8.len(substring)
+		if StartIndex then
+			local Segment = string.sub(Text1, 1, StartIndex - 1)
+			local Length, Length2 = utf8.len(Segment)
 			
-			if charCount == nil then
-				error(("string `%s` has an invalid byte at position %s"):format(substring, tostring(charCount_1)))
+			if Length == nil then
+				error(("string `%s` has an invalid byte at position %s"):format(Segment, (tostring(Length2))))
 			end
-			table.insert(t, {
-				index = charCount + 1,
-				match = string.sub(p1, matchIndex, matchIndex_1)
+			table.insert(List1, {
+				index = Length + 1,
+				match = string.sub(Text1, StartIndex, EndIndex)
 			})
 		end
 	end
-	if #t == 0 then
+	if #List1 == 0 then
 		return nil
 	end
-	local var1 = nil
+	local v1 = nil
 	
-	for i_1, v_1 in t do
-		if var1 == nil then
-			var1 = v_1
+	for _, value in List1 do
+		if v1 == nil then
+			v1 = value
 		end
-		if v_1.index < var1.index then
-			var1 = v_1
+		if value.index < v1.index then
+			v1 = value
 		end
 	end
-	return var1
+	return v1
 end

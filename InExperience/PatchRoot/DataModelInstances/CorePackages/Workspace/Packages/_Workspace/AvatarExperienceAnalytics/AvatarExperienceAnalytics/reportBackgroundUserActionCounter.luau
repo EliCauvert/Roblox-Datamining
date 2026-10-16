@@ -1,25 +1,24 @@
-﻿local avatarExperienceCommonModule = require(script:FindFirstAncestor("AvatarExperienceAnalytics").Parent.AvatarExperienceCommon)
-local constantsModule = require(script.Parent.Constants)
-local sendAXCounterV2Module = require(script.Parent.sendAXCounterV2)
-local avatarBackground = avatarExperienceCommonModule.Constants.ASSET_TYPE_NAME_TO_ID_STRING.AvatarBackground
-local t = {
-	Equip = constantsModule.AVATAR_EVENT_COUNTER_NAME.AXEquipBackground,
-	Unequip = constantsModule.AVATAR_EVENT_COUNTER_NAME.AXUnequipBackground,
-	TryOn = constantsModule.AVATAR_EVENT_COUNTER_NAME.AXTryOnBackground,
-	RemoveTryOn = constantsModule.AVATAR_EVENT_COUNTER_NAME.AXRemoveTryOnBackground
+﻿local ConstantsModule = require(script.Parent.Constants)
+local SendAXCounterV2Module = require(script.Parent.sendAXCounterV2)
+local AvatarBackground = require(script:FindFirstAncestor("AvatarExperienceAnalytics").Parent.AvatarExperienceCommon).Constants.ASSET_TYPE_NAME_TO_ID_STRING.AvatarBackground
+local config = {
+	Equip = ConstantsModule.AVATAR_EVENT_COUNTER_NAME.AXEquipBackground,
+	Unequip = ConstantsModule.AVATAR_EVENT_COUNTER_NAME.AXUnequipBackground,
+	TryOn = ConstantsModule.AVATAR_EVENT_COUNTER_NAME.AXTryOnBackground,
+	RemoveTryOn = ConstantsModule.AVATAR_EVENT_COUNTER_NAME.AXRemoveTryOnBackground
 }
-local t_1 = {
-	report = function(p1)
-		-- upvalues: sendAXCounterV2Module (ref), t (ref)
-		sendAXCounterV2Module(t[p1])
+local ReportBackgroundUserActionCounterModule = {
+	report = function(p1) --[[ Line: 25 ]]
+		-- upvalues: SendAXCounterV2Module (copy), config (copy)
+		SendAXCounterV2Module(config[p1])
 	end
 }
 
-function t_1.reportIfAvatarBackgroundAsset(value, p1, p2)
-	-- upvalues: avatarBackground (ref), t_1 (ref)
-	if avatarBackground and p1 == "Asset" and p2 == avatarBackground then
-		t_1.report(value)
+function ReportBackgroundUserActionCounterModule.reportIfAvatarBackgroundAsset(p1, p2, AvatarBackground1) --[[ Line: 30 ]]
+	-- upvalues: AvatarBackground (copy), ReportBackgroundUserActionCounterModule (copy)
+	if AvatarBackground and p2 == "Asset" and AvatarBackground1 == AvatarBackground then
+		ReportBackgroundUserActionCounterModule.report(p1)
 	end
 end
 
-return t_1
+return ReportBackgroundUserActionCounterModule

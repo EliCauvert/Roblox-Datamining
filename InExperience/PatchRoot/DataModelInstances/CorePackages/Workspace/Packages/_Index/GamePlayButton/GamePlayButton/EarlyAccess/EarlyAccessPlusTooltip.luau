@@ -1,28 +1,28 @@
-﻿local parent = script:FindFirstAncestor("GamePlayButton").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local educationalTooltip = foundationModule.EducationalTooltip
-local popoverSide = foundationModule.Enums.PopoverSide
-local popoverAlign = foundationModule.Enums.PopoverAlign
-local robloxSubscriptionPurchaseAppModule = require(parent.RobloxSubscriptionPurchaseApp)
-local signalsReactModule = require(parent.SignalsReact)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
+﻿local Parent = script:FindFirstAncestor("GamePlayButton").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local EducationalTooltip = FoundationModule.EducationalTooltip
+local PopoverSide = FoundationModule.Enums.PopoverSide
+local PopoverAlign = FoundationModule.Enums.PopoverAlign
+local RobloxSubscriptionPurchaseAppModule = require(Parent.RobloxSubscriptionPurchaseApp)
+local SignalsReactModule = require(Parent.SignalsReact)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-return reactModule.memo(function(p1)
-	-- upvalues: useLocalization (ref), robloxSubscriptionPurchaseAppModule (ref), signalsReactModule (ref), reactModule (ref), educationalTooltip (ref), popoverSide (ref), popoverAlign (ref)
-	local var1 = useLocalization({
+return ReactModule.memo(function(p1) --[[ Line: 24 | Named "EarlyAccessPlusTooltip" ]]
+	-- upvalues: UseLocalizationFunction (copy), RobloxSubscriptionPurchaseAppModule (copy), SignalsReactModule (copy), ReactModule (copy), EducationalTooltip (copy), PopoverSide (copy), PopoverAlign (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
 		title = "Feature.RobloxSubscription.ToolTip.EarlyAccess.Title",
 		body = "Feature.RobloxSubscription.ToolTip.EarlyAccess.Body"
 	})
 	
-	return if signalsReactModule.useSignalState(robloxSubscriptionPurchaseAppModule.RobloxSubscriptionSignals.get().getHasRobloxSubscription) then reactModule.createElement(educationalTooltip, {
+	return if SignalsReactModule.useSignalState(RobloxSubscriptionPurchaseAppModule.RobloxSubscriptionSignals.get().getHasRobloxSubscription) then ReactModule.createElement(EducationalTooltip, {
 		isOpen = p1.isOpen,
 		onClose = p1.onRequestClose,
 		onPressedOutside = p1.onRequestClose,
 		anchorRef = p1.anchorRef,
-		title = var1.title,
-		text = var1.body,
-		side = popoverSide.Top,
-		align = popoverAlign.Center
+		title = UseLocalizationResult.title,
+		text = UseLocalizationResult.body,
+		side = PopoverSide.Top,
+		align = PopoverAlign.Center
 	}) else nil
 end)

@@ -1,10 +1,10 @@
-﻿local parent = script.Parent.Parent
-local reactModule = require(parent.React)
-local text = require(parent.Foundation).Text
+﻿local Parent = script.Parent.Parent
+local ReactModule = require(Parent.React)
+local Text = require(Parent.Foundation).Text
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), text (ref)
-	return reactModule.createElement(text, {
+return ReactModule.memo(function(p1) --[[ Line: 15 | Named "HeaderText" ]]
+	-- upvalues: ReactModule (copy), Text (copy)
+	return ReactModule.createElement(Text, {
 		tag = "auto-xy content-emphasis text-heading-small",
 		testId = "settings-header-text",
 		Text = p1.text

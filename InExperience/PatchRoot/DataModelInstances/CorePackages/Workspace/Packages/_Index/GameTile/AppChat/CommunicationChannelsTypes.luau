@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent.Parent._Workspace.AppChat.AppChat.Components.EventReceivers.CommunicationChannelsTypes)
+﻿return (require(script.Parent.Parent.Parent.Parent._Workspace.AppChat.AppChat.Components.EventReceivers.CommunicationChannelsTypes))

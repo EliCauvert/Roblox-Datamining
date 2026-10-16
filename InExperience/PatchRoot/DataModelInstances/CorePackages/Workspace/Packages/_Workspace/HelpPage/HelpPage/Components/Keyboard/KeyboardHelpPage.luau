@@ -1,56 +1,58 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local foundationModule = require(parent_1.Foundation)
-local useKeybindsModule = require(parent.Hooks.useKeybinds)
-local keyboardGroupModule = require(script.Parent.KeyboardGroup)
-local _ = require(parent.Configs.ConfigTypes)
-local fFlagHelpPageCCLModule = require(parent.Flags.FFlagHelpPageCCL)
-local view = foundationModule.View
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local UseKeybindsModule = require(Parent.Hooks.useKeybinds)
+local KeyboardGroupModule = require(script.Parent.KeyboardGroup)
+local _ = require(Parent.Configs.ConfigTypes)
+local FFlagHelpPageCCLModule = require(Parent.Flags.FFlagHelpPageCCL)
+local View = require(Parent1.Foundation).View
 
-return reactModule.memo(function()
-	-- upvalues: useKeybindsModule (ref), reactModule (ref), view (ref), keyboardGroupModule (ref), fFlagHelpPageCCLModule (ref)
-	local var1 = useKeybindsModule()
-	local controls = var1.controls
-	local groups = var1.groups
-	local var2 = reactModule.useMemo(function()
-		-- upvalues: controls (ref), groups (ref), reactModule (copy), view (copy), keyboardGroupModule (copy)
-		if controls == nil or groups == nil then
+return ReactModule.memo(function() --[[ Line: 19 | Named "KeyboardHelpPage" ]]
+	-- upvalues: UseKeybindsModule (copy), ReactModule (copy), View (copy), KeyboardGroupModule (copy), FFlagHelpPageCCLModule (copy)
+	local UseKeybindsModuleResult = UseKeybindsModule()
+	local Controls = UseKeybindsModuleResult.controls
+	local Groups = UseKeybindsModuleResult.groups
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 24 ]]
+		-- upvalues: Controls (copy), Groups (copy), ReactModule (upval), View (upval), KeyboardGroupModule (upval)
+		if Controls == nil or Groups == nil then
 			return nil
 		end
 		local t = {}
 		
-		for i, v in groups do
-			t[v.id] = { controls = {}, group = v }
+		for i, group in Groups do
+			t[group.id] = { controls = {}, group = group }
 		end
-		for i_1, v_1 in controls do
-			if v_1.keyboardInput ~= nil then
-				local group = v_1.keyboardInput.group
-				
-				if t[group.id] ~= nil then
-					t[group.id].controls[i_1] = v_1
-				end
+		for i, control in Controls do
+			local NoKeyboardInput = control.keyboardInput == nil
+			local Group = nil
+			
+			if not NoKeyboardInput then
+				Group = control.keyboardInput.group
+				NoKeyboardInput = t[Group.id] == nil
+			end
+			if not NoKeyboardInput then
+				t[Group.id].controls[i] = control
 			end
 		end
-		local t_1 = {}
+		local Elements = {}
 		
-		for i_2, v_2 in t do
-			if next(v_2.controls) ~= nil then
-				table.insert(t_1, reactModule.createElement(view, {
+		for _, value in t do
+			if next(value.controls) ~= nil then
+				table.insert(Elements, ReactModule.createElement(View, {
 					tag = "auto-y padding-xxsmall",
-					LayoutOrder = v_2.group.layoutOrder,
-					Size = UDim2.new(0.333333333333, -1, 0, 0),
-					key = v_2.group.id
-				}, reactModule.createElement(keyboardGroupModule, v_2)))
+					LayoutOrder = value.group.layoutOrder,
+					Size = UDim2.new(0.3333333333333333, -1, 0, 0),
+					key = value.group.id
+				}, ReactModule.createElement(KeyboardGroupModule, value)))
 			end
 		end
-		return t_1
-	end, { controls, groups })
+		return Elements
+	end, { Controls, Groups })
 	
-	return if var2 == nil then nil else reactModule.createElement(view, {
+	return if UseMemoResult == nil then nil else ReactModule.createElement(View, {
 		tag = {
-			["col wrap align-x-left align-y-top size-full-0 auto-y"] = fFlagHelpPageCCLModule,
-			["row wrap align-x-left align-y-top size-full-0 auto-y"] = not fFlagHelpPageCCLModule
+			["col wrap align-x-left align-y-top size-full-0 auto-y"] = FFlagHelpPageCCLModule,
+			["row wrap align-x-left align-y-top size-full-0 auto-y"] = not FFlagHelpPageCCLModule
 		}
-	}, var2)
+	}, UseMemoResult)
 end)

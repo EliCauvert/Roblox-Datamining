@@ -1,42 +1,42 @@
-﻿local socialLibraries = script:FindFirstAncestor("SocialLibraries")
-local dependenciesModule = require(socialLibraries.dependencies)
-local roact = dependenciesModule.Roact
-local buttonType = dependenciesModule.UIBlox.App.Button.Enum.ButtonType
-local alertViewBuilderModule = require(socialLibraries.Components.AlertViewBuilder.AlertViewBuilder)
-local infoAlertView = roact.Component:extend("InfoAlertView")
-infoAlertView.defaultProps = {
+﻿local SocialLibraries = script:FindFirstAncestor("SocialLibraries")
+local DependenciesModule = require(SocialLibraries.dependencies)
+local Roact = DependenciesModule.Roact
+local ButtonType = DependenciesModule.UIBlox.App.Button.Enum.ButtonType
+local AlertViewBuilderModule = require(SocialLibraries.Components.AlertViewBuilder.AlertViewBuilder)
+local InfoAlertView = Roact.Component:extend("InfoAlertView")
+InfoAlertView.defaultProps = {
 	titleText = "TestTitle",
 	bodyText = "TestBody",
 	confirmText = "TestConfirm",
 	soakAreaTransparency = 0.9,
 	width = UDim.new(0.5, 0),
 	screenSize = Vector2.new(0, 0),
-	onModalClose = function() end,
+	onModalClose = function() --[[ Line: 18 ]] end,
 	soakAreaColor3 = Color3.fromRGB(0, 0, 255)
 }
 
-function infoAlertView.render(p1)
-	-- upvalues: roact (ref), alertViewBuilderModule (ref), buttonType (ref)
-	local props = p1.props
+function InfoAlertView.render(p1) --[[ Line: 24 ]]
+	-- upvalues: Roact (copy), AlertViewBuilderModule (copy), ButtonType (copy)
+	local Props = p1.props
 	
-	return roact.createElement(alertViewBuilderModule, {
-		title = props.titleText,
-		bodyText = props.bodyText,
-		width = props.width,
-		screenSize = props.screenSize,
-		onModalClose = props.onModalClose,
+	return Roact.createElement(AlertViewBuilderModule, {
+		title = Props.titleText,
+		bodyText = Props.bodyText,
+		width = Props.width,
+		screenSize = Props.screenSize,
+		onModalClose = Props.onModalClose,
 		buttons = {
 			{
-				buttonType = buttonType.PrimarySystem,
+				buttonType = ButtonType.PrimarySystem,
 				props = {
-					text = props.confirmText,
-					onActivated = props.onModalClose
+					text = Props.confirmText,
+					onActivated = Props.onModalClose
 				}
 			}
 		},
-		soakAreaColor3 = props.soakAreaColor3,
-		soakAreaTransparency = props.soakAreaTransparency
+		soakAreaColor3 = Props.soakAreaColor3,
+		soakAreaTransparency = Props.soakAreaTransparency
 	})
 end
 
-return infoAlertView
+return InfoAlertView

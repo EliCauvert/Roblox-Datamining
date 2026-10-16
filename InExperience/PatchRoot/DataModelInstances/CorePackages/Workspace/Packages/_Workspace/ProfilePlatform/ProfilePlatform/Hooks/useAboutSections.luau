@@ -1,23 +1,27 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local enumsModule = require(profilePlatform.Common.Enums)
-local useProfileJsonComponentModule = require(profilePlatform.Hooks.useProfileJsonComponent)
-local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfileWrapperContext)
-local parseSectionsFromDataModule = require(profilePlatform.Components.About.parseSectionsFromData)
-local fFlagProfileAboutDetailsUseSheet = require(parent.SharedFlags).FFlagProfileAboutDetailsUseSheet
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local UseProfileJsonComponentModule = require(ProfilePlatform.Hooks.useProfileJsonComponent)
+local UseProfileWrapperContextModule = require(ProfilePlatform.Contexts.useProfileWrapperContext)
+local ParseSectionsFromDataModule = require(ProfilePlatform.Components.About.parseSectionsFromData)
+local FFlagProfileAboutDetailsUseSheet = require(Parent.SharedFlags).FFlagProfileAboutDetailsUseSheet
 
-return function()
-	-- upvalues: useProfileWrapperContextModule (ref), useProfileJsonComponentModule (ref), enumsModule (ref), reactModule (ref), parseSectionsFromDataModule (ref), fFlagProfileAboutDetailsUseSheet (ref)
-	local profileType = useProfileWrapperContextModule().profileType
-	local about = useProfileJsonComponentModule(enumsModule.Components.About) or {}
+return function() --[[ Line: 11 ]]
+	-- upvalues: UseProfileWrapperContextModule (copy), UseProfileJsonComponentModule (copy), EnumsModule (copy), ReactModule (copy), ParseSectionsFromDataModule (copy), FFlagProfileAboutDetailsUseSheet (copy)
+	local ProfileType = UseProfileWrapperContextModule().profileType
+	local UseProfileJsonComponentModuleResult = UseProfileJsonComponentModule(EnumsModule.Components.About) or {}
 	
 	return {
-		aboutDetails = about,
-		aboutSections = reactModule.useMemo(function()
-			-- upvalues: parseSectionsFromDataModule (copy), about (ref), profileType (ref), enumsModule (copy)
-			return parseSectionsFromDataModule(about, profileType, if profileType == enumsModule.ProfileTypes.User and about.name then `@{about.name}` else about.name or "")
-		end, { about, profileType, about.name }),
-		profileName = if not fFlagProfileAboutDetailsUseSheet then if profileType == enumsModule.ProfileTypes.User and about.name then `@{about.name}` else about.name else nil
+		aboutDetails = UseProfileJsonComponentModuleResult,
+		aboutSections = ReactModule.useMemo(function() --[[ Line: 16 ]]
+			-- upvalues: ParseSectionsFromDataModule (upval), UseProfileJsonComponentModuleResult (copy), ProfileType (copy), EnumsModule (upval)
+			return ParseSectionsFromDataModule(UseProfileJsonComponentModuleResult, ProfileType, if ProfileType == EnumsModule.ProfileTypes.User and UseProfileJsonComponentModuleResult.name then `@{UseProfileJsonComponentModuleResult.name}` else UseProfileJsonComponentModuleResult.name or "")
+		end, {
+			UseProfileJsonComponentModuleResult,
+			ProfileType,
+			UseProfileJsonComponentModuleResult.name
+		}),
+		profileName = if FFlagProfileAboutDetailsUseSheet then if ProfileType == EnumsModule.ProfileTypes.User and UseProfileJsonComponentModuleResult.name then `@{UseProfileJsonComponentModuleResult.name}` else UseProfileJsonComponentModuleResult.name else nil
 	}
 end

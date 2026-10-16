@@ -1,40 +1,40 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent.Parent.Parent
-local parent_2 = parent_1.Parent
-local roactModule = require(parent_2.Roact)
-local tModule = require(parent_2.t)
-local withStyleModule = require(parent_1.Core.Style.withStyle)
-local tooltipContainerModule = require(parent.TooltipContainer)
-local tooltipOrientationModule = require(parent.Enum.TooltipOrientation)
-local tooltip = roactModule.PureComponent:extend("Tooltip")
-tooltip.validateProps = tModule.strictInterface({
-	triggerPosition = tModule.Vector2,
-	triggerSize = tModule.Vector2,
-	bodyText = tModule.string,
-	headerText = tModule.optional(tModule.string),
-	backgroundColor = tModule.optional(tModule.Color3),
-	backgroundTransparency = tModule.optional(tModule.number),
-	onDismiss = tModule.optional(tModule.callback),
-	onClose = tModule.optional(tModule.callback),
-	screenSize = tModule.optional(tModule.Vector2),
-	position = tModule.optional(tModule.UDim2),
-	orientation = tModule.optional(tooltipOrientationModule.isEnumValue),
-	triggerOnHover = tModule.optional(tModule.boolean),
-	forceClickTriggerPoint = tModule.optional(tModule.boolean),
-	isDirectChild = tModule.optional(tModule.boolean),
-	minContentWidth = tModule.optional(tModule.number)
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent.Parent.Parent
+local Parent2 = Parent1.Parent
+local RoactModule = require(Parent2.Roact)
+local TModule = require(Parent2.t)
+local WithStyleModule = require(Parent1.Core.Style.withStyle)
+local TooltipContainerModule = require(Parent.TooltipContainer)
+local TooltipOrientationModule = require(Parent.Enum.TooltipOrientation)
+local Tooltip = RoactModule.PureComponent:extend("Tooltip")
+Tooltip.validateProps = TModule.strictInterface({
+	triggerPosition = TModule.Vector2,
+	triggerSize = TModule.Vector2,
+	bodyText = TModule.string,
+	headerText = TModule.optional(TModule.string),
+	backgroundColor = TModule.optional(TModule.Color3),
+	backgroundTransparency = TModule.optional(TModule.number),
+	onDismiss = TModule.optional(TModule.callback),
+	onClose = TModule.optional(TModule.callback),
+	screenSize = TModule.optional(TModule.Vector2),
+	position = TModule.optional(TModule.UDim2),
+	orientation = TModule.optional(TooltipOrientationModule.isEnumValue),
+	triggerOnHover = TModule.optional(TModule.boolean),
+	forceClickTriggerPoint = TModule.optional(TModule.boolean),
+	isDirectChild = TModule.optional(TModule.boolean),
+	minContentWidth = TModule.optional(TModule.number)
 })
-tooltip.defaultProps = {
+Tooltip.defaultProps = {
 	triggerOnHover = false,
 	forceClickTriggerPoint = false,
 	isDirectChild = false,
 	screenSize = Vector2.new(10000, 10000),
-	orientation = tooltipOrientationModule.Bottom
+	orientation = TooltipOrientationModule.Bottom
 }
 
-function tooltip.init(p1)
-	function p0.onDismissDefault()
-		-- upvalues: p1 (ref)
+function Tooltip.init(p1) --[[ Line: 67 ]]
+	function p1.onDismissDefault() --[[ Line: 68 ]]
+		-- upvalues: p1 (copy)
 		if p1.props.forceClickTriggerPoint or p1.props.triggerOnHover then return end
 		if p1.props.onDismiss then
 			p1.props.onDismiss()
@@ -42,38 +42,39 @@ function tooltip.init(p1)
 	end
 end
 
-function tooltip.render(p1)
-	-- upvalues: withStyleModule (ref), roactModule (ref), tooltipContainerModule (ref)
-	local forceClickTriggerPoint = p1.props.forceClickTriggerPoint or p1.props.triggerOnHover
-	local isDirectChild = p1.props.isDirectChild
+function Tooltip.render(p1) --[[ Line: 78 ]]
+	-- upvalues: WithStyleModule (copy), RoactModule (copy), TooltipContainerModule (copy)
+	local ForceClickTriggerPoint = p1.props.forceClickTriggerPoint or p1.props.triggerOnHover
+	local IsDirectChild = p1.props.isDirectChild
 	
-	return withStyleModule(function(p2)
-		-- upvalues: p1 (ref), roactModule (copy), isDirectChild (ref), forceClickTriggerPoint (ref), tooltipContainerModule (copy)
-		local t = {
-			Background = not p1.props.forceClickTriggerPoint and roactModule.createElement("TextButton", {
+	return WithStyleModule(function(p2) --[[ Line: 81 ]]
+		-- upvalues: p1 (copy), RoactModule (upval), IsDirectChild (copy), ForceClickTriggerPoint (copy), TooltipContainerModule (upval)
+		local Theme = p2.Theme
+		local config = {
+			Background = not p1.props.forceClickTriggerPoint and RoactModule.createElement("TextButton", {
 				ZIndex = 0,
 				AutoButtonColor = false,
-				BackgroundColor3 = p2.Theme.Overlay.Color,
+				BackgroundColor3 = Theme.Overlay.Color,
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
-				Position = isDirectChild and UDim2.fromOffset(-p1.props.triggerPosition.X, -p1.props.triggerPosition.Y) or UDim2.fromOffset(0, 0),
+				Position = IsDirectChild and UDim2.fromOffset(-p1.props.triggerPosition.X, -p1.props.triggerPosition.Y) or UDim2.fromOffset(0, 0),
 				Size = UDim2.fromOffset(p1.props.screenSize.X, p1.props.screenSize.Y),
 				Text = "",
-				[roactModule.Event.Activated] = p1.onDismissDefault,
-				[roactModule.Event.TouchSwipe] = p1.onDismissDefault,
-				[roactModule.Event.MouseWheelForward] = p1.onDismissDefault,
-				[roactModule.Event.MouseWheelBackward] = p1.onDismissDefault
+				[RoactModule.Event.Activated] = p1.onDismissDefault,
+				[RoactModule.Event.TouchSwipe] = p1.onDismissDefault,
+				[RoactModule.Event.MouseWheelForward] = p1.onDismissDefault,
+				[RoactModule.Event.MouseWheelBackward] = p1.onDismissDefault
 			}),
-			TriggerPointMask = forceClickTriggerPoint and roactModule.createElement("TextButton", {
+			TriggerPointMask = ForceClickTriggerPoint and RoactModule.createElement("TextButton", {
 				Text = "",
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
 				Selectable = false,
 				Size = UDim2.fromOffset(p1.props.triggerSize.X, p1.props.triggerSize.Y),
-				Position = isDirectChild and UDim2.fromOffset(0, 0) or UDim2.fromOffset(p1.props.triggerPosition.X, p1.props.triggerPosition.Y),
-				[roactModule.Event.Activated] = p1.props.onDismiss
+				Position = IsDirectChild and UDim2.fromOffset(0, 0) or UDim2.fromOffset(p1.props.triggerPosition.X, p1.props.triggerPosition.Y),
+				[RoactModule.Event.Activated] = p1.props.onDismiss
 			}),
-			TooltipContainer = roactModule.createElement(tooltipContainerModule, {
+			TooltipContainer = RoactModule.createElement(TooltipContainerModule, {
 				triggerPosition = p1.props.triggerPosition,
 				triggerSize = p1.props.triggerSize,
 				bodyText = p1.props.bodyText,
@@ -81,16 +82,16 @@ function tooltip.render(p1)
 				screenSize = p1.props.screenSize,
 				position = p1.props.position,
 				orientation = p1.props.orientation,
-				isDirectChild = isDirectChild
+				isDirectChild = IsDirectChild
 			})
 		}
 		
-		return isDirectChild and roactModule.createElement("Frame", {
+		return IsDirectChild and RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			Size = UDim2.fromScale(1, 1)
-		}, t) or roactModule.createFragment(t)
+		}, config) or RoactModule.createFragment(config)
 	end)
 end
 
-return tooltip
+return Tooltip

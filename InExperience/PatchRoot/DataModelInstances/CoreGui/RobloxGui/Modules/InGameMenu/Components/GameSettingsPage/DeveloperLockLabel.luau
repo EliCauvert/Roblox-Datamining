@@ -1,26 +1,26 @@
-﻿local inGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
-local roact = inGameMenuDependenciesModule.Roact
-local t = inGameMenuDependenciesModule.t
-local parent = script.Parent.Parent.Parent
-local globalConfigModule = require(parent.GlobalConfig)
-local withLocalizationModule = require(parent.Localization.withLocalization)
-local themedTextLabelModule = require(parent.Components.ThemedTextLabel)
-local var1 = t.strictInterface({
-	Position = t.UDim2,
-	Size = t.UDim2,
-	AnchorPoint = t.Vector2
+﻿local InGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
+local Roact = InGameMenuDependenciesModule.Roact
+local T = InGameMenuDependenciesModule.t
+local Parent = script.Parent.Parent.Parent
+local GlobalConfigModule = require(Parent.GlobalConfig)
+local WithLocalizationModule = require(Parent.Localization.withLocalization)
+local ThemedTextLabelModule = require(Parent.Components.ThemedTextLabel)
+local StrictInterfaceResult = T.strictInterface({
+	Position = T.UDim2,
+	Size = T.UDim2,
+	AnchorPoint = T.Vector2
 })
 
-return function(p1)
-	-- upvalues: globalConfigModule (ref), var1 (ref), withLocalizationModule (ref), roact (ref), themedTextLabelModule (ref)
-	if globalConfigModule.propValidation then
-		assert(var1(p1))
+return function(p1) --[[ Line: 20 ]]
+	-- upvalues: GlobalConfigModule (copy), StrictInterfaceResult (copy), WithLocalizationModule (copy), Roact (copy), ThemedTextLabelModule (copy)
+	if GlobalConfigModule.propValidation then
+		assert(StrictInterfaceResult(p1))
 	end
-	return withLocalizationModule({
+	return WithLocalizationModule({
 		lockedText = "CoreScripts.InGameMenu.GameSettings.LockedByDeveloper"
-	})(function(p2)
-		-- upvalues: roact (copy), themedTextLabelModule (copy)
-		return roact.createElement(themedTextLabelModule, {
+	})(function(p2) --[[ Line: 27 ]]
+		-- upvalues: Roact (upval), ThemedTextLabelModule (upval)
+		return Roact.createElement(ThemedTextLabelModule, {
 			themeKey = "TextDefault",
 			fontKey = "CaptionBody",
 			TextTransparency = 0.5,

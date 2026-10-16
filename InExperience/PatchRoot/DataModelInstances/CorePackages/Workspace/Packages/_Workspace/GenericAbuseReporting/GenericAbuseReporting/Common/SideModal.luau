@@ -1,17 +1,17 @@
-﻿local parent = script:FindFirstAncestor("GenericAbuseReporting").Parent
-local reactModule = require(parent.React)
-local reactOtterModule = require(parent.ReactOtter)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local iconSize = foundationModule.Enums.IconSize
-local iconButton = foundationModule.IconButton
-local text = foundationModule.Text
-local button = foundationModule.Button
-local buttonSize = foundationModule.Enums.ButtonSize
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local fillBehavior = foundationModule.Enums.FillBehavior
-local useTokens = foundationModule.Hooks.useTokens
-local t = {
+﻿local Parent = script:FindFirstAncestor("GenericAbuseReporting").Parent
+local ReactModule = require(Parent.React)
+local ReactOtterModule = require(Parent.ReactOtter)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local IconSize = FoundationModule.Enums.IconSize
+local IconButton = FoundationModule.IconButton
+local Text = FoundationModule.Text
+local Button = FoundationModule.Button
+local ButtonSize = FoundationModule.Enums.ButtonSize
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local FillBehavior = FoundationModule.Enums.FillBehavior
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local config = {
 	stiffness = 400,
 	damping = 40,
 	mass = 1,
@@ -19,39 +19,39 @@ local t = {
 	restingVelocityLimit = 0.1
 }
 
-local function _(p1)
+local function _(p1: number): boolean --[[ Line: 53 | Named "isFullWidth" ]]
 	return p1 < 540
 end
 
-local function getAnchorPoint(p1)
-	return if p1.X < 540 then Vector2.new(0.5, 1) else Vector2.new(0, 0)
+local function getAnchorPoint(ScreenSize): Vector2 --[[ Line: 57 ]]
+	return if ScreenSize.X < 540 then Vector2.new(0.5, 1) else Vector2.new(0, 0)
 end
 
-local function getSize(p1, p2, p3)
-	return if p1.X < 540 then UDim2.new(0, p1.X, 0, p3) else UDim2.new(0, p2, 0, p1.Y)
+local function getSize(ScreenSize, XOffset, YOffset): UDim2 --[[ Line: 65 ]]
+	return if ScreenSize.X < 540 then UDim2.new(0, ScreenSize.X, 0, YOffset) else UDim2.new(0, XOffset, 0, ScreenSize.Y)
 end
 
-local function getPosition(p1, p2)
-	return if p1.X < 540 then UDim2.new(0.5, 0, 1, 0) else UDim2.new(1, -p2, 0, 0)
+local function getPosition(ScreenSize, Width): UDim2 --[[ Line: 73 ]]
+	return if ScreenSize.X < 540 then UDim2.new(0.5, 0, 1, 0) else UDim2.new(1, -Width, 0, 0)
 end
 
-return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), getAnchorPoint (ref), getSize (ref), getPosition (ref), reactOtterModule (ref), t (ref), view (ref), iconButton (ref), iconSize (ref), text (ref), button (ref), buttonVariant (ref), buttonSize (ref), fillBehavior (ref)
-	local var1 = useTokens()
-	local var2, var3 = reactModule.useState(getAnchorPoint(p1.screenSize))
-	local var4, var5 = reactModule.useState(getSize(p1.screenSize, p1.width, p1.height))
-	local var6, var7 = reactModule.useState(getPosition(p1.screenSize, p1.width))
-	local var8, var9 = reactModule.useState(true)
-	local var10, var11 = reactModule.useState(false)
-	local var12 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref)
+return function(p1) --[[ Line: 81 | Named "SideModal" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), getAnchorPoint (copy), getSize (copy), getPosition (copy), ReactOtterModule (copy), config (copy), View (copy), IconButton (copy), IconSize (copy), Text (copy), Button (copy), ButtonVariant (copy), ButtonSize (copy), FillBehavior (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(getAnchorPoint(p1.screenSize))
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(getSize(p1.screenSize, p1.width, p1.height))
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(getPosition(p1.screenSize, p1.width))
+	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(true)
+	local UseStateResult5, UseStateResult2_4 = ReactModule.useState(false)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 90 ]]
+		-- upvalues: p1 (copy)
 		return if p1.footerContent then p1.footerContent() else nil
 	end, { p1.footerContent })
-	local var13 = if var12 then 35 else 0
-	local var14, var15 = reactOtterModule.useAnimatedBinding(1, function()
-		-- upvalues: var8 (ref), var10 (ref), p1 (ref)
-		if not var8 then
-			if var10 then
+	local v1: number = if UseMemoResult then 35 else 0
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(1, function() --[[ Line: 95 ]]
+		-- upvalues: UseStateResult4 (copy), UseStateResult5 (copy), p1 (copy)
+		if not UseStateResult4 then
+			if UseStateResult5 then
 				if p1.buttonProps then
 					p1.buttonProps.onActivated()
 					
@@ -62,35 +62,44 @@ return function(p1)
 			end
 		end
 	end)
-	local var16 = reactModule.useMemo(function()
-		-- upvalues: var8 (ref)
-		return if var8 then 0 else 1
-	end, { var8 })
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var9 (ref)
+	local UseMemoResult1 = ReactModule.useMemo(function(): number --[[ Line: 110 ]]
+		-- upvalues: UseStateResult4 (copy)
+		return if UseStateResult4 then 0 else 1
+	end, { UseStateResult4 })
+	ReactModule.useEffect(function() --[[ Line: 114 ]]
+		-- upvalues: p1 (copy), UseStateResult2_3 (copy)
 		if p1.closeWithAnimation then
-			var9(false)
+			UseStateResult2_3(false)
 		end
 	end, { p1.closeWithAnimation })
-	reactModule.useEffect(function()
-		-- upvalues: var15 (ref), reactOtterModule (copy), var16 (ref), t (copy)
-		var15(reactOtterModule.spring(var16, t))
-	end, { var16 })
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), getAnchorPoint (copy), p1 (ref), var5 (ref), getSize (copy), var7 (ref), getPosition (copy)
-		var3(getAnchorPoint(p1.screenSize))
-		var5(getSize(p1.screenSize, p1.width, p1.height))
-		var7(getPosition(p1.screenSize, p1.width))
+	ReactModule.useEffect(function() --[[ Line: 120 ]]
+		-- upvalues: UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), UseMemoResult1 (copy), config (upval)
+		UseAnimatedBindingResult2(ReactOtterModule.spring(UseMemoResult1, config))
+	end, { UseMemoResult1 })
+	ReactModule.useEffect(function() --[[ Line: 124 ]]
+		-- upvalues: UseStateResult2 (copy), getAnchorPoint (upval), p1 (copy), UseStateResult2_1 (copy), getSize (upval), UseStateResult2_2 (copy), getPosition (upval)
+		UseStateResult2(getAnchorPoint(p1.screenSize))
+		UseStateResult2_1(getSize(p1.screenSize, p1.width, p1.height))
+		UseStateResult2_2(getPosition(p1.screenSize, p1.width))
 	end, { p1.screenSize })
-	local var17 = reactModule.useCallback(function()
-		-- upvalues: var9 (ref)
-		var9(false)
-	end, { var9 })
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 130 ]]
+		-- upvalues: UseStateResult2_3 (copy)
+		UseStateResult2_3(false)
+	end, { UseStateResult2_3 })
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 134 ]]
+		-- upvalues: p1 (copy), UseStateResult2_4 (copy), UseStateResult2_3 (copy)
+		if not p1.buttonProps or not p1.buttonProps.validateState or p1.buttonProps.validateState() then
+			UseStateResult2_4(true)
+			UseStateResult2_3(false)
+			
+			return
+		end
+	end, { UseStateResult2_3, UseStateResult2_4, p1.buttonProps })
 	
-	return reactModule.createElement("TextButton", {
+	return ReactModule.createElement("TextButton", {
 		AutoButtonColor = false,
 		BorderSizePixel = 0,
-		BackgroundTransparency = var14:map(function(p2)
+		BackgroundTransparency = UseAnimatedBindingResult:map(function(p2: number): number --[[ Line: 148 ]]
 			return p2 + 0.3
 		end),
 		BackgroundColor3 = Color3.fromHex("#000000"),
@@ -98,84 +107,77 @@ return function(p1)
 		Size = UDim2.new(1, 0, 1, 0),
 		Position = UDim2.fromScale(0.5, 0.5),
 		AnchorPoint = Vector2.new(0.5, 0.5),
-		[reactModule.Event.Activated] = var17
+		[ReactModule.Event.Activated] = UseResult
 	}, {
-		SideModalContainer = reactModule.createElement(view, {
+		SideModalContainer = ReactModule.createElement(View, {
 			tag = "size-full",
 			AnchorPoint = Vector2.new(1, 0),
-			Position = var14:map(function(p2)
-				-- upvalues: p1 (ref)
+			Position = UseAnimatedBindingResult:map(function(p2): UDim2 --[[ Line: 160 ]]
+				-- upvalues: p1 (copy)
 				return if p1.screenSize.X < 540 then UDim2.new(1, 0, 0, p1.height * p2) else UDim2.new(1, p1.width * p2, 0, 0)
 			end)
 		}, {
-			SideModal = reactModule.createElement(view, {
+			SideModal = ReactModule.createElement(View, {
 				tag = "bg-surface-300 radius-medium col",
-				AnchorPoint = var2,
-				Position = var6,
-				Size = var4
+				AnchorPoint = UseStateResult,
+				Position = UseStateResult3,
+				Size = UseStateResult1
 			}, {
-				IconRow = reactModule.createElement(view, {
+				IconRow = ReactModule.createElement(View, {
 					tag = "padding-left-medium",
 					LayoutOrder = 0,
 					Size = UDim2.new(1, 0, 0, 32)
 				}, {
-					IconButton = reactModule.createElement(iconButton, {
+					IconButton = ReactModule.createElement(IconButton, {
 						icon = "icons/navigation/pushBack",
 						tag = "anchor-center-left position-center-left",
-						size = iconSize.Medium,
-						onActivated = var17
+						size = IconSize.Medium,
+						onActivated = UseResult
 					})
 				}),
-				TitleRow = reactModule.createElement(view, {
+				TitleRow = ReactModule.createElement(View, {
 					tag = "auto-xy",
 					LayoutOrder = 1,
 					Size = UDim2.new(1, 0, 0, 32)
 				}, {
-					Title = reactModule.createElement(text, {
+					Title = ReactModule.createElement(Text, {
 						TextWrapped = true,
 						tag = "auto-xy",
-						fontStyle = var1.Typography.TitleLarge,
-						textStyle = var1.Color.Content.Emphasis,
+						fontStyle = UseTokensResult.Typography.TitleLarge,
+						textStyle = UseTokensResult.Color.Content.Emphasis,
 						Text = p1.title,
 						Size = UDim2.new(1, 0, 0, 32)
 					})
 				}),
-				Content = reactModule.createElement(view, {
+				Content = ReactModule.createElement(View, {
 					ClipsDescendants = true,
 					tag = "padding-x-medium",
 					LayoutOrder = 2,
-					Size = if p1.buttonProps then UDim2.new(1, 0, 1, -116 - var13) else UDim2.new(1, 0, 1, -84 - var13)
+					Size = if p1.buttonProps then UDim2.new(1, 0, 1, -116 - v1) else UDim2.new(1, 0, 1, -84 - v1)
 				}, {
-					MiddleContent = reactModule.createElement(view, { tag = "size-full" }, p1.children)
+					MiddleContent = ReactModule.createElement(View, { tag = "size-full" }, p1.children)
 				}),
-				ButtonRow = p1.buttonProps and reactModule.createElement(view, {
+				ButtonRow = p1.buttonProps and ReactModule.createElement(View, {
 					tag = "padding-x-medium padding-bottom-medium",
 					LayoutOrder = 3,
 					Size = UDim2.new(1, 0, 0, 32)
 				}, {
-					Button = reactModule.createElement(button, {
+					Button = ReactModule.createElement(Button, {
 						isDisabled = false,
 						text = p1.buttonProps.text,
-						variant = buttonVariant.Emphasis,
-						onActivated = reactModule.useCallback(function()
-							-- upvalues: p1 (ref), var11 (ref), var9 (ref)
-							if p1.buttonProps and p1.buttonProps.validateState and not p1.buttonProps.validateState() then
-								return
-							end
-							var11(true)
-							var9(false)
-						end, { var9, var11, p1.buttonProps }),
-						size = buttonSize.Small,
-						fillBehavior = fillBehavior.Fill
+						variant = ButtonVariant.Emphasis,
+						onActivated = UseResult1,
+						size = ButtonSize.Small,
+						fillBehavior = FillBehavior.Fill
 					})
 				}),
-				BottomFrame = if p1.footerContent then reactModule.createElement(view, {
+				BottomFrame = if p1.footerContent then ReactModule.createElement(View, {
 					tag = "padding-x-medium padding-bottom-medium",
 					LayoutOrder = 4,
 					BackgroundTransparency = 1,
 					Size = UDim2.new(1, 0, 0, 32),
 					AutomaticSize = Enum.AutomaticSize.Y
-				}, { FooterContent = var12 }) else nil
+				}, { FooterContent = UseMemoResult }) else nil
 			})
 		})
 	})

@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("EnableAEGIS2Upsellv700", false)
+﻿return (game:DefineFastFlag("EnableAEGIS2Upsellv700", false))

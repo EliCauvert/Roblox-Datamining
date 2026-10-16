@@ -1,17 +1,21 @@
-﻿local inExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
-local getDidSideSheetOpenWithPeoplePageModule = require(inExperienceSideSheet.Utils.getDidSideSheetOpenWithPeoplePage)
-local getHasRoomForPeoplePageModule = require(inExperienceSideSheet.Utils.getHasRoomForPeoplePage)
-local getSideSheetVisibilityModule = require(inExperienceSideSheet.Utils.getSideSheetVisibility)
-local registerInGameMenuPeoplePageActionsModule = require(inExperienceSideSheet.Utils.registerInGameMenuPeoplePageActions)
+﻿local InExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
+local GetDidSideSheetOpenWithPeoplePageModule = require(InExperienceSideSheet.Utils.getDidSideSheetOpenWithPeoplePage)
+local GetHasRoomForPeoplePageModule = require(InExperienceSideSheet.Utils.getHasRoomForPeoplePage)
+local GetSideSheetVisibilityModule = require(InExperienceSideSheet.Utils.getSideSheetVisibility)
+local RegisterInGameMenuPeoplePageActionsModule = require(InExperienceSideSheet.Utils.registerInGameMenuPeoplePageActions)
 
-return function(p1)
-	-- upvalues: getSideSheetVisibilityModule (ref), getDidSideSheetOpenWithPeoplePageModule (ref), getHasRoomForPeoplePageModule (ref), registerInGameMenuPeoplePageActionsModule (ref)
-	if not getSideSheetVisibilityModule(false) or not getDidSideSheetOpenWithPeoplePageModule(false) then
-		return false
-	elseif getHasRoomForPeoplePageModule(false, p1) then
-		return false
-	end
-	registerInGameMenuPeoplePageActionsModule.closePeoplePage(p1)
+return function(p1): boolean --[[ Line: 10 ]]
+	-- upvalues: GetSideSheetVisibilityModule (copy), GetDidSideSheetOpenWithPeoplePageModule (copy), GetHasRoomForPeoplePageModule (copy), RegisterInGameMenuPeoplePageActionsModule (copy)
+	local SideSheetVisibilityModule = GetSideSheetVisibilityModule(false)
+	local DidSideSheetOpenWithPeoplePageModule = GetDidSideSheetOpenWithPeoplePageModule(false)
 	
-	return true
+	if not SideSheetVisibilityModule or not DidSideSheetOpenWithPeoplePageModule then
+		return false
+	elseif GetHasRoomForPeoplePageModule(false, p1) then
+		return false
+	else
+		RegisterInGameMenuPeoplePageActionsModule.closePeoplePage(p1)
+		
+		return true
+	end
 end

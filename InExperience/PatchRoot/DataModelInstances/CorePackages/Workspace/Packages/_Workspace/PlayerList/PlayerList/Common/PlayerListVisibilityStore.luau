@@ -1,68 +1,69 @@
-﻿local signalsModule = require(script.Parent.Parent.Parent.Signals)
-local var1, var2 = signalsModule.createSignal(true)
-local var3 = false
+﻿local SignalsModule = require(script.Parent.Parent.Parent.Signals)
+local Signal, Signal2 = SignalsModule.createSignal(true)
+local ShouldPersistVisibility = false
 
-local function setShouldPersistVisibility(value)
-	-- upvalues: var3 (write)
-	var3 = value
+local function setShouldPersistVisibility(Value) --[[ Line: 19 ]]
+	-- upvalues: ShouldPersistVisibility (ref)
+	ShouldPersistVisibility = Value
 end
 
-local function setVisible(value)
-	-- upvalues: var2 (ref), var3 (write)
-	var2(value)
+local function setVisible(PlayerListVisible) --[[ Line: 23 ]]
+	-- upvalues: Signal2 (copy), ShouldPersistVisibility (ref)
+	Signal2(PlayerListVisible)
 	
-	if var3 then
-		UserSettings().GameSettings.PlayerListVisible = value
+	if ShouldPersistVisibility then
+		UserSettings().GameSettings.PlayerListVisible = PlayerListVisible
 	end
 end
 
-local var4, var5 = signalsModule.createSignal({})
-local var6 = nil
+local Signal1, Signal2_1 = SignalsModule.createSignal({})
+local TempHideSnapshot = nil
 
 return {
-	getVisible = var1,
+	getVisible = Signal,
 	setVisible = setVisible,
 	setShouldPersistVisibility = setShouldPersistVisibility,
-	getEffectiveVisible = signalsModule.createComputed(function(p1)
-		-- upvalues: var1 (ref), var4 (ref)
-		return var1(p1) and next(var4(p1)) == nil
+	getEffectiveVisible = SignalsModule.createComputed(function(p1): boolean --[[ Line: 37 ]]
+		-- upvalues: Signal (copy), Signal1 (copy)
+		return Signal(p1) and next(Signal1(p1)) == nil
 	end),
-	setTempHide = function(value, p1)
-		-- upvalues: var4 (ref), var5 (ref), var6 (write), var1 (ref), var2 (ref)
-		local var7 = next(var4(false)) == nil
-		var5(function(p2)
-			-- upvalues: value (ref), p1 (ref)
-			local cloned = table.clone(p2)
-			cloned[value] = if p1 then true else nil
+	setTempHide = function(p1, p2) --[[ Line: 43 ]]
+		-- upvalues: Signal1 (copy), Signal2_1 (copy), TempHideSnapshot (ref), Signal (copy), Signal2 (copy)
+		local NoNextEntry = next(Signal1(false)) == nil
+		Signal2_1(function(Tbl) --[[ Line: 45 ]]
+			-- upvalues: p1 (copy), p2 (copy)
+			local Copy = table.clone(Tbl)
+			Copy[p1] = if p2 then true else nil
 			
-			return cloned
+			return Copy
 		end)
-		local var8 = next(var4(false)) == nil
+		local NoNextEntry1 = next(Signal1(false)) == nil
 		
-		if var7 and not var8 then
-			var6 = var1(false)
+		if NoNextEntry and not NoNextEntry1 then
+			TempHideSnapshot = Signal(false)
 			
 			return
-		elseif not var7 and var8 and var6 ~= nil then
-			local var9 = var6
-			var6 = nil
+		end
+		if not NoNextEntry and NoNextEntry1 and TempHideSnapshot ~= nil then
+			local TempHideSnapshot1 = TempHideSnapshot
+			TempHideSnapshot = nil
 			
-			if var1(false) ~= var9 then
-				var2(var9)
+			if Signal(false) ~= TempHideSnapshot1 then
+				Signal2(TempHideSnapshot1)
 			end
 		end
 	end,
-	setTempHideSnapshot = function(value)
-		-- upvalues: var6 (write)
-		if var6 ~= nil then
-			var6 = value
+	setTempHideSnapshot = function(Value) --[[ Line: 65 ]]
+		-- upvalues: TempHideSnapshot (ref)
+		if TempHideSnapshot ~= nil then
+			TempHideSnapshot = Value
 		end
 	end,
-	reset = function()
-		-- upvalues: var3 (write), var6 (write), var5 (ref), var2 (ref)
-		var3 = false
-		var6 = nil
-		var5({})
-		var2(true)
+	reset = function() --[[ Line: 73 ]]
+		-- upvalues: ShouldPersistVisibility (ref), TempHideSnapshot (ref), Signal2_1 (copy), Signal2 (copy)
+		ShouldPersistVisibility = false
+		TempHideSnapshot = nil
+		Signal2_1({})
+		Signal2(true)
 	end
 }

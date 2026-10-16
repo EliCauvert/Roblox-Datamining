@@ -1,53 +1,54 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local guiService = game:GetService("GuiService")
-local contextActionService = game:GetService("ContextActionService")
-local socialUpsell = script:FindFirstAncestor("SocialUpsell")
-local parent = socialUpsell.Parent
-local reactRobloxModule = require(parent.ReactRoblox)
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local inExpOverlayModule = require(socialUpsell.Components.InExpOverlay)
-local constantsModule = require(socialUpsell.Constants)
-local getOverlayStoreModule = require(socialUpsell.Store.getOverlayStore)
-local var1 = nil
-local var2 = nil
+﻿local CoreGui = game:GetService("CoreGui")
+local GuiService = game:GetService("GuiService")
+local ContextActionService = game:GetService("ContextActionService")
+local SocialUpsell = script:FindFirstAncestor("SocialUpsell")
+local Parent = SocialUpsell.Parent
+local ReactRobloxModule = require(Parent.ReactRoblox)
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local InExpOverlayModule = require(SocialUpsell.Components.InExpOverlay)
+local ConstantsModule = require(SocialUpsell.Constants)
+local GetOverlayStoreModule = require(SocialUpsell.Store.getOverlayStore)
+local Root = nil
+local Folder = nil
 
-function mount()
-	-- upvalues: var1 (write), var2 (write), coreGuiService (ref), reactRobloxModule (ref), guiService (ref), constantsModule (ref), contextActionService (ref), reactModule (ref), inExpOverlayModule (ref)
-	if not var1 then
-		if not var2 then
-			var2 = Instance.new("Folder")
-			var2.Name = "Overlay"
-			var2.Parent = coreGuiService
+function mount() --[[ Line: 20 ]]
+	-- upvalues: Root (ref), Folder (ref), CoreGui (copy), ReactRobloxModule (copy), GuiService (copy), ConstantsModule (copy), ContextActionService (copy), ReactModule (copy), InExpOverlayModule (copy)
+	if not Root then
+		if not Folder then
+			Folder = Instance.new("Folder")
+			Folder.Name = "Overlay"
+			Folder.Parent = CoreGui
 		end
-		var1 = reactRobloxModule.createRoot(var2)
+		Root = ReactRobloxModule.createRoot(Folder)
 	end
-	guiService:SetMenuIsOpen(true, constantsModule.OVERLAY_MENU_NAME)
-	contextActionService:BindCoreAction(constantsModule.OVERLAY_CORE_ACTION_NAME, function() end, false, Enum.KeyCode.ButtonB, Enum.KeyCode.Escape)
-	var1:render(reactModule.createElement(inExpOverlayModule, { gui = var2 }))
+	GuiService:SetMenuIsOpen(true, ConstantsModule.OVERLAY_MENU_NAME)
+	ContextActionService:BindCoreAction(ConstantsModule.OVERLAY_CORE_ACTION_NAME, function() --[[ Line: 33 ]] end, false, Enum.KeyCode.ButtonB, Enum.KeyCode.Escape)
+	Root:render(ReactModule.createElement(InExpOverlayModule, { gui = Folder }))
 end
 
-function unmount()
-	-- upvalues: var1 (write), contextActionService (ref), constantsModule (ref), guiService (ref)
-	if var1 then
-		var1:unmount()
-		contextActionService:UnbindCoreAction(constantsModule.OVERLAY_CORE_ACTION_NAME)
-		guiService:SetMenuIsOpen(false, constantsModule.OVERLAY_MENU_NAME)
+function unmount() --[[ Line: 43 ]]
+	-- upvalues: Root (ref), ContextActionService (copy), ConstantsModule (copy), GuiService (copy)
+	if Root then
+		Root:unmount()
+		ContextActionService:UnbindCoreAction(ConstantsModule.OVERLAY_CORE_ACTION_NAME)
+		GuiService:SetMenuIsOpen(false, ConstantsModule.OVERLAY_MENU_NAME)
 	end
 end
 
-local var3 = nil
+local Effect = nil
 
-return function()
-	-- upvalues: getOverlayStoreModule (ref), var3 (write), signalsModule (ref)
-	local var4 = getOverlayStoreModule(false)
-	var3 = signalsModule.createEffect(function(p1)
-		-- upvalues: var4 (ref)
-		if var4.getCurrentOverlayType(p1) then
+return function() --[[ Line: 52 ]]
+	-- upvalues: GetOverlayStoreModule (copy), Effect (ref), SignalsModule (copy)
+	local OverlayStoreModule = GetOverlayStoreModule(false)
+	Effect = SignalsModule.createEffect(function(p1) --[[ Line: 55 ]]
+		-- upvalues: OverlayStoreModule (copy)
+		if OverlayStoreModule.getCurrentOverlayType(p1) then
 			mount()
 			
 			return
+		else
+			unmount()
 		end
-		unmount()
 	end)
 end

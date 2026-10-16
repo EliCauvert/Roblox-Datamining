@@ -1,58 +1,58 @@
-﻿local avatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
-local parent = avatarExperienceCommon.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local reactOtterModule = require(parent.ReactOtter)
-local animationConstantsModule = require(avatarExperienceCommon.AnimationConstants)
+﻿local AvatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
+local Parent = AvatarExperienceCommon.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local ReactOtterModule = require(Parent.ReactOtter)
+local AnimationConstantsModule = require(AvatarExperienceCommon.AnimationConstants)
 
-local function useCategoryPillAnimation(p1, p2, p3)
-	-- upvalues: reactOtterModule (ref), reactModule (ref), animationConstantsModule (ref)
-	local var1 = p3 and not p2
-	local var2 = if var1 then 1 else 0
-	local var3, var4 = reactOtterModule.useAnimatedBinding(p1)
-	local var5, var6 = reactOtterModule.useAnimatedBinding(var2)
-	reactModule.useEffect(function()
-		-- upvalues: var4 (ref), reactOtterModule (copy), p1 (ref), animationConstantsModule (copy)
-		var4(reactOtterModule.spring(p1, {
-			frequency = animationConstantsModule.FIntAXCategoryPillPositionAnimationFrequency,
-			dampingRatio = animationConstantsModule.FIntAXCategoryPillPositionAnimationDampingRatio
+local function useCategoryPillAnimation(TargetX, IsSelected, ShouldShowSubcategories) --[[ Line: 21 ]]
+	-- upvalues: ReactOtterModule (copy), ReactModule (copy), AnimationConstantsModule (copy)
+	local NoIsSelected: boolean = ShouldShowSubcategories and not IsSelected
+	local v1: number = if NoIsSelected then 1 else 0
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(TargetX)
+	local UseAnimatedBindingResult1, UseAnimatedBindingResult2_1 = ReactOtterModule.useAnimatedBinding(v1)
+	ReactModule.useEffect(function() --[[ Line: 31 ]]
+		-- upvalues: UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), TargetX (copy), AnimationConstantsModule (upval)
+		UseAnimatedBindingResult2(ReactOtterModule.spring(TargetX, {
+			frequency = AnimationConstantsModule.FIntAXCategoryPillPositionAnimationFrequency,
+			dampingRatio = AnimationConstantsModule.FIntAXCategoryPillPositionAnimationDampingRatio
 		}))
-	end, { p1, var4 })
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), var6 (ref), reactOtterModule (copy), animationConstantsModule (copy)
-		if var2 == 1 then
-			var6(reactOtterModule.instant(var2))
+	end, { TargetX, UseAnimatedBindingResult2 })
+	ReactModule.useEffect(function() --[[ Line: 38 ]]
+		-- upvalues: v1 (copy), UseAnimatedBindingResult2_1 (copy), ReactOtterModule (upval), AnimationConstantsModule (upval)
+		if v1 == 1 then
+			UseAnimatedBindingResult2_1(ReactOtterModule.instant(v1))
 			
 			return
+		else
+			UseAnimatedBindingResult2_1((ReactOtterModule.spring(v1, {
+				frequency = AnimationConstantsModule.FIntAXCategoryPillTransparencyAnimationFrequency,
+				dampingRatio = AnimationConstantsModule.FIntAXCategoryPillTransparencyAnimationDampingRatio
+			})))
 		end
-		var6(reactOtterModule.spring(var2, {
-			frequency = animationConstantsModule.FIntAXCategoryPillTransparencyAnimationFrequency,
-			dampingRatio = animationConstantsModule.FIntAXCategoryPillTransparencyAnimationDampingRatio
-		}))
-	end, { var2 })
+	end, { v1 })
 	
-	return var3, var5, var1
+	return UseAnimatedBindingResult, UseAnimatedBindingResult1, NoIsSelected
 end
 
-return function(p1)
-	-- upvalues: useCategoryPillAnimation (ref), reactModule (ref), foundationModule (ref)
-	local catInfo = p1.catInfo
-	local pillIndex = p1.pillIndex
-	local isSelected = p1.isSelected
-	local shouldShowSubcategories = p1.shouldShowSubcategories
-	local targetX = p1.targetX
-	local renderCategoryPill = p1.renderCategoryPill
-	local onRef = p1.onRef
-	local var1, var2, var3 = useCategoryPillAnimation(targetX, isSelected, shouldShowSubcategories)
+return function(p1) --[[ Line: 52 | Named "AnimatedCategoryPill" ]]
+	-- upvalues: useCategoryPillAnimation (copy), ReactModule (copy), FoundationModule (copy)
+	local CatInfo = p1.catInfo
+	local PillIndex = p1.pillIndex
+	local RenderCategoryPillFunction = p1.renderCategoryPill
+	local OnRef = p1.onRef
+	local UseCategoryPillAnimationResult, UseCategoryPillAnimationResult2, UseCategoryPillAnimationResult3 = useCategoryPillAnimation(p1.targetX, p1.isSelected, p1.shouldShowSubcategories)
 	
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "auto-xy anchor-center-left padding-x-xxsmall",
 		BackgroundTransparency = 1,
-		Position = var1:map(function(p2)
-			return UDim2.new(0, p2, 0.5, 0)
+		Position = UseCategoryPillAnimationResult:map(function(XOffset): UDim2 --[[ Line: 68 ]]
+			return UDim2.new(0, XOffset, 0.5, 0)
 		end),
-		GroupTransparency = var2,
+		GroupTransparency = UseCategoryPillAnimationResult2,
 		Size = UDim2.new(0, 0, 1, 0),
-		ref = onRef
-	}, { Pill = renderCategoryPill(catInfo, pillIndex, not var3) })
+		ref = OnRef
+	}, {
+		Pill = RenderCategoryPillFunction(CatInfo, PillIndex, not UseCategoryPillAnimationResult3)
+	})
 end

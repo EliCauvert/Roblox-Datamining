@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AppChatNewChatInputBar2", false)
+﻿return (game:DefineFastFlag("AppChatNewChatInputBar2", false))

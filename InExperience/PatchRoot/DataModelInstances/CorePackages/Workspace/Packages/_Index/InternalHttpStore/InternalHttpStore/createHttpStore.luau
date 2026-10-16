@@ -1,63 +1,66 @@
-﻿local parent = script.Parent
-local signalsModule = require(parent.Parent.Signals)
-local httpSessionTrackerModule = require(parent.HttpSessionTracker)
-local createFetchSignalModule = require(parent.createFetchSignal)
-local createCancelRequestHandlerModule = require(parent.GlobalHandlers.createCancelRequestHandler)
-local createNetworkStatsHandlerModule = require(parent.GlobalHandlers.createNetworkStatsHandler)
-local createGrafanaLoggingHandlerModule = require(parent.GlobalHandlers.createGrafanaLoggingHandler)
-local _ = require(parent.HttpStoreTypes)
+﻿local Parent = script.Parent
+local SignalsModule = require(Parent.Parent.Signals)
+local HttpSessionTrackerModule = require(Parent.HttpSessionTracker)
+local CreateFetchSignalModule = require(Parent.createFetchSignal)
+local CreateCancelRequestHandlerModule = require(Parent.GlobalHandlers.createCancelRequestHandler)
+local CreateNetworkStatsHandlerModule = require(Parent.GlobalHandlers.createNetworkStatsHandler)
+local CreateGrafanaLoggingHandlerModule = require(Parent.GlobalHandlers.createGrafanaLoggingHandler)
+local _ = require(Parent.HttpStoreTypes)
 local t = {}
 
-return function()
-	-- upvalues: t (write), createFetchSignalModule (ref), createCancelRequestHandlerModule (ref), createNetworkStatsHandlerModule (ref), createGrafanaLoggingHandlerModule (ref), signalsModule (ref), httpSessionTrackerModule (ref)
+return function() --[[ Line: 31 | Named "createHTTPStore" ]]
+	-- upvalues: t (ref), CreateFetchSignalModule (copy), CreateCancelRequestHandlerModule (copy), CreateNetworkStatsHandlerModule (copy), CreateGrafanaLoggingHandlerModule (copy), SignalsModule (copy), HttpSessionTrackerModule (copy)
 	return {
-		fetch = function(p1, p2)
-			-- upvalues: t (copy), createFetchSignalModule (copy), createCancelRequestHandlerModule (copy), createNetworkStatsHandlerModule (copy), createGrafanaLoggingHandlerModule (copy), signalsModule (copy)
-			if p1 and t[p1] then
-				return t[p1].getFetchSignal, t[p1].cancelRequest
+		fetch = function(Key, p1) --[[ Line: 33 ]]
+			-- upvalues: t (upval), CreateFetchSignalModule (upval), CreateCancelRequestHandlerModule (upval), CreateNetworkStatsHandlerModule (upval), CreateGrafanaLoggingHandlerModule (upval), SignalsModule (upval)
+			if Key and t[Key] then
+				return t[Key].getFetchSignal, t[Key].cancelRequest
 			end
-			local var1, var2 = createFetchSignalModule(p2)
-			var1 = createCancelRequestHandlerModule(var1)
-			local var3 = createNetworkStatsHandlerModule(var1)
-			local var4 = createGrafanaLoggingHandlerModule(var1)
+			local FetchSignalModule, FetchSignalModule2 = CreateFetchSignalModule(p1)
+			local CancelRequestHandlerModule = CreateCancelRequestHandlerModule(FetchSignalModule)
+			local NetworkStatsHandlerModule = CreateNetworkStatsHandlerModule(CancelRequestHandlerModule)
+			local GrafanaLoggingHandlerModule = CreateGrafanaLoggingHandlerModule(CancelRequestHandlerModule)
 			
-			local var5 = function()
-				-- upvalues: var3 (ref), var4 (ref), var2 (ref)
-				var3()
-				var4()
-				var2()
+			local function CancelRequest() --[[ Line: 55 ]]
+				-- upvalues: NetworkStatsHandlerModule (copy), GrafanaLoggingHandlerModule (copy), FetchSignalModule2 (copy)
+				NetworkStatsHandlerModule()
+				GrafanaLoggingHandlerModule()
+				FetchSignalModule2()
 			end
 			
-			if p1 then
-				local var6 = signalsModule.createEffect(function(p3)
-					-- upvalues: var1 (write), t (copy), p1 (ref)
-					local var7 = var1(p3)
+			if Key then
+				local Effect = SignalsModule.createEffect(function(p2) --[[ Line: 62 ]]
+					-- upvalues: CancelRequestHandlerModule (ref), t (upval), Key (copy)
+					local CancelRequestHandlerModuleResult = CancelRequestHandlerModule(p2)
 					
-					if var7.status == "Success" or var7.status == "Failed" then
-						t[p1] = nil
+					if CancelRequestHandlerModuleResult.status == "Success" or CancelRequestHandlerModuleResult.status == "Failed" then
+						t[Key] = nil
 					end
 				end)
 				
-				var5 = function()
-					-- upvalues: var6 (ref), var3 (ref), var4 (ref), var2 (ref), t (copy), p1 (ref)
-					var6()
-					var3()
-					var4()
-					var2()
-					t[p1] = nil
+				CancelRequest = function() --[[ Line: 69 ]]
+					-- upvalues: Effect (copy), NetworkStatsHandlerModule (copy), GrafanaLoggingHandlerModule (copy), FetchSignalModule2 (copy), t (upval), Key (copy)
+					Effect()
+					NetworkStatsHandlerModule()
+					GrafanaLoggingHandlerModule()
+					FetchSignalModule2()
+					t[Key] = nil
 				end
 				
-				t[p1] = { getFetchSignal = var1, cancelRequest = var5 }
+				t[Key] = {
+					getFetchSignal = CancelRequestHandlerModule,
+					cancelRequest = CancelRequest
+				}
 			end
-			return var1, var5
+			return CancelRequestHandlerModule, CancelRequest
 		end,
-		cancelAll = function()
-			-- upvalues: t (copy), httpSessionTrackerModule (copy)
-			for i, v in t do
-				v.cancelRequest()
+		cancelAll = function() --[[ Line: 84 ]]
+			-- upvalues: t (upval), HttpSessionTrackerModule (upval)
+			for _, value in t do
+				value.cancelRequest()
 			end
 			t = {}
-			httpSessionTrackerModule.cancelAll()
+			HttpSessionTrackerModule.cancelAll()
 		end
 	}
 end

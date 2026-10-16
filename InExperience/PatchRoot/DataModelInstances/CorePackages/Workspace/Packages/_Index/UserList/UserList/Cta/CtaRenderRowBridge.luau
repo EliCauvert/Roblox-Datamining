@@ -1,11 +1,11 @@
-﻿local userList = script:FindFirstAncestor("UserList")
-local parent = userList.Parent
-local _ = require(parent.React)
-local _ = require(userList.Common.Types)
-local useCtaRenderRowModule = require(userList.Hooks.useCtaRenderRow)
-local fFlagUserListComposeRenderRowWithCta = require(parent.SharedFlags).FFlagUserListComposeRenderRowWithCta
+﻿local UserList = script:FindFirstAncestor("UserList")
+local Parent = UserList.Parent
+local _ = require(Parent.React)
+local _ = require(UserList.Common.Types)
+local UseCtaRenderRowModule = require(UserList.Hooks.useCtaRenderRow)
+local FFlagUserListComposeRenderRowWithCta = require(Parent.SharedFlags).FFlagUserListComposeRenderRowWithCta
 
-return function(p1)
-	-- upvalues: useCtaRenderRowModule (ref), fFlagUserListComposeRenderRowWithCta (ref)
-	return p1.render(useCtaRenderRowModule(p1.ctaConfig, if fFlagUserListComposeRenderRowWithCta then p1.renderRow else nil))
+return function(p1) --[[ Line: 23 | Named "CtaRenderRowBridge" ]]
+	-- upvalues: UseCtaRenderRowModule (copy), FFlagUserListComposeRenderRowWithCta (copy)
+	return p1.render((UseCtaRenderRowModule(p1.ctaConfig, if FFlagUserListComposeRenderRowWithCta then p1.renderRow else nil)))
 end

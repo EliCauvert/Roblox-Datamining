@@ -1,18 +1,18 @@
-﻿local friendsLanding = script:FindFirstAncestor("FriendsLanding")
-local _ = friendsLanding.Parent
-local userGameSettingsService = UserSettings():GetService("UserGameSettings")
-local roactNavigation = require(friendsLanding.dependencies).RoactNavigation
+﻿local FriendsLanding = script:FindFirstAncestor("FriendsLanding")
+local _ = FriendsLanding.Parent
+local UserGameSettings = UserSettings():GetService("UserGameSettings")
+local RoactNavigation = require(FriendsLanding.dependencies).RoactNavigation
 
-return roactNavigation.createRobloxStackNavigator({
+return (RoactNavigation.createRobloxStackNavigator({
 	{
-		[require(friendsLanding.EnumScreens).FriendsLanding] = {
-			screen = require(friendsLanding.Components.FriendsLandingScreen),
-			navigationOptions = require(friendsLanding.Components.FriendsLandingScreen.NavigationOptions)
+		[require(FriendsLanding.EnumScreens).FriendsLanding] = {
+			screen = require(FriendsLanding.Components.FriendsLandingScreen),
+			navigationOptions = require(FriendsLanding.Components.FriendsLandingScreen.NavigationOptions)
 		}
 	}
 }, {
-	transitionConfig = function()
-		-- upvalues: userGameSettingsService (ref), roactNavigation (ref)
-		return if userGameSettingsService.ReducedMotion then roactNavigation.StackViewTransitionConfigs.FadeInPlace else roactNavigation.StackViewTransitionConfigs.SlideFromRight
+	transitionConfig = function() --[[ Line: 13 ]]
+		-- upvalues: UserGameSettings (copy), RoactNavigation (copy)
+		return if UserGameSettings.ReducedMotion then RoactNavigation.StackViewTransitionConfigs.FadeInPlace else RoactNavigation.StackViewTransitionConfigs.SlideFromRight
 	end
-})
+}))

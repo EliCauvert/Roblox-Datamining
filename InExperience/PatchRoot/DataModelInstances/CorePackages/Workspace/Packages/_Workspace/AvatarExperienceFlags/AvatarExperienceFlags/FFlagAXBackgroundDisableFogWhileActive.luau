@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("AXBackgroundDisableFogWhileActive", false) and require(script.Parent.FFlagAXBackgroundCycloramaRendering)
+﻿local FFlagAXBackgroundCycloramaRenderingModule = require(script.Parent.FFlagAXBackgroundCycloramaRendering)
+
+return game:DefineFastFlag("AXBackgroundDisableFogWhileActive", false) and FFlagAXBackgroundCycloramaRenderingModule

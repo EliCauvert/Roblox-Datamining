@@ -1,33 +1,33 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local roactModule = require(corePackagesService.Packages.Roact)
-local parent = script.Parent.Parent
-local fFlagTopBarDeprecateCoreGuiRoduxModule = require(parent.Flags.FFlagTopBarDeprecateCoreGuiRodux)
-local fFlagTopBarDeprecateChatRoduxModule = require(parent.Flags.FFlagTopBarDeprecateChatRodux)
-local fFlagTopBarDeprecateDisplayOptionsRoduxModule = require(parent.Flags.FFlagTopBarDeprecateDisplayOptionsRodux)
-local fFlagTopBarDeprecateRespawnRoduxModule = require(parent.Flags.FFlagTopBarDeprecateRespawnRodux)
-local fFlagTopBarDeprecateMoreMenuRoduxModule = require(parent.Flags.FFlagTopBarDeprecateMoreMenuRodux)
-local coreGuiCommonModule = require(corePackagesService.Workspace.Packages.CoreGuiCommon)
-local fFlagTopBarSignalizeHealthBar = coreGuiCommonModule.Flags.FFlagTopBarSignalizeHealthBar
-local fFlagTopBarSignalizeMenuOpen = coreGuiCommonModule.Flags.FFlagTopBarSignalizeMenuOpen
-local coreGuiConnectorModule = require(script.CoreGuiConnector)
-local menuConnectorModule = require(script.MenuConnector)
-local chatConnectorModule = require(script.ChatConnector)
-local healthConnectorModule = require(script.HealthConnector)
-local enabledNotifierModule = require(script.EnabledNotifier)
-local openUIConnectorModule = require(script.OpenUIConnector)
+﻿local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local Parent = script.Parent.Parent
+local FFlagTopBarDeprecateCoreGuiRoduxModule = require(Parent.Flags.FFlagTopBarDeprecateCoreGuiRodux)
+local FFlagTopBarDeprecateChatRoduxModule = require(Parent.Flags.FFlagTopBarDeprecateChatRodux)
+local FFlagTopBarDeprecateDisplayOptionsRoduxModule = require(Parent.Flags.FFlagTopBarDeprecateDisplayOptionsRodux)
+local FFlagTopBarDeprecateRespawnRoduxModule = require(Parent.Flags.FFlagTopBarDeprecateRespawnRodux)
+local FFlagTopBarDeprecateMoreMenuRoduxModule = require(Parent.Flags.FFlagTopBarDeprecateMoreMenuRodux)
+local CoreGuiCommonModule = require(CorePackages.Workspace.Packages.CoreGuiCommon)
+local FFlagTopBarSignalizeHealthBar = CoreGuiCommonModule.Flags.FFlagTopBarSignalizeHealthBar
+local FFlagTopBarSignalizeMenuOpen = CoreGuiCommonModule.Flags.FFlagTopBarSignalizeMenuOpen
+local CoreGuiConnectorModule = require(script.CoreGuiConnector)
+local MenuConnectorModule = require(script.MenuConnector)
+local ChatConnectorModule = require(script.ChatConnector)
+local HealthConnectorModule = require(script.HealthConnector)
+local EnabledNotifierModule = require(script.EnabledNotifier)
+local OpenUIConnectorModule = require(script.OpenUIConnector)
 local _ = require(script.LastInputTypeConnector)
-local connection = roactModule.PureComponent:extend("Connection")
+local Connection = RoactModule.PureComponent:extend("Connection")
 
-function connection.render(_)
-	-- upvalues: roactModule (ref), fFlagTopBarDeprecateCoreGuiRoduxModule (ref), coreGuiConnectorModule (ref), fFlagTopBarSignalizeMenuOpen (ref), fFlagTopBarDeprecateRespawnRoduxModule (ref), menuConnectorModule (ref), fFlagTopBarDeprecateChatRoduxModule (ref), chatConnectorModule (ref), fFlagTopBarSignalizeHealthBar (ref), healthConnectorModule (ref), fFlagTopBarDeprecateDisplayOptionsRoduxModule (ref), enabledNotifierModule (ref), fFlagTopBarDeprecateMoreMenuRoduxModule (ref), openUIConnectorModule (ref)
-	return roactModule.createFragment({
-		CoreGuiConnector = if fFlagTopBarDeprecateCoreGuiRoduxModule then nil else roactModule.createElement(coreGuiConnectorModule),
-		MenuConnector = if fFlagTopBarSignalizeMenuOpen and fFlagTopBarDeprecateRespawnRoduxModule then nil else roactModule.createElement(menuConnectorModule),
-		ChatConnector = if fFlagTopBarDeprecateChatRoduxModule then nil else roactModule.createElement(chatConnectorModule),
-		HealthConnector = if fFlagTopBarSignalizeHealthBar then nil else roactModule.createElement(healthConnectorModule),
-		EnabledNotifier = if fFlagTopBarDeprecateDisplayOptionsRoduxModule then nil else roactModule.createElement(enabledNotifierModule),
-		OpenUIConnector = if fFlagTopBarDeprecateMoreMenuRoduxModule then nil else roactModule.createElement(openUIConnectorModule)
+function Connection:render() --[[ Line: 26 ]]
+	-- upvalues: RoactModule (copy), FFlagTopBarDeprecateCoreGuiRoduxModule (copy), CoreGuiConnectorModule (copy), FFlagTopBarSignalizeMenuOpen (copy), FFlagTopBarDeprecateRespawnRoduxModule (copy), MenuConnectorModule (copy), FFlagTopBarDeprecateChatRoduxModule (copy), ChatConnectorModule (copy), FFlagTopBarSignalizeHealthBar (copy), HealthConnectorModule (copy), FFlagTopBarDeprecateDisplayOptionsRoduxModule (copy), EnabledNotifierModule (copy), FFlagTopBarDeprecateMoreMenuRoduxModule (copy), OpenUIConnectorModule (copy)
+	return RoactModule.createFragment({
+		CoreGuiConnector = if FFlagTopBarDeprecateCoreGuiRoduxModule then nil else RoactModule.createElement(CoreGuiConnectorModule),
+		MenuConnector = if FFlagTopBarSignalizeMenuOpen and FFlagTopBarDeprecateRespawnRoduxModule then nil else RoactModule.createElement(MenuConnectorModule),
+		ChatConnector = if FFlagTopBarDeprecateChatRoduxModule then nil else RoactModule.createElement(ChatConnectorModule),
+		HealthConnector = if FFlagTopBarSignalizeHealthBar then nil else RoactModule.createElement(HealthConnectorModule),
+		EnabledNotifier = if FFlagTopBarDeprecateDisplayOptionsRoduxModule then nil else RoactModule.createElement(EnabledNotifierModule),
+		OpenUIConnector = if FFlagTopBarDeprecateMoreMenuRoduxModule then nil else RoactModule.createElement(OpenUIConnectorModule)
 	})
 end
 
-return connection
+return Connection

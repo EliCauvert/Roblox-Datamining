@@ -1,37 +1,43 @@
-﻿local parent = script:FindFirstAncestor("VerifiedParentalConsentDialog").Parent
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
+﻿local Parent = script:FindFirstAncestor("VerifiedParentalConsentDialog").Parent
+local ReactModule = require(Parent.React)
+local UIBloxModule = require(Parent.UIBlox)
+local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
 
-return function(p1)
-	-- upvalues: useLocalization (ref), reactModule (ref), interactiveAlert (ref), buttonType (ref)
-	local var1 = useLocalization({
+return function(p1) --[[ Line: 21 | Named "AlertPrompt" ]]
+	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), InteractiveAlert (copy), ButtonType (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
 		GoToSettings = "Common.VerifiedParentalConsent.Action.GoToSettings",
 		Cancel = "Common.VerifiedParentalConsent.Action.Cancel",
 		Close = "Common.VerifiedParentalConsent.Action.Close"
 	})
 	
-	return reactModule.createElement(interactiveAlert, {
+	return ReactModule.createElement(InteractiveAlert, {
 		title = p1.title,
 		titleIcon = p1.titleIcon,
 		bodyText = p1.bodyText,
 		buttonStackInfo = {
 			buttons = if p1.isActionable then {
 				{
-					buttonType = buttonType.PrimarySystem,
+					buttonType = ButtonType.PrimarySystem,
 					props = {
 						onActivated = if p1.onAction then p1.onAction else p1.onDismiss,
-						text = var1.GoToSettings
+						text = UseLocalizationResult.GoToSettings
 					}
 				},
 				{
-					props = { onActivated = p1.onDismiss, text = var1.Cancel }
+					props = {
+						onActivated = p1.onDismiss,
+						text = UseLocalizationResult.Cancel
+					}
 				}
 			} else {
 				{
-					props = { onActivated = p1.onDismiss, text = var1.Close }
+					props = {
+						onActivated = p1.onDismiss,
+						text = UseLocalizationResult.Close
+					}
 				}
 			}
 		},

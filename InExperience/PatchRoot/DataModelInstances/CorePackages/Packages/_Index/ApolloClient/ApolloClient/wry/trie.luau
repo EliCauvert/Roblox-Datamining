@@ -1,1 +1,1 @@
-﻿return require(script.trie)
+﻿return (require(script.trie))

@@ -1,11 +1,10 @@
-﻿local friendsMenu = script:FindFirstAncestor("FriendsMenu")
-local parent = friendsMenu.Parent
-local _ = require(friendsMenu.friendsMenuModalType)
-local constantsModule = require(friendsMenu.Constants)
-local getFFlagFriendsMenuDummyLoadingFriendsFix = require(parent.SharedFlags).GetFFlagFriendsMenuDummyLoadingFriendsFix
+﻿local FriendsMenu = script:FindFirstAncestor("FriendsMenu")
+local _ = require(FriendsMenu.friendsMenuModalType)
+local ConstantsModule = require(FriendsMenu.Constants)
+local GetFFlagFriendsMenuDummyLoadingFriendsFixFunction = require(FriendsMenu.Parent.SharedFlags).GetFFlagFriendsMenuDummyLoadingFriendsFix
 
-local var1 = function(p1)
-	-- upvalues: getFFlagFriendsMenuDummyLoadingFriendsFix (ref), constantsModule (ref)
+local function v3(FriendFrequentRank) --[[ Line: 9 ]]
+	-- upvalues: GetFFlagFriendsMenuDummyLoadingFriendsFixFunction (copy), ConstantsModule (copy)
 	return {
 		displayName = "",
 		hasVerifiedBadge = false,
@@ -15,19 +14,19 @@ local var1 = function(p1)
 		name = "",
 		presence = "",
 		isLoadingPlaceholder = true,
-		friendFrequentRank = p1,
-		friendRank = p1,
-		id = if getFFlagFriendsMenuDummyLoadingFriendsFix() then constantsModule.DummyFriendsPrefix .. tostring(p1) else tostring(p1),
+		friendFrequentRank = FriendFrequentRank,
+		friendRank = FriendFrequentRank,
+		id = GetFFlagFriendsMenuDummyLoadingFriendsFixFunction() and ConstantsModule.DummyFriendsPrefix .. tostring(FriendFrequentRank) or tostring(FriendFrequentRank),
 		lastOnline = DateTime.now()
 	}
 end
 
-return function(p1)
-	-- upvalues: var1 (ref)
+return function(p1) --[[ Line: 28 ]]
+	-- upvalues: v3 (copy)
 	local t = {}
 	
 	for i = 1, p1 do
-		t[i] = var1(i)
+		t[i] = v3(i)
 	end
 	return t
 end

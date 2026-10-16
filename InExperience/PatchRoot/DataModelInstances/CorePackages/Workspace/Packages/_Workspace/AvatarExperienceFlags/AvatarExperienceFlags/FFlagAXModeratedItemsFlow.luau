@@ -1,1 +1,1 @@
-﻿return require(script.Parent.FFlagAXRootSlotBasedEditorFlag) and game:DefineFastFlag("AXModeratedItemsFlow5", false)
+﻿return game:DefineFastFlag("AXModeratedItemsFlow5", false)

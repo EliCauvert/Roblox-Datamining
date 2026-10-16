@@ -1,1 +1,1 @@
-﻿return require(script.Parent:WaitForChild("FFlagUnibarMenuOpenHamburgerGamepadIXP"))
+﻿return (require(script.Parent:WaitForChild("FFlagUnibarMenuOpenHamburgerGamepadIXP")))

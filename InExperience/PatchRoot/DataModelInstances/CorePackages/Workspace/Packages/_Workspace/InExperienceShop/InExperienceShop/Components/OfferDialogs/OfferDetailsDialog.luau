@@ -1,46 +1,50 @@
-﻿local inExperienceShop = script:FindFirstAncestor("InExperienceShop")
-local parent = inExperienceShop.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useRemainingTimeText = require(parent.InExperienceOffers).Hooks.useRemainingTimeText
-local useOfferModalTextModule = require(inExperienceShop.Hooks.useOfferModalText)
-local dialog = foundationModule.Dialog
-local view = foundationModule.View
-local text = foundationModule.Text
-local dialogSize = foundationModule.Enums.DialogSize
-local buttonVariant = foundationModule.Enums.ButtonVariant
+﻿local InExperienceShop = script:FindFirstAncestor("InExperienceShop")
+local Parent = InExperienceShop.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseRemainingTimeTextFunction = require(Parent.InExperienceOffers).Hooks.useRemainingTimeText
+local UseOfferModalTextModule = require(InExperienceShop.Hooks.useOfferModalText)
+local Dialog = FoundationModule.Dialog
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local DialogSize = FoundationModule.Enums.DialogSize
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
 
-return function(p1)
-	-- upvalues: useRemainingTimeText (ref), useOfferModalTextModule (ref), reactModule (ref), dialog (ref), dialogSize (ref), view (ref), text (ref), buttonVariant (ref)
-	local modal = p1.modal
-	local var1 = useOfferModalTextModule(modal.body, useRemainingTimeText(p1.expirationTimeInUTC))
+return function(p1) --[[ Line: 33 | Named "OfferDetailsDialog" ]]
+	-- upvalues: UseRemainingTimeTextFunction (copy), UseOfferModalTextModule (copy), ReactModule (copy), Dialog (copy), DialogSize (copy), View (copy), Text (copy), ButtonVariant (copy)
+	local Modal = p1.modal
+	local HasTermsAndConditions = Modal.termsAndConditions ~= nil
+	local UseOfferModalTextModuleResult = UseOfferModalTextModule(Modal.body, (UseRemainingTimeTextFunction(p1.expirationTimeInUTC)))
 	
-	return reactModule.createElement(dialog.Root, {
+	return ReactModule.createElement(Dialog.Root, {
 		hasBackdrop = true,
 		disablePortal = false,
-		size = dialogSize.Medium,
+		size = DialogSize.Medium,
 		onClose = p1.onClose
 	}, {
-		Title = reactModule.createElement(dialog.Title, { LayoutOrder = 1, text = modal.title }),
-		Content = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
-			Body = reactModule.createElement(view, { tag = "col gap-small size-full-0 auto-y" }, {
-				BodyText = reactModule.createElement(dialog.Text, { LayoutOrder = 1, Text = var1.bodyText }),
-				ViewTermsLink = if modal.termsAndConditions ~= nil then reactModule.createElement(text, {
+		Title = ReactModule.createElement(Dialog.Title, { LayoutOrder = 1, text = Modal.title }),
+		Content = ReactModule.createElement(Dialog.Content, { LayoutOrder = 2 }, {
+			Body = ReactModule.createElement(View, { tag = "col gap-small size-full-0 auto-y" }, {
+				BodyText = ReactModule.createElement(Dialog.Text, {
+					LayoutOrder = 1,
+					Text = UseOfferModalTextModuleResult.bodyText
+				}),
+				ViewTermsLink = if HasTermsAndConditions then ReactModule.createElement(Text, {
 					tag = "auto-xy text-body-medium text-wrap text-align-x-left content-muted",
 					RichText = true,
 					LayoutOrder = 2,
 					testId = "OfferViewTermsLink",
-					Text = `<u>{var1.viewTermsText}</u>`,
+					Text = `<u>{UseOfferModalTextModuleResult.viewTermsText}</u>`,
 					onActivated = p1.onViewTerms
 				}) else nil
 			})
 		}),
-		Actions = reactModule.createElement(dialog.Actions, {
+		Actions = ReactModule.createElement(Dialog.Actions, {
 			LayoutOrder = 3,
 			actions = {
 				{
-					text = modal.buttonText,
-					variant = buttonVariant.Emphasis,
+					text = Modal.buttonText,
+					variant = ButtonVariant.Emphasis,
 					onActivated = p1.onShopNow
 				}
 			}

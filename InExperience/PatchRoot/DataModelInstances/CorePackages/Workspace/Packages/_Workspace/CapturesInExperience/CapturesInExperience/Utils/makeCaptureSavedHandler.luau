@@ -1,89 +1,96 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local socialStopwatchModule = require(parent_1.SocialStopwatch)
-local capturesPolicyModule = require(parent.App.CapturesPolicy)
-local capturesToastTypeModule = require(parent.Enums.CapturesToastType)
-local constantsModule = require(parent.Constants)
-local eventNamesModule = require(parent.Analytics.EventNames)
-local retrieveCapturesModule = require(parent.Thunks.RetrieveCaptures)
-local toastTriggeredModule = require(parent.Actions.ToastTriggered)
-local triggerSourceTypeModule = require(parent.Enums.TriggerSourceType)
-local _ = require(parent.Types)
-local fetchCapturesFromGalleryModule = require(parent.Utils.fetchCapturesFromGallery)
-local findMatchingCaptureModule = require(parent.Utils.findMatchingCapture)
-local getCaptureObjectModule = require(parent.Utils.getCaptureObject)
-local pendingCaptureToastActionModule = require(parent.Utils.pendingCaptureToastAction)
-local waitForFlashOverlayModule = require(parent.Utils.waitForFlashOverlay)
-local fFlagBuildExperienceInGameCaptureToChat = require(parent_1.SharedFlags).FFlagBuildExperienceInGameCaptureToChat
-local fFlagCreateMomentsToastModule = require(parent.Flags.FFlagCreateMomentsToast)
-local captureTypeModule = require(parent.Enums.CaptureType)
-local fFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
-local captureServiceEnableXExperiencePostingApisEngineFeature = game:GetEngineFeature("CaptureServiceEnableXExperiencePostingApis")
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local SocialStopwatchModule = require(Parent1.SocialStopwatch)
+local CapturesPolicyModule = require(Parent.App.CapturesPolicy)
+local CapturesToastTypeModule = require(Parent.Enums.CapturesToastType)
+local ConstantsModule = require(Parent.Constants)
+local EventNamesModule = require(Parent.Analytics.EventNames)
+local RetrieveCapturesModule = require(Parent.Thunks.RetrieveCaptures)
+local ToastTriggeredModule = require(Parent.Actions.ToastTriggered)
+local TriggerSourceTypeModule = require(Parent.Enums.TriggerSourceType)
+local _ = require(Parent.Types)
+local FetchCapturesFromGalleryModule = require(Parent.Utils.fetchCapturesFromGallery)
+local FindMatchingCaptureModule = require(Parent.Utils.findMatchingCapture)
+local GetCaptureObjectModule = require(Parent.Utils.getCaptureObject)
+local PendingCaptureToastActionModule = require(Parent.Utils.pendingCaptureToastAction)
+local WaitForFlashOverlayModule = require(Parent.Utils.waitForFlashOverlay)
+local SharedFlagsModule = require(Parent1.SharedFlags)
+local FFlagBuildExperienceInGameCaptureToChat = SharedFlagsModule.FFlagBuildExperienceInGameCaptureToChat
+local FFlagMomentsCreationFeatureGate = SharedFlagsModule.FFlagMomentsCreationFeatureGate
+local GetMomentsCapabilitiesFunction = require(Parent1.MomentsCommon).Stores.GetMomentsCapabilities
+local FFlagCreateMomentsToastModule = require(Parent.Flags.FFlagCreateMomentsToast)
+local CaptureTypeModule = require(Parent.Enums.CaptureType)
+local FFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(Parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
+local CaptureServiceEnableXExperiencePostingApisEngineFeature = game:GetEngineFeature("CaptureServiceEnableXExperiencePostingApis")
 
-local function triggerDefaultToast(p1, p2, p3, p4, p5)
-	-- upvalues: toastTriggeredModule (ref), capturesToastTypeModule (ref), eventNamesModule (ref)
-	if p2 then
-		p1:dispatch(toastTriggeredModule(capturesToastTypeModule.CaptureTaken, { captureInfo = p3 }))
+local function triggerDefaultToast(p1, EnableShareCaptureCTAResult, CaptureInfo, IsCaptureTypeMatch, Callback: (any) -> ()) --[[ Line: 38 ]]
+	-- upvalues: ToastTriggeredModule (copy), CapturesToastTypeModule (copy), EventNamesModule (copy)
+	if EnableShareCaptureCTAResult then
+		p1:dispatch(ToastTriggeredModule(CapturesToastTypeModule.CaptureTaken, { captureInfo = CaptureInfo }))
 	else
-		p1:dispatch(toastTriggeredModule(capturesToastTypeModule.ViewCapture))
+		p1:dispatch(ToastTriggeredModule(CapturesToastTypeModule.ViewCapture))
 	end
-	if p4 then
-		p5(eventNamesModule.CapturesVideoShareToastViewed)
+	if IsCaptureTypeMatch then
+		Callback(EventNamesModule.CapturesVideoShareToastViewed)
 	end
-	p5(eventNamesModule.CapturesShareToastViewed)
+	Callback(EventNamesModule.CapturesShareToastViewed)
 end
 
-return function(p1, _, p2)
-	-- upvalues: fFlagEnableCapturesGalleryRetrievalCoreScriptModule (ref), captureTypeModule (ref), triggerSourceTypeModule (ref), socialStopwatchModule (ref), eventNamesModule (ref), retrieveCapturesModule (ref), waitForFlashOverlayModule (ref), fFlagBuildExperienceInGameCaptureToChat (ref), pendingCaptureToastActionModule (ref), getCaptureObjectModule (ref), toastTriggeredModule (ref), capturesToastTypeModule (ref), capturesPolicyModule (ref), fFlagCreateMomentsToastModule (ref), captureServiceEnableXExperiencePostingApisEngineFeature (ref), triggerDefaultToast (ref), constantsModule (ref), fetchCapturesFromGalleryModule (ref), findMatchingCaptureModule (ref)
-	return function(p3, p4)
-		-- upvalues: fFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), captureTypeModule (copy), triggerSourceTypeModule (copy), socialStopwatchModule (copy), p2 (ref), eventNamesModule (copy), p1 (ref), retrieveCapturesModule (copy), waitForFlashOverlayModule (copy), fFlagBuildExperienceInGameCaptureToChat (copy), pendingCaptureToastActionModule (copy), getCaptureObjectModule (copy), toastTriggeredModule (copy), capturesToastTypeModule (copy), capturesPolicyModule (copy), fFlagCreateMomentsToastModule (copy), captureServiceEnableXExperiencePostingApisEngineFeature (copy), triggerDefaultToast (copy), constantsModule (copy), fetchCapturesFromGalleryModule (copy), findMatchingCaptureModule (copy)
-		local var1
-		if fFlagEnableCapturesGalleryRetrievalCoreScriptModule then
-			var1 = p3.CaptureType == Enum.CaptureType.Video
-			var1 = nil
-		else
-			var1 = p3.type == captureTypeModule.Video
-		end
-		if p4 == triggerSourceTypeModule.UserSave and not var1 then
-			local var2 = socialStopwatchModule.Stopwatch.stop(socialStopwatchModule.Events.CaptureTaken)
-			p2(eventNamesModule.CapturesEntrypointLatency, { statValue = if var2 then var2.timeElapsed else nil })
-		end
-		p1:dispatch(retrieveCapturesModule())
-		waitForFlashOverlayModule(p1)
+return function(p1, _, Callback) --[[ Line: 60 | Named "makeCaptureSavedHandler" ]]
+	-- upvalues: FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CaptureTypeModule (copy), TriggerSourceTypeModule (copy), SocialStopwatchModule (copy), EventNamesModule (copy), RetrieveCapturesModule (copy), WaitForFlashOverlayModule (copy), FFlagBuildExperienceInGameCaptureToChat (copy), PendingCaptureToastActionModule (copy), GetCaptureObjectModule (copy), ToastTriggeredModule (copy), CapturesToastTypeModule (copy), CapturesPolicyModule (copy), FFlagCreateMomentsToastModule (copy), FFlagMomentsCreationFeatureGate (copy), GetMomentsCapabilitiesFunction (copy), CaptureServiceEnableXExperiencePostingApisEngineFeature (copy), triggerDefaultToast (copy), ConstantsModule (copy), FetchCapturesFromGalleryModule (copy), FindMatchingCaptureModule (copy)
+	return function(CaptureInfo, UserSave) --[[ Line: 61 | Named "captureSavedHandler" ]]
+		-- upvalues: FFlagEnableCapturesGalleryRetrievalCoreScriptModule (upval), CaptureTypeModule (upval), TriggerSourceTypeModule (upval), SocialStopwatchModule (upval), Callback (copy), EventNamesModule (upval), p1 (copy), RetrieveCapturesModule (upval), WaitForFlashOverlayModule (upval), FFlagBuildExperienceInGameCaptureToChat (upval), PendingCaptureToastActionModule (upval), GetCaptureObjectModule (upval), ToastTriggeredModule (upval), CapturesToastTypeModule (upval), CapturesPolicyModule (upval), FFlagCreateMomentsToastModule (upval), FFlagMomentsCreationFeatureGate (upval), GetMomentsCapabilitiesFunction (upval), CaptureServiceEnableXExperiencePostingApisEngineFeature (upval), triggerDefaultToast (upval), ConstantsModule (upval), FetchCapturesFromGalleryModule (upval), FindMatchingCaptureModule (upval)
+		local IsCaptureTypeMatch: boolean = if FFlagEnableCapturesGalleryRetrievalCoreScriptModule then CaptureInfo.CaptureType == Enum.CaptureType.Video else CaptureInfo.type == CaptureTypeModule.Video
 		
-		if fFlagBuildExperienceInGameCaptureToChat and p4 == triggerSourceTypeModule.UserSave then
-			local var3 = pendingCaptureToastActionModule.consume()
-			local var4 = if var3 then getCaptureObjectModule(p3) else nil
+		if UserSave == TriggerSourceTypeModule.UserSave and not IsCaptureTypeMatch then
+			local StopResult = SocialStopwatchModule.Stopwatch.stop(SocialStopwatchModule.Events.CaptureTaken)
+			Callback(EventNamesModule.CapturesEntrypointLatency, {
+				statValue = if StopResult then StopResult.timeElapsed else nil
+			})
+		end
+		p1:dispatch(RetrieveCapturesModule())
+		WaitForFlashOverlayModule(p1)
+		
+		if FFlagBuildExperienceInGameCaptureToChat and UserSave == TriggerSourceTypeModule.UserSave then
+			local ConsumeResult = PendingCaptureToastActionModule.consume()
+			local CaptureObjectModule = if ConsumeResult then GetCaptureObjectModule(CaptureInfo) else nil
 			
-			if var4 ~= nil then
-				p1:dispatch(toastTriggeredModule(capturesToastTypeModule.CaptureTakenWithAction, { captureInfo = var4, toastAction = var3 }))
-				
-				return
-			elseif p4 == triggerSourceTypeModule.PromptedShare then return end
-			local var5 = capturesPolicyModule.PolicyImplementation.read()
-			local var6 = if var5 then capturesPolicyModule.Mapper(var5).enableShareCaptureCTA() else false
-			local var7 = getCaptureObjectModule(p3)
-			local var8 = false
-			local var9 = if fFlagCreateMomentsToastModule then game.GameId else nil
-			
-			if fFlagCreateMomentsToastModule and captureServiceEnableXExperiencePostingApisEngineFeature then
-				local var10 = var7 ~= nil and var7.CaptureType == Enum.CaptureType.Video
-				local var11 = if var10 then var7.TimeLength else nil
-				var8 = var7 ~= nil and (if var10 then type(var11) == "number" and var11 >= 6 else not var10)
-			end
-			if not var8 or var9 == nil then
-				triggerDefaultToast(p1, var6, p3, var1, p2)
-				
-				return
-			elseif p1:getState()[constantsModule.RoduxKey].MomentsEligibility.byUniverseId[var9] ~= true then
-				triggerDefaultToast(p1, var6, p3, var1, p2)
+			if CaptureObjectModule ~= nil then
+				p1:dispatch(ToastTriggeredModule(CapturesToastTypeModule.CaptureTakenWithAction, {
+					captureInfo = CaptureObjectModule,
+					toastAction = ConsumeResult
+				}))
 				
 				return
 			end
-			p1:dispatch(toastTriggeredModule(capturesToastTypeModule.CaptureTakenWithMomentsCTA, {
-				captureInfo = if fFlagCreateMomentsToastModule and var7 then findMatchingCaptureModule(fetchCapturesFromGalleryModule(), var7) or var7 else var7
+		end
+		if UserSave == TriggerSourceTypeModule.PromptedShare then return end
+		local ReadResult = CapturesPolicyModule.PolicyImplementation.read()
+		local EnableShareCaptureCTAResult = if ReadResult then CapturesPolicyModule.Mapper(ReadResult).enableShareCaptureCTA() else false
+		local CaptureObjectModule = GetCaptureObjectModule(CaptureInfo)
+		local v1 = false
+		local GameId = if FFlagCreateMomentsToastModule then game.GameId else nil
+		local NoFFlagMomentsCreationFeatureGate = not FFlagMomentsCreationFeatureGate or GetMomentsCapabilitiesFunction(false).getCanCreateMoments(false)
+		
+		if FFlagCreateMomentsToastModule and CaptureServiceEnableXExperiencePostingApisEngineFeature and NoFFlagMomentsCreationFeatureGate then
+			local IsCaptureTypeMatch1: boolean = CaptureObjectModule ~= nil and CaptureObjectModule.CaptureType == Enum.CaptureType.Video
+			local TimeLength = if IsCaptureTypeMatch1 then CaptureObjectModule.TimeLength else nil
+			v1 = CaptureObjectModule ~= nil and (not IsCaptureTypeMatch1 or type(TimeLength) == "number" and TimeLength >= 6)
+		end
+		if not v1 or GameId == nil then
+			triggerDefaultToast(p1, EnableShareCaptureCTAResult, CaptureInfo, IsCaptureTypeMatch, Callback)
+			
+			return
+		end
+		if p1:getState()[ConstantsModule.RoduxKey].MomentsEligibility.byUniverseId[GameId] == true then
+			p1:dispatch(ToastTriggeredModule(CapturesToastTypeModule.CaptureTakenWithMomentsCTA, {
+				captureInfo = FFlagCreateMomentsToastModule and CaptureObjectModule and FindMatchingCaptureModule(FetchCapturesFromGalleryModule(), CaptureObjectModule) or CaptureObjectModule
 			}))
-			p2(eventNamesModule.CapturesCreateMomentToastViewed)
+			Callback(EventNamesModule.CapturesCreateMomentToastViewed)
+			
+			return
+		else
+			triggerDefaultToast(p1, EnableShareCaptureCTAResult, CaptureInfo, IsCaptureTypeMatch, Callback)
 		end
 	end
 end

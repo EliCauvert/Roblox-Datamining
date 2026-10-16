@@ -1,10 +1,10 @@
-﻿local expChatGlobalTabDefaultExperimentation = require(script:FindFirstAncestor("ExpChat").Parent.SocialExperiments).ExpChatGlobalTabDefaultExperimentation
-local var1 = nil
+﻿local ExpChatGlobalTabDefaultExperimentation = require(script:FindFirstAncestor("ExpChat").Parent.SocialExperiments).ExpChatGlobalTabDefaultExperimentation
+local GlobalWelcomeMessageKey = nil
 
-return function()
-	-- upvalues: var1 (write), expChatGlobalTabDefaultExperimentation (ref)
-	if var1 == nil then
-		var1 = expChatGlobalTabDefaultExperimentation.getGlobalWelcomeMessageKey()
+return function() --[[ Line: 23 | Named "getGlobalWelcomeMessageKey" ]]
+	-- upvalues: GlobalWelcomeMessageKey (ref), ExpChatGlobalTabDefaultExperimentation (copy)
+	if GlobalWelcomeMessageKey == nil then
+		GlobalWelcomeMessageKey = ExpChatGlobalTabDefaultExperimentation.getGlobalWelcomeMessageKey()
 	end
-	return var1
+	return GlobalWelcomeMessageKey
 end

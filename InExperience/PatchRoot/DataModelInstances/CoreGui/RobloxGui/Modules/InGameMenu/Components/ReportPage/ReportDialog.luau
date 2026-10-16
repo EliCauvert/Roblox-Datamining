@@ -1,38 +1,38 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local contextActionService = game:GetService("ContextActionService")
-local guiService = game:GetService("GuiService")
-local inGameMenuDependenciesModule = require(corePackagesService.Packages.InGameMenuDependencies)
-local roact = inGameMenuDependenciesModule.Roact
-local roactRodux = inGameMenuDependenciesModule.RoactRodux
-local UIBlox = inGameMenuDependenciesModule.UIBlox
-local t = inGameMenuDependenciesModule.t
-local cryo = inGameMenuDependenciesModule.Cryo
-local button = UIBlox.App.Button.Button
-local buttonType = UIBlox.App.Button.Enum.ButtonType
-local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
-local parent = script.Parent.Parent.Parent
-local flags = parent.Flags
-local getFFlagIGMGamepadSelectionHistoryModule = require(flags.GetFFlagIGMGamepadSelectionHistory)
-local fFlagIGMDialogButtonsUseUIBloxButtonModule = require(flags.FFlagIGMDialogButtonsUseUIBloxButton)
-local focusHandlerModule = require(script.Parent.Parent.Connection.FocusHandler)
-local assetsModule = require(parent.Resources.Assets)
-local closeReportDialogModule = require(parent.Actions.CloseReportDialog)
-local withLocalizationModule = require(parent.Localization.withLocalization)
-local themedTextLabelModule = require(parent.Components.ThemedTextLabel)
-local textEntryFieldModule = require(script.Parent.TextEntryField)
-local dropDownSelectionModule = require(parent.Components.DropDownSelection)
-local constantsModule = require(parent.Resources.Constants)
-local sendAnalyticsModule = require(parent.Utility.SendAnalytics)
-local sendReportModule = require(parent.Thunks.SendReport)
-local imageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
-local image = require(corePackagesService.Packages.Foundation).Image
-local fFlagCoreUiMigrateUIBloxToFoundation = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
-local reportDialog = roact.PureComponent:extend("ReportDialog")
+﻿local CorePackages = game:GetService("CorePackages")
+local ContextActionService = game:GetService("ContextActionService")
+local GuiService = game:GetService("GuiService")
+local InGameMenuDependenciesModule = require(CorePackages.Packages.InGameMenuDependencies)
+local Roact = InGameMenuDependenciesModule.Roact
+local RoactRodux = InGameMenuDependenciesModule.RoactRodux
+local UIBlox = InGameMenuDependenciesModule.UIBlox
+local T = InGameMenuDependenciesModule.t
+local Cryo = InGameMenuDependenciesModule.Cryo
+local Button = UIBlox.App.Button.Button
+local ButtonType = UIBlox.App.Button.Enum.ButtonType
+local WithFoundationOrUIBloxStyleFunction = require(CorePackages.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
+local Parent = script.Parent.Parent.Parent
+local Flags = Parent.Flags
+local GetFFlagIGMGamepadSelectionHistoryModule = require(Flags.GetFFlagIGMGamepadSelectionHistory)
+local FFlagIGMDialogButtonsUseUIBloxButtonModule = require(Flags.FFlagIGMDialogButtonsUseUIBloxButton)
+local FocusHandlerModule = require(script.Parent.Parent.Connection.FocusHandler)
+local AssetsModule = require(Parent.Resources.Assets)
+local CloseReportDialogModule = require(Parent.Actions.CloseReportDialog)
+local WithLocalizationModule = require(Parent.Localization.withLocalization)
+local ThemedTextLabelModule = require(Parent.Components.ThemedTextLabel)
+local TextEntryFieldModule = require(script.Parent.TextEntryField)
+local DropDownSelectionModule = require(Parent.Components.DropDownSelection)
+local ConstantsModule = require(Parent.Resources.Constants)
+local SendAnalyticsModule = require(Parent.Utility.SendAnalytics)
+local SendReportModule = require(Parent.Thunks.SendReport)
+local ImageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
+local Image = require(CorePackages.Packages.Foundation).Image
+local FFlagCoreUiMigrateUIBloxToFoundation = require(CorePackages.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
+local ReportDialog = Roact.PureComponent:extend("ReportDialog")
 local list = {
 	"Swearing", "Inappropriate Username", "Bullying", "Scamming", "Dating",
 	"Cheating/Exploiting", "Personal Question", "Offsite Links"
 }
-local list_1 = {
+local Selections = {
 	"CoreScripts.InGameMenu.Report.AbuseSwearing",
 	"CoreScripts.InGameMenu.Report.AbuseUsername",
 	"CoreScripts.InGameMenu.Report.AbuseBullying",
@@ -42,35 +42,35 @@ local list_1 = {
 	"CoreScripts.InGameMenu.Report.AbusePersonalQuestion",
 	"CoreScripts.InGameMenu.Report.AbuseOffsiteLink"
 }
-reportDialog.validateProps = t.strictInterface({
-	isOpen = t.boolean,
-	userId = t.optional(t.integer),
-	userName = t.optional(t.string),
-	placeName = t.string,
-	dispatchCloseReportDialog = t.callback,
-	dispatchSendReport = t.callback,
-	canCaptureFocus = t.optional(t.boolean),
-	isGamepadLastInput = t.optional(t.boolean)
+ReportDialog.validateProps = T.strictInterface({
+	isOpen = T.boolean,
+	userId = T.optional(T.integer),
+	userName = T.optional(T.string),
+	placeName = T.string,
+	dispatchCloseReportDialog = T.callback,
+	dispatchSendReport = T.callback,
+	canCaptureFocus = T.optional(T.boolean),
+	isGamepadLastInput = T.optional(T.boolean)
 })
 
-function reportDialog.init(p1)
-	-- upvalues: roact (ref)
+function ReportDialog.init(p1) --[[ Line: 88 ]]
+	-- upvalues: Roact (copy)
 	p1.state = { abuseDescription = "", typeOfAbuseIndex = 0 }
-	p1.selectionGroupRef = roact.createRef()
-	p1.reportTextEntryRef = roact.createRef()
-	p1.reportDropDownRef = roact.createRef()
+	p1.selectionGroupRef = Roact.createRef()
+	p1.reportTextEntryRef = Roact.createRef()
+	p1.reportDropDownRef = Roact.createRef()
 end
 
-function reportDialog.renderReportTitle(_, p1, p2, p3)
-	-- upvalues: roact (ref), themedTextLabelModule (ref)
-	p2.Title = roact.createElement(themedTextLabelModule, {
+function ReportDialog:renderReportTitle(p1, p2, Text) --[[ Line: 99 ]]
+	-- upvalues: Roact (copy), ThemedTextLabelModule (copy)
+	p2.Title = Roact.createElement(ThemedTextLabelModule, {
 		fontKey = "Header1",
 		themeKey = "TextEmphasis",
 		LayoutOrder = 1,
 		Size = UDim2.new(1, 0, 0, 48),
-		Text = p3
+		Text = Text
 	})
-	p2.Divider = roact.createElement("Frame", {
+	p2.Divider = Roact.createElement("Frame", {
 		BorderSizePixel = 0,
 		LayoutOrder = 2,
 		BackgroundColor3 = p1.Theme.Divider.Color,
@@ -79,109 +79,110 @@ function reportDialog.renderReportTitle(_, p1, p2, p3)
 	})
 end
 
-function reportDialog.renderTextEntryField(p1, p2, p3, p4)
-	-- upvalues: roact (ref), textEntryFieldModule (ref)
-	p3.ReportDescription = roact.createElement(textEntryFieldModule, {
+function ReportDialog.renderTextEntryField(p1, p2, p3, Size) --[[ Line: 118 ]]
+	-- upvalues: Roact (copy), TextEntryFieldModule (copy)
+	p3.ReportDescription = Roact.createElement(TextEntryFieldModule, {
 		enabled = p1.props.isOpen,
 		text = p1.state.abuseDescription,
-		textChanged = function(p5)
-			-- upvalues: p1 (ref)
-			p1:setState({ abuseDescription = p5 })
+		textChanged = function(AbuseDescription) --[[ Line: 122 ]]
+			-- upvalues: p1 (copy)
+			p1:setState({ abuseDescription = AbuseDescription })
 		end,
 		maxTextLength = 160,
 		autoFocusOnEnabled = not p1.props.isGamepadLastInput,
 		PlaceholderText = p2.textboxPlaceHolder,
 		LayoutOrder = 5,
-		Size = p4,
-		[roact.Ref] = p1.reportTextEntryRef
+		Size = Size,
+		[Roact.Ref] = p1.reportTextEntryRef
 	})
 end
 
-function reportDialog.renderButtons(p1, _, p2, p3)
-	-- upvalues: list (ref), roact (ref), button (ref), buttonType (ref), fFlagIGMDialogButtonsUseUIBloxButtonModule (ref)
-	local charCount = utf8.len(utf8.nfcnormalize(p1.state.abuseDescription))
-	p3.ButtonContainer = roact.createElement("Frame", {
+function ReportDialog.renderButtons(p1, _, p2, p3) --[[ Line: 137 ]]
+	-- upvalues: list (copy), Roact (copy), Button (copy), ButtonType (copy), FFlagIGMDialogButtonsUseUIBloxButtonModule (copy)
+	local Length = utf8.len(utf8.nfcnormalize(p1.state.abuseDescription))
+	local IsTypeOfAbuseIndexAbove: boolean = p1.state.typeOfAbuseIndex > 0 or p1.props.userId == nil
+	p3.ButtonContainer = Roact.createElement("Frame", {
 		BackgroundTransparency = 1,
 		LayoutOrder = 6,
 		Size = UDim2.new(1, 0, 0, 60)
 	}, {
-		Layout = roact.createElement("UIListLayout", {
+		Layout = Roact.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Horizontal,
 			HorizontalAlignment = Enum.HorizontalAlignment.Right,
 			Padding = UDim.new(0, 12),
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			VerticalAlignment = Enum.VerticalAlignment.Bottom
 		}),
-		CancelButton = roact.createElement(button, {
+		CancelButton = Roact.createElement(Button, {
 			layoutOrder = 1,
-			buttonType = buttonType.Secondary,
+			buttonType = ButtonType.Secondary,
 			size = UDim2.fromOffset(144, 36),
 			text = p2.cancel,
 			onActivated = p1.props.dispatchCloseReportDialog,
-			DO_NOT_USE_useUIBloxButton = if fFlagIGMDialogButtonsUseUIBloxButtonModule then true else nil
+			DO_NOT_USE_useUIBloxButton = if FFlagIGMDialogButtonsUseUIBloxButtonModule then true else nil
 		}),
-		ConfirmButton = roact.createElement(button, {
+		ConfirmButton = Roact.createElement(Button, {
 			layoutOrder = 2,
-			buttonType = buttonType.PrimarySystem,
+			buttonType = ButtonType.PrimarySystem,
 			size = UDim2.fromOffset(144, 36),
-			isDisabled = not ((charCount >= 0 and charCount <= 160) and (if p1.state.typeOfAbuseIndex <= 0 then p1.props.userId == nil else true)),
+			isDisabled = not (Length >= 0 and Length <= 160 and IsTypeOfAbuseIndexAbove),
 			text = p2.report,
-			onActivated = function()
-				-- upvalues: p1 (ref), list (copy)
-				p1.props.dispatchSendReport(if p1.props.userId ~= nil then list[p1.state.typeOfAbuseIndex] else "Inappropriate Content", p1.state.abuseDescription, p1.props.userId)
+			onActivated = function() --[[ Line: 142 ]]
+				-- upvalues: p1 (copy), list (upval)
+				p1.props.dispatchSendReport(if p1.props.userId == nil then "Inappropriate Content" else list[p1.state.typeOfAbuseIndex], p1.state.abuseDescription, p1.props.userId)
 				p1.props.dispatchCloseReportDialog()
 			end,
-			DO_NOT_USE_useUIBloxButton = if fFlagIGMDialogButtonsUseUIBloxButtonModule then true else nil
+			DO_NOT_USE_useUIBloxButton = if FFlagIGMDialogButtonsUseUIBloxButtonModule then true else nil
 		})
 	})
 end
 
-function reportDialog.renderReportPlayer(p1, p2, p3, p4)
-	-- upvalues: roact (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), image (ref), assetsModule (ref), imageSetLabel (ref), cryo (ref), themedTextLabelModule (ref), dropDownSelectionModule (ref), list_1 (ref)
+function ReportDialog.renderReportPlayer(p1, p2, p3, p4) --[[ Line: 183 ]]
+	-- upvalues: Roact (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), Image (copy), AssetsModule (copy), ImageSetLabel (copy), Cryo (copy), ThemedTextLabelModule (copy), DropDownSelectionModule (copy), Selections (copy)
 	p1:renderReportTitle(p2, p4, p3.reportPlayerTitle)
-	local t = {
+	local Frame = {
 		AnchorPoint = Vector2.new(0, 0.5),
 		Position = UDim2.new(0.5, -140, 0.5, 0),
 		Size = UDim2.new(0, 44, 0, 44)
 	}
-	local userId = p1.props.userId
-	p4.ReportPlayerTextContainer = roact.createElement("Frame", {
+	local UserId: number = p1.props.userId
+	p4.ReportPlayerTextContainer = Roact.createElement("Frame", {
 		BackgroundTransparency = 1,
 		LayoutOrder = 3,
 		Size = UDim2.new(1, 0, 0, 68)
 	}, {
-		PlayerCutout = if fFlagCoreUiMigrateUIBloxToFoundation then roact.createElement(image, {
+		PlayerCutout = if FFlagCoreUiMigrateUIBloxToFoundation then Roact.createElement(Image, {
 			ZIndex = 2,
-			AnchorPoint = t.AnchorPoint,
-			Position = t.Position,
-			Size = t.Size,
-			Image = assetsModule.Images.CircleCutout,
+			AnchorPoint = Frame.AnchorPoint,
+			Position = Frame.Position,
+			Size = Frame.Size,
+			Image = AssetsModule.Images.CircleCutout,
 			imageStyle = {
 				Transparency = 0,
 				Color3 = p2.Theme.BackgroundUIDefault.Color
 			}
-		}) else roact.createElement(imageSetLabel, cryo.Dictionary.join(t, {
+		}) else Roact.createElement(ImageSetLabel, Cryo.Dictionary.join(Frame, {
 			BackgroundTransparency = 1,
 			ZIndex = 2,
-			Image = assetsModule.Images.CircleCutout,
+			Image = AssetsModule.Images.CircleCutout,
 			ImageColor3 = p2.Theme.BackgroundUIDefault.Color
 		})),
-		PlayerIcon = if fFlagCoreUiMigrateUIBloxToFoundation then roact.createElement(image, {
-			AnchorPoint = t.AnchorPoint,
-			Position = t.Position,
-			Size = t.Size,
-			Image = if userId > 0 then "rbxthumb://type=AvatarHeadShot&id=" .. userId .. "&w=48&h=48" else ""
-		}) else roact.createElement(imageSetLabel, cryo.Dictionary.join(t, {
+		PlayerIcon = if FFlagCoreUiMigrateUIBloxToFoundation then Roact.createElement(Image, {
+			AnchorPoint = Frame.AnchorPoint,
+			Position = Frame.Position,
+			Size = Frame.Size,
+			Image = UserId > 0 and "rbxthumb://type=AvatarHeadShot&id=" .. UserId .. "&w=48&h=48" or ""
+		}) else Roact.createElement(ImageSetLabel, Cryo.Dictionary.join(Frame, {
 			BackgroundTransparency = 1,
-			Image = if userId > 0 then "rbxthumb://type=AvatarHeadShot&id=" .. userId .. "&w=48&h=48" else ""
+			Image = UserId > 0 and "rbxthumb://type=AvatarHeadShot&id=" .. UserId .. "&w=48&h=48" or ""
 		})),
-		PlayerBackground = roact.createElement("Frame", cryo.Dictionary.join(t, {
+		PlayerBackground = Roact.createElement("Frame", Cryo.Dictionary.join(Frame, {
 			BackgroundTransparency = 0,
 			BorderSizePixel = 0,
 			ZIndex = 0,
 			BackgroundColor3 = p2.Theme.UIDefault.Color
 		})),
-		PlayerName = roact.createElement(themedTextLabelModule, {
+		PlayerName = Roact.createElement(ThemedTextLabelModule, {
 			fontKey = "Body",
 			themeKey = "TextEmphasis",
 			AnchorPoint = Vector2.new(0, 0.5),
@@ -191,24 +192,24 @@ function reportDialog.renderReportPlayer(p1, p2, p3, p4)
 			TextXAlignment = Enum.TextXAlignment.Left
 		})
 	})
-	p4.AbuseTypeDropDown = roact.createElement("Frame", {
+	p4.AbuseTypeDropDown = Roact.createElement("Frame", {
 		BackgroundTransparency = 1,
 		LayoutOrder = 4,
 		Size = UDim2.new(1, 0, 0, 68)
 	}, {
-		DropDown = roact.createElement(dropDownSelectionModule, {
+		DropDown = Roact.createElement(DropDownSelectionModule, {
 			localize = true,
 			enabled = true,
 			selectionParentName = "abuseTypeDropDown",
 			Size = UDim2.new(1, 0, 0, 44),
 			placeHolderText = p3.selectTypeOfAbuse,
-			selections = list_1,
+			selections = Selections,
 			selectedIndex = p1.state.typeOfAbuseIndex,
 			canOpen = p1.props.canCaptureFocus,
 			canCaptureFocus = p1.props.isGamepadLastInput,
-			selectionChanged = function(p5)
-				-- upvalues: p1 (ref)
-				p1:setState({ typeOfAbuseIndex = p5 })
+			selectionChanged = function(TypeOfAbuseIndex) --[[ Line: 269 ]]
+				-- upvalues: p1 (copy)
+				p1:setState({ typeOfAbuseIndex = TypeOfAbuseIndex })
 			end,
 			ButtonRef = p1.reportDropDownRef
 		})
@@ -217,28 +218,28 @@ function reportDialog.renderReportPlayer(p1, p2, p3, p4)
 	p1:renderButtons(p2, p3, p4)
 end
 
-function reportDialog.renderReportGame(p1, p2, p3, p4)
-	-- upvalues: assetsModule (ref), roact (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), image (ref), imageSetLabel (ref), themedTextLabelModule (ref)
-	p1:renderReportTitle(p2, p4, "Report " .. p17.props.placeName)
-	local var1 = if game.GameId > 0 then "rbxthumb://type=GameIcon&id=" .. game.GameId .. "&w=150&h=150" else assetsModule.Images.PlaceholderGameIcon
-	p4.ReportGameTextContainer = roact.createElement("Frame", {
+function ReportDialog.renderReportGame(p1, p2, p3, p4) --[[ Line: 282 ]]
+	-- upvalues: AssetsModule (copy), Roact (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), Image (copy), ImageSetLabel (copy), ThemedTextLabelModule (copy)
+	p1:renderReportTitle(p2, p4, "Report " .. p1.props.placeName)
+	local Text = if game.GameId > 0 then "rbxthumb://type=GameIcon&id=" .. game.GameId .. "&w=150&h=150" else AssetsModule.Images.PlaceholderGameIcon
+	p4.ReportGameTextContainer = Roact.createElement("Frame", {
 		BackgroundTransparency = 1,
 		LayoutOrder = 3,
 		Size = UDim2.new(1, 0, 0, 126)
 	}, {
-		GameIcon = if fFlagCoreUiMigrateUIBloxToFoundation then roact.createElement(image, {
+		GameIcon = if FFlagCoreUiMigrateUIBloxToFoundation then Roact.createElement(Image, {
 			AnchorPoint = Vector2.new(0, 0.5),
 			Position = UDim2.new(0, 17, 0.5, 0),
 			Size = UDim2.new(0, 64, 0, 64),
-			Image = var1
-		}) else roact.createElement(imageSetLabel, {
+			Image = Text
+		}) else Roact.createElement(ImageSetLabel, {
 			BackgroundTransparency = 1,
 			AnchorPoint = Vector2.new(0, 0.5),
 			Position = UDim2.new(0, 17, 0.5, 0),
 			Size = UDim2.new(0, 64, 0, 64),
-			Image = var1
+			Image = Text
 		}),
-		GameName = roact.createElement(themedTextLabelModule, {
+		GameName = Roact.createElement(ThemedTextLabelModule, {
 			fontKey = "Body",
 			themeKey = "TextEmphasis",
 			TextWrapped = true,
@@ -253,9 +254,9 @@ function reportDialog.renderReportGame(p1, p2, p3, p4)
 	p1:renderButtons(p2, p3, p4)
 end
 
-function reportDialog.render(p1)
-	-- upvalues: withFoundationOrUIBloxStyle (ref), withLocalizationModule (ref), roact (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), image (ref), assetsModule (ref), imageSetLabel (ref), getFFlagIGMGamepadSelectionHistoryModule (ref), focusHandlerModule (ref), guiService (ref)
-	return withFoundationOrUIBloxStyle(function(p2)
+function ReportDialog.render(p1) --[[ Line: 327 ]]
+	-- upvalues: WithFoundationOrUIBloxStyleFunction (copy), WithLocalizationModule (copy), Roact (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), Image (copy), AssetsModule (copy), ImageSetLabel (copy), GetFFlagIGMGamepadSelectionHistoryModule (copy), FocusHandlerModule (copy), GuiService (copy)
+	return WithFoundationOrUIBloxStyleFunction(function(p2) --[[ Line: 328 ]]
 		return {
 			Theme = {
 				Overlay = {
@@ -276,9 +277,9 @@ function reportDialog.render(p1)
 				}
 			}
 		}
-	end, function(p2)
-		-- upvalues: withLocalizationModule (copy), p1 (ref), roact (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), image (copy), assetsModule (copy), imageSetLabel (copy), getFFlagIGMGamepadSelectionHistoryModule (copy), focusHandlerModule (copy), guiService (copy)
-		return withLocalizationModule({
+	end, function(p2) --[[ Line: 337 ]]
+		-- upvalues: WithLocalizationModule (upval), p1 (copy), Roact (upval), FFlagCoreUiMigrateUIBloxToFoundation (upval), Image (upval), AssetsModule (upval), ImageSetLabel (upval), GetFFlagIGMGamepadSelectionHistoryModule (upval), FocusHandlerModule (upval), GuiService (upval)
+		return WithLocalizationModule({
 			reportPlayerTitle = "CoreScripts.InGameMenu.Report.ReportPlayerTitle",
 			selectTypeOfAbuse = "CoreScripts.InGameMenu.Report.SelectAbuseType",
 			cancel = "CoreScripts.InGameMenu.Cancel",
@@ -292,15 +293,15 @@ function reportDialog.render(p1)
 				"CoreScripts.InGameMenu.Report.ReportGameTitle",
 				RBX_NAME = p1.props.placeName
 			}
-		})(function(p3)
-			-- upvalues: roact (copy), p1 (copy), p2 (ref), fFlagCoreUiMigrateUIBloxToFoundation (copy), image (copy), assetsModule (copy), imageSetLabel (copy), getFFlagIGMGamepadSelectionHistoryModule (copy), focusHandlerModule (copy), guiService (copy)
-			local t = {
-				Padding = roact.createElement("UIPadding", {
+		})(function(p3) --[[ Line: 349 ]]
+			-- upvalues: Roact (upval), p1 (upval), p2 (copy), FFlagCoreUiMigrateUIBloxToFoundation (upval), Image (upval), AssetsModule (upval), ImageSetLabel (upval), GetFFlagIGMGamepadSelectionHistoryModule (upval), FocusHandlerModule (upval), GuiService (upval)
+			local config = {
+				Padding = Roact.createElement("UIPadding", {
 					PaddingBottom = UDim.new(0, 24),
 					PaddingLeft = UDim.new(0, 24),
 					PaddingRight = UDim.new(0, 24)
 				}),
-				Layout = roact.createElement("UIListLayout", {
+				Layout = Roact.createElement("UIListLayout", {
 					FillDirection = Enum.FillDirection.Vertical,
 					HorizontalAlignment = Enum.HorizontalAlignment.Center,
 					SortOrder = Enum.SortOrder.LayoutOrder
@@ -308,18 +309,18 @@ function reportDialog.render(p1)
 			}
 			
 			if p1.props.userId == nil then
-				p1:renderReportGame(p2, p3, t)
+				p1:renderReportGame(p2, p3, config)
 			else
-				p1:renderReportPlayer(p2, p3, t)
+				p1:renderReportPlayer(p2, p3, config)
 			end
-			return roact.createElement("Frame", {
+			return Roact.createElement("Frame", {
 				Size = UDim2.new(1, 0, 1, 0),
 				BackgroundTransparency = 1,
 				ZIndex = 8,
 				Visible = p1.props.isOpen,
-				[roact.Ref] = p1.selectionGroupRef
+				[Roact.Ref] = p1.selectionGroupRef
 			}, {
-				Overlay = roact.createElement("TextButton", {
+				Overlay = Roact.createElement("TextButton", {
 					AutoButtonColor = false,
 					BorderSizePixel = 0,
 					Text = "",
@@ -328,9 +329,9 @@ function reportDialog.render(p1)
 					BackgroundTransparency = p2.Theme.Overlay.Transparency,
 					Size = UDim2.new(1, 0, 1, 0)
 				}),
-				DialogMainFrame = if fFlagCoreUiMigrateUIBloxToFoundation then roact.createElement(image, {
+				DialogMainFrame = if FFlagCoreUiMigrateUIBloxToFoundation then Roact.createElement(Image, {
 					AnchorPoint = Vector2.new(0.5, 0.5),
-					Image = assetsModule.Images.RoundedRectImageKey,
+					Image = AssetsModule.Images.RoundedRectImageKey,
 					imageStyle = {
 						Color3 = p2.Theme.BackgroundUIDefault.Color,
 						Transparency = p2.Theme.BackgroundUIDefault.Transparency
@@ -338,106 +339,108 @@ function reportDialog.render(p1)
 					Position = UDim2.new(0.5, 0, 0.5, 0),
 					Size = UDim2.new(0, 600, 0, 450),
 					slice = { center = Rect.new(8, 8, 9, 9) }
-				}, t) else roact.createElement(imageSetLabel, {
+				}, config) else Roact.createElement(ImageSetLabel, {
 					BackgroundTransparency = 1,
 					AnchorPoint = Vector2.new(0.5, 0.5),
-					Image = assetsModule.Images.RoundedRect.Image,
+					Image = AssetsModule.Images.RoundedRect.Image,
 					ImageColor3 = p2.Theme.BackgroundUIDefault.Color,
 					ImageTransparency = p2.Theme.BackgroundUIDefault.Transparency,
 					Position = UDim2.new(0.5, 0, 0.5, 0),
-					ScaleType = assetsModule.Images.RoundedRect.ScaleType,
+					ScaleType = AssetsModule.Images.RoundedRect.ScaleType,
 					Size = UDim2.new(0, 600, 0, 450),
-					SliceCenter = assetsModule.Images.RoundedRect.SliceCenter
-				}, t),
-				FocusHandler = getFFlagIGMGamepadSelectionHistoryModule() and (roact.createElement(focusHandlerModule, {
+					SliceCenter = AssetsModule.Images.RoundedRect.SliceCenter
+				}, config),
+				FocusHandler = GetFFlagIGMGamepadSelectionHistoryModule() and Roact.createElement(FocusHandlerModule, {
 					isFocused = p1.props.canCaptureFocus and p1.props.isGamepadLastInput,
 					shouldForgetPreviousSelection = not p1.props.isOpen,
-					didFocus = function(p4)
-						-- upvalues: p1 (copy), guiService (copy)
-						guiService.SelectedCoreObject = p4 or (if p1.props.userId then p1.reportDropDownRef:getValue() else p1.reportTextEntryRef:getValue())
+					didFocus = function(p4) --[[ Line: 411 ]]
+						-- upvalues: p1 (upval), GuiService (upval)
+						local Value = if p1.props.userId then p1.reportDropDownRef:getValue() else p1.reportTextEntryRef:getValue()
+						GuiService.SelectedCoreObject = p4 or Value
 					end
-				}) or nil)
+				}) or nil
 			})
 		end)
 	end)
 end
 
-function reportDialog.bindActions(p1)
-	-- upvalues: contextActionService (ref)
-	contextActionService:BindCoreAction("InGameMenuReportModalClose", function(_, p2, _)
-		-- upvalues: p1 (ref)
-		if p2 == Enum.UserInputState.Begin then
+function ReportDialog.bindActions(p1) --[[ Line: 426 ]]
+	-- upvalues: ContextActionService (copy)
+	ContextActionService:BindCoreAction("InGameMenuReportModalClose", function(_, UserInputState, _) --[[ Line: 427 | Named "closeReportFunc" ]]
+		-- upvalues: p1 (copy)
+		if UserInputState == Enum.UserInputState.Begin then
 			p1.props.dispatchCloseReportDialog()
 		end
 	end, false, Enum.KeyCode.Escape)
 end
 
-function reportDialog.unbindActions(_)
-	-- upvalues: contextActionService (ref)
-	contextActionService:UnbindCoreAction("InGameMenuReportModalClose")
+function ReportDialog:unbindActions() --[[ Line: 436 ]]
+	-- upvalues: ContextActionService (copy)
+	ContextActionService:UnbindCoreAction("InGameMenuReportModalClose")
 end
 
-function reportDialog.didMount(p1)
-	-- upvalues: guiService (ref)
-	guiService:RemoveSelectionGroup("ReportDialogGroup")
-	guiService:AddSelectionParent("ReportDialogGroup", p1.selectionGroupRef:getValue())
+function ReportDialog.didMount(p1) --[[ Line: 440 ]]
+	-- upvalues: GuiService (copy)
+	GuiService:RemoveSelectionGroup("ReportDialogGroup")
+	GuiService:AddSelectionParent("ReportDialogGroup", p1.selectionGroupRef:getValue())
 	
 	if p1.props.isOpen then
 		p1:bindActions()
 	end
 end
 
-function reportDialog.didUpdate(p1, p2)
-	-- upvalues: getFFlagIGMGamepadSelectionHistoryModule (ref), guiService (ref)
+function ReportDialog.didUpdate(p1, p2) --[[ Line: 449 ]]
+	-- upvalues: GetFFlagIGMGamepadSelectionHistoryModule (copy), GuiService (copy)
 	if p2.isOpen and not p1.props.isOpen then
 		p1:setState({ typeOfAbuseIndex = 0, abuseDescription = "" })
 	end
-	if not getFFlagIGMGamepadSelectionHistoryModule() and (not p2.canCaptureFocus or not p2.isGamepadLastInput) and (p1.props.canCaptureFocus and p1.props.isGamepadLastInput) then
-		guiService.SelectedCoreObject = if p1.props.userId then p1.reportDropDownRef:getValue() else p1.reportTextEntryRef:getValue()
+	if not GetFFlagIGMGamepadSelectionHistoryModule() and (not p2.canCaptureFocus or not p2.isGamepadLastInput) and (p1.props.canCaptureFocus and p1.props.isGamepadLastInput) then
+		GuiService.SelectedCoreObject = if p1.props.userId then p1.reportDropDownRef:getValue() else p1.reportTextEntryRef:getValue()
 	end
 	if p1.props.isOpen then
 		p1:bindActions()
 		
 		return
+	else
+		p1:unbindActions()
 	end
+end
+
+function ReportDialog.willUnmount(p1) --[[ Line: 481 ]]
 	p1:unbindActions()
 end
 
-function reportDialog.willUnmount(p1)
-	p1:unbindActions()
-end
-
-return roactRodux.UNSTABLE_connect2(function(p1, _)
-	-- upvalues: constantsModule (ref)
+return RoactRodux.UNSTABLE_connect2(function(p1, _) --[[ Line: 485 ]]
+	-- upvalues: ConstantsModule (copy)
 	return {
 		isOpen = p1.report.dialogOpen,
 		userId = p1.report.userId,
 		userName = p1.report.userName,
 		placeName = p1.gameInfo.name,
 		canCaptureFocus = p1.report.dialogOpen and not p1.respawn.dialogOpen,
-		isGamepadLastInput = p1.displayOptions.inputType == constantsModule.InputType.Gamepad
+		isGamepadLastInput = p1.displayOptions.inputType == ConstantsModule.InputType.Gamepad
 	}
-end, function(p1)
-	-- upvalues: closeReportDialogModule (ref), sendReportModule (ref), sendAnalyticsModule (ref), constantsModule (ref)
+end, function(Callback) --[[ Line: 494 ]]
+	-- upvalues: CloseReportDialogModule (copy), SendReportModule (copy), SendAnalyticsModule (copy), ConstantsModule (copy)
 	return {
-		dispatchCloseReportDialog = function()
-			-- upvalues: p1 (ref), closeReportDialogModule (copy)
-			p1(closeReportDialogModule())
+		dispatchCloseReportDialog = function() --[[ Line: 496 ]]
+			-- upvalues: Callback (copy), CloseReportDialogModule (upval)
+			Callback(CloseReportDialogModule())
 		end,
-		dispatchSendReport = function(p2, p3, p4)
-			-- upvalues: p1 (ref), sendReportModule (copy), sendAnalyticsModule (copy), constantsModule (copy)
-			p1(sendReportModule(p2, p3, p4))
-			local t = {}
+		dispatchSendReport = function(p1, p2, p3) --[[ Line: 499 ]]
+			-- upvalues: Callback (copy), SendReportModule (upval), SendAnalyticsModule (upval), ConstantsModule (upval)
+			Callback(SendReportModule(p1, p2, p3))
+			local List = {}
 			
-			if p2 == "Inappropriate Content" then
-				table.insert(t, "report_type=game")
-				table.insert(t, "reported_entity_id=" .. tostring(game.GameId))
+			if p1 == "Inappropriate Content" then
+				table.insert(List, "report_type=game")
+				table.insert(List, "reported_entity_id=" .. tostring(game.GameId))
 			else
-				table.insert(t, "report_type=user")
-				table.insert(t, "reported_entity_id=" .. tostring(p4))
+				table.insert(List, "report_type=user")
+				table.insert(List, "reported_entity_id=" .. tostring(p3))
 			end
-			table.insert(t, "report_source=ingame")
-			sendAnalyticsModule(constantsModule.AnalyticsReportSubmittedName, table.concat(t, "&"), {})
+			table.insert(List, "report_source=ingame")
+			SendAnalyticsModule(ConstantsModule.AnalyticsReportSubmittedName, table.concat(List, "&"), {})
 		end
 	}
-end)(reportDialog)
+end)(ReportDialog)

@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Index["ultimate-list"]["ultimate-list"])
+﻿return (require(script.Parent._Index["ultimate-list"]["ultimate-list"]))

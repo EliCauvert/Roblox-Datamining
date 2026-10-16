@@ -1,20 +1,23 @@
-﻿local accountUpgrade = script:FindFirstAncestor("AccountUpgrade")
-local _ = require(accountUpgrade.AccountUpgradeField)
-local _ = require(accountUpgrade.FlowSpec)
+﻿local AccountUpgrade = script:FindFirstAncestor("AccountUpgrade")
+local _ = require(AccountUpgrade.AccountUpgradeField)
+local _ = require(AccountUpgrade.FlowSpec)
 
-return function(p1)
+return function(p1) --[[ Line: 23 | Named "resolveFieldStates" ]]
 	local t = {}
 	
-	for i, v in ipairs(p1.spec.optionalFields) do
-		t[v] = { isUnlocked = true, blockingField = nil }
+	for _, optionalField in ipairs(p1.spec.optionalFields) do
+		t[optionalField] = { isUnlocked = true, blockingField = nil }
 	end
-	local var1 = nil
+	local BlockingField = nil
 	
-	for i_1, v_1 in ipairs(p1.spec.requiredFields) do
-		t[v_1] = { isUnlocked = var1 == nil, blockingField = var1 }
+	for _, requiredField in ipairs(p1.spec.requiredFields) do
+		t[requiredField] = {
+			isUnlocked = BlockingField == nil,
+			blockingField = BlockingField
+		}
 		
-		if not p1.isSatisfied[v_1] and var1 == nil then
-			var1 = v_1
+		if not p1.isSatisfied[requiredField] and BlockingField == nil then
+			BlockingField = requiredField
 		end
 	end
 	return t

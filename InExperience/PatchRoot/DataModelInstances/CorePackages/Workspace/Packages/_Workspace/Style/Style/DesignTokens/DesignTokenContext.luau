@@ -1,4 +1,4 @@
-﻿local parent = script:FindFirstAncestor("Style").Parent
-local _ = require(parent.UIBlox)
+﻿local Parent = script:FindFirstAncestor("Style").Parent
+local _ = require(Parent.UIBlox)
 
-return require(parent.React).createContext(nil)
+return require(Parent.React).createContext(nil)

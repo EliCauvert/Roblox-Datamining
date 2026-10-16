@@ -1,120 +1,120 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local localizationModule = require(parent.Localization)
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
 local _ = require(script.Parent.ChatCaptureGalleryView)
-local fFlagBuildExperienceChatCaptureGalleryNewestFirstModule = require(buildExperience.Flags.FFlagBuildExperienceChatCaptureGalleryNewestFirst)
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local useLocalization = localizationModule.Hooks.useLocalization
+local FFlagBuildExperienceChatCaptureGalleryNewestFirstModule = require(BuildExperience.Flags.FFlagBuildExperienceChatCaptureGalleryNewestFirst)
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-local function cloneCaptures(p1)
-	return table.clone(p1)
+local function cloneCaptures(Tbl) --[[ Line: 25 ]]
+	return table.clone(Tbl)
 end
 
-local function sortCapturesOldestFirst(p1)
-	local t = {}
+local function sortCapturesOldestFirst(Captures) --[[ Line: 29 ]]
+	local List = {}
 	
-	for i, v in p1 do
-		local captureTime = v.CaptureTime
-		table.insert(t, {
-			capture = v,
-			index = i,
-			timestamp = if typeof(captureTime) == "DateTime" then captureTime.UnixTimestampMillis else 0
+	for Index, capture in Captures do
+		local CaptureTime = capture.CaptureTime
+		table.insert(List, {
+			capture = capture,
+			index = Index,
+			timestamp = if typeof(CaptureTime) == "DateTime" then CaptureTime.UnixTimestampMillis else 0
 		})
 	end
-	table.sort(t, function(p2, p3)
-		return if p2.timestamp == p3.timestamp then p2.index < p3.index else p2.timestamp < p3.timestamp
+	table.sort(List, function(A, B): boolean --[[ Line: 39 ]]
+		return if A.timestamp == B.timestamp then A.index < B.index else A.timestamp < B.timestamp
 	end)
-	local t_1 = {}
+	local Captures1 = {}
 	
-	for i_1, v_1 in t do
-		table.insert(t_1, v_1.capture)
+	for _, value in List do
+		table.insert(Captures1, value.capture)
 	end
-	return t_1
+	return Captures1
 end
 
-return function(p2)
-	-- upvalues: signalsReactModule (ref), reactModule (ref), fFlagBuildExperienceChatCaptureGalleryNewestFirstModule (ref), sortCapturesOldestFirst (ref), cloneCaptures (ref), useLocalization (ref), localizationStringsModule (ref)
-	local var1 = signalsReactModule.useSignalState(p2.captureSource.getCaptures)
-	local var2 = signalsReactModule.useSignalState(p2.captureSource.getIsFinished)
-	local var3 = reactModule.useMemo(function()
-		-- upvalues: var1 (ref), fFlagBuildExperienceChatCaptureGalleryNewestFirstModule (copy), sortCapturesOldestFirst (copy)
-		local t = {}
+return function(p1) --[[ Line: 53 | Named "useChatCaptureGalleryViewModel" ]]
+	-- upvalues: SignalsReactModule (copy), ReactModule (copy), FFlagBuildExperienceChatCaptureGalleryNewestFirstModule (copy), sortCapturesOldestFirst (copy), cloneCaptures (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(p1.captureSource.getCaptures)
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(p1.captureSource.getIsFinished)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 56 ]]
+		-- upvalues: UseSignalStateResult (copy), FFlagBuildExperienceChatCaptureGalleryNewestFirstModule (upval), sortCapturesOldestFirst (upval)
+		local List = {}
 		
-		for i, v in var1 do
-			if v.CaptureType == Enum.CaptureType.Screenshot then
-				table.insert(t, v)
+		for _, value in UseSignalStateResult do
+			if value.CaptureType == Enum.CaptureType.Screenshot then
+				table.insert(List, value)
 			end
 		end
-		return if fFlagBuildExperienceChatCaptureGalleryNewestFirstModule then t else sortCapturesOldestFirst(t)
-	end, { var1 })
-	local var4, var5 = reactModule.useState(function()
-		-- upvalues: cloneCaptures (copy), p2 (ref)
-		return cloneCaptures(p2.initialCaptures)
+		return if FFlagBuildExperienceChatCaptureGalleryNewestFirstModule then List else sortCapturesOldestFirst(List)
+	end, { UseSignalStateResult })
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function() --[[ Line: 67 ]]
+		-- upvalues: cloneCaptures (upval), p1 (copy)
+		return cloneCaptures(p1.initialCaptures)
 	end)
-	local var6 = reactModule.useRef(p2.isOpen)
-	local var7 = useLocalization({
-		add = localizationStringsModule.CHAT_CAPTURE_GALLERY_ADD,
-		empty = localizationStringsModule.CHAT_CAPTURE_GALLERY_EMPTY,
+	local UseRefResult = ReactModule.useRef(p1.isOpen)
+	local UseLocalizationResult = UseLocalizationFunction({
+		add = LocalizationStringsModule.CHAT_CAPTURE_GALLERY_ADD,
+		empty = LocalizationStringsModule.CHAT_CAPTURE_GALLERY_EMPTY,
 		selectionCount = {
-			localizationStringsModule.CHAT_CAPTURE_GALLERY_SELECTION_COUNT,
-			SELECTED_COUNT = #var4,
-			MAX_SELECTIONS = p2.maxSelections
+			LocalizationStringsModule.CHAT_CAPTURE_GALLERY_SELECTION_COUNT,
+			SELECTED_COUNT = #UseStateResult,
+			MAX_SELECTIONS = p1.maxSelections
 		},
-		showMore = localizationStringsModule.CHAT_CAPTURE_GALLERY_SHOW_MORE,
-		title = localizationStringsModule.CHAT_CAPTURE_GALLERY_TITLE
+		showMore = LocalizationStringsModule.CHAT_CAPTURE_GALLERY_SHOW_MORE,
+		title = LocalizationStringsModule.CHAT_CAPTURE_GALLERY_TITLE
 	})
-	reactModule.useEffect(function()
-		-- upvalues: p2 (ref), var6 (ref), var5 (ref), cloneCaptures (copy)
-		if p2.isOpen and not var6.current then
-			var5(cloneCaptures(p2.initialCaptures))
+	ReactModule.useEffect(function() --[[ Line: 83 ]]
+		-- upvalues: p1 (copy), UseRefResult (copy), UseStateResult2 (copy), cloneCaptures (upval)
+		if p1.isOpen and not UseRefResult.current then
+			UseStateResult2(cloneCaptures(p1.initialCaptures))
 		end
-		var6.current = p2.isOpen
-	end, { p2.isOpen, p2.initialCaptures })
+		UseRefResult.current = p1.isOpen
+	end, { p1.isOpen, p1.initialCaptures })
 	
 	return {
-		addText = var7.add,
-		captures = var3,
-		emptyText = var7.empty,
-		isFinished = var2,
-		isLoading = #var1 == 0 and not var2,
-		isOpen = p2.isOpen,
-		maxSelections = p2.maxSelections,
-		selectedCount = #var4,
-		selectionCountText = var7.selectionCount,
-		showMoreText = var7.showMore,
-		titleText = var7.title,
-		isSelected = reactModule.useCallback(function(p3)
-			-- upvalues: var4 (ref)
-			return table.find(var4, p3) ~= nil
-		end, { var4 }),
-		onCaptureToggled = reactModule.useCallback(function(p3)
-			-- upvalues: var5 (ref), p2 (ref)
-			var5(function(p4)
-				-- upvalues: p3 (ref), p2 (copy)
-				local index = table.find(p4, p3)
+		addText = UseLocalizationResult.add,
+		captures = UseMemoResult,
+		emptyText = UseLocalizationResult.empty,
+		isFinished = UseSignalStateResult1,
+		isLoading = #UseSignalStateResult == 0 and not UseSignalStateResult1,
+		isOpen = p1.isOpen,
+		maxSelections = p1.maxSelections,
+		selectedCount = #UseStateResult,
+		selectionCountText = UseLocalizationResult.selectionCount,
+		showMoreText = UseLocalizationResult.showMore,
+		titleText = UseLocalizationResult.title,
+		isSelected = ReactModule.useCallback(function(Value): boolean --[[ Line: 90 ]]
+			-- upvalues: UseStateResult (copy)
+			return table.find(UseStateResult, Value) ~= nil
+		end, { UseStateResult }),
+		onCaptureToggled = ReactModule.useCallback(function(Value) --[[ Line: 94 ]]
+			-- upvalues: UseStateResult2 (copy), p1 (copy)
+			UseStateResult2(function(List) --[[ Line: 95 ]]
+				-- upvalues: Value (copy), p1 (upval)
+				local FoundIndex: number? = table.find(List, Value)
 				
-				if index ~= nil then
-					local cloned = table.clone(p4)
-					table.remove(cloned, index)
+				if FoundIndex ~= nil then
+					local Copy = table.clone(List)
+					table.remove(Copy, FoundIndex)
 					
-					return cloned
-				elseif p2.maxSelections <= #p4 then
-					return p4
+					return Copy
+				elseif p1.maxSelections <= #List then
+					return List
+				else
+					local Copy = table.clone(List)
+					table.insert(Copy, Value)
+					
+					return Copy
 				end
-				local cloned = table.clone(p4)
-				table.insert(cloned, p3)
-				
-				return cloned
 			end)
-		end, { p2.maxSelections }),
-		onClose = p2.onClose,
-		onConfirm = reactModule.useCallback(function()
-			-- upvalues: p2 (ref), var4 (ref)
-			p2.onConfirm(var4)
-		end, { p2.onConfirm, var4 }),
-		onShowMore = p2.captureSource.fetchMore,
-		shouldProgressivelyLoad = p2.shouldProgressivelyLoad
+		end, { p1.maxSelections }),
+		onClose = p1.onClose,
+		onConfirm = ReactModule.useCallback(function() --[[ Line: 111 ]]
+			-- upvalues: p1 (copy), UseStateResult (copy)
+			p1.onConfirm(UseStateResult)
+		end, { p1.onConfirm, UseStateResult }),
+		onShowMore = p1.captureSource.fetchMore,
+		shouldProgressivelyLoad = p1.shouldProgressivelyLoad
 	}
 end

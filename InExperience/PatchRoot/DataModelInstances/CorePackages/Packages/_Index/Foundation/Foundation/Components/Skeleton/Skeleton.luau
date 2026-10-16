@@ -1,62 +1,62 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local reactModule = require(parent.React)
-local useClock = require(parent.ReactUtils).useClock
-local components = foundation.Components
-local flagsModule = require(foundation.Utility.Flags)
-local _ = require(components.Types)
-local viewModule = require(components.View)
-local radiusModule = require(foundation.Enums.Radius)
-local usePreferencesModule = require(foundation.Providers.Preferences.usePreferences)
-local usePulseBindingModule = require(foundation.Utility.usePulseBinding)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local lerpModule = require(foundation.Utility.lerp)
-local t = {
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local ReactModule = require(Parent.React)
+local UseClockFunction = require(Parent.ReactUtils).useClock
+local Components = Foundation.Components
+local FlagsModule = require(Foundation.Utility.Flags)
+local _ = require(Components.Types)
+local ViewModule = require(Components.View)
+local RadiusModule = require(Foundation.Enums.Radius)
+local UsePreferencesModule = require(Foundation.Providers.Preferences.usePreferences)
+local UsePulseBindingModule = require(Foundation.Utility.usePulseBinding)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local LerpModule = require(Foundation.Utility.lerp)
+local config = {
 	testId = "--foundation-skeleton",
-	radius = radiusModule.None,
+	radius = RadiusModule.None,
 	Size = UDim2.fromScale(1, 1)
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), useClock (ref), usePulseBindingModule (ref), useTokensModule (ref), usePreferencesModule (ref), radiusModule (ref), flagsModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), lerpModule (ref)
-	local var1 = withDefaultsModule(p1, t)
-	local var2 = useClock()
-	local var3 = usePulseBindingModule(2)
-	local var4 = useTokensModule()
-	local var5 = usePreferencesModule()
-	local var6 = if flagsModule.FoundationSkeletonCommonShimmerToken then var4.Color.Common.Shimmer else var4.Color.Shift.Shift_300
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 40 | Named "Skeleton" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseClockFunction (copy), UsePulseBindingModule (copy), UseTokensModule (copy), UsePreferencesModule (copy), RadiusModule (copy), FlagsModule (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), LerpModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	local UseClockResult = UseClockFunction()
+	local UsePulseBindingModuleResult = UsePulseBindingModule(2)
+	local UseTokensModuleResult = UseTokensModule()
+	local UsePreferencesModuleResult = UsePreferencesModule()
+	local Shimmer = if FlagsModule.FoundationSkeletonCommonShimmerToken then UseTokensModuleResult.Color.Common.Shimmer else UseTokensModuleResult.Color.Shift.Shift_300
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var1, {
-		cornerRadius = if var1.radius ~= radiusModule.None then nil else UDim.new(0, var4.Radius[var1.radius]),
-		backgroundStyle = if var5.reducedMotion then var3:map(function(p3)
-			-- upvalues: flagsModule (copy), var6 (ref), var4 (ref), lerpModule (copy)
-			local var7 = if flagsModule.FoundationSkeletonCommonShimmerToken then var6.Transparency else var4.Color.Extended.White.White_10.Transparency
+	return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, {
+		cornerRadius = if WithDefaultsModuleResult.radius == RadiusModule.None then nil else UDim.new(0, UseTokensModuleResult.Radius[WithDefaultsModuleResult.radius]),
+		backgroundStyle = if UsePreferencesModuleResult.reducedMotion then UsePulseBindingModuleResult:map(function(p2) --[[ Line: 57 ]]
+			-- upvalues: FlagsModule (upval), Shimmer (copy), UseTokensModuleResult (copy), LerpModule (upval)
+			local Transparency = if FlagsModule.FoundationSkeletonCommonShimmerToken then Shimmer.Transparency else UseTokensModuleResult.Color.Extended.White.White_10.Transparency
 			
 			return {
-				Color3 = var6.Color3,
-				Transparency = lerpModule(var7, var7 - 0.1, p3)
+				Color3 = Shimmer.Color3,
+				Transparency = LerpModule(Transparency, Transparency - 0.1, p2)
 			}
-		end) else var4.Color.Extended.White.White_100,
-		Size = var1.Size,
-		ref = p2
+		end) else UseTokensModuleResult.Color.Extended.White.White_100,
+		Size = WithDefaultsModuleResult.Size,
+		ref = Ref
 	}), {
-		Gradient = if not var5.reducedMotion then reactModule.createElement("UIGradient", {
+		Gradient = if UsePreferencesModuleResult.reducedMotion then nil else ReactModule.createElement("UIGradient", {
 			Rotation = 15,
 			Color = ColorSequence.new({
-				ColorSequenceKeypoint.new(0, var6.Color3),
-				ColorSequenceKeypoint.new(0.5, var4.Color.Extended.White.White_30.Color3),
-				ColorSequenceKeypoint.new(1, var6.Color3)
+				ColorSequenceKeypoint.new(0, Shimmer.Color3),
+				ColorSequenceKeypoint.new(0.5, UseTokensModuleResult.Color.Extended.White.White_30.Color3),
+				ColorSequenceKeypoint.new(1, Shimmer.Color3)
 			}),
 			Transparency = NumberSequence.new({
-				NumberSequenceKeypoint.new(0, var6.Transparency),
-				NumberSequenceKeypoint.new(0.5, var4.Color.Extended.White.White_30.Transparency),
-				NumberSequenceKeypoint.new(1, var6.Transparency)
+				NumberSequenceKeypoint.new(0, Shimmer.Transparency),
+				NumberSequenceKeypoint.new(0.5, UseTokensModuleResult.Color.Extended.White.White_30.Transparency),
+				NumberSequenceKeypoint.new(1, Shimmer.Transparency)
 			}),
-			Offset = var2:map(function(p3)
-				return Vector2.new(p3 * 2 % 3 - 1.5, 0)
+			Offset = UseClockResult:map(function(p2: number): Vector2 --[[ Line: 84 ]]
+				return Vector2.new(p2 * 2 % 3 - 1.5, 0)
 			end)
-		}) else nil
+		})
 	})
 end))

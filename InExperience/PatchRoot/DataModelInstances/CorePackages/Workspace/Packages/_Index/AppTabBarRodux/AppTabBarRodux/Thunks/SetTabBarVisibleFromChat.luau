@@ -1,17 +1,17 @@
-﻿local appTabBarRodux = script:FindFirstAncestor("AppTabBarRodux")
-local argCheckModule = require(appTabBarRodux.Parent.ArgCheck)
-local setTabBarVisibleModule = require(appTabBarRodux.Actions.SetTabBarVisible)
+﻿local AppTabBarRodux = script:FindFirstAncestor("AppTabBarRodux")
+local ArgCheckModule = require(AppTabBarRodux.Parent.ArgCheck)
+local SetTabBarVisibleModule = require(AppTabBarRodux.Actions.SetTabBarVisible)
 
-return function(p1)
-	-- upvalues: argCheckModule (ref), setTabBarVisibleModule (ref)
-	argCheckModule.isType(p1, "boolean", "SetTabBarVisibleFromChat.isVisible")
+return function(TabBarVisible) --[[ Line: 7 ]]
+	-- upvalues: ArgCheckModule (copy), SetTabBarVisibleModule (copy)
+	ArgCheckModule.isType(TabBarVisible, "boolean", "SetTabBarVisibleFromChat.isVisible")
 	
-	return function(p2)
-		-- upvalues: p1 (ref), setTabBarVisibleModule (copy)
-		local state = p2:getState()
+	return function(p1) --[[ Line: 10 ]]
+		-- upvalues: TabBarVisible (copy), SetTabBarVisibleModule (upval)
+		local State = p1:getState()
 		
-		if not state.ChatAppReducer.ToggleChatPaused and state.TabBarVisible ~= p1 then
-			p2:dispatch(setTabBarVisibleModule(p1))
+		if not State.ChatAppReducer.ToggleChatPaused and State.TabBarVisible ~= TabBarVisible then
+			p1:dispatch(SetTabBarVisibleModule(TabBarVisible))
 		end
 	end
 end

@@ -1,19 +1,18 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local reactModule = require(moments.Parent.React)
-local getDeviceDisplayServiceModule = require(moments.Utils.getDeviceDisplayService)
-local isDisplayWakeLockSupportedModule = require(moments.Utils.isDisplayWakeLockSupported)
+﻿local Moments = script:FindFirstAncestor("Moments")
+local ReactModule = require(Moments.Parent.React)
+local GetDeviceDisplayServiceModule = require(Moments.Utils.getDeviceDisplayService)
+local IsDisplayWakeLockSupportedModule = require(Moments.Utils.isDisplayWakeLockSupported)
 
-return function(p1)
-	-- upvalues: reactModule (ref), isDisplayWakeLockSupportedModule (ref), getDeviceDisplayServiceModule (ref)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), isDisplayWakeLockSupportedModule (copy), getDeviceDisplayServiceModule (copy)
-		if p1 and isDisplayWakeLockSupportedModule() then
-			local var1 = getDeviceDisplayServiceModule():AcquireWakeLock("Moments.WatchFeed")
-			
-			return function()
-				-- upvalues: var1 (ref)
-				var1:Destroy()
-			end
+return function(p1) --[[ Line: 10 | Named "useDisplayWakeLock" ]]
+	-- upvalues: ReactModule (copy), IsDisplayWakeLockSupportedModule (copy), GetDeviceDisplayServiceModule (copy)
+	ReactModule.useEffect(function() --[[ Line: 11 ]]
+		-- upvalues: p1 (copy), IsDisplayWakeLockSupportedModule (upval), GetDeviceDisplayServiceModule (upval)
+		if not p1 or not IsDisplayWakeLockSupportedModule() then return end
+		local MomentsWatchFeed = GetDeviceDisplayServiceModule():AcquireWakeLock("Moments.WatchFeed")
+		
+		return function() --[[ Line: 18 ]]
+			-- upvalues: MomentsWatchFeed (copy)
+			MomentsWatchFeed:Destroy()
 		end
 	end, { p1 })
 end

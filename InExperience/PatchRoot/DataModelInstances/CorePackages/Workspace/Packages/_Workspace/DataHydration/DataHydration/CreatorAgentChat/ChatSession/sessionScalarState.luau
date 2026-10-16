@@ -1,51 +1,51 @@
-﻿local signalsModule = require(script:FindFirstAncestor("DataHydration").Parent.Signals)
+﻿local SignalsModule = require(script:FindFirstAncestor("DataHydration").Parent.Signals)
 
 return {
-	createSessionScalarState = function(p1)
-		-- upvalues: signalsModule (ref)
-		local var1, var2 = signalsModule.createSignal(p1)
-		local var3, var4 = signalsModule.createSignal(false)
-		local var5, var6 = signalsModule.createSignal(nil)
-		local var7, var8 = signalsModule.createSignal(false)
-		local var9, var10 = signalsModule.createSignal(false)
-		local var11, var12 = signalsModule.createSignal(0)
-		local var13, var14 = signalsModule.createSignal(nil)
+	createSessionScalarState = function(p1) --[[ Line: 27 ]]
+		-- upvalues: SignalsModule (copy)
+		local Signal, Signal2 = SignalsModule.createSignal(p1)
+		local Signal1, Signal2_1 = SignalsModule.createSignal(false)
+		local Signal3, Signal2_2 = SignalsModule.createSignal(nil)
+		local Signal4, Signal2_3 = SignalsModule.createSignal(false)
+		local Signal5, Signal2_4 = SignalsModule.createSignal(false)
+		local Signal6, Signal2_5 = SignalsModule.createSignal(0)
+		local Signal7, Signal2_6 = SignalsModule.createSignal(nil)
 		
 		return {
-			getCasSessionId = var1,
-			setCasSessionId = var2,
-			getHasLoadedHistory = var3,
-			setHasLoadedHistory = var4,
-			markHistoryLoaded = function()
-				-- upvalues: var4 (ref)
-				var4(true)
+			getCasSessionId = Signal,
+			setCasSessionId = Signal2,
+			getHasLoadedHistory = Signal1,
+			setHasLoadedHistory = Signal2_1,
+			markHistoryLoaded = function() --[[ Line: 62 ]]
+				-- upvalues: Signal2_1 (copy)
+				Signal2_1(true)
 			end,
-			getNextHistoryPageToken = var5,
-			setNextHistoryPageToken = var6,
-			getHistoryLoadInFlight = var7,
-			setHistoryLoadInFlight = var8,
-			getInitialized = var9,
-			setInitialized = var10,
-			getAssistantTurnSequence = var11,
-			incrementAssistantTurnSequence = function()
-				-- upvalues: var11 (ref), var12 (ref)
-				local var15 = var11(false) + 1
-				var12(var15)
+			getNextHistoryPageToken = Signal3,
+			setNextHistoryPageToken = Signal2_2,
+			getHistoryLoadInFlight = Signal4,
+			setHistoryLoadInFlight = Signal2_3,
+			getInitialized = Signal5,
+			setInitialized = Signal2_4,
+			getAssistantTurnSequence = Signal6,
+			incrementAssistantTurnSequence = function(): number --[[ Line: 51 ]]
+				-- upvalues: Signal6 (copy), Signal2_5 (copy)
+				local NewSignalResult = Signal6(false) + 1
+				Signal2_5(NewSignalResult)
 				
-				return var15
+				return NewSignalResult
 			end,
-			getLatestObservedHistorySequenceId = var13,
-			setLatestObservedHistorySequenceId = function(value)
-				-- upvalues: var14 (ref)
-				var14(value)
+			getLatestObservedHistorySequenceId = Signal7,
+			setLatestObservedHistorySequenceId = function(p2) --[[ Line: 37 ]]
+				-- upvalues: Signal2_6 (copy)
+				Signal2_6(p2)
 			end,
-			noteHistorySequenceId = function(p2)
-				-- upvalues: var13 (ref), var14 (ref)
+			noteHistorySequenceId = function(p2) --[[ Line: 41 ]]
+				-- upvalues: Signal7 (copy), Signal2_6 (copy)
 				if p2 == nil then return end
-				local var15 = var13(false)
+				local SignalResult = Signal7(false)
 				
-				if var15 == nil or var15 < p2 then
-					var14(p2)
+				if SignalResult == nil or SignalResult < p2 then
+					Signal2_6(p2)
 				end
 			end
 		}

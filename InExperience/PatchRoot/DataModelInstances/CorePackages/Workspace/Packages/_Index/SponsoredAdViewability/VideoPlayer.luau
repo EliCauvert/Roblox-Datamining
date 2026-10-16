@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.VideoPlayer.VideoPlayer)
+﻿return (require(script.Parent.Parent.Parent._Index.VideoPlayer.VideoPlayer))

@@ -1,25 +1,25 @@
-﻿local appPageShell = script:FindFirstAncestor("AppPageShell")
-local parent = appPageShell.Parent
-local appCommonLibModule = require(parent.AppCommonLib)
-local signalsModule = require(parent.Signals)
-local _ = require(appPageShell.createPageScrollStore)
+﻿local AppPageShell = script:FindFirstAncestor("AppPageShell")
+local Parent = AppPageShell.Parent
+local AppCommonLibModule = require(Parent.AppCommonLib)
+local SignalsModule = require(Parent.Signals)
+local _ = require(AppPageShell.createPageScrollStore)
 
-return function(p1, p2)
-	-- upvalues: appCommonLibModule (ref), signalsModule (ref)
-	local var1 = appCommonLibModule.Signal.new()
-	local var2 = signalsModule.createEffect(function(p3)
-		-- upvalues: p1 (ref), var1 (ref)
-		p1.getCanvasPosition(p3)
-		p1.getContentHeight(p3)
-		var1:fire()
+return function(p1, VerticalScrollingFrameRef) --[[ Line: 25 | Named "createFeedContextAdapter" ]]
+	-- upvalues: AppCommonLibModule (copy), SignalsModule (copy)
+	local NewResult = AppCommonLibModule.Signal.new()
+	local Effect = SignalsModule.createEffect(function(p2) --[[ Line: 33 ]]
+		-- upvalues: p1 (copy), NewResult (copy)
+		p1.getCanvasPosition(p2)
+		p1.getContentHeight(p2)
+		NewResult:fire()
 	end)
 	
 	return {
-		scrollViewPositionChangedSignal = var1,
-		verticalScrollingFrameRef = p2,
-		destroy = function()
-			-- upvalues: var2 (ref)
-			var2()
+		scrollViewPositionChangedSignal = NewResult,
+		verticalScrollingFrameRef = VerticalScrollingFrameRef,
+		destroy = function() --[[ Line: 42 ]]
+			-- upvalues: Effect (copy)
+			Effect()
 		end
 	}
 end

@@ -1,7 +1,7 @@
 ﻿game:DefineFastFlag("AddPeoplePageCardLayout4", false)
-local addPeoplePageLayoutSettingsEngineFeature = game:GetEngineFeature("AddPeoplePageLayoutSettings")
+local AddPeoplePageLayoutSettingsEngineFeature = game:GetEngineFeature("AddPeoplePageLayoutSettings")
 
-return function()
-	-- upvalues: addPeoplePageLayoutSettingsEngineFeature (ref)
-	return game:GetFastFlag("AddPeoplePageCardLayout4") and addPeoplePageLayoutSettingsEngineFeature
+return function() --[[ Line: 5 ]]
+	-- upvalues: AddPeoplePageLayoutSettingsEngineFeature (copy)
+	return game:GetFastFlag("AddPeoplePageCardLayout4") and AddPeoplePageLayoutSettingsEngineFeature
 end

@@ -1,85 +1,79 @@
-﻿local guiService = game:GetService("GuiService")
-local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local reactModule = require(parent.React)
-local useBinding = reactModule.useBinding
-local useContext = reactModule.useContext
-local useEffect = reactModule.useEffect
-local useLayerCollector = require(parent.UIBlox).Core.Layout.LayerCollector.useLayerCollector
-local responsiveModule = require(parent.Responsive)
-local useOrientation = responsiveModule.useOrientation
-local parentContainerContextModule = require(appChat.Contexts.ParentContainer.ParentContainerContext)
-local getFFlagAppChatInExperienceTabBarAdjustmentModule = require(appChat.Flags.getFFlagAppChatInExperienceTabBarAdjustment)
+﻿local GuiService = game:GetService("GuiService")
+local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local ReactModule = require(Parent.React)
+local UseBindingFunction = ReactModule.useBinding
+local UseContextFunction = ReactModule.useContext
+local UseEffectFunction = ReactModule.useEffect
+local UseLayerCollectorFunction = require(Parent.UIBlox).Core.Layout.LayerCollector.useLayerCollector
+local ResponsiveModule = require(Parent.Responsive)
+local UseOrientationFunction = ResponsiveModule.useOrientation
+local ParentContainerContextModule = require(AppChat.Contexts.ParentContainer.ParentContainerContext)
+local GetFFlagAppChatInExperienceTabBarAdjustmentModule = require(AppChat.Flags.getFFlagAppChatInExperienceTabBarAdjustment)
 
-return function()
-	-- upvalues: useContext (ref), parentContainerContextModule (ref), useLayerCollector (ref), getFFlagAppChatInExperienceTabBarAdjustmentModule (ref), useOrientation (ref), useBinding (ref), responsiveModule (ref), useEffect (ref), guiService (ref)
-	local var1
-	local parentContainer = useContext(parentContainerContextModule).getParentContainer()
-	local var2 = useLayerCollector()
-	local var3 = if not getFFlagAppChatInExperienceTabBarAdjustmentModule() then useOrientation() else nil
-	local var4, var5 = useBinding(if parentContainer then parentContainer.AbsoluteSize else Vector2.zero)
-	local var6, var7 = useBinding(if parentContainer then parentContainer.AbsolutePosition else Vector2.zero)
-	
-	if getFFlagAppChatInExperienceTabBarAdjustmentModule() then
-		var1 = nil
-	else
-		var1 = var3 == responsiveModule.Keys.Landscape
-		var1 = nil
-	end
-	useEffect(function()
-		-- upvalues: parentContainer (ref), var2 (ref), getFFlagAppChatInExperienceTabBarAdjustmentModule (copy), var1 (ref), guiService (copy), var5 (ref), var7 (ref)
-		if not parentContainer then
-			return function() end
+return function() --[[ Line: 22 | Named "useParentContainerExtents" ]]
+	-- upvalues: UseContextFunction (copy), ParentContainerContextModule (copy), UseLayerCollectorFunction (copy), GetFFlagAppChatInExperienceTabBarAdjustmentModule (copy), UseOrientationFunction (copy), UseBindingFunction (copy), ResponsiveModule (copy), UseEffectFunction (copy), GuiService (copy)
+	local ParentContainer = UseContextFunction(ParentContainerContextModule).getParentContainer()
+	local UseLayerCollectorResult = UseLayerCollectorFunction()
+	local UseOrientationResult = if GetFFlagAppChatInExperienceTabBarAdjustmentModule() then nil else UseOrientationFunction()
+	local UseBindingResult, UseBindingResult2 = UseBindingFunction(if ParentContainer then ParentContainer.AbsoluteSize else Vector2.zero)
+	local UseBindingResult1, UseBindingResult2_1 = UseBindingFunction(if ParentContainer then ParentContainer.AbsolutePosition else Vector2.zero)
+	local IsUseOrientationResultMatch = if GetFFlagAppChatInExperienceTabBarAdjustmentModule() then nil else UseOrientationResult == ResponsiveModule.Keys.Landscape
+	UseEffectFunction(function() --[[ Line: 37 ]]
+		-- upvalues: ParentContainer (copy), UseLayerCollectorResult (copy), GetFFlagAppChatInExperienceTabBarAdjustmentModule (upval), IsUseOrientationResultMatch (copy), GuiService (upval), UseBindingResult2 (copy), UseBindingResult2_1 (copy)
+		if not ParentContainer then
+			local function Connection1() --[[ Line: 100 ]] end
+			
+			return Connection1
 		end
-		local _ = nil
-		local _ = nil
-		local safeZoneOffsetsChangedConnection = nil
+		local Connection1 = nil
+		local Connection2 = nil
+		local Connection = nil
 		
-		local _ = function(p1, p2, p3)
-			return Vector2.new(math.clamp(p1.X, p2.X, p3.X), math.clamp(p1.Y, p2.Y, p3.Y))
+		local function _(Vector, Vector1, Vector3): Vector2 --[[ Line: 41 ]]
+			return Vector2.new(math.clamp(Vector.X, Vector1.X, Vector3.X), (math.clamp(Vector.Y, Vector1.Y, Vector3.Y)))
 		end
 		
-		local var8 = function()
-			-- upvalues: parentContainer (copy), var2 (copy), getFFlagAppChatInExperienceTabBarAdjustmentModule (copy), var1 (copy), guiService (copy), var5 (copy), var7 (copy)
-			local absoluteSize = parentContainer.AbsoluteSize
-			local absolutePosition = parentContainer.AbsolutePosition
-			local absoluteSize_1 = var2.absoluteSize
-			absoluteSize_1 -= if not (getFFlagAppChatInExperienceTabBarAdjustmentModule() or not var1) then Vector2.new(0, guiService:GetSafeZoneOffsets().bottom) else Vector2.zero
-			local zero = Vector2.zero
-			local vector2 = Vector2.new(math.clamp(absolutePosition.X, zero.X, absoluteSize_1.X), math.clamp(absolutePosition.Y, zero.Y, absoluteSize_1.Y))
-			local zero_1 = Vector2.zero
-			local var9 = absoluteSize_1 - vector2
-			var5(Vector2.new(math.clamp(absoluteSize.X, zero_1.X, var9.X), math.clamp(absoluteSize.Y, zero_1.Y, var9.Y)))
-			var7(vector2)
+		local function Callback() --[[ Line: 45 ]]
+			-- upvalues: ParentContainer (upval), UseLayerCollectorResult (upval), GetFFlagAppChatInExperienceTabBarAdjustmentModule (upval), IsUseOrientationResultMatch (upval), GuiService (upval), UseBindingResult2 (upval), UseBindingResult2_1 (upval)
+			local AbsoluteSize = ParentContainer.AbsoluteSize
+			local AbsolutePosition = ParentContainer.AbsolutePosition
+			local AbsoluteSizeDelta = UseLayerCollectorResult.absoluteSize - (if GetFFlagAppChatInExperienceTabBarAdjustmentModule() or not IsUseOrientationResultMatch then Vector2.zero else Vector2.new(0, GuiService:GetSafeZoneOffsets().bottom))
+			local ZeroVector = Vector2.zero
+			local _Vector2 = Vector2.new(math.clamp(AbsolutePosition.X, ZeroVector.X, AbsoluteSizeDelta.X), (math.clamp(AbsolutePosition.Y, ZeroVector.Y, AbsoluteSizeDelta.Y)))
+			local ZeroVector1 = Vector2.zero
+			local AbsoluteSizeDeltaDelta: Vector2 = AbsoluteSizeDelta - _Vector2
+			UseBindingResult2((Vector2.new(math.clamp(AbsoluteSize.X, ZeroVector1.X, AbsoluteSizeDeltaDelta.X), (math.clamp(AbsoluteSize.Y, ZeroVector1.Y, AbsoluteSizeDeltaDelta.Y)))))
+			UseBindingResult2_1(_Vector2)
 		end
 		
-		local var9 = parentContainer:GetPropertyChangedSignal("AbsoluteSize"):Connect(var8)
-		local var10 = parentContainer:GetPropertyChangedSignal("AbsolutePosition"):Connect(var8)
+		Connection1 = ParentContainer:GetPropertyChangedSignal("AbsoluteSize"):Connect(Callback)
+		Connection2 = ParentContainer:GetPropertyChangedSignal("AbsolutePosition"):Connect(Callback)
 		
-		if not getFFlagAppChatInExperienceTabBarAdjustmentModule() then
-			safeZoneOffsetsChangedConnection = guiService.SafeZoneOffsetsChanged:Connect(var8)
+		if not GetFFlagAppChatInExperienceTabBarAdjustmentModule() then
+			Connection = GuiService.SafeZoneOffsetsChanged:Connect(Callback)
 		end
-		var8()
+		Callback()
 		
-		return function()
-			-- upvalues: var9 (write), var10 (write), getFFlagAppChatInExperienceTabBarAdjustmentModule (copy), safeZoneOffsetsChangedConnection (write)
-			if var9 and var9.Connected then
-				var9:Disconnect()
+		return function() --[[ Line: 85 ]]
+			-- upvalues: Connection1 (ref), Connection2 (ref), GetFFlagAppChatInExperienceTabBarAdjustmentModule (upval), Connection (ref)
+			if Connection1 and Connection1.Connected then
+				Connection1:Disconnect()
 			end
-			if var10 and var10.Connected then
-				var10:Disconnect()
+			if Connection2 and Connection2.Connected then
+				Connection2:Disconnect()
 			end
-			if not getFFlagAppChatInExperienceTabBarAdjustmentModule() and safeZoneOffsetsChangedConnection and safeZoneOffsetsChangedConnection.Connected then
-				safeZoneOffsetsChangedConnection:Disconnect()
+			if not GetFFlagAppChatInExperienceTabBarAdjustmentModule() and Connection and Connection.Connected then
+				Connection:Disconnect()
 			end
 		end
 	end, {
-		parentContainer,
-		var5,
-		var7,
-		var2.absoluteSize,
-		var1
+		ParentContainer,
+		UseBindingResult2,
+		UseBindingResult2_1,
+		UseLayerCollectorResult.absoluteSize,
+		IsUseOrientationResultMatch
 	})
 	
-	return var4, var6
+	return UseBindingResult, UseBindingResult1
 end

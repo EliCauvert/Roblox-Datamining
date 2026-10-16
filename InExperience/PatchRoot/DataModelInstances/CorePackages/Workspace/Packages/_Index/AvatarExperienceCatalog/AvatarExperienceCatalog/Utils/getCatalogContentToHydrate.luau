@@ -1,30 +1,32 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local parent = avatarExperienceCatalog.Parent
-local itemTypeEnum = require(parent.AvatarExperienceModel).Enums.ItemTypeEnum
-local fFlagAXMigrateAllTabToSduiDev = require(parent.AvatarExperienceFlags).FFlagAXMigrateAllTabToSduiDev
-local _ = require(avatarExperienceCatalog.Components.ResultsList.WidgetListInfoViewModel)
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local Parent = AvatarExperienceCatalog.Parent
+local ItemTypeEnum = require(Parent.AvatarExperienceModel).Enums.ItemTypeEnum
+local FFlagAXMigrateAllTabToSduiDev = require(Parent.AvatarExperienceFlags).FFlagAXMigrateAllTabToSduiDev
+local _ = require(AvatarExperienceCatalog.Components.ResultsList.WidgetListInfoViewModel)
 
-return function(p1, p2, p3)
-	-- upvalues: itemTypeEnum (ref), fFlagAXMigrateAllTabToSduiDev (ref)
-	local t = {}
+return function(p1, p2, p3: number) --[[ Line: 38 | Named "getCatalogContentToHydrate" ]]
+	-- upvalues: ItemTypeEnum (copy), FFlagAXMigrateAllTabToSduiDev (copy)
+	local List = {}
 	
 	if not p1 or #p1 == 0 then
-		return t
+		return List
 	end
-	local t_1 = {}
+	local t = {}
 	
-	for i = 1, if p3 ~= nil then #p1 else math.min(p3, #p1) do
-		local var1 = p1[i]
-		local type = var1.type
-		local var2 = t_1[type]
+	for i = 1, if p3 == nil then #p1 else math.min(p3, #p1) do
+		local v1 = p1[i]
+		local Type = v1.type
+		local Entry = t[Type]
 		
-		if var2 ~= nil then
-			if (type == itemTypeEnum.Look and not fFlagAXMigrateAllTabToSduiDev) or not (if var2 then var2[var1.id] else nil) then
-				table.insert(t, var1)
-			end
+		if Entry == nil then
+			Entry = if p2 and p2[Type] then p2[Type] else false
+			t[Type] = Entry
 		end
-		var2 = if p2 and p2[type] then p2[type] else false
-		t_1[type] = var2
+		local Entry1 = if Entry then Entry[v1.id] else nil
+		
+		if Type == ItemTypeEnum.Look and not FFlagAXMigrateAllTabToSduiDev or not Entry1 then
+			table.insert(List, v1)
+		end
 	end
-	return t
+	return List
 end

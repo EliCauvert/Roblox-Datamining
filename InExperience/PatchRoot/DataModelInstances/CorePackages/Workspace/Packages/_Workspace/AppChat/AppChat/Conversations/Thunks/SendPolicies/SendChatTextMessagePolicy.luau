@@ -1,35 +1,35 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local appChatNetworkingModule = require(appChat.Parent.AppChatNetworking)
-local name = require(appChat.Logger):new(script.Name)
-local messageModelModule = require(appChat.Models.MessageModel)
-local sendChatMessagePolicyModule = require(script.Parent.SendChatMessagePolicy)
-local tbl = setmetatable({}, sendChatMessagePolicyModule)
-tbl.__index = tbl
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local AppChatNetworkingModule = require(AppChat.Parent.AppChatNetworking)
+local NewResult = require(AppChat.Logger):new(script.Name)
+local MessageModelModule = require(AppChat.Models.MessageModel)
+local SendChatMessagePolicyModule = require(script.Parent.SendChatMessagePolicy)
+local self = setmetatable({}, SendChatMessagePolicyModule)
+self.__index = self
 
-function tbl.new(p1, p2, p3, p4, p5)
-	-- upvalues: name (ref), sendChatMessagePolicyModule (ref)
-	name:info("New policy constructed for conversationId: {} messageText: {}, replyingToId: {}", p2, p3, if p4 then p4.id else nil)
-	local var1 = sendChatMessagePolicyModule:new(p2, p4)
-	setmetatable(var1, p1)
-	var1.messageText = p3
-	var1.decorators = p5
+function self.new(p1, p2, MessageText, MessageText1, Decorators) --[[ Line: 13 ]]
+	-- upvalues: NewResult (copy), SendChatMessagePolicyModule (copy)
+	NewResult:info("New policy constructed for conversationId: {} messageText: {}, replyingToId: {}", p2, MessageText, if MessageText1 then MessageText1.id else nil)
+	local NewResult1 = SendChatMessagePolicyModule:new(p2, MessageText1)
+	setmetatable(NewResult1, p1)
+	NewResult1.messageText = MessageText
+	NewResult1.decorators = Decorators
 	
-	return var1
+	return NewResult1
 end
 
-function tbl:sendMessage(_)
-	-- upvalues: name (ref), appChatNetworkingModule (ref)
-	name:info("sendMessage - conversationId: {} messageText: {}, replyingToId: {}", self.conversationId, self.messageText, if self.replyingToMessage then self.replyingToMessage.id else nil)
+function self:sendMessage(_) --[[ Line: 31 ]]
+	-- upvalues: NewResult (copy), AppChatNetworkingModule (copy)
+	NewResult:info("sendMessage - conversationId: {} messageText: {}, replyingToId: {}", self.conversationId, self.messageText, if self.replyingToMessage then self.replyingToMessage.id else nil)
 	
-	return appChatNetworkingModule.http.SendChatTextMessage(nil, self.conversationId, self.messageText, if self.replyingToMessage then self.replyingToMessage.id else nil)
+	return AppChatNetworkingModule.http.SendChatTextMessage(nil, self.conversationId, self.messageText, if self.replyingToMessage then self.replyingToMessage.id else nil)
 end
 
-function tbl:sendingMessagePayload()
-	-- upvalues: messageModelModule (ref)
+function self:sendingMessagePayload() --[[ Line: 47 ]]
+	-- upvalues: MessageModelModule (copy)
 	return {
-		messageType = messageModelModule.MessageTypes.PlainText,
+		messageType = MessageModelModule.MessageTypes.PlainText,
 		content = self.messageText
 	}
 end
 
-return tbl
+return self

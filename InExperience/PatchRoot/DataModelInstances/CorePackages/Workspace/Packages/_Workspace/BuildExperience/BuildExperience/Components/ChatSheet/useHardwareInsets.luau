@@ -1,41 +1,41 @@
-﻿local guiService = game:GetService("GuiService")
-local reactModule = require(script:FindFirstAncestor("BuildExperience").Parent.React)
+﻿local GuiService = game:GetService("GuiService")
+local ReactModule = require(script:FindFirstAncestor("BuildExperience").Parent.React)
 
-local function getHardwareSafeAreaInsets()
-	-- upvalues: guiService (ref)
-	local deviceSafeInsetsInsetArea = guiService:GetInsetArea(Enum.ScreenInsets.DeviceSafeInsets)
-	local noneInsetArea = guiService:GetInsetArea(Enum.ScreenInsets.None)
+local function getHardwareSafeAreaInsets() --[[ Line: 9 ]]
+	-- upvalues: GuiService (copy)
+	local InsetArea = GuiService:GetInsetArea(Enum.ScreenInsets.DeviceSafeInsets)
+	local InsetArea1 = GuiService:GetInsetArea(Enum.ScreenInsets.None)
 	
 	return {
-		left = deviceSafeInsetsInsetArea.Min.X - noneInsetArea.Min.X,
-		top = deviceSafeInsetsInsetArea.Min.Y - noneInsetArea.Min.Y,
-		right = noneInsetArea.Max.X - deviceSafeInsetsInsetArea.Max.X,
-		bottom = noneInsetArea.Max.Y - deviceSafeInsetsInsetArea.Max.Y
+		left = InsetArea.Min.X - InsetArea1.Min.X,
+		top = InsetArea.Min.Y - InsetArea1.Min.Y,
+		right = InsetArea1.Max.X - InsetArea.Max.X,
+		bottom = InsetArea1.Max.Y - InsetArea.Max.Y
 	}
 end
 
-return function(value)
-	-- upvalues: reactModule (ref), getHardwareSafeAreaInsets (ref)
-	local var1, var2 = reactModule.useState(getHardwareSafeAreaInsets)
-	reactModule.useEffect(function()
-		-- upvalues: value (ref), var2 (ref), getHardwareSafeAreaInsets (copy)
-		local var3 = if value then value:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
-			-- upvalues: var2 (copy), getHardwareSafeAreaInsets (copy)
-			var2(function(p1)
-				-- upvalues: getHardwareSafeAreaInsets (copy)
-				local var4 = getHardwareSafeAreaInsets()
+return function(Object) --[[ Line: 21 | Named "useHardwareInsets" ]]
+	-- upvalues: ReactModule (copy), getHardwareSafeAreaInsets (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(getHardwareSafeAreaInsets)
+	ReactModule.useEffect(function() --[[ Line: 24 ]]
+		-- upvalues: Object (copy), UseStateResult2 (copy), getHardwareSafeAreaInsets (upval)
+		local Connection = if Object then Object:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 28 ]]
+			-- upvalues: UseStateResult2 (upval), getHardwareSafeAreaInsets (upval)
+			UseStateResult2(function(HardwareSafeAreaInsets) --[[ Line: 29 ]]
+				-- upvalues: getHardwareSafeAreaInsets (upval)
+				local HardwareSafeAreaInsets1 = getHardwareSafeAreaInsets()
 				
-				return if var4.bottom == p1.bottom and var4.top == p1.top and (var4.left == p1.left and var4.right == p1.right) then p1 else var4
+				return if HardwareSafeAreaInsets1.bottom == HardwareSafeAreaInsets.bottom and HardwareSafeAreaInsets1.top == HardwareSafeAreaInsets.top and HardwareSafeAreaInsets1.left == HardwareSafeAreaInsets.left and HardwareSafeAreaInsets1.right == HardwareSafeAreaInsets.right then HardwareSafeAreaInsets else HardwareSafeAreaInsets1
 			end)
 		end) else nil
 		
-		return function()
-			-- upvalues: var3 (write)
-			if var3 then
-				var3:Disconnect()
+		return function() --[[ Line: 45 ]]
+			-- upvalues: Connection (ref)
+			if Connection then
+				Connection:Disconnect()
 			end
 		end
-	end, { value })
+	end, { Object })
 	
-	return var1
+	return UseStateResult
 end

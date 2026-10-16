@@ -1,47 +1,47 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceSlotBasedEditor").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local icon = foundationModule.Icon
-local iconSize = foundationModule.Enums.IconSize
-local constantsModule = require(script.Parent.Parent.Constants)
-local text = foundationModule.Text
-local fFlagAXMigrateBuilderIcons = require(parent.AvatarExperienceFlags).FFlagAXMigrateBuilderIcons
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceSlotBasedEditor").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local Icon = FoundationModule.Icon
+local IconSize = FoundationModule.Enums.IconSize
+local ConstantsModule = require(script.Parent.Parent.Constants)
+local Text = FoundationModule.Text
+local FFlagAXMigrateBuilderIcons = require(Parent.AvatarExperienceFlags).FFlagAXMigrateBuilderIcons
 
-return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), icon (ref), fFlagAXMigrateBuilderIcons (ref), constantsModule (ref), iconSize (ref), text (ref)
-	local var1 = useTokens()
+return function(Frame) --[[ Line: 33 | Named "ClearCategoryButton" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), Icon (copy), FFlagAXMigrateBuilderIcons (copy), ConstantsModule (copy), IconSize (copy), Text (copy)
+	local UseTokensResult = UseTokensFunction()
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Size = p1.Size or UDim2.fromOffset(var1.Size.Size_2500, var1.Size.Size_2500),
-		LayoutOrder = p1.LayoutOrder,
+		Size = Frame.Size or UDim2.fromOffset(UseTokensResult.Size.Size_2500, UseTokensResult.Size.Size_2500),
+		LayoutOrder = Frame.LayoutOrder,
 		Position = UDim2.fromScale(0.5, 0.5),
 		AnchorPoint = Vector2.new(0.5, 0.5)
 	}, {
-		reactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, {
-			Layout = reactModule.createElement("UIListLayout", {
+		ReactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, {
+			Layout = ReactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Vertical,
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
 				VerticalAlignment = Enum.VerticalAlignment.Center,
-				Padding = UDim.new(0, -var1.Padding.XSmall)
+				Padding = UDim.new(0, -UseTokensResult.Padding.XSmall)
 			}),
-			Icon = reactModule.createElement(icon, {
-				name = if fFlagAXMigrateBuilderIcons then constantsModule.Icons.Reset.name else constantsModule.Icons.Reset,
-				variant = if fFlagAXMigrateBuilderIcons then constantsModule.Icons.Reset.variant else nil,
-				size = iconSize.Medium,
+			Icon = ReactModule.createElement(Icon, {
+				name = if FFlagAXMigrateBuilderIcons then ConstantsModule.Icons.Reset.name else ConstantsModule.Icons.Reset,
+				variant = if FFlagAXMigrateBuilderIcons then ConstantsModule.Icons.Reset.variant else nil,
+				size = IconSize.Medium,
 				style = {
 					Transparency = 0,
-					Color3 = var1.Color.Content.Muted.Color3
+					Color3 = UseTokensResult.Color.Content.Muted.Color3
 				}
 			}),
-			Text = if p1.text then reactModule.createElement(text, {
+			Text = if Frame.text then ReactModule.createElement(Text, {
 				TextWrapped = true,
-				Size = if p1.textStyles then p1.textStyles.Size else UDim2.fromScale(1, 0),
-				Text = p1.text,
+				Size = Frame.textStyles and Frame.textStyles.Size or UDim2.fromScale(1, 0),
+				Text = Frame.text,
 				AutomaticSize = Enum.AutomaticSize.Y,
-				fontStyle = if p1.textStyles then p1.textStyles.fontStyle else var1.Typography.CaptionMedium,
-				padding = UDim.new(0, var1.Padding.Small)
+				fontStyle = Frame.textStyles and Frame.textStyles.fontStyle or UseTokensResult.Typography.CaptionMedium,
+				padding = UDim.new(0, UseTokensResult.Padding.Small)
 			}) else nil
 		})
 	})

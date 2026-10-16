@@ -1,21 +1,21 @@
-﻿local musicPicker = script:FindFirstAncestor("MusicPicker")
-local parent = musicPicker.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local scrollView = foundationModule.ScrollView
-local text = foundationModule.Text
-local view = foundationModule.View
-local scrollBarVisibility = foundationModule.Enums.ScrollBarVisibility
-local useTokens = foundationModule.Hooks.useTokens
-local _ = require(musicPicker.Types.MusicPickerTypes)
+﻿local MusicPicker = script:FindFirstAncestor("MusicPicker")
+local Parent = MusicPicker.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local ScrollView = FoundationModule.ScrollView
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local ScrollBarVisibility = FoundationModule.Enums.ScrollBarVisibility
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local _ = require(MusicPicker.Types.MusicPickerTypes)
 
-local function TabPill(p1)
-	-- upvalues: reactModule (ref), view (ref), foundationModule (ref), text (ref)
-	return reactModule.createElement(view, {
+local function TabPill(p1) --[[ Line: 31 ]]
+	-- upvalues: ReactModule (copy), View (copy), FoundationModule (copy), Text (copy)
+	return ReactModule.createElement(View, {
 		LayoutOrder = p1.layoutOrder,
 		onActivated = p1.onActivated,
 		stateLayer = {
-			affordance = foundationModule.Enums.StateLayerAffordance.None
+			affordance = FoundationModule.Enums.StateLayerAffordance.None
 		},
 		tag = {
 			["row align-x-center align-y-center auto-xy padding-x-medium padding-y-small radius-circle"] = true,
@@ -23,7 +23,7 @@ local function TabPill(p1)
 			["bg-surface-300"] = not p1.isActive
 		}
 	}, {
-		Label = reactModule.createElement(text, {
+		Label = ReactModule.createElement(Text, {
 			Text = p1.label,
 			tag = {
 				["auto-xy text-title-medium"] = true,
@@ -34,31 +34,31 @@ local function TabPill(p1)
 	})
 end
 
-return function(value)
-	-- upvalues: useTokens (ref), reactModule (ref), TabPill (ref), scrollView (ref), scrollBarVisibility (ref)
-	local var1 = useTokens()
-	local t = {}
+return function(Frame) --[[ Line: 58 | Named "MusicPickerTabStrip" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), TabPill (copy), ScrollView (copy), ScrollBarVisibility (copy)
+	local UseTokensResult = UseTokensFunction()
+	local Elements = {}
 	
-	for i, v in value.tabs do
-		local id = v.id
-		t[id] = reactModule.createElement(TabPill, {
-			label = v.label,
-			isActive = value.activeTabId == id,
-			layoutOrder = i,
-			onActivated = function()
-				-- upvalues: value (ref), id (ref)
-				value.onTabSelected(id)
+	for LayoutOrder, tab in Frame.tabs do
+		local Id = tab.id
+		Elements[Id] = ReactModule.createElement(TabPill, {
+			label = tab.label,
+			isActive = Frame.activeTabId == Id,
+			layoutOrder = LayoutOrder,
+			onActivated = function() --[[ Line: 67 ]]
+				-- upvalues: Frame (copy), Id (copy)
+				Frame.onTabSelected(Id)
 			end
 		})
 	end
-	return reactModule.createElement(scrollView, {
+	return ReactModule.createElement(ScrollView, {
 		tag = "size-full-0 auto-y padding-y-xsmall",
-		LayoutOrder = value.LayoutOrder,
+		LayoutOrder = Frame.LayoutOrder,
 		layout = {
 			FillDirection = Enum.FillDirection.Horizontal,
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
-			Padding = UDim.new(0, var1.Gap.Small),
+			Padding = UDim.new(0, UseTokensResult.Gap.Small),
 			SortOrder = Enum.SortOrder.LayoutOrder
 		},
 		scroll = {
@@ -66,7 +66,7 @@ return function(value)
 			AutomaticCanvasSize = Enum.AutomaticSize.X,
 			CanvasSize = UDim2.fromOffset(0, 0),
 			ScrollingDirection = Enum.ScrollingDirection.X,
-			scrollBarVisibility = scrollBarVisibility.None
+			scrollBarVisibility = ScrollBarVisibility.None
 		}
-	}, t)
+	}, Elements)
 end

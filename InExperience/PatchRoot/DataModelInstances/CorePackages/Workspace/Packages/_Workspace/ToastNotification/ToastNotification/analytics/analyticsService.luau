@@ -1,5 +1,5 @@
 ﻿return {
 	EventStream = {
-		sendEventDeferred = require(script.Parent.sendEventDeferred)(game:GetService("EventIngestService"))
+		sendEventDeferred = require(script.Parent.sendEventDeferred)((game:GetService("EventIngestService")))
 	}
 }

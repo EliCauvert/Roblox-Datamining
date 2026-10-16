@@ -1,174 +1,176 @@
-﻿local runService = game:GetService("RunService")
-local mediaGallery = script:FindFirstAncestor("MediaGallery")
-local parent = mediaGallery.Parent
-local reactModule = require(parent.React)
-local getIsInstanceVisible = require(parent.VideoUtils).getIsInstanceVisible
-local mediaGalleryConstantsModule = require(mediaGallery.MediaGalleryConstants)
-local VIDEO_VISIBLE_PERCENT = mediaGalleryConstantsModule.VIDEO_VISIBLE_PERCENT
-local VISIBILITY_SCAN_DEBOUNCE_SEC = mediaGalleryConstantsModule.VISIBILITY_SCAN_DEBOUNCE_SEC
+﻿local RunService = game:GetService("RunService")
+local MediaGallery = script:FindFirstAncestor("MediaGallery")
+local Parent = MediaGallery.Parent
+local ReactModule = require(Parent.React)
+local GetIsInstanceVisibleFunction = require(Parent.VideoUtils).getIsInstanceVisible
+local MediaGalleryConstantsModule = require(MediaGallery.MediaGalleryConstants)
+local VIDEOVISIBLEPERCENT = MediaGalleryConstantsModule.VIDEO_VISIBLE_PERCENT
+local VISIBILITYSCANDEBOUNCESEC = MediaGalleryConstantsModule.VISIBILITY_SCAN_DEBOUNCE_SEC
 
-return function(p1, p2, p3, p4)
-	-- upvalues: reactModule (ref), getIsInstanceVisible (ref), VIDEO_VISIBLE_PERCENT (ref), runService (ref), VISIBILITY_SCAN_DEBOUNCE_SEC (ref)
-	local var1 = reactModule.useRef(nil)
-	reactModule.useEffect(function()
-		-- upvalues: p2 (ref), p1 (ref), getIsInstanceVisible (copy), VIDEO_VISIBLE_PERCENT (copy), var1 (ref), p4 (ref), runService (copy), p3 (ref), VISIBILITY_SCAN_DEBOUNCE_SEC (copy)
+return function(p1, p2, Callback1, Callback) --[[ Line: 24 | Named "useGuiObjectVisibility" ]]
+	-- upvalues: ReactModule (copy), GetIsInstanceVisibleFunction (copy), VIDEOVISIBLEPERCENT (copy), RunService (copy), VISIBILITYSCANDEBOUNCESEC (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	ReactModule.useEffect(function() --[[ Line: 32 ]]
+		-- upvalues: p2 (copy), p1 (copy), GetIsInstanceVisibleFunction (upval), VIDEOVISIBLEPERCENT (upval), UseRefResult (copy), Callback (copy), RunService (upval), Callback1 (copy), VISIBILITYSCANDEBOUNCESEC (upval)
 		if not p2 or not p1.current then
 			return nil
 		end
-		local current = p1.current
-		local t = {}
-		local var2 = nil
-		local var3 = 0
+		local Current = p1.current
+		local Connections = {}
+		local DelayedThread = nil
+		local CurrentTime = 0
 		
-		local function _()
-			local currentCamera = workspace.CurrentCamera
+		local function _() --[[ Line: 43 | Named "getViewportBounds" ]]
+			local CurrentCamera = workspace.CurrentCamera
 			
-			return if currentCamera then {
+			return if CurrentCamera then {
 				min = Vector2.new(0, 0),
-				max = currentCamera.ViewportSize
+				max = CurrentCamera.ViewportSize
 			} else nil
 		end
 		
-		local _ = function()
-			-- upvalues: getIsInstanceVisible (copy), current (ref), VIDEO_VISIBLE_PERCENT (copy)
-			local currentCamera = workspace.CurrentCamera
-			local var4 = if not currentCamera then nil else {
+		local _ = function() --[[ Line: 51 | Named "isVisible" ]]
+			-- upvalues: GetIsInstanceVisibleFunction (upval), Current (copy), VIDEOVISIBLEPERCENT (upval)
+			local CurrentCamera = workspace.CurrentCamera
+			local Config = if CurrentCamera then {
 				min = Vector2.new(0, 0),
-				max = currentCamera.ViewportSize
-			}
+				max = CurrentCamera.ViewportSize
+			} else nil
 			
-			return if var4 then getIsInstanceVisible(current, var4, VIDEO_VISIBLE_PERCENT) else false
+			return if Config then GetIsInstanceVisibleFunction(Current, Config, VIDEOVISIBLEPERCENT) else false
 		end
 		
-		local _ = nil
-		local var4 = nil
+		local v1 = nil
+		local Callback2 = nil
 		
-		local _ = function()
-			-- upvalues: var1 (copy), p4 (copy)
-			if var1.current then
-				var1.current:Disconnect()
-				var1.current = nil
+		local _ = function() --[[ Line: 62 | Named "disconnectRenderStep" ]]
+			-- upvalues: UseRefResult (upval), Callback (upval)
+			if UseRefResult.current then
+				UseRefResult.current:Disconnect()
+				UseRefResult.current = nil
 				
-				if p4 then
-					p4()
+				if Callback then
+					Callback()
 				end
 			end
 		end
 		
-		local function disconnectLayoutSignals()
-			-- upvalues: t (write), var2 (write)
-			for i, v in t do
-				v:Disconnect()
+		local function disconnectLayoutSignals() --[[ Line: 72 ]]
+			-- upvalues: Connections (ref), DelayedThread (ref)
+			for _, connection in Connections do
+				connection:Disconnect()
 			end
-			t = {}
+			Connections = {}
 			
-			if var2 then
-				task.cancel(var2)
-				var2 = nil
+			if DelayedThread then
+				task.cancel(DelayedThread)
+				DelayedThread = nil
 			end
 		end
 		
-		local var5 = function()
-			-- upvalues: var1 (copy), disconnectLayoutSignals (ref), runService (copy), getIsInstanceVisible (copy), current (ref), VIDEO_VISIBLE_PERCENT (copy), p3 (copy), p4 (copy), var4 (write)
-			if var1.current then
-				return
-			end
-			disconnectLayoutSignals()
-			var1.current = runService.RenderStepped:Connect(function(p5)
-				-- upvalues: getIsInstanceVisible (copy), current (copy), VIDEO_VISIBLE_PERCENT (copy), p3 (copy), var1 (copy), p4 (copy), var4 (copy)
-				local currentCamera = workspace.CurrentCamera
-				local var6 = if not currentCamera then nil else {
-					min = Vector2.new(0, 0),
-					max = currentCamera.ViewportSize
-				}
-				
-				if if not var6 then false else getIsInstanceVisible(current, var6, VIDEO_VISIBLE_PERCENT) then
-					if p3 then
-						p3(p5)
+		v1 = function() --[[ Line: 83 ]]
+			-- upvalues: UseRefResult (upval), disconnectLayoutSignals (copy), RunService (upval), GetIsInstanceVisibleFunction (upval), Current (copy), VIDEOVISIBLEPERCENT (upval), Callback1 (upval), Callback (upval), Callback2 (ref)
+			if not UseRefResult.current then
+				disconnectLayoutSignals()
+				UseRefResult.current = RunService.RenderStepped:Connect(function(DeltaTime) --[[ Line: 90 ]]
+					-- upvalues: GetIsInstanceVisibleFunction (upval), Current (upval), VIDEOVISIBLEPERCENT (upval), Callback1 (upval), UseRefResult (upval), Callback (upval), Callback2 (upval)
+					local CurrentCamera = workspace.CurrentCamera
+					local Config = if CurrentCamera then {
+						min = Vector2.new(0, 0),
+						max = CurrentCamera.ViewportSize
+					} else nil
+					
+					if not (if Config then GetIsInstanceVisibleFunction(Current, Config, VIDEOVISIBLEPERCENT) else false) then
+						if UseRefResult.current then
+							UseRefResult.current:Disconnect()
+							UseRefResult.current = nil
+							
+							if Callback then
+								Callback()
+							end
+						end
+						Callback2()
+					elseif Callback1 then
+						Callback1(DeltaTime)
 						
 						return
 					end
-				elseif var1.current then
-					var1.current:Disconnect()
-					var1.current = nil
-					
-					if p4 then
-						p4()
-					end
-				end
-				var4()
-			end)
-		end
-		
-		var4 = function()
-			-- upvalues: t (write), var2 (write), var3 (write), VISIBILITY_SCAN_DEBOUNCE_SEC (copy), getIsInstanceVisible (copy), current (ref), VIDEO_VISIBLE_PERCENT (copy), var5 (write)
-			if #t > 0 then
+				end)
+				
 				return
 			end
-			local function onLayoutChange()
-				-- upvalues: var2 (copy), var3 (copy), VISIBILITY_SCAN_DEBOUNCE_SEC (copy), getIsInstanceVisible (copy), current (copy), VIDEO_VISIBLE_PERCENT (copy), var5 (copy)
-				if var2 then return end
-				local maxValue = math.max(0, var3 + VISIBILITY_SCAN_DEBOUNCE_SEC - tick())
-				
-				if maxValue > 0 then
-					var2 = task.delay(maxValue, function()
-						-- upvalues: var2 (copy), var3 (copy), getIsInstanceVisible (copy), current (copy), VIDEO_VISIBLE_PERCENT (copy), var5 (copy)
-						var2 = nil
-						var3 = tick()
-						local currentCamera = workspace.CurrentCamera
-						local var6 = if not currentCamera then nil else {
-							min = Vector2.new(0, 0),
-							max = currentCamera.ViewportSize
-						}
-						
-						if if not var6 then false else getIsInstanceVisible(current, var6, VIDEO_VISIBLE_PERCENT) then
-							var5()
-						end
-					end)
+		end
+		
+		Callback2 = function() --[[ Line: 102 ]]
+			-- upvalues: Connections (ref), DelayedThread (ref), CurrentTime (ref), VISIBILITYSCANDEBOUNCESEC (upval), GetIsInstanceVisibleFunction (upval), Current (copy), VIDEOVISIBLEPERCENT (upval), v1 (ref)
+			if #Connections <= 0 then
+				local function onLayoutChange() --[[ Line: 107 ]]
+					-- upvalues: DelayedThread (upval), CurrentTime (upval), VISIBILITYSCANDEBOUNCESEC (upval), GetIsInstanceVisibleFunction (upval), Current (upval), VIDEOVISIBLEPERCENT (upval), v1 (upval)
+					if DelayedThread then return end
+					local Largest = math.max(0, CurrentTime + VISIBILITYSCANDEBOUNCESEC - tick())
 					
-					return
+					if Largest > 0 then
+						DelayedThread = task.delay(Largest, function() --[[ Line: 113 ]]
+							-- upvalues: DelayedThread (upval), CurrentTime (upval), GetIsInstanceVisibleFunction (upval), Current (upval), VIDEOVISIBLEPERCENT (upval), v1 (upval)
+							DelayedThread = nil
+							CurrentTime = tick()
+							local CurrentCamera = workspace.CurrentCamera
+							local Config = if CurrentCamera then {
+								min = Vector2.new(0, 0),
+								max = CurrentCamera.ViewportSize
+							} else nil
+							
+							if if Config then GetIsInstanceVisibleFunction(Current, Config, VIDEOVISIBLEPERCENT) else false then
+								v1()
+							end
+						end)
+						
+						return
+					end
+					CurrentTime = tick()
+					local CurrentCamera = workspace.CurrentCamera
+					local Config = if CurrentCamera then {
+						min = Vector2.new(0, 0),
+						max = CurrentCamera.ViewportSize
+					} else nil
+					
+					if if Config then GetIsInstanceVisibleFunction(Current, Config, VIDEOVISIBLEPERCENT) else false then
+						v1()
+					end
 				end
-				var3 = tick()
-				local currentCamera = workspace.CurrentCamera
-				local var6 = if not currentCamera then nil else {
-					min = Vector2.new(0, 0),
-					max = currentCamera.ViewportSize
+				
+				Connections = {
+					Current:GetPropertyChangedSignal("AbsolutePosition"):Connect(onLayoutChange),
+					Current:GetPropertyChangedSignal("AbsoluteSize"):Connect(onLayoutChange)
 				}
 				
-				if if not var6 then false else getIsInstanceVisible(current, var6, VIDEO_VISIBLE_PERCENT) then
-					var5()
-				end
+				return
 			end
-			
-			t = {
-				current:GetPropertyChangedSignal("AbsolutePosition"):Connect(onLayoutChange),
-				current:GetPropertyChangedSignal("AbsoluteSize"):Connect(onLayoutChange)
-			}
 		end
 		
-		local currentCamera = workspace.CurrentCamera
-		local var6 = if not currentCamera then nil else {
+		local CurrentCamera = workspace.CurrentCamera
+		local Config = if CurrentCamera then {
 			min = Vector2.new(0, 0),
-			max = currentCamera.ViewportSize
-		}
+			max = CurrentCamera.ViewportSize
+		} else nil
 		
-		if if not var6 then false else getIsInstanceVisible(current, var6, VIDEO_VISIBLE_PERCENT) then
-			var5()
+		if if Config then GetIsInstanceVisibleFunction(Current, Config, VIDEOVISIBLEPERCENT) else false then
+			v1()
 		else
-			var4()
+			Callback2()
 		end
-		return function()
-			-- upvalues: disconnectLayoutSignals (ref), var1 (copy), p4 (copy)
+		return function() --[[ Line: 140 ]]
+			-- upvalues: disconnectLayoutSignals (copy), UseRefResult (upval), Callback (upval)
 			disconnectLayoutSignals()
 			
-			if var1.current then
-				var1.current:Disconnect()
-				var1.current = nil
+			if UseRefResult.current then
+				UseRefResult.current:Disconnect()
+				UseRefResult.current = nil
 				
-				if p4 then
-					p4()
+				if Callback then
+					Callback()
 				end
 			end
 		end
-	end, { p2, p1, p3, p4 })
+	end, { p2, p1, Callback1, Callback })
 end

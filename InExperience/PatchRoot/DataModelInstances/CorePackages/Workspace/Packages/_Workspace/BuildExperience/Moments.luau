@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.Moments.Moments)
+﻿return (require(script.Parent.Parent.Parent._Index.Moments.Moments))

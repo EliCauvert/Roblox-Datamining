@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Workspace.SocialExperiments.SocialExperiments)
+﻿return (require(script.Parent.Parent.Parent._Workspace.SocialExperiments.SocialExperiments))

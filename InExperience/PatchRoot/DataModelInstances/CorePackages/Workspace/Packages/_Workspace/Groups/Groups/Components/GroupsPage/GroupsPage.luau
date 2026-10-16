@@ -1,74 +1,73 @@
-﻿local groups = script:FindFirstAncestor("Groups")
-local parent = groups.Parent
-local reactModule = require(parent.React)
-local useEffectOnce = require(parent.RoactUtils).Hooks.useEffectOnce
-local fFlagEnableGroupDetailPane = require(parent.SharedFlags).FFlagEnableGroupDetailPane
-local var1 = if fFlagEnableGroupDetailPane then require(groups.Hooks.useIsCompactTouch) else nil
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local useTokens = foundationModule.Hooks.useTokens
-local fullscreenPageWithSafeArea = require(parent.AppBlox).FullscreenPageWithSafeArea
-local var2 = if fFlagEnableGroupDetailPane then require(groups.Components.GroupDetailPane) else nil
-local groupsListModule = require(groups.Components.GroupsList)
-local useGroupsWrapperContextModule = require(groups.Contexts.useGroupsWrapperContext)
-local useGroupsListData = require(groups.Hooks).useGroupsListData
-local useGroupsAnalyticsModule = require(groups.Hooks.useGroupsAnalytics)
-local eventNamesModule = require(groups.Analytics.EventNames)
+﻿local Groups = script:FindFirstAncestor("Groups")
+local Parent = Groups.Parent
+local ReactModule = require(Parent.React)
+local UseEffectOnceFunction = require(Parent.RoactUtils).Hooks.useEffectOnce
+local FFlagEnableGroupDetailPane = require(Parent.SharedFlags).FFlagEnableGroupDetailPane
+local UseIsCompactTouchModule = if FFlagEnableGroupDetailPane then require(Groups.Hooks.useIsCompactTouch) else nil
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local FullscreenPageWithSafeArea = require(Parent.AppBlox).FullscreenPageWithSafeArea
+local GroupDetailPaneModule = if FFlagEnableGroupDetailPane then require(Groups.Components.GroupDetailPane) else nil
+local GroupsListModule = require(Groups.Components.GroupsList)
+local UseGroupsWrapperContextModule = require(Groups.Contexts.useGroupsWrapperContext)
+local UseGroupsListDataFunction = require(Groups.Hooks).useGroupsListData
+local UseGroupsAnalyticsModule = require(Groups.Hooks.useGroupsAnalytics)
+local EventNamesModule = require(Groups.Analytics.EventNames)
 
-return function(_)
-	-- upvalues: useGroupsWrapperContextModule (ref), useTokens (ref), useGroupsListData (ref), useGroupsAnalyticsModule (ref), fFlagEnableGroupDetailPane (ref), var1 (ref), useEffectOnce (ref), eventNamesModule (ref), reactModule (ref), groupsListModule (ref), view (ref), var2 (ref), fullscreenPageWithSafeArea (ref)
-	local var3 = useGroupsWrapperContextModule()
-	local var4 = useTokens()
-	local var5 = useGroupsListData(var3.userId)
-	local var6 = useGroupsAnalyticsModule()
-	local var7 = if fFlagEnableGroupDetailPane then var1() else false
-	useEffectOnce(function()
-		-- upvalues: var6 (ref), eventNamesModule (copy)
-		var6.fireAnalyticsEvent(eventNamesModule.GroupsListPageExposure)
-	end, not var5.isLoading and not var5.loadFailure)
-	local var8 = reactModule.createElement(groupsListModule, {
+return function(_) --[[ Line: 31 | Named "GroupsPage" ]]
+	-- upvalues: UseGroupsWrapperContextModule (copy), UseTokensFunction (copy), UseGroupsListDataFunction (copy), UseGroupsAnalyticsModule (copy), FFlagEnableGroupDetailPane (copy), UseIsCompactTouchModule (copy), UseEffectOnceFunction (copy), EventNamesModule (copy), ReactModule (copy), GroupsListModule (copy), View (copy), GroupDetailPaneModule (copy), FullscreenPageWithSafeArea (copy)
+	local UseGroupsWrapperContextModuleResult = UseGroupsWrapperContextModule()
+	local UseTokensResult = UseTokensFunction()
+	local UseGroupsListDataResult = UseGroupsListDataFunction(UseGroupsWrapperContextModuleResult.userId)
+	local UseGroupsAnalyticsModuleResult = UseGroupsAnalyticsModule()
+	local UseIsCompactTouchModuleResult = if FFlagEnableGroupDetailPane then UseIsCompactTouchModule() else false
+	UseEffectOnceFunction(function() --[[ Line: 42 ]]
+		-- upvalues: UseGroupsAnalyticsModuleResult (copy), EventNamesModule (upval)
+		UseGroupsAnalyticsModuleResult.fireAnalyticsEvent(EventNamesModule.GroupsListPageExposure)
+	end, not UseGroupsListDataResult.isLoading and not UseGroupsListDataResult.loadFailure)
+	local Element = ReactModule.createElement(GroupsListModule, {
 		layoutOrder = 1,
-		groupsList = var5.groupsList,
-		canCreateGroup = var5.canCreateGroup,
-		isLoading = var5.isLoading,
-		loadFailure = var5.loadFailure
+		groupsList = UseGroupsListDataResult.groupsList,
+		canCreateGroup = UseGroupsListDataResult.canCreateGroup,
+		isLoading = UseGroupsListDataResult.isLoading,
+		loadFailure = UseGroupsListDataResult.loadFailure
 	})
-	local _ = nil
 	
-	return reactModule.createElement(fullscreenPageWithSafeArea, {
+	return ReactModule.createElement(FullscreenPageWithSafeArea, {
 		includeStatusBar = true,
-		BackgroundColor3 = var4.Color.Surface.Surface_0.Color3,
-		BackgroundTransparency = var4.Color.Surface.Surface_0.Transparency
+		BackgroundColor3 = UseTokensResult.Color.Surface.Surface_0.Color3,
+		BackgroundTransparency = UseTokensResult.Color.Surface.Surface_0.Transparency
 	}, {
-		GroupsPageContent = if fFlagEnableGroupDetailPane and not var7 then reactModule.createElement(view, {
+		GroupsPageContent = if FFlagEnableGroupDetailPane and not UseIsCompactTouchModuleResult then ReactModule.createElement(View, {
 			testId = "GroupsPage.DesktopLayout",
 			tag = "row size-full-full"
 		}, {
-			Sidebar = reactModule.createElement(view, {
+			Sidebar = ReactModule.createElement(View, {
 				LayoutOrder = 1,
 				tag = "col padding-xlarge",
 				testId = "GroupsPage.Sidebar",
 				Size = UDim2.new(0, 327, 1, 0)
-			}, { GroupsList = var8 }),
-			Divider = reactModule.createElement(view, {
+			}, { GroupsList = Element }),
+			Divider = ReactModule.createElement(View, {
 				LayoutOrder = 2,
 				testId = "GroupsPage.Divider",
 				Size = UDim2.new(0, 1, 1, 0),
-				backgroundStyle = var4.Color.Surface.Surface_300
+				backgroundStyle = UseTokensResult.Color.Surface.Surface_300
 			}),
-			MainPage = reactModule.createElement(view, {
+			MainPage = ReactModule.createElement(View, {
 				LayoutOrder = 3,
 				tag = "fill size-0-full clip",
 				testId = "GroupsPage.MainPane"
 			}, {
-				GroupDetailPane = reactModule.createElement(var2, {
-					groupId = var3.groupId,
-					source = var3.groupDetailPaneSource
+				GroupDetailPane = ReactModule.createElement(GroupDetailPaneModule, {
+					groupId = UseGroupsWrapperContextModuleResult.groupId,
+					source = UseGroupsWrapperContextModuleResult.groupDetailPaneSource
 				})
 			})
-		}) else reactModule.createElement(view, {
+		}) else ReactModule.createElement(View, {
 			tag = "col size-full-full padding-x-xlarge padding-y-xxlarge",
 			testId = "GroupsPage.SinglePane"
-		}, { Content = var8 })
+		}, { Content = Element })
 	})
 end

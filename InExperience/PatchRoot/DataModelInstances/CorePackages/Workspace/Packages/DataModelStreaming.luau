@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.DataModelStreaming.DataModelStreaming)
+﻿return (require(script.Parent._Workspace.DataModelStreaming.DataModelStreaming))

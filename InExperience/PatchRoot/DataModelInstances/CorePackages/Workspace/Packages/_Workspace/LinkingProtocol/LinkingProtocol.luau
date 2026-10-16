@@ -1,4 +1,5 @@
-﻿local _ = require(script.Enums.SettingsRoute)
+﻿local _ = require(script.Enums.DeepLinkSource)
+local _ = require(script.Enums.SettingsRoute)
 
 return {
 	LinkingProtocol = require(script.LinkingProtocol),

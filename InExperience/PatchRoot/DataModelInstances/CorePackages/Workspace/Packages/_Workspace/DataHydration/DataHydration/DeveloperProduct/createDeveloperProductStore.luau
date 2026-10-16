@@ -1,115 +1,117 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local _ = require(parent.HttpClient)
-local promiseModule = require(parent.Promise)
-local createSingleEntityResolverModule = require(dataHydration.createSingleEntityResolver)
-local fetchDeveloperProductModule = require(script.Parent.fetchDeveloperProduct)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local _ = require(Parent.HttpClient)
+local PromiseModule = require(Parent.Promise)
+local CreateSingleEntityResolverModule = require(DataHydration.createSingleEntityResolver)
+local FetchDeveloperProductModule = require(script.Parent.fetchDeveloperProduct)
 local _ = require(script.Parent.DeveloperProductStoreTypes)
 
-return function(p1)
-	-- upvalues: createSingleEntityResolverModule (ref), fetchDeveloperProductModule (ref), promiseModule (ref)
-	p1 = p1 or {}
-	local t = { network = p1.network, baseUrl = p1.baseUrl }
-	local var1 = createSingleEntityResolverModule(function(p2)
-		-- upvalues: fetchDeveloperProductModule (copy), t (ref)
-		return fetchDeveloperProductModule.list(p2, t)
+return function(p1) --[[ Line: 20 | Named "createDeveloperProductStore" ]]
+	-- upvalues: CreateSingleEntityResolverModule (copy), FetchDeveloperProductModule (copy), PromiseModule (copy)
+	local P0 = p1 or {}
+	local config = { network = P0.network, baseUrl = P0.baseUrl }
+	local SingleEntityResolverModule = CreateSingleEntityResolverModule(function(p2) --[[ Line: 24 ]]
+		-- upvalues: FetchDeveloperProductModule (upval), config (copy)
+		return FetchDeveloperProductModule.list(p2, config)
 	end)
 	
-	local function list(p2)
-		-- upvalues: fetchDeveloperProductModule (copy), t (ref), var1 (ref)
-		return fetchDeveloperProductModule.list(p2, t):andThen(function(p3)
-			-- upvalues: var1 (copy), p2 (ref)
-			var1.update(p2, p3)
-			
-			return p3
-		end)
-	end
-	
-	local function get(p2, p3)
-		-- upvalues: fetchDeveloperProductModule (copy), t (ref)
-		return fetchDeveloperProductModule.get(p2, p3, t)
-	end
-	
-	local function _(p2, p3)
+	local function _(Product, p2) --[[ Line: 39 | Named "imageVerificationError" ]]
 		return {
-			errorMessage = ("Developer product %s was created, but its uploaded image could not be verified because %s. Do not create another product; inspect the existing product before retrying."):format(tostring(p2.productId), p3),
-			product = p2
+			errorMessage = ("Developer product %s was created, but its uploaded image could not be verified because %s. Do not create another product; inspect the existing product before retrying."):format(tostring(Product.productId), p2),
+			product = Product
 		}
 	end
 	
-	local function readBackMutation(p2, p3, p4)
-		-- upvalues: fetchDeveloperProductModule (copy), t (ref), promiseModule (copy), var1 (ref)
-		local var2 = fetchDeveloperProductModule.get(p2, p3.productId, t)
+	local function readBackMutation(p2, Product, IconImageAssetId, p3) --[[ Line: 52 ]]
+		-- upvalues: FetchDeveloperProductModule (upval), config (copy), SingleEntityResolverModule (copy), PromiseModule (upval)
+		local GetResult = FetchDeveloperProductModule.get(p2, Product.productId, config)
 		
-		return (if p4 == nil then var2:catch(function()
-			-- upvalues: p3 (ref)
-			return p3
-		end) else var2:catch(function()
-			-- upvalues: promiseModule (copy), p3 (ref)
-			return promiseModule.reject({
-				errorMessage = ("Developer product %s was created, but its uploaded image could not be verified because %s. Do not create another product; inspect the existing product before retrying."):format(tostring(p3.productId), "the product could not be read back"),
-				product = p3
-			})
-		end)):andThen(function(p5)
-			-- upvalues: var1 (copy), p2 (ref), p4 (ref), promiseModule (copy), p3 (ref)
-			var1.fetch(p2)
-			
-			if p4 == nil or p5.iconImageAssetId == p4 then
-				return p5
+		return (if IconImageAssetId == nil then GetResult:catch(function() --[[ Line: 60 ]]
+			-- upvalues: p3 (copy), SingleEntityResolverModule (upval), p2 (copy), PromiseModule (upval), Product (copy)
+			if p3 then
+				SingleEntityResolverModule.fetch(p2)
+				
+				return PromiseModule.reject({
+					errorMessage = "The developer product update may have saved, but its text could not be verified because the follow-up read failed. List the product before retrying.",
+					outcome = "unverified",
+					product = { productId = Product.productId }
+				})
+			else
+				return Product
 			end
-			local var3 = p3
+		end) else GetResult:catch(function() --[[ Line: 75 ]]
+			-- upvalues: PromiseModule (upval), Product (copy)
+			return PromiseModule.reject({
+				errorMessage = ("Developer product %s was created, but its uploaded image could not be verified because %s. Do not create another product; inspect the existing product before retrying."):format(tostring(Product.productId), "the product could not be read back"),
+				product = Product
+			})
+		end)):andThen(function(Result) --[[ Line: 79 ]]
+			-- upvalues: SingleEntityResolverModule (upval), p2 (copy), IconImageAssetId (copy), PromiseModule (upval), Product (copy)
+			SingleEntityResolverModule.fetch(p2)
 			
-			return promiseModule.reject({
-				errorMessage = ("Developer product %s was created, but its uploaded image could not be verified because %s. Do not create another product; inspect the existing product before retrying."):format(tostring(var3.productId), "the stored icon did not match the returned icon"),
-				product = var3
+			return if IconImageAssetId == nil or Result.iconImageAssetId == IconImageAssetId then Result else PromiseModule.reject({
+				errorMessage = ("Developer product %s was created, but its uploaded image could not be verified because %s. Do not create another product; inspect the existing product before retrying."):format(tostring(Product.productId), "the stored icon did not match the returned icon"),
+				product = Product
 			})
 		end)
 	end
 	
 	return {
-		getProducts = var1.get,
-		fetchProducts = var1.fetch,
-		getAndFetchProducts = var1.getAndFetch,
-		list = list,
-		get = get,
-		create = function(p2, p3)
-			-- upvalues: fetchDeveloperProductModule (copy), t (ref), promiseModule (copy), readBackMutation (ref)
-			return fetchDeveloperProductModule.create(p2, p3, t):andThen(function(p4)
-				-- upvalues: p3 (ref), promiseModule (copy), readBackMutation (copy), p2 (ref)
-				return if p3.imageFile == nil or p4.iconImageAssetId ~= nil then readBackMutation(p2, p4, if p3.imageFile ~= nil then nil else p4.iconImageAssetId) else promiseModule.reject({
-					errorMessage = ("Developer product %s was created, but its uploaded image could not be verified because %s. Do not create another product; inspect the existing product before retrying."):format(tostring(p4.productId), "the API did not return an image asset ID"),
-					product = p4
+		getProducts = SingleEntityResolverModule.get,
+		fetchProducts = SingleEntityResolverModule.fetch,
+		getAndFetchProducts = SingleEntityResolverModule.getAndFetch,
+		getAccountResetGeneration = SingleEntityResolverModule.getAccountResetGeneration,
+		list = function(p2) --[[ Line: 28 ]]
+			-- upvalues: FetchDeveloperProductModule (upval), config (copy), SingleEntityResolverModule (copy)
+			return FetchDeveloperProductModule.list(p2, config):andThen(function(Result) --[[ Line: 29 ]]
+				-- upvalues: SingleEntityResolverModule (upval), p2 (copy)
+				SingleEntityResolverModule.update(p2, Result)
+				
+				return Result
+			end)
+		end,
+		get = function(p2, ProductId) --[[ Line: 35 ]]
+			-- upvalues: FetchDeveloperProductModule (upval), config (copy)
+			return FetchDeveloperProductModule.get(p2, ProductId, config)
+		end,
+		create = function(p2, p3) --[[ Line: 89 ]]
+			-- upvalues: FetchDeveloperProductModule (upval), config (copy), PromiseModule (upval), readBackMutation (copy)
+			return FetchDeveloperProductModule.create(p2, p3, config):andThen(function(Result) --[[ Line: 93 ]]
+				-- upvalues: p3 (copy), PromiseModule (upval), readBackMutation (upval), p2 (copy)
+				return if p3.imageFile == nil or Result.iconImageAssetId ~= nil then readBackMutation(p2, Result, if p3.imageFile == nil then nil else Result.iconImageAssetId) else PromiseModule.reject({
+					errorMessage = ("Developer product %s was created, but its uploaded image could not be verified because %s. Do not create another product; inspect the existing product before retrying."):format(tostring(Result.productId), "the API did not return an image asset ID"),
+					product = Result
 				})
 			end)
 		end,
-		update = function(p2, p3, p4)
-			-- upvalues: fetchDeveloperProductModule (copy), t (ref), readBackMutation (ref)
-			return fetchDeveloperProductModule.update(p2, p3, p4, t):andThen(function(p5)
-				-- upvalues: readBackMutation (copy), p2 (ref)
-				return readBackMutation(p2, p5)
+		update = function(p2, p3, p4, p5) --[[ Line: 105 ]]
+			-- upvalues: FetchDeveloperProductModule (upval), config (copy), readBackMutation (copy)
+			return FetchDeveloperProductModule.update(p2, p3, p4, config):andThen(function(Result) --[[ Line: 113 ]]
+				-- upvalues: readBackMutation (upval), p2 (copy), p5 (copy)
+				return readBackMutation(p2, Result, nil, p5)
 			end)
 		end,
-		activate = function(p2, p3)
-			-- upvalues: fetchDeveloperProductModule (copy), t (ref), readBackMutation (ref)
-			return fetchDeveloperProductModule.activate(p2, p3, t):andThen(function(p4)
-				-- upvalues: readBackMutation (copy), p2 (ref)
-				return readBackMutation(p2, p4)
+		activate = function(p2, p3) --[[ Line: 118 ]]
+			-- upvalues: FetchDeveloperProductModule (upval), config (copy), readBackMutation (copy)
+			return FetchDeveloperProductModule.activate(p2, p3, config):andThen(function(Result) --[[ Line: 119 ]]
+				-- upvalues: readBackMutation (upval), p2 (copy)
+				return readBackMutation(p2, Result)
 			end)
 		end,
-		deactivate = function(p2, p3)
-			-- upvalues: fetchDeveloperProductModule (copy), t (ref), readBackMutation (ref)
-			return fetchDeveloperProductModule.deactivate(p2, p3, t):andThen(function(p4)
-				-- upvalues: readBackMutation (copy), p2 (ref)
-				return readBackMutation(p2, p4)
+		deactivate = function(p2, p3) --[[ Line: 124 ]]
+			-- upvalues: FetchDeveloperProductModule (upval), config (copy), readBackMutation (copy)
+			return FetchDeveloperProductModule.deactivate(p2, p3, config):andThen(function(Result) --[[ Line: 127 ]]
+				-- upvalues: readBackMutation (upval), p2 (copy)
+				return readBackMutation(p2, Result)
 			end)
 		end,
-		clear = function()
-			-- upvalues: var1 (ref)
-			var1.clear()
+		clear = function() --[[ Line: 132 ]]
+			-- upvalues: SingleEntityResolverModule (copy)
+			SingleEntityResolverModule.clear()
 		end,
-		dispose = function()
-			-- upvalues: var1 (ref)
-			var1.dispose()
+		dispose = function() --[[ Line: 136 ]]
+			-- upvalues: SingleEntityResolverModule (copy)
+			SingleEntityResolverModule.dispose()
 		end
 	}
 end

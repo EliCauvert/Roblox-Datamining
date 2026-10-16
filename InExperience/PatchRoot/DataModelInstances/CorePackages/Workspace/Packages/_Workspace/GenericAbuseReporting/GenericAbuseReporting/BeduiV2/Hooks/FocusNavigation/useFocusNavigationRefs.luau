@@ -1,27 +1,31 @@
-﻿local parent = script:FindFirstAncestor("GenericAbuseReporting").Parent
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local inputHandlersModule = require(parent.InputHandlers)
-local reactModule = require(parent.React)
-local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
-local useDefaultFocusBehavior = require(parent.ReactFocusNavigation).useDefaultFocusBehavior
-local useAppFocusRoot = focusNavigationUtilsModule.useAppFocusRoot
-local composeRefsModule = require(script.Parent.composeRefs)
-local useScrollNavigationBindingsModule = require(script.Parent.useScrollNavigationBindings)
+﻿local Parent = script:FindFirstAncestor("GenericAbuseReporting").Parent
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local InputHandlersModule = require(Parent.InputHandlers)
+local ReactModule = require(Parent.React)
+local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
+local UseDefaultFocusBehaviorFunction = require(Parent.ReactFocusNavigation).useDefaultFocusBehavior
+local UseAppFocusRootFunction = FocusNavigationUtilsModule.useAppFocusRoot
+local ComposeRefsModule = require(script.Parent.composeRefs)
+local UseScrollNavigationBindingsModule = require(script.Parent.useScrollNavigationBindings)
 
-return function(p1, p2)
-	-- upvalues: useDefaultFocusBehavior (ref), useScrollNavigationBindingsModule (ref), useAppFocusRoot (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), reactModule (ref), composeRefsModule (ref)
-	local var1 = useDefaultFocusBehavior()
-	local var2 = useScrollNavigationBindingsModule({ includeDiscreteScroll = false })
-	local var3 = useAppFocusRoot({
+return function(SurfaceIdentifier, p1) --[[ Line: 26 | Named "useFocusNavigationRefs" ]]
+	-- upvalues: UseDefaultFocusBehaviorFunction (copy), UseScrollNavigationBindingsModule (copy), UseAppFocusRootFunction (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), ReactModule (copy), ComposeRefsModule (copy)
+	local UseDefaultFocusBehaviorResult = UseDefaultFocusBehaviorFunction()
+	local UseScrollNavigationBindingsModuleResult = UseScrollNavigationBindingsModule({ includeDiscreteScroll = false })
+	local UseAppFocusRootResult = UseAppFocusRootFunction({
 		isAutoFocusRoot = true,
-		surfaceIdentifier = p1,
+		surfaceIdentifier = SurfaceIdentifier,
 		customEventHandlers = {
-			[focusNavigationEventNameEnum.NavigateBack] = { handler = inputHandlersModule.onRelease(p2) }
+			[FocusNavigationEventNameEnum.NavigateBack] = { handler = InputHandlersModule.onRelease(p1) }
 		}
 	})
 	
-	return reactModule.useMemo(function()
-		-- upvalues: composeRefsModule (copy), var3 (ref), var1 (ref), var2 (ref)
-		return composeRefsModule(var3, var1, var2)
-	end, { var3, var1, var2 })
+	return (ReactModule.useMemo(function() --[[ Line: 41 ]]
+		-- upvalues: ComposeRefsModule (upval), UseAppFocusRootResult (copy), UseDefaultFocusBehaviorResult (copy), UseScrollNavigationBindingsModuleResult (copy)
+		return ComposeRefsModule(UseAppFocusRootResult, UseDefaultFocusBehaviorResult, UseScrollNavigationBindingsModuleResult)
+	end, {
+		UseAppFocusRootResult,
+		UseDefaultFocusBehaviorResult,
+		UseScrollNavigationBindingsModuleResult
+	}))
 end

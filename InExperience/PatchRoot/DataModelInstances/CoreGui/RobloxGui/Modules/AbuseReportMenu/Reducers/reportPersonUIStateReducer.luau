@@ -1,55 +1,64 @@
-﻿local abuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
-local constantsModule = require(abuseReportMenu.Components.Constants)
-local _ = require(abuseReportMenu.Components.Types)
-local playerMenuActions = constantsModule.PlayerMenuActions
+﻿local AbuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
+local ConstantsModule = require(AbuseReportMenu.Components.Constants)
+local _ = require(AbuseReportMenu.Components.Types)
+local PlayerMenuActions = ConstantsModule.PlayerMenuActions
 
-return function(p1, p2)
-	-- upvalues: playerMenuActions (ref), constantsModule (ref)
-	local cloned = table.clone(p1)
-	local type = p2.type
+return function(Tbl, p1) --[[ Line: 7 | Named "reportPersonUIStateReducer" ]]
+	-- upvalues: PlayerMenuActions (copy), ConstantsModule (copy)
+	local Copy = table.clone(Tbl)
+	local Type = p1.type
 	
-	if type == playerMenuActions.UpdateAbuseReason then
-		cloned.abuseReason = p2.abuseReason
+	if Type == PlayerMenuActions.UpdateAbuseReason then
+		Copy.abuseReason = p1.abuseReason
 		
-		return cloned
-	elseif type == playerMenuActions.UpdateComment then
-		cloned.comment = p2.comment
-		
-		return cloned
-	elseif type == playerMenuActions.UpdateMethodOfAbuse then
-		cloned.playerObjects = {}
-		cloned.abuseReason = nil
-		cloned.methodOfAbuse = p2.methodOfAbuse
-		
-		return cloned
-	elseif type == playerMenuActions.UpdateAbuser then
-		cloned.allegedAbuserId = p2.abuseId
-		cloned.allegedAbuser = p2.abuser
-		
-		return cloned
-	elseif type == playerMenuActions.UpdatePlayerNameMap then
-		cloned.playerObjects = p2.playerObjects
-		
-		return cloned
-	elseif type == playerMenuActions.SetVoiceEnabled then
-		cloned.isVoiceEnabled = p2.enabled
-		
-		return cloned
-	elseif type == playerMenuActions.SetMenuOpenTimestamp then
-		cloned.menuOpenedUnixTimestampMilliseconds = p2.timestamp
-		
-		return cloned
-	elseif type == playerMenuActions.ClearState then
-		cloned = table.clone(constantsModule.InitPersonUIState)
-		
-		return cloned
-	elseif type == playerMenuActions.SetShowModalSelector then
-		cloned.isModalSelectorShown = p2.isShown
-		cloned.modalSelectorCellData = p2.cellData
-		
-		return cloned
-	elseif type == playerMenuActions.SetPreselectedPlayer then
-		cloned.preselectedPlayer = p2.player
+		return Copy
 	end
-	return cloned
+	if Type == PlayerMenuActions.UpdateComment then
+		Copy.comment = p1.comment
+		
+		return Copy
+	end
+	if Type == PlayerMenuActions.UpdateMethodOfAbuse then
+		Copy.playerObjects = {}
+		Copy.abuseReason = nil
+		Copy.methodOfAbuse = p1.methodOfAbuse
+		
+		return Copy
+	end
+	if Type == PlayerMenuActions.UpdateAbuser then
+		Copy.allegedAbuserId = p1.abuseId
+		Copy.allegedAbuser = p1.abuser
+		
+		return Copy
+	end
+	if Type == PlayerMenuActions.UpdatePlayerNameMap then
+		Copy.playerObjects = p1.playerObjects
+		
+		return Copy
+	end
+	if Type == PlayerMenuActions.SetVoiceEnabled then
+		Copy.isVoiceEnabled = p1.enabled
+		
+		return Copy
+	end
+	if Type == PlayerMenuActions.SetMenuOpenTimestamp then
+		Copy.menuOpenedUnixTimestampMilliseconds = p1.timestamp
+		
+		return Copy
+	end
+	if Type == PlayerMenuActions.ClearState then
+		Copy = table.clone(ConstantsModule.InitPersonUIState)
+		
+		return Copy
+	end
+	if Type == PlayerMenuActions.SetShowModalSelector then
+		Copy.isModalSelectorShown = p1.isShown
+		Copy.modalSelectorCellData = p1.cellData
+		
+		return Copy
+	end
+	if Type == PlayerMenuActions.SetPreselectedPlayer then
+		Copy.preselectedPlayer = p1.player
+	end
+	return Copy
 end

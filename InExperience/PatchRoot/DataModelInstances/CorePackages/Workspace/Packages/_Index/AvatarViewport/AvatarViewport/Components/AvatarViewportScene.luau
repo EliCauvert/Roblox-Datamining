@@ -1,60 +1,60 @@
-﻿local avatarViewport = script:FindFirstAncestor("AvatarViewport")
-local reactModule = require(avatarViewport.Parent.React)
-local constantsModule = require(avatarViewport.Constants)
-local _ = require(avatarViewport.Types)
+﻿local AvatarViewport = script:FindFirstAncestor("AvatarViewport")
+local ReactModule = require(AvatarViewport.Parent.React)
+local ConstantsModule = require(AvatarViewport.Constants)
+local _ = require(AvatarViewport.Types)
 
-local function _(p1, p2)
-	if p1 and p2 then
-		p1.CurrentCamera = p2
+local function _(p1, CurrentCamera) --[[ Line: 24 | Named "bindCurrentCamera" ]]
+	if p1 and CurrentCamera then
+		p1.CurrentCamera = CurrentCamera
 	end
 end
 
-return function(p1)
-	-- upvalues: constantsModule (ref), reactModule (ref)
-	local refs = p1.refs
-	local inputHandlers = p1.inputHandlers
-	local lighting = p1.lighting or {
-		ambient = constantsModule.DefaultAmbient,
-		lightColor = constantsModule.DefaultLightColor,
-		lightDirection = constantsModule.DefaultLightDirection
+return function(p1) --[[ Line: 30 | Named "AvatarViewportScene" ]]
+	-- upvalues: ConstantsModule (copy), ReactModule (copy)
+	local Refs = p1.refs
+	local InputHandlers = p1.inputHandlers
+	local Lighting = p1.lighting or {
+		ambient = ConstantsModule.DefaultAmbient,
+		lightColor = ConstantsModule.DefaultLightColor,
+		lightDirection = ConstantsModule.DefaultLightDirection
 	}
 	
-	return reactModule.createElement("ViewportFrame", {
+	return ReactModule.createElement("ViewportFrame", {
 		Size = p1.size,
 		BackgroundColor3 = p1.backgroundColor3,
 		BackgroundTransparency = p1.backgroundTransparency or 0,
 		BorderSizePixel = 0,
-		Ambient = lighting.ambient,
-		LightColor = lighting.lightColor,
-		LightDirection = lighting.lightDirection,
-		Active = inputHandlers ~= nil,
+		Ambient = Lighting.ambient,
+		LightColor = Lighting.lightColor,
+		LightDirection = Lighting.lightDirection,
+		Active = InputHandlers ~= nil,
 		Selectable = false,
-		[reactModule.Event.InputBegan] = inputHandlers and inputHandlers.onInputBegan,
-		[reactModule.Event.InputChanged] = inputHandlers and inputHandlers.onInputChanged,
-		[reactModule.Event.InputEnded] = inputHandlers and inputHandlers.onInputEnded,
-		[reactModule.Event.TouchPinch] = inputHandlers and inputHandlers.onTouchPinch,
-		ref = reactModule.useCallback(function(p2)
-			-- upvalues: refs (ref)
-			refs.viewportFrame.current = p2
-			local current = refs.camera.current
+		[ReactModule.Event.InputBegan] = InputHandlers and InputHandlers.onInputBegan,
+		[ReactModule.Event.InputChanged] = InputHandlers and InputHandlers.onInputChanged,
+		[ReactModule.Event.InputEnded] = InputHandlers and InputHandlers.onInputEnded,
+		[ReactModule.Event.TouchPinch] = InputHandlers and InputHandlers.onTouchPinch,
+		ref = ReactModule.useCallback(function(Current) --[[ Line: 40 ]]
+			-- upvalues: Refs (copy)
+			Refs.viewportFrame.current = Current
+			local Current1 = Refs.camera.current
 			
-			if p2 and current then
-				p2.CurrentCamera = current
+			if Current and Current1 then
+				Current.CurrentCamera = Current1
 			end
-		end, { refs })
+		end, { Refs })
 	}, {
-		WorldModel = reactModule.createElement("WorldModel", { ref = refs.worldModel }),
-		Camera = reactModule.createElement("Camera", {
+		WorldModel = ReactModule.createElement("WorldModel", { ref = Refs.worldModel }),
+		Camera = ReactModule.createElement("Camera", {
 			CameraType = Enum.CameraType.Scriptable,
-			ref = reactModule.useCallback(function(p2)
-				-- upvalues: refs (ref)
-				refs.camera.current = p2
-				local current = refs.viewportFrame.current
+			ref = ReactModule.useCallback(function(Current) --[[ Line: 45 ]]
+				-- upvalues: Refs (copy)
+				Refs.camera.current = Current
+				local Current1 = Refs.viewportFrame.current
 				
-				if current and p2 then
-					current.CurrentCamera = p2
+				if Current1 and Current then
+					Current1.CurrentCamera = Current
 				end
-			end, { refs })
+			end, { Refs })
 		})
 	})
 end

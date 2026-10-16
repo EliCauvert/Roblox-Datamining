@@ -1,196 +1,183 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local fFlagBuildDesktopReadinessModule = require(buildExperience.Flags.FFlagBuildDesktopReadiness)
-local var1 = if fFlagBuildDesktopReadinessModule then require(parent.Display) else nil
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local reactRobloxModule = require(parent.ReactRoblox)
-local signalsReactModule = require(parent.SignalsReact)
-local buildPillMenuModule = require(script.Parent.BuildPillMenu)
-local buildPillMenuPageHostModule = require(script.Parent.BuildPillMenuPageHost)
-local getBuildPillMenuPortalStoreModule = require(buildExperience.Stores.GetBuildPillMenuPortalStore)
-local fFlagBuildPublishNavigationSheetModule = require(buildExperience.Flags.FFlagBuildPublishNavigationSheet)
-local var2 = if fFlagBuildPublishNavigationSheetModule then require(buildExperience.Components.PublishSheet.PublishSheetController) else nil
-local view = foundationModule.View
-local useOverlay = foundationModule.Hooks.useOverlay
-local useStyleSheet = foundationModule.Hooks.useStyleSheet
-local useTokens = foundationModule.Hooks.useTokens
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local DisplayModule = require(Parent.Display)
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.ReactRoblox)
+local SignalsReactModule = require(Parent.SignalsReact)
+local BuildPillMenuModule = require(script.Parent.BuildPillMenu)
+local BuildPillMenuPageHostModule = require(script.Parent.BuildPillMenuPageHost)
+local GetBuildPillMenuPortalStoreModule = require(BuildExperience.Stores.GetBuildPillMenuPortalStore)
+local FFlagBuildPublishNavigationSheetModule = require(BuildExperience.Flags.FFlagBuildPublishNavigationSheet)
+local PublishSheetControllerModule = if FFlagBuildPublishNavigationSheetModule then require(BuildExperience.Components.PublishSheet.PublishSheetController) else nil
+local View = FoundationModule.View
+local UseOverlayFunction = FoundationModule.Hooks.useOverlay
+local UseStyleSheetFunction = FoundationModule.Hooks.useStyleSheet
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-local function _(p1, p2)
-	return if p1 == Enum.DisplaySize.Small then p2.Y < p2.X else true
+local function _(DisplaySize, Vector): boolean --[[ Line: 46 | Named "isSideSheet" ]]
+	return DisplaySize ~= Enum.DisplaySize.Small or Vector.Y < Vector.X
 end
 
-local _ = function(p1, p2)
-	local var3 = p1.AbsolutePosition - (if p2:IsA("GuiObject") then p2.AbsolutePosition else Vector2.zero)
+local _ = function(Frame, Frame1: Frame): UDim2 --[[ Line: 50 | Named "getOverlayPosition" ]]
+	local AbsolutePositionDelta = Frame.AbsolutePosition - (if Frame1:IsA("GuiObject") then Frame1.AbsolutePosition else Vector2.zero)
 	
-	return UDim2.fromOffset(var3.X, var3.Y)
+	return UDim2.fromOffset(AbsolutePositionDelta.X, AbsolutePositionDelta.Y)
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: getBuildPillMenuPortalStoreModule (ref), signalsReactModule (ref), useOverlay (ref), useStyleSheet (ref), fFlagBuildDesktopReadinessModule (ref), useTokens (ref), var1 (ref), reactModule (ref), fFlagBuildPublishNavigationSheetModule (ref), view (ref), buildPillMenuModule (ref), reactRobloxModule (ref), buildPillMenuPageHostModule (ref), var2 (ref)
-	local var3 = signalsReactModule.useSignalState(getBuildPillMenuPortalStoreModule().getPortalTarget)
-	local var4 = useOverlay()
-	local var5 = useStyleSheet()
-	local var6 = if fFlagBuildDesktopReadinessModule then useTokens() else nil
-	local var7 = if fFlagBuildDesktopReadinessModule then var1.GetDisplayStore(false) else nil
-	local var8 = if fFlagBuildDesktopReadinessModule then signalsReactModule.useSignalState(var7.getDisplaySize) else nil
-	local var9 = if fFlagBuildDesktopReadinessModule then signalsReactModule.useSignalState(var7.getViewportSize) else nil
-	local var10 = reactModule.useRef(nil)
-	local var11, var12 = reactModule.useState(nil)
-	local var13, var14 = reactModule.useState(false)
-	local var15 = if fFlagBuildDesktopReadinessModule and p1.sheet ~= nil and (if var8 == Enum.DisplaySize.Small then var9.Y < var9.X else true) then p1.sheet else nil
-	local var16 = reactModule.useCallback(function()
-		-- upvalues: var10 (ref), var3 (ref), var4 (ref)
-		local current = var10.current
+return ReactModule.memo(function(p1) --[[ Line: 57 | Named "BuildPillMenuPortal" ]]
+	-- upvalues: GetBuildPillMenuPortalStoreModule (copy), SignalsReactModule (copy), UseOverlayFunction (copy), UseStyleSheetFunction (copy), UseTokensFunction (copy), DisplayModule (copy), ReactModule (copy), FFlagBuildPublishNavigationSheetModule (copy), View (copy), BuildPillMenuModule (copy), ReactRobloxModule (copy), BuildPillMenuPageHostModule (copy), PublishSheetControllerModule (copy)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(GetBuildPillMenuPortalStoreModule().getPortalTarget)
+	local UseOverlayResult = UseOverlayFunction()
+	local UseStyleSheetResult = UseStyleSheetFunction()
+	local UseTokensResult = UseTokensFunction()
+	local DisplayStore = DisplayModule.GetDisplayStore(false)
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(DisplayStore.getDisplaySize)
+	local UseSignalStateResult2 = SignalsReactModule.useSignalState(DisplayStore.getViewportSize)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
+	local Sheet = nil
+	
+	if p1.sheet ~= nil and (UseSignalStateResult1 ~= Enum.DisplaySize.Small or UseSignalStateResult2.X > UseSignalStateResult2.Y) then
+		Sheet = p1.sheet
+	end
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 74 ]]
+		-- upvalues: UseRefResult (copy), UseSignalStateResult (copy), UseOverlayResult (copy)
+		local Current = UseRefResult.current
 		
-		if var3 == nil or var4 == nil or current == nil then
-			return
-		end
-		local var17 = var3.AbsolutePosition - (if var4:IsA("GuiObject") then var4.AbsolutePosition else Vector2.zero)
-		current.Position = UDim2.fromOffset(var17.X, var17.Y)
-	end, { var3, var4 })
-	local var17 = reactModule.useCallback(function(p2)
-		-- upvalues: var10 (ref), var16 (ref)
-		var10.current = p2
-		var16()
-	end, { var16 })
-	local var18 = reactModule.useCallback(function(p2)
-		-- upvalues: fFlagBuildPublishNavigationSheetModule (copy), var14 (ref), var12 (ref)
-		if fFlagBuildPublishNavigationSheetModule and p2 == "publish" then
-			var14(true)
+		if UseSignalStateResult ~= nil and UseOverlayResult ~= nil and Current ~= nil then
+			local AbsolutePositionDelta = UseSignalStateResult.AbsolutePosition - (if UseOverlayResult:IsA("GuiObject") then UseOverlayResult.AbsolutePosition else Vector2.zero)
+			Current.Position = UDim2.fromOffset(AbsolutePositionDelta.X, AbsolutePositionDelta.Y)
 			
 			return
 		end
-		var12({ type = "overflow", page = p2 })
+	end, { UseSignalStateResult, UseOverlayResult })
+	local UseResult1 = ReactModule.useCallback(function(Current) --[[ Line: 83 ]]
+		-- upvalues: UseRefResult (copy), UseResult (copy)
+		UseRefResult.current = Current
+		UseResult()
+	end, { UseResult })
+	local UseResult2 = ReactModule.useCallback(function(Page) --[[ Line: 88 ]]
+		-- upvalues: FFlagBuildPublishNavigationSheetModule (upval), UseStateResult2_1 (copy), UseStateResult2 (copy)
+		if FFlagBuildPublishNavigationSheetModule and Page == "publish" then
+			UseStateResult2_1(true)
+			
+			return
+		else
+			UseStateResult2({ type = "overflow", page = Page })
+		end
 	end, {})
-	local var19 = reactModule.useCallback(function()
-		-- upvalues: var12 (ref)
-		var12({ type = "agents" })
+	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 99 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2({ type = "agents" })
 	end, {})
-	local var20 = reactModule.useCallback(function()
-		-- upvalues: var12 (ref)
-		var12({ type = "invitePicker" })
+	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 105 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2({ type = "invitePicker" })
 	end, {})
-	local var21 = reactModule.useCallback(function()
-		-- upvalues: var12 (ref)
-		var12({ type = "playtestManagement" })
+	local UseResult5 = ReactModule.useCallback(function() --[[ Line: 111 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2({ type = "playtestManagement" })
 	end, {})
-	local var22 = reactModule.useCallback(function()
-		-- upvalues: var12 (ref)
-		var12({ type = "creator-credit" })
+	local UseResult6 = ReactModule.useCallback(function() --[[ Line: 117 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2({ type = "creator-credit" })
 	end, {})
-	local var23 = reactModule.useCallback(function()
-		-- upvalues: var12 (ref)
-		var12(nil)
+	local UseResult7 = ReactModule.useCallback(function() --[[ Line: 123 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(nil)
 	end, {})
-	local var24 = reactModule.useCallback(function(p2)
-		-- upvalues: var23 (ref), p1 (ref)
-		var23()
+	local UseResult8 = ReactModule.useCallback(function(p2) --[[ Line: 127 ]]
+		-- upvalues: UseResult7 (copy), p1 (copy)
+		UseResult7()
 		
 		if p1.onOpenChat ~= nil then
 			p1.onOpenChat(p2)
 		end
-	end, { var23, p1.onOpenChat })
-	local var25 = reactModule.useCallback(function()
-		-- upvalues: var14 (ref)
-		var14(false)
+	end, { UseResult7, p1.onOpenChat })
+	local UseResult9 = ReactModule.useCallback(function() --[[ Line: 134 ]]
+		-- upvalues: UseStateResult2_1 (copy)
+		UseStateResult2_1(false)
 	end, {})
-	local var26 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: var12 (ref)
-		var12({
+	local UseResult10 = ReactModule.useCallback(function(Screen, p2) --[[ Line: 141 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2({
 			type = "screen",
-			screen = p2,
+			screen = Screen,
 			target = {
-				universeId = p3.universeId,
-				placeId = p3.placeId,
-				sessionId = p3.sessionId,
-				isNewGameTarget = p3.isNewGameTarget or false
+				universeId = p2.universeId,
+				placeId = p2.placeId,
+				sessionId = p2.sessionId,
+				isNewGameTarget = p2.isNewGameTarget or false
 			}
 		})
 	end, {})
-	
-	if fFlagBuildDesktopReadinessModule then
-		reactModule.useLayoutEffect(function()
-			-- upvalues: var15 (write)
-			if var15 == nil then
-				return
-			end
-			local clipsDescendants = var15.ClipsDescendants
-			var15.ClipsDescendants = false
-			
-			return function()
-				-- upvalues: var15 (copy), clipsDescendants (ref)
-				var15.ClipsDescendants = clipsDescendants
-			end
-		end, { var15 })
-	end
-	reactModule.useLayoutEffect(function()
-		-- upvalues: fFlagBuildDesktopReadinessModule (copy), var15 (write), var3 (ref), var4 (ref), var16 (ref)
-		if fFlagBuildDesktopReadinessModule and var15 ~= nil then return end
-		if var3 == nil or var4 == nil then
-			return
-		end
-		var16()
-		local var27 = var3:GetPropertyChangedSignal("AbsolutePosition"):Connect(var16)
-		local var28 = if var4:IsA("GuiObject") then var4:GetPropertyChangedSignal("AbsolutePosition"):Connect(var16) else nil
+	ReactModule.useLayoutEffect(function() --[[ Line: 154 ]]
+		-- upvalues: Sheet (ref)
+		if Sheet == nil then return end
+		local ClipsDescendants = Sheet.ClipsDescendants
+		Sheet.ClipsDescendants = false
 		
-		return function()
-			-- upvalues: var27 (ref), var28 (ref)
-			var27:Disconnect()
+		return function() --[[ Line: 163 ]]
+			-- upvalues: Sheet (upval), ClipsDescendants (copy)
+			Sheet.ClipsDescendants = ClipsDescendants
+		end
+	end, { Sheet })
+	ReactModule.useLayoutEffect(function() --[[ Line: 169 ]]
+		-- upvalues: Sheet (ref), UseSignalStateResult (copy), UseOverlayResult (copy), UseResult (copy)
+		if Sheet ~= nil then return end
+		if UseSignalStateResult == nil or UseOverlayResult == nil then return end
+		UseResult()
+		local Connection = UseSignalStateResult:GetPropertyChangedSignal("AbsolutePosition"):Connect(UseResult)
+		local Connection1 = if UseOverlayResult:IsA("GuiObject") then UseOverlayResult:GetPropertyChangedSignal("AbsolutePosition"):Connect(UseResult) else nil
+		
+		return function() --[[ Line: 185 ]]
+			-- upvalues: Connection (copy), Connection1 (copy)
+			Connection:Disconnect()
 			
-			if var28 ~= nil then
-				var28:Disconnect()
+			if Connection1 ~= nil then
+				Connection1:Disconnect()
 			end
 		end
-	end, {
-		if fFlagBuildDesktopReadinessModule then var15 else nil,
-		var3,
-		var4,
-		var16
-	})
+	end, { Sheet, UseSignalStateResult, UseOverlayResult, UseResult })
 	
-	if var3 == nil or var4 == nil then
-		return nil
-	end
-	local createElement = reactModule.createElement
-	createElement = createElement(reactModule.Fragment, nil, {
-		StyleLink = reactModule.createElement("StyleLink", { StyleSheet = var5 }),
-		Container = reactModule.createElement(view, {
-			ZIndex = 999,
-			tag = "auto-xy",
-			testId = "build-pill-menu-overlay-container",
-			AnchorPoint = if fFlagBuildDesktopReadinessModule and var15 ~= nil then Vector2.new(1, 0) else var3.AnchorPoint,
-			Position = if fFlagBuildDesktopReadinessModule and var15 ~= nil then UDim2.fromOffset(-var6.Padding.Large, 0) else nil,
-			ref = if fFlagBuildDesktopReadinessModule and var15 ~= nil then nil else var17
-		}, {
-			Pill = reactModule.createElement(buildPillMenuModule, {
-				target = p1.target,
-				testId = p1.testId,
-				onOpenPage = var18,
-				onOpenInvitePicker = var20,
-				onOpenPlaytestManagement = var21,
-				onOpenAgentsPage = var19,
-				onOpenCreatorCreditPage = var22
+	return if UseSignalStateResult == nil or UseOverlayResult == nil then nil else ReactModule.createElement(ReactModule.Fragment, nil, {
+		Pill = ReactRobloxModule.createPortal(ReactModule.createElement(ReactModule.Fragment, nil, {
+			StyleLink = ReactModule.createElement("StyleLink", { StyleSheet = UseStyleSheetResult }),
+			Container = ReactModule.createElement(View, {
+				ZIndex = 999,
+				tag = "auto-xy",
+				testId = "build-pill-menu-overlay-container",
+				AnchorPoint = if Sheet == nil then UseSignalStateResult.AnchorPoint else Vector2.new(1, 0),
+				Position = if Sheet == nil then nil else UDim2.fromOffset(-UseTokensResult.Padding.Large, 0),
+				ref = if Sheet == nil then UseResult1 else nil
+			}, {
+				Pill = ReactModule.createElement(BuildPillMenuModule, {
+					target = p1.target,
+					testId = p1.testId,
+					onOpenPage = UseResult2,
+					onOpenInvitePicker = UseResult4,
+					onOpenPlaytestManagement = UseResult5,
+					onOpenAgentsPage = UseResult3,
+					onOpenCreatorCreditPage = UseResult6
+				})
 			})
-		})
-	})
-	
-	return reactModule.createElement(reactModule.Fragment, nil, {
-		Pill = reactRobloxModule.createPortal(createElement, if fFlagBuildDesktopReadinessModule and var15 ~= nil then var15 else var4),
-		Page = reactModule.createElement(buildPillMenuPageHostModule, {
-			activePage = var11,
+		}), if Sheet == nil then UseOverlayResult else Sheet),
+		Page = ReactModule.createElement(BuildPillMenuPageHostModule, {
+			activePage = UseStateResult,
 			target = p1.target,
-			onClose = var23,
-			onOpenChat = var24,
-			onInvitesSent = var21,
-			onOpenInvitePicker = var20
+			onClose = UseResult7,
+			onOpenChat = UseResult8,
+			onInvitesSent = UseResult5,
+			onOpenInvitePicker = UseResult4
 		}),
-		PublishSheet = if fFlagBuildPublishNavigationSheetModule then reactModule.createElement(var2, {
+		PublishSheet = if FFlagBuildPublishNavigationSheetModule then ReactModule.createElement(PublishSheetControllerModule, {
 			showPreviewButton = false,
-			isOpen = var13,
+			isOpen = UseStateResult1,
 			target = p1.target,
-			onClose = var25,
-			navigateToSubPage = var26
+			onClose = UseResult9,
+			navigateToSubPage = UseResult10
 		}) else nil
 	})
 end)

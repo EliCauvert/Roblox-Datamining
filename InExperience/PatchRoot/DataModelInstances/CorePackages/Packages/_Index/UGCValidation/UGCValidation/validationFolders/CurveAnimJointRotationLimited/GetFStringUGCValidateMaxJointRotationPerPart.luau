@@ -1,8 +1,8 @@
-﻿local getFStringUGCValidateMaxJointRotationModule = require(script.Parent.GetFStringUGCValidateMaxJointRotation)
+﻿local GetFStringUGCValidateMaxJointRotationModule = require(script.Parent.GetFStringUGCValidateMaxJointRotation)
 
-local function getFallbackValue()
-	-- upvalues: getFStringUGCValidateMaxJointRotationModule (ref)
-	return getFStringUGCValidateMaxJointRotationModule.asString()
+local function getFallbackValue() --[[ Line: 23 ]]
+	-- upvalues: GetFStringUGCValidateMaxJointRotationModule (copy)
+	return GetFStringUGCValidateMaxJointRotationModule.asString()
 end
 
 game:DefineFastString("UGCValidateMaxJointRotationHead", "")
@@ -19,67 +19,68 @@ game:DefineFastString("UGCValidateMaxJointRotationLeftFoot", "")
 game:DefineFastString("UGCValidateMaxJointRotationRightUpperLeg", "")
 game:DefineFastString("UGCValidateMaxJointRotationRightLowerLeg", "")
 game:DefineFastString("UGCValidateMaxJointRotationRightFoot", "")
-local t = {}
-local t_1 = {
-	Head = function()
+local config = {
+	Head = function() --[[ Line: 45 ]]
 		return game:GetFastString("UGCValidateMaxJointRotationHead")
 	end,
-	UpperTorso = function()
+	UpperTorso = function() --[[ Line: 48 ]]
 		return game:GetFastString("UGCValidateMaxJointRotationUpperTorso")
 	end,
-	LeftUpperLeg = function()
+	LeftUpperLeg = function() --[[ Line: 51 ]]
 		return game:GetFastString("UGCValidateMaxJointRotationLeftUpperLeg")
 	end,
-	LeftLowerLeg = function()
+	LeftLowerLeg = function() --[[ Line: 54 ]]
 		return game:GetFastString("UGCValidateMaxJointRotationLeftLowerLeg")
 	end,
-	LeftHand = function()
+	LeftHand = function() --[[ Line: 57 ]]
 		return game:GetFastString("UGCValidateMaxJointRotationLeftHand")
 	end,
-	RightUpperArm = function()
+	RightUpperArm = function() --[[ Line: 60 ]]
 		return game:GetFastString("UGCValidateMaxJointRotationRightUpperArm")
 	end,
-	RightLowerArm = function()
+	RightLowerArm = function() --[[ Line: 63 ]]
 		return game:GetFastString("UGCValidateMaxJointRotationRightLowerArm")
 	end,
-	RightHand = function()
+	RightHand = function() --[[ Line: 66 ]]
 		return game:GetFastString("UGCValidateMaxJointRotationRightHand")
 	end,
-	LeftUpperArm = function()
+	LeftUpperArm = function() --[[ Line: 69 ]]
 		return game:GetFastString("UGCValidateMaxJointRotationLeftUpperArm")
 	end,
-	LeftLowerArm = function()
+	LeftLowerArm = function() --[[ Line: 72 ]]
 		return game:GetFastString("UGCValidateMaxJointRotationLeftLowerArm")
 	end,
-	LeftFoot = function()
+	LeftFoot = function() --[[ Line: 75 ]]
 		return game:GetFastString("UGCValidateMaxJointRotationLeftFoot")
 	end,
-	RightUpperLeg = function()
+	RightUpperLeg = function() --[[ Line: 78 ]]
 		return game:GetFastString("UGCValidateMaxJointRotationRightUpperLeg")
 	end,
-	RightLowerLeg = function()
+	RightLowerLeg = function() --[[ Line: 81 ]]
 		return game:GetFastString("UGCValidateMaxJointRotationRightLowerLeg")
 	end,
-	RightFoot = function()
+	RightFoot = function() --[[ Line: 84 ]]
 		return game:GetFastString("UGCValidateMaxJointRotationRightFoot")
 	end
 }
-
-function t.asString(p1)
-	-- upvalues: t_1 (ref), getFallbackValue (ref)
-	local var1 = t_1[p1]
-	
-	if not var1 then
-		return getFallbackValue()
+local GetFStringUGCValidateMaxJointRotationPerPartModule = {
+	asString = function(p1) --[[ Line: 89 ]]
+		-- upvalues: config (copy), getFallbackValue (copy)
+		local Entry = config[p1]
+		
+		if Entry then
+			local EntryResult = Entry()
+			
+			return if #EntryResult == 0 then getFallbackValue() else EntryResult
+		else
+			return getFallbackValue()
+		end
 	end
-	local var2 = var1()
-	
-	return if #var2 == 0 then getFallbackValue() else var2
+}
+
+function GetFStringUGCValidateMaxJointRotationPerPartModule.asNumber(p1): number --[[ Line: 101 ]]
+	-- upvalues: GetFStringUGCValidateMaxJointRotationPerPartModule (copy)
+	return (tonumber(GetFStringUGCValidateMaxJointRotationPerPartModule.asString(p1)))
 end
 
-function t.asNumber(p1)
-	-- upvalues: t (ref)
-	return tonumber(t.asString(p1))
-end
-
-return t
+return GetFStringUGCValidateMaxJointRotationPerPartModule

@@ -1,105 +1,107 @@
-﻿local dataModelTraversalOptionsModule = require(script:FindFirstAncestor("SceneUnderstanding").options.DataModelTraversalOptions)
+﻿local DataModelTraversalOptionsModule = require(script:FindFirstAncestor("SceneUnderstanding").options.DataModelTraversalOptions)
 
-return function(p1, p2, p3)
-	-- upvalues: dataModelTraversalOptionsModule (ref)
-	local var1 = dataModelTraversalOptionsModule.new(p3)
-	local var2 = false
+return function(p1, Callback, p2) --[[ Line: 9 | Named "createLazyInstanceCollector" ]]
+	-- upvalues: DataModelTraversalOptionsModule (copy)
+	local NewDataModelTraversalOptions = DataModelTraversalOptionsModule.new(p2)
+	local Flag = false
+	local List = {}
+	local Total = 0
+	local List1 = {}
+	local SpawnedThread = nil
+	local List2 = {}
 	local t = {}
-	local var3 = 0
-	local t_1 = {}
-	local var4 = nil
-	local t_2 = {}
-	local t_3 = {}
 	
-	local function _()
-		-- upvalues: t_2 (ref), var1 (ref)
-		return math.min(#t_2, var1.instanceProcessingLimit)
+	local function _(): number --[[ Line: 24 | Named "getBatchCount" ]]
+		-- upvalues: List2 (copy), NewDataModelTraversalOptions (copy)
+		return (math.min(#List2, NewDataModelTraversalOptions.instanceProcessingLimit))
 	end
 	
-	local function onAncestryChanged(p4)
-		-- upvalues: t (ref)
-		if p4.Parent == nil then
-			local index = table.find(t, p4)
+	local function onAncestryChanged(Value) --[[ Line: 28 ]]
+		-- upvalues: List (copy)
+		if Value.Parent == nil then
+			local FoundIndex: number? = table.find(List, Value)
 			
-			if index then
-				table.remove(t, index)
+			if FoundIndex then
+				table.remove(List, FoundIndex)
 			end
 		end
 	end
 	
-	local function processStack()
-		-- upvalues: t_2 (ref), var1 (ref), p2 (ref), t (ref), t_1 (ref), onAncestryChanged (ref), var3 (write), t_3 (write), var2 (write)
-		local removed
-		local minValue = math.min(#t_2, var1.instanceProcessingLimit)
+	local function processStack(): boolean --[[ Line: 37 ]]
+		-- upvalues: List2 (copy), NewDataModelTraversalOptions (copy), Callback (copy), List (copy), List1 (copy), onAncestryChanged (copy), Total (ref), t (ref), Flag (ref)
+		local Smallest = math.min(#List2, NewDataModelTraversalOptions.instanceProcessingLimit)
 		
-		for _ = 1, minValue do
-			removed = table.remove(t_2, #t_2)
+		for _ = 1, Smallest do
+			local Removed = table.remove(List2, #List2)
 			
-			if not removed then
-				continue
-			end
-			if not p2 or p2(removed) then
-				table.insert(t, removed)
-				table.insert(t_1, removed.AncestryChanged:Connect(onAncestryChanged))
-			end
-			for i, v in removed:GetChildren() do
-				table.insert(t_2, v)
-			end
-		end
-		var3 += minValue
-		
-		for removed in t_3 do
-			task.spawn(function()
-				-- upvalues: removed (ref), t (copy)
-				removed(t)
-			end)
-		end
-		if #t_2 == 0 then
-			var2 = false
-			
-			return false
-		elseif var1.instanceProcessingLimit <= var3 then
-			var3 = 0
-			
-			return true
-		end
-		return false
-	end
-	
-	local _ = function()
-		-- upvalues: var2 (write), t_2 (ref), var1 (ref), processStack (ref), var4 (write)
-		if var2 or math.min(#t_2, var1.instanceProcessingLimit) == 0 then
-			return
-		end
-		var2 = true
-		processStack()
-		var4 = task.spawn(function()
-			-- upvalues: var2 (copy), processStack (copy)
-			task.wait()
-			while var2 do
-				if var2 and processStack() then
-					task.wait()
+			if Removed then
+				if not Callback or Callback(Removed) then
+					table.insert(List, Removed)
+					table.insert(List1, Removed.AncestryChanged:Connect(onAncestryChanged))
+				end
+				for _, child in Removed:GetChildren() do
+					table.insert(List2, child)
 				end
 			end
-		end)
+		end
+		Total += Smallest
+		
+		for i in t do
+			task.spawn(function() --[[ Line: 58 ]]
+				-- upvalues: i (copy), List (upval)
+				i(List)
+			end)
+		end
+		if #List2 == 0 then
+			Flag = false
+			
+			return false
+		elseif NewDataModelTraversalOptions.instanceProcessingLimit <= Total then
+			Total = 0
+			
+			return true
+		else
+			return false
+		end
 	end
 	
-	local function onDescendantAdded(p4)
-		-- upvalues: t_2 (ref), var2 (write), var1 (ref), processStack (ref), var4 (write)
-		table.insert(t_2, p4)
-		
-		if not var2 and not var2 then
-			if math.min(#t_2, var1.instanceProcessingLimit) == 0 then return end
-			var2 = true
+	local _ = function() --[[ Line: 80 | Named "startProcessingLoop" ]]
+		-- upvalues: Flag (ref), List2 (copy), NewDataModelTraversalOptions (copy), processStack (copy), SpawnedThread (ref)
+		if not Flag and math.min(#List2, NewDataModelTraversalOptions.instanceProcessingLimit) ~= 0 then
+			Flag = true
 			processStack()
-			var4 = task.spawn(function()
-				-- upvalues: var2 (copy), processStack (copy)
+			SpawnedThread = task.spawn(function() --[[ Line: 89 ]]
+				-- upvalues: Flag (upval), processStack (upval)
 				task.wait()
-				while true do
-					while var2 do
-						if var2 and processStack() then
-							task.wait()
-						end
+				while Flag do
+					local v1 = processStack()
+					
+					if Flag and v1 then
+						task.wait()
+					end
+				end
+			end)
+			
+			return
+		end
+	end
+	
+	local function onDescendantAdded(Descendant) --[[ Line: 102 ]]
+		-- upvalues: List2 (copy), Flag (ref), NewDataModelTraversalOptions (copy), processStack (copy), SpawnedThread (ref)
+		table.insert(List2, Descendant)
+		
+		if not Flag and not Flag then
+			if math.min(#List2, NewDataModelTraversalOptions.instanceProcessingLimit) == 0 then return end
+			Flag = true
+			processStack()
+			SpawnedThread = task.spawn(function() --[[ Line: 89 ]]
+				-- upvalues: Flag (upval), processStack (upval)
+				task.wait()
+				while Flag do
+					local v1 = processStack()
+					
+					if Flag and v1 then
+						task.wait()
 					end
 				end
 			end)
@@ -107,77 +109,77 @@ return function(p1, p2, p3)
 	end
 	
 	return {
-		setInstancesProcessedPerFrame = function(value)
-			-- upvalues: var1 (ref), var2 (write), t_2 (ref), processStack (ref), var4 (write)
-			var1.instanceProcessingLimit = math.clamp(value, 0, 1e999)
+		setInstancesProcessedPerFrame = function(Value: number) --[[ Line: 143 ]]
+			-- upvalues: NewDataModelTraversalOptions (copy), Flag (ref), List2 (copy), processStack (copy), SpawnedThread (ref)
+			NewDataModelTraversalOptions.instanceProcessingLimit = math.clamp(Value, 0, 1e999)
 			
-			if not var2 then
-				if math.min(#t_2, var1.instanceProcessingLimit) == 0 then return end
-				var2 = true
+			if not Flag then
+				if math.min(#List2, NewDataModelTraversalOptions.instanceProcessingLimit) == 0 then return end
+				Flag = true
 				processStack()
-				var4 = task.spawn(function()
-					-- upvalues: var2 (copy), processStack (copy)
+				SpawnedThread = task.spawn(function() --[[ Line: 89 ]]
+					-- upvalues: Flag (upval), processStack (upval)
 					task.wait()
-					while true do
-						while var2 do
-							if var2 and processStack() then
-								task.wait()
-							end
+					while Flag do
+						local v1 = processStack()
+						
+						if Flag and v1 then
+							task.wait()
 						end
 					end
 				end)
 			end
 		end,
-		listen = function()
-			-- upvalues: p1 (ref), t_1 (ref), onDescendantAdded (ref), t_2 (ref), var2 (write), var1 (ref), processStack (ref), var4 (write)
-			for i, v in p1 do
-				table.insert(t_1, v.DescendantAdded:Connect(onDescendantAdded))
+		listen = function() --[[ Line: 110 ]]
+			-- upvalues: p1 (copy), List1 (copy), onDescendantAdded (copy), List2 (copy), Flag (ref), NewDataModelTraversalOptions (copy), processStack (copy), SpawnedThread (ref)
+			for _, value in p1 do
+				table.insert(List1, value.DescendantAdded:Connect(onDescendantAdded))
 				
-				for i_1, v_1 in v:GetChildren() do
-					table.insert(t_2, v_1)
+				for _, child in value:GetChildren() do
+					table.insert(List2, child)
 				end
 			end
-			if not var2 then
-				if math.min(#t_2, var1.instanceProcessingLimit) == 0 then return end
-				var2 = true
+			if not Flag then
+				if math.min(#List2, NewDataModelTraversalOptions.instanceProcessingLimit) == 0 then return end
+				Flag = true
 				processStack()
-				var4 = task.spawn(function()
-					-- upvalues: var2 (copy), processStack (copy)
+				SpawnedThread = task.spawn(function() --[[ Line: 89 ]]
+					-- upvalues: Flag (upval), processStack (upval)
 					task.wait()
-					while true do
-						while var2 do
-							if var2 and processStack() then
-								task.wait()
-							end
+					while Flag do
+						local v1 = processStack()
+						
+						if Flag and v1 then
+							task.wait()
 						end
 					end
 				end)
 			end
 		end,
-		get = function()
+		get = function() --[[ Line: 148 ]]
+			-- upvalues: List (copy)
+			return List
+		end,
+		destroy = function() --[[ Line: 129 ]]
+			-- upvalues: Flag (ref), List1 (copy), t (ref), SpawnedThread (ref)
+			Flag = false
+			
+			for _, Connection in List1 do
+				Connection:Disconnect()
+			end
+			t = {}
+			
+			if SpawnedThread then
+				task.cancel(SpawnedThread)
+			end
+		end,
+		onStepped = function(Key) --[[ Line: 122 ]]
 			-- upvalues: t (ref)
-			return t
-		end,
-		destroy = function()
-			-- upvalues: var2 (write), t_1 (ref), t_3 (write), var4 (write)
-			var2 = false
+			t[Key] = true
 			
-			for i, v in t_1 do
-				v:Disconnect()
-			end
-			t_3 = {}
-			
-			if var4 then
-				task.cancel(var4)
-			end
-		end,
-		onStepped = function(p5)
-			-- upvalues: t_3 (write)
-			t_3[p5] = true
-			
-			return function()
-				-- upvalues: t_3 (copy), p5 (ref)
-				t_3[p5] = nil
+			return function() --[[ Line: 124 ]]
+				-- upvalues: t (upval), Key (copy)
+				t[Key] = nil
 			end
 		end
 	}

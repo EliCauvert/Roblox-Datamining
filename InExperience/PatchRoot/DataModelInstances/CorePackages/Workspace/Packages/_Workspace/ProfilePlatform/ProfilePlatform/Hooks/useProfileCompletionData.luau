@@ -1,53 +1,47 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local sduiSharedUtilitiesModule = require(parent.SduiSharedUtilities)
-local _ = require(parent.SduiCoreSystem)
-local enumsModule = require(profilePlatform.Common.Enums)
-local createProfileCompletionPromptsConfig = require(parent.ProfilePlatformCommon).Utils.createProfileCompletionPromptsConfig
-local serverTriggeredModalsModule = require(parent.ServerTriggeredModals)
-local profileCompletionResolveLatestSduiEntry = game:DefineFastFlag("ProfileCompletionResolveLatestSduiEntry", false)
-local getSduiApiStore = sduiSharedUtilitiesModule.getSduiApiStore
-local fetchPrompts = serverTriggeredModalsModule.fetchPrompts
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local _ = require(Parent.SduiCoreSystem)
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local CreateProfileCompletionPromptsConfigFunction = require(Parent.ProfilePlatformCommon).Utils.createProfileCompletionPromptsConfig
+local GetSduiApiStoreFunction = require(Parent.SduiSharedUtilities).getSduiApiStore
+local FetchPromptsFunction = require(Parent.ServerTriggeredModals).fetchPrompts
 
-return function()
-	-- upvalues: reactModule (ref), createProfileCompletionPromptsConfig (ref), fetchPrompts (ref), profileCompletionResolveLatestSduiEntry (ref), getSduiApiStore (ref), enumsModule (ref), signalsReactModule (ref)
-	local var1 = reactModule.useMemo(function()
-		-- upvalues: createProfileCompletionPromptsConfig (copy)
-		return createProfileCompletionPromptsConfig()
+return function() --[[ Line: 26 | Named "useProfileCompletionData" ]]
+	-- upvalues: ReactModule (copy), CreateProfileCompletionPromptsConfigFunction (copy), FetchPromptsFunction (copy), GetSduiApiStoreFunction (copy), EnumsModule (copy), SignalsReactModule (copy)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 27 ]]
+		-- upvalues: CreateProfileCompletionPromptsConfigFunction (upval)
+		return CreateProfileCompletionPromptsConfigFunction()
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: fetchPrompts (copy), var1 (ref)
-		fetchPrompts(var1, true)
-	end, { var1 })
+	ReactModule.useEffect(function() --[[ Line: 31 ]]
+		-- upvalues: FetchPromptsFunction (upval), UseMemoResult (copy)
+		FetchPromptsFunction(UseMemoResult, true)
+	end, { UseMemoResult })
 	
-	return signalsReactModule.useSignalState(reactModule.useCallback(function(p1)
-		-- upvalues: profileCompletionResolveLatestSduiEntry (copy), getSduiApiStore (copy), enumsModule (copy)
-		if not profileCompletionResolveLatestSduiEntry then
-			return getSduiApiStore().getRootConfig(enumsModule.Components.ProfileCompletion, p1)
-		end
-		local var2 = getSduiApiStore().getData(enumsModule.Components.ProfileCompletion).data(p1)
+	return SignalsReactModule.useSignalState((ReactModule.useCallback(function(p1) --[[ Line: 39 ]]
+		-- upvalues: GetSduiApiStoreFunction (upval), EnumsModule (upval)
+		local DataResult = GetSduiApiStoreFunction().getData(EnumsModule.Components.ProfileCompletion).data(p1)
 		
-		if not var2 then
+		if not DataResult then
 			return nil
 		end
-		local config = nil
-		local var3 = 0
+		local v1 = nil
+		local v2 = 0
 		
-		for i, v in var2 do
-			if v and v.config then
-				local dataUpdatedTimestamp = v.dataUpdatedTimestamp or 0
+		for _, value in DataResult do
+			if value and value.config then
+				local DataUpdatedTimestamp = value.dataUpdatedTimestamp or 0
 				
-				if not config or var3 < dataUpdatedTimestamp then
-					config = v.config
-					var3 = dataUpdatedTimestamp
+				if not v1 or v2 < DataUpdatedTimestamp then
+					v1 = value.config
+					v2 = DataUpdatedTimestamp
 				end
 			end
 		end
-		return config
-	end, {})), reactModule.useCallback(function()
-		-- upvalues: fetchPrompts (copy), createProfileCompletionPromptsConfig (copy)
-		fetchPrompts(createProfileCompletionPromptsConfig(), true)
-	end, {})
+		return v1
+	end, {}))), (ReactModule.useCallback(function() --[[ Line: 35 ]]
+		-- upvalues: FetchPromptsFunction (upval), CreateProfileCompletionPromptsConfigFunction (upval)
+		FetchPromptsFunction(CreateProfileCompletionPromptsConfigFunction(), true)
+	end, {}))
 end

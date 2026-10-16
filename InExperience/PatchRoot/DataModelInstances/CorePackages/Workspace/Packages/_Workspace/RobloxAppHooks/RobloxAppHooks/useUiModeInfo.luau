@@ -1,24 +1,24 @@
-﻿local parent = script:FindFirstAncestor("RobloxAppHooks").Parent
-local reactModule = require(parent.React)
-local robloxAppEnumsModule = require(parent.RobloxAppEnums)
-local deviceType = robloxAppEnumsModule.DeviceType
-local uiMode = robloxAppEnumsModule.UiMode
-local useDeviceTypeModule = require(script.Parent.useDeviceType)
-local t = {
-	[deviceType.Desktop] = uiMode.Unknown,
-	[deviceType.Tablet] = uiMode.Unknown,
-	[deviceType.Phone] = uiMode.Unknown,
-	[deviceType.Console] = uiMode.TenFoot,
-	[deviceType.VR] = uiMode.VR
+﻿local Parent = script:FindFirstAncestor("RobloxAppHooks").Parent
+local ReactModule = require(Parent.React)
+local RobloxAppEnumsModule = require(Parent.RobloxAppEnums)
+local DeviceType = RobloxAppEnumsModule.DeviceType
+local UiMode = RobloxAppEnumsModule.UiMode
+local UseDeviceTypeModule = require(script.Parent.useDeviceType)
+local config = {
+	[DeviceType.Desktop] = UiMode.Unknown,
+	[DeviceType.Tablet] = UiMode.Unknown,
+	[DeviceType.Phone] = UiMode.Unknown,
+	[DeviceType.Console] = UiMode.TenFoot,
+	[DeviceType.VR] = UiMode.VR
 }
 
-return function()
-	-- upvalues: useDeviceTypeModule (ref), t (ref), uiMode (ref), reactModule (ref)
-	local var1 = useDeviceTypeModule()
-	local var2 = t[var1] or uiMode.Unknown
+return function() --[[ Line: 36 | Named "useUiModeInfo" ]]
+	-- upvalues: UseDeviceTypeModule (copy), config (copy), UiMode (copy), ReactModule (copy)
+	local UseDeviceTypeModuleResult = UseDeviceTypeModule()
+	local Entry = config[UseDeviceTypeModuleResult] or UiMode.Unknown
 	
-	return reactModule.useMemo(function()
-		-- upvalues: var1 (ref), var2 (ref)
-		return { deviceType = var1, uiMode = var2 }
-	end, { var1, var2 })
+	return (ReactModule.useMemo(function() --[[ Line: 40 ]]
+		-- upvalues: UseDeviceTypeModuleResult (copy), Entry (copy)
+		return { deviceType = UseDeviceTypeModuleResult, uiMode = Entry }
+	end, { UseDeviceTypeModuleResult, Entry }))
 end

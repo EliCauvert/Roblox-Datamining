@@ -1,92 +1,93 @@
-﻿local starterGuiService = game:GetService("StarterGui")
-local coreGuiCommon = script:FindFirstAncestor("CoreGuiCommon")
-local parent = coreGuiCommon.Parent
-local constantsModule = require(coreGuiCommon.Constants)
-local cachedPolicyServiceModule = require(parent.CachedPolicyService)
-local foundationModule = require(parent.Foundation)
-local motionModule = require(parent.Motion)
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local fFlagUseNewHurtOverlayImage = require(coreGuiCommon.Flags).FFlagUseNewHurtOverlayImage
-local fFlagUseNewHurtOverlayAnimation = require(coreGuiCommon.Flags).FFlagUseNewHurtOverlayAnimation
-local getLocalHumanoidStore = require(coreGuiCommon.Stores).GetLocalHumanoidStore
-local image = foundationModule.Image
-local color = Color3.fromRGB(187, 0, 4)
-local color3 = Color3.new(1, 1, 1)
-local t = {
-	showOverlay = motionModule.createState({
+﻿local StarterGui = game:GetService("StarterGui")
+local CoreGuiCommon = script:FindFirstAncestor("CoreGuiCommon")
+local Parent = CoreGuiCommon.Parent
+local ConstantsModule = require(CoreGuiCommon.Constants)
+local CachedPolicyServiceModule = require(Parent.CachedPolicyService)
+local MotionModule = require(Parent.Motion)
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local FFlagUseNewHurtOverlayImage = require(CoreGuiCommon.Flags).FFlagUseNewHurtOverlayImage
+local FFlagUseNewHurtOverlayAnimation = require(CoreGuiCommon.Flags).FFlagUseNewHurtOverlayAnimation
+local GetLocalHumanoidStore = require(CoreGuiCommon.Stores).GetLocalHumanoidStore
+local Image = require(Parent.Foundation).Image
+local _Color3 = Color3.fromRGB(187, 0, 4)
+local _Color3_1 = Color3.new(1, 1, 1)
+local config = {
+	showOverlay = MotionModule.createState({
 		transparency = 0,
-		size = if fFlagUseNewHurtOverlayAnimation then nil else UDim2.fromScale(1.5, 1.5)
+		size = if FFlagUseNewHurtOverlayAnimation then nil else UDim2.fromScale(1.5, 1.5)
 	}, {
-		default = motionModule.transition(motionModule.TransitionPreset.Default, {
-			duration = if fFlagUseNewHurtOverlayAnimation then 0.1 else 0
+		default = MotionModule.transition(MotionModule.TransitionPreset.Default, {
+			duration = if FFlagUseNewHurtOverlayAnimation then 0.1 else 0
 		})
 	}),
-	hideOverlay = motionModule.createState({
+	hideOverlay = MotionModule.createState({
 		transparency = 1,
-		size = if fFlagUseNewHurtOverlayAnimation then nil else UDim2.fromScale(3, 3)
+		size = if FFlagUseNewHurtOverlayAnimation then nil else UDim2.fromScale(3, 3)
 	}, {
-		default = motionModule.transition(motionModule.TransitionPreset.Default, {
-			duration = if fFlagUseNewHurtOverlayAnimation then 0.5 else 0.3
+		default = MotionModule.transition(MotionModule.TransitionPreset.Default, {
+			duration = if FFlagUseNewHurtOverlayAnimation then 0.5 else 0.3
 		})
 	})
 }
 
-function HurtOverlay(p1)
-	-- upvalues: starterGuiService (ref), motionModule (ref), t (ref), reactModule (ref), signalsReactModule (ref), getLocalHumanoidStore (ref), signalsModule (ref), constantsModule (ref), fFlagUseNewHurtOverlayImage (ref), color (ref), cachedPolicyServiceModule (ref), color3 (ref), image (ref), fFlagUseNewHurtOverlayAnimation (ref)
-	local mockStarterGui = p1.mockStarterGui or starterGuiService
-	local var1, var2 = motionModule.useMotion(t.hideOverlay)
-	local var3, var4 = reactModule.useState(mockStarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.Health))
-	local var5 = signalsReactModule.useSignalState(getLocalHumanoidStore)
-	local var6 = reactModule.useRef(var5.getHealthValue(false))
-	reactModule.useEffect(function()
-		-- upvalues: signalsModule (copy), var5 (ref), var6 (ref), constantsModule (copy), var2 (ref), t (copy), mockStarterGui (ref), var4 (ref)
-		local var7 = signalsModule.createEffect(function(p2)
-			-- upvalues: var5 (copy), var6 (copy), constantsModule (copy), var2 (copy), t (copy)
-			local healthValue = var5.getHealthValue(p2)
-			local current = var6.current
-			var6.current = healthValue
+function HurtOverlay(p1) --[[ Line: 51 ]]
+	-- upvalues: StarterGui (copy), MotionModule (copy), config (copy), ReactModule (copy), SignalsReactModule (copy), GetLocalHumanoidStore (copy), SignalsModule (copy), ConstantsModule (copy), FFlagUseNewHurtOverlayImage (copy), _Color3 (copy), CachedPolicyServiceModule (copy), _Color3_1 (copy), Image (copy), FFlagUseNewHurtOverlayAnimation (copy)
+	local MockStarterGui = p1.mockStarterGui or StarterGui
+	local UseMotionResult, UseMotionResult2 = MotionModule.useMotion(config.hideOverlay)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(MockStarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.Health))
+	local UseSignalStateResult = SignalsReactModule.useSignalState(GetLocalHumanoidStore)
+	local UseRefResult = ReactModule.useRef(UseSignalStateResult.getHealthValue(false))
+	ReactModule.useEffect(function() --[[ Line: 60 ]]
+		-- upvalues: SignalsModule (upval), UseSignalStateResult (copy), UseRefResult (copy), ConstantsModule (upval), UseMotionResult2 (copy), config (upval), MockStarterGui (copy), UseStateResult2 (copy)
+		local Effect = SignalsModule.createEffect(function(p2) --[[ Line: 61 ]]
+			-- upvalues: UseSignalStateResult (upval), UseRefResult (upval), ConstantsModule (upval), UseMotionResult2 (upval), config (upval)
+			local HealthValue = UseSignalStateResult.getHealthValue(p2)
+			local Current = UseRefResult.current
+			UseRefResult.current = HealthValue
 			
-			if not healthValue.health or not healthValue.maxHealth or not current.health or healthValue.isDead and current.isDead then return end
-			if (current.health - healthValue.health) / healthValue.maxHealth < constantsModule.HealthPercentForOverlay then
+			if not HealthValue.health or not HealthValue.maxHealth or not Current.health or HealthValue.isDead and Current.isDead then return end
+			if (Current.health - HealthValue.health) / HealthValue.maxHealth >= ConstantsModule.HealthPercentForOverlay then
+				UseMotionResult2(config.showOverlay, {
+					onAnimationComplete = function(Enabled) --[[ Line: 79 ]]
+						-- upvalues: UseMotionResult2 (upval), config (upval)
+						if Enabled == true then
+							UseMotionResult2(config.hideOverlay)
+						end
+					end
+				})
+				
 				return
 			end
-			var2(t.showOverlay, {
-				onAnimationComplete = function(p3)
-					-- upvalues: var2 (copy), t (copy)
-					if p3 == true then
-						var2(t.hideOverlay)
-					end
-				end
-			})
 		end)
-		local coreGuiChangedSignalConnection = mockStarterGui.CoreGuiChangedSignal:Connect(function(p2, p3)
-			-- upvalues: var4 (copy)
-			if p2 == Enum.CoreGuiType.Health or p2 == Enum.CoreGuiType.All then
-				var4(p3)
+		local CoreGuiChangedSignalConnection = MockStarterGui.CoreGuiChangedSignal:Connect(function(CoreGuiType, Enabled) --[[ Line: 88 ]]
+			-- upvalues: UseStateResult2 (upval)
+			if CoreGuiType == Enum.CoreGuiType.Health or CoreGuiType == Enum.CoreGuiType.All then
+				UseStateResult2(Enabled)
 			end
 		end)
 		
-		return function()
-			-- upvalues: var7 (ref), coreGuiChangedSignalConnection (ref)
-			var7()
-			coreGuiChangedSignalConnection:Disconnect()
+		return function() --[[ Line: 95 ]]
+			-- upvalues: Effect (copy), CoreGuiChangedSignalConnection (copy)
+			Effect()
+			CoreGuiChangedSignalConnection:Disconnect()
 		end
-	end, { var5 })
-	local var7 = if cachedPolicyServiceModule:IsSubjectToChinaPolicies() then color3 else color
+	end, { UseSignalStateResult })
+	local HurtOverlayAssetPng: string = if FFlagUseNewHurtOverlayImage then "rbxasset://textures/ui/TopBar/HurtOverlayAsset.png" else "rbxasset://textures/ui/TopBar/WhiteOverlayAsset.png"
+	local Color = if CachedPolicyServiceModule:IsSubjectToChinaPolicies() then _Color3_1 else _Color3
 	
-	return if var3 then reactModule.createElement(image, {
+	return if UseStateResult then ReactModule.createElement(Image, {
 		tag = "anchor-center-center position-center-center",
 		testId = "hurt-overlay",
-		Image = if fFlagUseNewHurtOverlayImage then "rbxasset://textures/ui/TopBar/HurtOverlayAsset.png" else "rbxasset://textures/ui/TopBar/WhiteOverlayAsset.png",
-		imageStyle = var1.transparency:map(function(p2)
-			-- upvalues: var7 (write)
-			return { Color3 = var7, Transparency = p2 }
+		Image = HurtOverlayAssetPng,
+		imageStyle = UseMotionResult.transparency:map(function(Transparency) --[[ Line: 114 ]]
+			-- upvalues: Color (ref)
+			return { Color3 = Color, Transparency = Transparency }
 		end),
 		ScaleType = Enum.ScaleType.Crop,
-		Size = if fFlagUseNewHurtOverlayAnimation then UDim2.fromScale(1, 1) else var1.size
+		Size = if FFlagUseNewHurtOverlayAnimation then UDim2.fromScale(1, 1) else UseMotionResult.size
 	}) else nil
 end
 
-return reactModule.memo(HurtOverlay)
+return ReactModule.memo(HurtOverlay)

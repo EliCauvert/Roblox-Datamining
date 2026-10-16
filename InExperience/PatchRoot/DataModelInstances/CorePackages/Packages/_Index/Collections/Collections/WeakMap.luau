@@ -1,24 +1,24 @@
 ﻿local _ = require(script.Parent.Parent.ES7Types)
-local t = {}
-t.__index = t
+local WeakMapModule = {}
+WeakMapModule.__index = WeakMapModule
 
-function t.new()
-	-- upvalues: t (ref)
-	return setmetatable({ _weakMap = setmetatable({}, { __mode = "k" }) }, t)
+function WeakMapModule.new() --[[ Line: 37 ]]
+	-- upvalues: WeakMapModule (copy)
+	return (setmetatable({ _weakMap = setmetatable({}, { __mode = "k" }) }, WeakMapModule))
 end
 
-function t:get(p1)
+function WeakMapModule:get(p1) --[[ Line: 42 ]]
 	return self._weakMap[p1]
 end
 
-function t:set(p1, p2)
+function WeakMapModule:set(p1, p2) --[[ Line: 46 ]]
 	self._weakMap[p1] = p2
 	
 	return self
 end
 
-function t:has(p1)
+function WeakMapModule:has(p1): boolean --[[ Line: 51 ]]
 	return self._weakMap[p1] ~= nil
 end
 
-return t
+return WeakMapModule

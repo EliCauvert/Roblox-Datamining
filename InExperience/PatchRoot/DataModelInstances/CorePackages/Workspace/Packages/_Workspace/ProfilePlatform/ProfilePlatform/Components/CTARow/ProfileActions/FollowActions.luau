@@ -1,89 +1,89 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local buttonVariant = require(parent.Foundation).Enums.ButtonVariant
-local setCurrentToastMessage = require(parent.ToastRodux).Actions.SetCurrentToastMessage
-local groupsNetworkingModule = require(profilePlatform.Networking.GroupsNetworking)
-local getProfilePlatformModule = require(profilePlatform.Networking.getProfilePlatform)
-local refreshProfilePlatformActionInfoModule = require(profilePlatform.Networking.refreshProfilePlatformActionInfo)
-local getAvailableCommunityComponentsModule = require(profilePlatform.Hooks.getAvailableCommunityComponents)
-local enumsModule = require(profilePlatform.Common.Enums)
-local _ = require(profilePlatform.Components.CTARow.Types)
-local eventNamesModule = require(profilePlatform.Analytics.EventNames)
-local profileTypes = enumsModule.ProfileTypes
-local fFlagProfilePlatformEnableUserFollowModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableUserFollow)
-local followingModule = require(parent.DataHydration.Following)
-local followingStore = followingModule.FollowingStore
-local followingUpdateErrorTypeEnum = followingModule.FollowingUpdateErrorTypeEnum
-local createChallengeNetwork = require(parent.GenericChallenges).Middleware.createChallengeNetwork
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ButtonVariant = require(Parent.Foundation).Enums.ButtonVariant
+local SetCurrentToastMessageFunction = require(Parent.ToastRodux).Actions.SetCurrentToastMessage
+local GroupsNetworkingModule = require(ProfilePlatform.Networking.GroupsNetworking)
+local GetProfilePlatformModule = require(ProfilePlatform.Networking.getProfilePlatform)
+local RefreshProfilePlatformActionInfoModule = require(ProfilePlatform.Networking.refreshProfilePlatformActionInfo)
+local GetAvailableCommunityComponentsModule = require(ProfilePlatform.Hooks.getAvailableCommunityComponents)
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local _ = require(ProfilePlatform.Components.CTARow.Types)
+local EventNamesModule = require(ProfilePlatform.Analytics.EventNames)
+local ProfileTypes = EnumsModule.ProfileTypes
+local FFlagProfilePlatformEnableUserFollowModule = require(ProfilePlatform.Flags.FFlagProfilePlatformEnableUserFollow)
+local FollowingModule = require(Parent.DataHydration.Following)
+local FollowingStore = FollowingModule.FollowingStore
+local FollowingUpdateErrorTypeEnum = FollowingModule.FollowingUpdateErrorTypeEnum
+local CreateChallengeNetworkFunction = require(Parent.GenericChallenges).Middleware.createChallengeNetwork
 
-local function handleUpdateUserFollowStatus(p1, p2, p3)
-	-- upvalues: createChallengeNetwork (ref), setCurrentToastMessage (ref), refreshProfilePlatformActionInfoModule (ref), followingUpdateErrorTypeEnum (ref)
-	return p2(p1.profileId, createChallengeNetwork()):andThen(function()
-		-- upvalues: p1 (ref), setCurrentToastMessage (copy), p3 (ref), refreshProfilePlatformActionInfoModule (copy)
-		p1.dispatch(setCurrentToastMessage({ isLocalized = true, toastMessage = p3 }))
+local function handleUpdateUserFollowStatus(p1, Callback, ToastMessage) --[[ Line: 24 ]]
+	-- upvalues: CreateChallengeNetworkFunction (copy), SetCurrentToastMessageFunction (copy), RefreshProfilePlatformActionInfoModule (copy), FollowingUpdateErrorTypeEnum (copy)
+	return Callback(p1.profileId, CreateChallengeNetworkFunction()):andThen(function() --[[ Line: 29 ]]
+		-- upvalues: p1 (copy), SetCurrentToastMessageFunction (upval), ToastMessage (copy), RefreshProfilePlatformActionInfoModule (upval)
+		p1.dispatch(SetCurrentToastMessageFunction({ isLocalized = true, toastMessage = ToastMessage }))
 		
-		return p1.dispatch(refreshProfilePlatformActionInfoModule(p1.profileId, p1.actionsComponentRequest))
-	end, function(p4)
-		-- upvalues: p1 (ref), setCurrentToastMessage (copy), followingUpdateErrorTypeEnum (copy)
-		p1.dispatch(setCurrentToastMessage({
+		return p1.dispatch(RefreshProfilePlatformActionInfoModule(p1.profileId, p1.actionsComponentRequest))
+	end, function(p2) --[[ Line: 35 ]]
+		-- upvalues: p1 (copy), SetCurrentToastMessageFunction (upval), FollowingUpdateErrorTypeEnum (upval)
+		p1.dispatch(SetCurrentToastMessageFunction({
 			isLocalized = true,
-			toastMessage = if p4 == nil or p4.errorType ~= followingUpdateErrorTypeEnum.Captcha then p1.localized.somethingIsWrongToast else p1.localized.userNotPassedCaptchaError
+			toastMessage = if p2 == nil or p2.errorType ~= FollowingUpdateErrorTypeEnum.Captcha then p1.localized.somethingIsWrongToast else p1.localized.userNotPassedCaptchaError
 		}))
 	end)
 end
 
 return {
-	[enumsModule.ProfileActions.Follow] = function(p1)
-		-- upvalues: buttonVariant (ref), enumsModule (ref), profileTypes (ref), fFlagProfilePlatformEnableUserFollowModule (ref), eventNamesModule (ref), handleUpdateUserFollowStatus (ref), followingStore (ref), groupsNetworkingModule (ref), getProfilePlatformModule (ref), getAvailableCommunityComponentsModule (ref)
+	[EnumsModule.ProfileActions.Follow] = function(p1) --[[ Line: 46 ]]
+		-- upvalues: ButtonVariant (copy), EnumsModule (copy), ProfileTypes (copy), FFlagProfilePlatformEnableUserFollowModule (copy), EventNamesModule (copy), handleUpdateUserFollowStatus (copy), FollowingStore (copy), GroupsNetworkingModule (copy), GetProfilePlatformModule (copy), GetAvailableCommunityComponentsModule (copy)
 		return {
-			variant = buttonVariant.Standard,
-			text = p1.localized[enumsModule.ProfileActions.Follow],
+			variant = ButtonVariant.Standard,
+			text = p1.localized[EnumsModule.ProfileActions.Follow],
 			onActivated = {
-				[profileTypes.User] = if fFlagProfilePlatformEnableUserFollowModule then function()
-					-- upvalues: p1 (ref), eventNamesModule (copy), handleUpdateUserFollowStatus (copy), followingStore (copy)
-					p1.analytics.fireAnalyticsEvent(eventNamesModule.CTAButtonFollow, { buttonSurface = p1.buttonSurface })
+				[ProfileTypes.User] = if FFlagProfilePlatformEnableUserFollowModule then function() --[[ Line: 52 ]]
+					-- upvalues: p1 (copy), EventNamesModule (upval), handleUpdateUserFollowStatus (upval), FollowingStore (upval)
+					p1.analytics.fireAnalyticsEvent(EventNamesModule.CTAButtonFollow, { buttonSurface = p1.buttonSurface })
 					
-					return handleUpdateUserFollowStatus(p1, followingStore.get().Follow, p1.localized.followedToast)
+					return handleUpdateUserFollowStatus(p1, FollowingStore.get().Follow, p1.localized.followedToast)
 				end else nil,
-				[profileTypes.Community] = function()
-					-- upvalues: p1 (ref), eventNamesModule (copy), groupsNetworkingModule (copy), getProfilePlatformModule (copy), getAvailableCommunityComponentsModule (copy)
-					p1.analytics.fireAnalyticsEvent(eventNamesModule.CTAButtonFollow, { buttonSurface = p1.buttonSurface })
+				[ProfileTypes.Community] = function() --[[ Line: 63 ]]
+					-- upvalues: p1 (copy), EventNamesModule (upval), GroupsNetworkingModule (upval), GetProfilePlatformModule (upval), GetAvailableCommunityComponentsModule (upval)
+					p1.analytics.fireAnalyticsEvent(EventNamesModule.CTAButtonFollow, { buttonSurface = p1.buttonSurface })
 					
-					return p1.dispatch(groupsNetworkingModule.JoinGroup.API({ groupId = p1.profileId })):andThen(function()
-						-- upvalues: p1 (copy), getProfilePlatformModule (copy), getAvailableCommunityComponentsModule (copy)
-						p1.dispatch(getProfilePlatformModule.API({
+					return p1.dispatch(GroupsNetworkingModule.JoinGroup.API({ groupId = p1.profileId })):andThen(function() --[[ Line: 71 ]]
+						-- upvalues: p1 (upval), GetProfilePlatformModule (upval), GetAvailableCommunityComponentsModule (upval)
+						p1.dispatch(GetProfilePlatformModule.API({
 							includeComponentOrdering = true,
 							profileType = p1.profileType,
 							profileId = p1.profileId,
-							components = getAvailableCommunityComponentsModule()
+							components = GetAvailableCommunityComponentsModule()
 						}))
 					end)
 				end
 			}
 		}
 	end,
-	[enumsModule.ProfileActions.Unfollow] = function(p1)
-		-- upvalues: enumsModule (ref), profileTypes (ref), fFlagProfilePlatformEnableUserFollowModule (ref), eventNamesModule (ref), handleUpdateUserFollowStatus (ref), followingStore (ref), groupsNetworkingModule (ref), getProfilePlatformModule (ref), getAvailableCommunityComponentsModule (ref)
+	[EnumsModule.ProfileActions.Unfollow] = function(p1) --[[ Line: 84 ]]
+		-- upvalues: EnumsModule (copy), ProfileTypes (copy), FFlagProfilePlatformEnableUserFollowModule (copy), EventNamesModule (copy), handleUpdateUserFollowStatus (copy), FollowingStore (copy), GroupsNetworkingModule (copy), GetProfilePlatformModule (copy), GetAvailableCommunityComponentsModule (copy)
 		return {
-			text = p1.localized[enumsModule.ProfileActions.Unfollow],
+			text = p1.localized[EnumsModule.ProfileActions.Unfollow],
 			onActivated = {
-				[profileTypes.User] = if fFlagProfilePlatformEnableUserFollowModule then function()
-					-- upvalues: p1 (ref), eventNamesModule (copy), handleUpdateUserFollowStatus (copy), followingStore (copy)
-					p1.analytics.fireAnalyticsEvent(eventNamesModule.ContextualMenuButtonUnfollow, { buttonSurface = p1.buttonSurface })
+				[ProfileTypes.User] = if FFlagProfilePlatformEnableUserFollowModule then function() --[[ Line: 89 ]]
+					-- upvalues: p1 (copy), EventNamesModule (upval), handleUpdateUserFollowStatus (upval), FollowingStore (upval)
+					p1.analytics.fireAnalyticsEvent(EventNamesModule.ContextualMenuButtonUnfollow, { buttonSurface = p1.buttonSurface })
 					
-					return handleUpdateUserFollowStatus(p1, followingStore.get().Unfollow, p1.localized.unfollowedToast)
+					return handleUpdateUserFollowStatus(p1, FollowingStore.get().Unfollow, p1.localized.unfollowedToast)
 				end else nil,
-				[profileTypes.Community] = function()
-					-- upvalues: p1 (ref), eventNamesModule (copy), groupsNetworkingModule (copy), getProfilePlatformModule (copy), getAvailableCommunityComponentsModule (copy)
-					p1.analytics.fireAnalyticsEvent(eventNamesModule.ContextualMenuButtonUnfollow, { buttonSurface = p1.buttonSurface })
+				[ProfileTypes.Community] = function() --[[ Line: 100 ]]
+					-- upvalues: p1 (copy), EventNamesModule (upval), GroupsNetworkingModule (upval), GetProfilePlatformModule (upval), GetAvailableCommunityComponentsModule (upval)
+					p1.analytics.fireAnalyticsEvent(EventNamesModule.ContextualMenuButtonUnfollow, { buttonSurface = p1.buttonSurface })
 					
-					return p1.dispatch(groupsNetworkingModule.LeaveGroup.API({ groupId = p1.profileId, userId = p1.localUserId })):andThen(function()
-						-- upvalues: p1 (copy), getProfilePlatformModule (copy), getAvailableCommunityComponentsModule (copy)
-						p1.dispatch(getProfilePlatformModule.API({
+					return p1.dispatch(GroupsNetworkingModule.LeaveGroup.API({ groupId = p1.profileId, userId = p1.localUserId })):andThen(function() --[[ Line: 110 ]]
+						-- upvalues: p1 (upval), GetProfilePlatformModule (upval), GetAvailableCommunityComponentsModule (upval)
+						p1.dispatch(GetProfilePlatformModule.API({
 							includeComponentOrdering = true,
 							profileType = p1.profileType,
 							profileId = p1.profileId,
-							components = getAvailableCommunityComponentsModule()
+							components = GetAvailableCommunityComponentsModule()
 						}))
 					end)
 				end

@@ -1,30 +1,31 @@
-﻿local parent = script:FindFirstAncestor("ReactUtils").Parent
-local reactModule = require(parent.React)
-local _ = require(parent.GoodSignal)
+﻿local Parent = script:FindFirstAncestor("ReactUtils").Parent
+local ReactModule = require(Parent.React)
+local _ = require(Parent.GoodSignal)
 
-return function(p1, p2, p3)
-	-- upvalues: reactModule (ref)
-	local var1 = reactModule.useMemo(function()
-		-- upvalues: p2 (ref)
-		return p2
-	end, p3)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var1 (ref)
-		if p1 == nil then
+return function(Signal, p1, p2) --[[ Line: 8 | Named "useEventConnection" ]]
+	-- upvalues: ReactModule (copy)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 13 ]]
+		-- upvalues: p1 (copy)
+		return p1
+	end, p2)
+	ReactModule.useEffect(function() --[[ Line: 17 ]]
+		-- upvalues: Signal (copy), UseMemoResult (copy)
+		if Signal == nil then
 			return nil
-		elseif typeof(p1) == "RBXScriptSignal" then
-			local var2 = p1:Connect(var1)
+		elseif typeof(Signal) == "RBXScriptSignal" then
+			local Connection = Signal:Connect(UseMemoResult)
 			
-			return function()
-				-- upvalues: var2 (ref)
-				var2:Disconnect()
+			return function() --[[ Line: 26 ]]
+				-- upvalues: Connection (copy)
+				Connection:Disconnect()
+			end
+		else
+			local Connection1 = Signal:Connect(UseMemoResult)
+			
+			return function() --[[ Line: 33 ]]
+				-- upvalues: Connection1 (copy)
+				Connection1:Disconnect()
 			end
 		end
-		local var3 = p1:Connect(var1)
-		
-		return function()
-			-- upvalues: var3 (ref)
-			var3:Disconnect()
-		end
-	end, { p1, var1 })
+	end, { Signal, UseMemoResult })
 end

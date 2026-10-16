@@ -1,184 +1,193 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local reactRobloxModule = require(parent.ReactRoblox)
-local guiService = game:GetService("GuiService")
-local useTokens = foundationModule.Hooks.useTokens
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.ReactRoblox)
+local GuiService = game:GetService("GuiService")
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-local function _(p1, p2)
-	if #p1 ~= #p2 then
+local function _(List, p1): boolean --[[ Line: 39 | Named "sameSnapPoints" ]]
+	if #List ~= #p1 then
 		return false
 	end
-	for i, v in p1 do
-		if p2[i] ~= v then
+	for i, value in List do
+		if p1[i] ~= value then
 			return false
 		end
 	end
 	return true
 end
 
-local function useSheetBounds(p3, p4, p5, p6, p7, p8)
-	-- upvalues: useTokens (ref), reactModule (ref)
-	local var1 = useTokens()
-	local onBoundsChanged = p3.onBoundsChanged
-	reactModule.useEffect(function()
-		-- upvalues: p3 (ref), p5 (ref), p6 (ref), p4 (ref), onBoundsChanged (ref), p8 (ref), var1 (ref), p7 (ref)
-		if not p3.isOpen or p5 == nil or (p6 == nil or p4 == nil) then
-			onBoundsChanged(nil, nil)
-			p8(nil)
+local function useSheetBounds(p2, Frame: Frame, Frame1: Frame, Frame2: Frame, p3, Callback) --[[ Line: 51 ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	local OnBoundsChangedFunction = p2.onBoundsChanged
+	ReactModule.useEffect(function() --[[ Line: 61 ]]
+		-- upvalues: p2 (copy), Frame1 (copy), Frame2 (copy), Frame (copy), OnBoundsChangedFunction (copy), Callback (copy), UseTokensResult (copy), p3 (copy)
+		if not p2.isOpen or Frame1 == nil or Frame2 == nil or Frame == nil then
+			OnBoundsChangedFunction(nil, nil)
+			Callback(nil)
 			
 			return nil
 		end
-		local function updateBounds()
-			-- upvalues: p4 (copy), p5 (copy), onBoundsChanged (copy), p8 (copy), p6 (copy), var1 (copy), p7 (copy)
-			local absolutePosition = p4.AbsolutePosition
+		local function updateBounds() --[[ Line: 67 ]]
+			-- upvalues: Frame (upval), Frame1 (upval), OnBoundsChangedFunction (upval), Callback (upval), Frame2 (upval), UseTokensResult (upval), p3 (upval)
+			local AbsolutePosition = Frame.AbsolutePosition
 			
-			if p5.AbsoluteSize.X < p4.AbsoluteSize.X - 1 then
-				onBoundsChanged(nil, if p5.AbsoluteSize.X > 0 then p5.AbsolutePosition.X else nil)
-				local var2 = p5.AbsolutePosition - absolutePosition
-				p8({
-					rect = Rect.new(var2, var2 + p5.AbsoluteSize),
-					areaSize = p4.AbsoluteSize
+			if Frame1.AbsoluteSize.X < Frame.AbsoluteSize.X - 1 then
+				OnBoundsChangedFunction(nil, if Frame1.AbsoluteSize.X > 0 then Frame1.AbsolutePosition.X else nil)
+				local AbsolutePositionDelta = Frame1.AbsolutePosition - AbsolutePosition
+				Callback({
+					rect = Rect.new(AbsolutePositionDelta, AbsolutePositionDelta + Frame1.AbsoluteSize),
+					areaSize = Frame.AbsoluteSize
 				})
 				
 				return
+			else
+				local IsYAbove = Frame2.AbsoluteSize.Y > 0
+				OnBoundsChangedFunction(if IsYAbove then Frame2.AbsolutePosition.Y - UseTokensResult.Padding.Medium else nil, nil)
+				local YDelta = Frame.AbsoluteSize.Y - p3
+				Callback(if IsYAbove then {
+					rect = Rect.new(Vector2.new(0, (math.max(0, YDelta - UseTokensResult.Size.Size_800))), Frame.AbsoluteSize),
+					areaSize = Frame.AbsoluteSize
+				} else nil)
 			end
-			local var3 = p6.AbsoluteSize.Y > 0
-			onBoundsChanged(if var3 then p6.AbsolutePosition.Y - var1.Padding.Medium else nil, nil)
-			p8(if var3 then {
-				rect = Rect.new(Vector2.new(0, math.max(0, p4.AbsoluteSize.Y - p7 - var1.Size.Size_800)), p4.AbsoluteSize),
-				areaSize = p4.AbsoluteSize
-			} else nil)
 		end
 		
 		updateBounds()
-		local t = {}
+		local List = {}
 		
-		for i, v in { p5, p6, p4 } do
-			table.insert(t, v:GetPropertyChangedSignal("AbsolutePosition"):Connect(updateBounds))
-			table.insert(t, v:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateBounds))
+		for _, Object in { Frame1, Frame2, Frame } do
+			table.insert(List, Object:GetPropertyChangedSignal("AbsolutePosition"):Connect(updateBounds))
+			table.insert(List, Object:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateBounds))
 		end
-		return function()
-			-- upvalues: t (ref), onBoundsChanged (copy), p8 (copy)
-			for i, v in t do
-				v:Disconnect()
+		return function() --[[ Line: 94 ]]
+			-- upvalues: List (copy), OnBoundsChangedFunction (upval), Callback (upval)
+			for _, Connection in List do
+				Connection:Disconnect()
 			end
-			onBoundsChanged(nil, nil)
-			p8(nil)
+			OnBoundsChangedFunction(nil, nil)
+			Callback(nil)
 		end
 	end, {
-		p3.isOpen, p5, p6, p4, p7, var1, onBoundsChanged, p8
+		p2.isOpen, Frame1, Frame2, Frame, p3, UseTokensResult, OnBoundsChangedFunction,
+		Callback
 	})
 end
 
-return function(p9)
-	-- upvalues: foundationModule (ref), reactModule (ref), guiService (ref), useSheetBounds (ref), reactRobloxModule (ref)
-	local var2 = foundationModule.Hooks.useOverlay()
-	local var3, var4 = reactModule.useState(nil)
-	local var5, var6 = reactModule.useState(nil)
-	local var7, var8 = reactModule.useState({})
-	reactModule.useLayoutEffect(function()
-		-- upvalues: var2 (ref), var4 (ref), guiService (copy)
-		if var2 == nil then
+return function(p4) --[[ Line: 104 | Named "LibraryChatSheetOverlay" ]]
+	-- upvalues: FoundationModule (copy), ReactModule (copy), GuiService (copy), useSheetBounds (copy), ReactRobloxModule (copy)
+	local UseOverlayResult = FoundationModule.Hooks.useOverlay()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState({})
+	ReactModule.useLayoutEffect(function() --[[ Line: 109 ]]
+		-- upvalues: UseOverlayResult (copy), UseStateResult2 (copy), GuiService (upval)
+		if UseOverlayResult == nil then
 			return nil
-		end
-		local screenGui = var2:FindFirstAncestorWhichIsA("ScreenGui") or var2
-		
-		local function updateLayout()
-			-- upvalues: var4 (copy), var2 (copy), screenGui (ref), guiService (copy)
-			var4({
-				originY = var2.AbsolutePosition.Y,
-				screenHeight = screenGui.AbsoluteSize.Y,
-				availableHeight = var2.AbsoluteSize.Y,
-				isBottomSheet = guiService.ViewportDisplaySize == Enum.DisplaySize.Small and screenGui.AbsoluteSize.X <= screenGui.AbsoluteSize.Y
-			})
-		end
-		
-		updateLayout()
-		local list = {
-			var2:GetPropertyChangedSignal("AbsolutePosition"):Connect(updateLayout),
-			var2:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateLayout),
-			screenGui:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateLayout),
-			guiService:GetPropertyChangedSignal("ViewportDisplaySize"):Connect(updateLayout)
-		}
-		
-		return function()
-			-- upvalues: list (ref)
-			for i, v in list do
-				v:Disconnect()
+		else
+			local ScreenGui = UseOverlayResult:FindFirstAncestorWhichIsA("ScreenGui") or UseOverlayResult
+			
+			local function updateLayout() --[[ Line: 114 ]]
+				-- upvalues: UseStateResult2 (upval), UseOverlayResult (upval), ScreenGui (copy), GuiService (upval)
+				UseStateResult2({
+					originY = UseOverlayResult.AbsolutePosition.Y,
+					screenHeight = ScreenGui.AbsoluteSize.Y,
+					availableHeight = UseOverlayResult.AbsoluteSize.Y,
+					isBottomSheet = GuiService.ViewportDisplaySize == Enum.DisplaySize.Small and ScreenGui.AbsoluteSize.X <= ScreenGui.AbsoluteSize.Y
+				})
+			end
+			
+			updateLayout()
+			local Connections = {
+				UseOverlayResult:GetPropertyChangedSignal("AbsolutePosition"):Connect(updateLayout),
+				UseOverlayResult:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateLayout),
+				ScreenGui:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateLayout),
+				GuiService:GetPropertyChangedSignal("ViewportDisplaySize"):Connect(updateLayout)
+			}
+			
+			return function() --[[ Line: 130 ]]
+				-- upvalues: Connections (copy)
+				for _, connection in Connections do
+					connection:Disconnect()
+				end
 			end
 		end
-	end, { var2 })
-	local var9, var10 = reactModule.useState(nil)
-	local var11, var12 = reactModule.useBinding(nil)
-	local var13 = reactModule.useCallback(function(p10, p11)
-		-- upvalues: var8 (ref)
-		var8({ sheet = p10, content = p11 })
+	end, { UseOverlayResult })
+	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(nil)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(nil)
+	local UseResult = ReactModule.useCallback(function(Sheet, Content) --[[ Line: 138 ]]
+		-- upvalues: UseStateResult2_2 (copy)
+		UseStateResult2_2({ sheet = Sheet, content = Content })
 	end, {})
-	local var14, var15 = reactModule.useState(nil)
-	local var16 = if p9.top == nil or var3 == nil then 0 else math.max(0, p9.top - var3.originY)
-	local var17 = if var3 ~= nil then 0 else var3.screenHeight
-	local var18 = if var3 ~= nil then 0 else var3.availableHeight
-	local snapPoints = p9.snapPoints
+	local UseStateResult5, UseStateResult2_4 = ReactModule.useState(nil)
+	local Largest: number = if p4.top == nil or UseStateResult == nil then 0 else math.max(0, p4.top - UseStateResult.originY)
+	local ScreenHeight = if UseStateResult == nil then 0 else UseStateResult.screenHeight
+	local AvailableHeight = if UseStateResult == nil then 0 else UseStateResult.availableHeight
+	local SnapPoints = p4.snapPoints
 	
-	if var17 > 0 then
-		snapPoints = {}
+	if ScreenHeight > 0 then
+		SnapPoints = {}
 		
-		for i, v in p9.snapPoints do
-			table.insert(snapPoints, math.max(2, math.min(v * var17, var18 - var16)))
+		for _, snapPoint in p4.snapPoints do
+			table.insert(SnapPoints, (math.max(2, (math.min(snapPoint * ScreenHeight, AvailableHeight - Largest)))))
 		end
 	end
-	local var19
-	local var20 = reactModule.useRef(snapPoints)
-	local current = var20.current
+	local UseRefResult = ReactModule.useRef(SnapPoints)
+	local Current = UseRefResult.current
+	local SnapPoints1 = SnapPoints
+	local Flag = nil
 	
-	if #current == #snapPoints then
-		for i, v in current do
-			if snapPoints[i] ~= v then
-				var19 = false
+	if #Current == #SnapPoints1 then
+		Flag = true
+		
+		for i, value in Current do
+			if SnapPoints1[i] ~= value then
+				Flag = false
+				break
 			end
 		end
-		var19 = true
 	else
-		var19 = false
+		Flag = false
 	end
-	if not var19 then
-		var20.current = snapPoints
+	if not Flag then
+		UseRefResult.current = SnapPoints
 	end
-	local current_1 = var20.current
-	useSheetBounds(p9, var9, var7.sheet, var7.content, var14 or current_1[1], var12)
-	local var21 = if var3 ~= nil and var3.isBottomSheet then 0 else var16
+	local Current1 = UseRefResult.current
+	useSheetBounds(p4, UseStateResult4, UseStateResult3.sheet, UseStateResult3.content, UseStateResult5 or Current1[1], UseBindingResult2)
+	local IsBottomSheet = UseStateResult ~= nil and UseStateResult.isBottomSheet
+	local RenderSheetResult = p4.renderSheet(Current1, UseResult, UseStateResult2_4)
+	local YOffset: number = if IsBottomSheet then 0 else Largest
 	
-	return reactModule.createElement(reactModule.Fragment, nil, {
-		Inset = if var2 ~= nil then nil else reactRobloxModule.createPortal(reactModule.createElement(foundationModule.View, {
-			ref = var10,
-			Position = UDim2.fromOffset(0, var21),
-			Size = UDim2.new(1, 0, 1, -var21),
+	return ReactModule.createElement(ReactModule.Fragment, nil, {
+		Inset = if UseOverlayResult == nil then nil else ReactRobloxModule.createPortal(ReactModule.createElement(FoundationModule.View, {
+			ref = UseStateResult2_3,
+			Position = UDim2.fromOffset(0, YOffset),
+			Size = UDim2.new(1, 0, 1, -YOffset),
 			backgroundStyle = { Transparency = 1 }
 		}, {
-			Window = reactModule.createElement(foundationModule.View, {
+			Window = ReactModule.createElement(FoundationModule.View, {
 				tag = "clip",
-				Position = var11:map(function(p10)
-					return if p10 then UDim2.fromOffset(p10.rect.Min.X, p10.rect.Min.Y) else UDim2.new()
+				Position = UseBindingResult:map(function(p5): UDim2 --[[ Line: 178 ]]
+					return if p5 then UDim2.fromOffset(p5.rect.Min.X, p5.rect.Min.Y) else UDim2.new()
 				end),
-				Size = var11:map(function(p10)
-					return if p10 then UDim2.fromOffset(p10.rect.Width, p10.rect.Height) else UDim2.fromScale(1, 1)
+				Size = UseBindingResult:map(function(p5): UDim2 --[[ Line: 181 ]]
+					return if p5 then UDim2.fromOffset(p5.rect.Width, p5.rect.Height) else UDim2.fromScale(1, 1)
 				end),
 				backgroundStyle = { Transparency = 1 }
 			}, {
-				Host = reactModule.createElement(foundationModule.View, {
+				Host = ReactModule.createElement(FoundationModule.View, {
 					testId = "Library.ChatOverlay",
-					ref = var6,
-					Position = var11:map(function(p10)
-						return if p10 then UDim2.fromOffset(-p10.rect.Min.X, -p10.rect.Min.Y) else UDim2.new()
+					ref = UseStateResult2_1,
+					Position = UseBindingResult:map(function(p5): UDim2 --[[ Line: 191 ]]
+						return if p5 then UDim2.fromOffset(-p5.rect.Min.X, -p5.rect.Min.Y) else UDim2.new()
 					end),
-					Size = var11:map(function(p10)
-						return if p10 then UDim2.fromOffset(p10.areaSize.X, p10.areaSize.Y) else UDim2.fromScale(1, 1)
+					Size = UseBindingResult:map(function(p5): UDim2 --[[ Line: 196 ]]
+						return if p5 then UDim2.fromOffset(p5.areaSize.X, p5.areaSize.Y) else UDim2.fromScale(1, 1)
 					end),
 					backgroundStyle = { Transparency = 1 }
 				})
 			})
-		}), var2),
-		Sheet = if var5 ~= nil then nil else reactModule.createElement(foundationModule.OverlayProvider, { gui = var5 }, p9.renderSheet(current_1, var13, var15))
+		}), UseOverlayResult),
+		Sheet = if UseStateResult1 == nil then nil else ReactModule.createElement(FoundationModule.OverlayProvider, { gui = UseStateResult1 }, RenderSheetResult)
 	})
 end

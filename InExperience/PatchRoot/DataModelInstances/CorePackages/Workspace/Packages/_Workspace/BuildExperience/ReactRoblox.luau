@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.ReactRoblox.ReactRoblox)
+﻿return (require(script.Parent.Parent.Parent._Index.ReactRoblox.ReactRoblox))

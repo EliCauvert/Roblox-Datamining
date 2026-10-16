@@ -1,37 +1,37 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local editProfileBackgroundModule = require(parent.EditProfileBackground)
-local refreshProfilePlatformUserInfoModule = require(profilePlatform.Networking.refreshProfilePlatformUserInfo)
-local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
-local useProfileJsonComponentModule = require(profilePlatform.Hooks.useProfileJsonComponent)
-local enumsModule = require(profilePlatform.Common.Enums)
-local defaultAnalyticsService = require(parent.SocialLuaAnalytics).Analytics.DefaultAnalyticsService
-local analytics = require(parent.EditProfileBackground).Analytics
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local EditProfileBackgroundModule = require(Parent.EditProfileBackground)
+local RefreshProfilePlatformUserInfoModule = require(ProfilePlatform.Networking.refreshProfilePlatformUserInfo)
+local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
+local UseProfileJsonComponentModule = require(ProfilePlatform.Hooks.useProfileJsonComponent)
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local DefaultAnalyticsService = require(Parent.SocialLuaAnalytics).Analytics.DefaultAnalyticsService
+local Analytics = require(Parent.EditProfileBackground).Analytics
 
-return function(_)
-	-- upvalues: useDispatch (ref), useLocalUserId (ref), useProfileJsonComponentModule (ref), enumsModule (ref), reactModule (ref), refreshProfilePlatformUserInfoModule (ref), analytics (ref), defaultAnalyticsService (ref), editProfileBackgroundModule (ref)
-	local var1 = useDispatch()
-	local var2 = useLocalUserId()
+return function(_) --[[ Line: 17 | Named "EditProfileBackgroundPageWrapper" ]]
+	-- upvalues: UseDispatchFunction (copy), UseLocalUserIdFunction (copy), UseProfileJsonComponentModule (copy), EnumsModule (copy), ReactModule (copy), RefreshProfilePlatformUserInfoModule (copy), Analytics (copy), DefaultAnalyticsService (copy), EditProfileBackgroundModule (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseLocalUserIdResult = UseLocalUserIdFunction()
 	
-	return reactModule.createElement(analytics.Context.Provider, {
+	return ReactModule.createElement(Analytics.Context.Provider, {
 		value = {
-			fireAnalyticsEvent = analytics.setupFireAnalyticsEvents({
+			fireAnalyticsEvent = Analytics.setupFireAnalyticsEvents({
 				analytics = {
-					EventStream = defaultAnalyticsService.EventStream,
-					Telemetry = defaultAnalyticsService.Telemetry
+					EventStream = DefaultAnalyticsService.EventStream,
+					Telemetry = DefaultAnalyticsService.Telemetry
 				},
-				infoForAllEvents = { uid = tostring(var2) }
+				infoForAllEvents = { uid = tostring(UseLocalUserIdResult) }
 			})
 		}
 	}, {
-		reactModule.createElement(editProfileBackgroundModule.EditProfileBackgroundPage, {
-			onBackgroundChanged = reactModule.useCallback(function()
-				-- upvalues: var1 (ref), refreshProfilePlatformUserInfoModule (copy), var2 (ref)
-				var1(refreshProfilePlatformUserInfoModule(tostring(var2)))
+		ReactModule.createElement(EditProfileBackgroundModule.EditProfileBackgroundPage, {
+			onBackgroundChanged = ReactModule.useCallback(function() --[[ Line: 23 ]]
+				-- upvalues: UseDispatchResult (copy), RefreshProfilePlatformUserInfoModule (upval), UseLocalUserIdResult (copy)
+				UseDispatchResult(RefreshProfilePlatformUserInfoModule((tostring(UseLocalUserIdResult))))
 			end),
-			profileBackgroundData = useProfileJsonComponentModule(enumsModule.Components.ProfileBackground)
+			profileBackgroundData = UseProfileJsonComponentModule(EnumsModule.Components.ProfileBackground)
 		})
 	})
 end

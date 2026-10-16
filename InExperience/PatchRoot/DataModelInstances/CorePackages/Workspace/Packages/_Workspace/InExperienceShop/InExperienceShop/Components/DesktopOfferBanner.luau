@@ -1,58 +1,58 @@
-﻿local parent = script:FindFirstAncestor("InExperienceShop").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local text = foundationModule.Text
-local icon = foundationModule.Icon
-local iconName = foundationModule.Enums.IconName
-local iconSize = foundationModule.Enums.IconSize
-local iconVariant = foundationModule.Enums.IconVariant
-local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
+﻿local Parent = script:FindFirstAncestor("InExperienceShop").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local Icon = FoundationModule.Icon
+local IconName = FoundationModule.Enums.IconName
+local IconSize = FoundationModule.Enums.IconSize
+local IconVariant = FoundationModule.Enums.IconVariant
+local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
 
-local function _(p1)
-	return p1:gsub("[&<>\"']", {
+local function _(Text: string): string --[[ Line: 21 | Named "escapeRichText" ]]
+	return (Text:gsub("[&<>\"']", {
 		["&"] = "&amp;",
 		["<"] = "&lt;",
 		[">"] = "&gt;",
 		["\""] = "&quot;",
 		["'"] = "&apos;"
-	})
+	}))
 end
 
-return function(p1)
-	-- upvalues: iconName (ref), iconName (ref), reactModule (ref), view (ref), icon (ref), iconSize (ref), iconVariant (ref), text (ref), stateLayerAffordance (ref)
-	return reactModule.createElement(view, {
+return function(Frame) --[[ Line: 53 | Named "DesktopOfferBanner" ]]
+	-- upvalues: IconName (copy), IconName (copy), ReactModule (copy), View (copy), Icon (copy), IconSize (copy), IconVariant (copy), Text (copy), StateLayerAffordance (copy)
+	return ReactModule.createElement(View, {
 		tag = "row align-y-center gap-medium size-full-0 auto-y padding-x-large padding-y-medium radius-medium bg-shift-200",
-		LayoutOrder = p1.LayoutOrder,
-		testId = p1.testId
+		LayoutOrder = Frame.LayoutOrder,
+		testId = Frame.testId
 	}, {
-		BannerIcon = reactModule.createElement(icon, {
+		BannerIcon = ReactModule.createElement(Icon, {
 			LayoutOrder = 1,
 			testId = "DesktopOfferBanner_Icon",
-			name = if p1.icon then iconName[p1.icon] else iconName.Tag,
-			size = iconSize.Medium,
-			variant = iconVariant.Filled
+			name = Frame.icon and IconName[Frame.icon] or IconName.Tag,
+			size = IconSize.Medium,
+			variant = IconVariant.Filled
 		}),
-		Message = reactModule.createElement(text, {
+		Message = ReactModule.createElement(Text, {
 			tag = "fill auto-y text-body-medium text-wrap text-align-x-left content-emphasis",
 			LayoutOrder = 2,
 			testId = "DesktopOfferBanner_Text",
-			Text = p1.text
+			Text = Frame.text
 		}),
-		Link = if p1.link then reactModule.createElement(text, {
+		Link = if Frame.link then ReactModule.createElement(Text, {
 			RichText = true,
 			tag = "auto-xy text-body-medium text-align-x-left content-emphasis",
 			LayoutOrder = 3,
 			testId = "DesktopOfferBanner_Link",
-			Text = `<u>{p1.link.text:gsub("[&<>\"']", {
+			Text = `<u>{Frame.link.text:gsub("[&<>\"']", {
 				["&"] = "&amp;",
 				["<"] = "&lt;",
 				[">"] = "&gt;",
 				["\""] = "&quot;",
 				["'"] = "&apos;"
 			})}</u>`,
-			stateLayer = { affordance = stateLayerAffordance.None },
-			onActivated = p1.link.onActivated
+			stateLayer = { affordance = StateLayerAffordance.None },
+			onActivated = Frame.link.onActivated
 		}) else nil
 	})
 end

@@ -1,17 +1,16 @@
-﻿local bulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
-local roduxModule = require(bulkPurchaseApp.Parent.Rodux)
-local _ = require(bulkPurchaseApp.Store.Types)
-local fFlagAXAddOffersToBulkPurchaseModule = require(bulkPurchaseApp.Flags.FFlagAXAddOffersToBulkPurchase)
+﻿local BulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
+local _ = require(BulkPurchaseApp.Store.Types)
+local FFlagAXAddOffersToBulkPurchaseModule = require(BulkPurchaseApp.Flags.FFlagAXAddOffersToBulkPurchase)
 
-return roduxModule.makeActionCreator("BulkPurchaseRequested", function(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: fFlagAXAddOffersToBulkPurchaseModule (ref)
+return require(BulkPurchaseApp.Parent.Rodux).makeActionCreator("BulkPurchaseRequested", function(ItemData, OrderRequest, Balance, TotalCost, Options, DiscountInformation, p1) --[[ Line: 25 ]]
+	-- upvalues: FFlagAXAddOffersToBulkPurchaseModule (copy)
 	return {
-		itemData = p1,
-		balance = p3,
-		totalCost = p4,
-		orderRequest = p2,
-		options = p5,
-		discountInformation = p6,
-		offerData = if fFlagAXAddOffersToBulkPurchaseModule then p7 else nil
+		itemData = ItemData,
+		balance = Balance,
+		totalCost = TotalCost,
+		orderRequest = OrderRequest,
+		options = Options,
+		discountInformation = DiscountInformation,
+		offerData = if FFlagAXAddOffersToBulkPurchaseModule then p1 else nil
 	}
 end)

@@ -1,37 +1,37 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
-local _ = require(parent_1.Signals)
-local createSignalMap = require(parent_1.CoreScriptsRoactCommon).Utilities.createSignalMap
-local _ = require(parent.LeaderboardStoreTypes)
-local leaderboardStoreModule = require(parent.LeaderboardStore)
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
+local _ = require(Parent1.Signals)
+local CreateSignalMapFunction = require(Parent1.CoreScriptsRoactCommon).Utilities.createSignalMap
+local _ = require(Parent.LeaderboardStoreTypes)
+local LeaderboardStoreModule = require(Parent.LeaderboardStore)
 
-return function(p1, p2)
-	-- upvalues: leaderboardStoreModule (ref), createSignalMap (ref)
-	return function()
-		-- upvalues: p1 (ref), p2 (ref), leaderboardStoreModule (copy), createSignalMap (copy)
-		local var1 = leaderboardStoreModule.new(p1 or game:GetService("Teams"), p2 or game:GetService("Players"))
+return function(p1, p2) --[[ Line: 22 | Named "createLeaderboardStore" ]]
+	-- upvalues: LeaderboardStoreModule (copy), CreateSignalMapFunction (copy)
+	return function() --[[ Line: 23 ]]
+		-- upvalues: p1 (copy), p2 (copy), LeaderboardStoreModule (upval), CreateSignalMapFunction (upval)
+		local NewLeaderboardStore = LeaderboardStoreModule.new(if p1 then p1 else game:GetService("Teams"), if p2 then p2 else game:GetService("Players"))
 		
 		return {
-			getGameStatsList = function()
-				-- upvalues: var1 (write), createSignalMap (copy)
-				return if var1 then var1:getGameStatsList() else createSignalMap()
+			getGameStatsList = function() --[[ Line: 30 ]]
+				-- upvalues: NewLeaderboardStore (ref), CreateSignalMapFunction (upval)
+				return if NewLeaderboardStore then NewLeaderboardStore:getGameStatsList() else CreateSignalMapFunction()
 			end,
-			getTeamList = function()
-				-- upvalues: var1 (write), createSignalMap (copy)
-				return if var1 then var1:getTeamList() else createSignalMap()
+			getTeamList = function() --[[ Line: 36 ]]
+				-- upvalues: NewLeaderboardStore (ref), CreateSignalMapFunction (upval)
+				return if NewLeaderboardStore then NewLeaderboardStore:getTeamList() else CreateSignalMapFunction()
 			end,
-			getTeamPlayerList = function(p3, p4)
-				-- upvalues: var1 (write), createSignalMap (copy)
-				return if var1 then var1:getTeamPlayerList(p3, p4) else createSignalMap()
+			getTeamPlayerList = function(p3, p4) --[[ Line: 42 ]]
+				-- upvalues: NewLeaderboardStore (ref), CreateSignalMapFunction (upval)
+				return if NewLeaderboardStore then NewLeaderboardStore:getTeamPlayerList(p3, p4) else CreateSignalMapFunction()
 			end,
-			getPlayerEntry = function(p3, p4)
-				-- upvalues: var1 (write)
-				return if var1 then var1:getPlayerEntry(p3, p4) else nil
+			getPlayerEntry = function(p3, p4) --[[ Line: 48 ]]
+				-- upvalues: NewLeaderboardStore (ref)
+				return if NewLeaderboardStore then NewLeaderboardStore:getPlayerEntry(p3, p4) else nil
 			end,
-			cleanUp = function()
-				-- upvalues: var1 (write)
-				var1:destroy()
-				var1 = nil
+			cleanUp = function() --[[ Line: 56 ]]
+				-- upvalues: NewLeaderboardStore (ref)
+				NewLeaderboardStore:destroy()
+				NewLeaderboardStore = nil
 			end
 		}
 	end

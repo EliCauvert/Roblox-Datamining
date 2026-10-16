@@ -1,12 +1,12 @@
 ﻿local _ = require(script.Parent.VoiceChatServiceManager)
-local t = { voice = "voice", text = "text", other = "other" }
+local MethodsOfAbuse = { voice = "voice", text = "text", other = "other" }
 
-function GetDefaultMethodOfAbuse(p1, p2)
-	-- upvalues: t (ref)
-	return if p1 then if p2:getRecentUsersInteractionData()[tostring(p1.UserId)] then t.voice else t.text elseif p2:GetMutedAnyone() then t.voice else t.text
+function GetDefaultMethodOfAbuse(Player, p1) --[[ Line: 14 ]]
+	-- upvalues: MethodsOfAbuse (copy)
+	return if Player then if p1:getRecentUsersInteractionData()[tostring(Player.UserId)] then MethodsOfAbuse.voice else MethodsOfAbuse.text elseif p1:GetMutedAnyone() then MethodsOfAbuse.voice else MethodsOfAbuse.text
 end
 
 return {
-	MethodsOfAbuse = t,
+	MethodsOfAbuse = MethodsOfAbuse,
 	GetDefaultMethodOfAbuse = GetDefaultMethodOfAbuse
 }

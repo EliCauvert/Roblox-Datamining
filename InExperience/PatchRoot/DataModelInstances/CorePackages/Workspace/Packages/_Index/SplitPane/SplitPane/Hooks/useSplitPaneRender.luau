@@ -1,151 +1,151 @@
-﻿local parent = script:FindFirstAncestor("SplitPane").Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local responsiveModule = require(parent.Responsive)
-local _ = require(parent.AppSplitView)
-local constants = require(parent.NavigationRodux).Constants
-local splitPaneContextModule = require(script.Parent.Parent.Context.SplitPaneContext)
-local splitPaneStoreModule = require(script.Parent.Parent.Stores.SplitPaneStore)
-local isSupportPaneScreenModule = require(script.Parent.Parent.Utils.isSupportPaneScreen)
-local splitPaneVariantModule = require(script.Parent.Parent.Utils.SplitPaneVariant)
-local supportPaneInputRulesModule = require(script.Parent.Parent.Utils.supportPaneInputRules)
-local usePreferredInput = responsiveModule.usePreferredInput
-local tempRnSwitchNavigatorName = constants.TempRnSwitchNavigatorName
+﻿local Parent = script:FindFirstAncestor("SplitPane").Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local _ = require(Parent.AppSplitView)
+local SplitPaneContextModule = require(script.Parent.Parent.Context.SplitPaneContext)
+local SplitPaneStoreModule = require(script.Parent.Parent.Stores.SplitPaneStore)
+local IsSupportPaneScreenModule = require(script.Parent.Parent.Utils.isSupportPaneScreen)
+local SplitPaneVariantModule = require(script.Parent.Parent.Utils.SplitPaneVariant)
+local SplitPaneTelemetryModule = require(script.Parent.Parent.Telemetry.SplitPaneTelemetry)
+local FFlagEnableSplitPaneTelemetry = require(Parent.SharedFlags).FFlagEnableSplitPaneTelemetry
+local SupportPaneInputRulesModule = require(script.Parent.Parent.Utils.supportPaneInputRules)
+local UsePreferredInputFunction = require(Parent.Responsive).usePreferredInput
+local TempRnSwitchNavigatorName = require(Parent.NavigationRodux).Constants.TempRnSwitchNavigatorName
 
-return function(p1, p2, p3, p4)
-	-- upvalues: splitPaneStoreModule (ref), signalsReactModule (ref), reactModule (ref), splitPaneContextModule (ref), usePreferredInput (ref), tempRnSwitchNavigatorName (ref), splitPaneVariantModule (ref), supportPaneInputRulesModule (ref), isSupportPaneScreenModule (ref)
-	local store = splitPaneStoreModule.getStore()
-	local var1 = signalsReactModule.useSignalState(store.getSupportPaneMode)
-	local var2 = signalsReactModule.useSignalState(store.getSupportWidth)
-	local var3 = signalsReactModule.useSignalState(store.getIsBreakpointEnabled)
-	local var4 = reactModule.useContext(splitPaneContextModule)
-	local var5 = usePreferredInput()
-	local var6 = if p4 then #p3 else 0
-	local cloned = table.clone(p2)
-	local t = {}
-	local t_1 = {}
+return function(Entry, Tbl, List, p1) --[[ Line: 54 | Named "useSplitPaneRender" ]]
+	-- upvalues: SplitPaneStoreModule (copy), SignalsReactModule (copy), ReactModule (copy), SplitPaneContextModule (copy), UsePreferredInputFunction (copy), TempRnSwitchNavigatorName (copy), FFlagEnableSplitPaneTelemetry (copy), SplitPaneTelemetryModule (copy), SplitPaneVariantModule (copy), SupportPaneInputRulesModule (copy), IsSupportPaneScreenModule (copy)
+	local Store = SplitPaneStoreModule.getStore()
+	local UseSignalStateResult = SignalsReactModule.useSignalState(Store.getSupportPaneMode)
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(Store.getSupportWidth)
+	local UseSignalStateResult2 = SignalsReactModule.useSignalState(Store.getIsBreakpointEnabled)
+	local UseContextResult = ReactModule.useContext(SplitPaneContextModule)
+	local UsePreferredInputResult = UsePreferredInputFunction()
+	local CountList: number = if p1 then #List else 0
+	local Copy = table.clone(Tbl)
+	local SupportSlotChildren = {}
+	local OverlaySlotChildren = {}
 	
-	if p4 then
-		for i, v in p3 do
-			local key = p1[v].descriptor.key
-			local var7 = cloned[key]
+	if p1 then
+		for _, value in List do
+			local Key = Entry[value].descriptor.key
+			local Entry1 = Copy[Key]
 			
-			if var7 ~= nil then
-				cloned[key] = nil
-				t[key] = var7
+			if Entry1 ~= nil then
+				Copy[Key] = nil
+				SupportSlotChildren[Key] = Entry1
 			end
 		end
 	end
-	if var3 then
-		local var8 = 0
+	if UseSignalStateResult2 then
+		local v1 = 0
 		
-		for i, v in p1 do
-			local options = v.descriptor.options
+		for i, value1 in Entry do
+			local Options = value1.descriptor.options
 			
-			if options ~= nil and options.splitPaneEligibility ~= nil then
-				var8 = i
+			if Options ~= nil and Options.splitPaneEligibility ~= nil then
+				v1 = i
 			end
 		end
-		for i_1, v_1 in p1 do
-			local options = v_1.descriptor.options
+		for i1, value2 in Entry do
+			local Options = value2.descriptor.options
+			local NoOptions = Options == nil or not Options.transparent or Options.overlayEnabled or Options.splitPaneEligibility ~= nil
+			local Key = nil
+			local Entry3 = nil
 			
-			if options ~= nil and options.transparent and (not options.overlayEnabled and options.splitPaneEligibility == nil) then
-				local key = v_1.descriptor.key
-				local var9 = cloned[key]
+			if not NoOptions then
+				Key = value2.descriptor.key
+				Entry3 = Copy[Key]
+				NoOptions = Entry3 == nil
+			end
+			if not NoOptions then
+				Copy[Key] = nil
 				
-				if var9 ~= nil then
-					cloned[key] = nil
-					
-					if var8 < i_1 then
-						t_1[key] = var9
-					end
+				if v1 < i1 then
+					OverlaySlotChildren[Key] = Entry3
 				end
 			end
 		end
 	end
-	local var10 = p1[1] ~= nil and (p1[1].descriptor ~= nil and (p1[1].descriptor.state ~= nil and p1[1].descriptor.state.routeName == tempRnSwitchNavigatorName))
-	local var11 = reactModule.useRef(0)
-	reactModule.useEffect(function()
-		-- upvalues: var11 (ref), var6 (ref), var10 (ref), splitPaneVariantModule (copy), store (ref), supportPaneInputRulesModule (copy), var5 (ref)
-		local current = var11.current
-		var11.current = var6
+	local IsRouteNameMatch: boolean = Entry[1] ~= nil and (Entry[1].descriptor ~= nil and (Entry[1].descriptor.state ~= nil and Entry[1].descriptor.state.routeName == TempRnSwitchNavigatorName))
+	local UseRefResult = ReactModule.useRef(0)
+	ReactModule.useEffect(function() --[[ Line: 122 ]]
+		-- upvalues: UseRefResult (copy), CountList (copy), IsRouteNameMatch (copy), FFlagEnableSplitPaneTelemetry (upval), SplitPaneTelemetryModule (upval), SplitPaneVariantModule (upval), Store (copy), SupportPaneInputRulesModule (upval), UsePreferredInputResult (copy)
+		local Current: number = UseRefResult.current
+		UseRefResult.current = CountList
 		
-		if not var10 then return end
-		local var12 = current > 0 and var6 == 0
-		local var13 = current == 0 and var6 > 0
-		local var14 = not var13 and var6 > 0
+		if not IsRouteNameMatch then return end
+		local IsCountListMatch: boolean = Current > 0 and CountList == 0
+		local IsCountListAbove: boolean = Current == 0 and CountList > 0
+		local IsCountListAbove1: boolean = not IsCountListAbove and CountList > 0
 		
-		if var13 then
-			if splitPaneVariantModule.shouldAutoExpandOnSupportOpen() then
-				store.setTemporarySupportPaneMode(supportPaneInputRulesModule.resolveOpenedMode(var5))
+		if IsCountListAbove then
+			if FFlagEnableSplitPaneTelemetry then
+				SplitPaneTelemetryModule.logSupportRouteOpened()
+			end
+			if SplitPaneVariantModule.shouldAutoExpandOnSupportOpen() then
+				Store.setTemporarySupportPaneMode(SupportPaneInputRulesModule.resolveOpenedMode(UsePreferredInputResult))
+				
+				return
+			else
+				Store.setTemporarySupportPaneMode(SupportPaneInputRulesModule.resolveInputChangedMode(UsePreferredInputResult))
 				
 				return
 			end
-			store.setTemporarySupportPaneMode(supportPaneInputRulesModule.resolveInputChangedMode(var5))
+		elseif IsCountListMatch then
+			Store.setTemporarySupportPaneMode(nil)
 			
 			return
-		elseif var12 then
-			store.setTemporarySupportPaneMode(nil)
-			
-			return
-		elseif var14 then
-			store.setTemporarySupportPaneMode(supportPaneInputRulesModule.resolveInputChangedMode(var5))
+		else
+			if IsCountListAbove1 then
+				Store.setTemporarySupportPaneMode(SupportPaneInputRulesModule.resolveInputChangedMode(UsePreferredInputResult))
+			end
 		end
 	end, {
-		var10,
-		var6,
-		store,
-		var1,
-		var5
+		IsRouteNameMatch,
+		CountList,
+		Store,
+		UseSignalStateResult,
+		UsePreferredInputResult
 	})
-	local var12 = if var6 > 0 then p3[var6] else nil
-	local var13 = if var12 ~= nil then {} else p1[var12].descriptor.options
-	local var14 = if var12 ~= nil then nil else p1[var12].descriptor.navigation
-	local var15 = var12 ~= nil
-	local t_2 = {}
+	local Entry2 = if CountList > 0 then List[CountList] else nil
+	local T = if Entry2 == nil then {} else Entry[Entry2].descriptor.options
+	local Navigation = if Entry2 == nil then nil else Entry[Entry2].descriptor.navigation
+	local HasEntry = Entry2 ~= nil
+	local SupportRouteKeys = {}
 	
-	if p4 then
-		for i, v in p1 do
-			if isSupportPaneScreenModule(v) then
-				local state = v.descriptor.state
+	if p1 then
+		for _, value3 in Entry do
+			if IsSupportPaneScreenModule(value3) then
+				local State = value3.descriptor.state
 				
-				if state ~= nil and state.key ~= nil then
-					table.insert(t_2, state.key)
+				if State ~= nil and State.key ~= nil then
+					table.insert(SupportRouteKeys, State.key)
 				end
 			end
 		end
 	end
-	local var16
-	local t_3 = {
-		hostNavigation = var14,
-		hasDetailOnTop = var15,
-		paneCount = var6,
-		splitPaneExpandable = var13.splitPaneExpandable,
-		splitPaneCollapsible = var13.splitPaneCollapsible,
-		supportRouteKeys = t_2
+	return {
+		primarySlotChildren = Copy,
+		supportSlotChildren = SupportSlotChildren,
+		overlaySlotChildren = OverlaySlotChildren,
+		supportContentProps = {
+			hostNavigation = Navigation,
+			hasDetailOnTop = HasEntry,
+			paneCount = CountList,
+			splitPaneExpandable = T.splitPaneExpandable,
+			splitPaneCollapsible = T.splitPaneCollapsible,
+			supportRouteKeys = SupportRouteKeys
+		},
+		supportWidth = UseSignalStateResult1,
+		supportMinWidth = Store.getMinSupportWidth(),
+		supportMaxWidth = Store.getMaxSupportWidth(),
+		onSupportPaneWidthChanged = Store.setSupportWidth,
+		supportPaneMode = UseSignalStateResult,
+		supportPaneResizable = UseContextResult.supportPaneResizable == true,
+		supportResizerAbovePane = not (if T.splitPaneCollapsible == true then not (HasEntry and CountList > 1) else not HasEntry and not (HasEntry and CountList > 1)),
+		isBreakpointEnabled = UseSignalStateResult2,
+		isRootAppStack = IsRouteNameMatch,
+		renderSupportContent = UseContextResult.renderSupportContent,
+		onContentRegionRectChanged = UseContextResult.onContentRegionRectChanged
 	}
-	
-	if var13.splitPaneCollapsible ~= true then
-		var16 = not var15
-		
-		if var16 then
-			var16 = not (var15 and var6 > 1)
-		end
-		return {
-			primarySlotChildren = cloned,
-			supportSlotChildren = t,
-			overlaySlotChildren = t_1,
-			supportContentProps = t_3,
-			supportWidth = var2,
-			supportMinWidth = store.getMinSupportWidth(),
-			supportMaxWidth = store.getMaxSupportWidth(),
-			onSupportPaneWidthChanged = store.setSupportWidth,
-			supportPaneMode = var1,
-			supportPaneResizable = var4.supportPaneResizable == true,
-			supportResizerAbovePane = not var16,
-			isBreakpointEnabled = var3,
-			renderSupportContent = var4.renderSupportContent,
-			onContentRegionRectChanged = var4.onContentRegionRectChanged
-		}
-	end
 end

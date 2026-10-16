@@ -1,105 +1,104 @@
-﻿local inGameAssetReporting = script:FindFirstAncestor("InGameAssetReporting")
-local parent = inGameAssetReporting.Parent
-local reactModule = require(parent.React)
-local reactOtterModule = require(parent.ReactOtter)
-local UIBloxModule = require(parent.UIBlox)
-local withLocalization = require(parent.Localization).withLocalization
-local constantsModule = require(inGameAssetReporting.InGameAssetReportUI.Resources.Constants)
-local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local ipErrorCodes = constantsModule.IpErrorCodes
-local t = {
+﻿local InGameAssetReporting = script:FindFirstAncestor("InGameAssetReporting")
+local Parent = InGameAssetReporting.Parent
+local ReactModule = require(Parent.React)
+local ReactOtterModule = require(Parent.ReactOtter)
+local UIBloxModule = require(Parent.UIBlox)
+local WithLocalizationFunction = require(Parent.Localization).withLocalization
+local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local IpErrorCodes = require(InGameAssetReporting.InGameAssetReportUI.Resources.Constants).IpErrorCodes
+local config = {
 	titleKey = "Feature.ReportAbuse.Heading.IpNoReportableContent",
 	descriptionKey = "Feature.ReportAbuse.Description.IpNoReportableContent",
 	showReportExperience = true
 }
-local t_1 = {
+local config1 = {
 	titleKey = "InGame.CommonUI.Title.Error",
 	descriptionKey = "Feature.ReportAbuse.Description.IpGenericError",
 	showReportExperience = false
 }
-local t_2 = {
-	[ipErrorCodes.ClientNoAssetsExtracted] = t,
-	[ipErrorCodes.NoEligibleContents] = t,
-	[ipErrorCodes.Unknown] = t_1
+local config2 = {
+	[IpErrorCodes.ClientNoAssetsExtracted] = config,
+	[IpErrorCodes.NoEligibleContents] = config,
+	[IpErrorCodes.Unknown] = config1
 }
-local t_3 = { stiffness = 400, damping = 40, mass = 1 }
+local config3 = { stiffness = 400, damping = 40, mass = 1 }
 
-return reactModule.memo(function(value)
-	-- upvalues: reactModule (ref), reactOtterModule (ref), t_3 (ref), t_2 (ref), t_1 (ref), withLocalization (ref), buttonType (ref), interactiveAlert (ref)
-	local var1, var2 = reactModule.useState(true)
-	local var3, var4 = reactOtterModule.useAnimatedBinding(1, function()
-		-- upvalues: var1 (ref), value (ref)
-		if not var1 then
-			value.onBack()
+return ReactModule.memo(function(p1) --[[ Line: 49 | Named "InGameAssetIPInfringementErrorModal" ]]
+	-- upvalues: ReactModule (copy), ReactOtterModule (copy), config3 (copy), config2 (copy), config1 (copy), WithLocalizationFunction (copy), ButtonType (copy), InteractiveAlert (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(true)
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(1, function() --[[ Line: 52 ]]
+		-- upvalues: UseStateResult (copy), p1 (copy)
+		if not UseStateResult then
+			p1.onBack()
 		end
 	end)
-	local var5 = reactModule.useMemo(function()
-		-- upvalues: var1 (ref)
-		return if var1 then 0 else 1
-	end, { var1 })
-	reactModule.useEffect(function()
-		-- upvalues: var4 (ref), reactOtterModule (copy), var5 (ref), t_3 (copy)
-		var4(reactOtterModule.spring(var5, t_3))
-	end, { var5 })
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref)
-		var2(false)
-	end, { var2 })
-	local var7 = if value.errorCode and t_2[value.errorCode] then t_2[value.errorCode] else t_1
+	local UseMemoResult = ReactModule.useMemo(function(): number --[[ Line: 59 ]]
+		-- upvalues: UseStateResult (copy)
+		return if UseStateResult then 0 else 1
+	end, { UseStateResult })
+	ReactModule.useEffect(function() --[[ Line: 63 ]]
+		-- upvalues: UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), UseMemoResult (copy), config3 (upval)
+		UseAnimatedBindingResult2(ReactOtterModule.spring(UseMemoResult, config3))
+	end, { UseMemoResult })
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 67 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(false)
+	end, { UseStateResult2 })
+	local Entry = if p1.errorCode and config2[p1.errorCode] then config2[p1.errorCode] else config1
 	
-	return withLocalization({
+	return WithLocalizationFunction({
 		errorBack = "Feature.ReportAbuse.Action.ErrorModalGoBack",
 		reportExperience = "Feature.ReportAbuse.Action.IpReportExperience",
-		title = var7.titleKey,
-		description = var7.descriptionKey
-	})(function(p1)
-		-- upvalues: var7 (ref), value (ref), buttonType (copy), var6 (ref), reactModule (copy), var3 (ref), interactiveAlert (copy)
-		local t = {}
+		title = Entry.titleKey,
+		description = Entry.descriptionKey
+	})(function(p2) --[[ Line: 80 ]]
+		-- upvalues: Entry (copy), p1 (copy), ButtonType (upval), UseResult (copy), ReactModule (upval), UseAnimatedBindingResult (copy), InteractiveAlert (upval)
+		local List = {}
 		
-		if var7.showReportExperience and value.onReportExperience then
-			table.insert(t, {
-				buttonType = buttonType.PrimarySystem,
+		if Entry.showReportExperience and p1.onReportExperience then
+			table.insert(List, {
+				buttonType = ButtonType.PrimarySystem,
 				props = {
-					onActivated = value.onReportExperience,
-					text = p1.reportExperience,
-					isLoading = value.isReportExperienceLoading,
-					isDisabled = value.isReportExperienceLoading
+					onActivated = p1.onReportExperience,
+					text = p2.reportExperience,
+					isLoading = p1.isReportExperienceLoading,
+					isDisabled = p1.isReportExperienceLoading
 				}
 			})
-			table.insert(t, {
-				buttonType = buttonType.Secondary,
-				props = { onActivated = var6, text = p1.errorBack }
+			table.insert(List, {
+				buttonType = ButtonType.Secondary,
+				props = { onActivated = UseResult, text = p2.errorBack }
 			})
 		else
-			table.insert(t, {
-				buttonType = buttonType.PrimarySystem,
-				props = { onActivated = var6, text = p1.errorBack }
+			table.insert(List, {
+				buttonType = ButtonType.PrimarySystem,
+				props = { onActivated = UseResult, text = p2.errorBack }
 			})
 		end
-		return reactModule.createElement("TextButton", {
+		return ReactModule.createElement("TextButton", {
 			AutoButtonColor = false,
 			BorderSizePixel = 0,
-			BackgroundTransparency = var3:map(function(p2)
-				return p2 + 0.3
+			BackgroundTransparency = UseAnimatedBindingResult:map(function(p3: number): number --[[ Line: 113 ]]
+				return p3 + 0.3
 			end),
 			BackgroundColor3 = Color3.fromHex("#000000"),
 			Size = UDim2.new(1, 0, 1, 0),
 			Text = "",
 			Position = UDim2.fromScale(0.5, 0.5),
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			[reactModule.Event.Activated] = var6,
+			[ReactModule.Event.Activated] = UseResult,
 			ZIndex = 10
 		}, {
-			Alert = reactModule.createElement(interactiveAlert, {
-				screenSize = value.screenSize,
-				title = p1.title,
-				bodyText = p1.description,
+			Alert = ReactModule.createElement(InteractiveAlert, {
+				screenSize = p1.screenSize,
+				title = p2.title,
+				bodyText = p2.description,
 				anchorPoint = Vector2.new(0.5, 0.5),
-				position = var3:map(function(p2)
-					return UDim2.new(0.5, 0, 0.5, 0):Lerp(UDim2.new(0.5, 0, -0.5, 0), p2)
+				position = UseAnimatedBindingResult:map(function(Alpha) --[[ Line: 129 ]]
+					return UDim2.new(0.5, 0, 0.5, 0):Lerp(UDim2.new(0.5, 0, -0.5, 0), Alpha)
 				end),
-				buttonStackInfo = { buttons = t }
+				buttonStackInfo = { buttons = List }
 			})
 		})
 	end)

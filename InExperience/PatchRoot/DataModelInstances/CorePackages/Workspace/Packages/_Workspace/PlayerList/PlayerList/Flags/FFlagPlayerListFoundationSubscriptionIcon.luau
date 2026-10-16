@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("PlayerListFoundationSubscriptionIcon", false)
+﻿return (game:DefineFastFlag("PlayerListFoundationSubscriptionIcon", false))

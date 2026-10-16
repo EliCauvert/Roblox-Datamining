@@ -1,85 +1,95 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local _ = require(foundation.Components.Types)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local knobModule = require(foundation.Components.Knob)
-local viewModule = require(foundation.Components.View)
-local colorNamespaceModule = require(foundation.Enums.ColorNamespace)
-local presentationContextModule = require(foundation.Providers.Style.PresentationContext)
-local _ = require(foundation.Enums.InputSize)
-local calculateSliderFractionModule = require(script.Parent.calculateSliderFraction)
-local getGuiInputPositionModule = require(script.Parent.getGuiInputPosition)
-local t = { colorNamespace = colorNamespaceModule.Inverse }
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local _ = require(Foundation.Components.Types)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local KnobModule = require(Foundation.Components.Knob)
+local ViewModule = require(Foundation.Components.View)
+local PresentationContextModule = require(Foundation.Providers.Style.PresentationContext)
+local _ = require(Foundation.Enums.InputSize)
+local CalculateSliderFractionModule = require(script.Parent.calculateSliderFraction)
+local GetGuiInputPositionModule = require(script.Parent.getGuiInputPosition)
+local config = {
+	colorNamespace = require(Foundation.Enums.ColorNamespace).Inverse
+}
 
-return function(p1)
-	-- upvalues: reactModule (ref), calculateSliderFractionModule (ref), getGuiInputPositionModule (ref), knobModule (ref), viewModule (ref), withCommonPropsModule (ref), presentationContextModule (ref), t (ref)
-	local var1 = reactModule.useRef(p1.fraction:getValue())
+return function(Frame: Frame) --[[ Line: 48 | Named "SliderThumb" ]]
+	-- upvalues: ReactModule (copy), CalculateSliderFractionModule (copy), GetGuiInputPositionModule (copy), KnobModule (copy), ViewModule (copy), WithCommonPropsModule (copy), PresentationContextModule (copy), config (copy)
+	local UseRefResult = ReactModule.useRef(Frame.fraction:getValue())
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 51 ]]
+		-- upvalues: UseRefResult (copy), Frame (copy)
+		UseRefResult.current = Frame.fraction:getValue()
+		
+		if Frame.onDragStarted then
+			Frame.onDragStarted()
+		end
+	end, { Frame.fraction, Frame.onDragStarted })
+	local UseResult1 = ReactModule.useCallback(function(_, p1) --[[ Line: 58 ]]
+		-- upvalues: Frame (copy), CalculateSliderFractionModule (upval), GetGuiInputPositionModule (upval), UseRefResult (copy)
+		local Current = Frame.trackRef.current
+		
+		if not Current then return end
+		local SliderFractionModule: number = CalculateSliderFractionModule(GetGuiInputPositionModule(p1, Current), Current, Frame.isVertical)
+		local Bounds, Bounds2 = Frame.getBounds()
+		local ClampedValue = math.clamp(SliderFractionModule, Bounds, Bounds2)
+		
+		if ClampedValue ~= UseRefResult.current then
+			UseRefResult.current = ClampedValue
+			Frame.onSeek(ClampedValue)
+		end
+	end, {
+		Frame.trackRef,
+		Frame.isVertical,
+		Frame.getBounds,
+		Frame.onSeek
+	})
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 72 ]]
+		-- upvalues: Frame (copy)
+		if Frame.onDragEnded then
+			Frame.onDragEnded()
+		end
+	end, { Frame.onDragEnded })
+	local MapResult = Frame.fraction:map(function(XScale: number): UDim2 --[[ Line: 78 ]]
+		-- upvalues: Frame (copy)
+		return if Frame.isVertical then UDim2.fromScale(0.5, 1 - XScale) else UDim2.fromScale(XScale, 0.5)
+	end)
+	local MapResult1 = if Frame.isContained then Frame.fraction:map(function(X: number): Vector2 --[[ Line: 82 ]]
+		-- upvalues: Frame (copy)
+		return if Frame.isVertical then Vector2.new(0.5, 1 - X) else Vector2.new(X, 0.5)
+	end) else Vector2.new(0.5, 0.5)
+	local Element = ReactModule.createElement(KnobModule, {
+		size = Frame.knobAppearance.size,
+		style = Frame.knobAppearance.style,
+		stroke = Frame.knobAppearance.stroke,
+		hasShadow = Frame.knobAppearance.hasShadow,
+		testId = `{Frame.testId}--knob`
+	})
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule({
-		AnchorPoint = p1.AnchorPoint or (if p1.isContained then p1.fraction:map(function(p2)
-			-- upvalues: p1 (ref)
-			return if p1.isVertical then Vector2.new(0.5, 1 - p2) else Vector2.new(p2, 0.5)
-		end) else Vector2.new(0.5, 0.5)),
-		Position = p1.Position or p1.fraction:map(function(p2)
-			-- upvalues: p1 (ref)
-			return if p1.isVertical then UDim2.fromScale(0.5, 1 - p2) else UDim2.fromScale(p2, 0.5)
-		end),
-		ZIndex = p1.ZIndex or 2,
-		Visible = p1.Visible,
-		LayoutOrder = p1.LayoutOrder,
-		onAbsoluteSizeChanged = p1.onAbsoluteSizeChanged,
-		onAbsolutePositionChanged = p1.onAbsolutePositionChanged,
-		testId = p1.testId
+	return ReactModule.createElement(ViewModule, WithCommonPropsModule({
+		AnchorPoint = Frame.AnchorPoint or MapResult1,
+		Position = Frame.Position or MapResult,
+		ZIndex = Frame.ZIndex or 2,
+		Visible = Frame.Visible,
+		LayoutOrder = Frame.LayoutOrder,
+		onAbsoluteSizeChanged = Frame.onAbsoluteSizeChanged,
+		onAbsolutePositionChanged = Frame.onAbsolutePositionChanged,
+		testId = Frame.testId
 	}, { tag = "size-0-0 auto-xy" }), {
-		DragTarget = reactModule.createElement(viewModule, {
+		DragTarget = ReactModule.createElement(ViewModule, {
 			tag = "size-full",
 			ZIndex = 2,
-			testId = `{p1.testId}--drag-target`
+			testId = `{Frame.testId}--drag-target`
 		}, {
-			DragDetector = if p1.isDragEnabled == false then nil else reactModule.createElement("UIDragDetector", {
+			DragDetector = if Frame.isDragEnabled == false then nil else ReactModule.createElement("UIDragDetector", {
 				DragStyle = Enum.UIDragDetectorDragStyle.Scriptable,
-				[reactModule.Event.DragStart] = reactModule.useCallback(function()
-					-- upvalues: var1 (ref), p1 (ref)
-					var1.current = p1.fraction:getValue()
-					
-					if p1.onDragStarted then
-						p1.onDragStarted()
-					end
-				end, { p1.fraction, p1.onDragStarted }),
-				[reactModule.Event.DragContinue] = reactModule.useCallback(function(_, p2)
-					-- upvalues: p1 (ref), calculateSliderFractionModule (copy), getGuiInputPositionModule (copy), var1 (ref)
-					local current = p1.trackRef.current
-					
-					if not current then return end
-					local var2 = calculateSliderFractionModule(getGuiInputPositionModule(p2, current), current, p1.isVertical)
-					local bounds, bounds_1 = p1.getBounds()
-					local clampedValue = math.clamp(var2, bounds, bounds_1)
-					
-					if clampedValue ~= var1.current then
-						var1.current = clampedValue
-						p1.onSeek(clampedValue)
-					end
-				end, { p1.trackRef, p1.isVertical, p1.getBounds, p1.onSeek }),
-				[reactModule.Event.DragEnd] = reactModule.useCallback(function()
-					-- upvalues: p1 (ref)
-					if p1.onDragEnded then
-						p1.onDragEnded()
-					end
-				end, { p1.onDragEnded }),
-				Enabled = not p1.isDisabled
+				[ReactModule.Event.DragStart] = UseResult,
+				[ReactModule.Event.DragContinue] = UseResult1,
+				[ReactModule.Event.DragEnd] = UseResult2,
+				Enabled = not Frame.isDisabled
 			})
 		}),
-		Knob = if p1.knob then reactModule.createElement(viewModule, {
+		Knob = if Frame.knob then ReactModule.createElement(ViewModule, {
 			tag = "size-0-0 auto-xy",
-			testId = `{p1.testId}--custom-knob`
-		}, p1.knob) else reactModule.createElement(presentationContextModule.Provider, { value = t }, {
-			Knob = reactModule.createElement(knobModule, {
-				size = p1.knobAppearance.size,
-				style = p1.knobAppearance.style,
-				stroke = p1.knobAppearance.stroke,
-				hasShadow = p1.knobAppearance.hasShadow,
-				testId = `{p1.testId}--knob`
-			})
-		})
+			testId = `{Frame.testId}--custom-knob`
+		}, Frame.knob) else ReactModule.createElement(PresentationContextModule.Provider, { value = config }, { Knob = Element })
 	})
 end

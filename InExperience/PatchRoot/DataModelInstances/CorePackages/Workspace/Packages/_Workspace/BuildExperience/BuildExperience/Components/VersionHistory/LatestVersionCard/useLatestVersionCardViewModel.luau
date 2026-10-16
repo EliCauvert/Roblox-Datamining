@@ -1,78 +1,82 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local dataHydrationModule = require(parent.DataHydration)
-local localizationModule = require(parent.Localization)
-local navigationModule = require(parent.Navigation)
-local placeVersionHistoryModule = require(parent.DataHydration.PlaceVersionHistory)
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local launchPlaytestWithLoadingStateModule = require(parent.BuildExperiencePlaytestLaunch.launchPlaytestWithLoadingState)
-local sendBuildExperienceEventModule = require(buildExperience.Telemetry.sendBuildExperienceEvent)
-local getPlaytestLoadingStoreModule = require(parent.BuildExperiencePlaytestLaunch.GetPlaytestLoadingStore)
-local versionHistoryUtilsModule = require(script.Parent.Parent.VersionHistoryUtils)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local PlaceVersionHistoryModule = require(Parent.DataHydration.PlaceVersionHistory)
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local LaunchPlaytestWithLoadingStateModule = require(Parent.BuildExperiencePlaytestLaunch.launchPlaytestWithLoadingState)
+local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
+local GetPlaytestLoadingStoreModule = require(Parent.BuildExperiencePlaytestLaunch.GetPlaytestLoadingStore)
+local VersionHistoryUtilsModule = require(script.Parent.Parent.VersionHistoryUtils)
 local _ = require(script.Parent.LatestVersionCardView)
-local dataStatus = dataHydrationModule.DataStatus
-local useLocalization = localizationModule.Hooks.useLocalization
-local useNavigation = navigationModule.useNavigation
+local DataStatus = require(Parent.DataHydration).DataStatus
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
 
-return function(p1)
-	-- upvalues: placeVersionHistoryModule (ref), reactModule (ref), signalsReactModule (ref), getPlaytestLoadingStoreModule (ref), useLocalization (ref), localizationStringsModule (ref), useNavigation (ref), sendBuildExperienceEventModule (ref), launchPlaytestWithLoadingStateModule (ref), versionHistoryUtilsModule (ref), dataStatus (ref)
-	local placeVersionHistoryStore = placeVersionHistoryModule.getPlaceVersionHistoryStore()
-	local var1 = reactModule.useMemo(function()
-		-- upvalues: placeVersionHistoryStore (ref), p1 (ref)
-		return placeVersionHistoryStore.getLiveVersion(p1.placeId)
-	end, { p1.placeId, placeVersionHistoryStore })
-	local var2 = signalsReactModule.useSignalState(var1.data)
-	local var3 = signalsReactModule.useSignalState(var1.status)
-	reactModule.useEffect(function()
-		-- upvalues: placeVersionHistoryStore (ref), p1 (ref)
-		placeVersionHistoryStore.fetchLiveVersion(p1.placeId)
-	end, { p1.placeId, placeVersionHistoryStore })
-	local var4 = signalsReactModule.useSignalState(reactModule.useCallback(function(p2)
-		-- upvalues: getPlaytestLoadingStoreModule (copy), p1 (ref)
-		return getPlaytestLoadingStoreModule(p2).getIsPlaytestLoadingForPlaceId(p1.placeId)(p2)
-	end, { p1.placeId }))
-	local var5 = useLocalization({
-		playtest = localizationStringsModule.BUILD_MENU_PLAYTEST,
-		publish = localizationStringsModule.BUILD_MENU_PUBLISH
+return function(p1) --[[ Line: 41 | Named "useLatestVersionCardViewModel" ]]
+	-- upvalues: PlaceVersionHistoryModule (copy), ReactModule (copy), SignalsReactModule (copy), GetPlaytestLoadingStoreModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseNavigationFunction (copy), SendBuildExperienceEventModule (copy), LaunchPlaytestWithLoadingStateModule (copy), VersionHistoryUtilsModule (copy), DataStatus (copy)
+	local PlaceVersionHistoryStore = PlaceVersionHistoryModule.getPlaceVersionHistoryStore()
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 43 ]]
+		-- upvalues: PlaceVersionHistoryStore (copy), p1 (copy)
+		return PlaceVersionHistoryStore.getLiveVersion(p1.placeId)
+	end, { p1.placeId, PlaceVersionHistoryStore })
+	local UseSignalStateResult = SignalsReactModule.useSignalState(UseMemoResult.data)
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(UseMemoResult.status)
+	ReactModule.useEffect(function() --[[ Line: 50 ]]
+		-- upvalues: PlaceVersionHistoryStore (copy), p1 (copy)
+		PlaceVersionHistoryStore.fetchLiveVersion(p1.placeId)
+	end, { p1.placeId, PlaceVersionHistoryStore })
+	local UseSignalStateResult2 = SignalsReactModule.useSignalState((ReactModule.useCallback(function(p2) --[[ Line: 54 ]]
+		-- upvalues: GetPlaytestLoadingStoreModule (upval), p1 (copy)
+		return GetPlaytestLoadingStoreModule(p2).getIsPlaytestLoadingForPlaceId(p1.placeId)(p2)
+	end, { p1.placeId })))
+	local UseLocalizationResult = UseLocalizationFunction({
+		playtest = LocalizationStringsModule.BUILD_MENU_PLAYTEST,
+		publish = LocalizationStringsModule.BUILD_MENU_PUBLISH
 	})
-	local var6 = useNavigation()
-	local var7 = reactModule.useCallback(function()
-		-- upvalues: sendBuildExperienceEventModule (copy), p1 (ref), launchPlaytestWithLoadingStateModule (copy)
-		sendBuildExperienceEventModule("PLAYTEST_CLICK", { universeId = p1.universeId, placeId = p1.placeId }, { context = "LatestVersionCard" })
-		launchPlaytestWithLoadingStateModule(p1.placeId, "LatestVersionCard", true)
+	local UseNavigationResult = UseNavigationFunction()
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 65 ]]
+		-- upvalues: SendBuildExperienceEventModule (upval), p1 (copy), LaunchPlaytestWithLoadingStateModule (upval)
+		SendBuildExperienceEventModule("PLAYTEST_CLICK", { universeId = p1.universeId, placeId = p1.placeId }, { context = "LatestVersionCard" })
+		LaunchPlaytestWithLoadingStateModule(p1.placeId, "LatestVersionCard", true)
 	end, { p1.placeId, p1.universeId })
-	local var8 = reactModule.useCallback(function()
-		-- upvalues: var6 (ref), sendBuildExperienceEventModule (copy), p1 (ref)
-		if var6 == nil then return end
-		sendBuildExperienceEventModule("PUBLISH_CLICK", { universeId = p1.universeId, placeId = p1.placeId }, { context = "LatestVersionCard" })
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 73 ]]
+		-- upvalues: UseNavigationResult (copy), SendBuildExperienceEventModule (upval), p1 (copy)
+		if UseNavigationResult == nil then return end
+		SendBuildExperienceEventModule("PUBLISH_CLICK", { universeId = p1.universeId, placeId = p1.placeId }, { context = "LatestVersionCard" })
 		
 		if p1.onClose then
 			p1.onClose()
 		end
-		var6.navigate("BuildPublish", {
-			target = var6.getParam("target") or { universeId = p1.universeId, placeId = p1.placeId }
+		UseNavigationResult.navigate("BuildPublish", {
+			target = UseNavigationResult.getParam("target") or { universeId = p1.universeId, placeId = p1.placeId }
 		})
-	end, { p1.placeId, p1.universeId, p1.onClose, var6 })
-	local entry = p1.entry
+	end, {
+		p1.placeId,
+		p1.universeId,
+		p1.onClose,
+		UseNavigationResult
+	})
+	local Entry = p1.entry
 	
-	if entry == nil then
+	if Entry == nil then
 		return nil
+	else
+		local PlaceVersion = if UseSignalStateResult then UseSignalStateResult.placeVersion else nil
+		local VersionNumber = if PlaceVersion then VersionHistoryUtilsModule.getVersionNumber(PlaceVersion) else nil
+		
+		return {
+			versionLabel = Entry.versionLabel,
+			title = Entry.title,
+			description = Entry.description,
+			playtestText = UseLocalizationResult.playtest,
+			publishText = UseLocalizationResult.publish,
+			isPlaytestDisabled = UseSignalStateResult2,
+			isPublishDisabled = UseSignalStateResult1 == DataStatus.NotReady or VersionNumber == Entry.versionNumber,
+			onPlaytestActivated = UseResult,
+			onPublishActivated = UseResult1,
+			layoutOrder = p1.layoutOrder,
+			testId = p1.testId
+		}
 	end
-	local var9 = if var2 then var2.placeVersion else nil
-	
-	return {
-		versionLabel = entry.versionLabel,
-		title = entry.title,
-		description = entry.description,
-		playtestText = var5.playtest,
-		publishText = var5.publish,
-		isPlaytestDisabled = var4,
-		isPublishDisabled = var3 == dataStatus.NotReady or (if var9 then versionHistoryUtilsModule.getVersionNumber(var9) else nil) == entry.versionNumber,
-		onPlaytestActivated = var7,
-		onPublishActivated = var8,
-		layoutOrder = p1.layoutOrder,
-		testId = p1.testId
-	}
 end

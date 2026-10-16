@@ -1,12 +1,12 @@
-﻿local songbird = script:FindFirstAncestor("Songbird")
-local jestConfigsModule = require(songbird.Parent.Dev.JestConfigs)
+﻿local Songbird = script:FindFirstAncestor("Songbird")
+local JestConfigsModule = require(Songbird.Parent.Dev.JestConfigs)
 
 return {
-	displayName = songbird.Name,
+	displayName = Songbird.Name,
 	setupFilesAfterEnv = {
-		jestConfigsModule.setupFiles.ErrorLogHandler,
-		jestConfigsModule.setupFiles.UIBloxInitializer,
-		jestConfigsModule.setupFiles.createPromiseRejectionHandler(),
-		jestConfigsModule.setupFiles.RetryTimes
+		JestConfigsModule.setupFiles.ErrorLogHandler,
+		JestConfigsModule.setupFiles.UIBloxInitializer,
+		JestConfigsModule.setupFiles.createPromiseRejectionHandler(),
+		JestConfigsModule.setupFiles.RetryTimes
 	}
 }

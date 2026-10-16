@@ -1,48 +1,48 @@
-﻿local serverDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
-local parent = serverDrivenUi.Parent
-local reactModule = require(parent.React)
-local argCheckModule = require(parent.ArgCheck)
-local omniFeedPropsKey = require(parent.DiscoveryTypes).OmniFeedPropsKey
-local sduiFeatureEntryPoint = require(parent.SduiSharedUtilities).SduiFeatureEntryPoint
-local fIntLuaAppDelayImpressionsMaxUpdates = require(parent.SharedFlags).FIntLuaAppDelayImpressionsMaxUpdates
-local sduiV2OmniFeedConstantsModule = require(serverDrivenUi.Migration.SduiV2OmniFeedConstants)
+﻿local ServerDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
+local Parent = ServerDrivenUi.Parent
+local ReactModule = require(Parent.React)
+local ArgCheckModule = require(Parent.ArgCheck)
+local OmniFeedPropsKey = require(Parent.DiscoveryTypes).OmniFeedPropsKey
+local SduiFeatureEntryPoint = require(Parent.SduiSharedUtilities).SduiFeatureEntryPoint
+local FIntLuaAppDelayImpressionsMaxUpdates = require(Parent.SharedFlags).FIntLuaAppDelayImpressionsMaxUpdates
+local SduiV2OmniFeedConstantsModule = require(ServerDrivenUi.Migration.SduiV2OmniFeedConstants)
 
-return reactModule.memo(function(p1)
-	-- upvalues: omniFeedPropsKey (ref), argCheckModule (ref), reactModule (ref), fIntLuaAppDelayImpressionsMaxUpdates (ref), sduiFeatureEntryPoint (ref), sduiV2OmniFeedConstantsModule (ref)
-	local var1 = p1[omniFeedPropsKey]
-	local appPage = var1.appPage
-	argCheckModule.assert(appPage ~= nil, "appPage must exist")
-	argCheckModule.assert(p1.sortIndex ~= nil, "sortIndex must exist")
-	argCheckModule.assert(p1.feedItemKey ~= nil and p1.feedItemKey ~= "", "feedItemKey must exist for V2 SDUI omni feed item")
+return ReactModule.memo(function(p1) --[[ Line: 29 | Named "SduiV2OmniFeedItem" ]]
+	-- upvalues: OmniFeedPropsKey (copy), ArgCheckModule (copy), ReactModule (copy), FIntLuaAppDelayImpressionsMaxUpdates (copy), SduiFeatureEntryPoint (copy), SduiV2OmniFeedConstantsModule (copy)
+	local v1 = p1[OmniFeedPropsKey]
+	local AppPage = v1.appPage
+	ArgCheckModule.assert(AppPage ~= nil, "appPage must exist")
+	ArgCheckModule.assert(p1.sortIndex ~= nil, "sortIndex must exist")
+	ArgCheckModule.assert(p1.feedItemKey ~= nil and p1.feedItemKey ~= "", "feedItemKey must exist for V2 SDUI omni feed item")
 	
-	return reactModule.createElement(sduiFeatureEntryPoint, {
+	return ReactModule.createElement(SduiFeatureEntryPoint, {
 		shouldDisplayError = false,
 		shouldDisplayLoading = false,
-		appPage = appPage,
-		configKey = sduiV2OmniFeedConstantsModule.HomeConfigKey,
+		appPage = AppPage,
+		configKey = SduiV2OmniFeedConstantsModule.HomeConfigKey,
 		identifier = p1.feedItemKey,
-		additionalAnalyticsData = reactModule.useMemo(function()
-			-- upvalues: p1 (ref)
+		additionalAnalyticsData = ReactModule.useMemo(function() --[[ Line: 39 ]]
+			-- upvalues: p1 (copy)
 			return { collectionPosition = p1.sortIndex }
 		end, { p1.sortIndex }),
-		extraLocalProps = reactModule.useMemo(function()
-			-- upvalues: var1 (ref), fIntLuaAppDelayImpressionsMaxUpdates (copy), p1 (ref)
+		extraLocalProps = ReactModule.useMemo(function() --[[ Line: 46 ]]
+			-- upvalues: v1 (copy), FIntLuaAppDelayImpressionsMaxUpdates (upval), p1 (copy)
 			return {
-				scrollViewPositionChangedSignal = var1.scrollViewPositionChangedSignal,
-				verticalScrollingFrameRef = var1.verticalScrollingFrameRef,
-				startRow = var1.feedItemStartRow,
-				numUpdatesToDelayImpressions = fIntLuaAppDelayImpressionsMaxUpdates,
-				selectionOrderBase = var1.selectionOrderBase,
-				videoPlaybackContext = var1.videoPlaybackContext,
+				scrollViewPositionChangedSignal = v1.scrollViewPositionChangedSignal,
+				verticalScrollingFrameRef = v1.verticalScrollingFrameRef,
+				startRow = v1.feedItemStartRow,
+				numUpdatesToDelayImpressions = FIntLuaAppDelayImpressionsMaxUpdates,
+				selectionOrderBase = v1.selectionOrderBase,
+				videoPlaybackContext = v1.videoPlaybackContext,
 				index = p1.sortIndex,
 				collectionPosition = p1.sortIndex
 			}
 		end, {
-			var1.scrollViewPositionChangedSignal, var1.verticalScrollingFrameRef,
-			var1.feedItemStartRow, var1.selectionOrderBase, var1.videoPlaybackContext,
+			v1.scrollViewPositionChangedSignal, v1.verticalScrollingFrameRef,
+			v1.feedItemStartRow, v1.selectionOrderBase, v1.videoPlaybackContext,
 			p1.sortIndex
 		}),
-		appCompositionEnabledOverride = var1.appCompositionEnabled == true,
+		appCompositionEnabledOverride = v1.appCompositionEnabled == true,
 		LayoutOrder = p1.sortIndex
 	})
 end)

@@ -1,16 +1,16 @@
 ﻿return {
-	rectangle = function(vectorA, vectorB)
+	rectangle = function(Left, Bottom) --[[ Line: 2 ]]
+		return { top = Bottom, bottom = Bottom, left = Left, right = Left }
+	end,
+	square = function(Bottom) --[[ Line: 10 ]]
 		return {
-			top = vectorB,
-			bottom = vectorB,
-			left = vectorA,
-			right = vectorA
+			top = Bottom,
+			bottom = Bottom,
+			left = Bottom,
+			right = Bottom
 		}
 	end,
-	square = function(p1)
-		return { top = p1, bottom = p1, left = p1, right = p1 }
-	end,
-	quad = function(p1, p2, p3, p4)
-		return { top = p1, bottom = p3, left = p4, right = p2 }
+	quad = function(Top, Right, Bottom, Left) --[[ Line: 18 ]]
+		return { top = Top, bottom = Bottom, left = Left, right = Right }
 	end
 }

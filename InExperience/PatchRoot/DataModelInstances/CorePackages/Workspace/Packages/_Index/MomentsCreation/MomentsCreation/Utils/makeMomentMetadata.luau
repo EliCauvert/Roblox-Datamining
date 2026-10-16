@@ -1,16 +1,16 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local _ = require(momentsCreation.Parent.MomentsTypes)
-local constantsModule = require(momentsCreation.Constants)
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local _ = require(MomentsCreation.Parent.MomentsTypes)
+local ConstantsModule = require(MomentsCreation.Constants)
 
-return function(p1, p2, p3, p4, p5)
-	-- upvalues: constantsModule (ref)
+return function(Sound, Description, Edits, p1: number, CommentsEnabled) --[[ Line: 27 | Named "makeMomentMetadata" ]]
+	-- upvalues: ConstantsModule (copy)
 	return {
-		assetTotalDuration = if p1.CaptureType == Enum.CaptureType.Screenshot then constantsModule.ScreenshotMusicDuration elseif p4 == nil or p4 <= 0 then p1.TimeLength else p4,
-		captureType = p1.CaptureType,
-		description = p2,
-		universeId = p1.SourceUniverseId,
-		placeId = p1.SourcePlaceId,
-		edits = p3,
-		commentsEnabled = p5
+		assetTotalDuration = if Sound.CaptureType == Enum.CaptureType.Screenshot then ConstantsModule.ScreenshotMusicDuration elseif p1 == nil or p1 <= 0 then Sound.TimeLength else p1,
+		captureType = Sound.CaptureType,
+		description = Description,
+		universeId = Sound.SourceUniverseId,
+		placeId = Sound.SourcePlaceId,
+		edits = Edits,
+		commentsEnabled = CommentsEnabled
 	}
 end

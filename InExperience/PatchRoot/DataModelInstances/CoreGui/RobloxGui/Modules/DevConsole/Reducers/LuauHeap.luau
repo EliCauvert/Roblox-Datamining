@@ -1,45 +1,47 @@
-﻿local immutableModule = require(script.Parent.Parent.Immutable)
-local actions = script.Parent.Parent.Actions
-local setLuauHeapStateModule = require(actions.SetLuauHeapState)
-local setLuauHeapProfileTargetModule = require(actions.SetLuauHeapProfileTarget)
-local setLuauHeapActiveSnapshotModule = require(actions.SetLuauHeapActiveSnapshot)
-local setLuauHeapCompareSnapshotModule = require(actions.SetLuauHeapCompareSnapshot)
+﻿local ImmutableModule = require(script.Parent.Parent.Immutable)
+local Actions = script.Parent.Parent.Actions
+local SetLuauHeapStateModule = require(Actions.SetLuauHeapState)
+local SetLuauHeapProfileTargetModule = require(Actions.SetLuauHeapProfileTarget)
+local SetLuauHeapActiveSnapshotModule = require(Actions.SetLuauHeapActiveSnapshot)
+local SetLuauHeapCompareSnapshotModule = require(Actions.SetLuauHeapCompareSnapshot)
 local _ = require(script.Parent.Parent.Components.LuauHeap.LuauHeapTypes)
-local t = {
+local config = {
 	isClientView = true,
 	client = { active = 0, compare = 0, snapshots = {} },
 	server = { active = 0, compare = 0, snapshots = {} }
 }
 
-return function(p1, p2)
-	-- upvalues: t (ref), setLuauHeapStateModule (ref), immutableModule (ref), setLuauHeapProfileTargetModule (ref), setLuauHeapActiveSnapshotModule (ref), setLuauHeapCompareSnapshotModule (ref)
-	p1 = p1 or t
+return function(p1, p2) --[[ Line: 33 ]]
+	-- upvalues: config (copy), SetLuauHeapStateModule (copy), ImmutableModule (copy), SetLuauHeapProfileTargetModule (copy), SetLuauHeapActiveSnapshotModule (copy), SetLuauHeapCompareSnapshotModule (copy)
+	local P0 = p1 or config
 	
-	if p2.type == setLuauHeapStateModule.name then
-		return immutableModule.JoinDictionaries(p1, if p2.isClientState then { client = p2.sessionState } else { server = p2.sessionState })
-	elseif p2.type == setLuauHeapProfileTargetModule.name then
-		return immutableModule.JoinDictionaries(p1, { isClientView = p2.isClientView })
-	elseif p2.type == setLuauHeapActiveSnapshotModule.name then
-		if p1.isClientView then
-			local cloned = table.clone(p1.client)
-			cloned.active = p2.active
+	if p2.type == SetLuauHeapStateModule.name then
+		return (ImmutableModule.JoinDictionaries(P0, if p2.isClientState then { client = p2.sessionState } else { server = p2.sessionState }))
+	elseif p2.type == SetLuauHeapProfileTargetModule.name then
+		return ImmutableModule.JoinDictionaries(P0, { isClientView = p2.isClientView })
+	elseif p2.type == SetLuauHeapActiveSnapshotModule.name then
+		if P0.isClientView then
+			local Copy = table.clone(P0.client)
+			Copy.active = p2.active
 			
-			return immutableModule.JoinDictionaries(p1, { client = cloned })
+			return ImmutableModule.JoinDictionaries(P0, { client = Copy })
+		else
+			local Copy = table.clone(P0.server)
+			Copy.active = p2.active
+			
+			return ImmutableModule.JoinDictionaries(P0, { server = Copy })
 		end
-		local cloned = table.clone(p1.server)
-		cloned.active = p2.active
+	elseif p2.type ~= SetLuauHeapCompareSnapshotModule.name then
+		return P0
+	elseif P0.isClientView then
+		local Copy = table.clone(P0.client)
+		Copy.compare = p2.compare
 		
-		return immutableModule.JoinDictionaries(p1, { server = cloned })
-	elseif p2.type ~= setLuauHeapCompareSnapshotModule.name then
-		return p1
-	elseif p1.isClientView then
-		local cloned = table.clone(p1.client)
-		cloned.compare = p2.compare
+		return ImmutableModule.JoinDictionaries(P0, { client = Copy })
+	else
+		local Copy = table.clone(P0.server)
+		Copy.compare = p2.compare
 		
-		return immutableModule.JoinDictionaries(p1, { client = cloned })
+		return ImmutableModule.JoinDictionaries(P0, { server = Copy })
 	end
-	local cloned = table.clone(p1.server)
-	cloned.compare = p2.compare
-	
-	return immutableModule.JoinDictionaries(p1, { server = cloned })
 end

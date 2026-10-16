@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.SponsoredTiles.SponsoredTiles)
+﻿return (require(script.Parent.Parent.Parent._Index.SponsoredTiles.SponsoredTiles))

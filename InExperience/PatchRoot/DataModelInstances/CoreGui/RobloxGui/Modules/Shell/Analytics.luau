@@ -1,269 +1,132 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local shell = game:GetService("CoreGui"):FindFirstChild("RobloxGui"):FindFirstChild("Modules"):FindFirstChild("Shell")
-local eventStream = require(corePackagesService.Workspace.Packages.Analytics).AnalyticsReporters.EventStream
-local userInteractions = require(corePackagesService.Workspace.Packages.Analytics).Events.userInteractions
-local pageHeartbeat = require(corePackagesService.Workspace.Packages.Analytics).Events.pageHeartbeat
-local contentHistoryModule = require(shell.XboxPrimaryNav:FindFirstChild("contentHistory"))
-local xboxPrimaryNavIXPTestModule = require(shell.Experiment.XboxPrimaryNavIXPTest)
-local getFIntXboxPrimaryNavABLoggingModule = require(shell.Flags.GetFIntXboxPrimaryNavABLogging)
-local var1 = nil
-pcall(function()
-	-- upvalues: var1 (write)
-	var1 = game:GetService("RbxAnalyticsService")
+﻿local CorePackages = game:GetService("CorePackages")
+local Shell = game:GetService("CoreGui"):FindFirstChild("RobloxGui"):FindFirstChild("Modules"):FindFirstChild("Shell")
+local EventStream = require(CorePackages.Workspace.Packages.Analytics).AnalyticsReporters.EventStream
+local UserInteractionsFunction = require(CorePackages.Workspace.Packages.Analytics).Events.userInteractions
+local PageHeartbeatFunction = require(CorePackages.Workspace.Packages.Analytics).Events.pageHeartbeat
+local ContentHistoryModule = require(Shell.XboxPrimaryNav:FindFirstChild("contentHistory"))
+local XboxPrimaryNavIXPTestModule = require(Shell.Experiment.XboxPrimaryNavIXPTest)
+local GetFIntXboxPrimaryNavABLoggingModule = require(Shell.Flags.GetFIntXboxPrimaryNavABLogging)
+local RbxAnalyticsService = nil
+pcall(function() --[[ Line: 22 ]]
+	-- upvalues: RbxAnalyticsService (ref)
+	RbxAnalyticsService = game:GetService("RbxAnalyticsService")
 end)
-local eventIngestService = game:GetService("EventIngestService")
-local userInputService = game:GetService("UserInputService")
-local var2 = eventStream.new(var1)
-local t = {
-	SetRBXEvent = function(value, p1)
-		-- upvalues: userInputService (ref), eventIngestService (ref)
-		local var3 = value
-		local var4 = p1
-		local var5 = nil
-		local var6 = nil
-		local _, _ = pcall(function()
-			-- upvalues: userInputService (copy), var5 (write), var6 (write), var3 (write), var4 (write), eventIngestService (copy)
-			if userInputService:GetPlatform() == Enum.Platform.XBoxOne then
-				var5 = "console"
-				var6 = "XboxOne"
-				var3 = var3 or ""
-				var4 = var4 or {}
-				eventIngestService:SetRBXEvent(var5, var6, var3, var4)
-			end
-		end)
-	end,
-	SetRBXEventStream = function(value, p1)
-		-- upvalues: userInputService (ref), eventIngestService (ref)
-		local var3 = value
-		local var4 = p1
-		local var5 = nil
-		local var6 = nil
-		local _, _ = pcall(function()
-			-- upvalues: userInputService (copy), var5 (write), var6 (write), var3 (write), var4 (write), eventIngestService (copy)
-			if userInputService:GetPlatform() == Enum.Platform.XBoxOne then
-				var5 = "console"
-				var6 = "XboxOne"
-				var3 = var3 or ""
-				var4 = var4 or {}
-				eventIngestService:SetRBXEventStream(var5, var6, var3, var4)
-			end
-		end)
-	end,
-	UpdateHeartbeatObject = function(p1)
-		-- upvalues: var1 (write)
-		local _, _ = pcall(function()
-			-- upvalues: var1 (copy), p1 (ref)
-			var1:UpdateHeartbeatObject(p1)
-		end)
-	end,
-	ReportCounter = function(p1, p2)
-		-- upvalues: userInputService (ref), var1 (write)
-		local var3 = p1
-		local var4 = p2
-		local _, _ = pcall(function()
-			-- upvalues: userInputService (copy), var3 (write), var4 (write), var1 (copy)
-			if userInputService:GetPlatform() == Enum.Platform.XBoxOne then
-				var3 = var3 or ""
-				var3 = "Xbox-" .. tostring(var3)
-				var4 = var4 or 1
-				var1:ReportCounter(var3, var4)
-			end
-		end)
-	end,
-	reportPageChanged = function()
-		-- upvalues: userInteractions (ref), var2 (ref)
-		userInteractions(var2, "luaPage")
-	end,
-	reportPageHeartbeat = function(p1, p2)
-		-- upvalues: pageHeartbeat (ref), var2 (ref)
-		pageHeartbeat(var2, p1, p2)
-	end
-}
-local t_1 = { TenFoot = "tenFoot", Classic = "classic" }
+local EventIngestService = game:GetService("EventIngestService")
+local UserInputService = game:GetService("UserInputService")
+local NewEventStream = EventStream.new(RbxAnalyticsService)
+local config = { TenFoot = "tenFoot", Classic = "classic" }
 
-local function _()
-	-- upvalues: xboxPrimaryNavIXPTestModule (ref)
-	return if xboxPrimaryNavIXPTestModule.isUserEnrolled() then "tenFoot" else "classic"
+local function _(): string --[[ Line: 35 | Named "getNavigationVersion" ]]
+	-- upvalues: XboxPrimaryNavIXPTestModule (copy)
+	return if XboxPrimaryNavIXPTestModule.isUserEnrolled() then "tenFoot" else "classic"
 end
 
-local _ = function(value, p1)
-	-- upvalues: userInputService (ref), eventIngestService (ref)
-	local var3 = nil
-	local var4 = nil
-	local ok, _ = pcall(function()
-		-- upvalues: userInputService (copy), var3 (write), var4 (write), value (write), p1 (write), eventIngestService (copy)
-		if userInputService:GetPlatform() == Enum.Platform.XBoxOne then
-			var16 = "console"
-			var17 = "XboxOne"
-			value = value or ""
-			p1 = p1 or {}
-			eventIngestService:SetRBXEvent(var16, var17, value, p1)
+local _ = function(p1, p2) --[[ Line: 44 | Named "setRBXEvent" ]]
+	-- upvalues: UserInputService (copy), EventIngestService (copy)
+	local v1 = nil
+	local v2 = nil
+	local Success, _ = pcall(function() --[[ Line: 46 ]]
+		-- upvalues: UserInputService (upval), v1 (ref), v2 (ref), p1 (ref), p2 (ref), EventIngestService (upval)
+		if UserInputService:GetPlatform() == Enum.Platform.XBoxOne then
+			v1 = "console"
+			v2 = "XboxOne"
+			p1 = p1 or ""
+			p2 = p2 or {}
+			EventIngestService:SetRBXEvent(v1, v2, p1, p2)
 		end
 	end)
 	
-	return ok
+	return Success
 end
 
-local _ = function(value, p1)
-	-- upvalues: userInputService (ref), eventIngestService (ref)
-	local var3 = nil
-	local var4 = nil
-	local ok, _ = pcall(function()
-		-- upvalues: userInputService (copy), var3 (write), var4 (write), value (write), p1 (write), eventIngestService (copy)
-		if userInputService:GetPlatform() == Enum.Platform.XBoxOne then
-			var20 = "console"
-			var21 = "XboxOne"
-			var18 = var18 or ""
-			p1 = p1 or {}
-			eventIngestService:SetRBXEventStream(var20, var21, var18, p1)
+local _ = function(p1, p2) --[[ Line: 59 | Named "setRBXEventStream" ]]
+	-- upvalues: UserInputService (copy), EventIngestService (copy)
+	local v1 = nil
+	local v2 = nil
+	local Success, _ = pcall(function() --[[ Line: 61 ]]
+		-- upvalues: UserInputService (upval), v1 (ref), v2 (ref), p1 (ref), p2 (ref), EventIngestService (upval)
+		if UserInputService:GetPlatform() == Enum.Platform.XBoxOne then
+			v1 = "console"
+			v2 = "XboxOne"
+			p1 = p1 or ""
+			p2 = p2 or {}
+			EventIngestService:SetRBXEventStream(v1, v2, p1, p2)
 		end
 	end)
 	
-	return ok
+	return Success
 end
 
-local _ = function(_)
-	-- upvalues: userInputService (ref), var1 (write)
-	local var3 = nil
-	local ok, _ = pcall(function()
-		-- upvalues: userInputService (copy), var3 (write), var1 (copy)
-		if userInputService:GetPlatform() == Enum.Platform.XBoxOne then
-			var3 = "console"
-			var1:ReleaseRBXEventStream(var3)
+local _ = function(_) --[[ Line: 74 | Named "releaseRBXEventStream" ]]
+	-- upvalues: UserInputService (copy), RbxAnalyticsService (ref)
+	local v1 = nil
+	local Success, _ = pcall(function() --[[ Line: 76 ]]
+		-- upvalues: UserInputService (upval), v1 (ref), RbxAnalyticsService (upval)
+		if UserInputService:GetPlatform() == Enum.Platform.XBoxOne then
+			v1 = "console"
+			RbxAnalyticsService:ReleaseRBXEventStream(v1)
 		end
 	end)
 	
-	return ok
+	return Success
 end
 
-local _ = function(p1)
-	-- upvalues: var1 (write)
-	local ok, _ = pcall(function()
-		-- upvalues: var1 (copy), p1 (ref)
-		var1:UpdateHeartbeatObject(p1)
+local _ = function(p1) --[[ Line: 86 | Named "updateHeartbeatObject" ]]
+	-- upvalues: RbxAnalyticsService (ref)
+	local Success, _ = pcall(function() --[[ Line: 87 ]]
+		-- upvalues: RbxAnalyticsService (upval), p1 (copy)
+		RbxAnalyticsService:UpdateHeartbeatObject(p1)
 	end)
 	
-	return ok
+	return Success
 end
 
-local _ = function(p1, p2)
-	-- upvalues: userInputService (ref), var1 (write)
-	local ok, _ = pcall(function()
-		-- upvalues: userInputService (copy), p1 (write), p2 (write), var1 (copy)
-		if userInputService:GetPlatform() == Enum.Platform.XBoxOne then
-			var22 = var22 or ""
-			var22 = "Xbox-" .. tostring(var22)
+local _ = function(p1, p2) --[[ Line: 94 | Named "reportCounter" ]]
+	-- upvalues: UserInputService (copy), RbxAnalyticsService (ref)
+	local Success, _ = pcall(function() --[[ Line: 95 ]]
+		-- upvalues: UserInputService (upval), p1 (ref), p2 (ref), RbxAnalyticsService (upval)
+		if UserInputService:GetPlatform() == Enum.Platform.XBoxOne then
+			p1 = p1 or ""
+			p1 = "Xbox-" .. tostring(p1)
 			p2 = p2 or 1
-			var1:ReportCounter(var22, p2)
+			RbxAnalyticsService:ReportCounter(p1, p2)
 		end
 	end)
 	
-	return ok
+	return Success
 end
 
-function t.reportNavigation(p1, p2, p3)
-	-- upvalues: contentHistoryModule (ref), xboxPrimaryNavIXPTestModule (ref), t_1 (ref), userInputService (ref), eventIngestService (ref), getFIntXboxPrimaryNavABLoggingModule (ref)
-	local lastContentName = contentHistoryModule:getLastContentName()
+local function reportNavigationLoaded(ToContent) --[[ Line: 153 ]]
+	-- upvalues: ContentHistoryModule (copy), XboxPrimaryNavIXPTestModule (copy), config (copy), UserInputService (copy), EventIngestService (copy), GetFIntXboxPrimaryNavABLoggingModule (copy)
+	local LastContentName = ContentHistoryModule:getLastContentName()
 	
-	if p2 ~= lastContentName then
-		local var3 = "Navigation"
-		local t = {
-			activationType = p1,
-			toContent = p2,
-			fromContent = lastContentName,
-			contentType = p3,
-			navigationVersion = if xboxPrimaryNavIXPTestModule.isUserEnrolled() then t_1.TenFoot else t_1.Classic
+	if ToContent ~= LastContentName then
+		local v1 = "NavigationLoaded"
+		local config1 = {
+			toContent = ToContent,
+			fromContent = LastContentName,
+			navigationVersion = if XboxPrimaryNavIXPTestModule.isUserEnrolled() then config.TenFoot else config.Classic
 		}
-		local var4 = nil
-		local var5 = nil
-		local _, _ = pcall(function()
-			-- upvalues: userInputService (copy), var4 (write), var5 (write), var3 (write), t (write), eventIngestService (copy)
-			if userInputService:GetPlatform() == Enum.Platform.XBoxOne then
-				var20 = "console"
-				var21 = "XboxOne"
-				var18 = var18 or ""
-				p8 = p8 or {}
-				eventIngestService:SetRBXEventStream(var20, var21, var18, p8)
+		local v2 = nil
+		local v3 = nil
+		local _, _ = pcall(function() --[[ Line: 61 ]]
+			-- upvalues: UserInputService (upval), v2 (ref), v3 (ref), v1 (ref), config1 (ref), EventIngestService (upval)
+			if UserInputService:GetPlatform() == Enum.Platform.XBoxOne then
+				v2 = "console"
+				v3 = "XboxOne"
+				v1 = v1 or ""
+				config1 = config1 or {}
+				EventIngestService:SetRBXEventStream(v2, v3, v1, config1)
 			end
 		end)
 		
-		if getFIntXboxPrimaryNavABLoggingModule() > 1 then
-			print("[ANALYTICS] Navigation", "ActivationType:", p1, "| ContentName:", p2, "| ContentType:", p3, "| PrevContentName:", lastContentName, "| NavigationVersion:", if xboxPrimaryNavIXPTestModule.isUserEnrolled() then t_1.TenFoot else t_1.Classic)
+		if GetFIntXboxPrimaryNavABLoggingModule() > 1 then
+			print("[ANALYTICS] NavigationLoaded ContentName:", ToContent, "| PrevContentName:", LastContentName, "| NavigationVersion:", if XboxPrimaryNavIXPTestModule.isUserEnrolled() then config.TenFoot else config.Classic)
 		end
 	end
 end
 
-local function reportNavigationLoaded(p1)
-	-- upvalues: contentHistoryModule (ref), xboxPrimaryNavIXPTestModule (ref), t_1 (ref), userInputService (ref), eventIngestService (ref), getFIntXboxPrimaryNavABLoggingModule (ref)
-	local lastContentName = contentHistoryModule:getLastContentName()
-	
-	if p1 ~= lastContentName then
-		local var3 = "NavigationLoaded"
-		local t = {
-			toContent = p1,
-			fromContent = lastContentName,
-			navigationVersion = if xboxPrimaryNavIXPTestModule.isUserEnrolled() then t_1.TenFoot else t_1.Classic
-		}
-		local var4 = nil
-		local var5 = nil
-		local _, _ = pcall(function()
-			-- upvalues: userInputService (copy), var4 (write), var5 (write), var3 (write), t (write), eventIngestService (copy)
-			if userInputService:GetPlatform() == Enum.Platform.XBoxOne then
-				var20 = "console"
-				var21 = "XboxOne"
-				var18 = var18 or ""
-				p8 = p8 or {}
-				eventIngestService:SetRBXEventStream(var20, var21, var18, p8)
-			end
-		end)
-		
-		if getFIntXboxPrimaryNavABLoggingModule() > 1 then
-			print("[ANALYTICS] NavigationLoaded ContentName:", p1, "| PrevContentName:", lastContentName, "| NavigationVersion:", if xboxPrimaryNavIXPTestModule.isUserEnrolled() then t_1.TenFoot else t_1.Classic)
-		end
-	end
-end
-
-function t.reportNavigationLoaded(p1)
-	-- upvalues: xboxPrimaryNavIXPTestModule (ref), reportNavigationLoaded (ref)
-	if xboxPrimaryNavIXPTestModule.isUserEnrolled() then
-		reportNavigationLoaded(p1)
-		
-		return
-	end
-	spawn(function()
-		-- upvalues: reportNavigationLoaded (copy), p1 (ref)
-		reportNavigationLoaded(p1)
-	end)
-end
-
-function t.reportBackNavigation(p1)
-	-- upvalues: contentHistoryModule (ref), xboxPrimaryNavIXPTestModule (ref), t_1 (ref), userInputService (ref), eventIngestService (ref), getFIntXboxPrimaryNavABLoggingModule (ref)
-	local lastContentName = contentHistoryModule:getLastContentName()
-	local var3 = "NavigationBack"
-	local t = {
-		fromContent = p1,
-		toContent = lastContentName,
-		navigationVersion = if xboxPrimaryNavIXPTestModule.isUserEnrolled() then t_1.TenFoot else t_1.Classic
-	}
-	local var4 = nil
-	local var5 = nil
-	local _, _ = pcall(function()
-		-- upvalues: userInputService (copy), var4 (write), var5 (write), var3 (write), t (write), eventIngestService (copy)
-		if userInputService:GetPlatform() == Enum.Platform.XBoxOne then
-			var20 = "console"
-			var21 = "XboxOne"
-			var18 = var18 or ""
-			p8 = p8 or {}
-			eventIngestService:SetRBXEventStream(var20, var21, var18, p8)
-		end
-	end)
-	
-	if getFIntXboxPrimaryNavABLoggingModule() > 1 then
-		print("[ANALYTICS] NavigationBack FromContent:", p1, "| ToContent:", lastContentName, "| NavigationVersion:", if xboxPrimaryNavIXPTestModule.isUserEnrolled() then t_1.TenFoot else t_1.Classic)
-	end
-end
-
-local t_2 = {
+local config1 = {
 	WidgetId = "WidgetName",
 	AppHubId = "AppHub",
 	AvatarEditorScreenId = "AvatarEditorScreen",
@@ -306,7 +169,7 @@ local t_2 = {
 	SearchScreenId = "SearchScreen",
 	PartyUiId = "PartyUi"
 }
-local t_3 = {
+local config2 = {
 	HomeId = "HomeTab",
 	AvatarId = "AvatarTab",
 	DiscoverId = "DiscoverTab",
@@ -316,14 +179,146 @@ local t_3 = {
 	SettingsId = "SettingsTab"
 }
 
-function t.WidgetNames(p1)
-	-- upvalues: t_2 (ref)
-	return t_2 and t_2[p1] or p1
-end
-
-function t.TabNames(p1)
-	-- upvalues: t_3 (ref)
-	return t_3 and t_3[p1] or p1
-end
-
-return t
+return {
+	SetRBXEvent = function(EventName, Target) --[[ Line: 108 ]]
+		-- upvalues: UserInputService (copy), EventIngestService (copy)
+		local EventName1 = EventName
+		local AdditionalArgs = Target
+		local Target1 = nil
+		local EventContext = nil
+		local _, _ = pcall(function() --[[ Line: 46 ]]
+			-- upvalues: UserInputService (upval), Target1 (ref), EventContext (ref), EventName1 (ref), AdditionalArgs (ref), EventIngestService (upval)
+			if UserInputService:GetPlatform() == Enum.Platform.XBoxOne then
+				Target1 = "console"
+				EventContext = "XboxOne"
+				EventName1 = EventName1 or ""
+				AdditionalArgs = AdditionalArgs or {}
+				EventIngestService:SetRBXEvent(Target1, EventContext, EventName1, AdditionalArgs)
+			end
+		end)
+	end,
+	SetRBXEventStream = function(p1, Target) --[[ Line: 113 ]]
+		-- upvalues: UserInputService (copy), EventIngestService (copy)
+		local v1 = p1
+		local Target1 = Target
+		local v2 = nil
+		local v3 = nil
+		local _, _ = pcall(function() --[[ Line: 61 ]]
+			-- upvalues: UserInputService (upval), v2 (ref), v3 (ref), v1 (ref), Target1 (ref), EventIngestService (upval)
+			if UserInputService:GetPlatform() == Enum.Platform.XBoxOne then
+				v2 = "console"
+				v3 = "XboxOne"
+				v1 = v1 or ""
+				Target1 = Target1 or {}
+				EventIngestService:SetRBXEventStream(v2, v3, v1, Target1)
+			end
+		end)
+	end,
+	UpdateHeartbeatObject = function(p1) --[[ Line: 117 ]]
+		-- upvalues: RbxAnalyticsService (ref)
+		local _, _ = pcall(function() --[[ Line: 87 ]]
+			-- upvalues: RbxAnalyticsService (upval), p1 (copy)
+			RbxAnalyticsService:UpdateHeartbeatObject(p1)
+		end)
+	end,
+	ReportCounter = function(CounterName, CounterName1) --[[ Line: 122 ]]
+		-- upvalues: UserInputService (copy), RbxAnalyticsService (ref)
+		local Text = CounterName
+		local Amount = CounterName1
+		local _, _ = pcall(function() --[[ Line: 95 ]]
+			-- upvalues: UserInputService (upval), Text (ref), Amount (ref), RbxAnalyticsService (upval)
+			if UserInputService:GetPlatform() == Enum.Platform.XBoxOne then
+				Text = Text or ""
+				Text = "Xbox-" .. tostring(Text)
+				Amount = Amount or 1
+				RbxAnalyticsService:ReportCounter(Text, Amount)
+			end
+		end)
+	end,
+	reportPageChanged = function() --[[ Line: 126 ]]
+		-- upvalues: UserInteractionsFunction (copy), NewEventStream (copy)
+		UserInteractionsFunction(NewEventStream, "luaPage")
+	end,
+	reportPageHeartbeat = function(p1, p2) --[[ Line: 131 ]]
+		-- upvalues: PageHeartbeatFunction (copy), NewEventStream (copy)
+		PageHeartbeatFunction(NewEventStream, p1, p2)
+	end,
+	reportNavigation = function(ActivationType, ToContent, ContentType) --[[ Line: 135 ]]
+		-- upvalues: ContentHistoryModule (copy), XboxPrimaryNavIXPTestModule (copy), config (copy), UserInputService (copy), EventIngestService (copy), GetFIntXboxPrimaryNavABLoggingModule (copy)
+		local LastContentName = ContentHistoryModule:getLastContentName()
+		
+		if ToContent ~= LastContentName then
+			local v1 = "Navigation"
+			local config1 = {
+				activationType = ActivationType,
+				toContent = ToContent,
+				fromContent = LastContentName,
+				contentType = ContentType,
+				navigationVersion = if XboxPrimaryNavIXPTestModule.isUserEnrolled() then config.TenFoot else config.Classic
+			}
+			local v2 = nil
+			local v3 = nil
+			local _, _ = pcall(function() --[[ Line: 61 ]]
+				-- upvalues: UserInputService (upval), v2 (ref), v3 (ref), v1 (ref), config1 (ref), EventIngestService (upval)
+				if UserInputService:GetPlatform() == Enum.Platform.XBoxOne then
+					v2 = "console"
+					v3 = "XboxOne"
+					v1 = v1 or ""
+					config1 = config1 or {}
+					EventIngestService:SetRBXEventStream(v2, v3, v1, config1)
+				end
+			end)
+			
+			if GetFIntXboxPrimaryNavABLoggingModule() > 1 then
+				print("[ANALYTICS] Navigation", "ActivationType:", ActivationType, "| ContentName:", ToContent, "| ContentType:", ContentType, "| PrevContentName:", LastContentName, "| NavigationVersion:", if XboxPrimaryNavIXPTestModule.isUserEnrolled() then config.TenFoot else config.Classic)
+			end
+		end
+	end,
+	reportNavigationLoaded = function(ToContent) --[[ Line: 174 ]]
+		-- upvalues: XboxPrimaryNavIXPTestModule (copy), reportNavigationLoaded (copy)
+		if XboxPrimaryNavIXPTestModule.isUserEnrolled() then
+			reportNavigationLoaded(ToContent)
+			
+			return
+		else
+			spawn(function() --[[ Line: 178 ]]
+				-- upvalues: reportNavigationLoaded (upval), ToContent (copy)
+				reportNavigationLoaded(ToContent)
+			end)
+		end
+	end,
+	reportBackNavigation = function(FromContent) --[[ Line: 182 ]]
+		-- upvalues: ContentHistoryModule (copy), XboxPrimaryNavIXPTestModule (copy), config (copy), UserInputService (copy), EventIngestService (copy), GetFIntXboxPrimaryNavABLoggingModule (copy)
+		local LastContentName = ContentHistoryModule:getLastContentName()
+		local EventName = "NavigationBack"
+		local config1 = {
+			fromContent = FromContent,
+			toContent = LastContentName,
+			navigationVersion = if XboxPrimaryNavIXPTestModule.isUserEnrolled() then config.TenFoot else config.Classic
+		}
+		local Target = nil
+		local EventContext = nil
+		local _, _ = pcall(function() --[[ Line: 61 ]]
+			-- upvalues: UserInputService (upval), Target (ref), EventContext (ref), EventName (ref), config1 (ref), EventIngestService (upval)
+			if UserInputService:GetPlatform() == Enum.Platform.XBoxOne then
+				Target = "console"
+				EventContext = "XboxOne"
+				EventName = EventName or ""
+				config1 = config1 or {}
+				EventIngestService:SetRBXEventStream(Target, EventContext, EventName, config1)
+			end
+		end)
+		
+		if GetFIntXboxPrimaryNavABLoggingModule() > 1 then
+			print("[ANALYTICS] NavigationBack FromContent:", FromContent, "| ToContent:", LastContentName, "| NavigationVersion:", if XboxPrimaryNavIXPTestModule.isUserEnrolled() then config.TenFoot else config.Classic)
+		end
+	end,
+	WidgetNames = function(p1) --[[ Line: 251 ]]
+		-- upvalues: config1 (copy)
+		return (if config1 then config1[p1] else config1) or p1
+	end,
+	TabNames = function(p1) --[[ Line: 259 ]]
+		-- upvalues: config2 (copy)
+		return (if config2 then config2[p1] else config2) or p1
+	end
+}

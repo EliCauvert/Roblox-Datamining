@@ -1,15 +1,15 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local constantsModule = require(momentsCreation.Constants)
-local _ = require(momentsCreation.Parent.MomentsTypes)
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local ConstantsModule = require(MomentsCreation.Constants)
+local _ = require(MomentsCreation.Parent.MomentsTypes)
 
-return function()
-	-- upvalues: constantsModule (ref)
+return function() --[[ Line: 9 | Named "makeDefaultStickerOverlayEdit" ]]
+	-- upvalues: ConstantsModule (copy)
 	return {
 		stickerURI = nil,
 		rotation = 0,
 		scale = 1,
 		zIndex = 1,
 		position = UDim2.fromScale(0.5, 0.5),
-		stickerSize = constantsModule.StickerOverlay.DefaultStickerSize
+		stickerSize = ConstantsModule.StickerOverlay.DefaultStickerSize
 	}
 end

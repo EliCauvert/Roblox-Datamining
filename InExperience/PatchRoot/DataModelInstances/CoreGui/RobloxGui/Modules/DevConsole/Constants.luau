@@ -1,4 +1,6 @@
-﻿return {
+﻿local SlimDevConsole2 = game:DefineFastFlag("SlimDevConsole2", false)
+
+return {
 	MainWindowInit = {
 		Transparency = 0.36,
 		Position = UDim2.new(0.5, -486, 0.02, 16),
@@ -270,10 +272,7 @@
 		MinFrameWidth = 654,
 		LearnMoreWidth = 80,
 		ChartHeaderNames = { "Name", "Toggle", "Draw Type", "Tags" },
-		ChartCellWidths = {
-			if game:DefineFastFlag("SlimDevConsole2", false) then 170 else 60,
-			80
-		}
+		ChartCellWidths = { if SlimDevConsole2 then 170 else 60, 80 }
 	},
 	Graph = {
 		PointWidth = 4,

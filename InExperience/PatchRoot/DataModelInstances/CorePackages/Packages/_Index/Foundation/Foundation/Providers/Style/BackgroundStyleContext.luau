@@ -1,17 +1,18 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local _ = require(foundation.Components.Types)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local var1 = reactModule.createContext(nil)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local _ = require(Foundation.Components.Types)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local Context = ReactModule.createContext(nil)
 
-function useBackgroundStyle()
-	-- upvalues: reactModule (ref), var1 (ref), useTokensModule (ref)
-	local var2 = reactModule.useContext(var1)
+function useBackgroundStyle() --[[ Line: 11 ]]
+	-- upvalues: ReactModule (copy), Context (copy), UseTokensModule (copy)
+	local UseContextResult = ReactModule.useContext(Context)
+	local UseTokensModuleResult = UseTokensModule()
 	
-	return if var2 == nil then useTokensModule().Color.Surface.Surface_0 else var2
+	return if UseContextResult == nil then UseTokensModuleResult.Color.Surface.Surface_0 else UseContextResult
 end
 
 return {
 	useBackgroundStyle = useBackgroundStyle,
-	Provider = var1.Provider
+	Provider = Context.Provider
 }

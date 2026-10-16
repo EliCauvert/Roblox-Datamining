@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.Analytics.Analytics)
+﻿return (require(script.Parent._Workspace.Analytics.Analytics))

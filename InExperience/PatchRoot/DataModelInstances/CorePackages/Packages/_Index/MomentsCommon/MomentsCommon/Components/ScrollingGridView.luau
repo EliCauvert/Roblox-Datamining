@@ -1,75 +1,107 @@
-﻿local parent = script:FindFirstAncestor("MomentsCommon").Parent
-local dashModule = require(parent.Dash)
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local button = foundationModule.Button
-local scrollBarVisibility = foundationModule.Enums.ScrollBarVisibility
-local scrollView = foundationModule.ScrollView
-local view = foundationModule.View
-local useTokens = foundationModule.Hooks.useTokens
+﻿local Parent = script:FindFirstAncestor("MomentsCommon").Parent
+local DashModule = require(Parent.Dash)
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local Button = FoundationModule.Button
+local ScrollBarVisibility = FoundationModule.Enums.ScrollBarVisibility
+local ScrollView = FoundationModule.ScrollView
+local View = FoundationModule.View
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-local function GridItems(p1)
-	-- upvalues: reactModule (ref), view (ref)
-	local t = {}
+local function GridItems(Frame) --[[ Line: 24 ]]
+	-- upvalues: ReactModule (copy), View (copy)
+	local Elements = {}
 	
-	for i, v in p1.items do
-		t[i] = reactModule.createElement(view, {
-			LayoutOrder = i,
-			Size = UDim2.fromOffset(p1.itemSize.X, p1.itemSize.Y)
-		}, { Content = p1.renderItem(v, i) })
+	for LayoutOrder, item in Frame.items do
+		Elements[LayoutOrder] = ReactModule.createElement(View, {
+			LayoutOrder = LayoutOrder,
+			Size = UDim2.fromOffset(Frame.itemSize.X, Frame.itemSize.Y)
+		}, { Content = Frame.renderItem(item, LayoutOrder) })
 	end
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "auto-y size-full-0",
 		AutomaticSize = Enum.AutomaticSize.Y,
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		UIGridLayout = reactModule.createElement("UIGridLayout", {
-			CellPadding = UDim2.fromOffset(p1.itemPadding.X, p1.itemPadding.Y),
-			CellSize = UDim2.fromOffset(p1.itemSize.X, p1.itemSize.Y),
+		UIGridLayout = ReactModule.createElement("UIGridLayout", {
+			CellPadding = UDim2.fromOffset(Frame.itemPadding.X, Frame.itemPadding.Y),
+			CellSize = UDim2.fromOffset(Frame.itemSize.X, Frame.itemSize.Y),
 			FillDirection = Enum.FillDirection.Horizontal,
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
 			SortOrder = Enum.SortOrder.LayoutOrder
 		}),
-		Children = reactModule.createElement(reactModule.Fragment, nil, t)
+		Children = ReactModule.createElement(ReactModule.Fragment, nil, Elements)
 	})
 end
 
-return function(p2)
-	-- upvalues: reactModule (ref), useTokens (ref), dashModule (ref), view (ref), scrollView (ref), scrollBarVisibility (ref), GridItems (ref), button (ref), foundationModule (ref)
-	local var1, var2 = reactModule.useState(Vector2.new(0, 0))
-	local var3, var4 = reactModule.useState(0)
-	local var5 = useTokens()
-	local var6 = reactModule.useCallback(function(p3)
-		-- upvalues: var2 (ref)
-		var2(p3.AbsoluteSize)
+return function(p1) --[[ Line: 79 ]]
+	-- upvalues: ReactModule (copy), UseTokensFunction (copy), DashModule (copy), View (copy), ScrollView (copy), ScrollBarVisibility (copy), GridItems (copy), Button (copy), FoundationModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.new(0, 0))
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(0)
+	local UseTokensResult = UseTokensFunction()
+	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 85 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(Frame.AbsoluteSize)
 	end, {})
-	local var7 = reactModule.useMemo(function()
-		-- upvalues: var1 (ref), p2 (ref)
-		return math.clamp(math.floor(var1.X / p2.itemConfig.minItemWidth), 1, p2.itemConfig.maxItemsPerRow)
-	end, { var1, p2.itemConfig })
-	local var8 = reactModule.useMemo(function()
-		-- upvalues: var1 (ref), p2 (ref), var7 (ref)
-		local var9 = var1.X - p2.itemConfig.padding * (var7 - 1)
-		local minValue = math.min(var9 / var7, var9)
+	local UseMemoResult = ReactModule.useMemo(function(): number --[[ Line: 89 ]]
+		-- upvalues: UseStateResult (copy), p1 (copy)
+		return (math.clamp(math.floor(UseStateResult.X / p1.itemConfig.minItemWidth), 1, p1.itemConfig.maxItemsPerRow))
+	end, { UseStateResult, p1.itemConfig })
+	local UseMemoResult1 = ReactModule.useMemo(function(): Vector2 --[[ Line: 97 ]]
+		-- upvalues: UseStateResult (copy), p1 (copy), UseMemoResult (copy)
+		local XDelta = UseStateResult.X - p1.itemConfig.padding * (UseMemoResult - 1)
+		local Smallest = math.min(XDelta / UseMemoResult, XDelta)
 		
-		return Vector2.new(math.floor(minValue), math.floor(minValue * p2.aspectRatio))
-	end, { var1, var7, p2.aspectRatio, p2.itemConfig })
-	local var9 = reactModule.useMemo(function()
-		-- upvalues: var1 (ref), var8 (ref), var7 (ref), p2 (ref)
-		return if var1.Y <= 0 then 0 else math.max(math.floor(var1.Y / var8.Y) * var7, p2.itemConfig.minItemsPerPage)
-	end, { var1, var8, var7, p2.itemConfig })
-	local var10 = var1.X > 0 and var1.Y > 0
-	local shouldShowShowMoreButton = p2.shouldShowShowMoreButton or var3 < #p2.items
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), var9 (ref), var4 (ref)
-		if var3 < var9 then
-			var4(var9)
+		return Vector2.new(math.floor(Smallest), (math.floor(Smallest * p1.aspectRatio)))
+	end, {
+		UseStateResult,
+		UseMemoResult,
+		p1.aspectRatio,
+		p1.itemConfig
+	})
+	local UseMemoResult2 = ReactModule.useMemo(function(): number --[[ Line: 107 ]]
+		-- upvalues: UseStateResult (copy), UseMemoResult1 (copy), UseMemoResult (copy), p1 (copy)
+		return if UseStateResult.Y <= 0 then 0 else math.max(math.floor(UseStateResult.Y / UseMemoResult1.Y) * UseMemoResult, p1.itemConfig.minItemsPerPage)
+	end, {
+		UseStateResult,
+		UseMemoResult1,
+		UseMemoResult,
+		p1.itemConfig
+	})
+	local IsYAbove: boolean = UseStateResult.X > 0 and UseStateResult.Y > 0
+	local ShouldShowShowMoreButton = p1.shouldShowShowMoreButton or UseStateResult1 < #p1.items
+	ReactModule.useEffect(function() --[[ Line: 121 ]]
+		-- upvalues: UseStateResult1 (copy), UseMemoResult2 (copy), UseStateResult2_1 (copy)
+		if UseStateResult1 < UseMemoResult2 then
+			UseStateResult2_1(UseMemoResult2)
 		end
-	end, { var1, var9, var3 })
+	end, { UseStateResult, UseMemoResult2, UseStateResult1 })
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 127 ]]
+		-- upvalues: UseStateResult1 (copy), UseMemoResult2 (copy), p1 (copy), UseStateResult2_1 (copy)
+		if #p1.items < UseStateResult1 + UseMemoResult2 and p1.shouldShowShowMoreButton then
+			p1.onShowMoreCallback()
+		end
+		UseStateResult2_1(UseStateResult1 + UseMemoResult2)
+	end, {
+		UseStateResult1,
+		UseMemoResult2,
+		p1.items,
+		p1.onShowMoreCallback
+	})
+	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 136 ]]
+		-- upvalues: ShouldShowShowMoreButton (copy), p1 (copy), UseStateResult1 (copy), DashModule (upval)
+		return if ShouldShowShowMoreButton then DashModule.slice(p1.items, 1, (math.min(#p1.items, UseStateResult1))) else p1.items
+	end, { p1.items, ShouldShowShowMoreButton, UseStateResult1 })
 	
-	return if p2.items == nil or #p2.items == 0 then reactModule.createElement(view, { tag = "shrink size-full", onAbsoluteSizeChanged = var6 }, { EmptyState = p2.renderEmptyState() }) else reactModule.createElement(view, { tag = "shrink size-full", onAbsoluteSizeChanged = var6 }, {
-		GridViewContainer = reactModule.createElement(view, { tag = "size-full" }, {
-			ScrollView = reactModule.createElement(scrollView, {
+	return if p1.items == nil or #p1.items == 0 then ReactModule.createElement(View, {
+		tag = "shrink size-full",
+		onAbsoluteSizeChanged = UseResult
+	}, { EmptyState = p1.renderEmptyState() }) else ReactModule.createElement(View, {
+		tag = "shrink size-full",
+		onAbsoluteSizeChanged = UseResult
+	}, {
+		GridViewContainer = ReactModule.createElement(View, { tag = "size-full" }, {
+			ScrollView = ReactModule.createElement(ScrollView, {
 				BorderSizePixel = 0,
 				tag = "size-full",
 				layout = {
@@ -77,44 +109,35 @@ return function(p2)
 					HorizontalAlignment = Enum.HorizontalAlignment.Center,
 					VerticalAlignment = Enum.VerticalAlignment.Top,
 					SortOrder = Enum.SortOrder.LayoutOrder,
-					Padding = UDim.new(0, var5.Padding.Large)
+					Padding = UDim.new(0, UseTokensResult.Padding.Large)
 				},
-				LayoutOrder = if p2.layoutOrder then p2.layoutOrder else 1,
+				LayoutOrder = if p1.layoutOrder then p1.layoutOrder else 1,
 				scroll = {
 					AutomaticCanvasSize = Enum.AutomaticSize.Y,
 					CanvasSize = UDim2.fromScale(1, 0),
 					ScrollingDirection = Enum.ScrollingDirection.Y,
-					scrollBarVisibility = scrollBarVisibility.None
+					scrollBarVisibility = ScrollBarVisibility.None
 				}
 			}, {
-				UIPadding = if p2.padding then reactModule.createElement("UIPadding", {
-					PaddingBottom = p2.padding.bottom,
-					PaddingTop = p2.padding.top,
-					PaddingLeft = p2.padding.left,
-					PaddingRight = p2.padding.right
+				UIPadding = if p1.padding then ReactModule.createElement("UIPadding", {
+					PaddingBottom = p1.padding.bottom,
+					PaddingTop = p1.padding.top,
+					PaddingLeft = p1.padding.left,
+					PaddingRight = p1.padding.right
 				}) else nil,
-				GridView = if #p2.items > 0 and var10 then reactModule.createElement(GridItems, {
+				GridView = if #p1.items > 0 and IsYAbove then ReactModule.createElement(GridItems, {
 					LayoutOrder = 1,
-					itemPadding = Vector2.new(p2.itemConfig.padding, p2.itemConfig.padding),
-					items = reactModule.useMemo(function()
-						-- upvalues: shouldShowShowMoreButton (ref), p2 (ref), var3 (ref), dashModule (copy)
-						return if shouldShowShowMoreButton then dashModule.slice(p2.items, 1, math.min(#p2.items, var3)) else p2.items
-					end, { p2.items, shouldShowShowMoreButton, var3 }),
-					itemsPerRow = var7,
-					itemSize = var8,
-					renderItem = p2.renderItem
+					itemPadding = Vector2.new(p1.itemConfig.padding, p1.itemConfig.padding),
+					items = UseMemoResult3,
+					itemsPerRow = UseMemoResult,
+					itemSize = UseMemoResult1,
+					renderItem = p1.renderItem
 				}) else nil,
-				ShowMore = if shouldShowShowMoreButton then reactModule.createElement(button, {
+				ShowMore = if ShouldShowShowMoreButton then ReactModule.createElement(Button, {
 					LayoutOrder = 2,
-					onActivated = reactModule.useCallback(function()
-						-- upvalues: var3 (ref), var9 (ref), p2 (ref), var4 (ref)
-						if #p2.items < var3 + var9 and p2.shouldShowShowMoreButton then
-							p2.onShowMoreCallback()
-						end
-						var4(var3 + var9)
-					end, { var3, var9, p2.items, p2.onShowMoreCallback }),
-					size = foundationModule.Enums.InputSize.Small,
-					text = p2.showMoreButtonText
+					onActivated = UseResult1,
+					size = FoundationModule.Enums.InputSize.Small,
+					text = p1.showMoreButtonText
 				}) else nil
 			})
 		})

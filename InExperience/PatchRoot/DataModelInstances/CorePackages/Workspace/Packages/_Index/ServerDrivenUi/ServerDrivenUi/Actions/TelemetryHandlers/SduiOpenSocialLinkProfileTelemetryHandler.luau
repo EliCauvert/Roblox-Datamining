@@ -1,8 +1,8 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local sendSocialLinkClickEvent = require(parent.DiscoveryAnalytics).Events.sendSocialLinkClickEvent
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
-local getActionTelemetryFieldValue = sduiCoreSystemModule.getActionTelemetryFieldValue
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local SendSocialLinkClickEventFunction = require(Parent.DiscoveryAnalytics).Events.sendSocialLinkClickEvent
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
+local GetActionTelemetryFieldValueFunction = SduiCoreSystemModule.getActionTelemetryFieldValue
 local list = {
 	"profileId",
 	"profileType",
@@ -11,26 +11,26 @@ local list = {
 	"socialLinkDisplayType"
 }
 
-return function(p1, p2, p3)
-	-- upvalues: list (ref), getActionTelemetryFieldValue (ref), sduiErrorType (ref), sendSocialLinkClickEvent (ref)
-	local t = {}
+return function(p1, p2, p3) --[[ Line: 17 ]]
+	-- upvalues: list (copy), GetActionTelemetryFieldValueFunction (copy), SduiErrorType (copy), SendSocialLinkClickEventFunction (copy)
+	local List = {}
 	
-	for i, v in list do
-		if getActionTelemetryFieldValue(p1, p2, v) == nil then
-			table.insert(t, v)
+	for _, value in list do
+		if GetActionTelemetryFieldValueFunction(p1, p2, value) == nil then
+			table.insert(List, value)
 		end
 	end
-	if #t > 0 then
-		p3.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if #List > 0 then
+		p3.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			name = "SocialLinkClickTelemetryHandler",
-			message = `Missing telemetry fields: {table.concat(t, ", ")}`
+			message = `Missing telemetry fields: {table.concat(List, ", ")}`
 		}, p3.appPage)
 	end
-	sendSocialLinkClickEvent({
-		assignment_id = tonumber(getActionTelemetryFieldValue(p1, p2, "profileId", 0)) or 0,
-		assignment_type = getActionTelemetryFieldValue(p1, p2, "profileType", ""),
-		social_link_type = getActionTelemetryFieldValue(p1, p2, "socialLinkType", ""),
-		social_link_url = getActionTelemetryFieldValue(p1, p2, "socialLinkUrl", ""),
-		social_link_display_type = getActionTelemetryFieldValue(p1, p2, "socialLinkDisplayType", "")
+	SendSocialLinkClickEventFunction({
+		assignment_id = tonumber(GetActionTelemetryFieldValueFunction(p1, p2, "profileId", 0)) or 0,
+		assignment_type = GetActionTelemetryFieldValueFunction(p1, p2, "profileType", ""),
+		social_link_type = GetActionTelemetryFieldValueFunction(p1, p2, "socialLinkType", ""),
+		social_link_url = GetActionTelemetryFieldValueFunction(p1, p2, "socialLinkUrl", ""),
+		social_link_display_type = GetActionTelemetryFieldValueFunction(p1, p2, "socialLinkDisplayType", "")
 	})
 end

@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.HelpPage.HelpPage)
+﻿return (require(script.Parent._Workspace.HelpPage.HelpPage))

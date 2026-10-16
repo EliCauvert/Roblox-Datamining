@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("SocialLuaAnalytics").Parent.Lumberyak).Logger.new(nil, "SocialLuaAnalytics")
+﻿return (require(script:FindFirstAncestor("SocialLuaAnalytics").Parent.Lumberyak).Logger.new(nil, "SocialLuaAnalytics"))

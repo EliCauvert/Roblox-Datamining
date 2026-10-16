@@ -1,59 +1,59 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local localizationService = game:GetService("LocalizationService")
-local inExperienceDetailsPrompt = script:FindFirstAncestor("InExperienceDetailsPrompt")
-local parent = inExperienceDetailsPrompt.Parent
-local provider = require(parent.FocusNavigationUtils).FocusNavigableSurfaceRegistry.Provider
-local foundationModule = require(parent.Foundation)
-local foundationProvider = foundationModule.FoundationProvider
-local localizationProvider = require(parent.Localization).LocalizationProvider
-local localization = require(parent.InExperienceLocales).Localization
-local reactModule = require(parent.React)
-local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
-local reactRobloxModule = require(parent.ReactRoblox)
-local inExperienceDetailsPromptAppModule = require(inExperienceDetailsPrompt.InExperienceDetailsPromptApp)
-local fFlagLuaAppIedpOverlayAndNavigationFix = require(parent.SharedFlags).FFlagLuaAppIedpOverlayAndNavigationFix
-local inExperienceDetailsPromptDisplayOrder = game:DefineFastInt("InExperienceDetailsPromptDisplayOrder", -1)
+﻿local CoreGui = game:GetService("CoreGui")
+local LocalizationService = game:GetService("LocalizationService")
+local InExperienceDetailsPrompt = script:FindFirstAncestor("InExperienceDetailsPrompt")
+local Parent = InExperienceDetailsPrompt.Parent
+local Provider = require(Parent.FocusNavigationUtils).FocusNavigableSurfaceRegistry.Provider
+local FoundationModule = require(Parent.Foundation)
+local FoundationProvider = FoundationModule.FoundationProvider
+local LocalizationProvider = require(Parent.Localization).LocalizationProvider
+local Localization = require(Parent.InExperienceLocales).Localization
+local ReactModule = require(Parent.React)
+local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
+local ReactRobloxModule = require(Parent.ReactRoblox)
+local InExperienceDetailsPromptAppModule = require(InExperienceDetailsPrompt.InExperienceDetailsPromptApp)
+local FFlagLuaAppIedpOverlayAndNavigationFix = require(Parent.SharedFlags).FFlagLuaAppIedpOverlayAndNavigationFix
+local InExperienceDetailsPromptDisplayOrder = game:DefineFastInt("InExperienceDetailsPromptDisplayOrder", -1)
 
-local function _()
-	-- upvalues: reactFocusNavigationModule (ref)
-	return reactFocusNavigationModule.FocusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui)
+local function _() --[[ Line: 23 | Named "createFocusNavigationService" ]]
+	-- upvalues: ReactFocusNavigationModule (copy)
+	return ReactFocusNavigationModule.FocusNavigationService.new(ReactFocusNavigationModule.EngineInterface.CoreGui)
 end
 
-return function()
-	-- upvalues: fFlagLuaAppIedpOverlayAndNavigationFix (ref), coreGuiService (ref), inExperienceDetailsPromptDisplayOrder (ref), reactFocusNavigationModule (ref), reactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), foundationProvider (ref), foundationModule (ref), provider (ref), inExperienceDetailsPromptAppModule (ref), reactRobloxModule (ref)
-	local folder = Instance.new("Folder")
-	folder.Name = if fFlagLuaAppIedpOverlayAndNavigationFix then "InExperienceDetailsPromptApp" else "InExperienceDetailsPrompt"
-	folder.Parent = coreGuiService
-	local inExperienceDetailsPromptOverlay = nil
+return function() --[[ Line: 27 | Named "renderInExperienceDetailsPrompt" ]]
+	-- upvalues: FFlagLuaAppIedpOverlayAndNavigationFix (copy), CoreGui (copy), InExperienceDetailsPromptDisplayOrder (copy), ReactFocusNavigationModule (copy), ReactModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), FoundationProvider (copy), FoundationModule (copy), Provider (copy), InExperienceDetailsPromptAppModule (copy), ReactRobloxModule (copy)
+	local Folder = Instance.new("Folder")
+	Folder.Name = if FFlagLuaAppIedpOverlayAndNavigationFix then "InExperienceDetailsPromptApp" else "InExperienceDetailsPrompt"
+	Folder.Parent = CoreGui
+	local InExperienceDetailsPromptOverlay = nil
 	
-	if fFlagLuaAppIedpOverlayAndNavigationFix then
-		inExperienceDetailsPromptOverlay = Instance.new("ScreenGui")
-		inExperienceDetailsPromptOverlay.Parent = folder
-		inExperienceDetailsPromptOverlay.Name = "InExperienceDetailsPromptOverlay"
-		inExperienceDetailsPromptOverlay.DisplayOrder = inExperienceDetailsPromptDisplayOrder
-		inExperienceDetailsPromptOverlay.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-		inExperienceDetailsPromptOverlay.Enabled = true
-		inExperienceDetailsPromptOverlay.ScreenInsets = Enum.ScreenInsets.CoreUISafeInsets
-		inExperienceDetailsPromptOverlay.SafeAreaCompatibility = Enum.SafeAreaCompatibility.None
-		inExperienceDetailsPromptOverlay.ClipToDeviceSafeArea = false
+	if FFlagLuaAppIedpOverlayAndNavigationFix then
+		InExperienceDetailsPromptOverlay = Instance.new("ScreenGui")
+		InExperienceDetailsPromptOverlay.Parent = Folder
+		InExperienceDetailsPromptOverlay.Name = "InExperienceDetailsPromptOverlay"
+		InExperienceDetailsPromptOverlay.DisplayOrder = InExperienceDetailsPromptDisplayOrder
+		InExperienceDetailsPromptOverlay.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+		InExperienceDetailsPromptOverlay.Enabled = true
+		InExperienceDetailsPromptOverlay.ScreenInsets = Enum.ScreenInsets.CoreUISafeInsets
+		InExperienceDetailsPromptOverlay.SafeAreaCompatibility = Enum.SafeAreaCompatibility.None
+		InExperienceDetailsPromptOverlay.ClipToDeviceSafeArea = false
 	end
-	local var1 = reactRobloxModule.createRoot(if fFlagLuaAppIedpOverlayAndNavigationFix then inExperienceDetailsPromptOverlay else folder)
-	var1:render(reactModule.createElement(localizationProvider, {
-		localization = localization.new(localizationService.RobloxLocaleId)
+	local Root = ReactRobloxModule.createRoot(if FFlagLuaAppIedpOverlayAndNavigationFix then InExperienceDetailsPromptOverlay else Folder)
+	Root:render((ReactModule.createElement(LocalizationProvider, {
+		localization = Localization.new(LocalizationService.RobloxLocaleId)
 	}, {
-		FoundationProvider = reactModule.createElement(foundationProvider, {
-			colorMode = foundationModule.Enums.ColorMode.Dark,
-			overlayGui = if fFlagLuaAppIedpOverlayAndNavigationFix then inExperienceDetailsPromptOverlay else nil
+		FoundationProvider = ReactModule.createElement(FoundationProvider, {
+			colorMode = FoundationModule.Enums.ColorMode.Dark,
+			overlayGui = if FFlagLuaAppIedpOverlayAndNavigationFix then InExperienceDetailsPromptOverlay else nil
 		}, {
-			FocusNavigationProvider = reactModule.createElement(reactFocusNavigationModule.FocusNavigationContext.Provider, {
-				value = reactFocusNavigationModule.FocusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui)
+			FocusNavigationProvider = ReactModule.createElement(ReactFocusNavigationModule.FocusNavigationContext.Provider, {
+				value = ReactFocusNavigationModule.FocusNavigationService.new(ReactFocusNavigationModule.EngineInterface.CoreGui)
 			}, {
-				FocusNavigationRegistryProvider = reactModule.createElement(provider, nil, {
-					InExperienceDetailsPromptApp = reactModule.createElement(inExperienceDetailsPromptAppModule)
+				FocusNavigationRegistryProvider = ReactModule.createElement(Provider, nil, {
+					InExperienceDetailsPromptApp = ReactModule.createElement(InExperienceDetailsPromptAppModule)
 				})
 			})
 		})
-	}))
+	})))
 	
-	return var1
+	return Root
 end

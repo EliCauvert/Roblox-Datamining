@@ -1,1 +1,1 @@
-﻿return require(script.PopoverContent)
+﻿return (require(script.PopoverContent))

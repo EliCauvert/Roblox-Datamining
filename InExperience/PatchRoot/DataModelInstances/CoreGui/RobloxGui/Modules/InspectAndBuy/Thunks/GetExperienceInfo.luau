@@ -1,36 +1,35 @@
-﻿local performFetch = require(game:GetService("CorePackages").Workspace.Packages.Http).PerformFetch
-local parent = script.Parent.Parent
-local thunkModule = require(parent.Thunk)
-local networkModule = require(parent.Services.Network)
-local createInspectAndBuyKeyMapperModule = require(parent.createInspectAndBuyKeyMapper)
-local experienceInfoModule = require(parent.Models.ExperienceInfo)
-local setExperienceInfoModule = require(parent.Actions.SetExperienceInfo)
-local sendCounterModule = require(parent.Thunks.SendCounter)
-local constantsModule = require(parent.Constants)
-local list = { networkModule }
-local var1 = createInspectAndBuyKeyMapperModule("getExperienceInfo")
+﻿local PerformFetch = require(game:GetService("CorePackages").Workspace.Packages.Http).PerformFetch
+local Parent = script.Parent.Parent
+local ThunkModule = require(Parent.Thunk)
+local NetworkModule = require(Parent.Services.Network)
+local ExperienceInfoModule = require(Parent.Models.ExperienceInfo)
+local SetExperienceInfoModule = require(Parent.Actions.SetExperienceInfo)
+local SendCounterModule = require(Parent.Thunks.SendCounter)
+local ConstantsModule = require(Parent.Constants)
+local list = { NetworkModule }
+local GetExperienceInfo = require(Parent.createInspectAndBuyKeyMapper)("getExperienceInfo")
 
-return function(p1)
-	-- upvalues: thunkModule (ref), list (ref), networkModule (ref), var1 (ref), performFetch (ref), experienceInfoModule (ref), setExperienceInfoModule (ref), sendCounterModule (ref), constantsModule (ref)
-	p1 = tostring(p1)
+return function(p1) --[[ Line: 23 | Named "GetExperienceInfo" ]]
+	-- upvalues: ThunkModule (copy), list (copy), NetworkModule (copy), GetExperienceInfo (copy), PerformFetch (copy), ExperienceInfoModule (copy), SetExperienceInfoModule (copy), SendCounterModule (copy), ConstantsModule (copy)
+	local Text = tostring(p1)
 	
-	return thunkModule.new(script.Name, list, function(p2, p3)
-		-- upvalues: networkModule (copy), var1 (copy), p1 (write), performFetch (copy), experienceInfoModule (copy), setExperienceInfoModule (copy), sendCounterModule (copy), constantsModule (copy)
-		local var2 = p3[networkModule]
+	return ThunkModule.new(script.Name, list, function(p2, p3) --[[ Line: 26 ]]
+		-- upvalues: NetworkModule (upval), GetExperienceInfo (upval), Text (ref), PerformFetch (upval), ExperienceInfoModule (upval), SetExperienceInfoModule (upval), SendCounterModule (upval), ConstantsModule (upval)
+		local v1 = p3[NetworkModule]
 		
-		return performFetch.Single(var1(p2:getState().storeId, p1), function()
-			-- upvalues: var2 (ref), p1 (copy), experienceInfoModule (copy), p2 (ref), setExperienceInfoModule (copy), sendCounterModule (copy), constantsModule (copy)
-			return var2.getExperienceInfo(p1):andThen(function(p4)
-				-- upvalues: experienceInfoModule (copy), p2 (copy), setExperienceInfoModule (copy), sendCounterModule (copy), constantsModule (copy)
-				p2:dispatch(setExperienceInfoModule(experienceInfoModule.fromGetExperienceInfo(p4.data[1])))
-				p2:dispatch(sendCounterModule(constantsModule.Counters.GetExperienceInfo .. constantsModule.CounterSuffix.RequestSucceeded))
-			end, function(_)
-				-- upvalues: p2 (copy), sendCounterModule (copy), constantsModule (copy)
-				p2:dispatch(sendCounterModule(constantsModule.Counters.GetExperienceInfo .. constantsModule.CounterSuffix.RequestRejected))
+		return PerformFetch.Single(GetExperienceInfo(p2:getState().storeId, Text), function() --[[ Line: 31 ]]
+			-- upvalues: v1 (copy), Text (upval), ExperienceInfoModule (upval), p2 (copy), SetExperienceInfoModule (upval), SendCounterModule (upval), ConstantsModule (upval)
+			return v1.getExperienceInfo(Text):andThen(function(Result) --[[ Line: 32 ]]
+				-- upvalues: ExperienceInfoModule (upval), p2 (upval), SetExperienceInfoModule (upval), SendCounterModule (upval), ConstantsModule (upval)
+				p2:dispatch(SetExperienceInfoModule((ExperienceInfoModule.fromGetExperienceInfo(Result.data[1]))))
+				p2:dispatch(SendCounterModule(ConstantsModule.Counters.GetExperienceInfo .. ConstantsModule.CounterSuffix.RequestSucceeded))
+			end, function(_) --[[ Line: 40 ]]
+				-- upvalues: p2 (upval), SendCounterModule (upval), ConstantsModule (upval)
+				p2:dispatch(SendCounterModule(ConstantsModule.Counters.GetExperienceInfo .. ConstantsModule.CounterSuffix.RequestRejected))
 			end)
-		end)(p2):catch(function(_)
-			-- upvalues: p2 (ref), sendCounterModule (copy), constantsModule (copy)
-			p2:dispatch(sendCounterModule(constantsModule.Counters.GetExperienceInfo .. constantsModule.CounterSuffix.RequestFailed))
+		end)(p2):catch(function(_) --[[ Line: 45 ]]
+			-- upvalues: p2 (copy), SendCounterModule (upval), ConstantsModule (upval)
+			p2:dispatch(SendCounterModule(ConstantsModule.Counters.GetExperienceInfo .. ConstantsModule.CounterSuffix.RequestFailed))
 		end)
 	end)
 end

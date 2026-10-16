@@ -1,26 +1,26 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local conversationOverlay = require(parent.AppChatNetworking).Constants.ConversationOverlay
-local loggerModule = require(appChat.Logger)
-local getDeepValue2Module = require(appChat.Utils.getDeepValue2)
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local fFlagAppChatEnableDoubleOptIn = require(parent.SharedFlags).FFlagAppChatEnableDoubleOptIn
-local t = {
-	[conversationOverlay.TrustedConnectionCreated] = true,
-	[conversationOverlay.AddTrustedConnectionU18] = fFlagAppChatEnableDoubleOptIn,
-	[conversationOverlay.TrustedConnectionRequestU18] = fFlagAppChatEnableDoubleOptIn
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local ConversationOverlay = require(Parent.AppChatNetworking).Constants.ConversationOverlay
+local LoggerModule = require(AppChat.Logger)
+local GetDeepValue2Module = require(AppChat.Utils.getDeepValue2)
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local FFlagAppChatEnableDoubleOptIn = require(Parent.SharedFlags).FFlagAppChatEnableDoubleOptIn
+local config = {
+	[ConversationOverlay.TrustedConnectionCreated] = true,
+	[ConversationOverlay.AddTrustedConnectionU18] = FFlagAppChatEnableDoubleOptIn,
+	[ConversationOverlay.TrustedConnectionRequestU18] = FFlagAppChatEnableDoubleOptIn
 }
 
-return function(p1)
-	-- upvalues: useSelector (ref), getDeepValue2Module (ref), t (ref), conversationOverlay (ref), loggerModule (ref)
-	local var1 = useSelector(function(p2)
-		-- upvalues: getDeepValue2Module (copy), p1 (ref)
-		return getDeepValue2Module(p2, `ChatAppReducer.Modals.conversationOverlays.{p1}.modal_variant`) or ""
+return function(p1): boolean --[[ Line: 20 ]]
+	-- upvalues: UseSelectorFunction (copy), GetDeepValue2Module (copy), config (copy), ConversationOverlay (copy), LoggerModule (copy)
+	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 21 ]]
+		-- upvalues: GetDeepValue2Module (upval), p1 (copy)
+		return GetDeepValue2Module(p2, `ChatAppReducer.Modals.conversationOverlays.{p1}.modal_variant`) or ""
 	end)
-	local var2 = t[var1]
+	local Entry = config[UseSelectorResult]
 	
-	if not var2 and var1 ~= conversationOverlay.None and var1 ~= "" then
-		loggerModule:warning(`Unsupported ConversationOverlay modal variant: {var1} for conversationId: {p1}`)
+	if not Entry and UseSelectorResult ~= ConversationOverlay.None and UseSelectorResult ~= "" then
+		LoggerModule:warning(`Unsupported ConversationOverlay modal variant: {UseSelectorResult} for conversationId: {p1}`)
 	end
-	return not not var2
+	return not not Entry
 end

@@ -1,202 +1,209 @@
-﻿local textChatService = game:GetService("TextChatService")
-local gameSettings = UserSettings().GameSettings
-local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local expChatSharedModule = require(parent.ExpChatShared)
-local engineFeaturePresetChatUseExpressionTrayOptionsEndpoint = require(parent.SharedFlags).EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint
-local _ = require(expChat.Stores.GetPresetChatStore.createPresetChatStore)
-local initializePresetChat = expChatSharedModule.Logger:new("ExpChat/PresetChat/initializePresetChat")
+﻿local TextChatService = game:GetService("TextChatService")
+local GameSettings = UserSettings().GameSettings
+local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint = require(Parent.SharedFlags).EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint
+local _ = require(ExpChat.Stores.GetPresetChatStore.createPresetChatStore)
+local InitializePresetChat = require(Parent.ExpChatShared).Logger:new("ExpChat/PresetChat/initializePresetChat")
 
-local function getPresetsFromEngine()
-	-- upvalues: textChatService (ref)
-	return textChatService:GetPresetsAsync()
+local function getPresetsFromEngine() --[[ Line: 18 ]]
+	-- upvalues: TextChatService (copy)
+	return TextChatService:GetPresetsAsync()
 end
 
-local function _(value, p1, p2)
-	-- upvalues: initializePresetChat (ref), engineFeaturePresetChatUseExpressionTrayOptionsEndpoint (ref)
-	task.spawn(function()
-		-- upvalues: p2 (ref), p1 (ref), initializePresetChat (copy), value (ref), engineFeaturePresetChatUseExpressionTrayOptionsEndpoint (copy)
-		local ok, status = pcall(p2)
+local function _(p1, p2, p3) --[[ Line: 22 | Named "fetchPresets" ]]
+	-- upvalues: InitializePresetChat (copy), EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint (copy)
+	task.spawn(function() --[[ Line: 23 ]]
+		-- upvalues: p3 (copy), p2 (copy), InitializePresetChat (upval), p1 (copy), EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint (upval)
+		local Success, Result = pcall(p3)
 		
-		if p1 then
-			if not ok then
-				initializePresetChat:warning("GetPresetsAsync failed: {}", tostring(status))
-			end
-			return
-		elseif not ok then
-			initializePresetChat:warning("GetPresetsAsync failed: {}", tostring(status))
-			value.setIsLoading(false)
-			
-			return
-		elseif not status then
-			value.setIsLoading(false)
-			
-			return
-		end
-		local var1 = (if engineFeaturePresetChatUseExpressionTrayOptionsEndpoint then status.status else status.accessLevel) or "Disabled"
-		value.setAccessLevel(var1)
-		
-		if var1 ~= "Disabled" then
-			local version = status.version
-			
-			if not engineFeaturePresetChatUseExpressionTrayOptionsEndpoint and (not version or version == "") then
-				initializePresetChat:warning("Missing version in GetPresetsAsync response, treating as disabled")
-				value.setAccessLevel("Disabled")
-				value.setIsLoading(false)
+		if not p2 then
+			if not Success then
+				InitializePresetChat:warning("GetPresetsAsync failed: {}", (tostring(Result)))
+				p1.setIsLoading(false)
 				
 				return
 			end
-			local categoryGroups = status.categoryGroups
-			
-			if categoryGroups and #categoryGroups > 0 then
-				value.setCategoryGroups(categoryGroups)
-				value.setVersion(version or "")
-				value.setIsEnabled(true)
-			end
-		end
-		value.setIsLoading(false)
-	end)
-end
-
-return function(value, p1, p2)
-	-- upvalues: getPresetsFromEngine (ref), initializePresetChat (ref), engineFeaturePresetChatUseExpressionTrayOptionsEndpoint (ref), gameSettings (ref)
-	p2 = p2 or getPresetsFromEngine
-	task.spawn(function()
-		-- upvalues: p2 (ref), p1 (ref), initializePresetChat (copy), value (ref), engineFeaturePresetChatUseExpressionTrayOptionsEndpoint (copy)
-		local ok, status = pcall(p2)
-		
-		if p1 then
-			if not ok then
-				initializePresetChat:warning("GetPresetsAsync failed: {}", tostring(status))
-			end
-			return
-		elseif not ok then
-			initializePresetChat:warning("GetPresetsAsync failed: {}", tostring(status))
-			value.setIsLoading(false)
-			
-			return
-		elseif not status then
-			value.setIsLoading(false)
-			
-			return
-		end
-		local var1 = (if engineFeaturePresetChatUseExpressionTrayOptionsEndpoint then status.status else status.accessLevel) or "Disabled"
-		value.setAccessLevel(var1)
-		
-		if var1 ~= "Disabled" then
-			local version = status.version
-			
-			if not engineFeaturePresetChatUseExpressionTrayOptionsEndpoint and (not version or version == "") then
-				initializePresetChat:warning("Missing version in GetPresetsAsync response, treating as disabled")
-				value.setAccessLevel("Disabled")
-				value.setIsLoading(false)
+			if not Result then
+				p1.setIsLoading(false)
 				
 				return
 			end
-			local categoryGroups = status.categoryGroups
+			local Status = (if EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint then Result.status else Result.accessLevel) or "Disabled"
+			p1.setAccessLevel(Status)
 			
-			if categoryGroups and #categoryGroups > 0 then
-				value.setCategoryGroups(categoryGroups)
-				value.setVersion(version or "")
-				value.setIsEnabled(true)
-			end
-		end
-		value.setIsLoading(false)
-	end)
-	gameSettings:GetPropertyChangedSignal("ChatTranslationLocale"):Connect(function()
-		-- upvalues: p1 (ref), value (ref), p2 (ref), initializePresetChat (copy), engineFeaturePresetChatUseExpressionTrayOptionsEndpoint (copy)
-		if not p1 then
-			value.setIsLoading(true)
-		end
-		task.spawn(function()
-			-- upvalues: p2 (ref), p1 (ref), initializePresetChat (copy), value (ref), engineFeaturePresetChatUseExpressionTrayOptionsEndpoint (copy)
-			local ok, status = pcall(p2)
-			
-			if p1 then
-				if not ok then
-					initializePresetChat:warning("GetPresetsAsync failed: {}", tostring(status))
-				end
-				return
-			elseif not ok then
-				initializePresetChat:warning("GetPresetsAsync failed: {}", tostring(status))
-				value.setIsLoading(false)
+			if Status ~= "Disabled" then
+				local Version = Result.version
 				
-				return
-			elseif not status then
-				value.setIsLoading(false)
-				
-				return
-			end
-			local var1 = (if engineFeaturePresetChatUseExpressionTrayOptionsEndpoint then status.status else status.accessLevel) or "Disabled"
-			value.setAccessLevel(var1)
-			
-			if var1 ~= "Disabled" then
-				local version = status.version
-				
-				if not engineFeaturePresetChatUseExpressionTrayOptionsEndpoint and (not version or version == "") then
-					initializePresetChat:warning("Missing version in GetPresetsAsync response, treating as disabled")
-					value.setAccessLevel("Disabled")
-					value.setIsLoading(false)
+				if not EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint and (not Version or Version == "") then
+					InitializePresetChat:warning("Missing version in GetPresetsAsync response, treating as disabled")
+					p1.setAccessLevel("Disabled")
+					p1.setIsLoading(false)
 					
 					return
 				end
-				local categoryGroups = status.categoryGroups
+				local CategoryGroups = Result.categoryGroups
 				
-				if categoryGroups and #categoryGroups > 0 then
-					value.setCategoryGroups(categoryGroups)
-					value.setVersion(version or "")
-					value.setIsEnabled(true)
+				if CategoryGroups and #CategoryGroups > 0 then
+					p1.setCategoryGroups(CategoryGroups)
+					p1.setVersion(Version or "")
+					p1.setIsEnabled(true)
 				end
 			end
-			value.setIsLoading(false)
+			p1.setIsLoading(false)
+			
+			return
+		elseif not Success then
+			InitializePresetChat:warning("GetPresetsAsync failed: {}", (tostring(Result)))
+		end
+	end)
+end
+
+return function(p1, p2, p3) --[[ Line: 71 | Named "initializePresetChat" ]]
+	-- upvalues: getPresetsFromEngine (copy), InitializePresetChat (copy), EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint (copy), GameSettings (copy)
+	local P5 = p3 or getPresetsFromEngine
+	task.spawn(function() --[[ Line: 23 ]]
+		-- upvalues: P5 (copy), p2 (copy), InitializePresetChat (upval), p1 (copy), EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint (upval)
+		local Success, Result = pcall(P5)
+		
+		if not p2 then
+			if not Success then
+				InitializePresetChat:warning("GetPresetsAsync failed: {}", (tostring(Result)))
+				p1.setIsLoading(false)
+				
+				return
+			end
+			if not Result then
+				p1.setIsLoading(false)
+				
+				return
+			end
+			local Status = (if EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint then Result.status else Result.accessLevel) or "Disabled"
+			p1.setAccessLevel(Status)
+			
+			if Status ~= "Disabled" then
+				local Version = Result.version
+				
+				if not EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint and (not Version or Version == "") then
+					InitializePresetChat:warning("Missing version in GetPresetsAsync response, treating as disabled")
+					p1.setAccessLevel("Disabled")
+					p1.setIsLoading(false)
+					
+					return
+				end
+				local CategoryGroups = Result.categoryGroups
+				
+				if CategoryGroups and #CategoryGroups > 0 then
+					p1.setCategoryGroups(CategoryGroups)
+					p1.setVersion(Version or "")
+					p1.setIsEnabled(true)
+				end
+			end
+			p1.setIsLoading(false)
+			
+			return
+		elseif not Success then
+			InitializePresetChat:warning("GetPresetsAsync failed: {}", (tostring(Result)))
+		end
+	end)
+	GameSettings:GetPropertyChangedSignal("ChatTranslationLocale"):Connect(function() --[[ Line: 75 ]]
+		-- upvalues: p2 (copy), p1 (copy), P5 (copy), InitializePresetChat (upval), EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint (upval)
+		if not p2 then
+			p1.setIsLoading(true)
+		end
+		task.spawn(function() --[[ Line: 23 ]]
+			-- upvalues: P5 (copy), p2 (copy), InitializePresetChat (upval), p1 (copy), EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint (upval)
+			local Success, Result = pcall(P5)
+			
+			if not p2 then
+				if not Success then
+					InitializePresetChat:warning("GetPresetsAsync failed: {}", (tostring(Result)))
+					p1.setIsLoading(false)
+					
+					return
+				end
+				if not Result then
+					p1.setIsLoading(false)
+					
+					return
+				end
+				local Status = (if EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint then Result.status else Result.accessLevel) or "Disabled"
+				p1.setAccessLevel(Status)
+				
+				if Status ~= "Disabled" then
+					local Version = Result.version
+					
+					if not EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint and (not Version or Version == "") then
+						InitializePresetChat:warning("Missing version in GetPresetsAsync response, treating as disabled")
+						p1.setAccessLevel("Disabled")
+						p1.setIsLoading(false)
+						
+						return
+					end
+					local CategoryGroups = Result.categoryGroups
+					
+					if CategoryGroups and #CategoryGroups > 0 then
+						p1.setCategoryGroups(CategoryGroups)
+						p1.setVersion(Version or "")
+						p1.setIsEnabled(true)
+					end
+				end
+				p1.setIsLoading(false)
+				
+				return
+			elseif not Success then
+				InitializePresetChat:warning("GetPresetsAsync failed: {}", (tostring(Result)))
+			end
 		end)
 	end)
-	gameSettings:GetPropertyChangedSignal("ChatTranslationEnabled"):Connect(function()
-		-- upvalues: p1 (ref), value (ref), p2 (ref), initializePresetChat (copy), engineFeaturePresetChatUseExpressionTrayOptionsEndpoint (copy)
-		if not p1 then
-			value.setIsLoading(true)
+	GameSettings:GetPropertyChangedSignal("ChatTranslationEnabled"):Connect(function() --[[ Line: 82 ]]
+		-- upvalues: p2 (copy), p1 (copy), P5 (copy), InitializePresetChat (upval), EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint (upval)
+		if not p2 then
+			p1.setIsLoading(true)
 		end
-		task.spawn(function()
-			-- upvalues: p2 (ref), p1 (ref), initializePresetChat (copy), value (ref), engineFeaturePresetChatUseExpressionTrayOptionsEndpoint (copy)
-			local ok, status = pcall(p2)
+		task.spawn(function() --[[ Line: 23 ]]
+			-- upvalues: P5 (copy), p2 (copy), InitializePresetChat (upval), p1 (copy), EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint (upval)
+			local Success, Result = pcall(P5)
 			
-			if p1 then
-				if not ok then
-					initializePresetChat:warning("GetPresetsAsync failed: {}", tostring(status))
-				end
-				return
-			elseif not ok then
-				initializePresetChat:warning("GetPresetsAsync failed: {}", tostring(status))
-				value.setIsLoading(false)
-				
-				return
-			elseif not status then
-				value.setIsLoading(false)
-				
-				return
-			end
-			local var1 = (if engineFeaturePresetChatUseExpressionTrayOptionsEndpoint then status.status else status.accessLevel) or "Disabled"
-			value.setAccessLevel(var1)
-			
-			if var1 ~= "Disabled" then
-				local version = status.version
-				
-				if not engineFeaturePresetChatUseExpressionTrayOptionsEndpoint and (not version or version == "") then
-					initializePresetChat:warning("Missing version in GetPresetsAsync response, treating as disabled")
-					value.setAccessLevel("Disabled")
-					value.setIsLoading(false)
+			if not p2 then
+				if not Success then
+					InitializePresetChat:warning("GetPresetsAsync failed: {}", (tostring(Result)))
+					p1.setIsLoading(false)
 					
 					return
 				end
-				local categoryGroups = status.categoryGroups
-				
-				if categoryGroups and #categoryGroups > 0 then
-					value.setCategoryGroups(categoryGroups)
-					value.setVersion(version or "")
-					value.setIsEnabled(true)
+				if not Result then
+					p1.setIsLoading(false)
+					
+					return
 				end
+				local Status = (if EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint then Result.status else Result.accessLevel) or "Disabled"
+				p1.setAccessLevel(Status)
+				
+				if Status ~= "Disabled" then
+					local Version = Result.version
+					
+					if not EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint and (not Version or Version == "") then
+						InitializePresetChat:warning("Missing version in GetPresetsAsync response, treating as disabled")
+						p1.setAccessLevel("Disabled")
+						p1.setIsLoading(false)
+						
+						return
+					end
+					local CategoryGroups = Result.categoryGroups
+					
+					if CategoryGroups and #CategoryGroups > 0 then
+						p1.setCategoryGroups(CategoryGroups)
+						p1.setVersion(Version or "")
+						p1.setIsEnabled(true)
+					end
+				end
+				p1.setIsLoading(false)
+				
+				return
+			elseif not Success then
+				InitializePresetChat:warning("GetPresetsAsync failed: {}", (tostring(Result)))
 			end
-			value.setIsLoading(false)
 		end)
 	end)
 end

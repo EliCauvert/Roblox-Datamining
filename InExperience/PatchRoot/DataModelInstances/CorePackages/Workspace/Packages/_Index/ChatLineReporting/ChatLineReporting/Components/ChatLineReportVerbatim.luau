@@ -1,33 +1,34 @@
-﻿local chatLineReporting = script:FindFirstAncestor("ChatLineReporting")
-local parent = chatLineReporting.Parent
-local constantsModule = require(chatLineReporting.Common.Constants)
-local getMessageTextModule = require(chatLineReporting.Common.getMessageText)
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local text = foundationModule.Text
+﻿local ChatLineReporting = script:FindFirstAncestor("ChatLineReporting")
+local Parent = ChatLineReporting.Parent
+local ConstantsModule = require(ChatLineReporting.Common.Constants)
+local GetMessageTextModule = require(ChatLineReporting.Common.getMessageText)
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local Text = FoundationModule.Text
 
-return function(p1)
-	-- upvalues: reactModule (ref), getMessageTextModule (ref), view (ref), constantsModule (ref), text (ref)
-	local var1, var2 = reactModule.useState(nil)
-	local var3 = getMessageTextModule(p1.selectedMessage.useTranslation, p1.selectedMessage.translation, p1.selectedMessage.text)
-	local var4 = var1 or (p1.selectedMessage.prefixText or "")
-	local userId = p1.selectedMessage.userId
+return function(p1) --[[ Line: 36 | Named "ChatLineReportVerbatim" ]]
+	-- upvalues: ReactModule (copy), GetMessageTextModule (copy), View (copy), ConstantsModule (copy), Text (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local MessageTextModule = GetMessageTextModule(p1.selectedMessage.useTranslation, p1.selectedMessage.translation, p1.selectedMessage.text)
+	local PrefixText = p1.selectedMessage.prefixText or ""
+	local Text1 = UseStateResult or PrefixText
+	local UserId = p1.selectedMessage.userId
 	
-	if userId and userId.data then
-		local names = userId.data.userProfiles[1].names
-		var2(string.gsub(var4, names.displayName, names.combinedName))
+	if UserId and UserId.data then
+		local Names = UserId.data.userProfiles[1].names
+		UseStateResult2((string.gsub(Text1, Names.displayName, Names.combinedName)))
 	end
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "radius-medium padding-left-medium padding-right-medium stroke-neutral stroke-standard",
-		Size = UDim2.new(1, 0, 0, constantsModule.SelectableChatLineHeight)
+		Size = UDim2.new(1, 0, 0, ConstantsModule.SelectableChatLineHeight)
 	}, {
-		messageFrame = reactModule.createElement(view, { tag = "auto-xy position-center-left anchor-center-left" }, {
-			messageText = reactModule.createElement(text, {
+		messageFrame = ReactModule.createElement(View, { tag = "auto-xy position-center-left anchor-center-left" }, {
+			messageText = ReactModule.createElement(Text, {
 				TextScaled = false,
 				RichText = true,
 				tag = "auto-xy content-muted",
-				Text = `{var4} {var3}`,
+				Text = `{Text1} {MessageTextModule}`,
 				TextTruncate = Enum.TextTruncate.SplitWord,
 				TextXAlignment = Enum.TextXAlignment.Left
 			})

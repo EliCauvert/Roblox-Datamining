@@ -1,8 +1,8 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local url = require(dataHydration.Parent.Http).Url
-local myHttpRequestModule = require(dataHydration.Presence.Networking.myHttpRequest)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local Url = require(DataHydration.Parent.Http).Url
+local MyHttpRequestModule = require(DataHydration.Presence.Networking.myHttpRequest)
 
-return function(p1)
-	-- upvalues: url (ref), myHttpRequestModule (ref)
-	return myHttpRequestModule(string.format("%s/presence/users", url.PRESENCE_URL), "POST", { postBody = { userIds = p1 } })
+return function(UserIds) --[[ Line: 34 ]]
+	-- upvalues: Url (copy), MyHttpRequestModule (copy)
+	return MyHttpRequestModule(string.format("%s/presence/users", Url.PRESENCE_URL), "POST", { postBody = { userIds = UserIds } })
 end

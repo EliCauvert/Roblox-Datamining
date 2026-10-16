@@ -1,8 +1,9 @@
-﻿return function(value)
-	if typeof(value) ~= "table" then
+﻿return function(p1) --[[ Line: 5 | Named "parseProfileFrameAssetId" ]]
+	if typeof(p1) == "table" then
+		local FrameAssetId = p1.FrameAssetId
+		
+		return if typeof(FrameAssetId) == "number" and FrameAssetId ~= 0 then tostring(FrameAssetId) else nil
+	else
 		return nil
 	end
-	local frameAssetId = value.FrameAssetId
-	
-	return if typeof(frameAssetId) == "number" and frameAssetId ~= 0 then tostring(frameAssetId) else nil
 end

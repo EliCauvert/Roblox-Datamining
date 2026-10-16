@@ -1,87 +1,94 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local signalsModule = require(parent.Signals)
-local useSignalBinding = require(parent.SignalsReact).useSignalBinding
-local userProfilesModule = require(parent.UserProfiles)
-local reactModule = require(parent.React)
-local _ = require(appChat.types)
-local useFoundationPresenceModule = require(script.Parent.useFoundationPresence)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local SignalsModule = require(Parent.Signals)
+local UseSignalBindingFunction = require(Parent.SignalsReact).useSignalBinding
+local UserProfilesModule = require(Parent.UserProfiles)
+local ReactModule = require(Parent.React)
+local _ = require(AppChat.types)
+local UseFoundationPresenceModule = require(script.Parent.useFoundationPresence)
 
-local function _(p1, p2, p3)
-	-- upvalues: signalsModule (ref)
-	return signalsModule.createComputed(function(p4)
-		-- upvalues: p2 (ref), p1 (ref), p3 (ref)
+local function _(p1, p2, p3) --[[ Line: 14 | Named "createUserProfileNameGetter" ]]
+	-- upvalues: SignalsModule (copy)
+	return SignalsModule.createComputed(function(p4) --[[ Line: 15 ]]
+		-- upvalues: p2 (copy), p1 (copy), p3 (copy)
 		if p2(p4) then
 			return ""
+		else
+			local v1 = p1(p4)
+			
+			return v1.data and #v1.data ~= 0 and p3(v1.data[1].names) or ""
 		end
-		local var1 = p1(p4)
-		
-		return if var1.data and #var1.data ~= 0 then p3(var1.data[1].names) or "" else ""
 	end)
 end
 
-return function(p1)
-	-- upvalues: userProfilesModule (ref), signalsModule (ref), useSignalBinding (ref), useFoundationPresenceModule (ref), reactModule (ref)
-	local var1 = if p1 and p1 ~= "" then userProfilesModule.Stores.UserProfileStore.get().fetchNamesByUserIds({ p1 }) else nil
-	local var2 = signalsModule.createComputed(function(p2)
-		-- upvalues: var1 (ref)
-		return if var1 then var1(p2).status ~= "success" else true
+return function(p1) --[[ Line: 28 | Named "useUserData" ]]
+	-- upvalues: UserProfilesModule (copy), SignalsModule (copy), UseSignalBindingFunction (copy), UseFoundationPresenceModule (copy), ReactModule (copy)
+	local GetResult = UserProfilesModule.Stores.UserProfileStore.get()
+	local NamesByUserIds = if p1 and p1 ~= "" then GetResult.fetchNamesByUserIds({ p1 }) else nil
+	local Computed = SignalsModule.createComputed(function(p2): boolean --[[ Line: 31 ]]
+		-- upvalues: NamesByUserIds (copy)
+		return not NamesByUserIds or NamesByUserIds(p2).status ~= "success"
 	end)
-	local var3 = useSignalBinding(var2)
+	local UseSignalBindingResult = UseSignalBindingFunction(Computed)
 	
-	local var4 = function(p2)
-		return p2.getDisplayName(false) or p2.getUsername(false)
+	local function v13(p2) --[[ Line: 40 ]]
+		local Username = p2.getUsername(false)
+		
+		return p2.getDisplayName(false) or Username
 	end
 	
-	var4 = useSignalBinding(signalsModule.createComputed(function(p2)
-		-- upvalues: var2 (ref), var1 (ref), var4 (ref)
-		if var2(p2) then
+	local UseSignalBindingResult1 = UseSignalBindingFunction((SignalsModule.createComputed(function(p2) --[[ Line: 15 ]]
+		-- upvalues: Computed (copy), NamesByUserIds (copy), v13 (copy)
+		if Computed(p2) then
 			return ""
+		else
+			local v1 = NamesByUserIds(p2)
+			
+			return v1.data and #v1.data ~= 0 and v13(v1.data[1].names) or ""
 		end
-		local var5 = var1(p2)
-		
-		return if var5.data and #var5.data ~= 0 then var4(var5.data[1].names) or "" else ""
-	end))
+	end)))
 	
-	local var5 = function(p2)
+	local function v15(p2) --[[ Line: 47 ]]
 		return p2.getUsername(false)
 	end
 	
-	var5 = useSignalBinding(signalsModule.createComputed(function(p2)
-		-- upvalues: var2 (ref), var1 (ref), var5 (ref)
-		if var2(p2) then
+	local UseSignalBindingResult2 = UseSignalBindingFunction((SignalsModule.createComputed(function(p2) --[[ Line: 15 ]]
+		-- upvalues: Computed (copy), NamesByUserIds (copy), v15 (copy)
+		if Computed(p2) then
 			return ""
+		else
+			local v1 = NamesByUserIds(p2)
+			
+			return v1.data and #v1.data ~= 0 and v15(v1.data[1].names) or ""
 		end
-		local var6 = var1(p2)
-		
-		return if var6.data and #var6.data ~= 0 then var5(var6.data[1].names) or "" else ""
-	end))
+	end)))
 	
-	local var6 = function(p2)
-		return p2.getCombinedName(false)
+	local function v17(Names) --[[ Line: 52 ]]
+		return Names.getCombinedName(false)
 	end
 	
-	var6 = useSignalBinding(signalsModule.createComputed(function(p2)
-		-- upvalues: var2 (ref), var1 (ref), var6 (ref)
-		if var2(p2) then
+	local UseSignalBindingResult3 = UseSignalBindingFunction((SignalsModule.createComputed(function(p2) --[[ Line: 15 ]]
+		-- upvalues: Computed (copy), NamesByUserIds (copy), v17 (copy)
+		if Computed(p2) then
 			return ""
+		else
+			local v1 = NamesByUserIds(p2)
+			
+			return v1.data and #v1.data ~= 0 and v17(v1.data[1].names) or ""
 		end
-		local var7 = var1(p2)
-		
-		return if var7.data and #var7.data ~= 0 then var6(var7.data[1].names) or "" else ""
-	end))
-	local var7 = useFoundationPresenceModule(p1)
+	end)))
+	local UseFoundationPresenceModuleResult = UseFoundationPresenceModule(p1)
 	
-	return reactModule.useMemo(function()
-		-- upvalues: var3 (ref), p1 (ref), var4 (ref), var6 (ref), var5 (ref), var7 (ref)
+	return ReactModule.useMemo(function() --[[ Line: 60 ]]
+		-- upvalues: UseSignalBindingResult (copy), p1 (copy), UseSignalBindingResult1 (copy), UseSignalBindingResult3 (copy), UseSignalBindingResult2 (copy), UseFoundationPresenceModuleResult (copy)
 		return {
-			isLoading = var3,
+			isLoading = UseSignalBindingResult,
 			id = tonumber(p1) or -1,
-			displayName = var4,
-			combinedName = var6,
-			username = var5,
-			presenceText = var7.presenceText,
-			presence = var7.presence
+			displayName = UseSignalBindingResult1,
+			combinedName = UseSignalBindingResult3,
+			username = UseSignalBindingResult2,
+			presenceText = UseFoundationPresenceModuleResult.presenceText,
+			presence = UseFoundationPresenceModuleResult.presence
 		}
-	end, { p1, var7 })
+	end, { p1, UseFoundationPresenceModuleResult })
 end

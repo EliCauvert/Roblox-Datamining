@@ -1,25 +1,19 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local momentsCommonModule = require(momentsCreation.Parent.MomentsCommon)
-local _ = require(momentsCreation.Types.CreationFlowTypes)
-local trimToolModule = require(momentsCreation.Tools.trimTool)
-local musicToolModule = require(momentsCreation.Tools.musicTool)
-local textToolModule = require(momentsCreation.Tools.textTool)
-local generateTextToolModule = require(momentsCreation.Tools.generateTextTool)
-local stickerToolModule = require(momentsCreation.Tools.stickerTool)
-local voiceToolModule = require(momentsCreation.Tools.voiceTool)
-local getFFlagMomentsStickerButton = momentsCommonModule.Flags.GetFFlagMomentsStickerButton
-local getFFlagMomentsTTSAudioOverlayModule = require(momentsCreation.Flags.GetFFlagMomentsTTSAudioOverlay)
-local list = {
-	trimToolModule,
-	musicToolModule,
-	textToolModule,
-	generateTextToolModule
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local _ = require(MomentsCreation.Types.CreationFlowTypes)
+local StickerToolModule = require(MomentsCreation.Tools.stickerTool)
+local VoiceToolModule = require(MomentsCreation.Tools.voiceTool)
+local GetFFlagMomentsTTSAudioOverlayModule = require(MomentsCreation.Flags.GetFFlagMomentsTTSAudioOverlay)
+local List = {
+	require(MomentsCreation.Tools.trimTool),
+	require(MomentsCreation.Tools.musicTool),
+	require(MomentsCreation.Tools.textTool),
+	(require(MomentsCreation.Tools.generateTextTool))
 }
 
-if getFFlagMomentsStickerButton() then
-	table.insert(list, stickerToolModule)
+if require(MomentsCreation.Parent.MomentsCommon).Flags.GetFFlagMomentsStickerButton() then
+	table.insert(List, StickerToolModule)
 end
-if getFFlagMomentsTTSAudioOverlayModule and game:GetEngineFeature("TextToSpeechPlatformPreview") then
-	table.insert(list, voiceToolModule)
+if GetFFlagMomentsTTSAudioOverlayModule and game:GetEngineFeature("TextToSpeechPlatformPreview") then
+	table.insert(List, VoiceToolModule)
 end
-return list
+return List

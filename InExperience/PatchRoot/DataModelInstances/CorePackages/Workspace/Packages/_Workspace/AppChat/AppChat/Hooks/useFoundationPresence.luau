@@ -1,84 +1,74 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local reactModule = require(parent.React)
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local _ = require(appChat.types)
-local roduxPresenceModule = require(appChat.Http.RoduxPresence)
-local fFlagAppChatPresenceStoreMigrationModule = require(appChat.Flags.FFlagAppChatPresenceStoreMigration)
-local dataHydrationModule = require(parent.DataHydration)
-local useGetPresenceByUserId = require(parent.FriendsCommon).Hooks.useGetPresenceByUserId
-local presenceType = roduxPresenceModule.Enums.PresenceType
-local var1 = if fFlagAppChatPresenceStoreMigrationModule then dataHydrationModule.Presence.PresenceEnums.PresenceType else nil
-local t = {
-	[presenceType.InGame] = "Active",
-	[presenceType.Online] = "Active",
-	[presenceType.InStudio] = "Active",
-	[presenceType.Offline] = "None",
-	[presenceType.Invisible] = "None"
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local ReactModule = require(Parent.React)
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local _ = require(AppChat.types)
+local RoduxPresenceModule = require(AppChat.Http.RoduxPresence)
+local FFlagAppChatPresenceStoreMigrationModule = require(AppChat.Flags.FFlagAppChatPresenceStoreMigration)
+local DataHydrationModule = require(Parent.DataHydration)
+local UseGetPresenceByUserIdFunction = require(Parent.FriendsCommon).Hooks.useGetPresenceByUserId
+local PresenceType = RoduxPresenceModule.Enums.PresenceType
+local PresenceType1 = if FFlagAppChatPresenceStoreMigrationModule then DataHydrationModule.Presence.PresenceEnums.PresenceType else nil
+local config = {
+	[PresenceType.InGame] = "Active",
+	[PresenceType.Online] = "Active",
+	[PresenceType.InStudio] = "Active",
+	[PresenceType.Offline] = "None",
+	[PresenceType.Invisible] = "None"
 }
-local t_1 = {
+local config1 = {
 	InGame = "Active",
 	Online = "Active",
 	InStudio = "Active",
 	Offline = "None"
 }
-local t_2 = {
-	[presenceType.InGame] = "ingameStatusLabel",
-	[presenceType.Online] = "onlinePresenceText",
-	[presenceType.InStudio] = "studioStatusLabel",
-	[presenceType.Offline] = "offlinePresenceText",
-	[presenceType.Invisible] = "offlinePresenceText"
+local config2 = {
+	[PresenceType.InGame] = "ingameStatusLabel",
+	[PresenceType.Online] = "onlinePresenceText",
+	[PresenceType.InStudio] = "studioStatusLabel",
+	[PresenceType.Offline] = "offlinePresenceText",
+	[PresenceType.Invisible] = "offlinePresenceText"
 }
-local t_3 = {
+local config3 = {
 	InGame = "ingameStatusLabel",
 	Online = "onlinePresenceText",
 	InStudio = "studioStatusLabel",
 	Offline = "offlinePresenceText"
 }
-local t_4 = {
+local config4 = {
 	offlinePresenceText = "Common.Presence.Label.Offline",
 	onlinePresenceText = "Common.Presence.Label.Online",
 	studioStatusLabel = "Common.Presence.Label.RobloxStudio",
 	ingameStatusLabel = "Common.Presence.Label.InExperience"
 }
 
-return function(p1)
-	-- upvalues: useLocalization (ref), t_4 (ref), reactModule (ref), fFlagAppChatPresenceStoreMigrationModule (ref), useGetPresenceByUserId (ref), useSelector (ref), roduxPresenceModule (ref), var1 (ref), presenceType (ref), t_3 (ref), t_2 (ref), t_1 (ref), t (ref)
-	local var2 = useLocalization(t_4)
-	local var3, var4 = reactModule.useBinding(var2.offlinePresenceText)
-	local none, none_1 = reactModule.useState("None")
-	local var5 = if fFlagAppChatPresenceStoreMigrationModule then useGetPresenceByUserId(p1) else useSelector(function(p2)
-		-- upvalues: p1 (ref), roduxPresenceModule (copy)
-		return if not (not p1 or p1 == "") then if p2 == nil or p2.ChatAppReducer == nil or (p2.ChatAppReducer.Presence == nil or p2.ChatAppReducer.Presence.byUserId == nil) then nil else roduxPresenceModule.Selectors.getUserPresenceByUserId(p2, p1) else nil
+return function(p1) --[[ Line: 65 | Named "useFoundationPresence" ]]
+	-- upvalues: UseLocalizationFunction (copy), config4 (copy), ReactModule (copy), FFlagAppChatPresenceStoreMigrationModule (copy), UseGetPresenceByUserIdFunction (copy), UseSelectorFunction (copy), RoduxPresenceModule (copy), PresenceType1 (copy), PresenceType (copy), config3 (copy), config2 (copy), config1 (copy), config (copy)
+	local UseLocalizationResult = UseLocalizationFunction(config4)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(UseLocalizationResult.offlinePresenceText)
+	local None, None2 = ReactModule.useState("None")
+	local UseGetPresenceByUserIdResult = nil
+	UseGetPresenceByUserIdResult = if FFlagAppChatPresenceStoreMigrationModule then UseGetPresenceByUserIdFunction(p1) else UseSelectorFunction(function(p2) --[[ Line: 75 ]]
+		-- upvalues: p1 (copy), RoduxPresenceModule (upval)
+		return if p1 and p1 ~= "" then if p2 == nil or p2.ChatAppReducer == nil or p2.ChatAppReducer.Presence == nil or p2.ChatAppReducer.Presence.byUserId == nil then nil else RoduxPresenceModule.Selectors.getUserPresenceByUserId(p2, p1) else nil
 	end)
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), fFlagAppChatPresenceStoreMigrationModule (copy), var1 (copy), presenceType (copy), var5 (write), t_3 (copy), t_2 (copy), t_1 (copy), t (copy), none_1 (ref), var4 (ref)
-		local offlinePresenceText = var2.offlinePresenceText
-		local var6 = if fFlagAppChatPresenceStoreMigrationModule then var1.Offline else presenceType.Offline
+	ReactModule.useEffect(function() --[[ Line: 91 ]]
+		-- upvalues: UseLocalizationResult (copy), FFlagAppChatPresenceStoreMigrationModule (upval), PresenceType1 (upval), PresenceType (upval), UseGetPresenceByUserIdResult (ref), config3 (upval), config2 (upval), config1 (upval), config (upval), None2 (copy), UseBindingResult2 (copy)
+		local OfflinePresenceText = UseLocalizationResult.offlinePresenceText
+		local Offline = if FFlagAppChatPresenceStoreMigrationModule then PresenceType1.Offline else PresenceType.Offline
 		
-		if var5 then
-			local var7
-			var6 = var5.userPresenceType
-			local lastLocation = var5.lastLocation
-			offlinePresenceText = if fFlagAppChatPresenceStoreMigrationModule then var2[t_3[var6]] else var2[t_2[var6]]
-			
-			if fFlagAppChatPresenceStoreMigrationModule then
-				var7 = var6 == var1.InGame
-				var7 = nil
-			else
-				var7 = var6 == presenceType.InGame
-			end
-			if var7 and lastLocation and lastLocation ~= "" then
-				offlinePresenceText = lastLocation
-			end
+		if UseGetPresenceByUserIdResult then
+			Offline = UseGetPresenceByUserIdResult.userPresenceType
+			local LastLocation = UseGetPresenceByUserIdResult.lastLocation
+			OfflinePresenceText = if (if FFlagAppChatPresenceStoreMigrationModule then Offline == PresenceType1.InGame else Offline == PresenceType.InGame) and LastLocation and LastLocation ~= "" then LastLocation elseif FFlagAppChatPresenceStoreMigrationModule then UseLocalizationResult[config3[Offline]] else UseLocalizationResult[config2[Offline]]
 		end
-		none_1((if fFlagAppChatPresenceStoreMigrationModule then t_1 else t)[var6] or "None")
-		var4(offlinePresenceText)
-	end, { var5, var2 })
+		None2((if FFlagAppChatPresenceStoreMigrationModule then config1 else config)[Offline] or "None")
+		UseBindingResult2(OfflinePresenceText)
+	end, { UseGetPresenceByUserIdResult, UseLocalizationResult })
 	
-	return reactModule.useMemo(function()
-		-- upvalues: none (ref), var3 (ref)
-		return { presence = none, presenceText = var3 }
-	end, { none, var3 })
+	return ReactModule.useMemo(function() --[[ Line: 119 ]]
+		-- upvalues: None (copy), UseBindingResult (copy)
+		return { presence = None, presenceText = UseBindingResult }
+	end, { None, UseBindingResult })
 end

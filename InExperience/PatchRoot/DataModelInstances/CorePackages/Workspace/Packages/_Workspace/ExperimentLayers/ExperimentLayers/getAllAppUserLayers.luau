@@ -1,46 +1,46 @@
-﻿local dashModule = require(script:FindFirstAncestor("ExperimentLayers").Parent.Dash)
-local appUserLayersModule = require(script.Parent.AppUserLayers)
-local ixpNewLayersForRegistration = game:DefineFastString("IxpNewLayersForRegistration", "")
+﻿local DashModule = require(script:FindFirstAncestor("ExperimentLayers").Parent.Dash)
+local AppUserLayersModule = require(script.Parent.AppUserLayers)
+local IxpNewLayersForRegistration = game:DefineFastString("IxpNewLayersForRegistration", "")
 
-local function findNextKey(p1, p2)
-	if not p1[p2] then
-		p1[p2] = true
+local function findNextKey(p1, Text) --[[ Line: 21 ]]
+	if not p1[Text] then
+		p1[Text] = true
 		
-		return p2
+		return Text
 	end
+	local Text1 = nil
 	for i = 2, 100 do
-		local text = p2 .. "_" .. i
+		Text1 = Text .. "_" .. i
 		
-		if p1[text] then
-			continue
+		if not p1[Text1] then
+			p1[Text1] = true
+			
+			return Text1
 		end
-		p1[text] = true
-		
-		return text
 	end
-	error("Exceeded max index for next key search: " .. p1)
+	error("Exceeded max index for next key search: " .. Text)
 end
 
-return function(p3)
-	-- upvalues: ixpNewLayersForRegistration (ref), appUserLayersModule (ref), dashModule (ref), findNextKey (ref)
-	p3 = p3 or ixpNewLayersForRegistration
+return function(p2) --[[ Line: 37 | Named "getAllAppUserLayers" ]]
+	-- upvalues: IxpNewLayersForRegistration (copy), AppUserLayersModule (copy), DashModule (copy), findNextKey (copy)
+	local Text = p2 or IxpNewLayersForRegistration
 	
-	if #p3 == 0 then
-		return appUserLayersModule
+	if #Text == 0 then
+		return AppUserLayersModule
 	end
-	local var1 = dashModule.copy(appUserLayersModule)
+	local CopyResult = DashModule.copy(AppUserLayersModule)
 	local t = {}
-	local t_1 = {}
+	local t1 = {}
 	
-	for i, v in var1 do
+	for i, value in CopyResult do
 		t[i] = true
-		t_1[v] = true
+		t1[value] = true
 	end
-	for i_1, v_1 in dashModule.map(string.split(p3, ","), dashModule.trim) do
-		if not t_1[v_1] then
-			t_1[v_1] = true
-			var1[findNextKey(t, v_1)] = v_1
+	for _, value1 in DashModule.map(string.split(Text, ","), DashModule.trim) do
+		if not t1[value1] then
+			t1[value1] = true
+			CopyResult[findNextKey(t, value1)] = value1
 		end
 	end
-	return var1
+	return CopyResult
 end

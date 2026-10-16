@@ -1,13 +1,13 @@
-﻿local reactRobloxModule = require(script.Parent.Parent.Parent.Dev.ReactRoblox)
+﻿local ReactRobloxModule = require(script.Parent.Parent.Parent.Dev.ReactRoblox)
 
-return function(p1, p2)
-	-- upvalues: reactRobloxModule (ref)
-	p2 = p2 or 1
-	local var1 = 0
-	while var1 < p2 and not p1() do
-		reactRobloxModule.act(function()
-			-- upvalues: var1 (write)
-			var1 += task.wait()
+return function(p1, p2) --[[ Line: 6 ]]
+	-- upvalues: ReactRobloxModule (copy)
+	local P1 = p2 or 1
+	local NewElapsed = 0
+	while NewElapsed < P1 and not p1() do
+		ReactRobloxModule.act(function() --[[ Line: 10 ]]
+			-- upvalues: NewElapsed (ref)
+			NewElapsed += task.wait()
 		end)
 	end
 end

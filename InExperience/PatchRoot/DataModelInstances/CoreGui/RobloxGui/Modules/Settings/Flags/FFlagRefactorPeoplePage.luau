@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("RefactorPeoplePage9", false)
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastFlag("RefactorPeoplePage9")
 end

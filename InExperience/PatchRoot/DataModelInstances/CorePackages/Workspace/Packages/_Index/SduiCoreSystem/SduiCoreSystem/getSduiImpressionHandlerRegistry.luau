@@ -1,47 +1,47 @@
-﻿local sduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
-local _ = require(sduiCoreSystem.SduiImpressionEventType)
-local _ = require(sduiCoreSystem.SduiBuilderTypes)
+﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
+local _ = require(SduiCoreSystem.SduiImpressionEventType)
+local _ = require(SduiCoreSystem.SduiBuilderTypes)
 
-local function createSduiImpressionHandlerRegistry()
-	local t = {}
+local function createSduiImpressionHandlerRegistry() --[[ Line: 32 ]]
+	local Tbl = {}
 	
 	return {
-		getImpressionHandlerConfig = function(p1)
-			-- upvalues: t (ref)
-			local var1 = t[p1]
+		getImpressionHandlerConfig = function(p1) --[[ Line: 36 ]]
+			-- upvalues: Tbl (copy)
+			local Entry = Tbl[p1]
 			
-			if var1 and not var1.handler and var1.lazyHandler then
-				var1.handler = var1.lazyHandler()
+			if Entry and not Entry.handler and Entry.lazyHandler then
+				Entry.handler = Entry.lazyHandler()
 			end
-			return var1
+			return Entry
 		end,
-		registerImpressionHandlerConfig = function(p1, p2)
-			-- upvalues: t (ref)
-			t[p1] = p2
+		registerImpressionHandlerConfig = function(Key, p1) --[[ Line: 48 ]]
+			-- upvalues: Tbl (copy)
+			Tbl[Key] = p1
 		end,
-		registerImpressionHandlerConfigs = function(p1)
-			-- upvalues: t (ref)
-			for i, v in p1 do
-				t[i] = v
+		registerImpressionHandlerConfigs = function(List) --[[ Line: 55 ]]
+			-- upvalues: Tbl (copy)
+			for i, value in List do
+				Tbl[i] = value
 			end
 		end,
-		debug_clear = function()
-			-- upvalues: t (ref)
-			table.clear(t)
+		debug_clear = function() --[[ Line: 63 ]]
+			-- upvalues: Tbl (copy)
+			table.clear(Tbl)
 		end,
-		debug_getRegisteredImpressionHandlerConfigs = function()
-			-- upvalues: t (ref)
-			return t
+		debug_getRegisteredImpressionHandlerConfigs = function() --[[ Line: 67 ]]
+			-- upvalues: Tbl (copy)
+			return Tbl
 		end
 	}
 end
 
-local var1 = nil
+local v1 = nil
 
-return function()
-	-- upvalues: var1 (write), createSduiImpressionHandlerRegistry (ref)
-	if var1 == nil then
-		var1 = createSduiImpressionHandlerRegistry()
+return function() --[[ Line: 85 | Named "getSduiImpressionHandlerRegistry" ]]
+	-- upvalues: v1 (ref), createSduiImpressionHandlerRegistry (copy)
+	if v1 == nil then
+		v1 = createSduiImpressionHandlerRegistry()
 	end
-	return var1
+	return v1
 end

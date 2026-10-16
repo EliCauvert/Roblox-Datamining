@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.AppBlox.AppBlox)
+﻿return (require(script.Parent._Workspace.AppBlox.AppBlox))

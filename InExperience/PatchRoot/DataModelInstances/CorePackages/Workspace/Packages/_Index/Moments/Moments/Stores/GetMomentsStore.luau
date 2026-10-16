@@ -1,6 +1,6 @@
-﻿local createMomentsStoreModule = require(script.createMomentsStore)
+﻿local CreateMomentsStoreModule = require(script.createMomentsStore)
 
-return require(script:FindFirstAncestor("Moments").Parent.Signals).createComputed(function(_)
-	-- upvalues: createMomentsStoreModule (ref)
-	return createMomentsStoreModule()
+return require(script:FindFirstAncestor("Moments").Parent.Signals).createComputed(function(_) --[[ Line: 7 ]]
+	-- upvalues: CreateMomentsStoreModule (copy)
+	return CreateMomentsStoreModule()
 end)

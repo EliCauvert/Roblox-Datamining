@@ -1,10 +1,10 @@
-﻿local createSduiFocusActivationStoreModule = require(script:FindFirstAncestor("SduiSharedUtilities").FocusNavigation.createSduiFocusActivationStore)
-local var1 = nil
+﻿local CreateSduiFocusActivationStoreModule = require(script:FindFirstAncestor("SduiSharedUtilities").FocusNavigation.createSduiFocusActivationStore)
+local v1 = nil
 
-return function()
-	-- upvalues: var1 (write), createSduiFocusActivationStoreModule (ref)
-	if var1 == nil then
-		var1 = createSduiFocusActivationStoreModule()
+return function() --[[ Line: 8 | Named "getSduiFocusActivationStore" ]]
+	-- upvalues: v1 (ref), CreateSduiFocusActivationStoreModule (copy)
+	if v1 == nil then
+		v1 = CreateSduiFocusActivationStoreModule()
 	end
-	return var1
+	return v1
 end

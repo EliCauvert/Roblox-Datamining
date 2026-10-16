@@ -1,3 +1,3 @@
-﻿local textSize = script:FindFirstAncestor("TextSize")
+﻿local TextSize = script:FindFirstAncestor("TextSize")
 
-return require(textSize.Parent.Signals).createComputed(require(textSize.createTextSizeStore))
+return require(TextSize.Parent.Signals).createComputed((require(TextSize.createTextSizeStore)))

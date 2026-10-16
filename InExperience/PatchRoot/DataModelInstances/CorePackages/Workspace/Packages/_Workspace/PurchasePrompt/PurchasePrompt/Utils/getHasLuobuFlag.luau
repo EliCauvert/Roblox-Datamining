@@ -1,6 +1,6 @@
-﻿local getFFlagEnableLuobuInGameUpsellModule = require(script.Parent.Parent.Flags.GetFFlagEnableLuobuInGameUpsell)
+﻿local GetFFlagEnableLuobuInGameUpsellModule = require(script.Parent.Parent.Flags.GetFFlagEnableLuobuInGameUpsell)
 
-return function()
-	-- upvalues: getFFlagEnableLuobuInGameUpsellModule (ref)
-	return getFFlagEnableLuobuInGameUpsellModule()
+return function() --[[ Line: 5 ]]
+	-- upvalues: GetFFlagEnableLuobuInGameUpsellModule (copy)
+	return GetFFlagEnableLuobuInGameUpsellModule()
 end

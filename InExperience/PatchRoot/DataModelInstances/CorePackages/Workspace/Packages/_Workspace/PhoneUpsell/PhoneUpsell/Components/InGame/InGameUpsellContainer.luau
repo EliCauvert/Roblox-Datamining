@@ -1,21 +1,21 @@
-﻿local phoneUpsell = script:FindFirstAncestor("PhoneUpsell")
-local parent = phoneUpsell.Parent
-local usePhoneVerificationUpsellPropsModule = require(phoneUpsell.Components.usePhoneVerificationUpsellProps)
-local reactModule = require(parent.React)
-local roactModule = require(parent.Roact)
-local _ = require(parent.LuauPolyfill)
-local mergePropsModule = require(phoneUpsell.Utils.mergeProps)
-local phoneVerificationUpsellStateModule = require(phoneUpsell.Components.PhoneVerificationUpsellState)
-local inGameEntryViewModule = require(phoneUpsell.Components.InGame.InGameEntryView)
-local inGameAddPhoneViewModule = require(phoneUpsell.Components.InGame.InGameAddPhoneView)
-local inGameVerifyPhoneViewModule = require(phoneUpsell.Components.InGame.InGameVerifyPhoneView)
-local getFFlagLuaUsePhoneNumberTextTypeForPhoneUpsellModule = require(phoneUpsell.Flags.GetFFlagLuaUsePhoneNumberTextTypeForPhoneUpsell)
-local getFFlagPhoneUseParentSizeForScreenSizeModule = require(phoneUpsell.Flags.GetFFlagPhoneUseParentSizeForScreenSize)
-local getFFlagFixIosOtpAutofillModule = require(phoneUpsell.Flags.GetFFlagFixIosOtpAutofill)
+﻿local PhoneUpsell = script:FindFirstAncestor("PhoneUpsell")
+local Parent = PhoneUpsell.Parent
+local UsePhoneVerificationUpsellPropsModule = require(PhoneUpsell.Components.usePhoneVerificationUpsellProps)
+local ReactModule = require(Parent.React)
+local RoactModule = require(Parent.Roact)
+local _ = require(Parent.LuauPolyfill)
+local MergePropsModule = require(PhoneUpsell.Utils.mergeProps)
+local PhoneVerificationUpsellStateModule = require(PhoneUpsell.Components.PhoneVerificationUpsellState)
+local InGameEntryViewModule = require(PhoneUpsell.Components.InGame.InGameEntryView)
+local InGameAddPhoneViewModule = require(PhoneUpsell.Components.InGame.InGameAddPhoneView)
+local InGameVerifyPhoneViewModule = require(PhoneUpsell.Components.InGame.InGameVerifyPhoneView)
+local GetFFlagLuaUsePhoneNumberTextTypeForPhoneUpsellModule = require(PhoneUpsell.Flags.GetFFlagLuaUsePhoneNumberTextTypeForPhoneUpsell)
+local GetFFlagPhoneUseParentSizeForScreenSizeModule = require(PhoneUpsell.Flags.GetFFlagPhoneUseParentSizeForScreenSize)
+local GetFFlagFixIosOtpAutofillModule = require(PhoneUpsell.Flags.GetFFlagFixIosOtpAutofill)
 
-local var1 = function() end
+local function CloseUpsell() --[[ Line: 85 ]] end
 
-local t = {
+local config = {
 	origin = "",
 	eventContext = "",
 	addPhoneTitleKey = "Feature.VerificationUpsell.Action.AddPhone",
@@ -26,79 +26,79 @@ local t = {
 	isPhoneNumberTextTypeEnabled = false,
 	alwaysShowAddPhoneLegalText = false,
 	requireAddPhoneLegalTextCheckbox = false,
-	onSuccess = var1,
-	onFailure = var1,
-	onCancelled = var1,
-	onExtraButtonClick = var1,
-	closeUpsell = var1,
-	showWebpage = function(_) end
+	onSuccess = CloseUpsell,
+	onFailure = CloseUpsell,
+	onCancelled = CloseUpsell,
+	onExtraButtonClick = CloseUpsell,
+	closeUpsell = CloseUpsell,
+	showWebpage = function(_) --[[ Line: 103 ]] end
 }
 
-return function(p1)
-	-- upvalues: mergePropsModule (ref), t (ref), usePhoneVerificationUpsellPropsModule (ref), reactModule (ref), getFFlagPhoneUseParentSizeForScreenSizeModule (ref), roactModule (ref), phoneVerificationUpsellStateModule (ref), inGameEntryViewModule (ref), inGameAddPhoneViewModule (ref), getFFlagLuaUsePhoneNumberTextTypeForPhoneUpsellModule (ref), inGameVerifyPhoneViewModule (ref), getFFlagFixIosOtpAutofillModule (ref)
-	local var2 = mergePropsModule(t, p1)
-	local var3 = usePhoneVerificationUpsellPropsModule(var2)
+return function(p1) --[[ Line: 106 | Named "InGameUpsellContainer" ]]
+	-- upvalues: MergePropsModule (copy), config (copy), UsePhoneVerificationUpsellPropsModule (copy), ReactModule (copy), GetFFlagPhoneUseParentSizeForScreenSizeModule (copy), RoactModule (copy), PhoneVerificationUpsellStateModule (copy), InGameEntryViewModule (copy), InGameAddPhoneViewModule (copy), GetFFlagLuaUsePhoneNumberTextTypeForPhoneUpsellModule (copy), InGameVerifyPhoneViewModule (copy), GetFFlagFixIosOtpAutofillModule (copy)
+	local MergePropsModuleResult = MergePropsModule(config, p1)
+	local UsePhoneVerificationUpsellPropsModuleResult = UsePhoneVerificationUpsellPropsModule(MergePropsModuleResult)
 	
-	return reactModule.createElement(if getFFlagPhoneUseParentSizeForScreenSizeModule() then "Frame" else reactModule.Fragment, if getFFlagPhoneUseParentSizeForScreenSizeModule() then {
+	return ReactModule.createElement(if GetFFlagPhoneUseParentSizeForScreenSizeModule() then "Frame" else ReactModule.Fragment, if GetFFlagPhoneUseParentSizeForScreenSizeModule() then {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 1, 0),
-		[roactModule.Change.AbsoluteSize] = function(p2)
-			-- upvalues: var3 (ref)
-			var3.setParentSize(p2.AbsoluteSize)
+		[RoactModule.Change.AbsoluteSize] = function(Frame) --[[ Line: 117 ]]
+			-- upvalues: UsePhoneVerificationUpsellPropsModuleResult (copy)
+			UsePhoneVerificationUpsellPropsModuleResult.setParentSize(Frame.AbsoluteSize)
 		end
 	} else nil, {
-		Entry = var3.phoneUpsellState == phoneVerificationUpsellStateModule.Entry and (var2.entryConfig and reactModule.createElement(inGameEntryViewModule, {
-			screenSize = var3.screenSize,
-			onClose = var3.handleCloseClick,
-			titleKey = var2.entryConfig.titleKey,
-			descriptionKey = var2.entryConfig.descriptionKey,
-			buttonKey = var2.entryConfig.buttonKey,
-			onButtonClick = var3.proceedToAddPhone,
-			extraButtonKey = var2.entryConfig.extraButtonConfig.extraButtonKey,
-			onExtraButtonClick = var2.closeUpsell,
-			countryCode = var3.countryCode,
-			onTermsOfUseClick = var3.navigateToSMSTerms,
-			onPrivacyPolicyClick = var3.navigateToPrivacy,
-			legalTextKey = var2.entryConfig.legalTextKey
+		Entry = UsePhoneVerificationUpsellPropsModuleResult.phoneUpsellState == PhoneVerificationUpsellStateModule.Entry and (MergePropsModuleResult.entryConfig and ReactModule.createElement(InGameEntryViewModule, {
+			screenSize = UsePhoneVerificationUpsellPropsModuleResult.screenSize,
+			onClose = UsePhoneVerificationUpsellPropsModuleResult.handleCloseClick,
+			titleKey = MergePropsModuleResult.entryConfig.titleKey,
+			descriptionKey = MergePropsModuleResult.entryConfig.descriptionKey,
+			buttonKey = MergePropsModuleResult.entryConfig.buttonKey,
+			onButtonClick = UsePhoneVerificationUpsellPropsModuleResult.proceedToAddPhone,
+			extraButtonKey = MergePropsModuleResult.entryConfig.extraButtonConfig.extraButtonKey,
+			onExtraButtonClick = MergePropsModuleResult.closeUpsell,
+			countryCode = UsePhoneVerificationUpsellPropsModuleResult.countryCode,
+			onTermsOfUseClick = UsePhoneVerificationUpsellPropsModuleResult.navigateToSMSTerms,
+			onPrivacyPolicyClick = UsePhoneVerificationUpsellPropsModuleResult.navigateToPrivacy,
+			legalTextKey = MergePropsModuleResult.entryConfig.legalTextKey
 		})),
-		AddPhone = var3.phoneUpsellState == phoneVerificationUpsellStateModule.AddPhone and reactModule.createElement(inGameAddPhoneViewModule, {
+		AddPhone = UsePhoneVerificationUpsellPropsModuleResult.phoneUpsellState == PhoneVerificationUpsellStateModule.AddPhone and ReactModule.createElement(InGameAddPhoneViewModule, {
 			extraButtonKey = "Feature.VerificationUpsell.Action.NotNow",
-			screenSize = var3.screenSize,
-			countryCode = var3.countryCode,
-			setCountryCode = var3.setCountryCode,
-			phoneNumber = var3.phoneNumber,
-			errorMessage = var3.addPhoneErrorMessage,
-			isDisabled = var3.isDisabled,
-			onPhoneNumberTextChange = var3.onPhoneNumberTextChange,
-			onSetPhoneNumber = var3.handleSetPhone,
-			onClose = var3.handleCloseClick,
-			onCountryCodeSelectorClick = var3.onCountryCodeSelectorClick,
-			isKeyboardShowing = var3.isKeyboardShowing,
-			keyboardHeight = var3.onScreenKeyboardHeight,
-			titleKey = var2.addPhoneTitleKey,
-			buttonKey = var2.addPhoneButtonKey,
-			onExtraButtonClick = var2.closeUpsell,
-			usePhoneNumberTextType = getFFlagLuaUsePhoneNumberTextTypeForPhoneUpsellModule() and var3.isPhoneNumberTextTypeEnabled,
-			descriptionKey = var2.addPhoneDescriptionKey,
-			legalTextKey = var2.addPhoneLegalTextKey,
-			onPhoneInputFocus = var3.onPhoneInputFocus
+			screenSize = UsePhoneVerificationUpsellPropsModuleResult.screenSize,
+			countryCode = UsePhoneVerificationUpsellPropsModuleResult.countryCode,
+			setCountryCode = UsePhoneVerificationUpsellPropsModuleResult.setCountryCode,
+			phoneNumber = UsePhoneVerificationUpsellPropsModuleResult.phoneNumber,
+			errorMessage = UsePhoneVerificationUpsellPropsModuleResult.addPhoneErrorMessage,
+			isDisabled = UsePhoneVerificationUpsellPropsModuleResult.isDisabled,
+			onPhoneNumberTextChange = UsePhoneVerificationUpsellPropsModuleResult.onPhoneNumberTextChange,
+			onSetPhoneNumber = UsePhoneVerificationUpsellPropsModuleResult.handleSetPhone,
+			onClose = UsePhoneVerificationUpsellPropsModuleResult.handleCloseClick,
+			onCountryCodeSelectorClick = UsePhoneVerificationUpsellPropsModuleResult.onCountryCodeSelectorClick,
+			isKeyboardShowing = UsePhoneVerificationUpsellPropsModuleResult.isKeyboardShowing,
+			keyboardHeight = UsePhoneVerificationUpsellPropsModuleResult.onScreenKeyboardHeight,
+			titleKey = MergePropsModuleResult.addPhoneTitleKey,
+			buttonKey = MergePropsModuleResult.addPhoneButtonKey,
+			onExtraButtonClick = MergePropsModuleResult.closeUpsell,
+			usePhoneNumberTextType = GetFFlagLuaUsePhoneNumberTextTypeForPhoneUpsellModule() and UsePhoneVerificationUpsellPropsModuleResult.isPhoneNumberTextTypeEnabled,
+			descriptionKey = MergePropsModuleResult.addPhoneDescriptionKey,
+			legalTextKey = MergePropsModuleResult.addPhoneLegalTextKey,
+			onPhoneInputFocus = UsePhoneVerificationUpsellPropsModuleResult.onPhoneInputFocus
 		}),
-		VerifyPhone = var3.phoneUpsellState == phoneVerificationUpsellStateModule.VerifyPhone and reactModule.createElement(inGameVerifyPhoneViewModule, {
+		VerifyPhone = UsePhoneVerificationUpsellPropsModuleResult.phoneUpsellState == PhoneVerificationUpsellStateModule.VerifyPhone and ReactModule.createElement(InGameVerifyPhoneViewModule, {
 			extraButtonKey = "Feature.VerificationUpsell.Action.EditPhoneNumber",
-			screenSize = var3.screenSize,
-			phoneNumber = var3.phoneNumber,
-			prefix = var3.countryCode.prefix,
-			code = var3.code,
-			errorMessage = var3.verifyPhoneErrorMessage,
-			onCodeTextChange = var3.onCodeTextChange,
-			onResendPhoneCode = var3.handleResendCode,
-			onClose = var3.handleCloseClick,
-			returnToAddPhone = var3.returnToAddPhone,
-			onCodeInputFocus = var3.onCodeInputFocus,
-			isKeyboardShowing = var3.isKeyboardShowing,
-			keyboardHeight = var3.onScreenKeyboardHeight,
-			useOTPInputType = if getFFlagFixIosOtpAutofillModule() then var3.isOTPInputTypeEnabled else var2.isOTPInputTypeEnabled,
-			onExtraButtonClick = var3.returnToAddPhone
+			screenSize = UsePhoneVerificationUpsellPropsModuleResult.screenSize,
+			phoneNumber = UsePhoneVerificationUpsellPropsModuleResult.phoneNumber,
+			prefix = UsePhoneVerificationUpsellPropsModuleResult.countryCode.prefix,
+			code = UsePhoneVerificationUpsellPropsModuleResult.code,
+			errorMessage = UsePhoneVerificationUpsellPropsModuleResult.verifyPhoneErrorMessage,
+			onCodeTextChange = UsePhoneVerificationUpsellPropsModuleResult.onCodeTextChange,
+			onResendPhoneCode = UsePhoneVerificationUpsellPropsModuleResult.handleResendCode,
+			onClose = UsePhoneVerificationUpsellPropsModuleResult.handleCloseClick,
+			returnToAddPhone = UsePhoneVerificationUpsellPropsModuleResult.returnToAddPhone,
+			onCodeInputFocus = UsePhoneVerificationUpsellPropsModuleResult.onCodeInputFocus,
+			isKeyboardShowing = UsePhoneVerificationUpsellPropsModuleResult.isKeyboardShowing,
+			keyboardHeight = UsePhoneVerificationUpsellPropsModuleResult.onScreenKeyboardHeight,
+			useOTPInputType = if GetFFlagFixIosOtpAutofillModule() then UsePhoneVerificationUpsellPropsModuleResult.isOTPInputTypeEnabled else MergePropsModuleResult.isOTPInputTypeEnabled,
+			onExtraButtonClick = UsePhoneVerificationUpsellPropsModuleResult.returnToAddPhone
 		})
 	})
 end

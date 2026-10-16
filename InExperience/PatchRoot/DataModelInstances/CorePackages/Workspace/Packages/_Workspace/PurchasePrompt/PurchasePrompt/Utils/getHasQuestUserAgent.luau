@@ -1,6 +1,6 @@
-﻿local httpService = game:GetService("HttpService")
+﻿local HttpService = game:GetService("HttpService")
 
-return function()
-	-- upvalues: httpService (ref)
-	return string.find(httpService:GetUserAgent(), "OculusQuest3Store") ~= nil
+return function(): boolean --[[ Line: 3 ]]
+	-- upvalues: HttpService (copy)
+	return string.find(HttpService:GetUserAgent(), "OculusQuest3Store") ~= nil
 end

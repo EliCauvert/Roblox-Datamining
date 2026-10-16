@@ -1,21 +1,20 @@
-﻿local momentsCommon = script:FindFirstAncestor("MomentsCommon")
-local parent = momentsCommon.Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local _ = require(momentsCommon.Media.MediaTypes)
-local mediaPreloadProviderModule = require(momentsCommon.Media.Components.MediaPreloadProvider)
-local useSignalState = signalsReactModule.useSignalState
+﻿local MomentsCommon = script:FindFirstAncestor("MomentsCommon")
+local Parent = MomentsCommon.Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local _ = require(MomentsCommon.Media.MediaTypes)
+local MediaPreloadProviderModule = require(MomentsCommon.Media.Components.MediaPreloadProvider)
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 
-return function(p1)
-	-- upvalues: mediaPreloadProviderModule (ref), reactModule (ref), signalsModule (ref), useSignalState (ref)
-	local var1 = mediaPreloadProviderModule.useMediaControllerProvider()
+return function(p1) --[[ Line: 28 | Named "useMomentMediaController" ]]
+	-- upvalues: MediaPreloadProviderModule (copy), ReactModule (copy), SignalsModule (copy), UseSignalStateFunction (copy)
+	local UseMediaControllerProviderResult = MediaPreloadProviderModule.useMediaControllerProvider()
 	
-	return useSignalState(reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), var1 (ref), p1 (ref)
-		return signalsModule.createComputed(function(p2)
-			-- upvalues: var1 (copy), p1 (copy)
-			return if var1 == nil then nil else var1.getControllerMap(p2)[p1]
+	return UseSignalStateFunction((ReactModule.useMemo(function() --[[ Line: 35 ]]
+		-- upvalues: SignalsModule (upval), UseMediaControllerProviderResult (copy), p1 (copy)
+		return SignalsModule.createComputed(function(p2) --[[ Line: 36 ]]
+			-- upvalues: UseMediaControllerProviderResult (upval), p1 (upval)
+			return if UseMediaControllerProviderResult == nil then nil else UseMediaControllerProviderResult.getControllerMap(p2)[p1]
 		end)
-	end, { var1, p1 }))
+	end, { UseMediaControllerProviderResult, p1 })))
 end

@@ -1,30 +1,30 @@
-﻿local userProfiles = script:FindFirstAncestor("UserProfiles")
-local parent = userProfiles.Parent
-local queriesModule = require(userProfiles.Common.Queries)
-local cryoModule = require(parent.Cryo)
-local _ = require(parent.ApolloClient)
+﻿local UserProfiles = script:FindFirstAncestor("UserProfiles")
+local Parent = UserProfiles.Parent
+local QueriesModule = require(UserProfiles.Common.Queries)
+local CryoModule = require(Parent.Cryo)
+local _ = require(Parent.ApolloClient)
 
-return function(p1, p2, p3)
-	-- upvalues: queriesModule (ref), cryoModule (ref)
-	local var1 = if p3 and p3.query then p3.query else queriesModule.userProfilesAllNamesByUserIds
-	
-	for i, v in p2 do
+return function(p1, List, p2) --[[ Line: 15 ]]
+	-- upvalues: QueriesModule (copy), CryoModule (copy)
+	local Query = if p2 and p2.query then p2.query else QueriesModule.userProfilesAllNamesByUserIds
+	for Id, value in List do
 		p1:writeQuery({
-			variables = { userIds = i },
-			query = var1,
+			variables = { userIds = Id },
+			query = Query,
 			data = {
 				userProfiles = {
 					{
 						__typename = "UserProfile",
-						id = i,
-						names = cryoModule.Dictionary.join({
+						platformProfileId = "",
+						id = Id,
+						names = CryoModule.Dictionary.join({
 							__typename = "Names",
 							alias = "",
 							contactName = "",
 							displayName = "",
 							username = "",
 							platformName = ""
-						}, v)
+						}, value)
 					}
 				}
 			}

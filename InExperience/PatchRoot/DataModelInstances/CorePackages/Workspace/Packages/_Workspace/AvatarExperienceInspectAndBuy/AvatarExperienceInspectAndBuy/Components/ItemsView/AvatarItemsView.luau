@@ -1,94 +1,104 @@
-﻿local avatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
-local parent = avatarExperienceInspectAndBuy.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local skeleton = foundationModule.Skeleton
-local useTokens = foundationModule.Hooks.useTokens
-local viewTypeModule = require(avatarExperienceInspectAndBuy.Enums.ViewType)
-local _ = require(avatarExperienceInspectAndBuy.Types)
-local itemCardRowContainerModule = require(avatarExperienceInspectAndBuy.Components.ItemsView.ItemCardRowContainer)
+﻿local AvatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
+local Parent = AvatarExperienceInspectAndBuy.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local Skeleton = FoundationModule.Skeleton
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local ViewTypeModule = require(AvatarExperienceInspectAndBuy.Enums.ViewType)
+local _ = require(AvatarExperienceInspectAndBuy.Types)
+local ItemCardRowContainerModule = require(AvatarExperienceInspectAndBuy.Components.ItemsView.ItemCardRowContainer)
 
-local var1 = function(p1, p2)
-	-- upvalues: viewTypeModule (ref)
-	return if p1 == viewTypeModule.WideLandscape then {
-		left = UDim.new(0, p2.Padding.XLarge),
-		right = UDim.new(0, p2.Padding.XLarge),
-		bottom = UDim.new(0, p2.Padding.Large)
-	} elseif p1 == viewTypeModule.Compact then {
-		left = UDim.new(0, p2.Padding.Large),
-		right = UDim.new(0, p2.Padding.Large),
-		bottom = UDim.new(0, p2.Padding.Large)
+local function v8(View, p1) --[[ Line: 45 ]]
+	-- upvalues: ViewTypeModule (copy)
+	return if View == ViewTypeModule.WideLandscape then {
+		left = UDim.new(0, p1.Padding.XLarge),
+		right = UDim.new(0, p1.Padding.XLarge),
+		bottom = UDim.new(0, p1.Padding.Large)
+	} elseif View == ViewTypeModule.Compact then {
+		left = UDim.new(0, p1.Padding.Large),
+		right = UDim.new(0, p1.Padding.Large),
+		bottom = UDim.new(0, p1.Padding.Large)
 	} else {
-		top = UDim.new(0, p2.Padding.Medium),
-		left = UDim.new(0, p2.Margin.Large * 2),
-		right = UDim.new(0, p2.Margin.Large * 2),
-		bottom = UDim.new(0, p2.Padding.Large)
+		top = UDim.new(0, p1.Padding.Medium),
+		left = UDim.new(0, p1.Margin.Large * 2),
+		right = UDim.new(0, p1.Margin.Large * 2),
+		bottom = UDim.new(0, p1.Padding.Large)
 	}
 end
 
-return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useTokens (ref), reactModule (ref), viewTypeModule (ref), var1 (ref), itemCardRowContainerModule (ref), skeleton (ref)
-	local var2 = useTokens()
-	local headerHeightOffset = p1.headerHeightOffset or 0
-	local actionBarHeightOffset = p1.actionBarHeightOffset or 0
-	local var3 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), viewTypeModule (copy), var2 (ref)
-		return if p1.view == viewTypeModule.Wide then var2.Size.Size_2500 else var2.Size.Size_2000
-	end, { p1.view, var2 })
+return (ReactModule.forwardRef(function(p1, Ref) --[[ Line: 68 ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), ViewTypeModule (copy), v8 (copy), ItemCardRowContainerModule (copy), Skeleton (copy)
+	local UseTokensResult = UseTokensFunction()
+	local HeaderHeightOffset = p1.headerHeightOffset or 0
+	local ActionBarHeightOffset = p1.actionBarHeightOffset or 0
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 73 ]]
+		-- upvalues: p1 (copy), ViewTypeModule (upval), UseTokensResult (copy)
+		return if p1.view == ViewTypeModule.Wide then UseTokensResult.Size.Size_2500 else UseTokensResult.Size.Size_2000
+	end, { p1.view, UseTokensResult })
 	
-	return reactModule.createElement("ScrollingFrame", {
+	return ReactModule.createElement("ScrollingFrame", {
 		ScrollBarThickness = 0,
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		LayoutOrder = 2,
-		Size = reactModule.useMemo(function()
-			-- upvalues: p1 (ref), viewTypeModule (copy), headerHeightOffset (ref), var2 (ref), actionBarHeightOffset (ref)
-			return if p1.view == viewTypeModule.Compact then UDim2.new(1, 0, 1, (-headerHeightOffset) - var2.Padding.Small - actionBarHeightOffset) else UDim2.new(1, 0, 1, (-headerHeightOffset) - var2.Padding.Small)
-		end, { p1.view, headerHeightOffset, var2, actionBarHeightOffset }),
-		Position = UDim2.new(0, 0, 0, headerHeightOffset),
+		Size = ReactModule.useMemo(function(): UDim2 --[[ Line: 130 ]]
+			-- upvalues: p1 (copy), ViewTypeModule (upval), HeaderHeightOffset (copy), UseTokensResult (copy), ActionBarHeightOffset (copy)
+			return if p1.view == ViewTypeModule.Compact then UDim2.new(1, 0, 1, -HeaderHeightOffset - UseTokensResult.Padding.Small - ActionBarHeightOffset) else UDim2.new(1, 0, 1, -HeaderHeightOffset - UseTokensResult.Padding.Small)
+		end, {
+			p1.view,
+			HeaderHeightOffset,
+			UseTokensResult,
+			ActionBarHeightOffset
+		}),
+		Position = UDim2.new(0, 0, 0, HeaderHeightOffset),
 		CanvasSize = UDim2.new(1, 0, 0, 0),
 		AutomaticCanvasSize = Enum.AutomaticSize.Y,
 		ScrollingDirection = Enum.ScrollingDirection.Y,
-		ref = p2
-	}, reactModule.useCallback(function()
-		-- upvalues: var1 (copy), p1 (ref), var2 (ref), reactModule (copy), itemCardRowContainerModule (copy), var3 (ref), skeleton (copy)
-		local var4 = var1(p1.view, var2)
-		local t = {
-			UIListLayout = reactModule.createElement("UIListLayout", {
+		ref = Ref
+	}, ReactModule.useCallback(function() --[[ Line: 81 ]]
+		-- upvalues: v8 (upval), p1 (copy), UseTokensResult (copy), ReactModule (upval), ItemCardRowContainerModule (upval), UseMemoResult (copy), Skeleton (upval)
+		local v1 = v8(p1.view, UseTokensResult)
+		local config = {
+			UIListLayout = ReactModule.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				FillDirection = Enum.FillDirection.Vertical,
-				Padding = UDim.new(0, var2.Padding.Large)
+				Padding = UDim.new(0, UseTokensResult.Padding.Large)
 			}),
-			UIPadding = reactModule.createElement("UIPadding", {
-				PaddingTop = var4.top,
-				PaddingLeft = var4.left,
-				PaddingRight = var4.right,
-				PaddingBottom = var4.bottom
+			UIPadding = ReactModule.createElement("UIPadding", {
+				PaddingTop = v1.top,
+				PaddingLeft = v1.left,
+				PaddingRight = v1.right,
+				PaddingBottom = v1.bottom
 			})
 		}
 		
 		if p1.items and #p1.items > 0 then
-			for i, v in p1.items do
-				t["Item" .. i] = reactModule.createElement(itemCardRowContainerModule, {
-					item = v,
+			for LayoutOrder, item in p1.items do
+				config["Item" .. LayoutOrder] = ReactModule.createElement(ItemCardRowContainerModule, {
+					item = item,
 					view = p1.view,
-					LayoutOrder = i,
+					LayoutOrder = LayoutOrder,
 					onItemCardActivated = p1.onItemCardActivated,
-					itemCardWidth = var3
+					itemCardWidth = UseMemoResult
 				})
 			end
-			return t
+			return config
 		else
 			for i = 1, 5 do
-				t["Skeleton" .. i] = reactModule.createElement("Frame", {
+				config["Skeleton" .. i] = ReactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
-					Size = UDim2.new(1, 0, 0, var3),
+					Size = UDim2.new(1, 0, 0, UseMemoResult),
 					LayoutOrder = i
 				}, {
-					Skeleton = reactModule.createElement(skeleton, { Size = UDim2.new(1, 0, 1, 0) })
+					Skeleton = ReactModule.createElement(Skeleton, { Size = UDim2.new(1, 0, 1, 0) })
 				})
 			end
-			return t
+			return config
 		end
-	end, { p1.items, p1.view, actionBarHeightOffset, var2 })())
-end)
+	end, {
+		p1.items,
+		p1.view,
+		ActionBarHeightOffset,
+		UseTokensResult
+	})())
+end))

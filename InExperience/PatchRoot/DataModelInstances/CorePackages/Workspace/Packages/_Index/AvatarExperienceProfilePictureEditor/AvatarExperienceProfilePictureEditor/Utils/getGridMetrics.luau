@@ -1,20 +1,21 @@
-﻿local t = { minimumItemsPerRow = 4, minimumItemWidth = 140 }
-local var1 = require(script:FindFirstAncestor("AvatarExperienceProfilePictureEditor").Parent.UIBlox).App.Grid.GridMetrics.makeCustomMetricsGetter(t)
+﻿local config = { minimumItemsPerRow = 4, minimumItemWidth = 140 }
+local CustomMetricsGetter = require(script:FindFirstAncestor("AvatarExperienceProfilePictureEditor").Parent.UIBlox).App.Grid.GridMetrics.makeCustomMetricsGetter(config)
 
-return function(p1)
-	-- upvalues: t (ref), var1 (ref)
-	local maxValue = math.max(0, math.max(0, p1.containerWidth - p1.horizontalPadding * 2) - p1.strokeInset * 2)
+return function(p1) --[[ Line: 28 | Named "getGridMetrics" ]]
+	-- upvalues: config (copy), CustomMetricsGetter (copy)
+	local Largest = math.max(0, math.max(0, p1.containerWidth - p1.horizontalPadding * 2) - p1.strokeInset * 2)
 	
-	if maxValue <= 0 then
+	if Largest <= 0 then
 		return {
-			itemsPerRow = t.minimumItemsPerRow,
+			itemsPerRow = config.minimumItemsPerRow,
 			itemWidth = p1.minTileSize
 		}
+	else
+		local CustomMetricsGetterResult = CustomMetricsGetter(Largest, p1.gap)
+		
+		return if CustomMetricsGetterResult.itemWidth < config.minimumItemWidth then {
+			itemsPerRow = CustomMetricsGetterResult.itemsPerRow,
+			itemWidth = config.minimumItemWidth
+		} else CustomMetricsGetterResult
 	end
-	local var2 = var1(maxValue, p1.gap)
-	
-	return if var2.itemWidth < t.minimumItemWidth then {
-		itemsPerRow = var2.itemsPerRow,
-		itemWidth = t.minimumItemWidth
-	} else var2
 end

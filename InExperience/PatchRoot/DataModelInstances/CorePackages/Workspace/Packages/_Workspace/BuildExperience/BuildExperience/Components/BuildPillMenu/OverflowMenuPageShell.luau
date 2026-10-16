@@ -1,96 +1,95 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local fFlagBuildBackButtonChevronModule = require(buildExperience.Flags.FFlagBuildBackButtonChevron)
-local fFlagBuildDesktopReadinessModule = require(buildExperience.Flags.FFlagBuildDesktopReadiness)
-local useScrollPerformanceTrackerModule = require(buildExperience.Telemetry.useScrollPerformanceTracker)
-local iconButton = foundationModule.IconButton
-local divider = foundationModule.Divider
-local scrollView = foundationModule.ScrollView
-local text = foundationModule.Text
-local view = foundationModule.View
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local iconName = foundationModule.Enums.IconName
-local inputSize = foundationModule.Enums.InputSize
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local FFlagBuildBackButtonChevronModule = require(BuildExperience.Flags.FFlagBuildBackButtonChevron)
+local UseScrollPerformanceTrackerModule = require(BuildExperience.Telemetry.useScrollPerformanceTracker)
+local IconButton = FoundationModule.IconButton
+local Divider = FoundationModule.Divider
+local ScrollView = FoundationModule.ScrollView
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local IconName = FoundationModule.Enums.IconName
+local InputSize = FoundationModule.Enums.InputSize
 
-return function(p1)
-	-- upvalues: reactModule (ref), useScrollPerformanceTrackerModule (ref), view (ref), fFlagBuildDesktopReadinessModule (ref), iconButton (ref), fFlagBuildBackButtonChevronModule (ref), iconName (ref), inputSize (ref), buttonVariant (ref), text (ref), scrollView (ref), divider (ref)
-	local testId = p1.testId or "overflow-menu-page"
-	local var1 = reactModule.useRef(nil)
-	useScrollPerformanceTrackerModule(p1.scrollPerformanceIntervalName or "BuildOverflowMenuPageShell", var1)
-	local var2 = reactModule.createElement(view, {
+return function(p1) --[[ Line: 34 | Named "OverflowMenuPageShell" ]]
+	-- upvalues: ReactModule (copy), UseScrollPerformanceTrackerModule (copy), View (copy), IconButton (copy), FFlagBuildBackButtonChevronModule (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), Text (copy), ScrollView (copy), Divider (copy)
+	local TestId = p1.testId or "overflow-menu-page"
+	local UseRefResult = ReactModule.useRef(nil)
+	UseScrollPerformanceTrackerModule(p1.scrollPerformanceIntervalName or "BuildOverflowMenuPageShell", UseRefResult)
+	local Element = ReactModule.createElement(View, {
 		tag = {
 			["composition-content-body"] = true,
 			["col size-full"] = p1.disableScrolling == true,
 			["col size-full-0 auto-y"] = p1.disableScrolling ~= true
 		},
-		testId = `{testId}-content-body`
+		testId = `{TestId}-content-body`
 	}, { Content = p1.content })
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		LayoutOrder = p1.layoutOrder,
 		tag = {
-			["composition-layout-detail"] = fFlagBuildDesktopReadinessModule,
+			["composition-layout-detail"] = true,
 			["col align-x-center size-full bg-surface-0"] = true
 		},
-		testId = testId
+		testId = TestId
 	}, {
-		Header = reactModule.createElement(view, {
+		Header = ReactModule.createElement(View, {
 			LayoutOrder = 1,
 			tag = {
 				["composition-content-header"] = true,
 				["row align-y-center gap-small size-full-0 auto-y padding-y-small"] = true
 			},
-			testId = `{testId}-header`
+			testId = `{TestId}-header`
 		}, {
-			Close = reactModule.createElement(iconButton, {
+			Close = ReactModule.createElement(IconButton, {
 				LayoutOrder = 1,
 				isCircular = true,
-				icon = p1.closeIcon or (if fFlagBuildBackButtonChevronModule then iconName.ChevronLargeLeft else iconName.X),
+				icon = p1.closeIcon or (if FFlagBuildBackButtonChevronModule then IconName.ChevronLargeLeft else IconName.X),
 				onActivated = p1.onClose,
-				size = if fFlagBuildDesktopReadinessModule then inputSize.Large else inputSize.Medium,
-				testId = `{testId}-close`,
-				variant = buttonVariant.Utility
+				size = InputSize.Large,
+				testId = `{TestId}-close`,
+				variant = ButtonVariant.Utility
 			}),
-			Title = if p1.headerContent ~= nil then reactModule.createElement(text, {
+			Title = if p1.headerContent == nil then ReactModule.createElement(Text, {
 				LayoutOrder = 2,
 				tag = "fill text-heading-medium text-align-x-left text-truncate-end content-emphasis",
 				Text = p1.title
-			}) else reactModule.createElement(view, {
+			}) else ReactModule.createElement(View, {
 				LayoutOrder = 2,
 				tag = "grow auto-y",
-				testId = `{testId}-header-content`
+				testId = `{TestId}-header-content`
 			}, { Content = p1.headerContent }),
-			Trailing = if p1.headerTrailing ~= nil then nil else reactModule.createElement(view, {
+			Trailing = if p1.headerTrailing == nil then nil else ReactModule.createElement(View, {
 				LayoutOrder = 3,
 				tag = "auto-xy",
-				testId = `{testId}-header-trailing`
+				testId = `{TestId}-header-trailing`
 			}, { Content = p1.headerTrailing })
 		}),
-		Body = if p1.disableScrolling then reactModule.createElement(view, {
+		Body = if p1.disableScrolling then ReactModule.createElement(View, {
 			LayoutOrder = 2,
 			tag = "fill size-full-0 bg-surface-0",
-			testId = `{testId}-body`
-		}, { ContentBody = var2 }) else reactModule.createElement(scrollView, {
+			testId = `{TestId}-body`
+		}, { ContentBody = Element }) else ReactModule.createElement(ScrollView, {
 			LayoutOrder = 2,
 			tag = "fill size-full-0 bg-surface-0",
-			scrollingFrameRef = var1,
-			testId = `{testId}-scroll-view`,
+			scrollingFrameRef = UseRefResult,
+			testId = `{TestId}-scroll-view`,
 			scroll = {
 				AutomaticCanvasSize = Enum.AutomaticSize.Y,
 				CanvasSize = UDim2.new(1, 0, 0, 0),
 				ScrollingDirection = Enum.ScrollingDirection.Y
 			}
-		}, { ContentBody = var2 }),
-		FooterDivider = if p1.footer == nil or p1.footerDivider == false then nil else reactModule.createElement(divider, { LayoutOrder = 3, testId = `{testId}-footer-divider` }),
-		Footer = if p1.footer ~= nil then nil else reactModule.createElement(view, {
+		}, { ContentBody = Element }),
+		FooterDivider = if p1.footer == nil or p1.footerDivider == false then nil else ReactModule.createElement(Divider, { LayoutOrder = 3, testId = `{TestId}-footer-divider` }),
+		Footer = if p1.footer == nil then nil else ReactModule.createElement(View, {
 			LayoutOrder = 4,
 			tag = {
 				["composition-content-body"] = true,
 				["size-full-0 auto-y"] = true
 			},
-			testId = `{testId}-footer-body`
+			testId = `{TestId}-footer-body`
 		}, { Footer = p1.footer })
 	})
 end

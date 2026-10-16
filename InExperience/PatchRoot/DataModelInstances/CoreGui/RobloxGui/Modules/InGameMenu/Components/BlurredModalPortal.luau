@@ -1,37 +1,36 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local corePackagesService = game:GetService("CorePackages")
-local runService = game:GetService("RunService")
+﻿local CoreGui = game:GetService("CoreGui")
+local RunService = game:GetService("RunService")
 local VRService = game:GetService("VRService")
-local inGameMenuDependenciesModule = require(corePackagesService.Packages.InGameMenuDependencies)
-local roact = inGameMenuDependenciesModule.Roact
-local t = inGameMenuDependenciesModule.t
-local constantsModule = require(script:FindFirstAncestor("InGameMenu").Resources.Constants)
-local blurredModalPortal = roact.PureComponent:extend("BlurredModalPortal")
-blurredModalPortal.validateProps = t.strictInterface({
-	Enabled = t.boolean,
-	[roact.Children] = t.optional(t.table)
+local InGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
+local Roact = InGameMenuDependenciesModule.Roact
+local T = InGameMenuDependenciesModule.t
+local ConstantsModule = require(script:FindFirstAncestor("InGameMenu").Resources.Constants)
+local BlurredModalPortal = Roact.PureComponent:extend("BlurredModalPortal")
+BlurredModalPortal.validateProps = T.strictInterface({
+	Enabled = T.boolean,
+	[Roact.Children] = T.optional(T.table)
 })
 
-function blurredModalPortal.render(p1)
-	-- upvalues: roact (ref), coreGuiService (ref), constantsModule (ref)
-	return roact.createElement(roact.Portal, { target = coreGuiService }, {
-		InGameMenuModalBlur = roact.createElement("ScreenGui", {
+function BlurredModalPortal.render(p1) --[[ Line: 20 ]]
+	-- upvalues: Roact (copy), CoreGui (copy), ConstantsModule (copy)
+	return Roact.createElement(Roact.Portal, { target = CoreGui }, {
+		InGameMenuModalBlur = Roact.createElement("ScreenGui", {
 			OnTopOfCoreBlur = true,
 			IgnoreGuiInset = true,
 			Enabled = p1.props.Enabled,
-			DisplayOrder = constantsModule.DisplayOrder.BlurredModalPortal
-		}, p1.props[roact.Children])
+			DisplayOrder = ConstantsModule.DisplayOrder.BlurredModalPortal
+		}, p1.props[Roact.Children])
 	})
 end
 
-function blurredModalPortal.didUpdate(p1, p2)
-	-- upvalues: VRService (ref), runService (ref)
+function BlurredModalPortal.didUpdate(p1, p2) --[[ Line: 34 ]]
+	-- upvalues: VRService (copy), RunService (copy)
 	if VRService.VREnabled then return end
-	local enabled = p1.props.Enabled
+	local Enabled = p1.props.Enabled
 	
-	if p2.Enabled ~= enabled then
-		runService:SetRobloxGuiFocused(enabled)
+	if p2.Enabled ~= Enabled then
+		RunService:SetRobloxGuiFocused(Enabled)
 	end
 end
 
-return blurredModalPortal
+return BlurredModalPortal

@@ -1,49 +1,51 @@
-﻿local parent = script:FindFirstAncestor("SduiSharedContent").Parent
-local sduiSharedUtilitiesModule = require(parent.SduiSharedUtilities)
-local sduiLoadTimer = sduiSharedUtilitiesModule.SduiLoadTimer
-local getSduiApiStore = sduiSharedUtilitiesModule.getSduiApiStore
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local sduiActionType = sduiCoreSystemModule.SduiActionType
-local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
+﻿local Parent = script:FindFirstAncestor("SduiSharedContent").Parent
+local SduiSharedUtilitiesModule = require(Parent.SduiSharedUtilities)
+local SduiLoadTimer = SduiSharedUtilitiesModule.SduiLoadTimer
+local GetSduiApiStoreFunction = SduiSharedUtilitiesModule.getSduiApiStore
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiActionType = SduiCoreSystemModule.SduiActionType
+local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
 
-return function(p1, _, p2)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref), sduiLoadTimer (ref), getSduiApiStore (ref)
-	local var1 = if p1 then p1.actionParams else nil
+return function(p1, _, p2) --[[ Line: 17 ]]
+	-- upvalues: SduiErrorType (copy), SduiActionType (copy), SduiLoadTimer (copy), GetSduiApiStoreFunction (copy)
+	local ActionParams = p1 and p1.actionParams or nil
 	
-	if var1 == nil then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if ActionParams == nil then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
-			name = sduiActionType.RefreshFromApi
+			name = SduiActionType.RefreshFromApi
 		}, p2.appPage)
 		
 		return
 	end
-	assert(var1, "actionParams must exist")
-	local configKey = var1.configKey
+	assert(ActionParams, "actionParams must exist")
+	local ConfigKey = ActionParams.configKey
 	
-	if typeof(configKey) ~= "string" then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if typeof(ConfigKey) ~= "string" then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			propName = "configKey",
-			name = sduiActionType.RefreshFromApi,
-			message = `Invalid or missing configKey: {configKey}`
+			name = SduiActionType.RefreshFromApi,
+			message = `Invalid or missing configKey: {ConfigKey}`
 		}, p2.appPage)
 		
 		return
 	end
-	local surfaceKey = var1.surfaceKey
+	local SurfaceKey = ActionParams.surfaceKey
 	
-	if typeof(surfaceKey) == "string" then
-		local var2 = sduiLoadTimer.createLoadTimer(surfaceKey)
-		var2.start("refresh")
+	if typeof(SurfaceKey) ~= "string" then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
+			propName = "surfaceKey",
+			name = SduiActionType.RefreshFromApi,
+			message = `Invalid or missing surfaceKey: {SurfaceKey}`
+		}, p2.appPage)
 		
-		return getSduiApiStore().refreshFromApi({ configKey = configKey, loadTimer = var2 }):finally(function()
-			-- upvalues: var2 (ref)
-			var2.logRefreshComplete()
-		end)
+		return
 	end
-	p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
-		propName = "surfaceKey",
-		name = sduiActionType.RefreshFromApi,
-		message = `Invalid or missing surfaceKey: {surfaceKey}`
-	}, p2.appPage)
+	local LoadTimer = SduiLoadTimer.createLoadTimer(SurfaceKey)
+	LoadTimer.start("refresh")
+	
+	return GetSduiApiStoreFunction().refreshFromApi({ configKey = ConfigKey, loadTimer = LoadTimer }):finally(function() --[[ Line: 59 ]]
+		-- upvalues: LoadTimer (copy)
+		LoadTimer.logRefreshComplete()
+	end)
 end

@@ -1,16 +1,16 @@
-﻿local isMakeupAssetTypeModule = require(script:FindFirstAncestor("AvatarExperienceCommon").Utils.isMakeupAssetType)
-local selectTryOnItemsModule = require(script.Parent.selectTryOnItems)
-local selectEquippedLayeredMakeupAssetsModule = require(script.Parent.selectEquippedLayeredMakeupAssets)
+﻿local IsMakeupAssetTypeModule = require(script:FindFirstAncestor("AvatarExperienceCommon").Utils.isMakeupAssetType)
+local SelectTryOnItemsModule = require(script.Parent.selectTryOnItems)
+local SelectEquippedLayeredMakeupAssetsModule = require(script.Parent.selectEquippedLayeredMakeupAssets)
 
-return function(value)
-	-- upvalues: selectEquippedLayeredMakeupAssetsModule (ref), selectTryOnItemsModule (ref), isMakeupAssetTypeModule (ref)
-	local count = #selectEquippedLayeredMakeupAssetsModule(value)
-	local var1 = 0
+return function(p1): number --[[ Line: 10 | Named "selectTotalLayeredMakeupAssets" ]]
+	-- upvalues: SelectEquippedLayeredMakeupAssetsModule (copy), SelectTryOnItemsModule (copy), IsMakeupAssetTypeModule (copy)
+	local Count = #SelectEquippedLayeredMakeupAssetsModule(p1)
+	local Count1 = 0
 	
-	for i, v in selectTryOnItemsModule(value) do
-		if v.selectedInTryOnManager and v.itemType and isMakeupAssetTypeModule(v.itemSubType) then
-			var1 += 1
+	for _, value in SelectTryOnItemsModule(p1) do
+		if value.selectedInTryOnManager and value.itemType and IsMakeupAssetTypeModule(value.itemSubType) then
+			Count1 += 1
 		end
 	end
-	return count + var1
+	return Count + Count1
 end

@@ -1,10 +1,10 @@
-﻿local dependenciesModule = require(script:FindFirstAncestor("PYMKCarousel").dependencies)
-local roduxFriends = dependenciesModule.RoduxFriends
-local convertActions = dependenciesModule.convertActions
-local friendsActionAdaptor = dependenciesModule.friendsActionAdaptor
-local llama = dependenciesModule.llama
-local friendsOmniActionAdaptorModule = require(script.Parent.friendsOmniActionAdaptor)
-local t = {
+﻿local DependenciesModule = require(script:FindFirstAncestor("PYMKCarousel").dependencies)
+local RoduxFriends = DependenciesModule.RoduxFriends
+local ConvertActionsFunction = DependenciesModule.convertActions
+local FriendsActionAdaptorFunction = DependenciesModule.friendsActionAdaptor
+local Llama = DependenciesModule.llama
+local FriendsOmniActionAdaptorModule = require(script.Parent.friendsOmniActionAdaptor)
+local config = {
 	countsByUserId = {},
 	byUserId = {},
 	requests = {
@@ -19,14 +19,14 @@ local t = {
 	friendshipStatus = {},
 	friendsRankByUserId = {}
 }
-local var1 = roduxFriends.installReducer()
+local InstallReducerResult = RoduxFriends.installReducer()
 
-local _ = function(p1)
-	-- upvalues: llama (ref), friendsActionAdaptor (ref), roduxFriends (ref), friendsOmniActionAdaptorModule (ref)
-	return llama.Dictionary.join(friendsActionAdaptor(roduxFriends), friendsOmniActionAdaptorModule(p1))
+local function _(p1) --[[ Line: 30 ]]
+	-- upvalues: Llama (copy), FriendsActionAdaptorFunction (copy), RoduxFriends (copy), FriendsOmniActionAdaptorModule (copy)
+	return Llama.Dictionary.join(FriendsActionAdaptorFunction(RoduxFriends), FriendsOmniActionAdaptorModule(p1))
 end
 
-return function(p1)
-	-- upvalues: convertActions (ref), var1 (ref), llama (ref), friendsActionAdaptor (ref), roduxFriends (ref), friendsOmniActionAdaptorModule (ref), t (ref)
-	return convertActions(var1, llama.Dictionary.join(friendsActionAdaptor(roduxFriends), friendsOmniActionAdaptorModule(p1)), t)
+return function(p1) --[[ Line: 34 ]]
+	-- upvalues: ConvertActionsFunction (copy), InstallReducerResult (copy), Llama (copy), FriendsActionAdaptorFunction (copy), RoduxFriends (copy), FriendsOmniActionAdaptorModule (copy), config (copy)
+	return ConvertActionsFunction(InstallReducerResult, Llama.Dictionary.join(FriendsActionAdaptorFunction(RoduxFriends), FriendsOmniActionAdaptorModule(p1)), config)
 end

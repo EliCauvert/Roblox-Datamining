@@ -1,25 +1,25 @@
-﻿local consoleModule = require(script.Parent.console)
-local reactGlobalsModule = require(script.Parent.Parent.ReactGlobals)
-local t = {}
-setmetatable(t, {
+﻿local ConsoleModule = require(script.Parent.console)
+local ReactGlobalsModule = require(script.Parent.Parent.ReactGlobals)
+local UninitializedStateModule = {}
+setmetatable(UninitializedStateModule, {
 	__metatable = "UninitializedState",
-	__index = function(_, _)
-		-- upvalues: reactGlobalsModule (ref), consoleModule (ref)
-		if reactGlobalsModule.__DEV__ then
-			consoleModule.warn("Attempted to access uninitialized state. Use setState to initialize state")
+	__index = function(_, _) --[[ Line: 26 ]]
+		-- upvalues: ReactGlobalsModule (copy), ConsoleModule (copy)
+		if ReactGlobalsModule.__DEV__ then
+			ConsoleModule.warn("Attempted to access uninitialized state. Use setState to initialize state")
 		end
 		return nil
 	end,
-	__newindex = function(_, _)
-		-- upvalues: reactGlobalsModule (ref), consoleModule (ref)
-		if reactGlobalsModule.__DEV__ then
-			consoleModule.error("Attempted to directly mutate state. Use setState to assign new values to state.")
+	__newindex = function(_, _) --[[ Line: 34 ]]
+		-- upvalues: ReactGlobalsModule (copy), ConsoleModule (copy)
+		if ReactGlobalsModule.__DEV__ then
+			ConsoleModule.error("Attempted to directly mutate state. Use setState to assign new values to state.")
 		end
 		return nil
 	end,
-	__tostring = function(_)
+	__tostring = function(_): string --[[ Line: 42 ]]
 		return "<uninitialized component state>"
 	end
 })
 
-return t
+return UninitializedStateModule

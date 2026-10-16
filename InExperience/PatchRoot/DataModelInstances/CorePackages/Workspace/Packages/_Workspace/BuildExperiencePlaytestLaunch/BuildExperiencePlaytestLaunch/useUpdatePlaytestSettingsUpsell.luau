@@ -1,30 +1,26 @@
-﻿local parent = script:FindFirstAncestor("BuildExperiencePlaytestLaunch").Parent
-local centralOverlayModule = require(parent.CentralOverlay)
-local foundationModule = require(parent.Foundation)
-local localizationModule = require(parent.Localization)
-local navigationModule = require(parent.Navigation)
-local reactModule = require(parent.React)
-local roactUtilsModule = require(parent.RoactUtils)
-local robloxAppEnumsModule = require(parent.RobloxAppEnums)
-local urlBuilder = require(parent.UrlBuilder).UrlBuilder
-local useAppPolicy = require(parent.UniversalAppPolicy).useAppPolicy
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local useNavigation = navigationModule.useNavigation
-local useLocalization = localizationModule.Hooks.useLocalization
-local appPage = robloxAppEnumsModule.AppPage
-local centralOverlayType = robloxAppEnumsModule.CentralOverlayType
-local setCentralOverlay = centralOverlayModule.Actions.SetCentralOverlay
-local closeCentralOverlay = centralOverlayModule.Thunks.CloseCentralOverlay
-local dialogSize = foundationModule.Enums.DialogSize
+﻿local Parent = script:FindFirstAncestor("BuildExperiencePlaytestLaunch").Parent
+local CentralOverlayModule = require(Parent.CentralOverlay)
+local ReactModule = require(Parent.React)
+local RobloxAppEnumsModule = require(Parent.RobloxAppEnums)
+local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
+local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local AppPage = RobloxAppEnumsModule.AppPage
+local CentralOverlayType = RobloxAppEnumsModule.CentralOverlayType
+local SetCentralOverlayFunction = CentralOverlayModule.Actions.SetCentralOverlay
+local CloseCentralOverlayFunction = CentralOverlayModule.Thunks.CloseCentralOverlay
+local DialogSize = require(Parent.Foundation).Enums.DialogSize
 
-return function()
-	-- upvalues: useDispatch (ref), useNavigation (ref), useAppPolicy (ref), useLocalization (ref), reactModule (ref), setCentralOverlay (ref), centralOverlayType (ref), dialogSize (ref), closeCentralOverlay (ref), appPage (ref), urlBuilder (ref)
-	local var1 = useDispatch()
-	local var2 = useNavigation()
-	local var3 = useAppPolicy(function(p1)
+return function() --[[ Line: 26 | Named "useUpdatePlaytestSettingsUpsell" ]]
+	-- upvalues: UseDispatchFunction (copy), UseNavigationFunction (copy), UseAppPolicyFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), DialogSize (copy), CloseCentralOverlayFunction (copy), AppPage (copy), UrlBuilder (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseNavigationResult = UseNavigationFunction()
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p1) --[[ Line: 30 ]]
 		return p1.getWebViewSupport()
 	end)
-	local var4 = useLocalization({
+	local FeatureBuildActionSettings = UseLocalizationFunction({
 		title = "Feature.Build.Action.Settings",
 		body = "Feature.Build.Message.UpdateSettingsToPlaytest",
 		updateSettings = "Feature.Build.Action.OpenSettings",
@@ -32,35 +28,37 @@ return function()
 		ok = "CommonUI.Controls.Action.OK"
 	})
 	
-	return reactModule.useCallback(function()
-		-- upvalues: var1 (ref), setCentralOverlay (copy), centralOverlayType (copy), var4 (ref), var3 (ref), dialogSize (copy), closeCentralOverlay (copy), var2 (ref), appPage (copy), urlBuilder (copy)
-		var1(setCentralOverlay(centralOverlayType.ConfirmationDialog, {
+	return (ReactModule.useCallback(function() --[[ Line: 43 ]]
+		-- upvalues: UseDispatchResult (copy), SetCentralOverlayFunction (upval), CentralOverlayType (upval), FeatureBuildActionSettings (copy), UseAppPolicyResult (copy), DialogSize (upval), CloseCentralOverlayFunction (upval), UseNavigationResult (copy), AppPage (upval), UrlBuilder (upval)
+		UseDispatchResult(SetCentralOverlayFunction(CentralOverlayType.ConfirmationDialog, {
 			orientButtonsVertically = true,
 			showCloseButton = false,
-			title = var4.title,
-			body = var4.body,
-			confirmButtonText = var4.updateSettings,
-			cancelButtonText = if var3 then var4.cancel else var4.ok,
-			hideConfirmButton = not var3,
-			size = dialogSize.Small,
-			onConfirm = function()
-				-- upvalues: var1 (copy), closeCentralOverlay (copy), var2 (copy), appPage (copy), urlBuilder (copy), var4 (copy)
-				var1(closeCentralOverlay())
+			title = FeatureBuildActionSettings.title,
+			body = FeatureBuildActionSettings.body,
+			confirmButtonText = FeatureBuildActionSettings.updateSettings,
+			cancelButtonText = if UseAppPolicyResult then FeatureBuildActionSettings.cancel else FeatureBuildActionSettings.ok,
+			hideConfirmButton = not UseAppPolicyResult,
+			size = DialogSize.Small,
+			onConfirm = function() --[[ Line: 54 ]]
+				-- upvalues: UseDispatchResult (upval), CloseCentralOverlayFunction (upval), UseNavigationResult (upval), AppPage (upval), UrlBuilder (upval), FeatureBuildActionSettings (upval)
+				UseDispatchResult(CloseCentralOverlayFunction())
 				
-				if var2 ~= nil then
-					var2.push(appPage.GenericWebPage, {
-						detail = urlBuilder.static.settings.account(),
-						extraProps = { title = var4.updateSettings }
+				if UseNavigationResult ~= nil then
+					UseNavigationResult.push(AppPage.GenericWebPage, {
+						detail = UrlBuilder.static.settings.account(),
+						extraProps = { title = FeatureBuildActionSettings.updateSettings }
 					})
 				end
 			end,
-			onCancel = function()
-				-- upvalues: var1 (copy), closeCentralOverlay (copy)
-				var1(closeCentralOverlay())
+			onCancel = function() --[[ Line: 65 ]]
+				-- upvalues: UseDispatchResult (upval), CloseCentralOverlayFunction (upval)
+				UseDispatchResult(CloseCentralOverlayFunction())
 			end
 		}))
 	end, {
-		var1, var2, var3, var4.title, var4.body, var4.updateSettings, var4.cancel,
-		var4.ok
-	})
+		UseDispatchResult, UseNavigationResult, UseAppPolicyResult,
+		FeatureBuildActionSettings.title, FeatureBuildActionSettings.body,
+		FeatureBuildActionSettings.updateSettings, FeatureBuildActionSettings.cancel,
+		FeatureBuildActionSettings.ok
+	}))
 end

@@ -1,1 +1,3 @@
-﻿return require(script.Parent.FFlagLuaAppDesktopMediaGalleryTelemetry) and (require(script.Parent.FFlagLuaAppEdpMediaGalleryRedesign) and game:DefineFastFlag("LuaAppEdpMediaGalleryRedesignTelemetry", false))
+﻿local FFlagLuaAppEdpMediaGalleryRedesignModule = require(script.Parent.FFlagLuaAppEdpMediaGalleryRedesign)
+
+return require(script.Parent.FFlagLuaAppDesktopMediaGalleryTelemetry) and (FFlagLuaAppEdpMediaGalleryRedesignModule and game:DefineFastFlag("LuaAppEdpMediaGalleryRedesignTelemetry", false))

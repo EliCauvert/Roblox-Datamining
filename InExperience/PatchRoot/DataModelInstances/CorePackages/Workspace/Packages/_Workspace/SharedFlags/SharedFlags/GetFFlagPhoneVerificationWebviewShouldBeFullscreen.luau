@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("PhoneVerificationWebviewShouldBeFullscreen1", false)
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastFlag("PhoneVerificationWebviewShouldBeFullscreen1")
 end

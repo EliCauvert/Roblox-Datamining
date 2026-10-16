@@ -1,42 +1,42 @@
-﻿local slotGeometryModule = require(script:FindFirstAncestor("ViewRecyclerRoblox").RobloxAdapter.SlotGeometry)
-local guiService = game:GetService("GuiService")
-local t = {
-	clearSelection = function(p1)
-		-- upvalues: guiService (ref)
-		local selectedObject = guiService.SelectedObject
+﻿local SlotGeometryModule = require(script:FindFirstAncestor("ViewRecyclerRoblox").RobloxAdapter.SlotGeometry)
+local GuiService = game:GetService("GuiService")
+local ReparentableHostModule = {
+	clearSelection = function(Ancestor) --[[ Line: 13 ]]
+		-- upvalues: GuiService (copy)
+		local SelectedObject = GuiService.SelectedObject
 		
-		if selectedObject ~= nil and (selectedObject == p1 or selectedObject:IsDescendantOf(p1)) then
-			guiService.SelectedObject = nil
+		if SelectedObject ~= nil and (SelectedObject == Ancestor or SelectedObject:IsDescendantOf(Ancestor)) then
+			GuiService.SelectedObject = nil
 		end
 	end,
-	create = function(p1)
-		local frame = Instance.new("Frame")
-		frame.Name = p1
-		frame.BackgroundTransparency = 1
-		frame.BorderSizePixel = 0
-		frame.Position = UDim2.new()
-		frame.Size = UDim2.new()
+	create = function(Name) --[[ Line: 20 ]]
+		local Frame = Instance.new("Frame")
+		Frame.Name = Name
+		Frame.BackgroundTransparency = 1
+		Frame.BorderSizePixel = 0
+		Frame.Position = UDim2.new()
+		Frame.Size = UDim2.new()
 		
-		return frame
+		return Frame
 	end,
-	place = function(p1, p2)
-		-- upvalues: slotGeometryModule (ref)
+	place = function(p1, p2) --[[ Line: 30 ]]
+		-- upvalues: SlotGeometryModule (copy)
 		p1.AutomaticSize = p2.automaticSize
-		p1.Size = slotGeometryModule.getHostSize(p2.automaticSize)
+		p1.Size = SlotGeometryModule.getHostSize(p2.automaticSize)
 		p1.Parent = p2.placeholder
 	end
 }
 
-function t.detach(p1)
-	-- upvalues: t (ref)
-	t.clearSelection(p1)
+function ReparentableHostModule.detach(p1) --[[ Line: 36 ]]
+	-- upvalues: ReparentableHostModule (copy)
+	ReparentableHostModule.clearSelection(p1)
 	p1.Parent = nil
 end
 
-function t.destroy(p1)
-	-- upvalues: t (ref)
-	t.detach(p1)
-	p1:Destroy()
+function ReparentableHostModule.destroy(Object) --[[ Line: 41 ]]
+	-- upvalues: ReparentableHostModule (copy)
+	ReparentableHostModule.detach(Object)
+	Object:Destroy()
 end
 
-return t
+return ReparentableHostModule

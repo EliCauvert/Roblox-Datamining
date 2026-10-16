@@ -1,25 +1,25 @@
-﻿local parent = script:FindFirstAncestor("DataHydration").Parent
-local urlBuilder = require(parent.UrlBuilder).UrlBuilder
-local url = require(parent.Http).Url
+﻿local Parent = script:FindFirstAncestor("DataHydration").Parent
+local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
+local Url = require(Parent.Http).Url
 
 return {
-	buildFollowingStatusUrl = function(p1, p2)
-		-- upvalues: urlBuilder (ref), url (ref)
-		return urlBuilder.new({
+	buildFollowingStatusUrl = function(UserId, UniverseId) --[[ Line: 14 ]]
+		-- upvalues: UrlBuilder (copy), Url (copy)
+		return UrlBuilder.new({
 			path = "v1/users/{userId}/universes/{universeId}/status",
-			base = url.FOLLOWINGS_URL
-		})({ userId = p1, universeId = p2 })
+			base = Url.FOLLOWINGS_URL
+		})({ userId = UserId, universeId = UniverseId })
 	end,
-	buildFollowingUpdateUrl = function(p1, p2)
-		-- upvalues: urlBuilder (ref), url (ref)
-		return urlBuilder.new({
+	buildFollowingUpdateUrl = function(UserId, UniverseId) --[[ Line: 29 ]]
+		-- upvalues: UrlBuilder (copy), Url (copy)
+		return UrlBuilder.new({
 			path = "v1/users/{userId}/universes/{universeId}",
-			base = url.FOLLOWINGS_URL
-		})({ userId = p1, universeId = p2 })
+			base = Url.FOLLOWINGS_URL
+		})({ userId = UserId, universeId = UniverseId })
 	end,
-	FOLLOWING_UPDATE_URL = urlBuilder.new({ path = "v1/users/universes/", base = url.FOLLOWINGS_URL }),
-	FOLLOWING_STATUS_URL = urlBuilder.new({
+	FOLLOWING_UPDATE_URL = UrlBuilder.new({ path = "v1/users/universes/", base = Url.FOLLOWINGS_URL }),
+	FOLLOWING_STATUS_URL = UrlBuilder.new({
 		path = "v1/users/universes/status",
-		base = url.FOLLOWINGS_URL
+		base = Url.FOLLOWINGS_URL
 	})
 }

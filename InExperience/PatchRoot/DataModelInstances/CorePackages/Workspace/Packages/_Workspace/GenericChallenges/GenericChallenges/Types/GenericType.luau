@@ -1,6 +1,5 @@
-﻿local genericChallenges = script:FindFirstAncestor("GenericChallenges")
-local addRawValueMethodToEnumModule = require(genericChallenges.Utils.addRawValueMethodToEnum)
-local t = {
+﻿local GenericChallenges = script:FindFirstAncestor("GenericChallenges")
+local config = {
 	Captcha = "captcha",
 	TwoStepVerification = "twostepverification",
 	SecurityQuestions = "securityquestions",
@@ -18,7 +17,7 @@ local t = {
 	CaptchaV2 = "captchav2",
 	Turnstile = "turnstile"
 }
-local var1 = require(genericChallenges.Parent.enumerate)(script.Name, t)
-addRawValueMethodToEnumModule(var1, t)
+local v1 = require(GenericChallenges.Parent.enumerate)(script.Name, config)
+require(GenericChallenges.Utils.addRawValueMethodToEnum)(v1, config)
 
-return var1
+return v1

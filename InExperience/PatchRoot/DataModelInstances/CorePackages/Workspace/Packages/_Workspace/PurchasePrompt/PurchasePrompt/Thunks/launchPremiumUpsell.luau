@@ -1,63 +1,64 @@
-﻿local parent = script.Parent.Parent
-local playersService = game:GetService("Players")
-local errorOccurredModule = require(parent.Actions.ErrorOccurred)
-local purchaseCompleteRecievedModule = require(parent.Actions.PurchaseCompleteRecieved)
-local setPromptStateModule = require(parent.Actions.SetPromptState)
-local setWindowStateModule = require(parent.Actions.SetWindowState)
-local upsellFlowModule = require(parent.Enums.UpsellFlow)
-local promptStateModule = require(parent.Enums.PromptState)
-local purchaseErrorModule = require(parent.Enums.PurchaseError)
-local windowStateModule = require(parent.Enums.WindowState)
-local getUpsellFlowModule = require(parent.NativeUpsell.getUpsellFlow)
-local analyticsModule = require(parent.Services.Analytics)
-local platformInterfaceModule = require(parent.Services.PlatformInterface)
-local externalSettingsModule = require(parent.Services.ExternalSettings)
-local hideWindowModule = require(parent.Thunks.hideWindow)
-local thunkModule = require(parent.Thunk)
+﻿local Parent = script.Parent.Parent
+local Players = game:GetService("Players")
+local ErrorOccurredModule = require(Parent.Actions.ErrorOccurred)
+local PurchaseCompleteRecievedModule = require(Parent.Actions.PurchaseCompleteRecieved)
+local SetPromptStateModule = require(Parent.Actions.SetPromptState)
+local SetWindowStateModule = require(Parent.Actions.SetWindowState)
+local UpsellFlowModule = require(Parent.Enums.UpsellFlow)
+local PromptStateModule = require(Parent.Enums.PromptState)
+local PurchaseErrorModule = require(Parent.Enums.PurchaseError)
+local WindowStateModule = require(Parent.Enums.WindowState)
+local GetUpsellFlowModule = require(Parent.NativeUpsell.getUpsellFlow)
+local AnalyticsModule = require(Parent.Services.Analytics)
+local PlatformInterfaceModule = require(Parent.Services.PlatformInterface)
+local ExternalSettingsModule = require(Parent.Services.ExternalSettings)
+local HideWindowModule = require(Parent.Thunks.hideWindow)
+local ThunkModule = require(Parent.Thunk)
 local list = {
-	analyticsModule,
-	platformInterfaceModule,
-	externalSettingsModule
+	AnalyticsModule,
+	PlatformInterfaceModule,
+	ExternalSettingsModule
 }
 
-return function()
-	-- upvalues: thunkModule (ref), list (ref), platformInterfaceModule (ref), externalSettingsModule (ref), analyticsModule (ref), purchaseCompleteRecievedModule (ref), setWindowStateModule (ref), windowStateModule (ref), getUpsellFlowModule (ref), upsellFlowModule (ref), setPromptStateModule (ref), promptStateModule (ref), hideWindowModule (ref), playersService (ref), errorOccurredModule (ref), purchaseErrorModule (ref)
-	return thunkModule.new(script.Name, list, function(p1, p2)
-		-- upvalues: platformInterfaceModule (copy), externalSettingsModule (copy), analyticsModule (copy), purchaseCompleteRecievedModule (copy), setWindowStateModule (copy), windowStateModule (copy), getUpsellFlowModule (copy), upsellFlowModule (copy), setPromptStateModule (copy), promptStateModule (copy), hideWindowModule (copy), playersService (copy), errorOccurredModule (copy), purchaseErrorModule (copy)
-		local var1 = p2[platformInterfaceModule]
-		local var2 = p2[externalSettingsModule]
-		local var3 = p2[analyticsModule]
-		local premiumProductInfo = p1:getState().premiumProductInfo
+return function() --[[ Line: 25 | Named "launchPremiumUpsell" ]]
+	-- upvalues: ThunkModule (copy), list (copy), PlatformInterfaceModule (copy), ExternalSettingsModule (copy), AnalyticsModule (copy), PurchaseCompleteRecievedModule (copy), SetWindowStateModule (copy), WindowStateModule (copy), GetUpsellFlowModule (copy), UpsellFlowModule (copy), SetPromptStateModule (copy), PromptStateModule (copy), HideWindowModule (copy), Players (copy), ErrorOccurredModule (copy), PurchaseErrorModule (copy)
+	return ThunkModule.new(script.Name, list, function(p1, p2) --[[ Line: 26 ]]
+		-- upvalues: PlatformInterfaceModule (upval), ExternalSettingsModule (upval), AnalyticsModule (upval), PurchaseCompleteRecievedModule (upval), SetWindowStateModule (upval), WindowStateModule (upval), GetUpsellFlowModule (upval), UpsellFlowModule (upval), SetPromptStateModule (upval), PromptStateModule (upval), HideWindowModule (upval), Players (upval), ErrorOccurredModule (upval), PurchaseErrorModule (upval)
+		local v1 = p2[PlatformInterfaceModule]
+		local v2 = p2[ExternalSettingsModule]
+		local v3 = p2[AnalyticsModule]
+		local PremiumProductInfo = p1:getState().premiumProductInfo
 		
-		if var2.isStudio() then
-			var1.signalMockPurchasePremium()
-			p1:dispatch(purchaseCompleteRecievedModule())
+		if v2.isStudio() then
+			v1.signalMockPurchasePremium()
+			p1:dispatch(PurchaseCompleteRecievedModule())
 			
-			return p1:dispatch(setWindowStateModule(windowStateModule.Hidden))
+			return p1:dispatch(SetWindowStateModule(WindowStateModule.Hidden))
 		end
-		local var4 = getUpsellFlowModule(var2.getPlatform())
-		var3.signalPremiumUpsellConfirmed()
+		local UpsellFlowModule1 = GetUpsellFlowModule(v2.getPlatform())
+		v3.signalPremiumUpsellConfirmed()
 		
-		if var4 == upsellFlowModule.Web then
-			var1.startPremiumUpsell(premiumProductInfo.productId)
-			p1:dispatch(setPromptStateModule(promptStateModule.UpsellInProgress))
-			p1:dispatch(hideWindowModule())
-			
-			return
-		elseif var4 ~= upsellFlowModule.Mobile then
-			p1:dispatch(errorOccurredModule(purchaseErrorModule.PremiumUnavailablePlatform))
+		if UpsellFlowModule1 == UpsellFlowModule.Web then
+			v1.startPremiumUpsell(PremiumProductInfo.productId)
+			p1:dispatch(SetPromptStateModule(PromptStateModule.UpsellInProgress))
+			p1:dispatch(HideWindowModule())
 			
 			return
 		end
-		local mobileProductId = premiumProductInfo.mobileProductId
-		local localPlayer = playersService.LocalPlayer
+		if UpsellFlowModule1 ~= UpsellFlowModule.Mobile then
+			p1:dispatch(ErrorOccurredModule(PurchaseErrorModule.PremiumUnavailablePlatform))
+			
+			return
+		end
+		local MobileProductId = PremiumProductInfo.mobileProductId
+		local LocalPlayer = Players.LocalPlayer
 		
 		if game:GetEngineFeature("NativePurchaseWithLocalPlayer") then
-			var1.promptNativePurchaseWithLocalPlayer(mobileProductId)
+			v1.promptNativePurchaseWithLocalPlayer(MobileProductId)
 		else
-			var1.promptNativePurchase(localPlayer, mobileProductId)
+			v1.promptNativePurchase(LocalPlayer, MobileProductId)
 		end
-		p1:dispatch(setPromptStateModule(promptStateModule.UpsellInProgress))
-		p1:dispatch(hideWindowModule())
+		p1:dispatch(SetPromptStateModule(PromptStateModule.UpsellInProgress))
+		p1:dispatch(HideWindowModule())
 	end)
 end

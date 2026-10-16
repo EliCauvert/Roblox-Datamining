@@ -1,1 +1,1 @@
-﻿return require(script.Coachmark)
+﻿return (require(script.Coachmark))

@@ -1,127 +1,137 @@
-﻿local viewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
-local _ = require(viewRecyclerReact.ReactAdapter.Private.CompositionPlacement)
-local compositionPlacementSuspendedModule = require(viewRecyclerReact.ReactAdapter.Private.CompositionPlacementSuspended)
-local reactModule = require(viewRecyclerReact.Parent.React)
-local recyclableViewContextModule = require(viewRecyclerReact.ReactAdapter.Private.RecyclableViewContext)
-local recyclableViewReadinessModule = require(viewRecyclerReact.ReactAdapter.RecyclableViewReadiness)
-local recyclableViewRegistryModule = require(viewRecyclerReact.ReactAdapter.Private.RecyclableViewRegistry)
-local signalsModule = require(viewRecyclerReact.Parent.Signals)
-local signalsReactModule = require(viewRecyclerReact.Parent.SignalsReact)
-local var1 = signalsModule.createSignal(nil)
-local var2 = signalsModule.createSignal(nil)
+﻿local ViewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
+local _ = require(ViewRecyclerReact.ReactAdapter.Private.CompositionPlacement)
+local CompositionPlacementSuspendedModule = require(ViewRecyclerReact.ReactAdapter.Private.CompositionPlacementSuspended)
+local ReactModule = require(ViewRecyclerReact.Parent.React)
+local RecyclableViewContextModule = require(ViewRecyclerReact.ReactAdapter.Private.RecyclableViewContext)
+local RecyclableViewReadinessModule = require(ViewRecyclerReact.ReactAdapter.RecyclableViewReadiness)
+local RecyclableViewRegistryModule = require(ViewRecyclerReact.ReactAdapter.Private.RecyclableViewRegistry)
+local SignalsModule = require(ViewRecyclerReact.Parent.Signals)
+local SignalsReactModule = require(ViewRecyclerReact.Parent.SignalsReact)
+local Signal = SignalsModule.createSignal(nil)
+local Signal1 = SignalsModule.createSignal(nil)
 
-local function InlineRecyclableView(p1)
-	-- upvalues: reactModule (ref), signalsModule (ref), var2 (ref), var1 (ref), recyclableViewRegistryModule (ref), recyclableViewContextModule (ref)
-	local var3 = reactModule.useState(function()
-		-- upvalues: signalsModule (copy), p1 (ref), var2 (copy), var1 (copy)
-		local var4, var5 = signalsModule.createSignal(p1.componentProps)
+local function InlineRecyclableView(p1) --[[ Line: 33 ]]
+	-- upvalues: ReactModule (copy), SignalsModule (copy), Signal1 (copy), Signal (copy), RecyclableViewRegistryModule (copy), RecyclableViewContextModule (copy)
+	local UseStateResult = ReactModule.useState(function() --[[ Line: 34 ]]
+		-- upvalues: SignalsModule (upval), p1 (copy), Signal1 (upval), Signal (upval)
+		local Signal2, Signal2_1 = SignalsModule.createSignal(p1.componentProps)
 		
 		return {
 			context = {
-				placement = var2,
-				assignmentSignal = var1,
-				itemSignal = var4,
-				itemKeySignal = signalsModule.createSignal({})
+				placement = Signal1,
+				assignmentSignal = Signal,
+				itemSignal = Signal2,
+				itemKeySignal = SignalsModule.createSignal({})
 			},
-			signal = var4,
-			set = var5,
+			signal = Signal2,
+			set = Signal2_1,
 			value = p1.componentProps
 		}
 	end)
 	
-	if var3.value ~= p1.componentProps then
-		var3.value = p1.componentProps
-		var3.set(p1.componentProps)
+	if UseStateResult.value ~= p1.componentProps then
+		UseStateResult.value = p1.componentProps
+		UseStateResult.set(p1.componentProps)
 	end
-	local var4 = reactModule.useState(function()
-		-- upvalues: reactModule (copy)
-		return { binding = reactModule.createBinding(false) }
+	local UseStateResult1 = ReactModule.useState(function() --[[ Line: 53 ]]
+		-- upvalues: ReactModule (upval)
+		return { binding = ReactModule.createBinding(false) }
 	end)
-	local metadata = recyclableViewRegistryModule.getMetadata(p1.viewType)
-	assert(metadata ~= nil, "createRecyclableView: unknown Recyclable view type")
+	local Metadata = RecyclableViewRegistryModule.getMetadata(p1.viewType)
+	assert(Metadata ~= nil, "createRecyclableView: unknown Recyclable view type")
 	
-	return reactModule.createElement(recyclableViewContextModule.Provider, { value = var3.context }, {
-		Content = reactModule.createElement(metadata.signalComponent, { itemSignal = var3.signal, pending = var4.binding })
+	return ReactModule.createElement(RecyclableViewContextModule.Provider, { value = UseStateResult.context }, {
+		Content = ReactModule.createElement(Metadata.signalComponent, {
+			itemSignal = UseStateResult.signal,
+			pending = UseStateResult1.binding
+		})
 	})
 end
 
-local function RecyclableViewComponent(p1)
-	-- upvalues: reactModule (ref), recyclableViewContextModule (ref), compositionPlacementSuspendedModule (ref), var2 (ref), signalsReactModule (ref), var1 (ref), InlineRecyclableView (ref)
-	local var3 = reactModule.useContext(recyclableViewContextModule)
-	local var4 = var3 == false
-	local var5 = if var4 or var3 == compositionPlacementSuspendedModule then nil else var3
-	local var6 = signalsReactModule.useSignalState(if var5 == nil then var2 else var5.placement)
-	local var7 = reactModule.useState(function()
+local function RecyclableViewComponent(p1) --[[ Line: 69 ]]
+	-- upvalues: ReactModule (copy), RecyclableViewContextModule (copy), CompositionPlacementSuspendedModule (copy), Signal1 (copy), SignalsReactModule (copy), Signal (copy), InlineRecyclableView (copy)
+	local UseContextResult = ReactModule.useContext(RecyclableViewContextModule)
+	local IsNotUseContextResult = UseContextResult == false
+	local UseContextResult1 = if IsNotUseContextResult or UseContextResult == CompositionPlacementSuspendedModule then nil else UseContextResult
+	local UseSignalStateResult = SignalsReactModule.useSignalState(if UseContextResult1 == nil then Signal1 else UseContextResult1.placement)
+	local UseStateResult = ReactModule.useState(function() --[[ Line: 75 ]]
 		return {}
 	end)
-	local var8 = reactModule.useRef(nil)
-	local var9 = reactModule.useRef(nil)
-	local var10 = reactModule.useRef(p1.componentProps)
-	var10.current = p1.componentProps
-	local var11 = signalsReactModule.useSignalState(if var5 == nil then var1 else var5.assignmentSignal)
-	local viewType = p1.viewType
-	reactModule.useLayoutEffect(function()
-		-- upvalues: var5 (ref), var6 (ref), viewType (ref), var7 (ref), var10 (ref), var8 (ref), var9 (ref)
-		if var5 == nil or var6 == nil then
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseRefResult2 = ReactModule.useRef(p1.componentProps)
+	UseRefResult2.current = p1.componentProps
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(if UseContextResult1 == nil then Signal else UseContextResult1.assignmentSignal)
+	local ViewType = p1.viewType
+	ReactModule.useLayoutEffect(function() --[[ Line: 86 ]]
+		-- upvalues: UseContextResult1 (copy), UseSignalStateResult (copy), ViewType (copy), UseStateResult (copy), UseRefResult2 (copy), UseRefResult (copy), UseRefResult1 (copy)
+		if UseContextResult1 == nil or UseSignalStateResult == nil then
 			return nil
+		else
+			local RegisterResult = UseSignalStateResult.register(ViewType, UseStateResult, UseContextResult1.assignmentSignal, UseRefResult2.current, UseRefResult.current)
+			UseRefResult1.current = RegisterResult
+			
+			return function() --[[ Line: 99 ]]
+				-- upvalues: UseRefResult1 (upval), RegisterResult (copy)
+				UseRefResult1.current = nil
+				RegisterResult.unregister()
+			end
 		end
-		local var12 = var6.register(viewType, var7, var5.assignmentSignal, var10.current, var8.current)
-		var9.current = var12
+	end, {
+		UseContextResult1,
+		UseSignalStateResult,
+		UseStateResult,
+		ViewType
+	})
+	local ComponentProps = p1.componentProps
+	ReactModule.useLayoutEffect(function() --[[ Line: 106 ]]
+		-- upvalues: UseRefResult1 (copy), ComponentProps (copy)
+		local Current = UseRefResult1.current
 		
-		return function()
-			-- upvalues: var9 (copy), var12 (ref)
-			var9.current = nil
-			var12.unregister()
+		if Current ~= nil then
+			Current.setProps(ComponentProps)
 		end
-	end, { var5, var6, var7, viewType })
-	local componentProps = p1.componentProps
-	reactModule.useLayoutEffect(function()
-		-- upvalues: var9 (ref), componentProps (ref)
-		local current = var9.current
+	end, { ComponentProps, UseSignalStateResult1 })
+	local UseResult = ReactModule.useCallback(function(Current) --[[ Line: 113 ]]
+		-- upvalues: UseRefResult (copy), UseRefResult1 (copy)
+		UseRefResult.current = Current
+		local Current1 = UseRefResult1.current
 		
-		if current ~= nil then
-			current.setProps(componentProps)
+		if Current1 ~= nil then
+			Current1.setPlaceholder(Current)
 		end
-	end, { componentProps, var11 })
+	end, {})
 	
-	return if var4 then reactModule.createElement(InlineRecyclableView, { componentProps = componentProps, viewType = viewType }) else reactModule.createElement("Frame", {
+	return if IsNotUseContextResult then ReactModule.createElement(InlineRecyclableView, { componentProps = ComponentProps, viewType = ViewType }) else ReactModule.createElement("Frame", {
 		Name = "RecyclableView",
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		AutomaticSize = Enum.AutomaticSize.XY,
 		Size = UDim2.new(),
-		ref = reactModule.useCallback(function(p2)
-			-- upvalues: var8 (ref), var9 (ref)
-			var8.current = p2
-			local current = var9.current
-			
-			if current ~= nil then
-				current.setPlaceholder(p2)
-			end
-		end, {})
+		ref = UseResult
 	})
 end
 
-return function(p1, p2)
-	-- upvalues: recyclableViewReadinessModule (ref), reactModule (ref), RecyclableViewComponent (ref), recyclableViewRegistryModule (ref)
-	p2 = p2 or {}
-	local readiness = p2.readiness or recyclableViewReadinessModule.ReadyOnAssignment
-	assert(if readiness ~= recyclableViewReadinessModule.ReadyOnAssignment then readiness == recyclableViewReadinessModule.ReadyOnCommit else true, "createRecyclableView: readiness must be ReadyOnAssignment or ReadyOnCommit")
-	local t = {}
+return function(SignalComponent, p1) --[[ Line: 138 | Named "createRecyclableView" ]]
+	-- upvalues: RecyclableViewReadinessModule (copy), ReactModule (copy), RecyclableViewComponent (copy), RecyclableViewRegistryModule (copy)
+	local P4 = p1 or {}
+	local Readiness = P4.readiness or RecyclableViewReadinessModule.ReadyOnAssignment
+	assert(Readiness == RecyclableViewReadinessModule.ReadyOnAssignment or Readiness == RecyclableViewReadinessModule.ReadyOnCommit, "createRecyclableView: readiness must be ReadyOnAssignment or ReadyOnCommit")
+	local _definitionIdentity = {}
 	
-	local function RecyclableViewFacade(p3)
-		-- upvalues: reactModule (copy), RecyclableViewComponent (copy), t (ref), RecyclableViewFacade (ref)
-		return reactModule.createElement(RecyclableViewComponent, {
-			componentProps = p3,
-			_definitionIdentity = t,
+	local function RecyclableViewFacade(ComponentProps) --[[ Line: 155 ]]
+		-- upvalues: ReactModule (upval), RecyclableViewComponent (upval), _definitionIdentity (copy), RecyclableViewFacade (copy)
+		return ReactModule.createElement(RecyclableViewComponent, {
+			componentProps = ComponentProps,
+			_definitionIdentity = _definitionIdentity,
 			viewType = RecyclableViewFacade
 		})
 	end
 	
-	recyclableViewRegistryModule.register(RecyclableViewFacade, {
-		readiness = readiness,
-		hideWhilePending = p2.hideWhilePending == true,
-		signalComponent = p1
+	RecyclableViewRegistryModule.register(RecyclableViewFacade, {
+		readiness = Readiness,
+		hideWhilePending = P4.hideWhilePending == true,
+		signalComponent = SignalComponent
 	})
 	
 	return RecyclableViewFacade

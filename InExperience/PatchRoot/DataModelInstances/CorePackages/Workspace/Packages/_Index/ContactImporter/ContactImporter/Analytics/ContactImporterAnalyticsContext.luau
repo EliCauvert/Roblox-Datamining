@@ -1,3 +1,3 @@
-﻿local dependenciesModule = require(script:FindFirstAncestor("ContactImporter").dependencies)
+﻿local DependenciesModule = require(script:FindFirstAncestor("ContactImporter").dependencies)
 
-return dependenciesModule.Roact.createContext({ fireAnalyticsEvent = dependenciesModule.Dash.noop })
+return DependenciesModule.Roact.createContext({ fireAnalyticsEvent = DependenciesModule.Dash.noop })

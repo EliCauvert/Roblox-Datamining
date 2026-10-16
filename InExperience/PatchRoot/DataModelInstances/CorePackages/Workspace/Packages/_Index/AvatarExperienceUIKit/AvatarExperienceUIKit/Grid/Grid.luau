@@ -1,88 +1,91 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceUIKit").Parent
-local reactModule = require(parent.React)
-local mutedError = require(parent.Loggers).mutedError
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceUIKit").Parent
+local ReactModule = require(Parent.React)
+local MutedErrorFunction = require(Parent.Loggers).mutedError
 local AXDebugGridShouldErrorOnInvalidRowCount = game:DefineFastFlag("AXDebugGridShouldErrorOnInvalidRowCount", false)
 
-local function GridRow(p1)
-	-- upvalues: reactModule (ref)
-	local t = {
-		GridRowLayout = reactModule.createElement("UIListLayout", {
+local function GridRow(Frame) --[[ Line: 21 ]]
+	-- upvalues: ReactModule (copy)
+	local config = {
+		GridRowLayout = ReactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Horizontal,
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
 			SortOrder = Enum.SortOrder.LayoutOrder
 		})
 	}
 	
-	for i, v in p1.items do
-		t[`item-{p1.getItemId(v)}-{i}`] = reactModule.createElement("Frame", {
+	for LayoutOrder, item in Frame.items do
+		config[`item-{Frame.getItemId(item)}-{LayoutOrder}`] = ReactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			BackgroundTransparency = 1,
-			Size = UDim2.new(UDim.new(1 / p1.itemsPerRow, 0), UDim.new(0, 0)),
+			Size = UDim2.new(UDim.new(1 / Frame.itemsPerRow, 0), UDim.new(0, 0)),
 			AutomaticSize = Enum.AutomaticSize.Y,
-			LayoutOrder = i
+			LayoutOrder = LayoutOrder
 		}, {
-			Padding = reactModule.createElement("UIPadding", {
-				PaddingLeft = UDim.new(0, p1.gapHorizontal / 2),
-				PaddingRight = UDim.new(0, p1.gapHorizontal / 2)
+			Padding = ReactModule.createElement("UIPadding", {
+				PaddingLeft = UDim.new(0, Frame.gapHorizontal / 2),
+				PaddingRight = UDim.new(0, Frame.gapHorizontal / 2)
 			}),
-			Content = p1.renderItem({
-				item = v,
-				index = (p1.rowIndex - 1) * p1.itemsPerRow + i,
-				gridInformation = { row = p1.rowIndex, column = (i - 1) % p1.itemsPerRow + 1 }
+			Content = Frame.renderItem({
+				item = item,
+				index = (Frame.rowIndex - 1) * Frame.itemsPerRow + LayoutOrder,
+				gridInformation = {
+					row = Frame.rowIndex,
+					column = (LayoutOrder - 1) % Frame.itemsPerRow + 1
+				}
 			})
 		})
 	end
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		Size = UDim2.fromScale(1, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
-		LayoutOrder = p1.LayoutOrder
-	}, t)
+		LayoutOrder = Frame.LayoutOrder
+	}, config)
 end
 
-return reactModule.forwardRef(function(p2, p3)
-	-- upvalues: AXDebugGridShouldErrorOnInvalidRowCount (ref), mutedError (ref), reactModule (ref), GridRow (ref)
-	local var1 = if p2.itemsPerRow <= 0 then 1 else p2.itemsPerRow
+return (ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 80 ]]
+	-- upvalues: AXDebugGridShouldErrorOnInvalidRowCount (copy), MutedErrorFunction (copy), ReactModule (copy), GridRow (copy)
+	local ItemsPerRow = if Frame.itemsPerRow <= 0 then 1 else Frame.itemsPerRow
 	
-	if AXDebugGridShouldErrorOnInvalidRowCount and p2.itemsPerRow <= 0 then
-		mutedError(`itemsPerRow must be a positive number greater than 0, received {var1}`)
+	if AXDebugGridShouldErrorOnInvalidRowCount and Frame.itemsPerRow <= 0 then
+		MutedErrorFunction(`itemsPerRow must be a positive number greater than 0, received {ItemsPerRow}`)
 	end
-	local gapHorizontal = p2.gapHorizontal or 0
-	local t = {
-		GridLayout = reactModule.createElement("UIListLayout", {
+	local GapHorizontal = Frame.gapHorizontal or 0
+	local config = {
+		GridLayout = ReactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
 			VerticalAlignment = Enum.VerticalAlignment.Top,
 			SortOrder = Enum.SortOrder.LayoutOrder,
-			Padding = UDim.new(0, p2.gapVertical or 0)
+			Padding = UDim.new(0, Frame.gapVertical or 0)
 		}),
-		Padding = reactModule.createElement("UIPadding", {
-			PaddingLeft = UDim.new(0, -gapHorizontal / 2),
-			PaddingRight = UDim.new(0, -gapHorizontal / 2)
+		Padding = ReactModule.createElement("UIPadding", {
+			PaddingLeft = UDim.new(0, -GapHorizontal / 2),
+			PaddingRight = UDim.new(0, -GapHorizontal / 2)
 		})
 	}
 	
-	for i = 1, math.ceil(#p2.items / var1) do
-		local var2 = (i - 1) * var1 + 1
-		local t_1 = {}
-		table.move(p2.items, var2, var2 + var1 - 1, var2, t_1)
-		t["row-" .. tostring(i)] = reactModule.createElement(GridRow, {
-			items = t_1,
-			itemsPerRow = var1,
-			renderItem = p2.renderItem,
-			getItemId = p2.getItemId,
+	for i = 1, math.ceil(#Frame.items / ItemsPerRow) do
+		local NewI = (i - 1) * ItemsPerRow + 1
+		local Items = {}
+		table.move(Frame.items, NewI, NewI + ItemsPerRow - 1, NewI, Items)
+		config["row-" .. tostring(i)] = ReactModule.createElement(GridRow, {
+			items = Items,
+			itemsPerRow = ItemsPerRow,
+			renderItem = Frame.renderItem,
+			getItemId = Frame.getItemId,
 			LayoutOrder = i,
-			gapHorizontal = gapHorizontal,
+			gapHorizontal = GapHorizontal,
 			rowIndex = i
 		})
 	end
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
-		Size = p2.Size or UDim2.fromScale(1, 1),
-		AutomaticSize = p2.AutomaticSize,
-		LayoutOrder = p2.LayoutOrder,
-		ref = p3
-	}, t)
-end)
+		Size = Frame.Size or UDim2.fromScale(1, 1),
+		AutomaticSize = Frame.AutomaticSize,
+		LayoutOrder = Frame.LayoutOrder,
+		ref = Ref
+	}, config)
+end))

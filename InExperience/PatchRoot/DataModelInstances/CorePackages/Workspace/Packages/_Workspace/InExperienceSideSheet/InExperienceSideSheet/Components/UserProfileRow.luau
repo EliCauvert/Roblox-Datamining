@@ -1,143 +1,135 @@
-﻿local playersService = game:GetService("Players")
-local inExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
-local parent = inExperienceSideSheet.Parent
-local foundationModule = require(parent.Foundation)
-local profileCardModule = require(parent.ProfileCard)
-local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
-local view = foundationModule.View
-local fFlagEnableBlackbirdCheck = sharedFlagsModule.FFlagEnableBlackbirdCheck
-local fFlagFlyoutSidePanelUseProfileFrameThumbnail = sharedFlagsModule.FFlagFlyoutSidePanelUseProfileFrameThumbnail
-local unibarListModule = require(inExperienceSideSheet.Components.UnibarList)
-local readHasRobloxSubscriptionLua = fFlagEnableBlackbirdCheck and game:GetEngineFeature("ReadHasRobloxSubscriptionLua")
-local var1 = if readHasRobloxSubscriptionLua then {
+﻿local Players = game:GetService("Players")
+local InExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
+local Parent = InExperienceSideSheet.Parent
+local ProfileCardModule = require(Parent.ProfileCard)
+local ReactModule = require(Parent.React)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local View = require(Parent.Foundation).View
+local FFlagEnableBlackbirdCheck = SharedFlagsModule.FFlagEnableBlackbirdCheck
+local FFlagFlyoutSidePanelUseProfileFrameThumbnail = SharedFlagsModule.FFlagFlyoutSidePanelUseProfileFrameThumbnail
+local UnibarListModule = require(InExperienceSideSheet.Components.UnibarList)
+local ReadHasRobloxSubscriptionLuaEngineFeature = FFlagEnableBlackbirdCheck and game:GetEngineFeature("ReadHasRobloxSubscriptionLua")
+local List = if ReadHasRobloxSubscriptionLuaEngineFeature then {
 	"Name",
 	"DisplayName",
 	"MembershipType",
 	"HasRobloxSubscription"
 } else { "Name", "DisplayName", "MembershipType" }
 
-local function _(p1)
-	return if p1 then {
-		id = tostring(p1.UserId),
-		name = p1.Name,
-		displayName = p1.DisplayName,
-		membership = p1.MembershipType
+local function _(Player: Player) --[[ Line: 31 | Named "createLocalUserModel" ]]
+	return if Player then {
+		id = tostring(Player.UserId),
+		name = Player.Name,
+		displayName = Player.DisplayName,
+		membership = Player.MembershipType
 	} else nil
 end
 
-local _ = function(p1)
-	-- upvalues: readHasRobloxSubscriptionLua (ref)
-	return readHasRobloxSubscriptionLua and (p1 ~= nil and p1.HasRobloxSubscription == true)
+local _ = function(p1): boolean --[[ Line: 42 | Named "isRobloxSubscriber" ]]
+	-- upvalues: ReadHasRobloxSubscriptionLuaEngineFeature (copy)
+	return ReadHasRobloxSubscriptionLuaEngineFeature and (p1 ~= nil and p1.HasRobloxSubscription == true)
 end
 
-local _ = function(p1, p2)
-	return if p1 == nil or p2 == nil then p1 == p2 else p1.id == p2.id and (p1.name == p2.name and (p1.displayName == p2.displayName and p1.membership == p2.membership))
+local _ = function(p1, p2): boolean --[[ Line: 48 | Named "isSameLocalUserModel" ]]
+	return if p1 == nil or p2 == nil then p1 == p2 else p1.id == p2.id and (p1.name == p2.name and p1.displayName == p2.displayName) and p1.membership == p2.membership
 end
 
-local function useLocalUser()
-	-- upvalues: reactModule (ref), playersService (ref), readHasRobloxSubscriptionLua (ref), var1 (ref)
-	local var2, var3 = reactModule.useState(function()
-		-- upvalues: playersService (copy)
-		local localPlayer = playersService.LocalPlayer
+local function useLocalUser() --[[ Line: 56 ]]
+	-- upvalues: ReactModule (copy), Players (copy), ReadHasRobloxSubscriptionLuaEngineFeature (copy), List (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function() --[[ Line: 57 ]]
+		-- upvalues: Players (upval)
+		local LocalPlayer = Players.LocalPlayer
 		
-		return if localPlayer then {
-			id = tostring(localPlayer.UserId),
-			name = localPlayer.Name,
-			displayName = localPlayer.DisplayName,
-			membership = localPlayer.MembershipType
+		return if LocalPlayer then {
+			id = tostring(LocalPlayer.UserId),
+			name = LocalPlayer.Name,
+			displayName = LocalPlayer.DisplayName,
+			membership = LocalPlayer.MembershipType
 		} else nil
 	end)
-	local var4, var5 = reactModule.useState(function()
-		-- upvalues: playersService (copy), readHasRobloxSubscriptionLua (copy)
-		local localPlayer = playersService.LocalPlayer
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(function(): boolean --[[ Line: 60 ]]
+		-- upvalues: Players (upval), ReadHasRobloxSubscriptionLuaEngineFeature (upval)
+		local LocalPlayer = Players.LocalPlayer
 		
-		return readHasRobloxSubscriptionLua and (localPlayer ~= nil and localPlayer.HasRobloxSubscription == true)
+		return ReadHasRobloxSubscriptionLuaEngineFeature and (LocalPlayer ~= nil and LocalPlayer.HasRobloxSubscription == true)
 	end)
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), var5 (ref), readHasRobloxSubscriptionLua (copy), var1 (copy), playersService (copy)
-		local t = {}
+	ReactModule.useEffect(function() --[[ Line: 64 ]]
+		-- upvalues: UseStateResult2 (copy), UseStateResult2_1 (copy), ReadHasRobloxSubscriptionLuaEngineFeature (upval), List (upval), Players (upval)
+		local Connections = {}
 		
-		local function listenToPlayer(p1)
-			-- upvalues: t (ref), var3 (copy), var5 (copy), readHasRobloxSubscriptionLua (copy), var1 (copy)
-			for i, v in t do
-				v:Disconnect()
+		local function listenToPlayer(Player: Player) --[[ Line: 67 ]]
+			-- upvalues: Connections (copy), UseStateResult2 (upval), UseStateResult2_1 (upval), ReadHasRobloxSubscriptionLuaEngineFeature (upval), List (upval)
+			for _, connection in Connections do
+				connection:Disconnect()
 			end
-			table.clear(t)
-			var3(if p1 then {
-				id = tostring(p1.UserId),
-				name = p1.Name,
-				displayName = p1.DisplayName,
-				membership = p1.MembershipType
+			table.clear(Connections)
+			UseStateResult2(if Player then {
+				id = tostring(Player.UserId),
+				name = Player.Name,
+				displayName = Player.DisplayName,
+				membership = Player.MembershipType
 			} else nil)
-			var5(readHasRobloxSubscriptionLua and (p1 ~= nil and p1.HasRobloxSubscription == true))
+			UseStateResult2_1(ReadHasRobloxSubscriptionLuaEngineFeature and (Player ~= nil and Player.HasRobloxSubscription == true))
 			
-			if p1 then
-				for i, v_1 in var1 do
-					table.insert(t, p1:GetPropertyChangedSignal(v_1):Connect(function()
-						-- upvalues: var3 (copy), p1 (ref), var5 (copy), readHasRobloxSubscriptionLua (copy)
-						var3(function(p2)
-							-- upvalues: p1 (copy)
-							local var6
-							local var7 = p1
-							local var8 = if var7 then {
-								id = tostring(var7.UserId),
-								name = var7.Name,
-								displayName = var7.DisplayName,
-								membership = var7.MembershipType
+			if Player then
+				for _, PropertyName in List do
+					table.insert(Connections, Player:GetPropertyChangedSignal(PropertyName):Connect(function() --[[ Line: 80 ]]
+						-- upvalues: UseStateResult2 (upval), Player (copy), UseStateResult2_1 (upval), ReadHasRobloxSubscriptionLuaEngineFeature (upval)
+						UseStateResult2(function(p1) --[[ Line: 81 ]]
+							-- upvalues: Player (upval)
+							local Config = if Player then {
+								id = tostring(Player.UserId),
+								name = Player.Name,
+								displayName = Player.DisplayName,
+								membership = Player.MembershipType
 							} else nil
+							local IsConfigMatch: boolean = if p1 == nil or Config == nil then p1 == Config else p1.id == Config.id and (p1.name == Config.name and p1.displayName == Config.displayName) and p1.membership == Config.membership
 							
-							if p2 == nil or var8 == nil then
-								var6 = p2 == var8
-								var6 = nil
-							else
-								var6 = p2.id == var8.id and (p2.name == var8.name and (p2.displayName == var8.displayName and p2.membership == var8.membership))
-							end
-							return if var6 then p2 else var8
+							return if IsConfigMatch then p1 else Config
 						end)
-						var5(readHasRobloxSubscriptionLua and (p1 ~= nil and p1.HasRobloxSubscription == true))
+						UseStateResult2_1(ReadHasRobloxSubscriptionLuaEngineFeature and (Player ~= nil and Player.HasRobloxSubscription == true))
 					end))
 				end
 			end
 		end
 		
-		local var6 = playersService:GetPropertyChangedSignal("LocalPlayer"):Connect(function()
-			-- upvalues: listenToPlayer (ref), playersService (copy)
-			listenToPlayer(playersService.LocalPlayer)
+		local Connection = Players:GetPropertyChangedSignal("LocalPlayer"):Connect(function() --[[ Line: 94 ]]
+			-- upvalues: listenToPlayer (copy), Players (upval)
+			listenToPlayer(Players.LocalPlayer)
 		end)
-		listenToPlayer(playersService.LocalPlayer)
+		listenToPlayer(Players.LocalPlayer)
 		
-		return function()
-			-- upvalues: var6 (ref), t (ref)
-			var6:Disconnect()
+		return function() --[[ Line: 99 ]]
+			-- upvalues: Connection (copy), Connections (copy)
+			Connection:Disconnect()
 			
-			for i, v in t do
-				v:Disconnect()
+			for _, connection in Connections do
+				connection:Disconnect()
 			end
 		end
 	end, {})
 	
-	return var2, var4
+	return UseStateResult, UseStateResult1
 end
 
-return reactModule.memo(function(p2)
-	-- upvalues: useLocalUser (ref), reactModule (ref), view (ref), profileCardModule (ref), fFlagEnableBlackbirdCheck (ref), fFlagFlyoutSidePanelUseProfileFrameThumbnail (ref), unibarListModule (ref)
-	local var7, var8 = useLocalUser()
+return ReactModule.memo(function(p1) --[[ Line: 110 | Named "UserProfileRow" ]]
+	-- upvalues: useLocalUser (copy), ReactModule (copy), View (copy), ProfileCardModule (copy), FFlagEnableBlackbirdCheck (copy), FFlagFlyoutSidePanelUseProfileFrameThumbnail (copy), UnibarListModule (copy)
+	local UseLocalUserResult, UseLocalUserResult2 = useLocalUser()
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "row align-y-center gap-small size-full-0 auto-y padding-top-small",
 		testId = "user-profile-row",
-		LayoutOrder = p2.layoutOrder
+		LayoutOrder = p1.layoutOrder
 	}, {
-		ProfileCardContainer = reactModule.createElement(view, { tag = "fill auto-y", LayoutOrder = 0 }, {
-			ProfileCard = reactModule.createElement(profileCardModule.ProfileCard, {
+		ProfileCardContainer = ReactModule.createElement(View, { tag = "fill auto-y", LayoutOrder = 0 }, {
+			ProfileCard = ReactModule.createElement(ProfileCardModule.ProfileCard, {
 				layoutOrder = 0,
 				isCompact = true,
-				localUserModel = var7,
-				isRobloxSubscriber = if fFlagEnableBlackbirdCheck then var8 else nil,
-				useProfileFrameThumbnail = fFlagFlyoutSidePanelUseProfileFrameThumbnail
+				localUserModel = UseLocalUserResult,
+				isRobloxSubscriber = if FFlagEnableBlackbirdCheck then UseLocalUserResult2 else nil,
+				useProfileFrameThumbnail = FFlagFlyoutSidePanelUseProfileFrameThumbnail
 			})
 		}),
-		UnibarList = reactModule.createElement(unibarListModule, { layoutOrder = 1 })
+		UnibarList = ReactModule.createElement(UnibarListModule, { layoutOrder = 1 })
 	})
 end)

@@ -1,105 +1,107 @@
-﻿local uDim2 = UDim2.new(0, 10, 0.15, 0)
-local uDim2_1 = UDim2.new(1, -20, 0.4, 0)
-local uDim2_2 = UDim2.new(0, 10, 0.55, 0)
-local uDim2_3 = UDim2.new(1, -20, 0.3, 0)
-local coreGuiService = game:GetService("CoreGui")
-local statsUtilsModule = require(coreGuiService.RobloxGui.Modules.Stats.StatsUtils)
-local _ = require(coreGuiService.RobloxGui.Modules.Stats.StatsAggregator)
-local t = {}
-t.__index = t
+﻿local _UDim2 = UDim2.new(0, 10, 0.15, 0)
+local _UDim2_1 = UDim2.new(1, -20, 0.4, 0)
+local _UDim2_2 = UDim2.new(0, 10, 0.55, 0)
+local _UDim2_3 = UDim2.new(1, -20, 0.3, 0)
+local CoreGui = game:GetService("CoreGui")
+local StatsUtilsModule = require(CoreGui.RobloxGui.Modules.Stats.StatsUtils)
+local _ = require(CoreGui.RobloxGui.Modules.Stats.StatsAggregator)
+local StatsMiniTextPanelModule = {}
+StatsMiniTextPanelModule.__index = StatsMiniTextPanelModule
 
-function t.new(p1)
-	-- upvalues: t (ref), statsUtilsModule (ref), uDim2_1 (ref), uDim2 (ref), uDim2_3 (ref), uDim2_2 (ref)
-	local valueLabel = {}
-	setmetatable(valueLabel, t)
-	valueLabel._statType = p1
-	valueLabel._frame = Instance.new("Frame")
-	valueLabel._frame.Name = "StatsMiniTextPanelClass"
-	valueLabel._frame.BackgroundTransparency = 1
-	valueLabel._frame.ZIndex = statsUtilsModule.TextZIndex
-	valueLabel._titleLabel = Instance.new("TextLabel")
-	valueLabel._titleLabel.Name = "TitleLabel"
-	valueLabel._valueLabel = Instance.new("TextLabel")
-	valueLabel._valueLabel.Name = "ValueLabel"
-	statsUtilsModule.StyleTextWidget(valueLabel._titleLabel)
-	statsUtilsModule.StyleTextWidget(valueLabel._valueLabel)
-	valueLabel._titleLabel.FontSize = statsUtilsModule.MiniPanelTitleFontSize
-	valueLabel._titleLabel.Text = valueLabel:_getTitle()
-	valueLabel._titleLabel.Parent = valueLabel._frame
-	valueLabel._titleLabel.Size = uDim2_1
-	valueLabel._titleLabel.Position = uDim2
-	valueLabel._titleLabel.TextXAlignment = Enum.TextXAlignment.Left
-	valueLabel._valueLabel.FontSize = statsUtilsModule.MiniPanelValueFontSize
-	valueLabel._valueLabel.Text = "0"
-	valueLabel._valueLabel.Parent = valueLabel._frame
-	valueLabel._valueLabel.Size = uDim2_3
-	valueLabel._valueLabel.Position = uDim2_2
-	valueLabel._valueLabel.TextXAlignment = Enum.TextXAlignment.Left
+function StatsMiniTextPanelModule.new(_statType) --[[ Line: 43 ]]
+	-- upvalues: StatsMiniTextPanelModule (copy), StatsUtilsModule (copy), _UDim2_1 (copy), _UDim2 (copy), _UDim2_3 (copy), _UDim2_2 (copy)
+	local t = {}
+	setmetatable(t, StatsMiniTextPanelModule)
+	t._statType = _statType
+	t._frame = Instance.new("Frame")
+	t._frame.Name = "StatsMiniTextPanelClass"
+	t._frame.BackgroundTransparency = 1
+	t._frame.ZIndex = StatsUtilsModule.TextZIndex
+	t._titleLabel = Instance.new("TextLabel")
+	t._titleLabel.Name = "TitleLabel"
+	t._valueLabel = Instance.new("TextLabel")
+	t._valueLabel.Name = "ValueLabel"
+	StatsUtilsModule.StyleTextWidget(t._titleLabel)
+	StatsUtilsModule.StyleTextWidget(t._valueLabel)
+	t._titleLabel.FontSize = StatsUtilsModule.MiniPanelTitleFontSize
+	t._titleLabel.Text = t:_getTitle()
+	t._titleLabel.Parent = t._frame
+	t._titleLabel.Size = _UDim2_1
+	t._titleLabel.Position = _UDim2
+	t._titleLabel.TextXAlignment = Enum.TextXAlignment.Left
+	t._valueLabel.FontSize = StatsUtilsModule.MiniPanelValueFontSize
+	t._valueLabel.Text = "0"
+	t._valueLabel.Parent = t._frame
+	t._valueLabel.Size = _UDim2_3
+	t._valueLabel.Position = _UDim2_2
+	t._valueLabel.TextXAlignment = Enum.TextXAlignment.Left
 	
-	return valueLabel
+	return t
 end
 
-function t:SetZIndex(p1)
-	self._frame.ZIndex = p1
-	self._titleLabel.ZIndex = p1
-	self.ZIndex = p1
+function StatsMiniTextPanelModule:SetZIndex(ZIndex) --[[ Line: 80 ]]
+	self._frame.ZIndex = ZIndex
+	self._titleLabel.ZIndex = ZIndex
+	self.ZIndex = ZIndex
 end
 
-function t:_getTitle()
-	-- upvalues: statsUtilsModule (ref)
-	return statsUtilsModule.TypeToShortName[self._statType]
+function StatsMiniTextPanelModule:_getTitle() --[[ Line: 86 ]]
+	-- upvalues: StatsUtilsModule (copy)
+	return StatsUtilsModule.TypeToShortName[self._statType]
 end
 
-function t:PlaceInParent(p1, p2, p3)
-	self._frame.Position = p3
-	self._frame.Size = p2
-	self._frame.Parent = p1
+function StatsMiniTextPanelModule:PlaceInParent(Parent, Size, Position) --[[ Line: 90 ]]
+	self._frame.Position = Position
+	self._frame.Size = Size
+	self._frame.Parent = Parent
 end
 
-function t:SetStatsAggregator(p1)
+function StatsMiniTextPanelModule:SetStatsAggregator(_aggregator) --[[ Line: 96 ]]
 	if self._aggregator then
 		self._aggregator:RemoveListener(self._listenerId)
 		self._listenerId = nil
 		self._aggregator = nil
 	end
-	self._aggregator = p1
+	self._aggregator = _aggregator
 	self:_refreshVisibility()
 end
 
-function t:SetVisible(p1)
-	self.frame.Visible = p1
+function StatsMiniTextPanelModule:SetVisible(Visible) --[[ Line: 108 ]]
+	self.frame.Visible = Visible
 	self:_refreshVisibility()
 end
 
-function t:_shouldBeVisible()
-	-- upvalues: statsUtilsModule (ref)
-	return if statsUtilsModule.PerformanceStatsShouldBeVisible() then self._frame.Visible else false
+function StatsMiniTextPanelModule._shouldBeVisible(p1) --[[ Line: 113 ]]
+	-- upvalues: StatsUtilsModule (copy)
+	return if StatsUtilsModule.PerformanceStatsShouldBeVisible() then p1._frame.Visible else false
 end
 
-function t:_refreshVisibility()
+function StatsMiniTextPanelModule:_refreshVisibility() --[[ Line: 122 ]]
 	if self:_shouldBeVisible() then
 		self:_startListening()
 		self:_updateFromAggregator()
 		
 		return
+	else
+		self:_stopListening()
 	end
-	self:_stopListening()
 end
 
-function t:_stopListening()
+function StatsMiniTextPanelModule:_stopListening() --[[ Line: 131 ]]
 	if self._aggregator == nil then return end
-	if self._listenerId == nil then
+	if self._listenerId ~= nil then
+		self._aggregator:RemoveListener(self._listenerId)
+		self._listenerId = nil
+		
 		return
 	end
-	self._aggregator:RemoveListener(self._listenerId)
-	self._listenerId = nil
 end
 
-function t:_startListening()
+function StatsMiniTextPanelModule:_startListening() --[[ Line: 144 ]]
 	if self._aggregator == nil then return end
 	if self._listenerId == nil then
-		self._listenerId = self._aggregator:AddListener(function()
-			-- upvalues: self (ref)
+		self._listenerId = self._aggregator:AddListener(function() --[[ Line: 153 ]]
+			-- upvalues: self (copy)
 			self:_updateFromAggregator()
 		end)
 		
@@ -107,13 +109,13 @@ function t:_startListening()
 	end
 end
 
-function t:OnPerformanceStatsShouldBeVisibleChanged()
+function StatsMiniTextPanelModule:OnPerformanceStatsShouldBeVisibleChanged() --[[ Line: 158 ]]
 	self:_refreshVisibility()
 end
 
-function t:_updateFromAggregator()
-	-- upvalues: statsUtilsModule (ref)
-	self._valueLabel.Text = statsUtilsModule.FormatTypedValue(if self._aggregator ~= nil then 0 else self._aggregator:GetLatestValue(), self._statType)
+function StatsMiniTextPanelModule:_updateFromAggregator() --[[ Line: 162 ]]
+	-- upvalues: StatsUtilsModule (copy)
+	self._valueLabel.Text = StatsUtilsModule.FormatTypedValue(if self._aggregator == nil then 0 else self._aggregator:GetLatestValue(), self._statType)
 end
 
-return t
+return StatsMiniTextPanelModule

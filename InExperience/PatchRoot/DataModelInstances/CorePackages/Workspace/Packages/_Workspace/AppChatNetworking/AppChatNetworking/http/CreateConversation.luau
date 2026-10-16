@@ -1,19 +1,19 @@
-﻿local httpService = game:GetService("HttpService")
-local appChatNetworking = script:FindFirstAncestor("AppChatNetworking")
-local luauPolyfillModule = require(appChatNetworking.Parent.LuauPolyfill)
-local default = require(appChatNetworking.url.HttpRequest).default
-local CHAT_PLATFORM_BASE_URLModule = require(appChatNetworking.url.CHAT_PLATFORM_BASE_URL)
+﻿local HttpService = game:GetService("HttpService")
+local AppChatNetworking = script:FindFirstAncestor("AppChatNetworking")
+local LuauPolyfillModule = require(AppChatNetworking.Parent.LuauPolyfill)
+local Default = require(AppChatNetworking.url.HttpRequest).default
+local CHATPLATFORMBASEURLModule = require(AppChatNetworking.url.CHAT_PLATFORM_BASE_URL)
 
-return function(p1, p2, p3, p4)
-	-- upvalues: default (ref), luauPolyfillModule (ref), httpService (ref), CHAT_PLATFORM_BASE_URLModule (ref)
-	return (p1 or default)(`{CHAT_PLATFORM_BASE_URLModule}/v1/create-conversations`, "POST", {
-		postBody = httpService:JSONEncode({
+return function(p1, p2, p3, Name) --[[ Line: 11 ]]
+	-- upvalues: Default (copy), LuauPolyfillModule (copy), HttpService (copy), CHATPLATFORMBASEURLModule (copy)
+	return (p1 or Default)(`{CHATPLATFORMBASEURLModule}/v1/create-conversations`, "POST", {
+		postBody = HttpService:JSONEncode({
 			conversations = {
 				{
 					type = p2,
-					name = p4,
-					participant_user_ids = luauPolyfillModule.Array.map(p3, function(p5)
-						return tonumber(p5)
+					name = Name,
+					participant_user_ids = LuauPolyfillModule.Array.map(p3, function(p4): number --[[ Line: 18 ]]
+						return (tonumber(p4))
 					end)
 				}
 			}

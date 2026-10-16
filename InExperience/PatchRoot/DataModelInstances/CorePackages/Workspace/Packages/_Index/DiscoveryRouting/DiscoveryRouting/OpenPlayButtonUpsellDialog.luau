@@ -1,19 +1,19 @@
-﻿local parent = script:FindFirstAncestor("DiscoveryRouting").Parent
-local centralOverlayType = require(parent.RobloxAppEnums).CentralOverlayType
-local setCentralOverlay = require(parent.CentralOverlay).Actions.SetCentralOverlay
+﻿local Parent = script:FindFirstAncestor("DiscoveryRouting").Parent
+local CentralOverlayType = require(Parent.RobloxAppEnums).CentralOverlayType
+local SetCentralOverlayFunction = require(Parent.CentralOverlay).Actions.SetCentralOverlay
 
-return function(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: setCentralOverlay (ref), centralOverlayType (ref)
-	return function(p8)
-		-- upvalues: setCentralOverlay (copy), centralOverlayType (copy), p1 (ref), p2 (ref), p3 (ref), p4 (ref), p5 (ref), p6 (ref), p7 (ref)
-		p8:dispatch(setCentralOverlay(centralOverlayType.PlayButtonUpsellDialog, {
-			titleText = p1,
-			bodyText = p2,
-			actionButtonText = p3,
-			cancelButtonText = p4,
-			onActionButtonClick = p5,
-			onCancelButtonClick = p6,
-			onCloseModal = p7
+return function(TitleText, BodyText, ActionButtonText, CancelButtonText, OnActionButtonClick, OnCancelButtonClick, OnCloseModal) --[[ Line: 6 ]]
+	-- upvalues: SetCentralOverlayFunction (copy), CentralOverlayType (copy)
+	return function(p1) --[[ Line: 15 ]]
+		-- upvalues: SetCentralOverlayFunction (upval), CentralOverlayType (upval), TitleText (copy), BodyText (copy), ActionButtonText (copy), CancelButtonText (copy), OnActionButtonClick (copy), OnCancelButtonClick (copy), OnCloseModal (copy)
+		p1:dispatch(SetCentralOverlayFunction(CentralOverlayType.PlayButtonUpsellDialog, {
+			titleText = TitleText,
+			bodyText = BodyText,
+			actionButtonText = ActionButtonText,
+			cancelButtonText = CancelButtonText,
+			onActionButtonClick = OnActionButtonClick,
+			onCancelButtonClick = OnCancelButtonClick,
+			onCloseModal = OnCloseModal
 		}))
 	end
 end

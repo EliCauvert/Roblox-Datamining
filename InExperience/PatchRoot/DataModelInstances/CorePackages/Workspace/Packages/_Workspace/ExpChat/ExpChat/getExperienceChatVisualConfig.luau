@@ -1,7 +1,4 @@
-﻿return function()
-	local _ = 20
-	local _ = { on = "icons/menu/chat_on", off = "icons/menu/chat_off" }
-	
+﻿return function() --[[ Line: 10 ]]
 	return {
 		label = "CoreScripts.TopBar.Chat",
 		icon = {

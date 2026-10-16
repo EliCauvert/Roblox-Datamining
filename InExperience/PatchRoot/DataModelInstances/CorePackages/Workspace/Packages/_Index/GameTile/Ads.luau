@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.Ads.Ads)
+﻿return (require(script.Parent.Parent.Parent._Index.Ads.Ads))

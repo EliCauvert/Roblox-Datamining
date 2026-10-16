@@ -1,59 +1,61 @@
-﻿local squads = script:FindFirstAncestor("Squads")
-local parent = squads.Parent
-local dependenciesModule = require(squads.dependencies)
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local cryoModule = require(parent.Cryo)
-local useNavigation = dependenciesModule.useNavigation
-local squadVoiceChangersModule = require(script.Parent.SquadVoiceChangers)
-local t = {
+﻿local Squads = script:FindFirstAncestor("Squads")
+local Parent = Squads.Parent
+local FFlagSquadsEnableFoundationTestIdsModule = require(Squads.Flags.FFlagSquadsEnableFoundationTestIds)
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local CryoModule = require(Parent.Cryo)
+local UseNavigationFunction = require(Squads.dependencies).useNavigation
+local SquadVoiceChangersModule = require(script.Parent.SquadVoiceChangers)
+local config = {
 	fillListWithExtraVoicePacks = false,
 	enableTestingTheme = false
 }
 
-function SquadVoiceChangerOverlay(p1)
-	-- upvalues: cryoModule (ref), t (ref), useNavigation (ref), reactModule (ref), foundationModule (ref), squadVoiceChangersModule (ref)
-	local var1 = cryoModule.Dictionary.join(t, p1)
-	local var2 = useNavigation()
-	local var3 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref)
-		if var2 and var2.pop then
-			var2.pop()
+function SquadVoiceChangerOverlay(p1) --[[ Line: 27 ]]
+	-- upvalues: CryoModule (copy), config (copy), UseNavigationFunction (copy), ReactModule (copy), FoundationModule (copy), FFlagSquadsEnableFoundationTestIdsModule (copy), SquadVoiceChangersModule (copy)
+	local JoinResult = CryoModule.Dictionary.join(config, p1)
+	local UseNavigationResult = UseNavigationFunction()
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 31 ]]
+		-- upvalues: UseNavigationResult (copy)
+		if UseNavigationResult and UseNavigationResult.pop then
+			UseNavigationResult.pop()
 		end
-	end, { var2 })
-	local wideMode = var2.getScreenProps("wideMode", false)
+	end, { UseNavigationResult })
+	local WideModeScreenProps = UseNavigationResult.getScreenProps("wideMode", false)
 	
-	return reactModule.createElement(reactModule.Fragment, nil, {
-		AbsorbInput = reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(ReactModule.Fragment, nil, {
+		AbsorbInput = ReactModule.createElement(FoundationModule.View, {
 			AutoButtonColor = false,
 			BorderSizePixel = 0,
 			ZIndex = 1,
 			tag = {
 				["size-full anchor-center-center position-center-center"] = true,
-				["bg-action-subtle"] = not var1.enableTestingTheme,
-				["bg-action-soft-emphasis"] = var1.enableTestingTheme
+				["bg-action-subtle"] = not JoinResult.enableTestingTheme,
+				["bg-action-soft-emphasis"] = JoinResult.enableTestingTheme
 			},
 			stateLayer = {
-				affordance = foundationModule.Enums.StateLayerAffordance.None
+				affordance = FoundationModule.Enums.StateLayerAffordance.None
 			},
-			onActivated = var3
+			onActivated = UseResult,
+			testId = if FFlagSquadsEnableFoundationTestIdsModule then "--social-squad-voice-changer-overlay--backdrop" else nil
 		}),
-		OverlayContainer = reactModule.createElement(foundationModule.View, {
+		OverlayContainer = ReactModule.createElement(FoundationModule.View, {
 			BorderSizePixel = 0,
 			Selectable = true,
 			ZIndex = 2,
 			tag = {
 				["bg-action-subtle no-clip"] = true,
-				["anchor-center-center position-center-center"] = wideMode,
-				["anchor-bottom-center position-bottom-center"] = not wideMode
+				["anchor-center-center position-center-center"] = WideModeScreenProps,
+				["anchor-bottom-center position-bottom-center"] = not WideModeScreenProps
 			},
-			Size = if wideMode then UDim2.new(0.75, 0, 0.9, 0) else UDim2.new(1, 0, 0.9, 0),
-			onActivated = function() end
+			Size = if WideModeScreenProps then UDim2.new(0.75, 0, 0.9, 0) else UDim2.new(1, 0, 0.9, 0),
+			onActivated = function() --[[ Line: 67 ]] end,
+			testId = if FFlagSquadsEnableFoundationTestIdsModule then "--social-squad-voice-changer-overlay" else nil
 		}, {
-			SquadVoiceChangers = reactModule.createElement(squadVoiceChangersModule, {
-				closeSquadVoiceChangers = var3,
-				fillListWithExtraVoicePacks = var1.fillListWithExtraVoicePacks,
-				enableTestingTheme = var1.enableTestingTheme
+			SquadVoiceChangers = ReactModule.createElement(SquadVoiceChangersModule, {
+				closeSquadVoiceChangers = UseResult,
+				fillListWithExtraVoicePacks = JoinResult.fillListWithExtraVoicePacks,
+				enableTestingTheme = JoinResult.enableTestingTheme
 			})
 		})
 	})

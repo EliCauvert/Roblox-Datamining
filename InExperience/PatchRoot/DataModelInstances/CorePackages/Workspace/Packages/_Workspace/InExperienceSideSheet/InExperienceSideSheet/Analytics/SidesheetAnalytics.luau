@@ -1,7 +1,7 @@
-﻿local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
-local telemetryService = game:GetService("TelemetryService")
-local telemetryServicePlaySessionInfoEnabledEngineFeature = game:GetEngineFeature("TelemetryServicePlaySessionInfoEnabled")
-local t = {
+﻿local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
+local TelemetryService = game:GetService("TelemetryService")
+local TelemetryServicePlaySessionInfoEnabledEngineFeature = game:GetEngineFeature("TelemetryServicePlaySessionInfoEnabled")
+local config = {
 	eventName = "sidesheet_closed",
 	description = "Fires when the sidesheet is closed",
 	backends = {
@@ -11,28 +11,31 @@ local t = {
 	lastUpdated = { 2026, 4, 8 }
 }
 
-function _logEventWithStandardizedFields(p1, p2)
-	-- upvalues: telemetryServicePlaySessionInfoEnabledEngineFeature (ref), rbxAnalyticsService (ref), telemetryService (ref)
-	local list = {
+function _logEventWithStandardizedFields(Config, p1) --[[ Line: 26 ]]
+	-- upvalues: TelemetryServicePlaySessionInfoEnabledEngineFeature (copy), RbxAnalyticsService (copy), TelemetryService (copy)
+	local StandardizedFields = {
 		"addPlaceId",
 		"addUniverseId",
 		"addSessionInfo",
 		"addOSInfo",
 		"addMemoryInfo"
 	}
-	p2 = p2 or {}
+	local P1 = p1 or {}
 	
-	if telemetryServicePlaySessionInfoEnabledEngineFeature then
-		table.insert(list, "addPlaySessionId")
+	if TelemetryServicePlaySessionInfoEnabledEngineFeature then
+		table.insert(StandardizedFields, "addPlaySessionId")
 	else
-		p2.playsessionid = rbxAnalyticsService:GetPlaySessionId()
+		P1.playsessionid = RbxAnalyticsService:GetPlaySessionId()
 	end
-	telemetryService:LogEvent(p1, { standardizedFields = list, customFields = p2 })
+	TelemetryService:LogEvent(Config, {
+		standardizedFields = StandardizedFields,
+		customFields = P1
+	})
 end
 
-function logSidesheetClosed(p1)
-	-- upvalues: t (ref)
-	_logEventWithStandardizedFields(t, { source = p1 })
+function logSidesheetClosed(Source) --[[ Line: 42 ]]
+	-- upvalues: config (copy)
+	_logEventWithStandardizedFields(config, { source = Source })
 end
 
 return { logSidesheetClosed = logSidesheetClosed }

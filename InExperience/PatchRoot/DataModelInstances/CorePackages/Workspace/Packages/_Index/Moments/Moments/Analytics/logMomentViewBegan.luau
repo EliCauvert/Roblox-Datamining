@@ -1,16 +1,15 @@
-﻿local parent = script:FindFirstAncestor("Moments").Parent
-local momentsCommonModule = require(parent.MomentsCommon)
-local _ = require(parent.MomentsTypes)
-local makeMomentViewBeganFieldsModule = require(script.Parent.makeMomentViewBeganFields)
-local analytics = momentsCommonModule.Analytics
-local eventNames = analytics.EventNames
+﻿local Parent = script:FindFirstAncestor("Moments").Parent
+local _ = require(Parent.MomentsTypes)
+local MakeMomentViewBeganFieldsModule = require(script.Parent.makeMomentViewBeganFields)
+local Analytics = require(Parent.MomentsCommon).Analytics
+local EventNames = Analytics.EventNames
 
-return function(p1, p2)
-	-- upvalues: analytics (ref), makeMomentViewBeganFieldsModule (ref), eventNames (ref)
-	analytics.reportMomentsViewBegan(p2)
-	local var1 = makeMomentViewBeganFieldsModule(p1, p2)
+return function(p1, p2, p3) --[[ Line: 14 | Named "logMomentViewBegan" ]]
+	-- upvalues: Analytics (copy), MakeMomentViewBeganFieldsModule (copy), EventNames (copy)
+	Analytics.reportMomentsViewBegan(p2)
+	local MomentViewBeganFieldsModule = MakeMomentViewBeganFieldsModule(p1, p2, p3)
 	
-	if var1 ~= nil then
-		analytics.fireAnalyticsEvent(eventNames.MomentViewBegan, var1)
+	if MomentViewBeganFieldsModule ~= nil then
+		Analytics.fireAnalyticsEvent(EventNames.MomentViewBegan, MomentViewBeganFieldsModule)
 	end
 end

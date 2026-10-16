@@ -1,16 +1,16 @@
-﻿local authSignup = script:FindFirstAncestor("AuthSignup")
-local postSetGenderModule = require(authSignup.Requests.PostSetGender)
-local promiseModule = require(authSignup.Parent.Promise)
+﻿local AuthSignup = script:FindFirstAncestor("AuthSignup")
+local PostSetGenderModule = require(AuthSignup.Requests.PostSetGender)
+local PromiseModule = require(AuthSignup.Parent.Promise)
 
 return {
-	setGender = function(value, p1)
-		-- upvalues: postSetGenderModule (ref), promiseModule (ref)
-		return postSetGenderModule(value, p1):andThen(function(p2)
-			-- upvalues: promiseModule (copy)
-			return if p2 == nil or p2.responseBody == nil then promiseModule.reject() else promiseModule.resolve()
-		end):catch(function(_)
-			-- upvalues: promiseModule (copy)
-			return promiseModule.reject()
+	setGender = function(p1, p2) --[[ Line: 8 ]]
+		-- upvalues: PostSetGenderModule (copy), PromiseModule (copy)
+		return PostSetGenderModule(p1, p2):andThen(function(Result) --[[ Line: 9 ]]
+			-- upvalues: PromiseModule (upval)
+			return if Result == nil or Result.responseBody == nil then PromiseModule.reject() else PromiseModule.resolve()
+		end):catch(function(_) --[[ Line: 15 ]]
+			-- upvalues: PromiseModule (upval)
+			return PromiseModule.reject()
 		end)
 	end
 }

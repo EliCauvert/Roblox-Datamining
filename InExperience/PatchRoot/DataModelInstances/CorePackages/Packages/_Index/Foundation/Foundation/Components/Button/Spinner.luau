@@ -1,28 +1,28 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local reactModule = require(parent.React)
-local isPluginSecurityModule = require(foundation.Utility.isPluginSecurity)
-local motionModule = require(parent.Motion)
-local useMotion = motionModule.useMotion
-local usePresence = motionModule.usePresence
-local useSpinnerMotionStatesModule = require(script.Parent.useSpinnerMotionStates)
-local flagsModule = require(foundation.Utility.Flags)
-local imageModule = require(foundation.Components.Image)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local useRotationModule = require(foundation.Utility.useRotation)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local ReactModule = require(Parent.React)
+local IsPluginSecurityModule = require(Foundation.Utility.isPluginSecurity)
+local MotionModule = require(Parent.Motion)
+local UseMotionFunction = MotionModule.useMotion
+local UsePresenceFunction = MotionModule.usePresence
+local UseSpinnerMotionStatesModule = require(script.Parent.useSpinnerMotionStates)
+local FlagsModule = require(Foundation.Utility.Flags)
+local ImageModule = require(Foundation.Components.Image)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local UseRotationModule = require(Foundation.Utility.useRotation)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
 
-local function IconSpinner(p1)
-	-- upvalues: useRotationModule (ref), reactModule (ref), imageModule (ref)
-	return reactModule.createElement(imageModule, {
+local function IconSpinner(p1) --[[ Line: 26 ]]
+	-- upvalues: UseRotationModule (copy), ReactModule (copy), ImageModule (copy)
+	return ReactModule.createElement(ImageModule, {
 		Image = "icons/status/loading_large",
 		tag = "position-center-center anchor-center-center size-full-full",
 		imageStyle = p1.style,
-		Rotation = useRotationModule(2),
+		Rotation = UseRotationModule(2),
 		testId = p1.testId
 	}, {
-		UIScale = reactModule.createElement("UIScale", { Scale = p1.scale })
+		UIScale = ReactModule.createElement("UIScale", { Scale = p1.scale })
 	})
 end
 
@@ -33,72 +33,76 @@ local list = {
 	Path2DControlPoint.new(UDim2.fromScale(0.5, 1), UDim2.fromScale(-0.25, 0), UDim2.fromScale(0.25, 0))
 }
 
-local function Path2DSpinner(p1)
-	-- upvalues: reactModule (ref), useRotationModule (ref), list (ref), viewModule (ref), isPluginSecurityModule (ref)
-	local var1 = reactModule.useRef(nil)
-	local var2 = useRotationModule(2)
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), list (copy)
-		local current = var1.current
+local function Path2DSpinner(p1) --[[ Line: 50 ]]
+	-- upvalues: ReactModule (copy), UseRotationModule (copy), list (copy), ViewModule (copy), IsPluginSecurityModule (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRotationModuleResult = UseRotationModule(2)
+	ReactModule.useEffect(function() --[[ Line: 54 ]]
+		-- upvalues: UseRefResult (copy), list (upval)
+		local Current = UseRefResult.current
 		
-		if current ~= nil then
-			current:SetControlPoints(list)
+		if Current ~= nil then
+			Current:SetControlPoints(list)
 		end
 	end, {})
 	
-	return reactModule.createElement(viewModule, {
+	return ReactModule.createElement(ViewModule, {
 		tag = "position-center-center anchor-center-center size-full",
-		Rotation = var2,
+		Rotation = UseRotationModuleResult,
 		testId = p1.testId
 	}, {
-		Circle = reactModule.createElement("Path2D", {
+		Circle = ReactModule.createElement("Path2D", {
 			Closed = false,
-			ref = var1,
-			Color3 = p1.style:map(function(p2)
+			ref = UseRefResult,
+			Color3 = p1.style:map(function(p2) --[[ Line: 69 ]]
 				return p2.Color3
 			end),
-			Transparency = if isPluginSecurityModule() then p1.style:map(function(p2)
+			Transparency = if IsPluginSecurityModule() then p1.style:map(function(p2) --[[ Line: 73 ]]
 				return p2.Transparency
 			end) else nil,
 			Thickness = p1.Thickness
 		}),
-		UIScale = reactModule.createElement("UIScale", { Scale = p1.scale })
+		UIScale = ReactModule.createElement("UIScale", { Scale = p1.scale })
 	})
 end
 
-local t = { style = {} }
+local config = { style = {} }
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), useSpinnerMotionStatesModule (ref), useMotion (ref), usePresence (ref), reactModule (ref), viewModule (ref), flagsModule (ref), Path2DSpinner (ref), IconSpinner (ref)
-	local var1 = withDefaultsModule(p1, t)
-	local var2 = useSpinnerMotionStatesModule()
-	local var3, var4 = useMotion(var2.Default)
-	local var5 = usePresence()
-	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), var4 (ref), var2 (ref)
-		if var5.isPresent then
-			var4(var2.Loading)
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 95 | Named "Spinner" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseSpinnerMotionStatesModule (copy), UseMotionFunction (copy), UsePresenceFunction (copy), ReactModule (copy), ViewModule (copy), FlagsModule (copy), Path2DSpinner (copy), IconSpinner (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	local UseSpinnerMotionStatesModuleResult = UseSpinnerMotionStatesModule()
+	local UseMotionResult, UseMotionResult2 = UseMotionFunction(UseSpinnerMotionStatesModuleResult.Default)
+	local UsePresenceResult = UsePresenceFunction()
+	ReactModule.useEffect(function() --[[ Line: 102 ]]
+		-- upvalues: UsePresenceResult (copy), UseMotionResult2 (copy), UseSpinnerMotionStatesModuleResult (copy)
+		if UsePresenceResult.isPresent then
+			UseMotionResult2(UseSpinnerMotionStatesModuleResult.Loading)
 			
 			return
+		else
+			UseMotionResult2(UseSpinnerMotionStatesModuleResult.Default, { onAnimationComplete = UsePresenceResult.onExitComplete })
 		end
-		var4(var2.Default, { onAnimationComplete = var5.onExitComplete })
-	end, { var5.isPresent })
+	end, { UsePresenceResult.isPresent })
 	
-	return reactModule.createElement(viewModule, {
+	return ReactModule.createElement(ViewModule, {
 		tag = "position-center-center anchor-center-center",
-		Size = var1.Size,
-		ref = p2
+		Size = WithDefaultsModuleResult.Size,
+		ref = Ref
 	}, {
-		Spinner = reactModule.createElement(if flagsModule.FoundationUsePath2DSpinner then Path2DSpinner else IconSpinner, {
-			scale = var3.scale,
-			style = reactModule.joinBindings({ style = var1.style, transparency = var3.transparency }):map(function(p3)
+		Spinner = ReactModule.createElement(if FlagsModule.FoundationUsePath2DSpinner then Path2DSpinner else IconSpinner, {
+			scale = UseMotionResult.scale,
+			style = ReactModule.joinBindings({
+				style = WithDefaultsModuleResult.style,
+				transparency = UseMotionResult.transparency
+			}):map(function(p2) --[[ Line: 122 ]]
 				return {
-					Color3 = p3.style.Color3,
-					Transparency = p3.style.Transparency + p3.transparency / 2
+					Color3 = p2.style.Color3,
+					Transparency = p2.style.Transparency + p2.transparency / 2
 				}
 			end),
-			Thickness = math.max(math.floor(var1.Size.X.Offset / 8), 1),
-			testId = var1.testId
+			Thickness = math.max(math.floor(WithDefaultsModuleResult.Size.X.Offset / 8), 1),
+			testId = WithDefaultsModuleResult.testId
 		})
 	})
 end))

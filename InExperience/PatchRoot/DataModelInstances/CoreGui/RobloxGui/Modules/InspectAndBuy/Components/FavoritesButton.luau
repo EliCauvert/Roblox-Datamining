@@ -1,158 +1,161 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local contextActionService = game:GetService("ContextActionService")
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local parent = script.Parent.Parent
-local colorsModule = require(parent.Colors)
-local createFavoriteForAssetModule = require(parent.Thunks.CreateFavoriteForAsset)
-local deleteFavoriteForAssetModule = require(parent.Thunks.DeleteFavoriteForAsset)
-local createFavoriteForBundleModule = require(parent.Thunks.CreateFavoriteForBundle)
-local deleteFavoriteForBundleModule = require(parent.Thunks.DeleteFavoriteForBundle)
-local getFavoriteForAssetModule = require(parent.Thunks.GetFavoriteForAsset)
-local getFavoriteForBundleModule = require(parent.Thunks.GetFavoriteForBundle)
-local gotFavoriteForDetailsItemModule = require(parent.Selectors.GotFavoriteForDetailsItem)
-local isDetailsItemPartOfBundleAndOffsaleModule = require(parent.Selectors.IsDetailsItemPartOfBundleAndOffsale)
-local getIsFavoriteModule = require(parent.Selectors.GetIsFavorite)
-local utilityFunctionsModule = require(parent.UtilityFunctions)
-local getSelectionImageObjectRoundedModule = require(parent.getSelectionImageObjectRounded)
-local favorite = require(script.Parent.Common.ControllerShortcutKeycodes).Favorite
-local favoritesButton = roactModule.PureComponent:extend("FavoritesButton")
+﻿local CorePackages = game:GetService("CorePackages")
+local ContextActionService = game:GetService("ContextActionService")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local Parent = script.Parent.Parent
+local ColorsModule = require(Parent.Colors)
+local CreateFavoriteForAssetModule = require(Parent.Thunks.CreateFavoriteForAsset)
+local DeleteFavoriteForAssetModule = require(Parent.Thunks.DeleteFavoriteForAsset)
+local CreateFavoriteForBundleModule = require(Parent.Thunks.CreateFavoriteForBundle)
+local DeleteFavoriteForBundleModule = require(Parent.Thunks.DeleteFavoriteForBundle)
+local GetFavoriteForAssetModule = require(Parent.Thunks.GetFavoriteForAsset)
+local GetFavoriteForBundleModule = require(Parent.Thunks.GetFavoriteForBundle)
+local GotFavoriteForDetailsItemModule = require(Parent.Selectors.GotFavoriteForDetailsItem)
+local IsDetailsItemPartOfBundleAndOffsaleModule = require(Parent.Selectors.IsDetailsItemPartOfBundleAndOffsale)
+local GetIsFavoriteModule = require(Parent.Selectors.GetIsFavorite)
+local UtilityFunctionsModule = require(Parent.UtilityFunctions)
+local GetSelectionImageObjectRoundedModule = require(Parent.getSelectionImageObjectRounded)
+local Favorite = require(script.Parent.Common.ControllerShortcutKeycodes).Favorite
+local FavoritesButton = RoactModule.PureComponent:extend("FavoritesButton")
 
-function favoritesButton.init(p1)
-	-- upvalues: getSelectionImageObjectRoundedModule (ref), contextActionService (ref), favorite (ref)
-	p1.selectedImage = getSelectionImageObjectRoundedModule()
+function FavoritesButton.init(p1) --[[ Line: 28 ]]
+	-- upvalues: GetSelectionImageObjectRoundedModule (copy), ContextActionService (copy), Favorite (copy)
+	p1.selectedImage = GetSelectionImageObjectRoundedModule()
 	p1.fetchFavoriteRetries = 0
-	contextActionService:BindCoreAction("FavoriteGamepadShortcut", function(_, p2, _)
-		-- upvalues: p1 (ref)
-		if p2 == Enum.UserInputState.End then
+	ContextActionService:BindCoreAction("FavoriteGamepadShortcut", function(_, UserInputState, _) --[[ Line: 32 ]]
+		-- upvalues: p1 (copy)
+		if UserInputState == Enum.UserInputState.End then
 			p1:activateButton()
 			
 			return Enum.ContextActionResult.Sink
+		else
+			return Enum.ContextActionResult.Pass
 		end
-		return Enum.ContextActionResult.Pass
-	end, false, favorite)
+	end, false, Favorite)
 end
 
-function favoritesButton.willUpdate(p1, p2)
-	-- upvalues: utilityFunctionsModule (ref)
-	local gotFavoriteForDetailsItem = p2.gotFavoriteForDetailsItem
-	local getFavoriteForAsset = p1.props.getFavoriteForAsset
-	local getFavoriteForBundle = p1.props.getFavoriteForBundle
+function FavoritesButton.willUpdate(p1, p2) --[[ Line: 41 ]]
+	-- upvalues: UtilityFunctionsModule (copy)
+	local GotFavoriteForDetailsItem = p2.gotFavoriteForDetailsItem
+	local GetFavoriteForAssetFunction = p1.props.getFavoriteForAsset
+	local GetFavoriteForBundleFunction = p1.props.getFavoriteForBundle
 	
-	if p2 and (p2.assetInfo and (not gotFavoriteForDetailsItem and p1.fetchFavoriteRetries < 10)) then
-		local assetInfo = p2.assetInfo
-		local var1 = assetInfo and assetInfo.parentBundleId ~= nil
-		coroutine.wrap(function()
-			-- upvalues: var1 (ref), getFavoriteForAsset (ref), assetInfo (ref), utilityFunctionsModule (copy), getFavoriteForBundle (ref)
-			if var1 then
-				getFavoriteForBundle(utilityFunctionsModule.getBundleId(assetInfo))
+	if p2 and (p2.assetInfo and (not GotFavoriteForDetailsItem and p1.fetchFavoriteRetries < 10)) then
+		local AssetInfo = p2.assetInfo
+		local HasParentBundleId: boolean = AssetInfo and AssetInfo.parentBundleId ~= nil
+		coroutine.wrap(function() --[[ Line: 55 ]]
+			-- upvalues: HasParentBundleId (copy), GetFavoriteForAssetFunction (copy), AssetInfo (copy), UtilityFunctionsModule (upval), GetFavoriteForBundleFunction (copy)
+			if HasParentBundleId then
+				GetFavoriteForBundleFunction((UtilityFunctionsModule.getBundleId(AssetInfo)))
 				
 				return
+			else
+				GetFavoriteForAssetFunction(AssetInfo.assetId)
 			end
-			getFavoriteForAsset(assetInfo.assetId)
 		end)()
 		p1.fetchFavoriteRetries += 1
 	end
 end
 
-function favoritesButton.activateButton(p1)
-	-- upvalues: utilityFunctionsModule (ref)
-	local isFavorited = p1.props.isFavorited
-	local isDetailsItemPartOfBundleAndOffsale = p1.props.IsDetailsItemPartOfBundleAndOffsale
-	local createFavoriteForAsset = p1.props.createFavoriteForAsset
-	local deleteFavoriteForAsset = p1.props.deleteFavoriteForAsset
-	local createFavoriteForBundle = p1.props.createFavoriteForBundle
-	local deleteFavoriteForBundle = p1.props.deleteFavoriteForBundle
-	local assetInfo = p1.props.assetInfo
+function FavoritesButton.activateButton(p1) --[[ Line: 67 ]]
+	-- upvalues: UtilityFunctionsModule (copy)
+	local IsDetailsItemPartOfBundleAndOffsale = p1.props.IsDetailsItemPartOfBundleAndOffsale
+	local CreateFavoriteForAssetFunction: (any) -> () = p1.props.createFavoriteForAsset
+	local DeleteFavoriteForAssetFunction: (any) -> () = p1.props.deleteFavoriteForAsset
+	local CreateFavoriteForBundleFunction: (any) -> () = p1.props.createFavoriteForBundle
+	local DeleteFavoriteForBundleFunction: (any) -> () = p1.props.deleteFavoriteForBundle
+	local AssetInfo = p1.props.assetInfo
 	
-	if isFavorited then
-		if isDetailsItemPartOfBundleAndOffsale then
-			deleteFavoriteForBundle(utilityFunctionsModule.getBundleId(assetInfo))
+	if p1.props.isFavorited then
+		if IsDetailsItemPartOfBundleAndOffsale then
+			DeleteFavoriteForBundleFunction((UtilityFunctionsModule.getBundleId(AssetInfo)))
+			
+			return
+		else
+			DeleteFavoriteForAssetFunction(AssetInfo.assetId)
 			
 			return
 		end
-		deleteFavoriteForAsset(assetInfo.assetId)
+	elseif IsDetailsItemPartOfBundleAndOffsale then
+		CreateFavoriteForBundleFunction((UtilityFunctionsModule.getBundleId(AssetInfo)))
 		
 		return
-	elseif isDetailsItemPartOfBundleAndOffsale then
-		createFavoriteForBundle(utilityFunctionsModule.getBundleId(assetInfo))
-		
-		return
+	else
+		CreateFavoriteForAssetFunction(AssetInfo.assetId)
 	end
-	createFavoriteForAsset(assetInfo.assetId)
 end
 
-function favoritesButton.willUnmount(_)
-	-- upvalues: contextActionService (ref)
-	contextActionService:UnbindCoreAction("FavoriteGamepadShortcut")
+function FavoritesButton:willUnmount() --[[ Line: 93 ]]
+	-- upvalues: ContextActionService (copy)
+	ContextActionService:UnbindCoreAction("FavoriteGamepadShortcut")
 end
 
-function favoritesButton.render(p1)
-	-- upvalues: roactModule (ref), colorsModule (ref)
-	return roactModule.createElement("ImageButton", {
+function FavoritesButton.render(p1) --[[ Line: 97 ]]
+	-- upvalues: RoactModule (copy), ColorsModule (copy)
+	return RoactModule.createElement("ImageButton", {
 		AnchorPoint = Vector2.new(0.5, 0),
 		BackgroundTransparency = 1,
 		Size = UDim2.new(0, 44, 0, 44),
 		LayoutOrder = 1,
 		Image = "rbxasset://textures/ui/InspectMenu/Button_outline.png",
-		ImageColor3 = colorsModule.White,
+		ImageColor3 = ColorsModule.White,
 		ScaleType = Enum.ScaleType.Slice,
 		SliceCenter = Rect.new(5, 5, 120, 20),
 		SelectionImageObject = p1.selectedImage,
 		Visible = true,
-		[roactModule.Ref] = p1.props.favoriteButtonRef,
-		[roactModule.Event.Activated] = function()
-			-- upvalues: p1 (ref)
+		[RoactModule.Ref] = p1.props.favoriteButtonRef,
+		[RoactModule.Event.Activated] = function() --[[ Line: 114 ]]
+			-- upvalues: p1 (copy)
 			p1:activateButton()
 		end
 	}, {
-		FavoriteIcon = roactModule.createElement("ImageLabel", {
+		FavoriteIcon = RoactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 1,
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Size = UDim2.new(0, 26, 0, 26),
 			Position = UDim2.new(0, 22, 0, 22),
 			Image = if p1.props.isFavorited then "rbxasset://textures/ui/InspectMenu/ico_favorite.png" else "rbxasset://textures/ui/InspectMenu/ico_favorite_off.png",
-			ImageColor3 = colorsModule.White
+			ImageColor3 = ColorsModule.White
 		})
 	})
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p1, _)
-	-- upvalues: gotFavoriteForDetailsItemModule (ref), getIsFavoriteModule (ref), isDetailsItemPartOfBundleAndOffsaleModule (ref)
+return RoactRoduxModule.UNSTABLE_connect2(function(p1, _) --[[ Line: 129 ]]
+	-- upvalues: GotFavoriteForDetailsItemModule (copy), GetIsFavoriteModule (copy), IsDetailsItemPartOfBundleAndOffsaleModule (copy)
 	return {
 		view = p1.view,
 		assetInfo = p1.assets[p1.detailsInformation.assetId],
 		bundleInfo = p1.bundles,
-		gotFavoriteForDetailsItem = gotFavoriteForDetailsItemModule(p1),
-		isFavorited = getIsFavoriteModule(p1),
-		IsDetailsItemPartOfBundleAndOffsale = isDetailsItemPartOfBundleAndOffsaleModule(p1)
+		gotFavoriteForDetailsItem = GotFavoriteForDetailsItemModule(p1),
+		isFavorited = GetIsFavoriteModule(p1),
+		IsDetailsItemPartOfBundleAndOffsale = IsDetailsItemPartOfBundleAndOffsaleModule(p1)
 	}
-end, function(p1)
-	-- upvalues: createFavoriteForAssetModule (ref), deleteFavoriteForAssetModule (ref), createFavoriteForBundleModule (ref), deleteFavoriteForBundleModule (ref), getFavoriteForAssetModule (ref), getFavoriteForBundleModule (ref)
+end, function(Callback) --[[ Line: 140 ]]
+	-- upvalues: CreateFavoriteForAssetModule (copy), DeleteFavoriteForAssetModule (copy), CreateFavoriteForBundleModule (copy), DeleteFavoriteForBundleModule (copy), GetFavoriteForAssetModule (copy), GetFavoriteForBundleModule (copy)
 	return {
-		createFavoriteForAsset = function(value)
-			-- upvalues: p1 (ref), createFavoriteForAssetModule (copy)
-			p1(createFavoriteForAssetModule(value))
+		createFavoriteForAsset = function(p1) --[[ Line: 142 ]]
+			-- upvalues: Callback (copy), CreateFavoriteForAssetModule (upval)
+			Callback(CreateFavoriteForAssetModule(p1))
 		end,
-		deleteFavoriteForAsset = function(value)
-			-- upvalues: p1 (ref), deleteFavoriteForAssetModule (copy)
-			p1(deleteFavoriteForAssetModule(value))
+		deleteFavoriteForAsset = function(p1) --[[ Line: 145 ]]
+			-- upvalues: Callback (copy), DeleteFavoriteForAssetModule (upval)
+			Callback(DeleteFavoriteForAssetModule(p1))
 		end,
-		createFavoriteForBundle = function(p2)
-			-- upvalues: p1 (ref), createFavoriteForBundleModule (copy)
-			p1(createFavoriteForBundleModule(p2))
+		createFavoriteForBundle = function(p1) --[[ Line: 148 ]]
+			-- upvalues: Callback (copy), CreateFavoriteForBundleModule (upval)
+			Callback(CreateFavoriteForBundleModule(p1))
 		end,
-		deleteFavoriteForBundle = function(p2)
-			-- upvalues: p1 (ref), deleteFavoriteForBundleModule (copy)
-			p1(deleteFavoriteForBundleModule(p2))
+		deleteFavoriteForBundle = function(p1) --[[ Line: 151 ]]
+			-- upvalues: Callback (copy), DeleteFavoriteForBundleModule (upval)
+			Callback(DeleteFavoriteForBundleModule(p1))
 		end,
-		getFavoriteForAsset = function(value)
-			-- upvalues: p1 (ref), getFavoriteForAssetModule (copy)
-			p1(getFavoriteForAssetModule(value))
+		getFavoriteForAsset = function(p1) --[[ Line: 154 ]]
+			-- upvalues: Callback (copy), GetFavoriteForAssetModule (upval)
+			Callback(GetFavoriteForAssetModule(p1))
 		end,
-		getFavoriteForBundle = function(p2)
-			-- upvalues: p1 (ref), getFavoriteForBundleModule (copy)
-			p1(getFavoriteForBundleModule(p2))
+		getFavoriteForBundle = function(p1) --[[ Line: 157 ]]
+			-- upvalues: Callback (copy), GetFavoriteForBundleModule (upval)
+			Callback(GetFavoriteForBundleModule(p1))
 		end
 	}
-end)(favoritesButton)
+end)(FavoritesButton)

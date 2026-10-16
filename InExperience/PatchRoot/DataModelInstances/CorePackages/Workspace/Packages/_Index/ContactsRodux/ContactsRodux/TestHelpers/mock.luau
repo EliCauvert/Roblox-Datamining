@@ -1,10 +1,10 @@
-﻿local roduxModule = require(script.Parent.Parent.Parent.Rodux)
+﻿local RoduxModule = require(script.Parent.Parent.Parent.Rodux)
 
 return {
 	mockFindContactFriends = "FIND_CONTACT_FRIENDS_SUCCEEDED_ACTION",
 	mockGetContactEntitiesByContactId = "GET_CONTACT_ENTITIES",
 	mockUploadContacts = "UPLOAD_CONTACTS",
-	mockFindContactFriendsAction = roduxModule.makeActionCreator("FIND_CONTACT_FRIENDS_SUCCEEDED_ACTION", function()
+	mockFindContactFriendsAction = RoduxModule.makeActionCreator("FIND_CONTACT_FRIENDS_SUCCEEDED_ACTION", function() --[[ Line: 5 ]]
 		return {
 			responseBody = {
 				userContactIds = {
@@ -16,7 +16,7 @@ return {
 			}
 		}
 	end),
-	mockGetContactEntitiesByContactIdAction = roduxModule.makeActionCreator("GET_CONTACT_ENTITIES", function()
+	mockGetContactEntitiesByContactIdAction = RoduxModule.makeActionCreator("GET_CONTACT_ENTITIES", function() --[[ Line: 19 ]]
 		return {
 			responseBody = {
 				userContactsEntities = {
@@ -44,9 +44,9 @@ return {
 			}
 		}
 	end),
-	mockUploadContactsAction = roduxModule.makeActionCreator("UPLOAD_CONTACTS", function(p1)
+	mockUploadContactsAction = RoduxModule.makeActionCreator("UPLOAD_CONTACTS", function(MatchedContactFields) --[[ Line: 49 ]]
 		return {
-			responseBody = if p1 then { matchedContactFields = p1 } else {
+			responseBody = if MatchedContactFields then { matchedContactFields = MatchedContactFields } else {
 				matchedContactFields = {
 					{
 						userContactId = "abc-123-456-1235",

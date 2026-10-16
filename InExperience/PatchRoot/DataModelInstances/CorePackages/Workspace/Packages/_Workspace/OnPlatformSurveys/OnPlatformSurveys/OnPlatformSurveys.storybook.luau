@@ -1,49 +1,48 @@
-﻿local onPlatformSurveys = script:FindFirstAncestor("OnPlatformSurveys")
-local parent = onPlatformSurveys.Parent
-local reactModule = require(parent.React)
-local reactRobloxModule = require(parent.Dev.ReactRoblox)
-local foundationModule = require(parent.Foundation)
-local foundationProvider = foundationModule.FoundationProvider
-local colorMode = foundationModule.Enums.ColorMode
-local device = foundationModule.Enums.Device
-local mockProvidersModule = require(onPlatformSurveys.MockProviders)
-local t = { Dark = colorMode.Dark, Light = colorMode.Light }
+﻿local OnPlatformSurveys = script:FindFirstAncestor("OnPlatformSurveys")
+local Parent = OnPlatformSurveys.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local FoundationProvider = FoundationModule.FoundationProvider
+local ColorMode = FoundationModule.Enums.ColorMode
+local Device = FoundationModule.Enums.Device
+local MockProvidersModule = require(OnPlatformSurveys.MockProviders)
+local config = { Dark = ColorMode.Dark, Light = ColorMode.Light }
 
-local function _(p1, p2)
-	local cloned = table.clone(p1)
+local function _(Tbl, List) --[[ Line: 26 | Named "union" ]]
+	local Copy = table.clone(Tbl)
 	
-	if p2 then
-		for i, v in p2 do
-			cloned[i] = v
+	if List then
+		for i, value in List do
+			Copy[i] = value
 		end
 	end
-	return cloned
+	return Copy
 end
 
 return {
-	roact = reactModule,
-	reactRoblox = reactRobloxModule,
-	mapStory = function(p3)
-		-- upvalues: reactModule (ref), mockProvidersModule (ref), foundationProvider (ref), t (ref), colorMode (ref), device (ref)
-		return function(p4)
-			-- upvalues: reactModule (copy), mockProvidersModule (copy), foundationProvider (copy), t (copy), colorMode (copy), device (copy), p3 (ref)
-			local var1 = if p4.definition then p4.definition.props else {}
-			local cloned = table.clone(p4)
+	roact = ReactModule,
+	reactRoblox = require(Parent.Dev.ReactRoblox),
+	mapStory = function(p1) --[[ Line: 39 ]]
+		-- upvalues: ReactModule (copy), MockProvidersModule (copy), FoundationProvider (copy), config (copy), ColorMode (copy), Device (copy)
+		return function(Tbl) --[[ Line: 40 ]]
+			-- upvalues: ReactModule (upval), MockProvidersModule (upval), FoundationProvider (upval), config (upval), ColorMode (upval), Device (upval), p1 (copy)
+			local Props = Tbl.definition and Tbl.definition.props or {}
+			local Copy = table.clone(Tbl)
 			
-			if var1 then
-				for i, v in var1 do
-					cloned[i] = v
+			if Props then
+				for i, prop in Props do
+					Copy[i] = prop
 				end
 			end
-			return reactModule.createElement(mockProvidersModule, {}, {
-				FoundationProvider = reactModule.createElement(foundationProvider, {
-					colorMode = t[p4.theme] or colorMode.Dark,
-					device = device[p4.platform] or device.Phone,
-					preferences = p4.settings,
-					overlayGui = p4.focus
-				}, { story = reactModule.createElement(p3, cloned) })
+			return ReactModule.createElement(MockProvidersModule, {}, {
+				FoundationProvider = ReactModule.createElement(FoundationProvider, {
+					colorMode = config[Tbl.theme] or ColorMode.Dark,
+					device = Device[Tbl.platform] or Device.Phone,
+					preferences = Tbl.settings,
+					overlayGui = Tbl.focus
+				}, { story = ReactModule.createElement(p1, Copy) })
 			})
 		end
 	end,
-	storyRoots = { onPlatformSurveys }
+	storyRoots = { OnPlatformSurveys }
 }

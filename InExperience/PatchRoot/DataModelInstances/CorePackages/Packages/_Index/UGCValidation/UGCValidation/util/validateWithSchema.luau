@@ -1,128 +1,139 @@
-﻿local function _(p1, p2)
-	if type(p1) == "table" then
-		for i, v in pairs(p1) do
-			if v == p2 then
+﻿local function _(List, p1): boolean --[[ Line: 3 | Named "checkName" ]]
+	if type(List) == "table" then
+		for _, value in pairs(List) do
+			if value == p1 then
 				return true
 			end
 		end
-	else
-		return type(p1) == "string" and p1 == p2
+	elseif type(List) == "string" then
+		return List == p1
 	end
+	return false
 end
 
-local _ = function(p3)
-	return if type(p3) == "table" then table.concat(p3, " or ") elseif type(p3) == "string" then p3 else "*"
+local _ = function(List) --[[ Line: 16 | Named "getReadableName" ]]
+	return if type(List) == "table" then table.concat(List, " or ") elseif type(List) == "string" then List else "*"
 end
 
-local function validateWithSchemaHelper(p3, p4, p5)
-	-- upvalues: validateWithSchemaHelper (ref)
-	local v
-	if p4.ClassName == p3.ClassName then
-		if p3.Name ~= nil then
-			local var1
-			local name = p3.Name
-			local name_1 = p4.Name
-			
-			if type(name) == "table" then
-				for i, v in pairs(name) do
-					if v == name_1 then
-						var1 = true
-						if not var1 then
-							return { success = false }
+local function validateWithSchemaHelper(p2, Key, p3) --[[ Line: 25 ]]
+	-- upvalues: validateWithSchemaHelper (copy)
+	repeat
+		if Key.ClassName ~= p2.ClassName then break end
+		if p2.Name ~= nil then
+			local Name = p2.Name
+			local Name1 = Key.Name
+			local Flag = nil
+			repeat
+				if type(Name) == "table" then
+					for _, value in pairs(Name) do
+						if value == Name1 then
+							Flag = true
+							break
 						end
 					end
+				else
+					if type(Name) ~= "string" then break end
+					Flag = Name == Name1
+					break
 				end
-			elseif type(name) == "string" then
-				local _ = name == name_1
-			else
-				var1 = false
-			end
+				Flag = false
+			until true
+			if not Flag then continue end
 		end
-		if p3._ignoreDescendants then
-			assert(not p3._children, "if _ignoreDescendants is true, there should be no descendants in the schema as they would be ignored anyway")
+		if p2._ignoreDescendants then
+			assert(not p2._children, "if _ignoreDescendants is true, there should be no descendants in the schema as they would be ignored anyway")
 			
-			for i, v in p4:GetDescendants() do
-				p5[v] = true
+			for _, descendant in Key:GetDescendants() do
+				p3[descendant] = true
 			end
-			p5[p4] = true
+			p3[Key] = true
 			
 			return { success = true }
-		elseif p3._children then
-			local var2
-			for i, v in pairs(p3._children) do
-				var2 = false
-				local var3 = nil
-				
-				for i_1, v_1 in pairs(p4:GetChildren()) do
-					if not p5[v_1] then
-						local var4 = validateWithSchemaHelper(v, v_1, p5)
-						
-						if var4.success then
-							var2 = true
-							break
-						elseif var4.message then
-							var3 = var4
+		else
+			if p2._children then
+				local v1 = nil
+				local Flag = nil
+				for _, child in pairs(p2._children) do
+					Flag = false
+					v1 = nil
+					
+					for _, child1 in pairs(Key:GetChildren()) do
+						if not p3[child1] then
+							local ValidateWithSchemaHelperResult = validateWithSchemaHelper(child, child1, p3)
+							
+							if ValidateWithSchemaHelperResult.success then
+								Flag = true
+								break
+							elseif ValidateWithSchemaHelperResult.message then
+								v1 = ValidateWithSchemaHelperResult
+							end
+						end
+					end
+					if not Flag and not child._optional then
+						if v1 then
+							return v1
+						else
+							local Name2 = child.Name
+							
+							return {
+								success = false,
+								message = "Could not find a " .. child.ClassName .. " called " .. (if type(Name2) == "table" then table.concat(Name2, " or ") elseif type(Name2) == "string" then Name2 else "*") .. " inside " .. Key.Name
+							}
 						end
 					end
 				end
-				if not var2 and not v._optional then
-					if var3 then
-						return var3
-					end
-					v = { success = false }
-					local name = v.Name
-					v.message = "Could not find a " .. v.ClassName .. " called " .. (if type(name) == "table" then table.concat(name, " or ") elseif type(name) == "string" then name else "*") .. " inside " .. p4.Name
-					
-					return v
-				end
 			end
+			p3[Key] = true
+			
+			return { success = true }
 		end
-		p5[p4] = true
-		
-		return { success = true }
-	end
+	until true
+	return { success = false }
 end
 
-return function(p6, p7, _)
-	-- upvalues: validateWithSchemaHelper (ref)
-	local name_1
-	if p7.ClassName == p6.ClassName then
-		if p6.Name ~= nil then
-			local var5
-			local name = p6.Name
-			name_1 = p7.Name
-			
-			if type(name) == "table" then
-				for i, v in pairs(name) do
-					if v == name_1 then
-						var5 = true
-						if not var5 then
-							local t = { success = false }
-							local name = p6.Name
-							t.message = "Expected top-level instance to be a " .. p6.ClassName .. " named " .. (if type(name) == "table" then table.concat(name, " or ") elseif type(name) == "string" then name else "*")
-							
-							return t
+return function(p2, Key, _) --[[ Line: 82 | Named "validateWithSchema" ]]
+	-- upvalues: validateWithSchemaHelper (copy)
+	repeat
+		if Key.ClassName ~= p2.ClassName then break end
+		if p2.Name ~= nil then
+			local Name = p2.Name
+			local Name1 = Key.Name
+			local Flag = nil
+			repeat
+				if type(Name) == "table" then
+					for _, value in pairs(Name) do
+						if value == Name1 then
+							Flag = true
+							break
 						end
 					end
+				else
+					if type(Name) ~= "string" then break end
+					Flag = Name == Name1
+					break
 				end
-			elseif type(name) == "string" then
-				local _ = name == name_1
-			else
-				var5 = false
-			end
+				Flag = false
+			until true
+			if not Flag then continue end
 		end
 		local t = {}
 		
-		if not validateWithSchemaHelper(p6, p7, t).success then
+		if not validateWithSchemaHelper(p2, Key, t).success then
 			return { success = false, message = "" }
 		end
-		name_1 = {}
+		local FullNames = {}
 		
-		for i, v in pairs(p7:GetDescendants()) do
-			if t[v] == nil then
-				name_1[#name_1 + 1] = v:GetFullName()
+		for _, descendant in pairs(Key:GetDescendants()) do
+			if t[descendant] == nil then
+				FullNames[#FullNames + 1] = descendant:GetFullName()
 			end
 		end
-		return if #name_1 > 0 then { success = false, message = "" } else { success = true }
-	end
+		return if #FullNames > 0 then { success = false, message = "" } else { success = true }
+	until true
+	local Name = p2.Name
+	
+	return {
+		success = false,
+		message = "Expected top-level instance to be a " .. p2.ClassName .. " named " .. (if type(Name) == "table" then table.concat(Name, " or ") elseif type(Name) == "string" then Name else "*")
+	}
 end

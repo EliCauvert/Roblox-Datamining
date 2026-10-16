@@ -1,108 +1,106 @@
-﻿local t = {}
-t.__index = t
-local runService = game:GetService("RunService")
-local workspaceService = game:GetService("Workspace")
-local tweenService = game:GetService("TweenService")
+﻿local Module = {}
+Module.__index = Module
+local RunService = game:GetService("RunService")
+local TweenService = game:GetService("TweenService")
 local _ = game:GetService("InsertService")
-local currentCamera = workspaceService.CurrentCamera
+local CurrentCamera = game:GetService("Workspace").CurrentCamera
 
-local function removeScripts(p1)
-	for i, v in ipairs(p1:GetDescendants()) do
-		if v:IsA("LuaSourceContainer") then
-			v:Destroy()
+local function removeScripts(SelectedCharacterIndicator) --[[ Line: 22 ]]
+	for _, ScriptObject in ipairs(SelectedCharacterIndicator:GetDescendants()) do
+		if ScriptObject:IsA("LuaSourceContainer") then
+			ScriptObject:Destroy()
 		end
 	end
 end
 
-local function ApplyArrow(p2, p3)
-	-- upvalues: currentCamera (ref), removeScripts (ref), tweenService (ref), runService (ref)
-	local contextMenuArrow = Instance.new("Model")
-	contextMenuArrow.Name = "ContextMenuArrow"
-	contextMenuArrow.Parent = currentCamera
-	local humanoid = p2:FindFirstChildOfClass("Humanoid")
+local function ApplyArrow(Object, p1) --[[ Line: 30 ]]
+	-- upvalues: CurrentCamera (copy), removeScripts (copy), TweenService (copy), RunService (copy)
+	local ContextMenuArrow = Instance.new("Model")
+	ContextMenuArrow.Name = "ContextMenuArrow"
+	ContextMenuArrow.Parent = CurrentCamera
+	local Humanoid = Object:FindFirstChildOfClass("Humanoid")
 	
-	if humanoid == nil then
-		humanoid = p2:WaitForChild("Humanoid", 15)
+	if Humanoid == nil then
+		Humanoid = Object:WaitForChild("Humanoid", 15)
 		
-		if humanoid == nil then
+		if Humanoid == nil then return end
+	end
+	local HumanoidRootPart = Object:WaitForChild("HumanoidRootPart")
+	local SelectedCharacterIndicator = p1.SelectedCharacterIndicator:Clone()
+	removeScripts(SelectedCharacterIndicator)
+	SelectedCharacterIndicator.Anchored = true
+	SelectedCharacterIndicator.Transparency = 0
+	SelectedCharacterIndicator.CanCollide = false
+	SelectedCharacterIndicator.Parent = ContextMenuArrow
+	local Tween = TweenService:Create(SelectedCharacterIndicator, TweenInfo.new(4, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, -1, false), { Orientation = vector.create(0, 360, 180) })
+	Tween:Play()
+	
+	local function update() --[[ Line: 59 ]]
+		-- upvalues: SelectedCharacterIndicator (copy), HumanoidRootPart (copy)
+		SelectedCharacterIndicator.Position = HumanoidRootPart.Position + vector.create(0, 5, 0)
+	end
+	
+	local Flag = false
+	
+	local function kill() --[[ Line: 64 ]]
+		-- upvalues: Flag (ref), ContextMenuArrow (copy), Tween (copy), RunService (upval)
+		if not Flag then
+			Flag = true
+			ContextMenuArrow:Destroy()
+			Tween:Destroy()
+			RunService:UnbindFromRenderStep("ContextActionMenuRenderArrow")
+			
 			return
 		end
 	end
-	local humanoidRootPart = p2:WaitForChild("HumanoidRootPart")
-	local var1 = p3.SelectedCharacterIndicator:Clone()
-	removeScripts(var1)
-	var1.Anchored = true
-	var1.Transparency = 0
-	var1.CanCollide = false
-	var1.Parent = contextMenuArrow
-	local var2 = tweenService:Create(var1, TweenInfo.new(4, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, -1, false), { Orientation = Vector3.new(0, 360, 180) })
-	var2:Play()
 	
-	local function update()
-		-- upvalues: var1 (ref), humanoidRootPart (ref)
-		var1.Position = humanoidRootPart.Position + Vector3.new(0, 5, 0)
-	end
-	
-	local var3 = false
-	
-	local function kill()
-		-- upvalues: var3 (write), contextMenuArrow (ref), var2 (ref), runService (copy)
-		if var3 then
-			return
-		end
-		var3 = true
-		contextMenuArrow:Destroy()
-		var2:Destroy()
-		runService:UnbindFromRenderStep("ContextActionMenuRenderArrow")
-	end
-	
-	humanoid.Died:Connect(kill)
-	p2.AncestryChanged:Connect(kill)
-	runService:BindToRenderStep("ContextActionMenuRenderArrow", Enum.RenderPriority.Camera.Value + 1, update)
-	contextMenuArrow.Parent = currentCamera
+	Humanoid.Died:Connect(kill)
+	Object.AncestryChanged:Connect(kill)
+	RunService:BindToRenderStep("ContextActionMenuRenderArrow", Enum.RenderPriority.Camera.Value + 1, update)
+	ContextMenuArrow.Parent = CurrentCamera
 	
 	return kill
 end
 
-function t.ChangeSelectedPlayer(p2, p3, p4)
-	-- upvalues: ApplyArrow (ref)
-	coroutine.wrap(function()
-		-- upvalues: p2 (ref), p3 (ref), ApplyArrow (copy), p4 (ref)
-		if p2.SelectedPlayer then
-			p2.SelectedPlayer = nil
-			p2.CharacterAddedConn:Disconnect()
-			p2.CharacterAddedConn = nil
+function Module.ChangeSelectedPlayer(p1, Player: Player, p2) --[[ Line: 82 ]]
+	-- upvalues: ApplyArrow (copy)
+	coroutine.wrap(function() --[[ Line: 83 ]]
+		-- upvalues: p1 (copy), Player (copy), ApplyArrow (upval), p2 (copy)
+		if p1.SelectedPlayer then
+			p1.SelectedPlayer = nil
+			p1.CharacterAddedConn:Disconnect()
+			p1.CharacterAddedConn = nil
 			
-			if p2.KillOldRenderFunction then
-				p2.KillOldRenderFunction()
-				p2.KillOldRenderFunction = nil
+			if p1.KillOldRenderFunction then
+				p1.KillOldRenderFunction()
+				p1.KillOldRenderFunction = nil
 			end
 		end
-		if p3 then
-			p2.SelectedPlayer = p3
-			p2.CharacterAddedConn = p3.CharacterAdded:Connect(function(p5)
-				-- upvalues: p2 (copy), ApplyArrow (copy), p4 (copy)
-				if p2.KillOldRenderFunction then
-					p2.KillOldRenderFunction()
+		if Player then
+			p1.SelectedPlayer = Player
+			p1.CharacterAddedConn = Player.CharacterAdded:Connect(function(Character) --[[ Line: 96 ]]
+				-- upvalues: p1 (upval), ApplyArrow (upval), p2 (upval)
+				if p1.KillOldRenderFunction then
+					p1.KillOldRenderFunction()
 				end
-				p2.KillOldRenderFunction = ApplyArrow(p5, p4)
+				p1.KillOldRenderFunction = ApplyArrow(Character, p2)
 			end)
 			
-			if p3.Character then
-				p2.KillOldRenderFunction = ApplyArrow(p3.Character, p4)
+			if Player.Character then
+				p1.KillOldRenderFunction = ApplyArrow(Player.Character, p2)
 			end
 		end
 	end)()
 end
 
-function t.new()
-	-- upvalues: t (ref)
-	local tbl = setmetatable({}, t)
-	tbl.KillOldRenderFunction = nil
-	tbl.SelectedPlayer = nil
-	tbl.CharacterAddedConn = nil
+function Module.new() --[[ Line: 109 ]]
+	-- upvalues: Module (copy)
+	local self = setmetatable({}, Module)
+	self.KillOldRenderFunction = nil
+	self.SelectedPlayer = nil
+	self.CharacterAddedConn = nil
 	
-	return tbl
+	return self
 end
 
-return t.new()
+return Module.new()

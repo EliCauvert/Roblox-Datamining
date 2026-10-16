@@ -1,10 +1,10 @@
-﻿local t = {
+﻿local config = {
 	[Enum.KeyCode.Up] = "VerticalPagerPrevious",
 	[Enum.KeyCode.PageUp] = "VerticalPagerPrevious",
 	[Enum.KeyCode.Down] = "VerticalPagerNext",
 	[Enum.KeyCode.PageDown] = "VerticalPagerNext"
 }
-local t_1 = {
+local config1 = {
 	[Enum.KeyCode.DPadUp] = "VerticalPagerPrevious",
 	[Enum.KeyCode.DPadDown] = "VerticalPagerNext"
 }
@@ -12,29 +12,29 @@ local t_1 = {
 return {
 	PREVIOUS_EVENT = "VerticalPagerPrevious",
 	NEXT_EVENT = "VerticalPagerNext",
-	KEYBOARD_KEY_EVENTS = t,
-	DPAD_KEY_EVENTS = t_1,
-	buildEventMap = function(p1, p2)
-		-- upvalues: t_1 (ref), t (ref)
+	KEYBOARD_KEY_EVENTS = config,
+	DPAD_KEY_EVENTS = config1,
+	buildEventMap = function(p1, p2) --[[ Line: 40 ]]
+		-- upvalues: config1 (copy), config (copy)
 		if not p1 then
 			return {}
 		end
-		local cloned = table.clone(t_1)
+		local Copy = table.clone(config1)
 		
 		if p2 == "focused" then
-			for i, v in t do
-				cloned[i] = v
+			for i, value in config do
+				Copy[i] = value
 			end
 		end
-		return cloned
+		return Copy
 	end,
-	thumbstickDirection = function(p3, p4)
-		return if math.abs(p3) < p4 then nil elseif p4 <= p3 then "previous" else "next"
+	thumbstickDirection = function(Value: number, p3) --[[ Line: 59 ]]
+		return if math.abs(Value) < p3 then nil elseif p3 <= Value then "previous" else "next"
 	end,
-	shouldTrackDrag = function(p3, p4)
-		return if p3 then p4 else true
+	shouldTrackDrag = function(p3, p4) --[[ Line: 77 ]]
+		return not p3 or p4
 	end,
-	resolveWheelGesture = function(p3, p4, p5)
+	resolveWheelGesture = function(p3, p4, p5) --[[ Line: 99 ]]
 		return p5 <= p3 - p4, p3
 	end
 }

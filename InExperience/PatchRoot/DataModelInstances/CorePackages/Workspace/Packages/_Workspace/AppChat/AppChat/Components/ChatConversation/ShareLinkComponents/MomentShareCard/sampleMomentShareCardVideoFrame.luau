@@ -1,27 +1,28 @@
-﻿local videoService = game:GetService("VideoService")
-local full = Enum.VideoSampleSize.Full
+﻿local VideoService = game:GetService("VideoService")
+local Full = Enum.VideoSampleSize.Full
 
-return function(p1, p2)
-	-- upvalues: videoService (ref), full (ref)
-	p2 = p2 or videoService
-	local var1 = nil
-	local ok, status = pcall(function()
-		-- upvalues: var1 (write), p2 (ref), p1 (ref), full (copy)
-		var1 = p2:CreateVideoSamplerAsync(p1, { Size = full })
+return function(Content, p1) --[[ Line: 6 | Named "sampleMomentShareCardVideoFrame" ]]
+	-- upvalues: VideoService (copy), Full (copy)
+	local P1 = p1 or VideoService
+	local VideoSamplerAsync = nil
+	local Success, Result = pcall(function() --[[ Line: 9 ]]
+		-- upvalues: VideoSamplerAsync (ref), P1 (copy), Content (copy), Full (upval)
+		VideoSamplerAsync = P1:CreateVideoSamplerAsync(Content, { Size = Full })
 		
-		return var1:GetSamplesAtTimesAsync({ 0 })
+		return VideoSamplerAsync:GetSamplesAtTimesAsync({ 0 })
 	end)
 	
-	if var1 ~= nil then
-		pcall(function()
-			-- upvalues: var1 (write)
-			var1:Destroy()
+	if VideoSamplerAsync ~= nil then
+		pcall(function() --[[ Line: 16 ]]
+			-- upvalues: VideoSamplerAsync (ref)
+			VideoSamplerAsync:Destroy()
 		end)
 	end
-	if ok then
-		local var2 = status[1]
+	if Success then
+		local Entry = Result[1]
 		
-		return if var2 ~= nil then nil else var2.Image
+		return if Entry == nil then nil else Entry.Image
+	else
+		return nil
 	end
-	return nil
 end

@@ -1,129 +1,130 @@
-﻿local parent = script.Parent.Parent
-local roactNavigationModule = require(parent.RoactNavigation)
-local getNavigation = roactNavigationModule.getNavigation
-local actions = roactNavigationModule.Actions
-local events = roactNavigationModule.Events
-local signalsModule = require(parent.Signals)
-local createSignal = signalsModule.createSignal
-local createComputed = signalsModule.createComputed
-local signalsExperimentalModule = require(parent.SignalsExperimental)
-local fFlagSignalsNavP2NavigationPrimitives = require(parent.SharedFlags).FFlagSignalsNavP2NavigationPrimitives
-local dEV = _G.__DEV__ or _G.__TESTEZ_RUNNING_TEST__
+﻿local Parent = script.Parent.Parent
+local RoactNavigationModule = require(Parent.RoactNavigation)
+local GetNavigationFunction = RoactNavigationModule.getNavigation
+local Actions = RoactNavigationModule.Actions
+local Events = RoactNavigationModule.Events
+local SignalsModule = require(Parent.Signals)
+local CreateSignalFunction = SignalsModule.createSignal
+local CreateComputedFunction = SignalsModule.createComputed
+local SignalsExperimentalModule = require(Parent.SignalsExperimental)
+local FFlagSignalsNavP2NavigationPrimitives = require(Parent.SharedFlags).FFlagSignalsNavP2NavigationPrimitives
+local DEV = _G.__DEV__ or _G.__TESTEZ_RUNNING_TEST__
 local _ = require(script.Parent.types)
 
-local function _(p1, p2, p3)
-	-- upvalues: events (ref)
+local function _(Action, State, LastState) --[[ Line: 28 | Named "makeEvent" ]]
+	-- upvalues: Events (copy)
 	return table.freeze({
-		type = events.Action,
-		action = p1,
-		state = p2,
-		lastState = p3
+		type = Events.Action,
+		action = Action,
+		state = State,
+		lastState = LastState
 	})
 end
 
-return function(value)
-	-- upvalues: createSignal (ref), fFlagSignalsNavP2NavigationPrimitives (ref), actions (ref), events (ref), dEV (ref), signalsExperimentalModule (ref), createComputed (ref), getNavigation (ref)
-	local t = {}
-	local t_1 = {}
-	local var1, var2 = createSignal(false)
+return function(p1) --[[ Line: 37 | Named "createSignalsNavigationObject" ]]
+	-- upvalues: CreateSignalFunction (copy), FFlagSignalsNavP2NavigationPrimitives (copy), Actions (copy), Events (copy), DEV (copy), SignalsExperimentalModule (copy), CreateComputedFunction (copy), GetNavigationFunction (copy)
+	local Callbacks = {}
+	local List = {}
+	local Signal, Signal2 = CreateSignalFunction(false)
 	
-	local function _(p1)
-		-- upvalues: t (ref)
-		for i in t do
-			task.spawn(i, p1)
+	local function _(p2) --[[ Line: 42 | Named "notifySubscribers" ]]
+		-- upvalues: Callbacks (copy)
+		for callback in Callbacks do
+			task.spawn(callback, p2)
 		end
 	end
 	
-	local function notifyEvents()
-		-- upvalues: fFlagSignalsNavP2NavigationPrimitives (copy), var2 (ref), t_1 (write), t (ref)
-		if fFlagSignalsNavP2NavigationPrimitives then
-			var2(false)
+	local function notifyEvents() --[[ Line: 48 ]]
+		-- upvalues: FFlagSignalsNavP2NavigationPrimitives (upval), Signal2 (copy), List (ref), Callbacks (copy)
+		if FFlagSignalsNavP2NavigationPrimitives then
+			Signal2(false)
 		end
-		t_1 = {}
+		local List1 = List
+		List = {}
 		
-		for i, v in t_1 do
-			for i_1 in t do
-				task.spawn(i_1, v)
+		for _, value in List1 do
+			for callback in Callbacks do
+				task.spawn(callback, value)
 			end
 		end
 	end
 	
-	local var3, var4 = createSignal(function()
-		-- upvalues: actions (copy), value (ref), events (copy), t_1 (write)
-		local var5 = actions.init()
-		local stateForAction = value.getStateForAction(var5)
-		table.insert(t_1, table.freeze({
+	local Signal1, Signal2_1 = CreateSignalFunction(function() --[[ Line: 59 ]]
+		-- upvalues: Actions (upval), p1 (copy), Events (upval), List (ref)
+		local InitResult = Actions.init()
+		local StateForAction = p1.getStateForAction(InitResult)
+		table.insert(List, (table.freeze({
 			lastState = nil,
-			type = events.Action,
-			action = var5,
-			state = stateForAction
-		}))
+			type = Events.Action,
+			action = InitResult,
+			state = StateForAction
+		})))
 		
-		return stateForAction
+		return StateForAction
 	end)
 	
-	local function dispatch(p2)
-		-- upvalues: dEV (copy), fFlagSignalsNavP2NavigationPrimitives (copy), var2 (ref), var4 (ref), value (ref), actions (copy), var3 (ref), events (copy), t (ref), t_1 (write), signalsExperimentalModule (copy)
-		if dEV and p2.type == "RESET_NAVIGATION_FOR_TESTING_ONLY__DO_NOT_USE_IN_PRODUCTION" then
-			if fFlagSignalsNavP2NavigationPrimitives then
-				var2(false)
+	local function dispatch(Action): boolean --[[ Line: 67 ]]
+		-- upvalues: DEV (upval), FFlagSignalsNavP2NavigationPrimitives (upval), Signal2 (copy), Signal2_1 (copy), p1 (copy), Actions (upval), Signal1 (copy), Events (upval), Callbacks (copy), List (ref), SignalsExperimentalModule (upval)
+		if DEV and Action.type == "RESET_NAVIGATION_FOR_TESTING_ONLY__DO_NOT_USE_IN_PRODUCTION" then
+			if FFlagSignalsNavP2NavigationPrimitives then
+				Signal2(false)
 			end
-			var4(value.getStateForAction(actions.init()))
+			Signal2_1((p1.getStateForAction(Actions.init())))
 			
 			return true
 		else
-			local var5 = var3(false)
-			local stateForAction = value.getStateForAction(p2, var5)
-			local stateForAction_1 = stateForAction or var5
-			local frozen = table.freeze({
-				type = events.Action,
-				action = p2,
-				state = stateForAction_1,
-				lastState = var5
+			local SignalResult = Signal1(false)
+			local StateForAction = p1.getStateForAction(Action, SignalResult)
+			local StateForAction1 = StateForAction or SignalResult
+			local Frozen = table.freeze({
+				type = Events.Action,
+				action = Action,
+				state = StateForAction1,
+				lastState = SignalResult
 			})
 			
-			if stateForAction == nil or stateForAction_1 == var5 then
-				for i in t do
-					task.spawn(i, frozen)
+			if StateForAction == nil or StateForAction1 == SignalResult then
+				for callback in Callbacks do
+					task.spawn(callback, Frozen)
 				end
-				return stateForAction == nil
+				return StateForAction == nil
 			else
-				table.insert(t_1, frozen)
+				table.insert(List, Frozen)
 				
-				if fFlagSignalsNavP2NavigationPrimitives then
-					signalsExperimentalModule.batch(function()
-						-- upvalues: var2 (copy), var4 (copy), stateForAction_1 (ref)
-						var2(true)
-						var4(stateForAction_1)
+				if FFlagSignalsNavP2NavigationPrimitives then
+					SignalsExperimentalModule.batch(function() --[[ Line: 88 ]]
+						-- upvalues: Signal2 (upval), Signal2_1 (upval), StateForAction1 (copy)
+						Signal2(true)
+						Signal2_1(StateForAction1)
 					end)
 				else
-					var4(stateForAction_1)
+					Signal2_1(StateForAction1)
 				end
 				return true
 			end
 		end
 	end
 	
-	local var6 = function()
+	local function v19() --[[ Line: 98 ]]
 		return nil
 	end
 	
-	local var7 = createComputed(function(p3)
-		-- upvalues: var3 (ref), getNavigation (copy), value (ref), dispatch (ref), t (ref), var6 (write)
-		return getNavigation(value, var3(p3), dispatch, t, function(_, p4)
+	local Computed = CreateComputedFunction(function(p3) --[[ Line: 102 ]]
+		-- upvalues: Signal1 (copy), GetNavigationFunction (upval), p1 (copy), dispatch (copy), Callbacks (copy), v19 (ref)
+		return GetNavigationFunction(p1, Signal1(p3), dispatch, Callbacks, function(_, p4) --[[ Line: 104 ]]
 			return p4
-		end, function()
-			-- upvalues: var6 (copy)
-			return var6()
+		end, function() --[[ Line: 106 ]]
+			-- upvalues: v19 (upval)
+			return v19()
 		end)
 	end)
-	var6 = var7
+	v19 = Computed
 	
 	return {
 		dispatch = dispatch,
 		notifyEvents = notifyEvents,
-		getState = var3,
-		getNavigation = var7,
-		getIsNavigating = var1
+		getState = Signal1,
+		getNavigation = Computed,
+		getIsNavigating = Signal
 	}
 end

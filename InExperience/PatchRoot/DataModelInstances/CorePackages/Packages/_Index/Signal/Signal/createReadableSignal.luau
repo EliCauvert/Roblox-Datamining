@@ -1,22 +1,22 @@
-﻿local createSignalModule = require(script.Parent.createSignal)
+﻿local CreateSignalModule = require(script.Parent.createSignal)
 
-return function(value)
-	-- upvalues: createSignalModule (ref)
-	local var1, var2 = createSignalModule()
-	local var3 = value
+return function(p1) --[[ Line: 30 | Named "createReadableSignal" ]]
+	-- upvalues: CreateSignalModule (copy)
+	local SignalModule, SignalModule2 = CreateSignalModule()
+	local v1 = p1
 	
 	return {
-		subscribe = function(_, p1)
-			-- upvalues: var1 (ref)
-			return var1:subscribe(p1)
+		subscribe = function(_, p2) --[[ Line: 35 ]]
+			-- upvalues: SignalModule (copy)
+			return SignalModule:subscribe(p2)
 		end,
-		getValue = function(_)
-			-- upvalues: var3 (write)
-			return var3
+		getValue = function(_) --[[ Line: 39 ]]
+			-- upvalues: v1 (ref)
+			return v1
 		end
-	}, function(p1)
-		-- upvalues: var3 (write), var2 (ref)
-		var3 = p1
-		var2(p1)
+	}, function(p2) --[[ Line: 43 | Named "fire" ]]
+		-- upvalues: v1 (ref), SignalModule2 (copy)
+		v1 = p2
+		SignalModule2(p2)
 	end
 end

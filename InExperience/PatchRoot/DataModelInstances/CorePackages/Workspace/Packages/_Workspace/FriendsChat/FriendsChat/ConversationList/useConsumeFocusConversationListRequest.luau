@@ -1,33 +1,34 @@
-﻿local friendsChat = script:FindFirstAncestor("FriendsChat")
-local parent = friendsChat.Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local getFriendsChatNavigationStoreModule = require(friendsChat.Stores.GetFriendsChatNavigationStore)
-local isFocusRequestFreshModule = require(friendsChat.Focus.isFocusRequestFresh)
+﻿local FriendsChat = script:FindFirstAncestor("FriendsChat")
+local Parent = FriendsChat.Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local GetFriendsChatNavigationStoreModule = require(FriendsChat.Stores.GetFriendsChatNavigationStore)
+local IsFocusRequestFreshModule = require(FriendsChat.Focus.isFocusRequestFresh)
 
-return function(p1, p2)
-	-- upvalues: reactModule (ref), getFriendsChatNavigationStoreModule (ref), signalsModule (ref), isFocusRequestFreshModule (ref)
-	reactModule.useEffect(function()
-		-- upvalues: getFriendsChatNavigationStoreModule (copy), signalsModule (copy), isFocusRequestFreshModule (copy), p1 (ref), p2 (ref)
-		local var1 = getFriendsChatNavigationStoreModule(false)
+return function(Callback, Callback1) --[[ Line: 18 | Named "useConsumeFocusConversationListRequest" ]]
+	-- upvalues: ReactModule (copy), GetFriendsChatNavigationStoreModule (copy), SignalsModule (copy), IsFocusRequestFreshModule (copy)
+	ReactModule.useEffect(function() --[[ Line: 22 ]]
+		-- upvalues: GetFriendsChatNavigationStoreModule (upval), SignalsModule (upval), IsFocusRequestFreshModule (upval), Callback (copy), Callback1 (copy)
+		local FriendsChatNavigationStoreModule = GetFriendsChatNavigationStoreModule(false)
 		
-		return signalsModule.createEffect(function(p3)
-			-- upvalues: var1 (ref), isFocusRequestFreshModule (copy), p1 (copy), p2 (copy)
-			local conversationListFocusRequestTime = var1.getConversationListFocusRequestTime(p3)
+		return SignalsModule.createEffect(function(p1) --[[ Line: 24 ]]
+			-- upvalues: FriendsChatNavigationStoreModule (copy), IsFocusRequestFreshModule (upval), Callback (upval), Callback1 (upval)
+			local ConversationListFocusRequestTime = FriendsChatNavigationStoreModule.getConversationListFocusRequestTime(p1)
 			
-			if conversationListFocusRequestTime == nil then return end
-			if not isFocusRequestFreshModule(conversationListFocusRequestTime, os.clock(), 5) then
-				var1.clearConversationListFocusRequest()
+			if ConversationListFocusRequestTime == nil then return end
+			if not IsFocusRequestFreshModule(ConversationListFocusRequestTime, os.clock(), 5) then
+				FriendsChatNavigationStoreModule.clearConversationListFocusRequest()
 				
 				return
 			end
-			local var2 = p1(p3)
+			local CallbackResult = Callback(p1)
 			
-			if var2 == nil then
+			if CallbackResult ~= nil then
+				Callback1(CallbackResult)
+				FriendsChatNavigationStoreModule.clearConversationListFocusRequest()
+				
 				return
 			end
-			p2(var2)
-			var1.clearConversationListFocusRequest()
 		end)
-	end, { p1, p2 })
+	end, { Callback, Callback1 })
 end

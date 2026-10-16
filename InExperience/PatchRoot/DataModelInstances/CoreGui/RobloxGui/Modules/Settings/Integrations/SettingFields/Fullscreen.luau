@@ -1,40 +1,38 @@
-﻿local settings = script:FindFirstAncestor("Settings")
-local corePackagesService = game:GetService("CorePackages")
-local gameSettings = UserSettings().GameSettings
-local guiService = game:GetService("GuiService")
-local settingsServiceModule = require(corePackagesService.Workspace.Packages.SettingsService)
-local valueChangedSignal = settingsServiceModule.ValueChangedSignal
-local availabilitySignal = settingsServiceModule.AvailabilitySignal
-local settingEnum = settingsServiceModule.SettingEnum
-local utilsModule = require(settings.Integrations.Utils)
+﻿local Settings = script:FindFirstAncestor("Settings")
+local GameSettings = UserSettings().GameSettings
+local GuiService = game:GetService("GuiService")
+local SettingsServiceModule = require(game:GetService("CorePackages").Workspace.Packages.SettingsService)
+local ValueChangedSignal = SettingsServiceModule.ValueChangedSignal
+local UtilsModule = require(Settings.Integrations.Utils)
 
-local function _()
-	-- upvalues: utilsModule (ref)
-	return if utilsModule.getDeviceType() ~= utilsModule.DeviceTypes.Desktop then utilsModule.getDeviceType() == utilsModule.DeviceTypes.Unknown else true
+local function _(): boolean --[[ Line: 45 | Named "initAvailability" ]]
+	-- upvalues: UtilsModule (copy)
+	return UtilsModule.getDeviceType() == UtilsModule.DeviceTypes.Desktop or UtilsModule.getDeviceType() == UtilsModule.DeviceTypes.Unknown
 end
 
 return {
 	id = "fullscreen",
 	label = "CoreScripts.InGameMenu.GameSettings.FullScreen",
 	alreadyLocalized = false,
-	field_type = settingEnum.Toggle,
-	layoutOrder = require(settings.Integrations.Constants).GAMESETTINGS.LAYOUT_ORDER.FullScreenFrame,
-	onChanged = (function()
-		-- upvalues: valueChangedSignal (ref), gameSettings (ref), guiService (ref)
-		local var1 = valueChangedSignal.new(gameSettings:InFullScreen())
-		var1:connect(function(p1)
-			-- upvalues: gameSettings (copy), guiService (copy)
-			if p1 == gameSettings:InFullScreen() then
+	field_type = SettingsServiceModule.SettingEnum.Toggle,
+	layoutOrder = require(Settings.Integrations.Constants).GAMESETTINGS.LAYOUT_ORDER.FullScreenFrame,
+	onChanged = (function() --[[ Line: 24 | Named "FullScreenValue" ]]
+		-- upvalues: ValueChangedSignal (copy), GameSettings (copy), GuiService (copy)
+		local NewValueChangedSignal = ValueChangedSignal.new(GameSettings:InFullScreen())
+		NewValueChangedSignal:connect(function(p1) --[[ Line: 27 ]]
+			-- upvalues: GameSettings (upval), GuiService (upval)
+			if p1 ~= GameSettings:InFullScreen() then
+				GuiService:ToggleFullscreen()
+				
 				return
 			end
-			guiService:ToggleFullscreen()
 		end, true)
-		gameSettings.FullscreenChanged:Connect(function(p1)
-			-- upvalues: var1 (ref)
-			var1:set(p1)
+		GameSettings.FullscreenChanged:Connect(function(IsFullscreen) --[[ Line: 35 ]]
+			-- upvalues: NewValueChangedSignal (copy)
+			NewValueChangedSignal:set(IsFullscreen)
 		end)
 		
-		return var1
+		return NewValueChangedSignal
 	end)(),
-	availability = availabilitySignal.new(if utilsModule.getDeviceType() ~= utilsModule.DeviceTypes.Desktop then utilsModule.getDeviceType() == utilsModule.DeviceTypes.Unknown else true)
+	availability = SettingsServiceModule.AvailabilitySignal.new(UtilsModule.getDeviceType() == UtilsModule.DeviceTypes.Desktop or UtilsModule.getDeviceType() == UtilsModule.DeviceTypes.Unknown)
 }

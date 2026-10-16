@@ -1,43 +1,34 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local _ = require(parent.DataHydration)
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local publishBottomSheetModule = require(script.Parent.PublishBottomSheet)
-local gameInfoUtilsModule = require(buildExperience.utils.GameInfoUtils)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local _ = require(Parent.DataHydration)
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local PublishBottomSheetModule = require(script.Parent.PublishBottomSheet)
+local GameInfoUtilsModule = require(BuildExperience.utils.GameInfoUtils)
 
-local function getEnrichedTarget(p1, p2, p3)
-	-- upvalues: gameInfoUtilsModule (ref)
-	local var1
-	local var2 = if gameInfoUtilsModule.isGameInfoReady(p2) then p2 else nil
-	local var3 = if var2 then var2.creator else nil
-	local t = {
-		universeId = p1.universeId,
-		placeId = p1.placeId or (if var2 then tonumber(var2.rootPlaceId) else nil),
-		sessionId = p1.sessionId,
-		experienceName = gameInfoUtilsModule.getGameInfoName(p2),
-		creatorName = if var3 and var3.name ~= "" then var3.name else p3,
-		gameIcon = p1.gameIcon
+local function getEnrichedTarget(EnrichedTarget, GameInfo, Loading) --[[ Line: 39 ]]
+	-- upvalues: GameInfoUtilsModule (copy)
+	local GameInfo1 = if GameInfoUtilsModule.isGameInfoReady(GameInfo) then GameInfo else nil
+	local Creator = if GameInfo1 then GameInfo1.creator else nil
+	
+	return {
+		universeId = EnrichedTarget.universeId,
+		placeId = EnrichedTarget.placeId or (if GameInfo1 then tonumber(GameInfo1.rootPlaceId) else nil),
+		sessionId = EnrichedTarget.sessionId,
+		experienceName = GameInfoUtilsModule.getGameInfoName(GameInfo),
+		creatorName = if Creator and Creator.name ~= "" then Creator.name else Loading,
+		gameIcon = EnrichedTarget.gameIcon,
+		isCreatorVerified = if Creator then Creator.hasVerifiedBadge == true else false,
+		isNewGameTarget = EnrichedTarget.isNewGameTarget
 	}
-	
-	if var3 then
-		var1 = var3.hasVerifiedBadge == true
-		var1 = nil
-	else
-		var1 = false
-	end
-	t.isCreatorVerified = var1
-	t.isNewGameTarget = p1.isNewGameTarget
-	
-	return t
 end
 
-return function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), getEnrichedTarget (ref), reactModule (ref), publishBottomSheetModule (ref)
-	return reactModule.createElement(publishBottomSheetModule, {
+return function(p1) --[[ Line: 55 | Named "PublishBottomSheetContainer" ]]
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), getEnrichedTarget (copy), ReactModule (copy), PublishBottomSheetModule (copy)
+	return ReactModule.createElement(PublishBottomSheetModule, {
 		isOpen = p1.isOpen,
-		target = getEnrichedTarget(p1.target, p1.gameInfo, useLocalization({ loading = localizationStringsModule.BUILD_MENU_LOADING }).loading),
+		target = getEnrichedTarget(p1.target, p1.gameInfo, UseLocalizationFunction({ loading = LocalizationStringsModule.BUILD_MENU_LOADING }).loading),
 		onClose = p1.onClose,
 		onOpenTitleDescriptionPage = p1.onOpenTitleDescriptionPage,
 		onOpenMediaSelectionPage = p1.onOpenMediaSelectionPage,

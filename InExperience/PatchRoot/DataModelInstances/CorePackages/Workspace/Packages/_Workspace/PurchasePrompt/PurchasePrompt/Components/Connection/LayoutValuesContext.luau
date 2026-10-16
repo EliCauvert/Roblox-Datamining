@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("PurchasePrompt").Parent.Roact).createContext(nil)
+﻿return (require(script:FindFirstAncestor("PurchasePrompt").Parent.Roact).createContext(nil))

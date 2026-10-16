@@ -1,31 +1,31 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local breakpointModule = require(foundation.Enums.Breakpoint)
-local headerBarContextModule = require(foundation.Components.HeaderBar.HeaderBarContext)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local useViewportBreakpointModule = require(foundation.Providers.Responsive.Hooks.useViewportBreakpoint)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local t = {
-	[breakpointModule.XSmall] = "size-full-1400",
-	[breakpointModule.Small] = "size-full-1400",
-	[breakpointModule.Medium] = "size-full-1600",
-	[breakpointModule.Large] = "size-full-1600",
-	[breakpointModule.XLarge] = "size-full-1800",
-	[breakpointModule.XXLarge] = "size-full-1800"
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local BreakpointModule = require(Foundation.Enums.Breakpoint)
+local HeaderBarContextModule = require(Foundation.Components.HeaderBar.HeaderBarContext)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local UseViewportBreakpointModule = require(Foundation.Providers.Responsive.Hooks.useViewportBreakpoint)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local config = {
+	[BreakpointModule.XSmall] = "size-full-1400",
+	[BreakpointModule.Small] = "size-full-1400",
+	[BreakpointModule.Medium] = "size-full-1600",
+	[BreakpointModule.Large] = "size-full-1600",
+	[BreakpointModule.XLarge] = "size-full-1800",
+	[BreakpointModule.XXLarge] = "size-full-1800"
 }
-local t_1 = { hasBackground = true, testId = "--foundation-header-bar" }
+local config1 = { hasBackground = true, testId = "--foundation-header-bar" }
 
-return reactModule.memo(function(p1)
-	-- upvalues: withDefaultsModule (ref), t_1 (ref), useViewportBreakpointModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), t (ref), headerBarContextModule (ref)
-	local var1 = withDefaultsModule(p1, t_1)
+return ReactModule.memo(function(p1) --[[ Line: 35 | Named "HeaderBar" ]]
+	-- upvalues: WithDefaultsModule (copy), config1 (copy), UseViewportBreakpointModule (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), config (copy), HeaderBarContextModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config1)
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var1, {
+	return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, {
 		tag = {
 			["row flex-between gap-small padding-medium"] = true,
-			["bg-surface-0"] = var1.hasBackground,
-			[t[useViewportBreakpointModule()]] = true
+			["bg-surface-0"] = WithDefaultsModuleResult.hasBackground,
+			[config[UseViewportBreakpointModule()]] = true
 		}
-	}), reactModule.createElement(headerBarContextModule.Provider, { testId = var1.testId }, var1.children))
+	}), ReactModule.createElement(HeaderBarContextModule.Provider, { testId = WithDefaultsModuleResult.testId }, WithDefaultsModuleResult.children))
 end)

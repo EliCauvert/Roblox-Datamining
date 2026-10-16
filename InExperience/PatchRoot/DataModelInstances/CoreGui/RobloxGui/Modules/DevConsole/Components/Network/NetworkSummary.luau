@@ -1,146 +1,162 @@
-﻿local roactModule = require(game:GetService("CorePackages").Packages.Roact)
-local constantsModule = require(script.Parent.Parent.Parent.Constants)
-local summaryHeaderNames = constantsModule.NetworkFormatting.SummaryHeaderNames
-local summaryCellWidths = constantsModule.NetworkFormatting.SummaryCellWidths
-local headerFrameHeight = constantsModule.NetworkFormatting.HeaderFrameHeight
-local entryFrameHeight = constantsModule.NetworkFormatting.EntryFrameHeight
-local lineWidth = constantsModule.GeneralFormatting.LineWidth
-local lineColor = constantsModule.GeneralFormatting.LineColor
-local cellPadding = constantsModule.NetworkFormatting.CellPadding
-local text = constantsModule.Color.Text
-local cellLabelModule = require(script.Parent.Parent.Parent.Components.CellLabel)
-local headerButtonModule = require(script.Parent.Parent.Parent.Components.HeaderButton)
-local var1 = 0
+﻿local RoactModule = require(game:GetService("CorePackages").Packages.Roact)
+local ConstantsModule = require(script.Parent.Parent.Parent.Constants)
+local SummaryHeaderNames = ConstantsModule.NetworkFormatting.SummaryHeaderNames
+local SummaryCellWidths = ConstantsModule.NetworkFormatting.SummaryCellWidths
+local HeaderFrameHeight = ConstantsModule.NetworkFormatting.HeaderFrameHeight
+local EntryFrameHeight = ConstantsModule.NetworkFormatting.EntryFrameHeight
+local LineWidth = ConstantsModule.GeneralFormatting.LineWidth
+local LineColor = ConstantsModule.GeneralFormatting.LineColor
+local CellPadding: number = ConstantsModule.NetworkFormatting.CellPadding
+local Text = ConstantsModule.Color.Text
+local CellLabelModule = require(script.Parent.Parent.Parent.Components.CellLabel)
+local HeaderButtonModule = require(script.Parent.Parent.Parent.Components.HeaderButton)
+local Total = 0
 
-for i, v in pairs(summaryCellWidths) do
-	var1 += v
+for _, summaryCellWidth in pairs(SummaryCellWidths) do
+	Total += summaryCellWidth
 end
-local var2 = -var1
+local Negated = -Total
+local List = {}
+local List1 = {}
+local List2 = {}
+table.insert(List, UDim2.new(0, CellPadding, 0, 0))
+table.insert(List1, UDim2.new(1, -Total - CellPadding, 0, HeaderFrameHeight))
+table.insert(List2, UDim2.new(1, -Total - CellPadding, 0, EntryFrameHeight))
+
+for _, summaryCellWidth1 in ipairs(SummaryCellWidths) do
+	table.insert(List, UDim2.new(1, Negated + CellPadding, 0, 0))
+	table.insert(List1, UDim2.new(0, summaryCellWidth1 - CellPadding, 0, HeaderFrameHeight))
+	table.insert(List2, UDim2.new(0, summaryCellWidth1 - CellPadding, 0, EntryFrameHeight))
+	Negated += summaryCellWidth1
+end
 local t = {}
-local t_1 = {}
-local t_2 = {}
-table.insert(t, UDim2.new(0, cellPadding, 0, 0))
-table.insert(t_1, UDim2.new(1, (-var1) - cellPadding, 0, headerFrameHeight))
-table.insert(t_2, UDim2.new(1, (-var1) - cellPadding, 0, entryFrameHeight))
 
-for i_1, v_1 in ipairs(summaryCellWidths) do
-	table.insert(t, UDim2.new(1, var2 + cellPadding, 0, 0))
-	table.insert(t_1, UDim2.new(0, v_1 - cellPadding, 0, headerFrameHeight))
-	table.insert(t_2, UDim2.new(0, v_1 - cellPadding, 0, entryFrameHeight))
-	var2 += v_1
+for i, Vector in ipairs(List) do
+	t[i] = UDim2.new(Vector.X.Scale, Vector.X.Offset - CellPadding, Vector.Y.Scale, Vector.Y.Offset)
 end
-local t_3 = {}
+local NetworkSummary = RoactModule.Component:extend("NetworkSummary")
 
-for i_2, v_2 in ipairs(t) do
-	t_3[i_2] = UDim2.new(v_2.X.Scale, v_2.X.Offset - cellPadding, v_2.Y.Scale, v_2.Y.Offset)
-end
-local networkSummary = roactModule.Component:extend("NetworkSummary")
-
-function networkSummary.render(p1)
-	-- upvalues: roactModule (ref), lineWidth (ref), lineColor (ref), t_3 (ref), headerFrameHeight (ref), summaryHeaderNames (ref), headerButtonModule (ref), t_1 (ref), t (ref), cellLabelModule (ref), entryFrameHeight (ref), text (ref)
-	local width = p1.props.width
-	local httpSummaryTable = p1.props.httpSummaryTable or {}
-	local layoutOrder = p1.props.layoutOrder
-	local t_2 = {
-		UIListLayout = roactModule.createElement("UIListLayout", {
+function NetworkSummary.render(p1) --[[ Line: 50 ]]
+	-- upvalues: RoactModule (copy), LineWidth (copy), LineColor (copy), t (copy), HeaderFrameHeight (copy), SummaryHeaderNames (copy), HeaderButtonModule (copy), List1 (copy), List (copy), CellLabelModule (copy), EntryFrameHeight (copy), Text (copy)
+	local Width = p1.props.width
+	local HttpSummaryTable = p1.props.httpSummaryTable or {}
+	local LayoutOrder = p1.props.layoutOrder
+	local config = {
+		UIListLayout = RoactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
 			VerticalAlignment = Enum.VerticalAlignment.Top,
 			SortOrder = Enum.SortOrder.LayoutOrder
 		})
 	}
-	local t_4 = {
-		UpperHorizontalLine = roactModule.createElement("Frame", {
+	local config1 = {
+		UpperHorizontalLine = RoactModule.createElement("Frame", {
 			BorderSizePixel = 0,
-			Size = UDim2.new(1, 0, 0, lineWidth),
-			BackgroundColor3 = lineColor
+			Size = UDim2.new(1, 0, 0, LineWidth),
+			BackgroundColor3 = LineColor
 		}),
-		LowerHorizontalLine = roactModule.createElement("Frame", {
+		LowerHorizontalLine = RoactModule.createElement("Frame", {
 			BorderSizePixel = 0,
-			Size = UDim2.new(1, 0, 0, lineWidth),
+			Size = UDim2.new(1, 0, 0, LineWidth),
 			Position = UDim2.new(0, 0, 1, 0),
-			BackgroundColor3 = lineColor
+			BackgroundColor3 = LineColor
 		})
 	}
 	
-	for i = 2, #t_3 do
-		t_4[string.format("VerticalLine_%d", i)] = roactModule.createElement("Frame", {
+	for i = 2, #t do
+		config1[string.format("VerticalLine_%d", i)] = RoactModule.createElement("Frame", {
 			BorderSizePixel = 0,
-			Size = UDim2.new(0, lineWidth, 0, headerFrameHeight),
-			Position = t_3[i],
-			BackgroundColor3 = lineColor
+			Size = UDim2.new(0, LineWidth, 0, HeaderFrameHeight),
+			Position = t[i],
+			BackgroundColor3 = LineColor
 		})
 	end
-	for i_1, v in ipairs(summaryHeaderNames) do
-		t_4[v] = roactModule.createElement(headerButtonModule, { text = v, size = t_1[i_1], pos = t[i_1] })
+	for i1, summaryHeaderName in ipairs(SummaryHeaderNames) do
+		config1[summaryHeaderName] = RoactModule.createElement(HeaderButtonModule, {
+			text = summaryHeaderName,
+			size = List1[i1],
+			pos = List[i1]
+		})
 	end
-	t_2.Header = roactModule.createElement("Frame", {
+	config.Header = RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		LayoutOrder = 1,
-		Size = UDim2.new(0, width, 0, headerFrameHeight)
-	}, t_4)
-	local var3 = 0
+		Size = UDim2.new(0, Width, 0, HeaderFrameHeight)
+	}, config1)
+	local Count = 0
 	
-	for i_2, v_1 in pairs(httpSummaryTable) do
-		var3 += 1
-		local t_5 = {
-			RequestType = roactModule.createElement(cellLabelModule, { text = v_1.RequestType, size = t_1[1], pos = t[1] }),
-			RequestCount = roactModule.createElement(cellLabelModule, { text = v_1.RequestCount, size = t_1[2], pos = t[2] }),
-			FailedCount = roactModule.createElement(cellLabelModule, { text = v_1.FailedCount, size = t_1[3], pos = t[3] }),
-			AverageTime = roactModule.createElement(cellLabelModule, {
-				text = string.format("%.3f", v_1.AverageTime),
-				size = t_1[4],
-				pos = t[4]
+	for _, Frames in pairs(HttpSummaryTable) do
+		Count += 1
+		local config2 = {
+			RequestType = RoactModule.createElement(CellLabelModule, {
+				text = Frames.RequestType,
+				size = List1[1],
+				pos = List[1]
 			}),
-			MinTime = roactModule.createElement(cellLabelModule, {
-				text = string.format("%.3f", v_1.MinTime),
-				size = t_1[5],
-				pos = t[5]
+			RequestCount = RoactModule.createElement(CellLabelModule, {
+				text = Frames.RequestCount,
+				size = List1[2],
+				pos = List[2]
 			}),
-			MaxTime = roactModule.createElement(cellLabelModule, {
-				text = string.format("%.3f", v_1.MaxTime),
-				size = t_1[6],
-				pos = t[6]
+			FailedCount = RoactModule.createElement(CellLabelModule, {
+				text = Frames.FailedCount,
+				size = List1[3],
+				pos = List[3]
 			}),
-			LowerHorizontalLine = roactModule.createElement("Frame", {
+			AverageTime = RoactModule.createElement(CellLabelModule, {
+				text = string.format("%.3f", Frames.AverageTime),
+				size = List1[4],
+				pos = List[4]
+			}),
+			MinTime = RoactModule.createElement(CellLabelModule, {
+				text = string.format("%.3f", Frames.MinTime),
+				size = List1[5],
+				pos = List[5]
+			}),
+			MaxTime = RoactModule.createElement(CellLabelModule, {
+				text = string.format("%.3f", Frames.MaxTime),
+				size = List1[6],
+				pos = List[6]
+			}),
+			LowerHorizontalLine = RoactModule.createElement("Frame", {
 				BorderSizePixel = 0,
-				Size = UDim2.new(1, 0, 0, lineWidth),
+				Size = UDim2.new(1, 0, 0, LineWidth),
 				Position = UDim2.new(0, 0, 1, 0),
-				BackgroundColor3 = lineColor
+				BackgroundColor3 = LineColor
 			})
 		}
 		
-		for i_3 = 2, #t_3 do
-			t_5[string.format("VerticalLine_%d", i_3)] = roactModule.createElement("Frame", {
+		for i2 = 2, #t do
+			config2[string.format("VerticalLine_%d", i2)] = RoactModule.createElement("Frame", {
 				BorderSizePixel = 0,
-				Size = UDim2.new(0, lineWidth, 1, 0),
-				Position = t_3[i_3],
-				BackgroundColor3 = lineColor
+				Size = UDim2.new(0, LineWidth, 1, 0),
+				Position = t[i2],
+				BackgroundColor3 = LineColor
 			})
 		end
-		t_2[v_1.RequestType] = roactModule.createElement("Frame", {
+		config[Frames.RequestType] = RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
-			Size = UDim2.new(0, width, 0, entryFrameHeight),
-			LayoutOrder = var3 + 1
-		}, t_5)
+			Size = UDim2.new(0, Width, 0, EntryFrameHeight),
+			LayoutOrder = Count + 1
+		}, config2)
 	end
-	if var3 == 0 then
-		t_2.Padding = roactModule.createElement("TextLabel", {
+	if Count == 0 then
+		config.Padding = RoactModule.createElement("TextLabel", {
 			Text = "No Summary Data Found",
 			BackgroundTransparency = 1,
 			LayoutOrder = 2,
-			Size = UDim2.new(0, width, 0, entryFrameHeight),
-			TextColor3 = text
+			Size = UDim2.new(0, Width, 0, EntryFrameHeight),
+			TextColor3 = Text
 		})
-		var3 = 1
+		Count = 1
 	end
-	return roactModule.createElement("ScrollingFrame", {
+	return RoactModule.createElement("ScrollingFrame", {
 		ScrollingEnabled = false,
 		ScrollBarThickness = 0,
 		BackgroundTransparency = 1,
-		Size = UDim2.new(1, 0, 0, var3 * entryFrameHeight + headerFrameHeight),
-		LayoutOrder = layoutOrder
-	}, t_2)
+		Size = UDim2.new(1, 0, 0, Count * EntryFrameHeight + HeaderFrameHeight),
+		LayoutOrder = LayoutOrder
+	}, config)
 end
 
-return networkSummary
+return NetworkSummary

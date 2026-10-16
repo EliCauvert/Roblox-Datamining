@@ -1,15 +1,14 @@
-﻿local progressLoading = script:FindFirstAncestor("ProgressLoading")
-local parent = progressLoading.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local reactRobloxModule = require(parent.ReactRoblox)
-local foundationProvider = foundationModule.FoundationProvider
-local t = {
-	Default = foundationModule.Enums.ColorMode.Dark,
-	Light = foundationModule.Enums.ColorMode.Light,
-	Dark = foundationModule.Enums.ColorMode.Dark
+﻿local ProgressLoading = script:FindFirstAncestor("ProgressLoading")
+local Parent = ProgressLoading.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local FoundationProvider = FoundationModule.FoundationProvider
+local config = {
+	Default = FoundationModule.Enums.ColorMode.Dark,
+	Light = FoundationModule.Enums.ColorMode.Light,
+	Dark = FoundationModule.Enums.ColorMode.Dark
 }
-local t_1 = {
+local config1 = {
 	Default = "Desktop",
 	Desktop = "Desktop",
 	Console = "Console"
@@ -17,17 +16,17 @@ local t_1 = {
 
 return {
 	name = "ProgressLoading",
-	storyRoot = progressLoading,
-	roact = reactModule,
-	reactRoblox = reactRobloxModule,
-	mapStory = function(p1)
-		-- upvalues: reactModule (ref), foundationProvider (ref), t (ref), t_1 (ref)
-		return function(p2)
-			-- upvalues: reactModule (copy), foundationProvider (copy), t (copy), t_1 (copy), p1 (ref)
-			return reactModule.createElement(foundationProvider, {
-				colorMode = if p2 then t[p2.theme] else t.Default,
-				device = if p2 then t_1[p2.platform] else "Desktop"
-			}, { Story = reactModule.createElement(p1, p2) })
+	storyRoot = ProgressLoading,
+	roact = ReactModule,
+	reactRoblox = require(Parent.ReactRoblox),
+	mapStory = function(p1) --[[ Line: 22 ]]
+		-- upvalues: ReactModule (copy), FoundationProvider (copy), config (copy), config1 (copy)
+		return function(p2) --[[ Line: 23 ]]
+			-- upvalues: ReactModule (upval), FoundationProvider (upval), config (upval), config1 (upval), p1 (copy)
+			return ReactModule.createElement(FoundationProvider, {
+				colorMode = p2 and config[p2.theme] or config.Default,
+				device = p2 and config1[p2.platform] or "Desktop"
+			}, { Story = ReactModule.createElement(p1, p2) })
 		end
 	end
 }

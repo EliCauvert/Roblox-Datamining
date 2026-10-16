@@ -1,59 +1,60 @@
-﻿local parent = script:FindFirstAncestor("SplitPane").Parent
-local guiService = game:GetService("GuiService")
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local splitPaneStoreModule = require(script.Parent.Parent.Stores.SplitPaneStore)
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local useRegistryEntry = focusNavigationUtilsModule.FocusNavigableSurfaceRegistry.useRegistryEntry
+﻿local Parent = script:FindFirstAncestor("SplitPane").Parent
+local GuiService = game:GetService("GuiService")
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local SplitPaneStoreModule = require(script.Parent.Parent.Stores.SplitPaneStore)
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+local UseRegistryEntryFunction = FocusNavigationUtilsModule.FocusNavigableSurfaceRegistry.useRegistryEntry
 
-local function getSelectionGroupRowContainer(p1)
-	local parent = p1.Parent
-	while parent ~= nil do
-		if not parent:IsA("ScrollingFrame") then
-			if not parent:IsA("GuiObject") or not parent.SelectionGroup then
-				parent = parent.Parent
-				continue
-			end
-			return parent
+local function getSelectionGroupRowContainer(Frame) --[[ Line: 44 ]]
+	local Parent = Frame.Parent
+	while Parent ~= nil do
+		if Parent:IsA("ScrollingFrame") then
+			return Parent
 		end
-		return parent
+		if Parent:IsA("GuiObject") and Parent.SelectionGroup then
+			return Parent
+		end
+		Parent = Parent.Parent
 	end
 	return nil
 end
 
-local function getRowBandContainer(p2, p3)
-	local y = p2.AbsolutePosition.Y
-	local var1 = y + p2.AbsoluteSize.Y
-	local y_1 = p2.AbsoluteSize.Y
-	local var2 = nil
-	local parent = p2.Parent
-	while parent ~= nil and (parent ~= p3 and parent:IsA("GuiObject")) do
-		local var3 = parent
-		local y_2 = var3.AbsolutePosition.Y
+local function getRowBandContainer(Frame: Frame, Current) --[[ Line: 63 ]]
+	local Y = Frame.AbsolutePosition.Y
+	local NewY = Y + Frame.AbsoluteSize.Y
+	local Y1 = Frame.AbsoluteSize.Y
+	local v1 = nil
+	local Parent = Frame.Parent
+	while Parent ~= nil and (Parent ~= Current and Parent:IsA("GuiObject")) do
+		local Frame1 = Parent
+		local Y2 = Frame1.AbsolutePosition.Y
+		local NewY1 = Y2 + Frame1.AbsoluteSize.Y
 		
-		if y_2 < y - y_1 or var1 + y_1 < y_2 + var3.AbsoluteSize.Y then break end
-		var2 = var3
-		parent = var3.Parent
+		if Y2 < Y - Y1 or NewY + Y1 < NewY1 then break end
+		v1 = Frame1
+		Parent = Frame1.Parent
 	end
-	return var2
+	return v1
 end
 
-local function _(p4, p5, p6)
-	-- upvalues: getSelectionGroupRowContainer (ref), getRowBandContainer (ref)
-	return if not (p5 ~= nil and p4:IsDescendantOf(p5)) then if p4:FindFirstAncestorWhichIsA("ScrollingFrame") == nil then getRowBandContainer(p4, p6) else getSelectionGroupRowContainer(p4) else p5
+local function _(Frame, Ancestor, p1) --[[ Line: 84 | Named "getFocusRowContainer" ]]
+	-- upvalues: getSelectionGroupRowContainer (copy), getRowBandContainer (copy)
+	return if Ancestor == nil or not Frame:IsDescendantOf(Ancestor) then if Frame:FindFirstAncestorWhichIsA("ScrollingFrame") == nil then getRowBandContainer(Frame, p1) else getSelectionGroupRowContainer(Frame) else Ancestor
 end
 
-local function hasSelectableToTheRight(p4, p5)
-	local x = p4.AbsolutePosition.X
-	local y = p4.AbsolutePosition.Y
-	local var4 = y + p4.AbsoluteSize.Y
+local function hasSelectableToTheRight(Frame: Frame, Object): boolean --[[ Line: 97 ]]
+	local X: number = Frame.AbsolutePosition.X
+	local Y = Frame.AbsolutePosition.Y
+	local NewY = Y + Frame.AbsoluteSize.Y
 	
-	for i, v in p5:GetDescendants() do
-		if v ~= p4 and v:IsA("GuiObject") and (v.Selectable and v.Visible) then
-			local y_1 = v.AbsolutePosition.Y
+	for _, Gui in Object:GetDescendants() do
+		if Gui ~= Frame and Gui:IsA("GuiObject") and Gui.Selectable and Gui.Visible then
+			local X1 = Gui.AbsolutePosition.X
+			local Y1 = Gui.AbsolutePosition.Y
 			
-			if (y < y_1 + v.AbsoluteSize.Y and y_1 < var4) and x + 2 < v.AbsolutePosition.X then
+			if Y < Y1 + Gui.AbsoluteSize.Y and NewY > Y1 and X + 2 < X1 then
 				return true
 			end
 		end
@@ -61,91 +62,93 @@ local function hasSelectableToTheRight(p4, p5)
 	return false
 end
 
-return function(p6)
-	-- upvalues: splitPaneStoreModule (ref), signalsReactModule (ref), useRegistryEntry (ref), focusNavigableSurfaceIdentifierEnum (ref), reactModule (ref), guiService (ref), getSelectionGroupRowContainer (ref), getRowBandContainer (ref), hasSelectableToTheRight (ref)
-	local store = splitPaneStoreModule.getStore()
-	local var5 = signalsReactModule.useSignalState(store.getSupportPaneEntryTarget)
-	local var6 = useRegistryEntry(focusNavigableSurfaceIdentifierEnum.HeaderView)
-	local var7 = reactModule.useRef(nil)
-	reactModule.useEffect(function()
-		-- upvalues: var7 (ref), store (ref), p6 (ref), guiService (copy), var5 (ref), var6 (ref), getSelectionGroupRowContainer (copy), getRowBandContainer (copy), hasSelectableToTheRight (copy)
-		local function _()
-			-- upvalues: var7 (copy)
-			local current = var7.current
+return function(p1) --[[ Line: 125 | Named "useSplitPaneFocusNavBridge" ]]
+	-- upvalues: SplitPaneStoreModule (copy), SignalsReactModule (copy), UseRegistryEntryFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), ReactModule (copy), GuiService (copy), getSelectionGroupRowContainer (copy), getRowBandContainer (copy), hasSelectableToTheRight (copy)
+	local Store = SplitPaneStoreModule.getStore()
+	local UseSignalStateResult = SignalsReactModule.useSignalState(Store.getSupportPaneEntryTarget)
+	local UseRegistryEntryResult = UseRegistryEntryFunction(FocusNavigableSurfaceIdentifierEnum.HeaderView)
+	local UseRefResult = ReactModule.useRef(nil)
+	ReactModule.useEffect(function() --[[ Line: 134 ]]
+		-- upvalues: UseRefResult (copy), Store (copy), p1 (copy), GuiService (upval), UseSignalStateResult (copy), UseRegistryEntryResult (copy), getSelectionGroupRowContainer (upval), getRowBandContainer (upval), hasSelectableToTheRight (upval)
+		local function _() --[[ Line: 135 | Named "clearOverride" ]]
+			-- upvalues: UseRefResult (upval)
+			local Current = UseRefResult.current
 			
-			if current ~= nil then
-				if current.object.NextSelectionRight == current.target then
-					current.object.NextSelectionRight = nil
+			if Current ~= nil then
+				if Current.object.NextSelectionRight == Current.target then
+					Current.object.NextSelectionRight = nil
 				end
-				var7.current = nil
+				UseRefResult.current = nil
 			end
 		end
 		
-		local function onSelectedCoreObjectChanged()
-			-- upvalues: store (copy), p6 (copy), guiService (copy), var5 (copy), var7 (copy), var6 (copy), getSelectionGroupRowContainer (copy), getRowBandContainer (copy), hasSelectableToTheRight (copy)
-			local isSplitEnabled = store.getIsSplitEnabled(false)
-			local current = p6.current
-			local selectedCoreObject = guiService.SelectedCoreObject
+		local function onSelectedCoreObjectChanged() --[[ Line: 146 ]]
+			-- upvalues: Store (upval), p1 (upval), GuiService (upval), UseSignalStateResult (upval), UseRefResult (upval), UseRegistryEntryResult (upval), getSelectionGroupRowContainer (upval), getRowBandContainer (upval), hasSelectableToTheRight (upval)
+			local Current = p1.current
+			local SelectedCoreObject = GuiService.SelectedCoreObject
 			
-			if isSplitEnabled and selectedCoreObject ~= nil and (current ~= nil and var5 ~= nil) and selectedCoreObject:IsDescendantOf(current) then
-				local var8 = if var6 == nil or not selectedCoreObject:IsDescendantOf(var6) then if selectedCoreObject:FindFirstAncestorWhichIsA("ScrollingFrame") ~= nil then getRowBandContainer(selectedCoreObject, current) else getSelectionGroupRowContainer(selectedCoreObject) else var6
+			if Store.getIsSplitEnabled(false) and SelectedCoreObject ~= nil and Current ~= nil and UseSignalStateResult ~= nil and SelectedCoreObject:IsDescendantOf(Current) then
+				local RowBandContainer = if UseRegistryEntryResult == nil or not SelectedCoreObject:IsDescendantOf(UseRegistryEntryResult) then if SelectedCoreObject:FindFirstAncestorWhichIsA("ScrollingFrame") == nil then getRowBandContainer(SelectedCoreObject, Current) else getSelectionGroupRowContainer(SelectedCoreObject) else UseRegistryEntryResult
 				
-				if var8 ~= nil and not hasSelectableToTheRight(selectedCoreObject, var8) then
-					local current_1 = var7.current
+				if RowBandContainer ~= nil and not hasSelectableToTheRight(SelectedCoreObject, RowBandContainer) then
+					local Current1 = UseRefResult.current
 					
-					if current_1 ~= nil and current_1.object ~= selectedCoreObject then
-						local current_2 = var7.current
+					if Current1 ~= nil and Current1.object ~= SelectedCoreObject then
+						local Current2 = UseRefResult.current
 						
-						if current_2 ~= nil then
-							if current_2.object.NextSelectionRight == current_2.target then
-								current_2.object.NextSelectionRight = nil
+						if Current2 ~= nil then
+							if Current2.object.NextSelectionRight == Current2.target then
+								Current2.object.NextSelectionRight = nil
 							end
-							var7.current = nil
+							UseRefResult.current = nil
 						end
 					end
-					if selectedCoreObject.NextSelectionRight == nil then
-						selectedCoreObject.NextSelectionRight = var5
-						var7.current = { object = selectedCoreObject, target = var5 }
+					if SelectedCoreObject.NextSelectionRight == nil then
+						SelectedCoreObject.NextSelectionRight = UseSignalStateResult
+						UseRefResult.current = {
+							object = SelectedCoreObject,
+							target = UseSignalStateResult
+						}
 						
 						return
 					end
 				else
-					local current_1 = var7.current
+					local Current3 = UseRefResult.current
 					
-					if current_1 ~= nil then
-						if current_1.object.NextSelectionRight == current_1.target then
-							current_1.object.NextSelectionRight = nil
+					if Current3 ~= nil then
+						if Current3.object.NextSelectionRight == Current3.target then
+							Current3.object.NextSelectionRight = nil
 						end
-						var7.current = nil
+						UseRefResult.current = nil
 					end
 				end
 				return
 			else
-				local current_1 = var7.current
+				local Current1 = UseRefResult.current
 				
-				if current_1 ~= nil then
-					if current_1.object.NextSelectionRight == current_1.target then
-						current_1.object.NextSelectionRight = nil
+				if Current1 ~= nil then
+					if Current1.object.NextSelectionRight == Current1.target then
+						Current1.object.NextSelectionRight = nil
 					end
-					var7.current = nil
+					UseRefResult.current = nil
 				end
 			end
 		end
 		
 		onSelectedCoreObjectChanged()
-		local var8 = guiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(onSelectedCoreObjectChanged)
+		local Connection = GuiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(onSelectedCoreObjectChanged)
 		
-		return function()
-			-- upvalues: var8 (ref), var7 (copy)
-			var8:Disconnect()
-			local current = var7.current
+		return function() --[[ Line: 187 ]]
+			-- upvalues: Connection (copy), UseRefResult (upval)
+			Connection:Disconnect()
+			local Current = UseRefResult.current
 			
-			if current ~= nil then
-				if current.object.NextSelectionRight == current.target then
-					current.object.NextSelectionRight = nil
+			if Current ~= nil then
+				if Current.object.NextSelectionRight == Current.target then
+					Current.object.NextSelectionRight = nil
 				end
-				var7.current = nil
+				UseRefResult.current = nil
 			end
 		end
-	end, { var6, var5, p6 })
+	end, { UseRegistryEntryResult, UseSignalStateResult, p1 })
 end

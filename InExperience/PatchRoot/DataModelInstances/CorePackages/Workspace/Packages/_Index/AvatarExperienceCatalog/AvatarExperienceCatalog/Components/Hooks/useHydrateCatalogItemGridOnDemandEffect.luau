@@ -1,40 +1,41 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local parent = avatarExperienceCatalog.Parent
-local reactModule = require(parent.React)
-local useNetworking = require(parent.AvatarExperienceCommon).Hooks.useNetworking
-local useStore = require(parent.RoactUtils).Hooks.RoactRodux.useStore
-local _ = require(avatarExperienceCatalog.Components.ResultsList.WidgetListInfoViewModel)
-local selectHydratedWidgetDataModule = require(avatarExperienceCatalog.State.Selectors.selectHydratedWidgetData)
-local getCatalogContentToHydrateModule = require(avatarExperienceCatalog.Utils.getCatalogContentToHydrate)
-local useCatalogPageMonolithDependenciesModule = require(avatarExperienceCatalog.Providers.useCatalogPageMonolithDependencies)
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local Parent = AvatarExperienceCatalog.Parent
+local ReactModule = require(Parent.React)
+local UseNetworkingFunction = require(Parent.AvatarExperienceCommon).Hooks.useNetworking
+local UseStoreFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useStore
+local _ = require(AvatarExperienceCatalog.Components.ResultsList.WidgetListInfoViewModel)
+local SelectHydratedWidgetDataModule = require(AvatarExperienceCatalog.State.Selectors.selectHydratedWidgetData)
+local GetCatalogContentToHydrateModule = require(AvatarExperienceCatalog.Utils.getCatalogContentToHydrate)
+local UseCatalogPageMonolithDependenciesModule = require(AvatarExperienceCatalog.Providers.useCatalogPageMonolithDependencies)
 local t = {}
 
-return function(p1, p2)
-	-- upvalues: useCatalogPageMonolithDependenciesModule (ref), useNetworking (ref), useStore (ref), reactModule (ref), t (ref), selectHydratedWidgetDataModule (ref), getCatalogContentToHydrateModule (ref)
-	local fetchHydratedWidgetContent = useCatalogPageMonolithDependenciesModule().fetchHydratedWidgetContent
-	local var1 = useNetworking()
-	local var2 = useStore()
-	local var3 = reactModule.useRef(nil)
-	local var4 = reactModule.useRef(nil)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), p2 (ref), t (copy), var3 (ref), var4 (ref), selectHydratedWidgetDataModule (copy), var2 (ref), getCatalogContentToHydrateModule (copy), fetchHydratedWidgetContent (ref), var1 (ref)
-		if not p1 or p1 == "" then return end
-		local p3 = p2 or t
+return function(Current, p1) --[[ Line: 47 | Named "useHydrateCatalogItemGridOnDemandEffect" ]]
+	-- upvalues: UseCatalogPageMonolithDependenciesModule (copy), UseNetworkingFunction (copy), UseStoreFunction (copy), ReactModule (copy), t (copy), SelectHydratedWidgetDataModule (copy), GetCatalogContentToHydrateModule (copy)
+	local FetchHydratedWidgetContentFunction = UseCatalogPageMonolithDependenciesModule().fetchHydratedWidgetContent
+	local UseNetworkingResult = UseNetworkingFunction()
+	local UseStoreResult = UseStoreFunction()
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	ReactModule.useEffect(function() --[[ Line: 62 ]]
+		-- upvalues: Current (copy), p1 (copy), t (upval), UseRefResult (copy), UseRefResult1 (copy), SelectHydratedWidgetDataModule (upval), UseStoreResult (copy), GetCatalogContentToHydrateModule (upval), FetchHydratedWidgetContentFunction (copy), UseNetworkingResult (copy)
+		if not Current or Current == "" then return end
+		local P1 = p1 or t
 		
-		if var3.current == p1 and var4.current == p3 then return end
-		local var5 = getCatalogContentToHydrateModule(p3, selectHydratedWidgetDataModule(var2:getState()), nil)
-		var3.current = p1
-		var4.current = p3
+		if UseRefResult.current == Current and UseRefResult1.current == P1 then return end
+		local CatalogContentToHydrateModule = GetCatalogContentToHydrateModule(P1, SelectHydratedWidgetDataModule(UseStoreResult:getState()), nil)
+		UseRefResult.current = Current
+		UseRefResult1.current = P1
 		
-		if #var5 == 0 then
+		if #CatalogContentToHydrateModule ~= 0 then
+			FetchHydratedWidgetContentFunction(UseNetworkingResult, CatalogContentToHydrateModule, Current)
+			
 			return
 		end
-		fetchHydratedWidgetContent(var1, var5, p1)
 	end, {
+		Current,
 		p1,
-		p2,
-		var1,
-		fetchHydratedWidgetContent,
-		var2
+		UseNetworkingResult,
+		FetchHydratedWidgetContentFunction,
+		UseStoreResult
 	})
 end

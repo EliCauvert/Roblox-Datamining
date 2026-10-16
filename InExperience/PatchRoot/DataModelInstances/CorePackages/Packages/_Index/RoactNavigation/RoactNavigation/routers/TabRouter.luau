@@ -1,18 +1,18 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
-local object = require(parent_1.Parent.LuauPolyfill).Object
-local switchRouterModule = require(parent.SwitchRouter)
-local backBehaviorModule = require(parent_1.BackBehavior)
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
+local Object = require(Parent1.Parent.LuauPolyfill).Object
+local SwitchRouterModule = require(Parent.SwitchRouter)
+local BackBehaviorModule = require(Parent1.BackBehavior)
 
-return function(p1, p2)
-	-- upvalues: backBehaviorModule (ref), object (ref), switchRouterModule (ref)
-	local t = {
+return function(p1, p2) --[[ Line: 11 ]]
+	-- upvalues: BackBehaviorModule (copy), Object (copy), SwitchRouterModule (copy)
+	local AssignResult = {
 		resetOnBlur = false,
-		backBehavior = backBehaviorModule.InitialRoute
+		backBehavior = BackBehaviorModule.InitialRoute
 	}
 	
 	if p2 then
-		t = object.assign(t, p2)
+		AssignResult = Object.assign(AssignResult, p2)
 	end
-	return switchRouterModule(p1, t)
+	return SwitchRouterModule(p1, AssignResult)
 end

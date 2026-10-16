@@ -1,20 +1,20 @@
-﻿local parent = script.Parent.Parent.Parent
-local dependenciesModule = require(parent.dependencies)
-local getDeepValue = dependenciesModule.SocialLibraries.Dictionary.getDeepValue
-local llama = dependenciesModule.llama
-local constantsModule = require(parent.Common.Constants)
-local _ = require(parent.Common.ModelTypes)
-local recommendationSourceEnum = dependenciesModule.SocialCommon.Enums.RecommendationSourceEnum
+﻿local Parent = script.Parent.Parent.Parent
+local DependenciesModule = require(Parent.dependencies)
+local GetDeepValueFunction = DependenciesModule.SocialLibraries.Dictionary.getDeepValue
+local Llama = DependenciesModule.llama
+local ConstantsModule = require(Parent.Common.Constants)
+local _ = require(Parent.Common.ModelTypes)
+local RecommendationSourceEnum = DependenciesModule.SocialCommon.Enums.RecommendationSourceEnum
 
-return function(p1)
-	-- upvalues: getDeepValue (ref), constantsModule (ref), recommendationSourceEnum (ref), llama (ref)
-	return function(p2)
-		-- upvalues: getDeepValue (copy), constantsModule (copy), recommendationSourceEnum (copy), llama (copy), p1 (ref)
-		local var1 = getDeepValue(p2, string.format("%s.Friends.recommendations.bySource.%s", constantsModule.RODUX_KEY, recommendationSourceEnum.HomepagePYMKCarousel)) or {}
+return function(p1) --[[ Line: 18 ]]
+	-- upvalues: GetDeepValueFunction (copy), ConstantsModule (copy), RecommendationSourceEnum (copy), Llama (copy)
+	return function(p2) --[[ Line: 19 ]]
+		-- upvalues: GetDeepValueFunction (upval), ConstantsModule (upval), RecommendationSourceEnum (upval), Llama (upval), p1 (copy)
+		local DeepValue = GetDeepValueFunction(p2, string.format("%s.Friends.recommendations.bySource.%s", ConstantsModule.RODUX_KEY, RecommendationSourceEnum.HomepagePYMKCarousel)) or {}
 		
-		return llama.List.filter(p1, function(p3)
-			-- upvalues: var1 (ref)
-			return var1[p3.id]
+		return Llama.List.filter(p1, function(p3) --[[ Line: 29 ]]
+			-- upvalues: DeepValue (copy)
+			return DeepValue[p3.id]
 		end)
 	end
 end

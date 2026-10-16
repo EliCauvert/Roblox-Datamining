@@ -1,27 +1,27 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local telemetryModule = require(appChat.Telemetry.Telemetry)
-local _ = require(appChat.Telemetry.Layers.ChatLandingTelemetryLayer)
-local _ = require(parent.SocialLuaAnalytics)
-local defaultTelemetryEventsModule = require(appChat.Telemetry.DefaultTelemetryEvents)
-local namedCounterConfigurationNoEmittedInfo = defaultTelemetryEventsModule.namedCounterConfigurationNoEmittedInfo
-local namedCounterConfigurationAndFormat = defaultTelemetryEventsModule.namedCounterConfigurationAndFormat
-local namedStatConfigurationAndFormat = defaultTelemetryEventsModule.namedStatConfigurationAndFormat
-local EVENT_INGEST_NO_EMITTED_INFO = defaultTelemetryEventsModule.EVENT_INGEST_NO_EMITTED_INFO
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local TelemetryModule = require(AppChat.Telemetry.Telemetry)
+local _ = require(AppChat.Telemetry.Layers.ChatLandingTelemetryLayer)
+local _ = require(AppChat.Parent.SocialLuaAnalytics)
+local DefaultTelemetryEventsModule = require(AppChat.Telemetry.DefaultTelemetryEvents)
+local NamedCounterConfigurationNoEmittedInfoFunction = DefaultTelemetryEventsModule.namedCounterConfigurationNoEmittedInfo
+local NamedCounterConfigurationAndFormatFunction = DefaultTelemetryEventsModule.namedCounterConfigurationAndFormat
+local NamedStatConfigurationAndFormatFunction = DefaultTelemetryEventsModule.namedStatConfigurationAndFormat
+local EVENTINGESTNOEMITTEDINFO = DefaultTelemetryEventsModule.EVENT_INGEST_NO_EMITTED_INFO
 
 return {
-	AppChatVisible = telemetryModule.new({
+	AppChatVisible = TelemetryModule.new({
 		name = "appChatVisible",
 		description = "",
-		lastUpdated = { 2026, 1, 27 },
+		lastUpdated = { 2026, 10, 7 },
 		backendsList = {
-			namedCounterConfigurationAndFormat("AppChat.Navigation.Visible", function(p1)
+			NamedCounterConfigurationAndFormatFunction("AppChat.Navigation.Visible", function(p1) --[[ Line: 23 ]]
 				return {
 					isChatEnabled = p1.isChatEnabled,
-					isChatLoading = p1.isChatLoading
+					isChatLoading = p1.isChatLoading,
+					isInConversation = p1.isInConversation
 				}
 			end),
-			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
+			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1) --[[ Line: 35 ]]
 				return {
 					isChatEnabled = p1.isChatEnabled,
 					isChatLoading = p1.isChatLoading
@@ -29,18 +29,18 @@ return {
 			end)
 		}
 	}),
-	AppChatClosed = telemetryModule.new({
+	AppChatClosed = TelemetryModule.new({
 		name = "appChatClosed",
 		description = "",
 		lastUpdated = { 2026, 2, 9 },
 		backendsList = {
-			namedCounterConfigurationAndFormat("AppChat.Navigation.Closed", function(p1)
+			NamedCounterConfigurationAndFormatFunction("AppChat.Navigation.Closed", function(p1) --[[ Line: 49 ]]
 				return {
 					isChatEnabled = p1.isChatEnabled,
 					isChatLoading = p1.isChatLoading
 				}
 			end),
-			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
+			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1) --[[ Line: 59 ]]
 				return {
 					isChatEnabled = p1.isChatEnabled,
 					isChatLoading = p1.isChatLoading
@@ -48,87 +48,87 @@ return {
 			end)
 		}
 	}),
-	ScreenRendered = telemetryModule.new({
+	ScreenRendered = TelemetryModule.new({
 		name = "chatLandingScreenRendered",
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			namedCounterConfigurationAndFormat("AppChat.ChatLanding.Rendered", function(p1)
+			NamedCounterConfigurationAndFormatFunction("AppChat.ChatLanding.Rendered", function(p1) --[[ Line: 73 ]]
 				return { isChatEnabled = p1.isChatEnabled }
 			end),
-			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
+			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1) --[[ Line: 80 ]]
 				return { isChatEnabled = p1.isChatEnabled }
 			end)
 		}
 	}),
-	ChatEmptyStateScreenRendered = telemetryModule.new({
+	ChatEmptyStateScreenRendered = TelemetryModule.new({
 		name = "chatEmptyStateScreenRendered",
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			namedCounterConfigurationAndFormat("AppChat.ChatLanding.EmptyState.Rendered", function(p1)
+			NamedCounterConfigurationAndFormatFunction("AppChat.ChatLanding.EmptyState.Rendered", function(p1) --[[ Line: 92 ]]
 				return { emptyStateType = p1.emptyStateType }
 			end),
-			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
+			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1) --[[ Line: 99 ]]
 				return { emptyStateType = p1.emptyStateType }
 			end)
 		}
 	}),
-	ChatAddFriendsBtnClicked = telemetryModule.new({
+	ChatAddFriendsBtnClicked = TelemetryModule.new({
 		name = "chatAddFriendsBtnClicked",
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			namedCounterConfigurationNoEmittedInfo("AppChat.ChatLanding.Button.AddConnections"),
-			EVENT_INGEST_NO_EMITTED_INFO
+			NamedCounterConfigurationNoEmittedInfoFunction("AppChat.ChatLanding.Button.AddConnections"),
+			EVENTINGESTNOEMITTEDINFO
 		}
 	}),
-	ChatLandingSearchBtnClicked = telemetryModule.new({
+	ChatLandingSearchBtnClicked = TelemetryModule.new({
 		name = "chatLandingSearchBtnClicked",
 		description = "",
 		lastUpdated = { 2025, 7, 31 },
 		backendsList = {
-			namedCounterConfigurationNoEmittedInfo("AppChat.ChatLanding.Button.Search"),
-			EVENT_INGEST_NO_EMITTED_INFO
+			NamedCounterConfigurationNoEmittedInfoFunction("AppChat.ChatLanding.Button.Search"),
+			EVENTINGESTNOEMITTEDINFO
 		}
 	}),
-	ChatLandingComposeBtnClicked = telemetryModule.new({
+	ChatLandingComposeBtnClicked = TelemetryModule.new({
 		name = "chatLandingComposeBtnClicked",
 		description = "",
 		lastUpdated = { 2025, 7, 31 },
 		backendsList = {
-			namedCounterConfigurationNoEmittedInfo("AppChat.ChatLanding.Button.Compose"),
-			EVENT_INGEST_NO_EMITTED_INFO
+			NamedCounterConfigurationNoEmittedInfoFunction("AppChat.ChatLanding.Button.Compose"),
+			EVENTINGESTNOEMITTEDINFO
 		}
 	}),
-	ChatLandingNotifBtnClicked = telemetryModule.new({
+	ChatLandingNotifBtnClicked = TelemetryModule.new({
 		name = "chatLandingNotifBtnClicked",
 		description = "",
 		lastUpdated = { 2025, 7, 31 },
 		backendsList = {
-			namedCounterConfigurationNoEmittedInfo("AppChat.ChatLanding.Button.Notifications"),
-			EVENT_INGEST_NO_EMITTED_INFO
+			NamedCounterConfigurationNoEmittedInfoFunction("AppChat.ChatLanding.Button.Notifications"),
+			EVENTINGESTNOEMITTEDINFO
 		}
 	}),
-	ChatLandingSnoozeBtnClicked = telemetryModule.new({
+	ChatLandingSnoozeBtnClicked = TelemetryModule.new({
 		name = "chatLandingSnoozeBtnClicked",
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			namedCounterConfigurationAndFormat("AppChat.ChatLanding.Button.Snooze", function(p1)
+			NamedCounterConfigurationAndFormatFunction("AppChat.ChatLanding.Button.Snooze", function(p1) --[[ Line: 147 ]]
 				return { isChatNotificationsMuted = p1.isChatNotificationsMuted }
 			end),
-			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
+			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1) --[[ Line: 155 ]]
 				return { isChatNotificationsMuted = p1.isChatNotificationsMuted }
 			end)
 		}
 	}),
-	ConversationCellRendered = telemetryModule.new({
+	ConversationCellRendered = TelemetryModule.new({
 		name = "chatLandingConversationCellRendered",
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			namedCounterConfigurationAndFormat("AppChat.ChatLanding.ConversationCell.Rendered", function(p1)
+			NamedCounterConfigurationAndFormatFunction("AppChat.ChatLanding.ConversationCell.Rendered", function(p1) --[[ Line: 168 ]]
 				return {
 					isFiltered = p1.isFiltered,
 					hasUnreadMessages = p1.hasUnreadMessages,
@@ -137,7 +137,7 @@ return {
 					osaAcknowledgementStatus = p1.osaAcknowledgementStatus
 				}
 			end),
-			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
+			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1) --[[ Line: 189 ]]
 				return {
 					isFiltered = p1.isFiltered,
 					conversationListCount = p1.conversationListCount,
@@ -152,22 +152,22 @@ return {
 			end)
 		}
 	}),
-	ConversationCellRenderedIndexStat = telemetryModule.new({
+	ConversationCellRenderedIndexStat = TelemetryModule.new({
 		name = "chatLandingConversationCellRenderedIndexStat",
 		description = "",
 		lastUpdated = { 2026, 1, 30 },
 		backendsList = {
-			namedStatConfigurationAndFormat("chatLandingConversationCellRenderedIndexStat", function(_)
+			NamedStatConfigurationAndFormatFunction("chatLandingConversationCellRenderedIndexStat", function(_) --[[ Line: 219 ]]
 				return {}
 			end)
 		}
 	}),
-	ConversationClicked = telemetryModule.new({
+	ConversationClicked = TelemetryModule.new({
 		name = "chatLandingConversationClicked",
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			namedCounterConfigurationAndFormat("AppChat.ChatLanding.Button.Conversation", function(p1)
+			NamedCounterConfigurationAndFormatFunction("AppChat.ChatLanding.Button.Conversation", function(p1) --[[ Line: 231 ]]
 				return {
 					isFiltered = p1.isFiltered,
 					hasUnreadMessages = p1.hasUnreadMessages,
@@ -176,7 +176,7 @@ return {
 					osaAcknowledgementStatus = p1.osaAcknowledgementStatus
 				}
 			end),
-			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
+			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1) --[[ Line: 251 ]]
 				return {
 					isFiltered = p1.isFiltered,
 					conversationListCount = p1.conversationListCount,
@@ -192,34 +192,34 @@ return {
 			end)
 		}
 	}),
-	ConversationClickedIndexStat = telemetryModule.new({
+	ConversationClickedIndexStat = TelemetryModule.new({
 		name = "chatLandingConversationClickedIndexStat",
 		description = "",
 		lastUpdated = { 2026, 1, 30 },
 		backendsList = {
-			namedStatConfigurationAndFormat("chatLandingConversationClickedIndexStat", function(_)
+			NamedStatConfigurationAndFormatFunction("chatLandingConversationClickedIndexStat", function(_) --[[ Line: 283 ]]
 				return {}
 			end)
 		}
 	}),
-	SearchStarted = telemetryModule.new({
+	SearchStarted = TelemetryModule.new({
 		name = "chatLandingSearchStarted",
 		description = "A search session opened on the chat landing list. Once per session, on both the client-filter and backend-search paths.",
 		lastUpdated = { 2026, 9, 21 },
 		backendsList = {
-			namedCounterConfigurationNoEmittedInfo("AppChat.ChatLanding.Search.Started"),
-			EVENT_INGEST_NO_EMITTED_INFO
+			NamedCounterConfigurationNoEmittedInfoFunction("AppChat.ChatLanding.Search.Started"),
+			EVENTINGESTNOEMITTEDINFO
 		}
 	}),
-	SearchResultsRendered = telemetryModule.new({
+	SearchResultsRendered = TelemetryModule.new({
 		name = "chatLandingSearchResultsRendered",
 		description = "A search query settled. Once per query, with the result count and outcome, which the cell events cannot express when zero cells render.",
 		lastUpdated = { 2026, 9, 21 },
 		backendsList = {
-			namedCounterConfigurationAndFormat("AppChat.ChatLanding.Search.ResultsRendered", function(p1)
+			NamedCounterConfigurationAndFormatFunction("AppChat.ChatLanding.Search.ResultsRendered", function(p1) --[[ Line: 306 ]]
 				return { searchResultType = p1.searchResultType }
 			end),
-			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
+			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1) --[[ Line: 315 ]]
 				return {
 					searchResultCount = p1.searchResultCount,
 					searchResultType = p1.searchResultType,
@@ -228,85 +228,85 @@ return {
 			end)
 		}
 	}),
-	ChatLandingGroupsBtnClicked = telemetryModule.new({
+	ChatLandingGroupsBtnClicked = TelemetryModule.new({
 		name = "chatLandingGroupsBtnClicked",
 		description = "",
 		lastUpdated = { 2025, 7, 31 },
 		backendsList = {
-			namedCounterConfigurationNoEmittedInfo("AppChat.ChatLanding.Button.Groups"),
-			EVENT_INGEST_NO_EMITTED_INFO
+			NamedCounterConfigurationNoEmittedInfoFunction("AppChat.ChatLanding.Button.Groups"),
+			EVENTINGESTNOEMITTEDINFO
 		}
 	}),
-	ChatLandingPvUpsellRendered = telemetryModule.new({
+	ChatLandingPvUpsellRendered = TelemetryModule.new({
 		name = "chatLandingPvUpsellRendered",
 		description = "",
 		lastUpdated = { 2025, 7, 31 },
 		backendsList = {
-			namedCounterConfigurationNoEmittedInfo("AppChat.ChatLanding.PvUpsell.Rendered"),
-			EVENT_INGEST_NO_EMITTED_INFO
+			NamedCounterConfigurationNoEmittedInfoFunction("AppChat.ChatLanding.PvUpsell.Rendered"),
+			EVENTINGESTNOEMITTEDINFO
 		}
 	}),
-	ChatLandingPvUpsellDismissed = telemetryModule.new({
+	ChatLandingPvUpsellDismissed = TelemetryModule.new({
 		name = "chatLandingPvUpsellDismissed",
 		description = "",
 		lastUpdated = { 2025, 7, 31 },
 		backendsList = {
-			namedCounterConfigurationNoEmittedInfo("AppChat.ChatLanding.PvUpsell.Dismissed"),
-			EVENT_INGEST_NO_EMITTED_INFO
+			NamedCounterConfigurationNoEmittedInfoFunction("AppChat.ChatLanding.PvUpsell.Dismissed"),
+			EVENTINGESTNOEMITTEDINFO
 		}
 	}),
-	ChatLandingPvUpsellContinueClicked = telemetryModule.new({
+	ChatLandingPvUpsellContinueClicked = TelemetryModule.new({
 		name = "chatLandingPvUpsellContinueClicked",
 		description = "",
 		lastUpdated = { 2025, 7, 31 },
 		backendsList = {
-			namedCounterConfigurationNoEmittedInfo("AppChat.ChatLanding.PvUpsell.Button.Continue"),
-			EVENT_INGEST_NO_EMITTED_INFO
+			NamedCounterConfigurationNoEmittedInfoFunction("AppChat.ChatLanding.PvUpsell.Button.Continue"),
+			EVENTINGESTNOEMITTEDINFO
 		}
 	}),
-	ChatLandingPvUpsellSucceeded = telemetryModule.new({
+	ChatLandingPvUpsellSucceeded = TelemetryModule.new({
 		name = "chatLandingPvUpsellSucceeded",
 		description = "",
 		lastUpdated = { 2025, 7, 31 },
 		backendsList = {
-			namedCounterConfigurationNoEmittedInfo("AppChat.ChatLanding.PvUpsell.Succeeded"),
-			EVENT_INGEST_NO_EMITTED_INFO
+			NamedCounterConfigurationNoEmittedInfoFunction("AppChat.ChatLanding.PvUpsell.Succeeded"),
+			EVENTINGESTNOEMITTEDINFO
 		}
 	}),
-	ChatLandingPvUpsellFailed = telemetryModule.new({
+	ChatLandingPvUpsellFailed = TelemetryModule.new({
 		name = "chatLandingPvUpsellFailed",
 		description = "",
 		lastUpdated = { 2025, 7, 31 },
 		backendsList = {
-			namedCounterConfigurationNoEmittedInfo("AppChat.ChatLanding.PvUpsell.Failed"),
-			EVENT_INGEST_NO_EMITTED_INFO
+			NamedCounterConfigurationNoEmittedInfoFunction("AppChat.ChatLanding.PvUpsell.Failed"),
+			EVENTINGESTNOEMITTEDINFO
 		}
 	}),
-	ChatLandingUnfilteredThreadsFtuxRendered = telemetryModule.new({
+	ChatLandingUnfilteredThreadsFtuxRendered = TelemetryModule.new({
 		name = "chatLandingUnfilteredThreadsFtuxRendered",
 		description = "",
 		lastUpdated = { 2025, 7, 31 },
 		backendsList = {
-			namedCounterConfigurationNoEmittedInfo("AppChat.ChatLanding.UnfilteredThreadsFtux.Rendered"),
-			EVENT_INGEST_NO_EMITTED_INFO
+			NamedCounterConfigurationNoEmittedInfoFunction("AppChat.ChatLanding.UnfilteredThreadsFtux.Rendered"),
+			EVENTINGESTNOEMITTEDINFO
 		}
 	}),
-	ChatLandingUnfilteredThreadsFtuxDismissed = telemetryModule.new({
+	ChatLandingUnfilteredThreadsFtuxDismissed = TelemetryModule.new({
 		name = "chatLandingUnfilteredThreadsFtuxDismissed",
 		description = "",
 		lastUpdated = { 2025, 7, 31 },
 		backendsList = {
-			namedCounterConfigurationNoEmittedInfo("AppChat.ChatLanding.UnfilteredThreadsFtux.Dismissed"),
-			EVENT_INGEST_NO_EMITTED_INFO
+			NamedCounterConfigurationNoEmittedInfoFunction("AppChat.ChatLanding.UnfilteredThreadsFtux.Dismissed"),
+			EVENTINGESTNOEMITTEDINFO
 		}
 	}),
-	ChatLandingUnfilteredThreadsFtuxLearnMoreClicked = telemetryModule.new({
+	ChatLandingUnfilteredThreadsFtuxLearnMoreClicked = TelemetryModule.new({
 		name = "chatLandingUnfilteredThreadsFtuxLearnMoreClicked",
 		description = "",
 		lastUpdated = { 2025, 7, 31 },
 		backendsList = {
-			namedCounterConfigurationNoEmittedInfo("AppChat.ChatLanding.UnfilteredThreadsFtux.Button.LearnMore"),
-			EVENT_INGEST_NO_EMITTED_INFO
+			NamedCounterConfigurationNoEmittedInfoFunction("AppChat.ChatLanding.UnfilteredThreadsFtux.Button.LearnMore"),
+			EVENTINGESTNOEMITTEDINFO
 		}
 	})
 }

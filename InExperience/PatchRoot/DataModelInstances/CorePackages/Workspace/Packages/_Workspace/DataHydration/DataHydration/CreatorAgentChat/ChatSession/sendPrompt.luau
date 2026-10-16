@@ -1,131 +1,138 @@
-﻿local signalsModule = require(script:FindFirstAncestor("DataHydration").Parent.Signals)
+﻿local Parent = script:FindFirstAncestor("DataHydration").Parent
+local SignalsModule = require(Parent.Signals)
 local _ = require(script.Parent.Parent.types)
+local FFlagBuildExperiencePromptFailureTelemetry = require(Parent.SharedFlags).FFlagBuildExperiencePromptFailureTelemetry
 
 return {
-	createSendPrompt = function(p1)
-		-- upvalues: signalsModule (ref)
+	createSendPrompt = function(p1) --[[ Line: 33 ]]
+		-- upvalues: SignalsModule (copy), FFlagBuildExperiencePromptFailureTelemetry (copy)
 		return {
-			sendPrompt = function(p2)
-				-- upvalues: p1 (ref), signalsModule (copy)
-				local var1 = p1.incrementAssistantTurnSequence()
-				local var2, var3 = signalsModule.createSignal(nil)
-				local var4, var5 = signalsModule.createSignal(nil)
-				local var6 = false
-				local var7 = false
-				local var8 = false
-				local var9 = false
-				local var10 = nil
-				local var11 = nil
-				local var12 = nil
+			sendPrompt = function(p2) --[[ Line: 34 ]]
+				-- upvalues: p1 (copy), SignalsModule (upval), FFlagBuildExperiencePromptFailureTelemetry (upval)
+				local IncrementAssistantTurnSequenceResult = p1.incrementAssistantTurnSequence()
+				local Signal, Signal2 = SignalsModule.createSignal(nil)
+				local Signal1, Signal2_1 = SignalsModule.createSignal(nil)
+				local Flag = false
+				local Flag1 = false
+				local Flag2 = false
+				local Flag3 = false
+				local v1 = nil
+				local Callback1: (() -> ())? = nil
+				local Callback: (() -> ())? = nil
 				
-				local function fireCompleted(p3)
-					-- upvalues: var7 (write), var1 (ref), p1 (copy), var12 (write), var11 (write), var10 (write), p2 (ref)
-					if var7 then return end
-					if var1 ~= p1.getAssistantTurnSequence() then return end
-					var7 = true
+				local function fireCompleted(StateResult) --[[ Line: 48 ]]
+					-- upvalues: Flag1 (ref), IncrementAssistantTurnSequenceResult (copy), p1 (upval), Callback (ref), Callback1 (ref), v1 (ref), p2 (copy)
+					if Flag1 then return end
+					if IncrementAssistantTurnSequenceResult ~= p1.getAssistantTurnSequence() then return end
+					Flag1 = true
 					p1.setActiveStop(nil)
 					
-					if var12 ~= nil then
-						var12()
-						var12 = nil
+					if Callback ~= nil then
+						Callback()
+						Callback = nil
 					end
-					if var11 ~= nil then
-						var11()
-						var11 = nil
+					if Callback1 ~= nil then
+						Callback1()
+						Callback1 = nil
 					end
-					if var10 ~= nil then
-						p1.noteTurnSequenceIds(var10)
+					if v1 ~= nil then
+						p1.noteTurnSequenceIds(v1)
 					end
 					if p2.onCompleted ~= nil then
-						p2.onCompleted(p3)
+						p2.onCompleted(StateResult)
 					end
 				end
 				
-				local function start()
-					-- upvalues: var6 (write), var9 (write), fireCompleted (ref), p1 (copy), var5 (ref), p2 (ref), var10 (write), var3 (ref), var11 (write), var12 (write), signalsModule (copy), var8 (write)
-					if var6 then
-						return
-					end
-					var6 = true
-					task.spawn(function()
-						-- upvalues: var9 (copy), fireCompleted (copy), p1 (copy), var5 (copy), p2 (copy), var10 (copy), var3 (copy), var11 (copy), var12 (copy), signalsModule (copy), var8 (copy)
-						if var9 then
-							fireCompleted(nil)
-							
-							return
-						end
-						local var13, var14 = p1.ensureInitialized()
-						
-						if not var13 then
-							var5({ stage = "initialize", errorCode = var14 })
-							fireCompleted(nil)
-							
-							return
-						end
-						local _ = nil
-						local _ = nil
-						local var15, var16 = p1.ensureCasSession()
-						
-						if var15 == nil then
-							var5(var16 or { stage = "session_new" })
-							fireCompleted(nil)
-							
-							return
-						elseif var9 then
-							fireCompleted(nil)
-							
-							return
-						end
-						var15 = p1.sessionPrompt({
-							sessionId = var15,
-							prompt = p2.prompt,
-							_meta = p2.promptMeta
-						})
-						var10 = var15
-						var3(var15)
-						
-						if var9 then
-							var15.cancel()
-						end
-						var11 = p1.startPollingTurnFromHistory(var15, var15, {
-							rtnIdleFallbackSeconds = p2.rtnIdleFallbackSeconds,
-							rtnSequenceGapFallbackSeconds = p2.rtnSequenceGapFallbackSeconds,
-							pollMinIntervalSeconds = p2.pollMinIntervalSeconds,
-							pollMaxIntervalSeconds = p2.pollMaxIntervalSeconds,
-							afterSequenceId = p1.getLatestObservedHistorySequenceId(),
-							onDroppedChatMessage = p2.onDroppedChatMessage
-						})
-						var12 = signalsModule.createEffect(function(p3)
-							-- upvalues: var15 (ref), p2 (copy), var8 (copy), fireCompleted (copy)
-							local var17 = var15.state(p3)
-							
-							if p2.onReceived ~= nil and not var8 and (var17.status == "streaming" or var17.status == "succeeded") then
-								var8 = true
-								p2.onReceived(var15.getTurnId())
+				local function start() --[[ Line: 73 ]]
+					-- upvalues: Flag (ref), Flag3 (ref), fireCompleted (copy), p1 (upval), Signal2_1 (copy), FFlagBuildExperiencePromptFailureTelemetry (upval), p2 (copy), v1 (ref), Signal2 (copy), Callback1 (ref), Callback (ref), SignalsModule (upval), Flag2 (ref)
+					if not Flag then
+						Flag = true
+						task.spawn(function() --[[ Line: 79 ]]
+							-- upvalues: Flag3 (upval), fireCompleted (upval), p1 (upval), Signal2_1 (upval), FFlagBuildExperiencePromptFailureTelemetry (upval), p2 (upval), v1 (upval), Signal2 (upval), Callback1 (upval), Callback (upval), SignalsModule (upval), Flag2 (upval)
+							if Flag3 then
+								fireCompleted(nil)
+								
+								return
 							end
-							if var17.isDone then
-								fireCompleted(var15.state(false))
+							local EnsureInitializedResult, EnsureInitializedResult2, EnsureInitializedResult3 = p1.ensureInitialized()
+							
+							if not EnsureInitializedResult then
+								Signal2_1({
+									stage = "initialize",
+									errorCode = EnsureInitializedResult2,
+									requestFailure = if FFlagBuildExperiencePromptFailureTelemetry then EnsureInitializedResult3 else nil
+								})
+								fireCompleted(nil)
+								
+								return
 							end
+							local EnsureCasSessionResult, EnsureCasSessionResult2 = p1.ensureCasSession()
+							
+							if EnsureCasSessionResult == nil then
+								Signal2_1(EnsureCasSessionResult2 or { stage = "session_new" })
+								fireCompleted(nil)
+								
+								return
+							end
+							if Flag3 then
+								fireCompleted(nil)
+								
+								return
+							end
+							local SessionPromptResult = p1.sessionPrompt({
+								sessionId = EnsureCasSessionResult,
+								prompt = p2.prompt,
+								_meta = p2.promptMeta
+							})
+							v1 = SessionPromptResult
+							Signal2(SessionPromptResult)
+							
+							if Flag3 then
+								SessionPromptResult.cancel()
+							end
+							Callback1 = p1.startPollingTurnFromHistory(EnsureCasSessionResult, SessionPromptResult, {
+								rtnIdleFallbackSeconds = p2.rtnIdleFallbackSeconds,
+								rtnSequenceGapFallbackSeconds = p2.rtnSequenceGapFallbackSeconds,
+								pollMinIntervalSeconds = p2.pollMinIntervalSeconds,
+								pollMaxIntervalSeconds = p2.pollMaxIntervalSeconds,
+								afterSequenceId = p1.getLatestObservedHistorySequenceId(),
+								onDroppedChatMessage = p2.onDroppedChatMessage
+							})
+							Callback = SignalsModule.createEffect(function(p3) --[[ Line: 131 ]]
+								-- upvalues: SessionPromptResult (copy), p2 (upval), Flag2 (upval), fireCompleted (upval)
+								local StateResult = SessionPromptResult.state(p3)
+								
+								if p2.onReceived ~= nil and not Flag2 and (StateResult.status == "streaming" or StateResult.status == "succeeded") then
+									Flag2 = true
+									p2.onReceived(SessionPromptResult.getTurnId())
+								end
+								if StateResult.isDone then
+									fireCompleted(SessionPromptResult.state(false))
+								end
+							end)
 						end)
-					end)
-				end
-				
-				local function stop()
-					-- upvalues: var7 (write), var9 (write), var10 (write), var12 (write), var11 (write), fireCompleted (ref)
-					if var7 then return end
-					var9 = true
-					
-					if var10 ~= nil then
-						var10.cancel()
 						
 						return
-					elseif var12 ~= nil then
-						var12()
-						var12 = nil
 					end
-					if var11 ~= nil then
-						var11()
-						var11 = nil
+				end
+				
+				local function stop() --[[ Line: 148 ]]
+					-- upvalues: Flag1 (ref), Flag3 (ref), v1 (ref), Callback (ref), Callback1 (ref), fireCompleted (copy)
+					if Flag1 then return end
+					Flag3 = true
+					
+					if v1 ~= nil then
+						v1.cancel()
+						
+						return
+					end
+					if Callback ~= nil then
+						Callback()
+						Callback = nil
+					end
+					if Callback1 ~= nil then
+						Callback1()
+						Callback1 = nil
 					end
 					fireCompleted(nil)
 				end
@@ -133,8 +140,8 @@ return {
 				p1.setActiveStop(stop)
 				
 				return {
-					getTurnHandle = var2,
-					getSetupError = var4,
+					getTurnHandle = Signal,
+					getSetupError = Signal1,
 					start = start,
 					stop = stop
 				}

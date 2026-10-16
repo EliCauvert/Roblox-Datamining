@@ -1,121 +1,123 @@
-﻿local playersService = game:GetService("Players")
-local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local signalsReactModule = require(parent.SignalsReact)
-local roactUtilsModule = require(parent.RoactUtils)
-local game = require(parent.DataHydration).Game
-local votesUtils = game.VotesUtils
-local sduiSharedContentModule = require(parent.SduiSharedContent)
-local toastRoduxModule = require(parent.ToastRodux)
-local discoveryAnalyticsModule = require(parent.DiscoveryAnalytics)
-local universalAppPolicyModule = require(parent.UniversalAppPolicy)
-local sharedFlagsModule = require(parent.SharedFlags)
-local iconVariant = foundationModule.Enums.IconVariant
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local sduiDualActionChip = sduiSharedContentModule.SduiDualActionChip
-local toastType = toastRoduxModule.Enums.ToastType
-local setCurrentToastMessage = toastRoduxModule.Actions.SetCurrentToastMessage
-local useAppPolicy = universalAppPolicyModule.useAppPolicy
-local gameVote = discoveryAnalyticsModule.Events.gameVote
-local useOptimisticUpdateStatusModule = require(script.Parent.Hooks.useOptimisticUpdateStatus)
-local getFFlagEdpPlayerFeedbackEnabled = sharedFlagsModule.GetFFlagEdpPlayerFeedbackEnabled
+﻿local Players = game:GetService("Players")
+local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local SignalsReactModule = require(Parent.SignalsReact)
+local Game1 = require(Parent.DataHydration).Game
+local VotesUtils = Game1.VotesUtils
+local ToastRoduxModule = require(Parent.ToastRodux)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local IconVariant = FoundationModule.Enums.IconVariant
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local SduiDualActionChip = require(Parent.SduiSharedContent).SduiDualActionChip
+local ToastType = ToastRoduxModule.Enums.ToastType
+local SetCurrentToastMessageFunction = ToastRoduxModule.Actions.SetCurrentToastMessage
+local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
+local GameVoteFunction = require(Parent.DiscoveryAnalytics).Events.gameVote
+local UseOptimisticUpdateStatusModule = require(script.Parent.Hooks.useOptimisticUpdateStatus)
+local GetFFlagEdpPlayerFeedbackEnabledFunction = SharedFlagsModule.GetFFlagEdpPlayerFeedbackEnabled
+local FFlagLuaAppAddUniverseIdToEngagementEvents = SharedFlagsModule.FFlagLuaAppAddUniverseIdToEngagementEvents
 
-local function _(p1)
-	return if p1 == true then "UpVoted" elseif p1 == false then "DownVoted" else "NotVoted"
+local function _(Enabled): string --[[ Line: 38 | Named "convertBooleanToVoteForAnalytics" ]]
+	return if Enabled == true then "UpVoted" elseif Enabled == false then "DownVoted" else "NotVoted"
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: useDispatch (ref), signalsReactModule (ref), game (ref), reactModule (ref), setCurrentToastMessage (ref), toastType (ref), getFFlagEdpPlayerFeedbackEnabled (ref), useOptimisticUpdateStatusModule (ref), playersService (ref), gameVote (ref), votesUtils (ref), iconVariant (ref), useAppPolicy (ref), sduiDualActionChip (ref), foundationModule (ref)
-	local layoutOrder = p1.layoutOrder
-	local universeId = p1.universeId
-	local var1 = useDispatch()
-	local var2 = signalsReactModule.useSignalState(game.getVotesStore(false).getAndFetchVote(universeId).data)
-	local var3 = signalsReactModule.useSignalState(game.getVotesStore(false).getAndFetchUserVote(universeId).data)
-	local var4 = signalsReactModule.useSignalState(game.getGameInfoStore(false).getAndFetchGameInfo(universeId).data)
-	local rootPlaceId = var4 and var4.rootPlaceId
-	local var5 = useOptimisticUpdateStatusModule(reactModule.useCallback(function(p2)
-		-- upvalues: game (copy), universeId (ref)
-		return game.getVotesStore(false).updateUserVote(universeId, p2)
-	end, { universeId }), reactModule.useCallback(function(p2)
-		-- upvalues: var1 (ref), setCurrentToastMessage (copy), toastType (copy), getFFlagEdpPlayerFeedbackEnabled (copy), rootPlaceId (ref), game (copy)
+return ReactModule.memo(function(p1) --[[ Line: 48 | Named "ExperienceDetailsVoteChip" ]]
+	-- upvalues: UseDispatchFunction (copy), SignalsReactModule (copy), Game1 (copy), ReactModule (copy), SetCurrentToastMessageFunction (copy), ToastType (copy), GetFFlagEdpPlayerFeedbackEnabledFunction (copy), UseOptimisticUpdateStatusModule (copy), Players (copy), GameVoteFunction (copy), FFlagLuaAppAddUniverseIdToEngagementEvents (copy), VotesUtils (copy), IconVariant (copy), UseAppPolicyFunction (copy), SduiDualActionChip (copy), FoundationModule (copy)
+	local LayoutOrder = p1.layoutOrder
+	local UniverseId = p1.universeId
+	local UseDispatchResult = UseDispatchFunction()
+	local UseSignalStateResult = SignalsReactModule.useSignalState(Game1.getVotesStore(false).getAndFetchVote(UniverseId).data)
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(Game1.getVotesStore(false).getAndFetchUserVote(UniverseId).data)
+	local UseSignalStateResult2 = SignalsReactModule.useSignalState(Game1.getGameInfoStore(false).getAndFetchGameInfo(UniverseId).data)
+	local RootPlaceId = UseSignalStateResult2 and UseSignalStateResult2.rootPlaceId
+	local UseOptimisticUpdateStatusModuleResult = UseOptimisticUpdateStatusModule(ReactModule.useCallback(function(p2) --[[ Line: 60 ]]
+		-- upvalues: Game1 (upval), UniverseId (copy)
+		return Game1.getVotesStore(false).updateUserVote(UniverseId, p2)
+	end, { UniverseId }), (ReactModule.useCallback(function(p2) --[[ Line: 65 ]]
+		-- upvalues: UseDispatchResult (copy), SetCurrentToastMessageFunction (upval), ToastType (upval), GetFFlagEdpPlayerFeedbackEnabledFunction (upval), RootPlaceId (copy), Game1 (upval)
 		if p2 == nil then return end
 		if p2.type == "error" then
-			local var6 = "Feature.Toast.VoteError.Default"
-			local reasonForNotVoteable = p2.reasonForNotVoteable
+			local ToastMessage = "Feature.Toast.VoteError.Default"
+			local ReasonForNotVoteable = p2.reasonForNotVoteable
 			
-			if reasonForNotVoteable == "PlayGame" then
-				var6 = "Feature.Toast.VoteError.PlayGame"
-			elseif reasonForNotVoteable == "FloodCheckThresholdMet" then
-				var6 = "Feature.Toast.VoteError.FloodCheckThresholdMet"
-			elseif reasonForNotVoteable == "AssetNotVoteable" then
-				var6 = "Feature.Toast.VoteError.AssetNotVoteable"
+			if ReasonForNotVoteable == "PlayGame" then
+				ToastMessage = "Feature.Toast.VoteError.PlayGame"
+			elseif ReasonForNotVoteable == "FloodCheckThresholdMet" then
+				ToastMessage = "Feature.Toast.VoteError.FloodCheckThresholdMet"
+			elseif ReasonForNotVoteable == "AssetNotVoteable" then
+				ToastMessage = "Feature.Toast.VoteError.AssetNotVoteable"
 			end
-			var1(setCurrentToastMessage({
-				toastType = toastType.NetworkingError,
-				toastMessage = var6
+			UseDispatchResult(SetCurrentToastMessageFunction({
+				toastType = ToastType.NetworkingError,
+				toastMessage = ToastMessage
 			}))
 			
 			return
 		elseif p2.type == "success" then
-			if getFFlagEdpPlayerFeedbackEnabled() and p2.userVote ~= nil and rootPlaceId then
-				game.getUserVoteFeedbackMetadataStore(false).getAndFetchUserVoteFeedbackMetadata(rootPlaceId)
+			local UserVote = p2.userVote
+			
+			if GetFFlagEdpPlayerFeedbackEnabledFunction() and UserVote ~= nil and RootPlaceId then
+				Game1.getUserVoteFeedbackMetadataStore(false).getAndFetchUserVoteFeedbackMetadata(RootPlaceId)
 			end
 		end
-	end, { rootPlaceId, var1 }))
-	local var6 = reactModule.useCallback(function(p2)
-		-- upvalues: var3 (ref), rootPlaceId (ref), playersService (copy), gameVote (copy), getFFlagEdpPlayerFeedbackEnabled (copy), game (copy), var5 (ref)
-		local userVote = var3 and var3.userVote
-		local var7 = if userVote == p2 then nil else p2
+	end, { RootPlaceId, UseDispatchResult })))
+	local UseResult = ReactModule.useCallback(function(UserVote) --[[ Line: 99 ]]
+		-- upvalues: UseSignalStateResult1 (copy), RootPlaceId (copy), Players (upval), GameVoteFunction (upval), FFlagLuaAppAddUniverseIdToEngagementEvents (upval), UniverseId (copy), GetFFlagEdpPlayerFeedbackEnabledFunction (upval), Game1 (upval), UseOptimisticUpdateStatusModuleResult (copy)
+		local UserVote1 = UseSignalStateResult1 and UseSignalStateResult1.userVote
+		local UserVote2 = if UserVote1 == UserVote then nil else UserVote
 		
-		if rootPlaceId then
-			local var8 = gameVote
-			local t = {
-				uid = tostring(playersService.LocalPlayer and playersService.LocalPlayer.UserId),
-				placeId = rootPlaceId
-			}
-			local var9 = var7
-			t.vote = if var9 == true then "UpVoted" elseif var9 == false then "DownVoted" else "NotVoted"
-			t.prevVote = if userVote == true then "UpVoted" elseif userVote == false then "DownVoted" else "NotVoted"
-			var8(t, "ExperienceDetailsVoteChip")
+		if RootPlaceId then
+			GameVoteFunction({
+				uid = tostring(Players.LocalPlayer and Players.LocalPlayer.UserId),
+				placeId = RootPlaceId,
+				vote = if UserVote2 == true then "UpVoted" elseif UserVote2 == false then "DownVoted" else "NotVoted",
+				prevVote = if UserVote1 == true then "UpVoted" elseif UserVote1 == false then "DownVoted" else "NotVoted",
+				universeId = if FFlagLuaAppAddUniverseIdToEngagementEvents then UniverseId else nil
+			}, "ExperienceDetailsVoteChip")
 		end
-		if getFFlagEdpPlayerFeedbackEnabled() and rootPlaceId then
-			game.getUserVoteFeedbackMetadataStore(false).clearItem(rootPlaceId)
+		if GetFFlagEdpPlayerFeedbackEnabledFunction() and RootPlaceId then
+			Game1.getUserVoteFeedbackMetadataStore(false).clearItem(RootPlaceId)
 		end
-		var5(var7)
+		UseOptimisticUpdateStatusModuleResult(UserVote2)
 	end, {
-		universeId,
-		var3,
-		rootPlaceId,
-		var5,
-		var1
+		UniverseId,
+		UseSignalStateResult1,
+		RootPlaceId,
+		UseOptimisticUpdateStatusModuleResult,
+		UseDispatchResult
 	})
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 139 ]]
+		-- upvalues: UseResult (copy)
+		UseResult(true)
+	end, { UseResult })
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 143 ]]
+		-- upvalues: UseResult (copy)
+		UseResult(false)
+	end, { UseResult })
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 147 ]]
+		-- upvalues: VotesUtils (upval), UseSignalStateResult (copy)
+		return VotesUtils.getRatingDisplayText(UseSignalStateResult)
+	end, { UseSignalStateResult })
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 151 ]]
+		-- upvalues: UseSignalStateResult1 (copy), IconVariant (upval)
+		return if UseSignalStateResult1 and UseSignalStateResult1.userVote == true then IconVariant.Filled else IconVariant.Regular
+	end, { UseSignalStateResult1 })
+	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 158 ]]
+		-- upvalues: UseSignalStateResult1 (copy), IconVariant (upval)
+		return if UseSignalStateResult1 and UseSignalStateResult1.userVote == false then IconVariant.Filled else IconVariant.Regular
+	end, { UseSignalStateResult1 })
 	
-	return if useAppPolicy(function(p2)
+	return if UseAppPolicyFunction(function(p2) --[[ Line: 165 ]]
 		return p2.getGamePlaysAndRatings()
-	end) then reactModule.createElement(sduiDualActionChip, {
-		text = reactModule.useMemo(function()
-			-- upvalues: votesUtils (copy), var2 (ref)
-			return votesUtils.getRatingDisplayText(var2)
-		end, { var2 }),
-		leadingIconName = foundationModule.Enums.IconName.ThumbUp,
-		leadingIconVariant = reactModule.useMemo(function()
-			-- upvalues: var3 (ref), iconVariant (copy)
-			return if var3 and var3.userVote == true then iconVariant.Filled else iconVariant.Regular
-		end, { var3 }),
-		leadingOnActivated = reactModule.useCallback(function()
-			-- upvalues: var6 (ref)
-			var6(true)
-		end, { var6 }),
-		trailingIconName = foundationModule.Enums.IconName.ThumbDown,
-		trailingIconVariant = reactModule.useMemo(function()
-			-- upvalues: var3 (ref), iconVariant (copy)
-			return if var3 and var3.userVote == false then iconVariant.Filled else iconVariant.Regular
-		end, { var3 }),
-		trailingOnActivated = reactModule.useCallback(function()
-			-- upvalues: var6 (ref)
-			var6(false)
-		end, { var6 }),
-		layoutOrder = layoutOrder
+	end) then ReactModule.createElement(SduiDualActionChip, {
+		text = UseMemoResult,
+		leadingIconName = FoundationModule.Enums.IconName.ThumbUp,
+		leadingIconVariant = UseMemoResult1,
+		leadingOnActivated = UseResult1,
+		trailingIconName = FoundationModule.Enums.IconName.ThumbDown,
+		trailingIconVariant = UseMemoResult2,
+		trailingOnActivated = UseResult2,
+		layoutOrder = LayoutOrder
 	}) else nil
 end)

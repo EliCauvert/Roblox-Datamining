@@ -1,58 +1,58 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local colorNamespaceModule = require(foundation.Enums.ColorNamespace)
-local cursorTypeModule = require(foundation.Enums.CursorType)
-local _ = require(foundation.Providers.Style.Tokens)
-local _ = require(foundation.Components.Types)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ColorNamespaceModule = require(Foundation.Enums.ColorNamespace)
+local CursorTypeModule = require(Foundation.Enums.CursorType)
+local _ = require(Foundation.Providers.Style.Tokens)
+local _ = require(Foundation.Components.Types)
 
 return {
-	encodeKey = function(p1, p2, p3, p4, p5)
-		-- upvalues: colorNamespaceModule (ref)
-		p2 = p2 or UDim.new(0, 0)
-		p4 = p4 or p1.Stroke.Thicker
+	encodeKey = function(p1, p2, p3, p4, p5): string --[[ Line: 11 ]]
+		-- upvalues: ColorNamespaceModule (copy)
+		local P1 = p2 or UDim.new(0, 0)
+		local Thicker = p1.Stroke.Thicker
+		local P3 = p4 or Thicker
 		
-		return p2.Scale .. " " .. p1.Offset .. " " .. (p3 or p1.Size.Size_150) - p4 .. " " .. p3 .. " " .. (p5 or colorNamespaceModule.Color)
+		return P1.Scale .. " " .. P1.Offset .. " " .. (p3 or p1.Size.Size_150) - P3 .. " " .. P3 .. " " .. (p5 or ColorNamespaceModule.Color)
 	end,
-	decodeKey = function(p1)
-		local var1 = if typeof(p1) == "string" then string.split(p1, " ") else p1
-		local var2 = tonumber(var1[3])
+	decodeKey = function(Text: string) --[[ Line: 27 ]]
+		local Parts = if typeof(Text) == "string" then string.split(Text, " ") else Text
+		local Number: number? = tonumber(Parts[3])
 		
-		return UDim.new(tonumber(var1[1]), math.max(0, tonumber(var1[2]) + var2)), var2, tonumber(var1[4]), var1[5]
+		return UDim.new(tonumber(Parts[1]), (math.max(0, tonumber(Parts[2]) + Number))), Number, tonumber(Parts[4]), Parts[5]
 	end,
-	encodeCursorTypeKey = function(p1, p2)
-		-- upvalues: colorNamespaceModule (ref)
-		return p1 .. " " .. (p2 or colorNamespaceModule.Color)
+	encodeCursorTypeKey = function(Text, p1): string --[[ Line: 40 ]]
+		-- upvalues: ColorNamespaceModule (copy)
+		return Text .. " " .. (p1 or ColorNamespaceModule.Color)
 	end,
-	decodeCursorTypeKey = function(p1)
-		local var1 = if typeof(p1) == "string" then string.split(p1, " ") else p1
+	decodeCursorTypeKey = function(Text: string) --[[ Line: 45 ]]
+		local Parts = if typeof(Text) == "string" then string.split(Text, " ") else Text
 		
-		return var1[1], var1[2]
+		return Parts[1], Parts[2]
 	end,
-	migrateCursorType = function(p1)
-		-- upvalues: cursorTypeModule (ref)
-		local var1 = tostring(p1)
+	migrateCursorType = function(p1) --[[ Line: 52 ]]
+		-- upvalues: CursorTypeModule (copy)
+		local Text = tostring(p1)
 		
-		return cursorTypeModule[string.gsub(var1, if var1:find("Kind") then "CursorKind%." else "CursorType%.", "")]
+		return CursorTypeModule[string.gsub(Text, if Text:find("Kind") then "CursorKind%." else "CursorType%.", "")]
 	end,
-	mapCursorToKey = function(p1, p2)
-		-- upvalues: colorNamespaceModule (ref), cursorTypeModule (ref)
-		local _ = nil
-		
-		if typeof(p1) == "table" then
-			local offset = p1.offset
-			local radius = p1.radius or UDim.new(0, 0)
-			local borderWidth = p1.borderWidth or p2.Stroke.Thicker
+	mapCursorToKey = function(Text, p1): string --[[ Line: 58 ]]
+		-- upvalues: ColorNamespaceModule (copy), CursorTypeModule (copy)
+		if typeof(Text) == "table" then
+			local Radius = Text.radius or UDim.new(0, 0)
+			local Thicker = p1.Stroke.Thicker
+			local BorderWidth = Text.borderWidth or Thicker
 			
-			return radius.Scale .. " " .. radius.Offset .. " " .. (offset or p2.Size.Size_150) - borderWidth .. " " .. borderWidth .. " " .. colorNamespaceModule.Color
-		elseif p1 == nil then
-			local uDim = UDim.new(0, 0)
-			local thicker = p2.Stroke.Thicker
+			return Radius.Scale .. " " .. Radius.Offset .. " " .. (Text.offset or p1.Size.Size_150) - BorderWidth .. " " .. BorderWidth .. " " .. ColorNamespaceModule.Color
+		elseif Text == nil then
+			local _UDim = UDim.new(0, 0)
+			local Thicker = p1.Stroke.Thicker
 			
-			return uDim.Scale .. " " .. uDim.Offset .. " " .. p11.Size.Size_150 - thicker .. " " .. thicker .. " " .. colorNamespaceModule.Color
-		elseif typeof(p1) == "userdata" then
-			local var1 = tostring(p1)
+			return _UDim.Scale .. " " .. _UDim.Offset .. " " .. p1.Size.Size_150 - Thicker .. " " .. Thicker .. " " .. ColorNamespaceModule.Color
+		elseif typeof(Text) == "userdata" then
+			local Text1 = tostring(Text)
 			
-			return cursorTypeModule[string.gsub(var1, if var1:find("Kind") then "CursorKind%." else "CursorType%.", "")] .. " " .. colorNamespaceModule.Color
+			return CursorTypeModule[string.gsub(Text1, if Text1:find("Kind") then "CursorKind%." else "CursorType%.", "")] .. " " .. ColorNamespaceModule.Color
+		else
+			return Text .. " " .. ColorNamespaceModule.Color
 		end
-		return p1 .. " " .. colorNamespaceModule.Color
 	end
 }

@@ -1,65 +1,66 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local localizationService = game:GetService("LocalizationService")
-local userRelationshipModals = script:FindFirstAncestor("UserRelationshipModals")
-local parent = userRelationshipModals.Parent
-local provider = require(parent.FocusNavigationUtils).FocusNavigableSurfaceRegistry.Provider
-local foundationModule = require(parent.Foundation)
-local foundationProvider = foundationModule.FoundationProvider
-local localizationProvider = require(parent.Localization).LocalizationProvider
-local localization = require(parent.InExperienceLocales).Localization
-local reactModule = require(parent.React)
-local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
-local reactRobloxModule = require(parent.ReactRoblox)
-local roduxModule = require(parent.Rodux)
-local roactRoduxModule = require(parent.RoactRodux)
-local installReducerModule = require(userRelationshipModals.Rodux.installReducer)
-local RODUX_KEYModule = require(userRelationshipModals.Rodux.RODUX_KEY)
+﻿local CoreGui = game:GetService("CoreGui")
+local LocalizationService = game:GetService("LocalizationService")
+local UserRelationshipModals = script:FindFirstAncestor("UserRelationshipModals")
+local Parent = UserRelationshipModals.Parent
+local Provider = require(Parent.FocusNavigationUtils).FocusNavigableSurfaceRegistry.Provider
+local FoundationModule = require(Parent.Foundation)
+local FoundationProvider = FoundationModule.FoundationProvider
+local LocalizationProvider = require(Parent.Localization).LocalizationProvider
+local Localization = require(Parent.InExperienceLocales).Localization
+local ReactModule = require(Parent.React)
+local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
+local ReactRobloxModule = require(Parent.ReactRoblox)
+local RoduxModule = require(Parent.Rodux)
+local RoactRoduxModule = require(Parent.RoactRodux)
+local InstallReducerModule = require(UserRelationshipModals.Rodux.installReducer)
+local RODUXKEYModule = require(UserRelationshipModals.Rodux.RODUX_KEY)
 
-local function createRoduxStore()
-	-- upvalues: roduxModule (ref), RODUX_KEYModule (ref), installReducerModule (ref)
-	return roduxModule.Store.new(roduxModule.combineReducers({ [RODUX_KEYModule] = installReducerModule() }), nil, { roduxModule.thunkMiddleware })
+local function createRoduxStore() --[[ Line: 23 ]]
+	-- upvalues: RoduxModule (copy), RODUXKEYModule (copy), InstallReducerModule (copy)
+	return RoduxModule.Store.new(RoduxModule.combineReducers({ [RODUXKEYModule] = InstallReducerModule() }), nil, { RoduxModule.thunkMiddleware })
 end
 
-return function(p1, p2)
-	-- upvalues: coreGuiService (ref), reactFocusNavigationModule (ref), reactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), foundationProvider (ref), foundationModule (ref), provider (ref), roactRoduxModule (ref), createRoduxStore (ref), reactRobloxModule (ref)
-	if coreGuiService:FindFirstChild("UserRelationshipModal") then
-		return
-	end
-	local userRelationshipModal = Instance.new("Folder")
-	userRelationshipModal.Name = "UserRelationshipModal"
-	userRelationshipModal.Parent = coreGuiService
-	local userRelationshipModalOverlay = Instance.new("ScreenGui")
-	userRelationshipModalOverlay.Parent = userRelationshipModal
-	userRelationshipModalOverlay.Name = "UserRelationshipModalOverlay"
-	userRelationshipModalOverlay.DisplayOrder = -1
-	userRelationshipModalOverlay.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-	userRelationshipModalOverlay.Enabled = true
-	userRelationshipModalOverlay.ScreenInsets = Enum.ScreenInsets.CoreUISafeInsets
-	userRelationshipModalOverlay.SafeAreaCompatibility = Enum.SafeAreaCompatibility.None
-	userRelationshipModalOverlay.ClipToDeviceSafeArea = false
-	local cloned = table.clone(p2)
-	
-	function cloned.onClose()
-		-- upvalues: userRelationshipModal (ref)
-		userRelationshipModal:Destroy()
-	end
-	
-	reactRobloxModule.createRoot(userRelationshipModalOverlay):render(reactModule.createElement(localizationProvider, {
-		localization = localization.new(localizationService.RobloxLocaleId)
-	}, {
-		FoundationProvider = reactModule.createElement(foundationProvider, {
-			colorMode = foundationModule.Enums.ColorMode.Dark,
-			overlayGui = userRelationshipModalOverlay
+return function(p1, Tbl) --[[ Line: 33 ]]
+	-- upvalues: CoreGui (copy), ReactFocusNavigationModule (copy), ReactModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), FoundationProvider (copy), FoundationModule (copy), Provider (copy), RoactRoduxModule (copy), createRoduxStore (copy), ReactRobloxModule (copy)
+	if not CoreGui:FindFirstChild("UserRelationshipModal") then
+		local UserRelationshipModal = Instance.new("Folder")
+		UserRelationshipModal.Name = "UserRelationshipModal"
+		UserRelationshipModal.Parent = CoreGui
+		local UserRelationshipModalOverlay = Instance.new("ScreenGui")
+		UserRelationshipModalOverlay.Parent = UserRelationshipModal
+		UserRelationshipModalOverlay.Name = "UserRelationshipModalOverlay"
+		UserRelationshipModalOverlay.DisplayOrder = -1
+		UserRelationshipModalOverlay.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+		UserRelationshipModalOverlay.Enabled = true
+		UserRelationshipModalOverlay.ScreenInsets = Enum.ScreenInsets.CoreUISafeInsets
+		UserRelationshipModalOverlay.SafeAreaCompatibility = Enum.SafeAreaCompatibility.None
+		UserRelationshipModalOverlay.ClipToDeviceSafeArea = false
+		local Copy = table.clone(Tbl)
+		
+		function Copy.onClose() --[[ Line: 52 ]]
+			-- upvalues: UserRelationshipModal (copy)
+			UserRelationshipModal:Destroy()
+		end
+		
+		ReactRobloxModule.createRoot(UserRelationshipModalOverlay):render((ReactModule.createElement(LocalizationProvider, {
+			localization = Localization.new(LocalizationService.RobloxLocaleId)
 		}, {
-			FocusNavigationProvider = reactModule.createElement(reactFocusNavigationModule.FocusNavigationContext.Provider, {
-				value = reactFocusNavigationModule.FocusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui)
+			FoundationProvider = ReactModule.createElement(FoundationProvider, {
+				colorMode = FoundationModule.Enums.ColorMode.Dark,
+				overlayGui = UserRelationshipModalOverlay
 			}, {
-				FocusNavigationRegistryProvider = reactModule.createElement(provider, nil, {
-					StoreProvider = reactModule.createElement(roactRoduxModule.StoreProvider, { store = createRoduxStore() }, {
-						UserRelationshipModal = reactModule.createElement(p1, cloned, {})
+				FocusNavigationProvider = ReactModule.createElement(ReactFocusNavigationModule.FocusNavigationContext.Provider, {
+					value = ReactFocusNavigationModule.FocusNavigationService.new(ReactFocusNavigationModule.EngineInterface.CoreGui)
+				}, {
+					FocusNavigationRegistryProvider = ReactModule.createElement(Provider, nil, {
+						StoreProvider = ReactModule.createElement(RoactRoduxModule.StoreProvider, { store = createRoduxStore() }, {
+							UserRelationshipModal = ReactModule.createElement(p1, Copy, {})
+						})
 					})
 				})
 			})
-		})
-	}))
+		})))
+		
+		return
+	end
 end

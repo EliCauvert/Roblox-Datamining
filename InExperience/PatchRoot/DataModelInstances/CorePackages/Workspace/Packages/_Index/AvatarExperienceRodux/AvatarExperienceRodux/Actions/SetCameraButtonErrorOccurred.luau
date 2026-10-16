@@ -1,9 +1,9 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceRodux").Parent
-local argCheckModule = require(parent.ArgCheck)
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceRodux").Parent
+local ArgCheckModule = require(Parent.ArgCheck)
 
-return require(parent.Rodux).makeActionCreator(script.Name, function(p1)
-	-- upvalues: argCheckModule (ref)
-	argCheckModule.isType(p1, "boolean", "Actions.SetCameraButton.errorOccurred")
+return require(Parent.Rodux).makeActionCreator(script.Name, function(ErrorOccurred) --[[ Line: 11 ]]
+	-- upvalues: ArgCheckModule (copy)
+	ArgCheckModule.isType(ErrorOccurred, "boolean", "Actions.SetCameraButton.errorOccurred")
 	
-	return { errorOccurred = p1 }
+	return { errorOccurred = ErrorOccurred }
 end)

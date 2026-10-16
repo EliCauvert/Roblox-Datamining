@@ -1,21 +1,21 @@
-﻿local viewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
-assert(viewRecyclerReact ~= nil, "ViewRecycler Storybook must be mounted under view-recycler-react")
-local parent = viewRecyclerReact.Parent
-local reactModule = require(parent.React)
-local reactRobloxModule = require(parent.ReactRoblox)
-local stories = viewRecyclerReact:FindFirstChild("Stories")
-assert(stories ~= nil, "ViewRecycler Storybook requires a local Stories folder")
+﻿local ViewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
+assert(ViewRecyclerReact ~= nil, "ViewRecycler Storybook must be mounted under view-recycler-react")
+local Parent = ViewRecyclerReact.Parent
+local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.ReactRoblox)
+local Stories = ViewRecyclerReact:FindFirstChild("Stories")
+assert(Stories ~= nil, "ViewRecycler Storybook requires a local Stories folder")
 
 return {
 	name = "ViewRecycler",
-	roact = reactModule,
-	reactRoblox = reactRobloxModule,
-	mapStory = function(p1)
-		-- upvalues: reactModule (ref)
-		return function(p2)
-			-- upvalues: reactModule (copy), p1 (ref)
-			return reactModule.createElement(p1, p2)
+	roact = ReactModule,
+	reactRoblox = ReactRobloxModule,
+	mapStory = function(p1) --[[ Line: 11 ]]
+		-- upvalues: ReactModule (copy)
+		return function(p2) --[[ Line: 12 ]]
+			-- upvalues: ReactModule (upval), p1 (copy)
+			return ReactModule.createElement(p1, p2)
 		end
 	end,
-	storyRoot = stories
+	storyRoot = Stories
 }

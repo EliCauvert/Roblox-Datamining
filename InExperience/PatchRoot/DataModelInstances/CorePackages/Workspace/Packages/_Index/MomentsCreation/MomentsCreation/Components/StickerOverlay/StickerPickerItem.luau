@@ -1,24 +1,25 @@
-﻿local parent = script:FindFirstAncestor("MomentsCreation").Parent
-local reactModule = require(parent.React)
-local image = require(parent.Foundation).Image
-local useCallback = reactModule.useCallback
+﻿local Parent = script:FindFirstAncestor("MomentsCreation").Parent
+local ReactModule = require(Parent.React)
+local Image = require(Parent.Foundation).Image
+local UseCallbackFunction = ReactModule.useCallback
 
-return function(p1)
-	-- upvalues: useCallback (ref), reactModule (ref), image (ref)
-	local stickerURI = p1.stickerURI
-	local onStickerSelected = p1.onStickerSelected
+return function(p1) --[[ Line: 25 | Named "StickerPickerItem" ]]
+	-- upvalues: UseCallbackFunction (copy), ReactModule (copy), Image (copy)
+	local StickerURI = p1.stickerURI
+	local OnStickerSelectedFunction = p1.onStickerSelected
+	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 29 ]]
+		-- upvalues: OnStickerSelectedFunction (copy), StickerURI (copy)
+		if OnStickerSelectedFunction then
+			OnStickerSelectedFunction(StickerURI)
+		end
+	end, { OnStickerSelectedFunction, StickerURI })
 	
-	return reactModule.createElement(image, {
+	return ReactModule.createElement(Image, {
 		BackgroundTransparency = 1,
 		tag = "size-1000-1000 radius-medium",
 		LayoutOrder = p1.layoutOrder,
-		onActivated = if onStickerSelected then useCallback(function()
-			-- upvalues: onStickerSelected (ref), stickerURI (ref)
-			if onStickerSelected then
-				onStickerSelected(stickerURI)
-			end
-		end, { onStickerSelected, stickerURI }) else nil,
-		Image = stickerURI,
+		onActivated = if OnStickerSelectedFunction then UseCallbackResult else nil,
+		Image = StickerURI,
 		ScaleType = Enum.ScaleType.Fit
 	})
 end

@@ -1,115 +1,118 @@
-﻿local purchasePrompt = script:FindFirstAncestor("PurchasePrompt")
-local httpService = game:GetService("HttpService")
-local promiseModule = require(purchasePrompt.Promise)
-local networkModule = require(purchasePrompt.Services.Network)
-local thunkModule = require(purchasePrompt.Thunk)
-local postCartPricingModule = require(purchasePrompt.Network.postCartPricing)
-local getCartPricingRequestedItemsForCartPricingModule = require(purchasePrompt.Utils.getCartPricingRequestedItemsForCartPricing)
-local getProductTypeFromRequestTypeModule = require(purchasePrompt.Utils.getProductTypeFromRequestType)
-local logUnifiedPurchaseTelemetryCounterModule = require(purchasePrompt.Utils.logUnifiedPurchaseTelemetryCounter)
-local unifiedPurchaseTelemetryModule = require(purchasePrompt.Events.UnifiedPurchaseTelemetry)
-local fFlagEnableFetchCartPricingDuringInExperience = require(purchasePrompt.Parent.SharedFlags).FFlagEnableFetchCartPricingDuringInExperience
-local disableInExpMarketplaceOffersTemp = game:DefineFastFlag("DisableInExpMarketplaceOffersTemp", false)
-local setCartPricingFetchingModule = require(purchasePrompt.Actions.SetCartPricingFetching)
-local setCartPricingResponseModule = require(purchasePrompt.Actions.SetCartPricingResponse)
-local setCartPricingFetchFailedModule = require(purchasePrompt.Actions.SetCartPricingFetchFailed)
-local list = { networkModule }
+﻿local PurchasePrompt = script:FindFirstAncestor("PurchasePrompt")
+local HttpService = game:GetService("HttpService")
+local PromiseModule = require(PurchasePrompt.Promise)
+local NetworkModule = require(PurchasePrompt.Services.Network)
+local ThunkModule = require(PurchasePrompt.Thunk)
+local PostCartPricingModule = require(PurchasePrompt.Network.postCartPricing)
+local GetCartPricingRequestedItemsForCartPricingModule = require(PurchasePrompt.Utils.getCartPricingRequestedItemsForCartPricing)
+local GetProductTypeFromRequestTypeModule = require(PurchasePrompt.Utils.getProductTypeFromRequestType)
+local LogUnifiedPurchaseTelemetryCounterModule = require(PurchasePrompt.Utils.logUnifiedPurchaseTelemetryCounter)
+local UnifiedPurchaseTelemetryModule = require(PurchasePrompt.Events.UnifiedPurchaseTelemetry)
+local FFlagEnableFetchCartPricingDuringInExperience = require(PurchasePrompt.Parent.SharedFlags).FFlagEnableFetchCartPricingDuringInExperience
+local DisableInExpMarketplaceOffersTemp = game:DefineFastFlag("DisableInExpMarketplaceOffersTemp", false)
+local SetCartPricingFetchingModule = require(PurchasePrompt.Actions.SetCartPricingFetching)
+local SetCartPricingResponseModule = require(PurchasePrompt.Actions.SetCartPricingResponse)
+local SetCartPricingFetchFailedModule = require(PurchasePrompt.Actions.SetCartPricingFetchFailed)
+local list = { NetworkModule }
 
-local function _(p1)
-	local productInfo = p1.productInfo
+local function _(p1) --[[ Line: 36 | Named "resolveCollectibleItemId" ]]
+	local ProductInfo = p1.productInfo
 	
-	if productInfo ~= nil and type(productInfo.collectibleItemId) == "string" and productInfo.collectibleItemId ~= "" then
-		return productInfo.collectibleItemId
+	if ProductInfo == nil or type(ProductInfo.collectibleItemId) ~= "string" or ProductInfo.collectibleItemId == "" then
+		local PromptRequest = p1.promptRequest
+		local CollectibleItemId = PromptRequest and PromptRequest.collectibleItemId
+		
+		return if type(CollectibleItemId) == "string" and CollectibleItemId ~= "" then CollectibleItemId else nil
+	else
+		return ProductInfo.collectibleItemId
 	end
-	local promptRequest = p1.promptRequest
-	local collectibleItemId = promptRequest and promptRequest.collectibleItemId
-	
-	return if type(collectibleItemId) == "string" and collectibleItemId ~= "" then collectibleItemId else nil
 end
 
-return function(p1, p2)
-	-- upvalues: thunkModule (ref), list (ref), networkModule (ref), fFlagEnableFetchCartPricingDuringInExperience (ref), getCartPricingRequestedItemsForCartPricingModule (ref), promiseModule (ref), getProductTypeFromRequestTypeModule (ref), httpService (ref), setCartPricingFetchingModule (ref), postCartPricingModule (ref), disableInExpMarketplaceOffersTemp (ref), setCartPricingFetchFailedModule (ref), setCartPricingResponseModule (ref), logUnifiedPurchaseTelemetryCounterModule (ref), unifiedPurchaseTelemetryModule (ref)
-	return thunkModule.new(script.Name, list, function(p3, p4)
-		-- upvalues: networkModule (copy), fFlagEnableFetchCartPricingDuringInExperience (copy), getCartPricingRequestedItemsForCartPricingModule (copy), p2 (ref), promiseModule (copy), getProductTypeFromRequestTypeModule (copy), httpService (copy), setCartPricingFetchingModule (copy), postCartPricingModule (copy), p1 (ref), disableInExpMarketplaceOffersTemp (copy), setCartPricingFetchFailedModule (copy), setCartPricingResponseModule (copy), logUnifiedPurchaseTelemetryCounterModule (copy), unifiedPurchaseTelemetryModule (copy)
-		local purchaseOptions
-		local var1 = p4[networkModule]
-		local state = p3:getState()
+return function(p1, CollectibleItemId) --[[ Line: 53 | Named "fetchCartPricing" ]]
+	-- upvalues: ThunkModule (copy), list (copy), NetworkModule (copy), FFlagEnableFetchCartPricingDuringInExperience (copy), GetCartPricingRequestedItemsForCartPricingModule (copy), PromiseModule (copy), GetProductTypeFromRequestTypeModule (copy), HttpService (copy), SetCartPricingFetchingModule (copy), PostCartPricingModule (copy), DisableInExpMarketplaceOffersTemp (copy), SetCartPricingFetchFailedModule (copy), SetCartPricingResponseModule (copy), LogUnifiedPurchaseTelemetryCounterModule (copy), UnifiedPurchaseTelemetryModule (copy)
+	return ThunkModule.new(script.Name, list, function(p2, p3) --[[ Line: 54 ]]
+		-- upvalues: NetworkModule (upval), FFlagEnableFetchCartPricingDuringInExperience (upval), GetCartPricingRequestedItemsForCartPricingModule (upval), CollectibleItemId (copy), PromiseModule (upval), GetProductTypeFromRequestTypeModule (upval), HttpService (upval), SetCartPricingFetchingModule (upval), PostCartPricingModule (upval), p1 (copy), DisableInExpMarketplaceOffersTemp (upval), SetCartPricingFetchFailedModule (upval), SetCartPricingResponseModule (upval), LogUnifiedPurchaseTelemetryCounterModule (upval), UnifiedPurchaseTelemetryModule (upval)
+		local v1 = p3[NetworkModule]
+		local State = p2:getState()
 		
-		if not fFlagEnableFetchCartPricingDuringInExperience then
-			local var2, productInfo, collectibleItemId
-			purchaseOptions = state.purchaseOptions
+		if not FFlagEnableFetchCartPricingDuringInExperience then
+			local PurchaseOptions = State.purchaseOptions
 			
-			if purchaseOptions == nil or not purchaseOptions.shouldFetchCartPricing then
+			if PurchaseOptions == nil or not PurchaseOptions.shouldFetchCartPricing then
 				return nil
-			elseif fFlagEnableFetchCartPricingDuringInExperience then
-				var2 = p2
+			end
+		end
+		local CollectibleItemId1 = nil
+		if FFlagEnableFetchCartPricingDuringInExperience then
+			CollectibleItemId1 = CollectibleItemId
+			
+			if not CollectibleItemId1 then
+				local ProductInfo1 = State.productInfo
 				
-				if not var2 then
-					productInfo = state.productInfo
-					
-					if productInfo == nil or type(productInfo.collectibleItemId) ~= "string" or productInfo.collectibleItemId == "" then
-						local promptRequest = state.promptRequest
-						collectibleItemId = promptRequest and promptRequest.collectibleItemId
-						var2 = if type(collectibleItemId) == "string" and collectibleItemId ~= "" then collectibleItemId else nil
-					else
-						var2 = productInfo.collectibleItemId
-					end
-				end
-			else
-				productInfo = state.productInfo
-				
-				if productInfo == nil or type(productInfo.collectibleItemId) ~= "string" or productInfo.collectibleItemId == "" then
-					local promptRequest = state.promptRequest
-					collectibleItemId = promptRequest and promptRequest.collectibleItemId
-					var2 = if type(collectibleItemId) == "string" and collectibleItemId ~= "" then collectibleItemId else nil
+				if ProductInfo1 == nil or type(ProductInfo1.collectibleItemId) ~= "string" or ProductInfo1.collectibleItemId == "" then
+					local PromptRequest = State.promptRequest
+					local CollectibleItemId2 = PromptRequest and PromptRequest.collectibleItemId
+					CollectibleItemId1 = if type(CollectibleItemId2) == "string" and CollectibleItemId2 ~= "" then CollectibleItemId2 else nil
 				else
-					var2 = productInfo.collectibleItemId
+					CollectibleItemId1 = ProductInfo1.collectibleItemId
 				end
 			end
-			purchaseOptions = getCartPricingRequestedItemsForCartPricingModule(var2, state.productPayload, state.productInfo)
+		else
+			local ProductInfo = State.productInfo
 			
-			if purchaseOptions == nil or #purchaseOptions == 0 then
-				return if fFlagEnableFetchCartPricingDuringInExperience then promiseModule.resolve(nil) else nil
+			if ProductInfo == nil or type(ProductInfo.collectibleItemId) ~= "string" or ProductInfo.collectibleItemId == "" then
+				local PromptRequest = State.promptRequest
+				local CollectibleItemId3 = PromptRequest and PromptRequest.collectibleItemId
+				CollectibleItemId1 = if type(CollectibleItemId3) == "string" and CollectibleItemId3 ~= "" then CollectibleItemId3 else nil
+			else
+				CollectibleItemId1 = ProductInfo.collectibleItemId
 			end
-			local purchaseAnalyticsMetadata = state.purchaseAnalyticsMetadata
-			productInfo = purchaseAnalyticsMetadata and purchaseAnalyticsMetadata.surface
-			local var3 = getProductTypeFromRequestTypeModule(state.promptRequest.requestType)
-			collectibleItemId = httpService:GenerateGUID(false)
-			p3:dispatch(setCartPricingFetchingModule(collectibleItemId))
+		end
+		local CartPricingRequestedItemsForCartPricingModule = GetCartPricingRequestedItemsForCartPricingModule(CollectibleItemId1, State.productPayload, State.productInfo)
+		
+		if CartPricingRequestedItemsForCartPricingModule == nil or #CartPricingRequestedItemsForCartPricingModule == 0 then
+			return if FFlagEnableFetchCartPricingDuringInExperience then PromiseModule.resolve(nil) else nil
+		else
+			local PurchaseAnalyticsMetadata = State.purchaseAnalyticsMetadata
+			local Surface = PurchaseAnalyticsMetadata and PurchaseAnalyticsMetadata.surface
+			local ProductTypeFromRequestTypeModule = GetProductTypeFromRequestTypeModule(State.promptRequest.requestType)
+			local Guid = HttpService:GenerateGUID(false)
+			p2:dispatch(SetCartPricingFetchingModule(Guid))
 			
-			local function _()
-				-- upvalues: p3 (ref), collectibleItemId (ref)
-				local cartPricing = p3:getState().cartPricing
+			local function _(): boolean --[[ Line: 92 | Named "isCurrentRequest" ]]
+				-- upvalues: p2 (copy), Guid (copy)
+				local CartPricing = p2:getState().cartPricing
 				
-				return cartPricing ~= nil and cartPricing.requestId == collectibleItemId
+				return CartPricing ~= nil and CartPricing.requestId == Guid
 			end
 			
-			return postCartPricingModule(var1, purchaseOptions, p1, productInfo, var3):andThen(function(p5)
-				-- upvalues: disableInExpMarketplaceOffersTemp (copy), p2 (copy), p3 (ref), setCartPricingFetchFailedModule (copy), collectibleItemId (ref), setCartPricingResponseModule (copy)
-				if disableInExpMarketplaceOffersTemp and p2 then
-					p3:dispatch(setCartPricingFetchFailedModule())
+			return PostCartPricingModule(v1, CartPricingRequestedItemsForCartPricingModule, p1, Surface, ProductTypeFromRequestTypeModule):andThen(function(Result) --[[ Line: 98 ]]
+				-- upvalues: DisableInExpMarketplaceOffersTemp (upval), CollectibleItemId (upval), p2 (copy), SetCartPricingFetchFailedModule (upval), Guid (copy), SetCartPricingResponseModule (upval)
+				if DisableInExpMarketplaceOffersTemp and CollectibleItemId then
+					p2:dispatch(SetCartPricingFetchFailedModule())
 					
 					return nil
 				end
-				local cartPricing = p3:getState().cartPricing
+				local CartPricing = p2:getState().cartPricing
 				
-				if not (cartPricing ~= nil and cartPricing.requestId == collectibleItemId) then
+				if CartPricing == nil or CartPricing.requestId ~= Guid then
 					return nil
-				elseif p5 == nil then
-					p3:dispatch(setCartPricingFetchFailedModule())
+				elseif Result == nil then
+					p2:dispatch(SetCartPricingFetchFailedModule())
 					
 					return nil
+				else
+					p2:dispatch(SetCartPricingResponseModule(Result))
+					
+					return Result
 				end
-				p3:dispatch(setCartPricingResponseModule(p5))
+			end):catch(function() --[[ Line: 117 ]]
+				-- upvalues: LogUnifiedPurchaseTelemetryCounterModule (upval), UnifiedPurchaseTelemetryModule (upval), Surface (copy), ProductTypeFromRequestTypeModule (copy), p2 (copy), Guid (copy), SetCartPricingFetchFailedModule (upval)
+				LogUnifiedPurchaseTelemetryCounterModule(UnifiedPurchaseTelemetryModule.UnifiedCartPricingHandlerErrorCounter, Surface, ProductTypeFromRequestTypeModule)
+				local CartPricing = p2:getState().cartPricing
 				
-				return p5
-			end):catch(function()
-				-- upvalues: logUnifiedPurchaseTelemetryCounterModule (copy), unifiedPurchaseTelemetryModule (copy), productInfo (ref), var3 (ref), p3 (ref), collectibleItemId (ref), setCartPricingFetchFailedModule (copy)
-				logUnifiedPurchaseTelemetryCounterModule(unifiedPurchaseTelemetryModule.UnifiedCartPricingHandlerErrorCounter, productInfo, var3)
-				local cartPricing = p3:getState().cartPricing
-				
-				if cartPricing ~= nil and cartPricing.requestId == collectibleItemId then
-					p3:dispatch(setCartPricingFetchFailedModule())
+				if CartPricing ~= nil and CartPricing.requestId == Guid then
+					p2:dispatch(SetCartPricingFetchFailedModule())
 				end
 			end)
 		end

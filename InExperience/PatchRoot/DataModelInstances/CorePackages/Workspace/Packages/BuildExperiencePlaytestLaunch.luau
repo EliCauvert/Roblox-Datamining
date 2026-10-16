@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.BuildExperiencePlaytestLaunch.BuildExperiencePlaytestLaunch)
+﻿return (require(script.Parent._Workspace.BuildExperiencePlaytestLaunch.BuildExperiencePlaytestLaunch))

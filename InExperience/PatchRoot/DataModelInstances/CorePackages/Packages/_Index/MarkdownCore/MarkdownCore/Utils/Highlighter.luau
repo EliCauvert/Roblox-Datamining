@@ -1,30 +1,28 @@
 ﻿local _ = require(script:FindFirstAncestor("Utils").Parent.Types)
-local utilityModule = require(script.Utility)
-local themeModule = require(script.Theme)
-local defaultTokenColorsModule = require(script.Theme.defaultTokenColors)
-local t = { defaultLexer = require(script.Lexer) }
+local UtilityModule = require(script.Utility)
+local ThemeModule = require(script.Theme)
+local DefaultTokenColorsModule = require(script.Theme.defaultTokenColors)
+local HighlighterModule = { defaultLexer = require(script.Lexer) }
 
-function t.highlight(p1, p2)
-	-- upvalues: themeModule (ref), defaultTokenColorsModule (ref), utilityModule (ref), t (ref)
+function HighlighterModule.highlight(p1, p2): string --[[ Line: 14 ]]
+	-- upvalues: ThemeModule (copy), DefaultTokenColorsModule (copy), UtilityModule (copy), HighlighterModule (copy)
 	if p2 then
-		themeModule.setColors(p2)
+		ThemeModule.setColors(p2)
 	else
-		themeModule.setColors(defaultTokenColorsModule)
+		ThemeModule.setColors(DefaultTokenColorsModule)
 	end
-	local var1 = utilityModule.convertTabsToSpaces(utilityModule.removeControlChars(p1))
-	local defaultLexer = t.defaultLexer
-	local iden = themeModule.getColor("iden")
-	local var2 = ""
+	local IdenColor = ThemeModule.getColor("iden")
+	local Text = ""
 	
-	for i, v in defaultLexer.scan(var1) do
-		var2 ..= themeModule.getColoredRichText(themeModule.getColor(i) or iden, utilityModule.sanitizeRichText(v))
+	for i, value in HighlighterModule.defaultLexer.scan((UtilityModule.convertTabsToSpaces(UtilityModule.removeControlChars(p1)))) do
+		Text ..= ThemeModule.getColoredRichText(ThemeModule.getColor(i) or IdenColor, UtilityModule.sanitizeRichText(value))
 	end
-	return var2
+	return Text
 end
 
-function t.getTokenColor(p3)
-	-- upvalues: themeModule (ref)
-	return themeModule.getColor(p3)
+function HighlighterModule.getTokenColor(p3) --[[ Line: 35 ]]
+	-- upvalues: ThemeModule (copy)
+	return ThemeModule.getColor(p3)
 end
 
-return t
+return HighlighterModule

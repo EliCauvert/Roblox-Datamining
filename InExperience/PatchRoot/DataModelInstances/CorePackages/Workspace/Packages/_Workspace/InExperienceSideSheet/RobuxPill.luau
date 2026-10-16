@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.RobuxPill.RobuxPill)
+﻿return (require(script.Parent.Parent.Parent._Index.RobuxPill.RobuxPill))

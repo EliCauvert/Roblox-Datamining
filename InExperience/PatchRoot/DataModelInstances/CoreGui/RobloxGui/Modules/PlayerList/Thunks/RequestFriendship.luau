@@ -1,57 +1,57 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
-local playersService = game:GetService("Players")
-local corePackagesService = game:GetService("CorePackages")
-local localPlayer = playersService.LocalPlayer
-local robloxGui = coreGuiService:WaitForChild("RobloxGui")
-local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
-local friendingUtilityModule = require(robloxGui.Modules.FriendingUtility)
-local sendNotificationInfo = robloxGui:WaitForChild("SendNotificationInfo")
-local fFlagRemoveHardCodedFriendLimitPromptModule = require(robloxGui.Modules.Flags.FFlagRemoveHardCodedFriendLimitPrompt)
+﻿local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+local RobloxTranslatorModule = require(game:GetService("CorePackages").Workspace.Packages.RobloxTranslator)
+local FriendingUtilityModule = require(RobloxGui.Modules.FriendingUtility)
+local SendNotificationInfo = RobloxGui:WaitForChild("SendNotificationInfo")
+local FFlagRemoveHardCodedFriendLimitPromptModule = require(RobloxGui.Modules.Flags.FFlagRemoveHardCodedFriendLimitPrompt)
 
-return function(p1, p2)
-	-- upvalues: fFlagRemoveHardCodedFriendLimitPromptModule (ref), rbxAnalyticsService (ref), playersService (ref), localPlayer (ref), friendingUtilityModule (ref), sendNotificationInfo (ref), robloxTranslatorModule (ref)
-	return function()
-		-- upvalues: fFlagRemoveHardCodedFriendLimitPromptModule (copy), rbxAnalyticsService (copy), p1 (ref), playersService (copy), localPlayer (copy), friendingUtilityModule (copy), p2 (ref), sendNotificationInfo (copy), robloxTranslatorModule (copy)
-		coroutine.wrap(function()
-			-- upvalues: fFlagRemoveHardCodedFriendLimitPromptModule (copy), rbxAnalyticsService (copy), p1 (copy), playersService (copy), localPlayer (copy), friendingUtilityModule (copy), p2 (copy), sendNotificationInfo (copy), robloxTranslatorModule (copy)
-			if fFlagRemoveHardCodedFriendLimitPromptModule then
-				rbxAnalyticsService:ReportCounter("PlayerDropDown-RequestFriendship")
-				rbxAnalyticsService:TrackEvent("Game", "RequestFriendship", "PlayerDropDown")
+return function(Player, p1) --[[ Line: 18 | Named "RequestFriendship" ]]
+	-- upvalues: FFlagRemoveHardCodedFriendLimitPromptModule (copy), RbxAnalyticsService (copy), Players (copy), LocalPlayer (copy), FriendingUtilityModule (copy), SendNotificationInfo (copy), RobloxTranslatorModule (copy)
+	return function() --[[ Line: 19 ]]
+		-- upvalues: FFlagRemoveHardCodedFriendLimitPromptModule (upval), RbxAnalyticsService (upval), Player (copy), Players (upval), LocalPlayer (upval), FriendingUtilityModule (upval), p1 (copy), SendNotificationInfo (upval), RobloxTranslatorModule (upval)
+		coroutine.wrap(function() --[[ Line: 20 ]]
+			-- upvalues: FFlagRemoveHardCodedFriendLimitPromptModule (upval), RbxAnalyticsService (upval), Player (upval), Players (upval), LocalPlayer (upval), FriendingUtilityModule (upval), p1 (upval), SendNotificationInfo (upval), RobloxTranslatorModule (upval)
+			if FFlagRemoveHardCodedFriendLimitPromptModule then
+				RbxAnalyticsService:ReportCounter("PlayerDropDown-RequestFriendship")
+				RbxAnalyticsService:TrackEvent("Game", "RequestFriendship", "PlayerDropDown")
 				
-				if p1.Parent == playersService then
-					localPlayer:RequestFriendship(p1)
+				if Player.Parent == Players then
+					LocalPlayer:RequestFriendship(Player)
 					
 					return
 				end
 			else
-				local userIdFriendCountAsync = friendingUtilityModule:GetFriendCountAsync(p1.UserId)
-				local userIdFriendCountAsync_1 = friendingUtilityModule:GetFriendCountAsync(localPlayer.UserId)
+				local FriendCountAsync: number = FriendingUtilityModule:GetFriendCountAsync(Player.UserId)
+				local FriendCountAsync1: number = FriendingUtilityModule:GetFriendCountAsync(LocalPlayer.UserId)
 				
-				if not userIdFriendCountAsync_1 or not userIdFriendCountAsync then return end
-				if userIdFriendCountAsync_1 < 200 and userIdFriendCountAsync < 200 then
-					rbxAnalyticsService:ReportCounter("PlayerDropDown-RequestFriendship")
-					rbxAnalyticsService:TrackEvent("Game", "RequestFriendship", "PlayerDropDown")
+				if not FriendCountAsync1 or not FriendCountAsync then return end
+				if FriendCountAsync1 < 200 and FriendCountAsync < 200 then
+					RbxAnalyticsService:ReportCounter("PlayerDropDown-RequestFriendship")
+					RbxAnalyticsService:TrackEvent("Game", "RequestFriendship", "PlayerDropDown")
 					
-					if p1.Parent == playersService then
-						localPlayer:RequestFriendship(p1)
+					if Player.Parent == Players then
+						LocalPlayer:RequestFriendship(Player)
 						
 						return
 					end
-				elseif userIdFriendCountAsync_1 >= 200 then
-					sendNotificationInfo:Fire({
+				elseif FriendCountAsync1 >= 200 then
+					SendNotificationInfo:Fire({
 						Text = "You are at the max friends limit.",
 						Duration = 5,
-						Title = if p2 then "Cannot accept friend request" else "Cannot send friend request"
+						Title = if p1 then "Cannot accept friend request" else "Cannot send friend request"
 					})
 					
 					return
-				elseif userIdFriendCountAsync >= 200 then
-					sendNotificationInfo:Fire({
-						Duration = 5,
-						Title = if p2 then "Cannot accept friend request" else "Cannot send friend request",
-						Text = robloxTranslatorModule:FormatByKey("InGame.PlayerDropDown.OtherPlayerFriendLimit", { RBX_NAME = p1.Name })
-					})
+				else
+					if FriendCountAsync >= 200 then
+						SendNotificationInfo:Fire({
+							Duration = 5,
+							Title = if p1 then "Cannot accept friend request" else "Cannot send friend request",
+							Text = RobloxTranslatorModule:FormatByKey("InGame.PlayerDropDown.OtherPlayerFriendLimit", { RBX_NAME = Player.Name })
+						})
+					end
 				end
 			end
 		end)()

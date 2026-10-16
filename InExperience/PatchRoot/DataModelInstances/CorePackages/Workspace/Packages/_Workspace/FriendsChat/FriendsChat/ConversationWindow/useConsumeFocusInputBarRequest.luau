@@ -1,25 +1,25 @@
-﻿local friendsChat = script:FindFirstAncestor("FriendsChat")
-local parent = friendsChat.Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local getFriendsChatNavigationStoreModule = require(friendsChat.Stores.GetFriendsChatNavigationStore)
-local isFocusRequestFreshModule = require(friendsChat.Focus.isFocusRequestFresh)
+﻿local FriendsChat = script:FindFirstAncestor("FriendsChat")
+local Parent = FriendsChat.Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local GetFriendsChatNavigationStoreModule = require(FriendsChat.Stores.GetFriendsChatNavigationStore)
+local IsFocusRequestFreshModule = require(FriendsChat.Focus.isFocusRequestFresh)
 
-return function(p1)
-	-- upvalues: reactModule (ref), getFriendsChatNavigationStoreModule (ref), signalsModule (ref), isFocusRequestFreshModule (ref)
-	reactModule.useEffect(function()
-		-- upvalues: getFriendsChatNavigationStoreModule (copy), signalsModule (copy), isFocusRequestFreshModule (copy), p1 (ref)
-		local var1 = getFriendsChatNavigationStoreModule(false)
+return function(Callback) --[[ Line: 24 | Named "useConsumeFocusInputBarRequest" ]]
+	-- upvalues: ReactModule (copy), GetFriendsChatNavigationStoreModule (copy), SignalsModule (copy), IsFocusRequestFreshModule (copy)
+	ReactModule.useEffect(function() --[[ Line: 25 ]]
+		-- upvalues: GetFriendsChatNavigationStoreModule (upval), SignalsModule (upval), IsFocusRequestFreshModule (upval), Callback (copy)
+		local FriendsChatNavigationStoreModule = GetFriendsChatNavigationStoreModule(false)
 		
-		return signalsModule.createEffect(function(p2)
-			-- upvalues: var1 (ref), isFocusRequestFreshModule (copy), p1 (copy)
-			local focusInputBarRequestTime = var1.getFocusInputBarRequestTime(p2)
+		return SignalsModule.createEffect(function(p1) --[[ Line: 27 ]]
+			-- upvalues: FriendsChatNavigationStoreModule (copy), IsFocusRequestFreshModule (upval), Callback (upval)
+			local FocusInputBarRequestTime = FriendsChatNavigationStoreModule.getFocusInputBarRequestTime(p1)
 			
-			if focusInputBarRequestTime == nil then return end
-			if isFocusRequestFreshModule(focusInputBarRequestTime, os.clock(), 5) then
-				p1()
+			if FocusInputBarRequestTime == nil then return end
+			if IsFocusRequestFreshModule(FocusInputBarRequestTime, os.clock(), 5) then
+				Callback()
 			end
-			var1.clearFocusInputBarRequest()
+			FriendsChatNavigationStoreModule.clearFocusInputBarRequest()
 		end)
-	end, { p1 })
+	end, { Callback })
 end

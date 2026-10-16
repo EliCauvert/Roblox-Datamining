@@ -1,11 +1,9 @@
-﻿return function(value, p1, p2)
-	local var1 = if p2 then p2.X else 0.5
-	local var2 = if p2 then p2.Y else 0.5
-	local var3 = if p1 == 0 then value.X else value.X / p1
-	local var4 = if p1 == 0 then value.Y else value.Y / p1
+﻿return function(Vector, p1, Vector1) --[[ Line: 7 | Named "getZoomedSizeAndOffset" ]]
+	local X = if p1 == 0 then Vector.X else Vector.X / p1
+	local Y = if p1 == 0 then Vector.Y else Vector.Y / p1
 	
 	return {
-		offset = Vector2.new((value.X - var3) * var1, (value.Y - var4) * var2),
-		size = Vector2.new(var3, var4)
+		offset = Vector2.new((Vector.X - X) * (if Vector1 then Vector1.X else 0.5), (Vector.Y - Y) * (if Vector1 then Vector1.Y else 0.5)),
+		size = Vector2.new(X, Y)
 	}
 end

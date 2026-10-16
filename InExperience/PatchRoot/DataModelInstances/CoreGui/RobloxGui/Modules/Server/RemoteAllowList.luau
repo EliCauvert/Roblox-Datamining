@@ -1,51 +1,51 @@
-﻿local sharedFlagsModule = require(game:GetService("CorePackages").Workspace.Packages.SharedFlags)
-local fFlagEnableModerateChatRemoteEvent = sharedFlagsModule.FFlagEnableModerateChatRemoteEvent
-local fFlagPlatformLeaderboardRccEnabled = sharedFlagsModule.FFlagPlatformLeaderboardRccEnabled
-local remoteAllowListAddExpChatFeatureValueChanged = game:DefineFastFlag("RemoteAllowListAddExpChatFeatureValueChanged", false)
+﻿local SharedFlagsModule = require(game:GetService("CorePackages").Workspace.Packages.SharedFlags)
+local FFlagEnableModerateChatRemoteEvent = SharedFlagsModule.FFlagEnableModerateChatRemoteEvent
+local FFlagPlatformLeaderboardRccEnabled = SharedFlagsModule.FFlagPlatformLeaderboardRccEnabled
+local RemoteAllowListAddExpChatFeatureValueChanged = game:DefineFastFlag("RemoteAllowListAddExpChatFeatureValueChanged", false)
 
-return function()
-	-- upvalues: fFlagEnableModerateChatRemoteEvent (ref), remoteAllowListAddExpChatFeatureValueChanged (ref), fFlagPlatformLeaderboardRccEnabled (ref)
+return function() --[[ Line: 8 ]]
+	-- upvalues: FFlagEnableModerateChatRemoteEvent (copy), RemoteAllowListAddExpChatFeatureValueChanged (copy), FFlagPlatformLeaderboardRccEnabled (copy)
 	assert(game:FindService("NetworkServer") ~= nil)
-	local networkServerService = game:GetService("NetworkServer")
-	local t = {}
-	table.insert(t, "GetServerVersion")
-	table.insert(t, "GetServerChannel")
-	table.insert(t, "WhisperChat")
-	table.insert(t, "GetServerType")
-	table.insert(t, "ServerSideBulkPurchaseEvent")
-	table.insert(t, "CanChatWith")
-	table.insert(t, "SetPlayerBlockList")
-	table.insert(t, "UpdatePlayerBlockList")
-	table.insert(t, "NewPlayerGroupDetails")
-	table.insert(t, "NewPlayerCanManageDetails")
-	table.insert(t, "SendPlayerBlockList")
-	table.insert(t, "UpdateLocalPlayerBlockList")
-	table.insert(t, "SendPlayerProfileSettings")
-	table.insert(t, "UpdatePlayerProfileSettings")
-	table.insert(t, "ShowPlayerJoinedFriendsToast")
-	table.insert(t, "ShowFriendJoinedPlayerToast")
-	table.insert(t, "CreateOrJoinParty")
-	table.insert(t, "RequestPlayerProfileSettings")
+	local NetworkServer = game:GetService("NetworkServer")
+	local List = {}
+	table.insert(List, "GetServerVersion")
+	table.insert(List, "GetServerChannel")
+	table.insert(List, "WhisperChat")
+	table.insert(List, "GetServerType")
+	table.insert(List, "ServerSideBulkPurchaseEvent")
+	table.insert(List, "CanChatWith")
+	table.insert(List, "SetPlayerBlockList")
+	table.insert(List, "UpdatePlayerBlockList")
+	table.insert(List, "NewPlayerGroupDetails")
+	table.insert(List, "NewPlayerCanManageDetails")
+	table.insert(List, "SendPlayerBlockList")
+	table.insert(List, "UpdateLocalPlayerBlockList")
+	table.insert(List, "SendPlayerProfileSettings")
+	table.insert(List, "UpdatePlayerProfileSettings")
+	table.insert(List, "ShowPlayerJoinedFriendsToast")
+	table.insert(List, "ShowFriendJoinedPlayerToast")
+	table.insert(List, "CreateOrJoinParty")
+	table.insert(List, "RequestPlayerProfileSettings")
 	
-	if fFlagEnableModerateChatRemoteEvent then
-		table.insert(t, "ModerateChatSettingUpdated")
+	if FFlagEnableModerateChatRemoteEvent then
+		table.insert(List, "ModerateChatSettingUpdated")
 	end
-	if remoteAllowListAddExpChatFeatureValueChanged then
-		table.insert(t, "ExpChatFeatureValueChanged")
+	if RemoteAllowListAddExpChatFeatureValueChanged then
+		table.insert(List, "ExpChatFeatureValueChanged")
 	end
-	table.insert(t, "SetDialogInUse")
-	table.insert(t, "RequestDeviceCameraOrientationCapability")
-	table.insert(t, "RequestDeviceCameraCFrame")
-	table.insert(t, "ReplicateDeviceCameraCFrame")
-	table.insert(t, "ReferredPlayerJoin")
-	table.insert(t, "BuildExperiencePlaytestTeleport")
-	table.insert(t, "SetUserActive")
-	table.insert(t, "AvatarGesturesVRPlayer")
+	table.insert(List, "SetDialogInUse")
+	table.insert(List, "RequestDeviceCameraOrientationCapability")
+	table.insert(List, "RequestDeviceCameraCFrame")
+	table.insert(List, "ReplicateDeviceCameraCFrame")
+	table.insert(List, "ReferredPlayerJoin")
+	table.insert(List, "BuildExperiencePlaytestTeleport")
+	table.insert(List, "SetUserActive")
+	table.insert(List, "AvatarGesturesVRPlayer")
 	
-	if fFlagPlatformLeaderboardRccEnabled then
-		table.insert(t, "PlatformLeaderboardPush")
-		table.insert(t, "PlatformLeaderboardTabOpened")
-		table.insert(t, "PlatformLeaderboardTabClosed")
+	if FFlagPlatformLeaderboardRccEnabled then
+		table.insert(List, "PlatformLeaderboardPush")
+		table.insert(List, "PlatformLeaderboardTabOpened")
+		table.insert(List, "PlatformLeaderboardTabClosed")
 	end
-	networkServerService:InitializeRemoteAllowList(t)
+	NetworkServer:InitializeRemoteAllowList(List)
 end

@@ -1,61 +1,62 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local promiseModule = require(parent.Promise)
-local useNavigation = require(parent.Navigation).useNavigation
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfileWrapperContext)
-local fFlagProfileInspectAndBuyKeepUpsellDialogOpenModule = require(profilePlatform.Flags.FFlagProfileInspectAndBuyKeepUpsellDialogOpen)
-local fFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module = require(profilePlatform.Flags.FFlagSocialEnableProfileInspectAndBuyAnalyticsV2)
-local fFlagEnableRecentActivityInspectAndBuy = require(parent.SharedFlags).FFlagEnableRecentActivityInspectAndBuy
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local PromiseModule = require(Parent.Promise)
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseProfileWrapperContextModule = require(ProfilePlatform.Contexts.useProfileWrapperContext)
+local FFlagProfileInspectAndBuyKeepUpsellDialogOpenModule = require(ProfilePlatform.Flags.FFlagProfileInspectAndBuyKeepUpsellDialogOpen)
+local FFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module = require(ProfilePlatform.Flags.FFlagSocialEnableProfileInspectAndBuyAnalyticsV2)
+local FFlagEnableRecentActivityInspectAndBuy = require(Parent.SharedFlags).FFlagEnableRecentActivityInspectAndBuy
 
-return function(p1, p2)
-	-- upvalues: useDispatch (ref), useNavigation (ref), useProfileWrapperContextModule (ref), reactModule (ref), parent (ref), fFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module (ref), fFlagEnableRecentActivityInspectAndBuy (ref), fFlagProfileInspectAndBuyKeepUpsellDialogOpenModule (ref), promiseModule (ref)
-	local var1 = useDispatch()
-	local var2 = useNavigation()
-	local var3 = useProfileWrapperContextModule()
+return function(PriceInRobux, Callback) --[[ Line: 20 | Named "useOpenRobuxUpsell" ]]
+	-- upvalues: UseDispatchFunction (copy), UseNavigationFunction (copy), UseProfileWrapperContextModule (copy), ReactModule (copy), Parent (copy), FFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module (copy), FFlagEnableRecentActivityInspectAndBuy (copy), FFlagProfileInspectAndBuyKeepUpsellDialogOpenModule (copy), PromiseModule (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseNavigationResult = UseNavigationFunction()
+	local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
 	
-	return reactModule.useCallback(function()
-		-- upvalues: parent (copy), var1 (ref), fFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module (copy), var3 (ref), fFlagEnableRecentActivityInspectAndBuy (copy), p2 (ref), fFlagProfileInspectAndBuyKeepUpsellDialogOpenModule (copy), var2 (ref), promiseModule (copy), p1 (ref)
-		local purchasePromptLiteModule = require(parent.PurchasePromptLite)
-		local closeCentralOverlay = require(parent.CentralOverlay).Thunks.CloseCentralOverlay
-		var1(purchasePromptLiteModule.Thunks.OpenCentralOverlayForUnifiedPurchasePrompt({
+	return ReactModule.useCallback(function() --[[ Line: 26 ]]
+		-- upvalues: Parent (upval), UseDispatchResult (copy), FFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module (upval), UseProfileWrapperContextModuleResult (copy), FFlagEnableRecentActivityInspectAndBuy (upval), Callback (copy), FFlagProfileInspectAndBuyKeepUpsellDialogOpenModule (upval), UseNavigationResult (copy), PromiseModule (upval), PriceInRobux (copy)
+		local PurchasePromptLiteModule = require(Parent.PurchasePromptLite)
+		local CloseCentralOverlayFunction = require(Parent.CentralOverlay).Thunks.CloseCentralOverlay
+		UseDispatchResult(PurchasePromptLiteModule.Thunks.OpenCentralOverlayForUnifiedPurchasePrompt({
 			productPayload = { kind = "RobuxUpsell" },
-			purchaseAnalyticsMetadata = if fFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module then {
-				surface = purchasePromptLiteModule.Enums.ProductPurchaseSurface.Profile
+			purchaseAnalyticsMetadata = if FFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module then {
+				surface = PurchasePromptLiteModule.Enums.ProductPurchaseSurface.Profile
 			} else nil,
 			purchaseCallbacks = {
-				onFlowComplete = function()
-					-- upvalues: var1 (copy), closeCentralOverlay (ref), var3 (copy), fFlagEnableRecentActivityInspectAndBuy (copy), p2 (copy), fFlagProfileInspectAndBuyKeepUpsellDialogOpenModule (copy), var2 (copy)
-					var1(closeCentralOverlay())
-					local var4 = if var3.postPurchase then var3.postPurchase.refreshRobuxBalance else nil
+				onFlowComplete = function() --[[ Line: 38 ]]
+					-- upvalues: UseDispatchResult (upval), CloseCentralOverlayFunction (copy), UseProfileWrapperContextModuleResult (upval), FFlagEnableRecentActivityInspectAndBuy (upval), Callback (upval), FFlagProfileInspectAndBuyKeepUpsellDialogOpenModule (upval), UseNavigationResult (upval)
+					UseDispatchResult(CloseCentralOverlayFunction())
+					local RefreshRobuxBalance: () -> () = if UseProfileWrapperContextModuleResult.postPurchase then UseProfileWrapperContextModuleResult.postPurchase.refreshRobuxBalance else nil
 					
-					if var4 then
-						var4()
+					if RefreshRobuxBalance then
+						RefreshRobuxBalance()
 					end
-					if fFlagEnableRecentActivityInspectAndBuy and p2 then
-						p2()
+					if FFlagEnableRecentActivityInspectAndBuy and Callback then
+						Callback()
 						
 						return
-					elseif not fFlagProfileInspectAndBuyKeepUpsellDialogOpenModule then
-						var2.goBack()
+					end
+					if not FFlagProfileInspectAndBuyKeepUpsellDialogOpenModule then
+						UseNavigationResult.goBack()
 					end
 				end,
-				fetchProductInfo = function()
-					-- upvalues: promiseModule (copy), p1 (copy)
-					return promiseModule.resolve({
+				fetchProductInfo = function() --[[ Line: 52 ]]
+					-- upvalues: PromiseModule (upval), PriceInRobux (upval)
+					return PromiseModule.resolve({
 						IsForSale = true,
 						Name = "RobuxUpsell",
-						PriceInRobux = p1
+						PriceInRobux = PriceInRobux
 					})
 				end
 			}
 		}))
 	end, {
-		var1,
-		var2,
-		var3.postPurchase,
-		p1,
-		if fFlagEnableRecentActivityInspectAndBuy then p2 else nil
+		UseDispatchResult,
+		UseNavigationResult,
+		UseProfileWrapperContextModuleResult.postPurchase,
+		PriceInRobux,
+		if FFlagEnableRecentActivityInspectAndBuy then Callback else nil
 	})
 end

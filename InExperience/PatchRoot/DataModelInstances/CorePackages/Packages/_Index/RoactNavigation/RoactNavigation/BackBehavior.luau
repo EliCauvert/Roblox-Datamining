@@ -1,14 +1,14 @@
-﻿local navigationSymbolModule = require(script.Parent.NavigationSymbol)
-local t = {
-	None = navigationSymbolModule("NONE"),
-	InitialRoute = navigationSymbolModule("INITIAL_ROUTE"),
-	Order = navigationSymbolModule("ORDER"),
-	History = navigationSymbolModule("HISTORY")
+﻿local NavigationSymbolModule = require(script.Parent.NavigationSymbol)
+local BackBehaviorModule = {
+	None = NavigationSymbolModule("NONE"),
+	InitialRoute = NavigationSymbolModule("INITIAL_ROUTE"),
+	Order = NavigationSymbolModule("ORDER"),
+	History = NavigationSymbolModule("HISTORY")
 }
-setmetatable(t, {
-	__index = function(_, p1)
-		error(("%q is not a valid member of BackBehavior"):format(tostring(p1)), 2)
+setmetatable(BackBehaviorModule, {
+	__index = function(_, p1) --[[ Line: 24 ]]
+		error(("%q is not a valid member of BackBehavior"):format((tostring(p1))), 2)
 	end
 })
 
-return t
+return BackBehaviorModule

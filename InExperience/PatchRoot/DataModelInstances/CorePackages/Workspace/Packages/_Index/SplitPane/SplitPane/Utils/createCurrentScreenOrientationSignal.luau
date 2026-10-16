@@ -1,56 +1,56 @@
-﻿local playersService = game:GetService("Players")
-local signalsModule = require(script:FindFirstAncestor("SplitPane").Parent.Signals)
+﻿local Players = game:GetService("Players")
+local SignalsModule = require(script:FindFirstAncestor("SplitPane").Parent.Signals)
 
-return function()
-	-- upvalues: signalsModule (ref), playersService (ref)
-	local var1, var2 = signalsModule.createSignal(nil)
-	local var3 = nil
-	local childAddedConnection = nil
+return function() --[[ Line: 7 | Named "createCurrentScreenOrientationSignal" ]]
+	-- upvalues: SignalsModule (copy), Players (copy)
+	local Signal, Signal2 = SignalsModule.createSignal(nil)
+	local Connection = nil
+	local Connection1 = nil
 	
-	local function _(p1)
-		-- upvalues: var2 (ref), var3 (write)
-		var2(p1.CurrentScreenOrientation)
-		var3 = p1:GetPropertyChangedSignal("CurrentScreenOrientation"):Connect(function()
-			-- upvalues: var2 (copy), p1 (ref)
-			var2(p1.CurrentScreenOrientation)
+	local function _(Object) --[[ Line: 13 | Named "connectToPlayerGui" ]]
+		-- upvalues: Signal2 (copy), Connection (ref)
+		Signal2(Object.CurrentScreenOrientation)
+		Connection = Object:GetPropertyChangedSignal("CurrentScreenOrientation"):Connect(function() --[[ Line: 15 ]]
+			-- upvalues: Signal2 (upval), Object (copy)
+			Signal2(Object.CurrentScreenOrientation)
 		end)
 	end
 	
-	local localPlayer = playersService.LocalPlayer
+	local LocalPlayer = Players.LocalPlayer
 	
-	if localPlayer then
-		local playerGui = localPlayer:FindFirstChildOfClass("PlayerGui")
+	if LocalPlayer then
+		local PlayerGui = LocalPlayer:FindFirstChildOfClass("PlayerGui")
 		
-		if playerGui then
-			var2(playerGui.CurrentScreenOrientation)
-			var3 = playerGui:GetPropertyChangedSignal("CurrentScreenOrientation"):Connect(function()
-				-- upvalues: var2 (ref), playerGui (ref)
-				var2(playerGui.CurrentScreenOrientation)
+		if PlayerGui then
+			Signal2(PlayerGui.CurrentScreenOrientation)
+			Connection = PlayerGui:GetPropertyChangedSignal("CurrentScreenOrientation"):Connect(function() --[[ Line: 15 ]]
+				-- upvalues: Signal2 (copy), PlayerGui (copy)
+				Signal2(PlayerGui.CurrentScreenOrientation)
 			end)
 		else
-			childAddedConnection = localPlayer.ChildAdded:Connect(function(p1)
-				-- upvalues: childAddedConnection (write), var2 (ref), var3 (write)
-				if p1:IsA("PlayerGui") then
-					if childAddedConnection then
-						childAddedConnection:Disconnect()
+			Connection1 = LocalPlayer.ChildAdded:Connect(function(Child) --[[ Line: 26 ]]
+				-- upvalues: Connection1 (ref), Signal2 (copy), Connection (ref)
+				if Child:IsA("PlayerGui") then
+					if Connection1 then
+						Connection1:Disconnect()
 					end
-					childAddedConnection = nil
-					var2(p1.CurrentScreenOrientation)
-					var3 = p1:GetPropertyChangedSignal("CurrentScreenOrientation"):Connect(function()
-						-- upvalues: var2 (copy), p1 (ref)
-						var2(p1.CurrentScreenOrientation)
+					Connection1 = nil
+					Signal2(Child.CurrentScreenOrientation)
+					Connection = Child:GetPropertyChangedSignal("CurrentScreenOrientation"):Connect(function() --[[ Line: 15 ]]
+						-- upvalues: Signal2 (upval), Child (copy)
+						Signal2(Child.CurrentScreenOrientation)
 					end)
 				end
 			end)
 		end
 	end
-	return var1, function()
-		-- upvalues: var3 (write), childAddedConnection (write)
-		if var3 then
-			var3:Disconnect()
+	return Signal, function() --[[ Line: 39 ]]
+		-- upvalues: Connection (ref), Connection1 (ref)
+		if Connection then
+			Connection:Disconnect()
 		end
-		if childAddedConnection then
-			childAddedConnection:Disconnect()
+		if Connection1 then
+			Connection1:Disconnect()
 		end
 	end
 end

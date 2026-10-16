@@ -1,6 +1,6 @@
-﻿local isVRAppBuildModule = require(script.Parent.IsVRAppBuild)
+﻿local IsVRAppBuildModule = require(script.Parent.IsVRAppBuild)
 
-return function()
-	-- upvalues: isVRAppBuildModule (ref)
-	return if isVRAppBuildModule() then Enum.QualityLevel.Level07 else Enum.QualityLevel.Automatic
+return function() --[[ Line: 3 ]]
+	-- upvalues: IsVRAppBuildModule (copy)
+	return if IsVRAppBuildModule() then Enum.QualityLevel.Level07 else Enum.QualityLevel.Automatic
 end

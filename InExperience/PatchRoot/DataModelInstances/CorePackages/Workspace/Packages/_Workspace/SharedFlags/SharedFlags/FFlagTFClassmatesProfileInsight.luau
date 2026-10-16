@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("TFClassmatesProfileInsight", false) and require(script.Parent.FFlagProfileInsightsParseClassmates)
+﻿local FFlagProfileInsightsParseClassmatesModule = require(script.Parent.FFlagProfileInsightsParseClassmates)
+
+return game:DefineFastFlag("TFClassmatesProfileInsight", false) and FFlagProfileInsightsParseClassmatesModule

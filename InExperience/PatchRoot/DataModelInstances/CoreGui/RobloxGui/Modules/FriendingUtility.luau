@@ -1,64 +1,65 @@
-﻿local httpService = game:GetService("HttpService")
-local httpRbxApiService = game:GetService("HttpRbxApiService")
-local starterGuiService = game:GetService("StarterGui")
-local playersService = game:GetService("Players")
-local fFlagRemoveHardCodedFriendLimitPromptModule = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.Flags.FFlagRemoveHardCodedFriendLimitPrompt)
-local localPlayer = playersService.LocalPlayer
-while not localPlayer do
-	playersService:GetPropertyChangedSignal("LocalPlayer"):Wait()
-	localPlayer = playersService.LocalPlayer
+﻿local HttpService = game:GetService("HttpService")
+local HttpRbxApiService = game:GetService("HttpRbxApiService")
+local StarterGui = game:GetService("StarterGui")
+local Players = game:GetService("Players")
+local FFlagRemoveHardCodedFriendLimitPromptModule = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.Flags.FFlagRemoveHardCodedFriendLimitPrompt)
+local LocalPlayer = Players.LocalPlayer
+while not LocalPlayer do
+	Players:GetPropertyChangedSignal("LocalPlayer"):Wait()
+	LocalPlayer = Players.LocalPlayer
 end
-local t = {}
-t.__index = t
-local text = string.gsub(string.gsub(game:GetService("ContentProvider").BaseUrl:lower(), "http:", "https:"), "www", "friends") .. "v1/users/{userId}/friends/count"
+local Module = {}
+Module.__index = Module
+local Text = string.gsub(string.gsub(game:GetService("ContentProvider").BaseUrl:lower(), "http:", "https:"), "www", "friends") .. "v1/users/{userId}/friends/count"
 
-function t.GetFriendCountAsync(_, p1)
-	-- upvalues: text (ref), httpRbxApiService (ref), httpService (ref)
-	local count = nil
-	local ok, status = pcall(function()
-		-- upvalues: text (copy), p1 (ref), httpRbxApiService (copy)
-		return httpRbxApiService:GetAsyncFullUrl(string.gsub(text, "{userId}", tostring(p1)))
+function Module:GetFriendCountAsync(p1) --[[ Line: 25 ]]
+	-- upvalues: Text (copy), HttpRbxApiService (copy), HttpService (copy)
+	local Count = nil
+	local Success, Result = pcall(function() --[[ Line: 28 ]]
+		-- upvalues: Text (upval), p1 (copy), HttpRbxApiService (upval)
+		return HttpRbxApiService:GetAsyncFullUrl((string.gsub(Text, "{userId}", (tostring(p1)))))
 	end)
 	
-	if not ok then
-		print(text, "failed because", status)
+	if not Success then
+		print(Text, "failed because", Result)
 		
 		return nil
 	end
-	local var1 = httpService:JSONDecode(status)
+	local Data = HttpService:JSONDecode(Result)
 	
-	if var1.count then
-		count = var1.count
+	if Data.count then
+		Count = Data.count
 	end
-	return count
+	return Count
 end
 
-function t.MaxFriendCount(_)
-	-- upvalues: fFlagRemoveHardCodedFriendLimitPromptModule (ref)
-	assert(not fFlagRemoveHardCodedFriendLimitPromptModule, "Should not call MaxFriendCount when FFlagRemoveHardCodedFriendLimitPrompt is enabled")
+function Module:MaxFriendCount(): number --[[ Line: 46 ]]
+	-- upvalues: FFlagRemoveHardCodedFriendLimitPromptModule (copy)
+	assert(not FFlagRemoveHardCodedFriendLimitPromptModule, "Should not call MaxFriendCount when FFlagRemoveHardCodedFriendLimitPrompt is enabled")
 	
 	return 200
 end
 
-local bindableEvent = Instance.new("BindableEvent")
-local bindableEvent_1 = Instance.new("BindableEvent")
-localPlayer.FriendStatusChanged:connect(function(p1, p2)
-	-- upvalues: bindableEvent (ref), bindableEvent_1 (ref)
-	if p2 == Enum.FriendStatus.Friend then
-		bindableEvent:Fire(p1)
+local BindableEvent = Instance.new("BindableEvent")
+local BindableEvent1 = Instance.new("BindableEvent")
+LocalPlayer.FriendStatusChanged:connect(function(Player, FriendStatus) --[[ Line: 54 ]]
+	-- upvalues: BindableEvent (copy), BindableEvent1 (copy)
+	if FriendStatus == Enum.FriendStatus.Friend then
+		BindableEvent:Fire(Player)
 		
 		return
-	elseif p2 == Enum.FriendStatus.NotFriend then
-		bindableEvent_1:Fire(p1)
+	end
+	if FriendStatus == Enum.FriendStatus.NotFriend then
+		BindableEvent1:Fire(Player)
 	end
 end)
-starterGuiService:RegisterGetCore("PlayerFriendedEvent", function()
-	-- upvalues: bindableEvent (ref)
-	return bindableEvent
+StarterGui:RegisterGetCore("PlayerFriendedEvent", function() --[[ Line: 62 ]]
+	-- upvalues: BindableEvent (copy)
+	return BindableEvent
 end)
-starterGuiService:RegisterGetCore("PlayerUnfriendedEvent", function()
-	-- upvalues: bindableEvent_1 (ref)
-	return bindableEvent_1
+StarterGui:RegisterGetCore("PlayerUnfriendedEvent", function() --[[ Line: 63 ]]
+	-- upvalues: BindableEvent1 (copy)
+	return BindableEvent1
 end)
 
-return t
+return Module

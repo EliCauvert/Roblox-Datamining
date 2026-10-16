@@ -1,26 +1,25 @@
-﻿local inExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
-local getDrawerVisibleStore = require(inExperienceSideSheet.Parent.Drawer).Stores.GetDrawerVisibleStore
-local flagsModule = require(inExperienceSideSheet.Flags)
-local getSideSheetConfigStoreModule = require(inExperienceSideSheet.Stores.GetSideSheetConfigStore)
-local getHasRoomForPeoplePageModule = require(inExperienceSideSheet.Utils.getHasRoomForPeoplePage)
-local registerInGameMenuPeoplePageActionsModule = require(inExperienceSideSheet.Utils.registerInGameMenuPeoplePageActions)
-local fFlagSideSheetOpenPeoplePage = flagsModule.FFlagSideSheetOpenPeoplePage
+﻿local InExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
+local GetDrawerVisibleStoreFunction = require(InExperienceSideSheet.Parent.Drawer).Stores.GetDrawerVisibleStore
+local GetSideSheetConfigStoreModule = require(InExperienceSideSheet.Stores.GetSideSheetConfigStore)
+local GetHasRoomForPeoplePageModule = require(InExperienceSideSheet.Utils.getHasRoomForPeoplePage)
+local RegisterInGameMenuPeoplePageActionsModule = require(InExperienceSideSheet.Utils.registerInGameMenuPeoplePageActions)
+local FFlagSideSheetOpenPeoplePage = require(InExperienceSideSheet.Flags).FFlagSideSheetOpenPeoplePage
 
-return function(p1)
-	-- upvalues: getDrawerVisibleStore (ref), fFlagSideSheetOpenPeoplePage (ref), getHasRoomForPeoplePageModule (ref), getSideSheetConfigStoreModule (ref), registerInGameMenuPeoplePageActionsModule (ref)
-	local var1 = getDrawerVisibleStore(false)
-	local var2 = fFlagSideSheetOpenPeoplePage and (p1 and getHasRoomForPeoplePageModule())
+return function(p1) --[[ Line: 13 ]]
+	-- upvalues: GetDrawerVisibleStoreFunction (copy), FFlagSideSheetOpenPeoplePage (copy), GetHasRoomForPeoplePageModule (copy), GetSideSheetConfigStoreModule (copy), RegisterInGameMenuPeoplePageActionsModule (copy)
+	local DrawerVisibleStore = GetDrawerVisibleStoreFunction(false)
+	local HasRoomForPeoplePageModule = FFlagSideSheetOpenPeoplePage and (p1 and GetHasRoomForPeoplePageModule())
 	
-	if fFlagSideSheetOpenPeoplePage and p1 then
-		getSideSheetConfigStoreModule(false).setDidSideSheetOpenWithPeoplePage(var2)
+	if FFlagSideSheetOpenPeoplePage and p1 then
+		GetSideSheetConfigStoreModule(false).setDidSideSheetOpenWithPeoplePage(HasRoomForPeoplePageModule)
 	end
-	var1.setDrawerVisible(p1)
+	DrawerVisibleStore.setDrawerVisible(p1)
 	
-	if var2 then
-		task.delay(0, function()
-			-- upvalues: var1 (ref), registerInGameMenuPeoplePageActionsModule (copy)
-			if var1.getDrawerVisible(false) then
-				registerInGameMenuPeoplePageActionsModule.openPeoplePage()
+	if HasRoomForPeoplePageModule then
+		task.delay(0, function() --[[ Line: 30 ]]
+			-- upvalues: DrawerVisibleStore (copy), RegisterInGameMenuPeoplePageActionsModule (upval)
+			if DrawerVisibleStore.getDrawerVisible(false) then
+				RegisterInGameMenuPeoplePageActionsModule.openPeoplePage()
 			end
 		end)
 	end

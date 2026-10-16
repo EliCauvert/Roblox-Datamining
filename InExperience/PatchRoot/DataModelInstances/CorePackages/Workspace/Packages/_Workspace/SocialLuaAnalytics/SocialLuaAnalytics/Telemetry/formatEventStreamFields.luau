@@ -1,21 +1,22 @@
-﻿local httpService = game:GetService("HttpService")
-local cryoModule = require(script:FindFirstAncestor("SocialLuaAnalytics").Parent.Cryo)
+﻿local HttpService = game:GetService("HttpService")
+local CryoModule = require(script:FindFirstAncestor("SocialLuaAnalytics").Parent.Cryo)
 
-return function(p1)
-	-- upvalues: cryoModule (ref), httpService (ref)
-	return cryoModule.Dictionary.map(p1, function(p2, p3)
-		-- upvalues: httpService (copy)
-		if type(p2) ~= "table" then
-			return tostring(p2), p3
+return function(p1) --[[ Line: 6 | Named "formatEventStreamFields" ]]
+	-- upvalues: CryoModule (copy), HttpService (copy)
+	return CryoModule.Dictionary.map(p1, function(Input, p2) --[[ Line: 7 ]]
+		-- upvalues: HttpService (upval)
+		if type(Input) ~= "table" then
+			return tostring(Input), p2
 		end
-		local ok, status = pcall(function()
-			-- upvalues: httpService (copy), p2 (ref)
-			return httpService:JSONEncode(p2)
+		local Success, Result = pcall(function() --[[ Line: 9 ]]
+			-- upvalues: HttpService (upval), Input (copy)
+			return HttpService:JSONEncode(Input)
 		end)
 		
-		if ok then
-			return status, p3
+		if Success then
+			return Result, p2
+		else
+			return "", p2
 		end
-		return "", p3
 	end)
 end

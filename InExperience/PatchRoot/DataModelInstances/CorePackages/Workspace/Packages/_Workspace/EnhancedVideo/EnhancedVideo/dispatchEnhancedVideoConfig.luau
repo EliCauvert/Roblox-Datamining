@@ -1,14 +1,14 @@
-﻿local replicatedStorageService = game:GetService("ReplicatedStorage")
+﻿local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local _ = require(script.Parent.Types)
 
-return function(p1)
-	-- upvalues: replicatedStorageService (ref)
-	task.spawn(function()
-		-- upvalues: replicatedStorageService (copy), p1 (ref)
-		local enhancedVideoConfig = replicatedStorageService:WaitForChild("EnhancedVideoConfig", 60)
+return function(p1) --[[ Line: 9 | Named "dispatchEnhancedVideoConfig" ]]
+	-- upvalues: ReplicatedStorage (copy)
+	task.spawn(function() --[[ Line: 10 ]]
+		-- upvalues: ReplicatedStorage (upval), p1 (copy)
+		local EnhancedVideoConfig = ReplicatedStorage:WaitForChild("EnhancedVideoConfig", 60)
 		
-		if enhancedVideoConfig and enhancedVideoConfig:IsA("BindableEvent") then
-			enhancedVideoConfig:Fire(p1)
+		if EnhancedVideoConfig and EnhancedVideoConfig:IsA("BindableEvent") then
+			EnhancedVideoConfig:Fire(p1)
 			
 			return
 		end

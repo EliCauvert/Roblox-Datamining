@@ -1,6 +1,6 @@
-﻿local tutilsModule = require(script:FindFirstAncestor("AvatarExperienceCommon").Parent.tutils)
+﻿local TutilsModule = require(script:FindFirstAncestor("AvatarExperienceCommon").Parent.tutils)
 
-return function()
-	-- upvalues: tutilsModule (ref)
-	return tutilsModule.deepEqual
+return function() --[[ Line: 6 ]]
+	-- upvalues: TutilsModule (copy)
+	return TutilsModule.deepEqual
 end

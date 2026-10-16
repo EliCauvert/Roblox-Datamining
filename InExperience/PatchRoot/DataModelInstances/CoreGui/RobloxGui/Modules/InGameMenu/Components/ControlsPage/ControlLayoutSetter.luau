@@ -1,49 +1,48 @@
-﻿local userInputService = game:GetService("UserInputService")
-local inGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
-local roact = inGameMenuDependenciesModule.Roact
-local roactRodux = inGameMenuDependenciesModule.RoactRodux
-local parent = script.Parent.Parent.Parent
-local controlsModule = require(parent.Resources.Controls)
-local setControlLayoutModule = require(parent.Actions.SetControlLayout)
-local controlLayoutSetter = roact.PureComponent:extend("ControlLayoutSetter")
+﻿local UserInputService = game:GetService("UserInputService")
+local InGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
+local RoactRodux = InGameMenuDependenciesModule.RoactRodux
+local Parent = script.Parent.Parent.Parent
+local ControlsModule = require(Parent.Resources.Controls)
+local SetControlLayoutModule = require(Parent.Actions.SetControlLayout)
+local ControlLayoutSetter = InGameMenuDependenciesModule.Roact.PureComponent:extend("ControlLayoutSetter")
 
-function controlLayoutSetter.init(p1)
-	-- upvalues: controlsModule (ref), userInputService (ref)
-	local var1 = controlsModule.inputToControlTypeMap[userInputService:GetLastInputType()]
+function ControlLayoutSetter.init(p1) --[[ Line: 16 ]]
+	-- upvalues: ControlsModule (copy), UserInputService (copy)
+	local InputToControlType = ControlsModule.inputToControlTypeMap[UserInputService:GetLastInputType()]
 	
-	if var1 then
-		p1.props.dispatchSetControlLayout(var1)
+	if InputToControlType then
+		p1.props.dispatchSetControlLayout(InputToControlType)
 	end
 end
 
-function controlLayoutSetter.render(_)
+function ControlLayoutSetter:render() --[[ Line: 23 ]]
 	return nil
 end
 
-function controlLayoutSetter.didMount(p1)
-	-- upvalues: userInputService (ref), controlsModule (ref)
-	p1.inputChangedConnection = userInputService.LastInputTypeChanged:Connect(function(p2)
-		-- upvalues: controlsModule (copy), p1 (ref)
-		local var1 = controlsModule.inputToControlTypeMap[p2]
+function ControlLayoutSetter.didMount(p1) --[[ Line: 27 ]]
+	-- upvalues: UserInputService (copy), ControlsModule (copy)
+	p1.inputChangedConnection = UserInputService.LastInputTypeChanged:Connect(function(LastInputType) --[[ Line: 28 ]]
+		-- upvalues: ControlsModule (upval), p1 (copy)
+		local InputToControlType = ControlsModule.inputToControlTypeMap[LastInputType]
 		
-		if var1 then
-			p1.props.dispatchSetControlLayout(var1)
+		if InputToControlType then
+			p1.props.dispatchSetControlLayout(InputToControlType)
 		end
 	end)
 end
 
-function controlLayoutSetter.willUnmount(p1)
+function ControlLayoutSetter.willUnmount(p1) --[[ Line: 39 ]]
 	if p1.inputChangedConnection then
 		p1.inputChangedConnection:Disconnect()
 	end
 end
 
-return roactRodux.UNSTABLE_connect2(nil, function(p1)
-	-- upvalues: setControlLayoutModule (ref)
+return RoactRodux.UNSTABLE_connect2(nil, function(Callback) --[[ Line: 45 ]]
+	-- upvalues: SetControlLayoutModule (copy)
 	return {
-		dispatchSetControlLayout = function(value)
-			-- upvalues: p1 (ref), setControlLayoutModule (copy)
-			p1(setControlLayoutModule(value))
+		dispatchSetControlLayout = function(p1) --[[ Line: 47 ]]
+			-- upvalues: Callback (copy), SetControlLayoutModule (upval)
+			Callback(SetControlLayoutModule(p1))
 		end
 	}
-end)(controlLayoutSetter)
+end)(ControlLayoutSetter)

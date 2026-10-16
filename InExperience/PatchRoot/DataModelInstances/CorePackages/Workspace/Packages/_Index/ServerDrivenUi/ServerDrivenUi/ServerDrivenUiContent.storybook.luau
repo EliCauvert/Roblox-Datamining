@@ -1,14 +1,12 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local reactModule = require(parent.React)
-local roduxModule = require(parent.Rodux)
-local foundationModule = require(parent.Foundation)
-local foundationProvider = foundationModule.FoundationProvider
-local colorMode = foundationModule.Enums.ColorMode
-local device = foundationModule.Enums.Device
-local reactRobloxModule = require(parent.Dev.ReactRoblox)
-local roactRoduxModule = require(parent.Dev.RoactRodux)
-local t = { Light = colorMode.Light, Dark = colorMode.Dark }
-local var1 = roduxModule.Store.new(function(p1)
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local FoundationProvider = FoundationModule.FoundationProvider
+local ColorMode = FoundationModule.Enums.ColorMode
+local Device = FoundationModule.Enums.Device
+local RoactRoduxModule = require(Parent.Dev.RoactRodux)
+local config = { Light = ColorMode.Light, Dark = ColorMode.Dark }
+local NewResult = require(Parent.Rodux).Store.new(function(p1) --[[ Line: 17 ]]
 	return p1
 end, {
 	ScreenSize = Vector2.new(1920, 1080),
@@ -27,30 +25,30 @@ end, {
 
 return {
 	name = "ServerDrivenUiContent",
-	roact = reactModule,
-	reactRoblox = reactRobloxModule,
-	mapStory = function(p1)
-		-- upvalues: reactModule (ref), roactRoduxModule (ref), var1 (ref), foundationProvider (ref), t (ref), device (ref)
-		return function(p2)
-			-- upvalues: reactModule (copy), roactRoduxModule (copy), var1 (copy), foundationProvider (copy), t (copy), device (copy), p1 (ref)
-			return reactModule.createElement("Frame", {
+	roact = ReactModule,
+	reactRoblox = require(Parent.Dev.ReactRoblox),
+	mapStory = function(p1) --[[ Line: 34 ]]
+		-- upvalues: ReactModule (copy), RoactRoduxModule (copy), NewResult (copy), FoundationProvider (copy), config (copy), Device (copy)
+		return function(p2) --[[ Line: 35 ]]
+			-- upvalues: ReactModule (upval), RoactRoduxModule (upval), NewResult (upval), FoundationProvider (upval), config (upval), Device (upval), p1 (copy)
+			return ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				AutomaticSize = Enum.AutomaticSize.Y,
 				Size = UDim2.fromScale(1, 0)
 			}, {
-				UIPadding = reactModule.createElement("UIPadding", {
+				UIPadding = ReactModule.createElement("UIPadding", {
 					PaddingTop = UDim.new(0, 10),
 					PaddingBottom = UDim.new(0, 10),
 					PaddingLeft = UDim.new(0, 10),
 					PaddingRight = UDim.new(0, 10)
 				}),
-				StoreProvider = reactModule.createElement(roactRoduxModule.StoreProvider, { store = var1 }, {
-					FoundationContext = reactModule.createElement(foundationProvider, {
-						colorMode = t[p2.theme],
-						device = device[p2.platform],
+				StoreProvider = ReactModule.createElement(RoactRoduxModule.StoreProvider, { store = NewResult }, {
+					FoundationContext = ReactModule.createElement(FoundationProvider, {
+						colorMode = config[p2.theme],
+						device = Device[p2.platform],
 						preferences = p2.settings,
 						scale = p2.settings and p2.settings.scale
-					}, { Child = reactModule.createElement(p1, p2) })
+					}, { Child = ReactModule.createElement(p1, p2) })
 				})
 			})
 		end

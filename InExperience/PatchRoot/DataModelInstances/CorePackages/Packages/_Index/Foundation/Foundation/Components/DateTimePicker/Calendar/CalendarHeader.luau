@@ -1,124 +1,121 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local reactModule = require(parent.React)
-local icon = require(parent.BuilderIcons).Icon
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local ReactModule = require(Parent.React)
+local Icon = require(Parent.BuilderIcons).Icon
 local _ = require(script.Parent.Parent.Utilities.DateTimeCalendarViewUtilities)
-local dateTimeUtilitiesModule = require(script.Parent.Parent.DateTimeUtilities)
-local buttonVariantModule = require(foundation.Enums.ButtonVariant)
-local dropdownModule = require(foundation.Components.Dropdown)
-local iconButtonModule = require(foundation.Components.IconButton)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local inputVariantModule = require(foundation.Enums.InputVariant)
-local viewModule = require(foundation.Components.View)
-local useScaledValueModule = require(foundation.Utility.useScaledValue)
-local useScrollToSelectedRefModule = require(script.Parent.useScrollToSelectedRef)
-local useTextSizeModule = require(foundation.Utility.useTextSize)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
+local DateTimeUtilitiesModule = require(script.Parent.Parent.DateTimeUtilities)
+local ButtonVariantModule = require(Foundation.Enums.ButtonVariant)
+local DropdownModule = require(Foundation.Components.Dropdown)
+local IconButtonModule = require(Foundation.Components.IconButton)
+local InputSizeModule = require(Foundation.Enums.InputSize)
+local InputVariantModule = require(Foundation.Enums.InputVariant)
+local ViewModule = require(Foundation.Components.View)
+local UseScaledValueModule = require(Foundation.Utility.useScaledValue)
+local UseScrollToSelectedRefModule = require(script.Parent.useScrollToSelectedRef)
+local UseTextSizeModule = require(Foundation.Utility.useTextSize)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 
-return function(p1)
-	-- upvalues: useTokensModule (ref), dateTimeUtilitiesModule (ref), useTextSizeModule (ref), useScaledValueModule (ref), reactModule (ref), useScrollToSelectedRefModule (ref), viewModule (ref), iconButtonModule (ref), icon (ref), inputSizeModule (ref), buttonVariantModule (ref), dropdownModule (ref), inputVariantModule (ref)
-	local viewDate = p1.viewDate
-	local var1 = useTokensModule()
-	local var2 = useTextSizeModule(dateTimeUtilitiesModule.monthMap[viewDate.month], var1.Typography.BodySmall)
-	local var3 = useTextSizeModule(tostring(viewDate.year), var1.Typography.BodySmall)
-	local var4 = useScaledValueModule(44)
-	local var5 = useScaledValueModule(200)
-	local var6 = if var2 then math.ceil(var2.X) + var4 else 110
-	local var7 = if var3 then math.ceil(var3.X) + var4 else 70
-	local var8 = reactModule.useMemo(function()
-		-- upvalues: dateTimeUtilitiesModule (copy)
-		local t = {}
+return function(Frame) --[[ Line: 46 | Named "CalendarHeader" ]]
+	-- upvalues: UseTokensModule (copy), DateTimeUtilitiesModule (copy), UseTextSizeModule (copy), UseScaledValueModule (copy), ReactModule (copy), UseScrollToSelectedRefModule (copy), ViewModule (copy), IconButtonModule (copy), Icon (copy), InputSizeModule (copy), ButtonVariantModule (copy), DropdownModule (copy), InputVariantModule (copy)
+	local ViewDate = Frame.viewDate
+	local UseTokensModuleResult = UseTokensModule()
+	local Text = tostring(ViewDate.year)
+	local UseTextSizeModuleResult = UseTextSizeModule(DateTimeUtilitiesModule.monthMap[ViewDate.month], UseTokensModuleResult.Typography.BodySmall)
+	local UseTextSizeModuleResult1 = UseTextSizeModule(Text, UseTokensModuleResult.Typography.BodySmall)
+	local UseScaledValueModuleResult = UseScaledValueModule(44)
+	local UseScaledValueModuleResult1 = UseScaledValueModule(200)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 59 ]]
+		-- upvalues: DateTimeUtilitiesModule (upval)
+		local List = {}
 		
-		for i, v in dateTimeUtilitiesModule.monthMap do
-			table.insert(t, { id = i, text = v })
+		for Id, Text in DateTimeUtilitiesModule.monthMap do
+			table.insert(List, { id = Id, text = Text })
 		end
-		return t
+		return List
 	end, {})
-	local var9 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), dateTimeUtilitiesModule (copy), viewDate (ref)
-		local year, year_1
-		local _ = nil
-		local _ = nil
-		
-		if p1.selectableDateRange then
-			year = dateTimeUtilitiesModule.toLocalTime(p1.selectableDateRange.startDate).Year
-			year_1 = dateTimeUtilitiesModule.toLocalTime(p1.selectableDateRange.endDate).Year
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 70 ]]
+		-- upvalues: Frame (copy), DateTimeUtilitiesModule (upval), ViewDate (copy)
+		local Year = nil
+		local Year1 = nil
+		if Frame.selectableDateRange then
+			Year = DateTimeUtilitiesModule.toLocalTime(Frame.selectableDateRange.startDate).Year
+			Year1 = DateTimeUtilitiesModule.toLocalTime(Frame.selectableDateRange.endDate).Year
 		else
-			year = viewDate.year - 50
-			year_1 = viewDate.year + 50
+			Year = ViewDate.year - 50
+			Year1 = ViewDate.year + 50
 		end
-		local t = {}
+		local List = {}
 		
-		for i = year, year_1 do
-			table.insert(t, { id = i, text = tostring(i) })
+		for i = Year, Year1 do
+			table.insert(List, { id = i, text = tostring(i) })
 		end
-		return t
-	end, { p1.selectableDateRange, viewDate.year })
+		return List
+	end, { Frame.selectableDateRange, ViewDate.year })
 	
-	return reactModule.createElement(viewModule, {
+	return ReactModule.createElement(ViewModule, {
 		tag = "row align-y-center gap-small size-full-0 auto-y padding-y-small",
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		PreviousMonthButton = reactModule.createElement(iconButtonModule, {
+		PreviousMonthButton = ReactModule.createElement(IconButtonModule, {
 			LayoutOrder = 1,
-			icon = icon.ChevronSmallLeft,
-			onActivated = p1.onPreviousMonth,
-			size = inputSizeModule.Small,
-			testId = `{p1.testId}--previous-month-button`,
-			variant = buttonVariantModule.Utility
+			icon = Icon.ChevronSmallLeft,
+			onActivated = Frame.onPreviousMonth,
+			size = InputSizeModule.Small,
+			testId = `{Frame.testId}--previous-month-button`,
+			variant = ButtonVariantModule.Utility
 		}),
-		MonthYearDropdowns = reactModule.createElement(viewModule, {
+		MonthYearDropdowns = ReactModule.createElement(ViewModule, {
 			LayoutOrder = 2,
 			tag = "row align-x-center align-y-center grow gap-small auto-y"
 		}, {
-			MonthDropdown = reactModule.createElement(dropdownModule.Root, {
+			MonthDropdown = ReactModule.createElement(DropdownModule.Root, {
 				label = "",
 				LayoutOrder = 1,
-				items = var8,
-				maxHeight = var5,
-				onItemChanged = reactModule.useCallback(function(p2)
-					-- upvalues: p1 (ref), viewDate (ref)
-					local var10 = tonumber(p2)
+				items = UseMemoResult,
+				maxHeight = UseScaledValueModuleResult1,
+				onItemChanged = ReactModule.useCallback(function(p1) --[[ Line: 92 ]]
+					-- upvalues: Frame (copy), ViewDate (copy)
+					local Number: number? = tonumber(p1)
 					
-					if var10 then
-						p1.onViewDateChanged({ month = var10, year = viewDate.year })
+					if Number then
+						Frame.onViewDateChanged({ month = Number, year = ViewDate.year })
 					end
-				end, { p1.onViewDateChanged, viewDate.year }),
-				scrollingFrameRef = useScrollToSelectedRefModule(var8, viewDate.month),
-				size = inputSizeModule.XSmall,
-				testId = `{p1.testId}--month-dropdown`,
-				value = viewDate.month,
-				variant = inputVariantModule.Utility,
-				width = UDim.new(0, var6)
+				end, { Frame.onViewDateChanged, ViewDate.year }),
+				scrollingFrameRef = UseScrollToSelectedRefModule(UseMemoResult, ViewDate.month),
+				size = InputSizeModule.XSmall,
+				testId = `{Frame.testId}--month-dropdown`,
+				value = ViewDate.month,
+				variant = InputVariantModule.Utility,
+				width = UDim.new(0, if UseTextSizeModuleResult then math.ceil(UseTextSizeModuleResult.X) + UseScaledValueModuleResult else 110)
 			}),
-			YearDropdown = reactModule.createElement(dropdownModule.Root, {
+			YearDropdown = ReactModule.createElement(DropdownModule.Root, {
 				label = "",
 				LayoutOrder = 2,
-				items = var9,
-				maxHeight = var5,
-				onItemChanged = reactModule.useCallback(function(p2)
-					-- upvalues: p1 (ref), viewDate (ref)
-					local var10 = tonumber(p2)
+				items = UseMemoResult1,
+				maxHeight = UseScaledValueModuleResult1,
+				onItemChanged = ReactModule.useCallback(function(p1) --[[ Line: 99 ]]
+					-- upvalues: Frame (copy), ViewDate (copy)
+					local Number: number? = tonumber(p1)
 					
-					if var10 then
-						p1.onViewDateChanged({ month = viewDate.month, year = var10 })
+					if Number then
+						Frame.onViewDateChanged({ month = ViewDate.month, year = Number })
 					end
-				end, { p1.onViewDateChanged, viewDate.month }),
-				scrollingFrameRef = useScrollToSelectedRefModule(var9, viewDate.year),
-				size = inputSizeModule.XSmall,
-				testId = `{p1.testId}--year-dropdown`,
-				value = viewDate.year,
-				variant = inputVariantModule.Utility,
-				width = UDim.new(0, var7)
+				end, { Frame.onViewDateChanged, ViewDate.month }),
+				scrollingFrameRef = UseScrollToSelectedRefModule(UseMemoResult1, ViewDate.year),
+				size = InputSizeModule.XSmall,
+				testId = `{Frame.testId}--year-dropdown`,
+				value = ViewDate.year,
+				variant = InputVariantModule.Utility,
+				width = UDim.new(0, if UseTextSizeModuleResult1 then math.ceil(UseTextSizeModuleResult1.X) + UseScaledValueModuleResult else 70)
 			})
 		}),
-		NextMonthButton = reactModule.createElement(iconButtonModule, {
+		NextMonthButton = ReactModule.createElement(IconButtonModule, {
 			LayoutOrder = 3,
-			icon = icon.ChevronSmallRight,
-			onActivated = p1.onNextMonth,
-			size = inputSizeModule.Small,
-			testId = `{p1.testId}--next-month-button`,
-			variant = buttonVariantModule.Utility
+			icon = Icon.ChevronSmallRight,
+			onActivated = Frame.onNextMonth,
+			size = InputSizeModule.Small,
+			testId = `{Frame.testId}--next-month-button`,
+			variant = ButtonVariantModule.Utility
 		})
 	})
 end

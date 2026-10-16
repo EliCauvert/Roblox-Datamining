@@ -1,25 +1,25 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local toastNotificationWrapperModule = require(parent.ToastNotificationWrapper)
-local experienceService = require(parent_1.ExperienceService).ExperienceService
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local ToastNotificationWrapperModule = require(Parent.ToastNotificationWrapper)
+local ExperienceService = require(Parent1.ExperienceService).ExperienceService
 
-return function(p1)
-	-- upvalues: reactModule (ref), experienceService (ref), toastNotificationWrapperModule (ref)
-	local var1, var2 = reactModule.useState(false)
-	reactModule.useEffect(function()
-		-- upvalues: experienceService (copy), var2 (ref)
-		experienceService:RegisterForExperienceJoin(function()
-			-- upvalues: var2 (copy)
-			var2(true)
+return function(p1) --[[ Line: 14 ]]
+	-- upvalues: ReactModule (copy), ExperienceService (copy), ToastNotificationWrapperModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	ReactModule.useEffect(function() --[[ Line: 16 ]]
+		-- upvalues: ExperienceService (upval), UseStateResult2 (copy)
+		ExperienceService:RegisterForExperienceJoin(function() --[[ Line: 17 ]]
+			-- upvalues: UseStateResult2 (upval)
+			UseStateResult2(true)
 		end)
-		experienceService:RegisterForExperienceLeave(function()
-			-- upvalues: var2 (copy)
-			var2(false)
+		ExperienceService:RegisterForExperienceLeave(function() --[[ Line: 20 ]]
+			-- upvalues: UseStateResult2 (upval)
+			UseStateResult2(false)
 		end)
 	end, {})
 	
-	return not var1 and reactModule.createElement(toastNotificationWrapperModule, {
+	return not UseStateResult and ReactModule.createElement(ToastNotificationWrapperModule, {
 		renderLocation = "universalApp",
 		displayOrder = p1.displayOrder
 	})

@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("ChromeWindowSignalConstraintsToggle", false)
+﻿return (game:DefineFastFlag("ChromeWindowSignalConstraintsToggle", false))

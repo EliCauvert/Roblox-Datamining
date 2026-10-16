@@ -1,8 +1,8 @@
-﻿local verifiedParentalConsentDialog = script:FindFirstAncestor("VerifiedParentalConsentDialog")
-local reactModule = require(verifiedParentalConsentDialog.Parent.React)
-local screenSizeContextModule = require(verifiedParentalConsentDialog.Hooks.ScreenSizeContext)
+﻿local VerifiedParentalConsentDialog = script:FindFirstAncestor("VerifiedParentalConsentDialog")
+local ReactModule = require(VerifiedParentalConsentDialog.Parent.React)
+local ScreenSizeContextModule = require(VerifiedParentalConsentDialog.Hooks.ScreenSizeContext)
 
-return function()
-	-- upvalues: reactModule (ref), screenSizeContextModule (ref)
-	return reactModule.useContext(screenSizeContextModule)
+return function() --[[ Line: 6 | Named "useScreenSize" ]]
+	-- upvalues: ReactModule (copy), ScreenSizeContextModule (copy)
+	return ReactModule.useContext(ScreenSizeContextModule)
 end

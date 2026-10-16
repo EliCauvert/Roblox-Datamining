@@ -1,17 +1,17 @@
-﻿local constantsModule = require(script:FindFirstAncestor("AvatarExperienceCommon").Constants)
+﻿local ConstantsModule = require(script:FindFirstAncestor("AvatarExperienceCommon").Constants)
 
-return function(p1)
-	-- upvalues: constantsModule (ref)
-	local outfitTryOn = p1.AvatarExperience.AvatarScene.OutfitTryOn
-	local outfitInfos = p1.AvatarExperience.AvatarEditor.OutfitInfos
-	local outfitIdMap = outfitTryOn.OutfitIdMap
+return function(p1) --[[ Line: 4 | Named "selectDefaultTryOnBodyColors" ]]
+	-- upvalues: ConstantsModule (copy)
+	local OutfitTryOn = p1.AvatarExperience.AvatarScene.OutfitTryOn
+	local OutfitInfos = p1.AvatarExperience.AvatarEditor.OutfitInfos
+	local OutfitIdMap = OutfitTryOn.OutfitIdMap
 	
-	for i, v in outfitTryOn.TryOnItems do
-		if outfitIdMap and v.itemType == "Bundle" and (v.itemSubType == constantsModule.BODY_BUNDLE_TYPE_ID and v.receivedBundleInfo) then
-			local itemId = outfitIdMap[v.itemId]
-			local var1 = if itemId then outfitInfos[itemId] else nil
+	for _, tryOnItem in OutfitTryOn.TryOnItems do
+		if OutfitIdMap and tryOnItem.itemType == "Bundle" and tryOnItem.itemSubType == ConstantsModule.BODY_BUNDLE_TYPE_ID and tryOnItem.receivedBundleInfo then
+			local OutfitId = OutfitIdMap[tryOnItem.itemId]
+			local OutfitInfo = if OutfitId then OutfitInfos[OutfitId] else nil
 			
-			return if var1 then var1.bodyColor3s else nil
+			return if OutfitInfo then OutfitInfo.bodyColor3s else nil
 		end
 	end
 	return nil

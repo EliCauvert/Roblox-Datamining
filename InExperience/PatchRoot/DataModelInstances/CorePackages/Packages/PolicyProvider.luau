@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Index.LuaRoactPolicyProvider.LuaRoactPolicyProvider)
+﻿return (require(script.Parent._Index.LuaRoactPolicyProvider.LuaRoactPolicyProvider))

@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.ExpChatIntegration.ExpChatIntegration)
+﻿return (require(script.Parent.Parent.Parent._Index.ExpChatIntegration.ExpChatIntegration))

@@ -1,39 +1,39 @@
-﻿local avatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
-local httpModule = require(avatarExperienceProfilePictureEditor.Parent.Http)
-local enumsModule = require(avatarExperienceProfilePictureEditor.Common.Enums)
+﻿local AvatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
+local HttpModule = require(AvatarExperienceProfilePictureEditor.Parent.Http)
+local EnumsModule = require(AvatarExperienceProfilePictureEditor.Common.Enums)
 local list = { "ProfileFrame", "ThumbnailCustomizations" }
 
-local function _(p1, p2)
-	if typeof(p2) == "string" then
-		table.insert(p1, `selectionTypes={p2}`)
+local function _(List, List1) --[[ Line: 12 | Named "appendSelectionTypeQueryParams" ]]
+	if typeof(List1) == "string" then
+		table.insert(List, `selectionTypes={List1}`)
 		
 		return
 	end
-	for i, v in p2 do
-		table.insert(p1, `selectionTypes={v}`)
+	for _, value in List1 do
+		table.insert(List, `selectionTypes={value}`)
 	end
 end
 
-local function buildUserAvatarConfigurationsUrl(p3, p4)
-	-- upvalues: list (ref), httpModule (ref)
-	p4 = p4 or list
-	local t = {}
+local function buildUserAvatarConfigurationsUrl(p1, p2): string --[[ Line: 23 ]]
+	-- upvalues: list (copy), HttpModule (copy)
+	local P2 = p2 or list
+	local List = {}
 	
-	if typeof(p4) == "string" then
-		table.insert(t, `selectionTypes={p4}`)
+	if typeof(P2) == "string" then
+		table.insert(List, `selectionTypes={P2}`)
 	else
-		for i, v in p4 do
-			table.insert(t, `selectionTypes={v}`)
+		for _, value in P2 do
+			table.insert(List, `selectionTypes={value}`)
 		end
 	end
-	return `{httpModule.Url.AVATAR_URL}v4/avatar/users/{p3}?{table.concat(t, "&")}`
+	return `{HttpModule.Url.AVATAR_URL}v4/avatar/users/{p1}?{table.concat(List, "&")}`
 end
 
 return {
 	DEFAULT_SELECTION_TYPES = list,
 	buildUserAvatarConfigurationsUrl = buildUserAvatarConfigurationsUrl,
-	fetchUserAvatarConfigurations = function(p5, p6, p7)
-		-- upvalues: buildUserAvatarConfigurationsUrl (ref), enumsModule (ref)
-		return p5(buildUserAvatarConfigurationsUrl(p6, p7), enumsModule.RequestMethods.GET)
+	fetchUserAvatarConfigurations = function(Callback, p3, p4) --[[ Line: 30 ]]
+		-- upvalues: buildUserAvatarConfigurationsUrl (copy), EnumsModule (copy)
+		return Callback(buildUserAvatarConfigurationsUrl(p3, p4), EnumsModule.RequestMethods.GET)
 	end
 }

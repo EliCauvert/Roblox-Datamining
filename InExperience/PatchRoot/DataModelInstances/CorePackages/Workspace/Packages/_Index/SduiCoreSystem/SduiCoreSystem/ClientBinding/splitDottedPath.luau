@@ -1,15 +1,16 @@
 ﻿local t = {}
 
-return function(vectorA)
-	-- upvalues: t (ref)
-	local var1 = t[vectorA]
+return function(Text: string) --[[ Line: 21 | Named "splitDottedPath" ]]
+	-- upvalues: t (copy)
+	local Entry = t[Text]
 	
-	if var1 == nil then
-		local parts = string.split(vectorA, ".")
-		table.freeze(parts)
-		t[vectorA] = parts
+	if Entry == nil then
+		local Parts = string.split(Text, ".")
+		table.freeze(Parts)
+		t[Text] = Parts
 		
-		return parts
+		return Parts
+	else
+		return Entry
 	end
-	return var1
 end

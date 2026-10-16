@@ -1,52 +1,50 @@
-﻿local var1, var2 = ...
-arg0 = var1
-arg1 = var2
+﻿arg0, arg1 = ...
 
-local function x1(p1, p2)
+local function x1(p1, p2) --[[ Line: 6 ]]
 	return p1 + p2
 end
 
-local function x2(p1, p2)
+local function x2(p1, p2) --[[ Line: 7 ]]
 	return p1 - p2
 end
 
-local function x3(p1, p2)
+local function x3(p1, p2) --[[ Line: 8 ]]
 	return p2 - p1
 end
 
-local function x4(p1, p2)
-	return tonumber(tostring(p2 % 1000) .. tostring(math.abs(p1 % 1000)))
+local function x4(p1: number, p2: number): number --[[ Line: 9 ]]
+	return (tonumber(tostring(p2 % 1000) .. tostring((math.abs(p1 % 1000)))))
 end
 
-local function x5(p1, p2)
-	return tonumber(tostring(p2 % 1337) .. tostring(math.abs(p1 % 1337)))
+local function x5(p1: number, p2: number): number --[[ Line: 10 ]]
+	return (tonumber(tostring(p2 % 1337) .. tostring((math.abs(p1 % 1337)))))
 end
 
-local function x6(p1, p2)
+local function x6(p1: number, p2: number): number --[[ Line: 11 ]]
 	return p1 % 1000 * (p2 % 1000)
 end
 
-local function x7(p1, p2)
+local function x7(p1: number, p2: number): number --[[ Line: 12 ]]
 	return p1 % 1337 * (p2 % 1337)
 end
 
-local function x8(p1, p2)
+local function x8(p1, p2): number --[[ Line: 13 ]]
 	return (p1 + p2) % 1000 * ((p1 - p2) % 1000)
 end
 
 local list = {
 	1, 2, 3, 4, 5, 6, 7, 8
 }
-local random = Random.new(5)
+local _Random = Random.new(5)
 
 for _ = 1, 32 do
-	local var3 = random:NextInteger(1, 8)
-	local var4 = random:NextInteger(1, 8)
-	local var5 = list[var3]
-	list[var3] = list[var4]
-	list[var4] = var5
+	local NextIntegerResult = _Random:NextInteger(1, 8)
+	local NextIntegerResult1 = _Random:NextInteger(1, 8)
+	local Entry = list[NextIntegerResult]
+	list[NextIntegerResult] = list[NextIntegerResult1]
+	list[NextIntegerResult1] = Entry
 end
-local t = {
+local config = {
 	[list[1]] = x1,
 	[list[2]] = x2,
 	[list[3]] = x3,
@@ -57,14 +55,14 @@ local t = {
 	[list[8]] = x8
 }
 
-return (function(p1, p2)
-	-- upvalues: t (ref)
-	local var6 = 393
-	local var7 = 1
+return ((function(p1: number, p2: number): number --[[ Line: 35 | Named "x9" ]]
+	-- upvalues: config (copy)
+	local v1 = 393
+	local Count = 1
 	
 	for _ = 1, 16 do
-		var6 = (var6 + t[math.abs(p2 + var6 + var7) % 8 + 1](var6 + p1, p2)) % 10000000
-		var7 += 1
+		v1 = (v1 + config[math.abs(p2 + v1 + Count) % 8 + 1](v1 + p1, p2)) % 10000000
+		Count += 1
 	end
-	return var6
-end)(arg0, arg1)
+	return v1
+end)(arg0, arg1))

@@ -1,9 +1,8 @@
-﻿local t = {}
-local object = require(script.Parent.Parent.Parent.Parent.LuauPolyfill).Object
+﻿local Object = require(script.Parent.Parent.Parent.Parent.LuauPolyfill).Object
 
-function t.compact(...)
-	-- upvalues: object (ref)
-	return object.assign({}, ...)
-end
-
-return t
+return {
+	compact = function(...) --[[ Line: 13 ]]
+		-- upvalues: Object (copy)
+		return Object.assign({}, ...)
+	end
+}

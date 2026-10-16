@@ -1,46 +1,46 @@
-﻿local reactModule = require(script:FindFirstAncestor("Moments").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("Moments").Parent.React)
 
-return function(p1, p2)
-	-- upvalues: reactModule (ref)
-	local var1, var2 = reactModule.useBinding(0)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), p2 (ref), var2 (ref)
-		local current = p1.current
+return function(p1, Frame: Frame) --[[ Line: 11 | Named "useVisibleContentHeight" ]]
+	-- upvalues: ReactModule (copy)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
+	ReactModule.useEffect(function() --[[ Line: 17 ]]
+		-- upvalues: p1 (copy), Frame (copy), UseBindingResult2 (copy)
+		local Current = p1.current
 		
-		if current == nil then return end
-		local function update()
-			-- upvalues: current (ref), p2 (copy), var2 (copy)
-			local y = current.AbsolutePosition.Y
-			local var3 = y + current.AbsoluteWindowSize.Y
+		if Current == nil then return end
+		local function update() --[[ Line: 23 ]]
+			-- upvalues: Current (copy), Frame (upval), UseBindingResult2 (upval)
+			local Y: number = Current.AbsolutePosition.Y
+			local NewY = Y + Current.AbsoluteWindowSize.Y
 			
-			if p2 ~= nil then
-				var3 = math.min(var3, p2.AbsolutePosition.Y)
+			if Frame ~= nil then
+				NewY = math.min(NewY, Frame.AbsolutePosition.Y)
 			end
-			var2(math.max(0, var3 - y))
+			UseBindingResult2((math.max(0, NewY - Y)))
 		end
 		
-		local y = current.AbsolutePosition.Y
-		local var3 = y + current.AbsoluteWindowSize.Y
+		local Y: number = Current.AbsolutePosition.Y
+		local NewY = Y + Current.AbsoluteWindowSize.Y
 		
-		if p2 ~= nil then
-			var3 = math.min(var3, p2.AbsolutePosition.Y)
+		if Frame ~= nil then
+			NewY = math.min(NewY, Frame.AbsolutePosition.Y)
 		end
-		var2(math.max(0, var3 - y))
-		local list = {
-			current:GetPropertyChangedSignal("AbsolutePosition"):Connect(update),
-			current:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(update)
+		UseBindingResult2((math.max(0, NewY - Y)))
+		local List = {
+			Current:GetPropertyChangedSignal("AbsolutePosition"):Connect(update),
+			Current:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(update)
 		}
 		
-		if p2 ~= nil then
-			table.insert(list, p2:GetPropertyChangedSignal("AbsolutePosition"):Connect(update))
+		if Frame ~= nil then
+			table.insert(List, Frame:GetPropertyChangedSignal("AbsolutePosition"):Connect(update))
 		end
-		return function()
-			-- upvalues: list (ref)
-			for i, v in list do
-				v:Disconnect()
+		return function() --[[ Line: 40 ]]
+			-- upvalues: List (copy)
+			for _, Connection in List do
+				Connection:Disconnect()
 			end
 		end
-	end, { p1, p2 })
+	end, { p1, Frame })
 	
-	return var1
+	return UseBindingResult
 end

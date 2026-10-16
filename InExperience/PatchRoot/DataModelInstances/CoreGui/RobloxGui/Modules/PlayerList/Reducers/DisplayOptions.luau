@@ -1,39 +1,24 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local VRService = game:GetService("VRService")
-local guiService = game:GetService("GuiService")
-local roduxModule = require(corePackagesService.Packages.Rodux)
-local cryoModule = require(corePackagesService.Packages.Cryo)
-local playerListModule = require(corePackagesService.Workspace.Packages.PlayerList)
-local parent = script.Parent.Parent
-local actions = script.Parent.Parent.Actions
-local setPlayerListVisibilityModule = require(actions.SetPlayerListVisibility)
-local setPlayerListEnabledModule = require(actions.SetPlayerListEnabled)
-local setTempHideKeyModule = require(actions.SetTempHideKey)
-local setPerformanceStatsVisibleModule = require(actions.SetPerformanceStatsVisible)
-local setSmallTouchDeviceModule = require(actions.SetSmallTouchDevice)
-local setTenFootInterfaceModule = require(actions.SetTenFootInterface)
-local setInspectMenuEnabledModule = require(actions.SetInspectMenuEnabled)
-local setIsUsingGamepadModule = require(actions.SetIsUsingGamepad)
-local setHasPermissionToVoiceChatModule = require(actions.SetHasPermissionToVoiceChat)
-local setMinimizedModule = require(actions.SetMinimized)
-local setSubjectToChinaPoliciesModule = require(actions.SetSubjectToChinaPolicies)
-local fFlagPlayerListPersistVisibilityModule = require(parent.Flags.FFlagPlayerListPersistVisibility)
-local fFlagAddNewPlayerListMobileFocusNav = playerListModule.Flags.FFlagAddNewPlayerListMobileFocusNav
-local var1 = if fFlagPlayerListPersistVisibilityModule then UserSettings().GameSettings else nil
+﻿local CorePackages = game:GetService("CorePackages")
+local CryoModule = require(CorePackages.Packages.Cryo)
+local PlayerListModule = require(CorePackages.Workspace.Packages.PlayerList)
+local Actions = script.Parent.Parent.Actions
+local FFlagPlayerListPersistVisibilityModule = require(script.Parent.Parent.Flags.FFlagPlayerListPersistVisibility)
+local FFlagAddNewPlayerListMobileFocusNav = PlayerListModule.Flags.FFlagAddNewPlayerListMobileFocusNav
+local GameSettings = if FFlagPlayerListPersistVisibilityModule then UserSettings().GameSettings else nil
 
-local function _(p1)
-	-- upvalues: cryoModule (ref)
+local function _(p1) --[[ Line: 48 | Named "updateIsVisible" ]]
+	-- upvalues: CryoModule (copy)
 	p1.isVisible = p1.setVisible
 	
 	if not p1.isTenFootInterface then
 		p1.isVisible = p1.isVisible
 	end
-	p1.isVisible = p1.isVisible and cryoModule.isEmpty(p1.tempHideKeys)
+	p1.isVisible = p1.isVisible and CryoModule.isEmpty(p1.tempHideKeys)
 	
 	return p1
 end
 
-return roduxModule.createReducer({
+return (require(CorePackages.Packages.Rodux).createReducer({
 	isMinimized = false,
 	isVisible = true,
 	isSmallTouchDevice = false,
@@ -43,109 +28,110 @@ return roduxModule.createReducer({
 	isUsingGamepad = false,
 	hasPermissionToVoiceChat = false,
 	subjectToChinaPolicies = true,
-	setVisible = if playerListModule.Flags.FFlagPlayerListUseMobileOnSmallDisplay then false elseif fFlagPlayerListPersistVisibilityModule then var1.PlayerListVisible else true,
-	vrEnabled = VRService.VREnabled,
-	inspectMenuEnabled = guiService:GetInspectMenuEnabled(),
+	setVisible = not PlayerListModule.Flags.FFlagPlayerListUseMobileOnSmallDisplay and (not FFlagPlayerListPersistVisibilityModule or GameSettings.PlayerListVisible),
+	vrEnabled = game:GetService("VRService").VREnabled,
+	inspectMenuEnabled = game:GetService("GuiService"):GetInspectMenuEnabled(),
 	tempHideKeys = {}
 }, {
-	[setPlayerListVisibilityModule.name] = function(p1, p2)
-		-- upvalues: fFlagPlayerListPersistVisibilityModule (ref), var1 (ref), cryoModule (ref)
-		if fFlagPlayerListPersistVisibilityModule and not p1.isSmallTouchDevice and not p1.isTenFootInterface then
-			var1.PlayerListVisible = p2.isVisible
+	[require(Actions.SetPlayerListVisibility).name] = function(p1, p2) --[[ Line: 61 ]]
+		-- upvalues: FFlagPlayerListPersistVisibilityModule (copy), GameSettings (copy), CryoModule (copy)
+		if FFlagPlayerListPersistVisibilityModule and not p1.isSmallTouchDevice and not p1.isTenFootInterface then
+			GameSettings.PlayerListVisible = p2.isVisible
 		end
-		local var2 = cryoModule.Dictionary.join(p1, { setVisible = p2.isVisible })
-		var2.isVisible = var2.setVisible
+		local JoinResult = CryoModule.Dictionary.join(p1, { setVisible = p2.isVisible })
+		JoinResult.isVisible = JoinResult.setVisible
 		
-		if not var2.isTenFootInterface then
-			var2.isVisible = var2.isVisible
+		if not JoinResult.isTenFootInterface then
+			JoinResult.isVisible = JoinResult.isVisible
 		end
-		var2.isVisible = var2.isVisible and cryoModule.isEmpty(var2.tempHideKeys)
+		JoinResult.isVisible = JoinResult.isVisible and CryoModule.isEmpty(JoinResult.tempHideKeys)
 		
-		return var2
+		return JoinResult
 	end,
-	[setPlayerListEnabledModule.name] = function(p1, p2)
-		-- upvalues: fFlagAddNewPlayerListMobileFocusNav (ref), cryoModule (ref)
-		local var2 = cryoModule.Dictionary.join(p1, {
+	[require(Actions.SetPlayerListEnabled).name] = function(p1, p2) --[[ Line: 73 ]]
+		-- upvalues: FFlagAddNewPlayerListMobileFocusNav (copy), CryoModule (copy)
+		local v1 = (not FFlagAddNewPlayerListMobileFocusNav or p2.isEnabled) and nil
+		local JoinResult = CryoModule.Dictionary.join(p1, {
 			playerlistCoreGuiEnabled = p2.isEnabled,
-			setVisible = if fFlagAddNewPlayerListMobileFocusNav then if fFlagAddNewPlayerListMobileFocusNav and not p2.isEnabled then false else nil else nil
+			setVisible = if FFlagAddNewPlayerListMobileFocusNav then v1 else nil
 		})
-		var2.isVisible = var2.setVisible
+		JoinResult.isVisible = JoinResult.setVisible
 		
-		if not var2.isTenFootInterface then
-			var2.isVisible = var2.isVisible
+		if not JoinResult.isTenFootInterface then
+			JoinResult.isVisible = JoinResult.isVisible
 		end
-		var2.isVisible = var2.isVisible and cryoModule.isEmpty(var2.tempHideKeys)
+		JoinResult.isVisible = JoinResult.isVisible and CryoModule.isEmpty(JoinResult.tempHideKeys)
 		
-		return var2
+		return JoinResult
 	end,
-	[setTempHideKeyModule.name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		local tempHideValue = p2.tempHideValue
+	[require(Actions.SetTempHideKey).name] = function(p1, p2) --[[ Line: 87 ]]
+		-- upvalues: CryoModule (copy)
+		local TempHideValue = p2.tempHideValue
 		
-		if tempHideValue == nil then
-			tempHideValue = cryoModule.None
+		if TempHideValue == nil then
+			TempHideValue = CryoModule.None
 		end
-		local var2 = cryoModule.Dictionary.join(p1, {
-			tempHideKeys = cryoModule.Dictionary.join(p1.tempHideKeys, { [p2.tempHideKey] = tempHideValue })
+		local JoinResult = CryoModule.Dictionary.join(p1, {
+			tempHideKeys = CryoModule.Dictionary.join(p1.tempHideKeys, { [p2.tempHideKey] = TempHideValue })
 		})
-		var2.isVisible = var2.setVisible
+		JoinResult.isVisible = JoinResult.setVisible
 		
-		if not var2.isTenFootInterface then
-			var2.isVisible = var2.isVisible
+		if not JoinResult.isTenFootInterface then
+			JoinResult.isVisible = JoinResult.isVisible
 		end
-		var2.isVisible = var2.isVisible and cryoModule.isEmpty(var2.tempHideKeys)
+		JoinResult.isVisible = JoinResult.isVisible and CryoModule.isEmpty(JoinResult.tempHideKeys)
 		
-		return var2
+		return JoinResult
 	end,
-	[setPerformanceStatsVisibleModule.name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, { performanceStatsVisible = p2.isVisible })
+	[require(Actions.SetPerformanceStatsVisible).name] = function(p1, p2) --[[ Line: 99 ]]
+		-- upvalues: CryoModule (copy)
+		return CryoModule.Dictionary.join(p1, { performanceStatsVisible = p2.isVisible })
 	end,
-	[setSmallTouchDeviceModule.name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		local var2 = cryoModule.Dictionary.join(p1, { isSmallTouchDevice = p2.isSmallTouchDevice })
-		var2.isVisible = var2.setVisible
+	[require(Actions.SetSmallTouchDevice).name] = function(p1, p2) --[[ Line: 105 ]]
+		-- upvalues: CryoModule (copy)
+		local JoinResult = CryoModule.Dictionary.join(p1, { isSmallTouchDevice = p2.isSmallTouchDevice })
+		JoinResult.isVisible = JoinResult.setVisible
 		
-		if not var2.isTenFootInterface then
-			var2.isVisible = var2.isVisible
+		if not JoinResult.isTenFootInterface then
+			JoinResult.isVisible = JoinResult.isVisible
 		end
-		var2.isVisible = var2.isVisible and cryoModule.isEmpty(var2.tempHideKeys)
+		JoinResult.isVisible = JoinResult.isVisible and CryoModule.isEmpty(JoinResult.tempHideKeys)
 		
-		return var2
+		return JoinResult
 	end,
-	[setTenFootInterfaceModule.name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		local var2 = cryoModule.Dictionary.join(p1, {
+	[require(Actions.SetTenFootInterface).name] = function(p1, p2) --[[ Line: 111 ]]
+		-- upvalues: CryoModule (copy)
+		local JoinResult = CryoModule.Dictionary.join(p1, {
 			isTenFootInterface = p2.isTenFootInterface,
-			setVisible = if p2.isTenFootInterface then false else p1.setVisible
+			setVisible = not p2.isTenFootInterface and p1.setVisible
 		})
-		var2.isVisible = var2.setVisible
+		JoinResult.isVisible = JoinResult.setVisible
 		
-		if not var2.isTenFootInterface then
-			var2.isVisible = var2.isVisible
+		if not JoinResult.isTenFootInterface then
+			JoinResult.isVisible = JoinResult.isVisible
 		end
-		var2.isVisible = var2.isVisible and cryoModule.isEmpty(var2.tempHideKeys)
+		JoinResult.isVisible = JoinResult.isVisible and CryoModule.isEmpty(JoinResult.tempHideKeys)
 		
-		return var2
+		return JoinResult
 	end,
-	[setInspectMenuEnabledModule.name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, { inspectMenuEnabled = p2.enabled })
+	[require(Actions.SetInspectMenuEnabled).name] = function(p1, p2) --[[ Line: 122 ]]
+		-- upvalues: CryoModule (copy)
+		return CryoModule.Dictionary.join(p1, { inspectMenuEnabled = p2.enabled })
 	end,
-	[setIsUsingGamepadModule.name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, { isUsingGamepad = p2.isUsingGamepad })
+	[require(Actions.SetIsUsingGamepad).name] = function(p1, p2) --[[ Line: 128 ]]
+		-- upvalues: CryoModule (copy)
+		return CryoModule.Dictionary.join(p1, { isUsingGamepad = p2.isUsingGamepad })
 	end,
-	[setHasPermissionToVoiceChatModule.name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, { hasPermissionToVoiceChat = p2.hasPermissionToVoiceChat })
+	[require(Actions.SetHasPermissionToVoiceChat).name] = function(p1, p2) --[[ Line: 134 ]]
+		-- upvalues: CryoModule (copy)
+		return CryoModule.Dictionary.join(p1, { hasPermissionToVoiceChat = p2.hasPermissionToVoiceChat })
 	end,
-	[setMinimizedModule.name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, { isMinimized = p2.isMinimized })
+	[require(Actions.SetMinimized).name] = function(p1, p2) --[[ Line: 140 ]]
+		-- upvalues: CryoModule (copy)
+		return CryoModule.Dictionary.join(p1, { isMinimized = p2.isMinimized })
 	end,
-	[setSubjectToChinaPoliciesModule.name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, { subjectToChinaPolicies = p2.subjectToChinaPolicies })
+	[require(Actions.SetSubjectToChinaPolicies).name] = function(p1, p2) --[[ Line: 146 ]]
+		-- upvalues: CryoModule (copy)
+		return CryoModule.Dictionary.join(p1, { subjectToChinaPolicies = p2.subjectToChinaPolicies })
 	end
-})
+}))

@@ -1,31 +1,32 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local reactModule = require(corePackagesService.Packages.React)
-local _ = require(corePackagesService.Workspace.Packages.Chrome)
+﻿local CorePackages = game:GetService("CorePackages")
+local ReactModule = require(CorePackages.Packages.React)
+local _ = require(CorePackages.Workspace.Packages.Chrome)
 
-return function(p1)
-	-- upvalues: reactModule (ref)
+return function(p1) --[[ Line: 7 ]]
+	-- upvalues: ReactModule (copy)
 	if p1 and p1.windowSize then
-		local windowSize = p1.windowSize
-		local var1, var2 = reactModule.useState(windowSize:get())
-		reactModule.useEffect(function()
-			-- upvalues: windowSize (ref), var2 (ref), var1 (ref)
-			local var3 = windowSize:connect(function()
-				-- upvalues: var2 (copy), windowSize (copy)
-				var2(windowSize:get())
+		local WindowSize = p1.windowSize
+		local UseStateResult, UseStateResult2 = ReactModule.useState(WindowSize:get())
+		ReactModule.useEffect(function() --[[ Line: 13 ]]
+			-- upvalues: WindowSize (copy), UseStateResult2 (copy), UseStateResult (copy)
+			local Connection = WindowSize:connect(function() --[[ Line: 14 ]]
+				-- upvalues: UseStateResult2 (upval), WindowSize (upval)
+				UseStateResult2(WindowSize:get())
 			end)
 			
-			if var1 ~= windowSize:get() then
-				var2(windowSize:get())
+			if UseStateResult ~= WindowSize:get() then
+				UseStateResult2(WindowSize:get())
 			end
-			return function()
-				-- upvalues: var3 (ref)
-				var3:disconnect()
+			return function() --[[ Line: 22 ]]
+				-- upvalues: Connection (copy)
+				Connection:disconnect()
 			end
 		end, { p1.id })
 		
-		return var1
+		return UseStateResult
+	else
+		warn("windowSize object not found")
+		
+		return UDim2.new()
 	end
-	warn("windowSize object not found")
-	
-	return UDim2.new()
 end

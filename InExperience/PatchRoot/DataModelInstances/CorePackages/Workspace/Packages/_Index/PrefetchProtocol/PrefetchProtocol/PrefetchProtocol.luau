@@ -1,26 +1,26 @@
-﻿local parent = script.Parent.Parent
-local messageBus = require(parent.MessageBus).MessageBus
+﻿local Parent = script.Parent.Parent
+local MessageBus = require(Parent.MessageBus).MessageBus
 local _ = require(script.Parent.PrefetchProtocolTypes)
-local t = {
+local PrefetchProtocolModule = {
 	POP_GUID_DESCRIPTOR = {
-		fid = messageBus.getMessageId("Prefetch", "popPendingPrefetchGuid"),
-		validateParams = require(parent.t).table
+		fid = MessageBus.getMessageId("Prefetch", "popPendingPrefetchGuid"),
+		validateParams = require(Parent.t).table
 	}
 }
-t.__index = t
+PrefetchProtocolModule.__index = PrefetchProtocolModule
 
-function t.new(p1)
-	-- upvalues: messageBus (ref), t (ref)
-	local t_1 = { messageBus = p1 or messageBus }
-	setmetatable(t_1, t)
+function PrefetchProtocolModule.new(p1) --[[ Line: 31 ]]
+	-- upvalues: MessageBus (copy), PrefetchProtocolModule (copy)
+	local config = { messageBus = p1 or MessageBus }
+	setmetatable(config, PrefetchProtocolModule)
 	
-	return t_1
+	return config
 end
 
-function t:popPendingPrefetchGuid()
+function PrefetchProtocolModule:popPendingPrefetchGuid() --[[ Line: 39 ]]
 	return self.messageBus.call(self.POP_GUID_DESCRIPTOR, {})
 end
 
-t.default = t.new()
+PrefetchProtocolModule.default = PrefetchProtocolModule.new()
 
-return t
+return PrefetchProtocolModule

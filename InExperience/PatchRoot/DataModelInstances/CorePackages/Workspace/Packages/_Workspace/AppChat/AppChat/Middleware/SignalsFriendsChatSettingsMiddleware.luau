@@ -1,36 +1,34 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local appChatNetworkingModule = require(parent.AppChatNetworking)
-local fFlagAppChatFriendsTabIxpEnabledModule = require(appChat.Flags.FFlagAppChatFriendsTabIxpEnabled)
-local fFlagExpChatEnableFriendsTab = require(parent.SharedFlags).FFlagExpChatEnableFriendsTab
-local thirdPartyChatSettingsLoadedModule = require(appChat.Actions.ThirdPartyChatSettingsLoaded)
-local getFriendsChatMetadataStoreModule = require(appChat.Stores.GetFriendsChatMetadataStore)
-local getFriendsChatSettingsStoreModule = require(appChat.Stores.GetFriendsChatSettingsStore)
-local t = {
-	[appChatNetworkingModule.rodux.GetMetadata.Succeeded.name] = function(p1)
-		-- upvalues: getFriendsChatMetadataStoreModule (ref)
-		getFriendsChatMetadataStoreModule(false).updateFriendsChatMetadata(p1.responseBody)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local FFlagAppChatFriendsTabIxpEnabledModule = require(AppChat.Flags.FFlagAppChatFriendsTabIxpEnabled)
+local FFlagExpChatEnableFriendsTab = require(Parent.SharedFlags).FFlagExpChatEnableFriendsTab
+local GetFriendsChatMetadataStoreModule = require(AppChat.Stores.GetFriendsChatMetadataStore)
+local GetFriendsChatSettingsStoreModule = require(AppChat.Stores.GetFriendsChatSettingsStore)
+local config = {
+	[require(Parent.AppChatNetworking).rodux.GetMetadata.Succeeded.name] = function(p1) --[[ Line: 12 ]]
+		-- upvalues: GetFriendsChatMetadataStoreModule (copy)
+		GetFriendsChatMetadataStoreModule(false).updateFriendsChatMetadata(p1.responseBody)
 	end,
-	[thirdPartyChatSettingsLoadedModule.name] = function(value)
-		-- upvalues: getFriendsChatSettingsStoreModule (ref)
-		getFriendsChatSettingsStoreModule(false).setThirdPartyChatRestrictionStatus(value.status)
+	[require(AppChat.Actions.ThirdPartyChatSettingsLoaded).name] = function(p1) --[[ Line: 16 ]]
+		-- upvalues: GetFriendsChatSettingsStoreModule (copy)
+		GetFriendsChatSettingsStoreModule(false).setThirdPartyChatRestrictionStatus(p1.status)
 	end
 }
 
-return function(value, _)
-	-- upvalues: fFlagAppChatFriendsTabIxpEnabledModule (ref), fFlagExpChatEnableFriendsTab (ref), t (ref)
-	return function(p1)
-		-- upvalues: value (ref), fFlagAppChatFriendsTabIxpEnabledModule (copy), fFlagExpChatEnableFriendsTab (copy), t (copy)
-		local var1 = value(p1)
+return function(Callback, _) --[[ Line: 25 | Named "SignalsFriendsChatSettingsMiddleware" ]]
+	-- upvalues: FFlagAppChatFriendsTabIxpEnabledModule (copy), FFlagExpChatEnableFriendsTab (copy), config (copy)
+	return function(p1) --[[ Line: 26 ]]
+		-- upvalues: Callback (copy), FFlagAppChatFriendsTabIxpEnabledModule (upval), FFlagExpChatEnableFriendsTab (upval), config (upval)
+		local CallbackResult = Callback(p1)
 		
-		if not fFlagAppChatFriendsTabIxpEnabledModule and not fFlagExpChatEnableFriendsTab then
-			return var1
+		if not FFlagAppChatFriendsTabIxpEnabledModule and not FFlagExpChatEnableFriendsTab then
+			return CallbackResult
 		end
-		local type = t[p1.type]
+		local Entry: (any) -> () = config[p1.type]
 		
-		if type then
-			type(p1)
+		if Entry then
+			Entry(p1)
 		end
-		return var1
+		return CallbackResult
 	end
 end

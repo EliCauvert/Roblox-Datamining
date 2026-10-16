@@ -1,52 +1,52 @@
-﻿local httpService = game:GetService("HttpService")
-local appChat = script:FindFirstAncestor("AppChat")
-local signalsModule = require(appChat.Parent.Signals)
-local networkingShareLinksModule = require(appChat.Http.NetworkingShareLinks)
-local name = require(appChat.Logger):new(script.Name)
+﻿local HttpService = game:GetService("HttpService")
+local AppChat = script:FindFirstAncestor("AppChat")
+local SignalsModule = require(AppChat.Parent.Signals)
+local NetworkingShareLinksModule = require(AppChat.Http.NetworkingShareLinks)
+local NewResult = require(AppChat.Logger):new(script.Name)
 
-return function()
-	-- upvalues: signalsModule (ref), networkingShareLinksModule (ref), httpService (ref), name (ref)
-	local var1, var2 = signalsModule.createSignal({})
+return function() --[[ Line: 23 | Named "createShareLinkStore" ]]
+	-- upvalues: SignalsModule (copy), NetworkingShareLinksModule (copy), HttpService (copy), NewResult (copy)
+	local Signal, Signal2 = SignalsModule.createSignal({})
 	local t = {}
 	
 	return {
-		getShareLinkMetadataTable = function(p1)
-			-- upvalues: var1 (ref)
-			return var1(p1)
+		getShareLinkMetadataTable = function(p1) --[[ Line: 27 ]]
+			-- upvalues: Signal (copy)
+			return Signal(p1)
 		end,
-		getShareLinkMetadataComputed = function(p1)
-			-- upvalues: t (ref), signalsModule (copy), var1 (ref)
-			if not t[p1] then
-				t[p1] = signalsModule.createComputed(function(p2)
-					-- upvalues: var1 (copy), p1 (ref)
-					return var1(p2)[p1]
+		getShareLinkMetadataComputed = function(Key) --[[ Line: 32 ]]
+			-- upvalues: t (copy), SignalsModule (upval), Signal (copy)
+			if not t[Key] then
+				t[Key] = SignalsModule.createComputed(function(p1) --[[ Line: 34 ]]
+					-- upvalues: Signal (upval), Key (copy)
+					return Signal(p1)[Key]
 				end)
 			end
-			return t[p1]
+			return t[Key]
 		end,
-		fetchShareLinkMetadata = function(p1, p2, p3)
-			-- upvalues: networkingShareLinksModule (copy), httpService (copy), name (copy), var2 (ref)
-			p1(networkingShareLinksModule.GetMetadata.API({ linkId = p2, linkType = p3 })):andThen(function(p4)
-				-- upvalues: httpService (copy), name (copy), var2 (copy), p2 (ref)
-				local responseBody = p4.responseBody
+		fetchShareLinkMetadata = function(Callback, LinkId, LinkType) --[[ Line: 41 ]]
+			-- upvalues: NetworkingShareLinksModule (upval), HttpService (upval), NewResult (upval), Signal2 (copy)
+			Callback(NetworkingShareLinksModule.GetMetadata.API({ linkId = LinkId, linkType = LinkType })):andThen(function(Result) --[[ Line: 43 ]]
+				-- upvalues: HttpService (upval), NewResult (upval), Signal2 (upval), LinkId (copy)
+				local ResponseBody = Result.responseBody
 				
-				if responseBody.data then
-					local data = httpService:JSONDecode(responseBody.data)
+				if ResponseBody.data then
+					local Data = HttpService:JSONDecode(ResponseBody.data)
 					
-					if not data.universeId then
-						name:warning("Invalid share link metadata: ", data)
+					if not Data.universeId then
+						NewResult:warning("Invalid share link metadata: ", Data)
 					end
-					var2(function(p5)
-						-- upvalues: p2 (copy), data (ref)
-						local cloned = table.clone(p5)
-						cloned[p2] = data
+					Signal2(function(Tbl) --[[ Line: 50 ]]
+						-- upvalues: LinkId (upval), Data (copy)
+						local Copy = table.clone(Tbl)
+						Copy[LinkId] = Data
 						
-						return cloned
+						return Copy
 					end)
 				end
-			end):catch(function(p4)
-				-- upvalues: name (copy)
-				name:warning("Error fetching share link metadata: ", p4)
+			end):catch(function(Err) --[[ Line: 57 ]]
+				-- upvalues: NewResult (upval)
+				NewResult:warning("Error fetching share link metadata: ", Err)
 			end)
 		end
 	}

@@ -1,52 +1,52 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local parent = momentsCreation.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local iconButton = foundationModule.IconButton
-local text = foundationModule.Text
-local view = foundationModule.View
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local iconName = foundationModule.Enums.IconName
-local iconVariant = foundationModule.Enums.IconVariant
-local inputSize = foundationModule.Enums.InputSize
-local textFeedbackReasonDialogModule = require(momentsCreation.Components.Dialogs.TextFeedbackReasonDialog)
-local getFFlagMomentsGeneratedTextDisclosureWrapModule = require(momentsCreation.Flags.GetFFlagMomentsGeneratedTextDisclosureWrap)
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local Parent = MomentsCreation.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local IconButton = FoundationModule.IconButton
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local IconName = FoundationModule.Enums.IconName
+local IconVariant = FoundationModule.Enums.IconVariant
+local InputSize = FoundationModule.Enums.InputSize
+local TextFeedbackReasonDialogModule = require(MomentsCreation.Components.Dialogs.TextFeedbackReasonDialog)
+local GetFFlagMomentsGeneratedTextDisclosureWrapModule = require(MomentsCreation.Flags.GetFFlagMomentsGeneratedTextDisclosureWrap)
 
-return function(p1)
-	-- upvalues: getFFlagMomentsGeneratedTextDisclosureWrapModule (ref), reactModule (ref), view (ref), text (ref), iconButton (ref), iconName (ref), iconVariant (ref), inputSize (ref), buttonVariant (ref), textFeedbackReasonDialogModule (ref)
-	return if p1.visible then reactModule.createElement(reactModule.Fragment, nil, {
-		Feedback = reactModule.createElement(view, {
+return function(p1) --[[ Line: 40 | Named "GeneratedTextFeedbackView" ]]
+	-- upvalues: GetFFlagMomentsGeneratedTextDisclosureWrapModule (copy), ReactModule (copy), View (copy), Text (copy), IconButton (copy), IconName (copy), IconVariant (copy), InputSize (copy), ButtonVariant (copy), TextFeedbackReasonDialogModule (copy)
+	return if p1.visible then ReactModule.createElement(ReactModule.Fragment, nil, {
+		Feedback = ReactModule.createElement(View, {
 			tag = "col align-x-center gap-small size-full-0 auto-y",
 			LayoutOrder = p1.layoutOrder
 		}, {
-			Disclosure = reactModule.createElement(text, {
+			Disclosure = ReactModule.createElement(Text, {
 				LayoutOrder = 1,
-				tag = if getFFlagMomentsGeneratedTextDisclosureWrapModule then "size-full-0 auto-y text-body-small text-wrap text-align-x-center text-align-y-top content-neutral" else "size-full-0 auto-y text-body-small text-align-x-center text-align-y-top content-neutral",
+				tag = if GetFFlagMomentsGeneratedTextDisclosureWrapModule then "size-full-0 auto-y text-body-small text-wrap text-align-x-center text-align-y-top content-neutral" else "size-full-0 auto-y text-body-small text-align-x-center text-align-y-top content-neutral",
 				Text = p1.disclosureText
 			}),
-			Icons = reactModule.createElement(view, {
+			Icons = ReactModule.createElement(View, {
 				LayoutOrder = 2,
 				tag = "row align-x-center align-y-center gap-small auto-xy"
 			}, {
-				ThumbsUp = reactModule.createElement(iconButton, {
+				ThumbsUp = ReactModule.createElement(IconButton, {
 					LayoutOrder = 1,
 					testId = "generated-text-feedback-thumbs-up",
-					icon = if p1.selectedAction == "thumbs_up" then { name = iconName.ThumbUp, variant = iconVariant.Filled } else iconName.ThumbUp,
+					icon = if p1.selectedAction == "thumbs_up" then { name = IconName.ThumbUp, variant = IconVariant.Filled } else IconName.ThumbUp,
 					onActivated = p1.onThumbsUp,
-					size = inputSize.Small,
-					variant = buttonVariant.Utility
+					size = InputSize.Small,
+					variant = ButtonVariant.Utility
 				}),
-				ThumbsDown = reactModule.createElement(iconButton, {
+				ThumbsDown = ReactModule.createElement(IconButton, {
 					LayoutOrder = 2,
 					testId = "generated-text-feedback-thumbs-down",
-					icon = if p1.selectedAction == "thumbs_down" then { name = iconName.ThumbDown, variant = iconVariant.Filled } else iconName.ThumbDown,
+					icon = if p1.selectedAction == "thumbs_down" then { name = IconName.ThumbDown, variant = IconVariant.Filled } else IconName.ThumbDown,
 					onActivated = p1.onThumbsDown,
-					size = inputSize.Small,
-					variant = buttonVariant.Utility
+					size = InputSize.Small,
+					variant = ButtonVariant.Utility
 				})
 			})
 		}),
-		ReasonDialog = if p1.showReasonDialog then reactModule.createElement(textFeedbackReasonDialogModule, {
+		ReasonDialog = if p1.showReasonDialog then ReactModule.createElement(TextFeedbackReasonDialogModule, {
 			onNotHelpful = p1.onNotHelpful,
 			onPolicyViolation = p1.onPolicyViolation,
 			onDismiss = p1.onDismissDialog

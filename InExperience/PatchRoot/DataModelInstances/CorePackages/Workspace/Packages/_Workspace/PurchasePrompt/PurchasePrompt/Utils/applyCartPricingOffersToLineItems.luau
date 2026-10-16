@@ -1,46 +1,46 @@
-﻿local purchasePrompt = script:FindFirstAncestor("PurchasePrompt")
-local _ = require(purchasePrompt.Parent.IAPExperience)
-local _ = require(purchasePrompt.types)
+﻿local PurchasePrompt = script:FindFirstAncestor("PurchasePrompt")
+local _ = require(PurchasePrompt.Parent.IAPExperience)
+local _ = require(PurchasePrompt.types)
 
-return function(p1, p2, p3)
+return function(List, p1, List1) --[[ Line: 18 | Named "applyCartPricingOffersToLineItems" ]]
 	local t = {}
 	
-	for i, v in p3 do
-		t[v] = true
+	for _, value in List1 do
+		t[value] = true
 	end
-	local t_1 = {}
-	
-	for i_1, v_1 in p2.items or {} do
-		local discountInformation = v_1.discountInformation
-		local t_2 = {}
-		
-		for i_2, v_2 in if discountInformation then discountInformation.discounts else {} do
-			local discountId = v_2.discountId
+	local t1 = {}
+	local Items = p1.items or {}
+	for _, item in Items do
+		local DiscountInformation = item.discountInformation
+		local OfferIds = {}
+		local Discounts = DiscountInformation and DiscountInformation.discounts or {}
+		for _, discount in Discounts do
+			local DiscountId = discount.discountId
 			
-			if discountId ~= nil and t[discountId] then
-				table.insert(t_2, discountId)
+			if DiscountId ~= nil and t[DiscountId] then
+				table.insert(OfferIds, DiscountId)
 			end
 		end
-		if #t_2 > 0 then
-			t_1[v_1.collectibleItemId] = { offerIds = t_2, priceInRobux = v_1.priceInRobux }
+		if #OfferIds > 0 then
+			t1[item.collectibleItemId] = { offerIds = OfferIds, priceInRobux = item.priceInRobux }
 		end
 	end
-	local t_2 = {}
+	local List2 = {}
 	
-	for i_2, v_2 in p1 do
-		local collectibleItemId = t_1[v_2.collectibleItemId]
+	for _, value1 in List do
+		local Entry = t1[value1.collectibleItemId]
 		
-		if collectibleItemId == nil then
-			table.insert(t_2, v_2)
+		if Entry == nil then
+			table.insert(List2, value1)
 		else
-			local cloned = table.clone(v_2)
-			cloned.offerIds = collectibleItemId.offerIds
+			local Copy = table.clone(value1)
+			Copy.offerIds = Entry.offerIds
 			
-			if collectibleItemId.priceInRobux ~= nil then
-				cloned.agreedPriceRobux = collectibleItemId.priceInRobux
+			if Entry.priceInRobux ~= nil then
+				Copy.agreedPriceRobux = Entry.priceInRobux
 			end
-			table.insert(t_2, cloned)
+			table.insert(List2, Copy)
 		end
 	end
-	return t_2
+	return List2
 end

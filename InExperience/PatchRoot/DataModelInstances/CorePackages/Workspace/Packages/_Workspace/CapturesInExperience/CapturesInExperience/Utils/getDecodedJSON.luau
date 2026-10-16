@@ -1,18 +1,19 @@
-﻿local httpService = game:GetService("HttpService")
+﻿local HttpService = game:GetService("HttpService")
 
-return function(p1)
-	-- upvalues: httpService (ref)
-	local ok, status = pcall(function()
-		-- upvalues: httpService (copy), p1 (ref)
-		return httpService:JSONDecode(p1)
+return function(Text) --[[ Line: 3 | Named "getDecodedJSON" ]]
+	-- upvalues: HttpService (copy)
+	local Success, Result = pcall(function() --[[ Line: 4 ]]
+		-- upvalues: HttpService (upval), Text (copy)
+		return HttpService:JSONDecode(Text)
 	end)
 	
-	if ok then
-		return status
+	if Success then
+		return Result
 	elseif _G.__TEST_SUITE_PACKAGE__ or _G.__TESTEZ_RUNNING_TEST__ then
 		return nil
+	else
+		warn(debug.traceback("Failed to decode JSON: " .. Text))
+		
+		return nil
 	end
-	warn(debug.traceback("Failed to decode JSON: " .. p0))
-	
-	return nil
 end

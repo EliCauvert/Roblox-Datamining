@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.DiscoveryRouting.DiscoveryRouting)
+﻿return (require(script.Parent.Parent.Parent._Index.DiscoveryRouting.DiscoveryRouting))

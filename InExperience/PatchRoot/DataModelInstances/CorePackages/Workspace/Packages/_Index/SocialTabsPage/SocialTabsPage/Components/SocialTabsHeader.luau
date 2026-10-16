@@ -1,38 +1,39 @@
-﻿local socialTabsPage = script:FindFirstAncestor("SocialTabsPage")
-local parent = socialTabsPage.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useNavigation = require(parent.Navigation).useNavigation
-local useSocialTabsContextModule = require(socialTabsPage.Contexts.useSocialTabsContext)
-local view = foundationModule.View
-local text = foundationModule.Text
-local iconButton = foundationModule.IconButton
-local iconName = foundationModule.Enums.IconName
-local iconSize = foundationModule.Enums.IconSize
-local buttonVariant = foundationModule.Enums.ButtonVariant
+﻿local SocialTabsPage = script:FindFirstAncestor("SocialTabsPage")
+local Parent = SocialTabsPage.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local UseSocialTabsContextModule = require(SocialTabsPage.Contexts.useSocialTabsContext)
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local IconButton = FoundationModule.IconButton
+local IconName = FoundationModule.Enums.IconName
+local IconSize = FoundationModule.Enums.IconSize
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
 
-return function(value)
-	-- upvalues: useSocialTabsContextModule (ref), useNavigation (ref), reactModule (ref), view (ref), iconButton (ref), iconName (ref), iconSize (ref), buttonVariant (ref), text (ref)
-	local var1 = useNavigation()
+return function(p1) --[[ Line: 20 | Named "SocialTabsHeader" ]]
+	-- upvalues: UseSocialTabsContextModule (copy), UseNavigationFunction (copy), ReactModule (copy), View (copy), IconButton (copy), IconName (copy), IconSize (copy), ButtonVariant (copy), Text (copy)
+	local UseSocialTabsContextModuleResult = UseSocialTabsContextModule()
+	local UseNavigationResult = UseNavigationFunction()
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "row align-y-center gap-small size-full-0 auto-y padding-x-xlarge bg-surface-0",
-		LayoutOrder = value.layoutOrder
+		LayoutOrder = p1.layoutOrder
 	}, {
-		BackButton = reactModule.createElement(iconButton, {
+		BackButton = ReactModule.createElement(IconButton, {
 			LayoutOrder = 1,
-			icon = iconName.ChevronLargeLeft,
-			size = iconSize.Medium,
-			variant = buttonVariant.Utility,
-			onActivated = reactModule.useCallback(function()
-				-- upvalues: var1 (ref)
-				var1.goBack()
-			end, { var1 })
+			icon = IconName.ChevronLargeLeft,
+			size = IconSize.Medium,
+			variant = ButtonVariant.Utility,
+			onActivated = ReactModule.useCallback(function() --[[ Line: 24 ]]
+				-- upvalues: UseNavigationResult (copy)
+				UseNavigationResult.goBack()
+			end, { UseNavigationResult })
 		}),
-		Title = reactModule.createElement(text, {
+		Title = ReactModule.createElement(Text, {
 			tag = "fill auto-y text-heading-medium text-align-x-left text-truncate-end content-emphasis",
 			LayoutOrder = 2,
-			Text = useSocialTabsContextModule().title or ""
+			Text = UseSocialTabsContextModuleResult.title or ""
 		})
 	})
 end

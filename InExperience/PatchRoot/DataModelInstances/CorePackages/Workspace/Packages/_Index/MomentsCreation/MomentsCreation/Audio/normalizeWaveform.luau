@@ -1,19 +1,19 @@
-﻿return function(p1)
-	local var1 = 0
-	local t = {}
+﻿return function(List) --[[ Line: 8 | Named "normalizeWaveform" ]]
+	local Largest = 0
+	local List1 = {}
 	
-	for i, v in p1 do
-		local absValue = math.abs(v)
-		table.insert(t, absValue)
-		var1 = math.max(var1, absValue)
+	for _, value in List do
+		local Magnitude = math.abs(value)
+		table.insert(List1, Magnitude)
+		Largest = math.max(Largest, Magnitude)
 	end
-	if var1 == 0 then
-		return t
+	if Largest == 0 then
+		return List1
 	end
-	local t_1 = {}
+	local List2 = {}
 	
-	for i_1, v_1 in t do
-		table.insert(t_1, v_1 / var1)
+	for _, value1 in List1 do
+		table.insert(List2, value1 / Largest)
 	end
-	return t_1
+	return List2
 end

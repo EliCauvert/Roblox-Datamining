@@ -1,22 +1,22 @@
-﻿local localizationService = game:GetService("LocalizationService")
-local playersService = game:GetService("Players")
-local var1 = false
-task.spawn(function()
-	-- upvalues: playersService (ref), localizationService (ref), var1 (write)
-	local localPlayer = playersService.LocalPlayer
-	while not localPlayer do
-		playersService:GetPropertyChangedSignal("LocalPlayer"):Wait()
-		localPlayer = playersService.LocalPlayer
+﻿local LocalizationService = game:GetService("LocalizationService")
+local Players = game:GetService("Players")
+local Flag = false
+task.spawn(function() --[[ Line: 12 ]]
+	-- upvalues: Players (copy), LocalizationService (copy), Flag (ref)
+	local LocalPlayer = Players.LocalPlayer
+	while not LocalPlayer do
+		Players:GetPropertyChangedSignal("LocalPlayer"):Wait()
+		LocalPlayer = Players.LocalPlayer
 	end
-	local ok, status = pcall(localizationService.GetCountryRegionForPlayerAsync, localizationService, localPlayer)
+	local Success, Result = pcall(LocalizationService.GetCountryRegionForPlayerAsync, LocalizationService, LocalPlayer)
 	
-	if not ok then return end
-	if status == "GB" then
-		var1 = true
+	if not Success then return end
+	if Result == "GB" then
+		Flag = true
 	end
 end)
 
-return function()
-	-- upvalues: var1 (write)
-	return var1
+return function() --[[ Line: 31 | Named "isShowUKOSAIllegalContentReportingLink" ]]
+	-- upvalues: Flag (ref)
+	return Flag
 end

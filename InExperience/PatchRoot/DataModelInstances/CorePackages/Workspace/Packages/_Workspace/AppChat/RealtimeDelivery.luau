@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.RealtimeDelivery.RealtimeDelivery)
+﻿return (require(script.Parent.Parent.Parent._Index.RealtimeDelivery.RealtimeDelivery))

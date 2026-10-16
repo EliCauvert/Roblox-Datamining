@@ -1,67 +1,67 @@
-﻿local mediaGallery = script:FindFirstAncestor("MediaGallery")
-local parent = mediaGallery.Parent
-local reactModule = require(parent.React)
-local reactRobloxModule = require(parent.ReactRoblox)
-local roduxModule = require(parent.Dev.Rodux)
-local roactRoduxModule = require(parent.Dev.RoactRodux)
-local roactNavigationModule = require(parent.Dev.RoactNavigation)
-local UIBloxModule = require(parent.UIBlox)
-UIBloxModule.init(require(parent.Dev.RobloxAppUIBloxConfig))
-local appStyleProvider = UIBloxModule.App.Style.AppStyleProvider
-local foundationModule = require(parent.Foundation)
-local foundationProvider = foundationModule.FoundationProvider
-local colorMode = foundationModule.Enums.ColorMode
-local device = foundationModule.Enums.Device
-local t = { Light = colorMode.Light, Dark = colorMode.Dark }
-local var1 = roduxModule.Store.new(function(p1)
+﻿local MediaGallery = script:FindFirstAncestor("MediaGallery")
+local Parent = MediaGallery.Parent
+local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.ReactRoblox)
+local RoduxModule = require(Parent.Dev.Rodux)
+local RoactRoduxModule = require(Parent.Dev.RoactRodux)
+local RoactNavigationModule = require(Parent.Dev.RoactNavigation)
+local UIBloxModule = require(Parent.UIBlox)
+UIBloxModule.init(require(Parent.Dev.RobloxAppUIBloxConfig))
+local AppStyleProvider = UIBloxModule.App.Style.AppStyleProvider
+local FoundationModule = require(Parent.Foundation)
+local FoundationProvider = FoundationModule.FoundationProvider
+local ColorMode = FoundationModule.Enums.ColorMode
+local Device = FoundationModule.Enums.Device
+local config = { Light = ColorMode.Light, Dark = ColorMode.Dark }
+local NewResult = RoduxModule.Store.new(function(p1) --[[ Line: 23 ]]
 	return p1
 end, {
 	ScreenSize = Vector2.new(1920, 1080),
 	TopBar = { topBarHeight = 0 },
 	GlobalGuiInset = { bottom = 0, left = 0, right = 0, top = 0 }
 }, {})
-local t_1 = {
-	isFocused = function()
+local config1 = {
+	isFocused = function(): boolean --[[ Line: 32 ]]
 		return true
 	end,
-	addListener = function(_, _, _)
-		return { remove = function() end }
+	addListener = function(_, _, _) --[[ Line: 35 ]]
+		return { remove = function() --[[ Line: 36 ]] end }
 	end
 }
 
 return {
-	name = mediaGallery.Name,
-	roact = reactModule,
-	reactRoblox = reactRobloxModule,
-	mapStory = function(p1)
-		-- upvalues: reactModule (ref), roactRoduxModule (ref), var1 (ref), roactNavigationModule (ref), t_1 (ref), foundationProvider (ref), t (ref), device (ref), appStyleProvider (ref)
-		return function(p2)
-			-- upvalues: reactModule (copy), roactRoduxModule (copy), var1 (copy), roactNavigationModule (copy), t_1 (copy), foundationProvider (copy), t (copy), device (copy), appStyleProvider (copy), p1 (ref)
-			return reactModule.createElement("Frame", {
+	name = MediaGallery.Name,
+	roact = ReactModule,
+	reactRoblox = ReactRobloxModule,
+	mapStory = function(p1) --[[ Line: 40 ]]
+		-- upvalues: ReactModule (copy), RoactRoduxModule (copy), NewResult (copy), RoactNavigationModule (copy), config1 (copy), FoundationProvider (copy), config (copy), Device (copy), AppStyleProvider (copy)
+		return function(p2) --[[ Line: 41 ]]
+			-- upvalues: ReactModule (upval), RoactRoduxModule (upval), NewResult (upval), RoactNavigationModule (upval), config1 (upval), FoundationProvider (upval), config (upval), Device (upval), AppStyleProvider (upval), p1 (copy)
+			return ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				AutomaticSize = Enum.AutomaticSize.Y,
 				Size = UDim2.fromScale(1, 0)
 			}, {
-				UIPadding = reactModule.createElement("UIPadding", {
+				UIPadding = ReactModule.createElement("UIPadding", {
 					PaddingTop = UDim.new(0, 10),
 					PaddingBottom = UDim.new(0, 10),
 					PaddingLeft = UDim.new(0, 10),
 					PaddingRight = UDim.new(0, 10)
 				}),
-				StoreProvider = reactModule.createElement(roactRoduxModule.StoreProvider, { store = var1 }, {
-					NavigationContext = reactModule.createElement(roactNavigationModule.Context.Provider, { value = t_1 }, {
-						FoundationContext = reactModule.createElement(foundationProvider, {
-							colorMode = t[p2.theme],
-							device = device[p2.platform],
+				StoreProvider = ReactModule.createElement(RoactRoduxModule.StoreProvider, { store = NewResult }, {
+					NavigationContext = ReactModule.createElement(RoactNavigationModule.Context.Provider, { value = config1 }, {
+						FoundationContext = ReactModule.createElement(FoundationProvider, {
+							colorMode = config[p2.theme],
+							device = Device[p2.platform],
 							preferences = p2.settings,
 							scale = p2.settings and p2.settings.scale
 						}, {
-							StyleProvider = reactModule.createElement(appStyleProvider, { style = { themeName = "Dark", fontName = "Gotham" } }, { Child = reactModule.createElement(p1, p2) })
+							StyleProvider = ReactModule.createElement(AppStyleProvider, { style = { themeName = "Dark", fontName = "Gotham" } }, { Child = ReactModule.createElement(p1, p2) })
 						})
 					})
 				})
 			})
 		end
 	end,
-	storyRoots = { mediaGallery }
+	storyRoots = { MediaGallery }
 }

@@ -1,29 +1,29 @@
-﻿local avatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
-local _ = require(avatarExperienceInspectAndBuy.Types)
-local _ = require(avatarExperienceInspectAndBuy.Parent.AvatarExperienceRodux)
-local buildItemDataFromAXRoduxModule = require(avatarExperienceInspectAndBuy.Utils.buildItemDataFromAXRodux)
+﻿local AvatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
+local _ = require(AvatarExperienceInspectAndBuy.Types)
+local _ = require(AvatarExperienceInspectAndBuy.Parent.AvatarExperienceRodux)
+local BuildItemDataFromAXRoduxModule = require(AvatarExperienceInspectAndBuy.Utils.buildItemDataFromAXRodux)
 
-return function(p1, p2)
-	-- upvalues: buildItemDataFromAXRoduxModule (ref)
-	local t = {}
+return function(p1, List) --[[ Line: 15 | Named "selectItemDataForTryOnItems" ]]
+	-- upvalues: BuildItemDataFromAXRoduxModule (copy)
+	local List1 = {}
 	
-	if not p1 or not p2 then
-		return t
+	if not p1 or not List then
+		return List1
 	end
-	for i, v in p2 do
-		local var1 = buildItemDataFromAXRoduxModule(p1, v.itemId, v.itemType)
+	for _, value in List do
+		local ItemDataFromAXRoduxModule = BuildItemDataFromAXRoduxModule(p1, value.itemId, value.itemType)
 		
-		if var1 then
-			table.insert(t, {
-				itemData = var1,
-				isEquipped = v.selectedInTryOnManager == true,
-				ordering = v.itemRecency or 0
+		if ItemDataFromAXRoduxModule then
+			table.insert(List1, {
+				itemData = ItemDataFromAXRoduxModule,
+				isEquipped = value.selectedInTryOnManager == true,
+				ordering = value.itemRecency or 0
 			})
 		end
 	end
-	table.sort(t, function(p3, p4)
-		return if p3.ordering == p4.ordering then if p3.itemData.id == p4.itemData.id then tostring(p3.itemData.itemType) < tostring(p4.itemData.itemType) else tostring(p3.itemData.id) < tostring(p4.itemData.id) else p3.ordering < p4.ordering
+	table.sort(List1, function(A, B): boolean --[[ Line: 34 ]]
+		return if A.ordering == B.ordering then if A.itemData.id == B.itemData.id then tostring(A.itemData.itemType) < tostring(B.itemData.itemType) else tostring(A.itemData.id) < tostring(B.itemData.id) else A.ordering < B.ordering
 	end)
 	
-	return t
+	return List1
 end

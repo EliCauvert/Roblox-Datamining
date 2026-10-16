@@ -1,85 +1,86 @@
-﻿local guiService = game:GetService("GuiService")
-local socialTabsPage = script:FindFirstAncestor("SocialTabsPage")
-local parent = socialTabsPage.Parent
-local reactModule = require(parent.React)
-local roactUtilsModule = require(parent.RoactUtils)
-local robloxAppHooksModule = require(parent.RobloxAppHooks)
-local socialCommonModule = require(parent.SocialCommon)
-local localizationModule = require(parent.Localization)
-local friendsNetworkingModule = require(parent.FriendsNetworking)
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local useLocalUserId = robloxAppHooksModule.useLocalUserId
-local useLocalization = localizationModule.Hooks.useLocalization
-local enteredChatFromEntryPointModule = require(parent.AppChat.EnteredChatFromEntryPoint)
-local chatEntryPointNames = socialCommonModule.Enums.ChatEntryPointNames
-local friendshipOriginSourceType = friendsNetworkingModule.Enums.FriendshipOriginSourceType
-local buttonTypes = require(parent.UserList).Enums.ButtonTypes
-local textKeysModule = require(socialTabsPage.Common.TextKeys)
-local _ = require(socialTabsPage.Common.Types)
-local friendingActionsModule = require(socialTabsPage.Utils.friendingActions)
-local notificationTypeList = guiService:GetNotificationTypeList()
+﻿local GuiService = game:GetService("GuiService")
+local SocialTabsPage = script:FindFirstAncestor("SocialTabsPage")
+local Parent = SocialTabsPage.Parent
+local ReactModule = require(Parent.React)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local EnteredChatFromEntryPointModule = require(Parent.AppChat.EnteredChatFromEntryPoint)
+local ChatEntryPointNames = require(Parent.SocialCommon).Enums.ChatEntryPointNames
+local FriendshipOriginSourceType = require(Parent.FriendsNetworking).Enums.FriendshipOriginSourceType
+local ButtonTypes = require(Parent.UserList).Enums.ButtonTypes
+local TextKeysModule = require(SocialTabsPage.Common.TextKeys)
+local _ = require(SocialTabsPage.Common.Types)
+local FriendingActionsModule = require(SocialTabsPage.Utils.friendingActions)
+local NotificationTypeList = GuiService:GetNotificationTypeList()
 
-return function()
-	-- upvalues: useDispatch (ref), useLocalUserId (ref), reactModule (ref), useLocalization (ref), textKeysModule (ref), buttonTypes (ref), enteredChatFromEntryPointModule (ref), chatEntryPointNames (ref), guiService (ref), notificationTypeList (ref), friendingActionsModule (ref), friendshipOriginSourceType (ref)
-	local var1 = useDispatch()
-	local var2 = useLocalUserId()
-	local var3 = reactModule.useRef({})
-	local var4 = useLocalization({
-		friendRequestSent = textKeysModule.FriendRequestSent,
-		friendAdded = textKeysModule.FriendAdded,
-		invalidTargetUserError = textKeysModule.InvalidTargetUserError,
-		alreadyFriendError = textKeysModule.AlreadyFriendError,
-		maxFriendsError = textKeysModule.MaxFriendsError,
-		invalidNicknameError = textKeysModule.InvalidNicknameError,
-		unauthorizedError = textKeysModule.UnauthorizedError,
-		userBannedError = textKeysModule.UserBannedError,
-		userBlockedError = textKeysModule.UserBlockedError,
-		userNotPassedCaptchaError = textKeysModule.UserNotPassedCaptchaError,
-		tooManyRequestsError = textKeysModule.TooManyRequestsError,
-		defaultFriendingError = textKeysModule.DefaultFriendingError
+return function() --[[ Line: 31 | Named "useCTAActionHandlers" ]]
+	-- upvalues: UseDispatchFunction (copy), UseLocalUserIdFunction (copy), ReactModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ButtonTypes (copy), EnteredChatFromEntryPointModule (copy), ChatEntryPointNames (copy), GuiService (copy), NotificationTypeList (copy), FriendingActionsModule (copy), FriendshipOriginSourceType (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseLocalUserIdResult = UseLocalUserIdFunction()
+	local UseRefResult = ReactModule.useRef({})
+	local UseLocalizationResult = UseLocalizationFunction({
+		friendRequestSent = TextKeysModule.FriendRequestSent,
+		friendAdded = TextKeysModule.FriendAdded,
+		invalidTargetUserError = TextKeysModule.InvalidTargetUserError,
+		alreadyFriendError = TextKeysModule.AlreadyFriendError,
+		maxFriendsError = TextKeysModule.MaxFriendsError,
+		invalidNicknameError = TextKeysModule.InvalidNicknameError,
+		unauthorizedError = TextKeysModule.UnauthorizedError,
+		userBannedError = TextKeysModule.UserBannedError,
+		userBlockedError = TextKeysModule.UserBlockedError,
+		userNotPassedCaptchaError = TextKeysModule.UserNotPassedCaptchaError,
+		tooManyRequestsError = TextKeysModule.TooManyRequestsError,
+		defaultFriendingError = TextKeysModule.DefaultFriendingError
 	})
 	
-	return reactModule.useMemo(function()
-		-- upvalues: buttonTypes (copy), var1 (ref), enteredChatFromEntryPointModule (copy), chatEntryPointNames (copy), guiService (copy), notificationTypeList (copy), var3 (ref), friendingActionsModule (copy), var2 (ref), friendshipOriginSourceType (copy), var4 (ref)
+	return ReactModule.useMemo(function() --[[ Line: 51 ]]
+		-- upvalues: ButtonTypes (upval), UseDispatchResult (copy), EnteredChatFromEntryPointModule (upval), ChatEntryPointNames (upval), GuiService (upval), NotificationTypeList (upval), UseRefResult (copy), FriendingActionsModule (upval), UseLocalUserIdResult (copy), FriendshipOriginSourceType (upval), UseLocalizationResult (copy)
 		return {
-			[buttonTypes.Chat] = function(p1)
-				-- upvalues: var1 (copy), enteredChatFromEntryPointModule (copy), chatEntryPointNames (copy), guiService (copy), notificationTypeList (copy)
-				var1(enteredChatFromEntryPointModule(chatEntryPointNames.SocialTab))
-				guiService:BroadcastNotification(p1, notificationTypeList.LAUNCH_CONVERSATION)
+			[ButtonTypes.Chat] = function(Data) --[[ Line: 53 ]]
+				-- upvalues: UseDispatchResult (upval), EnteredChatFromEntryPointModule (upval), ChatEntryPointNames (upval), GuiService (upval), NotificationTypeList (upval)
+				UseDispatchResult(EnteredChatFromEntryPointModule(ChatEntryPointNames.SocialTab))
+				GuiService:BroadcastNotification(Data, NotificationTypeList.LAUNCH_CONVERSATION)
 			end,
-			[buttonTypes.Add] = function(p1)
-				-- upvalues: var3 (copy), friendingActionsModule (copy), var1 (copy), var2 (copy), friendshipOriginSourceType (copy), var4 (copy)
-				if var3.current[p1] then
+			[ButtonTypes.Add] = function(TargetUserId) --[[ Line: 58 ]]
+				-- upvalues: UseRefResult (upval), FriendingActionsModule (upval), UseDispatchResult (upval), UseLocalUserIdResult (upval), FriendshipOriginSourceType (upval), UseLocalizationResult (upval)
+				if not UseRefResult.current[TargetUserId] then
+					UseRefResult.current[TargetUserId] = true
+					FriendingActionsModule.executeAddFriend({
+						dispatch = UseDispatchResult,
+						currentUserId = UseLocalUserIdResult,
+						targetUserId = TargetUserId,
+						friendshipOriginSourceType = FriendshipOriginSourceType.UserProfile.rawValue(),
+						localized = UseLocalizationResult
+					}):finally(function() --[[ Line: 71 ]]
+						-- upvalues: UseRefResult (upval), TargetUserId (copy)
+						UseRefResult.current[TargetUserId] = nil
+					end)
+					
 					return
 				end
-				var3.current[p1] = true
-				friendingActionsModule.executeAddFriend({
-					dispatch = var1,
-					currentUserId = var2,
-					targetUserId = p1,
-					friendshipOriginSourceType = friendshipOriginSourceType.UserProfile.rawValue(),
-					localized = var4
-				}):finally(function()
-					-- upvalues: var3 (copy), p1 (ref)
-					var3.current[p1] = nil
-				end)
 			end,
-			[buttonTypes.Accept] = function(p1)
-				-- upvalues: var3 (copy), friendingActionsModule (copy), var1 (copy), var2 (copy), var4 (copy)
-				if var3.current[p1] then
+			[ButtonTypes.Accept] = function(TargetUserId) --[[ Line: 76 ]]
+				-- upvalues: UseRefResult (upval), FriendingActionsModule (upval), UseDispatchResult (upval), UseLocalUserIdResult (upval), UseLocalizationResult (upval)
+				if not UseRefResult.current[TargetUserId] then
+					UseRefResult.current[TargetUserId] = true
+					FriendingActionsModule.executeAcceptFriendRequest({
+						dispatch = UseDispatchResult,
+						currentUserId = UseLocalUserIdResult,
+						targetUserId = TargetUserId,
+						localized = UseLocalizationResult
+					}):finally(function() --[[ Line: 88 ]]
+						-- upvalues: UseRefResult (upval), TargetUserId (copy)
+						UseRefResult.current[TargetUserId] = nil
+					end)
+					
 					return
 				end
-				var3.current[p1] = true
-				friendingActionsModule.executeAcceptFriendRequest({
-					dispatch = var1,
-					currentUserId = var2,
-					targetUserId = p1,
-					localized = var4
-				}):finally(function()
-					-- upvalues: var3 (copy), p1 (ref)
-					var3.current[p1] = nil
-				end)
 			end
 		}
-	end, { var1, var2, var4 })
+	end, {
+		UseDispatchResult,
+		UseLocalUserIdResult,
+		UseLocalizationResult
+	})
 end

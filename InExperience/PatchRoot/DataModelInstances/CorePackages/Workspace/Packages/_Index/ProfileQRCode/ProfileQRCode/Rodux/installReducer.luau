@@ -1,15 +1,15 @@
-﻿local profileQRCode = script:FindFirstAncestor("ProfileQRCode")
-local roduxModule = require(profileQRCode.Parent.Rodux)
-local configuredUsersModule = require(script.Parent.configuredUsers)
-local configuredRoduxNetworkingModule = require(profileQRCode.Networking.configuredRoduxNetworking)
-local shareUrlReducerModule = require(script.Parent.ShareUrlReducer)
-local fFlagProfileQrCodeDeprecateUserReduxModule = require(profileQRCode.Flags.FFlagProfileQrCodeDeprecateUserRedux)
+﻿local ProfileQRCode = script:FindFirstAncestor("ProfileQRCode")
+local RoduxModule = require(ProfileQRCode.Parent.Rodux)
+local ConfiguredUsersModule = require(script.Parent.configuredUsers)
+local ConfiguredRoduxNetworkingModule = require(ProfileQRCode.Networking.configuredRoduxNetworking)
+local ShareUrlReducerModule = require(script.Parent.ShareUrlReducer)
+local FFlagProfileQrCodeDeprecateUserReduxModule = require(ProfileQRCode.Flags.FFlagProfileQrCodeDeprecateUserRedux)
 
-return function()
-	-- upvalues: roduxModule (ref), fFlagProfileQrCodeDeprecateUserReduxModule (ref), configuredUsersModule (ref), configuredRoduxNetworkingModule (ref), shareUrlReducerModule (ref)
-	return roduxModule.combineReducers({
-		Users = if fFlagProfileQrCodeDeprecateUserReduxModule then nil else configuredUsersModule(),
-		NetworkStatus = configuredRoduxNetworkingModule.installReducer(),
-		ShareUrl = shareUrlReducerModule
+return function() --[[ Line: 16 ]]
+	-- upvalues: RoduxModule (copy), FFlagProfileQrCodeDeprecateUserReduxModule (copy), ConfiguredUsersModule (copy), ConfiguredRoduxNetworkingModule (copy), ShareUrlReducerModule (copy)
+	return RoduxModule.combineReducers({
+		Users = if FFlagProfileQrCodeDeprecateUserReduxModule then nil else ConfiguredUsersModule(),
+		NetworkStatus = ConfiguredRoduxNetworkingModule.installReducer(),
+		ShareUrl = ShareUrlReducerModule
 	})
 end

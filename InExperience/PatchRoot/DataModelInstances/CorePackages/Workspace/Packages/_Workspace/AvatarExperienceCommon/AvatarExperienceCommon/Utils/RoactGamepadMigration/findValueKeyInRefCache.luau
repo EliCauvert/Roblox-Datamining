@@ -1,6 +1,6 @@
-﻿return function(p1, p2)
-	for i, v in p2 do
-		if v.current == p1 then
+﻿return function(Current, List) --[[ Line: 1 | Named "findValueKeyInRefCache" ]]
+	for i, value in List do
+		if value.current == Current then
 			return i
 		end
 	end

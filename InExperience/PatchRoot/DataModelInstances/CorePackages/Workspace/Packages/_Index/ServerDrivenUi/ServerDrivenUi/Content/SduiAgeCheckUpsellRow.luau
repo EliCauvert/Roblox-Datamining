@@ -1,24 +1,24 @@
 ﻿local IXPService = game:GetService("IXPService")
-local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local _ = require(parent.SduiCompat)
-local sduiContentRow = require(parent.SduiSharedContent).SduiContentRow
-local ageCheckUpsellDismissedData = require(parent.GameDetail).AgeCheckUpsellDismissedData
-local luaAppEdpFaeIxpEnabled = game:DefineFastFlag("LuaAppEdpFaeIxpEnabled", false)
-local luaAppEdpFaeIxpLayer = game:DefineFastString("LuaAppEdpFaeIxpLayer", "PlayerApp.GameDetailsPage.Exposure")
+local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local _ = require(Parent.SduiCompat)
+local SduiContentRow = require(Parent.SduiSharedContent).SduiContentRow
+local AgeCheckUpsellDismissedData = require(Parent.GameDetail).AgeCheckUpsellDismissedData
+local LuaAppEdpFaeIxpEnabled = game:DefineFastFlag("LuaAppEdpFaeIxpEnabled", false)
+local LuaAppEdpFaeIxpLayer = game:DefineFastString("LuaAppEdpFaeIxpLayer", "PlayerApp.GameDetailsPage.Exposure")
 
-return reactModule.memo(function(p1)
-	-- upvalues: signalsReactModule (ref), ageCheckUpsellDismissedData (ref), luaAppEdpFaeIxpEnabled (ref), reactModule (ref), IXPService (ref), luaAppEdpFaeIxpLayer (ref), sduiContentRow (ref)
-	local var1 = signalsReactModule.useSignalState(ageCheckUpsellDismissedData.getIsAgeCheckUpsellDismissed)
+return ReactModule.memo(function(p1) --[[ Line: 43 | Named "SduiAgeCheckUpsellRow" ]]
+	-- upvalues: SignalsReactModule (copy), AgeCheckUpsellDismissedData (copy), LuaAppEdpFaeIxpEnabled (copy), ReactModule (copy), IXPService (copy), LuaAppEdpFaeIxpLayer (copy), SduiContentRow (copy)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(AgeCheckUpsellDismissedData.getIsAgeCheckUpsellDismissed)
 	
-	if luaAppEdpFaeIxpEnabled then
-		reactModule.useEffect(function()
-			-- upvalues: var1 (ref), IXPService (copy), luaAppEdpFaeIxpLayer (copy)
-			if not var1 then
-				IXPService:LogFlagLinkedUserLayerExposure(luaAppEdpFaeIxpLayer)
+	if LuaAppEdpFaeIxpEnabled then
+		ReactModule.useEffect(function() --[[ Line: 47 ]]
+			-- upvalues: UseSignalStateResult (copy), IXPService (upval), LuaAppEdpFaeIxpLayer (upval)
+			if not UseSignalStateResult then
+				IXPService:LogFlagLinkedUserLayerExposure(LuaAppEdpFaeIxpLayer)
 			end
-		end, { var1 })
+		end, { UseSignalStateResult })
 	end
-	return if var1 then nil else reactModule.createElement(sduiContentRow, p1)
+	return if UseSignalStateResult then nil else ReactModule.createElement(SduiContentRow, p1)
 end)

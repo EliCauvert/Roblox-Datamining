@@ -1,5 +1,5 @@
-﻿local tabTypesModule = require(script.Parent.TabTypes)
-local getOtherDisplayNameInWhisperChannelModule = require(script.Parent.getOtherDisplayNameInWhisperChannel)
+﻿local TabTypesModule = require(script.Parent.TabTypes)
+local GetOtherDisplayNameInWhisperChannelModule = require(script.Parent.getOtherDisplayNameInWhisperChannel)
 
 return {
 	LocalizationKeys = {
@@ -9,23 +9,26 @@ return {
 		system = "CoreScripts.TextChat.ChannelTabs.System",
 		team = "CoreScripts.TextChat.ChannelTabs.Team"
 	},
-	getDisplayLabel = function(p1, p2, p3, p4, p5)
-		-- upvalues: getOtherDisplayNameInWhisperChannelModule (ref), tabTypesModule (ref)
-		if p1 == "TextChat" then
-			if string.find(p2, "RBXGeneral") then
-				return p5.yourServer
-			elseif string.find(p2, "RBXSystem") then
-				return p5.system
-			elseif string.find(p2, "^RBXTeam") then
-				return p5.team
-			elseif string.find(p2, "^RBXWhisper") and p3 and p4 then
-				return getOtherDisplayNameInWhisperChannelModule(p3, p4) or p2
+	getDisplayLabel = function(p1, Text: string, p2, p3, p4) --[[ Line: 23 ]]
+		-- upvalues: GetOtherDisplayNameInWhisperChannelModule (copy), TabTypesModule (copy)
+		if p1 ~= "TextChat" then
+			if p1 ~= "UniverseChat" then
+				if p1 == "FriendsChat" then
+					return p4.friends
+				end
+				TabTypesModule.unreachable(p1)
+			elseif string.find(Text, "RBXGlobal") then
+				return p4.moreServers
 			end
-		elseif p1 == "UniverseChat" then
-			return if string.find(p2, "RBXGlobal") then p5.moreServers else p2
-		elseif p1 == "FriendsChat" then
-			return p5.friends
+		elseif string.find(Text, "RBXGeneral") then
+			return p4.yourServer
+		elseif string.find(Text, "RBXSystem") then
+			return p4.system
+		elseif string.find(Text, "^RBXTeam") then
+			return p4.team
+		elseif string.find(Text, "^RBXWhisper") and p2 and p3 then
+			return GetOtherDisplayNameInWhisperChannelModule(p2, p3) or Text
 		end
-		tabTypesModule.unreachable(p1)
+		return Text
 	end
 }

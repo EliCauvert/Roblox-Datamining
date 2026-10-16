@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AddTimerToBulkPurchaseBuyButton", false)
+﻿return (game:DefineFastFlag("AddTimerToBulkPurchaseBuyButton", false))

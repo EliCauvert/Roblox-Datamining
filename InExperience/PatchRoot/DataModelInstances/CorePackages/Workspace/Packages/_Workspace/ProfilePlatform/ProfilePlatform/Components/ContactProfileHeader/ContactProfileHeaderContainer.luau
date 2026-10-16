@@ -1,16 +1,16 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local reactModule = require(profilePlatform.Parent.React)
-local enumsModule = require(profilePlatform.Common.Enums)
-local useProfileJsonComponentModule = require(profilePlatform.Hooks.useProfileJsonComponent)
-local contactProfileHeaderModule = require(profilePlatform.Components.ContactProfileHeader.ContactProfileHeader)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local ReactModule = require(ProfilePlatform.Parent.React)
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local UseProfileJsonComponentModule = require(ProfilePlatform.Hooks.useProfileJsonComponent)
+local ContactProfileHeaderModule = require(ProfilePlatform.Components.ContactProfileHeader.ContactProfileHeader)
 
-return function(p1)
-	-- upvalues: useProfileJsonComponentModule (ref), enumsModule (ref), reactModule (ref), contactProfileHeaderModule (ref)
-	local var1 = useProfileJsonComponentModule(enumsModule.Components.ContactProfileHeader)
+return function(p1) --[[ Line: 18 | Named "ContactProfileHeaderContainer" ]]
+	-- upvalues: UseProfileJsonComponentModule (copy), EnumsModule (copy), ReactModule (copy), ContactProfileHeaderModule (copy)
+	local UseProfileJsonComponentModuleResult = UseProfileJsonComponentModule(EnumsModule.Components.ContactProfileHeader)
 	
-	return reactModule.createElement(contactProfileHeaderModule, {
+	return ReactModule.createElement(ContactProfileHeaderModule, {
 		layoutOrder = p1.layoutOrder,
-		contactName = var1.contactName,
-		avatarThumbnailUrl = var1.avatarThumbnailUrl
+		contactName = UseProfileJsonComponentModuleResult.contactName,
+		avatarThumbnailUrl = UseProfileJsonComponentModuleResult.avatarThumbnailUrl
 	})
 end

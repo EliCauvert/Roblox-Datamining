@@ -1,37 +1,40 @@
-﻿local parent = script.Parent.Parent
-local analyticsModule = require(parent.Analytics)
-local constantsModule = require(parent.Constants)
-local validateWithSchemaModule = require(parent.util.validateWithSchema)
-local _ = require(parent.util.Types)
+﻿local Parent = script.Parent.Parent
+local AnalyticsModule = require(Parent.Analytics)
+local ConstantsModule = require(Parent.Constants)
+local ValidateWithSchemaModule = require(Parent.util.validateWithSchema)
+local _ = require(Parent.util.Types)
 
-return function(p1, p2, p3)
-	-- upvalues: validateWithSchemaModule (ref), analyticsModule (ref), constantsModule (ref)
-	local var1 = validateWithSchemaModule(p1, p2, p3)
+return function(p1, Object, p2) --[[ Line: 9 | Named "validateInstanceTree" ]]
+	-- upvalues: ValidateWithSchemaModule (copy), AnalyticsModule (copy), ConstantsModule (copy)
+	local ValidateWithSchemaModuleResult = ValidateWithSchemaModule(p1, Object, p2)
 	
-	if var1.success == false then
-		analyticsModule.reportFailure(analyticsModule.ErrorType.validateInstanceTree, nil, p3)
+	if ValidateWithSchemaModuleResult.success == false then
+		AnalyticsModule.reportFailure(AnalyticsModule.ErrorType.validateInstanceTree, nil, p2)
 		
-		return false, { "Detected the following error(s): " .. var3.message }
+		return false, {
+			"Detected the following error(s): " .. ValidateWithSchemaModuleResult.message
+		}
 	end
-	local t = {}
+	local List = {}
 	
-	if constantsModule.BANNED_NAMES[p2.Name] then
-		table.insert(t, string.format("%s has an invalid name", p2:GetFullName()))
+	if ConstantsModule.BANNED_NAMES[Object.Name] then
+		table.insert(List, string.format("%s has an invalid name", Object:GetFullName()))
 	end
-	for i, v in pairs(p2:GetDescendants()) do
-		for i_1, v_1 in pairs(constantsModule.BANNED_CLASS_NAMES) do
-			if v:IsA(v_1) then
-				table.insert(t, string.format("%s is of type %s which is not allowed", v:GetFullName(), v_1))
+	for _, descendant in pairs(Object:GetDescendants()) do
+		for _, bANNEDCLASSNAME in pairs(ConstantsModule.BANNED_CLASS_NAMES) do
+			if descendant:IsA(bANNEDCLASSNAME) then
+				table.insert(List, string.format("%s is of type %s which is not allowed", descendant:GetFullName(), bANNEDCLASSNAME))
 			end
 		end
-		if constantsModule.BANNED_NAMES[v.Name] then
-			table.insert(t, string.format("%s has an invalid name", v:GetFullName()))
+		if ConstantsModule.BANNED_NAMES[descendant.Name] then
+			table.insert(List, string.format("%s has an invalid name", descendant:GetFullName()))
 		end
 	end
-	if #t > 0 then
-		analyticsModule.reportFailure(analyticsModule.ErrorType.validateInstanceTree_InvalidDescendants, nil, p3)
+	if #List > 0 then
+		AnalyticsModule.reportFailure(AnalyticsModule.ErrorType.validateInstanceTree_InvalidDescendants, nil, p2)
 		
-		return false, t
+		return false, List
+	else
+		return true
 	end
-	return true
 end

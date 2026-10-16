@@ -1,9 +1,10 @@
-﻿return function(p1, p2)
-	if p2 then
-		local absolutePosition = p2.AbsolutePosition
-		local rect = Rect.new(absolutePosition, absolutePosition + p2.AbsoluteSize)
+﻿return function(Vector, Frame: Frame): boolean --[[ Line: 1 | Named "isInputInsideObject" ]]
+	if Frame then
+		local AbsolutePosition = Frame.AbsolutePosition
+		local _Rect = Rect.new(AbsolutePosition, AbsolutePosition + Frame.AbsoluteSize)
 		
-		return rect.Min.X <= p1.X and (rect.Min.Y <= p1.Y and (p1.X <= rect.Max.X and p1.Y <= rect.Max.Y))
+		return _Rect.Min.X <= Vector.X and (_Rect.Min.Y <= Vector.Y and Vector.X <= _Rect.Max.X) and Vector.Y <= _Rect.Max.Y
+	else
+		return false
 	end
-	return false
 end

@@ -1,184 +1,197 @@
-﻿local parent = script:FindFirstAncestor("DataHydration").Parent
-local httpClientModule = require(parent.HttpClient)
-local promiseModule = require(parent.Promise)
-local createDataCacheModule = require(script.Parent.Parent.createDataCache)
-local createDataResolverModule = require(script.Parent.Parent.createDataResolver)
-local configModule = require(script.Parent.config)
-local responseDecodersModule = require(script.Parent.responseDecoders)
+﻿local Parent = script:FindFirstAncestor("DataHydration").Parent
+local HttpClientModule = require(Parent.HttpClient)
+local PromiseModule = require(Parent.Promise)
+local CreateDataCacheModule = require(script.Parent.Parent.createDataCache)
+local CreateDataResolverModule = require(script.Parent.Parent.createDataResolver)
+local ConfigModule = require(script.Parent.config)
+local ResponseDecodersModule = require(script.Parent.responseDecoders)
 local _ = require(script.Parent.types)
-local fetch = httpClientModule.fetch
-local asPromise = httpClientModule.asPromise
+local FetchFunction = HttpClientModule.fetch
+local AsPromiseFunction = HttpClientModule.asPromise
 
-return function(p1)
-	-- upvalues: configModule (ref), createDataCacheModule (ref), promiseModule (ref), asPromise (ref), fetch (ref), responseDecodersModule (ref), createDataResolverModule (ref)
-	p1 = p1 or {}
-	local quotaSummaryUrl = p1.quotaSummaryUrl or configModule.quotaSummaryUrl
-	local dailyLimitUrl = p1.dailyLimitUrl or configModule.dailyLimitUrl
-	local network = p1.network
-	local ttlSeconds = p1.ttlSeconds or configModule.pollIntervalSeconds
-	local var1 = createDataCacheModule(ttlSeconds, ttlSeconds)
-	local var2 = createDataCacheModule(ttlSeconds, ttlSeconds)
-	local var3 = 0
-	local var4 = 0
-	local var5 = promiseModule.resolve()
-	local var6 = promiseModule.resolve()
-	local var7 = promiseModule.resolve()
-	local var8 = false
+return function(p1) --[[ Line: 30 | Named "createCreatorCreditStore" ]]
+	-- upvalues: ConfigModule (copy), CreateDataCacheModule (copy), PromiseModule (copy), AsPromiseFunction (copy), FetchFunction (copy), ResponseDecodersModule (copy), CreateDataResolverModule (copy)
+	local P0 = p1 or {}
+	local QuotaSummaryUrl = P0.quotaSummaryUrl or ConfigModule.quotaSummaryUrl
+	local DailyLimitUrl = P0.dailyLimitUrl or ConfigModule.dailyLimitUrl
+	local Network = P0.network
+	local TtlSeconds = P0.ttlSeconds or ConfigModule.pollIntervalSeconds
+	local DataCacheModule = CreateDataCacheModule(TtlSeconds, TtlSeconds)
+	local DataCacheModule1 = CreateDataCacheModule(TtlSeconds, TtlSeconds)
+	local Count = 0
+	local Count1 = 0
+	local ResolveResult = PromiseModule.resolve()
+	local ResolveResult1 = PromiseModule.resolve()
+	local ResolveResult2 = PromiseModule.resolve()
+	local Flag = false
 	
-	local function fetchQuotaSummary(_)
-		-- upvalues: var3 (write), var4 (write), var5 (write), var8 (write), promiseModule (copy), asPromise (copy), fetch (copy), quotaSummaryUrl (ref), network (ref), responseDecodersModule (copy), var2 (ref)
-		local var9 = var5:catch(function()
+	local function fetchQuotaSummary(_) --[[ Line: 46 ]]
+		-- upvalues: Count (ref), Count1 (ref), ResolveResult (ref), Flag (ref), PromiseModule (upval), AsPromiseFunction (upval), FetchFunction (upval), QuotaSummaryUrl (copy), Network (copy), ResponseDecodersModule (upval), DataCacheModule1 (copy)
+		local Count2 = Count
+		local Count3 = Count1
+		local v1 = ResolveResult:catch(function() --[[ Line: 49 ]]
 			return nil
-		end):andThen(function()
-			-- upvalues: var8 (copy), var3 (ref), var3 (copy), promiseModule (copy), asPromise (copy), fetch (copy), quotaSummaryUrl (copy), network (copy), responseDecodersModule (copy), var4 (ref), var4 (copy), var2 (copy)
-			return if var8 or var3 ~= var3 then promiseModule.reject("Creator Credit store changed before queued quota read") else asPromise(fetch({
+		end):andThen(function() --[[ Line: 52 ]]
+			-- upvalues: Flag (upval), Count2 (copy), Count (upval), PromiseModule (upval), AsPromiseFunction (upval), FetchFunction (upval), QuotaSummaryUrl (upval), Network (upval), ResponseDecodersModule (upval), Count3 (copy), Count1 (upval), DataCacheModule1 (upval)
+			return if Flag or Count2 ~= Count then PromiseModule.reject("Creator Credit store changed before queued quota read") else AsPromiseFunction(FetchFunction({
 				method = "GET",
 				analyticsKey = "creator-credit.get-quota-summary",
-				url = quotaSummaryUrl,
-				network = network,
-				decode = responseDecodersModule.decodeQuotaSummary
-			})):andThen(function(p2)
-				-- upvalues: var8 (copy), var3 (copy), var3 (copy), promiseModule (copy), var4 (copy), var4 (copy), var2 (copy)
-				if var8 or var3 ~= var3 then
-					return promiseModule.reject("Creator Credit store changed during quota read")
-				elseif var4 ~= var4 then
-					local var10 = var2.getItem("current-user").data(false)
+				url = QuotaSummaryUrl,
+				network = Network,
+				decode = ResponseDecodersModule.decodeQuotaSummary
+			})):andThen(function(Result) --[[ Line: 62 ]]
+				-- upvalues: Flag (upval), Count2 (upval), Count (upval), PromiseModule (upval), Count3 (upval), Count1 (upval), DataCacheModule1 (upval)
+				if Flag or Count2 ~= Count then
+					return PromiseModule.reject("Creator Credit store changed during quota read")
+				end
+				if Count3 ~= Count1 then
+					local DataResult = DataCacheModule1.getItem("current-user").data(false)
 					
-					if var10 then
-						p2.limitSettings = var10
+					if DataResult then
+						Result.limitSettings = DataResult
 					end
 				end
-				return p2
+				return Result
 			end)
 		end)
-		var5 = var9
+		ResolveResult = v1
 		
-		return var9
+		return v1
 	end
 	
-	local var9 = createDataResolverModule({
+	local DataResolverModule = CreateDataResolverModule({
 		supportsMultiGet = false,
-		cache = var1,
+		cache = DataCacheModule,
 		fetchFn = fetchQuotaSummary
 	})
 	
-	local function fetchDailyLimit(_)
-		-- upvalues: var3 (write), var4 (write), var6 (write), var8 (write), promiseModule (copy), asPromise (copy), fetch (copy), dailyLimitUrl (ref), network (ref), responseDecodersModule (copy), var2 (ref)
-		local var10 = var6:catch(function()
+	local function fetchDailyLimit(_) --[[ Line: 85 ]]
+		-- upvalues: Count (ref), Count1 (ref), ResolveResult1 (ref), Flag (ref), PromiseModule (upval), AsPromiseFunction (upval), FetchFunction (upval), DailyLimitUrl (copy), Network (copy), ResponseDecodersModule (upval), DataCacheModule1 (copy)
+		local Count2 = Count
+		local Count3 = Count1
+		local v1 = ResolveResult1:catch(function() --[[ Line: 88 ]]
 			return nil
-		end):andThen(function()
-			-- upvalues: var8 (copy), var3 (ref), var3 (copy), promiseModule (copy), asPromise (copy), fetch (copy), dailyLimitUrl (copy), network (copy), responseDecodersModule (copy), var4 (ref), var4 (copy), var2 (copy)
-			return if var8 or var3 ~= var3 then promiseModule.reject("Creator Credit store changed before queued daily-limit read") else asPromise(fetch({
+		end):andThen(function() --[[ Line: 91 ]]
+			-- upvalues: Flag (upval), Count2 (copy), Count (upval), PromiseModule (upval), AsPromiseFunction (upval), FetchFunction (upval), DailyLimitUrl (upval), Network (upval), ResponseDecodersModule (upval), Count3 (copy), Count1 (upval), DataCacheModule1 (upval)
+			return if Flag or Count2 ~= Count then PromiseModule.reject("Creator Credit store changed before queued daily-limit read") else AsPromiseFunction(FetchFunction({
 				method = "GET",
 				analyticsKey = "creator-credit.get-daily-limit",
-				url = dailyLimitUrl,
-				network = network,
-				decode = responseDecodersModule.decodeDailyLimitSettings
-			})):andThen(function(p2)
-				-- upvalues: var8 (copy), var3 (copy), var3 (copy), promiseModule (copy), var4 (copy), var4 (copy), var2 (copy)
-				return if var8 or var3 ~= var3 then promiseModule.reject("Creator Credit store changed during daily-limit read") elseif var4 == var4 then p2 else var2.getItem("current-user").data(false) or p2
+				url = DailyLimitUrl,
+				network = Network,
+				decode = ResponseDecodersModule.decodeDailyLimitSettings
+			})):andThen(function(Result) --[[ Line: 101 ]]
+				-- upvalues: Flag (upval), Count2 (upval), Count (upval), PromiseModule (upval), Count3 (upval), Count1 (upval), DataCacheModule1 (upval)
+				return if Flag or Count2 ~= Count then PromiseModule.reject("Creator Credit store changed during daily-limit read") elseif Count3 == Count1 then Result else DataCacheModule1.getItem("current-user").data(false) or Result
 			end)
 		end)
-		var6 = var10
+		ResolveResult1 = v1
 		
-		return var10
+		return v1
 	end
 	
-	local var10 = createDataResolverModule({
+	local DataResolverModule1 = CreateDataResolverModule({
 		supportsMultiGet = false,
-		cache = var2,
+		cache = DataCacheModule1,
 		fetchFn = fetchDailyLimit
 	})
 	
 	return {
-		getQuotaSummary = function()
-			-- upvalues: var9 (ref)
-			return var9.getAndFetchItem("current-user")
+		getQuotaSummary = function() --[[ Line: 121 ]]
+			-- upvalues: DataResolverModule (copy)
+			return DataResolverModule.getAndFetchItem("current-user")
 		end,
-		getQuotaSummarySignals = function()
-			-- upvalues: var9 (ref)
-			return var9.getCachedItem("current-user")
+		getQuotaSummarySignals = function() --[[ Line: 125 ]]
+			-- upvalues: DataResolverModule (copy)
+			return DataResolverModule.getCachedItem("current-user")
 		end,
-		refreshQuotaSummary = function()
-			-- upvalues: var3 (write), fetchQuotaSummary (ref), var8 (write), promiseModule (copy), var1 (ref)
-			return fetchQuotaSummary("current-user"):andThen(function(p2)
-				-- upvalues: var8 (copy), var3 (ref), var3 (copy), promiseModule (copy), var1 (copy)
-				if var8 or var3 ~= var3 then
-					return promiseModule.reject("Creator Credit store changed during quota refresh")
+		refreshQuotaSummary = function() --[[ Line: 129 ]]
+			-- upvalues: Count (ref), fetchQuotaSummary (copy), Flag (ref), PromiseModule (upval), DataCacheModule (copy)
+			local Count1 = Count
+			
+			return fetchQuotaSummary("current-user"):andThen(function(Result) --[[ Line: 131 ]]
+				-- upvalues: Flag (upval), Count1 (copy), Count (upval), PromiseModule (upval), DataCacheModule (upval)
+				if Flag or Count1 ~= Count then
+					return PromiseModule.reject("Creator Credit store changed during quota refresh")
+				else
+					DataCacheModule.replaceItem("current-user", Result)
+					
+					return Result
 				end
-				var1.replaceItem("current-user", p2)
-				
-				return p2
 			end)
 		end,
-		getDailyLimit = function()
-			-- upvalues: var10 (ref)
-			return var10.getAndFetchItem("current-user")
+		getDailyLimit = function() --[[ Line: 140 ]]
+			-- upvalues: DataResolverModule1 (copy)
+			return DataResolverModule1.getAndFetchItem("current-user")
 		end,
-		getDailyLimitSignals = function()
-			-- upvalues: var10 (ref)
-			return var10.getCachedItem("current-user")
+		getDailyLimitSignals = function() --[[ Line: 144 ]]
+			-- upvalues: DataResolverModule1 (copy)
+			return DataResolverModule1.getCachedItem("current-user")
 		end,
-		refreshDailyLimit = function()
-			-- upvalues: var3 (write), fetchDailyLimit (ref), var8 (write), promiseModule (copy), var2 (ref)
-			return fetchDailyLimit("current-user"):andThen(function(p2)
-				-- upvalues: var8 (copy), var3 (ref), var3 (copy), promiseModule (copy), var2 (copy)
-				if var8 or var3 ~= var3 then
-					return promiseModule.reject("Creator Credit store changed during daily-limit refresh")
+		refreshDailyLimit = function() --[[ Line: 148 ]]
+			-- upvalues: Count (ref), fetchDailyLimit (copy), Flag (ref), PromiseModule (upval), DataCacheModule1 (copy)
+			local Count1 = Count
+			
+			return fetchDailyLimit("current-user"):andThen(function(Result) --[[ Line: 150 ]]
+				-- upvalues: Flag (upval), Count1 (copy), Count (upval), PromiseModule (upval), DataCacheModule1 (upval)
+				if Flag or Count1 ~= Count then
+					return PromiseModule.reject("Creator Credit store changed during daily-limit refresh")
+				else
+					DataCacheModule1.replaceItem("current-user", Result)
+					
+					return Result
 				end
-				var2.replaceItem("current-user", p2)
-				
-				return p2
 			end)
 		end,
-		setDailyLimit = function(value)
-			-- upvalues: var3 (write), var7 (write), var8 (write), promiseModule (copy), fetch (copy), dailyLimitUrl (ref), network (ref), responseDecodersModule (copy), asPromise (copy), var4 (write), var2 (ref), var1 (ref)
-			local var11 = var7:catch(function() end):andThen(function()
-				-- upvalues: var8 (copy), var3 (ref), var3 (copy), promiseModule (copy), fetch (copy), dailyLimitUrl (copy), value (ref), network (copy), responseDecodersModule (copy), asPromise (copy)
-				return if var8 or var3 ~= var3 then promiseModule.reject("Creator Credit store changed before queued daily-limit write") else asPromise(fetch({
+		setDailyLimit = function(Body) --[[ Line: 159 ]]
+			-- upvalues: Count (ref), ResolveResult2 (ref), Flag (ref), PromiseModule (upval), FetchFunction (upval), DailyLimitUrl (copy), Network (copy), ResponseDecodersModule (upval), AsPromiseFunction (upval), Count1 (ref), DataCacheModule1 (copy), DataCacheModule (copy)
+			local Count2 = Count
+			local Promise = ResolveResult2:catch(function() --[[ Line: 161 ]] end):andThen(function() --[[ Line: 162 ]]
+				-- upvalues: Flag (upval), Count2 (copy), Count (upval), PromiseModule (upval), FetchFunction (upval), DailyLimitUrl (upval), Body (copy), Network (upval), ResponseDecodersModule (upval), AsPromiseFunction (upval)
+				return if Flag or Count2 ~= Count then PromiseModule.reject("Creator Credit store changed before queued daily-limit write") else AsPromiseFunction((FetchFunction({
 					method = "PUT",
 					analyticsKey = "creator-credit.set-daily-limit",
-					url = dailyLimitUrl,
-					body = value,
-					network = network,
-					decode = responseDecodersModule.decodeDailyLimitSettings
-				}))
+					url = DailyLimitUrl,
+					body = Body,
+					network = Network,
+					decode = ResponseDecodersModule.decodeDailyLimitSettings
+				})))
 			end)
-			var7 = var11
+			ResolveResult2 = Promise
 			
-			return var11:andThen(function(p2)
-				-- upvalues: var8 (copy), var3 (ref), var3 (copy), var4 (copy), var2 (copy), var1 (copy)
-				if not var8 and var3 == var3 then
-					var4 += 1
-					var2.replaceItem("current-user", p2)
-					local var12 = var1.getItem("current-user").data(false)
+			return Promise:andThen(function(Result) --[[ Line: 179 ]]
+				-- upvalues: Flag (upval), Count2 (copy), Count (upval), Count1 (upval), DataCacheModule1 (upval), DataCacheModule (upval)
+				if not Flag and Count2 == Count then
+					Count1 += 1
+					DataCacheModule1.replaceItem("current-user", Result)
+					local DataResult = DataCacheModule.getItem("current-user").data(false)
 					
-					if var12 then
-						local cloned = table.clone(var12)
-						cloned.limitSettings = p2
-						var1.replaceItem("current-user", cloned)
+					if DataResult then
+						local Copy = table.clone(DataResult)
+						Copy.limitSettings = Result
+						DataCacheModule.replaceItem("current-user", Copy)
 					end
 				end
-				return p2
+				return Result
 			end)
 		end,
-		clear = function()
-			-- upvalues: var3 (write), var4 (write), var9 (ref), var10 (ref)
-			var3 += 1
-			var4 += 1
-			var9.clear()
-			var10.clear()
+		clear = function() --[[ Line: 194 ]]
+			-- upvalues: Count (ref), Count1 (ref), DataResolverModule (copy), DataResolverModule1 (copy)
+			Count += 1
+			Count1 += 1
+			DataResolverModule.clear()
+			DataResolverModule1.clear()
 		end,
-		dispose = function()
-			-- upvalues: var8 (write), var3 (write), var4 (write), var9 (ref), var10 (ref)
-			if var8 then
+		dispose = function() --[[ Line: 201 ]]
+			-- upvalues: Flag (ref), Count (ref), Count1 (ref), DataResolverModule (copy), DataResolverModule1 (copy)
+			if not Flag then
+				Flag = true
+				Count += 1
+				Count1 += 1
+				DataResolverModule.dispose()
+				DataResolverModule1.dispose()
+				
 				return
 			end
-			var8 = true
-			var3 += 1
-			var4 += 1
-			var9.dispose()
-			var10.dispose()
 		end
 	}
 end

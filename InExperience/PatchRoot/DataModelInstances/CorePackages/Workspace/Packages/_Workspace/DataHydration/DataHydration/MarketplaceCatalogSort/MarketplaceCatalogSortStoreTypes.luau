@@ -1,21 +1,21 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local tModule = require(parent.t)
-local _ = require(parent.Signals)
-local _ = require(dataHydration.DataHydrationTypes)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local TModule = require(Parent.t)
+local _ = require(Parent.Signals)
+local _ = require(DataHydration.DataHydrationTypes)
 
 return {
-	marketplaceCatalogSortResponseItemValidator = tModule.interface({
-		id = tModule.string,
-		type = tModule.string,
-		hydrationPriority = tModule.number,
-		hydrationCount = tModule.number,
-		content = tModule.table,
-		previewColumns = tModule.optional(tModule.number),
-		title = tModule.optional(tModule.string),
-		description = tModule.optional(tModule.string),
-		cardStyle = tModule.optional(tModule.table),
-		cardFooters = tModule.optional(tModule.table),
-		tagId = tModule.optional(tModule.string)
+	marketplaceCatalogSortResponseItemValidator = TModule.interface({
+		id = TModule.string,
+		type = TModule.string,
+		hydrationPriority = TModule.number,
+		hydrationCount = TModule.number,
+		content = TModule.table,
+		previewColumns = TModule.optional(TModule.number),
+		title = TModule.optional(TModule.string),
+		description = TModule.optional(TModule.string),
+		cardStyle = TModule.optional(TModule.table),
+		cardFooters = TModule.optional(TModule.table),
+		tagId = TModule.optional(TModule.string)
 	})
 }

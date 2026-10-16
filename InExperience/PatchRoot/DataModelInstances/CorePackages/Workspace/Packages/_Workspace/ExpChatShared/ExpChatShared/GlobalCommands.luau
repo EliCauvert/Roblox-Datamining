@@ -1,29 +1,29 @@
-﻿local globalHelpCommandModule = require(script.GlobalHelpCommand)
-local globalClearCommandModule = require(script.GlobalClearCommand)
-local globalMuteCommandModule = require(script.GlobalMuteCommand)
-local globalUnmuteCommandModule = require(script.GlobalUnmuteCommand)
-local globalOnlineCommandModule = require(script.GlobalOnlineCommand)
-local expChatGlobalUserCountEnabledEngineFeature = game:GetEngineFeature("ExpChatGlobalUserCountEnabled")
-local expChatEnableGlobalOnlineCommand = game:DefineFastFlag("ExpChatEnableGlobalOnlineCommand", false)
+﻿local GlobalHelpCommandModule = require(script.GlobalHelpCommand)
+local GlobalClearCommandModule = require(script.GlobalClearCommand)
+local GlobalMuteCommandModule = require(script.GlobalMuteCommand)
+local GlobalUnmuteCommandModule = require(script.GlobalUnmuteCommand)
+local GlobalOnlineCommandModule = require(script.GlobalOnlineCommand)
+local ExpChatGlobalUserCountEnabledEngineFeature = game:GetEngineFeature("ExpChatGlobalUserCountEnabled")
+local ExpChatEnableGlobalOnlineCommand = game:DefineFastFlag("ExpChatEnableGlobalOnlineCommand", false)
 local _ = require(script.types)
 
 return {
-	getGlobalEnabledCommands = function()
-		-- upvalues: globalClearCommandModule (ref), globalHelpCommandModule (ref), globalMuteCommandModule (ref), globalUnmuteCommandModule (ref), expChatGlobalUserCountEnabledEngineFeature (ref), expChatEnableGlobalOnlineCommand (ref), globalOnlineCommandModule (ref)
-		local t = {}
-		table.insert(t, globalClearCommandModule)
-		table.insert(t, globalHelpCommandModule)
-		table.insert(t, globalMuteCommandModule)
-		table.insert(t, globalUnmuteCommandModule)
+	getGlobalEnabledCommands = function() --[[ Line: 13 ]]
+		-- upvalues: GlobalClearCommandModule (copy), GlobalHelpCommandModule (copy), GlobalMuteCommandModule (copy), GlobalUnmuteCommandModule (copy), ExpChatGlobalUserCountEnabledEngineFeature (copy), ExpChatEnableGlobalOnlineCommand (copy), GlobalOnlineCommandModule (copy)
+		local List = {}
+		table.insert(List, GlobalClearCommandModule)
+		table.insert(List, GlobalHelpCommandModule)
+		table.insert(List, GlobalMuteCommandModule)
+		table.insert(List, GlobalUnmuteCommandModule)
 		
-		if expChatGlobalUserCountEnabledEngineFeature and expChatEnableGlobalOnlineCommand then
-			table.insert(t, globalOnlineCommandModule)
+		if ExpChatGlobalUserCountEnabledEngineFeature and ExpChatEnableGlobalOnlineCommand then
+			table.insert(List, GlobalOnlineCommandModule)
 		end
-		return t
+		return List
 	end,
-	GlobalHelpCommand = globalHelpCommandModule,
-	GlobalClearCommand = globalClearCommandModule,
-	GlobalMuteCommand = globalMuteCommandModule,
-	GlobalUnmuteCommand = globalUnmuteCommandModule,
-	GlobalOnlineCommand = globalOnlineCommandModule
+	GlobalHelpCommand = GlobalHelpCommandModule,
+	GlobalClearCommand = GlobalClearCommandModule,
+	GlobalMuteCommand = GlobalMuteCommandModule,
+	GlobalUnmuteCommand = GlobalUnmuteCommandModule,
+	GlobalOnlineCommand = GlobalOnlineCommandModule
 }

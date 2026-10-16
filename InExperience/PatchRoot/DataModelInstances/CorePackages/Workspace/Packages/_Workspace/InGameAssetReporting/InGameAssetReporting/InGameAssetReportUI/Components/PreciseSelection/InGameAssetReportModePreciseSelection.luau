@@ -1,387 +1,396 @@
-﻿local inGameAssetReporting = script:FindFirstAncestor("InGameAssetReporting")
-local parent = inGameAssetReporting.Parent
-local playersService = game:GetService("Players")
-local userInputService = game:GetService("UserInputService")
-local experienceStateCaptureService = game:GetService("ExperienceStateCaptureService")
-local httpService = game:GetService("HttpService")
-local contentProviderService = game:GetService("ContentProvider")
-local reactModule = require(parent.React)
-local withLocalization = require(parent.Localization).withLocalization
-local screenshotManager = require(parent.Screenshot).ScreenshotManager
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local clearTimeout = luauPolyfillModule.clearTimeout
-local setTimeout = luauPolyfillModule.setTimeout
-local constantsModule = require(inGameAssetReporting.InGameAssetReportUI.Resources.Constants)
-local analyticsReducerModule = require(inGameAssetReporting.InGameAssetReportUI.Resources.AnalyticsReducer)
-local sceneAnalysisModule = require(inGameAssetReporting.Analysis.SceneAnalysis)
-local inGameAssetReportSubmitDialogModule = require(inGameAssetReporting.InGameAssetReportUI.Components.InGameAssetReportSubmitDialog)
-local inGameAssetReportCompleteModalModule = require(inGameAssetReporting.InGameAssetReportUI.Components.InGameAssetReportCompleteModal)
-local inGameAssetIPInfringementErrorModalModule = require(inGameAssetReporting.InGameAssetReportUI.Components.InGameAssetIPInfringementErrorModal)
-local inGameAssetReportIPInfringementModalModule = require(inGameAssetReporting.InGameAssetReportUI.Components.InGameAssetReportIPInfringementModal)
-local reportPreciseSelectionLandscapeHeaderModule = require(inGameAssetReporting.InGameAssetReportUI.Components.PreciseSelection.ReportPreciseSelectionLandscapeHeader)
-local reportPreciseSelectionPortraitHeaderFooterModule = require(inGameAssetReporting.InGameAssetReportUI.Components.PreciseSelection.ReportPreciseSelectionPortraitHeaderFooter)
-local buildReportModule = require(inGameAssetReporting.Utility.buildReport)
-local inGameAssetReportAnalyticsModule = require(inGameAssetReporting.InGameAssetReportUI.Resources.InGameAssetReportAnalytics)
-local getHighlightModeVariantModule = require(inGameAssetReporting.Utility.getHighlightModeVariant)
-local preciseSelectionBugfixesEnabled = game:DefineFastFlag("PreciseSelectionBugfixesEnabled", false)
-local fFlagPrefillPreciseSelectionChoices = require(parent.SharedFlags).FFlagPrefillPreciseSelectionChoices
-local fFlagUpdateInGameAssetReportingCTAs = require(parent.SharedFlags).FFlagUpdateInGameAssetReportingCTAs
-local text = string.gsub(string.gsub(string.gsub(contentProviderService.BaseUrl:lower(), "/m.", "/www."), "http:", "https:"), "https://www", "https://apis") .. "rights-management-api/rights/v1/snapshots"
+﻿local InGameAssetReporting = script:FindFirstAncestor("InGameAssetReporting")
+local Parent = InGameAssetReporting.Parent
+local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+local ExperienceStateCaptureService = game:GetService("ExperienceStateCaptureService")
+local HttpService = game:GetService("HttpService")
+local ReactModule = require(Parent.React)
+local WithLocalizationFunction = require(Parent.Localization).withLocalization
+local ScreenshotManager = require(Parent.Screenshot).ScreenshotManager
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local ClearTimeoutFunction = LuauPolyfillModule.clearTimeout
+local SetTimeoutFunction = LuauPolyfillModule.setTimeout
+local ConstantsModule = require(InGameAssetReporting.InGameAssetReportUI.Resources.Constants)
+local AnalyticsReducerModule = require(InGameAssetReporting.InGameAssetReportUI.Resources.AnalyticsReducer)
+local SceneAnalysisModule = require(InGameAssetReporting.Analysis.SceneAnalysis)
+local InGameAssetReportSubmitDialogModule = require(InGameAssetReporting.InGameAssetReportUI.Components.InGameAssetReportSubmitDialog)
+local InGameAssetReportCompleteModalModule = require(InGameAssetReporting.InGameAssetReportUI.Components.InGameAssetReportCompleteModal)
+local InGameAssetIPInfringementErrorModalModule = require(InGameAssetReporting.InGameAssetReportUI.Components.InGameAssetIPInfringementErrorModal)
+local InGameAssetReportIPInfringementModalModule = require(InGameAssetReporting.InGameAssetReportUI.Components.InGameAssetReportIPInfringementModal)
+local ReportPreciseSelectionLandscapeHeaderModule = require(InGameAssetReporting.InGameAssetReportUI.Components.PreciseSelection.ReportPreciseSelectionLandscapeHeader)
+local ReportPreciseSelectionPortraitHeaderFooterModule = require(InGameAssetReporting.InGameAssetReportUI.Components.PreciseSelection.ReportPreciseSelectionPortraitHeaderFooter)
+local BuildReportModule = require(InGameAssetReporting.Utility.buildReport)
+local InGameAssetReportAnalyticsModule = require(InGameAssetReporting.InGameAssetReportUI.Resources.InGameAssetReportAnalytics)
+local GetHighlightModeVariantModule = require(InGameAssetReporting.Utility.getHighlightModeVariant)
+local PreciseSelectionBugfixesEnabled = game:DefineFastFlag("PreciseSelectionBugfixesEnabled", false)
+local FFlagPrefillPreciseSelectionChoices = require(Parent.SharedFlags).FFlagPrefillPreciseSelectionChoices
+local Text = string.gsub(string.gsub(string.gsub(game:GetService("ContentProvider").BaseUrl:lower(), "/m.", "/www."), "http:", "https:"), "https://www", "https://apis") .. "rights-management-api/rights/v1/snapshots"
 
-return function(p1)
-	-- upvalues: reactModule (ref), analyticsReducerModule (ref), constantsModule (ref), setTimeout (ref), clearTimeout (ref), preciseSelectionBugfixesEnabled (ref), screenshotManager (ref), sceneAnalysisModule (ref), inGameAssetReportAnalyticsModule (ref), experienceStateCaptureService (ref), userInputService (ref), httpService (ref), text (ref), getHighlightModeVariantModule (ref), buildReportModule (ref), playersService (ref), withLocalization (ref), fFlagUpdateInGameAssetReportingCTAs (ref), reportPreciseSelectionPortraitHeaderFooterModule (ref), reportPreciseSelectionLandscapeHeaderModule (ref), inGameAssetReportSubmitDialogModule (ref), fFlagPrefillPreciseSelectionChoices (ref), inGameAssetReportCompleteModalModule (ref), inGameAssetReportIPInfringementModalModule (ref), inGameAssetIPInfringementErrorModalModule (ref)
-	local var1, var2 = reactModule.useState(false)
-	local var3, var4 = reactModule.useState(false)
-	local var5, var6 = reactModule.useState(false)
-	local var7, var8 = reactModule.useState("")
-	local var9, var10 = reactModule.useState(nil)
-	local var11, var12 = reactModule.useState(true)
-	local var13, var14 = reactModule.useReducer(analyticsReducerModule, constantsModule.AnalyticsInitialState)
-	local var15, var16 = reactModule.useState(nil)
-	local var17, var18 = reactModule.useState(nil)
-	local var19, var20 = reactModule.useState(nil)
-	local var21, var22 = reactModule.useState(false)
-	local var23, var24 = reactModule.useState(nil)
-	local var25, var26 = reactModule.useState("")
-	local var27, var28 = reactModule.useState(nil)
-	local var29, var30 = reactModule.useState(false)
-	local viewportSize = game.Workspace.CurrentCamera.ViewportSize
-	local isSmallPortraitMode = p1.getIsSmallPortraitMode(viewportSize)
-	reactModule.useEffect(function()
-		-- upvalues: var14 (ref), constantsModule (copy), var24 (ref), setTimeout (copy), var22 (ref)
-		var14({
-			type = constantsModule.AnalyticsActions.AccumulateForTimeSpent,
+return function(p1) --[[ Line: 55 ]]
+	-- upvalues: ReactModule (copy), AnalyticsReducerModule (copy), ConstantsModule (copy), SetTimeoutFunction (copy), ClearTimeoutFunction (copy), PreciseSelectionBugfixesEnabled (copy), ScreenshotManager (copy), SceneAnalysisModule (copy), InGameAssetReportAnalyticsModule (copy), ExperienceStateCaptureService (copy), UserInputService (copy), HttpService (copy), Text (copy), GetHighlightModeVariantModule (copy), BuildReportModule (copy), Players (copy), WithLocalizationFunction (copy), ReportPreciseSelectionPortraitHeaderFooterModule (copy), ReportPreciseSelectionLandscapeHeaderModule (copy), InGameAssetReportSubmitDialogModule (copy), FFlagPrefillPreciseSelectionChoices (copy), InGameAssetReportCompleteModalModule (copy), InGameAssetReportIPInfringementModalModule (copy), InGameAssetIPInfringementErrorModalModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(false)
+	local UseStateResult4, UseStateResult2_3 = ReactModule.useState("")
+	local UseStateResult5, UseStateResult2_4 = ReactModule.useState(nil)
+	local UseStateResult6, UseStateResult2_5 = ReactModule.useState(true)
+	local UseReducerResult, UseReducerResult2 = ReactModule.useReducer(AnalyticsReducerModule, ConstantsModule.AnalyticsInitialState)
+	local UseStateResult7, UseStateResult2_6 = ReactModule.useState(nil)
+	local UseStateResult8, UseStateResult2_7 = ReactModule.useState(nil)
+	local UseStateResult9, UseStateResult2_8 = ReactModule.useState(nil)
+	local UseStateResult10, UseStateResult2_9 = ReactModule.useState(false)
+	local UseStateResult11, UseStateResult2_10 = ReactModule.useState(nil)
+	local UseStateResult12, UseStateResult2_11 = ReactModule.useState("")
+	local UseStateResult13, UseStateResult2_12 = ReactModule.useState(nil)
+	local UseStateResult14, UseStateResult2_13 = ReactModule.useState(false)
+	local ViewportSize = game.Workspace.CurrentCamera.ViewportSize
+	local IsSmallPortraitMode = p1.getIsSmallPortraitMode(ViewportSize)
+	ReactModule.useEffect(function() --[[ Line: 77 ]]
+		-- upvalues: UseReducerResult2 (copy), ConstantsModule (upval), UseStateResult2_10 (copy), SetTimeoutFunction (upval), UseStateResult2_9 (copy)
+		UseReducerResult2({
+			type = ConstantsModule.AnalyticsActions.AccumulateForTimeSpent,
 			accumulated_time_ms = workspace:GetServerTimeNow() * 1000
 		})
-		var14({
-			type = constantsModule.AnalyticsActions.SetPlaceId,
+		UseReducerResult2({
+			type = ConstantsModule.AnalyticsActions.SetPlaceId,
 			place_id = game.PlaceId
 		})
-		var24(setTimeout(function()
-			-- upvalues: var22 (copy)
-			var22(true)
+		UseStateResult2_10(SetTimeoutFunction(function() --[[ Line: 86 ]]
+			-- upvalues: UseStateResult2_9 (upval)
+			UseStateResult2_9(true)
 		end, 10000))
-	end, { var22, var24 })
-	local var31 = reactModule.useCallback(function()
-		-- upvalues: var22 (ref), var23 (ref), clearTimeout (copy)
-		var22(false)
+	end, { UseStateResult2_9, UseStateResult2_10 })
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 91 ]]
+		-- upvalues: UseStateResult2_9 (copy), UseStateResult11 (copy), ClearTimeoutFunction (upval)
+		UseStateResult2_9(false)
 		
-		if var23 then
-			clearTimeout(var23)
+		if UseStateResult11 then
+			ClearTimeoutFunction(UseStateResult11)
 		end
-	end, { var22, var23 })
-	local var32 = reactModule.useCallback(function()
-		-- upvalues: preciseSelectionBugfixesEnabled (copy), var7 (ref), screenshotManager (copy), var8 (ref), var31 (ref), var2 (ref), var14 (ref), constantsModule (copy), viewportSize (ref), isSmallPortraitMode (ref)
-		if preciseSelectionBugfixesEnabled then
-			if var7 == "" then
-				screenshotManager:TakeScreenshotWithCallback(var8, nil)
+	end, { UseStateResult2_9, UseStateResult11 })
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 99 ]]
+		-- upvalues: PreciseSelectionBugfixesEnabled (upval), UseStateResult4 (copy), ScreenshotManager (upval), UseStateResult2_3 (copy), UseResult (copy), UseStateResult2 (copy), UseReducerResult2 (copy), ConstantsModule (upval), ViewportSize (copy), IsSmallPortraitMode (copy)
+		if PreciseSelectionBugfixesEnabled then
+			if UseStateResult4 == "" then
+				ScreenshotManager:TakeScreenshotWithCallback(UseStateResult2_3, nil)
 			end
-		elseif not var7 then
-			screenshotManager:TakeScreenshotWithCallback(var8, nil)
+		elseif not UseStateResult4 then
+			ScreenshotManager:TakeScreenshotWithCallback(UseStateResult2_3, nil)
 		end
-		var31()
-		var2(true)
-		var14({
-			type = constantsModule.AnalyticsActions.SetViewportInformation,
-			viewport_size_x = viewportSize.X,
-			viewport_size_y = viewportSize.Y,
-			is_portrait_mode = isSmallPortraitMode
+		UseResult()
+		UseStateResult2(true)
+		UseReducerResult2({
+			type = ConstantsModule.AnalyticsActions.SetViewportInformation,
+			viewport_size_x = ViewportSize.X,
+			viewport_size_y = ViewportSize.Y,
+			is_portrait_mode = IsSmallPortraitMode
 		})
-		var14({
-			type = constantsModule.AnalyticsActions.IncrementNextCount
+		UseReducerResult2({
+			type = ConstantsModule.AnalyticsActions.IncrementNextCount
 		})
 	end, {
-		var2, var8, var7, viewportSize, isSmallPortraitMode, var14, var31
+		UseStateResult2, UseStateResult2_3, UseStateResult4, ViewportSize,
+		IsSmallPortraitMode, UseReducerResult2, UseResult
 	})
-	local var33 = reactModule.useCallback(function()
-		-- upvalues: var10 (ref), sceneAnalysisModule (copy), var19 (ref), var32 (ref)
-		var10(sceneAnalysisModule.interpretAndExtractItemsFromInstanceForPreciseSelection(var19))
-		var32()
-	end, { var32, var10, var19 })
-	local var34 = reactModule.useCallback(function()
-		-- upvalues: inGameAssetReportAnalyticsModule (copy), var13 (ref), p1 (ref)
-		inGameAssetReportAnalyticsModule(var13, 2)
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 139 ]]
+		-- upvalues: UseStateResult2_4 (copy), SceneAnalysisModule (upval), UseStateResult9 (copy), UseResult1 (copy)
+		UseStateResult2_4(SceneAnalysisModule.interpretAndExtractItemsFromInstanceForPreciseSelection(UseStateResult9))
+		UseResult1()
+	end, { UseResult1, UseStateResult2_4, UseStateResult9 })
+	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 145 ]]
+		-- upvalues: InGameAssetReportAnalyticsModule (upval), UseReducerResult (copy), p1 (copy)
+		InGameAssetReportAnalyticsModule(UseReducerResult, 2)
 		p1.backAction()
-	end, { p1.backAction, var13 })
-	reactModule.useEffect(function()
-		-- upvalues: var17 (ref), experienceStateCaptureService (copy), var20 (ref), var14 (ref), constantsModule (copy), preciseSelectionBugfixesEnabled (copy), var31 (ref), userInputService (copy), var10 (ref), sceneAnalysisModule (copy), var32 (ref), var18 (ref)
-		if var17 then
-			var17:Disconnect()
+	end, { p1.backAction, UseReducerResult })
+	ReactModule.useEffect(function() --[[ Line: 153 ]]
+		-- upvalues: UseStateResult8 (copy), ExperienceStateCaptureService (upval), UseStateResult2_8 (copy), UseReducerResult2 (copy), ConstantsModule (upval), PreciseSelectionBugfixesEnabled (upval), UseResult (copy), UserInputService (upval), UseStateResult2_4 (copy), SceneAnalysisModule (upval), UseResult1 (copy), UseStateResult2_7 (copy)
+		if UseStateResult8 then
+			UseStateResult8:Disconnect()
 		end
-		var18(experienceStateCaptureService.ItemSelectedInCaptureMode:Connect(function(p2)
-			-- upvalues: var20 (copy), var14 (copy), constantsModule (copy), preciseSelectionBugfixesEnabled (copy), var31 (copy), userInputService (copy), var10 (copy), sceneAnalysisModule (copy), var32 (copy)
-			var20(p2)
+		UseStateResult2_7((ExperienceStateCaptureService.ItemSelectedInCaptureMode:Connect(function(p2) --[[ Line: 157 ]]
+			-- upvalues: UseStateResult2_8 (upval), UseReducerResult2 (upval), ConstantsModule (upval), PreciseSelectionBugfixesEnabled (upval), UseResult (upval), UserInputService (upval), UseStateResult2_4 (upval), SceneAnalysisModule (upval), UseResult1 (upval)
+			UseStateResult2_8(p2)
 			
 			if p2 then
-				var14({
-					type = constantsModule.AnalyticsActions.IncremementAnnotationCount
+				UseReducerResult2({
+					type = ConstantsModule.AnalyticsActions.IncremementAnnotationCount
 				})
 				
-				if preciseSelectionBugfixesEnabled then
-					var31()
+				if PreciseSelectionBugfixesEnabled then
+					UseResult()
 				end
 			end
-			if userInputService.PreferredInput ~= Enum.PreferredInput.Touch then
-				var10(sceneAnalysisModule.interpretAndExtractItemsFromInstanceForPreciseSelection(p2))
-				var32()
+			if UserInputService.PreferredInput ~= Enum.PreferredInput.Touch then
+				UseStateResult2_4(SceneAnalysisModule.interpretAndExtractItemsFromInstanceForPreciseSelection(p2))
+				UseResult1()
 			end
-		end))
+		end)))
 	end, {
-		var20, var18, var32, var10, var14, var31
+		UseStateResult2_8, UseStateResult2_7, UseResult1, UseStateResult2_4,
+		UseReducerResult2, UseResult
 	})
-	local var35 = reactModule.useCallback(function(p2, p3, p4)
-		-- upvalues: var9 (ref), var28 (ref), constantsModule (copy), var7 (ref), httpService (copy), text (copy), var26 (ref), var6 (ref), var2 (ref), var4 (ref), var14 (ref), getHighlightModeVariantModule (copy), buildReportModule (copy), playersService (copy)
-		if p2 == "ip infringement" then
-			if not var9 or not var9.extractedAssets then
-				var28(constantsModule.IpErrorCodes.ClientNoAssetsExtracted)
+	local UseResult4 = ReactModule.useCallback(function(Reason_selection, Surface_selection, p2) --[[ Line: 190 ]]
+		-- upvalues: UseStateResult5 (copy), UseStateResult2_12 (copy), ConstantsModule (upval), UseStateResult4 (copy), HttpService (upval), Text (upval), UseStateResult2_11 (copy), UseStateResult2_2 (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), UseReducerResult2 (copy), GetHighlightModeVariantModule (upval), BuildReportModule (upval), Players (upval)
+		if Reason_selection == "ip infringement" then
+			if not UseStateResult5 or not UseStateResult5.extractedAssets then
+				UseStateResult2_12(ConstantsModule.IpErrorCodes.ClientNoAssetsExtracted)
 				
 				return
 			end
-			local t = {}
+			local Contents = {}
 			
-			for i, v in pairs(var9.extractedAssets) do
-				for i_1, v_1 in ipairs(v) do
-					local var36 = if i == "Package" then v_1.id else v_1
+			for i, extractedAsset in pairs(UseStateResult5.extractedAssets) do
+				for _, value in ipairs(extractedAsset) do
+					local Id = if i == "Package" then value.id else value
 					
-					if var36 then
-						local match = string.match(var36, "%d+")
+					if Id then
+						local Match: string? = string.match(Id, "%d+")
 						
-						if match and match ~= "" then
-							table.insert(t, { content_type = "Asset", content_id = match })
+						if Match and Match ~= "" then
+							table.insert(Contents, { content_type = "Asset", content_id = Match })
 						end
 					end
 				end
 			end
-			if #t > 0 then
-				httpService:RequestInternal({
+			if #Contents > 0 then
+				HttpService:RequestInternal({
 					Method = "POST",
-					Url = text,
+					Url = Text,
 					Headers = {
 						["Content-Type"] = "application/json",
 						Accept = "application/json"
 					},
-					Body = httpService:JSONEncode({
-						screenshot_id = var7,
+					Body = HttpService:JSONEncode({
+						screenshot_id = UseStateResult4,
 						universe_id = game.GameId,
-						contents = t
+						contents = Contents
 					})
-				}):Start(function(_, p5)
-					-- upvalues: httpService (copy), var26 (copy), var6 (copy), var28 (copy), constantsModule (copy)
-					if p5.StatusCode == 200 then
-						local ok, status = pcall(httpService.JSONDecode, httpService, p5.Body)
+				}):Start(function(_, p3) --[[ Line: 233 ]]
+					-- upvalues: HttpService (upval), UseStateResult2_11 (upval), UseStateResult2_2 (upval), UseStateResult2_12 (upval), ConstantsModule (upval)
+					if p3.StatusCode == 200 then
+						local Success, Result = pcall(HttpService.JSONDecode, HttpService, p3.Body)
 						
-						if ok and status and status.code then
-							var26(status.code)
-							var6(true)
+						if Success and Result and Result.code then
+							UseStateResult2_11(Result.code)
+							UseStateResult2_2(true)
+							
+							return
+						else
+							UseStateResult2_12(ConstantsModule.IpErrorCodes.Unknown)
 							
 							return
 						end
-						var28(constantsModule.IpErrorCodes.Unknown)
-						
-						return
 					else
-						local unknown = constantsModule.IpErrorCodes.Unknown
-						local ok, status = pcall(httpService.JSONDecode, httpService, p5.Body)
+						local Unknown = ConstantsModule.IpErrorCodes.Unknown
+						local Success1, Result1 = pcall(HttpService.JSONDecode, HttpService, p3.Body)
 						
-						if ok and status and (status.app_error_code and status.app_error_code ~= "") then
-							unknown = status.app_error_code
+						if Success1 and Result1 and Result1.app_error_code and Result1.app_error_code ~= "" then
+							Unknown = Result1.app_error_code
 						end
-						var28(unknown)
+						UseStateResult2_12(Unknown)
 					end
 				end)
 				
 				return
+			else
+				UseStateResult2_12(ConstantsModule.IpErrorCodes.ClientNoAssetsExtracted)
+				
+				return
 			end
-			var28(constantsModule.IpErrorCodes.ClientNoAssetsExtracted)
-			
-			return
 		else
-			var2(false)
-			var4(true)
-			var14({
+			UseStateResult2(false)
+			UseStateResult2_1(true)
+			UseReducerResult2({
 				final_annotation_count = 0,
-				type = constantsModule.AnalyticsActions.SetExtractionResults,
-				results = var9
+				type = ConstantsModule.AnalyticsActions.SetExtractionResults,
+				results = UseStateResult5
 			})
-			var14({
-				type = constantsModule.AnalyticsActions.SetReasonSelection,
-				reason_selection = p2
+			UseReducerResult2({
+				type = ConstantsModule.AnalyticsActions.SetReasonSelection,
+				reason_selection = Reason_selection
 			})
-			var14({
-				type = constantsModule.AnalyticsActions.SetSurfaceSelection,
-				surface_selection = p3
+			UseReducerResult2({
+				type = ConstantsModule.AnalyticsActions.SetSurfaceSelection,
+				surface_selection = Surface_selection
 			})
-			var14({
-				type = constantsModule.AnalyticsActions.SetCommentAdded,
-				comment_added = #p4 > 0
+			UseReducerResult2({
+				type = ConstantsModule.AnalyticsActions.SetCommentAdded,
+				comment_added = #p2 > 0
 			})
-			local var37 = getHighlightModeVariantModule()
-			var14({
-				type = constantsModule.AnalyticsActions.SetVariant,
-				variant = var37
+			local HighlightModeVariantModule = GetHighlightModeVariantModule()
+			UseReducerResult2({
+				type = ConstantsModule.AnalyticsActions.SetVariant,
+				variant = HighlightModeVariantModule
 			})
-			local var38 = buildReportModule(playersService.LocalPlayer.UserId, var7, var9, p2, p3, p4, {}, nil, var37)
+			local ReportModule = BuildReportModule(Players.LocalPlayer.UserId, UseStateResult4, UseStateResult5, Reason_selection, Surface_selection, p2, {}, nil, HighlightModeVariantModule)
 			
-			if var38 then
-				playersService:ReportAbuseV3(playersService.LocalPlayer, var38)
+			if ReportModule then
+				Players:ReportAbuseV3(Players.LocalPlayer, ReportModule)
 			end
 		end
 	end, {
-		var9, var2, var4, var7, var28, var6, var26, var14
+		UseStateResult5, UseStateResult2, UseStateResult2_1, UseStateResult4,
+		UseStateResult2_12, UseStateResult2_2, UseStateResult2_11, UseReducerResult2
 	})
-	local var39 = reactModule.useCallback(function()
-		-- upvalues: var10 (ref), var2 (ref), experienceStateCaptureService (copy)
-		var10(nil)
-		var2(false)
-		experienceStateCaptureService:ResetHighlight()
-	end, { var2, var10 })
-	local var40 = reactModule.useCallback(function()
-		-- upvalues: var4 (ref), inGameAssetReportAnalyticsModule (copy), var13 (ref), p1 (ref)
-		var4(false)
-		inGameAssetReportAnalyticsModule(var13, 1)
+	local UseResult5 = ReactModule.useCallback(function() --[[ Line: 319 ]]
+		-- upvalues: UseStateResult2_4 (copy), UseStateResult2 (copy), ExperienceStateCaptureService (upval)
+		UseStateResult2_4(nil)
+		UseStateResult2(false)
+		ExperienceStateCaptureService:ResetHighlight()
+	end, { UseStateResult2, UseStateResult2_4 })
+	local UseResult6 = ReactModule.useCallback(function() --[[ Line: 326 ]]
+		-- upvalues: UseStateResult2_1 (copy), InGameAssetReportAnalyticsModule (upval), UseReducerResult (copy), p1 (copy)
+		UseStateResult2_1(false)
+		InGameAssetReportAnalyticsModule(UseReducerResult, 1)
 		p1.onReportComplete()
-	end, { p1.onReportComplete, var4, var13 })
-	local var41 = reactModule.useCallback(function()
-		-- upvalues: var11 (ref), var12 (ref), var14 (ref), constantsModule (copy)
-		if var11 then
-			var12(false)
+	end, { p1.onReportComplete, UseStateResult2_1, UseReducerResult })
+	local UseResult7 = ReactModule.useCallback(function() --[[ Line: 332 ]]
+		-- upvalues: UseStateResult6 (copy), UseStateResult2_5 (copy), UseReducerResult2 (copy), ConstantsModule (upval)
+		if UseStateResult6 then
+			UseStateResult2_5(false)
 			
 			return
+		else
+			UseReducerResult2({
+				did_user_resize = true,
+				type = ConstantsModule.AnalyticsActions.SetDidUserResize
+			})
 		end
-		var14({
-			did_user_resize = true,
-			type = constantsModule.AnalyticsActions.SetDidUserResize
-		})
-	end, { var11, var1, var14, var12 })
-	reactModule.useEffect(function()
-		-- upvalues: var15 (ref), userInputService (copy), var34 (ref), var16 (ref)
-		if var15 then
-			var15:Disconnect()
+	end, {
+		UseStateResult6,
+		UseStateResult,
+		UseReducerResult2,
+		UseStateResult2_5
+	})
+	ReactModule.useEffect(function() --[[ Line: 345 ]]
+		-- upvalues: UseStateResult7 (copy), UserInputService (upval), UseResult3 (copy), UseStateResult2_6 (copy)
+		if UseStateResult7 then
+			UseStateResult7:Disconnect()
 		end
-		var16(userInputService.InputEnded:Connect(function(p5)
-			-- upvalues: var34 (copy)
-			if p5.KeyCode == Enum.KeyCode.Escape then
-				var34()
+		UseStateResult2_6((UserInputService.InputEnded:Connect(function(Input) --[[ Line: 350 ]]
+			-- upvalues: UseResult3 (upval)
+			if Input.KeyCode == Enum.KeyCode.Escape then
+				UseResult3()
 			end
-		end))
-	end, { var34, var16 })
-	local var42 = reactModule.useCallback(function()
-		-- upvalues: var28 (ref)
-		var28(nil)
+		end)))
+	end, { UseResult3, UseStateResult2_6 })
+	local UseResult8 = ReactModule.useCallback(function() --[[ Line: 359 ]]
+		-- upvalues: UseStateResult2_12 (copy)
+		UseStateResult2_12(nil)
 	end, {})
-	local var43 = reactModule.useCallback(function()
-		-- upvalues: var30 (ref), httpService (copy), var7 (ref), text (copy), var26 (ref), var28 (ref), var6 (ref), constantsModule (copy)
-		var30(true)
-		httpService:RequestInternal({
+	local UseResult9 = ReactModule.useCallback(function() --[[ Line: 366 ]]
+		-- upvalues: UseStateResult2_13 (copy), HttpService (upval), UseStateResult4 (copy), Text (upval), UseStateResult2_11 (copy), UseStateResult2_12 (copy), UseStateResult2_2 (copy), ConstantsModule (upval)
+		UseStateResult2_13(true)
+		HttpService:RequestInternal({
 			Method = "POST",
-			Url = text,
+			Url = Text,
 			Headers = {
 				["Content-Type"] = "application/json",
 				Accept = "application/json"
 			},
-			Body = httpService:JSONEncode({
-				screenshot_id = var7,
+			Body = HttpService:JSONEncode({
+				screenshot_id = UseStateResult4,
 				universe_id = game.GameId,
 				contents = {}
 			})
-		}):Start(function(_, p5)
-			-- upvalues: var30 (copy), httpService (copy), var26 (copy), var28 (copy), var6 (copy), constantsModule (copy)
-			var30(false)
+		}):Start(function(_, p3) --[[ Line: 385 ]]
+			-- upvalues: UseStateResult2_13 (upval), HttpService (upval), UseStateResult2_11 (upval), UseStateResult2_12 (upval), UseStateResult2_2 (upval), ConstantsModule (upval)
+			UseStateResult2_13(false)
 			
-			if p5.StatusCode == 200 then
-				local ok, status = pcall(httpService.JSONDecode, httpService, p5.Body)
+			if p3.StatusCode == 200 then
+				local Success, Result = pcall(HttpService.JSONDecode, HttpService, p3.Body)
 				
-				if ok and status and status.code then
-					var26(status.code)
-					var28(nil)
-					var6(true)
+				if Success and Result and Result.code then
+					UseStateResult2_11(Result.code)
+					UseStateResult2_12(nil)
+					UseStateResult2_2(true)
 					
 					return
 				end
 			end
-			var28(constantsModule.IpErrorCodes.Unknown)
+			UseStateResult2_12(ConstantsModule.IpErrorCodes.Unknown)
 		end)
 	end, {
-		var7,
-		var26,
-		var28,
-		var6,
-		var30
+		UseStateResult4,
+		UseStateResult2_11,
+		UseStateResult2_12,
+		UseStateResult2_2,
+		UseStateResult2_13
 	})
 	
-	return withLocalization({
+	return WithLocalizationFunction({
 		mainTitle = "Feature.ReportAbuse.Label.HighlightProblemPrecise",
+		next = "CommonUI.Controls.Action.Continue",
 		coachmarkTitle = "Feature.ReportAbuse.Label.CantSelectTitle",
-		coachmarkText = "Feature.ReportAbuse.Label.CantSelectSubtitle",
-		next = if fFlagUpdateInGameAssetReportingCTAs then "CommonUI.Controls.Action.Continue" else "Feature.ReportAbuse.Action.Next"
-	})(function(p5)
-		-- upvalues: reactModule (copy), var41 (ref), isSmallPortraitMode (ref), reportPreciseSelectionPortraitHeaderFooterModule (copy), var34 (ref), reportPreciseSelectionLandscapeHeaderModule (copy), var33 (ref), var21 (ref), var31 (ref), var1 (ref), inGameAssetReportSubmitDialogModule (copy), viewportSize (ref), var35 (ref), var39 (ref), var14 (ref), fFlagPrefillPreciseSelectionChoices (copy), var9 (ref), var3 (ref), inGameAssetReportCompleteModalModule (copy), var40 (ref), var5 (ref), inGameAssetReportIPInfringementModalModule (copy), var25 (ref), var27 (ref), inGameAssetIPInfringementErrorModalModule (copy), var42 (ref), var43 (ref), var29 (ref)
-		return reactModule.createElement("Frame", {
+		coachmarkText = "Feature.ReportAbuse.Label.CantSelectSubtitle"
+	})(function(p3) --[[ Line: 413 ]]
+		-- upvalues: ReactModule (upval), UseResult7 (copy), IsSmallPortraitMode (copy), ReportPreciseSelectionPortraitHeaderFooterModule (upval), UseResult3 (copy), ReportPreciseSelectionLandscapeHeaderModule (upval), UseResult2 (copy), UseStateResult10 (copy), UseResult (copy), UseStateResult (copy), InGameAssetReportSubmitDialogModule (upval), ViewportSize (copy), UseResult4 (copy), UseResult5 (copy), UseReducerResult2 (copy), FFlagPrefillPreciseSelectionChoices (upval), UseStateResult5 (copy), UseStateResult1 (copy), InGameAssetReportCompleteModalModule (upval), UseResult6 (copy), UseStateResult3 (copy), InGameAssetReportIPInfringementModalModule (upval), UseStateResult12 (copy), UseStateResult13 (copy), InGameAssetIPInfringementErrorModalModule (upval), UseResult8 (copy), UseResult9 (copy), UseStateResult14 (copy)
+		return ReactModule.createElement("Frame", {
 			Size = UDim2.new(1, 0, 1, 0),
 			BackgroundTransparency = 1,
-			[reactModule.Change.AbsoluteSize] = var41
+			[ReactModule.Change.AbsoluteSize] = UseResult7
 		}, {
-			Header = reactModule.createElement("TextButton", {
+			Header = ReactModule.createElement("TextButton", {
 				BackgroundTransparency = 1,
 				ZIndex = 2,
 				AutoButtonColor = false,
 				Size = UDim2.new(1, 0, 0, 72)
 			}, {
-				Layout = reactModule.createElement("UIListLayout", {
+				Layout = ReactModule.createElement("UIListLayout", {
 					FillDirection = Enum.FillDirection.Vertical,
 					HorizontalAlignment = Enum.HorizontalAlignment.Center,
 					SortOrder = Enum.SortOrder.LayoutOrder
 				}),
-				InGameAssetReportModeHeader = if isSmallPortraitMode then reactModule.createElement(reportPreciseSelectionPortraitHeaderFooterModule.PortraitModeHeader, {
-					titleText = p5.mainTitle,
-					nextText = p5.next,
-					backAction = var34
-				}) else reactModule.createElement(reportPreciseSelectionLandscapeHeaderModule, {
-					titleText = p5.mainTitle,
-					nextText = p5.next,
-					nextAction = var33,
-					backAction = var34,
-					coachmarkTitle = p5.coachmarkTitle,
-					coachmarkText = p5.coachmarkText,
-					isCoachmarkOpen = var21,
-					onCoachmarkClose = var31
+				InGameAssetReportModeHeader = if IsSmallPortraitMode then ReactModule.createElement(ReportPreciseSelectionPortraitHeaderFooterModule.PortraitModeHeader, {
+					titleText = p3.mainTitle,
+					nextText = p3.next,
+					backAction = UseResult3
+				}) else ReactModule.createElement(ReportPreciseSelectionLandscapeHeaderModule, {
+					titleText = p3.mainTitle,
+					nextText = p3.next,
+					nextAction = UseResult2,
+					backAction = UseResult3,
+					coachmarkTitle = p3.coachmarkTitle,
+					coachmarkText = p3.coachmarkText,
+					isCoachmarkOpen = UseStateResult10,
+					onCoachmarkClose = UseResult
 				})
 			}),
-			Footer = if isSmallPortraitMode then reactModule.createElement("TextButton", {
+			Footer = if IsSmallPortraitMode then ReactModule.createElement("TextButton", {
 				ZIndex = 2,
 				BackgroundTransparency = 1,
 				AutoButtonColor = false,
 				Size = UDim2.new(1, 0, 0, 60),
 				Position = UDim2.new(0, 0, 1, -60)
 			}, {
-				InGameAssetReportModeFooter = reactModule.createElement(reportPreciseSelectionPortraitHeaderFooterModule.PortraitModeFooter, {
-					nextAction = var33,
-					nextText = p5.next,
-					isCoachmarkOpen = var21,
-					onCoachmarkClose = var31,
-					coachmarkTitle = p5.coachmarkTitle,
-					coachmarkText = p5.coachmarkText
+				InGameAssetReportModeFooter = ReactModule.createElement(ReportPreciseSelectionPortraitHeaderFooterModule.PortraitModeFooter, {
+					nextAction = UseResult2,
+					nextText = p3.next,
+					isCoachmarkOpen = UseStateResult10,
+					onCoachmarkClose = UseResult,
+					coachmarkTitle = p3.coachmarkTitle,
+					coachmarkText = p3.coachmarkText
 				})
 			}) else nil,
-			SubmitDialog = if var1 then reactModule.createElement(inGameAssetReportSubmitDialogModule, {
-				screenSize = viewportSize,
-				onSubmit = var35,
-				onBack = var39,
-				analyticsDispatch = var14,
-				extractionResult = if fFlagPrefillPreciseSelectionChoices then var9 else nil
+			SubmitDialog = if UseStateResult then ReactModule.createElement(InGameAssetReportSubmitDialogModule, {
+				screenSize = ViewportSize,
+				onSubmit = UseResult4,
+				onBack = UseResult5,
+				analyticsDispatch = UseReducerResult2,
+				extractionResult = if FFlagPrefillPreciseSelectionChoices then UseStateResult5 else nil
 			}) else nil,
-			ReportCompleteModal = if var3 then reactModule.createElement(inGameAssetReportCompleteModalModule, { screenSize = viewportSize, onClose = var40 }) else nil,
-			IPInfringementModal = if var5 then reactModule.createElement(inGameAssetReportIPInfringementModalModule, {
-				screenSize = viewportSize,
-				reportCode = var25,
-				onClose = var40
+			ReportCompleteModal = if UseStateResult1 then ReactModule.createElement(InGameAssetReportCompleteModalModule, { screenSize = ViewportSize, onClose = UseResult6 }) else nil,
+			IPInfringementModal = if UseStateResult3 then ReactModule.createElement(InGameAssetReportIPInfringementModalModule, {
+				screenSize = ViewportSize,
+				reportCode = UseStateResult12,
+				onClose = UseResult6
 			}) else nil,
-			ErrorModal = if var27 ~= nil then nil else reactModule.createElement(inGameAssetIPInfringementErrorModalModule, {
-				screenSize = viewportSize,
-				onBack = var42,
-				errorCode = var27,
-				onReportExperience = var43,
-				isReportExperienceLoading = var29
+			ErrorModal = if UseStateResult13 == nil then nil else ReactModule.createElement(InGameAssetIPInfringementErrorModalModule, {
+				screenSize = ViewportSize,
+				onBack = UseResult8,
+				errorCode = UseStateResult13,
+				onReportExperience = UseResult9,
+				isReportExperienceLoading = UseStateResult14
 			})
 		})
 	end)

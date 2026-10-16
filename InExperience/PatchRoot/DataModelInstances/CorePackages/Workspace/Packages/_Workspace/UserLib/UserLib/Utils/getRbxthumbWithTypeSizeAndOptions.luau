@@ -1,27 +1,27 @@
-﻿local constantsModule = require(script.Parent.Constants)
-local sharedFlagsModule = require(script:FindFirstAncestor("UserLib").Parent.SharedFlags)
-local t = {
-	[constantsModule.RbxthumbTypes.Avatar] = sharedFlagsModule.FFlagAXBackgroundsInAvatarThumbnails,
-	[constantsModule.RbxthumbTypes.AvatarBust] = sharedFlagsModule.FFlagAXBackgroundsInAvatarBustThumbnails,
-	[constantsModule.RbxthumbTypes.AvatarHeadShot] = sharedFlagsModule.FFlagAXBackgroundsInHeadshotThumbnails,
-	[constantsModule.RbxthumbTypes.Outfit] = sharedFlagsModule.FFlagAXBackgroundsInOutfitThumbnails
+﻿local ConstantsModule = require(script.Parent.Constants)
+local SharedFlagsModule = require(script:FindFirstAncestor("UserLib").Parent.SharedFlags)
+local config = {
+	[ConstantsModule.RbxthumbTypes.Avatar] = SharedFlagsModule.FFlagAXBackgroundsInAvatarThumbnails,
+	[ConstantsModule.RbxthumbTypes.AvatarBust] = SharedFlagsModule.FFlagAXBackgroundsInAvatarBustThumbnails,
+	[ConstantsModule.RbxthumbTypes.AvatarHeadShot] = SharedFlagsModule.FFlagAXBackgroundsInHeadshotThumbnails,
+	[ConstantsModule.RbxthumbTypes.Outfit] = SharedFlagsModule.FFlagAXBackgroundsInOutfitThumbnails
 }
 
-return function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: t (ref), constantsModule (ref)
-	local formattedText = string.format("rbxthumb://type=%s&id=%s&w=%d&h=%d", p2, tostring(p1), p3, p3)
+return function(p1, AvatarHeadShot, p2, p3, p4, p5): string --[[ Line: 14 ]]
+	-- upvalues: config (copy), ConstantsModule (copy)
+	local Formatted = string.format("rbxthumb://type=%s&id=%s&w=%d&h=%d", AvatarHeadShot, tostring(p1), p2, p2)
 	
+	if p3 then
+		Formatted ..= "&filters=circular"
+	end
 	if p4 then
-		formattedText ..= "&filters=circular"
+		Formatted ..= "&timestamp=" .. os.time()
 	end
-	if p5 then
-		formattedText ..= "&timestamp=" .. os.time()
+	if config[AvatarHeadShot] then
+		Formatted ..= "&includeBackground=true"
 	end
-	if t[p2] then
-		formattedText ..= "&includeBackground=true"
+	if p5 and AvatarHeadShot == ConstantsModule.RbxthumbTypes.AvatarHeadShot then
+		Formatted ..= "&includeprofileframe=true"
 	end
-	if p6 and p2 == constantsModule.RbxthumbTypes.AvatarHeadShot then
-		formattedText ..= "&includeprofileframe=true"
-	end
-	return formattedText
+	return Formatted
 end

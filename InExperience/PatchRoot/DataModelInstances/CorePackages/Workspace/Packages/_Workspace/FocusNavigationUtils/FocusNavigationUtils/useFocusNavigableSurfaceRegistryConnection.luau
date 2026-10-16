@@ -1,25 +1,25 @@
-﻿local focusNavigationUtils = script:FindFirstAncestor("FocusNavigationUtils")
-local reactModule = require(focusNavigationUtils.Parent.React)
-local focusNavigableSurfaceRegistryModule = require(focusNavigationUtils.FocusNavigableSurfaceRegistry)
-local useRegisterFocusNavigableSurface = focusNavigableSurfaceRegistryModule.useRegisterFocusNavigableSurface
-local useDeRegisterFocusNavigableSurface = focusNavigableSurfaceRegistryModule.useDeRegisterFocusNavigableSurface
-local _ = require(focusNavigationUtils.FocusNavigableSurfaceIdentifierEnum)
+﻿local FocusNavigationUtils = script:FindFirstAncestor("FocusNavigationUtils")
+local ReactModule = require(FocusNavigationUtils.Parent.React)
+local FocusNavigableSurfaceRegistryModule = require(FocusNavigationUtils.FocusNavigableSurfaceRegistry)
+local UseRegisterFocusNavigableSurfaceFunction = FocusNavigableSurfaceRegistryModule.useRegisterFocusNavigableSurface
+local UseDeRegisterFocusNavigableSurfaceFunction = FocusNavigableSurfaceRegistryModule.useDeRegisterFocusNavigableSurface
+local _ = require(FocusNavigationUtils.FocusNavigableSurfaceIdentifierEnum)
 
-return function(p1, p2, p3)
-	-- upvalues: useRegisterFocusNavigableSurface (ref), useDeRegisterFocusNavigableSurface (ref), reactModule (ref)
-	local var1 = useRegisterFocusNavigableSurface()
-	local var2 = useDeRegisterFocusNavigableSurface()
-	local var3 = p1 ~= nil and (p3 == nil or p3)
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), var1 (ref), p2 (ref), p1 (ref), var2 (ref)
-		if var3 then
-			var1(p2, p1)
+return function(p1, p2, p3) --[[ Line: 17 ]]
+	-- upvalues: UseRegisterFocusNavigableSurfaceFunction (copy), UseDeRegisterFocusNavigableSurfaceFunction (copy), ReactModule (copy)
+	local UseRegisterFocusNavigableSurfaceResult = UseRegisterFocusNavigableSurfaceFunction()
+	local UseDeRegisterFocusNavigableSurfaceResult = UseDeRegisterFocusNavigableSurfaceFunction()
+	local v1 = p1 ~= nil and (p3 == nil or p3)
+	ReactModule.useEffect(function() --[[ Line: 26 ]]
+		-- upvalues: v1 (copy), UseRegisterFocusNavigableSurfaceResult (copy), p2 (copy), p1 (copy), UseDeRegisterFocusNavigableSurfaceResult (copy)
+		if v1 then
+			UseRegisterFocusNavigableSurfaceResult(p2, p1)
 		else
-			var2(p2, p1)
+			UseDeRegisterFocusNavigableSurfaceResult(p2, p1)
 		end
-		return function()
-			-- upvalues: var2 (copy), p2 (copy), p1 (copy)
-			var2(p2, p1)
+		return function() --[[ Line: 33 ]]
+			-- upvalues: UseDeRegisterFocusNavigableSurfaceResult (upval), p2 (upval), p1 (upval)
+			UseDeRegisterFocusNavigableSurfaceResult(p2, p1)
 		end
-	end, { var3, p2, p1 })
+	end, { v1, p2, p1 })
 end

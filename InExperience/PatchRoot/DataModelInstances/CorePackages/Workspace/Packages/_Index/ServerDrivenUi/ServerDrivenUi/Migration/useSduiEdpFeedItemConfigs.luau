@@ -1,143 +1,144 @@
-﻿local serverDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
-local parent = serverDrivenUi.Parent
-local reactModule = require(parent.React)
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local sduiComponent = sduiCoreSystemModule.SduiComponent
-local sduiErrors = sduiCoreSystemModule.SduiErrors
-local _ = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local getSduiFeedStoreModule = require(serverDrivenUi.DataStore.getSduiFeedStore)
-local _ = require(serverDrivenUi.DataStore.SduiFeedStoreTypes)
+﻿local ServerDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
+local Parent = ServerDrivenUi.Parent
+local ReactModule = require(Parent.React)
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiComponent = SduiCoreSystemModule.SduiComponent
+local SduiErrors = SduiCoreSystemModule.SduiErrors
+local _ = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local GetSduiFeedStoreModule = require(ServerDrivenUi.DataStore.getSduiFeedStore)
+local _ = require(ServerDrivenUi.DataStore.SduiFeedStoreTypes)
 
-local function _(p1, p2, p3, p4, p5)
-	if p1 and p3[p1] then
-		p5({
-			layoutOrder = p1,
-			itemKey = p4,
-			existingComponent = p3[p1]
+local function _(LayoutOrder, p1, p2, ItemKey, Callback: (any) -> ()) --[[ Line: 28 | Named "getLayoutOrder" ]]
+	if LayoutOrder and p2[LayoutOrder] then
+		Callback({
+			layoutOrder = LayoutOrder,
+			itemKey = ItemKey,
+			existingComponent = p2[LayoutOrder]
 		})
 		
-		return p2
+		return p1
+	else
+		return if LayoutOrder then LayoutOrder else p1
 	end
-	return p1 or p2
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), getSduiFeedStoreModule (ref), signalsReactModule (ref), sduiErrors (ref), sduiComponent (ref)
-	local var1 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: p1 (ref), getSduiFeedStoreModule (copy)
-		return function(p2)
-			-- upvalues: p1 (copy), getSduiFeedStoreModule (copy)
+return function(p1) --[[ Line: 65 | Named "useSduiEdpFeedItemConfigs" ]]
+	-- upvalues: ReactModule (copy), GetSduiFeedStoreModule (copy), SignalsReactModule (copy), SduiErrors (copy), SduiComponent (copy)
+	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 66 ]]
+		-- upvalues: p1 (copy), GetSduiFeedStoreModule (upval)
+		return function(p2) --[[ Line: 67 ]]
+			-- upvalues: p1 (upval), GetSduiFeedStoreModule (upval)
 			if not p1.shouldInterleaveSdui then
 				return {}
 			end
-			local var2 = getSduiFeedStoreModule(p1.storeKey)
+			local SduiFeedStoreModule = GetSduiFeedStoreModule(p1.storeKey)
 			local t = {}
 			
-			for i, v in if var2.getItemCollectionKeys then var2.getItemCollectionKeys(p2) else {} do
-				local itemCollection = var2.getItemCollection(v)
+			for _, value in if SduiFeedStoreModule.getItemCollectionKeys then SduiFeedStoreModule.getItemCollectionKeys(p2) else {} do
+				local ItemCollection = SduiFeedStoreModule.getItemCollection(value)
 				
-				if itemCollection then
-					t[v] = itemCollection(p2)
+				if ItemCollection then
+					t[value] = ItemCollection(p2)
 				end
 			end
 			return t
 		end
-	end, { p1.storeKey, p1.shouldInterleaveSdui }))
-	local var3 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref)
+	end, { p1.storeKey, p1.shouldInterleaveSdui })))
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 89 ]]
+		-- upvalues: p1 (copy)
 		local t = {}
 		
 		if not p1.shouldInterleaveSdui then
 			return t
 		end
-		for i, v in p1.portraitLayoutConfig do
-			t[v] = i
+		for i, value in p1.portraitLayoutConfig do
+			t[value] = i
 		end
 		return t
 	end, { p1.portraitLayoutConfig, p1.shouldInterleaveSdui })
-	local var4 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref)
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 100 ]]
+		-- upvalues: p1 (copy)
 		local t = {}
 		
 		if not p1.shouldInterleaveSdui then
 			return t
 		end
-		for i, v in p1.landscapeLayoutConfig do
-			t[v] = i
+		for i, value in p1.landscapeLayoutConfig do
+			t[value] = i
 		end
 		return t
 	end, { p1.landscapeLayoutConfig, p1.shouldInterleaveSdui })
-	local var5 = reactModule.useCallback(function(p3, p4, p5)
-		-- upvalues: p1 (ref), var3 (ref), var4 (ref)
+	local UseResult = ReactModule.useCallback(function(p3, ItemKey, p4) --[[ Line: 112 ]]
+		-- upvalues: p1 (copy), UseMemoResult (copy), UseMemoResult1 (copy)
 		if not p1.shouldInterleaveSdui then
 			return {}
 		end
-		local var6
-		local layoutOrder = p3.sduiConfig and (p3.sduiConfig.props and p3.sduiConfig.props.LayoutOrder)
-		local var7 = p1.defaultLayoutOrder + p5
-		local logLayoutConflictFn = p1.logLayoutConflictFn
+		local LayoutOrder = p3.sduiConfig and (p3.sduiConfig.props and p3.sduiConfig.props.LayoutOrder)
+		local NewDefaultLayoutOrder = p1.defaultLayoutOrder + p4
+		local LogLayoutConflictFnFunction: (any) -> () = p1.logLayoutConflictFn
+		local LayoutOrder1 = nil
 		
-		if layoutOrder and var3[layoutOrder] then
-			logLayoutConflictFn({
-				layoutOrder = layoutOrder,
-				itemKey = p4,
-				existingComponent = var3[layoutOrder]
+		if LayoutOrder and UseMemoResult[LayoutOrder] then
+			LogLayoutConflictFnFunction({
+				layoutOrder = LayoutOrder,
+				itemKey = ItemKey,
+				existingComponent = UseMemoResult[LayoutOrder]
 			})
-			var6 = var7
+			LayoutOrder1 = NewDefaultLayoutOrder
 		else
-			var6 = layoutOrder or var7
+			LayoutOrder1 = if LayoutOrder then LayoutOrder else NewDefaultLayoutOrder
 		end
-		local var8
-		local logLayoutConflictFn_1 = p1.logLayoutConflictFn
+		local LogLayoutConflictFnFunction1: (any) -> () = p1.logLayoutConflictFn
+		local LayoutOrder2 = nil
 		
-		if layoutOrder and var4[layoutOrder] then
-			logLayoutConflictFn_1({
-				layoutOrder = layoutOrder,
-				itemKey = p4,
-				existingComponent = var4[layoutOrder]
+		if LayoutOrder and UseMemoResult1[LayoutOrder] then
+			LogLayoutConflictFnFunction1({
+				layoutOrder = LayoutOrder,
+				itemKey = ItemKey,
+				existingComponent = UseMemoResult1[LayoutOrder]
 			})
-			var8 = var7
+			LayoutOrder2 = NewDefaultLayoutOrder
 		else
-			var8 = layoutOrder or var7
+			LayoutOrder2 = if LayoutOrder then LayoutOrder else NewDefaultLayoutOrder
 		end
-		return { portrait = var6, landscape = var8 }
+		return { portrait = LayoutOrder1, landscape = LayoutOrder2 }
 	end, {
-		var4,
-		var3,
+		UseMemoResult1,
+		UseMemoResult,
 		p1.defaultLayoutOrder,
 		p1.logLayoutConflictFn,
 		p1.shouldInterleaveSdui
 	})
 	
-	return reactModule.useMemo(function()
-		-- upvalues: p1 (ref), var1 (ref), var5 (ref), sduiErrors (copy), reactModule (copy), sduiComponent (copy)
+	return ReactModule.useMemo(function() --[[ Line: 153 ]]
+		-- upvalues: p1 (copy), UseSignalStateResult (copy), UseResult (copy), SduiErrors (upval), ReactModule (upval), SduiComponent (upval)
 		if not p1.shouldInterleaveSdui then
 			return {}
 		end
 		local t = {}
-		local var6 = 0
+		local Count = 0
 		
-		for i, v in var1 do
-			local var7 = var5(v, i, var6)
-			var6 += 1
-			local var8 = if v then v.sduiConfig else nil
-			local storeKey = `SduiEdpFeedItem-{p1.storeKey}-{i}`
+		for i, value in UseSignalStateResult do
+			local UseResultResult = UseResult(value, i, Count)
+			Count += 1
+			local SduiConfig = value and value.sduiConfig or nil
+			local SduiEdpFeedItemName: string = `SduiEdpFeedItem-{p1.storeKey}-{i}`
 			
-			if var8 == nil then
-				p1.sduiContext.dependencies.logger.reportError(sduiErrors.SduiErrorType.NilComponentConfig, {
-					name = storeKey,
+			if SduiConfig == nil then
+				p1.sduiContext.dependencies.logger.reportError(SduiErrors.SduiErrorType.NilComponentConfig, {
+					name = SduiEdpFeedItemName,
 					message = `Unable to render edp feed item for sdui. Feed store key: {p1.storeKey}, Collection key: {i}`
 				}, p1.sduiContext.appPage)
 			else
 				t[i] = {
-					portraitLayoutOrder = var7.portrait,
-					landscapeLayoutOrder = var7.landscape,
-					renderComponent = function()
-						-- upvalues: reactModule (copy), sduiComponent (copy), storeKey (ref), var8 (ref), p1 (copy)
-						return reactModule.createElement(sduiComponent, {
-							debugName = storeKey,
-							componentConfig = var8,
+					portraitLayoutOrder = UseResultResult.portrait,
+					landscapeLayoutOrder = UseResultResult.landscape,
+					renderComponent = function() --[[ Line: 176 ]]
+						-- upvalues: ReactModule (upval), SduiComponent (upval), SduiEdpFeedItemName (copy), SduiConfig (copy), p1 (upval)
+						return ReactModule.createElement(SduiComponent, {
+							debugName = SduiEdpFeedItemName,
+							componentConfig = SduiConfig,
 							sduiContext = p1.sduiContext
 						})
 					end
@@ -146,10 +147,10 @@ return function(p1)
 		end
 		return t
 	end, {
-		var1,
+		UseSignalStateResult,
 		p1.storeKey,
 		p1.sduiContext,
-		var5,
+		UseResult,
 		p1.shouldInterleaveSdui
 	})
 end

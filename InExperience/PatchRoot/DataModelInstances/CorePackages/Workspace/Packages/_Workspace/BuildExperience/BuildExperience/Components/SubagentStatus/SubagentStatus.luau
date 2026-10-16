@@ -1,74 +1,77 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local text = foundationModule.Text
-local view = foundationModule.View
-local useTokens = foundationModule.Hooks.useTokens
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-local function _(p1)
-	if p1 == nil then
+local function _(List): boolean --[[ Line: 24 | Named "hasChildren" ]]
+	if List == nil then
 		return false
-	elseif typeof(p1) ~= "table" then
+	end
+	if typeof(List) ~= "table" then
 		return true
 	end
-	for i, v in p1 do
-		if v ~= nil then
+	for _, value in List do
+		if value ~= nil then
 			return true
 		end
 	end
 	return false
 end
 
-return reactModule.memo(function(p2)
-	-- upvalues: useTokens (ref), reactModule (ref), view (ref), text (ref)
-	local var1
-	local var2 = useTokens()
-	local testId = p2.testId or "subagent-status"
-	local var3 = p2.isDisabled == true
-	local children = p2.children
+return ReactModule.memo(function(p1) --[[ Line: 39 | Named "SubagentStatus" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Text (copy)
+	local UseTokensResult = UseTokensFunction()
+	local TestId = p1.testId or "subagent-status"
+	local IsIsDisabled = p1.isDisabled == true
+	local Children = p1.children
+	local Flag = nil
 	
-	if children == nil then
-		var1 = false
-	elseif typeof(children) == "table" then
-		for i, v in children do
-			if v ~= nil then
-				var1 = true
+	if Children == nil then
+		Flag = false
+	elseif typeof(Children) == "table" then
+		Flag = false
+		
+		for _, child in Children do
+			if child ~= nil then
+				Flag = true
+				break
 			end
 		end
-		var1 = false
 	else
-		var1 = true
+		Flag = true
 	end
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "row align-x-center align-y-center size-0-800 auto-x radius-circle clip",
-		LayoutOrder = p2.layoutOrder,
-		backgroundStyle = var2.Color.ActionStandard.Background,
+		LayoutOrder = p1.layoutOrder,
+		backgroundStyle = UseTokensResult.Color.ActionStandard.Background,
 		cursor = {
-			radius = UDim.new(0, var2.Radius.Circle),
-			offset = var2.Size.Size_200,
-			borderWidth = math.floor(var2.Stroke.Thicker)
+			radius = UDim.new(0, UseTokensResult.Radius.Circle),
+			offset = UseTokensResult.Size.Size_200,
+			borderWidth = math.floor(UseTokensResult.Stroke.Thicker)
 		},
-		GroupTransparency = if var3 then 0.5 else 0,
-		isDisabled = var3,
-		onActivated = p2.onActivated,
-		selection = { Selectable = not var3 },
-		testId = testId
+		GroupTransparency = if IsIsDisabled then 0.5 else 0,
+		isDisabled = IsIsDisabled,
+		onActivated = p1.onActivated,
+		selection = { Selectable = not IsIsDisabled },
+		testId = TestId
 	}, {
-		Text = reactModule.createElement(text, {
+		Text = ReactModule.createElement(Text, {
 			LayoutOrder = 1,
 			tag = "shrink size-0-full auto-x text-label-medium text-truncate-end",
-			Text = p2.text,
+			Text = p1.text,
 			padding = {
-				left = UDim.new(0, var2.Padding.Medium),
-				right = if var1 then nil else UDim.new(0, var2.Padding.Medium)
+				left = UDim.new(0, UseTokensResult.Padding.Medium),
+				right = if Flag then nil else UDim.new(0, UseTokensResult.Padding.Medium)
 			},
-			textStyle = var2.Color.ActionStandard.Foreground,
-			testId = `{testId}-text`
+			textStyle = UseTokensResult.Color.ActionStandard.Foreground,
+			testId = `{TestId}-text`
 		}),
-		Trailing = if var1 then reactModule.createElement(view, {
+		Trailing = if Flag then ReactModule.createElement(View, {
 			LayoutOrder = 2,
 			tag = "row align-x-center align-y-center auto-xy padding-left-small padding-right-medium",
-			testId = `{testId}-trailing`
-		}, p2.children) else nil
+			testId = `{TestId}-trailing`
+		}, p1.children) else nil
 	})
 end)

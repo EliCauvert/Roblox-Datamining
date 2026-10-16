@@ -1,9 +1,9 @@
-﻿local var1, var2 = require(script:FindFirstAncestor("ProfilePlatformCommon").Parent.Signals).createSignal(0)
+﻿local Signal, Signal2 = require(script:FindFirstAncestor("ProfilePlatformCommon").Parent.Signals).createSignal(0)
 
 return {
-	notifyProfileRefresh = function()
-		-- upvalues: var2 (ref)
-		var2(os.clock())
+	notifyProfileRefresh = function() --[[ Line: 7 ]]
+		-- upvalues: Signal2 (copy)
+		Signal2(os.clock())
 	end,
-	getProfileRefreshSignal = var1
+	getProfileRefreshSignal = Signal
 }

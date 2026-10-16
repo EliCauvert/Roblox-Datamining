@@ -1,40 +1,38 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local expChatSharedModule = require(parent.ExpChatShared)
-local roduxModule = require(parent.Rodux)
-local dictionary = require(parent.llama).Dictionary
-local actions = expChat.Actions
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local Dictionary = require(Parent.llama).Dictionary
+local Actions = ExpChat.Actions
 
-return roduxModule.createReducer({
+return require(Parent.Rodux).createReducer({
 	_propertyEnabled = false,
 	_coreGuiEnabled = true,
 	_topBarVisibility = true,
 	value = false
 }, {
-	[require(actions.ChannelTabsConfigurationEnabled).name] = function(p1, p2)
-		-- upvalues: dictionary (ref)
-		return dictionary.join(p1, {
+	[require(Actions.ChannelTabsConfigurationEnabled).name] = function(p1, p2) --[[ Line: 29 ]]
+		-- upvalues: Dictionary (copy)
+		return Dictionary.join(p1, {
 			_propertyEnabled = p2.enabled,
 			value = p1._topBarVisibility and (p1._coreGuiEnabled and p2.enabled)
 		})
 	end,
-	[require(actions.ChatTopBarButtonActivated).name] = function(p1, p2)
-		-- upvalues: dictionary (ref)
-		return dictionary.join(p1, {
+	[require(Actions.ChatTopBarButtonActivated).name] = function(p1, p2) --[[ Line: 36 ]]
+		-- upvalues: Dictionary (copy)
+		return Dictionary.join(p1, {
 			_topBarVisibility = p2.isVisible,
 			value = p1._propertyEnabled and (p1._coreGuiEnabled and p2.isVisible)
 		})
 	end,
-	[require(actions.SetCoreGuiEnabledChanged).name] = function(p1, p2)
-		-- upvalues: dictionary (ref)
-		return dictionary.join(p1, {
+	[require(Actions.SetCoreGuiEnabledChanged).name] = function(p1, p2) --[[ Line: 43 ]]
+		-- upvalues: Dictionary (copy)
+		return Dictionary.join(p1, {
 			_coreGuiEnabled = p2.enabled,
 			value = p1._propertyEnabled and (p1._topBarVisibility and p2.enabled)
 		})
 	end,
-	[expChatSharedModule.Actions.ClientAppLoaded.name] = function(p1, p2)
-		-- upvalues: dictionary (ref)
-		return dictionary.join(p1, {
+	[require(Parent.ExpChatShared).Actions.ClientAppLoaded.name] = function(p1, p2) --[[ Line: 50 ]]
+		-- upvalues: Dictionary (copy)
+		return Dictionary.join(p1, {
 			_coreGuiEnabled = p2.isChatCoreGuiEnabled,
 			value = p1._propertyEnabled and (p1._topBarVisibility and p2.isChatCoreGuiEnabled)
 		})

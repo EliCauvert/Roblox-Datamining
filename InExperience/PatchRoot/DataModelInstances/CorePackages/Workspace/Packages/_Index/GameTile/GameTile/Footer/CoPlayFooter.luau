@@ -1,19 +1,19 @@
-﻿local parent = script:FindFirstAncestor("GameTile").Parent
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-local useStyle = UIBloxModule.Core.Style.useStyle
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local styledTextLabel = UIBloxModule.App.Text.StyledTextLabel
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local userLibModule = require(parent.UserLib)
-local constants = userLibModule.Utils.Constants
-local getRbxthumbWithTypeSizeAndOptions = userLibModule.Utils.getRbxthumbWithTypeSizeAndOptions
+﻿local Parent = script:FindFirstAncestor("GameTile").Parent
+local ReactModule = require(Parent.React)
+local UIBloxModule = require(Parent.UIBlox)
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local StyledTextLabel = UIBloxModule.App.Text.StyledTextLabel
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UserLibModule = require(Parent.UserLib)
+local Constants = UserLibModule.Utils.Constants
+local GetRbxthumbWithTypeSizeAndOptionsFunction = UserLibModule.Utils.getRbxthumbWithTypeSizeAndOptions
 
-local var1 = function(p1)
-	-- upvalues: reactModule (ref)
-	return reactModule.createElement(reactModule.Fragment, nil, {
-		Corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) }),
-		Border = reactModule.createElement("UIStroke", {
+local function v7(p1) --[[ Line: 24 ]]
+	-- upvalues: ReactModule (copy)
+	return ReactModule.createElement(ReactModule.Fragment, nil, {
+		Corner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) }),
+		Border = ReactModule.createElement("UIStroke", {
 			Thickness = 2,
 			ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
 			Color = p1.Theme.BackgroundUIDefault.Color,
@@ -22,32 +22,32 @@ local var1 = function(p1)
 	})
 end
 
-local var2 = function(p1, p2)
-	-- upvalues: getRbxthumbWithTypeSizeAndOptions (ref), constants (ref), reactModule (ref), imageSetLabel (ref), var1 (ref), styledTextLabel (ref)
-	local t = {}
+local function v8(Friends, p1) --[[ Line: 38 ]]
+	-- upvalues: GetRbxthumbWithTypeSizeAndOptionsFunction (copy), Constants (copy), ReactModule (copy), ImageSetLabel (copy), v7 (copy), StyledTextLabel (copy)
+	local Elements = {}
 	
-	if not p1 then
+	if not Friends then
 		return nil, nil
 	end
-	local var3 = 0
+	local Count = 0
 	
-	for i, v in pairs(p1) do
-		var3 += 1
-		local var4 = tostring(v)
+	for _, friend in pairs(Friends) do
+		Count += 1
+		local Text = tostring(friend)
 		
-		if var3 <= 3 then
-			t["mini_avatar_" .. var7] = reactModule.createElement(imageSetLabel, {
+		if Count <= 3 then
+			Elements["mini_avatar_" .. Text] = ReactModule.createElement(ImageSetLabel, {
 				BackgroundTransparency = 0,
 				AnchorPoint = Vector2.new(0, 0.5),
-				Position = UDim2.new(0, var3 * 16 / 2, 0.5, 0),
+				Position = UDim2.new(0, Count * 16 / 2, 0.5, 0),
 				Size = UDim2.fromOffset(16, 16),
-				Image = getRbxthumbWithTypeSizeAndOptions(var4, constants.RbxthumbTypes.AvatarHeadShot, 100),
+				Image = GetRbxthumbWithTypeSizeAndOptionsFunction(Text, Constants.RbxthumbTypes.AvatarHeadShot, 100),
 				BackgroundColor3 = Color3.fromRGB(209, 209, 209),
-				ZIndex = 4 - var3
-			}, { var1(p2) })
+				ZIndex = 4 - Count
+			}, { v7(p1) })
 		end
 	end
-	t.online_indicator = reactModule.createElement("Frame", {
+	Elements.online_indicator = ReactModule.createElement("Frame", {
 		BackgroundTransparency = 0,
 		ZIndex = 4,
 		AnchorPoint = Vector2.new(0, 0.5),
@@ -55,56 +55,56 @@ local var2 = function(p1, p2)
 		Size = UDim2.fromOffset(14, 14),
 		BackgroundColor3 = Color3.fromRGB(0, 180, 109)
 	}, {
-		var1(p2),
-		InExperienceCounter = reactModule.createElement(styledTextLabel, {
+		v7(p1),
+		InExperienceCounter = ReactModule.createElement(StyledTextLabel, {
 			lineHeight = 1,
 			richText = false,
-			colorStyle = p2.Theme.TextEmphasis,
-			fontStyle = p2.Font.Footer,
+			colorStyle = p1.Theme.TextEmphasis,
+			fontStyle = p1.Font.Footer,
 			textXAlignment = Enum.TextXAlignment.Center,
 			size = UDim2.fromScale(1, 1),
-			text = tostring(var3),
+			text = tostring(Count),
 			textTruncate = Enum.TextTruncate.None
 		})
 	})
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.fromScale(1, 1),
 		AnchorPoint = Vector2.new(0.5, 0.5),
 		Position = UDim2.fromScale(0.5, 0.5)
-	}, t), var3
+	}, Elements), Count
 end
 
-return function(p3)
-	-- upvalues: useStyle (ref), var2 (ref), useLocalization (ref), reactModule (ref), styledTextLabel (ref)
-	local var5 = useStyle()
-	local font = var5.Font
-	local var6, var7 = var2(p3.friends, var5)
+return function(p2) --[[ Line: 99 ]]
+	-- upvalues: UseStyleFunction (copy), v8 (copy), UseLocalizationFunction (copy), ReactModule (copy), StyledTextLabel (copy)
+	local UseStyleResult = UseStyleFunction()
+	local UseStyleResultFont = UseStyleResult.Font
+	local ActiveFriends, v1 = v8(p2.friends, UseStyleResult)
 	
-	return reactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
-		UIListLayout = reactModule.createElement("UIListLayout", {
+	return ReactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
+		UIListLayout = ReactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Horizontal,
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			Padding = UDim.new(0, 6)
 		}),
-		PresenceList = reactModule.createElement("Frame", {
+		PresenceList = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			LayoutOrder = 1,
-			Size = UDim2.new(0, math.min(3, var7 or 0) * 16 / 2 + 16, 0, 22)
-		}, { ActiveFriends = var6 }),
-		FriendsLabel = reactModule.createElement(styledTextLabel, {
+			Size = UDim2.new(0, math.min(3, v1 or 0) * 16 / 2 + 16, 0, 22)
+		}, { ActiveFriends = ActiveFriends }),
+		FriendsLabel = ReactModule.createElement(StyledTextLabel, {
 			lineHeight = 1,
 			richText = false,
 			layoutOrder = 2,
-			colorStyle = var5.Theme.TextMuted,
-			fontStyle = font.CaptionHeader,
+			colorStyle = UseStyleResult.Theme.TextMuted,
+			fontStyle = UseStyleResultFont.CaptionHeader,
 			textXAlignment = Enum.TextXAlignment.Left,
-			size = UDim2.new(1, -40, 0, font.BaseSize * font.CaptionHeader.RelativeSize),
-			text = useLocalization({ friendsText = "CommonUI.Features.Label.Friends" }).friendsText,
+			size = UDim2.new(1, -40, 0, UseStyleResultFont.BaseSize * UseStyleResultFont.CaptionHeader.RelativeSize),
+			text = UseLocalizationFunction({ friendsText = "CommonUI.Features.Label.Friends" }).friendsText,
 			textTruncate = Enum.TextTruncate.AtEnd
 		})
 	})

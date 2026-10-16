@@ -1,151 +1,156 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local _ = require(parent.Otter)
-local reactModule = require(parent.React)
-local reactOtterModule = require(parent.ReactOtter)
-local useRefCache = require(parent.ReactUtils).useRefCache
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local dotModule = require(script.Parent.Dot)
-local getCarouselIndicatorDotsConfigModule = require(script.Parent.getCarouselIndicatorDotsConfig)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local _ = require(Parent.Otter)
+local ReactModule = require(Parent.React)
+local ReactOtterModule = require(Parent.ReactOtter)
+local UseRefCacheFunction = require(Parent.ReactUtils).useRefCache
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local DotModule = require(script.Parent.Dot)
+local GetCarouselIndicatorDotsConfigModule = require(script.Parent.getCarouselIndicatorDotsConfig)
 
-local function getDotCenter(vectorA, vectorB, p1)
-	local var1 = math.max(#vectorA - 1, 0) * p1
-	local var2 = 0
+local function getDotCenter(Dots, ActiveVisibleIndex, Size): number --[[ Line: 26 ]]
+	local ScaledLargest = math.max(#Dots - 1, 0) * Size
+	local NewSize = 0
 	
-	for i, v in vectorA do
-		var1 += v.size
+	for i, dot in Dots do
+		ScaledLargest += dot.size
 		
-		if i < vectorB then
-			var2 += v.size + p1
-		elseif i == vectorB then
-			var2 += v.size / 2
+		if i < ActiveVisibleIndex then
+			NewSize += dot.size + Size
+		elseif i == ActiveVisibleIndex then
+			NewSize += dot.size / 2
 		end
 	end
-	return var2 - var1 / 2
+	return NewSize - ScaledLargest / 2
 end
 
-local t = {
+local config = {
 	page = 1,
 	count = 5,
 	testId = "--foundation-carousel-indicator"
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p2, p3)
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), reactModule (ref), getCarouselIndicatorDotsConfigModule (ref), reactOtterModule (ref), useRefCache (ref), getDotCenter (ref), dotModule (ref), viewModule (ref), withCommonPropsModule (ref)
-	local var3 = withDefaultsModule(p2, t)
-	local var4 = useTokensModule()
-	local count = var3.count
-	local size100 = var4.Size.Size_100
-	local size200 = var4.Size.Size_200
-	local size100_1 = var4.Size.Size_100
-	local minValue = math.min(5, count)
-	local var5 = minValue * size200 + (minValue - 1) * size100
-	local var6 = reactModule.useMemo(function()
-		-- upvalues: getCarouselIndicatorDotsConfigModule (copy), size200 (ref), size100_1 (ref), var3 (ref), count (ref)
-		return getCarouselIndicatorDotsConfigModule(size200, size100_1, var3.page, count)
-	end, { size200, size100_1, var3.page, count })
-	local var7 = reactModule.useRef(nil)
-	local var8, var9 = reactOtterModule.useAnimatedBinding(0)
-	local var10 = useRefCache()
-	local var11 = reactModule.useMemo(function()
-		-- upvalues: var4 (ref)
+return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 51 | Named "CarouselIndicator" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), ReactModule (copy), GetCarouselIndicatorDotsConfigModule (copy), ReactOtterModule (copy), UseRefCacheFunction (copy), getDotCenter (copy), DotModule (copy), ViewModule (copy), WithCommonPropsModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	local UseTokensModuleResult = UseTokensModule()
+	local Count: number = WithDefaultsModuleResult.count
+	local Size100 = UseTokensModuleResult.Size.Size_100
+	local Size200 = UseTokensModuleResult.Size.Size_200
+	local Size100_1 = UseTokensModuleResult.Size.Size_100
+	local Smallest = math.min(5, Count)
+	local XOffset = Smallest * Size200 + (Smallest - 1) * Size100
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 61 ]]
+		-- upvalues: GetCarouselIndicatorDotsConfigModule (upval), Size200 (copy), Size100_1 (copy), WithDefaultsModuleResult (copy), Count (copy)
+		return GetCarouselIndicatorDotsConfigModule(Size200, Size100_1, WithDefaultsModuleResult.page, Count)
+	end, { Size200, Size100_1, WithDefaultsModuleResult.page, Count })
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0)
+	local UseRefCacheResult = UseRefCacheFunction()
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 70 ]]
+		-- upvalues: UseTokensModuleResult (copy)
 		return {
-			easingStyle = var4.Ease.StandardOut,
-			duration = var4.Time.Time_200
+			easingStyle = UseTokensModuleResult.Ease.StandardOut,
+			duration = UseTokensModuleResult.Time.Time_200
 		}
-	end, { var4 })
-	reactModule.useEffect(function()
-		-- upvalues: var7 (ref), var6 (ref), getDotCenter (copy), size100 (ref), var9 (ref), reactOtterModule (copy), var11 (ref), var8 (ref)
-		local current = var7.current
-		var7.current = var6
+	end, { UseTokensModuleResult })
+	ReactModule.useEffect(function() --[[ Line: 77 ]]
+		-- upvalues: UseRefResult (copy), UseMemoResult (copy), getDotCenter (upval), Size100 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), UseMemoResult1 (copy), UseAnimatedBindingResult (copy)
+		local Current = UseRefResult.current
+		UseRefResult.current = UseMemoResult
 		
-		if current and current.count == var6.count and current.page ~= var6.page then
-			var9(reactOtterModule.ease(0, {
-				easingStyle = var11.easingStyle,
-				duration = var11.duration,
-				startingValue = var8:getValue() + (getDotCenter(current.dots, math.clamp(current.activeVisibleIndex + (var6.page - current.page), 1, #current.dots), size100) - getDotCenter(var6.dots, var6.activeVisibleIndex, size100))
+		if Current and Current.count == UseMemoResult.count and Current.page ~= UseMemoResult.page then
+			UseAnimatedBindingResult2(ReactOtterModule.ease(0, {
+				easingStyle = UseMemoResult1.easingStyle,
+				duration = UseMemoResult1.duration,
+				startingValue = UseAnimatedBindingResult:getValue() + (getDotCenter(Current.dots, math.clamp(Current.activeVisibleIndex + (UseMemoResult.page - Current.page), 1, #Current.dots), Size100) - getDotCenter(UseMemoResult.dots, UseMemoResult.activeVisibleIndex, Size100))
 			}))
 			
 			return
+		else
+			UseAnimatedBindingResult2((ReactOtterModule.instant(0)))
 		end
-		var9(reactOtterModule.instant(0))
-	end, { var6, size100, var11 })
-	local var12 = reactModule.useMemo(function()
-		-- upvalues: var4 (ref)
+	end, { UseMemoResult, Size100, UseMemoResult1 })
+	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 99 ]]
+		-- upvalues: UseTokensModuleResult (copy)
 		return {
-			easingStyle = var4.Ease.Linear,
-			duration = var4.Time.Time_100
+			easingStyle = UseTokensModuleResult.Ease.Linear,
+			duration = UseTokensModuleResult.Time.Time_100
 		}
-	end, { var4 })
-	local var13 = reactModule.useMemo(function()
-		-- upvalues: var4 (ref)
+	end, { UseTokensModuleResult })
+	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 106 ]]
+		-- upvalues: UseTokensModuleResult (copy)
 		return {
-			easingStyle = var4.Ease.StandardOut,
-			duration = var4.Time.Time_300
+			easingStyle = UseTokensModuleResult.Ease.StandardOut,
+			duration = UseTokensModuleResult.Time.Time_300
 		}
-	end, { var4 })
-	reactModule.useImperativeHandle(p3, function()
-		-- upvalues: var3 (ref), var6 (ref), var10 (ref)
-		if not var3.onActivated then
+	end, { UseTokensModuleResult })
+	ReactModule.useImperativeHandle(p2, function() --[[ Line: 113 ]]
+		-- upvalues: WithDefaultsModuleResult (copy), UseMemoResult (copy), UseRefCacheResult (copy)
+		if not WithDefaultsModuleResult.onActivated then
 			return nil
 		end
-		local page = nil
+		local Page = nil
 		
-		for i, v in var6.dots do
-			if not v.isActive then
-				page = v.page
+		for _, dot in UseMemoResult.dots do
+			if not dot.isActive then
+				Page = dot.page
 				break
 			end
 		end
-		return if page then var10[page].current else nil
-	end, { var10, var6.dots, var3.onActivated })
-	local t_1 = {}
+		return if Page then UseRefCacheResult[Page].current else nil
+	end, {
+		UseRefCacheResult,
+		UseMemoResult.dots,
+		WithDefaultsModuleResult.onActivated
+	})
+	local Elements = {}
 	
-	for i, v in var6.dots do
-		local var14 = var6.dots[i - 1]
-		local var15 = var6.dots[i + 1]
-		local var16 = if var14 and var14.isActive then var6.dots[i - 2] else var14
-		local var17 = if var15 and var15.isActive then var6.dots[i + 2] else var15
-		t_1[`Page{v.page}`] = reactModule.createElement(dotModule, {
-			LayoutOrder = i,
-			scale = v.size / size200,
-			isActive = v.isActive,
-			maxSize = size200,
-			page = v.page,
-			scaleEaseConfig = var13,
-			colorEaseConfig = var12,
-			onActivated = if v.isActive then nil else var3.onActivated,
-			Selectable = not v.isActive and var3.onActivated ~= nil,
-			NextSelectionUp = var3.NextSelectionUp,
-			NextSelectionDown = var3.NextSelectionDown,
-			NextSelectionLeft = if var16 == nil then var3.NextSelectionLeft else var10[var16.page],
-			NextSelectionRight = if var17 == nil then var3.NextSelectionRight else var10[var17.page],
-			ref = var10[v.page],
-			testId = `{var3.testId}--page-{v.page}`
+	for LayoutOrder, dot in UseMemoResult.dots do
+		local Dot = UseMemoResult.dots[LayoutOrder - 1]
+		local Dot1 = UseMemoResult.dots[LayoutOrder + 1]
+		local Dot2 = if Dot and Dot.isActive then UseMemoResult.dots[LayoutOrder - 2] else Dot
+		local Dot3 = if Dot1 and Dot1.isActive then UseMemoResult.dots[LayoutOrder + 2] else Dot1
+		Elements[`Page{dot.page}`] = ReactModule.createElement(DotModule, {
+			LayoutOrder = LayoutOrder,
+			scale = dot.size / Size200,
+			isActive = dot.isActive,
+			maxSize = Size200,
+			page = dot.page,
+			scaleEaseConfig = UseMemoResult3,
+			colorEaseConfig = UseMemoResult2,
+			onActivated = if dot.isActive then nil else WithDefaultsModuleResult.onActivated,
+			Selectable = not dot.isActive and WithDefaultsModuleResult.onActivated ~= nil,
+			NextSelectionUp = WithDefaultsModuleResult.NextSelectionUp,
+			NextSelectionDown = WithDefaultsModuleResult.NextSelectionDown,
+			NextSelectionLeft = if Dot2 == nil then WithDefaultsModuleResult.NextSelectionLeft else UseRefCacheResult[Dot2.page],
+			NextSelectionRight = if Dot3 == nil then WithDefaultsModuleResult.NextSelectionRight else UseRefCacheResult[Dot3.page],
+			ref = UseRefCacheResult[dot.page],
+			testId = `{WithDefaultsModuleResult.testId}--page-{dot.page}`
 		})
 	end
-	return reactModule.createElement(viewModule, withCommonPropsModule(var3, { tag = "auto-xy" }), {
-		Dots = reactModule.createElement(viewModule, {
+	return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, { tag = "auto-xy" }), {
+		Dots = ReactModule.createElement(ViewModule, {
 			tag = "auto-y",
-			Size = UDim2.fromOffset(var5, 0),
-			layout = reactModule.useMemo(function()
-				-- upvalues: size100 (ref)
+			Size = UDim2.fromOffset(XOffset, 0),
+			layout = ReactModule.useMemo(function() --[[ Line: 162 ]]
+				-- upvalues: Size100 (copy)
 				return {
 					FillDirection = Enum.FillDirection.Horizontal,
-					Padding = UDim.new(0, size100),
+					Padding = UDim.new(0, Size100),
 					SortOrder = Enum.SortOrder.LayoutOrder,
 					VerticalAlignment = Enum.VerticalAlignment.Center,
 					HorizontalAlignment = Enum.HorizontalAlignment.Center
 				}
-			end, { size100 }),
-			Position = var8:map(function(p4)
-				return UDim2.fromOffset(p4, 0)
+			end, { Size100 }),
+			Position = UseAnimatedBindingResult:map(function(XOffset): UDim2 --[[ Line: 182 ]]
+				return UDim2.fromOffset(XOffset, 0)
 			end),
-			testId = `{var3.testId}--dots`
-		}, t_1)
+			testId = `{WithDefaultsModuleResult.testId}--dots`
+		}, Elements)
 	})
 end))

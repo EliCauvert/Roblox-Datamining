@@ -1,112 +1,113 @@
-﻿local parent = script.Parent.Parent
-local jsonModule = require(parent.src.json)
-local urlModule = require(parent.lib.url)
+﻿local Parent = script.Parent.Parent
+local JsonModule = require(Parent.src.json)
+local UrlModule = require(Parent.lib.url)
 
-local function _(p1)
+local function _(p1): number --[[ Line: 12 | Named "maybe_number" ]]
 	return tonumber(p1) or p1
 end
 
-local function trim(p1)
-	p1 = p1 or ""
-	while p1:sub(1, 1) == " " do
-		p1 = p1:sub(2)
+local function trim(p1) --[[ Line: 20 ]]
+	local P1 = p1 or ""
+	while P1:sub(1, 1) == " " do
+		P1 = P1:sub(2)
 	end
-	while p1:sub(-1, -1) == " " do
-		p1 = p1:sub(1, -2)
+	while P1:sub(-1, -1) == " " do
+		P1 = P1:sub(1, -2)
 	end
-	return p1
+	return P1
 end
 
-local t = {}
-t.__index = t
+local Module = {}
+Module.__index = Module
 
-function t.new(p2, p3, p4)
-	-- upvalues: t (ref)
-	local tbl = setmetatable({}, t)
-	p4 = p4 or {}
-	tbl.name = p2
-	tbl.value = p3
-	tbl.domain = p4.domain or ""
-	tbl.path = p4.path or ""
-	
-	return tbl
-end
-
-function t:fromSet()
-	-- upvalues: trim (ref), t (ref)
-	local t_1 = {}
-	local var1 = self:split(";")
-	local var2 = var1[1]:split("=")
-	local var3 = trim(var2[1])
-	local var4 = trim(var2[2])
-	
-	for i = 2, #var1 do
-		local var5 = var1[i]:split("=")
-		t_1[trim(var5[1]):lower()] = trim(var5[2])
-	end
-	return t.new(var3, var4, t_1)
-end
-
-function t:matches(p2)
-	-- upvalues: urlModule (ref)
-	if not self.domain then
-		return true
-	end
-	local var6 = urlModule.parse(p2)
-	
-	if self.domain:sub(1, 1) == "." then
-		if var6.host:sub(-#self.domain, -1) ~= self.domain and var6.host ~= self.domain:sub(2) then
-			return false
-		end
-	else
-		return var6.host == self.domain and (self.path and not var6.path:sub(1, #self.path) == self.path)
-	end
-end
-
-local t_1 = {}
-t_1.__index = t_1
-
-function t_1.new()
-	-- upvalues: t_1 (ref)
-	local tbl = setmetatable({}, t_1)
-	tbl.__cookiejar = true
-	tbl.cookies = {}
-	
-	return tbl
-end
-
-function t_1:insert(p2, p3, p4)
-	-- upvalues: t (ref)
-	self.cookies[p2] = t.new(p2, p3, p4)
+function Module.new(Name, Value, p2) --[[ Line: 38 ]]
+	-- upvalues: Module (copy)
+	local self = setmetatable({}, Module)
+	local P4 = p2 or {}
+	self.name = Name
+	self.value = Value
+	self.domain = P4.domain or ""
+	self.path = P4.path or ""
 	
 	return self
 end
 
-function t_1:SetCookie(p2)
-	-- upvalues: t (ref)
-	local var6 = t.fromSet(p2)
-	self.cookies[var6.name] = var6
+function Module:fromSet() --[[ Line: 52 ]]
+	-- upvalues: trim (copy), Module (copy)
+	local t = {}
+	local v1 = self:split(";")
+	local v2 = v1[1]:split("=")
+	local TrimResult = trim(v2[1])
+	local TrimResult1 = trim(v2[2])
+	
+	for i = 2, #v1 do
+		local v3 = v1[i]:split("=")
+		t[trim(v3[1]):lower()] = trim(v3[2])
+	end
+	return Module.new(TrimResult, TrimResult1, t)
 end
 
-function t_1:delete(p2)
+function Module:matches(p2): boolean --[[ Line: 72 ]]
+	-- upvalues: UrlModule (copy)
+	if not self.domain then
+		return true
+	end
+	local ParseResult = UrlModule.parse(p2)
+	
+	if self.domain:sub(1, 1) == "." then
+		if ParseResult.host:sub(-#self.domain, -1) ~= self.domain and ParseResult.host ~= self.domain:sub(2) then
+			return false
+		end
+	elseif ParseResult.host ~= self.domain then
+		return false
+	end
+	return not self.path or not ParseResult.path:sub(1, #self.path) ~= self.path
+end
+
+local CookiesModule = {}
+CookiesModule.__index = CookiesModule
+
+function CookiesModule.new() --[[ Line: 104 ]]
+	-- upvalues: CookiesModule (copy)
+	local self = setmetatable({}, CookiesModule)
+	self.__cookiejar = true
+	self.cookies = {}
+	
+	return self
+end
+
+function CookiesModule:insert(Name, p2, p3) --[[ Line: 114 ]]
+	-- upvalues: Module (copy)
+	self.cookies[Name] = Module.new(Name, p2, p3)
+	
+	return self
+end
+
+function CookiesModule:SetCookie(p2) --[[ Line: 122 ]]
+	-- upvalues: Module (copy)
+	local FromSetResult = Module.fromSet(p2)
+	self.cookies[FromSetResult.name] = FromSetResult
+end
+
+function CookiesModule:delete(p2) --[[ Line: 130 ]]
 	self.cookies[p2] = nil
 end
 
-function t_1:string(_)
-	local var6 = ""
+function CookiesModule.string(p2, _): string --[[ Line: 134 ]]
+	local Text = ""
 	
-	for i, v in pairs(self.cookies) do
-		if var6 then
-			var6 ..= "; "
+	for _, cooky in pairs(p2.cookies) do
+		if Text then
+			Text ..= "; "
 		end
-		var6 ..= ("%s=%s"):format(v.name, v.value)
+		Text ..= ("%s=%s"):format(cooky.name, cooky.value)
 	end
-	return var6
+	return Text
 end
 
-function t_1:__tostring()
-	-- upvalues: jsonModule (ref)
-	return jsonModule.enc(self.domains)
+function CookiesModule:__tostring() --[[ Line: 149 ]]
+	-- upvalues: JsonModule (copy)
+	return JsonModule.enc(self.domains)
 end
 
-return t_1
+return CookiesModule

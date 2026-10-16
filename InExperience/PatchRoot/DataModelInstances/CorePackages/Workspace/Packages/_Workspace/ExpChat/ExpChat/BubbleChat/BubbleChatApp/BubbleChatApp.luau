@@ -1,69 +1,67 @@
-﻿local playersService = game:GetService("Players")
-local voiceChatService = game:GetService("VoiceChatService")
-local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local IXPServiceWrapperModule = require(expChat.IXPServiceWrapper)
-local expChatSharedModule = require(parent.ExpChatShared)
-local roactModule = require(parent.Roact)
-local reactModule = require(parent.React)
-local roactRoduxModule = require(parent.RoactRodux)
-local dictionary = require(parent.llama).Dictionary
-local none = require(parent.llama).None
-local sharedFlagsModule = require(parent.SharedFlags)
-local var1 = expChatSharedModule.Logger:new("ExpChat/" .. script.Name)
-local bubbleChat = script:FindFirstAncestor("BubbleChat")
-local withSignalsDataModule = require(script.Parent.withSignalsData)
-local permissions = require(expChat.Config).Permissions
-local globalFlagsModule = require(expChat.GlobalFlags)
-local getFFlagUseCharacterStore = expChatSharedModule.Flags.getFFlagUseCharacterStore
-local expChatRemoveBubbleChatAppUserMessagesState = game:DefineFastFlag("ExpChatRemoveBubbleChatAppUserMessagesState", false)
-local memoizeBubbleChatApp = game:DefineFastFlag("MemoizeBubbleChatApp", false)
-local getFFlagExpChatUseVoiceParticipantsStore = sharedFlagsModule.GetFFlagExpChatUseVoiceParticipantsStore
-local expChatBubbleChatRerenderOnAncestryChange = game:DefineFastFlag("ExpChatBubbleChatRerenderOnAncestryChange", false)
-local bubbleChatApp = roactModule.PureComponent:extend("BubbleChatApp")
-local getFStringVoicePerformanceIXPLayerNameModule = require(expChat.Flags.GetFStringVoicePerformanceIXPLayerName)
-local billboardUpdateFrequencyIXPLayerValue = game:DefineFastString("BillboardUpdateFrequencyIXPLayerValue", "BillboardUpdateFrequency")
-local billboardGuiModule = require(bubbleChat.BillboardGui)
+﻿local Players = game:GetService("Players")
+local VoiceChatService = game:GetService("VoiceChatService")
+local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local IXPServiceWrapperModule = require(ExpChat.IXPServiceWrapper)
+local ExpChatSharedModule = require(Parent.ExpChatShared)
+local RoactModule = require(Parent.Roact)
+local ReactModule = require(Parent.React)
+local RoactRoduxModule = require(Parent.RoactRodux)
+local Dictionary = require(Parent.llama).Dictionary
+local None = require(Parent.llama).None
+local NewResult = ExpChatSharedModule.Logger:new("ExpChat/" .. script.Name)
+local WithSignalsDataModule = require(script.Parent.withSignalsData)
+local Permissions = require(ExpChat.Config).Permissions
+local GlobalFlagsModule = require(ExpChat.GlobalFlags)
+local GetFFlagUseCharacterStoreFunction = ExpChatSharedModule.Flags.getFFlagUseCharacterStore
+local ExpChatRemoveBubbleChatAppUserMessagesState = game:DefineFastFlag("ExpChatRemoveBubbleChatAppUserMessagesState", false)
+local MemoizeBubbleChatApp = game:DefineFastFlag("MemoizeBubbleChatApp", false)
+local GetFFlagExpChatUseVoiceParticipantsStoreFunction = require(Parent.SharedFlags).GetFFlagExpChatUseVoiceParticipantsStore
+local ExpChatBubbleChatRerenderOnAncestryChange = game:DefineFastFlag("ExpChatBubbleChatRerenderOnAncestryChange", false)
+local BubbleChatApp = RoactModule.PureComponent:extend("BubbleChatApp")
+local GetFStringVoicePerformanceIXPLayerNameModule = require(ExpChat.Flags.GetFStringVoicePerformanceIXPLayerName)
+local BillboardUpdateFrequencyIXPLayerValue = game:DefineFastString("BillboardUpdateFrequencyIXPLayerValue", "BillboardUpdateFrequency")
+local BillboardGuiModule = require(script:FindFirstAncestor("BubbleChat").BillboardGui)
 
-if not expChatRemoveBubbleChatAppUserMessagesState then
-	function bubbleChatApp.getDerivedStateFromProps(p1, p2)
-		-- upvalues: dictionary (ref)
+if not ExpChatRemoveBubbleChatAppUserMessagesState then
+	function BubbleChatApp.getDerivedStateFromProps(p1, p2) --[[ Line: 41 ]]
+		-- upvalues: Dictionary (copy)
 		return {
-			userMessages = dictionary.join(p2.userMessages or {}, p1.userMessages)
+			userMessages = Dictionary.join(p2.userMessages or {}, p1.userMessages)
 		}
 	end
 end
-function bubbleChatApp.init(p1)
-	-- upvalues: var1 (ref), expChatRemoveBubbleChatAppUserMessagesState (ref), dictionary (ref), none (ref), expChatBubbleChatRerenderOnAncestryChange (ref), IXPServiceWrapperModule (ref), getFStringVoicePerformanceIXPLayerNameModule (ref), billboardUpdateFrequencyIXPLayerValue (ref)
-	var1:debug("Initializing")
+function BubbleChatApp.init(p1) --[[ Line: 51 ]]
+	-- upvalues: NewResult (copy), ExpChatRemoveBubbleChatAppUserMessagesState (copy), Dictionary (copy), None (copy), ExpChatBubbleChatRerenderOnAncestryChange (copy), IXPServiceWrapperModule (copy), GetFStringVoicePerformanceIXPLayerNameModule (copy), BillboardUpdateFrequencyIXPLayerValue (copy)
+	NewResult:debug("Initializing")
 	p1:setState({
 		localPlayerVoiceEnabled = false,
 		billboardUpdateFrequency = -1,
-		userMessages = if expChatRemoveBubbleChatAppUserMessagesState then nil else {}
+		userMessages = if ExpChatRemoveBubbleChatAppUserMessagesState then nil else {}
 	})
 	
-	function p2.onBillboardFadeOut(p2)
-		-- upvalues: expChatRemoveBubbleChatAppUserMessagesState (copy), p1 (ref), dictionary (copy), none (copy)
-		if not expChatRemoveBubbleChatAppUserMessagesState then
+	function p1.onBillboardFadeOut(p2) --[[ Line: 59 ]]
+		-- upvalues: ExpChatRemoveBubbleChatAppUserMessagesState (upval), p1 (copy), Dictionary (upval), None (upval)
+		if not ExpChatRemoveBubbleChatAppUserMessagesState then
 			p1:setState({
-				userMessages = dictionary.join(p1.state.userMessages, { [p2] = none })
+				userMessages = Dictionary.join(p1.state.userMessages, { [p2] = None })
 			})
 		end
 	end
 	
-	function p2.setCameraPermissionStateFromControl(p2)
-		-- upvalues: p1 (ref)
-		p1:setState({ hasCameraPermissions = p2 })
+	function p1.setCameraPermissionStateFromControl(HasCameraPermissions) --[[ Line: 67 ]]
+		-- upvalues: p1 (copy)
+		p1:setState({ hasCameraPermissions = HasCameraPermissions })
 	end
 	
-	if expChatBubbleChatRerenderOnAncestryChange then
+	if ExpChatBubbleChatRerenderOnAncestryChange then
 		p1.isMounted = false
 		p1.ancestryConnections = {}
 		
-		function p2.onTrackedAncestryChanged()
-			-- upvalues: p1 (ref)
+		function p1.onTrackedAncestryChanged() --[[ Line: 76 ]]
+			-- upvalues: p1 (copy)
 			if p1.isMounted then
-				p1:setState(function(p2)
+				p1:setState(function(p2) --[[ Line: 80 ]]
 					return {
 						ancestryRerenderToken = (p2.ancestryRerenderToken or 0) + 1
 					}
@@ -71,67 +69,70 @@ function bubbleChatApp.init(p1)
 			end
 		end
 	end
-	local ok, status = pcall(function()
-		-- upvalues: IXPServiceWrapperModule (copy), getFStringVoicePerformanceIXPLayerNameModule (copy)
-		return IXPServiceWrapperModule:GetLayerData(getFStringVoicePerformanceIXPLayerNameModule())
+	local Success, Result = pcall(function() --[[ Line: 87 ]]
+		-- upvalues: IXPServiceWrapperModule (upval), GetFStringVoicePerformanceIXPLayerNameModule (upval)
+		return IXPServiceWrapperModule:GetLayerData(GetFStringVoicePerformanceIXPLayerNameModule())
 	end)
 	
-	if ok and status and status[billboardUpdateFrequencyIXPLayerValue] then
+	if Success and Result and Result[BillboardUpdateFrequencyIXPLayerValue] then
 		p1:setState({
-			billboardUpdateFrequency = status[billboardUpdateFrequencyIXPLayerValue]
+			billboardUpdateFrequency = Result[BillboardUpdateFrequencyIXPLayerValue]
 		})
 	end
 end
 
-function bubbleChatApp.getPermissions(p1)
-	local var2 = function(p2, p3)
-		-- upvalues: p1 (ref)
-		p1:setState({ hasCameraPermissions = p2, hasMicPermissions = p3 })
+function BubbleChatApp.getPermissions(p1) --[[ Line: 101 ]]
+	local function v26(HasCameraPermissions, HasMicPermissions) --[[ Line: 102 ]]
+		-- upvalues: p1 (copy)
+		p1:setState({
+			hasCameraPermissions = HasCameraPermissions,
+			hasMicPermissions = HasMicPermissions
+		})
 	end
 	
 	if p1.props.getPermissions then
-		p1.props.getPermissions(var2)
+		p1.props.getPermissions(v26)
 	end
 end
 
-function bubbleChatApp.getMicPermission(p1)
-	-- upvalues: permissions (ref)
-	local var2 = function(_, p2)
-		-- upvalues: p1 (ref)
-		p1:setState({ hasMicPermissions = p2 })
+function BubbleChatApp.getMicPermission(p1) --[[ Line: 117 ]]
+	-- upvalues: Permissions (copy)
+	local function v27(_, HasMicPermissions) --[[ Line: 118 ]]
+		-- upvalues: p1 (copy)
+		p1:setState({ hasMicPermissions = HasMicPermissions })
 	end
 	
 	if p1.props.getPermissions then
-		p1.props.getPermissions(var2, permissions.MICROPHONE_ACCESS)
+		p1.props.getPermissions(v27, Permissions.MICROPHONE_ACCESS)
 	end
 end
 
-function bubbleChatApp.getCameraPermissionWithoutRequest(p1)
-	-- upvalues: permissions (ref)
-	local var2 = function(p2, _)
-		-- upvalues: p1 (ref)
-		p1:setState({ hasCameraPermissions = p2 })
+function BubbleChatApp.getCameraPermissionWithoutRequest(p1) --[[ Line: 132 ]]
+	-- upvalues: Permissions (copy)
+	local function v28(HasCameraPermissions, _) --[[ Line: 133 ]]
+		-- upvalues: p1 (copy)
+		p1:setState({ hasCameraPermissions = HasCameraPermissions })
 	end
 	
 	if p1.props.getPermissions then
-		p1.props.getPermissions(var2, permissions.CAMERA_ACCESS, true)
+		p1.props.getPermissions(v28, Permissions.CAMERA_ACCESS, true)
 	end
 end
 
-function bubbleChatApp.updateTrackedAncestryConnections(p1)
+function BubbleChatApp.updateTrackedAncestryConnections(p1) --[[ Line: 147 ]]
 	local t = {}
 	
 	if p1.props.characters then
-		for i, v in pairs(p1.props.characters) do
-			if v then
-				t[v] = true
+		for _, character in pairs(p1.props.characters) do
+			if character then
+				t[character] = true
 			end
 		end
 	end
 	if p1.props.mockUserIdToPartOrModel then
-		for i, v in pairs(p1.props.mockUserIdToPartOrModel) do
-			if v then
-				t[v] = true
+		for _, value in pairs(p1.props.mockUserIdToPartOrModel) do
+			if value then
+				t[value] = true
 			end
 		end
 	end
@@ -140,103 +141,104 @@ function bubbleChatApp.updateTrackedAncestryConnections(p1)
 			p1.ancestryConnections[i] = i.AncestryChanged:Connect(p1.onTrackedAncestryChanged)
 		end
 	end
-	for i_1, v in pairs(p1.ancestryConnections) do
-		if not t[i_1] then
-			v:Disconnect()
-			p1.ancestryConnections[i_1] = nil
+	for i1, ancestryConnection in pairs(p1.ancestryConnections) do
+		if not t[i1] then
+			ancestryConnection:Disconnect()
+			p1.ancestryConnections[i1] = nil
 		end
 	end
 end
 
-function bubbleChatApp.didMount(p2)
-	-- upvalues: expChatBubbleChatRerenderOnAncestryChange (ref), globalFlagsModule (ref), var1 (ref), playersService (ref), voiceChatService (ref), IXPServiceWrapperModule (ref), getFStringVoicePerformanceIXPLayerNameModule (ref)
-	if expChatBubbleChatRerenderOnAncestryChange then
+function BubbleChatApp.didMount(p2) --[[ Line: 178 ]]
+	-- upvalues: ExpChatBubbleChatRerenderOnAncestryChange (copy), GlobalFlagsModule (copy), NewResult (copy), Players (copy), VoiceChatService (copy), IXPServiceWrapperModule (copy), GetFStringVoicePerformanceIXPLayerNameModule (copy)
+	if ExpChatBubbleChatRerenderOnAncestryChange then
 		p2.isMounted = true
 		p2:updateTrackedAncestryConnections()
 	end
-	if globalFlagsModule.AvatarChatEnabled or globalFlagsModule.ChromeEnabled then
+	if GlobalFlagsModule.AvatarChatEnabled or GlobalFlagsModule.ChromeEnabled then
 		if p2.props.isVoiceServiceInitialized then
-			p2.props.isVoiceServiceInitialized():andThen(function()
-				-- upvalues: p2 (ref)
+			p2.props.isVoiceServiceInitialized():andThen(function() --[[ Line: 190 ]]
+				-- upvalues: p2 (copy)
 				p2:getMicPermission()
-			end):catch(function()
-				-- upvalues: var1 (copy)
-				var1:debug("VoiceChatServiceManager failed to initialize inside TextChatService bubblechat")
+			end):catch(function() --[[ Line: 193 ]]
+				-- upvalues: NewResult (upval)
+				NewResult:debug("VoiceChatServiceManager failed to initialize inside TextChatService bubblechat")
 			end)
 		else
 			p2:getMicPermission()
 		end
 		p2:getCameraPermissionWithoutRequest()
 	end
-	task.spawn(function()
-		-- upvalues: playersService (copy), voiceChatService (copy), var1 (copy), p2 (ref), IXPServiceWrapperModule (copy), getFStringVoicePerformanceIXPLayerNameModule (copy)
-		local ok, status = pcall(function()
-			-- upvalues: playersService (copy), voiceChatService (copy)
-			return if playersService.LocalPlayer then voiceChatService:IsVoiceEnabledForUserIdAsync(playersService.LocalPlayer.UserId) else false
+	task.spawn(function() --[[ Line: 202 ]]
+		-- upvalues: Players (upval), VoiceChatService (upval), NewResult (upval), p2 (copy), IXPServiceWrapperModule (upval), GetFStringVoicePerformanceIXPLayerNameModule (upval)
+		local Success, Result = pcall(function() --[[ Line: 203 ]]
+			-- upvalues: Players (upval), VoiceChatService (upval)
+			return if Players.LocalPlayer then VoiceChatService:IsVoiceEnabledForUserIdAsync(Players.LocalPlayer.UserId) else false
 		end)
 		
-		if not ok then
-			var1:debug("Unable to get voice enabled status: ", status)
+		if not Success then
+			NewResult:debug("Unable to get voice enabled status: ", Result)
 			
 			return
-		elseif status then
+		end
+		if Result then
 			p2:setState({ localPlayerVoiceEnabled = true })
-			IXPServiceWrapperModule:LogUserLayerExposure(getFStringVoicePerformanceIXPLayerNameModule())
+			IXPServiceWrapperModule:LogUserLayerExposure(GetFStringVoicePerformanceIXPLayerNameModule())
 		end
 	end)
 end
 
-function bubbleChatApp.didUpdate(p2)
-	-- upvalues: expChatBubbleChatRerenderOnAncestryChange (ref)
-	if expChatBubbleChatRerenderOnAncestryChange then
+function BubbleChatApp.didUpdate(p2) --[[ Line: 224 ]]
+	-- upvalues: ExpChatBubbleChatRerenderOnAncestryChange (copy)
+	if ExpChatBubbleChatRerenderOnAncestryChange then
 		p2:updateTrackedAncestryConnections()
 	end
 end
 
-function bubbleChatApp.willUnmount(p2)
-	-- upvalues: expChatBubbleChatRerenderOnAncestryChange (ref)
-	if expChatBubbleChatRerenderOnAncestryChange then
+function BubbleChatApp.willUnmount(p2) --[[ Line: 230 ]]
+	-- upvalues: ExpChatBubbleChatRerenderOnAncestryChange (copy)
+	if ExpChatBubbleChatRerenderOnAncestryChange then
 		p2.isMounted = false
 		
-		for i, v in pairs(p2.ancestryConnections) do
-			v:Disconnect()
+		for i, ancestryConnection in pairs(p2.ancestryConnections) do
+			ancestryConnection:Disconnect()
 			p2.ancestryConnections[i] = nil
 		end
 	end
 end
 
-function bubbleChatApp.render(p3)
-	-- upvalues: globalFlagsModule (ref), playersService (ref), roactModule (ref), dictionary (ref), billboardGuiModule (ref)
+function BubbleChatApp.render(p3) --[[ Line: 240 ]]
+	-- upvalues: GlobalFlagsModule (copy), Players (copy), RoactModule (copy), Dictionary (copy), BillboardGuiModule (copy)
 	local t = {}
 	
 	if p3.props.characters then
-		for i, v in pairs(p3.props.characters) do
-			if v and v:IsDescendantOf(workspace) then
+		for i, character in pairs(p3.props.characters) do
+			if character and character:IsDescendantOf(workspace) then
 				t[i] = false
 			end
 		end
 	end
 	if p3.props.mockUserIdToPartOrModel then
-		for i, v in pairs(p3.props.mockUserIdToPartOrModel) do
-			if v and v:IsDescendantOf(workspace) then
-				t[i] = false
+		for i1, value in pairs(p3.props.mockUserIdToPartOrModel) do
+			if value and value:IsDescendantOf(workspace) then
+				t[i1] = false
 			end
 		end
 	end
 	if p3.props.voiceParticipants then
-		for i, v in pairs(p3.props.voiceParticipants) do
-			if v ~= "Hidden" then
-				t[i] = true
+		for i2, voiceParticipant in pairs(p3.props.voiceParticipants) do
+			if voiceParticipant ~= "Hidden" then
+				t[i2] = true
 			end
 		end
 	end
-	if globalFlagsModule.AvatarChatEnabled and p3.state.hasCameraPermissions and playersService.LocalPlayer then
-		t[tostring(playersService.LocalPlayer.UserId)] = true
+	if GlobalFlagsModule.AvatarChatEnabled and p3.state.hasCameraPermissions and Players.LocalPlayer then
+		t[tostring(Players.LocalPlayer.UserId)] = true
 	end
-	return roactModule.createElement("ScreenGui", { ResetOnSpawn = false }, dictionary.map(t, function(p4, p5)
-		-- upvalues: roactModule (copy), billboardGuiModule (copy), p3 (ref)
-		return roactModule.createElement(billboardGuiModule, {
-			userId = p5,
+	return RoactModule.createElement("ScreenGui", { ResetOnSpawn = false }, Dictionary.map(t, function(p4, UserId) --[[ Line: 285 ]]
+		-- upvalues: RoactModule (upval), BillboardGuiModule (upval), p3 (copy)
+		return RoactModule.createElement(BillboardGuiModule, {
+			userId = UserId,
 			onFadeOut = p3.onBillboardFadeOut,
 			voiceEnabled = p3.props.voiceEnabled and p4,
 			getIconVoiceIndicator = p3.props.getIconVoiceIndicator,
@@ -250,40 +252,41 @@ function bubbleChatApp.render(p3)
 			isCameraOnlyUser = p3.props.isCameraOnlyUser,
 			setCameraPermissionStateFromControl = p3.setCameraPermissionStateFromControl,
 			getPermissions = p3.props.getPermissions,
-			voiceState = p3.props.voiceParticipants[p5],
-			partOrModel = p3.props.mockUserIdToPartOrModel[p5],
+			voiceState = p3.props.voiceParticipants[UserId],
+			partOrModel = p3.props.mockUserIdToPartOrModel[UserId],
 			isTextChatServiceOn = p3.props.isTextChatServiceOn,
 			billboardUpdateFrequency = p3.state.billboardUpdateFrequency
-		}), "BubbleChat_" .. p19
+		}), "BubbleChat_" .. UserId
 	end))
 end
 
-local function mapStateToProps(p4, p5)
-	-- upvalues: expChatSharedModule (ref), expChatRemoveBubbleChatAppUserMessagesState (ref), getFFlagUseCharacterStore (ref), getFFlagExpChatUseVoiceParticipantsStore (ref)
-	local mockUserIdToPartOrModel = p4.Messages.mockUserIdToPartOrModel
+local function mapStateToProps(p4, p5) --[[ Line: 311 ]]
+	-- upvalues: ExpChatSharedModule (copy), ExpChatRemoveBubbleChatAppUserMessagesState (copy), GetFFlagUseCharacterStoreFunction (copy), GetFFlagExpChatUseVoiceParticipantsStoreFunction (copy)
+	local MockUserIdToPartOrModel = p4.Messages.mockUserIdToPartOrModel
 	
 	if p5.mockUserIdToPartOrModel then
-		mockUserIdToPartOrModel = p5.mockUserIdToPartOrModel
+		MockUserIdToPartOrModel = p5.mockUserIdToPartOrModel
 	else
-		local context = expChatSharedModule.context
-		local messagesStore = context and context.messagesStore
+		local Context = ExpChatSharedModule.context
+		local MessagesStore = Context and Context.messagesStore
 		
-		if messagesStore then
-			mockUserIdToPartOrModel = messagesStore.getMockUserIdToPartOrModel(false)
+		if MessagesStore then
+			MockUserIdToPartOrModel = MessagesStore.getMockUserIdToPartOrModel(false)
 		end
 	end
 	return {
-		userMessages = if expChatRemoveBubbleChatAppUserMessagesState then nil else p4.Messages.messagesBySenderId,
+		userMessages = if ExpChatRemoveBubbleChatAppUserMessagesState then nil else p4.Messages.messagesBySenderId,
 		voiceEnabled = p4.Voice.isEnabled,
-		characters = if getFFlagUseCharacterStore() then nil else p4.Players.charactersByUserId,
-		voiceParticipants = if getFFlagExpChatUseVoiceParticipantsStore() then nil else p4.Voice.participants,
-		mockUserIdToPartOrModel = mockUserIdToPartOrModel
+		characters = if GetFFlagUseCharacterStoreFunction() then nil else p4.Players.charactersByUserId,
+		voiceParticipants = if GetFFlagExpChatUseVoiceParticipantsStoreFunction() then nil else p4.Voice.participants,
+		mockUserIdToPartOrModel = MockUserIdToPartOrModel
 	}
 end
 
-if getFFlagUseCharacterStore() or getFFlagExpChatUseVoiceParticipantsStore() then
-	local var2 = roactRoduxModule.connect(mapStateToProps)(bubbleChatApp)
+if GetFFlagUseCharacterStoreFunction() or GetFFlagExpChatUseVoiceParticipantsStoreFunction() then
+	local v1 = RoactRoduxModule.connect(mapStateToProps)(BubbleChatApp)
 	
-	return if memoizeBubbleChatApp then reactModule.memo(withSignalsDataModule(var2)) else withSignalsDataModule(var2)
+	return if MemoizeBubbleChatApp then ReactModule.memo(WithSignalsDataModule(v1)) else WithSignalsDataModule(v1)
+else
+	return if MemoizeBubbleChatApp then ReactModule.memo(RoactRoduxModule.connect(mapStateToProps)(BubbleChatApp)) else RoactRoduxModule.connect(mapStateToProps)(BubbleChatApp)
 end
-return if memoizeBubbleChatApp then reactModule.memo(roactRoduxModule.connect(mapStateToProps)(bubbleChatApp)) else roactRoduxModule.connect(mapStateToProps)(bubbleChatApp)

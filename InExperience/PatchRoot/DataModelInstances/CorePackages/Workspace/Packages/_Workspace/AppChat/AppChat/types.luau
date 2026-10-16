@@ -1,6 +1,6 @@
-﻿local parent = script:FindFirstAncestor("AppChat").Parent
-local _ = require(parent.AppChatNetworking)
-local _ = require(parent.LuauPolyfill)
-local _ = require(parent.React)
+﻿local Parent = script:FindFirstAncestor("AppChat").Parent
+local _ = require(Parent.AppChatNetworking)
+local _ = require(Parent.LuauPolyfill)
+local _ = require(Parent.React)
 
 return {}

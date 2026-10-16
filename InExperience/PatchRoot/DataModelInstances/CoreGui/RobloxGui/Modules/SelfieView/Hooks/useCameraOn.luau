@@ -1,8 +1,8 @@
-﻿local useTrackerModeModule = require(script.Parent.useTrackerMode)
+﻿local UseTrackerModeModule = require(script.Parent.useTrackerMode)
 
-return function()
-	-- upvalues: useTrackerModeModule (ref)
-	local var1 = useTrackerModeModule()
+return function(): boolean --[[ Line: 5 | Named "useCameraOn" ]]
+	-- upvalues: UseTrackerModeModule (copy)
+	local UseTrackerModeModuleResult = UseTrackerModeModule()
 	
-	return if var1 ~= Enum.TrackerMode.Video then var1 == Enum.TrackerMode.AudioVideo else true
+	return UseTrackerModeModuleResult == Enum.TrackerMode.Video or UseTrackerModeModuleResult == Enum.TrackerMode.AudioVideo
 end

@@ -1,16 +1,16 @@
-﻿local cryoModule = require(script:FindFirstAncestor("AppChat").Parent.Cryo)
+﻿local CryoModule = require(script:FindFirstAncestor("AppChat").Parent.Cryo)
 
-return function(p1)
-	-- upvalues: cryoModule (ref)
+return function(p1) --[[ Line: 6 ]]
+	-- upvalues: CryoModule (copy)
 	return {
 		Settings = nil,
-		Theme = cryoModule.Dictionary.join(p1.Theme, {
+		Theme = CryoModule.Dictionary.join(p1.Theme, {
 			TextDefault = {
 				Color = p1.Theme.TextEmphasis.Color,
 				Transparency = p1.Theme.TextEmphasis.Transparency
 			}
 		}),
-		Font = cryoModule.Dictionary.join(p1.Font, {
+		Font = CryoModule.Dictionary.join(p1.Font, {
 			Body = {
 				Font = p1.Font.Header1.Font,
 				RelativeSize = p1.Font.Body.RelativeSize,

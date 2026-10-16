@@ -1,73 +1,72 @@
-﻿local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
-local parent = genericAbuseReporting.Parent
-local reactModule = require(parent.React)
-local view = require(parent.Foundation).View
-local beduiAnalyticsModule = require(genericAbuseReporting.Bedui.Utils.BeduiAnalytics)
-local componentType = require(genericAbuseReporting.Bedui.Provider.AbuseReportBeduiTypes).ComponentType
-local dropdownModule = require(genericAbuseReporting.Bedui.Components.Dropdown)
-local freeCommentModule = require(genericAbuseReporting.Bedui.Components.FreeComment)
-local paragraphModule = require(genericAbuseReporting.Bedui.Components.Paragraph)
-local selectorModule = require(genericAbuseReporting.Bedui.Components.Selector)
-local sendAnalyticsEvent = beduiAnalyticsModule.sendAnalyticsEvent
-local telemetryEventType = beduiAnalyticsModule.TelemetryEventType
-local useAnalyticsContextModule = require(genericAbuseReporting.Bedui.Provider.useAnalyticsContext)
-local webViewLinkModule = require(genericAbuseReporting.Bedui.Components.WebViewLink)
-local fFlagAddThumbnailSelectorReport = require(parent.SharedFlags).FFlagAddThumbnailSelectorReport
+﻿local GenericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
+local Parent = GenericAbuseReporting.Parent
+local ReactModule = require(Parent.React)
+local View = require(Parent.Foundation).View
+local BeduiAnalyticsModule = require(GenericAbuseReporting.Bedui.Utils.BeduiAnalytics)
+local ComponentType = require(GenericAbuseReporting.Bedui.Provider.AbuseReportBeduiTypes).ComponentType
+local DropdownModule = require(GenericAbuseReporting.Bedui.Components.Dropdown)
+local FreeCommentModule = require(GenericAbuseReporting.Bedui.Components.FreeComment)
+local ParagraphModule = require(GenericAbuseReporting.Bedui.Components.Paragraph)
+local SelectorModule = require(GenericAbuseReporting.Bedui.Components.Selector)
+local SendAnalyticsEventFunction = BeduiAnalyticsModule.sendAnalyticsEvent
+local TelemetryEventType = BeduiAnalyticsModule.TelemetryEventType
+local UseAnalyticsContextModule = require(GenericAbuseReporting.Bedui.Provider.useAnalyticsContext)
+local WebViewLinkModule = require(GenericAbuseReporting.Bedui.Components.WebViewLink)
+local FFlagAddThumbnailSelectorReport = require(Parent.SharedFlags).FFlagAddThumbnailSelectorReport
 
-return reactModule.memo(function(p1)
-	-- upvalues: useAnalyticsContextModule (ref), reactModule (ref), componentType (ref), dropdownModule (ref), freeCommentModule (ref), paragraphModule (ref), webViewLinkModule (ref), fFlagAddThumbnailSelectorReport (ref), selectorModule (ref), sendAnalyticsEvent (ref), telemetryEventType (ref), view (ref)
-	local var1 = useAnalyticsContextModule()
+return ReactModule.memo(function(p1) --[[ Line: 30 | Named "SingleStepInnerContentRenderer" ]]
+	-- upvalues: UseAnalyticsContextModule (copy), ReactModule (copy), ComponentType (copy), DropdownModule (copy), FreeCommentModule (copy), ParagraphModule (copy), WebViewLinkModule (copy), FFlagAddThumbnailSelectorReport (copy), SelectorModule (copy), SendAnalyticsEventFunction (copy), TelemetryEventType (copy), View (copy)
+	local UseAnalyticsContextModuleResult = UseAnalyticsContextModule()
 	
-	return reactModule.createElement(view, { tag = "size-full-0 auto-y col gap-xxlarge" }, reactModule.useMemo(function()
-		-- upvalues: p1 (ref), componentType (copy), reactModule (copy), dropdownModule (copy), freeCommentModule (copy), paragraphModule (copy), webViewLinkModule (copy), fFlagAddThumbnailSelectorReport (copy), selectorModule (copy), var1 (ref), sendAnalyticsEvent (copy), telemetryEventType (copy)
+	return ReactModule.createElement(View, { tag = "size-full-0 auto-y col gap-xxlarge" }, (ReactModule.useMemo(function() --[[ Line: 33 ]]
+		-- upvalues: p1 (copy), ComponentType (upval), ReactModule (upval), DropdownModule (upval), FreeCommentModule (upval), ParagraphModule (upval), WebViewLinkModule (upval), FFlagAddThumbnailSelectorReport (upval), SelectorModule (upval), UseAnalyticsContextModuleResult (copy), SendAnalyticsEventFunction (upval), TelemetryEventType (upval)
 		if p1.contentConfig == nil then
 			return {}
 		end
-		local t = {}
+		local Elements = {}
 		
 		if p1.contentConfig.type ~= "configurableComponentList" then
 			return {}
 		end
-		for i, v in ipairs(p1.contentConfig.configurableComponentList.components) do
-			if v.componentType == componentType.Dropdown then
-				t[`{v.componentType}{i}`] = reactModule.createElement(dropdownModule, {
-					component = v,
-					isErrorState = v.formDataKey ~= nil and table.find(p1.formDataKeysWithError, v.formDataKey) ~= nil,
-					layoutOrder = i
+		for LayoutOrder, component in ipairs(p1.contentConfig.configurableComponentList.components) do
+			if component.componentType == ComponentType.Dropdown then
+				Elements[`{component.componentType}{LayoutOrder}`] = ReactModule.createElement(DropdownModule, {
+					component = component,
+					isErrorState = component.formDataKey ~= nil and table.find(p1.formDataKeysWithError, component.formDataKey) ~= nil,
+					layoutOrder = LayoutOrder
 				})
-			end
-			if v.componentType == componentType.FreeComment then
-				t[`{v.componentType}{i}`] = reactModule.createElement(freeCommentModule, {
-					component = v,
-					isErrorState = v.formDataKey ~= nil and table.find(p1.formDataKeysWithError, v.formDataKey) ~= nil,
-					layoutOrder = i
+			elseif component.componentType == ComponentType.FreeComment then
+				Elements[`{component.componentType}{LayoutOrder}`] = ReactModule.createElement(FreeCommentModule, {
+					component = component,
+					isErrorState = component.formDataKey ~= nil and table.find(p1.formDataKeysWithError, component.formDataKey) ~= nil,
+					layoutOrder = LayoutOrder
 				})
-			elseif v.componentType == componentType.Paragraph then
-				t[`{v.componentType}{i}`] = reactModule.createElement(paragraphModule, { component = v, layoutOrder = i })
-			elseif v.componentType == componentType.WebViewLink then
-				t[`{v.componentType}{i}`] = reactModule.createElement(webViewLinkModule, { component = v, layoutOrder = i })
-			elseif fFlagAddThumbnailSelectorReport and v.componentType == componentType.Selector then
-				t[`{v.componentType}{i}`] = reactModule.createElement(selectorModule, {
-					abuseVector = var1.abuseVector,
-					component = v,
-					isErrorState = v.formDataKey ~= nil and table.find(p1.formDataKeysWithError, v.formDataKey) ~= nil,
-					layoutOrder = i
+			elseif component.componentType == ComponentType.Paragraph then
+				Elements[`{component.componentType}{LayoutOrder}`] = ReactModule.createElement(ParagraphModule, { component = component, layoutOrder = LayoutOrder })
+			elseif component.componentType == ComponentType.WebViewLink then
+				Elements[`{component.componentType}{LayoutOrder}`] = ReactModule.createElement(WebViewLinkModule, { component = component, layoutOrder = LayoutOrder })
+			elseif FFlagAddThumbnailSelectorReport and component.componentType == ComponentType.Selector then
+				Elements[`{component.componentType}{LayoutOrder}`] = ReactModule.createElement(SelectorModule, {
+					abuseVector = UseAnalyticsContextModuleResult.abuseVector,
+					component = component,
+					isErrorState = component.formDataKey ~= nil and table.find(p1.formDataKeysWithError, component.formDataKey) ~= nil,
+					layoutOrder = LayoutOrder
 				})
 			else
-				sendAnalyticsEvent({
-					eventType = telemetryEventType.Error,
-					context = var1,
+				SendAnalyticsEventFunction({
+					eventType = TelemetryEventType.Error,
+					context = UseAnalyticsContextModuleResult,
 					meta = {
-						error = `SingleStepInnerContentRenderer - Unsupported component type: {v.componentType}`
+						error = `SingleStepInnerContentRenderer - Unsupported component type: {component.componentType}`
 					}
 				})
 			end
 		end
-		return t
+		return Elements
 	end, {
 		p1.contentConfig,
 		p1.formDataKeysWithError,
-		sendAnalyticsEvent,
-		var1
-	}))
+		SendAnalyticsEventFunction,
+		UseAnalyticsContextModuleResult
+	})))
 end)

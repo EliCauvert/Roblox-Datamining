@@ -1,1 +1,1 @@
-﻿return require(script.ListItem)
+﻿return (require(script.ListItem))

@@ -1,41 +1,41 @@
-﻿local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
-local parent = genericAbuseReporting.Parent
-local foundationModule = require(parent.Foundation)
-local motionModule = require(parent.Motion)
-local reactModule = require(parent.React)
-local alertSeverity = foundationModule.Enums.AlertSeverity
-local feedbackAlert = foundationModule.FeedbackAlert
-local view = foundationModule.View
-local telemetryEventType = require(genericAbuseReporting.BeduiV2.Analytics.analyticsService).TelemetryEventType
-local useAbuseReportAnalytics = require(genericAbuseReporting.BeduiV2.Analytics.AbuseReportAnalyticsContext).useAbuseReportAnalytics
-local fFlagAbuseReportImproveErrorEventsModule = require(genericAbuseReporting.Flags.FFlagAbuseReportImproveErrorEvents)
-local var1 = motionModule.createState({
+﻿local GenericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
+local Parent = GenericAbuseReporting.Parent
+local FoundationModule = require(Parent.Foundation)
+local MotionModule = require(Parent.Motion)
+local ReactModule = require(Parent.React)
+local AlertSeverity = FoundationModule.Enums.AlertSeverity
+local FeedbackAlert = FoundationModule.FeedbackAlert
+local View = FoundationModule.View
+local TelemetryEventType = require(GenericAbuseReporting.BeduiV2.Analytics.analyticsService).TelemetryEventType
+local UseAbuseReportAnalyticsFunction = require(GenericAbuseReporting.BeduiV2.Analytics.AbuseReportAnalyticsContext).useAbuseReportAnalytics
+local FFlagAbuseReportImproveErrorEventsModule = require(GenericAbuseReporting.Flags.FFlagAbuseReportImproveErrorEvents)
+local State = MotionModule.createState({
 	groupTransparency = 1,
 	sizeY = 0,
 	position = UDim2.new(0, 0, -0.5, 0)
 }, {
-	default = motionModule.transition(motionModule.TransitionPreset.Default, { duration = 0.15 })
+	default = MotionModule.transition(MotionModule.TransitionPreset.Default, { duration = 0.15 })
 })
-local t = {
-	error = alertSeverity.Error,
-	warning = alertSeverity.Warning,
-	info = alertSeverity.Info,
-	success = alertSeverity.Success
+local config = {
+	error = AlertSeverity.Error,
+	warning = AlertSeverity.Warning,
+	info = AlertSeverity.Info,
+	success = AlertSeverity.Success
 }
 
-return reactModule.memo(function(p1)
-	-- upvalues: motionModule (ref), var1 (ref), reactModule (ref), useAbuseReportAnalytics (ref), t (ref), telemetryEventType (ref), fFlagAbuseReportImproveErrorEventsModule (ref), view (ref), feedbackAlert (ref), alertSeverity (ref)
-	local var2 = motionModule.usePresence()
-	local var3, var4 = motionModule.useMotion(var1)
-	local var5 = reactModule.useRef(0)
-	local var6 = reactModule.useRef(var2.isPresent)
-	local sendEvent = useAbuseReportAnalytics().sendEvent
-	reactModule.useEffect(function()
-		-- upvalues: t (copy), p1 (ref), sendEvent (ref), telemetryEventType (copy), fFlagAbuseReportImproveErrorEventsModule (copy)
-		if not t[p1.severity] then
-			sendEvent({
-				sub_event_type = telemetryEventType.Error,
-				error_detail = if fFlagAbuseReportImproveErrorEventsModule then {
+return ReactModule.memo(function(p1) --[[ Line: 47 | Named "Feedback" ]]
+	-- upvalues: MotionModule (copy), State (copy), ReactModule (copy), UseAbuseReportAnalyticsFunction (copy), config (copy), TelemetryEventType (copy), FFlagAbuseReportImproveErrorEventsModule (copy), View (copy), FeedbackAlert (copy), AlertSeverity (copy)
+	local UsePresenceResult = MotionModule.usePresence()
+	local UseMotionResult, UseMotionResult2 = MotionModule.useMotion(State)
+	local UseRefResult = ReactModule.useRef(0)
+	local UseRefResult1 = ReactModule.useRef(UsePresenceResult.isPresent)
+	local SendEventFunction = UseAbuseReportAnalyticsFunction().sendEvent
+	ReactModule.useEffect(function() --[[ Line: 54 ]]
+		-- upvalues: config (upval), p1 (copy), SendEventFunction (copy), TelemetryEventType (upval), FFlagAbuseReportImproveErrorEventsModule (upval)
+		if not config[p1.severity] then
+			SendEventFunction({
+				sub_event_type = TelemetryEventType.Error,
+				error_detail = if FFlagAbuseReportImproveErrorEventsModule then {
 					error_message = "feedback missing correct severity",
 					error_metadata = { received_severity = p1.severity }
 				} else {
@@ -43,83 +43,81 @@ return reactModule.memo(function(p1)
 				}
 			})
 		end
-	end, { p1.severity, sendEvent })
-	reactModule.useEffect(function()
-		-- upvalues: var6 (ref), var2 (ref)
-		var6.current = var2.isPresent
-	end, { var2.isPresent })
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), var5 (ref), var4 (ref), p1 (ref)
-		if var2.isPresent then
-			if var5.current > 0 then
-				var4({
-					groupTransparency = 0,
-					position = UDim2.new(0, 0, 0, 1),
-					sizeY = var5.current + 2 + (p1.bottomMargin or 0)
-				})
-				
-				return
-			end
-		else
-			var4({
+	end, { p1.severity, SendEventFunction })
+	ReactModule.useEffect(function() --[[ Line: 73 ]]
+		-- upvalues: UseRefResult1 (copy), UsePresenceResult (copy)
+		UseRefResult1.current = UsePresenceResult.isPresent
+	end, { UsePresenceResult.isPresent })
+	ReactModule.useEffect(function() --[[ Line: 77 ]]
+		-- upvalues: UsePresenceResult (copy), UseRefResult (copy), UseMotionResult2 (copy), p1 (copy)
+		if not UsePresenceResult.isPresent then
+			UseMotionResult2({
 				groupTransparency = 1,
 				sizeY = 0,
 				position = UDim2.new(0, 0, -0.5, 0)
 			}, {
-				onAnimationComplete = function(p2)
-					-- upvalues: var2 (copy)
-					if p2 == true then
-						var2.onExitComplete()
+				onAnimationComplete = function(Enabled) --[[ Line: 92 ]]
+					-- upvalues: UsePresenceResult (upval)
+					if Enabled == true then
+						UsePresenceResult.onExitComplete()
 					end
 				end
 			})
+		elseif UseRefResult.current > 0 then
+			UseMotionResult2({
+				groupTransparency = 0,
+				position = UDim2.new(0, 0, 0, 1),
+				sizeY = UseRefResult.current + 2 + (p1.bottomMargin or 0)
+			})
+			
+			return
 		end
 	end, {
-		var2.isPresent,
-		var4,
-		var2.onExitComplete,
+		UsePresenceResult.isPresent,
+		UseMotionResult2,
+		UsePresenceResult.onExitComplete,
 		p1.bottomMargin
 	})
-	local maxWidth = p1.maxWidth
+	local MaxWidth = p1.maxWidth
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		ClipsDescendants = true,
-		Size = var3.sizeY:map(function(p2)
-			-- upvalues: maxWidth (ref)
-			return if maxWidth == nil then UDim2.new(1, 0, 0, p2) else UDim2.new(0, maxWidth, 0, p2)
+		Size = UseMotionResult.sizeY:map(function(YOffset): UDim2 --[[ Line: 120 ]]
+			-- upvalues: MaxWidth (copy)
+			return if MaxWidth == nil then UDim2.new(1, 0, 0, YOffset) else UDim2.new(0, MaxWidth, 0, YOffset)
 		end),
 		LayoutOrder = p1.layoutOrder
 	}, {
-		Content = reactModule.createElement("CanvasGroup", {
+		Content = ReactModule.createElement("CanvasGroup", {
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
 			BackgroundTransparency = 1,
-			GroupTransparency = var3.groupTransparency,
-			Position = var3.position,
-			[reactModule.Change.AbsoluteSize] = reactModule.useCallback(function(p2)
-				-- upvalues: var5 (ref), var6 (ref), var4 (ref), p1 (ref)
-				local y = p2.AbsoluteSize.Y
+			GroupTransparency = UseMotionResult.groupTransparency,
+			Position = UseMotionResult.position,
+			[ReactModule.Change.AbsoluteSize] = ReactModule.useCallback(function(Frame) --[[ Line: 101 ]]
+				-- upvalues: UseRefResult (copy), UseRefResult1 (copy), UseMotionResult2 (copy), p1 (copy)
+				local Y: number = Frame.AbsoluteSize.Y
 				
-				if y <= 0 or y == var5.current then return end
-				var5.current = y
+				if Y <= 0 or Y == UseRefResult.current then return end
+				UseRefResult.current = Y
 				
-				if var6.current then
-					var4({
+				if UseRefResult1.current then
+					UseMotionResult2({
 						groupTransparency = 0,
 						position = UDim2.new(0, 0, 0, 1),
-						sizeY = y + 2 + (p1.bottomMargin or 0)
+						sizeY = Y + 2 + (p1.bottomMargin or 0)
 					})
 				end
-			end, { var4, p1.bottomMargin })
+			end, { UseMotionResult2, p1.bottomMargin })
 		}, {
-			Padding = reactModule.createElement("UIPadding", {
+			Padding = ReactModule.createElement("UIPadding", {
 				PaddingTop = UDim.new(0, 1),
 				PaddingBottom = UDim.new(0, 1),
 				PaddingLeft = UDim.new(0, 1),
 				PaddingRight = UDim.new(0, 1)
 			}),
-			Alert = reactModule.createElement(feedbackAlert, {
-				severity = t[p1.severity] or alertSeverity.Info,
+			Alert = ReactModule.createElement(FeedbackAlert, {
+				severity = config[p1.severity] or AlertSeverity.Info,
 				title = p1.title,
 				subtitle = p1.subtitle,
 				onClose = p1.onClose

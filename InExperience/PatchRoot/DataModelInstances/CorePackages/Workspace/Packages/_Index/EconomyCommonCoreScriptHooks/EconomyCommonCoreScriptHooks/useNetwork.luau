@@ -1,7 +1,7 @@
-﻿local reactModule = require(script:FindFirstAncestor("EconomyCommonCoreScriptHooks").Parent.React)
-local networkContextModule = require(script.Parent.NetworkContext)
+﻿local ReactModule = require(script:FindFirstAncestor("EconomyCommonCoreScriptHooks").Parent.React)
+local NetworkContextModule = require(script.Parent.NetworkContext)
 
-return function()
-	-- upvalues: reactModule (ref), networkContextModule (ref)
-	return reactModule.useContext(networkContextModule)
+return function() --[[ Line: 7 | Named "useNetwork" ]]
+	-- upvalues: ReactModule (copy), NetworkContextModule (copy)
+	return ReactModule.useContext(NetworkContextModule)
 end

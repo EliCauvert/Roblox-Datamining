@@ -1,25 +1,25 @@
-﻿local robloxAppUpdate = script:FindFirstAncestor("RobloxAppUpdate")
-local parent = robloxAppUpdate.Parent
-local _ = require(robloxAppUpdate.Types)
-local joinGamePlayButton = require(parent.DiscoveryAnalytics).Points.joinGamePlayButton
-local updateMessageTypeModule = require(robloxAppUpdate.UpdateMessageType)
-local promiseModule = require(parent.Promise)
-local t = {
-	[Enum.AppUpdateStatus.Available] = updateMessageTypeModule.Default,
-	[Enum.AppUpdateStatus.AvailableBoundChannel] = updateMessageTypeModule.InternalChannel,
-	[Enum.AppUpdateStatus.AvailableBetaProgram] = updateMessageTypeModule.BetaProgram
+﻿local RobloxAppUpdate = script:FindFirstAncestor("RobloxAppUpdate")
+local Parent = RobloxAppUpdate.Parent
+local _ = require(RobloxAppUpdate.Types)
+local JoinGamePlayButtonFunction = require(Parent.DiscoveryAnalytics).Points.joinGamePlayButton
+local UpdateMessageTypeModule = require(RobloxAppUpdate.UpdateMessageType)
+local PromiseModule = require(Parent.Promise)
+local config = {
+	[Enum.AppUpdateStatus.Available] = UpdateMessageTypeModule.Default,
+	[Enum.AppUpdateStatus.AvailableBoundChannel] = UpdateMessageTypeModule.InternalChannel,
+	[Enum.AppUpdateStatus.AvailableBetaProgram] = UpdateMessageTypeModule.BetaProgram
 }
 
-return function(p1, p2, p3, p4)
-	-- upvalues: promiseModule (ref), joinGamePlayButton (ref), t (ref)
-	return function(_)
-		-- upvalues: p2 (ref), p1 (ref), promiseModule (copy), joinGamePlayButton (copy), p3 (ref), p4 (ref), t (copy)
-		return if p2 and not p1:canPerformBinaryUpdate() then promiseModule.resolve(nil) else p1:checkForUpdate():andThen(function(p5)
-			-- upvalues: joinGamePlayButton (copy), p3 (copy), p4 (copy), promiseModule (copy), t (copy)
-			local appUpdateStatus = p5.appUpdateStatus
-			joinGamePlayButton(p3.InfluxDb, "checkForUpdate", { ctx = p4, appUpdateStatus = appUpdateStatus })
+return function(p1, p2, p3, Ctx) --[[ Line: 15 ]]
+	-- upvalues: PromiseModule (copy), JoinGamePlayButtonFunction (copy), config (copy)
+	return function(_) --[[ Line: 21 ]]
+		-- upvalues: p2 (copy), p1 (copy), PromiseModule (upval), JoinGamePlayButtonFunction (upval), p3 (copy), Ctx (copy), config (upval)
+		return if p2 and not p1:canPerformBinaryUpdate() then PromiseModule.resolve(nil) else p1:checkForUpdate():andThen(function(Result) --[[ Line: 26 ]]
+			-- upvalues: JoinGamePlayButtonFunction (upval), p3 (upval), Ctx (upval), PromiseModule (upval), config (upval)
+			local AppUpdateStatus = Result.appUpdateStatus
+			JoinGamePlayButtonFunction(p3.InfluxDb, "checkForUpdate", { ctx = Ctx, appUpdateStatus = AppUpdateStatus })
 			
-			return if p5.errorMessage then promiseModule.reject(p5.errorMessage) else promiseModule.resolve(t[appUpdateStatus])
+			return if Result.errorMessage then PromiseModule.reject(Result.errorMessage) else PromiseModule.resolve(config[AppUpdateStatus])
 		end)
 	end
 end

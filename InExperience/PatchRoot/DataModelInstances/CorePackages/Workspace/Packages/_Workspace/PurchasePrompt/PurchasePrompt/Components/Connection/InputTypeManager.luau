@@ -1,81 +1,84 @@
-﻿local purchasePrompt = script:FindFirstAncestor("PurchasePrompt")
-local parent = purchasePrompt.Parent
-local userInputService = game:GetService("UserInputService")
-local roact = require(parent.PurchasePromptDeps).Roact
-local mouseIconOverrideService = require(parent.CoreScriptsCommon).MouseIconOverrideService
-local setGamepadEnabledModule = require(purchasePrompt.Actions.SetGamepadEnabled)
-local promptStateModule = require(purchasePrompt.Enums.PromptState)
-local connectToStoreModule = require(purchasePrompt.connectToStore)
-local externalEventConnectionModule = require(script.Parent.ExternalEventConnection)
-local t = {
+﻿local PurchasePrompt = script:FindFirstAncestor("PurchasePrompt")
+local Parent = PurchasePrompt.Parent
+local UserInputService = game:GetService("UserInputService")
+local Roact = require(Parent.PurchasePromptDeps).Roact
+local MouseIconOverrideService = require(Parent.CoreScriptsCommon).MouseIconOverrideService
+local SetGamepadEnabledModule = require(PurchasePrompt.Actions.SetGamepadEnabled)
+local PromptStateModule = require(PurchasePrompt.Enums.PromptState)
+local ConnectToStoreModule = require(PurchasePrompt.connectToStore)
+local ExternalEventConnectionModule = require(script.Parent.ExternalEventConnection)
+local config = {
 	[Enum.UserInputType.Gamepad1] = true,
 	[Enum.UserInputType.Gamepad2] = true,
 	[Enum.UserInputType.Gamepad3] = true,
 	[Enum.UserInputType.Gamepad4] = true
 }
-local inputTypeManager = roact.Component:extend("InputTypeManager")
+local InputTypeManager = Roact.Component:extend("InputTypeManager")
 
-function inputTypeManager.init(p1)
-	-- upvalues: t (ref)
-	local setGamepadEnabled = p1.props.setGamepadEnabled
+function InputTypeManager.init(p1) --[[ Line: 31 ]]
+	-- upvalues: config (copy)
+	local SetGamepadEnabledFunction = p1.props.setGamepadEnabled
 	
-	function p0.dispatchOnChange(p2)
-		-- upvalues: t (copy), p1 (ref), setGamepadEnabled (ref)
-		local var1 = if t[p2] then true else false
+	function p1.dispatchOnChange(p2) --[[ Line: 34 ]]
+		-- upvalues: config (upval), p1 (copy), SetGamepadEnabledFunction (copy)
+		local GamepadEnabled: boolean = if config[p2] then true else false
 		
-		if var1 == p1.props.gamepadEnabled then
+		if GamepadEnabled ~= p1.props.gamepadEnabled then
+			SetGamepadEnabledFunction(GamepadEnabled)
+			
 			return
 		end
-		setGamepadEnabled(var1)
 	end
 	
 	p1.cursorOverridden = false
 end
 
-function inputTypeManager.render(p1)
-	-- upvalues: roact (ref), externalEventConnectionModule (ref), userInputService (ref)
-	return roact.createElement(externalEventConnectionModule, {
-		event = userInputService.LastInputTypeChanged,
+function InputTypeManager.render(p1) --[[ Line: 50 ]]
+	-- upvalues: Roact (copy), ExternalEventConnectionModule (copy), UserInputService (copy)
+	return Roact.createElement(ExternalEventConnectionModule, {
+		event = UserInputService.LastInputTypeChanged,
 		callback = p1.dispatchOnChange
 	})
 end
 
-function inputTypeManager.didUpdate(p1, p2, _)
-	-- upvalues: promptStateModule (ref), mouseIconOverrideService (ref)
-	local var1 = p2.promptState == promptStateModule.None and p1.props.promptState ~= promptStateModule.None
-	local var2 = p2.promptState ~= promptStateModule.None and p1.props.promptState == promptStateModule.None
-	local var3 = if p1.props.gamepadEnabled then Enum.OverrideMouseIconBehavior.ForceHide else Enum.OverrideMouseIconBehavior.ForceShow
+function InputTypeManager.didUpdate(p1, p2, _) --[[ Line: 57 ]]
+	-- upvalues: PromptStateModule (copy), MouseIconOverrideService (copy)
+	local IsNotPromptStateMatch: boolean = p2.promptState == PromptStateModule.None and p1.props.promptState ~= PromptStateModule.None
+	local IsPromptStateMatch: boolean = p2.promptState ~= PromptStateModule.None and p1.props.promptState == PromptStateModule.None
+	local ForceHide = p1.props.gamepadEnabled and Enum.OverrideMouseIconBehavior.ForceHide or Enum.OverrideMouseIconBehavior.ForceShow
 	
-	if p1.props.promptState ~= promptStateModule.None and p2.gamepadEnabled ~= p1.props.gamepadEnabled then
+	if p1.props.promptState ~= PromptStateModule.None and p2.gamepadEnabled ~= p1.props.gamepadEnabled then
 		if p1.cursorOverridden then
-			mouseIconOverrideService.pop("PurchasePromptOverrideKey")
+			MouseIconOverrideService.pop("PurchasePromptOverrideKey")
 		end
-		mouseIconOverrideService.push("PurchasePromptOverrideKey", var3)
+		MouseIconOverrideService.push("PurchasePromptOverrideKey", ForceHide)
 		p1.cursorOverridden = true
 		
 		return
-	elseif var1 then
-		mouseIconOverrideService.push("PurchasePromptOverrideKey", var3)
+	elseif IsNotPromptStateMatch then
+		MouseIconOverrideService.push("PurchasePromptOverrideKey", ForceHide)
 		p1.cursorOverridden = true
 		
 		return
-	elseif var2 then
-		mouseIconOverrideService.pop("PurchasePromptOverrideKey")
-		p1.cursorOverridden = false
+	else
+		if IsPromptStateMatch then
+			MouseIconOverrideService.pop("PurchasePromptOverrideKey")
+			p1.cursorOverridden = false
+		end
 	end
 end
 
-return connectToStoreModule(function(p1)
+return (ConnectToStoreModule(function(p1) --[[ Line: 84 | Named "mapStateToProps" ]]
 	return {
 		promptState = p1.promptState,
 		gamepadEnabled = p1.gamepadEnabled
 	}
-end, function(p1)
-	-- upvalues: setGamepadEnabledModule (ref)
+end, function(Callback) --[[ Line: 91 | Named "mapDispatchToProps" ]]
+	-- upvalues: SetGamepadEnabledModule (copy)
 	return {
-		setGamepadEnabled = function(value)
-			-- upvalues: p1 (ref), setGamepadEnabledModule (copy)
-			p1(setGamepadEnabledModule(value))
+		setGamepadEnabled = function(p1) --[[ Line: 93 ]]
+			-- upvalues: Callback (copy), SetGamepadEnabledModule (upval)
+			Callback(SetGamepadEnabledModule(p1))
 		end
 	}
-end)(inputTypeManager)
+end)(InputTypeManager))

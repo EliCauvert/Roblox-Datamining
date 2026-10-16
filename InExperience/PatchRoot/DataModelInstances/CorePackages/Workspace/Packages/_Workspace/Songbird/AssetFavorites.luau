@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.AssetFavorites.AssetFavorites)
+﻿return (require(script.Parent.Parent.Parent._Index.AssetFavorites.AssetFavorites))

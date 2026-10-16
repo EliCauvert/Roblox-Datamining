@@ -1,15 +1,15 @@
 ﻿local _ = require(script:FindFirstAncestor("Foundation").Components.Types)
 
-return function(p1)
-	if typeof(p1) == "number" then
-		return `col-{p1}`
+return function(List): string --[[ Line: 6 | Named "getGridSizeTag" ]]
+	if typeof(List) == "number" then
+		return `col-{List}`
 	end
-	local t = {}
+	local List1 = {}
 	
-	for i, v in p1 do
-		if typeof(v) == "number" then
-			table.insert(t, `{i}-col-{v}`)
+	for i, value in List do
+		if typeof(value) == "number" then
+			table.insert(List1, `{i}-col-{value}`)
 		end
 	end
-	return table.concat(t, " ")
+	return table.concat(List1, " ")
 end

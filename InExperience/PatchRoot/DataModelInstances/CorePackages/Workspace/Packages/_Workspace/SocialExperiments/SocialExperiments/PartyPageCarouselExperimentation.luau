@@ -1,59 +1,57 @@
-﻿local experimentCacheManager = require(script:FindFirstAncestor("SocialExperiments").Parent.ExperimentCacheManager).ExperimentCacheManager
-local fStringPartyPageCarouselExpLayer = game:DefineFastString("FStringPartyPageCarouselExpLayer", "Party.Coordination.UI")
-local partyPageCarouselVariant = game:DefineFastString("PartyPageCarouselVariant", "enablePartyCoordinationUi")
-local forceEnableSocialCarouselPartyPage5 = game:DefineFastFlag("ForceEnableSocialCarouselPartyPage5", false)
-local enablePartyPageCarouselExperimentation4 = game:DefineFastFlag("EnablePartyPageCarouselExperimentation4", false)
+﻿local ExperimentCacheManager = require(script:FindFirstAncestor("SocialExperiments").Parent.ExperimentCacheManager).ExperimentCacheManager
+local FStringPartyPageCarouselExpLayer = game:DefineFastString("FStringPartyPageCarouselExpLayer", "Party.Coordination.UI")
+local PartyPageCarouselVariant = game:DefineFastString("PartyPageCarouselVariant", "enablePartyCoordinationUi")
+local ForceEnableSocialCarouselPartyPage5 = game:DefineFastFlag("ForceEnableSocialCarouselPartyPage5", false)
+local EnablePartyPageCarouselExperimentation4 = game:DefineFastFlag("EnablePartyPageCarouselExperimentation4", false)
 
-local function _(p1)
-	-- upvalues: experimentCacheManager (ref), fStringPartyPageCarouselExpLayer (ref)
-	local var1 = experimentCacheManager.default:getLayerVariables(fStringPartyPageCarouselExpLayer)
+local function _(p1) --[[ Line: 13 | Named "getIsUserInTreatment" ]]
+	-- upvalues: ExperimentCacheManager (copy), FStringPartyPageCarouselExpLayer (copy)
+	local LayerVariables = ExperimentCacheManager.default:getLayerVariables(FStringPartyPageCarouselExpLayer)
 	
-	return if var1 and var1[p1] ~= nil then var1[p1] else false
+	return if LayerVariables and LayerVariables[p1] ~= nil then LayerVariables[p1] else false
 end
 
 return {
-	getAppChatFormFactorEnabled = function()
-		-- upvalues: forceEnableSocialCarouselPartyPage5 (ref), enablePartyPageCarouselExperimentation4 (ref), partyPageCarouselVariant (ref), experimentCacheManager (ref), fStringPartyPageCarouselExpLayer (ref)
-		local var1 = forceEnableSocialCarouselPartyPage5
+	getAppChatFormFactorEnabled = function() --[[ Line: 28 ]]
+		-- upvalues: ForceEnableSocialCarouselPartyPage5 (copy), EnablePartyPageCarouselExperimentation4 (copy), PartyPageCarouselVariant (copy), ExperimentCacheManager (copy), FStringPartyPageCarouselExpLayer (copy)
+		local Flag: boolean = ForceEnableSocialCarouselPartyPage5
 		
-		if not var1 then
-			var1 = enablePartyPageCarouselExperimentation4
+		if not Flag then
+			Flag = EnablePartyPageCarouselExperimentation4
 			
-			if var1 then
-				local var2 = partyPageCarouselVariant
-				local var3 = experimentCacheManager.default:getLayerVariables(fStringPartyPageCarouselExpLayer)
+			if Flag then
+				local LayerVariables = ExperimentCacheManager.default:getLayerVariables(FStringPartyPageCarouselExpLayer)
 				
-				if var3 and var3[var2] ~= nil then
-					return var3[var2]
+				if LayerVariables and LayerVariables[PartyPageCarouselVariant] ~= nil then
+					return LayerVariables[PartyPageCarouselVariant]
 				end
-				var1 = false
+				Flag = false
 			end
 		end
-		return var1
+		return Flag
 	end,
-	getPartyPageCarouselEnabled = function()
-		-- upvalues: forceEnableSocialCarouselPartyPage5 (ref), enablePartyPageCarouselExperimentation4 (ref), partyPageCarouselVariant (ref), experimentCacheManager (ref), fStringPartyPageCarouselExpLayer (ref)
-		local var1 = forceEnableSocialCarouselPartyPage5
+	getPartyPageCarouselEnabled = function() --[[ Line: 23 ]]
+		-- upvalues: ForceEnableSocialCarouselPartyPage5 (copy), EnablePartyPageCarouselExperimentation4 (copy), PartyPageCarouselVariant (copy), ExperimentCacheManager (copy), FStringPartyPageCarouselExpLayer (copy)
+		local Flag: boolean = ForceEnableSocialCarouselPartyPage5
 		
-		if not var1 then
-			var1 = enablePartyPageCarouselExperimentation4
+		if not Flag then
+			Flag = EnablePartyPageCarouselExperimentation4
 			
-			if var1 then
-				local var2 = partyPageCarouselVariant
-				local var3 = experimentCacheManager.default:getLayerVariables(fStringPartyPageCarouselExpLayer)
+			if Flag then
+				local LayerVariables = ExperimentCacheManager.default:getLayerVariables(FStringPartyPageCarouselExpLayer)
 				
-				if var3 and var3[var2] ~= nil then
-					return var3[var2]
+				if LayerVariables and LayerVariables[PartyPageCarouselVariant] ~= nil then
+					return LayerVariables[PartyPageCarouselVariant]
 				end
-				var1 = false
+				Flag = false
 			end
 		end
-		return var1
+		return Flag
 	end,
-	logExposure = function()
-		-- upvalues: enablePartyPageCarouselExperimentation4 (ref), experimentCacheManager (ref), fStringPartyPageCarouselExpLayer (ref)
-		if enablePartyPageCarouselExperimentation4 and experimentCacheManager.default:getLayerVariables(fStringPartyPageCarouselExpLayer) ~= nil then
-			experimentCacheManager.default:logLayerExposure(fStringPartyPageCarouselExpLayer)
+	logExposure = function() --[[ Line: 33 ]]
+		-- upvalues: EnablePartyPageCarouselExperimentation4 (copy), ExperimentCacheManager (copy), FStringPartyPageCarouselExpLayer (copy)
+		if EnablePartyPageCarouselExperimentation4 and ExperimentCacheManager.default:getLayerVariables(FStringPartyPageCarouselExpLayer) ~= nil then
+			ExperimentCacheManager.default:logLayerExposure(FStringPartyPageCarouselExpLayer)
 		end
 	end
 }

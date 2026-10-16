@@ -1,212 +1,214 @@
-﻿local function _(p1)
+﻿local function _(Text) --[[ Line: 14 | Named "unimplemented" ]]
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-	print("UNIMPLEMENTED ERROR: " .. tostring(p1))
-	error("FIXME (roblox): " .. p1 .. " is unimplemented", 2)
+	print("UNIMPLEMENTED ERROR: " .. tostring(Text))
+	error("FIXME (roblox): " .. Text .. " is unimplemented", 2)
 end
 
-local parent = script.Parent.Parent
-local console = require(parent.Shared).console
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local object = luauPolyfillModule.Object
-local inspect = luauPolyfillModule.util.inspect
-local dEV = require(parent.ReactGlobals).__DEV__
-local dISABLEALLWARNINGSEXCEPTPROPVALIDATION = require(parent.ReactGlobals).__DISABLE_ALL_WARNINGS_EXCEPT_PROP_VALIDATION__
-local cOMPATWARNINGS = require(parent.ReactGlobals).__COMPAT_WARNINGS__
-local _ = require(parent.Shared)
-local _ = require(parent.React)
-local _ = require(script.Parent.ReactInternalTypes)
-local reactFiberLaneModule = require(script.Parent.ReactFiberLane)
+local Parent = script.Parent.Parent
+local Console = require(Parent.Shared).console
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Object = LuauPolyfillModule.Object
+local InspectFunction = LuauPolyfillModule.util.inspect
+local DEV = require(Parent.ReactGlobals).__DEV__
+local DISABLEALLWARNINGSEXCEPTPROPVALIDATION = require(Parent.ReactGlobals).__DISABLE_ALL_WARNINGS_EXCEPT_PROP_VALIDATION__
+local COMPATWARNINGS = require(Parent.ReactGlobals).__COMPAT_WARNINGS__
+do
+	local _ = require(Parent.Shared)
+	local _ = require(Parent.React)
+	local _ = require(script.Parent.ReactInternalTypes)
+end
+local ReactFiberLaneModule = require(script.Parent.ReactFiberLane)
 local _ = require(script.Parent["ReactFiberSuspenseComponent.new"])
-local unknownModule = require(script.Parent["ReactFiberSuspenseContext.new"])
+local ReactFiberSuspenseContextNewModule = require(script.Parent["ReactFiberSuspenseContext.new"])
 local _ = require(script.Parent.ReactFiberOffscreenComponent)
-local checkPropTypes = require(parent.Shared).checkPropTypes
-local reactWorkTagsModule = require(script.Parent.ReactWorkTags)
-local functionComponent = reactWorkTagsModule.FunctionComponent
-local classComponent = reactWorkTagsModule.ClassComponent
-local hostRoot = reactWorkTagsModule.HostRoot
-local hostComponent = reactWorkTagsModule.HostComponent
-local hostText = reactWorkTagsModule.HostText
-local hostPortal = reactWorkTagsModule.HostPortal
-local forwardRef = reactWorkTagsModule.ForwardRef
-local fragment = reactWorkTagsModule.Fragment
-local mode = reactWorkTagsModule.Mode
-local contextProvider = reactWorkTagsModule.ContextProvider
-local contextConsumer = reactWorkTagsModule.ContextConsumer
-local profiler = reactWorkTagsModule.Profiler
-local suspenseComponent = reactWorkTagsModule.SuspenseComponent
-local suspenseListComponent = reactWorkTagsModule.SuspenseListComponent
-local memoComponent = reactWorkTagsModule.MemoComponent
-local simpleMemoComponent = reactWorkTagsModule.SimpleMemoComponent
-local lazyComponent = reactWorkTagsModule.LazyComponent
-local incompleteClassComponent = reactWorkTagsModule.IncompleteClassComponent
-local offscreenComponent = reactWorkTagsModule.OffscreenComponent
-local legacyHiddenComponent = reactWorkTagsModule.LegacyHiddenComponent
-local reactFiberFlagsModule = require(script.Parent.ReactFiberFlags)
-local noFlags = reactFiberFlagsModule.NoFlags
-local staticMask = reactFiberFlagsModule.StaticMask
-local performedWork = reactFiberFlagsModule.PerformedWork
-local placement = reactFiberFlagsModule.Placement
-local hydrating = reactFiberFlagsModule.Hydrating
-local contentReset = reactFiberFlagsModule.ContentReset
-local didCapture = reactFiberFlagsModule.DidCapture
-local ref = reactFiberFlagsModule.Ref
-local deletion = reactFiberFlagsModule.Deletion
-local forceUpdateForLegacySuspense = reactFiberFlagsModule.ForceUpdateForLegacySuspense
-local reactSharedInternals = require(parent.Shared).ReactSharedInternals
-local reactFeatureFlags = require(parent.Shared).ReactFeatureFlags
-local debugRenderPhaseSideEffectsForStrictMode = reactFeatureFlags.debugRenderPhaseSideEffectsForStrictMode
-local disableLegacyContext = reactFeatureFlags.disableLegacyContext
-local disableModulePatternComponents = reactFeatureFlags.disableModulePatternComponents
-local enableProfilerTimer = reactFeatureFlags.enableProfilerTimer
-local enableSchedulerTracing = reactFeatureFlags.enableSchedulerTracing
-local enableSuspenseServerRenderer = reactFeatureFlags.enableSuspenseServerRenderer
-local warnAboutDefaultPropsOnFunctionComponents = reactFeatureFlags.warnAboutDefaultPropsOnFunctionComponents
-local invariant = require(parent.Shared).invariant
-local describeError = require(parent.Shared).describeError
-local shallowEqual = require(parent.Shared).shallowEqual
-local getComponentName = require(parent.Shared).getComponentName
-local reactSymbols = require(parent.Shared).ReactSymbols
-local REACT_LAZY_TYPE = reactSymbols.REACT_LAZY_TYPE
-local _ = reactSymbols.getIteratorFn
-local unknownModule_1 = require(script.Parent["ReactStrictModeWarnings.new"])
-local reactCurrentFiberModule = require(script.Parent.ReactCurrentFiber)
-local getCurrentFiberOwnerNameInDevOrNull = reactCurrentFiberModule.getCurrentFiberOwnerNameInDevOrNull
-local setIsRendering = reactCurrentFiberModule.setIsRendering
-local unknownModule_2 = require(script.Parent["ReactFiberHotReloading.new"])
-local resolveFunctionForHotReloading = unknownModule_2.resolveFunctionForHotReloading
-local resolveForwardRefForHotReloading = unknownModule_2.resolveForwardRefForHotReloading
-local resolveClassForHotReloading = unknownModule_2.resolveClassForHotReloading
-local unknownModule_3 = require(script.Parent["ReactChildFiber.new"])
-local mountChildFibers = unknownModule_3.mountChildFibers
-local reconcileChildFibers = unknownModule_3.reconcileChildFibers
-local cloneChildFibers = unknownModule_3.cloneChildFibers
-local unknownModule_4 = require(script.Parent["ReactUpdateQueue.new"])
-local processUpdateQueue = unknownModule_4.processUpdateQueue
-local cloneUpdateQueue = unknownModule_4.cloneUpdateQueue
-local initializeUpdateQueue = unknownModule_4.initializeUpdateQueue
-local reactTypeOfModeModule = require(script.Parent.ReactTypeOfMode)
-local concurrentMode = reactTypeOfModeModule.ConcurrentMode
-local noMode = reactTypeOfModeModule.NoMode
-local profileMode = reactTypeOfModeModule.ProfileMode
-local strictMode = reactTypeOfModeModule.StrictMode
-local blockingMode = reactTypeOfModeModule.BlockingMode
-local reactFiberHostConfigModule = require(script.Parent.ReactFiberHostConfig)
-local shouldSetTextContent = reactFiberHostConfigModule.shouldSetTextContent
-local isSuspenseInstancePending = reactFiberHostConfigModule.isSuspenseInstancePending
-local isSuspenseInstanceFallback = reactFiberHostConfigModule.isSuspenseInstanceFallback
-local registerSuspenseInstanceRetry = reactFiberHostConfigModule.registerSuspenseInstanceRetry
-local supportsHydration = reactFiberHostConfigModule.supportsHydration
-local unknownModule_5 = require(script.Parent["ReactFiberHostContext.new"])
-local pushHostContext = unknownModule_5.pushHostContext
-local pushHostContainer = unknownModule_5.pushHostContainer
-local suspenseStackCursor = unknownModule.suspenseStackCursor
-local hasSuspenseContext = unknownModule.hasSuspenseContext
-local forceSuspenseFallback = unknownModule.ForceSuspenseFallback
-local addSubtreeSuspenseContext = unknownModule.addSubtreeSuspenseContext
-local invisibleParentSuspenseContext = unknownModule.InvisibleParentSuspenseContext
-local pushSuspenseContext = unknownModule.pushSuspenseContext
-local setDefaultShallowSuspenseContext = unknownModule.setDefaultShallowSuspenseContext
-local unknownModule_6 = require(script.Parent["ReactFiberNewContext.new"])
-local propagateContextChange = unknownModule_6.propagateContextChange
-local readContext = unknownModule_6.readContext
-local calculateChangedBits = unknownModule_6.calculateChangedBits
-local prepareToReadContext = unknownModule_6.prepareToReadContext
-local pushProvider = unknownModule_6.pushProvider
-local t = {
+local CheckPropTypesFunction = require(Parent.Shared).checkPropTypes
+local ReactWorkTagsModule = require(script.Parent.ReactWorkTags)
+local FunctionComponent = ReactWorkTagsModule.FunctionComponent
+local ClassComponent = ReactWorkTagsModule.ClassComponent
+local HostRoot = ReactWorkTagsModule.HostRoot
+local HostComponent = ReactWorkTagsModule.HostComponent
+local HostText = ReactWorkTagsModule.HostText
+local HostPortal = ReactWorkTagsModule.HostPortal
+local ForwardRef = ReactWorkTagsModule.ForwardRef
+local Fragment = ReactWorkTagsModule.Fragment
+local Mode = ReactWorkTagsModule.Mode
+local ContextProvider = ReactWorkTagsModule.ContextProvider
+local ContextConsumer = ReactWorkTagsModule.ContextConsumer
+local Profiler = ReactWorkTagsModule.Profiler
+local SuspenseComponent = ReactWorkTagsModule.SuspenseComponent
+local SuspenseListComponent = ReactWorkTagsModule.SuspenseListComponent
+local MemoComponent = ReactWorkTagsModule.MemoComponent
+local SimpleMemoComponent = ReactWorkTagsModule.SimpleMemoComponent
+local LazyComponent = ReactWorkTagsModule.LazyComponent
+local IncompleteClassComponent = ReactWorkTagsModule.IncompleteClassComponent
+local OffscreenComponent = ReactWorkTagsModule.OffscreenComponent
+local LegacyHiddenComponent = ReactWorkTagsModule.LegacyHiddenComponent
+local ReactFiberFlagsModule = require(script.Parent.ReactFiberFlags)
+local NoFlags = ReactFiberFlagsModule.NoFlags
+local StaticMask = ReactFiberFlagsModule.StaticMask
+local PerformedWork = ReactFiberFlagsModule.PerformedWork
+local Placement = ReactFiberFlagsModule.Placement
+local Hydrating = ReactFiberFlagsModule.Hydrating
+local ContentReset = ReactFiberFlagsModule.ContentReset
+local DidCapture = ReactFiberFlagsModule.DidCapture
+local Ref = ReactFiberFlagsModule.Ref
+local Deletion = ReactFiberFlagsModule.Deletion
+local ForceUpdateForLegacySuspense = ReactFiberFlagsModule.ForceUpdateForLegacySuspense
+local ReactSharedInternals = require(Parent.Shared).ReactSharedInternals
+local ReactFeatureFlags = require(Parent.Shared).ReactFeatureFlags
+local DebugRenderPhaseSideEffectsForStrictMode = ReactFeatureFlags.debugRenderPhaseSideEffectsForStrictMode
+local DisableLegacyContext = ReactFeatureFlags.disableLegacyContext
+local DisableModulePatternComponents = ReactFeatureFlags.disableModulePatternComponents
+local EnableProfilerTimer = ReactFeatureFlags.enableProfilerTimer
+local EnableSchedulerTracing = ReactFeatureFlags.enableSchedulerTracing
+local EnableSuspenseServerRenderer = ReactFeatureFlags.enableSuspenseServerRenderer
+local WarnAboutDefaultPropsOnFunctionComponents = ReactFeatureFlags.warnAboutDefaultPropsOnFunctionComponents
+local InvariantFunction = require(Parent.Shared).invariant
+local DescribeError = require(Parent.Shared).describeError
+local ShallowEqualFunction = require(Parent.Shared).shallowEqual
+local GetComponentNameFunction = require(Parent.Shared).getComponentName
+local ReactSymbols = require(Parent.Shared).ReactSymbols
+local REACTLAZYTYPE = ReactSymbols.REACT_LAZY_TYPE
+local _ = ReactSymbols.getIteratorFn
+local ReactStrictModeWarningsNewModule = require(script.Parent["ReactStrictModeWarnings.new"])
+local ReactCurrentFiberModule = require(script.Parent.ReactCurrentFiber)
+local GetCurrentFiberOwnerNameInDevOrNullFunction = ReactCurrentFiberModule.getCurrentFiberOwnerNameInDevOrNull
+local SetIsRenderingFunction = ReactCurrentFiberModule.setIsRendering
+local ReactFiberHotReloadingNewModule = require(script.Parent["ReactFiberHotReloading.new"])
+local ResolveFunctionForHotReloadingFunction = ReactFiberHotReloadingNewModule.resolveFunctionForHotReloading
+local ResolveForwardRefForHotReloadingFunction = ReactFiberHotReloadingNewModule.resolveForwardRefForHotReloading
+local ResolveClassForHotReloadingFunction = ReactFiberHotReloadingNewModule.resolveClassForHotReloading
+local ReactChildFiberNewModule = require(script.Parent["ReactChildFiber.new"])
+local MountChildFibersFunction = ReactChildFiberNewModule.mountChildFibers
+local ReconcileChildFibersFunction = ReactChildFiberNewModule.reconcileChildFibers
+local CloneChildFibersFunction = ReactChildFiberNewModule.cloneChildFibers
+local ReactUpdateQueueNewModule = require(script.Parent["ReactUpdateQueue.new"])
+local ProcessUpdateQueueFunction = ReactUpdateQueueNewModule.processUpdateQueue
+local CloneUpdateQueueFunction = ReactUpdateQueueNewModule.cloneUpdateQueue
+local InitializeUpdateQueueFunction = ReactUpdateQueueNewModule.initializeUpdateQueue
+local ReactTypeOfModeModule = require(script.Parent.ReactTypeOfMode)
+local ConcurrentMode = ReactTypeOfModeModule.ConcurrentMode
+local NoMode = ReactTypeOfModeModule.NoMode
+local ProfileMode = ReactTypeOfModeModule.ProfileMode
+local StrictMode = ReactTypeOfModeModule.StrictMode
+local BlockingMode = ReactTypeOfModeModule.BlockingMode
+local ReactFiberHostConfigModule = require(script.Parent.ReactFiberHostConfig)
+local ShouldSetTextContentFunction = ReactFiberHostConfigModule.shouldSetTextContent
+local IsSuspenseInstancePendingFunction = ReactFiberHostConfigModule.isSuspenseInstancePending
+local IsSuspenseInstanceFallbackFunction = ReactFiberHostConfigModule.isSuspenseInstanceFallback
+local RegisterSuspenseInstanceRetryFunction = ReactFiberHostConfigModule.registerSuspenseInstanceRetry
+local SupportsHydration = ReactFiberHostConfigModule.supportsHydration
+local ReactFiberHostContextNewModule = require(script.Parent["ReactFiberHostContext.new"])
+local PushHostContextFunction = ReactFiberHostContextNewModule.pushHostContext
+local PushHostContainerFunction = ReactFiberHostContextNewModule.pushHostContainer
+local SuspenseStackCursor = ReactFiberSuspenseContextNewModule.suspenseStackCursor
+local HasSuspenseContextFunction = ReactFiberSuspenseContextNewModule.hasSuspenseContext
+local ForceSuspenseFallback = ReactFiberSuspenseContextNewModule.ForceSuspenseFallback
+local AddSubtreeSuspenseContextFunction = ReactFiberSuspenseContextNewModule.addSubtreeSuspenseContext
+local InvisibleParentSuspenseContext = ReactFiberSuspenseContextNewModule.InvisibleParentSuspenseContext
+local PushSuspenseContextFunction = ReactFiberSuspenseContextNewModule.pushSuspenseContext
+local SetDefaultShallowSuspenseContextFunction = ReactFiberSuspenseContextNewModule.setDefaultShallowSuspenseContext
+local ReactFiberNewContextNewModule = require(script.Parent["ReactFiberNewContext.new"])
+local PropagateContextChangeFunction = ReactFiberNewContextNewModule.propagateContextChange
+local ReadContextFunction = ReactFiberNewContextNewModule.readContext
+local CalculateChangedBitsFunction = ReactFiberNewContextNewModule.calculateChangedBits
+local PrepareToReadContextFunction = ReactFiberNewContextNewModule.prepareToReadContext
+local PushProviderFunction = ReactFiberNewContextNewModule.pushProvider
+local config = {
 	renderWithHooksRef = nil,
 	bailoutHooksRef = nil,
 	shouldSuspendRef = nil
 }
 
-local _ = function(p1)
-	-- upvalues: t (ref)
-	if not t.shouldSuspendRef then
-		t.shouldSuspendRef = require(script.Parent.ReactFiberReconciler).shouldSuspend
+local _ = function(p1) --[[ Line: 189 | Named "shouldSuspend" ]]
+	-- upvalues: config (copy)
+	if not config.shouldSuspendRef then
+		config.shouldSuspendRef = require(script.Parent.ReactFiberReconciler).shouldSuspend
 	end
-	return t.shouldSuspendRef(p1)
+	return config.shouldSuspendRef(p1)
 end
 
-local _ = function()
-	-- upvalues: t (ref)
-	local unknownModule = require(script.Parent["ReactFiberHooks.new"])
-	t.renderWithHooksRef = unknownModule.renderWithHooks
-	t.bailoutHooksRef = unknownModule.bailoutHooks
+local _ = function() --[[ Line: 198 | Named "initReactFiberHooks" ]]
+	-- upvalues: config (copy)
+	local ReactFiberHooksNewModule = require(script.Parent["ReactFiberHooks.new"])
+	config.renderWithHooksRef = ReactFiberHooksNewModule.renderWithHooks
+	config.bailoutHooksRef = ReactFiberHooksNewModule.bailoutHooks
 end
 
-local function renderWithHooks(...)
-	-- upvalues: t (ref)
-	if not t.renderWithHooksRef then
-		local unknownModule = require(script.Parent["ReactFiberHooks.new"])
-		t.renderWithHooksRef = unknownModule.renderWithHooks
-		t.bailoutHooksRef = unknownModule.bailoutHooks
+local function renderWithHooks(...) --[[ Line: 205 ]]
+	-- upvalues: config (copy)
+	if not config.renderWithHooksRef then
+		local ReactFiberHooksNewModule = require(script.Parent["ReactFiberHooks.new"])
+		config.renderWithHooksRef = ReactFiberHooksNewModule.renderWithHooks
+		config.bailoutHooksRef = ReactFiberHooksNewModule.bailoutHooks
 	end
-	return t.renderWithHooksRef(...)
+	return config.renderWithHooksRef(...)
 end
 
-local function bailoutHooks(...)
-	-- upvalues: t (ref)
-	if not t.bailoutHooksRef then
-		local unknownModule = require(script.Parent["ReactFiberHooks.new"])
-		t.renderWithHooksRef = unknownModule.renderWithHooks
-		t.bailoutHooksRef = unknownModule.bailoutHooks
+local function bailoutHooks(...) --[[ Line: 213 ]]
+	-- upvalues: config (copy)
+	if not config.bailoutHooksRef then
+		local ReactFiberHooksNewModule = require(script.Parent["ReactFiberHooks.new"])
+		config.renderWithHooksRef = ReactFiberHooksNewModule.renderWithHooks
+		config.bailoutHooksRef = ReactFiberHooksNewModule.bailoutHooks
 	end
-	return t.bailoutHooksRef(...)
+	return config.bailoutHooksRef(...)
 end
 
-local stopProfilerTimerIfRunning = require(script.Parent["ReactProfilerTimer.new"]).stopProfilerTimerIfRunning
-local unknownModule_7 = require(script.Parent["ReactFiberContext.new"])
-local getMaskedContext = unknownModule_7.getMaskedContext
-local getUnmaskedContext = unknownModule_7.getUnmaskedContext
-local hasContextChanged = unknownModule_7.hasContextChanged
-local pushContextProvider = unknownModule_7.pushContextProvider
-local isContextProvider = unknownModule_7.isContextProvider
-local pushTopLevelContextObject = unknownModule_7.pushTopLevelContextObject
-local invalidateContextProvider = unknownModule_7.invalidateContextProvider
-local unknownModule_8 = require(script.Parent["ReactFiberHydrationContext.new"])
-local resetHydrationState = unknownModule_8.resetHydrationState
-local enterHydrationState = unknownModule_8.enterHydrationState
-local reenterHydrationStateFromDehydratedSuspenseInstance = unknownModule_8.reenterHydrationStateFromDehydratedSuspenseInstance
-local tryToClaimNextHydratableInstance = unknownModule_8.tryToClaimNextHydratableInstance
-local warnIfHydrating = unknownModule_8.warnIfHydrating
-local unknownModule_9 = require(script.Parent["ReactFiberClassComponent.new"])
-local adoptClassInstance = unknownModule_9.adoptClassInstance
-local applyDerivedStateFromProps = unknownModule_9.applyDerivedStateFromProps
-local constructClassInstance = unknownModule_9.constructClassInstance
-local mountClassInstance = unknownModule_9.mountClassInstance
-local resumeMountClassInstance = unknownModule_9.resumeMountClassInstance
-local updateClassInstance = unknownModule_9.updateClassInstance
-local resolveDefaultProps = require(script.Parent["ReactFiberLazyComponent.new"]).resolveDefaultProps
-local unknownModule_10 = require(script.Parent["ReactFiber.new"])
-local resolveLazyComponentTag = unknownModule_10.resolveLazyComponentTag
-local createFiberFromFragment = unknownModule_10.createFiberFromFragment
-local createFiberFromOffscreen = unknownModule_10.createFiberFromOffscreen
-local createFiberFromTypeAndProps = unknownModule_10.createFiberFromTypeAndProps
-local isSimpleFunctionComponent = unknownModule_10.isSimpleFunctionComponent
-local createWorkInProgress = unknownModule_10.createWorkInProgress
-local unknownModule_11 = require(script.Parent["ReactFiberWorkLoop.new"])
-local pushRenderLanes = unknownModule_11.pushRenderLanes
-local markSpawnedWork = unknownModule_11.markSpawnedWork
-local retryDehydratedSuspenseBoundary = unknownModule_11.retryDehydratedSuspenseBoundary
-local scheduleUpdateOnFiber = unknownModule_11.scheduleUpdateOnFiber
-local renderDidSuspendDelayIfPossible = unknownModule_11.renderDidSuspendDelayIfPossible
-local getWorkInProgressRoot = unknownModule_11.getWorkInProgressRoot
-local getExecutionContext = unknownModule_11.getExecutionContext
-local retryAfterError = unknownModule_11.RetryAfterError
-local noContext = unknownModule_11.NoContext
-local var1 = nil
-local setWorkInProgressVersion = require(script.Parent["ReactMutableSource.new"]).setWorkInProgressVersion
-local markSkippedUpdateLanes = require(script.Parent.ReactFiberWorkInProgress).markSkippedUpdateLanes
-local consolePatchingDev = require(parent.Shared).ConsolePatchingDev
-local disableLogs = consolePatchingDev.disableLogs
-local reenableLogs = consolePatchingDev.reenableLogs
-local reactCurrentOwner = reactSharedInternals.ReactCurrentOwner
-local t_1 = {}
-local bailoutOnAlreadyFinishedWork = nil
-local updateFunctionComponent = nil
-local var2 = false
-local t_2 = {
+local StopProfilerTimerIfRunningFunction = require(script.Parent["ReactProfilerTimer.new"]).stopProfilerTimerIfRunning
+local ReactFiberContextNewModule = require(script.Parent["ReactFiberContext.new"])
+local GetMaskedContextFunction = ReactFiberContextNewModule.getMaskedContext
+local GetUnmaskedContextFunction = ReactFiberContextNewModule.getUnmaskedContext
+local HasContextChangedFunction = ReactFiberContextNewModule.hasContextChanged
+local PushContextProviderFunction = ReactFiberContextNewModule.pushContextProvider
+local IsContextProviderFunction = ReactFiberContextNewModule.isContextProvider
+local PushTopLevelContextObjectFunction = ReactFiberContextNewModule.pushTopLevelContextObject
+local InvalidateContextProviderFunction = ReactFiberContextNewModule.invalidateContextProvider
+local ReactFiberHydrationContextNewModule = require(script.Parent["ReactFiberHydrationContext.new"])
+local ResetHydrationStateFunction = ReactFiberHydrationContextNewModule.resetHydrationState
+local EnterHydrationStateFunction = ReactFiberHydrationContextNewModule.enterHydrationState
+local ReenterHydrationStateFromDehydratedSuspenseInstanceFunction = ReactFiberHydrationContextNewModule.reenterHydrationStateFromDehydratedSuspenseInstance
+local TryToClaimNextHydratableInstanceFunction = ReactFiberHydrationContextNewModule.tryToClaimNextHydratableInstance
+local WarnIfHydratingFunction = ReactFiberHydrationContextNewModule.warnIfHydrating
+local ReactFiberClassComponentNewModule = require(script.Parent["ReactFiberClassComponent.new"])
+local AdoptClassInstanceFunction = ReactFiberClassComponentNewModule.adoptClassInstance
+local ApplyDerivedStateFromPropsFunction = ReactFiberClassComponentNewModule.applyDerivedStateFromProps
+local ConstructClassInstanceFunction = ReactFiberClassComponentNewModule.constructClassInstance
+local MountClassInstanceFunction = ReactFiberClassComponentNewModule.mountClassInstance
+local ResumeMountClassInstanceFunction = ReactFiberClassComponentNewModule.resumeMountClassInstance
+local UpdateClassInstanceFunction = ReactFiberClassComponentNewModule.updateClassInstance
+local ResolveDefaultPropsFunction = require(script.Parent["ReactFiberLazyComponent.new"]).resolveDefaultProps
+local ReactFiberNewModule = require(script.Parent["ReactFiber.new"])
+local ResolveLazyComponentTagFunction = ReactFiberNewModule.resolveLazyComponentTag
+local CreateFiberFromFragmentFunction = ReactFiberNewModule.createFiberFromFragment
+local CreateFiberFromOffscreenFunction = ReactFiberNewModule.createFiberFromOffscreen
+local CreateFiberFromTypeAndPropsFunction = ReactFiberNewModule.createFiberFromTypeAndProps
+local IsSimpleFunctionComponentFunction = ReactFiberNewModule.isSimpleFunctionComponent
+local CreateWorkInProgressFunction = ReactFiberNewModule.createWorkInProgress
+local ReactFiberWorkLoopNewModule = require(script.Parent["ReactFiberWorkLoop.new"])
+local PushRenderLanesFunction = ReactFiberWorkLoopNewModule.pushRenderLanes
+local MarkSpawnedWorkFunction = ReactFiberWorkLoopNewModule.markSpawnedWork
+local RetryDehydratedSuspenseBoundaryFunction = ReactFiberWorkLoopNewModule.retryDehydratedSuspenseBoundary
+local ScheduleUpdateOnFiberFunction = ReactFiberWorkLoopNewModule.scheduleUpdateOnFiber
+local RenderDidSuspendDelayIfPossibleFunction = ReactFiberWorkLoopNewModule.renderDidSuspendDelayIfPossible
+local GetWorkInProgressRootFunction = ReactFiberWorkLoopNewModule.getWorkInProgressRoot
+local GetExecutionContextFunction = ReactFiberWorkLoopNewModule.getExecutionContext
+local RetryAfterError = ReactFiberWorkLoopNewModule.RetryAfterError
+local NoContext = ReactFiberWorkLoopNewModule.NoContext
+local UnstableWrap = nil
+local SetWorkInProgressVersionFunction = require(script.Parent["ReactMutableSource.new"]).setWorkInProgressVersion
+local MarkSkippedUpdateLanesFunction = require(script.Parent.ReactFiberWorkInProgress).markSkippedUpdateLanes
+local ConsolePatchingDev = require(Parent.Shared).ConsolePatchingDev
+local DisableLogsFunction = ConsolePatchingDev.disableLogs
+local ReenableLogsFunction = ConsolePatchingDev.reenableLogs
+local ReactCurrentOwner = ReactSharedInternals.ReactCurrentOwner
+local ReactFiberBeginWorkModule = {}
+local Callback2 = nil
+local Callback4 = nil
+local IsNotBitsMatch = false
+local config1 = {
 	didWarnAboutBadClass = {},
 	didWarnAboutModulePatternComponent = {},
 	didWarnAboutContextTypeOnFunctionComponent = {},
@@ -214,1532 +216,1509 @@ local t_2 = {
 	didWarnAboutFunctionRefs = {},
 	didWarnAboutDefaultPropsOnFunctionComponent = {}
 }
-local updateSimpleMemoComponent = nil
+local Callback3 = nil
 
-if dEV then
-	t_2.didWarnAboutBadClass = {}
-	t_2.didWarnAboutModulePatternComponent = {}
-	t_2.didWarnAboutContextTypeOnFunctionComponent = {}
-	t_2.didWarnAboutGetDerivedStateOnFunctionComponent = {}
-	t_2.didWarnAboutFunctionRefs = {}
-	t_1.didWarnAboutReassigningProps = false
-	t_2.didWarnAboutDefaultPropsOnFunctionComponent = {}
+if DEV then
+	config1.didWarnAboutBadClass = {}
+	config1.didWarnAboutModulePatternComponent = {}
+	config1.didWarnAboutContextTypeOnFunctionComponent = {}
+	config1.didWarnAboutGetDerivedStateOnFunctionComponent = {}
+	config1.didWarnAboutFunctionRefs = {}
+	ReactFiberBeginWorkModule.didWarnAboutReassigningProps = false
+	config1.didWarnAboutDefaultPropsOnFunctionComponent = {}
 end
-local _ = function(p1, p2, p3, p4)
-	-- upvalues: mountChildFibers (ref), reconcileChildFibers (ref)
+local function reconcileChildren(p1, Current, Children, p2) --[[ Line: 314 ]]
+	-- upvalues: MountChildFibersFunction (copy), ReactFeatureFlags (copy), ReconcileChildFibersFunction (copy)
 	if p1 == nil then
-		p2.child = mountChildFibers(p2, nil, p3, p4)
+		Current.child = MountChildFibersFunction(Current, nil, Children, p2)
 		
 		return
 	end
-	p2.child = reconcileChildFibers(p2, p1.child, p3, p4)
-end
-
-local _ = function(p1, p2, p3, p4)
-	-- upvalues: reconcileChildFibers (ref)
-	p2.child = reconcileChildFibers(p2, p1.child, nil, p4)
-	p2.child = reconcileChildFibers(p2, nil, p3, p4)
-end
-
-local function updateForwardRef(p1, p2, p3, p4, p5)
-	-- upvalues: dEV (ref), dISABLEALLWARNINGSEXCEPTPROPVALIDATION (ref), checkPropTypes (ref), getComponentName (ref), prepareToReadContext (ref), t_1 (ref), reactCurrentOwner (ref), setIsRendering (ref), renderWithHooks (ref), debugRenderPhaseSideEffectsForStrictMode (ref), strictMode (ref), disableLogs (ref), describeError (ref), reenableLogs (ref), var2 (write), bailoutHooks (ref), bailoutOnAlreadyFinishedWork (write), performedWork (ref), mountChildFibers (ref), reconcileChildFibers (ref)
-	local propTypes
-	if (dEV or dISABLEALLWARNINGSEXCEPTPROPVALIDATION) and p2.type ~= p2.elementType then
-		propTypes = p3.propTypes
-		local validateProps = p3.validateProps
+	if ReactFeatureFlags.enableWorkLoopTrims then
+		local ReconcileChildFibersResult = ReconcileChildFibersFunction(Current, p1.child, Children, p2)
 		
-		if propTypes or validateProps then
-			checkPropTypes(propTypes, validateProps, p4, "prop", getComponentName(p3))
-		end
-	end
-	local var3
-	propTypes = p3.render
-	local ref = p2.ref
-	local _ = nil
-	prepareToReadContext(p2, p5, t_1.markWorkInProgressReceivedUpdate)
-	
-	if dEV then
-		reactCurrentOwner.current = p2
-		setIsRendering(true)
-		var3 = renderWithHooks(p1, p2, propTypes, p4, ref, p5)
-		
-		if debugRenderPhaseSideEffectsForStrictMode and bit32.band(p2.mode, strictMode) ~= 0 then
-			disableLogs()
-			local ok, status = xpcall(renderWithHooks, describeError, p1, p2, propTypes, p4, ref, p5)
+		if ReconcileChildFibersResult ~= nil or Current.child ~= nil then
+			Current.child = ReconcileChildFibersResult
 			
-			if ok then
-				var3 = status
-			end
-			reenableLogs()
-			
-			if not ok then
-				error(status)
-			end
+			return
 		end
-		setIsRendering(false)
 	else
-		var3 = renderWithHooks(p1, p2, propTypes, p4, ref, p5)
+		Current.child = ReconcileChildFibersFunction(Current, p1.child, Children, p2)
 	end
-	if p1 ~= nil and not var2 then
-		bailoutHooks(p1, p2, p5)
+end
+
+local _ = function(p1, p2, p3, p4) --[[ Line: 357 | Named "forceUnmountCurrentAndReconcile" ]]
+	-- upvalues: ReconcileChildFibersFunction (copy)
+	p2.child = ReconcileChildFibersFunction(p2, p1.child, nil, p4)
+	p2.child = ReconcileChildFibersFunction(p2, nil, p3, p4)
+end
+
+local function updateForwardRef(p1, Current, InitResult, p2, BaseLanes) --[[ Line: 381 ]]
+	-- upvalues: DEV (copy), DISABLEALLWARNINGSEXCEPTPROPVALIDATION (copy), CheckPropTypesFunction (copy), GetComponentNameFunction (copy), PrepareToReadContextFunction (copy), ReactFiberBeginWorkModule (copy), ReactCurrentOwner (copy), SetIsRenderingFunction (copy), renderWithHooks (copy), DebugRenderPhaseSideEffectsForStrictMode (copy), StrictMode (copy), DisableLogsFunction (copy), DescribeError (copy), ReenableLogsFunction (copy), IsNotBitsMatch (ref), bailoutHooks (copy), Callback2 (ref), PerformedWork (copy), reconcileChildren (copy)
+	if (DEV or DISABLEALLWARNINGSEXCEPTPROPVALIDATION) and Current.type ~= Current.elementType then
+		local PropTypes = InitResult.propTypes
+		local ValidateProps = InitResult.validateProps
 		
-		return bailoutOnAlreadyFinishedWork(p1, p2, p5)
+		if PropTypes or ValidateProps then
+			CheckPropTypesFunction(PropTypes, ValidateProps, p2, "prop", GetComponentNameFunction(InitResult))
+		end
 	end
-	p2.flags = bit32.bor(p2.flags, performedWork)
+	local Render = InitResult.render
+	local Ref = Current.ref
+	PrepareToReadContextFunction(Current, BaseLanes, ReactFiberBeginWorkModule.markWorkInProgressReceivedUpdate)
+	local RenderWithHooksResult = nil
 	
-	if p1 == nil then
-		p2.child = mountChildFibers(p2, nil, var3, p5)
+	if DEV then
+		ReactCurrentOwner.current = Current
+		SetIsRenderingFunction(true)
+		RenderWithHooksResult = renderWithHooks(p1, Current, Render, p2, Ref, BaseLanes)
+		
+		if DebugRenderPhaseSideEffectsForStrictMode and bit32.band(Current.mode, StrictMode) ~= 0 then
+			DisableLogsFunction()
+			local Success, Result = xpcall(renderWithHooks, DescribeError, p1, Current, Render, p2, Ref, BaseLanes)
+			
+			if Success then
+				RenderWithHooksResult = Result
+			end
+			ReenableLogsFunction()
+			
+			if not Success then
+				error(Result)
+			end
+		end
+		SetIsRenderingFunction(false)
 	else
-		p2.child = reconcileChildFibers(p2, p1.child, var3, p5)
+		RenderWithHooksResult = renderWithHooks(p1, Current, Render, p2, Ref, BaseLanes)
 	end
-	return p2.child
+	if p1 == nil or IsNotBitsMatch then
+		Current.flags = bit32.bor(Current.flags, PerformedWork)
+		reconcileChildren(p1, Current, RenderWithHooksResult, BaseLanes)
+		
+		return Current.child
+	else
+		bailoutHooks(p1, Current, BaseLanes)
+		
+		return Callback2(p1, Current, BaseLanes)
+	end
 end
 
-local function updateMemoComponent(p1, p2, p3, p4, p5, p6)
-	-- upvalues: isSimpleFunctionComponent (ref), dEV (ref), resolveFunctionForHotReloading (ref), simpleMemoComponent (ref), updateSimpleMemoComponent (write), dISABLEALLWARNINGSEXCEPTPROPVALIDATION (ref), checkPropTypes (ref), getComponentName (ref), createFiberFromTypeAndProps (ref), reactFiberLaneModule (ref), shallowEqual (ref), bailoutOnAlreadyFinishedWork (write), performedWork (ref), createWorkInProgress (ref)
-	local var3
+local function updateMemoComponent(p1, Return_, InitResult, p2, Lanes, BaseLanes) --[[ Line: 468 ]]
+	-- upvalues: IsSimpleFunctionComponentFunction (copy), DEV (copy), ResolveFunctionForHotReloadingFunction (copy), SimpleMemoComponent (copy), Callback3 (ref), DISABLEALLWARNINGSEXCEPTPROPVALIDATION (copy), CheckPropTypesFunction (copy), GetComponentNameFunction (copy), CreateFiberFromTypeAndPropsFunction (copy), ReactFiberLaneModule (copy), ShallowEqualFunction (copy), Callback2 (ref), PerformedWork (copy), CreateWorkInProgressFunction (copy)
 	if p1 == nil then
-		local type = p3.type
+		local Type1 = InitResult.type
 		
-		if isSimpleFunctionComponent(type) and p3.compare == nil and p3.defaultProps == nil then
-			local var4 = if dEV then resolveFunctionForHotReloading(type) else type
-			p2.tag = simpleMemoComponent
-			p2.type = var4
+		if IsSimpleFunctionComponentFunction(Type1) and InitResult.compare == nil and InitResult.defaultProps == nil then
+			local ResolveFunctionForHotReloadingResult = if DEV then ResolveFunctionForHotReloadingFunction(Type1) else Type1
+			Return_.tag = SimpleMemoComponent
+			Return_.type = ResolveFunctionForHotReloadingResult
 			
-			if dEV then
-				validateFunctionComponentInDev(p2, type)
+			if DEV then
+				validateFunctionComponentInDev(Return_, Type1)
 			end
-			return updateSimpleMemoComponent(p1, p2, var4, p4, p5, p6)
-		elseif dEV or dISABLEALLWARNINGSEXCEPTPROPVALIDATION then
-			var3 = nil
-			local validateProps = nil
+			return Callback3(p1, Return_, ResolveFunctionForHotReloadingResult, p2, Lanes, BaseLanes)
+		else
+			if DEV or DISABLEALLWARNINGSEXCEPTPROPVALIDATION then
+				local PropTypes = nil
+				local ValidateProps = nil
+				
+				if type(Type1) == "table" then
+					PropTypes = Type1.propTypes
+					ValidateProps = Type1.validateProps
+				end
+				if PropTypes or ValidateProps then
+					CheckPropTypesFunction(PropTypes, ValidateProps, p2, "prop", GetComponentNameFunction(Type1))
+				end
+			end
+			local FiberFromTypeAndProps = CreateFiberFromTypeAndPropsFunction(InitResult.type, nil, p2, Return_, Return_.mode, BaseLanes)
+			FiberFromTypeAndProps.ref = Return_.ref
+			FiberFromTypeAndProps.return_ = Return_
+			Return_.child = FiberFromTypeAndProps
 			
-			if type(type) == "table" then
-				var3 = type.propTypes
-				validateProps = type.validateProps
+			return FiberFromTypeAndProps
+		end
+	else
+		if DEV or DISABLEALLWARNINGSEXCEPTPROPVALIDATION then
+			local Type2 = InitResult.type
+			local PropTypes = nil
+			local ValidateProps = nil
+			
+			if type(Type2) == "table" then
+				PropTypes = Type2.propTypes
+				ValidateProps = Type2.validateProps
 			end
-			if var3 or validateProps then
-				checkPropTypes(var3, validateProps, p4, "prop", getComponentName(type))
+			if PropTypes or ValidateProps then
+				CheckPropTypesFunction(PropTypes, ValidateProps, p2, "prop", GetComponentNameFunction(Type2))
 			end
 		end
-		var3 = createFiberFromTypeAndProps(p3.type, nil, p4, p2, p2.mode, p6)
-		var3.ref = p2.ref
-		var3.return_ = p2
-		p2.child = var3
+		local Child = p1.child
 		
-		return var3
-	elseif dEV or dISABLEALLWARNINGSEXCEPTPROPVALIDATION then
-		local type = p3.type
-		var3 = nil
-		local validateProps = nil
+		if not ReactFiberLaneModule.includesSomeLane(Lanes, BaseLanes) then
+			local MemoizedProps = Child.memoizedProps
+			local CompareFunction = InitResult.compare
+			
+			if CompareFunction == nil then
+				CompareFunction = ShallowEqualFunction
+			end
+			if CompareFunction(MemoizedProps, p2) and p1.ref == Return_.ref then
+				return Callback2(p1, Return_, BaseLanes)
+			end
+		end
+		Return_.flags = bit32.bor(Return_.flags, PerformedWork)
+		local WorkInProgress = CreateWorkInProgressFunction(Child, p2)
+		WorkInProgress.ref = Return_.ref
+		WorkInProgress.return_ = Return_
+		Return_.child = WorkInProgress
 		
-		if type(type) == "table" then
-			var3 = type.propTypes
-			validateProps = type.validateProps
-		end
-		if var3 or validateProps then
-			checkPropTypes(var3, validateProps, p4, "prop", getComponentName(type))
-		end
+		return WorkInProgress
 	end
-	local child = p1.child
-	
-	if not reactFiberLaneModule.includesSomeLane(p5, p6) then
-		var3 = child.memoizedProps
-		local compare = p3.compare
-		
-		if compare == nil then
-			compare = shallowEqual
-		end
-		if compare(var3, p4) and p1.ref == p2.ref then
-			return bailoutOnAlreadyFinishedWork(p1, p2, p6)
-		end
-	end
-	p2.flags = bit32.bor(p2.flags, performedWork)
-	var3 = createWorkInProgress(child, p4)
-	var3.ref = p2.ref
-	var3.return_ = p2
-	p2.child = var3
-	
-	return var3
 end
 
-updateSimpleMemoComponent = function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: dEV (ref), dISABLEALLWARNINGSEXCEPTPROPVALIDATION (ref), REACT_LAZY_TYPE (ref), describeError (ref), checkPropTypes (ref), getComponentName (ref), shallowEqual (ref), var2 (write), reactFiberLaneModule (ref), bailoutOnAlreadyFinishedWork (write), forceUpdateForLegacySuspense (ref), noFlags (ref), updateFunctionComponent (write)
-	if (dEV or dISABLEALLWARNINGSEXCEPTPROPVALIDATION) and p2.type ~= p2.elementType then
-		local elementType = p2.elementType
+Callback3 = function(p1, Current, Type1, PendingProps, Lanes, BaseLanes) --[[ Line: 589 | Named "updateSimpleMemoComponent" ]]
+	-- upvalues: DEV (copy), DISABLEALLWARNINGSEXCEPTPROPVALIDATION (copy), REACTLAZYTYPE (copy), DescribeError (copy), CheckPropTypesFunction (copy), GetComponentNameFunction (copy), ShallowEqualFunction (copy), IsNotBitsMatch (ref), ReactFiberLaneModule (copy), Callback2 (ref), ForceUpdateForLegacySuspense (copy), NoFlags (copy), Callback4 (ref)
+	if (DEV or DISABLEALLWARNINGSEXCEPTPROPVALIDATION) and Current.type ~= Current.elementType then
+		local ElementType = Current.elementType
 		
-		if elementType["$$typeof"] == REACT_LAZY_TYPE then
-			local var3 = elementType
-			local ok, status = xpcall(var3._init, describeError, var3._payload)
-			elementType = if ok then status else nil
-			local propTypes = nil
-			local validateProps = nil
+		if ElementType["$$typeof"] == REACTLAZYTYPE then
+			local Success, Result = xpcall(ElementType._init, DescribeError, ElementType._payload)
+			local Result1 = if Success then Result else nil
+			local PropTypes = nil
+			local ValidateProps = nil
 			
-			if elementType ~= nil and type(elementType) == "table" then
-				propTypes = elementType.propTypes
-				validateProps = elementType.validateProps
+			if Result1 ~= nil and type(Result1) == "table" then
+				PropTypes = Result1.propTypes
+				ValidateProps = Result1.validateProps
 			end
-			if propTypes or validateProps then
-				checkPropTypes(propTypes, validateProps, p4, "prop", getComponentName(elementType))
+			if PropTypes or ValidateProps then
+				CheckPropTypesFunction(PropTypes, ValidateProps, PendingProps, "prop", GetComponentNameFunction(Result1))
 			end
 		end
 	end
 	if p1 ~= nil then
-		if shallowEqual(p1.memoizedProps, p4) and p1.ref == p2.ref and (if dEV then p2.type == p1.type else true) then
-			var2 = false
+		local NoDEV: boolean = not DEV or Current.type == p1.type
+		
+		if ShallowEqualFunction(p1.memoizedProps, PendingProps) and p1.ref == Current.ref and NoDEV then
+			IsNotBitsMatch = false
 			
-			if not reactFiberLaneModule.includesSomeLane(p6, p5) then
-				p2.lanes = p1.lanes
+			if not ReactFiberLaneModule.includesSomeLane(BaseLanes, Lanes) then
+				Current.lanes = p1.lanes
 				
-				return bailoutOnAlreadyFinishedWork(p1, p2, p6)
-			elseif bit32.band(p1.flags, forceUpdateForLegacySuspense) ~= noFlags then
-				var2 = true
+				return Callback2(p1, Current, BaseLanes)
+			end
+			if bit32.band(p1.flags, ForceUpdateForLegacySuspense) ~= NoFlags then
+				IsNotBitsMatch = true
 			end
 		end
 	end
-	return updateFunctionComponent(p1, p2, p3, p4, p6)
+	return Callback4(p1, Current, Type1, PendingProps, BaseLanes)
 end
 
-local function updateOffscreenComponent(p1, p2, p3)
-	-- upvalues: concurrentMode (ref), noMode (ref), reactFiberLaneModule (ref), pushRenderLanes (ref), enableSchedulerTracing (ref), markSpawnedWork (ref), mountChildFibers (ref), reconcileChildFibers (ref)
-	local pendingProps = p2.pendingProps
-	local children = pendingProps.children
-	local var3 = if p1 ~= nil then p1.memoizedState else nil
+local function updateOffscreenComponent(p1, Current, BaseLanes) --[[ Line: 691 ]]
+	-- upvalues: ConcurrentMode (copy), NoMode (copy), ReactFiberLaneModule (copy), PushRenderLanesFunction (copy), EnableSchedulerTracing (copy), MarkSpawnedWorkFunction (copy), reconcileChildren (copy)
+	local PendingProps = Current.pendingProps
+	local Children = PendingProps.children
+	local MemoizedState = if p1 ~= nil then p1.memoizedState else nil
 	
-	if pendingProps.mode ~= "hidden" and pendingProps.mode ~= "unstable-defer-without-hiding" then
-		local var4
-		local _ = nil
-		
-		if var3 == nil then
-			var4 = p3
+	if PendingProps.mode == "hidden" or PendingProps.mode == "unstable-defer-without-hiding" then
+		if bit32.band(Current.mode, ConcurrentMode) == NoMode then
+			Current.memoizedState = { baseLanes = ReactFiberLaneModule.NoLanes }
+			PushRenderLanesFunction(Current, BaseLanes)
+		elseif ReactFiberLaneModule.includesSomeLane(BaseLanes, ReactFiberLaneModule.OffscreenLane) then
+			Current.memoizedState = { baseLanes = ReactFiberLaneModule.NoLanes }
+			PushRenderLanesFunction(Current, if MemoizedState == nil then BaseLanes else MemoizedState.baseLanes)
 		else
-			var4 = reactFiberLaneModule.mergeLanes(var3.baseLanes, p3)
-			p2.memoizedState = nil
-		end
-		pushRenderLanes(p2, var4)
-	elseif bit32.band(p2.mode, concurrentMode) == noMode then
-		p2.memoizedState = { baseLanes = reactFiberLaneModule.NoLanes }
-		pushRenderLanes(p2, p3)
-	elseif reactFiberLaneModule.includesSomeLane(p3, reactFiberLaneModule.OffscreenLane) then
-		p2.memoizedState = { baseLanes = reactFiberLaneModule.NoLanes }
-		pushRenderLanes(p2, if var3 ~= nil then var3.baseLanes else p3)
-	else
-		local var5 = if var3 ~= nil then p3 else reactFiberLaneModule.mergeLanes(var3.baseLanes, p3)
-		
-		if enableSchedulerTracing then
-			markSpawnedWork(reactFiberLaneModule.OffscreenLane)
-		end
-		p2.childLanes = reactFiberLaneModule.laneToLanes(reactFiberLaneModule.OffscreenLane)
-		p2.lanes = p2.childLanes
-		p2.memoizedState = { baseLanes = var5 }
-		pushRenderLanes(p2, var5)
-		
-		return nil
-	end
-	if p1 == nil then
-		p2.child = mountChildFibers(p2, nil, children, p3)
-	else
-		p2.child = reconcileChildFibers(p2, p1.child, children, p3)
-	end
-	return p2.child
-end
-
-function updateFragment(p1, p2, p3)
-	-- upvalues: mountChildFibers (ref), reconcileChildFibers (ref)
-	local pendingProps = p2.pendingProps
-	
-	if p1 == nil then
-		p2.child = mountChildFibers(p2, nil, pendingProps, p3)
-	else
-		p2.child = reconcileChildFibers(p2, p1.child, pendingProps, p3)
-	end
-	return p2.child
-end
-
-function updateMode(p1, p2, p3)
-	-- upvalues: mountChildFibers (ref), reconcileChildFibers (ref)
-	local children = p2.pendingProps.children
-	
-	if p1 == nil then
-		p2.child = mountChildFibers(p2, nil, children, p3)
-	else
-		p2.child = reconcileChildFibers(p2, p1.child, children, p3)
-	end
-	return p2.child
-end
-
-function updateProfiler(p1, p2, p3)
-	-- upvalues: enableProfilerTimer (ref), mountChildFibers (ref), reconcileChildFibers (ref)
-	if enableProfilerTimer then
-		local stateNode = p2.stateNode
-		stateNode.effectDuration = 0
-		stateNode.passiveEffectDuration = 0
-	end
-	local children = p2.pendingProps.children
-	
-	if p1 == nil then
-		p2.child = mountChildFibers(p2, nil, children, p3)
-	else
-		p2.child = reconcileChildFibers(p2, p1.child, children, p3)
-	end
-	return p2.child
-end
-
-local _ = function(p1, p2)
-	-- upvalues: ref (ref)
-	local ref_1 = p2.ref
-	
-	if p1 == nil and ref_1 ~= nil or p1 ~= nil and p1.ref ~= ref_1 then
-		p2.flags = bit32.bor(p2.flags, ref)
-	end
-end
-
-updateFunctionComponent = function(p1, p2, p3, p4, p5)
-	-- upvalues: dEV (ref), dISABLEALLWARNINGSEXCEPTPROPVALIDATION (ref), checkPropTypes (ref), getComponentName (ref), disableLegacyContext (ref), getUnmaskedContext (ref), getMaskedContext (ref), prepareToReadContext (ref), t_1 (ref), reactCurrentOwner (ref), setIsRendering (ref), renderWithHooks (ref), debugRenderPhaseSideEffectsForStrictMode (ref), strictMode (ref), disableLogs (ref), describeError (ref), reenableLogs (ref), var2 (write), bailoutHooks (ref), bailoutOnAlreadyFinishedWork (write), performedWork (ref), mountChildFibers (ref), reconcileChildFibers (ref)
-	local propTypes
-	if (dEV or dISABLEALLWARNINGSEXCEPTPROPVALIDATION) and (type(p3) ~= "function" and p2.type ~= p2.elementType) then
-		propTypes = nil
-		local validateProps = nil
-		
-		if type(p3) == "table" then
-			propTypes = p3.propTypes
-			validateProps = p3.validateProps
-		end
-		if propTypes or validateProps then
-			checkPropTypes(propTypes, validateProps, p4, "prop", getComponentName(p3))
-		end
-	end
-	local var3
-	propTypes = if not disableLegacyContext then getMaskedContext(p2, getUnmaskedContext(p2, p3, true)) else nil
-	local _ = nil
-	prepareToReadContext(p2, p5, t_1.markWorkInProgressReceivedUpdate)
-	
-	if dEV then
-		reactCurrentOwner.current = p2
-		setIsRendering(true)
-		var3 = renderWithHooks(p1, p2, p3, p4, propTypes, p5)
-		
-		if debugRenderPhaseSideEffectsForStrictMode and bit32.band(p2.mode, strictMode) ~= 0 then
-			disableLogs()
-			local ok, status = xpcall(renderWithHooks, describeError, p1, p2, p3, p4, propTypes, p5)
-			reenableLogs()
+			local BaseLanes1 = if MemoizedState == nil then BaseLanes else ReactFiberLaneModule.mergeLanes(MemoizedState.baseLanes, BaseLanes)
 			
-			if ok then
-				var3 = status
-			else
-				error(status)
+			if EnableSchedulerTracing then
+				MarkSpawnedWorkFunction(ReactFiberLaneModule.OffscreenLane)
+			end
+			Current.childLanes = ReactFiberLaneModule.laneToLanes(ReactFiberLaneModule.OffscreenLane)
+			Current.lanes = Current.childLanes
+			Current.memoizedState = { baseLanes = BaseLanes1 }
+			PushRenderLanesFunction(Current, BaseLanes1)
+			
+			return nil
+		end
+	else
+		local MergeLanesResult = nil
+		if MemoizedState == nil then
+			MergeLanesResult = BaseLanes
+		else
+			MergeLanesResult = ReactFiberLaneModule.mergeLanes(MemoizedState.baseLanes, BaseLanes)
+			Current.memoizedState = nil
+		end
+		PushRenderLanesFunction(Current, MergeLanesResult)
+	end
+	reconcileChildren(p1, Current, Children, BaseLanes)
+	
+	return Current.child
+end
+
+function updateFragment(p1, p2, p3) --[[ Line: 793 ]]
+	-- upvalues: reconcileChildren (copy)
+	reconcileChildren(p1, p2, p2.pendingProps, p3)
+	
+	return p2.child
+end
+
+function updateMode(p1, p2, p3) --[[ Line: 799 ]]
+	-- upvalues: reconcileChildren (copy)
+	reconcileChildren(p1, p2, p2.pendingProps.children, p3)
+	
+	return p2.child
+end
+
+function updateProfiler(p1, p2, p3) --[[ Line: 805 ]]
+	-- upvalues: EnableProfilerTimer (copy), reconcileChildren (copy)
+	if EnableProfilerTimer then
+		local StateNode = p2.stateNode
+		StateNode.effectDuration = 0
+		StateNode.passiveEffectDuration = 0
+	end
+	reconcileChildren(p1, p2, p2.pendingProps.children, p3)
+	
+	return p2.child
+end
+
+do
+	local _ = function(p1, p2) --[[ Line: 819 | Named "markRef" ]]
+		-- upvalues: Ref (copy)
+		local Ref1 = p2.ref
+		
+		if p1 == nil and Ref1 ~= nil or p1 ~= nil and p1.ref ~= Ref1 then
+			p2.flags = bit32.bor(p2.flags, Ref)
+		end
+	end
+
+	Callback4 = function(p1, Current, Callback, p2, BaseLanes) --[[ Line: 830 | Named "updateFunctionComponent" ]]
+		-- upvalues: DEV (copy), DISABLEALLWARNINGSEXCEPTPROPVALIDATION (copy), CheckPropTypesFunction (copy), GetComponentNameFunction (copy), DisableLegacyContext (copy), GetUnmaskedContextFunction (copy), GetMaskedContextFunction (copy), PrepareToReadContextFunction (copy), ReactFiberBeginWorkModule (copy), ReactCurrentOwner (copy), SetIsRenderingFunction (copy), renderWithHooks (copy), DebugRenderPhaseSideEffectsForStrictMode (copy), StrictMode (copy), DisableLogsFunction (copy), DescribeError (copy), ReenableLogsFunction (copy), IsNotBitsMatch (ref), bailoutHooks (copy), Callback2 (ref), PerformedWork (copy), reconcileChildren (copy)
+		if (DEV or DISABLEALLWARNINGSEXCEPTPROPVALIDATION) and (type(Callback) ~= "function" and Current.type ~= Current.elementType) then
+			local PropTypes = nil
+			local ValidateProps = nil
+			
+			if type(Callback) == "table" then
+				PropTypes = Callback.propTypes
+				ValidateProps = Callback.validateProps
+			end
+			if PropTypes or ValidateProps then
+				CheckPropTypesFunction(PropTypes, ValidateProps, p2, "prop", GetComponentNameFunction(Callback))
 			end
 		end
-		setIsRendering(false)
-	else
-		var3 = renderWithHooks(p1, p2, p3, p4, propTypes, p5)
-	end
-	if p1 ~= nil and not var2 then
-		bailoutHooks(p1, p2, p5)
+		local MaskedContext = if DisableLegacyContext then nil else GetMaskedContextFunction(Current, (GetUnmaskedContextFunction(Current, Callback, true)))
+		PrepareToReadContextFunction(Current, BaseLanes, ReactFiberBeginWorkModule.markWorkInProgressReceivedUpdate)
+		local RenderWithHooksResult = nil
 		
-		return bailoutOnAlreadyFinishedWork(p1, p2, p5)
-	end
-	p2.flags = bit32.bor(p2.flags, performedWork)
-	
-	if p1 == nil then
-		p2.child = mountChildFibers(p2, nil, var3, p5)
-	else
-		p2.child = reconcileChildFibers(p2, p1.child, var3, p5)
-	end
-	return p2.child
-end
-
-local function updateClassComponent(p1, p2, p3, p4, p5)
-	-- upvalues: dEV (ref), dISABLEALLWARNINGSEXCEPTPROPVALIDATION (ref), checkPropTypes (ref), getComponentName (ref), isContextProvider (ref), pushContextProvider (ref), prepareToReadContext (ref), t_1 (ref), placement (ref), constructClassInstance (ref), mountClassInstance (ref), resumeMountClassInstance (ref), updateClassInstance (ref), console (ref)
-	local propTypes
-	if (dEV or dISABLEALLWARNINGSEXCEPTPROPVALIDATION) and p2.type ~= p2.elementType then
-		propTypes = p3.propTypes
-		local validateProps = p3.validateProps
-		
-		if propTypes or validateProps then
-			checkPropTypes(propTypes, validateProps, p4, "prop", getComponentName(p3))
-		end
-	end
-	propTypes = nil
-	
-	if isContextProvider(p3) then
-		propTypes = true
-		pushContextProvider(p2)
-	else
-		propTypes = false
-	end
-	local var3
-	prepareToReadContext(p2, p5, t_1.markWorkInProgressReceivedUpdate)
-	local _ = nil
-	
-	if p2.stateNode == nil then
-		if p1 ~= nil then
-			p1.alternate = nil
-			p2.alternate = nil
-			p2.flags = bit32.bor(p2.flags, placement)
-		end
-		constructClassInstance(p2, p3, p4)
-		mountClassInstance(p2, p3, p4, p5)
-		var3 = true
-	else
-		var3 = if p1 == nil then resumeMountClassInstance(p2, p3, p4, p5) else updateClassInstance(p1, p2, p3, p4, p5)
-	end
-	local var4 = finishClassComponent(p1, p2, p3, var3, propTypes, p5)
-	
-	if dEV then
-		if var3 and p2.stateNode.props ~= p4 then
-			if not t_1.didWarnAboutReassigningProps then
-				console.error("It looks like %s is reassigning its own `this.props` while rendering. This is not supported and can lead to confusing bugs.", getComponentName(p2.type) or "a component")
-			end
-			t_1.didWarnAboutReassigningProps = true
-		end
-	end
-	return var4
-end
-
-function finishClassComponent(p1, p2, p3, p4, p5, p6)
-	-- upvalues: ref (ref), didCapture (ref), noFlags (ref), invalidateContextProvider (ref), bailoutOnAlreadyFinishedWork (write), reactCurrentOwner (ref), enableProfilerTimer (ref), stopProfilerTimerIfRunning (ref), dEV (ref), setIsRendering (ref), debugRenderPhaseSideEffectsForStrictMode (ref), strictMode (ref), disableLogs (ref), describeError (ref), reenableLogs (ref), performedWork (ref), reconcileChildFibers (ref), mountChildFibers (ref)
-	local ref_1 = p2.ref
-	
-	if p1 == nil and ref_1 ~= nil or p1 ~= nil and p1.ref ~= ref_1 then
-		p2.flags = bit32.bor(p2.flags, ref)
-	end
-	ref_1 = bit32.band(p2.flags, didCapture) ~= noFlags
-	
-	if p4 or ref_1 then
-		local var3
-		local stateNode = p2.stateNode
-		reactCurrentOwner.current = p2
-		local _ = nil
-		
-		if ref_1 and (p3.getDerivedStateFromError == nil or type(p3.getDerivedStateFromError) ~= "function") then
-			var3 = nil
+		if DEV then
+			ReactCurrentOwner.current = Current
+			SetIsRenderingFunction(true)
+			RenderWithHooksResult = renderWithHooks(p1, Current, Callback, p2, MaskedContext, BaseLanes)
 			
-			if enableProfilerTimer then
-				stopProfilerTimerIfRunning(p2)
-			end
-		elseif dEV then
-			setIsRendering(true)
-			var3 = stateNode:render()
-			
-			if debugRenderPhaseSideEffectsForStrictMode and bit32.band(p2.mode, strictMode) ~= 0 then
-				disableLogs()
-				local ok, status = xpcall(stateNode.render, describeError, stateNode)
-				reenableLogs()
+			if DebugRenderPhaseSideEffectsForStrictMode and bit32.band(Current.mode, StrictMode) ~= 0 then
+				DisableLogsFunction()
+				local Success, Result = xpcall(renderWithHooks, DescribeError, p1, Current, Callback, p2, MaskedContext, BaseLanes)
+				ReenableLogsFunction()
 				
-				if not ok then
-					error(status)
-				end
-			end
-			setIsRendering(false)
-		else
-			var3 = stateNode:render()
-		end
-		p2.flags = bit32.bor(p2.flags, performedWork)
-		
-		if p1 == nil or not ref_1 then
-			local var4 = var3
-			
-			if p1 == nil then
-				p2.child = mountChildFibers(p2, nil, var4, p6)
-			else
-				p2.child = reconcileChildFibers(p2, p1.child, var4, p6)
-			end
-		else
-			local var5 = var3
-			p2.child = reconcileChildFibers(p2, p1.child, nil, p6)
-			p2.child = reconcileChildFibers(p2, nil, var5, p6)
-		end
-		p2.memoizedState = stateNode.state
-		
-		if p5 then
-			invalidateContextProvider(p2, p3, true)
-		end
-		return p2.child
-	elseif p5 then
-		invalidateContextProvider(p2, p3, false)
-	end
-	return bailoutOnAlreadyFinishedWork(p1, p2, p6)
-end
-
-local _ = function(p1)
-	-- upvalues: pushTopLevelContextObject (ref), pushHostContainer (ref)
-	local stateNode = p1.stateNode
-	
-	if stateNode.pendingContext then
-		pushTopLevelContextObject(p1, stateNode.pendingContext, stateNode.pendingContext ~= stateNode.context)
-	elseif stateNode.context then
-		pushTopLevelContextObject(p1, stateNode.context, false)
-	end
-	pushHostContainer(p1, stateNode.containerInfo)
-end
-
-local function updateHostRoot(p1, p2, p3)
-	-- upvalues: pushTopLevelContextObject (ref), pushHostContainer (ref), invariant (ref), cloneUpdateQueue (ref), processUpdateQueue (ref), resetHydrationState (ref), bailoutOnAlreadyFinishedWork (write), enterHydrationState (ref), supportsHydration (ref), setWorkInProgressVersion (ref), mountChildFibers (ref), placement (ref), hydrating (ref), reconcileChildFibers (ref)
-	local stateNode = p2.stateNode
-	
-	if stateNode.pendingContext then
-		pushTopLevelContextObject(p2, stateNode.pendingContext, stateNode.pendingContext ~= stateNode.context)
-	elseif stateNode.context then
-		pushTopLevelContextObject(p2, stateNode.context, false)
-	end
-	pushHostContainer(p2, stateNode.containerInfo)
-	invariant(p1 ~= nil and p2.updateQueue ~= nil, "If the root does not have an updateQueue, we should have already bailed out. This error is likely caused by a bug in React. Please file an issue.")
-	local pendingProps = p2.pendingProps
-	local memoizedState = p2.memoizedState
-	local var3 = if memoizedState ~= nil then memoizedState.element else nil
-	cloneUpdateQueue(p1, p2)
-	processUpdateQueue(p2, pendingProps, nil, p3)
-	local element = p2.memoizedState.element
-	
-	if element == var3 then
-		resetHydrationState()
-		
-		return bailoutOnAlreadyFinishedWork(p1, p2, p3)
-	end
-	local stateNode_1 = p2.stateNode
-	
-	if stateNode_1.hydrate and enterHydrationState(p2) then
-		if supportsHydration then
-			local mutableSourceEagerHydrationData = stateNode_1.mutableSourceEagerHydrationData
-			
-			if mutableSourceEagerHydrationData ~= nil then
-				for i = 1, #mutableSourceEagerHydrationData, 2 do
-					setWorkInProgressVersion(mutableSourceEagerHydrationData[i], mutableSourceEagerHydrationData[i + 1])
-				end
-			end
-		end
-		local var4 = mountChildFibers(p2, nil, element, p3)
-		p2.child = var4
-		local var5 = var4
-		while var5 do
-			var5.flags = bit32.bor(bit32.band(var5.flags, bit32.bnot(placement)), hydrating)
-			var5 = var5.sibling
-		end
-	elseif p1 == nil then
-		p2.child = mountChildFibers(p2, nil, element, p3)
-	else
-		p2.child = reconcileChildFibers(p2, p1.child, element, p3)
-	end
-	resetHydrationState()
-	return p2.child
-end
-
-local function updateHostComponent(p4, p5, p6)
-	-- upvalues: pushHostContext (ref), tryToClaimNextHydratableInstance (ref), shouldSetTextContent (ref), contentReset (ref), performedWork (ref), ref (ref), mountChildFibers (ref), reconcileChildFibers (ref)
-	pushHostContext(p5)
-	
-	if p4 == nil then
-		tryToClaimNextHydratableInstance(p5)
-	end
-	local type = p5.type
-	local pendingProps = p5.pendingProps
-	local var6 = if p4 ~= nil then p4.memoizedProps else nil
-	local children = pendingProps.children
-	
-	if shouldSetTextContent(type, pendingProps) then
-		children = nil
-	elseif var6 ~= nil and shouldSetTextContent(type, var6) then
-		p5.flags = bit32.bor(p5.flags, contentReset)
-	end
-	p5.flags = bit32.bor(p5.flags, performedWork)
-	local ref_1 = p5.ref
-	
-	if p4 == nil and ref_1 ~= nil or p4 ~= nil and p4.ref ~= ref_1 then
-		p5.flags = bit32.bor(p5.flags, ref)
-	end
-	if p4 == nil then
-		p5.child = mountChildFibers(p5, nil, children, p6)
-	else
-		p5.child = reconcileChildFibers(p5, p4.child, children, p6)
-	end
-	return p5.child
-end
-
-local _ = function(p4, p5)
-	-- upvalues: tryToClaimNextHydratableInstance (ref)
-	if p4 == nil then
-		tryToClaimNextHydratableInstance(p5)
-	end
-	return nil
-end
-
-local function mountLazyComponent(p4, p5, p6, p7, p8)
-	-- upvalues: placement (ref), resolveLazyComponentTag (ref), resolveDefaultProps (ref), functionComponent (ref), dEV (ref), resolveFunctionForHotReloading (ref), updateFunctionComponent (write), classComponent (ref), resolveClassForHotReloading (ref), updateClassComponent (ref), forwardRef (ref), resolveForwardRefForHotReloading (ref), updateForwardRef (ref), memoComponent (ref), dISABLEALLWARNINGSEXCEPTPROPVALIDATION (ref), checkPropTypes (ref), getComponentName (ref), updateMemoComponent (ref), REACT_LAZY_TYPE (ref), inspect (ref), invariant (ref)
-	if p4 ~= nil then
-		p4.alternate = nil
-		p5.alternate = nil
-		p5.flags = bit32.bor(p5.flags, placement)
-	end
-	local propTypes
-	local pendingProps = p5.pendingProps
-	local var6 = p6._init(p6._payload)
-	p5.type = var6
-	p5.tag = resolveLazyComponentTag(var6)
-	local tag = p5.tag
-	local var7 = resolveDefaultProps(var6, pendingProps)
-	local _ = nil
-	
-	if tag == functionComponent then
-		if dEV then
-			validateFunctionComponentInDev(p5, var6)
-			var6 = resolveFunctionForHotReloading(var6)
-			p5.type = var6
-		end
-		return updateFunctionComponent(nil, p5, var6, var7, p8)
-	elseif tag == classComponent then
-		if dEV then
-			var6 = resolveClassForHotReloading(var6)
-			p5.type = var6
-		end
-		return updateClassComponent(nil, p5, var6, var7, p8)
-	elseif tag == forwardRef then
-		if dEV then
-			var6 = resolveForwardRefForHotReloading(var6)
-			p5.type = var6
-		end
-		return updateForwardRef(nil, p5, var6, var7, p8)
-	elseif tag == memoComponent then
-		if (dEV or dISABLEALLWARNINGSEXCEPTPROPVALIDATION) and p5.type ~= p5.elementType then
-			propTypes = var6.propTypes
-			local validateProps = var6.validateProps
-			
-			if propTypes or validateProps then
-				checkPropTypes(propTypes, validateProps, var7, "prop", getComponentName(var6))
-			end
-		end
-		return updateMemoComponent(nil, p5, var6, resolveDefaultProps(var6.type, var7), p7, p8)
-	else
-		propTypes = ""
-		
-		if dEV then
-			if var6 ~= nil and type(var6) == "table" and var6["$$typeof"] == REACT_LAZY_TYPE then
-				propTypes = " Did you wrap a component in React.lazy() more than once?"
-			elseif type(var6) == "table" and var6["$$typeof"] == nil then
-				propTypes = "\n" .. inspect(var6)
-			end
-		end
-		invariant(false, "Element type is invalid. Received a promise that resolves to: %s. Lazy element type must resolve to a class or function.%s", tostring(var6), propTypes)
-		
-		return nil
-	end
-end
-
-function mountIncompleteClassComponent(p4, p5, p6, p7, p8)
-	-- upvalues: placement (ref), classComponent (ref), isContextProvider (ref), pushContextProvider (ref), prepareToReadContext (ref), t_1 (ref), constructClassInstance (ref), mountClassInstance (ref)
-	if p4 ~= nil then
-		p4.alternate = nil
-		p5.alternate = nil
-		p5.flags = bit32.bor(p5.flags, placement)
-	end
-	local var6
-	p5.tag = classComponent
-	local _ = nil
-	
-	if isContextProvider(p6) then
-		var6 = true
-		pushContextProvider(p5)
-	else
-		var6 = false
-	end
-	prepareToReadContext(p5, p8, t_1.markWorkInProgressReceivedUpdate)
-	constructClassInstance(p5, p6, p7)
-	mountClassInstance(p5, p6, p7, p8)
-	
-	return finishClassComponent(nil, p5, p6, true, var6, p8)
-end
-
-local function mountIndeterminateComponent(a, b, p4, p5)
-	-- upvalues: placement (ref), disableLegacyContext (ref), getUnmaskedContext (ref), getMaskedContext (ref), prepareToReadContext (ref), t_1 (ref), dEV (ref), getComponentName (ref), t_2 (ref), console (ref), strictMode (ref), unknownModule_1 (ref), setIsRendering (ref), reactCurrentOwner (ref), renderWithHooks (ref), performedWork (ref), disableModulePatternComponents (ref), classComponent (ref), isContextProvider (ref), pushContextProvider (ref), initializeUpdateQueue (ref), applyDerivedStateFromProps (ref), adoptClassInstance (ref), mountClassInstance (ref), functionComponent (ref), debugRenderPhaseSideEffectsForStrictMode (ref), disableLogs (ref), describeError (ref), reenableLogs (ref), mountChildFibers (ref)
-	if a ~= nil then
-		a.alternate = nil
-		b.alternate = nil
-		b.flags = bit32.bor(b.flags, placement)
-	end
-	local var6
-	local pendingProps = b.pendingProps
-	local var7 = if not disableLegacyContext then getMaskedContext(b, getUnmaskedContext(b, p4, false)) else nil
-	prepareToReadContext(b, p5, t_1.markWorkInProgressReceivedUpdate)
-	local _ = nil
-	
-	if dEV then
-		if type(p4) == "table" and type(p4.render) == "function" then
-			local var8 = getComponentName(p4) or "Unknown"
-			
-			if not t_2.didWarnAboutBadClass[var8] then
-				console.error("The <%s /> component appears to have a render method, but doesn't extend React.Component. This is likely to cause errors. Change %s to extend React.Component instead.", var8, var8)
-				t_2.didWarnAboutBadClass[var8] = true
-			end
-		end
-		if bit32.band(b.mode, strictMode) ~= 0 then
-			unknownModule_1.recordLegacyContextWarning(b)
-		end
-		setIsRendering(true)
-		reactCurrentOwner.current = b
-		var6 = renderWithHooks(nil, b, p4, pendingProps, var7, p5)
-		setIsRendering(false)
-	else
-		var6 = renderWithHooks(nil, b, p4, pendingProps, var7, p5)
-	end
-	b.flags = bit32.bor(b.flags, performedWork)
-	local var9 = type(var6)
-	
-	if dEV and var6 ~= nil and (var9 == "table" and type(var6.render) == "function") and var6["$$typeof"] == nil then
-		local var10 = getComponentName(p4) or "Unknown"
-		
-		if not t_2.didWarnAboutModulePatternComponent[var10] then
-			console.error("The <%s /> component appears to be a function component that returns a class instance. Change %s to a class that extends React.Component instead. ", var10, var10)
-			t_2.didWarnAboutModulePatternComponent[var10] = true
-		end
-	end
-	if disableModulePatternComponents or var6 == nil or (var9 ~= "table" or type(var6.render) ~= "function") or var6["$$typeof"] ~= nil then
-		b.tag = functionComponent
-		
-		if dEV then
-			if disableLegacyContext and p4.contextTypes then
-				console.error("%s uses the legacy contextTypes API which is no longer supported. Use React.createContext() with React.useContext() instead.", getComponentName(p4) or "Unknown")
-			end
-			if debugRenderPhaseSideEffectsForStrictMode and bit32.band(b.mode, strictMode) ~= 0 then
-				disableLogs()
-				local ok, status = xpcall(renderWithHooks, describeError, nil, b, p4, pendingProps, var7, p5)
-				reenableLogs()
-				
-				if ok then
-					var6 = status
+				if Success then
+					RenderWithHooksResult = Result
 				else
-					error(status)
+					error(Result)
+				end
+			end
+			SetIsRenderingFunction(false)
+		else
+			RenderWithHooksResult = renderWithHooks(p1, Current, Callback, p2, MaskedContext, BaseLanes)
+		end
+		if p1 == nil or IsNotBitsMatch then
+			Current.flags = bit32.bor(Current.flags, PerformedWork)
+			reconcileChildren(p1, Current, RenderWithHooksResult, BaseLanes)
+			
+			return Current.child
+		else
+			bailoutHooks(p1, Current, BaseLanes)
+			
+			return Callback2(p1, Current, BaseLanes)
+		end
+	end
+
+	local function updateClassComponent(p1, Current, InitResult, Props, BaseLanes) --[[ Line: 1009 ]]
+		-- upvalues: DEV (copy), DISABLEALLWARNINGSEXCEPTPROPVALIDATION (copy), CheckPropTypesFunction (copy), GetComponentNameFunction (copy), IsContextProviderFunction (copy), PushContextProviderFunction (copy), PrepareToReadContextFunction (copy), ReactFiberBeginWorkModule (copy), Placement (copy), ConstructClassInstanceFunction (copy), MountClassInstanceFunction (copy), ResumeMountClassInstanceFunction (copy), UpdateClassInstanceFunction (copy), Console (copy)
+		if (DEV or DISABLEALLWARNINGSEXCEPTPROPVALIDATION) and Current.type ~= Current.elementType then
+			local PropTypes = InitResult.propTypes
+			local ValidateProps = InitResult.validateProps
+			
+			if PropTypes or ValidateProps then
+				CheckPropTypesFunction(PropTypes, ValidateProps, Props, "prop", GetComponentNameFunction(InitResult))
+			end
+		end
+		local Flag = nil
+		if IsContextProviderFunction(InitResult) then
+			Flag = true
+			PushContextProviderFunction(Current)
+		else
+			Flag = false
+		end
+		PrepareToReadContextFunction(Current, BaseLanes, ReactFiberBeginWorkModule.markWorkInProgressReceivedUpdate)
+		local ResumeMountClassInstanceResult = nil
+		
+		if Current.stateNode == nil then
+			if p1 ~= nil then
+				p1.alternate = nil
+				Current.alternate = nil
+				Current.flags = bit32.bor(Current.flags, Placement)
+			end
+			ConstructClassInstanceFunction(Current, InitResult, Props)
+			MountClassInstanceFunction(Current, InitResult, Props, BaseLanes)
+			ResumeMountClassInstanceResult = true
+		else
+			ResumeMountClassInstanceResult = if p1 == nil then ResumeMountClassInstanceFunction(Current, InitResult, Props, BaseLanes) else UpdateClassInstanceFunction(p1, Current, InitResult, Props, BaseLanes)
+		end
+		local FinishClassComponentResult = finishClassComponent(p1, Current, InitResult, ResumeMountClassInstanceResult, Flag, BaseLanes)
+		
+		if DEV then
+			local StateNode = Current.stateNode
+			
+			if ResumeMountClassInstanceResult and StateNode.props ~= Props then
+				if not ReactFiberBeginWorkModule.didWarnAboutReassigningProps then
+					Console.error("It looks like %s is reassigning its own `this.props` while rendering. This is not supported and can lead to confusing bugs.", GetComponentNameFunction(Current.type) or "a component")
+				end
+				ReactFiberBeginWorkModule.didWarnAboutReassigningProps = true
+			end
+		end
+		return FinishClassComponentResult
+	end
+
+	function finishClassComponent(p1, Current, p2, p3, p4, p5) --[[ Line: 1106 ]]
+		-- upvalues: Ref (copy), DidCapture (copy), NoFlags (copy), InvalidateContextProviderFunction (copy), Callback2 (ref), ReactCurrentOwner (copy), EnableProfilerTimer (copy), StopProfilerTimerIfRunningFunction (copy), DEV (copy), SetIsRenderingFunction (copy), DebugRenderPhaseSideEffectsForStrictMode (copy), StrictMode (copy), DisableLogsFunction (copy), DescribeError (copy), ReenableLogsFunction (copy), PerformedWork (copy), ReconcileChildFibersFunction (copy), reconcileChildren (copy)
+		local Ref1 = Current.ref
+		
+		if p1 == nil and Ref1 ~= nil or p1 ~= nil and p1.ref ~= Ref1 then
+			Current.flags = bit32.bor(Current.flags, Ref)
+		end
+		local IsNotBitsMatch = bit32.band(Current.flags, DidCapture) ~= NoFlags
+		
+		if p3 or IsNotBitsMatch then
+			local StateNode = Current.stateNode
+			ReactCurrentOwner.current = Current
+			local RenderResult = nil
+			
+			if IsNotBitsMatch and (p2.getDerivedStateFromError == nil or type(p2.getDerivedStateFromError) ~= "function") then
+				RenderResult = nil
+				
+				if EnableProfilerTimer then
+					StopProfilerTimerIfRunningFunction(Current)
+				end
+			elseif DEV then
+				SetIsRenderingFunction(true)
+				RenderResult = StateNode:render()
+				
+				if DebugRenderPhaseSideEffectsForStrictMode and bit32.band(Current.mode, StrictMode) ~= 0 then
+					DisableLogsFunction()
+					local Success, Result = xpcall(StateNode.render, DescribeError, StateNode)
+					ReenableLogsFunction()
+					
+					if not Success then
+						error(Result)
+					end
+				end
+				SetIsRenderingFunction(false)
+			else
+				RenderResult = StateNode:render()
+			end
+			Current.flags = bit32.bor(Current.flags, PerformedWork)
+			
+			if p1 == nil or not IsNotBitsMatch then
+				reconcileChildren(p1, Current, RenderResult, p5)
+			else
+				Current.child = ReconcileChildFibersFunction(Current, p1.child, nil, p5)
+				Current.child = ReconcileChildFibersFunction(Current, nil, RenderResult, p5)
+			end
+			Current.memoizedState = StateNode.state
+			
+			if p4 then
+				InvalidateContextProviderFunction(Current, p2, true)
+			end
+			return Current.child
+		else
+			if p4 then
+				InvalidateContextProviderFunction(Current, p2, false)
+			end
+			return Callback2(p1, Current, p5)
+		end
+	end
+
+	local _ = function(p1) --[[ Line: 1204 | Named "pushHostRootContext" ]]
+		-- upvalues: PushTopLevelContextObjectFunction (copy), PushHostContainerFunction (copy)
+		local StateNode = p1.stateNode
+		
+		if StateNode.pendingContext then
+			PushTopLevelContextObjectFunction(p1, StateNode.pendingContext, StateNode.pendingContext ~= StateNode.context)
+		elseif StateNode.context then
+			PushTopLevelContextObjectFunction(p1, StateNode.context, false)
+		end
+		PushHostContainerFunction(p1, StateNode.containerInfo)
+	end
+
+	local function updateHostRoot(p1, Current, BaseLanes) --[[ Line: 1220 ]]
+		-- upvalues: PushTopLevelContextObjectFunction (copy), PushHostContainerFunction (copy), InvariantFunction (copy), CloneUpdateQueueFunction (copy), ProcessUpdateQueueFunction (copy), ResetHydrationStateFunction (copy), Callback2 (ref), EnterHydrationStateFunction (copy), SupportsHydration (copy), SetWorkInProgressVersionFunction (copy), MountChildFibersFunction (copy), Placement (copy), Hydrating (copy), reconcileChildren (copy)
+		local StateNode = Current.stateNode
+		
+		if StateNode.pendingContext then
+			PushTopLevelContextObjectFunction(Current, StateNode.pendingContext, StateNode.pendingContext ~= StateNode.context)
+		elseif StateNode.context then
+			PushTopLevelContextObjectFunction(Current, StateNode.context, false)
+		end
+		PushHostContainerFunction(Current, StateNode.containerInfo)
+		local UpdateQueue = Current.updateQueue
+		InvariantFunction(p1 ~= nil and UpdateQueue ~= nil, "If the root does not have an updateQueue, we should have already bailed out. This error is likely caused by a bug in React. Please file an issue.")
+		local PendingProps = Current.pendingProps
+		local MemoizedState = Current.memoizedState
+		local Element = if MemoizedState == nil then nil else MemoizedState.element
+		CloneUpdateQueueFunction(p1, Current)
+		ProcessUpdateQueueFunction(Current, PendingProps, nil, BaseLanes)
+		local Element1 = Current.memoizedState.element
+		
+		if Element1 == Element then
+			ResetHydrationStateFunction()
+			
+			return Callback2(p1, Current, BaseLanes)
+		end
+		local StateNode1 = Current.stateNode
+		
+		if StateNode1.hydrate and EnterHydrationStateFunction(Current) then
+			if SupportsHydration then
+				local MutableSourceEagerHydrationData = StateNode1.mutableSourceEagerHydrationData
+				
+				if MutableSourceEagerHydrationData ~= nil then
+					for i = 1, #MutableSourceEagerHydrationData, 2 do
+						SetWorkInProgressVersionFunction(MutableSourceEagerHydrationData[i], MutableSourceEagerHydrationData[i + 1])
+					end
+				end
+			end
+			local MountChildFibersResult = MountChildFibersFunction(Current, nil, Element1, BaseLanes)
+			Current.child = MountChildFibersResult
+			local Sibling = MountChildFibersResult
+			while Sibling do
+				Sibling.flags = bit32.bor(bit32.band(Sibling.flags, (bit32.bnot(Placement))), Hydrating)
+				Sibling = Sibling.sibling
+			end
+		else
+			reconcileChildren(p1, Current, Element1, BaseLanes)
+			ResetHydrationStateFunction()
+		end
+		return Current.child
+	end
+
+	local function updateHostComponent(p2, Current, BaseLanes) --[[ Line: 1297 ]]
+		-- upvalues: PushHostContextFunction (copy), TryToClaimNextHydratableInstanceFunction (copy), ShouldSetTextContentFunction (copy), ContentReset (copy), PerformedWork (copy), Ref (copy), reconcileChildren (copy)
+		PushHostContextFunction(Current)
+		
+		if p2 == nil then
+			TryToClaimNextHydratableInstanceFunction(Current)
+		end
+		local Type1 = Current.type
+		local PendingProps = Current.pendingProps
+		local MemoizedProps = if p2 == nil then nil else p2.memoizedProps
+		local Children = PendingProps.children
+		
+		if ShouldSetTextContentFunction(Type1, PendingProps) then
+			Children = nil
+		elseif MemoizedProps ~= nil and ShouldSetTextContentFunction(Type1, MemoizedProps) then
+			Current.flags = bit32.bor(Current.flags, ContentReset)
+		end
+		Current.flags = bit32.bor(Current.flags, PerformedWork)
+		local Ref1 = Current.ref
+		
+		if p2 == nil and Ref1 ~= nil or p2 ~= nil and p2.ref ~= Ref1 then
+			Current.flags = bit32.bor(Current.flags, Ref)
+		end
+		reconcileChildren(p2, Current, Children, BaseLanes)
+		
+		return Current.child
+	end
+
+	local _ = function(p2, p3) --[[ Line: 1338 | Named "updateHostText" ]]
+		-- upvalues: TryToClaimNextHydratableInstanceFunction (copy)
+		if p2 == nil then
+			TryToClaimNextHydratableInstanceFunction(p3)
+		end
+		return nil
+	end
+
+	local function mountLazyComponent(p2, Current, ElementType, Lanes, BaseLanes) --[[ Line: 1347 ]]
+		-- upvalues: Placement (copy), ResolveLazyComponentTagFunction (copy), ResolveDefaultPropsFunction (copy), FunctionComponent (copy), DEV (copy), ResolveFunctionForHotReloadingFunction (copy), Callback4 (ref), ClassComponent (copy), ResolveClassForHotReloadingFunction (copy), updateClassComponent (copy), ForwardRef (copy), ResolveForwardRefForHotReloadingFunction (copy), updateForwardRef (copy), MemoComponent (copy), DISABLEALLWARNINGSEXCEPTPROPVALIDATION (copy), CheckPropTypesFunction (copy), GetComponentNameFunction (copy), updateMemoComponent (copy), REACTLAZYTYPE (copy), InspectFunction (copy), InvariantFunction (copy)
+		if p2 ~= nil then
+			p2.alternate = nil
+			Current.alternate = nil
+			Current.flags = bit32.bor(Current.flags, Placement)
+		end
+		local PendingProps = Current.pendingProps
+		local InitResult = ElementType._init(ElementType._payload)
+		Current.type = InitResult
+		Current.tag = ResolveLazyComponentTagFunction(InitResult)
+		local Tag = Current.tag
+		local ResolveDefaultPropsResult = ResolveDefaultPropsFunction(InitResult, PendingProps)
+		
+		if Tag == FunctionComponent then
+			if DEV then
+				validateFunctionComponentInDev(Current, InitResult)
+				InitResult = ResolveFunctionForHotReloadingFunction(InitResult)
+				Current.type = InitResult
+			end
+			return (Callback4(nil, Current, InitResult, ResolveDefaultPropsResult, BaseLanes))
+		elseif Tag == ClassComponent then
+			if DEV then
+				InitResult = ResolveClassForHotReloadingFunction(InitResult)
+				Current.type = InitResult
+			end
+			return (updateClassComponent(nil, Current, InitResult, ResolveDefaultPropsResult, BaseLanes))
+		elseif Tag == ForwardRef then
+			if DEV then
+				InitResult = ResolveForwardRefForHotReloadingFunction(InitResult)
+				Current.type = InitResult
+			end
+			return (updateForwardRef(nil, Current, InitResult, ResolveDefaultPropsResult, BaseLanes))
+		elseif Tag == MemoComponent then
+			if (DEV or DISABLEALLWARNINGSEXCEPTPROPVALIDATION) and Current.type ~= Current.elementType then
+				local PropTypes = InitResult.propTypes
+				local ValidateProps = InitResult.validateProps
+				
+				if PropTypes or ValidateProps then
+					CheckPropTypesFunction(PropTypes, ValidateProps, ResolveDefaultPropsResult, "prop", GetComponentNameFunction(InitResult))
+				end
+			end
+			return (updateMemoComponent(nil, Current, InitResult, ResolveDefaultPropsFunction(InitResult.type, ResolveDefaultPropsResult), Lanes, BaseLanes))
+		else
+			local v1 = ""
+			
+			if DEV then
+				if InitResult == nil or type(InitResult) ~= "table" or InitResult["$$typeof"] ~= REACTLAZYTYPE then
+					if type(InitResult) == "table" and InitResult["$$typeof"] == nil then
+						v1 = "\n" .. InspectFunction(InitResult)
+					end
+				else
+					v1 = " Did you wrap a component in React.lazy() more than once?"
+				end
+			end
+			InvariantFunction(false, "Element type is invalid. Received a promise that resolves to: %s. Lazy element type must resolve to a class or function.%s", tostring(InitResult), v1)
+			
+			return nil
+		end
+	end
+
+	function mountIncompleteClassComponent(p2, p3, p4, p5, p6) --[[ Line: 1478 ]]
+		-- upvalues: Placement (copy), ClassComponent (copy), IsContextProviderFunction (copy), PushContextProviderFunction (copy), PrepareToReadContextFunction (copy), ReactFiberBeginWorkModule (copy), ConstructClassInstanceFunction (copy), MountClassInstanceFunction (copy)
+		if p2 ~= nil then
+			p2.alternate = nil
+			p3.alternate = nil
+			p3.flags = bit32.bor(p3.flags, Placement)
+		end
+		p3.tag = ClassComponent
+		local Flag = nil
+		
+		if IsContextProviderFunction(p4) then
+			Flag = true
+			PushContextProviderFunction(p3)
+		else
+			Flag = false
+		end
+		PrepareToReadContextFunction(p3, p6, ReactFiberBeginWorkModule.markWorkInProgressReceivedUpdate)
+		ConstructClassInstanceFunction(p3, p4, p5)
+		MountClassInstanceFunction(p3, p4, p5, p6)
+		
+		return finishClassComponent(nil, p3, p4, true, Flag, p6)
+	end
+
+	local function mountIndeterminateComponent(p2, Current, Callback, BaseLanes) --[[ Line: 1530 ]]
+		-- upvalues: Placement (copy), DisableLegacyContext (copy), GetUnmaskedContextFunction (copy), GetMaskedContextFunction (copy), PrepareToReadContextFunction (copy), ReactFiberBeginWorkModule (copy), DEV (copy), GetComponentNameFunction (copy), config1 (copy), Console (copy), StrictMode (copy), ReactStrictModeWarningsNewModule (copy), SetIsRenderingFunction (copy), ReactCurrentOwner (copy), renderWithHooks (copy), PerformedWork (copy), DisableModulePatternComponents (copy), ClassComponent (copy), IsContextProviderFunction (copy), PushContextProviderFunction (copy), InitializeUpdateQueueFunction (copy), ApplyDerivedStateFromPropsFunction (copy), AdoptClassInstanceFunction (copy), MountClassInstanceFunction (copy), FunctionComponent (copy), DebugRenderPhaseSideEffectsForStrictMode (copy), DisableLogsFunction (copy), DescribeError (copy), ReenableLogsFunction (copy), MountChildFibersFunction (copy)
+		if p2 ~= nil then
+			p2.alternate = nil
+			Current.alternate = nil
+			Current.flags = bit32.bor(Current.flags, Placement)
+		end
+		local PendingProps = Current.pendingProps
+		local MaskedContext = if DisableLegacyContext then nil else GetMaskedContextFunction(Current, (GetUnmaskedContextFunction(Current, Callback, false)))
+		PrepareToReadContextFunction(Current, BaseLanes, ReactFiberBeginWorkModule.markWorkInProgressReceivedUpdate)
+		local RenderWithHooksResult = nil
+		
+		if DEV then
+			if type(Callback) == "table" and type(Callback.render) == "function" then
+				local ComponentName = GetComponentNameFunction(Callback) or "Unknown"
+				
+				if not config1.didWarnAboutBadClass[ComponentName] then
+					Console.error("The <%s /> component appears to have a render method, but doesn't extend React.Component. This is likely to cause errors. Change %s to extend React.Component instead.", ComponentName, ComponentName)
+					config1.didWarnAboutBadClass[ComponentName] = true
+				end
+			end
+			if bit32.band(Current.mode, StrictMode) ~= 0 then
+				ReactStrictModeWarningsNewModule.recordLegacyContextWarning(Current)
+			end
+			SetIsRenderingFunction(true)
+			ReactCurrentOwner.current = Current
+			RenderWithHooksResult = renderWithHooks(nil, Current, Callback, PendingProps, MaskedContext, BaseLanes)
+			SetIsRenderingFunction(false)
+		else
+			RenderWithHooksResult = renderWithHooks(nil, Current, Callback, PendingProps, MaskedContext, BaseLanes)
+		end
+		Current.flags = bit32.bor(Current.flags, PerformedWork)
+		local ValueType = type(RenderWithHooksResult)
+		
+		if DEV and RenderWithHooksResult ~= nil and ValueType == "table" and type(RenderWithHooksResult.render) == "function" and RenderWithHooksResult["$$typeof"] == nil then
+			local ComponentName = GetComponentNameFunction(Callback) or "Unknown"
+			
+			if not config1.didWarnAboutModulePatternComponent[ComponentName] then
+				Console.error("The <%s /> component appears to be a function component that returns a class instance. Change %s to a class that extends React.Component instead. ", ComponentName, ComponentName)
+				config1.didWarnAboutModulePatternComponent[ComponentName] = true
+			end
+		end
+		if DisableModulePatternComponents or RenderWithHooksResult == nil or ValueType ~= "table" or type(RenderWithHooksResult.render) ~= "function" or RenderWithHooksResult["$$typeof"] ~= nil then
+			Current.tag = FunctionComponent
+			
+			if DEV then
+				if DisableLegacyContext and Callback.contextTypes then
+					Console.error("%s uses the legacy contextTypes API which is no longer supported. Use React.createContext() with React.useContext() instead.", GetComponentNameFunction(Callback) or "Unknown")
+				end
+				if DebugRenderPhaseSideEffectsForStrictMode and bit32.band(Current.mode, StrictMode) ~= 0 then
+					DisableLogsFunction()
+					local Success, Result = xpcall(renderWithHooks, DescribeError, nil, Current, Callback, PendingProps, MaskedContext, BaseLanes)
+					ReenableLogsFunction()
+					
+					if Success then
+						RenderWithHooksResult = Result
+					else
+						error(Result)
+					end
+				end
+			end
+			Current.child = MountChildFibersFunction(Current, nil, RenderWithHooksResult, BaseLanes)
+			
+			if DEV then
+				validateFunctionComponentInDev(Current, Callback)
+			end
+			return Current.child
+		else
+			if DEV then
+				local ComponentName = GetComponentNameFunction(Callback) or "Unknown"
+				
+				if not config1.didWarnAboutModulePatternComponent[ComponentName] then
+					Console.error("The <%s /> component appears to be a function component that returns a class instance. " .. "Change %s to a class that extends React.Component instead. " .. ComponentName, ComponentName)
+					config1.didWarnAboutModulePatternComponent[ComponentName] = true
+				end
+			end
+			Current.tag = ClassComponent
+			Current.memoizedState = nil
+			Current.updateQueue = nil
+			local Flag = nil
+			
+			if IsContextProviderFunction(Callback) then
+				Flag = true
+				PushContextProviderFunction(Current)
+			else
+				Flag = false
+			end
+			Current.memoizedState = RenderWithHooksResult.state
+			InitializeUpdateQueueFunction(Current)
+			local GetDerivedStateFromProps = if type(Callback) ~= "function" then Callback.getDerivedStateFromProps else nil
+			
+			if GetDerivedStateFromProps ~= nil and type(GetDerivedStateFromProps) == "function" then
+				ApplyDerivedStateFromPropsFunction(Current, Callback, GetDerivedStateFromProps, PendingProps)
+			end
+			AdoptClassInstanceFunction(Current, RenderWithHooksResult)
+			MountClassInstanceFunction(Current, Callback, PendingProps, BaseLanes)
+			
+			return finishClassComponent(nil, Current, Callback, true, Flag, BaseLanes)
+		end
+	end
+
+	function validateFunctionComponentInDev(p2, Callback) --[[ Line: 1747 ]]
+		-- upvalues: DEV (copy), GetCurrentFiberOwnerNameInDevOrNullFunction (copy), config1 (copy), Console (copy), WarnAboutDefaultPropsOnFunctionComponents (copy), GetComponentNameFunction (copy)
+		if DEV then
+			if p2.ref ~= nil then
+				local Text = ""
+				local CurrentFiberOwnerNameInDevOrNull = GetCurrentFiberOwnerNameInDevOrNullFunction()
+				
+				if CurrentFiberOwnerNameInDevOrNull then
+					Text ..= "\n\nCheck the render method of `" .. CurrentFiberOwnerNameInDevOrNull .. "`."
+				end
+				local CurrentFiberOwnerNameInDevOrNull1 = CurrentFiberOwnerNameInDevOrNull or (p2._debugID or "")
+				local DebugSource = p2._debugSource
+				
+				if DebugSource then
+					CurrentFiberOwnerNameInDevOrNull1 = DebugSource.fileName .. ":" .. DebugSource.lineNumber
+				end
+				if not config1.didWarnAboutFunctionRefs[CurrentFiberOwnerNameInDevOrNull1] then
+					config1.didWarnAboutFunctionRefs[CurrentFiberOwnerNameInDevOrNull1] = true
+					Console.error("Function components cannot be given refs. Attempts to access this ref will fail. Did you mean to use React.forwardRef()?%s", Text)
+				end
+			end
+			if WarnAboutDefaultPropsOnFunctionComponents and type(Callback) ~= "function" and Callback.defaultProps ~= nil then
+				local ComponentName = GetComponentNameFunction(Callback) or "Unknown"
+				
+				if not config1.didWarnAboutDefaultPropsOnFunctionComponent[ComponentName] then
+					Console.error("%s: Support for defaultProps will be removed from function components in a future major release.", ComponentName)
+					config1.didWarnAboutDefaultPropsOnFunctionComponent[ComponentName] = true
+				end
+			end
+			if type(Callback) ~= "function" and Callback.getDerivedStateFromProps ~= nil and type(Callback.getDerivedStateFromProps) == "function" then
+				local ComponentName = GetComponentNameFunction(Callback) or "Unknown"
+				
+				if not config1.didWarnAboutGetDerivedStateOnFunctionComponent[ComponentName] then
+					Console.error("%s: Function components do not support getDerivedStateFromProps.", ComponentName)
+					config1.didWarnAboutGetDerivedStateOnFunctionComponent[ComponentName] = true
+				end
+			end
+			if type(Callback) ~= "function" and Callback.contextType ~= nil and type(Callback.contextType) == "table" then
+				local ComponentName = GetComponentNameFunction(Callback) or "Unknown"
+				
+				if not config1.didWarnAboutContextTypeOnFunctionComponent[ComponentName] then
+					Console.error("%s: Function components do not support contextType.", ComponentName)
+					config1.didWarnAboutContextTypeOnFunctionComponent[ComponentName] = true
 				end
 			end
 		end
-		b.child = mountChildFibers(b, nil, var6, p5)
-		
-		if dEV then
-			validateFunctionComponentInDev(b, p4)
-		end
-		return b.child
-	elseif dEV then
-		local var11 = getComponentName(p4) or "Unknown"
-		
-		if not t_2.didWarnAboutModulePatternComponent[var11] then
-			console.error("The <%s /> component appears to be a function component that returns a class instance. " .. "Change %s to a class that extends React.Component instead. " .. var11, var11)
-			t_2.didWarnAboutModulePatternComponent[var11] = true
-		end
 	end
-	local var12
-	b.tag = classComponent
-	b.memoizedState = nil
-	b.updateQueue = nil
-	local _ = false
-	
-	if isContextProvider(p4) then
-		var12 = true
-		pushContextProvider(b)
-	else
-		var12 = false
-	end
-	b.memoizedState = var6.state
-	initializeUpdateQueue(b)
-	local var13 = if type(p4) ~= "function" then p4.getDerivedStateFromProps else nil
-	
-	if var13 ~= nil and type(var13) == "function" then
-		applyDerivedStateFromProps(b, p4, var13, pendingProps)
-	end
-	adoptClassInstance(b, var6)
-	mountClassInstance(b, p4, pendingProps, p5)
-	
-	return finishClassComponent(nil, b, p4, true, var12, p5)
-end
 
-function validateFunctionComponentInDev(p4, p5)
-	-- upvalues: dEV (ref), getCurrentFiberOwnerNameInDevOrNull (ref), t_2 (ref), console (ref), warnAboutDefaultPropsOnFunctionComponents (ref), getComponentName (ref)
-	if dEV then
-		if p4.ref ~= nil then
-			local var6 = ""
-			local var7 = getCurrentFiberOwnerNameInDevOrNull()
-			
-			if var7 then
-				var6 ..= "\n\nCheck the render method of `" .. var7 .. "`."
-			end
-			local var8 = var7 or (p4._debugID or "")
-			local debugSource = p4._debugSource
-			
-			if debugSource then
-				var8 = debugSource.fileName .. ":" .. debugSource.lineNumber
-			end
-			if not t_2.didWarnAboutFunctionRefs[var8] then
-				t_2.didWarnAboutFunctionRefs[var8] = true
-				console.error("Function components cannot be given refs. Attempts to access this ref will fail. Did you mean to use React.forwardRef()?%s", var6)
-			end
-		end
-		if warnAboutDefaultPropsOnFunctionComponents and type(p5) ~= "function" and p5.defaultProps ~= nil then
-			local var9 = getComponentName(p5) or "Unknown"
-			
-			if not t_2.didWarnAboutDefaultPropsOnFunctionComponent[var9] then
-				console.error("%s: Support for defaultProps will be removed from function components in a future major release.", var9)
-				t_2.didWarnAboutDefaultPropsOnFunctionComponent[var9] = true
-			end
-		end
-		if type(p5) ~= "function" and p5.getDerivedStateFromProps ~= nil and type(p5.getDerivedStateFromProps) == "function" then
-			local var10 = getComponentName(p5) or "Unknown"
-			
-			if not t_2.didWarnAboutGetDerivedStateOnFunctionComponent[var10] then
-				console.error("%s: Function components do not support getDerivedStateFromProps.", var10)
-				t_2.didWarnAboutGetDerivedStateOnFunctionComponent[var10] = true
-			end
-		end
-		if type(p5) ~= "function" and p5.contextType ~= nil and type(p5.contextType) == "table" then
-			local var11 = getComponentName(p5) or "Unknown"
-			
-			if not t_2.didWarnAboutContextTypeOnFunctionComponent[var11] then
-				console.error("%s: Function components do not support contextType.", var11)
-				t_2.didWarnAboutContextTypeOnFunctionComponent[var11] = true
-			end
-		end
-	end
-end
-
-local t_3 = {
-	dehydrated = nil,
-	retryLane = reactFiberLaneModule.NoLane
-}
-
-local _ = function(p4)
-	return { baseLanes = p4 }
-end
-
-local _ = function(p4, p5)
-	-- upvalues: reactFiberLaneModule (ref)
-	return {
-		baseLanes = reactFiberLaneModule.mergeLanes(p4.baseLanes, p5)
+	local MemoizedState = {
+		dehydrated = nil,
+		retryLane = ReactFiberLaneModule.NoLane
 	}
-end
 
-local _ = function(p4, p5, _, _)
-	-- upvalues: hasSuspenseContext (ref), forceSuspenseFallback (ref)
-	return (p5 == nil or p5.memoizedState ~= nil) and hasSuspenseContext(p4, forceSuspenseFallback)
-end
-
-local _ = function(p4, p5)
-	-- upvalues: reactFiberLaneModule (ref)
-	return reactFiberLaneModule.removeLanes(p4.childLanes, p5)
-end
-
-local updateSuspensePrimaryChildren = nil
-local mountDehydratedSuspenseComponent = nil
-local mountSuspensePrimaryChildren = nil
-local updateSuspenseFallbackChildren = nil
-local updateDehydratedSuspenseComponent = nil
-
-local function updateSuspenseComponent(p4, p5, p6)
-	-- upvalues: dEV (ref), t (ref), didCapture (ref), suspenseStackCursor (ref), noFlags (ref), hasSuspenseContext (ref), forceSuspenseFallback (ref), addSubtreeSuspenseContext (ref), invisibleParentSuspenseContext (ref), setDefaultShallowSuspenseContext (ref), pushSuspenseContext (ref), tryToClaimNextHydratableInstance (ref), enableSuspenseServerRenderer (ref), mountDehydratedSuspenseComponent (write), t_3 (ref), reactFiberLaneModule (ref), enableSchedulerTracing (ref), markSpawnedWork (ref), mountSuspensePrimaryChildren (write), updateDehydratedSuspenseComponent (write), updateSuspenseFallbackChildren (write), updateSuspensePrimaryChildren (write)
-	local pendingProps = p5.pendingProps
-	
-	if dEV then
-		if not t.shouldSuspendRef then
-			t.shouldSuspendRef = require(script.Parent.ReactFiberReconciler).shouldSuspend
-		end
-		if t.shouldSuspendRef(p5) then
-			p5.flags = bit32.bor(p5.flags, didCapture)
-		end
+	local _ = function(BaseLanes) --[[ Line: 1844 | Named "mountSuspenseOffscreenState" ]]
+		return { baseLanes = BaseLanes }
 	end
-	local current = suspenseStackCursor.current
-	local var6 = false
-	local var7 = bit32.band(p5.flags, didCapture) ~= noFlags
-	
-	if not var7 then
-		if (p4 == nil or p4.memoizedState ~= nil) and hasSuspenseContext(current, forceSuspenseFallback) then
-			var6 = true
-			p5.flags = bit32.band(p5.flags, bit32.bnot(didCapture))
-		elseif (p4 == nil or p4.memoizedState ~= nil) and (pendingProps.fallback ~= nil and pendingProps.unstable_avoidThisFallback ~= true) then
-			current = addSubtreeSuspenseContext(current, invisibleParentSuspenseContext)
-		end
-		pushSuspenseContext(p5, setDefaultShallowSuspenseContext(current))
+
+	local _ = function(p2, p3) --[[ Line: 1850 | Named "updateSuspenseOffscreenState" ]]
+		-- upvalues: ReactFiberLaneModule (copy)
+		return {
+			baseLanes = ReactFiberLaneModule.mergeLanes(p2.baseLanes, p3)
+		}
+	end
+
+	local _ = function(p2, p3, _, _) --[[ Line: 1860 | Named "shouldRemainOnFallback" ]]
+		-- upvalues: HasSuspenseContextFunction (copy), ForceSuspenseFallback (copy)
+		return (p3 == nil or p3.memoizedState ~= nil) and HasSuspenseContextFunction(p2, ForceSuspenseFallback)
+	end
+
+	local _ = function(p2, p3) --[[ Line: 1884 | Named "getRemainingWorkInPrimaryTree" ]]
+		-- upvalues: ReactFiberLaneModule (copy)
+		return ReactFiberLaneModule.removeLanes(p2.childLanes, p3)
+	end
+
+	local Callback7 = nil
+	local Callback6 = nil
+	local Callback1 = nil
+	local Callback5 = nil
+	local Callback = nil
+
+	local function updateSuspenseComponent(p2, Return, BaseLanes) --[[ Line: 1896 ]]
+		-- upvalues: DEV (copy), config (copy), DidCapture (copy), SuspenseStackCursor (copy), NoFlags (copy), HasSuspenseContextFunction (copy), ForceSuspenseFallback (copy), AddSubtreeSuspenseContextFunction (copy), InvisibleParentSuspenseContext (copy), SetDefaultShallowSuspenseContextFunction (copy), PushSuspenseContextFunction (copy), TryToClaimNextHydratableInstanceFunction (copy), EnableSuspenseServerRenderer (copy), Callback6 (ref), MemoizedState (copy), ReactFiberLaneModule (copy), EnableSchedulerTracing (copy), MarkSpawnedWorkFunction (copy), Callback1 (ref), Callback (ref), Callback5 (ref), Callback7 (ref)
+		local PendingProps = Return.pendingProps
 		
-		if p4 == nil then
-			if pendingProps.fallback ~= nil then
-				tryToClaimNextHydratableInstance(p5)
+		if DEV then
+			if not config.shouldSuspendRef then
+				config.shouldSuspendRef = require(script.Parent.ReactFiberReconciler).shouldSuspend
+			end
+			if config.shouldSuspendRef(Return) then
+				Return.flags = bit32.bor(Return.flags, DidCapture)
+			end
+		end
+		local Current = SuspenseStackCursor.current
+		local Flag = false
+		local IsNotBitsMatch = bit32.band(Return.flags, DidCapture) ~= NoFlags
+		
+		if IsNotBitsMatch or (p2 == nil or p2.memoizedState ~= nil) and HasSuspenseContextFunction(Current, ForceSuspenseFallback) then
+			Flag = true
+			Return.flags = bit32.band(Return.flags, (bit32.bnot(DidCapture)))
+		elseif (p2 == nil or p2.memoizedState ~= nil) and (PendingProps.fallback ~= nil and PendingProps.unstable_avoidThisFallback ~= true) then
+			Current = AddSubtreeSuspenseContextFunction(Current, InvisibleParentSuspenseContext)
+		end
+		PushSuspenseContextFunction(Return, (SetDefaultShallowSuspenseContextFunction(Current)))
+		
+		if p2 == nil then
+			if PendingProps.fallback ~= nil then
+				TryToClaimNextHydratableInstanceFunction(Return)
 				
-				if enableSuspenseServerRenderer then
-					local memoizedState = p5.memoizedState
+				if EnableSuspenseServerRenderer then
+					local MemoizedState2 = Return.memoizedState
 					
-					if memoizedState ~= nil then
-						local dehydrated = memoizedState.dehydrated
+					if MemoizedState2 ~= nil then
+						local Dehydrated = MemoizedState2.dehydrated
 						
-						if dehydrated ~= nil then
-							return mountDehydratedSuspenseComponent(p5, dehydrated, p6)
+						if Dehydrated ~= nil then
+							return Callback6(Return, Dehydrated, BaseLanes)
 						end
 					end
 				end
 			end
-			local children = pendingProps.children
-			local fallback = pendingProps.fallback
+			local Children = PendingProps.children
+			local Fallback = PendingProps.fallback
 			
-			if var6 then
-				local var8 = mountSuspenseFallbackChildren(p5, children, fallback, p6)
-				p5.child.memoizedState = { baseLanes = p6 }
-				p5.memoizedState = t_3
+			if Flag then
+				Return.child.memoizedState = { baseLanes = BaseLanes }
+				Return.memoizedState = MemoizedState
 				
-				return var8
-			elseif pendingProps.unstable_expectedLoadTime == nil or type(pendingProps.unstable_expectedLoadTime) ~= "number" then
-				return mountSuspensePrimaryChildren(p5, children, p6)
+				return (mountSuspenseFallbackChildren(Return, Children, Fallback, BaseLanes))
 			end
-			local var9 = mountSuspenseFallbackChildren(p5, children, fallback, p6)
-			p5.child.memoizedState = { baseLanes = p6 }
-			p5.memoizedState = t_3
-			p5.lanes = reactFiberLaneModule.SomeRetryLane
+			if PendingProps.unstable_expectedLoadTime == nil or type(PendingProps.unstable_expectedLoadTime) ~= "number" then
+				return Callback1(Return, Children, BaseLanes)
+			end
+			local MountSuspenseFallbackChildrenResult = mountSuspenseFallbackChildren(Return, Children, Fallback, BaseLanes)
+			Return.child.memoizedState = { baseLanes = BaseLanes }
+			Return.memoizedState = MemoizedState
+			Return.lanes = ReactFiberLaneModule.SomeRetryLane
 			
-			if enableSchedulerTracing then
-				markSpawnedWork(reactFiberLaneModule.SomeRetryLane)
+			if EnableSchedulerTracing then
+				MarkSpawnedWorkFunction(ReactFiberLaneModule.SomeRetryLane)
 			end
-			return var9
+			return MountSuspenseFallbackChildrenResult
 		else
-			local memoizedState = p4.memoizedState
+			local MemoizedState1 = p2.memoizedState
 			
-			if memoizedState == nil then
-				if not var6 then
-					local var10 = updateSuspensePrimaryChildren(p4, p5, pendingProps.children, p6)
-					p5.memoizedState = nil
+			if MemoizedState1 == nil then
+				if not Flag then
+					Return.memoizedState = nil
 					
-					return var10
+					return (Callback7(p2, Return, PendingProps.children, BaseLanes))
 				end
-				local var11 = updateSuspenseFallbackChildren(p4, p5, pendingProps.children, pendingProps.fallback, p6)
-				local child = p5.child
-				local memoizedState_1 = p4.child.memoizedState
+				local CallbackResult = Callback5(p2, Return, PendingProps.children, PendingProps.fallback, BaseLanes)
+				local Child = Return.child
+				local MemoizedState4 = p2.child.memoizedState
 				
-				if memoizedState_1 == nil then
-					child.memoizedState = { baseLanes = p6 }
+				if MemoizedState4 == nil then
+					Child.memoizedState = { baseLanes = BaseLanes }
 				else
-					child.memoizedState = {
-						baseLanes = reactFiberLaneModule.mergeLanes(memoizedState_1.baseLanes, p6)
+					Child.memoizedState = {
+						baseLanes = ReactFiberLaneModule.mergeLanes(MemoizedState4.baseLanes, BaseLanes)
 					}
 				end
-				child.childLanes = reactFiberLaneModule.removeLanes(p4.childLanes, p6)
-				p5.memoizedState = t_3
+				Child.childLanes = ReactFiberLaneModule.removeLanes(p2.childLanes, BaseLanes)
+				Return.memoizedState = MemoizedState
 				
-				return var11
-			elseif enableSuspenseServerRenderer then
-				local dehydrated = memoizedState.dehydrated
-				
-				if dehydrated == nil then
-					if var6 then
-						local var12 = updateSuspenseFallbackChildren(p4, p5, pendingProps.children, pendingProps.fallback, p6)
-						local child = p5.child
-						local memoizedState_1 = p4.child.memoizedState
-						
-						if memoizedState_1 == nil then
-							child.memoizedState = { baseLanes = p6 }
-						else
-							child.memoizedState = {
-								baseLanes = reactFiberLaneModule.mergeLanes(memoizedState_1.baseLanes, p6)
-							}
-						end
-						child.childLanes = reactFiberLaneModule.removeLanes(p4.childLanes, p6)
-						p5.memoizedState = t_3
-						
-						return var12
-					else
-						local var13 = updateSuspensePrimaryChildren(p4, p5, pendingProps.children, p6)
-						p5.memoizedState = nil
-						
-						return var13
-					end
-				elseif not var7 then
-					return updateDehydratedSuspenseComponent(p4, p5, dehydrated, memoizedState, p6)
-				elseif p5.memoizedState == nil then
-					local var14 = mountSuspenseFallbackAfterRetryWithoutHydrating(p4, p5, pendingProps.children, pendingProps.fallback, p6)
-					p5.child.memoizedState = { baseLanes = p6 }
-					p5.memoizedState = t_3
+				return CallbackResult
+			else
+				if EnableSuspenseServerRenderer then
+					local Dehydrated = MemoizedState1.dehydrated
 					
-					return var14
+					if Dehydrated ~= nil then
+						if not IsNotBitsMatch then
+							return Callback(p2, Return, Dehydrated, MemoizedState1, BaseLanes)
+						elseif Return.memoizedState == nil then
+							Return.child.memoizedState = { baseLanes = BaseLanes }
+							Return.memoizedState = MemoizedState
+							
+							return (mountSuspenseFallbackAfterRetryWithoutHydrating(p2, Return, PendingProps.children, PendingProps.fallback, BaseLanes))
+						else
+							Return.child = p2.child
+							Return.flags = bit32.bor(Return.flags, DidCapture)
+							
+							return nil
+						end
+					end
 				end
-				p5.child = p4.child
-				p5.flags = bit32.bor(p5.flags, didCapture)
+				if not Flag then
+					Return.memoizedState = nil
+					
+					return (Callback7(p2, Return, PendingProps.children, BaseLanes))
+				end
+				local CallbackResult = Callback5(p2, Return, PendingProps.children, PendingProps.fallback, BaseLanes)
+				local Child = Return.child
+				local MemoizedState3 = p2.child.memoizedState
+				
+				if MemoizedState3 == nil then
+					Child.memoizedState = { baseLanes = BaseLanes }
+				else
+					Child.memoizedState = {
+						baseLanes = ReactFiberLaneModule.mergeLanes(MemoizedState3.baseLanes, BaseLanes)
+					}
+				end
+				Child.childLanes = ReactFiberLaneModule.removeLanes(p2.childLanes, BaseLanes)
+				Return.memoizedState = MemoizedState
+				
+				return CallbackResult
+			end
+		end
+	end
+
+	Callback1 = function(Return, Children, BaseLanes) --[[ Line: 2181 | Named "mountSuspensePrimaryChildren" ]]
+		-- upvalues: CreateFiberFromOffscreenFunction (copy)
+		local FiberFromOffscreen = CreateFiberFromOffscreenFunction({ mode = "visible", children = Children }, Return.mode, BaseLanes, nil)
+		FiberFromOffscreen.return_ = Return
+		Return.child = FiberFromOffscreen
+		
+		return FiberFromOffscreen
+	end
+
+	function mountSuspenseFallbackChildren(Return_, Children, p2, p3) --[[ Line: 2194 ]]
+		-- upvalues: BlockingMode (copy), NoMode (copy), ReactFiberLaneModule (copy), EnableProfilerTimer (copy), ProfileMode (copy), CreateFiberFromFragmentFunction (copy), CreateFiberFromOffscreenFunction (copy)
+		local Mode: number = Return_.mode
+		local Child = Return_.child
+		local PendingProps = { mode = "hidden", children = Children }
+		local FiberFromOffscreen = nil
+		local FiberFromFragment = nil
+		
+		if bit32.band(Mode, BlockingMode) == NoMode and Child ~= nil then
+			FiberFromOffscreen = Child
+			FiberFromOffscreen.childLanes = ReactFiberLaneModule.NoLanes
+			FiberFromOffscreen.pendingProps = PendingProps
+			
+			if EnableProfilerTimer and bit32.band(Return_.mode, ProfileMode) ~= 0 then
+				FiberFromOffscreen.actualDuration = 0
+				FiberFromOffscreen.actualStartTime = -1
+				FiberFromOffscreen.selfBaseDuration = 0
+				FiberFromOffscreen.treeBaseDuration = 0
+			end
+			FiberFromFragment = CreateFiberFromFragmentFunction(p2, Mode, p3, nil)
+		else
+			FiberFromOffscreen = CreateFiberFromOffscreenFunction(PendingProps, Mode, ReactFiberLaneModule.NoLanes, nil)
+			FiberFromFragment = CreateFiberFromFragmentFunction(p2, Mode, p3, nil)
+		end
+		FiberFromOffscreen.return_ = Return_
+		FiberFromFragment.return_ = Return_
+		FiberFromOffscreen.sibling = FiberFromFragment
+		Return_.child = FiberFromOffscreen
+		
+		return FiberFromFragment
+	end
+
+	local _ = function(p2, p3) --[[ Line: 2244 | Named "createWorkInProgressOffscreenFiber" ]]
+		-- upvalues: CreateWorkInProgressFunction (copy)
+		return CreateWorkInProgressFunction(p2, p3)
+	end
+
+	Callback7 = function(p2, Return, Children, BaseLanes) --[[ Line: 2253 | Named "updateSuspensePrimaryChildren" ]]
+		-- upvalues: CreateWorkInProgressFunction (copy), BlockingMode (copy), NoMode (copy), Deletion (copy)
+		local Child = p2.child
+		local Sibling = Child.sibling
+		local WorkInProgress = CreateWorkInProgressFunction(Child, { mode = "visible", children = Children })
+		
+		if bit32.band(Return.mode, BlockingMode) == NoMode then
+			WorkInProgress.lanes = BaseLanes
+		end
+		WorkInProgress.return_ = Return
+		WorkInProgress.sibling = nil
+		
+		if Sibling ~= nil then
+			local Deletions = Return.deletions
+			
+			if Deletions == nil then
+				Return.deletions = { Sibling }
+				Return.flags = bit32.bor(Return.flags, Deletion)
+			else
+				table.insert(Deletions, Sibling)
+			end
+		end
+		Return.child = WorkInProgress
+		
+		return WorkInProgress
+	end
+
+	Callback5 = function(p2, Return_, Children, Fallback, BaseLanes) --[[ Line: 2288 | Named "updateSuspenseFallbackChildren" ]]
+		-- upvalues: BlockingMode (copy), NoMode (copy), ReactFiberLaneModule (copy), EnableProfilerTimer (copy), ProfileMode (copy), CreateWorkInProgressFunction (copy), StaticMask (copy), CreateFiberFromFragmentFunction (copy), Placement (copy)
+		local Mode: number = Return_.mode
+		local Child = p2.child
+		local Sibling = Child.sibling
+		local PendingProps = { mode = "hidden", children = Children }
+		local WorkInProgress = nil
+		
+		if bit32.band(Mode, BlockingMode) == NoMode and Return_.child ~= Child then
+			WorkInProgress = Return_.child
+			WorkInProgress.childLanes = ReactFiberLaneModule.NoLanes
+			WorkInProgress.pendingProps = PendingProps
+			
+			if EnableProfilerTimer and bit32.band(Return_.mode, ProfileMode) ~= 0 then
+				WorkInProgress.actualDuration = 0
+				WorkInProgress.actualStartTime = -1
+				WorkInProgress.selfBaseDuration = Child.selfBaseDuration
+				WorkInProgress.treeBaseDuration = Child.treeBaseDuration
+			end
+			Return_.deletions = nil
+		else
+			WorkInProgress = CreateWorkInProgressFunction(Child, PendingProps)
+			WorkInProgress.subtreeFlags = bit32.band(Child.subtreeFlags, StaticMask)
+		end
+		local WorkInProgress1 = nil
+		if Sibling == nil then
+			WorkInProgress1 = CreateFiberFromFragmentFunction(Fallback, Mode, BaseLanes, nil)
+			WorkInProgress1.flags = bit32.bor(WorkInProgress1.flags, Placement)
+		else
+			WorkInProgress1 = CreateWorkInProgressFunction(Sibling, Fallback)
+		end
+		WorkInProgress1.return_ = Return_
+		WorkInProgress.return_ = Return_
+		WorkInProgress.sibling = WorkInProgress1
+		Return_.child = WorkInProgress
+		
+		return WorkInProgress1
+	end
+
+	local _ = function(p2, Return, p3) --[[ Line: 2371 | Named "retrySuspenseComponentWithoutHydrating" ]]
+		-- upvalues: ReconcileChildFibersFunction (copy), Callback1 (ref), Placement (copy)
+		ReconcileChildFibersFunction(Return, p2.child, nil, p3)
+		local CallbackResult = Callback1(Return, Return.pendingProps.children, p3)
+		CallbackResult.flags = bit32.bor(CallbackResult.flags, Placement)
+		Return.memoizedState = nil
+		
+		return CallbackResult
+	end
+
+	function mountSuspenseFallbackAfterRetryWithoutHydrating(p2, Return_, p3, p4, p5) --[[ Line: 2392 ]]
+		-- upvalues: CreateFiberFromOffscreenFunction (copy), ReactFiberLaneModule (copy), CreateFiberFromFragmentFunction (copy), Placement (copy), BlockingMode (copy), NoMode (copy), ReconcileChildFibersFunction (copy)
+		local Mode = Return_.mode
+		local FiberFromOffscreen = CreateFiberFromOffscreenFunction(p3, Mode, ReactFiberLaneModule.NoLanes, nil)
+		local FiberFromFragment = CreateFiberFromFragmentFunction(p4, Mode, p5, nil)
+		FiberFromFragment.flags = bit32.bor(FiberFromFragment.flags, Placement)
+		FiberFromOffscreen.return_ = Return_
+		FiberFromFragment.return_ = Return_
+		FiberFromOffscreen.sibling = FiberFromFragment
+		Return_.child = FiberFromOffscreen
+		
+		if bit32.band(Return_.mode, BlockingMode) ~= NoMode then
+			ReconcileChildFibersFunction(Return_, p2.child, nil, p5)
+		end
+		return FiberFromFragment
+	end
+
+	Callback6 = function(p2, Dehydrated, _) --[[ Line: 2422 | Named "mountDehydratedSuspenseComponent" ]]
+		-- upvalues: BlockingMode (copy), NoMode (copy), DEV (copy), Console (copy), ReactFiberLaneModule (copy), IsSuspenseInstanceFallbackFunction (copy), EnableSchedulerTracing (copy), MarkSpawnedWorkFunction (copy)
+		if bit32.band(p2.mode, BlockingMode) == NoMode then
+			if DEV then
+				Console.error("Cannot hydrate Suspense in legacy mode. Switch fromReactDOM.hydrate(element, container) to ReactDOM.createBlockingRoot(container, { hydrate: true }).render(element) or remove the Suspense componentsthe server rendered components.")
+			end
+			p2.lanes = ReactFiberLaneModule.laneToLanes(ReactFiberLaneModule.SyncLane)
+		elseif IsSuspenseInstanceFallbackFunction(Dehydrated) then
+			if EnableSchedulerTracing then
+				MarkSpawnedWorkFunction(ReactFiberLaneModule.DefaultHydrationLane)
+			end
+			p2.lanes = ReactFiberLaneModule.laneToLanes(ReactFiberLaneModule.DefaultHydrationLane)
+		else
+			p2.lanes = ReactFiberLaneModule.laneToLanes(ReactFiberLaneModule.OffscreenLane)
+			
+			if EnableSchedulerTracing then
+				MarkSpawnedWorkFunction(ReactFiberLaneModule.OffscreenLane)
+			end
+		end
+		return nil
+	end
+
+	Callback = function(p2, Return, Dehydrated, MemoizedState, BaseLanes) --[[ Line: 2469 | Named "updateDehydratedSuspenseComponent" ]]
+		-- upvalues: WarnIfHydratingFunction (copy), GetExecutionContextFunction (copy), RetryAfterError (copy), NoContext (copy), ReconcileChildFibersFunction (copy), Callback1 (ref), Placement (copy), BlockingMode (copy), NoMode (copy), IsSuspenseInstanceFallbackFunction (copy), ReactFiberLaneModule (copy), IsNotBitsMatch (ref), GetWorkInProgressRootFunction (copy), ScheduleUpdateOnFiberFunction (copy), RenderDidSuspendDelayIfPossibleFunction (copy), IsSuspenseInstancePendingFunction (copy), DidCapture (copy), RetryDehydratedSuspenseBoundaryFunction (copy), EnableSchedulerTracing (copy), UnstableWrap (ref), Parent (copy), RegisterSuspenseInstanceRetryFunction (copy), ReenterHydrationStateFromDehydratedSuspenseInstanceFunction (copy), Hydrating (copy)
+		WarnIfHydratingFunction()
+		
+		if bit32.band(GetExecutionContextFunction(), RetryAfterError) ~= NoContext then
+			ReconcileChildFibersFunction(Return, p2.child, nil, BaseLanes)
+			local CallbackResult = Callback1(Return, Return.pendingProps.children, BaseLanes)
+			CallbackResult.flags = bit32.bor(CallbackResult.flags, Placement)
+			Return.memoizedState = nil
+			
+			return CallbackResult
+		end
+		if bit32.band(Return.mode, BlockingMode) == NoMode then
+			ReconcileChildFibersFunction(Return, p2.child, nil, BaseLanes)
+			local CallbackResult = Callback1(Return, Return.pendingProps.children, BaseLanes)
+			CallbackResult.flags = bit32.bor(CallbackResult.flags, Placement)
+			Return.memoizedState = nil
+			
+			return CallbackResult
+		end
+		if IsSuspenseInstanceFallbackFunction(Dehydrated) then
+			ReconcileChildFibersFunction(Return, p2.child, nil, BaseLanes)
+			local CallbackResult = Callback1(Return, Return.pendingProps.children, BaseLanes)
+			CallbackResult.flags = bit32.bor(CallbackResult.flags, Placement)
+			Return.memoizedState = nil
+			
+			return CallbackResult
+		end
+		local IncludesSomeLaneResult = ReactFiberLaneModule.includesSomeLane(BaseLanes, p2.childLanes)
+		
+		if IsNotBitsMatch or IncludesSomeLaneResult then
+			local WorkInProgressRoot = GetWorkInProgressRootFunction()
+			
+			if WorkInProgressRoot ~= nil then
+				local BumpedLaneForHydration = ReactFiberLaneModule.getBumpedLaneForHydration(WorkInProgressRoot, BaseLanes)
+				
+				if BumpedLaneForHydration ~= ReactFiberLaneModule.NoLane and BumpedLaneForHydration ~= MemoizedState.retryLane then
+					MemoizedState.retryLane = BumpedLaneForHydration
+					ScheduleUpdateOnFiberFunction(p2, BumpedLaneForHydration, ReactFiberLaneModule.NoTimestamp)
+				end
+			end
+			RenderDidSuspendDelayIfPossibleFunction()
+			ReconcileChildFibersFunction(Return, p2.child, nil, BaseLanes)
+			local CallbackResult = Callback1(Return, Return.pendingProps.children, BaseLanes)
+			CallbackResult.flags = bit32.bor(CallbackResult.flags, Placement)
+			Return.memoizedState = nil
+			
+			return CallbackResult
+		else
+			if not IsSuspenseInstancePendingFunction(Dehydrated) then
+				ReenterHydrationStateFromDehydratedSuspenseInstanceFunction(Return, Dehydrated)
+				local CallbackResult = Callback1(Return, Return.pendingProps.children, BaseLanes)
+				CallbackResult.flags = bit32.bor(CallbackResult.flags, Hydrating)
+				
+				return CallbackResult
+			end
+			Return.flags = bit32.bor(Return.flags, DidCapture)
+			Return.child = p2.child
+			
+			local function v260() --[[ Line: 2565 ]]
+				-- upvalues: RetryDehydratedSuspenseBoundaryFunction (upval), p2 (copy)
+				return RetryDehydratedSuspenseBoundaryFunction(p2)
+			end
+			
+			if EnableSchedulerTracing then
+				if UnstableWrap == nil then
+					UnstableWrap = require(Parent.Scheduler).tracing.unstable_wrap
+				end
+				v260 = UnstableWrap(v260)
+			end
+			RegisterSuspenseInstanceRetryFunction(Dehydrated, v260)
+			
+			return nil
+		end
+	end
+
+	function updatePortalComponent(p2, p3, p4) --[[ Line: 2978 ]]
+		-- upvalues: PushHostContainerFunction (copy), ReconcileChildFibersFunction (copy), reconcileChildren (copy)
+		PushHostContainerFunction(p3, p3.stateNode.containerInfo)
+		local PendingProps = p3.pendingProps
+		
+		if p2 == nil then
+			p3.child = ReconcileChildFibersFunction(p3, nil, PendingProps, p4)
+		else
+			reconcileChildren(p2, p3, PendingProps, p4)
+		end
+		return p3.child
+	end
+
+	local Flag = false
+
+	local function updateContextProvider(p2, Current, BaseLanes) --[[ Line: 3001 ]]
+		-- upvalues: DEV (copy), DISABLEALLWARNINGSEXCEPTPROPVALIDATION (copy), Array (copy), Object (copy), Flag (ref), Console (copy), CheckPropTypesFunction (copy), PushProviderFunction (copy), CalculateChangedBitsFunction (copy), HasContextChangedFunction (copy), Callback2 (ref), PropagateContextChangeFunction (copy), reconcileChildren (copy)
+		local Context = Current.type._context
+		local PendingProps = Current.pendingProps
+		local MemoizedProps = Current.memoizedProps
+		local Value = PendingProps.value
+		
+		if DEV or DISABLEALLWARNINGSEXCEPTPROPVALIDATION then
+			if Array.indexOf(Object.keys(PendingProps), "value") < 1 and not Flag then
+				Flag = true
+				Console.error("The `value` prop is required for the `<Context.Provider>`. Did you misspell it or forget to pass it?")
+			end
+			local PropTypes = Current.type.propTypes
+			local ValidateProps = Current.type.validateProps
+			
+			if PropTypes or ValidateProps then
+				CheckPropTypesFunction(PropTypes, ValidateProps, PendingProps, "prop", "Context.Provider")
+			end
+		end
+		PushProviderFunction(Current, Value)
+		
+		if MemoizedProps ~= nil then
+			local ChangedBits = CalculateChangedBitsFunction(Context, Value, MemoizedProps.value)
+			
+			if ChangedBits ~= 0 then
+				PropagateContextChangeFunction(Current, Context, ChangedBits, BaseLanes)
+			elseif MemoizedProps.children == PendingProps.children and not HasContextChangedFunction() then
+				return Callback2(p2, Current, BaseLanes)
+			end
+		end
+		reconcileChildren(p2, Current, PendingProps.children, BaseLanes)
+		
+		return Current.child
+	end
+
+	local config2 = {
+		usingContextAsConsumer = false,
+		usingLegacyConsumer = false
+	}
+
+	function updateContextConsumer(p2, Current, p3) --[[ Line: 3069 ]]
+		-- upvalues: DEV (copy), config2 (copy), Console (copy), COMPATWARNINGS (copy), PrepareToReadContextFunction (copy), ReactFiberBeginWorkModule (copy), ReadContextFunction (copy), ReactCurrentOwner (copy), SetIsRenderingFunction (copy), PerformedWork (copy), reconcileChildren (copy)
+		local Type1 = Current.type
+		
+		if DEV then
+			if Type1._context == nil then
+				if Type1 ~= Type1.Consumer and not config2.usingContextAsConsumer then
+					config2.usingContextAsConsumer = true
+					Console.error("Rendering <Context> directly is not supported and will be removed in a future major release. Did you mean to render <Context.Consumer> instead?")
+				end
+			else
+				Type1 = Type1._context
+			end
+		end
+		local PendingProps = Current.pendingProps
+		local RenderFunction = nil
+		
+		if PendingProps.render then
+			if DEV and COMPATWARNINGS and not config2.usingLegacyConsumer then
+				config2.usingLegacyConsumer = true
+				Console.warn("Your Context.Consumer component is using legacy Roact syntax, which won't be supported in future versions of Roact. \nPlease provide no props and supply the 'render' function as a child (the 3rd argument of createElement). For example: \n       createElement(ContextConsumer, {render = function(...) end})\nbecomes:\n       createElement(ContextConsumer, nil, function(...) end)\nFor more info, reference the React documentation here: \nhttps://reactjs.org/docs/context.html#contextconsumer")
+			end
+			RenderFunction = PendingProps.render
+		else
+			RenderFunction = PendingProps.children
+		end
+		if DEV and type(RenderFunction) ~= "function" then
+			Console.error("A context consumer was rendered with multiple children, or a child that isn't a function. A context consumer expects a single child that is a function. If you did pass a function, make sure there is no trailing or leading whitespace around it.")
+		end
+		PrepareToReadContextFunction(Current, p3, ReactFiberBeginWorkModule.markWorkInProgressReceivedUpdate)
+		local Context = ReadContextFunction(Type1, PendingProps.unstable_observedBits)
+		local RenderResult = nil
+		
+		if DEV then
+			ReactCurrentOwner.current = Current
+			SetIsRenderingFunction(true)
+			RenderResult = RenderFunction(Context)
+			SetIsRenderingFunction(false)
+		else
+			RenderResult = RenderFunction(Context)
+		end
+		Current.flags = bit32.bor(Current.flags, PerformedWork)
+		reconcileChildren(p2, Current, RenderResult, p3)
+		
+		return Current.child
+	end
+
+	function ReactFiberBeginWorkModule.markWorkInProgressReceivedUpdate() --[[ Line: 3179 ]]
+		-- upvalues: IsNotBitsMatch (ref)
+		IsNotBitsMatch = true
+	end
+
+	Callback2 = function(p2, Current, BaseLanes) --[[ Line: 3183 | Named "bailoutOnAlreadyFinishedWork" ]]
+		-- upvalues: EnableProfilerTimer (copy), StopProfilerTimerIfRunningFunction (copy), MarkSkippedUpdateLanesFunction (copy), ReactFiberLaneModule (copy), CloneChildFibersFunction (copy)
+		if p2 then
+			Current.dependencies = p2.dependencies
+		end
+		if EnableProfilerTimer then
+			StopProfilerTimerIfRunningFunction(Current)
+		end
+		MarkSkippedUpdateLanesFunction(Current.lanes)
+		
+		if ReactFiberLaneModule.includesSomeLane(BaseLanes, Current.childLanes) then
+			CloneChildFibersFunction(p2, Current)
+			
+			return Current.child
+		else
+			return nil
+		end
+	end
+
+	function remountFiber(p2, Child, Child1) --[[ Line: 3214 ]]
+		-- upvalues: DEV (copy), Deletion (copy), Placement (copy)
+		if not DEV then
+			error("Did not expect this call in production. This is a bug in React. Please file an issue.")
+			
+			return
+		end
+		local Return = Child.return_
+		
+		if Return == nil then
+			error("Cannot swap the root fiber.")
+		end
+		assert(Return ~= nil, "returnFiber was nil in remountFiber")
+		p2.alternate = nil
+		Child.alternate = nil
+		Child1.index = Child.index
+		Child1.sibling = Child.sibling
+		Child1.return_ = Child.return_
+		Child1.ref = Child.ref
+		
+		if Child == Return.child then
+			Return.child = Child1
+		else
+			local Child2 = Return.child
+			
+			if Child2 == nil then
+				error("Expected parent to have a child.")
+			end
+			assert(Child2 ~= nil, "prevSibling was nil in remountFiber")
+			while Child2.sibling ~= Child do
+				Child2 = Child2.sibling
+				
+				if Child2 == nil then
+					error("Expected to find the previous sibling.")
+				end
+			end
+			Child2.sibling = Child1
+		end
+		local Deletions = Return.deletions
+		
+		if Deletions == nil then
+			Return.deletions = { p2 }
+			Return.flags = bit32.bor(Return.flags, Deletion)
+		else
+			table.insert(Deletions, p2)
+		end
+		Child1.flags = bit32.bor(Child1.flags, Placement)
+		
+		return Child1
+	end
+
+	function ReactFiberBeginWorkModule.beginWork(p3, Current, BaseLanes) --[[ Line: 3283 ]]
+		-- upvalues: DEV (copy), CreateFiberFromTypeAndPropsFunction (copy), HasContextChangedFunction (copy), IsNotBitsMatch (ref), ReactFiberLaneModule (copy), HostRoot (copy), PushTopLevelContextObjectFunction (copy), PushHostContainerFunction (copy), ResetHydrationStateFunction (copy), HostComponent (copy), PushHostContextFunction (copy), ClassComponent (copy), IsContextProviderFunction (copy), PushContextProviderFunction (copy), HostPortal (copy), ContextProvider (copy), PushProviderFunction (copy), Profiler (copy), EnableProfilerTimer (copy), SuspenseComponent (copy), EnableSuspenseServerRenderer (copy), PushSuspenseContextFunction (copy), SetDefaultShallowSuspenseContextFunction (copy), SuspenseStackCursor (copy), DidCapture (copy), updateSuspenseComponent (copy), Callback2 (ref), SuspenseListComponent (copy), OffscreenComponent (copy), LegacyHiddenComponent (copy), updateOffscreenComponent (copy), ForceUpdateForLegacySuspense (copy), NoFlags (copy), ReactWorkTagsModule (copy), mountIndeterminateComponent (copy), LazyComponent (copy), mountLazyComponent (copy), FunctionComponent (copy), ResolveDefaultPropsFunction (copy), Callback4 (ref), updateClassComponent (copy), updateHostRoot (copy), updateHostComponent (copy), HostText (copy), TryToClaimNextHydratableInstanceFunction (copy), ForwardRef (copy), updateForwardRef (copy), Fragment (copy), Mode (copy), updateContextProvider (copy), ContextConsumer (copy), MemoComponent (copy), DISABLEALLWARNINGSEXCEPTPROPVALIDATION (copy), CheckPropTypesFunction (copy), GetComponentNameFunction (copy), updateMemoComponent (copy), SimpleMemoComponent (copy), Callback3 (ref), IncompleteClassComponent (copy), updateOffscreenComponent (copy), InvariantFunction (copy)
+		local Lanes = Current.lanes
+		
+		if DEV and Current._debugNeedsRemount and p3 ~= nil then
+			return remountFiber(p3, Current, CreateFiberFromTypeAndPropsFunction(Current.type, Current.key, Current.pendingProps, Current._debugOwner or nil, Current.mode, Current.lanes))
+		end
+		if p3 == nil then
+			IsNotBitsMatch = false
+		elseif p3.memoizedProps == Current.pendingProps and not HasContextChangedFunction() and not (if DEV then Current.type ~= p3.type else false) then
+			if ReactFiberLaneModule.includesSomeLane(BaseLanes, Lanes) then
+				IsNotBitsMatch = bit32.band(p3.flags, ForceUpdateForLegacySuspense) ~= NoFlags
+			else
+				IsNotBitsMatch = false
+				
+				if Current.tag == HostRoot then
+					local StateNode = Current.stateNode
+					
+					if StateNode.pendingContext then
+						PushTopLevelContextObjectFunction(Current, StateNode.pendingContext, StateNode.pendingContext ~= StateNode.context)
+					elseif StateNode.context then
+						PushTopLevelContextObjectFunction(Current, StateNode.context, false)
+					end
+					PushHostContainerFunction(Current, StateNode.containerInfo)
+					ResetHydrationStateFunction()
+				elseif Current.tag == HostComponent then
+					PushHostContextFunction(Current)
+				elseif Current.tag == ClassComponent then
+					if IsContextProviderFunction(Current.type) then
+						PushContextProviderFunction(Current)
+					end
+				elseif Current.tag == HostPortal then
+					PushHostContainerFunction(Current, Current.stateNode.containerInfo)
+				elseif Current.tag == ContextProvider then
+					PushProviderFunction(Current, Current.memoizedProps.value)
+				elseif Current.tag == Profiler then
+					if EnableProfilerTimer then
+						local StateNode = Current.stateNode
+						StateNode.effectDuration = 0
+						StateNode.passiveEffectDuration = 0
+					end
+				elseif Current.tag == SuspenseComponent then
+					local MemoizedState = Current.memoizedState
+					
+					if MemoizedState == nil then
+						PushSuspenseContextFunction(Current, SetDefaultShallowSuspenseContextFunction(SuspenseStackCursor.current))
+					elseif EnableSuspenseServerRenderer and MemoizedState.dehydrated ~= nil then
+						PushSuspenseContextFunction(Current, SetDefaultShallowSuspenseContextFunction(SuspenseStackCursor.current))
+						Current.flags = bit32.bor(Current.flags, DidCapture)
+						
+						return nil
+					elseif ReactFiberLaneModule.includesSomeLane(BaseLanes, Current.child.childLanes) then
+						return updateSuspenseComponent(p3, Current, BaseLanes)
+					else
+						PushSuspenseContextFunction(Current, SetDefaultShallowSuspenseContextFunction(SuspenseStackCursor.current))
+						local CallbackResult = Callback2(p3, Current, BaseLanes)
+						
+						return if CallbackResult == nil then nil else CallbackResult.sibling
+					end
+				elseif Current.tag == SuspenseListComponent then
+					print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+					print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+					print("UNIMPLEMENTED ERROR: " .. tostring("beginWork: SuspenseListComponent"))
+					error("FIXME (roblox): beginWork: SuspenseListComponent is unimplemented", 2)
+				elseif Current.tag == OffscreenComponent or Current.tag == LegacyHiddenComponent then
+					Current.lanes = ReactFiberLaneModule.NoLanes
+					
+					return (updateOffscreenComponent(p3, Current, BaseLanes))
+				end
+				return Callback2(p3, Current, BaseLanes)
+			end
+		else
+			IsNotBitsMatch = true
+		end
+		Current.lanes = ReactFiberLaneModule.NoLanes
+		
+		if Current.tag == ReactWorkTagsModule.IndeterminateComponent then
+			return mountIndeterminateComponent(p3, Current, Current.type, BaseLanes)
+		end
+		if Current.tag == LazyComponent then
+			return (mountLazyComponent(p3, Current, Current.elementType, Lanes, BaseLanes))
+		end
+		if Current.tag == FunctionComponent then
+			local Type1 = Current.type
+			local PendingProps = Current.pendingProps
+			
+			return Callback4(p3, Current, Type1, if Current.elementType == Type1 then PendingProps else ResolveDefaultPropsFunction(Type1, PendingProps), BaseLanes)
+		end
+		if Current.tag == ClassComponent then
+			local Type2 = Current.type
+			local PendingProps = Current.pendingProps
+			
+			return (updateClassComponent(p3, Current, Type2, Current.elementType == Type2 and PendingProps or ResolveDefaultPropsFunction(Type2, PendingProps), BaseLanes))
+		end
+		if Current.tag == HostRoot then
+			return updateHostRoot(p3, Current, BaseLanes)
+		end
+		if Current.tag == HostComponent then
+			return (updateHostComponent(p3, Current, BaseLanes))
+		end
+		if Current.tag == HostText then
+			if p3 == nil then
+				TryToClaimNextHydratableInstanceFunction(Current)
+			end
+			return nil
+		else
+			if Current.tag == SuspenseComponent then
+				return updateSuspenseComponent(p3, Current, BaseLanes)
+			end
+			if Current.tag == HostPortal then
+				return updatePortalComponent(p3, Current, BaseLanes)
+			end
+			if Current.tag == ForwardRef then
+				local Type3 = Current.type
+				local PendingProps = Current.pendingProps
+				
+				return updateForwardRef(p3, Current, Type3, if Current.elementType == Type3 then PendingProps else ResolveDefaultPropsFunction(Type3, PendingProps), BaseLanes)
+			end
+			if Current.tag == Fragment then
+				return updateFragment(p3, Current, BaseLanes)
+			end
+			if Current.tag == Mode then
+				return updateMode(p3, Current, BaseLanes)
+			end
+			if Current.tag == Profiler then
+				return updateProfiler(p3, Current, BaseLanes)
+			end
+			if Current.tag == ContextProvider then
+				return updateContextProvider(p3, Current, BaseLanes)
+			end
+			if Current.tag == ContextConsumer then
+				return updateContextConsumer(p3, Current, BaseLanes)
+			end
+			if Current.tag == MemoComponent then
+				local Type4 = Current.type
+				local ResolveDefaultPropsResult = ResolveDefaultPropsFunction(Type4, Current.pendingProps)
+				
+				if (DEV or DISABLEALLWARNINGSEXCEPTPROPVALIDATION) and Current.type ~= Current.elementType then
+					local PropTypes = nil
+					local ValidateProps = nil
+					
+					if type(Type4) == "table" then
+						PropTypes = Type4.propTypes
+						ValidateProps = Type4.validateProps
+					end
+					if PropTypes or ValidateProps then
+						CheckPropTypesFunction(PropTypes, ValidateProps, ResolveDefaultPropsResult, "prop", GetComponentNameFunction(Type4))
+					end
+				end
+				return updateMemoComponent(p3, Current, Type4, ResolveDefaultPropsFunction(Type4.type, ResolveDefaultPropsResult), Lanes, BaseLanes)
+			elseif Current.tag == SimpleMemoComponent then
+				return Callback3(p3, Current, Current.type, Current.pendingProps, Lanes, BaseLanes)
+			elseif Current.tag == IncompleteClassComponent then
+				local Type5 = Current.type
+				local PendingProps = Current.pendingProps
+				
+				return mountIncompleteClassComponent(p3, Current, Type5, Current.elementType == Type5 and PendingProps or ResolveDefaultPropsFunction(Type5, PendingProps), BaseLanes)
+			elseif Current.tag == OffscreenComponent then
+				return (updateOffscreenComponent(p3, Current, BaseLanes))
+			elseif Current.tag == LegacyHiddenComponent then
+				return (updateOffscreenComponent(p3, Current, BaseLanes))
+			else
+				InvariantFunction(false, "Unknown unit of work tag (%s). This error is likely caused by a bug in React. Please file an issue.", (tostring(Current.tag)))
 				
 				return nil
 			end
 		end
 	end
+
 end
-
-mountSuspensePrimaryChildren = function(p4, p5, p6)
-	-- upvalues: createFiberFromOffscreen (ref)
-	local var6 = createFiberFromOffscreen({ mode = "visible", children = p5 }, p4.mode, p6, nil)
-	var6.return_ = p4
-	p4.child = var6
-	
-	return var6
-end
-
-function mountSuspenseFallbackChildren(p4, p5, p6, p7)
-	-- upvalues: blockingMode (ref), noMode (ref), reactFiberLaneModule (ref), enableProfilerTimer (ref), profileMode (ref), createFiberFromFragment (ref), createFiberFromOffscreen (ref)
-	local var6, var7
-	local mode = p4.mode
-	local child = p4.child
-	local t = { mode = "hidden", children = p5 }
-	local _ = nil
-	local _ = nil
-	
-	if bit32.band(mode, blockingMode) == noMode and child ~= nil then
-		var6 = child
-		var6.childLanes = reactFiberLaneModule.NoLanes
-		var6.pendingProps = t
-		
-		if enableProfilerTimer and bit32.band(p4.mode, profileMode) ~= 0 then
-			var6.actualDuration = 0
-			var6.actualStartTime = -1
-			var6.selfBaseDuration = 0
-			var6.treeBaseDuration = 0
-		end
-		var7 = createFiberFromFragment(p6, mode, p7, nil)
-	else
-		var6 = createFiberFromOffscreen(t, mode, reactFiberLaneModule.NoLanes, nil)
-		var7 = createFiberFromFragment(p6, mode, p7, nil)
-	end
-	var6.return_ = p4
-	var7.return_ = p4
-	var6.sibling = var7
-	p4.child = var6
-	
-	return var7
-end
-
-local _ = function(p4, p5)
-	-- upvalues: createWorkInProgress (ref)
-	return createWorkInProgress(p4, p5)
-end
-
-updateSuspensePrimaryChildren = function(p4, p5, p6, p7)
-	-- upvalues: createWorkInProgress (ref), blockingMode (ref), noMode (ref), deletion (ref)
-	local child = p4.child
-	local sibling = child.sibling
-	local var6 = createWorkInProgress(child, { mode = "visible", children = p6 })
-	
-	if bit32.band(p5.mode, blockingMode) == noMode then
-		var6.lanes = p7
-	end
-	var6.return_ = p5
-	var6.sibling = nil
-	
-	if sibling ~= nil then
-		local deletions = p5.deletions
-		
-		if deletions == nil then
-			p5.deletions = { sibling }
-			p5.flags = bit32.bor(p5.flags, deletion)
-		else
-			table.insert(deletions, sibling)
-		end
-	end
-	p5.child = var6
-	
-	return var6
-end
-
-updateSuspenseFallbackChildren = function(p4, p5, p6, p7, p8)
-	-- upvalues: blockingMode (ref), noMode (ref), reactFiberLaneModule (ref), enableProfilerTimer (ref), profileMode (ref), createWorkInProgress (ref), staticMask (ref), createFiberFromFragment (ref), placement (ref)
-	local var6
-	local mode = p5.mode
-	local child = p4.child
-	local sibling = child.sibling
-	local t = { mode = "hidden", children = p6 }
-	local _ = nil
-	
-	if bit32.band(mode, blockingMode) == noMode and p5.child ~= child then
-		var6 = p5.child
-		var6.childLanes = reactFiberLaneModule.NoLanes
-		var6.pendingProps = t
-		
-		if enableProfilerTimer and bit32.band(p5.mode, profileMode) ~= 0 then
-			var6.actualDuration = 0
-			var6.actualStartTime = -1
-			var6.selfBaseDuration = child.selfBaseDuration
-			var6.treeBaseDuration = child.treeBaseDuration
-		end
-		p5.deletions = nil
-	else
-		var6 = createWorkInProgress(child, t)
-		var6.subtreeFlags = bit32.band(child.subtreeFlags, staticMask)
-	end
-	local var7
-	local _ = nil
-	
-	if sibling == nil then
-		var7 = createFiberFromFragment(p7, mode, p8, nil)
-		var7.flags = bit32.bor(var7.flags, placement)
-	else
-		var7 = createWorkInProgress(sibling, p7)
-	end
-	var7.return_ = p5
-	var6.return_ = p5
-	var6.sibling = var7
-	p5.child = var6
-	
-	return var7
-end
-
-local _ = function(p4, p5, p6)
-	-- upvalues: reconcileChildFibers (ref), mountSuspensePrimaryChildren (write), placement (ref)
-	reconcileChildFibers(p5, p4.child, nil, p6)
-	local var6 = mountSuspensePrimaryChildren(p5, p5.pendingProps.children, p6)
-	var6.flags = bit32.bor(var6.flags, placement)
-	p5.memoizedState = nil
-	
-	return var6
-end
-
-function mountSuspenseFallbackAfterRetryWithoutHydrating(p4, p5, p6, p7, p8)
-	-- upvalues: createFiberFromOffscreen (ref), reactFiberLaneModule (ref), createFiberFromFragment (ref), placement (ref), blockingMode (ref), noMode (ref), reconcileChildFibers (ref)
-	local mode = p5.mode
-	local var6 = createFiberFromOffscreen(p6, mode, reactFiberLaneModule.NoLanes, nil)
-	local var7 = createFiberFromFragment(p7, mode, p8, nil)
-	var7.flags = bit32.bor(var7.flags, placement)
-	var6.return_ = p5
-	var7.return_ = p5
-	var6.sibling = var7
-	p5.child = var6
-	
-	if bit32.band(p5.mode, blockingMode) ~= noMode then
-		reconcileChildFibers(p5, p4.child, nil, p8)
-	end
-	return var7
-end
-
-mountDehydratedSuspenseComponent = function(p4, p5, _)
-	-- upvalues: blockingMode (ref), noMode (ref), dEV (ref), console (ref), reactFiberLaneModule (ref), isSuspenseInstanceFallback (ref), enableSchedulerTracing (ref), markSpawnedWork (ref)
-	if bit32.band(p4.mode, blockingMode) == noMode then
-		if dEV then
-			console.error("Cannot hydrate Suspense in legacy mode. Switch fromReactDOM.hydrate(element, container) to ReactDOM.createBlockingRoot(container, { hydrate: true }).render(element) or remove the Suspense componentsthe server rendered components.")
-		end
-		p4.lanes = reactFiberLaneModule.laneToLanes(reactFiberLaneModule.SyncLane)
-	elseif isSuspenseInstanceFallback(p5) then
-		if enableSchedulerTracing then
-			markSpawnedWork(reactFiberLaneModule.DefaultHydrationLane)
-		end
-		p4.lanes = reactFiberLaneModule.laneToLanes(reactFiberLaneModule.DefaultHydrationLane)
-	else
-		p4.lanes = reactFiberLaneModule.laneToLanes(reactFiberLaneModule.OffscreenLane)
-		
-		if enableSchedulerTracing then
-			markSpawnedWork(reactFiberLaneModule.OffscreenLane)
-		end
-	end
-	return nil
-end
-
-updateDehydratedSuspenseComponent = function(p4, p5, p6, p7, p8)
-	-- upvalues: warnIfHydrating (ref), getExecutionContext (ref), retryAfterError (ref), noContext (ref), reconcileChildFibers (ref), mountSuspensePrimaryChildren (write), placement (ref), blockingMode (ref), noMode (ref), isSuspenseInstanceFallback (ref), reactFiberLaneModule (ref), var2 (write), getWorkInProgressRoot (ref), scheduleUpdateOnFiber (ref), renderDidSuspendDelayIfPossible (ref), isSuspenseInstancePending (ref), didCapture (ref), retryDehydratedSuspenseBoundary (ref), enableSchedulerTracing (ref), var1 (write), parent (ref), registerSuspenseInstanceRetry (ref), reenterHydrationStateFromDehydratedSuspenseInstance (ref), hydrating (ref)
-	warnIfHydrating()
-	
-	if bit32.band(getExecutionContext(), retryAfterError) ~= noContext then
-		reconcileChildFibers(p5, p4.child, nil, p8)
-		local var6 = mountSuspensePrimaryChildren(p5, p5.pendingProps.children, p8)
-		var6.flags = bit32.bor(var6.flags, placement)
-		p5.memoizedState = nil
-		
-		return var6
-	elseif bit32.band(p5.mode, blockingMode) == noMode then
-		reconcileChildFibers(p5, p4.child, nil, p8)
-		local var7 = mountSuspensePrimaryChildren(p5, p5.pendingProps.children, p8)
-		var7.flags = bit32.bor(var7.flags, placement)
-		p5.memoizedState = nil
-		
-		return var7
-	elseif isSuspenseInstanceFallback(p6) then
-		reconcileChildFibers(p5, p4.child, nil, p8)
-		local var8 = mountSuspensePrimaryChildren(p5, p5.pendingProps.children, p8)
-		var8.flags = bit32.bor(var8.flags, placement)
-		p5.memoizedState = nil
-		
-		return var8
-	elseif var2 or reactFiberLaneModule.includesSomeLane(p8, p4.childLanes) then
-		local var9 = getWorkInProgressRoot()
-		
-		if var9 ~= nil then
-			local bumpedLaneForHydration = reactFiberLaneModule.getBumpedLaneForHydration(var9, p8)
-			
-			if bumpedLaneForHydration ~= reactFiberLaneModule.NoLane and bumpedLaneForHydration ~= p7.retryLane then
-				p7.retryLane = bumpedLaneForHydration
-				scheduleUpdateOnFiber(p4, bumpedLaneForHydration, reactFiberLaneModule.NoTimestamp)
-			end
-		end
-		renderDidSuspendDelayIfPossible()
-		reconcileChildFibers(p5, p4.child, nil, p8)
-		local var10 = mountSuspensePrimaryChildren(p5, p5.pendingProps.children, p8)
-		var10.flags = bit32.bor(var10.flags, placement)
-		p5.memoizedState = nil
-		
-		return var10
-	elseif not isSuspenseInstancePending(p6) then
-		reenterHydrationStateFromDehydratedSuspenseInstance(p5, p6)
-		local var11 = mountSuspensePrimaryChildren(p5, p5.pendingProps.children, p8)
-		var11.flags = bit32.bor(var11.flags, hydrating)
-		
-		return var11
-	end
-	p5.flags = bit32.bor(p5.flags, didCapture)
-	p5.child = p4.child
-	
-	local var12 = function()
-		-- upvalues: retryDehydratedSuspenseBoundary (copy), p4 (ref)
-		return retryDehydratedSuspenseBoundary(p4)
-	end
-	
-	if enableSchedulerTracing then
-		if var1 == nil then
-			var1 = require(parent.Scheduler).tracing.unstable_wrap
-		end
-		var12 = var1(var12)
-	end
-	registerSuspenseInstanceRetry(p6, var12)
-	
-	return nil
-end
-
-function updatePortalComponent(p4, p5, p6)
-	-- upvalues: pushHostContainer (ref), reconcileChildFibers (ref), mountChildFibers (ref)
-	pushHostContainer(p5, p5.stateNode.containerInfo)
-	local pendingProps = p5.pendingProps
-	
-	if p4 == nil then
-		p5.child = reconcileChildFibers(p5, nil, pendingProps, p6)
-	elseif p4 == nil then
-		p5.child = mountChildFibers(p5, nil, pendingProps, p6)
-	else
-		p5.child = reconcileChildFibers(p5, p4.child, pendingProps, p6)
-	end
-	return p5.child
-end
-
-local var6 = false
-
-local function updateContextProvider(p4, p5, p6)
-	-- upvalues: dEV (ref), dISABLEALLWARNINGSEXCEPTPROPVALIDATION (ref), array (ref), object (ref), var6 (write), console (ref), checkPropTypes (ref), pushProvider (ref), calculateChangedBits (ref), hasContextChanged (ref), bailoutOnAlreadyFinishedWork (write), propagateContextChange (ref), mountChildFibers (ref), reconcileChildFibers (ref)
-	local propTypes
-	local context = p5.type._context
-	local pendingProps = p5.pendingProps
-	local memoizedProps = p5.memoizedProps
-	local value = pendingProps.value
-	
-	if dEV or dISABLEALLWARNINGSEXCEPTPROPVALIDATION then
-		if array.indexOf(object.keys(pendingProps), "value") < 1 and not var6 then
-			var6 = true
-			console.error("The `value` prop is required for the `<Context.Provider>`. Did you misspell it or forget to pass it?")
-		end
-		propTypes = p5.type.propTypes
-		local validateProps = p5.type.validateProps
-		
-		if propTypes or validateProps then
-			checkPropTypes(propTypes, validateProps, pendingProps, "prop", "Context.Provider")
-		end
-	end
-	pushProvider(p5, value)
-	
-	if memoizedProps ~= nil then
-		local var7 = calculateChangedBits(context, value, memoizedProps.value)
-		
-		if var7 == 0 then
-			if memoizedProps.children == pendingProps.children and not hasContextChanged() then
-				return bailoutOnAlreadyFinishedWork(p4, p5, p6)
-			end
-		else
-			propagateContextChange(p5, context, var7, p6)
-		end
-	end
-	propTypes = pendingProps.children
-	
-	if p4 == nil then
-		p5.child = mountChildFibers(p5, nil, propTypes, p6)
-	else
-		p5.child = reconcileChildFibers(p5, p4.child, propTypes, p6)
-	end
-	return p5.child
-end
-
-local t_4 = {
-	usingContextAsConsumer = false,
-	usingLegacyConsumer = false
-}
-
-function updateContextConsumer(p4, p5, p6)
-	-- upvalues: dEV (ref), t_4 (ref), console (ref), cOMPATWARNINGS (ref), prepareToReadContext (ref), t_1 (ref), readContext (ref), reactCurrentOwner (ref), setIsRendering (ref), performedWork (ref), mountChildFibers (ref), reconcileChildFibers (ref)
-	local type = p5.type
-	
-	if dEV then
-		if type._context ~= nil then
-			type = type._context
-		elseif type ~= type.Consumer and not t_4.usingContextAsConsumer then
-			t_4.usingContextAsConsumer = true
-			console.error("Rendering <Context> directly is not supported and will be removed in a future major release. Did you mean to render <Context.Consumer> instead?")
-		end
-	end
-	local render
-	local pendingProps = p5.pendingProps
-	local _ = nil
-	
-	if pendingProps.render then
-		if dEV and cOMPATWARNINGS and not t_4.usingLegacyConsumer then
-			t_4.usingLegacyConsumer = true
-			console.warn("Your Context.Consumer component is using legacy Roact syntax, which won't be supported in future versions of Roact. \nPlease provide no props and supply the 'render' function as a child (the 3rd argument of createElement). For example: \n       createElement(ContextConsumer, {render = function(...) end})\nbecomes:\n       createElement(ContextConsumer, nil, function(...) end)\nFor more info, reference the React documentation here: \nhttps://reactjs.org/docs/context.html#contextconsumer")
-		end
-		render = pendingProps.render
-	else
-		render = pendingProps.children
-	end
-	if dEV and type(render) ~= "function" then
-		console.error("A context consumer was rendered with multiple children, or a child that isn't a function. A context consumer expects a single child that is a function. If you did pass a function, make sure there is no trailing or leading whitespace around it.")
-	end
-	local var7
-	prepareToReadContext(p5, p6, t_1.markWorkInProgressReceivedUpdate)
-	local var8 = readContext(type, pendingProps.unstable_observedBits)
-	local _ = nil
-	
-	if dEV then
-		reactCurrentOwner.current = p5
-		setIsRendering(true)
-		var7 = render(var8)
-		setIsRendering(false)
-	else
-		var7 = render(var8)
-	end
-	p5.flags = bit32.bor(p5.flags, performedWork)
-	
-	if p4 == nil then
-		p5.child = mountChildFibers(p5, nil, var7, p6)
-	else
-		p5.child = reconcileChildFibers(p5, p4.child, var7, p6)
-	end
-	return p5.child
-end
-
-function t_1.markWorkInProgressReceivedUpdate()
-	-- upvalues: var2 (write)
-	var2 = true
-end
-
-bailoutOnAlreadyFinishedWork = function(p4, p5, p6)
-	-- upvalues: enableProfilerTimer (ref), stopProfilerTimerIfRunning (ref), markSkippedUpdateLanes (ref), reactFiberLaneModule (ref), cloneChildFibers (ref)
-	if p4 then
-		p5.dependencies = p4.dependencies
-	end
-	if enableProfilerTimer then
-		stopProfilerTimerIfRunning(p5)
-	end
-	markSkippedUpdateLanes(p5.lanes)
-	
-	if reactFiberLaneModule.includesSomeLane(p6, p5.childLanes) then
-		cloneChildFibers(p4, p5)
-		
-		return p5.child
-	end
-	return nil
-end
-
-function remountFiber(p4, p5, p6)
-	-- upvalues: dEV (ref), deletion (ref), placement (ref)
-	if not dEV then
-		error("Did not expect this call in production. This is a bug in React. Please file an issue.")
-		
-		return
-	end
-	local _return = p5.return_
-	
-	if _return == nil then
-		error("Cannot swap the root fiber.")
-	end
-	assert(_return ~= nil, "returnFiber was nil in remountFiber")
-	p4.alternate = nil
-	p5.alternate = nil
-	p6.index = p5.index
-	p6.sibling = p5.sibling
-	p6.return_ = p5.return_
-	p6.ref = p5.ref
-	
-	if p5 == _return.child then
-		_return.child = p6
-	else
-		local child = _return.child
-		
-		if child == nil then
-			error("Expected parent to have a child.")
-		end
-		assert(child ~= nil, "prevSibling was nil in remountFiber")
-		while child.sibling ~= p5 do
-			child = child.sibling
-			
-			if child == nil then
-				error("Expected to find the previous sibling.")
-			end
-		end
-		child.sibling = p6
-	end
-	local deletions = _return.deletions
-	
-	if deletions == nil then
-		_return.deletions = { p4 }
-		_return.flags = bit32.bor(_return.flags, deletion)
-	else
-		table.insert(deletions, p4)
-	end
-	p6.flags = bit32.bor(p6.flags, placement)
-	
-	return p6
-end
-
-function t_1.beginWork(p7, p8, p9)
-	-- upvalues: dEV (ref), createFiberFromTypeAndProps (ref), hasContextChanged (ref), var2 (write), reactFiberLaneModule (ref), hostRoot (ref), pushTopLevelContextObject (ref), pushHostContainer (ref), resetHydrationState (ref), hostComponent (ref), pushHostContext (ref), classComponent (ref), isContextProvider (ref), pushContextProvider (ref), hostPortal (ref), contextProvider (ref), pushProvider (ref), profiler (ref), enableProfilerTimer (ref), suspenseComponent (ref), enableSuspenseServerRenderer (ref), pushSuspenseContext (ref), setDefaultShallowSuspenseContext (ref), suspenseStackCursor (ref), didCapture (ref), updateSuspenseComponent (ref), bailoutOnAlreadyFinishedWork (write), suspenseListComponent (ref), offscreenComponent (ref), legacyHiddenComponent (ref), updateOffscreenComponent (ref), forceUpdateForLegacySuspense (ref), noFlags (ref), reactWorkTagsModule (ref), mountIndeterminateComponent (ref), lazyComponent (ref), mountLazyComponent (ref), functionComponent (ref), resolveDefaultProps (ref), updateFunctionComponent (write), updateClassComponent (ref), updateHostRoot (ref), updateHostComponent (ref), hostText (ref), tryToClaimNextHydratableInstance (ref), forwardRef (ref), updateForwardRef (ref), fragment (ref), mode (ref), updateContextProvider (ref), contextConsumer (ref), memoComponent (ref), dISABLEALLWARNINGSEXCEPTPROPVALIDATION (ref), checkPropTypes (ref), getComponentName (ref), updateMemoComponent (ref), simpleMemoComponent (ref), updateSimpleMemoComponent (write), incompleteClassComponent (ref), updateOffscreenComponent (ref), invariant (ref)
-	local lanes = p8.lanes
-	
-	if dEV and p8._debugNeedsRemount and p7 ~= nil then
-		return remountFiber(p7, p8, createFiberFromTypeAndProps(p8.type, p8.key, p8.pendingProps, p8._debugOwner or nil, p8.mode, p8.lanes))
-	elseif p7 == nil then
-		var2 = false
-	elseif p7.memoizedProps == p8.pendingProps and not hasContextChanged() then
-		local var7
-		if dEV then
-			var7 = p8.type ~= p7.type
-			var7 = nil
-		else
-			var7 = false
-		end
-		if var7 then
-			var2 = true
-		elseif reactFiberLaneModule.includesSomeLane(p9, lanes) then
-			var2 = bit32.band(p7.flags, forceUpdateForLegacySuspense) == noFlags
-		else
-			var2 = false
-			
-			if p8.tag == hostRoot then
-				var7 = p8.stateNode
-				
-				if var7.pendingContext then
-					pushTopLevelContextObject(p8, var7.pendingContext, var7.pendingContext ~= var7.context)
-				elseif var7.context then
-					pushTopLevelContextObject(p8, var7.context, false)
-				end
-				pushHostContainer(p8, var7.containerInfo)
-				resetHydrationState()
-			elseif p8.tag == hostComponent then
-				pushHostContext(p8)
-			elseif p8.tag == classComponent then
-				if isContextProvider(p8.type) then
-					pushContextProvider(p8)
-				end
-			elseif p8.tag == hostPortal then
-				pushHostContainer(p8, p8.stateNode.containerInfo)
-			elseif p8.tag == contextProvider then
-				pushProvider(p8, p8.memoizedProps.value)
-			elseif p8.tag == profiler then
-				if enableProfilerTimer then
-					var7 = p8.stateNode
-					var7.effectDuration = 0
-					var7.passiveEffectDuration = 0
-				end
-			elseif p8.tag == suspenseComponent then
-				var7 = p8.memoizedState
-				
-				if var7 == nil then
-					pushSuspenseContext(p8, setDefaultShallowSuspenseContext(suspenseStackCursor.current))
-				elseif enableSuspenseServerRenderer and var7.dehydrated ~= nil then
-					pushSuspenseContext(p8, setDefaultShallowSuspenseContext(suspenseStackCursor.current))
-					p8.flags = bit32.bor(p8.flags, didCapture)
-					
-					return nil
-				elseif reactFiberLaneModule.includesSomeLane(p9, p8.child.childLanes) then
-					return updateSuspenseComponent(p7, p8, p9)
-				end
-				pushSuspenseContext(p8, setDefaultShallowSuspenseContext(suspenseStackCursor.current))
-				local var8 = bailoutOnAlreadyFinishedWork(p7, p8, p9)
-				
-				return if var8 == nil then nil else var8.sibling
-			elseif p8.tag == suspenseListComponent then
-				print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-				print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-				print("UNIMPLEMENTED ERROR: " .. tostring("beginWork: SuspenseListComponent"))
-				error("FIXME (roblox): beginWork: SuspenseListComponent is unimplemented", 2)
-			elseif p8.tag == offscreenComponent or p8.tag == legacyHiddenComponent then
-				p8.lanes = reactFiberLaneModule.NoLanes
-				
-				return updateOffscreenComponent(p7, p8, p9)
-			end
-			return bailoutOnAlreadyFinishedWork(p7, p8, p9)
-		end
-	end
-	p8.lanes = reactFiberLaneModule.NoLanes
-	
-	if p8.tag == reactWorkTagsModule.IndeterminateComponent then
-		return mountIndeterminateComponent(p7, p8, p8.type, p9)
-	elseif p8.tag == lazyComponent then
-		return mountLazyComponent(p7, p8, p8.elementType, lanes, p9)
-	elseif p8.tag == functionComponent then
-		local type = p8.type
-		local pendingProps = p8.pendingProps
-		
-		return updateFunctionComponent(p7, p8, type, if p8.elementType == type then pendingProps else resolveDefaultProps(type, pendingProps), p9)
-	elseif p8.tag == classComponent then
-		local type = p8.type
-		local pendingProps = p8.pendingProps
-		
-		return updateClassComponent(p7, p8, type, if p8.elementType == type then pendingProps else resolveDefaultProps(type, pendingProps), p9)
-	elseif p8.tag == hostRoot then
-		return updateHostRoot(p7, p8, p9)
-	elseif p8.tag == hostComponent then
-		return updateHostComponent(p7, p8, p9)
-	elseif p8.tag == hostText then
-		if p7 == nil then
-			tryToClaimNextHydratableInstance(p8)
-		end
-		return nil
-	elseif p8.tag == suspenseComponent then
-		return updateSuspenseComponent(p7, p8, p9)
-	elseif p8.tag == hostPortal then
-		return updatePortalComponent(p7, p8, p9)
-	elseif p8.tag == forwardRef then
-		local type = p8.type
-		local pendingProps = p8.pendingProps
-		
-		return updateForwardRef(p7, p8, type, if p8.elementType ~= type then resolveDefaultProps(type, pendingProps) else pendingProps, p9)
-	elseif p8.tag == fragment then
-		return updateFragment(p7, p8, p9)
-	elseif p8.tag == mode then
-		return updateMode(p7, p8, p9)
-	elseif p8.tag == profiler then
-		return updateProfiler(p7, p8, p9)
-	elseif p8.tag == contextProvider then
-		return updateContextProvider(p7, p8, p9)
-	elseif p8.tag == contextConsumer then
-		return updateContextConsumer(p7, p8, p9)
-	elseif p8.tag == memoComponent then
-		local type = p8.type
-		local var9 = resolveDefaultProps(type, p8.pendingProps)
-		
-		if (dEV or dISABLEALLWARNINGSEXCEPTPROPVALIDATION) and p8.type ~= p8.elementType then
-			local propTypes = nil
-			local validateProps = nil
-			
-			if type(type) == "table" then
-				propTypes = type.propTypes
-				validateProps = type.validateProps
-			end
-			if propTypes or validateProps then
-				checkPropTypes(propTypes, validateProps, var9, "prop", getComponentName(type))
-			end
-		end
-		return updateMemoComponent(p7, p8, type, resolveDefaultProps(type.type, var9), lanes, p9)
-	elseif p8.tag == simpleMemoComponent then
-		return updateSimpleMemoComponent(p7, p8, p8.type, p8.pendingProps, lanes, p9)
-	elseif p8.tag == incompleteClassComponent then
-		local type = p8.type
-		local pendingProps = p8.pendingProps
-		
-		return mountIncompleteClassComponent(p7, p8, type, if p8.elementType == type then pendingProps else resolveDefaultProps(type, pendingProps), p9)
-	elseif p8.tag == offscreenComponent then
-		return updateOffscreenComponent(p7, p8, p9)
-	elseif p8.tag == legacyHiddenComponent then
-		return updateOffscreenComponent(p7, p8, p9)
-	end
-	invariant(false, "Unknown unit of work tag (%s). This error is likely caused by a bug in React. Please file an issue.", tostring(p8.tag))
-	
-	return nil
-end
-
-return t_1
+return ReactFiberBeginWorkModule

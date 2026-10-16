@@ -1,42 +1,31 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local reactModule = require(parent.React)
-local expChatSharedModule = require(parent.ExpChatShared)
-local cryoModule = require(parent.Cryo)
-local fFlagGlobalTextChatAddPlaySessionFieldModule = require(expChat.Flags.FFlagGlobalTextChatAddPlaySessionField)
-local fFlagExpChatGlobalTabDefaultModule = require(expChat.Flags.FFlagExpChatGlobalTabDefault)
-local analytics = expChatSharedModule.Analytics
-local var1 = cryoModule.List.join(analytics.DefaultStandardizedFields, { "addPlaceInstanceId" }, if fFlagGlobalTextChatAddPlaySessionFieldModule then { "addPlaySessionId" } else {})
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local ReactModule = require(Parent.React)
+local FFlagExpChatGlobalTabDefaultModule = require(ExpChat.Flags.FFlagExpChatGlobalTabDefault)
+local Analytics = require(Parent.ExpChatShared).Analytics
+local JoinResult = require(Parent.Cryo).List.join(Analytics.DefaultStandardizedFields, { "addPlaceInstanceId" }, if require(ExpChat.Flags.FFlagGlobalTextChatAddPlaySessionField) then { "addPlaySessionId" } else {})
 
-return function(value)
-	-- upvalues: reactModule (ref), analytics (ref), fFlagExpChatGlobalTabDefaultModule (ref), var1 (ref)
-	local tabType = value.tabType or "Unknown"
-	local var2 = if value.hasUnreadMessages then 1 else 0
-	reactModule.useEffect(function()
-		-- upvalues: value (ref), analytics (copy), tabType (ref), var2 (ref), fFlagExpChatGlobalTabDefaultModule (copy), var1 (copy)
-		if not value.enabled then return end
-		local var3
-		local expChatTabImpressionConfig = analytics.ExpChatTabImpressionConfig
-		local t = {
-			name = value.name,
-			type = tabType,
-			index = value.index,
-			in_overflow = value.inOverflow,
-			visible = value.visible,
-			badge_count = var2
-		}
-		
-		if fFlagExpChatGlobalTabDefaultModule then
-			var3 = value.isSelected == true
-			var3 = nil
-		else
-			var3 = nil
+return function(p1) --[[ Line: 32 | Named "useTabImpression" ]]
+	-- upvalues: ReactModule (copy), Analytics (copy), FFlagExpChatGlobalTabDefaultModule (copy), JoinResult (copy)
+	local TabType = p1.tabType or "Unknown"
+	local Badge_count: number = if p1.hasUnreadMessages then 1 else 0
+	ReactModule.useEffect(function() --[[ Line: 37 ]]
+		-- upvalues: p1 (copy), Analytics (upval), TabType (copy), Badge_count (copy), FFlagExpChatGlobalTabDefaultModule (upval), JoinResult (upval)
+		if p1.enabled then
+			Analytics:TelemetryLogEvent(Analytics.ExpChatTabImpressionConfig, {
+				name = p1.name,
+				type = TabType,
+				index = p1.index,
+				in_overflow = p1.inOverflow,
+				visible = p1.visible,
+				badge_count = Badge_count,
+				is_selected = if FFlagExpChatGlobalTabDefaultModule then p1.isSelected == true else nil
+			}, JoinResult)
+			
+			return
 		end
-		t.is_selected = var3
-		analytics:TelemetryLogEvent(expChatTabImpressionConfig, t, var1)
 	end, {
-		value.enabled, value.name, tabType, value.index, value.inOverflow,
-		value.visible, var2,
-		if fFlagExpChatGlobalTabDefaultModule then value.isSelected else nil
+		p1.enabled, p1.name, TabType, p1.index, p1.inOverflow, p1.visible, Badge_count,
+		if FFlagExpChatGlobalTabDefaultModule then p1.isSelected else nil
 	})
 end

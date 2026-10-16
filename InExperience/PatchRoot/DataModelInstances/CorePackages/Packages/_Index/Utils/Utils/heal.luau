@@ -1,195 +1,197 @@
-﻿local parent = script.Parent.Parent
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local boolean = luauPolyfillModule.Boolean
-local error = luauPolyfillModule.Error
-local console = luauPolyfillModule.console
-local t = {}
-local graphQLModule = require(parent.GraphQL)
-local graphQLList = graphQLModule.GraphQLList
-local graphQLNonNull = graphQLModule.GraphQLNonNull
-local isNamedType = graphQLModule.isNamedType
-local isObjectType = graphQLModule.isObjectType
-local isInterfaceType = graphQLModule.isInterfaceType
-local isUnionType = graphQLModule.isUnionType
-local isInputObjectType = graphQLModule.isInputObjectType
-local isLeafType = graphQLModule.isLeafType
-local isListType = graphQLModule.isListType
-local isNonNullType = graphQLModule.isNonNullType
-local map = luauPolyfillModule.Map
-local string = luauPolyfillModule.String
-local var1 = nil
+﻿local Parent = script.Parent.Parent
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Boolean = LuauPolyfillModule.Boolean
+local Error1 = LuauPolyfillModule.Error
+local Console = LuauPolyfillModule.console
+local GraphQLModule = require(Parent.GraphQL)
+local GraphQLList = GraphQLModule.GraphQLList
+local GraphQLNonNull = GraphQLModule.GraphQLNonNull
+local IsNamedTypeFunction = GraphQLModule.isNamedType
+local IsObjectTypeFunction = GraphQLModule.isObjectType
+local IsInterfaceTypeFunction = GraphQLModule.isInterfaceType
+local IsUnionTypeFunction = GraphQLModule.isUnionType
+local IsInputObjectTypeFunction = GraphQLModule.isInputObjectType
+local IsLeafTypeFunction = GraphQLModule.isLeafType
+local IsListTypeFunction = GraphQLModule.isListType
+local IsNonNullTypeFunction = GraphQLModule.isNonNullType
+local Map = LuauPolyfillModule.Map
+local String = LuauPolyfillModule.String
+local Callback = nil
 
-function t.healSchema(p1)
-	-- upvalues: var1 (write)
-	var1(p1:getTypeMap(), p1:getDirectives())
+local function healSchema(p1) --[[ Line: 96 ]]
+	-- upvalues: Callback (ref)
+	Callback(p1:getTypeMap(), p1:getDirectives())
 	
 	return p1
 end
 
-function t.healTypes(p1, p2)
-	-- upvalues: boolean (ref), isObjectType (ref), isInterfaceType (ref), isUnionType (ref), isInputObjectType (ref), isLeafType (ref), error (ref), array (ref), isListType (ref), graphQLList (ref), isNonNullType (ref), graphQLNonNull (ref), isNamedType (ref), map (ref), string (ref), console (ref)
-	local _ = nil
-	local healFields = nil
-	local healInterfaces = nil
-	local healInputFields = nil
-	local healUnderlyingTypes = nil
-	local healType = nil
+Callback = function(List, Directives) --[[ Line: 106 | Named "healTypes" ]]
+	-- upvalues: Boolean (copy), IsObjectTypeFunction (copy), IsInterfaceTypeFunction (copy), IsUnionTypeFunction (copy), IsInputObjectTypeFunction (copy), IsLeafTypeFunction (copy), Error1 (copy), Array (copy), IsListTypeFunction (copy), GraphQLList (copy), IsNonNullTypeFunction (copy), GraphQLNonNull (copy), IsNamedTypeFunction (copy), Map (copy), String (copy), Console (copy)
+	local Callback = nil
+	local Callback1 = nil
+	local Callback3 = nil
+	local Callback2 = nil
+	local Callback4 = nil
 	
-	local function healNamedType(p3)
-		-- upvalues: boolean (copy), isObjectType (copy), healFields (write), healInterfaces (write), isInterfaceType (copy), isUnionType (copy), healUnderlyingTypes (write), isInputObjectType (copy), healInputFields (write), isLeafType (copy), error (copy)
-		if boolean.toJSBoolean(isObjectType(p3)) then
-			healFields(p3)
-			healInterfaces(p3)
+	local function healNamedType(GetResult) --[[ Line: 187 ]]
+		-- upvalues: Boolean (upval), IsObjectTypeFunction (upval), Callback (ref), Callback1 (ref), IsInterfaceTypeFunction (upval), IsUnionTypeFunction (upval), Callback2 (ref), IsInputObjectTypeFunction (upval), Callback3 (ref), IsLeafTypeFunction (upval), Error1 (upval)
+		if Boolean.toJSBoolean(IsObjectTypeFunction(GetResult)) then
+			Callback(GetResult)
+			Callback1(GetResult)
 			
-			return
-		elseif boolean.toJSBoolean(isInterfaceType(p3)) then
-			healFields(p3)
-			
-			if p3.getInterfaces ~= nil then
-				healInterfaces(p3)
-			end
-			return
-		elseif boolean.toJSBoolean(isUnionType(p3)) then
-			healUnderlyingTypes(p3)
-			
-			return
-		elseif boolean.toJSBoolean(isInputObjectType(p3)) then
-			healInputFields(p3)
-			
-			return
-		elseif boolean.toJSBoolean(isLeafType(p3)) then
 			return
 		end
-		error(error.new(("Unexpected schema type: %s"):format(tostring(p3))))
-	end
-	
-	healFields = function(p3)
-		-- upvalues: array (copy), healType (write), boolean (copy)
-		local fields = p3:getFields()
-		
-		for i, v in fields:entries() do
-			local var2 = v[1]
-			local var3 = v[2]
-			array.filter(array.map(var3.args, function(p4)
-				-- upvalues: healType (copy)
-				p4.type = healType(p4.type)
+		if Boolean.toJSBoolean(IsInterfaceTypeFunction(GetResult)) then
+			Callback(GetResult)
+			
+			if GetResult.getInterfaces ~= nil then
+				Callback1(GetResult)
+			end
+			return
+		elseif Boolean.toJSBoolean(IsUnionTypeFunction(GetResult)) then
+			Callback2(GetResult)
+			
+			return
+		else
+			if Boolean.toJSBoolean(IsInputObjectTypeFunction(GetResult)) then
+				Callback3(GetResult)
 				
-				return if p4.type == nil then nil else p4
-			end), boolean.toJSBoolean)
-			var3.type = healType(var3.type)
-			
-			if var3.type == nil then
-				fields[tostring(var2)] = nil
+				return
+			end
+			if not Boolean.toJSBoolean(IsLeafTypeFunction(GetResult)) then
+				error(Error1.new(("Unexpected schema type: %s"):format((tostring(GetResult)))))
+				
+				return
 			end
 		end
 	end
 	
-	healInterfaces = function(p4)
-		-- upvalues: array (copy), healType (write), boolean (copy)
-		if p4.getInterfaces ~= nil then
-			local interfaces = p4:getInterfaces()
-			interfaces = array.concat(interfaces, array.filter(array.map(array.splice(interfaces, 1), function(p5)
-				-- upvalues: healType (copy)
-				return healType(p5)
-			end), boolean.toJSBoolean))
-		end
-	end
-	
-	healInputFields = function(p4)
-		-- upvalues: healType (write)
-		local fields = p4:getFields()
+	Callback = function(p1) --[[ Line: 234 | Named "healFields" ]]
+		-- upvalues: Array (upval), Callback4 (ref), Boolean (upval)
+		local Fields = p1:getFields()
 		
-		for i, v in fields:entries() do
-			local var4 = v[1]
-			local var5 = v[2]
-			var5.type = healType(var5.type)
+		for _, value in Fields:entries() do
+			local v1 = value[1]
+			local v2 = value[2]
+			Array.filter(Array.map(v2.args, function(p2) --[[ Line: 250 ]]
+				-- upvalues: Callback4 (upval)
+				p2.type = Callback4(p2.type)
+				
+				return if p2.type == nil then nil else p2
+			end), Boolean.toJSBoolean)
+			v2.type = Callback4(v2.type)
 			
-			if var5.type == nil then
-				fields[tostring(var4)] = nil
+			if v2.type == nil then
+				Fields[tostring(v1)] = nil
 			end
 		end
 	end
 	
-	healUnderlyingTypes = function(p5)
-		-- upvalues: array (copy), healType (write), boolean (copy)
-		local types = p5:getTypes()
-		local _ = array.concat(types, array.filter(array.map(array.splice(types, 1), function(p6)
-			-- upvalues: healType (copy)
-			return healType(p6)
-		end), boolean.toJSBoolean))
+	Callback1 = function(p2) --[[ Line: 267 | Named "healInterfaces" ]]
+		-- upvalues: Array (upval), Callback4 (ref), Boolean (upval)
+		if p2.getInterfaces ~= nil then
+			local Interfaces = p2:getInterfaces()
+			local _ = Array.concat(Interfaces, Array.filter(Array.map(Array.splice(Interfaces, 1), function(p3) --[[ Line: 285 ]]
+				-- upvalues: Callback4 (upval)
+				return (Callback4(p3))
+			end), Boolean.toJSBoolean))
+		end
 	end
 	
-	healType = function(p5)
-		-- upvalues: boolean (copy), isListType (copy), healType (write), graphQLList (copy), isNonNullType (copy), graphQLNonNull (copy), isNamedType (copy), p1 (ref)
-		if boolean.toJSBoolean(isListType(p5)) then
-			local var6 = healType(p5.ofType)
+	Callback3 = function(p2) --[[ Line: 296 | Named "healInputFields" ]]
+		-- upvalues: Callback4 (ref)
+		local Fields = p2:getFields()
+		
+		for _, value in Fields:entries() do
+			local v3 = value[1]
+			local v4 = value[2]
+			v4.type = Callback4(v4.type)
 			
-			return if var6 == nil then nil else graphQLList.new(var6)
-		elseif boolean.toJSBoolean(isNonNullType(p5)) then
-			local var7 = healType(p5.ofType)
+			if v4.type == nil then
+				Fields[tostring(v3)] = nil
+			end
+		end
+	end
+	
+	Callback2 = function(p3) --[[ Line: 316 | Named "healUnderlyingTypes" ]]
+		-- upvalues: Array (upval), Callback4 (ref), Boolean (upval)
+		local Types = p3:getTypes()
+		local _ = Array.concat(Types, Array.filter(Array.map(Array.splice(Types, 1), function(p4) --[[ Line: 327 ]]
+			-- upvalues: Callback4 (upval)
+			return (Callback4(p4))
+		end), Boolean.toJSBoolean))
+	end
+	
+	Callback4 = function(Type) --[[ Line: 337 | Named "healType" ]]
+		-- upvalues: Boolean (upval), IsListTypeFunction (upval), Callback4 (ref), GraphQLList (upval), IsNonNullTypeFunction (upval), GraphQLNonNull (upval), IsNamedTypeFunction (upval), List (copy)
+		if Boolean.toJSBoolean(IsListTypeFunction(Type)) then
+			local CallbackResult = Callback4(Type.ofType)
 			
-			return if var7 == nil then nil else graphQLNonNull.new(var7)
-		elseif boolean.toJSBoolean(isNamedType(p5)) then
-			local var8
-			local name = p1:get(p5.name)
-			local toJSBoolean = boolean.toJSBoolean
+			return if CallbackResult == nil then nil else GraphQLList.new(CallbackResult)
+		end
+		if Boolean.toJSBoolean(IsNonNullTypeFunction(Type)) then
+			local CallbackResult = Callback4(Type.ofType)
 			
-			if boolean.toJSBoolean(name) then
-				var8 = p5 ~= name
-				var8 = nil
+			return if CallbackResult == nil then nil else GraphQLNonNull.new(CallbackResult)
+		end
+		if Boolean.toJSBoolean(IsNamedTypeFunction(Type)) then
+			local GetResult = List:get(Type.name)
+			
+			if Boolean.toJSBoolean(if Boolean.toJSBoolean(GetResult) then Type ~= GetResult else GetResult) then
+				return GetResult
+			end
+		end
+		return Type
+	end
+	
+	local NewMap = Map.new()
+	
+	for _, value in List do
+		local Unpacked = table.unpack(value)
+		local GetResult = List:get(Unpacked)
+		local NoGetResult = GetResult == nil or String.startsWith(Unpacked, "__")
+		local Name = nil
+		
+		if not NoGetResult then
+			Name = GetResult.name
+			NoGetResult = String.startsWith(Name, "__")
+		end
+		if not NoGetResult then
+			if NewMap:get(Name) == nil then
+				NewMap:set(Name, GetResult)
 			else
-				var8 = name
-			end
-			return if toJSBoolean(var8) then name else p5
-		end
-	end
-	
-	local var6 = map.new()
-	
-	for i, v in p1 do
-		local unpacked = table.unpack(v)
-		local var7 = p1:get(unpacked)
-		
-		if var7 ~= nil and not string.startsWith(unpacked, "__") then
-			local name = var7.name
-			
-			if not string.startsWith(name, "__") then
-				if var6:get(name) == nil then
-					var6:set(name, var7)
-				else
-					console.warn(("Duplicate schema type name %s found; keeping the existing one found in the schema"):format(name))
-				end
+				Console.warn(("Duplicate schema type name %s found; keeping the existing one found in the schema"):format(Name))
 			end
 		end
 	end
-	for i, v_1 in var6 do
-		local unpacked = table.unpack(v_1)
-		p1:set(unpacked, var6:get(unpacked))
+	for _, value1 in NewMap do
+		local Unpacked = table.unpack(value1)
+		List:set(Unpacked, (NewMap:get(Unpacked)))
 	end
-	for i, v_2 in p2 do
-		v_2.args = array.filter(v_2.args, function(p5)
-			-- upvalues: healType (write)
-			p5.type = healType(p5.type)
+	for _, directive in Directives do
+		directive.args = Array.filter(directive.args, function(p3): boolean --[[ Line: 422 ]]
+			-- upvalues: Callback4 (ref)
+			p3.type = Callback4(p3.type)
 			
-			return p5.type ~= nil
+			return p3.type ~= nil
 		end)
 	end
-	for i, v_3 in p1 do
-		local unpacked = table.unpack(v_3)
-		local var8 = p1:get(unpacked)
+	for _, value2 in List do
+		local Unpacked = table.unpack(value2)
+		local GetResult = List:get(Unpacked)
 		
-		if not string.startsWith(unpacked, "__") and array.indexOf(var6:keys(), unpacked) ~= -1 and var8 ~= nil then
-			healNamedType(var8)
+		if not String.startsWith(Unpacked, "__") and Array.indexOf(NewMap:keys(), Unpacked) ~= -1 and GetResult ~= nil then
+			healNamedType(GetResult)
 		end
 	end
-	for i, v_4 in p1 do
-		local unpacked = table.unpack(v_4)
+	for _, value3 in List do
+		local Unpacked = table.unpack(value3)
 		
-		if not string.startsWith(unpacked, "__") and array.indexOf(var6:keys(), unpacked) == -1 then
-			p1:set(unpacked, nil)
+		if not String.startsWith(Unpacked, "__") and Array.indexOf(NewMap:keys(), Unpacked) == -1 then
+			List:set(Unpacked, nil)
 		end
 	end
 end
 
-return t
+return { healSchema = healSchema, healTypes = Callback }

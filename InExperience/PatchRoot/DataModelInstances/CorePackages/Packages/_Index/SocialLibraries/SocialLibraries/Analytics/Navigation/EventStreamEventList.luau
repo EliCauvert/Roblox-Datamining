@@ -1,36 +1,34 @@
-﻿local eventNamesModule = require(script.Parent.EventNames)
-local enumsModule = require(script.Parent.Parent.Enums)
-local contexts = enumsModule.Contexts
-local eventTypes = enumsModule.EventTypes
-local subPages = enumsModule.SubPages
-local pages = enumsModule.Pages
-local btnValuesModule = require(script.Parent.BtnValues)
+﻿local EventNamesModule = require(script.Parent.EventNames)
+local EnumsModule = require(script.Parent.Parent.Enums)
+local Contexts = EnumsModule.Contexts
+local EventTypes = EnumsModule.EventTypes
+local BtnValuesModule = require(script.Parent.BtnValues)
 
-local var1 = function(p1)
-	return tostring(p1)
+local function Uid(p1): string --[[ Line: 10 ]]
+	return (tostring(p1))
 end
 
 return {
-	[eventNamesModule.HomePage_Carousel_LuaProfile] = {
-		context = contexts.HomePage,
-		eventType = eventTypes.ButtonClick,
+	[EventNamesModule.HomePage_Carousel_LuaProfile] = {
+		context = Contexts.HomePage,
+		eventType = EventTypes.ButtonClick,
 		additionalInfo = {
-			btn = btnValuesModule.PlayerProfile,
-			subpage = subPages.PeekView,
-			page = pages.PlayerProfile
+			btn = BtnValuesModule.PlayerProfile,
+			subpage = EnumsModule.SubPages.PeekView,
+			page = EnumsModule.Pages.PlayerProfile
 		},
-		formatRulesForAdditionalInfo = { uid = var1 }
+		formatRulesForAdditionalInfo = { uid = Uid }
 	},
-	[eventNamesModule.HomePage_Carousel_FriendsLanding] = {
-		context = contexts.HomePage,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = { btn = btnValuesModule.FriendsLanding },
-		formatRulesForAdditionalInfo = { uid = var1 }
+	[EventNamesModule.HomePage_Carousel_FriendsLanding] = {
+		context = Contexts.HomePage,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = { btn = BtnValuesModule.FriendsLanding },
+		formatRulesForAdditionalInfo = { uid = Uid }
 	},
-	[eventNamesModule.MorePage_FriendsLanding] = {
-		context = contexts.HomePage,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = { btn = btnValuesModule.FriendsLanding },
-		formatRulesForAdditionalInfo = { uid = var1 }
+	[EventNamesModule.MorePage_FriendsLanding] = {
+		context = Contexts.HomePage,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = { btn = BtnValuesModule.FriendsLanding },
+		formatRulesForAdditionalInfo = { uid = Uid }
 	}
 }

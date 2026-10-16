@@ -1,97 +1,93 @@
-﻿local shareSheet = script:FindFirstAncestor("ShareSheet")
-local parent = shareSheet.Parent
-local appChatModule = require(parent.AppChat)
-local reactModule = require(parent.React)
-local fFlagShareSheetHoldRecipientsWhileSendingModule = require(shareSheet.Flags.FFlagShareSheetHoldRecipientsWhileSending)
-local fFlagShareSheetPeoplePickerEnabledModule = require(shareSheet.Flags.FFlagShareSheetPeoplePickerEnabled)
-local _ = require(parent.AppChat.GetConversationListStore)
-local _ = require(parent.AppChat.GetExternalChatMessageSenderStore)
-local fetchConversationListPageToSignalsModule = require(parent.AppChat.fetchConversationListPageToSignals)
-local useExternalChatConversationEligibilityModule = require(parent.AppChat.useExternalChatConversationEligibility)
-local shareSheetConstantsModule = require(shareSheet.ShareSheetConstants)
-local _ = require(script.Parent.ShareSheetSocialRow)
-local useConversationList = appChatModule.Hooks.useConversationList
+﻿local ShareSheet = script:FindFirstAncestor("ShareSheet")
+local Parent = ShareSheet.Parent
+local ReactModule = require(Parent.React)
+local FFlagShareSheetFriendsSort = require(Parent.SharedFlags).FFlagShareSheetFriendsSort
+local FFlagShareSheetPeoplePickerEnabledModule = require(ShareSheet.Flags.FFlagShareSheetPeoplePickerEnabled)
+local _ = require(Parent.AppChat.GetConversationListStore)
+local _ = require(Parent.AppChat.GetExternalChatMessageSenderStore)
+local FetchConversationListPageToSignalsModule = require(Parent.AppChat.fetchConversationListPageToSignals)
+local UseExternalChatConversationEligibilityModule = require(Parent.AppChat.useExternalChatConversationEligibility)
+local ShareSheetConstantsModule = require(ShareSheet.ShareSheetConstants)
+local _ = require(ShareSheet.Types)
+local UseConversationListModule = require(Parent.AppChat.useConversationList)
 
-local function getCompactConversations(p1, p2, p3, p4)
-	-- upvalues: shareSheetConstantsModule (ref)
+local function getCompactConversations(EligibleConversations, Items, SelectedConversationIds, Callback) --[[ Line: 38 ]]
+	-- upvalues: ShareSheetConstantsModule (copy)
+	local List = {}
 	local t = {}
-	local t_1 = {}
 	
-	for i = 1, math.min(#p1, shareSheetConstantsModule.FIntShareSheetMaxConversations) do
-		local var1 = p1[i]
-		table.insert(t, var1)
-		t_1[var1.id] = true
+	for i = 1, math.min(#EligibleConversations, ShareSheetConstantsModule.FIntShareSheetMaxConversations) do
+		local EligibleConversation = EligibleConversations[i]
+		table.insert(List, EligibleConversation)
+		t[EligibleConversation.id] = true
 	end
-	for i_1, v in p2 do
-		if p3[v.id] and not t_1[v.id] and p4(v) then
-			table.insert(t, v)
-			t_1[v.id] = true
+	for _, item in Items do
+		if SelectedConversationIds[item.id] and not t[item.id] and Callback(item) then
+			table.insert(List, item)
+			t[item.id] = true
 		end
 	end
-	return t
+	return List
 end
 
-return function(p5)
-	-- upvalues: useConversationList (ref), fFlagShareSheetHoldRecipientsWhileSendingModule (ref), reactModule (ref), useExternalChatConversationEligibilityModule (ref), shareSheetConstantsModule (ref), fFlagShareSheetPeoplePickerEnabledModule (ref), getCompactConversations (ref), fetchConversationListPageToSignalsModule (ref)
-	local var2 = p5.chatShare ~= nil
-	local var3 = useConversationList(var2)
+return function(p1) --[[ Line: 66 | Named "useShareSheetConversationModel" ]]
+	-- upvalues: UseConversationListModule (copy), ReactModule (copy), UseExternalChatConversationEligibilityModule (copy), ShareSheetConstantsModule (copy), FFlagShareSheetPeoplePickerEnabledModule (copy), getCompactConversations (copy), FFlagShareSheetFriendsSort (copy), FetchConversationListPageToSignalsModule (copy)
+	local HasChatShare = p1.chatShare ~= nil
+	local UseConversationListModuleResult = UseConversationListModule(HasChatShare)
+	local UseRefResult = ReactModule.useRef(UseConversationListModuleResult)
 	
-	if fFlagShareSheetHoldRecipientsWhileSendingModule then
-		local var4 = reactModule.useRef(var3)
-		
-		if p5.isSending then
-			var3 = var4.current
-		else
-			var4.current = var3
-		end
+	if p1.isSending then
+		UseConversationListModuleResult = UseRefResult.current
+	else
+		UseRefResult.current = UseConversationListModuleResult
 	end
-	local var5
-	local var6 = #var3.items > 0
-	local var7 = p5.chatShare ~= nil and p5.chatShare.isAvailable
-	local var8 = p5.isOpen and (var7 and var6)
-	local var9 = if p5.chatShare then p5.chatShare.isGroupChatEnabled else false
-	local var10 = useExternalChatConversationEligibilityModule({
-		conversations = var3.items,
-		isActive = var8,
-		isGroupChatEnabled = var9,
-		maxConversationCount = shareSheetConstantsModule.FIntShareSheetMaxConversations
+	local v1 = #UseConversationListModuleResult.items > 0
+	local IsAvailable = p1.chatShare ~= nil and p1.chatShare.isAvailable
+	local V19: boolean = p1.isOpen and (IsAvailable and v1)
+	local IsGroupChatEnabled = if p1.chatShare then p1.chatShare.isGroupChatEnabled else false
+	local UseExternalChatConversationEligibilityModuleResult = UseExternalChatConversationEligibilityModule({
+		conversations = UseConversationListModuleResult.items,
+		isActive = V19,
+		isGroupChatEnabled = IsGroupChatEnabled,
+		maxConversationCount = ShareSheetConstantsModule.FIntShareSheetMaxConversations
 	})
-	local var11 = var10
-	local t = nil
+	local ConversationEligibility = UseExternalChatConversationEligibilityModuleResult
+	local PeoplePickerEligibility = nil
 	
-	if fFlagShareSheetPeoplePickerEnabledModule then
-		var5 = useExternalChatConversationEligibilityModule({
-			conversations = var3.items,
-			isActive = var8 and p5.isPeoplePickerDisplayed == true,
-			isGroupChatEnabled = var9,
-			maxConversationCount = shareSheetConstantsModule.FIntShareSheetPeoplePickerMaxConversations
+	if FFlagShareSheetPeoplePickerEnabledModule then
+		local UseExternalChatConversationEligibilityModuleResult1 = UseExternalChatConversationEligibilityModule({
+			conversations = UseConversationListModuleResult.items,
+			isActive = V19 and p1.isPeoplePickerDisplayed == true,
+			isGroupChatEnabled = IsGroupChatEnabled,
+			maxConversationCount = ShareSheetConstantsModule.FIntShareSheetPeoplePickerMaxConversations
 		})
-		var11 = {
-			eligibleConversations = getCompactConversations(var10.eligibleConversations, var3.items, p5.selectedConversationIds, function(p6)
-				-- upvalues: p5 (ref)
-				return p5.chatShare ~= nil and p5.chatShare.canSendToConversation(p6)
+		ConversationEligibility = {
+			eligibleConversations = getCompactConversations(UseExternalChatConversationEligibilityModuleResult.eligibleConversations, UseConversationListModuleResult.items, p1.selectedConversationIds, function(p2) --[[ Line: 102 ]]
+				-- upvalues: p1 (copy)
+				return p1.chatShare ~= nil and p1.chatShare.canSendToConversation(p2)
 			end),
-			isLoading = var10.isLoading
+			isLoading = UseExternalChatConversationEligibilityModuleResult.isLoading
 		}
-		t = {
-			eligibleConversations = if var5.isLoading and not var10.isLoading then var10.eligibleConversations else var5.eligibleConversations,
-			isLoading = var3.listStatus.error ~= nil and var5.isLoading
+		PeoplePickerEligibility = {
+			eligibleConversations = if UseExternalChatConversationEligibilityModuleResult1.isLoading and not UseExternalChatConversationEligibilityModuleResult.isLoading then UseExternalChatConversationEligibilityModuleResult.eligibleConversations else UseExternalChatConversationEligibilityModuleResult1.eligibleConversations,
+			isLoading = UseConversationListModuleResult.listStatus.error == nil and UseExternalChatConversationEligibilityModuleResult1.isLoading
 		}
 	end
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), fetchConversationListPageToSignalsModule (copy)
-		if var2 then
-			fetchConversationListPageToSignalsModule()
-		end
-	end, { var2 })
-	var5 = var2 and (not var6 and (var3.listStatus.error == nil and (if var3.listStatus.isFetchingConversations ~= true then var3.listStatus.hasFetchedInitialPage ~= true else true)))
+	if not FFlagShareSheetFriendsSort then
+		ReactModule.useEffect(function() --[[ Line: 118 ]]
+			-- upvalues: HasChatShare (copy), FetchConversationListPageToSignalsModule (upval)
+			if HasChatShare then
+				FetchConversationListPageToSignalsModule()
+			end
+		end, { HasChatShare })
+	end
+	local IsIsFetchingConversations: boolean = HasChatShare and (not v1 and (UseConversationListModuleResult.listStatus.error == nil and (UseConversationListModuleResult.listStatus.isFetchingConversations == true or UseConversationListModuleResult.listStatus.hasFetchedInitialPage ~= true)))
 	
 	return {
-		conversations = if fFlagShareSheetHoldRecipientsWhileSendingModule then nil else var3.items,
-		conversationEligibility = var11,
-		isSocialRowLoading = var7 and var5,
-		listStatus = var3.listStatus,
-		peoplePickerEligibility = t,
-		shouldShowSocialRow = var7 and (var6 or var5)
+		conversationEligibility = ConversationEligibility,
+		isSocialRowLoading = IsAvailable and IsIsFetchingConversations,
+		listStatus = UseConversationListModuleResult.listStatus,
+		peoplePickerEligibility = PeoplePickerEligibility,
+		shouldShowSocialRow = IsAvailable and (v1 or IsIsFetchingConversations)
 	}
 end

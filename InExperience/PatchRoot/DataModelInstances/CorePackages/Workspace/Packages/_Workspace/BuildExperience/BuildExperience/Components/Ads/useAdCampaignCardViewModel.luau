@@ -1,30 +1,29 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local foundationModule = require(parent.Foundation)
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local buttonVariant = foundationModule.Enums.ButtonVariant
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local ButtonVariant = require(Parent.Foundation).Enums.ButtonVariant
 
-return function(p1)
-	-- upvalues: localizationStringsModule (ref), useLocalization (ref), buttonVariant (ref)
-	local isActive = p1.variant == "active"
-	local var1 = useLocalization({
-		titleFree = localizationStringsModule.AD_CAMPAIGN_CARD_TITLE_FREE,
-		titleActive = localizationStringsModule.AD_CAMPAIGN_CARD_TITLE_ACTIVE,
-		descFree = localizationStringsModule.AD_CAMPAIGN_CARD_DESC_FREE,
+return function(p1) --[[ Line: 35 | Named "useAdCampaignCardViewModel" ]]
+	-- upvalues: LocalizationStringsModule (copy), UseLocalizationFunction (copy), ButtonVariant (copy)
+	local IsActive = p1.variant == "active"
+	local UseLocalizationResult = UseLocalizationFunction({
+		titleFree = LocalizationStringsModule.AD_CAMPAIGN_CARD_TITLE_FREE,
+		titleActive = LocalizationStringsModule.AD_CAMPAIGN_CARD_TITLE_ACTIVE,
+		descFree = LocalizationStringsModule.AD_CAMPAIGN_CARD_DESC_FREE,
 		activeDesc = {
-			localizationStringsModule.AD_CAMPAIGN_CARD_ACTIVE_DESC,
-			startDate = if p1.campaignStartTime ~= nil then "" else localizationStringsModule.formatCampaignDate(p1.campaignStartTime),
-			endDate = if p1.campaignEndTime ~= nil then "" else localizationStringsModule.formatCampaignDate(p1.campaignEndTime)
+			LocalizationStringsModule.AD_CAMPAIGN_CARD_ACTIVE_DESC,
+			startDate = if p1.campaignStartTime == nil then "" else LocalizationStringsModule.formatCampaignDate(p1.campaignStartTime),
+			endDate = if p1.campaignEndTime == nil then "" else LocalizationStringsModule.formatCampaignDate(p1.campaignEndTime)
 		},
-		view = localizationStringsModule.AD_CAMPAIGN_CARD_VIEW
+		view = LocalizationStringsModule.AD_CAMPAIGN_CARD_VIEW
 	})
 	
 	return {
-		title = if isActive then var1.titleActive else var1.titleFree,
-		description = if isActive then var1.activeDesc else var1.descFree,
-		actionText = var1.view,
-		buttonVariant = if isActive then buttonVariant.Standard else buttonVariant.SoftEmphasis,
+		title = if IsActive then UseLocalizationResult.titleActive else UseLocalizationResult.titleFree,
+		description = if IsActive then UseLocalizationResult.activeDesc else UseLocalizationResult.descFree,
+		actionText = UseLocalizationResult.view,
+		buttonVariant = if IsActive then ButtonVariant.Standard else ButtonVariant.SoftEmphasis,
 		isLoading = p1.isPrimaryPending == true,
 		onActivated = p1.onPrimary
 	}

@@ -1,97 +1,91 @@
-﻿local captureService = game:GetService("CaptureService")
-local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local parent = momentsCreation.Parent
-local momentsCommonModule = require(parent.MomentsCommon)
-local _ = require(parent.MomentsTypes)
-local eventNames = momentsCommonModule.Analytics.EventNames
-local fireAnalyticsEventModule = require(momentsCreation.Analytics.fireAnalyticsEvent)
-local makeCreationEventFieldsModule = require(momentsCreation.Analytics.makeCreationEventFields)
-local normalizeMomentMetadataModule = require(momentsCreation.Utils.normalizeMomentMetadata)
-local getFFlagMomentsCreationNormalizeMetadataEnumsModule = require(momentsCreation.Flags.GetFFlagMomentsCreationNormalizeMetadataEnums)
-local getFFlagMomentsUseUploadPostAsync = momentsCommonModule.Flags.GetFFlagMomentsUseUploadPostAsync
-local getFFlagMomentsUseMomentsServiceForUpload = momentsCommonModule.Flags.GetFFlagMomentsUseMomentsServiceForUpload
-local makePostMetadataModule = require(momentsCreation.Utils.makePostMetadata)
-local _game = game
-local captureServiceUploadUniverseIdOverrideEngineFeature = game:GetEngineFeature("CaptureServiceUploadUniverseIdOverride")
+﻿local CaptureService = game:GetService("CaptureService")
+local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local Parent = MomentsCreation.Parent
+local MomentsCommonModule = require(Parent.MomentsCommon)
+local _ = require(Parent.MomentsTypes)
+local EventNames = MomentsCommonModule.Analytics.EventNames
+local FireAnalyticsEventModule = require(MomentsCreation.Analytics.fireAnalyticsEvent)
+local MakeCreationEventFieldsModule = require(MomentsCreation.Analytics.makeCreationEventFields)
+local NormalizeMomentMetadataModule = require(MomentsCreation.Utils.normalizeMomentMetadata)
+local GetFFlagMomentsUseUploadPostAsyncFunction = MomentsCommonModule.Flags.GetFFlagMomentsUseUploadPostAsync
+local GetFFlagMomentsUseMomentsServiceForUploadFunction = MomentsCommonModule.Flags.GetFFlagMomentsUseMomentsServiceForUpload
+local MakePostMetadataModule = require(MomentsCreation.Utils.makePostMetadata)
+local v1 = game
+local CaptureServiceUploadUniverseIdOverrideEngineFeature = game:GetEngineFeature("CaptureServiceUploadUniverseIdOverride")
 game:DefineFastString("MomentsUploadUniverseId", "8357232245")
 
-local function _(p1)
-	-- upvalues: _game (ref)
-	local gameId = _game.GameId
+local function _(Tbl) --[[ Line: 61 | Named "injectUniverseIdOverride" ]]
+	-- upvalues: v1 (copy)
+	local GameId: number = v1.GameId
 	
-	if gameId == nil or gameId <= 0 then
-		local cloned = table.clone(p1)
-		cloned.universeIdOverride = tonumber(game:GetFastString("MomentsUploadUniverseId"))
+	if GameId == nil or GameId <= 0 then
+		local Copy = table.clone(Tbl)
+		Copy.universeIdOverride = tonumber(game:GetFastString("MomentsUploadUniverseId"))
 		
-		return cloned
+		return Copy
+	else
+		return Tbl
 	end
-	return p1
 end
 
-return function(p1, p2, p3, p4, p5)
-	-- upvalues: captureServiceUploadUniverseIdOverrideEngineFeature (ref), _game (ref), getFFlagMomentsCreationNormalizeMetadataEnumsModule (ref), normalizeMomentMetadataModule (ref), getFFlagMomentsUseUploadPostAsync (ref), makePostMetadataModule (ref), getFFlagMomentsUseMomentsServiceForUpload (ref), captureService (ref), makeCreationEventFieldsModule (ref), fireAnalyticsEventModule (ref), eventNames (ref)
-	local gameId, var1
-	if captureServiceUploadUniverseIdOverrideEngineFeature then
-		gameId = _game.GameId
+return function(Capture, Tbl, FeedRegistrationInfo, p1, p2) --[[ Line: 71 | Named "createMoment" ]]
+	-- upvalues: CaptureServiceUploadUniverseIdOverrideEngineFeature (copy), v1 (copy), NormalizeMomentMetadataModule (copy), GetFFlagMomentsUseUploadPostAsyncFunction (copy), MakePostMetadataModule (copy), GetFFlagMomentsUseMomentsServiceForUploadFunction (copy), CaptureService (copy), MakeCreationEventFieldsModule (copy), FireAnalyticsEventModule (copy), EventNames (copy)
+	local Tbl1 = nil
+	if CaptureServiceUploadUniverseIdOverrideEngineFeature then
+		local GameId: number = v1.GameId
 		
-		if gameId == nil or gameId <= 0 then
-			local cloned = table.clone(p2)
-			cloned.universeIdOverride = tonumber(game:GetFastString("MomentsUploadUniverseId"))
-			var1 = cloned
+		if GameId == nil or GameId <= 0 then
+			local Copy = table.clone(Tbl)
+			Copy.universeIdOverride = tonumber(game:GetFastString("MomentsUploadUniverseId"))
+			Tbl1 = Copy
 		else
-			var1 = p2
+			Tbl1 = Tbl
 		end
 	else
-		var1 = p2
+		Tbl1 = Tbl
 	end
-	if getFFlagMomentsCreationNormalizeMetadataEnumsModule() then
-		var1 = normalizeMomentMetadataModule(var1)
-	end
-	local var2
-	gameId = nil
-	local _ = nil
+	local NormalizeMomentMetadataModuleResult = NormalizeMomentMetadataModule(Tbl1)
+	local Success = nil
+	local Result = nil
 	
-	if getFFlagMomentsUseUploadPostAsync() then
-		local var3 = makePostMetadataModule(p2, if getFFlagMomentsUseMomentsServiceForUpload() then p1 else nil)
-		local ok, status = pcall(function()
-			-- upvalues: getFFlagMomentsUseMomentsServiceForUpload (copy), p5 (ref), var3 (ref), captureService (copy), p1 (ref)
-			if getFFlagMomentsUseMomentsServiceForUpload() then
-				(p5 or game:GetService("MomentsService")):CreatePostAsync(var3)
+	if GetFFlagMomentsUseUploadPostAsyncFunction() then
+		local PostMetadataModule = MakePostMetadataModule(Tbl, if GetFFlagMomentsUseMomentsServiceForUploadFunction() then Capture else nil)
+		Success, Result = pcall(function() --[[ Line: 90 ]]
+			-- upvalues: GetFFlagMomentsUseMomentsServiceForUploadFunction (upval), p2 (copy), PostMetadataModule (copy), CaptureService (upval), Capture (copy)
+			if GetFFlagMomentsUseMomentsServiceForUploadFunction() then
+				(p2 or game:GetService("MomentsService")):CreatePostAsync(PostMetadataModule)
 				
 				return
+			else
+				CaptureService:UploadPostAsync(Capture, PostMetadataModule)
 			end
-			captureService:UploadPostAsync(p1, var3)
 		end)
-		gameId = ok
-		var2 = status
 	else
-		local ok, status = pcall(function()
-			-- upvalues: captureService (copy), p1 (ref), var1 (write), p3 (ref)
-			captureService:UploadCaptureAndPostMoment(p1, var1, p3)
+		Success, Result = pcall(function() --[[ Line: 99 ]]
+			-- upvalues: CaptureService (upval), Capture (copy), NormalizeMomentMetadataModuleResult (ref), FeedRegistrationInfo (copy)
+			CaptureService:UploadCaptureAndPostMoment(Capture, NormalizeMomentMetadataModuleResult, FeedRegistrationInfo)
 		end)
-		gameId = ok
-		var2 = status
 	end
-	if gameId then
-		local var4 = makeCreationEventFieldsModule.makeCaptureDescriptorFields(p1)
+	if Success then
+		local CaptureDescriptorFields = MakeCreationEventFieldsModule.makeCaptureDescriptorFields(Capture)
 		
-		for i, v in makeCreationEventFieldsModule.makeCreationBaseFields(p4) do
-			var4[i] = v
+		for i1, value1 in MakeCreationEventFieldsModule.makeCreationBaseFields(p1) do
+			CaptureDescriptorFields[i1] = value1
 		end
-		fireAnalyticsEventModule(eventNames.EditingFlowMomentPublished, var4)
+		FireAnalyticsEventModule(EventNames.EditingFlowMomentPublished, CaptureDescriptorFields)
 		
 		return
 	else
-		local t = {
+		local config = {
 			status = "GenericFailure",
-			captureType = makeCreationEventFieldsModule.enumName(p1.CaptureType),
-			localId = tostring(p1.LocalId),
-			error = tostring(var2)
+			captureType = MakeCreationEventFieldsModule.enumName(Capture.CaptureType),
+			localId = tostring(Capture.LocalId),
+			error = tostring(Result)
 		}
 		
-		for i, v in makeCreationEventFieldsModule.makeCreationBaseFields(p4) do
-			t[i] = v
+		for i, value in MakeCreationEventFieldsModule.makeCreationBaseFields(p1) do
+			config[i] = value
 		end
-		fireAnalyticsEventModule(eventNames.UploadCaptureFailed, t)
+		FireAnalyticsEventModule(EventNames.UploadCaptureFailed, config)
 	end
 end

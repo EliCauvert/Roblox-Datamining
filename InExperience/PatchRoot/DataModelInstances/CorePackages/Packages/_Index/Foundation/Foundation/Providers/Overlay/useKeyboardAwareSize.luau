@@ -1,43 +1,41 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local wrappersModule = require(foundation.Utility.Wrappers)
-local guiService = wrappersModule.Services.GuiService
-local userInputService = wrappersModule.Services.UserInputService
-local reactModule = require(parent.React)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local WrappersModule = require(Foundation.Utility.Wrappers)
+local GuiService = WrappersModule.Services.GuiService
+local UserInputService = WrappersModule.Services.UserInputService
+local ReactModule = require(Foundation.Parent.React)
 
-return function(p1)
-	-- upvalues: reactModule (ref), userInputService (ref), guiService (ref)
-	local var1, var2 = reactModule.useBinding(UDim2.fromScale(1, 1))
-	reactModule.useLayoutEffect(function()
-		-- upvalues: p1 (ref), userInputService (copy), var2 (ref), guiService (copy), var1 (ref)
-		if p1 then
-			local function updateSafeAreaSize()
-				-- upvalues: userInputService (copy), var2 (copy), guiService (copy), p1 (copy), var1 (copy)
-				if not userInputService.OnScreenKeyboardVisible then
-					var2(UDim2.fromScale(1, 1))
-					
-					return
-				end
-				local uDim2 = UDim2.new(1, 0, 1, -(p1.AbsolutePosition.Y + p1.AbsoluteSize.Y - (userInputService.OnScreenKeyboardPosition.Y - guiService:GetGuiInset().Y)))
+return function(Frame: Frame) --[[ Line: 11 | Named "useKeyboardAwareSize" ]]
+	-- upvalues: ReactModule (copy), UserInputService (copy), GuiService (copy)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(UDim2.fromScale(1, 1))
+	ReactModule.useLayoutEffect(function() --[[ Line: 14 ]]
+		-- upvalues: Frame (copy), UserInputService (upval), UseBindingResult2 (copy), GuiService (upval), UseBindingResult (copy)
+		if not Frame then return end
+		local function updateSafeAreaSize() --[[ Line: 19 ]]
+			-- upvalues: UserInputService (upval), UseBindingResult2 (upval), GuiService (upval), Frame (upval), UseBindingResult (upval)
+			if not UserInputService.OnScreenKeyboardVisible then
+				UseBindingResult2(UDim2.fromScale(1, 1))
 				
-				if var1:getValue() ~= uDim2 then
-					var2(uDim2)
-				end
+				return
 			end
+			local _UDim2 = UDim2.new(1, 0, 1, -(Frame.AbsolutePosition.Y + Frame.AbsoluteSize.Y - (UserInputService.OnScreenKeyboardPosition.Y - GuiService:GetGuiInset().Y)))
 			
-			updateSafeAreaSize()
-			local var3 = userInputService:GetPropertyChangedSignal("OnScreenKeyboardVisible"):Connect(updateSafeAreaSize)
-			local var4 = userInputService:GetPropertyChangedSignal("OnScreenKeyboardPosition"):Connect(updateSafeAreaSize)
-			local var5 = p1:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateSafeAreaSize)
-			
-			return function()
-				-- upvalues: var3 (ref), var4 (ref), var5 (ref)
-				var3:Disconnect()
-				var4:Disconnect()
-				var5:Disconnect()
+			if UseBindingResult:getValue() ~= _UDim2 then
+				UseBindingResult2(_UDim2)
 			end
 		end
-	end, { p1 })
+		
+		updateSafeAreaSize()
+		local Connection = UserInputService:GetPropertyChangedSignal("OnScreenKeyboardVisible"):Connect(updateSafeAreaSize)
+		local Connection1 = UserInputService:GetPropertyChangedSignal("OnScreenKeyboardPosition"):Connect(updateSafeAreaSize)
+		local Connection2 = Frame:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateSafeAreaSize)
+		
+		return function() --[[ Line: 48 ]]
+			-- upvalues: Connection (copy), Connection1 (copy), Connection2 (copy)
+			Connection:Disconnect()
+			Connection1:Disconnect()
+			Connection2:Disconnect()
+		end
+	end, { Frame })
 	
-	return var1
+	return UseBindingResult
 end

@@ -1,40 +1,39 @@
-﻿local collectionViews = script:FindFirstAncestor("CollectionViews")
-local parent = collectionViews.Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local _ = require(collectionViews.CollectionViewTypes)
-local collectionLayoutStoreContextModule = require(script.Parent.CollectionLayoutStoreContext)
-local createCollectionLayoutStoreModule = require(script.Parent.createCollectionLayoutStore)
-local getMainCollectionLayoutStoreModule = require(script.Parent.getMainCollectionLayoutStore)
+﻿local CollectionViews = script:FindFirstAncestor("CollectionViews")
+local Parent = CollectionViews.Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local _ = require(CollectionViews.CollectionViewTypes)
+local CollectionLayoutStoreContextModule = require(script.Parent.CollectionLayoutStoreContext)
+local CreateCollectionLayoutStoreModule = require(script.Parent.createCollectionLayoutStore)
+local GetMainCollectionLayoutStoreModule = require(script.Parent.getMainCollectionLayoutStore)
 
-return function(p1)
-	-- upvalues: reactModule (ref), signalsModule (ref), createCollectionLayoutStoreModule (ref), getMainCollectionLayoutStoreModule (ref), collectionLayoutStoreContextModule (ref)
-	local var1, var2 = reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy)
-		return signalsModule.createSignal(0)
+return function(p1) --[[ Line: 22 | Named "CollectionLayoutStoreProvider" ]]
+	-- upvalues: ReactModule (copy), SignalsModule (copy), CreateCollectionLayoutStoreModule (copy), GetMainCollectionLayoutStoreModule (copy), CollectionLayoutStoreContextModule (copy)
+	local UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 23 ]]
+		-- upvalues: SignalsModule (upval)
+		return SignalsModule.createSignal(0)
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var2 (ref)
-		local container = p1.container
+	ReactModule.useEffect(function() --[[ Line: 27 ]]
+		-- upvalues: p1 (copy), UseMemoResult2 (copy)
+		local Container = p1.container
 		
-		if container then
-			var2(container.AbsoluteSize.X)
-			local var3 = container:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
-				-- upvalues: var2 (copy), container (ref)
-				var2(container.AbsoluteSize.X)
-			end)
-			
-			return function()
-				-- upvalues: var3 (ref)
-				var3:Disconnect()
-			end
+		if not Container then return end
+		UseMemoResult2(Container.AbsoluteSize.X)
+		local Connection = Container:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 33 ]]
+			-- upvalues: UseMemoResult2 (upval), Container (copy)
+			UseMemoResult2(Container.AbsoluteSize.X)
+		end)
+		
+		return function() --[[ Line: 36 ]]
+			-- upvalues: Connection (copy)
+			Connection:Disconnect()
 		end
 	end, { p1.container })
 	
-	return reactModule.createElement(collectionLayoutStoreContextModule.Provider, {
-		value = reactModule.useMemo(function()
-			-- upvalues: createCollectionLayoutStoreModule (copy), var1 (ref), getMainCollectionLayoutStoreModule (copy)
-			return createCollectionLayoutStoreModule(var1, getMainCollectionLayoutStoreModule(false))
-		end, { var1 })
+	return ReactModule.createElement(CollectionLayoutStoreContextModule.Provider, {
+		value = ReactModule.useMemo(function() --[[ Line: 41 ]]
+			-- upvalues: CreateCollectionLayoutStoreModule (upval), UseMemoResult (copy), GetMainCollectionLayoutStoreModule (upval)
+			return CreateCollectionLayoutStoreModule(UseMemoResult, GetMainCollectionLayoutStoreModule(false))
+		end, { UseMemoResult })
 	}, p1.children)
 end

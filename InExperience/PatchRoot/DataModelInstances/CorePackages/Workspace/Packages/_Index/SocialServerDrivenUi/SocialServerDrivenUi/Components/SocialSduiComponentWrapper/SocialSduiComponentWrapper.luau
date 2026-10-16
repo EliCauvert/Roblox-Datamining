@@ -1,17 +1,17 @@
-﻿local parent = script:FindFirstAncestor("SocialServerDrivenUi").Parent
-local reactModule = require(parent.React)
-local _ = require(parent.AppCommonLib)
-local getSduiComponentWrapper = require(parent.SduiCoreSystem).getSduiComponentWrapper
-local view = require(parent.Foundation).View
+﻿local Parent = script:FindFirstAncestor("SocialServerDrivenUi").Parent
+local ReactModule = require(Parent.React)
+local _ = require(Parent.AppCommonLib)
+local GetSduiComponentWrapperFunction = require(Parent.SduiCoreSystem).getSduiComponentWrapper
+local View = require(Parent.Foundation).View
 
-return reactModule.memo(function(p1)
-	-- upvalues: getSduiComponentWrapper (ref), reactModule (ref), view (ref)
-	return reactModule.createElement(view, {
+return ReactModule.memo(function(p1) --[[ Line: 29 | Named "SocialSduiComponentWrapper" ]]
+	-- upvalues: GetSduiComponentWrapperFunction (copy), ReactModule (copy), View (copy)
+	return ReactModule.createElement(View, {
 		tag = "size-full-0 auto-y",
 		LayoutOrder = p1.layoutOrder,
 		onAbsoluteSizeChanged = p1.onFrameResized
 	}, {
-		SocialSduiComponentWrapper = reactModule.createElement(getSduiComponentWrapper(p1.sduiComponentConfig), {
+		SocialSduiComponentWrapper = ReactModule.createElement(GetSduiComponentWrapperFunction(p1.sduiComponentConfig), {
 			debugName = p1.debugName,
 			componentConfig = p1.sduiComponentConfig,
 			sduiContext = p1.sduiContext,

@@ -1,17 +1,17 @@
-﻿local t = {}
-local parent = script.Parent.Parent.Parent
-local luauPolyfillModule = require(parent.Parent.LuauPolyfill)
-local boolean = luauPolyfillModule.Boolean
-local object = luauPolyfillModule.Object
-local _ = require(parent.core)
+﻿local Parent = script.Parent.Parent.Parent
+local LuauPolyfillModule = require(Parent.Parent.LuauPolyfill)
+local Boolean = LuauPolyfillModule.Boolean
+local Object = LuauPolyfillModule.Object
+local _ = require(Parent.core)
 local _ = require(script.Parent.types)
-local useQuery = require(script.Parent.Parent.hooks).useQuery
+local UseQueryFunction = require(script.Parent.Parent.hooks).useQuery
 
-function t.Query(p1)
-	-- upvalues: object (ref), useQuery (ref), boolean (ref)
-	local var1 = useQuery(p1.query, object.assign({}, p1, { children = object.None, query = object.None }))
-	
-	return if boolean.toJSBoolean(var1) then p1.children(var1) else nil
-end
-
-return t
+return {
+	Query = function(p1) --[[ Line: 27 ]]
+		-- upvalues: Object (copy), UseQueryFunction (copy), Boolean (copy)
+		local ChildrenFunction = p1.children
+		local UseQueryResult = UseQueryFunction(p1.query, (Object.assign({}, p1, { children = Object.None, query = Object.None })))
+		
+		return if Boolean.toJSBoolean(UseQueryResult) then ChildrenFunction(UseQueryResult) else nil
+	end
+}

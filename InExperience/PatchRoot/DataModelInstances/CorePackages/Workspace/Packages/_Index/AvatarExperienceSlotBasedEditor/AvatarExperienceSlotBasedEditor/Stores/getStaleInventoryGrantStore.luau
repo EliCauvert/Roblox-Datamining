@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("AvatarExperienceSlotBasedEditor").Parent.Signals).createComputed(require(script.Parent.createStaleInventoryGrantStore))
+﻿return require(script:FindFirstAncestor("AvatarExperienceSlotBasedEditor").Parent.Signals).createComputed((require(script.Parent.createStaleInventoryGrantStore)))

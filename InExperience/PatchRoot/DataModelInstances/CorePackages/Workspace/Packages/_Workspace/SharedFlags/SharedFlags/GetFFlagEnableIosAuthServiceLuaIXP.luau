@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("EnableIosAuthServiceLuaIXP", false)
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastFlag("EnableIosAuthServiceLuaIXP")
 end

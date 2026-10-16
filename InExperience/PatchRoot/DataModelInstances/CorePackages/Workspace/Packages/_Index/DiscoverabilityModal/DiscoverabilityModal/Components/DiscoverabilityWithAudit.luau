@@ -1,1 +1,1 @@
-﻿return require(script.DiscoverabilityWithAudit)
+﻿return (require(script.DiscoverabilityWithAudit))

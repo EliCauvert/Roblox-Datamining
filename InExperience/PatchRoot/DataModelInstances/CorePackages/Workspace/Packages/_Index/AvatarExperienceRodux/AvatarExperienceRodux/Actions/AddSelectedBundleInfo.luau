@@ -1,3 +1,3 @@
-﻿return require(script:FindFirstAncestor("AvatarExperienceRodux").Parent.Rodux).makeActionCreator(script.Name, function(p1, p2)
-	return { bundleId = p1, bundleInfo = p2 }
+﻿return require(script:FindFirstAncestor("AvatarExperienceRodux").Parent.Rodux).makeActionCreator(script.Name, function(BundleId, BundleInfo) --[[ Line: 13 ]]
+	return { bundleId = BundleId, bundleInfo = BundleInfo }
 end)

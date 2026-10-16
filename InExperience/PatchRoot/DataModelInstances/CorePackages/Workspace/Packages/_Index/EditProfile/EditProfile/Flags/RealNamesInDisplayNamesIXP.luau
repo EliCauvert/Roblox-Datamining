@@ -1,18 +1,17 @@
-﻿local roactAppExperimentModule = require(script:FindFirstAncestor("EditProfile").Parent.RoactAppExperiment)
-local realNamesInDisplayNamesIXPV1 = game:DefineFastString("RealNamesInDisplayNamesIXP_v1", "Social.DisplayNameSetting")
-local realNamesInDisplayNamesExperimentDefinition = game:DefineFastString("RealNamesInDisplayNamesExperimentDefinition", "can_see_real_names")
-local realNamesInDisplayNamesEnabledForAll = game:DefineFastFlag("RealNamesInDisplayNamesEnabledForAll", false)
-local useUserExperiment = roactAppExperimentModule.useUserExperiment
+﻿local RealNamesInDisplayNamesIXPV1 = game:DefineFastString("RealNamesInDisplayNamesIXP_v1", "Social.DisplayNameSetting")
+local RealNamesInDisplayNamesExperimentDefinition = game:DefineFastString("RealNamesInDisplayNamesExperimentDefinition", "can_see_real_names")
+local RealNamesInDisplayNamesEnabledForAll = game:DefineFastFlag("RealNamesInDisplayNamesEnabledForAll", false)
+local UseUserExperimentFunction = require(script:FindFirstAncestor("EditProfile").Parent.RoactAppExperiment).useUserExperiment
 
-local var1 = function(p1)
-	-- upvalues: realNamesInDisplayNamesEnabledForAll (ref), realNamesInDisplayNamesIXPV1 (ref), realNamesInDisplayNamesExperimentDefinition (ref)
-	return if realNamesInDisplayNamesEnabledForAll then true else ((p1 or {})[realNamesInDisplayNamesIXPV1] or {})[realNamesInDisplayNamesExperimentDefinition] == true
+local function IsExperimentEnabled(p1): boolean --[[ Line: 12 ]]
+	-- upvalues: RealNamesInDisplayNamesEnabledForAll (copy), RealNamesInDisplayNamesIXPV1 (copy), RealNamesInDisplayNamesExperimentDefinition (copy)
+	return if RealNamesInDisplayNamesEnabledForAll then true else ((p1 or {})[RealNamesInDisplayNamesIXPV1] or {})[RealNamesInDisplayNamesExperimentDefinition] == true
 end
 
 return {
-	isExperimentEnabled = var1,
-	useIsExperimentEnabled = function(p1)
-		-- upvalues: useUserExperiment (ref), realNamesInDisplayNamesIXPV1 (ref), var1 (ref)
-		return useUserExperiment({ realNamesInDisplayNamesIXPV1 }, var1, p1.isExposureEnabled)
+	isExperimentEnabled = IsExperimentEnabled,
+	useIsExperimentEnabled = function(p1) --[[ Line: 25 ]]
+		-- upvalues: UseUserExperimentFunction (copy), RealNamesInDisplayNamesIXPV1 (copy), IsExperimentEnabled (copy)
+		return UseUserExperimentFunction({ RealNamesInDisplayNamesIXPV1 }, IsExperimentEnabled, p1.isExposureEnabled)
 	end
 }

@@ -1,51 +1,51 @@
-﻿local parent = script:FindFirstAncestor("TrustedContacts").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local text = foundationModule.Text
-local view = foundationModule.View
-local useTokens = foundationModule.Hooks.useTokens
-local icon = foundationModule.Icon
-local iconSize = foundationModule.Enums.IconSize
-local iconVariant = require(parent.BuilderIcons).IconVariant
-local useDesignTokens = require(parent.Style).useDesignTokens
-local useProfileInsightsToIconsAndTextsModule = require(script.Parent.useProfileInsightsToIconsAndTexts)
+﻿local Parent = script:FindFirstAncestor("TrustedContacts").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local Icon = FoundationModule.Icon
+local IconSize = FoundationModule.Enums.IconSize
+local IconVariant = require(Parent.BuilderIcons).IconVariant
+local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
+local UseProfileInsightsToIconsAndTextsModule = require(script.Parent.useProfileInsightsToIconsAndTexts)
 
-return function(p1)
-	-- upvalues: useProfileInsightsToIconsAndTextsModule (ref), useDesignTokens (ref), useTokens (ref), reactModule (ref), view (ref), icon (ref), iconSize (ref), iconVariant (ref), text (ref)
-	local var1 = useProfileInsightsToIconsAndTextsModule(p1.profileInsightIconItems)
-	local var2 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: reactModule (copy), view (copy), icon (copy), iconSize (copy), iconVariant (copy), text (copy)
-		return reactModule.createElement(view, {
+return function(p1) --[[ Line: 28 | Named "SocialMetadataIconsAndTextsSection" ]]
+	-- upvalues: UseProfileInsightsToIconsAndTextsModule (copy), UseDesignTokensFunction (copy), UseTokensFunction (copy), ReactModule (copy), View (copy), Icon (copy), IconSize (copy), IconVariant (copy), Text (copy)
+	local UseProfileInsightsToIconsAndTextsModuleResult = UseProfileInsightsToIconsAndTextsModule(p1.profileInsightIconItems)
+	local UseResult = ReactModule.useCallback(function(p2, LayoutOrder) --[[ Line: 34 ]]
+		-- upvalues: ReactModule (upval), View (upval), Icon (upval), IconSize (upval), IconVariant (upval), Text (upval)
+		return ReactModule.createElement(View, {
 			tag = "auto-xy size-0 row align-y-center gap-xsmall padding-x-xsmall",
-			LayoutOrder = p3
+			LayoutOrder = LayoutOrder
 		}, {
-			Icon = reactModule.createElement(icon, {
+			Icon = ReactModule.createElement(Icon, {
 				LayoutOrder = 1,
 				name = p2.icon,
-				size = iconSize.XSmall,
-				variant = iconVariant.Filled
+				size = IconSize.XSmall,
+				variant = IconVariant.Filled
 			}),
-			Text = reactModule.createElement(text, {
+			Text = ReactModule.createElement(Text, {
 				tag = "auto-xy size-0 text-align-x-left text-truncate-end text-body-medium",
 				LayoutOrder = 2,
 				Text = p2.text
 			})
 		})
-	end, { useDesignTokens(), useTokens() })
-	local t = {}
+	end, { UseDesignTokensFunction(), (UseTokensFunction()) })
+	local List = {}
 	
-	for i, v in pairs(var1) do
-		table.insert(t, var2(v, i))
+	for i, value in pairs(UseProfileInsightsToIconsAndTextsModuleResult) do
+		table.insert(List, (UseResult(value, i)))
 	end
-	return reactModule.useMemo(function()
-		-- upvalues: reactModule (copy), view (copy), p1 (ref), t (ref)
-		return reactModule.createElement(view, {
+	return ReactModule.useMemo(function() --[[ Line: 59 ]]
+		-- upvalues: ReactModule (upval), View (upval), p1 (copy), List (copy)
+		return ReactModule.createElement(View, {
 			tag = {
 				["row auto-y size-full-0 wrap align-x-left"] = true,
 				["gap-xsmall"] = p1.isVerticallyConstrained,
 				["gap-small"] = not p1.isVerticallyConstrained
 			},
 			LayoutOrder = p1.layoutOrder
-		}, t)
-	end, { p1.profileInsightIconItems, t })
+		}, List)
+	end, { p1.profileInsightIconItems, List })
 end

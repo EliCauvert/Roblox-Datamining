@@ -1,40 +1,40 @@
-﻿local appTopBanner = script:FindFirstAncestor("AppTopBanner")
-local parent = appTopBanner.Parent
-local cryoModule = require(parent.Cryo)
-local roduxModule = require(parent.Rodux)
-local constantsModule = require(appTopBanner.Constants)
-local t = {
+﻿local AppTopBanner = script:FindFirstAncestor("AppTopBanner")
+local Parent = AppTopBanner.Parent
+local CryoModule = require(Parent.Cryo)
+local ConstantsModule = require(AppTopBanner.Constants)
+local config = {
 	isDisabled = true,
 	expanded = false,
 	appTopBannerContentProps = nil,
 	appTopBannerContentHeight = 0,
-	appTopBannerType = require(appTopBanner.Enums.AppTopBannerType).None,
-	onAppTopBannerClick = function() end
+	appTopBannerType = require(AppTopBanner.Enums.AppTopBannerType).None,
+	onAppTopBannerClick = function() --[[ Line: 37 ]] end
 }
 
-return roduxModule.createReducer(t, {
-	[require(appTopBanner.Actions.SetAppTopBanner).name] = function(p1, p2)
-		-- upvalues: cryoModule (ref), constantsModule (ref), t (ref)
-		local isDisabled = p1.isDisabled
+return require(Parent.Rodux).createReducer(config, {
+	[require(AppTopBanner.Actions.SetAppTopBanner).name] = function(JoinResult, p1) --[[ Line: 41 ]]
+		-- upvalues: CryoModule (copy), ConstantsModule (copy), config (copy)
+		local IsDisabled = JoinResult.isDisabled
 		
-		if p2.expanded then
-			p1 = cryoModule.Dictionary.join(p1, {
-				expanded = p2.expanded,
-				appTopBannerType = p2.appTopBannerType,
-				appTopBannerContentProps = p2.appTopBannerContentProps,
-				onAppTopBannerClick = p2.onAppTopBannerClick,
-				appTopBannerContentHeight = p2.appTopBannerContentHeight or constantsModule.CONTENT_HEIGHT,
-				isDisabled = isDisabled
+		if p1.expanded then
+			JoinResult = CryoModule.Dictionary.join(JoinResult, {
+				expanded = p1.expanded,
+				appTopBannerType = p1.appTopBannerType,
+				appTopBannerContentProps = p1.appTopBannerContentProps,
+				onAppTopBannerClick = p1.onAppTopBannerClick,
+				appTopBannerContentHeight = p1.appTopBannerContentHeight or ConstantsModule.CONTENT_HEIGHT,
+				isDisabled = IsDisabled
 			})
 			
-			return p1
-		elseif p1.expanded ~= p2.expanded then
-			p1 = cryoModule.Dictionary.join(t, { isDisabled = isDisabled })
+			return JoinResult
 		end
-		return p1
+		if JoinResult.expanded ~= p1.expanded then
+			JoinResult = CryoModule.Dictionary.join(config, { isDisabled = IsDisabled })
+		end
+		return JoinResult
 	end,
-	[require(appTopBanner.Actions.DisableAppTopBanner).name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return if p1.isDisabled == p2.isDisabled then p1 else cryoModule.Dictionary.join(p1, { isDisabled = not p1.isDisabled })
+	[require(AppTopBanner.Actions.DisableAppTopBanner).name] = function(p1, p2) --[[ Line: 61 ]]
+		-- upvalues: CryoModule (copy)
+		return if p1.isDisabled == p2.isDisabled then p1 else CryoModule.Dictionary.join(p1, { isDisabled = not p1.isDisabled })
 	end
 })

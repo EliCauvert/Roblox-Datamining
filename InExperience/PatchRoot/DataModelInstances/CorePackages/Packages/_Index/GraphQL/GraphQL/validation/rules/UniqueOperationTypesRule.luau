@@ -1,31 +1,29 @@
-﻿local graphQLError = require(script.Parent.Parent.Parent.error.GraphQLError).GraphQLError
+﻿local GraphQLError = require(script.Parent.Parent.Parent.error.GraphQLError).GraphQLError
 
 return {
-	UniqueOperationTypesRule = function(p1)
-		-- upvalues: graphQLError (ref)
-		local var1
-		local schema = p1:getSchema()
+	UniqueOperationTypesRule = function(p1) --[[ Line: 19 ]]
+		-- upvalues: GraphQLError (copy)
+		local Schema = p1:getSchema()
 		local t = {}
+		local Config = Schema and {
+			query = Schema:getQueryType(),
+			mutation = Schema:getMutationType(),
+			subscription = Schema:getSubscriptionType()
+		} or {}
 		
-		if schema then
-			var1 = {
-				query = schema:getQueryType(),
-				mutation = schema:getMutationType(),
-				subscription = schema:getSubscriptionType()
-			} or {}
-		end
-		local function checkOperationTypes(_, p2)
-			-- upvalues: t (ref), var1 (ref), p1 (ref), graphQLError (copy)
-			for i, v in ipairs(p2.operationTypes or {}) do
-				local operation = v.operation
-				local var2 = t[operation]
+		local function checkOperationTypes(_, p2): boolean --[[ Line: 32 ]]
+			-- upvalues: t (copy), Config (copy), p1 (copy), GraphQLError (upval)
+			local OperationTypes = p2.operationTypes or {}
+			for _, operationType in ipairs(OperationTypes) do
+				local Operation = operationType.operation
+				local Entry = t[Operation]
 				
-				if var1[operation] then
-					p1:reportError(graphQLError.new(("Type for %s already defined in the schema. It cannot be redefined."):format(operation), v))
-				elseif var2 then
-					p1:reportError(graphQLError.new(("There can be only one %s type in schema."):format(operation), { var2, v }))
+				if Config[Operation] then
+					p1:reportError(GraphQLError.new(("Type for %s already defined in the schema. It cannot be redefined."):format(Operation), operationType))
+				elseif Entry then
+					p1:reportError(GraphQLError.new(("There can be only one %s type in schema."):format(Operation), { Entry, operationType }))
 				else
-					t[operation] = v
+					t[Operation] = operationType
 				end
 			end
 			return false

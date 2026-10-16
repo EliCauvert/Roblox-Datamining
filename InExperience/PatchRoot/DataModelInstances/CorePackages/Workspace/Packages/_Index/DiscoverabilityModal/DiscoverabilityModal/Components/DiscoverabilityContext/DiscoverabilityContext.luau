@@ -1,28 +1,28 @@
-﻿local parent = script.Parent.Parent.Parent
-local dependenciesModule = require(parent.dependencies)
-local constantsModule = require(parent.Common.Constants)
-local react = dependenciesModule.React
-local discoverabilityModalAnalyticsContextModule = require(parent.Analytics.DiscoverabilityModalAnalyticsContext)
-local setupFireAnalyticsEventsModule = require(parent.Analytics.setupFireAnalyticsEvents)
-local analyticsServiceModule = require(parent.Analytics.AnalyticsService)
-local useSelector = dependenciesModule.Hooks.useSelector
+﻿local Parent = script.Parent.Parent.Parent
+local DependenciesModule = require(Parent.dependencies)
+local ConstantsModule = require(Parent.Common.Constants)
+local React = DependenciesModule.React
+local DiscoverabilityModalAnalyticsContextModule = require(Parent.Analytics.DiscoverabilityModalAnalyticsContext)
+local SetupFireAnalyticsEventsModule = require(Parent.Analytics.setupFireAnalyticsEvents)
+local AnalyticsServiceModule = require(Parent.Analytics.AnalyticsService)
+local UseSelectorFunction = DependenciesModule.Hooks.useSelector
 
-return function(p1)
-	-- upvalues: useSelector (ref), react (ref), discoverabilityModalAnalyticsContextModule (ref), setupFireAnalyticsEventsModule (ref), analyticsServiceModule (ref), constantsModule (ref)
-	return function(p2)
-		-- upvalues: useSelector (copy), react (copy), discoverabilityModalAnalyticsContextModule (copy), setupFireAnalyticsEventsModule (copy), analyticsServiceModule (copy), constantsModule (copy), p1 (ref)
-		return react.createElement(discoverabilityModalAnalyticsContextModule.Provider, {
+return function(p1) --[[ Line: 11 | Named "Container" ]]
+	-- upvalues: UseSelectorFunction (copy), React (copy), DiscoverabilityModalAnalyticsContextModule (copy), SetupFireAnalyticsEventsModule (copy), AnalyticsServiceModule (copy), ConstantsModule (copy)
+	return function(p2) --[[ Line: 12 ]]
+		-- upvalues: UseSelectorFunction (upval), React (upval), DiscoverabilityModalAnalyticsContextModule (upval), SetupFireAnalyticsEventsModule (upval), AnalyticsServiceModule (upval), ConstantsModule (upval), p1 (copy)
+		return React.createElement(DiscoverabilityModalAnalyticsContextModule.Provider, {
 			value = {
-				fireAnalyticsEvent = setupFireAnalyticsEventsModule({
-					analytics = analyticsServiceModule,
+				fireAnalyticsEvent = SetupFireAnalyticsEventsModule({
+					analytics = AnalyticsServiceModule,
 					defaultAnalyticsInfo = {
-						uid = useSelector(function(p3)
+						uid = UseSelectorFunction(function(p3) --[[ Line: 13 ]]
 							return p3.LocalUserId
 						end),
-						entry = if p2.navigation then p2.navigation.getParam(constantsModule.ENTRY_POINT) else p2.entryPoint
+						entry = if p2.navigation then p2.navigation.getParam(ConstantsModule.ENTRY_POINT) else p2.entryPoint
 					}
 				})
 			}
-		}, { react.createElement(p1, p2) })
+		}, { React.createElement(p1, p2) })
 	end
 end

@@ -1,36 +1,36 @@
-﻿local serverTriggeredModals = script:FindFirstAncestor("ServerTriggeredModals")
-local parent = serverTriggeredModals.Parent
-local reactModule = require(parent.React)
-local sduiFeatureEntryPoint = require(parent.SduiSharedUtilities).SduiFeatureEntryPoint
-local loggerModule = require(serverTriggeredModals.Logger)
-local reportPromptImpressionModule = require(serverTriggeredModals.reportPromptImpression)
-local sendModalImpressionEvent = require(parent.ServerTriggeredModalImpressions).sendModalImpressionEvent
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagEnableHomepagePromptsForModalsAndBanners = sharedFlagsModule.FFlagEnableHomepagePromptsForModalsAndBanners
-local fFlagPromptsHandlerEnabled = sharedFlagsModule.FFlagPromptsHandlerEnabled
-local fFlagPromptsActionEventLoggingModule = require(serverTriggeredModals.Flags.FFlagPromptsActionEventLogging)
+﻿local ServerTriggeredModals = script:FindFirstAncestor("ServerTriggeredModals")
+local Parent = ServerTriggeredModals.Parent
+local ReactModule = require(Parent.React)
+local SduiFeatureEntryPoint = require(Parent.SduiSharedUtilities).SduiFeatureEntryPoint
+local LoggerModule = require(ServerTriggeredModals.Logger)
+local ReportPromptImpressionModule = require(ServerTriggeredModals.reportPromptImpression)
+local SendModalImpressionEventFunction = require(Parent.ServerTriggeredModalImpressions).sendModalImpressionEvent
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagEnableHomepagePromptsForModalsAndBanners = SharedFlagsModule.FFlagEnableHomepagePromptsForModalsAndBanners
+local FFlagPromptsHandlerEnabled = SharedFlagsModule.FFlagPromptsHandlerEnabled
+local FFlagPromptsActionEventLoggingModule = require(ServerTriggeredModals.Flags.FFlagPromptsActionEventLogging)
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), reportPromptImpressionModule (ref), loggerModule (ref), sendModalImpressionEvent (ref), sduiFeatureEntryPoint (ref), fFlagEnableHomepagePromptsForModalsAndBanners (ref), fFlagPromptsHandlerEnabled (ref), fFlagPromptsActionEventLoggingModule (ref)
-	local modalId = p1.modalId
-	local modalType = p1.modalType
-	reactModule.useEffect(function()
-		-- upvalues: modalId (ref), modalType (ref), reportPromptImpressionModule (copy), loggerModule (copy), sendModalImpressionEvent (copy)
-		if modalId and modalType then
-			reportPromptImpressionModule(modalType, modalId):catch(function()
-				-- upvalues: loggerModule (copy)
-				loggerModule:warning("Failed to report prompt impression")
+return ReactModule.memo(function(p1) --[[ Line: 47 | Named "PromptsContainer" ]]
+	-- upvalues: ReactModule (copy), ReportPromptImpressionModule (copy), LoggerModule (copy), SendModalImpressionEventFunction (copy), SduiFeatureEntryPoint (copy), FFlagEnableHomepagePromptsForModalsAndBanners (copy), FFlagPromptsHandlerEnabled (copy), FFlagPromptsActionEventLoggingModule (copy)
+	local ModalId = p1.modalId
+	local ModalType = p1.modalType
+	ReactModule.useEffect(function() --[[ Line: 51 ]]
+		-- upvalues: ModalId (copy), ModalType (copy), ReportPromptImpressionModule (upval), LoggerModule (upval), SendModalImpressionEventFunction (upval)
+		if ModalId and ModalType then
+			ReportPromptImpressionModule(ModalType, ModalId):catch(function() --[[ Line: 53 ]]
+				-- upvalues: LoggerModule (upval)
+				LoggerModule:warning("Failed to report prompt impression")
 			end)
-			sendModalImpressionEvent(modalId, modalType)
+			SendModalImpressionEventFunction(ModalId, ModalType)
 		end
-	end, { modalId, modalType })
+	end, { ModalId, ModalType })
 	
-	return reactModule.createElement(sduiFeatureEntryPoint, {
+	return ReactModule.createElement(SduiFeatureEntryPoint, {
 		shouldDisplayLoading = false,
 		shouldDisplayError = false,
 		configKey = p1.configKey,
-		identifier = if fFlagEnableHomepagePromptsForModalsAndBanners or fFlagPromptsHandlerEnabled then p1.modalId else nil,
+		identifier = if FFlagEnableHomepagePromptsForModalsAndBanners or FFlagPromptsHandlerEnabled then p1.modalId else nil,
 		appPage = p1.appPage,
-		additionalAnalyticsData = if fFlagPromptsActionEventLoggingModule then { promptInstanceId = modalId or nil } else nil
+		additionalAnalyticsData = if FFlagPromptsActionEventLoggingModule then { promptInstanceId = ModalId or nil } else nil
 	})
 end)

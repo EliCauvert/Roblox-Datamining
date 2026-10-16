@@ -1,9 +1,9 @@
-﻿return function(p1, p2, p3)
-	local var1 = p1.useMemo(p2, p3)
-	p1.useEffect(function()
-		-- upvalues: var1 (ref)
-		return var1.destroy
-	end, { var1 })
+﻿return function(p1, p2, p3) --[[ Line: 1 | Named "useManagedLayout" ]]
+	local UseMemoResult = p1.useMemo(p2, p3)
+	p1.useEffect(function() --[[ Line: 3 ]]
+		-- upvalues: UseMemoResult (copy)
+		return UseMemoResult.destroy
+	end, { UseMemoResult })
 	
-	return var1
+	return UseMemoResult
 end

@@ -1,27 +1,26 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local roduxModule = require(parent.Rodux)
-local dictionary = require(parent.llama).Dictionary
-local configModule = require(expChat.Config)
-local actions = expChat.Actions
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local Dictionary = require(Parent.llama).Dictionary
+local ConfigModule = require(ExpChat.Config)
+local Actions = ExpChat.Actions
 
-return roduxModule.createReducer({
-	BackgroundTransparency = configModule.ChannelTabsSettings.BackgroundTransparency,
-	BackgroundColor3 = configModule.ChannelTabsSettings.BackgroundColor3,
-	HoverBackgroundColor3 = configModule.ChannelTabsSettings.HoverBackgroundColor3,
-	FontFace = configModule.ChannelTabsSettings.FontFace,
-	TextSize = configModule.ChannelTabsSettings.TextSize,
-	TextColor3 = configModule.ChannelTabsSettings.TextColor3,
-	SelectedTabTextColor3 = configModule.ChannelTabsSettings.SelectedTabTextColor3,
-	TextStrokeColor3 = configModule.ChannelTabsSettings.TextStrokeColor3,
-	TextStrokeTransparency = configModule.ChannelTabsSettings.TextStrokeTransparency
+return require(Parent.Rodux).createReducer({
+	BackgroundTransparency = ConfigModule.ChannelTabsSettings.BackgroundTransparency,
+	BackgroundColor3 = ConfigModule.ChannelTabsSettings.BackgroundColor3,
+	HoverBackgroundColor3 = ConfigModule.ChannelTabsSettings.HoverBackgroundColor3,
+	FontFace = ConfigModule.ChannelTabsSettings.FontFace,
+	TextSize = ConfigModule.ChannelTabsSettings.TextSize,
+	TextColor3 = ConfigModule.ChannelTabsSettings.TextColor3,
+	SelectedTabTextColor3 = ConfigModule.ChannelTabsSettings.SelectedTabTextColor3,
+	TextStrokeColor3 = ConfigModule.ChannelTabsSettings.TextStrokeColor3,
+	TextStrokeTransparency = ConfigModule.ChannelTabsSettings.TextStrokeTransparency
 }, {
-	[require(actions.ConfigurationObjectsLoaded).name] = function(p1, p2)
-		-- upvalues: dictionary (ref)
-		return dictionary.join(p1, p2.channelTabsSettings)
+	[require(Actions.ConfigurationObjectsLoaded).name] = function(p1, p2) --[[ Line: 25 ]]
+		-- upvalues: Dictionary (copy)
+		return Dictionary.join(p1, p2.channelTabsSettings)
 	end,
-	[require(actions.ChannelTabsSettingsChanged).name] = function(p1, p2)
-		-- upvalues: dictionary (ref)
-		return if p1[p2.property] then dictionary.join(p1, { [p2.property] = p2.value }) else p1
+	[require(Actions.ChannelTabsSettingsChanged).name] = function(p1, p2) --[[ Line: 29 ]]
+		-- upvalues: Dictionary (copy)
+		return if p1[p2.property] then Dictionary.join(p1, { [p2.property] = p2.value }) else p1
 	end
 })

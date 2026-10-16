@@ -1,71 +1,67 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local coreGuiService = game:GetService("CoreGui")
-local httpService = game:GetService("HttpService")
-local localizationService = game:GetService("LocalizationService")
-local robloxGui = coreGuiService.RobloxGui
-local abuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
-local coreScriptsRootProvider = require(corePackagesService.Workspace.Packages.CoreScriptsRoactCommon).CoreScriptsRootProvider
-local reactModule = require(corePackagesService.Packages.React)
-local requestInternalWrapper = require(corePackagesService.Workspace.Packages.Http).NetworkLayers.requestInternalWrapper
-local roactNetworking = require(corePackagesService.Workspace.Packages.RoactServiceTags).RoactNetworking
-local roactServices = require(corePackagesService.Workspace.Packages.RoactServices).RoactServices
-local focusNavigationUtilsModule = require(corePackagesService.Workspace.Packages.FocusNavigationUtils)
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local focusRoot = focusNavigationUtilsModule.FocusRoot
-local useRegistryEntry = focusNavigationUtilsModule.FocusNavigableSurfaceRegistry.useRegistryEntry
-local dynamicReportInExpContainerModule = require(corePackagesService.Workspace.Packages.GenericAbuseReporting.DynamicReportInExpContainer)
-local localization = require(corePackagesService.Workspace.Packages.InExperienceLocales).Localization
-local localizationProvider = require(corePackagesService.Workspace.Packages.Localization).LocalizationProvider
-local default = require(robloxGui.Modules.VoiceChat.VoiceChatServiceManager).default
-local useCaptureScreenshotV2Module = require(abuseReportMenu.Hooks.useCaptureScreenshotV2)
-local useSettingsHubCloseButtonModule = require(script.Parent.useSettingsHubCloseButton)
-local isAbuseReportMenuOpenCloseSignalEnabledModule = require(abuseReportMenu.Flags.isAbuseReportMenuOpenCloseSignalEnabled)
-local fFlagReportFocusNavCloseButtonModule = require(abuseReportMenu.Flags.FFlagReportFocusNavCloseButton)
-local fIntAbuseReportTabClearCapturedScreenshotOnCloseFixDelayModule = require(abuseReportMenu.Flags.FIntAbuseReportTabClearCapturedScreenshotOnCloseFixDelay)
-local safetyServiceSignalsModule = require(script.Parent.safetyServiceSignals)
-local inExpChatMessagesLoaderModule = require(script.Parent.inExpChatMessagesLoader)
-local inExpVoiceUsersLoaderModule = require(script.Parent.inExpVoiceUsersLoader)
-local setTimeout = require(corePackagesService.Packages.LuauPolyfill).setTimeout
+﻿local CorePackages = game:GetService("CorePackages")
+local HttpService = game:GetService("HttpService")
+local LocalizationService = game:GetService("LocalizationService")
+local AbuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
+local CoreScriptsRootProvider = require(CorePackages.Workspace.Packages.CoreScriptsRoactCommon).CoreScriptsRootProvider
+local ReactModule = require(CorePackages.Packages.React)
+local RequestInternalWrapperFunction = require(CorePackages.Workspace.Packages.Http).NetworkLayers.requestInternalWrapper
+local RoactNetworking = require(CorePackages.Workspace.Packages.RoactServiceTags).RoactNetworking
+local RoactServices = require(CorePackages.Workspace.Packages.RoactServices).RoactServices
+local FocusNavigationUtilsModule = require(CorePackages.Workspace.Packages.FocusNavigationUtils)
+local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+local FocusRoot = FocusNavigationUtilsModule.FocusRoot
+local UseRegistryEntryFunction = FocusNavigationUtilsModule.FocusNavigableSurfaceRegistry.useRegistryEntry
+local DynamicReportInExpContainerModule = require(CorePackages.Workspace.Packages.GenericAbuseReporting.DynamicReportInExpContainer)
+local Localization = require(CorePackages.Workspace.Packages.InExperienceLocales).Localization
+local LocalizationProvider = require(CorePackages.Workspace.Packages.Localization).LocalizationProvider
+local Default = require(game:GetService("CoreGui").RobloxGui.Modules.VoiceChat.VoiceChatServiceManager).default
+local UseCaptureScreenshotV2Module = require(AbuseReportMenu.Hooks.useCaptureScreenshotV2)
+local UseSettingsHubCloseButtonModule = require(script.Parent.useSettingsHubCloseButton)
+local IsAbuseReportMenuOpenCloseSignalEnabledModule = require(AbuseReportMenu.Flags.isAbuseReportMenuOpenCloseSignalEnabled)
+local FFlagReportFocusNavCloseButtonModule = require(AbuseReportMenu.Flags.FFlagReportFocusNavCloseButton)
+local FIntAbuseReportTabClearCapturedScreenshotOnCloseFixDelayModule = require(AbuseReportMenu.Flags.FIntAbuseReportTabClearCapturedScreenshotOnCloseFixDelay)
+local SafetyServiceSignalsModule = require(script.Parent.safetyServiceSignals)
+local InExpChatMessagesLoaderModule = require(script.Parent.inExpChatMessagesLoader)
+local InExpVoiceUsersLoaderModule = require(script.Parent.inExpVoiceUsersLoader)
+local SetTimeoutFunction = require(CorePackages.Packages.LuauPolyfill).setTimeout
 
-local function _()
-	-- upvalues: isAbuseReportMenuOpenCloseSignalEnabledModule (ref)
-	return isAbuseReportMenuOpenCloseSignalEnabledModule()
+local function _() --[[ Line: 41 | Named "shouldEmitMenuOpenCloseSignal" ]]
+	-- upvalues: IsAbuseReportMenuOpenCloseSignalEnabledModule (copy)
+	return IsAbuseReportMenuOpenCloseSignalEnabledModule()
 end
 
-local function AbuseReportMenuContentInner(p1)
-	-- upvalues: useRegistryEntry (ref), focusNavigableSurfaceIdentifierEnum (ref), fFlagReportFocusNavCloseButtonModule (ref), useSettingsHubCloseButtonModule (ref), reactModule (ref), focusRoot (ref), dynamicReportInExpContainerModule (ref), inExpChatMessagesLoaderModule (ref), inExpVoiceUsersLoaderModule (ref), default (ref)
-	local var1 = useRegistryEntry(focusNavigableSurfaceIdentifierEnum.CentralOverlay) == nil
-	local var2 = nil
-	local var3 = nil
+local function AbuseReportMenuContentInner(p1) --[[ Line: 75 ]]
+	-- upvalues: UseRegistryEntryFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), FFlagReportFocusNavCloseButtonModule (copy), UseSettingsHubCloseButtonModule (copy), ReactModule (copy), FocusRoot (copy), DynamicReportInExpContainerModule (copy), InExpChatMessagesLoaderModule (copy), InExpVoiceUsersLoaderModule (copy), Default (copy)
+	local NoUseRegistryEntryResult = UseRegistryEntryFunction(FocusNavigableSurfaceIdentifierEnum.CentralOverlay) == nil
+	local NextSelectionUp = nil
+	local v1 = nil
 	
-	if fFlagReportFocusNavCloseButtonModule then
-		local var4, var5 = useSettingsHubCloseButtonModule(p1.getSettingsHubRef, p1.isReportTabVisible)
-		var2 = var4
-		var3 = var5
+	if FFlagReportFocusNavCloseButtonModule then
+		NextSelectionUp, v28 = UseSettingsHubCloseButtonModule(p1.getSettingsHubRef, p1.isReportTabVisible)
 	end
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Position = UDim2.new(0, 0, 0, 0),
 		Size = UDim2.new(1, 0, 1, 0)
 	}, {
-		FocusNavigationCoreScriptsWrapper = reactModule.createElement(focusRoot, {
+		FocusNavigationCoreScriptsWrapper = ReactModule.createElement(FocusRoot, {
 			isIsolated = true,
 			frameProps = {
 				Size = UDim2.new(1, 0, 1, 0),
-				SelectionBehaviorUp = if fFlagReportFocusNavCloseButtonModule and var2 ~= nil then Enum.SelectionBehavior.Escape else nil,
-				NextSelectionUp = var2
+				SelectionBehaviorUp = if FFlagReportFocusNavCloseButtonModule and NextSelectionUp ~= nil then Enum.SelectionBehavior.Escape else nil,
+				NextSelectionUp = NextSelectionUp
 			},
-			isFocusable = var1,
-			isAutoFocusRoot = if fFlagReportFocusNavCloseButtonModule then not var3 else true,
-			surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.RouterView
+			isFocusable = NoUseRegistryEntryResult,
+			isAutoFocusRoot = not FFlagReportFocusNavCloseButtonModule or not v1,
+			surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.RouterView
 		}, {
-			DynamicReportInExpContainer = reactModule.createElement(dynamicReportInExpContainerModule, {
+			DynamicReportInExpContainer = ReactModule.createElement(DynamicReportInExpContainerModule, {
 				onClose = p1.onClose,
 				isReportTabVisible = p1.isReportTabVisible,
 				reportAnythingSnapshotRef = p1.reportAnythingSnapshotRef,
-				inExpChatMessagesLoader = inExpChatMessagesLoaderModule,
-				inExpVoiceUsersLoader = inExpVoiceUsersLoaderModule,
-				voiceChatServiceManager = default,
+				inExpChatMessagesLoader = InExpChatMessagesLoaderModule,
+				inExpVoiceUsersLoader = InExpVoiceUsersLoaderModule,
+				voiceChatServiceManager = Default,
 				preselectedPlayer = p1.preselectedPlayer,
 				onReportFinish = p1.onReportFinish
 			})
@@ -73,94 +69,102 @@ local function AbuseReportMenuContentInner(p1)
 	})
 end
 
-local function AbuseReportMenuContent(p1)
-	-- upvalues: reactModule (ref), useCaptureScreenshotV2Module (ref), isAbuseReportMenuOpenCloseSignalEnabledModule (ref), safetyServiceSignalsModule (ref), setTimeout (ref), fIntAbuseReportTabClearCapturedScreenshotOnCloseFixDelayModule (ref), AbuseReportMenuContentInner (ref), fFlagReportFocusNavCloseButtonModule (ref)
-	local var1, var2 = reactModule.useState(false)
-	local var3, var4 = reactModule.useState(nil)
-	local var5 = useCaptureScreenshotV2Module()
-	local var6 = reactModule.useRef(p1.hideReportTab)
-	var6.current = p1.hideReportTab
-	local var7 = reactModule.useRef(p1.showReportTab)
-	var7.current = p1.showReportTab
-	local var8 = reactModule.useRef(false)
-	local var9 = reactModule.useRef(false)
-	reactModule.useEffect(function()
-		-- upvalues: var8 (ref), var2 (ref), var5 (ref), var6 (ref), var7 (ref), p1 (ref), var9 (ref), var4 (ref), isAbuseReportMenuOpenCloseSignalEnabledModule (copy), safetyServiceSignalsModule (copy), setTimeout (copy), fIntAbuseReportTabClearCapturedScreenshotOnCloseFixDelayModule (copy)
-		p1.registerOnReportTabDisplaying(function()
-			-- upvalues: var8 (copy), var2 (copy), var5 (copy), var6 (copy), var7 (copy)
-			if var8.current then
+local function AbuseReportMenuContent(p1) --[[ Line: 126 ]]
+	-- upvalues: ReactModule (copy), UseCaptureScreenshotV2Module (copy), IsAbuseReportMenuOpenCloseSignalEnabledModule (copy), SafetyServiceSignalsModule (copy), SetTimeoutFunction (copy), FIntAbuseReportTabClearCapturedScreenshotOnCloseFixDelayModule (copy), AbuseReportMenuContentInner (copy), FFlagReportFocusNavCloseButtonModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
+	local UseCaptureScreenshotV2ModuleResult = UseCaptureScreenshotV2Module()
+	local UseRefResult = ReactModule.useRef(p1.hideReportTab)
+	UseRefResult.current = p1.hideReportTab
+	local UseRefResult1 = ReactModule.useRef(p1.showReportTab)
+	UseRefResult1.current = p1.showReportTab
+	local UseRefResult2 = ReactModule.useRef(false)
+	local UseRefResult3 = ReactModule.useRef(false)
+	ReactModule.useEffect(function() --[[ Line: 151 ]]
+		-- upvalues: UseRefResult2 (copy), UseStateResult2 (copy), UseCaptureScreenshotV2ModuleResult (copy), UseRefResult (copy), UseRefResult1 (copy), p1 (copy), UseRefResult3 (copy), UseStateResult2_1 (copy), IsAbuseReportMenuOpenCloseSignalEnabledModule (upval), SafetyServiceSignalsModule (upval), SetTimeoutFunction (upval), FIntAbuseReportTabClearCapturedScreenshotOnCloseFixDelayModule (upval)
+		p1.registerOnReportTabDisplaying(function() --[[ Line: 152 | Named "onOpen" ]]
+			-- upvalues: UseRefResult2 (upval), UseStateResult2 (upval), UseCaptureScreenshotV2ModuleResult (upval), UseRefResult (upval), UseRefResult1 (upval)
+			if not UseRefResult2.current then
+				UseRefResult2.current = true
+				UseStateResult2(true)
+				UseCaptureScreenshotV2ModuleResult.captureIfApplicable({
+					hide = UseRefResult.current,
+					show = UseRefResult1.current
+				})
+				
 				return
 			end
-			var8.current = true
-			var2(true)
-			var5.captureIfApplicable({ hide = var6.current, show = var7.current })
 		end)
-		p1.registerOnReportTabHidden(function()
-			-- upvalues: var5 (copy), var8 (copy), var9 (copy), var2 (copy), var4 (copy), isAbuseReportMenuOpenCloseSignalEnabledModule (copy), safetyServiceSignalsModule (copy)
-			if var5.getIsCapturing() then return end
-			var8.current = false
-			var9.current = false
-			var2(false)
-			var4(nil)
+		p1.registerOnReportTabHidden(function() --[[ Line: 169 ]]
+			-- upvalues: UseCaptureScreenshotV2ModuleResult (upval), UseRefResult2 (upval), UseRefResult3 (upval), UseStateResult2 (upval), UseStateResult2_1 (upval), IsAbuseReportMenuOpenCloseSignalEnabledModule (upval), SafetyServiceSignalsModule (upval)
+			if UseCaptureScreenshotV2ModuleResult.getIsCapturing() then return end
+			UseRefResult2.current = false
+			UseRefResult3.current = false
+			UseStateResult2(false)
+			UseStateResult2_1(nil)
 			
-			if isAbuseReportMenuOpenCloseSignalEnabledModule() then
-				safetyServiceSignalsModule.reportMenuTabClose()
+			if IsAbuseReportMenuOpenCloseSignalEnabledModule() then
+				SafetyServiceSignalsModule.reportMenuTabClose()
 			end
 		end)
-		p1.registerSetNextPlayerToReport(function(p2)
-			-- upvalues: var4 (copy)
-			var4(p2)
+		p1.registerSetNextPlayerToReport(function(p2) --[[ Line: 185 ]]
+			-- upvalues: UseStateResult2_1 (upval)
+			UseStateResult2_1(p2)
 		end)
-		p1.registerOnSettingsHidden(function()
-			-- upvalues: setTimeout (copy), var8 (copy), var5 (copy), fIntAbuseReportTabClearCapturedScreenshotOnCloseFixDelayModule (copy)
-			setTimeout(function()
-				-- upvalues: var8 (copy), var5 (copy)
-				if not var8.current then
-					var5.reset()
+		p1.registerOnSettingsHidden(function() --[[ Line: 189 ]]
+			-- upvalues: SetTimeoutFunction (upval), UseRefResult2 (upval), UseCaptureScreenshotV2ModuleResult (upval), FIntAbuseReportTabClearCapturedScreenshotOnCloseFixDelayModule (upval)
+			SetTimeoutFunction(function() --[[ Line: 196 ]]
+				-- upvalues: UseRefResult2 (upval), UseCaptureScreenshotV2ModuleResult (upval)
+				if not UseRefResult2.current then
+					UseCaptureScreenshotV2ModuleResult.reset()
 				end
-			end, fIntAbuseReportTabClearCapturedScreenshotOnCloseFixDelayModule)
+			end, FIntAbuseReportTabClearCapturedScreenshotOnCloseFixDelayModule)
 		end)
 	end, {
 		p1.registerOnReportTabHidden, p1.registerSetNextPlayerToReport,
 		p1.registerOnSettingsHidden, p1.registerOnReportTabDisplaying,
-		var5.captureIfApplicable, var5.getIsCapturing, var5.reset
+		UseCaptureScreenshotV2ModuleResult.captureIfApplicable,
+		UseCaptureScreenshotV2ModuleResult.getIsCapturing,
+		UseCaptureScreenshotV2ModuleResult.reset
 	})
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), var9 (ref), isAbuseReportMenuOpenCloseSignalEnabledModule (copy), var5 (ref), safetyServiceSignalsModule (copy)
-		if not var1 or var9.current then return end
-		if not isAbuseReportMenuOpenCloseSignalEnabledModule() then return end
-		if not var5.isCaptureApplicable or var5.isScreenshotTaken then
-			var9.current = true
-			safetyServiceSignalsModule.reportMenuTabOpen()
+	ReactModule.useEffect(function() --[[ Line: 219 ]]
+		-- upvalues: UseStateResult (copy), UseRefResult3 (copy), IsAbuseReportMenuOpenCloseSignalEnabledModule (upval), UseCaptureScreenshotV2ModuleResult (copy), SafetyServiceSignalsModule (upval)
+		if not UseStateResult or UseRefResult3.current then return end
+		if not IsAbuseReportMenuOpenCloseSignalEnabledModule() then return end
+		if not UseCaptureScreenshotV2ModuleResult.isCaptureApplicable or UseCaptureScreenshotV2ModuleResult.isScreenshotTaken then
+			UseRefResult3.current = true
+			SafetyServiceSignalsModule.reportMenuTabOpen()
 		end
 	end, {
-		var1,
-		var5.isScreenshotTaken,
-		var5.isCaptureApplicable
+		UseStateResult,
+		UseCaptureScreenshotV2ModuleResult.isScreenshotTaken,
+		UseCaptureScreenshotV2ModuleResult.isCaptureApplicable
 	})
 	
-	return reactModule.createElement(AbuseReportMenuContentInner, {
-		isReportTabVisible = var1,
-		preselectedPlayer = var3,
-		reportAnythingSnapshotRef = var5.snapshotRef,
-		getSettingsHubRef = if fFlagReportFocusNavCloseButtonModule then p1.getSettingsHubRef else nil,
+	return ReactModule.createElement(AbuseReportMenuContentInner, {
+		isReportTabVisible = UseStateResult,
+		preselectedPlayer = UseStateResult1,
+		reportAnythingSnapshotRef = UseCaptureScreenshotV2ModuleResult.snapshotRef,
+		getSettingsHubRef = if FFlagReportFocusNavCloseButtonModule then p1.getSettingsHubRef else nil,
 		onClose = p1.hideReportTab,
-		onReportFinish = function()
-			-- upvalues: var4 (ref)
-			var4(nil)
+		onReportFinish = function() --[[ Line: 245 ]]
+			-- upvalues: UseStateResult2_1 (copy)
+			UseStateResult2_1(nil)
 		end
 	})
 end
 
-return function(p1)
-	-- upvalues: localization (ref), localizationService (ref), reactModule (ref), coreScriptsRootProvider (ref), localizationProvider (ref), roactServices (ref), roactNetworking (ref), requestInternalWrapper (ref), httpService (ref), AbuseReportMenuContent (ref)
-	return reactModule.createElement(coreScriptsRootProvider, nil, reactModule.createElement(localizationProvider, {
-		localization = localization.new(localizationService.RobloxLocaleId)
+return function(p1) --[[ Line: 251 | Named "AbuseReportMenu" ]]
+	-- upvalues: Localization (copy), LocalizationService (copy), ReactModule (copy), CoreScriptsRootProvider (copy), LocalizationProvider (copy), RoactServices (copy), RoactNetworking (copy), RequestInternalWrapperFunction (copy), HttpService (copy), AbuseReportMenuContent (copy)
+	return ReactModule.createElement(CoreScriptsRootProvider, nil, ReactModule.createElement(LocalizationProvider, {
+		localization = Localization.new(LocalizationService.RobloxLocaleId)
 	}, {
-		ServicesProvider = reactModule.createElement(roactServices.ServiceProvider, {
-			services = { [roactNetworking] = requestInternalWrapper(httpService) }
+		ServicesProvider = ReactModule.createElement(RoactServices.ServiceProvider, {
+			services = {
+				[RoactNetworking] = RequestInternalWrapperFunction(HttpService)
+			}
 		}, {
-			AbuseReportMenuContent = reactModule.createElement(AbuseReportMenuContent, p1)
+			AbuseReportMenuContent = ReactModule.createElement(AbuseReportMenuContent, p1)
 		})
 	}))
 end

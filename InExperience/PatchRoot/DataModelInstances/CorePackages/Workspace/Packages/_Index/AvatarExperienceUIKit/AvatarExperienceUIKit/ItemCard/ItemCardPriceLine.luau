@@ -1,33 +1,32 @@
-﻿local avatarExperienceUIKit = script:FindFirstAncestor("AvatarExperienceUIKit")
-local parent = avatarExperienceUIKit.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
-local text = foundationModule.Text
-local icon = foundationModule.Icon
-local badge = foundationModule.Badge
-local iconSize = foundationModule.Enums.IconSize
-local badgeVariant = foundationModule.Enums.BadgeVariant
-local useTokens = foundationModule.Hooks.useTokens
-local useDesignTokens = require(parent.Style).useDesignTokens
-local getLocalizedPriceModule = require(avatarExperienceUIKit.ItemCard.Utils.getLocalizedPrice)
-local fFlagAXDurablesFooter = avatarExperienceFlagsModule.FFlagAXDurablesFooter
-local fFlagAXItemCardComponentsMemo = avatarExperienceFlagsModule.FFlagAXItemCardComponentsMemo
+﻿local AvatarExperienceUIKit = script:FindFirstAncestor("AvatarExperienceUIKit")
+local Parent = AvatarExperienceUIKit.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
+local Text = FoundationModule.Text
+local Icon = FoundationModule.Icon
+local Badge = FoundationModule.Badge
+local IconSize = FoundationModule.Enums.IconSize
+local BadgeVariant = FoundationModule.Enums.BadgeVariant
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
+local GetLocalizedPriceModule = require(AvatarExperienceUIKit.ItemCard.Utils.getLocalizedPrice)
+local FFlagAXDurablesFooter = AvatarExperienceFlagsModule.FFlagAXDurablesFooter
 
-local function renderIconTextPair(p1)
-	-- upvalues: reactModule (ref), icon (ref), iconSize (ref), text (ref)
-	local t = {}
+local function renderIconTextPair(p1) --[[ Line: 86 ]]
+	-- upvalues: ReactModule (copy), Icon (copy), IconSize (copy), Text (copy)
+	local Elements = {}
 	
 	if p1.iconName then
-		t[p1.iconKey] = reactModule.createElement(icon, {
+		Elements[p1.iconKey] = ReactModule.createElement(Icon, {
 			name = p1.iconName,
 			style = p1.resolvedColorStyle,
-			size = iconSize.Small,
+			size = IconSize.Small,
 			LayoutOrder = p1.iconLayoutOrder,
 			testId = p1.iconKey
 		})
 	end
-	t[p1.textKey] = reactModule.createElement(text, {
+	Elements[p1.textKey] = ReactModule.createElement(Text, {
 		textStyle = p1.resolvedColorStyle,
 		fontStyle = p1.tokens.Typography.BodyMedium,
 		LayoutOrder = p1.textLayoutOrder,
@@ -38,97 +37,100 @@ local function renderIconTextPair(p1)
 		TextTruncate = Enum.TextTruncate.SplitWord
 	})
 	
-	return t
+	return Elements
 end
 
-local function renderContentChildren(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: getLocalizedPriceModule (ref), renderIconTextPair (ref)
-	local icon = nil
-	local text = nil
-	local var1 = nil
-	local var2 = nil
+local function renderContentChildren(p1, PriceLineName, IconLayoutOrder, p2, ResolvedColorStyle, Tokens, DesignTokens) --[[ Line: 113 ]]
+	-- upvalues: GetLocalizedPriceModule (copy), renderIconTextPair (copy)
+	local Icon = nil
+	local Text = nil
+	local v1: string? = nil
+	local v2: string? = nil
 	
 	if p1.type == "price" then
-		icon = "robux"
-		text = getLocalizedPriceModule(p1.price)
-		var1 = "RobuxIcon"
-		var2 = "Amount"
+		Icon = "robux"
+		Text = GetLocalizedPriceModule(p1.price)
+		v1 = "RobuxIcon"
+		v2 = "Amount"
 	elseif p1.type == "timedOption" then
-		icon = p1.icon
-		text = p1.text
-		var1 = "TimedOptionIcon"
-		var2 = "TimedOptionText"
-	elseif p1.type == "text" then
-		text = p1.text
-		var1 = "Text"
-		var2 = "Text"
+		Icon = p1.icon
+		Text = p1.text
+		v1 = "TimedOptionIcon"
+		v2 = "TimedOptionText"
 	else
-		return {}
+		if p1.type ~= "text" then
+			return {}
+		end
+		Text = p1.text
+		v1 = "Text"
+		v2 = "Text"
 	end
-	return renderIconTextPair({
-		iconName = icon,
-		text = text,
-		iconKey = `{p2}{var1}`,
-		textKey = `{p2}{var2}`,
-		iconLayoutOrder = p3,
-		textLayoutOrder = if icon then p4 else p3,
-		resolvedColorStyle = p5,
-		tokens = p6,
-		designTokens = p7
-	})
+	return (renderIconTextPair({
+		iconName = Icon,
+		text = Text,
+		iconKey = `{PriceLineName}{v1}`,
+		textKey = `{PriceLineName}{v2}`,
+		iconLayoutOrder = IconLayoutOrder,
+		textLayoutOrder = if Icon then p2 else IconLayoutOrder,
+		resolvedColorStyle = ResolvedColorStyle,
+		tokens = Tokens,
+		designTokens = DesignTokens
+	}))
 end
 
-local function ItemCardPriceLine(p1)
-	-- upvalues: useTokens (ref), useDesignTokens (ref), reactModule (ref), badge (ref), badgeVariant (ref), iconSize (ref), fFlagAXDurablesFooter (ref), renderContentChildren (ref), icon (ref), text (ref), getLocalizedPriceModule (ref)
-	local var1 = useTokens()
-	local var2 = useDesignTokens()
+local function ItemCardPriceLine(Frame: Frame) --[[ Line: 158 ]]
+	-- upvalues: UseTokensFunction (copy), UseDesignTokensFunction (copy), ReactModule (copy), Badge (copy), BadgeVariant (copy), IconSize (copy), FFlagAXDurablesFooter (copy), renderContentChildren (copy), Icon (copy), Text (copy), GetLocalizedPriceModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseDesignTokensResult = UseDesignTokensFunction()
 	
-	if p1.content.type == "badge" then
-		return reactModule.createElement("Frame", {
+	if Frame.content.type == "badge" then
+		return (ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			AutomaticSize = Enum.AutomaticSize.XY,
-			LayoutOrder = p1.LayoutOrder
+			LayoutOrder = Frame.LayoutOrder
 		}, {
-			Padding = reactModule.createElement("UIPadding", { PaddingLeft = UDim.new(0, var1.Padding.XSmall) }),
-			Badge = reactModule.createElement(badge, {
-				text = p1.content.text,
-				variant = badgeVariant.Neutral,
-				Position = UDim2.new(0, 0, 0, -var1.Gap.XXSmall)
+			Padding = ReactModule.createElement("UIPadding", {
+				PaddingLeft = UDim.new(0, UseTokensResult.Padding.XSmall)
+			}),
+			Badge = ReactModule.createElement(Badge, {
+				text = Frame.content.text,
+				variant = BadgeVariant.Neutral,
+				Position = UDim2.new(0, 0, 0, -UseTokensResult.Gap.XXSmall)
 			})
-		})
+		}))
 	end
-	local var3 = if p1.content and p1.content.colorStyle then p1.content.colorStyle else var1.Color.Content.Emphasis
-	local var4 = if p1.content and p1.content.iconSize then p1.content.iconSize else iconSize.Small
-	local var5 = if p1.content and p1.content.fontStyle then p1.content.fontStyle else var1.Typography.BodyMedium
+	local ColorStyle = if Frame.content and Frame.content.colorStyle then Frame.content.colorStyle else UseTokensResult.Color.Content.Emphasis
+	local IconSize1 = if Frame.content and Frame.content.iconSize then Frame.content.iconSize else IconSize.Small
+	local FontStyle = if Frame.content and Frame.content.fontStyle then Frame.content.fontStyle else UseTokensResult.Typography.BodyMedium
 	
-	if not fFlagAXDurablesFooter or p1.content.type ~= "multi" then
-		return reactModule.createElement("Frame", {
+	if not FFlagAXDurablesFooter or Frame.content.type ~= "multi" then
+		return ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Size = UDim2.fromScale(1, 0),
-			LayoutOrder = p1.LayoutOrder
+			LayoutOrder = Frame.LayoutOrder
 		}, {
-			ItemCardPriceLineLayout = reactModule.createElement("UIListLayout", {
+			ItemCardPriceLineLayout = ReactModule.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				FillDirection = Enum.FillDirection.Horizontal,
 				HorizontalAlignment = Enum.HorizontalAlignment.Left,
 				VerticalAlignment = Enum.VerticalAlignment.Center,
-				Padding = UDim.new(0, var1.Gap.XXSmall)
+				Padding = UDim.new(0, UseTokensResult.Gap.XXSmall)
 			}),
-			ItemCardPriceLineRobuxIcon = if p1.content.type == "price" then reactModule.createElement(icon, {
+			ItemCardPriceLineRobuxIcon = if Frame.content.type == "price" then ReactModule.createElement(Icon, {
 				name = "robux",
 				LayoutOrder = 1,
 				testId = "priceLineRobuxIcon",
-				style = var3,
-				size = var4
+				style = ColorStyle,
+				size = IconSize1
 			}) else nil,
-			ItemCardPriceLineAmount = reactModule.createElement(text, {
+			ItemCardPriceLineAmount = ReactModule.createElement(Text, {
 				LayoutOrder = 2,
-				textStyle = var3,
-				fontStyle = var5,
-				Text = if p1.content.type == "price" then getLocalizedPriceModule(p1.content.price) else p1.content.text,
+				textStyle = ColorStyle,
+				fontStyle = FontStyle,
+				Text = if Frame.content.type == "price" then GetLocalizedPriceModule(Frame.content.price) else Frame.content.text,
 				TextXAlignment = Enum.TextXAlignment.Left,
 				TextYAlignment = Enum.TextYAlignment.Center,
 				AutomaticSize = Enum.AutomaticSize.XY,
@@ -136,48 +138,48 @@ local function ItemCardPriceLine(p1)
 			})
 		})
 	end
-	local content = p1.content
-	local t = {
-		ItemCardPriceLineLayout = reactModule.createElement("UIListLayout", {
+	local config = {
+		ItemCardPriceLineLayout = ReactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			FillDirection = Enum.FillDirection.Horizontal,
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
-			Padding = UDim.new(0, var1.Gap.XXSmall)
+			Padding = UDim.new(0, UseTokensResult.Gap.XXSmall)
 		})
 	}
-	local var6 = 1
+	local Count = 1
 	
-	for i, v in content.contents do
+	for i, content in Frame.content.contents do
 		if i > 1 then
-			t[`priceLineSpacer{i}`] = reactModule.createElement("Frame", {
+			config[`priceLineSpacer{i}`] = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
-				Size = UDim2.fromOffset(var1.Gap.XSmall, 0),
-				LayoutOrder = var6
+				Size = UDim2.fromOffset(UseTokensResult.Gap.XSmall, 0),
+				LayoutOrder = Count
 			})
-			var6 += 1
+			Count += 1
 		end
-		if v.type == "badge" then
-			t[`priceLine{i}Badge`] = reactModule.createElement(badge, {
-				text = v.text,
-				variant = badgeVariant.Neutral,
-				Position = UDim2.new(0, 0, 0, -var1.Gap.XXSmall)
+		if content.type == "badge" then
+			config[`priceLine{i}Badge`] = ReactModule.createElement(Badge, {
+				text = content.text,
+				variant = BadgeVariant.Neutral,
+				Position = UDim2.new(0, 0, 0, -UseTokensResult.Gap.XXSmall)
 			})
-			var6 += 1
-		else
-			for i_1, v_1 in renderContentChildren(v, `priceLine{i}`, var6, var6 + 1, if v.colorStyle then v.colorStyle else var1.Color.Content.Emphasis, var1, var2) do
-				t[i_1] = v_1
-			end
-			var6 += 2
+			Count += 1
+			continue
 		end
+		local ColorStyle1 = if content.colorStyle then content.colorStyle else UseTokensResult.Color.Content.Emphasis
+		for i1, value in renderContentChildren(content, `priceLine{i}`, Count, Count + 1, ColorStyle1, UseTokensResult, UseDesignTokensResult) do
+			config[i1] = value
+		end
+		Count += 2
 	end
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		AutomaticSize = Enum.AutomaticSize.Y,
 		Size = UDim2.fromScale(1, 0),
-		LayoutOrder = p1.LayoutOrder
-	}, t)
+		LayoutOrder = Frame.LayoutOrder
+	}, config)
 end
 
-return if fFlagAXItemCardComponentsMemo then reactModule.memo(ItemCardPriceLine) else ItemCardPriceLine
+return if AvatarExperienceFlagsModule.FFlagAXItemCardComponentsMemo then ReactModule.memo(ItemCardPriceLine) else ItemCardPriceLine

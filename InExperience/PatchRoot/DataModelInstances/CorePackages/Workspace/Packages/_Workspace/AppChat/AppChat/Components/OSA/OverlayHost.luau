@@ -1,53 +1,49 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local providerContainer = require(parent.RoactUtils).Components.ProviderContainer
-local groupOSADialogModule = require(appChat.Components.OSA.GroupOSADialog)
-local getOverlayStoreModule = require(appChat.Stores.GetOverlayStore)
-local fFlagSupportViewingUserProfileOnOSAModule = require(appChat.Flags.FFlagSupportViewingUserProfileOnOSA)
-local fFlagAppChatShowOSAOnPageEntry = require(parent.SharedFlags).FFlagAppChatShowOSAOnPageEntry
-local t = { GroupOSADialog = groupOSADialogModule }
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local ProviderContainer = require(Parent.RoactUtils).Components.ProviderContainer
+local GetOverlayStoreModule = require(AppChat.Stores.GetOverlayStore)
+local FFlagSupportViewingUserProfileOnOSAModule = require(AppChat.Flags.FFlagSupportViewingUserProfileOnOSA)
+local FFlagAppChatShowOSAOnPageEntry = require(Parent.SharedFlags).FFlagAppChatShowOSAOnPageEntry
+local config = {
+	GroupOSADialog = require(AppChat.Components.OSA.GroupOSADialog)
+}
 
-return function(p1)
-	-- upvalues: getOverlayStoreModule (ref), signalsReactModule (ref), fFlagSupportViewingUserProfileOnOSAModule (ref), reactModule (ref), t (ref), cryoModule (ref), fFlagAppChatShowOSAOnPageEntry (ref), providerContainer (ref)
-	local union
-	local var1 = getOverlayStoreModule(false)
-	local var2 = signalsReactModule.useSignalState(var1.getCurrentOverlay)
-	local var3 = if fFlagSupportViewingUserProfileOnOSAModule then signalsReactModule.useSignalState(var1.getOverlayDefaultProps) else nil
-	local var4 = reactModule.useCallback(function()
-		-- upvalues: var1 (ref)
-		var1.dismissOverlay()
+return function(p1) --[[ Line: 35 | Named "OverlayHost" ]]
+	-- upvalues: GetOverlayStoreModule (copy), SignalsReactModule (copy), FFlagSupportViewingUserProfileOnOSAModule (copy), ReactModule (copy), config (copy), CryoModule (copy), FFlagAppChatShowOSAOnPageEntry (copy), ProviderContainer (copy)
+	local OverlayStoreModule = GetOverlayStoreModule(false)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(OverlayStoreModule.getCurrentOverlay)
+	local UseSignalStateResult1 = if FFlagSupportViewingUserProfileOnOSAModule then SignalsReactModule.useSignalState(OverlayStoreModule.getOverlayDefaultProps) else nil
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 43 ]]
+		-- upvalues: OverlayStoreModule (copy)
+		OverlayStoreModule.dismissOverlay()
 	end, {})
-	local overlayType = var2 and var2.overlayType
-	local var5 = overlayType and t[overlayType]
+	local OverlayType = UseSignalStateResult and UseSignalStateResult.overlayType
+	local Entry = OverlayType and config[OverlayType]
 	
-	if not var5 then
+	if not Entry then
 		return nil
-	elseif fFlagSupportViewingUserProfileOnOSAModule then
-		union = cryoModule.Dictionary.union
-		union = union(var3 or {}, var2.overlayProps or {})
-	else
-		union = table.clone
-		union = union(var2.overlayProps or {})
 	end
-	if fFlagAppChatShowOSAOnPageEntry then
-		local onClose = union.onClose
+	local UnionResult = if FFlagSupportViewingUserProfileOnOSAModule then CryoModule.Dictionary.union(UseSignalStateResult1 or {}, UseSignalStateResult.overlayProps or {}) else table.clone(UseSignalStateResult.overlayProps or {})
+	
+	if FFlagAppChatShowOSAOnPageEntry then
+		local OnCloseFunction = UnionResult.onClose
 		
-		function union.onClose()
-			-- upvalues: onClose (ref), var4 (ref)
-			if onClose then
-				onClose()
+		function UnionResult.onClose() --[[ Line: 58 ]]
+			-- upvalues: OnCloseFunction (copy), UseResult (copy)
+			if OnCloseFunction then
+				OnCloseFunction()
 			end
-			var4()
+			UseResult()
 		end
 	else
-		union.onClose = var4
+		UnionResult.onClose = UseResult
 	end
-	union.hasBackdrop = true
-	union.disablePortal = false
-	local var6 = reactModule.createElement(var5, union)
+	UnionResult.hasBackdrop = true
+	UnionResult.disablePortal = false
+	local Element = ReactModule.createElement(Entry, UnionResult)
 	
-	return if p1.providers and #p1.providers > 0 then reactModule.createElement(providerContainer, { providers = p1.providers }, { Overlay = var6 }) else var6
+	return if p1.providers and #p1.providers > 0 then ReactModule.createElement(ProviderContainer, { providers = p1.providers }, { Overlay = Element }) else Element
 end

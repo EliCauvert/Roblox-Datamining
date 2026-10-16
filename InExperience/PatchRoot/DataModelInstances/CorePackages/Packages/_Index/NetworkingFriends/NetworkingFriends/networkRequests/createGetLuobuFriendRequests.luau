@@ -1,18 +1,18 @@
-﻿local FRIENDS_URLModule = require(script.Parent.Parent.FRIENDS_URL)
+﻿local FRIENDSURLModule = require(script.Parent.Parent.FRIENDS_URL)
 local _ = require(script.Parent.Parent.networkingFriendsTypes)
 
-return function(p1)
-	-- upvalues: FRIENDS_URLModule (ref)
-	return p1.roduxNetworking.GET({ Name = "GetLuobuFriendRequests" }, function(p2, p3)
-		-- upvalues: FRIENDS_URLModule (copy)
-		return p2(FRIENDS_URLModule):path("v1"):path("my"):path("luobu-friends"):path("requests"):queryArgs({
-			userOpenId = p3.userOpenId,
-			userAccessToken = p3.userAccessToken,
-			type = p3.type,
-			appType = p3.appType,
-			sortOrder = p3.sortOrder,
-			limit = p3.limit,
-			cursor = p3.cursor
+return function(p1) --[[ Line: 10 ]]
+	-- upvalues: FRIENDSURLModule (copy)
+	return p1.roduxNetworking.GET({ Name = "GetLuobuFriendRequests" }, function(Callback, p2) --[[ Line: 13 ]]
+		-- upvalues: FRIENDSURLModule (upval)
+		return Callback(FRIENDSURLModule):path("v1"):path("my"):path("luobu-friends"):path("requests"):queryArgs({
+			userOpenId = p2.userOpenId,
+			userAccessToken = p2.userAccessToken,
+			type = p2.type,
+			appType = p2.appType,
+			sortOrder = p2.sortOrder,
+			limit = p2.limit,
+			cursor = p2.cursor
 		})
 	end)
 end

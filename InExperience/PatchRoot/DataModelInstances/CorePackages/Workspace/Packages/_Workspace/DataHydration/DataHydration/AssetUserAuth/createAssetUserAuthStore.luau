@@ -1,146 +1,149 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local _ = require(parent.HttpClient)
-local createDataCacheModule = require(dataHydration.createDataCache)
-local createDataResolverModule = require(dataHydration.createDataResolver)
-local _ = require(dataHydration.DataHydrationTypes)
-local promiseModule = require(parent.Promise)
-local fetchAssetUserAuthModule = require(script.Parent.fetchAssetUserAuth)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local _ = require(Parent.HttpClient)
+local CreateDataCacheModule = require(DataHydration.createDataCache)
+local CreateDataResolverModule = require(DataHydration.createDataResolver)
+local _ = require(DataHydration.DataHydrationTypes)
+local PromiseModule = require(Parent.Promise)
+local FetchAssetUserAuthModule = require(script.Parent.fetchAssetUserAuth)
 local _ = require(script.Parent.AssetUserAuthStoreTypes)
 
-local function ALWAYS_REFRESH()
+local function ALWAYS_REFRESH(): boolean --[[ Line: 27 ]]
 	return true
 end
 
-return function(value)
-	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), fetchAssetUserAuthModule (ref), promiseModule (ref), ALWAYS_REFRESH (ref)
-	local value_1 = value or {}
-	local t = { network = value_1.network, baseUrl = value_1.baseUrl }
-	local var1 = createDataCacheModule()
-	local var2 = createDataResolverModule({
+return function(p1) --[[ Line: 33 | Named "createAssetUserAuthStore" ]]
+	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), FetchAssetUserAuthModule (copy), PromiseModule (copy), ALWAYS_REFRESH (copy)
+	local P0 = p1 or {}
+	local config = { network = P0.network, baseUrl = P0.baseUrl }
+	local DataCacheModule = CreateDataCacheModule()
+	local DataResolverModule = CreateDataResolverModule({
 		supportsMultiGet = false,
-		cache = var1,
-		fetchFn = function(p1, _)
-			-- upvalues: fetchAssetUserAuthModule (copy), t (ref)
-			return fetchAssetUserAuthModule.fetchOperation(p1, t)
+		cache = DataCacheModule,
+		fetchFn = function(p2, _) --[[ Line: 41 ]]
+			-- upvalues: FetchAssetUserAuthModule (upval), config (copy)
+			return FetchAssetUserAuthModule.fetchOperation(p2, config)
 		end
 	})
 	
-	local function seedAndReturn(p1)
-		-- upvalues: var1 (ref)
-		local path = p1.path
+	local function seedAndReturn(Result) --[[ Line: 64 ]]
+		-- upvalues: DataCacheModule (copy)
+		local Path: string = Result.path
 		
-		if typeof(path) == "string" and #path > 0 then
-			var1.updateItem(string.match(path, "operations/(.+)$") or path, p1)
+		if typeof(Path) == "string" and #Path > 0 then
+			DataCacheModule.updateItem(string.match(Path, "operations/(.+)$") or Path, Result)
 		end
-		return p1
+		return Result
 	end
 	
 	return {
-		patchAssetIcon = function(value, p1)
-			-- upvalues: fetchAssetUserAuthModule (copy), t (ref), var1 (ref)
-			return fetchAssetUserAuthModule.patchAssetIcon(value, p1, t):andThen(function(p2)
-				-- upvalues: var1 (copy)
-				local path = p2.path
+		patchAssetIcon = function(p2, p3) --[[ Line: 46 ]]
+			-- upvalues: FetchAssetUserAuthModule (upval), config (copy), DataCacheModule (copy)
+			return FetchAssetUserAuthModule.patchAssetIcon(p2, p3, config):andThen(function(Result) --[[ Line: 47 ]]
+				-- upvalues: DataCacheModule (upval)
+				local Path: string = Result.path
 				
-				if typeof(path) == "string" and #path > 0 then
-					var1.updateItem(string.match(path, "operations/(.+)$") or path, p2)
+				if typeof(Path) == "string" and #Path > 0 then
+					DataCacheModule.updateItem(string.match(Path, "operations/(.+)$") or Path, Result)
 				end
-				return p2
+				return Result
 			end)
 		end,
-		updateIcon = function(p1, p2)
-			-- upvalues: fetchAssetUserAuthModule (copy), t (ref), seedAndReturn (ref)
-			return fetchAssetUserAuthModule.updateIcon(p1, p2, t):andThen(seedAndReturn)
+		updateIcon = function(p2, p3) --[[ Line: 73 ]]
+			-- upvalues: FetchAssetUserAuthModule (upval), config (copy), seedAndReturn (copy)
+			return FetchAssetUserAuthModule.updateIcon(p2, p3, config):andThen(seedAndReturn)
 		end,
-		getPreviews = function(p1)
-			-- upvalues: fetchAssetUserAuthModule (copy), t (ref)
-			return fetchAssetUserAuthModule.getPreviews(p1, t)
+		getPreviews = function(p2) --[[ Line: 77 ]]
+			-- upvalues: FetchAssetUserAuthModule (upval), config (copy)
+			return FetchAssetUserAuthModule.getPreviews(p2, config)
 		end,
-		updatePreviews = function(p1, p2)
-			-- upvalues: fetchAssetUserAuthModule (copy), t (ref), seedAndReturn (ref)
-			return fetchAssetUserAuthModule.updatePreviews(p1, p2, t):andThen(seedAndReturn)
+		updatePreviews = function(p2, p3) --[[ Line: 81 ]]
+			-- upvalues: FetchAssetUserAuthModule (upval), config (copy), seedAndReturn (copy)
+			return FetchAssetUserAuthModule.updatePreviews(p2, p3, config):andThen(seedAndReturn)
 		end,
-		createImageAsset = function(value, p1, p2)
-			-- upvalues: fetchAssetUserAuthModule (copy), t (ref), seedAndReturn (ref)
-			return fetchAssetUserAuthModule.createImageAsset(value, p1, p2, t):andThen(seedAndReturn)
+		createImageAsset = function(p2, p3, p4) --[[ Line: 85 ]]
+			-- upvalues: FetchAssetUserAuthModule (upval), config (copy), seedAndReturn (copy)
+			return FetchAssetUserAuthModule.createImageAsset(p2, p3, p4, config):andThen(seedAndReturn)
 		end,
-		pollUntilDone = function(p1)
-			-- upvalues: promiseModule (copy), fetchAssetUserAuthModule (copy), t (ref), var1 (ref)
-			local var3
-			local _ = nil
+		pollUntilDone = function(p2) --[[ Line: 93 ]]
+			-- upvalues: PromiseModule (upval), FetchAssetUserAuthModule (upval), config (copy), DataCacheModule (copy)
+			local Match = nil
 			
-			if typeof(p1) == "string" then
-				var3 = p1
+			if typeof(p2) == "string" then
+				Match = p2
 			else
-				local path = p1.path or ""
-				var3 = string.match(path, "operations/(.+)$") or (p1.operationId or path)
+				local Path = p2.path or ""
+				Match = string.match(Path, "operations/(.+)$") or (p2.operationId or Path)
 			end
-			return promiseModule.new(function(p2, p3)
-				-- upvalues: var3 (write), fetchAssetUserAuthModule (copy), t (copy), var1 (copy)
-				local var4 = 0
-				local var5 = 0
+			return PromiseModule.new(function(Callback1, Callback) --[[ Line: 101 ]]
+				-- upvalues: Match (ref), FetchAssetUserAuthModule (upval), config (upval), DataCacheModule (upval)
+				local Count = 0
+				local Count1 = 0
 				
-				local function poll()
-					-- upvalues: var4 (write), var3 (copy), fetchAssetUserAuthModule (copy), t (copy), var1 (copy), var5 (write), p3 (ref), p2 (ref), poll (ref)
-					var4 += 1
-					fetchAssetUserAuthModule.fetchOperation(var3, t):andThen(function(p4)
-						-- upvalues: var1 (copy), var3 (ref)
-						var1.updateItem(var3, p4)
+				local function poll() --[[ Line: 105 ]]
+					-- upvalues: Count (ref), Match (upval), FetchAssetUserAuthModule (upval), config (upval), DataCacheModule (upval), Count1 (ref), Callback (copy), Callback1 (copy), poll (copy)
+					Count += 1
+					local Match1 = Match
+					FetchAssetUserAuthModule.fetchOperation(Match1, config):andThen(function(Result) --[[ Line: 58 ]]
+						-- upvalues: DataCacheModule (upval), Match1 (copy)
+						DataCacheModule.updateItem(Match1, Result)
 						
-						return p4
-					end):andThen(function(p4)
-						-- upvalues: var5 (copy), p3 (copy), p2 (copy), var4 (copy), var3 (copy), poll (copy)
-						var5 = 0
+						return Result
+					end):andThen(function(Result) --[[ Line: 108 ]]
+						-- upvalues: Count1 (upval), Callback (upval), Callback1 (upval), Count (upval), Match (upval), poll (upval)
+						Count1 = 0
 						
-						if p4.done then
-							if p4.error then
-								p3(p4.error.message or "Operation failed")
+						if Result.done then
+							if Result.error then
+								Callback(Result.error.message or "Operation failed")
+								
+								return
+							else
+								Callback1({ status = "done", operation = Result })
 								
 								return
 							end
-							p2({ status = "done", operation = p4 })
+						elseif Count >= 30 then
+							Callback1({ status = "timed_out", operationId = Match })
 							
 							return
-						elseif var4 >= 30 then
-							p2({ status = "timed_out", operationId = var3 })
-							
-							return
+						else
+							task.delay(2, poll)
 						end
-						task.delay(2, poll)
-					end):catch(function(p4)
-						-- upvalues: var5 (copy), poll (copy), p3 (copy)
-						var5 += 1
+					end):catch(function(Err) --[[ Line: 122 ]]
+						-- upvalues: Count1 (upval), poll (upval), Callback (upval)
+						Count1 += 1
 						
-						if var5 <= 3 then
-							task.delay(math.pow(2, var5 - 1) * 2, poll)
+						if Count1 <= 3 then
+							task.delay(math.pow(2, Count1 - 1) * 2, poll)
 							
 							return
+						else
+							Callback(Err)
 						end
-						p3(p4)
 					end)
 				end
 				
 				poll()
 			end)
 		end,
-		getOperation = var2.getCachedItem,
-		fetchOperation = var2.fetchItem,
-		getAndFetchOperation = function(p1)
-			-- upvalues: var2 (ref), ALWAYS_REFRESH (copy)
-			return var2.getAndFetchItem(p1, ALWAYS_REFRESH)
+		getOperation = DataResolverModule.getCachedItem,
+		fetchOperation = DataResolverModule.fetchItem,
+		getAndFetchOperation = function(p2) --[[ Line: 147 ]]
+			-- upvalues: DataResolverModule (copy), ALWAYS_REFRESH (upval)
+			return DataResolverModule.getAndFetchItem(p2, ALWAYS_REFRESH)
 		end,
-		refreshOperation = function(p1)
-			-- upvalues: fetchAssetUserAuthModule (copy), t (ref), var1 (ref)
-			return fetchAssetUserAuthModule.fetchOperation(p1, t):andThen(function(p2)
-				-- upvalues: var1 (copy), p1 (ref)
-				var1.updateItem(p1, p2)
+		refreshOperation = function(p2) --[[ Line: 57 ]]
+			-- upvalues: FetchAssetUserAuthModule (upval), config (copy), DataCacheModule (copy)
+			return FetchAssetUserAuthModule.fetchOperation(p2, config):andThen(function(Result) --[[ Line: 58 ]]
+				-- upvalues: DataCacheModule (upval), p2 (copy)
+				DataCacheModule.updateItem(p2, Result)
 				
-				return p2
+				return Result
 			end)
 		end,
-		updateOperation = var1.updateItem,
-		clear = var2.clear,
-		dispose = var2.dispose
+		updateOperation = DataCacheModule.updateItem,
+		clear = DataResolverModule.clear,
+		dispose = DataResolverModule.dispose
 	}
 end

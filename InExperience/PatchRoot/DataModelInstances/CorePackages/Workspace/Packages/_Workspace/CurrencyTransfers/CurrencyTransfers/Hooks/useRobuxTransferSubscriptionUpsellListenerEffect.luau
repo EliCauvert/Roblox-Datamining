@@ -1,33 +1,34 @@
-﻿local marketplaceService = game:GetService("MarketplaceService")
-local currencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
-local parent = currencyTransfers.Parent
-local reactModule = require(parent.React)
-local loggingProtocolModule = require(parent.LoggingProtocol)
-local sharedFlagsModule = require(parent.SharedFlags)
-local currencyTransferTelemetryModule = require(currencyTransfers.Events.CurrencyTransferTelemetry)
-local transferOriginationModule = require(currencyTransfers.Enums.TransferOrigination)
+﻿local MarketplaceService = game:GetService("MarketplaceService")
+local CurrencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
+local Parent = CurrencyTransfers.Parent
+local ReactModule = require(Parent.React)
+local LoggingProtocolModule = require(Parent.LoggingProtocol)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local CurrencyTransferTelemetryModule = require(CurrencyTransfers.Events.CurrencyTransferTelemetry)
+local TransferOriginationModule = require(CurrencyTransfers.Enums.TransferOrigination)
 
-return function(p1)
-	-- upvalues: reactModule (ref), sharedFlagsModule (ref), marketplaceService (ref), loggingProtocolModule (ref), currencyTransferTelemetryModule (ref), transferOriginationModule (ref)
-	reactModule.useEffect(function()
-		-- upvalues: sharedFlagsModule (copy), marketplaceService (copy), loggingProtocolModule (copy), currencyTransferTelemetryModule (copy), transferOriginationModule (copy), p1 (ref)
-		if sharedFlagsModule.GetEngineFeatureEnablePromptRobuxTransferDedicatedUpsellEvent() then
-			local promptRobuxTransferSubscriptionUpsellRequestedConnection = marketplaceService.PromptRobuxTransferSubscriptionUpsellRequested:Connect(function()
-				-- upvalues: loggingProtocolModule (copy), currencyTransferTelemetryModule (copy), transferOriginationModule (copy), p1 (copy)
-				loggingProtocolModule.default:logRobloxTelemetryCounter(currencyTransferTelemetryModule.CurrencyTransferEngineUpsellSignalReceivedCounter, 1, {
-					transferOrigination = tostring(transferOriginationModule.InExperience)
+return function(Callback) --[[ Line: 14 | Named "useRobuxTransferSubscriptionUpsellListenerEffect" ]]
+	-- upvalues: ReactModule (copy), SharedFlagsModule (copy), MarketplaceService (copy), LoggingProtocolModule (copy), CurrencyTransferTelemetryModule (copy), TransferOriginationModule (copy)
+	ReactModule.useEffect(function() --[[ Line: 15 ]]
+		-- upvalues: SharedFlagsModule (upval), MarketplaceService (upval), LoggingProtocolModule (upval), CurrencyTransferTelemetryModule (upval), TransferOriginationModule (upval), Callback (copy)
+		if SharedFlagsModule.GetEngineFeatureEnablePromptRobuxTransferDedicatedUpsellEvent() then
+			local PromptRobuxTransferSubscriptionUpsellRequestedConnection = MarketplaceService.PromptRobuxTransferSubscriptionUpsellRequested:Connect(function() --[[ Line: 22 ]]
+				-- upvalues: LoggingProtocolModule (upval), CurrencyTransferTelemetryModule (upval), TransferOriginationModule (upval), Callback (upval)
+				LoggingProtocolModule.default:logRobloxTelemetryCounter(CurrencyTransferTelemetryModule.CurrencyTransferEngineUpsellSignalReceivedCounter, 1, {
+					transferOrigination = tostring(TransferOriginationModule.InExperience)
 				})
-				p1()
+				Callback()
 			end)
 			
-			return function()
-				-- upvalues: promptRobuxTransferSubscriptionUpsellRequestedConnection (write)
-				if promptRobuxTransferSubscriptionUpsellRequestedConnection then
-					promptRobuxTransferSubscriptionUpsellRequestedConnection:Disconnect()
-					promptRobuxTransferSubscriptionUpsellRequestedConnection = nil
+			return function() --[[ Line: 33 ]]
+				-- upvalues: PromptRobuxTransferSubscriptionUpsellRequestedConnection (ref)
+				if PromptRobuxTransferSubscriptionUpsellRequestedConnection then
+					PromptRobuxTransferSubscriptionUpsellRequestedConnection:Disconnect()
+					PromptRobuxTransferSubscriptionUpsellRequestedConnection = nil
 				end
 			end
+		else
+			return function() --[[ Line: 19 ]] end
 		end
-		return function() end
-	end, { p1 })
+	end, { Callback })
 end

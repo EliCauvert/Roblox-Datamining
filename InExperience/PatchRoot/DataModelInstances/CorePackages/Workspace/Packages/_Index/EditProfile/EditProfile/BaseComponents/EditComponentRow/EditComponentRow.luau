@@ -1,49 +1,52 @@
-﻿local parent = script:FindFirstAncestor("EditProfile").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local radius = foundationModule.Enums.Radius
-local skeleton = foundationModule.Skeleton
-local iconName = foundationModule.Enums.IconName
-local iconSize = foundationModule.Enums.IconSize
-local icon = foundationModule.Icon
-local text = foundationModule.Text
-local view = foundationModule.View
-local useTokens = foundationModule.Hooks.useTokens
+﻿local Parent = script:FindFirstAncestor("EditProfile").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local Radius = FoundationModule.Enums.Radius
+local Skeleton = FoundationModule.Skeleton
+local IconName = FoundationModule.Enums.IconName
+local IconSize = FoundationModule.Enums.IconSize
+local Icon = FoundationModule.Icon
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), view (ref), text (ref), skeleton (ref), radius (ref), icon (ref), iconName (ref), iconSize (ref)
-	return reactModule.createElement(view, {
+return function(p1) --[[ Line: 26 | Named "EditComponentRow" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Text (copy), Skeleton (copy), Radius (copy), Icon (copy), IconName (copy), IconSize (copy)
+	local UseTokensResult = UseTokensFunction()
+	local Replaced = string.gsub(p1.currentValue, "\n", " ")
+	
+	return ReactModule.createElement(View, {
 		tag = "row size-full-1100 padding-medium align-y-center flex-x-between gap-medium",
 		LayoutOrder = p1.layoutOrder,
 		onActivated = p1.onActivated,
 		ref = p1.forwardRef
 	}, {
-		TitleText = reactModule.createElement(text, {
+		TitleText = ReactModule.createElement(Text, {
 			tag = "text-title-medium content-emphasis auto-xy",
 			LayoutOrder = 1,
 			Text = p1.label
 		}),
-		EditButton = if p1.shouldShimmer then reactModule.createElement(skeleton, {
+		EditButton = if p1.shouldShimmer then ReactModule.createElement(Skeleton, {
 			LayoutOrder = 3,
-			Size = UDim2.new(0.3, 0, 0, useTokens().Size.Size_400),
-			radius = radius.Medium
-		}) else reactModule.createElement(view, {
+			Size = UDim2.new(0.3, 0, 0, UseTokensResult.Size.Size_400),
+			radius = Radius.Medium
+		}) else ReactModule.createElement(View, {
 			tag = "row size-0-full fill align-y-center align-x-right gap-xsmall",
 			LayoutOrder = 2
 		}, {
-			CurrentText = reactModule.createElement(view, {
+			CurrentText = ReactModule.createElement(View, {
 				tag = "row size-0-full fill align-y-center align-x-right",
 				LayoutOrder = 1
 			}, {
-				reactModule.createElement(text, {
+				ReactModule.createElement(Text, {
 					tag = "text-body-small text-truncate-end size-0-full auto-x",
-					Text = string.gsub(p1.currentValue, "\n", " ")
+					Text = Replaced
 				})
 			}),
-			EditIcon = reactModule.createElement(icon, {
+			EditIcon = ReactModule.createElement(Icon, {
 				LayoutOrder = 2,
-				name = iconName.ChevronLargeRight,
-				size = iconSize.Medium
+				name = IconName.ChevronLargeRight,
+				size = IconSize.Medium
 			})
 		})
 	})

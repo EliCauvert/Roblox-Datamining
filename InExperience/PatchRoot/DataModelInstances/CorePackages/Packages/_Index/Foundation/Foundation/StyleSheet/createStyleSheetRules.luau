@@ -1,73 +1,73 @@
-﻿local parent = script.Parent
-local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local styleRuleModule = require(parent.StyleRule)
-local _ = require(parent.Rules.Types)
-local _ = require(foundation.Enums.ColorMode)
-local _ = require(foundation.Enums.Device)
-local flagsModule = require(foundation.Utility.Flags)
-local _ = require(parent.getOverrideAttributes)
-local scaleValueModule = require(foundation.Utility.scaleValue)
+﻿local Parent = script.Parent
+local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local StyleRuleModule = require(Parent.StyleRule)
+local _ = require(Parent.Rules.Types)
+local _ = require(Foundation.Enums.ColorMode)
+local _ = require(Foundation.Enums.Device)
+local FlagsModule = require(Foundation.Utility.Flags)
+local _ = require(Parent.getOverrideAttributes)
+local ScaleValueModule = require(Foundation.Utility.scaleValue)
 
-local function insertRule(p1, p2, p3)
-	-- upvalues: flagsModule (ref), reactModule (ref), styleRuleModule (ref)
-	local properties = p2.properties
-	local text = "." .. p2
-	local var1 = if p2.modifier ~= nil then "" else ":" .. p1.modifier
-	local text_1 = text .. var8 .. (if p2.pseudo ~= nil then "" else " ::" .. p1.pseudo)
+local function insertRule(List, p1, Tag) --[[ Line: 23 ]]
+	-- upvalues: FlagsModule (copy), ReactModule (copy), StyleRuleModule (copy)
+	local Properties = p1.properties
+	local Text = "." .. Tag
+	local Text1: string = if p1.modifier == nil then "" else ":" .. p1.modifier
+	local Text2 = Text .. Text1 .. (if p1.pseudo == nil then "" else " ::" .. p1.pseudo)
 	
-	if flagsModule.FoundationStyleRulePseudoName then
-		if p2.pseudoName ~= nil then
-			text_1 ..= " #" .. p1.pseudoName
+	if FlagsModule.FoundationStyleRulePseudoName then
+		if p1.pseudoName ~= nil then
+			Text2 ..= " #" .. p1.pseudoName
 		end
-		if p2.pseudo ~= nil and p2.pseudoName == nil then
-			text_1 ..= ", " .. text .. var8 .. " > " .. p1.pseudo
+		if p1.pseudo ~= nil and p1.pseudoName == nil then
+			Text2 ..= ", " .. Text .. Text1 .. " > " .. p1.pseudo
 		end
-	elseif p2.pseudo ~= nil then
-		text_1 ..= ", " .. text .. var8 .. " > " .. p1.pseudo
+	elseif p1.pseudo ~= nil then
+		Text2 ..= ", " .. Text .. Text1 .. " > " .. p1.pseudo
 	end
-	table.insert(p1, reactModule.createElement(styleRuleModule, {
-		key = text_1,
-		Priority = p2.priority,
-		Selector = text_1,
-		properties = properties
+	table.insert(List, ReactModule.createElement(StyleRuleModule, {
+		key = Text2,
+		Priority = p1.priority,
+		Selector = Text2,
+		properties = Properties
 	}))
 end
 
-local function updateRuleAttributes(p1, p2, p3, p4, p5)
-	-- upvalues: flagsModule (ref), scaleValueModule (ref)
-	p4 = if flagsModule.FoundationDisableTokenScaling then 1 else p4 or 1
-	
-	for i, v in p2 or {} do
-		local var1 = if p5 then p5[v.name] else nil
-		local var2 = scaleValueModule(if var1 ~= nil then v.value else var1, p4)
+local function updateRuleAttributes(Object, Attributes, p1, p2, p3) --[[ Line: 56 ]]
+	-- upvalues: FlagsModule (copy), ScaleValueModule (copy)
+	local Attributes1 = Attributes or {}
+	local P5 = if FlagsModule.FoundationDisableTokenScaling then 1 else p2 or 1
+	for _, value in Attributes1 do
+		local v1 = if p3 then p3[value.name] else nil
+		local ScaleValueModuleResult = ScaleValueModule(if v1 == nil then value.value else v1, P5)
 		
-		if p3[v.name] ~= var2 then
-			p1:SetAttribute(v.name, var2)
-			p3[v.name] = var2
+		if p1[value.name] ~= ScaleValueModuleResult then
+			Object:SetAttribute(value.name, ScaleValueModuleResult)
+			p1[value.name] = ScaleValueModuleResult
 		end
 	end
 end
 
-return function(p6, p7, p8, p9, p10, p11)
-	-- upvalues: flagsModule (ref), updateRuleAttributes (ref), insertRule (ref)
+return function(p4, List, p5, p6, p7, p8) --[[ Line: 77 | Named "createStyleSheetRules" ]]
+	-- upvalues: FlagsModule (copy), updateRuleAttributes (copy), insertRule (copy)
 	local t = {}
 	
-	for i, v in p7 do
-		local var3 = p6[i]
+	for i, _ in List do
+		local v2 = p4[i]
 		
-		if var3 ~= nil and (flagsModule.FoundationStyleRulePseudoName or var3.pseudoName == nil) then
-			if p8 and p9 then
-				updateRuleAttributes(p8, var3.attributes, p9, p10, p11)
+		if v2 ~= nil and (FlagsModule.FoundationStyleRulePseudoName or v2.pseudoName == nil) then
+			if p5 and p6 then
+				updateRuleAttributes(p5, v2.attributes, p6, p7, p8)
 			end
-			insertRule(t, var3, i)
+			insertRule(t, v2, i)
 			
-			if var3.children then
-				for i_1, v_1 in var3.children do
-					if p8 and p9 then
-						updateRuleAttributes(p8, v_1.attributes, p9, p10, p11)
+			if v2.children then
+				for _, child in v2.children do
+					if p5 and p6 then
+						updateRuleAttributes(p5, child.attributes, p6, p7, p8)
 					end
-					insertRule(t, v_1, v_1.tag)
+					insertRule(t, child, child.tag)
 				end
 			end
 		end

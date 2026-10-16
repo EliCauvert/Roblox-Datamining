@@ -1,48 +1,49 @@
-﻿local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local buildStaticCurveAnimationSchemaModule = require(parent.util.buildStaticCurveAnimationSchema)
-local validateInstanceTreeAgainstSchemaModule = require(parent.util.validateInstanceTreeAgainstSchema)
-local curveAnimationHierarchyUtilsModule = require(parent.util.CurveAnimationHierarchyUtils)
-local t = {
-	categories = {
-		validationEnumsModule.UploadCategory.EMOTE_ANIMATION,
-		validationEnumsModule.UploadCategory.ANIMATION
-	},
-	requiredData = { validationEnumsModule.SharedDataMember.curveAnimations },
-	fflag = require(parent.flags.getFFlagUGCValidateCurveAnimStrictSchema),
-	expectedFailures = {},
-	prereqTests = {
-		validationEnumsModule.ValidationModule.CurveAnimDataAvailable
-	}
-}
+﻿local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local BuildStaticCurveAnimationSchemaModule = require(Parent.util.buildStaticCurveAnimationSchema)
+local ValidateInstanceTreeAgainstSchemaModule = require(Parent.util.validateInstanceTreeAgainstSchema)
+local CurveAnimationHierarchyUtilsModule = require(Parent.util.CurveAnimationHierarchyUtils)
 
-local function validateNoBodyPartDuplicates(p1, p2)
-	-- upvalues: curveAnimationHierarchyUtilsModule (ref), errorSourceStringsModule (ref)
+local function validateNoBodyPartDuplicates(Object, p1) --[[ Line: 27 ]]
+	-- upvalues: CurveAnimationHierarchyUtilsModule (copy), ErrorSourceStringsModule (copy)
 	local t = {}
 	
-	for i, v in p1:GetDescendants() do
-		if v:IsA("Folder") and curveAnimationHierarchyUtilsModule.isBodyPartFolderNameValid(v.Name) then
-			if t[v.Name] then
-				p2:fail(errorSourceStringsModule.Keys.CurveAnim_DuplicateBodyPartFolder, { bodyPartName = v.Name, instancePath = v:GetFullName() })
+	for _, Folder in Object:GetDescendants() do
+		if Folder:IsA("Folder") and CurveAnimationHierarchyUtilsModule.isBodyPartFolderNameValid(Folder.Name) then
+			if t[Folder.Name] then
+				p1:fail(ErrorSourceStringsModule.Keys.CurveAnim_DuplicateBodyPartFolder, {
+					bodyPartName = Folder.Name,
+					instancePath = Folder:GetFullName()
+				})
 			end
-			t[v.Name] = true
+			t[Folder.Name] = true
 		end
 	end
 end
 
-function t.run(p3, p4)
-	-- upvalues: buildStaticCurveAnimationSchemaModule (ref), validateInstanceTreeAgainstSchemaModule (ref), errorSourceStringsModule (ref), validateNoBodyPartDuplicates (ref)
-	for i, v in p4.curveAnimations do
-		validateInstanceTreeAgainstSchemaModule(v, buildStaticCurveAnimationSchemaModule, p3, {
-			skipRootClassCheck = true,
-			skipInstanceContext = true,
-			missingErrorKey = errorSourceStringsModule.Keys.CurveAnim_StrictSchemaViolation,
-			unauthorizedErrorKey = errorSourceStringsModule.Keys.CurveAnim_StrictSchemaViolation
-		})
-		validateNoBodyPartDuplicates(v, p3)
+return {
+	categories = {
+		ValidationEnumsModule.UploadCategory.EMOTE_ANIMATION,
+		ValidationEnumsModule.UploadCategory.ANIMATION
+	},
+	requiredData = { ValidationEnumsModule.SharedDataMember.curveAnimations },
+	fflag = require(Parent.flags.getFFlagUGCValidateCurveAnimStrictSchema),
+	expectedFailures = {},
+	prereqTests = {
+		ValidationEnumsModule.ValidationModule.CurveAnimDataAvailable
+	},
+	run = function(p2, p3) --[[ Line: 42 ]]
+		-- upvalues: BuildStaticCurveAnimationSchemaModule (copy), ValidateInstanceTreeAgainstSchemaModule (copy), ErrorSourceStringsModule (copy), validateNoBodyPartDuplicates (copy)
+		for _, curveAnimation in p3.curveAnimations do
+			ValidateInstanceTreeAgainstSchemaModule(curveAnimation, BuildStaticCurveAnimationSchemaModule, p2, {
+				skipRootClassCheck = true,
+				skipInstanceContext = true,
+				missingErrorKey = ErrorSourceStringsModule.Keys.CurveAnim_StrictSchemaViolation,
+				unauthorizedErrorKey = ErrorSourceStringsModule.Keys.CurveAnim_StrictSchemaViolation
+			})
+			validateNoBodyPartDuplicates(curveAnimation, p2)
+		end
 	end
-end
-
-return t
+}

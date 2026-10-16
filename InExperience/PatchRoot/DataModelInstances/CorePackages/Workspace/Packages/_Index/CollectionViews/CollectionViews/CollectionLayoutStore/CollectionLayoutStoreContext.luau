@@ -1,4 +1,4 @@
-﻿local collectionViews = script:FindFirstAncestor("CollectionViews")
-local _ = require(collectionViews.CollectionViewTypes)
+﻿local CollectionViews = script:FindFirstAncestor("CollectionViews")
+local _ = require(CollectionViews.CollectionViewTypes)
 
-return require(collectionViews.Parent.React).createContext(nil)
+return require(CollectionViews.Parent.React).createContext(nil)

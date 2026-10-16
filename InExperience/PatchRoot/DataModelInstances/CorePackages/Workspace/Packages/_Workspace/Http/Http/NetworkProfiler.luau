@@ -1,7 +1,7 @@
-﻿local var1 = tonumber(settings():GetFVariable("PercentReportingNetworkProfileAfterStartup"))
-local t = {}
-t.__index = t
-t.aggregate = {
+﻿local Number: number? = tonumber(settings():GetFVariable("PercentReportingNetworkProfileAfterStartup"))
+local NetworkProfilerModule = {}
+NetworkProfilerModule.__index = NetworkProfilerModule
+NetworkProfilerModule.aggregate = {
 	queued = 0,
 	nameLookup = 0,
 	connect = 0,
@@ -10,34 +10,34 @@ t.aggregate = {
 	receiveResponse = 0
 }
 
-function t.track(p1, p2)
-	p1.aggregate.queued += p2.queued
+function NetworkProfilerModule.track(p1, Aggregate) --[[ Line: 24 ]]
+	p1.aggregate.queued += Aggregate.queued
 	
-	if p2.nameLookup >= 0 then
-		p1.aggregate.nameLookup += p2.nameLookup
+	if Aggregate.nameLookup >= 0 then
+		p1.aggregate.nameLookup += Aggregate.nameLookup
 	end
-	if p2.connect >= 0 then
-		p1.aggregate.connect += p2.connect
+	if Aggregate.connect >= 0 then
+		p1.aggregate.connect += Aggregate.connect
 	end
-	if p2.sslHandshake >= 0 then
-		p1.aggregate.sslHandshake += p2.sslHandshake
+	if Aggregate.sslHandshake >= 0 then
+		p1.aggregate.sslHandshake += Aggregate.sslHandshake
 	end
-	if p2.makeRequest >= 0 then
-		p1.aggregate.makeRequest += p2.makeRequest
+	if Aggregate.makeRequest >= 0 then
+		p1.aggregate.makeRequest += Aggregate.makeRequest
 	end
-	if p2.receiveResponse >= 0 then
-		p1.aggregate.receiveResponse += p2.receiveResponse
+	if Aggregate.receiveResponse >= 0 then
+		p1.aggregate.receiveResponse += Aggregate.receiveResponse
 	end
 end
 
-function t.report(p1, p2)
-	-- upvalues: var1 (ref)
-	p2("NetworkProfileDuringStartup", "Queued", p1.aggregate.queued, var1)
-	p2("NetworkProfileDuringStartup", "NameLookup", p1.aggregate.nameLookup, var1)
-	p2("NetworkProfileDuringStartup", "Connect", p1.aggregate.connect, var1)
-	p2("NetworkProfileDuringStartup", "SSLHandshake", p1.aggregate.sslHandshake, var1)
-	p2("NetworkProfileDuringStartup", "MakeRequest", p1.aggregate.makeRequest, var1)
-	p2("NetworkProfileDuringStartup", "ReceiveResponse", p1.aggregate.receiveResponse, var1)
+function NetworkProfilerModule.report(p1, Callback: (any, any, any, any) -> ()) --[[ Line: 43 ]]
+	-- upvalues: Number (copy)
+	Callback("NetworkProfileDuringStartup", "Queued", p1.aggregate.queued, Number)
+	Callback("NetworkProfileDuringStartup", "NameLookup", p1.aggregate.nameLookup, Number)
+	Callback("NetworkProfileDuringStartup", "Connect", p1.aggregate.connect, Number)
+	Callback("NetworkProfileDuringStartup", "SSLHandshake", p1.aggregate.sslHandshake, Number)
+	Callback("NetworkProfileDuringStartup", "MakeRequest", p1.aggregate.makeRequest, Number)
+	Callback("NetworkProfileDuringStartup", "ReceiveResponse", p1.aggregate.receiveResponse, Number)
 end
 
-return t
+return NetworkProfilerModule

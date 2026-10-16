@@ -1,44 +1,44 @@
-﻿local appHeaderBar = script:FindFirstAncestor("AppHeaderBar")
-local parent = appHeaderBar.Parent
-local roactCompatModule = require(parent.Dev.RoactCompat)
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-UIBloxModule.init(require(parent.Dev.RobloxAppUIBloxConfig))
-local colorMode = require(parent.Foundation).Enums.ColorMode
-local appStyleProvider = UIBloxModule.App.Style.AppStyleProvider
-local constants = UIBloxModule.App.Style.Constants
-local light = colorMode.Light
-local dark = colorMode.Dark
-local gotham = constants.FontName.Gotham
-roactCompatModule.setGlobalConfig({ elementTracing = true })
-local t = {
-	Default = { themeName = light, fontName = gotham },
-	Light = { themeName = light, fontName = gotham },
-	Dark = { themeName = dark, fontName = gotham }
+﻿local AppHeaderBar = script:FindFirstAncestor("AppHeaderBar")
+local Parent = AppHeaderBar.Parent
+local RoactCompatModule = require(Parent.Dev.RoactCompat)
+local ReactModule = require(Parent.React)
+local UIBloxModule = require(Parent.UIBlox)
+UIBloxModule.init((require(Parent.Dev.RobloxAppUIBloxConfig)))
+local ColorMode = require(Parent.Foundation).Enums.ColorMode
+local AppStyleProvider = UIBloxModule.App.Style.AppStyleProvider
+local Constants = UIBloxModule.App.Style.Constants
+local Light = ColorMode.Light
+local Dark = ColorMode.Dark
+local Gotham = Constants.FontName.Gotham
+RoactCompatModule.setGlobalConfig({ elementTracing = true })
+local config = {
+	Default = { themeName = Light, fontName = Gotham },
+	Light = { themeName = Light, fontName = Gotham },
+	Dark = { themeName = Dark, fontName = Gotham }
 }
-local t_1 = {
-	Console = constants.DeviceType.Console,
-	Desktop = constants.DeviceType.Desktop
+local config1 = {
+	Console = Constants.DeviceType.Console,
+	Desktop = Constants.DeviceType.Desktop
 }
 
 return {
 	name = "AppHeaderBar",
-	storyRoots = { appHeaderBar },
-	roact = roactCompatModule,
-	mapStory = function(p1)
-		-- upvalues: t (ref), reactModule (ref), appStyleProvider (ref), t_1 (ref)
-		return function(p2)
-			-- upvalues: t (copy), reactModule (copy), appStyleProvider (copy), t_1 (copy), p1 (ref)
-			local theme = t[p2.theme]
+	storyRoots = { AppHeaderBar },
+	roact = RoactCompatModule,
+	mapStory = function(p1) --[[ Line: 48 ]]
+		-- upvalues: config (copy), ReactModule (copy), AppStyleProvider (copy), config1 (copy)
+		return function(p2) --[[ Line: 49 ]]
+			-- upvalues: config (upval), ReactModule (upval), AppStyleProvider (upval), config1 (upval), p1 (copy)
+			local Entry = config[p2.theme]
 			
-			return reactModule.createElement(appStyleProvider, {
+			return ReactModule.createElement(AppStyleProvider, {
 				style = {
-					themeName = theme.themeName,
-					fontName = theme.fontName,
-					deviceType = t_1[p2.platform],
+					themeName = Entry.themeName,
+					fontName = Entry.fontName,
+					deviceType = config1[p2.platform],
 					settings = p2.settings
 				}
-			}, { Child = reactModule.createElement(p1, p2) })
+			}, { Child = ReactModule.createElement(p1, p2) })
 		end
 	end
 }

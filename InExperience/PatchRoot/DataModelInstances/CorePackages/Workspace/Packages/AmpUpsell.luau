@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.AmpUpsell.AmpUpsell)
+﻿return (require(script.Parent._Workspace.AmpUpsell.AmpUpsell))

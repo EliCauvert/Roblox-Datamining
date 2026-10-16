@@ -1,37 +1,36 @@
-﻿local parent = script:FindFirstAncestor("SquadsCore").Parent
-local cryoModule = require(parent.Cryo)
-local squadPromptModule = require(script.Parent.SquadPrompt)
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local useTokens = foundationModule.Hooks.useTokens
+﻿local Parent = script:FindFirstAncestor("SquadsCore").Parent
+local CryoModule = require(Parent.Cryo)
+local SquadPromptModule = require(script.Parent.SquadPrompt)
+local ReactModule = require(Parent.React)
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 
-function SquadOverlay()
-	-- upvalues: useTokens (ref), reactModule (ref), useSelector (ref), squadPromptModule (ref), cryoModule (ref)
-	local var1 = useTokens()
-	local var2, var3 = reactModule.useState(Vector2.new(0, 0))
+function SquadOverlay() --[[ Line: 17 ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), UseSelectorFunction (copy), SquadPromptModule (copy), CryoModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.new(0, 0))
 	
-	return reactModule.createElement("ScreenGui", {
+	return ReactModule.createElement("ScreenGui", {
 		Enabled = true,
 		IgnoreGuiInset = true,
 		ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
 		DisplayOrder = 12,
-		[reactModule.Change.AbsoluteSize] = function(p1)
-			-- upvalues: var3 (ref)
-			var3(p1.AbsoluteSize)
+		[ReactModule.Change.AbsoluteSize] = function(Frame) --[[ Line: 30 ]]
+			-- upvalues: UseStateResult2 (copy)
+			UseStateResult2(Frame.AbsoluteSize)
 		end
 	}, {
-		Overlay = reactModule.createElement("TextButton", {
+		Overlay = ReactModule.createElement("TextButton", {
 			AutoButtonColor = false,
 			BorderSizePixel = 0,
 			Text = "",
-			BackgroundColor3 = var1.Color.Extended.Black.Black_70.Color3,
-			BackgroundTransparency = var1.Color.Extended.Black.Black_70.Transparency,
+			BackgroundColor3 = UseTokensResult.Color.Extended.Black.Black_70.Color3,
+			BackgroundTransparency = UseTokensResult.Color.Extended.Black.Black_70.Transparency,
 			Size = UDim2.new(1, 0, 1, 0)
 		}),
-		SquadPrompt = reactModule.createElement(squadPromptModule, cryoModule.Dictionary.join(useSelector(function(p1)
+		SquadPrompt = ReactModule.createElement(SquadPromptModule, CryoModule.Dictionary.join(UseSelectorFunction(function(p1) --[[ Line: 21 ]]
 			return p1.Squad.SquadPrompt.arguments
-		end), { screenSize = var2 }))
+		end), { screenSize = UseStateResult }))
 	})
 end
 

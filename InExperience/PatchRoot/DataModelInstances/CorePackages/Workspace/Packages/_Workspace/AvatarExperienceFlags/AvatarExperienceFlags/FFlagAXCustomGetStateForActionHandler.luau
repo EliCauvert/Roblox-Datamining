@@ -1,1 +1,1 @@
-﻿return require(script.Parent.FFlagAXRootSlotBasedEditorFlag) and game:DefineFastFlag("AXCustomGetStateForActionHandler3", false)
+﻿return game:DefineFastFlag("AXCustomGetStateForActionHandler3", false)

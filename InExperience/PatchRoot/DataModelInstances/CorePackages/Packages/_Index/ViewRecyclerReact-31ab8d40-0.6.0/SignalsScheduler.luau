@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.SignalsScheduler.SignalsScheduler)
+﻿return (require(script.Parent.Parent.Parent._Index.SignalsScheduler.SignalsScheduler))

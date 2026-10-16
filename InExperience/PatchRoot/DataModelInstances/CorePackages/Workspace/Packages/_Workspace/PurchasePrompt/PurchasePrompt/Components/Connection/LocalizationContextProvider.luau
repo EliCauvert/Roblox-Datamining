@@ -1,7 +1,7 @@
-﻿local roact = require(script:FindFirstAncestor("PurchasePrompt").Parent.PurchasePromptDeps).Roact
-local localizationContextModule = require(script.Parent.LocalizationContext)
+﻿local Roact = require(script:FindFirstAncestor("PurchasePrompt").Parent.PurchasePromptDeps).Roact
+local LocalizationContextModule = require(script.Parent.LocalizationContext)
 
-return function(p1)
-	-- upvalues: roact (ref), localizationContextModule (ref)
-	return roact.createElement(localizationContextModule.Provider, { value = p1.localizationContext }, roact.oneChild(p1[roact.Children]))
+return function(p1) --[[ Line: 13 ]]
+	-- upvalues: Roact (copy), LocalizationContextModule (copy)
+	return Roact.createElement(LocalizationContextModule.Provider, { value = p1.localizationContext }, Roact.oneChild(p1[Roact.Children]))
 end

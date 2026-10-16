@@ -1,10 +1,10 @@
-﻿local parent = script.Parent.Parent
-local captureServiceModule = require(parent.Services.CaptureService)
-local captureTypeModule = require(parent.Enums.CaptureType)
-local _ = require(parent.Types)
-local captureServiceGetScreenshotCaptureObjectEngineFeature = game:GetEngineFeature("CaptureServiceGetScreenshotCaptureObject")
+﻿local Parent = script.Parent.Parent
+local CaptureServiceModule = require(Parent.Services.CaptureService)
+local CaptureTypeModule = require(Parent.Enums.CaptureType)
+local _ = require(Parent.Types)
+local CaptureServiceGetScreenshotCaptureObjectEngineFeature = game:GetEngineFeature("CaptureServiceGetScreenshotCaptureObject")
 
-return function(p1)
-	-- upvalues: captureTypeModule (ref), captureServiceGetScreenshotCaptureObjectEngineFeature (ref), captureServiceModule (ref)
-	return if p1.CaptureType == nil then if p1.type == captureTypeModule.Video then p1.videoCapture elseif p1.capture == nil then if captureServiceGetScreenshotCaptureObjectEngineFeature then captureServiceModule:GetScreenshotCaptureObject(p1.filePath) else nil else p1.capture else p1
+return function(p1) --[[ Line: 9 | Named "getCaptureObject" ]]
+	-- upvalues: CaptureTypeModule (copy), CaptureServiceGetScreenshotCaptureObjectEngineFeature (copy), CaptureServiceModule (copy)
+	return if p1.CaptureType == nil then if p1.type == CaptureTypeModule.Video then p1.videoCapture elseif p1.capture == nil then if CaptureServiceGetScreenshotCaptureObjectEngineFeature then CaptureServiceModule:GetScreenshotCaptureObject(p1.filePath) else nil else p1.capture else p1
 end

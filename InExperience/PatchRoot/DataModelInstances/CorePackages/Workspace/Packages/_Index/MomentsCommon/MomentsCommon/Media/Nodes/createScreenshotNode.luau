@@ -1,166 +1,184 @@
-﻿local momentsCommon = script:FindFirstAncestor("MomentsCommon")
-local parent = momentsCommon.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local view = foundationModule.View
-local _ = require(momentsCommon.Media.MediaTypes)
-local _ = require(momentsCommon.Media.mediaNodeRegistry)
-local preloadFastIntsModule = require(momentsCommon.Media.Preload.preloadFastInts)
+﻿local MomentsCommon = script:FindFirstAncestor("MomentsCommon")
+local Parent = MomentsCommon.Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local View = require(Parent.Foundation).View
+local _ = require(MomentsCommon.Media.MediaTypes)
+local _ = require(MomentsCommon.Media.mediaNodeRegistry)
+local PreloadFastIntsModule = require(MomentsCommon.Media.Preload.preloadFastInts)
+local FFlagMomentsPreloadScreenshotImageLabelModule = require(MomentsCommon.Flags.FFlagMomentsPreloadScreenshotImageLabel)
 
-local function _(p1)
-	-- upvalues: reactModule (ref)
-	return if p1 == nil then nil else reactModule.createElement("UICorner", { CornerRadius = p1 })
+local function _(CornerRadius) --[[ Line: 73 | Named "renderCorner" ]]
+	-- upvalues: ReactModule (copy)
+	return if CornerRadius == nil then nil else ReactModule.createElement("UICorner", { CornerRadius = CornerRadius })
 end
 
 return {
 	kind = "screenshot",
-	create = function(p1, p2)
-		-- upvalues: preloadFastIntsModule (ref), signalsModule (ref), reactModule (ref), view (ref)
-		local image = p1.image
-		assert(if image == nil then p1.imageContent ~= nil else true, "createScreenshotNode: screenshot content is required")
-		local poster = p1.poster
-		local durationSeconds = p1.durationSeconds or preloadFastIntsModule.getScreenshotDurationSeconds()
-		local imageContent = p1.imageContent or Content.fromUri(image)
-		local posterContent = p1.posterContent or (if poster ~= nil then nil else Content.fromUri(poster))
-		local var1, var2 = signalsModule.createSignal(0)
-		local var3, var4 = signalsModule.createSignal(false)
-		local var5, var6 = signalsModule.createSignal(nil)
-		local var7 = false
-		local var8 = false
-		local heartbeatConnection = p2.runService.Heartbeat:Connect(function(p3)
-			-- upvalues: var8 (write), var7 (write), var1 (ref), durationSeconds (ref), var2 (ref)
-			if var8 or not var7 then return end
-			local var9 = var1(false) + p3
+	create = function(p1, p2) --[[ Line: 81 ]]
+		-- upvalues: PreloadFastIntsModule (copy), SignalsModule (copy), FFlagMomentsPreloadScreenshotImageLabelModule (copy), ReactModule (copy), View (copy)
+		local Image = p1.image
+		assert(Image ~= nil or p1.imageContent ~= nil, "createScreenshotNode: screenshot content is required")
+		local Poster = p1.poster
+		local DurationSeconds = p1.durationSeconds or PreloadFastIntsModule.getScreenshotDurationSeconds()
+		local ImageContent = p1.imageContent or Content.fromUri(Image)
+		local PosterContent = p1.posterContent or (if Poster == nil then nil else Content.fromUri(Poster))
+		local Signal, Signal2 = SignalsModule.createSignal(0)
+		local Signal1, Signal2_1 = SignalsModule.createSignal(false)
+		local Signal3, Signal2_2 = SignalsModule.createSignal(nil)
+		local Flag = false
+		local Flag1 = false
+		local HeartbeatConnection = p2.runService.Heartbeat:Connect(function(DeltaTime) --[[ Line: 98 ]]
+			-- upvalues: Flag1 (ref), Flag (ref), Signal (copy), DurationSeconds (copy), Signal2 (copy)
+			if Flag1 or not Flag then return end
+			local NewSignalResult = Signal(false) + DeltaTime
 			
-			if durationSeconds <= var9 then
-				var9 %= durationSeconds
+			if DurationSeconds <= NewSignalResult then
+				NewSignalResult %= DurationSeconds
 			end
-			var2(var9)
+			Signal2(NewSignalResult)
 		end)
 		
-		local function refreshLoaded()
-			-- upvalues: p2 (ref), image (ref), var4 (ref), var6 (ref)
-			local var9 = p2.contentProvider:GetAssetFetchStatus(image)
-			var4(var9 == Enum.AssetFetchStatus.Success)
-			var6(if var9 == Enum.AssetFetchStatus.Failure then `screenshot load failed: {var9.Name}` else nil)
+		local function refreshLoaded() --[[ Line: 113 ]]
+			-- upvalues: p2 (copy), Image (copy), Signal2_1 (copy), Signal2_2 (copy)
+			local AssetFetchStatus = p2.contentProvider:GetAssetFetchStatus(Image)
+			Signal2_1(AssetFetchStatus == Enum.AssetFetchStatus.Success)
+			Signal2_2(if AssetFetchStatus == Enum.AssetFetchStatus.Failure then `screenshot load failed: {AssetFetchStatus.Name}` else nil)
 		end
 		
-		local var9 = nil
+		local Connection = nil
 		
-		if image == nil then
-			var4(true)
+		if Image == nil then
+			Signal2_1(true)
 		else
-			var9 = p2.contentProvider:GetAssetFetchStatusChangedSignal(image):Connect(refreshLoaded)
-			local var10 = p2.contentProvider:GetAssetFetchStatus(image)
-			var4(var10 == Enum.AssetFetchStatus.Success)
-			var6(if var10 == Enum.AssetFetchStatus.Failure then `screenshot load failed: {var10.Name}` else nil)
+			Connection = p2.contentProvider:GetAssetFetchStatusChangedSignal(Image):Connect(refreshLoaded)
+			local AssetFetchStatus = p2.contentProvider:GetAssetFetchStatus(Image)
+			Signal2_1(AssetFetchStatus == Enum.AssetFetchStatus.Success)
+			Signal2_2(if AssetFetchStatus == Enum.AssetFetchStatus.Failure then `screenshot load failed: {AssetFetchStatus.Name}` else nil)
 		end
 		return {
 			kind = "screenshot",
 			usesDecoder = false,
 			zIndex = 0,
 			id = p1.id,
-			assets = function()
-				-- upvalues: posterContent (ref), imageContent (ref)
-				return if posterContent == nil then { imageContent } else { imageContent, posterContent }
+			assets = function() --[[ Line: 129 ]]
+				-- upvalues: PosterContent (copy), ImageContent (copy)
+				return if PosterContent == nil then { ImageContent } else { ImageContent, PosterContent }
 			end,
-			download = function()
-				-- upvalues: var8 (write), posterContent (ref), imageContent (ref), p2 (ref)
-				if var8 then return end
-				local list, var11, var12
-				local t = {}
-				
-				if posterContent == nil then
-					list = { imageContent }
-					var11 = nil
-					var12 = nil
+			download = function() --[[ Line: 136 ]]
+				-- upvalues: Flag1 (ref), FFlagMomentsPreloadScreenshotImageLabelModule (upval), ImageContent (copy), PosterContent (copy), p2 (copy)
+				if Flag1 then return end
+				if FFlagMomentsPreloadScreenshotImageLabelModule then
+					local List = {}
+					local ImageLabel = nil
+					
+					if ImageContent.Uri ~= nil then
+						local Image = Instance.new("ImageLabel")
+						Image.Image = ImageContent.Uri
+						ImageLabel = Image
+						table.insert(List, Image)
+					end
+					if PosterContent ~= nil and PosterContent.Uri ~= nil then
+						table.insert(List, PosterContent.Uri)
+					end
+					if #List > 0 then
+						p2.contentProvider:PreloadAsync(List)
+					end
+					if ImageLabel ~= nil then
+						ImageLabel:Destroy()
+					end
+					return
 				else
-					list = { imageContent, posterContent }
-					var11 = nil
-					var12 = nil
-				end
-				for i, v in list, var11, var12 do
-					if v.Uri ~= nil then
-						table.insert(t, v.Uri)
+					local List1 = {}
+					local v1 = nil
+					local list = nil
+					local v2 = nil
+					
+					if PosterContent == nil then
+						list = { ImageContent }
+						v1 = nil
+						v2 = nil
+					else
+						list = { ImageContent, PosterContent }
+						v1 = nil
+						v2 = nil
+					end
+					for _, value in list, v1, v2 do
+						if value.Uri ~= nil then
+							table.insert(List1, value.Uri)
+						end
+					end
+					if #List1 > 0 then
+						p2.contentProvider:PreloadAsync(List1)
 					end
 				end
-				if #t > 0 then
-					p2.contentProvider:PreloadAsync(t)
-				end
 			end,
-			render = function(p3)
-				-- upvalues: reactModule (copy), view (copy), posterContent (ref), imageContent (ref)
-				local createElement_1
-				local createElement = reactModule.createElement
-				local t = { tag = "size-full", ZIndex = 0 }
-				local t_1 = {}
+			render = function(p3) --[[ Line: 195 ]]
+				-- upvalues: ReactModule (upval), View (upval), PosterContent (copy), ImageContent (copy)
+				local CreateElementFunction = ReactModule.createElement
+				local config = { tag = "size-full", ZIndex = 0 }
+				local t = {}
+				local ImageLabel = nil
 				
-				if posterContent == nil then
-					createElement_1 = nil
+				if PosterContent == nil then
+					ImageLabel = nil
 				else
-					createElement_1 = reactModule.createElement
-					local var13 = "ImageLabel"
-					local t_2 = {
+					local CornerRadius = p3.cornerRadius
+					ImageLabel = ReactModule.createElement("ImageLabel", {
 						BackgroundTransparency = 1,
 						ZIndex = 1,
 						Size = UDim2.fromScale(1, 1),
 						ScaleType = p3.scaleType or Enum.ScaleType.Crop,
-						ImageContent = posterContent
-					}
-					local t_3 = {}
-					local cornerRadius = p3.cornerRadius
-					t_3.Corner = if cornerRadius ~= nil then nil else reactModule.createElement("UICorner", { CornerRadius = cornerRadius })
-					createElement_1 = createElement_1(var13, t_2, t_3)
+						ImageContent = PosterContent
+					}, {
+						Corner = if CornerRadius == nil then nil else ReactModule.createElement("UICorner", { CornerRadius = CornerRadius })
+					})
 				end
-				t_1.Poster = createElement_1
-				local createElement_2 = reactModule.createElement
-				local var14 = "ImageLabel"
-				local t_2 = {
+				t.Poster = ImageLabel
+				local CornerRadius = p3.cornerRadius
+				t.Base = ReactModule.createElement("ImageLabel", {
 					BackgroundTransparency = 1,
 					ZIndex = 2,
 					Size = UDim2.fromScale(1, 1),
 					ScaleType = p3.scaleType or Enum.ScaleType.Crop,
-					ImageContent = imageContent,
+					ImageContent = ImageContent,
 					ref = p3.setSurface
-				}
-				local t_3 = {}
-				local cornerRadius = p3.cornerRadius
-				t_3.Corner = if cornerRadius ~= nil then nil else reactModule.createElement("UICorner", { CornerRadius = cornerRadius })
-				t_1.Base = createElement_2(var14, t_2, t_3)
+				}, {
+					Corner = if CornerRadius == nil then nil else ReactModule.createElement("UICorner", { CornerRadius = CornerRadius })
+				})
 				
-				return createElement(view, t, t_1)
+				return CreateElementFunction(View, config, t)
 			end,
-			play = function()
-				-- upvalues: var7 (write)
-				var7 = true
+			play = function() --[[ Line: 178 ]]
+				-- upvalues: Flag (ref)
+				Flag = true
 			end,
-			pause = function()
-				-- upvalues: var7 (write)
-				var7 = false
+			pause = function() --[[ Line: 182 ]]
+				-- upvalues: Flag (ref)
+				Flag = false
 			end,
-			seek = function(p3)
-				-- upvalues: var2 (ref), durationSeconds (ref)
-				var2(math.clamp(p3, 0, durationSeconds))
+			seek = function(Value: number) --[[ Line: 187 ]]
+				-- upvalues: Signal2 (copy), DurationSeconds (copy)
+				Signal2((math.clamp(Value, 0, DurationSeconds)))
 			end,
-			dispose = function()
-				-- upvalues: var8 (write), var7 (write), heartbeatConnection (ref), var9 (write)
-				if var8 then return end
-				var8 = true
-				var7 = false
-				heartbeatConnection:Disconnect()
+			dispose = function() --[[ Line: 226 ]]
+				-- upvalues: Flag1 (ref), Flag (ref), HeartbeatConnection (copy), Connection (ref)
+				if Flag1 then return end
+				Flag1 = true
+				Flag = false
+				HeartbeatConnection:Disconnect()
 				
-				if var9 ~= nil then
-					var9:Disconnect()
+				if Connection ~= nil then
+					Connection:Disconnect()
 				end
 			end,
-			getPosition = var1,
-			getDuration = function()
-				-- upvalues: durationSeconds (ref)
-				return durationSeconds
+			getPosition = Signal,
+			getDuration = function() --[[ Line: 191 ]]
+				-- upvalues: DurationSeconds (copy)
+				return DurationSeconds
 			end,
-			getIsImageLoaded = var3,
-			getFailureReason = var5
+			getIsImageLoaded = Signal1,
+			getFailureReason = Signal3
 		}
 	end
 }

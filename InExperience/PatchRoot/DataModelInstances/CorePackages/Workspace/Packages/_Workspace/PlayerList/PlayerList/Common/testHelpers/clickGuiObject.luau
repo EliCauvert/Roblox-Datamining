@@ -1,43 +1,46 @@
-﻿local virtualInputManagerService = game:GetService("VirtualInputManager")
+﻿local VirtualInputManager = game:GetService("VirtualInputManager")
 
-return function(p1)
-	-- upvalues: virtualInputManagerService (ref)
-	local screenGui = p1:FindFirstAncestorOfClass("ScreenGui")
-	local var1 = screenGui or Instance.new("ScreenGui")
-	local var2 = screenGui == nil
-	local var3 = nil
+return function(Frame: Frame) --[[ Line: 7 | Named "clickGuiObject" ]]
+	-- upvalues: VirtualInputManager (copy)
+	local ScreenGui = Frame:FindFirstAncestorOfClass("ScreenGui")
+	local ScreenGui1 = if ScreenGui then ScreenGui else Instance.new("ScreenGui")
+	local NoScreenGui = ScreenGui == nil
+	local v1 = nil
 	
-	if var2 then
-		var1.Parent = game:GetService("CoreGui")
-		local var4 = p1
-		while var4.Parent ~= nil and var4.Parent.Parent ~= game do
-			var4 = var4.Parent
+	if NoScreenGui then
+		ScreenGui1.Parent = game:GetService("CoreGui")
+		local Parent = Frame
+		while Parent.Parent ~= nil and Parent.Parent.Parent ~= game do
+			Parent = Parent.Parent
 		end
-		var3 = var4
-		var4.Parent = var1
+		v1 = Parent
+		Parent.Parent = ScreenGui1
 	end
-	virtualInputManagerService:WaitForInputEventsProcessed()
-	local absolutePosition = p1.AbsolutePosition
-	local absoluteSize = p1.AbsoluteSize
-	local var5 = absolutePosition.X + absoluteSize.X / 2
-	local var6 = absolutePosition.Y + absoluteSize.Y / 2
-	local var7 = false
-	local activatedConnection = p1.Activated:Connect(function()
-		-- upvalues: var7 (write)
-		var7 = true
+	VirtualInputManager:WaitForInputEventsProcessed()
+	local AbsolutePosition = Frame.AbsolutePosition
+	local AbsoluteSize = Frame.AbsoluteSize
+	local NewX = AbsolutePosition.X + AbsoluteSize.X / 2
+	local NewY = AbsolutePosition.Y + AbsoluteSize.Y / 2
+	local Flag = false
+	local ActivatedConnection = Frame.Activated:Connect(function() --[[ Line: 30 ]]
+		-- upvalues: Flag (ref)
+		Flag = true
 	end)
-	virtualInputManagerService:SendMouseButtonEvent(var5, var6, 0, true, nil, 1)
-	virtualInputManagerService:SendMouseButtonEvent(var5, var6, 0, false, nil, 1)
-	virtualInputManagerService:WaitForInputEventsProcessed()
-	virtualInputManagerService:SendTouchEvent(1, 0, var5, var6)
-	virtualInputManagerService:SendTouchEvent(1, 2, var5, var6)
-	virtualInputManagerService:WaitForInputEventsProcessed()
-	activatedConnection:Disconnect()
+	VirtualInputManager:SendMouseButtonEvent(NewX, NewY, 0, true, nil, 1)
+	VirtualInputManager:SendMouseButtonEvent(NewX, NewY, 0, false, nil, 1)
+	VirtualInputManager:WaitForInputEventsProcessed()
 	
-	if var2 then
-		if var3 then
-			var3.Parent = nil
+	if not Flag then
+		VirtualInputManager:SendTouchEvent(1, 0, NewX, NewY)
+		VirtualInputManager:SendTouchEvent(1, 2, NewX, NewY)
+		VirtualInputManager:WaitForInputEventsProcessed()
+	end
+	ActivatedConnection:Disconnect()
+	
+	if NoScreenGui then
+		if v1 then
+			v1.Parent = nil
 		end
-		var1:Destroy()
+		ScreenGui1:Destroy()
 	end
 end

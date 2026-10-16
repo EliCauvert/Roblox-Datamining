@@ -1,26 +1,26 @@
-﻿local tracingModule = require(script.Parent.Tracing)
-local tracingSubscriptionsModule = require(script.Parent.TracingSubscriptions)
-local unknownModule = require(script.Parent.forks["SchedulerHostConfig.mock"])
-local var1 = require(script.Parent.Scheduler)(unknownModule)
-local t = { tracing = {} }
+﻿local TracingModule = require(script.Parent.Tracing)
+local TracingSubscriptionsModule = require(script.Parent.TracingSubscriptions)
+local SchedulerHostConfigMockModule = require(script.Parent.forks["SchedulerHostConfig.mock"])
+local v1 = require(script.Parent.Scheduler)(SchedulerHostConfigMockModule)
+local UnstableMockModule = { tracing = {} }
 
-for i, v in var1 do
-	t[i] = v
+for i, value in v1 do
+	UnstableMockModule[i] = value
 end
-for i_1, v_1 in tracingModule do
-	t.tracing[i_1] = v_1
+for i1, value1 in TracingModule do
+	UnstableMockModule.tracing[i1] = value1
 end
-for i_2, v_2 in tracingSubscriptionsModule do
-	t.tracing[i_2] = v_2
+for i2, value2 in TracingSubscriptionsModule do
+	UnstableMockModule.tracing[i2] = value2
 end
-t.unstable_flushAllWithoutAsserting = unknownModule.unstable_flushAllWithoutAsserting
-t.unstable_flushNumberOfYields = unknownModule.unstable_flushNumberOfYields
-t.unstable_flushExpired = unknownModule.unstable_flushExpired
-t.unstable_clearYields = unknownModule.unstable_clearYields
-t.unstable_flushUntilNextPaint = unknownModule.unstable_flushUntilNextPaint
-t.unstable_flushAll = unknownModule.unstable_flushAll
-t.unstable_yieldValue = unknownModule.unstable_yieldValue
-t.unstable_advanceTime = unknownModule.unstable_advanceTime
-t.unstable_Profiling = var1.unstable_Profiling
+UnstableMockModule.unstable_flushAllWithoutAsserting = SchedulerHostConfigMockModule.unstable_flushAllWithoutAsserting
+UnstableMockModule.unstable_flushNumberOfYields = SchedulerHostConfigMockModule.unstable_flushNumberOfYields
+UnstableMockModule.unstable_flushExpired = SchedulerHostConfigMockModule.unstable_flushExpired
+UnstableMockModule.unstable_clearYields = SchedulerHostConfigMockModule.unstable_clearYields
+UnstableMockModule.unstable_flushUntilNextPaint = SchedulerHostConfigMockModule.unstable_flushUntilNextPaint
+UnstableMockModule.unstable_flushAll = SchedulerHostConfigMockModule.unstable_flushAll
+UnstableMockModule.unstable_yieldValue = SchedulerHostConfigMockModule.unstable_yieldValue
+UnstableMockModule.unstable_advanceTime = SchedulerHostConfigMockModule.unstable_advanceTime
+UnstableMockModule.unstable_Profiling = v1.unstable_Profiling
 
-return t
+return UnstableMockModule

@@ -1,68 +1,66 @@
-﻿local parent = script.Parent
-local coreGuiService = game:GetService("CoreGui")
-local experienceStateCaptureService = game:GetService("ExperienceStateCaptureService")
-local localizationService = game:GetService("LocalizationService")
-local reactModule = require(parent.React)
-local roactModule = require(parent.Roact)
-local styleProviderWithDefaultTheme = require(parent.Style).StyleProviderWithDefaultTheme
-local layerCollectorProvider = require(parent.UIBlox).Core.Layout.LayerCollector.LayerCollectorProvider
-local foundationProvider = require(parent.Foundation).FoundationProvider
-local localization = require(parent.InExperienceLocales).Localization
-local localizationProvider = require(parent.Localization).LocalizationProvider
-local fFlagHighlightModePreciseSelectionEnabled = require(parent.SharedFlags).FFlagHighlightModePreciseSelectionEnabled
-local messageBusService = game:GetService("MessageBusService")
-local captureModeMessageId = messageBusService:GetMessageId("CaptureMode", "sceneSelectionExitReason")
-local sceneAnalysisModule = require(script.Analysis.SceneAnalysis)
-local inGameAssetReportModeModule = require(script.InGameAssetReportUI.Components.InGameAssetReportMode)
-local inGameAssetReportModePreciseSelectionModule = require(script.InGameAssetReportUI.Components.PreciseSelection.InGameAssetReportModePreciseSelection)
-local getHighlightModeVariantModule = require(script.Utility.getHighlightModeVariant)
-local highlightModeVariants = require(script.InGameAssetReportUI.Resources.Constants).HighlightModeVariants
-local t = {
-	[highlightModeVariants.Default] = inGameAssetReportModeModule,
-	[highlightModeVariants.NoPreview] = inGameAssetReportModePreciseSelectionModule
+﻿local Parent = script.Parent
+local CoreGui = game:GetService("CoreGui")
+local ExperienceStateCaptureService = game:GetService("ExperienceStateCaptureService")
+local LocalizationService = game:GetService("LocalizationService")
+local ReactModule = require(Parent.React)
+local RoactModule = require(Parent.Roact)
+local StyleProviderWithDefaultTheme = require(Parent.Style).StyleProviderWithDefaultTheme
+local LayerCollectorProvider = require(Parent.UIBlox).Core.Layout.LayerCollector.LayerCollectorProvider
+local FoundationProvider = require(Parent.Foundation).FoundationProvider
+local Localization = require(Parent.InExperienceLocales).Localization
+local LocalizationProvider = require(Parent.Localization).LocalizationProvider
+local FFlagHighlightModePreciseSelectionEnabled = require(Parent.SharedFlags).FFlagHighlightModePreciseSelectionEnabled
+local MessageBusService = game:GetService("MessageBusService")
+local CaptureModeMessageId = MessageBusService:GetMessageId("CaptureMode", "sceneSelectionExitReason")
+local SceneAnalysisModule = require(script.Analysis.SceneAnalysis)
+local InGameAssetReportModeModule = require(script.InGameAssetReportUI.Components.InGameAssetReportMode)
+local GetHighlightModeVariantModule = require(script.Utility.getHighlightModeVariant)
+local HighlightModeVariants = require(script.InGameAssetReportUI.Resources.Constants).HighlightModeVariants
+local config = {
+	[HighlightModeVariants.Default] = InGameAssetReportModeModule,
+	[HighlightModeVariants.NoPreview] = require(script.InGameAssetReportUI.Components.PreciseSelection.InGameAssetReportModePreciseSelection)
 }
 
 return {
-	interpretAnnotation = sceneAnalysisModule.interpretAnnotation,
-	extractItemsFromInterpretations = sceneAnalysisModule.extractItemsFromInterpretations,
-	__setRandomGenerator = sceneAnalysisModule.__setRandomGenerator,
-	initialize = function()
-		-- upvalues: inGameAssetReportModeModule (ref), fFlagHighlightModePreciseSelectionEnabled (ref), getHighlightModeVariantModule (ref), highlightModeVariants (ref), t (ref), reactModule (ref), layerCollectorProvider (ref), foundationProvider (ref), roactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), styleProviderWithDefaultTheme (ref), messageBusService (ref), captureModeMessageId (ref), experienceStateCaptureService (ref), coreGuiService (ref)
-		local _ = nil
-		local var1 = inGameAssetReportModeModule
+	interpretAnnotation = SceneAnalysisModule.interpretAnnotation,
+	extractItemsFromInterpretations = SceneAnalysisModule.extractItemsFromInterpretations,
+	__setRandomGenerator = SceneAnalysisModule.__setRandomGenerator,
+	initialize = function() --[[ Line: 41 ]]
+		-- upvalues: InGameAssetReportModeModule (copy), FFlagHighlightModePreciseSelectionEnabled (copy), GetHighlightModeVariantModule (copy), HighlightModeVariants (copy), config (copy), ReactModule (copy), LayerCollectorProvider (copy), FoundationProvider (copy), RoactModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), StyleProviderWithDefaultTheme (copy), MessageBusService (copy), CaptureModeMessageId (copy), ExperienceStateCaptureService (copy), CoreGui (copy)
+		local InGameAssetReportModeModule1 = InGameAssetReportModeModule
 		
-		if fFlagHighlightModePreciseSelectionEnabled then
-			local var2 = getHighlightModeVariantModule()
+		if FFlagHighlightModePreciseSelectionEnabled then
+			local HighlightModeVariantModule = GetHighlightModeVariantModule()
 			
-			if var2 ~= highlightModeVariants.Default and t[var2] ~= nil then
+			if HighlightModeVariantModule ~= HighlightModeVariants.Default and config[HighlightModeVariantModule] ~= nil then
 				game:GetService("ExperienceStateCaptureService").SelectionMode = Enum.ExperienceStateCaptureSelectionMode.SafetyHighlightMode
-				var1 = t[var2]
+				InGameAssetReportModeModule1 = config[HighlightModeVariantModule]
 			end
 		end
-		local screenGui = reactModule.createElement("ScreenGui", {
+		local ScreenGui = ReactModule.createElement("ScreenGui", {
 			IgnoreGuiInset = true,
 			OnTopOfCoreBlur = false,
 			ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 		}, {
-			LayerCollectorProvider = reactModule.createElement(layerCollectorProvider, {}, {
-				FoundationProvider = reactModule.createElement(foundationProvider, { colorMode = "Dark" }, {
-					LocalizationProvider = roactModule.createElement(localizationProvider, {
-						localization = localization.new(localizationService.RobloxLocaleId)
+			LayerCollectorProvider = ReactModule.createElement(LayerCollectorProvider, {}, {
+				FoundationProvider = ReactModule.createElement(FoundationProvider, { colorMode = "Dark" }, {
+					LocalizationProvider = RoactModule.createElement(LocalizationProvider, {
+						localization = Localization.new(LocalizationService.RobloxLocaleId)
 					}, {
-						StyleProvider = reactModule.createElement(styleProviderWithDefaultTheme, { withDarkTheme = true }, {
-							InGameAssetReportUI = roactModule.createElement(var1, {
-								backAction = function()
-									-- upvalues: messageBusService (copy), captureModeMessageId (copy), experienceStateCaptureService (copy)
-									messageBusService:Publish(captureModeMessageId, { reason = "back" })
-									experienceStateCaptureService:ToggleCaptureMode()
+						StyleProvider = ReactModule.createElement(StyleProviderWithDefaultTheme, { withDarkTheme = true }, {
+							InGameAssetReportUI = RoactModule.createElement(InGameAssetReportModeModule1, {
+								backAction = function() --[[ Line: 72 ]]
+									-- upvalues: MessageBusService (upval), CaptureModeMessageId (upval), ExperienceStateCaptureService (upval)
+									MessageBusService:Publish(CaptureModeMessageId, { reason = "back" })
+									ExperienceStateCaptureService:ToggleCaptureMode()
 								end,
-								onReportComplete = function()
-									-- upvalues: messageBusService (copy), captureModeMessageId (copy), experienceStateCaptureService (copy)
-									messageBusService:Publish(captureModeMessageId, { reason = "submit" })
-									experienceStateCaptureService:ToggleCaptureMode()
+								onReportComplete = function() --[[ Line: 76 ]]
+									-- upvalues: MessageBusService (upval), CaptureModeMessageId (upval), ExperienceStateCaptureService (upval)
+									MessageBusService:Publish(CaptureModeMessageId, { reason = "submit" })
+									ExperienceStateCaptureService:ToggleCaptureMode()
 								end,
-								getIsSmallPortraitMode = function(p1)
-									return p1.X < p1.Y and p1.X < 800
+								getIsSmallPortraitMode = function(Vector): boolean --[[ Line: 80 ]]
+									return Vector.X < Vector.Y and Vector.X < 800
 								end
 							})
 						})
@@ -72,11 +70,11 @@ return {
 		})
 		
 		if game:GetEngineFeature("ExperienceStateCaptureHiddenSelection") then
-			experienceStateCaptureService.HiddenSelectionEnabled = true
+			ExperienceStateCaptureService.HiddenSelectionEnabled = true
 		end
-		roactModule.mount(screenGui, coreGuiService, "InGameAssetReportMode")
+		RoactModule.mount(ScreenGui, CoreGui, "InGameAssetReportMode")
 	end,
-	getHighlightModeVariant = getHighlightModeVariantModule,
-	HighlightModeVariants = highlightModeVariants,
+	getHighlightModeVariant = GetHighlightModeVariantModule,
+	HighlightModeVariants = HighlightModeVariants,
 	["jest.config"] = script["jest.config"]
 }

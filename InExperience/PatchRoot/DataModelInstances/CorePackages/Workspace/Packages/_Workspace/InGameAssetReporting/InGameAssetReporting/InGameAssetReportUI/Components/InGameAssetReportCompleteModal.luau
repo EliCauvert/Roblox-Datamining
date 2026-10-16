@@ -1,67 +1,67 @@
-﻿local parent = script:FindFirstAncestor("InGameAssetReporting").Parent
-local reactModule = require(parent.React)
-local reactOtterModule = require(parent.ReactOtter)
-local UIBloxModule = require(parent.UIBlox)
-local withLocalization = require(parent.Localization).withLocalization
-local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local t = { stiffness = 400, damping = 40, mass = 1 }
+﻿local Parent = script:FindFirstAncestor("InGameAssetReporting").Parent
+local ReactModule = require(Parent.React)
+local ReactOtterModule = require(Parent.ReactOtter)
+local UIBloxModule = require(Parent.UIBlox)
+local WithLocalizationFunction = require(Parent.Localization).withLocalization
+local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local config = { stiffness = 400, damping = 40, mass = 1 }
 
-return function(value)
-	-- upvalues: reactModule (ref), reactOtterModule (ref), t (ref), withLocalization (ref), interactiveAlert (ref), buttonType (ref)
-	local var1, var2 = reactModule.useState(true)
-	local var3, var4 = reactOtterModule.useAnimatedBinding(1, function()
-		-- upvalues: var1 (ref), value (ref)
-		if not var1 then
-			value.onClose()
+return function(p1) --[[ Line: 24 | Named "InGameAssetReportCompleteModal" ]]
+	-- upvalues: ReactModule (copy), ReactOtterModule (copy), config (copy), WithLocalizationFunction (copy), InteractiveAlert (copy), ButtonType (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(true)
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(1, function() --[[ Line: 27 ]]
+		-- upvalues: UseStateResult (copy), p1 (copy)
+		if not UseStateResult then
+			p1.onClose()
 		end
 	end)
-	local var5 = reactModule.useMemo(function()
-		-- upvalues: var1 (ref)
-		return if var1 then 0 else 1
-	end, { var1 })
-	reactModule.useEffect(function()
-		-- upvalues: var4 (ref), reactOtterModule (copy), var5 (ref), t (copy)
-		var4(reactOtterModule.spring(var5, t))
-	end, { var5 })
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref)
-		var2(false)
-	end, { var2 })
+	local UseMemoResult = ReactModule.useMemo(function(): number --[[ Line: 34 ]]
+		-- upvalues: UseStateResult (copy)
+		return if UseStateResult then 0 else 1
+	end, { UseStateResult })
+	ReactModule.useEffect(function() --[[ Line: 38 ]]
+		-- upvalues: UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), UseMemoResult (copy), config (upval)
+		UseAnimatedBindingResult2(ReactOtterModule.spring(UseMemoResult, config))
+	end, { UseMemoResult })
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 42 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(false)
+	end, { UseStateResult2 })
 	
-	return withLocalization({
+	return WithLocalizationFunction({
 		reportCompleteTitle = "Feature.ReportAbuse.Title.SelectInSceneThankYou",
 		reportCompleteDescription = "Feature.ReportAbuse.Label.SelectInSceneComplete",
 		reportCompleteClose = "Feature.ReportAbuse.Action.Close"
-	})(function(p1)
-		-- upvalues: reactModule (copy), var3 (ref), var6 (ref), interactiveAlert (copy), value (ref), buttonType (copy)
-		return reactModule.createElement("TextButton", {
+	})(function(p2) --[[ Line: 50 ]]
+		-- upvalues: ReactModule (upval), UseAnimatedBindingResult (copy), UseResult (copy), InteractiveAlert (upval), p1 (copy), ButtonType (upval)
+		return ReactModule.createElement("TextButton", {
 			AutoButtonColor = false,
 			BorderSizePixel = 0,
-			BackgroundTransparency = var3:map(function(p2)
-				return p2 + 0.3
+			BackgroundTransparency = UseAnimatedBindingResult:map(function(p3: number): number --[[ Line: 54 ]]
+				return p3 + 0.3
 			end),
 			BackgroundColor3 = Color3.fromHex("#000000"),
 			Size = UDim2.new(1, 0, 1, 0),
 			Text = "",
 			Position = UDim2.fromScale(0.5, 0.5),
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			[reactModule.Event.Activated] = var6,
+			[ReactModule.Event.Activated] = UseResult,
 			ZIndex = 10
 		}, {
-			Alert = reactModule.createElement(interactiveAlert, {
-				screenSize = value.screenSize,
-				title = p1.reportCompleteTitle,
-				bodyText = p1.reportCompleteDescription,
+			Alert = ReactModule.createElement(InteractiveAlert, {
+				screenSize = p1.screenSize,
+				title = p2.reportCompleteTitle,
+				bodyText = p2.reportCompleteDescription,
 				anchorPoint = Vector2.new(0.5, 0.5),
-				position = var3:map(function(p2)
-					return UDim2.new(0.5, 0, 0.5, 0):Lerp(UDim2.new(0.5, 0, -0.5, 0), p2)
+				position = UseAnimatedBindingResult:map(function(Alpha) --[[ Line: 70 ]]
+					return UDim2.new(0.5, 0, 0.5, 0):Lerp(UDim2.new(0.5, 0, -0.5, 0), Alpha)
 				end),
 				buttonStackInfo = {
 					buttons = {
 						{
-							buttonType = buttonType.PrimarySystem,
-							props = { onActivated = var6, text = p1.reportCompleteClose }
+							buttonType = ButtonType.PrimarySystem,
+							props = { onActivated = UseResult, text = p2.reportCompleteClose }
 						}
 					}
 				}

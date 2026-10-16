@@ -1,14 +1,14 @@
-﻿local parent = script:FindFirstAncestor("ExpChat").Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
+﻿local Parent = script:FindFirstAncestor("ExpChat").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
 
-return reactModule.memo(function(value)
-	-- upvalues: reactModule (ref), foundationModule (ref)
-	return reactModule.createElement(foundationModule.Chip, {
-		LayoutOrder = value.layoutOrder or 0,
-		text = value.name,
-		isChecked = value.isSelected,
-		onActivated = value.onActivated,
-		size = foundationModule.Enums.ChipSize.Small
+return ReactModule.memo(function(p1) --[[ Line: 13 | Named "PresetCategoryTab" ]]
+	-- upvalues: ReactModule (copy), FoundationModule (copy)
+	return ReactModule.createElement(FoundationModule.Chip, {
+		LayoutOrder = p1.layoutOrder or 0,
+		text = p1.name,
+		isChecked = p1.isSelected,
+		onActivated = p1.onActivated,
+		size = FoundationModule.Enums.ChipSize.Small
 	})
 end)

@@ -1,89 +1,89 @@
-﻿local playersService = game:GetService("Players")
-local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local dataHydrationModule = require(parent.DataHydration)
-local discoveryAnalyticsModule = require(parent.DiscoveryAnalytics)
-local foundationModule = require(parent.Foundation)
-local game = dataHydrationModule.Game
-local signalsModule = require(parent.Signals)
-local localizeStrings = require(parent.Localization).localizeStrings
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local sduiActionType = sduiCoreSystemModule.SduiActionType
-local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
-local gameFollow = discoveryAnalyticsModule.Events.gameFollow
-local getSduiPageEntrySnackbarStore = require(parent.SduiSharedUtilities).getSduiPageEntrySnackbarStore
+﻿local Players = game:GetService("Players")
+local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local FoundationModule = require(Parent.Foundation)
+local Game1 = require(Parent.DataHydration).Game
+local SignalsModule = require(Parent.Signals)
+local FFlagLuaAppAddUniverseIdToEngagementEvents = require(Parent.SharedFlags).FFlagLuaAppAddUniverseIdToEngagementEvents
+local LocalizeStringsFunction = require(Parent.Localization).localizeStrings
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiActionType = SduiCoreSystemModule.SduiActionType
+local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
+local GameFollowFunction = require(Parent.DiscoveryAnalytics).Events.gameFollow
+local GetSduiPageEntrySnackbarStoreFunction = require(Parent.SduiSharedUtilities).getSduiPageEntrySnackbarStore
 
-return function(p1, _, p2, _)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref), game (ref), playersService (ref), gameFollow (ref), signalsModule (ref), getSduiPageEntrySnackbarStore (ref), foundationModule (ref), localizeStrings (ref)
-	local var1 = if p1 then p1.actionParams else nil
+return function(p1, _, p2, _) --[[ Line: 26 | Named "SduiToggleExperienceFollowAction" ]]
+	-- upvalues: SduiErrorType (copy), SduiActionType (copy), Game1 (copy), Players (copy), GameFollowFunction (copy), FFlagLuaAppAddUniverseIdToEngagementEvents (copy), SignalsModule (copy), GetSduiPageEntrySnackbarStoreFunction (copy), FoundationModule (copy), LocalizeStringsFunction (copy)
+	local ActionParams = p1 and p1.actionParams or nil
 	
-	if var1 == nil then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if ActionParams == nil then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing action params",
-			name = sduiActionType.ToggleExperienceFollow
+			name = SduiActionType.ToggleExperienceFollow
 		}, p2.appPage)
 		
 		return
 	end
-	local universeId = var1.universeId
-	local gameName = var1.gameName or ""
+	local UniverseId = ActionParams.universeId
+	local GameName = ActionParams.gameName or ""
 	
-	if universeId == nil or typeof(universeId) ~= "string" then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if UniverseId == nil or typeof(UniverseId) ~= "string" then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing universeId",
-			name = sduiActionType.ToggleExperienceFollow
+			name = SduiActionType.ToggleExperienceFollow
 		}, p2.appPage)
 		
 		return
-	end
-	local placeId = var1.placeId
-	local ctx = var1.ctx or ""
-	local followingsStore = game.getFollowingsStore(false)
-	local var2 = followingsStore.getAndFetchFollowing(universeId).data(false)
-	local var3 = not (if var2 then var2.isFollowing else false)
-	gameFollow({
-		uid = tostring(playersService.LocalPlayer and playersService.LocalPlayer.UserId),
-		placeId = tostring(placeId),
-		state = if var3 then "on" else "off",
-		ctx = ctx
-	}, ctx)
-	local var4 = followingsStore.updateFollowing(universeId, var3)
-	local localization = p2.dependencies.localization
-	local t = {}
-	t.dispose = signalsModule.createEffect(function(p3)
-		-- upvalues: var4 (ref), p2 (ref), localization (ref), getSduiPageEntrySnackbarStore (copy), foundationModule (copy), localizeStrings (copy), gameName (ref), t (ref)
-		local var5 = var4(p3)
-		
-		if var5 == nil then return end
-		local configKey = p2.configKey
-		
-		if var5.type == "error" then
-			if configKey then
-				getSduiPageEntrySnackbarStore().show(configKey, {
-					title = localization:Format(if var5.errorType == "LimitReached" then "Feature.GameFollows.TooltipNotificationsLimitReached" else "Feature.Toast.NetworkingError.SomethingIsWrong"),
-					icon = foundationModule.Enums.IconName.TriangleExclamation
+	else
+		local Ctx = ActionParams.ctx or ""
+		local FollowingsStore = Game1.getFollowingsStore(false)
+		local DataResult = FollowingsStore.getAndFetchFollowing(UniverseId).data(false)
+		local Inverted = not (DataResult and DataResult.isFollowing or false)
+		GameFollowFunction({
+			uid = tostring(Players.LocalPlayer and Players.LocalPlayer.UserId),
+			placeId = tostring(ActionParams.placeId),
+			state = if Inverted then "on" else "off",
+			ctx = Ctx,
+			universeId = if FFlagLuaAppAddUniverseIdToEngagementEvents then UniverseId else nil
+		}, Ctx)
+		local UpdateFollowingResult = FollowingsStore.updateFollowing(UniverseId, Inverted)
+		local Localization = p2.dependencies.localization
+		local t = {}
+		t.dispose = SignalsModule.createEffect(function(p3) --[[ Line: 73 ]]
+			-- upvalues: UpdateFollowingResult (copy), p2 (copy), Localization (copy), GetSduiPageEntrySnackbarStoreFunction (upval), FoundationModule (upval), LocalizeStringsFunction (upval), GameName (copy), t (copy)
+			local UpdateFollowingResultResult = UpdateFollowingResult(p3)
+			
+			if UpdateFollowingResultResult == nil then return end
+			local ConfigKey = p2.configKey
+			
+			if UpdateFollowingResultResult.type == "error" then
+				if ConfigKey then
+					GetSduiPageEntrySnackbarStoreFunction().show(ConfigKey, {
+						title = Localization:Format(if UpdateFollowingResultResult.errorType == "LimitReached" then "Feature.GameFollows.TooltipNotificationsLimitReached" else "Feature.Toast.NetworkingError.SomethingIsWrong"),
+						icon = FoundationModule.Enums.IconName.TriangleExclamation
+					})
+				end
+			elseif UpdateFollowingResultResult.type == "success" and ConfigKey then
+				local LocalizeStringsResult = LocalizeStringsFunction(Localization, {
+					notificationsTurnedOn = {
+						"Feature.GameFollows.TooltipTurnedOnNotifications",
+						experienceName = GameName
+					},
+					notificationsTurnedOff = {
+						"Feature.GameFollows.TooltipTurnedOffNotifications",
+						experienceName = GameName
+					}
+				})
+				GetSduiPageEntrySnackbarStoreFunction().show(ConfigKey, {
+					title = if UpdateFollowingResultResult.isFollowing then LocalizeStringsResult.notificationsTurnedOn else LocalizeStringsResult.notificationsTurnedOff,
+					icon = if UpdateFollowingResultResult.isFollowing then FoundationModule.Enums.IconName.Bell else FoundationModule.Enums.IconName.BellSlash
 				})
 			end
-		elseif var5.type == "success" and configKey then
-			local var6 = localizeStrings(localization, {
-				notificationsTurnedOn = {
-					"Feature.GameFollows.TooltipTurnedOnNotifications",
-					experienceName = gameName
-				},
-				notificationsTurnedOff = {
-					"Feature.GameFollows.TooltipTurnedOffNotifications",
-					experienceName = gameName
-				}
-			})
-			getSduiPageEntrySnackbarStore().show(configKey, {
-				title = if var5.isFollowing then var6.notificationsTurnedOn else var6.notificationsTurnedOff,
-				icon = if var5.isFollowing then foundationModule.Enums.IconName.Bell else foundationModule.Enums.IconName.BellSlash
-			})
-		end
-		local dispose = t.dispose
-		
-		if dispose then
-			dispose()
-			t.dispose = nil
-		end
-	end)
+			local DisposeFunction: () -> () = t.dispose
+			
+			if DisposeFunction then
+				DisposeFunction()
+				t.dispose = nil
+			end
+		end)
+	end
 end

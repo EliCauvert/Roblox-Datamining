@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.CoreScriptsCommon.CoreScriptsCommon)
+﻿return (require(script.Parent._Workspace.CoreScriptsCommon.CoreScriptsCommon))

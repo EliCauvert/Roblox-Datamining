@@ -1,13 +1,13 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local inputSizeModule = require(foundation.Enums.InputSize)
-local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
-local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant)
-local _ = require(foundation.Providers.Style.Tokens)
-local _ = require(foundation.Components.Types)
-local iconSizeModule = require(foundation.Enums.IconSize)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local InputSizeModule = require(Foundation.Enums.InputSize)
+local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
+local ComposeStyleVariantModule = require(Foundation.Utility.composeStyleVariant)
+local _ = require(Foundation.Providers.Style.Tokens)
+local _ = require(Foundation.Components.Types)
+local IconSizeModule = require(Foundation.Enums.IconSize)
 
-local function variantsMap(p1)
-	-- upvalues: inputSizeModule (ref), iconSizeModule (ref)
+local function variantsMap(p1) --[[ Line: 38 ]]
+	-- upvalues: InputSizeModule (copy), IconSizeModule (copy)
 	return {
 		common = {
 			container = { tag = "" },
@@ -29,7 +29,7 @@ local function variantsMap(p1)
 			submenuContent = { tag = "stroke-standard stroke-default radius-medium" }
 		},
 		sizes = {
-			[inputSizeModule.XSmall] = {
+			[InputSizeModule.XSmall] = {
 				container = {
 					tag = "size-full-600 radius-small",
 					paddingLeftWithCheck = 0,
@@ -37,17 +37,17 @@ local function variantsMap(p1)
 					paddingRight = p1.Padding.Small
 				},
 				wrapper = { gap = p1.Size.Size_150 },
-				icon = { tag = "size-400", size = iconSizeModule.XSmall },
+				icon = { tag = "size-400", size = IconSizeModule.XSmall },
 				text = { tag = "text-body-small" },
 				title = {
 					tag = "text-caption-small",
 					checkColumnWidth = p1.Size.Size_500
 				},
 				check = { tag = "size-500-400", size = p1.Size.Size_400 },
-				chevron = { size = iconSizeModule.Small },
+				chevron = { size = IconSizeModule.Small },
 				groupPadding = { size = p1.Padding.XSmall }
 			},
-			[inputSizeModule.Small] = {
+			[InputSizeModule.Small] = {
 				container = {
 					tag = "size-full-800 radius-small",
 					paddingLeftWithCheck = 0,
@@ -55,17 +55,17 @@ local function variantsMap(p1)
 					paddingRight = p1.Padding.Small
 				},
 				wrapper = { gap = p1.Size.Size_150 },
-				icon = { tag = "size-500", size = iconSizeModule.Small },
+				icon = { tag = "size-500", size = IconSizeModule.Small },
 				text = { tag = "text-body-small" },
 				title = {
 					tag = "text-caption-small",
 					checkColumnWidth = p1.Size.Size_600
 				},
 				check = { tag = "size-600-400", size = p1.Size.Size_400 },
-				chevron = { size = iconSizeModule.Small },
+				chevron = { size = IconSizeModule.Small },
 				groupPadding = { size = p1.Padding.Small }
 			},
-			[inputSizeModule.Medium] = {
+			[InputSizeModule.Medium] = {
 				container = {
 					tag = "size-full-1000 radius-medium",
 					paddingLeftWithCheck = 0,
@@ -73,17 +73,17 @@ local function variantsMap(p1)
 					paddingRight = p1.Size.Size_250
 				},
 				wrapper = { gap = p1.Size.Size_150 },
-				icon = { tag = "size-500", size = iconSizeModule.Medium },
+				icon = { tag = "size-500", size = IconSizeModule.Medium },
 				text = { tag = "text-body-medium" },
 				title = {
 					tag = "text-caption-medium",
 					checkColumnWidth = p1.Size.Size_700
 				},
 				check = { tag = "size-700-500", size = p1.Size.Size_500 },
-				chevron = { size = iconSizeModule.Medium },
+				chevron = { size = IconSizeModule.Medium },
 				groupPadding = { size = p1.Padding.Small }
 			},
-			[inputSizeModule.Large] = {
+			[InputSizeModule.Large] = {
 				container = {
 					tag = "size-full-1200 radius-medium",
 					paddingLeftWithCheck = 0,
@@ -91,14 +91,14 @@ local function variantsMap(p1)
 					paddingRight = p1.Size.Size_350
 				},
 				wrapper = { gap = p1.Padding.Small },
-				icon = { tag = "size-600", size = iconSizeModule.Large },
+				icon = { tag = "size-600", size = IconSizeModule.Large },
 				text = { tag = "text-body-large" },
 				title = {
 					tag = "text-caption-large",
 					checkColumnWidth = p1.Size.Size_800
 				},
 				check = { tag = "size-800-600", size = p1.Size.Size_600 },
-				chevron = { size = iconSizeModule.Large },
+				chevron = { size = IconSizeModule.Large },
 				groupPadding = { size = p1.Padding.Small }
 			}
 		},
@@ -110,9 +110,9 @@ local function variantsMap(p1)
 	}
 end
 
-return function(p1, p2, p3)
-	-- upvalues: variantsContextModule (ref), variantsMap (ref), composeStyleVariantModule (ref)
-	local baseMenuItem = variantsContextModule.useVariants("BaseMenuItem", variantsMap, p1)
+return function(p1, p2, p3) --[[ Line: 134 ]]
+	-- upvalues: VariantsContextModule (copy), variantsMap (copy), ComposeStyleVariantModule (copy)
+	local BaseMenuItem = VariantsContextModule.useVariants("BaseMenuItem", variantsMap, p1)
 	
-	return composeStyleVariantModule(baseMenuItem.common, baseMenuItem.sizes[p2], baseMenuItem.defaultSize, baseMenuItem.isScrollable[p3])
+	return ComposeStyleVariantModule(BaseMenuItem.common, BaseMenuItem.sizes[p2], BaseMenuItem.defaultSize, BaseMenuItem.isScrollable[p3])
 end

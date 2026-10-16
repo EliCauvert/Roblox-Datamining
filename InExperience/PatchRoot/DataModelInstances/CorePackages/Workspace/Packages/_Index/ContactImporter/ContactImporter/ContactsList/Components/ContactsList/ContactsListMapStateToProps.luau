@@ -1,25 +1,25 @@
-﻿local contactImporter = script:FindFirstAncestor("ContactImporter")
-local dependenciesModule = require(contactImporter.dependencies)
-local RODUX_KEY = require(contactImporter.Common.Constants).RODUX_KEY
-local networkStatus = dependenciesModule.RoduxNetworking.Enum.NetworkStatus
-local networkingFriends = dependenciesModule.NetworkingFriends
-local networkingContacts = dependenciesModule.NetworkingContacts
-local selectors = dependenciesModule.RoduxContacts.Selectors
-local memoize = dependenciesModule.memoize
-local getDeepValue = dependenciesModule.SocialLibraries.Dictionary.getDeepValue
-local getDeviceContactsModule = require(script.Parent.getDeviceContacts)
-local decorateMatchedContactModule = require(script.Parent.decorateMatchedContact)
+﻿local ContactImporter = script:FindFirstAncestor("ContactImporter")
+local DependenciesModule = require(ContactImporter.dependencies)
+local RODUXKEY = require(ContactImporter.Common.Constants).RODUX_KEY
+local NetworkStatus = DependenciesModule.RoduxNetworking.Enum.NetworkStatus
+local NetworkingFriends = DependenciesModule.NetworkingFriends
+local NetworkingContacts = DependenciesModule.NetworkingContacts
+local Selectors = DependenciesModule.RoduxContacts.Selectors
+local MemoizeFunction = DependenciesModule.memoize
+local GetDeepValueFunction = DependenciesModule.SocialLibraries.Dictionary.getDeepValue
+local GetDeviceContactsModule = require(script.Parent.getDeviceContacts)
+local DecorateMatchedContactModule = require(script.Parent.decorateMatchedContact)
 
-return function(p1)
-	-- upvalues: getDeepValue (ref), RODUX_KEY (ref), memoize (ref), getDeviceContactsModule (ref), decorateMatchedContactModule (ref), selectors (ref), networkingFriends (ref), networkStatus (ref), networkingContacts (ref)
-	local localUserId = p1.LocalUserId
-	local var1 = getDeepValue(p1, RODUX_KEY .. ".Contacts")
+return function(p1) --[[ Line: 16 ]]
+	-- upvalues: GetDeepValueFunction (copy), RODUXKEY (copy), MemoizeFunction (copy), GetDeviceContactsModule (copy), DecorateMatchedContactModule (copy), Selectors (copy), NetworkingFriends (copy), NetworkStatus (copy), NetworkingContacts (copy)
+	local LocalUserId = p1.LocalUserId
+	local DeepValue = GetDeepValueFunction(p1, RODUXKEY .. ".Contacts")
 	
 	return {
 		localUserId = p1.LocalUserId,
-		matchedContacts = decorateMatchedContactModule(selectors.sortContacts(p1), var1),
-		deviceContacts = memoize(getDeviceContactsModule)(var1),
+		matchedContacts = DecorateMatchedContactModule(Selectors.sortContacts(p1), DeepValue),
+		deviceContacts = MemoizeFunction(GetDeviceContactsModule)(DeepValue),
 		screenSize = p1.ScreenSize,
-		isFetching = if networkingFriends.RequestFriendshipFromContactId.getStatus(p1, localUserId) ~= networkStatus.Fetching then if networkingContacts.FindContactFriends.getStatus(p1, localUserId) ~= networkStatus.Fetching then if networkingContacts.GetContactEntitiesByContactId.getStatus(p1, localUserId) ~= networkStatus.Fetching then networkingContacts.UploadContactsByUser.getStatus(p1, localUserId) == networkStatus.Fetching else true else true else true
+		isFetching = NetworkingFriends.RequestFriendshipFromContactId.getStatus(p1, LocalUserId) == NetworkStatus.Fetching or (NetworkingContacts.FindContactFriends.getStatus(p1, LocalUserId) == NetworkStatus.Fetching or (NetworkingContacts.GetContactEntitiesByContactId.getStatus(p1, LocalUserId) == NetworkStatus.Fetching or NetworkingContacts.UploadContactsByUser.getStatus(p1, LocalUserId) == NetworkStatus.Fetching))
 	}
 end

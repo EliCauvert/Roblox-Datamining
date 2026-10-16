@@ -1,86 +1,90 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local fFlagBuildExperienceMonetizationNativeUIModule = require(buildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI)
-local gameConfigurationContentModule = require(buildExperience.Components.GameConfigurations.GameConfigurationContent.GameConfigurationContent)
-local publishConfigurationContentContainerModule = require(buildExperience.Components.PublishConfigurationContent.PublishConfigurationContentContainer)
-local overflowMenuPageShellModule = require(script.Parent.OverflowMenuPageShell)
-local publishFooterModule = require(buildExperience.Components.GameConfigurations.PublishFooter.PublishFooter)
-local publishLatestPreviewCardModule = require(buildExperience.Components.GameConfigurations.PublishPreviewCard.PublishLatestPreviewCard)
-local publishPreviewCardModule = require(buildExperience.Components.GameConfigurations.PublishPreviewCard.PublishPreviewCard)
-local publishStatusModule = require(buildExperience.Chat.PublishStatus)
-local view = foundationModule.View
-local t = {
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local FFlagBuildExperienceMonetizationNativeUIModule = require(BuildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI)
+local GameConfigurationContentModule = require(BuildExperience.Components.GameConfigurations.GameConfigurationContent.GameConfigurationContent)
+local PublishConfigurationContentContainerModule = require(BuildExperience.Components.PublishConfigurationContent.PublishConfigurationContentContainer)
+local OverflowMenuPageShellModule = require(script.Parent.OverflowMenuPageShell)
+local PublishFooterModule = require(BuildExperience.Components.GameConfigurations.PublishFooter.PublishFooter)
+local PublishLatestPreviewCardModule = require(BuildExperience.Components.GameConfigurations.PublishPreviewCard.PublishLatestPreviewCard)
+local PublishPreviewCardModule = require(BuildExperience.Components.GameConfigurations.PublishPreviewCard.PublishPreviewCard)
+local PublishStatusModule = require(BuildExperience.Chat.PublishStatus)
+local View = require(Parent.Foundation).View
+local config = {
 	publish = "LuaApp_Build_Publish_Scroll",
 	settings = "LuaApp_Build_Settings_Scroll"
 }
 
-local function _(p1)
-	-- upvalues: publishLatestPreviewCardModule (ref), publishPreviewCardModule (ref)
-	return if p1 then publishLatestPreviewCardModule else publishPreviewCardModule
+local function _(p1) --[[ Line: 57 | Named "getPublishPreview" ]]
+	-- upvalues: PublishLatestPreviewCardModule (copy), PublishPreviewCardModule (copy)
+	return if p1 then PublishLatestPreviewCardModule else PublishPreviewCardModule
 end
 
-local function PublishPreview(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), publishStatusModule (ref), publishLatestPreviewCardModule (ref), publishPreviewCardModule (ref), reactModule (ref)
-	local target = p1.target
+local function PublishPreview(p1) --[[ Line: 61 ]]
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), PublishStatusModule (copy), PublishLatestPreviewCardModule (copy), PublishPreviewCardModule (copy), ReactModule (copy)
+	local UseLocalizationResult = UseLocalizationFunction({ loading = LocalizationStringsModule.BUILD_MENU_LOADING })
+	local Target = p1.target
 	
-	return reactModule.createElement(if publishStatusModule.usePublishStatus(p1.target).isPublishLatest then publishLatestPreviewCardModule else publishPreviewCardModule, {
+	return ReactModule.createElement(if PublishStatusModule.usePublishStatus(p1.target).isPublishLatest then PublishLatestPreviewCardModule else PublishPreviewCardModule, {
 		layoutOrder = 1,
 		target = {
-			universeId = target.universeId,
-			placeId = target.placeId,
-			experienceName = target.experienceName or useLocalization({ loading = localizationStringsModule.BUILD_MENU_LOADING }).loading,
-			creatorName = target.creatorName,
-			gameIcon = target.gameIcon
+			universeId = Target.universeId,
+			placeId = Target.placeId,
+			experienceName = Target.experienceName or UseLocalizationResult.loading,
+			creatorName = Target.creatorName,
+			gameIcon = Target.gameIcon
 		},
-		isCreatorVerified = target.isCreatorVerified
+		isCreatorVerified = Target.isCreatorVerified
 	})
 end
 
-return function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), reactModule (ref), PublishPreview (ref), publishConfigurationContentContainerModule (ref), gameConfigurationContentModule (ref), fFlagBuildExperienceMonetizationNativeUIModule (ref), view (ref), overflowMenuPageShellModule (ref), t (ref), publishFooterModule (ref)
-	local var1 = useLocalization({
-		loading = localizationStringsModule.BUILD_MENU_LOADING,
-		publish = localizationStringsModule.BUILD_MENU_PUBLISH,
-		settings = localizationStringsModule.BUILD_MENU_SETTINGS
+return function(p1) --[[ Line: 82 | Named "BuildOverflowMenuPageComponent" ]]
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), PublishPreview (copy), PublishConfigurationContentContainerModule (copy), GameConfigurationContentModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), View (copy), OverflowMenuPageShellModule (copy), config (copy), PublishFooterModule (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
+		loading = LocalizationStringsModule.BUILD_MENU_LOADING,
+		publish = LocalizationStringsModule.BUILD_MENU_PUBLISH,
+		settings = LocalizationStringsModule.BUILD_MENU_SETTINGS
 	})
-	local testId = p1.testId or `BuildOverflowMenuPage.{p1.page}`
-	local var2 = if p1.page == "publish" then reactModule.createElement(PublishPreview, { target = p1.target }) else nil
-	local var3 = if p1.page == "publish" then reactModule.createElement(publishConfigurationContentContainerModule, {
+	local TestId = p1.testId or `BuildOverflowMenuPage.{p1.page}`
+	local ExperienceName = p1.target.experienceName or UseLocalizationResult.loading
+	local Element = if p1.page == "publish" then ReactModule.createElement(PublishPreview, { target = p1.target }) else nil
+	local Element1 = if p1.page == "publish" then ReactModule.createElement(PublishConfigurationContentContainerModule, {
 		layoutOrder = 2,
 		universeId = p1.target.universeId,
 		onOpenTitleDescriptionPage = p1.onOpenTitleDescriptionPage,
 		onOpenMediaSelectionPage = p1.onOpenMediaSelectionPage,
 		onOpenVersionTitleDescriptionPage = p1.onOpenVersionTitleDescriptionPage,
 		onOpenVersionHistory = p1.onOpenVersionHistory
-	}) else reactModule.createElement(gameConfigurationContentModule, {
+	}) else ReactModule.createElement(GameConfigurationContentModule, {
 		universeId = p1.target.universeId,
 		placeId = p1.target.placeId,
-		experienceName = p1.target.experienceName or var1.loading,
+		experienceName = ExperienceName,
 		onOpenAudiencePage = p1.onOpenAudiencePage,
 		onOpenTitleDescriptionPage = p1.onOpenTitleDescriptionPage,
 		onOpenMediaSelectionPage = p1.onOpenMediaSelectionPage,
-		onOpenMonetizationPage = if fFlagBuildExperienceMonetizationNativeUIModule then p1.onOpenMonetizationPage else nil,
+		onOpenMonetizationPage = if FFlagBuildExperienceMonetizationNativeUIModule then p1.onOpenMonetizationPage else nil,
 		onOpenPlaytestPicker = p1.onOpenPlaytestPicker,
 		onOpenPlaytestManagement = p1.onOpenPlaytestManagement
 	})
 	
-	return reactModule.createElement(overflowMenuPageShellModule, {
-		title = if p1.page == "publish" then var1.publish else var1.settings,
-		testId = testId,
+	return ReactModule.createElement(OverflowMenuPageShellModule, {
+		title = if p1.page == "publish" then UseLocalizationResult.publish else UseLocalizationResult.settings,
+		testId = TestId,
 		onClose = p1.onClose,
-		content = if var2 then reactModule.createElement(view, { tag = "col gap-large size-full-0 auto-y" }, { LeadingContent = var2, GameConfigurationContent = var3 }) else var3,
-		scrollPerformanceIntervalName = t[p1.page],
-		footer = if p1.page == "publish" then reactModule.createElement(publishFooterModule, {
+		content = if Element then ReactModule.createElement(View, { tag = "col gap-large size-full-0 auto-y" }, {
+			LeadingContent = Element,
+			GameConfigurationContent = Element1
+		}) else Element1,
+		scrollPerformanceIntervalName = config[p1.page],
+		footer = if p1.page == "publish" then ReactModule.createElement(PublishFooterModule, {
 			target = {
 				universeId = p1.target.universeId,
 				placeId = p1.target.placeId,
 				sessionId = p1.target.sessionId
 			},
-			testId = testId,
+			testId = TestId,
 			showPreviewButton = p1.showPreviewButton
 		}) else nil
 	})

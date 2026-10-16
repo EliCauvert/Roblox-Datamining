@@ -1,62 +1,62 @@
-﻿local inExperienceShop = script:FindFirstAncestor("InExperienceShop")
-local parent = inExperienceShop.Parent
-local jest = require(parent.Dev.JestGlobals).jest
-local signalsModule = require(parent.Signals)
-local constantsModule = require(inExperienceShop.Constants)
-local _ = require(inExperienceShop.Types)
-local _ = require(inExperienceShop.Api.BonusPromotionEligibility)
+﻿local InExperienceShop = script:FindFirstAncestor("InExperienceShop")
+local Parent = InExperienceShop.Parent
+local Jest = require(Parent.Dev.JestGlobals).jest
+local SignalsModule = require(Parent.Signals)
+local ConstantsModule = require(InExperienceShop.Constants)
+local _ = require(InExperienceShop.Types)
+local _ = require(InExperienceShop.Api.BonusPromotionEligibility)
 
-return function()
-	-- upvalues: signalsModule (ref), constantsModule (ref), jest (ref)
-	local var1, var2 = signalsModule.createSignal({})
-	local var3, var4 = signalsModule.createSignal({})
-	local var5, var6 = signalsModule.createSignal(false)
-	local var7, var8 = signalsModule.createSignal(nil)
-	local var9, var10 = signalsModule.createSignal({})
-	local var11, var12 = signalsModule.createSignal({ available = {}, active = {} })
-	local var13, var14 = signalsModule.createSignal({})
-	local var15, var16 = signalsModule.createSignal(constantsModule.MIN_COLUMNS)
-	local var17, var18 = signalsModule.createSignal(false)
-	local var19, var20 = signalsModule.createSignal(false)
-	local var21, var22 = signalsModule.createSignal(nil)
+return function() --[[ Line: 74 | Named "createMockInExperienceShopStore" ]]
+	-- upvalues: SignalsModule (copy), ConstantsModule (copy), Jest (copy)
+	local Signal, Signal2 = SignalsModule.createSignal({})
+	local Signal1, Signal2_1 = SignalsModule.createSignal({})
+	local Signal3, Signal2_2 = SignalsModule.createSignal(false)
+	local Signal4, Signal2_3 = SignalsModule.createSignal(nil)
+	local Signal5, Signal2_4 = SignalsModule.createSignal({})
+	local Signal6, Signal2_5 = SignalsModule.createSignal({ available = {}, active = {} })
+	local Signal7, Signal2_6 = SignalsModule.createSignal({})
+	local Signal8, Signal2_7 = SignalsModule.createSignal(ConstantsModule.MIN_COLUMNS)
+	local Signal9, Signal2_8 = SignalsModule.createSignal(false)
+	local Signal10, Signal2_9 = SignalsModule.createSignal(false)
+	local Signal11, Signal2_10 = SignalsModule.createSignal(nil)
 	
 	return {
 		store = {
-			getCategories = var1,
-			getSections = var3,
-			getLoading = var5,
-			getError = var7,
-			getOwnership = var9,
-			getTrialAvailabilities = var11,
-			getBonusPromotionEligibility = var13,
-			getItemsPerRow = var15,
-			getShouldOpenToRobuxTab = var17,
-			getOpenedFromBuyRobux = var19,
-			getPurchasedRobuxAmount = var21,
-			dismissRobuxPurchaseSuccess = function()
-				-- upvalues: var22 (ref)
-				var22(nil)
+			getCategories = Signal,
+			getSections = Signal1,
+			getLoading = Signal3,
+			getError = Signal4,
+			getOwnership = Signal5,
+			getTrialAvailabilities = Signal6,
+			getBonusPromotionEligibility = Signal7,
+			getItemsPerRow = Signal8,
+			getShouldOpenToRobuxTab = Signal9,
+			getOpenedFromBuyRobux = Signal10,
+			getPurchasedRobuxAmount = Signal11,
+			dismissRobuxPurchaseSuccess = function() --[[ Line: 108 ]]
+				-- upvalues: Signal2_10 (copy)
+				Signal2_10(nil)
 			end,
-			onShopOpened = jest.fn(),
-			fetchAllShopData = jest.fn(),
-			prefetchWidgetsOnly = jest.fn(),
-			refreshShopItemInfo = jest.fn(),
-			refreshRobuxWidgetsAfterPurchase = jest.fn(),
-			fetchGamePassOwnership = jest.fn(),
-			pollGamePassOwnership = jest.fn(),
-			bonusGamePassIdForNativePurchase = jest.fn(),
-			setItemsPerRow = var16,
-			setShouldOpenToRobuxTab = var18,
-			setOpenedFromBuyRobux = var20
+			onShopOpened = Jest.fn(),
+			fetchAllShopData = Jest.fn(),
+			prefetchWidgetsOnly = Jest.fn(),
+			refreshShopItemInfo = Jest.fn(),
+			refreshRobuxWidgetsAfterPurchase = Jest.fn(),
+			fetchGamePassOwnership = Jest.fn(),
+			pollGamePassOwnership = Jest.fn(),
+			bonusGamePassIdForNativePurchase = Jest.fn(),
+			setItemsPerRow = Signal2_7,
+			setShouldOpenToRobuxTab = Signal2_8,
+			setOpenedFromBuyRobux = Signal2_9
 		},
-		setCategories = var2,
-		setSections = var4,
-		setLoading = var6,
-		setError = var8,
-		setOwnership = var10,
-		setTrialAvailabilities = var12,
-		setBonusPromotionEligibility = var14,
-		setItemsPerRow = var16,
-		setPurchasedRobuxAmount = var22
+		setCategories = Signal2,
+		setSections = Signal2_1,
+		setLoading = Signal2_2,
+		setError = Signal2_3,
+		setOwnership = Signal2_4,
+		setTrialAvailabilities = Signal2_5,
+		setBonusPromotionEligibility = Signal2_6,
+		setItemsPerRow = Signal2_7,
+		setPurchasedRobuxAmount = Signal2_10
 	}
 end

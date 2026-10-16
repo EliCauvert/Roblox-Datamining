@@ -1,89 +1,89 @@
-﻿local parent = script:FindFirstAncestor("ProfilePlatform").Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local foundationModule = require(parent.Foundation)
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local calculateItemWidth = require(parent.CollectionViews).calculateItemWidth
-local appPage = require(parent.RobloxAppEnums).AppPage
-local useTokens = foundationModule.Hooks.useTokens
-local getSduiServiceDependenciesStore = sduiCoreSystemModule.getSduiServiceDependenciesStore
+﻿local Parent = script:FindFirstAncestor("ProfilePlatform").Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local CalculateItemWidthFunction = require(Parent.CollectionViews).calculateItemWidth
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+local GetSduiServiceDependenciesStoreFunction = require(Parent.SduiCoreSystem).getSduiServiceDependenciesStore
 
-local function _(p1, p2, p3, p4, p5)
-	local var1 = p5 - p4
+local function _(p1, p2, p3: number, p4, p5): number --[[ Line: 24 | Named "computePeekFraction" ]]
+	local v1 = p5 - p4
 	
-	if var1 <= 0 then
+	if v1 <= 0 then
 		return 0
+	else
+		local v2 = p1 - p2 - (p3 - 1) * p4 - p5
+		
+		return if v2 <= 0 then 0 else math.clamp(p3 * v1 / v2, 0, 0.5)
 	end
-	local var2 = p1 - p2 - (p3 - 1) * p4 - p5
-	
-	return if var2 <= 0 then 0 else math.clamp(p3 * var1 / var2, 0, 0.5)
 end
 
-return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), calculateItemWidth (ref), signalsModule (ref), appPage (ref), getSduiServiceDependenciesStore (ref)
-	local var1 = useTokens()
-	local medium = var1.Gap.Medium
-	local size1500 = var1.Size.Size_1500
-	local var2 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), medium (ref), size1500 (ref)
-		local containerWidth = p1.containerWidth
-		local sideMargin = p1.sideMargin
-		local var3 = size1500 - medium
+return function(p1) --[[ Line: 50 | Named "useProfileCompletionSduiContext" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), CalculateItemWidthFunction (copy), SignalsModule (copy), AppPage (copy), GetSduiServiceDependenciesStoreFunction (copy)
+	local UseTokensResult = UseTokensFunction()
+	local Medium = UseTokensResult.Gap.Medium
+	local Size1500 = UseTokensResult.Size.Size_1500
+	local UseMemoResult = ReactModule.useMemo(function(): number --[[ Line: 55 ]]
+		-- upvalues: p1 (copy), Medium (copy), Size1500 (copy)
+		local ContainerWidth = p1.containerWidth
+		local SideMargin = p1.sideMargin
+		local SizeDelta = Size1500 - Medium
 		
-		if var3 <= 0 then
+		if SizeDelta <= 0 then
 			return 0
+		else
+			local ContainerWidthDelta = ContainerWidth - SideMargin - Medium * 0 - Size1500
+			
+			return if ContainerWidthDelta <= 0 then 0 else math.clamp(SizeDelta * 1 / ContainerWidthDelta, 0, 0.5)
 		end
-		local var4 = containerWidth - sideMargin - medium * 0 - size1500
-		
-		return if var4 <= 0 then 0 else math.clamp(var3 * 1 / var4, 0, 0.5)
-	end, { p1.containerWidth, p1.sideMargin, medium, size1500 })
-	local var3 = reactModule.useMemo(function()
-		-- upvalues: calculateItemWidth (copy), medium (ref), p1 (ref), var2 (ref)
-		return calculateItemWidth(1, medium, p1.sideMargin, p1.containerWidth, var2)
-	end, { medium, p1.sideMargin, p1.containerWidth, var2 })
-	local var4, var5 = reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), var2 (ref), medium (ref), p1 (ref), var3 (ref)
-		return signalsModule.createSignal({
+	end, { p1.containerWidth, p1.sideMargin, Medium, Size1500 })
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 59 ]]
+		-- upvalues: CalculateItemWidthFunction (upval), Medium (copy), p1 (copy), UseMemoResult (copy)
+		return CalculateItemWidthFunction(1, Medium, p1.sideMargin, p1.containerWidth, UseMemoResult)
+	end, { Medium, p1.sideMargin, p1.containerWidth, UseMemoResult })
+	local UseMemoResult2, UseMemoResult2_1 = ReactModule.useMemo(function() --[[ Line: 63 ]]
+		-- upvalues: SignalsModule (upval), UseMemoResult (copy), Medium (copy), p1 (copy), UseMemoResult1 (copy)
+		return SignalsModule.createSignal({
 			numColumns = 1,
 			verticalPadding = 0,
-			fractionalItemAmount = var2,
-			columnGap = medium,
+			fractionalItemAmount = UseMemoResult,
+			columnGap = Medium,
 			sideMargin = p1.sideMargin,
-			itemWidth = var3
+			itemWidth = UseMemoResult1
 		})
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), var2 (ref), medium (ref), p1 (ref), var3 (ref)
-		var5({
+	ReactModule.useEffect(function() --[[ Line: 74 ]]
+		-- upvalues: UseMemoResult2_1 (copy), UseMemoResult (copy), Medium (copy), p1 (copy), UseMemoResult1 (copy)
+		UseMemoResult2_1({
 			numColumns = 1,
 			verticalPadding = 0,
-			fractionalItemAmount = var2,
-			columnGap = medium,
+			fractionalItemAmount = UseMemoResult,
+			columnGap = Medium,
 			sideMargin = p1.sideMargin,
-			itemWidth = var3
+			itemWidth = UseMemoResult1
 		})
 	end, {
-		var2,
-		medium,
+		UseMemoResult,
+		Medium,
 		p1.sideMargin,
-		var3,
-		var5
+		UseMemoResult1,
+		UseMemoResult2_1
 	})
-	local var6 = reactModule.useCallback(function(_)
-		-- upvalues: signalsModule (copy), var4 (ref)
-		return signalsModule.createComputed(function(p2)
-			-- upvalues: var4 (copy)
-			return var4(p2)
+	local UseResult = ReactModule.useCallback(function(_) --[[ Line: 85 ]]
+		-- upvalues: SignalsModule (upval), UseMemoResult2 (copy)
+		return SignalsModule.createComputed(function(p2) --[[ Line: 86 ]]
+			-- upvalues: UseMemoResult2 (upval)
+			return UseMemoResult2(p2)
 		end)
-	end, { var4 })
-	local profilePlatform = appPage.ProfilePlatform
+	end, { UseMemoResult2 })
+	local ProfilePlatform = AppPage.ProfilePlatform
 	
-	return reactModule.useMemo(function()
-		-- upvalues: getSduiServiceDependenciesStore (copy), profilePlatform (ref), var6 (ref)
+	return (ReactModule.useMemo(function() --[[ Line: 92 ]]
+		-- upvalues: GetSduiServiceDependenciesStoreFunction (upval), ProfilePlatform (copy), UseResult (copy)
 		return {
-			dependencies = getSduiServiceDependenciesStore().getDependencies(profilePlatform),
-			appPage = profilePlatform,
-			getPageLayoutConfig = var6
+			dependencies = GetSduiServiceDependenciesStoreFunction().getDependencies(ProfilePlatform),
+			appPage = ProfilePlatform,
+			getPageLayoutConfig = UseResult
 		}
-	end, { profilePlatform, var6 })
+	end, { ProfilePlatform, UseResult }))
 end

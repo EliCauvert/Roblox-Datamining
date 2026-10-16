@@ -1,96 +1,98 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useEarlyIsFocused = require(parent.Navigation).useEarlyIsFocused
-local AXTooltip = require(parent.AvatarExperienceUIKit).AXTooltipComponents.AXTooltip
-local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
-local fFlagAXMarketplaceLicensingItemDetails = avatarExperienceFlagsModule.FFlagAXMarketplaceLicensingItemDetails
-local fFlagAXMarketplaceLicensingItemCards = avatarExperienceFlagsModule.FFlagAXMarketplaceLicensingItemCards
-local itemLicenseType = require(parent.AvatarExperienceModel).Enums.ItemLicenseType
-local badgeVariant = foundationModule.Enums.BadgeVariant
-local badgeSize = foundationModule.Enums.BadgeSize
-local t = {
-	[itemLicenseType.FirstParty] = {
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseEarlyIsFocusedFunction = require(Parent.Navigation).useEarlyIsFocused
+local AXTooltip = require(Parent.AvatarExperienceUIKit).AXTooltipComponents.AXTooltip
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
+local FFlagAXMarketplaceLicensingItemDetails = AvatarExperienceFlagsModule.FFlagAXMarketplaceLicensingItemDetails
+local FFlagAXMarketplaceLicensingItemCards = AvatarExperienceFlagsModule.FFlagAXMarketplaceLicensingItemCards
+local ItemLicenseType = require(Parent.AvatarExperienceModel).Enums.ItemLicenseType
+local BadgeVariant = FoundationModule.Enums.BadgeVariant
+local BadgeSize = FoundationModule.Enums.BadgeSize
+local BadgeShape = FoundationModule.Enums.BadgeShape
+local config = {
+	[ItemLicenseType.FirstParty] = {
 		label = "Feature.Catalog.Label.LicensingOfficial",
 		info = "Feature.Catalog.Label.LicensingOfficialInfo",
-		passiveVariant = badgeVariant.Contrast
+		passiveVariant = BadgeVariant.Contrast
 	},
-	[itemLicenseType.ThirdParty] = {
+	[ItemLicenseType.ThirdParty] = {
 		label = "Feature.Catalog.Label.LicensingLicensed",
 		info = "Feature.Catalog.Label.LicensingLicensedInfo",
-		passiveVariant = badgeVariant.OverMedia
+		passiveVariant = BadgeVariant.OverMedia
 	}
 }
 
-local function PassiveLicensingBadge(p1)
-	-- upvalues: useLocalization (ref), reactModule (ref), foundationModule (ref), badgeSize (ref)
-	return reactModule.createElement(foundationModule.Badge, {
+local function PassiveLicensingBadge(Frame) --[[ Line: 74 ]]
+	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), FoundationModule (copy), BadgeSize (copy)
+	return ReactModule.createElement(FoundationModule.Badge, {
 		testId = "LicensingBadge",
-		text = useLocalization({ label = p1.config.label }).label,
-		variant = p1.config.passiveVariant,
-		size = p1.passiveSize or badgeSize.Small,
-		LayoutOrder = p1.LayoutOrder,
-		onAbsoluteSizeChanged = p1.onAbsoluteSizeChanged
+		text = UseLocalizationFunction({ label = Frame.config.label }).label,
+		variant = Frame.config.passiveVariant,
+		size = Frame.passiveSize or BadgeSize.Small,
+		LayoutOrder = Frame.LayoutOrder,
+		onAbsoluteSizeChanged = Frame.onAbsoluteSizeChanged
 	})
 end
 
-local function InteractiveLicensingBadge(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), useLocalization (ref), fFlagAXMarketplaceLicensingItemDetails (ref), useEarlyIsFocused (ref), foundationModule (ref), badgeVariant (ref), badgeSize (ref), AXTooltip (ref)
-	local var1 = useTokens()
-	local var2, var3 = reactModule.useState(false)
-	local var4 = useLocalization({ label = p1.config.label, info = p1.config.info })
-	local var5 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref)
-		var3(function(p2)
-			return not p2
+local function InteractiveLicensingBadge(Frame) --[[ Line: 89 ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), UseLocalizationFunction (copy), FFlagAXMarketplaceLicensingItemDetails (copy), UseEarlyIsFocusedFunction (copy), FoundationModule (copy), BadgeVariant (copy), BadgeSize (copy), BadgeShape (copy), AXTooltip (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseLocalizationResult = UseLocalizationFunction({ label = Frame.config.label, info = Frame.config.info })
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 98 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(function(p1): boolean --[[ Line: 99 ]]
+			return not p1
 		end)
 	end, {})
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref)
-		var3(false)
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 104 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(false)
 	end, {})
-	reactModule.useImperativeHandle(p1.dismissTooltipRef, function()
-		-- upvalues: var6 (ref)
-		return var6
-	end, { var6 })
+	ReactModule.useImperativeHandle(Frame.dismissTooltipRef, function() --[[ Line: 108 ]]
+		-- upvalues: UseResult1 (copy)
+		return UseResult1
+	end, { UseResult1 })
 	
-	if fFlagAXMarketplaceLicensingItemDetails then
-		local var7 = useEarlyIsFocused()
-		reactModule.useEffect(function()
-			-- upvalues: var7 (ref), var6 (ref)
-			if not var7 then
-				var6()
+	if FFlagAXMarketplaceLicensingItemDetails then
+		local UseEarlyIsFocusedResult = UseEarlyIsFocusedFunction()
+		ReactModule.useEffect(function() --[[ Line: 117 ]]
+			-- upvalues: UseEarlyIsFocusedResult (copy), UseResult1 (copy)
+			if not UseEarlyIsFocusedResult then
+				UseResult1()
 			end
-		end, { var7, var6 })
+		end, { UseEarlyIsFocusedResult, UseResult1 })
 	end
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "auto-xy",
 		testId = "LicensingBadge",
-		LayoutOrder = p1.LayoutOrder,
-		onActivated = var5,
-		onAbsoluteSizeChanged = p1.onAbsoluteSizeChanged
+		LayoutOrder = Frame.LayoutOrder,
+		onActivated = UseResult,
+		onAbsoluteSizeChanged = Frame.onAbsoluteSizeChanged
 	}, {
-		Badge = reactModule.createElement(foundationModule.Badge, {
-			text = var4.label,
-			variant = badgeVariant.Standard,
-			size = badgeSize.Small
+		Badge = ReactModule.createElement(FoundationModule.Badge, {
+			text = UseLocalizationResult.label,
+			variant = BadgeVariant.Standard,
+			size = BadgeSize.Small,
+			shape = BadgeShape.Box
 		}),
-		Tooltip = reactModule.createElement(AXTooltip, {
-			isOpen = var2,
-			popoverSide = p1.popoverSide or "Bottom",
-			tooltipText = var4.info,
-			maxWidth = var1.Size.Size_1200 * 3,
-			onTooltipActivated = var6
+		Tooltip = ReactModule.createElement(AXTooltip, {
+			isOpen = UseStateResult,
+			popoverSide = Frame.popoverSide or "Bottom",
+			tooltipText = UseLocalizationResult.info,
+			maxWidth = UseTokensResult.Size.Size_1200 * 3,
+			onTooltipActivated = UseResult1
 		})
 	})
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: t (ref), fFlagAXMarketplaceLicensingItemCards (ref), reactModule (ref), PassiveLicensingBadge (ref), InteractiveLicensingBadge (ref)
-	local cloned = table.clone(p1)
-	cloned.config = t[p1.itemLicensingInfo.licenseType]
+return ReactModule.memo(function(Tbl) --[[ Line: 147 | Named "LicensingBadge" ]]
+	-- upvalues: config (copy), FFlagAXMarketplaceLicensingItemCards (copy), ReactModule (copy), PassiveLicensingBadge (copy), InteractiveLicensingBadge (copy)
+	local Copy = table.clone(Tbl)
+	Copy.config = config[Tbl.itemLicensingInfo.licenseType]
 	
-	return if fFlagAXMarketplaceLicensingItemCards and p1.isInteractive == false then reactModule.createElement(PassiveLicensingBadge, cloned) else reactModule.createElement(InteractiveLicensingBadge, cloned)
+	return if FFlagAXMarketplaceLicensingItemCards and Tbl.isInteractive == false then ReactModule.createElement(PassiveLicensingBadge, Copy) else ReactModule.createElement(InteractiveLicensingBadge, Copy)
 end)

@@ -1,81 +1,73 @@
-﻿local runService = game:GetService("RunService")
-local gameCollections = script:FindFirstAncestor("GameCollections")
-local reactModule = require(gameCollections.Parent.React)
-local calculateCountdownTimeModule = require(gameCollections.calculateCountdownTime)
+﻿local RunService = game:GetService("RunService")
+local GameCollections = script:FindFirstAncestor("GameCollections")
+local ReactModule = require(GameCollections.Parent.React)
+local CalculateCountdownTimeModule = require(GameCollections.calculateCountdownTime)
 
-local function _(p1)
-	return if p1.days < 0 then false elseif p1.hours < 0 or p1.hours > 23 then false else p1.minutes < 0 or p1.minutes > 59
+local function _(p1): boolean --[[ Line: 19 | Named "validateTimeValues" ]]
+	return p1.days >= 0 and (p1.hours >= 0 and p1.hours <= 23 and (p1.minutes >= 0 and p1.minutes <= 59))
 end
 
-local _ = function(p1)
+local _ = function(p1: number): number --[[ Line: 35 | Named "getUpdateFrequency" ]]
 	return if p1 < 15 then 1 else 15
 end
 
-return function(p1, p2, p3)
-	-- upvalues: reactModule (ref), calculateCountdownTimeModule (ref), runService (ref)
-	local var1, var2 = reactModule.useState("")
-	local var3 = reactModule.useCallback(function()
-		-- upvalues: p3 (ref), p1 (ref), p2 (ref), calculateCountdownTimeModule (copy), var2 (ref)
-		if p3 == nil or p3 == "" or (p1 == nil or p2 == nil) or p2 == "" then
+return function(p1, Text, Minutes) --[[ Line: 46 | Named "useCountdownSubtitleTextBinding" ]]
+	-- upvalues: ReactModule (copy), CalculateCountdownTimeModule (copy), RunService (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState("")
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 52 ]]
+		-- upvalues: Minutes (copy), p1 (copy), Text (copy), CalculateCountdownTimeModule (upval), UseStateResult2 (copy)
+		if Minutes == nil or Minutes == "" or p1 == nil or Text == nil or Text == "" then
 			return 0
 		end
-		local var4
-		local var5 = p3
-		local var6 = p1 - DateTime.now().UnixTimestamp
-		local var7 = calculateCountdownTimeModule(var6)
+		local Minutes1 = Minutes
+		local v1 = p1 - DateTime.now().UnixTimestamp
+		local CountdownTimeModule = CalculateCountdownTimeModule(v1)
 		
-		if var7.days < 0 then
-			var4 = false
-		elseif var7.hours < 0 or var7.hours > 23 then
-			var4 = false
-		elseif var7.minutes >= 0 then
-			var4 = var7.minutes <= 59
+		if CountdownTimeModule.days >= 0 and (CountdownTimeModule.hours >= 0 and CountdownTimeModule.hours <= 23 and (CountdownTimeModule.minutes >= 0 and CountdownTimeModule.minutes <= 59)) then
+			Minutes1 = if CountdownTimeModule.days > 0 then Minutes else Text:gsub("{hours}", (tostring(CountdownTimeModule.hours))):gsub("{minutes}", (tostring(CountdownTimeModule.minutes)))
 		end
-		if var4 then
-			var5 = if var7.days > 0 then p3 else p2:gsub("{hours}", tostring(var7.hours)):gsub("{minutes}", tostring(var7.minutes))
-		end
-		var2(var5)
+		UseStateResult2(Minutes1)
 		
-		return var6
-	end, { p3, p1, p2 })
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref)
-		var3()
-	end, { var3 })
-	reactModule.useEffect(function()
-		-- upvalues: p3 (ref), p1 (ref), p2 (ref), runService (copy), var3 (ref)
-		local heartbeatConnection = nil
+		return v1
+	end, { Minutes, p1, Text })
+	ReactModule.useEffect(function() --[[ Line: 79 ]]
+		-- upvalues: UseResult (copy)
+		UseResult()
+	end, { UseResult })
+	ReactModule.useEffect(function() --[[ Line: 84 ]]
+		-- upvalues: Minutes (copy), p1 (copy), Text (copy), RunService (upval), UseResult (copy)
+		local Connection = nil
 		
-		if p3 ~= nil and p3 ~= "" and (p1 ~= nil and p2 ~= nil) and p2 ~= "" then
-			local var4 = p1 - DateTime.now().UnixTimestamp
+		if Minutes ~= nil and Minutes ~= "" and p1 ~= nil and Text ~= nil and Text ~= "" then
+			local v1 = p1 - DateTime.now().UnixTimestamp
 			
-			if var4 > 0 then
-				local var5 = 0
-				local var6 = if var4 < 15 then 1 else 15
-				heartbeatConnection = runService.Heartbeat:Connect(function()
-					-- upvalues: var5 (write), var6 (write), var4 (write), var3 (copy), heartbeatConnection (write)
-					local processTime = os.clock()
+			if v1 > 0 then
+				local v2 = 0
+				local v3: number = if v1 < 15 then 1 else 15
+				Connection = RunService.Heartbeat:Connect(function() --[[ Line: 99 ]]
+					-- upvalues: v2 (ref), v3 (ref), v1 (ref), UseResult (upval), Connection (ref)
+					local ClockTime = os.clock()
 					
-					if processTime - var5 < var6 then return end
-					var5 = processTime
-					var4 = var3()
-					var6 = if var4 < 15 then 1 else 15
+					if ClockTime - v2 < v3 then return end
+					v2 = ClockTime
+					v1 = UseResult()
+					v3 = if v1 < 15 then 1 else 15
 					
-					if var4 <= 0 and heartbeatConnection then
-						heartbeatConnection:Disconnect()
-						heartbeatConnection = nil
+					if v1 <= 0 and Connection then
+						Connection:Disconnect()
+						Connection = nil
 					end
 				end)
 			end
 		end
-		return function()
-			-- upvalues: heartbeatConnection (write)
-			if heartbeatConnection ~= nil then
-				heartbeatConnection:Disconnect()
-				heartbeatConnection = nil
+		return function() --[[ Line: 114 ]]
+			-- upvalues: Connection (ref)
+			if Connection ~= nil then
+				Connection:Disconnect()
+				Connection = nil
 			end
 		end
-	end, { p1, var3 })
+	end, { p1, UseResult })
 	
-	return var1
+	return UseStateResult
 end

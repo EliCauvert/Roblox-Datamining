@@ -1,38 +1,39 @@
-﻿local enableCaptureUploadForSupportTicketEngineFeature = game:GetEngineFeature("EnableCaptureUploadForSupportTicket")
-local enableCheckUploadCaptureStatusForSupportTicketEngineFeature = game:GetEngineFeature("EnableCheckUploadCaptureStatusForSupportTicket")
+﻿local EnableCaptureUploadForSupportTicketEngineFeature = game:GetEngineFeature("EnableCaptureUploadForSupportTicket")
+local EnableCheckUploadCaptureStatusForSupportTicketEngineFeature = game:GetEngineFeature("EnableCheckUploadCaptureStatusForSupportTicket")
 
-return function(value, p1)
-	-- upvalues: enableCaptureUploadForSupportTicketEngineFeature (ref), enableCheckUploadCaptureStatusForSupportTicketEngineFeature (ref)
-	if not enableCaptureUploadForSupportTicketEngineFeature or not enableCheckUploadCaptureStatusForSupportTicketEngineFeature then
+return function(Capture, p1) --[[ Line: 15 | Named "uploadCaptureAsset" ]]
+	-- upvalues: EnableCaptureUploadForSupportTicketEngineFeature (copy), EnableCheckUploadCaptureStatusForSupportTicketEngineFeature (copy)
+	if not EnableCaptureUploadForSupportTicketEngineFeature or not EnableCheckUploadCaptureStatusForSupportTicketEngineFeature then
 		return nil, Enum.UploadCaptureResult.UploadFailed
 	end
-	p1 = p1 or game:GetService("CaptureService")
-	local ok, status, var1 = pcall(function()
-		-- upvalues: p1 (ref), value (ref)
-		return p1:StartUploadCaptureForSupportTicketAsync(value)
+	local P1 = p1 or game:GetService("CaptureService")
+	local Success, Result, Result3 = pcall(function() --[[ Line: 25 ]]
+		-- upvalues: P1 (copy), Capture (copy)
+		return P1:StartUploadCaptureForSupportTicketAsync(Capture)
 	end)
 	
-	if ok and status == Enum.UploadCaptureResult.Success then
-		for _ = 1, 120 do
-			task.wait(5)
-			local ok_1, status_1, var2 = pcall(function()
-				-- upvalues: p1 (ref), var1 (ref)
-				return p1:CheckUploadCaptureStatusForSupportTicketAsync(var1)
-			end)
-			
-			if ok_1 then
-				if status_1 ~= Enum.UploadCaptureResult.Success then
-					if status_1 == Enum.UploadCaptureResult.UploadPending then
-						continue
-					end
-					return nil, status_1
-				end
-				return var2, nil
-			end
-			return nil, Enum.UploadCaptureResult.UploadFailed
-		end
-		return nil, Enum.UploadCaptureResult.UploadFailed
-	else
-		return nil, if ok and status ~= nil then status else Enum.UploadCaptureResult.UploadFailed
+	if not Success or Result ~= Enum.UploadCaptureResult.Success then
+		return nil, if Success and Result ~= nil then Result else Enum.UploadCaptureResult.UploadFailed
 	end
+	local Result1 = nil
+	local Result3_1 = nil
+	for _ = 1, 120 do
+		task.wait(5)
+		local Success1
+		Success1, Result1, Result3_1 = pcall(function() --[[ Line: 38 ]]
+			-- upvalues: P1 (copy), Result3 (copy)
+			return P1:CheckUploadCaptureStatusForSupportTicketAsync(Result3)
+		end)
+		
+		if not Success1 then
+			return nil, Enum.UploadCaptureResult.UploadFailed
+		elseif Result1 ~= Enum.UploadCaptureResult.Success then
+			if Result1 ~= Enum.UploadCaptureResult.UploadPending then
+				return nil, Result1
+			end
+		else
+			return Result3_1, nil
+		end
+	end
+	return nil, Enum.UploadCaptureResult.UploadFailed
 end

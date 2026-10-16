@@ -1,80 +1,80 @@
-﻿local chatLineReporting = script:FindFirstAncestor("ChatLineReporting")
-local parent = chatLineReporting.Parent
-local reactModule = require(parent.React)
-local expChatSharedModule = require(parent.ExpChatShared)
-local buttonType = require(parent.UIBlox).App.Button.Enum.ButtonType
-local reportCompleteDialogModule = require(parent.GenericAbuseReporting.ReportCompleteDialog)
-local localPlayer = game:GetService("Players").LocalPlayer
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local constantsModule = require(chatLineReporting.Common.Constants)
-local getDisplayNameFromUserIdModule = require(chatLineReporting.Common.getDisplayNameFromUserId)
-local getPlayerModule = require(chatLineReporting.Common.getPlayer)
-local mutePlayerModule = require(chatLineReporting.Common.mutePlayer)
-local sendSystemMessageModule = require(chatLineReporting.Common.sendSystemMessage)
+﻿local ChatLineReporting = script:FindFirstAncestor("ChatLineReporting")
+local Parent = ChatLineReporting.Parent
+local ReactModule = require(Parent.React)
+local ExpChatSharedModule = require(Parent.ExpChatShared)
+local ButtonType = require(Parent.UIBlox).App.Button.Enum.ButtonType
+local ReportCompleteDialogModule = require(Parent.GenericAbuseReporting.ReportCompleteDialog)
+local LocalPlayer = game:GetService("Players").LocalPlayer
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local ConstantsModule = require(ChatLineReporting.Common.Constants)
+local GetDisplayNameFromUserIdModule = require(ChatLineReporting.Common.getDisplayNameFromUserId)
+local GetPlayerModule = require(ChatLineReporting.Common.getPlayer)
+local MutePlayerModule = require(ChatLineReporting.Common.mutePlayer)
+local SendSystemMessageModule = require(ChatLineReporting.Common.sendSystemMessage)
 
-return function(p1)
-	-- upvalues: expChatSharedModule (ref), useLocalization (ref), getPlayerModule (ref), getDisplayNameFromUserIdModule (ref), buttonType (ref), reactModule (ref), reportCompleteDialogModule (ref), localPlayer (ref), mutePlayerModule (ref), constantsModule (ref), sendSystemMessageModule (ref)
-	local context = expChatSharedModule.context
-	local var1 = useLocalization(p1.localizationKeys)
-	local t = nil
+return function(p1) --[[ Line: 40 | Named "ChatLineReportCompleteModal" ]]
+	-- upvalues: ExpChatSharedModule (copy), UseLocalizationFunction (copy), GetPlayerModule (copy), GetDisplayNameFromUserIdModule (copy), ButtonType (copy), ReactModule (copy), ReportCompleteDialogModule (copy), LocalPlayer (copy), MutePlayerModule (copy), ConstantsModule (copy), SendSystemMessageModule (copy)
+	local Context = ExpChatSharedModule.context
+	local UseLocalizationResult = UseLocalizationFunction(p1.localizationKeys)
+	local v1 = nil
 	
-	if context.store then
-		t = getPlayerModule(context.store:getState().Players.byUserId, p1.selectedMessage.userId)
+	if Context.store then
+		v1 = GetPlayerModule(Context.store:getState().Players.byUserId, p1.selectedMessage.userId)
 		
-		if t == nil then
-			t = {
+		if v1 == nil then
+			v1 = {
 				username = "",
-				displayName = getDisplayNameFromUserIdModule(p1.selectedMessage.userId),
+				displayName = GetDisplayNameFromUserIdModule(p1.selectedMessage.userId),
 				userId = p1.selectedMessage.userId
 			}
 		end
 	end
-	local var2 = useLocalization({
+	local UseLocalizationResult1 = UseLocalizationFunction({
 		completeMute = {
 			"Feature.ReportAbuse.Action.TextMute",
-			name = if t then t.displayName else ""
+			name = v1 and v1.displayName or ""
 		},
 		systemMuteMessage = {
 			"Feature.ReportAbuse.Message.UserTextMutedSystem",
-			name = if t then t.displayName else ""
+			name = v1 and v1.displayName or ""
 		}
 	})
-	local t_1 = {
-		buttonType = buttonType.PrimarySystem,
+	local config = {
+		buttonType = ButtonType.PrimarySystem,
 		props = {
-			onActivated = function()
-				-- upvalues: p1 (ref)
+			onActivated = function() --[[ Line: 67 ]]
+				-- upvalues: p1 (copy)
 				p1.onDismiss(nil, "")
 			end,
-			text = var1.completeClose
+			text = UseLocalizationResult.completeClose
 		}
 	}
 	
-	return reactModule.createElement(reportCompleteDialogModule, {
+	return ReactModule.createElement(ReportCompleteDialogModule, {
 		buttonStackInfo = {
 			forceFillDirection = Enum.FillDirection.Vertical,
-			buttons = if localPlayer then {
+			buttons = if LocalPlayer then {
 				{
-					buttonType = buttonType.Secondary,
+					buttonType = ButtonType.Secondary,
 					props = {
-						onActivated = function()
-							-- upvalues: mutePlayerModule (copy), t (write), localPlayer (copy), p1 (ref), constantsModule (copy), sendSystemMessageModule (copy), var2 (ref)
-							local var3 = mutePlayerModule(t, localPlayer, p1.selectedMessage.isUniverseChat)
+						onActivated = function() --[[ Line: 82 ]]
+							-- upvalues: MutePlayerModule (upval), v1 (ref), LocalPlayer (upval), p1 (copy), ConstantsModule (upval), SendSystemMessageModule (upval), UseLocalizationResult1 (copy)
+							local MutePlayerModuleResult = MutePlayerModule(v1, LocalPlayer, p1.selectedMessage.isUniverseChat)
 							
-							if var3 and var3.key == constantsModule.SuccessfulMuteKey then
-								sendSystemMessageModule(var2.systemMuteMessage)
+							if MutePlayerModuleResult and MutePlayerModuleResult.key == ConstantsModule.SuccessfulMuteKey then
+								SendSystemMessageModule(UseLocalizationResult1.systemMuteMessage)
 							end
-							p1.onDismiss(var3)
+							p1.onDismiss(MutePlayerModuleResult)
 						end,
-						text = var2.completeMute
+						text = UseLocalizationResult1.completeMute
 					}
 				},
-				t_1
-			} else { t_1 }
+				config
+			} else { config }
 		},
 		localizationKeys = p1.localizationKeys,
-		onDismiss = function()
-			-- upvalues: p1 (ref)
+		onDismiss = function() --[[ Line: 98 ]]
+			-- upvalues: p1 (copy)
 			p1.onDismiss(nil, "")
 		end
 	})

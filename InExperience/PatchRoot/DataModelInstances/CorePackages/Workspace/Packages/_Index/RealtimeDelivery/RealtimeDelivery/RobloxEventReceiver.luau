@@ -1,64 +1,62 @@
-﻿local signal = require(script:FindFirstAncestor("RealtimeDelivery").Parent.AppCommonLib).Signal
-local httpService = game:GetService("HttpService")
-local t = {}
-t.__index = t
+﻿local Signal = require(script:FindFirstAncestor("RealtimeDelivery").Parent.AppCommonLib).Signal
+local HttpService = game:GetService("HttpService")
+local RobloxEventReceiverModule = {}
+RobloxEventReceiverModule.__index = RobloxEventReceiverModule
 
-function t:observeEvent(p1, p2)
-	-- upvalues: signal (ref)
+function RobloxEventReceiverModule:observeEvent(p1, Callback) --[[ Line: 14 ]]
+	-- upvalues: Signal (copy)
 	assert(type(p1) == "string", "Expected namespace to be a string")
-	assert(type(p2) == "function", "Expected callback to be a function")
-	local var1 = self.namespaceTable[p1]
+	assert(type(Callback) == "function", "Expected callback to be a function")
+	local Namespace = self.namespaceTable[p1]
 	
-	if var1 == nil then
-		var1 = signal.new()
-		self.namespaceTable[p1] = var1
+	if Namespace == nil then
+		Namespace = Signal.new()
+		self.namespaceTable[p1] = Namespace
 	end
-	return var1:connect(p2)
+	return Namespace:connect(Callback)
 end
 
-function t.new(p1)
-	-- upvalues: t (ref), httpService (ref)
-	local t_1 = { namespaceTable = {} }
-	setmetatable(t_1, t)
-	t_1.connections = {
-		p1.RobloxEventReceived:Connect(function(p2)
-			-- upvalues: t_1 (ref), httpService (copy)
-			local namespace = t_1.namespaceTable[p2.namespace]
+function RobloxEventReceiverModule.new(NotificationService) --[[ Line: 27 ]]
+	-- upvalues: RobloxEventReceiverModule (copy), HttpService (copy)
+	local config = { namespaceTable = {} }
+	setmetatable(config, RobloxEventReceiverModule)
+	config.connections = {
+		NotificationService.RobloxEventReceived:Connect(function(EventData) --[[ Line: 34 ]]
+			-- upvalues: config (copy), HttpService (upval)
+			local Namespace = config.namespaceTable[EventData.namespace]
 			
-			if namespace == nil then return end
-			local t
-			local _ = nil
-			
-			if p2.detail and p2.detail ~= "" then
-				local ok, status = pcall(function()
-					-- upvalues: httpService (copy), p2 (ref)
-					return httpService:JSONDecode(p2.detail)
+			if Namespace == nil then return end
+			local t = nil
+			if EventData.detail and EventData.detail ~= "" then
+				local Success, Result = pcall(function() --[[ Line: 43 ]]
+					-- upvalues: HttpService (upval), EventData (copy)
+					return HttpService:JSONDecode(EventData.detail)
 				end)
-				t = if ok then status else p2.detail
+				t = Success and Result or EventData.detail
 			else
 				t = {}
 			end
-			namespace:fire(t, p2.detailType)
+			Namespace:fire(t, EventData.detailType)
 		end),
-		p1.RobloxConnectionChanged:Connect(function(p2, p3, p4, p5)
-			-- upvalues: t_1 (ref), httpService (copy)
-			local var1 = t_1.namespaceTable[p2]
+		NotificationService.RobloxConnectionChanged:Connect(function(ConnectionName, ConnectionState, SequenceNumber, NamespaceSequenceNumbers) --[[ Line: 60 ]]
+			-- upvalues: config (copy), HttpService (upval)
+			local Namespace = config.namespaceTable[ConnectionName]
 			
-			if var1 == nil then return end
-			local var2 = nil
+			if Namespace == nil then return end
+			local v1 = nil
 			
-			if p5 then
-				local ok, status = pcall(function()
-					-- upvalues: httpService (copy), p5 (ref)
-					return httpService:JSONDecode(p5)
+			if NamespaceSequenceNumbers then
+				local Success, Result = pcall(function() --[[ Line: 69 ]]
+					-- upvalues: HttpService (upval), NamespaceSequenceNumbers (copy)
+					return HttpService:JSONDecode(NamespaceSequenceNumbers)
 				end)
-				var2 = if ok then status else {}
+				v1 = if Success then Result else {}
 			end
-			var1:fire(p3, p4, var2)
+			Namespace:fire(ConnectionState, SequenceNumber, v1)
 		end)
 	}
 	
-	return t_1
+	return config
 end
 
-return t
+return RobloxEventReceiverModule

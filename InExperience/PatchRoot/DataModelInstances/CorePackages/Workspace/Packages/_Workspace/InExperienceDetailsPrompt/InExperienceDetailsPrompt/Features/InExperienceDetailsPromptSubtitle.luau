@@ -1,20 +1,20 @@
-﻿local parent = script:FindFirstAncestor("InExperienceDetailsPrompt").Parent
-local reactModule = require(parent.React)
-local _ = require(parent.DataHydration)
-local verifiedBadgesModule = require(parent.VerifiedBadges)
-local text = require(parent.Foundation).Text
+﻿local Parent = script:FindFirstAncestor("InExperienceDetailsPrompt").Parent
+local ReactModule = require(Parent.React)
+local _ = require(Parent.DataHydration)
+local VerifiedBadgesModule = require(Parent.VerifiedBadges)
+local Text = require(Parent.Foundation).Text
 
-return function(p1)
-	-- upvalues: reactModule (ref), verifiedBadgesModule (ref), text (ref)
-	return if p1.creator.hasVerifiedBadge then reactModule.createElement(verifiedBadgesModule.EmojiWrapper, {
-		emoji = verifiedBadgesModule.emoji.verified,
+return function(p1) --[[ Line: 16 | Named "InExperienceDetailsPromptSubtitle" ]]
+	-- upvalues: ReactModule (copy), VerifiedBadgesModule (copy), Text (copy)
+	return if p1.creator.hasVerifiedBadge then ReactModule.createElement(VerifiedBadgesModule.EmojiWrapper, {
+		emoji = VerifiedBadgesModule.emoji.verified,
 		layoutOrder = p1.layoutOrder
 	}, {
-		CreatorName = reactModule.createElement(text, {
+		CreatorName = ReactModule.createElement(Text, {
 			tag = "text-body-large content-default auto-xy text-truncate-split padding-right-xxsmall",
 			Text = p1.creator.name
 		})
-	}) else reactModule.createElement(text, {
+	}) else ReactModule.createElement(Text, {
 		tag = "text-body-large content-default auto-xy text-truncate-split padding-right-xxsmall",
 		Text = p1.creator.name,
 		LayoutOrder = p1.layoutOrder

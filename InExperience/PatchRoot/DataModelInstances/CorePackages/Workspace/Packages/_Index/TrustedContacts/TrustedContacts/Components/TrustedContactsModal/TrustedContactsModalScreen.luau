@@ -1,49 +1,27 @@
-﻿local trustedContacts = script:FindFirstAncestor("TrustedContacts")
-local parent = trustedContacts.Parent
-local reactModule = require(parent.React)
-local reactRobloxModule = require(parent.ReactRoblox)
-local useOverlay = require(parent.Foundation).Hooks.useOverlay
-local var1 = if require(parent.SharedFlags).FFlagTFWithActionsCheck then require(script.Parent.TrustedFriendsCardWithActionsCheck) else require(script.Parent.TrustedContactsModalContainer)
-local fFlagTCModalUseFoundationOverlay = require(parent.SharedFlags).FFlagTCModalUseFoundationOverlay
-local _ = require(trustedContacts.Common.Types)
+﻿local TrustedContacts = script:FindFirstAncestor("TrustedContacts")
+local Parent = TrustedContacts.Parent
+local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.ReactRoblox)
+local UseOverlayFunction = require(Parent.Foundation).Hooks.useOverlay
+local TrustedFriendsCardWithActionsCheckModule = require(script.Parent.TrustedFriendsCardWithActionsCheck)
+local _ = require(TrustedContacts.Common.Types)
 
-return function(p1)
-	-- upvalues: fFlagTCModalUseFoundationOverlay (ref), useOverlay (ref), reactRobloxModule (ref), reactModule (ref), var1 (ref)
-	local modalProps = p1.screenProps.modalProps
-	local externalNavigation = p1.screenProps.externalNavigation
+return function(p1) --[[ Line: 14 ]]
+	-- upvalues: UseOverlayFunction (copy), ReactRobloxModule (copy), ReactModule (copy), TrustedFriendsCardWithActionsCheckModule (copy)
+	local ModalProps = p1.screenProps.modalProps
+	local ExternalNavigation = p1.screenProps.externalNavigation
+	local UseOverlayResult = UseOverlayFunction()
 	
-	if not fFlagTCModalUseFoundationOverlay then
-		return reactModule.createElement("ScreenGui", {
-			Enabled = true,
-			DisplayOrder = 11,
-			ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-		}, {
-			reactModule.createElement(var1, {
-				userId = modalProps.userId,
-				onRequestAccepted = modalProps.onRequestAccepted,
-				onRequestSent = modalProps.onRequestSent,
-				source = modalProps.source,
-				modalVariantOverride = modalProps.modalVariantOverride,
-				sentFromQrCode = modalProps.sentFromQrCode,
-				tokens = modalProps.tokens,
-				isVerticallyConstrained = modalProps.isVerticallyConstrained,
-				onAcknowledged = modalProps.onAcknowledged,
-				externalNavigation = externalNavigation
-			})
-		})
-	end
-	local var2 = useOverlay()
-	
-	return if var2 then reactRobloxModule.createPortal(reactModule.createElement(var1, {
-		userId = modalProps.userId,
-		onRequestAccepted = modalProps.onRequestAccepted,
-		onRequestSent = modalProps.onRequestSent,
-		source = modalProps.source,
-		modalVariantOverride = modalProps.modalVariantOverride,
-		sentFromQrCode = modalProps.sentFromQrCode,
-		tokens = modalProps.tokens,
-		isVerticallyConstrained = modalProps.isVerticallyConstrained,
-		onAcknowledged = modalProps.onAcknowledged,
-		externalNavigation = externalNavigation
-	}), var2) else nil
+	return if UseOverlayResult then ReactRobloxModule.createPortal(ReactModule.createElement(TrustedFriendsCardWithActionsCheckModule, {
+		userId = ModalProps.userId,
+		onRequestAccepted = ModalProps.onRequestAccepted,
+		onRequestSent = ModalProps.onRequestSent,
+		source = ModalProps.source,
+		modalVariantOverride = ModalProps.modalVariantOverride,
+		sentFromQrCode = ModalProps.sentFromQrCode,
+		tokens = ModalProps.tokens,
+		isVerticallyConstrained = ModalProps.isVerticallyConstrained,
+		onAcknowledged = ModalProps.onAcknowledged,
+		externalNavigation = ExternalNavigation
+	}), UseOverlayResult) else nil
 end

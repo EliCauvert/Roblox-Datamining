@@ -1,46 +1,46 @@
-﻿local virtualEvents = script:FindFirstAncestor("VirtualEvents")
-local cryoModule = require(virtualEvents.Parent.Cryo)
-local reactModule = require(virtualEvents.Parent.React)
-local UIBloxModule = require(virtualEvents.Parent.UIBlox)
-local useLocalization = require(virtualEvents.Parent.Localization).Hooks.useLocalization
-local eventHostNameModule = require(virtualEvents.Components.EventHostName)
-local _ = require(virtualEvents.Parent.VirtualEventsState)
-local foundationModule = require(virtualEvents.Parent.Foundation)
-local useCursor = foundationModule.Hooks.useCursor
-local cell = UIBloxModule.App.Table.Cell
-local cellHeadDetail = UIBloxModule.App.Table.CellHeadDetail
-local cellTailDescription = UIBloxModule.App.Table.CellTailDescription
-local useStyle = UIBloxModule.Core.Style.useStyle
-local t = { size = UDim2.new(1, 0, 0, 52) }
+﻿local VirtualEvents = script:FindFirstAncestor("VirtualEvents")
+local CryoModule = require(VirtualEvents.Parent.Cryo)
+local ReactModule = require(VirtualEvents.Parent.React)
+local UIBloxModule = require(VirtualEvents.Parent.UIBlox)
+local UseLocalizationFunction = require(VirtualEvents.Parent.Localization).Hooks.useLocalization
+local EventHostNameModule = require(VirtualEvents.Components.EventHostName)
+local _ = require(VirtualEvents.Parent.VirtualEventsState)
+local FoundationModule = require(VirtualEvents.Parent.Foundation)
+local UseCursorFunction = FoundationModule.Hooks.useCursor
+local Cell = UIBloxModule.App.Table.Cell
+local CellHeadDetail = UIBloxModule.App.Table.CellHeadDetail
+local CellTailDescription = UIBloxModule.App.Table.CellTailDescription
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local config = { size = UDim2.new(1, 0, 0, 52) }
 
-return function(p1)
-	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), useLocalization (ref), useCursor (ref), foundationModule (ref), reactModule (ref), cell (ref), cellHeadDetail (ref), cellTailDescription (ref), eventHostNameModule (ref)
-	p1 = cryoModule.Dictionary.join(t, p1)
-	local var1 = useStyle()
+return function(p1) --[[ Line: 29 | Named "EventHostedBy" ]]
+	-- upvalues: CryoModule (copy), config (copy), UseStyleFunction (copy), UseLocalizationFunction (copy), UseCursorFunction (copy), FoundationModule (copy), ReactModule (copy), Cell (copy), CellHeadDetail (copy), CellTailDescription (copy), EventHostNameModule (copy)
+	local JoinResult = CryoModule.Dictionary.join(config, p1)
+	local UseStyleResult = UseStyleFunction()
 	
-	return reactModule.createElement(cell, {
+	return ReactModule.createElement(Cell, {
 		userInteractionEnabled = true,
 		horizontalPadding = 0,
 		layoutWraps = true,
-		selectionCursor = useCursor(foundationModule.Enums.CursorType.RoundedRect),
-		size = p1.size,
-		onActivated = reactModule.useCallback(function()
-			-- upvalues: p1 (write)
-			if p1.onActivated then
-				p1.onActivated(p1.host)
+		selectionCursor = UseCursorFunction(FoundationModule.Enums.CursorType.RoundedRect),
+		size = JoinResult.size,
+		onActivated = ReactModule.useCallback(function() --[[ Line: 38 ]]
+			-- upvalues: JoinResult (ref)
+			if JoinResult.onActivated then
+				JoinResult.onActivated(JoinResult.host)
 			end
-		end, { p1 }),
-		head = reactModule.createElement(cellHeadDetail, {
-			labelText = useLocalization({ hostedBy = "Feature.VirtualEvents.HostedByLabel" }).hostedBy,
-			labelTextColor = var1.Theme.TextDefault,
-			labelTextFont = var1.Font.Body
+		end, { JoinResult }),
+		head = ReactModule.createElement(CellHeadDetail, {
+			labelText = UseLocalizationFunction({ hostedBy = "Feature.VirtualEvents.HostedByLabel" }).hostedBy,
+			labelTextColor = UseStyleResult.Theme.TextDefault,
+			labelTextFont = UseStyleResult.Font.Body
 		}),
-		tail = reactModule.createElement(cellTailDescription, {
+		tail = ReactModule.createElement(CellTailDescription, {
 			text = "",
 			showArrow = true,
-			renderTextOverride = function()
-				-- upvalues: reactModule (copy), eventHostNameModule (copy), p1 (write)
-				return reactModule.createElement(eventHostNameModule, { host = p1.host })
+			renderTextOverride = function() --[[ Line: 57 ]]
+				-- upvalues: ReactModule (upval), EventHostNameModule (upval), JoinResult (ref)
+				return ReactModule.createElement(EventHostNameModule, { host = JoinResult.host })
 			end
 		})
 	})

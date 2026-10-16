@@ -1,18 +1,18 @@
-﻿local appPageShell = script:FindFirstAncestor("AppPageShell")
-local parent = appPageShell.Parent
-local reactModule = require(parent.React)
-local foundationProvider = require(parent.Foundation).FoundationProvider
+﻿local AppPageShell = script:FindFirstAncestor("AppPageShell")
+local Parent = AppPageShell.Parent
+local ReactModule = require(Parent.React)
+local FoundationProvider = require(Parent.Foundation).FoundationProvider
 
 return {
-	name = appPageShell.Name,
-	roact = reactModule,
-	reactRoblox = require(parent.Dev.ReactRoblox),
-	mapStory = function(p1)
-		-- upvalues: reactModule (ref), foundationProvider (ref)
-		return function(p2)
-			-- upvalues: reactModule (copy), foundationProvider (copy), p1 (ref)
-			return reactModule.createElement(foundationProvider, { theme = p2.theme, device = p2.platform }, reactModule.createElement(p1, p2))
+	name = AppPageShell.Name,
+	roact = ReactModule,
+	reactRoblox = require(Parent.Dev.ReactRoblox),
+	mapStory = function(p1) --[[ Line: 14 ]]
+		-- upvalues: ReactModule (copy), FoundationProvider (copy)
+		return function(p2) --[[ Line: 15 ]]
+			-- upvalues: ReactModule (upval), FoundationProvider (upval), p1 (copy)
+			return ReactModule.createElement(FoundationProvider, { theme = p2.theme, device = p2.platform }, ReactModule.createElement(p1, p2))
 		end
 	end,
-	storyRoots = { appPageShell }
+	storyRoots = { AppPageShell }
 }

@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.ModerationCommon.ModerationCommon)
+﻿return (require(script.Parent._Workspace.ModerationCommon.ModerationCommon))

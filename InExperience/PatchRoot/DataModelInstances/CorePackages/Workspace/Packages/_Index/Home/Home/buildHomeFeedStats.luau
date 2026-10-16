@@ -1,10 +1,10 @@
-﻿local function _(p1)
-	local var1 = if p1 ~= nil then nil else p1.kind
+﻿local function _(p1) --[[ Line: 7 | Named "readInputValue" ]]
+	local Kind = if p1 == nil then nil else p1.kind
 	
-	return if var1 == nil then nil else var1.value
+	return if Kind == nil then nil else Kind.value
 end
 
-local _ = function(p1)
+local _ = function(p1): boolean --[[ Line: 12 | Named "isFeed" ]]
 	return type(p1) == "table" and type(p1.entry_map) == "table"
 end
 
@@ -13,116 +13,121 @@ local list = {
 	"items", "cards"
 }
 
-local _ = function(p1)
-	-- upvalues: list (ref)
-	for i, v in list do
-		if type(p1[v]) == "table" then
+local _ = function(p1): boolean --[[ Line: 20 | Named "hasItemList" ]]
+	-- upvalues: list (copy)
+	for _, value in list do
+		if type(p1[value]) == "table" then
 			return true
 		end
 	end
 	return false
 end
 
-local _ = function(p2)
-	local sortId = p2.sort_id
+local _ = function(p2): boolean --[[ Line: 29 | Named "hasSortId" ]]
+	local SortId = p2.sort_id
 	
-	return sortId ~= nil and sortId ~= ""
+	return SortId ~= nil and SortId ~= ""
 end
 
-local _ = function(p2)
-	local poolId = p2.pool_id
+local _ = function(p2) --[[ Line: 34 | Named "readPoolId" ]]
+	local PoolId = p2.pool_id
 	
-	return if type(poolId) == "string" and poolId ~= "" then poolId else nil
+	return if type(PoolId) == "string" and PoolId ~= "" then PoolId else nil
 end
 
-local _ = function(p2, p3)
-	local sortId = p3.sort_id
+local _ = function(p2, p3) --[[ Line: 39 | Named "readSortId" ]]
+	local SortId = p3.sort_id
 	
-	return if sortId == nil or sortId == "" then p2 else tostring(sortId)
+	return if SortId == nil or SortId == "" then p2 else tostring(SortId)
 end
 
-local function countSortItems(p2, p3, p4, p5)
-	-- upvalues: list (ref)
-	local poolId = p2.pool_id
-	local var1 = if type(poolId) == "string" and poolId ~= "" then poolId else nil
+local function countSortItems(p2, p3, p4, p5): number --[[ Line: 47 ]]
+	-- upvalues: list (copy)
+	local PoolId = p2.pool_id
+	local PoolId1 = if type(PoolId) == "string" and PoolId ~= "" then PoolId else nil
 	
-	if var1 == nil then
-		poolId = 0
+	if PoolId1 == nil then
+		local Total = 0
 		
-		for i, v in list do
-			local var2 = p2[v]
+		for _, value in list do
+			local v1 = p2[value]
 			
-			if type(var2) == "table" then
-				poolId += #var2
+			if type(v1) == "table" then
+				Total += #v1
 			end
 		end
-		return poolId
+		return Total
 	else
-		poolId = `{p5}/{var1}`
+		local Text: string = `{p5}/{PoolId1}`
 		
-		if p4[poolId] then
+		if p4[Text] then
 			return 0
+		else
+			p4[Text] = true
+			local ContentPools = p3.content_pools
+			local ContentPool = if type(ContentPools) == "table" then ContentPools[PoolId1] else nil
+			local Items = if type(ContentPool) == "table" then ContentPool.items else nil
+			
+			return if type(Items) == "table" then #Items else 0
 		end
-		p4[poolId] = true
-		local contentPools = p3.content_pools
-		local var3 = if type(contentPools) == "table" then contentPools[var1] else nil
-		local var4 = if type(var3) == "table" then var3.items else nil
-		
-		return if type(var4) == "table" then #var4 else 0
 	end
 end
 
-return function(p6)
-	-- upvalues: list (ref), countSortItems (ref)
+return function(p6) --[[ Line: 75 | Named "buildHomeFeedStats" ]]
+	-- upvalues: list (copy), countSortItems (copy)
 	local t = {}
 	
 	if type(p6) ~= "table" then
 		return t
 	end
-	local t_1 = {}
-	
-	for i, v in p6.page_entries or {} do
-		local inputData = v.input_data
-		local var5 = if inputData ~= nil then nil else inputData.kind
-		local var6 = if var5 ~= nil then nil else var5.value
+	local t1 = {}
+	local PageEntries = p6.page_entries or {}
+	local Flag = nil
+	for _, pageEntry in PageEntries do
+		local InputData = pageEntry.input_data
+		local Kind = if InputData == nil then nil else InputData.kind
+		local Value = if Kind == nil then nil else Kind.value
 		
-		if type(var6) == "table" and type(var6.entry_map) == "table" then
-			for i_1, v_1 in var6.entry_order or {} do
-				local var7 = var6.entry_map[v_1]
+		if type(Value) == "table" and type(Value.entry_map) == "table" then
+			local EntryOrder = Value.entry_order or {}
+			for Position, value in EntryOrder do
+				local Entry = Value.entry_map[value]
 				
-				if var7 ~= nil then
-					local inputData_1 = var7.input_data
-					local var8 = if inputData_1 ~= nil then nil else inputData_1.kind
-					local var9 = if var8 ~= nil then nil else var8.value
+				if Entry ~= nil then
+					local InputData1 = Entry.input_data
+					local Kind1 = if InputData1 == nil then nil else InputData1.kind
+					local Value1 = if Kind1 == nil then nil else Kind1.value
 					
-					if type(var9) == "table" then
-						local var10
-						inputData_1 = true
-						local poolId = var9.pool_id
+					if type(Value1) == "table" then
+						Flag = true
+						local PoolId = Value1.pool_id
 						
-						if (if type(poolId) == "string" and poolId ~= "" then poolId else nil) == nil then
-							for i_2, v_2 in list do
-								if type(var9[v_2]) == "table" then
-									inputData_1 = true
+						if (if type(PoolId) == "string" and PoolId ~= "" then PoolId else nil) == nil then
+							Flag = false
+							
+							for _, value1 in list do
+								if type(Value1[value1]) == "table" then
+									Flag = true
+									break
 								end
 							end
-							inputData_1 = false
 						end
-						if not inputData_1 then
-							poolId = var9.sort_id
-							var10 = poolId ~= nil and poolId ~= ""
+						local Flag1: boolean = Flag
+						
+						if not Flag1 then
+							local SortId = Value1.sort_id
+							Flag1 = SortId ~= nil and SortId ~= ""
+						end
+						if Flag1 then
+							local SortId = Value1.sort_id
+							local Value2 = if SortId == nil or SortId == "" then value else tostring(SortId)
+							local CountSortItemsResult = if Flag then countSortItems(Value1, Value, t1, Value2) else nil
+							local Entry1 = t[Value2]
 							
-							if var10 then
-								poolId = var9.sort_id
-								var10 = if poolId == nil or poolId == "" then v_1 else tostring(poolId)
-								poolId = if inputData_1 then countSortItems(var9, var6, t_1, var10) else nil
-								local var11 = t[var10]
-								
-								if var11 == nil then
-									t[var10] = { itemCount = poolId, position = i_1 }
-								elseif poolId ~= nil then
-									var11.itemCount = (var11.itemCount or 0) + poolId
-								end
+							if Entry1 == nil then
+								t[Value2] = { itemCount = CountSortItemsResult, position = Position }
+							elseif CountSortItemsResult ~= nil then
+								Entry1.itemCount = (Entry1.itemCount or 0) + CountSortItemsResult
 							end
 						end
 					end

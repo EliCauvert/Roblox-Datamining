@@ -1,83 +1,78 @@
-﻿local sessionService = game:GetService("SessionService")
-local parent = script:FindFirstAncestor("AppChat").Parent
-local string = require(parent.LuauPolyfill).String
-local sessionType = require(parent.RobloxAppSessionization).SessionType
-local appChatSessionName = game:DefineFastString("AppChatSessionName", "ChatPage")
-local var1 = 0
-local var2 = 0
-local t = {}
+﻿local SessionService = game:GetService("SessionService")
+local Parent = script:FindFirstAncestor("AppChat").Parent
+local String = require(Parent.LuauPolyfill).String
+local SessionType = require(Parent.RobloxAppSessionization).SessionType
+local AppChatSessionName = game:DefineFastString("AppChatSessionName", "ChatPage")
+local Count = 0
+local Count1 = 0
 
-local function createL3Session(p1)
-	-- upvalues: sessionType (ref), appChatSessionName (ref), string (ref)
-	local level2a = sessionType.StructuralIdentifier.Level2a
+local function createL3Session(SessionService) --[[ Line: 23 ]]
+	-- upvalues: SessionType (copy), AppChatSessionName (copy), String (copy)
+	local Level2a = SessionType.StructuralIdentifier.Level2a
 	
-	if p1:SessionExists(level2a) then
-		p1:SetSession(level2a, appChatSessionName, appChatSessionName)
+	if SessionService:SessionExists(Level2a) then
+		SessionService:SetSession(Level2a, AppChatSessionName, AppChatSessionName)
+		local SessionTag = SessionService:GetSessionTag(Level2a)
 		
-		if game:GetEngineFeature("SessionGetSessionID") and string.startsWith(p1:GetSessionTag(level2a), "ingame") then
-			p1:SetMetadata(appChatSessionName, "InGameSessionId", p1:GetSessionID(level2a))
+		if game:GetEngineFeature("SessionGetSessionID") and String.startsWith(SessionTag, "ingame") then
+			SessionService:SetMetadata(AppChatSessionName, "InGameSessionId", (SessionService:GetSessionID(Level2a)))
 		end
 	end
 end
 
-local function _(p1)
-	-- upvalues: appChatSessionName (ref)
-	if p1:SessionExists(appChatSessionName) then
-		p1:RemoveSession(appChatSessionName)
+local function _(SessionService) --[[ Line: 39 | Named "destroyL3Session" ]]
+	-- upvalues: AppChatSessionName (copy)
+	if SessionService:SessionExists(AppChatSessionName) then
+		SessionService:RemoveSession(AppChatSessionName)
 	end
 end
 
-function t.acquire(p1)
-	-- upvalues: sessionService (ref), var2 (write), var1 (write), createL3Session (ref)
-	p1 = p1 or sessionService
-	
-	if var2 > 0 then
-		var2 -= 1
+return {
+	acquire = function(p1) --[[ Line: 45 ]]
+		-- upvalues: SessionService (copy), Count1 (ref), Count (ref), createL3Session (copy)
+		local P2 = p1 or SessionService
 		
-		return
+		if Count1 > 0 then
+			Count1 -= 1
+			
+			return
+		end
+		Count += 1
+		
+		if Count == 1 then
+			createL3Session(P2)
+		end
+	end,
+	release = function(p1) --[[ Line: 57 ]]
+		-- upvalues: SessionService (copy), Count (ref), AppChatSessionName (copy)
+		local P3 = p1 or SessionService
+		Count -= 1
+		
+		if Count == 0 and P3:SessionExists(AppChatSessionName) then
+			P3:RemoveSession(AppChatSessionName)
+		end
+	end,
+	reserve = function(p1) --[[ Line: 68 ]]
+		-- upvalues: SessionService (copy), Count1 (ref), Count (ref), createL3Session (copy)
+		local P4 = p1 or SessionService
+		Count1 += 1
+		Count += 1
+		
+		if Count == 1 then
+			createL3Session(P4)
+		end
+	end,
+	getCount = function() --[[ Line: 77 ]]
+		-- upvalues: Count (ref)
+		return Count
+	end,
+	getReservations = function() --[[ Line: 81 ]]
+		-- upvalues: Count1 (ref)
+		return Count1
+	end,
+	_resetForTesting = function() --[[ Line: 85 ]]
+		-- upvalues: Count (ref), Count1 (ref)
+		Count = 0
+		Count1 = 0
 	end
-	var1 += 1
-	
-	if var1 == 1 then
-		createL3Session(p1)
-	end
-end
-
-function t.release(p1)
-	-- upvalues: sessionService (ref), var1 (write), appChatSessionName (ref)
-	p1 = p1 or sessionService
-	var1 -= 1
-	
-	if var1 == 0 and p1:SessionExists(appChatSessionName) then
-		p1:RemoveSession(appChatSessionName)
-	end
-end
-
-function t.reserve(p1)
-	-- upvalues: sessionService (ref), var2 (write), var1 (write), createL3Session (ref)
-	p1 = p1 or sessionService
-	var2 += 1
-	var1 += 1
-	
-	if var1 == 1 then
-		createL3Session(p1)
-	end
-end
-
-function t.getCount()
-	-- upvalues: var1 (write)
-	return var1
-end
-
-function t.getReservations()
-	-- upvalues: var2 (write)
-	return var2
-end
-
-function t._resetForTesting()
-	-- upvalues: var1 (write), var2 (write)
-	var1 = 0
-	var2 = 0
-end
-
-return t
+}

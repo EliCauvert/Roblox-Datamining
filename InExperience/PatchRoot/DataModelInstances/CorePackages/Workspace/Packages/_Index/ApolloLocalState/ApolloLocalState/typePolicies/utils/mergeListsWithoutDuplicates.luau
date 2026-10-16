@@ -1,19 +1,20 @@
-﻿local cryoModule = require(script:FindFirstAncestor("ApolloLocalState").Parent.Cryo)
+﻿local CryoModule = require(script:FindFirstAncestor("ApolloLocalState").Parent.Cryo)
 
-return function(p1, p2, p3)
-	-- upvalues: cryoModule (ref)
-	if not p2 or #p2 == 0 then
-		return p1
-	elseif p1 and #p1 ~= 0 then
-		local var1 = cryoModule.List.toSet(cryoModule.List.map(p1, function(p4)
-			-- upvalues: p3 (ref)
-			return if p3 then p4[p3] else p4
+return function(Tbl, p1, p2) --[[ Line: 5 | Named "mergeListsWithoutDuplicates" ]]
+	-- upvalues: CryoModule (copy)
+	if not p1 or #p1 == 0 then
+		return Tbl
+	elseif Tbl and #Tbl ~= 0 then
+		local Set = CryoModule.List.toSet(CryoModule.List.map(Tbl, function(p3) --[[ Line: 13 ]]
+			-- upvalues: p2 (copy)
+			return if p2 then p3[p2] else p3
 		end))
 		
-		return cryoModule.List.join(table.clone(p1), cryoModule.List.filter(p2, function(p4)
-			-- upvalues: p3 (ref), var1 (ref)
-			return not var1[if p3 then p4[p3] else p4]
-		end))
+		return CryoModule.List.join(table.clone(Tbl), (CryoModule.List.filter(p1, function(p3): boolean --[[ Line: 18 ]]
+			-- upvalues: p2 (copy), Set (copy)
+			return not Set[if p2 then p3[p2] else p3]
+		end)))
+	else
+		return p1
 	end
-	return p2
 end

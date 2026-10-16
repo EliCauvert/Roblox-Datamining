@@ -1,68 +1,70 @@
-﻿local parent = script.Parent.Parent
-local reactGlobalsModule = require(parent.ReactGlobals)
-local object = require(parent.LuauPolyfill).Object
-local dEV = reactGlobalsModule.__DEV__
-local yOLO = reactGlobalsModule.__YOLO__
-local console = require(parent.Shared).console
+﻿local Parent = script.Parent.Parent
+local ReactGlobalsModule = require(Parent.ReactGlobals)
+local Object = require(Parent.LuauPolyfill).Object
+local DEV = ReactGlobalsModule.__DEV__
+local YOLO = ReactGlobalsModule.__YOLO__
+local Console = require(Parent.Shared).console
 local _ = require(script.Parent.ReactInternalTypes)
-local reactFiberLaneModule = require(script.Parent.ReactFiberLane)
-local noLane = reactFiberLaneModule.NoLane
-local noLanes = reactFiberLaneModule.NoLanes
-local isSubsetOfLanes = reactFiberLaneModule.isSubsetOfLanes
-local mergeLanes = reactFiberLaneModule.mergeLanes
-local var1 = nil
+local ReactFiberLaneModule = require(script.Parent.ReactFiberLane)
+local NoLane = ReactFiberLaneModule.NoLane
+local NoLanes = ReactFiberLaneModule.NoLanes
+local IsSubsetOfLanesFunction = ReactFiberLaneModule.isSubsetOfLanes
+local MergeLanesFunction = ReactFiberLaneModule.mergeLanes
+local ReactFiberNewContextNewModule = nil
 
-local function _()
-	-- upvalues: var1 (write)
-	if not var1 then
-		var1 = require(script.Parent["ReactFiberNewContext.new"])
+local function _() --[[ Line: 115 | Named "enterDisallowedContextReadInDEV" ]]
+	-- upvalues: ReactFiberNewContextNewModule (ref)
+	if not ReactFiberNewContextNewModule then
+		ReactFiberNewContextNewModule = require(script.Parent["ReactFiberNewContext.new"])
 	end
-	var1.enterDisallowedContextReadInDEV()
+	ReactFiberNewContextNewModule.enterDisallowedContextReadInDEV()
 end
 
-local _ = function()
-	-- upvalues: var1 (write)
-	if not var1 then
-		var1 = require(script.Parent["ReactFiberNewContext.new"])
+local _ = function() --[[ Line: 121 | Named "exitDisallowedContextReadInDEV" ]]
+	-- upvalues: ReactFiberNewContextNewModule (ref)
+	if not ReactFiberNewContextNewModule then
+		ReactFiberNewContextNewModule = require(script.Parent["ReactFiberNewContext.new"])
 	end
-	var1.exitDisallowedContextReadInDEV()
+	ReactFiberNewContextNewModule.exitDisallowedContextReadInDEV()
 end
 
-local reactFiberFlagsModule = require(script.Parent.ReactFiberFlags)
-local callback = reactFiberFlagsModule.Callback
-local shouldCapture = reactFiberFlagsModule.ShouldCapture
-local didCapture = reactFiberFlagsModule.DidCapture
-local debugRenderPhaseSideEffectsForStrictMode = require(parent.Shared).ReactFeatureFlags.debugRenderPhaseSideEffectsForStrictMode
-local strictMode = require(script.Parent.ReactTypeOfMode).StrictMode
-local markSkippedUpdateLanes = require(script.Parent.ReactFiberWorkInProgress).markSkippedUpdateLanes
-local describeError = require(parent.Shared).describeError
-local consolePatchingDev = require(parent.Shared).ConsolePatchingDev
-local disableLogs = consolePatchingDev.disableLogs
-local reenableLogs = consolePatchingDev.reenableLogs
-local t = {
+local ReactFiberFlagsModule = require(script.Parent.ReactFiberFlags)
+local Callback = ReactFiberFlagsModule.Callback
+local ShouldCapture = ReactFiberFlagsModule.ShouldCapture
+local DidCapture = ReactFiberFlagsModule.DidCapture
+local ReactFeatureFlags = require(Parent.Shared).ReactFeatureFlags
+local DebugRenderPhaseSideEffectsForStrictMode = ReactFeatureFlags.debugRenderPhaseSideEffectsForStrictMode
+local EnableAllocationTrims = ReactFeatureFlags.enableAllocationTrims
+local StrictMode = require(script.Parent.ReactTypeOfMode).StrictMode
+local MarkSkippedUpdateLanesFunction = require(script.Parent.ReactFiberWorkInProgress).markSkippedUpdateLanes
+local DescribeError = require(Parent.Shared).describeError
+local ConsolePatchingDev = require(Parent.Shared).ConsolePatchingDev
+local DisableLogsFunction = ConsolePatchingDev.disableLogs
+local ReenableLogsFunction = ConsolePatchingDev.reenableLogs
+local ReactUpdateQueueModule = {
 	UpdateState = 0,
 	ReplaceState = 1,
 	ForceUpdate = 2,
 	CaptureUpdate = 3
 }
-local var2 = false
-local var3 = nil
-local var4 = nil
+local Flag = false
+local Flag1: boolean? = nil
+local Shared = nil
 
-if dEV then
-	var3 = false
-	var4 = nil
+if DEV then
+	Flag1 = false
+	Shared = nil
 	
-	function t.resetCurrentlyProcessingQueue()
-		-- upvalues: var4 (write)
-		var4 = nil
+	function ReactUpdateQueueModule.resetCurrentlyProcessingQueue() --[[ Line: 182 ]]
+		-- upvalues: Shared (ref)
+		Shared = nil
 	end
 end
-local list = table.create(210)
-local var5 = 210
+local Buffer = table.create(210)
+local Count = 210
 
 for i = 1, 210 do
-	list[i] = {
+	Buffer[i] = {
 		eventTime = -1,
 		lane = -1,
 		tag = -1,
@@ -71,7 +73,7 @@ for i = 1, 210 do
 		next = nil
 	}
 end
-function t.initializeUpdateQueue(p1)
+function ReactUpdateQueueModule.initializeUpdateQueue(p1) --[[ Line: 203 ]]
 	p1.updateQueue = {
 		firstBaseUpdate = nil,
 		lastBaseUpdate = nil,
@@ -81,386 +83,380 @@ function t.initializeUpdateQueue(p1)
 	}
 end
 
-function t.cloneUpdateQueue(p1, p2)
-	local updateQueue = p1.updateQueue
+function ReactUpdateQueueModule.cloneUpdateQueue(p1, p2) --[[ Line: 217 ]]
+	local UpdateQueue = p1.updateQueue
 	
-	if p2.updateQueue == updateQueue then
-		p2.updateQueue = table.clone(updateQueue)
+	if p2.updateQueue == UpdateQueue then
+		p2.updateQueue = table.clone(UpdateQueue)
 	end
 end
 
-function t.createUpdate(p1, p2, p3, p4)
-	-- upvalues: var5 (write), list (ref)
-	if var5 > 0 then
-		local var6 = list[var5]
-		list[var5] = nil
-		var5 -= 1
-		var6.eventTime = p1
-		var6.lane = p2
-		var6.tag = 0
-		var6.payload = p3
-		var6.callback = p4
+function ReactUpdateQueueModule.createUpdate(EventTime, Lane, Payload, Callback) --[[ Line: 231 ]]
+	-- upvalues: Count (ref), Buffer (copy)
+	if Count > 0 then
+		local BufferEntry = Buffer[Count]
+		Buffer[Count] = nil
+		Count -= 1
+		BufferEntry.eventTime = EventTime
+		BufferEntry.lane = Lane
+		BufferEntry.tag = 0
+		BufferEntry.payload = Payload
+		BufferEntry.callback = Callback
 		
-		return var6
-	end
-	return {
-		tag = 0,
-		next = nil,
-		eventTime = p1,
-		lane = p2,
-		payload = p3,
-		callback = p4
-	}
-end
-
-function t.enqueueUpdate(p1, p2)
-	-- upvalues: dEV (ref), var4 (write), var3 (write), console (ref)
-	local updateQueue = p1.updateQueue
-	
-	if updateQueue == nil then return end
-	local shared = updateQueue.shared
-	local pending = shared.pending
-	
-	if pending == nil then
-		p2.next = p2
+		return BufferEntry
 	else
-		p2.next = pending.next
-		pending.next = p2
-	end
-	shared.pending = p2
-	
-	if dEV and var4 == shared and not var3 then
-		console.error("An update (setState, replaceState, or forceUpdate) was scheduled from inside an update function. Update functions should be pure, with zero side-effects. Consider using componentDidUpdate or a callback.")
-		var3 = true
+		return {
+			tag = 0,
+			next = nil,
+			eventTime = EventTime,
+			lane = Lane,
+			payload = Payload,
+			callback = Callback
+		}
 	end
 end
 
-function t.enqueueCapturedUpdate(p1, p2)
-	local updateQueue = p1.updateQueue
-	local alternate = p1.alternate
+function ReactUpdateQueueModule.enqueueUpdate(p1, Pending) --[[ Line: 281 ]]
+	-- upvalues: DEV (copy), Shared (ref), Flag1 (ref), Console (copy)
+	local UpdateQueue = p1.updateQueue
 	
-	if alternate ~= nil then
-		local updateQueue_1 = alternate.updateQueue
+	if UpdateQueue == nil then return end
+	local Shared1 = UpdateQueue.shared
+	local Pending1 = Shared1.pending
+	
+	if Pending1 == nil then
+		Pending.next = Pending
+	else
+		Pending.next = Pending1.next
+		Pending1.next = Pending
+	end
+	Shared1.pending = Pending
+	
+	if DEV and Shared == Shared1 and not Flag1 then
+		Console.error("An update (setState, replaceState, or forceUpdate) was scheduled from inside an update function. Update functions should be pure, with zero side-effects. Consider using componentDidUpdate or a callback.")
+		Flag1 = true
+	end
+end
+
+function ReactUpdateQueueModule.enqueueCapturedUpdate(p1, LastBaseUpdate) --[[ Line: 313 ]]
+	local UpdateQueue = p1.updateQueue
+	local Alternate = p1.alternate
+	
+	if Alternate ~= nil then
+		local UpdateQueue1 = Alternate.updateQueue
 		
-		if updateQueue == updateQueue_1 then
-			local var6 = nil
-			local var7 = nil
-			local firstBaseUpdate = updateQueue.firstBaseUpdate
+		if UpdateQueue == UpdateQueue1 then
+			local FirstBaseUpdate = nil
+			local v1 = nil
+			local FirstBaseUpdate1 = UpdateQueue.firstBaseUpdate
+			local LastBaseUpdate2 = nil
 			
-			if firstBaseUpdate == nil then
-				var7 = p2
-				var6 = p2
+			if FirstBaseUpdate1 == nil then
+				LastBaseUpdate2 = LastBaseUpdate
+				FirstBaseUpdate = LastBaseUpdate
 			else
-				local var8 = firstBaseUpdate
+				local Next = FirstBaseUpdate1
 				repeat
-					local t = {
+					local config = {
 						next = nil,
-						eventTime = var8.eventTime,
-						lane = var8.lane,
-						tag = var8.tag,
-						payload = var8.payload,
-						callback = var8.callback
+						eventTime = Next.eventTime,
+						lane = Next.lane,
+						tag = Next.tag,
+						payload = Next.payload,
+						callback = Next.callback
 					}
-					if var7 == nil then
-						var7 = t
-						var6 = t
+					if v1 == nil then
+						v1 = config
+						FirstBaseUpdate = config
 					else
-						var7.next = t
-						var7 = t
+						v1.next = config
+						v1 = config
 					end
-					var8 = var8.next
-				until var8 == nil
-				if var7 == nil then
-					var7 = p2
-					var6 = p2
+					Next = Next.next
+				until Next == nil
+				if v1 == nil then
+					LastBaseUpdate2 = LastBaseUpdate
+					FirstBaseUpdate = LastBaseUpdate
 				else
-					var7.next = p2
-					var7 = p2
+					v1.next = LastBaseUpdate
+					LastBaseUpdate2 = LastBaseUpdate
 				end
 			end
-			updateQueue = {
-				baseState = updateQueue_1.baseState,
-				firstBaseUpdate = var6,
-				lastBaseUpdate = var7,
-				shared = updateQueue_1.shared,
-				effects = updateQueue_1.effects
+			UpdateQueue = {
+				baseState = UpdateQueue1.baseState,
+				firstBaseUpdate = FirstBaseUpdate,
+				lastBaseUpdate = LastBaseUpdate2,
+				shared = UpdateQueue1.shared,
+				effects = UpdateQueue1.effects
 			}
-			p1.updateQueue = updateQueue
+			p1.updateQueue = UpdateQueue
 			
 			return
-		else
-			local lastBaseUpdate = updateQueue.lastBaseUpdate
-			
-			if lastBaseUpdate == nil then
-				updateQueue.firstBaseUpdate = p2
-			else
-				lastBaseUpdate.next = p2
-			end
-			updateQueue.lastBaseUpdate = p2
 		end
 	end
+	local LastBaseUpdate1 = UpdateQueue.lastBaseUpdate
+	
+	if LastBaseUpdate1 == nil then
+		UpdateQueue.firstBaseUpdate = LastBaseUpdate
+	else
+		LastBaseUpdate1.next = LastBaseUpdate
+	end
+	UpdateQueue.lastBaseUpdate = LastBaseUpdate
 end
 
-local function getStateFromUpdate(p1, _, p2, p3, p4, _)
-	-- upvalues: dEV (ref), var1 (write), debugRenderPhaseSideEffectsForStrictMode (ref), strictMode (ref), disableLogs (ref), yOLO (ref), describeError (ref), reenableLogs (ref), shouldCapture (ref), didCapture (ref), object (ref), var2 (write)
-	local tag = p2.tag
+local function getStateFromUpdate(p1, _, Update, Tbl, p2, _) --[[ Line: 394 ]]
+	-- upvalues: DEV (copy), ReactFiberNewContextNewModule (ref), DebugRenderPhaseSideEffectsForStrictMode (copy), StrictMode (copy), DisableLogsFunction (copy), YOLO (copy), DescribeError (copy), ReenableLogsFunction (copy), ShouldCapture (copy), DidCapture (copy), EnableAllocationTrims (copy), Object (copy), Flag (ref)
+	local Tag = Update.tag
 	
-	if tag == 1 then
-		local payload = p2.payload
+	if Tag == 1 then
+		local PayloadFunction1 = Update.payload
 		
-		if type(payload) == "function" then
-			if dEV then
-				if not var1 then
-					var1 = require(script.Parent["ReactFiberNewContext.new"])
-				end
-				var1.enterDisallowedContextReadInDEV()
-			end
-			local var6 = payload(p3, p4)
-			
-			if dEV then
-				if debugRenderPhaseSideEffectsForStrictMode and bit32.band(p1.mode, strictMode) ~= 0 then
-					local var7
-					disableLogs()
-					local _ = nil
-					local var8 = nil
-					
-					if yOLO then
-						var7 = true
-						payload(p3, p4)
-					else
-						local ok, status = xpcall(payload, describeError, p3, p4)
-						var7 = ok
-						var8 = status
-					end
-					reenableLogs()
-					
-					if not var7 then
-						error(var8)
-					end
-				end
-				if not var1 then
-					var1 = require(script.Parent["ReactFiberNewContext.new"])
-				end
-				var1.exitDisallowedContextReadInDEV()
-			end
-			return var6
-		else
-			return payload
+		if type(PayloadFunction1) ~= "function" then
+			return PayloadFunction1
 		end
-	elseif tag == 3 or tag == 0 then
-		if tag == 3 then
-			p1.flags = bit32.bor(bit32.band(p1.flags, bit32.bnot(shouldCapture)), didCapture)
-		end
-		local var9
-		local payload = p2.payload
-		local _ = nil
-		
-		if type(payload) == "function" then
-			if dEV then
-				if not var1 then
-					var1 = require(script.Parent["ReactFiberNewContext.new"])
-				end
-				var1.enterDisallowedContextReadInDEV()
+		if DEV then
+			if not ReactFiberNewContextNewModule then
+				ReactFiberNewContextNewModule = require(script.Parent["ReactFiberNewContext.new"])
 			end
-			var9 = payload(p3, p4)
-			
-			if dEV then
-				if debugRenderPhaseSideEffectsForStrictMode and bit32.band(p1.mode, strictMode) ~= 0 then
-					local var10
-					disableLogs()
-					local _ = nil
-					local var11 = nil
-					
-					if yOLO then
-						var10 = true
-						payload(p3, p4)
-					else
-						local ok, status = xpcall(payload, describeError, p3, p4)
-						var10 = ok
-						var11 = status
-					end
-					reenableLogs()
-					
-					if not var10 then
-						error(var11)
-					end
-				end
-				var1 = var1 or require(script.Parent["ReactFiberNewContext.new"])
-				var1.exitDisallowedContextReadInDEV()
-			end
-		else
-			var9 = payload
+			ReactFiberNewContextNewModule.enterDisallowedContextReadInDEV()
 		end
-		return if var9 == nil then p3 else object.assign({}, p3, var9)
-	elseif tag == 2 then
-		var2 = true
+		local PayloadResult = PayloadFunction1(Tbl, p2)
 		
-		return p3
-	end
-	return p3
-end
-
-t.getStateFromUpdate = getStateFromUpdate
-
-function t.processUpdateQueue(p1, p2, p3, p4)
-	-- upvalues: var2 (write), dEV (ref), var4 (write), noLanes (ref), isSubsetOfLanes (ref), mergeLanes (ref), noLane (ref), getStateFromUpdate (ref), callback (ref), markSkippedUpdateLanes (ref)
-	local updateQueue = p1.updateQueue
-	var2 = false
-	
-	if dEV then
-		var4 = updateQueue.shared
-	end
-	local firstBaseUpdate = updateQueue.firstBaseUpdate
-	local lastBaseUpdate = updateQueue.lastBaseUpdate
-	local pending = updateQueue.shared.pending
-	
-	if pending ~= nil then
-		updateQueue.shared.pending = nil
-		local var6 = pending
-		local next = var6.next
-		var6.next = nil
-		
-		if lastBaseUpdate == nil then
-			firstBaseUpdate = next
-		else
-			lastBaseUpdate.next = next
-		end
-		local var7 = var6
-		local alternate = p1.alternate
-		
-		if alternate ~= nil then
-			local updateQueue_1 = alternate.updateQueue
-			local lastBaseUpdate_1 = updateQueue_1.lastBaseUpdate
-			
-			if lastBaseUpdate_1 ~= var7 then
-				if lastBaseUpdate_1 == nil then
-					updateQueue_1.firstBaseUpdate = next
+		if DEV then
+			if DebugRenderPhaseSideEffectsForStrictMode and bit32.band(p1.mode, StrictMode) ~= 0 then
+				DisableLogsFunction()
+				local v1 = nil
+				local Success = nil
+				
+				if YOLO then
+					Success = true
+					PayloadFunction1(Tbl, p2)
 				else
-					lastBaseUpdate_1.next = next
+					Success, v47 = xpcall(PayloadFunction1, DescribeError, Tbl, p2)
 				end
-				updateQueue_1.lastBaseUpdate = var6
-			end
-		end
-	end
-	if firstBaseUpdate ~= nil then
-		local baseState = updateQueue.baseState
-		local var8 = noLanes
-		local var9 = nil
-		local var10 = nil
-		local var11 = nil
-		local var12 = firstBaseUpdate
-		while true do
-			local lane = var12.lane
-			local eventTime = var12.eventTime
-			if isSubsetOfLanes(p4, lane) then
-				if var11 ~= nil then
-					local t = {
-						next = nil,
-						eventTime = eventTime,
-						lane = noLane,
-						tag = var12.tag,
-						payload = var12.payload,
-						callback = var12.callback
-					}
-					var11.next = t
-					var11 = t
-				end
-				baseState = getStateFromUpdate(p1, updateQueue, var12, baseState, p2, p3)
+				ReenableLogsFunction()
 				
-				if var12.callback ~= nil and var12.lane ~= noLane then
-					p1.flags = bit32.bor(p1.flags, callback)
-					local effects = updateQueue.effects
+				if not Success then
+					error(v1)
+				end
+			end
+			if not ReactFiberNewContextNewModule then
+				ReactFiberNewContextNewModule = require(script.Parent["ReactFiberNewContext.new"])
+			end
+			ReactFiberNewContextNewModule.exitDisallowedContextReadInDEV()
+		end
+		return PayloadResult
+	elseif Tag == 3 or Tag == 0 then
+		if Tag == 3 then
+			p1.flags = bit32.bor(bit32.band(p1.flags, (bit32.bnot(ShouldCapture))), DidCapture)
+		end
+		local PayloadFunction = Update.payload
+		local Payload = nil
+		
+		if type(PayloadFunction) == "function" then
+			if DEV then
+				if not ReactFiberNewContextNewModule then
+					ReactFiberNewContextNewModule = require(script.Parent["ReactFiberNewContext.new"])
+				end
+				ReactFiberNewContextNewModule.enterDisallowedContextReadInDEV()
+			end
+			Payload = PayloadFunction(Tbl, p2)
+			
+			if DEV then
+				if DebugRenderPhaseSideEffectsForStrictMode and bit32.band(p1.mode, StrictMode) ~= 0 then
+					DisableLogsFunction()
+					local v2 = nil
+					local Success1 = nil
 					
-					if effects == nil then
-						updateQueue.effects = { var12 }
+					if YOLO then
+						Success1 = true
+						PayloadFunction(Tbl, p2)
 					else
-						table.insert(effects, var12)
+						Success1, v50 = xpcall(PayloadFunction, DescribeError, Tbl, p2)
+					end
+					ReenableLogsFunction()
+					
+					if not Success1 then
+						error(v2)
 					end
 				end
-				var12 = var12.next
-				
-				if var12 ~= nil then continue end
-				local pending_1 = updateQueue.shared.pending
-				
-				if pending_1 == nil then break end
-				local var13 = pending_1
-				local next = var13.next
-				var13.next = nil
-				var12 = next
-				updateQueue.lastBaseUpdate = var13
-				updateQueue.shared.pending = nil
-			end
-			local t = {
-				next = nil,
-				eventTime = eventTime,
-				lane = lane,
-				tag = var12.tag,
-				payload = var12.payload,
-				callback = var12.callback
-			}
-			
-			if var11 == nil then
-				var10 = t
-				var11 = t
-				var9 = baseState
-			else
-				var11.next = t
-				var11 = t
-			end
-			var8 = mergeLanes(var8, lane)
-		end
-		if var11 == nil then
-			var9 = baseState
-		end
-		updateQueue.baseState = var9
-		updateQueue.firstBaseUpdate = var10
-		updateQueue.lastBaseUpdate = var11
-		markSkippedUpdateLanes(var8)
-		p1.lanes = var8
-		p1.memoizedState = baseState
-	end
-	if dEV then
-		var4 = nil
-	end
-end
-
-local _ = function(p5, p6)
-	if type(p5) ~= "function" then
-		error(string.format("Invalid argument passed as callback. Expected a function. Instead received: %s", tostring(p5)))
-	end
-	p5(p6)
-end
-
-function t.resetHasForceUpdateBeforeProcessing()
-	-- upvalues: var2 (write)
-	var2 = false
-end
-
-function t.checkHasForceUpdateAfterProcessing()
-	-- upvalues: var2 (write)
-	return var2
-end
-
-function t.commitUpdateQueue(_, p5, p6)
-	-- upvalues: list (ref), var5 (write)
-	local effects = p5.effects
-	p5.effects = nil
-	
-	if effects ~= nil then
-		for i, v in effects do
-			local callback = v.callback
-			
-			if callback ~= nil then
-				if type(callback) ~= "function" then
-					error(string.format("Invalid argument passed as callback. Expected a function. Instead received: %s", tostring(callback)))
+				if not ReactFiberNewContextNewModule then
+					ReactFiberNewContextNewModule = require(script.Parent["ReactFiberNewContext.new"])
 				end
-				callback(p6)
+				ReactFiberNewContextNewModule.exitDisallowedContextReadInDEV()
 			end
-			table.clear(v)
-			table.insert(list, v)
-			var5 += 1
+		else
+			Payload = PayloadFunction
+		end
+		return if Payload == nil then Tbl elseif EnableAllocationTrims then Object.assign(if type(Tbl) == "table" and getmetatable(Tbl) == nil then table.clone(Tbl) else Object.assign({}, Tbl), Payload) else Object.assign({}, Tbl, Payload)
+	elseif Tag == 2 then
+		Flag = true
+		
+		return Tbl
+	else
+		return Tbl
+	end
+end
+
+ReactUpdateQueueModule.getStateFromUpdate = getStateFromUpdate
+
+function ReactUpdateQueueModule.processUpdateQueue(p1, p2, p3, p4) --[[ Line: 514 ]]
+	-- upvalues: Flag (ref), DEV (copy), Shared (ref), NoLanes (copy), IsSubsetOfLanesFunction (copy), MergeLanesFunction (copy), NoLane (copy), getStateFromUpdate (copy), Callback (copy), MarkSkippedUpdateLanesFunction (copy)
+	local UpdateQueue = p1.updateQueue
+	Flag = false
+	
+	if DEV then
+		Shared = UpdateQueue.shared
+	end
+	local FirstBaseUpdate = UpdateQueue.firstBaseUpdate
+	local LastBaseUpdate = UpdateQueue.lastBaseUpdate
+	local Pending = UpdateQueue.shared.pending
+	
+	if Pending ~= nil then
+		UpdateQueue.shared.pending = nil
+		local Next = Pending.next
+		Pending.next = nil
+		
+		if LastBaseUpdate == nil then
+			FirstBaseUpdate = Next
+		else
+			LastBaseUpdate.next = Next
+		end
+		local Alternate = p1.alternate
+		
+		if Alternate ~= nil then
+			local UpdateQueue1 = Alternate.updateQueue
+			local LastBaseUpdate1 = UpdateQueue1.lastBaseUpdate
+			
+			if LastBaseUpdate1 ~= Pending then
+				if LastBaseUpdate1 == nil then
+					UpdateQueue1.firstBaseUpdate = Next
+				else
+					LastBaseUpdate1.next = Next
+				end
+				UpdateQueue1.lastBaseUpdate = Pending
+			end
+		end
+	end
+	repeat
+		if FirstBaseUpdate == nil then break end
+		local BaseState = UpdateQueue.baseState
+		local Lanes = NoLanes
+		local BaseState1 = nil
+		local FirstBaseUpdate1 = nil
+		local LastBaseUpdate2 = nil
+		local Next = FirstBaseUpdate
+		while true do
+			local Lane = Next.lane
+			local EventTime = Next.eventTime
+			if IsSubsetOfLanesFunction(p4, Lane) then
+				if LastBaseUpdate2 ~= nil then
+					local config = {
+						next = nil,
+						eventTime = EventTime,
+						lane = NoLane,
+						tag = Next.tag,
+						payload = Next.payload,
+						callback = Next.callback
+					}
+					LastBaseUpdate2.next = config
+					LastBaseUpdate2 = config
+				end
+				BaseState = getStateFromUpdate(p1, UpdateQueue, Next, BaseState, p2, p3)
+				
+				if Next.callback ~= nil and Next.lane ~= NoLane then
+					p1.flags = bit32.bor(p1.flags, Callback)
+					local Effects = UpdateQueue.effects
+					
+					if Effects == nil then
+						UpdateQueue.effects = { Next }
+					else
+						table.insert(Effects, Next)
+					end
+				end
+			else
+				local config = {
+					next = nil,
+					eventTime = EventTime,
+					lane = Lane,
+					tag = Next.tag,
+					payload = Next.payload,
+					callback = Next.callback
+				}
+				
+				if LastBaseUpdate2 == nil then
+					FirstBaseUpdate1 = config
+					LastBaseUpdate2 = config
+					BaseState1 = BaseState
+				else
+					LastBaseUpdate2.next = config
+					LastBaseUpdate2 = config
+				end
+				Lanes = MergeLanesFunction(Lanes, Lane)
+			end
+			Next = Next.next
+			
+			if Next ~= nil then continue end
+			local Pending1 = UpdateQueue.shared.pending
+			
+			if Pending1 == nil then break end
+			Pending1.next = nil
+			Next = Pending1.next
+			UpdateQueue.lastBaseUpdate = Pending1
+			UpdateQueue.shared.pending = nil
+		end
+		if LastBaseUpdate2 == nil then
+			BaseState1 = BaseState
+		end
+		UpdateQueue.baseState = BaseState1
+		UpdateQueue.firstBaseUpdate = FirstBaseUpdate1
+		UpdateQueue.lastBaseUpdate = LastBaseUpdate2
+		MarkSkippedUpdateLanesFunction(Lanes)
+		p1.lanes = Lanes
+		p1.memoizedState = BaseState
+	until true
+	if DEV then
+		Shared = nil
+	end
+end
+
+local _ = function(Callback: (any) -> (), p1) --[[ Line: 706 | Named "callCallback" ]]
+	if type(Callback) ~= "function" then
+		error(string.format("Invalid argument passed as callback. Expected a function. Instead received: %s", (tostring(Callback))))
+	end
+	Callback(p1)
+end
+
+function ReactUpdateQueueModule.resetHasForceUpdateBeforeProcessing() --[[ Line: 721 ]]
+	-- upvalues: Flag (ref)
+	Flag = false
+end
+
+function ReactUpdateQueueModule.checkHasForceUpdateAfterProcessing() --[[ Line: 725 ]]
+	-- upvalues: Flag (ref)
+	return Flag
+end
+
+function ReactUpdateQueueModule:commitUpdateQueue(p1, p2) --[[ Line: 729 ]]
+	-- upvalues: Buffer (copy), Count (ref)
+	local Effects = p1.effects
+	p1.effects = nil
+	
+	if Effects ~= nil then
+		for _, effect in Effects do
+			local CallbackFunction: (any) -> () = effect.callback
+			
+			if CallbackFunction ~= nil then
+				if type(CallbackFunction) ~= "function" then
+					error(string.format("Invalid argument passed as callback. Expected a function. Instead received: %s", (tostring(CallbackFunction))))
+				end
+				CallbackFunction(p2)
+			end
+			table.clear(effect)
+			table.insert(Buffer, effect)
+			Count += 1
 		end
 	end
 end
 
-return t
+return ReactUpdateQueueModule

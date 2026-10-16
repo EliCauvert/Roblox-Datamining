@@ -1,66 +1,68 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local guiService = game:GetService("GuiService")
-local avatarIdentification = require(parent_1.AvatarIdentification).AvatarIdentification
-local dashModule = require(parent_1.Dash)
-local getAvatarAssetsModule = require(parent.Utils.getAvatarAssets)
-local captureMetadataGetAvatarsTimeoutMs = game:DefineFastInt("CaptureMetadataGetAvatarsTimeoutMs", 150)
-local captureMetadataMaxAvatars = game:DefineFastInt("CaptureMetadataMaxAvatars", 5)
-local captureMetadataMinAvatarBoundingBoxPixels = game:DefineFastInt("CaptureMetadataMinAvatarBoundingBoxPixels", 200)
-local captureMetadataMinHitRatePercentage = game:DefineFastInt("CaptureMetadataMinHitRatePercentage", 50)
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local GuiService = game:GetService("GuiService")
+local AvatarIdentification = require(Parent1.AvatarIdentification).AvatarIdentification
+local DashModule = require(Parent1.Dash)
+local GetAvatarAssetsModule = require(Parent.Utils.getAvatarAssets)
+local CaptureMetadataGetAvatarsTimeoutMs = game:DefineFastInt("CaptureMetadataGetAvatarsTimeoutMs", 150)
+local CaptureMetadataMaxAvatars = game:DefineFastInt("CaptureMetadataMaxAvatars", 5)
+local CaptureMetadataMinAvatarBoundingBoxPixels = game:DefineFastInt("CaptureMetadataMinAvatarBoundingBoxPixels", 200)
+local CaptureMetadataMinHitRatePercentage = game:DefineFastInt("CaptureMetadataMinHitRatePercentage", 50)
 
-local function _()
-	local currentCamera = workspace.CurrentCamera
+local function _() --[[ Line: 17 | Named "getViewportSize" ]]
+	local CurrentCamera = workspace.CurrentCamera
 	
-	if currentCamera then
-		return currentCamera.ViewportSize
-	end
+	if not CurrentCamera then return end
+	return CurrentCamera.ViewportSize
 end
 
-local round = math.round
+local RoundFunction = math.round
 
-local _ = function(p1)
-	-- upvalues: round (ref)
-	return { x = round(p1.X), y = round(p1.Y) }
+local _ = function(Vector) --[[ Line: 28 | Named "vec2ToTable" ]]
+	-- upvalues: RoundFunction (copy)
+	return { x = RoundFunction(Vector.X), y = RoundFunction(Vector.Y) }
 end
 
-return function()
-	-- upvalues: captureMetadataGetAvatarsTimeoutMs (ref), avatarIdentification (ref), dashModule (ref), guiService (ref), captureMetadataMaxAvatars (ref), captureMetadataMinHitRatePercentage (ref), captureMetadataMinAvatarBoundingBoxPixels (ref), getAvatarAssetsModule (ref), round (ref)
-	local currentCamera = workspace.CurrentCamera
-	local var1 = if not currentCamera then nil else currentCamera.ViewportSize
+return function() --[[ Line: 32 ]]
+	-- upvalues: CaptureMetadataGetAvatarsTimeoutMs (copy), AvatarIdentification (copy), DashModule (copy), GuiService (copy), CaptureMetadataMaxAvatars (copy), CaptureMetadataMinHitRatePercentage (copy), CaptureMetadataMinAvatarBoundingBoxPixels (copy), GetAvatarAssetsModule (copy), RoundFunction (copy)
+	local CurrentCamera = workspace.CurrentCamera
+	local ViewportSize = if CurrentCamera then CurrentCamera.ViewportSize else nil
 	
-	if not var1 then
+	if not ViewportSize then
 		return {}
 	end
-	local var2 = dashModule.values(avatarIdentification.getVisibleAvatars(true, captureMetadataGetAvatarsTimeoutMs / 1000))
-	local rawScreenScale = guiService:GetRawScreenScale()
+	local ValuesResult = DashModule.values((AvatarIdentification.getVisibleAvatars(true, CaptureMetadataGetAvatarsTimeoutMs / 1000)))
+	local RawScreenScale = GuiService:GetRawScreenScale()
 	
-	for i, v in var2 do
-		v.boundingBox.min = v.boundingBox.min * var1 * rawScreenScale
-		v.boundingBox.max = v.boundingBox.max * var1 * rawScreenScale
+	for _, value in ValuesResult do
+		value.boundingBox.min = value.boundingBox.min * ViewportSize * RawScreenScale
+		value.boundingBox.max = value.boundingBox.max * ViewportSize * RawScreenScale
 	end
-	table.sort(var2, function(p1, p2)
-		return (p2.boundingBox.max - p2.boundingBox.min).Magnitude < (p1.boundingBox.max - p1.boundingBox.min).Magnitude
+	table.sort(ValuesResult, function(A, B): boolean --[[ Line: 50 ]]
+		return (B.boundingBox.max - B.boundingBox.min).Magnitude < (A.boundingBox.max - A.boundingBox.min).Magnitude
 	end)
-	local var3 = 0
+	local Count = 0
 	local t = {}
 	
-	for i_1, v_1 in var2 do
-		if captureMetadataMaxAvatars <= var3 then break end
-		var3 += 1
+	for _, value1 in ValuesResult do
+		if CaptureMetadataMaxAvatars <= Count then break end
+		Count += 1
 		
-		if v_1.hitRate >= captureMetadataMinHitRatePercentage / 100 then
-			if (v_1.boundingBox.max - v_1.boundingBox.min).Magnitude < captureMetadataMinAvatarBoundingBoxPixels then break end
-			local player = v_1.player
-			local userId = player.UserId
-			local t_1 = { avatarItems = getAvatarAssetsModule(player.Character) }
-			local t_2 = {}
-			local min = v_1.boundingBox.min
-			t_2.min = { x = round(min.X), y = round(min.Y) }
-			local max = v_1.boundingBox.max
-			t_2.max = { x = round(max.X), y = round(max.Y) }
-			t_1.boundingBox = t_2
-			t[userId] = t_1
+		if value1.hitRate >= CaptureMetadataMinHitRatePercentage / 100 then
+			if (value1.boundingBox.max - value1.boundingBox.min).Magnitude < CaptureMetadataMinAvatarBoundingBoxPixels then break end
+			local Player = value1.player
+			local AvatarAssetsModule = GetAvatarAssetsModule(Player.Character)
+			local UserId = Player.UserId
+			local Min = value1.boundingBox.min
+			local Min1 = { x = RoundFunction(Min.X), y = RoundFunction(Min.Y) }
+			local Max = value1.boundingBox.max
+			t[UserId] = {
+				avatarItems = AvatarAssetsModule,
+				boundingBox = {
+					min = Min1,
+					max = { x = RoundFunction(Max.X), y = RoundFunction(Max.Y) }
+				}
+			}
 		end
 	end
 	return t

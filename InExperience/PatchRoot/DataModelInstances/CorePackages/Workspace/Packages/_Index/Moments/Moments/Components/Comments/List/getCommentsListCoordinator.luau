@@ -1,41 +1,39 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local momentsCommentsModule = require(parent.DataHydration.MomentsComments)
-local momentsGetMomentsCommentsStoreModule = require(parent.DataHydration.MomentsGetMomentsCommentsStore)
-local sharedFlagsModule = require(parent.SharedFlags)
-local momentsGetMomentsReactionsStoreModule = require(parent.DataHydration.MomentsGetMomentsReactionsStore)
-local signalsModule = require(parent.Signals)
-local getCommentCollectionStoreModule = require(moments.Components.Comments.GetCommentCollectionStore)
-local getCommentSessionFiltersStoreModule = require(moments.Components.Comments.GetCommentSessionFiltersStore)
-local getCommentReactionsStoreModule = require(moments.Stores.GetCommentReactionsStore)
-local createCommentsListCoordinatorModule = require(script.Parent.createCommentsListCoordinator)
-local fFlagMomentsComments = sharedFlagsModule.FFlagMomentsComments
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local MomentsCommentsModule = require(Parent.DataHydration.MomentsComments)
+local MomentsGetMomentsCommentsStoreModule = require(Parent.DataHydration.MomentsGetMomentsCommentsStore)
+local MomentsGetMomentsReactionsStoreModule = require(Parent.DataHydration.MomentsGetMomentsReactionsStore)
+local GetCommentCollectionStoreModule = require(Moments.Components.Comments.GetCommentCollectionStore)
+local GetCommentSessionFiltersStoreModule = require(Moments.Components.Comments.GetCommentSessionFiltersStore)
+local GetCommentReactionsStoreModule = require(Moments.Stores.GetCommentReactionsStore)
+local CreateCommentsListCoordinatorModule = require(script.Parent.createCommentsListCoordinator)
+local FFlagMomentsComments = require(Parent.SharedFlags).FFlagMomentsComments
 
-local function getCommentPostedCallback(p1, p2)
-	local recommendationSession = require(script.Parent.Parent.Sheet.getCommentsSheetStore)(false).getRecommendationSession(p1, p2)
+local function getCommentPostedCallback(p1, p2) --[[ Line: 16 ]]
+	local RecommendationSession = require(script.Parent.Parent.Sheet.getCommentsSheetStore)(false).getRecommendationSession(p1, p2)
 	
-	return if recommendationSession == nil then nil else recommendationSession.logComment
+	return if RecommendationSession == nil then nil else RecommendationSession.logComment
 end
 
-local function getCommentDeletedCallback(p1, p2)
-	local recommendationSession = require(script.Parent.Parent.Sheet.getCommentsSheetStore)(false).getRecommendationSession(p1, p2)
+local function getCommentDeletedCallback(p1, p2) --[[ Line: 22 ]]
+	local RecommendationSession = require(script.Parent.Parent.Sheet.getCommentsSheetStore)(false).getRecommendationSession(p1, p2)
 	
-	return if recommendationSession == nil then nil else recommendationSession.logCommentDelete
+	return if RecommendationSession == nil then nil else RecommendationSession.logCommentDelete
 end
 
-return signalsModule.createComputed(function(_)
-	-- upvalues: momentsGetMomentsCommentsStoreModule (ref), createCommentsListCoordinatorModule (ref), getCommentCollectionStoreModule (ref), fFlagMomentsComments (ref), getCommentReactionsStoreModule (ref), momentsGetMomentsReactionsStoreModule (ref), getCommentSessionFiltersStoreModule (ref), momentsCommentsModule (ref), getCommentPostedCallback (ref), getCommentDeletedCallback (ref)
-	return createCommentsListCoordinatorModule({
-		collectionStore = getCommentCollectionStoreModule(false),
-		commentsStore = momentsGetMomentsCommentsStoreModule(false),
-		reactionStore = if fFlagMomentsComments then getCommentReactionsStoreModule(false) else nil,
-		catalogStore = if fFlagMomentsComments then momentsGetMomentsReactionsStoreModule(false) else nil,
-		sessionFilters = getCommentSessionFiltersStoreModule(false),
-		network = momentsCommentsModule.resolveCommentsNetwork(nil),
-		getCommentPostedCallback = if fFlagMomentsComments then getCommentPostedCallback else nil,
-		getAnalyticsSession = if fFlagMomentsComments then function(p1, p2)
+return require(Parent.Signals).createComputed(function(_) --[[ Line: 28 ]]
+	-- upvalues: MomentsGetMomentsCommentsStoreModule (copy), CreateCommentsListCoordinatorModule (copy), GetCommentCollectionStoreModule (copy), FFlagMomentsComments (copy), GetCommentReactionsStoreModule (copy), MomentsGetMomentsReactionsStoreModule (copy), GetCommentSessionFiltersStoreModule (copy), MomentsCommentsModule (copy), getCommentPostedCallback (copy), getCommentDeletedCallback (copy)
+	return CreateCommentsListCoordinatorModule({
+		collectionStore = GetCommentCollectionStoreModule(false),
+		commentsStore = MomentsGetMomentsCommentsStoreModule(false),
+		reactionStore = if FFlagMomentsComments then GetCommentReactionsStoreModule(false) else nil,
+		catalogStore = if FFlagMomentsComments then MomentsGetMomentsReactionsStoreModule(false) else nil,
+		sessionFilters = GetCommentSessionFiltersStoreModule(false),
+		network = MomentsCommentsModule.resolveCommentsNetwork(nil),
+		getCommentPostedCallback = if FFlagMomentsComments then getCommentPostedCallback else nil,
+		getAnalyticsSession = if FFlagMomentsComments then function(p1, p2) --[[ Line: 39 ]]
 			return require(script.Parent.Parent.Sheet.getCommentsSheetStore)(false).getAnalyticsSession(p1, p2)
 		end else nil,
-		getCommentDeletedCallback = if fFlagMomentsComments then getCommentDeletedCallback else nil
+		getCommentDeletedCallback = if FFlagMomentsComments then getCommentDeletedCallback else nil
 	})
 end)

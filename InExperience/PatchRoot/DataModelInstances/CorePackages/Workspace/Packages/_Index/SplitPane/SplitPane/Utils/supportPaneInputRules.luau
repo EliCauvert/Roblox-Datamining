@@ -1,18 +1,16 @@
-﻿local parent = script:FindFirstAncestor("SplitPane").Parent
-local appSplitViewModule = require(parent.AppSplitView)
-local responsiveModule = require(parent.Responsive)
-local sharedFlagsModule = require(parent.SharedFlags)
-local splitPaneStoreModule = require(script.Parent.Parent.Stores.SplitPaneStore)
-local supportPaneMode = appSplitViewModule.Enums.SupportPaneMode
-local fFlagLuaAppSduiEdpEnabled = sharedFlagsModule.FFlagLuaAppSduiEdpEnabled
+﻿local Parent = script:FindFirstAncestor("SplitPane").Parent
+local ResponsiveModule = require(Parent.Responsive)
+local SplitPaneStoreModule = require(script.Parent.Parent.Stores.SplitPaneStore)
+local SupportPaneMode = require(Parent.AppSplitView).Enums.SupportPaneMode
+local FFlagLuaAppSduiEdpEnabled = require(Parent.SharedFlags).FFlagLuaAppSduiEdpEnabled
 
 return {
-	resolveOpenedMode = function(p1)
-		-- upvalues: responsiveModule (ref), fFlagLuaAppSduiEdpEnabled (ref), supportPaneMode (ref)
-		return if p1 == responsiveModule.Input.Directional or not fFlagLuaAppSduiEdpEnabled then supportPaneMode.Expanded else supportPaneMode.Normal
+	resolveOpenedMode = function(Directional) --[[ Line: 18 ]]
+		-- upvalues: ResponsiveModule (copy), FFlagLuaAppSduiEdpEnabled (copy), SupportPaneMode (copy)
+		return if Directional == ResponsiveModule.Input.Directional or not FFlagLuaAppSduiEdpEnabled then SupportPaneMode.Expanded else SupportPaneMode.Normal
 	end,
-	resolveInputChangedMode = function(p1)
-		-- upvalues: responsiveModule (ref), supportPaneMode (ref), splitPaneStoreModule (ref)
-		return if p1 == responsiveModule.Input.Directional then supportPaneMode.Expanded else splitPaneStoreModule.getStore().getSupportPaneMode()
+	resolveInputChangedMode = function(Directional) --[[ Line: 26 ]]
+		-- upvalues: ResponsiveModule (copy), SupportPaneMode (copy), SplitPaneStoreModule (copy)
+		return if Directional == ResponsiveModule.Input.Directional then SupportPaneMode.Expanded else SplitPaneStoreModule.getStore().getSupportPaneMode()
 	end
 }

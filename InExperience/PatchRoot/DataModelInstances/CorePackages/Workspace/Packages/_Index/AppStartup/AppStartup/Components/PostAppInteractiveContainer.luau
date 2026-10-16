@@ -1,31 +1,31 @@
-﻿local appStartup = script:FindFirstAncestor("AppStartup")
-local parent = appStartup.Parent
-local _ = require(appStartup.AppStartupSequence)
-local _ = require(parent.AppCommonLib)
-local reactModule = require(parent.React)
+﻿local AppStartup = script:FindFirstAncestor("AppStartup")
+local Parent = AppStartup.Parent
+local _ = require(AppStartup.AppStartupSequence)
+local _ = require(Parent.AppCommonLib)
+local ReactModule = require(Parent.React)
 
-return function(p1)
-	-- upvalues: reactModule (ref)
-	local var1, var2 = reactModule.useState(p1.appStartupSequence.isInteractive)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var2 (ref)
-		local changedConnection = nil
+return function(p1) --[[ Line: 14 ]]
+	-- upvalues: ReactModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(p1.appStartupSequence.isInteractive)
+	ReactModule.useEffect(function() --[[ Line: 17 ]]
+		-- upvalues: p1 (copy), UseStateResult2 (copy)
+		local ChangedConnection = nil
 		
 		if p1.appStartupSequence.isInteractive then
-			var2(true)
+			UseStateResult2(true)
 		else
-			changedConnection = p1.appStartupSequence.changed:connect(function()
-				-- upvalues: var2 (copy), p1 (copy), changedConnection (write)
-				var2(p1.appStartupSequence.isInteractive)
+			ChangedConnection = p1.appStartupSequence.changed:connect(function() --[[ Line: 23 ]]
+				-- upvalues: UseStateResult2 (upval), p1 (upval), ChangedConnection (ref)
+				UseStateResult2(p1.appStartupSequence.isInteractive)
 				
-				if changedConnection ~= nil and p1.appStartupSequence.isInteractive then
-					changedConnection:disconnect()
-					changedConnection = nil
+				if ChangedConnection ~= nil and p1.appStartupSequence.isInteractive then
+					ChangedConnection:disconnect()
+					ChangedConnection = nil
 				end
 			end)
 		end
-		return if changedConnection then changedConnection.disconnect else nil
+		return if ChangedConnection then ChangedConnection.disconnect else nil
 	end, { p1.appStartupSequence })
 	
-	return reactModule.createElement(reactModule.Fragment, nil, if var1 then p1.children else {})
+	return ReactModule.createElement(ReactModule.Fragment, nil, if UseStateResult then p1.children else {})
 end

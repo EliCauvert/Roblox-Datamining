@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.ProfileCtaService.ProfileCtaService)
+﻿return (require(script.Parent.Parent.Parent._Index.ProfileCtaService.ProfileCtaService))

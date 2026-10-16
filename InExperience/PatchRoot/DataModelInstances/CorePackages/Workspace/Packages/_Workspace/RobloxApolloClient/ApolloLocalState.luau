@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.ApolloLocalState.ApolloLocalState)
+﻿return (require(script.Parent.Parent.Parent._Index.ApolloLocalState.ApolloLocalState))

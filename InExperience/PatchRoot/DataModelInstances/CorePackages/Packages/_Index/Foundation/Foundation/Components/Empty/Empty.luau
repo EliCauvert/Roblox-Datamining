@@ -1,56 +1,54 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local reactModule = require(parent.React)
-local icon = require(parent.BuilderIcons).Icon
-local buttonModule = require(foundation.Components.Button)
-local iconModule = require(foundation.Components.Icon)
-local iconSizeModule = require(foundation.Enums.IconSize)
-local textModule = require(foundation.Components.Text)
-local viewModule = require(foundation.Components.View)
-local translatorModule = require(foundation.Utility.Localization.Translator)
-local _ = require(foundation.Components.Types)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local t = {
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local ReactModule = require(Parent.React)
+local ButtonModule = require(Foundation.Components.Button)
+local IconModule = require(Foundation.Components.Icon)
+local TextModule = require(Foundation.Components.Text)
+local ViewModule = require(Foundation.Components.View)
+local TranslatorModule = require(Foundation.Utility.Localization.Translator)
+local _ = require(Foundation.Components.Types)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local config = {
 	testId = "--foundation-empty",
 	icon = {
 		name = "icons/status/oof_xlarge",
-		size = iconSizeModule.Large
+		size = require(Foundation.Enums.IconSize).Large
 	},
-	text = translatorModule:FormatByKey("CommonUI.Controls.NoResultsFound"),
+	text = TranslatorModule:FormatByKey("CommonUI.Controls.NoResultsFound"),
 	button = {
 		onActivated = nil,
-		icon = icon.TwoArrowsSpinClockwise,
-		text = translatorModule:FormatByKey("CommonUI.Controls.Action.Refresh")
+		icon = require(Parent.BuilderIcons).Icon.TwoArrowsSpinClockwise,
+		text = TranslatorModule:FormatByKey("CommonUI.Controls.Action.Refresh")
 	}
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), iconModule (ref), textModule (ref), buttonModule (ref)
-	local var1 = withDefaultsModule(p1, t)
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 49 | Named "Empty" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), IconModule (copy), TextModule (copy), ButtonModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var1, {
+	return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, {
 		tag = "col align-x-center align-y-center gap-small size-full auto-xy",
-		ref = p2
+		ref = Ref
 	}), {
-		Icon = reactModule.createElement(iconModule, {
+		Icon = ReactModule.createElement(IconModule, {
 			LayoutOrder = 1,
-			name = var1.icon.name,
-			size = var1.icon.size,
-			style = useTokensModule().Color.Content.Default
+			name = WithDefaultsModuleResult.icon.name,
+			size = WithDefaultsModuleResult.icon.size,
+			style = UseTokensModule().Color.Content.Default
 		}),
-		Text = reactModule.createElement(textModule, {
+		Text = ReactModule.createElement(TextModule, {
 			LayoutOrder = 2,
 			tag = "size-full-0 auto-y text-body-large text-wrap text-align-x-center content-default",
-			Text = var1.text,
-			testId = `{var1.testId}--text`
+			Text = WithDefaultsModuleResult.text,
+			testId = `{WithDefaultsModuleResult.testId}--text`
 		}),
-		Button = if var1.button and var1.button.onActivated then reactModule.createElement(buttonModule, {
+		Button = if WithDefaultsModuleResult.button and WithDefaultsModuleResult.button.onActivated then ReactModule.createElement(ButtonModule, {
 			LayoutOrder = 3,
-			text = var1.button.text,
-			icon = var1.button.icon,
-			onActivated = var1.button.onActivated
+			text = WithDefaultsModuleResult.button.text,
+			icon = WithDefaultsModuleResult.button.icon,
+			onActivated = WithDefaultsModuleResult.button.onActivated
 		}) else nil
 	})
 end))

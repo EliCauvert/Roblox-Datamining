@@ -1,131 +1,136 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local _ = require(parent.MomentsTypes)
-local momentsCommonModule = require(parent.MomentsCommon)
-local momentsGetMomentsCommentsStoreModule = require(parent.DataHydration.MomentsGetMomentsCommentsStore)
-local useRoactService = require(parent.RobloxAppHooks).useRoactService
-local appAppLifecycleObserverService = require(parent.RoactServiceTags).AppAppLifecycleObserverService
-local useFeedOptional = require(moments.Components.Feed.FeedContext).useFeedOptional
-local makeRecommendationAttributionModule = require(moments.Analytics.makeRecommendationAttribution)
-local makeCommentCountFieldsModule = require(moments.Analytics.makeCommentCountFields)
-local fFlagMomentsCommentsCountAnalyticsModule = require(moments.Flags.FFlagMomentsCommentsCountAnalytics)
-local getCommentsSheetStoreModule = require(script.Parent.Sheet.getCommentsSheetStore)
-local createCommentsRecommendationSessionModule = require(script.Parent.createCommentsRecommendationSession)
-local createCommentsAnalyticsSessionModule = require(script.Parent.createCommentsAnalyticsSession)
-local useCommentCapabilitiesModule = require(script.Parent.useCommentCapabilities)
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local _ = require(Parent.MomentsTypes)
+local MomentsCommonModule = require(Parent.MomentsCommon)
+local MomentsGetMomentsCommentsStoreModule = require(Parent.DataHydration.MomentsGetMomentsCommentsStore)
+local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
+local AppAppLifecycleObserverService = require(Parent.RoactServiceTags).AppAppLifecycleObserverService
+local UseFeedOptionalFunction = require(Moments.Components.Feed.FeedContext).useFeedOptional
+local MakeRecommendationAttributionModule = require(Moments.Analytics.makeRecommendationAttribution)
+local MakeCommentCountFieldsModule = require(Moments.Analytics.makeCommentCountFields)
+local FFlagMomentsCommentsCountAnalyticsModule = require(Moments.Flags.FFlagMomentsCommentsCountAnalytics)
+local GetCommentsSheetStoreModule = require(script.Parent.Sheet.getCommentsSheetStore)
+local CreateCommentsRecommendationSessionModule = require(script.Parent.createCommentsRecommendationSession)
+local CreateCommentsAnalyticsSessionModule = require(script.Parent.createCommentsAnalyticsSession)
+local UseCommentCapabilitiesModule = require(script.Parent.useCommentCapabilities)
 
-return function(p1, p2)
-	-- upvalues: useFeedOptional (ref), useRoactService (ref), appAppLifecycleObserverService (ref), getCommentsSheetStoreModule (ref), reactModule (ref), signalsModule (ref), useCommentCapabilitiesModule (ref), makeRecommendationAttributionModule (ref), createCommentsRecommendationSessionModule (ref), momentsGetMomentsCommentsStoreModule (ref), momentsCommonModule (ref), fFlagMomentsCommentsCountAnalyticsModule (ref), makeCommentCountFieldsModule (ref), createCommentsAnalyticsSessionModule (ref)
-	local var1 = useFeedOptional()
-	local var2 = useRoactService(appAppLifecycleObserverService)
-	local var3 = getCommentsSheetStoreModule(false)
-	local var4 = reactModule.useRef(nil)
-	local var5 = reactModule.useRef(nil)
-	local var6 = var1 ~= nil and (var1.isActiveFeed and var1.isPlaybackActive)
-	local var7 = reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy)
-		local var8, var9 = signalsModule.createSignal(true)
+return function(p1, Callback) --[[ Line: 24 | Named "useCommentsEvents" ]]
+	-- upvalues: UseFeedOptionalFunction (copy), UseRoactServiceFunction (copy), AppAppLifecycleObserverService (copy), GetCommentsSheetStoreModule (copy), ReactModule (copy), SignalsModule (copy), UseCommentCapabilitiesModule (copy), MakeRecommendationAttributionModule (copy), CreateCommentsRecommendationSessionModule (copy), MomentsGetMomentsCommentsStoreModule (copy), MomentsCommonModule (copy), FFlagMomentsCommentsCountAnalyticsModule (copy), MakeCommentCountFieldsModule (copy), CreateCommentsAnalyticsSessionModule (copy)
+	local UseFeedOptionalResult = UseFeedOptionalFunction()
+	local UseRoactServiceResult = UseRoactServiceFunction(AppAppLifecycleObserverService)
+	local CommentsSheetStoreModule = GetCommentsSheetStoreModule(false)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local IsPlaybackActive = UseFeedOptionalResult ~= nil and (UseFeedOptionalResult.isActiveFeed and UseFeedOptionalResult.isPlaybackActive)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 34 ]]
+		-- upvalues: SignalsModule (upval)
+		local Signal, Signal2 = SignalsModule.createSignal(true)
 		
-		return { get = var8, set = var9 }
+		return { get = Signal, set = Signal2 }
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), var7 (ref)
-		if var2 == nil then
-			return
-		end
-		local onHideConnection = var2.OnHide:Connect(function()
-			-- upvalues: var7 (copy)
-			var7.set(false)
+	ReactModule.useEffect(function() --[[ Line: 39 ]]
+		-- upvalues: UseRoactServiceResult (copy), UseMemoResult (copy)
+		if UseRoactServiceResult == nil then return end
+		local OnHideConnection = UseRoactServiceResult.OnHide:Connect(function() --[[ Line: 44 ]]
+			-- upvalues: UseMemoResult (upval)
+			UseMemoResult.set(false)
 		end)
-		local onUnhideConnection = var2.OnUnhide:Connect(function()
-			-- upvalues: var7 (copy)
-			var7.set(true)
+		local OnUnhideConnection = UseRoactServiceResult.OnUnhide:Connect(function() --[[ Line: 47 ]]
+			-- upvalues: UseMemoResult (upval)
+			UseMemoResult.set(true)
 		end)
 		
-		return function()
-			-- upvalues: onHideConnection (ref), onUnhideConnection (ref)
-			onHideConnection:Disconnect()
-			onUnhideConnection:Disconnect()
+		return function() --[[ Line: 50 ]]
+			-- upvalues: OnHideConnection (copy), OnUnhideConnection (copy)
+			OnHideConnection:Disconnect()
+			OnUnhideConnection:Disconnect()
 		end
-	end, { var2, var7 })
-	reactModule.useEffect(function()
-		-- upvalues: signalsModule (copy), var7 (ref), var3 (ref), var4 (ref), var5 (ref), var6 (ref)
-		return signalsModule.createEffect(function(p3)
-			-- upvalues: var7 (copy), var3 (copy), var4 (copy), var5 (copy), var6 (copy)
-			local var8 = var7.get(p3)
-			local isOpen = var3.getIsOpen(p3)
-			local openSessionId = var3.getOpenSessionId(p3)
-			local var9 = var3.getFeedItemId(false) or ""
-			local current = var4.current
-			local current_1 = var5.current
-			local isOpen_1 = var6 and (var8 and isOpen)
+	end, { UseRoactServiceResult, UseMemoResult })
+	ReactModule.useEffect(function() --[[ Line: 56 ]]
+		-- upvalues: SignalsModule (upval), UseMemoResult (copy), CommentsSheetStoreModule (copy), UseRefResult (copy), UseRefResult1 (copy), IsPlaybackActive (copy)
+		return SignalsModule.createEffect(function(p2) --[[ Line: 57 ]]
+			-- upvalues: UseMemoResult (upval), CommentsSheetStoreModule (upval), UseRefResult (upval), UseRefResult1 (upval), IsPlaybackActive (upval)
+			local GetResult = UseMemoResult.get(p2)
+			local IsOpen = CommentsSheetStoreModule.getIsOpen(p2)
+			local OpenSessionId = CommentsSheetStoreModule.getOpenSessionId(p2)
+			local FeedItemId = CommentsSheetStoreModule.getFeedItemId(false) or ""
+			local Current = UseRefResult.current
+			local Current1 = UseRefResult1.current
+			local IsOpen1 = IsPlaybackActive and (GetResult and IsOpen)
 			
-			if current ~= nil then
-				if isOpen_1 and var3.getRecommendationSession(var9, openSessionId) == current then
-					current.startView()
+			if Current ~= nil then
+				if IsOpen1 and CommentsSheetStoreModule.getRecommendationSession(FeedItemId, OpenSessionId) == Current then
+					Current.startView()
 				else
-					current.finishView()
+					Current.finishView()
 				end
 			end
-			if current_1 ~= nil then
-				if isOpen_1 and var3.getAnalyticsSession(var9, openSessionId) == current_1 then
-					current_1.startView()
+			if Current1 ~= nil then
+				if IsOpen1 and CommentsSheetStoreModule.getAnalyticsSession(FeedItemId, OpenSessionId) == Current1 then
+					Current1.startView()
 					
 					return
-				elseif not var8 then
-					current_1.finishView("app_hidden")
+				end
+				if not GetResult then
+					Current1.finishView("app_hidden")
 					
 					return
-				elseif not var6 then
-					current_1.finishView("navigation_hidden")
+				end
+				if not IsPlaybackActive then
+					Current1.finishView("navigation_hidden")
 				end
 			end
 		end)
-	end, { var6, var3, var7 })
-	reactModule.useEffect(function()
-		-- upvalues: var4 (ref), var5 (ref)
-		return function()
-			-- upvalues: var4 (copy), var5 (copy)
-			if var4.current ~= nil then
-				var4.current.finishView()
+	end, {
+		IsPlaybackActive,
+		CommentsSheetStoreModule,
+		UseMemoResult
+	})
+	ReactModule.useEffect(function() --[[ Line: 85 ]]
+		-- upvalues: UseRefResult (copy), UseRefResult1 (copy)
+		return function() --[[ Line: 86 ]]
+			-- upvalues: UseRefResult (upval), UseRefResult1 (upval)
+			if UseRefResult.current ~= nil then
+				UseRefResult.current.finishView()
 			end
-			if var5.current ~= nil then
-				var5.current.finishView("unmounted")
+			if UseRefResult1.current ~= nil then
+				UseRefResult1.current.finishView("unmounted")
 			end
 		end
 	end, {})
-	local canRead = useCommentCapabilitiesModule().canRead
+	local CanRead = UseCommentCapabilitiesModule().canRead
 	
-	return reactModule.useCallback(function()
-		-- upvalues: p1 (ref), canRead (ref), makeRecommendationAttributionModule (copy), var1 (ref), createCommentsRecommendationSessionModule (copy), p2 (ref), momentsGetMomentsCommentsStoreModule (copy), momentsCommonModule (copy), fFlagMomentsCommentsCountAnalyticsModule (copy), makeCommentCountFieldsModule (copy), createCommentsAnalyticsSessionModule (copy), var4 (ref), var5 (ref), var3 (ref)
-		local var8 = if p1 ~= nil then nil else p1.feedItemId
+	return ReactModule.useCallback(function() --[[ Line: 98 ]]
+		-- upvalues: p1 (copy), CanRead (copy), MakeRecommendationAttributionModule (upval), UseFeedOptionalResult (copy), CreateCommentsRecommendationSessionModule (upval), Callback (copy), MomentsGetMomentsCommentsStoreModule (upval), MomentsCommonModule (upval), FFlagMomentsCommentsCountAnalyticsModule (upval), MakeCommentCountFieldsModule (upval), CreateCommentsAnalyticsSessionModule (upval), UseRefResult (copy), UseRefResult1 (copy), CommentsSheetStoreModule (copy)
+		local FeedItemId = if p1 == nil then nil else p1.feedItemId
 		
-		if var8 == nil or var8 == "" or not canRead then return end
-		local var9 = nil
-		local var10 = makeRecommendationAttributionModule(p1)
+		if FeedItemId == nil or FeedItemId == "" or not CanRead then return end
+		local Current = nil
+		local RecommendationAttributionModule = MakeRecommendationAttributionModule(p1)
 		
-		if var1 ~= nil and var10 ~= nil then
-			var9 = createCommentsRecommendationSessionModule(var1.logAction, var10, p2(false))
+		if UseFeedOptionalResult ~= nil and RecommendationAttributionModule ~= nil then
+			Current = CreateCommentsRecommendationSessionModule(UseFeedOptionalResult.logAction, RecommendationAttributionModule, Callback(false))
 		end
-		local var11 = momentsGetMomentsCommentsStoreModule(false)
-		local ownerGeneration = var11.getOwnerGeneration(false)
-		local var12 = createCommentsAnalyticsSessionModule(var8, if var1 ~= nil and (if var1.recommendationSource ~= momentsCommonModule.Analytics.RecommendationSource.Profile then var1.recommendationSource == momentsCommonModule.Analytics.RecommendationSource.MyMoments else true) then "profile" else "watch_tab", function()
-			-- upvalues: var11 (ref), ownerGeneration (ref)
-			return var11.getOwnerGeneration(false) == ownerGeneration
-		end, nil, nil, nil, if fFlagMomentsCommentsCountAnalyticsModule then function()
-			-- upvalues: makeCommentCountFieldsModule (copy), var11 (ref), var8 (ref)
-			return makeCommentCountFieldsModule(var11.getCachedMomentComments(var8).data(false))
+		local MomentsGetMomentsCommentsStoreModuleResult = MomentsGetMomentsCommentsStoreModule(false)
+		local OwnerGeneration = MomentsGetMomentsCommentsStoreModuleResult.getOwnerGeneration(false)
+		local IsRecommendationSourceMatch: boolean = UseFeedOptionalResult ~= nil and (UseFeedOptionalResult.recommendationSource == MomentsCommonModule.Analytics.RecommendationSource.Profile or UseFeedOptionalResult.recommendationSource == MomentsCommonModule.Analytics.RecommendationSource.MyMoments)
+		local CommentsAnalyticsSessionModule = CreateCommentsAnalyticsSessionModule(FeedItemId, if IsRecommendationSourceMatch then "profile" else "watch_tab", function(): boolean --[[ Line: 125 ]]
+			-- upvalues: MomentsGetMomentsCommentsStoreModuleResult (copy), OwnerGeneration (copy)
+			return MomentsGetMomentsCommentsStoreModuleResult.getOwnerGeneration(false) == OwnerGeneration
+		end, nil, nil, nil, if FFlagMomentsCommentsCountAnalyticsModule then function() --[[ Line: 118 ]]
+			-- upvalues: MakeCommentCountFieldsModule (upval), MomentsGetMomentsCommentsStoreModuleResult (copy), FeedItemId (copy)
+			return MakeCommentCountFieldsModule(MomentsGetMomentsCommentsStoreModuleResult.getCachedMomentComments(FeedItemId).data(false))
 		end else nil)
-		var4.current = var9
-		var5.current = var12
-		var3.open(var8, var9, var12)
+		UseRefResult.current = Current
+		UseRefResult1.current = CommentsAnalyticsSessionModule
+		CommentsSheetStoreModule.open(FeedItemId, Current, CommentsAnalyticsSessionModule)
 	end, {
 		p1 or false,
-		var1 or false,
-		var3,
-		p2,
-		canRead
+		UseFeedOptionalResult or false,
+		CommentsSheetStoreModule,
+		Callback,
+		CanRead
 	})
 end

@@ -1,21 +1,21 @@
-﻿local charts = script:FindFirstAncestor("Charts")
-local parent = charts.Parent
-local addSystemInfoToArgs = require(parent.DiscoveryUtils).AddSystemInfoToArgs
-local buildSduiCollectionInfo = require(parent.SduiSharedUtilities).buildSduiCollectionInfo
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagSduiChartsRequestPlaceholders = sharedFlagsModule.FFlagSduiChartsRequestPlaceholders
-local fFlagSduiPreferredTextSizeLineBudgets = sharedFlagsModule.FFlagSduiPreferredTextSizeLineBudgets
-local fFlagSduiChartsAudienceFilterModule = require(charts.Flags.FFlagSduiChartsAudienceFilter)
-local uDim = UDim.new(1, 72)
+﻿local Charts = script:FindFirstAncestor("Charts")
+local Parent = Charts.Parent
+local AddSystemInfoToArgsFunction = require(Parent.DiscoveryUtils).AddSystemInfoToArgs
+local BuildSduiCollectionInfoFunction = require(Parent.SduiSharedUtilities).buildSduiCollectionInfo
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagSduiChartsRequestPlaceholders = SharedFlagsModule.FFlagSduiChartsRequestPlaceholders
+local FFlagSduiPreferredTextSizeLineBudgets = SharedFlagsModule.FFlagSduiPreferredTextSizeLineBudgets
+local FFlagSduiChartsAudienceFilterModule = require(Charts.Flags.FFlagSduiChartsAudienceFilter)
+local _UDim = UDim.new(1, 72)
 
-return function(p1, p2)
-	-- upvalues: addSystemInfoToArgs (ref), fFlagSduiChartsAudienceFilterModule (ref), fFlagSduiChartsRequestPlaceholders (ref), buildSduiCollectionInfo (ref), uDim (ref), fFlagSduiPreferredTextSizeLineBudgets (ref)
+return function(p1, p2) --[[ Line: 36 | Named "buildChartsPageRequest" ]]
+	-- upvalues: AddSystemInfoToArgsFunction (copy), FFlagSduiChartsAudienceFilterModule (copy), FFlagSduiChartsRequestPlaceholders (copy), BuildSduiCollectionInfoFunction (copy), _UDim (copy), FFlagSduiPreferredTextSizeLineBudgets (copy)
 	local t = {}
-	local t_1 = {}
-	addSystemInfoToArgs(t_1, { "maxMemory" })
+	local t1 = {}
+	AddSystemInfoToArgsFunction(t1, { "maxMemory" })
 	
-	if t_1.maxMemory and t_1.maxMemory ~= "" then
-		t.max_memory = t_1.maxMemory
+	if t1.maxMemory and t1.maxMemory ~= "" then
+		t.max_memory = t1.maxMemory
 	end
 	if p2 then
 		if p2.feedPageToken and p2.feedPageToken ~= "" then
@@ -33,23 +33,23 @@ return function(p1, p2)
 		if p2.pageType and p2.pageType ~= "" then
 			t.page_type = p2.pageType
 		end
-		local filterSelections = p2.filterSelections
+		local FilterSelections = p2.filterSelections
 		
-		if filterSelections then
-			if filterSelections.device and filterSelections.device ~= "" then
-				t.device = filterSelections.device
+		if FilterSelections then
+			if FilterSelections.device and FilterSelections.device ~= "" then
+				t.device = FilterSelections.device
 			end
-			if filterSelections.country and filterSelections.country ~= "" then
-				t.country = filterSelections.country
+			if FilterSelections.country and FilterSelections.country ~= "" then
+				t.country = FilterSelections.country
 			end
-			if filterSelections.ageGroup and filterSelections.ageGroup ~= "" then
-				t.age_group = filterSelections.ageGroup
+			if FilterSelections.ageGroup and FilterSelections.ageGroup ~= "" then
+				t.age_group = FilterSelections.ageGroup
 			end
-			if fFlagSduiChartsAudienceFilterModule and filterSelections.audience and filterSelections.audience ~= "" then
-				t.audience = filterSelections.audience
+			if FFlagSduiChartsAudienceFilterModule and FilterSelections.audience and FilterSelections.audience ~= "" then
+				t.audience = FilterSelections.audience
 			end
 		end
-		if fFlagSduiChartsRequestPlaceholders and p2.includePlaceholders then
+		if FFlagSduiChartsRequestPlaceholders and p2.includePlaceholders then
 			t.include_placeholders = true
 		end
 		if p2.hydrationStreamEnabled ~= nil then
@@ -62,10 +62,10 @@ return function(p1, p2)
 			t.client_capabilities = p2.clientCapabilities
 		end
 		if p2.hydrationStreamEnabled then
-			local var1 = buildSduiCollectionInfo("Small", uDim, if fFlagSduiPreferredTextSizeLineBudgets then 3 else nil)
+			local Small = BuildSduiCollectionInfoFunction("Small", _UDim, if FFlagSduiPreferredTextSizeLineBudgets then 3 else nil)
 			t.collection_layout = p1.CollectionLayoutInfo.new({
-				items_per_row = var1.items_per_row,
-				rows_above_fold = var1.rows_above_fold
+				items_per_row = Small.items_per_row,
+				rows_above_fold = Small.rows_above_fold
 			})
 		end
 	end

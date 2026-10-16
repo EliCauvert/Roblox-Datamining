@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.SocialLinksNetworking.SocialLinksNetworking)
+﻿return (require(script.Parent.Parent.Parent._Index.SocialLinksNetworking.SocialLinksNetworking))

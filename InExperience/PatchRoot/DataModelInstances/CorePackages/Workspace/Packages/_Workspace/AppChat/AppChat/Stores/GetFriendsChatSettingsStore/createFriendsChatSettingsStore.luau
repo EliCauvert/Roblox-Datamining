@@ -1,43 +1,43 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local sharedFlagsModule = require(parent.SharedFlags)
-local signalsModule = require(parent.Signals)
-local getFriendsChatMetadataStoreModule = require(appChat.Stores.GetFriendsChatMetadataStore)
-local name = require(appChat.Logger):new(script.Name)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local SharedFlagsModule = require(Parent.SharedFlags)
+local SignalsModule = require(Parent.Signals)
+local GetFriendsChatMetadataStoreModule = require(AppChat.Stores.GetFriendsChatMetadataStore)
+local NewResult = require(AppChat.Logger):new(script.Name)
 
-return function()
-	-- upvalues: getFriendsChatMetadataStoreModule (ref), signalsModule (ref), sharedFlagsModule (ref), name (ref)
-	local var1 = getFriendsChatMetadataStoreModule(false)
-	local var2, var3 = signalsModule.createSignal(Enum.ChatRestrictionStatus.Unknown)
-	local var4 = signalsModule.createComputed(function(p1)
-		-- upvalues: var1 (ref), var2 (ref)
-		local var5 = var1.getCachedFriendsChatMetadata(p1).data(p1)
-		local var6 = var2(p1)
+return function() --[[ Line: 19 | Named "createFriendsChatSettingsStore" ]]
+	-- upvalues: GetFriendsChatMetadataStoreModule (copy), SignalsModule (copy), SharedFlagsModule (copy), NewResult (copy)
+	local FriendsChatMetadataStoreModule = GetFriendsChatMetadataStoreModule(false)
+	local Signal, Signal2 = SignalsModule.createSignal(Enum.ChatRestrictionStatus.Unknown)
+	local Computed = SignalsModule.createComputed(function(p1): boolean --[[ Line: 24 ]]
+		-- upvalues: FriendsChatMetadataStoreModule (copy), Signal (copy)
+		local DataResult = FriendsChatMetadataStoreModule.getCachedFriendsChatMetadata(p1).data(p1)
+		local SignalResult = Signal(p1)
 		
-		return var5 ~= nil and (var6 ~= Enum.ChatRestrictionStatus.Unknown and (var5.isChatEnabled and var6 == Enum.ChatRestrictionStatus.NotRestricted))
+		return DataResult ~= nil and (SignalResult ~= Enum.ChatRestrictionStatus.Unknown and (DataResult.isChatEnabled and SignalResult == Enum.ChatRestrictionStatus.NotRestricted))
 	end)
-	local var5 = signalsModule.createComputed(function(p1)
-		-- upvalues: var1 (ref)
-		local var6 = var1.getCachedFriendsChatMetadata(p1).data(p1)
+	local Computed1 = SignalsModule.createComputed(function(p1) --[[ Line: 38 ]]
+		-- upvalues: FriendsChatMetadataStoreModule (copy)
+		local DataResult = FriendsChatMetadataStoreModule.getCachedFriendsChatMetadata(p1).data(p1)
 		
-		return if var6 then var6.isChatUserMessagesEnabled else nil
+		return if DataResult then DataResult.isChatUserMessagesEnabled else nil
 	end)
 	
 	return {
-		getThirdPartyChatRestrictionStatus = var2,
-		getChatEnabled = var4,
-		getGroupChatEnabled = signalsModule.createComputed(function(p1)
-			-- upvalues: var1 (ref)
-			local var6 = var1.getCachedFriendsChatMetadata(p1).data(p1)
+		getThirdPartyChatRestrictionStatus = Signal,
+		getChatEnabled = Computed,
+		getGroupChatEnabled = SignalsModule.createComputed(function(p1): boolean --[[ Line: 33 ]]
+			-- upvalues: FriendsChatMetadataStoreModule (copy)
+			local DataResult = FriendsChatMetadataStoreModule.getCachedFriendsChatMetadata(p1).data(p1)
 			
-			return var6 ~= nil and (var6.isChatEnabled and var6.isGroupChatEnabledByPrivacySetting == "enabled")
+			return DataResult ~= nil and (DataResult.isChatEnabled and DataResult.isGroupChatEnabledByPrivacySetting == "enabled")
 		end),
-		getChatUserMessagesEnabled = var5,
-		setThirdPartyChatRestrictionStatus = var3,
-		dispose = if sharedFlagsModule.FFlagDebugFriendsChat then signalsModule.createEffect(function(p1)
-			-- upvalues: var1 (ref), name (copy), var4 (ref), var2 (ref), var5 (ref)
-			local var6 = var1.getCachedFriendsChatMetadata(p1).data(p1)
-			name:debug(`Friends Chat eligibility: chatEnabled={tostring(var4(p1))}` .. ` (accountChatEnabled={tostring(if var6 then var6.isChatEnabled else nil)},` .. ` privacySetting={tostring(if var6 then var6.isChatEnabledByPrivacySetting else nil)},` .. ` globalRules={tostring(if var6 then var6.isChatEnabledByGlobalRules else nil)},` .. ` thirdPartyStatus={tostring(var2(p1))});` .. ` chatUserMessagesEnabled={tostring(var5(p1))}`)
-		end) else function() end
+		getChatUserMessagesEnabled = Computed1,
+		setThirdPartyChatRestrictionStatus = Signal2,
+		dispose = if SharedFlagsModule.FFlagDebugFriendsChat then SignalsModule.createEffect(function(p1) --[[ Line: 44 ]]
+			-- upvalues: FriendsChatMetadataStoreModule (copy), NewResult (upval), Computed (copy), Signal (copy), Computed1 (copy)
+			local DataResult = FriendsChatMetadataStoreModule.getCachedFriendsChatMetadata(p1).data(p1)
+			NewResult:debug(`Friends Chat eligibility: chatEnabled={tostring(Computed(p1))}` .. ` (accountChatEnabled={tostring(if DataResult then DataResult.isChatEnabled else nil)},` .. ` privacySetting={tostring(if DataResult then DataResult.isChatEnabledByPrivacySetting else nil)},` .. ` globalRules={tostring(if DataResult then DataResult.isChatEnabledByGlobalRules else nil)},` .. ` thirdPartyStatus={tostring(Signal(p1))});` .. ` chatUserMessagesEnabled={tostring(Computed1(p1))}`)
+		end) else function() --[[ Line: 55 ]] end
 	}
 end

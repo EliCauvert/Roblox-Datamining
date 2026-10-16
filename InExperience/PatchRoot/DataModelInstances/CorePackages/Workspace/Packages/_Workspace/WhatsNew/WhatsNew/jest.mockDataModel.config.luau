@@ -1,4 +1,4 @@
-﻿local jestConfigsModule = require(script:FindFirstAncestor("WhatsNew").Parent.Dev.JestConfigs)
+﻿local JestConfigsModule = require(script:FindFirstAncestor("WhatsNew").Parent.Dev.JestConfigs)
 
 return {
 	displayName = "WhatsNew-MockDataModel",
@@ -10,8 +10,8 @@ return {
 		"**/createInGameWhatsNewHost.test"
 	},
 	setupFilesAfterEnv = {
-		jestConfigsModule.setupFiles.LogHandler,
-		jestConfigsModule.setupFiles.createPromiseRejectionHandler(),
-		jestConfigsModule.setupFiles.RetryTimes
+		JestConfigsModule.setupFiles.LogHandler,
+		JestConfigsModule.setupFiles.createPromiseRejectionHandler(),
+		JestConfigsModule.setupFiles.RetryTimes
 	}
 }

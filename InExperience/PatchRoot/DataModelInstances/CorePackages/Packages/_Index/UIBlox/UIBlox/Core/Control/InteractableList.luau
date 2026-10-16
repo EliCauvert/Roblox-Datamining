@@ -1,137 +1,137 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local roactModule = require(parent_1.Roact)
-local tModule = require(parent_1.t)
-local cryoModule = require(parent_1.Cryo)
-local bindingValidatorModule = require(parent.Core.Utility.bindingValidator)
-local controlStateModule = require(parent.Core.Control.Enum.ControlState)
-local interactableListItemModule = require(script.Parent.InteractableListItem)
-local selectionModeModule = require(script.Parent.Enum.SelectionMode)
-local interactableList = roactModule.PureComponent:extend("InteractableList")
-interactableList.validateProps = tModule.strictInterface({
-	itemList = tModule.table,
-	renderItem = tModule.callback,
-	renderList = tModule.optional(tModule.callback),
-	selection = tModule.optional(tModule.table),
-	selectionMode = tModule.optional(selectionModeModule.isEnumValue),
-	onSelectionChanged = tModule.optional(tModule.callback),
-	size = tModule.optional(tModule.UDim2),
-	position = tModule.optional(tModule.UDim2),
-	layoutOrder = tModule.optional(tModule.integer),
-	padding = tModule.optional(tModule.UDim),
-	fillDirection = tModule.optional(tModule.enum(Enum.FillDirection)),
-	horizontalAlignment = tModule.optional(tModule.enum(Enum.HorizontalAlignment)),
-	verticalAlignment = tModule.optional(tModule.enum(Enum.VerticalAlignment)),
-	sortOrder = tModule.optional(tModule.enum(Enum.SortOrder)),
-	automaticSize = tModule.optional(tModule.enum(Enum.AutomaticSize)),
-	itemSize = tModule.optional(tModule.union(tModule.UDim2, bindingValidatorModule(tModule.UDim2)))
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local RoactModule = require(Parent1.Roact)
+local TModule = require(Parent1.t)
+local CryoModule = require(Parent1.Cryo)
+local ControlStateModule = require(Parent.Core.Control.Enum.ControlState)
+local InteractableListItemModule = require(script.Parent.InteractableListItem)
+local SelectionModeModule = require(script.Parent.Enum.SelectionMode)
+local InteractableList = RoactModule.PureComponent:extend("InteractableList")
+InteractableList.validateProps = TModule.strictInterface({
+	itemList = TModule.table,
+	renderItem = TModule.callback,
+	renderList = TModule.optional(TModule.callback),
+	selection = TModule.optional(TModule.table),
+	selectionMode = TModule.optional(SelectionModeModule.isEnumValue),
+	onSelectionChanged = TModule.optional(TModule.callback),
+	size = TModule.optional(TModule.UDim2),
+	position = TModule.optional(TModule.UDim2),
+	layoutOrder = TModule.optional(TModule.integer),
+	padding = TModule.optional(TModule.UDim),
+	fillDirection = TModule.optional(TModule.enum(Enum.FillDirection)),
+	horizontalAlignment = TModule.optional(TModule.enum(Enum.HorizontalAlignment)),
+	verticalAlignment = TModule.optional(TModule.enum(Enum.VerticalAlignment)),
+	sortOrder = TModule.optional(TModule.enum(Enum.SortOrder)),
+	automaticSize = TModule.optional(TModule.enum(Enum.AutomaticSize)),
+	itemSize = TModule.optional(TModule.union(TModule.UDim2, require(Parent.Core.Utility.bindingValidator)(TModule.UDim2)))
 })
-interactableList.defaultProps = {
-	renderList = function(p1, p2, p3)
-		-- upvalues: roactModule (ref)
-		local list = {
-			roactModule.createElement("UIListLayout", {
+InteractableList.defaultProps = {
+	renderList = function(List, Callback, p1) --[[ Line: 60 ]]
+		-- upvalues: RoactModule (copy)
+		local List1 = {
+			RoactModule.createElement("UIListLayout", {
 				key = "$layout",
-				Padding = p3.padding,
-				FillDirection = p3.fillDirection,
-				HorizontalAlignment = p3.horizontalAlignment,
-				VerticalAlignment = p3.verticalAlignment,
-				SortOrder = p3.sortOrder
+				Padding = p1.padding,
+				FillDirection = p1.fillDirection,
+				HorizontalAlignment = p1.horizontalAlignment,
+				VerticalAlignment = p1.verticalAlignment,
+				SortOrder = p1.sortOrder
 			})
 		}
 		
-		for i in pairs(p1) do
-			table.insert(list, p2(i))
+		for i in pairs(List) do
+			table.insert(List1, Callback(i))
 		end
-		return roactModule.createElement("Frame", {
+		return RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
-			Size = p3.size,
-			Position = p3.position,
-			AutomaticSize = p3.automaticSize
-		}, list)
+			Size = p1.size,
+			Position = p1.position,
+			AutomaticSize = p1.automaticSize
+		}, List1)
 	end,
 	size = UDim2.fromScale(1, 1),
 	itemSize = UDim2.fromScale(1, 1),
-	selectionMode = selectionModeModule.Single
+	selectionMode = SelectionModeModule.Single
 }
 
-function interactableList.init(p4)
-	-- upvalues: selectionModeModule (ref), cryoModule (ref)
-	local t = { interactable = {}, selection = {} }
+function InteractableList.init(p2) --[[ Line: 88 ]]
+	-- upvalues: SelectionModeModule (copy), CryoModule (copy)
+	local config = { interactable = {}, selection = {} }
 	
-	if p4.props.selectionMode == selectionModeModule.Single then
-		local var1 = next(p4.props.itemList)
+	if p2.props.selectionMode == SelectionModeModule.Single then
+		local NextEntry = next(p2.props.itemList)
 		
-		if var1 ~= nil then
-			t.selection = { var1 }
+		if NextEntry ~= nil then
+			config.selection = { NextEntry }
 		end
 	end
-	p4:setState(t)
+	p2:setState(config)
 	
-	function p3.setInteractableState(p5, p6)
-		-- upvalues: p4 (ref), cryoModule (copy)
-		p4:setState(function(p7)
-			-- upvalues: cryoModule (copy), p5 (ref), p6 (ref)
+	function p2.setInteractableState(p3, p4) --[[ Line: 101 ]]
+		-- upvalues: p2 (copy), CryoModule (upval)
+		p2:setState(function(p5) --[[ Line: 102 ]]
+			-- upvalues: CryoModule (upval), p3 (copy), p4 (copy)
 			return {
-				interactable = cryoModule.Dictionary.join(p7.interactable, { [p5] = p6 })
+				interactable = CryoModule.Dictionary.join(p5.interactable, { [p3] = p4 })
 			}
 		end)
 	end
 	
-	function p3.setSelection(p5)
-		-- upvalues: p4 (ref)
-		p4:setState({ selection = p5 })
+	function p2.setSelection(Selection) --[[ Line: 110 ]]
+		-- upvalues: p2 (copy)
+		p2:setState({ selection = Selection })
 	end
 end
 
-function interactableList.getSelection(p4)
-	-- upvalues: selectionModeModule (ref), cryoModule (ref)
-	if p4.props.selection then
-		return p4.props.selection
-	elseif p4.props.selectionMode == selectionModeModule.None then
+function InteractableList.getSelection(p2) --[[ Line: 117 ]]
+	-- upvalues: SelectionModeModule (copy), CryoModule (copy)
+	if p2.props.selection then
+		return p2.props.selection
+	end
+	if p2.props.selectionMode == SelectionModeModule.None then
 		return {}
 	end
-	local var1 = cryoModule.List.filter(p4.state.selection, function(p5)
-		-- upvalues: p4 (ref)
-		return p4.props.itemList[p5] ~= nil
+	local FilterResult = CryoModule.List.filter(p2.state.selection, function(p3): boolean --[[ Line: 124 ]]
+		-- upvalues: p2 (copy)
+		return p2.props.itemList[p3] ~= nil
 	end)
 	
-	if p4.props.selectionMode ~= selectionModeModule.Single then
-		return var1
+	if p2.props.selectionMode ~= SelectionModeModule.Single then
+		return FilterResult
 	end
-	local var2 = var1[#var1]
+	local FilterResultEntry = FilterResult[#FilterResult]
 	
-	if var2 == nil then
-		var2 = next(p4.props.itemList)
+	if FilterResultEntry == nil then
+		FilterResultEntry = next(p2.props.itemList)
 	end
-	return if var2 == nil then {} else { var2 }
+	return if FilterResultEntry == nil then {} else { FilterResultEntry }
 end
 
-function interactableList.didMount(p4)
-	if p4.props.selection == nil and p4.props.onSelectionChanged then
-		p4.props.onSelectionChanged(p4:getSelection())
+function InteractableList.didMount(p2) --[[ Line: 142 ]]
+	if p2.props.selection == nil and p2.props.onSelectionChanged then
+		p2.props.onSelectionChanged(p2:getSelection())
 	end
 end
 
-function interactableList.render(p4)
-	-- upvalues: controlStateModule (ref), roactModule (ref), interactableListItemModule (ref)
-	return p4.props.renderList(p4.props.itemList, function(p5)
-		-- upvalues: p4 (ref), controlStateModule (copy), roactModule (copy), interactableListItemModule (copy)
-		return roactModule.createElement(interactableListItemModule, {
-			id = p5,
-			item = p4.props.itemList[p5],
-			interactableState = p4.state.interactable[p5] or controlStateModule.Default,
-			selection = p4:getSelection(),
-			renderItem = p4.props.renderItem,
-			itemSize = if p4.props.itemList[p5] then p4.props.itemList[p5].itemSize else p4.props.itemSize,
-			selectionMode = p4.props.selectionMode,
-			onSelectionChanged = p4.props.onSelectionChanged,
-			setInteractableState = p4.setInteractableState,
-			setSelection = p4.setSelection,
-			key = tostring(p5)
+function InteractableList.render(p2) --[[ Line: 148 ]]
+	-- upvalues: ControlStateModule (copy), RoactModule (copy), InteractableListItemModule (copy)
+	return p2.props.renderList(p2.props.itemList, function(Id) --[[ Line: 149 ]]
+		-- upvalues: p2 (copy), ControlStateModule (upval), RoactModule (upval), InteractableListItemModule (upval)
+		return RoactModule.createElement(InteractableListItemModule, {
+			id = Id,
+			item = p2.props.itemList[Id],
+			interactableState = p2.state.interactable[Id] or ControlStateModule.Default,
+			selection = p2:getSelection(),
+			renderItem = p2.props.renderItem,
+			itemSize = p2.props.itemList[Id] and p2.props.itemList[Id].itemSize or p2.props.itemSize,
+			selectionMode = p2.props.selectionMode,
+			onSelectionChanged = p2.props.onSelectionChanged,
+			setInteractableState = p2.setInteractableState,
+			setSelection = p2.setSelection,
+			key = tostring(Id)
 		})
-	end, p4.props)
+	end, p2.props)
 end
 
-return interactableList
+return InteractableList

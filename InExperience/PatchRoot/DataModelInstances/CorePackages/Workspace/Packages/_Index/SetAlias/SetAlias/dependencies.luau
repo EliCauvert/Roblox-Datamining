@@ -1,22 +1,21 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
-local luaSocialLibrariesDepsModule = require(parent_1.LuaSocialLibrariesDeps)
-local RODUX_KEY = require(parent.Common.Constants).RODUX_KEY
-local roduxNetworking = luaSocialLibrariesDepsModule.RoduxNetworking
-local httpRequest = luaSocialLibrariesDepsModule.httpRequest
-local var1 = require(parent_1.Lumberyak).Logger.new(nil, RODUX_KEY):new(RODUX_KEY .. " Networking")
-local var2 = roduxNetworking.config({
-	keyPath = RODUX_KEY .. ".NetworkStatus",
-	networkImpl = httpRequest.config({
-		requestFunction = function(p1, p2, p3)
-			-- upvalues: var1 (ref), httpRequest (ref)
-			var1:info("Fetching: {}", string.format("[ requestMethod = %q, url = %q ]", p2, p1))
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
+local LuaSocialLibrariesDepsModule = require(Parent1.LuaSocialLibrariesDeps)
+local RODUXKEY = require(Parent.Common.Constants).RODUX_KEY
+local HttpRequest = LuaSocialLibrariesDepsModule.httpRequest
+local NewResult = require(Parent1.Lumberyak).Logger.new(nil, RODUXKEY):new(RODUXKEY .. " Networking")
+local ConfigResult = LuaSocialLibrariesDepsModule.RoduxNetworking.config({
+	keyPath = RODUXKEY .. ".NetworkStatus",
+	networkImpl = HttpRequest.config({
+		requestFunction = function(p1, p2, p3) --[[ Line: 14 ]]
+			-- upvalues: NewResult (copy), HttpRequest (copy)
+			NewResult:info("Fetching: {}", string.format("[ requestMethod = %q, url = %q ]", p2, p1))
 			
-			return httpRequest.requestFunctions.HttpRbxApi(p1, p2, p3)
+			return HttpRequest.requestFunctions.HttpRbxApi(p1, p2, p3)
 		end,
-		postRequestFunction = function(p1, p2)
-			-- upvalues: var1 (ref)
-			var1:debug("Returned: {}", string.format("[ requestMethod = %q, url = %q, statusCode = %s, body = %s ]", p2.requestMethod, p2.url, p1.StatusCode, p1.Body))
+		postRequestFunction = function(p1, p2) --[[ Line: 18 ]]
+			-- upvalues: NewResult (copy)
+			NewResult:debug("Returned: {}", string.format("[ requestMethod = %q, url = %q, statusCode = %s, body = %s ]", p2.requestMethod, p2.url, p1.StatusCode, p1.Body))
 		end,
 		maxRetryCount = game:DefineFastInt("SetAliasHttpRetryCount", 3)
 	})
@@ -24,31 +23,31 @@ local var2 = roduxNetworking.config({
 
 return {
 	AppStorageService = game:GetService("AppStorageService"),
-	Analytics = require(parent_1.Analytics),
-	SocialLuaAnalytics = require(parent_1.SocialLuaAnalytics),
-	Dash = require(parent_1.Dash),
-	UIBlox = require(parent_1.UIBlox),
-	Roact = require(parent_1.Roact),
-	RoactRodux = require(parent_1.RoactRodux),
-	RoactNavigation = require(parent_1.RoactNavigation),
-	Rodux = require(parent_1.Rodux),
-	React = require(parent_1.React),
-	ContactsProtocol = require(parent_1.ContactsProtocol).ContactsProtocol,
-	Promise = require(parent_1.Promise),
-	enumerate = require(parent_1.enumerate),
-	UserProfiles = require(parent_1.UserProfiles),
-	RoactFitComponents = luaSocialLibrariesDepsModule.RoactFitComponents,
-	RoduxNetworking = var2,
-	NetworkingAliases = luaSocialLibrariesDepsModule.NetworkingAliases.config({ roduxNetworking = var2 }),
-	RoduxAliases = luaSocialLibrariesDepsModule.RoduxAliases.config({ keyPath = RODUX_KEY .. ".Aliases" }),
-	SocialLibraries = luaSocialLibrariesDepsModule.SocialLibraries.config({}),
-	LocalizationProvider = require(parent_1.Localization).LocalizationProvider,
+	Analytics = require(Parent1.Analytics),
+	SocialLuaAnalytics = require(Parent1.SocialLuaAnalytics),
+	Dash = require(Parent1.Dash),
+	UIBlox = require(Parent1.UIBlox),
+	Roact = require(Parent1.Roact),
+	RoactRodux = require(Parent1.RoactRodux),
+	RoactNavigation = require(Parent1.RoactNavigation),
+	Rodux = require(Parent1.Rodux),
+	React = require(Parent1.React),
+	ContactsProtocol = require(Parent1.ContactsProtocol).ContactsProtocol,
+	Promise = require(Parent1.Promise),
+	enumerate = require(Parent1.enumerate),
+	UserProfiles = require(Parent1.UserProfiles),
+	RoactFitComponents = LuaSocialLibrariesDepsModule.RoactFitComponents,
+	RoduxNetworking = ConfigResult,
+	NetworkingAliases = LuaSocialLibrariesDepsModule.NetworkingAliases.config({ roduxNetworking = ConfigResult }),
+	RoduxAliases = LuaSocialLibrariesDepsModule.RoduxAliases.config({ keyPath = RODUXKEY .. ".Aliases" }),
+	SocialLibraries = LuaSocialLibrariesDepsModule.SocialLibraries.config({}),
+	LocalizationProvider = require(Parent1.Localization).LocalizationProvider,
 	Hooks = {
-		useEffectOnMount = require(parent_1.RoactUtils).Hooks.useEffectOnMount,
-		useLocalization = require(parent_1.Localization).Hooks.useLocalization,
-		useSelector = require(parent_1.RoactUtils).Hooks.RoactRodux.useSelector,
-		useDispatch = require(parent_1.RoactUtils).Hooks.RoactRodux.useDispatch,
-		useLocalUserId = require(parent_1.RobloxAppHooks).useLocalUserId
+		useEffectOnMount = require(Parent1.RoactUtils).Hooks.useEffectOnMount,
+		useLocalization = require(Parent1.Localization).Hooks.useLocalization,
+		useSelector = require(Parent1.RoactUtils).Hooks.RoactRodux.useSelector,
+		useDispatch = require(Parent1.RoactUtils).Hooks.RoactRodux.useDispatch,
+		useLocalUserId = require(Parent1.RobloxAppHooks).useLocalUserId
 	},
-	Foundation = require(parent_1.Foundation)
+	Foundation = require(Parent1.Foundation)
 }

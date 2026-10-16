@@ -1,81 +1,75 @@
-﻿local parent = script.Parent
-local luauPolyfillModule = require(parent.Parent.Parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local string = luauPolyfillModule.String
-local getLocation = require(parent.location).getLocation
-local whitespace = nil
-local leftPad = nil
-local printSourceLocation = nil
-local printPrefixedLines = nil
+﻿local Parent = script.Parent
+local LuauPolyfillModule = require(Parent.Parent.Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local String1 = LuauPolyfillModule.String
+local GetLocationFunction = require(Parent.location).getLocation
+local Callback1 = nil
+local Callback3 = nil
+local Callback = nil
+local Callback2 = nil
 
-local function printLocation(p1)
-	-- upvalues: printSourceLocation (write), getLocation (ref)
-	return printSourceLocation(p1.source, getLocation(p1.source, p1.start))
+local function printLocation(p1) --[[ Line: 27 ]]
+	-- upvalues: Callback (ref), GetLocationFunction (copy)
+	return Callback(p1.source, GetLocationFunction(p1.source, p1.start))
 end
 
-printSourceLocation = function(p1, p2)
-	-- upvalues: whitespace (write), string (ref), printPrefixedLines (write), array (ref)
-	local var1 = p1.locationOffset.column - 1
-	local text = whitespace(var1) .. p1.body
-	local var2 = p2.line - 1 + 1
-	local var3 = p2.line + (p1.locationOffset.line - 1)
-	local var4 = p2.column + (if p2.line == 1 then var1 else 0)
-	local text_1 = p1.name .. ":" .. var9 .. ":" .. var10 .. "\n"
-	local var5 = string.split(text, { "\r\n", "\n", "\r" })
-	local var6 = var5[var2]
+Callback = function(Source, p1): string --[[ Line: 34 | Named "printSourceLocation" ]]
+	-- upvalues: Callback1 (ref), String1 (copy), Callback2 (ref), Array (copy)
+	local ColumnDelta = Source.locationOffset.column - 1
+	local NewLine = p1.line - 1 + 1
+	local NewLine1 = p1.line + (Source.locationOffset.line - 1)
+	local NewColumn = p1.column + (p1.line == 1 and ColumnDelta or 0)
+	local Text1 = Source.name .. ":" .. NewLine1 .. ":" .. NewColumn .. "\n"
+	local SplitResult = String1.split(Callback1(ColumnDelta) .. Source.body, { "\r\n", "\n", "\r" })
+	local Text: string = SplitResult[NewLine]
 	
-	if string.len(var6) <= 120 then
-		return text_1 .. printPrefixedLines({
-			{ var3 - 1, var5[var2 - 1] },
-			{ var3, var6 },
-			{ "", whitespace(var4 - 1) .. "^" },
-			{ var3 + 1, var5[var2 + 1] }
+	if string.len(Text) <= 120 then
+		return Text1 .. Callback2({
+			{ NewLine1 - 1, SplitResult[NewLine - 1] },
+			{ NewLine1, Text },
+			{ "", Callback1(NewColumn - 1) .. "^" },
+			{ NewLine1 + 1, SplitResult[NewLine + 1] }
 		})
 	end
-	local var7 = math.floor(var4 / 80) + 1
-	local var8 = var4 % 80
-	local t = {}
+	local NewFloored = math.floor(NewColumn / 80) + 1
+	local NewColumnRemainder = NewColumn % 80
+	local List = {}
 	
-	for i = 1, string.len(var6), 80 do
-		table.insert(t, string.slice(var6, i, i + 80))
+	for i = 1, string.len(Text), 80 do
+		table.insert(List, String1.slice(Text, i, i + 80))
 	end
-	return text_1 .. printPrefixedLines(array.concat({ { tostring(var3), t[1] } }, array.map(array.slice(t, 2, var7 + 1), function(p3)
-		return { "", p3 }
-	end), { { " ", whitespace(var8 - 1) .. "^" } }, { { "", t[var7 + 1] } }))
+	return Text1 .. Callback2(Array.concat({ { tostring(NewLine1), List[1] } }, Array.map(Array.slice(List, 2, NewFloored + 1), function(p2) --[[ Line: 61 ]]
+		return { "", p2 }
+	end), { { " ", Callback1(NewColumnRemainder - 1) .. "^" } }, { { "", List[NewFloored + 1] } }))
 end
 
-printPrefixedLines = function(p3)
-	-- upvalues: array (ref), leftPad (write)
-	local var9 = array.filter(p3, function(p4)
-		return p4[2] ~= nil
+Callback2 = function(ConcatResult) --[[ Line: 83 | Named "printPrefixedLines" ]]
+	-- upvalues: Array (copy), Callback3 (ref)
+	local FilterResult = Array.filter(ConcatResult, function(Entry): boolean --[[ Line: 84 ]]
+		return Entry[2] ~= nil
 	end)
-	local maxValue = math.max(table.unpack(array.map(var9, function(p4)
-		return string.len(p4[1])
+	local Largest = math.max(table.unpack(Array.map(FilterResult, function(Entry): number --[[ Line: 89 ]]
+		return (string.len(Entry[1]))
 	end)))
 	
-	return array.join(array.map(var9, function(p4)
-		-- upvalues: leftPad (copy), maxValue (ref)
-		local var10
-		local var11 = p4[2]
-		local var12 = leftPad(maxValue, p4[1])
+	return Array.join(Array.map(FilterResult, function(Entry): string --[[ Line: 94 ]]
+		-- upvalues: Callback3 (upval), Largest (copy)
+		local Entry1 = Entry[2]
 		
-		if var11 and var11 ~= "" then
-			var10 = " | " .. var19 or " |"
-		end
-		return var12 .. var21
+		return Callback3(Largest, Entry[1]) .. (Entry1 and Entry1 ~= "" and " | " .. Entry1 or " |")
 	end), "\n")
 end
 
-whitespace = function(p3)
-	return string.rep(" ", p3)
+Callback1 = function(Count: number): string --[[ Line: 103 | Named "whitespace" ]]
+	return string.rep(" ", Count)
 end
 
-leftPad = function(p3, p4)
-	-- upvalues: whitespace (write)
-	return whitespace(p3 - string.len(p4)) .. p10
+Callback3 = function(Largest, Text: string): string --[[ Line: 107 | Named "leftPad" ]]
+	-- upvalues: Callback1 (ref)
+	return Callback1(Largest - string.len(Text)) .. Text
 end
 
 return {
-	printSourceLocation = printSourceLocation,
+	printSourceLocation = Callback,
 	printLocation = printLocation
 }

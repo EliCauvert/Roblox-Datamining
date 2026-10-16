@@ -1,340 +1,352 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local motionModule = require(parent.Motion)
-local view = foundationModule.View
-local useTokens = foundationModule.Hooks.useTokens
-local t = {
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local MotionModule = require(Parent.Motion)
+local View = FoundationModule.View
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local config = {
 	[Enum.KeyCode.Left] = Vector2.new(-1, 0),
 	[Enum.KeyCode.Right] = Vector2.new(1, 0),
 	[Enum.KeyCode.Up] = Vector2.new(0, -1),
 	[Enum.KeyCode.Down] = Vector2.new(0, 1)
 }
 
-local function _(p1, p2, p3)
-	return math.max(p2.Magnitude / 2, 0.01) / math.sin(math.atan(math.tan(math.rad(p1) / 2) * math.min(1, if p3.X > 0 and p3.Y > 0 then p3.X / p3.Y else 1)))
+local function _(Degrees: number, Offset, Vector): number --[[ Line: 43 | Named "getCameraDistance" ]]
+	return math.max(Offset.Magnitude / 2, 0.01) / math.sin((math.atan(math.tan(math.rad(Degrees) / 2) * math.min(1, if Vector.X > 0 and Vector.Y > 0 then Vector.X / Vector.Y else 1))))
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), foundationModule (ref), reactModule (ref), motionModule (ref), t (ref), view (ref)
-	local var1 = useTokens()
-	local reducedMotion = foundationModule.Hooks.usePreferences().reducedMotion
-	local var2 = reactModule.useRef(nil)
-	local var3, var4 = motionModule.useMotion({ size = UDim2.fromScale(1, 1) })
-	local var5 = reactModule.useRef(var4)
-	var5.current = var4
-	local var6, var7 = reactModule.useState(nil)
-	local var8, var9 = reactModule.useState(0)
-	local model = p1.model
-	local fieldOfView = p1.fieldOfView or 30
-	local cameraDistanceScale = p1.cameraDistanceScale or 1
-	local var10 = p1.isInteractive == true
-	local var11 = reactModule.useRef({
-		yaw = 0.349065850399,
-		pitch = -0.261799387799,
+return ReactModule.memo(function(Frame) --[[ Line: 49 | Named "ModelViewport" ]]
+	-- upvalues: UseTokensFunction (copy), FoundationModule (copy), ReactModule (copy), MotionModule (copy), config (copy), View (copy)
+	local UseTokensResult = UseTokensFunction()
+	local ReducedMotion = FoundationModule.Hooks.usePreferences().reducedMotion
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseMotionResult, UseMotionResult2 = MotionModule.useMotion({ size = UDim2.fromScale(1, 1) })
+	local UseRefResult1 = ReactModule.useRef(UseMotionResult2)
+	UseRefResult1.current = UseMotionResult2
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(0)
+	local Model = Frame.model
+	local FieldOfView = Frame.fieldOfView or 30
+	local CameraDistanceScale = Frame.cameraDistanceScale or 1
+	local IsIsInteractive = Frame.isInteractive == true
+	local UseRefResult2 = ReactModule.useRef({
+		yaw = 0.3490658503988659,
+		pitch = -0.2617993877991494,
 		zoom = 1,
-		center = Vector3.new(0, 0, 0),
+		center = vector.create(0, 0, 0),
 		baseDistance = 0,
 		camera = nil,
 		sourceModel = nil,
 		dragInput = nil,
 		lastDragPosition = nil
 	})
-	local var12 = reactModule.useCallback(function()
-		-- upvalues: var11 (ref)
-		local current = var11.current
-		local camera = current.camera
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 75 ]]
+		-- upvalues: UseRefResult2 (copy)
+		local Current = UseRefResult2.current
+		local Camera = Current.camera
 		
-		if camera == nil then
+		if Camera ~= nil then
+			Camera.CFrame = CFrame.lookAt(Current.center + CFrame.fromEulerAnglesYXZ(Current.pitch, Current.yaw, 0) * Vector3.new(0, 0, Current.baseDistance * Current.zoom), Current.center)
+			
 			return
 		end
-		camera.CFrame = CFrame.lookAt(current.center + CFrame.fromEulerAnglesYXZ(current.pitch, current.yaw, 0) * Vector3.new(0, 0, current.baseDistance * current.zoom), current.center)
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), model (ref), var7 (ref), var9 (ref), fieldOfView (ref), var11 (ref), cameraDistanceScale (ref), var12 (ref), var10 (ref)
-		local current = var2.current
+	ReactModule.useEffect(function() --[[ Line: 86 ]]
+		-- upvalues: UseRefResult (copy), Model (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), FieldOfView (copy), UseRefResult2 (copy), CameraDistanceScale (copy), UseResult (copy), IsIsInteractive (copy)
+		local Current = UseRefResult.current
 		
-		if current == nil or model == nil then
+		if Current == nil or Model == nil then
 			return nil
 		end
-		local var13 = model:Clone()
+		local ModelClone = Model:Clone()
 		
-		if var13 == nil then
-			var7(model)
-			local var14 = model:GetPropertyChangedSignal("Archivable"):Connect(function()
-				-- upvalues: var9 (copy)
-				var9(function(p2)
-					return p2 + 1
+		if ModelClone == nil then
+			UseStateResult2(Model)
+			local Connection = Model:GetPropertyChangedSignal("Archivable"):Connect(function() --[[ Line: 95 ]]
+				-- upvalues: UseStateResult2_1 (upval)
+				UseStateResult2_1(function(p1: number): number --[[ Line: 96 ]]
+					return p1 + 1
 				end)
 			end)
 			
-			return function()
-				-- upvalues: var14 (ref)
-				var14:Disconnect()
+			return function() --[[ Line: 100 ]]
+				-- upvalues: Connection (copy)
+				Connection:Disconnect()
 			end
 		end
-		var7(nil)
-		local worldModel = Instance.new("WorldModel")
-		worldModel.Parent = current
-		var13.Parent = worldModel
-		local camera = Instance.new("Camera")
-		camera.CameraType = Enum.CameraType.Scriptable
-		camera.FieldOfView = fieldOfView
-		camera.Parent = worldModel
-		current.CurrentCamera = camera
-		local current_1 = var11.current
-		current_1.camera = camera
+		UseStateResult2(nil)
+		local WorldModel = Instance.new("WorldModel")
+		WorldModel.Parent = Current
+		ModelClone.Parent = WorldModel
+		local Camera = Instance.new("Camera")
+		Camera.CameraType = Enum.CameraType.Scriptable
+		Camera.FieldOfView = FieldOfView
+		Camera.Parent = WorldModel
+		Current.CurrentCamera = Camera
+		local Current1 = UseRefResult2.current
+		Current1.camera = Camera
 		
-		if current_1.sourceModel ~= model then
-			current_1.yaw = 0.349065850399
-			current_1.pitch = -0.261799387799
-			current_1.zoom = 1
-			current_1.sourceModel = model
+		if Current1.sourceModel ~= Model then
+			Current1.yaw = 0.3490658503988659
+			Current1.pitch = -0.2617993877991494
+			Current1.zoom = 1
+			Current1.sourceModel = Model
 		end
-		local boundingBox, boundingBox_1 = var13:GetBoundingBox()
-		var13:TranslateBy(-boundingBox.Position)
-		current_1.center = Vector3.new(0, 0, 0)
-		local var15 = current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
-			-- upvalues: current_1 (ref), fieldOfView (copy), boundingBox_1 (write), current (ref), cameraDistanceScale (copy), var12 (copy)
-			local absoluteSize = current.AbsoluteSize
-			current_1.baseDistance = math.max(boundingBox_1.Magnitude / 2, 0.01) / math.sin(math.atan(math.tan(math.rad(fieldOfView) / 2) * math.min(1, if absoluteSize.X > 0 and absoluteSize.Y > 0 then absoluteSize.X / absoluteSize.Y else 1))) * cameraDistanceScale
-			var12()
+		local BoundingCFrame, BoundingSize = ModelClone:GetBoundingBox()
+		ModelClone:TranslateBy(-BoundingCFrame.Position)
+		Current1.center = vector.create(0, 0, 0)
+		local Connection1 = Current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 129 | Named "updateFit" ]]
+			-- upvalues: Current1 (copy), FieldOfView (upval), BoundingSize (ref), Current (copy), CameraDistanceScale (upval), UseResult (upval)
+			local AbsoluteSize = Current.AbsoluteSize
+			Current1.baseDistance = math.max(BoundingSize.Magnitude / 2, 0.01) / math.sin((math.atan(math.tan(math.rad(FieldOfView) / 2) * math.min(1, if AbsoluteSize.X > 0 and AbsoluteSize.Y > 0 then AbsoluteSize.X / AbsoluteSize.Y else 1)))) * CameraDistanceScale
+			UseResult()
 		end)
-		local absoluteSize = current.AbsoluteSize
-		current_1.baseDistance = math.max(boundingBox_1.Magnitude / 2, 0.01) / math.sin(math.atan(math.tan(math.rad(fieldOfView) / 2) * math.min(1, if absoluteSize.X > 0 and absoluteSize.Y > 0 then absoluteSize.X / absoluteSize.Y else 1))) * cameraDistanceScale
-		var12()
-		local var16 = false
-		local var17 = nil
-		local t = {}
+		local AbsoluteSize = Current.AbsoluteSize
+		Current1.baseDistance = math.max(BoundingSize.Magnitude / 2, 0.01) / math.sin((math.atan(math.tan(math.rad(FieldOfView) / 2) * math.min(1, if AbsoluteSize.X > 0 and AbsoluteSize.Y > 0 then AbsoluteSize.X / AbsoluteSize.Y else 1)))) * CameraDistanceScale
+		UseResult()
+		local Flag = false
+		local DeferredThread = nil
+		local ChangedConnections = {}
 		
-		local function refreshPreview()
-			-- upvalues: var17 (write), var16 (write), model (copy), var13 (write), worldModel (ref), boundingBox_1 (write), current_1 (ref), fieldOfView (copy), current (ref), cameraDistanceScale (copy), var12 (copy)
-			var17 = nil
+		local function refreshPreview() --[[ Line: 140 ]]
+			-- upvalues: DeferredThread (ref), Flag (ref), Model (upval), ModelClone (ref), WorldModel (copy), BoundingSize (ref), Current1 (copy), FieldOfView (upval), Current (copy), CameraDistanceScale (upval), UseResult (upval)
+			DeferredThread = nil
 			
-			if var16 then return end
-			local var18 = model:Clone()
+			if Flag then return end
+			local ModelClone1 = Model:Clone()
 			
-			if var18 == nil then return end
-			local boundingBox, boundingBox_2 = var18:GetBoundingBox()
-			var18:TranslateBy(-boundingBox.Position)
-			var13:Destroy()
-			var13 = var18
-			var13.Parent = worldModel
-			boundingBox_1 = boundingBox_2
-			local absoluteSize = current.AbsoluteSize
-			current_1.baseDistance = math.max(boundingBox_1.Magnitude / 2, 0.01) / math.sin(math.atan(math.tan(math.rad(fieldOfView) / 2) * math.min(1, if absoluteSize.X > 0 and absoluteSize.Y > 0 then absoluteSize.X / absoluteSize.Y else 1))) * cameraDistanceScale
-			var12()
-		end
-		
-		absoluteSize = function()
-			-- upvalues: var16 (write), var17 (write), refreshPreview (ref)
-			if var16 or var17 ~= nil then
+			if ModelClone1 ~= nil then
+				local BoundingCFrame, BoundingSize1 = ModelClone1:GetBoundingBox()
+				ModelClone1:TranslateBy(-BoundingCFrame.Position)
+				ModelClone:Destroy()
+				ModelClone = ModelClone1
+				ModelClone.Parent = WorldModel
+				BoundingSize = BoundingSize1
+				local AbsoluteSize = Current.AbsoluteSize
+				Current1.baseDistance = math.max(BoundingSize.Magnitude / 2, 0.01) / math.sin((math.atan(math.tan(math.rad(FieldOfView) / 2) * math.min(1, if AbsoluteSize.X > 0 and AbsoluteSize.Y > 0 then AbsoluteSize.X / AbsoluteSize.Y else 1)))) * CameraDistanceScale
+				UseResult()
+				
 				return
 			end
-			var17 = task.defer(refreshPreview)
 		end
 		
-		local function _(p2)
-			-- upvalues: t (ref), absoluteSize (ref)
-			if t[p2] == nil then
-				t[p2] = p2.Changed:Connect(absoluteSize)
-			end
-		end
-		
-		local descendantAddedConnection = nil
-		local descendantRemovingConnection = nil
-		
-		if var10 then
-			if t[model] == nil then
-				t[model] = model.Changed:Connect(absoluteSize)
-			end
-			for i, v in model:GetDescendants() do
-				if t[v] == nil then
-					t[v] = v.Changed:Connect(absoluteSize)
-				end
-			end
-			descendantAddedConnection = model.DescendantAdded:Connect(function(p2)
-				-- upvalues: t (ref), absoluteSize (ref), var16 (write), var17 (write), refreshPreview (ref)
-				if t[p2] == nil then
-					t[p2] = p2.Changed:Connect(absoluteSize)
-				end
-				if not var16 then
-					if var17 ~= nil then return end
-					var17 = task.defer(refreshPreview)
-				end
-			end)
-			descendantRemovingConnection = model.DescendantRemoving:Connect(function(p2)
-				-- upvalues: t (ref), var16 (write), var17 (write), refreshPreview (ref)
-				local var18 = t[p2]
+		local function scheduleRefresh() --[[ Line: 157 ]]
+			-- upvalues: Flag (ref), DeferredThread (ref), refreshPreview (copy)
+			if not Flag and DeferredThread == nil then
+				DeferredThread = task.defer(refreshPreview)
 				
-				if var18 ~= nil then
-					var18:Disconnect()
-					t[p2] = nil
+				return
+			end
+		end
+		
+		local function _(Key) --[[ Line: 163 | Named "observe" ]]
+			-- upvalues: ChangedConnections (copy), scheduleRefresh (copy)
+			if ChangedConnections[Key] == nil then
+				ChangedConnections[Key] = Key.Changed:Connect(scheduleRefresh)
+			end
+		end
+		
+		local Connection2 = nil
+		local Connection3 = nil
+		
+		if IsIsInteractive then
+			if ChangedConnections[Model] == nil then
+				ChangedConnections[Model] = Model.Changed:Connect(scheduleRefresh)
+			end
+			for _, descendant in Model:GetDescendants() do
+				if ChangedConnections[descendant] == nil then
+					ChangedConnections[descendant] = descendant.Changed:Connect(scheduleRefresh)
 				end
-				if not var16 then
-					if var17 ~= nil then return end
-					var17 = task.defer(refreshPreview)
+			end
+			Connection2 = Model.DescendantAdded:Connect(function(Descendant) --[[ Line: 175 ]]
+				-- upvalues: ChangedConnections (copy), scheduleRefresh (copy), Flag (ref), DeferredThread (ref), refreshPreview (copy)
+				if ChangedConnections[Descendant] == nil then
+					ChangedConnections[Descendant] = Descendant.Changed:Connect(scheduleRefresh)
+				end
+				if not Flag then
+					if DeferredThread ~= nil then return end
+					DeferredThread = task.defer(refreshPreview)
+				end
+			end)
+			Connection3 = Model.DescendantRemoving:Connect(function(Descendant) --[[ Line: 179 ]]
+				-- upvalues: ChangedConnections (copy), Flag (ref), DeferredThread (ref), refreshPreview (copy)
+				local ChangedConnection = ChangedConnections[Descendant]
+				
+				if ChangedConnection ~= nil then
+					ChangedConnection:Disconnect()
+					ChangedConnections[Descendant] = nil
+				end
+				if not Flag then
+					if DeferredThread ~= nil then return end
+					DeferredThread = task.defer(refreshPreview)
 				end
 			end)
 		end
-		return function()
-			-- upvalues: var16 (write), var17 (write), descendantAddedConnection (write), descendantRemovingConnection (write), t (ref), var15 (ref), current_1 (ref), worldModel (ref)
-			var16 = true
+		return function() --[[ Line: 189 ]]
+			-- upvalues: Flag (ref), DeferredThread (ref), Connection2 (ref), Connection3 (ref), ChangedConnections (copy), Connection1 (copy), Current1 (copy), WorldModel (copy)
+			Flag = true
 			
-			if var17 ~= nil then
-				task.cancel(var17)
+			if DeferredThread ~= nil then
+				task.cancel(DeferredThread)
 			end
-			if descendantAddedConnection then
-				descendantAddedConnection:Disconnect()
+			if Connection2 then
+				Connection2:Disconnect()
 			end
-			if descendantRemovingConnection then
-				descendantRemovingConnection:Disconnect()
+			if Connection3 then
+				Connection3:Disconnect()
 			end
-			for i, v in t do
-				v:Disconnect()
+			for _, changedConnection in ChangedConnections do
+				changedConnection:Disconnect()
 			end
-			var15:Disconnect()
-			current_1.camera = nil
-			current_1.dragInput = nil
-			current_1.lastDragPosition = nil
-			worldModel:Destroy()
+			Connection1:Disconnect()
+			Current1.camera = nil
+			Current1.dragInput = nil
+			Current1.lastDragPosition = nil
+			WorldModel:Destroy()
 		end
 	end, {
-		model or false, fieldOfView, cameraDistanceScale, var10, var12, var8
+		Model or false, FieldOfView, CameraDistanceScale, IsIsInteractive, UseResult,
+		UseStateResult1
 	})
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), var10 (ref), var5 (ref), motionModule (copy), reducedMotion (ref)
-		local current = var2.current
+	ReactModule.useEffect(function() --[[ Line: 211 ]]
+		-- upvalues: UseRefResult (copy), IsIsInteractive (copy), UseRefResult1 (copy), MotionModule (upval), ReducedMotion (copy)
+		local Current = UseRefResult.current
 		
-		if current == nil or not var10 then
+		if Current == nil or not IsIsInteractive then
 			return nil
-		end
-		local parent = current.Parent
-		local var18 = false
-		
-		local function resizeViewport()
-			-- upvalues: parent (ref), var5 (copy), motionModule (copy), var18 (write), reducedMotion (copy)
-			local absoluteSize = parent.AbsoluteSize
+		else
+			local Parent = Current.Parent
+			local Flag = false
 			
-			if absoluteSize.X <= 0 or absoluteSize.Y <= 0 then return end
-			var5.current(motionModule.createState({ size = UDim2.fromOffset(absoluteSize.X, absoluteSize.Y) }, {
-				default = motionModule.transition({
-					duration = if var18 and not reducedMotion then 0.25 else 0,
-					easingStyle = Enum.EasingStyle.Quad
-				})
-			}))
-			var18 = true
-		end
-		
-		resizeViewport()
-		local var19 = parent:GetPropertyChangedSignal("AbsoluteSize"):Connect(resizeViewport)
-		
-		return function()
-			-- upvalues: var19 (ref)
-			var19:Disconnect()
-		end
-	end, { var10, reducedMotion })
-	local var18 = reactModule.useCallback(function(_, p2)
-		-- upvalues: var11 (ref), var10 (ref)
-		local current = var11.current
-		
-		if not var10 or current.dragInput ~= nil then return end
-		if p2.UserInputType == Enum.UserInputType.MouseButton1 or p2.UserInputType == Enum.UserInputType.Touch then
-			current.dragInput = p2
-			current.lastDragPosition = p2.Position
-		end
-	end, { var10 })
-	reactModule.useEffect(function()
-		-- upvalues: var10 (ref), var11 (ref), var12 (ref), t (copy)
-		if var10 then
-			local userInputService = game:GetService("UserInputService")
-			local inputChangedConnection = userInputService.InputChanged:Connect(function(p2)
-				-- upvalues: var11 (copy), var12 (copy)
-				local current = var11.current
-				local dragInput = current.dragInput
+			local function resizeViewport() --[[ Line: 218 ]]
+				-- upvalues: Parent (copy), UseRefResult1 (upval), MotionModule (upval), Flag (ref), ReducedMotion (upval)
+				local AbsoluteSize = Parent.AbsoluteSize
 				
-				if dragInput == nil or current.lastDragPosition == nil then return end
-				if (dragInput.UserInputType == Enum.UserInputType.MouseButton1 and p2.UserInputType == Enum.UserInputType.MouseMovement) or p2 == dragInput then
-					local var19 = p2.Position - current.lastDragPosition
-					current.lastDragPosition = p2.Position
-					current.yaw -= var19.X * 0.01
-					current.pitch = math.clamp(current.pitch - var19.Y * 0.01, -1.483529864195, 1.483529864195)
-					var12()
+				if AbsoluteSize.X > 0 and AbsoluteSize.Y > 0 then
+					UseRefResult1.current(MotionModule.createState({ size = UDim2.fromOffset(AbsoluteSize.X, AbsoluteSize.Y) }, {
+						default = MotionModule.transition({
+							duration = if Flag and not ReducedMotion then 0.25 else 0,
+							easingStyle = Enum.EasingStyle.Quad
+						})
+					}))
+					Flag = true
+					
+					return
+				end
+			end
+			
+			resizeViewport()
+			local Connection = Parent:GetPropertyChangedSignal("AbsoluteSize"):Connect(resizeViewport)
+			
+			return function() --[[ Line: 233 ]]
+				-- upvalues: Connection (copy)
+				Connection:Disconnect()
+			end
+		end
+	end, { IsIsInteractive, ReducedMotion })
+	local UseResult1 = ReactModule.useCallback(function(_, Input) --[[ Line: 238 ]]
+		-- upvalues: UseRefResult2 (copy), IsIsInteractive (copy)
+		local Current = UseRefResult2.current
+		
+		if not IsIsInteractive or Current.dragInput ~= nil then return end
+		if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
+			Current.dragInput = Input
+			Current.lastDragPosition = Input.Position
+		end
+	end, { IsIsInteractive })
+	ReactModule.useEffect(function() --[[ Line: 252 ]]
+		-- upvalues: IsIsInteractive (copy), UseRefResult2 (copy), UseResult (copy), config (upval)
+		if IsIsInteractive then
+			local UserInputService = game:GetService("UserInputService")
+			local InputChangedConnection = UserInputService.InputChanged:Connect(function(Input) --[[ Line: 257 ]]
+				-- upvalues: UseRefResult2 (upval), UseResult (upval)
+				local Current = UseRefResult2.current
+				local DragInput = Current.dragInput
+				
+				if DragInput == nil or Current.lastDragPosition == nil then return end
+				if DragInput.UserInputType == Enum.UserInputType.MouseButton1 and Input.UserInputType == Enum.UserInputType.MouseMovement or Input == DragInput then
+					local PositionDelta = Input.Position - Current.lastDragPosition
+					Current.lastDragPosition = Input.Position
+					Current.yaw -= PositionDelta.X * 0.01
+					Current.pitch = math.clamp(Current.pitch - PositionDelta.Y * 0.01, -1.4835298641951802, 1.4835298641951802)
+					UseResult()
 					
 					return
 				end
 			end)
-			local inputEndedConnection = userInputService.InputEnded:Connect(function(p2)
-				-- upvalues: var11 (copy)
-				if var11.current.dragInput == p2 then
-					var11.current.dragInput = nil
-					var11.current.lastDragPosition = nil
+			local InputEndedConnection = UserInputService.InputEnded:Connect(function(Input) --[[ Line: 278 ]]
+				-- upvalues: UseRefResult2 (upval)
+				if UseRefResult2.current.dragInput == Input then
+					UseRefResult2.current.dragInput = nil
+					UseRefResult2.current.lastDragPosition = nil
 				end
 			end)
-			local windowFocusReleasedConnection = userInputService.WindowFocusReleased:Connect(function()
-				-- upvalues: var11 (copy)
-				var11.current.dragInput = nil
-				var11.current.lastDragPosition = nil
+			local WindowFocusReleasedConnection = UserInputService.WindowFocusReleased:Connect(function() --[[ Line: 274 | Named "clearDrag" ]]
+				-- upvalues: UseRefResult2 (upval)
+				UseRefResult2.current.dragInput = nil
+				UseRefResult2.current.lastDragPosition = nil
 			end)
-			local inputBeganConnection = userInputService.InputBegan:Connect(function(p2, p3)
-				-- upvalues: t (copy), var11 (copy), var12 (copy)
-				local keyCode = t[p2.KeyCode]
+			local InputBeganConnection = UserInputService.InputBegan:Connect(function(Input, GameProcessed) --[[ Line: 284 ]]
+				-- upvalues: config (upval), UseRefResult2 (upval), UseResult (upval)
+				local Entry = config[Input.KeyCode]
 				
-				if p3 or keyCode == nil then
+				if not GameProcessed and Entry ~= nil then
+					local Current = UseRefResult2.current
+					Current.yaw -= Entry.X * 0.2617993877991494
+					Current.pitch = math.clamp(Current.pitch - Entry.Y * 0.2617993877991494, -1.4835298641951802, 1.4835298641951802)
+					UseResult()
+					
 					return
 				end
-				local current = var11.current
-				current.yaw -= keyCode.X * 0.261799387799
-				current.pitch = math.clamp(current.pitch - keyCode.Y * 0.261799387799, -1.483529864195, 1.483529864195)
-				var12()
 			end)
 			
-			return function()
-				-- upvalues: inputBeganConnection (ref), inputChangedConnection (ref), inputEndedConnection (ref), windowFocusReleasedConnection (ref), var11 (copy)
-				inputBeganConnection:Disconnect()
-				inputChangedConnection:Disconnect()
-				inputEndedConnection:Disconnect()
-				windowFocusReleasedConnection:Disconnect()
-				var11.current.dragInput = nil
-				var11.current.lastDragPosition = nil
+			return function() --[[ Line: 294 ]]
+				-- upvalues: InputBeganConnection (copy), InputChangedConnection (copy), InputEndedConnection (copy), WindowFocusReleasedConnection (copy), UseRefResult2 (upval)
+				InputBeganConnection:Disconnect()
+				InputChangedConnection:Disconnect()
+				InputEndedConnection:Disconnect()
+				WindowFocusReleasedConnection:Disconnect()
+				UseRefResult2.current.dragInput = nil
+				UseRefResult2.current.lastDragPosition = nil
 			end
+		else
+			return nil
 		end
-		return nil
-	end, { var10, var12 })
+	end, { IsIsInteractive, UseResult })
 	
-	return reactModule.createElement(view, {
-		Size = p1.size or UDim2.fromScale(1, 1),
-		backgroundStyle = if p1.backgroundTransparency ~= nil then nil else {
-			Color3 = var1.Color.Surface.Surface_200.Color3,
-			Transparency = p1.backgroundTransparency
+	return ReactModule.createElement(View, {
+		Size = Frame.size or UDim2.fromScale(1, 1),
+		backgroundStyle = if Frame.backgroundTransparency == nil then nil else {
+			Color3 = UseTokensResult.Color.Surface.Surface_200.Color3,
+			Transparency = Frame.backgroundTransparency
 		},
-		LayoutOrder = p1.LayoutOrder,
-		testId = p1.testId
+		LayoutOrder = Frame.LayoutOrder,
+		testId = Frame.testId
 	}, {
-		Unavailable = if model == nil or var6 ~= model then nil else reactModule.createElement(foundationModule.Text, {
+		Unavailable = if Model == nil or UseStateResult ~= Model then nil else ReactModule.createElement(FoundationModule.Text, {
 			tag = "size-full padding-small text-body-small text-wrap text-align-x-center content-default",
-			Text = p1.unavailableText,
-			testId = if p1.testId ~= nil then nil else `{p1.testId}.Unavailable`
+			Text = Frame.unavailableText,
+			testId = if Frame.testId == nil then nil else `{Frame.testId}.Unavailable`
 		}),
-		Viewport = reactModule.createElement("ViewportFrame", {
-			Visible = if model ~= nil then var6 ~= model else true,
-			Size = if var10 then var3.size else UDim2.fromScale(1, 1),
-			BackgroundColor3 = var1.Color.Surface.Surface_200.Color3,
-			BackgroundTransparency = p1.backgroundTransparency or var1.Color.Surface.Surface_200.Transparency,
+		Viewport = ReactModule.createElement("ViewportFrame", {
+			Visible = Model == nil or UseStateResult ~= Model,
+			Size = if IsIsInteractive then UseMotionResult.size else UDim2.fromScale(1, 1),
+			BackgroundColor3 = UseTokensResult.Color.Surface.Surface_200.Color3,
+			BackgroundTransparency = Frame.backgroundTransparency or UseTokensResult.Color.Surface.Surface_200.Transparency,
 			BorderSizePixel = 0,
-			Active = var10,
-			ref = var2,
-			[reactModule.Tag] = if p1.testId ~= nil then nil else `data-testid={p1.testId}.Viewport`,
-			[reactModule.Event.InputBegan] = var18,
-			[reactModule.Event.InputChanged] = reactModule.useCallback(function(_, p2)
-				-- upvalues: var11 (ref), var10 (ref), var12 (ref)
-				local current = var11.current
+			Active = IsIsInteractive,
+			ref = UseRefResult,
+			[ReactModule.Tag] = if Frame.testId == nil then nil else `data-testid={Frame.testId}.Viewport`,
+			[ReactModule.Event.InputBegan] = UseResult1,
+			[ReactModule.Event.InputChanged] = ReactModule.useCallback(function(_, Input) --[[ Line: 303 ]]
+				-- upvalues: UseRefResult2 (copy), IsIsInteractive (copy), UseResult (copy)
+				local Current = UseRefResult2.current
 				
-				if var10 and current.dragInput == nil and p2.UserInputType == Enum.UserInputType.MouseWheel then
-					current.zoom = math.clamp(current.zoom - p2.Position.Z * 0.12, 0.4, 2.5)
-					var12()
+				if IsIsInteractive and Current.dragInput == nil and Input.UserInputType == Enum.UserInputType.MouseWheel then
+					Current.zoom = math.clamp(Current.zoom - Input.Position.Z * 0.12, 0.4, 2.5)
+					UseResult()
 				end
-			end, { var10, var12 })
+			end, { IsIsInteractive, UseResult })
 		})
 	})
 end)

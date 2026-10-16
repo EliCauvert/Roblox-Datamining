@@ -1,77 +1,77 @@
 ﻿return {
-	Filter = function(p1, p2)
-		local t = {}
+	Filter = function(p1, Callback) --[[ Line: 11 ]]
+		local List = {}
 		
 		for i = 1, #p1 do
-			local var1 = p1[i]
+			local v1 = p1[i]
 			
-			if p2(var1, i) then
-				table.insert(t, var1)
+			if Callback(v1, i) then
+				table.insert(List, v1)
 			end
 		end
-		return t
+		return List
 	end,
-	Map = function(p3, p4)
+	Map = function(p2, Callback) --[[ Line: 27 ]]
 		local t = {}
 		
-		for i = 1, #p3 do
-			t[i] = p4(p3[i], i)
+		for i = 1, #p2 do
+			t[i] = Callback(p2[i], i)
 		end
 		return t
 	end,
-	MapReverse = function(p5, p6)
+	MapReverse = function(p3, Callback) --[[ Line: 40 ]]
 		local t = {}
 		
-		for i = #p5, 1, -1 do
-			t[i] = p6(p5[i], i)
+		for i = #p3, 1, -1 do
+			t[i] = Callback(p3[i], i)
 		end
 		return t
 	end,
-	FilterMap = function(p7, p8)
-		local t = {}
+	FilterMap = function(p4, Callback) --[[ Line: 56 ]]
+		local List = {}
 		
-		for i = 1, #p7 do
-			local var2 = p8(p7[i], i)
+		for i = 1, #p4 do
+			local CallbackResult = Callback(p4[i], i)
 			
-			if var2 ~= nil then
-				table.insert(t, var2)
+			if CallbackResult ~= nil then
+				table.insert(List, CallbackResult)
 			end
 		end
-		return t
+		return List
 	end,
-	Fold = function(p9, p10, p11)
-		local var3 = p10
+	Fold = function(p5, p6, Callback) --[[ Line: 74 ]]
+		local v2 = p6
 		
-		for i = 1, #p9 do
-			var3 = p11(var3, p9[i], i)
+		for i = 1, #p5 do
+			v2 = Callback(v2, p5[i], i)
 		end
-		return var3
+		return v2
 	end,
-	FoldDictionary = function(p12, p13, p14)
-		local var4 = p13
+	FoldDictionary = function(List, p7, Callback) --[[ Line: 87 ]]
+		local v3 = p7
 		
-		for i, v in pairs(p12) do
-			var4 = p14(var4, i, v)
+		for i, value in pairs(List) do
+			v3 = Callback(v3, i, value)
 		end
-		return var4
+		return v3
 	end,
-	Take = function(p15, p16, p17)
-		p17 = p17 or 1
-		local var5 = p16 + (p17 - 1)
+	Take = function(p8, p9, p10) --[[ Line: 100 ]]
+		local P10 = p10 or 1
+		local NewP = p9 + (P10 - 1)
 		
-		if #p15 < var5 then
-			var5 = #p15
+		if #p8 < NewP then
+			NewP = #p8
 		end
 		local t = {}
 		
-		for i = p17, var5 do
-			t[i - (p17 - 1)] = p15[i]
+		for i = P10, NewP do
+			t[i - (P10 - 1)] = p8[i]
 		end
 		return t
 	end,
-	Find = function(p18, p19)
-		for i, v in ipairs(p18) do
-			if v == p19 then
+	Find = function(List, p11) --[[ Line: 122 ]]
+		for i, value in ipairs(List) do
+			if value == p11 then
 				return i
 			end
 		end

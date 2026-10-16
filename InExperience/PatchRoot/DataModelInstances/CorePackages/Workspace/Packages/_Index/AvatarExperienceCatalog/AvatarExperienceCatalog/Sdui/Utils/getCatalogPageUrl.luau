@@ -1,11 +1,11 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local parent = avatarExperienceCatalog.Parent
-local var1 = require(parent.UrlBuilder).UrlBuilder.new({
-	base = require(parent.Http).Url.APIS_URL,
-	path = require(avatarExperienceCatalog.Sdui.Constants).CatalogSduiUrl
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local Parent = AvatarExperienceCatalog.Parent
+local NewResult = require(Parent.UrlBuilder).UrlBuilder.new({
+	base = require(Parent.Http).Url.APIS_URL,
+	path = require(AvatarExperienceCatalog.Sdui.Constants).CatalogSduiUrl
 })
 
-return function()
-	-- upvalues: var1 (ref)
-	return var1()
+return function() --[[ Line: 13 | Named "getCatalogPageUrl" ]]
+	-- upvalues: NewResult (copy)
+	return NewResult()
 end

@@ -1,7 +1,7 @@
 ﻿local _ = require(script:FindFirstAncestor("BuildExperience").Parent.DataHydration.ExperienceAnalytics)
 
-return function(p1, p2, p3)
-	local _, match, match_1, match_2, match_3 = string.match(p1, "(%d+)%-(%d+)%-(%d+)T(%d+):(%d+):%d+")
+return function(Text: string, p1, p2): string --[[ Line: 11 | Named "formatMetricTimestamp" ]]
+	local _, Match2, Match3, Match4, Match5 = string.match(Text, "(%d+)%-(%d+)%-(%d+)T(%d+):(%d+):%d+")
 	
-	return if match == nil then p1 elseif p2 == "OneMinute" or p2 == "HalfHour" or p2 == "OneHour" then `{match_2}:{match_3}` else `{p3[tonumber(match)] or match} {tonumber(match_1)}`
+	return if Match2 == nil then Text elseif p1 == "OneMinute" or p1 == "HalfHour" or p1 == "OneHour" then `{Match4}:{Match5}` else `{p2[tonumber(Match2)] or Match2} {tonumber(Match3)}`
 end

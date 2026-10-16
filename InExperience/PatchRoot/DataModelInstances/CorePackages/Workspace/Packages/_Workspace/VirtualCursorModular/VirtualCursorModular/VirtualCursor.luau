@@ -1,28 +1,27 @@
-﻿local virtualCursorModular = script:FindFirstAncestor("VirtualCursorModular")
-local parent = virtualCursorModular.Parent
+﻿local VirtualCursorModular = script:FindFirstAncestor("VirtualCursorModular")
 local _ = game:GetService("CoreGui")
-local guiService = game:GetService("GuiService")
-local runService = game:GetService("RunService")
-local userInputService = game:GetService("UserInputService")
-local gamepadService = game:GetService("GamepadService")
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagEnableVirtualCursorMoveAssist = sharedFlagsModule.FFlagEnableVirtualCursorMoveAssist
-local fFlagVCWasDisabledFromMenuOpen = sharedFlagsModule.FFlagVCWasDisabledFromMenuOpen
-local fFlagEnableVirtualCursorDebugging = sharedFlagsModule.FFlagEnableVirtualCursorDebugging
-local inputControllerModule = require(virtualCursorModular.Controllers.InputController)
-local cursorControllerModule = require(virtualCursorModular.Controllers.CursorController)
-local selectionControllerModule = require(virtualCursorModular.Controllers.SelectionController)
-local moveAssistControllerModule = require(virtualCursorModular.Controllers.MoveAssistController)
-local enumsModule = require(virtualCursorModular.Enums)
-local t = {}
-t.__index = t
+local GuiService = game:GetService("GuiService")
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+local GamepadService = game:GetService("GamepadService")
+local SharedFlagsModule = require(VirtualCursorModular.Parent.SharedFlags)
+local FFlagEnableVirtualCursorMoveAssist = SharedFlagsModule.FFlagEnableVirtualCursorMoveAssist
+local FFlagVCWasDisabledFromMenuOpen = SharedFlagsModule.FFlagVCWasDisabledFromMenuOpen
+local FFlagEnableVirtualCursorDebugging = SharedFlagsModule.FFlagEnableVirtualCursorDebugging
+local InputControllerModule = require(VirtualCursorModular.Controllers.InputController)
+local CursorControllerModule = require(VirtualCursorModular.Controllers.CursorController)
+local SelectionControllerModule = require(VirtualCursorModular.Controllers.SelectionController)
+local MoveAssistControllerModule = require(VirtualCursorModular.Controllers.MoveAssistController)
+local EnumsModule = require(VirtualCursorModular.Enums)
+local Module = {}
+Module.__index = Module
 
-function t.new()
-	-- upvalues: cursorControllerModule (ref), inputControllerModule (ref), fFlagEnableVirtualCursorMoveAssist (ref), moveAssistControllerModule (ref), selectionControllerModule (ref), fFlagEnableVirtualCursorDebugging (ref), virtualCursorModular (ref), t (ref)
-	local var1 = cursorControllerModule.new()
-	local var2 = inputControllerModule.new(var1)
-	local var3 = if fFlagEnableVirtualCursorMoveAssist then moveAssistControllerModule.new() else nil
-	local tbl = setmetatable({
+function Module.new() --[[ Line: 59 ]]
+	-- upvalues: CursorControllerModule (copy), InputControllerModule (copy), FFlagEnableVirtualCursorMoveAssist (copy), MoveAssistControllerModule (copy), SelectionControllerModule (copy), FFlagEnableVirtualCursorDebugging (copy), VirtualCursorModular (copy), Module (copy)
+	local NewCursorController = CursorControllerModule.new()
+	local NewInputController = InputControllerModule.new(NewCursorController)
+	local NewMoveAssistController = if FFlagEnableVirtualCursorMoveAssist then MoveAssistControllerModule.new() else nil
+	local self = setmetatable({
 		_selectedObject = nil,
 		_previouslySelectedObject = nil,
 		_wasDisabledFromOtherInput = false,
@@ -32,39 +31,39 @@ function t.new()
 		_boundToRenderStep = false,
 		_wasDisabledFromMenuOpen = false,
 		_cursorPosition = Vector2.new(),
-		_cursorController = var1,
-		_inputController = var2,
-		_selectionController = selectionControllerModule.new(var2, var1, var3),
-		_moveAssistController = var3,
-		_moveAssistDebugView = if fFlagEnableVirtualCursorDebugging and var3 then require(virtualCursorModular.Controllers.MoveAssistDebugView).new() else nil
-	}, t)
-	tbl:initialize()
+		_cursorController = NewCursorController,
+		_inputController = NewInputController,
+		_selectionController = SelectionControllerModule.new(NewInputController, NewCursorController, NewMoveAssistController),
+		_moveAssistController = NewMoveAssistController,
+		_moveAssistDebugView = if FFlagEnableVirtualCursorDebugging and NewMoveAssistController then require(VirtualCursorModular.Controllers.MoveAssistDebugView).new() else nil
+	}, Module)
+	self:initialize()
 	
-	return tbl
+	return self
 end
 
-function t:Destroy()
-	-- upvalues: runService (ref)
-	local lastInputTypeChangedEventConnection = self._lastInputTypeChangedEventConnection
+function Module:Destroy() --[[ Line: 93 ]]
+	-- upvalues: RunService (copy)
+	local LastInputTypeChangedEventConnection = self._lastInputTypeChangedEventConnection
 	
-	if lastInputTypeChangedEventConnection then
-		lastInputTypeChangedEventConnection:Disconnect()
+	if LastInputTypeChangedEventConnection then
+		LastInputTypeChangedEventConnection:Disconnect()
 		self._lastInputTypeChangedEventConnection = nil
 	end
-	local gamepadCursorEnabledConnection = self._gamepadCursorEnabledConnection
+	local GamepadCursorEnabledConnection = self._gamepadCursorEnabledConnection
 	
-	if gamepadCursorEnabledConnection then
-		gamepadCursorEnabledConnection:Disconnect()
+	if GamepadCursorEnabledConnection then
+		GamepadCursorEnabledConnection:Disconnect()
 		self._gamepadCursorEnabledConnection = nil
 	end
-	local menuOpenedEventConnection = self._menuOpenedEventConnection
+	local MenuOpenedEventConnection = self._menuOpenedEventConnection
 	
-	if menuOpenedEventConnection then
-		menuOpenedEventConnection:Disconnect()
+	if MenuOpenedEventConnection then
+		MenuOpenedEventConnection:Disconnect()
 		self._menuOpenedEventConnection = nil
 	end
 	if self._boundToRenderStep then
-		runService:UnbindFromRenderStep("VirtualCursorStepped")
+		RunService:UnbindFromRenderStep("VirtualCursorStepped")
 		self._boundToRenderStep = false
 	end
 	if self._inputController then
@@ -79,94 +78,97 @@ function t:Destroy()
 	end
 end
 
-function t:UpdateGamepadCursor()
-	-- upvalues: gamepadService (ref), userInputService (ref)
-	if gamepadService.GamepadCursorEnabled then
-		self:EnableVirtualCursor(userInputService:GetMouseLocation())
+function Module:UpdateGamepadCursor() --[[ Line: 131 ]]
+	-- upvalues: GamepadService (copy), UserInputService (copy)
+	if GamepadService.GamepadCursorEnabled then
+		self:EnableVirtualCursor((UserInputService:GetMouseLocation()))
 		
 		return
+	else
+		self:EnableSelectionPreview()
 	end
-	self:EnableSelectionPreview()
 end
 
-function t:initialize()
-	-- upvalues: userInputService (ref), gamepadService (ref), fFlagEnableVirtualCursorDebugging (ref)
-	self._lastInputTypeChangedEventConnection = userInputService.LastInputTypeChanged:Connect(function(p1)
-		-- upvalues: gamepadService (copy), self (ref), fFlagEnableVirtualCursorDebugging (copy)
-		if p1 ~= Enum.UserInputType.Gamepad1 and p1 ~= Enum.UserInputType.Focus and gamepadService.GamepadCursorEnabled then
-			gamepadService.GamepadCursorEnabled = false
+function Module:initialize() --[[ Line: 141 ]]
+	-- upvalues: UserInputService (copy), GamepadService (copy), FFlagEnableVirtualCursorDebugging (copy)
+	self._lastInputTypeChangedEventConnection = UserInputService.LastInputTypeChanged:Connect(function(UserInputType) --[[ Line: 143 ]]
+		-- upvalues: GamepadService (upval), self (copy), FFlagEnableVirtualCursorDebugging (upval)
+		if UserInputType == Enum.UserInputType.Gamepad1 or UserInputType == Enum.UserInputType.Focus or not GamepadService.GamepadCursorEnabled then
+			if UserInputType == Enum.UserInputType.Gamepad1 and self._wasDisabledFromOtherInput then
+				GamepadService.GamepadCursorEnabled = true
+				self._wasDisabledFromOtherInput = false
+			end
+		else
+			GamepadService.GamepadCursorEnabled = false
 			self._wasDisabledFromOtherInput = true
-		elseif p1 == Enum.UserInputType.Gamepad1 and self._wasDisabledFromOtherInput then
-			gamepadService.GamepadCursorEnabled = true
-			self._wasDisabledFromOtherInput = false
 		end
-		if fFlagEnableVirtualCursorDebugging then
-			print("LastInputTypeChanged", p1, "GamepadCursorEnabled", gamepadService.GamepadCursorEnabled, "_wasDisabledFromOtherInput", self._wasDisabledFromOtherInput)
+		if FFlagEnableVirtualCursorDebugging then
+			print("LastInputTypeChanged", UserInputType, "GamepadCursorEnabled", GamepadService.GamepadCursorEnabled, "_wasDisabledFromOtherInput", self._wasDisabledFromOtherInput)
 		end
 	end)
-	self._gamepadCursorEnabledConnection = gamepadService:GetPropertyChangedSignal("GamepadCursorEnabled"):Connect(function()
-		-- upvalues: self (ref)
+	self._gamepadCursorEnabledConnection = GamepadService:GetPropertyChangedSignal("GamepadCursorEnabled"):Connect(function() --[[ Line: 169 ]]
+		-- upvalues: self (copy)
 		self:UpdateGamepadCursor()
 	end)
 	self:UpdateGamepadCursor()
 end
 
-function t:onRenderStep(p1)
+function Module:onRenderStep(p1) --[[ Line: 176 ]]
 	self._selectionController:onRenderStep(p1)
-	local moveAssistDebugView = self._moveAssistDebugView
-	local moveAssistController = self._moveAssistController
+	local MoveAssistDebugView = self._moveAssistDebugView
+	local MoveAssistController = self._moveAssistController
 	
-	if moveAssistDebugView and moveAssistController then
-		moveAssistDebugView:update(moveAssistController._debugSnapshot, self._cursorController:GetCursorScreenGuiOffset())
+	if MoveAssistDebugView and MoveAssistController then
+		MoveAssistDebugView:update(MoveAssistController._debugSnapshot, self._cursorController:GetCursorScreenGuiOffset())
 	end
 end
 
-function t:EnableVirtualCursor(p1)
-	-- upvalues: gamepadService (ref), enumsModule (ref), runService (ref), guiService (ref), fFlagVCWasDisabledFromMenuOpen (ref)
-	self._cursorController:Enable(p1)
-	gamepadService:SetGamepadCursorPosition(p1)
-	self._inputController:SetBehavior(enumsModule.Behavior.VirtualCursor)
+function Module:EnableVirtualCursor(MouseLocation) --[[ Line: 186 ]]
+	-- upvalues: GamepadService (copy), EnumsModule (copy), RunService (copy), GuiService (copy), FFlagVCWasDisabledFromMenuOpen (copy)
+	self._cursorController:Enable(MouseLocation)
+	GamepadService:SetGamepadCursorPosition(MouseLocation)
+	self._inputController:SetBehavior(EnumsModule.Behavior.VirtualCursor)
 	
 	if not self._boundToRenderStep then
-		runService:BindToRenderStep("VirtualCursorStepped", Enum.RenderPriority.Input.Value + 1, function(p2)
-			-- upvalues: self (ref)
-			self:onRenderStep(p2)
+		RunService:BindToRenderStep("VirtualCursorStepped", Enum.RenderPriority.Input.Value + 1, function(DeltaTime) --[[ Line: 192 ]]
+			-- upvalues: self (copy)
+			self:onRenderStep(DeltaTime)
 		end)
 		self._boundToRenderStep = true
 	end
-	self._menuOpenedEventConnection = guiService.MenuOpened:Connect(function()
-		-- upvalues: gamepadService (copy), fFlagVCWasDisabledFromMenuOpen (copy), self (ref)
-		gamepadService.GamepadCursorEnabled = false
+	self._menuOpenedEventConnection = GuiService.MenuOpened:Connect(function() --[[ Line: 198 ]]
+		-- upvalues: GamepadService (upval), FFlagVCWasDisabledFromMenuOpen (upval), self (copy)
+		GamepadService.GamepadCursorEnabled = false
 		
-		if fFlagVCWasDisabledFromMenuOpen then
+		if FFlagVCWasDisabledFromMenuOpen then
 			self._wasDisabledFromMenuOpen = true
 		end
 	end)
 end
 
-function t:EnableSelectionPreview()
-	-- upvalues: enumsModule (ref), runService (ref), guiService (ref), fFlagVCWasDisabledFromMenuOpen (ref)
-	local menuOpenedEventConnection = self._menuOpenedEventConnection
+function Module:EnableSelectionPreview() --[[ Line: 206 ]]
+	-- upvalues: EnumsModule (copy), RunService (copy), GuiService (copy), FFlagVCWasDisabledFromMenuOpen (copy)
+	local MenuOpenedEventConnection = self._menuOpenedEventConnection
 	
-	if menuOpenedEventConnection then
-		menuOpenedEventConnection:Disconnect()
+	if MenuOpenedEventConnection then
+		MenuOpenedEventConnection:Disconnect()
 		self._menuOpenedEventConnection = nil
 	end
 	self._cursorController:Disable()
-	self._inputController:SetBehavior(enumsModule.Behavior.SelectionPreview)
+	self._inputController:SetBehavior(EnumsModule.Behavior.SelectionPreview)
 	
 	if self._boundToRenderStep then
-		runService:UnbindFromRenderStep("VirtualCursorStepped")
+		RunService:UnbindFromRenderStep("VirtualCursorStepped")
 		self._boundToRenderStep = false
 	end
-	guiService.SelectedObject = nil
+	GuiService.SelectedObject = nil
 	
-	if not fFlagVCWasDisabledFromMenuOpen or not self._wasDisabledFromMenuOpen then
-		guiService.SelectedCoreObject = nil
+	if not FFlagVCWasDisabledFromMenuOpen or not self._wasDisabledFromMenuOpen then
+		GuiService.SelectedCoreObject = nil
 	end
-	if fFlagVCWasDisabledFromMenuOpen then
+	if FFlagVCWasDisabledFromMenuOpen then
 		self._wasDisabledFromMenuOpen = false
 	end
 end
 
-return t.new()
+return Module.new()

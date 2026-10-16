@@ -1,151 +1,154 @@
-﻿local whatsNew = script:FindFirstAncestor("WhatsNew")
-local constantsModule = require(whatsNew.Constants)
-local _ = require(whatsNew.Types)
-local deriveResolvedFieldsModule = require(script.Parent.DeriveResolvedFields)
+﻿local WhatsNew = script:FindFirstAncestor("WhatsNew")
+local ConstantsModule = require(WhatsNew.Constants)
+local _ = require(WhatsNew.Types)
+local DeriveResolvedFieldsModule = require(script.Parent.DeriveResolvedFields)
 
-local function _(p1, p2, p3)
-	if p1 == nil then
+local function _(List, p1, p2) --[[ Line: 33 | Named "appendWarning" ]]
+	if List ~= nil then
+		table.insert(List, `{p1}:{p2}`)
+		
 		return
 	end
-	table.insert(p1, `{p2}:{p3}`)
 end
 
-local _ = function(p1, p2, p3, p4, p5)
+local _ = function(BuildContext, Deps, ScreenScopeId, TourType, Warnings) --[[ Line: 40 | Named "createBuildContext" ]]
 	return {
-		document = p1,
-		deps = p2,
-		screenScopeId = p3,
-		tourType = p4,
-		warnings = p5,
-		constants = p1.constants,
-		scopeTours = p1.scopeTours
+		document = BuildContext,
+		deps = Deps,
+		screenScopeId = ScreenScopeId,
+		tourType = TourType,
+		warnings = Warnings,
+		constants = BuildContext.constants,
+		scopeTours = BuildContext.scopeTours
 	}
 end
 
-local function filterEntriesInSubtree(p1, p2)
-	-- upvalues: deriveResolvedFieldsModule (ref)
-	local t = {}
+local function filterEntriesInSubtree(List, BuildContext) --[[ Line: 59 ]]
+	-- upvalues: DeriveResolvedFieldsModule (copy)
+	local List1 = {}
 	
-	for i, v in p1 do
-		if deriveResolvedFieldsModule.isEntryInScopeSubtree(v, p2.screenScopeId, p2.scopeTours) then
-			table.insert(t, v)
+	for _, value in List do
+		if DeriveResolvedFieldsModule.isEntryInScopeSubtree(value, BuildContext.screenScopeId, BuildContext.scopeTours) then
+			table.insert(List1, value)
 		end
 	end
-	return t
+	return List1
 end
 
-local function groupEntriesByScopeId(p3)
+local function groupEntriesByScopeId(List1) --[[ Line: 69 ]]
 	local t = {}
 	
-	for i, v in p3 do
-		local scopeId = t[v.scopeId]
+	for _, value in List1 do
+		local List = t[value.scopeId]
 		
-		if scopeId == nil then
-			scopeId = {}
-			t[v.scopeId] = scopeId
+		if List == nil then
+			List = {}
+			t[value.scopeId] = List
 		end
-		table.insert(scopeId, v)
+		table.insert(List, value)
 	end
 	return t
 end
 
-local function collectRelevantScopeIds(p4, p5, p6)
-	local t = { [p4] = true }
+local function collectRelevantScopeIds(ScreenScopeId, List, ScopeTours) --[[ Line: 82 ]]
+	local config = { [ScreenScopeId] = true }
 	
-	local function addAncestorChain(p7)
-		-- upvalues: t (ref), p4 (ref), p6 (ref)
-		local var1 = p7
-		while var1 ~= nil and not t[var1] do
-			t[var1] = true
+	local function addAncestorChain(ParentScopeId) --[[ Line: 91 ]]
+		-- upvalues: config (copy), ScreenScopeId (copy), ScopeTours (copy)
+		local ParentScopeId1 = ParentScopeId
+		while ParentScopeId1 ~= nil and not config[ParentScopeId1] do
+			config[ParentScopeId1] = true
 			
-			if var1 == p4 then break end
-			local var2 = p6[var1]
-			var1 = if var2 then var2.parentScopeId else nil
+			if ParentScopeId1 == ScreenScopeId then break end
+			local ScopeTour = ScopeTours[ParentScopeId1]
+			ParentScopeId1 = if ScopeTour then ScopeTour.parentScopeId else nil
 		end
 	end
 	
-	for i in p5 do
+	for i in List do
 		addAncestorChain(i)
 	end
-	local t_1 = {}
+	local List1 = {}
 	
-	for i_1 in t do
-		table.insert(t_1, i_1)
+	for i1 in config do
+		table.insert(List1, i1)
 	end
-	return t_1
+	return List1
 end
 
-local function buildEmptyScopeTree(p8, p9)
+local function buildEmptyScopeTree(Ids, ScopeTours) --[[ Line: 118 ]]
 	local t = {}
 	
-	for i, v in p8 do
-		local var3 = p9[v]
-		t[v] = {
-			id = v,
-			parentScopeId = if var3 then var3.parentScopeId else nil,
+	for _, id in Ids do
+		local ScopeTour = ScopeTours[id]
+		t[id] = {
+			id = id,
+			parentScopeId = if ScopeTour then ScopeTour.parentScopeId else nil,
 			tourTips = {}
 		}
 	end
 	return t
 end
 
-local _ = function(p10, p11)
-	if p10.globalRemaining < p11 then
+local _ = function(p1, p2): boolean --[[ Line: 134 | Named "tryConsumeSteps" ]]
+	if p1.globalRemaining < p2 then
 		return false
+	else
+		p1.globalRemaining -= p2
+		
+		return true
 	end
-	p10.globalRemaining -= p11
-	
-	return true
 end
 
-local _ = function(p10, p11, p12)
-	-- upvalues: constantsModule (ref)
-	if p10.truncated then return end
-	p10.truncated = true
-	local TOUR_TIPS_TRUNCATED = constantsModule.WarningCodes.TOUR_TIPS_TRUNCATED
+local _ = function(p1, List, p2) --[[ Line: 142 | Named "markTruncated" ]]
+	-- upvalues: ConstantsModule (copy)
+	if p1.truncated then return end
+	p1.truncated = true
+	local TOURTIPSTRUNCATED = ConstantsModule.WarningCodes.TOUR_TIPS_TRUNCATED
 	
-	if p11 == nil then
+	if List ~= nil then
+		table.insert(List, `{TOURTIPSTRUNCATED}:{p2}`)
+		
 		return
 	end
-	table.insert(p11, `{TOUR_TIPS_TRUNCATED}:{p12}`)
 end
 
-local function getScopePathFromScreen(p10, p11, p12)
-	local t = {}
-	local var4 = p10
-	while var4 ~= nil do
-		table.insert(t, 1, var4)
+local function getScopePathFromScreen(ParentScopeId, ScreenScopeId, ScopeTours) --[[ Line: 150 ]]
+	local List = {}
+	local ParentScopeId1 = ParentScopeId
+	while ParentScopeId1 ~= nil do
+		table.insert(List, 1, ParentScopeId1)
 		
-		if var4 == p11 then break end
-		local var5 = p12[var4]
-		var4 = if var5 then var5.parentScopeId else nil
+		if ParentScopeId1 == ScreenScopeId then break end
+		local ScopeTour = ScopeTours[ParentScopeId1]
+		ParentScopeId1 = if ScopeTour then ScopeTour.parentScopeId else nil
 	end
-	return t
+	return List
 end
 
-local function entryToTourTip(p13, p14)
+local function entryToTourTip(NestedGatewayTip, NestedGatewayTip1) --[[ Line: 169 ]]
 	return {
 		stepCount = 1,
-		id = p13.id,
-		scopeId = p13.scopeId,
-		title = p13.title,
-		text = p13.text,
-		icon = p13.icon,
-		enabled = p13.enabled,
-		publishedTime = p13.publishedTime,
-		disabledTime = p13.disabledTime,
-		expired = p13.expired,
-		seen = p13.seen,
-		optOutCount = p13.optOutCount,
-		adopted = p13.adopted,
-		toShow = p13.toShow,
-		anchorId = p14.anchorId,
-		side = p14.side,
-		align = p14.align
+		id = NestedGatewayTip.id,
+		scopeId = NestedGatewayTip.scopeId,
+		title = NestedGatewayTip.title,
+		text = NestedGatewayTip.text,
+		icon = NestedGatewayTip.icon,
+		enabled = NestedGatewayTip.enabled,
+		publishedTime = NestedGatewayTip.publishedTime,
+		disabledTime = NestedGatewayTip.disabledTime,
+		expired = NestedGatewayTip.expired,
+		seen = NestedGatewayTip.seen,
+		optOutCount = NestedGatewayTip.optOutCount,
+		adopted = NestedGatewayTip.adopted,
+		toShow = NestedGatewayTip.toShow,
+		anchorId = NestedGatewayTip1.anchorId,
+		side = NestedGatewayTip1.side,
+		align = NestedGatewayTip1.align
 	}
 end
 
-local function buildNestedGatewayTip(p13, p14, p15)
+local function buildNestedGatewayTip(NestedGatewayTip, Scope, NestedGatewayTip1) --[[ Line: 191 ]]
 	return {
 		icon = nil,
 		enabled = true,
@@ -157,177 +160,179 @@ local function buildNestedGatewayTip(p13, p14, p15)
 		adopted = false,
 		toShow = true,
 		stepCount = 1,
-		id = `gateway:{p13.id}`,
-		scopeId = p13.parentScopeId or p13.id,
-		title = p15.title,
-		text = p15.text,
-		anchorId = p13.anchorId or "",
-		side = p13.side,
-		align = p13.align,
+		id = `gateway:{NestedGatewayTip.id}`,
+		scopeId = NestedGatewayTip.parentScopeId or NestedGatewayTip.id,
+		title = NestedGatewayTip1.title,
+		text = NestedGatewayTip1.text,
+		anchorId = NestedGatewayTip.anchorId or "",
+		side = NestedGatewayTip.side,
+		align = NestedGatewayTip.align,
 		gateway = {
-			openActionKey = p13.openActionKey or "",
-			closeActionKey = p13.closeActionKey or "",
-			scope = p14
+			openActionKey = NestedGatewayTip.openActionKey or "",
+			closeActionKey = NestedGatewayTip.closeActionKey or "",
+			scope = Scope
 		}
 	}
 end
 
-local _ = function(p13, p14, p15, _, p16, p17)
-	-- upvalues: constantsModule (ref)
-	local var6
-	if p16.globalRemaining < 1 then
-		var6 = false
+local _ = function(p1, p2, p3, _, p4, BuildContext): boolean --[[ Line: 226 | Named "addPlainTipToScope" ]]
+	-- upvalues: ConstantsModule (copy)
+	local Flag = nil
+	if p4.globalRemaining < 1 then
+		Flag = false
 	else
-		p16.globalRemaining -= 1
-		var6 = true
+		p4.globalRemaining -= 1
+		Flag = true
 	end
-	if var6 then
-		table.insert(p15[p13].tourTips, p14)
+	if Flag then
+		table.insert(p3[p1].tourTips, p2)
 		
 		return true
 	end
-	local warnings = p17.warnings
-	local screenScopeId = p17.screenScopeId
+	local Warnings = BuildContext.warnings
+	local ScreenScopeId = BuildContext.screenScopeId
 	
-	if not p16.truncated then
-		p16.truncated = true
-		local TOUR_TIPS_TRUNCATED = constantsModule.WarningCodes.TOUR_TIPS_TRUNCATED
+	if not p4.truncated then
+		p4.truncated = true
+		local TOURTIPSTRUNCATED = ConstantsModule.WarningCodes.TOUR_TIPS_TRUNCATED
 		
-		if warnings ~= nil then
-			table.insert(warnings, `{TOUR_TIPS_TRUNCATED}:{screenScopeId}`)
+		if Warnings ~= nil then
+			table.insert(Warnings, `{TOURTIPSTRUNCATED}:{ScreenScopeId}`)
 		end
 	end
 	return false
 end
 
-local function ensureNestedGateway(p13, p14, p15, p16, p17, p18)
-	-- upvalues: constantsModule (ref), deriveResolvedFieldsModule (ref), buildNestedGatewayTip (ref)
-	if p16[p14] ~= nil then
+local function ensureNestedGateway(ParentScopeId, Key, p1, p2, p3, BuildContext): boolean --[[ Line: 243 ]]
+	-- upvalues: ConstantsModule (copy), DeriveResolvedFieldsModule (copy), buildNestedGatewayTip (copy)
+	if p2[Key] ~= nil then
 		return true
 	end
-	local var6
-	local var7 = p18.scopeTours[p14]
+	local ScopeTour = BuildContext.scopeTours[Key]
 	
-	if var7 == nil then
+	if ScopeTour == nil then
 		return false
-	elseif p17.globalRemaining < 1 then
-		var6 = false
-	else
-		p17.globalRemaining -= 1
-		var6 = true
 	end
-	if var6 then
-		local labels = deriveResolvedFieldsModule.getLabels(var7, p18.tourType)
+	local Flag = nil
+	if p3.globalRemaining < 1 then
+		Flag = false
+	else
+		p3.globalRemaining -= 1
+		Flag = true
+	end
+	if Flag then
+		local Labels = DeriveResolvedFieldsModule.getLabels(ScopeTour, BuildContext.tourType)
 		
-		if not deriveResolvedFieldsModule.hasLabels(labels) then
-			local warnings = p18.warnings
-			local GATEWAY_COPY_FALLBACK = constantsModule.WarningCodes.GATEWAY_COPY_FALLBACK
+		if not DeriveResolvedFieldsModule.hasLabels(Labels) then
+			local Warnings = BuildContext.warnings
+			local GATEWAYCOPYFALLBACK = ConstantsModule.WarningCodes.GATEWAY_COPY_FALLBACK
 			
-			if warnings ~= nil then
-				table.insert(warnings, `{GATEWAY_COPY_FALLBACK}:{p14}`)
+			if Warnings ~= nil then
+				table.insert(Warnings, `{GATEWAYCOPYFALLBACK}:{Key}`)
 			end
 		end
-		local var8 = buildNestedGatewayTip(var7, p15[p14], labels)
-		table.insert(p15[p13].tourTips, var8)
-		p16[p14] = { parentScopeId = p13, tip = var8 }
+		local NestedGatewayTip = buildNestedGatewayTip(ScopeTour, p1[Key], Labels)
+		table.insert(p1[ParentScopeId].tourTips, NestedGatewayTip)
+		p2[Key] = { parentScopeId = ParentScopeId, tip = NestedGatewayTip }
 		
 		return true
 	else
-		local warnings = p18.warnings
-		local screenScopeId = p18.screenScopeId
+		local Warnings = BuildContext.warnings
+		local ScreenScopeId = BuildContext.screenScopeId
 		
-		if not p17.truncated then
-			p17.truncated = true
-			local TOUR_TIPS_TRUNCATED = constantsModule.WarningCodes.TOUR_TIPS_TRUNCATED
+		if not p3.truncated then
+			p3.truncated = true
+			local TOURTIPSTRUNCATED = ConstantsModule.WarningCodes.TOUR_TIPS_TRUNCATED
 			
-			if warnings ~= nil then
-				table.insert(warnings, `{TOUR_TIPS_TRUNCATED}:{screenScopeId}`)
+			if Warnings ~= nil then
+				table.insert(Warnings, `{TOURTIPSTRUNCATED}:{ScreenScopeId}`)
 			end
 		end
 		return false
 	end
 end
 
-local function ensureScopeChainForEntry(p13, p14, p15, p16, p17)
-	-- upvalues: getScopePathFromScreen (ref), ensureNestedGateway (ref)
-	local var6 = getScopePathFromScreen(p13, p17.screenScopeId, p17.scopeTours)
+local function ensureScopeChainForEntry(ScopeId, p1, p2, p3, BuildContext): boolean --[[ Line: 280 ]]
+	-- upvalues: getScopePathFromScreen (copy), ensureNestedGateway (copy)
+	local ScopePathFromScreen = getScopePathFromScreen(ScopeId, BuildContext.screenScopeId, BuildContext.scopeTours)
 	
-	for i = 1, #var6 - 1 do
-		if ensureNestedGateway(var6[i], var6[i + 1], p14, p15, p16, p17) then
-			continue
+	for i = 1, #ScopePathFromScreen - 1 do
+		if not ensureNestedGateway(ScopePathFromScreen[i], ScopePathFromScreen[i + 1], p1, p2, p3, BuildContext) then
+			return false
 		end
-		return false
 	end
 	return true
 end
 
-local function buildScopeTourForScreen(p18, p19)
-	-- upvalues: filterEntriesInSubtree (ref), groupEntriesByScopeId (ref), collectRelevantScopeIds (ref), buildEmptyScopeTree (ref), deriveResolvedFieldsModule (ref), ensureScopeChainForEntry (ref), entryToTourTip (ref), constantsModule (ref)
-	local screenScopeId = p18.scopeTours[p18.screenScopeId]
-	local var7 = if screenScopeId then screenScopeId.parentScopeId else nil
-	local maxTourTips = p18.constants.maxTourTips
-	local var8 = filterEntriesInSubtree(p19, p18)
-	local var9 = buildEmptyScopeTree(collectRelevantScopeIds(p18.screenScopeId, groupEntriesByScopeId(var8), p18.scopeTours), p18.scopeTours)
-	local t = { truncated = false, globalRemaining = maxTourTips }
-	local t_1 = {}
+local function buildScopeTourForScreen(BuildContext, p4) --[[ Line: 298 ]]
+	-- upvalues: filterEntriesInSubtree (copy), groupEntriesByScopeId (copy), collectRelevantScopeIds (copy), buildEmptyScopeTree (copy), DeriveResolvedFieldsModule (copy), ensureScopeChainForEntry (copy), entryToTourTip (copy), ConstantsModule (copy)
+	local ScopeTour = BuildContext.scopeTours[BuildContext.screenScopeId]
+	local ParentScopeId = if ScopeTour then ScopeTour.parentScopeId else nil
+	local MaxTourTips = BuildContext.constants.maxTourTips
+	local FilterEntriesInSubtreeResult = filterEntriesInSubtree(p4, BuildContext)
+	local EmptyScopeTree = buildEmptyScopeTree(collectRelevantScopeIds(BuildContext.screenScopeId, groupEntriesByScopeId(FilterEntriesInSubtreeResult), BuildContext.scopeTours), BuildContext.scopeTours)
+	local config = { truncated = false, globalRemaining = MaxTourTips }
+	local t = {}
 	
-	for i, v in var8 do
-		local var10 = deriveResolvedFieldsModule.deriveEntryDisplay(v, p18.tourType, p18.deps)
+	for _, value in FilterEntriesInSubtreeResult do
+		local DeriveEntryDisplayResult = DeriveResolvedFieldsModule.deriveEntryDisplay(value, BuildContext.tourType, BuildContext.deps)
 		
-		if var10.toShow and ensureScopeChainForEntry(v.scopeId, var9, t_1, t, p18) then
-			local warnings
-			local var11 = entryToTourTip(var10, v)
-			local scopeId = v.scopeId
+		if DeriveEntryDisplayResult.toShow and ensureScopeChainForEntry(value.scopeId, EmptyScopeTree, t, config, BuildContext) then
+			local EntryToTourTipResult = entryToTourTip(DeriveEntryDisplayResult, value)
+			local ScopeId = value.scopeId
+			local Flag = nil
 			
-			if t.globalRemaining < 1 then
-				warnings = false
+			if config.globalRemaining < 1 then
+				Flag = false
 			else
-				t.globalRemaining -= 1
-				warnings = true
+				config.globalRemaining -= 1
+				Flag = true
 			end
-			if warnings then
-				table.insert(var9[scopeId].tourTips, var11)
+			if Flag then
+				table.insert(EmptyScopeTree[ScopeId].tourTips, EntryToTourTipResult)
 			else
-				warnings = p18.warnings
-				local screenScopeId_1 = p18.screenScopeId
+				local Warnings = BuildContext.warnings
+				local ScreenScopeId = BuildContext.screenScopeId
+				local Truncated = config.truncated
+				local TOURTIPSTRUNCATED = nil
 				
-				if not t.truncated then
-					t.truncated = true
-					local TOUR_TIPS_TRUNCATED = constantsModule.WarningCodes.TOUR_TIPS_TRUNCATED
-					
-					if warnings ~= nil then
-						table.insert(warnings, `{TOUR_TIPS_TRUNCATED}:{screenScopeId_1}`)
-					end
+				if not Truncated then
+					config.truncated = true
+					TOURTIPSTRUNCATED = ConstantsModule.WarningCodes.TOUR_TIPS_TRUNCATED
+					Truncated = Warnings == nil
+				end
+				if not Truncated then
+					table.insert(Warnings, `{TOURTIPSTRUNCATED}:{ScreenScopeId}`)
 				end
 			end
 		end
 	end
-	local screenScopeId_1 = var9[p18.screenScopeId]
+	local EmptyScopeTreeEntry = EmptyScopeTree[BuildContext.screenScopeId]
 	
-	return if screenScopeId_1 == nil then {
+	return if EmptyScopeTreeEntry == nil then {
 		truncated = false,
 		globalTotalSteps = 0,
 		scope = {
-			id = p18.screenScopeId,
-			parentScopeId = var7,
+			id = BuildContext.screenScopeId,
+			parentScopeId = ParentScopeId,
 			tourTips = {}
 		}
 	} else {
-		scope = screenScopeId_1,
-		truncated = t.truncated,
-		globalTotalSteps = deriveResolvedFieldsModule.countScopeSteps(screenScopeId_1)
+		scope = EmptyScopeTreeEntry,
+		truncated = config.truncated,
+		globalTotalSteps = DeriveResolvedFieldsModule.countScopeSteps(EmptyScopeTreeEntry)
 	}
 end
 
-return function(p20, p21, p22, p23, p24, p25)
-	-- upvalues: buildScopeTourForScreen (ref)
-	return buildScopeTourForScreen({
-		document = p20,
-		deps = p21,
-		screenScopeId = p22,
-		tourType = p23,
-		warnings = p25,
-		constants = p20.constants,
-		scopeTours = p20.scopeTours
-	}, p24)
+return function(BuildContext, Deps, ScreenScopeId, TourType, p5, Warnings) --[[ Line: 350 | Named "buildTourTips" ]]
+	-- upvalues: buildScopeTourForScreen (copy)
+	return (buildScopeTourForScreen({
+		document = BuildContext,
+		deps = Deps,
+		screenScopeId = ScreenScopeId,
+		tourType = TourType,
+		warnings = Warnings,
+		constants = BuildContext.constants,
+		scopeTours = BuildContext.scopeTours
+	}, p5))
 end

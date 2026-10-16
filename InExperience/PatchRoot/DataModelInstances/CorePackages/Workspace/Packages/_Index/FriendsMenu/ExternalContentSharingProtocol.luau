@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Workspace.ExternalContentSharingProtocol.ExternalContentSharingProtocol)
+﻿return (require(script.Parent.Parent.Parent._Workspace.ExternalContentSharingProtocol.ExternalContentSharingProtocol))

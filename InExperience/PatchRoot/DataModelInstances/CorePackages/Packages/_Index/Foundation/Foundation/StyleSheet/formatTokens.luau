@@ -1,124 +1,124 @@
-﻿local colorScopeKeepPrefixModule = require(script.Parent.colorScopeKeepPrefix)
+﻿local ColorScopeKeepPrefixModule = require(script.Parent.colorScopeKeepPrefix)
 local _ = require(script:FindFirstAncestor("Foundation").Providers.Style.Tokens)
 local _ = require(script.Parent.Rules.Types)
 
-local function pascalToKebab(p1)
-	local replaced = string.gsub(p1:gsub("_", "-"), "(%u)", function(p2)
-		return "-" .. p1:lower()
+local function pascalToKebab(Text: string): string --[[ Line: 10 ]]
+	local Replaced = string.gsub(Text:gsub("_", "-"), "(%u)", function(Match: string): string --[[ Line: 15 ]]
+		return "-" .. Match:lower()
 	end)
 	
-	if replaced:sub(1, 1) == "-" then
-		replaced = replaced:sub(2, #replaced)
+	if Replaced:sub(1, 1) == "-" then
+		Replaced = Replaced:sub(2, #Replaced)
 	end
-	return replaced
+	return Replaced
 end
 
-return function(p1)
-	-- upvalues: pascalToKebab (ref), colorScopeKeepPrefixModule (ref)
-	local t = {}
-	local t_1 = {}
-	local t_2 = {}
-	local t_3 = {}
-	local t_4 = {}
-	local t_5 = {}
-	local t_6 = {}
-	local t_7 = {}
-	local t_8 = {}
-	local t_9 = {}
-	local t_10 = {
-		colors = t,
-		variants = t_1,
-		strokes = t_2,
-		gaps = t_3,
-		radii = t_4,
-		sizes = t_5,
-		typography = t_6,
-		paddings = t_7,
-		margins = t_8,
-		gutters = t_9
+return function(p1) --[[ Line: 28 | Named "formatTokens" ]]
+	-- upvalues: pascalToKebab (copy), ColorScopeKeepPrefixModule (copy)
+	local Colors = {}
+	local Variants = {}
+	local List = {}
+	local List1 = {}
+	local List2 = {}
+	local List3 = {}
+	local Typography = {}
+	local List4 = {}
+	local List5 = {}
+	local List6 = {}
+	local config = {
+		colors = Colors,
+		variants = Variants,
+		strokes = List,
+		gaps = List1,
+		radii = List2,
+		sizes = List3,
+		typography = Typography,
+		paddings = List4,
+		margins = List5,
+		gutters = List6
 	}
 	
 	if p1 == nil or next(p1) == nil then
-		return t_10
+		return config
 	end
-	for i, v in pairs(p1.Color) do
-		if v.Background then
-			t_1[pascalToKebab(i)] = v
-		else
-			t[i] = {}
-			
-			for i_1, v_1 in v do
-				t[i][pascalToKebab(if colorScopeKeepPrefixModule[i] then i .. i_1 else i_1)] = v_1
+	for i, value in pairs(p1.Color) do
+		if value.Background then
+			Variants[pascalToKebab(i)] = value
+			continue
+		end
+		Colors[i] = {}
+		
+		for i1, value1 in value do
+			Colors[i][pascalToKebab(if ColorScopeKeepPrefixModule[i] then i .. i1 else i1)] = value1
+		end
+	end
+	for i2, value2 in pairs(p1.Inverse) do
+		if i2 == "Content" then
+			for i3, value3 in value2 do
+				Colors[i2][`inverse-{pascalToKebab(if ColorScopeKeepPrefixModule[i2] then i2 .. i3 else i3)}`] = value3
 			end
 		end
 	end
-	for i_1, v_1 in pairs(p1.Inverse) do
-		if i_1 == "Content" then
-			for i_2, v_2 in v_1 do
-				t[i_1][`inverse-{pascalToKebab(if colorScopeKeepPrefixModule[i_1] then i_1 .. i_2 else i_2)}`] = v_2
-			end
-		end
+	for i4, Size in pairs(p1.Stroke) do
+		table.insert(List, { name = pascalToKebab(i4), size = Size })
 	end
-	for i_2, v_2 in pairs(p1.Stroke) do
-		table.insert(t_2, { name = pascalToKebab(i_2), size = v_2 })
-	end
-	table.insert(t_2, { name = "none", size = 0 })
-	table.sort(t_2, function(p2, p3)
-		return p2.size < p3.size
+	table.insert(List, { name = "none", size = 0 })
+	table.sort(List, function(A, B): boolean --[[ Line: 86 ]]
+		return A.size < B.size
 	end)
 	
-	for i_3, v_3 in pairs(p1.Gap) do
-		table.insert(t_3, { name = string.lower(i_3), size = UDim.new(0, v_3) })
+	for i6, value5 in pairs(p1.Gap) do
+		table.insert(List1, { name = string.lower(i6), size = UDim.new(0, value5) })
 	end
-	table.sort(t_3, function(p2, p3)
-		return p2.size.Offset < p3.size.Offset
+	table.sort(List1, function(A, B): boolean --[[ Line: 94 ]]
+		return A.size.Offset < B.size.Offset
 	end)
 	
-	for i_4, v_4 in pairs(p1.Radius) do
-		table.insert(t_4, { name = string.lower(i_4), size = UDim.new(0, v_4) })
+	for i7, value6 in pairs(p1.Radius) do
+		table.insert(List2, { name = string.lower(i7), size = UDim.new(0, value6) })
 	end
-	table.sort(t_4, function(p2, p3)
-		return p2.size.Offset < p3.size.Offset
+	table.sort(List2, function(A, B): boolean --[[ Line: 102 ]]
+		return A.size.Offset < B.size.Offset
 	end)
 	
-	for i_5, v_5 in pairs(p1.Size) do
-		table.insert(t_5, {
-			name = pascalToKebab(string.split(i_5, "_")[2]),
-			size = UDim.new(0, v_5)
+	for i9, value8 in pairs(p1.Size) do
+		table.insert(List3, {
+			name = pascalToKebab(string.split(i9, "_")[2]),
+			size = UDim.new(0, value8)
 		})
 	end
-	table.insert(t_5, { name = "full", size = UDim.new(1, 0) })
-	table.sort(t_5, function(p2, p3)
-		return p2.size.Offset < p3.size.Offset
+	table.insert(List3, { name = "full", size = UDim.new(1, 0) })
+	table.sort(List3, function(A, B): boolean --[[ Line: 114 ]]
+		return A.size.Offset < B.size.Offset
 	end)
 	
-	for i_6, v_6 in pairs(p1.Typography) do
-		t_6[pascalToKebab(i_6)] = {
-			Font = v_6.Font,
-			TextSize = v_6.FontSize,
-			LineHeight = v_6.LineHeight
+	for i5, value4 in pairs(p1.Typography) do
+		Typography[pascalToKebab(i5)] = {
+			Font = value4.Font,
+			TextSize = value4.FontSize,
+			LineHeight = value4.LineHeight
 		}
 	end
-	for i_7, v_7 in pairs(p1.Padding) do
-		table.insert(t_7, { name = string.lower(i_7), size = UDim.new(0, v_7) })
+	for i10, value9 in pairs(p1.Padding) do
+		table.insert(List4, { name = string.lower(i10), size = UDim.new(0, value9) })
 	end
-	table.sort(t_7, function(p2, p3)
-		return p2.size.Offset < p3.size.Offset
+	table.sort(List4, function(A, B): boolean --[[ Line: 130 ]]
+		return A.size.Offset < B.size.Offset
 	end)
 	
-	for i_8, v_8 in pairs(p1.Margin) do
-		table.insert(t_8, { name = string.lower(i_8), size = UDim.new(0, v_8) })
+	for i8, value7 in pairs(p1.Margin) do
+		table.insert(List5, { name = string.lower(i8), size = UDim.new(0, value7) })
 	end
-	table.sort(t_8, function(p2, p3)
-		return p2.size.Offset < p3.size.Offset
+	table.sort(List5, function(A, B): boolean --[[ Line: 138 ]]
+		return A.size.Offset < B.size.Offset
 	end)
 	
-	for i_9, v_9 in pairs(p1.Gutter) do
-		table.insert(t_9, { name = string.lower(i_9), size = UDim.new(0, v_9) })
+	for i11, value10 in pairs(p1.Gutter) do
+		table.insert(List6, { name = string.lower(i11), size = UDim.new(0, value10) })
 	end
-	table.sort(t_9, function(p2, p3)
-		return p2.size.Offset < p3.size.Offset
+	table.sort(List6, function(A, B): boolean --[[ Line: 146 ]]
+		return A.size.Offset < B.size.Offset
 	end)
 	
-	return t_10
+	return config
 end

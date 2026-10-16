@@ -1,47 +1,46 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
-local roactModule = require(parent_1.Roact)
-local colorMode = require(parent_1.Foundation).Enums.ColorMode
-local fadeControllerModule = require(parent.FadeController)
-local adLabelModule = require(parent.AdLabel)
-local circularButtonModule = require(parent.CircularButton)
-local livePreviewWatermarkModule = require(parent.LivePreviewWatermark)
-local flagsModule = require(script.Parent.Flags)
-local sharedFlagsModule = require(parent_1.SharedFlags)
-local UIBloxModule = require(parent_1.UIBlox)
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local appStyleProvider = UIBloxModule.App.Style.AppStyleProvider
-local images = UIBloxModule.App.ImageSet.Images
-local speakerMute = images["icons/controls/speakerMute"]
-local speaker = images["icons/controls/speaker"]
-local previewExpand = images["icons/actions/previewExpand"]
-local previewShrink = images["icons/actions/previewShrink"]
-local var1 = images["icons/controls/media-play-large"]
-local var2 = images["icons/controls/media-pause-large"]
-local close = images["icons/navigation/close"]
-local circle42Stroke3 = images["component_assets/circle_42_stroke_3"]
-local fFlagEnableReportAdDropdown = flagsModule.GetFFlagEnableReportAdDropdown()
-local enableHideReportAdModalDuringScreenshot = flagsModule.GetEnableHideReportAdModalDuringScreenshot()
-local fFlagFixReportAdInfoDuringRotation = flagsModule.FFlagFixReportAdInfoDuringRotation
-local fFlagInExperienceUseAppStyleProvider = sharedFlagsModule.FFlagInExperienceUseAppStyleProvider
-local var3 = if fFlagFixReportAdInfoDuringRotation then require(parent_1.ArgCheck) else nil
-local var4 = if fFlagEnableReportAdDropdown then require(parent.ReportAdPopup) else nil
-local var5 = if fFlagEnableReportAdDropdown then require(parent.AdDropdownMenu) else nil
-local adsInteractivityTelemetryModule = require(parent.AdsInteractivityTelemetry)
-local adsInteractivityControls = roactModule.PureComponent:extend("AdsInteractivityControls")
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
+local RoactModule = require(Parent1.Roact)
+local ColorMode = require(Parent1.Foundation).Enums.ColorMode
+local FadeControllerModule = require(Parent.FadeController)
+local AdLabelModule = require(Parent.AdLabel)
+local CircularButtonModule = require(Parent.CircularButton)
+local LivePreviewWatermarkModule = require(Parent.LivePreviewWatermark)
+local FlagsModule = require(script.Parent.Flags)
+local UIBloxModule = require(Parent1.UIBlox)
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local AppStyleProvider = UIBloxModule.App.Style.AppStyleProvider
+local Images = UIBloxModule.App.ImageSet.Images
+local IconsControlsSpeakerMute = Images["icons/controls/speakerMute"]
+local IconsControlsSpeaker = Images["icons/controls/speaker"]
+local IconsActionsPreviewExpand = Images["icons/actions/previewExpand"]
+local IconsActionsPreviewShrink = Images["icons/actions/previewShrink"]
+local IconsControlsMediaPlayLarge = Images["icons/controls/media-play-large"]
+local IconsControlsMediaPauseLarge = Images["icons/controls/media-pause-large"]
+local IconsNavigationClose = Images["icons/navigation/close"]
+local ComponentAssetsCircle42Stroke3 = Images["component_assets/circle_42_stroke_3"]
+local FFlagEnableReportAdDropdown = FlagsModule.GetFFlagEnableReportAdDropdown()
+local EnableHideReportAdModalDuringScreenshot = FlagsModule.GetEnableHideReportAdModalDuringScreenshot()
+local FFlagFixReportAdInfoDuringRotation = FlagsModule.FFlagFixReportAdInfoDuringRotation
+local FFlagInExperienceUseAppStyleProvider = require(Parent1.SharedFlags).FFlagInExperienceUseAppStyleProvider
+local ArgCheckModule = if FFlagFixReportAdInfoDuringRotation then require(Parent1.ArgCheck) else nil
+local ReportAdPopupModule = if FFlagEnableReportAdDropdown then require(Parent.ReportAdPopup) else nil
+local AdDropdownMenuModule = if FFlagEnableReportAdDropdown then require(Parent.AdDropdownMenu) else nil
+local AdsInteractivityTelemetryModule = require(Parent.AdsInteractivityTelemetry)
+local AdsInteractivityControls = RoactModule.PureComponent:extend("AdsInteractivityControls")
 
-local function _(p1)
+local function _(p1: number): number --[[ Line: 47 | Named "opacityToTransparency" ]]
 	return 1 - p1
 end
 
-local adGuiInteractivityPixelsPerStud = flagsModule.GetAdGuiInteractivityPixelsPerStud()
+local AdGuiInteractivityPixelsPerStud = FlagsModule.GetAdGuiInteractivityPixelsPerStud()
 
-local _ = function(p1)
+local _ = function(p1) --[[ Line: 54 | Named "getAdornee" ]]
 	return if p1 == nil then nil elseif p1.Adornee == nil then if p1.Parent == nil or not p1.Parent:IsA("BasePart") then nil else p1.Parent else p1.Adornee
 end
 
-function adsInteractivityControls.init(p1)
-	-- upvalues: fadeControllerModule (ref), roactModule (ref)
+function AdsInteractivityControls.init(p1) --[[ Line: 69 ]]
+	-- upvalues: FadeControllerModule (copy), RoactModule (copy)
 	if game:GetEngineFeature("DeprecateCpv15") then
 		p1.state = {
 			isViewable = false,
@@ -68,134 +67,127 @@ function adsInteractivityControls.init(p1)
 			adGuiRectStuds = Vector2.new(0, 0)
 		}
 	end
-	local function onAdorneeChanged()
-		-- upvalues: p1 (ref)
-		local t = {}
-		local adGui = p1.props.adGui
-		t.adornee = if adGui == nil then nil elseif adGui.Adornee ~= nil then if adGui.Parent == nil or not adGui.Parent:IsA("BasePart") then nil else adGui.Parent else adGui.Adornee
-		p1:setState(t)
+	local function onAdorneeChanged() --[[ Line: 97 ]]
+		-- upvalues: p1 (copy)
+		local AdGui = p1.props.adGui
+		p1:setState({
+			adornee = if AdGui == nil then nil elseif AdGui.Adornee == nil then if AdGui.Parent == nil or not AdGui.Parent:IsA("BasePart") then nil else AdGui.Parent else AdGui.Adornee
+		})
 	end
 	
 	p1.signalConnections = {
 		p1.props.adGui:GetPropertyChangedSignal("Adornee"):Connect(onAdorneeChanged),
 		p1.props.adGui:GetPropertyChangedSignal("Parent"):Connect(onAdorneeChanged)
 	}
-	p1.props.adGui.adGuiStateChanged:Connect(function(p2)
-		-- upvalues: p1 (ref)
-		p1:setState(p2)
+	p1.props.adGui.adGuiStateChanged:Connect(function(AdUIState) --[[ Line: 108 ]]
+		-- upvalues: p1 (copy)
+		p1:setState(AdUIState)
 	end)
-	p1.fadeController = fadeControllerModule.new()
-	local var6, var7 = roactModule.createBinding(1)
-	p1.controlsOpacity = var6
-	p1.updateControlsOpacity = var7
-	p1.fadeController:subscribe(function(p2)
-		-- upvalues: p1 (ref)
+	p1.fadeController = FadeControllerModule.new()
+	p1.controlsOpacity, p1.updateControlsOpacity = RoactModule.createBinding(1)
+	p1.fadeController:subscribe(function(p2) --[[ Line: 115 ]]
+		-- upvalues: p1 (copy)
 		p1.updateControlsOpacity(p2)
 	end)
 	p1.props.adGui:forwardStateToLuaUI()
 end
 
-function adsInteractivityControls.willUnmount(p1)
-	for i, v in ipairs(p1.signalConnections) do
-		v:Disconnect()
+function AdsInteractivityControls.willUnmount(p1) --[[ Line: 122 ]]
+	for _, signalConnection in ipairs(p1.signalConnections) do
+		signalConnection:Disconnect()
 	end
 end
 
-function adsInteractivityControls.render(p2)
-	-- upvalues: var2 (ref), var1 (ref), speaker (ref), speakerMute (ref), previewShrink (ref), previewExpand (ref), roactModule (ref), fFlagEnableReportAdDropdown (ref), adGuiInteractivityPixelsPerStud (ref), adsInteractivityTelemetryModule (ref), var4 (ref), enableHideReportAdModalDuringScreenshot (ref), fFlagFixReportAdInfoDuringRotation (ref), var3 (write), var5 (ref), adLabelModule (ref), circularButtonModule (ref), close (ref), imageSetLabel (ref), circle42Stroke3 (ref), livePreviewWatermarkModule (ref)
+function AdsInteractivityControls.render(p2) --[[ Line: 128 ]]
+	-- upvalues: IconsControlsMediaPauseLarge (copy), IconsControlsMediaPlayLarge (copy), IconsControlsSpeaker (copy), IconsControlsSpeakerMute (copy), IconsActionsPreviewShrink (copy), IconsActionsPreviewExpand (copy), RoactModule (copy), FFlagEnableReportAdDropdown (copy), AdGuiInteractivityPixelsPerStud (copy), AdsInteractivityTelemetryModule (copy), ReportAdPopupModule (copy), EnableHideReportAdModalDuringScreenshot (copy), FFlagFixReportAdInfoDuringRotation (copy), ArgCheckModule (ref), AdDropdownMenuModule (copy), AdLabelModule (copy), CircularButtonModule (copy), IconsNavigationClose (copy), ImageSetLabel (copy), ComponentAssetsCircle42Stroke3 (copy), LivePreviewWatermarkModule (copy)
 	if not p2.props.adGui then
 		return nil
 	end
-	local var6 = p2.state.adUIType == Enum.AdUIType.Video
-	local var7 = p2.state.adUIType == Enum.AdUIType.None
-	local var8 = nil
+	local IsAdUITypeMatch = p2.state.adUIType == Enum.AdUIType.Video
+	local IsAdUITypeMatch1 = p2.state.adUIType == Enum.AdUIType.None
+	local IconsControlsMediaPlayLarge1 = nil
 	
 	if game:GetEngineFeature("DeprecateCpv15") then
-		if var6 and p2.state.isFullscreen then
-			var8 = if p2.state.videoPlaying then var2 else var1
+		if IsAdUITypeMatch and p2.state.isFullscreen then
+			IconsControlsMediaPlayLarge1 = if p2.state.videoPlaying then IconsControlsMediaPauseLarge else IconsControlsMediaPlayLarge
 		end
-	elseif var6 then
+	elseif IsAdUITypeMatch then
 		if p2.state.isFullscreen and not p2.state.videoPlaying or p2.state.isClickToPlay and not p2.state.isFullscreen then
-			var8 = var1
+			IconsControlsMediaPlayLarge1 = IconsControlsMediaPlayLarge
 		elseif p2.state.isFullscreen and p2.state.videoPlaying then
-			var8 = var2
+			IconsControlsMediaPlayLarge1 = IconsControlsMediaPauseLarge
 		end
 	end
-	local isFullscreen = var6 and p2.state.isFullscreen
-	local _ = nil
-	local var9 = if game:GetEngineFeature("DeprecateCpv15") then var6 and (not p2.state.isFullscreen and p2.state.videoPlaying) else var6 and (not p2.state.isFullscreen and (not p2.state.isClickToPlay and p2.state.videoPlaying))
-	local var10 = if p2.state.volumeEnabled then speaker else speakerMute
-	local var11 = if p2.state.isFullscreen then previewShrink else previewExpand
-	local vector2 = Vector2.new(0.10038949275, 0.17847020934)
+	local IsFullscreen = IsAdUITypeMatch and p2.state.isFullscreen
+	local VideoPlaying = if game:GetEngineFeature("DeprecateCpv15") then IsAdUITypeMatch and (not p2.state.isFullscreen and p2.state.videoPlaying) else IsAdUITypeMatch and (not p2.state.isFullscreen and (not p2.state.isClickToPlay and p2.state.videoPlaying))
+	local IconsControlsSpeaker1 = p2.state.volumeEnabled and IconsControlsSpeaker or IconsControlsSpeakerMute
+	local IconsActionsPreviewShrink1 = p2.state.isFullscreen and IconsActionsPreviewShrink or IconsActionsPreviewExpand
+	local _Vector2 = Vector2.new(0.10038949275, 0.17847020934)
 	
 	if not p2.state.isFullscreen then
-		vector2 *= 1.5
+		_Vector2 *= 1.5
 	end
-	local var12 = if not p2.state.isViewable then false else p2.controlsOpacity:map(function(p3)
-		-- upvalues: var8 (write), var1 (copy)
-		return var8 == var1 or (var8 ~= nil and (p3 and p3 > 0))
+	local MapResult = p2.controlsOpacity:map(function(p3: number): number --[[ Line: 185 ]]
+		-- upvalues: IconsControlsMediaPlayLarge1 (ref), IconsControlsMediaPlayLarge (upval)
+		return if IconsControlsMediaPlayLarge1 == IconsControlsMediaPlayLarge then 0.19999999999999996 else 1 - p3 * 0.8
 	end)
-	local var13 = p2.controlsOpacity:map(function(p3)
-		-- upvalues: var8 (write), var1 (copy)
-		return if var8 == var1 then 0.2 else 1 - p3 * 0.8
-	end)
-	local createElement = roactModule.createElement
-	local var14 = "SurfaceGui"
-	local t = {
+	local AdGui = p2.props.adGui
+	
+	return RoactModule.createElement("SurfaceGui", {
 		ZOffset = 1,
 		LightInfluence = 0,
 		Brightness = 2,
-		ZIndexBehavior = if fFlagEnableReportAdDropdown then Enum.ZIndexBehavior.Sibling else Enum.ZIndexBehavior.Global,
+		ZIndexBehavior = if FFlagEnableReportAdDropdown then Enum.ZIndexBehavior.Sibling else Enum.ZIndexBehavior.Global,
 		SizingMode = Enum.SurfaceGuiSizingMode.PixelsPerStud,
-		PixelsPerStud = adGuiInteractivityPixelsPerStud
-	}
-	local adGui = p2.props.adGui
-	t.Adornee = if adGui == nil then nil elseif adGui.Adornee ~= nil then if adGui.Parent == nil or not adGui.Parent:IsA("BasePart") then nil else adGui.Parent else adGui.Adornee
-	t.Face = p2.props.adGui.Face
-	t.AlwaysOnTop = p2.state.isFullscreen
-	local t_1 = {
-		InteractiveArea = adGui("TextButton", {
-			Size = UDim2.fromOffset(p2.state.adGuiRectStuds.X * adGuiInteractivityPixelsPerStud, p2.state.adGuiRectStuds.Y * adGuiInteractivityPixelsPerStud),
+		PixelsPerStud = AdGuiInteractivityPixelsPerStud,
+		Adornee = if AdGui == nil then nil elseif AdGui.Adornee == nil then if AdGui.Parent == nil or not AdGui.Parent:IsA("BasePart") then nil else AdGui.Parent else AdGui.Adornee,
+		Face = p2.props.adGui.Face,
+		AlwaysOnTop = p2.state.isFullscreen
+	}, {
+		InteractiveArea = RoactModule.createElement("TextButton", {
+			Size = UDim2.fromOffset(p2.state.adGuiRectStuds.X * AdGuiInteractivityPixelsPerStud, p2.state.adGuiRectStuds.Y * AdGuiInteractivityPixelsPerStud),
 			Position = UDim2.new(0.5, 0, 0.5, 0),
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			BackgroundColor3 = Color3.new(0, 0, 0),
-			BackgroundTransparency = p2.controlsOpacity:map(function(p3)
-				-- upvalues: var8 (write), var1 (copy)
-				return if var8 == var1 then 0.7 else 1 - p3 * 0.3
+			BackgroundTransparency = p2.controlsOpacity:map(function(p3: number): number --[[ Line: 212 ]]
+				-- upvalues: IconsControlsMediaPlayLarge1 (ref), IconsControlsMediaPlayLarge (upval)
+				return if IconsControlsMediaPlayLarge1 == IconsControlsMediaPlayLarge then 0.7 else 1 - p3 * 0.3
 			end),
 			Text = "",
-			[roactModule.Event.MouseMoved] = function(_, _)
-				-- upvalues: var6 (ref), p2 (ref)
-				if var6 and p2.state.isFullscreen then
+			[RoactModule.Event.MouseMoved] = function(_, _) --[[ Line: 221 ]]
+				-- upvalues: IsAdUITypeMatch (copy), p2 (copy)
+				if IsAdUITypeMatch and p2.state.isFullscreen then
 					p2.fadeController:updateLastInputTime()
 				end
 			end,
-			[roactModule.Event.Activated] = function(_, p3)
-				-- upvalues: fFlagEnableReportAdDropdown (copy), p2 (ref), adsInteractivityTelemetryModule (copy), var6 (ref)
-				if fFlagEnableReportAdDropdown and p2.state.isDropDownOpen then
+			[RoactModule.Event.Activated] = function(_, Input) --[[ Line: 226 ]]
+				-- upvalues: FFlagEnableReportAdDropdown (upval), p2 (copy), AdsInteractivityTelemetryModule (upval), IsAdUITypeMatch (copy)
+				if FFlagEnableReportAdDropdown and p2.state.isDropDownOpen then
 					p2:setState({ isDropDownOpen = false })
 					p2.props.adGui:HandleLuaUIEvent(Enum.AdUIEventType.PlayEventTriggered)
 					p2.props.adGui:HandleLuaUIEvent(Enum.AdUIEventType.PlayButtonClicked)
-					adsInteractivityTelemetryModule.logAdMenuEvent("close")
+					AdsInteractivityTelemetryModule.logAdMenuEvent("close")
 					
 					return
-				elseif var6 then
+				end
+				if IsAdUITypeMatch then
 					if p2.state.isFullscreen then
-						if p2.state.videoPlaying then
-							if p3.UserInputType ~= Enum.UserInputType.Touch then
-								p2.props.adGui:HandleLuaUIEvent(Enum.AdUIEventType.PauseButtonClicked)
-								
-								return
-							elseif p2.fadeController:inProgress() and not p2.fadeController:isFading() then
-								p2.fadeController:skipToFade()
-								
-								return
-							end
-							p2.fadeController:updateLastInputTime()
+						if not p2.state.videoPlaying then
+							p2.props.adGui:HandleLuaUIEvent(Enum.AdUIEventType.PlayButtonClicked)
+						elseif Input.UserInputType ~= Enum.UserInputType.Touch then
+							p2.props.adGui:HandleLuaUIEvent(Enum.AdUIEventType.PauseButtonClicked)
 							
 							return
 						else
-							p2.props.adGui:HandleLuaUIEvent(Enum.AdUIEventType.PlayButtonClicked)
+							if p2.fadeController:inProgress() and not p2.fadeController:isFading() then
+								p2.fadeController:skipToFade()
+								
+								return
+							else
+								p2.fadeController:updateLastInputTime()
+								
+								return
+							end
 						end
 					elseif p2.state.isViewable then
 						p2.props.adGui:HandleLuaUIEvent(Enum.AdUIEventType.FullscreenButtonClicked)
@@ -205,42 +197,42 @@ function adsInteractivityControls.render(p2)
 				end
 			end
 		}, {
-			AbuseReportingModal = fFlagEnableReportAdDropdown and (var4 and (p2.state.isReportAdPopupOpen and (roactModule.createElement(var4, {
+			AbuseReportingModal = FFlagEnableReportAdDropdown and ReportAdPopupModule and p2.state.isReportAdPopupOpen and RoactModule.createElement(ReportAdPopupModule, {
 				showReportAdPopup = p2.state.isReportAdPopupOpen,
-				onClose = function()
-					-- upvalues: p2 (ref)
+				onClose = function() --[[ Line: 264 ]]
+					-- upvalues: p2 (copy)
 					p2:setState({ isReportAdPopupOpen = false })
 				end,
-				onOpen = if enableHideReportAdModalDuringScreenshot then function()
-					-- upvalues: p2 (ref), adsInteractivityTelemetryModule (copy)
+				onOpen = if EnableHideReportAdModalDuringScreenshot then function() --[[ Line: 270 ]]
+					-- upvalues: p2 (copy), AdsInteractivityTelemetryModule (upval)
 					p2:setState({ isReportAdPopupOpen = true })
-					adsInteractivityTelemetryModule.logReportAdEvent("open")
+					AdsInteractivityTelemetryModule.logReportAdEvent("open")
 				end else nil,
-				adInfo = if fFlagFixReportAdInfoDuringRotation then var3.isNotNil(p2.state.reportAdInfo, "reportAdInfo") or p2.props.adGui:GetSingleReportAdInfo() else p2.props.adGui:GetSingleReportAdInfo()
-			}) or nil))),
-			AdDropdownMenu = if fFlagEnableReportAdDropdown and var5 then roactModule.createElement(var5, {
+				adInfo = FFlagFixReportAdInfoDuringRotation and ArgCheckModule.isNotNil(p2.state.reportAdInfo, "reportAdInfo") or p2.props.adGui:GetSingleReportAdInfo()
+			}) or nil,
+			AdDropdownMenu = if FFlagEnableReportAdDropdown and AdDropdownMenuModule then RoactModule.createElement(AdDropdownMenuModule, {
 				showDropDownMenu = p2.state.isDropDownOpen,
-				onWhyThisAdActivated = function()
-					-- upvalues: p2 (ref), adsInteractivityTelemetryModule (copy)
+				onWhyThisAdActivated = function() --[[ Line: 287 ]]
+					-- upvalues: p2 (copy), AdsInteractivityTelemetryModule (upval)
 					p2.props.adGui:HandleLuaUIEvent(Enum.AdUIEventType.WhyThisAdClicked)
-					adsInteractivityTelemetryModule.logWhyThisAdEvent()
+					AdsInteractivityTelemetryModule.logWhyThisAdEvent()
 				end,
-				onReportAdActivated = function()
-					-- upvalues: p2 (ref)
+				onReportAdActivated = function() --[[ Line: 292 ]]
+					-- upvalues: p2 (copy)
 					p2:setState({ isReportAdPopupOpen = true })
 				end,
-				transparency = 0.2
+				transparency = 0.19999999999999996
 			}) else nil,
-			AdLabel = roactModule.createElement(adLabelModule, {
-				onActivated = if fFlagEnableReportAdDropdown then function()
-					-- upvalues: fFlagFixReportAdInfoDuringRotation (copy), p2 (ref), adsInteractivityTelemetryModule (copy)
-					if fFlagFixReportAdInfoDuringRotation then
-						local t = { isDropDownOpen = not p2.state.isDropDownOpen }
+			AdLabel = RoactModule.createElement(AdLabelModule, {
+				onActivated = if FFlagEnableReportAdDropdown then function() --[[ Line: 302 ]]
+					-- upvalues: FFlagFixReportAdInfoDuringRotation (upval), p2 (copy), AdsInteractivityTelemetryModule (upval)
+					if FFlagFixReportAdInfoDuringRotation then
+						local config = { isDropDownOpen = not p2.state.isDropDownOpen }
 						
 						if not p2.state.isDropDownOpen then
-							t.reportAdInfo = p2.props.adGui:GetSingleReportAdInfo()
+							config.reportAdInfo = p2.props.adGui:GetSingleReportAdInfo()
 						end
-						p2:setState(t)
+						p2:setState(config)
 					else
 						p2:setState({ isDropDownOpen = not p2.state.isDropDownOpen })
 					end
@@ -251,130 +243,137 @@ function adsInteractivityControls.render(p2)
 						p2.props.adGui:HandleLuaUIEvent(Enum.AdUIEventType.PauseEventTriggered)
 						p2.props.adGui:HandleLuaUIEvent(Enum.AdUIEventType.PauseButtonClicked)
 					end
-					adsInteractivityTelemetryModule.logAdMenuEvent(if p2.state.isDropDownOpen then "open" else "close")
-				end else function()
-					-- upvalues: p2 (ref)
+					AdsInteractivityTelemetryModule.logAdMenuEvent(if p2.state.isDropDownOpen then "open" else "close")
+				end else function() --[[ Line: 326 ]]
+					-- upvalues: p2 (copy)
 					p2.props.adGui:HandleLuaUIEvent(Enum.AdUIEventType.AdLabelClicked)
 				end,
 				isMenuOpen = p2.state.isDropDownOpen,
-				Visible = not var7
+				Visible = not IsAdUITypeMatch1
 			}),
-			CloseButton = roactModule.createElement(circularButtonModule, {
+			CloseButton = RoactModule.createElement(CircularButtonModule, {
 				HorizontalScale = 0.06884057971,
 				Position = UDim2.fromScale(0.995, 0.005),
 				AnchorPoint = Vector2.new(1, 0),
 				ImageSize = UDim2.fromScale(0.8, 0.8),
-				Image = close,
-				Visible = isFullscreen,
-				Transparency = var13,
-				AutoButtonColor = if fFlagEnableReportAdDropdown and p2.state.isDropDownOpen then false else true,
-				onActivated = function()
-					-- upvalues: fFlagEnableReportAdDropdown (copy), p2 (ref), adsInteractivityTelemetryModule (copy)
-					if fFlagEnableReportAdDropdown and p2.state.isDropDownOpen then
+				Image = IconsNavigationClose,
+				Visible = IsFullscreen,
+				Transparency = MapResult,
+				AutoButtonColor = not FFlagEnableReportAdDropdown or not p2.state.isDropDownOpen,
+				onActivated = function() --[[ Line: 341 ]]
+					-- upvalues: FFlagEnableReportAdDropdown (upval), p2 (copy), AdsInteractivityTelemetryModule (upval)
+					if FFlagEnableReportAdDropdown and p2.state.isDropDownOpen then
 						p2:setState({ isDropDownOpen = false })
 						p2.props.adGui:HandleLuaUIEvent(Enum.AdUIEventType.PlayEventTriggered)
 						p2.props.adGui:HandleLuaUIEvent(Enum.AdUIEventType.PlayButtonClicked)
-						adsInteractivityTelemetryModule.logAdMenuEvent("close")
+						AdsInteractivityTelemetryModule.logAdMenuEvent("close")
 						
 						return
+					else
+						p2.props.adGui:HandleLuaUIEvent(Enum.AdUIEventType.CloseButtonClicked)
 					end
-					p2.props.adGui:HandleLuaUIEvent(Enum.AdUIEventType.CloseButtonClicked)
 				end
 			}),
-			PlayPauseButton = roactModule.createElement("ImageButton", {
+			PlayPauseButton = RoactModule.createElement("ImageButton", {
 				BackgroundTransparency = 1,
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Position = UDim2.fromScale(0.5, 0.5),
-				Size = UDim2.fromScale(vector2.X, vector2.Y),
-				Visible = var12,
-				AutoButtonColor = if fFlagEnableReportAdDropdown and p2.state.isDropDownOpen then false else true,
-				[roactModule.Event.Activated] = function()
-					-- upvalues: fFlagEnableReportAdDropdown (copy), p2 (ref), adsInteractivityTelemetryModule (copy), var8 (write), var1 (copy), var2 (copy)
-					if fFlagEnableReportAdDropdown and p2.state.isDropDownOpen then
+				Size = UDim2.fromScale(_Vector2.X, _Vector2.Y),
+				Visible = if p2.state.isViewable then p2.controlsOpacity:map(function(p3: number): boolean --[[ Line: 174 ]]
+					-- upvalues: IconsControlsMediaPlayLarge1 (ref), IconsControlsMediaPlayLarge (upval)
+					return IconsControlsMediaPlayLarge1 == IconsControlsMediaPlayLarge or IconsControlsMediaPlayLarge1 ~= nil and (p3 and p3 > 0)
+				end) else false,
+				AutoButtonColor = not FFlagEnableReportAdDropdown or not p2.state.isDropDownOpen,
+				[RoactModule.Event.Activated] = function() --[[ Line: 362 ]]
+					-- upvalues: FFlagEnableReportAdDropdown (upval), p2 (copy), AdsInteractivityTelemetryModule (upval), IconsControlsMediaPlayLarge1 (ref), IconsControlsMediaPlayLarge (upval), IconsControlsMediaPauseLarge (upval)
+					if FFlagEnableReportAdDropdown and p2.state.isDropDownOpen then
 						p2:setState({ isDropDownOpen = false })
 						p2.props.adGui:HandleLuaUIEvent(Enum.AdUIEventType.PlayEventTriggered)
 						p2.props.adGui:HandleLuaUIEvent(Enum.AdUIEventType.PlayButtonClicked)
-						adsInteractivityTelemetryModule.logAdMenuEvent("close")
+						AdsInteractivityTelemetryModule.logAdMenuEvent("close")
 						
 						return
-					elseif var8 == var1 then
+					end
+					if IconsControlsMediaPlayLarge1 == IconsControlsMediaPlayLarge then
 						p2.props.adGui:HandleLuaUIEvent(Enum.AdUIEventType.PlayButtonClicked)
 						
 						return
-					elseif var8 == var2 then
+					end
+					if IconsControlsMediaPlayLarge1 == IconsControlsMediaPauseLarge then
 						p2.props.adGui:HandleLuaUIEvent(Enum.AdUIEventType.PauseButtonClicked)
 					end
 				end
 			}, {
-				circle = roactModule.createElement(imageSetLabel, {
+				circle = RoactModule.createElement(ImageSetLabel, {
 					BackgroundTransparency = 1,
-					Image = circle42Stroke3,
+					Image = ComponentAssetsCircle42Stroke3,
 					Size = UDim2.fromScale(1, 1),
 					Position = UDim2.fromScale(0.5, 0.5),
 					AnchorPoint = Vector2.new(0.5, 0.5),
-					ImageTransparency = var13
+					ImageTransparency = MapResult
 				}),
-				icon = roactModule.createElement(imageSetLabel, {
+				icon = RoactModule.createElement(ImageSetLabel, {
 					BackgroundTransparency = 1,
-					Image = var8,
+					Image = IconsControlsMediaPlayLarge1,
 					Size = UDim2.fromScale(0.6, 0.6),
 					Position = UDim2.fromScale(0.5, 0.5),
 					AnchorPoint = Vector2.new(0.5, 0.5),
-					ImageTransparency = var13
+					ImageTransparency = MapResult
 				})
 			}),
-			VolumeButton = roactModule.createElement(circularButtonModule, {
+			VolumeButton = RoactModule.createElement(CircularButtonModule, {
 				HorizontalScale = 0.12,
-				Visible = var9,
+				Visible = VideoPlaying,
 				Position = UDim2.fromScale(0.075, 0.75),
-				Image = var10,
+				Image = IconsControlsSpeaker1,
 				ImageSize = UDim2.fromScale(0.8, 0.8),
-				AutoButtonColor = if fFlagEnableReportAdDropdown and p2.state.isDropDownOpen then false else true,
-				onActivated = function()
-					-- upvalues: fFlagEnableReportAdDropdown (copy), p2 (ref), adsInteractivityTelemetryModule (copy)
-					if fFlagEnableReportAdDropdown and p2.state.isDropDownOpen then
+				AutoButtonColor = not FFlagEnableReportAdDropdown or not p2.state.isDropDownOpen,
+				onActivated = function() --[[ Line: 404 ]]
+					-- upvalues: FFlagEnableReportAdDropdown (upval), p2 (copy), AdsInteractivityTelemetryModule (upval)
+					if FFlagEnableReportAdDropdown and p2.state.isDropDownOpen then
 						p2:setState({ isDropDownOpen = false })
 						p2.props.adGui:HandleLuaUIEvent(Enum.AdUIEventType.PlayEventTriggered)
-						adsInteractivityTelemetryModule.logAdMenuEvent("close")
+						AdsInteractivityTelemetryModule.logAdMenuEvent("close")
 						
 						return
+					else
+						p2.props.adGui:HandleLuaUIEvent(Enum.AdUIEventType.VolumeButtonClicked)
 					end
-					p2.props.adGui:HandleLuaUIEvent(Enum.AdUIEventType.VolumeButtonClicked)
 				end,
-				Transparency = 0.2
+				Transparency = 0.19999999999999996
 			}),
-			FullscreenButton = roactModule.createElement(circularButtonModule, {
+			FullscreenButton = RoactModule.createElement(CircularButtonModule, {
 				HorizontalScale = 0.12,
-				Visible = var9,
+				Visible = VideoPlaying,
 				Position = UDim2.fromScale(0.87625, 0.75),
 				AnchorPoint = Vector2.new(1, 0),
-				Image = var11,
+				Image = IconsActionsPreviewShrink1,
 				ImageSize = UDim2.fromScale(0.7, 0.7),
-				AutoButtonColor = if fFlagEnableReportAdDropdown and p2.state.isDropDownOpen then false else true,
-				onActivated = function()
-					-- upvalues: fFlagEnableReportAdDropdown (copy), p2 (ref), adsInteractivityTelemetryModule (copy)
-					if fFlagEnableReportAdDropdown and p2.state.isDropDownOpen then
+				AutoButtonColor = not FFlagEnableReportAdDropdown or not p2.state.isDropDownOpen,
+				onActivated = function() --[[ Line: 426 ]]
+					-- upvalues: FFlagEnableReportAdDropdown (upval), p2 (copy), AdsInteractivityTelemetryModule (upval)
+					if FFlagEnableReportAdDropdown and p2.state.isDropDownOpen then
 						p2:setState({ isDropDownOpen = false })
 						p2.props.adGui:HandleLuaUIEvent(Enum.AdUIEventType.PlayEventTriggered)
-						adsInteractivityTelemetryModule.logAdMenuEvent("close")
+						AdsInteractivityTelemetryModule.logAdMenuEvent("close")
 						
 						return
+					else
+						p2.props.adGui:HandleLuaUIEvent(Enum.AdUIEventType.FullscreenButtonClicked)
 					end
-					p2.props.adGui:HandleLuaUIEvent(Enum.AdUIEventType.FullscreenButtonClicked)
 				end,
-				Transparency = 0.2
+				Transparency = 0.19999999999999996
 			}),
-			LivePreviewWatermark = roactModule.createElement(livePreviewWatermarkModule, { IsVisible = not p2.state.hideLivePreviewWatermark } or nil) or nil
+			LivePreviewWatermark = RoactModule.createElement(LivePreviewWatermarkModule, { IsVisible = not p2.state.hideLivePreviewWatermark } or nil) or nil
 		})
-	}
-	adGui = roactModule.createElement
-	
-	return createElement(var14, t, t_1)
+	})
 end
 
-return if fFlagInExperienceUseAppStyleProvider then function(p2)
-	-- upvalues: roactModule (ref), appStyleProvider (ref), colorMode (ref), adsInteractivityControls (ref)
-	return roactModule.createElement(appStyleProvider, { style = { themeName = colorMode.Dark } }, {
-		AdsInteractivityControls = roactModule.createElement(adsInteractivityControls, p2)
+local function AdsInteractivityFunctionalWrapper(p2) --[[ Line: 448 ]]
+	-- upvalues: RoactModule (copy), AppStyleProvider (copy), ColorMode (copy), AdsInteractivityControls (copy)
+	return RoactModule.createElement(AppStyleProvider, { style = { themeName = ColorMode.Dark } }, {
+		AdsInteractivityControls = RoactModule.createElement(AdsInteractivityControls, p2)
 	})
-end else adsInteractivityControls
+end
+
+return if FFlagInExperienceUseAppStyleProvider then AdsInteractivityFunctionalWrapper else AdsInteractivityControls

@@ -1,1 +1,1 @@
-﻿return table.freeze({ Start = "start", End = "end" })
+﻿return (table.freeze({ Start = "start", End = "end" }))

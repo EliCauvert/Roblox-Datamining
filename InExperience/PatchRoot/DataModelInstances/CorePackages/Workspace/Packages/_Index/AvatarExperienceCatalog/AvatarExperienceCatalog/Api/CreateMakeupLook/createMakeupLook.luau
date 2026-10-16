@@ -1,11 +1,11 @@
-﻿local httpService = game:GetService("HttpService")
-local parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
-local url = require(parent.Http).Url
-local _ = require(parent.LuauPolyfill)
+﻿local HttpService = game:GetService("HttpService")
+local Parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
+local Url = require(Parent.Http).Url
+local _ = require(Parent.LuauPolyfill)
 
-return function(p1, p2)
-	-- upvalues: url (ref), httpService (ref)
-	local var1, var2 = p1(`{url.AVATAR_URL}v3/outfits/create`, "POST", { postBody = httpService:JSONEncode(p2) })
+return function(Callback, Input) --[[ Line: 37 | Named "createMakeupLook" ]]
+	-- upvalues: Url (copy), HttpService (copy)
+	local POST, POST2 = Callback(`{Url.AVATAR_URL}v3/outfits/create`, "POST", { postBody = HttpService:JSONEncode(Input) })
 	
-	return var1, var2
+	return POST, POST2
 end

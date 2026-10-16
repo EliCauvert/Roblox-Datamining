@@ -1,67 +1,67 @@
-﻿local foundation = game:GetService("CorePackages").Packages._Index.Foundation.Foundation
-local reactModule = require(foundation.Parent.React)
-local components = foundation.Components
-local inputFieldModule = require(components.InputField)
-local _ = require(foundation.Components.Types)
-local composerTextInputModule = require(script.Parent.ComposerTextInput)
-local useTextInputVariantsModule = require(components.TextInput.useTextInputVariants)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local t = {
+﻿local Foundation = game:GetService("CorePackages").Packages._Index.Foundation.Foundation
+local ReactModule = require(Foundation.Parent.React)
+local Components = Foundation.Components
+local InputFieldModule = require(Components.InputField)
+local _ = require(Foundation.Components.Types)
+local ComposerTextInputModule = require(script.Parent.ComposerTextInput)
+local UseTextInputVariantsModule = require(Components.TextInput.useTextInputVariants)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local config = {
 	minLines = 1,
 	maxLines = 5,
 	testId = "--app-blox-composer",
-	size = require(foundation.Enums.InputSize).Large
+	size = require(Foundation.Enums.InputSize).Large
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useTextInputVariantsModule (ref), reactModule (ref), inputFieldModule (ref), withCommonPropsModule (ref), composerTextInputModule (ref)
-	local var1 = withDefaultsModule(p1, t)
-	local var2 = useTokensModule()
-	local var3 = useTextInputVariantsModule(var2, var1.size, var1.variant)
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 41 | Named "Composer" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UseTextInputVariantsModule (copy), ReactModule (copy), InputFieldModule (copy), WithCommonPropsModule (copy), ComposerTextInputModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	local UseTokensModuleResult = UseTokensModule()
+	local UseTextInputVariantsModuleResult = UseTextInputVariantsModule(UseTokensModuleResult, WithDefaultsModuleResult.size, WithDefaultsModuleResult.variant)
 	
-	return reactModule.createElement(inputFieldModule, withCommonPropsModule(var1, {
-		width = if var1.width then var1.width else nil,
-		label = var1.label,
-		hint = var1.hint,
-		hasError = var1.hasError,
-		isDisabled = var1.leadingElement == nil and var1.trailingElement == nil and var1.isDisabled,
-		isRequired = var1.isRequired,
-		input = function(p3)
-			-- upvalues: reactModule (copy), composerTextInputModule (copy), var1 (ref), var2 (ref), var3 (ref)
-			return reactModule.createElement(composerTextInputModule, {
+	return ReactModule.createElement(InputFieldModule, WithCommonPropsModule(WithDefaultsModuleResult, {
+		width = if WithDefaultsModuleResult.width then WithDefaultsModuleResult.width else nil,
+		label = WithDefaultsModuleResult.label,
+		hint = WithDefaultsModuleResult.hint,
+		hasError = WithDefaultsModuleResult.hasError,
+		isDisabled = WithDefaultsModuleResult.leadingElement == nil and WithDefaultsModuleResult.trailingElement == nil and WithDefaultsModuleResult.isDisabled,
+		isRequired = WithDefaultsModuleResult.isRequired,
+		input = function(Ref) --[[ Line: 58 ]]
+			-- upvalues: ReactModule (upval), ComposerTextInputModule (upval), WithDefaultsModuleResult (copy), UseTokensModuleResult (copy), UseTextInputVariantsModuleResult (copy)
+			return ReactModule.createElement(ComposerTextInputModule, {
 				alwaysMultiLine = true,
 				manualFocusRelease = true,
 				textPaddingOnParent = true,
 				LayoutOrder = 2,
-				size = var1.size,
-				variant = var1.variant,
-				minLines = var1.minLines,
-				maxLines = var1.maxLines,
-				trailingAlignBottom = var1.trailingElement ~= nil,
-				composerDebug = var1.composerDebug,
-				focusBehavior = var1.focusBehavior,
-				onFocus = var1.onFocusGained,
-				onFocusLost = var1.onFocusLost,
-				onReturnPressed = var1.onReturnPressed,
-				onChanged = var1.onChanged,
-				text = var1.text,
-				hasError = var1.hasError,
-				isDisabled = var1.isDisabled,
-				hasClearButton = var1.hasClearButton,
-				placeholder = var1.placeholder,
+				size = WithDefaultsModuleResult.size,
+				variant = WithDefaultsModuleResult.variant,
+				minLines = WithDefaultsModuleResult.minLines,
+				maxLines = WithDefaultsModuleResult.maxLines,
+				trailingAlignBottom = WithDefaultsModuleResult.trailingElement ~= nil,
+				composerDebug = WithDefaultsModuleResult.composerDebug,
+				focusBehavior = WithDefaultsModuleResult.focusBehavior,
+				onFocus = WithDefaultsModuleResult.onFocusGained,
+				onFocusLost = WithDefaultsModuleResult.onFocusLost,
+				onReturnPressed = WithDefaultsModuleResult.onReturnPressed,
+				onChanged = WithDefaultsModuleResult.onChanged,
+				text = WithDefaultsModuleResult.text,
+				hasError = WithDefaultsModuleResult.hasError,
+				isDisabled = WithDefaultsModuleResult.isDisabled,
+				hasClearButton = WithDefaultsModuleResult.hasClearButton,
+				placeholder = WithDefaultsModuleResult.placeholder,
 				horizontalPadding = {
-					left = if var1.leadingElement then UDim.new(0, var2.Padding.XSmall) else UDim.new(0, var2.Padding.Large),
-					right = if var1.trailingElement then UDim.new(0, var2.Padding.XSmall) else var3.container.horizontalPadding
+					left = if WithDefaultsModuleResult.leadingElement then UDim.new(0, UseTokensModuleResult.Padding.XSmall) else UDim.new(0, UseTokensModuleResult.Padding.Large),
+					right = if WithDefaultsModuleResult.trailingElement then UDim.new(0, UseTokensModuleResult.Padding.XSmall) else UseTextInputVariantsModuleResult.container.horizontalPadding
 				},
-				leadingElement = var1.leadingElement,
-				trailingElement = var1.trailingElement,
-				ref = p3,
-				testId = `{var1.testId}--input`
+				leadingElement = WithDefaultsModuleResult.leadingElement,
+				trailingElement = WithDefaultsModuleResult.trailingElement,
+				ref = Ref,
+				testId = `{WithDefaultsModuleResult.testId}--input`
 			})
 		end,
-		textBoxRef = var1.textBoxRef,
-		ref = p2
+		textBoxRef = WithDefaultsModuleResult.textBoxRef,
+		ref = Ref
 	}))
 end))

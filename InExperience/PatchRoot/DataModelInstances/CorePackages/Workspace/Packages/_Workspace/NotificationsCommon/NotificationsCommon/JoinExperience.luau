@@ -1,23 +1,24 @@
-﻿local parent = script.Parent.Parent
-local default = require(parent.LinkingProtocol).LinkingProtocol.default
-local isSubjectToDesktopPolicies = require(parent.SharedFlags).isSubjectToDesktopPolicies
+﻿local Parent = script.Parent.Parent
+local Default = require(Parent.LinkingProtocol).LinkingProtocol.default
+local IsSubjectToDesktopPoliciesFunction = require(Parent.SharedFlags).isSubjectToDesktopPolicies
 
-return function(p1, p2)
-	-- upvalues: isSubjectToDesktopPolicies (ref), default (ref)
-	return pcall(function()
-		-- upvalues: p2 (ref), isSubjectToDesktopPolicies (copy), default (copy), p1 (ref)
-		if p2 and not isSubjectToDesktopPolicies() then
+return function(p1, p2) --[[ Line: 10 ]]
+	-- upvalues: IsSubjectToDesktopPoliciesFunction (copy), Default (copy)
+	return pcall(function() --[[ Line: 11 ]]
+		-- upvalues: p2 (copy), IsSubjectToDesktopPoliciesFunction (upval), Default (upval), p1 (copy)
+		if p2 and not IsSubjectToDesktopPoliciesFunction() then
 			game:Shutdown()
 		end
-		default:isURLRegistered(p1):andThen(function(p3)
-			-- upvalues: default (copy), p1 (copy), p2 (copy)
-			if p3 then
-				default:detectURL(p1)
+		Default:isURLRegistered(p1):andThen(function(Result) --[[ Line: 15 ]]
+			-- upvalues: Default (upval), p1 (upval), p2 (upval)
+			if Result then
+				Default:detectURL(p1)
 				
 				return
-			elseif p2 then
+			end
+			if p2 then
 				game:Shutdown()
-				default:detectURL(p1)
+				Default:detectURL(p1)
 			end
 		end)
 	end)

@@ -1,51 +1,51 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local view = foundationModule.View
-local iconName = foundationModule.Enums.IconName
-local agentDetailMenuModule = require(script.Parent.AgentDetailMenu)
-local buildOverflowMenuButtonModule = require(script.Parent.BuildOverflowMenuButton)
-local stopPlaytestButtonModule = require(script.Parent.StopPlaytestButton)
-local getBuildOverflowMenuStoreModule = require(buildExperience.Stores.GetBuildOverflowMenuStore)
-local _ = require(buildExperience.Stores.GetBuildOverflowMenuStore.createBuildOverflowMenuStore)
-local publishStatusModule = require(buildExperience.Chat.PublishStatus)
-local leaveExperienceModule = require(buildExperience.utils.leaveExperience)
-local fFlagBuildExperienceRemoveAgentTaskUiModule = require(buildExperience.Flags.FFlagBuildExperienceRemoveAgentTaskUi)
-local fFlagBuildExperienceMenuImprovementsModule = require(buildExperience.Flags.FFlagBuildExperienceMenuImprovements)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local View = FoundationModule.View
+local IconName = FoundationModule.Enums.IconName
+local AgentDetailMenuModule = require(script.Parent.AgentDetailMenu)
+local BuildOverflowMenuButtonModule = require(script.Parent.BuildOverflowMenuButton)
+local StopPlaytestButtonModule = require(script.Parent.StopPlaytestButton)
+local GetBuildOverflowMenuStoreModule = require(BuildExperience.Stores.GetBuildOverflowMenuStore)
+local _ = require(BuildExperience.Stores.GetBuildOverflowMenuStore.createBuildOverflowMenuStore)
+local PublishStatusModule = require(BuildExperience.Chat.PublishStatus)
+local LeaveExperienceModule = require(BuildExperience.utils.leaveExperience)
+local FFlagBuildExperienceRemoveAgentTaskUiModule = require(BuildExperience.Flags.FFlagBuildExperienceRemoveAgentTaskUi)
+local FFlagBuildExperienceMenuImprovementsModule = require(BuildExperience.Flags.FFlagBuildExperienceMenuImprovements)
 
-return function(p1)
-	-- upvalues: getBuildOverflowMenuStoreModule (ref), publishStatusModule (ref), reactModule (ref), view (ref), fFlagBuildExperienceMenuImprovementsModule (ref), stopPlaytestButtonModule (ref), leaveExperienceModule (ref), fFlagBuildExperienceRemoveAgentTaskUiModule (ref), agentDetailMenuModule (ref), buildOverflowMenuButtonModule (ref), iconName (ref)
-	local var1 = publishStatusModule.usePublishStatus(p1.target)
+return function(p1) --[[ Line: 54 | Named "BuildPillMenu" ]]
+	-- upvalues: GetBuildOverflowMenuStoreModule (copy), PublishStatusModule (copy), ReactModule (copy), View (copy), FFlagBuildExperienceMenuImprovementsModule (copy), StopPlaytestButtonModule (copy), LeaveExperienceModule (copy), FFlagBuildExperienceRemoveAgentTaskUiModule (copy), AgentDetailMenuModule (copy), BuildOverflowMenuButtonModule (copy), IconName (copy)
+	local UsePublishStatusResult = PublishStatusModule.usePublishStatus(p1.target)
 	
-	return reactModule.createElement(reactModule.Fragment, nil, {
-		Pill = reactModule.createElement(view, {
+	return ReactModule.createElement(ReactModule.Fragment, nil, {
+		Pill = ReactModule.createElement(View, {
 			tag = "row align-y-center gap-xsmall size-0-1100 auto-x padding-x-xsmall radius-circle clip bg-over-media-0",
 			Position = p1.position,
 			AnchorPoint = p1.anchorPoint,
 			LayoutOrder = p1.layoutOrder,
 			testId = p1.testId
 		}, {
-			StopPlaytest = if fFlagBuildExperienceMenuImprovementsModule then reactModule.createElement(stopPlaytestButtonModule, {
+			StopPlaytest = if FFlagBuildExperienceMenuImprovementsModule then ReactModule.createElement(StopPlaytestButtonModule, {
 				layoutOrder = 0,
-				onActivated = function()
-					-- upvalues: leaveExperienceModule (copy)
-					leaveExperienceModule()
+				onActivated = function() --[[ Line: 101 ]]
+					-- upvalues: LeaveExperienceModule (upval)
+					LeaveExperienceModule()
 				end
 			}) else nil,
-			AgentDetail = if not fFlagBuildExperienceRemoveAgentTaskUiModule then reactModule.createElement(agentDetailMenuModule, {
+			AgentDetail = if FFlagBuildExperienceRemoveAgentTaskUiModule then nil else ReactModule.createElement(AgentDetailMenuModule, {
 				layoutOrder = 1,
-				onActivated = p1.onOpenAgentsPage or function() end
-			}) else nil,
-			Overflow = reactModule.createElement(buildOverflowMenuButtonModule, {
+				onActivated = p1.onOpenAgentsPage or function() --[[ Line: 109 ]] end
+			}),
+			Overflow = ReactModule.createElement(BuildOverflowMenuButtonModule, {
 				layoutOrder = 3,
-				icon = iconName.ThreeDotsHorizontal,
-				store = p1.store or getBuildOverflowMenuStoreModule(),
+				icon = IconName.ThreeDotsHorizontal,
+				store = p1.store or GetBuildOverflowMenuStoreModule(),
 				target = p1.target,
-				hasPublishedTurn = var1.hasPublishedTurn,
-				hasPublishedVersion = var1.hasPublishedVersion,
-				onAction = reactModule.useCallback(function(p2)
-					-- upvalues: p1 (ref)
+				hasPublishedTurn = UsePublishStatusResult.hasPublishedTurn,
+				hasPublishedVersion = UsePublishStatusResult.hasPublishedVersion,
+				onAction = ReactModule.useCallback(function(p2) --[[ Line: 59 ]]
+					-- upvalues: p1 (copy)
 					if p2.type == "openPage" then
 						if p1.onOpenPage then
 							p1.onOpenPage(p2.page)

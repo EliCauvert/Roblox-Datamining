@@ -1,20 +1,20 @@
-﻿local promiseModule = require(script:FindFirstAncestor("AppChat").Parent.Promise)
-local t = {}
-t.__index = t
+﻿local PromiseModule = require(script:FindFirstAncestor("AppChat").Parent.Promise)
+local SendMessagePolicyModule = {}
+SendMessagePolicyModule.__index = SendMessagePolicyModule
 
-function t.onBeforeSendingMessage(_, _) end
+function SendMessagePolicyModule:onBeforeSendingMessage(_) --[[ Line: 9 ]] end
 
-function t.sendMessage(_, _)
-	-- upvalues: promiseModule (ref)
-	return promiseModule.reject("Not implemented")
+function SendMessagePolicyModule:sendMessage(_) --[[ Line: 11 ]]
+	-- upvalues: PromiseModule (copy)
+	return PromiseModule.reject("Not implemented")
 end
 
-function t.onSuccess(_, _, p1)
+function SendMessagePolicyModule:onSuccess(_, p1) --[[ Line: 15 ]]
 	return p1
 end
 
-function t.onFailure(_, _, p1)
+function SendMessagePolicyModule:onFailure(_, p1) --[[ Line: 19 ]]
 	return p1
 end
 
-return t
+return SendMessagePolicyModule

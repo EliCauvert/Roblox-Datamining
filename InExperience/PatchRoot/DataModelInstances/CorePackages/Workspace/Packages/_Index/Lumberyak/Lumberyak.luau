@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CorePackages").Packages.Lumberyak)
+﻿return (require(game:GetService("CorePackages").Packages.Lumberyak))

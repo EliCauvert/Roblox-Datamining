@@ -1,13 +1,13 @@
-﻿local avatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
-local profileRefreshSignal = require(avatarExperienceProfilePictureEditor.Parent.ProfilePlatformCommon).Signals.ProfileRefreshSignal
-local userAvatarConfigurationsCacheModule = require(avatarExperienceProfilePictureEditor.Api.userAvatarConfigurationsCache)
-local saveCloseupAndFullBody = require(avatarExperienceProfilePictureEditor.Shared.savePPEConfig).saveCloseupAndFullBody
+﻿local AvatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
+local ProfileRefreshSignal = require(AvatarExperienceProfilePictureEditor.Parent.ProfilePlatformCommon).Signals.ProfileRefreshSignal
+local UserAvatarConfigurationsCacheModule = require(AvatarExperienceProfilePictureEditor.Api.userAvatarConfigurationsCache)
+local SaveCloseupAndFullBodyFunction = require(AvatarExperienceProfilePictureEditor.Shared.savePPEConfig).saveCloseupAndFullBody
 
-return function(p1)
-	-- upvalues: saveCloseupAndFullBody (ref), userAvatarConfigurationsCacheModule (ref), profileRefreshSignal (ref)
-	local ok, status = pcall(function()
-		-- upvalues: saveCloseupAndFullBody (copy), p1 (ref)
-		return saveCloseupAndFullBody({
+return function(p1): boolean --[[ Line: 25 | Named "saveEditProfileImage" ]]
+	-- upvalues: SaveCloseupAndFullBodyFunction (copy), UserAvatarConfigurationsCacheModule (copy), ProfileRefreshSignal (copy)
+	local Success, Result = pcall(function() --[[ Line: 26 ]]
+		-- upvalues: SaveCloseupAndFullBodyFunction (upval), p1 (copy)
+		return SaveCloseupAndFullBodyFunction({
 			emoteAssetId = p1.emoteAssetId,
 			cameraDistanceScale = p1.cameraDistanceScale,
 			cameraYRotDeg = p1.cameraYRotDeg,
@@ -16,12 +16,13 @@ return function(p1)
 		})
 	end)
 	
-	if not ok or not status.ok then
+	if not Success or not Result.ok then
 		return false
-	elseif p1.localUserId then
-		userAvatarConfigurationsCacheModule.invalidate(p1.localUserId)
 	end
-	profileRefreshSignal.notifyProfileRefresh()
+	if p1.localUserId then
+		UserAvatarConfigurationsCacheModule.invalidate(p1.localUserId)
+	end
+	ProfileRefreshSignal.notifyProfileRefresh()
 	
 	return true
 end

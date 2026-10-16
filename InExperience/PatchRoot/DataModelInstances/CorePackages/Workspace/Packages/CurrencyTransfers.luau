@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.CurrencyTransfers.CurrencyTransfers)
+﻿return (require(script.Parent._Workspace.CurrencyTransfers.CurrencyTransfers))

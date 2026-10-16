@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Workspace.VirtualEvents.VirtualEvents)
+﻿return (require(script.Parent.Parent.Parent._Workspace.VirtualEvents.VirtualEvents))

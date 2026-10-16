@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("CurrencyTransferSignalRecipientOnComplete", false)
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastFlag("CurrencyTransferSignalRecipientOnComplete")
 end

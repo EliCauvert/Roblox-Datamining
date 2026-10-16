@@ -1,25 +1,25 @@
-﻿local home = script:FindFirstAncestor("Home")
-local parent = home.Parent
-local appPage = require(parent.RobloxAppEnums).AppPage
-local sduiSharedUtilitiesModule = require(parent.SduiSharedUtilities)
-local fetchHomePageModule = require(home.fetchHomePage)
-local getSiteMessageStore = require(parent.SiteMessageStore).GetSiteMessageStore
+﻿local Home = script:FindFirstAncestor("Home")
+local Parent = Home.Parent
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local SduiSharedUtilitiesModule = require(Parent.SduiSharedUtilities)
+local FetchHomePageModule = require(Home.fetchHomePage)
+local GetSiteMessageStoreFunction = require(Parent.SiteMessageStore).GetSiteMessageStore
 
-return function(p1, p2, p3)
-	-- upvalues: getSiteMessageStore (ref), sduiSharedUtilitiesModule (ref), appPage (ref), fetchHomePageModule (ref)
-	if p3 ~= false then
-		getSiteMessageStore(false).refreshSiteAlertInfo()
+return function(RequestIntent, ContextualFeatures, Enabled) --[[ Line: 11 | Named "refreshHomePage" ]]
+	-- upvalues: GetSiteMessageStoreFunction (copy), SduiSharedUtilitiesModule (copy), AppPage (copy), FetchHomePageModule (copy)
+	if Enabled ~= false then
+		GetSiteMessageStoreFunction(false).refreshSiteAlertInfo()
 	end
-	local var1 = sduiSharedUtilitiesModule.SduiLoadTimer.createLoadTimer(appPage.Home)
-	var1.start("refresh")
-	local var2 = fetchHomePageModule(var1, {
+	local LoadTimer = SduiSharedUtilitiesModule.SduiLoadTimer.createLoadTimer(AppPage.Home)
+	LoadTimer.start("refresh")
+	local HomePageModule = FetchHomePageModule(LoadTimer, {
 		forceRefresh = true,
-		requestIntent = p1,
-		contextualFeatures = p2
+		requestIntent = RequestIntent,
+		contextualFeatures = ContextualFeatures
 	})
 	
-	return if var2 then var2:finally(function()
-		-- upvalues: var1 (ref)
-		var1.logRefreshComplete()
+	return if HomePageModule then HomePageModule:finally(function() --[[ Line: 30 ]]
+		-- upvalues: LoadTimer (copy)
+		LoadTimer.logRefreshComplete()
 	end) else nil
 end

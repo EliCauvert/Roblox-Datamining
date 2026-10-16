@@ -1,31 +1,36 @@
-﻿local createEffect = require(script.Parent.Parent.Signals).createEffect
+﻿local CreateEffectFunction = require(script.Parent.Parent.Signals).createEffect
 
-return function(p1)
-	-- upvalues: createEffect (ref)
-	local var1 = false
-	local var2 = nil
+return function(Callback) --[[ Line: 8 | Named "createDetachedEffect" ]]
+	-- upvalues: CreateEffectFunction (copy)
+	local Flag = false
+	local BindableEvent = nil
 	
-	local function disposeEffect()
-		-- upvalues: var1 (write), var2 (write)
-		if not var1 then
-			var1 = true
+	local function disposeEffect() --[[ Line: 12 ]]
+		-- upvalues: Flag (ref), BindableEvent (ref)
+		if not Flag then
+			Flag = true
 			
-			if var2 ~= nil then
-				var2:Fire()
+			if BindableEvent ~= nil then
+				BindableEvent:Fire()
 			end
 		end
 	end
 	
-	local var3 = createEffect(function(p2)
-		-- upvalues: p1 (ref), disposeEffect (ref)
-		p1(p2, disposeEffect)
+	local Effect: () -> () = CreateEffectFunction(function(p1) --[[ Line: 21 ]]
+		-- upvalues: Callback (copy), disposeEffect (copy)
+		Callback(p1, disposeEffect)
 	end)
-	local bindableEvent = Instance.new("BindableEvent")
-	var2 = bindableEvent
-	bindableEvent.Event:Once(function()
-		-- upvalues: bindableEvent (ref), var2 (write), var3 (ref)
-		bindableEvent:Destroy()
-		var2 = nil
-		var3()
-	end)
+	
+	if Flag then
+		Effect()
+	else
+		local BindableEvent1 = Instance.new("BindableEvent")
+		BindableEvent = BindableEvent1
+		BindableEvent1.Event:Once(function() --[[ Line: 30 ]]
+			-- upvalues: BindableEvent1 (copy), BindableEvent (ref), Effect (copy)
+			BindableEvent1:Destroy()
+			BindableEvent = nil
+			Effect()
+		end)
+	end
 end

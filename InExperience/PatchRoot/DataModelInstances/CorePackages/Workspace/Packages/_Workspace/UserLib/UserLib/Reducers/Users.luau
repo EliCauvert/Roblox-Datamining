@@ -1,116 +1,121 @@
-﻿local userLib = script:FindFirstAncestor("UserLib")
-local parent = userLib.Parent
-local immutable = require(parent.AppCommonLib).Immutable
-local addUser = require(userLib.Actions).AddUser
-local addUsers = require(userLib.Actions).AddUsers
-local receivedUserPresence = require(userLib.Actions).ReceivedUserPresence
-local removeUser = require(userLib.Actions).RemoveUser
-local setUserIsFriend = require(userLib.Actions).SetUserIsFriend
-local setUserMembershipType = require(userLib.Actions).SetUserMembershipType
-local setUserHasRobloxSubscription = require(userLib.Actions).SetUserHasRobloxSubscription
-local setUserPresence = require(userLib.Actions).SetUserPresence
-local receivedDisplayName = require(userLib.Actions).ReceivedDisplayName
-local fFlagEnableBlackbirdCheck = require(parent.SharedFlags).FFlagEnableBlackbirdCheck
+﻿local UserLib = script:FindFirstAncestor("UserLib")
+local Parent = UserLib.Parent
+local Immutable = require(Parent.AppCommonLib).Immutable
+local AddUser = require(UserLib.Actions).AddUser
+local AddUsers = require(UserLib.Actions).AddUsers
+local ReceivedUserPresence = require(UserLib.Actions).ReceivedUserPresence
+local RemoveUser = require(UserLib.Actions).RemoveUser
+local SetUserIsFriend = require(UserLib.Actions).SetUserIsFriend
+local SetUserMembershipType = require(UserLib.Actions).SetUserMembershipType
+local SetUserHasRobloxSubscription = require(UserLib.Actions).SetUserHasRobloxSubscription
+local SetUserPresence = require(UserLib.Actions).SetUserPresence
+local ReceivedDisplayName = require(UserLib.Actions).ReceivedDisplayName
+local FFlagEnableBlackbirdCheck = require(Parent.SharedFlags).FFlagEnableBlackbirdCheck
 
-return function(p1, p2)
-	-- upvalues: addUser (ref), immutable (ref), addUsers (ref), setUserIsFriend (ref), setUserPresence (ref), receivedUserPresence (ref), setUserMembershipType (ref), fFlagEnableBlackbirdCheck (ref), setUserHasRobloxSubscription (ref), removeUser (ref), receivedDisplayName (ref)
-	p1 = p1 or {}
-	assert(p1, "")
+return function(p1, p2) --[[ Line: 20 ]]
+	-- upvalues: AddUser (copy), Immutable (copy), AddUsers (copy), SetUserIsFriend (copy), SetUserPresence (copy), ReceivedUserPresence (copy), SetUserMembershipType (copy), FFlagEnableBlackbirdCheck (copy), SetUserHasRobloxSubscription (copy), RemoveUser (copy), ReceivedDisplayName (copy)
+	local P0 = p1 or {}
+	assert(P0, "")
 	
-	if p2.type == addUser.name then
-		local user = p2.user
-		p1 = immutable.Set(p1, user.id, user)
+	if p2.type == AddUser.name then
+		local User = p2.user
+		P0 = Immutable.Set(P0, User.id, User)
 		
-		return p1
-	elseif p2.type == addUsers.name then
-		local t = {}
+		return P0
+	end
+	if p2.type == AddUsers.name then
+		local JoinDictionariesResults = {}
 		
-		for i, v in pairs(p2.users) do
-			local var1 = p1[i]
+		for i, user in pairs(p2.users) do
+			local Entry = P0[i]
 			
-			if var1 then
-				t[i] = immutable.JoinDictionaries(var1, v)
+			if Entry then
+				JoinDictionariesResults[i] = Immutable.JoinDictionaries(Entry, user)
 			else
-				t[i] = v
+				JoinDictionariesResults[i] = user
 			end
 		end
-		p1 = immutable.JoinDictionaries(p1, t)
+		P0 = Immutable.JoinDictionaries(P0, JoinDictionariesResults)
 		
-		return p1
-	elseif p2.type == setUserIsFriend.name then
-		local userId = p1[p2.userId]
+		return P0
+	elseif p2.type == SetUserIsFriend.name then
+		local Entry = P0[p2.userId]
 		
-		if userId then
-			p1 = immutable.Set(p1, userId.id, immutable.Set(userId, "isFriend", p2.isFriend))
+		if Entry then
+			P0 = Immutable.Set(P0, Entry.id, (Immutable.Set(Entry, "isFriend", p2.isFriend)))
 			
-			return p1
-		end
-		warn("Setting isFriend on user", p2.userId, "who doesn't exist yet")
-		
-		return p1
-	elseif p2.type == setUserPresence.name then
-		local userId = p1[p2.userId]
-		
-		if userId then
-			p1 = immutable.Set(p1, userId.id, immutable.JoinDictionaries(userId, { presence = p2.presence, lastLocation = p2.lastLocation }))
+			return P0
+		else
+			warn("Setting isFriend on user", p2.userId, "who doesn't exist yet")
 			
-			return p1
+			return P0
 		end
-		warn("Setting presence on user", p2.userId, "who doesn't exist yet")
+	elseif p2.type == SetUserPresence.name then
+		local Entry = P0[p2.userId]
 		
-		return p1
-	elseif p2.type == receivedUserPresence.name then
-		local userId = p1[p2.userId]
-		
-		if userId then
-			p1 = immutable.JoinDictionaries(p1, {
-				[p2.userId] = immutable.JoinDictionaries(userId, {
-					presence = p2.presence,
-					lastLocation = p2.lastLocation,
-					placeId = p2.placeId,
-					rootPlaceId = p2.rootPlaceId,
-					gameInstanceId = p2.gameInstanceId,
-					lastOnline = p2.lastOnline,
-					universeId = p2.universeId
+		if Entry then
+			P0 = Immutable.Set(P0, Entry.id, (Immutable.JoinDictionaries(Entry, { presence = p2.presence, lastLocation = p2.lastLocation })))
+			
+			return P0
+		else
+			warn("Setting presence on user", p2.userId, "who doesn't exist yet")
+			
+			return P0
+		end
+	else
+		if p2.type == ReceivedUserPresence.name then
+			local Entry = P0[p2.userId]
+			
+			if Entry then
+				P0 = Immutable.JoinDictionaries(P0, {
+					[p2.userId] = Immutable.JoinDictionaries(Entry, {
+						presence = p2.presence,
+						lastLocation = p2.lastLocation,
+						placeId = p2.placeId,
+						rootPlaceId = p2.rootPlaceId,
+						gameInstanceId = p2.gameInstanceId,
+						lastOnline = p2.lastOnline,
+						universeId = p2.universeId
+					})
 				})
-			})
+				
+				return P0
+			end
+		elseif p2.type == SetUserMembershipType.name then
+			local Entry = P0[p2.userId]
 			
-			return p1
-		end
-	elseif p2.type == setUserMembershipType.name then
-		local userId = p1[p2.userId]
-		
-		if userId then
-			p1 = immutable.JoinDictionaries(p1, {
-				[p2.userId] = immutable.JoinDictionaries(userId, { membership = p2.membershipType })
-			})
+			if Entry then
+				P0 = Immutable.JoinDictionaries(P0, {
+					[p2.userId] = Immutable.JoinDictionaries(Entry, { membership = p2.membershipType })
+				})
+				
+				return P0
+			end
+		elseif FFlagEnableBlackbirdCheck and p2.type == SetUserHasRobloxSubscription.name then
+			local Entry = P0[p2.userId]
 			
-			return p1
-		end
-	elseif fFlagEnableBlackbirdCheck and p2.type == setUserHasRobloxSubscription.name then
-		local userId = p1[p2.userId]
-		
-		if userId then
-			p1 = immutable.JoinDictionaries(p1, {
-				[p2.userId] = immutable.JoinDictionaries(userId, { hasRobloxSubscription = p2.hasRobloxSubscription })
-			})
+			if Entry then
+				P0 = Immutable.JoinDictionaries(P0, {
+					[p2.userId] = Immutable.JoinDictionaries(Entry, { hasRobloxSubscription = p2.hasRobloxSubscription })
+				})
+				
+				return P0
+			end
+		elseif p2.type ~= RemoveUser.name then
+			if p2.type == ReceivedDisplayName.name then
+				local Entry = P0[p2.userId]
+				
+				if Entry then
+					P0 = Immutable.JoinDictionaries(P0, {
+						[p2.userId] = Immutable.JoinDictionaries(Entry, { displayName = p2.displayName })
+					})
+				end
+			end
+		elseif P0[p2.userId] then
+			P0 = Immutable.RemoveFromDictionary(P0, p2.userId)
 			
-			return p1
+			return P0
 		end
-	elseif p2.type == removeUser.name then
-		if p1[p2.userId] then
-			p1 = immutable.RemoveFromDictionary(p1, p2.userId)
-			
-			return p1
-		end
-	elseif p2.type == receivedDisplayName.name then
-		local userId = p1[p2.userId]
-		
-		if userId then
-			p1 = immutable.JoinDictionaries(p1, {
-				[p2.userId] = immutable.JoinDictionaries(userId, { displayName = p2.displayName })
-			})
-		end
+		return P0
 	end
-	return p1
 end

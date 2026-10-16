@@ -1,105 +1,106 @@
-﻿local httpService = game:GetService("HttpService")
-local avatarExperienceSlotBasedEditor = script:FindFirstAncestor("AvatarExperienceSlotBasedEditor")
-local parent = avatarExperienceSlotBasedEditor.Parent
-local signalsModule = require(parent.Signals)
-local mutedError = require(parent.Loggers).mutedError
-local inventoryItemTypeModule = require(avatarExperienceSlotBasedEditor.Enums.InventoryItemType)
-local _ = require(avatarExperienceSlotBasedEditor.Enums.InventoryItemAvailability)
+﻿local HttpService = game:GetService("HttpService")
+local AvatarExperienceSlotBasedEditor = script:FindFirstAncestor("AvatarExperienceSlotBasedEditor")
+local Parent = AvatarExperienceSlotBasedEditor.Parent
+local SignalsModule = require(Parent.Signals)
+local MutedErrorFunction = require(Parent.Loggers).mutedError
+local InventoryItemTypeModule = require(AvatarExperienceSlotBasedEditor.Enums.InventoryItemType)
+local _ = require(AvatarExperienceSlotBasedEditor.Enums.InventoryItemAvailability)
 local _ = require(script.Parent.Parent.Types)
-local fFlagAXInventoryDurablesSupport = require(parent.AvatarExperienceFlags).FFlagAXInventoryDurablesSupport
-local fFlagAXBackgroundGeneration = require(parent.AvatarExperienceFlags).FFlagAXBackgroundGeneration
-local fFlagAXRefetchInventoryOnUpdate = require(parent.AvatarExperienceFlags).FFlagAXRefetchInventoryOnUpdate
+local FFlagAXInventoryDurablesSupport = require(Parent.AvatarExperienceFlags).FFlagAXInventoryDurablesSupport
+local FFlagAXBackgroundGeneration = require(Parent.AvatarExperienceFlags).FFlagAXBackgroundGeneration
+local FFlagAXRefetchInventoryOnUpdate = require(Parent.AvatarExperienceFlags).FFlagAXRefetchInventoryOnUpdate
 
-return function()
-	-- upvalues: signalsModule (ref), httpService (ref), fFlagAXRefetchInventoryOnUpdate (ref), inventoryItemTypeModule (ref), mutedError (ref), fFlagAXInventoryDurablesSupport (ref), fFlagAXBackgroundGeneration (ref)
-	local var1 = nil
-	local var2, var3 = signalsModule.createSignal(nil)
-	local var4, var5 = signalsModule.createSignal(false)
-	local var6, var7 = signalsModule.createSignal(httpService:GenerateGUID(true))
-	local var8 = if fFlagAXRefetchInventoryOnUpdate then false else nil
-	
-	return {
+return function() --[[ Line: 45 | Named "createCategoryInventoryStore" ]]
+	-- upvalues: SignalsModule (copy), HttpService (copy), FFlagAXRefetchInventoryOnUpdate (copy), InventoryItemTypeModule (copy), MutedErrorFunction (copy), FFlagAXInventoryDurablesSupport (copy), FFlagAXBackgroundGeneration (copy)
+	local v1 = nil
+	local Signal, Signal2 = SignalsModule.createSignal(nil)
+	local Signal1, Signal2_1 = SignalsModule.createSignal(false)
+	local Signal3, Signal2_2 = SignalsModule.createSignal(HttpService:GenerateGUID(true))
+	local Flag = not FFlagAXRefetchInventoryOnUpdate and nil
+	v1 = {
 		nextPageCursor = nil,
-		getItems = var2,
-		getHasReachedLastPage = var4,
-		getSearchUuid = var6,
-		isRefreshPending = function()
-			-- upvalues: var8 (write)
-			return var8 == true
+		getItems = Signal,
+		getHasReachedLastPage = Signal1,
+		getSearchUuid = Signal3,
+		isRefreshPending = function(): boolean --[[ Line: 108 ]]
+			-- upvalues: Flag (ref)
+			return Flag == true
 		end,
-		startNewSearch = function()
-			-- upvalues: var1 (write), fFlagAXRefetchInventoryOnUpdate (copy), var8 (write), var3 (ref), var5 (ref), var7 (ref), httpService (copy)
-			var1.nextPageCursor = nil
+		startNewSearch = function() --[[ Line: 57 ]]
+			-- upvalues: v1 (ref), FFlagAXRefetchInventoryOnUpdate (upval), Flag (ref), Signal2 (copy), Signal2_1 (copy), Signal2_2 (copy), HttpService (upval)
+			v1.nextPageCursor = nil
 			
-			if fFlagAXRefetchInventoryOnUpdate then
-				var8 = false
+			if FFlagAXRefetchInventoryOnUpdate then
+				Flag = false
 			end
-			var3(nil)
-			var5(false)
-			var7(httpService:GenerateGUID(true))
+			Signal2(nil)
+			Signal2_1(false)
+			Signal2_2(HttpService:GenerateGUID(true))
 		end,
-		startRefresh = function()
-			-- upvalues: var1 (write), var8 (write), var5 (ref), var7 (ref), httpService (copy)
-			var1.nextPageCursor = nil
-			var8 = true
-			var5(false)
-			var7(httpService:GenerateGUID(true))
+		startRefresh = function() --[[ Line: 71 ]]
+			-- upvalues: v1 (ref), Flag (ref), Signal2_1 (copy), Signal2_2 (copy), HttpService (upval)
+			v1.nextPageCursor = nil
+			Flag = true
+			Signal2_1(false)
+			Signal2_2(HttpService:GenerateGUID(true))
 		end,
-		removeItems = function(p1)
-			-- upvalues: var2 (ref), var3 (ref)
-			local var9 = var2(false)
+		removeItems = function(List) --[[ Line: 80 ]]
+			-- upvalues: Signal (copy), Signal2 (copy)
+			local SignalResult = Signal(false)
 			
-			if not var9 then return end
+			if not SignalResult then return end
 			local t = {}
 			
-			for i, v in p1 do
-				t[v] = true
+			for _, value in List do
+				t[value] = true
 			end
-			local t_1 = {}
+			local t1 = {}
 			
-			for i_1, v_1 in var9 do
-				if not t[v_1.itemId] then
-					t_1[#t_1 + 1] = v_1
+			for _, value1 in SignalResult do
+				if not t[value1.itemId] then
+					t1[#t1 + 1] = value1
 				end
 			end
-			if #t_1 == #var9 then
+			if #t1 ~= #SignalResult then
+				Signal2(if #t1 > 0 then t1 else nil)
+				
 				return
 			end
-			var3(if #t_1 > 0 then t_1 else nil)
 		end,
-		addResultsPage = function(p2, p3)
-			-- upvalues: fFlagAXRefetchInventoryOnUpdate (copy), var6 (ref), var8 (write), var2 (ref), inventoryItemTypeModule (copy), mutedError (copy), fFlagAXInventoryDurablesSupport (copy), fFlagAXBackgroundGeneration (copy), var3 (ref), var1 (write), var5 (ref)
-			if fFlagAXRefetchInventoryOnUpdate and p3 ~= nil and p3 ~= var6(false) then return end
-			local var10 = fFlagAXRefetchInventoryOnUpdate and var8 == true
+		addResultsPage = function(p1, p2) --[[ Line: 115 ]]
+			-- upvalues: FFlagAXRefetchInventoryOnUpdate (upval), Signal3 (copy), Flag (ref), Signal (copy), InventoryItemTypeModule (upval), MutedErrorFunction (upval), FFlagAXInventoryDurablesSupport (upval), FFlagAXBackgroundGeneration (upval), Signal2 (copy), v1 (ref), Signal2_1 (copy)
+			if FFlagAXRefetchInventoryOnUpdate and p2 ~= nil and p2 ~= Signal3(false) then return end
+			local IsFlag: boolean = FFlagAXRefetchInventoryOnUpdate and Flag == true
 			
-			if fFlagAXRefetchInventoryOnUpdate then
-				var8 = false
+			if FFlagAXRefetchInventoryOnUpdate then
+				Flag = false
 			end
-			local var11 = if var10 then nil else var2(false)
-			local var12 = if var11 then table.clone(var11) else {}
-			
-			for i, v in p2.avatarInventoryItems do
-				local var13 = if v.itemCategory.itemType == Enum.AvatarItemType.Asset.Value then inventoryItemTypeModule.Asset elseif v.itemCategory.itemType == Enum.AvatarItemType.Bundle.Value then inventoryItemTypeModule.Outfit else inventoryItemTypeModule.Unknown
+			local SignalResult = if IsFlag then nil else Signal(false)
+			local Copy = if SignalResult then table.clone(SignalResult) else {}
+			for _, avatarInventoryItem in p1.avatarInventoryItems do
+				local Asset = if avatarInventoryItem.itemCategory.itemType == Enum.AvatarItemType.Asset.Value then InventoryItemTypeModule.Asset elseif avatarInventoryItem.itemCategory.itemType == Enum.AvatarItemType.Bundle.Value then InventoryItemTypeModule.Outfit else InventoryItemTypeModule.Unknown
 				
-				if var13 == inventoryItemTypeModule.Unknown then
-					mutedError(`Unknown item type received from user inventory endpoint: {v.itemCategory.itemType}`)
+				if Asset == InventoryItemTypeModule.Unknown then
+					MutedErrorFunction(`Unknown item type received from user inventory endpoint: {avatarInventoryItem.itemCategory.itemType}`)
 				else
-					table.insert(var12, {
-						itemId = tostring(v.itemId),
-						inventoryItemType = var13,
-						availabilityStatus = v.availabilityStatus,
-						expirationTime = if fFlagAXInventoryDurablesSupport then v.expirationTime else nil,
-						isPlusExclusive = if fFlagAXBackgroundGeneration then v.isPlusExclusive else nil
+					table.insert(Copy, {
+						itemId = tostring(avatarInventoryItem.itemId),
+						inventoryItemType = Asset,
+						availabilityStatus = avatarInventoryItem.availabilityStatus,
+						expirationTime = if FFlagAXInventoryDurablesSupport then avatarInventoryItem.expirationTime else nil,
+						isPlusExclusive = if FFlagAXBackgroundGeneration then avatarInventoryItem.isPlusExclusive else nil
 					})
 				end
 			end
-			var3(var12)
-			local nextPageToken = p2.nextPageToken
-			var1.nextPageCursor = nextPageToken
+			Signal2(Copy)
+			local NextPageToken = p1.nextPageToken
+			v1.nextPageCursor = NextPageToken
 			
-			if nextPageToken == nil or nextPageToken == "" then
-				var5(true)
+			if NextPageToken == nil or NextPageToken == "" then
+				Signal2_1(true)
 			end
 		end
 	}
+	
+	return v1
 end

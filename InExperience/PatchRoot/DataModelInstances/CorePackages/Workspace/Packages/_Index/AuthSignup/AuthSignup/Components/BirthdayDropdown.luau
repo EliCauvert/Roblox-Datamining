@@ -1,136 +1,141 @@
-﻿local authSignup = script:FindFirstAncestor("AuthSignup")
-local parent = authSignup.Parent
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local authAnalyticsModule = require(parent.AuthAnalytics)
-local authCommonModule = require(parent.AuthCommon)
-local timeModule = require(parent.Time)
-local authFormInteraction = authAnalyticsModule.Events.authFormInteraction
-local eventStreamConstants = authAnalyticsModule.EventStreamConstants
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local validateBirthdayModule = require(authSignup.Util.validateBirthday)
-local birthday = authCommonModule.Models.Birthday
-local useTokens = foundationModule.Hooks.useTokens
-local text = foundationModule.Text
-local view = foundationModule.View
-local useEffect = reactModule.useEffect
-local useState = reactModule.useState
-local timeUnit = timeModule.TimeUnit
-local dateHelper = timeModule.DateHelper
-local dropdownWithPopover = authCommonModule.Components.DropdownWithPopover
+﻿local AuthSignup = script:FindFirstAncestor("AuthSignup")
+local Parent = AuthSignup.Parent
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local AuthAnalyticsModule = require(Parent.AuthAnalytics)
+local AuthCommonModule = require(Parent.AuthCommon)
+local TimeModule = require(Parent.Time)
+local AuthFormInteractionFunction = AuthAnalyticsModule.Events.authFormInteraction
+local EventStreamConstants = AuthAnalyticsModule.EventStreamConstants
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local ValidateBirthdayModule = require(AuthSignup.Util.validateBirthday)
+local Birthday = AuthCommonModule.Models.Birthday
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local UseEffectFunction = ReactModule.useEffect
+local UseStateFunction = ReactModule.useState
+local TimeUnit = TimeModule.TimeUnit
+local DateHelper = TimeModule.DateHelper
+local DropdownWithPopover = AuthCommonModule.Components.DropdownWithPopover
 
-local var1 = function(p1)
-	local t = {}
+local function v16(p1) --[[ Line: 34 ]]
+	local List = {}
 	
 	for i = 1, 12 do
-		table.insert(t, { text = p1[i], value = i })
+		table.insert(List, { text = p1[i], value = i })
 	end
-	return t
+	return List
 end
 
-local t = { minAgeAllowed = 0, maxAgeAllowed = 99 }
+local config = { minAgeAllowed = 0, maxAgeAllowed = 99 }
 
-return reactModule.memo(function(p2)
-	-- upvalues: cryoModule (ref), t (ref), useTokens (ref), useLocalization (ref), dateHelper (ref), useState (ref), timeUnit (ref), reactModule (ref), var1 (ref), useEffect (ref), birthday (ref), validateBirthdayModule (ref), eventStreamConstants (ref), authFormInteraction (ref), view (ref), dropdownWithPopover (ref), text (ref)
-	local var2 = cryoModule.Dictionary.join(t, p2)
-	local var3 = useTokens()
-	local var4 = useLocalization({
+return ReactModule.memo(function(p2) --[[ Line: 63 | Named "BirthdayDropdown" ]]
+	-- upvalues: CryoModule (copy), config (copy), UseTokensFunction (copy), UseLocalizationFunction (copy), DateHelper (copy), UseStateFunction (copy), TimeUnit (copy), ReactModule (copy), v16 (copy), UseEffectFunction (copy), Birthday (copy), ValidateBirthdayModule (copy), EventStreamConstants (copy), AuthFormInteractionFunction (copy), View (copy), DropdownWithPopover (copy), Text (copy)
+	local JoinResult = CryoModule.Dictionary.join(config, p2)
+	local UseTokensResult = UseTokensFunction()
+	local UseLocalizationResult = UseLocalizationFunction({
 		errorText = "Authentication.SignUp.Response.InvalidBirthday",
 		monthLabel = "Authentication.SignUp.Label.Month",
 		dayLabel = "Authentication.SignUp.Label.Day",
 		yearLabel = "Authentication.SignUp.Label.Year"
 	})
-	local var5 = useLocalization(dateHelper.MonthsLocalizationKeys)
-	local var6, var7 = useState(nil)
-	local var8, var9 = useState(nil)
-	local var10, var11 = useState(nil)
-	local var12, var13 = useState(false)
-	local years = dateHelper:getCurrentDate()[timeUnit.Years]
-	local minAgeAllowed = var2.minAgeAllowed
-	local var14 = years - var2.maxAgeAllowed
-	local var15 = years - minAgeAllowed
-	local localeId = dateHelper.DateTypeOrder[var2.localeId]
-	local months = localeId[timeUnit.Months]
-	local days = localeId[timeUnit.Days]
-	local years_1 = localeId[timeUnit.Years]
-	local var16 = reactModule.useMemo(function()
-		-- upvalues: dateHelper (copy), var14 (ref), var15 (ref)
-		return dateHelper:generateYearCellDatas(var14, var15)
-	end, { var14, var15 })
-	local var17 = reactModule.useMemo(function()
-		-- upvalues: var1 (copy), var5 (ref)
-		return var1(var5)
-	end, { var5 })
-	local var18 = reactModule.useMemo(function()
-		-- upvalues: dateHelper (copy)
-		return dateHelper:generateDayCellDatas()
+	local UseLocalizationResult1 = UseLocalizationFunction(DateHelper.MonthsLocalizationKeys)
+	local UseStateResult, UseStateResult2 = UseStateFunction(nil)
+	local UseStateResult1, UseStateResult2_1 = UseStateFunction(nil)
+	local UseStateResult3, UseStateResult2_2 = UseStateFunction(nil)
+	local UseStateResult4, UseStateResult2_3 = UseStateFunction(false)
+	local CurrentDateEntry = DateHelper:getCurrentDate()[TimeUnit.Years]
+	local MinAgeAllowed = JoinResult.minAgeAllowed
+	local CurrentDateEntryDelta = CurrentDateEntry - JoinResult.maxAgeAllowed
+	local CurrentDateEntryDelta1 = CurrentDateEntry - MinAgeAllowed
+	local DateTypeOrderEntry = DateHelper.DateTypeOrder[JoinResult.localeId]
+	local DateTypeOrderEntry1 = DateTypeOrderEntry[TimeUnit.Months]
+	local DateTypeOrderEntry2 = DateTypeOrderEntry[TimeUnit.Days]
+	local DateTypeOrderEntry3 = DateTypeOrderEntry[TimeUnit.Years]
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 91 ]]
+		-- upvalues: DateHelper (upval), CurrentDateEntryDelta (copy), CurrentDateEntryDelta1 (copy)
+		return DateHelper:generateYearCellDatas(CurrentDateEntryDelta, CurrentDateEntryDelta1)
+	end, { CurrentDateEntryDelta, CurrentDateEntryDelta1 })
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 94 ]]
+		-- upvalues: v16 (upval), UseLocalizationResult1 (copy)
+		return (v16(UseLocalizationResult1))
+	end, { UseLocalizationResult1 })
+	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 97 ]]
+		-- upvalues: DateHelper (upval)
+		return DateHelper:generateDayCellDatas()
 	end, {})
-	local focusOnMount = var2.focusOnMount
-	useEffect(function()
-		-- upvalues: var8 (ref), var6 (ref), var10 (ref), birthday (copy), validateBirthdayModule (copy), minAgeAllowed (ref), var2 (ref), var13 (ref), eventStreamConstants (copy), authFormInteraction (copy)
-		if var8 == nil or var6 == nil or var10 == nil then return end
-		local var19 = birthday.new({ Month = var8, Day = var6, Year = var10 })
+	local FocusOnMount = JoinResult.focusOnMount
+	UseEffectFunction(function() --[[ Line: 103 ]]
+		-- upvalues: UseStateResult1 (copy), UseStateResult (copy), UseStateResult3 (copy), Birthday (upval), ValidateBirthdayModule (upval), MinAgeAllowed (copy), JoinResult (copy), UseStateResult2_3 (copy), EventStreamConstants (upval), AuthFormInteractionFunction (upval)
+		if UseStateResult1 == nil or UseStateResult == nil or UseStateResult3 == nil then return end
+		local NewBirthday = Birthday.new({
+			Month = UseStateResult1,
+			Day = UseStateResult,
+			Year = UseStateResult3
+		})
 		
-		if validateBirthdayModule(var8, var6, var10, minAgeAllowed) then
-			var2.onBirthdaySelected(var19, var19:GetAgeInYears(), true)
-			var13(false)
-			authFormInteraction(var2.analyticsEventContext, eventStreamConstants.Field.BirthdayDropdown, eventStreamConstants.State.BirthdayDropdownBirthdaySelected .. "," .. var28:ToString(","))
+		if ValidateBirthdayModule(UseStateResult1, UseStateResult, UseStateResult3, MinAgeAllowed) then
+			JoinResult.onBirthdaySelected(NewBirthday, NewBirthday:GetAgeInYears(), true)
+			UseStateResult2_3(false)
+			AuthFormInteractionFunction(JoinResult.analyticsEventContext, EventStreamConstants.Field.BirthdayDropdown, EventStreamConstants.State.BirthdayDropdownBirthdaySelected .. "," .. NewBirthday:ToString(","))
 			
 			return
+		else
+			JoinResult.onBirthdaySelected(NewBirthday, NewBirthday:GetAgeInYears(), false)
+			UseStateResult2_3(true)
+			AuthFormInteractionFunction(JoinResult.analyticsEventContext, EventStreamConstants.Field.BirthdayDropdown, EventStreamConstants.State.BirthdayDropdownInvalidBirthdayError)
 		end
-		var2.onBirthdaySelected(var19, var19:GetAgeInYears(), false)
-		var13(true)
-		authFormInteraction(var2.analyticsEventContext, eventStreamConstants.Field.BirthdayDropdown, eventStreamConstants.State.BirthdayDropdownInvalidBirthdayError)
-	end, { var8, var6, var10 })
+	end, { UseStateResult1, UseStateResult, UseStateResult3 })
 	
-	return reactModule.createElement(view, { tag = "col size-full-0 auto-y gap-small align-x-start" }, {
-		DropdownContainer = reactModule.createElement(view, { tag = "row size-full-0 flex-x-fill auto-y gap-medium" }, {
-			MonthDropdown = reactModule.createElement(dropdownWithPopover, {
+	return ReactModule.createElement(View, { tag = "col size-full-0 auto-y gap-small align-x-start" }, {
+		DropdownContainer = ReactModule.createElement(View, { tag = "row size-full-0 flex-x-fill auto-y gap-medium" }, {
+			MonthDropdown = ReactModule.createElement(DropdownWithPopover, {
 				dropdownHeight = 40,
 				fixSizeToParent = true,
-				placeholder = var4.monthLabel,
-				value = var8,
-				cellDatas = var17,
-				layoutOrder = months,
-				onChange = var9,
-				errorState = var12,
-				focusOnMount = focusOnMount and months == 1,
-				backgroundColorToken = var3.Color.Common.Shadow,
-				onDropdownOpened = var2.onDropdownOpened
+				placeholder = UseLocalizationResult.monthLabel,
+				value = UseStateResult1,
+				cellDatas = UseMemoResult1,
+				layoutOrder = DateTypeOrderEntry1,
+				onChange = UseStateResult2_1,
+				errorState = UseStateResult4,
+				focusOnMount = FocusOnMount and DateTypeOrderEntry1 == 1,
+				backgroundColorToken = UseTokensResult.Color.Common.Shadow,
+				onDropdownOpened = JoinResult.onDropdownOpened
 			}),
-			DayDropdown = reactModule.createElement(dropdownWithPopover, {
+			DayDropdown = ReactModule.createElement(DropdownWithPopover, {
 				dropdownHeight = 40,
 				fixSizeToParent = true,
-				placeholder = var4.dayLabel,
-				value = var6,
-				cellDatas = var18,
-				layoutOrder = days,
-				onChange = var7,
-				errorState = var12,
-				focusOnMount = focusOnMount and days == 1,
-				backgroundColorToken = var3.Color.Common.Shadow,
-				onDropdownOpened = var2.onDropdownOpened
+				placeholder = UseLocalizationResult.dayLabel,
+				value = UseStateResult,
+				cellDatas = UseMemoResult2,
+				layoutOrder = DateTypeOrderEntry2,
+				onChange = UseStateResult2,
+				errorState = UseStateResult4,
+				focusOnMount = FocusOnMount and DateTypeOrderEntry2 == 1,
+				backgroundColorToken = UseTokensResult.Color.Common.Shadow,
+				onDropdownOpened = JoinResult.onDropdownOpened
 			}),
-			YearDropdown = reactModule.createElement(dropdownWithPopover, {
+			YearDropdown = ReactModule.createElement(DropdownWithPopover, {
 				dropdownHeight = 40,
 				fixSizeToParent = true,
-				placeholder = var4.yearLabel,
-				value = var10,
-				cellDatas = var16,
-				layoutOrder = years_1,
-				onChange = var11,
-				errorState = var12,
-				focusOnMount = focusOnMount and years_1 == 1,
-				backgroundColorToken = var3.Color.Common.Shadow,
-				onDropdownOpened = var2.onDropdownOpened
+				placeholder = UseLocalizationResult.yearLabel,
+				value = UseStateResult3,
+				cellDatas = UseMemoResult,
+				layoutOrder = DateTypeOrderEntry3,
+				onChange = UseStateResult2_2,
+				errorState = UseStateResult4,
+				focusOnMount = FocusOnMount and DateTypeOrderEntry3 == 1,
+				backgroundColorToken = UseTokensResult.Color.Common.Shadow,
+				onDropdownOpened = JoinResult.onDropdownOpened
 			})
 		}),
-		ErrorText = var12 and reactModule.createElement(text, {
+		ErrorText = UseStateResult4 and ReactModule.createElement(Text, {
 			tag = "auto-xy text-body-small",
-			Text = var4.errorText,
+			Text = UseLocalizationResult.errorText,
 			padding = { bottom = UDim.new(0, 0) },
-			textStyle = var3.Color.System.Alert
+			textStyle = UseTokensResult.Color.System.Alert
 		})
 	})
 end)

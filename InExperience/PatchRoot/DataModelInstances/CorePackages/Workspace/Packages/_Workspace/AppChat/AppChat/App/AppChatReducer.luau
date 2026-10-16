@@ -1,31 +1,29 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local gameDetailRoduxModule = require(parent.GameDetailRodux)
-local httpModule = require(parent.Http)
-local playabilityRoduxModule = require(parent.PlayabilityRodux)
-local roduxModule = require(parent.Rodux)
-local constantsModule = require(parent.SquadsCore.Constants)
-local installReducerModule = require(parent.SquadsCore.installReducer)
-local getFFlagIsSquadEnabled = require(parent.SharedFlags).GetFFlagIsSquadEnabled
-local fFlagRemoveUnusedFriendCountRoduxSlice = require(parent.SharedFlags).FFlagRemoveUnusedFriendCountRoduxSlice
-local formFactorReducer = require(parent.FormFactor).FormFactorReducer
-local userLibModule = require(parent.UserLib)
-local socialBlockingModalModule = require(parent.SocialBlockingModal)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local RoduxModule = require(Parent.Rodux)
+local InstallReducerModule = require(Parent.SquadsCore.installReducer)
+local GetFFlagIsSquadEnabledFunction = require(Parent.SharedFlags).GetFFlagIsSquadEnabled
+local UserLibModule = require(Parent.UserLib)
+local SocialBlockingModalModule = require(Parent.SocialBlockingModal)
+local ScreenSizeModule = require(AppChat.installReducer.ScreenSize)
+local FriendCount = require(Parent.LegacyFriendsRodux).Reducers.FriendCount
+local SquadLocation = require(Parent.SquadsCore.Enums).SquadLocation
+local PartyPageCarouselExperimentation = require(Parent.SocialExperiments).PartyPageCarouselExperimentation
 
-return roduxModule.combineReducers({
-	PlayerContextualMenu = require(parent.PlayerContextualMenu).installReducer(),
-	EventReceievers = roduxModule.combineReducers({
-		NetworkStatus = require(appChat.Http.RoduxNetworking).installReducer()
+return (RoduxModule.combineReducers({
+	PlayerContextualMenu = require(Parent.PlayerContextualMenu).installReducer(),
+	EventReceievers = RoduxModule.combineReducers({
+		NetworkStatus = require(AppChat.Http.RoduxNetworking).installReducer()
 	}),
-	ChatAppReducer = require(appChat.installReducer)(),
-	FetchingStatus = httpModule.Reducers.FetchingStatus,
-	GameDetails = gameDetailRoduxModule.GameDetails.GameDetailReducer,
-	LocalUserId = userLibModule.Reducers.LocalUserIdReducer,
-	FriendCount = if fFlagRemoveUnusedFriendCountRoduxSlice then nil else require(parent.LegacyFriendsRodux).Reducers.FriendCount,
-	PlayabilityStatus = playabilityRoduxModule.PlayabilityStatus.PlayabilityStatusReducer,
-	ScreenSize = if require(parent.SocialExperiments).PartyPageCarouselExperimentation.getPartyPageCarouselEnabled() then require(appChat.installReducer.ScreenSize) else nil,
-	FormFactor = formFactorReducer,
-	Users = userLibModule.Reducers.UserReducer,
-	[constantsModule.RODUX_KEY] = if getFFlagIsSquadEnabled() then installReducerModule(require(parent.SquadsCore.Enums).SquadLocation.InExperience) else nil,
-	[socialBlockingModalModule.RoduxKey] = socialBlockingModalModule.installReducer()
-})
+	ChatAppReducer = require(AppChat.installReducer)(),
+	FetchingStatus = require(Parent.Http).Reducers.FetchingStatus,
+	GameDetails = require(Parent.GameDetailRodux).GameDetails.GameDetailReducer,
+	LocalUserId = UserLibModule.Reducers.LocalUserIdReducer,
+	FriendCount = if require(Parent.SharedFlags).FFlagRemoveUnusedFriendCountRoduxSlice then nil else FriendCount,
+	PlayabilityStatus = require(Parent.PlayabilityRodux).PlayabilityStatus.PlayabilityStatusReducer,
+	ScreenSize = if PartyPageCarouselExperimentation.getPartyPageCarouselEnabled() then ScreenSizeModule else nil,
+	FormFactor = require(Parent.FormFactor).FormFactorReducer,
+	Users = UserLibModule.Reducers.UserReducer,
+	[require(Parent.SquadsCore.Constants).RODUX_KEY] = if GetFFlagIsSquadEnabledFunction() then InstallReducerModule(SquadLocation.InExperience) else nil,
+	[SocialBlockingModalModule.RoduxKey] = SocialBlockingModalModule.installReducer()
+}))

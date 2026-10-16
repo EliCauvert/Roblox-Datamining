@@ -1,167 +1,251 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local dataHydrationModule = require(parent.DataHydration)
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local _ = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local fFlagAppChatUseProfileFrameThumbnailModule = require(appChat.Flags.FFlagAppChatUseProfileFrameThumbnail)
-local getConversationStoreModule = require(appChat.Stores.GetConversationStore)
-local avatar = foundationModule.Avatar
-local avatarSize = foundationModule.Enums.AvatarSize
-local image = foundationModule.Image
-local view = foundationModule.View
-local var1 = dataHydrationModule.Presence.PresenceStore.get()
-local presenceType = dataHydrationModule.Presence.PresenceEnums.PresenceType
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local DataHydrationModule = require(Parent.DataHydration)
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local _ = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local FFlagAppChatUseProfileFrameThumbnailModule = require(AppChat.Flags.FFlagAppChatUseProfileFrameThumbnail)
+local FFlagAppChatBindingFacePileUserTileParityModule = require(AppChat.Flags.FFlagAppChatBindingFacePileUserTileParity)
+local GetConversationStoreModule = require(AppChat.Stores.GetConversationStore)
+local GetStandardSizeAvatarHeadShotRbxthumbFunction = require(Parent.UserLib).Utils.getStandardSizeAvatarHeadShotRbxthumb
+local Avatar = FoundationModule.Avatar
+local AvatarSize = FoundationModule.Enums.AvatarSize
+local Image = FoundationModule.Image
+local View = FoundationModule.View
+local UseCumulativeBackgroundFunction = FoundationModule.Hooks.useCumulativeBackground
+local GetResult = DataHydrationModule.Presence.PresenceStore.get()
+local PresenceType = DataHydrationModule.Presence.PresenceEnums.PresenceType
 
-local function _(p1)
+local function _(p1) --[[ Line: 37 | Named "getParticipantId" ]]
 	if type(p1) == "table" then
-		local id = p1.id or p1.userId
+		local Id = p1.id or p1.userId
 		
-		return if id == nil then nil else tostring(id)
+		return if Id == nil then nil else tostring(Id)
+	else
+		return if p1 == nil then nil else tostring(p1)
 	end
-	return if p1 == nil then nil else tostring(p1)
 end
 
-local function getParticipantIds(p1, p2)
-	-- upvalues: getConversationStoreModule (ref)
-	local var2 = p1.presentationSignal(p2)
-	local var3 = if var2.localUserId ~= nil then "" else tostring(var2.localUserId)
-	local conversation = getConversationStoreModule(false).getConversation(p1.id, p2)
-	local var4 = if conversation == nil or conversation.participants == nil then {} else conversation.participants
-	local t = {}
+local function getParticipantIds(p1, p2) --[[ Line: 45 ]]
+	-- upvalues: GetConversationStoreModule (copy)
+	local PresentationSignalResult = p1.presentationSignal(p2)
+	local Text: string = if PresentationSignalResult.localUserId == nil then "" else tostring(PresentationSignalResult.localUserId)
+	local Conversation = GetConversationStoreModule(false).getConversation(p1.id, p2)
+	local T = if Conversation == nil or Conversation.participants == nil then {} else Conversation.participants
+	local List = {}
 	
-	if #var4 == 1 then
-		table.insert(t, var3)
+	if #T == 1 then
+		table.insert(List, Text)
 		
-		return t
+		return List
 	end
-	for i, v in var4 do
-		local var5
-		if type(v) == "table" then
-			local var6 = v.id or v.userId
-			var5 = if var6 ~= nil then nil else tostring(var6)
+	for _, value in T do
+		local Text1 = nil
+		if type(value) == "table" then
+			local Id = value.id or value.userId
+			Text1 = if Id == nil then nil else tostring(Id)
 		else
-			var5 = if v ~= nil then nil else tostring(v)
+			Text1 = if value == nil then nil else tostring(value)
 		end
-		if var5 ~= nil and var5 ~= var3 then
-			table.insert(t, var5)
+		if Text1 ~= nil and Text1 ~= Text then
+			table.insert(List, Text1)
 		end
 	end
-	return t
+	return List
 end
 
-local _ = function(p3, p4)
-	-- upvalues: getParticipantIds (ref)
-	local var7 = getParticipantIds(p3, p4)
+local _ = function(p3, p4) --[[ Line: 68 | Named "getAvatarIds" ]]
+	-- upvalues: getParticipantIds (copy)
+	local ParticipantIds = getParticipantIds(p3, p4)
 	
-	return { primary = var7[1] or "", secondary = var7[2] }
+	return {
+		primary = ParticipantIds[1] or "",
+		secondary = ParticipantIds[2]
+	}
 end
 
-return function(p3)
-	-- upvalues: foundationModule (ref), reactModule (ref), getParticipantIds (ref), var1 (ref), presenceType (ref), signalsReactModule (ref), view (ref), avatar (ref), fFlagAppChatUseProfileFrameThumbnailModule (ref), avatarSize (ref), image (ref)
-	local var7 = foundationModule.Hooks.useTokens()
-	local shift300 = var7.Color.Shift.Shift_300
-	local var8 = reactModule.useCallback(function(p4, p5)
-		-- upvalues: getParticipantIds (copy)
-		local var9 = getParticipantIds(p4, p5)
+local function getHeadshotImage(UserId, HasSecondary, FFlagAppChatUseProfileFrameThumbnailModule) --[[ Line: 77 ]]
+	-- upvalues: GetStandardSizeAvatarHeadShotRbxthumbFunction (copy)
+	return if HasSecondary and UserId ~= 0 then GetStandardSizeAvatarHeadShotRbxthumbFunction(tostring(UserId), FFlagAppChatUseProfileFrameThumbnailModule) else ""
+end
+
+return function(p3) --[[ Line: 84 | Named "ConversationFacePileBinding" ]]
+	-- upvalues: FoundationModule (copy), ReactModule (copy), getParticipantIds (copy), GetResult (copy), PresenceType (copy), SignalsReactModule (copy), FFlagAppChatBindingFacePileUserTileParityModule (copy), UseCumulativeBackgroundFunction (copy), Image (copy), getHeadshotImage (copy), FFlagAppChatUseProfileFrameThumbnailModule (copy), View (copy), Avatar (copy), AvatarSize (copy)
+	local UseTokensResult = FoundationModule.Hooks.useTokens()
+	local Shift300 = UseTokensResult.Color.Shift.Shift_300
+	local UseResult = ReactModule.useCallback(function(p4, p5): number --[[ Line: 88 ]]
+		-- upvalues: getParticipantIds (upval)
+		local ParticipantIds = getParticipantIds(p4, p5)
 		
-		return tonumber(({ primary = var9[1] or "", secondary = var9[2] }).primary) or 0
+		return tonumber(({
+			primary = ParticipantIds[1] or "",
+			secondary = ParticipantIds[2]
+		}).primary) or 0
 	end, {})
-	local var9 = reactModule.useCallback(function(p4, p5)
-		-- upvalues: getParticipantIds (copy)
-		local var10 = getParticipantIds(p4, p5)
+	local UseResult1 = ReactModule.useCallback(function(p4, p5): number --[[ Line: 91 ]]
+		-- upvalues: getParticipantIds (upval)
+		local ParticipantIds = getParticipantIds(p4, p5)
 		
-		return tonumber(({ primary = var10[1] or "", secondary = var10[2] }).secondary) or 0
+		return tonumber(({
+			primary = ParticipantIds[1] or "",
+			secondary = ParticipantIds[2]
+		}).secondary) or 0
 	end, {})
-	local var10 = reactModule.useCallback(function(p4, p5)
-		-- upvalues: getParticipantIds (copy)
-		local var11 = getParticipantIds(p4, p5)
+	local UseResult2 = ReactModule.useCallback(function(p4, p5): boolean --[[ Line: 94 ]]
+		-- upvalues: getParticipantIds (upval)
+		local ParticipantIds = getParticipantIds(p4, p5)
 		
-		return ({ primary = var11[1] or "", secondary = var11[2] }).secondary ~= nil
+		return ({
+			primary = ParticipantIds[1] or "",
+			secondary = ParticipantIds[2]
+		}).secondary ~= nil
 	end, {})
-	local var11 = reactModule.useCallback(function(p4, p5)
-		-- upvalues: getParticipantIds (copy), var1 (copy), presenceType (copy)
-		for i, v in getParticipantIds(p4, p5) do
-			local var12 = var1.GetPresenceByUserId(v).data(p5)
+	local UseResult3 = ReactModule.useCallback(function(p4, p5): boolean --[[ Line: 97 ]]
+		-- upvalues: getParticipantIds (upval), GetResult (upval), PresenceType (upval)
+		for _, value in getParticipantIds(p4, p5) do
+			local DataResult = GetResult.GetPresenceByUserId(value).data(p5)
 			
-			if var12 ~= nil then
-				local userPresenceType = var12.userPresenceType
+			if DataResult ~= nil then
+				local UserPresenceType = DataResult.userPresenceType
 				
-				if userPresenceType == presenceType.InGame or userPresenceType == presenceType.InStudio or userPresenceType == presenceType.Online then
+				if UserPresenceType == PresenceType.InGame or UserPresenceType == PresenceType.InStudio or UserPresenceType == PresenceType.Online then
 					return true
 				end
 			end
 		end
 		return false
 	end, {})
-	local var13 = signalsReactModule.useSignalBinding(function(p6)
-		-- upvalues: var8 (ref), p3 (ref)
-		return var8(p3.itemSignal(p6), p6)
+	local UseSignalBindingResult = SignalsReactModule.useSignalBinding(function(p6) --[[ Line: 114 ]]
+		-- upvalues: UseResult (copy), p3 (copy)
+		return UseResult(p3.itemSignal(p6), p6)
 	end)
-	local var14 = signalsReactModule.useSignalBinding(function(p6)
-		-- upvalues: var10 (ref), p3 (ref)
-		return var10(p3.itemSignal(p6), p6)
+	local UseSignalBindingResult1 = SignalsReactModule.useSignalBinding(function(p6) --[[ Line: 117 ]]
+		-- upvalues: UseResult1 (copy), p3 (copy)
+		return UseResult1(p3.itemSignal(p6), p6)
 	end)
-	
-	return reactModule.createElement(view, {
-		tag = "position-center-center anchor-center-center size-full"
-	}, {
-		Primary = reactModule.createElement(avatar, {
-			testId = "conversation-face-pile-primary",
-			backgroundStyle = shift300,
-			includeProfileFrame = fFlagAppChatUseProfileFrameThumbnailModule,
-			size = avatarSize.Medium,
-			userId = var13,
-			Visible = var14:map(function(p6)
-				return not p6
-			end)
-		}),
-		Group = reactModule.createElement(view, {
-			tag = "size-full",
-			testId = "conversation-face-pile-group",
-			Visible = var14
-		}, {
-			Primary = reactModule.createElement(avatar, {
-				testId = "conversation-face-pile-group-primary",
-				ZIndex = 2,
-				AnchorPoint = Vector2.new(0, 1),
-				backplateStyle = var7.Color.Surface.Surface_0,
-				backgroundStyle = shift300,
-				Position = UDim2.fromScale(0, 1),
-				size = avatarSize.Small,
-				userId = var13
-			}),
-			Secondary = reactModule.createElement(avatar, {
-				testId = "conversation-face-pile-group-secondary",
-				ZIndex = 1,
-				AnchorPoint = Vector2.new(1, 0),
-				backplateStyle = var7.Color.Surface.Surface_0,
-				backgroundStyle = shift300,
-				Position = UDim2.fromScale(1, 0),
-				size = avatarSize.Small,
-				userId = signalsReactModule.useSignalBinding(function(p6)
-					-- upvalues: var9 (ref), p3 (ref)
-					return var9(p3.itemSignal(p6), p6)
-				end)
-			})
-		}),
-		Presence = reactModule.createElement(image, {
-			Image = "component_assets/circle_16",
-			ZIndex = 3,
-			tag = "anchor-center-center radius-circle bg-surface-100",
-			testId = "conversation-face-pile-presence",
-			Position = UDim2.new(0.8536, var7.Stroke.Thicker, 0.8536, var7.Stroke.Thicker),
-			Size = UDim2.new(0.125, 4, 0.125, 4),
-			Visible = signalsReactModule.useSignalBinding(function(p6)
-				-- upvalues: var11 (ref), p3 (ref)
-				return var11(p3.itemSignal(p6), p6)
-			end),
-			imageStyle = var7.Color.System.Success,
-			stroke = {
-				Thickness = var7.Stroke.Thicker,
-				Color = var7.Color.Surface.Surface_100.Color3
-			}
-		})
+	local UseSignalBindingResult2 = SignalsReactModule.useSignalBinding(function(p6) --[[ Line: 120 ]]
+		-- upvalues: UseResult2 (copy), p3 (copy)
+		return UseResult2(p3.itemSignal(p6), p6)
+	end)
+	local MapResult = UseSignalBindingResult2:map(function(p6): boolean --[[ Line: 126 ]]
+		return not p6
+	end)
+	local UseCumulativeBackgroundResult = if FFlagAppChatBindingFacePileUserTileParityModule then UseCumulativeBackgroundFunction(UseTokensResult.Color.Surface.Surface_0, Shift300) else nil
+	local Element = ReactModule.createElement(Image, {
+		Image = "component_assets/circle_16",
+		ZIndex = 3,
+		tag = "anchor-center-center radius-circle bg-surface-100",
+		testId = "conversation-face-pile-presence",
+		Position = UDim2.new(0.8536, UseTokensResult.Stroke.Thicker, 0.8536, UseTokensResult.Stroke.Thicker),
+		Size = UDim2.new(0.125, 4, 0.125, 4),
+		Visible = SignalsReactModule.useSignalBinding(function(p6) --[[ Line: 123 ]]
+			-- upvalues: UseResult3 (copy), p3 (copy)
+			return UseResult3(p3.itemSignal(p6), p6)
+		end),
+		imageStyle = UseTokensResult.Color.System.Success,
+		stroke = {
+			Thickness = UseTokensResult.Stroke.Thicker,
+			Color = UseTokensResult.Color.Surface.Surface_100.Color3
+		}
 	})
+	
+	if FFlagAppChatBindingFacePileUserTileParityModule then
+		local JoinBindingsResult = ReactModule.joinBindings({
+			userId = UseSignalBindingResult,
+			hasSecondary = UseSignalBindingResult2
+		})
+		
+		return ReactModule.createElement(View, {
+			tag = "position-center-center anchor-center-center size-full"
+		}, {
+			Primary = ReactModule.createElement(View, {
+				tag = "size-full",
+				testId = "conversation-face-pile-primary",
+				Visible = MapResult
+			}, {
+				Image = ReactModule.createElement(Image, {
+					tag = "position-center-center anchor-center-center size-full aspect-1-1 radius-circle",
+					testId = "conversation-face-pile-primary--image",
+					backgroundStyle = Shift300,
+					Image = JoinBindingsResult:map(function(p6) --[[ Line: 152 ]]
+						-- upvalues: getHeadshotImage (upval), FFlagAppChatUseProfileFrameThumbnailModule (upval)
+						return getHeadshotImage(p6.userId, not p6.hasSecondary, FFlagAppChatUseProfileFrameThumbnailModule)
+					end)
+				})
+			}),
+			Group = ReactModule.createElement(View, {
+				tag = "size-full",
+				testId = "conversation-face-pile-group",
+				Visible = UseSignalBindingResult2
+			}, {
+				Primary = ReactModule.createElement(Image, {
+					tag = "position-bottom-left anchor-bottom-left aspect-1-1 radius-circle",
+					testId = "conversation-face-pile-group-primary--image",
+					ZIndex = 2,
+					backgroundStyle = UseCumulativeBackgroundResult,
+					Image = JoinBindingsResult:map(function(p6) --[[ Line: 155 ]]
+						-- upvalues: getHeadshotImage (upval)
+						return getHeadshotImage(p6.userId, p6.hasSecondary)
+					end),
+					Size = UDim2.fromScale(0.7, 0.7)
+				}),
+				Secondary = ReactModule.createElement(Image, {
+					tag = "position-top-right anchor-top-right aspect-1-1 radius-circle",
+					testId = "conversation-face-pile-group-secondary--image",
+					ZIndex = 1,
+					backgroundStyle = UseCumulativeBackgroundResult,
+					Image = ReactModule.joinBindings({
+						userId = UseSignalBindingResult1,
+						hasSecondary = UseSignalBindingResult2
+					}):map(function(p6) --[[ Line: 159 ]]
+						-- upvalues: getHeadshotImage (upval)
+						return getHeadshotImage(p6.userId, p6.hasSecondary)
+					end),
+					Size = UDim2.fromScale(0.7, 0.7)
+				})
+			}),
+			Presence = Element
+		})
+	else
+		return ReactModule.createElement(View, {
+			tag = "position-center-center anchor-center-center size-full"
+		}, {
+			Primary = ReactModule.createElement(Avatar, {
+				testId = "conversation-face-pile-primary",
+				backgroundStyle = Shift300,
+				includeProfileFrame = FFlagAppChatUseProfileFrameThumbnailModule,
+				size = AvatarSize.Medium,
+				userId = UseSignalBindingResult,
+				Visible = MapResult
+			}),
+			Group = ReactModule.createElement(View, {
+				tag = "size-full",
+				testId = "conversation-face-pile-group",
+				Visible = UseSignalBindingResult2
+			}, {
+				Primary = ReactModule.createElement(Avatar, {
+					testId = "conversation-face-pile-group-primary",
+					ZIndex = 2,
+					AnchorPoint = Vector2.new(0, 1),
+					backplateStyle = UseTokensResult.Color.Surface.Surface_0,
+					backgroundStyle = Shift300,
+					Position = UDim2.fromScale(0, 1),
+					size = AvatarSize.Small,
+					userId = UseSignalBindingResult
+				}),
+				Secondary = ReactModule.createElement(Avatar, {
+					testId = "conversation-face-pile-group-secondary",
+					ZIndex = 1,
+					AnchorPoint = Vector2.new(1, 0),
+					backplateStyle = UseTokensResult.Color.Surface.Surface_0,
+					backgroundStyle = Shift300,
+					Position = UDim2.fromScale(1, 0),
+					size = AvatarSize.Small,
+					userId = UseSignalBindingResult1
+				})
+			}),
+			Presence = Element
+		})
+	end
 end

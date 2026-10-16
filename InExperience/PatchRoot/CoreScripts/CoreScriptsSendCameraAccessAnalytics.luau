@@ -1,21 +1,21 @@
-﻿local corePackagesService = game:GetService("CorePackages")
+﻿local CorePackages = game:GetService("CorePackages")
 local _ = game:GetService("VideoCaptureService")
-local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
-local coreGuiService = game:GetService("CoreGui")
-local cryoModule = require(corePackagesService.Packages.Cryo)
-local getCamMicPermissionsModule = require(coreGuiService.RobloxGui.Modules.Settings.getCamMicPermissions)
-local default = require(corePackagesService.Workspace.Packages.PermissionsProtocol).PermissionsProtocol.default
-local var1 = not cryoModule.isEmpty(require(coreGuiService.RobloxGui.Modules.Settings.cameraDevicesHelper).GetDevices())
+local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
+local CoreGui = game:GetService("CoreGui")
+local GetCamMicPermissionsModule: (any, any, any) -> () = require(CoreGui.RobloxGui.Modules.Settings.getCamMicPermissions)
+local Default = require(CorePackages.Workspace.Packages.PermissionsProtocol).PermissionsProtocol.default
+local Inverted = not require(CorePackages.Packages.Cryo).isEmpty((require(CoreGui.RobloxGui.Modules.Settings.cameraDevicesHelper).GetDevices()))
 
-if var1 then
-	getCamMicPermissionsModule(function(p1)
-		-- upvalues: rbxAnalyticsService (ref), var1 (ref)
-		rbxAnalyticsService:SendEventDeferred("client", "avatarChat", "CameraDevicePermissionResponse", {
+if Inverted then
+	GetCamMicPermissionsModule(function(p1) --[[ Line: 14 ]]
+		-- upvalues: RbxAnalyticsService (copy), Inverted (copy)
+		RbxAnalyticsService:SendEventDeferred("client", "avatarChat", "CameraDevicePermissionResponse", {
 			hasAccessToCamera = p1.hasCameraPermissions,
-			hasEligibleCamera = var1
+			hasEligibleCamera = Inverted
 		})
-	end, { default.Permissions.CAMERA_ACCESS }, true)
+	end, { Default.Permissions.CAMERA_ACCESS }, true)
 	
 	return
+else
+	RbxAnalyticsService:SendEventDeferred("client", "avatarChat", "CameraDevicePermissionResponse", { hasAccessToCamera = false, hasEligibleCamera = Inverted })
 end
-rbxAnalyticsService:SendEventDeferred("client", "avatarChat", "CameraDevicePermissionResponse", { hasAccessToCamera = false, hasEligibleCamera = var1 })

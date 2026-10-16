@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Workspace.AdGuiInteractivity.AdGuiInteractivity)
+﻿return (require(script.Parent.Parent.Parent._Workspace.AdGuiInteractivity.AdGuiInteractivity))

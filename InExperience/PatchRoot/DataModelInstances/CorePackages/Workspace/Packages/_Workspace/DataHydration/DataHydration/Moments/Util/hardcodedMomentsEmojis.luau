@@ -1,46 +1,46 @@
-﻿local reactionType = require(script:FindFirstAncestor("DataHydration").Parent.MomentsTypes).Enums.ReactionType
+﻿local ReactionType = require(script:FindFirstAncestor("DataHydration").Parent.MomentsTypes).Enums.ReactionType
 
 return {
 	{
 		assetSource = nil,
 		unicode = nil,
-		id = reactionType.ThumbsUp,
-		name = reactionType.ThumbsUp
+		id = ReactionType.ThumbsUp,
+		name = ReactionType.ThumbsUp
 	},
 	{
 		assetSource = nil,
 		unicode = nil,
-		id = reactionType.Heart,
-		name = reactionType.Heart
+		id = ReactionType.Heart,
+		name = ReactionType.Heart
 	},
 	{
 		assetSource = nil,
 		unicode = nil,
-		id = reactionType.LaughJoy,
-		name = reactionType.LaughJoy
+		id = ReactionType.LaughJoy,
+		name = ReactionType.LaughJoy
 	},
 	{
 		assetSource = nil,
 		unicode = nil,
-		id = reactionType.Wow,
-		name = reactionType.Wow
+		id = ReactionType.Wow,
+		name = ReactionType.Wow
 	},
 	{
 		assetSource = nil,
 		unicode = nil,
-		id = reactionType.Cry,
-		name = reactionType.Cry
+		id = ReactionType.Cry,
+		name = ReactionType.Cry
 	},
 	{
 		assetSource = nil,
 		unicode = nil,
-		id = reactionType.Fire,
-		name = reactionType.Fire
+		id = ReactionType.Fire,
+		name = ReactionType.Fire
 	},
 	{
 		assetSource = nil,
 		unicode = nil,
-		id = reactionType.Skull,
-		name = reactionType.Skull
+		id = ReactionType.Skull,
+		name = ReactionType.Skull
 	}
 }

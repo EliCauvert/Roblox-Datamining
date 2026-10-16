@@ -1,0 +1,3 @@
+﻿local FFlagBuildExperienceUseFoundationSheetModule = require(script.Parent.FFlagBuildExperienceUseFoundationSheet)
+
+return game:DefineFastFlag("BuildExperienceChatSheetReversedContent", false) and FFlagBuildExperienceUseFoundationSheetModule

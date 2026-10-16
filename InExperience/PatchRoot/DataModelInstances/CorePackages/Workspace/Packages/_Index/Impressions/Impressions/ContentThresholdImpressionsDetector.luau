@@ -1,88 +1,89 @@
-﻿local parent = script:FindFirstAncestor("Impressions").Parent
-local reactModule = require(parent.React)
-local useViewportBounds = require(parent.ViewportUtils).useViewportBounds
+﻿local Parent = script:FindFirstAncestor("Impressions").Parent
+local ReactModule = require(Parent.React)
+local UseViewportBoundsFunction = require(Parent.ViewportUtils).useViewportBounds
 
-return function(p1)
-	-- upvalues: useViewportBounds (ref), reactModule (ref)
-	local var1 = useViewportBounds()
-	local var2 = reactModule.useRef({})
-	local var3 = reactModule.useRef(0)
-	local var4 = reactModule.useRef(nil)
-	local var5 = reactModule.useRef(p1.impressionsTag)
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref), var1 (ref), var3 (ref), var2 (ref)
-		local current = p1.containerRef.current
+return function(p1) --[[ Line: 24 | Named "ContentThresholdImpressionsDetector" ]]
+	-- upvalues: UseViewportBoundsFunction (copy), ReactModule (copy)
+	local UseViewportBoundsResult = UseViewportBoundsFunction()
+	local UseRefResult = ReactModule.useRef({})
+	local UseRefResult1 = ReactModule.useRef(0)
+	local UseRefResult2 = ReactModule.useRef(nil)
+	local UseRefResult3 = ReactModule.useRef(p1.impressionsTag)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 32 ]]
+		-- upvalues: p1 (copy), UseViewportBoundsResult (copy), UseRefResult1 (copy), UseRefResult (copy)
+		local Current = p1.containerRef.current
 		
-		if not current then return end
-		local floored = math.floor(p1.fullContentHeight)
+		if not Current then return end
+		local Floored = math.floor(p1.fullContentHeight)
 		
-		if floored <= 0 then return end
-		if current.AbsoluteSize.Y == 0 then return end
-		local y = current.AbsolutePosition.Y
-		local var7 = y + current.AbsoluteSize.Y
-		local y_1 = (if p1.viewportBoundsOffset then {
-			min = var1.min + p1.viewportBoundsOffset.min,
-			max = var1.max + p1.viewportBoundsOffset.max
-		} else var1).max.Y
+		if Floored <= 0 then return end
+		if Current.AbsoluteSize.Y == 0 then return end
+		local Y = Current.AbsolutePosition.Y
+		local NewY = Y + Current.AbsoluteSize.Y
+		local Y1: number = (if p1.viewportBoundsOffset then {
+			min = UseViewportBoundsResult.min + p1.viewportBoundsOffset.min,
+			max = UseViewportBoundsResult.max + p1.viewportBoundsOffset.max
+		} else UseViewportBoundsResult).max.Y
 		
-		if y_1 <= 0 then return end
-		var3.current = math.max(var3.current, math.clamp(math.min(var7, y_1) - y, 0, floored) / floored)
-		local t = {}
+		if Y1 <= 0 then return end
+		UseRefResult1.current = math.max(UseRefResult1.current, math.clamp(math.min(NewY, Y1) - Y, 0, Floored) / Floored)
+		local List = {}
 		
-		for i, v in p1.thresholds do
-			if not var2.current[i] and v <= var3.current then
-				var2.current[i] = true
-				table.insert(t, p1.thresholds[i])
+		for i, threshold in p1.thresholds do
+			if not UseRefResult.current[i] and threshold <= UseRefResult1.current then
+				UseRefResult.current[i] = true
+				table.insert(List, p1.thresholds[i])
 			end
 		end
-		if #t > 0 then
-			p1.sendImpressions(t)
+		if #List > 0 then
+			p1.sendImpressions(List)
 		end
 	end, {
 		p1.containerRef, p1.fullContentHeight, p1.thresholds, p1.viewportBoundsOffset,
-		p1.sendImpressions, var1
+		p1.sendImpressions, UseViewportBoundsResult
 	})
-	local var8 = reactModule.useCallback(function()
-		-- upvalues: var4 (ref), var6 (ref)
-		if var4.current then
-			task.cancel(var4.current)
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 89 ]]
+		-- upvalues: UseRefResult2 (copy), UseResult (copy)
+		if UseRefResult2.current then
+			task.cancel(UseRefResult2.current)
 		end
-		var4.current = task.delay(0.2, function()
-			-- upvalues: var4 (copy), var6 (copy)
-			var4.current = nil
-			var6()
+		UseRefResult2.current = task.delay(0.2, function() --[[ Line: 93 ]]
+			-- upvalues: UseRefResult2 (upval), UseResult (upval)
+			UseRefResult2.current = nil
+			UseResult()
 		end)
-	end, { var6 })
-	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), p1 (ref), var2 (ref), var3 (ref), var8 (ref)
-		if var5.current ~= p1.impressionsTag then
-			var5.current = p1.impressionsTag
-			var2.current = {}
-			var3.current = 0
-			var8()
+	end, { UseResult })
+	ReactModule.useEffect(function() --[[ Line: 99 ]]
+		-- upvalues: UseRefResult3 (copy), p1 (copy), UseRefResult (copy), UseRefResult1 (copy), UseResult1 (copy)
+		if UseRefResult3.current ~= p1.impressionsTag then
+			UseRefResult3.current = p1.impressionsTag
+			UseRefResult.current = {}
+			UseRefResult1.current = 0
+			UseResult1()
 		end
-	end, { p1.impressionsTag, var8 })
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var8 (ref), var4 (ref)
-		local current = p1.containerRef.current
+	end, { p1.impressionsTag, UseResult1 })
+	ReactModule.useEffect(function() --[[ Line: 108 ]]
+		-- upvalues: p1 (copy), UseResult1 (copy), UseRefResult2 (copy)
+		local Current = p1.containerRef.current
 		
-		if current then
-			var8()
-			local var9 = current:GetPropertyChangedSignal("AbsolutePosition"):Connect(var8)
-			local var10 = current:GetPropertyChangedSignal("AbsoluteSize"):Connect(var8)
+		if Current then
+			UseResult1()
+			local Connection = Current:GetPropertyChangedSignal("AbsolutePosition"):Connect(UseResult1)
+			local Connection1 = Current:GetPropertyChangedSignal("AbsoluteSize"):Connect(UseResult1)
 			
-			return function()
-				-- upvalues: var4 (copy), var9 (ref), var10 (ref)
-				if var4.current then
-					task.cancel(var4.current)
-					var4.current = nil
+			return function() --[[ Line: 118 ]]
+				-- upvalues: UseRefResult2 (upval), Connection (copy), Connection1 (copy)
+				if UseRefResult2.current then
+					task.cancel(UseRefResult2.current)
+					UseRefResult2.current = nil
 				end
-				var9:Disconnect()
-				var10:Disconnect()
+				Connection:Disconnect()
+				Connection1:Disconnect()
 			end
+		else
+			return nil
 		end
-		return nil
-	end, { p1.containerRef, var8 })
+	end, { p1.containerRef, UseResult1 })
 	
 	return nil
 end

@@ -1,23 +1,23 @@
 ﻿local _ = require(script:FindFirstAncestor("AvatarExperienceCatalog").Models.WidgetListInfo)
 
-return function(p1)
-	local t = {
+return function(List) --[[ Line: 11 | Named "getFooterVisibilityFromItemFooters" ]]
+	local config = {
 		isCreatorNameVisible = false,
 		isTitleVisible = false,
 		isPriceVisible = false
 	}
 	
-	if not p1 then
-		return t
+	if not List then
+		return config
 	end
-	for i, v in p1 do
-		if v.contentType == "AgentName" then
-			t.isCreatorNameVisible = true
-		elseif v.contentType == "Price" then
-			t.isPriceVisible = true
-		elseif v.contentType == "ItemName" then
-			t.isTitleVisible = true
+	for _, value in List do
+		if value.contentType == "AgentName" then
+			config.isCreatorNameVisible = true
+		elseif value.contentType == "Price" then
+			config.isPriceVisible = true
+		elseif value.contentType == "ItemName" then
+			config.isTitleVisible = true
 		end
 	end
-	return t
+	return config
 end

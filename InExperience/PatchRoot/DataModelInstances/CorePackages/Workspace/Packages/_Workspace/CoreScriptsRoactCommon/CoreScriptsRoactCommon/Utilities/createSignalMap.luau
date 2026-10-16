@@ -1,59 +1,59 @@
-﻿local parent = script:FindFirstAncestor("CoreScriptsRoactCommon").Parent
-local signalsModule = require(parent.Signals)
-local cryoModule = require(parent.Cryo)
+﻿local Parent = script:FindFirstAncestor("CoreScriptsRoactCommon").Parent
+local SignalsModule = require(Parent.Signals)
+local CryoModule = require(Parent.Cryo)
 
-return function(value)
-	-- upvalues: signalsModule (ref), cryoModule (ref)
+return function(List) --[[ Line: 22 | Named "createSignalMap" ]]
+	-- upvalues: SignalsModule (copy), CryoModule (copy)
 	local t = {}
-	local var1 = 0
+	local Count = 0
 	
-	if value then
-		for i, v in pairs(value) do
-			t[i] = v
-			var1 += 1
+	if List then
+		for i, value in pairs(List) do
+			t[i] = value
+			Count += 1
 		end
 	end
-	local var2, var3 = signalsModule.createSignal(t)
-	local var4, var5 = signalsModule.createSignal(var1)
+	local Signal, Signal2 = SignalsModule.createSignal(t)
+	local Signal1, Signal2_1 = SignalsModule.createSignal(Count)
 	
 	return {
-		getData = function(p1, p2)
-			-- upvalues: var2 (ref)
-			return var2(p2)[p1]
+		getData = function(p1, p2) --[[ Line: 35 ]]
+			-- upvalues: Signal (copy)
+			return Signal(p2)[p1]
 		end,
-		setData = function(value, p1, p2)
-			-- upvalues: var2 (ref), cryoModule (copy), var5 (ref), var4 (ref), var3 (ref)
-			local var6 = var2(p2)
-			local var7 = cryoModule.Dictionary.join(var6, { [value] = p1 })
+		setData = function(p1, p2, p3) --[[ Line: 39 ]]
+			-- upvalues: Signal (copy), CryoModule (upval), Signal2_1 (copy), Signal1 (copy), Signal2 (copy)
+			local SignalResult = Signal(p3)
+			local JoinResult = CryoModule.Dictionary.join(SignalResult, { [p1] = p2 })
 			
-			if not var6[value] then
-				var5(var4(p2) + 1)
+			if not SignalResult[p1] then
+				Signal2_1(Signal1(p3) + 1)
 			end
-			var3(var7)
+			Signal2(JoinResult)
 		end,
-		removeData = function(p1, p2)
-			-- upvalues: var2 (ref), cryoModule (copy), var5 (ref), var4 (ref), var3 (ref)
-			local var6 = var2(p2)
+		removeData = function(p1, p2) --[[ Line: 49 ]]
+			-- upvalues: Signal (copy), CryoModule (upval), Signal2_1 (copy), Signal1 (copy), Signal2 (copy)
+			local SignalResult = Signal(p2)
 			
-			if var6[p1] then
-				local var7 = cryoModule.Dictionary.join(var6, { [p1] = cryoModule.None })
-				var5(var4(p2) - 1)
-				var3(var7)
+			if SignalResult[p1] then
+				local JoinResult = CryoModule.Dictionary.join(SignalResult, { [p1] = CryoModule.None })
+				Signal2_1(Signal1(p2) - 1)
+				Signal2(JoinResult)
 			end
 		end,
-		getCount = var4,
-		iterateData = function(p1, p2)
-			-- upvalues: signalsModule (copy), var2 (ref)
-			return signalsModule.createEffect(function()
-				-- upvalues: var2 (copy), p2 (ref), p1 (ref)
-				for i, v in pairs(var2(p2)) do
-					p1(i, v)
+		getCount = Signal1,
+		iterateData = function(Callback, p1) --[[ Line: 64 ]]
+			-- upvalues: SignalsModule (upval), Signal (copy)
+			return SignalsModule.createEffect(function() --[[ Line: 65 ]]
+				-- upvalues: Signal (upval), p1 (copy), Callback (copy)
+				for i, value in pairs((Signal(p1))) do
+					Callback(i, value)
 				end
 			end)
 		end,
-		getAllData = signalsModule.createComputed(function(p3)
-			-- upvalues: var2 (ref)
-			return var2(p3)
+		getAllData = SignalsModule.createComputed(function(p2) --[[ Line: 60 ]]
+			-- upvalues: Signal (copy)
+			return Signal(p2)
 		end)
 	}
 end

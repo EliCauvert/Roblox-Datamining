@@ -1,83 +1,83 @@
-﻿local parent = script:FindFirstAncestor("BuildExperiencePlaytestLaunch").Parent
-local httpService = game:GetService("HttpService")
-local memStorageService = game:GetService("MemStorageService")
-local messageBusService = game:GetService("MessageBusService")
-local logger = require(parent.Loggers).Logger
-local launchExperienceModule = require(script.Parent.launchExperience)
-local buildExperiencePlaytestRejoinDelayMs = game:DefineFastInt("BuildExperiencePlaytestRejoinDelayMs", 250)
-local buildExperiencePlaytestRejoinExpiryMs = game:DefineFastInt("BuildExperiencePlaytestRejoinExpiryMs", 60000)
-local gameMessageId = messageBusService:GetMessageId("Game", "onGameLeave")
+﻿local HttpService = game:GetService("HttpService")
+local MemStorageService = game:GetService("MemStorageService")
+local MessageBusService = game:GetService("MessageBusService")
+local Logger = require(script:FindFirstAncestor("BuildExperiencePlaytestLaunch").Parent.Loggers).Logger
+local LaunchExperienceModule = require(script.Parent.launchExperience)
+local BuildExperiencePlaytestRejoinDelayMs = game:DefineFastInt("BuildExperiencePlaytestRejoinDelayMs", 250)
+local BuildExperiencePlaytestRejoinExpiryMs = game:DefineFastInt("BuildExperiencePlaytestRejoinExpiryMs", 60000)
+local GameMessageId = MessageBusService:GetMessageId("Game", "onGameLeave")
 
-local function _()
+local function _() --[[ Line: 27 | Named "now" ]]
 	return DateTime.now().UnixTimestampMillis
 end
 
-local function takeIntent()
-	-- upvalues: memStorageService (ref), httpService (ref), buildExperiencePlaytestRejoinExpiryMs (ref), logger (ref)
-	local buildExperiencePlaytestRejoinItem = memStorageService:GetItem("BuildExperiencePlaytestRejoin")
+local function takeIntent() --[[ Line: 31 ]]
+	-- upvalues: MemStorageService (copy), HttpService (copy), BuildExperiencePlaytestRejoinExpiryMs (copy), Logger (copy)
+	local BuildExperiencePlaytestRejoinItem = MemStorageService:GetItem("BuildExperiencePlaytestRejoin")
 	
-	if buildExperiencePlaytestRejoinItem == nil or buildExperiencePlaytestRejoinItem == "" then
+	if BuildExperiencePlaytestRejoinItem == nil or BuildExperiencePlaytestRejoinItem == "" then
 		return nil
 	end
-	memStorageService:SetItem("BuildExperiencePlaytestRejoin", "")
-	local ok, status = pcall(httpService.JSONDecode, httpService, buildExperiencePlaytestRejoinItem)
+	MemStorageService:SetItem("BuildExperiencePlaytestRejoin", "")
+	local Success, Result = pcall(HttpService.JSONDecode, HttpService, BuildExperiencePlaytestRejoinItem)
 	
-	if not ok or type(status) ~= "table" or (type(status.placeId) ~= "number" or type(status.source) ~= "string") or type(status.createdAt) ~= "number" then
+	if not Success or type(Result) ~= "table" or type(Result.placeId) ~= "number" or type(Result.source) ~= "string" or type(Result.createdAt) ~= "number" then
 		return nil
 	end
-	local var1 = DateTime.now().UnixTimestampMillis - status.createdAt
+	local UnixTimestampMillisDelta = DateTime.now().UnixTimestampMillis - Result.createdAt
 	
-	if var1 < 0 or buildExperiencePlaytestRejoinExpiryMs < var1 then
-		logger:warning("PlaytestRejoin: dropped a Playtest request that expired after {} ms", var1)
+	if UnixTimestampMillisDelta < 0 or BuildExperiencePlaytestRejoinExpiryMs < UnixTimestampMillisDelta then
+		Logger:warning("PlaytestRejoin: dropped a Playtest request that expired after {} ms", UnixTimestampMillisDelta)
 		
 		return nil
+	else
+		return Result
 	end
-	return status
 end
 
-local t = {
-	request = function(p1, p2, p3)
-		-- upvalues: memStorageService (ref), httpService (ref)
-		memStorageService:SetItem("BuildExperiencePlaytestRejoin", httpService:JSONEncode({
-			placeId = p1,
-			source = p2,
-			isTeamTest = p3,
+local PlaytestRejoinModule = {
+	request = function(PlaceId, Source, IsTeamTest) --[[ Line: 57 ]]
+		-- upvalues: MemStorageService (copy), HttpService (copy)
+		MemStorageService:SetItem("BuildExperiencePlaytestRejoin", HttpService:JSONEncode({
+			placeId = PlaceId,
+			source = Source,
+			isTeamTest = IsTeamTest,
 			createdAt = DateTime.now().UnixTimestampMillis
 		}))
 	end,
-	resume = function(p1)
-		-- upvalues: takeIntent (ref), buildExperiencePlaytestRejoinDelayMs (ref), launchExperienceModule (ref)
-		local var1 = takeIntent()
+	resume = function(p1): boolean --[[ Line: 62 ]]
+		-- upvalues: takeIntent (copy), BuildExperiencePlaytestRejoinDelayMs (copy), LaunchExperienceModule (copy)
+		local TakeIntentResult = takeIntent()
 		
-		if var1 == nil then
+		if TakeIntentResult == nil then
 			return false
 		end
-		p1 = p1 or buildExperiencePlaytestRejoinDelayMs
+		local P3 = p1 or BuildExperiencePlaytestRejoinDelayMs
 		
-		if p1 > 0 then
-			task.delay(p1 / 1000, function()
-				-- upvalues: launchExperienceModule (copy), var1 (ref)
-				launchExperienceModule(var1.placeId, var1.source, var1.isTeamTest)
+		if P3 > 0 then
+			task.delay(P3 / 1000, function() --[[ Line: 70 ]]
+				-- upvalues: LaunchExperienceModule (upval), TakeIntentResult (copy)
+				LaunchExperienceModule(TakeIntentResult.placeId, TakeIntentResult.source, TakeIntentResult.isTeamTest)
 			end)
 		else
-			launchExperienceModule(var1.placeId, var1.source, var1.isTeamTest)
+			LaunchExperienceModule(TakeIntentResult.placeId, TakeIntentResult.source, TakeIntentResult.isTeamTest)
 		end
 		return true
 	end
 }
 
-function t.listen()
-	-- upvalues: t (ref), messageBusService (ref), gameMessageId (ref)
-	t.resume()
-	local var1 = messageBusService:Subscribe(gameMessageId, function()
-		-- upvalues: t (copy)
-		t.resume()
+function PlaytestRejoinModule.listen() --[[ Line: 80 ]]
+	-- upvalues: PlaytestRejoinModule (copy), MessageBusService (copy), GameMessageId (copy)
+	PlaytestRejoinModule.resume()
+	local SubscribeResult = MessageBusService:Subscribe(GameMessageId, function() --[[ Line: 82 ]]
+		-- upvalues: PlaytestRejoinModule (upval)
+		PlaytestRejoinModule.resume()
 	end, false, false)
 	
-	return function()
-		-- upvalues: var1 (ref)
-		var1:Disconnect()
+	return function() --[[ Line: 85 ]]
+		-- upvalues: SubscribeResult (copy)
+		SubscribeResult:Disconnect()
 	end
 end
 
-return t
+return PlaytestRejoinModule

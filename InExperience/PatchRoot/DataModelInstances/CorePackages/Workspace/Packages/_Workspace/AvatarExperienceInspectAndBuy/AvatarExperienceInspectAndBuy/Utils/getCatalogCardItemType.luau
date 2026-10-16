@@ -1,8 +1,8 @@
 ﻿local AXCommonModule = require(script:FindFirstAncestor("AvatarExperienceInspectAndBuy").Parent.AXCommon)
-local itemRestrictions = AXCommonModule.Enums.ItemRestrictions
-local catalogItemCardItemTypeEnum = AXCommonModule.Components.CatalogItemCard.CatalogItemCardItemTypeEnum
+local ItemRestrictions = AXCommonModule.Enums.ItemRestrictions
+local CatalogItemCardItemTypeEnum = AXCommonModule.Components.CatalogItemCard.CatalogItemCardItemTypeEnum
 
-return function(p1)
-	-- upvalues: itemRestrictions (ref), catalogItemCardItemTypeEnum (ref)
-	return if p1 then if p1[itemRestrictions.Limited] then catalogItemCardItemTypeEnum.Limited elseif p1[itemRestrictions.Collectible] or p1[itemRestrictions.LimitedUnique] then catalogItemCardItemTypeEnum.Collectible else nil else nil
+return function(p1) --[[ Line: 13 | Named "getCatalogCardItemType" ]]
+	-- upvalues: ItemRestrictions (copy), CatalogItemCardItemTypeEnum (copy)
+	return if p1 then if p1[ItemRestrictions.Limited] then CatalogItemCardItemTypeEnum.Limited elseif p1[ItemRestrictions.Collectible] or p1[ItemRestrictions.LimitedUnique] then CatalogItemCardItemTypeEnum.Collectible else nil else nil
 end

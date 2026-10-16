@@ -1,7 +1,7 @@
-﻿local reactModule = require(script:FindFirstAncestor("AvatarExperienceSlotBasedEditor").Parent.React)
-local slotBasedEditorContextModule = require(script.Parent.SlotBasedEditorContext)
+﻿local ReactModule = require(script:FindFirstAncestor("AvatarExperienceSlotBasedEditor").Parent.React)
+local SlotBasedEditorContextModule = require(script.Parent.SlotBasedEditorContext)
 
-return function()
-	-- upvalues: reactModule (ref), slotBasedEditorContextModule (ref)
-	return reactModule.useContext(slotBasedEditorContextModule)
+return function() --[[ Line: 13 | Named "useSlotBasedEditorContext" ]]
+	-- upvalues: ReactModule (copy), SlotBasedEditorContextModule (copy)
+	return (ReactModule.useContext(SlotBasedEditorContextModule))
 end

@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("RealtimeDelivery").Parent.React).createContext(require(script.Parent.TopicEventReceiver).new(game:GetService("NotificationService")))
+﻿return require(script:FindFirstAncestor("RealtimeDelivery").Parent.React).createContext((require(script.Parent.TopicEventReceiver).new((game:GetService("NotificationService")))))

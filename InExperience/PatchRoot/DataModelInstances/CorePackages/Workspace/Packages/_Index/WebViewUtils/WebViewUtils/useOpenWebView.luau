@@ -1,71 +1,73 @@
-﻿local parent = script:FindFirstAncestor("WebViewUtils").Parent
-local reactModule = require(parent.React)
-local useEffect = reactModule.useEffect
-local useCallback = reactModule.useCallback
-local useRef = reactModule.useRef
-local sharedFlagsModule = require(parent.SharedFlags)
-local getFFlagEnableUnifiedWebViews = sharedFlagsModule.GetFFlagEnableUnifiedWebViews
-local fFlagAppNavMyStatsTab = sharedFlagsModule.FFlagAppNavMyStatsTab
-local fFlagUseWebViewSessionInOpenWebViewModule = require(script.Parent.Flags.FFlagUseWebViewSessionInOpenWebView)
-local openWebViewSessionModule = require(script.Parent.openWebViewSession)
-local browserService = game:GetService("BrowserService")
-local httpService = game:GetService("HttpService")
-local webViewService = game:GetService("WebViewService")
+﻿local Parent = script:FindFirstAncestor("WebViewUtils").Parent
+local ReactModule = require(Parent.React)
+local UseEffectFunction = ReactModule.useEffect
+local UseCallbackFunction = ReactModule.useCallback
+local UseRefFunction = ReactModule.useRef
+local SharedFlagsModule = require(Parent.SharedFlags)
+local GetFFlagEnableUnifiedWebViewsFunction = SharedFlagsModule.GetFFlagEnableUnifiedWebViews
+local FFlagAppNavMyStatsTab = SharedFlagsModule.FFlagAppNavMyStatsTab
+local FFlagUseWebViewSessionInOpenWebViewModule = require(script.Parent.Flags.FFlagUseWebViewSessionInOpenWebView)
+local OpenWebViewSessionModule = require(script.Parent.openWebViewSession)
+local BrowserService = game:GetService("BrowserService")
+local HttpService = game:GetService("HttpService")
+local WebViewService = game:GetService("WebViewService")
 
-return function()
-	-- upvalues: useRef (ref), useCallback (ref), fFlagUseWebViewSessionInOpenWebViewModule (ref), openWebViewSessionModule (ref), fFlagAppNavMyStatsTab (ref), getFFlagEnableUnifiedWebViews (ref), webViewService (ref), browserService (ref), httpService (ref), useEffect (ref)
-	local var1 = useRef(nil)
-	local var2 = useRef(nil)
-	local var3 = useCallback(function()
-		-- upvalues: var1 (ref), var2 (ref)
-		if var1.current then
-			var1.current:Disconnect()
-			var1.current = nil
+return function() --[[ Line: 32 | Named "useOpenWebView" ]]
+	-- upvalues: UseRefFunction (copy), UseCallbackFunction (copy), FFlagUseWebViewSessionInOpenWebViewModule (copy), OpenWebViewSessionModule (copy), FFlagAppNavMyStatsTab (copy), GetFFlagEnableUnifiedWebViewsFunction (copy), WebViewService (copy), BrowserService (copy), HttpService (copy), UseEffectFunction (copy)
+	local UseRefResult = UseRefFunction(nil)
+	local UseRefResult1 = UseRefFunction(nil)
+	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 36 ]]
+		-- upvalues: UseRefResult (copy), UseRefResult1 (copy)
+		if UseRefResult.current then
+			UseRefResult.current:Disconnect()
+			UseRefResult.current = nil
 		end
-		if var2.current then
-			var2.current()
-			var2.current = nil
+		if UseRefResult1.current then
+			UseRefResult1.current()
+			UseRefResult1.current = nil
 		end
-	end, { var1, var2 })
-	local var4 = useCallback(function(p1, p2, p3)
-		-- upvalues: fFlagUseWebViewSessionInOpenWebViewModule (copy), var3 (ref), openWebViewSessionModule (copy), fFlagAppNavMyStatsTab (copy), var2 (ref), getFFlagEnableUnifiedWebViews (copy), var1 (ref), webViewService (copy), browserService (copy), httpService (copy)
-		if fFlagUseWebViewSessionInOpenWebViewModule then
-			var3()
-			local _, var5 = openWebViewSessionModule(p1, p2, if fFlagAppNavMyStatsTab then p3 else nil)
-			var2.current = var5
+	end, { UseRefResult, UseRefResult1 })
+	local UseCallbackResult1 = UseCallbackFunction(function(Url, Title, Callback) --[[ Line: 47 ]]
+		-- upvalues: FFlagUseWebViewSessionInOpenWebViewModule (upval), UseCallbackResult (copy), OpenWebViewSessionModule (upval), FFlagAppNavMyStatsTab (upval), UseRefResult1 (copy), GetFFlagEnableUnifiedWebViewsFunction (upval), UseRefResult (copy), WebViewService (upval), BrowserService (upval), HttpService (upval)
+		if FFlagUseWebViewSessionInOpenWebViewModule then
+			UseCallbackResult()
+			local _, OpenWebViewSessionModuleResult2 = OpenWebViewSessionModule(Url, Title, if FFlagAppNavMyStatsTab then Callback else nil)
+			UseRefResult1.current = OpenWebViewSessionModuleResult2
 			
 			return
-		elseif getFFlagEnableUnifiedWebViews() then
-			var3()
-			var1.current = webViewService.OnWindowClosed:Connect(function()
-				-- upvalues: webViewService (copy), var3 (copy), fFlagAppNavMyStatsTab (copy), p3 (ref)
-				webViewService:CloseWindow()
-				var3()
+		end
+		if GetFFlagEnableUnifiedWebViewsFunction() then
+			UseCallbackResult()
+			UseRefResult.current = WebViewService.OnWindowClosed:Connect(function() --[[ Line: 60 ]]
+				-- upvalues: WebViewService (upval), UseCallbackResult (upval), FFlagAppNavMyStatsTab (upval), Callback (copy)
+				WebViewService:CloseWindow()
+				UseCallbackResult()
 				
-				if fFlagAppNavMyStatsTab and p3 then
-					p3()
+				if FFlagAppNavMyStatsTab and Callback then
+					Callback()
 				end
 			end)
-			webViewService:OpenWindow(p1, p2, true)
+			WebViewService:OpenWindow(Url, Title, true)
 			
 			return
+		else
+			BrowserService:SendCommand(HttpService:JSONEncode({
+				command = "open",
+				visible = true,
+				isGenericWebview = true,
+				enableOverlayReplacement = true,
+				url = Url,
+				title = Title
+			}))
 		end
-		browserService:SendCommand(httpService:JSONEncode({
-			command = "open",
-			visible = true,
-			isGenericWebview = true,
-			enableOverlayReplacement = true,
-			url = p1,
-			title = p2
-		}))
-	end, { var3 })
-	useEffect(function()
-		-- upvalues: var3 (ref)
-		return function()
-			-- upvalues: var3 (copy)
-			var3()
+	end, { UseCallbackResult })
+	UseEffectFunction(function() --[[ Line: 82 ]]
+		-- upvalues: UseCallbackResult (copy)
+		return function() --[[ Line: 83 ]]
+			-- upvalues: UseCallbackResult (upval)
+			UseCallbackResult()
 		end
-	end, { var3 })
+	end, { UseCallbackResult })
 	
-	return var4
+	return UseCallbackResult1
 end

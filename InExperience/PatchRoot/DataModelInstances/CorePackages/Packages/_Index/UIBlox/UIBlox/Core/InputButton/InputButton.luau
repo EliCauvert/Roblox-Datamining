@@ -1,48 +1,48 @@
-﻿local parent = script.Parent.Parent.Parent.Parent
-local roactModule = require(parent.Roact)
-local tModule = require(parent.t)
-local cryoModule = require(parent.Cryo)
-local roactGamepadModule = require(parent.RoactGamepad)
-local foundationModule = require(parent.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local withStyleModule = require(parent.UIBlox.Core.Style.withStyle)
-local imageSetComponentModule = require(parent.UIBlox.Core.ImageSet.ImageSetComponent)
-local controllableModule = require(parent.UIBlox.Core.Control.Controllable)
-local controlStateModule = require(parent.UIBlox.Core.Control.Enum.ControlState)
-local fitTextLabel = require(parent.FitFrame).FitTextLabel
-local fitFrameHorizontal = require(parent.FitFrame).FitFrameHorizontal
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local inputButton = roactModule.PureComponent:extend("InputButton")
-inputButton.validateProps = tModule.strictInterface({
-	text = tModule.string,
-	size = tModule.optional(tModule.UDim2),
-	image = tModule.table,
-	imageColor = tModule.Color3,
-	fillImage = tModule.optional(tModule.table),
-	fillImageSize = tModule.optional(tModule.UDim2),
-	fillImageColor = tModule.optional(tModule.Color3),
-	selectedColor = tModule.Color3,
-	textColor = tModule.Color3,
-	transparency = tModule.number,
-	onActivated = tModule.callback,
-	isDisabled = tModule.optional(tModule.boolean),
-	layoutOrder = tModule.optional(tModule.number),
-	frameRef = tModule.optional(tModule.table),
-	NextSelectionLeft = tModule.optional(tModule.table),
-	NextSelectionRight = tModule.optional(tModule.table),
-	NextSelectionUp = tModule.optional(tModule.table),
-	NextSelectionDown = tModule.optional(tModule.table),
-	SelectionImageObject = tModule.optional(tModule.table),
-	isRoactGamepadEnabled = tModule.optional(tModule.boolean)
+﻿local Parent = script.Parent.Parent.Parent.Parent
+local RoactModule = require(Parent.Roact)
+local TModule = require(Parent.t)
+local CryoModule = require(Parent.Cryo)
+local RoactGamepadModule = require(Parent.RoactGamepad)
+local FoundationModule = require(Parent.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local WithStyleModule = require(Parent.UIBlox.Core.Style.withStyle)
+local ImageSetComponentModule = require(Parent.UIBlox.Core.ImageSet.ImageSetComponent)
+local ControllableModule = require(Parent.UIBlox.Core.Control.Controllable)
+local ControlStateModule = require(Parent.UIBlox.Core.Control.Enum.ControlState)
+local FitTextLabel = require(Parent.FitFrame).FitTextLabel
+local FitFrameHorizontal = require(Parent.FitFrame).FitFrameHorizontal
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local InputButton = RoactModule.PureComponent:extend("InputButton")
+InputButton.validateProps = TModule.strictInterface({
+	text = TModule.string,
+	size = TModule.optional(TModule.UDim2),
+	image = TModule.table,
+	imageColor = TModule.Color3,
+	fillImage = TModule.optional(TModule.table),
+	fillImageSize = TModule.optional(TModule.UDim2),
+	fillImageColor = TModule.optional(TModule.Color3),
+	selectedColor = TModule.Color3,
+	textColor = TModule.Color3,
+	transparency = TModule.number,
+	onActivated = TModule.callback,
+	isDisabled = TModule.optional(TModule.boolean),
+	layoutOrder = TModule.optional(TModule.number),
+	frameRef = TModule.optional(TModule.table),
+	NextSelectionLeft = TModule.optional(TModule.table),
+	NextSelectionRight = TModule.optional(TModule.table),
+	NextSelectionUp = TModule.optional(TModule.table),
+	NextSelectionDown = TModule.optional(TModule.table),
+	SelectionImageObject = TModule.optional(TModule.table),
+	isRoactGamepadEnabled = TModule.optional(TModule.boolean)
 })
-inputButton.defaultProps = {
+InputButton.defaultProps = {
 	layoutOrder = 0,
 	isDisabled = false,
 	isRoactGamepadEnabled = true
 }
 
-function inputButton.init(p1)
-	-- upvalues: controlStateModule (ref), roactModule (ref)
+function InputButton.init(p1) --[[ Line: 57 ]]
+	-- upvalues: ControlStateModule (copy), RoactModule (copy)
 	p1.state = {
 		outerTransparency = 1,
 		innerTransparency = 1,
@@ -52,119 +52,107 @@ function inputButton.init(p1)
 		innerImageColor = p1.props.fillImageColor
 	}
 	
-	function p0.changeSprite(p2)
-		-- upvalues: controlStateModule (copy), p1 (ref)
-		if p2 == controlStateModule.Hover then
-			if p1.props.isDisabled then
-				return
-			else
+	function p1.changeSprite(Default) --[[ Line: 67 ]]
+		-- upvalues: ControlStateModule (upval), p1 (copy)
+		if Default == ControlStateModule.Hover then
+			if not p1.props.isDisabled then
 				p1:setState({ outerImageColor = p1.props.selectedColor })
 				
 				return
 			end
-		elseif p2 == controlStateModule.Default then
+		elseif Default == ControlStateModule.Default then
 			p1:setState({ outerImageColor = p1.props.imageColor })
 		end
 	end
 	
 	if not p1.props.size then
-		local var1, var2 = roactModule.createBinding(UDim2.new(1, 0, 0, 26))
-		p1.sizeBinding = var1
-		p1.updateSizeBinding = var2
+		p1.sizeBinding, p1.updateSizeBinding = RoactModule.createBinding(UDim2.new(1, 0, 0, 26))
 		
-		function p0.textAbsoluteSizeChanged(p2)
-			-- upvalues: p1 (ref)
-			local var3 = 26
+		function p1.textAbsoluteSizeChanged(Frame: Frame) --[[ Line: 85 ]]
+			-- upvalues: p1 (copy)
+			local YOffset = 26
 			
-			if var3 < p2.AbsoluteSize.Y then
-				var3 = p2.AbsoluteSize.Y
+			if YOffset < Frame.AbsoluteSize.Y then
+				YOffset = Frame.AbsoluteSize.Y
 			end
-			p1.updateSizeBinding(UDim2.new(1, 0, 0, var3))
+			p1.updateSizeBinding(UDim2.new(1, 0, 0, YOffset))
 		end
 	end
 end
 
-function inputButton.render(p1)
-	-- upvalues: withStyleModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), cryoModule (ref), roactModule (ref), fitFrameHorizontal (ref), fitTextLabel (ref), roactGamepadModule (ref), controllableModule (ref), imageSetComponentModule (ref)
-	return withStyleModule(function(p2)
-		-- upvalues: p1 (ref), foundationFontFaceMigration (copy), normalizeFontFace (copy), cryoModule (copy), roactModule (copy), fitFrameHorizontal (copy), fitTextLabel (copy), roactGamepadModule (copy), controllableModule (copy), imageSetComponentModule (copy)
-		local var1
-		local font = p2.Font
-		local var2 = font.Body.RelativeSize * font.BaseSize
-		local font_1 = font.Body.Font
-		local _ = nil
-		local t = {
+function InputButton.render(p1) --[[ Line: 95 ]]
+	-- upvalues: WithStyleModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), CryoModule (copy), RoactModule (copy), FitFrameHorizontal (copy), FitTextLabel (copy), RoactGamepadModule (copy), ControllableModule (copy), ImageSetComponentModule (copy)
+	return WithStyleModule(function(p2) --[[ Line: 96 ]]
+		-- upvalues: p1 (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), CryoModule (upval), RoactModule (upval), FitFrameHorizontal (upval), FitTextLabel (upval), RoactGamepadModule (upval), ControllableModule (upval), ImageSetComponentModule (upval)
+		local _Font = p2.Font
+		local BodyFont = _Font.Body.Font
+		local config = {
 			LayoutOrder = 2,
 			BackgroundTransparency = 1,
 			TextWrapped = true,
 			Text = p1.props.text,
 			TextXAlignment = Enum.TextXAlignment.Left,
-			TextSize = var2,
-			Font = if foundationFontFaceMigration then nil else font_1,
-			FontFace = if foundationFontFaceMigration then normalizeFontFace(font_1) else nil,
+			TextSize = _Font.Body.RelativeSize * _Font.BaseSize,
+			Font = if FoundationFontFaceMigration then nil else BodyFont,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(BodyFont) else nil,
 			TextColor3 = p1.props.textColor,
 			TextTransparency = p1.props.transparency
 		}
-		local var3 = "Frame"
-		local var4 = false
+		local v1 = "Frame"
+		local Flag = false
+		local Component = nil
+		local JoinResult = nil
 		
 		if p1.props.size then
-			var1 = "TextButton"
-			t = cryoModule.Dictionary.join(t, {
+			Component = "TextButton"
+			JoinResult = CryoModule.Dictionary.join(config, {
 				Size = UDim2.new(1, -34, 0, 26),
 				AutomaticSize = Enum.AutomaticSize.Y,
-				[roactModule.Event.Activated] = if not p1.props.isDisabled then p1.props.onActivated else nil
+				[RoactModule.Event.Activated] = if p1.props.isDisabled then nil else p1.props.onActivated or nil
 			})
 		else
-			var4 = true
-			var3 = fitFrameHorizontal
-			var1 = fitTextLabel
-			t = cryoModule.Dictionary.join(t, {
-				Font = if foundationFontFaceMigration then normalizeFontFace(font_1) else nil,
-				FontFace = if foundationFontFaceMigration then cryoModule.None else nil,
-				width = fitTextLabel.Width.FitToText,
+			Flag = true
+			v1 = FitFrameHorizontal
+			Component = FitTextLabel
+			JoinResult = CryoModule.Dictionary.join(config, {
+				Font = if FoundationFontFaceMigration then NormalizeFontFaceFunction(BodyFont) else nil,
+				FontFace = if FoundationFontFaceMigration then CryoModule.None else nil,
+				width = FitTextLabel.Width.FitToText,
 				onActivated = p1.props.onActivated,
-				[roactModule.Change.AbsoluteSize] = p1.textAbsoluteSizeChanged
+				[RoactModule.Change.AbsoluteSize] = p1.textAbsoluteSizeChanged
 			})
 		end
-		local size
-		local fillImage = p1.props.fillImage
-		local createElement = roactModule.createElement
-		local var5 = if p1.props.isRoactGamepadEnabled then roactGamepadModule.Focusable[var3] else var3
-		local t_1 = {}
+		local FillImage = p1.props.fillImage
 		
-		if not var4 then
-			size = p1.props.size or (p1.sizeBinding or nil)
-		end
-		t_1.Size = size
-		t_1.height = var4 and UDim.new(0, 26) or nil
-		t_1.AutomaticSize = Enum.AutomaticSize.Y
-		t_1.BackgroundTransparency = 1
-		t_1.LayoutOrder = p1.props.layoutOrder
-		t_1[roactModule.Ref] = p1.props.frameRef
-		t_1.SelectionImageObject = p1.props.SelectionImageObject
-		t_1.FillDirection = if var4 then Enum.FillDirection.Horizontal else nil
-		t_1.VerticalAlignment = if var4 then Enum.VerticalAlignment.Center else nil
-		t_1.contentPadding = var4 and UDim.new(0, 8) or nil
-		t_1.NextSelectionLeft = p1.props.NextSelectionLeft
-		t_1.NextSelectionRight = p1.props.NextSelectionRight
-		t_1.NextSelectionUp = p1.props.NextSelectionUp
-		t_1.NextSelectionDown = p1.props.NextSelectionDown
-		t_1.inputBindings = if p1.props.isRoactGamepadEnabled then {
-			Activated = roactGamepadModule.Input.onBegin(Enum.KeyCode.ButtonA, p1.props.onActivated)
-		} else nil
-		
-		return createElement(var5, t_1, {
-			HorizontalLayout = not var4 and roactModule.createElement("UIListLayout", {
+		return RoactModule.createElement(if p1.props.isRoactGamepadEnabled then RoactGamepadModule.Focusable[v1] else v1, {
+			Size = if Flag then nil else p1.props.size or (p1.sizeBinding or nil),
+			height = Flag and UDim.new(0, 26) or nil,
+			AutomaticSize = Enum.AutomaticSize.Y,
+			BackgroundTransparency = 1,
+			LayoutOrder = p1.props.layoutOrder,
+			[RoactModule.Ref] = p1.props.frameRef,
+			SelectionImageObject = p1.props.SelectionImageObject,
+			FillDirection = Flag and Enum.FillDirection.Horizontal or nil,
+			VerticalAlignment = Flag and Enum.VerticalAlignment.Center or nil,
+			contentPadding = Flag and UDim.new(0, 8) or nil,
+			NextSelectionLeft = p1.props.NextSelectionLeft,
+			NextSelectionRight = p1.props.NextSelectionRight,
+			NextSelectionUp = p1.props.NextSelectionUp,
+			NextSelectionDown = p1.props.NextSelectionDown,
+			inputBindings = if p1.props.isRoactGamepadEnabled then {
+				Activated = RoactGamepadModule.Input.onBegin(Enum.KeyCode.ButtonA, p1.props.onActivated)
+			} else nil
+		}, {
+			HorizontalLayout = if Flag then nil else RoactModule.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				FillDirection = Enum.FillDirection.Horizontal,
 				Padding = UDim.new(0, 8),
 				VerticalAlignment = Enum.VerticalAlignment.Center
 			}) or nil,
-			Padding = not var4 and roactModule.createElement("UIPadding", { PaddingLeft = UDim.new(0, 8) }) or nil,
-			InputButtonImage = roactModule.createElement(controllableModule, {
+			Padding = if Flag then nil else RoactModule.createElement("UIPadding", { PaddingLeft = UDim.new(0, 8) }) or nil,
+			InputButtonImage = RoactModule.createElement(ControllableModule, {
 				controlComponent = {
-					component = imageSetComponentModule.Button,
+					component = ImageSetComponentModule.Button,
 					props = {
 						BackgroundTransparency = 1,
 						Size = UDim2.new(0, 26, 0, 26),
@@ -173,14 +161,14 @@ function inputButton.render(p1)
 						ScaleType = p1.props.buttonSliceType,
 						SliceCenter = p1.props.buttonSliceCenter,
 						ImageColor3 = p1.state.outerImageColor,
-						[roactModule.Event.Activated] = p1.props.onActivated,
+						[RoactModule.Event.Activated] = p1.props.onActivated,
 						LayoutOrder = 1
 					},
 					children = {
-						InputFillImage = fillImage and roactModule.createElement(imageSetComponentModule.Label, {
+						InputFillImage = FillImage and RoactModule.createElement(ImageSetComponentModule.Label, {
 							BackgroundTransparency = 1,
 							Size = p1.props.fillImageSize,
-							Image = fillImage,
+							Image = FillImage,
 							ImageTransparency = p1.props.transparency,
 							ImageColor3 = p1.props.fillImageColor,
 							AnchorPoint = Vector2.new(0.5, 0.5),
@@ -189,16 +177,16 @@ function inputButton.render(p1)
 					}
 				},
 				isDisabled = p1.props.isDisabled,
-				onStateChanged = function(_, p3)
-					-- upvalues: p1 (copy)
+				onStateChanged = function(_, p3) --[[ Line: 204 ]]
+					-- upvalues: p1 (upval)
 					p1.changeSprite(p3)
 				end
 			}),
-			InputButtonText = p1.props.text ~= "" and roactModule.createElement(controllableModule, {
-				controlComponent = { component = var1, props = t },
+			InputButtonText = p1.props.text ~= "" and RoactModule.createElement(ControllableModule, {
+				controlComponent = { component = Component, props = JoinResult },
 				isDisabled = p1.props.isDisabled,
-				onStateChanged = function(_, p3)
-					-- upvalues: p1 (copy)
+				onStateChanged = function(_, p3) --[[ Line: 215 ]]
+					-- upvalues: p1 (upval)
 					p1.changeSprite(p3)
 				end
 			})
@@ -206,7 +194,7 @@ function inputButton.render(p1)
 	end)
 end
 
-return roactModule.forwardRef(function(p1, p2)
-	-- upvalues: roactModule (ref), inputButton (ref), cryoModule (ref)
-	return roactModule.createElement(inputButton, cryoModule.Dictionary.join(p1, { frameRef = p2 }))
+return RoactModule.forwardRef(function(p1, FrameRef) --[[ Line: 224 ]]
+	-- upvalues: RoactModule (copy), InputButton (copy), CryoModule (copy)
+	return RoactModule.createElement(InputButton, CryoModule.Dictionary.join(p1, { frameRef = FrameRef }))
 end)

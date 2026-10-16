@@ -1,152 +1,151 @@
-﻿local soundService = game:GetService("SoundService")
-local voiceChatService = game:GetService("VoiceChatService")
-local runService = game:GetService("RunService")
-local localPlayer = game:GetService("Players").LocalPlayer
+﻿local SoundService = game:GetService("SoundService")
+local VoiceChatService = game:GetService("VoiceChatService")
+local RunService = game:GetService("RunService")
+local LocalPlayer = game:GetService("Players").LocalPlayer
 
-local function _()
-	-- upvalues: soundService (ref), voiceChatService (ref)
-	return soundService.DefaultListenerLocation == Enum.ListenerLocation.Default and (voiceChatService.UseAudioApi == Enum.AudioApiRollout.Enabled and voiceChatService.EnableDefaultVoice)
+local function _() --[[ Line: 7 | Named "ShouldUseDefaultVoice" ]]
+	-- upvalues: SoundService (copy), VoiceChatService (copy)
+	return SoundService.DefaultListenerLocation == Enum.ListenerLocation.Default and VoiceChatService.UseAudioApi == Enum.AudioApiRollout.Enabled and VoiceChatService.EnableDefaultVoice
 end
 
-local _ = function()
-	-- upvalues: soundService (ref)
-	return soundService.DefaultListenerLocation == Enum.ListenerLocation.Camera
+local _ = function(): boolean --[[ Line: 13 | Named "ShouldUseCamera" ]]
+	-- upvalues: SoundService (copy)
+	return SoundService.DefaultListenerLocation == Enum.ListenerLocation.Camera
 end
 
-local _ = function()
-	-- upvalues: soundService (ref)
-	return soundService.DefaultListenerLocation == Enum.ListenerLocation.Character
+local _ = function(): boolean --[[ Line: 17 | Named "ShouldUseCharacter" ]]
+	-- upvalues: SoundService (copy)
+	return SoundService.DefaultListenerLocation == Enum.ListenerLocation.Character
 end
 
-local _ = function()
-	-- upvalues: soundService (ref), voiceChatService (ref)
-	return if soundService.DefaultListenerLocation == Enum.ListenerLocation.None then false else soundService.DefaultListenerLocation == Enum.ListenerLocation.Camera or (soundService.DefaultListenerLocation == Enum.ListenerLocation.Character or (soundService.DefaultListenerLocation == Enum.ListenerLocation.Default and (voiceChatService.UseAudioApi == Enum.AudioApiRollout.Enabled and voiceChatService.EnableDefaultVoice)))
+local _ = function() --[[ Line: 21 | Named "ShouldSpawnListener" ]]
+	-- upvalues: SoundService (copy), VoiceChatService (copy)
+	return SoundService.DefaultListenerLocation ~= Enum.ListenerLocation.None and (SoundService.DefaultListenerLocation == Enum.ListenerLocation.Camera or (SoundService.DefaultListenerLocation == Enum.ListenerLocation.Character or SoundService.DefaultListenerLocation == Enum.ListenerLocation.Default and VoiceChatService.UseAudioApi == Enum.AudioApiRollout.Enabled and VoiceChatService.EnableDefaultVoice))
 end
 
-local _ = function(p1, p2)
-	local wire = Instance.new("Wire")
-	wire.SourceInstance = p1
-	wire.TargetInstance = p2
-	wire.Parent = p1
+local _ = function(Parent, TargetInstance) --[[ Line: 28 | Named "WireUp" ]]
+	local Wire = Instance.new("Wire")
+	Wire.SourceInstance = Parent
+	Wire.TargetInstance = TargetInstance
+	Wire.Parent = Parent
 	
-	return wire
+	return Wire
 end
 
-local _ = function()
-	-- upvalues: soundService (ref)
-	local audioDeviceOutput = soundService:FindFirstChildWhichIsA("AudioDeviceOutput", true)
+local _ = function() --[[ Line: 36 | Named "GetMainOut" ]]
+	-- upvalues: SoundService (copy)
+	local AudioDeviceOutput = SoundService:FindFirstChildWhichIsA("AudioDeviceOutput", true)
 	
-	if not audioDeviceOutput then
-		local audioDeviceOutput_1 = Instance.new("AudioDeviceOutput")
-		audioDeviceOutput_1.Parent = soundService
-		audioDeviceOutput = audioDeviceOutput_1
+	if not AudioDeviceOutput then
+		local AudioDeviceOutput1 = Instance.new("AudioDeviceOutput")
+		AudioDeviceOutput1.Parent = SoundService
+		AudioDeviceOutput = AudioDeviceOutput1
 	end
-	return audioDeviceOutput
+	return AudioDeviceOutput
 end
 
-local function SpawnCharacterListener(p1)
-	-- upvalues: SpawnCharacterListener (ref), soundService (ref), runService (ref)
-	local primaryPart = p1.PrimaryPart
+local function SpawnCharacterListener(Character) --[[ Line: 46 ]]
+	-- upvalues: SpawnCharacterListener (copy), SoundService (copy), RunService (copy)
+	local PrimaryPart = Character.PrimaryPart
 	
-	if not primaryPart then
-		p1:GetPropertyChangedSignal("PrimaryPart"):Once(function()
-			-- upvalues: SpawnCharacterListener (copy), p1 (ref)
-			SpawnCharacterListener(p1)
+	if not PrimaryPart then
+		Character:GetPropertyChangedSignal("PrimaryPart"):Once(function() --[[ Line: 49 ]]
+			-- upvalues: SpawnCharacterListener (upval), Character (copy)
+			SpawnCharacterListener(Character)
 		end)
 		
 		return
 	end
-	local attachment = Instance.new("Attachment")
+	local Attachment = Instance.new("Attachment")
 	
-	local function UpdateCFrame()
-		-- upvalues: attachment (ref)
-		local currentCamera = workspace.CurrentCamera
+	local function UpdateCFrame() --[[ Line: 56 ]]
+		-- upvalues: Attachment (copy)
+		local CurrentCamera = workspace.CurrentCamera
 		
-		if currentCamera then
-			local rotation = currentCamera.CFrame.Rotation
-			attachment.WorldAxis = rotation.XVector
-			attachment.WorldSecondaryAxis = rotation.YVector
+		if CurrentCamera then
+			local Rotation = CurrentCamera.CFrame.Rotation
+			Attachment.WorldAxis = Rotation.XVector
+			Attachment.WorldSecondaryAxis = Rotation.YVector
 			
 			return
 		end
 	end
 	
-	local currentCamera = workspace.CurrentCamera
+	local CurrentCamera = workspace.CurrentCamera
 	
-	if currentCamera then
-		local rotation = currentCamera.CFrame.Rotation
-		attachment.WorldAxis = rotation.XVector
-		attachment.WorldSecondaryAxis = rotation.YVector
+	if CurrentCamera then
+		local Rotation = CurrentCamera.CFrame.Rotation
+		Attachment.WorldAxis = Rotation.XVector
+		Attachment.WorldSecondaryAxis = Rotation.YVector
 	end
-	local audioListener = Instance.new("AudioListener")
-	audioListener.Parent = attachment
-	attachment.Parent = primaryPart
-	local audioDeviceOutput = soundService:FindFirstChildWhichIsA("AudioDeviceOutput", true)
+	local AudioListener = Instance.new("AudioListener")
+	AudioListener.Parent = Attachment
+	Attachment.Parent = PrimaryPart
+	local AudioDeviceOutput = SoundService:FindFirstChildWhichIsA("AudioDeviceOutput", true)
 	
-	if not audioDeviceOutput then
-		local audioDeviceOutput_1 = Instance.new("AudioDeviceOutput")
-		audioDeviceOutput_1.Parent = soundService
-		audioDeviceOutput = audioDeviceOutput_1
+	if not AudioDeviceOutput then
+		local AudioDeviceOutput1 = Instance.new("AudioDeviceOutput")
+		AudioDeviceOutput1.Parent = SoundService
+		AudioDeviceOutput = AudioDeviceOutput1
 	end
-	local wire = Instance.new("Wire")
-	wire.SourceInstance = audioListener
-	wire.TargetInstance = audioDeviceOutput
-	wire.Parent = audioListener
-	local heartbeatConnection = runService.Heartbeat:Connect(UpdateCFrame)
-	local ancestryChangedConnection = nil
-	ancestryChangedConnection = attachment.AncestryChanged:Connect(function()
-		-- upvalues: attachment (ref), heartbeatConnection (ref), ancestryChangedConnection (write)
-		if not attachment:IsDescendantOf(game) then
-			heartbeatConnection:Disconnect()
-			ancestryChangedConnection:Disconnect()
+	local Wire = Instance.new("Wire")
+	Wire.SourceInstance = AudioListener
+	Wire.TargetInstance = AudioDeviceOutput
+	Wire.Parent = AudioListener
+	local HeartbeatConnection = RunService.Heartbeat:Connect(UpdateCFrame)
+	local Connection = nil
+	Connection = Attachment.AncestryChanged:Connect(function() --[[ Line: 76 ]]
+		-- upvalues: Attachment (copy), HeartbeatConnection (copy), Connection (ref)
+		if not Attachment:IsDescendantOf(game) then
+			HeartbeatConnection:Disconnect()
+			Connection:Disconnect()
 		end
 	end)
 end
 
-local var1 = false
+local Flag = false
 
-local function Initialize()
-	-- upvalues: soundService (ref), voiceChatService (ref), var1 (write), localPlayer (ref), SpawnCharacterListener (ref)
-	if not (if soundService.DefaultListenerLocation == Enum.ListenerLocation.None then false else soundService.DefaultListenerLocation == Enum.ListenerLocation.Camera or (soundService.DefaultListenerLocation == Enum.ListenerLocation.Character or (soundService.DefaultListenerLocation == Enum.ListenerLocation.Default and (voiceChatService.UseAudioApi == Enum.AudioApiRollout.Enabled and voiceChatService.EnableDefaultVoice)))) then return end
-	if var1 then return end
-	if soundService.DefaultListenerLocation == Enum.ListenerLocation.Character then
-		local character = localPlayer.Character
+local function Initialize() --[[ Line: 86 ]]
+	-- upvalues: SoundService (copy), VoiceChatService (copy), Flag (ref), LocalPlayer (copy), SpawnCharacterListener (copy)
+	if SoundService.DefaultListenerLocation == Enum.ListenerLocation.None or SoundService.DefaultListenerLocation ~= Enum.ListenerLocation.Camera and (SoundService.DefaultListenerLocation ~= Enum.ListenerLocation.Character and (SoundService.DefaultListenerLocation ~= Enum.ListenerLocation.Default or (VoiceChatService.UseAudioApi ~= Enum.AudioApiRollout.Enabled or not VoiceChatService.EnableDefaultVoice))) then return end
+	if Flag then return end
+	if SoundService.DefaultListenerLocation == Enum.ListenerLocation.Character then
+		local Character = LocalPlayer.Character
 		
-		if character then
-			SpawnCharacterListener(character)
+		if Character then
+			SpawnCharacterListener(Character)
 		end
-		localPlayer.CharacterAdded:Connect(SpawnCharacterListener)
-	elseif soundService.DefaultListenerLocation == Enum.ListenerLocation.Camera then
-		local audioDeviceOutput = soundService:FindFirstChildWhichIsA("AudioDeviceOutput", true)
+		LocalPlayer.CharacterAdded:Connect(SpawnCharacterListener)
+	elseif SoundService.DefaultListenerLocation == Enum.ListenerLocation.Camera then
+		local AudioDeviceOutput = SoundService:FindFirstChildWhichIsA("AudioDeviceOutput", true)
 		
-		if not audioDeviceOutput then
-			local audioDeviceOutput_1 = Instance.new("AudioDeviceOutput")
-			audioDeviceOutput_1.Parent = soundService
-			audioDeviceOutput = audioDeviceOutput_1
+		if not AudioDeviceOutput then
+			local AudioDeviceOutput1 = Instance.new("AudioDeviceOutput")
+			AudioDeviceOutput1.Parent = SoundService
+			AudioDeviceOutput = AudioDeviceOutput1
 		end
-		local var2 = audioDeviceOutput
-		local audioListener = Instance.new("AudioListener")
-		audioListener.Parent = workspace.CurrentCamera
-		local wire = Instance.new("Wire")
-		wire.SourceInstance = audioListener
-		wire.TargetInstance = var2
-		wire.Parent = audioListener
-	elseif soundService.DefaultListenerLocation == Enum.ListenerLocation.Default and (voiceChatService.UseAudioApi == Enum.AudioApiRollout.Enabled and voiceChatService.EnableDefaultVoice) then
-		local audioListener = Instance.new("AudioListener")
-		audioListener.Parent = workspace.CurrentCamera
-		local wire = Instance.new("Wire")
-		wire.Parent = audioListener
-		local audioDeviceOutput = Instance.new("AudioDeviceOutput")
-		audioDeviceOutput.Parent = wire
-		wire.SourceInstance = audioListener
-		wire.TargetInstance = audioDeviceOutput
+		local AudioListener = Instance.new("AudioListener")
+		AudioListener.Parent = workspace.CurrentCamera
+		local Wire = Instance.new("Wire")
+		Wire.SourceInstance = AudioListener
+		Wire.TargetInstance = AudioDeviceOutput
+		Wire.Parent = AudioListener
+	elseif SoundService.DefaultListenerLocation == Enum.ListenerLocation.Default and (VoiceChatService.UseAudioApi == Enum.AudioApiRollout.Enabled and VoiceChatService.EnableDefaultVoice) then
+		local AudioListener = Instance.new("AudioListener")
+		AudioListener.Parent = workspace.CurrentCamera
+		local Wire = Instance.new("Wire")
+		Wire.Parent = AudioListener
+		local AudioDeviceOutput = Instance.new("AudioDeviceOutput")
+		AudioDeviceOutput.Parent = Wire
+		Wire.SourceInstance = AudioListener
+		Wire.TargetInstance = AudioDeviceOutput
 	end
-	var1 = true
+	Flag = true
 end
 
 Initialize()
-soundService:GetPropertyChangedSignal("DefaultListenerLocation"):Connect(Initialize)
-voiceChatService:GetPropertyChangedSignal("UseAudioApi"):Connect(Initialize)
-voiceChatService:GetPropertyChangedSignal("EnableDefaultVoice"):Connect(Initialize)
+SoundService:GetPropertyChangedSignal("DefaultListenerLocation"):Connect(Initialize)
+VoiceChatService:GetPropertyChangedSignal("UseAudioApi"):Connect(Initialize)
+VoiceChatService:GetPropertyChangedSignal("EnableDefaultVoice"):Connect(Initialize)
 
 return {}

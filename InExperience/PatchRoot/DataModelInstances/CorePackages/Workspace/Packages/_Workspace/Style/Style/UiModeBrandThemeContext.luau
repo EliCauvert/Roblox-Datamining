@@ -1,4 +1,4 @@
-﻿local parent = script:FindFirstAncestor("Style").Parent
-local _ = require(parent.Foundation)
+﻿local Parent = script:FindFirstAncestor("Style").Parent
+local _ = require(Parent.Foundation)
 
-return require(parent.React).createContext({})
+return require(Parent.React).createContext({})

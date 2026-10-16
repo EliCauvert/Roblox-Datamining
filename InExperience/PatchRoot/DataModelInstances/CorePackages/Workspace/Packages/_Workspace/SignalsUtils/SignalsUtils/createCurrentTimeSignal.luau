@@ -1,56 +1,56 @@
-﻿local runService = game:GetService("RunService")
-local signalsModule = require(script:FindFirstAncestor("SignalsUtils").Parent.Signals)
-local tbl = setmetatable({}, { __mode = "v" })
-local var1 = nil
+﻿local RunService = game:GetService("RunService")
+local SignalsModule = require(script:FindFirstAncestor("SignalsUtils").Parent.Signals)
+local self = setmetatable({}, { __mode = "v" })
+local HeartbeatConnection = nil
 
-local function _()
-	-- upvalues: tbl (ref), var1 (write)
-	if next(tbl) == nil and var1 then
-		var1:Disconnect()
-		var1 = nil
+local function _() --[[ Line: 18 | Named "maybeDisconnect" ]]
+	-- upvalues: self (copy), HeartbeatConnection (ref)
+	if next(self) == nil and HeartbeatConnection then
+		HeartbeatConnection:Disconnect()
+		HeartbeatConnection = nil
 	end
 end
 
-local function onHeartbeat()
-	-- upvalues: tbl (ref), var1 (write)
-	if next(tbl) == nil and var1 then
-		var1:Disconnect()
-		var1 = nil
+local function onHeartbeat() --[[ Line: 25 ]]
+	-- upvalues: self (copy), HeartbeatConnection (ref)
+	if next(self) == nil and HeartbeatConnection then
+		HeartbeatConnection:Disconnect()
+		HeartbeatConnection = nil
 	end
-	if not var1 then return end
-	local processTime = os.clock()
+	if not HeartbeatConnection then return end
+	local ClockTime = os.clock()
 	
-	for i, v in tbl do
-		if i <= processTime - v.lastTick then
-			v.lastTick = processTime
-			v.setter(DateTime.now().UnixTimestamp)
+	for i, value in self do
+		if i <= ClockTime - value.lastTick then
+			value.lastTick = ClockTime
+			value.setter(DateTime.now().UnixTimestamp)
 		end
 	end
 end
 
-local _ = function()
-	-- upvalues: var1 (write), runService (ref), onHeartbeat (ref)
-	if not var1 then
-		var1 = runService.Heartbeat:Connect(onHeartbeat)
+local _ = function() --[[ Line: 40 | Named "ensureConnection" ]]
+	-- upvalues: HeartbeatConnection (ref), RunService (copy), onHeartbeat (copy)
+	if not HeartbeatConnection then
+		HeartbeatConnection = RunService.Heartbeat:Connect(onHeartbeat)
 	end
 end
 
-return function(value)
-	-- upvalues: tbl (ref), signalsModule (ref), var1 (write), runService (ref), onHeartbeat (ref)
-	local value_1 = value or 30
+return function(p1) --[[ Line: 46 | Named "createCurrentTimeSignal" ]]
+	-- upvalues: self (copy), SignalsModule (copy), HeartbeatConnection (ref), RunService (copy), onHeartbeat (copy)
+	local P0 = p1 or 30
 	
-	if not tbl[value_1] then
-		local var2, var3 = signalsModule.createSignal(DateTime.now().UnixTimestamp)
-		tbl[value_1] = { getter = var2, setter = var3, lastTick = os.clock() }
+	if not self[P0] then
+		local Signal, Signal2 = SignalsModule.createSignal(DateTime.now().UnixTimestamp)
+		self[P0] = { getter = Signal, setter = Signal2, lastTick = os.clock() }
 		
-		if not var1 then
-			var1 = runService.Heartbeat:Connect(onHeartbeat)
+		if not HeartbeatConnection then
+			HeartbeatConnection = RunService.Heartbeat:Connect(onHeartbeat)
 		end
 	end
-	local var4 = tbl[value_1]
+	local SelfEntry = self[P0]
 	
-	return function(p1)
-		-- upvalues: var4 (ref)
-		return var4.getter(p1)
+	return function(p2) --[[ Line: 63 ]]
+		-- upvalues: SelfEntry (copy)
+		return SelfEntry.getter(p2)
 	end
 end

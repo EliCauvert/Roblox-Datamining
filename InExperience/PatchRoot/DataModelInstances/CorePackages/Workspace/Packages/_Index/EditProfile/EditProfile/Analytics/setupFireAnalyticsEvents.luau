@@ -1,15 +1,15 @@
-﻿local analyticsFactory = require(script:FindFirstAncestor("EditProfile").Parent.SocialLuaAnalytics).Analytics.AnalyticsFactory
-local diagActionListModule = require(script.Parent.DiagActionList)
-local eventStreamActionListModule = require(script.Parent.EventStreamActionList)
-local telemetryActionListModule = require(script.Parent.TelemetryActionList)
+﻿local AnalyticsFactory = require(script:FindFirstAncestor("EditProfile").Parent.SocialLuaAnalytics).Analytics.AnalyticsFactory
+local DiagActionListModule = require(script.Parent.DiagActionList)
+local EventStreamActionListModule = require(script.Parent.EventStreamActionList)
+local TelemetryActionListModule = require(script.Parent.TelemetryActionList)
 
-return function(p1)
-	-- upvalues: analyticsFactory (ref), eventStreamActionListModule (ref), diagActionListModule (ref), telemetryActionListModule (ref)
-	return analyticsFactory.setUpAnalyticsFactory({
+return function(p1) --[[ Line: 10 ]]
+	-- upvalues: AnalyticsFactory (copy), EventStreamActionListModule (copy), DiagActionListModule (copy), TelemetryActionListModule (copy)
+	return AnalyticsFactory.setUpAnalyticsFactory({
 		eventLists = {
-			EventStream = eventStreamActionListModule,
-			Diag = diagActionListModule,
-			Telemetry = telemetryActionListModule
+			EventStream = EventStreamActionListModule,
+			Diag = DiagActionListModule,
+			Telemetry = TelemetryActionListModule
 		},
 		analyticsImpl = p1.analytics
 	})(p1).fireAnalyticsEvent

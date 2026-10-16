@@ -1,1 +1,1 @@
-﻿return require(script.instanceof)
+﻿return (require(script.instanceof))

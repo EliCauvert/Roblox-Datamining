@@ -1,20 +1,20 @@
 ﻿local _ = require(script.Parent.Parent.Types)
 
-return function(value)
-	value:PivotTo(CFrame.new())
-	local humanoidRootPart = value:FindFirstChild("HumanoidRootPart")
+return function(Model) --[[ Line: 5 | Named "finishModelSetup" ]]
+	Model:PivotTo(CFrame.new())
+	local HumanoidRootPart = Model:FindFirstChild("HumanoidRootPart")
 	
-	if humanoidRootPart and humanoidRootPart:IsA("BasePart") then
-		value.PrimaryPart = humanoidRootPart
-		humanoidRootPart.Anchored = true
+	if HumanoidRootPart and HumanoidRootPart:IsA("BasePart") then
+		Model.PrimaryPart = HumanoidRootPart
+		HumanoidRootPart.Anchored = true
 	end
-	local humanoid = value:FindFirstChildOfClass("Humanoid")
-	local var1 = if humanoid then humanoid:FindFirstChildOfClass("Animator") else nil
+	local Humanoid = Model:FindFirstChildOfClass("Humanoid")
+	local Animator = if Humanoid then Humanoid:FindFirstChildOfClass("Animator") else nil
 	
-	if humanoid and not var1 then
-		local animator = Instance.new("Animator")
-		animator.Parent = humanoid
-		var1 = animator
+	if Humanoid and not Animator then
+		local Animator1 = Instance.new("Animator")
+		Animator1.Parent = Humanoid
+		Animator = Animator1
 	end
-	return { model = value, humanoid = humanoid, animator = var1 }
+	return { model = Model, humanoid = Humanoid, animator = Animator }
 end

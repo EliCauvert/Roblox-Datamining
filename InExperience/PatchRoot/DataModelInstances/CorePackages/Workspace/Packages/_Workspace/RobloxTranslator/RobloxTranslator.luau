@@ -1,4 +1,4 @@
-﻿local robloxTranslatorModule = require(script.RobloxTranslator)
-robloxTranslatorModule["jest.config"] = script["jest.config"]
+﻿local RobloxTranslatorModule = require(script.RobloxTranslator)
+RobloxTranslatorModule["jest.config"] = script["jest.config"]
 
-return robloxTranslatorModule
+return RobloxTranslatorModule

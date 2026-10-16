@@ -1,18 +1,20 @@
-﻿return function(p1, p2)
-	if p1 == p2 then
+﻿return function(List, List1): boolean --[[ Line: 8 | Named "shallowEqual" ]]
+	if List == List1 then
 		return true
-	elseif typeof(p1) ~= "table" or typeof(p2) ~= "table" or #p1 ~= #p2 then
-		return false
-	elseif p1 == nil or p2 == nil then
+	end
+	if typeof(List) ~= "table" or typeof(List1) ~= "table" or #List ~= #List1 then
 		return false
 	end
-	for i, v in p1 do
-		if p2[i] ~= v then
+	if List == nil or List1 == nil then
+		return false
+	end
+	for i, value in List do
+		if List1[i] ~= value then
 			return false
 		end
 	end
-	for i, v in p2 do
-		if p1[i] ~= v then
+	for i1, value1 in List1 do
+		if List[i1] ~= value1 then
 			return false
 		end
 	end

@@ -1,13 +1,14 @@
 ﻿local _ = require(script:FindFirstAncestor("InExperienceShop").Types)
 
-return function(p1)
-	if #p1 <= 1 then
-		return p1
+return function(Tbl) --[[ Line: 6 | Named "sortRobuxPackagesByAmountDescending" ]]
+	if #Tbl <= 1 then
+		return Tbl
+	else
+		local Copy = table.clone(Tbl)
+		table.sort(Copy, function(A, B): boolean --[[ Line: 12 ]]
+			return if A.robuxAmount == B.robuxAmount then A.id < B.id else B.robuxAmount < A.robuxAmount
+		end)
+		
+		return Copy
 	end
-	local cloned = table.clone(p1)
-	table.sort(cloned, function(p2, p3)
-		return if p2.robuxAmount == p3.robuxAmount then p2.id < p3.id else p3.robuxAmount < p2.robuxAmount
-	end)
-	
-	return cloned
 end

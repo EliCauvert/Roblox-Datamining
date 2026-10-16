@@ -1,17 +1,17 @@
-﻿local parent = script.Parent.Parent
-local setPromptStateModule = require(parent.Actions.SetPromptState)
-local errorOccurredModule = require(parent.Actions.ErrorOccurred)
-local subscriptionPurchaseInfoReceivedModule = require(parent.Actions.SubscriptionPurchaseInfoReceived)
-local promptStateModule = require(parent.Enums.PromptState)
-local purchaseErrorModule = require(parent.Enums.PurchaseError)
-local thunkModule = require(parent.Thunk)
+﻿local Parent = script.Parent.Parent
+local SetPromptStateModule = require(Parent.Actions.SetPromptState)
+local ErrorOccurredModule = require(Parent.Actions.ErrorOccurred)
+local SubscriptionPurchaseInfoReceivedModule = require(Parent.Actions.SubscriptionPurchaseInfoReceived)
+local PromptStateModule = require(Parent.Enums.PromptState)
+local PurchaseErrorModule = require(Parent.Enums.PurchaseError)
+local ThunkModule = require(Parent.Thunk)
 
-return function(p1)
-	-- upvalues: thunkModule (ref), subscriptionPurchaseInfoReceivedModule (ref), errorOccurredModule (ref), purchaseErrorModule (ref), setPromptStateModule (ref), promptStateModule (ref)
-	return thunkModule.new(script.Name, nil, function(p2, _)
-		-- upvalues: subscriptionPurchaseInfoReceivedModule (copy), p1 (ref), errorOccurredModule (copy), purchaseErrorModule (copy), setPromptStateModule (copy), promptStateModule (copy)
-		p2:dispatch(subscriptionPurchaseInfoReceivedModule(p1))
+return function(p1) --[[ Line: 13 | Named "resolveSubscriptionPromptState" ]]
+	-- upvalues: ThunkModule (copy), SubscriptionPurchaseInfoReceivedModule (copy), ErrorOccurredModule (copy), PurchaseErrorModule (copy), SetPromptStateModule (copy), PromptStateModule (copy)
+	return ThunkModule.new(script.Name, nil, function(p2, _) --[[ Line: 14 ]]
+		-- upvalues: SubscriptionPurchaseInfoReceivedModule (upval), p1 (copy), ErrorOccurredModule (upval), PurchaseErrorModule (upval), SetPromptStateModule (upval), PromptStateModule (upval)
+		p2:dispatch(SubscriptionPurchaseInfoReceivedModule(p1))
 		
-		return if p1.CanPurchase == false then p2:dispatch(errorOccurredModule(purchaseErrorModule.AlreadySubscribed)) else p2:dispatch(setPromptStateModule(promptStateModule.PromptSubscriptionPurchase))
+		return if p1.CanPurchase == false then p2:dispatch(ErrorOccurredModule(PurchaseErrorModule.AlreadySubscribed)) else p2:dispatch(SetPromptStateModule(PromptStateModule.PromptSubscriptionPurchase))
 	end)
 end

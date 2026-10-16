@@ -1,97 +1,97 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local userInputService = game:GetService("UserInputService")
+﻿local CoreGui = game:GetService("CoreGui")
+local UserInputService = game:GetService("UserInputService")
 
-return function(p1)
-	-- upvalues: userInputService (ref), coreGuiService (ref)
-	local buildLibraryBack = Instance.new("InputContext")
-	buildLibraryBack.Name = "BuildLibraryBack"
-	buildLibraryBack.Priority = 2000
-	buildLibraryBack.Sink = true
-	local back = Instance.new("InputAction")
-	back.Name = "Back"
-	back.Type = Enum.InputActionType.Bool
+return function(Callback) --[[ Line: 13 | Named "bindLibraryBackInput" ]]
+	-- upvalues: UserInputService (copy), CoreGui (copy)
+	local BuildLibraryBack = Instance.new("InputContext")
+	BuildLibraryBack.Name = "BuildLibraryBack"
+	BuildLibraryBack.Priority = 2000
+	BuildLibraryBack.Sink = true
+	local Back = Instance.new("InputAction")
+	Back.Name = "Back"
+	Back.Type = Enum.InputActionType.Bool
 	
-	for i, v in { Enum.KeyCode.Escape, Enum.KeyCode.ButtonB } do
-		local inputBinding = Instance.new("InputBinding")
-		inputBinding.KeyCode = v
-		inputBinding.Parent = back
+	for _, KeyCode in { Enum.KeyCode.Escape, Enum.KeyCode.ButtonB } do
+		local InputBinding = Instance.new("InputBinding")
+		InputBinding.KeyCode = KeyCode
+		InputBinding.Parent = Back
 	end
-	back.Parent = buildLibraryBack
-	local var1 = false
-	local var2 = false
-	local var3 = false
+	Back.Parent = BuildLibraryBack
+	local ChatOpen = false
+	local IsKeyDown = false
+	local Enabled = false
 	
-	local function update()
-		-- upvalues: var1 (write), var2 (write), userInputService (copy), var3 (write), buildLibraryBack (ref)
-		local var4 = not var1 and (not var2 and userInputService:GetFocusedTextBox() == nil)
+	local function update() --[[ Line: 33 ]]
+		-- upvalues: ChatOpen (ref), IsKeyDown (ref), UserInputService (upval), Enabled (ref), BuildLibraryBack (copy)
+		local NoFocusedTextBox: boolean = not ChatOpen and (not IsKeyDown and UserInputService:GetFocusedTextBox() == nil)
 		
-		if not var4 then
-			var3 = false
+		if not NoFocusedTextBox then
+			Enabled = false
 		end
-		buildLibraryBack.Enabled = var4
+		BuildLibraryBack.Enabled = NoFocusedTextBox
 	end
 	
-	local var4 = not var1 and (not var2 and userInputService:GetFocusedTextBox() == nil)
+	local NoFocusedTextBox: boolean = not ChatOpen and (not IsKeyDown and UserInputService:GetFocusedTextBox() == nil)
 	
-	if not var4 then
-		var3 = false
+	if not NoFocusedTextBox then
+		Enabled = false
 	end
-	buildLibraryBack.Enabled = var4
-	local list = {
-		back.Pressed:Connect(function()
-			-- upvalues: var3 (write), buildLibraryBack (ref)
-			var3 = buildLibraryBack.Enabled
+	BuildLibraryBack.Enabled = NoFocusedTextBox
+	local Connections = {
+		Back.Pressed:Connect(function() --[[ Line: 43 ]]
+			-- upvalues: Enabled (ref), BuildLibraryBack (copy)
+			Enabled = BuildLibraryBack.Enabled
 		end),
-		back.Released:Connect(function()
-			-- upvalues: var3 (write), p1 (ref)
-			if var3 then
-				var3 = false
-				p1()
+		Back.Released:Connect(function() --[[ Line: 46 ]]
+			-- upvalues: Enabled (ref), Callback (copy)
+			if Enabled then
+				Enabled = false
+				Callback()
 			end
 		end),
-		userInputService.TextBoxFocused:Connect(update),
-		userInputService.TextBoxFocusReleased:Connect(function()
-			-- upvalues: var2 (write), userInputService (copy), var1 (write), var3 (write), buildLibraryBack (ref)
-			var2 = userInputService:IsKeyDown(Enum.KeyCode.Escape) or userInputService:IsGamepadButtonDown(Enum.UserInputType.Gamepad1, Enum.KeyCode.ButtonB)
-			local var5 = not var1 and (not var2 and userInputService:GetFocusedTextBox() == nil)
+		UserInputService.TextBoxFocused:Connect(update),
+		UserInputService.TextBoxFocusReleased:Connect(function() --[[ Line: 53 ]]
+			-- upvalues: IsKeyDown (ref), UserInputService (upval), ChatOpen (ref), Enabled (ref), BuildLibraryBack (copy)
+			IsKeyDown = UserInputService:IsKeyDown(Enum.KeyCode.Escape) or UserInputService:IsGamepadButtonDown(Enum.UserInputType.Gamepad1, Enum.KeyCode.ButtonB)
+			local NoFocusedTextBox: boolean = not ChatOpen and (not IsKeyDown and UserInputService:GetFocusedTextBox() == nil)
 			
-			if not var5 then
-				var3 = false
+			if not NoFocusedTextBox then
+				Enabled = false
 			end
-			buildLibraryBack.Enabled = var5
+			BuildLibraryBack.Enabled = NoFocusedTextBox
 		end),
-		userInputService.InputEnded:Connect(function(p2)
-			-- upvalues: var2 (write), var1 (write), userInputService (copy), var3 (write), buildLibraryBack (ref)
-			if var2 and (p2.KeyCode == Enum.KeyCode.Escape or p2.KeyCode == Enum.KeyCode.ButtonB) then
-				var2 = false
-				local var5 = not var1 and (not var2 and userInputService:GetFocusedTextBox() == nil)
+		UserInputService.InputEnded:Connect(function(Input) --[[ Line: 58 ]]
+			-- upvalues: IsKeyDown (ref), ChatOpen (ref), UserInputService (upval), Enabled (ref), BuildLibraryBack (copy)
+			if IsKeyDown and (Input.KeyCode == Enum.KeyCode.Escape or Input.KeyCode == Enum.KeyCode.ButtonB) then
+				IsKeyDown = false
+				local NoFocusedTextBox: boolean = not ChatOpen and (not IsKeyDown and UserInputService:GetFocusedTextBox() == nil)
 				
-				if not var5 then
-					var3 = false
+				if not NoFocusedTextBox then
+					Enabled = false
 				end
-				buildLibraryBack.Enabled = var5
+				BuildLibraryBack.Enabled = NoFocusedTextBox
 			end
 		end)
 	}
-	buildLibraryBack.Parent = coreGuiService
+	BuildLibraryBack.Parent = CoreGui
 	
 	return {
-		setChatOpen = function(value)
-			-- upvalues: var1 (write), var2 (write), userInputService (copy), var3 (write), buildLibraryBack (ref)
-			var1 = value
-			local var5 = not var1 and (not var2 and userInputService:GetFocusedTextBox() == nil)
+		setChatOpen = function(Value) --[[ Line: 70 ]]
+			-- upvalues: ChatOpen (ref), IsKeyDown (ref), UserInputService (upval), Enabled (ref), BuildLibraryBack (copy)
+			ChatOpen = Value
+			local NoFocusedTextBox: boolean = not ChatOpen and (not IsKeyDown and UserInputService:GetFocusedTextBox() == nil)
 			
-			if not var5 then
-				var3 = false
+			if not NoFocusedTextBox then
+				Enabled = false
 			end
-			buildLibraryBack.Enabled = var5
+			BuildLibraryBack.Enabled = NoFocusedTextBox
 		end,
-		unbind = function()
-			-- upvalues: list (ref), buildLibraryBack (ref)
-			for i, v in list do
-				v:Disconnect()
+		unbind = function() --[[ Line: 74 ]]
+			-- upvalues: Connections (copy), BuildLibraryBack (copy)
+			for _, connection in Connections do
+				connection:Disconnect()
 			end
-			buildLibraryBack:Destroy()
+			BuildLibraryBack:Destroy()
 		end
 	}
 end

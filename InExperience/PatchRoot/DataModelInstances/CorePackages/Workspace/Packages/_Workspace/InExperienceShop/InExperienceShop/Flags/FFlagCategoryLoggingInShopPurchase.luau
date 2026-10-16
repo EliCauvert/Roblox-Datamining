@@ -1,0 +1,3 @@
+﻿local FFlagEnableCategoryLoggingInShopModule = require(script.Parent.FFlagEnableCategoryLoggingInShop)
+
+return game:DefineFastFlag("CategoryLoggingInShopPurchase", false) and FFlagEnableCategoryLoggingInShopModule

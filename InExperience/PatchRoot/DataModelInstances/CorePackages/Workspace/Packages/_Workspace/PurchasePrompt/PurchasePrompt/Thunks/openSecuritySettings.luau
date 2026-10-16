@@ -1,43 +1,41 @@
-﻿local parent = script.Parent.Parent
+﻿local Parent = script.Parent.Parent
 local _ = game:GetService("Players")
-local _ = require(parent.Actions.ErrorOccurred)
-local _ = require(parent.Actions.SetPromptState)
-local upsellFlowModule = require(parent.Enums.UpsellFlow)
-local _ = require(parent.Enums.PromptState)
-local _ = require(parent.Enums.PurchaseError)
-local hideWindowModule = require(parent.Thunks.hideWindow)
-local getUpsellFlowModule = require(parent.NativeUpsell.getUpsellFlow)
-local analyticsModule = require(parent.Services.Analytics)
-local externalSettingsModule = require(parent.Services.ExternalSettings)
-local networkModule = require(parent.Services.Network)
-local platformInterfaceModule = require(parent.Services.PlatformInterface)
-local thunkModule = require(parent.Thunk)
-local _ = require(parent.Promise)
+local _ = require(Parent.Actions.ErrorOccurred)
+local _ = require(Parent.Actions.SetPromptState)
+local UpsellFlowModule = require(Parent.Enums.UpsellFlow)
+local _ = require(Parent.Enums.PromptState)
+local _ = require(Parent.Enums.PurchaseError)
+local HideWindowModule = require(Parent.Thunks.hideWindow)
+local GetUpsellFlowModule = require(Parent.NativeUpsell.getUpsellFlow)
+local AnalyticsModule = require(Parent.Services.Analytics)
+local ExternalSettingsModule = require(Parent.Services.ExternalSettings)
+local PlatformInterfaceModule = require(Parent.Services.PlatformInterface)
+local ThunkModule = require(Parent.Thunk)
+local _ = require(Parent.Promise)
 local list = {
-	analyticsModule,
-	externalSettingsModule,
-	networkModule,
-	platformInterfaceModule
+	AnalyticsModule,
+	ExternalSettingsModule,
+	require(Parent.Services.Network),
+	PlatformInterfaceModule
 }
 
-return function(value)
-	-- upvalues: thunkModule (ref), list (ref), analyticsModule (ref), externalSettingsModule (ref), platformInterfaceModule (ref), getUpsellFlowModule (ref), upsellFlowModule (ref), hideWindowModule (ref)
-	return thunkModule.new(script.Name, list, function(p1, p2)
-		-- upvalues: analyticsModule (copy), externalSettingsModule (copy), platformInterfaceModule (copy), getUpsellFlowModule (copy), upsellFlowModule (copy), value (ref), hideWindowModule (copy)
-		local var1 = p2[analyticsModule]
-		local var2 = p2[externalSettingsModule]
-		local var3 = p2[platformInterfaceModule]
-		local state = p1:getState()
+return function(p1) --[[ Line: 26 | Named "openSecuritySettings" ]]
+	-- upvalues: ThunkModule (copy), list (copy), AnalyticsModule (copy), ExternalSettingsModule (copy), PlatformInterfaceModule (copy), GetUpsellFlowModule (copy), UpsellFlowModule (copy), HideWindowModule (copy)
+	return ThunkModule.new(script.Name, list, function(p2, p3) --[[ Line: 27 ]]
+		-- upvalues: AnalyticsModule (upval), ExternalSettingsModule (upval), PlatformInterfaceModule (upval), GetUpsellFlowModule (upval), UpsellFlowModule (upval), p1 (copy), HideWindowModule (upval)
+		local v1 = p3[AnalyticsModule]
+		local v2 = p3[PlatformInterfaceModule]
+		local State = p2:getState()
 		
-		if getUpsellFlowModule(var2.getPlatform()) == upsellFlowModule.Web then
-			var1.signalTwoSVSettingsErrorConfirmed(state.productInfo.productId, state.requestType)
+		if GetUpsellFlowModule(p3[ExternalSettingsModule].getPlatform()) == UpsellFlowModule.Web then
+			v1.signalTwoSVSettingsErrorConfirmed(State.productInfo.productId, State.requestType)
 			
-			if value then
-				var3.openSecuritySettings(value)
+			if p1 then
+				v2.openSecuritySettings(p1)
 			else
-				var3.openSecuritySettings()
+				v2.openSecuritySettings()
 			end
 		end
-		p1:dispatch(hideWindowModule())
+		p2:dispatch(HideWindowModule())
 	end)
 end

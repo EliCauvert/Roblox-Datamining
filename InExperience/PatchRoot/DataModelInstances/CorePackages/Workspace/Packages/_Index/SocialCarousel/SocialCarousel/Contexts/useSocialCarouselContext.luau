@@ -1,7 +1,7 @@
-﻿local socialCarouselContextModule = require(script.Parent.SocialCarouselContext)
-local reactModule = require(script:FindFirstAncestor("SocialCarousel").Parent.React)
+﻿local SocialCarouselContextModule = require(script.Parent.SocialCarouselContext)
+local ReactModule = require(script:FindFirstAncestor("SocialCarousel").Parent.React)
 
-return function()
-	-- upvalues: reactModule (ref), socialCarouselContextModule (ref)
-	return reactModule.useContext(socialCarouselContextModule)
+return function() --[[ Line: 6 ]]
+	-- upvalues: ReactModule (copy), SocialCarouselContextModule (copy)
+	return ReactModule.useContext(SocialCarouselContextModule)
 end

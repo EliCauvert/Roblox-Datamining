@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("NotificationsCommon").Parent.Signals).createComputed(require(script.createGameInvitesStatusStore))
+﻿return require(script:FindFirstAncestor("NotificationsCommon").Parent.Signals).createComputed((require(script.createGameInvitesStatusStore)))

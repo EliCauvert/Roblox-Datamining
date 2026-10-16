@@ -1,162 +1,166 @@
-﻿local parent = script.Parent.Parent.Parent.Parent
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local boolean = luauPolyfillModule.Boolean
-local object = luauPolyfillModule.Object
-local set = luauPolyfillModule.Set
-local t = {}
-local visit = require(parent.GraphQL).visit
-local apolloLink = require(script.Parent.Parent.core).ApolloLink
-local observable = require(script.Parent.Parent.Parent.utilities).Observable
-local serializeFetchParameter = require(script.Parent.serializeFetchParameter).serializeFetchParameter
-local selectURI = require(script.Parent.selectURI).selectURI
-local parseAndCheckHttpResponse = require(script.Parent.parseAndCheckHttpResponse).parseAndCheckHttpResponse
-local checkFetcher = require(script.Parent.checkFetcher).checkFetcher
-local selectHttpOptionsAndBodyModule = require(script.Parent.selectHttpOptionsAndBody)
-local selectHttpOptionsAndBody = selectHttpOptionsAndBodyModule.selectHttpOptionsAndBody
-local fallbackHttpConfig = selectHttpOptionsAndBodyModule.fallbackHttpConfig
-local createSignalIfSupported = require(script.Parent.createSignalIfSupported).createSignalIfSupported
-local rewriteURIForGET = require(script.Parent.rewriteURIForGET).rewriteURIForGET
-local fromError = require(script.Parent.Parent.utils).fromError
+﻿local Parent = script.Parent.Parent.Parent.Parent
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Boolean = LuauPolyfillModule.Boolean
+local Object = LuauPolyfillModule.Object
+local Set = LuauPolyfillModule.Set
+local VisitFunction = require(Parent.GraphQL).visit
+local ApolloLink = require(script.Parent.Parent.core).ApolloLink
+local Observable = require(script.Parent.Parent.Parent.utilities).Observable
+local SerializeFetchParameterFunction = require(script.Parent.serializeFetchParameter).serializeFetchParameter
+local SelectURIFunction = require(script.Parent.selectURI).selectURI
+local ParseAndCheckHttpResponseFunction = require(script.Parent.parseAndCheckHttpResponse).parseAndCheckHttpResponse
+local CheckFetcherFunction = require(script.Parent.checkFetcher).checkFetcher
+local SelectHttpOptionsAndBodyModule = require(script.Parent.selectHttpOptionsAndBody)
+local SelectHttpOptionsAndBodyFunction = SelectHttpOptionsAndBodyModule.selectHttpOptionsAndBody
+local FallbackHttpConfig = SelectHttpOptionsAndBodyModule.fallbackHttpConfig
+local CreateSignalIfSupportedFunction = require(script.Parent.createSignalIfSupported).createSignalIfSupported
+local RewriteURIForGETFunction = require(script.Parent.rewriteURIForGET).rewriteURIForGET
+local FromErrorFunction = require(script.Parent.Parent.utils).fromError
 
-function t.createHttpLink(p1)
-	-- upvalues: object (ref), checkFetcher (ref), boolean (ref), apolloLink (ref), selectURI (ref), selectHttpOptionsAndBody (ref), fallbackHttpConfig (ref), set (ref), visit (ref), createSignalIfSupported (ref), array (ref), rewriteURIForGET (ref), fromError (ref), serializeFetchParameter (ref), observable (ref), parseAndCheckHttpResponse (ref)
-	local var1 = p1
-	
-	if var1 == nil then
-		var1 = {}
-	end
-	local var2 = if var1.uri ~= nil then var1.uri else "/graphql"
-	local fetch = var1.fetch
-	local includeExtensions = var1.includeExtensions
-	local useGETForQueries = var1.useGETForQueries
-	local var3 = var1.includeUnusedVariables ~= nil and var1.includeUnusedVariables
-	local var4 = object.assign({}, var1, {
-		uri = object.None,
-		fetch = object.None,
-		includeExtensions = object.None,
-		useGETForQueries = object.None,
-		includeUnusedVariables = object.None
-	})
-	checkFetcher(fetch)
-	
-	if not boolean.toJSBoolean(fetch) then
-		fetch = _G.fetch
-	end
-	local t = {
-		http = { includeExtensions = includeExtensions },
-		options = var4.fetchOptions,
-		credentials = var4.credentials,
-		headers = var4.headers
-	}
-	
-	return apolloLink.new(function(_, p2)
-		-- upvalues: selectURI (copy), var2 (ref), boolean (copy), object (copy), selectHttpOptionsAndBody (copy), fallbackHttpConfig (copy), t (ref), var3 (ref), set (copy), visit (copy), createSignalIfSupported (copy), useGETForQueries (ref), array (copy), rewriteURIForGET (copy), fromError (copy), serializeFetchParameter (copy), observable (copy), fetch (write), parseAndCheckHttpResponse (copy)
-		local var5 = selectURI(p2, var2)
-		local context = p2:getContext()
-		local t_1 = {}
+return {
+	createHttpLink = function(p1) --[[ Line: 41 ]]
+		-- upvalues: Object (copy), CheckFetcherFunction (copy), Boolean (copy), ApolloLink (copy), SelectURIFunction (copy), SelectHttpOptionsAndBodyFunction (copy), FallbackHttpConfig (copy), Set (copy), VisitFunction (copy), CreateSignalIfSupportedFunction (copy), Array (copy), RewriteURIForGETFunction (copy), FromErrorFunction (copy), SerializeFetchParameterFunction (copy), Observable (copy), ParseAndCheckHttpResponseFunction (copy)
+		local v1 = p1
 		
-		if boolean.toJSBoolean(context.clientAwareness) then
-			local name = context.clientAwareness.name
-			local version = context.clientAwareness.version
-			
-			if boolean.toJSBoolean(name) then
-				t_1["apollographql-client-name"] = name
-			end
-			if boolean.toJSBoolean(version) then
-				t_1["apollographql-client-version"] = version
-			end
+		if v1 == nil then
+			v1 = {}
 		end
-		local var6 = selectHttpOptionsAndBody(p2, fallbackHttpConfig, t, {
-			http = context.http,
-			options = context.fetchOptions,
-			credentials = context.credentials,
-			headers = object.assign({}, t_1, context.headers)
+		local Graphql = if v1.uri == nil then "/graphql" else v1.uri or "/graphql"
+		local FetchFunction = v1.fetch
+		local IncludeExtensions = v1.includeExtensions
+		local UseGETForQueries = v1.useGETForQueries
+		local IncludeUnusedVariables = v1.includeUnusedVariables ~= nil and (v1.includeUnusedVariables or false)
+		local AssignResult = Object.assign({}, v1, {
+			uri = Object.None,
+			fetch = Object.None,
+			includeExtensions = Object.None,
+			useGETForQueries = Object.None,
+			includeUnusedVariables = Object.None
 		})
-		local options = var6.options
-		local body = var6.body
+		CheckFetcherFunction(FetchFunction)
 		
-		if body.variables ~= nil and not var3 then
-			local var7 = set.new(object.keys(body.variables))
-			visit(p2.query, {
-				Variable = function(_, p3, _, p4)
-					-- upvalues: boolean (copy), var7 (ref)
-					if boolean.toJSBoolean(p4) and p4.kind ~= "VariableDefinition" then
-						var7:delete(p3.name.value)
-					end
+		if not Boolean.toJSBoolean(FetchFunction) then
+			FetchFunction = _G.fetch
+		end
+		local config = {
+			http = { includeExtensions = IncludeExtensions },
+			options = AssignResult.fetchOptions,
+			credentials = AssignResult.credentials,
+			headers = AssignResult.headers
+		}
+		
+		return ApolloLink.new(function(_, p2) --[[ Line: 78 ]]
+			-- upvalues: SelectURIFunction (upval), Graphql (copy), Boolean (upval), Object (upval), SelectHttpOptionsAndBodyFunction (upval), FallbackHttpConfig (upval), config (copy), IncludeUnusedVariables (copy), Set (upval), VisitFunction (upval), CreateSignalIfSupportedFunction (upval), UseGETForQueries (copy), Array (upval), RewriteURIForGETFunction (upval), FromErrorFunction (upval), SerializeFetchParameterFunction (upval), Observable (upval), FetchFunction (ref), ParseAndCheckHttpResponseFunction (upval)
+			local SelectURIResult = SelectURIFunction(p2, Graphql)
+			local Context = p2:getContext()
+			local t = {}
+			
+			if Boolean.toJSBoolean(Context.clientAwareness) then
+				local Name = Context.clientAwareness.name
+				local Version = Context.clientAwareness.version
+				
+				if Boolean.toJSBoolean(Name) then
+					t["apollographql-client-name"] = Name
 				end
+				if Boolean.toJSBoolean(Version) then
+					t["apollographql-client-version"] = Version
+				end
+			end
+			local SelectHttpOptionsAndBodyResult = SelectHttpOptionsAndBodyFunction(p2, FallbackHttpConfig, config, {
+				http = Context.http,
+				options = Context.fetchOptions,
+				credentials = Context.credentials,
+				headers = Object.assign({}, t, Context.headers)
 			})
+			local Options = SelectHttpOptionsAndBodyResult.options
+			local Body = SelectHttpOptionsAndBodyResult.body
 			
-			if boolean.toJSBoolean(var7.size) then
-				body.variables = object.assign({}, body.variables)
-				var7:forEach(function(p3)
-					-- upvalues: body (ref)
-					body.variables[p3] = nil
-				end)
-			end
-		end
-		local controller = nil
-		
-		if not boolean.toJSBoolean(options.signal) then
-			local var8 = createSignalIfSupported()
-			local signal = var8.signal
-			controller = var8.controller
-			
-			if boolean.toJSBoolean(controller) then
-				options.signal = signal
-			end
-		end
-		if boolean.toJSBoolean(useGETForQueries) and not array.some(p2.query.definitions, function(p3)
-			return p3.kind == "OperationDefinition" and p3.operation == "mutation"
-		end) then
-			options.method = "GET"
-		end
-		if options.method == "GET" then
-			local var9 = rewriteURIForGET(var5, body)
-			local newURI = var9.newURI
-			local parseError = var9.parseError
-			
-			if boolean.toJSBoolean(parseError) then
-				return fromError(parseError)
-			end
-		else
-			local ok, status = pcall(function()
-				-- upvalues: options (ref), serializeFetchParameter (copy), body (ref)
-				options.body = serializeFetchParameter(body, "Payload")
-			end)
-			
-			return if ok then observable.new(function(p3)
-				-- upvalues: fetch (copy), var5 (write), options (ref), p2 (ref), parseAndCheckHttpResponse (copy), boolean (copy), controller (write)
-				fetch(var5, options):andThen(function(p4)
-					-- upvalues: p2 (copy)
-					p2:setContext({ response = p4 })
-					
-					return p4
-				end):andThen(parseAndCheckHttpResponse(p2)):andThen(function(p4)
-					-- upvalues: p3 (ref)
-					p3:next(p4)
-					p3:complete()
-					
-					return p4
-				end):catch(function(p4)
-					-- upvalues: boolean (copy), p3 (ref)
-					if p4.name == "AbortError" then return end
-					if boolean.toJSBoolean(p4.result) and boolean.toJSBoolean(p4.result.errors) and boolean.toJSBoolean(p4.result.data) then
-						p3:next(p4.result)
+			if Body.variables ~= nil and not IncludeUnusedVariables then
+				local NewSet = Set.new(Object.keys(Body.variables))
+				VisitFunction(p2.query, {
+					Variable = function(_, p3, _, p4) --[[ Line: 122 ]]
+						-- upvalues: Boolean (upval), NewSet (copy)
+						if Boolean.toJSBoolean(p4) and p4.kind ~= "VariableDefinition" then
+							NewSet:delete(p3.name.value)
+						end
 					end
-					p3:error(p4)
+				})
+				
+				if Boolean.toJSBoolean(NewSet.size) then
+					Body.variables = Object.assign({}, Body.variables)
+					NewSet:forEach(function(p3) --[[ Line: 139 ]]
+						-- upvalues: Body (copy)
+						Body.variables[p3] = nil
+					end)
+				end
+			end
+			local Controller = nil
+			
+			if not Boolean.toJSBoolean(Options.signal) then
+				local SignalIfSupported = CreateSignalIfSupportedFunction()
+				local Signal = SignalIfSupported.signal
+				Controller = SignalIfSupported.controller
+				
+				if Boolean.toJSBoolean(Controller) then
+					Options.signal = Signal
+				end
+			end
+			local function definitionIsMutation(p3): boolean --[[ Line: 156 ]]
+				return p3.kind == "OperationDefinition" and p3.operation == "mutation"
+			end
+			
+			if Boolean.toJSBoolean(UseGETForQueries) and not Array.some(p2.query.definitions, definitionIsMutation) then
+				Options.method = "GET"
+			end
+			if Options.method == "GET" then
+				local RewriteURIForGETResult = RewriteURIForGETFunction(SelectURIResult, Body)
+				local NewURI = RewriteURIForGETResult.newURI
+				local ParseError = RewriteURIForGETResult.parseError
+				
+				if Boolean.toJSBoolean(ParseError) then
+					return FromErrorFunction(ParseError)
+				end
+				SelectURIResult = NewURI
+			else
+				local Success, Result = pcall(function() --[[ Line: 174 ]]
+					-- upvalues: Options (copy), SerializeFetchParameterFunction (upval), Body (copy)
+					Options.body = SerializeFetchParameterFunction(Body, "Payload")
 				end)
 				
-				return function()
-					-- upvalues: boolean (copy), controller (copy)
-					if boolean.toJSBoolean(controller) then
-						controller:abort()
+				if not Success then
+					return FromErrorFunction(Result)
+				end
+			end
+			return Observable.new(function(p3) --[[ Line: 181 ]]
+				-- upvalues: FetchFunction (upval), SelectURIResult (ref), Options (copy), p2 (copy), ParseAndCheckHttpResponseFunction (upval), Boolean (upval), Controller (ref)
+				FetchFunction(SelectURIResult, Options):andThen(function(Result) --[[ Line: 183 ]]
+					-- upvalues: p2 (upval)
+					p2:setContext({ response = Result })
+					
+					return Result
+				end):andThen(ParseAndCheckHttpResponseFunction(p2)):andThen(function(Result) --[[ Line: 188 ]]
+					-- upvalues: p3 (copy)
+					p3:next(Result)
+					p3:complete()
+					
+					return Result
+				end):catch(function(Err) --[[ Line: 194 ]]
+					-- upvalues: Boolean (upval), p3 (copy)
+					if Err.name == "AbortError" then return end
+					if Boolean.toJSBoolean(Err.result) and Boolean.toJSBoolean(Err.result.errors) and Boolean.toJSBoolean(Err.result.data) then
+						p3:next(Err.result)
+					end
+					p3:error(Err)
+				end)
+				
+				return function() --[[ Line: 241 ]]
+					-- upvalues: Boolean (upval), Controller (upval)
+					if Boolean.toJSBoolean(Controller) then
+						Controller:abort()
 					end
 				end
-			end) else fromError(status)
-		end
-		var5 = newURI
-	end)
-end
-
-return t
+			end)
+		end)
+	end
+}

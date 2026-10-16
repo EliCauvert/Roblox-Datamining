@@ -1,26 +1,32 @@
-﻿local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
-local parent = genericAbuseReporting.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local getIconRichText = foundationModule.Utility.getIconRichText
-local iconName = foundationModule.Enums.IconName
-local text = foundationModule.Text
-local _ = require(genericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.AbuseSheetFlowTypes)
-local useArTranslation = require(genericAbuseReporting.BeduiV2.Utils.Translate.arTranslation).useArTranslation
+﻿local GenericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
+local Parent = GenericAbuseReporting.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local GetIconRichTextFunction = FoundationModule.Utility.getIconRichText
+local IconName = FoundationModule.Enums.IconName
+local Text = FoundationModule.Text
+local _ = require(GenericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.AbuseSheetFlowTypes)
+local UseArTranslationFunction = require(GenericAbuseReporting.BeduiV2.Utils.Translate.arTranslation).useArTranslation
 
-return reactModule.memo(function(p1)
-	-- upvalues: useArTranslation (ref), reactModule (ref), iconName (ref), getIconRichText (ref), text (ref)
-	return if p1.subtitle then reactModule.createElement(text, {
+return ReactModule.memo(function(p1) --[[ Line: 25 | Named "Subtitle" ]]
+	-- upvalues: UseArTranslationFunction (copy), ReactModule (copy), IconName (copy), GetIconRichTextFunction (copy), Text (copy)
+	local TranslateIntoStringFunction = UseArTranslationFunction().translateIntoString
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 28 ]]
+		-- upvalues: p1 (copy), IconName (upval), GetIconRichTextFunction (upval)
+		if p1.subtitle and p1.subtitle.leading then
+			local IconNameEntry = IconName[p1.subtitle.leading]
+			
+			if IconNameEntry then
+				return GetIconRichTextFunction(IconNameEntry)
+			end
+		end
+		return ""
+	end, { p1.subtitle })
+	
+	return if p1.subtitle then ReactModule.createElement(Text, {
 		RichText = true,
 		tag = "auto-xy text-body-medium content-default",
-		Text = `{reactModule.useMemo(function()
-			-- upvalues: p1 (ref), iconName (copy), getIconRichText (copy)
-			if p1.subtitle and p1.subtitle.leading then
-				local leading = iconName[p1.subtitle.leading]
-				
-				return if leading then getIconRichText(leading) else ""
-			end
-		end, { p1.subtitle })} {useArTranslation().translateIntoString(p1.subtitle.text)}`,
+		Text = `{UseMemoResult} {TranslateIntoStringFunction(p1.subtitle.text)}`,
 		LayoutOrder = p1.layoutOrder
 	}) else nil
 end)

@@ -1,6 +1,6 @@
-﻿local socialLuaAnalyticsModule = require(script:FindFirstAncestor("AppChat").Parent.SocialLuaAnalytics)
+﻿local SocialLuaAnalyticsModule = require(script:FindFirstAncestor("AppChat").Parent.SocialLuaAnalytics)
 
 return {
-	new = socialLuaAnalyticsModule.Telemetry.new,
-	contexts = socialLuaAnalyticsModule.Analytics.Enums.Contexts
+	new = SocialLuaAnalyticsModule.Telemetry.new,
+	contexts = SocialLuaAnalyticsModule.Analytics.Enums.Contexts
 }

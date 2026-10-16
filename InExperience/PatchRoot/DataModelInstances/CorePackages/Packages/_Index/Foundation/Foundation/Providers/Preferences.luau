@@ -1,1 +1,1 @@
-﻿return require(script.PreferencesProvider)
+﻿return (require(script.PreferencesProvider))

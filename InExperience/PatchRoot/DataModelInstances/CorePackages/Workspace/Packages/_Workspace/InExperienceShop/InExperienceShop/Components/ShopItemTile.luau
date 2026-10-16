@@ -1,188 +1,229 @@
-﻿local inExperienceShop = script:FindFirstAncestor("InExperienceShop")
-local parent = inExperienceShop.Parent
-local sessionService = game:GetService("SessionService")
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local signalsReactModule = require(parent.SignalsReact)
-local view = foundationModule.View
-local text = foundationModule.Text
-local image = foundationModule.Image
-local icon = foundationModule.Icon
-local enums = foundationModule.Enums
-local iconSize = enums.IconSize
-local shopItemFooterModule = require(inExperienceShop.Components.ShopItemFooter)
-local getInExperienceShopStoreModule = require(inExperienceShop.Stores.getInExperienceShopStore)
-local SHOP_ITEM_MEDIA_HEIGHT_SCALE = require(inExperienceShop.Components.computeShopRowTileWidths).SHOP_ITEM_MEDIA_HEIGHT_SCALE
-local fFlagEnableInExperienceShopUnifiedLoggingModule = require(inExperienceShop.Flags.FFlagEnableInExperienceShopUnifiedLogging)
-local fFlagEnableCategoryLoggingInShopModule = require(inExperienceShop.Flags.FFlagEnableCategoryLoggingInShop)
-local fFlagFixThumbnailBackgroundInExperienceShopModule = require(inExperienceShop.Flags.FFlagFixThumbnailBackgroundInExperienceShop)
-local fFlagEnableDiscountOnInShopTileModule = require(inExperienceShop.Flags.FFlagEnableDiscountOnInShopTile)
-local fFlagLuaAppEnableGamePassFreeTrialsModule = require(inExperienceShop.Flags.FFlagLuaAppEnableGamePassFreeTrials)
-local getIconRichText = foundationModule.Utility.getIconRichText
-local var1 = if fFlagEnableDiscountOnInShopTileModule then require(inExperienceShop.Utils.formatPrice) else nil
-local _ = require(inExperienceShop.Types)
-local constantsModule = require(inExperienceShop.Constants)
+﻿local InExperienceShop = script:FindFirstAncestor("InExperienceShop")
+local Parent = InExperienceShop.Parent
+local SessionService = game:GetService("SessionService")
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local SignalsReactModule = require(Parent.SignalsReact)
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local Image = FoundationModule.Image
+local Icon = FoundationModule.Icon
+local Enums = FoundationModule.Enums
+local Badge = FoundationModule.Badge
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local IconSize = Enums.IconSize
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local ShopItemFooterModule = require(InExperienceShop.Components.ShopItemFooter)
+local GetInExperienceShopStoreModule = require(InExperienceShop.Stores.getInExperienceShopStore)
+local SHOPITEMMEDIAHEIGHTSCALE = require(InExperienceShop.Components.computeShopRowTileWidths).SHOP_ITEM_MEDIA_HEIGHT_SCALE
+local FFlagEnableInExperienceShopUnifiedLoggingModule = require(InExperienceShop.Flags.FFlagEnableInExperienceShopUnifiedLogging)
+local FFlagEnableCategoryLoggingInShopModule = require(InExperienceShop.Flags.FFlagEnableCategoryLoggingInShop)
+local FFlagCategoryLoggingInShopPurchaseModule = require(InExperienceShop.Flags.FFlagCategoryLoggingInShopPurchase)
+local FFlagFixThumbnailBackgroundInExperienceShopModule = require(InExperienceShop.Flags.FFlagFixThumbnailBackgroundInExperienceShop)
+local FFlagEnableDiscountOnInShopTileModule = require(InExperienceShop.Flags.FFlagEnableDiscountOnInShopTile)
+local FFlagLuaAppEnableGamePassFreeTrialsModule = require(InExperienceShop.Flags.FFlagLuaAppEnableGamePassFreeTrials)
+local GetIconRichTextFunction = FoundationModule.Utility.getIconRichText
+local FormatPriceModule = if FFlagEnableDiscountOnInShopTileModule then require(InExperienceShop.Utils.formatPrice) else nil
+local _ = require(InExperienceShop.Types)
+local ConstantsModule = require(InExperienceShop.Constants)
+local config = {
+	freeTrial = "Feature.InExperienceShop.Label.FreeTrial",
+	trial = "Feature.InExperienceShop.Label.Trial"
+}
 
-return reactModule.memo(function(p1)
-	-- upvalues: signalsReactModule (ref), getInExperienceShopStoreModule (ref), reactModule (ref), fFlagLuaAppEnableGamePassFreeTrialsModule (ref), fFlagEnableInExperienceShopUnifiedLoggingModule (ref), parent (ref), inExperienceShop (ref), fFlagEnableCategoryLoggingInShopModule (ref), sessionService (ref), fFlagEnableDiscountOnInShopTileModule (ref), var1 (ref), view (ref), image (ref), fFlagFixThumbnailBackgroundInExperienceShopModule (ref), SHOP_ITEM_MEDIA_HEIGHT_SCALE (ref), text (ref), icon (ref), constantsModule (ref), iconSize (ref), getIconRichText (ref), enums (ref), shopItemFooterModule (ref)
-	local var2
-	local var3 = signalsReactModule.useSignalState(getInExperienceShopStoreModule)
-	local var4 = reactModule.useRef(nil)
-	local var5 = signalsReactModule.useSignalState(function(p2)
-		-- upvalues: var3 (ref), p1 (ref)
-		return var3.getOwnership(p2)[p1.itemId]
+local function TrialBadge() --[[ Line: 72 ]]
+	-- upvalues: UseLocalizationFunction (copy), config (copy), UseTokensFunction (copy), ReactModule (copy), Badge (copy), Enums (copy)
+	local UseLocalizationResult = UseLocalizationFunction(config)
+	local UseTokensResult = UseTokensFunction()
+	
+	return ReactModule.createElement(Badge, {
+		text = UseLocalizationResult.trial,
+		variant = Enums.BadgeVariant.OverMedia,
+		size = Enums.BadgeSize.Small,
+		Position = UDim2.fromOffset(UseTokensResult.Gap.Small, UseTokensResult.Gap.Small)
+	})
+end
+
+local function FreeTrialLabel(Frame) --[[ Line: 84 ]]
+	-- upvalues: UseLocalizationFunction (copy), config (copy), UseTokensFunction (copy), ReactModule (copy), Text (copy)
+	return ReactModule.createElement(Text, {
+		tag = "auto-xy",
+		fontStyle = UseTokensFunction().Typography.BodyMedium,
+		Text = UseLocalizationFunction(config).freeTrial,
+		LayoutOrder = Frame.LayoutOrder
+	})
+end
+
+return ReactModule.memo(function(Frame) --[[ Line: 96 | Named "ShopItemTile" ]]
+	-- upvalues: SignalsReactModule (copy), GetInExperienceShopStoreModule (copy), ReactModule (copy), FFlagLuaAppEnableGamePassFreeTrialsModule (copy), FFlagEnableInExperienceShopUnifiedLoggingModule (copy), Parent (copy), InExperienceShop (copy), FFlagEnableCategoryLoggingInShopModule (copy), SessionService (copy), FFlagCategoryLoggingInShopPurchaseModule (copy), FFlagEnableDiscountOnInShopTileModule (copy), FormatPriceModule (copy), View (copy), Image (copy), FFlagFixThumbnailBackgroundInExperienceShopModule (copy), SHOPITEMMEDIAHEIGHTSCALE (copy), TrialBadge (copy), Text (copy), FreeTrialLabel (copy), Icon (copy), ConstantsModule (copy), IconSize (copy), GetIconRichTextFunction (copy), Enums (copy), ShopItemFooterModule (copy)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(GetInExperienceShopStoreModule)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(function(p1) --[[ Line: 103 ]]
+		-- upvalues: UseSignalStateResult (copy), Frame (copy)
+		return UseSignalStateResult.getOwnership(p1)[Frame.itemId]
 	end)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var3 (ref)
-		if p1.itemType == "GamePass" then
-			var3.fetchGamePassOwnership(p1.itemId)
+	ReactModule.useEffect(function() --[[ Line: 107 ]]
+		-- upvalues: Frame (copy), UseSignalStateResult (copy)
+		if Frame.itemType == "GamePass" then
+			UseSignalStateResult.fetchGamePassOwnership(Frame.itemId)
 		end
-	end, { p1.itemId, p1.itemType, var3.fetchGamePassOwnership })
-	local var6 = signalsReactModule.useSignalState(function(p2)
-		-- upvalues: var3 (ref), fFlagLuaAppEnableGamePassFreeTrialsModule (copy), p1 (ref)
-		return if fFlagLuaAppEnableGamePassFreeTrialsModule and p1.itemType == "GamePass" then var3.getTrialAvailabilities(p2).available[p1.itemId] == true else false
+	end, {
+		Frame.itemId,
+		Frame.itemType,
+		UseSignalStateResult.fetchGamePassOwnership
+	})
+	local UseSignalStateResult2 = SignalsReactModule.useSignalState(function(p1): boolean --[[ Line: 113 ]]
+		-- upvalues: UseSignalStateResult (copy), FFlagLuaAppEnableGamePassFreeTrialsModule (upval), Frame (copy)
+		local Available = UseSignalStateResult.getTrialAvailabilities(p1).available
+		
+		return if FFlagLuaAppEnableGamePassFreeTrialsModule and Frame.itemType == "GamePass" then Available[Frame.itemId] == true else false
 	end)
-	reactModule.useEffect(function()
-		-- upvalues: fFlagEnableInExperienceShopUnifiedLoggingModule (copy), parent (copy), inExperienceShop (copy), p1 (ref), fFlagEnableCategoryLoggingInShopModule (copy), var4 (ref), sessionService (copy)
-		if fFlagEnableInExperienceShopUnifiedLoggingModule then
-			task.defer(function()
-				-- upvalues: parent (copy), inExperienceShop (copy), p1 (copy), fFlagEnableCategoryLoggingInShopModule (copy), var4 (copy), sessionService (copy)
-				local addUnifiedEventLogging = require(parent.AvatarExperienceAnalytics).addUnifiedEventLogging
-				local var7 = require(inExperienceShop.Utils.mapShopItemTypeToUnifiedItemType)(p1.itemType)
+	local NoUseSignalStateResult1: boolean = FFlagLuaAppEnableGamePassFreeTrialsModule and (UseSignalStateResult2 and not UseSignalStateResult1)
+	ReactModule.useEffect(function() --[[ Line: 125 ]]
+		-- upvalues: FFlagEnableInExperienceShopUnifiedLoggingModule (upval), Parent (upval), InExperienceShop (upval), Frame (copy), FFlagEnableCategoryLoggingInShopModule (upval), UseRefResult (copy), SessionService (upval)
+		if FFlagEnableInExperienceShopUnifiedLoggingModule then
+			task.defer(function() --[[ Line: 130 ]]
+				-- upvalues: Parent (upval), InExperienceShop (upval), Frame (upval), FFlagEnableCategoryLoggingInShopModule (upval), UseRefResult (upval), SessionService (upval)
+				local AddUnifiedEventLoggingFunction: (any, any, any) -> () = require(Parent.AvatarExperienceAnalytics).addUnifiedEventLogging
+				local ItemType = require(InExperienceShop.Utils.mapShopItemTypeToUnifiedItemType)(Frame.itemType)
 				
-				if var7 == nil then
+				if ItemType ~= nil then
+					AddUnifiedEventLoggingFunction(UseRefResult, {
+						universeId = if Frame.universeId == nil then game.GameId else tonumber(Frame.universeId),
+						itemId = Frame.itemId,
+						itemType = ItemType,
+						categoryId = Frame.categoryId,
+						gridPositionRow = Frame.gridPositionRow,
+						gridPositionColumn = Frame.gridPositionColumn,
+						categoryType = if FFlagEnableCategoryLoggingInShopModule then Frame.categoryType else nil,
+						stableCategoryId = if FFlagEnableCategoryLoggingInShopModule then Frame.stableCategoryId else nil,
+						categoryGroup = if FFlagEnableCategoryLoggingInShopModule then Frame.categoryGroup else nil,
+						categoryName = if FFlagEnableCategoryLoggingInShopModule then Frame.categoryName else nil
+					}, { sessionTagName = SessionService:GetSessionTag("level2a") })
+					
 					return
 				end
-				addUnifiedEventLogging(var4, {
-					universeId = if p1.universeId ~= nil then game.GameId else tonumber(p1.universeId),
-					itemId = p1.itemId,
-					itemType = var7,
-					categoryId = p1.categoryId,
-					gridPositionRow = p1.gridPositionRow,
-					gridPositionColumn = p1.gridPositionColumn,
-					categoryType = if fFlagEnableCategoryLoggingInShopModule then p1.categoryType else nil,
-					stableCategoryId = if fFlagEnableCategoryLoggingInShopModule then p1.stableCategoryId else nil,
-					categoryGroup = if fFlagEnableCategoryLoggingInShopModule then p1.categoryGroup else nil,
-					categoryName = if fFlagEnableCategoryLoggingInShopModule then p1.categoryName else nil
-				}, { sessionTagName = sessionService:GetSessionTag("level2a") })
 			end)
 			
 			return
 		end
 	end, {
-		p1.itemId, p1.itemType, p1.universeId, p1.categoryId, p1.gridPositionRow,
-		p1.gridPositionColumn,
-		if fFlagEnableCategoryLoggingInShopModule then p1.categoryType else nil,
-		if fFlagEnableCategoryLoggingInShopModule then p1.stableCategoryId else nil,
-		if fFlagEnableCategoryLoggingInShopModule then p1.categoryGroup else nil,
-		if fFlagEnableCategoryLoggingInShopModule then p1.categoryName else nil
+		Frame.itemId, Frame.itemType, Frame.universeId, Frame.categoryId,
+		Frame.gridPositionRow, Frame.gridPositionColumn,
+		if FFlagEnableCategoryLoggingInShopModule then Frame.categoryType else nil,
+		if FFlagEnableCategoryLoggingInShopModule then Frame.stableCategoryId else nil,
+		if FFlagEnableCategoryLoggingInShopModule then Frame.categoryGroup else nil,
+		if FFlagEnableCategoryLoggingInShopModule then Frame.categoryName else nil
 	})
-	local onItemActivated = p1.onItemActivated
-	local itemType = p1.itemType
-	local var7 = reactModule.useCallback(function()
-		-- upvalues: onItemActivated (ref), p1 (ref), itemType (ref)
-		if onItemActivated then
-			onItemActivated(p1.itemId, itemType)
+	local OnItemActivatedFunction = Frame.onItemActivated
+	local ItemType = Frame.itemType
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 175 ]]
+		-- upvalues: OnItemActivatedFunction (copy), Frame (copy), ItemType (copy)
+		if OnItemActivatedFunction then
+			OnItemActivatedFunction(Frame.itemId, ItemType)
 		end
-	end, { p1.itemId, itemType, onItemActivated })
-	local var8 = fFlagEnableDiscountOnInShopTileModule and (p1.userBasePriceInRobux ~= nil and (p1.price ~= nil and p1.price < p1.userBasePriceInRobux))
-	local var9 = if var8 and var1 then var1(p1.userBasePriceInRobux) else nil
-	local var10 = if var8 and var1 then var1(p1.price) else nil
-	local createElement = reactModule.createElement
-	local t = {
+	end, { Frame.itemId, ItemType, OnItemActivatedFunction })
+	local PurchaseCategoryLocation = nil
+	
+	if FFlagCategoryLoggingInShopPurchaseModule then
+		local config = {
+			categoryGroup = Frame.categoryGroup,
+			categoryPosition = Frame.categoryId,
+			gridPositionRow = Frame.gridPositionRow,
+			gridPositionColumn = Frame.gridPositionColumn,
+			categoryName = Frame.categoryName,
+			stableCategoryId = Frame.stableCategoryId
+		}
+		
+		if config.categoryGroup ~= nil or config.categoryPosition ~= nil or config.gridPositionRow ~= nil or config.gridPositionColumn ~= nil or config.categoryName ~= nil or config.stableCategoryId ~= nil then
+			PurchaseCategoryLocation = config
+		end
+	end
+	local IsUserBasePriceInRobuxAbove: boolean = FFlagEnableDiscountOnInShopTileModule and (Frame.userBasePriceInRobux ~= nil and (Frame.price ~= nil and Frame.userBasePriceInRobux > Frame.price))
+	local FormatPriceModuleResult = if IsUserBasePriceInRobuxAbove and FormatPriceModule then FormatPriceModule(Frame.userBasePriceInRobux) else nil
+	local FormatPriceModuleResult1 = if IsUserBasePriceInRobuxAbove and FormatPriceModule then FormatPriceModule(Frame.price) else nil
+	
+	return ReactModule.createElement(View, {
 		tag = "col fill size-full-0 auto-y radius-medium clip bg-shift-200",
-		LayoutOrder = p1.LayoutOrder,
-		onActivated = if onItemActivated then var7 else nil,
-		ref = if fFlagEnableInExperienceShopUnifiedLoggingModule then var4 else nil
-	}
-	local t_1 = {
-		Media = reactModule.createElement(image, {
+		LayoutOrder = Frame.LayoutOrder,
+		onActivated = if OnItemActivatedFunction then UseResult else nil,
+		ref = if FFlagEnableInExperienceShopUnifiedLoggingModule then UseRefResult else nil
+	}, {
+		Media = ReactModule.createElement(Image, {
 			LayoutOrder = 1,
 			tag = {
-				["radius-medium bg-shift-200"] = fFlagFixThumbnailBackgroundInExperienceShopModule,
-				["radius-medium"] = not fFlagFixThumbnailBackgroundInExperienceShopModule
+				["radius-medium bg-shift-200"] = FFlagFixThumbnailBackgroundInExperienceShopModule,
+				["radius-medium"] = not FFlagFixThumbnailBackgroundInExperienceShopModule
 			},
-			Size = UDim2.fromScale(1, SHOP_ITEM_MEDIA_HEIGHT_SCALE),
+			Size = UDim2.fromScale(1, SHOPITEMMEDIAHEIGHTSCALE),
 			SizeConstraint = Enum.SizeConstraint.RelativeXX,
-			Image = p1.thumbnail,
+			Image = Frame.thumbnail,
 			ScaleType = Enum.ScaleType.Fit
-		})
-	}
-	local createElement_1 = reactModule.createElement
-	local t_2 = {
-		tag = "col gap-medium size-full-0 auto-y padding-medium",
-		LayoutOrder = 2
-	}
-	local t_3 = {}
-	local createElement_2 = reactModule.createElement
-	local t_4 = { tag = "col size-full-0 auto-y", LayoutOrder = 1 }
-	local t_5 = {
-		Title = reactModule.createElement(text, {
-			tag = "size-full-0 auto-y text-title-medium text-align-x-left text-truncate-end content-emphasis",
-			LayoutOrder = 1,
-			Text = p1.name
-		})
-	}
-	
-	if not p1.price then
-		var2 = nil
-	elseif fFlagEnableDiscountOnInShopTileModule then
-		var2 = reactModule.createElement
-		var2 = var2(view, {
-			tag = "row align-y-center gap-xsmall auto-xy",
+		}, {
+			TrialBadge = if NoUseSignalStateResult1 then ReactModule.createElement(TrialBadge) else nil
+		}),
+		TileContent = ReactModule.createElement(View, {
+			tag = "col gap-medium size-full-0 auto-y padding-medium",
 			LayoutOrder = 2
 		}, {
-			SalePrice = reactModule.createElement(view, {
-				tag = "row align-y-center gap-xsmall auto-xy",
-				LayoutOrder = 1
-			}, {
-				SaleRobuxIcon = reactModule.createElement(icon, {
+			ContentHeader = ReactModule.createElement(View, { tag = "col size-full-0 auto-y", LayoutOrder = 1 }, {
+				Title = ReactModule.createElement(Text, {
+					tag = "size-full-0 auto-y text-title-medium text-align-x-left text-truncate-end content-emphasis",
 					LayoutOrder = 1,
-					name = constantsModule.ROBUX_ICON,
-					size = iconSize.Small
+					Text = Frame.name
 				}),
-				SalePriceLabel = reactModule.createElement(text, {
-					tag = "auto-xy text-body-medium text-truncate-end content-emphasis",
-					LayoutOrder = 2,
-					Text = var10 or tostring(p1.price)
-				})
+				FreeTrialLabel = if NoUseSignalStateResult1 then ReactModule.createElement(FreeTrialLabel, { LayoutOrder = 2 }) else nil,
+				Metadata = if Frame.price and not NoUseSignalStateResult1 then if FFlagEnableDiscountOnInShopTileModule then ReactModule.createElement(View, {
+					tag = "row align-y-center gap-xsmall auto-xy",
+					LayoutOrder = 2
+				}, {
+					SalePrice = ReactModule.createElement(View, {
+						tag = "row align-y-center gap-xsmall auto-xy",
+						LayoutOrder = 1
+					}, {
+						SaleRobuxIcon = ReactModule.createElement(Icon, {
+							LayoutOrder = 1,
+							name = ConstantsModule.ROBUX_ICON,
+							size = IconSize.Small
+						}),
+						SalePriceLabel = ReactModule.createElement(Text, {
+							tag = "auto-xy text-body-medium text-truncate-end content-emphasis",
+							LayoutOrder = 2,
+							Text = FormatPriceModuleResult1 or tostring(Frame.price)
+						})
+					}),
+					OriginalPrice = if IsUserBasePriceInRobuxAbove and FormatPriceModuleResult then ReactModule.createElement(Text, {
+						tag = "auto-xy text-body-small text-truncate-end content-default",
+						RichText = true,
+						LayoutOrder = 2,
+						Text = "<s>" .. GetIconRichTextFunction(Enums.IconName.Robux) .. " " .. FormatPriceModuleResult .. "</s>"
+					}) else nil
+				}) else ReactModule.createElement(View, {
+					tag = "row align-y-center gap-xsmall auto-xy",
+					LayoutOrder = 2
+				}, {
+					RobuxIcon = ReactModule.createElement(Icon, {
+						LayoutOrder = 1,
+						name = ConstantsModule.ROBUX_ICON,
+						size = IconSize.Small
+					}),
+					PriceLabel = ReactModule.createElement(Text, {
+						tag = "auto-xy text-body-medium text-truncate-end content-default",
+						LayoutOrder = 2,
+						Text = tostring(Frame.price)
+					})
+				}) else nil
 			}),
-			OriginalPrice = if var8 and var9 then reactModule.createElement(text, {
-				tag = "auto-xy text-body-small text-truncate-end content-default",
-				RichText = true,
+			Footer = ReactModule.createElement(ShopItemFooterModule, {
 				LayoutOrder = 2,
-				Text = "<s>" .. getIconRichText(enums.IconName.Robux) .. " " .. var9 .. "</s>"
-			}) else nil
-		})
-	else
-		var2 = reactModule.createElement(view, {
-			tag = "row align-y-center gap-xsmall auto-xy",
-			LayoutOrder = 2
-		}, {
-			RobuxIcon = reactModule.createElement(icon, {
-				LayoutOrder = 1,
-				name = constantsModule.ROBUX_ICON,
-				size = iconSize.Small
-			}),
-			PriceLabel = reactModule.createElement(text, {
-				tag = "auto-xy text-body-medium text-truncate-end content-default",
-				LayoutOrder = 2,
-				Text = tostring(p1.price)
+				itemId = Frame.itemId,
+				itemType = Frame.itemType,
+				isOwned = UseSignalStateResult1,
+				showTry = UseSignalStateResult2,
+				price = Frame.price,
+				shopPageType = Frame.shopPageType,
+				purchaseCategoryLocation = PurchaseCategoryLocation
 			})
 		})
-	end
-	t_5.Metadata = var2
-	t_3.ContentHeader = createElement_2(view, t_4, t_5)
-	t_3.Footer = reactModule.createElement(shopItemFooterModule, {
-		LayoutOrder = 2,
-		itemId = p1.itemId,
-		itemType = p1.itemType,
-		isOwned = var5,
-		showTry = var6,
-		price = p1.price,
-		shopPageType = p1.shopPageType
 	})
-	t_1.TileContent = createElement_1(view, t_2, t_3)
-	
-	return createElement(view, t, t_1)
 end)

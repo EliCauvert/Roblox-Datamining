@@ -1,43 +1,44 @@
-﻿local authCommon = script:FindFirstAncestor("AuthCommon")
-local appStorageUtilitiesModule = require(authCommon.Utils.AppStorageUtilities)
-local _ = require(authCommon.Utils.PreviousAccountEntry)
-local prunePreviousAccountsListModule = require(authCommon.Utils.prunePreviousAccountsList)
-local parent = authCommon.Parent
-local cryoModule = require(parent.Cryo)
-local fFlagFixPreviousAccountsListEntries = require(parent.SharedFlags).FFlagFixPreviousAccountsListEntries
+﻿local AuthCommon = script:FindFirstAncestor("AuthCommon")
+local AppStorageUtilitiesModule = require(AuthCommon.Utils.AppStorageUtilities)
+local _ = require(AuthCommon.Utils.PreviousAccountEntry)
+local PrunePreviousAccountsListModule = require(AuthCommon.Utils.prunePreviousAccountsList)
+local Parent = AuthCommon.Parent
+local CryoModule = require(Parent.Cryo)
+local FFlagFixPreviousAccountsListEntries = require(Parent.SharedFlags).FFlagFixPreviousAccountsListEntries
 
-return function(p1, p2)
-	-- upvalues: appStorageUtilitiesModule (ref), fFlagFixPreviousAccountsListEntries (ref), cryoModule (ref), prunePreviousAccountsListModule (ref)
-	if p1 == nil or p1 == "" or (p1 == "0" or p1 == "-1") then
-		return false
-	elseif p2.username == nil or p2.username == "" then
+return function(UserId, p1): boolean --[[ Line: 15 | Named "ensureLoginEntry" ]]
+	-- upvalues: AppStorageUtilitiesModule (copy), FFlagFixPreviousAccountsListEntries (copy), CryoModule (copy), PrunePreviousAccountsListModule (copy)
+	if UserId == nil or UserId == "" or UserId == "0" or UserId == "-1" then
 		return false
 	end
-	local var1 = if p2.displayName and p2.displayName ~= "nil" then p2.displayName else nil
-	local previousAccountsList = appStorageUtilitiesModule.getPreviousAccountsList()
-	local var2 = previousAccountsList[p1]
+	if p1.username == nil or p1.username == "" then
+		return false
+	end
+	local DisplayName = if p1.displayName and p1.displayName ~= "nil" then p1.displayName else nil
+	local PreviousAccountsList = AppStorageUtilitiesModule.getPreviousAccountsList()
+	local PreviousAccounts = PreviousAccountsList[UserId]
 	
-	if not var2 then
-		previousAccountsList[p1] = {
+	if not PreviousAccounts then
+		PreviousAccountsList[UserId] = {
 			showInAccountPicker = true,
-			userId = p1,
-			userIdentifier = p2.username,
-			username = p2.username,
-			displayName = var1,
+			userId = UserId,
+			userIdentifier = p1.username,
+			username = p1.username,
+			displayName = DisplayName,
 			signInTimestamp = os.time()
 		}
-		appStorageUtilitiesModule.setPreviousAccountsList(previousAccountsList)
-		prunePreviousAccountsListModule()
+		AppStorageUtilitiesModule.setPreviousAccountsList(PreviousAccountsList)
+		PrunePreviousAccountsListModule()
 		
 		return true
 	end
-	local t = { username = p2.username, displayName = var1 }
+	local config = { username = p1.username, displayName = DisplayName }
 	
-	if fFlagFixPreviousAccountsListEntries then
-		t.userId = p1
+	if FFlagFixPreviousAccountsListEntries then
+		config.userId = UserId
 	end
-	previousAccountsList[p1] = cryoModule.Dictionary.join(var2, t)
-	appStorageUtilitiesModule.setPreviousAccountsList(previousAccountsList)
+	PreviousAccountsList[UserId] = CryoModule.Dictionary.join(PreviousAccounts, config)
+	AppStorageUtilitiesModule.setPreviousAccountsList(PreviousAccountsList)
 	
 	return true
 end

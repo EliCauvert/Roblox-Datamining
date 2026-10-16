@@ -1,46 +1,46 @@
-﻿local genericChallenges = script:FindFirstAncestor("GenericChallenges")
-local buildHybridCallbackModule = require(script.Parent.BuildHybridCallback)
+﻿local GenericChallenges = script:FindFirstAncestor("GenericChallenges")
+local BuildHybridCallbackModule = require(script.Parent.BuildHybridCallback)
 local _ = require(script.Parent.ChallengeWebView)
-local challengeErrorModule = require(script.Parent.ChallengeError)
-local completionDataToRawHeadersModule = require(genericChallenges.Utils.completionDataToRawHeaders)
-local _ = require(genericChallenges.Parent.LuauPolyfill)
-local errorKindModule = require(genericChallenges.Types.ErrorKind)
-local buildCredentialsProtocolHookModule = require(script.Parent.Hooks.BuildCredentialsProtocolHook)
+local ChallengeErrorModule = require(script.Parent.ChallengeError)
+local CompletionDataToRawHeadersModule = require(GenericChallenges.Utils.completionDataToRawHeaders)
+local _ = require(GenericChallenges.Parent.LuauPolyfill)
+local ErrorKindModule = require(GenericChallenges.Types.ErrorKind)
+local BuildCredentialsProtocolHookModule = require(script.Parent.Hooks.BuildCredentialsProtocolHook)
 
-return function(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: buildHybridCallbackModule (ref), buildCredentialsProtocolHookModule (ref), challengeErrorModule (ref), errorKindModule (ref), completionDataToRawHeadersModule (ref)
-	return buildHybridCallbackModule({
-		Hooks = { buildCredentialsProtocolHookModule() },
-		OnChallengeLoadFailed = function(_)
-			-- upvalues: p5 (ref), p7 (ref), challengeErrorModule (copy), errorKindModule (copy), p2 (ref), p3 (ref)
-			if p5 ~= nil then
-				p5()
+return function(ChallengeId, ChallengeType, p1, Callback3, Callback, Callback2, Callback1) --[[ Line: 25 ]]
+	-- upvalues: BuildHybridCallbackModule (copy), BuildCredentialsProtocolHookModule (copy), ChallengeErrorModule (copy), ErrorKindModule (copy), CompletionDataToRawHeadersModule (copy)
+	return BuildHybridCallbackModule({
+		Hooks = { BuildCredentialsProtocolHookModule() },
+		OnChallengeLoadFailed = function(_) --[[ Line: 37 ]]
+			-- upvalues: Callback (copy), Callback1 (copy), ChallengeErrorModule (upval), ErrorKindModule (upval), ChallengeType (copy), p1 (copy)
+			if Callback ~= nil then
+				Callback()
 			end
-			p7(challengeErrorModule.new(errorKindModule.LoadFailed, { challengeType = p2 }))
-			p3:close()
+			Callback1(ChallengeErrorModule.new(ErrorKindModule.LoadFailed, { challengeType = ChallengeType }))
+			p1:close()
 		end,
-		OnChallengeInvalidated = function(p8)
-			-- upvalues: p5 (ref), p7 (ref), challengeErrorModule (copy), errorKindModule (copy), p3 (ref)
-			if p5 ~= nil and p8.data ~= nil then
-				p5(p8.data)
+		OnChallengeInvalidated = function(p2) --[[ Line: 46 ]]
+			-- upvalues: Callback (copy), Callback1 (copy), ChallengeErrorModule (upval), ErrorKindModule (upval), p1 (copy)
+			if Callback ~= nil and p2.data ~= nil then
+				Callback(p2.data)
 			end
-			p7(challengeErrorModule.new(errorKindModule.Invalidated, p8.data))
-			p3:close()
+			Callback1(ChallengeErrorModule.new(ErrorKindModule.Invalidated, p2.data))
+			p1:close()
 		end,
-		OnChallengeDisplayed = function(_)
-			-- upvalues: p3 (ref)
-			p3:setVisible(true)
+		OnChallengeDisplayed = function(_) --[[ Line: 53 ]]
+			-- upvalues: p1 (copy)
+			p1:setVisible(true)
 		end,
-		OnChallengeCompleted = function(p8)
-			-- upvalues: p6 (ref), p4 (ref), completionDataToRawHeadersModule (copy), p1 (ref), p3 (ref)
-			if p8.data ~= nil and p8.data.challengeType ~= nil and p8.data.metadata ~= nil then
-				p6(p4(completionDataToRawHeadersModule({
-					challengeId = p1,
-					challengeType = p8.data.challengeType,
-					metadata = p8.data.metadata
+		OnChallengeCompleted = function(p2) --[[ Line: 56 ]]
+			-- upvalues: Callback2 (copy), Callback3 (copy), CompletionDataToRawHeadersModule (upval), ChallengeId (copy), p1 (copy)
+			if p2.data ~= nil and p2.data.challengeType ~= nil and p2.data.metadata ~= nil then
+				Callback2(Callback3(CompletionDataToRawHeadersModule({
+					challengeId = ChallengeId,
+					challengeType = p2.data.challengeType,
+					metadata = p2.data.metadata
 				})))
 			end
-			p3:close()
+			p1:close()
 		end
 	})
 end

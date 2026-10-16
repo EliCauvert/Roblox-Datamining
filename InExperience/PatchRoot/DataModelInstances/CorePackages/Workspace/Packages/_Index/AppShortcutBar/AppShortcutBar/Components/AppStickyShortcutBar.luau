@@ -1,1 +1,1 @@
-﻿return require(script.AppStickyShortcutBar)
+﻿return (require(script.AppStickyShortcutBar))

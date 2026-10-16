@@ -1,105 +1,105 @@
-﻿local parent = script.Parent.Parent
-local roactNavigationModule = require(parent.RoactNavigation)
-local getNavigation = roactNavigationModule.getNavigation
-local actions = roactNavigationModule.Actions
-local signalsModule = require(parent.Signals)
-local createSignal = signalsModule.createSignal
-local createComputed = signalsModule.createComputed
-local signalsExperimentalModule = require(parent.SignalsExperimental)
+﻿local Parent = script.Parent.Parent
+local RoactNavigationModule = require(Parent.RoactNavigation)
+local GetNavigationFunction = RoactNavigationModule.getNavigation
+local Actions = RoactNavigationModule.Actions
+local SignalsModule = require(Parent.Signals)
+local CreateSignalFunction = SignalsModule.createSignal
+local CreateComputedFunction = SignalsModule.createComputed
+local SignalsExperimentalModule = require(Parent.SignalsExperimental)
 local _ = require(script.Parent.types)
-local dEV = _G.__DEV__ or _G.__TESTEZ_RUNNING_TEST__
+local DEV = _G.__DEV__ or _G.__TESTEZ_RUNNING_TEST__
 
-return function(p1)
-	-- upvalues: createSignal (ref), actions (ref), signalsExperimentalModule (ref), dEV (ref), createComputed (ref), getNavigation (ref)
+return function(p1) --[[ Line: 44 | Named "createProjectedNavigationObject" ]]
+	-- upvalues: CreateSignalFunction (copy), Actions (copy), SignalsExperimentalModule (copy), DEV (copy), CreateComputedFunction (copy), GetNavigationFunction (copy)
 	local t = {}
-	local var1, var2 = createSignal(false)
-	local var3, var4 = createSignal(function()
-		-- upvalues: p1 (ref), actions (copy)
-		return p1.getStateForAction(actions.init())
+	local Signal, Signal2 = CreateSignalFunction(false)
+	local Signal1, Signal2_1 = CreateSignalFunction(function() --[[ Line: 52 ]]
+		-- upvalues: p1 (copy), Actions (upval)
+		return (p1.getStateForAction(Actions.init()))
 	end)
-	local var5 = nil
-	local t_1 = {}
+	local Callback = nil
+	local List = {}
 	
-	local function setDispatch(value)
-		-- upvalues: var5 (write), t_1 (write)
-		var5 = value
+	local function setDispatch(Callback1: (any) -> ()) --[[ Line: 61 ]]
+		-- upvalues: Callback (ref), List (ref)
+		Callback = Callback1
 		
-		if #t_1 > 0 then
-			local var6 = t_1
-			t_1 = {}
+		if #List > 0 then
+			local List1 = List
+			List = {}
 			
-			for i, v in var6 do
-				value(v)
+			for _, value in List1 do
+				Callback1(value)
 			end
 		end
 	end
 	
-	local function clearDispatch()
-		-- upvalues: var5 (write)
-		var5 = nil
+	local function clearDispatch() --[[ Line: 72 ]]
+		-- upvalues: Callback (ref)
+		Callback = nil
 	end
 	
-	local function update(p2)
-		-- upvalues: signalsExperimentalModule (copy), var4 (ref), var2 (ref)
-		if p2 == nil then
+	local function update(p2) --[[ Line: 79 ]]
+		-- upvalues: SignalsExperimentalModule (upval), Signal2_1 (copy), Signal2 (copy)
+		if p2 ~= nil then
+			SignalsExperimentalModule.batch(function() --[[ Line: 83 ]]
+				-- upvalues: Signal2_1 (upval), p2 (copy), Signal2 (upval)
+				Signal2_1(p2)
+				Signal2(p2.isTransitioning == true)
+			end)
+			
 			return
 		end
-		signalsExperimentalModule.batch(function()
-			-- upvalues: var4 (copy), p2 (ref), var2 (copy)
-			var4(p2)
-			var2(p2.isTransitioning == true)
-		end)
 	end
 	
-	local function dispatch(p2)
-		-- upvalues: dEV (copy), signalsExperimentalModule (copy), var4 (ref), p1 (ref), actions (copy), var2 (ref), var5 (write), var3 (ref), t_1 (write)
-		if dEV and p2.type == "RESET_NAVIGATION_FOR_TESTING_ONLY__DO_NOT_USE_IN_PRODUCTION" then
-			signalsExperimentalModule.batch(function()
-				-- upvalues: var4 (copy), p1 (copy), actions (copy), var2 (copy)
-				var4(p1.getStateForAction(actions.init()))
-				var2(false)
+	local function dispatch(p2): boolean --[[ Line: 94 ]]
+		-- upvalues: DEV (upval), SignalsExperimentalModule (upval), Signal2_1 (copy), p1 (copy), Actions (upval), Signal2 (copy), Callback (ref), Signal1 (copy), List (ref)
+		if DEV and p2.type == "RESET_NAVIGATION_FOR_TESTING_ONLY__DO_NOT_USE_IN_PRODUCTION" then
+			SignalsExperimentalModule.batch(function() --[[ Line: 96 ]]
+				-- upvalues: Signal2_1 (upval), p1 (upval), Actions (upval), Signal2 (upval)
+				Signal2_1((p1.getStateForAction(Actions.init())))
+				Signal2(false)
 			end)
 			
 			return true
-		elseif var5 ~= nil then
-			var5(p2)
+		end
+		if Callback ~= nil then
+			Callback(p2)
 			
 			return true
 		end
-		local var7 = var3(false)
-		local stateForAction = p1.getStateForAction(p2, var7)
+		local SignalResult = Signal1(false)
+		local StateForAction = p1.getStateForAction(p2, SignalResult)
 		
-		if stateForAction ~= nil and stateForAction ~= var7 then
-			var4(stateForAction)
+		if StateForAction ~= nil and StateForAction ~= SignalResult then
+			Signal2_1(StateForAction)
 		end
-		table.insert(t_1, p2)
+		table.insert(List, p2)
 		
 		return true
 	end
 	
-	local function notifyEvents() end
-	
-	local var7 = function()
+	local function v17() --[[ Line: 123 ]]
 		return nil
 	end
 	
-	local var8 = createComputed(function(p2)
-		-- upvalues: var3 (ref), getNavigation (copy), p1 (ref), dispatch (ref), t (ref), var7 (write)
-		return getNavigation(p1, var3(p2), dispatch, t, function(_, p3)
+	local Computed = CreateComputedFunction(function(p2) --[[ Line: 126 ]]
+		-- upvalues: Signal1 (copy), GetNavigationFunction (upval), p1 (copy), dispatch (copy), t (copy), v17 (ref)
+		return GetNavigationFunction(p1, Signal1(p2), dispatch, t, function(_, p3) --[[ Line: 128 ]]
 			return p3
-		end, function()
-			-- upvalues: var7 (copy)
-			return var7()
+		end, function() --[[ Line: 130 ]]
+			-- upvalues: v17 (upval)
+			return v17()
 		end)
 	end)
-	var7 = var8
+	v17 = Computed
 	
 	return {
 		dispatch = dispatch,
-		notifyEvents = notifyEvents,
-		getState = var3,
-		getNavigation = var8,
-		getIsNavigating = var1,
+		notifyEvents = function() --[[ Line: 118 ]] end,
+		getState = Signal1,
+		getNavigation = Computed,
+		getIsNavigating = Signal,
 		update = update,
 		setDispatch = setDispatch,
 		clearDispatch = clearDispatch

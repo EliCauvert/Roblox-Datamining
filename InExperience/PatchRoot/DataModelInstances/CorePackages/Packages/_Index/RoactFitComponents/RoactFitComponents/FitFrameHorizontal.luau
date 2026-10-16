@@ -1,17 +1,17 @@
-﻿local parent = script.Parent.Parent
-local cryoModule = require(parent.Cryo)
-local roactModule = require(parent.Roact)
-local fitFrameOnAxisModule = require(script.Parent.FitFrameOnAxis)
-local isRoact17Module = require(script.Parent.isRoact17)
+﻿local Parent = script.Parent.Parent
+local CryoModule = require(Parent.Cryo)
+local RoactModule = require(Parent.Roact)
+local FitFrameOnAxisModule = require(script.Parent.FitFrameOnAxis)
+local IsRoact17Module = require(script.Parent.isRoact17)
 
-return roactModule.forwardRef(function(p1, p2)
-	-- upvalues: isRoact17Module (ref), roactModule (ref), cryoModule (ref), fitFrameOnAxisModule (ref)
-	p1 = p1 or {}
+return RoactModule.forwardRef(function(p1, p2) --[[ Line: 10 ]]
+	-- upvalues: IsRoact17Module (copy), RoactModule (copy), CryoModule (copy), FitFrameOnAxisModule (copy)
+	local P0 = p1 or {}
 	
-	return roactModule.createElement(fitFrameOnAxisModule, cryoModule.Dictionary.join(p1, {
-		axis = fitFrameOnAxisModule.Axis.Horizontal,
-		minimumSize = UDim2.new(UDim.new(0, 0), p1.height),
-		[if isRoact17Module() then "forwardedRef" else roactModule.Ref] = p2,
-		height = cryoModule.None
-	}))
+	return RoactModule.createElement(FitFrameOnAxisModule, (CryoModule.Dictionary.join(P0, {
+		axis = FitFrameOnAxisModule.Axis.Horizontal,
+		minimumSize = UDim2.new(UDim.new(0, 0), P0.height),
+		[if IsRoact17Module() then "forwardedRef" else RoactModule.Ref] = p2,
+		height = CryoModule.None
+	})))
 end)

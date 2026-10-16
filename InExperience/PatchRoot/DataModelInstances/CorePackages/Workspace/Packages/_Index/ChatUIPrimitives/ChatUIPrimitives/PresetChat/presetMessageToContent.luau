@@ -1,24 +1,24 @@
-﻿local engineFeaturePresetChatUseExpressionTrayOptionsEndpoint = require(script:FindFirstAncestor("ChatUIPrimitives").Parent.SharedFlags).EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint
+﻿local EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint = require(script:FindFirstAncestor("ChatUIPrimitives").Parent.SharedFlags).EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint
 local _ = require(script.Parent.Types)
 local _ = require(script.Parent.Parent.UniversalMessage.Types)
 
 return {
-	presetMessageToContent = function(value)
-		-- upvalues: engineFeaturePresetChatUseExpressionTrayOptionsEndpoint (ref)
-		return if value.presetId == "" then nil else {
+	presetMessageToContent = function(p1) --[[ Line: 19 ]]
+		-- upvalues: EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint (copy)
+		return if p1.presetId == "" then nil else {
 			kind = "preset",
-			presetId = value.presetId,
-			text = if engineFeaturePresetChatUseExpressionTrayOptionsEndpoint then value.text else value.value
+			presetId = p1.presetId,
+			text = if EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint then p1.text else p1.value
 		}
 	end,
-	presetMessageToExpressionItem = function(value)
-		-- upvalues: engineFeaturePresetChatUseExpressionTrayOptionsEndpoint (ref)
-		local var1 = if value.presetId == "" then nil else {
+	presetMessageToExpressionItem = function(p1) --[[ Line: 31 ]]
+		-- upvalues: EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint (copy)
+		local Config = if p1.presetId == "" then nil else {
 			kind = "preset",
-			presetId = value.presetId,
-			text = if engineFeaturePresetChatUseExpressionTrayOptionsEndpoint then value.text else value.value
+			presetId = p1.presetId,
+			text = if EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint then p1.text else p1.value
 		}
 		
-		return if var1 == nil then nil else { content = var1 }
+		return if Config == nil then nil else { content = Config }
 	end
 }

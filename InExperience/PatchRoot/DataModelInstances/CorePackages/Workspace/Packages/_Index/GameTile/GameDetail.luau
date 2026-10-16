@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.GameDetail.GameDetail)
+﻿return (require(script.Parent.Parent.Parent._Index.GameDetail.GameDetail))

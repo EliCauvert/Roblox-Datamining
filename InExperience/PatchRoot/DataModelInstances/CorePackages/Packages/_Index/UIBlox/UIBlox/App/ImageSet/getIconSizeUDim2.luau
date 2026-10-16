@@ -1,11 +1,11 @@
-﻿local parent = script.Parent
-local iconSizeModule = require(parent.Enum.IconSize)
-local getIconSizeModule = require(parent.getIconSize)
+﻿local Parent = script.Parent
+local IconSizeModule = require(Parent.Enum.IconSize)
+local GetIconSizeModule = require(Parent.getIconSize)
 
-return function(p1)
-	-- upvalues: iconSizeModule (ref), getIconSizeModule (ref)
-	assert(iconSizeModule.isEnumValue(p1))
-	local var1 = getIconSizeModule(p1)
+return function(p1): UDim2 --[[ Line: 6 ]]
+	-- upvalues: IconSizeModule (copy), GetIconSizeModule (copy)
+	assert(IconSizeModule.isEnumValue(p1))
+	local IconSizeModule1 = GetIconSizeModule(p1)
 	
-	return UDim2.fromOffset(var1, var1)
+	return UDim2.fromOffset(IconSizeModule1, IconSizeModule1)
 end

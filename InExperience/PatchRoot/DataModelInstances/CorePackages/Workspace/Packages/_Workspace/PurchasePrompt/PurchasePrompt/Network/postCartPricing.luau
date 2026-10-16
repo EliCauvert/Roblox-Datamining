@@ -1,39 +1,39 @@
-﻿local parent = script.Parent.Parent
-local _ = require(parent.Parent.PurchasePromptLite)
-local promiseModule = require(parent.Promise)
-local _ = require(parent.types)
-local unifiedPurchaseTelemetryModule = require(parent.Events.UnifiedPurchaseTelemetry)
-local logUnifiedPurchaseTelemetryCounterModule = require(parent.Utils.logUnifiedPurchaseTelemetryCounter)
+﻿local Parent = script.Parent.Parent
+local _ = require(Parent.Parent.PurchasePromptLite)
+local PromiseModule = require(Parent.Promise)
+local _ = require(Parent.types)
+local UnifiedPurchaseTelemetryModule = require(Parent.Events.UnifiedPurchaseTelemetry)
+local LogUnifiedPurchaseTelemetryCounterModule = require(Parent.Utils.logUnifiedPurchaseTelemetryCounter)
 
-local function _(p1, p2)
-	local t = { featureKey = "MARKETPLACE_CART", items = p1 }
+local function _(Items, UnselectedOffers) --[[ Line: 18 | Named "buildCartPricingRequestBody" ]]
+	local config = { featureKey = "MARKETPLACE_CART", items = Items }
 	
-	if p2 ~= nil then
-		t.unselectedOffers = p2
+	if UnselectedOffers ~= nil then
+		config.unselectedOffers = UnselectedOffers
 	end
-	return t
+	return config
 end
 
-return function(p1, p2, p3, p4, p5)
-	-- upvalues: promiseModule (ref), logUnifiedPurchaseTelemetryCounterModule (ref), unifiedPurchaseTelemetryModule (ref)
-	if p2 == nil or #p2 == 0 or p1.postCartPricing == nil then
-		return promiseModule.resolve(nil)
+return function(p1, Items, UnselectedOffers, p2, p3) --[[ Line: 32 | Named "postCartPricing" ]]
+	-- upvalues: PromiseModule (copy), LogUnifiedPurchaseTelemetryCounterModule (copy), UnifiedPurchaseTelemetryModule (copy)
+	if Items == nil or #Items == 0 or p1.postCartPricing == nil then
+		return PromiseModule.resolve(nil)
 	end
-	local postCartPricing = p1.postCartPricing
-	local t = { featureKey = "MARKETPLACE_CART", items = p2 }
+	local PostCartPricingFunction = p1.postCartPricing
+	local config = { featureKey = "MARKETPLACE_CART", items = Items }
 	
-	if p3 ~= nil then
-		t.unselectedOffers = p3
+	if UnselectedOffers ~= nil then
+		config.unselectedOffers = UnselectedOffers
 	end
-	return postCartPricing(t):andThen(function(p6)
-		-- upvalues: logUnifiedPurchaseTelemetryCounterModule (copy), unifiedPurchaseTelemetryModule (copy), p4 (ref), p5 (ref)
-		logUnifiedPurchaseTelemetryCounterModule(unifiedPurchaseTelemetryModule.UnifiedCartPricingFetchSucceededCounter, p4, p5)
+	return PostCartPricingFunction(config):andThen(function(Result) --[[ Line: 48 ]]
+		-- upvalues: LogUnifiedPurchaseTelemetryCounterModule (upval), UnifiedPurchaseTelemetryModule (upval), p2 (copy), p3 (copy)
+		LogUnifiedPurchaseTelemetryCounterModule(UnifiedPurchaseTelemetryModule.UnifiedCartPricingFetchSucceededCounter, p2, p3)
 		
-		return p6
-	end):catch(function(p6)
-		-- upvalues: logUnifiedPurchaseTelemetryCounterModule (copy), unifiedPurchaseTelemetryModule (copy), p4 (ref), p5 (ref)
-		logUnifiedPurchaseTelemetryCounterModule(unifiedPurchaseTelemetryModule.UnifiedCartPricingFetchFailedCounter, p4, p5)
-		warn(string.format("postCartPricing failed: %s", tostring(p6)))
+		return Result
+	end):catch(function(Err) --[[ Line: 56 ]]
+		-- upvalues: LogUnifiedPurchaseTelemetryCounterModule (upval), UnifiedPurchaseTelemetryModule (upval), p2 (copy), p3 (copy)
+		LogUnifiedPurchaseTelemetryCounterModule(UnifiedPurchaseTelemetryModule.UnifiedCartPricingFetchFailedCounter, p2, p3)
+		warn(string.format("postCartPricing failed: %s", (tostring(Err))))
 		
 		return nil
 	end)

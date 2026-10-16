@@ -1,9 +1,9 @@
-﻿local editProfileAnalyticsContextModule = require(script.EditProfileAnalyticsContext)
+﻿local EditProfileAnalyticsContextModule = require(script.EditProfileAnalyticsContext)
 
 return {
 	AnalyticsService = require(script.AnalyticsService),
-	Context = editProfileAnalyticsContextModule,
-	connect = require(script:FindFirstAncestor("EditProfile").Parent.LuaSocialLibrariesDeps).SocialLibraries.config({}).Context.getConnect(editProfileAnalyticsContextModule),
+	Context = EditProfileAnalyticsContextModule,
+	connect = require(script:FindFirstAncestor("EditProfile").Parent.LuaSocialLibrariesDeps).SocialLibraries.config({}).Context.getConnect(EditProfileAnalyticsContextModule),
 	EventNames = require(script.Enums.EventNames),
 	setupFireAnalyticsEvents = require(script.setupFireAnalyticsEvents),
 	useAnalytics = require(script.useAnalytics),

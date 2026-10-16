@@ -1,122 +1,121 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local textService = game:GetService("TextService")
-local guiService = game:GetService("GuiService")
-local marketplaceService = game:GetService("MarketplaceService")
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local appFonts = require(corePackagesService.Workspace.Packages.Style).AppFonts
-local parent = script.Parent.Parent
-local colorsModule = require(parent.Colors)
-local promptPurchaseModule = require(parent.Thunks.PromptPurchase)
-local getSelectionImageObjectRoundedModule = require(parent.getSelectionImageObjectRounded)
-local utilityFunctionsModule = require(parent.UtilityFunctions)
-local buyButton = roactModule.PureComponent:extend("BuyButton")
+﻿local CorePackages = game:GetService("CorePackages")
+local TextService = game:GetService("TextService")
+local GuiService = game:GetService("GuiService")
+local MarketplaceService = game:GetService("MarketplaceService")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local AppFonts = require(CorePackages.Workspace.Packages.Style).AppFonts
+local Parent = script.Parent.Parent
+local ColorsModule = require(Parent.Colors)
+local PromptPurchaseModule = require(Parent.Thunks.PromptPurchase)
+local GetSelectionImageObjectRoundedModule = require(Parent.getSelectionImageObjectRounded)
+local UtilityFunctionsModule = require(Parent.UtilityFunctions)
+local BuyButton = RoactModule.PureComponent:extend("BuyButton")
 
-function buyButton.init(p1)
-	-- upvalues: getSelectionImageObjectRoundedModule (ref), guiService (ref)
-	p1.selectedImage = getSelectionImageObjectRoundedModule()
+function BuyButton.init(p1) --[[ Line: 21 ]]
+	-- upvalues: GetSelectionImageObjectRoundedModule (copy), GuiService (copy)
+	p1.selectedImage = GetSelectionImageObjectRoundedModule()
 	p1.connections = {}
 	p1.lastGamepadFocus = nil
 	
-	function p0.onPromptPurchaseFinished()
-		-- upvalues: p1 (ref), guiService (copy)
+	function p1.onPromptPurchaseFinished() --[[ Line: 26 ]]
+		-- upvalues: p1 (copy), GuiService (upval)
 		if p1.props.gamepadEnabled and p1.props.visible then
-			guiService.SelectedCoreObject = p1.lastGamepadFocus
+			GuiService.SelectedCoreObject = p1.lastGamepadFocus
 		end
 	end
 end
 
-function buyButton.render(p1)
-	-- upvalues: utilityFunctionsModule (ref), roactModule (ref), colorsModule (ref), guiService (ref), appFonts (ref)
-	local itemType = p1.props.itemType
-	local itemId = p1.props.itemId
-	local showRobuxIcon = p1.props.showRobuxIcon
-	local forSale = p1.props.forSale
-	local promptPurchase = p1.props.promptPurchase
-	local buyText = p1.props.buyText
-	local buyButtonRef = p1.props.buyButtonRef
-	local collectibleItemId = p1.props.collectibleItemId
-	local collectibleLowestAvailableResaleProductId = p1.props.collectibleLowestAvailableResaleProductId
-	local collectibleLowestAvailableResaleItemInstanceId = p1.props.collectibleLowestAvailableResaleItemInstanceId
-	local collectibleLowestResalePrice = p1.props.collectibleLowestResalePrice
-	local var1 = utilityFunctionsModule.isLimited2Point0_Or_LimitedCollectible(p1.props.assetInfo)
-	local var2 = if not forSale then 0.5 else 0
+function BuyButton.render(p1) --[[ Line: 34 ]]
+	-- upvalues: UtilityFunctionsModule (copy), RoactModule (copy), ColorsModule (copy), GuiService (copy), AppFonts (copy)
+	local ItemType = p1.props.itemType
+	local ItemId = p1.props.itemId
+	local ForSale = p1.props.forSale
+	local PromptPurchaseFunction = p1.props.promptPurchase
+	local BuyText = p1.props.buyText
+	local CollectibleItemId = p1.props.collectibleItemId
+	local CollectibleLowestAvailableResaleProductId = p1.props.collectibleLowestAvailableResaleProductId
+	local CollectibleLowestAvailableResaleItemInstanceId = p1.props.collectibleLowestAvailableResaleItemInstanceId
+	local CollectibleLowestResalePrice = p1.props.collectibleLowestResalePrice
+	local IsLimited2Point0_Or_LimitedCollectible = UtilityFunctionsModule.isLimited2Point0_Or_LimitedCollectible(p1.props.assetInfo)
+	local ImageTransparency: number = if ForSale then 0 else 0.5
 	
-	return roactModule.createElement("ImageButton", {
+	return RoactModule.createElement("ImageButton", {
 		AnchorPoint = Vector2.new(0.5, 0),
 		BackgroundTransparency = 1,
 		Size = UDim2.new(0.5, -32, 0, 44),
 		Image = "rbxasset://textures/ui/InspectMenu/Button_white.png",
-		ImageColor3 = colorsModule.Green,
+		ImageColor3 = ColorsModule.Green,
 		SelectionImageObject = p1.selectedImage,
 		LayoutOrder = 3,
-		ImageTransparency = var2,
-		[roactModule.Ref] = buyButtonRef,
-		[roactModule.Event.Activated] = function()
-			-- upvalues: forSale (ref), p1 (ref), guiService (copy), promptPurchase (ref), itemId (ref), itemType (ref), collectibleItemId (ref), collectibleLowestAvailableResaleProductId (ref), collectibleLowestAvailableResaleItemInstanceId (ref), collectibleLowestResalePrice (ref), var1 (ref)
-			if forSale then
+		ImageTransparency = ImageTransparency,
+		[RoactModule.Ref] = p1.props.buyButtonRef,
+		[RoactModule.Event.Activated] = function() --[[ Line: 66 ]]
+			-- upvalues: ForSale (copy), p1 (copy), GuiService (upval), PromptPurchaseFunction (copy), ItemId (copy), ItemType (copy), CollectibleItemId (copy), CollectibleLowestAvailableResaleProductId (copy), CollectibleLowestAvailableResaleItemInstanceId (copy), CollectibleLowestResalePrice (copy), IsLimited2Point0_Or_LimitedCollectible (copy)
+			if ForSale then
 				if p1.props.gamepadEnabled and p1.props.visible then
-					p1.lastGamepadFocus = guiService.SelectedCoreObject
-					guiService.SelectedCoreObject = nil
+					p1.lastGamepadFocus = GuiService.SelectedCoreObject
+					GuiService.SelectedCoreObject = nil
 				end
-				promptPurchase(itemId, itemType, collectibleItemId, collectibleLowestAvailableResaleProductId, collectibleLowestAvailableResaleItemInstanceId, collectibleLowestResalePrice, var1)
+				PromptPurchaseFunction(ItemId, ItemType, CollectibleItemId, CollectibleLowestAvailableResaleProductId, CollectibleLowestAvailableResaleItemInstanceId, CollectibleLowestResalePrice, IsLimited2Point0_Or_LimitedCollectible)
 			end
 		end
 	}, {
-		UIListLayout = roactModule.createElement("UIListLayout", {
+		UIListLayout = RoactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Horizontal,
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
 			HorizontalAlignment = Enum.HorizontalAlignment.Center
 		}),
-		RobuxIcon = roactModule.createElement("ImageLabel", {
+		RobuxIcon = RoactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 1,
 			Image = "rbxasset://textures/ui/common/robux_small.png",
 			LayoutOrder = 1,
 			Size = UDim2.new(0, 16, 0, 16),
-			ImageTransparency = var2,
-			ImageColor3 = colorsModule.White,
-			Visible = showRobuxIcon
+			ImageTransparency = ImageTransparency,
+			ImageColor3 = ColorsModule.White,
+			Visible = p1.props.showRobuxIcon
 		}),
-		BuyText = roactModule.createElement("TextLabel", {
+		BuyText = RoactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
 			TextSize = 16,
 			LayoutOrder = 2,
-			Size = UDim2.new(0, p1:getBuyButtonTextSize(buyText), 1, 0),
-			Text = tostring(buyText),
-			Font = appFonts.default:getDefault(),
-			TextColor3 = colorsModule.White,
-			TextTransparency = var2,
+			Size = UDim2.new(0, p1:getBuyButtonTextSize(BuyText), 1, 0),
+			Text = tostring(BuyText),
+			Font = AppFonts.default:getDefault(),
+			TextColor3 = ColorsModule.White,
+			TextTransparency = ImageTransparency,
 			TextXAlignment = Enum.TextXAlignment.Center
 		})
 	})
 end
 
-function buyButton.didMount(p1)
-	-- upvalues: marketplaceService (ref)
-	local promptBundlePurchaseFinishedConnection = marketplaceService.PromptBundlePurchaseFinished:Connect(p1.onPromptPurchaseFinished)
-	table.insert(p1.connections, marketplaceService.PromptPurchaseFinished:Connect(p1.onPromptPurchaseFinished))
-	table.insert(p1.connections, promptBundlePurchaseFinishedConnection)
+function BuyButton.didMount(p1) --[[ Line: 114 ]]
+	-- upvalues: MarketplaceService (copy)
+	local PromptBundlePurchaseFinishedConnection = MarketplaceService.PromptBundlePurchaseFinished:Connect(p1.onPromptPurchaseFinished)
+	table.insert(p1.connections, (MarketplaceService.PromptPurchaseFinished:Connect(p1.onPromptPurchaseFinished)))
+	table.insert(p1.connections, PromptBundlePurchaseFinishedConnection)
 end
 
-function buyButton.willUnmount(p1)
-	for i, v in pairs(p1.connections) do
-		v:Disconnect()
+function BuyButton.willUnmount(p1) --[[ Line: 122 ]]
+	for _, connection in pairs(p1.connections) do
+		connection:Disconnect()
 	end
 end
 
-function buyButton.getBuyButtonTextSize(p2, p3)
-	-- upvalues: textService (ref), appFonts (ref)
+function BuyButton.getBuyButtonTextSize(p2, BuyText) --[[ Line: 128 ]]
+	-- upvalues: TextService (copy), AppFonts (copy)
 	if p2.props.buyButtonRef.current then
-		local var1 = textService:GetTextSize(tostring(p3), 16, appFonts.default:getDefault(), Vector2.new(p2.props.buyButtonRef.current.AbsoluteSize.X, 5000))
-		p2.props.buyButtonRef.Size = UDim2.new(0, 1, 0, var1.Y)
+		local TextSize = TextService:GetTextSize(tostring(BuyText), 16, AppFonts.default:getDefault(), Vector2.new(p2.props.buyButtonRef.current.AbsoluteSize.X, 5000))
+		p2.props.buyButtonRef.Size = UDim2.new(0, 1, 0, TextSize.Y)
 		
-		return if var1.X > 32 then var1.X else 32
+		return TextSize.X > 32 and TextSize.X or 32
+	else
+		return 0
 	end
-	return 0
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p2, _)
+return RoactRoduxModule.UNSTABLE_connect2(function(p2, _) --[[ Line: 143 ]]
 	return {
 		locale = p2.locale,
 		view = p2.view,
@@ -124,12 +123,12 @@ return roactRoduxModule.UNSTABLE_connect2(function(p2, _)
 		gamepadEnabled = p2.gamepadEnabled,
 		visible = p2.visible
 	}
-end, function(p2)
-	-- upvalues: promptPurchaseModule (ref)
+end, function(Callback) --[[ Line: 153 ]]
+	-- upvalues: PromptPurchaseModule (copy)
 	return {
-		promptPurchase = function(p3, p4, p5, p6, p7, p8, p9)
-			-- upvalues: p2 (ref), promptPurchaseModule (copy)
-			p2(promptPurchaseModule(p3, p4, p5, p6, p7, p8, p9))
+		promptPurchase = function(p2, p3, p4, p5, p6, p7, p8) --[[ Line: 155 ]]
+			-- upvalues: Callback (copy), PromptPurchaseModule (upval)
+			Callback(PromptPurchaseModule(p2, p3, p4, p5, p6, p7, p8))
 		end
 	}
-end)(buyButton)
+end)(BuyButton)

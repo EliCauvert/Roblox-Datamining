@@ -1,30 +1,29 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local iconModule = require(foundation.Components.Icon)
-local viewModule = require(foundation.Components.View)
-local iconSizeModule = require(foundation.Enums.IconSize)
-local _ = require(foundation.Components.Types)
-local useRotationModule = require(foundation.Utility.useRotation)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local t = {
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local IconModule = require(Foundation.Components.Icon)
+local ViewModule = require(Foundation.Components.View)
+local _ = require(Foundation.Components.Types)
+local UseRotationModule = require(Foundation.Utility.useRotation)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local config = {
 	testId = "--foundation-loading",
-	size = iconSizeModule.Large
+	size = require(Foundation.Enums.IconSize).Large
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), useRotationModule (ref), useTokensModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), iconModule (ref)
-	local var1 = withDefaultsModule(p1, t)
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 27 | Named "Loading" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseRotationModule (copy), UseTokensModule (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), IconModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var1, { tag = "auto-xy" }), {
-		Icon = reactModule.createElement(iconModule, {
+	return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, { tag = "auto-xy" }), {
+		Icon = ReactModule.createElement(IconModule, {
 			name = "icons/graphic/loadingspinner",
-			size = var1.size,
-			style = useTokensModule().DarkMode.Content.Emphasis,
-			Rotation = useRotationModule(),
-			ref = p2,
-			testId = `{var1.testId}--icon`
+			size = WithDefaultsModuleResult.size,
+			style = UseTokensModule().DarkMode.Content.Emphasis,
+			Rotation = UseRotationModule(),
+			ref = Ref,
+			testId = `{WithDefaultsModuleResult.testId}--icon`
 		})
 	})
 end))

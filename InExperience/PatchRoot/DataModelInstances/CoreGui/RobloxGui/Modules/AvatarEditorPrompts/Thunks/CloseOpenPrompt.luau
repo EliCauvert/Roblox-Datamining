@@ -1,32 +1,32 @@
-﻿local avatarEditorService = game:GetService("AvatarEditorService")
-local parent = script.Parent.Parent
-local closeOpenPromptModule = require(parent.Actions.CloseOpenPrompt)
-local promptTypeModule = require(parent.PromptType)
+﻿local AvatarEditorService = game:GetService("AvatarEditorService")
+local Parent = script.Parent.Parent
+local CloseOpenPromptModule = require(Parent.Actions.CloseOpenPrompt)
+local PromptTypeModule = require(Parent.PromptType)
 
-return function(p1)
-	-- upvalues: promptTypeModule (ref), avatarEditorService (ref), closeOpenPromptModule (ref)
-	local promptType = p1:getState().promptInfo.promptType
+return function(p1) --[[ Line: 8 ]]
+	-- upvalues: PromptTypeModule (copy), AvatarEditorService (copy), CloseOpenPromptModule (copy)
+	local PromptType = p1:getState().promptInfo.promptType
 	
-	if promptType == promptTypeModule.AllowInventoryReadAccess then
-		avatarEditorService:SetAllowInventoryReadAccess(false)
-	elseif promptType == promptTypeModule.SaveAvatar then
-		avatarEditorService:SignalSaveAvatarPermissionDenied()
-	elseif promptType == promptTypeModule.CreateOutfit then
-		avatarEditorService:SignalCreateOutfitPermissionDenied()
-	elseif promptType == promptTypeModule.EnterOutfitName then
-		avatarEditorService:SignalCreateOutfitPermissionDenied()
-	elseif promptType == promptTypeModule.SetFavorite then
-		avatarEditorService:SignalSetFavoritePermissionDenied()
-	elseif promptType == promptTypeModule.DeleteOutfit then
-		avatarEditorService:SignalDeleteOutfitPermissionDenied()
-	elseif promptType == promptTypeModule.RenameOutfit then
-		avatarEditorService:SignalRenameOutfitPermissionDenied()
-	elseif promptType == promptTypeModule.UpdateOutfit then
-		avatarEditorService:SignalUpdateOutfitPermissionDenied()
-	elseif promptType == promptTypeModule.SaveAvatarTimeout then
-		avatarEditorService:SignalSaveAvatarPermissionDenied()
-	elseif promptType ~= nil then
-		error("CloseOpenPrompt for unhandled prompt type " .. tostring(promptType))
+	if PromptType == PromptTypeModule.AllowInventoryReadAccess then
+		AvatarEditorService:SetAllowInventoryReadAccess(false)
+	elseif PromptType == PromptTypeModule.SaveAvatar then
+		AvatarEditorService:SignalSaveAvatarPermissionDenied()
+	elseif PromptType == PromptTypeModule.CreateOutfit then
+		AvatarEditorService:SignalCreateOutfitPermissionDenied()
+	elseif PromptType == PromptTypeModule.EnterOutfitName then
+		AvatarEditorService:SignalCreateOutfitPermissionDenied()
+	elseif PromptType == PromptTypeModule.SetFavorite then
+		AvatarEditorService:SignalSetFavoritePermissionDenied()
+	elseif PromptType == PromptTypeModule.DeleteOutfit then
+		AvatarEditorService:SignalDeleteOutfitPermissionDenied()
+	elseif PromptType == PromptTypeModule.RenameOutfit then
+		AvatarEditorService:SignalRenameOutfitPermissionDenied()
+	elseif PromptType == PromptTypeModule.UpdateOutfit then
+		AvatarEditorService:SignalUpdateOutfitPermissionDenied()
+	elseif PromptType == PromptTypeModule.SaveAvatarTimeout then
+		AvatarEditorService:SignalSaveAvatarPermissionDenied()
+	elseif PromptType ~= nil then
+		error("CloseOpenPrompt for unhandled prompt type " .. tostring(PromptType))
 	end
-	p1:dispatch(closeOpenPromptModule())
+	p1:dispatch(CloseOpenPromptModule())
 end

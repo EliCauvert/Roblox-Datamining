@@ -1,3 +1,3 @@
-﻿local parent = script:FindFirstAncestor("ProfileQRCode").Parent
+﻿local Parent = script:FindFirstAncestor("ProfileQRCode").Parent
 
-return require(parent.React).createContext({ fireEvent = require(parent.Dash).noop })
+return require(Parent.React).createContext({ fireEvent = require(Parent.Dash).noop })

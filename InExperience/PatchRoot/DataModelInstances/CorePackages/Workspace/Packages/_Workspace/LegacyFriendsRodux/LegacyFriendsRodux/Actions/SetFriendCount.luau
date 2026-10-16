@@ -1,3 +1,3 @@
-﻿return require(script:FindFirstAncestor("LegacyFriendsRodux").Parent.Rodux).makeActionCreator(script.Name, function(p1)
-	return { count = p1 }
+﻿return require(script:FindFirstAncestor("LegacyFriendsRodux").Parent.Rodux).makeActionCreator(script.Name, function(Count) --[[ Line: 6 ]]
+	return { count = Count }
 end)

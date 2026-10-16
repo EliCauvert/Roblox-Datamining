@@ -1,73 +1,72 @@
-﻿local squadsCore = script:FindFirstAncestor("SquadsCore")
-local parent = squadsCore.Parent
-local httpService = game:GetService("HttpService")
-local constantsModule = require(squadsCore.Common.Constants)
-local createOrJoinSquadModule = require(squadsCore.Thunks.createOrJoinSquad)
-local getScheduledSquadsStoreModule = require(squadsCore.Stores.GetScheduledSquadsStore)
-local eventNamesModule = require(squadsCore.Analytics.EventNames)
-local squadExternalContractContextModule = require(squadsCore.Components.SquadExternalContractProvider.SquadExternalContractContext)
-local squadToastActionsAndStatesModule = require(squadsCore.Enums.SquadToastActionsAndStates)
-local squadToastTypeModule = require(squadsCore.Enums.SquadToastType)
-local reactModule = require(parent.React)
-local realtimeDeliveryModule = require(parent.RealtimeDelivery)
-local toastNotificationModule = require(parent.ToastNotification)
-local toastNotificationsProtocolModule = require(parent.ToastNotificationsProtocol)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local lifecycleEvents = toastNotificationModule.LifecycleEvents
-local notificationTypeEnum = toastNotificationModule.ToastNotificationTypeModule.NotificationTypeEnum
-local default = toastNotificationsProtocolModule.ToastNotificationProtocol.default
+﻿local SquadsCore = script:FindFirstAncestor("SquadsCore")
+local Parent = SquadsCore.Parent
+local HttpService = game:GetService("HttpService")
+local ConstantsModule = require(SquadsCore.Common.Constants)
+local CreateOrJoinSquadModule = require(SquadsCore.Thunks.createOrJoinSquad)
+local GetScheduledSquadsStoreModule = require(SquadsCore.Stores.GetScheduledSquadsStore)
+local EventNamesModule = require(SquadsCore.Analytics.EventNames)
+local SquadExternalContractContextModule = require(SquadsCore.Components.SquadExternalContractProvider.SquadExternalContractContext)
+local SquadToastActionsAndStatesModule = require(SquadsCore.Enums.SquadToastActionsAndStates)
+local SquadToastTypeModule = require(SquadsCore.Enums.SquadToastType)
+local ReactModule = require(Parent.React)
+local RealtimeDeliveryModule = require(Parent.RealtimeDelivery)
+local ToastNotificationModule = require(Parent.ToastNotification)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local LifecycleEvents = ToastNotificationModule.LifecycleEvents
+local NotificationTypeEnum = ToastNotificationModule.ToastNotificationTypeModule.NotificationTypeEnum
+local Default = require(Parent.ToastNotificationsProtocol).ToastNotificationProtocol.default
 
-return function()
-	-- upvalues: useDispatch (ref), reactModule (ref), squadExternalContractContextModule (ref), default (ref), notificationTypeEnum (ref), lifecycleEvents (ref), constantsModule (ref), httpService (ref), eventNamesModule (ref), squadToastActionsAndStatesModule (ref), squadToastTypeModule (ref), createOrJoinSquadModule (ref), realtimeDeliveryModule (ref), getScheduledSquadsStoreModule (ref)
-	local var1 = useDispatch()
-	local var2 = reactModule.useContext(squadExternalContractContextModule)
-	local var3 = var2.useIsChatEnabled()
-	reactModule.useEffect(function()
-		-- upvalues: default (copy), notificationTypeEnum (copy), var3 (ref)
-		local var4 = default:listenToDisplayNotification(function(p1)
-			-- upvalues: notificationTypeEnum (copy), var3 (copy), default (copy)
-			if (p1.notificationType == notificationTypeEnum.ScheduledSquadHappeningNow or p1.notificationType == notificationTypeEnum.ScheduledSquadReminder) and not var3 then
-				default:dismissNotification(p1.notificationId)
+return function() --[[ Line: 26 | Named "SquadScheduledSquadEventReceiver" ]]
+	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), SquadExternalContractContextModule (copy), Default (copy), NotificationTypeEnum (copy), LifecycleEvents (copy), ConstantsModule (copy), HttpService (copy), EventNamesModule (copy), SquadToastActionsAndStatesModule (copy), SquadToastTypeModule (copy), CreateOrJoinSquadModule (copy), RealtimeDeliveryModule (copy), GetScheduledSquadsStoreModule (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseContextResult = ReactModule.useContext(SquadExternalContractContextModule)
+	local UseIsChatEnabledResult = UseContextResult.useIsChatEnabled()
+	ReactModule.useEffect(function() --[[ Line: 31 ]]
+		-- upvalues: Default (upval), NotificationTypeEnum (upval), UseIsChatEnabledResult (copy)
+		local ListenToDisplayNotificationResult = Default:listenToDisplayNotification(function(p1) --[[ Line: 33 ]]
+			-- upvalues: NotificationTypeEnum (upval), UseIsChatEnabledResult (upval), Default (upval)
+			if (p1.notificationType == NotificationTypeEnum.ScheduledSquadHappeningNow or p1.notificationType == NotificationTypeEnum.ScheduledSquadReminder) and not UseIsChatEnabledResult then
+				Default:dismissNotification(p1.notificationId)
 			end
 		end)
 		
-		return function()
-			-- upvalues: var4 (ref)
-			var4:Disconnect()
+		return function() --[[ Line: 45 ]]
+			-- upvalues: ListenToDisplayNotificationResult (copy)
+			ListenToDisplayNotificationResult:Disconnect()
 		end
-	end, { var3 })
-	reactModule.useEffect(function()
-		-- upvalues: lifecycleEvents (copy), notificationTypeEnum (copy), constantsModule (copy), httpService (copy), var2 (ref), eventNamesModule (copy), squadToastActionsAndStatesModule (copy), squadToastTypeModule (copy), var1 (ref), createOrJoinSquadModule (copy)
-		local userAction = lifecycleEvents:RegisterCallback(lifecycleEvents.ToastEvents.UserAction, notificationTypeEnum.ScheduledSquadHappeningNow, function(p1)
-			-- upvalues: constantsModule (copy), httpService (copy), var2 (copy), eventNamesModule (copy), squadToastActionsAndStatesModule (copy), squadToastTypeModule (copy), var1 (copy), createOrJoinSquadModule (copy)
-			if p1 and p1.userActionType == "click" and (p1.visualItem and p1.visualItem.actionEventParams) and p1.visualItem.visualItemName == constantsModule.JOIN_SQUAD then
-				local actionEventParams = httpService:JSONDecode(p1.visualItem.actionEventParams)
-				var2.fireSquadAnalytics(eventNamesModule.SquadToastActions, {
-					parentChannelId = actionEventParams.parentChannelId,
-					toastAction = squadToastActionsAndStatesModule.ScheduledSquadHappeningNowJoinParty,
-					toastType = squadToastTypeModule.ScheduledSquadHappeningNow
+	end, { UseIsChatEnabledResult })
+	ReactModule.useEffect(function() --[[ Line: 51 ]]
+		-- upvalues: LifecycleEvents (upval), NotificationTypeEnum (upval), ConstantsModule (upval), HttpService (upval), UseContextResult (copy), EventNamesModule (upval), SquadToastActionsAndStatesModule (upval), SquadToastTypeModule (upval), UseDispatchResult (copy), CreateOrJoinSquadModule (upval)
+		local RegisterResult = LifecycleEvents:RegisterCallback(LifecycleEvents.ToastEvents.UserAction, NotificationTypeEnum.ScheduledSquadHappeningNow, function(p1) --[[ Line: 55 ]]
+			-- upvalues: ConstantsModule (upval), HttpService (upval), UseContextResult (upval), EventNamesModule (upval), SquadToastActionsAndStatesModule (upval), SquadToastTypeModule (upval), UseDispatchResult (upval), CreateOrJoinSquadModule (upval)
+			if p1 and p1.userActionType == "click" and p1.visualItem and p1.visualItem.actionEventParams and p1.visualItem.visualItemName == ConstantsModule.JOIN_SQUAD then
+				local Data = HttpService:JSONDecode(p1.visualItem.actionEventParams)
+				UseContextResult.fireSquadAnalytics(EventNamesModule.SquadToastActions, {
+					parentChannelId = Data.parentChannelId,
+					toastAction = SquadToastActionsAndStatesModule.ScheduledSquadHappeningNowJoinParty,
+					toastType = SquadToastTypeModule.ScheduledSquadHappeningNow
 				})
-				var1(createOrJoinSquadModule(actionEventParams.parentChannelId, var2.setSquadPrompt, var2.fireSquadAnalytics, var2.squadLocation, httpService:GenerateGUID(false), function() end, tostring(actionEventParams.scheduledGroupUpId)))
+				UseDispatchResult(CreateOrJoinSquadModule(Data.parentChannelId, UseContextResult.setSquadPrompt, UseContextResult.fireSquadAnalytics, UseContextResult.squadLocation, HttpService:GenerateGUID(false), function() --[[ Line: 77 ]] end, (tostring(Data.scheduledGroupUpId))))
 			end
 		end)
 		
-		return function()
-			-- upvalues: userAction (ref)
-			userAction()
+		return function() --[[ Line: 85 ]]
+			-- upvalues: RegisterResult (copy)
+			RegisterResult()
 		end
 	end, {
-		var1,
-		var2.setSquadPrompt,
-		var2.fireSquadAnalytics,
-		var2.squadLocation
+		UseDispatchResult,
+		UseContextResult.setSquadPrompt,
+		UseContextResult.fireSquadAnalytics,
+		UseContextResult.squadLocation
 	})
-	realtimeDeliveryModule.useRealtimeNamespace(constantsModule.COMMUNICATION_CHANNEL_RTN_NAMESPACE, function(p1)
-		-- upvalues: constantsModule (copy), getScheduledSquadsStoreModule (copy)
-		if p1.Type == constantsModule.SCHEDULED_GROUP_UP_CHANGED_RTN_TYPE then
-			local var4 = getScheduledSquadsStoreModule(false)
+	RealtimeDeliveryModule.useRealtimeNamespace(ConstantsModule.COMMUNICATION_CHANNEL_RTN_NAMESPACE, function(p1) --[[ Line: 97 ]]
+		-- upvalues: ConstantsModule (upval), GetScheduledSquadsStoreModule (upval)
+		if p1.Type == ConstantsModule.SCHEDULED_GROUP_UP_CHANGED_RTN_TYPE then
+			local ScheduledSquadsStoreModule = GetScheduledSquadsStoreModule(false)
 			
-			for i, v in ipairs(p1.ScheduledGroupUpIds) do
-				var4.fetchAndCacheScheduledSquadStatus(v)
+			for _, scheduledGroupUpId in ipairs(p1.ScheduledGroupUpIds) do
+				ScheduledSquadsStoreModule.fetchAndCacheScheduledSquadStatus(scheduledGroupUpId)
 			end
 		end
 	end, {})

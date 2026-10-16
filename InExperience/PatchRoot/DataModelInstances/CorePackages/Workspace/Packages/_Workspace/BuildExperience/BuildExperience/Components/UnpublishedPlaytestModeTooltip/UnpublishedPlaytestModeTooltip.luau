@@ -1,63 +1,59 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local sharedFlagsModule = require(parent.SharedFlags)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local buildAppStorageModule = require(buildExperience.Storage.BuildAppStorage)
-local buildModeLaunchModule = require(parent.BuildExperiencePlaytestLaunch.BuildModeLaunch)
-local fFlagBuildExperienceTooltipsLightDismissModule = require(buildExperience.Flags.FFlagBuildExperienceTooltipsLightDismiss)
-local educationalTooltip = foundationModule.EducationalTooltip
-local overlayProvider = foundationModule.OverlayProvider
-local popoverSide = foundationModule.Enums.PopoverSide
-local popoverAlign = foundationModule.Enums.PopoverAlign
-local fIntUnpublishedPlaytestModeTooltipDisplayLimit = sharedFlagsModule.FIntUnpublishedPlaytestModeTooltipDisplayLimit
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local BuildAppStorageModule = require(BuildExperience.Storage.BuildAppStorage)
+local BuildModeLaunchModule = require(Parent.BuildExperiencePlaytestLaunch.BuildModeLaunch)
+local EducationalTooltip = FoundationModule.EducationalTooltip
+local OverlayProvider = FoundationModule.OverlayProvider
+local PopoverSide = FoundationModule.Enums.PopoverSide
+local PopoverAlign = FoundationModule.Enums.PopoverAlign
+local FIntUnpublishedPlaytestModeTooltipDisplayLimit = require(Parent.SharedFlags).FIntUnpublishedPlaytestModeTooltipDisplayLimit
 
-local function _(p1)
-	-- upvalues: fIntUnpublishedPlaytestModeTooltipDisplayLimit (ref), buildModeLaunchModule (ref), buildAppStorageModule (ref)
-	return fIntUnpublishedPlaytestModeTooltipDisplayLimit > 0 and (buildModeLaunchModule:hasBuildMode() and (buildAppStorageModule.getUnpublishedPlaytestModeTooltipDisplayCount() < fIntUnpublishedPlaytestModeTooltipDisplayLimit and (p1 ~= nil and p1.current ~= nil)))
+local function _(p1): boolean --[[ Line: 27 | Named "getCanShow" ]]
+	-- upvalues: FIntUnpublishedPlaytestModeTooltipDisplayLimit (copy), BuildModeLaunchModule (copy), BuildAppStorageModule (copy)
+	return FIntUnpublishedPlaytestModeTooltipDisplayLimit > 0 and (BuildModeLaunchModule:hasBuildMode() and (BuildAppStorageModule.getUnpublishedPlaytestModeTooltipDisplayCount() < FIntUnpublishedPlaytestModeTooltipDisplayLimit and (p1 ~= nil and p1.current ~= nil)))
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), reactModule (ref), fIntUnpublishedPlaytestModeTooltipDisplayLimit (ref), buildModeLaunchModule (ref), buildAppStorageModule (ref), overlayProvider (ref), educationalTooltip (ref), popoverSide (ref), popoverAlign (ref), fFlagBuildExperienceTooltipsLightDismissModule (ref)
-	local var1 = useLocalization({
-		description = localizationStringsModule.UNPUBLISHED_PLAYTEST_MODE_TOOLTIP_DESCRIPTION,
-		title = localizationStringsModule.UNPUBLISHED_PLAYTEST_MODE_TOOLTIP_TITLE
+return ReactModule.memo(function(p1) --[[ Line: 35 | Named "UnpublishedPlaytestModeTooltip" ]]
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), FIntUnpublishedPlaytestModeTooltipDisplayLimit (copy), BuildModeLaunchModule (copy), BuildAppStorageModule (copy), OverlayProvider (copy), EducationalTooltip (copy), PopoverSide (copy), PopoverAlign (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
+		description = LocalizationStringsModule.UNPUBLISHED_PLAYTEST_MODE_TOOLTIP_DESCRIPTION,
+		title = LocalizationStringsModule.UNPUBLISHED_PLAYTEST_MODE_TOOLTIP_TITLE
 	})
-	local useState = reactModule.useState
-	local anchorRef = p1.anchorRef
-	local var2 = fIntUnpublishedPlaytestModeTooltipDisplayLimit > 0 and (buildModeLaunchModule:hasBuildMode() and (buildAppStorageModule.getUnpublishedPlaytestModeTooltipDisplayCount() < fIntUnpublishedPlaytestModeTooltipDisplayLimit and (anchorRef ~= nil and anchorRef.current ~= nil)))
-	useState, var9 = useState(var2)
-	local var3 = reactModule.useRef(false)
-	local var4 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref)
-		var2(false)
+	local AnchorRef = p1.anchorRef
+	local UseStateResult, UseStateResult2 = ReactModule.useState(FIntUnpublishedPlaytestModeTooltipDisplayLimit > 0 and (BuildModeLaunchModule:hasBuildMode() and (BuildAppStorageModule.getUnpublishedPlaytestModeTooltipDisplayCount() < FIntUnpublishedPlaytestModeTooltipDisplayLimit and (AnchorRef ~= nil and AnchorRef.current ~= nil))))
+	local UseRefResult = ReactModule.useRef(false)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 43 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(false)
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), p1 (ref), fIntUnpublishedPlaytestModeTooltipDisplayLimit (copy), buildModeLaunchModule (copy), buildAppStorageModule (copy)
-		local anchorRef = p1.anchorRef
-		var2(fIntUnpublishedPlaytestModeTooltipDisplayLimit > 0 and (buildModeLaunchModule:hasBuildMode() and (buildAppStorageModule.getUnpublishedPlaytestModeTooltipDisplayCount() < fIntUnpublishedPlaytestModeTooltipDisplayLimit and (anchorRef ~= nil and anchorRef.current ~= nil))))
+	ReactModule.useEffect(function() --[[ Line: 47 ]]
+		-- upvalues: UseStateResult2 (copy), p1 (copy), FIntUnpublishedPlaytestModeTooltipDisplayLimit (upval), BuildModeLaunchModule (upval), BuildAppStorageModule (upval)
+		local AnchorRef = p1.anchorRef
+		UseStateResult2(FIntUnpublishedPlaytestModeTooltipDisplayLimit > 0 and (BuildModeLaunchModule:hasBuildMode() and (BuildAppStorageModule.getUnpublishedPlaytestModeTooltipDisplayCount() < FIntUnpublishedPlaytestModeTooltipDisplayLimit and (AnchorRef ~= nil and AnchorRef.current ~= nil))))
 	end, { p1.anchorRef })
-	reactModule.useEffect(function()
-		-- upvalues: useState (ref), var3 (ref), buildAppStorageModule (copy)
-		if useState and not var3.current then
-			var3.current = true
-			buildAppStorageModule.incrementUnpublishedPlaytestModeTooltipDisplayCount()
+	ReactModule.useEffect(function() --[[ Line: 51 ]]
+		-- upvalues: UseStateResult (copy), UseRefResult (copy), BuildAppStorageModule (upval)
+		if UseStateResult and not UseRefResult.current then
+			UseRefResult.current = true
+			BuildAppStorageModule.incrementUnpublishedPlaytestModeTooltipDisplayCount()
 		end
-	end, { useState })
+	end, { UseStateResult })
 	
-	return if useState then reactModule.createElement(overlayProvider, nil, {
-		Tooltip = reactModule.createElement(educationalTooltip, {
+	return if UseStateResult then ReactModule.createElement(OverlayProvider, nil, {
+		Tooltip = ReactModule.createElement(EducationalTooltip, {
 			testId = "unpublished-playtest-mode-tooltip",
 			anchorRef = p1.anchorRef,
-			title = var1.title,
-			text = var1.description,
-			side = popoverSide.Bottom,
-			align = popoverAlign.Start,
-			isOpen = useState,
-			onClose = var4,
-			onPressedOutside = if fFlagBuildExperienceTooltipsLightDismissModule then var4 else nil,
+			title = UseLocalizationResult.title,
+			text = UseLocalizationResult.description,
+			side = PopoverSide.Bottom,
+			align = PopoverAlign.Start,
+			isOpen = UseStateResult,
+			onClose = UseResult,
+			onPressedOutside = UseResult,
 			Visible = p1.isVisible
 		})
 	}) else nil

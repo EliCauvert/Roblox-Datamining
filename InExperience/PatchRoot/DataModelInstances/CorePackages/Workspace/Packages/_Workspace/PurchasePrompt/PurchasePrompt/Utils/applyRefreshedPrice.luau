@@ -1,15 +1,15 @@
-﻿local purchasePrompt = script:FindFirstAncestor("PurchasePrompt")
-local refreshExpectedPriceModule = require(purchasePrompt.Actions.RefreshExpectedPrice)
-local setProductPayloadModule = require(purchasePrompt.Actions.SetProductPayload)
+﻿local PurchasePrompt = script:FindFirstAncestor("PurchasePrompt")
+local RefreshExpectedPriceModule = require(PurchasePrompt.Actions.RefreshExpectedPrice)
+local SetProductPayloadModule = require(PurchasePrompt.Actions.SetProductPayload)
 
-return function(p1, p2)
-	-- upvalues: refreshExpectedPriceModule (ref), setProductPayloadModule (ref)
-	p1:dispatch(refreshExpectedPriceModule(p2))
-	local productPayload = p1:getState().productPayload
+return function(p1, ExpectedPrice) --[[ Line: 6 | Named "applyRefreshedPrice" ]]
+	-- upvalues: RefreshExpectedPriceModule (copy), SetProductPayloadModule (copy)
+	p1:dispatch(RefreshExpectedPriceModule(ExpectedPrice))
+	local ProductPayload = p1:getState().productPayload
 	
-	if productPayload then
-		local cloned = table.clone(productPayload)
-		cloned.expectedPrice = p2
-		p1:dispatch(setProductPayloadModule(cloned))
+	if ProductPayload then
+		local Copy = table.clone(ProductPayload)
+		Copy.expectedPrice = ExpectedPrice
+		p1:dispatch(SetProductPayloadModule(Copy))
 	end
 end

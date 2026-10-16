@@ -2,7 +2,7 @@
 	Images = {
 		GamepadQuest = {
 			Image = "rbxassetid://13262267483",
-			HeightRatio = 0.511904761905
+			HeightRatio = 0.5119047619047619
 		}
 	},
 	Labels = {

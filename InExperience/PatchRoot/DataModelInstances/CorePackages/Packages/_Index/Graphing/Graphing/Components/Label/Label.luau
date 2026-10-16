@@ -1,60 +1,62 @@
-﻿local graphing = script:FindFirstAncestor("Graphing")
-local reactModule = require(graphing.Parent.React)
-local styleUtilModule = require(graphing.Util.StyleUtil)
-local _ = require(graphing.Types)
-local useViewportBindingModule = require(graphing.Util.useViewportBinding)
-local useViewportBinding = useViewportBindingModule.useViewportBinding
-local useViewportVisibility = useViewportBindingModule.useViewportVisibility
+﻿local Graphing = script:FindFirstAncestor("Graphing")
+local ReactModule = require(Graphing.Parent.React)
+local StyleUtilModule = require(Graphing.Util.StyleUtil)
+local _ = require(Graphing.Types)
+local UseViewportBindingModule = require(Graphing.Util.useViewportBinding)
+local UseViewportBindingFunction = UseViewportBindingModule.useViewportBinding
+local UseViewportVisibilityFunction = UseViewportBindingModule.useViewportVisibility
 
-local function anchorForAlignment(p1, p2)
-	local var1 = 0
-	local var2 = 0
+local function anchorForAlignment(TextXAlignment, TextYAlignment): Vector2 --[[ Line: 37 ]]
+	local X = 0
+	local Y = 0
 	
-	if p1 == Enum.TextXAlignment.Left then
-		var1 = 0
-	elseif p1 == Enum.TextXAlignment.Center then
-		var1 = 0.5
-	elseif p1 == Enum.TextXAlignment.Right then
-		var1 = 1
+	if TextXAlignment == Enum.TextXAlignment.Left then
+		X = 0
+	elseif TextXAlignment == Enum.TextXAlignment.Center then
+		X = 0.5
+	elseif TextXAlignment == Enum.TextXAlignment.Right then
+		X = 1
 	end
-	if p2 == Enum.TextYAlignment.Top then
-		var2 = 0
-	elseif p2 == Enum.TextYAlignment.Center then
-		var2 = 0.5
-	elseif p2 == Enum.TextYAlignment.Bottom then
-		var2 = 1
+	if TextYAlignment == Enum.TextYAlignment.Top then
+		Y = 0
+	elseif TextYAlignment == Enum.TextYAlignment.Center then
+		Y = 0.5
+	elseif TextYAlignment == Enum.TextYAlignment.Bottom then
+		Y = 1
 	end
-	return Vector2.new(var1, var2)
+	return Vector2.new(X, Y)
 end
 
-function Label(p1)
-	-- upvalues: reactModule (ref), anchorForAlignment (ref), useViewportBinding (ref), useViewportVisibility (ref), styleUtilModule (ref)
-	local var1 = if p1.TextXAlignment then p1.TextXAlignment else Enum.TextXAlignment.Center
-	local var2 = if p1.TextYAlignment then p1.TextYAlignment else Enum.TextYAlignment.Center
+function Label(Label1) --[[ Line: 60 ]]
+	-- upvalues: ReactModule (copy), anchorForAlignment (copy), UseViewportBindingFunction (copy), UseViewportVisibilityFunction (copy), StyleUtilModule (copy)
+	local TextXAlignment = if Label1.TextXAlignment then Label1.TextXAlignment else Enum.TextXAlignment.Center
+	local TextYAlignment = if Label1.TextYAlignment then Label1.TextYAlignment else Enum.TextYAlignment.Center
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 64 ]]
+		-- upvalues: anchorForAlignment (upval), TextXAlignment (copy), TextYAlignment (copy)
+		return anchorForAlignment(TextXAlignment, TextYAlignment)
+	end, { Label1.TextXAlignment, Label1.TextYAlignment })
+	local UseViewportBindingResult = UseViewportBindingFunction(function(p1): UDim2 --[[ Line: 68 ]]
+		-- upvalues: Label1 (copy)
+		local Offset = if Label1.Offset then Label1.Offset else Vector2.new(0, 0)
+		local PlotToViewResult = p1.plotToView(Label1.Position)
+		
+		return UDim2.new(PlotToViewResult.X, Offset.X, PlotToViewResult.Y, Offset.Y)
+	end, { Label1.Position, Label1.Offset })
 	
-	return if useViewportVisibility(function(p2)
-		-- upvalues: p1 (ref)
-		return p2.isPointInViewport(p1.Position)
-	end, { p1.Position }) then reactModule.createElement("TextLabel", {
+	return if UseViewportVisibilityFunction(function(p1) --[[ Line: 74 ]]
+		-- upvalues: Label1 (copy)
+		return p1.isPointInViewport(Label1.Position)
+	end, { Label1.Position }) then ReactModule.createElement("TextLabel", {
 		BackgroundTransparency = 1,
-		AnchorPoint = reactModule.useMemo(function()
-			-- upvalues: anchorForAlignment (copy), var1 (ref), var2 (ref)
-			return anchorForAlignment(var1, var2)
-		end, { p1.TextXAlignment, p1.TextYAlignment }),
-		Position = useViewportBinding(function(p2)
-			-- upvalues: p1 (ref)
-			local var3 = if p1.Offset then p1.Offset else Vector2.new(0, 0)
-			local var4 = p2.plotToView(p1.Position)
-			
-			return UDim2.new(var4.X, var3.X, var4.Y, var3.Y)
-		end, { p1.Position, p1.Offset }),
-		Text = p1.Text,
-		TextXAlignment = var1,
-		TextYAlignment = var2,
-		TextColor3 = p1.Color3 or styleUtilModule.GRID_LABEL_COLOR3,
-		TextSize = p1.FontSize or styleUtilModule.GRID_LABEL_FONT_SIZE,
-		ZIndex = p1.ZIndex
-	}, p1.children) else nil
+		AnchorPoint = UseMemoResult,
+		Position = UseViewportBindingResult,
+		Text = Label1.Text,
+		TextXAlignment = TextXAlignment,
+		TextYAlignment = TextYAlignment,
+		TextColor3 = Label1.Color3 or StyleUtilModule.GRID_LABEL_COLOR3,
+		TextSize = Label1.FontSize or StyleUtilModule.GRID_LABEL_FONT_SIZE,
+		ZIndex = Label1.ZIndex
+	}, Label1.children) else nil
 end
 
 return Label

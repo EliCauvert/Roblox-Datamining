@@ -1,4 +1,4 @@
-﻿local t = {
+﻿local config = {
 	AreCollisionCostsShown = {
 		name = "AreCollisionCostsShown",
 		description = "Highlights assemblies in the world with color from green to red based on how costly the collision computation is.",
@@ -7,13 +7,13 @@
 	},
 	AreAnchorsShown = {
 		name = "AreAnchorsShown",
-		description = "When set to true, parts that are BasePart.Anchored will show a gray surface outline on the surface of the part\226\128\153s bounding box that is currently facing the ground.",
+		description = "When set to true, parts that are BasePart.Anchored will show a gray surface outline on the surface of the part’s bounding box that is currently facing the ground.",
 		type = "Adorn",
 		tags = { "Behavior", "Constraints" }
 	},
 	AreUnalignedPartsShown = {
 		name = "AreUnalignedPartsShown",
-		description = "When set to true, parts that aren\226\128\153t aligned on the 1x1x1 grid will be outlined yellow.",
+		description = "When set to true, parts that aren’t aligned on the 1x1x1 grid will be outlined yellow.",
 		type = "Box",
 		tags = { "Behavior" }
 	},
@@ -25,13 +25,13 @@
 	},
 	AreOwnersShown = {
 		name = "AreOwnersShown",
-		description = "When set to true, each Player\226\128\153s character is outlined with a unique color, and each part that the player has network ownership over is outlined with the same color.",
+		description = "When set to true, each Player’s character is outlined with a unique color, and each part that the player has network ownership over is outlined with the same color.",
 		type = "Box",
 		tags = { "Behavior", "Networking" }
 	},
 	AreRegionsShown = {
 		name = "AreRegionsShown",
-		description = "When set to true, a cylinder is drawn around each Player\226\128\153s character, representing their Player.SimulationRadius.",
+		description = "When set to true, a cylinder is drawn around each Player’s character, representing their Player.SimulationRadius.",
 		type = "Adorn",
 		tags = { "Behavior", "Networking" }
 	},
@@ -80,10 +80,10 @@
 }
 
 if game:DefineFastFlag("SlimDevConsole2", false) then
-	for i, v in pairs(t) do
-		v.learnMoreUrl = "https://create.roblox.com/docs/reference/engine/classes/PhysicsSettings#" .. i
+	for i, value in pairs(config) do
+		value.learnMoreUrl = "https://create.roblox.com/docs/reference/engine/classes/PhysicsSettings#" .. i
 	end
-	t.SlimTintMode = {
+	config.SlimTintMode = {
 		name = "SlimTintMode",
 		description = "Color-codes meshes by the selected debug criterion. Select a mode from the dropdown to visualize SLIM streaming behavior.",
 		learnMoreUrl = "https://create.roblox.com/docs/reference/engine/enums/SlimTintMode",
@@ -95,4 +95,4 @@ if game:DefineFastFlag("SlimDevConsole2", false) then
 		tags = { "Performance" }
 	}
 end
-return t
+return config

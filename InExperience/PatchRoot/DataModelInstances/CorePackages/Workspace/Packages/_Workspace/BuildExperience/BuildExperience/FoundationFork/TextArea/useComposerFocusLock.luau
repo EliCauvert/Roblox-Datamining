@@ -1,20 +1,20 @@
-﻿local reactModule = require(game:GetService("CorePackages").Packages._Index.Foundation.Foundation.Parent.React)
+﻿local ReactModule = require(game:GetService("CorePackages").Packages._Index.Foundation.Foundation.Parent.React)
 
-return function(p1, p2)
-	-- upvalues: reactModule (ref)
-	reactModule.useEffect(function()
-		-- upvalues: p2 (ref), p1 (ref)
-		for i, v in p2 do
-			local current = v.current
+return function(p1, p2) --[[ Line: 16 | Named "useComposerFocusLock" ]]
+	-- upvalues: ReactModule (copy)
+	ReactModule.useEffect(function() --[[ Line: 17 ]]
+		-- upvalues: p2 (copy), p1 (copy)
+		for _, value in p2 do
+			local Current = value.current
 			
-			if current ~= nil then
+			if Current ~= nil then
 				if p1 then
-					current.TextEditable = false
-					current.Active = false
-					current:ReleaseFocus()
+					Current.TextEditable = false
+					Current.Active = false
+					Current:ReleaseFocus()
 				else
-					current.TextEditable = true
-					current.Active = true
+					Current.TextEditable = true
+					Current.Active = true
 				end
 			end
 		end

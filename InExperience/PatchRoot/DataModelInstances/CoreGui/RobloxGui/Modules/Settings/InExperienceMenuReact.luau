@@ -1,37 +1,36 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local eventIngestService = game:GetService("EventIngestService")
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local reactModule = require(corePackagesService.Packages.React)
-local signalsReactModule = require(corePackagesService.Packages.SignalsReact)
-local analytics = require(corePackagesService.Workspace.Packages.Analytics).Analytics
-local eventIngest = require(corePackagesService.Workspace.Packages.Analytics).AnalyticsReporters.EventIngest
-local inExperienceLocalesModule = require(corePackagesService.Workspace.Packages.InExperienceLocales)
-local localizationModule = require(corePackagesService.Workspace.Packages.Localization)
-local serviceProvider = require(corePackagesService.Workspace.Packages.RoactServices).RoactServices.ServiceProvider
-local roactServiceTagsModule = require(corePackagesService.Workspace.Packages.RoactServiceTags)
-local utilsModule = require(script.Parent.Integrations.Utils)
-local appEventIngestService = roactServiceTagsModule.AppEventIngestService
-local roactAnalytics = roactServiceTagsModule.RoactAnalytics
-local localizationProvider = localizationModule.LocalizationProvider
-local getLocalizationServiceStore = localizationModule.GetLocalizationServiceStore
-local localization = inExperienceLocalesModule.Localization
-local foundationProvider = foundationModule.FoundationProvider
-local t = { colorMode = foundationModule.Enums.ColorMode.Dark }
+﻿local CorePackages = game:GetService("CorePackages")
+local EventIngestService = game:GetService("EventIngestService")
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local ReactModule = require(CorePackages.Packages.React)
+local SignalsReactModule = require(CorePackages.Packages.SignalsReact)
+local Analytics = require(CorePackages.Workspace.Packages.Analytics).Analytics
+local EventIngest = require(CorePackages.Workspace.Packages.Analytics).AnalyticsReporters.EventIngest
+local LocalizationModule = require(CorePackages.Workspace.Packages.Localization)
+local ServiceProvider = require(CorePackages.Workspace.Packages.RoactServices).RoactServices.ServiceProvider
+local RoactServiceTagsModule = require(CorePackages.Workspace.Packages.RoactServiceTags)
+local UtilsModule = require(script.Parent.Integrations.Utils)
+local AppEventIngestService = RoactServiceTagsModule.AppEventIngestService
+local RoactAnalytics = RoactServiceTagsModule.RoactAnalytics
+local LocalizationProvider = LocalizationModule.LocalizationProvider
+local GetLocalizationServiceStoreFunction = LocalizationModule.GetLocalizationServiceStore
+local Localization = require(CorePackages.Workspace.Packages.InExperienceLocales).Localization
+local FoundationProvider = FoundationModule.FoundationProvider
+local config = { colorMode = FoundationModule.Enums.ColorMode.Dark }
 
-return reactModule.memo(function(p1)
-	-- upvalues: getLocalizationServiceStore (ref), signalsReactModule (ref), localization (ref), reactModule (ref), serviceProvider (ref), appEventIngestService (ref), eventIngest (ref), eventIngestService (ref), roactAnalytics (ref), analytics (ref), localizationProvider (ref), foundationProvider (ref), t (ref), utilsModule (ref)
-	return reactModule.createElement(serviceProvider, {
+return ReactModule.memo(function(p1) --[[ Line: 38 | Named "InExperienceMenuReact" ]]
+	-- upvalues: GetLocalizationServiceStoreFunction (copy), SignalsReactModule (copy), Localization (copy), ReactModule (copy), ServiceProvider (copy), AppEventIngestService (copy), EventIngest (copy), EventIngestService (copy), RoactAnalytics (copy), Analytics (copy), LocalizationProvider (copy), FoundationProvider (copy), config (copy), UtilsModule (copy)
+	return ReactModule.createElement(ServiceProvider, {
 		services = {
-			[appEventIngestService] = eventIngest.new(eventIngestService),
-			[roactAnalytics] = analytics.new()
+			[AppEventIngestService] = EventIngest.new(EventIngestService),
+			[RoactAnalytics] = Analytics.new()
 		}
 	}, {
-		LocalizationProvider = reactModule.createElement(localizationProvider, {
-			localization = localization.new(signalsReactModule.useSignalState(getLocalizationServiceStore(false).getRobloxLocaleId))
+		LocalizationProvider = ReactModule.createElement(LocalizationProvider, {
+			localization = Localization.new((SignalsReactModule.useSignalState(GetLocalizationServiceStoreFunction(false).getRobloxLocaleId)))
 		}, {
-			FoundationProvider = reactModule.createElement(foundationProvider, {
-				colorMode = p1.theme or t.colorMode,
-				device = utilsModule.getDeviceType()
+			FoundationProvider = ReactModule.createElement(FoundationProvider, {
+				colorMode = p1.theme or config.colorMode,
+				device = UtilsModule.getDeviceType()
 			}, p1.children)
 		})
 	})

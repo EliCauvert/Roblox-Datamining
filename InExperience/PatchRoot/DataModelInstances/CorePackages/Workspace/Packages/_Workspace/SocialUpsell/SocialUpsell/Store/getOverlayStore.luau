@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("SocialUpsell").Parent.Signals).createComputed(require(script.Parent.createOverlayStore))
+﻿return require(script:FindFirstAncestor("SocialUpsell").Parent.Signals).createComputed((require(script.Parent.createOverlayStore)))

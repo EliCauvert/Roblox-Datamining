@@ -1,13 +1,13 @@
-﻿return function(p1, p2)
+﻿return function(List, p1) --[[ Line: 2 ]]
 	local t = {}
 	
-	for i, v in pairs(p1) do
-		if not p2[i] then
+	for i, value in pairs(List) do
+		if not p1[i] then
 			error("tables did not have matching indices")
 			
 			return
 		end
-		t[i] = if v < p2[i] then v else p2[i]
+		t[i] = value < p1[i] and value or p1[i]
 	end
 	return t
 end

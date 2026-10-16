@@ -1,36 +1,36 @@
-﻿local tModule = require(script:FindFirstAncestor("RoduxSquads").Parent.t)
-local t = {}
+﻿local TModule = require(script:FindFirstAncestor("RoduxSquads").Parent.t)
+local SquadSelfPermissionsModelModule = {}
 
-function t.new(p1)
-	-- upvalues: t (ref)
-	assert(t.isValid(p1))
-	t.__index = t
-	setmetatable(p1, t)
+function SquadSelfPermissionsModelModule.new(p1) --[[ Line: 8 ]]
+	-- upvalues: SquadSelfPermissionsModelModule (copy)
+	assert(SquadSelfPermissionsModelModule.isValid(p1))
+	SquadSelfPermissionsModelModule.__index = SquadSelfPermissionsModelModule
+	setmetatable(p1, SquadSelfPermissionsModelModule)
 	
 	return p1
 end
 
-function t.mock(p1)
-	-- upvalues: t (ref)
-	p1 = p1 or {}
+function SquadSelfPermissionsModelModule.mock(p1) --[[ Line: 20 ]]
+	-- upvalues: SquadSelfPermissionsModelModule (copy)
+	local P1 = p1 or {}
 	
-	return t.new({
-		canSeeRegroupPromptToast = p1.canSeeRegroupPromptToast or false,
-		canSeeRegroupJoinButton = p1.canSeeRegroupJoinButton or false
-	})
+	return (SquadSelfPermissionsModelModule.new({
+		canSeeRegroupPromptToast = P1.canSeeRegroupPromptToast or false,
+		canSeeRegroupJoinButton = P1.canSeeRegroupJoinButton or false
+	}))
 end
 
-function t.format(p1)
-	-- upvalues: t (ref)
-	return t.new({
+function SquadSelfPermissionsModelModule.format(p1) --[[ Line: 31 ]]
+	-- upvalues: SquadSelfPermissionsModelModule (copy)
+	return (SquadSelfPermissionsModelModule.new({
 		canSeeRegroupPromptToast = p1.canSeeRegroupPromptToast,
 		canSeeRegroupJoinButton = p1.canSeeRegroupJoinButton
-	})
+	}))
 end
 
-t.isValid = tModule.interface({
-	canSeeRegroupPromptToast = tModule.boolean,
-	canSeeRegroupJoinButton = tModule.boolean
+SquadSelfPermissionsModelModule.isValid = TModule.interface({
+	canSeeRegroupPromptToast = TModule.boolean,
+	canSeeRegroupJoinButton = TModule.boolean
 })
 
-return t
+return SquadSelfPermissionsModelModule

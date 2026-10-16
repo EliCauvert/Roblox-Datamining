@@ -1,39 +1,45 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local horizontalPageMargin = require(parent.UIBlox).App.Container.HorizontalPageMargin
-local CTAButtonsRowModule = require(profilePlatform.Components.CTARow.CTAButtonsRow)
-local useMapJsonToButtonListModule = require(profilePlatform.Components.CTARow.useMapJsonToButtonList)
-local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfileWrapperContext)
-local useIsMeTabModule = require(profilePlatform.Hooks.useIsMeTab)
-local useProfileAnalyticsContextModule = require(profilePlatform.Contexts.useProfileAnalyticsContext)
-local eventNamesModule = require(profilePlatform.Analytics.EventNames)
-local socialStopwatchModule = require(parent.SocialStopwatch)
-local loadingStagesExtensionModule = require(profilePlatform.Analytics.LoadingStagesExtension)
-local useEffectOnMount = require(parent.RoactUtils).Hooks.useEffectOnMount
-local fFlagAXEnableProfileTab = require(parent.SharedFlags).FFlagAXEnableProfileTab
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local HorizontalPageMargin = require(Parent.UIBlox).App.Container.HorizontalPageMargin
+local CTAButtonsRowModule = require(ProfilePlatform.Components.CTARow.CTAButtonsRow)
+local UseMapJsonToButtonListModule = require(ProfilePlatform.Components.CTARow.useMapJsonToButtonList)
+local UseProfileWrapperContextModule = require(ProfilePlatform.Contexts.useProfileWrapperContext)
+local UseIsMeTabModule = require(ProfilePlatform.Hooks.useIsMeTab)
+local UseProfileAnalyticsContextModule = require(ProfilePlatform.Contexts.useProfileAnalyticsContext)
+local EventNamesModule = require(ProfilePlatform.Analytics.EventNames)
+local SocialStopwatchModule = require(Parent.SocialStopwatch)
+local LoadingStagesExtensionModule = require(ProfilePlatform.Analytics.LoadingStagesExtension)
+local UseEffectOnMountFunction = require(Parent.RoactUtils).Hooks.useEffectOnMount
+local FFlagAXEnableProfileTab = require(Parent.SharedFlags).FFlagAXEnableProfileTab
 
-return function(p1)
-	-- upvalues: useProfileWrapperContextModule (ref), useMapJsonToButtonListModule (ref), fFlagAXEnableProfileTab (ref), useIsMeTabModule (ref), useProfileAnalyticsContextModule (ref), useEffectOnMount (ref), socialStopwatchModule (ref), eventNamesModule (ref), loadingStagesExtensionModule (ref), reactModule (ref), CTAButtonsRowModule (ref), horizontalPageMargin (ref)
-	local var1 = useMapJsonToButtonListModule(useProfileWrapperContextModule().profileId)
-	local var2 = if fFlagAXEnableProfileTab then useIsMeTabModule() else nil
-	local var3 = useProfileAnalyticsContextModule()
-	useEffectOnMount(function()
-		-- upvalues: socialStopwatchModule (copy), var3 (ref), eventNamesModule (copy), loadingStagesExtensionModule (copy)
-		local var4 = socialStopwatchModule.Stopwatch.get(socialStopwatchModule.Events.ProfileOpened)
-		var3.fireAnalyticsEvent(eventNamesModule.ProfileLoadingStage, {
+return function(p1) --[[ Line: 24 | Named "CTAButtonRowContainer" ]]
+	-- upvalues: UseProfileWrapperContextModule (copy), UseMapJsonToButtonListModule (copy), FFlagAXEnableProfileTab (copy), UseIsMeTabModule (copy), UseProfileAnalyticsContextModule (copy), UseEffectOnMountFunction (copy), SocialStopwatchModule (copy), EventNamesModule (copy), LoadingStagesExtensionModule (copy), ReactModule (copy), CTAButtonsRowModule (copy), HorizontalPageMargin (copy)
+	local UseMapJsonToButtonListModuleResult = UseMapJsonToButtonListModule(UseProfileWrapperContextModule().profileId)
+	local UseIsMeTabModuleResult = if FFlagAXEnableProfileTab then UseIsMeTabModule() else nil
+	local UseProfileAnalyticsContextModuleResult = UseProfileAnalyticsContextModule()
+	UseEffectOnMountFunction(function() --[[ Line: 30 ]]
+		-- upvalues: SocialStopwatchModule (upval), UseProfileAnalyticsContextModuleResult (copy), EventNamesModule (upval), LoadingStagesExtensionModule (upval)
+		local GetResult = SocialStopwatchModule.Stopwatch.get(SocialStopwatchModule.Events.ProfileOpened)
+		UseProfileAnalyticsContextModuleResult.fireAnalyticsEvent(EventNamesModule.ProfileLoadingStage, {
 			isProfilePlatform = true,
-			statValue = if var4 then var4.timeElapsed else nil,
-			status = loadingStagesExtensionModule.CTALoaded
+			statValue = if GetResult then GetResult.timeElapsed else nil,
+			status = LoadingStagesExtensionModule.CTALoaded
 		})
 	end)
 	
-	return if fFlagAXEnableProfileTab and var2 then reactModule.createElement(CTAButtonsRowModule, { buttonList = var1, layoutOrder = p1.layoutOrder }) else reactModule.createElement(horizontalPageMargin, {
+	return if FFlagAXEnableProfileTab and UseIsMeTabModuleResult then ReactModule.createElement(CTAButtonsRowModule, {
+		buttonList = UseMapJsonToButtonListModuleResult,
+		layoutOrder = p1.layoutOrder
+	}) else ReactModule.createElement(HorizontalPageMargin, {
 		backgroundTransparency = 1,
 		useAutomaticSizing = true,
 		size = UDim2.new(1, 0, 0, 0),
 		layoutOrder = p1.layoutOrder
 	}, {
-		Content = reactModule.createElement(CTAButtonsRowModule, { layoutOrder = 1, buttonList = var1 })
+		Content = ReactModule.createElement(CTAButtonsRowModule, {
+			layoutOrder = 1,
+			buttonList = UseMapJsonToButtonListModuleResult
+		})
 	})
 end

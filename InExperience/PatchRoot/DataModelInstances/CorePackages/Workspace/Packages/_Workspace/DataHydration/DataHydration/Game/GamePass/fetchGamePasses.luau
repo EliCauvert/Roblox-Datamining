@@ -1,20 +1,20 @@
-﻿local httpRequestModule = require(script:FindFirstAncestor("DataHydration").Parent.HttpRequest)
+﻿local HttpRequestModule = require(script:FindFirstAncestor("DataHydration").Parent.HttpRequest)
 local _ = require(script.Parent.GamePassStoreTypes)
-local gamePassUrlBuilderModule = require(script.Parent.GamePassUrlBuilder)
-local var1 = httpRequestModule.config({
-	requestFunction = function(p1, p2, p3)
-		-- upvalues: httpRequestModule (ref)
-		return httpRequestModule.requestFunctions.HttpRbxApi(p1, p2, p3)
+local GamePassUrlBuilderModule = require(script.Parent.GamePassUrlBuilder)
+local ConfigResult = HttpRequestModule.config({
+	requestFunction = function(p1, p2, p3) --[[ Line: 15 ]]
+		-- upvalues: HttpRequestModule (copy)
+		return HttpRequestModule.requestFunctions.HttpRbxApi(p1, p2, p3)
 	end
 })
 
-return function(p1)
-	-- upvalues: gamePassUrlBuilderModule (ref), var1 (ref)
-	return var1(gamePassUrlBuilderModule.buildGamePassesUrl({ universeId = p1 }), "GET"):andThen(function(p2)
-		-- upvalues: p1 (ref)
+return function(UniverseId) --[[ Line: 20 | Named "fetchGamePasses" ]]
+	-- upvalues: GamePassUrlBuilderModule (copy), ConfigResult (copy)
+	return ConfigResult(GamePassUrlBuilderModule.buildGamePassesUrl({ universeId = UniverseId }), "GET"):andThen(function(Result) --[[ Line: 22 ]]
+		-- upvalues: UniverseId (copy)
 		return {
-			universeId = p1,
-			gamePasses = if p2.responseBody then p2.responseBody.gamePasses else {}
+			universeId = UniverseId,
+			gamePasses = Result.responseBody and Result.responseBody.gamePasses or {}
 		}
 	end)
 end

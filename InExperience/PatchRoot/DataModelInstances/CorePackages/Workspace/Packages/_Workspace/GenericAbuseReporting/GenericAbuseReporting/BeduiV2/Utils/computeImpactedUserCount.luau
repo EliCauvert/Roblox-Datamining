@@ -1,28 +1,28 @@
-﻿local playersService = game:GetService("Players")
+﻿local Players = game:GetService("Players")
 
-return function(p1, p2)
-	-- upvalues: playersService (ref)
+return function(p1, p2): number --[[ Line: 11 | Named "computeImpactedUserCount" ]]
+	-- upvalues: Players (copy)
 	if not p1 or not p1.participants then
 		return 0
 	end
-	local var1 = playersService:GetPlayerByUserId(tonumber(p2))
+	local Player = Players:GetPlayerByUserId((tonumber(p2)))
 	
-	if not var1 or not var1.Character or not var1.Character.PrimaryPart then
+	if not Player or not Player.Character or not Player.Character.PrimaryPart then
 		return 0
 	end
-	local position = var1.Character.PrimaryPart.Position
-	local var2 = 0
+	local Position = Player.Character.PrimaryPart.Position
+	local Count = 0
 	
-	for i in pairs(p1.participants) do
-		local var3 = tonumber(i)
+	for participant in pairs(p1.participants) do
+		local Number: number? = tonumber(participant)
 		
-		if var3 and var3 ~= var1.UserId then
-			local var4 = playersService:GetPlayerByUserId(var3)
+		if Number and Number ~= Player.UserId then
+			local Player1 = Players:GetPlayerByUserId(Number)
 			
-			if var4 and var4.Character and (var4.Character.PrimaryPart and (var4.Character.PrimaryPart.Position - position).Magnitude <= 160) then
-				var2 += 1
+			if Player1 and Player1.Character and Player1.Character.PrimaryPart and (Player1.Character.PrimaryPart.Position - Position).Magnitude <= 160 then
+				Count += 1
 			end
 		end
 	end
-	return var2
+	return Count
 end

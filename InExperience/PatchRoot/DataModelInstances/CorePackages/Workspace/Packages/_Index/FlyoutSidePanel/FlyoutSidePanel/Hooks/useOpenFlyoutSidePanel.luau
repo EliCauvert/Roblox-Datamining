@@ -1,20 +1,20 @@
-﻿local parent = script:FindFirstAncestor("FlyoutSidePanel").Parent
-local reactModule = require(parent.React)
-local useSetDrawerVisible = require(parent.Drawer).Hooks.useSetDrawerVisible
-local useRoactService = require(parent.RobloxAppHooks).useRoactService
-local appEventIngestService = require(parent.RoactServiceTags).AppEventIngestService
-local flyoutAnalyticsModule = require(script.Parent.Parent.Analytics.FlyoutAnalytics)
-local flyoutTooltipManagerModule = require(script.Parent.Parent.FlyoutTooltipManager)
+﻿local Parent = script:FindFirstAncestor("FlyoutSidePanel").Parent
+local ReactModule = require(Parent.React)
+local UseSetDrawerVisibleFunction = require(Parent.Drawer).Hooks.useSetDrawerVisible
+local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
+local AppEventIngestService = require(Parent.RoactServiceTags).AppEventIngestService
+local FlyoutAnalyticsModule = require(script.Parent.Parent.Analytics.FlyoutAnalytics)
+local FlyoutTooltipManagerModule = require(script.Parent.Parent.FlyoutTooltipManager)
 
-return function(p1)
-	-- upvalues: useSetDrawerVisible (ref), useRoactService (ref), appEventIngestService (ref), reactModule (ref), flyoutAnalyticsModule (ref), flyoutTooltipManagerModule (ref)
-	local var1 = useSetDrawerVisible()
-	local var2 = useRoactService(appEventIngestService)
+return function(p1) --[[ Line: 13 | Named "useOpenFlyoutSidePanel" ]]
+	-- upvalues: UseSetDrawerVisibleFunction (copy), UseRoactServiceFunction (copy), AppEventIngestService (copy), ReactModule (copy), FlyoutAnalyticsModule (copy), FlyoutTooltipManagerModule (copy)
+	local UseSetDrawerVisibleResult = UseSetDrawerVisibleFunction()
+	local UseRoactServiceResult = UseRoactServiceFunction(AppEventIngestService)
 	
-	return reactModule.useCallback(function()
-		-- upvalues: flyoutAnalyticsModule (copy), var2 (ref), p1 (ref), var1 (ref), flyoutTooltipManagerModule (copy)
-		flyoutAnalyticsModule.sendPageLoadEvent(var2, p1)
-		var1(true)
-		flyoutTooltipManagerModule:flyoutSidePanelOpened()
-	end, { var1, var2, p1 })
+	return ReactModule.useCallback(function() --[[ Line: 17 ]]
+		-- upvalues: FlyoutAnalyticsModule (upval), UseRoactServiceResult (copy), p1 (copy), UseSetDrawerVisibleResult (copy), FlyoutTooltipManagerModule (upval)
+		FlyoutAnalyticsModule.sendPageLoadEvent(UseRoactServiceResult, p1)
+		UseSetDrawerVisibleResult(true)
+		FlyoutTooltipManagerModule:flyoutSidePanelOpened()
+	end, { UseSetDrawerVisibleResult, UseRoactServiceResult, p1 })
 end

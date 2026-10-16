@@ -1,77 +1,69 @@
-﻿local parent = script:FindFirstAncestor("StartupStore").Parent
-local signalsModule = require(parent.Signals)
-local signalsExperimentalModule = require(parent.SignalsExperimental)
-local retrievalStatus = require(parent.Http).Enum.RetrievalStatus
-local fFlagLuaAppChartsResetFetchingStatusOnFilterChange = require(parent.SharedFlags).FFlagLuaAppChartsResetFetchingStatusOnFilterChange
+﻿local Parent = script:FindFirstAncestor("StartupStore").Parent
+local SignalsModule = require(Parent.Signals)
+local SignalsExperimentalModule = require(Parent.SignalsExperimental)
+local RetrievalStatus = require(Parent.Http).Enum.RetrievalStatus
 
-local function _(p1)
-	-- upvalues: retrievalStatus (ref)
-	return if p1 ~= retrievalStatus.NotStarted then if p1 ~= retrievalStatus.Fetching then if p1 ~= retrievalStatus.Failed then p1 == retrievalStatus.Done else true else true else true
+local function _(Done): boolean --[[ Line: 27 | Named "isRetrievalStatus" ]]
+	-- upvalues: RetrievalStatus (copy)
+	return Done == RetrievalStatus.NotStarted or (Done == RetrievalStatus.Fetching or (Done == RetrievalStatus.Failed or Done == RetrievalStatus.Done))
 end
 
-local function joinRetrievalStatus(p1, p2)
-	-- upvalues: retrievalStatus (ref)
-	if not (if p1 ~= retrievalStatus.NotStarted then if p1 ~= retrievalStatus.Fetching then if p1 ~= retrievalStatus.Failed then p1 == retrievalStatus.Done else true else true else true) then
-		p1 = nil
+local function joinRetrievalStatus(Done, Done1) --[[ Line: 34 ]]
+	-- upvalues: RetrievalStatus (copy)
+	if Done ~= RetrievalStatus.NotStarted and (Done ~= RetrievalStatus.Fetching and (Done ~= RetrievalStatus.Failed and Done ~= RetrievalStatus.Done)) then
+		Done = nil
 	end
-	if not (if p2 ~= retrievalStatus.NotStarted then if p2 ~= retrievalStatus.Fetching then if p2 ~= retrievalStatus.Failed then p2 == retrievalStatus.Done else true else true else true) then
-		p2 = nil
+	if Done1 ~= RetrievalStatus.NotStarted and (Done1 ~= RetrievalStatus.Fetching and (Done1 ~= RetrievalStatus.Failed and Done1 ~= RetrievalStatus.Done)) then
+		Done1 = nil
 	end
-	return if p1 == nil then p2 elseif p2 == nil then p1 elseif p1 == retrievalStatus.Failed or p2 == retrievalStatus.Failed then retrievalStatus.Failed elseif p1 == retrievalStatus.NotStarted and p2 == retrievalStatus.NotStarted then retrievalStatus.NotStarted elseif p1 == retrievalStatus.Done and p2 == retrievalStatus.Done then retrievalStatus.Done else retrievalStatus.Fetching
+	return if Done == nil then Done1 elseif Done1 == nil then Done elseif Done == RetrievalStatus.Failed or Done1 == RetrievalStatus.Failed then RetrievalStatus.Failed elseif Done == RetrievalStatus.NotStarted and Done1 == RetrievalStatus.NotStarted then RetrievalStatus.NotStarted elseif Done == RetrievalStatus.Done and Done1 == RetrievalStatus.Done then RetrievalStatus.Done else RetrievalStatus.Fetching
 end
 
-local _ = function()
-	-- upvalues: fFlagLuaAppChartsResetFetchingStatusOnFilterChange (ref), retrievalStatus (ref)
-	return if fFlagLuaAppChartsResetFetchingStatusOnFilterChange then {
+local _ = function() --[[ Line: 59 | Named "defaultGamesPageDataStatus" ]]
+	-- upvalues: RetrievalStatus (copy)
+	return {
 		isRefreshFetch = false,
-		status = retrievalStatus.NotStarted
-	} else retrievalStatus.NotStarted
+		status = RetrievalStatus.NotStarted
+	}
 end
 
-return signalsModule.createComputed(function()
-	-- upvalues: signalsModule (ref), retrievalStatus (ref), fFlagLuaAppChartsResetFetchingStatusOnFilterChange (ref), joinRetrievalStatus (ref), signalsExperimentalModule (ref)
-	local var1, var2 = signalsModule.createSignal(true)
-	local var3, var4 = signalsModule.createSignal(retrievalStatus.NotStarted)
-	local var5, var6 = signalsModule.createSignal(if fFlagLuaAppChartsResetFetchingStatusOnFilterChange then {
+return SignalsModule.createComputed(function() --[[ Line: 66 ]]
+	-- upvalues: SignalsModule (copy), RetrievalStatus (copy), joinRetrievalStatus (copy), SignalsExperimentalModule (copy)
+	local Signal, Signal2 = SignalsModule.createSignal(true)
+	local Signal1, Signal2_1 = SignalsModule.createSignal(RetrievalStatus.NotStarted)
+	local Signal3, Signal2_2 = SignalsModule.createSignal({
 		isRefreshFetch = false,
-		status = retrievalStatus.NotStarted
-	} else retrievalStatus.NotStarted)
-	local var7, var8 = signalsModule.createSignal(retrievalStatus.NotStarted)
+		status = RetrievalStatus.NotStarted
+	})
+	local Signal4, Signal2_3 = SignalsModule.createSignal(RetrievalStatus.NotStarted)
 	
 	return {
-		getPreloading = var1,
-		getHomePageDataStatus = var3,
-		getGamesPageDataStatus = var5,
-		getFetchHomePageDataStatusAll = var7,
-		getAppLoadingStarted = signalsModule.createComputed(function(p1)
-			-- upvalues: var5 (ref), fFlagLuaAppChartsResetFetchingStatusOnFilterChange (copy), var3 (ref), var7 (ref), joinRetrievalStatus (copy), retrievalStatus (copy)
-			local var9 = var5(p1)
-			
-			return joinRetrievalStatus(joinRetrievalStatus(if fFlagLuaAppChartsResetFetchingStatusOnFilterChange then var9.status else var9, var3(p1)), var7(p1)) ~= retrievalStatus.NotStarted
+		getPreloading = Signal,
+		getHomePageDataStatus = Signal1,
+		getGamesPageDataStatus = Signal3,
+		getFetchHomePageDataStatusAll = Signal4,
+		getAppLoadingStarted = SignalsModule.createComputed(function(p1): boolean --[[ Line: 82 ]]
+			-- upvalues: Signal3 (copy), Signal1 (copy), Signal4 (copy), joinRetrievalStatus (upval), RetrievalStatus (upval)
+			return joinRetrievalStatus(joinRetrievalStatus(Signal3(p1).status, (Signal1(p1))), (Signal4(p1))) ~= RetrievalStatus.NotStarted
 		end),
-		setPreloading = var2,
-		setHomePageDataStatus = var4,
-		setGamesPageDataStatus = function(value, p1)
-			-- upvalues: fFlagLuaAppChartsResetFetchingStatusOnFilterChange (copy), var6 (ref)
-			if fFlagLuaAppChartsResetFetchingStatusOnFilterChange then
-				var6({ status = value, isRefreshFetch = p1 or false })
-				
-				return
-			end
-			var6(value)
+		setPreloading = Signal2,
+		setHomePageDataStatus = Signal2_1,
+		setGamesPageDataStatus = function(Status, p1) --[[ Line: 75 ]]
+			-- upvalues: Signal2_2 (copy)
+			Signal2_2({ status = Status, isRefreshFetch = p1 or false })
 		end,
-		setFetchHomePageDataStatusAll = var8,
-		reset = function()
-			-- upvalues: signalsExperimentalModule (copy), var2 (ref), var4 (ref), retrievalStatus (copy), var6 (ref), fFlagLuaAppChartsResetFetchingStatusOnFilterChange (copy), var8 (ref)
-			signalsExperimentalModule.batch(function()
-				-- upvalues: var2 (copy), var4 (copy), retrievalStatus (copy), var6 (copy), fFlagLuaAppChartsResetFetchingStatusOnFilterChange (copy), var8 (copy)
-				var2(true)
-				var4(retrievalStatus.NotStarted)
-				var6(if fFlagLuaAppChartsResetFetchingStatusOnFilterChange then {
+		setFetchHomePageDataStatusAll = Signal2_3,
+		reset = function() --[[ Line: 93 ]]
+			-- upvalues: SignalsExperimentalModule (upval), Signal2 (copy), Signal2_1 (copy), RetrievalStatus (upval), Signal2_2 (copy), Signal2_3 (copy)
+			SignalsExperimentalModule.batch(function() --[[ Line: 94 ]]
+				-- upvalues: Signal2 (upval), Signal2_1 (upval), RetrievalStatus (upval), Signal2_2 (upval), Signal2_3 (upval)
+				Signal2(true)
+				Signal2_1(RetrievalStatus.NotStarted)
+				Signal2_2({
 					isRefreshFetch = false,
-					status = retrievalStatus.NotStarted
-				} else retrievalStatus.NotStarted)
-				var8(retrievalStatus.NotStarted)
+					status = RetrievalStatus.NotStarted
+				})
+				Signal2_3(RetrievalStatus.NotStarted)
 			end)
 		end
 	}

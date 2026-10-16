@@ -1,38 +1,41 @@
-﻿local parent = script:FindFirstAncestor("InteractionFeedback").Parent
-local sharedFlagsModule = require(parent.SharedFlags)
-local triggerFeedbackModule = require(script.Parent.triggerFeedback)
-local interactionFeedbackContextModule = require(script.Parent.InteractionFeedbackContext)
-local roactUtilsModule = require(parent.RoactUtils)
-local useInputType = roactUtilsModule.Hooks.useInputType
-local useLaserPointerHand = roactUtilsModule.Hooks.useLaserPointerHand
-local reactModule = require(parent.React)
-local isSpatial = require(parent.AppCommonLib).isSpatial
-local fFlagLuaAppHapticTriggeredTelemetry = sharedFlagsModule.FFlagLuaAppHapticTriggeredTelemetry
+﻿local Parent = script:FindFirstAncestor("InteractionFeedback").Parent
+local TriggerFeedbackModule = require(script.Parent.triggerFeedback)
+local InteractionFeedbackContextModule = require(script.Parent.InteractionFeedbackContext)
+local RoactUtilsModule = require(Parent.RoactUtils)
+local UseInputTypeFunction = RoactUtilsModule.Hooks.useInputType
+local UseLaserPointerHandFunction = RoactUtilsModule.Hooks.useLaserPointerHand
+local ReactModule = require(Parent.React)
+local IsSpatialFunction = require(Parent.AppCommonLib).isSpatial
 
-local function useHapticPositionAndRadius()
-	-- upvalues: useInputType (ref), useLaserPointerHand (ref), reactModule (ref), isSpatial (ref)
-	local var1 = useLaserPointerHand()
+local function useHapticPositionAndRadius() --[[ Line: 15 ]]
+	-- upvalues: UseInputTypeFunction (copy), UseLaserPointerHandFunction (copy), ReactModule (copy), IsSpatialFunction (copy)
+	local UseInputTypeResult = UseInputTypeFunction()
+	local UseLaserPointerHandResult = UseLaserPointerHandFunction()
 	
-	return reactModule.useMemo(function()
-		-- upvalues: isSpatial (copy), var1 (ref)
-		return if isSpatial() then if var1 == "Right" then { Vector3.new(1, 0, 0), 0.1 } else { Vector3.new(-1, 0, 0), 0.1 } else { Vector3.new(0, 0, 0), 100 }
-	end, { useInputType(), var1 })
+	return (ReactModule.useMemo(function() --[[ Line: 18 ]]
+		-- upvalues: IsSpatialFunction (upval), UseLaserPointerHandResult (copy)
+		return if IsSpatialFunction() then if UseLaserPointerHandResult == "Right" then { vector.create(1, 0, 0), 0.1 } else { vector.create(-1, 0, 0), 0.1 } else { vector.create(0, 0, 0), 100 }
+	end, { UseInputTypeResult, UseLaserPointerHandResult }))
 end
 
-return function()
-	-- upvalues: reactModule (ref), interactionFeedbackContextModule (ref), useHapticPositionAndRadius (ref), triggerFeedbackModule (ref), fFlagLuaAppHapticTriggeredTelemetry (ref)
-	local var1 = reactModule.useContext(interactionFeedbackContextModule)
-	local _ = nil
-	local _ = nil
-	local var2 = useHapticPositionAndRadius()
-	local var3 = var2[1]
-	local var4 = var2[2]
+return function() --[[ Line: 35 | Named "useTriggerFeedback" ]]
+	-- upvalues: ReactModule (copy), InteractionFeedbackContextModule (copy), useHapticPositionAndRadius (copy), TriggerFeedbackModule (copy)
+	local UseContextResult = ReactModule.useContext(InteractionFeedbackContextModule)
+	local UseHapticPositionAndRadiusResultEntry = nil
+	local UseHapticPositionAndRadiusResultEntry1 = nil
+	local UseHapticPositionAndRadiusResult = useHapticPositionAndRadius()
+	UseHapticPositionAndRadiusResultEntry = UseHapticPositionAndRadiusResult[1]
+	UseHapticPositionAndRadiusResultEntry1 = UseHapticPositionAndRadiusResult[2]
 	
-	if not var1 then
+	if not UseContextResult then
 		error("useTriggerFeedback must be used within an InteractionFeedbackProvider")
 	end
-	return reactModule.useCallback(function(p1, p2, p3, p4)
-		-- upvalues: triggerFeedbackModule (copy), var1 (ref), var3 (write), var4 (write), fFlagLuaAppHapticTriggeredTelemetry (copy)
-		return triggerFeedbackModule(p1, p2, var1, var3, var4, if fFlagLuaAppHapticTriggeredTelemetry then p3 else nil, if fFlagLuaAppHapticTriggeredTelemetry then p4 else nil)
-	end, { var1, var3, var4 })
+	return (ReactModule.useCallback(function(p1, p2, p3, p4) --[[ Line: 49 ]]
+		-- upvalues: TriggerFeedbackModule (upval), UseContextResult (copy), UseHapticPositionAndRadiusResultEntry (ref), UseHapticPositionAndRadiusResultEntry1 (ref)
+		return TriggerFeedbackModule(p1, p2, UseContextResult, UseHapticPositionAndRadiusResultEntry, UseHapticPositionAndRadiusResultEntry1, p3, p4)
+	end, {
+		UseContextResult,
+		UseHapticPositionAndRadiusResultEntry,
+		UseHapticPositionAndRadiusResultEntry1
+	}))
 end

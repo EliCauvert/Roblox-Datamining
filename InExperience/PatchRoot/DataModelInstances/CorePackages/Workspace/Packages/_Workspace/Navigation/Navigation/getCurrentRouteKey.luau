@@ -1,9 +1,9 @@
 ﻿local _ = require(script.Parent.types)
-local getCurrentRouteStateModule = require(script.Parent.getCurrentRouteState)
+local GetCurrentRouteStateModule = require(script.Parent.getCurrentRouteState)
 
-return function(p1)
-	-- upvalues: getCurrentRouteStateModule (ref)
-	local var1 = getCurrentRouteStateModule(p1)
+return function(p1) --[[ Line: 7 | Named "getCurrentRouteKey" ]]
+	-- upvalues: GetCurrentRouteStateModule (copy)
+	local CurrentRouteStateModule = GetCurrentRouteStateModule(p1)
 	
-	return if var1 then var1.key else nil
+	return if CurrentRouteStateModule then CurrentRouteStateModule.key else nil
 end

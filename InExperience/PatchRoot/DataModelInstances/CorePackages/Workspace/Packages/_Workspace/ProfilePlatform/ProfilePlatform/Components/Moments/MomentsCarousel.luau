@@ -1,154 +1,156 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local collectionViewsModule = require(parent.CollectionViews)
-local foundationModule = require(parent.Foundation)
-local navigationModule = require(parent.Navigation)
-local _ = require(parent.DataHydration.MomentsStoreTypes)
-local momentTileModule = require(script.Parent.MomentTile)
-local momentsCarouselMediaProviderModule = require(script.Parent.MomentsCarouselMediaProvider)
-local getVisibleTileRangeModule = require(script.Parent.getVisibleTileRange)
-local useDynamicSizeMarginModule = require(profilePlatform.Hooks.useDynamicSizeMargin)
-local useProfileFormFactorModule = require(profilePlatform.Hooks.useProfileFormFactor)
-local enumsModule = require(profilePlatform.Common.Enums)
-local collectionCarousel = collectionViewsModule.CollectionCarousel
-local useNavigationFocus = navigationModule.useNavigationFocus
-local useTokens = foundationModule.Hooks.useTokens
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local _ = require(Parent.DataHydration.MomentsStoreTypes)
+local MomentTileModule = require(script.Parent.MomentTile)
+local MomentsCarouselMediaProviderModule = require(script.Parent.MomentsCarouselMediaProvider)
+local GetVisibleTileRangeModule = require(script.Parent.getVisibleTileRange)
+local UseDynamicSizeMarginModule = require(ProfilePlatform.Hooks.useDynamicSizeMargin)
+local UseProfileFormFactorModule = require(ProfilePlatform.Hooks.useProfileFormFactor)
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local CollectionCarousel = require(Parent.CollectionViews).CollectionCarousel
+local UseNavigationFocusFunction = require(Parent.Navigation).useNavigationFocus
+local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 
-return function(p1)
-	-- upvalues: useTokens (ref), useProfileFormFactorModule (ref), enumsModule (ref), useNavigationFocus (ref), useDynamicSizeMarginModule (ref), reactModule (ref), getVisibleTileRangeModule (ref), momentTileModule (ref), collectionCarousel (ref), momentsCarouselMediaProviderModule (ref)
-	local moments = p1.moments
-	local var1 = useTokens()
-	local var2 = useProfileFormFactorModule().formFactor == enumsModule.ProfileFormFactor.Wide
-	local var3 = useNavigationFocus()
-	local var4, var5 = useDynamicSizeMarginModule()
-	local var6, var7 = reactModule.useState(0)
-	local var8, var9 = reactModule.useState(1)
-	local var10 = reactModule.useRef(nil)
-	local var11 = reactModule.useRef(nil)
-	local var12 = reactModule.useRef(nil)
-	local var13 = if var2 then 4 else 3
-	local var14 = if var2 then nil else 0.2
-	local onTileImpression = p1.onTileImpression
-	local var15 = reactModule.useRef({})
-	local var16 = reactModule.useRef(nil)
-	local var17 = reactModule.useMemo(function()
-		-- upvalues: moments (ref)
-		for i, v in moments do
-			if v.metadata.captureType == Enum.CaptureType.Video then
+return function(p1) --[[ Line: 44 | Named "MomentsCarousel" ]]
+	-- upvalues: UseTokensFunction (copy), UseProfileFormFactorModule (copy), EnumsModule (copy), UseNavigationFocusFunction (copy), UseDynamicSizeMarginModule (copy), ReactModule (copy), GetVisibleTileRangeModule (copy), MomentTileModule (copy), CollectionCarousel (copy), MomentsCarouselMediaProviderModule (copy)
+	local Moments = p1.moments
+	local UseTokensResult = UseTokensFunction()
+	local IsFormFactorMatch = UseProfileFormFactorModule().formFactor == EnumsModule.ProfileFormFactor.Wide
+	local UseNavigationFocusResult = UseNavigationFocusFunction()
+	local UseDynamicSizeMarginModuleResult, UseDynamicSizeMarginModuleResult2 = UseDynamicSizeMarginModule()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(1)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseRefResult2 = ReactModule.useRef(nil)
+	local NumColumns: number = if IsFormFactorMatch then 4 else 3
+	local FractionalItemAmount = if IsFormFactorMatch then nil else 0.2
+	local OnTileImpressionFunction = p1.onTileImpression
+	local UseRefResult3 = ReactModule.useRef({})
+	local UseRefResult4 = ReactModule.useRef(nil)
+	local UseMemoResult = ReactModule.useMemo(function(): boolean --[[ Line: 70 ]]
+		-- upvalues: Moments (copy)
+		for _, moment in Moments do
+			if moment.metadata.captureType == Enum.CaptureType.Video then
 				return true
 			end
 		end
 		return false
-	end, { moments })
-	local var18 = moments[var8]
-	local var19 = var18 ~= nil and var18.metadata.captureType == Enum.CaptureType.Video
-	local var20 = reactModule.useCallback(function(p2)
-		-- upvalues: var7 (ref)
-		var7(p2)
+	end, { Moments })
+	local Moment = Moments[UseStateResult1]
+	local IsCaptureTypeMatch: boolean = Moment ~= nil and Moment.metadata.captureType == Enum.CaptureType.Video
+	local UseResult = ReactModule.useCallback(function(p2: number): number --[[ Line: 82 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(p2)
 		
 		return p2 * 1.5 + 48
 	end, {})
-	local var21 = reactModule.useCallback(function()
-		-- upvalues: onTileImpression (ref), var6 (ref), var10 (ref), getVisibleTileRangeModule (copy), var13 (ref), var14 (ref), moments (ref), var15 (ref)
-		if onTileImpression == nil or var6 <= 0 then return end
-		local current = var10.current
-		local var22, var23 = getVisibleTileRangeModule(if current ~= nil then 0 else current.CanvasPosition.X, var6, 12, var13, var14, #moments)
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 91 ]]
+		-- upvalues: OnTileImpressionFunction (copy), UseStateResult (copy), UseRefResult (copy), GetVisibleTileRangeModule (upval), NumColumns (copy), FractionalItemAmount (copy), Moments (copy), UseRefResult3 (copy)
+		if OnTileImpressionFunction == nil or UseStateResult <= 0 then return end
+		local Current = UseRefResult.current
+		local VisibleTileRangeModule, VisibleTileRangeModule2 = GetVisibleTileRangeModule(if Current == nil then 0 else Current.CanvasPosition.X, UseStateResult, 12, NumColumns, FractionalItemAmount, #Moments)
 		
-		for i = var22, var23 do
-			if not var15.current[i] then
-				var15.current[i] = true
-				onTileImpression(i)
+		for i = VisibleTileRangeModule, VisibleTileRangeModule2 do
+			if not UseRefResult3.current[i] then
+				UseRefResult3.current[i] = true
+				OnTileImpressionFunction(i)
 			end
 		end
 	end, {
-		onTileImpression,
-		var6,
-		var13,
-		var14,
-		#moments
+		OnTileImpressionFunction,
+		UseStateResult,
+		NumColumns,
+		FractionalItemAmount,
+		#Moments
 	})
-	reactModule.useEffect(function()
-		-- upvalues: var16 (ref), moments (ref), var15 (ref), var21 (ref)
-		if var16.current ~= moments then
-			var16.current = moments
-			var15.current = {}
+	ReactModule.useEffect(function() --[[ Line: 107 ]]
+		-- upvalues: UseRefResult4 (copy), Moments (copy), UseRefResult3 (copy), UseResult1 (copy)
+		if UseRefResult4.current ~= Moments then
+			UseRefResult4.current = Moments
+			UseRefResult3.current = {}
 		end
-		var21()
-	end, { moments, var21 })
-	local var24 = reactModule.useCallback(function()
-		-- upvalues: var10 (ref), var6 (ref), var11 (ref), moments (ref), var9 (ref), var21 (ref)
-		if var10.current == nil or var6 <= 0 then return end
-		if var11.current ~= nil then
-			task.cancel(var11.current)
+		UseResult1()
+	end, { Moments, UseResult1 })
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 118 ]]
+		-- upvalues: UseRefResult (copy), UseStateResult (copy), UseRefResult1 (copy), Moments (copy), UseStateResult2_1 (copy), UseResult1 (copy)
+		if UseRefResult.current == nil or UseStateResult <= 0 then return end
+		if UseRefResult1.current ~= nil then
+			task.cancel(UseRefResult1.current)
 		end
-		var11.current = task.delay(0.2, function()
-			-- upvalues: var11 (copy), var10 (copy), var6 (copy), moments (copy), var9 (copy), var21 (copy)
-			var11.current = nil
-			local current = var10.current
+		UseRefResult1.current = task.delay(0.2, function() --[[ Line: 126 ]]
+			-- upvalues: UseRefResult1 (upval), UseRefResult (upval), UseStateResult (upval), Moments (upval), UseStateResult2_1 (upval), UseResult1 (upval)
+			UseRefResult1.current = nil
+			local Current = UseRefResult.current
 			
-			if current == nil then
+			if Current ~= nil then
+				UseStateResult2_1((math.clamp(math.round(Current.CanvasPosition.X / (UseStateResult + 12)) + 1, 1, #Moments)))
+				UseResult1()
+				
 				return
 			end
-			var9(math.clamp(math.round(current.CanvasPosition.X / (var6 + 12)) + 1, 1, #moments))
-			var21()
 		end)
-	end, { var6, #moments, var21 })
-	reactModule.useEffect(function()
-		-- upvalues: var11 (ref)
-		return function()
-			-- upvalues: var11 (copy)
-			if var11.current ~= nil then
-				task.cancel(var11.current)
-				var11.current = nil
+	end, { UseStateResult, #Moments, UseResult1 })
+	ReactModule.useEffect(function() --[[ Line: 141 ]]
+		-- upvalues: UseRefResult1 (copy)
+		return function() --[[ Line: 142 ]]
+			-- upvalues: UseRefResult1 (upval)
+			if UseRefResult1.current ~= nil then
+				task.cancel(UseRefResult1.current)
+				UseRefResult1.current = nil
 			end
 		end
 	end, {})
-	local frame = reactModule.createElement("Frame", {
+	local Frame = ReactModule.createElement("Frame", {
 		AutomaticSize = Enum.AutomaticSize.Y,
 		BackgroundTransparency = 1,
 		LayoutOrder = p1.layoutOrder,
-		Size = UDim2.new(1, 0, 0, var6 * 1.5 + 48),
-		[reactModule.Change.AbsoluteSize] = var5
+		Size = UDim2.new(1, 0, 0, UseStateResult * 1.5 + 48),
+		[ReactModule.Change.AbsoluteSize] = UseDynamicSizeMarginModuleResult2
 	}, {
-		CollectionCarousel = reactModule.createElement(collectionCarousel, {
+		CollectionCarousel = ReactModule.createElement(CollectionCarousel, {
 			LayoutOrder = 1,
 			title = "Moments",
 			columnGap = 12,
-			items = moments,
-			renderItem = reactModule.useCallback(function(p2, p3, p4)
-				-- upvalues: reactModule (copy), momentTileModule (copy), var3 (ref), var8 (ref), var12 (ref), p1 (ref)
-				return reactModule.createElement(momentTileModule, {
-					moment = p2,
-					layoutOrder = p3,
-					itemSize = p4,
-					isActive = var3 and p3 == var8,
-					onActivated = function()
-						-- upvalues: var12 (copy), p1 (copy), p3 (ref)
-						local current = var12.current
+			items = Moments,
+			renderItem = ReactModule.useCallback(function(Moment, LayoutOrder, ItemSize) --[[ Line: 150 ]]
+				-- upvalues: ReactModule (upval), MomentTileModule (upval), UseNavigationFocusResult (copy), UseStateResult1 (copy), UseRefResult2 (copy), p1 (copy)
+				return ReactModule.createElement(MomentTileModule, {
+					moment = Moment,
+					layoutOrder = LayoutOrder,
+					itemSize = ItemSize,
+					isActive = UseNavigationFocusResult and LayoutOrder == UseStateResult1,
+					onActivated = function() --[[ Line: 156 ]]
+						-- upvalues: UseRefResult2 (upval), p1 (upval), LayoutOrder (copy)
+						local Current = UseRefResult2.current
 						
-						if current ~= nil then
-							current.release()
+						if Current ~= nil then
+							Current.release()
 						end
-						p1.onSelectMoment(p3)
+						p1.onSelectMoment(LayoutOrder)
 					end
-				}), p2.momentId
-			end, { var3, var8, p1.onSelectMoment }),
-			getItemHeight = var20,
-			scrollingFrameRef = var10,
-			onChangeCanvasPosition = var24,
-			numColumns = var13,
-			fractionalItemAmount = var14,
-			sideMargin = var4,
+				}), Moment.momentId
+			end, {
+				UseNavigationFocusResult,
+				UseStateResult1,
+				p1.onSelectMoment
+			}),
+			getItemHeight = UseResult,
+			scrollingFrameRef = UseRefResult,
+			onChangeCanvasPosition = UseResult2,
+			numColumns = NumColumns,
+			fractionalItemAmount = FractionalItemAmount,
+			sideMargin = UseDynamicSizeMarginModuleResult,
 			onActivateHeader = p1.onActivateHeader
 		})
 	})
 	
-	return if var3 and var17 then reactModule.createElement(momentsCarouselMediaProviderModule, {
-		moments = moments,
-		activeIndex = var8,
-		playbackActive = var19,
-		mediaCornerRadius = var1.Radius.Large,
-		handoffRef = var12
-	}, { Carousel = frame }) else frame
+	return if UseNavigationFocusResult and UseMemoResult then ReactModule.createElement(MomentsCarouselMediaProviderModule, {
+		moments = Moments,
+		activeIndex = UseStateResult1,
+		playbackActive = IsCaptureTypeMatch,
+		mediaCornerRadius = UseTokensResult.Radius.Large,
+		handoffRef = UseRefResult2
+	}, { Carousel = Frame }) else Frame
 end

@@ -1,15 +1,15 @@
-﻿local authCommon = script:FindFirstAncestor("AuthCommon")
-local loginByEmailModule = require(authCommon.Thunks.LoginByEmail)
-local loginByPhoneModule = require(authCommon.Thunks.LoginByPhone)
-local loginByUsernameModule = require(authCommon.Thunks.LoginByUsername)
-local isStringEmailModule = require(authCommon.Utils.isStringEmail)
-local isStringPhoneModule = require(authCommon.Utils.isStringPhone)
-local var1 = require(authCommon.Parent.AppCommonLib).isTenFootInterface()
+﻿local AuthCommon = script:FindFirstAncestor("AuthCommon")
+local LoginByEmailModule = require(AuthCommon.Thunks.LoginByEmail)
+local LoginByPhoneModule = require(AuthCommon.Thunks.LoginByPhone)
+local LoginByUsernameModule = require(AuthCommon.Thunks.LoginByUsername)
+local IsStringEmailModule = require(AuthCommon.Utils.isStringEmail)
+local IsStringPhoneModule = require(AuthCommon.Utils.isStringPhone)
+local IsTenFootInterface = require(AuthCommon.Parent.AppCommonLib).isTenFootInterface()
 
-return function(p1, p2, p3, p4, p5, p6, p7, p8, p9)
-	-- upvalues: isStringEmailModule (ref), var1 (ref), loginByEmailModule (ref), isStringPhoneModule (ref), loginByPhoneModule (ref), loginByUsernameModule (ref)
-	return function(p10)
-		-- upvalues: isStringEmailModule (copy), p2 (ref), p9 (ref), var1 (copy), loginByEmailModule (copy), p1 (ref), p3 (ref), p4 (ref), p5 (ref), p6 (ref), p7 (ref), p8 (ref), isStringPhoneModule (copy), loginByPhoneModule (copy), loginByUsernameModule (copy)
-		return if isStringEmailModule(p2) and not p9 and not var1 then p10:dispatch(loginByEmailModule(p1, p2, p3, p4, p5, p6, p7, p8)) elseif isStringPhoneModule(p2) and not p9 and not var1 then p10:dispatch(loginByPhoneModule(p1, p2, p3, p4, p5, p6, p7, p8)) else p10:dispatch(loginByUsernameModule(p1, p2, p3, p4, p5, p6, p7))
+return function(p1, p2, p3, p4, p5, p6, p7, p8, p9) --[[ Line: 13 ]]
+	-- upvalues: IsStringEmailModule (copy), IsTenFootInterface (copy), LoginByEmailModule (copy), IsStringPhoneModule (copy), LoginByPhoneModule (copy), LoginByUsernameModule (copy)
+	return function(p10) --[[ Line: 24 ]]
+		-- upvalues: IsStringEmailModule (upval), p2 (copy), p9 (copy), IsTenFootInterface (upval), LoginByEmailModule (upval), p1 (copy), p3 (copy), p4 (copy), p5 (copy), p6 (copy), p7 (copy), p8 (copy), IsStringPhoneModule (upval), LoginByPhoneModule (upval), LoginByUsernameModule (upval)
+		return if IsStringEmailModule(p2) and not p9 and not IsTenFootInterface then p10:dispatch(LoginByEmailModule(p1, p2, p3, p4, p5, p6, p7, p8)) elseif IsStringPhoneModule(p2) and not p9 and not IsTenFootInterface then p10:dispatch(LoginByPhoneModule(p1, p2, p3, p4, p5, p6, p7, p8)) else p10:dispatch(LoginByUsernameModule(p1, p2, p3, p4, p5, p6, p7))
 	end
 end

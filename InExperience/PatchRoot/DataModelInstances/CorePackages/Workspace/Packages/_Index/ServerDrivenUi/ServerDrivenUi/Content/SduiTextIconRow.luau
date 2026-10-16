@@ -1,15 +1,14 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local UIBloxModule = require(parent.UIBlox)
-local foundationModule = require(parent.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local checkAndFormatPossibleLink = require(parent.CollectionViews).checkAndFormatPossibleLink
-local textSizeModule = require(parent.TextSize)
-local t = {
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local FoundationModule = require(Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local ImageSetLabel = require(Parent.UIBlox).Core.ImageSet.ImageSetLabel
+local CheckAndFormatPossibleLinkFunction = require(Parent.CollectionViews).checkAndFormatPossibleLink
+local TextSizeModule = require(Parent.TextSize)
+local config = {
 	anchorPoint = "AnchorPoint",
 	automaticSize = "AutomaticSize",
 	backgroundColor3 = "BackgroundColor3",
@@ -26,91 +25,91 @@ local t = {
 	zIndex = "ZIndex"
 }
 
-local function applyOverrides(p1, p2)
-	-- upvalues: t (ref), cryoModule (ref)
-	if p2 == nil then
+local function applyOverrides(p1, IconOverrides) --[[ Line: 89 ]]
+	-- upvalues: config (copy), CryoModule (copy)
+	if IconOverrides == nil then
 		return p1
 	end
-	local t_1 = {}
+	local t = {}
 	
-	for i, v in p2 do
-		t_1[t[i] or i] = v
+	for i, iconOverride in IconOverrides do
+		t[config[i] or i] = iconOverride
 	end
-	return cryoModule.Dictionary.join(p1, t_1)
+	return CryoModule.Dictionary.join(p1, t)
 end
 
-return reactModule.memo(function(p3)
-	-- upvalues: textSizeModule (ref), useTokens (ref), checkAndFormatPossibleLink (ref), reactModule (ref), applyOverrides (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), imageSetLabel (ref)
-	local layoutOrder = p3.layoutOrder
-	local anchorPoint = p3.anchorPoint
-	local automaticSize = p3.automaticSize
-	local size = p3.size
-	local zIndex = p3.zIndex
-	local position = p3.position
-	local selectable = p3.selectable
-	local textSizeOffset = textSizeModule.getTextSizeStore(false).getTextSizeOffset(false)
-	local var1 = useTokens()
-	local fontStyle = p3.fontStyle or var1.Typography.HeadingSmall
-	local textColor = p3.textColor or var1.Color.Content.Emphasis.Color3
-	local ceiled = math.ceil(fontStyle.LineHeight * fontStyle.FontSize + textSizeOffset)
-	local var2 = if p3.iconWidth then UDim2.new(0, p3.iconWidth, 0, p3.iconWidth) else UDim2.new(0, ceiled, 0, ceiled)
-	local iconColor = p3.iconColor or textColor
-	local var3 = p3.onActivated ~= nil
-	local var4, var5 = checkAndFormatPossibleLink(p3.text)
+return ReactModule.memo(function(p2) --[[ Line: 100 | Named "SduiTextIconRow" ]]
+	-- upvalues: TextSizeModule (copy), UseTokensFunction (copy), CheckAndFormatPossibleLinkFunction (copy), ReactModule (copy), applyOverrides (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ImageSetLabel (copy)
+	local LayoutOrder = p2.layoutOrder
+	local AnchorPoint = p2.anchorPoint
+	local AutomaticSize = p2.automaticSize
+	local Size = p2.size
+	local ZIndex = p2.zIndex
+	local Position = p2.position
+	local Selectable = p2.selectable
+	local TextSizeOffset = TextSizeModule.getTextSizeStore(false).getTextSizeOffset(false)
+	local UseTokensResult = UseTokensFunction()
+	local FontStyle = p2.fontStyle or UseTokensResult.Typography.HeadingSmall
+	local TextColor = p2.textColor or UseTokensResult.Color.Content.Emphasis.Color3
+	local Ceiled = math.ceil(FontStyle.LineHeight * FontStyle.FontSize + TextSizeOffset)
+	local _UDim2: UDim2 = if p2.iconWidth then UDim2.new(0, p2.iconWidth, 0, p2.iconWidth) else UDim2.new(0, Ceiled, 0, Ceiled)
+	local IconColor = p2.iconColor or TextColor
+	local HasOnActivated = p2.onActivated ~= nil
+	local CheckAndFormatPossibleLinkResult, CheckAndFormatPossibleLinkResult2 = CheckAndFormatPossibleLinkFunction(p2.text)
 	
-	return reactModule.createElement(if var3 then "TextButton" else "Frame", {
-		Position = position,
-		AnchorPoint = anchorPoint,
-		AutomaticSize = automaticSize,
-		Size = size or UDim2.new(1, 0, 0, ceiled),
-		BackgroundTransparency = if p3.backgroundStyle then p3.backgroundStyle.Transparency else 1,
-		BackgroundColor3 = if p3.backgroundStyle then p3.backgroundStyle.Color3 else nil,
+	return ReactModule.createElement(if HasOnActivated then "TextButton" else "Frame", {
+		Position = Position,
+		AnchorPoint = AnchorPoint,
+		AutomaticSize = AutomaticSize,
+		Size = Size or UDim2.new(1, 0, 0, Ceiled),
+		BackgroundTransparency = p2.backgroundStyle and p2.backgroundStyle.Transparency or 1,
+		BackgroundColor3 = p2.backgroundStyle and p2.backgroundStyle.Color3 or nil,
 		BorderSizePixel = 0,
-		LayoutOrder = layoutOrder,
-		ZIndex = zIndex,
-		Text = if var3 then "" else nil,
-		TextTransparency = if var3 then 1 else nil,
-		AutoButtonColor = if var3 then false else nil,
-		[reactModule.Event.Activated] = if var3 then p3.onActivated else nil,
-		Active = var3,
-		Selectable = selectable,
-		[reactModule.Tag] = if p3.testId then `data-testid={p3.testId}` elseif var3 then "data-testid=--sdui-text-icon-row-button" else "data-testid=--sdui-text-icon-row"
+		LayoutOrder = LayoutOrder,
+		ZIndex = ZIndex,
+		Text = if HasOnActivated then "" else nil,
+		TextTransparency = if HasOnActivated then 1 else nil,
+		AutoButtonColor = not HasOnActivated and nil,
+		[ReactModule.Event.Activated] = if HasOnActivated then p2.onActivated else nil,
+		Active = HasOnActivated,
+		Selectable = Selectable,
+		[ReactModule.Tag] = if p2.testId then `data-testid={p2.testId}` elseif HasOnActivated then "data-testid=--sdui-text-icon-row-button" else "data-testid=--sdui-text-icon-row"
 	}, {
-		UICorner = if p3.cornerRadius then reactModule.createElement("UICorner", { CornerRadius = p3.cornerRadius }) else nil,
-		UIListLayout = reactModule.createElement("UIListLayout", {
+		UICorner = if p2.cornerRadius then ReactModule.createElement("UICorner", { CornerRadius = p2.cornerRadius }) else nil,
+		UIListLayout = ReactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			FillDirection = Enum.FillDirection.Horizontal,
-			Padding = UDim.new(0, p3.gap or 0),
+			Padding = UDim.new(0, p2.gap or 0),
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
 			VerticalAlignment = Enum.VerticalAlignment.Center
 		}),
-		Text = reactModule.createElement("TextLabel", applyOverrides({
+		Text = ReactModule.createElement("TextLabel", applyOverrides({
 			BackgroundTransparency = 1,
-			Text = var5 or "",
+			Text = CheckAndFormatPossibleLinkResult2 or "",
 			AutomaticSize = Enum.AutomaticSize.X,
-			Size = size or UDim2.new(0, 0, 0, ceiled),
-			Font = if foundationFontFaceMigration then nil else fontStyle.Font,
-			FontFace = if foundationFontFaceMigration then normalizeFontFace(fontStyle.Font) else nil,
-			TextSize = fontStyle.FontSize,
+			Size = Size or UDim2.new(0, 0, 0, Ceiled),
+			Font = if FoundationFontFaceMigration then nil else FontStyle.Font,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(FontStyle.Font) else nil,
+			TextSize = FontStyle.FontSize,
 			TextTransparency = 0,
-			TextColor3 = textColor,
+			TextColor3 = TextColor,
 			TextWrapped = false,
 			TextTruncate = Enum.TextTruncate.SplitWord,
 			TextXAlignment = Enum.TextXAlignment.Left,
-			LayoutOrder = (if p3.iconFirst then -1 else 1) * 1,
-			RichText = if var4 then true else nil,
-			[reactModule.Tag] = "data-testid=--sdui-text-icon-row-text"
-		}, p3.textOverrides), {
-			UIFlexItem = if p3.textFlexMode then reactModule.createElement("UIFlexItem", { FlexMode = p3.textFlexMode }) else nil
+			LayoutOrder = (if p2.iconFirst then -1 else 1) * 1,
+			RichText = if CheckAndFormatPossibleLinkResult then true else nil,
+			[ReactModule.Tag] = "data-testid=--sdui-text-icon-row-text"
+		}, p2.textOverrides), {
+			UIFlexItem = if p2.textFlexMode then ReactModule.createElement("UIFlexItem", { FlexMode = p2.textFlexMode }) else nil
 		}),
-		Icon = if p3.icon then reactModule.createElement(imageSetLabel, applyOverrides({
-			LayoutOrder = (if p3.iconFirst then -1 else 1) * 2,
-			Size = var2,
+		Icon = if p2.icon then ReactModule.createElement(ImageSetLabel, applyOverrides({
+			LayoutOrder = (if p2.iconFirst then -1 else 1) * 2,
+			Size = _UDim2,
 			BackgroundTransparency = 1,
-			ImageColor3 = iconColor,
+			ImageColor3 = IconColor,
 			ImageTransparency = 0,
-			Image = p3.icon,
-			[reactModule.Tag] = "data-testid=--sdui-text-icon-row-icon"
-		}, p3.iconOverrides)) else nil
+			Image = p2.icon,
+			[ReactModule.Tag] = "data-testid=--sdui-text-icon-row-icon"
+		}, p2.iconOverrides)) else nil
 	})
 end)

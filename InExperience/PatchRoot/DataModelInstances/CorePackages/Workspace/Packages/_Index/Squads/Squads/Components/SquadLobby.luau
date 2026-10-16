@@ -1,1 +1,1 @@
-﻿return require(script.SquadLobby)
+﻿return (require(script.SquadLobby))

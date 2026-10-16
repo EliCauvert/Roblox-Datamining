@@ -1,81 +1,84 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local foundationModule = require(parent.Foundation)
-local momentsCommonModule = require(parent.MomentsCommon)
-local text = foundationModule.Text
-local view = foundationModule.View
-local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
-local useTokens = foundationModule.Hooks.useTokens
-local useSignalBinding = signalsReactModule.useSignalBinding
-local useSignalState = signalsReactModule.useSignalState
-local reaction = momentsCommonModule.Components.Reaction
-local reactionSize = momentsCommonModule.Enums.ReactionSize
-local momentContextModule = require(script.Parent.Parent.Parent.MomentContext)
-local reactionsSheetModule = require(moments.Components.ReactionsSheet)
-local getColorStyleWithTransparencyModule = require(moments.Utils.getColorStyleWithTransparency)
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local FoundationModule = require(Parent.Foundation)
+local MomentsCommonModule = require(Parent.MomentsCommon)
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseSignalBindingFunction = SignalsReactModule.useSignalBinding
+local UseSignalStateFunction = SignalsReactModule.useSignalState
+local Reaction = MomentsCommonModule.Components.Reaction
+local ReactionSize = MomentsCommonModule.Enums.ReactionSize
+local MomentContextModule = require(script.Parent.Parent.Parent.MomentContext)
+local ReactionsSheetModule = require(Moments.Components.ReactionsSheet)
+local GetColorStyleWithTransparencyModule = require(Moments.Utils.getColorStyleWithTransparency)
 
-local function _(p1)
+local function _(p1: number): string --[[ Line: 46 | Named "formatCount" ]]
 	return if p1 == nil then "" elseif p1 >= 1000000 then string.format("%.1fM", p1 / 1000000) elseif p1 >= 1000 then string.format("%.1fK", p1 / 1000) else tostring(p1)
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), momentContextModule (ref), reactModule (ref), useSignalBinding (ref), useSignalState (ref), getColorStyleWithTransparencyModule (ref), reaction (ref), reactionSize (ref), view (ref), stateLayerAffordance (ref), text (ref), reactionsSheetModule (ref)
-	local var1 = useTokens()
-	local var2 = momentContextModule.useMoment()
-	local var3, var4 = reactModule.useState(false)
-	local var5 = useSignalBinding(var2.store.getReactionCount)
-	local var6 = useSignalState(var2.store.getIndividualReactionCounts)
-	local animationRatio = var2.animationRatio
-	local var7 = animationRatio:map(function(p2)
-		-- upvalues: getColorStyleWithTransparencyModule (copy), var1 (ref)
-		return getColorStyleWithTransparencyModule(var1.Color.Content.Emphasis, p2)
+return ReactModule.memo(function(Frame) --[[ Line: 58 | Named "Reactions" ]]
+	-- upvalues: UseTokensFunction (copy), MomentContextModule (copy), ReactModule (copy), UseSignalBindingFunction (copy), UseSignalStateFunction (copy), GetColorStyleWithTransparencyModule (copy), Reaction (copy), ReactionSize (copy), View (copy), StateLayerAffordance (copy), Text (copy), ReactionsSheetModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseMomentResult = MomentContextModule.useMoment()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseSignalBindingResult = UseSignalBindingFunction(UseMomentResult.store.getReactionCount)
+	local UseSignalStateResult = UseSignalStateFunction(UseMomentResult.store.getIndividualReactionCounts)
+	local AnimationRatio = UseMomentResult.animationRatio
+	local MapResult = AnimationRatio:map(function(p1) --[[ Line: 71 ]]
+		-- upvalues: GetColorStyleWithTransparencyModule (upval), UseTokensResult (copy)
+		return GetColorStyleWithTransparencyModule(UseTokensResult.Color.Content.Emphasis, p1)
 	end)
-	local var8 = reactModule.useCallback(function()
-		-- upvalues: var4 (ref)
-		var4(true)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 75 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(true)
 	end, {})
-	local var9 = reactModule.useCallback(function()
-		-- upvalues: var4 (ref)
-		var4(false)
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 79 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(false)
 	end, {})
-	local t = {}
+	local Elements = {}
 	
-	for i = 1, math.min(3, #var6) do
-		t["Reaction" .. i] = reactModule.createElement(reaction, {
+	for i = 1, math.min(3, #UseSignalStateResult) do
+		Elements["Reaction" .. i] = ReactModule.createElement(Reaction, {
 			LayoutOrder = i,
-			reactionType = var6[i].reaction,
-			size = reactionSize.Small,
-			imageStyle = var7
+			reactionType = UseSignalStateResult[i].reaction,
+			size = ReactionSize.Small,
+			imageStyle = MapResult
 		})
 	end
-	return reactModule.createElement(reactModule.Fragment, nil, {
-		ReactionsLine = reactModule.createElement(view, {
+	return ReactModule.createElement(ReactModule.Fragment, nil, {
+		ReactionsLine = ReactModule.createElement(View, {
 			tag = "row align-x-left align-y-center gap-small auto-xy",
-			LayoutOrder = p1.LayoutOrder,
-			onActivated = var8,
-			stateLayer = { affordance = stateLayerAffordance.None },
-			Visible = var5:map(function(p2)
-				return p2 ~= nil
+			LayoutOrder = Frame.LayoutOrder,
+			onActivated = UseResult,
+			stateLayer = { affordance = StateLayerAffordance.None },
+			Visible = UseSignalBindingResult:map(function(p1): boolean --[[ Line: 102 ]]
+				return p1 ~= nil
 			end)
 		}, {
-			Facepile = reactModule.createElement(view, {
+			Facepile = ReactModule.createElement(View, {
 				LayoutOrder = 1,
 				tag = "row align-x-left align-y-center gap-xxsmall auto-xy"
-			}, t),
-			Count = reactModule.createElement(text, {
+			}, Elements),
+			Count = ReactModule.createElement(Text, {
 				LayoutOrder = 2,
 				tag = "auto-xy text-body-medium text-align-x-left text-align-y-center content-default",
-				Text = var5:map(function(p2)
-					return `{if p2 == nil then "" elseif p2 >= 1000000 then string.format("%.1fM", p2 / 1000000) elseif p2 >= 1000 then string.format("%.1fK", p2 / 1000) else tostring(p2)} reactions`
+				Text = UseSignalBindingResult:map(function(p1: number): string --[[ Line: 114 ]]
+					return `{if p1 == nil then "" elseif p1 >= 1000000 then string.format("%.1fM", p1 / 1000000) elseif p1 >= 1000 then string.format("%.1fK", p1 / 1000) else tostring(p1)} reactions`
 				end),
-				textStyle = animationRatio:map(function(p3)
-					-- upvalues: getColorStyleWithTransparencyModule (copy), var1 (ref)
-					return getColorStyleWithTransparencyModule(var1.Color.Content.Default, p3)
+				textStyle = AnimationRatio:map(function(p2) --[[ Line: 117 ]]
+					-- upvalues: GetColorStyleWithTransparencyModule (upval), UseTokensResult (copy)
+					return GetColorStyleWithTransparencyModule(UseTokensResult.Color.Content.Default, p2)
 				end)
 			})
 		}),
-		Modal = if var3 then reactModule.createElement(reactionsSheetModule, { reactionCounts = var6, onClose = var9 }) else nil
+		Modal = if UseStateResult then ReactModule.createElement(ReactionsSheetModule, {
+			reactionCounts = UseSignalStateResult,
+			onClose = UseResult1
+		}) else nil
 	})
 end)

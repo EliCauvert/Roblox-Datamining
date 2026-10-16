@@ -1,3 +1,3 @@
-﻿local parent = script.Parent
+﻿local Parent = script.Parent
 
-return require(parent.Parent.Signals).createComputed(require(parent.createHttpStore))
+return require(Parent.Parent.Signals).createComputed((require(Parent.createHttpStore)))

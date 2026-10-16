@@ -1,22 +1,22 @@
-﻿local analyticsFeedNoopShimModule = require(script.AnalyticsFeedNoopShim)
+﻿local AnalyticsFeedNoopShimModule = require(script.AnalyticsFeedNoopShim)
 
-local function NoopComponent()
+local function NoopComponent() --[[ Line: 23 ]]
 	return nil
 end
 
-local var1 = function() end
+local function v2() --[[ Line: 27 ]] end
 
-local function noopRegisterSection(_)
-	-- upvalues: var1 (ref)
-	return var1
+local function noopRegisterSection(_) --[[ Line: 28 ]]
+	-- upvalues: v2 (copy)
+	return v2
 end
 
-local function noopRegisterSections(_)
-	-- upvalues: var1 (ref)
-	return var1
+local function noopRegisterSections(_) --[[ Line: 31 ]]
+	-- upvalues: v2 (copy)
+	return v2
 end
 
-local function noopGetRootSignal()
+local function noopGetRootSignal() --[[ Line: 36 ]]
 	return {
 		title = "root",
 		leafId = nil,
@@ -36,19 +36,20 @@ if _G.ENVIRONMENT == "PRODUCTION" or script:FindFirstChild("DevOnly") == nil the
 		getRootSignal = noopGetRootSignal,
 		DebugPanelWindow = NoopComponent,
 		DebugPanelSection = NoopComponent,
-		AnalyticsFeed = analyticsFeedNoopShimModule
+		AnalyticsFeed = AnalyticsFeedNoopShimModule
+	}
+else
+	local DevOnly = script.DevOnly
+	local DebugPanelSectionRegistryModule = require(DevOnly.DebugPanelSectionRegistry)
+	
+	return {
+		["jest.config"] = script["jest.config"],
+		DebugPanel = require(DevOnly.DebugPanel),
+		registerSection = DebugPanelSectionRegistryModule.registerSection,
+		registerSections = DebugPanelSectionRegistryModule.registerSections,
+		getRootSignal = DebugPanelSectionRegistryModule.getRootSignal,
+		DebugPanelWindow = require(DevOnly.DebugPanelWindow),
+		DebugPanelSection = require(DevOnly.DebugPanelSection),
+		AnalyticsFeed = require(DevOnly.AnalyticsFeed)
 	}
 end
-local devOnly = script.DevOnly
-local debugPanelSectionRegistryModule = require(devOnly.DebugPanelSectionRegistry)
-
-return {
-	["jest.config"] = script["jest.config"],
-	DebugPanel = require(devOnly.DebugPanel),
-	registerSection = debugPanelSectionRegistryModule.registerSection,
-	registerSections = debugPanelSectionRegistryModule.registerSections,
-	getRootSignal = debugPanelSectionRegistryModule.getRootSignal,
-	DebugPanelWindow = require(devOnly.DebugPanelWindow),
-	DebugPanelSection = require(devOnly.DebugPanelSection),
-	AnalyticsFeed = require(devOnly.AnalyticsFeed)
-}

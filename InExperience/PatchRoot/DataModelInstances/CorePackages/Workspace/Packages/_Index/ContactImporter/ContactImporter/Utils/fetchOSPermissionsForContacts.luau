@@ -1,24 +1,24 @@
-﻿local dependenciesModule = require(script.Parent.Parent.dependencies)
-local updateOptedInUsers = dependenciesModule.SocialModalsCommon.Utils.updateOptedInUsers
-local permissionsProtocol = dependenciesModule.PermissionsProtocol
-local appStorageService = dependenciesModule.AppStorageService
+﻿local DependenciesModule = require(script.Parent.Parent.dependencies)
+local UpdateOptedInUsers = DependenciesModule.SocialModalsCommon.Utils.updateOptedInUsers
+local PermissionsProtocol = DependenciesModule.PermissionsProtocol
+local AppStorageService = DependenciesModule.AppStorageService
 
-return function(p1, p2)
-	-- upvalues: permissionsProtocol (ref), updateOptedInUsers (ref), appStorageService (ref)
-	p1:hasPermissions({ permissionsProtocol.Permissions.CONTACTS_ACCESS }):andThen(function(p3)
-		-- upvalues: permissionsProtocol (copy), updateOptedInUsers (copy), appStorageService (copy), p2 (ref)
-		local var1 = p3 and p3.status == permissionsProtocol.Status.AUTHORIZED
+return function(p1, Callback) --[[ Line: 10 ]]
+	-- upvalues: PermissionsProtocol (copy), UpdateOptedInUsers (copy), AppStorageService (copy)
+	p1:hasPermissions({ PermissionsProtocol.Permissions.CONTACTS_ACCESS }):andThen(function(Result) --[[ Line: 13 ]]
+		-- upvalues: PermissionsProtocol (upval), UpdateOptedInUsers (upval), AppStorageService (upval), Callback (copy)
+		local IsStatusMatch: boolean = Result and Result.status == PermissionsProtocol.Status.AUTHORIZED
 		
-		if not var1 then
-			updateOptedInUsers:clearLocalStorage(appStorageService)
+		if not IsStatusMatch then
+			UpdateOptedInUsers:clearLocalStorage(AppStorageService)
 		end
-		if p2 then
-			p2(var1)
+		if Callback then
+			Callback(IsStatusMatch)
 		end
-	end):catch(function(_)
-		-- upvalues: p2 (ref)
-		if p2 then
-			p2(false)
+	end):catch(function(_) --[[ Line: 24 ]]
+		-- upvalues: Callback (copy)
+		if Callback then
+			Callback(false)
 		end
 	end)
 end

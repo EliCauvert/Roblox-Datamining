@@ -1,40 +1,40 @@
-﻿local friendsMenu = script:FindFirstAncestor("FriendsMenu")
-local parent = friendsMenu.Parent
-local context = friendsMenu.Context
-local reactModule = require(parent.React)
-local checkbox = require(parent.Foundation).Checkbox
-local _ = require(friendsMenu.friendsMenuModalType)
-local selectedUsersContextModule = require(context.SelectedUsersContext)
+﻿local FriendsMenu = script:FindFirstAncestor("FriendsMenu")
+local Parent = FriendsMenu.Parent
+local ReactModule = require(Parent.React)
+local Checkbox = require(Parent.Foundation).Checkbox
+local _ = require(FriendsMenu.friendsMenuModalType)
+local SelectedUsersContextModule = require(FriendsMenu.Context.SelectedUsersContext)
 
-return function(p1)
-	-- upvalues: reactModule (ref), selectedUsersContextModule (ref), checkbox (ref)
-	local var1 = reactModule.useContext(selectedUsersContextModule)
+return function(p1) --[[ Line: 23 ]]
+	-- upvalues: ReactModule (copy), SelectedUsersContextModule (copy), Checkbox (copy)
+	local UseContextResult = ReactModule.useContext(SelectedUsersContextModule)
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		AutomaticSize = Enum.AutomaticSize.XY,
 		AnchorPoint = p1.anchorPoint,
 		Position = p1.position,
 		LayoutOrder = p1.layoutOrder
 	}, {
-		CheckboxAlignment = reactModule.createElement("UIListLayout", { VerticalAlignment = Enum.VerticalAlignment.Center }),
-		Button = reactModule.createElement(checkbox, {
+		CheckboxAlignment = ReactModule.createElement("UIListLayout", { VerticalAlignment = Enum.VerticalAlignment.Center }),
+		Button = ReactModule.createElement(Checkbox, {
 			label = "",
-			onActivated = reactModule.useCallback(function()
-				-- upvalues: var1 (ref), p1 (ref)
-				if var1.isFriendSelected(p1.friend.id) then
-					var1.removeFriend(p1.friend.id)
+			onActivated = ReactModule.useCallback(function() --[[ Line: 27 ]]
+				-- upvalues: UseContextResult (copy), p1 (copy)
+				if UseContextResult.isFriendSelected(p1.friend.id) then
+					UseContextResult.removeFriend(p1.friend.id)
 					
 					return
+				else
+					UseContextResult.addFriend(p1.friend.id, p1.friend.displayName)
 				end
-				var1.addFriend(p1.friend.id, p1.friend.displayName)
 			end, {
-				var1.isFriendSelected(p1.friend.id),
-				var1.removeFriend,
-				var1.addFriend,
+				UseContextResult.isFriendSelected(p1.friend.id),
+				UseContextResult.removeFriend,
+				UseContextResult.addFriend,
 				p1.friend.id
 			}),
-			isChecked = var1.isFriendSelected(p1.friend.id),
+			isChecked = UseContextResult.isFriendSelected(p1.friend.id),
 			isDisabled = p1.isDisabled,
 			Selectable = p1.selectable
 		})

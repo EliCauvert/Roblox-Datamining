@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("EnableSecurityAlertDeeplink", false)
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastFlag("EnableSecurityAlertDeeplink")
 end

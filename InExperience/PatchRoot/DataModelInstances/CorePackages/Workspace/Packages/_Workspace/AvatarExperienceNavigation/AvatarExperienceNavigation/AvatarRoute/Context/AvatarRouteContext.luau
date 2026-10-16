@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("AvatarExperienceNavigation").Parent.React).createContext(nil)
+﻿return (require(script:FindFirstAncestor("AvatarExperienceNavigation").Parent.React).createContext(nil))

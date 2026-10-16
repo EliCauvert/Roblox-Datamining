@@ -1,22 +1,22 @@
 ﻿local _ = require(script.Parent.Parent.Types)
-local createSignal = require(script:FindFirstAncestor("Moments").Parent.Signals).createSignal
+local CreateSignalFunction = require(script:FindFirstAncestor("Moments").Parent.Signals).createSignal
 
-return function()
-	-- upvalues: createSignal (ref)
-	local var1, var2 = createSignal(false)
-	local var3, var4 = createSignal(nil)
+return function() --[[ Line: 26 | Named "createExperienceDetailsSheetStore" ]]
+	-- upvalues: CreateSignalFunction (copy)
+	local Signal, Signal2 = CreateSignalFunction(false)
+	local Signal1, Signal2_1 = CreateSignalFunction(nil)
 	
 	return {
-		getIsOpen = var1,
-		getContext = var3,
-		open = function(p1)
-			-- upvalues: var4 (ref), var2 (ref)
-			var4(p1)
-			var2(true)
+		getIsOpen = Signal,
+		getContext = Signal1,
+		open = function(p1) --[[ Line: 30 ]]
+			-- upvalues: Signal2_1 (copy), Signal2 (copy)
+			Signal2_1(p1)
+			Signal2(true)
 		end,
-		close = function()
-			-- upvalues: var2 (ref)
-			var2(false)
+		close = function() --[[ Line: 35 ]]
+			-- upvalues: Signal2 (copy)
+			Signal2(false)
 		end
 	}
 end

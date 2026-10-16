@@ -1,28 +1,28 @@
-﻿local peopleReactView = script:FindFirstAncestor("PeopleReactView")
-local parent = peopleReactView.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local text = foundationModule.Text
-local view = foundationModule.View
-local layoutToggleButtonModule = require(peopleReactView.Components.Buttons.LayoutToggleButton)
-local constantsModule = require(peopleReactView.Constants)
+﻿local PeopleReactView = script:FindFirstAncestor("PeopleReactView")
+local Parent = PeopleReactView.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local LayoutToggleButtonModule = require(PeopleReactView.Components.Buttons.LayoutToggleButton)
+local ConstantsModule = require(PeopleReactView.Constants)
 
-return reactModule.memo(function(p1)
-	-- upvalues: useLocalization (ref), constantsModule (ref), reactModule (ref), view (ref), text (ref), layoutToggleButtonModule (ref)
-	return reactModule.createElement(view, {
+return ReactModule.memo(function(Frame) --[[ Line: 23 | Named "TitleBar" ]]
+	-- upvalues: UseLocalizationFunction (copy), ConstantsModule (copy), ReactModule (copy), View (copy), Text (copy), LayoutToggleButtonModule (copy)
+	return ReactModule.createElement(View, {
 		tag = "row size-full-0 auto-y align-y-center flex-x-between",
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Title = reactModule.createElement(text, {
+		Title = ReactModule.createElement(Text, {
 			tag = "auto-xy content-default text-heading-small text-align-x-left",
 			LayoutOrder = 1,
-			Text = useLocalization({ header = constantsModule.PEOPLEPAGE.PEOPLE_LIST.HEADER }).header
+			Text = UseLocalizationFunction({ header = ConstantsModule.PEOPLEPAGE.PEOPLE_LIST.HEADER }).header
 		}),
-		LayoutToggleButton = reactModule.createElement(layoutToggleButtonModule, {
+		LayoutToggleButton = ReactModule.createElement(LayoutToggleButtonModule, {
 			LayoutOrder = 2,
-			layout = p1.layout,
-			setLayout = p1.setLayout
+			layout = Frame.layout,
+			setLayout = Frame.setLayout
 		})
 	})
 end)

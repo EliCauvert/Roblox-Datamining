@@ -1,25 +1,25 @@
-﻿local parent = script:FindFirstAncestor("Responsive").Parent
-local reactModule = require(parent.React)
-local roactServiceTagsModule = require(parent.RoactServiceTags)
-local useRoactService = require(parent.RobloxAppHooks).useRoactService
+﻿local Parent = script:FindFirstAncestor("Responsive").Parent
+local ReactModule = require(Parent.React)
+local RoactServiceTagsModule = require(Parent.RoactServiceTags)
+local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
 
-return function()
-	-- upvalues: useRoactService (ref), roactServiceTagsModule (ref), reactModule (ref)
-	local var1 = useRoactService(roactServiceTagsModule.AppUserGameSettings)
-	local var2, var3 = reactModule.useState(var1:InFullScreen())
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), var1 (ref)
-		var3(var1:InFullScreen())
-		local fullscreenChangedConnection = var1.FullscreenChanged:Connect(function(p1)
-			-- upvalues: var3 (copy)
-			var3(p1)
+return function() --[[ Line: 6 | Named "useIsInFullScreen" ]]
+	-- upvalues: UseRoactServiceFunction (copy), RoactServiceTagsModule (copy), ReactModule (copy)
+	local UseRoactServiceResult = UseRoactServiceFunction(RoactServiceTagsModule.AppUserGameSettings)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(UseRoactServiceResult:InFullScreen())
+	ReactModule.useEffect(function() --[[ Line: 10 ]]
+		-- upvalues: UseStateResult2 (copy), UseRoactServiceResult (copy)
+		UseStateResult2(UseRoactServiceResult:InFullScreen())
+		local FullscreenChangedConnection = UseRoactServiceResult.FullscreenChanged:Connect(function(IsFullscreen) --[[ Line: 12 ]]
+			-- upvalues: UseStateResult2 (upval)
+			UseStateResult2(IsFullscreen)
 		end)
 		
-		return function()
-			-- upvalues: fullscreenChangedConnection (ref)
-			fullscreenChangedConnection:Disconnect()
+		return function() --[[ Line: 16 ]]
+			-- upvalues: FullscreenChangedConnection (copy)
+			FullscreenChangedConnection:Disconnect()
 		end
 	end, {})
 	
-	return var2
+	return UseStateResult
 end

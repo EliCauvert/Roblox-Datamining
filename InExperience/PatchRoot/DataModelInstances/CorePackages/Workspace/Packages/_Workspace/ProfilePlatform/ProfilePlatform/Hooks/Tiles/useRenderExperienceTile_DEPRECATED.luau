@@ -1,60 +1,60 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local useNavigation = require(parent.Navigation).useNavigation
-local openGameDetails = require(parent.GameDetail).OpenGameDetails
-local UIBloxModule = require(parent.UIBlox)
-local experienceTileV3 = UIBloxModule.App.Tile.ExperienceTileV3
-local useStyle = UIBloxModule.Core.Style.useStyle
-local userLibModule = require(parent.UserLib)
-local constants = userLibModule.Utils.Constants
-local _ = require(profilePlatform.Common.Types)
-local getRbxthumbWithTypeSizeAndOptions = userLibModule.Utils.getRbxthumbWithTypeSizeAndOptions
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local OpenGameDetailsFunction = require(Parent.GameDetail).OpenGameDetails
+local UIBloxModule = require(Parent.UIBlox)
+local ExperienceTileV3 = UIBloxModule.App.Tile.ExperienceTileV3
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local UserLibModule = require(Parent.UserLib)
+local Constants = UserLibModule.Utils.Constants
+local _ = require(ProfilePlatform.Common.Types)
+local GetRbxthumbWithTypeSizeAndOptionsFunction = UserLibModule.Utils.getRbxthumbWithTypeSizeAndOptions
 
-return function(p1, p2, _)
-	-- upvalues: useDispatch (ref), useNavigation (ref), useStyle (ref), reactModule (ref), openGameDetails (ref), constants (ref), getRbxthumbWithTypeSizeAndOptions (ref), experienceTileV3 (ref)
-	local var1 = useDispatch()
-	local var2 = useNavigation()
-	local var3 = useStyle()
-	p1 = p1 or "ProfileExperienceTile_"
+return function(p1, Callback, _) --[[ Line: 27 | Named "useRenderSquareExperienceTile" ]]
+	-- upvalues: UseDispatchFunction (copy), UseNavigationFunction (copy), UseStyleFunction (copy), ReactModule (copy), OpenGameDetailsFunction (copy), Constants (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), ExperienceTileV3 (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseNavigationResult = UseNavigationFunction()
+	local UseStyleResult = UseStyleFunction()
+	local P0 = p1 or "ProfileExperienceTile_"
 	
-	return reactModule.useCallback(function(p3, p4, _, p5)
-		-- upvalues: p2 (ref), var1 (ref), openGameDetails (copy), var2 (ref), constants (copy), getRbxthumbWithTypeSizeAndOptions (copy), reactModule (copy), experienceTileV3 (copy), var3 (ref), p1 (write)
-		return reactModule.createElement("Frame", {
+	return (ReactModule.useCallback(function(p2, LayoutOrder, _, p3) --[[ Line: 44 ]]
+		-- upvalues: Callback (copy), UseDispatchResult (copy), OpenGameDetailsFunction (upval), UseNavigationResult (copy), Constants (upval), GetRbxthumbWithTypeSizeAndOptionsFunction (upval), ReactModule (upval), ExperienceTileV3 (upval), UseStyleResult (copy), P0 (ref)
+		return ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
-			LayoutOrder = p4,
+			LayoutOrder = LayoutOrder,
 			Size = UDim2.new(1, 0, 1, 0)
 		}, {
-			Tile = reactModule.createElement(experienceTileV3, {
+			Tile = ReactModule.createElement(ExperienceTileV3, {
 				contextTextLineCount = 1,
 				hasBackground = false,
 				isHoverEnabled = false,
 				hasOutline = false,
-				experienceName = p3.name,
-				thumbnail = getRbxthumbWithTypeSizeAndOptions(p3.experienceId, constants.RbxthumbTypes.GameIcon, 150),
-				onActivated = function()
-					-- upvalues: p2 (copy), p3 (ref), p4 (ref), p5 (ref), var1 (copy), openGameDetails (copy), var2 (copy)
-					if p2 then
-						p2(p3, p4, p5)
+				experienceName = p2.name,
+				thumbnail = GetRbxthumbWithTypeSizeAndOptionsFunction(p2.experienceId, Constants.RbxthumbTypes.GameIcon, 150),
+				onActivated = function() --[[ Line: 45 ]]
+					-- upvalues: Callback (upval), p2 (copy), LayoutOrder (copy), p3 (copy), UseDispatchResult (upval), OpenGameDetailsFunction (upval), UseNavigationResult (upval)
+					if Callback then
+						Callback(p2, LayoutOrder, p3)
 					end
-					var1(openGameDetails(p3.experienceId, var2, { mountAsFullView = false, showBackButton = true }))
+					UseDispatchResult(OpenGameDetailsFunction(p2.experienceId, UseNavigationResult, { mountAsFullView = false, showBackButton = true }))
 				end,
 				styleProps = {
 					bottomContentPadding = {
 						Left = 0,
 						Right = 0,
-						Top = var3.Tokens.Padding.Small,
-						Bottom = var3.Tokens.Padding.Small
+						Top = UseStyleResult.Tokens.Padding.Small,
+						Bottom = UseStyleResult.Tokens.Padding.Small
 					}
 				}
 			})
-		}), `{p1}{p3.experienceId}_`
+		}), `{P0}{p2.experienceId}_`
 	end, {
-		var1,
-		var2,
-		var3.Tokens.Padding.Small,
-		p2,
-		p1
-	})
+		UseDispatchResult,
+		UseNavigationResult,
+		UseStyleResult.Tokens.Padding.Small,
+		Callback,
+		P0
+	}))
 end

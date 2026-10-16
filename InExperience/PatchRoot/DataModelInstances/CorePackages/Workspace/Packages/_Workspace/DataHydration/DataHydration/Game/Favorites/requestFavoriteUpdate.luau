@@ -1,13 +1,15 @@
-﻿local httpRequestModule = require(script:FindFirstAncestor("DataHydration").Parent.HttpRequest)
-local httpService = game:GetService("HttpService")
-local favoritesUrlBuilderModule = require(script.Parent.FavoritesUrlBuilder)
+﻿local HttpRequestModule = require(script:FindFirstAncestor("DataHydration").Parent.HttpRequest)
+local HttpService = game:GetService("HttpService")
+local FavoritesUrlBuilderModule = require(script.Parent.FavoritesUrlBuilder)
 
-return function(p1, p2)
-	-- upvalues: favoritesUrlBuilderModule (ref), httpService (ref), httpRequestModule (ref)
-	return httpRequestModule.config({
-		requestFunction = function(p3, p4, p5)
-			-- upvalues: httpRequestModule (copy)
-			return httpRequestModule.requestFunctions.HttpRbxApi(p3, p4, p5)
+return function(p1, IsFavorited) --[[ Line: 10 | Named "requestUpdateFavorite" ]]
+	-- upvalues: FavoritesUrlBuilderModule (copy), HttpService (copy), HttpRequestModule (copy)
+	return HttpRequestModule.config({
+		requestFunction = function(p2, p3, p4) --[[ Line: 18 ]]
+			-- upvalues: HttpRequestModule (upval)
+			return HttpRequestModule.requestFunctions.HttpRbxApi(p2, p3, p4)
 		end
-	})(favoritesUrlBuilderModule.buildFavoriteUpdateUrl(p1), "POST", { postBody = httpService:JSONEncode({ isFavorited = p2 }) })
+	})(FavoritesUrlBuilderModule.buildFavoriteUpdateUrl(p1), "POST", {
+		postBody = HttpService:JSONEncode({ isFavorited = IsFavorited })
+	})
 end

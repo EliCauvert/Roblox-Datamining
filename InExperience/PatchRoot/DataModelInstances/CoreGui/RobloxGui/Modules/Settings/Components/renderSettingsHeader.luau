@@ -1,60 +1,58 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local reactModule = require(corePackagesService.Packages.React)
-local reactRobloxModule = require(corePackagesService.Packages.ReactRoblox)
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local localizationModule = require(corePackagesService.Workspace.Packages.Localization)
-local settingReactViewModule = require(corePackagesService.Workspace.Packages.SettingReactView)
-local coreScriptsCommonModule = require(corePackagesService.Workspace.Packages.CoreScriptsCommon)
-local inExperienceMenuReactModule = require(script.Parent.Parent.InExperienceMenuReact)
-local create = require(corePackagesService.Workspace.Packages.AppCommonLib).Create
-local useLocalization = localizationModule.Hooks.useLocalization
-local headerText = settingReactViewModule.HeaderText
-local settingsShowSignal = coreScriptsCommonModule.SettingsShowSignal
-local view = foundationModule.View
-local useTokens = foundationModule.Hooks.useTokens
+﻿local CorePackages = game:GetService("CorePackages")
+local ReactModule = require(CorePackages.Packages.React)
+local ReactRobloxModule = require(CorePackages.Packages.ReactRoblox)
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local InExperienceMenuReactModule = require(script.Parent.Parent.InExperienceMenuReact)
+local CreateFunction = require(CorePackages.Workspace.Packages.AppCommonLib).Create
+local UseLocalizationFunction = require(CorePackages.Workspace.Packages.Localization).Hooks.useLocalization
+local HeaderText = require(CorePackages.Workspace.Packages.SettingReactView).HeaderText
+local SettingsShowSignal = require(CorePackages.Workspace.Packages.CoreScriptsCommon).SettingsShowSignal
+local View = FoundationModule.View
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-local function HeaderTextContainer(p1)
-	-- upvalues: useLocalization (ref), useTokens (ref), reactModule (ref), view (ref), headerText (ref)
-	return reactModule.createElement(view, {
+local function HeaderTextContainer(p1) --[[ Line: 26 ]]
+	-- upvalues: UseLocalizationFunction (copy), UseTokensFunction (copy), ReactModule (copy), View (copy), HeaderText (copy)
+	return ReactModule.createElement(View, {
 		tag = "auto-xy",
 		padding = {
 			left = UDim.new(0, 10),
-			bottom = UDim.new(0, useTokens().Padding.Small)
+			bottom = UDim.new(0, UseTokensFunction().Padding.Small)
 		}
 	}, {
-		Text = reactModule.createElement(headerText, {
-			text = useLocalization({ headerText = p1.text }).headerText
+		Text = ReactModule.createElement(HeaderText, {
+			text = UseLocalizationFunction({ headerText = p1.text }).headerText
 		})
 	})
 end
 
-return function(value)
-	-- upvalues: create (ref), settingsShowSignal (ref), reactRobloxModule (ref), reactModule (ref), inExperienceMenuReactModule (ref), HeaderTextContainer (ref)
-	local var1 = create("Frame")({
+return function(p1) --[[ Line: 44 | Named "renderSettingsHeader" ]]
+	-- upvalues: CreateFunction (copy), SettingsShowSignal (copy), ReactRobloxModule (copy), ReactModule (copy), InExperienceMenuReactModule (copy), HeaderTextContainer (copy)
+	local v1 = CreateFunction("Frame")({
 		Name = "HeaderWrapper",
 		BackgroundTransparency = 1,
 		Size = UDim2.fromScale(1, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
-		LayoutOrder = value.layoutOrder,
-		Parent = value.parent
+		LayoutOrder = p1.layoutOrder,
+		Parent = p1.parent
 	})
-	local var2 = nil
-	settingsShowSignal:connect(function(p1)
-		-- upvalues: var2 (write), var1 (ref), value (ref), reactRobloxModule (copy), reactModule (copy), inExperienceMenuReactModule (copy), HeaderTextContainer (copy)
-		if p1 then
-			var1.Parent = value.parent
-			var2 = reactRobloxModule.createRoot(var1)
-			var2:render(reactModule.createElement(inExperienceMenuReactModule, nil, {
-				HeaderTextContainer = reactModule.createElement(HeaderTextContainer, { text = value.headerText })
+	local Root = nil
+	SettingsShowSignal:connect(function(p2) --[[ Line: 55 ]]
+		-- upvalues: Root (ref), v1 (copy), p1 (copy), ReactRobloxModule (upval), ReactModule (upval), InExperienceMenuReactModule (upval), HeaderTextContainer (upval)
+		if p2 then
+			v1.Parent = p1.parent
+			Root = ReactRobloxModule.createRoot(v1)
+			Root:render(ReactModule.createElement(InExperienceMenuReactModule, nil, {
+				HeaderTextContainer = ReactModule.createElement(HeaderTextContainer, { text = p1.headerText })
 			}))
 			
 			return
-		elseif var2 then
-			var2:unmount()
-			var2 = nil
-			var1.Parent = nil
+		end
+		if Root then
+			Root:unmount()
+			Root = nil
+			v1.Parent = nil
 		end
 	end)
 	
-	return var1
+	return v1
 end

@@ -1,5 +1,5 @@
-﻿local keyCodeCategoriesModule = require(script.Parent.KeyCodeCategories)
-local t = {
+﻿local KeyCodeCategoriesModule = require(script.Parent.KeyCodeCategories)
+local config = {
 	QuotedDouble = true,
 	Hash = true,
 	Dollar = true,
@@ -21,7 +21,7 @@ local t = {
 	RightCurly = true,
 	Tilde = true
 }
-local t_1 = {
+local config1 = {
 	Unknown = "Sentinel value when no key is pressed.",
 	Backspace = "Deletes the character before the cursor.",
 	Tab = "Tab key; moves focus between fields.",
@@ -44,7 +44,7 @@ local t_1 = {
 	Break = "Break key. Only present on some keyboards.",
 	Menu = "Context Menu key.",
 	Power = "Power key. Only present on some keyboards.",
-	Euro = "Euro (\226\130\172) key. Only present on some keyboards.",
+	Euro = "Euro (€) key. Only present on some keyboards.",
 	Undo = "Undo key. Only present on some keyboards.",
 	MouseLeftButton = "Primary mouse button.",
 	MouseRightButton = "Secondary mouse button.",
@@ -68,11 +68,11 @@ local t_1 = {
 	Thumbstick2Left = "Right stick pushed left.",
 	Thumbstick2Right = "Right stick pushed right."
 }
-local t_2 = {
+local config2 = {
 	Letters = "Single letter key on a QWERTY layout.",
 	Numbers = "Top-row digit key on a QWERTY layout.",
 	Keypad = "Key on the numeric keypad cluster.",
-	["Function keys"] = "Function key row (F1\226\128\147F15).",
+	["Function keys"] = "Function key row (F1–F15).",
 	Arrows = "Arrow key.",
 	Navigation = "Navigation/editing key.",
 	Modifiers = "Modifier key (Shift, Ctrl, Alt, Caps Lock).",
@@ -84,19 +84,20 @@ local t_2 = {
 }
 
 return {
-	getKeyCodeNote = function(p1)
-		-- upvalues: keyCodeCategoriesModule (ref), t_1 (ref), t (ref), t_2 (ref)
-		local keyCodeName = keyCodeCategoriesModule.getKeyCodeName(p1)
+	getKeyCodeNote = function(p1) --[[ Line: 97 ]]
+		-- upvalues: KeyCodeCategoriesModule (copy), config1 (copy), config (copy), config2 (copy)
+		local KeyCodeName = KeyCodeCategoriesModule.getKeyCodeName(p1)
 		
-		if t_1[keyCodeName] then
-			return t_1[keyCodeName]
-		elseif keyCodeName:match("^World%d+$") then
-			return "Deprecated legacy SDL2 placeholder (World0\226\128\147World95). Not reliably emitted by modern input."
-		elseif t[keyCodeName] then
+		if config1[KeyCodeName] then
+			return config1[KeyCodeName]
+		elseif KeyCodeName:match("^World%d+$") then
+			return "Deprecated legacy SDL2 placeholder (World0–World95). Not reliably emitted by modern input."
+		elseif config[KeyCodeName] then
 			return "Shifted symbol KeyCode. Prefer detecting the base key plus Shift; rarely emitted on its own."
+		else
+			local Category = KeyCodeCategoriesModule.getCategory(p1)
+			
+			return if Category == "Other" or Category == "Deprecated" then config2[Category] else nil
 		end
-		local category = keyCodeCategoriesModule.getCategory(p1)
-		
-		return if category == "Other" or category == "Deprecated" then t_2[category] else nil
 	end
 }

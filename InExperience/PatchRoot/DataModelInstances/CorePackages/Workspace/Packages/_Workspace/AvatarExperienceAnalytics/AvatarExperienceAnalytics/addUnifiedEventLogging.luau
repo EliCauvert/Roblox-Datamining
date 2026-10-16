@@ -1,40 +1,40 @@
-﻿local collectionService = game:GetService("CollectionService")
-local unifiedEventLogConstantsModule = require(script.Parent.UnifiedEventLogConstants)
-local avatarExperienceFlagsModule = require(script:FindFirstAncestor("AvatarExperienceAnalytics").Parent.AvatarExperienceFlags)
-local fFlagAXMISEnableMultiShoppingUnifiedEvents = avatarExperienceFlagsModule.FFlagAXMISEnableMultiShoppingUnifiedEvents
-local fFlagAXSkipTapDetection = avatarExperienceFlagsModule.FFlagAXSkipTapDetection
-local fFlagAXUnifiedImpressionsOnThumbnail = avatarExperienceFlagsModule.FFlagAXUnifiedImpressionsOnThumbnail
-local t = {
+﻿local CollectionService = game:GetService("CollectionService")
+local UnifiedEventLogConstantsModule = require(script.Parent.UnifiedEventLogConstants)
+local AvatarExperienceFlagsModule = require(script:FindFirstAncestor("AvatarExperienceAnalytics").Parent.AvatarExperienceFlags)
+local FFlagAXMISEnableMultiShoppingUnifiedEvents = AvatarExperienceFlagsModule.FFlagAXMISEnableMultiShoppingUnifiedEvents
+local FFlagAXSkipTapDetection = AvatarExperienceFlagsModule.FFlagAXSkipTapDetection
+local FFlagAXUnifiedImpressionsOnThumbnail = AvatarExperienceFlagsModule.FFlagAXUnifiedImpressionsOnThumbnail
+local config = {
 	table = true,
 	string = true,
 	number = true,
 	boolean = true
 }
 
-return function(p1, p2, p3)
-	-- upvalues: collectionService (ref), unifiedEventLogConstantsModule (ref), fFlagAXMISEnableMultiShoppingUnifiedEvents (ref), fFlagAXUnifiedImpressionsOnThumbnail (ref), fFlagAXSkipTapDetection (ref), t (ref)
+return function(p1, List, p2) --[[ Line: 27 ]]
+	-- upvalues: CollectionService (copy), UnifiedEventLogConstantsModule (copy), FFlagAXMISEnableMultiShoppingUnifiedEvents (copy), FFlagAXUnifiedImpressionsOnThumbnail (copy), FFlagAXSkipTapDetection (copy), config (copy)
 	if not p1.current then return end
-	collectionService:AddTag(p1.current, unifiedEventLogConstantsModule.TAG_NAME)
+	CollectionService:AddTag(p1.current, UnifiedEventLogConstantsModule.TAG_NAME)
 	
-	if p3 and p3.hasDeferredActions then
-		p1.current:SetAttribute(unifiedEventLogConstantsModule.HAS_DEFERRED_ACTION, true)
+	if p2 and p2.hasDeferredActions then
+		p1.current:SetAttribute(UnifiedEventLogConstantsModule.HAS_DEFERRED_ACTION, true)
 	end
-	if fFlagAXMISEnableMultiShoppingUnifiedEvents and p3 and p3.isSelected ~= nil then
-		p1.current:SetAttribute(unifiedEventLogConstantsModule.IS_SELECTED, p3.isSelected)
+	if FFlagAXMISEnableMultiShoppingUnifiedEvents and p2 and p2.isSelected ~= nil then
+		p1.current:SetAttribute(UnifiedEventLogConstantsModule.IS_SELECTED, p2.isSelected)
 	end
-	if p3 and p3.sessionTagName then
-		p1.current:SetAttribute(unifiedEventLogConstantsModule.SESSION_TAG_NAME, p3.sessionTagName)
+	if p2 and p2.sessionTagName then
+		p1.current:SetAttribute(UnifiedEventLogConstantsModule.SESSION_TAG_NAME, p2.sessionTagName)
 	end
-	if fFlagAXUnifiedImpressionsOnThumbnail and p3 and p3.skipImpressionDetection then
-		p1.current:SetAttribute(unifiedEventLogConstantsModule.SKIP_IMPRESSION_DETECTION, true)
+	if FFlagAXUnifiedImpressionsOnThumbnail and p2 and p2.skipImpressionDetection then
+		p1.current:SetAttribute(UnifiedEventLogConstantsModule.SKIP_IMPRESSION_DETECTION, true)
 	end
-	if fFlagAXSkipTapDetection then
-		p1.current:SetAttribute(unifiedEventLogConstantsModule.SKIP_TAP_DETECTION, if p3 and p3.skipTapDetection then true else nil)
+	if FFlagAXSkipTapDetection then
+		p1.current:SetAttribute(UnifiedEventLogConstantsModule.SKIP_TAP_DETECTION, if p2 and p2.skipTapDetection then true else nil)
 	end
-	if p2 then
-		for i, v in p2 do
-			if t[type(p2[i])] then
-				p1.current:SetAttribute(unifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. i, if type(p2[i]) == "table" then table.concat(p2[i], ",") else p2[i])
+	if List then
+		for i, _ in List do
+			if config[type(List[i])] then
+				p1.current:SetAttribute(UnifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. i, if type(List[i]) == "table" then table.concat(List[i], ",") else List[i])
 			end
 		end
 	end

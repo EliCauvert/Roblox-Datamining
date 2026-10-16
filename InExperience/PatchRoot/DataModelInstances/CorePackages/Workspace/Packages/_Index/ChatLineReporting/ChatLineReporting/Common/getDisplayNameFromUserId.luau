@@ -1,13 +1,13 @@
-﻿local userService = game:GetService("UserService")
+﻿local UserService = game:GetService("UserService")
 
-function getDisplayNameFromUserId(p1)
-	-- upvalues: userService (ref)
-	local ok, status = pcall(function()
-		-- upvalues: userService (copy), p1 (ref)
-		return userService:GetUserInfosByUserIdsAsync({ tonumber(p1) })[1]
+function getDisplayNameFromUserId(p1) --[[ Line: 3 ]]
+	-- upvalues: UserService (copy)
+	local Success, Result = pcall(function() --[[ Line: 4 ]]
+		-- upvalues: UserService (upval), p1 (copy)
+		return UserService:GetUserInfosByUserIdsAsync({ (tonumber(p1)) })[1]
 	end)
 	
-	return if ok then status.DisplayName else ""
+	return if Success then Result.DisplayName else ""
 end
 
 return getDisplayNameFromUserId

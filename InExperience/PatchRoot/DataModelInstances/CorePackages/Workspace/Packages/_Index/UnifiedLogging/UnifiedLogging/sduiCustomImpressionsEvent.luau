@@ -1,17 +1,17 @@
-﻿local telemetryService = game:GetService("TelemetryService")
-local luaAppItemImpressionsEventThrottlingHundredthsPercent = game:DefineFastInt("LuaAppItemImpressionsEventThrottlingHundredthsPercent", 10000)
+﻿local TelemetryService = game:GetService("TelemetryService")
+local LuaAppItemImpressionsEventThrottlingHundredthsPercent = game:DefineFastInt("LuaAppItemImpressionsEventThrottlingHundredthsPercent", 10000)
 
-return function(p1, p2, p3)
-	-- upvalues: telemetryService (ref), luaAppItemImpressionsEventThrottlingHundredthsPercent (ref)
-	telemetryService:LogEvent({
-		eventName = p1,
+return function(EventName, EventContext, CustomFields) --[[ Line: 7 | Named "sduiCustomImpressionsEvent" ]]
+	-- upvalues: TelemetryService (copy), LuaAppItemImpressionsEventThrottlingHundredthsPercent (copy)
+	TelemetryService:LogEvent({
+		eventName = EventName,
 		backends = { "EventIngest", "Points" },
-		throttlingPercentage = luaAppItemImpressionsEventThrottlingHundredthsPercent,
+		throttlingPercentage = LuaAppItemImpressionsEventThrottlingHundredthsPercent,
 		lastUpdated = { 26, 3, 17 },
-		description = `SDUI custom impression event: {p1}`
+		description = `SDUI custom impression event: {EventName}`
 	}, {
-		eventContext = p2,
+		eventContext = EventContext,
 		standardizedFields = { "addSessionInfo", "addSessionId", "addOSInfo" },
-		customFields = p3
+		customFields = CustomFields
 	})
 end

@@ -1,12 +1,13 @@
-﻿local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
-local getAvatarEventCounterNameWithPlatformModule = require(script.Parent.getAvatarEventCounterNameWithPlatform)
+﻿local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
+local GetAvatarEventCounterNameWithPlatformModule = require(script.Parent.getAvatarEventCounterNameWithPlatform)
 
-return function(p1)
-	-- upvalues: rbxAnalyticsService (ref), getAvatarEventCounterNameWithPlatformModule (ref)
+return function(p1) --[[ Line: 4 | Named "reportAvatarEventCounterNoAnalyticsArgument" ]]
+	-- upvalues: RbxAnalyticsService (copy), GetAvatarEventCounterNameWithPlatformModule (copy)
 	if p1 then
-		rbxAnalyticsService:ReportCounter(getAvatarEventCounterNameWithPlatformModule(p1), 1)
+		RbxAnalyticsService:ReportCounter(GetAvatarEventCounterNameWithPlatformModule(p1), 1)
 		
 		return
+	else
+		RbxAnalyticsService:ReportCounter("AvatarExperienceCounterMiss", 1)
 	end
-	rbxAnalyticsService:ReportCounter("AvatarExperienceCounterMiss", 1)
 end

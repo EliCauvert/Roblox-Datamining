@@ -1,65 +1,67 @@
-﻿local inExperienceShop = script:FindFirstAncestor("InExperienceShop")
-local parent = inExperienceShop.Parent
-local reactModule = require(parent.React)
-local signal = require(parent.AppCommonLib).Signal
-local fFlagEnableInExperienceShopUnifiedLoggingModule = require(inExperienceShop.Flags.FFlagEnableInExperienceShopUnifiedLogging)
+﻿local InExperienceShop = script:FindFirstAncestor("InExperienceShop")
+local Parent = InExperienceShop.Parent
+local ReactModule = require(Parent.React)
+local Signal = require(Parent.AppCommonLib).Signal
+local FFlagEnableInExperienceShopUnifiedLoggingModule = require(InExperienceShop.Flags.FFlagEnableInExperienceShopUnifiedLogging)
 
-local var1 = function() end
+local function OnLayoutChange() --[[ Line: 22 ]] end
 
-return function(p1)
-	-- upvalues: fFlagEnableInExperienceShopUnifiedLoggingModule (ref), var1 (ref), reactModule (ref), signal (ref), inExperienceShop (ref)
-	if fFlagEnableInExperienceShopUnifiedLoggingModule then
-		local var2 = reactModule.useMemo(function()
-			-- upvalues: signal (copy)
-			return signal.new()
+return function(p1) --[[ Line: 24 | Named "useShopImpressionsDetector" ]]
+	-- upvalues: FFlagEnableInExperienceShopUnifiedLoggingModule (copy), OnLayoutChange (copy), ReactModule (copy), Signal (copy), InExperienceShop (copy)
+	if FFlagEnableInExperienceShopUnifiedLoggingModule then
+		local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 33 ]]
+			-- upvalues: Signal (upval)
+			return Signal.new()
 		end, {})
-		local var3 = reactModule.useRef(nil)
-		reactModule.useEffect(function()
-			-- upvalues: p1 (ref), var2 (ref)
-			local externalScrollSignal = p1.externalScrollSignal
+		local UseRefResult = ReactModule.useRef(nil)
+		ReactModule.useEffect(function() --[[ Line: 39 ]]
+			-- upvalues: p1 (copy), UseMemoResult (copy)
+			local ExternalScrollSignal = p1.externalScrollSignal
 			
-			if externalScrollSignal == nil then
-				return function() end
+			if ExternalScrollSignal == nil then
+				return function() --[[ Line: 42 ]] end
+			else
+				local Connection = ExternalScrollSignal:connect(function() --[[ Line: 45 ]]
+					-- upvalues: UseMemoResult (upval)
+					UseMemoResult:fire()
+				end)
+				
+				return function() --[[ Line: 49 ]]
+					-- upvalues: Connection (copy)
+					Connection:disconnect()
+				end
 			end
-			local var4 = externalScrollSignal:connect(function()
-				-- upvalues: var2 (copy)
-				var2:fire()
-			end)
-			
-			return function()
-				-- upvalues: var4 (ref)
-				var4:disconnect()
-			end
-		end, { p1.externalScrollSignal, var2 })
-		local var4 = reactModule.useCallback(function()
-			-- upvalues: p1 (ref)
+		end, { p1.externalScrollSignal, UseMemoResult })
+		local UseResult = ReactModule.useCallback(function() --[[ Line: 58 ]]
+			-- upvalues: p1 (copy)
 			return p1.isPageActive
 		end, { p1.isPageActive })
 		
 		return {
-			gridRef = var3,
-			onLayoutChange = reactModule.useCallback(function()
-				-- upvalues: var2 (ref)
-				var2:fire()
-			end, { var2 }),
-			impressionsDetector = reactModule.useMemo(function()
-				-- upvalues: inExperienceShop (copy), reactModule (copy), var3 (ref), var4 (ref), var2 (ref), p1 (ref)
-				local analyticsModule = require(inExperienceShop.Analytics)
+			gridRef = UseRefResult,
+			onLayoutChange = ReactModule.useCallback(function() --[[ Line: 54 ]]
+				-- upvalues: UseMemoResult (copy)
+				UseMemoResult:fire()
+			end, { UseMemoResult }),
+			impressionsDetector = ReactModule.useMemo(function() --[[ Line: 62 ]]
+				-- upvalues: InExperienceShop (upval), ReactModule (upval), UseRefResult (copy), UseResult (copy), UseMemoResult (copy), p1 (copy)
+				local AnalyticsModule = require(InExperienceShop.Analytics)
 				
-				return reactModule.createElement(analyticsModule.ShopTagBasedImpressionsDetector, {
-					parentRef = var3,
-					pageFilter = var4,
-					requestImpressionsSignal = var2,
+				return ReactModule.createElement(AnalyticsModule.ShopTagBasedImpressionsDetector, {
+					parentRef = UseRefResult,
+					pageFilter = UseResult,
+					requestImpressionsSignal = UseMemoResult,
 					extensions = {
-						analyticsModule.InExperienceShopUnifiedImpressionsReporter(p1.pageType)
+						AnalyticsModule.InExperienceShopUnifiedImpressionsReporter(p1.pageType)
 					}
 				})
-			end, { p1.pageType, var4, var2 })
+			end, { p1.pageType, UseResult, UseMemoResult })
+		}
+	else
+		return {
+			impressionsDetector = nil,
+			gridRef = { current = nil },
+			onLayoutChange = OnLayoutChange
 		}
 	end
-	return {
-		impressionsDetector = nil,
-		gridRef = { current = nil },
-		onLayoutChange = var1
-	}
 end

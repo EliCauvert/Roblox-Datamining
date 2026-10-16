@@ -1,81 +1,81 @@
-﻿local virtualEvents = script:FindFirstAncestor("VirtualEvents")
-local getEventCtaButtonStateModule = require(virtualEvents.Common.getEventCtaButtonState)
-local _ = require(virtualEvents.Parent.GraphQLServer)
-local reactModule = require(virtualEvents.Parent.React)
-local UIBloxModule = require(virtualEvents.Parent.UIBlox)
-local useLocalization = require(virtualEvents.Parent.Localization).Hooks.useLocalization
-local _ = require(virtualEvents.Parent.VirtualEventsState)
-local usePlayButtonState = require(virtualEvents.Parent.GamePlayButton).usePlayButtonState
-local roactNetworking = require(virtualEvents.Parent.RoactServiceTags).RoactNetworking
-local useRoactService = require(virtualEvents.Parent.RobloxAppHooks).useRoactService
-local images = UIBloxModule.App.ImageSet.Images
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
+﻿local VirtualEvents = script:FindFirstAncestor("VirtualEvents")
+local GetEventCtaButtonStateModule = require(VirtualEvents.Common.getEventCtaButtonState)
+local _ = require(VirtualEvents.Parent.GraphQLServer)
+local ReactModule = require(VirtualEvents.Parent.React)
+local UIBloxModule = require(VirtualEvents.Parent.UIBlox)
+local UseLocalizationFunction = require(VirtualEvents.Parent.Localization).Hooks.useLocalization
+local _ = require(VirtualEvents.Parent.VirtualEventsState)
+local UsePlayButtonStateFunction = require(VirtualEvents.Parent.GamePlayButton).usePlayButtonState
+local RoactNetworking = require(VirtualEvents.Parent.RoactServiceTags).RoactNetworking
+local UseRoactServiceFunction = require(VirtualEvents.Parent.RobloxAppHooks).useRoactService
+local Images = UIBloxModule.App.ImageSet.Images
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
 
-return function(p1, p2, p3, p4)
-	-- upvalues: useLocalization (ref), useRoactService (ref), roactNetworking (ref), usePlayButtonState (ref), getEventCtaButtonStateModule (ref), reactModule (ref), buttonType (ref), images (ref)
-	local var1 = useLocalization({
+return function(p1, p2, p3, ButtonRef) --[[ Line: 65 | Named "useActionBarProps" ]]
+	-- upvalues: UseLocalizationFunction (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), UsePlayButtonStateFunction (copy), GetEventCtaButtonStateModule (copy), ReactModule (copy), ButtonType (copy), Images (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
 		notifyMe = "Feature.VirtualEvents.NotifyMe",
 		unfollowEvent = "Feature.VirtualEvents.UnfollowEvent",
 		joinEvent = "Feature.VirtualEvents.JoinEvent",
 		goHome = "Feature.VirtualEvents.GoHome"
 	})
-	local var2 = getEventCtaButtonStateModule(usePlayButtonState(useRoactService(roactNetworking), tostring(p1.universeId)))
-	local isJoinEventDisabled = var2.isJoinEventDisabled
-	local isRsvpDisabled = var2.isRsvpDisabled
-	local var3 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), p2 (ref), buttonType (copy), var1 (ref), images (copy), p3 (ref), p4 (ref), isRsvpDisabled (ref), isJoinEventDisabled (ref)
+	local EventCtaButtonStateModule = GetEventCtaButtonStateModule((UsePlayButtonStateFunction(UseRoactServiceFunction(RoactNetworking), (tostring(p1.universeId)))))
+	local IsJoinEventDisabled = EventCtaButtonStateModule.isJoinEventDisabled
+	local IsRsvpDisabled = EventCtaButtonStateModule.isRsvpDisabled
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 85 ]]
+		-- upvalues: p1 (copy), p2 (copy), ButtonType (upval), UseLocalizationResult (copy), Images (upval), p3 (copy), ButtonRef (copy), IsRsvpDisabled (copy), IsJoinEventDisabled (copy)
 		return if p1.eventStatus == "cancelled" or p1.eventStatus == "moderated" then {
 			props = {
-				buttonType = buttonType.Secondary,
-				text = var1.goHome,
+				buttonType = ButtonType.Secondary,
+				text = UseLocalizationResult.goHome,
 				onActivated = p3.onClose,
-				buttonRef = p4
+				buttonRef = ButtonRef
 			}
 		} elseif p2 == "Upcoming" or p2 == "UpcomingImminent" then if p1.userRsvpStatus == "going" then {
 			props = {
-				buttonType = buttonType.Secondary,
-				text = var1.unfollowEvent,
-				icon = images["icons/actions/favoriteOn"],
+				buttonType = ButtonType.Secondary,
+				text = UseLocalizationResult.unfollowEvent,
+				icon = Images["icons/actions/favoriteOn"],
 				onActivated = p3.onRsvpChanged,
-				buttonRef = p4,
-				isDisabled = isRsvpDisabled
+				buttonRef = ButtonRef,
+				isDisabled = IsRsvpDisabled
 			}
 		} else {
 			props = {
-				buttonType = buttonType.PrimarySystem,
-				text = var1.notifyMe,
-				icon = images["icons/actions/favoriteOff"],
+				buttonType = ButtonType.PrimarySystem,
+				text = UseLocalizationResult.notifyMe,
+				icon = Images["icons/actions/favoriteOff"],
 				onActivated = p3.onRsvpChanged,
-				buttonRef = p4,
-				isDisabled = isRsvpDisabled
+				buttonRef = ButtonRef,
+				isDisabled = IsRsvpDisabled
 			}
 		} elseif p2 == "Ongoing" or p2 == "ElapsedImminent" then {
 			props = {
-				buttonType = buttonType.PrimaryContextual,
-				text = var1.joinEvent,
+				buttonType = ButtonType.PrimaryContextual,
+				text = UseLocalizationResult.joinEvent,
 				onActivated = p3.onJoinEvent,
-				buttonRef = p4,
-				isDisabled = isJoinEventDisabled
+				buttonRef = ButtonRef,
+				isDisabled = IsJoinEventDisabled
 			}
 		} else nil
 	end, {
-		p1, p2, p3, p4, isRsvpDisabled, isJoinEventDisabled
+		p1, p2, p3, ButtonRef, IsRsvpDisabled, IsJoinEventDisabled
 	})
-	local var4 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), p2 (ref), images (copy), p3 (ref)
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 145 ]]
+		-- upvalues: p1 (copy), p2 (copy), Images (upval), p3 (copy)
 		return if p1.eventStatus == "cancelled" or p1.eventStatus == "moderated" or p2 == "Elapsed" then nil else {
 			props = {
 				userInteractionEnabled = true,
 				anchorPoint = Vector2.new(0.5, 0.5),
 				position = UDim2.fromScale(0.5, 0.5),
-				icon = images["icons/actions/share"],
+				icon = Images["icons/actions/share"],
 				onActivated = p3.onShare
 			}
 		}
 	end, { p1, p2, p3 })
 	
-	return reactModule.useMemo(function()
-		-- upvalues: var3 (ref), var4 (ref)
-		return { button = var3, icons = { var4 } }
-	end, { var3, var4 })
+	return (ReactModule.useMemo(function() --[[ Line: 165 ]]
+		-- upvalues: UseMemoResult (copy), UseMemoResult1 (copy)
+		return { button = UseMemoResult, icons = { UseMemoResult1 } }
+	end, { UseMemoResult, UseMemoResult1 }))
 end

@@ -1,74 +1,75 @@
-﻿local inExperienceIntervention = script:FindFirstAncestor("InExperienceIntervention")
-local parent = inExperienceIntervention.Parent
-local abuseVectorModule = require(parent.UniversalFeatureRestrictions.AbuseVector)
-local constants = require(parent.InterventionShared).Utils.Constants
-local interventionAnalytics = require(parent.InterventionShared).InterventionAnalytics
-local interventionTreatmentShownSignal = require(parent.InterventionShared).Signals.interventionTreatmentShownSignal
-local partyChatTimeoutReceivedSignal = require(parent.InterventionShared).Signals.partyChatTimeoutReceivedSignal
-local showFeatureRestrictionFromRealtimeModule = require(parent.UniversalFeatureRestrictions.showFeatureRestrictionFromRealtime)
-local fFlagAppChatReactiveFeatureRestrictions = require(parent.SharedFlags).FFlagAppChatReactiveFeatureRestrictions
-local fFlagAppChatUniversalFeatureRestriction = require(parent.SharedFlags).FFlagAppChatUniversalFeatureRestriction
-local _ = require(inExperienceIntervention.Utils.Types)
+﻿local InExperienceIntervention = script:FindFirstAncestor("InExperienceIntervention")
+local Parent = InExperienceIntervention.Parent
+local AbuseVectorModule = require(Parent.UniversalFeatureRestrictions.AbuseVector)
+local Constants = require(Parent.InterventionShared).Utils.Constants
+local InterventionAnalytics = require(Parent.InterventionShared).InterventionAnalytics
+local InterventionTreatmentShownSignal = require(Parent.InterventionShared).Signals.interventionTreatmentShownSignal
+local PartyChatTimeoutReceivedSignal = require(Parent.InterventionShared).Signals.partyChatTimeoutReceivedSignal
+local ShowFeatureRestrictionFromRealtimeModule = require(Parent.UniversalFeatureRestrictions.showFeatureRestrictionFromRealtime)
+local FFlagAppChatReactiveFeatureRestrictions = require(Parent.SharedFlags).FFlagAppChatReactiveFeatureRestrictions
+local FFlagAppChatUniversalFeatureRestriction = require(Parent.SharedFlags).FFlagAppChatUniversalFeatureRestriction
+local _ = require(InExperienceIntervention.Utils.Types)
 
-local function onPartyChatTimeoutUFRShown()
-	-- upvalues: interventionTreatmentShownSignal (ref), constants (ref)
-	interventionTreatmentShownSignal:fire(constants.TreatmentType.PartyChatTimeoutDialog)
+local function onPartyChatTimeoutUFRShown() --[[ Line: 17 ]]
+	-- upvalues: InterventionTreatmentShownSignal (copy), Constants (copy)
+	InterventionTreatmentShownSignal:fire(Constants.TreatmentType.PartyChatTimeoutDialog)
 end
 
-local function onPartyChatTimeoutAcknowledgementSuccess()
-	-- upvalues: partyChatTimeoutReceivedSignal (ref)
-	partyChatTimeoutReceivedSignal:fire(nil)
+local function onPartyChatTimeoutAcknowledgementSuccess() --[[ Line: 20 ]]
+	-- upvalues: PartyChatTimeoutReceivedSignal (copy)
+	PartyChatTimeoutReceivedSignal:fire(nil)
 end
 
-local function onPartyChatTimeoutUFRAppeal() end
+local function onPartyChatTimeoutUFRAppeal() --[[ Line: 25 ]] end
 
 return {
 	configName = "PartyChatDialogNudge",
-	shouldTriggerVisualTreatment = function(p1)
-		-- upvalues: constants (ref)
-		return p1.type == constants.NotificationDialogType.ChatTimeout and p1.abuseVector == constants.AbuseVectorType.PartyChat
+	shouldTriggerVisualTreatment = function(p1): boolean --[[ Line: 29 ]]
+		-- upvalues: Constants (copy)
+		return p1.type == Constants.NotificationDialogType.ChatTimeout and p1.abuseVector == Constants.AbuseVectorType.PartyChat
 	end,
-	shouldTriggerBehavioralTreatment = function(p1)
-		-- upvalues: constants (ref)
-		return p1.type == constants.NotificationDialogType.ChatTimeout and p1.abuseVector == constants.AbuseVectorType.PartyChat
+	shouldTriggerBehavioralTreatment = function(p1): boolean --[[ Line: 33 ]]
+		-- upvalues: Constants (copy)
+		return p1.type == Constants.NotificationDialogType.ChatTimeout and p1.abuseVector == Constants.AbuseVectorType.PartyChat
 	end,
-	shouldTriggerEventReceived = function(p1)
-		-- upvalues: constants (ref)
-		return p1.type == constants.NotificationDialogType.ChatTimeout and p1.abuseVector == constants.AbuseVectorType.PartyChat
+	shouldTriggerEventReceived = function(p1): boolean --[[ Line: 37 ]]
+		-- upvalues: Constants (copy)
+		return p1.type == Constants.NotificationDialogType.ChatTimeout and p1.abuseVector == Constants.AbuseVectorType.PartyChat
 	end,
-	onTriggerVisualTreatment = function(p1, p2)
-		-- upvalues: fFlagAppChatUniversalFeatureRestriction (ref), showFeatureRestrictionFromRealtimeModule (ref), abuseVectorModule (ref), onPartyChatTimeoutUFRAppeal (ref), onPartyChatTimeoutUFRShown (ref), fFlagAppChatReactiveFeatureRestrictions (ref), onPartyChatTimeoutAcknowledgementSuccess (ref), constants (ref)
-		if fFlagAppChatUniversalFeatureRestriction then
-			showFeatureRestrictionFromRealtimeModule(abuseVectorModule.PartyChat, p2, {
+	onTriggerVisualTreatment = function(Callback: (any) -> (), Detail) --[[ Line: 41 ]]
+		-- upvalues: FFlagAppChatUniversalFeatureRestriction (copy), ShowFeatureRestrictionFromRealtimeModule (copy), AbuseVectorModule (copy), onPartyChatTimeoutUFRAppeal (copy), onPartyChatTimeoutUFRShown (copy), FFlagAppChatReactiveFeatureRestrictions (copy), onPartyChatTimeoutAcknowledgementSuccess (copy), Constants (copy)
+		if FFlagAppChatUniversalFeatureRestriction then
+			ShowFeatureRestrictionFromRealtimeModule(AbuseVectorModule.PartyChat, Detail, {
 				onAppeal = onPartyChatTimeoutUFRAppeal,
 				onShown = onPartyChatTimeoutUFRShown,
-				onAcknowledgementSuccess = if fFlagAppChatReactiveFeatureRestrictions then onPartyChatTimeoutAcknowledgementSuccess else nil
+				onAcknowledgementSuccess = if FFlagAppChatReactiveFeatureRestrictions then onPartyChatTimeoutAcknowledgementSuccess else nil
 			})
 			
 			return
+		else
+			Callback({
+				isShown = true,
+				type = Constants.UIStateActions.ToggleNotificationDialog,
+				treatmentType = Constants.TreatmentType.PartyChatTimeoutDialog,
+				endTime = DateTime.now().UnixTimestamp + Detail.timeoutDurationSeconds,
+				detail = Detail
+			})
 		end
-		p1({
-			isShown = true,
-			type = constants.UIStateActions.ToggleNotificationDialog,
-			treatmentType = constants.TreatmentType.PartyChatTimeoutDialog,
-			endTime = DateTime.now().UnixTimestamp + p2.timeoutDurationSeconds,
-			detail = p2
-		})
 	end,
-	onTriggerBehavioralTreatment = function(p1)
-		-- upvalues: partyChatTimeoutReceivedSignal (ref)
-		partyChatTimeoutReceivedSignal:fire(p1.vectorTargetId)
+	onTriggerBehavioralTreatment = function(p1) --[[ Line: 60 ]]
+		-- upvalues: PartyChatTimeoutReceivedSignal (copy)
+		PartyChatTimeoutReceivedSignal:fire(p1.vectorTargetId)
 	end,
-	onTriggerEventReceived = function(p1)
-		-- upvalues: interventionAnalytics (ref), constants (ref)
-		interventionAnalytics.sendAnalyticsEvent(interventionAnalytics.TelemetryConfigs.MessageReceived, {
-			eventType = interventionAnalytics.Constants.EventTypes.ModalMessageReceived,
-			counterNamespace = interventionAnalytics.Constants.CounterNamespaceTypes.PartyChat,
-			interventionType = interventionAnalytics.Constants.InterventionTypes.PartyChatTimeout,
+	onTriggerEventReceived = function(p1) --[[ Line: 63 ]]
+		-- upvalues: InterventionAnalytics (copy), Constants (copy)
+		InterventionAnalytics.sendAnalyticsEvent(InterventionAnalytics.TelemetryConfigs.MessageReceived, {
+			eventType = InterventionAnalytics.Constants.EventTypes.ModalMessageReceived,
+			counterNamespace = InterventionAnalytics.Constants.CounterNamespaceTypes.PartyChat,
+			interventionType = InterventionAnalytics.Constants.InterventionTypes.PartyChatTimeout,
 			renderedTimestamp = DateTime.now().UnixTimestampMillis,
 			eventId = p1.decisionEventId,
 			duration = p1.timeoutDurationSeconds,
-			placement = constants.InterventionPlacementType.InExperience
+			placement = Constants.InterventionPlacementType.InExperience
 		})
 	end
 }

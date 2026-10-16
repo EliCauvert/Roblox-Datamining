@@ -1,47 +1,48 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local foundationModule = require(parent.Foundation)
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local _ = require(appChat.types)
-local conversationBottomModal = require(parent.AppChatNetworking).Constants.ConversationBottomModal
-local modalConfigurationModule = require(appChat.Models.ModalConfiguration)
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local getDeepValue2Module = require(appChat.Utils.getDeepValue2)
-local socialExperimentsModule = require(parent.SocialExperiments)
-local fFlagTestDeviceForFAEUpsell = socialExperimentsModule.FFlagTestDeviceForFAEUpsell
-local deviceMeetsRequirementsForFAE = socialExperimentsModule.deviceMeetsRequirementsForFAE
-local conversationModalModule = require(script.Parent.ConversationModal)
-local appChatFAEBannerModule = require(appChat.Components.FaeBanner.AppChatFAEBanner)
-local t = {
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local FoundationModule = require(Parent.Foundation)
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local _ = require(AppChat.types)
+local ConversationBottomModal = require(Parent.AppChatNetworking).Constants.ConversationBottomModal
+local ModalConfigurationModule = require(AppChat.Models.ModalConfiguration)
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local GetDeepValue2Module = require(AppChat.Utils.getDeepValue2)
+local SocialExperimentsModule = require(Parent.SocialExperiments)
+local FFlagTestDeviceForFAEUpsell = SocialExperimentsModule.FFlagTestDeviceForFAEUpsell
+local DeviceMeetsRequirementsForFAEFunction = SocialExperimentsModule.deviceMeetsRequirementsForFAE
+local ConversationModalModule = require(script.Parent.ConversationModal)
+local AppChatFAEBannerModule = require(AppChat.Components.FaeBanner.AppChatFAEBanner)
+local config = {
 	shouldShowLegacyBottomModal = false,
-	onHeightChanged = function(_) end
+	onHeightChanged = function(_) --[[ Line: 34 ]] end
 }
 
-return reactModule.memo(function(p1)
-	-- upvalues: cryoModule (ref), t (ref), useSelector (ref), getDeepValue2Module (ref), modalConfigurationModule (ref), reactModule (ref), conversationBottomModal (ref), appChatFAEBannerModule (ref), fFlagTestDeviceForFAEUpsell (ref), deviceMeetsRequirementsForFAE (ref), conversationModalModule (ref), foundationModule (ref)
-	local var1 = cryoModule.Dictionary.union(t, p1)
-	local var2 = useSelector(function(p2)
-		-- upvalues: getDeepValue2Module (copy), var1 (ref), modalConfigurationModule (copy)
-		return getDeepValue2Module(p2, `ChatAppReducer.Modals.conversationBottomModals.{var1.conversationId}`) or modalConfigurationModule.default
+return ReactModule.memo(function(p1) --[[ Line: 37 | Named "ConversationBottomModalContainer" ]]
+	-- upvalues: CryoModule (copy), config (copy), UseSelectorFunction (copy), GetDeepValue2Module (copy), ModalConfigurationModule (copy), ReactModule (copy), ConversationBottomModal (copy), AppChatFAEBannerModule (copy), FFlagTestDeviceForFAEUpsell (copy), DeviceMeetsRequirementsForFAEFunction (copy), ConversationModalModule (copy), FoundationModule (copy)
+	local UnionResult = CryoModule.Dictionary.union(config, p1)
+	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 41 ]]
+		-- upvalues: GetDeepValue2Module (upval), UnionResult (copy), ModalConfigurationModule (upval)
+		return GetDeepValue2Module(p2, `ChatAppReducer.Modals.conversationBottomModals.{UnionResult.conversationId}`) or ModalConfigurationModule.default
 	end)
-	local var3 = reactModule.useCallback(function(p2)
-		-- upvalues: var1 (ref)
-		var1.onHeightChanged(p2.AbsoluteSize.Y)
-	end, { var1.onHeightChanged })
-	local var4 = if not (var1.shouldShowChatInputBar or not var2 or (var2.modal_variant == nil or var2.modal_variant == conversationBottomModal.None)) then reactModule.createElement(appChatFAEBannerModule, {
-		modalConfiguration = var2,
-		conversationId = var1.conversationId
+	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 46 ]]
+		-- upvalues: UnionResult (copy)
+		UnionResult.onHeightChanged(Frame.AbsoluteSize.Y)
+	end, { UnionResult.onHeightChanged })
+	local Element = if not UnionResult.shouldShowChatInputBar and UseSelectorResult and UseSelectorResult.modal_variant ~= nil and UseSelectorResult.modal_variant ~= ConversationBottomModal.None then ReactModule.createElement(AppChatFAEBannerModule, {
+		modalConfiguration = UseSelectorResult,
+		conversationId = UnionResult.conversationId
 	}) else nil
 	
-	if fFlagTestDeviceForFAEUpsell and not deviceMeetsRequirementsForFAE() then
+	if FFlagTestDeviceForFAEUpsell and not DeviceMeetsRequirementsForFAEFunction() then
 		return nil
-	elseif not var4 and var1.shouldShowLegacyBottomModal then
-		var4 = reactModule.createElement(conversationModalModule, { bodyText = var1.legacyBottomModalText })
 	end
-	return reactModule.createElement(foundationModule.View, {
+	if not Element and UnionResult.shouldShowLegacyBottomModal then
+		Element = ReactModule.createElement(ConversationModalModule, { bodyText = UnionResult.legacyBottomModalText })
+	end
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "auto-y size-full-0",
-		LayoutOrder = var1.layoutOrder,
-		onAbsoluteSizeChanged = var3
-	}, { ConversationBottomModal = var4 })
+		LayoutOrder = UnionResult.layoutOrder,
+		onAbsoluteSizeChanged = UseResult
+	}, { ConversationBottomModal = Element })
 end)

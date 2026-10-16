@@ -1,19 +1,26 @@
-﻿local constantsModule = require(script.Constants)
-local enumsModule = require(script.Enums)
-local storesModule = require(script.Stores)
-local creationFlowScreenModule = require(script.Components.CreationFlowScreen)
-local _ = require(script.Enums.CreationFlowState)
-local creationFlowLocalizationModule = require(script.Enums.CreationFlowLocalization)
+﻿local _ = require(script.Enums.CreationFlowState)
 local _ = require(script.Enums.DialogType)
 local _ = require(script.Enums.DragHandle)
 
 return {
-	Constants = constantsModule,
-	Enums = enumsModule,
-	CreationFlowLocalization = creationFlowLocalizationModule,
-	Stores = storesModule,
-	CreationFlowScreen = creationFlowScreenModule,
+	Constants = require(script.Constants),
+	Enums = require(script.Enums),
+	CreationFlowLocalization = require(script.Enums.CreationFlowLocalization),
+	Stores = require(script.Stores),
+	CreationFlowScreen = require(script.Components.CreationFlowScreen),
 	publishMomentWithUpload = require(script.Upload.publishMomentWithUpload),
+	beginCreationFlow = function(p1) --[[ Line: 24 ]]
+		require(script.Analytics.beginCreationFlow)(p1)
+	end,
+	publishMomentWithTags = function(p1, p2, p3, p4, p5, p6) --[[ Line: 28 ]]
+		return require(script.Upload.publishMomentWithTags)(p1, p2, p3, p4, p5, p6)
+	end,
+	registerAnalyticsListener = function(p1) --[[ Line: 50 ]]
+		return require(script.Analytics.hostAnalyticsListener).register(p1)
+	end,
+	resetCreationFlow = function(p1) --[[ Line: 46 ]]
+		return require(script.resetCreationFlow)(p1)
+	end,
 	isTextFiltered = require(script.Moderation.isTextFiltered),
 	makePostMetadata = require(script.Utils.makePostMetadata),
 	["jest.config"] = script["jest.config"]

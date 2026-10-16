@@ -1,54 +1,52 @@
-﻿local roactModule = require(game:GetService("CorePackages").Packages.Roact)
-local themeModule = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.Settings.Theme)
-local semibold = themeModule.font(Enum.Font.SourceSansSemibold, "Semibold")
-local var1 = themeModule.textSize(19)
-local color = Color3.fromRGB(222, 225, 227)
-local color_1 = Color3.fromRGB(255, 255, 255)
-local shareButton = roactModule.PureComponent:extend("ShareButton")
+﻿local RoactModule = require(game:GetService("CorePackages").Packages.Roact)
+local ThemeModule = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.Settings.Theme)
+local Semibold = ThemeModule.font(Enum.Font.SourceSansSemibold, "Semibold")
+local TextSizeResult = ThemeModule.textSize(19)
+local _Color3 = Color3.fromRGB(222, 225, 227)
+local _Color3_1 = Color3.fromRGB(255, 255, 255)
+local ShareButton = RoactModule.PureComponent:extend("ShareButton")
 
-function shareButton.init(p1)
+function ShareButton.init(p1) --[[ Line: 14 ]]
 	p1.state = { isHovering = false }
 end
 
-function shareButton.render(p1)
-	-- upvalues: roactModule (ref), color (ref), color_1 (ref), themeModule (ref), var1 (ref), semibold (ref)
-	local size = p1.props.size
-	local layoutOrder = p1.props.layoutOrder
-	local onShare = p1.props.onShare
-	local isEnabled = p1.props.isEnabled
+function ShareButton.render(p1) --[[ Line: 20 ]]
+	-- upvalues: RoactModule (copy), _Color3 (copy), _Color3_1 (copy), ThemeModule (copy), TextSizeResult (copy), Semibold (copy)
+	local OnShareFunction = p1.props.onShare
+	local IsEnabled = p1.props.isEnabled
 	
-	return roactModule.createElement("TextButton", {
-		LayoutOrder = layoutOrder,
-		Size = size,
+	return RoactModule.createElement("TextButton", {
+		LayoutOrder = p1.props.layoutOrder,
+		Size = p1.props.size,
 		Text = p1.props.text,
-		TextSize = var1,
-		Font = semibold,
+		TextSize = TextSizeResult,
+		Font = Semibold,
 		AutoButtonColor = false,
-		BackgroundColor3 = if p1.state.isHovering and isEnabled then color else color_1,
-		Transparency = if isEnabled then 0 else 0.5,
-		[roactModule.Event.Activated] = function()
-			-- upvalues: isEnabled (ref), onShare (ref)
-			if isEnabled then
-				onShare()
+		BackgroundColor3 = if p1.state.isHovering and IsEnabled then _Color3 else _Color3_1,
+		Transparency = if IsEnabled then 0 else 0.5,
+		[RoactModule.Event.Activated] = function() --[[ Line: 48 ]]
+			-- upvalues: IsEnabled (copy), OnShareFunction (copy)
+			if IsEnabled then
+				OnShareFunction()
 			end
 		end,
-		[roactModule.Event.InputBegan] = function()
-			-- upvalues: p1 (ref)
+		[RoactModule.Event.InputBegan] = function() --[[ Line: 53 ]]
+			-- upvalues: p1 (copy)
 			p1:setState({ isHovering = true })
 		end,
-		[roactModule.Event.InputEnded] = function()
-			-- upvalues: p1 (ref)
+		[RoactModule.Event.InputEnded] = function() --[[ Line: 56 ]]
+			-- upvalues: p1 (copy)
 			p1:setState({ isHovering = false })
 		end
 	}, {
-		Border = roactModule.createElement("UIStroke", {
+		Border = RoactModule.createElement("UIStroke", {
 			ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
-			Color = if p1.state.isHovering and isEnabled then color else color_1,
-			Thickness = themeModule.DefaultStokeThickness,
-			Transparency = if isEnabled then 0 else 0.5
+			Color = if p1.state.isHovering and IsEnabled then _Color3 else _Color3_1,
+			Thickness = ThemeModule.DefaultStokeThickness,
+			Transparency = if IsEnabled then 0 else 0.5
 		}),
-		UICorner = roactModule.createElement("UICorner", { CornerRadius = themeModule.DefaultCornerRadius })
+		UICorner = RoactModule.createElement("UICorner", { CornerRadius = ThemeModule.DefaultCornerRadius })
 	})
 end
 
-return shareButton
+return ShareButton

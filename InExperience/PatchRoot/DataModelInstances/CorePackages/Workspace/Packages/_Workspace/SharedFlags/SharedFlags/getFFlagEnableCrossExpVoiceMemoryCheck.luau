@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("EnableCrossExpVoiceMemoryCheck", false)
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetEngineFeature("PerformanceControlService") and game:GetFastFlag("EnableCrossExpVoiceMemoryCheck")
 end

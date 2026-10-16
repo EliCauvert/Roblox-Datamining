@@ -1,3 +1,3 @@
-﻿return function(p1)
-	return if string.sub(p1, 1, 7) ~= "Enabled" then p1 == "AllUsers" else true
+﻿return function(Text: string): boolean --[[ Line: 4 ]]
+	return string.sub(Text, 1, 7) == "Enabled" or Text == "AllUsers"
 end

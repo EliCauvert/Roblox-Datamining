@@ -1,41 +1,40 @@
-﻿local authCommon = script:FindFirstAncestor("AuthCommon")
-local appStorageUtilitiesModule = require(authCommon.Utils.AppStorageUtilities)
-local cryoModule = require(authCommon.Parent.Cryo)
-local defaultMaxPruneAccounts = game:DefineFastInt("DefaultMaxPruneAccounts", 50)
-local _ = require(authCommon.Utils.PreviousAccountEntry)
+﻿local AuthCommon = script:FindFirstAncestor("AuthCommon")
+local AppStorageUtilitiesModule = require(AuthCommon.Utils.AppStorageUtilities)
+local CryoModule = require(AuthCommon.Parent.Cryo)
+local DefaultMaxPruneAccounts = game:DefineFastInt("DefaultMaxPruneAccounts", 50)
+local _ = require(AuthCommon.Utils.PreviousAccountEntry)
 
-return function()
-	-- upvalues: appStorageUtilitiesModule (ref), cryoModule (ref), defaultMaxPruneAccounts (ref)
-	local var1 = cryoModule.Dictionary.values(appStorageUtilitiesModule.getPreviousAccountsList())
-	local var2 = cryoModule.List.filter(var1, function(p1)
+return function(): boolean --[[ Line: 10 | Named "prunePreviousAccountsList" ]]
+	-- upvalues: AppStorageUtilitiesModule (copy), CryoModule (copy), DefaultMaxPruneAccounts (copy)
+	local ValuesResult = CryoModule.Dictionary.values((AppStorageUtilitiesModule.getPreviousAccountsList()))
+	local FilterResult = CryoModule.List.filter(ValuesResult, function(p1): boolean --[[ Line: 13 ]]
 		return p1.signOutTimestamp == nil
 	end)
-	local var3 = cryoModule.List.filter(var1, function(p1)
+	local FilterResult1 = CryoModule.List.filter(ValuesResult, function(p1): boolean --[[ Line: 16 ]]
 		return p1.signOutTimestamp ~= nil
 	end)
 	
-	if #var3 <= defaultMaxPruneAccounts then
+	if #FilterResult1 <= DefaultMaxPruneAccounts then
 		return true
 	end
-	local var4 = cryoModule.List.sort(var3, function(p1, p2)
-		return p2.signOutTimestamp < p1.signOutTimestamp
-	end)
 	local t = {}
-	local var5 = 0
+	local Count = 0
 	
-	for i, v in ipairs(var4) do
-		if defaultMaxPruneAccounts <= var5 then break end
-		if v.userId then
-			t[v.userId] = v
+	for _, value in ipairs((CryoModule.List.sort(FilterResult1, function(p1, p2): boolean --[[ Line: 28 ]]
+		return p2.signOutTimestamp < p1.signOutTimestamp
+	end))) do
+		if DefaultMaxPruneAccounts <= Count then break end
+		if value.userId then
+			t[value.userId] = value
 		end
-		var5 += 1
+		Count += 1
 	end
-	for i, v_1 in ipairs(var2) do
-		if v_1.userId then
-			t[v_1.userId] = v_1
+	for _, value1 in ipairs(FilterResult) do
+		if value1.userId then
+			t[value1.userId] = value1
 		end
 	end
-	appStorageUtilitiesModule.setPreviousAccountsList(t)
+	AppStorageUtilitiesModule.setPreviousAccountsList(t)
 	
 	return true
 end

@@ -1,38 +1,37 @@
-﻿local serverDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
-local parent = serverDrivenUi.Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local abbreviateCount = require(parent.Localization).abbreviateCount
-local _ = require(parent.Foundation)
-local images = require(parent.FoundationImages).Images
-local _ = require(parent.SduiCoreSystem)
-local sduiGameTileActiveFriendsFooterModule = require(serverDrivenUi.Content.SduiGameTileActiveFriendsFooter)
-local sduiTileFooterModule = require(serverDrivenUi.Content.SduiTileFooter)
-local sduiInGameFriendsDataModule = require(serverDrivenUi.DataStore.SduiInGameFriendsData)
-local fFlagLuaAppFixInlineSignalsReactPattern = require(parent.SharedFlags).FFlagLuaAppFixInlineSignalsReactPattern
-local fFlagLuaAppSduiGameTileMetadataFontStyle = require(parent.SharedFlags).FFlagLuaAppSduiGameTileMetadataFontStyle
-local fFlagSduiGameTileUseFooterComponentAsDefault = require(parent.SharedFlags).FFlagSduiGameTileUseFooterComponentAsDefault
+﻿local ServerDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
+local Parent = ServerDrivenUi.Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local AbbreviateCountFunction = require(Parent.Localization).abbreviateCount
+local _ = require(Parent.Foundation)
+local Images = require(Parent.FoundationImages).Images
+local _ = require(Parent.SduiCoreSystem)
+local SduiGameTileActiveFriendsFooterModule = require(ServerDrivenUi.Content.SduiGameTileActiveFriendsFooter)
+local SduiTileFooterModule = require(ServerDrivenUi.Content.SduiTileFooter)
+local SduiInGameFriendsDataModule = require(ServerDrivenUi.DataStore.SduiInGameFriendsData)
+local FFlagLuaAppFixInlineSignalsReactPattern = require(Parent.SharedFlags).FFlagLuaAppFixInlineSignalsReactPattern
+local FFlagLuaAppSduiGameTileMetadataFontStyle = require(Parent.SharedFlags).FFlagLuaAppSduiGameTileMetadataFontStyle
+local FFlagSduiGameTileUseFooterComponentAsDefault = require(Parent.SharedFlags).FFlagSduiGameTileUseFooterComponentAsDefault
 
-return reactModule.memo(function(p1)
-	-- upvalues: sduiInGameFriendsDataModule (ref), fFlagLuaAppFixInlineSignalsReactPattern (ref), reactModule (ref), signalsReactModule (ref), sduiTileFooterModule (ref), fFlagLuaAppSduiGameTileMetadataFontStyle (ref), sduiGameTileActiveFriendsFooterModule (ref), fFlagSduiGameTileUseFooterComponentAsDefault (ref), images (ref), abbreviateCount (ref)
-	local _ = nil
-	local getInGameFriendsByGame = sduiInGameFriendsDataModule.getInGameFriendsByGame
-	local var1 = if fFlagLuaAppFixInlineSignalsReactPattern then signalsReactModule.useSignalState(reactModule.useCallback(function(p2)
-		-- upvalues: getInGameFriendsByGame (ref), p1 (ref)
-		local universeId = getInGameFriendsByGame(p2)[p1.universeId]
+return ReactModule.memo(function(p1) --[[ Line: 42 | Named "SduiGameTileFooter" ]]
+	-- upvalues: SduiInGameFriendsDataModule (copy), FFlagLuaAppFixInlineSignalsReactPattern (copy), ReactModule (copy), SignalsReactModule (copy), SduiTileFooterModule (copy), FFlagLuaAppSduiGameTileMetadataFontStyle (copy), SduiGameTileActiveFriendsFooterModule (copy), FFlagSduiGameTileUseFooterComponentAsDefault (copy), Images (copy), AbbreviateCountFunction (copy)
+	local GetInGameFriendsByGameFunction = SduiInGameFriendsDataModule.getInGameFriendsByGame
+	local UseSignalStateResult = if FFlagLuaAppFixInlineSignalsReactPattern then SignalsReactModule.useSignalState((ReactModule.useCallback(function(p2): boolean --[[ Line: 47 ]]
+		-- upvalues: GetInGameFriendsByGameFunction (copy), p1 (copy)
+		local InGameFriendsByGameEntry = GetInGameFriendsByGameFunction(p2)[p1.universeId]
 		
-		if universeId then
-			for i in universeId do
+		if InGameFriendsByGameEntry then
+			for _ in InGameFriendsByGameEntry do
 				return true
 			end
 		end
 		return false
-	end, { getInGameFriendsByGame, p1.universeId })) else signalsReactModule.useSignalState(function(p3)
-		-- upvalues: getInGameFriendsByGame (ref), p1 (ref)
-		local universeId = getInGameFriendsByGame(p3)[p1.universeId]
+	end, { GetInGameFriendsByGameFunction, p1.universeId }))) else SignalsReactModule.useSignalState(function(p3): boolean --[[ Line: 59 ]]
+		-- upvalues: GetInGameFriendsByGameFunction (copy), p1 (copy)
+		local InGameFriendsByGameEntry = GetInGameFriendsByGameFunction(p3)[p1.universeId]
 		
-		if universeId then
-			for i in universeId do
+		if InGameFriendsByGameEntry then
+			for _ in InGameFriendsByGameEntry do
 				return true
 			end
 		end
@@ -40,14 +39,15 @@ return reactModule.memo(function(p1)
 	end)
 	
 	if (p1.isSelected or p1.isHovered) and (p1.ageRatingText and p1.ageRatingText ~= "") then
-		return reactModule.createElement(sduiTileFooterModule, {
+		return ReactModule.createElement(SduiTileFooterModule, {
 			testId = "--sdui-game-tile-footer-age-rating",
 			leftText = p1.ageRatingText,
 			analyticsContext = p1.analyticsContext,
-			fontStyle = if fFlagLuaAppSduiGameTileMetadataFontStyle then p1.metadataFontStyle else nil
+			fontStyle = if FFlagLuaAppSduiGameTileMetadataFontStyle then p1.metadataFontStyle else nil
 		})
-	elseif var1 then
-		return reactModule.createElement(sduiGameTileActiveFriendsFooterModule, {
+	end
+	if UseSignalStateResult then
+		return ReactModule.createElement(SduiGameTileActiveFriendsFooterModule, {
 			testId = "--sdui-game-tile-footer-active-friends",
 			hideBorder = true,
 			placeId = p1.placeId,
@@ -55,26 +55,27 @@ return reactModule.memo(function(p1)
 			sduiContext = p1.sduiContext,
 			analyticsContext = p1.analyticsContext
 		})
-	elseif fFlagSduiGameTileUseFooterComponentAsDefault and p1.useFooterComponentAsDefault or (not p1.ratingText or p1.ratingText == "") then
+	end
+	if FFlagSduiGameTileUseFooterComponentAsDefault and p1.useFooterComponentAsDefault or (not p1.ratingText or p1.ratingText == "") then
 		return p1.footerComponent
 	end
-	local sduiContext = p1.sduiContext
-	local ratingText = p1.ratingText
-	local var2 = if p1.ratingText then images["icons/status/games/rating_small"] else nil
-	local var3 = nil
-	local var4 = nil
+	local SduiContext = p1.sduiContext
+	local RatingText = p1.ratingText
+	local IconsStatusGamesRatingSmall = if p1.ratingText then Images["icons/status/games/rating_small"] else nil
+	local IconsStatusGamesPeoplePlayingSmall = nil
+	local RightText = nil
 	
 	if p1.playerCount ~= nil then
-		var4 = if p1.playerCount == -1 then "--" else abbreviateCount(p1.playerCount, sduiContext.dependencies.localization:GetLocale())
-		var3 = images["icons/status/games/people-playing_small"]
+		RightText = if p1.playerCount == -1 then "--" else AbbreviateCountFunction(p1.playerCount, SduiContext.dependencies.localization:GetLocale())
+		IconsStatusGamesPeoplePlayingSmall = Images["icons/status/games/people-playing_small"]
 	end
-	return reactModule.createElement(sduiTileFooterModule, {
+	return ReactModule.createElement(SduiTileFooterModule, {
 		testId = "--sdui-game-tile-footer-rating",
 		sduiContext = p1.sduiContext,
-		leftText = ratingText,
-		leftIcon = var2,
-		rightText = var4,
-		rightIcon = var3,
-		fontStyle = if fFlagLuaAppSduiGameTileMetadataFontStyle then p1.metadataFontStyle else nil
+		leftText = RatingText,
+		leftIcon = IconsStatusGamesRatingSmall,
+		rightText = RightText,
+		rightIcon = IconsStatusGamesPeoplePlayingSmall,
+		fontStyle = if FFlagLuaAppSduiGameTileMetadataFontStyle then p1.metadataFontStyle else nil
 	})
 end)

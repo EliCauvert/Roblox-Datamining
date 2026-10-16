@@ -1,123 +1,131 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local guiService = game:GetService("GuiService")
-local userInputService = game:GetService("UserInputService")
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local _ = require(buildExperience.Stores.BuildLibrary.createBuildLibraryStore)
-local libraryTypesModule = require(buildExperience.Components.Library.LibraryTypes)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local GuiService = game:GetService("GuiService")
+local UserInputService = game:GetService("UserInputService")
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local _ = require(BuildExperience.Stores.BuildLibrary.createBuildLibraryStore)
+local LibraryTypesModule = require(BuildExperience.Components.Library.LibraryTypes)
 local _ = require(script.Parent.LibraryDetailView)
-local _ = require(buildExperience.Chat.chatTypes)
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
+local _ = require(BuildExperience.Chat.chatTypes)
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 
-return function(p1, p2)
-	-- upvalues: userInputService (ref), guiService (ref), reactModule (ref), useLocalization (ref), localizationStringsModule (ref), signalsReactModule (ref), libraryTypesModule (ref)
-	local var1 = if p2 ~= nil then userInputService else p2.userInputService
-	local var2 = if p2 ~= nil then guiService else p2.guiService
-	local var3 = p1.isActive ~= false
-	local var4 = p1.chatActions ~= nil
-	local var5, var6 = reactModule.useState(0)
-	local var7, var8 = reactModule.useState(0)
-	reactModule.useEffect(function()
-		-- upvalues: var4 (ref), var6 (ref), var2 (ref), var1 (ref)
-		if var4 then
-			local function updateKeyboardTop()
-				-- upvalues: var2 (copy), var6 (copy), var1 (copy)
-				var6(if var1.OnScreenKeyboardVisible then math.max(0, var1.OnScreenKeyboardPosition.Y - var2:GetGuiInset().Y) else 0)
-			end
+return function(p1, p2) --[[ Line: 36 | Named "useLibraryDetailViewModel" ]]
+	-- upvalues: UserInputService (copy), GuiService (copy), ReactModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), SignalsReactModule (copy), LibraryTypesModule (copy)
+	local UserInputService1 = if p2 == nil then UserInputService else p2.userInputService
+	local GuiService1 = if p2 == nil then GuiService else p2.guiService
+	local IsIsActive = p1.isActive ~= false
+	local HasChatActions = p1.chatActions ~= nil
+	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(0)
+	ReactModule.useEffect(function() --[[ Line: 49 ]]
+		-- upvalues: HasChatActions (copy), UseStateResult2 (copy), GuiService1 (copy), UserInputService1 (copy)
+		if not HasChatActions then
+			UseStateResult2(0)
 			
-			var6(if var1.OnScreenKeyboardVisible then math.max(0, var1.OnScreenKeyboardPosition.Y - var2:GetGuiInset().Y) else 0)
-			local var9 = var1:GetPropertyChangedSignal("OnScreenKeyboardVisible"):Connect(updateKeyboardTop)
-			local var10 = var1:GetPropertyChangedSignal("OnScreenKeyboardSize"):Connect(updateKeyboardTop)
-			local var11 = var1:GetPropertyChangedSignal("OnScreenKeyboardPosition"):Connect(updateKeyboardTop)
-			
-			return function()
-				-- upvalues: var9 (ref), var10 (ref), var11 (ref)
-				var9:Disconnect()
-				var10:Disconnect()
-				var11:Disconnect()
-			end
-		end
-		var6(0)
-	end, { var4, var1, var2 })
-	local var9 = reactModule.useCallback(function(p3)
-		-- upvalues: var8 (ref)
-		var8(p3.AbsolutePosition.Y + p3.AbsoluteSize.Y)
-	end, {})
-	local var10 = if var4 and var5 > 0 and var7 > 0 then math.max(0, var7 - var5) else 0
-	local var11 = useLocalization({
-		soundLabel = "Feature.Build.Label.Sounds",
-		composerPlaceholder = localizationStringsModule.CHAT_COMPOSER_PLACEHOLDER
-	})
-	local chatActions = p1.chatActions
-	
-	if chatActions ~= nil and (chatActions.placeholder == nil or chatActions.placeholder == "") then
-		chatActions = table.clone(chatActions)
-		chatActions.placeholder = var11.composerPlaceholder
-	end
-	local var12 = if p1.isReady then signalsReactModule.useSignalState(reactModule.useCallback(function(p3)
-		-- upvalues: p1 (ref)
-		return p1.library.getItem(p3, p1.itemId)
-	end, { p1.library, p1.itemId })) else nil
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var12 (ref), var3 (ref), libraryTypesModule (copy)
-		local resourceActions = p1.resourceActions
-		
-		if var12 == nil or not var3 then
 			return
 		end
-		local var13 = libraryTypesModule.toChatResource(var12)
-		local var14 = resourceActions.onAddResource(var13) == true
+		local function updateKeyboardTop() --[[ Line: 54 ]]
+			-- upvalues: GuiService1 (upval), UseStateResult2 (upval), UserInputService1 (upval)
+			local GuiInset = GuiService1:GetGuiInset()
+			UseStateResult2(if UserInputService1.OnScreenKeyboardVisible then math.max(0, UserInputService1.OnScreenKeyboardPosition.Y - GuiInset.Y) else 0)
+		end
 		
-		return function()
-			-- upvalues: var14 (ref), resourceActions (ref), var13 (ref)
-			if var14 then
-				resourceActions.onRemoveResource(var13)
+		local GuiInset = GuiService1:GetGuiInset()
+		UseStateResult2(if UserInputService1.OnScreenKeyboardVisible then math.max(0, UserInputService1.OnScreenKeyboardPosition.Y - GuiInset.Y) else 0)
+		local Connection = UserInputService1:GetPropertyChangedSignal("OnScreenKeyboardVisible"):Connect(updateKeyboardTop)
+		local Connection1 = UserInputService1:GetPropertyChangedSignal("OnScreenKeyboardSize"):Connect(updateKeyboardTop)
+		local Connection2 = UserInputService1:GetPropertyChangedSignal("OnScreenKeyboardPosition"):Connect(updateKeyboardTop)
+		
+		return function() --[[ Line: 69 ]]
+			-- upvalues: Connection (copy), Connection1 (copy), Connection2 (copy)
+			Connection:Disconnect()
+			Connection1:Disconnect()
+			Connection2:Disconnect()
+		end
+	end, { HasChatActions, UserInputService1, GuiService1 })
+	local UseResult = ReactModule.useCallback(function(Frame: Frame) --[[ Line: 75 ]]
+		-- upvalues: UseStateResult2_1 (copy)
+		UseStateResult2_1(Frame.AbsolutePosition.Y + Frame.AbsoluteSize.Y)
+	end, {})
+	local Largest: number = if HasChatActions and UseStateResult > 0 and UseStateResult1 > 0 then math.max(0, UseStateResult1 - UseStateResult) else 0
+	local UseLocalizationResult = UseLocalizationFunction({
+		soundLabel = "Feature.Build.Label.Sounds",
+		composerPlaceholder = LocalizationStringsModule.CHAT_COMPOSER_PLACEHOLDER
+	})
+	local ChatActions = p1.chatActions
+	
+	if ChatActions ~= nil and (ChatActions.placeholder == nil or ChatActions.placeholder == "") then
+		ChatActions = table.clone(ChatActions)
+		ChatActions.placeholder = UseLocalizationResult.composerPlaceholder
+	end
+	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useCallback(function(p3) --[[ Line: 93 ]]
+		-- upvalues: p1 (copy)
+		return p1.library.getItem(p3, p1.itemId)
+	end, { p1.library, p1.itemId })))
+	local UseSignalStateResult1 = if p1.isReady then UseSignalStateResult else nil
+	ReactModule.useEffect(function() --[[ Line: 99 ]]
+		-- upvalues: p1 (copy), UseSignalStateResult1 (copy), IsIsActive (copy), LibraryTypesModule (upval)
+		local ResourceActions = p1.resourceActions
+		
+		if UseSignalStateResult1 == nil or not IsIsActive then return end
+		local ChatResource = LibraryTypesModule.toChatResource(UseSignalStateResult1)
+		local IsOnAddResourceResult = ResourceActions.onAddResource(ChatResource) == true
+		
+		return function() --[[ Line: 106 ]]
+			-- upvalues: IsOnAddResourceResult (copy), ResourceActions (copy), ChatResource (copy)
+			if IsOnAddResourceResult then
+				ResourceActions.onRemoveResource(ChatResource)
 			end
 		end
-	end, { var12 or false, p1.resourceActions, p1.library, var3 })
-	reactModule.useEffect(function()
-		-- upvalues: var12 (ref), var3 (ref), p1 (ref)
-		if var12 == nil or var12.model == nil or not var3 then
+	end, {
+		UseSignalStateResult1 or false,
+		p1.resourceActions,
+		p1.library,
+		IsIsActive
+	})
+	ReactModule.useEffect(function() --[[ Line: 113 ]]
+		-- upvalues: UseSignalStateResult1 (copy), IsIsActive (copy), p1 (copy)
+		if UseSignalStateResult1 == nil or UseSignalStateResult1.model == nil or not IsIsActive then
 			return nil
+		else
+			local DestroyingConnection = UseSignalStateResult1.model.Destroying:Connect(p1.onBack)
+			
+			return function() --[[ Line: 118 ]]
+				-- upvalues: DestroyingConnection (copy)
+				DestroyingConnection:Disconnect()
+			end
 		end
-		local destroyingConnection = var12.model.Destroying:Connect(p1.onBack)
-		
-		return function()
-			-- upvalues: destroyingConnection (ref)
-			destroyingConnection:Disconnect()
-		end
-	end, { var12 or false, p1.onBack, var3 })
-	local var13 = if var12 == nil or var12.kind ~= "Image" then nil else var12.image
-	local var14, var15 = reactModule.useState(nil)
-	local var16 = reactModule.useCallback(function(p3)
-		-- upvalues: var15 (ref), var13 (ref)
-		var15(if p3 == Enum.AssetFetchStatus.Success then nil else var13)
-	end, { var13 or false })
-	local var17 = if var12 == nil or var12.kind ~= "Sound" then nil else var12.soundId
-	local var18 = if var12 == nil or var12.model == nil then nil else {
-		id = var12.id,
-		displayName = var12.displayName,
-		path = var12.path,
-		className = var12.className,
-		model = var12.model
+	end, { UseSignalStateResult1 or false, p1.onBack, IsIsActive })
+	local Image = if UseSignalStateResult1 == nil or UseSignalStateResult1.kind ~= "Image" then nil else UseSignalStateResult1.image
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(nil)
+	local SoundId = if UseSignalStateResult1 == nil or UseSignalStateResult1.kind ~= "Sound" then nil else UseSignalStateResult1.soundId
+	local Config = if UseSignalStateResult1 == nil or UseSignalStateResult1.model == nil then nil else {
+		id = UseSignalStateResult1.id,
+		displayName = UseSignalStateResult1.displayName,
+		path = UseSignalStateResult1.path,
+		className = UseSignalStateResult1.className,
+		model = UseSignalStateResult1.model
 	}
 	
 	return {
-		isActive = var3,
-		keyboardOverlap = var10,
-		onPageMetricsChanged = var9,
-		liveModel = var18,
-		image = var13,
-		imageLoadFailed = var13 ~= nil and var14 == var13,
-		onImageLoaded = var16,
-		soundId = var17,
-		modelName = if var12 ~= nil then nil else var12.displayName,
-		description = if var12 ~= nil then nil else var12.description,
-		status = if not p1.isReady then if var18 == nil and (var12 == nil or var12.kind ~= "Image" or (var12.image == nil or var12.image == "")) and (var12 == nil or var12.kind ~= "Sound" or (var17 == nil or var17 == "")) then "Failed" else "Ready" else "Loading",
+		isActive = IsIsActive,
+		keyboardOverlap = Largest,
+		onPageMetricsChanged = UseResult,
+		liveModel = Config,
+		image = Image,
+		imageLoadFailed = Image ~= nil and UseStateResult3 == Image,
+		onImageLoaded = ReactModule.useCallback(function(AssetFetchStatus) --[[ Line: 125 ]]
+			-- upvalues: UseStateResult2_2 (copy), Image (copy)
+			UseStateResult2_2(if AssetFetchStatus == Enum.AssetFetchStatus.Success then nil else Image)
+		end, { Image or false }),
+		soundId = SoundId,
+		modelName = if UseSignalStateResult1 == nil then nil else UseSignalStateResult1.displayName,
+		description = if UseSignalStateResult1 == nil then nil else UseSignalStateResult1.description,
+		status = if p1.isReady then if Config == nil and (UseSignalStateResult1 == nil or UseSignalStateResult1.kind ~= "Image" or UseSignalStateResult1.image == nil or UseSignalStateResult1.image == "") and (UseSignalStateResult1 == nil or UseSignalStateResult1.kind ~= "Sound" or SoundId == nil or SoundId == "") then "Failed" else "Ready" else "Loading",
 		unavailableText = p1.unavailableText,
-		soundLabel = var11.soundLabel,
-		chatActions = chatActions
+		soundLabel = UseLocalizationResult.soundLabel,
+		chatActions = ChatActions
 	}
 end

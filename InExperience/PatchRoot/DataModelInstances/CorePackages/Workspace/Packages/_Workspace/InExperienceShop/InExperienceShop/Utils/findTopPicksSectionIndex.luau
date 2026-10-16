@@ -1,19 +1,19 @@
-﻿local inExperienceShop = script:FindFirstAncestor("InExperienceShop")
-local constantsModule = require(inExperienceShop.Constants)
-local _ = require(inExperienceShop.Types)
-local fFlagIdentifyTopPicksByCategoryTypeModule = require(inExperienceShop.Flags.FFlagIdentifyTopPicksByCategoryType)
+﻿local InExperienceShop = script:FindFirstAncestor("InExperienceShop")
+local ConstantsModule = require(InExperienceShop.Constants)
+local _ = require(InExperienceShop.Types)
+local FFlagIdentifyTopPicksByCategoryTypeModule = require(InExperienceShop.Flags.FFlagIdentifyTopPicksByCategoryType)
 
-return function(p1)
-	-- upvalues: fFlagIdentifyTopPicksByCategoryTypeModule (ref), constantsModule (ref)
-	for i, v in p1 do
-		if fFlagIdentifyTopPicksByCategoryTypeModule then
-			if v.categoryType ~= constantsModule.TOP_PICKS_CATEGORY_TYPE then
-				if v.categoryType == nil then
-					if string.lower(v.name) == "top picks" then
-						return i
-					end
-				end
+return function(List) --[[ Line: 16 | Named "findTopPicksSectionIndex" ]]
+	-- upvalues: FFlagIdentifyTopPicksByCategoryTypeModule (copy), ConstantsModule (copy)
+	for i, value in List do
+		if FFlagIdentifyTopPicksByCategoryTypeModule then
+			if value.categoryType == ConstantsModule.TOP_PICKS_CATEGORY_TYPE then
+				return i
+			elseif value.categoryType ~= nil then
+				continue
 			end
+		end
+		if string.lower(value.name) == "top picks" then
 			return i
 		end
 	end

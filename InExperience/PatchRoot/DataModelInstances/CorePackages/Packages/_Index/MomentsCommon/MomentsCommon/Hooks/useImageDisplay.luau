@@ -1,57 +1,57 @@
-﻿local momentsCommon = script:FindFirstAncestor("MomentsCommon")
-local contentProviderService = game:GetService("ContentProvider")
-local reactModule = require(momentsCommon.Parent.React)
-local signalModule = require(momentsCommon.Utils.Signal)
-local useCallback = reactModule.useCallback
-local useEffect = reactModule.useEffect
-local useRef = reactModule.useRef
-local useToggleStateModule = require(momentsCommon.Hooks.useToggleState)
+﻿local MomentsCommon = script:FindFirstAncestor("MomentsCommon")
+local ContentProvider = game:GetService("ContentProvider")
+local ReactModule = require(MomentsCommon.Parent.React)
+local SignalModule = require(MomentsCommon.Utils.Signal)
+local UseCallbackFunction = ReactModule.useCallback
+local UseEffectFunction = ReactModule.useEffect
+local UseRefFunction = ReactModule.useRef
+local UseToggleStateModule = require(MomentsCommon.Hooks.useToggleState)
 
-return function(_, p1)
-	-- upvalues: useRef (ref), signalModule (ref), useToggleStateModule (ref), useEffect (ref), contentProviderService (ref), useCallback (ref)
-	local var1 = useRef(nil)
-	local var2 = useRef(nil)
-	local var3 = useRef(false)
-	local var4 = useRef(signalModule.new())
-	local var5 = useToggleStateModule(false)
-	useEffect(function()
-		-- upvalues: var1 (ref), p1 (ref), var3 (ref), var2 (ref), contentProviderService (copy), var4 (ref)
-		local current = var1.current
+return function(_, ImageContent) --[[ Line: 22 | Named "useImageDisplay" ]]
+	-- upvalues: UseRefFunction (copy), SignalModule (copy), UseToggleStateModule (copy), UseEffectFunction (copy), ContentProvider (copy), UseCallbackFunction (copy)
+	local UseRefResult = UseRefFunction(nil)
+	local UseRefResult1 = UseRefFunction(nil)
+	local UseRefResult2 = UseRefFunction(false)
+	local UseRefResult3 = UseRefFunction(SignalModule.new())
+	local UseToggleStateModuleResult = UseToggleStateModule(false)
+	UseEffectFunction(function() --[[ Line: 33 ]]
+		-- upvalues: UseRefResult (copy), ImageContent (copy), UseRefResult2 (copy), UseRefResult1 (copy), ContentProvider (upval), UseRefResult3 (copy)
+		local Current = UseRefResult.current
 		
-		if not current then return end
-		if p1 then
-			var3.current = false
+		if not Current then return end
+		if ImageContent then
+			UseRefResult2.current = false
 			
-			if p1.SourceType == Enum.ContentSourceType.Uri then
-				var2.current = p1.Uri
-				task.spawn(function()
-					-- upvalues: contentProviderService (copy), p1 (copy), var2 (copy), var3 (copy), var4 (copy)
-					contentProviderService:PreloadAsync({ p1.Uri }, function(_, p2)
-						-- upvalues: var2 (copy), p1 (copy), var3 (copy), var4 (copy)
-						if var2.current ~= p1.Uri then return end
-						if p2 == Enum.AssetFetchStatus.Success then
-							var3.current = true
-							var4.current:fire()
+			if ImageContent.SourceType == Enum.ContentSourceType.Uri then
+				UseRefResult1.current = ImageContent.Uri
+				task.spawn(function() --[[ Line: 44 ]]
+					-- upvalues: ContentProvider (upval), ImageContent (upval), UseRefResult1 (upval), UseRefResult2 (upval), UseRefResult3 (upval)
+					ContentProvider:PreloadAsync({ ImageContent.Uri }, function(_, AssetFetchStatus) --[[ Line: 45 ]]
+						-- upvalues: UseRefResult1 (upval), ImageContent (upval), UseRefResult2 (upval), UseRefResult3 (upval)
+						if UseRefResult1.current ~= ImageContent.Uri then return end
+						if AssetFetchStatus == Enum.AssetFetchStatus.Success then
+							UseRefResult2.current = true
+							UseRefResult3.current:fire()
 						end
 					end)
 				end)
 			end
-			if p1.SourceType == Enum.ContentSourceType.Object then
-				var3.current = true
-				var4.current:fire()
+			if ImageContent.SourceType == Enum.ContentSourceType.Object then
+				UseRefResult2.current = true
+				UseRefResult3.current:fire()
 			end
-			current.ImageContent = p1
+			Current.ImageContent = ImageContent
 		end
-	end, { var5.enabled, p1 })
+	end, { UseToggleStateModuleResult.enabled, ImageContent })
 	
 	return {
-		isLoadedRef = var3,
-		onImageLoadedSignalRef = var4,
-		ref = var1,
-		updateRef = useCallback(function(p2)
-			-- upvalues: var5 (ref), var1 (ref)
-			var5.toggle()
-			var1.current = p2
-		end, { var5.toggle })
+		isLoadedRef = UseRefResult2,
+		onImageLoadedSignalRef = UseRefResult3,
+		ref = UseRefResult,
+		updateRef = UseCallbackFunction(function(Current) --[[ Line: 67 ]]
+			-- upvalues: UseToggleStateModuleResult (copy), UseRefResult (copy)
+			UseToggleStateModuleResult.toggle()
+			UseRefResult.current = Current
+		end, { UseToggleStateModuleResult.toggle })
 	}
 end

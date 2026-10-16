@@ -1,34 +1,31 @@
-﻿local utilsModule = require(script.Parent.Utils)
-local _ = {
-	Hovering = "Hovering",
-	Dragging = "Dragging",
-	Idle = "Idle"
-}
-local t = {}
-t.__index = t
+﻿local UtilsModule = require(script.Parent.Utils)
+local DragBarModule = {}
+DragBarModule.__index = DragBarModule
 
-function t:getCFrame()
+function DragBarModule:getCFrame() --[[ Line: 33 ]]
 	return self.part.CFrame
 end
 
-function t:setCFrame(p1)
+function DragBarModule:setCFrame(p1) --[[ Line: 37 ]]
 	self.part.CFrame = p1
 end
 
-function t:updateTransparency()
+function DragBarModule:updateTransparency() --[[ Line: 41 ]]
 	if self.dragBarState == "Hovering" then
 		self.dragBarImage.ImageTransparency = 0.2
 		
 		return
-	elseif self.dragBarState == "Dragging" then
+	end
+	if self.dragBarState == "Dragging" then
 		self.dragBarImage.ImageTransparency = 0
 		
 		return
+	else
+		self.dragBarImage.ImageTransparency = 0.6
 	end
-	self.dragBarImage.ImageTransparency = 0.6
 end
 
-function t:updateState()
+function DragBarModule:updateState() --[[ Line: 51 ]]
 	if self.dragging then
 		self.dragBarState = "Dragging"
 	elseif self.hovering and not self.dragging then
@@ -39,59 +36,59 @@ function t:updateState()
 	self:updateTransparency()
 end
 
-function t:startDrag(p1)
+function DragBarModule:startDrag(UiGroupOffSet) --[[ Line: 62 ]]
 	self.dragging = true
-	self.uiGroupOffSet = p1
+	self.uiGroupOffSet = UiGroupOffSet
 	self:updateState()
 end
 
-function t:dragEnd()
+function DragBarModule:dragEnd() --[[ Line: 68 ]]
 	self.dragging = false
 	self:updateState()
 end
 
-function t:startHover()
+function DragBarModule:startHover() --[[ Line: 73 ]]
 	self.hovering = true
 	self:updateState()
 end
 
-function t:hoverEnd()
+function DragBarModule:hoverEnd() --[[ Line: 78 ]]
 	self.hovering = false
 	self:updateState()
 end
 
-function t:show()
+function DragBarModule:show() --[[ Line: 83 ]]
 	self.part.Parent = self.partsParent
 end
 
-function t:hide()
+function DragBarModule:hide() --[[ Line: 87 ]]
 	self.part.Parent = nil
 end
 
-function t:rescale(p1)
-	-- upvalues: utilsModule (ref)
+function DragBarModule:rescale(p1) --[[ Line: 91 ]]
+	-- upvalues: UtilsModule (copy)
 	self.part.Size *= p1
 	
 	if self.uiGroupOffSet then
-		self.uiGroupOffSet = utilsModule.rescaleCFramePosition(self.uiGroupOffSet, p1)
+		self.uiGroupOffSet = UtilsModule.rescaleCFramePosition(self.uiGroupOffSet, p1)
 	end
 end
 
-function t.new(p1, p2)
-	-- upvalues: t (ref)
-	local t_1 = {
+function DragBarModule.new(Part, DragBarImage) --[[ Line: 98 ]]
+	-- upvalues: DragBarModule (copy)
+	local config = {
 		hovering = false,
 		dragging = false,
 		dragBarState = "Idle",
 		uiGroupOffSet = nil,
-		part = p1,
-		dragBarImage = p2,
-		partsParent = p1.Parent
+		part = Part,
+		dragBarImage = DragBarImage,
+		partsParent = Part.Parent
 	}
-	setmetatable(t_1, t)
-	t_1.dragBarImage.ImageTransparency = 0.6
+	setmetatable(config, DragBarModule)
+	config.dragBarImage.ImageTransparency = 0.6
 	
-	return t_1
+	return config
 end
 
-return t
+return DragBarModule

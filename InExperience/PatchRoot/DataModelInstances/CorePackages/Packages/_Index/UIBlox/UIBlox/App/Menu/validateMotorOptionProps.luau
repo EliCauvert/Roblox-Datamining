@@ -1,9 +1,9 @@
-﻿local tModule = require(script.Parent.Parent.Parent.Parent.t)
+﻿local TModule = require(script.Parent.Parent.Parent.Parent.t)
 
-return tModule.strictInterface({
-	targetValue = tModule.number,
-	springParams = tModule.optional(tModule.strictInterface({
-		frequency = tModule.number,
-		dampingRatio = tModule.number
+return TModule.strictInterface({
+	targetValue = TModule.number,
+	springParams = TModule.optional(TModule.strictInterface({
+		frequency = TModule.number,
+		dampingRatio = TModule.number
 	}))
 })

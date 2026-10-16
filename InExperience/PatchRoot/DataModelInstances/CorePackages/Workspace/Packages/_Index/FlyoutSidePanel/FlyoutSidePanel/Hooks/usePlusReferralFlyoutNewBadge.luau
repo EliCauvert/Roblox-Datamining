@@ -1,50 +1,49 @@
-﻿local appStorageService = game:GetService("AppStorageService")
-local reactModule = require(script:FindFirstAncestor("FlyoutSidePanel").Parent.React)
+﻿local AppStorageService = game:GetService("AppStorageService")
+local ReactModule = require(script:FindFirstAncestor("FlyoutSidePanel").Parent.React)
 
-local function _(p1)
-	-- upvalues: appStorageService (ref)
-	local ok, status = pcall(function()
-		-- upvalues: appStorageService (copy), p1 (ref)
-		return appStorageService:GetItem(p1)
+local function _(p1): number --[[ Line: 11 | Named "getImpressionCount" ]]
+	-- upvalues: AppStorageService (copy)
+	local Success, Result = pcall(function() --[[ Line: 12 ]]
+		-- upvalues: AppStorageService (upval), p1 (copy)
+		return AppStorageService:GetItem(p1)
 	end)
 	
-	return if ok and typeof(status) == "string" and status ~= "" then tonumber(status) or 0 else 0
+	return Success and typeof(Result) == "string" and Result ~= "" and tonumber(Result) or 0
 end
 
-local _ = function(p1)
-	-- upvalues: appStorageService (ref)
-	pcall(function()
-		-- upvalues: appStorageService (copy), p1 (ref)
-		appStorageService:SetItem(p1, "1")
-		appStorageService:Flush()
+local _ = function(p1) --[[ Line: 21 | Named "markSeen" ]]
+	-- upvalues: AppStorageService (copy)
+	pcall(function() --[[ Line: 22 ]]
+		-- upvalues: AppStorageService (upval), p1 (copy)
+		AppStorageService:SetItem(p1, "1")
+		AppStorageService:Flush()
 	end)
 end
 
-return function(p1, p2)
-	-- upvalues: reactModule (ref), appStorageService (ref)
-	local var1 = reactModule.useState(function()
-		-- upvalues: p2 (ref), appStorageService (copy)
-		local ok, status = pcall(function()
-			-- upvalues: appStorageService (copy), p2 (ref)
-			return appStorageService:GetItem(p2)
+return function(Callback, Key) --[[ Line: 32 | Named "usePlusReferralFlyoutNewBadge" ]]
+	-- upvalues: ReactModule (copy), AppStorageService (copy)
+	local UseStateResult = ReactModule.useState(function(): boolean --[[ Line: 33 ]]
+		-- upvalues: Key (copy), AppStorageService (upval)
+		local Success, Result = pcall(function() --[[ Line: 12 ]]
+			-- upvalues: AppStorageService (upval), Key (copy)
+			return AppStorageService:GetItem(Key)
 		end)
 		
-		return (if ok and typeof(status) == "string" and status ~= "" then tonumber(status) or 0 else 0) < 1
+		return (Success and typeof(Result) == "string" and Result ~= "" and tonumber(Result) or 0) < 1
 	end)
 	
 	return {
-		shouldShowNewBadge = var1,
-		onActivated = reactModule.useCallback(function()
-			-- upvalues: var1 (ref), p2 (ref), appStorageService (copy), p1 (ref)
-			if var1 then
-				local var2 = p2
-				pcall(function()
-					-- upvalues: appStorageService (copy), var2 (ref)
-					appStorageService:SetItem(var2, "1")
-					appStorageService:Flush()
+		shouldShowNewBadge = UseStateResult,
+		onActivated = ReactModule.useCallback(function() --[[ Line: 37 ]]
+			-- upvalues: UseStateResult (copy), Key (copy), AppStorageService (upval), Callback (copy)
+			if UseStateResult then
+				pcall(function() --[[ Line: 22 ]]
+					-- upvalues: AppStorageService (upval), Key (copy)
+					AppStorageService:SetItem(Key, "1")
+					AppStorageService:Flush()
 				end)
 			end
-			p1()
-		end, { var1, p1, p2 })
+			Callback()
+		end, { UseStateResult, Callback, Key })
 	}
 end

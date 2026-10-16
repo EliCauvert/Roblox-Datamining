@@ -1,11 +1,10 @@
-﻿local appComposition = script:FindFirstAncestor("AppComposition")
-local parent = appComposition.Parent
-local displayModule = require(parent.Display)
-local signalsModule = require(parent.Signals)
-local _ = require(parent.Foundation)
-local resolveBreakpointModule = require(appComposition.resolveBreakpoint)
+﻿local AppComposition = script:FindFirstAncestor("AppComposition")
+local Parent = AppComposition.Parent
+local DisplayModule = require(Parent.Display)
+local _ = require(Parent.Foundation)
+local ResolveBreakpointModule = require(AppComposition.resolveBreakpoint)
 
-return signalsModule.createComputed(function(p1)
-	-- upvalues: displayModule (ref), resolveBreakpointModule (ref)
-	return resolveBreakpointModule(displayModule.GetDisplayStore(p1).getDesignSpaceViewportWidth(p1))
-end)
+return (require(Parent.Signals).createComputed(function(p1) --[[ Line: 11 ]]
+	-- upvalues: DisplayModule (copy), ResolveBreakpointModule (copy)
+	return ResolveBreakpointModule((DisplayModule.GetDisplayStore(p1).getDesignSpaceViewportWidth(p1)))
+end))

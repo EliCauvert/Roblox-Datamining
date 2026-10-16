@@ -1,66 +1,65 @@
-﻿local parent = script.Parent.Parent
-local reactModule = require(parent.Parent.React)
-local withNavigationModule = require(script.Parent.withNavigation)
-local eventsModule = require(parent.Events)
-local t = {
-	[eventsModule.WillFocus] = "onWillFocus",
-	[eventsModule.DidFocus] = "onDidFocus",
-	[eventsModule.WillBlur] = "onWillBlur",
-	[eventsModule.DidBlur] = "onDidBlur"
+﻿local Parent = script.Parent.Parent
+local WithNavigationModule = require(script.Parent.withNavigation)
+local EventsModule = require(Parent.Events)
+local config = {
+	[EventsModule.WillFocus] = "onWillFocus",
+	[EventsModule.DidFocus] = "onDidFocus",
+	[EventsModule.WillBlur] = "onWillBlur",
+	[EventsModule.DidBlur] = "onDidBlur"
 }
-local navigationEvents = reactModule.Component:extend("NavigationEvents")
+local NavigationEvents = require(Parent.Parent.React).Component:extend("NavigationEvents")
 
-function navigationEvents.didMount(p1)
+function NavigationEvents.didMount(p1) --[[ Line: 51 ]]
 	p1:subscribeAll()
 end
 
-function navigationEvents.didUpdate(p1, p2)
+function NavigationEvents.didUpdate(p1, p2) --[[ Line: 58 ]]
 	if p1.props.navigation ~= p2.navigation then
 		p1:removeAll()
 		p1:subscribeAll()
 	end
 end
 
-function navigationEvents.willUnmount(p1)
+function NavigationEvents.willUnmount(p1) --[[ Line: 66 ]]
 	p1:removeAll()
 end
 
-function navigationEvents.getPropListener(p1, p2)
-	-- upvalues: t (ref)
-	return p1.props[t[p2]]
+function NavigationEvents.getPropListener(p1, p2) --[[ Line: 70 ]]
+	-- upvalues: config (copy)
+	return p1.props[config[p2]]
 end
 
-function navigationEvents.subscribeAll(p1)
-	-- upvalues: t (ref)
-	local navigation = p1.props.navigation
+function NavigationEvents.subscribeAll(p1) --[[ Line: 74 ]]
+	-- upvalues: config (copy)
+	local Navigation = p1.props.navigation
 	p1.subscriptions = {}
 	
-	for i in t do
-		p1.subscriptions[i] = navigation.addListener(i, function(...)
-			-- upvalues: p1 (ref), i (ref)
-			local var1 = p1:getPropListener(i)
+	for i in config do
+		p1.subscriptions[i] = Navigation.addListener(i, function(...) --[[ Line: 80 ]]
+			-- upvalues: p1 (copy), i (copy)
+			local PropListener: (any) -> () = p1:getPropListener(i)
 			
-			if var1 then
-				var1(...)
+			if PropListener then
+				PropListener(...)
 			end
 		end)
 	end
 end
 
-function navigationEvents.removeAll(p2)
-	-- upvalues: t (ref)
-	for i in t do
-		local var1 = p2.subscriptions[i]
+function NavigationEvents.removeAll(p2) --[[ Line: 90 ]]
+	-- upvalues: config (copy)
+	for i in config do
+		local Subscription = p2.subscriptions[i]
 		
-		if var1 then
-			var1.remove()
+		if Subscription then
+			Subscription.remove()
 			p2.subscriptions[i] = nil
 		end
 	end
 end
 
-function navigationEvents.render(_)
+function NavigationEvents:render() --[[ Line: 100 ]]
 	return nil
 end
 
-return withNavigationModule(navigationEvents)
+return WithNavigationModule(NavigationEvents)

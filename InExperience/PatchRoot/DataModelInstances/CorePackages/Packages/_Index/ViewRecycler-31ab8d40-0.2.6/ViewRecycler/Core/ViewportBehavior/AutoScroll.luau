@@ -1,40 +1,41 @@
-﻿local viewRecycler = script:FindFirstAncestor("ViewRecycler")
-local autoScrollPolicyModule = require(viewRecycler.Core.Enums.AutoScrollPolicy)
-local autoScrollTargetModule = require(viewRecycler.Core.Enums.AutoScrollTarget)
-local _ = require(viewRecycler.Core.Types)
+﻿local ViewRecycler = script:FindFirstAncestor("ViewRecycler")
+local AutoScrollPolicyModule = require(ViewRecycler.Core.Enums.AutoScrollPolicy)
+local AutoScrollTargetModule = require(ViewRecycler.Core.Enums.AutoScrollTarget)
+local _ = require(ViewRecycler.Core.Types)
 
 return {
-	resolveTarget = function(p1, p2, p3)
-		-- upvalues: autoScrollPolicyModule (ref), autoScrollTargetModule (ref)
-		return if p1 == autoScrollPolicyModule.WhenAtEnd then if p3.atEnd then autoScrollTargetModule.End else false else type(p1) == "function" and p1(p2, p3)
+	resolveTarget = function(Callback, p1, p2) --[[ Line: 20 ]]
+		-- upvalues: AutoScrollPolicyModule (copy), AutoScrollTargetModule (copy)
+		return if Callback == AutoScrollPolicyModule.WhenAtEnd then if p2.atEnd then AutoScrollTargetModule.End else false else type(Callback) == "function" and Callback(p1, p2)
 	end,
-	getTargetOffset = function(value, p1, p2)
-		-- upvalues: autoScrollTargetModule (ref)
-		return if value == autoScrollTargetModule.Start then 0 else math.max(0, p1 - p2)
+	getTargetOffset = function(Start, p1, p2): number --[[ Line: 33 ]]
+		-- upvalues: AutoScrollTargetModule (copy)
+		return if Start == AutoScrollTargetModule.Start then 0 else math.max(0, p1 - p2)
 	end,
-	create = function()
-		-- upvalues: autoScrollTargetModule (ref)
-		local var1 = false
+	create = function() --[[ Line: 41 ]]
+		-- upvalues: AutoScrollTargetModule (copy)
+		local Flag = false
 		
 		return {
-			onDataSourceChanged = function(p1)
-				-- upvalues: autoScrollTargetModule (copy), var1 (write)
-				if p1 == autoScrollTargetModule.End then
-					var1 = true
+			onDataSourceChanged = function(End) --[[ Line: 45 ]]
+				-- upvalues: AutoScrollTargetModule (upval), Flag (ref)
+				if End == AutoScrollTargetModule.End then
+					Flag = true
 					
-					return p1
+					return End
+				else
+					Flag = false
+					
+					return End
 				end
-				var1 = false
-				
-				return p1
 			end,
-			getContentLengthCorrection = function(p1, p2)
-				-- upvalues: var1 (write)
-				return if var1 then math.max(0, p1 - p2) else nil
+			getContentLengthCorrection = function(p1, p2) --[[ Line: 54 ]]
+				-- upvalues: Flag (ref)
+				return if Flag then math.max(0, p1 - p2) else nil
 			end,
-			onScrollOffsetChanged = function(value, p1)
-				-- upvalues: var1 (write)
-				var1 = value and p1
+			onScrollOffsetChanged = function(p1, p2) --[[ Line: 61 ]]
+				-- upvalues: Flag (ref)
+				Flag = p1 and p2
 			end
 		}
 	end

@@ -1,76 +1,90 @@
-﻿local signal = require(script:FindFirstAncestor("SocialServerDrivenUi").Parent.AppCommonLib).Signal
-local var1 = nil
-local var2 = nil
+﻿local Signal = require(script:FindFirstAncestor("SocialServerDrivenUi").Parent.AppCommonLib).Signal
+local v1 = nil
+local v2 = nil
 
-local function _()
-	-- upvalues: var1 (write), signal (ref)
-	if var1 == nil then
-		local var3 = signal.new()
-		var1 = var3
+local function _() --[[ Line: 15 | Named "getOpenProfileRequested" ]]
+	-- upvalues: v1 (ref), Signal (copy)
+	local v3 = v1
+	
+	if v3 == nil then
+		local NewSignal = Signal.new()
+		v1 = NewSignal
 		
-		return var3
+		return NewSignal
+	else
+		return v3
 	end
-	return var1
 end
 
-local _ = function()
-	-- upvalues: var2 (write), signal (ref)
-	if var2 == nil then
-		local var3 = signal.new()
-		var2 = var3
+local _ = function() --[[ Line: 26 | Named "getOpenAddFriendsRequested" ]]
+	-- upvalues: v2 (ref), Signal (copy)
+	local v3 = v2
+	
+	if v3 == nil then
+		local NewSignal = Signal.new()
+		v2 = NewSignal
 		
-		return var3
+		return NewSignal
+	else
+		return v3
 	end
-	return var2
 end
 
 return {
-	requestOpenProfile = function(p1, p2)
-		-- upvalues: var1 (write), signal (ref)
-		local var3
-		if var1 == nil then
-			local var4 = signal.new()
-			var1 = var4
-			var3 = var4
+	requestOpenProfile = function(UserId, ExtraProps) --[[ Line: 37 ]]
+		-- upvalues: v1 (ref), Signal (copy)
+		local v3 = v1
+		local v4 = nil
+		
+		if v3 == nil then
+			local NewSignal = Signal.new()
+			v1 = NewSignal
+			v4 = NewSignal
 		else
-			var3 = var1
+			v4 = v3
 		end
-		var3:fire({ userId = p1, extraProps = p2 })
+		v4:fire({ userId = UserId, extraProps = ExtraProps })
 	end,
-	subscribeOpenProfile = function(p1)
-		-- upvalues: var1 (write), signal (ref)
-		local var3
-		if var1 == nil then
-			local var4 = signal.new()
-			var1 = var4
-			var3 = var4
+	subscribeOpenProfile = function(p1) --[[ Line: 44 ]]
+		-- upvalues: v1 (ref), Signal (copy)
+		local v3 = v1
+		local v4 = nil
+		
+		if v3 == nil then
+			local NewSignal = Signal.new()
+			v1 = NewSignal
+			v4 = NewSignal
 		else
-			var3 = var1
+			v4 = v3
 		end
-		return var3:connect(p1)
+		return v4:connect(p1)
 	end,
-	requestOpenAddFriends = function()
-		-- upvalues: var2 (write), signal (ref)
-		local var3
-		if var2 == nil then
-			local var4 = signal.new()
-			var2 = var4
-			var3 = var4
+	requestOpenAddFriends = function() --[[ Line: 48 ]]
+		-- upvalues: v2 (ref), Signal (copy)
+		local v3 = v2
+		local v4 = nil
+		
+		if v3 == nil then
+			local NewSignal = Signal.new()
+			v2 = NewSignal
+			v4 = NewSignal
 		else
-			var3 = var2
+			v4 = v3
 		end
-		var3:fire()
+		v4:fire()
 	end,
-	subscribeOpenAddFriends = function(p1)
-		-- upvalues: var2 (write), signal (ref)
-		local var3
-		if var2 == nil then
-			local var4 = signal.new()
-			var2 = var4
-			var3 = var4
+	subscribeOpenAddFriends = function(p1) --[[ Line: 52 ]]
+		-- upvalues: v2 (ref), Signal (copy)
+		local v3 = v2
+		local v4 = nil
+		
+		if v3 == nil then
+			local NewSignal = Signal.new()
+			v2 = NewSignal
+			v4 = NewSignal
 		else
-			var3 = var2
+			v4 = v3
 		end
-		return var3:connect(p1)
+		return v4:connect(p1)
 	end
 }

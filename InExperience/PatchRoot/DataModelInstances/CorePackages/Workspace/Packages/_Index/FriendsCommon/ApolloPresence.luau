@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.ApolloPresence.ApolloPresence)
+﻿return (require(script.Parent.Parent.Parent._Index.ApolloPresence.ApolloPresence))

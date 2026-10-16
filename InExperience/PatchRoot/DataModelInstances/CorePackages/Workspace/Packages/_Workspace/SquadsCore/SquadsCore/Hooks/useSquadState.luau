@@ -1,31 +1,32 @@
-﻿local squadsCore = script:FindFirstAncestor("SquadsCore")
-local parent = squadsCore.Parent
-local reactModule = require(parent.React)
-local networkingSquadsModule = require(squadsCore.Http.NetworkingSquads)
-local networkStatus = require(squadsCore.Http.RoduxNetworking).Enum.NetworkStatus
-local squadStateModule = require(squadsCore.Enums.SquadState)
-local useCurrentSquadIdModule = require(squadsCore.Hooks.useCurrentSquadId)
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
+﻿local SquadsCore = script:FindFirstAncestor("SquadsCore")
+local Parent = SquadsCore.Parent
+local ReactModule = require(Parent.React)
+local NetworkingSquadsModule = require(SquadsCore.Http.NetworkingSquads)
+local NetworkStatus = require(SquadsCore.Http.RoduxNetworking).Enum.NetworkStatus
+local SquadStateModule = require(SquadsCore.Enums.SquadState)
+local UseCurrentSquadIdModule = require(SquadsCore.Hooks.useCurrentSquadId)
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
 
-return function()
-	-- upvalues: useCurrentSquadIdModule (ref), reactModule (ref), networkingSquadsModule (ref), useSelector (ref), squadStateModule (ref), networkStatus (ref)
-	local var1 = useCurrentSquadIdModule() or ""
-	local var2 = useSelector(reactModule.useCallback(function(p1)
-		-- upvalues: networkingSquadsModule (copy)
-		return networkingSquadsModule.JoinSquad.getStatus(p1, {})
-	end, {}))
-	local var3 = useSelector(reactModule.useCallback(function(p1)
-		-- upvalues: networkingSquadsModule (copy)
-		return networkingSquadsModule.CreateOrJoinSquad.getStatus(p1, {})
-	end, {}))
-	local idle = squadStateModule.Idle
+return function() --[[ Line: 13 ]]
+	-- upvalues: UseCurrentSquadIdModule (copy), ReactModule (copy), NetworkingSquadsModule (copy), UseSelectorFunction (copy), SquadStateModule (copy), NetworkStatus (copy)
+	local UseCurrentSquadIdModuleResult = UseCurrentSquadIdModule() or ""
+	local UseSelectorResult = UseSelectorFunction((ReactModule.useCallback(function(p1) --[[ Line: 16 ]]
+		-- upvalues: NetworkingSquadsModule (upval)
+		return NetworkingSquadsModule.JoinSquad.getStatus(p1, {})
+	end, {})))
+	local UseSelectorResult1 = UseSelectorFunction((ReactModule.useCallback(function(p1) --[[ Line: 21 ]]
+		-- upvalues: NetworkingSquadsModule (upval)
+		return NetworkingSquadsModule.CreateOrJoinSquad.getStatus(p1, {})
+	end, {})))
+	local Idle = SquadStateModule.Idle
 	
-	if var1 ~= "" then
-		idle = squadStateModule.Active
+	if UseCurrentSquadIdModuleResult ~= "" then
+		Idle = SquadStateModule.Active
 		
-		return idle
-	elseif var2 == networkStatus.Fetching or var3 == networkStatus.Fetching then
-		idle = squadStateModule.Initializing
+		return Idle
 	end
-	return idle
+	if UseSelectorResult == NetworkStatus.Fetching or UseSelectorResult1 == NetworkStatus.Fetching then
+		Idle = SquadStateModule.Initializing
+	end
+	return Idle
 end

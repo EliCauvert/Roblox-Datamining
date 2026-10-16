@@ -1,150 +1,155 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local userInputService = game:GetService("UserInputService")
-local reactModule = require(parent_1.React)
-local reactOtterModule = require(parent_1.ReactOtter)
-local reactUtilsModule = require(parent_1.ReactUtils)
-local navigationTypeModule = require(parent.Enums.NavigationType)
-local isPointWithinBoundsModule = require(parent.Utils.isPointWithinBounds)
-local useCallback = reactModule.useCallback
-local useEffect = reactModule.useEffect
-local useEventConnection = reactUtilsModule.useEventConnection
-local useMotor = reactOtterModule.useMotor
-local useRef = reactModule.useRef
-local useState = reactModule.useState
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local UserInputService = game:GetService("UserInputService")
+local ReactModule = require(Parent1.React)
+local ReactOtterModule = require(Parent1.ReactOtter)
+local NavigationTypeModule = require(Parent.Enums.NavigationType)
+local IsPointWithinBoundsModule = require(Parent.Utils.isPointWithinBounds)
+local UseCallbackFunction = ReactModule.useCallback
+local UseEffectFunction = ReactModule.useEffect
+local UseEventConnectionFunction = require(Parent1.ReactUtils).useEventConnection
+local UseMotorFunction = ReactOtterModule.useMotor
+local UseRefFunction = ReactModule.useRef
+local UseStateFunction = ReactModule.useState
 
-return function(p1, p2, p3, p4)
-	-- upvalues: useRef (ref), useState (ref), useCallback (ref), useMotor (ref), reactModule (ref), reactOtterModule (ref), navigationTypeModule (ref), useEffect (ref), useEventConnection (ref), userInputService (ref), isPointWithinBoundsModule (ref)
-	local var1 = useRef(nil)
-	local var2, var3 = useState(p2)
-	local var4 = useRef(nil)
-	local var5 = useRef(false)
-	local var6 = useRef(nil)
-	local var7 = useRef(nil)
-	local var8 = useRef(nil)
-	local var9 = useRef(nil)
-	local var10 = useRef(false)
-	local var11 = useMotor((p2 - 1) * -p3.Y, useCallback(function(p5)
-		-- upvalues: var4 (ref)
-		if var4.current then
-			var4.current.Position = UDim2.new(0.5, 0, 0, p5)
+return function(p1, p2: number, Current, MaxValue) --[[ Line: 26 | Named "useSnapScrollController" ]]
+	-- upvalues: UseRefFunction (copy), UseStateFunction (copy), UseCallbackFunction (copy), UseMotorFunction (copy), ReactModule (copy), ReactOtterModule (copy), NavigationTypeModule (copy), UseEffectFunction (copy), UseEventConnectionFunction (copy), UserInputService (copy), IsPointWithinBoundsModule (copy)
+	local UseRefResult = UseRefFunction(nil)
+	local UseStateResult, UseStateResult2 = UseStateFunction(p2)
+	local UseRefResult1 = UseRefFunction(nil)
+	local UseRefResult2 = UseRefFunction(false)
+	local UseRefResult3 = UseRefFunction(nil)
+	local UseRefResult4 = UseRefFunction(nil)
+	local UseRefResult5 = UseRefFunction(nil)
+	local UseRefResult6 = UseRefFunction(nil)
+	local UseRefResult7 = UseRefFunction(false)
+	local UseMotorResult = UseMotorFunction((p2 - 1) * -Current.Y, UseCallbackFunction(function(YOffset) --[[ Line: 42 ]]
+		-- upvalues: UseRefResult1 (copy)
+		if UseRefResult1.current then
+			UseRefResult1.current.Position = UDim2.new(0.5, 0, 0, YOffset)
 			
 			return
 		end
-	end, {}), useCallback(function()
-		-- upvalues: var5 (ref)
-		var5.current = false
-	end, {}))
-	local var12 = reactModule.useCallback(function(p5, p6)
-		-- upvalues: p1 (ref), var4 (ref), var1 (ref), var5 (ref), var10 (ref), p4 (ref), p3 (ref), var11 (ref), reactOtterModule (copy), var3 (ref)
-		if not p1 or not var4.current or (not var1.current or var5.current) or (var10.current or p4 < 1) then return end
-		assert(var4.current ~= nil, "motionRef.current is nil")
-		var5.current = true
-		local clampedValue = math.clamp(p5, 1, p4)
-		local var13 = (clampedValue - 1) * -p3.Y
+	end, {}), (UseCallbackFunction(function() --[[ Line: 50 ]]
+		-- upvalues: UseRefResult2 (copy)
+		UseRefResult2.current = false
+	end, {})))
+	local UseResult = ReactModule.useCallback(function(Value: number, p3) --[[ Line: 57 ]]
+		-- upvalues: p1 (copy), UseRefResult1 (copy), UseRefResult (copy), UseRefResult2 (copy), UseRefResult7 (copy), MaxValue (copy), Current (copy), UseMotorResult (copy), ReactOtterModule (upval), UseStateResult2 (copy)
+		if not p1 or not UseRefResult1.current or not UseRefResult.current or UseRefResult2.current or UseRefResult7.current or MaxValue < 1 then return end
+		assert(UseRefResult1.current ~= nil, "motionRef.current is nil")
+		UseRefResult2.current = true
+		local ClampedValue = math.clamp(Value, 1, MaxValue)
+		local ScaledClampedValue = (ClampedValue - 1) * -Current.Y
 		
-		if p6 then
-			var11(reactOtterModule.instant(var13))
+		if p3 then
+			UseMotorResult(ReactOtterModule.instant(ScaledClampedValue))
 		else
-			var11(reactOtterModule.spring(var13, { frequency = 8 }))
+			UseMotorResult(ReactOtterModule.spring(ScaledClampedValue, { frequency = 8 }))
 		end
-		var3(clampedValue)
-	end, { p1, p3, p4, var11 })
-	local var13 = reactModule.useCallback(function(p5, p6)
-		-- upvalues: navigationTypeModule (copy), var12 (ref), var2 (ref)
-		if p5 == navigationTypeModule.Previous then
-			var12(var2 - 1, p6)
-			
-			return
-		elseif p5 == navigationTypeModule.Next then
-			var12(var2 + 1, p6)
+		UseStateResult2(ClampedValue)
+	end, { p1, Current, MaxValue, UseMotorResult })
+	local UseResult1 = ReactModule.useCallback(function(Next, p3) --[[ Line: 86 ]]
+		-- upvalues: NavigationTypeModule (upval), UseResult (copy), UseStateResult (copy)
+		if Next == NavigationTypeModule.Previous then
+			UseResult(UseStateResult - 1, p3)
 			
 			return
 		end
-		var12(var2, p6)
-	end, { var2, var12 })
-	useEffect(function()
-		-- upvalues: var4 (ref), var6 (ref), p3 (ref), var5 (ref), var13 (ref), navigationTypeModule (copy)
-		if var4.current and var6.current ~= p3 then
-			var5.current = false
-			var13(navigationTypeModule.Current, true)
-			var6.current = p3
+		if Next == NavigationTypeModule.Next then
+			UseResult(UseStateResult + 1, p3)
+			
+			return
+		else
+			UseResult(UseStateResult, p3)
+		end
+	end, { UseStateResult, UseResult })
+	UseEffectFunction(function() --[[ Line: 96 ]]
+		-- upvalues: UseRefResult1 (copy), UseRefResult3 (copy), Current (copy), UseRefResult2 (copy), UseResult1 (copy), NavigationTypeModule (upval)
+		if UseRefResult1.current and UseRefResult3.current ~= Current then
+			UseRefResult2.current = false
+			UseResult1(NavigationTypeModule.Current, true)
+			UseRefResult3.current = Current
 			
 			return
 		end
-	end, { p3, var13 })
-	useEventConnection(userInputService.TouchPinch, reactModule.useCallback(function(_, _, _, p5, _)
-		-- upvalues: var13 (ref), navigationTypeModule (copy), var10 (ref), var8 (ref)
-		if p5 == Enum.UserInputState.Begin then
-			var13(navigationTypeModule.Current)
-			var10.current = true
-			
-			return
-		elseif p5 == Enum.UserInputState.End then
-			var10.current = false
-			var8.current = nil
-		end
-	end, { var13 }))
-	useEventConnection(userInputService.TouchStarted, reactModule.useCallback(function(p5)
-		-- upvalues: p1 (ref), var4 (ref), var1 (ref), var8 (ref), isPointWithinBoundsModule (copy), var7 (ref), var9 (ref), var11 (ref), reactOtterModule (copy)
-		if not p1 or not var4.current or (not var1.current or var8.current) then return end
-		if isPointWithinBoundsModule(Vector2.new(p5.Position.X, p5.Position.Y), var1.current.AbsolutePosition, var1.current.AbsoluteSize) then
-			var7.current = var4.current.Position.Y.Offset
-			var9.current = p5.Position.Y
-			var8.current = p5
-			var11(reactOtterModule.instant(var4.current.Position.Y.Offset))
+	end, { Current, UseResult1 })
+	UseEventConnectionFunction(UserInputService.TouchPinch, (ReactModule.useCallback(function(_, _, _, UserInputState, _) --[[ Line: 106 ]]
+		-- upvalues: UseResult1 (copy), NavigationTypeModule (upval), UseRefResult7 (copy), UseRefResult5 (copy)
+		if UserInputState == Enum.UserInputState.Begin then
+			UseResult1(NavigationTypeModule.Current)
+			UseRefResult7.current = true
 			
 			return
 		end
-	end, { p1, var11 }))
-	useEventConnection(userInputService.TouchMoved, reactModule.useCallback(function(p5)
-		-- upvalues: p1 (ref), var4 (ref), var1 (ref), var8 (ref), var7 (ref), var9 (ref), var10 (ref), p4 (ref), p3 (ref), var11 (ref), reactOtterModule (copy)
-		if p1 and var4.current and (var1.current and var8.current == p5) and (var7.current and var9.current and not var10.current) then
-			var11(reactOtterModule.instant(math.clamp(var7.current + (p5.Position.Y - var9.current), (p4 - 1) * -p3.Y - 100, 100)))
+		if UserInputState == Enum.UserInputState.End then
+			UseRefResult7.current = false
+			UseRefResult5.current = nil
+		end
+	end, { UseResult1 })))
+	UseEventConnectionFunction(UserInputService.TouchStarted, (ReactModule.useCallback(function(Current) --[[ Line: 118 ]]
+		-- upvalues: p1 (copy), UseRefResult1 (copy), UseRefResult (copy), UseRefResult5 (copy), IsPointWithinBoundsModule (upval), UseRefResult4 (copy), UseRefResult6 (copy), UseMotorResult (copy), ReactOtterModule (upval)
+		if not p1 or not UseRefResult1.current or not UseRefResult.current or UseRefResult5.current then return end
+		if IsPointWithinBoundsModule(Vector2.new(Current.Position.X, Current.Position.Y), UseRefResult.current.AbsolutePosition, UseRefResult.current.AbsoluteSize) then
+			UseRefResult4.current = UseRefResult1.current.Position.Y.Offset
+			UseRefResult6.current = Current.Position.Y
+			UseRefResult5.current = Current
+			UseMotorResult(ReactOtterModule.instant(UseRefResult1.current.Position.Y.Offset))
 			
 			return
 		end
-	end, { p1, p3, p4, var11 }))
-	useEventConnection(userInputService.TouchSwipe, reactModule.useCallback(function(p5)
-		-- upvalues: p1 (ref), var4 (ref), var1 (ref), var8 (ref), var10 (ref), var5 (ref), var13 (ref), navigationTypeModule (copy)
-		if not p1 or not var4.current or (not var1.current or not var8.current) or (var10.current or var5.current) then return end
-		if p5 == Enum.SwipeDirection.Up then
-			var13(navigationTypeModule.Next)
-			
-			return
-		elseif p5 == Enum.SwipeDirection.Down then
-			var13(navigationTypeModule.Previous)
+	end, { p1, UseMotorResult })))
+	UseEventConnectionFunction(UserInputService.TouchMoved, (ReactModule.useCallback(function(Current1) --[[ Line: 140 ]]
+		-- upvalues: p1 (copy), UseRefResult1 (copy), UseRefResult (copy), UseRefResult5 (copy), UseRefResult4 (copy), UseRefResult6 (copy), UseRefResult7 (copy), MaxValue (copy), Current (copy), UseMotorResult (copy), ReactOtterModule (upval)
+		if p1 and UseRefResult1.current and UseRefResult.current and UseRefResult5.current == Current1 and UseRefResult4.current and UseRefResult6.current and not UseRefResult7.current then
+			UseMotorResult(ReactOtterModule.instant((math.clamp(UseRefResult4.current + (Current1.Position.Y - UseRefResult6.current), (MaxValue - 1) * -Current.Y - 100, 100))))
 			
 			return
 		end
-		var13(navigationTypeModule.Current)
-	end, { p1, var13 }))
-	useEventConnection(userInputService.TouchEnded, reactModule.useCallback(function(p5)
-		-- upvalues: p1 (ref), var4 (ref), var1 (ref), var8 (ref), var7 (ref), var5 (ref), p3 (ref), var13 (ref), navigationTypeModule (copy)
-		if not p1 or not var4.current or (not var1.current or var8.current ~= p5) or (not var7.current or var5.current) then return end
-		local var14 = var4.current.Position.Y.Offset - var7.current
+	end, { p1, Current, MaxValue, UseMotorResult })))
+	UseEventConnectionFunction(UserInputService.TouchSwipe, (ReactModule.useCallback(function(SwipeDirection) --[[ Line: 166 ]]
+		-- upvalues: p1 (copy), UseRefResult1 (copy), UseRefResult (copy), UseRefResult5 (copy), UseRefResult7 (copy), UseRefResult2 (copy), UseResult1 (copy), NavigationTypeModule (upval)
+		if not p1 or not UseRefResult1.current or not UseRefResult.current or not UseRefResult5.current or UseRefResult7.current or UseRefResult2.current then return end
+		if SwipeDirection == Enum.SwipeDirection.Up then
+			UseResult1(NavigationTypeModule.Next)
+			
+			return
+		end
+		if SwipeDirection == Enum.SwipeDirection.Down then
+			UseResult1(NavigationTypeModule.Previous)
+			
+			return
+		else
+			UseResult1(NavigationTypeModule.Current)
+		end
+	end, { p1, UseResult1 })))
+	UseEventConnectionFunction(UserInputService.TouchEnded, (ReactModule.useCallback(function(Current1) --[[ Line: 190 ]]
+		-- upvalues: p1 (copy), UseRefResult1 (copy), UseRefResult (copy), UseRefResult5 (copy), UseRefResult4 (copy), UseRefResult2 (copy), Current (copy), UseResult1 (copy), NavigationTypeModule (upval)
+		if not p1 or not UseRefResult1.current or not UseRefResult.current or UseRefResult5.current ~= Current1 or not UseRefResult4.current or UseRefResult2.current then return end
+		local OffsetDelta = UseRefResult1.current.Position.Y.Offset - UseRefResult4.current
 		
-		if p3.Y * 0.25 < -var14 then
-			var13(navigationTypeModule.Next)
-		elseif p3.Y * 0.25 < var14 then
-			var13(navigationTypeModule.Previous)
+		if Current.Y * 0.25 < -OffsetDelta then
+			UseResult1(NavigationTypeModule.Next)
+		elseif Current.Y * 0.25 < OffsetDelta then
+			UseResult1(NavigationTypeModule.Previous)
 		else
-			var13(navigationTypeModule.Current)
+			UseResult1(NavigationTypeModule.Current)
 		end
-		var8.current = nil
-		var7.current = nil
-	end, { p1, p3, var13 }))
-	useEventConnection(userInputService.PointerAction, reactModule.useCallback(function(p5, p6)
-		-- upvalues: p1 (ref), var13 (ref), navigationTypeModule (copy)
+		UseRefResult5.current = nil
+		UseRefResult4.current = nil
+	end, { p1, Current, UseResult1 })))
+	UseEventConnectionFunction(UserInputService.PointerAction, (ReactModule.useCallback(function(p3: number, Vector) --[[ Line: 218 ]]
+		-- upvalues: p1 (copy), UseResult1 (copy), NavigationTypeModule (upval)
 		if not p1 then return end
-		if p5 < 0 or p6.Y < -0.1 then
-			var13(navigationTypeModule.Next)
+		if p3 < 0 or Vector.Y < -0.1 then
+			UseResult1(NavigationTypeModule.Next)
 			
 			return
-		elseif p5 > 0 or p6.Y > 0.1 then
-			var13(navigationTypeModule.Previous)
 		end
-	end, { p1, var13 }))
+		if p3 > 0 or Vector.Y > 0.1 then
+			UseResult1(NavigationTypeModule.Previous)
+		end
+	end, { p1, UseResult1 })))
 	
-	return var2, var1, var4, var12, var13
+	return UseStateResult, UseRefResult, UseRefResult1, UseResult, UseResult1
 end

@@ -1,84 +1,83 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local creatorAgentChatModule = require(parent.DataHydration.CreatorAgentChat)
-local fFlagBuildExperiencePinForBuild = require(parent.SharedFlags).FFlagBuildExperiencePinForBuild
-local getCurrentExperienceProjectModule = require(script.Parent.getCurrentExperienceProject)
-local getDefaultTemplatePlaceIdModule = require(script.Parent.getDefaultTemplatePlaceId)
-local debug = creatorAgentChatModule.debug
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local CreatorAgentChatModule = require(Parent.DataHydration.CreatorAgentChat)
+local FFlagBuildExperiencePinForBuild = require(Parent.SharedFlags).FFlagBuildExperiencePinForBuild
+local GetCurrentExperienceProjectModule = require(script.Parent.getCurrentExperienceProject)
+local GetDefaultTemplatePlaceIdModule = require(script.Parent.getDefaultTemplatePlaceId)
+local Debug = CreatorAgentChatModule.debug
 
-local function awaitRequestHandle(p1, p2)
-	while p1(false).status == "pending" do
-		if p2 > os.clock() then
-			task.wait()
-			continue
+local function awaitRequestHandle(Callback, NewClockTime) --[[ Line: 35 ]]
+	while Callback(false).status == "pending" do
+		if NewClockTime <= os.clock() then
+			return Callback(false)
 		end
-		return p1(false)
+		task.wait()
 	end
-	return p1(false)
+	return Callback(false)
 end
 
-local function runSyncRpc(p3, p4, p5)
-	-- upvalues: awaitRequestHandle (ref)
-	local var1 = awaitRequestHandle(p4().state, os.clock() + 30)
-	local floored = math.floor((os.clock() - os.clock()) * 1000)
+local function runSyncRpc(Method, Callback, Callback1) --[[ Line: 45 ]]
+	-- upvalues: awaitRequestHandle (copy)
+	local AwaitRequestHandleResult = awaitRequestHandle(Callback().state, os.clock() + 30)
+	local Floored = math.floor((os.clock() - os.clock()) * 1000)
 	
-	return if var1.status == "succeeded" then {
+	return if AwaitRequestHandleResult.status == "succeeded" then {
 		status = "ok",
-		method = p3,
-		detail = if p5 then p5(var1.result) else "succeeded",
-		elapsedMs = floored
-	} elseif var1.status == "pending" then {
+		method = Method,
+		detail = if Callback1 then Callback1(AwaitRequestHandleResult.result) else "succeeded",
+		elapsedMs = Floored
+	} elseif AwaitRequestHandleResult.status == "pending" then {
 		status = "fail",
 		detail = "timed out (still pending)",
-		method = p3,
-		elapsedMs = floored
+		method = Method,
+		elapsedMs = Floored
 	} else {
 		status = "fail",
-		method = p3,
-		detail = var1.error or "failed",
-		elapsedMs = floored
+		method = Method,
+		detail = AwaitRequestHandleResult.error or "failed",
+		elapsedMs = Floored
 	}
 end
 
-local function _(p3, p4)
+local function _(Method, Detail) --[[ Line: 83 | Named "skipResult" ]]
 	return {
 		status = "skip",
 		elapsedMs = nil,
-		method = p3,
-		detail = p4
+		method = Method,
+		detail = Detail
 	}
 end
 
-local _ = function(p3)
-	return `[{if p3.status == "ok" then "OK" elseif p3.status == "skip" then "SKIP" else "FAIL"}] {p3.method}{if p3.elapsedMs then ` ({p3.elapsedMs}ms)` else ""} \226\128\148 {p3.detail}`
+local _ = function(p1): string --[[ Line: 92 | Named "formatResultLine" ]]
+	return `[{if p1.status == "ok" then "OK" elseif p1.status == "skip" then "SKIP" else "FAIL"}] {p1.method}{if p1.elapsedMs then ` ({p1.elapsedMs}ms)` else ""} — {p1.detail}`
 end
 
-local function buildSummary(p4, p5)
-	local list = { "CAS API smoke test", p4, "" }
+local function buildSummary(Url, List): string --[[ Line: 98 ]]
+	local List1 = { "CAS API smoke test", Url, "" }
 	
-	for i, v in p5 do
-		table.insert(list, `[{if v.status == "ok" then "OK" elseif v.status == "skip" then "SKIP" else "FAIL"}] {v.method}{if v.elapsedMs then ` ({v.elapsedMs}ms)` else ""} \226\128\148 {v.detail}`)
+	for _, value in List do
+		table.insert(List1, `[{if value.status == "ok" then "OK" elseif value.status == "skip" then "SKIP" else "FAIL"}] {value.method}{if value.elapsedMs then ` ({value.elapsedMs}ms)` else ""} — {value.detail}`)
 	end
-	local var1 = 0
-	local var2 = 0
-	local var3 = 0
+	local Count = 0
+	local Count1 = 0
+	local Count2 = 0
 	
-	for i_1, v_1 in p5 do
-		if v_1.status == "ok" then
-			var1 += 1
-		elseif v_1.status == "skip" then
-			var3 += 1
+	for _, value1 in List do
+		if value1.status == "ok" then
+			Count += 1
+		elseif value1.status == "skip" then
+			Count2 += 1
 		else
-			var2 += 1
+			Count1 += 1
 		end
 	end
-	table.insert(list, "")
-	table.insert(list, `Summary: {var1} ok, {var2} fail, {var3} skip`)
+	table.insert(List1, "")
+	table.insert(List1, `Summary: {Count} ok, {Count1} fail, {Count2} skip`)
 	
-	return table.concat(list, "\n")
+	return table.concat(List1, "\n")
 end
 
-local function runSessionPromptSmoke(p6, p7, p8)
-	if p7 == nil then
+local function runSessionPromptSmoke(p2, SessionId, UniverseId) --[[ Line: 126 ]]
+	if SessionId == nil then
 		return {
 			method = "session/prompt",
 			status = "skip",
@@ -86,160 +85,169 @@ local function runSessionPromptSmoke(p6, p7, p8)
 			elapsedMs = nil
 		}
 	end
-	local processTime = os.clock()
-	local t = { prompt = "smoke test", sessionId = p7 }
+	local ClockTime = os.clock()
+	local config = { prompt = "smoke test", sessionId = SessionId }
 	
-	if p8 ~= nil then
-		t._meta = { _roblox = { providerConfig = { universeId = p8 } } }
-	end
-	local var4 = p6.sessionPrompt(t)
-	local var5 = os.clock() + 30
-	while var4.state(false).status == "queued" do
-		if var5 > os.clock() then
-			task.wait()
-			continue
-		end
-		return {
-			method = "session/prompt",
-			status = "fail",
-			detail = "timed out waiting for POST ack (still queued)",
-			elapsedMs = math.floor((os.clock() - processTime) * 1000)
+	if UniverseId ~= nil then
+		config._meta = {
+			_roblox = { providerConfig = { universeId = UniverseId } }
 		}
 	end
-	while not var4.state(false).isDone do
-		if var5 > os.clock() then
-			task.wait()
-			continue
+	local SessionPromptResult = p2.sessionPrompt(config)
+	local NewClockTime = os.clock() + 30
+	while SessionPromptResult.state(false).status == "queued" do
+		if NewClockTime <= os.clock() then
+			return {
+				method = "session/prompt",
+				status = "fail",
+				detail = "timed out waiting for POST ack (still queued)",
+				elapsedMs = math.floor((os.clock() - ClockTime) * 1000)
+			}
 		end
-		return {
-			method = "session/prompt",
-			status = "fail",
-			detail = "timed out waiting for CAP completion",
-			elapsedMs = math.floor((os.clock() - processTime) * 1000)
-		}
+		task.wait()
 	end
-	local floored = math.floor((os.clock() - processTime) * 1000)
-	local var6 = var4.state(false)
+	while not SessionPromptResult.state(false).isDone do
+		if NewClockTime <= os.clock() then
+			return {
+				method = "session/prompt",
+				status = "fail",
+				detail = "timed out waiting for CAP completion",
+				elapsedMs = math.floor((os.clock() - ClockTime) * 1000)
+			}
+		end
+		task.wait()
+	end
+	local Floored = math.floor((os.clock() - ClockTime) * 1000)
+	local StateResult = SessionPromptResult.state(false)
 	
-	return if var6.status == "failed" then {
+	return if StateResult.status == "failed" then {
 		method = "session/prompt",
 		status = "fail",
-		detail = var6.error or "POST failed",
-		elapsedMs = floored
+		detail = StateResult.error or "POST failed",
+		elapsedMs = Floored
 	} else {
 		method = "session/prompt",
 		status = "ok",
-		detail = if var6.isDone then `CAP completed ({var6.status}, stopReason={var6.stopReason or "?"})` else "POST accepted (202); CAP stream not completed in window",
-		elapsedMs = floored
+		detail = if StateResult.isDone then `CAP completed ({StateResult.status}, stopReason={StateResult.stopReason or "?"})` else "POST accepted (202); CAP stream not completed in window",
+		elapsedMs = Floored
 	}
 end
 
-return function(p9, p10, p11)
-	-- upvalues: creatorAgentChatModule (ref), getCurrentExperienceProjectModule (ref), getDefaultTemplatePlaceIdModule (ref), debug (ref), runSyncRpc (ref), fFlagBuildExperiencePinForBuild (ref), runSessionPromptSmoke (ref), buildSummary (ref)
-	local var7 = creatorAgentChatModule.resolveCreatorAgentAcp()
-	local t = {}
-	local var8 = getCurrentExperienceProjectModule()
-	p10 = p10 or var8.universeId
-	p11 = p11 or (var8.placeId or getDefaultTemplatePlaceIdModule())
-	debug.log("info", "CAS smoke test starting", { acpUrl = var7.url, universeId = p10, placeId = p11 })
-	local var9 = nil
-	table.insert(t, runSyncRpc("initialize", function()
-		-- upvalues: p9 (ref)
-		return p9.initialize({ protocolVersion = 2 })
-	end, function(p12)
-		return if typeof(p12) == "table" and typeof(p12.agentInfo) == "table" then `agent={p12.agentInfo.name or "?"} v{p12.agentInfo.version or "?"}` else "succeeded"
-	end))
-	local var10 = if p10 == nil then {
+return function(p3, p4, p5) --[[ Line: 200 | Named "runCreatorAgentSmokeTest" ]]
+	-- upvalues: CreatorAgentChatModule (copy), GetCurrentExperienceProjectModule (copy), GetDefaultTemplatePlaceIdModule (copy), Debug (copy), runSyncRpc (copy), FFlagBuildExperiencePinForBuild (copy), runSessionPromptSmoke (copy), buildSummary (copy)
+	local ResolveCreatorAgentAcpResult = CreatorAgentChatModule.resolveCreatorAgentAcp()
+	local List = {}
+	local CurrentExperienceProjectModule = GetCurrentExperienceProjectModule()
+	local P11 = p4 or CurrentExperienceProjectModule.universeId
+	local P12 = p5 or (CurrentExperienceProjectModule.placeId or GetDefaultTemplatePlaceIdModule())
+	Debug.log("info", "CAS smoke test starting", {
+		acpUrl = ResolveCreatorAgentAcpResult.url,
+		universeId = P11,
+		placeId = P12
+	})
+	local SessionId = nil
+	table.insert(List, (runSyncRpc("initialize", function() --[[ Line: 219 ]]
+		-- upvalues: p3 (copy)
+		return p3.initialize({ protocolVersion = 2 })
+	end, function(p6): string --[[ Line: 221 ]]
+		return if typeof(p6) == "table" and typeof(p6.agentInfo) == "table" then `agent={p6.agentInfo.name or "?"} v{p6.agentInfo.version or "?"}` else "succeeded"
+	end)))
+	local Config = if P11 == nil then {
 		method = "session/new",
 		status = "skip",
 		detail = "requires universeId (game.GameId is 0 or not in an experience)",
 		elapsedMs = nil
-	} else runSyncRpc("session/new", function()
-		-- upvalues: p9 (ref), p10 (ref), p11 (ref), fFlagBuildExperiencePinForBuild (copy)
-		return p9.sessionNew({
-			project = { universeId = p10, placeId = p11 },
-			application = if fFlagBuildExperiencePinForBuild then "build" else nil
+	} else runSyncRpc("session/new", function() --[[ Line: 231 ]]
+		-- upvalues: p3 (copy), P11 (copy), P12 (copy), FFlagBuildExperiencePinForBuild (upval)
+		return p3.sessionNew({
+			project = { universeId = P11, placeId = P12 },
+			application = if FFlagBuildExperiencePinForBuild then "build" else nil
 		})
-	end, function(p12)
-		-- upvalues: var9 (write)
-		if typeof(p12) == "table" and typeof(p12.sessionId) == "string" and p12.sessionId ~= "" then
-			var9 = p12.sessionId
+	end, function(p6): string --[[ Line: 239 ]]
+		-- upvalues: SessionId (ref)
+		if typeof(p6) == "table" and typeof(p6.sessionId) == "string" and p6.sessionId ~= "" then
+			SessionId = p6.sessionId
 			
-			return `sessionId={var9}`
+			return `sessionId={SessionId}`
+		else
+			return "succeeded but missing sessionId"
 		end
-		return "succeeded but missing sessionId"
 	end)
 	
-	if var10.status == "ok" and var9 == nil then
-		var10 = {
+	if Config.status == "ok" and SessionId == nil then
+		Config = {
 			method = "session/new",
 			status = "fail",
 			detail = "succeeded but missing sessionId in result",
-			elapsedMs = var10.elapsedMs
+			elapsedMs = Config.elapsedMs
 		}
-	elseif var10.status == "fail" then
-		var10.detail = debug.rpcFailureMessage("session/new", { status = "failed", error = var10.detail })
+	elseif Config.status == "fail" then
+		Config.detail = Debug.rpcFailureMessage("session/new", { status = "failed", error = Config.detail })
 	end
-	table.insert(t, var10)
-	table.insert(t, runSyncRpc("session/list", function()
-		-- upvalues: p9 (ref)
-		return p9.sessionList()
-	end, function(p12)
-		return `{#(if typeof(p12) == "table" and p12.sessions then p12.sessions else {})} session(s)`
-	end))
+	table.insert(List, Config)
+	table.insert(List, (runSyncRpc("session/list", function() --[[ Line: 262 ]]
+		-- upvalues: p3 (copy)
+		return p3.sessionList()
+	end, function(p6): string --[[ Line: 264 ]]
+		return `{#(if typeof(p6) == "table" and p6.sessions then p6.sessions else {})} session(s)`
+	end)))
 	
-	if var9 == nil then
-		table.insert(t, {
+	if SessionId == nil then
+		table.insert(List, {
 			method = "session/load",
 			status = "skip",
 			detail = "requires session/new",
 			elapsedMs = nil
 		})
-		table.insert(t, {
+		table.insert(List, {
 			method = "_roblox/session/update_info",
 			status = "skip",
 			detail = "requires session/new",
 			elapsedMs = nil
 		})
-		table.insert(t, {
+		table.insert(List, {
 			method = "session/cancel",
 			status = "skip",
 			detail = "requires session/new",
 			elapsedMs = nil
 		})
-		table.insert(t, {
+		table.insert(List, {
 			method = "_roblox/session/delete",
 			status = "skip",
 			detail = "requires session/new",
 			elapsedMs = nil
 		})
-		table.insert(t, {
+		table.insert(List, {
 			method = "session/prompt",
 			status = "skip",
 			detail = "requires session/new to succeed first",
 			elapsedMs = nil
 		})
 	else
-		table.insert(t, runSyncRpc("session/load", function()
-			-- upvalues: p9 (ref), var9 (write)
-			return p9.sessionLoad(var9)
-		end))
-		table.insert(t, runSyncRpc("_roblox/session/update_info", function()
-			-- upvalues: p9 (ref), var9 (write)
-			return p9.sessionUpdateInfo(var9, "BuildExperience smoke test")
-		end))
-		table.insert(t, runSessionPromptSmoke(p9, var9, p10))
-		table.insert(t, runSyncRpc("session/cancel", function()
-			-- upvalues: p9 (ref), var9 (write)
-			return p9.sessionCancel(var9)
-		end))
-		table.insert(t, runSyncRpc("_roblox/session/delete", function()
-			-- upvalues: p9 (ref), var9 (write)
-			return p9.sessionDelete(var9)
-		end))
+		table.insert(List, (runSyncRpc("session/load", function() --[[ Line: 277 ]]
+			-- upvalues: p3 (copy), SessionId (ref)
+			return p3.sessionLoad(SessionId)
+		end)))
+		table.insert(List, (runSyncRpc("_roblox/session/update_info", function() --[[ Line: 282 ]]
+			-- upvalues: p3 (copy), SessionId (ref)
+			return p3.sessionUpdateInfo(SessionId, "BuildExperience smoke test")
+		end)))
+		table.insert(List, (runSessionPromptSmoke(p3, SessionId, P11)))
+		table.insert(List, (runSyncRpc("session/cancel", function() --[[ Line: 289 ]]
+			-- upvalues: p3 (copy), SessionId (ref)
+			return p3.sessionCancel(SessionId)
+		end)))
+		table.insert(List, (runSyncRpc("_roblox/session/delete", function() --[[ Line: 294 ]]
+			-- upvalues: p3 (copy), SessionId (ref)
+			return p3.sessionDelete(SessionId)
+		end)))
 	end
-	local var11 = buildSummary(var7.url, t)
-	debug.log("info", "CAS smoke test complete", { results = t, summary = var11 })
+	local Summary = buildSummary(ResolveCreatorAgentAcpResult.url, List)
+	Debug.log("info", "CAS smoke test complete", { results = List, summary = Summary })
 	
-	return { acpUrl = var7.url, results = t, summary = var11 }
+	return {
+		acpUrl = ResolveCreatorAgentAcpResult.url,
+		results = List,
+		summary = Summary
+	}
 end

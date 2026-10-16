@@ -1,37 +1,37 @@
-﻿local parent = script:FindFirstAncestor("EditProfile").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local snackbar = foundationModule.Snackbar
-local enums = foundationModule.Enums
+﻿local Parent = script:FindFirstAncestor("EditProfile").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local Snackbar = FoundationModule.Snackbar
+local Enums = FoundationModule.Enums
 
-return function(p1)
-	-- upvalues: reactModule (ref), snackbar (ref), enums (ref)
-	local var1, var2 = reactModule.useState(true)
-	local var3 = reactModule.useRef(nil)
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), var2 (ref)
-		if var3.current then
-			task.cancel(var3.current)
+return function(p1) --[[ Line: 12 | Named "EditProfileToast" ]]
+	-- upvalues: ReactModule (copy), Snackbar (copy), Enums (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(true)
+	local UseRefResult = ReactModule.useRef(nil)
+	ReactModule.useEffect(function() --[[ Line: 18 ]]
+		-- upvalues: UseRefResult (copy), UseStateResult2 (copy)
+		if UseRefResult.current then
+			task.cancel(UseRefResult.current)
 		end
-		var3.current = task.delay(5, function()
-			-- upvalues: var2 (copy)
-			var2(false)
+		UseRefResult.current = task.delay(5, function() --[[ Line: 25 ]]
+			-- upvalues: UseStateResult2 (upval)
+			UseStateResult2(false)
 		end)
 		
-		return function()
-			-- upvalues: var3 (copy)
-			if var3.current then
-				task.cancel(var3.current)
-				var3.current = nil
+		return function() --[[ Line: 30 ]]
+			-- upvalues: UseRefResult (upval)
+			if UseRefResult.current then
+				task.cancel(UseRefResult.current)
+				UseRefResult.current = nil
 			end
 		end
 	end, {})
 	
-	return if var1 then reactModule.createElement(snackbar, {
+	return if UseStateResult then ReactModule.createElement(Snackbar, {
 		title = p1.text,
 		icon = {
-			name = enums.IconName.CircleCheck,
-			variant = enums.IconVariant.Filled
+			name = Enums.IconName.CircleCheck,
+			variant = Enums.IconVariant.Filled
 		},
 		Position = UDim2.new(0.5, 0, 0, 50),
 		AnchorPoint = Vector2.new(0.5, 0)

@@ -1,123 +1,124 @@
-﻿local runService = game:GetService("RunService")
-local corePackagesService = game:GetService("CorePackages")
-local roactModule = require(corePackagesService.Packages.Roact)
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local tModule = require(corePackagesService.Packages.t)
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local images = UIBloxModule.App.ImageSet.Images
-local color = Color3.fromRGB(98, 98, 99)
-local color_1 = Color3.fromRGB(255, 255, 255)
-local color_2 = Color3.fromRGB(196, 0, 1)
-local circle29 = images["component_assets/circle_29"]
-local fillCircle = roactModule.PureComponent:extend("FillCircle")
-fillCircle.validateProps = tModule.strictInterface({
-	Position = tModule.UDim2,
-	AnchorPoint = tModule.Vector2,
-	fillFraction = tModule.number,
-	largerCircleFraction = tModule.number,
-	popCircleFraction = tModule.number,
-	shakeCircleFraction = tModule.number,
-	BackgroundColor = tModule.Color3
+﻿local RunService = game:GetService("RunService")
+local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
+local TModule = require(CorePackages.Packages.t)
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local _Color3 = Color3.fromRGB(98, 98, 99)
+local _Color3_1 = Color3.fromRGB(255, 255, 255)
+local _Color3_2 = Color3.fromRGB(196, 0, 1)
+local ComponentAssetsCircle29 = UIBloxModule.App.ImageSet.Images["component_assets/circle_29"]
+local FillCircle = RoactModule.PureComponent:extend("FillCircle")
+FillCircle.validateProps = TModule.strictInterface({
+	Position = TModule.UDim2,
+	AnchorPoint = TModule.Vector2,
+	fillFraction = TModule.number,
+	largerCircleFraction = TModule.number,
+	popCircleFraction = TModule.number,
+	shakeCircleFraction = TModule.number,
+	BackgroundColor = TModule.Color3
 })
 
-local function _(p1)
+local function _(p1: number): number --[[ Line: 36 | Named "getFillRingZIndex" ]]
 	return if p1 > 0.75 then 8 elseif p1 > 0.5 then 6 elseif p1 > 0.25 then 4 elseif p1 > 0 then 2 else 0
 end
 
-local _ = function(p1, p2, p3)
+local _ = function(p1, p2: number, p3: number): number --[[ Line: 49 | Named "linearTween" ]]
 	return (p1 - p2 / 30) / ((p3 - p2) / 30)
 end
 
-local _ = function(p1, p2, p3)
+local _ = function(p1, p2: number, p3: number): boolean --[[ Line: 54 | Named "isBetweenFrames" ]]
 	return p2 / 30 <= p1 and p1 <= p3 / 30
 end
 
-local function largerCircleAnimation(p1, p2, p3, p4)
+local function largerCircleAnimation(p1: number, p2, p3, Callback: () -> ()) --[[ Line: 58 ]]
 	if p3 then
-		p1 = 0.266666666667 - p1
+		p1 = 0.26666666666666666 - p1
 	end
-	local var1 = p1
-	
-	if var1 >= 0 and var1 <= 0.166666666667 then
-		local var2 = 16 + 6 * ((p1 - 0) / 0.166666666667)
-		p2.size(UDim2.new(0, var2, 0, var2))
+	if p1 >= 0 and p1 <= 0.16666666666666666 then
+		local XOffset = 16 + 6 * ((p1 - 0) / 0.16666666666666666)
+		p2.size(UDim2.new(0, XOffset, 0, XOffset))
 		
 		return
 	end
-	local var3 = p1
-	
-	if var3 >= 0.166666666667 and var3 <= 0.266666666667 then
-		local var4 = 22 - 2 * ((p1 - 0.166666666667) / 0.1)
-		p2.size(UDim2.new(0, var4, 0, var4))
+	if p1 >= 0.16666666666666666 and p1 <= 0.26666666666666666 then
+		local XOffset1 = 22 - 2 * ((p1 - 0.16666666666666666) / 0.1)
+		p2.size(UDim2.new(0, XOffset1, 0, XOffset1))
 		
 		return
-	elseif p1 < 0 then
+	end
+	if p1 < 0 then
 		p2.size(UDim2.new(0, 16, 0, 16))
-		p4()
+		Callback()
 		
 		return
+	else
+		p2.size(UDim2.new(0, 20, 0, 20))
+		Callback()
 	end
-	p2.size(UDim2.new(0, 20, 0, 20))
-	p4()
 end
 
-local function popCircleAnimation(p1, p2, _, p3)
+local function popCircleAnimation(p1: number, p2, _, Callback: () -> ()) --[[ Line: 86 ]]
 	if p1 >= 0 and p1 <= 0.1 then
-		local var1 = 20 + 4 * ((p1 - 0) / 0.1)
-		p2.size(UDim2.new(0, var1, 0, var1))
-		
-		return
-	elseif p1 >= 0.1 and p1 <= 0.2 then
-		local var2 = 24 - 4 * ((p1 - 0.1) / 0.1)
-		p2.size(UDim2.new(0, var2, 0, var2))
+		local XOffset = 20 + 4 * ((p1 - 0) / 0.1)
+		p2.size(UDim2.new(0, XOffset, 0, XOffset))
 		
 		return
 	end
-	p2.size(UDim2.new(0, 20, 0, 20))
-	p3()
+	if p1 >= 0.1 and p1 <= 0.2 then
+		local XOffset1 = 24 - 4 * ((p1 - 0.1) / 0.1)
+		p2.size(UDim2.new(0, XOffset1, 0, XOffset1))
+		
+		return
+	else
+		p2.size(UDim2.new(0, 20, 0, 20))
+		Callback()
+	end
 end
 
-local function shakeCircleAnimation(p1, p2, _, p3)
+local function shakeCircleAnimation(p1: number, p2, _, Callback: () -> ()) --[[ Line: 107 ]]
 	if p1 >= 0 and p1 <= 0.1 then
 		p2.positionOffset(UDim2.new(0, -4 * ((p1 - 0) / 0.1), 0, 0))
 		
 		return
-	elseif p1 >= 0.1 and p1 <= 0.2 then
+	end
+	if p1 >= 0.1 and p1 <= 0.2 then
 		p2.positionOffset(UDim2.new(0, -4 + 12 * ((p1 - 0.1) / 0.1), 0, 0))
 		
 		return
-	elseif p1 >= 0.2 and p1 <= 0.266666666667 then
-		p2.positionOffset(UDim2.new(0, 8 - 16 * ((p1 - 0.2) / 0.066666666667), 0, 0))
-		
-		return
-	elseif p1 >= 0.266666666667 and p1 <= 0.333333333333 then
-		p2.positionOffset(UDim2.new(0, -8 + 16 * ((p1 - 0.266666666667) / 0.066666666667), 0, 0))
-		
-		return
-	elseif p1 >= 0.333333333333 and p1 <= 0.4 then
-		p2.positionOffset(UDim2.new(0, 8 - 16 * ((p1 - 0.333333333333) / 0.066666666667), 0, 0))
-		
-		return
-	elseif p1 >= 0.4 and p1 <= 0.466666666667 then
-		p2.positionOffset(UDim2.new(0, -8 + 8 * ((p1 - 0.4) / 0.066666666667), 0, 0))
+	end
+	if p1 >= 0.2 and p1 <= 0.26666666666666666 then
+		p2.positionOffset(UDim2.new(0, 8 - 16 * ((p1 - 0.2) / 0.06666666666666667), 0, 0))
 		
 		return
 	end
-	p2.positionOffset(UDim2.new(0, 0, 0, 0))
-	p3()
+	if p1 >= 0.26666666666666666 and p1 <= 0.3333333333333333 then
+		p2.positionOffset(UDim2.new(0, -8 + 16 * ((p1 - 0.26666666666666666) / 0.06666666666666667), 0, 0))
+		
+		return
+	end
+	if p1 >= 0.3333333333333333 and p1 <= 0.4 then
+		p2.positionOffset(UDim2.new(0, 8 - 16 * ((p1 - 0.3333333333333333) / 0.06666666666666667), 0, 0))
+		
+		return
+	end
+	if p1 >= 0.4 and p1 <= 0.4666666666666667 then
+		p2.positionOffset(UDim2.new(0, -8 + 8 * ((p1 - 0.4) / 0.06666666666666667), 0, 0))
+		
+		return
+	else
+		p2.positionOffset(UDim2.new(0, 0, 0, 0))
+		Callback()
+	end
 end
 
-function fillCircle.init(p1)
-	-- upvalues: roactModule (ref)
-	local var1, var2 = roactModule.createBinding(UDim2.new(0, 16, 0, 16))
-	p1.sizeBinding = var1
-	p1.sizeBindingUpdate = var2
-	p1.largerSizeBinding = p1.sizeBinding:map(function(p2)
+function FillCircle.init(p1) --[[ Line: 142 ]]
+	-- upvalues: RoactModule (copy)
+	p1.sizeBinding, p1.sizeBindingUpdate = RoactModule.createBinding(UDim2.new(0, 16, 0, 16))
+	p1.largerSizeBinding = p1.sizeBinding:map(function(p2): UDim2 --[[ Line: 145 ]]
 		return p2 + UDim2.new(0, 2, 0, 2)
 	end)
-	local var3, var4 = roactModule.createBinding(UDim2.new(0, 0, 0, 0))
-	p1.positionOffsetBinding = var3
-	p1.positionOffsetBindingUpdate = var4
+	p1.positionOffsetBinding, p1.positionOffsetBindingUpdate = RoactModule.createBinding(UDim2.new(0, 0, 0, 0))
 	p1.updateBindings = {
 		size = p1.sizeBindingUpdate,
 		positionOffset = p1.positionOffsetBindingUpdate
@@ -128,174 +129,168 @@ function fillCircle.init(p1)
 	p1.renderSteppedConnection = nil
 end
 
-function fillCircle.render(p1)
-	-- upvalues: color_2 (ref), color_1 (ref), roactModule (ref), color (ref), imageSetLabel (ref), circle29 (ref)
-	local props = p1.props
-	local var1 = if props.fillFraction >= 1 then color_2 else color_1
-	local createElement = roactModule.createElement
-	local var2 = "Frame"
-	local t = {
+function FillCircle.render(p1) --[[ Line: 161 ]]
+	-- upvalues: _Color3_2 (copy), _Color3_1 (copy), RoactModule (copy), _Color3 (copy), ImageSetLabel (copy), ComponentAssetsCircle29 (copy)
+	local Props = p1.props
+	local _Color3_2_1 = Props.fillFraction >= 1 and _Color3_2 or _Color3_1
+	local FillFraction: number = Props.fillFraction
+	
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = p1.sizeBinding,
-		Position = props.Position,
-		AnchorPoint = props.AnchorPoint
-	}
-	local t_1 = {}
-	local createElement_1 = roactModule.createElement
-	local var3 = "Frame"
-	local t_2 = {
-		BorderSizePixel = 0,
-		Position = p1.positionOffsetBinding,
-		Size = UDim2.new(1, 0, 1, 0),
-		BackgroundColor3 = color
-	}
-	local t_3 = {
-		OuterRing = roactModule.createElement(imageSetLabel, {
-			Image = "rbxasset://textures/ui/InGameMenu/CircleCutout.png",
-			BackgroundTransparency = 1,
-			ZIndex = 10,
-			Size = UDim2.new(1, 0, 1, 0),
-			ImageColor3 = props.BackgroundColor
-		}),
-		InnerRing = roactModule.createElement(imageSetLabel, {
-			BackgroundTransparency = 1,
-			ZIndex = 10,
-			Image = circle29,
-			Size = UDim2.new(1, -4, 1, -4),
-			Position = UDim2.new(0.5, 0, 0.5, 0),
-			AnchorPoint = Vector2.new(0.5, 0.5),
-			ImageColor3 = props.BackgroundColor
-		})
-	}
-	local createElement_2 = roactModule.createElement
-	local var4 = "Frame"
-	local t_4 = {
-		BackgroundTransparency = 1,
-		Size = UDim2.new(0, 0, 0, 0),
-		Position = UDim2.new(0.5, 0, 0.5, 0),
-		Rotation = props.fillFraction * 360
-	}
-	local fillFraction = props.fillFraction
-	t_4.ZIndex = if fillFraction > 0.75 then 8 elseif fillFraction > 0.5 then 6 elseif fillFraction > 0.25 then 4 elseif fillFraction > 0 then 2 else 0
-	t_3.FillRingRotationFrame = createElement_2(var4, t_4, {
-		FillRing = roactModule.createElement(imageSetLabel, {
-			Image = "rbxasset://textures/ui/InGameMenu/QuarterCircle.png",
-			BackgroundTransparency = 1,
-			Size = p1.largerSizeBinding,
-			AnchorPoint = Vector2.new(0.5, 0.5),
-			ImageColor3 = var1
-		})
-	})
-	t_3.EdgeBlockers = roactModule.createElement("Frame", {
-		BackgroundTransparency = 1,
-		ZIndex = 10,
-		Size = UDim2.new(1, 0, 1, 0)
+		Position = Props.Position,
+		AnchorPoint = Props.AnchorPoint
 	}, {
-		Top = roactModule.createElement("Frame", {
+		PositionOffsetFrame = RoactModule.createElement("Frame", {
 			BorderSizePixel = 0,
-			AnchorPoint = Vector2.new(0.5, 1),
-			Position = UDim2.new(0.5, 0, 0, 0),
-			Size = UDim2.new(1, 4, 0, 2),
-			BackgroundColor3 = props.BackgroundColor
-		}),
-		Right = roactModule.createElement("Frame", {
-			BorderSizePixel = 0,
-			AnchorPoint = Vector2.new(0, 0.5),
-			Position = UDim2.new(1, 0, 0.5, 0),
-			Size = UDim2.new(0, 2, 1, 4),
-			BackgroundColor3 = props.BackgroundColor
-		}),
-		Bottom = roactModule.createElement("Frame", {
-			BorderSizePixel = 0,
-			AnchorPoint = Vector2.new(0.5, 0),
-			Position = UDim2.new(0.5, 0, 1, 0),
-			Size = UDim2.new(1, 4, 0, 2),
-			BackgroundColor3 = props.BackgroundColor
-		}),
-		Left = roactModule.createElement("Frame", {
-			BorderSizePixel = 0,
-			AnchorPoint = Vector2.new(1, 0.5),
-			Position = UDim2.new(0, 0, 0.5, 0),
-			Size = UDim2.new(0, 2, 1, 4),
-			BackgroundColor3 = props.BackgroundColor
+			Position = p1.positionOffsetBinding,
+			Size = UDim2.new(1, 0, 1, 0),
+			BackgroundColor3 = _Color3
+		}, {
+			OuterRing = RoactModule.createElement(ImageSetLabel, {
+				Image = "rbxasset://textures/ui/InGameMenu/CircleCutout.png",
+				BackgroundTransparency = 1,
+				ZIndex = 10,
+				Size = UDim2.new(1, 0, 1, 0),
+				ImageColor3 = Props.BackgroundColor
+			}),
+			InnerRing = RoactModule.createElement(ImageSetLabel, {
+				BackgroundTransparency = 1,
+				ZIndex = 10,
+				Image = ComponentAssetsCircle29,
+				Size = UDim2.new(1, -4, 1, -4),
+				Position = UDim2.new(0.5, 0, 0.5, 0),
+				AnchorPoint = Vector2.new(0.5, 0.5),
+				ImageColor3 = Props.BackgroundColor
+			}),
+			FillRingRotationFrame = RoactModule.createElement("Frame", {
+				BackgroundTransparency = 1,
+				Size = UDim2.new(0, 0, 0, 0),
+				Position = UDim2.new(0.5, 0, 0.5, 0),
+				Rotation = Props.fillFraction * 360,
+				ZIndex = if FillFraction > 0.75 then 8 elseif FillFraction > 0.5 then 6 elseif FillFraction > 0.25 then 4 elseif FillFraction > 0 then 2 else 0
+			}, {
+				FillRing = RoactModule.createElement(ImageSetLabel, {
+					Image = "rbxasset://textures/ui/InGameMenu/QuarterCircle.png",
+					BackgroundTransparency = 1,
+					Size = p1.largerSizeBinding,
+					AnchorPoint = Vector2.new(0.5, 0.5),
+					ImageColor3 = _Color3_2_1
+				})
+			}),
+			EdgeBlockers = RoactModule.createElement("Frame", {
+				BackgroundTransparency = 1,
+				ZIndex = 10,
+				Size = UDim2.new(1, 0, 1, 0)
+			}, {
+				Top = RoactModule.createElement("Frame", {
+					BorderSizePixel = 0,
+					AnchorPoint = Vector2.new(0.5, 1),
+					Position = UDim2.new(0.5, 0, 0, 0),
+					Size = UDim2.new(1, 4, 0, 2),
+					BackgroundColor3 = Props.BackgroundColor
+				}),
+				Right = RoactModule.createElement("Frame", {
+					BorderSizePixel = 0,
+					AnchorPoint = Vector2.new(0, 0.5),
+					Position = UDim2.new(1, 0, 0.5, 0),
+					Size = UDim2.new(0, 2, 1, 4),
+					BackgroundColor3 = Props.BackgroundColor
+				}),
+				Bottom = RoactModule.createElement("Frame", {
+					BorderSizePixel = 0,
+					AnchorPoint = Vector2.new(0.5, 0),
+					Position = UDim2.new(0.5, 0, 1, 0),
+					Size = UDim2.new(1, 4, 0, 2),
+					BackgroundColor3 = Props.BackgroundColor
+				}),
+				Left = RoactModule.createElement("Frame", {
+					BorderSizePixel = 0,
+					AnchorPoint = Vector2.new(1, 0.5),
+					Position = UDim2.new(0, 0, 0.5, 0),
+					Size = UDim2.new(0, 2, 1, 4),
+					BackgroundColor3 = Props.BackgroundColor
+				})
+			}),
+			TopLeftFill = RoactModule.createElement("Frame", {
+				BorderSizePixel = 0,
+				Size = UDim2.new(0.5, 0, 0.5, 0),
+				BackgroundColor3 = Props.fillFraction >= 1 and _Color3_2_1 or _Color3,
+				ZIndex = if Props.fillFraction >= 1 then 9 else 7
+			}),
+			BottomLeftFill = RoactModule.createElement("Frame", {
+				BorderSizePixel = 0,
+				Size = UDim2.new(0.5, 0, 0.5, 0),
+				Position = UDim2.new(0, 0, 0.5, 0),
+				BackgroundColor3 = Props.fillFraction >= 0.75 and _Color3_2_1 or _Color3,
+				ZIndex = if Props.fillFraction >= 0.75 then 9 else 5
+			}),
+			BottomRightFill = RoactModule.createElement("Frame", {
+				BorderSizePixel = 0,
+				Size = UDim2.new(0.5, 0, 0.5, 0),
+				Position = UDim2.new(0.5, 0, 0.5, 0),
+				BackgroundColor3 = Props.fillFraction >= 0.5 and _Color3_2_1 or _Color3,
+				ZIndex = if Props.fillFraction >= 0.5 then 9 else 3
+			}),
+			TopRightFill = RoactModule.createElement("Frame", {
+				BorderSizePixel = 0,
+				Size = UDim2.new(0.5, 0, 0.5, 0),
+				Position = UDim2.new(0.5, 0, 0, 0),
+				BackgroundColor3 = Props.fillFraction >= 0.25 and _Color3_2_1 or _Color3,
+				ZIndex = if Props.fillFraction >= 0.25 then 9 else 1
+			})
 		})
 	})
-	t_3.TopLeftFill = roactModule.createElement("Frame", {
-		BorderSizePixel = 0,
-		Size = UDim2.new(0.5, 0, 0.5, 0),
-		BackgroundColor3 = if props.fillFraction >= 1 then var1 else color,
-		ZIndex = if props.fillFraction >= 1 then 9 else 7
-	})
-	t_3.BottomLeftFill = roactModule.createElement("Frame", {
-		BorderSizePixel = 0,
-		Size = UDim2.new(0.5, 0, 0.5, 0),
-		Position = UDim2.new(0, 0, 0.5, 0),
-		BackgroundColor3 = if props.fillFraction >= 0.75 then var1 else color,
-		ZIndex = if props.fillFraction >= 0.75 then 9 else 5
-	})
-	t_3.BottomRightFill = roactModule.createElement("Frame", {
-		BorderSizePixel = 0,
-		Size = UDim2.new(0.5, 0, 0.5, 0),
-		Position = UDim2.new(0.5, 0, 0.5, 0),
-		BackgroundColor3 = if props.fillFraction >= 0.5 then var1 else color,
-		ZIndex = if props.fillFraction >= 0.5 then 9 else 3
-	})
-	t_3.TopRightFill = roactModule.createElement("Frame", {
-		BorderSizePixel = 0,
-		Size = UDim2.new(0.5, 0, 0.5, 0),
-		Position = UDim2.new(0.5, 0, 0, 0),
-		BackgroundColor3 = if props.fillFraction >= 0.25 then var1 else color,
-		ZIndex = if props.fillFraction >= 0.25 then 9 else 1
-	})
-	t_1.PositionOffsetFrame = createElement_1(var3, t_2, t_3)
-	
-	return createElement(var2, t, t_1)
 end
 
-function fillCircle.didUpdate(p1, p2, _)
-	-- upvalues: largerCircleAnimation (ref), popCircleAnimation (ref), shakeCircleAnimation (ref)
-	local var1 = p1.props.largerCircleFraction <= p1.props.fillFraction
+function FillCircle.didUpdate(p1, p2, _) --[[ Line: 284 ]]
+	-- upvalues: largerCircleAnimation (copy), popCircleAnimation (copy), shakeCircleAnimation (copy)
+	local IsFillFractionAbove = p1.props.fillFraction >= p1.props.largerCircleFraction
 	
-	if p2.largerCircleFraction <= p2.fillFraction ~= var1 then
-		p1:playAnimation(largerCircleAnimation, not var1)
+	if p2.largerCircleFraction <= p2.fillFraction ~= IsFillFractionAbove then
+		p1:playAnimation(largerCircleAnimation, not IsFillFractionAbove)
 	end
-	if p1.props.popCircleFraction <= p1.props.fillFraction and not (p2.popCircleFraction <= p2.fillFraction) then
+	local IsPopCircleFractionBelow = p2.popCircleFraction <= p2.fillFraction
+	
+	if p1.props.fillFraction >= p1.props.popCircleFraction and not IsPopCircleFractionBelow then
 		p1:playAnimation(popCircleAnimation, false)
 	end
-	if p1.props.shakeCircleFraction <= p1.props.fillFraction and not (p2.shakeCircleFraction <= p2.fillFraction) then
+	local IsShakeCircleFractionBelow = p2.shakeCircleFraction <= p2.fillFraction
+	
+	if p1.props.fillFraction >= p1.props.shakeCircleFraction and not IsShakeCircleFractionBelow then
 		p1:playAnimation(shakeCircleAnimation, false)
 	end
 end
 
-function fillCircle.playAnimation(p1, p2, p3)
-	-- upvalues: runService (ref)
+function FillCircle.playAnimation(p1, AnimationFunction, ReverseAnimation) --[[ Line: 304 ]]
+	-- upvalues: RunService (copy)
 	if p1.animationFunction then
-		p1.animationFunction(100, p1.updateBindings, p1.reverseAnimation, function() end)
+		p1.animationFunction(100, p1.updateBindings, p1.reverseAnimation, function() --[[ Line: 307 ]] end)
 	end
 	p1.animationStartTime = tick()
-	p1.animationFunction = p2
-	p1.reverseAnimation = p3
+	p1.animationFunction = AnimationFunction
+	p1.reverseAnimation = ReverseAnimation
 	
 	if not p1.renderSteppedConnection then
-		p1.renderSteppedConnection = runService.RenderStepped:Connect(function()
-			-- upvalues: p1 (ref)
-			p1.animationFunction(tick() - p1.animationStartTime, p1.updateBindings, p1.reverseAnimation, function()
-				-- upvalues: p1 (copy)
+		p1.renderSteppedConnection = RunService.RenderStepped:Connect(function() --[[ Line: 313 ]]
+			-- upvalues: p1 (copy)
+			p1.animationFunction(tick() - p1.animationStartTime, p1.updateBindings, p1.reverseAnimation, function() --[[ Line: 318 ]]
+				-- upvalues: p1 (upval)
 				p1:stopAnimation()
 			end)
 		end)
 	end
 end
 
-function fillCircle.stopAnimation(p1)
+function FillCircle.stopAnimation(p1) --[[ Line: 326 ]]
 	if p1.renderSteppedConnection then
 		p1.renderSteppedConnection:Disconnect()
 		p1.renderSteppedConnection = nil
 	end
 end
 
-function fillCircle.willUnmount(p1)
+function FillCircle.willUnmount(p1) --[[ Line: 333 ]]
 	p1:stopAnimation()
 end
 
-return fillCircle
+return FillCircle

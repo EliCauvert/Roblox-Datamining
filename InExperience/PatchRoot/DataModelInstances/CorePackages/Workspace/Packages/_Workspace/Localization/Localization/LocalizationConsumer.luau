@@ -1,59 +1,59 @@
-﻿local parent = script:FindFirstAncestor("Localization").Parent
-local localizationService = game:GetService("LocalizationService")
-local reactModule = require(parent.React)
-local argCheckModule = require(parent.ArgCheck)
-local robloxLocaleIdKeyModule = require(script.Parent.RobloxLocaleIdKey)
-local localizationRoactContextModule = require(script.Parent.LocalizationRoactContext)
-local localizeStringsModule = require(script.Parent.localizeStrings)
-local localizationConsumer = reactModule.Component:extend("LocalizationConsumer")
+﻿local Parent = script:FindFirstAncestor("Localization").Parent
+local LocalizationService = game:GetService("LocalizationService")
+local ReactModule = require(Parent.React)
+local ArgCheckModule = require(Parent.ArgCheck)
+local RobloxLocaleIdKeyModule = require(script.Parent.RobloxLocaleIdKey)
+local LocalizationRoactContextModule = require(script.Parent.LocalizationRoactContext)
+local LocalizeStringsModule = require(script.Parent.localizeStrings)
+local LocalizationConsumer = ReactModule.Component:extend("LocalizationConsumer")
 
-function localizationConsumer.init(p1)
-	-- upvalues: localizationService (ref)
-	local localization = p1.props.localization
+function LocalizationConsumer.init(p1) --[[ Line: 14 ]]
+	-- upvalues: LocalizationService (copy)
+	local Localization = p1.props.localization
 	
-	if localization == nil then
+	if Localization == nil then
 		error("LocalizationConsumer must be below a LocalizationProvider.")
 	end
-	p1.state = { locale = localizationService.RobloxLocaleId }
+	p1.state = { locale = LocalizationService.RobloxLocaleId }
 	
-	function p0.updateLocalization(_)
-		-- upvalues: localization (ref), p1 (ref)
-		local locale = localization:GetLocale()
+	function p1:updateLocalization() --[[ Line: 25 ]]
+		-- upvalues: Localization (copy), p1 (copy)
+		local Locale = Localization:GetLocale()
 		
-		if locale ~= p1.state.locale then
-			p1:setState({ locale = locale })
+		if Locale ~= p1.state.locale then
+			p1:setState({ locale = Locale })
 		end
 	end
 	
-	p1.connections = { localization.changed:connect(p1.updateLocalization) }
+	p1.connections = { Localization.changed:connect(p1.updateLocalization) }
 end
 
-function localizationConsumer.willUnmount(p1)
-	for i, v in pairs(p1.connections) do
-		v:disconnect()
+function LocalizationConsumer.willUnmount(p1) --[[ Line: 39 ]]
+	for _, connection in pairs(p1.connections) do
+		connection:disconnect()
 	end
 end
 
-function localizationConsumer.render(p2)
-	-- upvalues: argCheckModule (ref), localizeStringsModule (ref), robloxLocaleIdKeyModule (ref)
-	local localization = p2.props.localization
-	local render = p2.props.render
-	local stringsToBeLocalized = p2.props.stringsToBeLocalized
-	argCheckModule.isType(render, "function", "LocalizationConsumer.props.render")
-	argCheckModule.isType(stringsToBeLocalized, "table", "LocalizationConsumer.props.stringsToBeLocalized")
-	local var1 = localizeStringsModule(localization, stringsToBeLocalized)
-	var1[robloxLocaleIdKeyModule] = p2.state.locale
+function LocalizationConsumer.render(p2) --[[ Line: 45 ]]
+	-- upvalues: ArgCheckModule (copy), LocalizeStringsModule (copy), RobloxLocaleIdKeyModule (copy)
+	local Localization = p2.props.localization
+	local RenderFunction = p2.props.render
+	local StringsToBeLocalized = p2.props.stringsToBeLocalized
+	ArgCheckModule.isType(RenderFunction, "function", "LocalizationConsumer.props.render")
+	ArgCheckModule.isType(StringsToBeLocalized, "table", "LocalizationConsumer.props.stringsToBeLocalized")
+	local LocalizeStringsModuleResult = LocalizeStringsModule(Localization, StringsToBeLocalized)
+	LocalizeStringsModuleResult[RobloxLocaleIdKeyModule] = p2.state.locale
 	
-	return render(var1)
+	return RenderFunction(LocalizeStringsModuleResult)
 end
 
-return function(p2)
-	-- upvalues: reactModule (ref), localizationRoactContextModule (ref), localizationConsumer (ref)
-	return reactModule.createElement(localizationRoactContextModule.Consumer, {
-		render = function(p3)
-			-- upvalues: reactModule (copy), localizationConsumer (copy), p2 (ref)
-			return reactModule.createElement(localizationConsumer, {
-				localization = p3,
+return function(p2) --[[ Line: 60 | Named "LocalizationContextConsumer" ]]
+	-- upvalues: ReactModule (copy), LocalizationRoactContextModule (copy), LocalizationConsumer (copy)
+	return ReactModule.createElement(LocalizationRoactContextModule.Consumer, {
+		render = function(Localization) --[[ Line: 62 ]]
+			-- upvalues: ReactModule (upval), LocalizationConsumer (upval), p2 (copy)
+			return ReactModule.createElement(LocalizationConsumer, {
+				localization = Localization,
 				render = p2.render,
 				stringsToBeLocalized = p2.stringsToBeLocalized
 			})

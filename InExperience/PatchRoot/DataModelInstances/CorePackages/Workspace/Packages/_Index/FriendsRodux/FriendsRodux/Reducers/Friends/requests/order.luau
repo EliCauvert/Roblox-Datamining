@@ -1,80 +1,81 @@
-﻿local friendsRodux = script:FindFirstAncestor("FriendsRodux")
-local parent = friendsRodux.Parent
-local roduxModule = require(parent.Rodux)
-local _ = require(friendsRodux.roduxFriendsTypes)
-local fFlagAddFriendsPageHighlightUnseenRequests = require(parent.SharedFlags).FFlagAddFriendsPageHighlightUnseenRequests
-local fFlagAddFriendsRefreshRequestOrder = require(parent.SharedFlags).FFlagAddFriendsRefreshRequestOrder
+﻿local FriendsRodux = script:FindFirstAncestor("FriendsRodux")
+local Parent = FriendsRodux.Parent
+local RoduxModule = require(Parent.Rodux)
+local _ = require(FriendsRodux.roduxFriendsTypes)
+local FFlagAddFriendsPageHighlightUnseenRequests = require(Parent.SharedFlags).FFlagAddFriendsPageHighlightUnseenRequests
+local FFlagAddFriendsRefreshRequestOrder = require(Parent.SharedFlags).FFlagAddFriendsRefreshRequestOrder
 local t = {}
 
-local function parkTrailingScores(p1, p2)
+local function parkTrailingScores(p1, List) --[[ Line: 16 ]]
 	local t = {}
 	
-	for i, v in ipairs(p2) do
-		t[tostring(v.id)] = true
+	for _, value in ipairs(List) do
+		t[tostring(value.id)] = true
 	end
-	local t_1 = {}
-	
-	for i_1, v_1 in pairs(if p1 then p1.requestsById else {}) do
-		if not t[i_1] then
-			table.insert(t_1, { userId = i_1, score = v_1 })
+	local List1 = {}
+	local Iterator = pairs
+	local RequestsById = p1 and p1.requestsById or {}
+	for UserId, Score in Iterator(RequestsById) do
+		if not t[UserId] then
+			table.insert(List1, { userId = UserId, score = Score })
 		end
 	end
-	table.sort(t_1, function(p3, p4)
-		return p3.score < p4.score
+	table.sort(List1, function(A, B): boolean --[[ Line: 28 ]]
+		return A.score < B.score
 	end)
-	local t_2 = {}
+	local t1 = {}
 	
-	for i_2, v_2 in ipairs(t_1) do
-		t_2[v_2.userId] = #p2 + i_2
+	for i, value1 in ipairs(List1) do
+		t1[value1.userId] = #List + i
 	end
-	return t_2, #t_1
+	return t1, #List1
 end
 
-return function(p3)
-	-- upvalues: roduxModule (ref), t (ref), fFlagAddFriendsRefreshRequestOrder (ref), parkTrailingScores (ref), fFlagAddFriendsPageHighlightUnseenRequests (ref)
-	return roduxModule.createReducer(t, {
-		[p3.friendsNetworking.GetFriendRequests.Succeeded.name] = function(p4, p5)
-			-- upvalues: fFlagAddFriendsRefreshRequestOrder (copy), parkTrailingScores (copy), fFlagAddFriendsPageHighlightUnseenRequests (copy)
-			local var1 = 0
+return function(p2) --[[ Line: 42 ]]
+	-- upvalues: RoduxModule (copy), t (copy), FFlagAddFriendsRefreshRequestOrder (copy), parkTrailingScores (copy), FFlagAddFriendsPageHighlightUnseenRequests (copy)
+	return RoduxModule.createReducer(t, {
+		[p2.friendsNetworking.GetFriendRequests.Succeeded.name] = function(p3, p4) --[[ Line: 46 ]]
+			-- upvalues: FFlagAddFriendsRefreshRequestOrder (upval), parkTrailingScores (upval), FFlagAddFriendsPageHighlightUnseenRequests (upval)
+			local Amount = 0
 			
-			if fFlagAddFriendsRefreshRequestOrder and p5.queryArgs and p5.queryArgs.cursor == nil then
-				local var2, var3 = parkTrailingScores(p4, p5.responseBody.data)
-				p4 = { requestsById = var2 }
-				var1 = var3
+			if FFlagAddFriendsRefreshRequestOrder and p4.queryArgs and p4.queryArgs.cursor == nil then
+				local ParkTrailingScoresResult, ParkTrailingScoresResult2 = parkTrailingScores(p3, p4.responseBody.data)
+				p3 = { requestsById = ParkTrailingScoresResult }
+				Amount = ParkTrailingScoresResult2
 			end
-			p4 = p4 or {}
-			local count = p4.count or 0
-			local requestsById = p4.requestsById or {}
-			local data = p5.responseBody.data
-			local nextPageCursor = p5.responseBody.nextPageCursor
+			local P5 = p3 or {}
+			local Count = P5.count or 0
+			local RequestsById = P5.requestsById or {}
+			local Data = p4.responseBody.data
+			local NextPageCursor = p4.responseBody.nextPageCursor
 			
-			if nextPageCursor == p4.lastCursor and nextPageCursor ~= nil then
-				return p4
+			if NextPageCursor == P5.lastCursor and NextPageCursor ~= nil then
+				return P5
 			end
-			for i, v in ipairs(data) do
-				local var4 = count + i
+			for i, entry in ipairs(Data) do
+				local NewCount = Count + i
 				
-				if not requestsById[tostring(v.id)] then
-					if fFlagAddFriendsRefreshRequestOrder then
-						requestsById[tostring(v.id)] = var4
-					elseif not fFlagAddFriendsPageHighlightUnseenRequests then
-						requestsById[tostring(v.id)] = var4
-					elseif v.isUnseen then
-						requestsById[tostring(v.id)] = -(tonumber(string.gsub(string.gsub(v.friendRequest.sentAt, "%.%d+Z$", "Z"), "%D", "")) or 0)
+				if not RequestsById[tostring(entry.id)] then
+					if FFlagAddFriendsRefreshRequestOrder then
+						RequestsById[tostring(entry.id)] = NewCount
+					elseif not FFlagAddFriendsPageHighlightUnseenRequests then
+						RequestsById[tostring(entry.id)] = NewCount
+					elseif entry.isUnseen then
+						RequestsById[tostring(entry.id)] = -(tonumber((string.gsub(string.gsub(entry.friendRequest.sentAt, "%.%d+Z$", "Z"), "%D", ""))) or 0)
 					else
-						requestsById[tostring(v.id)] = var4
+						RequestsById[tostring(entry.id)] = NewCount
 					end
 				end
 			end
-			local var5 = count + #data
+			local NewCount = Count + #Data
 			
-			if fFlagAddFriendsRefreshRequestOrder then
-				var5 += var1
+			if FFlagAddFriendsRefreshRequestOrder then
+				NewCount += Amount
 			end
 			return {
-				count = var5,
-				lastCursor = nextPageCursor,
-				requestsById = requestsById
+				count = NewCount,
+				lastCursor = NextPageCursor,
+				requestsById = RequestsById
 			}
 		end
 	})

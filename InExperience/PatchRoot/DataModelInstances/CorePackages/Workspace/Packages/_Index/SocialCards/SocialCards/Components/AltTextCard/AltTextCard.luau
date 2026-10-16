@@ -1,29 +1,29 @@
-﻿local parent = script:FindFirstAncestor("SocialCards").Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local useTokens = foundationModule.Hooks.useTokens
+﻿local Parent = script:FindFirstAncestor("SocialCards").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), foundationModule (ref)
-	local var1 = useTokens()
+return function(p1) --[[ Line: 13 | Named "AltTextCard" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), FoundationModule (copy)
+	local UseTokensResult = UseTokensFunction()
 	
-	return reactModule.createElement(foundationModule.Text, {
+	return ReactModule.createElement(FoundationModule.Text, {
 		TextWrapped = true,
 		AutomaticSize = Enum.AutomaticSize.XY,
 		fontStyle = {
-			Font = var1.Typography.BodyMedium.Font,
-			FontSize = var1.Typography.BodyMedium.FontSize
+			Font = UseTokensResult.Typography.BodyMedium.Font,
+			FontSize = UseTokensResult.Typography.BodyMedium.FontSize
 		},
 		padding = {
-			bottom = UDim.new(0, var1.Padding.Medium),
-			left = UDim.new(0, var1.Padding.Medium),
-			right = UDim.new(0, var1.Padding.Medium),
-			top = UDim.new(0, var1.Padding.Medium)
+			bottom = UDim.new(0, UseTokensResult.Padding.Medium),
+			left = UDim.new(0, UseTokensResult.Padding.Medium),
+			right = UDim.new(0, UseTokensResult.Padding.Medium),
+			top = UDim.new(0, UseTokensResult.Padding.Medium)
 		},
 		Text = p1.altText,
 		textStyle = {
-			Color3 = var1.Color.Content.Muted.Color3,
-			Transparency = var1.Color.Content.Muted.Transparency
+			Color3 = UseTokensResult.Color.Content.Muted.Color3,
+			Transparency = UseTokensResult.Color.Content.Muted.Transparency
 		}
 	})
 end

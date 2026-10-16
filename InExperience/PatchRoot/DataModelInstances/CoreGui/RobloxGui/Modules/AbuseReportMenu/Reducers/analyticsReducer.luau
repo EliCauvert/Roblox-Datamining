@@ -1,86 +1,100 @@
-﻿local abuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
-local corePackagesService = game:GetService("CorePackages")
-local _ = require(abuseReportMenu.Components.Types)
-local constantsModule = require(abuseReportMenu.Components.Constants)
-local cryoModule = require(corePackagesService.Packages.Cryo)
-local analyticsActions = constantsModule.AnalyticsActions
-local t = {
-	typeofabuseSelection = cryoModule.None,
-	reasonSelection = cryoModule.None
+﻿local AbuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
+local _ = require(AbuseReportMenu.Components.Types)
+local ConstantsModule = require(AbuseReportMenu.Components.Constants)
+local CryoModule = require(game:GetService("CorePackages").Packages.Cryo)
+local AnalyticsActions = ConstantsModule.AnalyticsActions
+local config = {
+	typeofabuseSelection = CryoModule.None,
+	reasonSelection = CryoModule.None
 }
 
-return function(p1, p2)
-	-- upvalues: analyticsActions (ref), constantsModule (ref), cryoModule (ref), t (ref)
-	local cloned = table.clone(p1)
-	local type = p2.type
+return function(Tbl, p1) --[[ Line: 15 | Named "analyticsReducer" ]]
+	-- upvalues: AnalyticsActions (copy), ConstantsModule (copy), CryoModule (copy), config (copy)
+	local Copy = table.clone(Tbl)
+	local Type = p1.type
 	
-	if type == analyticsActions.Reset then
-		local menuEverShown = cloned.menuEverShown
-		cloned = constantsModule.AnalyticsInitialState
-		cloned.menuEverShown = menuEverShown
+	if Type == AnalyticsActions.Reset then
+		local MenuEverShown = Copy.menuEverShown
+		Copy = ConstantsModule.AnalyticsInitialState
+		Copy.menuEverShown = MenuEverShown
 		
-		return cloned
-	elseif type == analyticsActions.SetMenuOpenedTimestamp then
-		cloned.menuEverShown = true
-		cloned.menuOpenedUnixTimestampMilliseconds = p2.timestamp
-		
-		return cloned
-	elseif type == analyticsActions.IncrementExperiencePersonChanged then
-		cloned.experiencePersonChangeCount += 1
-		
-		return cloned
-	elseif type == analyticsActions.IncrementTypeofabuseChanged then
-		cloned.typeofabuseChangeCount += 1
-		
-		return cloned
-	elseif type == analyticsActions.IncrementPersonChanged then
-		cloned.personChangeCount += 1
-		
-		return cloned
-	elseif type == analyticsActions.IncrementReasonChanged then
-		cloned.reasonChangeCount += 1
-		
-		return cloned
-	elseif type == analyticsActions.IncrementCaptureScene then
-		cloned.captureSceneCount += 1
-		
-		return cloned
-	elseif type == analyticsActions.SetViewportInformation then
-		cloned.viewportSizeX = p2.viewportSizeX
-		cloned.viewportSizeY = p2.viewportSizeY
-		cloned.isPortraitMode = p2.viewportSizeX < p2.viewportSizeY
-		
-		return cloned
-	elseif type == analyticsActions.SetMemoryRequirementMet then
-		cloned.memoryRequirementMet = p2.memoryRequirementMet
-		
-		return cloned
-	elseif type == analyticsActions.SetSubmissionCompleted then
-		cloned.isSubmissionCompleted = true
-		
-		return cloned
-	elseif type == analyticsActions.SetTypeOfAbuseSelection then
-		cloned.typeofabuseSelection = p2.selection
-		
-		return cloned
-	elseif type == analyticsActions.SetPreselectedAbuseSelection then
-		cloned.preselectedAbuseSelection = p2.selection
-		
-		return cloned
-	elseif type == analyticsActions.SetReasonSelection then
-		cloned.reasonSelection = p2.selection
-		
-		return cloned
-	elseif type == analyticsActions.SetCommentAdded then
-		cloned.commentAdded = p2.commentAdded
-		
-		return cloned
-	elseif type == analyticsActions.SwitchToExperienceInitialSelections then
-		cloned = cryoModule.Dictionary.join(cloned, t, constantsModule.AnalyticsExpeirenceInitialSelections)
-		
-		return cloned
-	elseif type == analyticsActions.SwitchToPersonInitialSelections then
-		cloned = cryoModule.Dictionary.join(cloned, t, constantsModule.AnalyticsPersonInitialSelections)
+		return Copy
 	end
-	return cloned
+	if Type == AnalyticsActions.SetMenuOpenedTimestamp then
+		Copy.menuEverShown = true
+		Copy.menuOpenedUnixTimestampMilliseconds = p1.timestamp
+		
+		return Copy
+	end
+	if Type == AnalyticsActions.IncrementExperiencePersonChanged then
+		Copy.experiencePersonChangeCount += 1
+		
+		return Copy
+	end
+	if Type == AnalyticsActions.IncrementTypeofabuseChanged then
+		Copy.typeofabuseChangeCount += 1
+		
+		return Copy
+	end
+	if Type == AnalyticsActions.IncrementPersonChanged then
+		Copy.personChangeCount += 1
+		
+		return Copy
+	end
+	if Type == AnalyticsActions.IncrementReasonChanged then
+		Copy.reasonChangeCount += 1
+		
+		return Copy
+	end
+	if Type == AnalyticsActions.IncrementCaptureScene then
+		Copy.captureSceneCount += 1
+		
+		return Copy
+	end
+	if Type == AnalyticsActions.SetViewportInformation then
+		Copy.viewportSizeX = p1.viewportSizeX
+		Copy.viewportSizeY = p1.viewportSizeY
+		Copy.isPortraitMode = p1.viewportSizeX < p1.viewportSizeY
+		
+		return Copy
+	end
+	if Type == AnalyticsActions.SetMemoryRequirementMet then
+		Copy.memoryRequirementMet = p1.memoryRequirementMet
+		
+		return Copy
+	end
+	if Type == AnalyticsActions.SetSubmissionCompleted then
+		Copy.isSubmissionCompleted = true
+		
+		return Copy
+	end
+	if Type == AnalyticsActions.SetTypeOfAbuseSelection then
+		Copy.typeofabuseSelection = p1.selection
+		
+		return Copy
+	end
+	if Type == AnalyticsActions.SetPreselectedAbuseSelection then
+		Copy.preselectedAbuseSelection = p1.selection
+		
+		return Copy
+	end
+	if Type == AnalyticsActions.SetReasonSelection then
+		Copy.reasonSelection = p1.selection
+		
+		return Copy
+	end
+	if Type == AnalyticsActions.SetCommentAdded then
+		Copy.commentAdded = p1.commentAdded
+		
+		return Copy
+	end
+	if Type == AnalyticsActions.SwitchToExperienceInitialSelections then
+		Copy = CryoModule.Dictionary.join(Copy, config, ConstantsModule.AnalyticsExpeirenceInitialSelections)
+		
+		return Copy
+	end
+	if Type == AnalyticsActions.SwitchToPersonInitialSelections then
+		Copy = CryoModule.Dictionary.join(Copy, config, ConstantsModule.AnalyticsPersonInitialSelections)
+	end
+	return Copy
 end

@@ -1,60 +1,60 @@
-﻿local clientChatModules = game:GetService("Chat"):WaitForChild("ClientChatModules")
-local chatSettingsModule = require(clientChatModules:WaitForChild("ChatSettings"))
-local chatConstantsModule = require(clientChatModules:WaitForChild("ChatConstants"))
-local t = nil
-pcall(function()
-	-- upvalues: t (write)
-	t = require(game:GetService("Chat").ClientChatModules.ChatLocalization)
+﻿local ClientChatModules = game:GetService("Chat"):WaitForChild("ClientChatModules")
+local ChatSettingsModule = require(ClientChatModules:WaitForChild("ChatSettings"))
+local ChatConstantsModule = require(ClientChatModules:WaitForChild("ChatConstants"))
+local ChatLocalizationModule = nil
+pcall(function() --[[ Line: 13 ]]
+	-- upvalues: ChatLocalizationModule (ref)
+	ChatLocalizationModule = require(game:GetService("Chat").ClientChatModules.ChatLocalization)
 end)
 
-if t == nil then
-	t = {}
+if ChatLocalizationModule == nil then
+	ChatLocalizationModule = {}
 end
-if not t.FormatMessageToSend or not t.LocalizeFormattedMessage then
-	function t.FormatMessageToSend(_, _, p1)
+if not ChatLocalizationModule.FormatMessageToSend or not ChatLocalizationModule.LocalizeFormattedMessage then
+	function ChatLocalizationModule:FormatMessageToSend(_, p1) --[[ Line: 17 ]]
 		return p1
 	end
 end
-return function(p1)
-	-- upvalues: chatSettingsModule (ref), t (write), chatConstantsModule (ref)
-	local function _()
-		-- upvalues: chatSettingsModule (copy)
-		return if chatSettingsModule.ShowJoinAndLeaveHelpText == nil then false else chatSettingsModule.ShowJoinAndLeaveHelpText
+return function(p1) --[[ Line: 20 | Named "Run" ]]
+	-- upvalues: ChatSettingsModule (copy), ChatLocalizationModule (ref), ChatConstantsModule (copy)
+	local function _() --[[ Line: 22 | Named "ShowJoinAndLeaveCommands" ]]
+		-- upvalues: ChatSettingsModule (upval)
+		return ChatSettingsModule.ShowJoinAndLeaveHelpText ~= nil and ChatSettingsModule.ShowJoinAndLeaveHelpText
 	end
 	
-	p1:RegisterProcessCommandsFunction("chat_commands_inquiry", function(p2, p3, p4)
-		-- upvalues: p1 (ref), t (copy), chatSettingsModule (copy)
-		if p3:lower() ~= "/?" and p3:lower() ~= "/help" then
+	p1:RegisterProcessCommandsFunction("chat_commands_inquiry", function(p2, Text: string, p3): boolean --[[ Line: 29 | Named "ProcessCommandsFunction" ]]
+		-- upvalues: p1 (copy), ChatLocalizationModule (upval), ChatSettingsModule (upval)
+		if Text:lower() ~= "/?" and Text:lower() ~= "/help" then
 			return false
 		end
-		local var1 = p1:GetSpeaker(p2)
-		var1:SendSystemMessage(t:FormatMessageToSend("GameChat_ChatCommandsTeller_Desc", "These are the basic chat commands."), p4)
+		local Speaker = p1:GetSpeaker(p2)
+		Speaker:SendSystemMessage(ChatLocalizationModule:FormatMessageToSend("GameChat_ChatCommandsTeller_Desc", "These are the basic chat commands."), p3)
 		
-		if chatSettingsModule.AllowMeCommand then
-			var1:SendSystemMessage(t:FormatMessageToSend("GameChat_ChatCommandsTeller_MeCommand", "/me <text> : roleplaying command for doing actions."), p4)
+		if ChatSettingsModule.AllowMeCommand then
+			Speaker:SendSystemMessage(ChatLocalizationModule:FormatMessageToSend("GameChat_ChatCommandsTeller_MeCommand", "/me <text> : roleplaying command for doing actions."), p3)
 		end
-		var1:SendSystemMessage(t:FormatMessageToSend("GameChat_ChatCommandsTeller_SwitchChannelCommand", "/c <channel> : switch channel menu tabs."), p4)
+		Speaker:SendSystemMessage(ChatLocalizationModule:FormatMessageToSend("GameChat_ChatCommandsTeller_SwitchChannelCommand", "/c <channel> : switch channel menu tabs."), p3)
 		
-		if if chatSettingsModule.ShowJoinAndLeaveHelpText ~= nil then false else chatSettingsModule.ShowJoinAndLeaveHelpText then
-			var1:SendSystemMessage(t:FormatMessageToSend("GameChat_ChatCommandsTeller_JoinChannelCommand", "/join <channel> or /j <channel> : join channel."), p4)
-			var1:SendSystemMessage(t:FormatMessageToSend("GameChat_ChatCommandsTeller_LeaveChannelCommand", "/leave <channel> or /l <channel> : leave channel. (leaves current if none specified)"), p4)
+		if ChatSettingsModule.ShowJoinAndLeaveHelpText ~= nil and ChatSettingsModule.ShowJoinAndLeaveHelpText then
+			Speaker:SendSystemMessage(ChatLocalizationModule:FormatMessageToSend("GameChat_ChatCommandsTeller_JoinChannelCommand", "/join <channel> or /j <channel> : join channel."), p3)
+			Speaker:SendSystemMessage(ChatLocalizationModule:FormatMessageToSend("GameChat_ChatCommandsTeller_LeaveChannelCommand", "/leave <channel> or /l <channel> : leave channel. (leaves current if none specified)"), p3)
 		end
-		var1:SendSystemMessage(t:FormatMessageToSend("GameChat_ChatCommandsTeller_WhisperCommand", "/whisper <speaker> or /w <speaker> : open private message channel with speaker."), p4)
-		var1:SendSystemMessage(t:FormatMessageToSend("GameChat_ChatCommandsTeller_MuteCommand", "/mute <speaker> : mute a speaker."), p4)
-		var1:SendSystemMessage(t:FormatMessageToSend("GameChat_ChatCommandsTeller_UnMuteCommand", "/unmute <speaker> : unmute a speaker."), p4)
-		local player = var1:GetPlayer()
+		Speaker:SendSystemMessage(ChatLocalizationModule:FormatMessageToSend("GameChat_ChatCommandsTeller_WhisperCommand", "/whisper <speaker> or /w <speaker> : open private message channel with speaker."), p3)
+		Speaker:SendSystemMessage(ChatLocalizationModule:FormatMessageToSend("GameChat_ChatCommandsTeller_MuteCommand", "/mute <speaker> : mute a speaker."), p3)
+		Speaker:SendSystemMessage(ChatLocalizationModule:FormatMessageToSend("GameChat_ChatCommandsTeller_UnMuteCommand", "/unmute <speaker> : unmute a speaker."), p3)
+		local Player = Speaker:GetPlayer()
 		
-		if player and player.Team then
-			var1:SendSystemMessage(t:FormatMessageToSend("GameChat_ChatCommandsTeller_TeamCommand", "/team <message> or /t <message> : send a team chat to players on your team."), p4)
+		if Player and Player.Team then
+			Speaker:SendSystemMessage(ChatLocalizationModule:FormatMessageToSend("GameChat_ChatCommandsTeller_TeamCommand", "/team <message> or /t <message> : send a team chat to players on your team."), p3)
 		end
 		return true
-	end, chatConstantsModule.StandardPriority)
+	end, ChatConstantsModule.StandardPriority)
 	
-	if chatSettingsModule.GeneralChannelName then
-		local generalChannelNameChannel = p1:GetChannel(chatSettingsModule.GeneralChannelName)
+	if ChatSettingsModule.GeneralChannelName then
+		local Channel = p1:GetChannel(ChatSettingsModule.GeneralChannelName)
 		
-		if generalChannelNameChannel then
-			generalChannelNameChannel.WelcomeMessage = t:FormatMessageToSend("GameChat_ChatCommandsTeller_AllChannelWelcomeMessage", "Chat '/?' or '/help' for a list of chat commands.")
+		if Channel then
+			Channel.WelcomeMessage = ChatLocalizationModule:FormatMessageToSend("GameChat_ChatCommandsTeller_AllChannelWelcomeMessage", "Chat '/?' or '/help' for a list of chat commands.")
 		end
 	end
 end

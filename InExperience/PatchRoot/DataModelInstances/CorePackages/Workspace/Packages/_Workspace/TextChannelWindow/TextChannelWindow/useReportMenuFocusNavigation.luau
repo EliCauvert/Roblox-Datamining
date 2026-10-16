@@ -1,52 +1,51 @@
-﻿local parent = script.Parent.Parent
-local reactModule = require(parent.React)
-local usePortalSelectionLinks = require(parent.ChatUIPrimitives).Hooks.usePortalSelectionLinks
-local useSelectionBackActionModule = require(script.Parent.FocusNavigation.useSelectionBackAction)
+﻿local Parent = script.Parent.Parent
+local ReactModule = require(Parent.React)
+local UsePortalSelectionLinksFunction = require(Parent.ChatUIPrimitives).Hooks.usePortalSelectionLinks
+local UseSelectionBackActionModule = require(script.Parent.FocusNavigation.useSelectionBackAction)
 
-local function findFirstSelectable(p1)
-	for i, v in p1:GetDescendants() do
-		if not v:IsA("GuiButton") then
-			if v:IsA("GuiObject") and v.Selectable then
-				return v
-			end
+local function findFirstSelectable(Current) --[[ Line: 28 ]]
+	for _, descendant in Current:GetDescendants() do
+		if descendant:IsA("GuiButton") then
+			return descendant
+		elseif descendant:IsA("GuiObject") and descendant.Selectable then
+			return descendant
 		end
-		return v
 	end
 	return nil
 end
 
-return function(p2)
-	-- upvalues: reactModule (ref), useSelectionBackActionModule (ref), findFirstSelectable (ref), usePortalSelectionLinks (ref)
-	local menuContentRef = p2.menuContentRef
-	local triggerRef = p2.triggerRef
-	local onClose = p2.onClose
-	useSelectionBackActionModule({
+return function(p1) --[[ Line: 40 | Named "useReportMenuFocusNavigation" ]]
+	-- upvalues: ReactModule (copy), UseSelectionBackActionModule (copy), findFirstSelectable (copy), UsePortalSelectionLinksFunction (copy)
+	local MenuContentRef = p1.menuContentRef
+	local TriggerRef = p1.triggerRef
+	local OnCloseFunction = p1.onClose
+	UseSelectionBackActionModule({
 		actionNamePrefix = "TextChannelWindowReportMenuBack",
-		enabled = p2.enabled,
-		active = p2.isOpen,
-		onAction = reactModule.useCallback(function(p3)
-			-- upvalues: onClose (ref)
-			if p3 == Enum.UserInputState.End then
-				onClose()
+		enabled = p1.enabled,
+		active = p1.isOpen,
+		onAction = ReactModule.useCallback(function(UserInputState) --[[ Line: 45 ]]
+			-- upvalues: OnCloseFunction (copy)
+			if UserInputState == Enum.UserInputState.End then
+				OnCloseFunction()
 			end
 			return Enum.ContextActionResult.Sink
-		end, { onClose }),
-		contextActionService = p2.contextActionService
+		end, { OnCloseFunction }),
+		contextActionService = p1.contextActionService
 	})
-	local var1 = reactModule.useCallback(function()
-		-- upvalues: menuContentRef (ref), findFirstSelectable (copy)
-		local current = menuContentRef.current
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 62 ]]
+		-- upvalues: MenuContentRef (copy), findFirstSelectable (upval)
+		local Current = MenuContentRef.current
 		
-		return if current then findFirstSelectable(current) else nil
-	end, { menuContentRef })
-	usePortalSelectionLinks({
-		enabled = p2.enabled,
-		active = p2.isOpen,
+		return if Current then findFirstSelectable(Current) else nil
+	end, { MenuContentRef })
+	UsePortalSelectionLinksFunction({
+		enabled = p1.enabled,
+		active = p1.isOpen,
 		edges = {
-			{ direction = "Right", from = triggerRef, to = var1 },
-			{ direction = "Left", from = var1, to = triggerRef }
+			{ direction = "Right", from = TriggerRef, to = UseResult },
+			{ direction = "Left", from = UseResult, to = TriggerRef }
 		},
-		restoreHome = triggerRef,
-		guiService = p2.guiService
+		restoreHome = TriggerRef,
+		guiService = p1.guiService
 	})
 end

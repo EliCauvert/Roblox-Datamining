@@ -1,34 +1,34 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local reactModule = require(parent.React)
-local _ = require(parent.Foundation)
-local loadableImage = require(parent.UIBlox).App.Loading.LoadableImage
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local ReactModule = require(Parent.React)
+local _ = require(Parent.Foundation)
+local LoadableImage = require(Parent.UIBlox).App.Loading.LoadableImage
 
-return reactModule.memo(function(value)
-	-- upvalues: reactModule (ref), loadableImage (ref)
-	local var1 = if value.isContained then value.cardCornerRadius else 0
+return ReactModule.memo(function(p1) --[[ Line: 50 | Named "SduiTileInsetImage" ]]
+	-- upvalues: ReactModule (copy), LoadableImage (copy)
+	local CardCornerRadius = if p1.isContained then p1.cardCornerRadius else 0
 	
-	return reactModule.createElement("Frame", {
-		[reactModule.Tag] = if value.testId then `data-testid={value.testId}` else nil,
-		Size = UDim2.new(1, 0, 1, var1),
+	return ReactModule.createElement("Frame", {
+		[ReactModule.Tag] = if p1.testId then `data-testid={p1.testId}` else nil,
+		Size = UDim2.new(1, 0, 1, CardCornerRadius),
 		BorderSizePixel = 0,
 		ClipsDescendants = true,
-		BackgroundColor3 = if value.backgroundStyle then value.backgroundStyle.Color3 else nil,
-		BackgroundTransparency = if value.backgroundStyle then value.backgroundStyle.Transparency else 1,
+		BackgroundColor3 = if p1.backgroundStyle then p1.backgroundStyle.Color3 else nil,
+		BackgroundTransparency = if p1.backgroundStyle then p1.backgroundStyle.Transparency else 1,
 		ZIndex = -3
 	}, {
-		UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, value.cardCornerRadius) }),
-		ThumbnailFrame = reactModule.createElement("Frame", {
+		UICorner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, p1.cardCornerRadius) }),
+		ThumbnailFrame = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
-			Size = UDim2.new(1, value.imagePadding * -2, 1, value.imagePadding * -2 - var1),
-			Position = UDim2.fromOffset(value.imagePadding, value.imagePadding)
+			Size = UDim2.new(1, p1.imagePadding * -2, 1, p1.imagePadding * -2 - CardCornerRadius),
+			Position = UDim2.fromOffset(p1.imagePadding, p1.imagePadding)
 		}, {
-			Thumbnail = if value.imageComponent then value.imageComponent elseif value.image then reactModule.createElement(loadableImage, {
+			Thumbnail = if p1.imageComponent then p1.imageComponent elseif p1.image then ReactModule.createElement(LoadableImage, {
 				BackgroundTransparency = 1,
 				showFailedStateWhenLoadingFailed = true,
 				useShimmerAnimationWhileLoading = true,
-				Image = value.image,
+				Image = p1.image,
 				Size = UDim2.new(1, 0, 1, 0),
-				cornerRadius = UDim.new(0, value.imageCornerRadius)
+				cornerRadius = UDim.new(0, p1.imageCornerRadius)
 			}) else nil
 		})
 	})

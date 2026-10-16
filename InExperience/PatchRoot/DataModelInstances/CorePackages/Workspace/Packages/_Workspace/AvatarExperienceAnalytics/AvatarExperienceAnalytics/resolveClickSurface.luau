@@ -1,14 +1,15 @@
-﻿local unifiedEventLogConstantsModule = require(script.Parent.UnifiedEventLogConstants)
-local avatarScreenProperties = require(script:FindFirstAncestor("AvatarExperienceAnalytics").Parent.AvatarExperienceNavigation).AvatarRoute.AvatarScreenProperties
+﻿local UnifiedEventLogConstantsModule = require(script.Parent.UnifiedEventLogConstants)
+local AvatarScreenProperties = require(script:FindFirstAncestor("AvatarExperienceAnalytics").Parent.AvatarExperienceNavigation).AvatarRoute.AvatarScreenProperties
 
-return function(p1, p2)
-	-- upvalues: unifiedEventLogConstantsModule (ref), avatarScreenProperties (ref)
-	if p1:GetAttribute(unifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "surface") ~= nil then
+return function(Object, p1) --[[ Line: 10 | Named "resolveClickSurface" ]]
+	-- upvalues: UnifiedEventLogConstantsModule (copy), AvatarScreenProperties (copy)
+	if Object:GetAttribute(UnifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "surface") ~= nil then
 		return nil
-	elseif not p2 or not p2.current or not p2.opaque then
+	elseif p1 and p1.current and p1.opaque then
+		local AvatarScreenProperty = AvatarScreenProperties[p1.opaque.name]
+		
+		return if AvatarScreenProperty and AvatarScreenProperty.analyticsData then AvatarScreenProperty.analyticsData.unifiedLoggingSurface else nil
+	else
 		return nil
 	end
-	local name = avatarScreenProperties[p2.opaque.name]
-	
-	return if name and name.analyticsData then name.analyticsData.unifiedLoggingSurface else nil
 end

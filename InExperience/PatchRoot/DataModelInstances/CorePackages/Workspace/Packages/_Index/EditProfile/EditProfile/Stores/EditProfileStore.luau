@@ -1,41 +1,42 @@
-﻿local parent = script:FindFirstAncestor("EditProfile").Parent
-local _ = require(parent.Signals)
-local dataHydrationModule = require(parent.DataHydration)
-local createDataCache = dataHydrationModule.createDataCache
-local createDataResolver = dataHydrationModule.createDataResolver
-local fetchUserDescriptionModule = require(script.Parent.Requests.fetchUserDescription)
-local fetchUsernameChangePriceModule = require(script.Parent.Requests.fetchUsernameChangePrice)
-local updateUserDescriptionModule = require(script.Parent.Requests.updateUserDescription)
-local var1 = createDataCache()
-local var2 = createDataResolver({
+﻿local Parent = script:FindFirstAncestor("EditProfile").Parent
+local _ = require(Parent.Signals)
+local DataHydrationModule = require(Parent.DataHydration)
+local CreateDataCacheFunction = DataHydrationModule.createDataCache
+local CreateDataResolverFunction = DataHydrationModule.createDataResolver
+local UpdateUserDescriptionModule = require(script.Parent.Requests.updateUserDescription)
+local DataCache = CreateDataCacheFunction()
+local DataResolver = CreateDataResolverFunction({
 	supportsMultiGet = false,
 	queueProcessDelaySec = 0,
-	cache = var1,
-	fetchFn = fetchUserDescriptionModule
+	cache = DataCache,
+	fetchFn = require(script.Parent.Requests.fetchUserDescription)
 })
-local var3 = createDataResolver({
+
+local function getDescription(p1) --[[ Line: 33 ]]
+	-- upvalues: DataResolver (copy)
+	return (DataResolver.getAndFetchItem(p1))
+end
+
+local DataResolver1 = CreateDataResolverFunction({
 	supportsMultiGet = false,
 	queueProcessDelaySec = 0,
-	cache = createDataCache(),
-	fetchFn = fetchUsernameChangePriceModule
+	cache = CreateDataCacheFunction(),
+	fetchFn = require(script.Parent.Requests.fetchUsernameChangePrice)
 })
 
 return {
-	getDescription = function(p1)
-		-- upvalues: var2 (ref)
-		return var2.getAndFetchItem(p1)
+	getDescription = getDescription,
+	getUsernameChangePrice = function(p1) --[[ Line: 46 ]]
+		-- upvalues: DataResolver1 (copy)
+		return DataResolver1.getAndFetchItem(p1)
 	end,
-	getUsernameChangePrice = function(p1)
-		-- upvalues: var3 (ref)
-		return var3.getAndFetchItem(p1)
-	end,
-	updateDescription = function(p1, p2)
-		-- upvalues: updateUserDescriptionModule (ref), var1 (ref)
-		return updateUserDescriptionModule(p2):andThen(function(p3)
-			-- upvalues: var1 (copy), p1 (ref)
-			var1.replaceItem(p1, p3)
+	updateDescription = function(p1, p2) --[[ Line: 50 ]]
+		-- upvalues: UpdateUserDescriptionModule (copy), DataCache (copy)
+		return UpdateUserDescriptionModule(p2):andThen(function(Result) --[[ Line: 51 ]]
+			-- upvalues: DataCache (upval), p1 (copy)
+			DataCache.replaceItem(p1, Result)
 			
-			return p3
+			return Result
 		end)
 	end
 }

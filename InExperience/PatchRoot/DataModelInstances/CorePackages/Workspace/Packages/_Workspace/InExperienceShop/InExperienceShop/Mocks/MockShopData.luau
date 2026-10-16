@@ -1,7 +1,7 @@
-﻿local inExperienceShop = script:FindFirstAncestor("InExperienceShop")
-local promiseModule = require(inExperienceShop.Parent.Promise)
-local constantsModule = require(inExperienceShop.Constants)
-local _ = require(inExperienceShop.Types)
+﻿local InExperienceShop = script:FindFirstAncestor("InExperienceShop")
+local PromiseModule = require(InExperienceShop.Parent.Promise)
+local ConstantsModule = require(InExperienceShop.Constants)
+local _ = require(InExperienceShop.Types)
 local list = {
 	{
 		id = "101",
@@ -124,7 +124,7 @@ local list = {
 		creator = { name = "MockCreator", hasVerifiedBadge = false }
 	}
 }
-local list_1 = {
+local list1 = {
 	{
 		id = "201",
 		name = "pass5",
@@ -163,7 +163,7 @@ local list_1 = {
 	},
 	{
 		id = "204",
-		name = "Thanks\226\128\153s <3 :heart::victory_hand:t2:",
+		name = "Thanks’s <3 :heart::victory_hand:t2:",
 		thumbnail = "rbxassetid://6789",
 		price = 1,
 		isOwned = false,
@@ -187,35 +187,35 @@ local list_1 = {
 	}
 }
 
-local function pickRandomItems()
-	-- upvalues: list (ref), list_1 (ref)
-	local list_2 = table.create(#list + #list_1)
-	table.move(list, 1, #list, 1, list_2)
-	table.move(list_1, 1, #list_1, #list + 1, list_2)
+local function pickRandomItems() --[[ Line: 345 ]]
+	-- upvalues: list (copy), list1 (copy)
+	local Buffer = table.create(#list + #list1)
+	table.move(list, 1, #list, 1, Buffer)
+	table.move(list1, 1, #list1, #list + 1, Buffer)
 	
-	for i = #list_2, 2, -1 do
-		local randomValue = math.random(1, i)
-		local var1 = list_2[i]
-		list_2[i] = list_2[randomValue]
-		list_2[randomValue] = var1
+	for i = #Buffer, 2, -1 do
+		local RandomValue = math.random(1, i)
+		local BufferEntry = Buffer[i]
+		Buffer[i] = Buffer[RandomValue]
+		Buffer[RandomValue] = BufferEntry
 	end
-	local minValue = math.min(math.random(8, 10), #list_2)
-	local list_3 = table.create(minValue)
+	local Smallest = math.min(math.random(8, 10), #Buffer)
+	local Buffer1 = table.create(Smallest)
 	
-	for i_1 = 1, minValue do
-		list_3[i_1] = list_2[i_1]
+	for i1 = 1, Smallest do
+		Buffer1[i1] = Buffer[i1]
 	end
-	return list_3
+	return Buffer1
 end
 
-local list_2 = {
+local list2 = {
 	{ name = "Home" },
 	{
 		name = "Top picks",
 		stableCategoryId = "Top picks",
 		categoryGroup = "Featured",
 		items = pickRandomItems(),
-		categoryType = constantsModule.TOP_PICKS_CATEGORY_TYPE
+		categoryType = ConstantsModule.TOP_PICKS_CATEGORY_TYPE
 	},
 	{
 		name = "Robux",
@@ -227,7 +227,7 @@ local list_2 = {
 				mobileProductId = "com.roblox.client.robux40",
 				robuxAmount = 40,
 				currencyAmountStr = "$0.49",
-				robuxImage = constantsModule.ROBUX_PACKAGE_IMAGE
+				robuxImage = ConstantsModule.ROBUX_PACKAGE_IMAGE
 			},
 			{
 				id = "613",
@@ -235,7 +235,7 @@ local list_2 = {
 				mobileProductId = "com.roblox.robloxmobile.premium80robux",
 				robuxAmount = 80,
 				currencyAmountStr = "$0.99",
-				robuxImage = constantsModule.ROBUX_PACKAGE_IMAGE
+				robuxImage = ConstantsModule.ROBUX_PACKAGE_IMAGE
 			},
 			{
 				id = "470",
@@ -243,7 +243,7 @@ local list_2 = {
 				mobileProductId = "com.roblox.robloxmobile.premium400robux",
 				robuxAmount = 400,
 				currencyAmountStr = "$4.99",
-				robuxImage = constantsModule.ROBUX_PACKAGE_IMAGE
+				robuxImage = ConstantsModule.ROBUX_PACKAGE_IMAGE
 			},
 			{
 				id = "471",
@@ -251,7 +251,7 @@ local list_2 = {
 				mobileProductId = "com.roblox.robloxmobile.premium800robux",
 				robuxAmount = 800,
 				currencyAmountStr = "$9.99",
-				robuxImage = constantsModule.ROBUX_PACKAGE_IMAGE
+				robuxImage = ConstantsModule.ROBUX_PACKAGE_IMAGE
 			},
 			{
 				id = "472",
@@ -259,7 +259,7 @@ local list_2 = {
 				mobileProductId = "com.roblox.robloxmobile.premium1700robux",
 				robuxAmount = 1700,
 				currencyAmountStr = "$19.99",
-				robuxImage = constantsModule.ROBUX_PACKAGE_IMAGE
+				robuxImage = ConstantsModule.ROBUX_PACKAGE_IMAGE
 			},
 			{
 				id = "473",
@@ -267,7 +267,7 @@ local list_2 = {
 				mobileProductId = "com.roblox.robloxmobile.premium4500robux",
 				robuxAmount = 4500,
 				currencyAmountStr = "$49.99",
-				robuxImage = constantsModule.ROBUX_PACKAGE_IMAGE
+				robuxImage = ConstantsModule.ROBUX_PACKAGE_IMAGE
 			},
 			{
 				id = "474",
@@ -275,7 +275,7 @@ local list_2 = {
 				mobileProductId = "com.roblox.robloxmobile.premium10000robux",
 				robuxAmount = 10000,
 				currencyAmountStr = "$99.99",
-				robuxImage = constantsModule.ROBUX_PACKAGE_IMAGE
+				robuxImage = ConstantsModule.ROBUX_PACKAGE_IMAGE
 			},
 			{
 				id = "21",
@@ -283,7 +283,7 @@ local list_2 = {
 				mobileProductId = "com.roblox.client.robux22500",
 				robuxAmount = 22500,
 				currencyAmountStr = "$199.99",
-				robuxImage = constantsModule.ROBUX_PACKAGE_IMAGE
+				robuxImage = ConstantsModule.ROBUX_PACKAGE_IMAGE
 			}
 		}
 	},
@@ -294,56 +294,56 @@ local list_2 = {
 	{ name = "Gear", items = pickRandomItems() }
 }
 
-local function buildShopData()
-	-- upvalues: list_2 (ref)
-	local list = table.create(#list_2)
-	local t = {}
+local function buildShopData() --[[ Line: 384 ]]
+	-- upvalues: list2 (copy)
+	local Buffer = table.create(#list2)
+	local Sections = {}
 	
-	for i, v in ipairs(list_2) do
-		local var2 = tostring(i)
-		list[i] = { id = var2, name = v.name }
+	for i, value in ipairs(list2) do
+		local Text = tostring(i)
+		Buffer[i] = { id = Text, name = value.name }
 		
-		if v.name ~= "Home" then
-			table.insert(t, {
-				id = var2,
-				name = v.name,
-				items = v.items or {},
-				robuxPackages = v.robuxPackages,
-				bonusJwt = v.bonusJwt,
-				categoryType = v.categoryType,
-				stableCategoryId = v.stableCategoryId,
-				categoryGroup = v.categoryGroup
+		if value.name ~= "Home" then
+			table.insert(Sections, {
+				id = Text,
+				name = value.name,
+				items = value.items or {},
+				robuxPackages = value.robuxPackages,
+				bonusJwt = value.bonusJwt,
+				categoryType = value.categoryType,
+				stableCategoryId = value.stableCategoryId,
+				categoryGroup = value.categoryGroup
 			})
 		end
 	end
-	return { categories = list, sections = t }
+	return { categories = Buffer, sections = Sections }
 end
 
 return {
 	MOCK_PRODUCT_ITEMS = list,
-	MOCK_GAMEPASS_ITEMS = list_1,
-	buildShopItems = function()
-		-- upvalues: list_2 (ref)
-		local t = {}
+	MOCK_GAMEPASS_ITEMS = list1,
+	buildShopItems = function() --[[ Line: 416 ]]
+		-- upvalues: list2 (copy)
+		local Categories = {}
 		
-		for i, v in ipairs(list_2) do
-			if v.name ~= "Home" and v.name ~= "Robux" then
-				local items = v.items or {}
-				local list = table.create(#items)
+		for _, value in ipairs(list2) do
+			if value.name ~= "Home" and value.name ~= "Robux" then
+				local Items = value.items or {}
+				local Buffer = table.create(#Items)
 				
-				for i_1, v_1 in ipairs(items) do
-					list[i_1] = { id = i_1, type = v_1.itemType }
+				for Id, item in ipairs(Items) do
+					Buffer[Id] = { id = Id, type = item.itemType }
 				end
-				table.insert(t, { id = #t + 1, name = v.name, items = list })
+				table.insert(Categories, { id = #Categories + 1, name = value.name, items = Buffer })
 			end
 		end
-		return { categories = t }
+		return { categories = Categories }
 	end,
-	getShopData = function(p1)
-		-- upvalues: promiseModule (ref), buildShopData (ref)
-		return promiseModule.delay(if p1 ~= nil then 0.5 else p1):andThen(function()
-			-- upvalues: buildShopData (copy)
-			return buildShopData()
+	getShopData = function(p1) --[[ Line: 453 ]]
+		-- upvalues: PromiseModule (copy), buildShopData (copy)
+		return PromiseModule.delay(if p1 == nil then 0.5 else p1):andThen(function() --[[ Line: 455 ]]
+			-- upvalues: buildShopData (upval)
+			return (buildShopData())
 		end)
 	end
 }

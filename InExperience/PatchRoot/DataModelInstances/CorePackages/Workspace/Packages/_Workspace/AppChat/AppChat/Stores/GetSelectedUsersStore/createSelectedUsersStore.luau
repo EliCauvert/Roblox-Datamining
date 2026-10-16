@@ -1,152 +1,156 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local signalsModule = require(parent.Signals)
-local signal = require(parent.AppCommonLib).Signal
-local arraySet = require(appChat.DataStructures).ArraySet
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local SignalsModule = require(Parent.Signals)
+local Signal = require(Parent.AppCommonLib).Signal
+local ArraySet = require(AppChat.DataStructures).ArraySet
 
-return function()
-	-- upvalues: signalsModule (ref), arraySet (ref), signal (ref)
-	local var1, var2 = signalsModule.createSignal(0)
-	local var3, var4 = signalsModule.createSignal(arraySet.new({}))
-	local var5 = signalsModule.createComputed(function(p1)
-		-- upvalues: var3 (ref), var1 (ref)
-		return var3(p1):size() < var1(p1)
+return function() --[[ Line: 35 | Named "createSelectedUsersStore" ]]
+	-- upvalues: SignalsModule (copy), ArraySet (copy), Signal (copy)
+	local Signal1, Signal2 = SignalsModule.createSignal(0)
+	local Signal3, Signal2_1 = SignalsModule.createSignal(ArraySet.new({}))
+	local Computed = SignalsModule.createComputed(function(p1): boolean --[[ Line: 43 ]]
+		-- upvalues: Signal3 (copy), Signal1 (copy)
+		return Signal3(p1):size() < Signal1(p1)
 	end)
-	local var6 = signalsModule.createComputed(function(p1)
-		-- upvalues: var3 (ref)
-		return var3(p1):size()
+	local Computed1 = SignalsModule.createComputed(function(p1) --[[ Line: 49 ]]
+		-- upvalues: Signal3 (copy)
+		return Signal3(p1):size()
 	end)
-	local var7 = signalsModule.createComputed(function(p1)
-		-- upvalues: var3 (ref)
-		return var3(p1):toArray()
+	local Computed2 = SignalsModule.createComputed(function(p1) --[[ Line: 54 ]]
+		-- upvalues: Signal3 (copy)
+		return Signal3(p1):toArray()
 	end)
-	local var8 = signal.new()
+	local NewSignal = Signal.new()
 	local t = {}
-	local t_1 = {}
+	local t1 = {}
 	
-	local function _()
-		-- upvalues: var8 (write)
-		var8:fire()
+	local function _() --[[ Line: 66 | Named "emitMaxSizeExceeded" ]]
+		-- upvalues: NewSignal (ref)
+		NewSignal:fire()
 	end
 	
-	local function addUserId(p1)
-		-- upvalues: var3 (ref), var5 (ref), var8 (write), var4 (ref)
-		if var3(false):has(p1) then
+	local function addUserId(p1): boolean --[[ Line: 116 ]]
+		-- upvalues: Signal3 (copy), Computed (copy), NewSignal (ref), Signal2_1 (copy)
+		if Signal3(false):has(p1) then
 			return true
-		elseif var5(false) then
-			var4(function(p2)
-				-- upvalues: p1 (ref)
-				local var9 = p2:clone()
-				var9:add(p1)
+		elseif Computed(false) then
+			Signal2_1(function(p2) --[[ Line: 130 ]]
+				-- upvalues: p1 (copy)
+				local Copy = p2:clone()
+				Copy:add(p1)
 				
-				return var9
+				return Copy
 			end)
 			
 			return true
+		else
+			NewSignal:fire()
+			
+			return false
 		end
-		var8:fire()
-		
-		return false
 	end
 	
 	return {
-		setMaxSize = function(a)
-			-- upvalues: var2 (ref)
-			var2(function(_)
-				-- upvalues: a (ref)
-				return a
+		setMaxSize = function(p1) --[[ Line: 70 ]]
+			-- upvalues: Signal2 (copy)
+			Signal2(function(_) --[[ Line: 71 ]]
+				-- upvalues: p1 (copy)
+				return p1
 			end)
 		end,
-		getSelectedUserIdsCount = function()
-			-- upvalues: var6 (ref)
-			return var6
+		getSelectedUserIdsCount = function() --[[ Line: 84 ]]
+			-- upvalues: Computed1 (copy)
+			return Computed1
 		end,
-		getSelectedUserIdAtIndex = function(p1)
-			-- upvalues: t (write), signalsModule (copy), var3 (ref)
-			if not t[p1] then
-				t[p1] = signalsModule.createComputed(function(p2)
-					-- upvalues: var3 (copy), p1 (ref)
-					return var3(p2):at(p1)
+		getSelectedUserIdAtIndex = function(Key) --[[ Line: 88 ]]
+			-- upvalues: t (ref), SignalsModule (upval), Signal3 (copy)
+			if not t[Key] then
+				t[Key] = SignalsModule.createComputed(function(p1) --[[ Line: 90 ]]
+					-- upvalues: Signal3 (upval), Key (copy)
+					return Signal3(p1):at(Key)
 				end)
 			end
-			return t[p1]
+			return t[Key]
 		end,
-		getIsUserSelected = function(p1)
-			-- upvalues: t_1 (write), signalsModule (copy), var3 (ref)
-			if not t_1[p1] then
-				t_1[p1] = signalsModule.createComputed(function(p2)
-					-- upvalues: var3 (copy), p1 (ref)
-					return var3(p2):has(p1)
+		getIsUserSelected = function(Key) --[[ Line: 98 ]]
+			-- upvalues: t1 (ref), SignalsModule (upval), Signal3 (copy)
+			if not t1[Key] then
+				t1[Key] = SignalsModule.createComputed(function(p1) --[[ Line: 100 ]]
+					-- upvalues: Signal3 (upval), Key (copy)
+					return Signal3(p1):has(Key)
 				end)
 			end
-			return t_1[p1]
+			return t1[Key]
 		end,
-		getMaxSize = function()
-			-- upvalues: var1 (ref)
-			return var1
+		getMaxSize = function() --[[ Line: 108 ]]
+			-- upvalues: Signal1 (copy)
+			return Signal1
 		end,
-		getSelectedUserIdsArray = function()
-			-- upvalues: var7 (ref)
-			return var7
+		getSelectedUserIdsArray = function() --[[ Line: 112 ]]
+			-- upvalues: Computed2 (copy)
+			return Computed2
 		end,
 		addUserId = addUserId,
-		removeUserId = function(p1)
-			-- upvalues: var4 (ref)
-			var4(function(p2)
-				-- upvalues: p1 (ref)
+		removeUserId = function(p1) --[[ Line: 139 ]]
+			-- upvalues: Signal2_1 (copy)
+			Signal2_1(function(p2) --[[ Line: 140 ]]
+				-- upvalues: p1 (copy)
 				if p2:has(p1) then
-					local var9 = p2:clone()
-					var9:remove(p1)
+					local Copy = p2:clone()
+					Copy:remove(p1)
 					
-					return var9
+					return Copy
+				else
+					return p2
 				end
-				return p2
 			end)
 		end,
-		toggleUserId = function(p1)
-			-- upvalues: var3 (ref), var4 (ref), addUserId (ref)
-			if var3(false):has(p1) then
-				var4(function(p2)
-					-- upvalues: p1 (ref)
+		toggleUserId = function(p1) --[[ Line: 150 ]]
+			-- upvalues: Signal3 (copy), Signal2_1 (copy), addUserId (copy)
+			if Signal3(false):has(p1) then
+				Signal2_1(function(p2) --[[ Line: 140 ]]
+					-- upvalues: p1 (copy)
 					if p2:has(p1) then
-						local var9 = p2:clone()
-						var9:remove(p1)
+						local Copy = p2:clone()
+						Copy:remove(p1)
 						
-						return var9
+						return Copy
+					else
+						return p2
 					end
-					return p2
 				end)
 				
 				return true
+			else
+				return (addUserId(p1))
 			end
-			return addUserId(p1)
 		end,
-		clearStore = function()
-			-- upvalues: var8 (write), signal (copy), t (write), t_1 (write), var4 (ref), arraySet (copy)
-			var8 = signal.new()
+		clearStore = function() --[[ Line: 161 ]]
+			-- upvalues: NewSignal (ref), Signal (upval), t (ref), t1 (ref), Signal2_1 (copy), ArraySet (upval)
+			NewSignal = Signal.new()
 			t = {}
-			t_1 = {}
-			var4(function(_)
-				-- upvalues: arraySet (copy)
-				return arraySet.new({})
+			t1 = {}
+			Signal2_1(function(_) --[[ Line: 165 ]]
+				-- upvalues: ArraySet (upval)
+				return ArraySet.new({})
 			end)
 		end,
-		onMaxSizeExceeded = function(a)
-			-- upvalues: var8 (write)
-			local var9 = var8:connect(a)
+		onMaxSizeExceeded = function(p1) --[[ Line: 76 ]]
+			-- upvalues: NewSignal (ref)
+			local Connection = NewSignal:connect(p1)
 			
-			return function()
-				-- upvalues: var9 (ref)
-				var9:disconnect()
+			return function() --[[ Line: 79 ]]
+				-- upvalues: Connection (copy)
+				Connection:disconnect()
 			end
 		end,
-		hasUserId = function(p1)
-			-- upvalues: var3 (ref)
-			return var3(false):has(p1)
+		hasUserId = function(p1) --[[ Line: 170 ]]
+			-- upvalues: Signal3 (copy)
+			return Signal3(false):has(p1)
 		end,
-		getCount = function()
-			-- upvalues: var3 (ref)
-			return var3(false):size()
+		getCount = function() --[[ Line: 175 ]]
+			-- upvalues: Signal3 (copy)
+			return Signal3(false):size()
 		end
 	}
 end

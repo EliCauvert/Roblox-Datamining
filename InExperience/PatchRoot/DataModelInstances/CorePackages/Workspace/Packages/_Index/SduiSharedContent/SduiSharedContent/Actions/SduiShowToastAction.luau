@@ -1,72 +1,76 @@
-﻿local sduiSharedContent = script:FindFirstAncestor("SduiSharedContent")
-local parent = sduiSharedContent.Parent
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local toastRoduxModule = require(parent.ToastRodux)
-local setCurrentToastMessage = toastRoduxModule.Actions.SetCurrentToastMessage
-local toastType = toastRoduxModule.Enums.ToastType
-local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
-local sduiActionType = sduiCoreSystemModule.SduiActionType
-local getSduiActionHandlerRegistry = sduiCoreSystemModule.getSduiActionHandlerRegistry
-local sduiActionParams = sduiCoreSystemModule.SduiActionParams
-local getStringParam = sduiActionParams.getStringParam
-local getBooleanParam = sduiActionParams.getBooleanParam
-local sduiDismissPromptActionModule = require(sduiSharedContent.Actions.SduiDismissPromptAction)
-local fFlagSduiDismissPromptAction = require(parent.SharedFlags).FFlagSduiDismissPromptAction
-local fFlagLuaAppSduiMovePromptsActions = require(parent.SharedFlags).FFlagLuaAppSduiMovePromptsActions
+﻿local SduiSharedContent = script:FindFirstAncestor("SduiSharedContent")
+local Parent = SduiSharedContent.Parent
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local ToastRoduxModule = require(Parent.ToastRodux)
+local SetCurrentToastMessageFunction = ToastRoduxModule.Actions.SetCurrentToastMessage
+local ToastType = ToastRoduxModule.Enums.ToastType
+local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
+local SduiActionType = SduiCoreSystemModule.SduiActionType
+local GetSduiActionHandlerRegistryFunction = SduiCoreSystemModule.getSduiActionHandlerRegistry
+local SduiActionParams = SduiCoreSystemModule.SduiActionParams
+local GetStringParamFunction = SduiActionParams.getStringParam
+local GetBooleanParamFunction = SduiActionParams.getBooleanParam
+local SduiDismissPromptActionModule = require(SduiSharedContent.Actions.SduiDismissPromptAction)
+local FFlagSduiDismissPromptAction = require(Parent.SharedFlags).FFlagSduiDismissPromptAction
+local FFlagLuaAppSduiMovePromptsActions = require(Parent.SharedFlags).FFlagLuaAppSduiMovePromptsActions
 
-return function(p1, p2, p3, _)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref), getStringParam (ref), toastType (ref), setCurrentToastMessage (ref), fFlagSduiDismissPromptAction (ref), getBooleanParam (ref), fFlagLuaAppSduiMovePromptsActions (ref), getSduiActionHandlerRegistry (ref), sduiDismissPromptActionModule (ref)
-	local var1 = if p1 then p1.actionParams else nil
+return function(p1, p2, p3, _) --[[ Line: 27 | Named "SduiShowToastAction" ]]
+	-- upvalues: SduiErrorType (copy), SduiActionType (copy), GetStringParamFunction (copy), ToastType (copy), SetCurrentToastMessageFunction (copy), FFlagSduiDismissPromptAction (copy), GetBooleanParamFunction (copy), FFlagLuaAppSduiMovePromptsActions (copy), GetSduiActionHandlerRegistryFunction (copy), SduiDismissPromptActionModule (copy)
+	local ActionParams = p1 and p1.actionParams or nil
 	
-	if var1 == nil then
-		p3.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if ActionParams == nil then
+		p3.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
-			name = sduiActionType.ShowToast
+			name = SduiActionType.ShowToast
 		}, p3.appPage)
 		
 		return
 	end
-	local var2 = getStringParam(var1, "toastMessage")
+	local ToastMessage = GetStringParamFunction(ActionParams, "toastMessage")
 	
-	if var2 == nil then
-		p3.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if ToastMessage == nil then
+		p3.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing actionParam: toastMessage",
 			propName = "toastMessage",
-			name = sduiActionType.ShowToast
+			name = SduiActionType.ShowToast
 		}, p3.appPage)
 		
 		return
 	end
-	local var3 = getStringParam(var1, "toastType")
-	p3.dependencies.dispatch(setCurrentToastMessage({
+	local ToastType1 = GetStringParamFunction(ActionParams, "toastType")
+	p3.dependencies.dispatch(SetCurrentToastMessageFunction({
 		isLocalized = true,
-		toastMessage = var2,
-		toastType = if var3 and toastType[var3] then toastType[var3] else toastType.SuccessConfirmation
+		toastMessage = ToastMessage,
+		toastType = if ToastType1 and ToastType[ToastType1] then ToastType[ToastType1] else ToastType.SuccessConfirmation
 	}))
 	
-	if fFlagSduiDismissPromptAction and getBooleanParam(var1, "dismissPrompt", false) then
-		local t = {
-			actionType = sduiActionType.DismissPrompt,
-			actionParams = { promptType = var1.promptType, promptId = var1.promptId }
+	if FFlagSduiDismissPromptAction and GetBooleanParamFunction(ActionParams, "dismissPrompt", false) then
+		local config = {
+			actionType = SduiActionType.DismissPrompt,
+			actionParams = {
+				promptType = ActionParams.promptType,
+				promptId = ActionParams.promptId
+			}
 		}
 		
-		if fFlagLuaAppSduiMovePromptsActions then
-			local actionHandlerConfig = getSduiActionHandlerRegistry().getActionHandlerConfig(sduiActionType.DismissPrompt)
+		if FFlagLuaAppSduiMovePromptsActions then
+			local ActionHandlerConfig = GetSduiActionHandlerRegistryFunction().getActionHandlerConfig(SduiActionType.DismissPrompt)
 			
-			if actionHandlerConfig and actionHandlerConfig.handler then
-				actionHandlerConfig.handler(t, p2, p3)
+			if ActionHandlerConfig and ActionHandlerConfig.handler then
+				ActionHandlerConfig.handler(config, p2, p3)
+				
+				return
+			else
+				p3.dependencies.logger.reportError(SduiErrorType.FailedToExecuteAction, {
+					message = "DismissPrompt handler is not registered",
+					propName = "dismissPrompt",
+					name = SduiActionType.ShowToast
+				}, p3.appPage)
 				
 				return
 			end
-			p3.dependencies.logger.reportError(sduiErrorType.FailedToExecuteAction, {
-				message = "DismissPrompt handler is not registered",
-				propName = "dismissPrompt",
-				name = sduiActionType.ShowToast
-			}, p3.appPage)
-			
-			return
 		else
-			sduiDismissPromptActionModule(t, p2, p3)
+			SduiDismissPromptActionModule(config, p2, p3)
 		end
 	end
 end

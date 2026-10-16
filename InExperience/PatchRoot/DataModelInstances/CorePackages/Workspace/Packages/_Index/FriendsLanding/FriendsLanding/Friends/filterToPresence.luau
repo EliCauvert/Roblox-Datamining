@@ -1,17 +1,17 @@
-﻿local friendsLanding = script:FindFirstAncestor("FriendsLanding")
-local presenceType = require(friendsLanding.dependencies).RoduxPresence.Enums.PresenceType
-local filterStatesModule = require(friendsLanding.Friends.filterStates)
+﻿local FriendsLanding = script:FindFirstAncestor("FriendsLanding")
+local PresenceType = require(FriendsLanding.dependencies).RoduxPresence.Enums.PresenceType
+local FilterStatesModule = require(FriendsLanding.Friends.filterStates)
 
-return function(p1)
-	-- upvalues: filterStatesModule (ref), presenceType (ref)
-	return if p1 == filterStatesModule.InExperience then { presenceType.InGame, presenceType.InStudio } elseif p1 == filterStatesModule.Offline then { presenceType.Offline } elseif p1 == filterStatesModule.Online then {
-		presenceType.Online,
-		presenceType.InStudio,
-		presenceType.InGame
+return function(InExperience) --[[ Line: 6 ]]
+	-- upvalues: FilterStatesModule (copy), PresenceType (copy)
+	return if InExperience == FilterStatesModule.InExperience then { PresenceType.InGame, PresenceType.InStudio } elseif InExperience == FilterStatesModule.Offline then { PresenceType.Offline } elseif InExperience == FilterStatesModule.Online then {
+		PresenceType.Online,
+		PresenceType.InStudio,
+		PresenceType.InGame
 	} else {
-		presenceType.Online,
-		presenceType.InStudio,
-		presenceType.InGame,
-		presenceType.Offline
+		PresenceType.Online,
+		PresenceType.InStudio,
+		PresenceType.InGame,
+		PresenceType.Offline
 	}
 end

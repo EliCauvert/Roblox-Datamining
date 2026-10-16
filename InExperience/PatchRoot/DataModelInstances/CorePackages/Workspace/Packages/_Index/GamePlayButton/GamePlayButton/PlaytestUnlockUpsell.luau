@@ -1,16 +1,16 @@
-﻿local parent = script:FindFirstAncestor("GamePlayButton").Parent
-local playabilityStatusEnum = require(parent.DiscoveryTypes).PlayabilityStatusEnum
-local fFlagLuaAppPlayButtonAmpAgeCheckFlow = require(parent.SharedFlags).FFlagLuaAppPlayButtonAmpAgeCheckFlow
-local t = {
+﻿local Parent = script:FindFirstAncestor("GamePlayButton").Parent
+local PlayabilityStatusEnum = require(Parent.DiscoveryTypes).PlayabilityStatusEnum
+local FFlagLuaAppPlayButtonAmpAgeCheckFlow = require(Parent.SharedFlags).FFlagLuaAppPlayButtonAmpAgeCheckFlow
+local Type = {
 	AgeVerification = "AgeVerification",
 	UpdatePlaytestSettings = "UpdatePlaytestSettings",
 	TrustedFriends = "TrustedFriends"
 }
 
 return {
-	Type = t,
-	getType = function(p1)
-		-- upvalues: playabilityStatusEnum (ref), fFlagLuaAppPlayButtonAmpAgeCheckFlow (ref), t (ref)
-		return if p1 == playabilityStatusEnum.ContextualPlayabilityUnverifiedSeventeenPlusUser or fFlagLuaAppPlayButtonAmpAgeCheckFlow and p1 == playabilityStatusEnum.ContextualPlayabilityAgeCheckRequired then t.AgeVerification elseif p1 == playabilityStatusEnum.ContextualPlayabilityPlaytestDisabled or p1 == playabilityStatusEnum.ContextualPlayabilityRequireParentApproval then t.UpdatePlaytestSettings elseif p1 == playabilityStatusEnum.ContextualPlayabilityTrustedFriendRequired then t.TrustedFriends else nil
+	Type = Type,
+	getType = function(ContextualPlayabilityAgeCheckRequired) --[[ Line: 17 ]]
+		-- upvalues: PlayabilityStatusEnum (copy), FFlagLuaAppPlayButtonAmpAgeCheckFlow (copy), Type (copy)
+		return if ContextualPlayabilityAgeCheckRequired == PlayabilityStatusEnum.ContextualPlayabilityUnverifiedSeventeenPlusUser or FFlagLuaAppPlayButtonAmpAgeCheckFlow and ContextualPlayabilityAgeCheckRequired == PlayabilityStatusEnum.ContextualPlayabilityAgeCheckRequired then Type.AgeVerification elseif ContextualPlayabilityAgeCheckRequired == PlayabilityStatusEnum.ContextualPlayabilityPlaytestDisabled or ContextualPlayabilityAgeCheckRequired == PlayabilityStatusEnum.ContextualPlayabilityRequireParentApproval then Type.UpdatePlaytestSettings elseif ContextualPlayabilityAgeCheckRequired == PlayabilityStatusEnum.ContextualPlayabilityTrustedFriendRequired then Type.TrustedFriends else nil
 	end
 }

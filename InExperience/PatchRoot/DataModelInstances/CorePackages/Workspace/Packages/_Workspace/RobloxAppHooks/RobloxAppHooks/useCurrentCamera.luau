@@ -1,6 +1,6 @@
-﻿local useProperty = require(script:FindFirstAncestor("RobloxAppHooks").Parent.GuiObjectUtils).useProperty
+﻿local UsePropertyFunction = require(script:FindFirstAncestor("RobloxAppHooks").Parent.GuiObjectUtils).useProperty
 
-return function()
-	-- upvalues: useProperty (ref)
-	return useProperty(workspace, "CurrentCamera")
+return function() --[[ Line: 5 | Named "useCurrentCamera" ]]
+	-- upvalues: UsePropertyFunction (copy)
+	return UsePropertyFunction(workspace, "CurrentCamera")
 end

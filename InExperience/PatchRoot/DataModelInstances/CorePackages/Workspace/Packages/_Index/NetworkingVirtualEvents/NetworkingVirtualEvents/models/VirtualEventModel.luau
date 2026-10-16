@@ -1,8 +1,8 @@
 ﻿local _ = require(script:FindFirstAncestor("NetworkingVirtualEvents").types)
 
 return {
-	mock = function(p1)
-		local currentDateTime = DateTime.now()
+	mock = function(Id) --[[ Line: 7 ]]
+		local _DateTime = DateTime.now()
 		
 		return {
 			title = "Event Name",
@@ -11,7 +11,7 @@ return {
 			placeId = 123456789,
 			eventStatus = "active",
 			userRsvpStatus = "none",
-			id = p1,
+			id = Id,
 			host = {
 				hostType = "user",
 				hostId = 1,
@@ -19,37 +19,37 @@ return {
 				hasVerifiedBadge = true
 			},
 			eventTime = {
-				startTime = currentDateTime,
-				endTime = DateTime.fromUnixTimestamp(currentDateTime.UnixTimestamp + 86400),
-				startUtc = currentDateTime:ToIsoDate(),
-				endUtc = currentDateTime:ToIsoDate()
+				startTime = _DateTime,
+				endTime = DateTime.fromUnixTimestamp(_DateTime.UnixTimestamp + 86400),
+				startUtc = _DateTime:ToIsoDate(),
+				endUtc = _DateTime:ToIsoDate()
 			},
-			createdTime = currentDateTime,
-			updatedTime = currentDateTime
+			createdTime = _DateTime,
+			updatedTime = _DateTime
 		}
 	end,
-	fromResponse = function(p1)
-		local dateTime = DateTime.fromIsoDate(p1.eventTime.startUtc)
-		local dateTime_1 = DateTime.fromIsoDate(p1.eventTime.endUtc)
-		local dateTime_2 = DateTime.fromIsoDate(p1.createdUtc)
-		local dateTime_3 = DateTime.fromIsoDate(p1.updatedUtc)
+	fromResponse = function(p1) --[[ Line: 38 ]]
+		local _DateTime = DateTime.fromIsoDate(p1.eventTime.startUtc)
+		local _DateTime1 = DateTime.fromIsoDate(p1.eventTime.endUtc)
+		local _DateTime2 = DateTime.fromIsoDate(p1.createdUtc)
+		local _DateTime3 = DateTime.fromIsoDate(p1.updatedUtc)
 		
-		return if dateTime and dateTime_1 and (dateTime_2 and dateTime_3) then {
+		return if _DateTime and _DateTime1 and _DateTime2 and _DateTime3 then {
 			id = p1.id,
 			title = p1.title,
 			description = p1.description,
 			host = p1.host,
 			eventTime = {
-				startTime = dateTime,
-				endTime = dateTime_1,
+				startTime = _DateTime,
+				endTime = _DateTime1,
 				startUtc = p1.eventTime.startUtc,
 				endUtc = p1.eventTime.endUtc
 			},
 			universeId = p1.universeId,
 			placeId = p1.placeId,
 			eventStatus = p1.eventStatus,
-			createdTime = dateTime_2,
-			updatedTime = dateTime_3,
+			createdTime = _DateTime2,
+			updatedTime = _DateTime3,
 			userRsvpStatus = p1.userRsvpStatus
 		} else nil
 	end

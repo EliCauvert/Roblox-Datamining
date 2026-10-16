@@ -1,15 +1,15 @@
-﻿local parent = script:FindFirstAncestor("GameTile").Parent
-local centralOverlayType = require(parent.RobloxAppEnums).CentralOverlayType
-local setCentralOverlay = require(parent.CentralOverlay).Actions.SetCentralOverlay
+﻿local Parent = script:FindFirstAncestor("GameTile").Parent
+local CentralOverlayType = require(Parent.RobloxAppEnums).CentralOverlayType
+local SetCentralOverlayFunction = require(Parent.CentralOverlay).Actions.SetCentralOverlay
 
-return function(p1, p2, p3)
-	-- upvalues: setCentralOverlay (ref), centralOverlayType (ref)
-	return function(p4)
-		-- upvalues: setCentralOverlay (copy), centralOverlayType (copy), p1 (ref), p2 (ref), p3 (ref)
-		p4:dispatch(setCentralOverlay(centralOverlayType.PlacesList, {
+return function(p1, AnchorSpaceSize, AnchorSpacePosition) --[[ Line: 6 ]]
+	-- upvalues: SetCentralOverlayFunction (copy), CentralOverlayType (copy)
+	return function(p2) --[[ Line: 7 ]]
+		-- upvalues: SetCentralOverlayFunction (upval), CentralOverlayType (upval), p1 (copy), AnchorSpaceSize (copy), AnchorSpacePosition (copy)
+		p2:dispatch(SetCentralOverlayFunction(CentralOverlayType.PlacesList, {
 			game = p1,
-			anchorSpaceSize = p2,
-			anchorSpacePosition = p3
+			anchorSpaceSize = AnchorSpaceSize,
+			anchorSpacePosition = AnchorSpacePosition
 		}))
 	end
 end

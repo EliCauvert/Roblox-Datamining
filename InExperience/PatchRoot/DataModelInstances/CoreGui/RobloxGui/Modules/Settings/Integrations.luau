@@ -1,8 +1,8 @@
-﻿local settings = script:FindFirstAncestor("Settings")
-local integrations = settings.Integrations
+﻿local Settings = script:FindFirstAncestor("Settings")
+local Integrations = Settings.Integrations
 
 return {
-	Settings = if require(settings.Flags).FFlagRefactorInExpSettingsInDevelopment then require(integrations.Settings) else nil,
-	Constants = require(integrations.Constants),
-	Utils = require(integrations.Utils)
+	Settings = if require(Settings.Flags).FFlagRefactorInExpSettingsInDevelopment then require(Integrations.Settings) else nil,
+	Constants = require(Integrations.Constants),
+	Utils = require(Integrations.Utils)
 }

@@ -1,26 +1,22 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local reactModule = require(parent.React)
-local useTokens = require(parent.Foundation).Hooks.useTokens
-local fFlagSduiDividerThemeAwareStroke = require(parent.SharedFlags).FFlagSduiDividerThemeAwareStroke
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local ReactModule = require(Parent.React)
+local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+local FFlagSduiDividerThemeAwareStroke = require(Parent.SharedFlags).FFlagSduiDividerThemeAwareStroke
 
-return reactModule.memo(function(p1)
-	-- upvalues: fFlagSduiDividerThemeAwareStroke (ref), useTokens (ref), reactModule (ref)
-	local var1 = if fFlagSduiDividerThemeAwareStroke then useTokens() else nil
-	local size = p1.size
-	local layoutOrder = p1.layoutOrder
-	local position = p1.position
-	local anchorPoint = p1.anchorPoint
-	local backgroundColor3 = p1.backgroundColor3
-	local backgroundTransparency = p1.backgroundTransparency
+return ReactModule.memo(function(p1) --[[ Line: 22 | Named "SduiDivider" ]]
+	-- upvalues: FFlagSduiDividerThemeAwareStroke (copy), UseTokensFunction (copy), ReactModule (copy)
+	local UseTokensResult = if FFlagSduiDividerThemeAwareStroke then UseTokensFunction() else nil
+	local BackgroundColor3 = p1.backgroundColor3
+	local BackgroundTransparency = p1.backgroundTransparency
 	
-	return reactModule.createElement("Frame", {
-		Size = size or UDim2.new(1, 0, 0, 1),
-		LayoutOrder = layoutOrder,
-		Position = position,
-		AnchorPoint = anchorPoint,
-		BackgroundColor3 = if fFlagSduiDividerThemeAwareStroke then backgroundColor3 or var1.Color.Stroke.Default.Color3 else backgroundColor3 or Color3.new(1, 1, 1),
-		BackgroundTransparency = if fFlagSduiDividerThemeAwareStroke then backgroundTransparency or var1.Color.Stroke.Default.Transparency else backgroundTransparency or 0.85,
+	return ReactModule.createElement("Frame", {
+		Size = p1.size or UDim2.new(1, 0, 0, 1),
+		LayoutOrder = p1.layoutOrder,
+		Position = p1.position,
+		AnchorPoint = p1.anchorPoint,
+		BackgroundColor3 = if FFlagSduiDividerThemeAwareStroke then BackgroundColor3 or UseTokensResult.Color.Stroke.Default.Color3 else BackgroundColor3 or Color3.new(1, 1, 1),
+		BackgroundTransparency = if FFlagSduiDividerThemeAwareStroke then BackgroundTransparency or UseTokensResult.Color.Stroke.Default.Transparency else BackgroundTransparency or 0.85,
 		BorderSizePixel = 0,
-		[reactModule.Tag] = "data-testid=--sdui-divider"
+		[ReactModule.Tag] = "data-testid=--sdui-divider"
 	})
 end)

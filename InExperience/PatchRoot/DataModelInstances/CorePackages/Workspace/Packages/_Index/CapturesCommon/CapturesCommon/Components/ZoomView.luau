@@ -1,24 +1,24 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local view = require(parent_1.Foundation).View
-local useZoomControllerModule = require(parent.Hooks.useZoomController)
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local View = require(Parent1.Foundation).View
+local UseZoomControllerModule = require(Parent.Hooks.useZoomController)
 
-return function(p1)
-	-- upvalues: useZoomControllerModule (ref), reactModule (ref), view (ref)
-	local var1, var2 = useZoomControllerModule(p1.active ~= nil or p1.active)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var1 (ref)
+return function(p1) --[[ Line: 17 ]]
+	-- upvalues: UseZoomControllerModule (copy), ReactModule (copy), View (copy)
+	local UseZoomControllerModuleResult, UseZoomControllerModuleResult2 = UseZoomControllerModule(p1.active == nil or p1.active)
+	ReactModule.useEffect(function() --[[ Line: 22 ]]
+		-- upvalues: p1 (copy), UseZoomControllerModuleResult (copy)
 		if p1.onZoomStatusChanged then
-			p1.onZoomStatusChanged(var1)
+			p1.onZoomStatusChanged(UseZoomControllerModuleResult)
 		end
-	end, { var1, p1.onZoomStatusChanged })
+	end, { UseZoomControllerModuleResult, p1.onZoomStatusChanged })
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "anchor-center-center position-center-center size-full bg-action-subtle",
 		ZIndex = 1,
-		ref = var2
+		ref = UseZoomControllerModuleResult2
 	}, {
-		ZoomItem = reactModule.createElement(reactModule.Fragment, nil, p1.children)
+		ZoomItem = ReactModule.createElement(ReactModule.Fragment, nil, p1.children)
 	})
 end

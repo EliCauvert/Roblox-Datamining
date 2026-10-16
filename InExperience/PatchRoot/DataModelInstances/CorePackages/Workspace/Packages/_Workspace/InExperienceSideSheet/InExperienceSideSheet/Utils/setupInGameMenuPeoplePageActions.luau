@@ -1,25 +1,26 @@
-﻿local registerInGameMenuPeoplePageActionsModule = require(script:FindFirstAncestor("InExperienceSideSheet").Utils.registerInGameMenuPeoplePageActions)
+﻿local RegisterInGameMenuPeoplePageActionsModule = require(script:FindFirstAncestor("InExperienceSideSheet").Utils.registerInGameMenuPeoplePageActions)
 
-return function(p1)
-	-- upvalues: registerInGameMenuPeoplePageActionsModule (ref)
-	registerInGameMenuPeoplePageActionsModule.registerOpenPeoplePage(function()
-		-- upvalues: p1 (ref)
-		local playersPage = p1.PlayersPage
+return function(p1) --[[ Line: 23 ]]
+	-- upvalues: RegisterInGameMenuPeoplePageActionsModule (copy)
+	RegisterInGameMenuPeoplePageActionsModule.registerOpenPeoplePage(function() --[[ Line: 24 ]]
+		-- upvalues: p1 (copy)
+		local PlayersPage = p1.PlayersPage
 		
-		if playersPage == nil then return end
+		if PlayersPage == nil then return end
 		if p1:GetVisibility() then
-			p1:SwitchToPage(playersPage, true, 1)
+			p1:SwitchToPage(PlayersPage, true, 1)
 			
 			return
+		else
+			p1:SetVisibility(true, false, PlayersPage)
 		end
-		p1:SetVisibility(true, false, playersPage)
 	end)
-	registerInGameMenuPeoplePageActionsModule.registerClosePeoplePage(function()
-		-- upvalues: p1 (ref)
-		local playersPage = p1.PlayersPage
-		local pages = p1.Pages
+	RegisterInGameMenuPeoplePageActionsModule.registerClosePeoplePage(function() --[[ Line: 37 ]]
+		-- upvalues: p1 (copy)
+		local PlayersPage = p1.PlayersPage
+		local Pages = p1.Pages
 		
-		if p1:GetVisibility() and playersPage ~= nil and (pages ~= nil and pages.CurrentPage == playersPage) then
+		if p1:GetVisibility() and PlayersPage ~= nil and Pages ~= nil and Pages.CurrentPage == PlayersPage then
 			p1:SetVisibility(false)
 		end
 	end)

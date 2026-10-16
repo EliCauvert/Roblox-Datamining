@@ -1,69 +1,75 @@
 ﻿local _ = require(script.Parent.types)
-local t = {
+local config = {
 	BLOCK_REASON_FREE_TRIAL_EXHAUSTED = "FreeTrialExhausted",
 	BLOCK_REASON_DAILY_LIMIT_REACHED = "DailyLimitReached",
 	BLOCK_REASON_INSUFFICIENT_ROBUX_BALANCE = "InsufficientRobuxBalance"
 }
-local t_1 = {
+local config1 = {
 	FREE_TRIAL_RESET_PERIOD_DAILY = "Daily",
 	FREE_TRIAL_RESET_PERIOD_WEEKLY = "Weekly",
 	FREE_TRIAL_RESET_PERIOD_MONTHLY = "Monthly"
 }
 
-local function _(p1)
-	return if typeof(p1) == "number" then p1 elseif typeof(p1) == "string" then tonumber(p1) or 0 else 0
+local function _(p1) --[[ Line: 20 | Named "decodeNumber" ]]
+	return if typeof(p1) == "number" then p1 else typeof(p1) == "string" and tonumber(p1) or 0
 end
 
-local function decodeDailyLimitSettings(value)
-	local var1 = if typeof(value) == "table" then value else {}
-	local var2 = if typeof(var1.limitSettings) == "table" then var1.limitSettings else var1
-	local t = {
-		additionalUsageEnabled = var2.additionalUsageEnabled == true,
-		dailyLimitSet = var2.dailyLimitSet == true
-	}
-	local dailyLimit = var2.dailyLimit
-	t.dailyLimit = if typeof(dailyLimit) == "number" then dailyLimit elseif typeof(dailyLimit) == "string" then tonumber(dailyLimit) or 0 else 0
+local function decodeDailyLimitSettings(LimitSettings) --[[ Line: 30 ]]
+	local LimitSettings1 = if typeof(LimitSettings) == "table" then LimitSettings else {}
+	local LimitSettings2 = if typeof(LimitSettings1.limitSettings) == "table" then LimitSettings1.limitSettings else LimitSettings1
+	local DailyLimit = LimitSettings2.dailyLimit
 	
-	return t
+	return {
+		additionalUsageEnabled = LimitSettings2.additionalUsageEnabled == true,
+		dailyLimitSet = LimitSettings2.dailyLimitSet == true,
+		dailyLimit = if typeof(DailyLimit) == "number" then DailyLimit else typeof(DailyLimit) == "string" and tonumber(DailyLimit) or 0
+	}
 end
 
-local _ = function(p1)
-	-- upvalues: t (ref)
-	return if typeof(p1) == "string" then t[p1] else nil
+local _ = function(p1) --[[ Line: 40 | Named "decodeQuotaBlockReason" ]]
+	-- upvalues: config (copy)
+	return if typeof(p1) == "string" then config[p1] else nil
 end
 
-local _ = function(value)
-	-- upvalues: t_1 (ref)
-	return if typeof(value) == "string" then t_1[value] or "Daily" else "Daily"
+local _ = function(p1) --[[ Line: 50 | Named "decodeFreeTrialResetPeriod" ]]
+	-- upvalues: config1 (copy)
+	return typeof(p1) == "string" and config1[p1] or "Daily"
 end
 
 return {
 	decodeDailyLimitSettings = decodeDailyLimitSettings,
-	decodeQuotaSummary = function(p1)
-		-- upvalues: decodeDailyLimitSettings (ref), t (ref), t_1 (ref)
-		local var1 = if typeof(p1) == "table" then p1 else {}
-		local var2 = if typeof(var1.summary) == "table" then var1.summary else var1
-		local t_2 = {}
-		local freeTrialDailyAllowance = var2.freeTrialDailyAllowance
-		t_2.freeTrialDailyAllowance = if typeof(freeTrialDailyAllowance) == "number" then freeTrialDailyAllowance elseif typeof(freeTrialDailyAllowance) == "string" then tonumber(freeTrialDailyAllowance) or 0 else 0
-		local freeTrialRemaining = var2.freeTrialRemaining
-		t_2.freeTrialRemaining = if typeof(freeTrialRemaining) == "number" then freeTrialRemaining elseif typeof(freeTrialRemaining) == "string" then tonumber(freeTrialRemaining) or 0 else 0
-		local freeTrialPctUsed = var2.freeTrialPctUsed
-		t_2.freeTrialPctUsed = if typeof(freeTrialPctUsed) == "number" then freeTrialPctUsed elseif typeof(freeTrialPctUsed) == "string" then tonumber(freeTrialPctUsed) or 0 else 0
-		t_2.nextResetEligibleTime = var2.nextResetEligibleTime or ""
-		local robuxBalance = var2.robuxBalance
-		t_2.robuxBalance = if typeof(robuxBalance) == "number" then robuxBalance elseif typeof(robuxBalance) == "string" then tonumber(robuxBalance) or 0 else 0
-		t_2.limitSettings = decodeDailyLimitSettings(var2.limitSettings)
-		local robuxSpentToday = var2.robuxSpentToday
-		t_2.robuxSpentToday = if typeof(robuxSpentToday) == "number" then robuxSpentToday elseif typeof(robuxSpentToday) == "string" then tonumber(robuxSpentToday) or 0 else 0
-		local limitRemaining = var2.limitRemaining
-		t_2.limitRemaining = if typeof(limitRemaining) == "number" then limitRemaining elseif typeof(limitRemaining) == "string" then tonumber(limitRemaining) or 0 else 0
-		t_2.allowed = if typeof(var2.allowed) == "boolean" then var2.allowed else nil
-		local reason = var2.reason
-		t_2.reason = if typeof(reason) ~= "string" then t[reason] else nil
-		local freeTrialResetPeriod = var2.freeTrialResetPeriod
-		t_2.freeTrialResetPeriod = if typeof(freeTrialResetPeriod) ~= "string" then t_1[freeTrialResetPeriod] or "Daily" else "Daily"
+	decodeQuotaSummary = function(p1) --[[ Line: 57 ]]
+		-- upvalues: decodeDailyLimitSettings (copy), config (copy), config1 (copy)
+		local T = if typeof(p1) == "table" then p1 else {}
+		local Summary = if typeof(T.summary) == "table" then T.summary else T
+		local FreeTrialDailyAllowance = Summary.freeTrialDailyAllowance
+		local FreeTrialDailyAllowance1 = if typeof(FreeTrialDailyAllowance) == "number" then FreeTrialDailyAllowance else typeof(FreeTrialDailyAllowance) == "string" and tonumber(FreeTrialDailyAllowance) or 0
+		local FreeTrialRemaining = Summary.freeTrialRemaining
+		local FreeTrialRemaining1 = if typeof(FreeTrialRemaining) == "number" then FreeTrialRemaining else typeof(FreeTrialRemaining) == "string" and tonumber(FreeTrialRemaining) or 0
+		local FreeTrialPctUsed = Summary.freeTrialPctUsed
+		local FreeTrialPctUsed1 = if typeof(FreeTrialPctUsed) == "number" then FreeTrialPctUsed else typeof(FreeTrialPctUsed) == "string" and tonumber(FreeTrialPctUsed) or 0
+		local RobuxBalance = Summary.robuxBalance
+		local RobuxBalance1 = if typeof(RobuxBalance) == "number" then RobuxBalance else typeof(RobuxBalance) == "string" and tonumber(RobuxBalance) or 0
+		local RobuxSpentToday = Summary.robuxSpentToday
+		local RobuxSpentToday1 = if typeof(RobuxSpentToday) == "number" then RobuxSpentToday else typeof(RobuxSpentToday) == "string" and tonumber(RobuxSpentToday) or 0
+		local LimitRemaining = Summary.limitRemaining
+		local LimitRemaining1 = if typeof(LimitRemaining) == "number" then LimitRemaining else typeof(LimitRemaining) == "string" and tonumber(LimitRemaining) or 0
+		local Reason = Summary.reason
+		local Entry = if typeof(Reason) == "string" then config[Reason] else nil
+		local FreeTrialResetPeriod = Summary.freeTrialResetPeriod
 		
-		return t_2
+		return {
+			freeTrialDailyAllowance = FreeTrialDailyAllowance1,
+			freeTrialRemaining = FreeTrialRemaining1,
+			freeTrialPctUsed = FreeTrialPctUsed1,
+			nextResetEligibleTime = Summary.nextResetEligibleTime or "",
+			robuxBalance = RobuxBalance1,
+			limitSettings = decodeDailyLimitSettings(Summary.limitSettings),
+			robuxSpentToday = RobuxSpentToday1,
+			limitRemaining = LimitRemaining1,
+			allowed = if typeof(Summary.allowed) == "boolean" then Summary.allowed else nil,
+			reason = Entry,
+			freeTrialResetPeriod = typeof(FreeTrialResetPeriod) == "string" and config1[FreeTrialResetPeriod] or "Daily"
+		}
 	end
 }

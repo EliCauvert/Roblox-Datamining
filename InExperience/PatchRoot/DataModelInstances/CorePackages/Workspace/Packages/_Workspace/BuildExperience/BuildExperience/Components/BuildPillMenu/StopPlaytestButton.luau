@@ -1,21 +1,21 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local iconButton = foundationModule.IconButton
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local iconName = foundationModule.Enums.IconName
-local inputSize = foundationModule.Enums.InputSize
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local IconButton = FoundationModule.IconButton
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local IconName = FoundationModule.Enums.IconName
+local InputSize = FoundationModule.Enums.InputSize
 
-return function(p1)
-	-- upvalues: reactModule (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref)
-	return reactModule.createElement(iconButton, {
+return function(p1) --[[ Line: 19 | Named "StopPlaytestButton" ]]
+	-- upvalues: ReactModule (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy)
+	return ReactModule.createElement(IconButton, {
 		isCircular = true,
 		testId = "build-header-stop-playtest-button",
 		LayoutOrder = p1.layoutOrder,
-		icon = iconName.StopSmall,
+		icon = IconName.StopSmall,
 		isDisabled = p1.isDisabled,
 		onActivated = p1.onActivated,
-		size = inputSize.Medium,
-		variant = buttonVariant.Utility
+		size = InputSize.Medium,
+		variant = ButtonVariant.Utility
 	})
 end

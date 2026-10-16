@@ -1,55 +1,55 @@
 ﻿local _ = require(script.Parent.CommentCollectionTypes)
-local t = {
+local config = {
 	sessionHiddenCommentIds = {},
 	recentlyBlockedAuthorIds = {}
 }
 
-return function(p1)
-	-- upvalues: t (ref)
-	local filters = p1.filters or t
-	local stickyPostedCommentIds = p1.stickyPostedCommentIds or {}
-	local visibleIdsBeforeReconciliation = p1.visibleIdsBeforeReconciliation or {}
-	local t_1 = {}
-	local t_2 = {}
+return function(p1) --[[ Line: 23 | Named "mergeCommentPage" ]]
+	-- upvalues: config (copy)
+	local Filters = p1.filters or config
+	local StickyPostedCommentIds = p1.stickyPostedCommentIds or {}
+	local VisibleIdsBeforeReconciliation = p1.visibleIdsBeforeReconciliation or {}
+	local t = {}
+	local List = {}
 	
 	if p1.pendingSentinel ~= nil then
-		table.insert(t_2, p1.pendingSentinel)
-		t_1[p1.pendingSentinel] = true
+		table.insert(List, p1.pendingSentinel)
+		t[p1.pendingSentinel] = true
 	end
-	for i, v in stickyPostedCommentIds do
-		if not t_1[v] then
-			table.insert(t_2, v)
-			t_1[v] = true
+	for _, stickyPostedCommentId in StickyPostedCommentIds do
+		if not t[stickyPostedCommentId] then
+			table.insert(List, stickyPostedCommentId)
+			t[stickyPostedCommentId] = true
 		end
 	end
 	if not p1.replace then
-		for i, v_1 in p1.existingIds do
-			if not t_1[v_1] then
-				table.insert(t_2, v_1)
-				t_1[v_1] = true
+		for _, existingId in p1.existingIds do
+			if not t[existingId] then
+				table.insert(List, existingId)
+				t[existingId] = true
 			end
 		end
 	end
-	local t_3 = {}
+	local AddedIds = {}
 	
-	for i_2, v_1 in p1.pageComments do
-		if v_1.status == "Active" and not t_1[v_1.commentId] and filters.sessionHiddenCommentIds[v_1.commentId] ~= true then
-			local var1 = if v_1.author ~= nil then nil else v_1.author.userId
+	for _, pageComment in p1.pageComments do
+		if pageComment.status == "Active" and not t[pageComment.commentId] and Filters.sessionHiddenCommentIds[pageComment.commentId] ~= true then
+			local UserId = if pageComment.author == nil then nil else pageComment.author.userId
 			
-			if var1 == nil or filters.recentlyBlockedAuthorIds[var1] ~= true then
-				table.insert(t_2, v_1.commentId)
-				t_1[v_1.commentId] = true
+			if UserId == nil or Filters.recentlyBlockedAuthorIds[UserId] ~= true then
+				table.insert(List, pageComment.commentId)
+				t[pageComment.commentId] = true
 				
-				if not visibleIdsBeforeReconciliation[v_1.commentId] then
-					table.insert(t_3, v_1.commentId)
+				if not VisibleIdsBeforeReconciliation[pageComment.commentId] then
+					table.insert(AddedIds, pageComment.commentId)
 				end
 			end
 		end
 	end
 	return {
-		orderedCommentIds = t_2,
-		addedIds = t_3,
-		visibleCount = #t_3,
-		shouldContinuePaging = p1.hasMore == true and #t_3 == 0
+		orderedCommentIds = List,
+		addedIds = AddedIds,
+		visibleCount = #AddedIds,
+		shouldContinuePaging = p1.hasMore == true and #AddedIds == 0
 	}
 end

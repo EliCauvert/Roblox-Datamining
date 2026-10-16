@@ -1,38 +1,39 @@
-﻿local roactModule = require(script:FindFirstAncestor("AppChat").Parent.Roact)
-local removeUserDialogContainerModule = require(script.Parent.RemoveUserDialogContainer)
-local loggerModule = require(script.Parent.Logger)
-local removeUserDialog = roactModule.PureComponent:extend("RemoveUserDialog")
-removeUserDialog.defaultProps = { navigation = nil }
+﻿local RoactModule = require(script:FindFirstAncestor("AppChat").Parent.Roact)
+local RemoveUserDialogContainerModule = require(script.Parent.RemoveUserDialogContainer)
+local LoggerModule = require(script.Parent.Logger)
+local RemoveUserDialog = RoactModule.PureComponent:extend("RemoveUserDialog")
+RemoveUserDialog.defaultProps = { navigation = nil }
 
-function removeUserDialog.init(p1)
-	function p0.onRemoveUserDialogClose()
-		-- upvalues: p1 (ref)
+function RemoveUserDialog.init(p1) --[[ Line: 14 ]]
+	function p1.onRemoveUserDialogClose() --[[ Line: 15 ]]
+		-- upvalues: p1 (copy)
 		p1.props.navigation.goBack()
 	end
 end
 
-function removeUserDialog.render(p1)
-	-- upvalues: loggerModule (ref), roactModule (ref), removeUserDialogContainerModule (ref)
-	local navigation = p1.props.navigation
-	assert(type(navigation) ~= "nil", "RemoveUserDialog should be wrapped with Roact Navigation")
-	local conversationId = navigation.getParam("conversationId", nil)
-	local participantId = navigation.getParam("participantId", nil)
+function RemoveUserDialog.render(p1) --[[ Line: 20 ]]
+	-- upvalues: LoggerModule (copy), RoactModule (copy), RemoveUserDialogContainerModule (copy)
+	local Navigation = p1.props.navigation
+	assert(type(Navigation) ~= "nil", "RemoveUserDialog should be wrapped with Roact Navigation")
+	local ConversationIdParam = Navigation.getParam("conversationId", nil)
+	local ParticipantIdParam = Navigation.getParam("participantId", nil)
 	
-	if conversationId == nil or participantId == nil then
-		loggerModule:warning("ConversationId and participantId are required to open {screen}")
+	if ConversationIdParam == nil or ParticipantIdParam == nil then
+		LoggerModule:warning("ConversationId and participantId are required to open {screen}")
 		
 		return nil
+	else
+		return RoactModule.createElement(RemoveUserDialogContainerModule, {
+			conversationId = ConversationIdParam,
+			participantId = ParticipantIdParam,
+			onModalClose = p1.onRemoveUserDialogClose
+		})
 	end
-	return roactModule.createElement(removeUserDialogContainerModule, {
-		conversationId = conversationId,
-		participantId = participantId,
-		onModalClose = p1.onRemoveUserDialogClose
-	})
 end
 
-function removeUserDialog.didMount(_)
-	-- upvalues: loggerModule (ref)
-	loggerModule:info("{screen} mounted")
+function RemoveUserDialog:didMount() --[[ Line: 38 ]]
+	-- upvalues: LoggerModule (copy)
+	LoggerModule:info("{screen} mounted")
 end
 
-return removeUserDialog
+return RemoveUserDialog

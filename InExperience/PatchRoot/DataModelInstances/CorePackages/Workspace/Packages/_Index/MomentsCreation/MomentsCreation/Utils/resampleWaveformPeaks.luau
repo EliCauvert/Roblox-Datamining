@@ -1,21 +1,20 @@
-﻿return function(p1, p2, p3, p4)
-	local t = {}
-	local p0Count = #p1
+﻿return function(p1, p2, MinValue: number, MaxValue: number) --[[ Line: 9 | Named "resampleWaveformPeaks" ]]
+	local ClampedValues = {}
+	local CountP0 = #p1
 	
-	for i_1 = 1, p2 do
-		local var1 = p3
+	for i = 1, p2 do
+		local ClampedValue: number = MinValue
 		
-		if p0Count <= 0 then
-			table.insert(t, var1)
-			continue
+		if CountP0 > 0 then
+			local NewFloored = math.floor((i - 1) / p2 * CountP0) + 1
+			local Value = 0
+			
+			for i1 = NewFloored, math.max(NewFloored, (math.floor(i / p2 * CountP0))) do
+				Value = math.max(Value, p1[i1])
+			end
+			ClampedValue = math.clamp(Value, MinValue, MaxValue)
 		end
-		local var2 = math.floor((i_1 - 1) / p2 * p0Count) + 1
-		local var3 = 0
-		
-		for i = var2, math.max(var2, math.floor(i_1 / p2 * p0Count)) do
-			var3 = math.max(var3, p1[i])
-		end
-		var1 = math.clamp(var3, p3, p4)
+		table.insert(ClampedValues, ClampedValue)
 	end
-	return t
+	return ClampedValues
 end

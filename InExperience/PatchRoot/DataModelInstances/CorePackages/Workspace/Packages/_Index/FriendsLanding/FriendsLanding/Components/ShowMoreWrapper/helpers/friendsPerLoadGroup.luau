@@ -1,18 +1,18 @@
-﻿local dependenciesModule = require(script:FindFirstAncestor("FriendsLanding").dependencies)
-local llama = dependenciesModule.llama
-local t = dependenciesModule.t
-local friendsPerRowModule = require(script.Parent.friendsPerRow)
-local var1 = t.interface({ width = t.number })
-local var2 = t.interface({
-	visibleRows = t.number,
-	itemSize = t.number,
-	minimumItemsPerRow = t.optional(t.number)
+﻿local DependenciesModule = require(script:FindFirstAncestor("FriendsLanding").dependencies)
+local Llama = DependenciesModule.llama
+local T = DependenciesModule.t
+local FriendsPerRowModule = require(script.Parent.friendsPerRow)
+local InterfaceResult = T.interface({ width = T.number })
+local InterfaceResult1 = T.interface({
+	visibleRows = T.number,
+	itemSize = T.number,
+	minimumItemsPerRow = T.optional(T.number)
 })
 
-return function(p1, p2)
-	-- upvalues: var1 (ref), var2 (ref), friendsPerRowModule (ref), llama (ref)
-	assert(var1(p1))
-	assert(var2(p2))
+return function(p1, p2) --[[ Line: 17 ]]
+	-- upvalues: InterfaceResult (copy), InterfaceResult1 (copy), FriendsPerRowModule (copy), Llama (copy)
+	assert(InterfaceResult(p1))
+	assert(InterfaceResult1(p2))
 	
-	return p2.visibleRows * friendsPerRowModule(llama.Dictionary.join({ width = p1.width }, p2))
+	return p2.visibleRows * FriendsPerRowModule(Llama.Dictionary.join({ width = p1.width }, p2))
 end

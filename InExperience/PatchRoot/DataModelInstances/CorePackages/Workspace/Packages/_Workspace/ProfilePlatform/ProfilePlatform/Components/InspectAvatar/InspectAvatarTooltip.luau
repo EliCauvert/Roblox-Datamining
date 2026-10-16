@@ -1,79 +1,82 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local useAppFocusRoot = focusNavigationUtilsModule.useAppFocusRoot
-local foundationModule = require(parent.Foundation)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useInspectAvatarTooltipModule = require(script.Parent.useInspectAvatarTooltip)
-local fFlagProfileInspectAndBuyTooltipGamepadFocusModule = require(profilePlatform.Flags.FFlagProfileInspectAndBuyTooltipGamepadFocus)
-local popover = foundationModule.Popover
-local popoverAlign = foundationModule.Enums.PopoverAlign
-local popoverSide = foundationModule.Enums.PopoverSide
-local radius = foundationModule.Enums.Radius
-local iconButton = foundationModule.IconButton
-local iconName = foundationModule.Enums.IconName
-local iconSize = foundationModule.Enums.IconSize
-local text = foundationModule.Text
-local view = foundationModule.View
-local useTokens = foundationModule.Hooks.useTokens
-local buttonVariant = foundationModule.Enums.ButtonVariant
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+local UseAppFocusRootFunction = FocusNavigationUtilsModule.useAppFocusRoot
+local FoundationModule = require(Parent.Foundation)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseInspectAvatarTooltipModule = require(script.Parent.useInspectAvatarTooltip)
+local FFlagProfileInspectAndBuyTooltipGamepadFocusModule = require(ProfilePlatform.Flags.FFlagProfileInspectAndBuyTooltipGamepadFocus)
+local Popover = FoundationModule.Popover
+local PopoverAlign = FoundationModule.Enums.PopoverAlign
+local PopoverSide = FoundationModule.Enums.PopoverSide
+local Radius = FoundationModule.Enums.Radius
+local IconButton = FoundationModule.IconButton
+local IconName = FoundationModule.Enums.IconName
+local IconSize = FoundationModule.Enums.IconSize
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
 
-return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useTokens (ref), useInspectAvatarTooltipModule (ref), useLocalization (ref), reactModule (ref), fFlagProfileInspectAndBuyTooltipGamepadFocusModule (ref), useAppFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), popover (ref), popoverSide (ref), popoverAlign (ref), radius (ref), view (ref), text (ref), iconButton (ref), iconName (ref), iconSize (ref), buttonVariant (ref)
-	local var1 = useTokens()
-	local var2 = useInspectAvatarTooltipModule()
-	local var3 = useLocalization({
+return (ReactModule.forwardRef(function(p1, p2) --[[ Line: 36 ]]
+	-- upvalues: UseTokensFunction (copy), UseInspectAvatarTooltipModule (copy), UseLocalizationFunction (copy), ReactModule (copy), FFlagProfileInspectAndBuyTooltipGamepadFocusModule (copy), UseAppFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), Popover (copy), PopoverSide (copy), PopoverAlign (copy), Radius (copy), View (copy), Text (copy), IconButton (copy), IconName (copy), IconSize (copy), ButtonVariant (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseInspectAvatarTooltipModuleResult = UseInspectAvatarTooltipModule()
+	local UseLocalizationResult = UseLocalizationFunction({
 		title = "Feature.Profile.Header.InspectAndBuy.Tooltip",
 		body = "Feature.Profile.Description.InspectAndBuy"
 	})
-	reactModule.useImperativeHandle(p2, function()
-		-- upvalues: var2 (ref)
-		return { onDismiss = var2.onDismiss }
-	end, { var2.onDismiss })
+	ReactModule.useImperativeHandle(p2, function() --[[ Line: 44 ]]
+		-- upvalues: UseInspectAvatarTooltipModuleResult (copy)
+		return {
+			onDismiss = UseInspectAvatarTooltipModuleResult.onDismiss
+		}
+	end, { UseInspectAvatarTooltipModuleResult.onDismiss })
+	local UseAppFocusRootResult = if FFlagProfileInspectAndBuyTooltipGamepadFocusModule then UseAppFocusRootFunction({
+		isAutoFocusRoot = true,
+		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.ContextualMenu,
+		isFocusable = UseInspectAvatarTooltipModuleResult.showTooltip
+	}) else nil
 	
-	return reactModule.createElement(popover.Root, { isOpen = var2.showTooltip }, {
-		Anchor = reactModule.createElement(popover.Anchor, { anchorRef = p1.anchorRef }),
-		Content = reactModule.createElement(popover.Content, {
+	return ReactModule.createElement(Popover.Root, { isOpen = UseInspectAvatarTooltipModuleResult.showTooltip }, {
+		Anchor = ReactModule.createElement(Popover.Anchor, { anchorRef = p1.anchorRef }),
+		Content = ReactModule.createElement(Popover.Content, {
 			hasArrow = true,
-			side = popoverSide.Right,
-			align = popoverAlign.Center,
-			radius = radius.Medium,
-			backgroundStyle = var1.Color.System.Contrast
+			side = PopoverSide.Right,
+			align = PopoverAlign.Center,
+			radius = Radius.Medium,
+			backgroundStyle = UseTokensResult.Color.System.Contrast
 		}, {
-			Layout = reactModule.createElement(view, {
+			Layout = ReactModule.createElement(View, {
 				tag = "col gap-xsmall auto-y padding-medium",
 				Size = UDim2.fromOffset(160, 0),
-				ref = if fFlagProfileInspectAndBuyTooltipGamepadFocusModule then if fFlagProfileInspectAndBuyTooltipGamepadFocusModule then useAppFocusRoot({
-					isAutoFocusRoot = true,
-					surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.ContextualMenu,
-					isFocusable = var2.showTooltip
-				}) else nil else nil
+				ref = if FFlagProfileInspectAndBuyTooltipGamepadFocusModule then UseAppFocusRootResult else nil
 			}, {
-				Header = reactModule.createElement(view, {
+				Header = ReactModule.createElement(View, {
 					tag = "row flex-between align-y-center size-full-0 auto-y",
 					LayoutOrder = 1
 				}, {
-					Title = reactModule.createElement(text, {
+					Title = ReactModule.createElement(Text, {
 						tag = "auto-xy text-title-large content-inverse-emphasis",
-						Text = var3.title
+						Text = UseLocalizationResult.title
 					}),
-					CloseButton = reactModule.createElement(iconButton, {
-						icon = iconName.X,
-						size = iconSize.Small,
-						onActivated = var2.onDismiss,
-						variant = buttonVariant.OverMedia
+					CloseButton = ReactModule.createElement(IconButton, {
+						icon = IconName.X,
+						size = IconSize.Small,
+						onActivated = UseInspectAvatarTooltipModuleResult.onDismiss,
+						variant = ButtonVariant.OverMedia
 					})
 				}),
-				Body = reactModule.createElement(text, {
+				Body = ReactModule.createElement(Text, {
 					tag = "size-full-0 auto-y text-body-medium content-inverse-default",
 					TextWrapped = true,
 					LayoutOrder = 2,
-					Text = var3.body,
+					Text = UseLocalizationResult.body,
 					TextXAlignment = Enum.TextXAlignment.Left
 				})
 			})
 		})
 	})
-end)
+end))

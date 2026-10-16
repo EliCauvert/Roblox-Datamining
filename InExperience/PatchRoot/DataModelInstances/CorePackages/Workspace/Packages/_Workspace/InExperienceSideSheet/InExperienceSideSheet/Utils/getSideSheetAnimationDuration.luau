@@ -1,6 +1,6 @@
-﻿local constants = require(script:FindFirstAncestor("InExperienceSideSheet").Parent.Drawer).Constants
+﻿local Constants = require(script:FindFirstAncestor("InExperienceSideSheet").Parent.Drawer).Constants
 
-return function()
-	-- upvalues: constants (ref)
-	return constants.DRAWER_ANIM_SETTINGS.duration
+return function() --[[ Line: 7 ]]
+	-- upvalues: Constants (copy)
+	return Constants.DRAWER_ANIM_SETTINGS.duration
 end

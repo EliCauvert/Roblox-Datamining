@@ -1,44 +1,48 @@
-﻿local avatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
-local parent = avatarExperienceInspectAndBuy.Parent
-local _ = require(avatarExperienceInspectAndBuy.Types)
-local avatarExperienceModelModule = require(avatarExperienceInspectAndBuy.Parent.AvatarExperienceModel)
-local reactModule = require(parent.React)
-local useMemo = reactModule.useMemo
-local useCallback = reactModule.useCallback
-local roactUtilsModule = require(parent.RoactUtils)
-local convertAssetInfoToItemDataModule = require(avatarExperienceInspectAndBuy.Utils.convertAssetInfoToItemData)
-local convertBundleInfoToItemDataModule = require(avatarExperienceInspectAndBuy.Utils.convertBundleInfoToItemData)
-local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
-local tutilsModule = require(parent.tutils)
-local performFetch = require(parent.Http).PerformFetch
-local itemTypeEnum = avatarExperienceModelModule.Enums.ItemTypeEnum
-local fFlagAXEnableBatchItemDetailsFetchV2 = require(parent.AvatarExperienceFlags).FFlagAXEnableBatchItemDetailsFetchV2
-local batchItemDetailsPerformFetchKey = require(avatarExperienceInspectAndBuy.Constants).BatchItemDetailsPerformFetchKey
+﻿local AvatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
+local Parent = AvatarExperienceInspectAndBuy.Parent
+local _ = require(AvatarExperienceInspectAndBuy.Types)
+local ReactModule = require(Parent.React)
+local UseMemoFunction = ReactModule.useMemo
+local UseCallbackFunction = ReactModule.useCallback
+local ConvertAssetInfoToItemDataModule = require(AvatarExperienceInspectAndBuy.Utils.convertAssetInfoToItemData)
+local ConvertBundleInfoToItemDataModule = require(AvatarExperienceInspectAndBuy.Utils.convertBundleInfoToItemData)
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local TutilsModule = require(Parent.tutils)
+local PerformFetch = require(Parent.Http).PerformFetch
+local ItemTypeEnum = require(AvatarExperienceInspectAndBuy.Parent.AvatarExperienceModel).Enums.ItemTypeEnum
+local FFlagAXEnableBatchItemDetailsFetchV2 = require(Parent.AvatarExperienceFlags).FFlagAXEnableBatchItemDetailsFetchV2
+local BatchItemDetailsPerformFetchKey = require(AvatarExperienceInspectAndBuy.Constants).BatchItemDetailsPerformFetchKey
 
-local function getResellableInsances(p1)
+local function getResellableInsances(p1) --[[ Line: 28 ]]
 	return p1.collectibleResellableInstances
 end
 
-return function(p1)
-	-- upvalues: useCallback (ref), itemTypeEnum (ref), fFlagAXEnableBatchItemDetailsFetchV2 (ref), performFetch (ref), batchItemDetailsPerformFetchKey (ref), useSelector (ref), tutilsModule (ref), getResellableInsances (ref), useMemo (ref), convertAssetInfoToItemDataModule (ref), convertBundleInfoToItemDataModule (ref)
-	local var1 = if p1 then p1.id else nil
-	local var2 = if p1 then p1.itemType else nil
-	local var3 = useCallback(function(p2)
-		-- upvalues: fFlagAXEnableBatchItemDetailsFetchV2 (copy), performFetch (copy), batchItemDetailsPerformFetchKey (copy), var1 (ref), var2 (ref), itemTypeEnum (copy)
-		return if fFlagAXEnableBatchItemDetailsFetchV2 then performFetch.GetStatus(p2, batchItemDetailsPerformFetchKey) elseif var1 and var2 then performFetch.GetStatus(p2, string.format("inspectAndBuy.%d.getItemDetails.%s.%s", p2.storeId, var1, if var2 == itemTypeEnum.Asset then tostring(Enum.AvatarItemType.Asset) else tostring(Enum.AvatarItemType.Bundle))) else nil
-	end, { var1, var2 })
-	local var4 = useSelector(useCallback(function(p2)
-		-- upvalues: var2 (ref), itemTypeEnum (copy), var1 (ref)
-		return if var2 == itemTypeEnum.Asset then p2.assets[var1] elseif var2 == itemTypeEnum.Bundle then p2.bundles[var1] else nil
-	end, { var1, var2 }), tutilsModule.deepEqual)
-	local var5 = useSelector(getResellableInsances, tutilsModule.deepEqual)
+return function(p1) --[[ Line: 36 | Named "useConvertedItemData" ]]
+	-- upvalues: UseCallbackFunction (copy), ItemTypeEnum (copy), FFlagAXEnableBatchItemDetailsFetchV2 (copy), PerformFetch (copy), BatchItemDetailsPerformFetchKey (copy), UseSelectorFunction (copy), TutilsModule (copy), getResellableInsances (copy), UseMemoFunction (copy), ConvertAssetInfoToItemDataModule (copy), ConvertBundleInfoToItemDataModule (copy)
+	local Id = if p1 then p1.id else nil
+	local ItemType = if p1 then p1.itemType else nil
+	local UseCallbackResult = UseCallbackFunction(function(p2) --[[ Line: 40 ]]
+		-- upvalues: ItemType (copy), ItemTypeEnum (upval), Id (copy)
+		return if ItemType == ItemTypeEnum.Asset then p2.assets[Id] elseif ItemType == ItemTypeEnum.Bundle then p2.bundles[Id] else nil
+	end, { Id, ItemType })
+	local UseCallbackResult1 = UseCallbackFunction(function(p2) --[[ Line: 49 ]]
+		-- upvalues: FFlagAXEnableBatchItemDetailsFetchV2 (upval), PerformFetch (upval), BatchItemDetailsPerformFetchKey (upval), Id (copy), ItemType (copy), ItemTypeEnum (upval)
+		return if FFlagAXEnableBatchItemDetailsFetchV2 then PerformFetch.GetStatus(p2, BatchItemDetailsPerformFetchKey) elseif Id and ItemType then PerformFetch.GetStatus(p2, (string.format("inspectAndBuy.%d.getItemDetails.%s.%s", p2.storeId, Id, if ItemType == ItemTypeEnum.Asset then tostring(Enum.AvatarItemType.Asset) else tostring(Enum.AvatarItemType.Bundle)))) else nil
+	end, { Id, ItemType })
+	local UseSelectorResult = UseSelectorFunction(UseCallbackResult, TutilsModule.deepEqual)
+	local UseSelectorResult1 = UseSelectorFunction(getResellableInsances, TutilsModule.deepEqual)
 	
-	return useMemo(function()
-		-- upvalues: var4 (ref), var5 (ref), var2 (ref), itemTypeEnum (copy), convertAssetInfoToItemDataModule (copy), convertBundleInfoToItemDataModule (copy)
-		local var6 = if var4 and var4.collectibleItemId ~= nil and var5 ~= nil then var5[var4.collectibleItemId] else nil
+	return UseMemoFunction(function() --[[ Line: 74 ]]
+		-- upvalues: UseSelectorResult (copy), UseSelectorResult1 (copy), ItemType (copy), ItemTypeEnum (upval), ConvertAssetInfoToItemDataModule (upval), ConvertBundleInfoToItemDataModule (upval)
+		local UseSelectorResultEntry = if UseSelectorResult and UseSelectorResult.collectibleItemId ~= nil and UseSelectorResult1 ~= nil then UseSelectorResult1[UseSelectorResult.collectibleItemId] else nil
 		
-		if var4 then
-			return if var2 == itemTypeEnum.Asset then convertAssetInfoToItemDataModule(var4, var6) elseif var2 == itemTypeEnum.Bundle then convertBundleInfoToItemDataModule(var4, var6) else nil
+		if UseSelectorResult then
+			if ItemType == ItemTypeEnum.Asset then
+				return (ConvertAssetInfoToItemDataModule(UseSelectorResult, UseSelectorResultEntry))
+			elseif ItemType == ItemTypeEnum.Bundle then
+				return (ConvertBundleInfoToItemDataModule(UseSelectorResult, UseSelectorResultEntry))
+			end
 		end
-	end, { var4, var5, var2 }), useSelector(var3, tutilsModule.deepEqual)
+		return nil
+	end, { UseSelectorResult, UseSelectorResult1, ItemType }), (UseSelectorFunction(UseCallbackResult1, TutilsModule.deepEqual))
 end

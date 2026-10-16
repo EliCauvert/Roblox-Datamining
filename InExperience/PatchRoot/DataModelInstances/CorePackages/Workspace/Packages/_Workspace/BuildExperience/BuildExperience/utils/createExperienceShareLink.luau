@@ -1,26 +1,25 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local httpService = game:GetService("HttpService")
-local httpClientModule = require(parent.HttpClient)
-local urlBase = require(parent.UrlBuilder).UrlBase
-local fetch = httpClientModule.fetch
-local asPromise = httpClientModule.asPromise
-local text = urlBase.APIS .. "/sharelinks/v1/get-or-create-link"
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local HttpService = game:GetService("HttpService")
+local HttpClientModule = require(Parent.HttpClient)
+local FetchFunction = HttpClientModule.fetch
+local AsPromiseFunction = HttpClientModule.asPromise
+local Text = require(Parent.UrlBuilder).UrlBase.APIS .. "/sharelinks/v1/get-or-create-link"
 
-local function decodeShareLink(p1)
+local function decodeShareLink(p1) --[[ Line: 37 ]]
 	return if type(p1) == "table" and type(p1.shortUrl) == "string" then p1.shortUrl else nil
 end
 
-return function(p1, p2)
-	-- upvalues: fetch (ref), text (ref), httpService (ref), decodeShareLink (ref), asPromise (ref)
-	return asPromise(fetch({
+return function(p1, Retry) --[[ Line: 45 | Named "createExperienceShareLink" ]]
+	-- upvalues: FetchFunction (copy), Text (copy), HttpService (copy), decodeShareLink (copy), AsPromiseFunction (copy)
+	return AsPromiseFunction((FetchFunction({
 		method = "POST",
 		analyticsKey = "build-experience.create-private-share-link",
-		url = text,
+		url = Text,
 		body = {
 			linkType = "ExperienceDetails",
-			data = httpService:JSONEncode({ universeId = tostring(p1) })
+			data = HttpService:JSONEncode({ universeId = tostring(p1) })
 		},
 		decode = decodeShareLink,
-		retry = p2
-	}))
+		retry = Retry
+	})))
 end

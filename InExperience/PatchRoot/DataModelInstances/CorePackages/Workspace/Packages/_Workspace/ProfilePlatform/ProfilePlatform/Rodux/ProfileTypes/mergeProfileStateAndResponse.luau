@@ -1,19 +1,19 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local cryoModule = require(profilePlatform.Parent.Cryo)
-local _ = require(profilePlatform.Common.Types)
-local getDeepValueModule = require(profilePlatform.Utils.getDeepValue)
-local fFlagProfilePlatformEnableLazyLoadingComponentsModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableLazyLoadingComponents)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local CryoModule = require(ProfilePlatform.Parent.Cryo)
+local _ = require(ProfilePlatform.Common.Types)
+local GetDeepValueModule = require(ProfilePlatform.Utils.getDeepValue)
+local FFlagProfilePlatformEnableLazyLoadingComponentsModule = require(ProfilePlatform.Flags.FFlagProfilePlatformEnableLazyLoadingComponents)
 
-return function(p1, p2)
-	-- upvalues: getDeepValueModule (ref), fFlagProfilePlatformEnableLazyLoadingComponentsModule (ref), cryoModule (ref)
-	local var1 = getDeepValueModule(p1, `{p2.profileId}`) or {}
+return function(p1, p2) --[[ Line: 11 ]]
+	-- upvalues: GetDeepValueModule (copy), FFlagProfilePlatformEnableLazyLoadingComponentsModule (copy), CryoModule (copy)
+	local DeepValueModule = GetDeepValueModule(p1, `{p2.profileId}`) or {}
 	
-	return cryoModule.Dictionary.join(p1, {
+	return CryoModule.Dictionary.join(p1, {
 		[p2.profileId] = {
 			profileType = p2.profileType,
 			profileId = p2.profileId,
-			componentOrdering = if fFlagProfilePlatformEnableLazyLoadingComponentsModule and p2.onlyEssentialComponents then var1.componentOrdering or p2.componentOrdering else p2.componentOrdering or var1.componentOrdering,
-			components = cryoModule.Dictionary.join(var1.components or {}, p2.components)
+			componentOrdering = if FFlagProfilePlatformEnableLazyLoadingComponentsModule and p2.onlyEssentialComponents then DeepValueModule.componentOrdering or p2.componentOrdering else p2.componentOrdering or DeepValueModule.componentOrdering,
+			components = CryoModule.Dictionary.join(DeepValueModule.components or {}, p2.components)
 		}
 	})
 end

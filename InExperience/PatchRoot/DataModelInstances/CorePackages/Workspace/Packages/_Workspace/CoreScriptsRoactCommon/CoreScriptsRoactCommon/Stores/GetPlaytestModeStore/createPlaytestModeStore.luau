@@ -1,64 +1,69 @@
-﻿local runService = game:GetService("RunService")
-local coreScriptsRoactCommon = script:FindFirstAncestor("CoreScriptsRoactCommon")
-local parent = coreScriptsRoactCommon.Parent
-local signalsModule = require(parent.Signals)
-local createSignal = signalsModule.createSignal
-local getIsPrivatePlaytesterStore = require(parent.DataHydration.IsPrivatePlaytester).getIsPrivatePlaytesterStore
-local universeConfigurationModule = require(parent.DataHydration.UniverseConfiguration)
-local getUniverseConfigurationStore = universeConfigurationModule.getUniverseConfigurationStore
-local privacyType = universeConfigurationModule.PrivacyType
-local playtestModeAnalyticsModule = require(coreScriptsRoactCommon.Analytics.PlaytestModeAnalytics)
-local buildModeLaunchModule = require(parent.BuildExperiencePlaytestLaunch.BuildModeLaunch)
-local debugEnablePlaytestMode = game:DefineFastFlag("DebugEnablePlaytestMode", false)
-local fFlagAddPlaytestModeAnalyticsModule = require(coreScriptsRoactCommon.Flags.FFlagAddPlaytestModeAnalytics)
-local fFlagPlaytestModeExcludeBuildModeModule = require(coreScriptsRoactCommon.Flags.FFlagPlaytestModeExcludeBuildMode)
-local fFlagPlaytestModeExcludeStudioModule = require(coreScriptsRoactCommon.Flags.FFlagPlaytestModeExcludeStudio)
-local fFlagPlaytestModeIncludeTeamTestModule = require(coreScriptsRoactCommon.Flags.FFlagPlaytestModeIncludeTeamTest)
+﻿local RunService = game:GetService("RunService")
+local CoreScriptsRoactCommon = script:FindFirstAncestor("CoreScriptsRoactCommon")
+local Parent = CoreScriptsRoactCommon.Parent
+local SignalsModule = require(Parent.Signals)
+local CreateSignalFunction = SignalsModule.createSignal
+local GetIsPrivatePlaytesterStoreFunction = require(Parent.DataHydration.IsPrivatePlaytester).getIsPrivatePlaytesterStore
+local UniverseConfigurationModule = require(Parent.DataHydration.UniverseConfiguration)
+local GetUniverseConfigurationStoreFunction = UniverseConfigurationModule.getUniverseConfigurationStore
+local PrivacyType = UniverseConfigurationModule.PrivacyType
+local PlaytestModeAnalyticsModule = require(CoreScriptsRoactCommon.Analytics.PlaytestModeAnalytics)
+local BuildModeLaunchModule = require(Parent.BuildExperiencePlaytestLaunch.BuildModeLaunch)
+local DebugEnablePlaytestMode = game:DefineFastFlag("DebugEnablePlaytestMode", false)
+local FFlagAddPlaytestModeAnalyticsModule = require(CoreScriptsRoactCommon.Flags.FFlagAddPlaytestModeAnalytics)
+local FFlagPlaytestModeExcludeBuildModeModule = require(CoreScriptsRoactCommon.Flags.FFlagPlaytestModeExcludeBuildMode)
+local FFlagPlaytestModeExcludeStudioModule = require(CoreScriptsRoactCommon.Flags.FFlagPlaytestModeExcludeStudio)
+local FFlagPlaytestModeIncludeTeamTestModule = require(CoreScriptsRoactCommon.Flags.FFlagPlaytestModeIncludeTeamTest)
 
-return function()
-	-- upvalues: createSignal (ref), signalsModule (ref), getIsPrivatePlaytesterStore (ref), getUniverseConfigurationStore (ref), privacyType (ref), debugEnablePlaytestMode (ref), fFlagPlaytestModeExcludeBuildModeModule (ref), buildModeLaunchModule (ref), fFlagPlaytestModeIncludeTeamTestModule (ref), runService (ref), fFlagAddPlaytestModeAnalyticsModule (ref), playtestModeAnalyticsModule (ref), fFlagPlaytestModeExcludeStudioModule (ref)
-	local var1, var2 = createSignal(false)
-	local var3 = signalsModule.createComputed(function(p1)
-		-- upvalues: getIsPrivatePlaytesterStore (copy)
-		local var4 = getIsPrivatePlaytesterStore(p1).getAndFetch(game.GameId).data(p1)
+return function() --[[ Line: 32 ]]
+	-- upvalues: CreateSignalFunction (copy), SignalsModule (copy), GetIsPrivatePlaytesterStoreFunction (copy), GetUniverseConfigurationStoreFunction (copy), PrivacyType (copy), DebugEnablePlaytestMode (copy), FFlagPlaytestModeExcludeBuildModeModule (copy), BuildModeLaunchModule (copy), FFlagPlaytestModeIncludeTeamTestModule (copy), RunService (copy), FFlagAddPlaytestModeAnalyticsModule (copy), PlaytestModeAnalyticsModule (copy), FFlagPlaytestModeExcludeStudioModule (copy)
+	local Signal, Signal2 = CreateSignalFunction(false)
+	local Computed = SignalsModule.createComputed(function(p1): boolean --[[ Line: 35 ]]
+		-- upvalues: GetIsPrivatePlaytesterStoreFunction (upval)
+		local DataResult = GetIsPrivatePlaytesterStoreFunction(p1).getAndFetch(game.GameId).data(p1)
 		
-		return var4 ~= nil and var4.isPlaytester == true
+		return DataResult ~= nil and DataResult.isPlaytester == true
 	end)
-	local var4 = signalsModule.createComputed(function(p1)
-		-- upvalues: getUniverseConfigurationStore (copy), privacyType (copy)
-		local var5 = getUniverseConfigurationStore(p1).getAndFetchSummary(game.GameId).data(p1)
+	local Computed1 = SignalsModule.createComputed(function(p1): boolean --[[ Line: 41 ]]
+		-- upvalues: GetUniverseConfigurationStoreFunction (upval), PrivacyType (upval)
+		local DataResult = GetUniverseConfigurationStoreFunction(p1).getAndFetchSummary(game.GameId).data(p1)
 		
-		return var5 ~= nil and var5.privacyType == privacyType.Private
+		return DataResult ~= nil and DataResult.privacyType == PrivacyType.Private
 	end)
 	
 	return {
-		getIsPlaytestMode = signalsModule.createComputed(function(p1)
-			-- upvalues: debugEnablePlaytestMode (copy), fFlagPlaytestModeExcludeBuildModeModule (copy), buildModeLaunchModule (copy), fFlagPlaytestModeIncludeTeamTestModule (copy), runService (copy), fFlagAddPlaytestModeAnalyticsModule (copy), playtestModeAnalyticsModule (copy), var3 (ref), var1 (ref), var4 (ref), fFlagPlaytestModeExcludeStudioModule (copy)
-			if debugEnablePlaytestMode then
+		getIsPlaytestMode = SignalsModule.createComputed(function(p1): boolean --[[ Line: 47 ]]
+			-- upvalues: DebugEnablePlaytestMode (upval), FFlagPlaytestModeExcludeBuildModeModule (upval), BuildModeLaunchModule (upval), FFlagPlaytestModeIncludeTeamTestModule (upval), RunService (upval), FFlagAddPlaytestModeAnalyticsModule (upval), PlaytestModeAnalyticsModule (upval), Computed (copy), Signal (copy), Computed1 (copy), FFlagPlaytestModeExcludeStudioModule (upval)
+			if DebugEnablePlaytestMode then
 				return true
-			elseif fFlagPlaytestModeExcludeBuildModeModule and buildModeLaunchModule:hasBuildMode() then
+			end
+			if FFlagPlaytestModeExcludeBuildModeModule and BuildModeLaunchModule:hasBuildMode() then
 				return false
-			elseif fFlagPlaytestModeIncludeTeamTestModule and runService:IsTeamTest() then
-				if fFlagAddPlaytestModeAnalyticsModule then
-					if runService:IsStudio() then
-						playtestModeAnalyticsModule.logPlaytestModeEnabled("studio_team_test")
+			end
+			if FFlagPlaytestModeIncludeTeamTestModule and RunService:IsTeamTest() then
+				if FFlagAddPlaytestModeAnalyticsModule then
+					if RunService:IsStudio() then
+						PlaytestModeAnalyticsModule.logPlaytestModeEnabled("studio_team_test")
 					else
-						playtestModeAnalyticsModule.logPlaytestModeEnabled("team_test_server")
+						PlaytestModeAnalyticsModule.logPlaytestModeEnabled("team_test_server")
 					end
 				end
 				return true
-			elseif var3(p1) then
-				if fFlagAddPlaytestModeAnalyticsModule then
-					playtestModeAnalyticsModule.logPlaytestModeEnabled("private_playtester")
+			elseif Computed(p1) then
+				if FFlagAddPlaytestModeAnalyticsModule then
+					PlaytestModeAnalyticsModule.logPlaytestModeEnabled("private_playtester")
 				end
 				return true
-			elseif not var1(p1) or not var4(p1) or fFlagPlaytestModeExcludeStudioModule and runService:IsStudio() then
-				return false
-			elseif fFlagAddPlaytestModeAnalyticsModule then
-				playtestModeAnalyticsModule.logPlaytestModeEnabled("private_game")
+			else
+				if not Signal(p1) or not Computed1(p1) or FFlagPlaytestModeExcludeStudioModule and RunService:IsStudio() then
+					return false
+				end
+				if FFlagAddPlaytestModeAnalyticsModule then
+					PlaytestModeAnalyticsModule.logPlaytestModeEnabled("private_game")
+				end
+				return true
 			end
-			return true
 		end),
-		setHasEditAccess = var2
+		setHasEditAccess = Signal2
 	}
 end

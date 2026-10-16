@@ -1,35 +1,35 @@
-﻿local t = {
-	new = function()
+﻿local GameModule = {
+	new = function() --[[ Line: 16 ]]
 		return {}
 	end
 }
 
-function t.fromGameCache(p1)
-	-- upvalues: t (ref)
-	local var1 = t.new()
-	var1.universeId = p1.UniverseId
-	var1.placeId = p1.PlaceId
-	var1.name = p1.Name
-	var1.playerCount = p1.PlayerCount
-	var1.imageToken = p1.ImageToken
-	var1.totalUpVotes = p1.VoteData.UpVotes
-	var1.totalDownVotes = p1.VoteData.DownVotes
+function GameModule.fromGameCache(p1) --[[ Line: 21 ]]
+	-- upvalues: GameModule (copy)
+	local NewGame = GameModule.new()
+	NewGame.universeId = p1.UniverseId
+	NewGame.placeId = p1.PlaceId
+	NewGame.name = p1.Name
+	NewGame.playerCount = p1.PlayerCount
+	NewGame.imageToken = p1.ImageToken
+	NewGame.totalUpVotes = p1.VoteData.UpVotes
+	NewGame.totalDownVotes = p1.VoteData.DownVotes
 	
-	return var1
+	return NewGame
 end
 
-function t.fromJsonData(p1)
-	-- upvalues: t (ref)
-	local var1 = t.new()
-	var1.universeId = p1.universeId
-	var1.placeId = p1.placeId
-	var1.name = p1.name
-	var1.playerCount = p1.playerCount
-	var1.imageToken = p1.imageToken
-	var1.totalUpVotes = p1.totalUpVotes
-	var1.totalDownVotes = p1.totalDownVotes
+function GameModule.fromJsonData(p1) --[[ Line: 33 ]]
+	-- upvalues: GameModule (copy)
+	local NewGame = GameModule.new()
+	NewGame.universeId = p1.universeId
+	NewGame.placeId = p1.placeId
+	NewGame.name = p1.name
+	NewGame.playerCount = p1.playerCount
+	NewGame.imageToken = p1.imageToken
+	NewGame.totalUpVotes = p1.totalUpVotes
+	NewGame.totalDownVotes = p1.totalDownVotes
 	
-	return var1
+	return NewGame
 end
 
-return t
+return GameModule

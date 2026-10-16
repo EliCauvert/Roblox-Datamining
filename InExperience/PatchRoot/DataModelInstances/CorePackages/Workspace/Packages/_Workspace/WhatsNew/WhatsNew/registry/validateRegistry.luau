@@ -1,170 +1,173 @@
-﻿local whatsNew = script:FindFirstAncestor("WhatsNew")
-local constantsModule = require(whatsNew.Constants)
-local enumsModule = require(whatsNew.Enums)
-local _ = require(whatsNew.Types)
-local scopeActionsModule = require(script.Parent.ScopeActions)
+﻿local WhatsNew = script:FindFirstAncestor("WhatsNew")
+local ConstantsModule = require(WhatsNew.Constants)
+local EnumsModule = require(WhatsNew.Enums)
+local _ = require(WhatsNew.Types)
+local ScopeActionsModule = require(script.Parent.ScopeActions)
 
-local function _(p1, p2, p3)
-	table.insert(p1, `{p2}:{p3}`)
+local function _(List, p1, p2) --[[ Line: 21 | Named "appendError" ]]
+	table.insert(List, `{p1}:{p2}`)
 end
 
-local _ = function(p1)
+local _ = function(p1): boolean --[[ Line: 25 | Named "isNonEmptyString" ]]
 	return p1 ~= nil and p1 ~= ""
 end
 
-local _ = function(p1)
-	local dateTime = DateTime.fromIsoDate(p1)
+local _ = function(p1) --[[ Line: 29 | Named "isoDateToUnix" ]]
+	local _DateTime = DateTime.fromIsoDate(p1)
 	
-	return if dateTime then dateTime.UnixTimestamp else nil
+	return _DateTime and _DateTime.UnixTimestamp or nil
 end
 
-local _ = function(p1, p2)
-	-- upvalues: enumsModule (ref)
-	return if p2 == enumsModule.TourType.WhatsNew then p1.whatsNew else p1.onboarding
+local _ = function(p1, WhatsNew) --[[ Line: 34 | Named "getRegistryEntries" ]]
+	-- upvalues: EnumsModule (copy)
+	return if WhatsNew == EnumsModule.TourType.WhatsNew then p1.whatsNew else p1.onboarding
 end
 
-local function validateConstants(p1, p2)
-	-- upvalues: constantsModule (ref)
-	local constants = p1.constants
+local function validateConstants(p1, List) --[[ Line: 41 ]]
+	-- upvalues: ConstantsModule (copy)
+	local Constants = p1.constants
 	
-	for i, v in {
-		textMaxLength = constants.textMaxLength,
-		maxTourTips = constants.maxTourTips,
-		maxOptOutCount = constants.maxOptOutCount
+	for i, value in {
+		textMaxLength = Constants.textMaxLength,
+		maxTourTips = Constants.maxTourTips,
+		maxOptOutCount = Constants.maxOptOutCount
 	} do
-		if typeof(v) ~= "number" or v <= 0 then
-			table.insert(p2, `{constantsModule.ErrorCodes.INVALID_CONSTANTS}:{`{i}`}`)
+		if typeof(value) ~= "number" or value <= 0 then
+			table.insert(List, `{ConstantsModule.ErrorCodes.INVALID_CONSTANTS}:{`{i}`}`)
 		end
 	end
 end
 
-local function validateScopeKeys(p3, p4)
-	-- upvalues: constantsModule (ref)
-	for i, v in p3.scopeTours do
-		if v.id ~= i then
-			table.insert(p4, `{constantsModule.ErrorCodes.SCOPE_KEY_MISMATCH}:{`{i}->{v.id}`}`)
+local function validateScopeKeys(p2, List) --[[ Line: 56 ]]
+	-- upvalues: ConstantsModule (copy)
+	for i, scopeTour in p2.scopeTours do
+		if scopeTour.id ~= i then
+			table.insert(List, `{ConstantsModule.ErrorCodes.SCOPE_KEY_MISMATCH}:{`{i}->{scopeTour.id}`}`)
 		end
 	end
 end
 
-local function validateEntrySchedule(p5, p6, p7)
-	-- upvalues: constantsModule (ref), enumsModule (ref)
-	local id = `{p5.id} ({p6})`
-	local var1 = nil
-	local var2 = nil
-	local publishedTime = p5.publishedTime
+local function validateEntrySchedule(p3, WhatsNew, List) --[[ Line: 64 ]]
+	-- upvalues: ConstantsModule (copy), EnumsModule (copy)
+	local Text: string = `{p3.id} ({WhatsNew})`
+	local UnixTimestamp = nil
+	local UnixTimestamp1 = nil
+	local PublishedTime = p3.publishedTime
 	
-	if publishedTime ~= nil and publishedTime ~= "" then
-		local dateTime = DateTime.fromIsoDate(p5.publishedTime)
-		var1 = if dateTime then dateTime.UnixTimestamp else nil
+	if PublishedTime ~= nil and PublishedTime ~= "" then
+		local _DateTime = DateTime.fromIsoDate(p3.publishedTime)
+		UnixTimestamp = _DateTime and _DateTime.UnixTimestamp or nil
 		
-		if var1 == nil then
-			table.insert(p7, `{constantsModule.ErrorCodes.INVALID_PUBLISHED_TIME}:{id}`)
+		if UnixTimestamp == nil then
+			table.insert(List, `{ConstantsModule.ErrorCodes.INVALID_PUBLISHED_TIME}:{Text}`)
 		end
 	else
-		table.insert(p7, `{constantsModule.ErrorCodes.MISSING_PUBLISHED_TIME}:{id}`)
+		table.insert(List, `{ConstantsModule.ErrorCodes.MISSING_PUBLISHED_TIME}:{Text}`)
 	end
-	if p6 == enumsModule.TourType.WhatsNew then
-		local disabledTime = p5.disabledTime
+	if WhatsNew == EnumsModule.TourType.WhatsNew then
+		local DisabledTime = p3.disabledTime
 		
-		if disabledTime ~= nil and disabledTime ~= "" then
-			local dateTime = DateTime.fromIsoDate(p5.disabledTime)
-			var2 = if dateTime then dateTime.UnixTimestamp else nil
+		if DisabledTime ~= nil and DisabledTime ~= "" then
+			local _DateTime = DateTime.fromIsoDate(p3.disabledTime)
+			UnixTimestamp1 = _DateTime and _DateTime.UnixTimestamp or nil
 			
-			if var2 == nil then
-				table.insert(p7, `{constantsModule.ErrorCodes.INVALID_DISABLED_TIME}:{id}`)
+			if UnixTimestamp1 == nil then
+				table.insert(List, `{ConstantsModule.ErrorCodes.INVALID_DISABLED_TIME}:{Text}`)
 			end
 		else
-			table.insert(p7, `{constantsModule.ErrorCodes.MISSING_DISABLED_TIME}:{id}`)
+			table.insert(List, `{ConstantsModule.ErrorCodes.MISSING_DISABLED_TIME}:{Text}`)
 		end
 	else
-		local disabledTime = p5.disabledTime
+		local DisabledTime = p3.disabledTime
 		
-		if disabledTime ~= nil and disabledTime ~= "" then
-			local dateTime = DateTime.fromIsoDate(p5.disabledTime)
-			var2 = if dateTime then dateTime.UnixTimestamp else nil
+		if DisabledTime ~= nil and DisabledTime ~= "" then
+			local _DateTime = DateTime.fromIsoDate(p3.disabledTime)
+			UnixTimestamp1 = _DateTime and _DateTime.UnixTimestamp or nil
 			
-			if var2 == nil then
-				table.insert(p7, `{constantsModule.ErrorCodes.INVALID_DISABLED_TIME}:{id}`)
+			if UnixTimestamp1 == nil then
+				table.insert(List, `{ConstantsModule.ErrorCodes.INVALID_DISABLED_TIME}:{Text}`)
 			end
 		end
 	end
-	if var1 ~= nil and var2 ~= nil and var2 <= var1 then
-		table.insert(p7, `{constantsModule.ErrorCodes.INVALID_SCHEDULE_WINDOW}:{id}`)
+	if UnixTimestamp ~= nil and UnixTimestamp1 ~= nil and UnixTimestamp1 <= UnixTimestamp then
+		table.insert(List, `{ConstantsModule.ErrorCodes.INVALID_SCHEDULE_WINDOW}:{Text}`)
 	end
 end
 
-local function validateEntryScopes(p5, p6)
-	-- upvalues: constantsModule (ref), validateEntrySchedule (ref), enumsModule (ref)
-	local function validateEntries(p7, p8)
-		-- upvalues: p5 (ref), p6 (ref), constantsModule (copy), validateEntrySchedule (copy)
-		for i, v in p7 do
-			if p5.scopeTours[v.scopeId] == nil then
-				table.insert(p6, `{constantsModule.ErrorCodes.UNKNOWN_SCOPE}:{`{v.id} ({p8})`}`)
+local function validateEntryScopes(p3, List) --[[ Line: 99 ]]
+	-- upvalues: ConstantsModule (copy), validateEntrySchedule (copy), EnumsModule (copy)
+	local function validateEntries(WhatsNew, WhatsNew1) --[[ Line: 100 ]]
+		-- upvalues: p3 (copy), List (copy), ConstantsModule (upval), validateEntrySchedule (upval)
+		for _, value in WhatsNew do
+			if p3.scopeTours[value.scopeId] == nil then
+				table.insert(List, `{ConstantsModule.ErrorCodes.UNKNOWN_SCOPE}:{`{value.id} ({WhatsNew1})`}`)
 			end
-			if p5.constants.textMaxLength < #v.text then
-				table.insert(p6, `{constantsModule.ErrorCodes.TEXT_TOO_LONG}:{`{v.id} ({p8})`}`)
+			if p3.constants.textMaxLength < #value.text then
+				table.insert(List, `{ConstantsModule.ErrorCodes.TEXT_TOO_LONG}:{`{value.id} ({WhatsNew1})`}`)
 			end
-			local title = v.title
-			local var1 = title ~= nil and title ~= ""
+			local Title = value.title
+			local IsNotTitleMatch: boolean = Title ~= nil and Title ~= ""
 			
-			if not var1 then
-				local text = v.text
-				var1 = text ~= nil and text ~= ""
-				
-				if not var1 then
-					table.insert(p6, `{constantsModule.ErrorCodes.EMPTY_ENTRY_LABELS}:{`{v.id} ({p8})`}`)
-				end
+			if not IsNotTitleMatch then
+				local Text = value.text
+				IsNotTitleMatch = Text ~= nil and Text ~= ""
 			end
-			validateEntrySchedule(v, p8, p6)
+			if not IsNotTitleMatch then
+				table.insert(List, `{ConstantsModule.ErrorCodes.EMPTY_ENTRY_LABELS}:{`{value.id} ({WhatsNew1})`}`)
+			end
+			validateEntrySchedule(value, WhatsNew1, List)
 		end
 	end
 	
-	for i, v in enumsModule.TourTypeList do
-		validateEntries(if v == enumsModule.TourType.WhatsNew then p5.whatsNew else p5.onboarding, v)
+	for _, value in EnumsModule.TourTypeList do
+		validateEntries(if value == EnumsModule.TourType.WhatsNew then p3.whatsNew else p3.onboarding, value)
 	end
 end
 
-local function validateUniqueEntryIds(p9, p10)
-	-- upvalues: enumsModule (ref), constantsModule (ref)
-	for i, v in enumsModule.TourTypeList do
-		local whatsNew, var2, var3
+local function validateUniqueEntryIds(p4, List) --[[ Line: 123 ]]
+	-- upvalues: EnumsModule (copy), ConstantsModule (copy)
+	for _, value in EnumsModule.TourTypeList do
 		local t = {}
+		local WhatsNew = nil
+		local v1 = nil
+		local v2 = nil
 		
-		if v == enumsModule.TourType.WhatsNew then
-			whatsNew = p9.whatsNew
-			var2 = nil
-			var3 = nil
+		if value == EnumsModule.TourType.WhatsNew then
+			WhatsNew = p4.whatsNew
+			v1 = nil
+			v2 = nil
 		else
-			whatsNew = p9.onboarding
-			var2 = nil
-			var3 = nil
+			WhatsNew = p4.onboarding
+			v1 = nil
+			v2 = nil
 		end
-		for i_1, v_1 in whatsNew, var2, var3 do
-			if t[v_1.id] then
-				table.insert(p10, `{constantsModule.ErrorCodes.DUPLICATE_ENTRY_ID}:{`{v_1.id} ({v})`}`)
+		for _, value1 in WhatsNew, v1, v2 do
+			if t[value1.id] then
+				table.insert(List, `{ConstantsModule.ErrorCodes.DUPLICATE_ENTRY_ID}:{`{value1.id} ({value})`}`)
 			else
-				t[v_1.id] = true
+				t[value1.id] = true
 			end
 		end
 	end
 end
 
-local function scopeHasEntries(p11, p12)
-	-- upvalues: enumsModule (ref)
-	for i, v in enumsModule.TourTypeList do
-		local whatsNew, var4, var5
-		if v == enumsModule.TourType.WhatsNew then
-			whatsNew = p12.whatsNew
-			var4 = nil
-			var5 = nil
+local function scopeHasEntries(ScopeId, p5): boolean --[[ Line: 136 ]]
+	-- upvalues: EnumsModule (copy)
+	for _, value in EnumsModule.TourTypeList do
+		local WhatsNew = nil
+		local v3 = nil
+		local v4 = nil
+		if value == EnumsModule.TourType.WhatsNew then
+			WhatsNew = p5.whatsNew
+			v3 = nil
+			v4 = nil
 		else
-			whatsNew = p12.onboarding
-			var4 = nil
-			var5 = nil
+			WhatsNew = p5.onboarding
+			v3 = nil
+			v4 = nil
 		end
-		for i_1, v_1 in whatsNew, var4, var5 do
-			if v_1.scopeId == p11 then
+		for _, value1 in WhatsNew, v3, v4 do
+			if value1.scopeId == ScopeId then
 				return true
 			end
 		end
@@ -172,46 +175,45 @@ local function scopeHasEntries(p11, p12)
 	return false
 end
 
-local function validateNestedScopeActions(p13, p14)
-	-- upvalues: scopeHasEntries (ref), constantsModule (ref)
-	for i, v in p13.scopeTours do
-		if v.parentScopeId ~= nil and scopeHasEntries(i, p13) then
-			local openActionKey = v.openActionKey
-			local var6 = openActionKey ~= nil and openActionKey ~= ""
+local function validateNestedScopeActions(p6, List) --[[ Line: 148 ]]
+	-- upvalues: scopeHasEntries (copy), ConstantsModule (copy)
+	for i, scopeTour in p6.scopeTours do
+		if scopeTour.parentScopeId ~= nil and scopeHasEntries(i, p6) then
+			local OpenActionKey = scopeTour.openActionKey
 			
-			if var6 then
-				local closeActionKey = v.closeActionKey
-				var6 = closeActionKey ~= nil and closeActionKey ~= ""
+			if OpenActionKey ~= nil and OpenActionKey ~= "" then
+				local CloseActionKey = scopeTour.closeActionKey
 				
-				if not var6 then
-					table.insert(p14, `{constantsModule.ErrorCodes.NESTED_MISSING_ACTION}:{i}`)
+				if CloseActionKey ~= nil and CloseActionKey ~= "" then
+					continue
 				end
 			end
+			table.insert(List, `{ConstantsModule.ErrorCodes.NESTED_MISSING_ACTION}:{i}`)
 		end
 	end
 end
 
-local function validateKnownActionKeys(p15, p16, p17)
-	-- upvalues: scopeActionsModule (ref), constantsModule (ref)
-	if p16 == nil then return end
-	for i, v in scopeActionsModule.collectRegistryActionKeys(p15) do
-		if not p16:has(v) then
-			table.insert(p17, `{constantsModule.ErrorCodes.UNKNOWN_ACTION_KEY}:{v}`)
+local function validateKnownActionKeys(p7, ScopeActions, List) --[[ Line: 164 ]]
+	-- upvalues: ScopeActionsModule (copy), ConstantsModule (copy)
+	if ScopeActions == nil then return end
+	for _, value in ScopeActionsModule.collectRegistryActionKeys(p7) do
+		if not ScopeActions:has(value) then
+			table.insert(List, `{ConstantsModule.ErrorCodes.UNKNOWN_ACTION_KEY}:{value}`)
 		end
 	end
 end
 
-return function(p18, p19)
-	-- upvalues: validateConstants (ref), validateScopeKeys (ref), validateEntryScopes (ref), validateUniqueEntryIds (ref), validateNestedScopeActions (ref), validateKnownActionKeys (ref)
-	local t = {}
-	local t_1 = {}
-	p19 = p19 or {}
-	validateConstants(p18, t)
-	validateScopeKeys(p18, t)
-	validateEntryScopes(p18, t)
-	validateUniqueEntryIds(p18, t)
-	validateNestedScopeActions(p18, t)
-	validateKnownActionKeys(p18, p19.scopeActions, t)
+return function(p8, p9) --[[ Line: 180 | Named "validateRegistry" ]]
+	-- upvalues: validateConstants (copy), validateScopeKeys (copy), validateEntryScopes (copy), validateUniqueEntryIds (copy), validateNestedScopeActions (copy), validateKnownActionKeys (copy)
+	local Errors = {}
+	local Warnings = {}
+	local P20 = p9 or {}
+	validateConstants(p8, Errors)
+	validateScopeKeys(p8, Errors)
+	validateEntryScopes(p8, Errors)
+	validateUniqueEntryIds(p8, Errors)
+	validateNestedScopeActions(p8, Errors)
+	validateKnownActionKeys(p8, P20.scopeActions, Errors)
 	
-	return { errors = t, warnings = t_1 }
+	return { errors = Errors, warnings = Warnings }
 end

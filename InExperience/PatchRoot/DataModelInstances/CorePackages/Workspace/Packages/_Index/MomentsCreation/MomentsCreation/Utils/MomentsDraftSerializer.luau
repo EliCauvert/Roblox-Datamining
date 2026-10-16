@@ -1,292 +1,322 @@
-﻿local _ = require(script:FindFirstAncestor("MomentsCreation").Parent.MomentsTypes)
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local _ = require(MomentsCreation.Parent.MomentsTypes)
+local FFlagMomentsTTSDraftRestoreModule = require(MomentsCreation.Flags.FFlagMomentsTTSDraftRestore)
 
-local function _(p1)
+local function _(Vector) --[[ Line: 91 | Named "encodeUDim2" ]]
 	return {
-		xScale = p1.X.Scale,
-		xOffset = p1.X.Offset,
-		yScale = p1.Y.Scale,
-		yOffset = p1.Y.Offset
+		xScale = Vector.X.Scale,
+		xOffset = Vector.X.Offset,
+		yScale = Vector.Y.Scale,
+		yOffset = Vector.Y.Offset
 	}
 end
 
-local _ = function(p1)
+local _ = function(p1) --[[ Line: 100 | Named "encodeColor3" ]]
 	return { r = p1.R, g = p1.G, b = p1.B }
 end
 
-local function encodeTextOverlay(p1)
-	local textOverlayStyle = p1.textOverlayStyle
-	local t = {}
-	local position = p1.position
-	t.position = {
-		xScale = position.X.Scale,
-		xOffset = position.X.Offset,
-		yScale = position.Y.Scale,
-		yOffset = position.Y.Offset
-	}
-	t.rotation = p1.rotation
-	t.scale = p1.scale
-	t.text = p1.text
-	t.zIndex = p1.zIndex
-	local t_1 = { font = textOverlayStyle.font.Name }
-	local fontColor = textOverlayStyle.fontColor
-	t_1.fontColor = { r = fontColor.R, g = fontColor.G, b = fontColor.B }
-	t_1.fontSize = textOverlayStyle.fontSize
-	t_1.textXAlignment = textOverlayStyle.textXAlignment.Name
-	t.textOverlayStyle = t_1
+local function encodeTextOverlay(p1) --[[ Line: 104 ]]
+	local TextOverlayStyle = p1.textOverlayStyle
+	local Position = p1.position
+	local FontColor = TextOverlayStyle.fontColor
 	
-	return t
-end
-
-local _ = function(p1)
-	local t = { stickerURI = p1.stickerURI }
-	local position = p1.position
-	t.position = {
-		xScale = position.X.Scale,
-		xOffset = position.X.Offset,
-		yScale = position.Y.Scale,
-		yOffset = position.Y.Offset
-	}
-	t.stickerSize = p1.stickerSize
-	t.rotation = p1.rotation
-	t.scale = p1.scale
-	t.zIndex = p1.zIndex
-	
-	return t
-end
-
-local function serialize(p1)
-	-- upvalues: encodeTextOverlay (ref)
-	local edits = p1.edits
-	local t = { trim = edits.trim, music = edits.music }
-	
-	if edits.text then
-		local t_1 = {}
-		
-		for i, v in edits.text do
-			table.insert(t_1, encodeTextOverlay(v))
-		end
-		t.text = t_1
-	end
-	if edits.sticker then
-		local t_1 = {}
-		
-		for i, v in edits.sticker do
-			local t_2 = { stickerURI = v.stickerURI }
-			local position = v.position
-			t_2.position = {
-				xScale = position.X.Scale,
-				xOffset = position.X.Offset,
-				yScale = position.Y.Scale,
-				yOffset = position.Y.Offset
-			}
-			t_2.stickerSize = v.stickerSize
-			t_2.rotation = v.rotation
-			t_2.scale = v.scale
-			t_2.zIndex = v.zIndex
-			table.insert(t_1, t_2)
-		end
-		t.sticker = t_1
-	end
 	return {
-		userId = p1.userId,
-		captureRef = {
-			localId = p1.captureRef.localId,
-			captureType = p1.captureRef.captureType.Name
+		position = {
+			xScale = Position.X.Scale,
+			xOffset = Position.X.Offset,
+			yScale = Position.Y.Scale,
+			yOffset = Position.Y.Offset
 		},
-		description = p1.description,
-		commentsEnabled = p1.commentsEnabled,
-		edits = t,
-		lastSaveTime = p1.lastSaveTime
+		rotation = p1.rotation,
+		scale = p1.scale,
+		text = p1.text,
+		zIndex = p1.zIndex,
+		textOverlayStyle = {
+			font = TextOverlayStyle.font.Name,
+			fontColor = { r = FontColor.R, g = FontColor.G, b = FontColor.B },
+			fontSize = TextOverlayStyle.fontSize,
+			textXAlignment = TextOverlayStyle.textXAlignment.Name
+		}
 	}
 end
 
-local function decodeUDim2(p2)
-	return if type(p2) == "table" then if type(p2.xScale) == "number" and type(p2.xOffset) == "number" and (type(p2.yScale) == "number" and type(p2.yOffset) == "number") then UDim2.new(p2.xScale, p2.xOffset, p2.yScale, p2.yOffset) else nil else nil
+local _ = function(p1) --[[ Line: 121 | Named "encodeStickerOverlay" ]]
+	local Position = p1.position
+	
+	return {
+		stickerURI = p1.stickerURI,
+		position = {
+			xScale = Position.X.Scale,
+			xOffset = Position.X.Offset,
+			yScale = Position.Y.Scale,
+			yOffset = Position.Y.Offset
+		},
+		stickerSize = p1.stickerSize,
+		rotation = p1.rotation,
+		scale = p1.scale,
+		zIndex = p1.zIndex
+	}
 end
 
-local _ = function(p2)
-	return if type(p2) == "table" then if type(p2.r) == "number" and type(p2.g) == "number" and type(p2.b) == "number" then Color3.new(p2.r, p2.g, p2.b) else nil else nil
+local _ = function(Voice) --[[ Line: 132 | Named "encodeVoice" ]]
+	return {
+		text = Voice.text,
+		voiceId = Voice.voiceId,
+		startTime = Voice.startTime
+	}
 end
 
-local _ = function(p2, p3)
-	if type(p3) ~= "string" then
+local function decodeUDim2(Position) --[[ Line: 186 ]]
+	return if type(Position) == "table" and (type(Position.xScale) == "number" and type(Position.xOffset) == "number" and type(Position.yScale) == "number" and type(Position.yOffset) == "number") then UDim2.new(Position.xScale, Position.xOffset, Position.yScale, Position.yOffset) else nil
+end
+
+local _ = function(p1) --[[ Line: 202 | Named "decodeColor3" ]]
+	return if type(p1) == "table" and (type(p1.r) == "number" and type(p1.g) == "number" and type(p1.b) == "number") then Color3.new(p1.r, p1.g, p1.b) else nil
+end
+
+local _ = function(p1, p2) --[[ Line: 213 | Named "safeDecodeEnum" ]]
+	if type(p2) == "string" then
+		local Success, Result = pcall(function() --[[ Line: 217 ]]
+			-- upvalues: p1 (copy), p2 (copy)
+			return p1[p2]
+		end)
+		
+		return if Success then Result else nil
+	else
 		return nil
 	end
-	local ok, status = pcall(function()
-		-- upvalues: p2 (ref), p3 (ref)
-		return p2[p3]
-	end)
-	
-	return if ok then status else nil
 end
 
-local function decodeTextOverlay(p2)
-	-- upvalues: decodeUDim2 (ref)
-	if type(p2) ~= "table" or type(p2.textOverlayStyle) ~= "table" then
+local function decodeTextOverlay(p1) --[[ Line: 223 ]]
+	-- upvalues: decodeUDim2 (copy)
+	if type(p1) ~= "table" or type(p1.textOverlayStyle) ~= "table" then
 		return nil
 	end
-	local var1
-	local textOverlayStyle = p2.textOverlayStyle
-	local var2 = decodeUDim2(p2.position)
-	local font = Enum.Font
-	local font_1 = textOverlayStyle.font
+	local TextOverlayStyle = p1.textOverlayStyle
+	local DecodeUDimResult = decodeUDim2(p1.position)
+	local _Font = Enum.Font
+	local TextOverlayStyleFont = TextOverlayStyle.font
+	local v1 = nil
 	
-	if type(font_1) == "string" then
-		local ok, status = pcall(function()
-			-- upvalues: font (ref), font_1 (ref)
-			return font[font_1]
+	if type(TextOverlayStyleFont) == "string" then
+		local Success, Result = pcall(function() --[[ Line: 217 ]]
+			-- upvalues: _Font (copy), TextOverlayStyleFont (copy)
+			return _Font[TextOverlayStyleFont]
 		end)
-		var1 = if ok then status else nil
+		v1 = if Success then Result else nil
 	else
-		var1 = nil
+		v1 = nil
 	end
-	local fontColor = textOverlayStyle.fontColor
-	local var3 = if type(fontColor) ~= "table" then if type(fontColor.r) == "number" and type(fontColor.g) == "number" and type(fontColor.b) == "number" then Color3.new(fontColor.r, fontColor.g, fontColor.b) else nil else nil
-	local textXAlignment = Enum.TextXAlignment
-	local textXAlignment_1 = textOverlayStyle.textXAlignment
+	local FontColor = TextOverlayStyle.fontColor
+	local _Color3 = if type(FontColor) == "table" and (type(FontColor.r) == "number" and type(FontColor.g) == "number" and type(FontColor.b) == "number") then Color3.new(FontColor.r, FontColor.g, FontColor.b) else nil
+	local TextXAlignment = Enum.TextXAlignment
+	local TextXAlignment1 = TextOverlayStyle.textXAlignment
+	local TextXAlignment2 = nil
 	
-	if type(textXAlignment_1) == "string" then
-		local ok, status = pcall(function()
-			-- upvalues: textXAlignment (ref), textXAlignment_1 (ref)
-			return textXAlignment[textXAlignment_1]
+	if type(TextXAlignment1) == "string" then
+		local Success1, Result1 = pcall(function() --[[ Line: 217 ]]
+			-- upvalues: TextXAlignment (copy), TextXAlignment1 (copy)
+			return TextXAlignment[TextXAlignment1]
 		end)
-		fontColor = if ok then status else nil
+		TextXAlignment2 = if Success1 then Result1 else nil
 	else
-		fontColor = nil
+		TextXAlignment2 = nil
 	end
-	return if var2 == nil or var1 == nil or (var3 == nil or fontColor == nil) then nil elseif type(p2.rotation) == "number" and type(p2.scale) == "number" and (type(p2.text) == "string" and type(p2.zIndex) == "number") and type(textOverlayStyle.fontSize) == "number" then {
-		position = var2,
-		rotation = p2.rotation,
-		scale = p2.scale,
-		text = p2.text,
-		zIndex = p2.zIndex,
+	return if DecodeUDimResult == nil or v1 == nil or _Color3 == nil or TextXAlignment2 == nil then nil elseif type(p1.rotation) == "number" and type(p1.scale) == "number" and type(p1.text) == "string" and type(p1.zIndex) == "number" and type(TextOverlayStyle.fontSize) == "number" then {
+		position = DecodeUDimResult,
+		rotation = p1.rotation,
+		scale = p1.scale,
+		text = p1.text,
+		zIndex = p1.zIndex,
 		textOverlayStyle = {
-			font = var1,
-			fontColor = var3,
-			fontSize = textOverlayStyle.fontSize,
-			textXAlignment = fontColor
+			font = v1,
+			fontColor = _Color3,
+			fontSize = TextOverlayStyle.fontSize,
+			textXAlignment = TextXAlignment2
 		}
 	} else nil
 end
 
-local function decodeStickerOverlay(p2)
-	-- upvalues: decodeUDim2 (ref)
-	if type(p2) ~= "table" then
+local function decodeStickerOverlay(p1) --[[ Line: 265 ]]
+	-- upvalues: decodeUDim2 (copy)
+	if type(p1) == "table" then
+		local DecodeUDimResult = decodeUDim2(p1.position)
+		
+		return if DecodeUDimResult == nil then nil elseif (p1.stickerURI == nil or type(p1.stickerURI) == "string") and (type(p1.stickerSize) == "number" and type(p1.rotation) == "number" and type(p1.scale) == "number" and type(p1.zIndex) == "number") then {
+			stickerURI = p1.stickerURI,
+			position = DecodeUDimResult,
+			stickerSize = p1.stickerSize,
+			rotation = p1.rotation,
+			scale = p1.scale,
+			zIndex = p1.zIndex
+		} else nil
+	else
 		return nil
 	end
-	local var1 = decodeUDim2(p2.position)
-	
-	return if var1 == nil then nil elseif not (p2.stickerURI ~= nil and type(p2.stickerURI) ~= "string") then if type(p2.stickerSize) == "number" and type(p2.rotation) == "number" and (type(p2.scale) == "number" and type(p2.zIndex) == "number") then {
-		stickerURI = p2.stickerURI,
-		position = var1,
-		stickerSize = p2.stickerSize,
-		rotation = p2.rotation,
-		scale = p2.scale,
-		zIndex = p2.zIndex
-	} else nil else nil
 end
 
-local function decodeTrim(p2)
-	return if type(p2) == "table" then if type(p2.startTime) == "number" and type(p2.endTime) == "number" then { startTime = p2.startTime, endTime = p2.endTime } else nil else nil
+local function decodeTrim(Trim) --[[ Line: 299 ]]
+	return if type(Trim) == "table" and (type(Trim.startTime) == "number" and type(Trim.endTime) == "number") then { startTime = Trim.startTime, endTime = Trim.endTime } else nil
 end
 
-local function decodeMusic(p2)
-	return if type(p2) == "table" then if type(p2.assetId) == "number" and type(p2.startTime) == "number" then { assetId = p2.assetId, startTime = p2.startTime } else nil else nil
+local function decodeMusic(Music) --[[ Line: 314 ]]
+	return if type(Music) == "table" and (type(Music.assetId) == "number" and type(Music.startTime) == "number") then { assetId = Music.assetId, startTime = Music.startTime } else nil
+end
+
+local function decodeVoice(Voice) --[[ Line: 329 ]]
+	return if type(Voice) == "table" and (type(Voice.text) == "string" and Voice.text ~= "" and type(Voice.voiceId) == "number" and type(Voice.startTime) == "number") then {
+		text = Voice.text,
+		voiceId = Voice.voiceId,
+		startTime = Voice.startTime
+	} else nil
 end
 
 return {
-	serialize = serialize,
-	deserialize = function(p2)
-		-- upvalues: decodeTrim (ref), decodeMusic (ref), decodeTextOverlay (ref), decodeStickerOverlay (ref)
+	serialize = function(p1) --[[ Line: 140 ]]
+		-- upvalues: encodeTextOverlay (copy), FFlagMomentsTTSDraftRestoreModule (copy)
+		local Edits = p1.edits
+		local Edits1 = { trim = Edits.trim, music = Edits.music }
+		
+		if Edits.text then
+			local Text = {}
+			
+			for _, value in Edits.text do
+				table.insert(Text, (encodeTextOverlay(value)))
+			end
+			Edits1.text = Text
+		end
+		if Edits.sticker then
+			local Sticker = {}
+			
+			for _, value1 in Edits.sticker do
+				local Position = value1.position
+				table.insert(Sticker, {
+					stickerURI = value1.stickerURI,
+					position = {
+						xScale = Position.X.Scale,
+						xOffset = Position.X.Offset,
+						yScale = Position.Y.Scale,
+						yOffset = Position.Y.Offset
+					},
+					stickerSize = value1.stickerSize,
+					rotation = value1.rotation,
+					scale = value1.scale,
+					zIndex = value1.zIndex
+				})
+			end
+			Edits1.sticker = Sticker
+		end
+		if FFlagMomentsTTSDraftRestoreModule and Edits.voice then
+			local Voice = Edits.voice
+			Edits1.voice = {
+				text = Voice.text,
+				voiceId = Voice.voiceId,
+				startTime = Voice.startTime
+			}
+		end
+		return {
+			userId = p1.userId,
+			captureRef = {
+				localId = p1.captureRef.localId,
+				captureType = p1.captureRef.captureType.Name
+			},
+			description = p1.description,
+			commentsEnabled = p1.commentsEnabled,
+			edits = Edits1,
+			lastSaveTime = p1.lastSaveTime
+		}
+	end,
+	deserialize = function(p2) --[[ Line: 350 ]]
+		-- upvalues: decodeTrim (copy), decodeMusic (copy), decodeTextOverlay (copy), decodeStickerOverlay (copy), FFlagMomentsTTSDraftRestoreModule (copy), decodeVoice (copy)
 		if type(p2) ~= "table" then
 			return nil
 		end
-		local captureRef = p2.captureRef
+		local CaptureRef = p2.captureRef
 		
-		if type(captureRef) ~= "table" or type(captureRef.localId) ~= "string" or captureRef.localId == "" then
+		if type(CaptureRef) ~= "table" or type(CaptureRef.localId) ~= "string" or CaptureRef.localId == "" then
 			return nil
 		end
-		local var1
-		local captureType = Enum.CaptureType
-		local captureType_1 = captureRef.captureType
+		local CaptureType = Enum.CaptureType
+		local CaptureType1 = CaptureRef.captureType
+		local CaptureType2 = nil
 		
-		if type(captureType_1) == "string" then
-			local ok, status = pcall(function()
-				-- upvalues: captureType (ref), captureType_1 (ref)
-				return captureType[captureType_1]
+		if type(CaptureType1) == "string" then
+			local Success, Result = pcall(function() --[[ Line: 217 ]]
+				-- upvalues: CaptureType (copy), CaptureType1 (copy)
+				return CaptureType[CaptureType1]
 			end)
-			var1 = if ok then status else nil
+			CaptureType2 = if Success then Result else nil
 		else
-			var1 = nil
+			CaptureType2 = nil
 		end
-		if var1 == nil then
+		if CaptureType2 == nil then
 			return nil
 		end
-		local edits = p2.edits
+		local Edits = p2.edits
 		
-		if type(edits) ~= "table" then
+		if type(Edits) ~= "table" then
 			return nil
 		end
-		local var2
-		local t = {}
+		local Edits1 = {}
 		
-		if edits.trim ~= nil then
-			local var3 = decodeTrim(edits.trim)
+		if Edits.trim ~= nil then
+			local DecodeTrimResult = decodeTrim(Edits.trim)
 			
-			if var3 == nil then
+			if DecodeTrimResult == nil then
 				return nil
 			end
-			t.trim = var3
+			Edits1.trim = DecodeTrimResult
 		end
-		if edits.music ~= nil then
-			local var4 = decodeMusic(edits.music)
+		if Edits.music ~= nil then
+			local DecodeMusicResult = decodeMusic(Edits.music)
 			
-			if var4 == nil then
+			if DecodeMusicResult == nil then
 				return nil
 			end
-			t.music = var4
+			Edits1.music = DecodeMusicResult
 		end
-		if edits.text ~= nil then
-			if type(edits.text) ~= "table" then
+		if Edits.text ~= nil then
+			if type(Edits.text) ~= "table" then
 				return nil
 			end
-			local t_1 = {}
+			local Text = {}
 			
-			for i, v in edits.text do
-				var2 = decodeTextOverlay(v)
+			for _, value in Edits.text do
+				local DecodeTextOverlayResult = decodeTextOverlay(value)
 				
-				if var2 ~= nil then
-					table.insert(t_1, var2)
-					continue
+				if DecodeTextOverlayResult == nil then
+					return nil
 				end
-				return nil
+				table.insert(Text, DecodeTextOverlayResult)
 			end
-			t.text = t_1
+			Edits1.text = Text
 		end
-		if edits.sticker ~= nil then
-			if type(edits.sticker) ~= "table" then
+		if Edits.sticker ~= nil then
+			if type(Edits.sticker) ~= "table" then
 				return nil
 			end
-			local t_1 = {}
+			local Sticker = {}
 			
-			for i, v in edits.sticker do
-				var2 = decodeStickerOverlay(v)
+			for _, value1 in Edits.sticker do
+				local DecodeStickerOverlayResult = decodeStickerOverlay(value1)
 				
-				if var2 ~= nil then
-					table.insert(t_1, var2)
-					continue
+				if DecodeStickerOverlayResult == nil then
+					return nil
 				end
-				return nil
+				table.insert(Sticker, DecodeStickerOverlayResult)
 			end
-			t.sticker = t_1
+			Edits1.sticker = Sticker
 		end
-		return if type(p2.userId) == "string" then if not (p2.description ~= nil and type(p2.description) ~= "string") then if not (p2.commentsEnabled ~= nil and type(p2.commentsEnabled) ~= "boolean") then if type(p2.lastSaveTime) == "number" then {
+		if FFlagMomentsTTSDraftRestoreModule and Edits.voice ~= nil then
+			Edits1.voice = decodeVoice(Edits.voice)
+		end
+		return if type(p2.userId) == "string" and ((p2.description == nil or type(p2.description) == "string") and ((p2.commentsEnabled == nil or type(p2.commentsEnabled) == "boolean") and type(p2.lastSaveTime) == "number")) then {
 			userId = p2.userId,
-			captureRef = { localId = captureRef.localId, captureType = var1 },
+			captureRef = { localId = CaptureRef.localId, captureType = CaptureType2 },
 			description = p2.description,
 			commentsEnabled = p2.commentsEnabled,
-			edits = t,
+			edits = Edits1,
 			lastSaveTime = p2.lastSaveTime
-		} else nil else nil else nil else nil
+		} else nil
 	end
 }

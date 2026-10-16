@@ -1,12 +1,11 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local roduxModule = require(corePackagesService.Packages.Rodux)
-local cryoModule = require(corePackagesService.Packages.Cryo)
-local actions = script.Parent.Parent.Actions
+﻿local CorePackages = game:GetService("CorePackages")
+local CryoModule = require(CorePackages.Packages.Cryo)
+local Actions = script.Parent.Parent.Actions
 
-return roduxModule.createReducer({}, {
-	[require(actions.AddPlayer).name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, {
+return (require(CorePackages.Packages.Rodux).createReducer({}, {
+	[require(Actions.AddPlayer).name] = function(p1, p2) --[[ Line: 16 ]]
+		-- upvalues: CryoModule (copy)
+		return CryoModule.Dictionary.join(p1, {
 			[p2.userId] = {
 				isBlocked = false,
 				isFollowing = false,
@@ -15,13 +14,13 @@ return roduxModule.createReducer({}, {
 			}
 		})
 	end,
-	[require(actions.RemovePlayer).name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, { [p2.userId] = cryoModule.None })
+	[require(Actions.RemovePlayer).name] = function(p1, p2) --[[ Line: 27 ]]
+		-- upvalues: CryoModule (copy)
+		return CryoModule.Dictionary.join(p1, { [p2.userId] = CryoModule.None })
 	end,
-	[require(actions.SetPlayerIsBlocked).name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, {
+	[require(Actions.SetPlayerIsBlocked).name] = function(p1, p2) --[[ Line: 33 ]]
+		-- upvalues: CryoModule (copy)
+		return CryoModule.Dictionary.join(p1, {
 			[p2.userId] = {
 				isBlocked = p2.isBlocked,
 				friendStatus = p1[p2.userId].friendStatus,
@@ -30,9 +29,9 @@ return roduxModule.createReducer({}, {
 			}
 		})
 	end,
-	[require(actions.SetPlayerFollowRelationship).name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, {
+	[require(Actions.SetPlayerFollowRelationship).name] = function(p1, p2) --[[ Line: 44 ]]
+		-- upvalues: CryoModule (copy)
+		return CryoModule.Dictionary.join(p1, {
 			[p2.userId] = {
 				isBlocked = p1[p2.userId].isBlocked,
 				friendStatus = p1[p2.userId].friendStatus,
@@ -41,9 +40,9 @@ return roduxModule.createReducer({}, {
 			}
 		})
 	end,
-	[require(actions.SetPlayerIsFollowing).name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, {
+	[require(Actions.SetPlayerIsFollowing).name] = function(p1, p2) --[[ Line: 55 ]]
+		-- upvalues: CryoModule (copy)
+		return CryoModule.Dictionary.join(p1, {
 			[p2.userId] = {
 				isBlocked = p1[p2.userId].isBlocked,
 				friendStatus = p1[p2.userId].friendStatus,
@@ -52,9 +51,9 @@ return roduxModule.createReducer({}, {
 			}
 		})
 	end,
-	[require(actions.SetPlayerFriendStatus).name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, {
+	[require(Actions.SetPlayerFriendStatus).name] = function(p1, p2) --[[ Line: 66 ]]
+		-- upvalues: CryoModule (copy)
+		return CryoModule.Dictionary.join(p1, {
 			[p2.userId] = {
 				isBlocked = p1[p2.userId].isBlocked,
 				friendStatus = p2.friendStatus,
@@ -63,4 +62,4 @@ return roduxModule.createReducer({}, {
 			}
 		})
 	end
-})
+}))

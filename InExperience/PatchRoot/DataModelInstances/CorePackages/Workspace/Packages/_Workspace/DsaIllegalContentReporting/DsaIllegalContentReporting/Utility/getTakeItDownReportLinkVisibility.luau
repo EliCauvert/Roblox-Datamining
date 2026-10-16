@@ -1,31 +1,29 @@
-﻿local parent = script:FindFirstAncestor("DsaIllegalContentReporting").Parent
-local localizationService = game:GetService("LocalizationService")
-local playersService = game:GetService("Players")
-local fFlagAddTakeItDownReportLinkToSurfaces = require(parent.SharedFlags).FFlagAddTakeItDownReportLinkToSurfaces
-local countriesWithTakeItDownReport = game:DefineFastString("CountriesWithTakeItDownReport", "US")
-local var1 = false
+﻿local LocalizationService = game:GetService("LocalizationService")
+local Players = game:GetService("Players")
+local FFlagAddTakeItDownReportLinkToSurfaces = require(script:FindFirstAncestor("DsaIllegalContentReporting").Parent.SharedFlags).FFlagAddTakeItDownReportLinkToSurfaces
+local CountriesWithTakeItDownReport = game:DefineFastString("CountriesWithTakeItDownReport", "US")
+local Flag = false
 
-if fFlagAddTakeItDownReportLinkToSurfaces then
-	task.spawn(function()
-		-- upvalues: playersService (ref), localizationService (ref), countriesWithTakeItDownReport (ref), var1 (write)
-		local localPlayer = playersService.LocalPlayer
-		while not localPlayer do
-			playersService:GetPropertyChangedSignal("LocalPlayer"):Wait()
-			localPlayer = playersService.LocalPlayer
+if FFlagAddTakeItDownReportLinkToSurfaces then
+	task.spawn(function() --[[ Line: 18 ]]
+		-- upvalues: Players (copy), LocalizationService (copy), CountriesWithTakeItDownReport (copy), Flag (ref)
+		local LocalPlayer = Players.LocalPlayer
+		while not LocalPlayer do
+			Players:GetPropertyChangedSignal("LocalPlayer"):Wait()
+			LocalPlayer = Players.LocalPlayer
 		end
-		local ok, status = pcall(localizationService.GetCountryRegionForPlayerAsync, localizationService, localPlayer)
+		local Success, Result = pcall(LocalizationService.GetCountryRegionForPlayerAsync, LocalizationService, LocalPlayer)
 		
-		if not ok then return end
-		for i, v in ipairs(countriesWithTakeItDownReport:split(",")) do
-			if status == v then
-				var1 = true
-				
-				return
+		if not Success then return end
+		for _, value in ipairs((CountriesWithTakeItDownReport:split(","))) do
+			if Result == value then
+				Flag = true
+				break
 			end
 		end
 	end)
 end
-return function()
-	-- upvalues: fFlagAddTakeItDownReportLinkToSurfaces (ref), var1 (write)
-	return fFlagAddTakeItDownReportLinkToSurfaces and var1
+return function() --[[ Line: 42 | Named "getTakeItDownReportLinkVisibility" ]]
+	-- upvalues: FFlagAddTakeItDownReportLinkToSurfaces (copy), Flag (ref)
+	return FFlagAddTakeItDownReportLinkToSurfaces and Flag
 end

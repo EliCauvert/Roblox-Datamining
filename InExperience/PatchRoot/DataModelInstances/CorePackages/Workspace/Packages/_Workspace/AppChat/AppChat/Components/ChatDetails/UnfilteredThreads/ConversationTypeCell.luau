@@ -1,82 +1,81 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local _ = require(appChat.types)
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-local useStyle = UIBloxModule.Core.Style.useStyle
-local iconButton = UIBloxModule.App.Button.IconButton
-local iconSize = UIBloxModule.App.ImageSet.Enum.IconSize
-local baseCellModule = require(appChat.Components.Cells.BaseCell)
-local useIsInExperienceModule = require(appChat.Hooks.useIsInExperience)
-local foundationModule = require(parent.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local fFlagHideConversationTypeInfoIfNoWebViewModule = require(appChat.Flags.FFlagHideConversationTypeInfoIfNoWebView)
-local t = {
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local _ = require(AppChat.types)
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local UIBloxModule = require(Parent.UIBlox)
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local IconButton = UIBloxModule.App.Button.IconButton
+local BaseCellModule = require(AppChat.Components.Cells.BaseCell)
+local UseIsInExperienceModule = require(AppChat.Hooks.useIsInExperience)
+local FoundationModule = require(Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local config = {
 	bodyText = "Placeholder body",
 	iconImage = nil,
 	iconCellWidth = 30,
 	shouldShowIcon = true,
 	cellHeight = 28,
-	iconSize = iconSize.Small,
-	onIconActivated = function() end
+	iconSize = UIBloxModule.App.ImageSet.Enum.IconSize.Small,
+	onIconActivated = function() --[[ Line: 39 ]] end
 }
 
-return function(p1)
-	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), useTokens (ref), useIsInExperienceModule (ref), reactModule (ref), baseCellModule (ref), foundationModule (ref), fFlagHideConversationTypeInfoIfNoWebViewModule (ref), iconButton (ref)
-	local var1 = cryoModule.Dictionary.join(t, p1)
-	local style = var1.style or useStyle()
-	local theme = style.Theme
-	local size300 = style.Tokens.Size.Size_300
-	local var2 = useTokens()
-	local var3 = useIsInExperienceModule()
-	local var4, var5 = reactModule.useBinding(0)
+return function(p1) --[[ Line: 44 | Named "ConversationTypeCell" ]]
+	-- upvalues: CryoModule (copy), config (copy), UseStyleFunction (copy), UseTokensFunction (copy), UseIsInExperienceModule (copy), ReactModule (copy), BaseCellModule (copy), FoundationModule (copy), IconButton (copy)
+	local JoinResult = CryoModule.Dictionary.join(config, p1)
+	local UseStyleResult = UseStyleFunction()
+	local Style = JoinResult.style or UseStyleResult
+	local Theme = Style.Theme
+	local Size300 = Style.Tokens.Size.Size_300
+	local UseTokensResult = UseTokensFunction()
+	local UseIsInExperienceModuleResult = UseIsInExperienceModule()
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
 	
-	return reactModule.createElement(baseCellModule, {
+	return ReactModule.createElement(BaseCellModule, {
 		Selectable = false,
 		isDisabled = true,
 		showDivider = false,
-		Size = UDim2.new(1, 0, 0, var1.cellHeight),
-		BackgroundColor3 = if var3 then var2.Color.None.Color3 else theme.BackgroundDefault.Color,
-		BackgroundTransparency = if var3 then var2.Color.None.Transparency else style.Theme.BackgroundDefault.Transparency,
-		LayoutOrder = var1.layoutOrder,
-		dividerColor3 = theme.Divider.Color,
-		dividerTransparency = theme.Divider.Transparency
+		Size = UDim2.new(1, 0, 0, JoinResult.cellHeight),
+		BackgroundColor3 = if UseIsInExperienceModuleResult then UseTokensResult.Color.None.Color3 else Theme.BackgroundDefault.Color,
+		BackgroundTransparency = if UseIsInExperienceModuleResult then UseTokensResult.Color.None.Transparency else Style.Theme.BackgroundDefault.Transparency,
+		LayoutOrder = JoinResult.layoutOrder,
+		dividerColor3 = Theme.Divider.Color,
+		dividerTransparency = Theme.Divider.Transparency
 	}, {
-		UIPadding = reactModule.createElement("UIPadding", {
-			PaddingLeft = UDim.new(0, size300),
-			PaddingRight = UDim.new(0, size300)
+		UIPadding = ReactModule.createElement("UIPadding", {
+			PaddingLeft = UDim.new(0, Size300),
+			PaddingRight = UDim.new(0, Size300)
 		}),
-		Content = reactModule.createElement(foundationModule.View, {
+		Content = ReactModule.createElement(FoundationModule.View, {
 			tag = "row size-full align-y-center",
-			onAbsoluteSizeChanged = reactModule.useCallback(function(p2)
-				-- upvalues: var5 (ref)
-				var5(p2.AbsoluteSize.X)
+			onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame) --[[ Line: 53 ]]
+				-- upvalues: UseBindingResult2 (copy)
+				UseBindingResult2(Frame.AbsoluteSize.X)
 			end, {})
 		}, {
-			Text = reactModule.createElement(foundationModule.Text, {
+			Text = ReactModule.createElement(FoundationModule.Text, {
 				LayoutOrder = 1,
 				tag = "size-0-full auto-x content-emphasis text-align-x-left text-title-large text-truncate-end",
-				Text = var1.bodyText,
+				Text = JoinResult.bodyText,
 				sizeConstraint = {
-					MaxSize = var4:map(function(p2)
-						-- upvalues: fFlagHideConversationTypeInfoIfNoWebViewModule (copy), var1 (ref)
-						local var6 = p2 - (if fFlagHideConversationTypeInfoIfNoWebViewModule and not var1.shouldShowIcon then 0 else var1.iconCellWidth)
+					MaxSize = UseBindingResult:map(function(p2): Vector2 --[[ Line: 82 ]]
+						-- upvalues: JoinResult (copy)
+						local v1 = p2 - (if JoinResult.shouldShowIcon then JoinResult.iconCellWidth else 0)
 						
-						return Vector2.new(if var6 > 0 then var6 else 1e999, 1e999)
+						return Vector2.new(if v1 > 0 then v1 else 1e999, 1e999)
 					end)
 				}
 			}),
-			InfoIcon = if fFlagHideConversationTypeInfoIfNoWebViewModule and not var1.shouldShowIcon then nil else reactModule.createElement(iconButton, {
+			InfoIcon = if JoinResult.shouldShowIcon then ReactModule.createElement(IconButton, {
 				backgroundTransparency = 1,
 				layoutOrder = 2,
-				icon = var1.iconImage,
-				iconColor3 = theme.IconDefault.Color,
-				iconSize = var1.iconSize,
-				iconTransparency = theme.IconDefault.Transparency,
-				size = UDim2.fromOffset(var1.iconCellWidth, var1.iconCellWidth),
-				onActivated = var1.onIconActivated
-			})
+				icon = JoinResult.iconImage,
+				iconColor3 = Theme.IconDefault.Color,
+				iconSize = JoinResult.iconSize,
+				iconTransparency = Theme.IconDefault.Transparency,
+				size = UDim2.fromOffset(JoinResult.iconCellWidth, JoinResult.iconCellWidth),
+				onActivated = JoinResult.onIconActivated
+			}) else nil
 		})
 	})
 end

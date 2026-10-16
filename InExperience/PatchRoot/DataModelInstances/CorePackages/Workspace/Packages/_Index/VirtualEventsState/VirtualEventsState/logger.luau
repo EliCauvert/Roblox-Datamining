@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("VirtualEventsState").Parent.RobloxAppLoggers).Logger:new("VirtualEventsState")
+﻿return (require(script:FindFirstAncestor("VirtualEventsState").Parent.RobloxAppLoggers).Logger:new("VirtualEventsState"))

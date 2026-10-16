@@ -1,20 +1,22 @@
 ﻿local _ = require(script:FindFirstAncestor("Foundation").Components.Types)
 
-return function(p1)
-	if p1 ~= nil then
-		if typeof(p1) == "table" then
-			local t = {}
+return function(List) --[[ Line: 6 | Named "getFormattedTags" ]]
+	if List ~= nil then
+		if typeof(List) == "table" then
+			local List1 = {}
 			
-			for i, v in p1 do
-				if v then
-					table.insert(t, i)
+			for i, value in List do
+				if value then
+					table.insert(List1, i)
 				end
 			end
-			return table.concat(t, " ")
-		elseif typeof(p1) == "string" then
-			return p1
+			return table.concat(List1, " ")
+		else
+			if typeof(List) == "string" then
+				return List
+			end
+			assert(false, "Invalid argument to useStyleTags. Expected a table or string, got " .. typeof(List))
 		end
-		assert(false, "Invalid argument to useStyleTags. Expected a table or string, got " .. typeof(p1))
 	end
 	return nil
 end

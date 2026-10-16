@@ -1,43 +1,42 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local foundationModule = require(parent_1.Foundation)
-local useLocalization = require(parent_1.Localization).Hooks.useLocalization
-local view = foundationModule.View
-local empty = foundationModule.Empty
-local iconSize = foundationModule.Enums.IconSize
-local fFlagPlayerListLocalizeGameTextModule = require(parent.Flags.FFlagPlayerListLocalizeGameText)
-local useLegacyAndTransparencyAwarePanelStyleModule = require(parent.Hooks.useLegacyAndTransparencyAwarePanelStyle)
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local FoundationModule = require(Parent1.Foundation)
+local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
+local View = FoundationModule.View
+local Empty = FoundationModule.Empty
+local IconSize = FoundationModule.Enums.IconSize
+local FFlagPlayerListLocalizeGameTextModule = require(Parent.Flags.FFlagPlayerListLocalizeGameText)
+local UseLegacyAndTransparencyAwarePanelStyleModule = require(Parent.Hooks.useLegacyAndTransparencyAwarePanelStyle)
 
-local var1 = function() end
+local function v9() --[[ Line: 16 ]] end
 
-return reactModule.memo(function(p1)
-	-- upvalues: useLegacyAndTransparencyAwarePanelStyleModule (ref), fFlagPlayerListLocalizeGameTextModule (ref), useLocalization (ref), reactModule (ref), view (ref), empty (ref), iconSize (ref), var1 (ref)
-	local body, retry
-	local var2 = useLegacyAndTransparencyAwarePanelStyleModule(p1.useLegacyPanelStyling)
-	local _ = nil
-	local _ = nil
+return ReactModule.memo(function(p1) --[[ Line: 25 | Named "ServiceUnavailableStateImpl" ]]
+	-- upvalues: UseLegacyAndTransparencyAwarePanelStyleModule (copy), FFlagPlayerListLocalizeGameTextModule (copy), UseLocalizationFunction (copy), ReactModule (copy), View (copy), Empty (copy), IconSize (copy), v9 (copy)
+	local UseLegacyAndTransparencyAwarePanelStyleModuleResult = UseLegacyAndTransparencyAwarePanelStyleModule(p1.useLegacyPanelStyling)
+	local Retry = nil
+	local Body = nil
 	
-	if fFlagPlayerListLocalizeGameTextModule then
-		local var3 = useLocalization({
+	if FFlagPlayerListLocalizeGameTextModule then
+		local UseLocalizationResult = UseLocalizationFunction({
 			body = "InGame.PlayerList.LeaderboardUnavailable",
 			retry = "InGame.PlayerList.Retry"
 		})
-		body = var3.body
-		retry = var3.retry
+		Body = UseLocalizationResult.body
+		Retry = UseLocalizationResult.retry
 	else
-		body = "Leaderboard unavailable. Please try again later."
-		retry = "Retry"
+		Body = "Leaderboard unavailable. Please try again later."
+		Retry = "Retry"
 	end
-	return reactModule.createElement(view, {
-		tag = var2.panelTag,
+	return ReactModule.createElement(View, {
+		tag = UseLegacyAndTransparencyAwarePanelStyleModuleResult.panelTag,
 		LayoutOrder = p1.layoutOrder,
-		backgroundStyle = var2.backgroundStyle
+		backgroundStyle = UseLegacyAndTransparencyAwarePanelStyleModuleResult.backgroundStyle
 	}, {
-		Content = reactModule.createElement(empty, {
-			icon = { name = "triangle-exclamation", size = iconSize.Large },
-			text = body,
-			button = { text = retry, onActivated = p1.onRetry or var1 }
+		Content = ReactModule.createElement(Empty, {
+			icon = { name = "triangle-exclamation", size = IconSize.Large },
+			text = Body,
+			button = { text = Retry, onActivated = p1.onRetry or v9 }
 		})
 	})
 end)

@@ -1,83 +1,90 @@
-﻿local avatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
-local _ = require(avatarExperienceProfilePictureEditor.Components.AssetPicker.AssetPickerTile)
-local userLibModule = require(avatarExperienceProfilePictureEditor.Parent.UserLib)
-local getRbxthumbWithTypeSizeAndOptions = userLibModule.Utils.getRbxthumbWithTypeSizeAndOptions
-local constants = userLibModule.Utils.Constants
-local _ = require(avatarExperienceProfilePictureEditor.Hooks.useOwnedEmotes)
-local _ = require(avatarExperienceProfilePictureEditor.Hooks.useRecommendedEmotes)
-local _ = require(avatarExperienceProfilePictureEditor.Utils.mapWidgetContentToFrameItems)
-local getRecommendationPriceLineContentModule = require(avatarExperienceProfilePictureEditor.Utils.getRecommendationPriceLineContent)
+﻿local AvatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
+local _ = require(AvatarExperienceProfilePictureEditor.Components.AssetPicker.AssetPickerTile)
+local UserLibModule = require(AvatarExperienceProfilePictureEditor.Parent.UserLib)
+local GetRbxthumbWithTypeSizeAndOptionsFunction = UserLibModule.Utils.getRbxthumbWithTypeSizeAndOptions
+local Constants = UserLibModule.Utils.Constants
+local _ = require(AvatarExperienceProfilePictureEditor.Hooks.useOwnedEmotes)
+local _ = require(AvatarExperienceProfilePictureEditor.Hooks.useRecommendedEmotes)
+local _ = require(AvatarExperienceProfilePictureEditor.Utils.mapWidgetContentToFrameItems)
+local GetRecommendationPriceLineContentModule = require(AvatarExperienceProfilePictureEditor.Utils.getRecommendationPriceLineContent)
 
-local function buildOwnedEmoteItems(p1)
-	-- upvalues: getRbxthumbWithTypeSizeAndOptions (ref), constants (ref)
-	local t = {}
+local function buildOwnedEmoteItems(OwnedEmotes) --[[ Line: 35 ]]
+	-- upvalues: GetRbxthumbWithTypeSizeAndOptionsFunction (copy), Constants (copy)
+	local List = {}
 	
-	for i, v in p1 do
-		table.insert(t, {
-			id = v.id,
-			label = v.label,
-			image = getRbxthumbWithTypeSizeAndOptions(v.id, constants.RbxthumbTypes.Asset, 150)
+	for _, ownedEmote in OwnedEmotes do
+		table.insert(List, {
+			id = ownedEmote.id,
+			label = ownedEmote.label,
+			image = GetRbxthumbWithTypeSizeAndOptionsFunction(ownedEmote.id, Constants.RbxthumbTypes.Asset, 150)
 		})
 	end
-	return t
+	return List
 end
 
-local function buildRecommendedEmoteItems(p2, p3, p4)
-	-- upvalues: getRbxthumbWithTypeSizeAndOptions (ref), constants (ref), getRecommendationPriceLineContentModule (ref)
+local function buildRecommendedEmoteItems(OwnedEmotes, RecommendedEmotes, FreeLabel) --[[ Line: 50 ]]
+	-- upvalues: GetRbxthumbWithTypeSizeAndOptionsFunction (copy), Constants (copy), GetRecommendationPriceLineContentModule (copy)
+	local List = {}
 	local t = {}
-	local t_1 = {}
 	
-	for i, v in p2 do
-		t_1[v.id] = true
+	for _, ownedEmote in OwnedEmotes do
+		t[ownedEmote.id] = true
 	end
-	for i, v_1 in p3 do
-		if not t_1[v_1.id] then
-			table.insert(t, {
-				id = v_1.id,
-				label = v_1.label,
-				image = getRbxthumbWithTypeSizeAndOptions(v_1.id, constants.RbxthumbTypes.Asset, 150),
-				priceLineContent = getRecommendationPriceLineContentModule({
-					priceInRobux = v_1.priceInRobux,
-					lowestPrice = v_1.lowestPrice,
-					priceStatus = v_1.priceStatus,
-					freeLabel = p4
+	for _, recommendedEmote in RecommendedEmotes do
+		if not t[recommendedEmote.id] then
+			table.insert(List, {
+				id = recommendedEmote.id,
+				label = recommendedEmote.label,
+				image = GetRbxthumbWithTypeSizeAndOptionsFunction(recommendedEmote.id, Constants.RbxthumbTypes.Asset, 150),
+				priceLineContent = GetRecommendationPriceLineContentModule({
+					priceInRobux = recommendedEmote.priceInRobux,
+					lowestPrice = recommendedEmote.lowestPrice,
+					priceStatus = recommendedEmote.priceStatus,
+					freeLabel = FreeLabel
 				})
 			})
 		end
 	end
-	return t
+	return List
 end
 
-local function _(p5, p6)
-	local cloned = table.clone(p5)
+local function _(Tbl, List) --[[ Line: 81 | Named "buildCombinedEmoteItems" ]]
+	local Copy = table.clone(Tbl)
 	
-	for i, v in p6 do
-		table.insert(cloned, v)
+	for _, value in List do
+		table.insert(Copy, value)
 	end
-	return cloned
+	return Copy
 end
 
-local function buildFrameAssetItems(value)
-	local t = {}
+local function buildFrameAssetItems(FrameItems) --[[ Line: 92 ]]
+	local List = {}
 	
-	for i, v in value do
-		table.insert(t, { id = v.id, label = v.label, image = v.image })
+	for _, frameItem in FrameItems do
+		table.insert(List, {
+			id = frameItem.id,
+			label = frameItem.label,
+			image = frameItem.image
+		})
 	end
-	return t
+	return List
 end
 
-return function(value)
-	-- upvalues: buildOwnedEmoteItems (ref), buildRecommendedEmoteItems (ref), buildFrameAssetItems (ref)
-	local var1 = buildOwnedEmoteItems(value.ownedEmotes)
-	local var2 = buildRecommendedEmoteItems(value.ownedEmotes, value.recommendedEmotes, value.freeLabel)
-	local t = { ownedEmoteItems = var1, recommendedEmoteItems = var2 }
-	local cloned = table.clone(var1)
+return function(p1) --[[ Line: 107 | Named "buildEditProfileImageAssetItems" ]]
+	-- upvalues: buildOwnedEmoteItems (copy), buildRecommendedEmoteItems (copy), buildFrameAssetItems (copy)
+	local OwnedEmoteItems = buildOwnedEmoteItems(p1.ownedEmotes)
+	local RecommendedEmoteItems = buildRecommendedEmoteItems(p1.ownedEmotes, p1.recommendedEmotes, p1.freeLabel)
+	local config = {
+		ownedEmoteItems = OwnedEmoteItems,
+		recommendedEmoteItems = RecommendedEmoteItems
+	}
+	local Copy = table.clone(OwnedEmoteItems)
 	
-	for i, v in var2 do
-		table.insert(cloned, v)
+	for _, recommendedEmoteItem in RecommendedEmoteItems do
+		table.insert(Copy, recommendedEmoteItem)
 	end
-	t.combinedEmoteItems = cloned
-	t.frameAssetItems = buildFrameAssetItems(value.frameItems)
+	config.combinedEmoteItems = Copy
+	config.frameAssetItems = buildFrameAssetItems(p1.frameItems)
 	
-	return t
+	return config
 end

@@ -1,16 +1,16 @@
-﻿local userList = script:FindFirstAncestor("UserList")
-local socialLuaAnalyticsModule = require(userList.Parent.SocialLuaAnalytics)
-local _ = require(userList.Common.Types)
+﻿local UserList = script:FindFirstAncestor("UserList")
+local SocialLuaAnalyticsModule = require(UserList.Parent.SocialLuaAnalytics)
+local _ = require(UserList.Common.Types)
 
-return socialLuaAnalyticsModule.Telemetry.new({
+return SocialLuaAnalyticsModule.Telemetry.new({
 	name = "UserListInteraction",
 	description = "A user interacted with a user-list row",
 	lastUpdated = { 2026, 9, 14 },
 	backendsList = {
 		{
-			type = socialLuaAnalyticsModule.Analytics.Enums.SupportedTelemetryBackends.EventIngest,
+			type = SocialLuaAnalyticsModule.Analytics.Enums.SupportedTelemetryBackends.EventIngest,
 			standardizedFields = { "addSessionInfo", "addSessionId" },
-			format = function(p1, _)
+			format = function(p1, _) --[[ Line: 49 ]]
 				return p1
 			end
 		}

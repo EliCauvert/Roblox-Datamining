@@ -1,33 +1,33 @@
-﻿local signalsModule = require(script:FindFirstAncestor("ExpChatIntegration").Parent.Signals)
+﻿local SignalsModule = require(script:FindFirstAncestor("ExpChatIntegration").Parent.Signals)
 local _ = require(script.Parent.ChatPlatformTypes)
-local t = {
+local ChatWindowSettings = {
 	ChatWindowBackgroundTransparency = 0.3,
 	ChatWindowMaxWidth = 600,
 	ChatWindowMaxHeight = 400,
 	ChatWindowBackgroundColor3 = Color3.fromRGB(34, 34, 34)
 }
-local t_1 = {
-	getBackgroundColor = function(value)
-		return value.BackgroundColor3
+local config = {
+	getBackgroundColor = function(Frame) --[[ Line: 33 ]]
+		return Frame.BackgroundColor3
 	end,
-	getBackgroundTransparency = function(value)
-		return value.BackgroundTransparency
+	getBackgroundTransparency = function(Frame) --[[ Line: 36 ]]
+		return Frame.BackgroundTransparency
 	end
 }
-local t_2 = {
-	setTextboxFocus = function() end,
-	clearTextboxFocus = function() end
+local config1 = {
+	setTextboxFocus = function() --[[ Line: 42 ]] end,
+	clearTextboxFocus = function() --[[ Line: 43 ]] end
 }
 
-return function()
-	-- upvalues: signalsModule (ref), t (ref), t_1 (ref), t_2 (ref)
+return function() --[[ Line: 46 | Named "createDefaultChatPlatformValue" ]]
+	-- upvalues: SignalsModule (copy), ChatWindowSettings (copy), config (copy), config1 (copy)
 	return {
-		getChatInputBarSettings = signalsModule.createSignal({}),
-		chatWindowSettings = t,
-		getInterpolators = signalsModule.createSignal(t_1),
-		getTransparencyStore = function(_)
-			-- upvalues: t_2 (copy)
-			return t_2
+		getChatInputBarSettings = SignalsModule.createSignal({}),
+		chatWindowSettings = ChatWindowSettings,
+		getInterpolators = SignalsModule.createSignal(config),
+		getTransparencyStore = function(_) --[[ Line: 51 ]]
+			-- upvalues: config1 (upval)
+			return config1
 		end
 	}
 end

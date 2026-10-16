@@ -1,8 +1,8 @@
-﻿local reactModule = require(script:FindFirstAncestor("AvatarExperienceProfilePictureEditor").Parent.React)
-local virtualizedFeedViewModule = require(script.Parent.VirtualizedFeedView)
-local useVirtualizedFeedViewModelModule = require(script.Parent.useVirtualizedFeedViewModel)
+﻿local ReactModule = require(script:FindFirstAncestor("AvatarExperienceProfilePictureEditor").Parent.React)
+local VirtualizedFeedViewModule = require(script.Parent.VirtualizedFeedView)
+local UseVirtualizedFeedViewModelModule = require(script.Parent.useVirtualizedFeedViewModel)
 
-return function(value)
-	-- upvalues: useVirtualizedFeedViewModelModule (ref), reactModule (ref), virtualizedFeedViewModule (ref)
-	return reactModule.createElement(virtualizedFeedViewModule, useVirtualizedFeedViewModelModule(value))
+return function(p1) --[[ Line: 10 | Named "AssetPickerVirtualizedFeedContainer" ]]
+	-- upvalues: UseVirtualizedFeedViewModelModule (copy), ReactModule (copy), VirtualizedFeedViewModule (copy)
+	return ReactModule.createElement(VirtualizedFeedViewModule, (UseVirtualizedFeedViewModelModule(p1)))
 end

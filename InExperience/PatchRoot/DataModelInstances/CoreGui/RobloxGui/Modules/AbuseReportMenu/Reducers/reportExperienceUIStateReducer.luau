@@ -1,13 +1,13 @@
-﻿local abuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
-local _ = require(abuseReportMenu.Components.Types)
-local playerMenuActions = require(abuseReportMenu.Components.Constants).PlayerMenuActions
+﻿local AbuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
+local _ = require(AbuseReportMenu.Components.Types)
+local PlayerMenuActions = require(AbuseReportMenu.Components.Constants).PlayerMenuActions
 
-return function(p1, p2)
-	-- upvalues: playerMenuActions (ref)
-	local cloned = table.clone(p1)
+return function(Tbl, p1) --[[ Line: 6 | Named "reportExperienceUIStateReducer" ]]
+	-- upvalues: PlayerMenuActions (copy)
+	local Copy = table.clone(Tbl)
 	
-	if p2.type == playerMenuActions.UpdateComment then
-		cloned.comment = p2.comment
+	if p1.type == PlayerMenuActions.UpdateComment then
+		Copy.comment = p1.comment
 	end
-	return cloned
+	return Copy
 end

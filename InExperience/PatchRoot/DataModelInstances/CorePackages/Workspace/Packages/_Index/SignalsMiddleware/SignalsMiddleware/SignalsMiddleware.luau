@@ -1,41 +1,41 @@
-﻿local parent = script.Parent.Parent
-local signalsExperimentalModule = require(parent.SignalsExperimental)
-local actionHandlersModule = require(script.Parent.ActionHandlers)
-local fFlagSignalsRegistryOwnedFanout = require(parent.SharedFlags).FFlagSignalsRegistryOwnedFanout
+﻿local Parent = script.Parent.Parent
+local SignalsExperimentalModule = require(Parent.SignalsExperimental)
+local ActionHandlersModule = require(script.Parent.ActionHandlers)
+local FFlagSignalsRegistryOwnedFanout = require(Parent.SharedFlags).FFlagSignalsRegistryOwnedFanout
 
-return function(value)
-	-- upvalues: fFlagSignalsRegistryOwnedFanout (ref), signalsExperimentalModule (ref), actionHandlersModule (ref)
-	return function(p1, _)
-		-- upvalues: fFlagSignalsRegistryOwnedFanout (copy), signalsExperimentalModule (copy), actionHandlersModule (copy), value (ref)
-		return function(p2)
-			-- upvalues: fFlagSignalsRegistryOwnedFanout (copy), signalsExperimentalModule (copy), actionHandlersModule (copy), value (copy), p1 (ref)
-			local type
-			if fFlagSignalsRegistryOwnedFanout then
-				type = nil
-				signalsExperimentalModule.batch(function()
-					-- upvalues: actionHandlersModule (copy), value (copy), p2 (ref), type (write), p1 (copy)
-					actionHandlersModule.handleAction(value, p2)
-					type = p1(p2)
+return function(p1) --[[ Line: 8 | Named "createSignalsMiddleware" ]]
+	-- upvalues: FFlagSignalsRegistryOwnedFanout (copy), SignalsExperimentalModule (copy), ActionHandlersModule (copy)
+	return function(Callback, _) --[[ Line: 9 ]]
+		-- upvalues: FFlagSignalsRegistryOwnedFanout (upval), SignalsExperimentalModule (upval), ActionHandlersModule (upval), p1 (copy)
+		return function(p2) --[[ Line: 10 ]]
+			-- upvalues: FFlagSignalsRegistryOwnedFanout (upval), SignalsExperimentalModule (upval), ActionHandlersModule (upval), p1 (upval), Callback (copy)
+			if FFlagSignalsRegistryOwnedFanout then
+				local v1 = nil
+				SignalsExperimentalModule.batch(function() --[[ Line: 13 ]]
+					-- upvalues: ActionHandlersModule (upval), p1 (upval), p2 (copy), v1 (ref), Callback (upval)
+					ActionHandlersModule.handleAction(p1, p2)
+					v1 = Callback(p2)
 				end)
 				
-				return type
+				return v1
 			end
-			type = value[p2.type]
+			local v1 = p1[p2.type]
 			
-			if type and #type > 0 then
-				signalsExperimentalModule.batch(function()
-					-- upvalues: type (ref), p2 (ref), p1 (copy)
-					local var1 = true
+			if v1 and #v1 > 0 then
+				SignalsExperimentalModule.batch(function() --[[ Line: 25 ]]
+					-- upvalues: v1 (copy), p2 (copy), Callback (upval)
+					local v2 = true
 					
-					for i, v in type do
-						var1 = v(p2) and var1
+					for _, value in v1 do
+						v2 = value(p2) and v2
 					end
-					return if var1 then nil else p1(p2)
+					return if v2 then nil else Callback(p2)
 				end)
 				
 				return nil
+			else
+				return Callback(p2)
 			end
-			return p1(p2)
 		end
 	end
 end

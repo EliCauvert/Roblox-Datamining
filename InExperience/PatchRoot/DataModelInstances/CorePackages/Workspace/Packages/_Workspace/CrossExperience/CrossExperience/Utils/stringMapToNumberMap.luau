@@ -1,15 +1,15 @@
-﻿local cryo = require(script:FindFirstAncestor("CrossExperience").dependencies).Cryo
+﻿local Cryo = require(script:FindFirstAncestor("CrossExperience").dependencies).Cryo
 
-return function(p1)
-	-- upvalues: cryo (ref)
+return function(p1) --[[ Line: 6 ]]
+	-- upvalues: Cryo (copy)
 	local t = {}
 	
 	if p1 ~= nil then
-		for i, v in ipairs(cryo.Dictionary.keys(p1)) do
-			local var1 = tonumber(v)
+		for _, value in ipairs((Cryo.Dictionary.keys(p1))) do
+			local Number: number? = tonumber(value)
 			
-			if var1 then
-				t[var1] = p1[v]
+			if Number then
+				t[Number] = p1[value]
 			end
 		end
 	end

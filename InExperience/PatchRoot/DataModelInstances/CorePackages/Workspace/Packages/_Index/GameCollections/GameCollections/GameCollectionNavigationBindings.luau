@@ -1,35 +1,33 @@
-﻿local parent = script:FindFirstAncestor("GameCollections").Parent
-local reactModule = require(parent.React)
-local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
-local inputHandlersModule = require(parent.InputHandlers)
-local focusNavigationEventNameEnum = require(parent.FocusNavigationUtils).FocusNavigationEventNameEnum
-local t = {
-	[Enum.KeyCode.ButtonX] = focusNavigationEventNameEnum.SeeAll,
-	[Enum.KeyCode.ButtonA] = focusNavigationEventNameEnum.HoldToPlay
+﻿local Parent = script:FindFirstAncestor("GameCollections").Parent
+local ReactModule = require(Parent.React)
+local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
+local InputHandlersModule = require(Parent.InputHandlers)
+local FocusNavigationEventNameEnum = require(Parent.FocusNavigationUtils).FocusNavigationEventNameEnum
+local config = {
+	[Enum.KeyCode.ButtonX] = FocusNavigationEventNameEnum.SeeAll,
+	[Enum.KeyCode.ButtonA] = FocusNavigationEventNameEnum.HoldToPlay
 }
-local t_1 = {}
 
-local function useControllerBarFocusNavigationBindings(p1, p2)
-	-- upvalues: reactModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), reactFocusNavigationModule (ref), t (ref)
-	return reactFocusNavigationModule.useEventHandlerMap(reactModule.useMemo(function()
-		-- upvalues: focusNavigationEventNameEnum (copy), p1 (ref), inputHandlersModule (copy), p2 (ref)
+local function useControllerBarFocusNavigationBindings(OnSeeAll, Handler) --[[ Line: 23 ]]
+	-- upvalues: ReactModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), ReactFocusNavigationModule (copy), config (copy)
+	return ReactFocusNavigationModule.useEventHandlerMap(ReactModule.useMemo(function() --[[ Line: 24 ]]
+		-- upvalues: FocusNavigationEventNameEnum (upval), OnSeeAll (copy), InputHandlersModule (upval), Handler (copy)
 		return {
-			[focusNavigationEventNameEnum.SeeAll] = if p1 then { handler = inputHandlersModule.onRelease(p1) } else nil,
-			[focusNavigationEventNameEnum.HoldToPlay] = if p2 then { handler = p2 } else nil
+			[FocusNavigationEventNameEnum.SeeAll] = if OnSeeAll then { handler = InputHandlersModule.onRelease(OnSeeAll) } else nil,
+			[FocusNavigationEventNameEnum.HoldToPlay] = if Handler then { handler = Handler } else nil
 		}
-	end, { p1, p2 }), reactFocusNavigationModule.useEventMap(t))
+	end, { OnSeeAll, Handler }), (ReactFocusNavigationModule.useEventMap(config)))
 end
 
-t_1.useControllerBarFocusNavigationBindings = useControllerBarFocusNavigationBindings
-
-function t_1.OnSeeAllControllerBarNavigateWrapper(p1)
-	-- upvalues: useControllerBarFocusNavigationBindings (ref), reactModule (ref)
-	return reactModule.createElement("Frame", {
-		BackgroundTransparency = 1,
-		ref = useControllerBarFocusNavigationBindings(p1.onSeeAll),
-		Size = UDim2.new(1, 0, 0, 0),
-		AutomaticSize = Enum.AutomaticSize.Y
-	}, p1.children)
-end
-
-return t_1
+return {
+	useControllerBarFocusNavigationBindings = useControllerBarFocusNavigationBindings,
+	OnSeeAllControllerBarNavigateWrapper = function(p1) --[[ Line: 45 ]]
+		-- upvalues: useControllerBarFocusNavigationBindings (copy), ReactModule (copy)
+		return ReactModule.createElement("Frame", {
+			BackgroundTransparency = 1,
+			ref = useControllerBarFocusNavigationBindings(p1.onSeeAll),
+			Size = UDim2.new(1, 0, 0, 0),
+			AutomaticSize = Enum.AutomaticSize.Y
+		}, p1.children)
+	end
+}

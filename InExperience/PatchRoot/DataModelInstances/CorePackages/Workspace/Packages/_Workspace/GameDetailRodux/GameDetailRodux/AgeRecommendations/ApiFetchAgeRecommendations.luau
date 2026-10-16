@@ -1,53 +1,54 @@
-﻿local gameDetailRodux = script:FindFirstAncestor("GameDetailRodux")
-local parent = gameDetailRodux.Parent
-local logging = require(parent.AppCommonLib).Logging
-local promiseModule = require(parent.Promise)
-local ageRecommendationDetailsModule = require(gameDetailRodux.AgeRecommendations.AgeRecommendationDetails)
-local performFetch = require(parent.Http).PerformFetch
-local setNetworkingErrorToast = require(parent.RobloxAppToastsRodux).Thunks.SetNetworkingErrorToast
-local setAgeRecommendationModule = require(gameDetailRodux.AgeRecommendations.SetAgeRecommendation)
-local setAgeRecommendationHeadersModule = require(gameDetailRodux.AgeRecommendations.SetAgeRecommendationHeaders)
-local getAgeRecommendationModule = require(gameDetailRodux.AgeRecommendations.GetAgeRecommendation)
+﻿local GameDetailRodux = script:FindFirstAncestor("GameDetailRodux")
+local Parent = GameDetailRodux.Parent
+local Logging = require(Parent.AppCommonLib).Logging
+local PromiseModule = require(Parent.Promise)
+local AgeRecommendationDetailsModule = require(GameDetailRodux.AgeRecommendations.AgeRecommendationDetails)
+local PerformFetch = require(Parent.Http).PerformFetch
+local SetNetworkingErrorToastFunction = require(Parent.RobloxAppToastsRodux).Thunks.SetNetworkingErrorToast
+local SetAgeRecommendationModule = require(GameDetailRodux.AgeRecommendations.SetAgeRecommendation)
+local SetAgeRecommendationHeadersModule = require(GameDetailRodux.AgeRecommendations.SetAgeRecommendationHeaders)
+local GetAgeRecommendationModule = require(GameDetailRodux.AgeRecommendations.GetAgeRecommendation)
 
-local function _(p1)
-	return "luaapp.experience_guidelines.get-age-guidelines" .. p0
+local function _(Text): string --[[ Line: 17 | Named "fetchKeymapper" ]]
+	return "luaapp.experience_guidelines.get-age-guidelines" .. Text
 end
 
 return {
-	Fetch = function(p1, p2)
-		-- upvalues: performFetch (ref), getAgeRecommendationModule (ref), ageRecommendationDetailsModule (ref), logging (ref), promiseModule (ref), setAgeRecommendationModule (ref), setAgeRecommendationHeadersModule (ref), setNetworkingErrorToast (ref)
-		return performFetch.Single("luaapp.experience_guidelines.get-age-guidelines" .. p2, function(p3)
-			-- upvalues: getAgeRecommendationModule (copy), p1 (ref), p2 (ref), ageRecommendationDetailsModule (copy), logging (copy), promiseModule (copy), setAgeRecommendationModule (copy), setAgeRecommendationHeadersModule (copy), setNetworkingErrorToast (copy)
-			return getAgeRecommendationModule(p1, p2):andThen(function(p4)
-				-- upvalues: ageRecommendationDetailsModule (copy), logging (copy), p2 (copy), promiseModule (copy), p3 (ref), setAgeRecommendationModule (copy), setAgeRecommendationHeadersModule (copy)
-				local responseBody = p4.responseBody
+	Fetch = function(p1, Text) --[[ Line: 21 ]]
+		-- upvalues: PerformFetch (copy), GetAgeRecommendationModule (copy), AgeRecommendationDetailsModule (copy), Logging (copy), PromiseModule (copy), SetAgeRecommendationModule (copy), SetAgeRecommendationHeadersModule (copy), SetNetworkingErrorToastFunction (copy)
+		return PerformFetch.Single("luaapp.experience_guidelines.get-age-guidelines" .. Text, function(p2) --[[ Line: 22 ]]
+			-- upvalues: GetAgeRecommendationModule (upval), p1 (copy), Text (copy), AgeRecommendationDetailsModule (upval), Logging (upval), PromiseModule (upval), SetAgeRecommendationModule (upval), SetAgeRecommendationHeadersModule (upval), SetNetworkingErrorToastFunction (upval)
+			return GetAgeRecommendationModule(p1, Text):andThen(function(Result) --[[ Line: 23 ]]
+				-- upvalues: AgeRecommendationDetailsModule (upval), Logging (upval), Text (upval), PromiseModule (upval), p2 (copy), SetAgeRecommendationModule (upval), SetAgeRecommendationHeadersModule (upval)
+				local ResponseBody = Result.responseBody
 				
-				if responseBody == nil then
-					logging.warn("Response from GetAgeRecommendation is malformed!")
+				if ResponseBody == nil then
+					Logging.warn("Response from GetAgeRecommendation is malformed!")
 					
-					return promiseModule.reject({ HttpError = Enum.HttpError.OK })
+					return PromiseModule.reject({ HttpError = Enum.HttpError.OK })
 				end
-				local var1, var2 = ageRecommendationDetailsModule.fromJsonData(responseBody.ageRecommendationDetails):unwrap()
+				local UnwrapResult, UnwrapResult2 = AgeRecommendationDetailsModule.fromJsonData(ResponseBody.ageRecommendationDetails):unwrap()
 				
-				if var1 == false then
-					logging.warn("Failed to parse AgeRecommendationDetails for `" .. p2 .. "`")
+				if UnwrapResult == false then
+					Logging.warn("Failed to parse AgeRecommendationDetails for `" .. Text .. "`")
 					
-					return promiseModule.reject(p4)
+					return PromiseModule.reject(Result)
+				else
+					p2:dispatch(SetAgeRecommendationModule(Text, UnwrapResult2))
+					p2:dispatch(SetAgeRecommendationHeadersModule(ResponseBody.headerDisplayName, ResponseBody.headerDisplayNameShort))
+					
+					return PromiseModule.resolve(Result)
 				end
-				p3:dispatch(setAgeRecommendationModule(p2, var2))
-				p3:dispatch(setAgeRecommendationHeadersModule(responseBody.headerDisplayName, responseBody.headerDisplayNameShort))
+			end, function(p3) --[[ Line: 46 ]]
+				-- upvalues: p2 (copy), SetNetworkingErrorToastFunction (upval), PromiseModule (upval)
+				p2:dispatch(SetNetworkingErrorToastFunction(p3))
 				
-				return promiseModule.resolve(p4)
-			end, function(p4)
-				-- upvalues: p3 (ref), setNetworkingErrorToast (copy), promiseModule (copy)
-				p3:dispatch(setNetworkingErrorToast(p4))
-				
-				return promiseModule.reject(p4)
+				return PromiseModule.reject(p3)
 			end)
 		end)
 	end,
-	GetFetchingStatus = function(p1, p2)
-		-- upvalues: performFetch (ref)
-		return performFetch.GetStatus(p1, "luaapp.experience_guidelines.get-age-guidelines" .. p7)
+	GetFetchingStatus = function(p1, Text) --[[ Line: 53 ]]
+		-- upvalues: PerformFetch (copy)
+		return PerformFetch.GetStatus(p1, "luaapp.experience_guidelines.get-age-guidelines" .. Text)
 	end
 }

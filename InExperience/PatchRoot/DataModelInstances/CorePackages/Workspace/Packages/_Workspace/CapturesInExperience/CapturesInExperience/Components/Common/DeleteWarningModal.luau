@@ -1,34 +1,32 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local localizationModule = require(parent_1.Localization)
-local reactModule = require(parent_1.React)
-local roactUtilsModule = require(parent_1.RoactUtils)
-local robloxAppHooksModule = require(parent_1.RobloxAppHooks)
-local UIBloxModule = require(parent_1.UIBlox)
-local checkbox = require(parent_1.Foundation).Checkbox
-local deleteWarningModalClosedModule = require(parent.Actions.DeleteWarningModalClosed)
-local recordDeleteWarningModalOptOutModule = require(parent.Utils.recordDeleteWarningModalOptOut)
-local useCallback = reactModule.useCallback
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local useEffect = reactModule.useEffect
-local useLocalization = localizationModule.Hooks.useLocalization
-local useScreenSize = robloxAppHooksModule.useScreenSize
-local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
-local useState = reactModule.useState
-local useStyle = UIBloxModule.Core.Style.useStyle
-local constantsModule = require(parent.Constants)
-local eventNamesModule = require(parent.Analytics.EventNames)
-local useAnalyticsModule = require(parent.Analytics.useAnalytics)
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local RoactUtilsModule = require(Parent1.RoactUtils)
+local UIBloxModule = require(Parent1.UIBlox)
+local Checkbox = require(Parent1.Foundation).Checkbox
+local DeleteWarningModalClosedModule = require(Parent.Actions.DeleteWarningModalClosed)
+local RecordDeleteWarningModalOptOutModule = require(Parent.Utils.recordDeleteWarningModalOptOut)
+local UseCallbackFunction = ReactModule.useCallback
+local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
+local UseEffectFunction = ReactModule.useEffect
+local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
+local UseScreenSizeFunction = require(Parent1.RobloxAppHooks).useScreenSize
+local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
+local UseStateFunction = ReactModule.useState
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local ConstantsModule = require(Parent.Constants)
+local EventNamesModule = require(Parent.Analytics.EventNames)
+local UseAnalyticsModule = require(Parent.Analytics.useAnalytics)
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 
-return function(p1)
-	-- upvalues: useScreenSize (ref), useStyle (ref), useAnalyticsModule (ref), useDispatch (ref), useLocalization (ref), useSelector (ref), constantsModule (ref), useState (ref), useEffect (ref), useCallback (ref), deleteWarningModalClosedModule (ref), eventNamesModule (ref), recordDeleteWarningModalOptOutModule (ref), reactModule (ref), interactiveAlert (ref), buttonType (ref), checkbox (ref)
-	local var1 = useScreenSize()
-	local var2 = useStyle()
-	local var3 = useAnalyticsModule()
-	local var4 = useDispatch()
-	local var5 = useLocalization({
+return function(p1) --[[ Line: 37 ]]
+	-- upvalues: UseScreenSizeFunction (copy), UseStyleFunction (copy), UseAnalyticsModule (copy), UseDispatchFunction (copy), UseLocalizationFunction (copy), UseSelectorFunction (copy), ConstantsModule (copy), UseStateFunction (copy), UseEffectFunction (copy), UseCallbackFunction (copy), DeleteWarningModalClosedModule (copy), EventNamesModule (copy), RecordDeleteWarningModalOptOutModule (copy), ReactModule (copy), InteractiveAlert (copy), ButtonType (copy), Checkbox (copy)
+	local UseScreenSizeResult = UseScreenSizeFunction()
+	local UseStyleResult = UseStyleFunction()
+	local UseAnalyticsModuleResult = UseAnalyticsModule()
+	local UseDispatchResult = UseDispatchFunction()
+	local UseLocalizationResult = UseLocalizationFunction({
 		alertBody = "Feature.Captures.Label.DeleteCaptureInfo",
 		alertBodyPlural = "Feature.Captures.Label.DeleteCapturesWarning",
 		alertTitle = "Feature.Captures.Title.DeleteCaptureWarning",
@@ -37,81 +35,81 @@ return function(p1)
 		deleteCTA = "Feature.Captures.Action.DeleteCaptureWarningConfirm",
 		optOutText = "Feature.Captures.Label.DeleteCaptureWarningOptOut"
 	})
-	local theme = var2.Theme
-	local var6 = useSelector(function(p2)
-		-- upvalues: constantsModule (copy)
-		return p2[constantsModule.RoduxKey].Carousel.IsDeleteWarningModalOpen
+	local Theme = UseStyleResult.Theme
+	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 56 ]]
+		-- upvalues: ConstantsModule (upval)
+		return p2[ConstantsModule.RoduxKey].Carousel.IsDeleteWarningModalOpen
 	end)
-	local var7 = useSelector(function(p2)
-		-- upvalues: constantsModule (copy)
-		return p2[constantsModule.RoduxKey].CaptureManager.SelectedCaptures
+	local UseSelectorResult1 = UseSelectorFunction(function(p2) --[[ Line: 60 ]]
+		-- upvalues: ConstantsModule (upval)
+		return p2[ConstantsModule.RoduxKey].CaptureManager.SelectedCaptures
 	end)
-	local var8, var9 = useState(false)
-	useEffect(function()
-		-- upvalues: var6 (ref), var9 (ref)
-		if var6 then
-			var9(false)
+	local UseStateResult, UseStateResult2 = UseStateFunction(false)
+	UseEffectFunction(function() --[[ Line: 66 ]]
+		-- upvalues: UseSelectorResult (copy), UseStateResult2 (copy)
+		if UseSelectorResult then
+			UseStateResult2(false)
 		end
-	end, { var6, var9 })
+	end, { UseSelectorResult, UseStateResult2 })
 	
-	return reactModule.createElement("TextButton", {
+	return ReactModule.createElement("TextButton", {
 		Active = true,
 		AutoButtonColor = false,
-		BackgroundColor3 = theme.Overlay.Color,
-		BackgroundTransparency = theme.Overlay.Transparency,
+		BackgroundColor3 = Theme.Overlay.Color,
+		BackgroundTransparency = Theme.Overlay.Transparency,
 		Size = UDim2.fromScale(1, 1),
-		Visible = var6,
+		Visible = UseSelectorResult,
 		ZIndex = p1.zIndex
 	}, {
-		Alert = reactModule.createElement(interactiveAlert, {
+		Alert = ReactModule.createElement(InteractiveAlert, {
 			isMiddleContentFocusable = false,
-			bodyText = if #var7 > 1 then var5.alertBodyPlural else var5.alertBody,
+			bodyText = if #UseSelectorResult1 > 1 then UseLocalizationResult.alertBodyPlural else UseLocalizationResult.alertBody,
 			buttonStackInfo = {
 				buttons = {
 					{
-						buttonType = buttonType.Secondary,
+						buttonType = ButtonType.Secondary,
 						props = {
-							onActivated = useCallback(function()
-								-- upvalues: var4 (ref), deleteWarningModalClosedModule (copy), var3 (ref), eventNamesModule (copy)
-								var4(deleteWarningModalClosedModule())
-								var3.fireEvent(eventNamesModule.CapturesDeleteWarningModalCancelPressed)
+							onActivated = UseCallbackFunction(function() --[[ Line: 72 ]]
+								-- upvalues: UseDispatchResult (copy), DeleteWarningModalClosedModule (upval), UseAnalyticsModuleResult (copy), EventNamesModule (upval)
+								UseDispatchResult(DeleteWarningModalClosedModule())
+								UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesDeleteWarningModalCancelPressed)
 							end, {}),
-							text = var5.cancelCTA
+							text = UseLocalizationResult.cancelCTA
 						}
 					},
 					{
-						buttonType = buttonType.PrimarySystem,
+						buttonType = ButtonType.PrimarySystem,
 						props = {
-							onActivated = useCallback(function()
-								-- upvalues: p1 (ref), var8 (ref), recordDeleteWarningModalOptOutModule (copy), var3 (ref), eventNamesModule (copy), var4 (ref), deleteWarningModalClosedModule (copy)
+							onActivated = UseCallbackFunction(function() --[[ Line: 77 ]]
+								-- upvalues: p1 (copy), UseStateResult (copy), RecordDeleteWarningModalOptOutModule (upval), UseAnalyticsModuleResult (copy), EventNamesModule (upval), UseDispatchResult (copy), DeleteWarningModalClosedModule (upval)
 								p1.deleteItem()
 								
-								if var8 then
-									recordDeleteWarningModalOptOutModule(var3)
+								if UseStateResult then
+									RecordDeleteWarningModalOptOutModule(UseAnalyticsModuleResult)
 								end
-								var3.fireEvent(eventNamesModule.CapturesDeleteWarningModalDeletePressed)
-								var4(deleteWarningModalClosedModule())
-							end, { var3, var8, p1.deleteItem }),
-							text = var5.deleteCTA
+								UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesDeleteWarningModalDeletePressed)
+								UseDispatchResult(DeleteWarningModalClosedModule())
+							end, { UseAnalyticsModuleResult, UseStateResult, p1.deleteItem }),
+							text = UseLocalizationResult.deleteCTA
 						}
 					}
 				}
 			},
-			middleContent = function()
-				-- upvalues: reactModule (copy), checkbox (copy), var5 (ref), var8 (ref), var9 (ref)
-				return reactModule.createElement(checkbox, {
+			middleContent = function() --[[ Line: 118 ]]
+				-- upvalues: ReactModule (upval), Checkbox (upval), UseLocalizationResult (copy), UseStateResult (copy), UseStateResult2 (copy)
+				return ReactModule.createElement(Checkbox, {
 					isDisabled = false,
-					label = var5.optOutText,
-					isChecked = var8,
-					onActivated = function()
-						-- upvalues: var9 (copy), var8 (copy)
-						var9(not var8)
+					label = UseLocalizationResult.optOutText,
+					isChecked = UseStateResult,
+					onActivated = function() --[[ Line: 123 ]]
+						-- upvalues: UseStateResult2 (upval), UseStateResult (upval)
+						UseStateResult2(not UseStateResult)
 					end
 				})
 			end,
 			position = UDim2.fromScale(0.5, 0.5),
-			screenSize = var1,
-			title = if #var7 > 1 then var5.alertTitlePlural else var5.alertTitle
+			screenSize = UseScreenSizeResult,
+			title = if #UseSelectorResult1 > 1 then UseLocalizationResult.alertTitlePlural else UseLocalizationResult.alertTitle
 		})
 	})
 end

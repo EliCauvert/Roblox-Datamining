@@ -1,51 +1,51 @@
-﻿local var1 = script:FindFirstAncestor("ultimate-list")
-local _ = require(var1.Dimensions)
-local dimensionsMethodsModule = require(var1.Dimensions.DimensionsMethods)
-local reactModule = require(var1.Parent.React)
-local _ = require(var1.Renderers)
-local adjustPositionToScrollAxisModule = require(var1.Dimensions.adjustPositionToScrollAxis)
-local _ = require(var1.createVirtualizedListController)
-local joinAndMapBindingsModule = require(var1.Util.joinAndMapBindings)
-local createElement = reactModule.createElement
+﻿local UltimateList = script:FindFirstAncestor("ultimate-list")
+local _ = require(UltimateList.Dimensions)
+local DimensionsMethodsModule = require(UltimateList.Dimensions.DimensionsMethods)
+local ReactModule = require(UltimateList.Parent.React)
+local _ = require(UltimateList.Renderers)
+local AdjustPositionToScrollAxisModule = require(UltimateList.Dimensions.adjustPositionToScrollAxis)
+local _ = require(UltimateList.createVirtualizedListController)
+local JoinAndMapBindingsModule = require(UltimateList.Util.joinAndMapBindings)
+local CreateElementFunction = ReactModule.createElement
 
-local function getKeyDefault(_, p1)
-	return tostring(p1)
+local function getKeyDefault(_, p1): string --[[ Line: 13 ]]
+	return (tostring(p1))
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), getKeyDefault (ref), dimensionsMethodsModule (ref), createElement (ref), joinAndMapBindingsModule (ref), adjustPositionToScrollAxisModule (ref)
-	local var2, var3 = reactModule.useState(p1.virtualizedListController.get)
-	local var4, var5 = reactModule.useBinding(nil)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var3 (ref), var5 (ref)
-		local var6 = p1.virtualizedListController.get()
-		var3(var6)
+return function(p1) --[[ Line: 23 | Named "ReactStateRenderer" ]]
+	-- upvalues: ReactModule (copy), getKeyDefault (copy), DimensionsMethodsModule (copy), CreateElementFunction (copy), JoinAndMapBindingsModule (copy), AdjustPositionToScrollAxisModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(p1.virtualizedListController.get)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(nil)
+	ReactModule.useEffect(function() --[[ Line: 39 ]]
+		-- upvalues: p1 (copy), UseStateResult2 (copy), UseBindingResult2 (copy)
+		local GetResult = p1.virtualizedListController.get()
+		UseStateResult2(GetResult)
 		
-		return p1.virtualizedListController.bindToUpdate(function()
-			-- upvalues: var5 (copy), var6 (write), p1 (copy), var3 (copy)
-			var5({
-				lockedTo = var6,
+		return p1.virtualizedListController.bindToUpdate(function() --[[ Line: 43 ]]
+			-- upvalues: UseBindingResult2 (upval), GetResult (ref), p1 (upval), UseStateResult2 (upval)
+			UseBindingResult2({
+				lockedTo = GetResult,
 				scrollAxis = p1.scrollAxisBinding:getValue()
 			})
-			var6 = p1.virtualizedListController.get()
-			var3(var6)
+			GetResult = p1.virtualizedListController.get()
+			UseStateResult2(GetResult)
 		end)
 	end, { p1.virtualizedListController, p1.scrollAxisBinding })
-	local t = {}
-	local getKey = p1.getKey or getKeyDefault
-	local range = p1.virtualizedListController.getRange()
+	local Frames = {}
+	local GetKey = p1.getKey or getKeyDefault
+	local Range = p1.virtualizedListController.getRange()
 	
-	for i, v in var2 do
-		local var6 = range.X + (i - 1)
-		local uDimRect = dimensionsMethodsModule.getUDimRect(p1.dimensions, v, var6, p1.virtualizedListController.getWindowSize(), p1.direction)
-		t[getKey(v, var6)] = createElement("Frame", {
+	for i, value in UseStateResult do
+		local NewX = Range.X + (i - 1)
+		local UDimRect = DimensionsMethodsModule.getUDimRect(p1.dimensions, value, NewX, p1.virtualizedListController.getWindowSize(), p1.direction)
+		Frames[GetKey(value, NewX)] = CreateElementFunction("Frame", {
 			BackgroundTransparency = 1,
-			Position = joinAndMapBindingsModule(function(p2, p3)
-				-- upvalues: p1 (ref), var2 (ref), adjustPositionToScrollAxisModule (copy), uDimRect (ref)
-				return if p1.config.freezeViewWhileScrolling == false or p3 == nil or p3.lockedTo ~= var2 then adjustPositionToScrollAxisModule(uDimRect.position, p2, p1.direction) else adjustPositionToScrollAxisModule(uDimRect.position, p3.scrollAxis, p1.direction)
-			end, p1.scrollAxisBinding, var4),
-			Size = uDimRect.size
-		}, p1.callback(v))
+			Position = JoinAndMapBindingsModule(function(p2, p3) --[[ Line: 71 ]]
+				-- upvalues: p1 (copy), UseStateResult (copy), AdjustPositionToScrollAxisModule (upval), UDimRect (copy)
+				return if p1.config.freezeViewWhileScrolling == false or p3 == nil or p3.lockedTo ~= UseStateResult then AdjustPositionToScrollAxisModule(UDimRect.position, p2, p1.direction) else AdjustPositionToScrollAxisModule(UDimRect.position, p3.scrollAxis, p1.direction)
+			end, p1.scrollAxisBinding, UseBindingResult),
+			Size = UDimRect.size
+		}, p1.callback(value))
 	end
-	return createElement(reactModule.Fragment, nil, t)
+	return CreateElementFunction(ReactModule.Fragment, nil, Frames)
 end

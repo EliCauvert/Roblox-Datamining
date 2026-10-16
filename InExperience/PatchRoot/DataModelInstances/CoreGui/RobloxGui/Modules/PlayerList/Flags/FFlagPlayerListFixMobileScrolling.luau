@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("PlayerListFixMobileScrolling", false)
+﻿return (game:DefineFastFlag("PlayerListFixMobileScrolling", false))

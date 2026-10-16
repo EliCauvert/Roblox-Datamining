@@ -1,197 +1,167 @@
-﻿local shareSheet = script:FindFirstAncestor("ShareSheet")
-local parent = shareSheet.Parent
-local appChatModule = require(parent.AppChat)
-local reactModule = require(parent.React)
-local _ = require(parent.AppChat.GetExternalChatMessageSenderStore)
-local fFlagShareSheetHoldRecipientsWhileSendingModule = require(shareSheet.Flags.FFlagShareSheetHoldRecipientsWhileSending)
-local fFlagShareSheetLocalizeStringsModule = require(shareSheet.Flags.FFlagShareSheetLocalizeStrings)
-local fFlagShareSheetMessageSendTelemetryModule = require(shareSheet.Flags.FFlagShareSheetMessageSendTelemetry)
-local _ = require(parent.InExperienceLocales)
-local localizationRoactContext = require(parent.Localization).LocalizationRoactContext
-local shareSheetTelemetryModule = require(shareSheet.telemetry.ShareSheetTelemetry)
-local useConversationList = appChatModule.Hooks.useConversationList
+﻿local ShareSheet = script:FindFirstAncestor("ShareSheet")
+local Parent = ShareSheet.Parent
+local ReactModule = require(Parent.React)
+local _ = require(Parent.AppChat.GetExternalChatMessageSenderStore)
+local _ = require(Parent.InExperienceLocales)
+local LocalizationRoactContext = require(Parent.Localization).LocalizationRoactContext
+local FFlagShareSheetFriendsSort = require(Parent.SharedFlags).FFlagShareSheetFriendsSort
+local _ = require(ShareSheet.Recipients.RecipientSource)
+local ShareSheetTelemetryModule = require(ShareSheet.telemetry.ShareSheetTelemetry)
+local UseConversationListModule = require(Parent.AppChat.useConversationList)
 
-local function _(p1)
-	local titleForViewer = p1.titleForViewer
+local function _(p1) --[[ Line: 61 | Named "getConversationDisplayName" ]]
+	local TitleForViewer = p1.titleForViewer
 	
-	return if titleForViewer and titleForViewer ~= "" then titleForViewer else p1.title or ""
+	return if TitleForViewer and TitleForViewer ~= "" then TitleForViewer else p1.title or ""
 end
 
-local _ = function(vectorA, vectorB)
-	local var1 = vectorB - 1
-	
-	return if var1 <= 0 then vectorA elseif var1 == 1 then `{vectorA} + 1 other` else `{vectorA} + {var1} others`
-end
-
-local function formatLocalizedSnackbarTitle(p1, p2, p3, p4, p5)
-	if not p2 then
-		return p1:Format(if p3 == 1 then "Feature.UniversalShareSheet.Response.NotSharedMessage" else "Feature.UniversalShareSheet.Response.NotSharedMultipleMessages")
-	elseif p5 == nil then
-		return p1:Format(if p3 == 1 then "Feature.UniversalShareSheet.Response.SharedMessage" else "Feature.UniversalShareSheet.Response.SharedMultipleMessages")
+local function formatLocalizedSnackbarTitle(UseContextResult, p1, Count, p2, Callback) --[[ Line: 66 ]]
+	if not p1 then
+		return UseContextResult:Format(if Count == 1 then "Feature.UniversalShareSheet.Response.NotSharedMessage" else "Feature.UniversalShareSheet.Response.NotSharedMultipleMessages")
+	elseif Callback == nil then
+		return UseContextResult:Format(if Count == 1 then "Feature.UniversalShareSheet.Response.SharedMessage" else "Feature.UniversalShareSheet.Response.SharedMultipleMessages")
+	else
+		local CallbackResult = Callback(p2)
+		local v1 = #p2 - 1
+		
+		return if v1 <= 0 then CallbackResult else UseContextResult:Format(if v1 == 1 then "Feature.UniversalShareSheet.Response.SharedCustomMessage" else "Feature.UniversalShareSheet.SharedCustomMultipleMessages", { CUSTOM_MESSAGE = CallbackResult, N = v1 })
 	end
-	local var1 = p5(p4)
-	local var2 = #p4 - 1
-	
-	return if var2 <= 0 then var1 else p1:Format(if var2 == 1 then "Feature.UniversalShareSheet.Response.SharedCustomMessage" else "Feature.UniversalShareSheet.SharedCustomMultipleMessages", { CUSTOM_MESSAGE = var1, N = var2 })
 end
 
-return function(p1)
-	-- upvalues: fFlagShareSheetHoldRecipientsWhileSendingModule (ref), useConversationList (ref), reactModule (ref), fFlagShareSheetLocalizeStringsModule (ref), localizationRoactContext (ref), shareSheetTelemetryModule (ref), fFlagShareSheetMessageSendTelemetryModule (ref), formatLocalizedSnackbarTitle (ref)
-	local var1 = if fFlagShareSheetHoldRecipientsWhileSendingModule then useConversationList(p1.chatShare ~= nil).items else p1.conversations
-	local var2, var3 = reactModule.useState(false)
-	local var4 = reactModule.useRef(false)
-	local var5 = if fFlagShareSheetLocalizeStringsModule then reactModule.useContext(localizationRoactContext) else nil
+return function(p1) --[[ Line: 89 | Named "useShareSheetSend" ]]
+	-- upvalues: UseConversationListModule (copy), ReactModule (copy), LocalizationRoactContext (copy), ShareSheetTelemetryModule (copy), FFlagShareSheetFriendsSort (copy), formatLocalizedSnackbarTitle (copy)
+	local Items = UseConversationListModule(p1.chatShare ~= nil).items
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseRefResult = ReactModule.useRef(false)
+	local UseContextResult = ReactModule.useContext(LocalizationRoactContext)
 	
 	return {
-		isSending = var2,
-		onSendActivated = reactModule.useCallback(function(p2)
-			-- upvalues: var4 (ref), shareSheetTelemetryModule (copy), p1 (ref), var1 (ref), fFlagShareSheetHoldRecipientsWhileSendingModule (copy), var3 (ref), fFlagShareSheetMessageSendTelemetryModule (copy), fFlagShareSheetLocalizeStringsModule (copy), var5 (ref), formatLocalizedSnackbarTitle (copy)
-			if var4.current then return end
-			local var6 = string.find(p2, "%S") ~= nil
+		isSending = UseStateResult,
+		onSendActivated = ReactModule.useCallback(function(Text: string) --[[ Line: 96 ]]
+			-- upvalues: UseRefResult (copy), ShareSheetTelemetryModule (upval), p1 (copy), FFlagShareSheetFriendsSort (upval), Items (copy), UseStateResult2 (copy), UseContextResult (copy), formatLocalizedSnackbarTitle (upval)
+			if UseRefResult.current then return end
+			local HasFoundAt = string.find(Text, "%S") ~= nil
 			
-			if var6 then
-				shareSheetTelemetryModule.logInteraction({
+			if HasFoundAt then
+				ShareSheetTelemetryModule.logInteraction({
 					context = p1.context,
+					recipientSource = if FFlagShareSheetFriendsSort then p1.recipientSource else nil,
 					telemetryId = p1.telemetryId or "",
-					interactionType = shareSheetTelemetryModule.InteractionType.CustomMessageSubmitted
+					interactionType = ShareSheetTelemetryModule.InteractionType.CustomMessageSubmitted
 				})
 			end
-			local t = {}
+			local List = {}
 			
 			if p1.chatShare ~= nil then
-				for i, v in var1 do
-					if p1.selectedConversationIds[v.id] and p1.chatShare.canSendToConversation(v) then
-						table.insert(t, v)
+				for _, item in Items do
+					if p1.selectedConversationIds[item.id] and p1.chatShare.canSendToConversation(item) then
+						table.insert(List, item)
 					end
 				end
 			end
-			if not fFlagShareSheetHoldRecipientsWhileSendingModule then
-				p1.onSendActivated()
-			end
-			local chatShare = p1.chatShare
+			local ChatShare = p1.chatShare
 			
-			if chatShare == nil or #t == 0 then
-				if fFlagShareSheetHoldRecipientsWhileSendingModule then
-					p1.onSendActivated()
-				end
+			if ChatShare == nil or #List == 0 then
+				p1.onSendActivated()
+				
 				return
-			else
-				var4.current = true
-				var3(true)
-				local var7 = false
-				local var8 = false
-				local var9 = false
-				local t_1 = {}
-				local var10 = if p2 == "" then p1.url else `{p1.url} {p2}`
-				
-				local function finishSending()
-					-- upvalues: var4 (copy), var3 (copy), var8 (write), var9 (write), p1 (copy), chatShare (ref), t (ref), t_1 (ref), fFlagShareSheetMessageSendTelemetryModule (copy), shareSheetTelemetryModule (copy), fFlagShareSheetLocalizeStringsModule (copy), var5 (copy), formatLocalizedSnackbarTitle (copy), fFlagShareSheetHoldRecipientsWhileSendingModule (copy)
-					var4.current = false
-					var3(false)
-					
-					if not var8 and not var9 then return end
-					if p1.onShareSendResultSnackbar then
-						local var11
-						local navigateToChat = chatShare.navigateToChat
-						local var12 = if #t == 1 and #t_1 == 1 then t_1[1].conversationId else nil
-						local onShareSendResultSnackbar = p1.onShareSendResultSnackbar
-						local t_2 = {
-							action = if var9 and navigateToChat then {
-								onActivated = function()
-									-- upvalues: fFlagShareSheetMessageSendTelemetryModule (copy), shareSheetTelemetryModule (copy), p1 (copy), t (copy), var12 (ref), navigateToChat (ref)
-									if fFlagShareSheetMessageSendTelemetryModule then
-										shareSheetTelemetryModule.logInteraction({
-											context = p1.context,
-											telemetryId = p1.telemetryId or "",
-											interactionType = shareSheetTelemetryModule.InteractionType.ViewMessage,
-											requestedConversationId = if #t == 1 then t[1].id else nil,
-											resolvedConversationId = var12,
-											viewDestination = if var12 then shareSheetTelemetryModule.ViewDestination.Conversation else shareSheetTelemetryModule.ViewDestination.ChatLanding
-										})
-									end
-									navigateToChat(var12)
-								end,
-								text = if fFlagShareSheetLocalizeStringsModule then var5:Format("CommonUI.Messages.Action.View") else "View"
-							} else nil
-						}
-						
-						if fFlagShareSheetLocalizeStringsModule then
-							var11 = formatLocalizedSnackbarTitle(var5, var9, #t, t_1, p1.formatSuccessSnackbarText)
-						elseif not var9 then
-							var11 = if #t == 1 then "Message can't be sent" else "Messages can't be sent"
-						elseif p1.formatSuccessSnackbarText then
-							local var13 = p1.formatSuccessSnackbarText(t_1)
-							local var14 = #t_1 - 1
-							var11 = if var14 <= 0 then var13 elseif var14 == 1 then `{var13} + 1 other` else `{var13} + {var14} others`
-						else
-							var11 = if #t == 1 then "Message was sent" else "Messages were sent"
-						end
-						t_2.title = var11
-						onShareSendResultSnackbar(t_2)
-					end
-					if var9 then
-						if fFlagShareSheetHoldRecipientsWhileSendingModule then
-							p1.onSendActivated()
-						end
-						p1.onCloseWithReason(shareSheetTelemetryModule.CloseReason.SendSuccess)
-					end
-				end
-				
-				local function send(p3)
-					-- upvalues: fFlagShareSheetMessageSendTelemetryModule (copy), shareSheetTelemetryModule (copy), p1 (copy), var6 (ref), chatShare (ref), var10 (ref), var9 (write), t_1 (ref), var8 (write), var7 (write)
-					local var11 = if fFlagShareSheetMessageSendTelemetryModule then shareSheetTelemetryModule.startMessageSendResult({
-						context = p1.context,
-						telemetryId = p1.telemetryId or "",
-						requestedConversationId = p3.id,
-						hasCustomMessage = var6
-					}) else nil
-					
-					return chatShare.sendToConversation(p3, var10):catch(function()
-						return { status = "failure" }
-					end):andThen(function(p4)
-						-- upvalues: fFlagShareSheetMessageSendTelemetryModule (copy), var11 (ref), var9 (copy), t_1 (copy), p3 (ref), var8 (copy), var7 (copy)
-						if fFlagShareSheetMessageSendTelemetryModule then
-							var11(p4)
-						end
-						if p4.status == "success" and p4.conversationId then
-							var9 = true
-							local var12 = t_1
-							local t = { conversationId = p4.conversationId }
-							local var13 = p3
-							local titleForViewer = var13.titleForViewer
-							t.displayName = if titleForViewer and titleForViewer ~= "" then titleForViewer else var13.title or ""
-							table.insert(var12, t)
-							
-							return
-						elseif p4.status == "failure" then
-							var8 = true
-							
-							return
-						elseif p4.status == "declined" then
-							var7 = true
-						end
-					end)
-				end
-				
-				local var11 = send(t[1])
-				
-				for i = 2, #t do
-					local var12 = t[i]
-					var11 = var11:andThen(function()
-						-- upvalues: var7 (write), send (ref), var12 (ref)
-						if var7 then
-							return
-						end
-						return send(var12)
-					end)
-				end
-				var11:andThen(finishSending)
 			end
+			UseRefResult.current = true
+			UseStateResult2(true)
+			local Flag = false
+			local Flag1 = false
+			local Flag2 = false
+			local List1 = {}
+			local Url = if Text == "" then p1.url else `{p1.url} {Text}`
+			
+			local function finishSending() --[[ Line: 136 ]]
+				-- upvalues: UseRefResult (upval), UseStateResult2 (upval), Flag1 (ref), Flag2 (ref), p1 (upval), ChatShare (copy), List (copy), List1 (copy), ShareSheetTelemetryModule (upval), FFlagShareSheetFriendsSort (upval), UseContextResult (upval), formatLocalizedSnackbarTitle (upval)
+				UseRefResult.current = false
+				UseStateResult2(false)
+				
+				if not Flag1 and not Flag2 then return end
+				if p1.onShareSendResultSnackbar then
+					local NavigateToChatFunction = ChatShare.navigateToChat
+					local ConversationId = if #List == 1 and #List1 == 1 then List1[1].conversationId else nil
+					p1.onShareSendResultSnackbar({
+						action = if Flag2 and NavigateToChatFunction then {
+							onActivated = function() --[[ Line: 152 ]]
+								-- upvalues: ShareSheetTelemetryModule (upval), p1 (upval), FFlagShareSheetFriendsSort (upval), List (upval), ConversationId (copy), NavigateToChatFunction (copy)
+								ShareSheetTelemetryModule.logInteraction({
+									context = p1.context,
+									recipientSource = if FFlagShareSheetFriendsSort then p1.recipientSource else nil,
+									telemetryId = p1.telemetryId or "",
+									interactionType = ShareSheetTelemetryModule.InteractionType.ViewMessage,
+									requestedConversationId = if #List == 1 then List[1].id else nil,
+									resolvedConversationId = ConversationId,
+									viewDestination = if ConversationId then ShareSheetTelemetryModule.ViewDestination.Conversation else ShareSheetTelemetryModule.ViewDestination.ChatLanding
+								})
+								NavigateToChatFunction(ConversationId)
+							end,
+							text = UseContextResult:Format("CommonUI.Messages.Action.View")
+						} else nil,
+						title = formatLocalizedSnackbarTitle(UseContextResult, Flag2, #List, List1, p1.formatSuccessSnackbarText)
+					})
+				end
+				if Flag2 then
+					p1.onSendActivated()
+					p1.onCloseWithReason(ShareSheetTelemetryModule.CloseReason.SendSuccess)
+				end
+			end
+			
+			local function send(p2) --[[ Line: 188 ]]
+				-- upvalues: ShareSheetTelemetryModule (upval), p1 (upval), FFlagShareSheetFriendsSort (upval), HasFoundAt (copy), ChatShare (copy), Url (copy), Flag2 (ref), List1 (copy), Flag1 (ref), Flag (ref)
+				local StartMessageSendResultResult = ShareSheetTelemetryModule.startMessageSendResult({
+					context = p1.context,
+					recipientSource = if FFlagShareSheetFriendsSort then p1.recipientSource else nil,
+					telemetryId = p1.telemetryId or "",
+					requestedConversationId = p2.id,
+					hasCustomMessage = HasFoundAt
+				})
+				
+				return ChatShare.sendToConversation(p2, Url):catch(function() --[[ Line: 198 ]]
+					return { status = "failure" }
+				end):andThen(function(Result) --[[ Line: 203 ]]
+					-- upvalues: StartMessageSendResultResult (copy), Flag2 (upval), List1 (upval), p2 (copy), Flag1 (upval), Flag (upval)
+					StartMessageSendResultResult(Result)
+					
+					if Result.status == "success" and Result.conversationId then
+						Flag2 = true
+						local TitleForViewer = p2.titleForViewer
+						table.insert(List1, {
+							conversationId = Result.conversationId,
+							displayName = if TitleForViewer and TitleForViewer ~= "" then TitleForViewer else p2.title or ""
+						})
+						
+						return
+					end
+					if Result.status == "failure" then
+						Flag1 = true
+						
+						return
+					end
+					if Result.status == "declined" then
+						Flag = true
+					end
+				end)
+			end
+			
+			local SendResult = send(List[1])
+			
+			for i = 2, #List do
+				local Entry = List[i]
+				SendResult = SendResult:andThen(function() --[[ Line: 222 ]]
+					-- upvalues: Flag (ref), send (copy), Entry (copy)
+					if Flag then return end
+					return send(Entry)
+				end)
+			end
+			SendResult:andThen(finishSending)
 		end, {
-			p1.chatShare, p1.context, var1, p1.formatSuccessSnackbarText,
+			p1.chatShare, p1.context, Items, p1.formatSuccessSnackbarText,
 			p1.onCloseWithReason, p1.onSendActivated, p1.onShareSendResultSnackbar,
-			p1.selectedConversationIds, p1.telemetryId, p1.url,
-			if fFlagShareSheetLocalizeStringsModule then var5 else nil
+			p1.recipientSource, p1.selectedConversationIds, p1.telemetryId, p1.url,
+			UseContextResult
 		})
 	}
 end

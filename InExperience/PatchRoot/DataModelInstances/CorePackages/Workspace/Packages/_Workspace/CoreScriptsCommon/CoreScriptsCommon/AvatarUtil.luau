@@ -1,117 +1,118 @@
-﻿local playersService = game:GetService("Players")
-local t = {}
-t.__index = t
+﻿local Players = game:GetService("Players")
+local Module = {}
+Module.__index = Module
 
-function t.new(p1)
-	-- upvalues: t (ref)
-	local tbl = setmetatable({}, t)
-	tbl.player = p1
-	tbl.characterChangedEvent = Instance.new("BindableEvent")
-	tbl.eventQueued = false
-	tbl.connections = {}
-	tbl.connections.characterAddedConnection = p1.CharacterAdded:Connect(function(p2)
-		-- upvalues: tbl (ref)
-		tbl:onCharacterChanged(p2)
+function Module.new(Player: Player) --[[ Line: 17 ]]
+	-- upvalues: Module (copy)
+	local self = setmetatable({}, Module)
+	self.player = Player
+	self.characterChangedEvent = Instance.new("BindableEvent")
+	self.eventQueued = false
+	self.connections = {}
+	self.connections.characterAddedConnection = Player.CharacterAdded:Connect(function(Character) --[[ Line: 30 ]]
+		-- upvalues: self (copy)
+		self:onCharacterChanged(Character)
 	end)
-	tbl.connections.characterAppearanceChangedConnection = p1.CharacterAppearanceLoaded:Connect(function(p2)
-		-- upvalues: tbl (ref)
-		tbl:onCharacterChanged(p2)
+	self.connections.characterAppearanceChangedConnection = Player.CharacterAppearanceLoaded:Connect(function(Character) --[[ Line: 35 ]]
+		-- upvalues: self (copy)
+		self:onCharacterChanged(Character)
 	end)
 	
-	if tbl.player.Character then
-		tbl:onCharacterChanged(tbl.player.Character)
+	if self.player.Character then
+		self:onCharacterChanged(self.player.Character)
 	end
-	return tbl
+	return self
 end
 
-function t:removeConnection(p1)
+function Module:removeConnection(p1) --[[ Line: 47 ]]
 	if self.connections[p1] then
 		self.connections[p1]:Disconnect()
 		self.connections[p1] = nil
 	end
 end
 
-function t:onCharacterChanged(p1)
+function Module:onCharacterChanged(Character) --[[ Line: 54 ]]
 	self:removeConnection("descendantAddedConnection")
-	self.connections.descendantAddedConnection = p1.DescendantAdded:Connect(function(p2)
-		-- upvalues: self (ref)
-		self:onDescendantAdded(p2)
+	self.connections.descendantAddedConnection = Character.DescendantAdded:Connect(function(Descendant) --[[ Line: 57 ]]
+		-- upvalues: self (copy)
+		self:onDescendantAdded(Descendant)
 	end)
 	self:removeConnection("descendantRemovedConnection")
-	self.connections.descendantRemovedConnection = p1.DescendantRemoving:Connect(function(p2)
-		-- upvalues: self (ref)
-		self:onDescendantRemoving(p2)
+	self.connections.descendantRemovedConnection = Character.DescendantRemoving:Connect(function(Descendant) --[[ Line: 62 ]]
+		-- upvalues: self (copy)
+		self:onDescendantRemoving(Descendant)
 	end)
 	
-	for i, v in pairs(p1:GetDescendants()) do
-		self:onDescendantAdded(v)
+	for _, descendant in pairs(Character:GetDescendants()) do
+		self:onDescendantAdded(descendant)
 	end
 	self:fireCharacterChanged()
 end
 
-function t:onDescendantAdded(p2)
-	if p2:IsA("NumberValue") then
-		local text = p2.Name .. "Connection"
-		self:removeConnection(text)
-		self.connections[text] = p2.Changed:Connect(function()
-			-- upvalues: self (ref)
+function Module:onDescendantAdded(NumberValue) --[[ Line: 75 ]]
+	if NumberValue:IsA("NumberValue") then
+		local Text = NumberValue.Name .. "Connection"
+		self:removeConnection(Text)
+		self.connections[Text] = NumberValue.Changed:Connect(function() --[[ Line: 80 ]]
+			-- upvalues: self (copy)
 			self:fireCharacterChanged()
 		end)
 	end
 	self:fireCharacterChanged()
 end
 
-function t:onDescendantRemoving(p2)
-	if p2:IsA("NumberValue") then
-		self:removeConnection(p2.Name .. "Connection")
+function Module:onDescendantRemoving(NumberValue) --[[ Line: 89 ]]
+	if NumberValue:IsA("NumberValue") then
+		self:removeConnection(NumberValue.Name .. "Connection")
 	end
 	self:fireCharacterChanged()
 end
 
-function t:fireCharacterChanged()
-	if self.eventQueued then
+function Module:fireCharacterChanged() --[[ Line: 100 ]]
+	if not self.eventQueued then
+		self.eventQueued = true
+		task.delay(0.1, function() --[[ Line: 107 ]]
+			-- upvalues: self (copy)
+			self.eventQueued = false
+			local Character = self.player.Character
+			
+			if Character then
+				self.characterChangedEvent:Fire(Character)
+			end
+		end)
+		
 		return
 	end
-	self.eventQueued = true
-	task.delay(0.1, function()
-		-- upvalues: self (ref)
-		self.eventQueued = false
-		local character = self.player.Character
-		
-		if character then
-			self.characterChangedEvent:Fire(character)
-		end
-	end)
 end
 
-local t_1 = {}
-t_1.__index = t_1
+local AvatarUtil = {}
+AvatarUtil.__index = AvatarUtil
 
-function t_1.new()
-	-- upvalues: t_1 (ref)
-	local tbl = setmetatable({}, t_1)
-	tbl.playerConnections = {}
+function AvatarUtil.new() --[[ Line: 122 ]]
+	-- upvalues: AvatarUtil (copy)
+	local self = setmetatable({}, AvatarUtil)
+	self.playerConnections = {}
 	
-	return tbl
+	return self
 end
 
-function t_1:connectLocalCharacterChanges(p2)
-	-- upvalues: playersService (ref)
-	local localPlayer = playersService.LocalPlayer
-	while not localPlayer do
-		playersService.Changed:Wait()
-		localPlayer = playersService.LocalPlayer
+function AvatarUtil:connectLocalCharacterChanges(Callback) --[[ Line: 133 ]]
+	-- upvalues: Players (copy)
+	local LocalPlayer = Players.LocalPlayer
+	while not LocalPlayer do
+		Players.Changed:Wait()
+		LocalPlayer = Players.LocalPlayer
 	end
-	self:connectPlayerCharacterChanges(localPlayer, p2)
+	self:connectPlayerCharacterChanges(LocalPlayer, Callback)
 end
 
-function t_1:connectPlayerCharacterChanges(p3, p4)
-	-- upvalues: t (ref)
-	if not self.playerConnections[p3] then
-		self.playerConnections[p3] = t.new(p3)
+function AvatarUtil:connectPlayerCharacterChanges(LocalPlayer, Callback) --[[ Line: 148 ]]
+	-- upvalues: Module (copy)
+	if not self.playerConnections[LocalPlayer] then
+		self.playerConnections[LocalPlayer] = Module.new(LocalPlayer)
 	end
-	self.playerConnections[p3].characterChangedEvent.Event:Connect(p4)
-	self.playerConnections[p3]:fireCharacterChanged()
+	self.playerConnections[LocalPlayer].characterChangedEvent.Event:Connect(Callback)
+	self.playerConnections[LocalPlayer]:fireCharacterChanged()
 end
 
-return t_1
+return AvatarUtil

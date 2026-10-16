@@ -1,20 +1,20 @@
-﻿local reactModule = require(script.Parent.Parent.React)
+﻿local ReactModule = require(script.Parent.Parent.React)
 local _ = require(script.Parent.Message)
-local var1 = reactModule.createContext(nil)
+local Context = ReactModule.createContext(nil)
 
 return {
-	Context = var1,
-	Provider = function(p1)
-		-- upvalues: reactModule (ref), var1 (ref)
-		return reactModule.createElement(var1.Provider, {
-			value = reactModule.useMemo(function()
-				-- upvalues: p1 (ref)
+	Context = Context,
+	Provider = function(p1) --[[ Line: 19 ]]
+		-- upvalues: ReactModule (copy), Context (copy)
+		return ReactModule.createElement(Context.Provider, {
+			value = ReactModule.useMemo(function() --[[ Line: 21 ]]
+				-- upvalues: p1 (copy)
 				return { write = p1.upsertMessage, remove = p1.removeMessage }
 			end, { p1.upsertMessage, p1.removeMessage })
 		}, p1.children)
 	end,
-	useMessageWriter = function()
-		-- upvalues: reactModule (ref), var1 (ref)
-		return reactModule.useContext(var1)
+	useMessageWriter = function() --[[ Line: 31 ]]
+		-- upvalues: ReactModule (copy), Context (copy)
+		return ReactModule.useContext(Context)
 	end
 }

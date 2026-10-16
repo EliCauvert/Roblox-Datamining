@@ -1,55 +1,55 @@
-﻿local parent = script:FindFirstAncestor("SduiSharedContent").Parent
-local reactModule = require(parent.React)
-local _ = require(parent.AppCommonLib)
-local screenSizeImpressionsTracker = require(parent.Impressions).ScreenSizeImpressionsTracker
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local findAnalyticsField = sduiCoreSystemModule.findAnalyticsField
-local sduiBuilder = sduiCoreSystemModule.SduiBuilder
-local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
-local sendSduiFeedImpressions = require(parent.UnifiedLogging).sendSduiFeedImpressions
+﻿local Parent = script:FindFirstAncestor("SduiSharedContent").Parent
+local ReactModule = require(Parent.React)
+local _ = require(Parent.AppCommonLib)
+local ScreenSizeImpressionsTracker = require(Parent.Impressions).ScreenSizeImpressionsTracker
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local FindAnalyticsFieldFunction = SduiCoreSystemModule.findAnalyticsField
+local SduiBuilder = SduiCoreSystemModule.SduiBuilder
+local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
+local SendSduiFeedImpressionsFunction = require(Parent.UnifiedLogging).sendSduiFeedImpressions
 
-return function(p1)
-	-- upvalues: reactModule (ref), sduiErrorType (ref), findAnalyticsField (ref), sduiBuilder (ref), sendSduiFeedImpressions (ref), screenSizeImpressionsTracker (ref)
-	local var1 = reactModule.useRef(p1.feedItems)
-	var1.current = p1.feedItems
-	local sduiContext = p1.sduiContext
+return function(p1) --[[ Line: 29 | Named "SduiFeedImpressionsDetector" ]]
+	-- upvalues: ReactModule (copy), SduiErrorType (copy), FindAnalyticsFieldFunction (copy), SduiBuilder (copy), SendSduiFeedImpressionsFunction (copy), ScreenSizeImpressionsTracker (copy)
+	local UseRefResult = ReactModule.useRef(p1.feedItems)
+	UseRefResult.current = p1.feedItems
+	local SduiContext = p1.sduiContext
 	
-	return reactModule.createElement(screenSizeImpressionsTracker, {
-		pageContext = sduiContext.routeName or sduiContext.appPage,
+	return ReactModule.createElement(ScreenSizeImpressionsTracker, {
+		pageContext = SduiContext.routeName or SduiContext.appPage,
 		parentRef = p1.parentRef,
 		impressionsTag = p1.impressionsTag,
 		scrollViewPositionChangedSignal = p1.scrollViewPositionChangedSignal,
-		sendImpressions = reactModule.useCallback(function(p2)
-			-- upvalues: var1 (ref), sduiContext (ref), sduiErrorType (copy), findAnalyticsField (copy), sduiBuilder (copy), sendSduiFeedImpressions (copy)
-			if not p2 or #p2 == 0 then return end
-			local current = var1.current
-			local t = {}
-			local t_1 = {}
-			local t_2 = {}
+		sendImpressions = ReactModule.useCallback(function(List) --[[ Line: 37 ]]
+			-- upvalues: UseRefResult (copy), SduiContext (copy), SduiErrorType (upval), FindAnalyticsFieldFunction (upval), SduiBuilder (upval), SendSduiFeedImpressionsFunction (upval)
+			if not List or #List == 0 then return end
+			local Current = UseRefResult.current
+			local List1 = {}
+			local List2 = {}
+			local List3 = {}
 			
-			for i, v in p2 do
-				if v > 0 then
-					local var2 = current and current[v]
+			for _, value in List do
+				if value > 0 then
+					local CurrentEntry = Current and Current[value]
 					
-					if var2 == nil then
-						sduiContext.dependencies.logger.reportError(sduiErrorType.FailedToLogFeedImpressions, {
+					if CurrentEntry == nil then
+						SduiContext.dependencies.logger.reportError(SduiErrorType.FailedToLogFeedImpressions, {
 							name = "SduiFeedImpressionsDetector",
-							message = `feed item index {v} detected with no matching componentConfig`
-						}, sduiContext.appPage)
+							message = `feed item index {value} detected with no matching componentConfig`
+						}, SduiContext.appPage)
 					else
-						local componentType = findAnalyticsField("componentType", var2.analyticsData) or (sduiBuilder.getComponentType(var2, sduiContext) or "unknown")
-						local var3 = findAnalyticsField("collectionId", var2.analyticsData)
-						local var4 = if var3 ~= nil then "" else tostring(var3)
-						table.insert(t, v)
-						table.insert(t_1, var4)
-						table.insert(t_2, tostring(componentType))
+						local ComponentType = FindAnalyticsFieldFunction("componentType", CurrentEntry.analyticsData) or (SduiBuilder.getComponentType(CurrentEntry, SduiContext) or "unknown")
+						local CollectionId = FindAnalyticsFieldFunction("collectionId", CurrentEntry.analyticsData)
+						local Text: string = if CollectionId == nil then "" else tostring(CollectionId)
+						table.insert(List1, value)
+						table.insert(List2, Text)
+						table.insert(List3, (tostring(ComponentType)))
 					end
 				end
 			end
-			if #t > 0 then
-				sendSduiFeedImpressions(t, t_1, t_2, sduiContext.appPage)
+			if #List1 > 0 then
+				SendSduiFeedImpressionsFunction(List1, List2, List3, SduiContext.appPage)
 			end
-		end, { sduiContext }),
-		dataUpdatedTimestamp = sduiContext.dataUpdatedTimestamp
+		end, { SduiContext }),
+		dataUpdatedTimestamp = SduiContext.dataUpdatedTimestamp
 	})
 end

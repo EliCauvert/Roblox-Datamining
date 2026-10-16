@@ -1,3 +1,3 @@
-﻿return require(script.Parent.Parent.Action)("UpdateAveragePing", function(p1)
-	return { AveragePing = p1 }
+﻿return require(script.Parent.Parent.Action)("UpdateAveragePing", function(AveragePing) --[[ Line: 4 ]]
+	return { AveragePing = AveragePing }
 end)

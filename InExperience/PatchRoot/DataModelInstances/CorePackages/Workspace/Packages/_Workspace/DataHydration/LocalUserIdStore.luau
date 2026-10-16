@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.LocalUserIdStore.LocalUserIdStore)
+﻿return (require(script.Parent.Parent.Parent._Index.LocalUserIdStore.LocalUserIdStore))

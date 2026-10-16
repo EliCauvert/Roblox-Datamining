@@ -1,3 +1,6 @@
-﻿return game:DefineFastFlag("AXCatalogBackgroundsSupport", false) and (require(script.Parent.FFlagAXBackgroundsRoot) and pcall(function()
+﻿local FFlagAXBackgroundsRootModule = require(script.Parent.FFlagAXBackgroundsRoot)
+local Success = pcall(function() --[[ Line: 3 ]]
 	return Enum.AvatarAssetType.AvatarBackground
-end))
+end)
+
+return game:DefineFastFlag("AXCatalogBackgroundsSupport", false) and (FFlagAXBackgroundsRootModule and Success)

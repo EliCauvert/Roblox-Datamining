@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CorePackages").Packages.Thumbnailing)
+﻿return (require(game:GetService("CorePackages").Packages.Thumbnailing))

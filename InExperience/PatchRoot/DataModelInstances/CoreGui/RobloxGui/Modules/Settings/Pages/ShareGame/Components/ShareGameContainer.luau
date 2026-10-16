@@ -1,44 +1,44 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local corePackagesService = game:GetService("CorePackages")
-local httpRbxApiService = game:GetService("HttpRbxApiService")
-local playersService = game:GetService("Players")
-local modules = coreGuiService.RobloxGui.Modules
-local shareGame = modules.Settings.Pages.ShareGame
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local httpRequestModule = require(modules.Common.httpRequest)
-local shareGamePageFrameModule = require(shareGame.Components.ShareGamePageFrame)
-local constantsModule = require(shareGame.Constants)
-local fetchUserFriendsModule = require(shareGame.Thunks.FetchUserFriends)
-local closePageModule = require(shareGame.Actions.ClosePage)
-local shareGameContainer = roactModule.PureComponent:extend("ShareGameContainer")
-shareGameContainer.defaultProps = { skeletonComponent = shareGamePageFrameModule }
+﻿local CorePackages = game:GetService("CorePackages")
+local HttpRbxApiService = game:GetService("HttpRbxApiService")
+local Players = game:GetService("Players")
+local Modules = game:GetService("CoreGui").RobloxGui.Modules
+local ShareGame = Modules.Settings.Pages.ShareGame
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local HttpRequestModule = require(Modules.Common.httpRequest)
+local ConstantsModule = require(ShareGame.Constants)
+local FetchUserFriendsModule = require(ShareGame.Thunks.FetchUserFriends)
+local ClosePageModule = require(ShareGame.Actions.ClosePage)
+local ShareGameContainer = RoactModule.PureComponent:extend("ShareGameContainer")
+ShareGameContainer.defaultProps = {
+	skeletonComponent = require(ShareGame.Components.ShareGamePageFrame)
+}
 
-function shareGameContainer.init(p1)
+function ShareGameContainer.init(p1) --[[ Line: 30 ]]
 	p1.props.reFetch(p1.props.requestImpl)
 end
 
-function shareGameContainer.render(p1)
-	-- upvalues: roactModule (ref)
-	return roactModule.createElement(p1.props.skeletonComponent, p1.props)
+function ShareGameContainer.render(p1) --[[ Line: 34 ]]
+	-- upvalues: RoactModule (copy)
+	return RoactModule.createElement(p1.props.skeletonComponent, p1.props)
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p1, _)
+return (RoactRoduxModule.UNSTABLE_connect2(function(p1, _) --[[ Line: 38 ]]
 	return {
 		deviceLayout = p1.DeviceInfo.DeviceLayout,
 		searchAreaActive = p1.ConversationsSearch.SearchAreaActive,
 		searchText = p1.ConversationsSearch.SearchText
 	}
-end, function(p1)
-	-- upvalues: closePageModule (ref), constantsModule (ref), playersService (ref), httpRequestModule (ref), httpRbxApiService (ref), fetchUserFriendsModule (ref)
+end, function(Callback) --[[ Line: 44 ]]
+	-- upvalues: ClosePageModule (copy), ConstantsModule (copy), Players (copy), HttpRequestModule (copy), HttpRbxApiService (copy), FetchUserFriendsModule (copy)
 	return {
-		closePage = function()
-			-- upvalues: p1 (ref), closePageModule (copy), constantsModule (copy)
-			p1(closePageModule(constantsModule.PageRoute.SHARE_GAME))
+		closePage = function() --[[ Line: 46 ]]
+			-- upvalues: Callback (copy), ClosePageModule (upval), ConstantsModule (upval)
+			Callback(ClosePageModule(ConstantsModule.PageRoute.SHARE_GAME))
 		end,
-		reFetch = function(p2)
-			-- upvalues: playersService (copy), httpRequestModule (copy), httpRbxApiService (copy), p1 (ref), fetchUserFriendsModule (copy)
-			p1(fetchUserFriendsModule(p2 or httpRequestModule(httpRbxApiService), tostring(playersService.LocalPlayer.UserId)))
+		reFetch = function(p1) --[[ Line: 50 ]]
+			-- upvalues: Players (upval), HttpRequestModule (upval), HttpRbxApiService (upval), Callback (copy), FetchUserFriendsModule (upval)
+			Callback(FetchUserFriendsModule(p1 or HttpRequestModule(HttpRbxApiService), (tostring(Players.LocalPlayer.UserId))))
 		end
 	}
-end)(shareGameContainer)
+end)(ShareGameContainer))

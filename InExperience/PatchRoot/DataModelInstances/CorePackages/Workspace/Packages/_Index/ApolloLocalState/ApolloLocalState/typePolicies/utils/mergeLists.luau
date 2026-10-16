@@ -1,9 +1,9 @@
-﻿local array = require(script:FindFirstAncestor("ApolloLocalState").Parent.LuauPolyfill).Array
+﻿local Array = require(script:FindFirstAncestor("ApolloLocalState").Parent.LuauPolyfill).Array
 
-return function(p1, p2)
-	-- upvalues: array (ref)
-	p1 = p1 or {}
-	p2 = p2 or {}
+return function(p1, p2) --[[ Line: 4 ]]
+	-- upvalues: Array (copy)
+	local Tbl = p1 or {}
+	local P1 = p2 or {}
 	
-	return if #p2 == 0 then p1 elseif #p1 == 0 then p2 else array.concat(table.clone(p1), p2)
+	return if #P1 == 0 then Tbl elseif #Tbl == 0 then P1 else Array.concat(table.clone(Tbl), P1)
 end

@@ -1,157 +1,154 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local guiService = game:GetService("GuiService")
-local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local cryoModule = require(parent_1.Cryo)
-local reactModule = require(parent_1.React)
-local roactGamepadModule = require(parent_1.RoactGamepad)
-local useStyleModule = require(parent.Core.Style.useStyle)
-local cursorContextModule = require(script.Parent.CursorContext)
-local cursorComponentModule = require(script.Parent.CursorComponent)
-local cursorTypeModule = require(script.Parent.CursorType)
+﻿local CoreGui = game:GetService("CoreGui")
+local GuiService = game:GetService("GuiService")
+local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local CryoModule = require(Parent1.Cryo)
+local ReactModule = require(Parent1.React)
+local RoactGamepadModule = require(Parent1.RoactGamepad)
+local UseStyleModule = require(Parent.Core.Style.useStyle)
+local CursorContextModule = require(script.Parent.CursorContext)
+local CursorComponentModule = require(script.Parent.CursorComponent)
+local CursorTypeModule = require(script.Parent.CursorType)
 
-local _ = function(p1, p2, p3)
+local function _(p1, p2, p3): string --[[ Line: 20 ]]
 	return string.format("%f %f %f %f", p1.Scale, p1.Offset, p2, p3)
 end
 
-local var1 = function(p1)
-	local var2 = 1e999
-	local var3 = 1e999
-	local var4 = 1e999
-	local var5 = 1e999
+local function v12(Text: string) --[[ Line: 24 ]]
+	local Scale = 1e999
+	local v1 = 1e999
+	local v2 = 1e999
+	local v3 = 1e999
 	
-	for i, v in string.split(p1, " ") do
-		local var6 = tonumber(v)
+	for i, value in string.split(Text, " ") do
+		local Number: number? = tonumber(value)
 		
-		if var6 ~= nil then
+		if Number ~= nil then
 			if i == 1 then
-				var2 = var6
+				Scale = Number
 			elseif i == 2 then
-				var3 = var6
+				v1 = Number
 			elseif i == 3 then
-				var4 = var6
+				v2 = Number
 			elseif i == 4 then
-				var5 = var6
+				v3 = Number
 			end
 		end
 	end
-	assert(var2 ~= 1e999 and (var3 ~= 1e999 and (var4 ~= 1e999 and var5 ~= 1e999)), "Error! Not all parameters are decoded.")
+	assert(Scale ~= 1e999 and (v1 ~= 1e999 and (v2 ~= 1e999 and v3 ~= 1e999)), "Error! Not all parameters are decoded.")
 	
-	return UDim.new(var2, math.max(0, var3 + var4)), var4, var5
+	return UDim.new(Scale, (math.max(0, v1 + v2))), v2, v3
 end
 
-return function(p2)
-	-- upvalues: reactModule (ref), roactGamepadModule (ref), useStyleModule (ref), cryoModule (ref), cursorTypeModule (ref), var1 (ref), cursorComponentModule (ref), coreGuiService (ref), guiService (ref), cursorContextModule (ref)
-	local var7, var8 = reactModule.useState({})
-	local var9, var10 = reactModule.useState({})
-	local var11 = reactModule.createRef()
-	local var12, var13 = reactModule.useState(nil)
-	local var14 = roactGamepadModule.useRefCache()
-	local selectionCursor = useStyleModule().Tokens.Component.SelectionCursor
+return function(p1) --[[ Line: 53 ]]
+	-- upvalues: ReactModule (copy), RoactGamepadModule (copy), UseStyleModule (copy), CryoModule (copy), CursorTypeModule (copy), v12 (copy), CursorComponentModule (copy), CoreGui (copy), GuiService (copy), CursorContextModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState({})
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState({})
+	local Ref = ReactModule.createRef()
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(nil)
+	local UseRefCacheResult = RoactGamepadModule.useRefCache()
+	local Tokens = UseStyleModule().Tokens
 	
-	local var15 = function(p3, p4, p5)
-		-- upvalues: selectionCursor (ref), var7 (ref), var8 (ref), cryoModule (copy), var14 (ref)
-		local var16
+	local function GetCursor(p2, p3: number, Thick: number) --[[ Line: 61 ]]
+		-- upvalues: Tokens (copy), UseStateResult (copy), UseStateResult2 (copy), CryoModule (upval), UseRefCacheResult (copy)
 		warn("UIBlox's SelectionCursor is deprecated and should not be used anymore.")
-		local var17 = if p3 ~= nil then p3 else UDim.new(0, 0)
-		local _ = 0
+		local _UDim = if p2 ~= nil then p2 else UDim.new(0, 0)
+		local Thick1 = nil
 		
-		if p5 == nil then
-			var16 = selectionCursor.BorderWidth
+		if Thick == nil then
+			Thick1 = Tokens.Stroke.Thick
 		else
-			assert(p5 > 0, "Error! borderWidth should be larger than 0.")
-			var16 = p5
+			assert(Thick > 0, "Error! borderWidth should be larger than 0.")
+			Thick1 = Thick
 		end
-		local formattedText = string.format("%f %f %f %f", var17.Scale, var17.Offset, if p4 ~= nil then selectionCursor.Offset - var16 else p4 - var16, var16)
+		local Formatted = string.format("%f %f %f %f", _UDim.Scale, _UDim.Offset, if p3 == nil then Tokens.Size.Size_150 - Thick1 else p3 - Thick1, Thick1)
 		
-		if var7[formattedText] == nil then
-			var8(cryoModule.Dictionary.join(var7, { [formattedText] = true }))
+		if UseStateResult[Formatted] == nil then
+			UseStateResult2(CryoModule.Dictionary.join(UseStateResult, { [Formatted] = true }))
 		end
-		return var14[formattedText]
+		return UseRefCacheResult[Formatted]
 	end
 	
-	local var16 = function(p3)
-		-- upvalues: cursorTypeModule (copy), var9 (ref), var10 (ref), cryoModule (copy), var14 (ref)
-		assert(cursorTypeModule.isEnumValue(p3), ("Error! expected a CursorType enum, got %s"):format(tostring(p3)))
+	local function GetCursorByType(p2) --[[ Line: 96 ]]
+		-- upvalues: CursorTypeModule (upval), UseStateResult1 (copy), UseStateResult2_1 (copy), CryoModule (upval), UseRefCacheResult (copy)
+		assert(CursorTypeModule.isEnumValue(p2), ("Error! expected a CursorType enum, got %s"):format((tostring(p2))))
 		warn("UIBlox's SelectionCursor is deprecated and should not be used anymore.")
 		
-		if var9[p3] == nil then
-			var10(cryoModule.Dictionary.join(var9, { [p3] = true }))
+		if UseStateResult1[p2] == nil then
+			UseStateResult2_1(CryoModule.Dictionary.join(UseStateResult1, { [p2] = true }))
 		end
-		return var14[p3]
+		return UseRefCacheResult[p2]
 	end
 	
-	local var17 = function()
-		-- upvalues: var7 (ref), var14 (ref), var12 (ref), var1 (copy), reactModule (copy), cursorComponentModule (copy), var9 (ref)
-		local t = {}
+	local function v28() --[[ Line: 112 ]]
+		-- upvalues: UseStateResult (copy), UseRefCacheResult (copy), UseStateResult3 (copy), v12 (upval), ReactModule (upval), CursorComponentModule (upval), UseStateResult1 (copy)
+		local Elements = {}
 		
-		for i, v in pairs(var7) do
-			local var18 = var14[i] ~= nil and (var12 ~= nil and var14[i].current == var12)
-			local var19, var20, var21 = var1(i)
-			t[i] = reactModule.createElement(cursorComponentModule, {
-				ref = var14[i],
-				isVisible = var18,
-				cornerRadius = var19,
-				offset = var20,
-				borderWidth = var21
+		for i, _ in pairs(UseStateResult) do
+			local IsCurrentMatch: boolean = UseRefCacheResult[i] ~= nil and (UseStateResult3 ~= nil and UseRefCacheResult[i].current == UseStateResult3)
+			local CornerRadius, Offset, BorderWidth = v12(i)
+			Elements[i] = ReactModule.createElement(CursorComponentModule, {
+				ref = UseRefCacheResult[i],
+				isVisible = IsCurrentMatch,
+				cornerRadius = CornerRadius,
+				offset = Offset,
+				borderWidth = BorderWidth
 			})
 		end
-		for i_1, v in pairs(var9) do
-			t[i_1] = reactModule.createElement(i_1.rawValue(), {
-				ref = var14[i_1],
-				isVisible = var14[i_1] ~= nil and (var12 ~= nil and var14[i_1].current == var12)
+		for i1, _ in pairs(UseStateResult1) do
+			Elements[i1] = ReactModule.createElement(i1.rawValue(), {
+				ref = UseRefCacheResult[i1],
+				isVisible = UseRefCacheResult[i1] ~= nil and (UseStateResult3 ~= nil and UseRefCacheResult[i1].current == UseStateResult3)
 			})
 		end
-		return t
+		return Elements
 	end
 	
-	reactModule.useEffect(function()
-		-- upvalues: var11 (ref), coreGuiService (copy), guiService (copy), var13 (ref)
-		if var11.current == nil or not var11.current:IsDescendantOf(game) then
-			return
-		end
-		local var22 = var11.current:IsDescendantOf(coreGuiService)
+	ReactModule.useEffect(function() --[[ Line: 145 ]]
+		-- upvalues: Ref (copy), CoreGui (upval), GuiService (upval), UseStateResult2_2 (copy)
+		if Ref.current == nil or not Ref.current:IsDescendantOf(game) then return end
+		local IsDescendantOf = Ref.current:IsDescendantOf(CoreGui)
 		
-		local function setUpSelectionImageObjectConnection()
-			-- upvalues: var22 (ref), guiService (copy), var13 (copy)
-			return if var22 then guiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function()
-				-- upvalues: guiService (copy), var13 (copy)
-				if guiService.SelectedCoreObject == nil then
-					var13(nil)
+		local function setUpSelectionImageObjectConnection() --[[ Line: 152 ]]
+			-- upvalues: IsDescendantOf (copy), GuiService (upval), UseStateResult2_2 (upval)
+			return if IsDescendantOf then GuiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function() --[[ Line: 157 ]]
+				-- upvalues: GuiService (upval), UseStateResult2_2 (upval)
+				if GuiService.SelectedCoreObject == nil then
+					UseStateResult2_2(nil)
 					
 					return
+				else
+					UseStateResult2_2(GuiService.SelectedCoreObject.SelectionImageObject)
 				end
-				var13(guiService.SelectedCoreObject.SelectionImageObject)
-			end) else guiService:GetPropertyChangedSignal("SelectedObject"):Connect(function()
-				-- upvalues: guiService (copy), var13 (copy)
-				if guiService.SelectedObject == nil then
-					var13(nil)
+			end) else GuiService:GetPropertyChangedSignal("SelectedObject"):Connect(function() --[[ Line: 165 ]]
+				-- upvalues: GuiService (upval), UseStateResult2_2 (upval)
+				if GuiService.SelectedObject == nil then
+					UseStateResult2_2(nil)
 					
 					return
+				else
+					UseStateResult2_2(GuiService.SelectedObject.SelectionImageObject)
 				end
-				var13(guiService.SelectedObject.SelectionImageObject)
 			end)
 		end
 		
-		local var23 = setUpSelectionImageObjectConnection()
-		local ancestryChangedConnection = var11.current.AncestryChanged:Connect(function()
-			-- upvalues: var23 (write), setUpSelectionImageObjectConnection (ref)
-			var23:Disconnect()
-			var23 = setUpSelectionImageObjectConnection()
+		local SetUpSelectionImageObjectConnectionResult = setUpSelectionImageObjectConnection()
+		local AncestryChangedConnection = Ref.current.AncestryChanged:Connect(function() --[[ Line: 176 ]]
+			-- upvalues: SetUpSelectionImageObjectConnectionResult (ref), setUpSelectionImageObjectConnection (copy)
+			SetUpSelectionImageObjectConnectionResult:Disconnect()
+			SetUpSelectionImageObjectConnectionResult = setUpSelectionImageObjectConnection()
 		end)
 		
-		return function()
-			-- upvalues: var23 (write), ancestryChangedConnection (ref)
-			var23:Disconnect()
-			ancestryChangedConnection:Disconnect()
+		return function() --[[ Line: 186 ]]
+			-- upvalues: SetUpSelectionImageObjectConnectionResult (ref), AncestryChangedConnection (copy)
+			SetUpSelectionImageObjectConnectionResult:Disconnect()
+			AncestryChangedConnection:Disconnect()
 		end
 	end, {})
 	
-	return reactModule.createElement(cursorContextModule.Provider, { value = { getCursor = var15, getCursorByType = var16 } }, cryoModule.Dictionary.join({
-		InvisibleContainer = reactModule.createElement("Frame", {
-			Visible = false,
-			Size = UDim2.new(0, 0, 0, 0),
-			ref = var11
-		}, var17())
-	}, p2.children))
+	return ReactModule.createElement(CursorContextModule.Provider, {
+		value = { getCursor = GetCursor, getCursorByType = GetCursorByType }
+	}, CryoModule.Dictionary.join({
+		InvisibleContainer = ReactModule.createElement("Frame", { Visible = false, Size = UDim2.new(0, 0, 0, 0), ref = Ref }, (v28()))
+	}, p1.children))
 end

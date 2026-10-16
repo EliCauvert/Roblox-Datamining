@@ -1,77 +1,119 @@
-﻿local parent = script:FindFirstAncestor("AppBlox").Parent
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local reactOtterModule = require(parent.ReactOtter)
-local UIBloxModule = require(parent.UIBlox)
-local cursorKind = UIBloxModule.App.SelectionImage.CursorKind
-local styledTextLabel = UIBloxModule.App.Text.StyledTextLabel
-local useCursor = UIBloxModule.App.SelectionCursor.useCursor
-local useSelectionCursor = UIBloxModule.App.SelectionImage.useSelectionCursor
-local useStyle = require(parent.UIBlox).Core.Style.useStyle
-local foundationModule = require(parent.Foundation)
-local icon = foundationModule.Icon
-local view = foundationModule.View
-local iconSize = foundationModule.Enums.IconSize
-local useTokens = foundationModule.Hooks.useTokens
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagLuaAppEdpConsoleMediaGalleryVideo = sharedFlagsModule.FFlagLuaAppEdpConsoleMediaGalleryVideo
-local fFlagLuaAppEdpConsoleMediaGalleryVideoPlayIcon = sharedFlagsModule.FFlagLuaAppEdpConsoleMediaGalleryVideoPlayIcon
-local constantsModule = require(script.Parent.Constants)
+﻿local Parent = script:FindFirstAncestor("AppBlox").Parent
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local ReactOtterModule = require(Parent.ReactOtter)
+local UIBloxModule = require(Parent.UIBlox)
+local CursorKind = UIBloxModule.App.SelectionImage.CursorKind
+local StyledTextLabel = UIBloxModule.App.Text.StyledTextLabel
+local UseCursorFunction = UIBloxModule.App.SelectionCursor.useCursor
+local UseSelectionCursorFunction = UIBloxModule.App.SelectionImage.useSelectionCursor
+local UseStyleFunction = require(Parent.UIBlox).Core.Style.useStyle
+local FoundationModule = require(Parent.Foundation)
+local Icon = FoundationModule.Icon
+local View = FoundationModule.View
+local IconSize = FoundationModule.Enums.IconSize
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagLuaAppEdpConsoleMediaGalleryVideo = SharedFlagsModule.FFlagLuaAppEdpConsoleMediaGalleryVideo
+local FFlagLuaAppEdpConsoleMediaGalleryVideoPlayIcon = SharedFlagsModule.FFlagLuaAppEdpConsoleMediaGalleryVideoPlayIcon
+local ConstantsModule = require(script.Parent.Constants)
 local _ = require(script.Parent.MediaGalleryTypes)
-local t = {
+local config = {
 	titleText = "Media",
 	numItemsShown = 4,
-	itemAspectRatio = 1.777777777778,
-	animationConfig = { dampingRatio = 1, frequency = 6.666666666667 },
-	onActivated = function() end,
-	onSelectionGained = function() end,
-	exitFullscreen = function() end
+	itemAspectRatio = 1.7777777777777777,
+	animationConfig = { dampingRatio = 1, frequency = 6.666666666666667 },
+	onActivated = function() --[[ Line: 39 ]] end,
+	onSelectionGained = function() --[[ Line: 40 ]] end,
+	exitFullscreen = function() --[[ Line: 41 ]] end
 }
 
-return function(p1)
-	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), fFlagLuaAppEdpConsoleMediaGalleryVideoPlayIcon (ref), useTokens (ref), constantsModule (ref), reactOtterModule (ref), reactModule (ref), useCursor (ref), useSelectionCursor (ref), cursorKind (ref), view (ref), icon (ref), iconSize (ref), fFlagLuaAppEdpConsoleMediaGalleryVideo (ref), styledTextLabel (ref)
-	local var1 = cryoModule.Dictionary.join(t, p1)
-	local var2 = useStyle()
-	local var3 = if fFlagLuaAppEdpConsoleMediaGalleryVideoPlayIcon then useTokens() else nil
-	local var4 = cryoModule.Dictionary.join(constantsModule.getDefaultStyleProps(var2), var1.styleProps or {})
-	local borderRadius = var4.borderRadius
-	local gutter = var4.gutter
-	local contentGap = var4.contentGap
-	local titleFont = var4.titleFont
-	local titleTextColor = var4.titleTextColor
-	local var5, var6 = reactOtterModule.useAnimatedBinding(0)
-	local var7, var8 = reactModule.useState(Vector2.zero)
-	local var9 = if var1.showCursor then useCursor(borderRadius) else useSelectionCursor(cursorKind.Invisible)
+return function(p1) --[[ Line: 79 | Named "MediaGalleryExpandableView" ]]
+	-- upvalues: CryoModule (copy), config (copy), UseStyleFunction (copy), FFlagLuaAppEdpConsoleMediaGalleryVideoPlayIcon (copy), UseTokensFunction (copy), ConstantsModule (copy), ReactOtterModule (copy), ReactModule (copy), UseCursorFunction (copy), UseSelectionCursorFunction (copy), CursorKind (copy), View (copy), Icon (copy), IconSize (copy), FFlagLuaAppEdpConsoleMediaGalleryVideo (copy), StyledTextLabel (copy)
+	local JoinResult = CryoModule.Dictionary.join(config, p1)
+	local UseStyleResult = UseStyleFunction()
+	local UseTokensResult = if FFlagLuaAppEdpConsoleMediaGalleryVideoPlayIcon then UseTokensFunction() else nil
+	local JoinResult1 = CryoModule.Dictionary.join(ConstantsModule.getDefaultStyleProps(UseStyleResult), JoinResult.styleProps or {})
+	local BorderRadius = JoinResult1.borderRadius
+	local Gutter = JoinResult1.gutter
+	local ContentGap = JoinResult1.contentGap
+	local TitleFont = JoinResult1.titleFont
+	local TitleTextColor = JoinResult1.titleTextColor
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.zero)
+	local UseResult = ReactModule.useCallback(function(Frame, _, _, _) --[[ Line: 96 ]]
+		-- upvalues: Gutter (copy), JoinResult (copy), UseStateResult2 (copy)
+		local XRatio = (Frame.AbsoluteSize.X - Gutter * (JoinResult.numItemsShown - 1)) / JoinResult.numItemsShown
+		UseStateResult2(Vector2.new(XRatio, XRatio / JoinResult.itemAspectRatio))
+	end, {
+		Gutter,
+		JoinResult.itemAspectRatio,
+		JoinResult.numItemsShown
+	})
+	local UseResult1 = ReactModule.useCallback(function(Ancestor, _, Frame, Frame1) --[[ Line: 110 ]]
+		-- upvalues: UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), JoinResult (copy)
+		if not Ancestor then
+			return nil
+		end
+		local IsDescendantOf = Frame1 ~= nil and Frame1:IsDescendantOf(Ancestor)
+		local IsDescendantOf1 = Frame ~= nil and Frame:IsDescendantOf(Ancestor)
+		local IsDescendantOf1_1 = not IsDescendantOf and IsDescendantOf1
+		
+		if IsDescendantOf and not IsDescendantOf1 then
+			UseAnimatedBindingResult2(ReactOtterModule.spring(JoinResult.expandableAreaHeightOffset, JoinResult.animationConfig))
+			JoinResult.mediaGalleryGainFocused(true)
+			
+			return nil
+		end
+		if not IsDescendantOf1_1 then
+			return nil
+		end
+		if Frame1 == nil or Frame1.AbsolutePosition.Y <= Frame.AbsolutePosition.Y then
+			UseAnimatedBindingResult2(ReactOtterModule.spring(0, JoinResult.animationConfig))
+		end
+		JoinResult.exitFullscreen()
+		JoinResult.mediaGalleryGainFocused(false)
+		
+		return nil
+	end, {
+		JoinResult.expandableAreaHeightOffset,
+		JoinResult.animationConfig,
+		JoinResult.exitFullscreen,
+		JoinResult.mediaGalleryGainFocused
+	})
+	local UseCursorResult = UseCursorFunction(BorderRadius)
+	local UseSelectionCursorResult = UseSelectionCursorFunction(CursorKind.Invisible)
+	local UseCursorResult1 = if JoinResult.showCursor then UseCursorResult else UseSelectionCursorResult
 	
-	return reactModule.createElement("CanvasGroup", {
+	return ReactModule.createElement("CanvasGroup", {
 		BackgroundTransparency = 1,
-		GroupTransparency = var1.groupTransparency,
+		GroupTransparency = JoinResult.groupTransparency,
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
-		ref = if fFlagLuaAppEdpConsoleMediaGalleryVideo then var1.rootRef else nil
+		ref = if FFlagLuaAppEdpConsoleMediaGalleryVideo then JoinResult.rootRef else nil
 	}, {
-		UIListLayout = reactModule.createElement("UIListLayout", {
+		UIListLayout = ReactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			SortOrder = Enum.SortOrder.LayoutOrder,
-			Padding = UDim.new(0, contentGap)
+			Padding = UDim.new(0, ContentGap)
 		}),
-		ExpandableArea = reactModule.createElement("Frame", {
+		ExpandableArea = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 1,
-			Size = var5:map(function(p2)
-				return UDim2.new(1, 0, 0, p2)
+			Size = UseAnimatedBindingResult:map(function(YOffset): UDim2 --[[ Line: 229 ]]
+				return UDim2.new(1, 0, 0, YOffset)
 			end)
 		}),
-		Title = reactModule.createElement(styledTextLabel, {
+		Title = ReactModule.createElement(StyledTextLabel, {
 			layoutOrder = 2,
-			text = var1.titleText,
-			fontStyle = titleFont,
-			colorStyle = titleTextColor,
+			text = JoinResult.titleText,
+			fontStyle = TitleFont,
+			colorStyle = TitleTextColor,
 			textXAlignment = Enum.TextXAlignment.Left,
-			size = UDim2.new(1, 0, 0, if titleFont.RelativeSize then titleFont.RelativeSize * var2.Font.BaseSize else titleFont.FontSize)
+			size = UDim2.new(1, 0, 0, if TitleFont.RelativeSize then TitleFont.RelativeSize * UseStyleResult.Font.BaseSize else TitleFont.FontSize)
 		}),
-		MediaGallery = reactModule.createElement("ScrollingFrame", {
-			Size = UDim2.new(1, 0, 0, var7.Y),
+		MediaGallery = ReactModule.createElement("ScrollingFrame", {
+			Size = UDim2.new(1, 0, 0, UseStateResult.Y),
 			BackgroundTransparency = 1,
 			AutomaticCanvasSize = Enum.AutomaticSize.XY,
 			ScrollBarImageTransparency = 1,
@@ -79,90 +121,58 @@ return function(p1)
 			ScrollingDirection = Enum.ScrollingDirection.X,
 			Selectable = false,
 			LayoutOrder = 3,
-			[reactModule.Change.AbsoluteSize] = reactModule.useCallback(function(p2, _, _, _)
-				-- upvalues: gutter (ref), var1 (ref), var8 (ref)
-				local var10 = (p2.AbsoluteSize.X - gutter * (var1.numItemsShown - 1)) / var1.numItemsShown
-				var8(Vector2.new(var10, var10 / var1.itemAspectRatio))
-			end, { gutter, var1.itemAspectRatio, var1.numItemsShown }),
-			[reactModule.Event.SelectionChanged] = reactModule.useCallback(function(p2, _, p3, p4)
-				-- upvalues: var6 (ref), reactOtterModule (copy), var1 (ref)
-				if not p2 then
-					return nil
-				end
-				local var10 = p4 ~= nil and p4:IsDescendantOf(p2)
-				local var11 = p3 ~= nil and p3:IsDescendantOf(p2)
-				local var12 = not var10 and var11
-				
-				if var10 and not var11 then
-					var6(reactOtterModule.spring(var1.expandableAreaHeightOffset, var1.animationConfig))
-					var1.mediaGalleryGainFocused(true)
-					
-					return nil
-				elseif not var12 then
-					return nil
-				elseif not (p4 ~= nil and p3.AbsolutePosition.Y < p4.AbsolutePosition.Y) then
-					var6(reactOtterModule.spring(0, var1.animationConfig))
-				end
-				var1.exitFullscreen()
-				var1.mediaGalleryGainFocused(false)
-				
-				return nil
-			end, {
-				var1.expandableAreaHeightOffset,
-				var1.animationConfig,
-				var1.exitFullscreen,
-				var1.mediaGalleryGainFocused
-			})
+			[ReactModule.Change.AbsoluteSize] = UseResult,
+			[ReactModule.Event.SelectionChanged] = UseResult1
 		}, {
-			Layout = reactModule.createElement("UIListLayout", {
+			Layout = ReactModule.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				FillDirection = Enum.FillDirection.Horizontal,
-				Padding = UDim.new(0, gutter)
+				Padding = UDim.new(0, Gutter)
 			}),
-			Items = reactModule.createElement(reactModule.Fragment, {}, reactModule.useMemo(function()
-				-- upvalues: var1 (ref), reactModule (copy), var7 (ref), var9 (ref), borderRadius (ref), fFlagLuaAppEdpConsoleMediaGalleryVideoPlayIcon (copy), view (copy), icon (copy), iconSize (copy), var3 (ref)
-				local t = {}
+			Items = ReactModule.createElement(ReactModule.Fragment, {}, (ReactModule.useMemo(function() --[[ Line: 161 ]]
+				-- upvalues: JoinResult (copy), ReactModule (upval), UseStateResult (copy), UseCursorResult1 (copy), BorderRadius (copy), FFlagLuaAppEdpConsoleMediaGalleryVideoPlayIcon (upval), View (upval), Icon (upval), IconSize (upval), UseTokensResult (copy)
+				local ImageButtons = {}
 				
-				for i, v in var1.items do
-					t["Item" .. i] = reactModule.createElement("ImageButton", {
-						LayoutOrder = i,
-						Size = UDim2.fromOffset(var7.X, var7.Y),
-						Image = v.imageId,
+				for LayoutOrder, item in JoinResult.items do
+					ImageButtons["Item" .. LayoutOrder] = ReactModule.createElement("ImageButton", {
+						LayoutOrder = LayoutOrder,
+						Size = UDim2.fromOffset(UseStateResult.X, UseStateResult.Y),
+						Image = item.imageId,
 						ScaleType = Enum.ScaleType.Crop,
 						BackgroundTransparency = 1,
 						AutoButtonColor = false,
-						SelectionImageObject = var9,
-						[reactModule.Event.Activated] = function()
-							-- upvalues: var1 (copy), i (ref)
-							var1.onActivated(i)
+						SelectionImageObject = UseCursorResult1,
+						[ReactModule.Event.Activated] = function() --[[ Line: 172 ]]
+							-- upvalues: JoinResult (upval), LayoutOrder (copy)
+							JoinResult.onActivated(LayoutOrder)
 						end,
-						[reactModule.Event.SelectionGained] = function()
-							-- upvalues: var1 (copy), i (ref)
-							var1.onSelectionGained(i)
+						[ReactModule.Event.SelectionGained] = function() --[[ Line: 175 ]]
+							-- upvalues: JoinResult (upval), LayoutOrder (copy)
+							JoinResult.onSelectionGained(LayoutOrder)
 						end
 					}, {
-						Corner = reactModule.createElement("UICorner", { CornerRadius = borderRadius }),
-						PlayIcon = if fFlagLuaAppEdpConsoleMediaGalleryVideoPlayIcon and v.videoId then reactModule.createElement(view, {
+						Corner = ReactModule.createElement("UICorner", { CornerRadius = BorderRadius }),
+						PlayIcon = if FFlagLuaAppEdpConsoleMediaGalleryVideoPlayIcon and item.videoId then ReactModule.createElement(View, {
 							tag = "auto-xy padding-medium radius-circle bg-over-media-100",
 							ZIndex = 2,
 							AnchorPoint = Vector2.new(0.5, 0.5),
 							Position = UDim2.fromScale(0.5, 0.5),
 							selection = { Selectable = false }
 						}, {
-							Icon = reactModule.createElement(icon, {
+							Icon = ReactModule.createElement(Icon, {
 								name = "play-large",
-								size = iconSize.Medium,
-								style = var3.Color.Content.Emphasis
+								size = IconSize.Medium,
+								style = UseTokensResult.Color.Content.Emphasis
 							})
 						}) else nil
 					})
 				end
-				return t
+				return ImageButtons
 			end, {
-				var7, var1.items, var1.onActivated, var1.onSelectionGained, var9,
-				borderRadius,
-				if fFlagLuaAppEdpConsoleMediaGalleryVideoPlayIcon then var3 else nil
-			}))
+				UseStateResult, JoinResult.items, JoinResult.onActivated,
+				JoinResult.onSelectionGained, UseCursorResult1, BorderRadius,
+				if FFlagLuaAppEdpConsoleMediaGalleryVideoPlayIcon then UseTokensResult else nil
+			})))
 		})
 	})
 end

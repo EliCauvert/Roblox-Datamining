@@ -1,12 +1,12 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local experienceGuidelinesModule = require(parent.DataHydration.ExperienceGuidelines)
-local experienceQuestionnaireModule = require(parent.DataHydration.ExperienceQuestionnaire)
-local universeActivationModule = require(parent.DataHydration.UniverseActivation)
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local ExperienceGuidelinesModule = require(Parent.DataHydration.ExperienceGuidelines)
+local ExperienceQuestionnaireModule = require(Parent.DataHydration.ExperienceQuestionnaire)
+local UniverseActivationModule = require(Parent.DataHydration.UniverseActivation)
 
-return function(p1)
-	-- upvalues: experienceGuidelinesModule (ref), universeActivationModule (ref), experienceQuestionnaireModule (ref)
-	local universeActivationStore = universeActivationModule.getUniverseActivationStore()
-	experienceGuidelinesModule.getExperienceGuidelinesStore().refreshDetailedGuidelines(p1):catch(function() end)
-	universeActivationStore.refreshEligibility(p1):catch(function() end)
-	experienceQuestionnaireModule.getExperienceQuestionnaireStore().fetchEligibility(p1)
+return function(p1) --[[ Line: 8 | Named "refreshPublishEligibility" ]]
+	-- upvalues: ExperienceGuidelinesModule (copy), UniverseActivationModule (copy), ExperienceQuestionnaireModule (copy)
+	local UniverseActivationStore = UniverseActivationModule.getUniverseActivationStore()
+	ExperienceGuidelinesModule.getExperienceGuidelinesStore().refreshDetailedGuidelines(p1):catch(function() --[[ Line: 11 ]] end)
+	UniverseActivationStore.refreshEligibility(p1):catch(function() --[[ Line: 14 ]] end)
+	ExperienceQuestionnaireModule.getExperienceQuestionnaireStore().fetchEligibility(p1)
 end

@@ -1,28 +1,28 @@
-﻿local localization = script:FindFirstAncestor("Localization")
-local parent = localization.Parent
-local localizationService = game:GetService("LocalizationService")
-local reactModule = require(parent.React)
-local argCheckModule = require(parent.ArgCheck)
-local robloxLocaleIdKeyModule = require(localization.RobloxLocaleIdKey)
-local localizationRoactContextModule = require(localization.LocalizationRoactContext)
-local localizeStringsModule = require(localization.localizeStrings)
-local useSignal = require(parent.RoactUtils).Hooks.useSignal
+﻿local Localization = script:FindFirstAncestor("Localization")
+local Parent = Localization.Parent
+local LocalizationService = game:GetService("LocalizationService")
+local ReactModule = require(Parent.React)
+local ArgCheckModule = require(Parent.ArgCheck)
+local RobloxLocaleIdKeyModule = require(Localization.RobloxLocaleIdKey)
+local LocalizationRoactContextModule = require(Localization.LocalizationRoactContext)
+local LocalizeStringsModule = require(Localization.localizeStrings)
+local UseSignalFunction = require(Parent.RoactUtils).Hooks.useSignal
 
-return function(p1)
-	-- upvalues: reactModule (ref), localizationRoactContextModule (ref), localizationService (ref), useSignal (ref), argCheckModule (ref), localizeStringsModule (ref), robloxLocaleIdKeyModule (ref)
-	local var1 = reactModule.useContext(localizationRoactContextModule)
-	local var2, var3 = reactModule.useState(localizationService.RobloxLocaleId)
-	useSignal(var1.changed, reactModule.useCallback(function(_)
-		-- upvalues: var1 (ref), var2 (ref), var3 (ref)
-		local locale = var1:GetLocale()
+return function(p1) --[[ Line: 17 | Named "useLocalization" ]]
+	-- upvalues: ReactModule (copy), LocalizationRoactContextModule (copy), LocalizationService (copy), UseSignalFunction (copy), ArgCheckModule (copy), LocalizeStringsModule (copy), RobloxLocaleIdKeyModule (copy)
+	local UseContextResult = ReactModule.useContext(LocalizationRoactContextModule)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(LocalizationService.RobloxLocaleId)
+	UseSignalFunction(UseContextResult.changed, (ReactModule.useCallback(function(_) --[[ Line: 22 ]]
+		-- upvalues: UseContextResult (copy), UseStateResult (copy), UseStateResult2 (copy)
+		local Locale = UseContextResult:GetLocale()
 		
-		if locale ~= var2 then
-			var3(locale)
+		if Locale ~= UseStateResult then
+			UseStateResult2(Locale)
 		end
-	end, { var1 }))
-	argCheckModule.isType(p1, "table", "LocalizationConsumer.props.stringsToBeLocalized")
-	local var4 = localizeStringsModule(var1, p1)
-	var4[robloxLocaleIdKeyModule] = var2
+	end, { UseContextResult })))
+	ArgCheckModule.isType(p1, "table", "LocalizationConsumer.props.stringsToBeLocalized")
+	local LocalizeStringsModuleResult = LocalizeStringsModule(UseContextResult, p1)
+	LocalizeStringsModuleResult[RobloxLocaleIdKeyModule] = UseStateResult
 	
-	return var4
+	return LocalizeStringsModuleResult
 end

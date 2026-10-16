@@ -1,5 +1,5 @@
-﻿return require(script:FindFirstAncestor("AppChat").Parent.Rodux).makeActionCreator(script.Name, function(p1)
-	assert(type(p1) == "table", script.Name .. ": result must be a table")
+﻿return require(script:FindFirstAncestor("AppChat").Parent.Rodux).makeActionCreator(script.Name, function(Result) --[[ Line: 6 ]]
+	assert(type(Result) == "table", script.Name .. ": result must be a table")
 	
-	return { result = p1 }
+	return { result = Result }
 end)

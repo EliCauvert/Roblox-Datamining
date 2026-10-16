@@ -1,4 +1,4 @@
-﻿return require(script.Parent.createEnum)("PurchaseError", {
+﻿return (require(script.Parent.createEnum)("PurchaseError", {
 	"CannotGetBalance", "CannotGetItemPrice", "AlreadyPremium",
 	"PremiumUnavailable", "PremiumUnavailablePlatform", "NotForSale",
 	"NotForSaleHere", "AlreadyOwn", "PremiumOnly", "Under13", "Limited", "Guest",
@@ -10,5 +10,5 @@
 	"RestrictedUser", "SubscriptionPurchasePlatformNotSupported",
 	"SubscriptionInvalidSaleLocation", "SubscriptionNotForSale", "VpcRequired",
 	"ExceedParentalSpendLimit", "EconomicRestriction",
-	"PendingProductsLimitExceeded", "UnsupportedInStudio"
-})
+	"PendingProductsLimitExceeded", "UnsupportedInStudio", "VIPServerUnavailable"
+}))

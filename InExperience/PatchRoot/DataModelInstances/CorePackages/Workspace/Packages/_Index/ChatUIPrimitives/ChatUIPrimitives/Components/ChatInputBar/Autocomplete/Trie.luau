@@ -1,67 +1,66 @@
-﻿local t = {}
-t.__index = t
+﻿local Module = {}
+Module.__index = Module
 
-function t.new(p1)
-	-- upvalues: t (ref)
-	local tbl = setmetatable({}, t)
-	tbl.children = {}
-	tbl.isEndOfWord = false
-	tbl.data = p1
+function Module.new(Data) --[[ Line: 4 ]]
+	-- upvalues: Module (copy)
+	local self = setmetatable({}, Module)
+	self.children = {}
+	self.isEndOfWord = false
+	self.data = Data
 	
-	return tbl
+	return self
 end
 
-local t_1 = {}
-t_1.__index = t_1
+local TrieModule = {}
+TrieModule.__index = TrieModule
 
-function t_1.new()
-	-- upvalues: t_1 (ref), t (ref)
-	local tbl = setmetatable({}, t_1)
-	tbl.root = t.new("")
+function TrieModule.new() --[[ Line: 15 ]]
+	-- upvalues: TrieModule (copy), Module (copy)
+	local self = setmetatable({}, TrieModule)
+	self.root = Module.new("")
 	
-	return tbl
+	return self
 end
 
-function t_1:insert(p1)
-	-- upvalues: t (ref)
-	local root = self.root
+function TrieModule:insert(Text: string) --[[ Line: 21 ]]
+	-- upvalues: Module (copy)
+	local Root = self.root
 	
-	for i = 1, #p1 do
-		local substring = string.sub(p1, i, i)
+	for i = 1, #Text do
+		local Segment = string.sub(Text, i, i)
 		
-		if not root.children[substring] then
-			root.children[substring] = t.new(substring)
+		if not Root.children[Segment] then
+			Root.children[Segment] = Module.new(Segment)
 		end
-		root = root.children[substring]
+		Root = Root.children[Segment]
 	end
-	root.isEndOfWord = true
+	Root.isEndOfWord = true
 end
 
-function t_1:autocomplete(p2)
-	local substring
+function TrieModule:autocomplete(Text: string) --[[ Line: 33 ]]
 	local t = {}
-	local root = self.root
+	local Root = self.root
 	
-	for i = 1, #p2 do
-		substring = string.sub(p2, i, i)
+	for i = 1, #Text do
+		local Segment = string.sub(Text, i, i)
 		
-		if not root.children[substring] then
+		if not Root.children[Segment] then
 			return t
 		end
-		root = root.children[substring]
+		Root = Root.children[Segment]
 	end
-	self:_collect(root, t, string.sub(p2, 1, #p2 - 1))
+	self:_collect(Root, t, (string.sub(Text, 1, #Text - 1)))
 	
 	return t
 end
 
-function t_1:_collect(p3, p4, p5)
-	if p3.isEndOfWord then
-		table.insert(p4, p5 .. p3.data)
+function TrieModule:_collect(Root, List, Text) --[[ Line: 48 ]]
+	if Root.isEndOfWord then
+		table.insert(List, Text .. Root.data)
 	end
-	for i, v in pairs(p3.children) do
-		self:_collect(v, p4, p5 .. p3.data)
+	for _, child in pairs(Root.children) do
+		self:_collect(child, List, Text .. Root.data)
 	end
 end
 
-return t_1
+return TrieModule

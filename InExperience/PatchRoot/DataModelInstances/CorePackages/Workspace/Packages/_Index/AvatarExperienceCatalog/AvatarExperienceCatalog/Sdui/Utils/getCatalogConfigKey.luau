@@ -1,8 +1,8 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local constantsModule = require(avatarExperienceCatalog.Sdui.Constants)
-local normalizeScreenSizeForWire = require(avatarExperienceCatalog.Parent.AvatarExperienceCommon).Utils.normalizeScreenSizeForWire
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local ConstantsModule = require(AvatarExperienceCatalog.Sdui.Constants)
+local NormalizeScreenSizeForWireFunction = require(AvatarExperienceCatalog.Parent.AvatarExperienceCommon).Utils.normalizeScreenSizeForWire
 
-return function(p1, p2)
-	-- upvalues: normalizeScreenSizeForWire (ref), constantsModule (ref)
-	return `{constantsModule.CatalogSduiConfigKeyPrefix}-{p1}-{normalizeScreenSizeForWire(p2)}`
+return function(p1, p2): string --[[ Line: 11 | Named "getCatalogConfigKey" ]]
+	-- upvalues: NormalizeScreenSizeForWireFunction (copy), ConstantsModule (copy)
+	return `{ConstantsModule.CatalogSduiConfigKeyPrefix}-{p1}-{NormalizeScreenSizeForWireFunction(p2)}`
 end

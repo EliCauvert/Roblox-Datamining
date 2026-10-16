@@ -1,14 +1,13 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local _ = require(appChat.types)
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local memo = reactModule.memo
-local useCallback = reactModule.useCallback
-local useStyle = require(parent.UIBlox).Core.Style.useStyle
-local bidirectionalFlatList = require(parent.VirtualizedList).BidirectionalFlatList
-local pendingShimmerBubbleModule = require(script.Parent.PendingShimmerBubble)
-local t = {
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local _ = require(AppChat.types)
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local UseCallbackFunction = ReactModule.useCallback
+local UseStyleFunction = require(Parent.UIBlox).Core.Style.useStyle
+local BidirectionalFlatList = require(Parent.VirtualizedList).BidirectionalFlatList
+local PendingShimmerBubbleModule = require(script.Parent.PendingShimmerBubble)
+local config = {
 	minTransparency = 0.5,
 	maxTransparency = 0.9,
 	itemList = {
@@ -87,35 +86,36 @@ local t = {
 	size = UDim2.new(1, 0, 1, 0)
 }
 
-return memo(function(p1)
-	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), useCallback (ref), reactModule (ref), pendingShimmerBubbleModule (ref), bidirectionalFlatList (ref)
-	local var1 = cryoModule.Dictionary.join(t, p1)
-	local style = var1.style or useStyle()
+return ReactModule.memo(function(p1) --[[ Line: 113 | Named "PendingStateIndicator" ]]
+	-- upvalues: CryoModule (copy), config (copy), UseStyleFunction (copy), UseCallbackFunction (copy), ReactModule (copy), PendingShimmerBubbleModule (copy), BidirectionalFlatList (copy)
+	local JoinResult = CryoModule.Dictionary.join(config, p1)
+	local UseStyleResult = UseStyleFunction()
+	local Style = JoinResult.style or UseStyleResult
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
-		BackgroundColor3 = style.Theme.BackgroundDefault.Color,
-		Size = var1.size,
-		Transparency = style.Tokens.Color.None.Transparency,
-		LayoutOrder = var1.layoutOrder
+		BackgroundColor3 = Style.Theme.BackgroundDefault.Color,
+		Size = JoinResult.size,
+		Transparency = Style.Tokens.Color.None.Transparency,
+		LayoutOrder = JoinResult.layoutOrder
 	}, {
-		ShimmerMessageList = reactModule.createElement(bidirectionalFlatList, {
+		ShimmerMessageList = ReactModule.createElement(BidirectionalFlatList, {
 			inverted = true,
 			optimizeInvertedCanvasResize = true,
-			data = var1.itemList,
-			renderItem = useCallback(function(p2)
-				-- upvalues: var1 (ref), reactModule (copy), pendingShimmerBubbleModule (copy), cryoModule (copy)
-				return reactModule.createElement(pendingShimmerBubbleModule, cryoModule.Dictionary.join(p2.item, {
-					backgroundTransparency = var1.maxTransparency - (var1.maxTransparency - var1.minTransparency) * (p2.index - 1) / math.max(1, #var1.itemList)
+			data = JoinResult.itemList,
+			renderItem = UseCallbackFunction(function(p2) --[[ Line: 119 ]]
+				-- upvalues: JoinResult (copy), ReactModule (upval), PendingShimmerBubbleModule (upval), CryoModule (upval)
+				return ReactModule.createElement(PendingShimmerBubbleModule, CryoModule.Dictionary.join(p2.item, {
+					backgroundTransparency = JoinResult.maxTransparency - (JoinResult.maxTransparency - JoinResult.minTransparency) * (p2.index - 1) / math.max(1, #JoinResult.itemList)
 				}))
-			end, { #var1.itemList }),
+			end, { #JoinResult.itemList }),
 			style = {
 				BackgroundTransparency = 1,
 				ScrollBarThickness = 0,
 				Name = "ShimmerMessageList"
 			},
 			contentContainerStyle = { BackgroundTransparency = 1 },
-			keyExtractor = function(_, p2)
+			keyExtractor = function(_, p2) --[[ Line: 154 ]]
 				return p2
 			end
 		})

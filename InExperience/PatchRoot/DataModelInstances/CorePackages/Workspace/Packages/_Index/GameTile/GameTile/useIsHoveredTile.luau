@@ -1,67 +1,67 @@
-﻿local gameTile = script:FindFirstAncestor("GameTile")
-local parent = gameTile.Parent
-local reactModule = require(parent.React)
-local _ = require(parent.AppCommonLib)
-local hoverTileCoordinatorModule = require(gameTile.HoverTileCoordinator)
+﻿local GameTile = script:FindFirstAncestor("GameTile")
+local Parent = GameTile.Parent
+local ReactModule = require(Parent.React)
+local _ = require(Parent.AppCommonLib)
+local HoverTileCoordinatorModule = require(GameTile.HoverTileCoordinator)
 
-return function(p1, p2, p3, p4)
-	-- upvalues: hoverTileCoordinatorModule (ref), reactModule (ref)
-	p4 = p4 or hoverTileCoordinatorModule.default
-	local var1, var2 = reactModule.useState(false)
-	reactModule.useEffect(function()
-		-- upvalues: p3 (ref), p2 (ref), var2 (ref), p4 (ref)
-		if not p3 then return end
-		local function _(p5)
-			-- upvalues: p2 (copy), var2 (copy)
-			var2(p5 ~= nil and p5 == p2)
+return function(p1, HoveredKey, p2, p3) --[[ Line: 11 | Named "useIsHoveredTile" ]]
+	-- upvalues: HoverTileCoordinatorModule (copy), ReactModule (copy)
+	local P3 = p3 or HoverTileCoordinatorModule.default
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	ReactModule.useEffect(function() --[[ Line: 25 ]]
+		-- upvalues: p2 (copy), HoveredKey (copy), UseStateResult2 (copy), P3 (copy)
+		if not p2 then return end
+		local function _(HoveredKey1) --[[ Line: 31 | Named "checkAndUpdateState" ]]
+			-- upvalues: HoveredKey (upval), UseStateResult2 (upval)
+			UseStateResult2(HoveredKey1 ~= nil and HoveredKey1 == HoveredKey)
 		end
 		
-		local hoveredKey = p4.hoveredKey
-		var2(hoveredKey ~= nil and hoveredKey == p2)
-		local changedConnection = p4.changed:connect(function(p5)
-			-- upvalues: p2 (copy), var2 (copy)
-			var2(p5 ~= nil and p5 == p2)
+		local HoveredKey1 = P3.hoveredKey
+		UseStateResult2(HoveredKey1 ~= nil and HoveredKey1 == HoveredKey)
+		local ChangedConnection = P3.changed:connect(function(HoveredKey1) --[[ Line: 38 ]]
+			-- upvalues: HoveredKey (upval), UseStateResult2 (upval)
+			UseStateResult2(HoveredKey1 ~= nil and HoveredKey1 == HoveredKey)
 		end)
 		
-		return function()
-			-- upvalues: changedConnection (write)
-			if changedConnection ~= nil then
-				changedConnection:disconnect()
-				changedConnection = nil
+		return function() --[[ Line: 42 ]]
+			-- upvalues: ChangedConnection (ref)
+			if ChangedConnection ~= nil then
+				ChangedConnection:disconnect()
+				ChangedConnection = nil
 			end
 		end
-	end, { p3, p2, p4 })
-	reactModule.useEffect(function()
-		-- upvalues: p3 (ref), p1 (ref), p4 (ref), p2 (ref)
-		if not p3 then return end
-		local t = {}
+	end, { p2, HoveredKey, P3 })
+	ReactModule.useEffect(function() --[[ Line: 50 ]]
+		-- upvalues: p2 (copy), p1 (copy), P3 (copy), HoveredKey (copy)
+		if not p2 then return end
+		local List = {}
 		
 		if p1.current ~= nil then
-			table.insert(t, p1.current.MouseLeave:Connect(function()
-				-- upvalues: p4 (copy), p2 (copy)
-				p4:cancelHover(p2)
+			table.insert(List, p1.current.MouseLeave:Connect(function() --[[ Line: 59 ]]
+				-- upvalues: P3 (upval), HoveredKey (upval)
+				P3:cancelHover(HoveredKey)
 			end))
-			table.insert(t, p1.current.MouseEnter:Connect(function()
-				-- upvalues: p4 (copy), p2 (copy)
-				p4:requestHover(p2)
+			table.insert(List, p1.current.MouseEnter:Connect(function() --[[ Line: 65 ]]
+				-- upvalues: P3 (upval), HoveredKey (upval)
+				P3:requestHover(HoveredKey)
 			end))
 		end
-		return function()
-			-- upvalues: t (ref)
-			for i, v in t do
-				v:Disconnect()
+		return function() --[[ Line: 70 ]]
+			-- upvalues: List (copy)
+			for _, Connection in List do
+				Connection:Disconnect()
 			end
 		end
-	end, { p2, p1, p3, p4 })
-	reactModule.useEffect(function()
-		-- upvalues: p2 (ref), p4 (ref)
-		return function()
-			-- upvalues: p2 (copy), p4 (copy)
-			if p2 then
-				p4:cancelHover(p2)
+	end, { HoveredKey, p1, p2, P3 })
+	ReactModule.useEffect(function() --[[ Line: 78 ]]
+		-- upvalues: HoveredKey (copy), P3 (copy)
+		return function() --[[ Line: 79 ]]
+			-- upvalues: HoveredKey (upval), P3 (upval)
+			if HoveredKey then
+				P3:cancelHover(HoveredKey)
 			end
 		end
-	end, { p2, p4 })
+	end, { HoveredKey, P3 })
 	
-	return p3 and var1
+	return p2 and UseStateResult
 end

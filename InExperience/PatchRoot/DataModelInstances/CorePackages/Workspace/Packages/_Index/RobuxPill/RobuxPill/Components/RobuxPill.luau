@@ -1,48 +1,48 @@
-﻿local robuxPill = script:FindFirstAncestor("RobuxPill")
-local parent = robuxPill.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local text = foundationModule.Text
-local icon = foundationModule.Icon
-local button = foundationModule.Button
-local skeleton = foundationModule.Skeleton
-local fillBehavior = foundationModule.Enums.FillBehavior
-local iconSize = foundationModule.Enums.IconSize
-local iconName = foundationModule.Enums.IconName
-local inputSize = foundationModule.Enums.InputSize
-local radius = foundationModule.Enums.Radius
-local fFlagRobuxPillSingleFocusTargetModule = require(robuxPill.Flags.FFlagRobuxPillSingleFocusTarget)
+﻿local RobuxPill = script:FindFirstAncestor("RobuxPill")
+local Parent = RobuxPill.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local Text = FoundationModule.Text
+local Icon = FoundationModule.Icon
+local Button = FoundationModule.Button
+local Skeleton = FoundationModule.Skeleton
+local FillBehavior = FoundationModule.Enums.FillBehavior
+local IconSize = FoundationModule.Enums.IconSize
+local IconName = FoundationModule.Enums.IconName
+local InputSize = FoundationModule.Enums.InputSize
+local Radius = FoundationModule.Enums.Radius
+local FFlagRobuxPillSingleFocusTargetModule = require(RobuxPill.Flags.FFlagRobuxPillSingleFocusTarget)
 
-local function _(p1)
+local function _(p1) --[[ Line: 32 | Named "numWithCommas" ]]
 	return tostring(p1):reverse():gsub("(%d%d%d)", "%1,"):reverse():gsub("^,", "")
 end
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useTokens (ref), fFlagRobuxPillSingleFocusTargetModule (ref), reactModule (ref), foundationModule (ref), icon (ref), iconName (ref), iconSize (ref), skeleton (ref), radius (ref), text (ref), button (ref), inputSize (ref), fillBehavior (ref)
-	local var1 = useTokens()
-	local var2 = p1.showBorder == nil or p1.showBorder
-	local var3 = if fFlagRobuxPillSingleFocusTargetModule then false else nil
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 36 | Named "RobuxPill" ]]
+	-- upvalues: UseTokensFunction (copy), FFlagRobuxPillSingleFocusTargetModule (copy), ReactModule (copy), FoundationModule (copy), Icon (copy), IconName (copy), IconSize (copy), Skeleton (copy), Radius (copy), Text (copy), Button (copy), InputSize (copy), FillBehavior (copy)
+	local UseTokensResult = UseTokensFunction()
+	local NoShowBorder = p1.showBorder == nil or p1.showBorder
+	local Selectable = not FFlagRobuxPillSingleFocusTargetModule and nil
 	
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		testId = "robux-pill",
 		tag = {
 			["size-full-1400 padding-medium"] = p1.isCompact == true,
 			["size-full-0 auto-y"] = p1.isCompact ~= true,
-			["padding-xlarge"] = not p1.isCompact and var2,
-			["padding-x-medium padding-y-xlarge"] = not p1.isCompact and not var2
+			["padding-xlarge"] = not p1.isCompact and NoShowBorder,
+			["padding-x-medium padding-y-xlarge"] = not p1.isCompact and not NoShowBorder
 		},
 		onActivated = p1.onBuyActivated,
 		LayoutOrder = p1.layoutOrder,
-		ref = p2,
-		stroke = if var2 then {
-			Color = var1.Color.Stroke.Default.Color3,
-			Transparency = var1.Color.Stroke.Default.Transparency,
-			Thickness = var1.Stroke.Standard
+		ref = Ref,
+		stroke = if NoShowBorder then {
+			Color = UseTokensResult.Color.Stroke.Default.Color3,
+			Transparency = UseTokensResult.Color.Stroke.Default.Transparency,
+			Thickness = UseTokensResult.Stroke.Standard
 		} else nil,
-		cornerRadius = if var2 then UDim.new(0, var1.Radius.Medium) else nil
+		cornerRadius = if NoShowBorder then UDim.new(0, UseTokensResult.Radius.Medium) else nil
 	}, {
-		RobuxContainer = reactModule.createElement(foundationModule.View, {
+		RobuxContainer = ReactModule.createElement(FoundationModule.View, {
 			testId = "robux-container",
 			tag = {
 				["row align-y-center position-center-left anchor-center-left auto-xy"] = true,
@@ -50,18 +50,18 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 				["gap-small"] = p1.isCompact ~= true
 			}
 		}, {
-			RobuxIcon = reactModule.createElement(icon, {
+			RobuxIcon = ReactModule.createElement(Icon, {
 				LayoutOrder = 1,
 				testId = "robux-icon",
-				name = iconName.Robux,
-				size = if p1.isCompact then iconSize.Large else iconSize.Medium
+				name = IconName.Robux,
+				size = if p1.isCompact then IconSize.Large else IconSize.Medium
 			}),
-			RobuxAmount = if p1.robuxBalance == nil then reactModule.createElement(foundationModule.View, { tag = "size-2500-800", LayoutOrder = 2 }, {
-				Skeleton = reactModule.createElement(skeleton, {
+			RobuxAmount = if p1.robuxBalance == nil then ReactModule.createElement(FoundationModule.View, { tag = "size-2500-800", LayoutOrder = 2 }, {
+				Skeleton = ReactModule.createElement(Skeleton, {
 					testId = "robux-balance-skeleton",
-					radius = radius.Medium
+					radius = Radius.Medium
 				})
-			}) else reactModule.createElement(text, {
+			}) else ReactModule.createElement(Text, {
 				LayoutOrder = 2,
 				Size = UDim2.new(0.5, 0, 0, 0),
 				tag = {
@@ -72,25 +72,25 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 				Text = tostring(p1.robuxBalance):reverse():gsub("(%d%d%d)", "%1,"):reverse():gsub("^,", "")
 			})
 		}),
-		BuyRobuxButton = if p1.isCompact then reactModule.createElement(foundationModule.View, {
+		BuyRobuxButton = if p1.isCompact then ReactModule.createElement(FoundationModule.View, {
 			tag = "anchor-center-right auto-xy",
 			testId = "buy-robux-button-container",
 			Position = UDim2.new(1, 0, 0.5, 0),
 			sizeConstraint = { MinSize = Vector2.new(84, 0) }
 		}, {
-			Button = reactModule.createElement(button, {
+			Button = ReactModule.createElement(Button, {
 				text = p1.buyButtonText,
-				size = inputSize.Small,
-				Selectable = var3,
+				size = InputSize.Small,
+				Selectable = Selectable,
 				onActivated = p1.onBuyActivated,
-				fillBehavior = fillBehavior.Fill
+				fillBehavior = FillBehavior.Fill
 			})
-		}) else reactModule.createElement(button, {
+		}) else ReactModule.createElement(Button, {
 			AnchorPoint = Vector2.new(1, 0.5),
 			Position = UDim2.new(1, 0, 0.5, 0),
 			text = p1.buyButtonText,
-			size = inputSize.Small,
-			Selectable = var3,
+			size = InputSize.Small,
+			Selectable = Selectable,
 			onActivated = p1.onBuyActivated
 		})
 	})

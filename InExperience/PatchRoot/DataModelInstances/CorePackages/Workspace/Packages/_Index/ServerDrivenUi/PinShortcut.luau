@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.PinShortcut.PinShortcut)
+﻿return (require(script.Parent.Parent.Parent._Index.PinShortcut.PinShortcut))

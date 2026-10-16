@@ -1,100 +1,102 @@
-﻿local parent = script:FindFirstAncestor("ShareSheet").Parent
-local foundationModule = require(parent.Foundation)
-local motionModule = require(parent.Motion)
-local reactModule = require(parent.React)
-local userTileModule = require(parent.UserTile)
-local icon = foundationModule.Icon
-local text = foundationModule.Text
-local view = foundationModule.View
-local iconName = foundationModule.Enums.IconName
-local iconSize = foundationModule.Enums.IconSize
-local iconVariant = foundationModule.Enums.IconVariant
-local usePreferences = foundationModule.Hooks.usePreferences
-local useTokens = foundationModule.Hooks.useTokens
-local userTile = userTileModule.UserTile
-local layoutMode = userTileModule.LayoutMode
+﻿local Parent = script:FindFirstAncestor("ShareSheet").Parent
+local FoundationModule = require(Parent.Foundation)
+local MotionModule = require(Parent.Motion)
+local ReactModule = require(Parent.React)
+local UserTileModule = require(Parent.UserTile)
+local Icon = FoundationModule.Icon
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local IconName = FoundationModule.Enums.IconName
+local IconSize = FoundationModule.Enums.IconSize
+local IconVariant = FoundationModule.Enums.IconVariant
+local UsePreferencesFunction = FoundationModule.Hooks.usePreferences
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UserTile = UserTileModule.UserTile
+local LayoutMode = UserTileModule.LayoutMode
 
-local function AnimatedIcon(p1)
-	-- upvalues: useTokens (ref), usePreferences (ref), reactModule (ref), motionModule (ref), view (ref), icon (ref), iconSize (ref)
-	local var1 = useTokens()
-	local reducedMotion = usePreferences().reducedMotion
-	local var2 = reactModule.useMemo(function()
-		-- upvalues: motionModule (copy), reducedMotion (ref), var1 (ref)
+local function AnimatedIcon(p1) --[[ Line: 27 ]]
+	-- upvalues: UseTokensFunction (copy), UsePreferencesFunction (copy), ReactModule (copy), MotionModule (copy), View (copy), Icon (copy), IconSize (copy)
+	local UseTokensResult = UseTokensFunction()
+	local ReducedMotion = UsePreferencesFunction().reducedMotion
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 30 ]]
+		-- upvalues: MotionModule (upval), ReducedMotion (copy), UseTokensResult (copy)
 		return {
-			compressed = motionModule.createState({ scale = 0.75 }, { default = motionModule.transition({ duration = 0 }) }),
-			rest = motionModule.createState({ scale = 1 }, {
-				default = motionModule.transition({
-					duration = if reducedMotion then 0 else var1.Time.Time_300,
-					easingStyle = var1.Ease.ExpressiveOut
+			compressed = MotionModule.createState({ scale = 0.75 }, { default = MotionModule.transition({ duration = 0 }) }),
+			rest = MotionModule.createState({ scale = 1 }, {
+				default = MotionModule.transition({
+					duration = if ReducedMotion then 0 else UseTokensResult.Time.Time_300,
+					easingStyle = UseTokensResult.Ease.ExpressiveOut
 				})
 			})
 		}
-	end, { reducedMotion, var1 })
-	local var3, var4 = motionModule.useMotion(var2.rest)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var4 (ref), var2 (ref)
+	end, { ReducedMotion, UseTokensResult })
+	local UseMotionResult, UseMotionResult2 = MotionModule.useMotion(UseMemoResult.rest)
+	ReactModule.useEffect(function() --[[ Line: 49 ]]
+		-- upvalues: p1 (copy), UseMotionResult2 (copy), UseMemoResult (copy)
 		if p1.shouldAnimate then
-			var4(var2.compressed, {
-				onAnimationComplete = function(p2)
-					-- upvalues: var4 (copy), var2 (copy)
-					if p2 == true then
-						var4(var2.rest)
+			UseMotionResult2(UseMemoResult.compressed, {
+				onAnimationComplete = function(Enabled) --[[ Line: 55 ]]
+					-- upvalues: UseMotionResult2 (upval), UseMemoResult (upval)
+					if Enabled == true then
+						UseMotionResult2(UseMemoResult.rest)
 					end
 				end
 			})
 			
 			return
 		end
-	end, { var4, p1.shouldAnimate, var2 })
+	end, { UseMotionResult2, p1.shouldAnimate, UseMemoResult })
 	
-	return reactModule.createElement(view, { tag = "auto-xy", scale = var3.scale }, {
-		Icon = reactModule.createElement(icon, { name = p1.icon, size = iconSize.Large })
+	return ReactModule.createElement(View, { tag = "auto-xy", scale = UseMotionResult.scale }, {
+		Icon = ReactModule.createElement(Icon, { name = p1.icon, size = IconSize.Large })
 	})
 end
 
-return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), view (ref), userTile (ref), layoutMode (ref), icon (ref), iconName (ref), iconSize (ref), iconVariant (ref), AnimatedIcon (ref), text (ref)
-	return reactModule.createElement(view, {
+return function(Frame) --[[ Line: 86 | Named "ShareSheetItemView" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), UserTile (copy), LayoutMode (copy), Icon (copy), IconName (copy), IconSize (copy), IconVariant (copy), AnimatedIcon (copy), Text (copy)
+	local UseTokensResult = UseTokensFunction()
+	
+	return ReactModule.createElement(View, {
 		tag = "col align-x-center gap-small size-1700-0 auto-y",
 		testId = "share-sheet-item-view",
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Content = if p1.primaryUserId then reactModule.createElement(view, {
+		Content = if Frame.primaryUserId then ReactModule.createElement(View, {
 			tag = "size-full-1700",
 			LayoutOrder = 1,
-			testId = if p1.secondUserId then "share-sheet-item-avatar-pile" else "share-sheet-item-avatar"
+			testId = if Frame.secondUserId then "share-sheet-item-avatar-pile" else "share-sheet-item-avatar"
 		}, {
-			Tile = reactModule.createElement(userTile, {
+			Tile = ReactModule.createElement(UserTile, {
 				selectable = true,
-				userId = p1.primaryUserId,
-				facePileSecondUserId = p1.secondUserId,
-				layoutMode = layoutMode.compact,
-				userPresenceType = p1.userPresence,
-				onActivated = p1.onActivated
+				userId = Frame.primaryUserId,
+				facePileSecondUserId = Frame.secondUserId,
+				layoutMode = LayoutMode.compact,
+				userPresenceType = Frame.userPresence,
+				onActivated = Frame.onActivated
 			}),
-			SelectionIndicator = if p1.isSelected then reactModule.createElement(icon, {
+			SelectionIndicator = if Frame.isSelected then ReactModule.createElement(Icon, {
 				ZIndex = 4,
 				testId = "share-sheet-item-selection-indicator",
-				name = iconName.CircleCheck,
-				size = iconSize.Small,
-				variant = iconVariant.Filled,
-				style = useTokens().Color.System.Contrast,
+				name = IconName.CircleCheck,
+				size = IconSize.Small,
+				variant = IconVariant.Filled,
+				style = UseTokensResult.Color.System.Contrast,
 				Position = UDim2.fromScale(0.8536, 0.1464),
 				AnchorPoint = Vector2.new(0.5, 0.5)
 			}) else nil
-		}) else reactModule.createElement(view, {
+		}) else ReactModule.createElement(View, {
 			tag = "align-x-center align-y-center size-full-1700 radius-circle bg-shift-300",
 			LayoutOrder = 1,
 			testId = "share-sheet-item",
-			onActivated = p1.onActivated,
+			onActivated = Frame.onActivated,
 			selection = { Selectable = true }
 		}, {
-			IconContent = reactModule.createElement(AnimatedIcon, { icon = p1.icon, shouldAnimate = p1.shouldAnimate })
+			IconContent = ReactModule.createElement(AnimatedIcon, { icon = Frame.icon, shouldAnimate = Frame.shouldAnimate })
 		}),
-		Label = reactModule.createElement(text, {
+		Label = ReactModule.createElement(Text, {
 			tag = "size-full-0 auto-y text-body-small text-align-x-center content-default",
 			LayoutOrder = 2,
-			Text = p1.label,
+			Text = Frame.label,
 			TextTruncate = Enum.TextTruncate.AtEnd
 		})
 	})

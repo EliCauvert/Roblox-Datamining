@@ -1,65 +1,65 @@
-﻿local playersService = game:GetService("Players")
-local corePackagesService = game:GetService("CorePackages")
-local coreGuiService = game:GetService("CoreGui")
-local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
-local fStringLuaAppPlayButtonAgeCheckAmpFeatureName = sharedFlagsModule.FStringLuaAppPlayButtonAgeCheckAmpFeatureName
-local fStringLuaAppPlayButtonAgeCheckAmpNameSpace = sharedFlagsModule.FStringLuaAppPlayButtonAgeCheckAmpNameSpace
-local fFlagPioneerLeaveOnInExpFaeDownAge = sharedFlagsModule.FFlagPioneerLeaveOnInExpFaeDownAge
-local logging = require(corePackagesService.Workspace.Packages.AppCommonLib).Logging
-local maybeLeavePioneerOnFaeDownAgeModule = require(corePackagesService.Workspace.Packages.PioneerUtils.maybeLeavePioneerOnFaeDownAge)
-local t = {}
+﻿local Players = game:GetService("Players")
+local CorePackages = game:GetService("CorePackages")
+local CoreGui = game:GetService("CoreGui")
+local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
+local FStringLuaAppPlayButtonAgeCheckAmpFeatureName = SharedFlagsModule.FStringLuaAppPlayButtonAgeCheckAmpFeatureName
+local FStringLuaAppPlayButtonAgeCheckAmpNameSpace = SharedFlagsModule.FStringLuaAppPlayButtonAgeCheckAmpNameSpace
+local FFlagPioneerLeaveOnInExpFaeDownAge = SharedFlagsModule.FFlagPioneerLeaveOnInExpFaeDownAge
+local Logging = require(CorePackages.Workspace.Packages.AppCommonLib).Logging
+local MaybeLeavePioneerOnFaeDownAgeModule = require(CorePackages.Workspace.Packages.PioneerUtils.maybeLeavePioneerOnFaeDownAge)
 
-local function onPromptAgeCheckRequested(p1)
-	-- upvalues: playersService (ref), corePackagesService (ref), coreGuiService (ref), fStringLuaAppPlayButtonAgeCheckAmpFeatureName (ref), logging (ref), fFlagPioneerLeaveOnInExpFaeDownAge (ref), maybeLeavePioneerOnFaeDownAgeModule (ref), fStringLuaAppPlayButtonAgeCheckAmpNameSpace (ref)
-	local localPlayer = playersService.LocalPlayer
+local function onPromptAgeCheckRequested(Player) --[[ Line: 25 ]]
+	-- upvalues: Players (copy), CorePackages (copy), CoreGui (copy), FStringLuaAppPlayButtonAgeCheckAmpFeatureName (copy), Logging (copy), FFlagPioneerLeaveOnInExpFaeDownAge (copy), MaybeLeavePioneerOnFaeDownAgeModule (copy), FStringLuaAppPlayButtonAgeCheckAmpNameSpace (copy)
+	local LocalPlayer = Players.LocalPlayer
 	
-	if p1 ~= localPlayer then return end
-	local ok, status = pcall(require, corePackagesService.Workspace.Packages.AmpUpsell)
+	if Player ~= LocalPlayer then return end
+	local Success, Result = pcall(require, CorePackages.Workspace.Packages.AmpUpsell)
 	
-	if not ok or not status or not status.InExpAmpWizardController then return end
-	local ok_1, status_1 = pcall(require, coreGuiService.RobloxGui.Modules.ApolloClient)
+	if not Success or not Result or not Result.InExpAmpWizardController then return end
+	local Success1, Result1 = pcall(require, CoreGui.RobloxGui.Modules.ApolloClient)
 	
-	if ok_1 and status_1 then
-		status.InExpAmpWizardController.OpenAmpWizardContainerInExp(fStringLuaAppPlayButtonAgeCheckAmpFeatureName, function(p2, p3)
-			-- upvalues: localPlayer (ref), logging (copy), fFlagPioneerLeaveOnInExpFaeDownAge (copy), status (ref), maybeLeavePioneerOnFaeDownAgeModule (copy)
-			local function notifyIfGranted()
-				-- upvalues: p2 (ref), localPlayer (copy), logging (copy)
-				if p2 == "Granted" then
-					local ok, status = pcall(function()
-						-- upvalues: localPlayer (copy)
-						localPlayer:NotifyAgeCheckPassed()
+	if Success1 and Result1 then
+		Result.InExpAmpWizardController.OpenAmpWizardContainerInExp(FStringLuaAppPlayButtonAgeCheckAmpFeatureName, function(p1, p2) --[[ Line: 43 ]]
+			-- upvalues: LocalPlayer (copy), Logging (upval), FFlagPioneerLeaveOnInExpFaeDownAge (upval), Result (copy), MaybeLeavePioneerOnFaeDownAgeModule (upval)
+			local function notifyIfGranted() --[[ Line: 44 ]]
+				-- upvalues: p1 (copy), LocalPlayer (upval), Logging (upval)
+				if p1 == "Granted" then
+					local Success, Result = pcall(function() --[[ Line: 46 ]]
+						-- upvalues: LocalPlayer (upval)
+						LocalPlayer:NotifyAgeCheckPassed()
 					end)
 					
-					if not ok then
-						logging.warn("PromptAgeCheckRequested: NotifyAgeCheckPassed failed: " .. tostring(status))
+					if not Success then
+						Logging.warn("PromptAgeCheckRequested: NotifyAgeCheckPassed failed: " .. tostring(Result))
 					end
 				end
 			end
 			
-			if fFlagPioneerLeaveOnInExpFaeDownAge then
-				local ampEnums = status.AmpEnums
-				maybeLeavePioneerOnFaeDownAgeModule(p3 ~= nil and p3[ampEnums.ActionTypeEnum.AgeEstimation] == ampEnums.ActionStatusEnum.Success, notifyIfGranted)
+			if FFlagPioneerLeaveOnInExpFaeDownAge then
+				local AmpEnums = Result.AmpEnums
+				MaybeLeavePioneerOnFaeDownAgeModule(p2 ~= nil and p2[AmpEnums.ActionTypeEnum.AgeEstimation] == AmpEnums.ActionStatusEnum.Success, notifyIfGranted)
 				
 				return
-			elseif p2 == "Granted" then
-				local ok, status_1 = pcall(function()
-					-- upvalues: localPlayer (copy)
-					localPlayer:NotifyAgeCheckPassed()
+			end
+			if p1 == "Granted" then
+				local Success, Result1 = pcall(function() --[[ Line: 46 ]]
+					-- upvalues: LocalPlayer (upval)
+					LocalPlayer:NotifyAgeCheckPassed()
 				end)
 				
-				if not ok then
-					logging.warn("PromptAgeCheckRequested: NotifyAgeCheckPassed failed: " .. tostring(status_1))
+				if not Success then
+					Logging.warn("PromptAgeCheckRequested: NotifyAgeCheckPassed failed: " .. tostring(Result1))
 				end
 			end
-		end, nil, "PromptAgeCheckRequested", nil, fStringLuaAppPlayButtonAgeCheckAmpNameSpace, status_1)
+		end, nil, "PromptAgeCheckRequested", nil, FStringLuaAppPlayButtonAgeCheckAmpNameSpace, Result1)
 		
 		return
 	end
 end
 
-function t.init()
-	-- upvalues: playersService (ref), onPromptAgeCheckRequested (ref)
-	playersService.PromptAgeCheckRequested:Connect(onPromptAgeCheckRequested)
-end
-
-return t
+return {
+	init = function() --[[ Line: 72 ]]
+		-- upvalues: Players (copy), onPromptAgeCheckRequested (copy)
+		Players.PromptAgeCheckRequested:Connect(onPromptAgeCheckRequested)
+	end
+}

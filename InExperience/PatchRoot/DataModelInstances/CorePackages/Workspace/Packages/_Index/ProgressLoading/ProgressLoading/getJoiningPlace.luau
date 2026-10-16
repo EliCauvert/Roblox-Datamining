@@ -1,13 +1,13 @@
-﻿local engineFeatureEnableDeferredAssetManagerServiceModule = require(script:FindFirstAncestor("ProgressLoading").Flags.EngineFeatureEnableDeferredAssetManagerService)
-local var1 = if engineFeatureEnableDeferredAssetManagerServiceModule then game:GetService("DeferredAssetManagerService") else nil
+﻿local EngineFeatureEnableDeferredAssetManagerServiceModule = require(script:FindFirstAncestor("ProgressLoading").Flags.EngineFeatureEnableDeferredAssetManagerService)
+local DeferredAssetManagerService = if EngineFeatureEnableDeferredAssetManagerServiceModule then game:GetService("DeferredAssetManagerService") else nil
 
 return {
-	getJoiningPlaceId = function()
-		-- upvalues: engineFeatureEnableDeferredAssetManagerServiceModule (ref), var1 (ref)
-		return if engineFeatureEnableDeferredAssetManagerServiceModule and var1 then var1.JoiningPlaceId or 0 else 0
+	getJoiningPlaceId = function() --[[ Line: 11 ]]
+		-- upvalues: EngineFeatureEnableDeferredAssetManagerServiceModule (copy), DeferredAssetManagerService (copy)
+		return EngineFeatureEnableDeferredAssetManagerServiceModule and DeferredAssetManagerService and DeferredAssetManagerService.JoiningPlaceId or 0
 	end,
-	getJoiningUniverseId = function()
-		-- upvalues: engineFeatureEnableDeferredAssetManagerServiceModule (ref), var1 (ref)
-		return if engineFeatureEnableDeferredAssetManagerServiceModule and var1 then var1.JoiningUniverseId or 0 else 0
+	getJoiningUniverseId = function() --[[ Line: 18 ]]
+		-- upvalues: EngineFeatureEnableDeferredAssetManagerServiceModule (copy), DeferredAssetManagerService (copy)
+		return EngineFeatureEnableDeferredAssetManagerServiceModule and DeferredAssetManagerService and DeferredAssetManagerService.JoiningUniverseId or 0
 	end
 }

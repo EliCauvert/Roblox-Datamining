@@ -1,21 +1,21 @@
-﻿local bulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
-local parent = bulkPurchaseApp.Parent
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local alertPromptModule = require(bulkPurchaseApp.Components.AlertPrompt)
+﻿local BulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
+local Parent = BulkPurchaseApp.Parent
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local AlertPromptModule = require(BulkPurchaseApp.Components.AlertPrompt)
 
-return function(p1)
-	-- upvalues: useLocalization (ref), reactModule (ref), alertPromptModule (ref)
-	local var1 = useLocalization({
+return function(p1) --[[ Line: 13 | Named "BulkPurchaseSuccess" ]]
+	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), AlertPromptModule (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
 		title = "CoreScripts.BulkPurchasePrompt.SuccessPrompt.Heading",
 		bodyText = "CoreScripts.BulkPurchasePrompt.SuccessPrompt.Body",
 		dismissCTA = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.DismissCTA"
 	})
 	
-	return reactModule.createElement(alertPromptModule, {
-		title = var1.title,
-		bodyText = var1.bodyText:gsub("{.*}", tostring(p1.itemCount)),
-		dismissCTA = var1.dismissCTA,
+	return ReactModule.createElement(AlertPromptModule, {
+		title = UseLocalizationResult.title,
+		bodyText = UseLocalizationResult.bodyText:gsub("{.*}", (tostring(p1.itemCount))),
+		dismissCTA = UseLocalizationResult.dismissCTA,
 		onDismiss = p1.onDismiss
 	})
 end

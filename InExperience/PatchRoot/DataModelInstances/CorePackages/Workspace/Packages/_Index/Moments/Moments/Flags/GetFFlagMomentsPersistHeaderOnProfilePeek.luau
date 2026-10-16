@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("MomentsPersistHeaderOnProfilePeek", false)
 
-return function()
+return function() --[[ Line: 12 ]]
 	return game:GetFastFlag("MomentsPersistHeaderOnProfilePeek")
 end

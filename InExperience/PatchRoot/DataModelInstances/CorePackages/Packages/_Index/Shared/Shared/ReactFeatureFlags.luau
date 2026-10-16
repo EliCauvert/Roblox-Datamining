@@ -1,20 +1,22 @@
-﻿local parent = script.Parent.Parent
-local reactGlobalsModule = require(parent.ReactGlobals)
-local safeFlagsModule = require(parent.SafeFlags)
+﻿local Parent = script.Parent.Parent
+local ReactGlobalsModule = require(Parent.ReactGlobals)
+local SafeFlagsModule = require(Parent.SafeFlags)
+local ReactCatchYieldingInDEV = SafeFlagsModule.createGetFFlag("ReactCatchYieldingInDEV")
+local ReactFilterInternalStackFrames = SafeFlagsModule.createGetFFlag("ReactFilterInternalStackFrames")
 
 return {
 	enableDebugTracing = false,
-	enableSchedulingProfiler = safeFlagsModule.createGetFFlag("ReactEnableSchedulingProfiler")() or reactGlobalsModule.__PROFILE__ and reactGlobalsModule.__EXPERIMENTAL__,
-	catchYieldingInDEV = reactGlobalsModule.__DEV__ and safeFlagsModule.createGetFFlag("ReactCatchYieldingInDEV")(),
-	debugRenderPhaseSideEffectsForStrictMode = reactGlobalsModule.__DEV__,
-	replayFailedUnitOfWorkWithInvokeGuardedCallback = reactGlobalsModule.__DEV__,
+	enableSchedulingProfiler = SafeFlagsModule.createGetFFlag("ReactEnableSchedulingProfiler")() or ReactGlobalsModule.__PROFILE__ and ReactGlobalsModule.__EXPERIMENTAL__,
+	catchYieldingInDEV = ReactGlobalsModule.__DEV__ and ReactCatchYieldingInDEV(),
+	debugRenderPhaseSideEffectsForStrictMode = ReactGlobalsModule.__DEV__,
+	replayFailedUnitOfWorkWithInvokeGuardedCallback = ReactGlobalsModule.__DEV__,
 	warnAboutDeprecatedLifecycles = true,
-	enableProfilerTimer = reactGlobalsModule.__PROFILE__,
-	enableProfilerCommitHooks = reactGlobalsModule.__PROFILE__,
-	enableSchedulerTracing = reactGlobalsModule.__PROFILE__,
-	enableSuspenseServerRenderer = reactGlobalsModule.__EXPERIMENTAL__,
-	enableBlocksAPI = reactGlobalsModule.__EXPERIMENTAL__,
-	enableLazyElements = reactGlobalsModule.__EXPERIMENTAL__,
+	enableProfilerTimer = ReactGlobalsModule.__PROFILE__,
+	enableProfilerCommitHooks = ReactGlobalsModule.__PROFILE__,
+	enableSchedulerTracing = ReactGlobalsModule.__PROFILE__,
+	enableSuspenseServerRenderer = ReactGlobalsModule.__EXPERIMENTAL__,
+	enableBlocksAPI = ReactGlobalsModule.__EXPERIMENTAL__,
+	enableLazyElements = ReactGlobalsModule.__EXPERIMENTAL__,
 	enableSchedulerDebugging = false,
 	enableFundamentalAPI = false,
 	enableScopeAPI = false,
@@ -26,9 +28,10 @@ return {
 	enableComponentStackLocations = true,
 	enableNewReconciler = true,
 	skipUnmountedBoundaries = true,
-	deletedTreeCleanUpLevel = safeFlagsModule.createGetFInt("ReactDeletedTreeCleanUpLevel", 1)(),
-	enableNewTreeCleanupPath = safeFlagsModule.createGetFFlag("ReactEnableNewTreeCleanupPath", false)(),
-	filterInternalStackFrames = reactGlobalsModule.__DEV__ and safeFlagsModule.createGetFFlag("ReactFilterInternalStackFrames")(),
+	deletedTreeCleanUpLevel = SafeFlagsModule.createGetFInt("ReactDeletedTreeCleanUpLevel", 1)(),
+	enableNewTreeCleanupPath = SafeFlagsModule.createGetFFlag("ReactEnableNewTreeCleanupPath", false)(),
+	enableHookDoubleBuffering = SafeFlagsModule.createGetFFlag("ReactEnableHookDoubleBuffering", false)(),
+	filterInternalStackFrames = ReactGlobalsModule.__DEV__ and ReactFilterInternalStackFrames(),
 	warnAboutStringRefs = false,
 	disableLegacyContext = false,
 	disableModulePatternComponents = false,
@@ -36,5 +39,13 @@ return {
 	deferRenderPhaseUpdateToNextBatch = false,
 	decoupleUpdatePriorityFromScheduler = true,
 	enableEagerRootListeners = false,
-	enableDoubleInvokingEffects = false
+	enableDoubleInvokingEffects = false,
+	enableAllocationTrims = SafeFlagsModule.createGetFFlag("ReactEnableAllocationTrims", false)(),
+	enableWorkLoopTrims = SafeFlagsModule.createGetFFlag("ReactWorkLoopTrims", false)(),
+	enableCommitTraversalTrims = SafeFlagsModule.createGetFFlag("ReactCommitTraversalTrims", false)(),
+	enableSkipHostSiblingLookup = SafeFlagsModule.createGetFFlag("ReactSkipHostSiblingLookup", false)(),
+	enableReentrantSafeSignals = SafeFlagsModule.createGetFFlag("ReactReentrantSafeSignals", false)(),
+	keepSyncQueueOnError = SafeFlagsModule.createGetFFlag("ReactKeepSyncQueueOnError", false)(),
+	fixGetInstanceFromNode = SafeFlagsModule.createGetFFlag("ReactFixGetInstanceFromNode", false)(),
+	fixEagerReducerError = SafeFlagsModule.createGetFFlag("ReactFixEagerReducerError", false)()
 }

@@ -1,44 +1,44 @@
-﻿local playersService = game:GetService("Players")
-local squads = script:FindFirstAncestor("Squads")
-local parent = squads.Parent
-local dependenciesModule = require(squads.dependencies)
-local react = dependenciesModule.React
-local useCurrentSquadSelector = dependenciesModule.Hooks.useCurrentSquadSelector
-local getFFlagEnablePartyVoiceOnlyForEligibleUsers = require(parent.SquadsCore.Flags).GetFFlagEnablePartyVoiceOnlyForEligibleUsers
-local getFStringPartyVoiceEligibilityAllowList = require(parent.SquadsCore.Flags).GetFStringPartyVoiceEligibilityAllowList
+﻿local Players = game:GetService("Players")
+local Squads = script:FindFirstAncestor("Squads")
+local Parent = Squads.Parent
+local DependenciesModule = require(Squads.dependencies)
+local React = DependenciesModule.React
+local UseCurrentSquadSelectorFunction = DependenciesModule.Hooks.useCurrentSquadSelector
+local GetFFlagEnablePartyVoiceOnlyForEligibleUsersFunction = require(Parent.SquadsCore.Flags).GetFFlagEnablePartyVoiceOnlyForEligibleUsers
+local GetFStringPartyVoiceEligibilityAllowListFunction = require(Parent.SquadsCore.Flags).GetFStringPartyVoiceEligibilityAllowList
 
-function getIsUserWhitelisted(p1)
-	-- upvalues: getFStringPartyVoiceEligibilityAllowList (ref)
-	for i in getFStringPartyVoiceEligibilityAllowList():gmatch("%d+") do
-		if tonumber(i) == p1 then
+function getIsUserWhitelisted(Number): boolean --[[ Line: 18 ]]
+	-- upvalues: GetFStringPartyVoiceEligibilityAllowListFunction (copy)
+	for i in GetFStringPartyVoiceEligibilityAllowListFunction():gmatch("%d+") do
+		if tonumber(i) == Number then
 			return true
 		end
 	end
 	return false
 end
 
-function useIsAnyOtherUserPartyVoiceEligible()
-	-- upvalues: playersService (ref), useCurrentSquadSelector (ref), react (ref)
-	local var1 = if playersService.LocalPlayer then playersService.LocalPlayer.UserId else 0
-	local var2 = useCurrentSquadSelector()
-	local var3 = react.useMemo(function()
-		-- upvalues: var2 (ref)
-		return if var2 then var2.members else {}
-	end, { var2 })
+function useIsAnyOtherUserPartyVoiceEligible() --[[ Line: 27 ]]
+	-- upvalues: Players (copy), UseCurrentSquadSelectorFunction (copy), React (copy)
+	local UserId = Players.LocalPlayer and Players.LocalPlayer.UserId or 0
+	local UseCurrentSquadSelectorResult = UseCurrentSquadSelectorFunction()
+	local UseMemoResult = React.useMemo(function() --[[ Line: 30 ]]
+		-- upvalues: UseCurrentSquadSelectorResult (copy)
+		return if UseCurrentSquadSelectorResult then UseCurrentSquadSelectorResult.members else {}
+	end, { UseCurrentSquadSelectorResult })
 	
-	return react.useMemo(function()
-		-- upvalues: var1 (ref), var3 (ref)
-		if var1 ~= 0 then
-			for i, v in ipairs(var3) do
-				if v.userId ~= var1 and (v.partyVoiceEligible or getIsUserWhitelisted(v.userId)) then
+	return React.useMemo(function(): boolean --[[ Line: 37 ]]
+		-- upvalues: UserId (copy), UseMemoResult (copy)
+		if UserId ~= 0 then
+			for _, value in ipairs(UseMemoResult) do
+				if value.userId ~= UserId and (value.partyVoiceEligible or getIsUserWhitelisted(value.userId)) then
 					return true
 				end
 			end
 		end
 		return false
-	end, { var1, var3 })
+	end, { UserId, UseMemoResult })
 end
 
-return if getFFlagEnablePartyVoiceOnlyForEligibleUsers() then useIsAnyOtherUserPartyVoiceEligible else function()
+return if GetFFlagEnablePartyVoiceOnlyForEligibleUsersFunction() then useIsAnyOtherUserPartyVoiceEligible else function(): boolean --[[ Line: 55 ]]
 	return true
 end

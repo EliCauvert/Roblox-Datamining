@@ -1,68 +1,74 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local getTransparencyStoreModule = require(expChat.Stores.GetTransparencyStore)
-local useIsChatBackgroundVisibleModule = require(expChat.Stores.GetTransparencyStore.useIsChatBackgroundVisible)
-local usePausableTimeoutModule = require(expChat.Stores.GetTransparencyStore.usePausableTimeout)
-local dictationAnalyticsModule = require(script.Parent.DictationAnalytics)
-local dictationFTUXStorageModule = require(script.Parent.DictationFTUXStorage)
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local GetTransparencyStoreModule = require(ExpChat.Stores.GetTransparencyStore)
+local UseIsChatBackgroundVisibleModule = require(ExpChat.Stores.GetTransparencyStore.useIsChatBackgroundVisible)
+local UsePausableTimeoutModule = require(ExpChat.Stores.GetTransparencyStore.usePausableTimeout)
+local DictationAnalyticsModule = require(script.Parent.DictationAnalytics)
+local DictationFTUXStorageModule = require(script.Parent.DictationFTUXStorage)
 
-return function(p1)
-	-- upvalues: useIsChatBackgroundVisibleModule (ref), getTransparencyStoreModule (ref), signalsReactModule (ref), reactModule (ref), dictationFTUXStorageModule (ref), dictationAnalyticsModule (ref), usePausableTimeoutModule (ref)
-	local var1 = useIsChatBackgroundVisibleModule()
-	local var2 = signalsReactModule.useSignalState(getTransparencyStoreModule(false).getIsTextBoxFocused)
-	local var3, var4 = reactModule.useState(function()
-		-- upvalues: dictationFTUXStorageModule (copy)
-		return dictationFTUXStorageModule.hasBeenDismissed()
+return function(p1) --[[ Line: 44 | Named "useDictationFTUX" ]]
+	-- upvalues: UseIsChatBackgroundVisibleModule (copy), GetTransparencyStoreModule (copy), SignalsReactModule (copy), ReactModule (copy), DictationFTUXStorageModule (copy), DictationAnalyticsModule (copy), UsePausableTimeoutModule (copy)
+	local UseIsChatBackgroundVisibleModuleResult = UseIsChatBackgroundVisibleModule()
+	local UseSignalStateResult = SignalsReactModule.useSignalState(GetTransparencyStoreModule(false).getIsTextBoxFocused)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function() --[[ Line: 53 ]]
+		-- upvalues: DictationFTUXStorageModule (upval)
+		return DictationFTUXStorageModule.hasBeenDismissed()
 	end)
-	local var5, var6 = reactModule.useState(function()
-		-- upvalues: dictationFTUXStorageModule (copy)
-		return dictationFTUXStorageModule.hasBeenUsed()
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(function() --[[ Line: 56 ]]
+		-- upvalues: DictationFTUXStorageModule (upval)
+		return DictationFTUXStorageModule.hasBeenUsed()
 	end)
-	local var7 = reactModule.useCallback(function(p2)
-		-- upvalues: var4 (ref), dictationFTUXStorageModule (copy), dictationAnalyticsModule (copy)
-		var4(function(p3)
-			-- upvalues: dictationFTUXStorageModule (copy), dictationAnalyticsModule (copy), p2 (ref)
+	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 60 ]]
+		-- upvalues: UseStateResult2 (copy), DictationFTUXStorageModule (upval), DictationAnalyticsModule (upval)
+		UseStateResult2(function(p3) --[[ Line: 63 ]]
+			-- upvalues: DictationFTUXStorageModule (upval), DictationAnalyticsModule (upval), p2 (copy)
 			if p3 then
 				return p3
+			else
+				DictationFTUXStorageModule.markDismissed()
+				DictationAnalyticsModule.fire(DictationAnalyticsModule.Events.FtuxDismiss, {
+					[DictationAnalyticsModule.Properties.SttMode] = DictationAnalyticsModule.Modes.Continuous,
+					[DictationAnalyticsModule.Properties.DismissReason] = p2 or DictationAnalyticsModule.DismissReasons.UserInteraction
+				})
+				
+				return true
 			end
-			dictationFTUXStorageModule.markDismissed()
-			dictationAnalyticsModule.fire(dictationAnalyticsModule.Events.FtuxDismiss, {
-				[dictationAnalyticsModule.Properties.SttMode] = dictationAnalyticsModule.Modes.Continuous,
-				[dictationAnalyticsModule.Properties.DismissReason] = p2 or dictationAnalyticsModule.DismissReasons.UserInteraction
-			})
-			
-			return true
 		end)
 	end, {})
-	local var8 = reactModule.useCallback(function()
-		-- upvalues: var6 (ref), dictationFTUXStorageModule (copy)
-		var6(function(p2)
-			-- upvalues: dictationFTUXStorageModule (copy)
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 77 ]]
+		-- upvalues: UseStateResult2_1 (copy), DictationFTUXStorageModule (upval)
+		UseStateResult2_1(function(p2) --[[ Line: 78 ]]
+			-- upvalues: DictationFTUXStorageModule (upval)
 			if p2 then
 				return p2
+			else
+				DictationFTUXStorageModule.markUsed()
+				
+				return true
 			end
-			dictationFTUXStorageModule.markUsed()
-			
-			return true
 		end)
 	end, {})
-	local var9 = var5 and (not var3 and (p1.isEligible and (not p1.isComposing and (not p1.isActive and (not var2 and var1)))))
-	usePausableTimeoutModule(var9, 10, reactModule.useCallback(function()
-		-- upvalues: var7 (ref), dictationAnalyticsModule (copy)
-		var7(dictationAnalyticsModule.DismissReasons.Visibility)
-	end, { var7 }))
-	local var10 = reactModule.useRef(false)
-	reactModule.useEffect(function()
-		-- upvalues: var9 (ref), var10 (ref), dictationAnalyticsModule (copy)
-		if var9 and not var10.current then
-			var10.current = true
-			dictationAnalyticsModule.fire(dictationAnalyticsModule.Events.FtuxShown, {
-				[dictationAnalyticsModule.Properties.SttMode] = dictationAnalyticsModule.Modes.Continuous
+	local UseIsChatBackgroundVisibleModuleResult1 = UseStateResult1 and (not UseStateResult and (p1.isEligible and (not p1.isComposing and (not p1.isActive and (not UseSignalStateResult and UseIsChatBackgroundVisibleModuleResult)))))
+	UsePausableTimeoutModule(UseIsChatBackgroundVisibleModuleResult1, 10, (ReactModule.useCallback(function() --[[ Line: 102 ]]
+		-- upvalues: UseResult (copy), DictationAnalyticsModule (upval)
+		UseResult(DictationAnalyticsModule.DismissReasons.Visibility)
+	end, { UseResult })))
+	local UseRefResult = ReactModule.useRef(false)
+	ReactModule.useEffect(function() --[[ Line: 111 ]]
+		-- upvalues: UseIsChatBackgroundVisibleModuleResult1 (copy), UseRefResult (copy), DictationAnalyticsModule (upval)
+		if UseIsChatBackgroundVisibleModuleResult1 and not UseRefResult.current then
+			UseRefResult.current = true
+			DictationAnalyticsModule.fire(DictationAnalyticsModule.Events.FtuxShown, {
+				[DictationAnalyticsModule.Properties.SttMode] = DictationAnalyticsModule.Modes.Continuous
 			})
 		end
-	end, { var9 })
+	end, { UseIsChatBackgroundVisibleModuleResult1 })
 	
-	return { shouldShow = var9, dismiss = var7, markUsed = var8 }
+	return {
+		shouldShow = UseIsChatBackgroundVisibleModuleResult1,
+		dismiss = UseResult,
+		markUsed = UseResult1
+	}
 end

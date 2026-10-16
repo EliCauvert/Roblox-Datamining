@@ -1,145 +1,127 @@
-﻿local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local validationRulesUtilModule = require(parent.util.ValidationRulesUtil)
-local getAllInstancesIsAModule = require(parent.util.getAllInstancesIsA)
-local r15plusUtilsModule = require(parent.util.R15plusUtils)
-local vector3UtilsModule = require(parent.util.Vector3Utils)
-local valueToStringModule = require(parent.util.valueToString)
-local cFrameUtilsModule = require(parent.util.CFrameUtils)
-local t = {
-	categories = {
-		validationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
-		validationEnumsModule.UploadCategory.DYNAMIC_HEAD
-	},
-	requiredData = { validationEnumsModule.SharedDataMember.rootInstance },
-	fflag = r15plusUtilsModule.checkFlagEnabledForAllowHrd
-}
-local var1 = game:DefineFastInt("UGCValidationHrdJointSizeHundredthsLimit", 150) / 100
-local UGCValidationHrdJointRangeMinXHundredths = game:DefineFastInt("UGCValidationHrdJointRangeMinXHundredths", 0)
-local UGCValidationHrdJointRangeMaxXHundredths = game:DefineFastInt("UGCValidationHrdJointRangeMaxXHundredths", 0)
-local UGCValidationHrdJointRangeMinYHundredths = game:DefineFastInt("UGCValidationHrdJointRangeMinYHundredths", 0)
-local UGCValidationHrdJointRangeMaxYHundredths = game:DefineFastInt("UGCValidationHrdJointRangeMaxYHundredths", 0)
-local UGCValidationHrdJointRangeMinZHundredths = game:DefineFastInt("UGCValidationHrdJointRangeMinZHundredths", 0)
-local UGCValidationHrdJointRangeMaxZHundredths = game:DefineFastInt("UGCValidationHrdJointRangeMaxZHundredths", 0)
-local UGCValidationHrdOriginOffsetMinYHundredths = game:DefineFastInt("UGCValidationHrdOriginOffsetMinYHundredths", -500)
-local UGCValidationHrdOriginOffsetMaxYHundredths = game:DefineFastInt("UGCValidationHrdOriginOffsetMaxYHundredths", 500)
-local vector3 = Vector3.new(UGCValidationHrdJointRangeMinXHundredths / 100, UGCValidationHrdJointRangeMinYHundredths / 100, UGCValidationHrdJointRangeMinZHundredths / 100)
-local vector3_1 = Vector3.new(UGCValidationHrdJointRangeMaxXHundredths / 100, UGCValidationHrdJointRangeMaxYHundredths / 100, UGCValidationHrdJointRangeMaxZHundredths / 100)
-local vector3_2 = Vector3.new(0, UGCValidationHrdOriginOffsetMinYHundredths / 100, 0)
-local vector3_3 = Vector3.new(0, UGCValidationHrdOriginOffsetMaxYHundredths / 100, 0)
-local var2 = game:DefineFastInt("UGCValidationDrdJointSizeHundredthsLimit", 150) / 100
-local vector3_4 = Vector3.new(game:DefineFastInt("UGCValidationDrdJointRangeMinXHundredths", 0) / 100, game:DefineFastInt("UGCValidationDrdJointRangeMinYHundredths", 0) / 100, game:DefineFastInt("UGCValidationDrdJointRangeMinZHundredths", 0) / 100)
-local vector3_5 = Vector3.new(game:DefineFastInt("UGCValidationDrdJointRangeMaxXHundredths", 0) / 100, game:DefineFastInt("UGCValidationDrdJointRangeMaxYHundredths", 0) / 100, game:DefineFastInt("UGCValidationDrdJointRangeMaxZHundredths", 0) / 100)
+﻿local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local ValidationRulesUtilModule = require(Parent.util.ValidationRulesUtil)
+local GetAllInstancesIsAModule = require(Parent.util.getAllInstancesIsA)
+local R15plusUtilsModule = require(Parent.util.R15plusUtils)
+local Vector3UtilsModule = require(Parent.util.Vector3Utils)
+local ValueToStringModule = require(Parent.util.valueToString)
+local CFrameUtilsModule = require(Parent.util.CFrameUtils)
+local UGCValidationHrdJointSizeHundredthsLimitRatio = game:DefineFastInt("UGCValidationHrdJointSizeHundredthsLimit", 150) / 100
+local _Vector3 = Vector3.new(game:DefineFastInt("UGCValidationHrdJointRangeMinXHundredths", 0) / 100, game:DefineFastInt("UGCValidationHrdJointRangeMinYHundredths", 0) / 100, game:DefineFastInt("UGCValidationHrdJointRangeMinZHundredths", 0) / 100)
+local _Vector3_1 = Vector3.new(game:DefineFastInt("UGCValidationHrdJointRangeMaxXHundredths", 0) / 100, game:DefineFastInt("UGCValidationHrdJointRangeMaxYHundredths", 0) / 100, game:DefineFastInt("UGCValidationHrdJointRangeMaxZHundredths", 0) / 100)
+local _Vector3_2 = Vector3.new(0, game:DefineFastInt("UGCValidationHrdOriginOffsetMinYHundredths", -500) / 100, 0)
+local _Vector3_3 = Vector3.new(0, game:DefineFastInt("UGCValidationHrdOriginOffsetMaxYHundredths", 500) / 100, 0)
+local UGCValidationDrdJointSizeHundredthsLimitRatio = game:DefineFastInt("UGCValidationDrdJointSizeHundredthsLimit", 150) / 100
+local _Vector3_4 = Vector3.new(game:DefineFastInt("UGCValidationDrdJointRangeMinXHundredths", 0) / 100, game:DefineFastInt("UGCValidationDrdJointRangeMinYHundredths", 0) / 100, game:DefineFastInt("UGCValidationDrdJointRangeMinZHundredths", 0) / 100)
+local _Vector3_5 = Vector3.new(game:DefineFastInt("UGCValidationDrdJointRangeMaxXHundredths", 0) / 100, game:DefineFastInt("UGCValidationDrdJointRangeMaxYHundredths", 0) / 100, game:DefineFastInt("UGCValidationDrdJointRangeMaxZHundredths", 0) / 100)
 
-local function checkVectorRange(p1, p2, p3, p4, p5, p6)
-	-- upvalues: vector3UtilsModule (ref), errorSourceStringsModule (ref), valueToStringModule (ref)
-	if not vector3UtilsModule.isInRange(p4, p5, p6) then
-		p1:fail(errorSourceStringsModule.Keys.HrdProperties_PropertyOutOfRange, {
-			jointName = p2,
-			propertyName = p3,
-			currentValue = valueToStringModule(p4),
-			valueMin = valueToStringModule(p5),
-			valueMax = valueToStringModule(p6)
+local function checkVectorRange(p1, Name, PropertyName, IndexRange, p2, p3) --[[ Line: 45 ]]
+	-- upvalues: Vector3UtilsModule (copy), ErrorSourceStringsModule (copy), ValueToStringModule (copy)
+	if not Vector3UtilsModule.isInRange(IndexRange, p2, p3) then
+		p1:fail(ErrorSourceStringsModule.Keys.HrdProperties_PropertyOutOfRange, {
+			jointName = Name,
+			propertyName = PropertyName,
+			currentValue = ValueToStringModule(IndexRange),
+			valueMin = ValueToStringModule(p2),
+			valueMax = ValueToStringModule(p3)
 		})
 	end
 end
 
-local function checkSize(p1, p2, p3, p4, p5)
-	-- upvalues: errorSourceStringsModule (ref), valueToStringModule (ref)
-	if p4 < 0 or p5 < p4 then
-		p1:fail(errorSourceStringsModule.Keys.HrdProperties_PropertyOutOfRange, {
+local function checkSize(p1, JointName, PropertyName, IndexSize: number, UGCValidationDrdJointSizeHundredthsLimitRatio) --[[ Line: 64 ]]
+	-- upvalues: ErrorSourceStringsModule (copy), ValueToStringModule (copy)
+	if IndexSize < 0 or UGCValidationDrdJointSizeHundredthsLimitRatio < IndexSize then
+		p1:fail(ErrorSourceStringsModule.Keys.HrdProperties_PropertyOutOfRange, {
 			valueMin = "0",
-			jointName = p2,
-			propertyName = p3,
-			currentValue = valueToStringModule(p4),
-			valueMax = valueToStringModule(p5)
+			jointName = JointName,
+			propertyName = PropertyName,
+			currentValue = ValueToStringModule(IndexSize),
+			valueMax = ValueToStringModule(UGCValidationDrdJointSizeHundredthsLimitRatio)
 		})
 	end
 end
 
-function t.run(p1, p2)
-	-- upvalues: getAllInstancesIsAModule (ref), validationRulesUtilModule (ref), cFrameUtilsModule (ref), vector3UtilsModule (ref), vector3_2 (ref), vector3_3 (ref), errorSourceStringsModule (ref), valueToStringModule (ref), r15plusUtilsModule (ref), checkSize (ref), var1 (ref), checkVectorRange (ref), vector3 (ref), vector3_1 (ref), var2 (ref), vector3_4 (ref), vector3_5 (ref)
-	for i, v in getAllInstancesIsAModule(p2.rootInstance, "MeshPart") do
-		local humanoidRigDescription = v:FindFirstChildWhichIsA("HumanoidRigDescription")
-		local name = validationRulesUtilModule.rigAttachmentToParentMap[v.Name]
-		
-		if humanoidRigDescription ~= nil then
-			p1:setReportingInstance(humanoidRigDescription)
-			local originOffset = humanoidRigDescription.OriginOffset
+return {
+	categories = {
+		ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
+		ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD
+	},
+	requiredData = { ValidationEnumsModule.SharedDataMember.rootInstance },
+	fflag = R15plusUtilsModule.checkFlagEnabledForAllowHrd,
+	run = function(p1, p2) --[[ Line: 82 ]]
+		-- upvalues: GetAllInstancesIsAModule (copy), ValidationRulesUtilModule (copy), CFrameUtilsModule (copy), Vector3UtilsModule (copy), _Vector3_2 (copy), _Vector3_3 (copy), ErrorSourceStringsModule (copy), ValueToStringModule (copy), R15plusUtilsModule (copy), checkSize (copy), UGCValidationHrdJointSizeHundredthsLimitRatio (copy), checkVectorRange (copy), _Vector3 (copy), _Vector3_1 (copy), UGCValidationDrdJointSizeHundredthsLimitRatio (copy), _Vector3_4 (copy), _Vector3_5 (copy)
+		for _, Object in GetAllInstancesIsAModule(p2.rootInstance, "MeshPart") do
+			local HumanoidRigDescription = Object:FindFirstChildWhichIsA("HumanoidRigDescription")
+			local RigAttachmentToParent = ValidationRulesUtilModule.rigAttachmentToParentMap[Object.Name]
 			
-			if v.Name == "LowerTorso" then
-				if not cFrameUtilsModule.fuzzyEq(originOffset.Rotation, CFrame.identity) or not vector3UtilsModule.isInRange(originOffset.Position, vector3_2, vector3_3) then
-					p1:fail(errorSourceStringsModule.Keys.HrdProperties_OriginOutsideBounds, {
-						valueMin = valueToStringModule(vector3_2),
-						valueMax = valueToStringModule(vector3_3)
-					})
-				end
-			elseif not cFrameUtilsModule.fuzzyEq(originOffset, CFrame.identity) then
-				p1:fail(errorSourceStringsModule.Keys.HrdProperties_UncontainedJoint, { jointName = "originOffset", foundMeshName = v.Name })
-			end
-			local nameContainedJointLabels = humanoidRigDescription:GetContainedJointLabels(v.Name)
-			
-			for i_1, v_1 in r15plusUtilsModule.getHrdJointLabels() do
-				local var3 = `{v_1.Name}RigAttachment` == name
-				local var4 = humanoidRigDescription:GetJoint(v_1)
+			if HumanoidRigDescription ~= nil then
+				p1:setReportingInstance(HumanoidRigDescription)
+				local OriginOffset = HumanoidRigDescription.OriginOffset
 				
-				if var3 and (not var4 or var4.Name ~= name or var4.ClassName ~= "Attachment") then
-					p1:fail(errorSourceStringsModule.Keys.HrdMissingStandardJoint, { jointName = v_1.Name })
-				end
-				if var4 then
-					if table.find(nameContainedJointLabels, v_1) then
-						if not var3 and (var4.Name ~= v_1.Name or var4.ClassName ~= "Bone") then
-							p1:fail(errorSourceStringsModule.Keys.HrdImproperJointMapping, { jointName = v_1.Name, boneName = v_1.Name })
-						end
-						local var5 = humanoidRigDescription:GetJointSize(v_1)
-						local var6 = humanoidRigDescription:GetJointRangeMin(v_1)
-						local var7 = humanoidRigDescription:GetJointRangeMax(v_1)
-						checkSize(p1, v_1.Name, "size", var5, var1)
-						checkVectorRange(p1, v_1.Name, "rangeMin", var6, vector3, vector3_1)
-						checkVectorRange(p1, v_1.Name, "rangeMax", var7, vector3, vector3_1)
-						
-						if not vector3UtilsModule.isFirstLessOrEqual(var6, var7) then
-							p1:fail(errorSourceStringsModule.Keys.HrdProperties_MinAboveMax, { jointName = v_1.Name })
-						end
-					else
-						p1:fail(errorSourceStringsModule.Keys.HrdProperties_UncontainedJoint, { jointName = v_1.Name, foundMeshName = v.Name })
+				if Object.Name == "LowerTorso" then
+					if not CFrameUtilsModule.fuzzyEq(OriginOffset.Rotation, CFrame.identity) or not Vector3UtilsModule.isInRange(OriginOffset.Position, _Vector3_2, _Vector3_3) then
+						p1:fail(ErrorSourceStringsModule.Keys.HrdProperties_OriginOutsideBounds, {
+							valueMin = ValueToStringModule(_Vector3_2),
+							valueMax = ValueToStringModule(_Vector3_3)
+						})
 					end
+				elseif not CFrameUtilsModule.fuzzyEq(OriginOffset, CFrame.identity) then
+					p1:fail(ErrorSourceStringsModule.Keys.HrdProperties_UncontainedJoint, { jointName = "originOffset", foundMeshName = Object.Name })
 				end
-			end
-			local digitsRigDescription = v:FindFirstChildWhichIsA("DigitsRigDescription")
-			
-			if digitsRigDescription ~= nil then
-				p1:setReportingInstance(digitsRigDescription)
+				local ContainedJointLabels = HumanoidRigDescription:GetContainedJointLabels(Object.Name)
 				
-				if (v.Name ~= "LeftHand" or digitsRigDescription.Side ~= Enum.DigitsRigDescriptionSide.Left) and (v.Name ~= "RightHand" or digitsRigDescription.Side ~= Enum.DigitsRigDescriptionSide.Right) then
-					local var8 = "None"
+				for _, value in R15plusUtilsModule.getHrdJointLabels() do
+					local IsRigAttachmentNameMatch = `{value.Name}RigAttachment` == RigAttachmentToParent
+					local Joint = HumanoidRigDescription:GetJoint(value)
 					
-					if v.Name == "LeftHand" then
-						var8 = "Left"
-					elseif v.Name == "RightHand" then
-						var8 = "Right"
+					if IsRigAttachmentNameMatch and (not Joint or Joint.Name ~= RigAttachmentToParent or Joint.ClassName ~= "Attachment") then
+						p1:fail(ErrorSourceStringsModule.Keys.HrdMissingStandardJoint, { jointName = value.Name })
 					end
-					p1:fail(errorSourceStringsModule.Keys.HrdCheck_DrdInvalidSide, {
-						partName = v.Name,
-						expectedSide = var8,
-						foundSide = digitsRigDescription.Side.Name
-					})
+					if Joint then
+						if table.find(ContainedJointLabels, value) then
+							if not IsRigAttachmentNameMatch and (Joint.Name ~= value.Name or Joint.ClassName ~= "Bone") then
+								p1:fail(ErrorSourceStringsModule.Keys.HrdImproperJointMapping, { jointName = value.Name, boneName = value.Name })
+							end
+							local JointRangeMin = HumanoidRigDescription:GetJointRangeMin(value)
+							local JointRangeMax = HumanoidRigDescription:GetJointRangeMax(value)
+							checkSize(p1, value.Name, "size", HumanoidRigDescription:GetJointSize(value), UGCValidationHrdJointSizeHundredthsLimitRatio)
+							checkVectorRange(p1, value.Name, "rangeMin", JointRangeMin, _Vector3, _Vector3_1)
+							checkVectorRange(p1, value.Name, "rangeMax", JointRangeMax, _Vector3, _Vector3_1)
+							
+							if not Vector3UtilsModule.isFirstLessOrEqual(JointRangeMin, JointRangeMax) then
+								p1:fail(ErrorSourceStringsModule.Keys.HrdProperties_MinAboveMax, { jointName = value.Name })
+							end
+						else
+							p1:fail(ErrorSourceStringsModule.Keys.HrdProperties_UncontainedJoint, { jointName = value.Name, foundMeshName = Object.Name })
+						end
+					end
 				end
-				checkSize(p1, "Index", "size", digitsRigDescription.IndexSize, var2)
-				checkSize(p1, "Thumb", "size", digitsRigDescription.ThumbSize, var2)
-				checkSize(p1, "Middle", "size", digitsRigDescription.MiddleSize, var2)
-				checkSize(p1, "Pinky", "size", digitsRigDescription.PinkySize, var2)
-				checkSize(p1, "Ring", "size", digitsRigDescription.RingSize, var2)
-				checkVectorRange(p1, "Index", "range", digitsRigDescription.IndexRange, vector3_4, vector3_5)
-				checkVectorRange(p1, "Thumb", "range", digitsRigDescription.ThumbRange, vector3_4, vector3_5)
-				checkVectorRange(p1, "Pinky", "range", digitsRigDescription.PinkyRange, vector3_4, vector3_5)
-				checkVectorRange(p1, "Ring", "range", digitsRigDescription.RingRange, vector3_4, vector3_5)
-				checkVectorRange(p1, "Middle", "range", digitsRigDescription.MiddleRange, vector3_4, vector3_5)
+				local DigitsRigDescription = Object:FindFirstChildWhichIsA("DigitsRigDescription")
+				
+				if DigitsRigDescription ~= nil then
+					p1:setReportingInstance(DigitsRigDescription)
+					
+					if (Object.Name ~= "LeftHand" or DigitsRigDescription.Side ~= Enum.DigitsRigDescriptionSide.Left) and (Object.Name ~= "RightHand" or DigitsRigDescription.Side ~= Enum.DigitsRigDescriptionSide.Right) then
+						p1:fail(ErrorSourceStringsModule.Keys.HrdCheck_DrdInvalidSide, {
+							partName = Object.Name,
+							expectedSide = if Object.Name == "LeftHand" then "Left" elseif Object.Name == "RightHand" then "Right" else "None",
+							foundSide = DigitsRigDescription.Side.Name
+						})
+					end
+					checkSize(p1, "Index", "size", DigitsRigDescription.IndexSize, UGCValidationDrdJointSizeHundredthsLimitRatio)
+					checkSize(p1, "Thumb", "size", DigitsRigDescription.ThumbSize, UGCValidationDrdJointSizeHundredthsLimitRatio)
+					checkSize(p1, "Middle", "size", DigitsRigDescription.MiddleSize, UGCValidationDrdJointSizeHundredthsLimitRatio)
+					checkSize(p1, "Pinky", "size", DigitsRigDescription.PinkySize, UGCValidationDrdJointSizeHundredthsLimitRatio)
+					checkSize(p1, "Ring", "size", DigitsRigDescription.RingSize, UGCValidationDrdJointSizeHundredthsLimitRatio)
+					checkVectorRange(p1, "Index", "range", DigitsRigDescription.IndexRange, _Vector3_4, _Vector3_5)
+					checkVectorRange(p1, "Thumb", "range", DigitsRigDescription.ThumbRange, _Vector3_4, _Vector3_5)
+					checkVectorRange(p1, "Pinky", "range", DigitsRigDescription.PinkyRange, _Vector3_4, _Vector3_5)
+					checkVectorRange(p1, "Ring", "range", DigitsRigDescription.RingRange, _Vector3_4, _Vector3_5)
+					checkVectorRange(p1, "Middle", "range", DigitsRigDescription.MiddleRange, _Vector3_4, _Vector3_5)
+				end
 			end
 		end
 	end
-end
-
-return t
+}

@@ -1,19 +1,19 @@
-﻿local httpService = game:GetService("HttpService")
-local phoneUpsell = script:FindFirstAncestor("PhoneUpsell")
-local promiseModule = require(phoneUpsell.Parent.Promise)
-local postVerifyPhoneCodeModule = require(phoneUpsell.Http.Requests.PostVerifyPhoneCode)
+﻿local HttpService = game:GetService("HttpService")
+local PhoneUpsell = script:FindFirstAncestor("PhoneUpsell")
+local PromiseModule = require(PhoneUpsell.Parent.Promise)
+local PostVerifyPhoneCodeModule = require(PhoneUpsell.Http.Requests.PostVerifyPhoneCode)
 
-return function(p1, p2)
-	-- upvalues: postVerifyPhoneCodeModule (ref), promiseModule (ref), httpService (ref)
-	return function()
-		-- upvalues: postVerifyPhoneCodeModule (copy), p1 (ref), p2 (ref), promiseModule (copy), httpService (copy)
-		return postVerifyPhoneCodeModule(p1, p2):andThen(function(_)
-			-- upvalues: promiseModule (copy)
-			return promiseModule.resolve()
-		end, function(p3)
-			-- upvalues: httpService (copy), promiseModule (copy)
-			return promiseModule.reject({
-				ErrorCode = if p3.Body then httpService:JSONDecode(p3.Body).errors[1].code else 0
+return function(p1, p2) --[[ Line: 14 ]]
+	-- upvalues: PostVerifyPhoneCodeModule (copy), PromiseModule (copy), HttpService (copy)
+	return function() --[[ Line: 15 ]]
+		-- upvalues: PostVerifyPhoneCodeModule (upval), p1 (copy), p2 (copy), PromiseModule (upval), HttpService (upval)
+		return PostVerifyPhoneCodeModule(p1, p2):andThen(function(_) --[[ Line: 16 ]]
+			-- upvalues: PromiseModule (upval)
+			return PromiseModule.resolve()
+		end, function(p3) --[[ Line: 18 ]]
+			-- upvalues: HttpService (upval), PromiseModule (upval)
+			return PromiseModule.reject({
+				ErrorCode = if p3.Body then HttpService:JSONDecode(p3.Body).errors[1].code else 0
 			})
 		end)
 	end

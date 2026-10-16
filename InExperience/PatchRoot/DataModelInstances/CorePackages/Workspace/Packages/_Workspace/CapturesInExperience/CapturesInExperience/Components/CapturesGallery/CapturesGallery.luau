@@ -1,89 +1,100 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local capturesCommonModule = require(parent_1.CapturesCommon)
-local localizationModule = require(parent_1.Localization)
-local reactModule = require(parent_1.React)
-local roactUtilsModule = require(parent_1.RoactUtils)
-local UIBloxModule = require(parent_1.UIBlox)
-local foundationModule = require(parent_1.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local useAnalyticsModule = require(parent.Analytics.useAnalytics)
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local useLocalization = localizationModule.Hooks.useLocalization
-local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
-local useStyle = UIBloxModule.Core.Style.useStyle
-local useSystemMenuDetectionModule = require(parent.Hooks.useSystemMenuDetection)
-local captureGridView = capturesCommonModule.Components.CaptureGridView
-local captureItem = capturesCommonModule.Components.CaptureItem
-local carouselOpenedModule = require(parent.Actions.CarouselOpened)
-local constantsModule = require(parent.Constants)
-local eventNamesModule = require(parent.Analytics.EventNames)
-local galleryActionContainerModule = require(parent.Components.CapturesGallery.GalleryActionContainer)
-local galleryGridViewModule = require(parent.Components.CapturesGallery.GalleryGridView)
-local fFlagUseCaptureCommonComponentsModule = require(parent.Flags.FFlagUseCaptureCommonComponents)
-local fFlagCapturesGalleryDespawnOnMenuCloseModule = require(parent.Flags.FFlagCapturesGalleryDespawnOnMenuClose)
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local CapturesCommonModule = require(Parent1.CapturesCommon)
+local ReactModule = require(Parent1.React)
+local RoactUtilsModule = require(Parent1.RoactUtils)
+local FoundationModule = require(Parent1.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local UseAnalyticsModule = require(Parent.Analytics.useAnalytics)
+local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
+local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
+local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
+local UseStyleFunction = require(Parent1.UIBlox).Core.Style.useStyle
+local UseSystemMenuDetectionModule = require(Parent.Hooks.useSystemMenuDetection)
+local CaptureGridView = CapturesCommonModule.Components.CaptureGridView
+local CaptureItem = CapturesCommonModule.Components.CaptureItem
+local CarouselOpenedModule = require(Parent.Actions.CarouselOpened)
+local ConstantsModule = require(Parent.Constants)
+local EventNamesModule = require(Parent.Analytics.EventNames)
+local GalleryActionContainerModule = require(Parent.Components.CapturesGallery.GalleryActionContainer)
+local GalleryGridViewModule = require(Parent.Components.CapturesGallery.GalleryGridView)
+local FFlagUseCaptureCommonComponentsModule = require(Parent.Flags.FFlagUseCaptureCommonComponents)
+local FFlagCapturesGalleryDespawnOnMenuCloseModule = require(Parent.Flags.FFlagCapturesGalleryDespawnOnMenuClose)
 
-return function(p1)
-	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useStyle (ref), useSystemMenuDetectionModule (ref), useSelector (ref), constantsModule (ref), useLocalization (ref), reactModule (ref), eventNamesModule (ref), carouselOpenedModule (ref), fFlagCapturesGalleryDespawnOnMenuCloseModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), fFlagUseCaptureCommonComponentsModule (ref), captureGridView (ref), galleryActionContainerModule (ref), captureItem (ref), galleryGridViewModule (ref)
-	local var1 = useAnalyticsModule()
-	local var2 = useDispatch()
-	local var3 = useStyle()
-	local var4 = useSystemMenuDetectionModule()
-	local var5 = useSelector(function(p2)
-		-- upvalues: constantsModule (copy)
-		return p2[constantsModule.RoduxKey].Captures
+return function(Frame) --[[ Line: 41 ]]
+	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseStyleFunction (copy), UseSystemMenuDetectionModule (copy), UseSelectorFunction (copy), ConstantsModule (copy), UseLocalizationFunction (copy), ReactModule (copy), EventNamesModule (copy), CarouselOpenedModule (copy), FFlagCapturesGalleryDespawnOnMenuCloseModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), FFlagUseCaptureCommonComponentsModule (copy), CaptureGridView (copy), GalleryActionContainerModule (copy), CaptureItem (copy), GalleryGridViewModule (copy)
+	local UseAnalyticsModuleResult = UseAnalyticsModule()
+	local UseDispatchResult = UseDispatchFunction()
+	local UseStyleResult = UseStyleFunction()
+	local UseSystemMenuDetectionModuleResult = UseSystemMenuDetectionModule()
+	local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 47 ]]
+		-- upvalues: ConstantsModule (upval)
+		return p1[ConstantsModule.RoduxKey].Captures
 	end)
-	local var6 = next(var5) == nil
-	local var7 = reactModule.useCallback(function(p2)
-		-- upvalues: var1 (ref), eventNamesModule (copy), var2 (ref), carouselOpenedModule (copy)
-		return function()
-			-- upvalues: var1 (copy), eventNamesModule (copy), var2 (copy), carouselOpenedModule (copy), p2 (ref)
-			var1.fireEvent(eventNamesModule.CapturesCarouselOpened)
-			var2(carouselOpenedModule(p2))
+	local NoNextEntry = next(UseSelectorResult) == nil
+	local FeatureCapturesTitleGallery = UseLocalizationFunction({
+		nothingHereYet = "Feature.Captures.Label.NothingHereYet",
+		title = "Feature.Captures.Title.Gallery"
+	})
+	local UseResult = ReactModule.useCallback(function(p1) --[[ Line: 58 ]]
+		-- upvalues: UseAnalyticsModuleResult (copy), EventNamesModule (upval), UseDispatchResult (copy), CarouselOpenedModule (upval)
+		return function() --[[ Line: 59 ]]
+			-- upvalues: UseAnalyticsModuleResult (upval), EventNamesModule (upval), UseDispatchResult (upval), CarouselOpenedModule (upval), p1 (copy)
+			UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesCarouselOpened)
+			UseDispatchResult(CarouselOpenedModule(p1))
 		end
 	end, {})
+	local Color = UseStyleResult.Theme.TextMuted.Color
+	local CaptionBodyFont = UseStyleResult.Font.CaptionBody.Font
+	local ScaledBaseSize = UseStyleResult.Font.BaseSize * UseStyleResult.Font.CaptionBody.RelativeSize
+	local Transparency = UseStyleResult.Theme.TextMuted.Transparency
+	local NoNoNextEntry: boolean = if FFlagCapturesGalleryDespawnOnMenuCloseModule then UseSystemMenuDetectionModuleResult and not NoNextEntry else not NoNextEntry
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
-		BackgroundColor3 = var3.Theme.BackgroundDefault.Color,
-		BackgroundTransparency = var3.Theme.BackgroundDefault.Transparency,
-		LayoutOrder = p1.LayoutOrder,
-		Size = p1.Size or UDim2.fromScale(1, 1)
+		BackgroundColor3 = UseStyleResult.Theme.BackgroundDefault.Color,
+		BackgroundTransparency = UseStyleResult.Theme.BackgroundDefault.Transparency,
+		LayoutOrder = Frame.LayoutOrder,
+		Size = Frame.Size or UDim2.fromScale(1, 1)
 	}, {
-		UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) }),
-		Layout = reactModule.createElement("UIListLayout", {
+		UICorner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) }),
+		Layout = ReactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
 			Padding = UDim.new(0, 12),
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			VerticalAlignment = Enum.VerticalAlignment.Top
 		}),
-		NothingHereYet = var6 and reactModule.createElement("TextLabel", {
+		NothingHereYet = NoNextEntry and ReactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
 			TextWrapped = true,
-			Font = if foundationFontFaceMigration then nil else var3.Font.CaptionBody.Font,
-			FontFace = if foundationFontFaceMigration then normalizeFontFace(var3.Tokens.Typography.BodySmall.Font) else nil,
+			Font = if FoundationFontFaceMigration then nil else CaptionBodyFont,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodySmall.Font) else nil,
 			Size = UDim2.new(1, -12, 1, 12),
-			Text = useLocalization({
-				nothingHereYet = "Feature.Captures.Label.NothingHereYet",
-				title = "Feature.Captures.Title.Gallery"
-			}).nothingHereYet,
-			TextColor3 = var3.Theme.TextMuted.Color,
-			TextSize = var3.Font.BaseSize * var3.Font.CaptionBody.RelativeSize,
-			TextTransparency = var3.Theme.TextMuted.Transparency,
+			Text = FeatureCapturesTitleGallery.nothingHereYet,
+			TextColor3 = Color,
+			TextSize = ScaledBaseSize,
+			TextTransparency = Transparency,
 			TextXAlignment = Enum.TextXAlignment.Center
 		}, {
-			MaxSize = reactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(312, 1e999) })
+			MaxSize = ReactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(312, 1e999) })
 		}),
-		GalleryGridView = if if fFlagCapturesGalleryDespawnOnMenuCloseModule then var4 and not var6 else not var6 then if fFlagUseCaptureCommonComponentsModule then reactModule.createElement(captureGridView, {
+		GalleryGridView = if NoNoNextEntry then if FFlagUseCaptureCommonComponentsModule then ReactModule.createElement(CaptureGridView, {
 			shouldShowShowMoreButton = true,
-			captures = var5,
-			header = reactModule.createElement(galleryActionContainerModule, { isDisabled = false, LayoutOrder = 1, itemCount = #var5 }),
-			renderItem = function(p2, p3)
-				-- upvalues: reactModule (copy), captureItem (copy), var7 (ref)
-				return reactModule.createElement(captureItem, { capture = p2, onActivated = var7(p3) })
+			captures = UseSelectorResult,
+			header = ReactModule.createElement(GalleryActionContainerModule, {
+				isDisabled = false,
+				LayoutOrder = 1,
+				itemCount = #UseSelectorResult
+			}),
+			renderItem = function(Capture, p1) --[[ Line: 125 ]]
+				-- upvalues: ReactModule (upval), CaptureItem (upval), UseResult (copy)
+				return ReactModule.createElement(CaptureItem, { capture = Capture, onActivated = UseResult(p1) })
 			end
-		}) else reactModule.createElement(galleryGridViewModule, { captures = var5, Size = UDim2.new(1, -12, 1, -12) }) else nil
+		}) else ReactModule.createElement(GalleryGridViewModule, {
+			captures = UseSelectorResult,
+			Size = UDim2.new(1, -12, 1, -12)
+		}) else nil
 	})
 end

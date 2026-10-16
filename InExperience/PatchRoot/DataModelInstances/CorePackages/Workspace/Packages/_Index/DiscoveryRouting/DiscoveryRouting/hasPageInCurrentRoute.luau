@@ -1,17 +1,16 @@
-﻿return function(p1, p2, p3)
+﻿return function(p1, Name, p2): boolean --[[ Line: 1 ]]
 	if not p1 then
 		return false
 	end
-	local p0Count = #p1
+	local CountP0 = #p1
 	
-	if p3 then
-		p0Count -= 1
+	if p2 then
+		CountP0 -= 1
 	end
-	for i = 1, p0Count do
-		if p1[i].name ~= p2 then
-			continue
+	for i = 1, CountP0 do
+		if p1[i].name == Name then
+			return true
 		end
-		return true
 	end
 	return false
 end

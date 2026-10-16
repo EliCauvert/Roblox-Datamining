@@ -1,310 +1,291 @@
-﻿local squadsCore = script:FindFirstAncestor("SquadsCore")
-local parent = squadsCore.Parent
-local _ = require(parent.RoduxSquads)
-local reactModule = require(parent.React)
-local dashModule = require(parent.Dash)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
-local getRbxthumbWithTypeSizeAndOptions = require(parent.UserLib).Utils.getRbxthumbWithTypeSizeAndOptions
-local constants = require(parent.UserLib).Utils.Constants
-local realtimeDeliveryModule = require(parent.RealtimeDelivery)
-local networkingPresenceModule = require(squadsCore.Http.NetworkingPresence)
-local constantsModule = require(squadsCore.Common.Constants)
-local cryoModule = require(parent.Cryo)
-local squadRegroupExperimentation = require(parent.SocialExperiments).SquadRegroupExperimentation
-local roduxPresenceModule = require(squadsCore.Http.RoduxPresence)
-local squadExperienceInviteSourceModule = require(squadsCore.Enums.SquadExperienceInviteSource)
-local squadToastActionsAndStatesModule = require(squadsCore.Enums.SquadToastActionsAndStates)
-local eventNamesModule = require(squadsCore.Analytics.EventNames)
-local presenceType = roduxPresenceModule.Enums.PresenceType
-local squadRegroupEntryPointModule = require(squadsCore.Enums.SquadRegroupEntryPoint)
-local squadExternalContractContextModule = require(squadsCore.Components.SquadExternalContractProvider.SquadExternalContractContext)
-local regroupPromptNotificationStateModule = require(squadsCore.Utils.RegroupPromptNotificationState)
-local loggerModule = require(squadsCore.Logger)
-local serializeTableModule = require(squadsCore.Utils.serializeTable)
-local setRegroupPromptShownModule = require(squadsCore.Thunks.setRegroupPromptShown)
-local guiService = game:GetService("GuiService")
-local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
-local squadRegroupPromptDebounceTimeMs = game:DefineFastInt("SquadRegroupPromptDebounceTimeMs", 20000)
-local fFlagSquadsPresenceStoreMigrationModule = require(squadsCore.Flags.FFlagSquadsPresenceStoreMigration)
-local var1 = if fFlagSquadsPresenceStoreMigrationModule then require(parent.DataHydration) else nil
-local var2 = if fFlagSquadsPresenceStoreMigrationModule then require(parent.Signals) else nil
-local var3 = if fFlagSquadsPresenceStoreMigrationModule then require(parent.SignalsReact) else nil
-local var4 = if fFlagSquadsPresenceStoreMigrationModule then var1.Presence.PresenceStore.get() else nil
-local var5 = if fFlagSquadsPresenceStoreMigrationModule then var1.Presence.normalizePresenceRawData else nil
-local var6 = if fFlagSquadsPresenceStoreMigrationModule then var1.Presence.PresenceEnums.PresenceType else nil
-local var7 = if fFlagSquadsPresenceStoreMigrationModule then var3.useSignalState else nil
+﻿local SquadsCore = script:FindFirstAncestor("SquadsCore")
+local Parent = SquadsCore.Parent
+local _ = require(Parent.RoduxSquads)
+local ReactModule = require(Parent.React)
+local DashModule = require(Parent.Dash)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
+local GetRbxthumbWithTypeSizeAndOptionsFunction = require(Parent.UserLib).Utils.getRbxthumbWithTypeSizeAndOptions
+local Constants = require(Parent.UserLib).Utils.Constants
+local RealtimeDeliveryModule = require(Parent.RealtimeDelivery)
+local NetworkingPresenceModule = require(SquadsCore.Http.NetworkingPresence)
+local ConstantsModule = require(SquadsCore.Common.Constants)
+local CryoModule = require(Parent.Cryo)
+local SquadRegroupExperimentation = require(Parent.SocialExperiments).SquadRegroupExperimentation
+local SquadExperienceInviteSourceModule = require(SquadsCore.Enums.SquadExperienceInviteSource)
+local SquadToastActionsAndStatesModule = require(SquadsCore.Enums.SquadToastActionsAndStates)
+local EventNamesModule = require(SquadsCore.Analytics.EventNames)
+local PresenceType = require(SquadsCore.Http.RoduxPresence).Enums.PresenceType
+local SquadRegroupEntryPointModule = require(SquadsCore.Enums.SquadRegroupEntryPoint)
+local SquadExternalContractContextModule = require(SquadsCore.Components.SquadExternalContractProvider.SquadExternalContractContext)
+local RegroupPromptNotificationStateModule = require(SquadsCore.Utils.RegroupPromptNotificationState)
+local LoggerModule = require(SquadsCore.Logger)
+local SerializeTableModule = require(SquadsCore.Utils.serializeTable)
+local SetRegroupPromptShownModule = require(SquadsCore.Thunks.setRegroupPromptShown)
+local GetSquadExperienceInviteStoreModule = require(SquadsCore.Stores.GetSquadExperienceInviteStore)
+local GuiService = game:GetService("GuiService")
+local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
+local SquadRegroupPromptDebounceTimeMs = game:DefineFastInt("SquadRegroupPromptDebounceTimeMs", 20000)
+local FFlagSquadsPresenceStoreMigrationModule = require(SquadsCore.Flags.FFlagSquadsPresenceStoreMigration)
+local FFlagUseSignalsForSquadExperienceInvite = require(Parent.SharedFlags).FFlagUseSignalsForSquadExperienceInvite
+local DataHydrationModule = if FFlagSquadsPresenceStoreMigrationModule then require(Parent.DataHydration) else nil
+local SignalsModule = if FFlagSquadsPresenceStoreMigrationModule then require(Parent.Signals) else nil
+local SignalsReactModule = if FFlagSquadsPresenceStoreMigrationModule then require(Parent.SignalsReact) else nil
+local GetResult = if FFlagSquadsPresenceStoreMigrationModule then DataHydrationModule.Presence.PresenceStore.get() else nil
+local NormalizePresenceRawData = if FFlagSquadsPresenceStoreMigrationModule then DataHydrationModule.Presence.normalizePresenceRawData else nil
+local PresenceType1 = if FFlagSquadsPresenceStoreMigrationModule then DataHydrationModule.Presence.PresenceEnums.PresenceType else nil
+local UseSignalState = if FFlagSquadsPresenceStoreMigrationModule then SignalsReactModule.useSignalState else nil
 
-return function(p1)
-	-- upvalues: reactModule (ref), squadExternalContractContextModule (ref), useLocalization (ref), useDispatch (ref), useLocalUserId (ref), cryoModule (ref), fFlagSquadsPresenceStoreMigrationModule (ref), var2 (ref), var4 (ref), var7 (ref), networkingPresenceModule (ref), presenceType (ref), loggerModule (ref), serializeTableModule (ref), useSelector (ref), squadRegroupPromptDebounceTimeMs (ref), dashModule (ref), var6 (ref), squadRegroupExperimentation (ref), guiService (ref), eventNamesModule (ref), rbxAnalyticsService (ref), squadToastActionsAndStatesModule (ref), squadRegroupEntryPointModule (ref), regroupPromptNotificationStateModule (ref), squadExperienceInviteSourceModule (ref), setRegroupPromptShownModule (ref), realtimeDeliveryModule (ref), constantsModule (ref), var5 (ref), getRbxthumbWithTypeSizeAndOptions (ref), constants (ref)
-	local var8
-	local var9 = reactModule.useContext(squadExternalContractContextModule)
-	local var10 = useLocalization({
+return function(p1) --[[ Line: 60 ]]
+	-- upvalues: ReactModule (copy), SquadExternalContractContextModule (copy), UseLocalizationFunction (copy), UseDispatchFunction (copy), UseLocalUserIdFunction (copy), CryoModule (copy), FFlagSquadsPresenceStoreMigrationModule (copy), SignalsModule (copy), GetResult (copy), UseSignalState (copy), NetworkingPresenceModule (copy), PresenceType (copy), LoggerModule (copy), SerializeTableModule (copy), FFlagUseSignalsForSquadExperienceInvite (copy), UseSelectorFunction (copy), SquadRegroupPromptDebounceTimeMs (copy), DashModule (copy), GetSquadExperienceInviteStoreModule (copy), PresenceType1 (copy), SquadRegroupExperimentation (copy), GuiService (copy), EventNamesModule (copy), RbxAnalyticsService (copy), SquadToastActionsAndStatesModule (copy), SquadRegroupEntryPointModule (copy), RegroupPromptNotificationStateModule (copy), SquadExperienceInviteSourceModule (copy), SetRegroupPromptShownModule (copy), RealtimeDeliveryModule (copy), ConstantsModule (copy), NormalizePresenceRawData (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), Constants (copy)
+	local UseContextResult = ReactModule.useContext(SquadExternalContractContextModule)
+	local UseLocalizationResult = UseLocalizationFunction({
 		RegroupPromptTitle = "Notifications.SquadRegroupPrompt.ToastLabel.ContinuePlayingTogether",
 		RegroupPromptBody = "Notifications.SquadRegroupPrompt.ToastLabel.JoinANewServer",
 		Dismiss = "Notifications.SquadRegroupPrompt.ToastAction.Dismiss",
 		Join = "Notifications.SquadRegroupPrompt.ToastAction.Join"
 	})
-	local var11 = useDispatch()
-	local var12 = tonumber(useLocalUserId()) or 0
-	local var13 = reactModule.useRef(false)
-	local var14 = reactModule.useMemo(function()
-		-- upvalues: cryoModule (copy), p1 (ref)
-		return cryoModule.List.map(p1.currentSquadMembers, function(p2)
+	local UseDispatchResult = UseDispatchFunction()
+	local Number: number = tonumber(UseLocalUserIdFunction()) or 0
+	local UseRefResult = ReactModule.useRef(false)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 74 ]]
+		-- upvalues: CryoModule (upval), p1 (copy)
+		return CryoModule.List.map(p1.currentSquadMembers, function(p2) --[[ Line: 75 ]]
 			return p2.userId
 		end)
 	end, { p1.currentSquadMembers })
-	local var15 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref)
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 80 ]]
+		-- upvalues: p1 (copy)
 		local t = {}
 		
-		for i, v in ipairs(p1.currentSquadMembers) do
-			t[tostring(v.userId)] = true
+		for _, currentSquadMember in ipairs(p1.currentSquadMembers) do
+			t[tostring(currentSquadMember.userId)] = true
 		end
 		return t
 	end, { p1.currentSquadMembers })
-	local var16 = if fFlagSquadsPresenceStoreMigrationModule then reactModule.useMemo(function()
-		-- upvalues: var2 (copy), var14 (ref), var4 (copy)
-		return var2.createComputed(function(p2)
-			-- upvalues: var14 (copy), var4 (copy)
-			local t = {}
+	local UseMemoResult2 = if FFlagSquadsPresenceStoreMigrationModule then ReactModule.useMemo(function() --[[ Line: 91 ]]
+		-- upvalues: SignalsModule (upval), UseMemoResult (copy), GetResult (upval)
+		return SignalsModule.createComputed(function(p2) --[[ Line: 92 ]]
+			-- upvalues: UseMemoResult (upval), GetResult (upval)
+			local DataResults = {}
 			
-			for i, v in ipairs(var14) do
-				local var17 = tostring(v)
-				t[var17] = var4.GetPresenceByUserId(var17).data(p2)
+			for _, value in ipairs(UseMemoResult) do
+				local Text = tostring(value)
+				DataResults[Text] = GetResult.GetPresenceByUserId(Text).data(p2)
 			end
-			return t
+			return DataResults
 		end)
-	end, { var14 }) else nil
-	local _ = nil
-	local var17 = nil
+	end, { UseMemoResult }) else nil
+	local UseSignalStateResult = nil
+	local Callback = nil
 	
-	if fFlagSquadsPresenceStoreMigrationModule then
-		var8 = var7(var16)
+	if FFlagSquadsPresenceStoreMigrationModule then
+		UseSignalStateResult = UseSignalState(UseMemoResult2)
 	else
-		local var18, var19 = reactModule.useState({})
-		var8 = var18
-		var17 = var19
+		UseSignalStateResult, Callback = ReactModule.useState({})
 	end
-	local var20 = reactModule.useCallback(function()
-		-- upvalues: fFlagSquadsPresenceStoreMigrationModule (copy), var14 (ref), var4 (copy), var11 (ref), networkingPresenceModule (copy), cryoModule (copy), presenceType (copy), var17 (write), loggerModule (copy), serializeTableModule (copy)
-		if not fFlagSquadsPresenceStoreMigrationModule then
-			var11(networkingPresenceModule.GetPresencesFromUserIds.API(var14)):andThen(function(p2)
-				-- upvalues: cryoModule (copy), presenceType (copy), var17 (copy)
-				local userPresences
-				if p2 then
-					userPresences = p2.responseBody and (p2.responseBody.userPresences or {})
-				end
-				local t = {}
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 112 ]]
+		-- upvalues: FFlagSquadsPresenceStoreMigrationModule (upval), UseMemoResult (copy), GetResult (upval), UseDispatchResult (copy), NetworkingPresenceModule (upval), CryoModule (upval), PresenceType (upval), Callback (ref), LoggerModule (upval), SerializeTableModule (upval)
+		if not FFlagSquadsPresenceStoreMigrationModule then
+			UseDispatchResult(NetworkingPresenceModule.GetPresencesFromUserIds.API(UseMemoResult)):andThen(function(Result) --[[ Line: 119 ]]
+				-- upvalues: CryoModule (upval), PresenceType (upval), Callback (upval)
+				local JoinResults = {}
 				
-				for i, v in pairs(userPresences) do
-					if v.userId and v.userPresenceType then
-						t[tostring(v.userId)] = cryoModule.Dictionary.join(v, {
-							userPresenceType = presenceType.fromRawValue(v.userPresenceType)
+				for _, value in pairs(Result and Result.responseBody and Result.responseBody.userPresences or {}) do
+					if value.userId and value.userPresenceType then
+						JoinResults[tostring(value.userId)] = CryoModule.Dictionary.join(value, {
+							userPresenceType = PresenceType.fromRawValue(value.userPresenceType)
 						})
 					end
 				end
-				var17(function(p3)
-					-- upvalues: cryoModule (copy), t (ref)
-					return cryoModule.Dictionary.join(p3 or {}, t)
+				Callback(function(p2) --[[ Line: 129 ]]
+					-- upvalues: CryoModule (upval), JoinResults (copy)
+					return CryoModule.Dictionary.join(p2 or {}, JoinResults)
 				end)
-			end):catch(function(p3)
-				-- upvalues: loggerModule (copy), serializeTableModule (copy)
-				loggerModule:warning("SquadRegroupPromptEventReceiver: initial presence fetch failed. err={}", serializeTableModule(p3))
+			end):catch(function(Err) --[[ Line: 133 ]]
+				-- upvalues: LoggerModule (upval), SerializeTableModule (upval)
+				LoggerModule:warning("SquadRegroupPromptEventReceiver: initial presence fetch failed. err={}", SerializeTableModule(Err))
 			end)
 			
 			return
 		end
-		for i, v in ipairs(var14) do
-			var4.RefreshPresenceByUserId(tostring(v))
+		for _, value in ipairs(UseMemoResult) do
+			GetResult.RefreshPresenceByUserId((tostring(value)))
 		end
-	end, { var11, var14, var12 })
-	local var21 = reactModule.useRef(true)
-	reactModule.useEffect(function()
-		-- upvalues: var21 (ref), var20 (ref)
-		var21.current = true
-		var20()
+	end, { UseDispatchResult, UseMemoResult, Number })
+	local UseRefResult1 = ReactModule.useRef(true)
+	ReactModule.useEffect(function() --[[ Line: 143 ]]
+		-- upvalues: UseRefResult1 (copy), UseResult (copy)
+		UseRefResult1.current = true
+		UseResult()
 		
-		return function()
-			-- upvalues: var21 (copy)
-			var21.current = false
+		return function() --[[ Line: 147 ]]
+			-- upvalues: UseRefResult1 (upval)
+			UseRefResult1.current = false
 		end
 	end, {})
-	local var22 = reactModule.useRef(nil)
-	var22.current = useSelector(reactModule.useCallback(function(p2)
+	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 152 ]]
 		return if p2.Squad and p2.Squad.Squad then p2.Squad.Squad.currentExperienceInvite else nil
-	end, {}))
-	local var23 = squadRegroupPromptDebounceTimeMs / 1000
-	local var24 = reactModule.useRef(nil)
+	end, {})
+	local UseRefResult2 = ReactModule.useRef(nil)
+	UseRefResult2.current = if FFlagUseSignalsForSquadExperienceInvite then nil else UseSelectorFunction(UseResult1)
+	local SquadRegroupPromptDebounceTimeMsRatio = SquadRegroupPromptDebounceTimeMs / 1000
+	local UseRefResult3 = ReactModule.useRef(nil)
 	
-	if var24.current == nil then
-		var24.current = dashModule.debounce(function(p2, p3, p4, p5)
-			-- upvalues: var21 (ref), var13 (ref), var22 (ref), fFlagSquadsPresenceStoreMigrationModule (copy), var6 (copy), presenceType (copy), squadRegroupExperimentation (copy), guiService (copy), var10 (ref), var9 (ref), eventNamesModule (copy), rbxAnalyticsService (copy), squadToastActionsAndStatesModule (copy), squadRegroupEntryPointModule (copy), regroupPromptNotificationStateModule (copy), loggerModule (copy), serializeTableModule (copy), var11 (ref), squadExperienceInviteSourceModule (copy), setRegroupPromptShownModule (copy)
-			if not var21.current or var13.current or var22.current ~= nil then return end
-			local var25 = p2[tostring(p3)]
+	if UseRefResult3.current == nil then
+		UseRefResult3.current = DashModule.debounce(function(List, InitiatorId, SquadId, Icon) --[[ Line: 167 ]]
+			-- upvalues: UseRefResult1 (copy), UseRefResult (copy), FFlagUseSignalsForSquadExperienceInvite (upval), GetSquadExperienceInviteStoreModule (upval), UseRefResult2 (copy), FFlagSquadsPresenceStoreMigrationModule (upval), PresenceType1 (upval), PresenceType (upval), SquadRegroupExperimentation (upval), GuiService (upval), UseLocalizationResult (copy), UseContextResult (copy), EventNamesModule (upval), RbxAnalyticsService (upval), SquadToastActionsAndStatesModule (upval), SquadRegroupEntryPointModule (upval), RegroupPromptNotificationStateModule (upval), LoggerModule (upval), SerializeTableModule (upval), UseDispatchResult (copy), SquadExperienceInviteSourceModule (upval), SetRegroupPromptShownModule (upval)
+			if not UseRefResult1.current or UseRefResult.current or (if FFlagUseSignalsForSquadExperienceInvite then GetSquadExperienceInviteStoreModule(false).getHasCurrentExperienceInvite(false) else UseRefResult2.current ~= nil) then return end
+			local Entry = List[tostring(InitiatorId)]
 			
-			if var25 == nil then return end
-			for i, v in pairs(p2) do
-				if v and (if v.userPresenceType ~= (if fFlagSquadsPresenceStoreMigrationModule then var6.Online else presenceType.Online) then v.userPresenceType == (if fFlagSquadsPresenceStoreMigrationModule then var6.InGame else presenceType.InGame) and (var25.gameId ~= (if fFlagSquadsPresenceStoreMigrationModule then "" else nil) and (v.gameId ~= (if fFlagSquadsPresenceStoreMigrationModule then "" else nil) and var25.gameId ~= v.gameId)) else true) then
-					squadRegroupExperimentation.logExposure()
+			if Entry == nil then return end
+			for _, value in pairs(List) do
+				if value and (value.userPresenceType == (if FFlagSquadsPresenceStoreMigrationModule then PresenceType1.Online else PresenceType.Online) or value.userPresenceType == (if FFlagSquadsPresenceStoreMigrationModule then PresenceType1.InGame else PresenceType.InGame) and (Entry.gameId ~= (if FFlagSquadsPresenceStoreMigrationModule then "" else nil) and (value.gameId ~= (if FFlagSquadsPresenceStoreMigrationModule then "" else nil) and Entry.gameId ~= value.gameId))) then
+					SquadRegroupExperimentation.logExposure()
 					
-					if not squadRegroupExperimentation.getSquadRegroupEnabled() then return end
-					local var26 = nil
-					var26 = guiService:SendNotification({
-						Title = var10.RegroupPromptTitle,
-						Text = var10.RegroupPromptBody,
-						Icon = p5,
+					if not SquadRegroupExperimentation.getSquadRegroupEnabled() then break end
+					local SendNotificationResult = nil
+					SendNotificationResult = GuiService:SendNotification({
+						Title = UseLocalizationResult.RegroupPromptTitle,
+						Text = UseLocalizationResult.RegroupPromptBody,
+						Icon = Icon,
 						Buttons = {
 							{
-								Text = var10.Dismiss,
+								Text = UseLocalizationResult.Dismiss,
 								ButtonType = Enum.NotificationButtonType.Secondary,
-								OnActivated = function()
-									-- upvalues: var9 (copy), eventNamesModule (copy), p4 (ref), p3 (ref), var25 (ref), rbxAnalyticsService (copy), squadToastActionsAndStatesModule (copy), squadRegroupEntryPointModule (copy), regroupPromptNotificationStateModule (copy), var26 (write), var13 (copy)
-									var9.fireSquadAnalytics(eventNamesModule.SquadRegroupPromptClicked, {
+								OnActivated = function() --[[ Line: 223 ]]
+									-- upvalues: UseContextResult (upval), EventNamesModule (upval), SquadId (copy), InitiatorId (copy), Entry (copy), RbxAnalyticsService (upval), SquadToastActionsAndStatesModule (upval), SquadRegroupEntryPointModule (upval), RegroupPromptNotificationStateModule (upval), SendNotificationResult (ref), UseRefResult (upval)
+									UseContextResult.fireSquadAnalytics(EventNamesModule.SquadRegroupPromptClicked, {
 										clientTimestamp = os.time(),
-										squadId = p4,
-										initiatorId = p3,
-										gameInstanceId = var25.gameId,
-										rootPlaceId = var25.rootPlaceId,
-										placeId = var25.placeId,
-										universeId = var25.universeId,
-										playSessionId = rbxAnalyticsService:GetPlaySessionId(),
-										button = squadToastActionsAndStatesModule.RegroupDismiss,
-										entryPoint = squadRegroupEntryPointModule.ToastPrompt
+										squadId = SquadId,
+										initiatorId = InitiatorId,
+										gameInstanceId = Entry.gameId,
+										rootPlaceId = Entry.rootPlaceId,
+										placeId = Entry.placeId,
+										universeId = Entry.universeId,
+										playSessionId = RbxAnalyticsService:GetPlaySessionId(),
+										button = SquadToastActionsAndStatesModule.RegroupDismiss,
+										entryPoint = SquadRegroupEntryPointModule.ToastPrompt
 									})
-									regroupPromptNotificationStateModule.dismissNotification(var26)
-									var13.current = false
+									RegroupPromptNotificationStateModule.dismissNotification(SendNotificationResult)
+									UseRefResult.current = false
 								end
 							},
 							{
-								Text = var10.Join,
+								Text = UseLocalizationResult.Join,
 								ButtonType = Enum.NotificationButtonType.Primary,
-								OnActivated = function()
-									-- upvalues: var25 (ref), var9 (copy), loggerModule (copy), fFlagSquadsPresenceStoreMigrationModule (copy), serializeTableModule (copy), var11 (copy), squadExperienceInviteSourceModule (copy), eventNamesModule (copy), p4 (ref), p3 (ref), rbxAnalyticsService (copy), squadToastActionsAndStatesModule (copy), squadRegroupEntryPointModule (copy), regroupPromptNotificationStateModule (copy), var26 (write), var13 (copy)
-									local rootPlaceId = var25.rootPlaceId
+								OnActivated = function() --[[ Line: 243 ]]
+									-- upvalues: Entry (copy), UseContextResult (upval), LoggerModule (upval), FFlagSquadsPresenceStoreMigrationModule (upval), SerializeTableModule (upval), UseDispatchResult (upval), SquadExperienceInviteSourceModule (upval), EventNamesModule (upval), SquadId (copy), InitiatorId (copy), RbxAnalyticsService (upval), SquadToastActionsAndStatesModule (upval), SquadRegroupEntryPointModule (upval), RegroupPromptNotificationStateModule (upval), SendNotificationResult (ref), UseRefResult (upval)
+									local RootPlaceId = Entry.rootPlaceId
 									
-									if var9.createExperienceInvite == nil then
-										loggerModule:warning("SquadRegroupEventReceiver: Join clicked but createExperienceInvite was not supplied in the external contract")
-									elseif rootPlaceId == nil or fFlagSquadsPresenceStoreMigrationModule and rootPlaceId == "" then
-										loggerModule:warning("SquadRegroupEventReceiver: Join clicked but rootPlaceId is missing from local presence. localPresence={}", serializeTableModule(var25))
+									if UseContextResult.createExperienceInvite == nil then
+										LoggerModule:warning("SquadRegroupEventReceiver: Join clicked but createExperienceInvite was not supplied in the external contract")
+									elseif RootPlaceId == nil or FFlagSquadsPresenceStoreMigrationModule and RootPlaceId == "" then
+										LoggerModule:warning("SquadRegroupEventReceiver: Join clicked but rootPlaceId is missing from local presence. localPresence={}", SerializeTableModule(Entry))
 									else
-										var11(var9.createExperienceInvite(tostring(rootPlaceId), squadExperienceInviteSourceModule.Regroup)):andThen(function(p6)
-											-- upvalues: var9 (copy), eventNamesModule (copy), p4 (copy), p3 (copy), var25 (copy), rbxAnalyticsService (copy), squadToastActionsAndStatesModule (copy), squadRegroupEntryPointModule (copy)
-											var9.fireSquadAnalytics(eventNamesModule.SquadRegroupPromptClicked, {
+										UseDispatchResult(UseContextResult.createExperienceInvite(tostring(RootPlaceId), SquadExperienceInviteSourceModule.Regroup)):andThen(function(Result) --[[ Line: 264 ]]
+											-- upvalues: UseContextResult (upval), EventNamesModule (upval), SquadId (upval), InitiatorId (upval), Entry (upval), RbxAnalyticsService (upval), SquadToastActionsAndStatesModule (upval), SquadRegroupEntryPointModule (upval)
+											UseContextResult.fireSquadAnalytics(EventNamesModule.SquadRegroupPromptClicked, {
 												clientTimestamp = os.time(),
-												squadId = p4,
-												initiatorId = p3,
-												gameInstanceId = var25.gameId,
-												rootPlaceId = var25.rootPlaceId,
-												placeId = var25.placeId,
-												universeId = var25.universeId,
-												playSessionId = rbxAnalyticsService:GetPlaySessionId(),
-												experienceInviteId = p6,
-												button = squadToastActionsAndStatesModule.RegroupJoin,
-												entryPoint = squadRegroupEntryPointModule.ToastPrompt
+												squadId = SquadId,
+												initiatorId = InitiatorId,
+												gameInstanceId = Entry.gameId,
+												rootPlaceId = Entry.rootPlaceId,
+												placeId = Entry.placeId,
+												universeId = Entry.universeId,
+												playSessionId = RbxAnalyticsService:GetPlaySessionId(),
+												experienceInviteId = Result,
+												button = SquadToastActionsAndStatesModule.RegroupJoin,
+												entryPoint = SquadRegroupEntryPointModule.ToastPrompt
 											})
-										end):catch(function(p6)
-											-- upvalues: loggerModule (copy), serializeTableModule (copy)
-											loggerModule:warning("SquadRegroupEventReceiver: createExperienceInvite failed. err={}", serializeTableModule(p6))
+										end):catch(function(Err) --[[ Line: 282 ]]
+											-- upvalues: LoggerModule (upval), SerializeTableModule (upval)
+											LoggerModule:warning("SquadRegroupEventReceiver: createExperienceInvite failed. err={}", SerializeTableModule(Err))
 										end)
 									end
-									regroupPromptNotificationStateModule.dismissNotification(var26)
-									var13.current = false
+									RegroupPromptNotificationStateModule.dismissNotification(SendNotificationResult)
+									UseRefResult.current = false
 								end
 							}
 						}
 					})
-					var13.current = true
-					regroupPromptNotificationStateModule.setActive(var26, p4)
-					var9.fireSquadAnalytics(eventNamesModule.SquadRegroupPromptShown, {
+					UseRefResult.current = true
+					RegroupPromptNotificationStateModule.setActive(SendNotificationResult, SquadId)
+					UseContextResult.fireSquadAnalytics(EventNamesModule.SquadRegroupPromptShown, {
 						clientTimestamp = os.time(),
-						squadId = p4,
-						initiatorId = p3,
-						gameInstanceId = var25.gameId,
-						rootPlaceId = var25.rootPlaceId,
-						placeId = var25.placeId,
-						universeId = var25.universeId,
-						playSessionId = rbxAnalyticsService:GetPlaySessionId(),
-						entryPoint = squadRegroupEntryPointModule.ToastPrompt
+						squadId = SquadId,
+						initiatorId = InitiatorId,
+						gameInstanceId = Entry.gameId,
+						rootPlaceId = Entry.rootPlaceId,
+						placeId = Entry.placeId,
+						universeId = Entry.universeId,
+						playSessionId = RbxAnalyticsService:GetPlaySessionId(),
+						entryPoint = SquadRegroupEntryPointModule.ToastPrompt
 					})
 					
-					if p4 then
-						var11(setRegroupPromptShownModule(p4))
+					if SquadId then
+						UseDispatchResult(SetRegroupPromptShownModule(SquadId))
 					end
-					return
+					break
 				end
 			end
-		end, var23, { leading = false, trailing = true })
+		end, SquadRegroupPromptDebounceTimeMsRatio, { leading = false, trailing = true })
 	end
-	realtimeDeliveryModule.useRealtimeNamespace(constantsModule.PRESENCE_BULK_RTN_NAMESPACE, function(p2)
-		-- upvalues: var15 (ref), fFlagSquadsPresenceStoreMigrationModule (copy), var4 (copy), var5 (copy), presenceType (copy), var17 (write)
-		if type(p2) ~= "table" then return end
-		local var25 = nil
+	RealtimeDeliveryModule.useRealtimeNamespace(ConstantsModule.PRESENCE_BULK_RTN_NAMESPACE, function(List) --[[ Line: 326 ]]
+		-- upvalues: UseMemoResult1 (copy), FFlagSquadsPresenceStoreMigrationModule (upval), GetResult (upval), NormalizePresenceRawData (upval), PresenceType (upval), Callback (ref)
+		if type(List) ~= "table" then return end
+		local PresenceReports = nil
 		
-		for i, v in ipairs(p2) do
-			local userId = v and v.UserId
+		for _, Player in ipairs(List) do
+			local UserId = Player and Player.UserId
 			
-			if userId ~= nil then
-				local var26 = tostring(userId)
+			if UserId ~= nil then
+				local Text = tostring(UserId)
 				
-				if var15[var26] then
-					local presenceReport = v and v.PresenceReport
+				if UseMemoResult1[Text] then
+					local PresenceReport = Player and Player.PresenceReport
 					
-					if presenceReport ~= nil then
-						if fFlagSquadsPresenceStoreMigrationModule then
-							var4.UpdateUserPresence(var26, var5(presenceReport), { isUpdatedRealtime = true })
+					if PresenceReport ~= nil then
+						if FFlagSquadsPresenceStoreMigrationModule then
+							GetResult.UpdateUserPresence(Text, NormalizePresenceRawData(PresenceReport), { isUpdatedRealtime = true })
 						else
-							presenceReport.userPresenceType = presenceType.fromRawValue(presenceReport.userPresenceType)
-							var25 = var25 or {}
-							var25[var26] = presenceReport
+							PresenceReport.userPresenceType = PresenceType.fromRawValue(PresenceReport.userPresenceType)
+							PresenceReports = PresenceReports or {}
+							PresenceReports[Text] = PresenceReport
 						end
 					end
 				end
 			end
 		end
-		if not fFlagSquadsPresenceStoreMigrationModule and var25 ~= nil then
-			var17(function(p3)
-				-- upvalues: var25 (write)
-				local cloned = table.clone(p3 or {})
+		if not FFlagSquadsPresenceStoreMigrationModule and PresenceReports ~= nil then
+			Callback(function(p2) --[[ Line: 358 ]]
+				-- upvalues: PresenceReports (ref)
+				local Copy = table.clone(p2 or {})
 				
-				for i, v in pairs(var25) do
-					cloned[i] = v
+				for i, presenceReport in pairs(PresenceReports) do
+					Copy[i] = presenceReport
 				end
-				return cloned
+				return Copy
 			end)
 		end
-	end, { var11, p1.currentSquadId, var15 })
-	realtimeDeliveryModule.useRealtimeConnectionStateChanged(constantsModule.PRESENCE_BULK_RTN_NAMESPACE, function(p3, p4)
-		-- upvalues: loggerModule (copy), var20 (ref)
-		if p3 == Enum.ConnectionState.Connected and p4 then
-			loggerModule:info("Connection re-established, fetching squad presences.")
-			var20()
+	end, { UseDispatchResult, p1.currentSquadId, UseMemoResult1 })
+	RealtimeDeliveryModule.useRealtimeConnectionStateChanged(ConstantsModule.PRESENCE_BULK_RTN_NAMESPACE, function(ConnectionState, p2) --[[ Line: 371 ]]
+		-- upvalues: LoggerModule (upval), UseResult (copy)
+		if ConnectionState == Enum.ConnectionState.Connected and p2 then
+			LoggerModule:info("Connection re-established, fetching squad presences.")
+			UseResult()
 		end
-	end, { var20 })
-	reactModule.useEffect(function()
-		-- upvalues: var13 (ref), var8 (write), var12 (ref), fFlagSquadsPresenceStoreMigrationModule (copy), getRbxthumbWithTypeSizeAndOptions (copy), constants (copy), var24 (ref), p1 (ref)
-		if not var13.current then
-			local universeId
-			local var27 = var8[tostring(var12)]
-			
-			if fFlagSquadsPresenceStoreMigrationModule then
-				if var27 and var27.universeId ~= "" then
-					universeId = var27.universeId
-					
-					if not universeId then
-						if var27 and var27.gameId ~= "" then
-							universeId = var27.gameId or nil
-						end
-					end
-				end
-			else
-				universeId = var27 and (var27.universeId or (var27.gameId or nil))
-			end
-			var24.current(var8, var12, p1.currentSquadId, if universeId ~= nil then nil else getRbxthumbWithTypeSizeAndOptions(tostring(universeId), constants.RbxthumbTypes.GameIcon, 128, false))
+	end, { UseResult })
+	ReactModule.useEffect(function() --[[ Line: 380 ]]
+		-- upvalues: UseRefResult (copy), UseSignalStateResult (ref), Number (copy), FFlagSquadsPresenceStoreMigrationModule (upval), GetRbxthumbWithTypeSizeAndOptionsFunction (upval), Constants (upval), UseRefResult3 (copy), p1 (copy)
+		if not UseRefResult.current then
+			local UseSignalStateResultEntry = UseSignalStateResult[tostring(Number)]
+			local UniverseId = (if FFlagSquadsPresenceStoreMigrationModule then UseSignalStateResultEntry and UseSignalStateResultEntry.universeId ~= "" and UseSignalStateResultEntry.universeId or UseSignalStateResultEntry and UseSignalStateResultEntry.gameId ~= "" and UseSignalStateResultEntry.gameId else UseSignalStateResultEntry and (UseSignalStateResultEntry.universeId or UseSignalStateResultEntry.gameId)) or nil
+			UseRefResult3.current(UseSignalStateResult, Number, p1.currentSquadId, if UniverseId == nil then nil else GetRbxthumbWithTypeSizeAndOptionsFunction(tostring(UniverseId), Constants.RbxthumbTypes.GameIcon, 128, false))
 		end
-	end, { var8, var12, p1.currentSquadId })
+	end, { UseSignalStateResult, Number, p1.currentSquadId })
 	
 	return nil
 end

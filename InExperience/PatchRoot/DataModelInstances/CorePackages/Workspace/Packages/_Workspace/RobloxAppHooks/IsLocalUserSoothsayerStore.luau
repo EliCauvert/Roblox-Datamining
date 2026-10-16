@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.IsLocalUserSoothsayerStore.IsLocalUserSoothsayerStore)
+﻿return (require(script.Parent.Parent.Parent._Index.IsLocalUserSoothsayerStore.IsLocalUserSoothsayerStore))

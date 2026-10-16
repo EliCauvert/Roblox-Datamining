@@ -1,37 +1,38 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local _ = require(appChat.MessageData.Types)
-local getConversationMessageStoreModule = require(appChat.Stores.GetConversationMessageStore)
-local getConversationMessageListStoreModule = require(appChat.Stores.GetConversationMessageListStore)
-local ingestOperationModule = require(script.Parent.IngestOperation)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local _ = require(AppChat.MessageData.Types)
+local GetConversationMessageStoreModule = require(AppChat.Stores.GetConversationMessageStore)
+local GetConversationMessageListStoreModule = require(AppChat.Stores.GetConversationMessageListStore)
+local IngestOperationModule = require(script.Parent.IngestOperation)
 
-return function(p1, p2, p3, p4)
-	-- upvalues: getConversationMessageStoreModule (ref), getConversationMessageListStoreModule (ref), ingestOperationModule (ref)
-	local var1 = getConversationMessageStoreModule(false)
-	local var2 = getConversationMessageListStoreModule(false)
+return function(p1, List, Append, p2) --[[ Line: 31 | Named "ingestBatch" ]]
+	-- upvalues: GetConversationMessageStoreModule (copy), GetConversationMessageListStoreModule (copy), IngestOperationModule (copy)
+	local ConversationMessageStoreModule = GetConversationMessageStoreModule(false)
+	local ConversationMessageListStoreModule = GetConversationMessageListStoreModule(false)
 	local t = {}
-	local t_1 = {}
+	local Ids = {}
 	
-	for i, v in p2 do
-		if v and v.id then
-			t[v.id] = v
-			table.insert(t_1, v.id)
+	for _, value in List do
+		if value and value.id then
+			t[value.id] = value
+			table.insert(Ids, value.id)
 		end
 	end
 	if next(t) ~= nil then
-		var1.upsertMessages(t)
+		ConversationMessageStoreModule.upsertMessages(t)
 	end
-	if p3 == ingestOperationModule.AppendAndAdvanceCursor then
-		var2.receivePage(p1, t_1, p4)
+	if Append == IngestOperationModule.AppendAndAdvanceCursor then
+		ConversationMessageListStoreModule.receivePage(p1, Ids, p2)
 		
-		return t_1
-	elseif p3 == ingestOperationModule.Append then
-		if #t_1 > 0 then
-			var2.appendMessages(p1, t_1)
-			
-			return t_1
-		end
-	elseif #t_1 > 0 then
-		var2.prependMessages(p1, t_1)
+		return Ids
 	end
-	return t_1
+	if Append ~= IngestOperationModule.Append then
+		if #Ids > 0 then
+			ConversationMessageListStoreModule.prependMessages(p1, Ids)
+		end
+	elseif #Ids > 0 then
+		ConversationMessageListStoreModule.appendMessages(p1, Ids)
+		
+		return Ids
+	end
+	return Ids
 end

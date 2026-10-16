@@ -1,52 +1,52 @@
-﻿local parent = script:FindFirstAncestor("Moments").Parent
-local _ = require(parent.MomentsTypes)
-local reactionType = require(parent.MomentsCommon).Enums.ReactionType
-local momentsUpdateReactionTrayOrder = game:DefineFastFlag("MomentsUpdateReactionTrayOrder", false)
-local t = {
-	[reactionType.ThumbsUp] = true,
-	[reactionType.Heart] = true,
-	[reactionType.LaughJoy] = true,
-	[reactionType.Wow] = true,
-	[reactionType.Cry] = true,
-	[reactionType.Fire] = true,
-	[reactionType.Skull] = true
+﻿local Parent = script:FindFirstAncestor("Moments").Parent
+local _ = require(Parent.MomentsTypes)
+local ReactionType = require(Parent.MomentsCommon).Enums.ReactionType
+local MomentsUpdateReactionTrayOrder = game:DefineFastFlag("MomentsUpdateReactionTrayOrder", false)
+local config = {
+	[ReactionType.ThumbsUp] = true,
+	[ReactionType.Heart] = true,
+	[ReactionType.LaughJoy] = true,
+	[ReactionType.Wow] = true,
+	[ReactionType.Cry] = true,
+	[ReactionType.Fire] = true,
+	[ReactionType.Skull] = true
 }
 local list = {
-	reactionType.ThumbsUp, reactionType.Heart, reactionType.LaughJoy,
-	reactionType.Wow, reactionType.Cry, reactionType.Fire, reactionType.Skull
+	ReactionType.ThumbsUp, ReactionType.Heart, ReactionType.LaughJoy,
+	ReactionType.Wow, ReactionType.Cry, ReactionType.Fire, ReactionType.Skull
 }
 
-local function _(p1)
-	local replaced = string.gsub(string.lower(p1), "%-", "")
+local function _(Text: string): string --[[ Line: 38 | Named "normalizeEmojiName" ]]
+	local Replaced = string.gsub(string.lower(Text), "%-", "")
 	
-	return if replaced == "crying" then "cry" else replaced
+	return if Replaced == "crying" then "cry" else Replaced
 end
 
 return {
-	reactionTypesFromEmojis = function(p1)
-		-- upvalues: t (ref), momentsUpdateReactionTrayOrder (ref), list (ref)
-		local t_1 = {}
-		local t_2 = {}
+	reactionTypesFromEmojis = function(List) --[[ Line: 48 ]]
+		-- upvalues: config (copy), MomentsUpdateReactionTrayOrder (copy), list (copy)
+		local List1 = {}
+		local t = {}
 		
-		for i, v in p1 do
-			local replaced = string.gsub(string.lower(v.name), "%-", "")
-			local var1 = if replaced == "crying" then "cry" else replaced
+		for _, value in List do
+			local Replaced = string.gsub(string.lower(value.name), "%-", "")
+			local Cry: string = if Replaced == "crying" then "cry" else Replaced
 			
-			if t[var1] then
-				table.insert(t_1, var1)
-				t_2[var1] = true
+			if config[Cry] then
+				table.insert(List1, Cry)
+				t[Cry] = true
 			end
 		end
-		if momentsUpdateReactionTrayOrder then
-			t_1 = {}
+		if MomentsUpdateReactionTrayOrder then
+			List1 = {}
 			
-			for i, v_1 in list do
-				if t_2[v_1] then
-					table.insert(t_1, v_1)
+			for _, value1 in list do
+				if t[value1] then
+					table.insert(List1, value1)
 				end
 			end
 		end
-		return if #t_1 == 0 then list else t_1
+		return if #List1 == 0 then list else List1
 	end,
 	PICKER_REACTION_ORDER = list
 }

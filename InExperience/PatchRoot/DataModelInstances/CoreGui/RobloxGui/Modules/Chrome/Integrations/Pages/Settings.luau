@@ -1,25 +1,23 @@
-﻿local chrome = script:FindFirstAncestor("Chrome")
-local corePackagesService = game:GetService("CorePackages")
-local serviceModule = require(chrome.Service)
-local commonIconModule = require(chrome.Integrations.CommonIcon)
-local sideSheetPlacement = require(corePackagesService.Workspace.Packages.Chrome).Enums.SideSheetPlacement
-local inGameMenuIntegrationUtilsModule = require(script.Parent.InGameMenuIntegrationUtils)
-local gameSettingsPage = inGameMenuIntegrationUtilsModule.createPageOpenSignal("GameSettingsPage")
+﻿local Chrome = script:FindFirstAncestor("Chrome")
+local ServiceModule = require(Chrome.Service)
+local CommonIconModule = require(Chrome.Integrations.CommonIcon)
+local InGameMenuIntegrationUtilsModule = require(script.Parent.InGameMenuIntegrationUtils)
+local GameSettingsPage = InGameMenuIntegrationUtilsModule.createPageOpenSignal("GameSettingsPage")
 
-return serviceModule:register({
+return ServiceModule:register({
 	id = "settings",
 	label = "CoreScripts.InGameMenu.PageTitle.GameSettings",
-	initialAvailability = serviceModule.AvailabilitySignal.Available,
-	sideSheetPlacement = sideSheetPlacement.AboveFold,
-	activated = function(_)
-		-- upvalues: inGameMenuIntegrationUtilsModule (ref), gameSettingsPage (ref)
-		inGameMenuIntegrationUtilsModule.toggleIGMPage("GameSettingsPage", gameSettingsPage:get())
+	initialAvailability = ServiceModule.AvailabilitySignal.Available,
+	sideSheetPlacement = require(game:GetService("CorePackages").Workspace.Packages.Chrome).Enums.SideSheetPlacement.AboveFold,
+	activated = function(_) --[[ Line: 19 ]]
+		-- upvalues: InGameMenuIntegrationUtilsModule (copy), GameSettingsPage (copy)
+		InGameMenuIntegrationUtilsModule.toggleIGMPage("GameSettingsPage", GameSettingsPage:get())
 	end,
-	isActivated = gameSettingsPage,
+	isActivated = GameSettingsPage,
 	components = {
-		Icon = function(_)
-			-- upvalues: commonIconModule (ref), gameSettingsPage (ref)
-			return commonIconModule("icons/common/settings", "icons/common/settingsOn", gameSettingsPage)
+		Icon = function(_) --[[ Line: 24 ]]
+			-- upvalues: CommonIconModule (copy), GameSettingsPage (copy)
+			return CommonIconModule("icons/common/settings", "icons/common/settingsOn", GameSettingsPage)
 		end
 	}
 })

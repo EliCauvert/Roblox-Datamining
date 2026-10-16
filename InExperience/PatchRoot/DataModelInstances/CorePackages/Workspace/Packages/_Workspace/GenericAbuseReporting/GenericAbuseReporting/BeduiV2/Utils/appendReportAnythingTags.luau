@@ -1,138 +1,141 @@
-﻿local httpService = game:GetService("HttpService")
-local getFFlagReportAnythingEnableAdReport = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.SharedFlags).GetFFlagReportAnythingEnableAdReport
+﻿local HttpService = game:GetService("HttpService")
+local GetFFlagReportAnythingEnableAdReportFunction = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.SharedFlags).GetFFlagReportAnythingEnableAdReport
 
-local function transformVectorArray(p1)
+local function transformVectorArray(ConvexHull) --[[ Line: 70 ]]
 	local t = {}
 	
-	for i, v in ipairs(p1) do
-		t[#t + 1] = { v.X, v.Y }
+	for _, value in ipairs(ConvexHull) do
+		t[#t + 1] = { value.X, value.Y }
 	end
 	return t
 end
 
-local function transformIdentifiedAds(p2)
+local function transformIdentifiedAds(IdentifiedAds) --[[ Line: 78 ]]
 	local t = {}
 	
-	for i, v in pairs(p2) do
+	for _, identifiedAd in pairs(IdentifiedAds) do
 		t[#t + 1] = {
-			assetId = v.assetId,
-			distance = v.distance,
+			assetId = identifiedAd.assetId,
+			distance = identifiedAd.distance,
 			boundingBox = {
-				minX = v.boundingBox.min.X,
-				minY = v.boundingBox.min.Y,
-				maxX = v.boundingBox.max.X,
-				maxY = v.boundingBox.max.Y
+				minX = identifiedAd.boundingBox.min.X,
+				minY = identifiedAd.boundingBox.min.Y,
+				maxX = identifiedAd.boundingBox.max.X,
+				maxY = identifiedAd.boundingBox.max.Y
 			},
-			adUnitName = v.adUnitName,
-			encryptedAdTrackingData = v.encryptedAdTrackingData,
-			encryptionMetadata = v.encryptionMetadata
+			adUnitName = identifiedAd.adUnitName,
+			encryptedAdTrackingData = identifiedAd.encryptedAdTrackingData,
+			encryptionMetadata = identifiedAd.encryptionMetadata
 		}
 	end
 	return t
 end
 
-local function transformIdentifiedAvatars(p3)
-	-- upvalues: transformVectorArray (ref)
+local function transformIdentifiedAvatars(IdentifiedAvatars) --[[ Line: 98 ]]
+	-- upvalues: transformVectorArray (copy)
 	local t = {}
 	
-	for i, v in pairs(p3) do
-		local t_1 = {
+	for i, identifiedAvatar in pairs(IdentifiedAvatars) do
+		local config = {
 			userId = tostring(i),
-			distance = v.distance,
+			distance = identifiedAvatar.distance,
 			boundingBox = {
-				minX = v.boundingBox.min.X,
-				minY = v.boundingBox.min.Y,
-				maxX = v.boundingBox.max.X,
-				maxY = v.boundingBox.max.Y
+				minX = identifiedAvatar.boundingBox.min.X,
+				minY = identifiedAvatar.boundingBox.min.Y,
+				maxX = identifiedAvatar.boundingBox.max.X,
+				maxY = identifiedAvatar.boundingBox.max.Y
 			},
-			hitRate = v.hitRate,
-			convexHull = transformVectorArray(v.convexHull)
+			hitRate = identifiedAvatar.hitRate,
+			convexHull = transformVectorArray(identifiedAvatar.convexHull)
 		}
 		
-		if v.pointProcessingStats ~= nil then
-			t_1.pointProcessingStats = {
-				if v.pointProcessingStats.wasSkipped then 1 else 0,
-				v.pointProcessingStats.total,
-				v.pointProcessingStats.offScreenDiscardCount,
-				v.pointProcessingStats.tooCloseDiscardCount
+		if identifiedAvatar.pointProcessingStats ~= nil then
+			config.pointProcessingStats = {
+				if identifiedAvatar.pointProcessingStats.wasSkipped then 1 else 0,
+				identifiedAvatar.pointProcessingStats.total,
+				identifiedAvatar.pointProcessingStats.offScreenDiscardCount,
+				identifiedAvatar.pointProcessingStats.tooCloseDiscardCount
 			}
 		end
-		t[#t + 1] = t_1
+		t[#t + 1] = config
 	end
 	return t
 end
 
-local function _(p4)
-	for i in pairs(p4.identifiedAvatars) do
+local function _(p1): boolean --[[ Line: 130 | Named "hasIdentifiedAvatars" ]]
+	for _ in pairs(p1.identifiedAvatars) do
 		return true
 	end
 	return false
 end
 
-local _ = function(p5)
-	for i in pairs(p5.identifiedAds) do
+local _ = function(p2): boolean --[[ Line: 137 | Named "hasIdentifiedAds" ]]
+	for _ in pairs(p2.identifiedAds) do
 		return true
 	end
 	return false
 end
 
 return {
-	appendReportAnythingTags = function(p6, p7)
-		-- upvalues: httpService (ref), transformIdentifiedAvatars (ref), getFFlagReportAnythingEnableAdReport (ref), transformIdentifiedAds (ref)
-		if not p7 then
-			return p6
+	appendReportAnythingTags = function(p3, p4) --[[ Line: 144 ]]
+		-- upvalues: HttpService (copy), transformIdentifiedAvatars (copy), GetFFlagReportAnythingEnableAdReportFunction (copy), transformIdentifiedAds (copy)
+		if not p4 then
+			return p3
 		end
-		local identificationResults = p7.identificationResults
+		local IdentificationResults = p4.identificationResults
+		local Flag = false
 		
-		for i in pairs(identificationResults.identifiedAvatars) do
-			var8 = true
+		for _ in pairs(IdentificationResults.identifiedAvatars) do
+			Flag = true
+			break
 		end
-		var8 = false
-		if var8 then
-			p6.IDENTIFIED_AVATARS = {
+		if Flag then
+			p3.IDENTIFIED_AVATARS = {
 				valueList = {
 					{
-						data = httpService:JSONEncode(transformIdentifiedAvatars(identificationResults.identifiedAvatars))
+						data = HttpService:JSONEncode((transformIdentifiedAvatars(IdentificationResults.identifiedAvatars)))
 					}
 				}
 			}
 		end
-		if identificationResults.avatarIDStats then
-			p6.AVATAR_ID_STATS = {
+		if IdentificationResults.avatarIDStats then
+			p3.AVATAR_ID_STATS = {
 				valueList = {
 					{
-						data = httpService:JSONEncode(identificationResults.avatarIDStats)
+						data = HttpService:JSONEncode(IdentificationResults.avatarIDStats)
 					}
 				}
 			}
 		end
-		if getFFlagReportAnythingEnableAdReport() then
-			for i in pairs(identificationResults.identifiedAds) do
-				var9 = true
+		if GetFFlagReportAnythingEnableAdReportFunction() then
+			local Flag1 = false
+			
+			for _ in pairs(IdentificationResults.identifiedAds) do
+				Flag1 = true
+				break
 			end
-			var9 = false
-			if var9 then
-				p6.IDENTIFIED_ADS = {
+			if Flag1 then
+				p3.IDENTIFIED_ADS = {
 					valueList = {
 						{
-							data = httpService:JSONEncode(transformIdentifiedAds(identificationResults.identifiedAds))
+							data = HttpService:JSONEncode((transformIdentifiedAds(IdentificationResults.identifiedAds)))
 						}
 					}
 				}
 			end
-			if identificationResults.adIDStats then
-				p6.AD_ID_STATS = {
+			if IdentificationResults.adIDStats then
+				p3.AD_ID_STATS = {
 					valueList = {
 						{
-							data = httpService:JSONEncode(identificationResults.adIDStats)
+							data = HttpService:JSONEncode(IdentificationResults.adIDStats)
 						}
 					}
 				}
 			end
 		end
-		if #p7.screenshotId > 0 then
-			p6.SCREENSHOT_ID = { valueList = { { data = p7.screenshotId } } }
+		if #p4.screenshotId > 0 then
+			p3.SCREENSHOT_ID = { valueList = { { data = p4.screenshotId } } }
 		end
-		return p6
+		return p3
 	end
 }

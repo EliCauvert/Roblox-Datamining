@@ -1,30 +1,30 @@
-﻿local isSubjectToDesktopPolicies = require(script.Parent.Parent.SharedFlags).isSubjectToDesktopPolicies
+﻿local IsSubjectToDesktopPoliciesFunction = require(script.Parent.Parent.SharedFlags).isSubjectToDesktopPolicies
 
-return function(p1)
-	-- upvalues: isSubjectToDesktopPolicies (ref)
+return function(p1) --[[ Line: 5 | Named "SharePolicies" ]]
+	-- upvalues: IsSubjectToDesktopPoliciesFunction (copy)
 	return {
-		getAccountProviderName = function()
-			-- upvalues: p1 (ref)
+		getAccountProviderName = function() --[[ Line: 7 ]]
+			-- upvalues: p1 (copy)
 			return p1.AccountProviderName or ""
 		end,
-		shouldShowGameDetailsShareButton = function()
-			-- upvalues: isSubjectToDesktopPolicies (copy), p1 (ref)
-			return if isSubjectToDesktopPolicies() then false else p1.GameDetailsShareButton or false
+		shouldShowGameDetailsShareButton = function() --[[ Line: 10 ]]
+			-- upvalues: IsSubjectToDesktopPoliciesFunction (upval), p1 (copy)
+			return not IsSubjectToDesktopPoliciesFunction() and (p1.GameDetailsShareButton or false)
 		end,
-		shouldShowCatalogShareButton = function()
-			-- upvalues: isSubjectToDesktopPolicies (copy), p1 (ref)
-			return if isSubjectToDesktopPolicies() then false else p1.CatalogShareButton or false
+		shouldShowCatalogShareButton = function() --[[ Line: 17 ]]
+			-- upvalues: IsSubjectToDesktopPoliciesFunction (upval), p1 (copy)
+			return not IsSubjectToDesktopPoliciesFunction() and (p1.CatalogShareButton or false)
 		end,
-		shouldShareToAccountProvider = function()
-			-- upvalues: p1 (ref)
+		shouldShareToAccountProvider = function() --[[ Line: 24 ]]
+			-- upvalues: p1 (copy)
 			return p1.ShareToAccountProvider or false
 		end,
-		shouldInviteFromAccountProvider = function()
-			-- upvalues: p1 (ref)
+		shouldInviteFromAccountProvider = function() --[[ Line: 27 ]]
+			-- upvalues: p1 (copy)
 			return p1.InviteFromAccountProvider or false
 		end,
-		getShareToAccountProviderTimeout = function()
-			-- upvalues: p1 (ref)
+		getShareToAccountProviderTimeout = function() --[[ Line: 30 ]]
+			-- upvalues: p1 (copy)
 			return p1.ShareToAccountProviderTimeout or 5
 		end
 	}

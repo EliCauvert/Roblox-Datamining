@@ -1,13 +1,13 @@
-﻿local parent = script.Parent.Parent.Parent
-local useUserExperiment = require(parent.RoactAppExperiment).useUserExperiment
-local fStringPaginatedCarouselExperimentLayer = require(parent.SharedFlags).FStringPaginatedCarouselExperimentLayer
+﻿local Parent = script.Parent.Parent.Parent
+local UseUserExperimentFunction = require(Parent.RoactAppExperiment).useUserExperiment
+local FStringPaginatedCarouselExperimentLayer = require(Parent.SharedFlags).FStringPaginatedCarouselExperimentLayer
 
 return {
-	usePaginatedFriendsCarouselExperiment = function()
-		-- upvalues: useUserExperiment (ref), fStringPaginatedCarouselExperimentLayer (ref)
-		return true, useUserExperiment({ fStringPaginatedCarouselExperimentLayer }, function(p1)
-			-- upvalues: fStringPaginatedCarouselExperimentLayer (copy)
-			return (p1[fStringPaginatedCarouselExperimentLayer] or {}).friendsSortVariant
-		end)
+	usePaginatedFriendsCarouselExperiment = function() --[[ Line: 11 ]]
+		-- upvalues: UseUserExperimentFunction (copy), FStringPaginatedCarouselExperimentLayer (copy)
+		return true, (UseUserExperimentFunction({ FStringPaginatedCarouselExperimentLayer }, function(p1) --[[ Line: 14 ]]
+			-- upvalues: FStringPaginatedCarouselExperimentLayer (upval)
+			return (p1[FStringPaginatedCarouselExperimentLayer] or {}).friendsSortVariant
+		end))
 	end
 }

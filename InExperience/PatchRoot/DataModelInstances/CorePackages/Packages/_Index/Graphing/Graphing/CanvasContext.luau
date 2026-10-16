@@ -1,3 +1,3 @@
-﻿local graphing = script:FindFirstAncestor("Graphing")
+﻿local Graphing = script:FindFirstAncestor("Graphing")
 
-return require(graphing.Parent.React).createContext(require(graphing.Util.CanvasUtil).createDefaultFunctions())
+return (require(Graphing.Parent.React).createContext(require(Graphing.Util.CanvasUtil).createDefaultFunctions()))

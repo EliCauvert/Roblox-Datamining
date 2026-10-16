@@ -1,29 +1,29 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local useDeviceOrientation = require(parent_1.RobloxAppHooks).useDeviceOrientation
-local deviceOrientationMode = require(parent_1.RobloxAppEnums).DeviceOrientationMode
-local userInputService = require(parent_1.MockableProxyServices).UserInputService
-local placementModule = require(parent.Enum.Placement)
-local mocksModule = require(parent.Mocks)
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local UseDeviceOrientationFunction = require(Parent1.RobloxAppHooks).useDeviceOrientation
+local DeviceOrientationMode = require(Parent1.RobloxAppEnums).DeviceOrientationMode
+local UserInputService = require(Parent1.MockableProxyServices).UserInputService
+local PlacementModule = require(Parent.Enum.Placement)
+local MocksModule = require(Parent.Mocks)
 
-return function()
-	-- upvalues: useDeviceOrientation (ref), deviceOrientationMode (ref), reactModule (ref), userInputService (ref), mocksModule (ref), placementModule (ref)
-	local var1 = useDeviceOrientation() == deviceOrientationMode.Portrait
-	local var2, var3 = reactModule.useState(userInputService.TouchEnabled)
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), userInputService (copy)
-		var3(userInputService.TouchEnabled)
-		local var4 = userInputService:GetPropertyChangedSignal("TouchEnabled"):Connect(function()
-			-- upvalues: var3 (copy), userInputService (copy)
-			var3(userInputService.TouchEnabled)
+return function() --[[ Line: 17 | Named "useNavBarPlacement" ]]
+	-- upvalues: UseDeviceOrientationFunction (copy), DeviceOrientationMode (copy), ReactModule (copy), UserInputService (copy), MocksModule (copy), PlacementModule (copy)
+	local IsUseDeviceOrientationResultMatch = UseDeviceOrientationFunction() == DeviceOrientationMode.Portrait
+	local UseStateResult, UseStateResult2 = ReactModule.useState(UserInputService.TouchEnabled)
+	ReactModule.useEffect(function() --[[ Line: 22 ]]
+		-- upvalues: UseStateResult2 (copy), UserInputService (upval)
+		UseStateResult2(UserInputService.TouchEnabled)
+		local Connection = UserInputService:GetPropertyChangedSignal("TouchEnabled"):Connect(function() --[[ Line: 24 ]]
+			-- upvalues: UseStateResult2 (upval), UserInputService (upval)
+			UseStateResult2(UserInputService.TouchEnabled)
 		end)
 		
-		return function()
-			-- upvalues: var4 (ref)
-			var4:Disconnect()
+		return function() --[[ Line: 27 ]]
+			-- upvalues: Connection (copy)
+			Connection:Disconnect()
 		end
 	end, {})
 	
-	return if mocksModule.navBarPlacement == nil then if var2 and var1 then placementModule.Bottom else placementModule.Left else mocksModule.navBarPlacement
+	return if MocksModule.navBarPlacement == nil then if UseStateResult and IsUseDeviceOrientationResultMatch then PlacementModule.Bottom else PlacementModule.Left else MocksModule.navBarPlacement
 end

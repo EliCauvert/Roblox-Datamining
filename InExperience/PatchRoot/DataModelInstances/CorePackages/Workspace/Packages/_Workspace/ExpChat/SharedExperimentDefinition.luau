@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Workspace.SharedExperimentDefinition.SharedExperimentDefinition)
+﻿return (require(script.Parent.Parent.Parent._Workspace.SharedExperimentDefinition.SharedExperimentDefinition))

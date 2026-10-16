@@ -1,38 +1,38 @@
-﻿local avatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
-local parent = avatarExperienceInspectAndBuy.Parent
-local reactModule = require(parent.React)
-local reactRobloxModule = require(parent.Dev.ReactRoblox)
-local UIBloxModule = require(parent.UIBlox)
-local designTokenProvider = require(parent.Style).DesignTokenProvider
-local localizationProvider = require(parent.Localization).LocalizationProvider
-local roactRoduxModule = require(parent.RoactRodux)
-local roduxModule = require(parent.Rodux)
-local foundationModule = require(parent.Foundation)
-local foundationProvider = foundationModule.FoundationProvider
-local colorMode = foundationModule.Enums.ColorMode
-local device = foundationModule.Enums.Device
-UIBloxModule.init(require(parent.Dev.RobloxAppUIBloxConfig))
-local appStyleProvider = UIBloxModule.App.Style.AppStyleProvider
+﻿local AvatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
+local Parent = AvatarExperienceInspectAndBuy.Parent
+local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.Dev.ReactRoblox)
+local UIBloxModule = require(Parent.UIBlox)
+local DesignTokenProvider = require(Parent.Style).DesignTokenProvider
+local LocalizationProvider = require(Parent.Localization).LocalizationProvider
+local RoactRoduxModule = require(Parent.RoactRodux)
+local RoduxModule = require(Parent.Rodux)
+local FoundationModule = require(Parent.Foundation)
+local FoundationProvider = FoundationModule.FoundationProvider
+local ColorMode = FoundationModule.Enums.ColorMode
+local Device = FoundationModule.Enums.Device
+UIBloxModule.init(require(Parent.Dev.RobloxAppUIBloxConfig))
+local AppStyleProvider = UIBloxModule.App.Style.AppStyleProvider
 
-local function createLocalization()
+local function createLocalization() --[[ Line: 23 ]]
 	return {
-		Format = function(_, p1)
+		Format = function(_, p1) --[[ Line: 25 ]]
 			return p1
 		end,
-		GetLocale = function()
+		GetLocale = function(): string --[[ Line: 28 ]]
 			return "locale"
 		end
 	}
 end
 
-local function createStore()
-	-- upvalues: roduxModule (ref)
-	return roduxModule.Store.new(roduxModule.createReducer({}, {}), nil, { roduxModule.makeThunkMiddleware({}) })
+local function createStore() --[[ Line: 34 ]]
+	-- upvalues: RoduxModule (copy)
+	return RoduxModule.Store.new(RoduxModule.createReducer({}, {}), nil, { RoduxModule.makeThunkMiddleware({}) })
 end
 
-local t = { Light = colorMode.Light, Dark = colorMode.Dark }
-local t_1 = { Console = device.Console, Desktop = device.Desktop }
-local t_2 = {
+local config = { Light = ColorMode.Light, Dark = ColorMode.Dark }
+local config1 = { Console = Device.Console, Desktop = Device.Desktop }
+local config2 = {
 	Default = { themeName = "Dark", fontName = "Gotham" },
 	Light = { themeName = "Light", fontName = "Gotham" },
 	Dark = { themeName = "Dark", fontName = "Gotham" }
@@ -40,22 +40,22 @@ local t_2 = {
 
 return {
 	name = "AvatarExperienceInspectAndBuy",
-	storyRoot = avatarExperienceInspectAndBuy,
-	roact = reactModule,
-	reactRoblox = reactRobloxModule,
-	mapStory = function(p1)
-		-- upvalues: t (ref), reactModule (ref), localizationProvider (ref), createLocalization (ref), appStyleProvider (ref), t_2 (ref), roactRoduxModule (ref), createStore (ref), designTokenProvider (ref), foundationProvider (ref), t_1 (ref)
-		return function(p2)
-			-- upvalues: t (copy), reactModule (copy), localizationProvider (copy), createLocalization (copy), appStyleProvider (copy), t_2 (copy), roactRoduxModule (copy), createStore (copy), designTokenProvider (copy), foundationProvider (copy), t_1 (copy), p1 (ref)
-			return reactModule.createElement(localizationProvider, { localization = createLocalization() }, {
-				AppStyleProvider = reactModule.createElement(appStyleProvider, { style = if p2 then t_2[p2.theme] else t_2.Default }, {
-					StoreProvider = reactModule.createElement(roactRoduxModule.StoreProvider, { store = createStore() }, {
-						DesignTokenProvider = reactModule.createElement(designTokenProvider, { tokenMappers = {} }, {
-							FoundationProvider = reactModule.createElement(foundationProvider, {
-								colorMode = t[p2.theme],
-								device = t_1[p2.platform],
+	storyRoot = AvatarExperienceInspectAndBuy,
+	roact = ReactModule,
+	reactRoblox = ReactRobloxModule,
+	mapStory = function(p1) --[[ Line: 71 ]]
+		-- upvalues: config (copy), ReactModule (copy), LocalizationProvider (copy), createLocalization (copy), AppStyleProvider (copy), config2 (copy), RoactRoduxModule (copy), createStore (copy), DesignTokenProvider (copy), FoundationProvider (copy), config1 (copy)
+		return function(p2) --[[ Line: 72 ]]
+			-- upvalues: config (upval), ReactModule (upval), LocalizationProvider (upval), createLocalization (upval), AppStyleProvider (upval), config2 (upval), RoactRoduxModule (upval), createStore (upval), DesignTokenProvider (upval), FoundationProvider (upval), config1 (upval), p1 (copy)
+			return ReactModule.createElement(LocalizationProvider, { localization = createLocalization() }, {
+				AppStyleProvider = ReactModule.createElement(AppStyleProvider, { style = p2 and config2[p2.theme] or config2.Default }, {
+					StoreProvider = ReactModule.createElement(RoactRoduxModule.StoreProvider, { store = createStore() }, {
+						DesignTokenProvider = ReactModule.createElement(DesignTokenProvider, { tokenMappers = {} }, {
+							FoundationProvider = ReactModule.createElement(FoundationProvider, {
+								colorMode = config[p2.theme],
+								device = config1[p2.platform],
 								preferences = p2.settings
-							}, { Child = reactModule.createElement(p1, p2) })
+							}, { Child = ReactModule.createElement(p1, p2) })
 						})
 					})
 				})

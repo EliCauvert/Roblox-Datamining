@@ -1,246 +1,210 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local expChatSharedModule = require(parent.ExpChatShared)
-local configModule = require(expChat.Config)
-local channelChipModule = require(script.Parent.ChannelChip)
-local fFlagEnableConsoleExpControls = require(parent.SharedFlags).FFlagEnableConsoleExpControls
-local fFlagExpChatInputBarV2CustomSendButtonModule = require(expChat.Flags.FFlagExpChatInputBarV2CustomSendButton)
-local fFlagExpChatInputBarV2CornerAndTruncationFixModule = require(expChat.Flags.FFlagExpChatInputBarV2CornerAndTruncationFix)
-local fFlagExpChatComposerInputBarFigmaParityModule = require(expChat.Flags.FFlagExpChatComposerInputBarFigmaParity)
-local fFlagExpChatPresetChatEnabled = expChatSharedModule.Flags.FFlagExpChatPresetChatEnabled
-local fFlagExpChatFixBackspaceNilTargetChannel = expChatSharedModule.Flags.FFlagExpChatFixBackspaceNilTargetChannel
-local fFlagExpChatPresetChatGamepadEnabledModule = require(expChat.Flags.FFlagExpChatPresetChatGamepadEnabled)
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local ExpChatSharedModule = require(Parent.ExpChatShared)
+local ConfigModule = require(ExpChat.Config)
+local ChannelChipModule = require(script.Parent.ChannelChip)
+local FFlagEnableConsoleExpControls = require(Parent.SharedFlags).FFlagEnableConsoleExpControls
+local FFlagExpChatInputBarV2CustomSendButtonModule = require(ExpChat.Flags.FFlagExpChatInputBarV2CustomSendButton)
+local FFlagExpChatInputBarV2CornerAndTruncationFixModule = require(ExpChat.Flags.FFlagExpChatInputBarV2CornerAndTruncationFix)
+local FFlagExpChatComposerInputBarFigmaParityModule = require(ExpChat.Flags.FFlagExpChatComposerInputBarFigmaParity)
+local FFlagExpChatPresetChatEnabled = ExpChatSharedModule.Flags.FFlagExpChatPresetChatEnabled
+local FFlagExpChatFixBackspaceNilTargetChannel = ExpChatSharedModule.Flags.FFlagExpChatFixBackspaceNilTargetChannel
+local FFlagExpChatPresetChatGamepadEnabledModule = require(ExpChat.Flags.FFlagExpChatPresetChatGamepadEnabled)
 
-local function renderCustomSendButton(p1, p2, p3, p4)
-	-- upvalues: reactModule (ref), fFlagExpChatPresetChatGamepadEnabledModule (ref), foundationModule (ref)
-	local var1 = if p3 then p2.Color.ActionStandard else p2.Color.ActionEmphasis
-	local size800 = p2.Size.Size_800
+local function renderCustomSendButton(p1, UseTokensResult, HasEmptyInputText, OnSendActivated) --[[ Line: 79 ]]
+	-- upvalues: ReactModule (copy), FFlagExpChatPresetChatGamepadEnabledModule (copy), FoundationModule (copy)
+	local ActionStandard = if HasEmptyInputText then UseTokensResult.Color.ActionStandard else UseTokensResult.Color.ActionEmphasis
+	local Size800 = UseTokensResult.Size.Size_800
 	
-	return reactModule.createElement("CanvasGroup", {
+	return ReactModule.createElement("CanvasGroup", {
 		BackgroundTransparency = 1,
 		AnchorPoint = Vector2.new(1, 0),
-		GroupTransparency = if p3 then p1.setTransparency(0.5, p1.transparencyValue) else p1.transparencyValue,
+		GroupTransparency = if HasEmptyInputText then p1.setTransparency(0.5, p1.transparencyValue) else p1.transparencyValue,
 		Position = UDim2.fromScale(1, 0),
 		Size = UDim2.new(0, p1.sendButtonContainerWidth + 6, 1, 0)
 	}, {
-		Layout = reactModule.createElement("UIListLayout", {
+		Layout = ReactModule.createElement("UIListLayout", {
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
 			VerticalAlignment = Enum.VerticalAlignment.Center
 		}),
-		SendButton = reactModule.createElement("TextButton", {
+		SendButton = ReactModule.createElement("TextButton", {
 			AutoButtonColor = false,
-			BackgroundColor3 = var1.Background.Color3,
-			BackgroundTransparency = var1.Background.Transparency,
+			BackgroundColor3 = ActionStandard.Background.Color3,
+			BackgroundTransparency = ActionStandard.Background.Transparency,
 			BorderSizePixel = 0,
-			Selectable = if p3 then false elseif fFlagExpChatPresetChatGamepadEnabledModule then nil else false,
-			Size = UDim2.fromOffset(size800, size800),
+			Selectable = not HasEmptyInputText and (if FFlagExpChatPresetChatGamepadEnabledModule then nil else false),
+			Size = UDim2.fromOffset(Size800, Size800),
 			Text = "",
-			[reactModule.Event.Activated] = if p3 then nil else p4
+			[ReactModule.Event.Activated] = if HasEmptyInputText then nil else OnSendActivated
 		}, {
-			UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) }),
-			IconLayout = reactModule.createElement("UIListLayout", {
+			UICorner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) }),
+			IconLayout = ReactModule.createElement("UIListLayout", {
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
 				VerticalAlignment = Enum.VerticalAlignment.Center
 			}),
-			Icon = reactModule.createElement(foundationModule.Icon, {
-				name = foundationModule.Enums.IconName.ArrowMediumUp,
-				size = foundationModule.Enums.IconSize.Small,
-				style = var1.Foreground
+			Icon = ReactModule.createElement(FoundationModule.Icon, {
+				name = FoundationModule.Enums.IconName.ArrowMediumUp,
+				size = FoundationModule.Enums.IconSize.Small,
+				style = ActionStandard.Foreground
 			})
 		})
 	})
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: foundationModule (ref), reactModule (ref), fFlagExpChatInputBarV2CornerAndTruncationFixModule (ref), channelChipModule (ref), fFlagExpChatFixBackspaceNilTargetChannel (ref), configModule (ref), fFlagExpChatPresetChatEnabled (ref), fFlagEnableConsoleExpControls (ref), fFlagExpChatComposerInputBarFigmaParityModule (ref), fFlagExpChatInputBarV2CustomSendButtonModule (ref), renderCustomSendButton (ref), fFlagExpChatPresetChatGamepadEnabledModule (ref)
-	local var1 = foundationModule.Hooks.useTokens()
-	local setTransparency = p1.setTransparency
-	local chatInputBarSettings = p1.chatInputBarSettings
-	local chatInputBarBackgroundTransparency = p1.chatInputBarBackgroundTransparency
-	local isSpatialUIEnabled = p1.isSpatialUIEnabled
-	local canLocalUserChatDerived = p1.canLocalUserChatDerived
-	local targetChannelWidth = p1.targetChannelWidth
-	local showPlaceholderText = p1.showPlaceholderText
-	local hasEmptyInputText = p1.hasEmptyInputText
-	local cursor = p1.cursor
-	local placeholderRef = p1.placeholderRef
-	local textBoxRef = p1.textBoxRef
-	local customTextBoxRef = p1.customTextBoxRef
-	local onAbsoluteSizeChanged = p1.onAbsoluteSizeChanged
-	local onFocused = p1.onFocused
-	local onFocusLost = p1.onFocusLost
-	local onTextChanged = p1.onTextChanged
-	local onReturnPressedFromOnScreenKeyboard = p1.onReturnPressedFromOnScreenKeyboard
-	local onSendActivated = p1.onSendActivated
-	local createElement = reactModule.createElement
-	local var2 = "Frame"
-	local t = {
+return ReactModule.memo(function(p1) --[[ Line: 132 | Named "ChatInputBarV2" ]]
+	-- upvalues: FoundationModule (copy), ReactModule (copy), FFlagExpChatInputBarV2CornerAndTruncationFixModule (copy), ChannelChipModule (copy), FFlagExpChatFixBackspaceNilTargetChannel (copy), ConfigModule (copy), FFlagExpChatPresetChatEnabled (copy), FFlagEnableConsoleExpControls (copy), FFlagExpChatComposerInputBarFigmaParityModule (copy), FFlagExpChatInputBarV2CustomSendButtonModule (copy), renderCustomSendButton (copy), FFlagExpChatPresetChatGamepadEnabledModule (copy)
+	local UseTokensResult = FoundationModule.Hooks.useTokens()
+	local SetTransparencyFunction = p1.setTransparency
+	local ChatInputBarSettings = p1.chatInputBarSettings
+	local IsSpatialUIEnabled = p1.isSpatialUIEnabled
+	local CanLocalUserChatDerived = p1.canLocalUserChatDerived
+	local TargetChannelWidth = p1.targetChannelWidth
+	local ShowPlaceholderText = p1.showPlaceholderText
+	local HasEmptyInputText = p1.hasEmptyInputText
+	local Cursor = p1.cursor
+	local PlaceholderRef = p1.placeholderRef
+	local TextBoxRef = p1.textBoxRef
+	local CustomTextBoxRef = p1.customTextBoxRef
+	local OnFocused = p1.onFocused
+	local OnFocusLost = p1.onFocusLost
+	local OnTextChanged = p1.onTextChanged
+	local OnReturnPressedFromOnScreenKeyboard = p1.onReturnPressedFromOnScreenKeyboard
+	local OnSendActivated = p1.onSendActivated
+	
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		AutomaticSize = Enum.AutomaticSize.XY,
 		Size = UDim2.new(1, 0, 0, 0)
-	}
-	local t_1 = {}
-	local createElement_1 = reactModule.createElement
-	local var3 = "Frame"
-	local t_2 = {
-		BackgroundTransparency = 1,
-		AutomaticSize = Enum.AutomaticSize.Y,
-		Size = UDim2.fromScale(1, 0)
-	}
-	local t_3 = {}
-	local createElement_2 = reactModule.createElement
-	local var4 = "Frame"
-	local t_4 = {
-		LayoutOrder = 1,
-		AutomaticSize = Enum.AutomaticSize.Y,
-		BackgroundColor3 = chatInputBarSettings.BackgroundColor3,
-		BackgroundTransparency = setTransparency(chatInputBarBackgroundTransparency, p1.transparencyValue),
-		Position = UDim2.fromScale(0, 0),
-		Size = UDim2.fromScale(1, 0)
-	}
-	local t_5 = {
-		UICorner = reactModule.createElement("UICorner", {
-			CornerRadius = if fFlagExpChatInputBarV2CornerAndTruncationFixModule then UDim.new(0, 20) else UDim.new(1, 0)
-		}),
-		UIStroke = reactModule.createElement("UIStroke", {
-			ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
-			Color = var1.Color.Stroke.Default.Color3,
-			Transparency = setTransparency(var1.Color.Stroke.Default.Transparency, p1.transparencyValue)
-		}),
-		UIPadding = reactModule.createElement("UIPadding", { PaddingRight = UDim.new(0, 2) })
-	}
-	local createElement_3 = reactModule.createElement
-	local var5 = "Frame"
-	local t_6 = {
-		BackgroundTransparency = 1,
-		AutomaticSize = Enum.AutomaticSize.Y,
-		Position = UDim2.fromScale(0, 0),
-		Size = UDim2.new(1, -(p1.sendButtonContainerWidth + 6), 0, 0)
-	}
-	local t_7 = {
-		TargetChannelChip = reactModule.createElement(channelChipModule, {
-			transparency = setTransparency(0, p1.transparencyValue),
-			onAbsoluteSizeChanged = onAbsoluteSizeChanged,
-			onChannelChipActivated = if fFlagExpChatFixBackspaceNilTargetChannel then function()
-				-- upvalues: p1 (ref)
-				p1.resetTargetChannel(p1.isGlobalChatTabActive)
-			end else p1.resetTargetChannel,
-			targetTextChannelDisplayName = p1.targetTextChannelDisplayName or "",
-			isChannelBarVisible = p1.isChannelBarVisible,
-			developerChannelTabsEnabled = p1.developerChannelTabsEnabled
-		})
-	}
-	local var6 = not canLocalUserChatDerived
-	
-	if var6 then
-		var6 = reactModule.createElement
-		var6 = var6("TextLabel", {
-			BackgroundTransparency = 1,
-			Selectable = true,
-			AnchorPoint = Vector2.new(1, 0),
-			AutomaticSize = Enum.AutomaticSize.Y,
-			Font = configModule.ChatInputBarFont,
-			Text = p1.disabledChatPlaceholderText,
-			Position = UDim2.fromScale(1, 0),
-			Size = targetChannelWidth:map(function(p2)
-				return UDim2.new(1, -(p2 + 8), 0, 0)
-			end),
-			TextColor3 = if showPlaceholderText then chatInputBarSettings.PlaceholderColor3 else chatInputBarSettings.TextColor3,
-			TextSize = if isSpatialUIEnabled then chatInputBarSettings.SpatialPanelTextSize else chatInputBarSettings.TextSize,
-			TextTransparency = setTransparency(if showPlaceholderText then 0.5 else 0, p1.transparencyValue),
-			SelectionImageObject = cursor,
-			TextWrapped = if fFlagExpChatInputBarV2CornerAndTruncationFixModule then not showPlaceholderText else not (fFlagExpChatPresetChatEnabled and (showPlaceholderText and p1.shouldTruncatePlaceholder)),
-			TextTruncate = if fFlagExpChatInputBarV2CornerAndTruncationFixModule and showPlaceholderText then Enum.TextTruncate.AtEnd elseif fFlagExpChatPresetChatEnabled and showPlaceholderText then Enum.TextTruncate.AtEnd else nil,
-			TextXAlignment = Enum.TextXAlignment.Left,
-			TextYAlignment = Enum.TextYAlignment.Top,
-			ref = placeholderRef
-		})
-	end
-	t_7.DisabledPlaceholderLabel = var6
-	local var7 = canLocalUserChatDerived
-	
-	if var7 then
-		var7 = reactModule.createElement
-		local var8 = "Frame"
-		local t_8 = {
-			BackgroundTransparency = 1,
-			AnchorPoint = Vector2.new(1, 0),
-			AutomaticSize = Enum.AutomaticSize.Y,
-			Position = UDim2.fromScale(1, 0),
-			Size = targetChannelWidth:map(function(p2)
-				return UDim2.new(1, -(p2 + 8), 0, 0)
-			end)
-		}
-		local t_9 = {}
-		local var9 = canLocalUserChatDerived
-		
-		if var9 then
-			var9 = reactModule.createElement
-			var9 = var9("TextBox", {
-				AnchorPoint = Vector2.new(0, 0),
-				AutomaticSize = Enum.AutomaticSize.XY,
-				BackgroundTransparency = 1,
-				ClearTextOnFocus = false,
-				FontFace = chatInputBarSettings.FontFace,
-				PlaceholderText = if showPlaceholderText then p1.placeholderText else "",
-				Selectable = if fFlagEnableConsoleExpControls then true else nil,
-				SelectionImageObject = cursor,
-				Size = UDim2.fromScale(1, 0),
-				Text = "",
-				PlaceholderColor3 = if fFlagExpChatComposerInputBarFigmaParityModule and chatInputBarSettings.PlaceholderColor3 == configModule.ChatInputBarPlaceholderColor then var1.DarkMode.Content.Default.Color3 else chatInputBarSettings.PlaceholderColor3,
-				TextColor3 = chatInputBarSettings.TextColor3,
-				TextSize = if isSpatialUIEnabled then chatInputBarSettings.SpatialPanelTextSize else chatInputBarSettings.TextSize,
-				TextTransparency = setTransparency(if showPlaceholderText and not fFlagExpChatComposerInputBarFigmaParityModule then 0.5 else 0, p1.transparencyValue),
-				TextStrokeTransparency = setTransparency(chatInputBarSettings.TextStrokeTransparency, p1.transparencyValue),
-				TextStrokeColor3 = chatInputBarSettings.TextStrokeColor3,
-				TextWrapped = if fFlagExpChatInputBarV2CornerAndTruncationFixModule then not showPlaceholderText else not (fFlagExpChatPresetChatEnabled and (showPlaceholderText and p1.shouldTruncatePlaceholder)),
-				TextTruncate = if fFlagExpChatInputBarV2CornerAndTruncationFixModule and showPlaceholderText then Enum.TextTruncate.AtEnd elseif fFlagExpChatPresetChatEnabled and showPlaceholderText then Enum.TextTruncate.AtEnd else nil,
-				TextXAlignment = Enum.TextXAlignment.Left,
-				TextYAlignment = Enum.TextYAlignment.Top,
-				ZIndex = 2,
-				[reactModule.Event.Focused] = onFocused,
-				[reactModule.Event.FocusLost] = onFocusLost,
-				[reactModule.Change.Text] = onTextChanged,
-				[reactModule.Event.ReturnPressedFromOnScreenKeyboard] = onReturnPressedFromOnScreenKeyboard,
-				ref = if chatInputBarSettings.TextBox then customTextBoxRef else textBoxRef
-			})
-		end
-		t_9.TextBox = var9
-		var7 = var7(var8, t_8, t_9)
-	end
-	t_7.TextBoxContainer = var7
-	t_7.UIPadding = reactModule.createElement("UIPadding", {
-		PaddingBottom = UDim.new(0, 10),
-		PaddingLeft = UDim.new(0, 10),
-		PaddingRight = UDim.new(0, 10),
-		PaddingTop = UDim.new(0, 10)
-	})
-	t_5.TextContainer = createElement_3(var5, t_6, t_7)
-	t_5.SendButtonContainer = if fFlagExpChatInputBarV2CustomSendButtonModule then renderCustomSendButton(p1, var1, hasEmptyInputText, onSendActivated) else reactModule.createElement("CanvasGroup", {
-		BackgroundTransparency = 1,
-		AnchorPoint = Vector2.new(1, 0),
-		GroupTransparency = p1.transparencyValue,
-		Position = UDim2.fromScale(1, 0),
-		Size = UDim2.new(0, p1.sendButtonContainerWidth + 6, 1, 0)
 	}, {
-		Layout = reactModule.createElement("UIListLayout", {
-			HorizontalAlignment = Enum.HorizontalAlignment.Center,
-			VerticalAlignment = Enum.VerticalAlignment.Center
-		}),
-		SendButton = reactModule.createElement(foundationModule.IconButton, {
-			isCircular = true,
-			icon = foundationModule.Enums.IconName.ArrowMediumUp,
-			variant = if hasEmptyInputText then foundationModule.Enums.ButtonVariant.Standard else foundationModule.Enums.ButtonVariant.Emphasis,
-			size = foundationModule.Enums.InputSize.Small,
-			isDisabled = hasEmptyInputText,
-			Selectable = if fFlagExpChatPresetChatGamepadEnabledModule then nil else false,
-			onActivated = onSendActivated
+		Container = ReactModule.createElement("Frame", {
+			BackgroundTransparency = 1,
+			AutomaticSize = Enum.AutomaticSize.Y,
+			Size = UDim2.fromScale(1, 0)
+		}, {
+			InputGroup = ReactModule.createElement("Frame", {
+				LayoutOrder = 1,
+				AutomaticSize = Enum.AutomaticSize.Y,
+				BackgroundColor3 = ChatInputBarSettings.BackgroundColor3,
+				BackgroundTransparency = SetTransparencyFunction(p1.chatInputBarBackgroundTransparency, p1.transparencyValue),
+				Position = UDim2.fromScale(0, 0),
+				Size = UDim2.fromScale(1, 0)
+			}, {
+				UICorner = ReactModule.createElement("UICorner", {
+					CornerRadius = if FFlagExpChatInputBarV2CornerAndTruncationFixModule then UDim.new(0, 20) else UDim.new(1, 0)
+				}),
+				UIStroke = ReactModule.createElement("UIStroke", {
+					ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
+					Color = UseTokensResult.Color.Stroke.Default.Color3,
+					Transparency = SetTransparencyFunction(UseTokensResult.Color.Stroke.Default.Transparency, p1.transparencyValue)
+				}),
+				UIPadding = ReactModule.createElement("UIPadding", { PaddingRight = UDim.new(0, 2) }),
+				TextContainer = ReactModule.createElement("Frame", {
+					BackgroundTransparency = 1,
+					AutomaticSize = Enum.AutomaticSize.Y,
+					Position = UDim2.fromScale(0, 0),
+					Size = UDim2.new(1, -(p1.sendButtonContainerWidth + 6), 0, 0)
+				}, {
+					TargetChannelChip = ReactModule.createElement(ChannelChipModule, {
+						transparency = SetTransparencyFunction(0, p1.transparencyValue),
+						onAbsoluteSizeChanged = p1.onAbsoluteSizeChanged,
+						onChannelChipActivated = if FFlagExpChatFixBackspaceNilTargetChannel then function() --[[ Line: 194 ]]
+							-- upvalues: p1 (copy)
+							p1.resetTargetChannel(p1.isGlobalChatTabActive)
+						end else p1.resetTargetChannel,
+						targetTextChannelDisplayName = p1.targetTextChannelDisplayName or "",
+						isChannelBarVisible = p1.isChannelBarVisible,
+						developerChannelTabsEnabled = p1.developerChannelTabsEnabled
+					}),
+					DisabledPlaceholderLabel = not CanLocalUserChatDerived and ReactModule.createElement("TextLabel", {
+						BackgroundTransparency = 1,
+						Selectable = true,
+						AnchorPoint = Vector2.new(1, 0),
+						AutomaticSize = Enum.AutomaticSize.Y,
+						Font = ConfigModule.ChatInputBarFont,
+						Text = p1.disabledChatPlaceholderText,
+						Position = UDim2.fromScale(1, 0),
+						Size = TargetChannelWidth:map(function(p2: number): UDim2 --[[ Line: 209 ]]
+							return UDim2.new(1, -(p2 + 8), 0, 0)
+						end),
+						TextColor3 = ShowPlaceholderText and ChatInputBarSettings.PlaceholderColor3 or ChatInputBarSettings.TextColor3,
+						TextSize = if IsSpatialUIEnabled then ChatInputBarSettings.SpatialPanelTextSize else ChatInputBarSettings.TextSize,
+						TextTransparency = SetTransparencyFunction(if ShowPlaceholderText then 0.5 else 0, p1.transparencyValue),
+						SelectionImageObject = Cursor,
+						TextWrapped = if FFlagExpChatInputBarV2CornerAndTruncationFixModule then not ShowPlaceholderText else not (FFlagExpChatPresetChatEnabled and (ShowPlaceholderText and p1.shouldTruncatePlaceholder)),
+						TextTruncate = if FFlagExpChatInputBarV2CornerAndTruncationFixModule and ShowPlaceholderText then Enum.TextTruncate.AtEnd elseif FFlagExpChatPresetChatEnabled and ShowPlaceholderText then Enum.TextTruncate.AtEnd else nil,
+						TextXAlignment = Enum.TextXAlignment.Left,
+						TextYAlignment = Enum.TextYAlignment.Top,
+						ref = PlaceholderRef
+					}),
+					TextBoxContainer = CanLocalUserChatDerived and ReactModule.createElement("Frame", {
+						BackgroundTransparency = 1,
+						AnchorPoint = Vector2.new(1, 0),
+						AutomaticSize = Enum.AutomaticSize.Y,
+						Position = UDim2.fromScale(1, 0),
+						Size = TargetChannelWidth:map(function(p2: number): UDim2 --[[ Line: 245 ]]
+							return UDim2.new(1, -(p2 + 8), 0, 0)
+						end)
+					}, {
+						TextBox = CanLocalUserChatDerived and ReactModule.createElement("TextBox", {
+							AnchorPoint = Vector2.new(0, 0),
+							AutomaticSize = Enum.AutomaticSize.XY,
+							BackgroundTransparency = 1,
+							ClearTextOnFocus = false,
+							FontFace = ChatInputBarSettings.FontFace,
+							PlaceholderText = ShowPlaceholderText and p1.placeholderText or "",
+							Selectable = if FFlagEnableConsoleExpControls then true else nil,
+							SelectionImageObject = Cursor,
+							Size = UDim2.fromScale(1, 0),
+							Text = "",
+							PlaceholderColor3 = if FFlagExpChatComposerInputBarFigmaParityModule and ChatInputBarSettings.PlaceholderColor3 == ConfigModule.ChatInputBarPlaceholderColor then UseTokensResult.DarkMode.Content.Default.Color3 else ChatInputBarSettings.PlaceholderColor3,
+							TextColor3 = ChatInputBarSettings.TextColor3,
+							TextSize = if IsSpatialUIEnabled then ChatInputBarSettings.SpatialPanelTextSize else ChatInputBarSettings.TextSize,
+							TextTransparency = SetTransparencyFunction(if ShowPlaceholderText and not FFlagExpChatComposerInputBarFigmaParityModule then 0.5 else 0, p1.transparencyValue),
+							TextStrokeTransparency = SetTransparencyFunction(ChatInputBarSettings.TextStrokeTransparency, p1.transparencyValue),
+							TextStrokeColor3 = ChatInputBarSettings.TextStrokeColor3,
+							TextWrapped = if FFlagExpChatInputBarV2CornerAndTruncationFixModule then not ShowPlaceholderText else not (FFlagExpChatPresetChatEnabled and (ShowPlaceholderText and p1.shouldTruncatePlaceholder)),
+							TextTruncate = if FFlagExpChatInputBarV2CornerAndTruncationFixModule and ShowPlaceholderText then Enum.TextTruncate.AtEnd elseif FFlagExpChatPresetChatEnabled and ShowPlaceholderText then Enum.TextTruncate.AtEnd else nil,
+							TextXAlignment = Enum.TextXAlignment.Left,
+							TextYAlignment = Enum.TextYAlignment.Top,
+							ZIndex = 2,
+							[ReactModule.Event.Focused] = OnFocused,
+							[ReactModule.Event.FocusLost] = OnFocusLost,
+							[ReactModule.Change.Text] = OnTextChanged,
+							[ReactModule.Event.ReturnPressedFromOnScreenKeyboard] = OnReturnPressedFromOnScreenKeyboard,
+							ref = if ChatInputBarSettings.TextBox then CustomTextBoxRef else TextBoxRef
+						})
+					}),
+					UIPadding = ReactModule.createElement("UIPadding", {
+						PaddingBottom = UDim.new(0, 10),
+						PaddingLeft = UDim.new(0, 10),
+						PaddingRight = UDim.new(0, 10),
+						PaddingTop = UDim.new(0, 10)
+					})
+				}),
+				SendButtonContainer = if FFlagExpChatInputBarV2CustomSendButtonModule then renderCustomSendButton(p1, UseTokensResult, HasEmptyInputText, OnSendActivated) else ReactModule.createElement("CanvasGroup", {
+					BackgroundTransparency = 1,
+					AnchorPoint = Vector2.new(1, 0),
+					GroupTransparency = p1.transparencyValue,
+					Position = UDim2.fromScale(1, 0),
+					Size = UDim2.new(0, p1.sendButtonContainerWidth + 6, 1, 0)
+				}, {
+					Layout = ReactModule.createElement("UIListLayout", {
+						HorizontalAlignment = Enum.HorizontalAlignment.Center,
+						VerticalAlignment = Enum.VerticalAlignment.Center
+					}),
+					SendButton = ReactModule.createElement(FoundationModule.IconButton, {
+						isCircular = true,
+						icon = FoundationModule.Enums.IconName.ArrowMediumUp,
+						variant = if HasEmptyInputText then FoundationModule.Enums.ButtonVariant.Standard else FoundationModule.Enums.ButtonVariant.Emphasis,
+						size = FoundationModule.Enums.InputSize.Small,
+						isDisabled = HasEmptyInputText,
+						Selectable = if FFlagExpChatPresetChatGamepadEnabledModule then nil else false,
+						onActivated = OnSendActivated
+					})
+				})
+			})
 		})
 	})
-	t_3.InputGroup = createElement_2(var4, t_4, t_5)
-	t_1.Container = createElement_1(var3, t_2, t_3)
-	
-	return createElement(var2, t, t_1)
 end)

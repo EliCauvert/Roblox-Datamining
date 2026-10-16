@@ -1,28 +1,28 @@
-﻿local inGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
-local roact = inGameMenuDependenciesModule.Roact
-local t = inGameMenuDependenciesModule.t
-local parent = script.Parent.Parent.Parent
-local globalConfigModule = require(parent.GlobalConfig)
-local themedTextLabelModule = require(parent.Components.ThemedTextLabel)
-local withLocalizationModule = require(parent.Localization.withLocalization)
-local var1 = t.strictInterface({ title = t.string, LayoutOrder = t.integer })
+﻿local InGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
+local Roact = InGameMenuDependenciesModule.Roact
+local T = InGameMenuDependenciesModule.t
+local Parent = script.Parent.Parent.Parent
+local GlobalConfigModule = require(Parent.GlobalConfig)
+local ThemedTextLabelModule = require(Parent.Components.ThemedTextLabel)
+local WithLocalizationModule = require(Parent.Localization.withLocalization)
+local StrictInterfaceResult = T.strictInterface({ title = T.string, LayoutOrder = T.integer })
 
-return function(p1)
-	-- upvalues: globalConfigModule (ref), var1 (ref), withLocalizationModule (ref), roact (ref), themedTextLabelModule (ref)
-	if globalConfigModule.propValidation then
-		assert(var1(p1))
+return function(Frame) --[[ Line: 26 | Named "ControlEntry" ]]
+	-- upvalues: GlobalConfigModule (copy), StrictInterfaceResult (copy), WithLocalizationModule (copy), Roact (copy), ThemedTextLabelModule (copy)
+	if GlobalConfigModule.propValidation then
+		assert(StrictInterfaceResult(Frame))
 	end
-	return withLocalizationModule({ title = p1.title })(function(p2)
-		-- upvalues: roact (copy), p1 (ref), themedTextLabelModule (copy)
-		return roact.createElement("Frame", {
+	return WithLocalizationModule({ title = Frame.title })(function(p1) --[[ Line: 33 ]]
+		-- upvalues: Roact (upval), Frame (copy), ThemedTextLabelModule (upval)
+		return Roact.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 0, 45),
-			LayoutOrder = p1.LayoutOrder
+			LayoutOrder = Frame.LayoutOrder
 		}, {
-			HeaderText = roact.createElement(themedTextLabelModule, {
+			HeaderText = Roact.createElement(ThemedTextLabelModule, {
 				fontKey = "CaptionHeader",
 				themeKey = "TextMuted",
-				Text = p2.title,
+				Text = p1.title,
 				TextXAlignment = Enum.TextXAlignment.Left,
 				Position = UDim2.new(0, 0, 0, 20),
 				Size = UDim2.new(1, 0, 0, 17)

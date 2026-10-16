@@ -1,67 +1,70 @@
-﻿local invariantModule = require(script.Parent.invariant)
-local invokeGuardedCallbackImplModule = require(script.Parent.invokeGuardedCallbackImpl)
-local var1 = nil
-local var2 = false
-local var3 = nil
-local var4 = false
-local var5 = nil
-local t = {
-	onError = function(p1)
-		-- upvalues: var2 (write), var3 (write)
-		var2 = true
-		var3 = p1
+﻿local InvariantModule = require(script.Parent.invariant)
+local InvokeGuardedCallbackImplModule = require(script.Parent.invokeGuardedCallbackImpl)
+local Callback = nil
+local Flag = false
+local v1 = nil
+local Flag1 = false
+local v2 = nil
+local config = {
+	onError = function(p1) --[[ Line: 25 ]]
+		-- upvalues: Flag (ref), v1 (ref)
+		Flag = true
+		v1 = p1
 	end
 }
-local t_1 = {
-	invokeGuardedCallback = function(...)
-		-- upvalues: var2 (write), var3 (write), invokeGuardedCallbackImplModule (ref), t (ref)
-		var2 = false
-		var3 = nil
-		invokeGuardedCallbackImplModule(t, ...)
+local ReactErrorUtils = {
+	invokeGuardedCallback = function(...) --[[ Line: 45 ]]
+		-- upvalues: Flag (ref), v1 (ref), InvokeGuardedCallbackImplModule (copy), config (copy)
+		Flag = false
+		v1 = nil
+		InvokeGuardedCallbackImplModule(config, ...)
 	end
 }
 
-function t_1.invokeGuardedCallbackAndCatchFirstError(...)
-	-- upvalues: t_1 (ref), var2 (write), var1 (write), var4 (write), var5 (write)
-	t_1.invokeGuardedCallback(...)
+function ReactErrorUtils.invokeGuardedCallbackAndCatchFirstError(...) --[[ Line: 62 ]]
+	-- upvalues: ReactErrorUtils (copy), Flag (ref), Callback (ref), Flag1 (ref), v2 (ref)
+	ReactErrorUtils.invokeGuardedCallback(...)
 	
-	if var2 then
-		local var6 = var1()
+	if Flag then
+		local CallbackResult = Callback()
 		
-		if not var4 then
-			var4 = true
-			var5 = var6
+		if not Flag1 then
+			Flag1 = true
+			v2 = CallbackResult
 		end
 	end
 end
 
-function t_1.rethrowCaughtError()
-	-- upvalues: var4 (write), var5 (write)
-	if var4 then
-		local var6 = var5
-		var4 = false
-		var5 = nil
-		error(var6)
+function ReactErrorUtils.rethrowCaughtError() --[[ Line: 80 ]]
+	-- upvalues: Flag1 (ref), v2 (ref)
+	if Flag1 then
+		local v3 = v2
+		Flag1 = false
+		v2 = nil
+		error(v3)
 	end
 end
 
-function t_1.hasCaughtError()
-	-- upvalues: var2 (write)
-	return var2
+function ReactErrorUtils.hasCaughtError() --[[ Line: 89 ]]
+	-- upvalues: Flag (ref)
+	return Flag
 end
 
-function t_1.clearCaughtError()
-	-- upvalues: var2 (write), var3 (write), invariantModule (ref)
-	if var2 then
-		local var6 = var3
-		var2 = false
-		var3 = nil
+Callback = function() --[[ Line: 93 ]]
+	-- upvalues: Flag (ref), v1 (ref), InvariantModule (copy)
+	if Flag then
+		local v3 = v1
+		Flag = false
+		v1 = nil
 		
-		return var6
+		return v3
+	else
+		InvariantModule(false, "clearCaughtError was called but no error was captured. This error is likely caused by a bug in React. Please file an issue.")
+		
+		return nil
 	end
-	invariantModule(false, "clearCaughtError was called but no error was captured. This error is likely caused by a bug in React. Please file an issue.")
-	
-	return nil
 end
 
-return t_1
+ReactErrorUtils.clearCaughtError = Callback
+
+return ReactErrorUtils

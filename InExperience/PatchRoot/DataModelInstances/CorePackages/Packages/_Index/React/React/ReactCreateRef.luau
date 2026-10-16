@@ -1,35 +1,61 @@
-﻿local parent = script.Parent.Parent
-local reactGlobalsModule = require(parent.ReactGlobals)
-local _ = require(parent.Shared)
-local unknownModule = require(script.Parent["ReactBinding.roblox"])
-
-return {
-	createRef = function()
-		-- upvalues: unknownModule (ref), reactGlobalsModule (ref)
-		local var1, _ = unknownModule.create(nil)
+﻿local Parent = script.Parent.Parent
+local ReactGlobalsModule = require(Parent.ReactGlobals)
+local ReactBindingRobloxModule = require(script.Parent["ReactBinding.roblox"])
+local ReactCreateRefModule = {
+	createRef = function() --[[ Line: 27 ]]
+		-- upvalues: ReactBindingRobloxModule (copy), ReactGlobalsModule (copy)
+		local NewReactBindingRoblox, _ = ReactBindingRobloxModule.create(nil)
 		local t = {}
 		
-		if reactGlobalsModule.__DEV__ then
-			var1._source = debug.traceback("Ref created at:", 1)
+		if ReactGlobalsModule.__DEV__ then
+			NewReactBindingRoblox._source = debug.traceback("Ref created at:", 1)
 		end
 		setmetatable(t, {
-			__index = function(_, p1)
-				-- upvalues: var1 (ref)
-				return if p1 == "current" then var1:getValue() else var1[p1]
+			__index = function(_, p1) --[[ Line: 45 ]]
+				-- upvalues: NewReactBindingRoblox (copy)
+				return if p1 == "current" then NewReactBindingRoblox:getValue() else NewReactBindingRoblox[p1]
 			end,
-			__newindex = function(_, p1, p2)
-				-- upvalues: unknownModule (copy), var1 (ref)
-				if p1 == "current" then
-					unknownModule.update(var1, p2)
+			__newindex = function(_, Key, p1) --[[ Line: 52 ]]
+				-- upvalues: ReactBindingRobloxModule (upval), NewReactBindingRoblox (copy)
+				if Key == "current" then
+					ReactBindingRobloxModule.update(NewReactBindingRoblox, p1)
 				end
-				var1[p1] = p2
+				NewReactBindingRoblox[Key] = p1
 			end,
-			__tostring = function(_)
-				-- upvalues: var1 (ref)
-				return string.format("Ref(%s)", tostring(var1:getValue()))
+			__tostring = function(_): string --[[ Line: 63 ]]
+				-- upvalues: NewReactBindingRoblox (copy)
+				return string.format("Ref(%s)", (tostring(NewReactBindingRoblox:getValue())))
 			end
 		})
 		
 		return t
 	end
 }
+
+local function refNewIndex(p1, Key, p2) --[[ Line: 78 ]]
+	-- upvalues: ReactBindingRobloxModule (copy)
+	local Index = getmetatable(p1).__index
+	Index[Key] = p2
+	
+	if Key == "current" then
+		ReactBindingRobloxModule.update(Index, p2)
+	end
+end
+
+local function refToString(p1): string --[[ Line: 90 ]]
+	return string.format("Ref(%s)", (tostring(getmetatable(p1).__index:getValue())))
+end
+
+local function createRefWithoutClosures() --[[ Line: 94 ]]
+	-- upvalues: ReactGlobalsModule (copy), ReactBindingRobloxModule (copy), refNewIndex (copy), refToString (copy)
+	return (setmetatable({}, {
+		__index = ReactBindingRobloxModule.createWithoutUpdater(nil, if ReactGlobalsModule.__DEV__ then debug.traceback("Ref created at:", 1) else nil),
+		__newindex = refNewIndex,
+		__tostring = refToString
+	}))
+end
+
+if require(Parent.Shared).ReactFeatureFlags.enableAllocationTrims then
+	ReactCreateRefModule.createRef = createRefWithoutClosures
+end
+return ReactCreateRefModule

@@ -1,25 +1,25 @@
-﻿local authCommon = script:FindFirstAncestor("AuthCommon")
-local parent = authCommon.Parent
-local promiseModule = require(parent.Promise)
-local authPlatformDisconnectModule = require(authCommon.Http.Requests.AuthPlatformDisconnect)
-local enableConsoleDisconnectNetworkingErrorToast = game:DefineFastFlag("EnableConsoleDisconnectNetworkingErrorToast", false)
-local setNetworkingErrorToast = require(parent.RobloxAppToastsRodux).Thunks.SetNetworkingErrorToast
+﻿local AuthCommon = script:FindFirstAncestor("AuthCommon")
+local Parent = AuthCommon.Parent
+local PromiseModule = require(Parent.Promise)
+local AuthPlatformDisconnectModule = require(AuthCommon.Http.Requests.AuthPlatformDisconnect)
+local EnableConsoleDisconnectNetworkingErrorToast = game:DefineFastFlag("EnableConsoleDisconnectNetworkingErrorToast", false)
+local SetNetworkingErrorToastFunction = require(Parent.RobloxAppToastsRodux).Thunks.SetNetworkingErrorToast
 
-return function(p1, p2, p3)
-	-- upvalues: authPlatformDisconnectModule (ref), promiseModule (ref), enableConsoleDisconnectNetworkingErrorToast (ref), setNetworkingErrorToast (ref)
-	return function(p4)
-		-- upvalues: authPlatformDisconnectModule (copy), p1 (ref), p3 (ref), p2 (ref), promiseModule (copy), enableConsoleDisconnectNetworkingErrorToast (copy), setNetworkingErrorToast (copy)
-		return authPlatformDisconnectModule(p1):andThen(function()
-			-- upvalues: p4 (ref), p3 (copy), p1 (copy), p2 (copy), promiseModule (copy)
-			p4:dispatch(p3(p1, p2))
+return function(p1, p2, Callback) --[[ Line: 12 | Named "ConsoleDisconnect" ]]
+	-- upvalues: AuthPlatformDisconnectModule (copy), PromiseModule (copy), EnableConsoleDisconnectNetworkingErrorToast (copy), SetNetworkingErrorToastFunction (copy)
+	return function(p3) --[[ Line: 13 ]]
+		-- upvalues: AuthPlatformDisconnectModule (upval), p1 (copy), Callback (copy), p2 (copy), PromiseModule (upval), EnableConsoleDisconnectNetworkingErrorToast (upval), SetNetworkingErrorToastFunction (upval)
+		return AuthPlatformDisconnectModule(p1):andThen(function() --[[ Line: 14 ]]
+			-- upvalues: p3 (copy), Callback (upval), p1 (upval), p2 (upval), PromiseModule (upval)
+			p3:dispatch(Callback(p1, p2))
 			
-			return promiseModule.resolve()
-		end, function(p5)
-			-- upvalues: enableConsoleDisconnectNetworkingErrorToast (copy), p4 (ref), setNetworkingErrorToast (copy), promiseModule (copy)
-			if enableConsoleDisconnectNetworkingErrorToast then
-				p4:dispatch(setNetworkingErrorToast(p5))
+			return PromiseModule.resolve()
+		end, function(p4) --[[ Line: 19 ]]
+			-- upvalues: EnableConsoleDisconnectNetworkingErrorToast (upval), p3 (copy), SetNetworkingErrorToastFunction (upval), PromiseModule (upval)
+			if EnableConsoleDisconnectNetworkingErrorToast then
+				p3:dispatch(SetNetworkingErrorToastFunction(p4))
 			end
-			return promiseModule.reject(p5)
+			return PromiseModule.reject(p4)
 		end)
 	end
 end

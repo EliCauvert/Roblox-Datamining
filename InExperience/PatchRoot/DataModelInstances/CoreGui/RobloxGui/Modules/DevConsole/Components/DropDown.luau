@@ -1,147 +1,149 @@
 ﻿local _ = game:GetService("CoreGui").RobloxGui
-local roactModule = require(game:GetService("CorePackages").Packages.Roact)
-local devConsoleDropdownFlipFix = game:DefineFastFlag("DevConsoleDropdownFlipFix", false)
-local devConsoleDropdownMultiSelect = game:DefineFastFlag("DevConsoleDropdownMultiSelect", false)
-local constantsModule = require(script.Parent.Parent.Constants)
-local utilBar = constantsModule.Font.UtilBar
-local utilBar_1 = constantsModule.DefaultFontSize.UtilBar
-local dropDownArrowHeight = constantsModule.GeneralFormatting.DropDownArrowHeight
-local var1 = dropDownArrowHeight / 2
-local downArrow = constantsModule.Image.DownArrow
-local dropDown = roactModule.Component:extend("DropDown")
+local RoactModule = require(game:GetService("CorePackages").Packages.Roact)
+local DevConsoleDropdownFlipFix = game:DefineFastFlag("DevConsoleDropdownFlipFix", false)
+local DevConsoleDropdownMultiSelect = game:DefineFastFlag("DevConsoleDropdownMultiSelect", false)
+local ConstantsModule = require(script.Parent.Parent.Constants)
+local UtilBar = ConstantsModule.Font.UtilBar
+local UtilBar1 = ConstantsModule.DefaultFontSize.UtilBar
+local DropDownArrowHeight: number = ConstantsModule.GeneralFormatting.DropDownArrowHeight
+local DropDownArrowHeightRatio = DropDownArrowHeight / 2
+local DownArrow = ConstantsModule.Image.DownArrow
+local DropDown = RoactModule.Component:extend("DropDown")
 
-function dropDown.init(p1)
-	-- upvalues: devConsoleDropdownFlipFix (ref), roactModule (ref)
-	if devConsoleDropdownFlipFix then
+function DropDown.init(p1) --[[ Line: 19 ]]
+	-- upvalues: DevConsoleDropdownFlipFix (copy), RoactModule (copy)
+	if DevConsoleDropdownFlipFix then
 		p1.guiInset = game:GetService("GuiService"):GetGuiInset()
 	end
-	function p0.onMainButtonPressed(_, _)
-		-- upvalues: p1 (ref)
+	function p1:onMainButtonPressed(_) --[[ Line: 24 ]]
+		-- upvalues: p1 (copy)
 		p1:setState({ showDropDown = true })
 	end
 	
-	function p0.nonDropDownSelection(_, p2)
-		-- upvalues: p1 (ref)
-		if p2.UserInputType == Enum.UserInputType.MouseButton1 or p2.UserInputType == Enum.UserInputType.Touch and p2.UserInputState == Enum.UserInputState.End then
+	function p1:nonDropDownSelection(Input) --[[ Line: 30 ]]
+		-- upvalues: p1 (copy)
+		if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch and Input.UserInputState == Enum.UserInputState.End then
 			p1:setState({ showDropDown = false })
 		end
 	end
 	
 	p1.state = { showDropDown = false }
-	p1.ref = roactModule.createRef()
+	p1.ref = RoactModule.createRef()
 end
 
-function dropDown.render(p1)
-	-- upvalues: devConsoleDropdownMultiSelect (ref), roactModule (ref), constantsModule (ref), utilBar_1 (ref), utilBar (ref), devConsoleDropdownFlipFix (ref), downArrow (ref), dropDownArrowHeight (ref), var1 (ref)
-	local buttonSize = p1.props.buttonSize
-	local dropDownList = p1.props.dropDownList
-	local selectedIndex = p1.props.selectedIndex
-	local onSelection = p1.props.onSelection
-	local layoutOrder = p1.props.layoutOrder
-	local selectedSet = p1.props.selectedSet
-	local onToggle = p1.props.onToggle
-	local var2 = devConsoleDropdownMultiSelect and onToggle ~= nil
-	local dropDownTargetParent = p1.props.dropDownTargetParent
-	local showDropDown = p1.ref.current and p1.state.showDropDown
-	local t = {}
-	local uDim2 = nil
-	local uDim2_1 = nil
-	local var3 = 0
-	local var4 = 0
+function DropDown.render(p1) --[[ Line: 48 ]]
+	-- upvalues: DevConsoleDropdownMultiSelect (copy), RoactModule (copy), ConstantsModule (copy), UtilBar1 (copy), UtilBar (copy), DevConsoleDropdownFlipFix (copy), DownArrow (copy), DropDownArrowHeight (copy), DropDownArrowHeightRatio (copy)
+	local ButtonSize = p1.props.buttonSize
+	local DropDownList = p1.props.dropDownList
+	local SelectedIndex = p1.props.selectedIndex
+	local OnSelectionFunction = p1.props.onSelection
+	local LayoutOrder = p1.props.layoutOrder
+	local SelectedSet = p1.props.selectedSet
+	local OnToggleFunction = p1.props.onToggle
+	local HasOnToggleFunction: boolean = DevConsoleDropdownMultiSelect and OnToggleFunction ~= nil
+	local DropDownTargetParent = p1.props.dropDownTargetParent
+	local ShowDropDown = p1.ref.current and p1.state.showDropDown
+	local TextButtons = {}
+	local Position: UDim2? = nil
+	local Size: UDim2? = nil
+	local YOffset = 0
+	local XOffset = 0
 	
-	if p1.ref.current and showDropDown then
-		local absolutePosition = p1.ref.current.AbsolutePosition
-		local absoluteSize = p1.ref.current.AbsoluteSize
-		var4 = absoluteSize.X
-		t.UIListLayout = roactModule.createElement("UIListLayout", {
+	if p1.ref.current and ShowDropDown then
+		local AbsolutePosition = p1.ref.current.AbsolutePosition
+		local AbsoluteSize = p1.ref.current.AbsoluteSize
+		XOffset = AbsoluteSize.X
+		TextButtons.UIListLayout = RoactModule.createElement("UIListLayout", {
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			VerticalAlignment = Enum.VerticalAlignment.Top
 		})
 		
-		for i, v in pairs(dropDownList) do
-			local _ = nil
-			t[v] = roactModule.createElement("TextButton", {
-				Size = buttonSize,
-				Text = v,
-				TextColor3 = constantsModule.Color.Text,
-				TextSize = utilBar_1,
-				Font = utilBar,
+		for LayoutOrder1, Text in pairs(DropDownList) do
+			TextButtons[Text] = RoactModule.createElement("TextButton", {
+				Size = ButtonSize,
+				Text = Text,
+				TextColor3 = ConstantsModule.Color.Text,
+				TextSize = UtilBar1,
+				Font = UtilBar,
 				AutoButtonColor = false,
-				BackgroundColor3 = if if var2 then selectedSet ~= nil and selectedSet[i] == true else i == selectedIndex then constantsModule.Color.SelectedGray else constantsModule.Color.UnselectedGray,
+				BackgroundColor3 = (if HasOnToggleFunction then SelectedSet ~= nil and SelectedSet[LayoutOrder1] == true else LayoutOrder1 == SelectedIndex) and ConstantsModule.Color.SelectedGray or ConstantsModule.Color.UnselectedGray,
 				BackgroundTransparency = 0,
 				BorderSizePixel = 0,
-				LayoutOrder = i,
-				[roactModule.Event.Activated] = function()
-					-- upvalues: var2 (ref), onToggle (ref), i (ref), onSelection (ref), p1 (ref)
-					if var2 then
-						onToggle(i)
+				LayoutOrder = LayoutOrder1,
+				[RoactModule.Event.Activated] = function() --[[ Line: 106 ]]
+					-- upvalues: HasOnToggleFunction (copy), OnToggleFunction (copy), LayoutOrder1 (copy), OnSelectionFunction (copy), p1 (copy)
+					if HasOnToggleFunction then
+						OnToggleFunction(LayoutOrder1)
 						
 						return
+					else
+						OnSelectionFunction(LayoutOrder1)
+						p1:setState({ showDropDown = false })
 					end
-					onSelection(i)
-					p1:setState({ showDropDown = false })
 				end
 			})
-			var3 += absoluteSize.Y
+			YOffset += AbsoluteSize.Y
 		end
-		local var5 = var3 + 24
+		local NewYOffset = YOffset + 24
 		
-		if devConsoleDropdownFlipFix then
-			local currentCamera = workspace.CurrentCamera
-			local var6 = (if currentCamera then currentCamera.ViewportSize.Y else 1e999) - p1.guiInset.Y - (absolutePosition.Y + absoluteSize.Y)
-			uDim2_1 = UDim2.new(0, var4 + 24, 0, var5)
-			uDim2 = if var6 < var5 and var6 < absolutePosition.Y then UDim2.new(0, absolutePosition.X, 0, absolutePosition.Y - var5) else UDim2.new(0, absolutePosition.X, 0, absolutePosition.Y + absoluteSize.Y)
+		if DevConsoleDropdownFlipFix then
+			local CurrentCamera = workspace.CurrentCamera
+			local YDelta = (CurrentCamera and CurrentCamera.ViewportSize.Y or 1e999) - p1.guiInset.Y - (AbsolutePosition.Y + AbsoluteSize.Y)
+			local Y = AbsolutePosition.Y
+			local IsYDeltaBelow: boolean = YDelta < NewYOffset and YDelta < Y
+			Size = UDim2.new(0, XOffset + 24, 0, NewYOffset)
+			Position = if IsYDeltaBelow then UDim2.new(0, AbsolutePosition.X, 0, AbsolutePosition.Y - NewYOffset) else UDim2.new(0, AbsolutePosition.X, 0, AbsolutePosition.Y + AbsoluteSize.Y)
 		else
-			uDim2_1 = UDim2.new(0, var4 + 24, 0, var3 + 24)
-			uDim2 = UDim2.new(0, absolutePosition.X, 0, absolutePosition.Y + absoluteSize.Y)
+			Size = UDim2.new(0, XOffset + 24, 0, YOffset + 24)
+			Position = UDim2.new(0, AbsolutePosition.X, 0, AbsolutePosition.Y + AbsoluteSize.Y)
 		end
 	end
-	return roactModule.createElement("TextButton", {
-		Size = buttonSize,
-		Position = devConsoleDropdownFlipFix and (p1.props.position or (UDim2.new() or nil)),
-		Text = if var2 then p1.props.summaryText or "" else dropDownList[selectedIndex],
-		TextColor3 = constantsModule.Color.Text,
-		TextSize = utilBar_1,
-		Font = utilBar,
+	return RoactModule.createElement("TextButton", {
+		Size = ButtonSize,
+		Position = DevConsoleDropdownFlipFix and (p1.props.position or UDim2.new()) or nil,
+		Text = if HasOnToggleFunction then p1.props.summaryText or "" else DropDownList[SelectedIndex],
+		TextColor3 = ConstantsModule.Color.Text,
+		TextSize = UtilBar1,
+		Font = UtilBar,
 		AutoButtonColor = false,
-		BackgroundColor3 = constantsModule.Color.UnselectedGray,
+		BackgroundColor3 = ConstantsModule.Color.UnselectedGray,
 		BackgroundTransparency = 0,
-		LayoutOrder = layoutOrder,
-		[roactModule.Event.Activated] = p1.onMainButtonPressed,
-		[roactModule.Ref] = p1.ref
+		LayoutOrder = LayoutOrder,
+		[RoactModule.Event.Activated] = p1.onMainButtonPressed,
+		[RoactModule.Ref] = p1.ref
 	}, {
-		arrow = roactModule.createElement("ImageLabel", {
+		arrow = RoactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 1,
-			Image = downArrow,
-			Size = UDim2.new(0, dropDownArrowHeight, 0, dropDownArrowHeight),
-			Position = UDim2.new(1, (-dropDownArrowHeight) - var1, 0.5, -var1)
+			Image = DownArrow,
+			Size = UDim2.new(0, DropDownArrowHeight, 0, DropDownArrowHeight),
+			Position = UDim2.new(1, -DropDownArrowHeight - DropDownArrowHeightRatio, 0.5, -DropDownArrowHeightRatio)
 		}),
-		DropDown = showDropDown and roactModule.createElement(roactModule.Portal, {
-			target = if dropDownTargetParent ~= nil then dropDownTargetParent else game:GetService("CoreGui").DevConsoleMaster
+		DropDown = ShowDropDown and RoactModule.createElement(RoactModule.Portal, {
+			target = if DropDownTargetParent == nil then game:GetService("CoreGui").DevConsoleMaster else DropDownTargetParent or game:GetService("CoreGui").DevConsoleMaster
 		}, {
-			InputCatcher = roactModule.createElement("Frame", {
+			InputCatcher = RoactModule.createElement("Frame", {
 				Size = UDim2.new(1, 0, 1, 0),
 				Position = UDim2.new(0, 0, 0, 0),
 				BackgroundTransparency = 1,
-				[roactModule.Event.InputEnded] = p1.nonDropDownSelection
+				[RoactModule.Event.InputEnded] = p1.nonDropDownSelection
 			}, {
-				OuterFrame = roactModule.createElement("ImageButton", {
+				OuterFrame = RoactModule.createElement("ImageButton", {
 					AutoButtonColor = false,
 					BackgroundTransparency = 0,
-					Size = uDim2_1,
-					Position = uDim2,
-					BackgroundColor3 = constantsModule.Color.TextBoxGray
+					Size = Size,
+					Position = Position,
+					BackgroundColor3 = ConstantsModule.Color.TextBoxGray
 				}, {
-					innerFrame = roactModule.createElement("Frame", {
+					innerFrame = RoactModule.createElement("Frame", {
 						BackgroundTransparency = 1,
 						Position = UDim2.new(0, 12, 0, 12),
-						Size = UDim2.new(0, var4, 0, var3)
-					}, t)
+						Size = UDim2.new(0, XOffset, 0, YOffset)
+					}, TextButtons)
 				})
 			})
 		})
 	})
 end
 
-return dropDown
+return DropDown

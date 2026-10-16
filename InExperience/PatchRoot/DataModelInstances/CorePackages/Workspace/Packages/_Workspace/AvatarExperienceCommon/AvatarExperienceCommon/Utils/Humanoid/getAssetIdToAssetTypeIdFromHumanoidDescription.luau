@@ -1,25 +1,24 @@
-﻿local constantsModule = require(script:FindFirstAncestor("AvatarExperienceCommon").Constants)
+﻿local ConstantsModule = require(script:FindFirstAncestor("AvatarExperienceCommon").Constants)
 
-return function(value)
-	-- upvalues: constantsModule (ref)
-	local v_1
-	local t = {}
+return function(Humanoid: Humanoid) --[[ Line: 5 | Named "getAssetIdToAssetTypeIdFromHumanoidDescription" ]]
+	-- upvalues: ConstantsModule (copy)
+	local ACCESSORYTYPETOASSETTYPEEntries = {}
 	
-	for i, v in constantsModule.ASSET_TYPE_ID_STRING_TO_HUMANOID_DESCRIPTION_PROP do
-		if constantsModule.ASSET_TYPE_TO_ACCESSORY_TYPE[tostring(i)] == nil then
-			v_1 = value[v]
+	for i, value in ConstantsModule.ASSET_TYPE_ID_STRING_TO_HUMANOID_DESCRIPTION_PROP do
+		if ConstantsModule.ASSET_TYPE_TO_ACCESSORY_TYPE[tostring(i)] == nil then
+			local HumanoidEntry = Humanoid[value]
 			
-			if typeof(v_1) == "number" and v_1 > 0 then
-				t[tostring(v_1)] = tostring(i)
-			elseif typeof(v_1) == "string" and v_1 ~= "" then
-				for i_1 in v_1:gmatch("([%d]+),?") do
-					t[i_1] = tostring(i)
+			if typeof(HumanoidEntry) == "number" and HumanoidEntry > 0 then
+				ACCESSORYTYPETOASSETTYPEEntries[tostring(HumanoidEntry)] = tostring(i)
+			elseif typeof(HumanoidEntry) == "string" and HumanoidEntry ~= "" then
+				for i1 in HumanoidEntry:gmatch("([%d]+),?") do
+					ACCESSORYTYPETOASSETTYPEEntries[i1] = tostring(i)
 				end
 			end
 		end
 	end
-	for i_1, v_1 in value:GetAccessories(true) do
-		t[tostring(v_1.AssetId)] = constantsModule.ACCESSORY_TYPE_TO_ASSET_TYPE[v_1.AccessoryType]
+	for _, accessory in Humanoid:GetAccessories(true) do
+		ACCESSORYTYPETOASSETTYPEEntries[tostring(accessory.AssetId)] = ConstantsModule.ACCESSORY_TYPE_TO_ASSET_TYPE[accessory.AccessoryType]
 	end
-	return t
+	return ACCESSORYTYPETOASSETTYPEEntries
 end

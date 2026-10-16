@@ -1,71 +1,71 @@
-﻿local appStorageService = game:GetService("AppStorageService")
-local playersService = game:GetService("Players")
-local httpService = game:GetService("HttpService")
+﻿local AppStorageService = game:GetService("AppStorageService")
+local Players = game:GetService("Players")
+local HttpService = game:GetService("HttpService")
 
-local function _()
-	-- upvalues: playersService (ref)
-	return if playersService.LocalPlayer and playersService.LocalPlayer.UserId > 0 then tostring(playersService.LocalPlayer.UserId) else "0"
+local function _(): string --[[ Line: 5 | Named "getCurrentUser" ]]
+	-- upvalues: Players (copy)
+	return if Players.LocalPlayer and Players.LocalPlayer.UserId > 0 then tostring(Players.LocalPlayer.UserId) else "0"
 end
 
-local _ = function(p1)
+local _ = function(p1): string --[[ Line: 14 | Named "getUserKey" ]]
 	return "u_" .. tostring(p1 or "0")
 end
 
-local function getValuesForAllUsers(p1)
-	-- upvalues: appStorageService (ref), httpService (ref)
-	local var1 = appStorageService:GetItem(p1)
-	local ok, status = pcall(function()
-		-- upvalues: httpService (copy), var1 (ref)
-		return httpService:JSONDecode(var1)
+local function getValuesForAllUsers(Key) --[[ Line: 18 ]]
+	-- upvalues: AppStorageService (copy), HttpService (copy)
+	local Item = AppStorageService:GetItem(Key)
+	local Success, Result = pcall(function() --[[ Line: 20 ]]
+		-- upvalues: HttpService (upval), Item (copy)
+		return HttpService:JSONDecode(Item)
 	end)
 	
-	return if ok and type(status) == "table" then status else { default = var1 }
+	return if Success and type(Result) == "table" then Result else { default = Item }
 end
 
-local _ = function(value, p1)
-	-- upvalues: httpService (ref), appStorageService (ref)
-	appStorageService:SetItem(value, httpService:JSONEncode(p1))
+local _ = function(Key, Input) --[[ Line: 32 | Named "setValuesForAllUsers" ]]
+	-- upvalues: HttpService (copy), AppStorageService (copy)
+	AppStorageService:SetItem(Key, (HttpService:JSONEncode(Input)))
 end
 
-local t = {}
-t.__index = t
+local UserLocalStore = {}
+UserLocalStore.__index = UserLocalStore
 
-function t.new(p1)
-	-- upvalues: playersService (ref), t (ref)
+function UserLocalStore.new(p1: string) --[[ Line: 40 ]]
+	-- upvalues: Players (copy), UserLocalStore (copy)
 	if not p1 then
-		p1 = if playersService.LocalPlayer and playersService.LocalPlayer.UserId > 0 then tostring(playersService.LocalPlayer.UserId) else "0"
+		p1 = if Players.LocalPlayer and Players.LocalPlayer.UserId > 0 then tostring(Players.LocalPlayer.UserId) else "0"
 	end
-	local t_1 = { userId = tostring(p1) }
-	setmetatable(t_1, t)
+	local config = { userId = tostring(p1) }
+	setmetatable(config, UserLocalStore)
 	
-	return t_1
+	return config
 end
 
-function t:GetItem(p1)
-	-- upvalues: getValuesForAllUsers (ref)
-	local var1 = getValuesForAllUsers(p1)
-	local var2 = var1["u_" .. tostring(self.userId or "0")]
+function UserLocalStore:GetItem(Key) --[[ Line: 52 ]]
+	-- upvalues: getValuesForAllUsers (copy)
+	local ValuesForAllUsers = getValuesForAllUsers(Key)
+	local ValuesForAllUser = ValuesForAllUsers["u_" .. tostring(self.userId or "0")]
 	
-	if var2 == nil then
-		var2 = var1.default
+	if ValuesForAllUser == nil then
+		ValuesForAllUser = ValuesForAllUsers.default
 	end
-	return var2
+	return ValuesForAllUser
 end
 
-function t:SetItem(p1, p2)
-	-- upvalues: getValuesForAllUsers (ref), httpService (ref), appStorageService (ref)
-	local var1 = getValuesForAllUsers(p1)
-	var1["u_" .. tostring(self.userId or "0")] = p2
-	appStorageService:SetItem(p1, httpService:JSONEncode(var1))
+function UserLocalStore:SetItem(Key, Json) --[[ Line: 62 ]]
+	-- upvalues: getValuesForAllUsers (copy), HttpService (copy), AppStorageService (copy)
+	local ValuesForAllUsers = getValuesForAllUsers(Key)
+	ValuesForAllUsers["u_" .. tostring(self.userId or "0")] = Json
+	AppStorageService:SetItem(Key, (HttpService:JSONEncode(ValuesForAllUsers)))
 end
 
-function t.Flush(_)
-	-- upvalues: appStorageService (ref)
-	appStorageService:Flush()
+function UserLocalStore:Flush() --[[ Line: 69 ]]
+	-- upvalues: AppStorageService (copy)
+	AppStorageService:Flush()
 end
 
-t.getItem = t.GetItem
-t.setItem = t.SetItem
-t.flush = t.Flush
+UserLocalStore.getItem = UserLocalStore.GetItem
+UserLocalStore.setItem = UserLocalStore.SetItem
+UserLocalStore.flush = UserLocalStore.Flush
 
-return t
+return UserLocalStore

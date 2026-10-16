@@ -1,28 +1,28 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local textModule = require(foundation.Components.Text)
-local _ = require(foundation.Components.Types)
-local inputLabelSizeModule = require(foundation.Enums.InputLabelSize)
-local medium = inputLabelSizeModule.Medium
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local TextModule = require(Foundation.Components.Text)
+local _ = require(Foundation.Components.Types)
+local InputLabelSizeModule = require(Foundation.Enums.InputLabelSize)
+local Medium = InputLabelSizeModule.Medium
 
-return reactModule.memo(function(p1)
-	-- upvalues: medium (ref), reactModule (ref), inputLabelSizeModule (ref), textModule (ref)
-	local size = p1.size or medium
+return ReactModule.memo(function(Frame) --[[ Line: 23 | Named "InputHint" ]]
+	-- upvalues: Medium (copy), ReactModule (copy), InputLabelSizeModule (copy), TextModule (copy)
+	local Size = Frame.size or Medium
 	
-	return reactModule.createElement(textModule, {
-		Text = p1.text,
-		tag = reactModule.useMemo(function()
-			-- upvalues: p1 (ref), size (ref), inputLabelSizeModule (copy)
+	return ReactModule.createElement(TextModule, {
+		Text = Frame.text,
+		tag = ReactModule.useMemo(function() --[[ Line: 26 ]]
+			-- upvalues: Frame (copy), Size (copy), InputLabelSizeModule (upval)
 			return {
 				["size-0 auto-xy text-wrap text-align-x-left text-align-y-top"] = true,
-				["content-muted"] = p1.isDisabled,
-				["content-default"] = not p1.isDisabled,
-				["text-caption-small"] = if size ~= inputLabelSizeModule.Small then size == inputLabelSizeModule.XSmall else true,
-				["text-caption-medium"] = if size ~= inputLabelSizeModule.Medium then size == inputLabelSizeModule.Large else true
+				["content-muted"] = Frame.isDisabled,
+				["content-default"] = not Frame.isDisabled,
+				["text-caption-small"] = Size == InputLabelSizeModule.Small or Size == InputLabelSizeModule.XSmall,
+				["text-caption-medium"] = Size == InputLabelSizeModule.Medium or Size == InputLabelSizeModule.Large
 			}
-		end, { p1.isDisabled, size }),
-		testId = p1.testId,
-		LayoutOrder = p1.LayoutOrder,
-		padding = p1.padding
+		end, { Frame.isDisabled, Size }),
+		testId = Frame.testId,
+		LayoutOrder = Frame.LayoutOrder,
+		padding = Frame.padding
 	})
 end)

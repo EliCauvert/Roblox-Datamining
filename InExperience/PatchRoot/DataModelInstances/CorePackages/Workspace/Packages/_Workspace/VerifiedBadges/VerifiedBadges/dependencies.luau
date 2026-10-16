@@ -1,16 +1,15 @@
-﻿local parent = script:FindFirstAncestor("VerifiedBadges").Parent
-local usersNetworkingModule = require(parent.UsersNetworking)
-local httpRequestModule = require(parent.HttpRequest)
-local var1 = require(parent.RoduxNetworking).config({
+﻿local Parent = script:FindFirstAncestor("VerifiedBadges").Parent
+local HttpRequestModule = require(Parent.HttpRequest)
+local ConfigResult = require(Parent.RoduxNetworking).config({
 	keyPath = "VerifiedBadges.NetworkStatus",
-	networkImpl = httpRequestModule.config({
+	networkImpl = HttpRequestModule.config({
 		maxRetryCount = 0,
-		requestFunction = httpRequestModule.requestFunctions.RequestInternal
+		requestFunction = HttpRequestModule.requestFunctions.RequestInternal
 	})
 })
 
 return {
-	RoduxNetworking = var1,
-	FriendsNetworking = require(parent.FriendsNetworking).config({ roduxNetworking = var1 }),
-	UsersNetworking = usersNetworkingModule.config({ roduxNetworking = var1 })
+	RoduxNetworking = ConfigResult,
+	FriendsNetworking = require(Parent.FriendsNetworking).config({ roduxNetworking = ConfigResult }),
+	UsersNetworking = require(Parent.UsersNetworking).config({ roduxNetworking = ConfigResult })
 }

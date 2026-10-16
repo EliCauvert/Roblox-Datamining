@@ -1,37 +1,34 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local parent = momentsCreation.Parent
-local builderIconsModule = require(parent.BuilderIcons)
-local momentsCommonModule = require(parent.MomentsCommon)
-local reactModule = require(parent.React)
-local creationFlowStateModule = require(momentsCreation.Enums.CreationFlowState)
-local _ = require(momentsCreation.Types.CreationFlowTypes)
-local createEditSessionModule = require(momentsCreation.Stores.createEditSession)
-local trimmingViewModule = require(momentsCreation.Components.TrimmingView)
-local eventNames = momentsCommonModule.Analytics.EventNames
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local Parent = MomentsCreation.Parent
+local ReactModule = require(Parent.React)
+local _ = require(MomentsCreation.Types.CreationFlowTypes)
+local CreateEditSessionModule = require(MomentsCreation.Stores.createEditSession)
+local TrimmingViewModule = require(MomentsCreation.Components.TrimmingView)
+local EventNames = require(Parent.MomentsCommon).Analytics.EventNames
 
 return {
 	kind = "trim",
 	presentation = "Step",
 	zIndex = 1,
-	step = creationFlowStateModule.Trimming,
+	step = require(MomentsCreation.Enums.CreationFlowState).Trimming,
 	cta = {
 		localizationKey = "Feature.Moments.Action.TrimVideo",
 		order = 1,
-		icon = builderIconsModule.Icon.ThreeBarsVerticalTrianglesHorizontal,
-		analyticsEvent = eventNames.EditingFlowTrimButtonPressed,
-		commitAnalyticsEvent = eventNames.EditingFlowTrimDoneButtonPressed,
-		cancelAnalyticsEvent = eventNames.EditingFlowTrimBackButtonPressed
+		icon = require(Parent.BuilderIcons).Icon.ThreeBarsVerticalTrianglesHorizontal,
+		analyticsEvent = EventNames.EditingFlowTrimButtonPressed,
+		commitAnalyticsEvent = EventNames.EditingFlowTrimDoneButtonPressed,
+		cancelAnalyticsEvent = EventNames.EditingFlowTrimBackButtonPressed
 	},
 	supportedCaptureTypes = { Enum.CaptureType.Video },
-	createSession = function()
-		-- upvalues: createEditSessionModule (ref)
-		return createEditSessionModule()
+	createSession = function() --[[ Line: 39 ]]
+		-- upvalues: CreateEditSessionModule (copy)
+		return CreateEditSessionModule()
 	end,
-	renderEditor = function(p1)
-		-- upvalues: reactModule (ref), trimmingViewModule (ref)
-		return reactModule.createElement(trimmingViewModule, { layoutOrder = 2, controller = p1 })
+	renderEditor = function(Controller) --[[ Line: 42 ]]
+		-- upvalues: ReactModule (copy), TrimmingViewModule (copy)
+		return ReactModule.createElement(TrimmingViewModule, { layoutOrder = 2, controller = Controller })
 	end,
-	toEdits = function(p1)
-		return { trim = p1 }
+	toEdits = function(Trim) --[[ Line: 49 ]]
+		return { trim = Trim }
 	end
 }

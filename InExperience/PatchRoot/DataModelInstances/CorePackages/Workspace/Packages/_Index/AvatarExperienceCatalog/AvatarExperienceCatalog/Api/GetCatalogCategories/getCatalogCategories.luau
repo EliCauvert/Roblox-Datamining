@@ -1,20 +1,20 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local parent = avatarExperienceCatalog.Parent
-local _ = require(parent.AvatarExperienceCommon)
-local url = require(parent.Http).Url
-local _ = require(parent.LuauPolyfill)
-local makeAXResponseHandlerModule = require(avatarExperienceCatalog.Utils.makeAXResponseHandler)
-local normalizeCatalogCategoriesModule = require(script.Parent.normalizeCatalogCategories)
-local constantsModule = require(script.Parent.constants)
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local Parent = AvatarExperienceCatalog.Parent
+local _ = require(Parent.AvatarExperienceCommon)
+local Url = require(Parent.Http).Url
+local _ = require(Parent.LuauPolyfill)
+local MakeAXResponseHandlerModule = require(AvatarExperienceCatalog.Utils.makeAXResponseHandler)
+local NormalizeCatalogCategoriesModule = require(script.Parent.normalizeCatalogCategories)
+local ConstantsModule = require(script.Parent.constants)
 
 return {
-	getCatalogCategories = function(p1, p2)
-		-- upvalues: url (ref), makeAXResponseHandlerModule (ref), normalizeCatalogCategoriesModule (ref), constantsModule (ref)
-		local var1, var2 = p1(`{url.APIS_URL}marketplace-widgets/v1/pills?{url:makeQueryString({ versionId = p2 })}`, "GET")
+	getCatalogCategories = function(Callback, VersionId) --[[ Line: 15 ]]
+		-- upvalues: Url (copy), MakeAXResponseHandlerModule (copy), NormalizeCatalogCategoriesModule (copy), ConstantsModule (copy)
+		local GET, GET2 = Callback(`{Url.APIS_URL}marketplace-widgets/v1/pills?{Url:makeQueryString({ versionId = VersionId })}`, "GET")
 		
-		return makeAXResponseHandlerModule(var1, normalizeCatalogCategoriesModule, {
-			modelMismatchCounter = constantsModule.FETCH_CATALOG_CATEGORIES_MODEL_MISMATCH_COUNTER_NAME,
-			latencyCounter = constantsModule.FETCH_CATALOG_CATEGORIES_LATENCY_COUNTER_NAME
-		}), var2
+		return MakeAXResponseHandlerModule(GET, NormalizeCatalogCategoriesModule, {
+			modelMismatchCounter = ConstantsModule.FETCH_CATALOG_CATEGORIES_MODEL_MISMATCH_COUNTER_NAME,
+			latencyCounter = ConstantsModule.FETCH_CATALOG_CATEGORIES_LATENCY_COUNTER_NAME
+		}), GET2
 	end
 }

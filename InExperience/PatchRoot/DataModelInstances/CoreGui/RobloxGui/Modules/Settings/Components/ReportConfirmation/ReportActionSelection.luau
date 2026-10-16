@@ -1,18 +1,17 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local roactModule = require(corePackagesService.Packages.Roact)
-local tModule = require(corePackagesService.Packages.t)
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
-local textButton = UIBloxModule.App.Button.TextButton
-local checkboxRowModule = require(script.Parent.CheckboxRow)
-local reportActionSelection = roactModule.PureComponent:extend("ReportActionSelection")
+﻿local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local TModule = require(CorePackages.Packages.t)
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local WithFoundationOrUIBloxStyleFunction = require(CorePackages.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
+local TextButton = require(CorePackages.Packages.UIBlox).App.Button.TextButton
+local CheckboxRowModule = require(script.Parent.CheckboxRow)
+local ReportActionSelection = RoactModule.PureComponent:extend("ReportActionSelection")
 
-local var1 = function() end
+local function OnBlockCheckboxActivated() --[[ Line: 28 ]] end
 
-reportActionSelection.defaultProps = {
+ReportActionSelection.defaultProps = {
 	titleText = "Thanks for your report!",
 	subtitleText = "We've received your report and will take action soon if needed. Your feedback helps keep our community safe.",
 	instructionText = "Other steps you can take:",
@@ -24,191 +23,191 @@ reportActionSelection.defaultProps = {
 	isBlocked = false,
 	ZIndex = 1,
 	uiScale = 1.3,
-	onMuteCheckboxActivated = var1,
-	onBlockCheckboxActivated = var1,
-	onDoneActivated = var1
+	onMuteCheckboxActivated = OnBlockCheckboxActivated,
+	onBlockCheckboxActivated = OnBlockCheckboxActivated,
+	onDoneActivated = OnBlockCheckboxActivated
 }
-reportActionSelection.validateProps = tModule.interface({
-	titleText = tModule.string,
-	subtitleText = tModule.string,
-	instructionText = tModule.string,
-	muteText = tModule.string,
-	blockText = tModule.string,
-	doneText = tModule.string,
-	showVoiceMuting = tModule.boolean,
-	isVoiceMuted = tModule.optional(tModule.boolean),
-	isBlocked = tModule.optional(tModule.boolean),
-	onMuteCheckboxActivated = tModule.optional(tModule.callback),
-	onBlockCheckboxActivated = tModule.optional(tModule.callback),
-	onDoneActivated = tModule.callback,
-	ZIndex = tModule.number
+ReportActionSelection.validateProps = TModule.interface({
+	titleText = TModule.string,
+	subtitleText = TModule.string,
+	instructionText = TModule.string,
+	muteText = TModule.string,
+	blockText = TModule.string,
+	doneText = TModule.string,
+	showVoiceMuting = TModule.boolean,
+	isVoiceMuted = TModule.optional(TModule.boolean),
+	isBlocked = TModule.optional(TModule.boolean),
+	onMuteCheckboxActivated = TModule.optional(TModule.callback),
+	onBlockCheckboxActivated = TModule.optional(TModule.callback),
+	onDoneActivated = TModule.callback,
+	ZIndex = TModule.number
 })
 
-function reportActionSelection.init(p1)
-	function p0.onMuteCheckboxActivated(p2)
-		-- upvalues: p1 (ref)
-		p1:setState({ isVoiceMuted = p2 })
-		p1.props.onMuteCheckboxActivated(p2)
+function ReportActionSelection.init(DefaultProps) --[[ Line: 63 ]]
+	function DefaultProps.onMuteCheckboxActivated(IsVoiceMuted) --[[ Line: 64 ]]
+		-- upvalues: DefaultProps (copy)
+		DefaultProps:setState({ isVoiceMuted = IsVoiceMuted })
+		DefaultProps.props.onMuteCheckboxActivated(IsVoiceMuted)
 	end
 	
-	function p0.onBlockCheckboxActivated(p2)
-		-- upvalues: p1 (ref)
-		p1:setState({ isBlocked = p2 })
-		p1.props.onBlockCheckboxActivated(p2)
+	function DefaultProps.onBlockCheckboxActivated(IsBlocked) --[[ Line: 72 ]]
+		-- upvalues: DefaultProps (copy)
+		DefaultProps:setState({ isBlocked = IsBlocked })
+		DefaultProps.props.onBlockCheckboxActivated(IsBlocked)
 	end
 	
-	function p0.onDoneActivated()
-		-- upvalues: p1 (ref)
-		p1.props.onDoneActivated(p1.state.isBlocked, p1.state.isVoiceMuted)
+	function DefaultProps.onDoneActivated() --[[ Line: 80 ]]
+		-- upvalues: DefaultProps (copy)
+		DefaultProps.props.onDoneActivated(DefaultProps.state.isBlocked, DefaultProps.state.isVoiceMuted)
 	end
 	
-	p1:setState({
-		isVoiceMuted = p1.props.isVoiceMuted,
-		isBlocked = p1.props.isBlocked
+	DefaultProps:setState({
+		isVoiceMuted = DefaultProps.props.isVoiceMuted,
+		isBlocked = DefaultProps.props.isBlocked
 	})
 end
 
-function reportActionSelection.render(p1)
-	-- upvalues: withFoundationOrUIBloxStyle (ref), foundationFontFaceMigration (ref), roactModule (ref), normalizeFontFace (ref), checkboxRowModule (ref), textButton (ref)
-	return withFoundationOrUIBloxStyle(function(p2)
-		-- upvalues: foundationFontFaceMigration (copy)
+function ReportActionSelection.render(DefaultProps) --[[ Line: 90 ]]
+	-- upvalues: WithFoundationOrUIBloxStyleFunction (copy), FoundationFontFaceMigration (copy), RoactModule (copy), NormalizeFontFaceFunction (copy), CheckboxRowModule (copy), TextButton (copy)
+	return WithFoundationOrUIBloxStyleFunction(function(p1) --[[ Line: 91 ]]
+		-- upvalues: FoundationFontFaceMigration (upval)
 		return {
-			Tokens = if foundationFontFaceMigration then p2 else nil,
+			Tokens = if FoundationFontFaceMigration then p1 else nil,
 			Theme = {
 				Divider = {
-					Color = p2.Color.Stroke.Emphasis.Color3,
-					Transparency = p2.Color.Stroke.Emphasis.Transparency
+					Color = p1.Color.Stroke.Emphasis.Color3,
+					Transparency = p1.Color.Stroke.Emphasis.Transparency
 				},
 				SystemPrimaryContent = {
-					Color = p2.Color.ActionSubEmphasis.Foreground.Color3,
-					Transparency = p2.Color.ActionSubEmphasis.Foreground.Transparency
+					Color = p1.Color.ActionSubEmphasis.Foreground.Color3,
+					Transparency = p1.Color.ActionSubEmphasis.Foreground.Transparency
 				},
 				TextDefault = {
-					Color = p2.Color.Content.Default.Color3,
-					Transparency = p2.Color.Content.Default.Transparency
+					Color = p1.Color.Content.Default.Color3,
+					Transparency = p1.Color.Content.Default.Transparency
 				},
 				TextEmphasis = {
-					Color = p2.Color.Content.Emphasis.Color3,
-					Transparency = p2.Color.Content.Emphasis.Transparency
+					Color = p1.Color.Content.Emphasis.Color3,
+					Transparency = p1.Color.Content.Emphasis.Transparency
 				}
 			},
 			Font = {
 				BaseSize = 1,
 				CaptionHeader = {
-					Font = p2.Typography.CaptionLarge.Font,
-					RelativeSize = p2.Typography.CaptionLarge.FontSize
+					Font = p1.Typography.CaptionLarge.Font,
+					RelativeSize = p1.Typography.CaptionLarge.FontSize
 				},
 				Header1 = {
-					Font = p2.Typography.HeadingSmall.Font,
-					RelativeSize = p2.Typography.HeadingSmall.FontSize
+					Font = p1.Typography.HeadingSmall.Font,
+					RelativeSize = p1.Typography.HeadingSmall.FontSize
 				}
 			}
 		}
-	end, function(p2)
-		-- upvalues: roactModule (copy), p1 (ref), foundationFontFaceMigration (copy), normalizeFontFace (copy), checkboxRowModule (copy), textButton (copy)
-		local baseSize = p2.Font.BaseSize
+	end, function(p1) --[[ Line: 124 ]]
+		-- upvalues: RoactModule (upval), DefaultProps (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), CheckboxRowModule (upval), TextButton (upval)
+		local BaseSize = p1.Font.BaseSize
 		
-		return roactModule.createElement("Frame", {
+		return RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.fromScale(1, 1),
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.fromScale(0.5, 0.5),
-			ZIndex = p1.props.ZIndex
+			ZIndex = DefaultProps.props.ZIndex
 		}, {
-			uiScale = roactModule.createElement("UIScale", { Scale = p1.props.uiScale }),
-			layout = roactModule.createElement("UIListLayout", {
+			uiScale = RoactModule.createElement("UIScale", { Scale = DefaultProps.props.uiScale }),
+			layout = RoactModule.createElement("UIListLayout", {
 				VerticalAlignment = Enum.VerticalAlignment.Top,
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
 				Padding = UDim.new(0, 22),
 				FillDirection = Enum.FillDirection.Vertical,
 				SortOrder = Enum.SortOrder.LayoutOrder
 			}),
-			title = roactModule.createElement("TextLabel", {
+			title = RoactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 1,
-				Text = p1.props.titleText,
-				TextColor3 = p2.Theme.TextEmphasis.Color,
-				TextTransparency = p2.Theme.TextEmphasis.Transparency,
-				TextSize = p2.Font.Header1.RelativeSize * baseSize,
-				Font = if foundationFontFaceMigration then nil else p2.Font.Header1.Font,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.HeadingSmall.Font) else nil,
+				Text = DefaultProps.props.titleText,
+				TextColor3 = p1.Theme.TextEmphasis.Color,
+				TextTransparency = p1.Theme.TextEmphasis.Transparency,
+				TextSize = p1.Font.Header1.RelativeSize * BaseSize,
+				Font = if FoundationFontFaceMigration then nil else p1.Font.Header1.Font,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p1.Tokens.Typography.HeadingSmall.Font) else nil,
 				AutomaticSize = Enum.AutomaticSize.XY
 			}),
-			subtitle = roactModule.createElement("TextLabel", {
+			subtitle = RoactModule.createElement("TextLabel", {
 				TextWrapped = true,
 				BackgroundTransparency = 1,
 				LayoutOrder = 2,
 				Size = UDim2.fromOffset(612, 0),
-				Text = p1.props.subtitleText,
-				TextColor3 = p2.Theme.TextEmphasis.Color,
-				TextTransparency = p2.Theme.TextEmphasis.Transparency,
-				TextSize = p2.Font.CaptionHeader.RelativeSize * baseSize,
-				Font = if foundationFontFaceMigration then nil else p2.Font.CaptionHeader.Font,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.CaptionLarge.Font) else nil,
+				Text = DefaultProps.props.subtitleText,
+				TextColor3 = p1.Theme.TextEmphasis.Color,
+				TextTransparency = p1.Theme.TextEmphasis.Transparency,
+				TextSize = p1.Font.CaptionHeader.RelativeSize * BaseSize,
+				Font = if FoundationFontFaceMigration then nil else p1.Font.CaptionHeader.Font,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p1.Tokens.Typography.CaptionLarge.Font) else nil,
 				AutomaticSize = Enum.AutomaticSize.Y
 			}),
-			actions = roactModule.createElement("Frame", {
+			actions = RoactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 3,
 				Size = UDim2.fromOffset(584, 0),
 				AutomaticSize = Enum.AutomaticSize.Y
 			}, {
-				layout = roactModule.createElement("UIListLayout", {
+				layout = RoactModule.createElement("UIListLayout", {
 					VerticalAlignment = Enum.VerticalAlignment.Top,
 					HorizontalAlignment = Enum.HorizontalAlignment.Center,
 					Padding = UDim.new(0, 18),
 					FillDirection = Enum.FillDirection.Vertical,
 					SortOrder = Enum.SortOrder.LayoutOrder
 				}),
-				instruction = roactModule.createElement("TextLabel", {
+				instruction = RoactModule.createElement("TextLabel", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 1,
 					Size = UDim2.fromScale(1, 0),
-					Text = p1.props.instructionText,
-					TextColor3 = p2.Theme.TextDefault.Color,
-					TextTransparency = p2.Theme.TextDefault.Transparency,
-					TextSize = p2.Font.CaptionHeader.RelativeSize * baseSize,
-					Font = if foundationFontFaceMigration then nil else p2.Font.CaptionHeader.Font,
-					FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.CaptionLarge.Font) else nil,
+					Text = DefaultProps.props.instructionText,
+					TextColor3 = p1.Theme.TextDefault.Color,
+					TextTransparency = p1.Theme.TextDefault.Transparency,
+					TextSize = p1.Font.CaptionHeader.RelativeSize * BaseSize,
+					Font = if FoundationFontFaceMigration then nil else p1.Font.CaptionHeader.Font,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p1.Tokens.Typography.CaptionLarge.Font) else nil,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					AutomaticSize = Enum.AutomaticSize.Y
 				}),
-				muteCheckbox = p1.props.showVoiceMuting and roactModule.createElement(checkboxRowModule, {
+				muteCheckbox = DefaultProps.props.showVoiceMuting and RoactModule.createElement(CheckboxRowModule, {
 					height = 28,
 					image = "icons/controls/microphone",
 					LayoutOrder = 2,
-					descriptionText = p1.props.muteText,
-					actionDisabled = p1.state.isBlocked,
-					checkboxSelected = p1.state.isBlocked or p1.state.isVoiceMuted,
-					onCheckboxActivated = p1.onMuteCheckboxActivated
+					descriptionText = DefaultProps.props.muteText,
+					actionDisabled = DefaultProps.state.isBlocked,
+					checkboxSelected = DefaultProps.state.isBlocked or DefaultProps.state.isVoiceMuted,
+					onCheckboxActivated = DefaultProps.onMuteCheckboxActivated
 				}),
-				div = p1.props.showVoiceMuting and roactModule.createElement("Frame", {
+				div = DefaultProps.props.showVoiceMuting and RoactModule.createElement("Frame", {
 					BorderSizePixel = 0,
 					LayoutOrder = 3,
 					Size = UDim2.new(1, 0, 0, 1),
-					BackgroundColor3 = p2.Theme.Divider.Color,
-					BackgroundTransparency = p2.Theme.Divider.Transparency
+					BackgroundColor3 = p1.Theme.Divider.Color,
+					BackgroundTransparency = p1.Theme.Divider.Transparency
 				}),
-				blockCheckbox = roactModule.createElement(checkboxRowModule, {
+				blockCheckbox = RoactModule.createElement(CheckboxRowModule, {
 					height = 28,
 					image = "icons/actions/block",
 					LayoutOrder = 4,
-					descriptionText = p1.props.blockText,
-					checkboxSelected = p1.state.isBlocked,
-					onCheckboxActivated = p1.onBlockCheckboxActivated
+					descriptionText = DefaultProps.props.blockText,
+					checkboxSelected = DefaultProps.state.isBlocked,
+					onCheckboxActivated = DefaultProps.onBlockCheckboxActivated
 				}),
-				doneContainer = roactModule.createElement("Frame", {
+				doneContainer = RoactModule.createElement("Frame", {
 					BorderSizePixel = 0,
 					LayoutOrder = 5,
-					BackgroundColor3 = p2.Theme.SystemPrimaryContent.Color,
-					BackgroundTransparency = p2.Theme.SystemPrimaryContent.Transparency,
+					BackgroundColor3 = p1.Theme.SystemPrimaryContent.Color,
+					BackgroundTransparency = p1.Theme.SystemPrimaryContent.Transparency,
 					Size = UDim2.new(1, 0, 0, 44)
 				}, {
-					uiCorner = roactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 4) }),
-					doneButton = roactModule.createElement(textButton, {
+					uiCorner = RoactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 4) }),
+					doneButton = RoactModule.createElement(TextButton, {
 						size = UDim2.fromScale(1, 1),
-						text = p1.props.doneText,
-						onActivated = p1.onDoneActivated
+						text = DefaultProps.props.doneText,
+						onActivated = DefaultProps.onDoneActivated
 					})
 				})
 			})
@@ -216,4 +215,4 @@ function reportActionSelection.render(p1)
 	end)
 end
 
-return reportActionSelection
+return ReportActionSelection

@@ -1,114 +1,120 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local foundationModule = require(parent.Foundation)
-local checkbox = foundationModule.Checkbox
-local text = foundationModule.Text
-local view = foundationModule.View
-local inputSize = foundationModule.Enums.InputSize
-local useTokens = foundationModule.Hooks.useTokens
-local focusable = require(parent.RoactGamepad).Focusable
-local expandingFrameModule = require(script.Parent.ExpandingFrame)
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local FoundationModule = require(Parent.Foundation)
+local Checkbox = FoundationModule.Checkbox
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local InputSize = FoundationModule.Enums.InputSize
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local Focusable = require(Parent.RoactGamepad).Focusable
+local ExpandingFrameModule = require(script.Parent.ExpandingFrame)
 
-local function CheckboxButtonItem(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), view (ref), text (ref), focusable (ref), checkbox (ref), inputSize (ref), expandingFrameModule (ref)
-	local var1 = useTokens()
-	local var2 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref)
-		if p1.onActivated then
-			p1.onActivated(p1.id)
+local function CheckboxButtonItem(Gui) --[[ Line: 62 ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Text (copy), Focusable (copy), Checkbox (copy), InputSize (copy), ExpandingFrameModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 64 ]]
+		-- upvalues: Gui (copy)
+		if Gui.onActivated then
+			Gui.onActivated(Gui.id)
 		end
-	end, { p1.onActivated, p1.id })
-	local itemHeight = p1.itemHeight or var1.Size.Size_900
-	local var3 = reactModule.useRef(nil)
-	local var4, var5 = reactModule.useBinding(itemHeight)
-	local var6 = reactModule.useCallback(function(p2)
-		-- upvalues: itemHeight (ref), p1 (ref), var1 (ref), var5 (ref)
-		local var7 = itemHeight
+	end, { Gui.onActivated, Gui.id })
+	local ItemHeight = Gui.itemHeight or UseTokensResult.Size.Size_900
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(ItemHeight)
+	local UseResult1 = ReactModule.useCallback(function(Frame) --[[ Line: 76 ]]
+		-- upvalues: ItemHeight (copy), Gui (copy), UseTokensResult (copy), UseBindingResult2 (copy)
+		local NewSize = ItemHeight
 		
-		if p2 then
-			var7 += p2.AbsoluteSize.Y
+		if Frame then
+			NewSize += Frame.AbsoluteSize.Y
 		end
-		if not p1.hideDivider then
-			var7 += var1.Size.Size_50
+		if not Gui.hideDivider then
+			NewSize += UseTokensResult.Size.Size_50
 		end
-		var5(var7)
+		UseBindingResult2(NewSize)
 		
-		if p1.onHeightChanged then
-			p1.onHeightChanged(var7)
+		if Gui.onHeightChanged then
+			Gui.onHeightChanged(NewSize)
 		end
-	end, { itemHeight, p1.hideDivider, var5, p1.onHeightChanged })
-	reactModule.useEffect(function()
-		-- upvalues: var6 (ref), var3 (ref)
-		var6(var3.current)
+	end, {
+		ItemHeight,
+		Gui.hideDivider,
+		UseBindingResult2,
+		Gui.onHeightChanged
+	})
+	ReactModule.useEffect(function() --[[ Line: 90 ]]
+		-- upvalues: UseResult1 (copy), UseRefResult (copy)
+		UseResult1(UseRefResult.current)
 	end, {})
+	local IsIsSelected: boolean = Gui.expandedView and Gui.isSelected == true
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
-		Size = var4:map(function(p2)
-			return UDim2.new(1, 0, 0, p2)
+		Size = UseBindingResult:map(function(YOffset): UDim2 --[[ Line: 97 ]]
+			return UDim2.new(1, 0, 0, YOffset)
 		end),
-		LayoutOrder = p1.layoutOrder,
-		ref = p1.frameRef,
-		NextSelectionLeft = p1.NextSelectionLeft,
-		NextSelectionRight = p1.NextSelectionRight,
-		NextSelectionUp = p1.NextSelectionUp,
-		NextSelectionDown = p1.NextSelectionDown
+		LayoutOrder = Gui.layoutOrder,
+		ref = Gui.frameRef,
+		NextSelectionLeft = Gui.NextSelectionLeft,
+		NextSelectionRight = Gui.NextSelectionRight,
+		NextSelectionUp = Gui.NextSelectionUp,
+		NextSelectionDown = Gui.NextSelectionDown
 	}, {
-		UIListLayout = reactModule.createElement("UIListLayout", {
+		UIListLayout = ReactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			FillDirection = Enum.FillDirection.Vertical,
 			HorizontalAlignment = Enum.HorizontalAlignment.Right
 		}),
-		Contents = reactModule.createElement(view, {
+		Contents = ReactModule.createElement(View, {
 			tag = "size-full row items-center padding-left-large padding-y-medium padding-right-none",
 			LayoutOrder = 1,
-			ref = p1.defaultChildRef,
-			NextSelectionDown = if p1.expandedView and p1.isSelected == true then var3 else nil,
-			SelectionImageObject = p1.SelectionImageObject
+			ref = Gui.defaultChildRef,
+			NextSelectionDown = if IsIsSelected then UseRefResult else nil,
+			SelectionImageObject = Gui.SelectionImageObject
 		}, {
-			ClickableTextArea = reactModule.createElement("TextButton", {
-				Size = UDim2.new(1, (-var1.Size.Size_400) - var1.Size.Size_400, 1, 0),
+			ClickableTextArea = ReactModule.createElement("TextButton", {
+				Size = UDim2.new(1, -UseTokensResult.Size.Size_400 - UseTokensResult.Size.Size_400, 1, 0),
 				BackgroundTransparency = 1,
 				Text = "",
-				Active = not p1.isDisabled,
-				[reactModule.Event.Activated] = if not p1.isDisabled then var2 else nil,
+				Active = not Gui.isDisabled,
+				[ReactModule.Event.Activated] = if Gui.isDisabled then nil else UseResult,
 				LayoutOrder = 1
 			}, {
-				CustomViewFrame = p1.customView and reactModule.createElement(view, {
+				CustomViewFrame = Gui.customView and ReactModule.createElement(View, {
 					tag = "gui-object-defaults",
 					LayoutOrder = 1,
 					Size = UDim2.new(1, 0, 1, 0)
-				}, { CustomView = p1.customView }),
-				TitleText = p1.text and (not p1.customView and reactModule.createElement(text, {
+				}, { CustomView = Gui.customView }),
+				TitleText = Gui.text and (not Gui.customView and ReactModule.createElement(Text, {
 					LayoutOrder = 1,
 					tag = "text-title-medium content-default text-align-x-left auto-y",
 					Size = UDim2.new(1, 0, 1, 0),
-					Text = p1.text
+					Text = Gui.text
 				}))
 			}),
-			RightContent = reactModule.createElement(focusable[checkbox], {
+			RightContent = ReactModule.createElement(Focusable[Checkbox], {
 				label = "",
 				LayoutOrder = 3,
-				isChecked = p1.isSelected,
-				isDisabled = p1.isDisabled,
-				onActivated = var2,
-				size = inputSize.Medium
+				isChecked = Gui.isSelected,
+				isDisabled = Gui.isDisabled,
+				onActivated = UseResult,
+				size = InputSize.Medium
 			})
 		}),
-		ExpandingFrame = p1.expandedView and reactModule.createElement(focusable[expandingFrameModule], {
+		ExpandingFrame = Gui.expandedView and ReactModule.createElement(Focusable[ExpandingFrameModule], {
 			LayoutOrder = 2,
-			Size = UDim2.new(1, 0, 0, p1.expandedViewHeight or 0),
-			isExpanded = p1.isSelected == true,
-			onAbsoluteSizeChanged = var6,
-			ref = var3,
-			NextSelectionUp = p1.defaultChildRef
-		}, { ExpandedView = p1.expandedView })
+			Size = UDim2.new(1, 0, 0, Gui.expandedViewHeight or 0),
+			isExpanded = Gui.isSelected == true,
+			onAbsoluteSizeChanged = UseResult1,
+			ref = UseRefResult,
+			NextSelectionUp = Gui.defaultChildRef
+		}, { ExpandedView = Gui.expandedView })
 	})
 end
 
-return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: reactModule (ref), CheckboxButtonItem (ref), cryoModule (ref)
-	return reactModule.createElement(CheckboxButtonItem, cryoModule.Dictionary.join(p1, { frameRef = p2 }))
+return ReactModule.forwardRef(function(p1, FrameRef) --[[ Line: 165 ]]
+	-- upvalues: ReactModule (copy), CheckboxButtonItem (copy), CryoModule (copy)
+	return ReactModule.createElement(CheckboxButtonItem, CryoModule.Dictionary.join(p1, { frameRef = FrameRef }))
 end)

@@ -1,21 +1,29 @@
-﻿local accountUpgrade = script:FindFirstAncestor("AccountUpgrade")
-local inputValidity = require(accountUpgrade.Parent.AuthCommon).Enums.InputValidity
-local accountUpgradeFieldModule = require(accountUpgrade.AccountUpgradeField)
+﻿local AccountUpgrade = script:FindFirstAncestor("AccountUpgrade")
+local InputValidity = require(AccountUpgrade.Parent.AuthCommon).Enums.InputValidity
+local AccountUpgradeFieldModule = require(AccountUpgrade.AccountUpgradeField)
 local list = {
-	accountUpgradeFieldModule.Birthday,
-	accountUpgradeFieldModule.Username,
-	accountUpgradeFieldModule.Password
+	AccountUpgradeFieldModule.Birthday,
+	AccountUpgradeFieldModule.Username,
+	AccountUpgradeFieldModule.Password
 }
 
-return function(p1)
-	-- upvalues: list (ref), accountUpgradeFieldModule (ref), inputValidity (ref)
+return function(p1): boolean --[[ Line: 30 | Named "computeIsAccountUpgradeButtonEnabled" ]]
+	-- upvalues: list (copy), AccountUpgradeFieldModule (copy), InputValidity (copy)
 	if p1.isSubmitting then
 		return false
 	end
 	local t = {}
 	
-	for i, v in ipairs(p1.requiredFields or list) do
-		t[v] = true
+	for _, value in ipairs(p1.requiredFields or list) do
+		t[value] = true
 	end
-	return if t[accountUpgradeFieldModule.Birthday] and p1.birthday == nil then false elseif t[accountUpgradeFieldModule.Birthday] and p1.isBirthdayOldEnough == false then false elseif t[accountUpgradeFieldModule.Username] and ((p1.username or "") == "" or p1.usernameValid ~= inputValidity.Valid) then false elseif t[accountUpgradeFieldModule.Password] and ((p1.password or "") == "" or p1.passwordValid ~= inputValidity.Valid) then false else (p1.email or "") == "" or p1.emailValid == true
+	if t[AccountUpgradeFieldModule.Birthday] and p1.birthday == nil then
+		return false
+	else
+		local Username = p1.username or ""
+		local Password = p1.password or ""
+		local Email = p1.email or ""
+		
+		return (not t[AccountUpgradeFieldModule.Username] or Username ~= "" and p1.usernameValid == InputValidity.Valid) and ((not t[AccountUpgradeFieldModule.Password] or Password ~= "" and p1.passwordValid == InputValidity.Valid) and (Email == "" or p1.emailValid == true))
+	end
 end

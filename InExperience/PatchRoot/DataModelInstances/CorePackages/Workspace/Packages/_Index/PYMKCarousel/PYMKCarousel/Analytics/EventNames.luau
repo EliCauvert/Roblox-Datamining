@@ -1,6 +1,6 @@
-﻿local dependenciesModule = require(script.Parent.Parent.dependencies)
+﻿local DependenciesModule = require(script.Parent.Parent.dependencies)
 
-return dependenciesModule.enumerate(script.Name, {
+return DependenciesModule.enumerate(script.Name, {
 	CarouselLoadedWithUsers = "CarouselLoadedWithUsers",
 	PYMKCarouselLoadingTime = "PYMKCarouselLoadingTime",
 	UserSeen = "UserSeen",
@@ -9,5 +9,5 @@ return dependenciesModule.enumerate(script.Name, {
 	RequestFriendship = "RequestFriendship",
 	AcceptFriendship = "AcceptFriendship",
 	PYMKUserPresenceLoad = "PYMKUserPresenceLoad",
-	CarouselGenericTileClicked = if dependenciesModule.getFFlagPYMKAddFriendsEntry() then "CarouselGenericTileClicked" else nil
+	CarouselGenericTileClicked = if DependenciesModule.getFFlagPYMKAddFriendsEntry() then "CarouselGenericTileClicked" else nil
 })

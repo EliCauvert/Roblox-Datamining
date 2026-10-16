@@ -1,6 +1,6 @@
-﻿local getFIntMomentsTTSStartTimeMinTailSecondsModule = require(script:FindFirstAncestor("MomentsCreation").Flags.GetFIntMomentsTTSStartTimeMinTailSeconds)
+﻿local GetFIntMomentsTTSStartTimeMinTailSecondsModule = require(script:FindFirstAncestor("MomentsCreation").Flags.GetFIntMomentsTTSStartTimeMinTailSeconds)
 
-return function(value, minValue)
-	-- upvalues: getFIntMomentsTTSStartTimeMinTailSecondsModule (ref)
-	return math.clamp(value, 0, math.max(0, minValue - getFIntMomentsTTSStartTimeMinTailSecondsModule()))
+return function(Value: number, p1): number --[[ Line: 12 | Named "clampTtsStartTime" ]]
+	-- upvalues: GetFIntMomentsTTSStartTimeMinTailSecondsModule (copy)
+	return (math.clamp(Value, 0, (math.max(0, p1 - GetFIntMomentsTTSStartTimeMinTailSecondsModule()))))
 end

@@ -1,17 +1,17 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local enumsModule = require(profilePlatform.Common.Enums)
-local appPage = require(parent.RobloxAppEnums).AppPage
-local contexts = require(parent.SocialLuaAnalytics).Analytics.Enums.Contexts
-local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfileWrapperContext)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local Contexts = require(Parent.SocialLuaAnalytics).Analytics.Enums.Contexts
+local UseProfileWrapperContextModule = require(ProfilePlatform.Contexts.useProfileWrapperContext)
 
-return function()
-	-- upvalues: useProfileWrapperContextModule (ref), reactModule (ref), enumsModule (ref), contexts (ref), appPage (ref)
-	local var1 = useProfileWrapperContextModule()
+return function() --[[ Line: 13 ]]
+	-- upvalues: UseProfileWrapperContextModule (copy), ReactModule (copy), EnumsModule (copy), Contexts (copy), AppPage (copy)
+	local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
 	
-	return reactModule.useMemo(function()
-		-- upvalues: var1 (ref), enumsModule (copy), contexts (copy), appPage (copy)
-		return if var1.profileType == enumsModule.ProfileTypes.Community then contexts.CommunityProfile elseif var1.profileType == enumsModule.ProfileTypes.User then contexts.PlayerProfile else appPage.ProfilePlatform
-	end, { var1.profileType })
+	return ReactModule.useMemo(function() --[[ Line: 16 ]]
+		-- upvalues: UseProfileWrapperContextModuleResult (copy), EnumsModule (upval), Contexts (upval), AppPage (upval)
+		return if UseProfileWrapperContextModuleResult.profileType == EnumsModule.ProfileTypes.Community then Contexts.CommunityProfile elseif UseProfileWrapperContextModuleResult.profileType == EnumsModule.ProfileTypes.User then Contexts.PlayerProfile else AppPage.ProfilePlatform
+	end, { UseProfileWrapperContextModuleResult.profileType })
 end

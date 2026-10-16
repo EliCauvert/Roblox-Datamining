@@ -1,51 +1,51 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local parent = avatarExperienceCatalog.Parent
-local _ = require(parent.AvatarExperienceRodux)
-local dataHydrationModule = require(parent.DataHydration)
-local promiseModule = require(parent.Promise)
-local logging = require(parent.AppCommonLib).Logging
-local _ = require(parent.Http)
-local _ = require(avatarExperienceCatalog.Components.ResultsList.WidgetListInfoViewModel)
-local collectDedupedHydrationContentModule = require(avatarExperienceCatalog.Sdui.Utils.collectDedupedHydrationContent)
-local buildHydrationReduxPayloadModule = require(avatarExperienceCatalog.Sdui.Utils.buildHydrationReduxPayload)
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local Parent = AvatarExperienceCatalog.Parent
+local _ = require(Parent.AvatarExperienceRodux)
+local DataHydrationModule = require(Parent.DataHydration)
+local PromiseModule = require(Parent.Promise)
+local Logging = require(Parent.AppCommonLib).Logging
+local _ = require(Parent.Http)
+local _ = require(AvatarExperienceCatalog.Components.ResultsList.WidgetListInfoViewModel)
+local CollectDedupedHydrationContentModule = require(AvatarExperienceCatalog.Sdui.Utils.collectDedupedHydrationContent)
+local BuildHydrationReduxPayloadModule = require(AvatarExperienceCatalog.Sdui.Utils.buildHydrationReduxPayload)
 
-return function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: dataHydrationModule (ref), promiseModule (ref), collectDedupedHydrationContentModule (ref), buildHydrationReduxPayloadModule (ref), logging (ref)
-	local marketplaceCatalogSort = dataHydrationModule.MarketplaceCatalogSort.getMarketplaceCatalogSortStore(false).getMarketplaceCatalogSort(p5)
-	local var1 = if marketplaceCatalogSort and marketplaceCatalogSort.data then marketplaceCatalogSort.data(false) else nil
+return function(Callback, p1, Callback1, p2, p3, p4) --[[ Line: 31 | Named "hydrateCatalogSortById" ]]
+	-- upvalues: DataHydrationModule (copy), PromiseModule (copy), CollectDedupedHydrationContentModule (copy), BuildHydrationReduxPayloadModule (copy), Logging (copy)
+	local MarketplaceCatalogSort = DataHydrationModule.MarketplaceCatalogSort.getMarketplaceCatalogSortStore(false).getMarketplaceCatalogSort(p3)
+	local DataResult = if MarketplaceCatalogSort and MarketplaceCatalogSort.data then MarketplaceCatalogSort.data(false) else nil
 	
-	if not var1 or not var1.content then
-		return promiseModule.resolve()
+	if not DataResult or not DataResult.content then
+		return PromiseModule.resolve()
 	end
-	local t_1
 	local t = {}
-	collectDedupedHydrationContentModule(var1.content, t, {}, nil)
-	local _ = nil
+	CollectDedupedHydrationContentModule(DataResult.content, t, {}, nil)
+	local List = nil
 	
-	if p6 then
-		t_1 = {}
+	if p4 then
+		List = {}
 		
-		for i, v in t do
-			local type = p6[tostring(v.type)]
+		for _, value in t do
+			local v1 = p4[tostring(value.type)]
 			
-			if not type or not type[tostring(v.id)] then
-				table.insert(t_1, v)
+			if not v1 or not v1[tostring(value.id)] then
+				table.insert(List, value)
 			end
 		end
 	else
-		t_1 = t
+		List = t
 	end
-	return if #t_1 == 0 then promiseModule.resolve() else p4.HydrateWidgetContent(p2, t_1):andThen(function(p7)
-		-- upvalues: buildHydrationReduxPayloadModule (copy), t_1 (write), p1 (ref), p3 (ref)
-		local var2 = if p7 then p7.responseBody else nil
-		local var3 = if var2 then var2.hydratedContent else nil
+	return if #List == 0 then PromiseModule.resolve() else p2.HydrateWidgetContent(p1, List):andThen(function(Result) --[[ Line: 76 ]]
+		-- upvalues: BuildHydrationReduxPayloadModule (upval), List (ref), Callback (copy), Callback1 (copy)
+		local ResponseBody = if Result then Result.responseBody else nil
+		local HydratedContent = if ResponseBody then ResponseBody.hydratedContent else nil
 		
-		if var3 == nil then
+		if HydratedContent ~= nil then
+			Callback(Callback1((BuildHydrationReduxPayloadModule(HydratedContent, List))))
+			
 			return
 		end
-		p1(p3(buildHydrationReduxPayloadModule(var3, t_1)))
-	end):catch(function(p7)
-		-- upvalues: logging (copy), p5 (ref)
-		logging.warn("hydrateCatalogSortById: HydrateWidgetContent failed for sort " .. p4 .. ": " .. tostring(p7))
+	end):catch(function(Err) --[[ Line: 86 ]]
+		-- upvalues: Logging (upval), p3 (copy)
+		Logging.warn("hydrateCatalogSortById: HydrateWidgetContent failed for sort " .. p3 .. ": " .. tostring(Err))
 	end)
 end

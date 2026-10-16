@@ -1,20 +1,20 @@
-﻿local userGameSettingsService = UserSettings():GetService("UserGameSettings")
-local parent = script:FindFirstAncestor("AvatarExperienceUIKit").Parent
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local fFlagAXVirtualizedFeedVerticalPadding = require(parent.SharedFlags).FFlagAXVirtualizedFeedVerticalPadding
-local fFlagAXSduiFeedBackToTopAndNavClearance = require(parent.AvatarExperienceFlags).FFlagAXSduiFeedBackToTopAndNavClearance
-local foundationModule = require(parent.Foundation)
-local button = foundationModule.Button
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local view = foundationModule.View
-local loading = foundationModule.Loading
-local iconSize = foundationModule.Enums.IconSize
-local flatList = require(parent.VirtualizedList).FlatList
-local isFeedContentScrollableModule = require(script.Parent.isFeedContentScrollable)
-local fFlagVirtualizedFeedFooterWrapperProp = require(parent.SharedFlags).FFlagVirtualizedFeedFooterWrapperProp
-local t = { BackgroundTransparency = 1, BorderSizePixel = 0 }
-local t_1 = {
+﻿local UserGameSettings = UserSettings():GetService("UserGameSettings")
+local Parent = script:FindFirstAncestor("AvatarExperienceUIKit").Parent
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local FFlagAXVirtualizedFeedVerticalPadding = require(Parent.SharedFlags).FFlagAXVirtualizedFeedVerticalPadding
+local FFlagAXSduiFeedBackToTopAndNavClearance = require(Parent.AvatarExperienceFlags).FFlagAXSduiFeedBackToTopAndNavClearance
+local FoundationModule = require(Parent.Foundation)
+local Button = FoundationModule.Button
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local View = FoundationModule.View
+local Loading = FoundationModule.Loading
+local IconSize = FoundationModule.Enums.IconSize
+local FlatList = require(Parent.VirtualizedList).FlatList
+local IsFeedContentScrollableModule = require(script.Parent.isFeedContentScrollable)
+local FFlagVirtualizedFeedFooterWrapperProp = require(Parent.SharedFlags).FFlagVirtualizedFeedFooterWrapperProp
+local ContentContainerStyle = { BackgroundTransparency = 1, BorderSizePixel = 0 }
+local Style = {
 	Selectable = false,
 	BackgroundTransparency = 1,
 	ScrollBarThickness = 0,
@@ -23,226 +23,244 @@ local t_1 = {
 	ElasticBehavior = Enum.ElasticBehavior.Always,
 	AutomaticCanvasSize = Enum.AutomaticSize.Y
 }
-local t_2 = { backToTop = "Feature.GamePage.Action.BackToTop" }
+local config = { backToTop = "Feature.GamePage.Action.BackToTop" }
 
-local function _(p1)
+local function _(p1) --[[ Line: 51 | Named "getNativeScrollingFrameRef" ]]
 	if p1.current ~= nil then
-		local nativeScrollRef = p1.current:getNativeScrollRef()
+		local NativeScrollRef = p1.current:getNativeScrollRef()
 		
-		return if nativeScrollRef == nil then nil else nativeScrollRef._nativeRef
+		if NativeScrollRef ~= nil then
+			return NativeScrollRef._nativeRef
+		end
 	end
+	return nil
 end
 
-local function VirtualizedFeedBackToTopButton(p1)
-	-- upvalues: useLocalization (ref), t_2 (ref), reactModule (ref), button (ref), buttonVariant (ref)
-	return reactModule.createElement(button, {
-		text = p1.text or useLocalization(t_2).backToTop,
-		variant = buttonVariant.Link,
+local function VirtualizedFeedBackToTopButton(p1) --[[ Line: 66 ]]
+	-- upvalues: UseLocalizationFunction (copy), config (copy), ReactModule (copy), Button (copy), ButtonVariant (copy)
+	local UseLocalizationResult = UseLocalizationFunction(config)
+	
+	return ReactModule.createElement(Button, {
+		text = p1.text or UseLocalizationResult.backToTop,
+		variant = ButtonVariant.Link,
 		onActivated = p1.onActivated
 	})
 end
 
-local var1 = if fFlagAXSduiFeedBackToTopAndNavClearance then "row align-x-center align-y-center size-full-0 auto-y padding-xlarge" else "row align-y-center align-x-center padding-xlarge"
+local RowAlignXCenterAlignYCenterSizeFull0AutoYPaddingXlarge: string = if FFlagAXSduiFeedBackToTopAndNavClearance then "row align-x-center align-y-center size-full-0 auto-y padding-xlarge" else "row align-y-center align-x-center padding-xlarge"
 
-local function VirtualizedFeedFooterLayout(p1)
-	-- upvalues: reactModule (ref), view (ref), var1 (ref)
-	return reactModule.createElement(view, { tag = var1 }, p1.children)
+local function VirtualizedFeedFooterLayout(p1) --[[ Line: 84 ]]
+	-- upvalues: ReactModule (copy), View (copy), RowAlignXCenterAlignYCenterSizeFull0AutoYPaddingXlarge (copy)
+	return ReactModule.createElement(View, {
+		tag = RowAlignXCenterAlignYCenterSizeFull0AutoYPaddingXlarge
+	}, p1.children)
 end
 
-local _ = function(p1)
-	-- upvalues: reactModule (ref), VirtualizedFeedFooterLayout (ref)
-	return if p1.shouldWrap then reactModule.createElement(VirtualizedFeedFooterLayout, {}, p1.footerContent) else p1.footerContent
+local _ = function(p1) --[[ Line: 137 | Named "createFooterComponent" ]]
+	-- upvalues: ReactModule (copy), VirtualizedFeedFooterLayout (copy)
+	return if p1.shouldWrap then ReactModule.createElement(VirtualizedFeedFooterLayout, {}, p1.footerContent) else p1.footerContent
 end
 
-return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: fFlagAXVirtualizedFeedVerticalPadding (ref), fFlagVirtualizedFeedFooterWrapperProp (ref), reactModule (ref), fFlagAXSduiFeedBackToTopAndNavClearance (ref), userGameSettingsService (ref), isFeedContentScrollableModule (ref), VirtualizedFeedBackToTopButton (ref), loading (ref), iconSize (ref), view (ref), VirtualizedFeedFooterLayout (ref), flatList (ref), t (ref), t_1 (ref)
-	local var2
-	local horizontalPadding = p1.horizontalPadding or 0
-	local var3 = if fFlagAXVirtualizedFeedVerticalPadding then p1.verticalPadding or 0 else 0
-	
-	if fFlagVirtualizedFeedFooterWrapperProp then
-		var2 = p1.shouldWrapFooter ~= false
-		var2 = nil
-	else
-		var2 = true
-	end
-	local var4 = reactModule.useRef(nil)
-	local var5 = reactModule.useCallback(function(p3)
-		-- upvalues: var4 (ref), p1 (ref)
-		var4.current = p3
-		local flatListRef = p1.flatListRef
+return ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 146 | Named "VirtualizedFeed" ]]
+	-- upvalues: FFlagAXVirtualizedFeedVerticalPadding (copy), FFlagVirtualizedFeedFooterWrapperProp (copy), ReactModule (copy), FFlagAXSduiFeedBackToTopAndNavClearance (copy), UserGameSettings (copy), IsFeedContentScrollableModule (copy), VirtualizedFeedBackToTopButton (copy), Loading (copy), IconSize (copy), View (copy), VirtualizedFeedFooterLayout (copy), FlatList (copy), ContentContainerStyle (copy), Style (copy)
+	local HorizontalPadding = Frame.horizontalPadding or 0
+	local VerticalPadding = FFlagAXVirtualizedFeedVerticalPadding and Frame.verticalPadding or 0
+	local NoFFlagVirtualizedFeedFooterWrapperProp: boolean = not FFlagVirtualizedFeedFooterWrapperProp or Frame.shouldWrapFooter ~= false
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseResult = ReactModule.useCallback(function(Current) --[[ Line: 152 ]]
+		-- upvalues: UseRefResult (copy), Frame (copy)
+		UseRefResult.current = Current
+		local FlatListRefFunction: (any) -> () = Frame.flatListRef
 		
-		if flatListRef then
-			if typeof(flatListRef) == "function" then
-				flatListRef(p3)
+		if FlatListRefFunction then
+			if typeof(FlatListRefFunction) == "function" then
+				FlatListRefFunction(Current)
 				
 				return
-			elseif typeof(flatListRef) == "table" then
-				flatListRef.current = p3
+			end
+			if typeof(FlatListRefFunction) == "table" then
+				FlatListRefFunction.current = Current
 			end
 		end
-	end, { p1.flatListRef })
-	local var6, var7 = reactModule.useState(false)
-	local var8 = nil
-	local _ = nil
-	local var9 = nil
-	local var10 = nil
-	local var11 = nil
+	end, { Frame.flatListRef })
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local v1 = nil
+	local UseStateResult2_1 = nil
+	local v2 = nil
+	local Callback = nil
+	local UseResult1 = nil
 	
-	if fFlagAXSduiFeedBackToTopAndNavClearance then
-		local var12, var13 = reactModule.useState(0)
-		var8 = var12
-		local var14 = var13
-		local var15, var16 = reactModule.useState(0)
-		var9 = var15
-		var10 = var16
-		var11 = reactModule.useCallback(function(_, p3)
-			-- upvalues: var14 (write)
-			var14(p3)
+	if FFlagAXSduiFeedBackToTopAndNavClearance then
+		v1, UseStateResult2_1 = ReactModule.useState(0)
+		v2, Callback = ReactModule.useState(0)
+		UseResult1 = ReactModule.useCallback(function(_, p1) --[[ Line: 182 ]]
+			-- upvalues: UseStateResult2_1 (ref)
+			UseStateResult2_1(p1)
 		end, {})
 	end
-	local var17 = reactModule.useCallback(function()
-		-- upvalues: var4 (ref), userGameSettingsService (copy)
-		if var4.current then
-			var4.current:scrollToOffset({
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 187 ]]
+		-- upvalues: UseRefResult (copy), UserGameSettings (upval)
+		if UseRefResult.current then
+			UseRefResult.current:scrollToOffset({
 				offset = 0,
-				animated = if userGameSettingsService.ReducedMotion then false else true
+				animated = not UserGameSettings.ReducedMotion
 			})
 		end
 	end, {})
-	
-	if not fFlagAXSduiFeedBackToTopAndNavClearance then
-		local var18
-		if var4.current ~= nil then
-			local nativeScrollRef = var4.current:getNativeScrollRef()
-			var18 = if nativeScrollRef == nil then nil else nativeScrollRef._nativeRef
-		end
-		reactModule.useEffect(function()
-			-- upvalues: var18 (ref), var7 (ref)
-			local t = {}
+	local NativeRef = nil
+	repeat
+		if FFlagAXSduiFeedBackToTopAndNavClearance then break end
+		repeat
+			if UseRefResult.current ~= nil then
+				local NativeScrollRef = UseRefResult.current:getNativeScrollRef()
+				
+				if NativeScrollRef ~= nil then
+					NativeRef = NativeScrollRef._nativeRef
+					break
+				end
+			end
+			NativeRef = nil
+		until true
+		ReactModule.useEffect(function() --[[ Line: 199 ]]
+			-- upvalues: NativeRef (copy), UseStateResult2 (copy)
+			local List = {}
 			
-			local function sizeChangeHandler()
-				-- upvalues: var18 (copy), var7 (copy)
-				if var18 == nil or var18.current == nil then
+			local function sizeChangeHandler() --[[ Line: 202 ]]
+				-- upvalues: NativeRef (upval), UseStateResult2 (upval)
+				if NativeRef ~= nil and NativeRef.current ~= nil then
+					local Current = NativeRef.current
+					UseStateResult2(Current.AbsoluteWindowSize.Y < Current.AbsoluteCanvasSize.Y)
+					
 					return
 				end
-				local current = var18.current
-				var7(current.AbsoluteWindowSize.Y < current.AbsoluteCanvasSize.Y)
 			end
 			
-			if var18 and var18.current then
-				table.insert(t, var18.current:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(sizeChangeHandler))
-				table.insert(t, var18.current:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(sizeChangeHandler))
+			if NativeRef and NativeRef.current then
+				table.insert(List, NativeRef.current:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(sizeChangeHandler))
+				table.insert(List, NativeRef.current:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(sizeChangeHandler))
 				
-				if var18 ~= nil and var18.current ~= nil then
-					local current = var18.current
-					var7(current.AbsoluteWindowSize.Y < current.AbsoluteCanvasSize.Y)
+				if NativeRef ~= nil and NativeRef.current ~= nil then
+					local Current = NativeRef.current
+					UseStateResult2(Current.AbsoluteWindowSize.Y < Current.AbsoluteCanvasSize.Y)
 				end
 			end
-			return function()
-				-- upvalues: t (ref)
-				for i, v in t do
-					v:Disconnect()
+			return function() --[[ Line: 220 ]]
+				-- upvalues: List (copy)
+				for _, Connection in List do
+					Connection:Disconnect()
 				end
 			end
-		end, { var18 })
-	end
-	local var19 = nil
+		end, { NativeRef })
+	until true
+	local Element = nil
 	
-	if fFlagAXSduiFeedBackToTopAndNavClearance then
-		local var20 = if p1.ListFooterComponent then p1.ListFooterComponent elseif isFeedContentScrollableModule(var8 or 0, var9 or 0, var3) and p1.isEndOfList == true then reactModule.createElement(VirtualizedFeedBackToTopButton, { text = p1.scrollToTopLabel, onActivated = var17 }) elseif p1.isLoading then reactModule.createElement(loading, { size = iconSize.Medium }) else nil
-		local endOfListBottomPadding = p1.endOfListBottomPadding or 0
-		local var21 = reactModule.useMemo(function()
-			-- upvalues: endOfListBottomPadding (ref)
-			return if endOfListBottomPadding <= 0 then nil else { bottom = UDim.new(0, endOfListBottomPadding) }
-		end, { endOfListBottomPadding })
+	if FFlagAXSduiFeedBackToTopAndNavClearance then
+		local IsIsEndOfList: boolean = IsFeedContentScrollableModule(v1 or 0, v2 or 0, VerticalPadding) and Frame.isEndOfList == true
+		local ListFooterComponent = if Frame.ListFooterComponent then Frame.ListFooterComponent elseif IsIsEndOfList then ReactModule.createElement(VirtualizedFeedBackToTopButton, { text = Frame.scrollToTopLabel, onActivated = UseResult2 }) elseif Frame.isLoading then ReactModule.createElement(Loading, { size = IconSize.Medium }) else nil
+		local EndOfListBottomPadding = Frame.endOfListBottomPadding or 0
+		local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 248 ]]
+			-- upvalues: EndOfListBottomPadding (copy)
+			return if EndOfListBottomPadding <= 0 then nil else { bottom = UDim.new(0, EndOfListBottomPadding) }
+		end, { EndOfListBottomPadding })
 		
-		if var21 then
-			local var22
-			local createElement = reactModule.createElement
-			local var23 = view
-			local t_2 = { tag = "size-full-0 auto-y", padding = var21 }
-			local t_3 = {}
+		if UseMemoResult then
+			local CreateElementFunction = ReactModule.createElement
+			local config = { tag = "size-full-0 auto-y", padding = UseMemoResult }
+			local t = {}
+			local Element1 = nil
 			
-			if not var20 then
-				var22 = nil
-			elseif fFlagVirtualizedFeedFooterWrapperProp then
-				local t_4 = { footerContent = var20, shouldWrap = var2 }
-				var22 = if t_4.shouldWrap then reactModule.createElement(VirtualizedFeedFooterLayout, {}, t_4.footerContent) else t_4.footerContent
+			if ListFooterComponent then
+				if FFlagVirtualizedFeedFooterWrapperProp then
+					local config1 = {
+						footerContent = ListFooterComponent,
+						shouldWrap = NoFFlagVirtualizedFeedFooterWrapperProp
+					}
+					Element1 = if config1.shouldWrap then ReactModule.createElement(VirtualizedFeedFooterLayout, {}, config1.footerContent) else config1.footerContent
+				else
+					Element1 = ReactModule.createElement(VirtualizedFeedFooterLayout, {}, ListFooterComponent)
+				end
 			else
-				var22 = reactModule.createElement(VirtualizedFeedFooterLayout, {}, var20)
+				Element1 = nil
 			end
-			t_3.FooterContent = var22
-			var19 = createElement(var23, t_2, t_3)
-		elseif var20 then
-			if fFlagVirtualizedFeedFooterWrapperProp then
-				local t_2 = { footerContent = var20, shouldWrap = var2 }
-				var19 = if t_2.shouldWrap then reactModule.createElement(VirtualizedFeedFooterLayout, {}, t_2.footerContent) else t_2.footerContent
+			t.FooterContent = Element1
+			Element = CreateElementFunction(View, config, t)
+		elseif ListFooterComponent then
+			if FFlagVirtualizedFeedFooterWrapperProp then
+				local config = {
+					footerContent = ListFooterComponent,
+					shouldWrap = NoFFlagVirtualizedFeedFooterWrapperProp
+				}
+				Element = if config.shouldWrap then ReactModule.createElement(VirtualizedFeedFooterLayout, {}, config.footerContent) else config.footerContent
 			else
-				var19 = reactModule.createElement(VirtualizedFeedFooterLayout, {}, var20)
+				Element = ReactModule.createElement(VirtualizedFeedFooterLayout, {}, ListFooterComponent)
 			end
 		end
 	else
-		local var24 = if p1.ListFooterComponent then p1.ListFooterComponent elseif p1.isEndOfList and var6 then reactModule.createElement(VirtualizedFeedBackToTopButton, { text = p1.scrollToTopLabel, onActivated = var17 }) elseif p1.isLoading then reactModule.createElement(loading, { size = iconSize.Medium }) else nil
+		local ListFooterComponent1 = if Frame.ListFooterComponent then Frame.ListFooterComponent elseif Frame.isEndOfList and UseStateResult then ReactModule.createElement(VirtualizedFeedBackToTopButton, { text = Frame.scrollToTopLabel, onActivated = UseResult2 }) elseif Frame.isLoading then ReactModule.createElement(Loading, { size = IconSize.Medium }) else nil
 		
-		if not var24 then
-			var19 = nil
-		elseif fFlagVirtualizedFeedFooterWrapperProp then
-			local t_2 = { footerContent = var24, shouldWrap = var2 }
-			var19 = if t_2.shouldWrap then reactModule.createElement(VirtualizedFeedFooterLayout, {}, t_2.footerContent) else t_2.footerContent
+		if ListFooterComponent1 then
+			if FFlagVirtualizedFeedFooterWrapperProp then
+				local config = {
+					footerContent = ListFooterComponent1,
+					shouldWrap = NoFFlagVirtualizedFeedFooterWrapperProp
+				}
+				Element = if config.shouldWrap then ReactModule.createElement(VirtualizedFeedFooterLayout, {}, config.footerContent) else config.footerContent
+			else
+				Element = ReactModule.createElement(VirtualizedFeedFooterLayout, {}, ListFooterComponent1)
+			end
 		else
-			var19 = reactModule.createElement(VirtualizedFeedFooterLayout, {}, var24)
+			Element = nil
 		end
 	end
-	return reactModule.createElement("Frame", {
-		BackgroundColor3 = p1.backgroundColor,
-		BackgroundTransparency = if p1.backgroundTransparency ~= nil then if p1.backgroundColor then 0 else 1 else p1.backgroundTransparency,
+	return ReactModule.createElement("Frame", {
+		BackgroundColor3 = Frame.backgroundColor,
+		BackgroundTransparency = if Frame.backgroundTransparency == nil then if Frame.backgroundColor then 0 else 1 else Frame.backgroundTransparency,
 		BorderSizePixel = 0,
-		Size = p1.Size or UDim2.new(1, 0, 1, 0),
-		ClipsDescendants = p1.clipsDescendants ~= nil or p1.clipsDescendants,
-		LayoutOrder = p1.LayoutOrder,
-		[reactModule.Change.AbsoluteSize] = reactModule.useCallback(function(p3)
-			-- upvalues: p1 (ref), fFlagAXSduiFeedBackToTopAndNavClearance (copy), var10 (write)
-			if p1.onContainerWidthChanged then
-				p1.onContainerWidthChanged(p3.AbsoluteSize.X)
+		Size = Frame.Size or UDim2.new(1, 0, 1, 0),
+		ClipsDescendants = Frame.clipsDescendants == nil or Frame.clipsDescendants,
+		LayoutOrder = Frame.LayoutOrder,
+		[ReactModule.Change.AbsoluteSize] = ReactModule.useCallback(function(Frame1: Frame) --[[ Line: 312 ]]
+			-- upvalues: Frame (copy), FFlagAXSduiFeedBackToTopAndNavClearance (upval), Callback (ref)
+			if Frame.onContainerWidthChanged then
+				Frame.onContainerWidthChanged(Frame1.AbsoluteSize.X)
 			end
-			if fFlagAXSduiFeedBackToTopAndNavClearance and var10 then
-				var10(p3.AbsoluteSize.Y)
+			if FFlagAXSduiFeedBackToTopAndNavClearance and Callback then
+				Callback(Frame1.AbsoluteSize.Y)
 			end
-		end, { p1.onContainerWidthChanged }),
-		ref = p2
+		end, { Frame.onContainerWidthChanged }),
+		ref = Ref
 	}, {
-		UIPadding = if horizontalPadding > 0 or var3 > 0 then reactModule.createElement("UIPadding", {
-			PaddingLeft = UDim.new(0, horizontalPadding),
-			PaddingRight = UDim.new(0, horizontalPadding),
-			PaddingTop = UDim.new(0, var3),
-			PaddingBottom = UDim.new(0, var3)
+		UIPadding = if HorizontalPadding > 0 or VerticalPadding > 0 then ReactModule.createElement("UIPadding", {
+			PaddingLeft = UDim.new(0, HorizontalPadding),
+			PaddingRight = UDim.new(0, HorizontalPadding),
+			PaddingTop = UDim.new(0, VerticalPadding),
+			PaddingBottom = UDim.new(0, VerticalPadding)
 		}) else nil,
-		FeedFlatList = reactModule.createElement(flatList, {
+		FeedFlatList = ReactModule.createElement(FlatList, {
 			UNSTABLE_forceSiblingLayoutUpdate = true,
 			showDefaultLoadingIndicators = true,
-			data = p1.data,
-			renderItem = p1.renderItem,
-			windowSize = p1.windowSize or 21,
-			initialNumToRender = p1.initialNumToRender or 8,
-			maxToRenderPerBatch = p1.maxToRenderPerBatch or 1,
-			updateCellsBatchingPeriod = p1.updateCellsBatchingPeriod or 30,
-			scrollEventThrottle = p1.scrollEventThrottle or 0,
-			ref = var5,
-			contentContainerStyle = t,
-			style = t_1,
-			onScroll = reactModule.useCallback(function(p3)
-				-- upvalues: p1 (ref)
-				if p1.onScroll then
-					p1.onScroll(p3.CanvasPosition.Y)
+			data = Frame.data,
+			renderItem = Frame.renderItem,
+			windowSize = Frame.windowSize or 21,
+			initialNumToRender = Frame.initialNumToRender or 8,
+			maxToRenderPerBatch = Frame.maxToRenderPerBatch or 1,
+			updateCellsBatchingPeriod = Frame.updateCellsBatchingPeriod or 30,
+			scrollEventThrottle = Frame.scrollEventThrottle or 0,
+			ref = UseResult,
+			contentContainerStyle = ContentContainerStyle,
+			style = Style,
+			onScroll = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 306 ]]
+				-- upvalues: Frame (copy)
+				if Frame.onScroll then
+					Frame.onScroll(ScrollFrame.CanvasPosition.Y)
 				end
-			end, { p1.onScroll }),
-			onContentSizeChange = if fFlagAXSduiFeedBackToTopAndNavClearance then var11 else nil,
-			onEndReachedThreshold = p1.onEndReachedThreshold,
-			onEndReached = p1.onEndReached,
-			ListHeaderComponent = p1.ListHeaderComponent,
-			ListFooterComponent = var19,
-			scrollEnabled = p1.scrollEnabled
+			end, { Frame.onScroll }),
+			onContentSizeChange = if FFlagAXSduiFeedBackToTopAndNavClearance then UseResult1 else nil,
+			onEndReachedThreshold = Frame.onEndReachedThreshold,
+			onEndReached = Frame.onEndReached,
+			ListHeaderComponent = Frame.ListHeaderComponent,
+			ListFooterComponent = Element,
+			scrollEnabled = Frame.scrollEnabled
 		})
 	})
 end)

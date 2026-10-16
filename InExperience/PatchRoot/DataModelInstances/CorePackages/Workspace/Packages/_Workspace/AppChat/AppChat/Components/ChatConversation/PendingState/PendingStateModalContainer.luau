@@ -1,173 +1,184 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local _ = require(appChat.types)
-local appChatNetworkingModule = require(parent.AppChatNetworking)
-local cryoModule = require(parent.Cryo)
-local luaAppNavigationContextModule = require(appChat.LuaAppNavigationContext)
-local reactModule = require(parent.React)
-local getDeepValue2Module = require(appChat.Utils.getDeepValue2)
-local memo = reactModule.memo
-local useCallback = reactModule.useCallback
-local useContext = reactModule.useContext
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local useEffect = reactModule.useEffect
-local useEffectOnMount = require(parent.RoactUtils).Hooks.useEffectOnMount
-local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
-local useNavigation = require(parent.Navigation).useNavigation
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local useAnalyticsModule = require(appChat.Analytics.useAnalytics)
-local accessResponseEnum = require(parent.AmpUpsell).AmpEnums.AccessResponseEnum
-local appPage = require(parent.RobloxAppEnums).AppPage
-local navigateBack = require(parent.NavigationRodux).Thunks.NavigateBack
-local navigateDown = require(parent.NavigationRodux).Thunks.NavigateDown
-local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
-local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
-local refreshAllUnfilteredThreadsDetailsModule = require(appChat.Conversations.Thunks.refreshAllUnfilteredThreadsDetails)
-local unfilteredThreadsAMPFeatureNameModule = require(appChat.Components.UnfilteredThreadsAMPFeatureName)
-local conversationModalModule = require(script.Parent.Parent.ConversationModal.ConversationModal)
-local t = {
-	showNetworkErrorToast = function() end,
-	onHeightChanged = function() end
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local _ = require(AppChat.types)
+local AppChatNetworkingModule = require(Parent.AppChatNetworking)
+local CryoModule = require(Parent.Cryo)
+local LuaAppNavigationContextModule = require(AppChat.LuaAppNavigationContext)
+local ReactModule = require(Parent.React)
+local GetDeepValue2Module = require(AppChat.Utils.getDeepValue2)
+local MemoFunction = ReactModule.memo
+local UseCallbackFunction = ReactModule.useCallback
+local UseContextFunction = ReactModule.useContext
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseEffectFunction = ReactModule.useEffect
+local UseEffectOnMountFunction = require(Parent.RoactUtils).Hooks.useEffectOnMount
+local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local UseAnalyticsModule = require(AppChat.Analytics.useAnalytics)
+local AccessResponseEnum = require(Parent.AmpUpsell).AmpEnums.AccessResponseEnum
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local NavigateBackFunction = require(Parent.NavigationRodux).Thunks.NavigateBack
+local NavigateDownFunction = require(Parent.NavigationRodux).Thunks.NavigateDown
+local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
+local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
+local RefreshAllUnfilteredThreadsDetailsModule = require(AppChat.Conversations.Thunks.refreshAllUnfilteredThreadsDetails)
+local UnfilteredThreadsAMPFeatureNameModule = require(AppChat.Components.UnfilteredThreadsAMPFeatureName)
+local ConversationModalModule = require(script.Parent.Parent.ConversationModal.ConversationModal)
+local config = {
+	showNetworkErrorToast = function() --[[ Line: 46 ]] end,
+	onHeightChanged = function() --[[ Line: 47 ]] end
 }
-local t_1 = {
+local config1 = {
 	pending_state_phone_verify = true,
 	pending_state_ineligible = true
 }
-local t_2 = {
+local config2 = {
 	pending_state_phone_verify = "ConversationPvUpsell",
 	pending_state_ineligible = "ConversationIneligibleModal"
 }
 
-function PendingStateModalContainer(p1)
-	-- upvalues: cryoModule (ref), t (ref), useLocalUserId (ref), useAnalyticsModule (ref), useContext (ref), luaAppNavigationContextModule (ref), useNavigation (ref), useDispatch (ref), useSelector (ref), getDeepValue2Module (ref), t_2 (ref), t_1 (ref), useEffectOnMount (ref), useEffect (ref), appChatNetworkingModule (ref), useCallback (ref), appPage (ref), unfilteredThreadsAMPFeatureNameModule (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateBack (ref), accessResponseEnum (ref), refreshAllUnfilteredThreadsDetailsModule (ref), navigateDown (ref), reactModule (ref), conversationModalModule (ref)
-	local var2 = cryoModule.Dictionary.union(t, p1)
-	local var3 = useLocalUserId()
-	local var4 = useAnalyticsModule()
-	local var5 = useContext(luaAppNavigationContextModule)
-	local var6 = useNavigation()
-	local var7 = useDispatch()
-	local var8 = useSelector(function(p2)
-		-- upvalues: getDeepValue2Module (copy), var2 (ref)
-		return getDeepValue2Module(p2, `ChatAppReducer.Modals.pendingStateModals.{var2.conversationId}`)
+function PendingStateModalContainer(p1) --[[ Line: 61 ]]
+	-- upvalues: CryoModule (copy), config (copy), UseLocalUserIdFunction (copy), UseAnalyticsModule (copy), UseContextFunction (copy), LuaAppNavigationContextModule (copy), UseNavigationFunction (copy), UseDispatchFunction (copy), UseSelectorFunction (copy), GetDeepValue2Module (copy), config2 (copy), config1 (copy), UseEffectOnMountFunction (copy), UseEffectFunction (copy), AppChatNetworkingModule (copy), UseCallbackFunction (copy), AppPage (copy), UnfilteredThreadsAMPFeatureNameModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateBackFunction (copy), AccessResponseEnum (copy), RefreshAllUnfilteredThreadsDetailsModule (copy), NavigateDownFunction (copy), ReactModule (copy), ConversationModalModule (copy)
+	local UnionResult = CryoModule.Dictionary.union(config, p1)
+	local UseLocalUserIdResult = UseLocalUserIdFunction()
+	local UseAnalyticsModuleResult = UseAnalyticsModule()
+	local UseContextResult = UseContextFunction(LuaAppNavigationContextModule)
+	local UseNavigationResult = UseNavigationFunction()
+	local UseDispatchResult = UseDispatchFunction()
+	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 70 ]]
+		-- upvalues: GetDeepValue2Module (upval), UnionResult (copy)
+		return GetDeepValue2Module(p2, `ChatAppReducer.Modals.pendingStateModals.{UnionResult.conversationId}`)
 	end) or {}
-	local modalVariant = var8.modal_variant
-	local var9 = getDeepValue2Module(var8, "modal_layout.id")
-	local var10 = getDeepValue2Module(var8, "modal_layout.seen_record_action")
-	local var11 = t_2[modalVariant]
-	local var12 = t_1[modalVariant]
-	local var13 = getDeepValue2Module(var8, "modal_layout.buttons")
-	local var14 = var13 and var13[1]
-	local var15 = var13 and var13[2]
-	useEffectOnMount(function()
-		-- upvalues: var4 (ref), var12 (ref), var11 (ref), var2 (ref)
-		if var4 and var12 and var11 then
-			var4.fireAnalyticsEvent(`{var11}Rendered`, { conversationId = var2.conversationId })
+	local ModalVariant = UseSelectorResult.modal_variant
+	local ModalLayoutId = GetDeepValue2Module(UseSelectorResult, "modal_layout.id")
+	local ModalLayoutSeenRecordAction = GetDeepValue2Module(UseSelectorResult, "modal_layout.seen_record_action")
+	local Entry = config2[ModalVariant]
+	local Entry1 = config1[ModalVariant]
+	local ModalLayoutButtons = GetDeepValue2Module(UseSelectorResult, "modal_layout.buttons")
+	local ModalLayoutButton = ModalLayoutButtons and ModalLayoutButtons[1]
+	local ModalLayoutButton1 = ModalLayoutButtons and ModalLayoutButtons[2]
+	UseEffectOnMountFunction(function() --[[ Line: 83 ]]
+		-- upvalues: UseAnalyticsModuleResult (copy), Entry1 (copy), Entry (copy), UnionResult (copy)
+		if UseAnalyticsModuleResult and Entry1 and Entry then
+			UseAnalyticsModuleResult.fireAnalyticsEvent(`{Entry}Rendered`, { conversationId = UnionResult.conversationId })
 		end
 	end)
-	useEffect(function()
-		-- upvalues: var12 (ref), var7 (ref), appChatNetworkingModule (copy), var10 (ref), var9 (ref)
-		if var12 then
-			var7(appChatNetworkingModule.rodux.RecordModalSequenceResponse.API(var10, "pending_state_modal", var9)):catch(function(p2)
-				warn("Error in PendingStateModalContainer -> RecordModalSequenceResponse seen: " .. tostring(p2))
+	UseEffectFunction(function() --[[ Line: 92 ]]
+		-- upvalues: Entry1 (copy), UseDispatchResult (copy), AppChatNetworkingModule (upval), ModalLayoutSeenRecordAction (copy), ModalLayoutId (copy)
+		if Entry1 then
+			UseDispatchResult(AppChatNetworkingModule.rodux.RecordModalSequenceResponse.API(ModalLayoutSeenRecordAction, "pending_state_modal", ModalLayoutId)):catch(function(Err) --[[ Line: 100 ]]
+				warn("Error in PendingStateModalContainer -> RecordModalSequenceResponse seen: " .. tostring(Err))
 			end)
 		end
 	end, {
-		var7,
-		var12,
-		var10,
-		var9,
-		var2.conversationId
+		UseDispatchResult,
+		Entry1,
+		ModalLayoutSeenRecordAction,
+		ModalLayoutId,
+		UnionResult.conversationId
 	})
-	local var16 = useCallback(function(p2, p3)
-		-- upvalues: var7 (ref), appChatNetworkingModule (copy)
-		return var7(appChatNetworkingModule.rodux.RemoveUserFromConversation.API(p3, p2))
-	end, { var7 })
-	local var17 = useCallback(function()
-		-- upvalues: var4 (ref), var11 (ref), var2 (ref), var16 (ref), var3 (ref)
-		if var4 and var11 then
-			var4.fireAnalyticsEvent(`{var11}LeftGroup`, { conversationId = var2.conversationId })
+	local UseCallbackResult = UseCallbackFunction(function(p2, p3) --[[ Line: 114 ]]
+		-- upvalues: UseDispatchResult (copy), AppChatNetworkingModule (upval)
+		return UseDispatchResult(AppChatNetworkingModule.rodux.RemoveUserFromConversation.API(p3, p2))
+	end, { UseDispatchResult })
+	local UseCallbackResult1 = UseCallbackFunction(function() --[[ Line: 118 ]]
+		-- upvalues: UseAnalyticsModuleResult (copy), Entry (copy), UnionResult (copy), UseNavigationResult (copy), UseContextResult (copy)
+		if UseAnalyticsModuleResult and Entry then
+			UseAnalyticsModuleResult.fireAnalyticsEvent(`{Entry}LearnMoreClicked`, { conversationId = UnionResult.conversationId })
 		end
-		if var2.conversationId then
-			var16(var3, var2.conversationId):catch(function()
-				-- upvalues: var2 (copy)
-				var2.showNetworkErrorToast()
-			end)
-		end
-	end, {
-		var3, var2.conversationId, var11, var4, var16, var2.showNetworkErrorToast
-	})
-	local var18 = ({
-		pending_state_phone_verify = useCallback(function()
-			-- upvalues: var4 (ref), var11 (ref), var2 (ref), appPage (copy), unfilteredThreadsAMPFeatureNameModule (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var7 (ref), navigateBack (copy), accessResponseEnum (copy), refreshAllUnfilteredThreadsDetailsModule (copy), navigateDown (copy)
-			if var4 and var11 then
-				var4.fireAnalyticsEvent(`{var11}ContinueClicked`, { conversationId = var2.conversationId })
-			end
-			local t = {
-				name = appPage.AmpWizardContainer,
-				extraProps = {
-					featureName = unfilteredThreadsAMPFeatureNameModule,
-					completionCallback = function(p2, _)
-						-- upvalues: fFlagSignalsNavP3Dispatch (copy), var1 (copy), var7 (copy), navigateBack (copy), accessResponseEnum (copy), var4 (copy), var11 (copy), var2 (copy), refreshAllUnfilteredThreadsDetailsModule (copy)
-						if fFlagSignalsNavP3Dispatch then
-							var1.back(true)
-						else
-							var7(navigateBack(true))
-						end
-						if p2 == accessResponseEnum.Granted then
-							if var4 and var11 then
-								var4.fireAnalyticsEvent(`{var11}Succeeded`, { conversationId = var2.conversationId })
-							end
-							var7(refreshAllUnfilteredThreadsDetailsModule(var2.conversationId))
-							
-							return
-						elseif var4 and var11 then
-							var4.fireAnalyticsEvent(`{var11}Failed`, { conversationId = var2.conversationId })
-						end
-					end
-				}
-			}
+		if UseNavigationResult then
+			UseContextResult.navigateToUnfilteredThreadsLearnMore(UseNavigationResult.navigate)
 			
-			if fFlagSignalsNavP3Dispatch then
-				var1.down(var1.fromLegacyPage(t))
-				
-				return
-			end
-			var7(navigateDown(t))
-		end, { var7, var11, var4, var2.conversationId }),
-		pending_state_ineligible = useCallback(function()
-			-- upvalues: var4 (ref), var11 (ref), var2 (ref), var6 (ref), var5 (ref)
-			if var4 and var11 then
-				var4.fireAnalyticsEvent(`{var11}LearnMoreClicked`, { conversationId = var2.conversationId })
-			end
-			if var6 then
-				var5.navigateToUnfilteredThreadsLearnMore(var6.navigate)
-				
-				return
-			end
-			var5.navigateToUnfilteredThreadsLearnMore()
-		end, {
-			var5,
-			var4,
-			var11,
-			var2.conversationId,
-			var6
-		})
-	})[modalVariant]
+			return
+		else
+			UseContextResult.navigateToUnfilteredThreadsLearnMore()
+		end
+	end, {
+		UseContextResult,
+		UseAnalyticsModuleResult,
+		Entry,
+		UnionResult.conversationId,
+		UseNavigationResult
+	})
+	local UseCallbackResult2 = UseCallbackFunction(function() --[[ Line: 130 ]]
+		-- upvalues: UseAnalyticsModuleResult (copy), Entry (copy), UnionResult (copy), AppPage (upval), UnfilteredThreadsAMPFeatureNameModule (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateBackFunction (upval), AccessResponseEnum (upval), RefreshAllUnfilteredThreadsDetailsModule (upval), NavigateDownFunction (upval)
+		if UseAnalyticsModuleResult and Entry then
+			UseAnalyticsModuleResult.fireAnalyticsEvent(`{Entry}ContinueClicked`, { conversationId = UnionResult.conversationId })
+		end
+		local config = {
+			name = AppPage.AmpWizardContainer,
+			extraProps = {
+				featureName = UnfilteredThreadsAMPFeatureNameModule,
+				completionCallback = function(Granted, _) --[[ Line: 140 ]]
+					-- upvalues: FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (upval), NavigateBackFunction (upval), AccessResponseEnum (upval), UseAnalyticsModuleResult (upval), Entry (upval), UnionResult (upval), RefreshAllUnfilteredThreadsDetailsModule (upval)
+					if FFlagSignalsNavP3Dispatch then
+						NavigationCommands.back(true)
+					else
+						UseDispatchResult(NavigateBackFunction(true))
+					end
+					if Granted == AccessResponseEnum.Granted then
+						if UseAnalyticsModuleResult and Entry then
+							UseAnalyticsModuleResult.fireAnalyticsEvent(`{Entry}Succeeded`, { conversationId = UnionResult.conversationId })
+						end
+						UseDispatchResult(RefreshAllUnfilteredThreadsDetailsModule(UnionResult.conversationId))
+						
+						return
+					elseif UseAnalyticsModuleResult and Entry then
+						UseAnalyticsModuleResult.fireAnalyticsEvent(`{Entry}Failed`, { conversationId = UnionResult.conversationId })
+					end
+				end
+			}
+		}
+		
+		if FFlagSignalsNavP3Dispatch then
+			NavigationCommands.down(NavigationCommands.fromLegacyPage(config))
+			
+			return
+		else
+			UseDispatchResult(NavigateDownFunction(config))
+		end
+	end, {
+		UseDispatchResult,
+		Entry,
+		UseAnalyticsModuleResult,
+		UnionResult.conversationId
+	})
+	local UseCallbackResult3 = UseCallbackFunction(function() --[[ Line: 171 ]]
+		-- upvalues: UseAnalyticsModuleResult (copy), Entry (copy), UnionResult (copy), UseCallbackResult (copy), UseLocalUserIdResult (copy)
+		if UseAnalyticsModuleResult and Entry then
+			UseAnalyticsModuleResult.fireAnalyticsEvent(`{Entry}LeftGroup`, { conversationId = UnionResult.conversationId })
+		end
+		if UnionResult.conversationId then
+			UseCallbackResult(UseLocalUserIdResult, UnionResult.conversationId):catch(function() --[[ Line: 179 ]]
+				-- upvalues: UnionResult (upval)
+				UnionResult.showNetworkErrorToast()
+			end)
+		end
+	end, {
+		UseLocalUserIdResult, UnionResult.conversationId, Entry,
+		UseAnalyticsModuleResult, UseCallbackResult, UnionResult.showNetworkErrorToast
+	})
+	local Entry2 = ({
+		pending_state_phone_verify = UseCallbackResult2,
+		pending_state_ineligible = UseCallbackResult1
+	})[ModalVariant]
 	
-	if var12 then
-		return reactModule.createElement(conversationModalModule, {
-			bodyText = getDeepValue2Module(var8, "modal_layout.body.text"),
-			acceptText = if var15 and var18 then var15.text else nil,
-			denyText = if var14 then var14.text else nil,
-			layoutOrder = var2.layoutOrder,
-			onAccepted = var18,
-			onDenied = var17,
-			onHeightChanged = var2.onHeightChanged
+	if Entry1 then
+		return ReactModule.createElement(ConversationModalModule, {
+			bodyText = GetDeepValue2Module(UseSelectorResult, "modal_layout.body.text"),
+			acceptText = if ModalLayoutButton1 and Entry2 then ModalLayoutButton1.text else nil,
+			denyText = if ModalLayoutButton then ModalLayoutButton.text else nil,
+			layoutOrder = UnionResult.layoutOrder,
+			onAccepted = Entry2,
+			onDenied = UseCallbackResult3,
+			onHeightChanged = UnionResult.onHeightChanged
 		})
-	elseif modalVariant ~= "none" and modalVariant ~= nil and not t_1[modalVariant] then
-		warn("Unsupported PendingStateModal variant: " .. modalVariant)
+	end
+	if ModalVariant ~= "none" and ModalVariant ~= nil and not config1[ModalVariant] then
+		warn("Unsupported PendingStateModal variant: " .. ModalVariant)
 	end
 	return nil
 end
 
-return memo(PendingStateModalContainer)
+return MemoFunction(PendingStateModalContainer)

@@ -1,81 +1,74 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local corePackagesService = game:GetService("CorePackages")
+﻿local CorePackages = game:GetService("CorePackages")
 local _ = game:GetService("Players")
-local robloxGui = coreGuiService:WaitForChild("RobloxGui")
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local tModule = require(corePackagesService.Packages.t)
-local cryoModule = require(corePackagesService.Packages.Cryo)
-local constantsModule = require(script.Parent.Parent.Constants)
-local var1 = require(script.Parent.Parent.Logger)(script.Name)
-local bubbleChatBillboardModule = require(script.Parent.BubbleChatBillboard)
-local getFFlagBubbleVoiceIndicatorSettingModule = require(robloxGui.Modules.Flags.GetFFlagBubbleVoiceIndicatorSetting)
-local chatBillboards = roactModule.Component:extend("ChatBillboards")
-chatBillboards.validateProps = tModule.strictInterface({
-	userMessages = tModule.map(tModule.string, tModule.array(tModule.string)),
-	bubbleChatEnabled = tModule.boolean,
-	voiceEnabled = tModule.boolean,
-	participants = tModule.map(tModule.string, tModule.string)
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local TModule = require(CorePackages.Packages.t)
+local CryoModule = require(CorePackages.Packages.Cryo)
+local ConstantsModule = require(script.Parent.Parent.Constants)
+local v1 = require(script.Parent.Parent.Logger)(script.Name)
+local BubbleChatBillboardModule = require(script.Parent.BubbleChatBillboard)
+local GetFFlagBubbleVoiceIndicatorSettingModule = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.Flags.GetFFlagBubbleVoiceIndicatorSetting)
+local ChatBillboards = RoactModule.Component:extend("ChatBillboards")
+ChatBillboards.validateProps = TModule.strictInterface({
+	userMessages = TModule.map(TModule.string, TModule.array(TModule.string)),
+	bubbleChatEnabled = TModule.boolean,
+	voiceEnabled = TModule.boolean,
+	participants = TModule.map(TModule.string, TModule.string)
 })
 
-function chatBillboards.getDerivedStateFromProps(p1, p2)
-	-- upvalues: cryoModule (ref)
+function ChatBillboards.getDerivedStateFromProps(p1, p2) --[[ Line: 33 ]]
+	-- upvalues: CryoModule (copy)
 	return {
-		userMessages = cryoModule.Dictionary.join(p2.userMessages or {}, p1.userMessages)
+		userMessages = CryoModule.Dictionary.join(p2.userMessages or {}, p1.userMessages)
 	}
 end
 
-function chatBillboards.init(p1)
-	-- upvalues: var1 (ref), cryoModule (ref)
-	var1:debug("Initializing")
+function ChatBillboards.init(p1) --[[ Line: 42 ]]
+	-- upvalues: v1 (copy), CryoModule (copy)
+	v1:debug("Initializing")
 	p1:setState({ userMessages = {} })
 	
-	function p2.onBillboardFadeOut(p2)
-		-- upvalues: p1 (ref), cryoModule (copy)
+	function p1.onBillboardFadeOut(p2) --[[ Line: 48 ]]
+		-- upvalues: p1 (copy), CryoModule (upval)
 		p1:setState({
-			userMessages = cryoModule.Dictionary.join(p1.state.userMessages, { [p2] = cryoModule.None })
+			userMessages = CryoModule.Dictionary.join(p1.state.userMessages, { [p2] = CryoModule.None })
 		})
 	end
 end
 
-function chatBillboards.render(p1)
-	-- upvalues: constantsModule (ref), var1 (ref), roactModule (ref), bubbleChatBillboardModule (ref)
+function ChatBillboards.render(p1) --[[ Line: 55 ]]
+	-- upvalues: ConstantsModule (copy), v1 (copy), RoactModule (copy), BubbleChatBillboardModule (copy)
 	if not p1.props.voiceEnabled and not p1.props.bubbleChatEnabled then return end
 	local t = {}
 	
-	for i, v in pairs(p1.state.userMessages) do
+	for i, _ in pairs(p1.state.userMessages) do
 		t[i] = false
 	end
-	for i_1, v_1 in pairs(p1.props.participants) do
-		if v_1 ~= constantsModule.VOICE_STATE.HIDDEN then
-			t[i_1] = true
+	for i1, participant in pairs(p1.props.participants) do
+		if participant ~= ConstantsModule.VOICE_STATE.HIDDEN then
+			t[i1] = true
 		end
 	end
-	local t_1 = {}
+	local Elements = {}
 	
-	for i_2, v_2 in pairs(t) do
-		var1:trace("Rendering billboard for ...{}", string.sub(tostring(i_2), -4))
-		t_1["BubbleChat_" .. i_2] = roactModule.createElement(bubbleChatBillboardModule, {
-			userId = i_2,
+	for UserId, value in pairs(t) do
+		v1:trace("Rendering billboard for ...{}", (string.sub(tostring(UserId), -4)))
+		Elements["BubbleChat_" .. UserId] = RoactModule.createElement(BubbleChatBillboardModule, {
+			userId = UserId,
 			onFadeOut = p1.onBillboardFadeOut,
-			voiceEnabled = p1.props.voiceEnabled and v_2,
+			voiceEnabled = p1.props.voiceEnabled and value,
 			bubbleChatEnabled = p1.props.bubbleChatEnabled
 		})
 	end
-	return roactModule.createElement("ScreenGui", { ResetOnSpawn = false }, t_1)
+	return RoactModule.createElement("ScreenGui", { ResetOnSpawn = false }, Elements)
 end
 
-return roactRoduxModule.connect(function(p2)
-	-- upvalues: getFFlagBubbleVoiceIndicatorSettingModule (ref)
-	local voiceEnabled = p2.components.voiceEnabled
-	
-	if getFFlagBubbleVoiceIndicatorSettingModule() then
-		voiceEnabled = p2.components.voiceEnabled and p2.chatSettings.Voice.ShowIndicator
-	end
+return RoactRoduxModule.connect(function(p2) --[[ Line: 93 | Named "mapStateToProps" ]]
+	-- upvalues: GetFFlagBubbleVoiceIndicatorSettingModule (copy)
 	return {
 		userMessages = p2.userMessages,
-		voiceEnabled = voiceEnabled,
+		voiceEnabled = if GetFFlagBubbleVoiceIndicatorSettingModule() then p2.components.voiceEnabled and p2.chatSettings.Voice.ShowIndicator else p2.components.voiceEnabled,
 		bubbleChatEnabled = p2.components.bubbleChatEnabled,
 		participants = p2.voiceState
 	}
-end)(chatBillboards)
+end)(ChatBillboards)

@@ -1,27 +1,27 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local var1, _ = require(appChat.Utils.loadFoundationCloudAsset)("pictograms/alert")
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local Alert, _ = require(AppChat.Utils.loadFoundationCloudAsset)("pictograms/alert")
 
-return reactModule.memo(function()
-	-- upvalues: useLocalization (ref), reactModule (ref), foundationModule (ref), var1 (ref)
-	return reactModule.createElement(foundationModule.View, {
+return ReactModule.memo(function() --[[ Line: 13 | Named "MomentShareCardUnavailable" ]]
+	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), FoundationModule (copy), Alert (copy)
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "col align-x-center size-full-0 auto-xy padding-xxlarge bg-action-subtle",
 		testId = "MomentShareCardUnavailable"
 	}, {
-		UnavailableImage = reactModule.createElement(foundationModule.Image, {
+		UnavailableImage = ReactModule.createElement(FoundationModule.Image, {
 			tag = "size-1600 content-system-contrast",
 			testId = "MomentShareCardUnavailableImage",
 			LayoutOrder = 1,
-			Image = var1,
+			Image = Alert,
 			ScaleType = Enum.ScaleType.Fit
 		}),
-		UnavailableText = reactModule.createElement(foundationModule.Text, {
+		UnavailableText = ReactModule.createElement(FoundationModule.Text, {
 			tag = "auto-xy text-body-large text-wrap text-align-x-center content-system-contrast",
 			LayoutOrder = 2,
-			Text = useLocalization({
+			Text = UseLocalizationFunction({
 				momentUnavailable = "Feature.Moments.Label.MomentUnavailableDefault"
 			}).momentUnavailable
 		})

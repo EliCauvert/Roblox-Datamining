@@ -1,21 +1,16 @@
-﻿local joinExperienceActionModule = require(script.Parent.JoinExperienceAction)
-local playExperienceActionModule = require(script.Parent.PlayExperienceAction)
-local chatActionModule = require(script.Parent.ChatAction)
-local viewProfileActionModule = require(script.Parent.ViewProfileAction)
-local unlockExperienceActionModule = require(script.Parent.UnlockExperienceAction)
-local _ = require(script.Parent.Types)
+﻿local _ = require(script.Parent.Types)
 local t = {}
 
-for i, v in {
-	joinExperienceActionModule,
-	playExperienceActionModule,
-	chatActionModule,
-	viewProfileActionModule,
-	unlockExperienceActionModule
+for _, value in {
+	require(script.Parent.JoinExperienceAction),
+	require(script.Parent.PlayExperienceAction),
+	require(script.Parent.ChatAction),
+	require(script.Parent.ViewProfileAction),
+	(require(script.Parent.UnlockExperienceAction))
 } do
-	for i_1, v_1 in v do
-		assert(t[i_1] == nil, "Duplicate GameJoinCard action key: " .. tostring(i_1))
-		t[i_1] = v_1
+	for i, value1 in value do
+		assert(t[i] == nil, "Duplicate GameJoinCard action key: " .. tostring(i))
+		t[i] = value1
 	end
 end
 return t

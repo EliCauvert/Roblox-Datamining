@@ -1,16 +1,19 @@
-﻿local inGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
-local roact = inGameMenuDependenciesModule.Roact
-local t = inGameMenuDependenciesModule.t
-local localizationConsumerModule = require(script.Parent.LocalizationConsumer)
+﻿local InGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
+local Roact = InGameMenuDependenciesModule.Roact
+local T = InGameMenuDependenciesModule.t
+local LocalizationConsumerModule = require(script.Parent.LocalizationConsumer)
 
-return function(p1)
-	-- upvalues: t (ref), roact (ref), localizationConsumerModule (ref)
-	assert(t.table(p1))
+return function(StringsToBeLocalized) --[[ Line: 9 | Named "withLocalization" ]]
+	-- upvalues: T (copy), Roact (copy), LocalizationConsumerModule (copy)
+	assert(T.table(StringsToBeLocalized))
 	
-	return function(p2)
-		-- upvalues: t (copy), roact (copy), localizationConsumerModule (copy), p1 (ref)
-		assert(t.callback(p2))
+	return function(Render) --[[ Line: 12 ]]
+		-- upvalues: T (upval), Roact (upval), LocalizationConsumerModule (upval), StringsToBeLocalized (copy)
+		assert(T.callback(Render))
 		
-		return roact.createElement(localizationConsumerModule, { render = p2, stringsToBeLocalized = p1 })
+		return Roact.createElement(LocalizationConsumerModule, {
+			render = Render,
+			stringsToBeLocalized = StringsToBeLocalized
+		})
 	end
 end

@@ -1,103 +1,101 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local sharedFlagsModule = require(profilePlatform.Parent.SharedFlags)
-local enumsModule = require(profilePlatform.Common.Enums)
-local profileTypes = enumsModule.ProfileTypes
-local fFlagProfilePlatformEnableEditAppearanceMenuModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableEditAppearanceMenu)
-local fFlagProfilePlatformEditBackgroundMenuItemModule = require(profilePlatform.Flags.FFlagProfilePlatformEditBackgroundMenuItem)
-local fFlagProfilePlatformEnableEditLookModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableEditLook)
-local fFlagProfilePlatformNewProfileHeader = sharedFlagsModule.FFlagProfilePlatformNewProfileHeader
-local fFlagEnablePlatformProfileContextualMenuOption = sharedFlagsModule.FFlagEnablePlatformProfileContextualMenuOption
-local fFlagProfilePlatformEnableCurrencyTransfer = sharedFlagsModule.FFlagProfilePlatformEnableCurrencyTransfer
-local fFlagProfilePlatformEnableTradeItemsModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableTradeItems)
-local fFlagProfilePlatformAddTC = sharedFlagsModule.FFlagProfilePlatformAddTC
-local fFlagFixTFLinksVRGatingModule = require(profilePlatform.Flags.FFlagFixTFLinksVRGating)
-local fFlagProfilePlatformEnableUnlockChatModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableUnlockChat)
-local fFlagProfilePlatformEnableUserFollowModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableUserFollow)
-local fFlagFriendsCallingClientGateDEV = sharedFlagsModule.FFlagFriendsCallingClientGate_DEV
-local fFlagJoinabilityCTARefactor = sharedFlagsModule.FFlagJoinabilityCTARefactor
-local list = {
-	enumsModule.ProfileActions.AddFriend,
-	enumsModule.ProfileActions.CannotAddFriend,
-	enumsModule.ProfileActions.AcceptFriendRequest,
-	enumsModule.ProfileActions.AcceptOffNetworkFriendRequest,
-	enumsModule.ProfileActions.Block, enumsModule.ProfileActions.Unblock,
-	enumsModule.ProfileActions.Chat, enumsModule.ProfileActions.EditAlias,
-	enumsModule.ProfileActions.EditAvatar, enumsModule.ProfileActions.EditProfile,
-	enumsModule.ProfileActions.IgnoreFriendRequest,
-	enumsModule.ProfileActions.JoinExperience,
-	enumsModule.ProfileActions.PendingFriendRequest,
-	enumsModule.ProfileActions.QrCode, enumsModule.ProfileActions.Report,
-	enumsModule.ProfileActions.ShareProfile, enumsModule.ProfileActions.Unfriend,
-	enumsModule.ProfileActions.RemoveTrustedConnection
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local SharedFlagsModule = require(ProfilePlatform.Parent.SharedFlags)
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local ProfileTypes = EnumsModule.ProfileTypes
+local FFlagProfilePlatformEnableEditAppearanceMenuModule = require(ProfilePlatform.Flags.FFlagProfilePlatformEnableEditAppearanceMenu)
+local FFlagProfilePlatformEditBackgroundMenuItemModule = require(ProfilePlatform.Flags.FFlagProfilePlatformEditBackgroundMenuItem)
+local FFlagProfilePlatformEnableEditLookModule = require(ProfilePlatform.Flags.FFlagProfilePlatformEnableEditLook)
+local FFlagProfilePlatformNewProfileHeader = SharedFlagsModule.FFlagProfilePlatformNewProfileHeader
+local FFlagEnablePlatformProfileContextualMenuOption = SharedFlagsModule.FFlagEnablePlatformProfileContextualMenuOption
+local FFlagProfilePlatformEnableCurrencyTransfer = SharedFlagsModule.FFlagProfilePlatformEnableCurrencyTransfer
+local FFlagProfilePlatformEnableTradeItemsModule = require(ProfilePlatform.Flags.FFlagProfilePlatformEnableTradeItems)
+local FFlagProfilePlatformAddTC = SharedFlagsModule.FFlagProfilePlatformAddTC
+local FFlagFixTFLinksVRGatingModule = require(ProfilePlatform.Flags.FFlagFixTFLinksVRGating)
+local FFlagProfilePlatformEnableUserFollowModule = require(ProfilePlatform.Flags.FFlagProfilePlatformEnableUserFollow)
+local FFlagJoinabilityCTARefactor = SharedFlagsModule.FFlagJoinabilityCTARefactor
+local List = {
+	EnumsModule.ProfileActions.AddFriend,
+	EnumsModule.ProfileActions.CannotAddFriend,
+	EnumsModule.ProfileActions.AcceptFriendRequest,
+	EnumsModule.ProfileActions.AcceptOffNetworkFriendRequest,
+	EnumsModule.ProfileActions.Block, EnumsModule.ProfileActions.Unblock,
+	EnumsModule.ProfileActions.Chat, EnumsModule.ProfileActions.EditAlias,
+	EnumsModule.ProfileActions.EditAvatar, EnumsModule.ProfileActions.EditProfile,
+	EnumsModule.ProfileActions.IgnoreFriendRequest,
+	EnumsModule.ProfileActions.JoinExperience,
+	EnumsModule.ProfileActions.PendingFriendRequest,
+	EnumsModule.ProfileActions.QrCode, EnumsModule.ProfileActions.Report,
+	EnumsModule.ProfileActions.ShareProfile, EnumsModule.ProfileActions.Unfriend,
+	EnumsModule.ProfileActions.RemoveTrustedConnection,
+	EnumsModule.ProfileActions.UnlockChat
 }
 
-if fFlagFriendsCallingClientGateDEV then
-	table.insert(list, enumsModule.ProfileActions.Call)
+if SharedFlagsModule.FFlagFriendsCallingClientGate_DEV then
+	table.insert(List, EnumsModule.ProfileActions.Call)
 end
-if fFlagJoinabilityCTARefactor then
-	table.insert(list, enumsModule.ProfileActions.PlayExperience)
+if FFlagJoinabilityCTARefactor then
+	table.insert(List, EnumsModule.ProfileActions.PlayExperience)
 end
-if fFlagProfilePlatformEnableUnlockChatModule then
-	table.insert(list, enumsModule.ProfileActions.UnlockChat)
-end
-if fFlagProfilePlatformEnableEditAppearanceMenuModule then
-	table.insert(list, enumsModule.ProfileActions.EditAppearance)
-	table.insert(list, enumsModule.ProfileActions.EditEmotes)
-	table.insert(list, enumsModule.ProfileActions.SwitchAvatar)
+if FFlagProfilePlatformEnableEditAppearanceMenuModule then
+	table.insert(List, EnumsModule.ProfileActions.EditAppearance)
+	table.insert(List, EnumsModule.ProfileActions.EditEmotes)
+	table.insert(List, EnumsModule.ProfileActions.SwitchAvatar)
 	
-	if fFlagProfilePlatformEditBackgroundMenuItemModule then
-		table.insert(list, enumsModule.ProfileActions.EditBackground)
+	if FFlagProfilePlatformEditBackgroundMenuItemModule then
+		table.insert(List, EnumsModule.ProfileActions.EditBackground)
 	end
 end
-if fFlagProfilePlatformEnableEditLookModule then
-	table.insert(list, enumsModule.ProfileActions.EditLook)
+if FFlagProfilePlatformEnableEditLookModule then
+	table.insert(List, EnumsModule.ProfileActions.EditLook)
 end
-if fFlagProfilePlatformEnableCurrencyTransfer then
-	table.insert(list, enumsModule.ProfileActions.CurrencyTransfer)
+if FFlagProfilePlatformEnableCurrencyTransfer then
+	table.insert(List, EnumsModule.ProfileActions.CurrencyTransfer)
 end
-if fFlagProfilePlatformEnableTradeItemsModule then
-	table.insert(list, enumsModule.ProfileActions.TradeItems)
+if FFlagProfilePlatformEnableTradeItemsModule then
+	table.insert(List, EnumsModule.ProfileActions.TradeItems)
 end
-if fFlagProfilePlatformAddTC then
-	table.insert(list, enumsModule.ProfileActions.AddTrustedConnection)
-	table.insert(list, enumsModule.ProfileActions.AddIncomingTrustedConnection)
-	table.insert(list, enumsModule.ProfileActions.PendingTrustedConnection)
+if FFlagProfilePlatformAddTC then
+	table.insert(List, EnumsModule.ProfileActions.AddTrustedConnection)
+	table.insert(List, EnumsModule.ProfileActions.AddIncomingTrustedConnection)
+	table.insert(List, EnumsModule.ProfileActions.PendingTrustedConnection)
 end
-if not fFlagFixTFLinksVRGatingModule then
-	table.insert(list, enumsModule.ProfileActions.AddTrustedConnectionViaLink)
-elseif fFlagProfilePlatformAddTC then
-	table.insert(list, enumsModule.ProfileActions.AddTrustedConnectionViaLink)
+if FFlagFixTFLinksVRGatingModule then
+	if FFlagProfilePlatformAddTC then
+		table.insert(List, EnumsModule.ProfileActions.AddTrustedConnectionViaLink)
+	end
+else
+	table.insert(List, EnumsModule.ProfileActions.AddTrustedConnectionViaLink)
 end
-table.insert(list, enumsModule.ProfileActions.PendingIncomingTrustedConnection)
+table.insert(List, EnumsModule.ProfileActions.PendingIncomingTrustedConnection)
 
-if fFlagProfilePlatformNewProfileHeader then
-	table.insert(list, enumsModule.ProfileActions.ViewAbout)
+if FFlagProfilePlatformNewProfileHeader then
+	table.insert(List, EnumsModule.ProfileActions.ViewAbout)
 end
-if fFlagEnablePlatformProfileContextualMenuOption then
-	table.insert(list, enumsModule.ProfileActions.ViewPlatformProfile)
+if FFlagEnablePlatformProfileContextualMenuOption then
+	table.insert(List, EnumsModule.ProfileActions.ViewPlatformProfile)
 end
-if fFlagProfilePlatformEnableUserFollowModule then
-	table.insert(list, enumsModule.ProfileActions.Follow)
-	table.insert(list, enumsModule.ProfileActions.Unfollow)
+if FFlagProfilePlatformEnableUserFollowModule then
+	table.insert(List, EnumsModule.ProfileActions.Follow)
+	table.insert(List, EnumsModule.ProfileActions.Unfollow)
 end
-local t = {}
-table.insert(t, enumsModule.ProfileActions.CopyLink)
-table.insert(t, enumsModule.ProfileActions.JoinCommunity)
-table.insert(t, enumsModule.ProfileActions.CancelJoinCommunityRequest)
-table.insert(t, enumsModule.ProfileActions.ViewCommunity)
-table.insert(t, enumsModule.ProfileActions.LeaveCommunity)
-table.insert(t, enumsModule.ProfileActions.MakePrimaryCommunity)
-table.insert(t, enumsModule.ProfileActions.RemovePrimaryCommunity)
-table.insert(t, enumsModule.ProfileActions.Report)
-table.insert(t, enumsModule.ProfileActions.ViewFullProfile)
-table.insert(t, enumsModule.ProfileActions.Follow)
-table.insert(t, enumsModule.ProfileActions.Unfollow)
+local List1 = {}
+table.insert(List1, EnumsModule.ProfileActions.CopyLink)
+table.insert(List1, EnumsModule.ProfileActions.JoinCommunity)
+table.insert(List1, EnumsModule.ProfileActions.CancelJoinCommunityRequest)
+table.insert(List1, EnumsModule.ProfileActions.ViewCommunity)
+table.insert(List1, EnumsModule.ProfileActions.LeaveCommunity)
+table.insert(List1, EnumsModule.ProfileActions.MakePrimaryCommunity)
+table.insert(List1, EnumsModule.ProfileActions.RemovePrimaryCommunity)
+table.insert(List1, EnumsModule.ProfileActions.Report)
+table.insert(List1, EnumsModule.ProfileActions.ViewFullProfile)
+table.insert(List1, EnumsModule.ProfileActions.Follow)
+table.insert(List1, EnumsModule.ProfileActions.Unfollow)
 
 return {
-	[profileTypes.User] = list,
-	[profileTypes.Community] = t,
-	[profileTypes.Contact] = {
-		enumsModule.ProfileActions.AddFriendFromContacts,
-		enumsModule.ProfileActions.AddFriendFromContactsSent
+	[ProfileTypes.User] = List,
+	[ProfileTypes.Community] = List1,
+	[ProfileTypes.Contact] = {
+		EnumsModule.ProfileActions.AddFriendFromContacts,
+		EnumsModule.ProfileActions.AddFriendFromContactsSent
 	}
 }

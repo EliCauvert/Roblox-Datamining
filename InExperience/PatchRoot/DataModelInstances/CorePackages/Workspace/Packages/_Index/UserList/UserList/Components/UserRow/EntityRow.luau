@@ -1,28 +1,28 @@
-﻿local userList = script:FindFirstAncestor("UserList")
-local parent = userList.Parent
-local reactModule = require(parent.React)
-local enumsModule = require(userList.Common.Enums)
-local _ = require(userList.Common.Types)
-local userRowModule = require(script.Parent.UserRow)
-local contactRowModule = require(script.Parent.ContactRow)
-local fFlagUserListCtaIntegrationEnabled = require(parent.SharedFlags).FFlagUserListCtaIntegrationEnabled
-local fFlagAddStatusIndicatorToBaseRow = require(parent.SharedFlags).FFlagAddStatusIndicatorToBaseRow
+﻿local UserList = script:FindFirstAncestor("UserList")
+local Parent = UserList.Parent
+local ReactModule = require(Parent.React)
+local EnumsModule = require(UserList.Common.Enums)
+local _ = require(UserList.Common.Types)
+local UserRowModule = require(script.Parent.UserRow)
+local ContactRowModule = require(script.Parent.ContactRow)
+local FFlagUserListCtaIntegrationEnabled = require(Parent.SharedFlags).FFlagUserListCtaIntegrationEnabled
+local FFlagAddStatusIndicatorToBaseRow = require(Parent.SharedFlags).FFlagAddStatusIndicatorToBaseRow
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), enumsModule (ref), contactRowModule (ref), userRowModule (ref), fFlagUserListCtaIntegrationEnabled (ref), fFlagAddStatusIndicatorToBaseRow (ref)
-	local entity = p1.entity
-	local var1 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref), entity (ref)
+return ReactModule.memo(function(p1) --[[ Line: 43 | Named "EntityRow" ]]
+	-- upvalues: ReactModule (copy), EnumsModule (copy), ContactRowModule (copy), UserRowModule (copy), FFlagUserListCtaIntegrationEnabled (copy), FFlagAddStatusIndicatorToBaseRow (copy)
+	local Entity = p1.entity
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 46 ]]
+		-- upvalues: p1 (copy), Entity (copy)
 		if p1.onActivated then
-			p1.onActivated(entity.id, entity.type)
+			p1.onActivated(Entity.id, Entity.type)
 		end
-	end, { p1.onActivated, entity.id, entity.type })
-	local var2 = if p1.layoutMode == enumsModule.LayoutMode.Horizontal then enumsModule.RowLayoutMode.Compact else enumsModule.RowLayoutMode.Wide
+	end, { p1.onActivated, Entity.id, Entity.type })
+	local Compact = if p1.layoutMode == EnumsModule.LayoutMode.Horizontal then EnumsModule.RowLayoutMode.Compact else EnumsModule.RowLayoutMode.Wide
 	
-	return if entity.type == enumsModule.EntityType.Contact then reactModule.createElement(contactRowModule, {
-		entityId = entity.id,
-		layoutMode = var2,
-		onActivated = var1,
+	return if Entity.type == EnumsModule.EntityType.Contact then ReactModule.createElement(ContactRowModule, {
+		entityId = Entity.id,
+		layoutMode = Compact,
+		onActivated = UseResult,
 		layoutOrder = p1.layoutOrder,
 		primaryCta = p1.primaryCta,
 		secondaryCta = p1.secondaryCta,
@@ -30,18 +30,18 @@ return reactModule.memo(function(p1)
 		loadingState = p1.loadingState,
 		trailingContent = p1.trailingContent,
 		configs = p1.configs
-	}) else reactModule.createElement(userRowModule, {
-		entityId = entity.id,
-		layoutMode = var2,
-		onActivated = var1,
+	}) else ReactModule.createElement(UserRowModule, {
+		entityId = Entity.id,
+		layoutMode = Compact,
+		onActivated = UseResult,
 		primaryCta = p1.primaryCta,
 		secondaryCta = p1.secondaryCta,
-		ctaLoading = if fFlagUserListCtaIntegrationEnabled then p1.ctaLoading else nil,
+		ctaLoading = if FFlagUserListCtaIntegrationEnabled then p1.ctaLoading else nil,
 		contextualInfo = p1.contextualInfo,
 		layoutOrder = p1.layoutOrder,
 		loadingState = p1.loadingState,
 		presence = p1.presence,
-		shouldShowNewIndicator = if fFlagAddStatusIndicatorToBaseRow then p1.shouldShowNewIndicator else nil,
+		shouldShowNewIndicator = if FFlagAddStatusIndicatorToBaseRow then p1.shouldShowNewIndicator else nil,
 		trailingContent = p1.trailingContent,
 		configs = p1.configs
 	})

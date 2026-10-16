@@ -1,209 +1,208 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local _ = require(parent.HttpClient)
-local promiseModule = require(parent.Promise)
-local urlBase = require(parent.UrlBuilder).UrlBase
-local pollAnalyticsOperationModule = require(dataHydration.pollAnalyticsOperation)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local _ = require(Parent.HttpClient)
+local PromiseModule = require(Parent.Promise)
+local UrlBase = require(Parent.UrlBuilder).UrlBase
+local PollAnalyticsOperationModule = require(DataHydration.pollAnalyticsOperation)
 local _ = require(script.Parent.CampaignStatsTypes)
-local WINDOW_DAYS = require(script.Parent.CampaignStatsConstants).WINDOW_DAYS
-local t = {}
+local WINDOWDAYS = require(script.Parent.CampaignStatsConstants).WINDOW_DAYS
 
-local function sumByCampaign(p1)
+local function sumByCampaign(QueryResult) --[[ Line: 59 ]]
 	local t = {}
 	
-	if p1 == nil or p1.values == nil then
+	if QueryResult == nil or QueryResult.values == nil then
 		return t
 	end
-	local value
-	for i, v in p1.values do
-		value = nil
+	local v1 = nil
+	for _, value in QueryResult.values do
+		v1 = nil
 		
-		if v.breakdownValue ~= nil then
-			for i_1, v_1 in v.breakdownValue do
-				if v_1.dimension == "CampaignId" then
-					value = v_1.value
+		if value.breakdownValue ~= nil then
+			for _, value1 in value.breakdownValue do
+				if value1.dimension == "CampaignId" then
+					v1 = value1.value
 					break
 				end
 			end
 		end
-		if value ~= nil and value ~= "RAQI_RESERVED_DIMENSION_VALUES_NO_VALUE" then
-			local var1 = 0
+		if v1 ~= nil and v1 ~= "RAQI_RESERVED_DIMENSION_VALUES_NO_VALUE" then
+			local Total = 0
 			
-			if v.dataPoints ~= nil then
-				for v_1, v_1 in v.dataPoints do
-					var1 += v_1.value or 0
+			if value.dataPoints ~= nil then
+				for _, dataPoint in value.dataPoints do
+					Total += dataPoint.value or 0
 				end
 			end
-			t[value] = (t[value] or 0) + var1
+			t[v1] = (t[v1] or 0) + Total
 		end
 	end
 	return t
 end
 
-local function queryMetricByCampaign(p2, p3, p4, p5)
-	-- upvalues: urlBase (ref), pollAnalyticsOperationModule (ref), sumByCampaign (ref)
-	return pollAnalyticsOperationModule({
+local function queryMetricByCampaign(Metric, p1, p2, p3) --[[ Line: 88 ]]
+	-- upvalues: UrlBase (copy), PollAnalyticsOperationModule (copy), sumByCampaign (copy)
+	return PollAnalyticsOperationModule({
 		analyticsKey = "ads-campaign-stats.query",
 		timeoutMessage = "analytics-query-gateway: campaign stats query did not complete",
-		network = p5.network,
-		url = ("%s/analytics-query-gateway/v1/metrics/resource/%s/id/%d"):format(p5.baseUrl or urlBase.APIS, "RESOURCE_TYPE_UNIVERSE", p3),
+		network = p3.network,
+		url = ("%s/analytics-query-gateway/v1/metrics/resource/%s/id/%d"):format(p3.baseUrl or UrlBase.APIS, "RESOURCE_TYPE_UNIVERSE", p1),
 		body = {
 			resourceType = "RESOURCE_TYPE_UNIVERSE",
-			resourceId = tostring(p3),
+			resourceId = tostring(p1),
 			query = {
 				granularity = "METRIC_GRANULARITY_NONE",
-				metric = p2,
-				startTime = p4.startIso,
-				endTime = p4.queryEndIso,
+				metric = Metric,
+				startTime = p2.startIso,
+				endTime = p2.queryEndIso,
 				breakdown = { { dimensions = { "CampaignId" } } },
 				filter = {
 					{
 						dimension = "AttributionDateHour",
 						operation = "FILTER_OPERATION_GTE",
-						values = { tostring(p4.startMs) }
+						values = { (tostring(p2.startMs)) }
 					},
 					{
 						dimension = "AttributionDateHour",
 						operation = "FILTER_OPERATION_LT",
-						values = { tostring(p4.endMs) }
+						values = { (tostring(p2.endMs)) }
 					}
 				}
 			}
 		},
-		mapResult = function(p6)
-			-- upvalues: sumByCampaign (copy)
-			return sumByCampaign(p6.queryResult)
+		mapResult = function(p4) --[[ Line: 132 ]]
+			-- upvalues: sumByCampaign (upval)
+			return (sumByCampaign(p4.queryResult))
 		end
 	})
 end
 
-local function captureMetricOutcome(p2)
-	return p2:andThen(function(p3)
-		return { succeeded = true, value = p3 }
-	end, function(_)
+local function captureMetricOutcome(Promise) --[[ Line: 139 ]]
+	return Promise:andThen(function(Result) --[[ Line: 140 ]]
+		return { succeeded = true, value = Result }
+	end, function(_) --[[ Line: 145 ]]
 		return { succeeded = false, value = {} }
 	end)
 end
 
-function t.fetchCampaignStats(p2, p3)
-	-- upvalues: WINDOW_DAYS (ref), promiseModule (ref), queryMetricByCampaign (ref), captureMetricOutcome (ref)
-	p3 = p3 or {}
-	local var2 = if p3.nowMs ~= nil then DateTime.now().UnixTimestampMillis else p3.nowMs
-	local var3 = var2 - var2 % 3600000
-	local var4 = var3 - WINDOW_DAYS * 86400000
-	local t = {
-		startMs = var4,
-		endMs = var3,
-		startIso = DateTime.fromUnixTimestampMillis(var4):ToIsoDate(),
-		queryEndIso = DateTime.fromUnixTimestampMillis(var3 + 2592000000):ToIsoDate()
-	}
-	
-	return promiseModule.all({
-		queryMetricByCampaign("AdsUANumPlaysDefaultViewByUniverse", p2, t, p3):andThen(function(p4)
-			return { succeeded = true, value = p4 }
-		end, function(_)
-			return { succeeded = false, value = {} }
-		end),
-		queryMetricByCampaign("AdsUANumClicksDefaultViewByUniverse", p2, t, p3):andThen(function(p4)
-			return { succeeded = true, value = p4 }
-		end, function(_)
-			return { succeeded = false, value = {} }
-		end),
-		queryMetricByCampaign("AdsUANumImpressionsDefaultViewByUniverse", p2, t, p3):andThen(function(p4)
-			return { succeeded = true, value = p4 }
-		end, function(_)
-			return { succeeded = false, value = {} }
-		end),
-		captureMetricOutcome(queryMetricByCampaign("AdsUAPlaytimeDefaultViewByUniverse", p2, t, p3))
-	}):andThen(function(p4)
-		local var5 = p4[1]
-		local var6 = p4[2]
-		local var7 = p4[3]
-		local var8 = p4[4]
-		local t = {}
-		
-		local function _(p5)
-			-- upvalues: t (ref)
-			local var9 = t[p5]
-			
-			if var9 == nil then
-				var9 = {
-					plays = 0,
-					adClicks = 0,
-					adViews = 0,
-					playtimeSeconds = 0
-				}
-				t[p5] = var9
-			end
-			return var9
-		end
-		
-		for i, v in var5.value do
-			local var9 = t[i]
-			
-			if var9 == nil then
-				var9 = {
-					plays = 0,
-					adClicks = 0,
-					adViews = 0,
-					playtimeSeconds = 0
-				}
-				t[i] = var9
-			end
-			var9.plays = v
-		end
-		for i_1, v_1 in var6.value do
-			local var10 = t[i_1]
-			
-			if var10 == nil then
-				var10 = {
-					plays = 0,
-					adClicks = 0,
-					adViews = 0,
-					playtimeSeconds = 0
-				}
-				t[i_1] = var10
-			end
-			var10.adClicks = v_1
-		end
-		for i_2, v_2 in var7.value do
-			local var11 = t[i_2]
-			
-			if var11 == nil then
-				var11 = {
-					plays = 0,
-					adClicks = 0,
-					adViews = 0,
-					playtimeSeconds = 0
-				}
-				t[i_2] = var11
-			end
-			var11.adViews = v_2
-		end
-		for i_3, v_3 in var8.value do
-			local var12 = t[i_3]
-			
-			if var12 == nil then
-				var12 = {
-					plays = 0,
-					adClicks = 0,
-					adViews = 0,
-					playtimeSeconds = 0
-				}
-				t[i_3] = var12
-			end
-			var12.playtimeSeconds = v_3
-		end
-		return {
-			byCampaign = t,
-			failedMetrics = {
-				plays = not var5.succeeded,
-				adClicks = not var6.succeeded,
-				adViews = not var7.succeeded,
-				playtimeSeconds = not var8.succeeded
-			}
+return {
+	fetchCampaignStats = function(p1, p2) --[[ Line: 156 ]]
+		-- upvalues: WINDOWDAYS (copy), PromiseModule (copy), queryMetricByCampaign (copy), captureMetricOutcome (copy)
+		local P10 = p2 or {}
+		local UnixTimestampMillis = if P10.nowMs == nil then DateTime.now().UnixTimestampMillis else P10.nowMs
+		local UnixTimestampMillisDelta = UnixTimestampMillis - UnixTimestampMillis % 3600000
+		local UnixTimestampMillisDeltaDelta = UnixTimestampMillisDelta - WINDOWDAYS * 86400000
+		local config = {
+			startMs = UnixTimestampMillisDeltaDelta,
+			endMs = UnixTimestampMillisDelta,
+			startIso = DateTime.fromUnixTimestampMillis(UnixTimestampMillisDeltaDelta):ToIsoDate(),
+			queryEndIso = DateTime.fromUnixTimestampMillis(UnixTimestampMillisDelta + 2592000000):ToIsoDate()
 		}
-	end)
-end
-
-return t
+		
+		return PromiseModule.all({
+			queryMetricByCampaign("AdsUANumPlaysDefaultViewByUniverse", p1, config, P10):andThen(function(Result) --[[ Line: 140 ]]
+				return { succeeded = true, value = Result }
+			end, function(_) --[[ Line: 145 ]]
+				return { succeeded = false, value = {} }
+			end),
+			queryMetricByCampaign("AdsUANumClicksDefaultViewByUniverse", p1, config, P10):andThen(function(Result) --[[ Line: 140 ]]
+				return { succeeded = true, value = Result }
+			end, function(_) --[[ Line: 145 ]]
+				return { succeeded = false, value = {} }
+			end),
+			queryMetricByCampaign("AdsUANumImpressionsDefaultViewByUniverse", p1, config, P10):andThen(function(Result) --[[ Line: 140 ]]
+				return { succeeded = true, value = Result }
+			end, function(_) --[[ Line: 145 ]]
+				return { succeeded = false, value = {} }
+			end),
+			captureMetricOutcome(queryMetricByCampaign("AdsUAPlaytimeDefaultViewByUniverse", p1, config, P10))
+		}):andThen(function(Entry) --[[ Line: 179 ]]
+			local Entry1 = Entry[1]
+			local Entry2 = Entry[2]
+			local Entry3 = Entry[3]
+			local Entry4 = Entry[4]
+			local ByCampaign = {}
+			
+			local function _(Key) --[[ Line: 186 | Named "entryFor" ]]
+				-- upvalues: ByCampaign (copy)
+				local ByCampaignEntry = ByCampaign[Key]
+				
+				if ByCampaignEntry == nil then
+					ByCampaignEntry = {
+						plays = 0,
+						adClicks = 0,
+						adViews = 0,
+						playtimeSeconds = 0
+					}
+					ByCampaign[Key] = ByCampaignEntry
+				end
+				return ByCampaignEntry
+			end
+			
+			for i, Plays in Entry1.value do
+				local ByCampaignEntry = ByCampaign[i]
+				
+				if ByCampaignEntry == nil then
+					ByCampaignEntry = {
+						plays = 0,
+						adClicks = 0,
+						adViews = 0,
+						playtimeSeconds = 0
+					}
+					ByCampaign[i] = ByCampaignEntry
+				end
+				ByCampaignEntry.plays = Plays
+			end
+			for i1, AdClicks in Entry2.value do
+				local ByCampaignEntry = ByCampaign[i1]
+				
+				if ByCampaignEntry == nil then
+					ByCampaignEntry = {
+						plays = 0,
+						adClicks = 0,
+						adViews = 0,
+						playtimeSeconds = 0
+					}
+					ByCampaign[i1] = ByCampaignEntry
+				end
+				ByCampaignEntry.adClicks = AdClicks
+			end
+			for i2, AdViews in Entry3.value do
+				local ByCampaignEntry = ByCampaign[i2]
+				
+				if ByCampaignEntry == nil then
+					ByCampaignEntry = {
+						plays = 0,
+						adClicks = 0,
+						adViews = 0,
+						playtimeSeconds = 0
+					}
+					ByCampaign[i2] = ByCampaignEntry
+				end
+				ByCampaignEntry.adViews = AdViews
+			end
+			for i3, PlaytimeSeconds in Entry4.value do
+				local ByCampaignEntry = ByCampaign[i3]
+				
+				if ByCampaignEntry == nil then
+					ByCampaignEntry = {
+						plays = 0,
+						adClicks = 0,
+						adViews = 0,
+						playtimeSeconds = 0
+					}
+					ByCampaign[i3] = ByCampaignEntry
+				end
+				ByCampaignEntry.playtimeSeconds = PlaytimeSeconds
+			end
+			return {
+				byCampaign = ByCampaign,
+				failedMetrics = {
+					plays = not Entry1.succeeded,
+					adClicks = not Entry2.succeeded,
+					adViews = not Entry3.succeeded,
+					playtimeSeconds = not Entry4.succeeded
+				}
+			}
+		end)
+	end
+}

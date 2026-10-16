@@ -1,19 +1,19 @@
-﻿local currencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
-local parent = currencyTransfers.Parent
-local fFlagSduiOpenIncomingTransferUpsellAction = require(parent.SharedFlags).FFlagSduiOpenIncomingTransferUpsellAction
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local sduiActionType = sduiCoreSystemModule.SduiActionType
-local getSduiActionHandlerRegistry = sduiCoreSystemModule.getSduiActionHandlerRegistry
+﻿local CurrencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
+local Parent = CurrencyTransfers.Parent
+local FFlagSduiOpenIncomingTransferUpsellAction = require(Parent.SharedFlags).FFlagSduiOpenIncomingTransferUpsellAction
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiActionType = SduiCoreSystemModule.SduiActionType
+local GetSduiActionHandlerRegistryFunction = SduiCoreSystemModule.getSduiActionHandlerRegistry
 
-return function()
-	-- upvalues: fFlagSduiOpenIncomingTransferUpsellAction (ref), sduiActionType (ref), currencyTransfers (ref), getSduiActionHandlerRegistry (ref)
-	if fFlagSduiOpenIncomingTransferUpsellAction then
-		getSduiActionHandlerRegistry().registerActionHandlerConfigs({
-			[sduiActionType.OpenIncomingTransferUpsell] = {
+return function() --[[ Line: 14 | Named "registerCurrencyTransferSduiActions" ]]
+	-- upvalues: FFlagSduiOpenIncomingTransferUpsellAction (copy), SduiActionType (copy), CurrencyTransfers (copy), GetSduiActionHandlerRegistryFunction (copy)
+	if FFlagSduiOpenIncomingTransferUpsellAction then
+		GetSduiActionHandlerRegistryFunction().registerActionHandlerConfigs({
+			[SduiActionType.OpenIncomingTransferUpsell] = {
 				skipUnifiedLogging = false,
-				lazyHandler = function()
-					-- upvalues: currencyTransfers (copy)
-					return require(currencyTransfers.Actions.SduiOpenIncomingTransferUpsellAction)
+				lazyHandler = function() --[[ Line: 21 ]]
+					-- upvalues: CurrencyTransfers (upval)
+					return require(CurrencyTransfers.Actions.SduiOpenIncomingTransferUpsellAction)
 				end
 			}
 		})

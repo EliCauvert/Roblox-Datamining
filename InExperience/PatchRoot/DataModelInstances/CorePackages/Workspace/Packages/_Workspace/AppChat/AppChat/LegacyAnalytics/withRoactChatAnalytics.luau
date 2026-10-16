@@ -1,9 +1,9 @@
-﻿local roactModule = require(script:FindFirstAncestor("AppChat").Parent.Roact)
-local roactChatAnalyticsConsumerModule = require(script.Parent.RoactChatAnalyticsConsumer)
+﻿local RoactModule = require(script:FindFirstAncestor("AppChat").Parent.Roact)
+local RoactChatAnalyticsConsumerModule = require(script.Parent.RoactChatAnalyticsConsumer)
 
-return function(p1)
-	-- upvalues: roactModule (ref), roactChatAnalyticsConsumerModule (ref)
-	assert(type(p1) == "function", "Expect renderCallback to be a function.")
+return function(Callback) --[[ Line: 12 ]]
+	-- upvalues: RoactModule (copy), RoactChatAnalyticsConsumerModule (copy)
+	assert(type(Callback) == "function", "Expect renderCallback to be a function.")
 	
-	return roactModule.createElement(roactChatAnalyticsConsumerModule, { render = p1 })
+	return RoactModule.createElement(RoactChatAnalyticsConsumerModule, { render = Callback })
 end

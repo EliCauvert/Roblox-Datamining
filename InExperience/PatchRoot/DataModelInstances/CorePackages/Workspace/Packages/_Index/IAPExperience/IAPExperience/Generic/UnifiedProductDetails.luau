@@ -1,181 +1,154 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local formatNumberModule = require(parent.Utility.formatNumber)
-local reactModule = require(parent_1.React)
-local foundationModule = require(parent_1.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local text = foundationModule.Text
-local image = foundationModule.Image
-local view = foundationModule.View
-local skeleton = foundationModule.Skeleton
-local radius = foundationModule.Enums.Radius
-local virtualItemBadgeTypeModule = require(parent.Enums.VirtualItemBadgeType)
-local modelViewportModule = require(parent.Generic.ModelViewport)
-local yellowBadgeModule = require(parent.Generic.YellowBadge)
-local localizationService = game:GetService("LocalizationService")
-local useLocalization = require(parent_1.Localization).Hooks.useLocalization
-local useRobuxTextModule = require(parent.Generic.Hooks.useRobuxText)
-local fFlagUnifiedPurchaseFlowMarketplaceUIImprovements = require(parent.Parent.SharedFlags).FFlagUnifiedPurchaseFlowMarketplaceUIImprovements
-local fFlagUnifiedPurchaseAddSkeleton = require(parent.Parent.SharedFlags).FFlagUnifiedPurchaseAddSkeleton
-local fFlagEnableUnifiedPurchaseFlowForDevSubs = require(parent.Parent.SharedFlags).FFlagEnableUnifiedPurchaseFlowForDevSubs
-local getFFlagDiscountInfoForSubscriptionPurchaseModalLua = require(parent.Parent.SharedFlags).GetFFlagDiscountInfoForSubscriptionPurchaseModalLua
-local default = require(parent_1.LoggingProtocol).default
-local virtualItemBadgeShownCounter = require(parent.Generic.Events.VirtualItemBadgeCounter).VirtualItemBadgeShownCounter
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local FormatNumberModule = require(Parent.Utility.formatNumber)
+local ReactModule = require(Parent1.React)
+local FoundationModule = require(Parent1.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local Text = FoundationModule.Text
+local Image = FoundationModule.Image
+local View = FoundationModule.View
+local Skeleton = FoundationModule.Skeleton
+local Radius = FoundationModule.Enums.Radius
+local VirtualItemBadgeTypeModule = require(Parent.Enums.VirtualItemBadgeType)
+local ModelViewportModule = require(Parent.Generic.ModelViewport)
+local YellowBadgeModule = require(Parent.Generic.YellowBadge)
+local LocalizationService = game:GetService("LocalizationService")
+local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
+local UseRobuxTextModule = require(Parent.Generic.Hooks.useRobuxText)
+local FFlagUnifiedPurchaseFlowMarketplaceUIImprovements = require(Parent.Parent.SharedFlags).FFlagUnifiedPurchaseFlowMarketplaceUIImprovements
+local FFlagUnifiedPurchaseAddSkeleton = require(Parent.Parent.SharedFlags).FFlagUnifiedPurchaseAddSkeleton
+local FFlagEnableUnifiedPurchaseFlowForDevSubs = require(Parent.Parent.SharedFlags).FFlagEnableUnifiedPurchaseFlowForDevSubs
+local GetFFlagDiscountInfoForSubscriptionPurchaseModalLuaFunction = require(Parent.Parent.SharedFlags).GetFFlagDiscountInfoForSubscriptionPurchaseModalLua
+local FFlagLuaAppsEnablePromptVIPServerPurchase = require(Parent.Parent.SharedFlags).FFlagLuaAppsEnablePromptVIPServerPurchase
+local Default = require(Parent1.LoggingProtocol).default
+local VirtualItemBadgeShownCounter = require(Parent.Generic.Events.VirtualItemBadgeCounter).VirtualItemBadgeShownCounter
 
-local function _(a)
-	return if #a > 50 then a:sub(1, 50) .. "..." else a
+local function _(Text: string): string --[[ Line: 52 | Named "withMaxLength" ]]
+	return if #Text > 50 then Text:sub(1, 50) .. "..." else Text
 end
 
-local _ = require(parent.ProductPurchase.PricingTypes)
+local _ = require(Parent.ProductPurchase.PricingTypes)
 
-return function(p1)
-	-- upvalues: getFFlagDiscountInfoForSubscriptionPurchaseModalLua (ref), useLocalization (ref), useTokens (ref), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (ref), useRobuxTextModule (ref), reactModule (ref), modelViewportModule (ref), fFlagUnifiedPurchaseAddSkeleton (ref), skeleton (ref), radius (ref), image (ref), virtualItemBadgeTypeModule (ref), yellowBadgeModule (ref), default (ref), virtualItemBadgeShownCounter (ref), view (ref), text (ref), formatNumberModule (ref), localizationService (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref)
-	local var1 = getFFlagDiscountInfoForSubscriptionPurchaseModalLua()
-	local itemPrice = p1.itemPrice
-	local var2 = if itemPrice then itemPrice.priceInRobux else p1.itemRobuxCost
-	local var3 = useLocalization({ Popular = "IAPExperience.RobuxUpsell.Text.PopularItem" })
-	local priceSuffix = p1.priceSuffix
-	local var4 = useTokens()
-	local var5 = if p1.isPortrait then 128 else 72
-	local var6 = if fFlagUnifiedPurchaseFlowMarketplaceUIImprovements then useRobuxTextModule(var2) else nil
-	local var7 = useRobuxTextModule(if itemPrice then itemPrice.basePriceInRobux else p1.itemRobuxCost)
-	local var8 = itemPrice and itemPrice.priceInRobux < itemPrice.basePriceInRobux
+return function(p1) --[[ Line: 81 ]]
+	-- upvalues: GetFFlagDiscountInfoForSubscriptionPurchaseModalLuaFunction (copy), UseLocalizationFunction (copy), UseTokensFunction (copy), FFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy), UseRobuxTextModule (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy), ReactModule (copy), ModelViewportModule (copy), FFlagUnifiedPurchaseAddSkeleton (copy), Skeleton (copy), Radius (copy), Image (copy), VirtualItemBadgeTypeModule (copy), YellowBadgeModule (copy), Default (copy), VirtualItemBadgeShownCounter (copy), View (copy), Text (copy), FormatNumberModule (copy), LocalizationService (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy)
+	local FFlagDiscountInfoForSubscriptionPurchaseModalLua = GetFFlagDiscountInfoForSubscriptionPurchaseModalLuaFunction()
+	local ItemPrice = p1.itemPrice
+	local PriceInRobux = if ItemPrice then ItemPrice.priceInRobux else p1.itemRobuxCost
+	local UseLocalizationResult = UseLocalizationFunction({ Popular = "IAPExperience.RobuxUpsell.Text.PopularItem" })
+	local PriceSuffix = p1.priceSuffix
+	local UseTokensResult = UseTokensFunction()
+	local XOffset: number = if p1.isPortrait then 128 else 72
+	local UseRobuxTextModuleResult = if FFlagUnifiedPurchaseFlowMarketplaceUIImprovements then UseRobuxTextModule(PriceInRobux) else nil
+	local UseRobuxTextModuleResult1 = UseRobuxTextModule(if ItemPrice then ItemPrice.basePriceInRobux else p1.itemRobuxCost)
+	local IsBasePriceInRobuxAbove: boolean = ItemPrice and ItemPrice.basePriceInRobux > ItemPrice.priceInRobux
+	local IncludePriceSuffixOnOriginal = if FFlagLuaAppsEnablePromptVIPServerPurchase and p1.includePriceSuffixOnOriginal ~= nil then p1.includePriceSuffixOnOriginal else FFlagDiscountInfoForSubscriptionPurchaseModalLua
 	
 	if p1.isCompact then
-		var5 *= 0.7
+		XOffset *= 0.7
 	end
-	local createElement_2
-	local var9 = if p1.model ~= nil then if fFlagUnifiedPurchaseAddSkeleton and p1.itemIcon == nil and p1.isLoading then reactModule.createElement(skeleton, {
+	local Element = if p1.model == nil then if FFlagUnifiedPurchaseAddSkeleton and p1.itemIcon == nil and p1.isLoading then ReactModule.createElement(Skeleton, {
 		LayoutOrder = 1,
-		Size = UDim2.fromOffset(var5, var5),
-		radius = radius.Circle
-	}) else reactModule.createElement(image, {
+		Size = UDim2.fromOffset(XOffset, XOffset),
+		radius = Radius.Circle
+	}) else ReactModule.createElement(Image, {
 		BackgroundTransparency = 1,
 		Position = UDim2.new(0, 5, 0, 5),
-		Size = UDim2.new(0, var5, 0, var5),
+		Size = UDim2.new(0, XOffset, 0, XOffset),
 		ScaleType = Enum.ScaleType.Stretch,
 		Image = if p1.itemIcon then p1.itemIcon else "icons/status/imageunavailable",
 		imageStyle = {
-			Transparency = if p1.itemIcon then nil else var4.Color.Content.Default.Transparency
+			Transparency = if p1.itemIcon then nil else UseTokensResult.Color.Content.Default.Transparency
 		}
-	}) else reactModule.createElement(modelViewportModule, {
+	}) else ReactModule.createElement(ModelViewportModule, {
 		model = p1.model,
 		Position = UDim2.fromOffset(5, 5),
-		Size = UDim2.fromOffset(var5, var5)
+		Size = UDim2.fromOffset(XOffset, XOffset)
 	})
-	local var10 = if p1.badgeType and p1.badgeType == virtualItemBadgeTypeModule.Popular then reactModule.createElement(yellowBadgeModule, {
+	local Element1 = if p1.badgeType and p1.badgeType == VirtualItemBadgeTypeModule.Popular then ReactModule.createElement(YellowBadgeModule, {
 		LayoutOrder = 3,
 		Icon = "icons/menu/fire_fill",
-		Text = var3.Popular
+		Text = UseLocalizationResult.Popular
 	}) else nil
-	reactModule.useEffect(function()
-		-- upvalues: var10 (ref), default (copy), virtualItemBadgeShownCounter (copy), p1 (ref)
-		if var10 then
-			default:logRobloxTelemetryCounter(virtualItemBadgeShownCounter, 1, { badgeType = p1.badgeType })
+	ReactModule.useEffect(function() --[[ Line: 144 ]]
+		-- upvalues: Element1 (copy), Default (upval), VirtualItemBadgeShownCounter (upval), p1 (copy)
+		if Element1 then
+			Default:logRobloxTelemetryCounter(VirtualItemBadgeShownCounter, 1, { badgeType = p1.badgeType })
 			
 			return
 		end
 	end, {})
-	local var11 = if p1.isCompact then "auto-xy text-align-x-left text-wrap text-title-small content-emphasis" else "auto-xy text-align-x-left text-wrap text-title-medium content-emphasis"
-	local var12 = if p1.isCompact then "auto-xy text-align-x-left text-wrap text-title-small content-emphasis" else "auto-xy text-align-x-left text-wrap text-title-medium content-emphasis"
-	local createElement = reactModule.createElement
-	local t = {
+	local AutoXyTextAlignXLeftTextWrapTextTitleSmallContentEmphasis: string = if p1.isCompact then "auto-xy text-align-x-left text-wrap text-title-small content-emphasis" else "auto-xy text-align-x-left text-wrap text-title-medium content-emphasis"
+	local AutoXyTextAlignXLeftTextWrapTextTitleSmallContentEmphasis1: string = if p1.isCompact then "auto-xy text-align-x-left text-wrap text-title-small content-emphasis" else "auto-xy text-align-x-left text-wrap text-title-medium content-emphasis"
+	local CreateElementFunction1 = ReactModule.createElement
+	local config = {
 		tag = "auto-y row gap-small align-y-center align-x-left",
 		LayoutOrder = p1.layoutOrder,
 		Size = UDim2.new(1, 0, 0, 0)
 	}
-	local t_1 = { ItemIcon = var9 }
-	local createElement_1 = reactModule.createElement
-	local t_2 = {
+	local config1 = { ItemIcon = Element }
+	local CreateElementFunction = ReactModule.createElement
+	local config2 = {
 		LayoutOrder = 2,
 		tag = "col auto-y gap-small",
-		Size = UDim2.new(1, (-var5) - 6, 0, 0)
+		Size = UDim2.new(1, -XOffset - 6, 0, 0)
 	}
-	local t_3 = {}
+	local t = {}
+	local Element2 = nil
 	
-	if fFlagUnifiedPurchaseAddSkeleton and p1.isLoading and p1.itemName == nil then
-		createElement_2 = reactModule.createElement(skeleton, {
+	if FFlagUnifiedPurchaseAddSkeleton and p1.isLoading and p1.itemName == nil then
+		Element2 = ReactModule.createElement(Skeleton, {
 			LayoutOrder = 1,
 			tag = "position-bottom-center",
 			Size = UDim2.fromScale(1, 0.3),
-			radius = radius.Circle
+			radius = Radius.Circle
 		})
 	else
-		createElement_2 = reactModule.createElement
-		local var13 = text
-		local t_4 = { LayoutOrder = 1, Size = UDim2.new(1, 0, 0, 0) }
-		local itemName = p1.itemName
-		t_4.Text = if #itemName > 50 then itemName:sub(1, 50) .. "..." else itemName
-		t_4.tag = var11
-		createElement_2 = createElement_2(var13, t_4)
-	end
-	local createElement_3
-	t_3.ItemName = createElement_2
-	t_3.ItemSubtitle = p1.subtitleView
-	
-	if fFlagUnifiedPurchaseAddSkeleton and p1.isLoading and var2 == nil then
-		createElement_3 = reactModule.createElement(skeleton, {
-			LayoutOrder = if p1.subtitleView then 3 else 2,
-			Size = UDim2.fromScale(0.4, 0.3),
-			radius = radius.Circle
+		local ItemName: string = p1.itemName
+		Element2 = ReactModule.createElement(Text, {
+			LayoutOrder = 1,
+			Size = UDim2.new(1, 0, 0, 0),
+			Text = if #ItemName > 50 then ItemName:sub(1, 50) .. "..." else ItemName,
+			tag = AutoXyTextAlignXLeftTextWrapTextTitleSmallContentEmphasis
 		})
-	else
-		local var14
-		createElement_3 = reactModule.createElement
-		local var15 = view
-		local t_4 = {
-			LayoutOrder = if p1.subtitleView then 3 else 2,
-			tag = if p1.isPortrait then "auto-xy col gap-small align-y-center" elseif var1 and var8 then "row align-y-center gap-small auto-xy clip" else "auto-xy row gap-small align-y-center"
-		}
-		local t_5 = {}
-		
-		if var2 then
-			if fFlagUnifiedPurchaseFlowMarketplaceUIImprovements then
-				var14 = reactModule.createElement
-				var14 = var14(text, {
-					LayoutOrder = 1,
-					RichText = true,
-					Text = var6 .. (if priceSuffix and priceSuffix ~= "" then "" .. priceSuffix else ""),
-					tag = var12
-				})
-			else
-				var14 = reactModule.createElement
-				var14 = var14(text, {
-					LayoutOrder = 1,
-					tag = "auto-xy text-align-x-left text-wrap text-title-medium content-emphasis",
-					Text = utf8.char(57346) .. " " .. formatNumberModule(localizationService.RobloxLocaleId, var2) .. (if priceSuffix and priceSuffix ~= "" then "" .. priceSuffix else "")
-				})
-			end
-		elseif fFlagEnableUnifiedPurchaseFlowForDevSubs and p1.itemDisplayPrice then
-			var14 = reactModule.createElement
-			var14 = var14(text, {
-				LayoutOrder = 1,
-				Text = p1.itemDisplayPrice .. (if priceSuffix and priceSuffix ~= "" then "" .. priceSuffix else ""),
-				tag = var12
-			})
-		else
-			var14 = nil
-		end
-		local var16
-		t_5.ItemCost = var14
-		
-		if var8 and var7 then
-			var16 = reactModule.createElement
-			var16 = var16(text, {
-				LayoutOrder = 2,
-				tag = "auto-xy text-align-x-left text-wrap text-body-small content-default",
-				RichText = true,
-				Text = "<s>" .. var7 .. (if var1 and priceSuffix and priceSuffix ~= "" then priceSuffix else "") .. "</s>"
-			})
-		else
-			var16 = nil
-		end
-		t_5.OriginalPrice = var16
-		t_5.ItemBadge = var10
-		createElement_3 = createElement_3(var15, t_4, t_5)
 	end
-	t_3.ItemDetails = createElement_3
-	t_1.ItemDetailsFrame = createElement_1(view, t_2, t_3)
+	t.ItemName = Element2
+	t.ItemSubtitle = p1.subtitleView
+	t.ItemDetails = if FFlagUnifiedPurchaseAddSkeleton and p1.isLoading and PriceInRobux == nil then ReactModule.createElement(Skeleton, {
+		LayoutOrder = if p1.subtitleView then 3 else 2,
+		Size = UDim2.fromScale(0.4, 0.3),
+		radius = Radius.Circle
+	}) else ReactModule.createElement(View, {
+		LayoutOrder = if p1.subtitleView then 3 else 2,
+		tag = if p1.isPortrait then "auto-xy col gap-small align-y-center" elseif FFlagDiscountInfoForSubscriptionPurchaseModalLua and IsBasePriceInRobuxAbove then "row align-y-center gap-small auto-xy clip" else "auto-xy row gap-small align-y-center"
+	}, {
+		ItemCost = if FFlagLuaAppsEnablePromptVIPServerPurchase and p1.priceText then ReactModule.createElement(Text, {
+			LayoutOrder = 1,
+			RichText = true,
+			Text = p1.priceText,
+			tag = AutoXyTextAlignXLeftTextWrapTextTitleSmallContentEmphasis1
+		}) elseif PriceInRobux then if FFlagUnifiedPurchaseFlowMarketplaceUIImprovements then ReactModule.createElement(Text, {
+			LayoutOrder = 1,
+			RichText = true,
+			Text = UseRobuxTextModuleResult .. (if PriceSuffix and PriceSuffix ~= "" then "" .. PriceSuffix else ""),
+			tag = AutoXyTextAlignXLeftTextWrapTextTitleSmallContentEmphasis1
+		}) else ReactModule.createElement(Text, {
+			LayoutOrder = 1,
+			tag = "auto-xy text-align-x-left text-wrap text-title-medium content-emphasis",
+			Text = utf8.char(57346) .. " " .. FormatNumberModule(LocalizationService.RobloxLocaleId, PriceInRobux) .. (if PriceSuffix and PriceSuffix ~= "" then "" .. PriceSuffix else "")
+		}) elseif FFlagEnableUnifiedPurchaseFlowForDevSubs and p1.itemDisplayPrice then ReactModule.createElement(Text, {
+			LayoutOrder = 1,
+			Text = p1.itemDisplayPrice .. (if PriceSuffix and PriceSuffix ~= "" then "" .. PriceSuffix else ""),
+			tag = AutoXyTextAlignXLeftTextWrapTextTitleSmallContentEmphasis1
+		}) else nil,
+		OriginalPrice = if IsBasePriceInRobuxAbove and UseRobuxTextModuleResult1 then ReactModule.createElement(Text, {
+			LayoutOrder = 2,
+			tag = "auto-xy text-align-x-left text-wrap text-body-small content-default",
+			RichText = true,
+			Text = "<s>" .. UseRobuxTextModuleResult1 .. (if IncludePriceSuffixOnOriginal and PriceSuffix and PriceSuffix ~= "" then PriceSuffix else "") .. "</s>"
+		}) else nil,
+		ItemBadge = Element1
+	})
+	config1.ItemDetailsFrame = CreateElementFunction(View, config2, t)
 	
-	return createElement(view, t, t_1)
+	return CreateElementFunction1(View, config, config1)
 end

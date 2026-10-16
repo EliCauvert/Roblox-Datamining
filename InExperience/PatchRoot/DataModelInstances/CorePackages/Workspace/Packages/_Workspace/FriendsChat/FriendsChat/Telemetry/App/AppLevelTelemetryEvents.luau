@@ -1,20 +1,21 @@
-﻿local parent = script:FindFirstAncestor("FriendsChat").Parent
-local telemetryModule = require(parent.AppChat.Telemetry)
-local defaultTelemetryEventsModule = require(parent.AppChat.DefaultTelemetryEvents)
+﻿local Parent = script:FindFirstAncestor("FriendsChat").Parent
+local TelemetryModule = require(Parent.AppChat.Telemetry)
+local DefaultTelemetryEventsModule = require(Parent.AppChat.DefaultTelemetryEvents)
 
 return {
-	AppChatVisible = telemetryModule.new({
+	AppChatVisible = TelemetryModule.new({
 		name = "appChatVisible",
 		description = "",
-		lastUpdated = { 2026, 7, 7 },
+		lastUpdated = { 2026, 10, 7 },
 		backendsList = {
-			defaultTelemetryEventsModule.namedCounterConfigurationAndFormat("AppChat.Navigation.Visible", function(p1)
+			DefaultTelemetryEventsModule.namedCounterConfigurationAndFormat("AppChat.Navigation.Visible", function(p1) --[[ Line: 31 ]]
 				return {
 					isChatEnabled = p1.isChatEnabled,
-					isChatLoading = p1.isChatLoading
+					isChatLoading = p1.isChatLoading,
+					isInConversation = p1.isInConversation
 				}
 			end),
-			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
+			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1) --[[ Line: 39 ]]
 				return {
 					isChatEnabled = p1.isChatEnabled,
 					isChatLoading = p1.isChatLoading
@@ -22,18 +23,18 @@ return {
 			end)
 		}
 	}),
-	AppChatClosed = telemetryModule.new({
+	AppChatClosed = TelemetryModule.new({
 		name = "appChatClosed",
 		description = "",
 		lastUpdated = { 2026, 7, 7 },
 		backendsList = {
-			defaultTelemetryEventsModule.namedCounterConfigurationAndFormat("AppChat.Navigation.Closed", function(p1)
+			DefaultTelemetryEventsModule.namedCounterConfigurationAndFormat("AppChat.Navigation.Closed", function(p1) --[[ Line: 54 ]]
 				return {
 					isChatEnabled = p1.isChatEnabled,
 					isChatLoading = p1.isChatLoading
 				}
 			end),
-			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
+			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1) --[[ Line: 61 ]]
 				return {
 					isChatEnabled = p1.isChatEnabled,
 					isChatLoading = p1.isChatLoading

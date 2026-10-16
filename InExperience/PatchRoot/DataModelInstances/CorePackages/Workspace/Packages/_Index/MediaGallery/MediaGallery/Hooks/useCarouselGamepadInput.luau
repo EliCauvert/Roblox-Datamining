@@ -1,68 +1,69 @@
-﻿local mediaGallery = script:FindFirstAncestor("MediaGallery")
-local parent = mediaGallery.Parent
-local reactModule = require(parent.React)
-local focusNavigationEventNameEnum = require(parent.FocusNavigationUtils).FocusNavigationEventNameEnum
-local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
-local inputHandlersModule = require(parent.InputHandlers)
-local fFlagLuaAppMediaGalleryGamepadSupport = require(parent.SharedFlags).FFlagLuaAppMediaGalleryGamepadSupport
-local _ = require(mediaGallery.MediaGalleryTypes)
+﻿local MediaGallery = script:FindFirstAncestor("MediaGallery")
+local Parent = MediaGallery.Parent
+local ReactModule = require(Parent.React)
+local FocusNavigationEventNameEnum = require(Parent.FocusNavigationUtils).FocusNavigationEventNameEnum
+local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
+local InputHandlersModule = require(Parent.InputHandlers)
+local FFlagLuaAppMediaGalleryGamepadSupport = require(Parent.SharedFlags).FFlagLuaAppMediaGalleryGamepadSupport
+local _ = require(MediaGallery.MediaGalleryTypes)
 
-return function(p1)
-	-- upvalues: reactModule (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), reactFocusNavigationModule (ref)
-	local var1 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref)
+return function(p1) --[[ Line: 30 | Named "useCarouselGamepadInput" ]]
+	-- upvalues: ReactModule (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), ReactFocusNavigationModule (copy)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 31 ]]
+		-- upvalues: p1 (copy)
 		if p1.onFullscreenToggle then
 			p1.onFullscreenToggle()
 		end
 	end, { p1.onFullscreenToggle })
-	local var2 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref)
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 37 ]]
+		-- upvalues: p1 (copy)
 		if p1.isVideoActive then
 			p1.toggleMuteSignal:fire()
 		end
 	end, { p1.toggleMuteSignal, p1.isVideoActive })
 	
-	return reactFocusNavigationModule.useEventHandlerMap(reactModule.useMemo(function()
-		-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), var1 (ref), var2 (ref), fFlagLuaAppMediaGalleryGamepadSupport (copy), p1 (ref)
-		local t = {
-			[focusNavigationEventNameEnum.Fullscreen] = { handler = inputHandlersModule.onRelease(var1) },
-			[focusNavigationEventNameEnum.ExitFullscreen] = { handler = inputHandlersModule.onRelease(var1) },
-			[focusNavigationEventNameEnum.Mute] = { handler = inputHandlersModule.onRelease(var2) },
-			[focusNavigationEventNameEnum.Unmute] = { handler = inputHandlersModule.onRelease(var2) }
+	return (ReactFocusNavigationModule.useEventHandlerMap(ReactModule.useMemo(function() --[[ Line: 82 ]]
+		-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), UseResult (copy), UseResult1 (copy), FFlagLuaAppMediaGalleryGamepadSupport (upval), p1 (copy)
+		local config = {
+			[FocusNavigationEventNameEnum.Fullscreen] = { handler = InputHandlersModule.onRelease(UseResult) },
+			[FocusNavigationEventNameEnum.ExitFullscreen] = { handler = InputHandlersModule.onRelease(UseResult) },
+			[FocusNavigationEventNameEnum.Mute] = { handler = InputHandlersModule.onRelease(UseResult1) },
+			[FocusNavigationEventNameEnum.Unmute] = { handler = InputHandlersModule.onRelease(UseResult1) }
 		}
 		
-		if fFlagLuaAppMediaGalleryGamepadSupport then
-			t[focusNavigationEventNameEnum.PageBackward] = { handler = inputHandlersModule.onPress(p1.scrollLeft) }
-			t[focusNavigationEventNameEnum.PageForward] = { handler = inputHandlersModule.onPress(p1.scrollRight) }
-			t[focusNavigationEventNameEnum.PlayVideo] = {
-				handler = inputHandlersModule.onRelease(function() end)
+		if FFlagLuaAppMediaGalleryGamepadSupport then
+			config[FocusNavigationEventNameEnum.PageBackward] = { handler = InputHandlersModule.onPress(p1.scrollLeft) }
+			config[FocusNavigationEventNameEnum.PageForward] = { handler = InputHandlersModule.onPress(p1.scrollRight) }
+			config[FocusNavigationEventNameEnum.PlayVideo] = {
+				handler = InputHandlersModule.onRelease(function() --[[ Line: 108 ]] end)
 			}
-			t[focusNavigationEventNameEnum.PauseVideo] = {
-				handler = inputHandlersModule.onRelease(function() end)
+			config[FocusNavigationEventNameEnum.PauseVideo] = {
+				handler = InputHandlersModule.onRelease(function() --[[ Line: 109 ]] end)
 			}
 			
-			return t
+			return config
+		else
+			config[FocusNavigationEventNameEnum.TabBackward] = { handler = InputHandlersModule.onRelease(p1.scrollLeft) }
+			config[FocusNavigationEventNameEnum.TabForward] = { handler = InputHandlersModule.onRelease(p1.scrollRight) }
+			
+			return config
 		end
-		t[focusNavigationEventNameEnum.TabBackward] = { handler = inputHandlersModule.onRelease(p1.scrollLeft) }
-		t[focusNavigationEventNameEnum.TabForward] = { handler = inputHandlersModule.onRelease(p1.scrollRight) }
-		
-		return t
-	end, { p1.scrollLeft, p1.scrollRight, var1, var2 }), reactFocusNavigationModule.useEventMap(reactModule.useMemo(function()
-		-- upvalues: fFlagLuaAppMediaGalleryGamepadSupport (copy), focusNavigationEventNameEnum (copy), p1 (ref)
+	end, { p1.scrollLeft, p1.scrollRight, UseResult, UseResult1 }), (ReactFocusNavigationModule.useEventMap((ReactModule.useMemo(function() --[[ Line: 43 ]]
+		-- upvalues: FFlagLuaAppMediaGalleryGamepadSupport (upval), FocusNavigationEventNameEnum (upval), p1 (copy)
 		return {
-			[Enum.KeyCode.ButtonL1] = if fFlagLuaAppMediaGalleryGamepadSupport then nil else focusNavigationEventNameEnum.TabBackward,
-			[Enum.KeyCode.ButtonR1] = if fFlagLuaAppMediaGalleryGamepadSupport then nil else focusNavigationEventNameEnum.TabForward,
-			[Enum.KeyCode.ButtonL2] = if fFlagLuaAppMediaGalleryGamepadSupport then focusNavigationEventNameEnum.PageBackward else nil,
-			[Enum.KeyCode.ButtonR2] = if fFlagLuaAppMediaGalleryGamepadSupport then focusNavigationEventNameEnum.PageForward else nil,
-			[Enum.KeyCode.ButtonA] = if fFlagLuaAppMediaGalleryGamepadSupport and p1.isVideoActive and p1.isVideoReady then if p1.isVideoPlaying then focusNavigationEventNameEnum.PauseVideo else focusNavigationEventNameEnum.PlayVideo else nil,
-			[Enum.KeyCode.ButtonR3] = if p1.isFullscreen then focusNavigationEventNameEnum.ExitFullscreen else focusNavigationEventNameEnum.Fullscreen,
-			[Enum.KeyCode.ButtonL3] = if not p1.isVideoActive then nil elseif p1.isMuted then focusNavigationEventNameEnum.Unmute else focusNavigationEventNameEnum.Mute
+			[Enum.KeyCode.ButtonL1] = if FFlagLuaAppMediaGalleryGamepadSupport then nil else FocusNavigationEventNameEnum.TabBackward,
+			[Enum.KeyCode.ButtonR1] = if FFlagLuaAppMediaGalleryGamepadSupport then nil else FocusNavigationEventNameEnum.TabForward,
+			[Enum.KeyCode.ButtonL2] = if FFlagLuaAppMediaGalleryGamepadSupport then FocusNavigationEventNameEnum.PageBackward else nil,
+			[Enum.KeyCode.ButtonR2] = if FFlagLuaAppMediaGalleryGamepadSupport then FocusNavigationEventNameEnum.PageForward else nil,
+			[Enum.KeyCode.ButtonA] = if FFlagLuaAppMediaGalleryGamepadSupport and p1.isVideoActive and p1.isVideoReady then if p1.isVideoPlaying then FocusNavigationEventNameEnum.PauseVideo else FocusNavigationEventNameEnum.PlayVideo else nil,
+			[Enum.KeyCode.ButtonR3] = if p1.isFullscreen then FocusNavigationEventNameEnum.ExitFullscreen else FocusNavigationEventNameEnum.Fullscreen,
+			[Enum.KeyCode.ButtonL3] = if p1.isVideoActive then if p1.isMuted then FocusNavigationEventNameEnum.Unmute else FocusNavigationEventNameEnum.Mute else nil
 		}
 	end, {
 		p1.isFullscreen,
 		p1.isMuted,
 		p1.isVideoActive,
-		if fFlagLuaAppMediaGalleryGamepadSupport then p1.isVideoPlaying else nil,
-		if fFlagLuaAppMediaGalleryGamepadSupport then p1.isVideoReady else nil
-	})))
+		if FFlagLuaAppMediaGalleryGamepadSupport then p1.isVideoPlaying else nil,
+		if FFlagLuaAppMediaGalleryGamepadSupport then p1.isVideoReady else nil
+	}))))))
 end

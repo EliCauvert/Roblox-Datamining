@@ -1,332 +1,333 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local marketplaceService = game:GetService("MarketplaceService")
-local playersService = game:GetService("Players")
-local httpService = game:GetService("HttpService")
-local promiseModule = require(corePackagesService.Packages.Promise)
-local avatarEditorService = game:GetService("AvatarEditorService")
-local url = require(corePackagesService.Workspace.Packages.Http).Url
-local _ = require(corePackagesService.Packages.LuauPolyfill)
-local _ = require(corePackagesService.Workspace.Packages.AvatarExperienceInspectAndBuy)
-local formattedText = string.format("https://develop.%s", url.DOMAIN)
+﻿local CorePackages = game:GetService("CorePackages")
+local MarketplaceService = game:GetService("MarketplaceService")
+local Players = game:GetService("Players")
+local HttpService = game:GetService("HttpService")
+local PromiseModule = require(CorePackages.Packages.Promise)
+local AvatarEditorService = game:GetService("AvatarEditorService")
+local Url = require(CorePackages.Workspace.Packages.Http).Url
+local _ = require(CorePackages.Packages.LuauPolyfill)
+local _ = require(CorePackages.Workspace.Packages.AvatarExperienceInspectAndBuy)
+local Formatted = string.format("https://develop.%s", Url.DOMAIN)
 local AXEnableIaBRbxClientFeature = game:DefineFastFlag("AXEnableIaBRbxClientFeature", false)
-local inspectAndBuyFeature = game:DefineFastString("InspectAndBuyFeature", "InspectAndBuy")
+local InspectAndBuyFeature = game:DefineFastString("InspectAndBuyFeature", "InspectAndBuy")
 
-local function _(p1, p2, p3, p4)
-	-- upvalues: httpService (ref)
-	return httpService:RequestInternal(p1):Start(function(p5, p6)
-		-- upvalues: p2 (ref), httpService (copy), p3 (ref), p4 (ref)
-		if not p5 or p6.StatusCode ~= 200 then
-			p4(p6)
+local function _(Options, p1, p2, p3) --[[ Line: 29 | Named "request" ]]
+	-- upvalues: HttpService (copy)
+	return HttpService:RequestInternal(Options):Start(function(p4, p5) --[[ Line: 30 ]]
+		-- upvalues: p1 (copy), HttpService (upval), p2 (copy), p3 (copy)
+		if not p4 or p5.StatusCode ~= 200 then
+			p3(p5)
 			
 			return
 		end
-		local body
-		local var1 = true
-		local _ = nil
+		local v1 = true
+		local Body = nil
 		
-		if p2 and p6.Body ~= "null" then
-			local ok, status = pcall(httpService.JSONDecode, httpService, p6.Body)
-			var1 = ok
-			body = status
+		if p1 and p5.Body ~= "null" then
+			v1, Body = pcall(HttpService.JSONDecode, HttpService, p5.Body)
 		else
-			body = p6.Body
+			Body = p5.Body
 		end
-		if var1 then
-			p3(body)
+		if v1 then
+			p2(Body)
 			
 			return
+		else
+			p3("Could not parse JSON.")
 		end
-		p4("Could not parse JSON.")
 	end)
 end
 
-local function createYieldingPromise(p1, p2)
-	-- upvalues: AXEnableIaBRbxClientFeature (ref), inspectAndBuyFeature (ref), promiseModule (ref), httpService (ref)
+local function createYieldingPromise(Options, p1) --[[ Line: 52 ]]
+	-- upvalues: AXEnableIaBRbxClientFeature (copy), InspectAndBuyFeature (copy), PromiseModule (copy), HttpService (copy)
 	if AXEnableIaBRbxClientFeature then
-		p1.Headers = p1.Headers or {}
-		p1.Headers["rbx-client-feature"] = inspectAndBuyFeature
+		Options.Headers = Options.Headers or {}
+		Options.Headers["rbx-client-feature"] = InspectAndBuyFeature
 	end
-	return promiseModule.new(function(p3, p4)
-		-- upvalues: p1 (ref), p2 (ref), httpService (copy)
-		coroutine.wrap(function()
-			-- upvalues: p1 (copy), p2 (copy), p3 (ref), p4 (ref), httpService (copy)
-			local _ = httpService:RequestInternal(p1):Start(function(p5, p6)
-				-- upvalues: p2 (ref), httpService (copy), p3 (ref), p4 (ref)
-				if not p5 or p6.StatusCode ~= 200 then
-					p4(p6)
+	return PromiseModule.new(function(Callback1, Callback) --[[ Line: 57 ]]
+		-- upvalues: Options (copy), p1 (copy), HttpService (upval)
+		coroutine.wrap(function() --[[ Line: 58 ]]
+			-- upvalues: Options (upval), p1 (upval), Callback1 (copy), Callback (copy), HttpService (upval)
+			local _ = HttpService:RequestInternal(Options):Start(function(p2, p3) --[[ Line: 30 ]]
+				-- upvalues: p1 (copy), HttpService (upval), Callback1 (copy), Callback (copy)
+				if not p2 or p3.StatusCode ~= 200 then
+					Callback(p3)
 					
 					return
 				end
-				local body
-				local var1 = true
-				local _ = nil
+				local v1 = true
+				local Body = nil
 				
-				if p2 and p6.Body ~= "null" then
-					local ok, status = pcall(httpService.JSONDecode, httpService, p6.Body)
-					var1 = ok
-					body = status
+				if p1 and p3.Body ~= "null" then
+					v1, Body = pcall(HttpService.JSONDecode, HttpService, p3.Body)
 				else
-					body = p6.Body
+					Body = p3.Body
 				end
-				if var1 then
-					p3(body)
+				if v1 then
+					Callback1(Body)
 					
 					return
+				else
+					Callback("Could not parse JSON.")
 				end
-				p4("Could not parse JSON.")
 			end)
 		end)()
 	end)
 end
 
-local function getPreviewAvatar(p1)
-	-- upvalues: url (ref), httpService (ref), createYieldingPromise (ref)
+local function getPreviewAvatar(Assets) --[[ Line: 67 ]]
+	-- upvalues: Url (copy), HttpService (copy), createYieldingPromise (copy)
 	return createYieldingPromise({
 		Method = "POST",
-		Url = url.APIS_URL .. "look-api/v1/looks/purchase-details",
-		Body = httpService:JSONEncode({ assets = p1 }),
+		Url = Url.APIS_URL .. "look-api/v1/looks/purchase-details",
+		Body = HttpService:JSONEncode({ assets = Assets }),
 		Headers = { ["Content-Type"] = "application/json" }
 	}, true)
 end
 
-local function getProductInfo(p1)
-	-- upvalues: promiseModule (ref), marketplaceService (ref)
-	return promiseModule.new(function(p2, p3)
-		-- upvalues: marketplaceService (copy), p1 (ref)
-		local ok, status = pcall(function()
-			-- upvalues: marketplaceService (copy), p1 (copy)
-			return marketplaceService:GetProductInfoAsync(p1)
+local function getProductInfo(AssetId) --[[ Line: 85 ]]
+	-- upvalues: PromiseModule (copy), MarketplaceService (copy)
+	return PromiseModule.new(function(Callback: (any) -> (), Callback1: (any, any) -> ()) --[[ Line: 86 ]]
+		-- upvalues: MarketplaceService (upval), AssetId (copy)
+		local Success, Result = pcall(function() --[[ Line: 87 ]]
+			-- upvalues: MarketplaceService (upval), AssetId (upval)
+			return MarketplaceService:GetProductInfoAsync(AssetId)
 		end)
 		
-		if ok then
-			p2(status)
+		if Success then
+			Callback(Result)
 			
 			return
+		else
+			Callback1("Failure in getProductInfo: ", (tostring(Result)))
 		end
-		p3("Failure in getProductInfo: ", tostring(status))
 	end)
 end
 
-local function getBatchItemDetails(p1, p2)
-	-- upvalues: promiseModule (ref), avatarEditorService (ref)
-	return promiseModule.new(function(p3, p4)
-		-- upvalues: avatarEditorService (copy), p1 (ref), p2 (ref)
-		local ok, status = pcall(function()
-			-- upvalues: avatarEditorService (copy), p1 (copy), p2 (copy)
-			return avatarEditorService:GetBatchItemDetailsAsync(p1, p2)
+local function getBatchItemDetails(ItemIds, ItemType) --[[ Line: 102 ]]
+	-- upvalues: PromiseModule (copy), AvatarEditorService (copy)
+	return PromiseModule.new(function(Callback: (any) -> (), Callback1: (any, any) -> ()) --[[ Line: 103 ]]
+		-- upvalues: AvatarEditorService (upval), ItemIds (copy), ItemType (copy)
+		local Success, Result = pcall(function() --[[ Line: 104 ]]
+			-- upvalues: AvatarEditorService (upval), ItemIds (upval), ItemType (upval)
+			return AvatarEditorService:GetBatchItemDetailsAsync(ItemIds, ItemType)
 		end)
 		
-		if ok then
-			p3(status)
+		if Success then
+			Callback(Result)
 			
 			return
+		else
+			Callback1("Failure in batchGetItemDetails: ", (tostring(Result)))
 		end
-		p4("Failure in batchGetItemDetails: ", tostring(status))
 	end)
 end
 
-local function getBatchItemDetailsV2(p1)
-	-- upvalues: url (ref), httpService (ref), createYieldingPromise (ref)
+local function getBatchItemDetailsV2(Items) --[[ Line: 121 ]]
+	-- upvalues: Url (copy), HttpService (copy), createYieldingPromise (copy)
 	return createYieldingPromise({
 		Method = "POST",
-		Url = url.CATALOG_URL .. "v1/catalog/items/details",
-		Body = httpService:JSONEncode({ items = p1 }),
+		Url = Url.CATALOG_URL .. "v1/catalog/items/details",
+		Body = HttpService:JSONEncode({ items = Items }),
 		Headers = { ["Content-Type"] = "application/json" }
 	}, true)
 end
 
-local function getItemDetails(p1, p2)
-	-- upvalues: promiseModule (ref), avatarEditorService (ref)
-	return promiseModule.new(function(p3, p4)
-		-- upvalues: avatarEditorService (copy), p1 (ref), p2 (ref)
-		local ok, status = pcall(function()
-			-- upvalues: avatarEditorService (copy), p1 (copy), p2 (copy)
-			return avatarEditorService:GetItemDetailsAsync(p1, p2)
+local function getItemDetails(ItemId, ItemType) --[[ Line: 139 ]]
+	-- upvalues: PromiseModule (copy), AvatarEditorService (copy)
+	return PromiseModule.new(function(Callback: (any) -> (), Callback1: (any, any) -> ()) --[[ Line: 140 ]]
+		-- upvalues: AvatarEditorService (upval), ItemId (copy), ItemType (copy)
+		local Success, Result = pcall(function() --[[ Line: 141 ]]
+			-- upvalues: AvatarEditorService (upval), ItemId (upval), ItemType (upval)
+			return AvatarEditorService:GetItemDetailsAsync(ItemId, ItemType)
 		end)
 		
-		if ok then
-			p3(status)
+		if Success then
+			Callback(Result)
 			
 			return
+		else
+			Callback1("Failure in getItemDetails: ", (tostring(Result)))
 		end
-		p4("Failure in getItemDetails: ", tostring(status))
 	end)
 end
 
-local function getPlayerName(p1)
-	-- upvalues: promiseModule (ref), playersService (ref)
-	return promiseModule.new(function(p2, p3)
-		-- upvalues: playersService (copy), p1 (ref)
-		local ok, status = pcall(function()
-			-- upvalues: playersService (copy), p1 (copy)
-			return playersService:GetNameFromUserIdAsync(p1)
+local function getPlayerName(UserId) --[[ Line: 156 ]]
+	-- upvalues: PromiseModule (copy), Players (copy)
+	return PromiseModule.new(function(Callback: (any) -> (), Callback1: (any, any) -> ()) --[[ Line: 157 ]]
+		-- upvalues: Players (upval), UserId (copy)
+		local Success, Result = pcall(function() --[[ Line: 158 ]]
+			-- upvalues: Players (upval), UserId (upval)
+			return Players:GetNameFromUserIdAsync(UserId)
 		end)
 		
-		if ok then
-			p2(status)
+		if Success then
+			Callback(Result)
 			
 			return
+		else
+			Callback1("Failure in getPlayerName: ", (tostring(Result)))
 		end
-		p3("Failure in getPlayerName: ", tostring(status))
 	end)
 end
 
-local function getAssetBundles(value)
-	-- upvalues: url (ref), createYieldingPromise (ref)
+local function getAssetBundles(p1) --[[ Line: 173 ]]
+	-- upvalues: Url (copy), createYieldingPromise (copy)
 	return createYieldingPromise({
 		Method = "GET",
-		Url = url.CATALOG_URL .. "v1/assets/" .. tostring(value) .. "/bundles"
+		Url = Url.CATALOG_URL .. "v1/assets/" .. tostring(p1) .. "/bundles"
 	}, true)
 end
 
-local function getHumanoidDescriptionFromCostumeId(p1)
-	-- upvalues: promiseModule (ref), playersService (ref)
-	return promiseModule.new(function(p2, _)
-		-- upvalues: playersService (copy), p1 (ref)
-		spawn(function()
-			-- upvalues: playersService (copy), p1 (copy), p2 (ref)
-			local var1 = playersService:GetHumanoidDescriptionFromOutfitIdAsync(p1)
+local function getHumanoidDescriptionFromCostumeId(OutfitId) --[[ Line: 186 ]]
+	-- upvalues: PromiseModule (copy), Players (copy)
+	return PromiseModule.new(function(Callback, _) --[[ Line: 187 ]]
+		-- upvalues: Players (upval), OutfitId (copy)
+		spawn(function() --[[ Line: 188 ]]
+			-- upvalues: Players (upval), OutfitId (upval), Callback (copy)
+			local HumanoidDescriptionFromOutfitIdAsync = Players:GetHumanoidDescriptionFromOutfitIdAsync(OutfitId)
 			
-			if var1 then
-				p2(var1)
+			if HumanoidDescriptionFromOutfitIdAsync then
+				Callback(HumanoidDescriptionFromOutfitIdAsync)
 			end
 		end)
 	end)
 end
 
-local function getAssetFavoriteCount(value)
-	-- upvalues: url (ref), createYieldingPromise (ref)
+local function getAssetFavoriteCount(p1) --[[ Line: 201 ]]
+	-- upvalues: Url (copy), createYieldingPromise (copy)
 	return createYieldingPromise({
 		Method = "GET",
-		Url = url.CATALOG_URL .. "v1/favorites/assets/" .. tostring(value) .. "/count"
+		Url = Url.CATALOG_URL .. "v1/favorites/assets/" .. tostring(p1) .. "/count"
 	}, false)
 end
 
-local function getBundleFavoriteCount(p1)
-	-- upvalues: url (ref), createYieldingPromise (ref)
+local function getBundleFavoriteCount(p1) --[[ Line: 214 ]]
+	-- upvalues: Url (copy), createYieldingPromise (copy)
 	return createYieldingPromise({
 		Method = "GET",
-		Url = url.CATALOG_URL .. "v1/favorites/bundles/" .. tostring(p1) .. "/count"
+		Url = Url.CATALOG_URL .. "v1/favorites/bundles/" .. tostring(p1) .. "/count"
 	}, false)
 end
 
-local function getFavoriteForAsset(value)
-	-- upvalues: playersService (ref), url (ref), createYieldingPromise (ref)
+local function getFavoriteForAsset(p1) --[[ Line: 227 ]]
+	-- upvalues: Players (copy), Url (copy), createYieldingPromise (copy)
 	return createYieldingPromise({
 		Method = "GET",
-		Url = url.CATALOG_URL .. "v1/favorites/users/" .. tostring(playersService.LocalPlayer.UserId) .. "/assets/" .. tostring(value) .. "/favorite"
+		Url = Url.CATALOG_URL .. "v1/favorites/users/" .. tostring(Players.LocalPlayer.UserId) .. "/assets/" .. tostring(p1) .. "/favorite"
 	}, true)
 end
 
-local function getFavoriteForBundle(p1)
-	-- upvalues: playersService (ref), url (ref), createYieldingPromise (ref)
+local function getFavoriteForBundle(p1) --[[ Line: 246 ]]
+	-- upvalues: Players (copy), Url (copy), createYieldingPromise (copy)
 	return createYieldingPromise({
 		Method = "GET",
-		Url = url.CATALOG_URL .. "v1/favorites/users/" .. tostring(playersService.LocalPlayer.UserId) .. "/bundles/" .. tostring(p1) .. "/favorite"
+		Url = Url.CATALOG_URL .. "v1/favorites/users/" .. tostring(Players.LocalPlayer.UserId) .. "/bundles/" .. tostring(p1) .. "/favorite"
 	}, true)
 end
 
-local function createFavoriteForAsset(value)
-	-- upvalues: playersService (ref), url (ref), httpService (ref), createYieldingPromise (ref)
+local function createFavoriteForAsset(p1) --[[ Line: 265 ]]
+	-- upvalues: Players (copy), Url (copy), HttpService (copy), createYieldingPromise (copy)
 	return createYieldingPromise({
 		Method = "POST",
-		Url = url.CATALOG_URL .. "v1/favorites/users/" .. tostring(playersService.LocalPlayer.UserId) .. "/assets/" .. tostring(value) .. "/favorite",
-		Body = httpService:JSONEncode({})
+		Url = Url.CATALOG_URL .. "v1/favorites/users/" .. tostring(Players.LocalPlayer.UserId) .. "/assets/" .. tostring(p1) .. "/favorite",
+		Body = HttpService:JSONEncode({})
 	}, true)
 end
 
-local function deleteFavoriteForAsset(value)
-	-- upvalues: playersService (ref), url (ref), createYieldingPromise (ref)
+local function deleteFavoriteForAsset(p1) --[[ Line: 285 ]]
+	-- upvalues: Players (copy), Url (copy), createYieldingPromise (copy)
 	return createYieldingPromise({
 		Method = "DELETE",
-		Url = url.CATALOG_URL .. "v1/favorites/users/" .. tostring(playersService.LocalPlayer.UserId) .. "/assets/" .. tostring(value) .. "/favorite"
+		Url = Url.CATALOG_URL .. "v1/favorites/users/" .. tostring(Players.LocalPlayer.UserId) .. "/assets/" .. tostring(p1) .. "/favorite"
 	}, true)
 end
 
-local function createFavoriteForBundle(p1)
-	-- upvalues: playersService (ref), url (ref), httpService (ref), createYieldingPromise (ref)
+local function createFavoriteForBundle(p1) --[[ Line: 304 ]]
+	-- upvalues: Players (copy), Url (copy), HttpService (copy), createYieldingPromise (copy)
 	return createYieldingPromise({
 		Method = "POST",
-		Url = url.CATALOG_URL .. "v1/favorites/users/" .. tostring(playersService.LocalPlayer.UserId) .. "/bundles/" .. tostring(p1) .. "/favorite",
-		Body = httpService:JSONEncode({})
+		Url = Url.CATALOG_URL .. "v1/favorites/users/" .. tostring(Players.LocalPlayer.UserId) .. "/bundles/" .. tostring(p1) .. "/favorite",
+		Body = HttpService:JSONEncode({})
 	}, true)
 end
 
-local function deleteFavoriteForBundle(p1)
-	-- upvalues: playersService (ref), url (ref), createYieldingPromise (ref)
+local function deleteFavoriteForBundle(p1) --[[ Line: 324 ]]
+	-- upvalues: Players (copy), Url (copy), createYieldingPromise (copy)
 	return createYieldingPromise({
 		Method = "DELETE",
-		Url = url.CATALOG_URL .. "v1/favorites/users/" .. tostring(playersService.LocalPlayer.UserId) .. "/bundles/" .. tostring(p1) .. "/favorite"
+		Url = Url.CATALOG_URL .. "v1/favorites/users/" .. tostring(Players.LocalPlayer.UserId) .. "/bundles/" .. tostring(p1) .. "/favorite"
 	}, true)
 end
 
-local function getEconomyProductInfo(p1)
-	-- upvalues: url (ref), createYieldingPromise (ref)
+local function getEconomyProductInfo(p1) --[[ Line: 343 ]]
+	-- upvalues: Url (copy), createYieldingPromise (copy)
 	return createYieldingPromise({
 		Method = "GET",
-		Url = url.ECONOMY_URL .. "v1/products/" .. tostring(p1) .. "?showPurchasable=true"
+		Url = Url.ECONOMY_URL .. "v1/products/" .. tostring(p1) .. "?showPurchasable=true"
 	}, true)
 end
 
-local function getModelFromUserId(p1)
-	-- upvalues: promiseModule (ref), playersService (ref)
-	return promiseModule.new(function(p2, p3)
-		-- upvalues: playersService (copy), p1 (ref)
-		spawn(function()
-			-- upvalues: playersService (copy), p1 (copy), p2 (ref), p3 (ref)
-			local var1 = playersService:CreateHumanoidModelFromUserIdAsync(p1)
+local function getModelFromUserId(UserId) --[[ Line: 356 ]]
+	-- upvalues: PromiseModule (copy), Players (copy)
+	return PromiseModule.new(function(Callback, Callback1) --[[ Line: 357 ]]
+		-- upvalues: Players (upval), UserId (copy)
+		spawn(function() --[[ Line: 358 ]]
+			-- upvalues: Players (upval), UserId (upval), Callback (copy), Callback1 (copy)
+			local HumanoidModelFromUserIdAsync = Players:CreateHumanoidModelFromUserIdAsync(UserId)
 			
-			if var1 then
-				p2(var1)
+			if HumanoidModelFromUserIdAsync then
+				Callback(HumanoidModelFromUserIdAsync)
 				
 				return
+			else
+				Callback1("Failure in getModelFromUserId")
 			end
-			p3("Failure in getModelFromUserId")
 		end)
 	end)
 end
 
-local function getCollectibleResellableInstances(p1, p2)
-	-- upvalues: url (ref), createYieldingPromise (ref)
+local function getCollectibleResellableInstances(p1, p2) --[[ Line: 373 ]]
+	-- upvalues: Url (copy), createYieldingPromise (copy)
 	return createYieldingPromise({
 		Method = "GET",
-		Url = string.format("%smarketplace-sales/v1/item/%s/resellable-instances?%s", url.APIS_URL, p1, url:makeQueryString({
+		Url = string.format("%smarketplace-sales/v1/item/%s/resellable-instances?%s", Url.APIS_URL, p1, (Url:makeQueryString({
 			ownerType = "User",
 			cursor = "",
 			limit = 500,
 			ownerId = tostring(p2)
-		}))
+		})))
 	}, true)
 end
 
-local function getVersionInfo(p1)
-	-- upvalues: formattedText (ref), createYieldingPromise (ref)
+local function getVersionInfo(p1) --[[ Line: 390 ]]
+	-- upvalues: Formatted (copy), createYieldingPromise (copy)
 	return createYieldingPromise({
 		Method = "GET",
-		Url = string.format("%sv1/assets/%s/saved-versions", formattedText, p1)
+		Url = string.format("%sv1/assets/%s/saved-versions", Formatted, p1)
 	}, true)
 end
 
-local function getExperiencePlayability(p1)
-	-- upvalues: url (ref), createYieldingPromise (ref)
+local function getExperiencePlayability(p1) --[[ Line: 399 ]]
+	-- upvalues: Url (copy), createYieldingPromise (copy)
 	return createYieldingPromise({
 		Method = "GET",
-		Url = string.format("%sv1/games/multiget-playability-status?universeIds=%s", url.GAME_URL, p1)
+		Url = string.format("%sv1/games/multiget-playability-status?universeIds=%s", Url.GAME_URL, p1)
 	}, true)
 end
 
-local function getExperienceInfo(p1)
-	-- upvalues: url (ref), createYieldingPromise (ref)
+local function getExperienceInfo(p1) --[[ Line: 408 ]]
+	-- upvalues: Url (copy), createYieldingPromise (copy)
 	return createYieldingPromise({
 		Method = "GET",
-		Url = string.format("%sv1/games?universeIds=%s", url.GAME_URL, p1)
+		Url = string.format("%sv1/games?universeIds=%s", Url.GAME_URL, p1)
 	}, true)
 end
 
 return {
-	new = function()
-		-- upvalues: getProductInfo (ref), getEconomyProductInfo (ref), getPlayerName (ref), getAssetBundles (ref), getHumanoidDescriptionFromCostumeId (ref), getAssetFavoriteCount (ref), getBundleFavoriteCount (ref), getFavoriteForAsset (ref), getFavoriteForBundle (ref), createFavoriteForAsset (ref), deleteFavoriteForAsset (ref), createFavoriteForBundle (ref), deleteFavoriteForBundle (ref), getModelFromUserId (ref), getCollectibleResellableInstances (ref), getVersionInfo (ref), getExperiencePlayability (ref), getExperienceInfo (ref), getItemDetails (ref), getPreviewAvatar (ref), getBatchItemDetails (ref), getBatchItemDetailsV2 (ref)
-		local t = {
+	new = function() --[[ Line: 419 ]]
+		-- upvalues: getProductInfo (copy), getEconomyProductInfo (copy), getPlayerName (copy), getAssetBundles (copy), getHumanoidDescriptionFromCostumeId (copy), getAssetFavoriteCount (copy), getBundleFavoriteCount (copy), getFavoriteForAsset (copy), getFavoriteForBundle (copy), createFavoriteForAsset (copy), deleteFavoriteForAsset (copy), createFavoriteForBundle (copy), deleteFavoriteForBundle (copy), getModelFromUserId (copy), getCollectibleResellableInstances (copy), getVersionInfo (copy), getExperiencePlayability (copy), getExperienceInfo (copy), getItemDetails (copy), getPreviewAvatar (copy), getBatchItemDetails (copy), getBatchItemDetailsV2 (copy)
+		local config = {
 			getProductInfo = getProductInfo,
 			getEconomyProductInfo = getEconomyProductInfo,
 			getPlayerName = getPlayerName,
@@ -350,12 +351,12 @@ return {
 			getBatchItemDetails = getBatchItemDetails,
 			getBatchItemDetailsV2 = getBatchItemDetailsV2
 		}
-		setmetatable(t, {
-			__tostring = function()
+		setmetatable(config, {
+			__tostring = function(): string --[[ Line: 452 ]]
 				return "Service(Network)"
 			end
 		})
 		
-		return t
+		return config
 	end
 }

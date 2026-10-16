@@ -1,10 +1,10 @@
-﻿local lumberyak = require(script:FindFirstAncestor("CrossExperience").dependencies).Lumberyak
-local crossExperience = lumberyak.Logger.new(nil, "CrossExperience")
-crossExperience:addSink({
-	maxLevel = game:DefineFastString("CrossExpEventLoggingLevel", lumberyak.Logger.Levels.Error),
-	log = function(_, p1, _)
+﻿local Lumberyak = require(script:FindFirstAncestor("CrossExperience").dependencies).Lumberyak
+local CrossExperience = Lumberyak.Logger.new(nil, "CrossExperience")
+CrossExperience:addSink({
+	maxLevel = game:DefineFastString("CrossExpEventLoggingLevel", Lumberyak.Logger.Levels.Error),
+	log = function(_, p1, _) --[[ Line: 13 ]]
 		print(p1)
 	end
 })
 
-return crossExperience
+return CrossExperience

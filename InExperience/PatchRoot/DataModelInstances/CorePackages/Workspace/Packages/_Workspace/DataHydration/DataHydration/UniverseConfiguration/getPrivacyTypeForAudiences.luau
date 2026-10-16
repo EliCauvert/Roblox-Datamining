@@ -1,22 +1,22 @@
-﻿local audience = require(script:FindFirstAncestor("DataHydration").UniverseActivation.UniverseActivationStoreTypes).Audience
-local privacyType = require(script.Parent.UniverseConfigurationStoreTypes).PrivacyType
+﻿local Audience = require(script:FindFirstAncestor("DataHydration").UniverseActivation.UniverseActivationStoreTypes).Audience
+local PrivacyType = require(script.Parent.UniverseConfigurationStoreTypes).PrivacyType
 local list = {
 	{
-		audience = audience.Public,
-		privacyType = privacyType.Public
+		audience = Audience.Public,
+		privacyType = PrivacyType.Public
 	},
 	{
-		audience = audience.Friends,
-		privacyType = privacyType.FriendsOnly
+		audience = Audience.Friends,
+		privacyType = PrivacyType.FriendsOnly
 	}
 }
 
-return function(p1)
-	-- upvalues: list (ref), privacyType (ref)
-	for i, v in list do
-		if table.find(p1, v.audience) then
-			return v.privacyType
+return function(List) --[[ Line: 20 ]]
+	-- upvalues: list (copy), PrivacyType (copy)
+	for _, value in list do
+		if table.find(List, value.audience) then
+			return value.privacyType
 		end
 	end
-	return privacyType.Private
+	return PrivacyType.Private
 end

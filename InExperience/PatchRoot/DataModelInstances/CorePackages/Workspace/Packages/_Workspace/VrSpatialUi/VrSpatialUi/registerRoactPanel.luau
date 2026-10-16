@@ -1,114 +1,119 @@
-﻿local vrSpatialUi = script:FindFirstAncestor("VrSpatialUi")
-local httpService = game:GetService("HttpService")
-local UIManagerModule = require(vrSpatialUi.UIManager)
-local constantsModule = require(vrSpatialUi.Constants)
-local fFlagEnableSpatialUIBottomBarFixPlaceFilterModule = require(vrSpatialUi.Flags.FFlagEnableSpatialUIBottomBarFixPlaceFilter)
+﻿local VrSpatialUi = script:FindFirstAncestor("VrSpatialUi")
+local HttpService = game:GetService("HttpService")
+local UIManagerModule = require(VrSpatialUi.UIManager)
+local ConstantsModule = require(VrSpatialUi.Constants)
+local FFlagEnableSpatialUIBottomBarFixPlaceFilterModule = require(VrSpatialUi.Flags.FFlagEnableSpatialUIBottomBarFixPlaceFilter)
 
-local function _(p1, p2)
-	local part = Instance.new("Part")
-	part.Name = p1
-	part.Anchored = true
-	part.CanCollide = false
-	part.CanTouch = false
-	part.CanQuery = false
-	part.CastShadow = false
-	part.Transparency = 1
-	part.Size = Vector3.new(0.050000000745, 0.050000000745, 0.050000000745)
-	part:SetAttribute("_isProtectedSpatialUIPart", true)
-	part.Parent = p2
+local function _(Name, Parent) --[[ Line: 17 | Named "createInertDecoy" ]]
+	local Part = Instance.new("Part")
+	Part.Name = Name
+	Part.Anchored = true
+	Part.CanCollide = false
+	Part.CanTouch = false
+	Part.CanQuery = false
+	Part.CastShadow = false
+	Part.Transparency = 1
+	Part.Size = vector.create(0.05000000074505806, 0.05000000074505806, 0.05000000074505806)
+	Part:SetAttribute("_isProtectedSpatialUIPart", true)
+	Part.Parent = Parent
 end
 
-local _ = function(p1)
-	-- upvalues: httpService (ref)
-	if p1:GetAttribute("_isProtectedSpatialUIPart") then
+local _ = function(Object) --[[ Line: 37 | Named "renameAndProtectPart" ]]
+	-- upvalues: HttpService (copy)
+	if not Object:GetAttribute("_isProtectedSpatialUIPart") then
+		local Name = Object.Name
+		local Parent = Object.Parent
+		Object:SetAttribute("_isProtectedSpatialUIPart", true)
+		Object.Name = HttpService:GenerateGUID(false)
+		local Part = Instance.new("Part")
+		Part.Name = Name
+		Part.Anchored = true
+		Part.CanCollide = false
+		Part.CanTouch = false
+		Part.CanQuery = false
+		Part.CastShadow = false
+		Part.Transparency = 1
+		Part.Size = vector.create(0.05000000074505806, 0.05000000074505806, 0.05000000074505806)
+		Part:SetAttribute("_isProtectedSpatialUIPart", true)
+		Part.Parent = Parent
+		
 		return
 	end
-	local name = p1.Name
-	local parent = p1.Parent
-	p1:SetAttribute("_isProtectedSpatialUIPart", true)
-	p1.Name = httpService:GenerateGUID(false)
-	local part = Instance.new("Part")
-	part.Name = name
-	part.Anchored = true
-	part.CanCollide = false
-	part.CanTouch = false
-	part.CanQuery = false
-	part.CastShadow = false
-	part.Transparency = 1
-	part.Size = Vector3.new(0.050000000745, 0.050000000745, 0.050000000745)
-	part:SetAttribute("_isProtectedSpatialUIPart", true)
-	part.Parent = parent
 end
 
-local _ = function(value)
-	-- upvalues: httpService (ref)
-	if value == nil then return end
-	local adornee = value.Adornee
+local _ = function(p1) --[[ Line: 48 | Named "setupBottomBarRuntime" ]]
+	-- upvalues: HttpService (copy)
+	if p1 == nil then return end
+	local Adornee = p1.Adornee
 	
-	if adornee == nil then return end
-	if adornee:GetAttribute("_isProtectedSpatialUIPart") then
+	if Adornee == nil then return end
+	if not Adornee:GetAttribute("_isProtectedSpatialUIPart") then
+		local Name = Adornee.Name
+		local Parent = Adornee.Parent
+		Adornee:SetAttribute("_isProtectedSpatialUIPart", true)
+		Adornee.Name = HttpService:GenerateGUID(false)
+		local Part = Instance.new("Part")
+		Part.Name = Name
+		Part.Anchored = true
+		Part.CanCollide = false
+		Part.CanTouch = false
+		Part.CanQuery = false
+		Part.CastShadow = false
+		Part.Transparency = 1
+		Part.Size = vector.create(0.05000000074505806, 0.05000000074505806, 0.05000000074505806)
+		Part:SetAttribute("_isProtectedSpatialUIPart", true)
+		Part.Parent = Parent
+		
 		return
 	end
-	local name = adornee.Name
-	local parent = adornee.Parent
-	adornee:SetAttribute("_isProtectedSpatialUIPart", true)
-	adornee.Name = httpService:GenerateGUID(false)
-	local part = Instance.new("Part")
-	part.Name = name
-	part.Anchored = true
-	part.CanCollide = false
-	part.CanTouch = false
-	part.CanQuery = false
-	part.CastShadow = false
-	part.Transparency = 1
-	part.Size = Vector3.new(0.050000000745, 0.050000000745, 0.050000000745)
-	part:SetAttribute("_isProtectedSpatialUIPart", true)
-	part.Parent = parent
 end
 
-return function(p1, p2, p3, p4)
-	-- upvalues: constantsModule (ref), fFlagEnableSpatialUIBottomBarFixPlaceFilterModule (ref), httpService (ref), UIManagerModule (ref)
-	local t = nil
-	local var1 = constantsModule.ROACT_PANEL_UIGROUP_MAP[p2]
+return function(p1, PanelType, p2, KeepVisibleWhenTopBarHidden) --[[ Line: 61 ]]
+	-- upvalues: ConstantsModule (copy), FFlagEnableSpatialUIBottomBarFixPlaceFilterModule (copy), HttpService (copy), UIManagerModule (copy)
+	local CameraFixedPanelProp = nil
+	local ROACTPANELUIGROUP = ConstantsModule.ROACT_PANEL_UIGROUP_MAP[PanelType]
 	
-	if var1 then
-		t = {
-			uiGroupElementOffset = constantsModule.ROACT_PANEL_UIGROUP_ELEMENT_OFFSET_MAP[p2]
+	if ROACTPANELUIGROUP then
+		CameraFixedPanelProp = {
+			uiGroupElementOffset = ConstantsModule.ROACT_PANEL_UIGROUP_ELEMENT_OFFSET_MAP[PanelType]
 		}
 	end
-	local t_1 = {
+	local config = {
 		headScale = 1,
-		keepVisibleWhenTopBarHidden = p4,
+		keepVisibleWhenTopBarHidden = KeepVisibleWhenTopBarHidden,
 		panelObject = p1.current,
-		uiType = constantsModule.SpatialUIType.SpatialUIRoact,
-		panelType = p2,
-		panelPositionProps = { uiGroup = var1, cameraFixedPanelProp = t }
+		uiType = ConstantsModule.SpatialUIType.SpatialUIRoact,
+		panelType = PanelType,
+		panelPositionProps = {
+			uiGroup = ROACTPANELUIGROUP,
+			cameraFixedPanelProp = CameraFixedPanelProp
+		}
 	}
 	
-	if fFlagEnableSpatialUIBottomBarFixPlaceFilterModule and p2 == constantsModule.PanelType.BottomBar then
-		local current = p1.current
+	if FFlagEnableSpatialUIBottomBarFixPlaceFilterModule and PanelType == ConstantsModule.PanelType.BottomBar then
+		local Current = p1.current
 		
-		if current ~= nil then
-			local adornee = current.Adornee
+		if Current ~= nil then
+			local Adornee = Current.Adornee
 			
-			if adornee ~= nil and not adornee:GetAttribute("_isProtectedSpatialUIPart") then
-				local name = adornee.Name
-				local parent = adornee.Parent
-				adornee:SetAttribute("_isProtectedSpatialUIPart", true)
-				adornee.Name = httpService:GenerateGUID(false)
-				local part = Instance.new("Part")
-				part.Name = name
-				part.Anchored = true
-				part.CanCollide = false
-				part.CanTouch = false
-				part.CanQuery = false
-				part.CastShadow = false
-				part.Transparency = 1
-				part.Size = Vector3.new(0.050000000745, 0.050000000745, 0.050000000745)
-				part:SetAttribute("_isProtectedSpatialUIPart", true)
-				part.Parent = parent
+			if Adornee ~= nil and not Adornee:GetAttribute("_isProtectedSpatialUIPart") then
+				local Name = Adornee.Name
+				local Parent = Adornee.Parent
+				Adornee:SetAttribute("_isProtectedSpatialUIPart", true)
+				Adornee.Name = HttpService:GenerateGUID(false)
+				local Part = Instance.new("Part")
+				Part.Name = Name
+				Part.Anchored = true
+				Part.CanCollide = false
+				Part.CanTouch = false
+				Part.CanQuery = false
+				Part.CastShadow = false
+				Part.Transparency = 1
+				Part.Size = vector.create(0.05000000074505806, 0.05000000074505806, 0.05000000074505806)
+				Part:SetAttribute("_isProtectedSpatialUIPart", true)
+				Part.Parent = Parent
 			end
 		end
 	end
-	UIManagerModule.getInstance():registerRoactPanel(p2, t_1, p3)
+	UIManagerModule.getInstance():registerRoactPanel(PanelType, config, p2)
 end

@@ -1,6 +1,6 @@
-﻿local var1 = require(game:GetService("CorePackages").Workspace.Packages.RobloxTranslator):FormatByKey("Feature.SettingsHub.Prompt.RestartOnMicAccessChange")
+﻿local FeatureSettingsHubPromptRestartOnMicAccessChange = require(game:GetService("CorePackages").Workspace.Packages.RobloxTranslator):FormatByKey("Feature.SettingsHub.Prompt.RestartOnMicAccessChange")
 
-return function(p1)
-	-- upvalues: var1 (ref)
-	return if p1:GetPlatform() == Enum.Platform.Android then "<b>" .. var0 .. "</b>" else nil
+return function(UserInputService) --[[ Line: 14 ]]
+	-- upvalues: FeatureSettingsHubPromptRestartOnMicAccessChange (copy)
+	return if UserInputService:GetPlatform() == Enum.Platform.Android then "<b>" .. FeatureSettingsHubPromptRestartOnMicAccessChange .. "</b>" else nil
 end

@@ -1,20 +1,18 @@
-﻿local sduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
-local parent = sduiCoreSystem.Parent
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local sduiBuilderModule = require(sduiCoreSystem.SduiBuilder)
-local sduiBuilderTypesModule = require(sduiCoreSystem.SduiBuilderTypes)
-local _ = require(sduiCoreSystem.SduiComponentType)
-local _ = require(sduiCoreSystem.SduiConfigTypes)
-local sduiErrorType = require(sduiCoreSystem.SduiErrors).SduiErrorType
-local sduiBuilderProcessingPhase = sduiBuilderTypesModule.SduiBuilderProcessingPhase
-local compareSduiPropsModule = require(sduiCoreSystem.compareSduiProps)
-local compareSduiAnalyticsContextModule = require(sduiCoreSystem.compareSduiAnalyticsContext)
-local parsePropsModule = require(sduiCoreSystem.parseProps)
+﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
+local Parent = SduiCoreSystem.Parent
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local SduiBuilderModule = require(SduiCoreSystem.SduiBuilder)
+local _ = require(SduiCoreSystem.SduiComponentType)
+local _ = require(SduiCoreSystem.SduiConfigTypes)
+local SduiErrorType = require(SduiCoreSystem.SduiErrors).SduiErrorType
+local SduiBuilderProcessingPhase = require(SduiCoreSystem.SduiBuilderTypes).SduiBuilderProcessingPhase
+local CompareSduiAnalyticsContextModule = require(SduiCoreSystem.compareSduiAnalyticsContext)
+local ParsePropsModule = require(SduiCoreSystem.parseProps)
 
-local function SduiErrorComponent(_)
-	-- upvalues: reactModule (ref)
-	return reactModule.createElement("Frame", {
+local function SduiErrorComponent(_) --[[ Line: 29 ]]
+	-- upvalues: ReactModule (copy)
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(0, 100, 0, 100)
 	})
@@ -22,43 +20,44 @@ end
 
 local t = {}
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), sduiBuilderModule (ref), compareSduiAnalyticsContextModule (ref), t (ref), parsePropsModule (ref), sduiBuilderProcessingPhase (ref), cryoModule (ref), sduiErrorType (ref), SduiErrorComponent (ref)
-	local componentConfig = p1.componentConfig
-	local componentType = componentConfig.componentType
-	local sduiContext = p1.sduiContext
-	local debugName = p1.debugName
-	local parentAnalyticsContext = p1.parentAnalyticsContext
-	local localAnalyticsData = p1.localAnalyticsData
-	local extraLocalProps = p1.extraLocalProps
-	local var1 = reactModule.useRef(nil)
+return ReactModule.memo(function(p1) --[[ Line: 39 | Named "SduiFastPathComponent" ]]
+	-- upvalues: ReactModule (copy), SduiBuilderModule (copy), CompareSduiAnalyticsContextModule (copy), t (copy), ParsePropsModule (copy), SduiBuilderProcessingPhase (copy), CryoModule (copy), SduiErrorType (copy), SduiErrorComponent (copy)
+	local ComponentConfig = p1.componentConfig
+	local ComponentType = ComponentConfig.componentType
+	local SduiContext = p1.sduiContext
+	local DebugName = p1.debugName
+	local ParentAnalyticsContext = p1.parentAnalyticsContext
+	local LocalAnalyticsData = p1.localAnalyticsData
+	local ExtraLocalProps = p1.extraLocalProps
+	local UseRefResult = ReactModule.useRef(nil)
 	
-	if var1.current == nil then
-		var1.current = sduiBuilderModule.buildAnalyticsContext(componentConfig, parentAnalyticsContext, localAnalyticsData)
+	if UseRefResult.current == nil then
+		UseRefResult.current = SduiBuilderModule.buildAnalyticsContext(ComponentConfig, ParentAnalyticsContext, LocalAnalyticsData)
 	else
-		local var2 = sduiBuilderModule.buildAnalyticsContext(componentConfig, parentAnalyticsContext, localAnalyticsData)
+		local AnalyticsContext = SduiBuilderModule.buildAnalyticsContext(ComponentConfig, ParentAnalyticsContext, LocalAnalyticsData)
 		
-		if not compareSduiAnalyticsContextModule(var1.current, var2) then
-			var1.current = var2
+		if not CompareSduiAnalyticsContextModule(UseRefResult.current, AnalyticsContext) then
+			UseRefResult.current = AnalyticsContext
 		end
 	end
-	local current = var1.current
-	local cloned = table.clone(componentConfig.props or t)
-	parsePropsModule(componentType, cloned, debugName, sduiContext, current, nil, sduiBuilderProcessingPhase.Render)
+	local Current = UseRefResult.current
+	local Copy = table.clone(ComponentConfig.props or t)
+	ParsePropsModule(ComponentType, Copy, DebugName, SduiContext, Current, nil, SduiBuilderProcessingPhase.Render)
 	
-	if extraLocalProps then
-		cloned = cryoModule.Dictionary.join(cloned, extraLocalProps)
+	if ExtraLocalProps then
+		Copy = CryoModule.Dictionary.join(Copy, ExtraLocalProps)
 	end
-	cloned.componentConfig = componentConfig
-	cloned.sduiContext = sduiContext
-	cloned.debugName = debugName
-	cloned.analyticsContext = current
-	local var3 = sduiContext.componentDefinitions:getComponent(componentType)
+	Copy.componentConfig = ComponentConfig
+	Copy.sduiContext = SduiContext
+	Copy.debugName = DebugName
+	Copy.analyticsContext = Current
+	local Component = SduiContext.componentDefinitions:getComponent(ComponentType)
 	
-	if var3 == nil then
-		sduiContext.dependencies.logger.reportError(sduiErrorType.NoComponentRegistered, { componentType = componentType, name = debugName }, sduiContext.appPage)
+	if Component == nil then
+		SduiContext.dependencies.logger.reportError(SduiErrorType.NoComponentRegistered, { componentType = ComponentType, name = DebugName }, SduiContext.appPage)
 		
-		return reactModule.createElement(SduiErrorComponent)
+		return ReactModule.createElement(SduiErrorComponent)
+	else
+		return ReactModule.createElement(Component, Copy)
 	end
-	return reactModule.createElement(var3, cloned)
-end, compareSduiPropsModule)
+end, (require(SduiCoreSystem.compareSduiProps)))

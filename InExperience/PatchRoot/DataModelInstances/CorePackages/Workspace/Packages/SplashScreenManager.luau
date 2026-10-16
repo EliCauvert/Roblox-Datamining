@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.SplashScreenManager.SplashScreenManager)
+﻿return (require(script.Parent._Workspace.SplashScreenManager.SplashScreenManager))

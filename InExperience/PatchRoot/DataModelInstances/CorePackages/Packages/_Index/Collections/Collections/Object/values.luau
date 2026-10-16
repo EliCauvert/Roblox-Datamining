@@ -1,26 +1,28 @@
 ﻿local _ = require(script.Parent.Parent.Parent.ES7Types)
 
-return function(p1)
-	if p1 == nil then
+return function(Text: string) --[[ Line: 23 ]]
+	if Text == nil then
 		error("cannot extract values from a nil value")
 	end
-	local var1 = typeof(p1)
-	local list = nil
+	local ValueType = typeof(Text)
+	local List = nil
 	
-	if var1 == "table" then
-		list = {}
+	if ValueType == "table" then
+		List = {}
 		
-		for i, v in pairs(p1) do
-			table.insert(list, v)
+		for _, value in pairs(Text) do
+			table.insert(List, value)
 		end
-		return list
-	elseif var1 == "string" then
-		local var2 = p1:len()
-		list = table.create(var2)
-		
-		for i = 1, var2 do
-			list[i] = p1:sub(i, i)
+		return List
+	else
+		if ValueType == "string" then
+			local Length = Text:len()
+			List = table.create(Length)
+			
+			for i = 1, Length do
+				List[i] = Text:sub(i, i)
+			end
 		end
+		return List
 	end
-	return list
 end

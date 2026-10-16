@@ -1,40 +1,41 @@
-﻿local eventNamesModule = require(script.Parent.EventNames)
-local diagEventTypes = require(script:FindFirstAncestor("UserProfiles").Parent.SocialLuaAnalytics).Analytics.Enums.DiagEventTypes
-local errorCodesForLoggingModule = require(script.Parent.ErrorCodesForLogging)
+﻿local EventNamesModule = require(script.Parent.EventNames)
+local DiagEventTypes = require(script:FindFirstAncestor("UserProfiles").Parent.SocialLuaAnalytics).Analytics.Enums.DiagEventTypes
+local ErrorCodesForLoggingModule = require(script.Parent.ErrorCodesForLogging)
 
 return {
-	[eventNamesModule.UserProfilesRequestBegin] = {
+	[EventNamesModule.UserProfilesRequestBegin] = {
 		name = game:DefineFastString("UserProfilesRequestBegin", "UserProfilesRequestBegin")
 	},
-	[eventNamesModule.UserProfilesRequestSuccess] = {
+	[EventNamesModule.UserProfilesRequestSuccess] = {
 		name = game:DefineFastString("UserProfilesRequestSuccess", "UserProfilesRequestSuccess")
 	},
-	[eventNamesModule.UserProfilesRequestFail] = {
+	[EventNamesModule.UserProfilesRequestFail] = {
 		name = game:DefineFastString("UserProfilesRequestFail", "UserProfilesRequestFail")
 	},
-	[eventNamesModule.UserProfilesRequestFailAfterRetry] = {
+	[EventNamesModule.UserProfilesRequestFailAfterRetry] = {
 		name = game:DefineFastString("UserProfilesRequestFailAfterRetry", "UserProfilesRequestFailAfterRetry")
 	},
-	[eventNamesModule.UserProfilesRequestSuccessAfterRetry] = {
+	[EventNamesModule.UserProfilesRequestSuccessAfterRetry] = {
 		name = game:DefineFastString("UserProfilesRequestSuccessAfterRetry", "UserProfilesRequestSuccessAfterRetry")
 	},
-	[eventNamesModule.UserProfilesErrorCode] = {
-		type = diagEventTypes.Counter,
-		name = function(p1)
-			-- upvalues: eventNamesModule (ref), errorCodesForLoggingModule (ref)
-			local var1 = tostring(p1.status)
-			local userProfilesErrorCode = eventNamesModule.UserProfilesErrorCode
+	[EventNamesModule.UserProfilesErrorCode] = {
+		type = DiagEventTypes.Counter,
+		name = function(p1) --[[ Line: 31 ]]
+			-- upvalues: EventNamesModule (copy), ErrorCodesForLoggingModule (copy)
+			local Text = tostring(p1.status)
+			local UserProfilesErrorCode = EventNamesModule.UserProfilesErrorCode
 			
-			if errorCodesForLoggingModule[var1] then
-				userProfilesErrorCode ..= var1
+			if ErrorCodesForLoggingModule[Text] then
+				UserProfilesErrorCode ..= Text
 				
-				return userProfilesErrorCode
+				return UserProfilesErrorCode
+			else
+				return UserProfilesErrorCode .. "Other"
 			end
-			return userProfilesErrorCode .. "Other"
 		end
 	},
-	[eventNamesModule.UserProfilesUnmountEarly] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.UserProfilesUnmountEarly] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("UserProfilesUnmountEarly", "UserProfilesUnmountEarly")
 	}
 }

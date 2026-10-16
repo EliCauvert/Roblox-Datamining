@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CorePackages").Packages.ReactIs)
+﻿return (require(game:GetService("CorePackages").Packages.ReactIs))

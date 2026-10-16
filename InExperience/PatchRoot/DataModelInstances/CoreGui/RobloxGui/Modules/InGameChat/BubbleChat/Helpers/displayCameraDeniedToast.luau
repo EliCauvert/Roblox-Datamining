@@ -1,13 +1,13 @@
-﻿local promiseModule = require(game:GetService("CorePackages").Packages.Promise)
-local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-local trackerMenuModule = require(robloxGui.Modules.Tracker.TrackerMenu)
-local trackerPromptTypeModule = require(robloxGui.Modules.Tracker.TrackerPromptType)
+﻿local PromiseModule = require(game:GetService("CorePackages").Packages.Promise)
+local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+local TrackerMenuModule = require(RobloxGui.Modules.Tracker.TrackerMenu)
+local TrackerPromptTypeModule = require(RobloxGui.Modules.Tracker.TrackerPromptType)
 
-return function()
-	-- upvalues: trackerMenuModule (ref), trackerPromptTypeModule (ref), promiseModule (ref)
-	trackerMenuModule:showPrompt(trackerPromptTypeModule.None)
-	promiseModule.delay(0.016666666667):andThen(function()
-		-- upvalues: trackerMenuModule (copy), trackerPromptTypeModule (copy)
-		trackerMenuModule:showPrompt(trackerPromptTypeModule.VideoNoPermission)
+return function() --[[ Line: 10 ]]
+	-- upvalues: TrackerMenuModule (copy), TrackerPromptTypeModule (copy), PromiseModule (copy)
+	TrackerMenuModule:showPrompt(TrackerPromptTypeModule.None)
+	PromiseModule.delay(0.016666666666666666):andThen(function() --[[ Line: 12 ]]
+		-- upvalues: TrackerMenuModule (upval), TrackerPromptTypeModule (upval)
+		TrackerMenuModule:showPrompt(TrackerPromptTypeModule.VideoNoPermission)
 	end)
 end

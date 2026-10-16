@@ -1,60 +1,58 @@
-﻿local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-local corePackagesService = game:GetService("CorePackages")
-local playersService = game:GetService("Players")
-local runService = game:GetService("RunService")
-local playerPermissionsModule = require(robloxGui.Modules.PlayerPermissionsModule)
-local constantsModule = require(script:FindFirstAncestor("Settings").Integrations.Constants)
-local settingsServiceModule = require(corePackagesService.Workspace.Packages.SettingsService)
-local valueChangedSignal = settingsServiceModule.ValueChangedSignal
-local availabilitySignal = settingsServiceModule.AvailabilitySignal
-local settingEnum = settingsServiceModule.SettingEnum
-local devConsoleMasterModule = require(script.Parent.Parent.Parent.Parent.DevConsoleMaster)
-local LAYOUT_ORDER = constantsModule.GAMESETTINGS.LAYOUT_ORDER
+﻿local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local PlayerPermissionsModule = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.PlayerPermissionsModule)
+local SettingsServiceModule = require(game:GetService("CorePackages").Workspace.Packages.SettingsService)
+local ValueChangedSignal = SettingsServiceModule.ValueChangedSignal
+local AvailabilitySignal = SettingsServiceModule.AvailabilitySignal
+local SettingEnum = SettingsServiceModule.SettingEnum
+local DevConsoleMasterModule = require(script.Parent.Parent.Parent.Parent.DevConsoleMaster)
+local LAYOUTORDER = require(script:FindFirstAncestor("Settings").Integrations.Constants).GAMESETTINGS.LAYOUT_ORDER
 
-local function _()
-	-- upvalues: valueChangedSignal (ref), devConsoleMasterModule (ref)
-	local var1 = valueChangedSignal.new()
-	var1:connect(function()
-		-- upvalues: devConsoleMasterModule (copy)
-		if devConsoleMasterModule then
-			devConsoleMasterModule:SetVisibility(true)
-			local settingsHubModule = require(script.Parent.Parent.Parent.SettingsHub)
+local function _() --[[ Line: 22 | Named "DeveloperConsoleValue" ]]
+	-- upvalues: ValueChangedSignal (copy), DevConsoleMasterModule (copy)
+	local NewValueChangedSignal = ValueChangedSignal.new()
+	NewValueChangedSignal:connect(function() --[[ Line: 25 ]]
+		-- upvalues: DevConsoleMasterModule (upval)
+		if DevConsoleMasterModule then
+			DevConsoleMasterModule:SetVisibility(true)
+			local SettingsHubModule = require(script.Parent.Parent.Parent.SettingsHub)
 			
-			if settingsHubModule then
-				settingsHubModule:SetVisibility(false)
+			if SettingsHubModule then
+				SettingsHubModule:SetVisibility(false)
 			end
 		end
 	end)
 	
-	return var1
+	return NewValueChangedSignal
 end
 
-local function DeveloperConsoleAvailability()
-	-- upvalues: availabilitySignal (ref), runService (ref), playerPermissionsModule (ref), playersService (ref)
-	local var1 = availabilitySignal.new(false)
+local function DeveloperConsoleAvailability() --[[ Line: 40 ]]
+	-- upvalues: AvailabilitySignal (copy), RunService (copy), PlayerPermissionsModule (copy), Players (copy)
+	local NewAvailabilitySignal = AvailabilitySignal.new(false)
 	
-	if runService:IsStudio() then
-		var1:set(true)
+	if RunService:IsStudio() then
+		NewAvailabilitySignal:set(true)
 		
-		return var1
+		return NewAvailabilitySignal
+	else
+		spawn(function() --[[ Line: 46 ]]
+			-- upvalues: PlayerPermissionsModule (upval), Players (upval), NewAvailabilitySignal (copy)
+			NewAvailabilitySignal:set((PlayerPermissionsModule.CanPlayerManagePlaceAsync(Players.LocalPlayer)))
+		end)
+		
+		return NewAvailabilitySignal
 	end
-	spawn(function()
-		-- upvalues: playerPermissionsModule (copy), playersService (copy), var1 (ref)
-		var1:set(playerPermissionsModule.CanPlayerManagePlaceAsync(playersService.LocalPlayer))
-	end)
-	
-	return var1
 end
 
-local var1 = valueChangedSignal.new()
-var1:connect(function()
-	-- upvalues: devConsoleMasterModule (ref)
-	if devConsoleMasterModule then
-		devConsoleMasterModule:SetVisibility(true)
-		local settingsHubModule = require(script.Parent.Parent.Parent.SettingsHub)
+local NewValueChangedSignal = ValueChangedSignal.new()
+NewValueChangedSignal:connect(function() --[[ Line: 25 ]]
+	-- upvalues: DevConsoleMasterModule (copy)
+	if DevConsoleMasterModule then
+		DevConsoleMasterModule:SetVisibility(true)
+		local SettingsHubModule = require(script.Parent.Parent.Parent.SettingsHub)
 		
-		if settingsHubModule then
-			settingsHubModule:SetVisibility(false)
+		if SettingsHubModule then
+			SettingsHubModule:SetVisibility(false)
 		end
 	end
 end)
@@ -64,8 +62,8 @@ return {
 	label = "CoreScripts.InGameMenu.GameSettings.DeveloperConsole",
 	text = "CoreScripts.InGameMenu.GameSettings.Open",
 	alreadyLocalized = false,
-	field_type = settingEnum.TextButton,
-	onActivated = var1,
-	layoutOrder = LAYOUT_ORDER.DeveloperConsoleButton,
+	field_type = SettingEnum.TextButton,
+	onActivated = NewValueChangedSignal,
+	layoutOrder = LAYOUTORDER.DeveloperConsoleButton,
 	availability = DeveloperConsoleAvailability()
 }

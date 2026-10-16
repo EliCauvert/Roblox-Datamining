@@ -1,51 +1,51 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-local shareGame = robloxGui.Modules.Settings.Pages.ShareGame
-local roactModule = require(corePackagesService.Packages.Roact)
-local constantsModule = require(shareGame.Constants)
-local themeModule = require(robloxGui.Modules.Settings.Theme)
-local var1 = require(shareGame.getTranslator)()
-local friendsErrorPage = roactModule.PureComponent:extend("FriendsErrorPage")
+﻿local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+local ShareGame = RobloxGui.Modules.Settings.Pages.ShareGame
+local RoactModule = require(game:GetService("CorePackages").Packages.Roact)
+local ConstantsModule = require(ShareGame.Constants)
+local ThemeModule = require(RobloxGui.Modules.Settings.Theme)
+local Translator = require(ShareGame.getTranslator)()
+local FriendsErrorPage = RoactModule.PureComponent:extend("FriendsErrorPage")
 
-function friendsErrorPage.render(p1)
-	-- upvalues: roactModule (ref), var1 (ref), constantsModule (ref), themeModule (ref)
-	local layoutOrder = p1.props.LayoutOrder
-	local zIndex = p1.props.ZIndex
-	local var2 = 0
+function FriendsErrorPage.render(p1) --[[ Line: 17 ]]
+	-- upvalues: RoactModule (copy), Translator (copy), ConstantsModule (copy), ThemeModule (copy)
+	local ZIndex = p1.props.ZIndex
+	local Count = 0
 	
-	local function _()
-		-- upvalues: var2 (write)
-		var2 += 1
+	local function _(): number --[[ Line: 22 | Named "incrementLayoutOrder" ]]
+		-- upvalues: Count (ref)
+		Count += 1
 		
-		return var2
+		return Count
 	end
 	
-	return roactModule.createElement("Frame", {
+	Count += 1
+	
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 1, 0),
-		LayoutOrder = layoutOrder,
-		ZIndex = zIndex
+		LayoutOrder = p1.props.LayoutOrder,
+		ZIndex = ZIndex
 	}, {
-		listLayout = roactModule.createElement("UIListLayout", {
+		listLayout = RoactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
 			SortOrder = Enum.SortOrder.LayoutOrder
 		}),
-		subtitle = roactModule.createElement("TextLabel", {
+		subtitle = RoactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
 			TextTransparency = 0.22,
 			TextWrapped = true,
-			Text = var1:FormatByKey("Feature.SettingsHub.Label.LoadingFriendsListFailed"),
-			TextColor3 = constantsModule.Color.GRAY5,
-			TextSize = themeModule.textSize(21),
-			Font = themeModule.font(Enum.Font.SourceSans),
-			LayoutOrder = var2 + 1,
+			Text = Translator:FormatByKey("Feature.SettingsHub.Label.LoadingFriendsListFailed"),
+			TextColor3 = ConstantsModule.Color.GRAY5,
+			TextSize = ThemeModule.textSize(21),
+			Font = ThemeModule.font(Enum.Font.SourceSans),
+			LayoutOrder = Count,
 			Size = UDim2.new(0, 280, 0, 42),
 			TextYAlignment = Enum.TextYAlignment.Top,
-			ZIndex = zIndex
+			ZIndex = ZIndex
 		})
 	})
 end
 
-return friendsErrorPage
+return FriendsErrorPage

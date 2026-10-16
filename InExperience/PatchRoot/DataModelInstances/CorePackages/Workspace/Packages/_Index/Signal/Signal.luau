@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CorePackages").Packages.Signal)
+﻿return (require(game:GetService("CorePackages").Packages.Signal))

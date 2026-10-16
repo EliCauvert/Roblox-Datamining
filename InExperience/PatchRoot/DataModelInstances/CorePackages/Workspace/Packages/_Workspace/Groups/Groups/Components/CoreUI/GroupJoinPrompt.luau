@@ -1,62 +1,61 @@
-﻿local textService = game:GetService("TextService")
-local groups = script:FindFirstAncestor("Groups")
-local parent = groups.Parent
-local enumsModule = require(parent.ProfilePlatform.Enums)
-local foundationModule = require(parent.Foundation)
-local getTextSize = require(parent.Style).GetTextSize
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local localizationModule = require(parent.Localization)
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-local userLibModule = require(parent.UserLib)
-local getRbxthumbWithTypeSizeAndOptions = userLibModule.Utils.getRbxthumbWithTypeSizeAndOptions
-local constants = userLibModule.Utils.Constants
-local verifiedBadgesModule = require(parent.VerifiedBadges)
-local mouseIconOverrideService = require(parent.CoreScriptsCommon).MouseIconOverrideService
-local useScreenSize = require(parent.CoreScriptsRoactCommon).useScreenSize
-local loadableImage = UIBloxModule.App.Loading.LoadableImage
-local dialog = foundationModule.Dialog
-local dialogSize = foundationModule.Enums.DialogSize
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local useLocalization = localizationModule.Hooks.useLocalization
-local useAbbreviatedNumberLocalization = localizationModule.Hooks.useAbbreviatedNumberLocalization
-local text = foundationModule.Text
-local view = foundationModule.View
-local skeleton = foundationModule.Skeleton
-local useTokens = foundationModule.Hooks.useTokens
-local _ = require(groups.Common.Types)
-local constantsModule = require(groups.Common.constants)
-local t = {
-	[enumsModule.DisabledReasons.BannedFromCommunity] = "subTextBannedFromCommunity",
-	[enumsModule.DisabledReasons.CommunityIsClosed] = "subTextGroupClosed",
-	[enumsModule.DisabledReasons.MaxCommunitiesJoined] = "subTextPremiumMaxGroups",
-	[enumsModule.DisabledReasons.AccountCreatedLessThanOneDay] = "subTextRequiresAccountTenureTooltipOneDay",
-	[enumsModule.DisabledReasons.AccountCreatedLessThanThreeDays] = "subTextRequiresAccountTenureTooltipThreeDays",
-	[enumsModule.DisabledReasons.AccountCreatedLessThanOneWeek] = "subTextRequiresAccountTenureTooltipOneWeek",
-	[enumsModule.DisabledReasons.AccountCreatedLessThanOneMonth] = "subTextRequiresAccountTenureTooltipOneMonth",
-	[enumsModule.DisabledReasons.AccountCreatedLessThanThreeMonths] = "subTextRequiresAccountTenureTooltipThreeMonths",
-	[enumsModule.DisabledReasons.InsufficientVerificationLevelHigh] = "subTextInsufficientVerificationLevelHigh",
-	[enumsModule.DisabledReasons.InsufficientVerificationLevelMedium] = "subTextInsufficientVerificationLevelMedium",
-	[enumsModule.DisabledReasons.InsufficientVerificationLevelLow] = "subTextInsufficientVerificationLevelLow"
+﻿local TextService = game:GetService("TextService")
+local Groups = script:FindFirstAncestor("Groups")
+local Parent = Groups.Parent
+local EnumsModule = require(Parent.ProfilePlatform.Enums)
+local FoundationModule = require(Parent.Foundation)
+local GetTextSizeFunction = require(Parent.Style).GetTextSize
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local LocalizationModule = require(Parent.Localization)
+local ReactModule = require(Parent.React)
+local UserLibModule = require(Parent.UserLib)
+local GetRbxthumbWithTypeSizeAndOptionsFunction = UserLibModule.Utils.getRbxthumbWithTypeSizeAndOptions
+local Constants = UserLibModule.Utils.Constants
+local VerifiedBadgesModule = require(Parent.VerifiedBadges)
+local MouseIconOverrideService = require(Parent.CoreScriptsCommon).MouseIconOverrideService
+local UseScreenSizeFunction = require(Parent.CoreScriptsRoactCommon).useScreenSize
+local LoadableImage = require(Parent.UIBlox).App.Loading.LoadableImage
+local Dialog = FoundationModule.Dialog
+local DialogSize = FoundationModule.Enums.DialogSize
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
+local UseAbbreviatedNumberLocalizationFunction = LocalizationModule.Hooks.useAbbreviatedNumberLocalization
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local Skeleton = FoundationModule.Skeleton
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local _ = require(Groups.Common.Types)
+local ConstantsModule = require(Groups.Common.constants)
+local config = {
+	[EnumsModule.DisabledReasons.BannedFromCommunity] = "subTextBannedFromCommunity",
+	[EnumsModule.DisabledReasons.CommunityIsClosed] = "subTextGroupClosed",
+	[EnumsModule.DisabledReasons.MaxCommunitiesJoined] = "subTextPremiumMaxGroups",
+	[EnumsModule.DisabledReasons.AccountCreatedLessThanOneDay] = "subTextRequiresAccountTenureTooltipOneDay",
+	[EnumsModule.DisabledReasons.AccountCreatedLessThanThreeDays] = "subTextRequiresAccountTenureTooltipThreeDays",
+	[EnumsModule.DisabledReasons.AccountCreatedLessThanOneWeek] = "subTextRequiresAccountTenureTooltipOneWeek",
+	[EnumsModule.DisabledReasons.AccountCreatedLessThanOneMonth] = "subTextRequiresAccountTenureTooltipOneMonth",
+	[EnumsModule.DisabledReasons.AccountCreatedLessThanThreeMonths] = "subTextRequiresAccountTenureTooltipThreeMonths",
+	[EnumsModule.DisabledReasons.InsufficientVerificationLevelHigh] = "subTextInsufficientVerificationLevelHigh",
+	[EnumsModule.DisabledReasons.InsufficientVerificationLevelMedium] = "subTextInsufficientVerificationLevelMedium",
+	[EnumsModule.DisabledReasons.InsufficientVerificationLevelLow] = "subTextInsufficientVerificationLevelLow"
 }
 
-return function(p1)
-	-- upvalues: useTokens (ref), useScreenSize (ref), constantsModule (ref), useLocalization (ref), reactModule (ref), mouseIconOverrideService (ref), enumsModule (ref), t (ref), foundationFontFaceMigration (ref), getTextSize (ref), textService (ref), getRbxthumbWithTypeSizeAndOptions (ref), constants (ref), view (ref), loadableImage (ref), text (ref), skeleton (ref), verifiedBadgesModule (ref), useAbbreviatedNumberLocalization (ref), buttonVariant (ref), dialog (ref), dialogSize (ref)
-	local var1 = useTokens()
-	local var2 = p1.enableInputDelayed ~= nil or p1.enableInputDelayed
-	local var3 = if useScreenSize().Y < constantsModule.SMALL_SCREEN_HEIGHT_THRESHOLD then constantsModule.THUMBNAIL_SIZE_SMALL else constantsModule.THUMBNAIL_SIZE
-	local data = p1.data
-	local var4 = data == nil
-	local var5 = if data then data.groupName else nil
-	local var6 = if data then data.ownerName else nil
-	local var7 = if data then data.ownerIsVerified else false
-	local var8 = if data then data.membersCount else 0
-	local var9 = if data then data.isAlreadyMember else false
-	local var10 = if data then data.hasPendingRequest else false
-	local var11 = if data then data.isEligible else false
-	local var12 = if data then data.disabledReason else nil
-	local var13 = if data and data.hasSocialModules ~= nil then data.hasSocialModules else true
-	local var14 = useLocalization({
+return function(p1) --[[ Line: 64 ]]
+	-- upvalues: UseTokensFunction (copy), UseScreenSizeFunction (copy), ConstantsModule (copy), UseLocalizationFunction (copy), ReactModule (copy), MouseIconOverrideService (copy), EnumsModule (copy), config (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), Constants (copy), View (copy), LoadableImage (copy), Text (copy), Skeleton (copy), VerifiedBadgesModule (copy), UseAbbreviatedNumberLocalizationFunction (copy), ButtonVariant (copy), Dialog (copy), DialogSize (copy)
+	local UseTokensResult = UseTokensFunction()
+	local NoEnableInputDelayed = p1.enableInputDelayed == nil or p1.enableInputDelayed
+	local THUMBNAILSIZESMALL = if UseScreenSizeFunction().Y < ConstantsModule.SMALL_SCREEN_HEIGHT_THRESHOLD then ConstantsModule.THUMBNAIL_SIZE_SMALL else ConstantsModule.THUMBNAIL_SIZE
+	local Data = p1.data
+	local NoData = Data == nil
+	local GroupName = if Data then Data.groupName else nil
+	local OwnerName = if Data then Data.ownerName else nil
+	local OwnerIsVerified = if Data then Data.ownerIsVerified else false
+	local MembersCount = if Data then Data.membersCount else 0
+	local IsAlreadyMember = if Data then Data.isAlreadyMember else false
+	local HasPendingRequest = if Data then Data.hasPendingRequest else false
+	local IsEligible = if Data then Data.isEligible else false
+	local DisabledReason = if Data then Data.disabledReason else nil
+	local NoData1 = not Data or Data.hasSocialModules == nil or Data.hasSocialModules
+	local UseLocalizationResult = UseLocalizationFunction({
 		joinGroup = "Feature.Groups.Action.JoinGroup",
 		followGroup = "Feature.Groups.Action.Follow",
 		notNowButton = "Feature.Groups.Action.NotNow",
@@ -76,341 +75,365 @@ return function(p1)
 		subTextInsufficientVerificationLevelMedium = "Feature.Groups.Modal.ContentTextMedium",
 		subTextInsufficientVerificationLevelLow = "Feature.Groups.Modal.ContentTextLow",
 		subTextNotEligible = "Feature.Groups.Description.NotEligibleToJoin",
-		titleJoin = { "Feature.Groups.Title.Join", groupName = var5 or "" },
-		titleFollow = { "Feature.Groups.Title.Follow", groupName = var5 or "" },
+		titleJoin = { "Feature.Groups.Title.Join", groupName = GroupName or "" },
+		titleFollow = {
+			"Feature.Groups.Title.Follow",
+			groupName = GroupName or ""
+		},
 		titleAlreadyRequested = {
 			"Feature.Groups.Title.RequestedToJoin",
-			groupName = var5 or ""
+			groupName = GroupName or ""
 		},
 		titleAlreadyMember = {
 			"Feature.Groups.Title.AlreadyMember",
-			groupName = var5 or ""
+			groupName = GroupName or ""
 		},
 		titleAlreadyFollowing = {
 			"Feature.Groups.Title.AlreadyFollowing",
-			groupName = var5 or ""
+			groupName = GroupName or ""
 		},
 		titleUnableToJoin = {
 			"Feature.Groups.Title.UnableToJoin",
-			groupName = var5 or ""
+			groupName = GroupName or ""
 		},
 		ownerBy = {
 			"Feature.Groups.Label.ByOwnerWithFormat",
-			ownerName = var6 or ""
+			ownerName = OwnerName or ""
 		}
 	})
-	reactModule.useEffect(function()
-		-- upvalues: mouseIconOverrideService (copy)
-		mouseIconOverrideService.push("GroupJoinPromptOverride", Enum.OverrideMouseIconBehavior.ForceShow)
+	ReactModule.useEffect(function() --[[ Line: 127 ]]
+		-- upvalues: MouseIconOverrideService (upval)
+		MouseIconOverrideService.push("GroupJoinPromptOverride", Enum.OverrideMouseIconBehavior.ForceShow)
 		
-		return function()
-			-- upvalues: mouseIconOverrideService (copy)
-			mouseIconOverrideService.pop("GroupJoinPromptOverride")
+		return function() --[[ Line: 130 ]]
+			-- upvalues: MouseIconOverrideService (upval)
+			MouseIconOverrideService.pop("GroupJoinPromptOverride")
 		end
 	end, {})
-	local var15 = reactModule.useRef(nil)
-	local var16, var17 = reactModule.useState(nil)
-	local var18 = reactModule.useRef(nil)
-	local var19, var20 = reactModule.useState(nil)
-	reactModule.useEffect(function()
-		-- upvalues: var15 (ref), var17 (ref), var16 (ref)
-		local var21 = nil
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
+	ReactModule.useEffect(function() --[[ Line: 141 ]]
+		-- upvalues: UseRefResult (copy), UseStateResult2 (copy), UseStateResult (copy)
+		local Connection = nil
 		
-		if var15.current then
-			local current = var15.current
+		if UseRefResult.current then
+			local Current = UseRefResult.current
 			
-			if current.AbsoluteSize.X > 0 then
-				var17(current.AbsoluteSize.X)
+			if Current.AbsoluteSize.X > 0 then
+				UseStateResult2(Current.AbsoluteSize.X)
 			end
-			var21 = current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
-				-- upvalues: current (ref), var16 (copy), var17 (copy)
-				if current.AbsoluteSize.X > 0 and current.AbsoluteSize.X ~= var16 then
-					var17(current.AbsoluteSize.X)
+			Connection = Current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 148 ]]
+				-- upvalues: Current (copy), UseStateResult (upval), UseStateResult2 (upval)
+				if Current.AbsoluteSize.X > 0 and Current.AbsoluteSize.X ~= UseStateResult then
+					UseStateResult2(Current.AbsoluteSize.X)
 				end
 			end)
 		end
-		return function()
-			-- upvalues: var21 (write)
-			if var21 then
-				var21:Disconnect()
-				var21 = nil
+		return function() --[[ Line: 154 ]]
+			-- upvalues: Connection (ref)
+			if Connection then
+				Connection:Disconnect()
+				Connection = nil
 			end
 		end
-	end, { var16 })
-	reactModule.useEffect(function()
-		-- upvalues: var18 (ref), var20 (ref), var19 (ref)
-		local var21 = nil
+	end, { UseStateResult })
+	ReactModule.useEffect(function() --[[ Line: 162 ]]
+		-- upvalues: UseRefResult1 (copy), UseStateResult2_1 (copy), UseStateResult1 (copy)
+		local Connection = nil
 		
-		if var18.current then
-			local current = var18.current
+		if UseRefResult1.current then
+			local Current = UseRefResult1.current
 			
-			if current.AbsoluteSize.X > 0 then
-				var20(current.AbsoluteSize.X)
+			if Current.AbsoluteSize.X > 0 then
+				UseStateResult2_1(Current.AbsoluteSize.X)
 			end
-			var21 = current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
-				-- upvalues: current (ref), var19 (copy), var20 (copy)
-				if current.AbsoluteSize.X > 0 and current.AbsoluteSize.X ~= var19 then
-					var20(current.AbsoluteSize.X)
+			Connection = Current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 169 ]]
+				-- upvalues: Current (copy), UseStateResult1 (upval), UseStateResult2_1 (upval)
+				if Current.AbsoluteSize.X > 0 and Current.AbsoluteSize.X ~= UseStateResult1 then
+					UseStateResult2_1(Current.AbsoluteSize.X)
 				end
 			end)
 		end
-		return function()
-			-- upvalues: var21 (write)
-			if var21 then
-				var21:Disconnect()
-				var21 = nil
+		return function() --[[ Line: 175 ]]
+			-- upvalues: Connection (ref)
+			if Connection then
+				Connection:Disconnect()
+				Connection = nil
 			end
 		end
-	end, { var19 })
-	local var21 = reactModule.useMemo(function()
-		-- upvalues: var10 (ref), var14 (ref), var9 (ref), var11 (ref), var12 (ref), enumsModule (copy), t (copy)
-		if var10 then
-			return var14.subTextPendingRequest
-		elseif var9 or var11 or not var12 then
+	end, { UseStateResult1 })
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 183 ]]
+		-- upvalues: HasPendingRequest (copy), UseLocalizationResult (copy), IsAlreadyMember (copy), IsEligible (copy), DisabledReason (copy), EnumsModule (upval), config (upval)
+		if HasPendingRequest then
+			return UseLocalizationResult.subTextPendingRequest
+		end
+		if IsAlreadyMember or IsEligible or not DisabledReason then
 			return nil
 		end
-		local var22 = enumsModule.DisabledReasons[var12]
+		local DisabledReason1 = EnumsModule.DisabledReasons[DisabledReason]
 		
-		if var22 then
-			local var23 = t[var22]
+		if DisabledReason1 then
+			local Entry = config[DisabledReason1]
 			
-			return if var23 then var14[var23] else var14.subTextNotEligible
+			if Entry then
+				return UseLocalizationResult[Entry]
+			end
 		end
+		return UseLocalizationResult.subTextNotEligible
 	end, {
-		var14,
-		var9,
-		var10,
-		var11,
-		var12
+		UseLocalizationResult,
+		IsAlreadyMember,
+		HasPendingRequest,
+		IsEligible,
+		DisabledReason
 	})
-	local var22 = reactModule.useMemo(function()
-		-- upvalues: var4 (ref), var13 (ref), var14 (ref), var9 (ref), var10 (ref), var11 (ref), var5 (ref)
-		if var4 then
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 204 ]]
+		-- upvalues: NoData (copy), NoData1 (copy), UseLocalizationResult (copy), IsAlreadyMember (copy), HasPendingRequest (copy), IsEligible (copy), GroupName (copy)
+		if NoData then
 			return nil
-		end
-		local var23 = if var13 then var14.titleJoin else var14.titleFollow
-		
-		if var9 then
-			var23 = if var13 then var14.titleAlreadyMember else var14.titleAlreadyFollowing
-		elseif var10 then
-			var23 = var14.titleAlreadyRequested
-		elseif not var11 then
-			var23 = var14.titleUnableToJoin
-		end
-		return var23 or var5
-	end, {
-		var14, var5, var9, var10, var11, var13, var4
-	})
-	local font = var1.Typography.HeadingSmall.Font
-	local fontSize = var1.Typography.HeadingSmall.FontSize
-	local font_1 = var1.Typography.BodyMedium.Font
-	local fontSize_1 = var1.Typography.BodyMedium.FontSize
-	local medium = var1.Padding.Medium
-	local var23 = reactModule.useMemo(function()
-		-- upvalues: var22 (ref), var16 (ref), foundationFontFaceMigration (copy), getTextSize (copy), fontSize (ref), font (ref), textService (copy)
-		return if not (not var22 or var22 == "" or (not var16 or var16 <= 0)) then if foundationFontFaceMigration then getTextSize(var22, fontSize, font, Vector2.new(var16, 1e999), { addTemporaryPadding = false }) else textService:GetTextSize(var22, fontSize, font, Vector2.new(var16, 1e999)) else nil
-	end, { var22, var16, font, fontSize })
-	local var24 = reactModule.useMemo(function()
-		-- upvalues: var21 (ref), var19 (ref), medium (ref), foundationFontFaceMigration (copy), getTextSize (copy), fontSize_1 (ref), font_1 (ref), textService (copy)
-		if var21 and var19 and var19 > 0 then
-			local var25 = var19 - medium * 2
+		else
+			local TitleAlreadyMember = if IsAlreadyMember then if NoData1 then UseLocalizationResult.titleAlreadyMember else UseLocalizationResult.titleAlreadyFollowing elseif HasPendingRequest then UseLocalizationResult.titleAlreadyRequested elseif IsEligible then if NoData1 then UseLocalizationResult.titleJoin else UseLocalizationResult.titleFollow else UseLocalizationResult.titleUnableToJoin
 			
-			return if var25 > 0 then if foundationFontFaceMigration then getTextSize(var21, fontSize_1, font_1, Vector2.new(var25, 1e999), { addTemporaryPadding = false }) else textService:GetTextSize(var21, fontSize_1, font_1, Vector2.new(var25, 1e999)) else nil
+			return if TitleAlreadyMember then TitleAlreadyMember else GroupName
 		end
 	end, {
-		var21,
-		var19,
-		font_1,
-		fontSize_1,
-		medium
+		UseLocalizationResult, GroupName, IsAlreadyMember, HasPendingRequest,
+		IsEligible, NoData1, NoData
 	})
-	local var25 = reactModule.useMemo(function()
-		-- upvalues: var23 (ref), var24 (ref)
+	local HeadingSmallFont = UseTokensResult.Typography.HeadingSmall.Font
+	local FontSize = UseTokensResult.Typography.HeadingSmall.FontSize
+	local BodyMediumFont = UseTokensResult.Typography.BodyMedium.Font
+	local FontSize1 = UseTokensResult.Typography.BodyMedium.FontSize
+	local Medium = UseTokensResult.Padding.Medium
+	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 233 ]]
+		-- upvalues: UseMemoResult1 (copy), UseStateResult (copy), FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), FontSize (copy), HeadingSmallFont (copy), TextService (upval)
+		return if UseMemoResult1 and UseMemoResult1 ~= "" and UseStateResult and UseStateResult > 0 then if FoundationFontFaceMigration then GetTextSizeFunction(UseMemoResult1, FontSize, HeadingSmallFont, Vector2.new(UseStateResult, 1e999), { addTemporaryPadding = false }) else TextService:GetTextSize(UseMemoResult1, FontSize, HeadingSmallFont, Vector2.new(UseStateResult, 1e999)) else nil
+	end, {
+		UseMemoResult1,
+		UseStateResult,
+		HeadingSmallFont,
+		FontSize
+	})
+	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 255 ]]
+		-- upvalues: UseMemoResult (copy), UseStateResult1 (copy), Medium (copy), FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), FontSize1 (copy), BodyMediumFont (copy), TextService (upval)
+		if UseMemoResult and UseStateResult1 and UseStateResult1 > 0 then
+			local UseStateResultDelta = UseStateResult1 - Medium * 2
+			
+			if UseStateResultDelta > 0 then
+				return if FoundationFontFaceMigration then GetTextSizeFunction(UseMemoResult, FontSize1, BodyMediumFont, Vector2.new(UseStateResultDelta, 1e999), { addTemporaryPadding = false }) else TextService:GetTextSize(UseMemoResult, FontSize1, BodyMediumFont, Vector2.new(UseStateResultDelta, 1e999))
+			end
+		end
+		return nil
+	end, {
+		UseMemoResult,
+		UseStateResult1,
+		BodyMediumFont,
+		FontSize1,
+		Medium
+	})
+	local UseMemoResult4 = ReactModule.useMemo(function() --[[ Line: 280 ]]
+		-- upvalues: UseMemoResult2 (copy), UseMemoResult3 (copy)
 		local t = {}
 		
-		if var23 then
-			t.title = var23
+		if UseMemoResult2 then
+			t.title = UseMemoResult2
 		end
-		if var24 then
-			t.subText = var24
+		if UseMemoResult3 then
+			t.subText = UseMemoResult3
 		end
 		return t
-	end, { var23, var24 })
-	local var26 = if p1.groupId then getRbxthumbWithTypeSizeAndOptions(tostring(p1.groupId), constants.RbxthumbTypes.GroupIcon, constantsModule.THUMBNAIL_SIZE) else nil
-	local var27 = reactModule.useCallback(function()
-		-- upvalues: var26 (ref), reactModule (copy), view (copy), var1 (ref), var3 (ref), loadableImage (copy)
-		return if var26 then reactModule.createElement(view, {
+	end, { UseMemoResult2, UseMemoResult3 })
+	local RbxthumbWithTypeSizeAndOptions = if p1.groupId then GetRbxthumbWithTypeSizeAndOptionsFunction(tostring(p1.groupId), Constants.RbxthumbTypes.GroupIcon, ConstantsModule.THUMBNAIL_SIZE) else nil
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 300 ]]
+		-- upvalues: RbxthumbWithTypeSizeAndOptions (copy), ReactModule (upval), View (upval), UseTokensResult (copy), THUMBNAILSIZESMALL (copy), LoadableImage (upval)
+		return if RbxthumbWithTypeSizeAndOptions then ReactModule.createElement(View, {
 			tag = "col size-full-0 auto-y align-x-center",
 			LayoutOrder = 0
 		}, {
-			UIPadding = reactModule.createElement("UIPadding", {
-				PaddingTop = UDim.new(0, var1.Padding.Medium),
-				PaddingBottom = UDim.new(0, var1.Padding.Medium)
+			UIPadding = ReactModule.createElement("UIPadding", {
+				PaddingTop = UDim.new(0, UseTokensResult.Padding.Medium),
+				PaddingBottom = UDim.new(0, UseTokensResult.Padding.Medium)
 			}),
-			ImageContainer = reactModule.createElement(view, { Size = UDim2.new(0, var3, 0, var3) }, {
-				UISizeConstraint = reactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(var3, var3) }),
-				LoadableImage = reactModule.createElement(loadableImage, {
+			ImageContainer = ReactModule.createElement(View, {
+				Size = UDim2.new(0, THUMBNAILSIZESMALL, 0, THUMBNAILSIZESMALL)
+			}, {
+				UISizeConstraint = ReactModule.createElement("UISizeConstraint", {
+					MaxSize = Vector2.new(THUMBNAILSIZESMALL, THUMBNAILSIZESMALL)
+				}),
+				LoadableImage = ReactModule.createElement(LoadableImage, {
 					BackgroundTransparency = 1,
 					useShimmerAnimationWhileLoading = true,
 					showFailedStateWhenLoadingFailed = true,
 					Size = UDim2.fromScale(1, 1),
-					Image = var26,
-					cornerRadius = UDim.new(0, var1.Radius.Medium)
+					Image = RbxthumbWithTypeSizeAndOptions,
+					cornerRadius = UDim.new(0, UseTokensResult.Radius.Medium)
 				})
 			})
 		}) else nil
-	end, { var26, var1, var3 })
-	local var28 = reactModule.useCallback(function()
-		-- upvalues: reactModule (copy), view (copy), var15 (ref), var22 (ref), var4 (ref), var25 (ref), text (copy), var1 (ref), var16 (ref), skeleton (copy), fontSize (ref)
-		return reactModule.createElement(view, {
+	end, {
+		RbxthumbWithTypeSizeAndOptions,
+		UseTokensResult,
+		THUMBNAILSIZESMALL
+	})
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 329 ]]
+		-- upvalues: ReactModule (upval), View (upval), UseRefResult (copy), UseMemoResult1 (copy), NoData (copy), UseMemoResult4 (copy), Text (upval), UseTokensResult (copy), UseStateResult (copy), Skeleton (upval), FontSize (copy)
+		return ReactModule.createElement(View, {
 			tag = "col size-full-0 auto-y",
 			LayoutOrder = 1,
-			ref = var15
+			ref = UseRefResult
 		}, {
-			TitleText = if var22 and var22 ~= "" and (not var4 and var25) and var25.title then reactModule.createElement(text, {
+			TitleText = if UseMemoResult1 and UseMemoResult1 ~= "" and not NoData and UseMemoResult4 and UseMemoResult4.title then ReactModule.createElement(Text, {
 				tag = "text-align-x-left",
 				TextWrapped = true,
-				Text = var22,
-				fontStyle = var1.Typography.HeadingSmall,
-				textStyle = var1.Color.Content.Emphasis,
-				Size = UDim2.fromOffset(math.ceil(var25.title.X), math.ceil(var25.title.Y)),
+				Text = UseMemoResult1,
+				fontStyle = UseTokensResult.Typography.HeadingSmall,
+				textStyle = UseTokensResult.Color.Content.Emphasis,
+				Size = UDim2.fromOffset(math.ceil(UseMemoResult4.title.X), (math.ceil(UseMemoResult4.title.Y))),
 				AutomaticSize = Enum.AutomaticSize.None
 			}, {
-				UISizeConstraint = reactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(var16 or 1e999, 1e999) })
-			}) elseif var22 and var22 ~= "" and not var4 then reactModule.createElement(text, {
+				UISizeConstraint = ReactModule.createElement("UISizeConstraint", {
+					MaxSize = Vector2.new(if UseStateResult then UseStateResult else 1e999, 1e999)
+				})
+			}) elseif UseMemoResult1 and UseMemoResult1 ~= "" and not NoData then ReactModule.createElement(Text, {
 				tag = "size-full-0 auto-y text-align-x-left",
 				TextWrapped = true,
-				Text = var22,
-				fontStyle = var1.Typography.HeadingSmall,
-				textStyle = var1.Color.Content.Emphasis
-			}) elseif var4 then reactModule.createElement(skeleton, { Size = UDim2.new(1, 0, 0, fontSize) }) else nil
+				Text = UseMemoResult1,
+				fontStyle = UseTokensResult.Typography.HeadingSmall,
+				textStyle = UseTokensResult.Color.Content.Emphasis
+			}) elseif NoData then ReactModule.createElement(Skeleton, { Size = UDim2.new(1, 0, 0, FontSize) }) else nil
 		})
 	end, {
-		var22, var4, var25, var16, var1, var15, fontSize
+		UseMemoResult1, NoData, UseMemoResult4, UseStateResult, UseTokensResult,
+		UseRefResult, FontSize
 	})
-	local var29 = reactModule.useCallback(function()
-		-- upvalues: var6 (ref), var4 (ref), reactModule (copy), view (copy), var1 (ref), verifiedBadgesModule (copy), var7 (ref), text (copy), var14 (ref), skeleton (copy), fontSize_1 (ref)
-		return if not (var6 ~= nil and var6 ~= "" and not var4) then if var4 then reactModule.createElement(view, { tag = "col size-full-0 auto-y", LayoutOrder = 2 }, {
-			UIPadding = reactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, var1.Padding.XSmall) }),
-			Shimmer = reactModule.createElement(skeleton, { Size = UDim2.new(0.6, 0, 0, fontSize_1) })
-		}) else nil else reactModule.createElement(view, { tag = "col size-full-0 auto-y", LayoutOrder = 2 }, {
-			UIPadding = reactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, var1.Padding.XSmall) }),
-			Content = reactModule.createElement(verifiedBadgesModule.EmojiWrapper, {
-				emoji = if var7 then verifiedBadgesModule.emoji.verified else "",
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 367 ]]
+		-- upvalues: OwnerName (copy), NoData (copy), ReactModule (upval), View (upval), UseTokensResult (copy), VerifiedBadgesModule (upval), OwnerIsVerified (copy), Text (upval), UseLocalizationResult (copy), Skeleton (upval), FontSize1 (copy)
+		return if OwnerName == nil or OwnerName == "" or NoData then if NoData then ReactModule.createElement(View, { tag = "col size-full-0 auto-y", LayoutOrder = 2 }, {
+			UIPadding = ReactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, UseTokensResult.Padding.XSmall) }),
+			Shimmer = ReactModule.createElement(Skeleton, { Size = UDim2.new(0.6, 0, 0, FontSize1) })
+		}) else nil else ReactModule.createElement(View, { tag = "col size-full-0 auto-y", LayoutOrder = 2 }, {
+			UIPadding = ReactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, UseTokensResult.Padding.XSmall) }),
+			Content = ReactModule.createElement(VerifiedBadgesModule.EmojiWrapper, {
+				emoji = if OwnerIsVerified then VerifiedBadgesModule.emoji.verified else "",
 				size = UDim2.new(1, 0, 0, 0),
 				automaticSize = Enum.AutomaticSize.Y,
 				horizontalAlignment = Enum.HorizontalAlignment.Left
 			}, {
-				Text = reactModule.createElement(text, {
+				Text = ReactModule.createElement(Text, {
 					tag = "size-full-0 auto-y text-body-medium text-align-x-left",
 					TextWrapped = true,
-					Text = var14.ownerBy
+					Text = UseLocalizationResult.ownerBy
 				})
 			})
 		})
 	end, {
-		var6, var7, var4, var1, var14, fontSize_1
+		OwnerName, OwnerIsVerified, NoData, UseTokensResult, UseLocalizationResult,
+		FontSize1
 	})
-	local var30 = useAbbreviatedNumberLocalization(var8)
-	local var31 = reactModule.useCallback(function()
-		-- upvalues: reactModule (copy), view (copy), var18 (ref), var1 (ref), var4 (ref), skeleton (copy), fontSize_1 (ref), var21 (ref), var25 (ref), text (copy), var19 (ref), var8 (ref), var30 (ref), var13 (ref), var14 (ref)
-		return reactModule.createElement(view, {
+	local UseAbbreviatedNumberLocalizationResult = UseAbbreviatedNumberLocalizationFunction(MembersCount)
+	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 408 ]]
+		-- upvalues: ReactModule (upval), View (upval), UseRefResult1 (copy), UseTokensResult (copy), NoData (copy), Skeleton (upval), FontSize1 (copy), UseMemoResult (copy), UseMemoResult4 (copy), Text (upval), UseStateResult1 (copy), MembersCount (copy), UseAbbreviatedNumberLocalizationResult (copy), NoData1 (copy), UseLocalizationResult (copy)
+		return ReactModule.createElement(View, {
 			tag = "col size-full-0 auto-y",
 			LayoutOrder = 3,
-			ref = var18
+			ref = UseRefResult1
 		}, {
-			UIPadding = reactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, var1.Padding.Medium) }),
-			Content = if var4 then reactModule.createElement(skeleton, { Size = UDim2.new(0.4, 0, 0, fontSize_1) }) elseif var21 ~= nil and var25 and var25.subText then if var21 ~= nil then if var8 and var8 > 0 then reactModule.createElement(text, {
+			UIPadding = ReactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, UseTokensResult.Padding.Medium) }),
+			Content = if NoData then ReactModule.createElement(Skeleton, { Size = UDim2.new(0.4, 0, 0, FontSize1) }) elseif UseMemoResult == nil or not UseMemoResult4 or not UseMemoResult4.subText then if UseMemoResult == nil then if MembersCount and MembersCount > 0 then ReactModule.createElement(Text, {
 				tag = "size-full-0 auto-y text-body-medium text-align-x-left",
 				TextWrapped = true,
-				Text = var30 .. " " .. (if var13 then var14.members else var14.followers)
-			}) else nil else reactModule.createElement(text, {
+				Text = UseAbbreviatedNumberLocalizationResult .. " " .. (if NoData1 then UseLocalizationResult.members else UseLocalizationResult.followers)
+			}) else nil else ReactModule.createElement(Text, {
 				tag = "size-full-0 auto-y text-body-medium text-align-x-left",
 				TextWrapped = true,
-				Text = var21
-			}) else reactModule.createElement(text, {
+				Text = UseMemoResult
+			}) else ReactModule.createElement(Text, {
 				tag = "text-body-medium text-align-x-left",
 				TextWrapped = true,
-				Text = var21,
-				Size = UDim2.fromOffset(math.ceil(var25.subText.X), math.ceil(var25.subText.Y)),
+				Text = UseMemoResult,
+				Size = UDim2.fromOffset(math.ceil(UseMemoResult4.subText.X), (math.ceil(UseMemoResult4.subText.Y))),
 				AutomaticSize = Enum.AutomaticSize.None
 			}, {
-				UISizeConstraint = reactModule.createElement("UISizeConstraint", {
-					MaxSize = Vector2.new(if var19 then var19 - var1.Padding.Medium * 2 else 1e999, 1e999)
+				UISizeConstraint = ReactModule.createElement("UISizeConstraint", {
+					MaxSize = Vector2.new(if UseStateResult1 then UseStateResult1 - UseTokensResult.Padding.Medium * 2 else 1e999, 1e999)
 				})
 			})
 		})
 	end, {
-		var4, var21, var25, var19, var1, var8, var30, var13, var14, var18,
-		fontSize_1
+		NoData, UseMemoResult, UseMemoResult4, UseStateResult1, UseTokensResult,
+		MembersCount, UseAbbreviatedNumberLocalizationResult, NoData1,
+		UseLocalizationResult, UseRefResult1, FontSize1
 	})
-	local var32, var33 = reactModule.useState(false)
-	local var34 = reactModule.useCallback(function()
-		-- upvalues: var32 (ref), var33 (ref), p1 (ref)
-		if not var32 then
-			var33(true)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(false)
+	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 469 ]]
+		-- upvalues: UseStateResult3 (copy), UseStateResult2_2 (copy), p1 (copy)
+		if not UseStateResult3 then
+			UseStateResult2_2(true)
 			
 			if p1.onJoin then
 				p1.onJoin()
 			end
 		end
 	end, { p1.onJoin })
-	local var35 = reactModule.useCallback(function()
-		-- upvalues: var32 (ref), p1 (ref)
-		if not var32 and p1.onClose then
+	local UseResult5 = ReactModule.useCallback(function() --[[ Line: 478 ]]
+		-- upvalues: UseStateResult3 (copy), p1 (copy)
+		if not UseStateResult3 and p1.onClose then
 			p1.onClose()
 		end
-	end, { p1.onClose, var32 })
+	end, { p1.onClose, UseStateResult3 })
 	
-	return reactModule.createElement(dialog.Root, { size = dialogSize.Small, onClose = var35 }, {
-		DialogContent = reactModule.createElement(dialog.Content, { LayoutOrder = 1 }, {
-			Content = reactModule.createElement(view, { tag = "col size-full-0 auto-y" }, {
-				UIListLayout = reactModule.createElement("UIListLayout", {
+	return ReactModule.createElement(Dialog.Root, { size = DialogSize.Small, onClose = UseResult5 }, {
+		DialogContent = ReactModule.createElement(Dialog.Content, { LayoutOrder = 1 }, {
+			Content = ReactModule.createElement(View, { tag = "col size-full-0 auto-y" }, {
+				UIListLayout = ReactModule.createElement("UIListLayout", {
 					FillDirection = Enum.FillDirection.Vertical,
 					SortOrder = Enum.SortOrder.LayoutOrder,
 					Padding = UDim.new(0, 0)
 				}),
-				GroupImage = var27(),
-				Title = var28(),
-				OwnerName = var29(),
-				SubContent = var31()
+				GroupImage = UseResult(),
+				Title = UseResult1(),
+				OwnerName = UseResult2(),
+				SubContent = UseResult3()
 			})
 		}),
-		DialogActions = reactModule.createElement(dialog.Actions, {
+		DialogActions = ReactModule.createElement(Dialog.Actions, {
 			LayoutOrder = 2,
-			actions = reactModule.useMemo(function()
-				-- upvalues: var4 (ref), buttonVariant (copy), var9 (ref), var11 (ref), var10 (ref), var14 (ref), var35 (ref), var32 (ref), var13 (ref), var34 (ref), var2 (ref), constantsModule (copy)
-				return if var4 then {
+			actions = ReactModule.useMemo(function() --[[ Line: 486 ]]
+				-- upvalues: NoData (copy), ButtonVariant (upval), IsAlreadyMember (copy), IsEligible (copy), HasPendingRequest (copy), UseLocalizationResult (copy), UseResult5 (copy), UseStateResult3 (copy), NoData1 (copy), UseResult4 (copy), NoEnableInputDelayed (copy), ConstantsModule (upval)
+				return if NoData then {
 					{
 						isLoading = true,
 						isDisabled = true,
-						variant = buttonVariant.Standard
+						variant = ButtonVariant.Standard
 					}
-				} elseif var9 or not var11 or var10 then {
+				} elseif IsAlreadyMember or not IsEligible or HasPendingRequest then {
 					{
-						variant = buttonVariant.Standard,
-						text = var14.closeButton,
-						onActivated = var35,
-						isDisabled = var32
+						variant = ButtonVariant.Standard,
+						text = UseLocalizationResult.closeButton,
+						onActivated = UseResult5,
+						isDisabled = UseStateResult3
 					}
 				} else {
 					{
-						variant = buttonVariant.Emphasis,
-						text = if var13 then var14.joinGroup else var14.followGroup,
-						onActivated = var34,
-						inputDelay = if var2 then constantsModule.ACCEPT_DELAY_SECONDS else nil,
-						isLoading = var32,
-						isDisabled = var32
+						variant = ButtonVariant.Emphasis,
+						text = NoData1 and UseLocalizationResult.joinGroup or UseLocalizationResult.followGroup,
+						onActivated = UseResult4,
+						inputDelay = if NoEnableInputDelayed then ConstantsModule.ACCEPT_DELAY_SECONDS else nil,
+						isLoading = UseStateResult3,
+						isDisabled = UseStateResult3
 					},
 					{
-						variant = buttonVariant.Standard,
-						text = var14.notNowButton,
-						onActivated = var35,
-						isDisabled = var32
+						variant = ButtonVariant.Standard,
+						text = UseLocalizationResult.notNowButton,
+						onActivated = UseResult5,
+						isDisabled = UseStateResult3
 					}
 				}
 			end, {
-				var14, var34, var35, var2, var10, var11, var9, var32, var13
+				UseLocalizationResult, UseResult4, UseResult5, NoEnableInputDelayed,
+				HasPendingRequest, IsEligible, IsAlreadyMember, UseStateResult3, NoData1
 			})
 		})
 	})

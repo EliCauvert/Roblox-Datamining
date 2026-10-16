@@ -1,7 +1,6 @@
-﻿local guiService = game:GetService("GuiService")
-local ok, status = pcall(guiService.GetNotificationTypeList, guiService)
-
-return if ok then status else {
+﻿local GuiService = game:GetService("GuiService")
+local Success, Result = pcall(GuiService.GetNotificationTypeList, GuiService)
+local config = {
 	VIEW_PROFILE = 0,
 	REPORT_ABUSE = 1,
 	VIEW_GAME_DETAILS = 2,
@@ -43,3 +42,5 @@ return if ok then status else {
 	GAME_STREAMING_STATUS_CHANGED = 43,
 	POST_PURCHASE = 44
 }
+
+return Success and Result or config

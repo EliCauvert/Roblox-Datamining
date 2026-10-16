@@ -1,331 +1,334 @@
-﻿local runService = game:GetService("RunService")
-local tweenService = game:GetService("TweenService")
-local inExperienceShop = script:FindFirstAncestor("InExperienceShop")
-local parent = inExperienceShop.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagEnableExperienceShopGlobalIconModule = require(inExperienceShop.Flags.FFlagEnableExperienceShopGlobalIcon)
-local fFlagEnableShopIconTelemetryModule = require(inExperienceShop.Flags.FFlagEnableShopIconTelemetry)
-local fFlagOfferNotifyOnGlobalIcon = sharedFlagsModule.FFlagOfferNotifyOnGlobalIcon
-local shopGlobalIconAnimGracePeriodMs = game:DefineFastInt("ShopGlobalIconAnimGracePeriodMs", 3000)
-local getShopGlobalIconStoreModule = require(inExperienceShop.Stores.GetShopGlobalIconStore)
-local fFlagExperienceShopNewIconographyModule = require(inExperienceShop.Flags.FFlagExperienceShopNewIconography)
-local useTokens = foundationModule.Hooks.useTokens
-local iconName = foundationModule.Enums.IconName
-local iconVariant = foundationModule.Enums.IconVariant
-local var1 = if fFlagExperienceShopNewIconographyModule then 0.23 else 0.2
-local var2 = if fFlagExperienceShopNewIconographyModule then 0.23 else 0.2
-local tweenInfo = TweenInfo.new(0.35, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
-local tweenInfo_1 = TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.In)
-local tweenInfo_2 = TweenInfo.new(0.3, Enum.EasingStyle.Back, Enum.EasingDirection.Out)
-local tweenInfo_3 = TweenInfo.new(0.2, Enum.EasingStyle.Back, Enum.EasingDirection.In)
-local currentTime = nil
+﻿local RunService = game:GetService("RunService")
+local TweenService = game:GetService("TweenService")
+local InExperienceShop = script:FindFirstAncestor("InExperienceShop")
+local Parent = InExperienceShop.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local FFlagEnableExperienceShopGlobalIconModule = require(InExperienceShop.Flags.FFlagEnableExperienceShopGlobalIcon)
+local FFlagEnableShopIconTelemetryModule = require(InExperienceShop.Flags.FFlagEnableShopIconTelemetry)
+local FFlagOfferNotifyOnGlobalIcon = require(Parent.SharedFlags).FFlagOfferNotifyOnGlobalIcon
+local ShopGlobalIconAnimGracePeriodMs = game:DefineFastInt("ShopGlobalIconAnimGracePeriodMs", 3000)
+local GetShopGlobalIconStoreModule = require(InExperienceShop.Stores.GetShopGlobalIconStore)
+local FFlagExperienceShopNewIconographyModule = require(InExperienceShop.Flags.FFlagExperienceShopNewIconography)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local IconName = FoundationModule.Enums.IconName
+local IconVariant = FoundationModule.Enums.IconVariant
+local v1: number = if FFlagExperienceShopNewIconographyModule then 0.23 else 0.2
+local v2: number = if FFlagExperienceShopNewIconographyModule then 0.23 else 0.2
+local _TweenInfo = TweenInfo.new(0.35, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+local _TweenInfo1 = TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.In)
+local _TweenInfo2 = TweenInfo.new(0.3, Enum.EasingStyle.Back, Enum.EasingDirection.Out)
+local _TweenInfo3 = TweenInfo.new(0.2, Enum.EasingStyle.Back, Enum.EasingDirection.In)
+local CurrentTime: number? = nil
 
 if game:IsLoaded() then
-	currentTime = tick()
+	CurrentTime = tick()
 else
-	local loadedConnection = nil
-	loadedConnection = game.Loaded:Connect(function()
-		-- upvalues: currentTime (write), loadedConnection (write)
-		currentTime = tick()
-		loadedConnection:Disconnect()
+	local Connection = nil
+	Connection = game.Loaded:Connect(function() --[[ Line: 44 ]]
+		-- upvalues: CurrentTime (ref), Connection (ref)
+		CurrentTime = tick()
+		Connection:Disconnect()
 	end)
 end
-return function(p1)
-	-- upvalues: fFlagEnableExperienceShopGlobalIconModule (ref), useTokens (ref), fFlagOfferNotifyOnGlobalIcon (ref), getShopGlobalIconStoreModule (ref), reactModule (ref), shopGlobalIconAnimGracePeriodMs (ref), currentTime (write), tweenService (ref), tweenInfo (ref), tweenInfo_2 (ref), tweenInfo_3 (ref), tweenInfo_1 (ref), fFlagEnableShopIconTelemetryModule (ref), runService (ref), parent (ref), inExperienceShop (ref), foundationModule (ref), fFlagExperienceShopNewIconographyModule (ref), iconName (ref), iconVariant (ref), var2 (ref), var1 (ref)
-	if fFlagEnableExperienceShopGlobalIconModule then
-		local var3 = useTokens()
-		local buttonSize = p1.buttonSize
-		local leftGap = p1.leftGap or 0
-		local var4 = if fFlagOfferNotifyOnGlobalIcon then getShopGlobalIconStoreModule(false).setIconInstance else nil
-		local var5, var6 = reactModule.useState(0)
-		local var7, var8 = reactModule.useState(0)
-		local var9, var10 = reactModule.useState(false)
-		local var11 = reactModule.useRef(nil)
-		local var12 = reactModule.useRef(nil)
-		local var13 = reactModule.useRef(nil)
-		local var14 = reactModule.useRef(nil)
-		local var15 = reactModule.useRef(nil)
-		local var16 = reactModule.useRef(nil)
-		local var17 = reactModule.useRef(nil)
-		local var18 = reactModule.useRef(nil)
-		local var19 = reactModule.useRef(nil)
-		local var20 = reactModule.useRef(nil)
-		local var21 = reactModule.useRef(nil)
-		local var22 = reactModule.useRef(p1.hidden)
-		var22.current = p1.hidden
-		reactModule.useEffect(function()
-			-- upvalues: var17 (ref), var18 (ref), var6 (ref), var8 (ref), var13 (ref), var14 (ref), var11 (ref), var12 (ref), var15 (ref), var16 (ref), buttonSize (ref), var10 (ref), shopGlobalIconAnimGracePeriodMs (copy), currentTime (copy), tweenService (copy), tweenInfo (copy), tweenInfo_2 (copy), tweenInfo_3 (copy), tweenInfo_1 (copy), var19 (ref), var20 (ref), var21 (ref), var22 (ref)
-			local numberValue = Instance.new("NumberValue")
-			numberValue.Value = 0
-			var17.current = numberValue
-			local numberValue_1 = Instance.new("NumberValue")
-			numberValue_1.Value = 0
-			var18.current = numberValue_1
-			local var23 = numberValue:GetPropertyChangedSignal("Value"):Connect(function()
-				-- upvalues: var6 (copy), numberValue (ref)
-				var6(numberValue.Value)
+return function(p1) --[[ Line: 65 | Named "ShopGlobalIcon" ]]
+	-- upvalues: FFlagEnableExperienceShopGlobalIconModule (copy), UseTokensFunction (copy), FFlagOfferNotifyOnGlobalIcon (copy), GetShopGlobalIconStoreModule (copy), ReactModule (copy), ShopGlobalIconAnimGracePeriodMs (copy), CurrentTime (ref), TweenService (copy), _TweenInfo (copy), _TweenInfo2 (copy), _TweenInfo3 (copy), _TweenInfo1 (copy), FFlagEnableShopIconTelemetryModule (copy), RunService (copy), Parent (copy), InExperienceShop (copy), FoundationModule (copy), FFlagExperienceShopNewIconographyModule (copy), IconName (copy), IconVariant (copy), v2 (copy), v1 (copy)
+	if FFlagEnableExperienceShopGlobalIconModule then
+		local UseTokensResult = UseTokensFunction()
+		local ButtonSize: number = p1.buttonSize
+		local LeftGap = p1.leftGap or 0
+		local SetIconInstance = if FFlagOfferNotifyOnGlobalIcon then GetShopGlobalIconStoreModule(false).setIconInstance else nil
+		local UseStateResult, UseStateResult2 = ReactModule.useState(0)
+		local UseStateResult1, UseStateResult2_1 = ReactModule.useState(0)
+		local UseStateResult3, UseStateResult2_2 = ReactModule.useState(false)
+		local UseRefResult = ReactModule.useRef(nil)
+		local UseRefResult1 = ReactModule.useRef(nil)
+		local UseRefResult2 = ReactModule.useRef(nil)
+		local UseRefResult3 = ReactModule.useRef(nil)
+		local UseRefResult4 = ReactModule.useRef(nil)
+		local UseRefResult5 = ReactModule.useRef(nil)
+		local UseRefResult6 = ReactModule.useRef(nil)
+		local UseRefResult7 = ReactModule.useRef(nil)
+		local UseRefResult8 = ReactModule.useRef(nil)
+		local UseRefResult9 = ReactModule.useRef(nil)
+		local UseRefResult10 = ReactModule.useRef(nil)
+		local UseRefResult11 = ReactModule.useRef(p1.hidden)
+		UseRefResult11.current = p1.hidden
+		ReactModule.useEffect(function() --[[ Line: 99 ]]
+			-- upvalues: UseRefResult6 (copy), UseRefResult7 (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), UseRefResult2 (copy), UseRefResult3 (copy), UseRefResult (copy), UseRefResult1 (copy), UseRefResult4 (copy), UseRefResult5 (copy), ButtonSize (copy), UseStateResult2_2 (copy), ShopGlobalIconAnimGracePeriodMs (upval), CurrentTime (upval), TweenService (upval), _TweenInfo (upval), _TweenInfo2 (upval), _TweenInfo3 (upval), _TweenInfo1 (upval), UseRefResult8 (copy), UseRefResult9 (copy), UseRefResult10 (copy), UseRefResult11 (copy)
+			local NumValue = Instance.new("NumberValue")
+			NumValue.Value = 0
+			UseRefResult6.current = NumValue
+			local NumValue1 = Instance.new("NumberValue")
+			NumValue1.Value = 0
+			UseRefResult7.current = NumValue1
+			local Connection = NumValue:GetPropertyChangedSignal("Value"):Connect(function() --[[ Line: 108 ]]
+				-- upvalues: UseStateResult2 (upval), NumValue (copy)
+				UseStateResult2(NumValue.Value)
 			end)
-			local var24 = numberValue_1:GetPropertyChangedSignal("Value"):Connect(function()
-				-- upvalues: var8 (copy), numberValue_1 (ref)
-				var8(numberValue_1.Value)
+			local Connection1 = NumValue1:GetPropertyChangedSignal("Value"):Connect(function() --[[ Line: 111 ]]
+				-- upvalues: UseStateResult2_1 (upval), NumValue1 (copy)
+				UseStateResult2_1(NumValue1.Value)
 			end)
 			
-			local function stopAllAnimations()
-				-- upvalues: var13 (copy), var14 (copy), var11 (copy), var12 (copy), var15 (copy), var16 (copy)
-				if var13.current then
-					var13.current:Disconnect()
-					var13.current = nil
+			local function stopAllAnimations() --[[ Line: 115 ]]
+				-- upvalues: UseRefResult2 (upval), UseRefResult3 (upval), UseRefResult (upval), UseRefResult1 (upval), UseRefResult4 (upval), UseRefResult5 (upval)
+				if UseRefResult2.current then
+					UseRefResult2.current:Disconnect()
+					UseRefResult2.current = nil
 				end
-				if var14.current then
-					var14.current:Disconnect()
-					var14.current = nil
+				if UseRefResult3.current then
+					UseRefResult3.current:Disconnect()
+					UseRefResult3.current = nil
 				end
-				if var11.current then
-					var11.current:Cancel()
-					var11.current = nil
+				if UseRefResult.current then
+					UseRefResult.current:Cancel()
+					UseRefResult.current = nil
 				end
-				if var12.current then
-					var12.current:Cancel()
-					var12.current = nil
+				if UseRefResult1.current then
+					UseRefResult1.current:Cancel()
+					UseRefResult1.current = nil
 				end
-				if var15.current then
-					task.cancel(var15.current)
-					var15.current = nil
+				if UseRefResult4.current then
+					task.cancel(UseRefResult4.current)
+					UseRefResult4.current = nil
 				end
-				if var16.current then
-					task.cancel(var16.current)
-					var16.current = nil
+				if UseRefResult5.current then
+					task.cancel(UseRefResult5.current)
+					UseRefResult5.current = nil
 				end
 			end
 			
-			local function _()
-				-- upvalues: numberValue (ref), buttonSize (copy), numberValue_1 (ref), var6 (copy), var8 (copy), var10 (copy)
-				numberValue.Value = buttonSize
-				numberValue_1.Value = 1
-				var6(buttonSize)
-				var8(1)
-				var10(true)
+			local function _() --[[ Line: 142 | Named "showImmediate" ]]
+				-- upvalues: NumValue (copy), ButtonSize (upval), NumValue1 (copy), UseStateResult2 (upval), UseStateResult2_1 (upval), UseStateResult2_2 (upval)
+				NumValue.Value = ButtonSize
+				NumValue1.Value = 1
+				UseStateResult2(ButtonSize)
+				UseStateResult2_1(1)
+				UseStateResult2_2(true)
 			end
 			
-			local function showAnimated()
-				-- upvalues: stopAllAnimations (ref), shopGlobalIconAnimGracePeriodMs (copy), currentTime (copy), numberValue (ref), buttonSize (copy), numberValue_1 (ref), var6 (copy), var8 (copy), var10 (copy), tweenService (copy), tweenInfo (copy), var11 (copy), var15 (copy), tweenInfo_2 (copy), var12 (copy)
-				local var25
+			local function showAnimated() --[[ Line: 150 ]]
+				-- upvalues: stopAllAnimations (copy), ShopGlobalIconAnimGracePeriodMs (upval), CurrentTime (upval), NumValue (copy), ButtonSize (upval), NumValue1 (copy), UseStateResult2 (upval), UseStateResult2_1 (upval), UseStateResult2_2 (upval), TweenService (upval), _TweenInfo (upval), UseRefResult (upval), UseRefResult4 (upval), _TweenInfo2 (upval), UseRefResult1 (upval)
 				stopAllAnimations()
 				
-				if shopGlobalIconAnimGracePeriodMs > 0 then
-					var25 = currentTime and tick() - currentTime
+				if ShopGlobalIconAnimGracePeriodMs > 0 then
+					local Elapsed = CurrentTime and tick() - CurrentTime
 					
-					if var25 == nil or var25 < shopGlobalIconAnimGracePeriodMs / 1000 then
-						numberValue.Value = buttonSize
-						numberValue_1.Value = 1
-						var6(buttonSize)
-						var8(1)
-						var10(true)
+					if Elapsed == nil or Elapsed < ShopGlobalIconAnimGracePeriodMs / 1000 then
+						NumValue.Value = ButtonSize
+						NumValue1.Value = 1
+						UseStateResult2(ButtonSize)
+						UseStateResult2_1(1)
+						UseStateResult2_2(true)
 						
 						return
 					end
 				end
-				numberValue.Value = 0
-				numberValue_1.Value = 0
-				var10(false)
-				var25 = tweenService:Create(numberValue, tweenInfo, { Value = buttonSize })
-				var11.current = var25
-				var25:Play()
-				var15.current = task.delay(0.2, function()
-					-- upvalues: var15 (copy), var10 (copy), tweenService (copy), numberValue_1 (copy), tweenInfo_2 (copy), var12 (copy)
-					var15.current = nil
-					var10(true)
-					local var26 = tweenService:Create(numberValue_1, tweenInfo_2, { Value = 1 })
-					var12.current = var26
-					var26:Play()
+				NumValue.Value = 0
+				NumValue1.Value = 0
+				UseStateResult2_2(false)
+				local Tween = TweenService:Create(NumValue, _TweenInfo, { Value = ButtonSize })
+				UseRefResult.current = Tween
+				Tween:Play()
+				UseRefResult4.current = task.delay(0.2, function() --[[ Line: 170 ]]
+					-- upvalues: UseRefResult4 (upval), UseStateResult2_2 (upval), TweenService (upval), NumValue1 (upval), _TweenInfo2 (upval), UseRefResult1 (upval)
+					UseRefResult4.current = nil
+					UseStateResult2_2(true)
+					local Tween = TweenService:Create(NumValue1, _TweenInfo2, { Value = 1 })
+					UseRefResult1.current = Tween
+					Tween:Play()
 				end)
 			end
 			
-			local function hideAnimated()
-				-- upvalues: stopAllAnimations (ref), tweenService (copy), numberValue_1 (ref), tweenInfo_3 (copy), var12 (copy), var13 (copy), var10 (copy), var15 (copy), numberValue (ref), tweenInfo_1 (copy), var11 (copy), var14 (copy), var16 (copy), var19 (copy)
+			UseRefResult8.current = showAnimated
+			
+			function UseRefResult9.current() --[[ Line: 179 ]]
+				-- upvalues: stopAllAnimations (copy), TweenService (upval), NumValue1 (copy), _TweenInfo3 (upval), UseRefResult1 (upval), UseRefResult2 (upval), UseStateResult2_2 (upval), UseRefResult4 (upval), NumValue (copy), _TweenInfo1 (upval), UseRefResult (upval), UseRefResult3 (upval), UseRefResult5 (upval), UseRefResult8 (upval)
 				stopAllAnimations()
-				local var25 = tweenService:Create(numberValue_1, tweenInfo_3, { Value = 0 })
-				var12.current = var25
-				var13.current = var25.Completed:Connect(function(p2)
-					-- upvalues: var13 (copy), var10 (copy)
-					if p2 == Enum.PlaybackState.Completed then
-						var13.current = nil
-						var10(false)
+				local Tween = TweenService:Create(NumValue1, _TweenInfo3, { Value = 0 })
+				UseRefResult1.current = Tween
+				UseRefResult2.current = Tween.Completed:Connect(function(PlaybackState) --[[ Line: 184 ]]
+					-- upvalues: UseRefResult2 (upval), UseStateResult2_2 (upval)
+					if PlaybackState == Enum.PlaybackState.Completed then
+						UseRefResult2.current = nil
+						UseStateResult2_2(false)
 						
 						return
 					end
 				end)
-				var25:Play()
-				var15.current = task.delay(0.2, function()
-					-- upvalues: var15 (copy), tweenService (copy), numberValue (copy), tweenInfo_1 (copy), var11 (copy), var14 (copy), var16 (copy), var19 (copy)
-					var15.current = nil
-					local var26 = tweenService:Create(numberValue, tweenInfo_1, { Value = 0 })
-					var11.current = var26
-					var14.current = var26.Completed:Connect(function(p2)
-						-- upvalues: var14 (copy), var16 (copy), var19 (copy)
-						if p2 == Enum.PlaybackState.Completed then
-							var14.current = nil
-							var16.current = task.delay(1.5, function()
-								-- upvalues: var16 (copy), var19 (copy)
-								var16.current = nil
+				Tween:Play()
+				UseRefResult4.current = task.delay(0.2, function() --[[ Line: 193 ]]
+					-- upvalues: UseRefResult4 (upval), TweenService (upval), NumValue (upval), _TweenInfo1 (upval), UseRefResult (upval), UseRefResult3 (upval), UseRefResult5 (upval), UseRefResult8 (upval)
+					UseRefResult4.current = nil
+					local Tween = TweenService:Create(NumValue, _TweenInfo1, { Value = 0 })
+					UseRefResult.current = Tween
+					UseRefResult3.current = Tween.Completed:Connect(function(PlaybackState) --[[ Line: 197 ]]
+						-- upvalues: UseRefResult3 (upval), UseRefResult5 (upval), UseRefResult8 (upval)
+						if PlaybackState == Enum.PlaybackState.Completed then
+							UseRefResult3.current = nil
+							UseRefResult5.current = task.delay(1.5, function() --[[ Line: 202 ]]
+								-- upvalues: UseRefResult5 (upval), UseRefResult8 (upval)
+								UseRefResult5.current = nil
 								
-								if var19.current then
-									var19.current()
+								if UseRefResult8.current then
+									UseRefResult8.current()
 								end
 							end)
 							
 							return
 						end
 					end)
-					var26:Play()
+					Tween:Play()
 				end)
 			end
 			
-			var19.current = showAnimated
-			var20.current = hideAnimated
-			var21.current = stopAllAnimations
+			UseRefResult10.current = stopAllAnimations
 			
-			if not var22.current then
+			if not UseRefResult11.current then
 				showAnimated()
 			end
-			return function()
-				-- upvalues: stopAllAnimations (ref), var23 (ref), var24 (ref), numberValue (ref), numberValue_1 (ref), var17 (copy), var18 (copy)
+			return function() --[[ Line: 224 ]]
+				-- upvalues: stopAllAnimations (copy), Connection (copy), Connection1 (copy), NumValue (copy), NumValue1 (copy), UseRefResult6 (upval), UseRefResult7 (upval)
 				stopAllAnimations()
-				var23:Disconnect()
-				var24:Disconnect()
-				numberValue:Destroy()
-				numberValue_1:Destroy()
-				var17.current = nil
-				var18.current = nil
+				Connection:Disconnect()
+				Connection1:Disconnect()
+				NumValue:Destroy()
+				NumValue1:Destroy()
+				UseRefResult6.current = nil
+				UseRefResult7.current = nil
 			end
-		end, { buttonSize })
-		local var23 = reactModule.useRef(false)
-		reactModule.useEffect(function()
-			-- upvalues: p1 (ref), var23 (ref), var17 (ref), var18 (ref), var21 (ref), var10 (ref), buttonSize (ref)
+		end, { ButtonSize })
+		local UseRefResult12 = ReactModule.useRef(false)
+		ReactModule.useEffect(function() --[[ Line: 236 ]]
+			-- upvalues: p1 (copy), UseRefResult12 (copy), UseRefResult6 (copy), UseRefResult7 (copy), UseRefResult10 (copy), UseStateResult2_2 (copy), ButtonSize (copy)
 			if p1.hidden == nil then return end
-			if not var23.current then
-				var23.current = true
+			if not UseRefResult12.current then
+				UseRefResult12.current = true
 				
 				return
 			end
-			local current = var17.current
-			local current_1 = var18.current
+			local Current = UseRefResult6.current
+			local Current1 = UseRefResult7.current
 			
-			if not current or not current_1 then return end
-			if var21.current then
-				var21.current()
+			if not Current or not Current1 then return end
+			if UseRefResult10.current then
+				UseRefResult10.current()
 			end
 			if p1.hidden then
-				current.Value = 0
-				current_1.Value = 0
-				var10(false)
+				Current.Value = 0
+				Current1.Value = 0
+				UseStateResult2_2(false)
 				
 				return
+			else
+				Current.Value = ButtonSize
+				Current1.Value = 1
+				UseStateResult2_2(true)
 			end
-			current.Value = buttonSize
-			current_1.Value = 1
-			var10(true)
-		end, { p1.hidden, buttonSize })
-		reactModule.useEffect(function()
-			-- upvalues: p1 (ref)
-			return function()
-				-- upvalues: p1 (copy)
+		end, { p1.hidden, ButtonSize })
+		ReactModule.useEffect(function() --[[ Line: 278 ]]
+			-- upvalues: p1 (copy)
+			return function() --[[ Line: 279 ]]
+				-- upvalues: p1 (upval)
 				if p1.onAreaChanged then
 					p1.onAreaChanged("experience-shop-icon", Vector2.zero, Vector2.zero)
 				end
 			end
 		end, { p1.onAreaChanged })
 		
-		local function reportArea(p2)
-			-- upvalues: p1 (ref)
+		local function reportArea(Frame: Frame) --[[ Line: 286 ]]
+			-- upvalues: p1 (copy)
 			if not p1.onAreaChanged then return end
 			if p1.hidden then
 				p1.onAreaChanged("experience-shop-icon", Vector2.zero, Vector2.zero)
 				
 				return
+			else
+				p1.onAreaChanged("experience-shop-icon", Frame.AbsolutePosition, Frame.AbsoluteSize)
 			end
-			p1.onAreaChanged("experience-shop-icon", p2.AbsolutePosition, p2.AbsoluteSize)
 		end
 		
-		return reactModule.createElement("Frame", {
-			Size = UDim2.fromOffset((if buttonSize == 0 then 0 else var5 / buttonSize * leftGap) + var5, buttonSize),
+		local function onActivated() --[[ Line: 300 ]]
+			-- upvalues: FFlagEnableShopIconTelemetryModule (upval), RunService (upval), Parent (upval), InExperienceShop (upval), p1 (copy)
+			if FFlagEnableShopIconTelemetryModule and not RunService:IsStudio() then
+				local LoggingProtocolModule = require(Parent.LoggingProtocol)
+				LoggingProtocolModule.default:logRobloxTelemetryEvent(require(InExperienceShop.Events.ShopIconClickEvent), {
+					LoggingProtocolModule.StandardizedFields.addPlaceId,
+					LoggingProtocolModule.StandardizedFields.addUniverseId,
+					LoggingProtocolModule.StandardizedFields.addSessionId
+				}, {})
+			end
+			if p1.onActivated then
+				p1.onActivated()
+			end
+		end
+		
+		return ReactModule.createElement("Frame", {
+			Size = UDim2.fromOffset((if ButtonSize == 0 then 0 else UseStateResult / ButtonSize * LeftGap) + UseStateResult, ButtonSize),
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			LayoutOrder = p1.layoutOrder,
-			[reactModule.Change.AbsolutePosition] = reportArea,
-			[reactModule.Change.AbsoluteSize] = reportArea
+			[ReactModule.Change.AbsolutePosition] = reportArea,
+			[ReactModule.Change.AbsoluteSize] = reportArea
 		}, {
-			Button = var9 and (reactModule.createElement(foundationModule.View, {
-				ref = var4,
-				Size = UDim2.fromOffset(buttonSize, buttonSize),
+			Button = UseStateResult3 and ReactModule.createElement(FoundationModule.View, {
+				ref = SetIconInstance,
+				Size = UDim2.fromOffset(ButtonSize, ButtonSize),
 				AnchorPoint = Vector2.new(0.5, 0.5),
-				Position = UDim2.new(1, -buttonSize / 2, 0.5, 0),
+				Position = UDim2.new(1, -ButtonSize / 2, 0.5, 0),
 				cornerRadius = UDim.new(1, 0),
-				backgroundStyle = var3.Color.OverMedia.OverMedia_0,
-				onActivated = function()
-					-- upvalues: fFlagEnableShopIconTelemetryModule (copy), runService (copy), parent (copy), inExperienceShop (copy), p1 (ref)
-					if fFlagEnableShopIconTelemetryModule and not runService:IsStudio() then
-						local loggingProtocolModule = require(parent.LoggingProtocol)
-						loggingProtocolModule.default:logRobloxTelemetryEvent(require(inExperienceShop.Events.ShopIconClickEvent), {
-							loggingProtocolModule.StandardizedFields.addPlaceId,
-							loggingProtocolModule.StandardizedFields.addUniverseId,
-							loggingProtocolModule.StandardizedFields.addSessionId
-						}, {})
-					end
-					if p1.onActivated then
-						p1.onActivated()
-					end
-				end,
-				scale = var7
+				backgroundStyle = UseTokensResult.Color.OverMedia.OverMedia_0,
+				onActivated = onActivated,
+				scale = UseStateResult1
 			}, {
-				Icon = if fFlagExperienceShopNewIconographyModule then reactModule.createElement(foundationModule.Icon, {
+				Icon = if FFlagExperienceShopNewIconographyModule then ReactModule.createElement(FoundationModule.Icon, {
 					ZIndex = 1,
-					name = iconName.ShoppingBasket,
-					size = buttonSize * 0.55,
-					variant = if p1.isActive then iconVariant.Filled else iconVariant.Regular,
-					style = var3.Color.Content.Emphasis,
+					name = IconName.ShoppingBasket,
+					size = ButtonSize * 0.55,
+					variant = if p1.isActive then IconVariant.Filled else IconVariant.Regular,
+					style = UseTokensResult.Color.Content.Emphasis,
 					Position = UDim2.fromScale(0.5, 0.5),
 					AnchorPoint = Vector2.new(0.5, 0.5)
-				}) elseif p1.icon ~= nil then reactModule.createElement(foundationModule.Icon, {
+				}) elseif p1.icon == nil then ReactModule.createElement(FoundationModule.Icon, {
 					ZIndex = 1,
-					name = iconName.BuildingStore,
-					size = buttonSize * 0.55,
-					variant = if p1.isActive then iconVariant.Filled else iconVariant.Regular,
-					style = var3.Color.Content.Emphasis,
+					name = IconName.BuildingStore,
+					size = ButtonSize * 0.55,
+					variant = if p1.isActive then IconVariant.Filled else IconVariant.Regular,
+					style = UseTokensResult.Color.Content.Emphasis,
 					Position = UDim2.fromScale(0.5, 0.5),
 					AnchorPoint = Vector2.new(0.5, 0.5)
-				}) else reactModule.createElement("Frame", {
+				}) else ReactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					ZIndex = 1,
 					Size = UDim2.fromScale(1, 1)
 				}, {
-					Layout = reactModule.createElement("UIListLayout", {
+					Layout = ReactModule.createElement("UIListLayout", {
 						HorizontalAlignment = Enum.HorizontalAlignment.Center,
 						VerticalAlignment = Enum.VerticalAlignment.Center
 					}),
 					CustomIcon = p1.icon
 				}),
-				StatusIndicator = p1.showStatusIndicator and reactModule.createElement("Frame", {
+				StatusIndicator = p1.showStatusIndicator and ReactModule.createElement("Frame", {
 					BorderSizePixel = 0,
 					ZIndex = 3,
 					Size = UDim2.fromOffset(8, 8),
 					AnchorPoint = Vector2.new(0.5, 0.5),
-					Position = UDim2.fromScale(var2 + 0.5, 1 - (var1 + 0.5)),
-					BackgroundColor3 = var3.Color.System.Emphasis.Color3,
-					BackgroundTransparency = var3.Color.System.Emphasis.Transparency
+					Position = UDim2.fromScale(v2 + 0.5, 1 - (v1 + 0.5)),
+					BackgroundColor3 = UseTokensResult.Color.System.Emphasis.Color3,
+					BackgroundTransparency = UseTokensResult.Color.System.Emphasis.Transparency
 				}, {
-					UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) }),
-					UIStroke = reactModule.createElement("UIStroke", {
+					UICorner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) }),
+					UIStroke = ReactModule.createElement("UIStroke", {
 						Thickness = 2,
 						ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
-						Color = var3.Color.OverMedia.OverMedia_0.Color3,
-						Transparency = var3.Color.OverMedia.OverMedia_0.Transparency
+						Color = UseTokensResult.Color.OverMedia.OverMedia_0.Color3,
+						Transparency = UseTokensResult.Color.OverMedia.OverMedia_0.Transparency
 					})
 				}) or nil
-			}) or nil)
+			}) or nil
 		})
+	else
+		return nil
 	end
-	return nil
 end

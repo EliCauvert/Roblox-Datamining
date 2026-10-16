@@ -1,18 +1,3 @@
-﻿return function(p1)
-	local var1 = false
-	
-	if p1 ~= nil then
-		var1 = false
-		
-		if type(p1) == "table" then
-			if p1.failureReason ~= nil then
-				var1 = true
-				
-				if p1.expirationTimeInMinutes == nil then
-					var1 = p1.FailureReason ~= nil and p1.ExpirationTimeInMinutes ~= nil
-				end
-			end
-		end
-	end
-	return var1
+﻿return function(p1): boolean --[[ Line: 8 ]]
+	return p1 ~= nil and (type(p1) == "table" and (if p1.failureReason == nil then p1.FailureReason ~= nil and p1.ExpirationTimeInMinutes ~= nil else p1.expirationTimeInMinutes ~= nil or p1.FailureReason ~= nil and p1.ExpirationTimeInMinutes ~= nil))
 end

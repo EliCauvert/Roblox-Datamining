@@ -1,83 +1,85 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local httpService = game:GetService("HttpService")
-local runService = game:GetService("RunService")
-local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-local roactModule = require(corePackagesService.Packages.Roact)
-local reactModule = require(corePackagesService.Packages.React)
-local useVoiceStateModule = require(robloxGui.Modules.VoiceChat.Hooks.useVoiceState)
-local constantsModule = require(robloxGui.Modules.VoiceChat.Constants)
-local default = require(robloxGui.Modules.VoiceChat.VoiceChatServiceManager).default
-local uDim2 = UDim2.fromOffset(36, 36)
+﻿local CorePackages = game:GetService("CorePackages")
+local HttpService = game:GetService("HttpService")
+local RunService = game:GetService("RunService")
+local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+local RoactModule = require(CorePackages.Packages.Roact)
+local ReactModule = require(CorePackages.Packages.React)
+local UseVoiceStateModule = require(RobloxGui.Modules.VoiceChat.Hooks.useVoiceState)
+local ConstantsModule = require(RobloxGui.Modules.VoiceChat.Constants)
+local Default = require(RobloxGui.Modules.VoiceChat.VoiceChatServiceManager).default
+local _UDim2 = UDim2.fromOffset(36, 36)
 
-local function _(p1)
-	-- upvalues: reactModule (ref), roactModule (ref)
-	return reactModule.useMemo(function()
-		-- upvalues: roactModule (copy), p1 (ref)
-		return roactModule.joinBindings(p1)
+local function _(p1) --[[ Line: 16 | Named "useJoinBinding" ]]
+	-- upvalues: ReactModule (copy), RoactModule (copy)
+	return ReactModule.useMemo(function() --[[ Line: 17 ]]
+		-- upvalues: RoactModule (upval), p1 (copy)
+		return RoactModule.joinBindings(p1)
 	end, {})
 end
 
-local _ = function(p1)
-	-- upvalues: constantsModule (ref), default (ref)
-	return function(p2)
-		-- upvalues: constantsModule (copy), default (copy), p1 (ref)
-		local var1 = p2[1]
+local _ = function(p1) --[[ Line: 22 | Named "mapLevelToIcon" ]]
+	-- upvalues: ConstantsModule (copy), Default (copy)
+	return function(Entry) --[[ Line: 24 ]]
+		-- upvalues: ConstantsModule (upval), Default (upval), p1 (copy)
+		local Entry1 = Entry[1]
+		local Entry2: number = Entry[2]
 		
-		return if var1 == constantsModule.VOICE_STATE.MUTED or var1 == constantsModule.VOICE_STATE.LOCAL_MUTED then default:GetIcon("Muted", p1) elseif var1 == constantsModule.VOICE_STATE.CONNECTING then default:GetIcon("Connecting", p1) elseif var1 == constantsModule.VOICE_STATE.INACTIVE then default:GetIcon("Unmuted0", p1) elseif var1 == constantsModule.VOICE_STATE.TALKING then default:GetIcon("Unmuted" .. tostring(math.floor(0.5 + 5 * p2[2]) * 20), p1) else default:GetIcon("Error", p1)
+		return if Entry1 == ConstantsModule.VOICE_STATE.MUTED or Entry1 == ConstantsModule.VOICE_STATE.LOCAL_MUTED then Default:GetIcon("Muted", p1) elseif Entry1 == ConstantsModule.VOICE_STATE.CONNECTING then Default:GetIcon("Connecting", p1) elseif Entry1 == ConstantsModule.VOICE_STATE.INACTIVE then Default:GetIcon("Unmuted0", p1) elseif Entry1 == ConstantsModule.VOICE_STATE.TALKING then Default:GetIcon("Unmuted" .. tostring(math.floor(0.5 + 5 * Entry2) * 20), p1) else Default:GetIcon("Error", p1)
 	end
 end
 
-local function GenerateGUID()
-	-- upvalues: httpService (ref)
-	return httpService:GenerateGUID()
+local function GenerateGUID() --[[ Line: 42 ]]
+	-- upvalues: HttpService (copy)
+	return HttpService:GenerateGUID()
 end
 
-return function(p1)
-	-- upvalues: useVoiceStateModule (ref), reactModule (ref), roactModule (ref), GenerateGUID (ref), constantsModule (ref), runService (ref), default (ref), uDim2 (ref)
-	local var1 = useVoiceStateModule(p1.userId, p1.disable or false)
-	local var2, var3 = reactModule.useBinding(0)
-	local var4, var5 = reactModule.useBinding(var1)
-	local list = { var4, var2 }
-	local var6 = reactModule.useMemo(function()
-		-- upvalues: roactModule (copy), list (ref)
-		return roactModule.joinBindings(list)
+return function(Image) --[[ Line: 55 | Named "VRBarVoiceIcon" ]]
+	-- upvalues: UseVoiceStateModule (copy), ReactModule (copy), RoactModule (copy), GenerateGUID (copy), ConstantsModule (copy), RunService (copy), Default (copy), _UDim2 (copy)
+	local UseVoiceStateModuleResult = UseVoiceStateModule(Image.userId, Image.disable or false)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
+	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(UseVoiceStateModuleResult)
+	local list = { UseBindingResult1, UseBindingResult }
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 17 ]]
+		-- upvalues: RoactModule (upval), list (copy)
+		return RoactModule.joinBindings(list)
 	end, {})
-	local current = reactModule.useRef(GenerateGUID()).current or ""
-	var5(var1)
-	local var7 = var1 == constantsModule.VOICE_STATE.TALKING
-	reactModule.useEffect(function()
-		-- upvalues: var7 (ref), runService (copy), current (ref), var3 (ref)
-		if var7 then
-			runService:BindToRenderStep(current, 1, function()
-				-- upvalues: var3 (copy)
-				var3(math.random())
+	local Current = ReactModule.useRef(GenerateGUID()).current or ""
+	UseBindingResult2_1(UseVoiceStateModuleResult)
+	local IsUseVoiceStateModuleResultMatch = UseVoiceStateModuleResult == ConstantsModule.VOICE_STATE.TALKING
+	ReactModule.useEffect(function() --[[ Line: 65 ]]
+		-- upvalues: IsUseVoiceStateModuleResultMatch (copy), RunService (upval), Current (copy), UseBindingResult2 (copy)
+		if IsUseVoiceStateModuleResultMatch then
+			RunService:BindToRenderStep(Current, 1, function() --[[ Line: 67 ]]
+				-- upvalues: UseBindingResult2 (upval)
+				UseBindingResult2(math.random())
 			end)
 		end
-		return function()
-			-- upvalues: var7 (copy), runService (copy), current (copy)
-			if var7 then
-				runService:UnbindFromRenderStep(current)
+		return function() --[[ Line: 71 ]]
+			-- upvalues: IsUseVoiceStateModuleResultMatch (upval), RunService (upval), Current (upval)
+			if IsUseVoiceStateModuleResultMatch then
+				RunService:UnbindFromRenderStep(Current)
 			end
 		end
-	end, { var7 })
+	end, { IsUseVoiceStateModuleResultMatch })
 	
-	return roactModule.createElement("ImageLabel", {
-		BackgroundTransparency = p1.BackgroundTransparency or 1,
-		Image = reactModule.useMemo(function()
-			-- upvalues: var6 (ref), p1 (ref), constantsModule (copy), default (copy)
-			local iconStyle = p1.iconStyle
+	return RoactModule.createElement("ImageLabel", {
+		BackgroundTransparency = Image.BackgroundTransparency or 1,
+		Image = ReactModule.useMemo(function() --[[ Line: 78 ]]
+			-- upvalues: UseMemoResult (copy), Image (copy), ConstantsModule (upval), Default (upval)
+			local IconStyle = Image.iconStyle
 			
-			return var6:map(function(p2)
-				-- upvalues: constantsModule (copy), default (copy), iconStyle (ref)
-				local var8 = p2[1]
+			return UseMemoResult:map(function(Entry) --[[ Line: 24 ]]
+				-- upvalues: ConstantsModule (upval), Default (upval), IconStyle (copy)
+				local Entry1 = Entry[1]
+				local Entry2: number = Entry[2]
 				
-				return if var8 == constantsModule.VOICE_STATE.MUTED or var8 == constantsModule.VOICE_STATE.LOCAL_MUTED then default:GetIcon("Muted", iconStyle) elseif var8 == constantsModule.VOICE_STATE.CONNECTING then default:GetIcon("Connecting", iconStyle) elseif var8 == constantsModule.VOICE_STATE.INACTIVE then default:GetIcon("Unmuted0", iconStyle) elseif var8 == constantsModule.VOICE_STATE.TALKING then default:GetIcon("Unmuted" .. tostring(math.floor(0.5 + 5 * p2[2]) * 20), iconStyle) else default:GetIcon("Error", iconStyle)
+				return if Entry1 == ConstantsModule.VOICE_STATE.MUTED or Entry1 == ConstantsModule.VOICE_STATE.LOCAL_MUTED then Default:GetIcon("Muted", IconStyle) elseif Entry1 == ConstantsModule.VOICE_STATE.CONNECTING then Default:GetIcon("Connecting", IconStyle) elseif Entry1 == ConstantsModule.VOICE_STATE.INACTIVE then Default:GetIcon("Unmuted0", IconStyle) elseif Entry1 == ConstantsModule.VOICE_STATE.TALKING then Default:GetIcon("Unmuted" .. tostring(math.floor(0.5 + 5 * Entry2) * 20), IconStyle) else Default:GetIcon("Error", IconStyle)
 			end)
-		end, { p1.iconStyle }),
-		ImageColor3 = p1.ImageColor3,
-		ImageTransparency = p1.ImageTransparency,
-		Position = p1.Position,
-		Size = p1.Size or uDim2,
-		[roactModule.Children] = p1[roactModule.Children]
+		end, { Image.iconStyle }),
+		ImageColor3 = Image.ImageColor3,
+		ImageTransparency = Image.ImageTransparency,
+		Position = Image.Position,
+		Size = Image.Size or _UDim2,
+		[RoactModule.Children] = Image[RoactModule.Children]
 	})
 end

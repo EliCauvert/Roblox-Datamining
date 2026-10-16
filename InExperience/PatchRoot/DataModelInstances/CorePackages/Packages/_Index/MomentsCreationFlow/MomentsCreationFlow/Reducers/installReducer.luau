@@ -1,9 +1,9 @@
-﻿local momentsCreationFlow = script:FindFirstAncestor("MomentsCreationFlow")
-local roduxModule = require(momentsCreationFlow.Parent.Rodux)
-local creationFlowModule = require(momentsCreationFlow.Reducers.CreationFlow)
-local musicModule = require(momentsCreationFlow.Reducers.Music)
+﻿local MomentsCreationFlow = script:FindFirstAncestor("MomentsCreationFlow")
+local RoduxModule = require(MomentsCreationFlow.Parent.Rodux)
+local CreationFlowModule = require(MomentsCreationFlow.Reducers.CreationFlow)
+local MusicModule = require(MomentsCreationFlow.Reducers.Music)
 
-return function()
-	-- upvalues: roduxModule (ref), creationFlowModule (ref), musicModule (ref)
-	return roduxModule.combineReducers({ CreationFlow = creationFlowModule, Music = musicModule })
+return function() --[[ Line: 14 ]]
+	-- upvalues: RoduxModule (copy), CreationFlowModule (copy), MusicModule (copy)
+	return RoduxModule.combineReducers({ CreationFlow = CreationFlowModule, Music = MusicModule })
 end

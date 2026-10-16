@@ -1,66 +1,75 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local reactModule = require(buildExperience.Parent.React)
-local adUpsellVisibilityUtilsModule = require(script.Parent.adUpsellVisibilityUtils)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local ReactModule = require(BuildExperience.Parent.React)
+local AdUpsellVisibilityUtilsModule = require(script.Parent.adUpsellVisibilityUtils)
 local _ = require(script.Parent.AdUpsellMilestoneView)
-local fFlagBuildAgentAdCampaignCardModule = require(buildExperience.Flags.FFlagBuildAgentAdCampaignCard)
+local FFlagBuildAgentAdCampaignCardModule = require(BuildExperience.Flags.FFlagBuildAgentAdCampaignCard)
+local FFlagBuildAdUpsellPinnedModule = require(BuildExperience.Flags.FFlagBuildAdUpsellPinned)
 
-return function(p1)
-	-- upvalues: reactModule (ref), adUpsellVisibilityUtilsModule (ref), fFlagBuildAgentAdCampaignCardModule (ref)
-	local var1 = reactModule.useRef(nil)
-	local var2 = reactModule.useRef(nil)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var2 (ref), var1 (ref), adUpsellVisibilityUtilsModule (copy)
+return function(p1) --[[ Line: 27 | Named "useAdUpsellMilestoneViewModel" ]]
+	-- upvalues: ReactModule (copy), FFlagBuildAdUpsellPinnedModule (copy), AdUpsellVisibilityUtilsModule (copy), FFlagBuildAgentAdCampaignCardModule (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	ReactModule.useEffect(function() --[[ Line: 32 ]]
+		-- upvalues: p1 (copy), UseRefResult1 (copy), UseRefResult (copy), FFlagBuildAdUpsellPinnedModule (upval), AdUpsellVisibilityUtilsModule (upval)
 		if p1.isImpressed then
-			var2.current = p1.anchorId
+			UseRefResult1.current = p1.anchorId
 			
 			return
-		elseif var2.current == p1.anchorId then return end
-		local current = p1.scrollingFrameRef.current
-		local current_1 = var1.current
-		
-		if current == nil or current_1 == nil then
-			return
 		end
-		local t = {}
-		local var3 = false
+		if UseRefResult1.current == p1.anchorId then return end
+		local Current = UseRefResult.current
 		
-		local function disconnectListeners()
-			-- upvalues: var3 (write), t (write)
-			if var3 then return end
-			var3 = true
+		if not FFlagBuildAdUpsellPinnedModule then
+			local Current1 = p1.scrollingFrameRef and p1.scrollingFrameRef.current
 			
-			for i, v in t do
-				v:Disconnect()
-			end
-			table.clear(t)
-		end
-		
-		local function reportIfVisible()
-			-- upvalues: var2 (copy), p1 (copy), current_1 (ref), current (ref), adUpsellVisibilityUtilsModule (copy), var3 (write), t (write)
-			if var2.current ~= p1.anchorId and p1.isPageVisible and (current_1:IsDescendantOf(current) and adUpsellVisibilityUtilsModule.isCardVisibleInScrollViewport(current, current_1)) then
-				var2.current = p1.anchorId
-				p1.onImpression(p1.anchorId)
+			if Current1 == nil or Current == nil then return end
+			local Tbl = {}
+			local Flag = false
+			
+			local function disconnectListeners() --[[ Line: 56 ]]
+				-- upvalues: Flag (ref), Tbl (ref)
+				if Flag then return end
+				Flag = true
 				
-				if var3 then return end
-				var3 = true
-				
-				for i, v in t do
-					v:Disconnect()
+				for _, Connection in Tbl do
+					Connection:Disconnect()
 				end
-				table.clear(t)
+				table.clear(Tbl)
 			end
+			
+			local function reportIfVisible() --[[ Line: 66 ]]
+				-- upvalues: UseRefResult1 (upval), p1 (upval), Current (copy), Current1 (copy), AdUpsellVisibilityUtilsModule (upval), Flag (ref), Tbl (ref)
+				if UseRefResult1.current ~= p1.anchorId and p1.isPageVisible and Current:IsDescendantOf(Current1) and AdUpsellVisibilityUtilsModule.isCardVisibleInScrollViewport(Current1, Current) then
+					UseRefResult1.current = p1.anchorId
+					p1.onImpression(p1.anchorId)
+					
+					if Flag then return end
+					Flag = true
+					
+					for _, Connection in Tbl do
+						Connection:Disconnect()
+					end
+					table.clear(Tbl)
+				end
+			end
+			
+			Tbl = {
+				Current1:GetPropertyChangedSignal("CanvasPosition"):Connect(reportIfVisible),
+				Current1:GetPropertyChangedSignal("AbsolutePosition"):Connect(reportIfVisible),
+				Current1:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(reportIfVisible),
+				Current:GetPropertyChangedSignal("AbsolutePosition"):Connect(reportIfVisible),
+				Current:GetPropertyChangedSignal("AbsoluteSize"):Connect(reportIfVisible)
+			}
+			reportIfVisible()
+			
+			return disconnectListeners
+		elseif Current ~= nil and p1.isPageVisible then
+			UseRefResult1.current = p1.anchorId
+			p1.onImpression(p1.anchorId)
+			
+			return
+		else
 		end
-		
-		t = {
-			current:GetPropertyChangedSignal("CanvasPosition"):Connect(reportIfVisible),
-			current:GetPropertyChangedSignal("AbsolutePosition"):Connect(reportIfVisible),
-			current:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(reportIfVisible),
-			current_1:GetPropertyChangedSignal("AbsolutePosition"):Connect(reportIfVisible),
-			current_1:GetPropertyChangedSignal("AbsoluteSize"):Connect(reportIfVisible)
-		}
-		reportIfVisible()
-		
-		return disconnectListeners
 	end, {
 		p1.anchorId,
 		p1.isImpressed,
@@ -72,8 +81,8 @@ return function(p1)
 	return {
 		order = p1.order,
 		congratsText = p1.congratsText,
-		freePromotionsRemaining = if fFlagBuildAgentAdCampaignCardModule then p1.freePromotionsRemaining else nil,
-		cardRef = var1,
+		freePromotionsRemaining = if FFlagBuildAgentAdCampaignCardModule then p1.freePromotionsRemaining else nil,
+		cardRef = UseRefResult,
 		isCreatePending = p1.isCreatePending,
 		onCreate = p1.onCreate,
 		onDismiss = p1.onDismiss

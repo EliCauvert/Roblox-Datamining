@@ -1,62 +1,63 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local chatBubbleEnumModule = require(script.Parent.ChatBubbleEnum)
-local getChatBubbleCornerRadiiModule = require(script.Parent.getChatBubbleCornerRadii)
-local foundationModule = require(parent.Foundation)
-local image = foundationModule.Image
-local view = foundationModule.View
-local useTokens = foundationModule.Hooks.useTokens
-local fFlagAppChatNativeFoundationCornerRadiiModule = require(appChat.Flags.FFlagAppChatNativeFoundationCornerRadii)
-local t = {
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local ChatBubbleEnumModule = require(script.Parent.ChatBubbleEnum)
+local GetChatBubbleCornerRadiiModule = require(script.Parent.getChatBubbleCornerRadii)
+local FoundationModule = require(Parent.Foundation)
+local Image = FoundationModule.Image
+local View = FoundationModule.View
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local FFlagAppChatNativeFoundationCornerRadiiModule = require(AppChat.Flags.FFlagAppChatNativeFoundationCornerRadii)
+local config = {
 	layoutOrder = 0,
 	padding = 0,
 	alignment = Enum.HorizontalAlignment.Right,
 	children = {},
 	imageStyle = { Transparency = 0, Color3 = Color3.new(0, 0, 0) },
-	onAbsoluteSizeChanged = function(_) end,
+	onAbsoluteSizeChanged = function(_) --[[ Line: 31 ]] end,
 	position = UDim2.new(0, 0, 0, 0),
-	setContentWidth = function(_) end,
-	variant = chatBubbleEnumModule.BUBBLE_VARIANTS.SINGLE
+	setContentWidth = function(_) --[[ Line: 34 ]] end,
+	variant = ChatBubbleEnumModule.BUBBLE_VARIANTS.SINGLE
 }
 
-function ChatBubbleGroupable(p1)
-	-- upvalues: cryoModule (ref), t (ref), useTokens (ref), reactModule (ref), view (ref), fFlagAppChatNativeFoundationCornerRadiiModule (ref), getChatBubbleCornerRadiiModule (ref), chatBubbleEnumModule (ref), image (ref)
-	local var1 = cryoModule.Dictionary.union(t, p1)
-	local var2 = var1.alignment == Enum.HorizontalAlignment.Left
-	local size500 = useTokens().Size.Size_500
-	local var3 = reactModule.createElement(view, {
+function ChatBubbleGroupable(p1) --[[ Line: 38 ]]
+	-- upvalues: CryoModule (copy), config (copy), UseTokensFunction (copy), ReactModule (copy), View (copy), FFlagAppChatNativeFoundationCornerRadiiModule (copy), GetChatBubbleCornerRadiiModule (copy), ChatBubbleEnumModule (copy), Image (copy)
+	local UnionResult = CryoModule.Dictionary.union(config, p1)
+	local IsAlignmentMatch = UnionResult.alignment == Enum.HorizontalAlignment.Left
+	local Size500 = UseTokensFunction().Size.Size_500
+	local Element = ReactModule.createElement(View, {
 		tag = "size-0 auto-xy",
 		BackgroundTransparency = 1,
-		padding = var1.padding
-	}, var1.children)
+		padding = UnionResult.padding
+	}, UnionResult.children)
 	
-	if fFlagAppChatNativeFoundationCornerRadiiModule then
-		return reactModule.createElement(view, {
+	if FFlagAppChatNativeFoundationCornerRadiiModule then
+		return ReactModule.createElement(View, {
 			AutomaticSize = Enum.AutomaticSize.XY,
-			backgroundStyle = var1.imageStyle,
-			cornerRadius = getChatBubbleCornerRadiiModule(var1.variant, var2, size500),
-			Position = var1.position,
-			LayoutOrder = var1.layoutOrder,
-			onAbsoluteSizeChanged = var1.onAbsoluteSizeChanged
-		}, var3)
+			backgroundStyle = UnionResult.imageStyle,
+			cornerRadius = GetChatBubbleCornerRadiiModule(UnionResult.variant, IsAlignmentMatch, Size500),
+			Position = UnionResult.position,
+			LayoutOrder = UnionResult.layoutOrder,
+			onAbsoluteSizeChanged = UnionResult.onAbsoluteSizeChanged
+		}, Element)
+	else
+		local GROUPEDRECEIVEDBUBBLES = if IsAlignmentMatch then ChatBubbleEnumModule.GROUPED_RECEIVED_BUBBLES else ChatBubbleEnumModule.GROUPED_OUTGOING_BUBBLES
+		
+		return ReactModule.createElement(Image, {
+			BackgroundTransparency = 1,
+			AutomaticSize = Enum.AutomaticSize.XY,
+			Image = if UnionResult.variant == ChatBubbleEnumModule.BUBBLE_VARIANTS.SINGLE then ChatBubbleEnumModule.GROUPED_BUBBLE_SINGLE elseif UnionResult.variant == ChatBubbleEnumModule.BUBBLE_VARIANTS.TOP then GROUPEDRECEIVEDBUBBLES.BUBBLE_TOP elseif UnionResult.variant == ChatBubbleEnumModule.BUBBLE_VARIANTS.BOTTOM then GROUPEDRECEIVEDBUBBLES.BUBBLE_BOTTOM else GROUPEDRECEIVEDBUBBLES.BUBBLE_MIDDLE,
+			ScaleType = Enum.ScaleType.Slice,
+			slice = {
+				center = ChatBubbleEnumModule.GROUPED_BUBBLE_SLICE_CENTER
+			},
+			imageStyle = UnionResult.imageStyle,
+			Position = UnionResult.position,
+			LayoutOrder = UnionResult.layoutOrder,
+			onAbsoluteSizeChanged = UnionResult.onAbsoluteSizeChanged
+		}, Element)
 	end
-	local var4 = if var2 then chatBubbleEnumModule.GROUPED_RECEIVED_BUBBLES else chatBubbleEnumModule.GROUPED_OUTGOING_BUBBLES
-	
-	return reactModule.createElement(image, {
-		BackgroundTransparency = 1,
-		AutomaticSize = Enum.AutomaticSize.XY,
-		Image = if var1.variant == chatBubbleEnumModule.BUBBLE_VARIANTS.SINGLE then chatBubbleEnumModule.GROUPED_BUBBLE_SINGLE elseif var1.variant == chatBubbleEnumModule.BUBBLE_VARIANTS.TOP then var4.BUBBLE_TOP elseif var1.variant == chatBubbleEnumModule.BUBBLE_VARIANTS.BOTTOM then var4.BUBBLE_BOTTOM else var4.BUBBLE_MIDDLE,
-		ScaleType = Enum.ScaleType.Slice,
-		slice = {
-			center = chatBubbleEnumModule.GROUPED_BUBBLE_SLICE_CENTER
-		},
-		imageStyle = var1.imageStyle,
-		Position = var1.position,
-		LayoutOrder = var1.layoutOrder,
-		onAbsoluteSizeChanged = var1.onAbsoluteSizeChanged
-	}, var3)
 end
 
-return reactModule.memo(ChatBubbleGroupable)
+return ReactModule.memo(ChatBubbleGroupable)

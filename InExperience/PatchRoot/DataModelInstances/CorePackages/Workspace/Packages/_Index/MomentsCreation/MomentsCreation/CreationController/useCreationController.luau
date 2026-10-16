@@ -1,12 +1,12 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local reactModule = require(momentsCreation.Parent.React)
-local creationControllerContextModule = require(momentsCreation.CreationController.CreationControllerContext)
-local _ = require(momentsCreation.Types.CreationFlowTypes)
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local ReactModule = require(MomentsCreation.Parent.React)
+local CreationControllerContextModule = require(MomentsCreation.CreationController.CreationControllerContext)
+local _ = require(MomentsCreation.Types.CreationFlowTypes)
 
-return function()
-	-- upvalues: reactModule (ref), creationControllerContextModule (ref)
-	local var1 = reactModule.useContext(creationControllerContextModule)
-	assert(var1 ~= nil, "useCreationController must be used within a CreationControllerProvider")
+return function() --[[ Line: 14 | Named "useCreationController" ]]
+	-- upvalues: ReactModule (copy), CreationControllerContextModule (copy)
+	local UseContextResult = ReactModule.useContext(CreationControllerContextModule)
+	assert(UseContextResult ~= nil, "useCreationController must be used within a CreationControllerProvider")
 	
-	return var1
+	return UseContextResult
 end

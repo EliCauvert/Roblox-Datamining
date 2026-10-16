@@ -1,30 +1,29 @@
-﻿local parent = script:FindFirstAncestor("RobloxAppInteractionFeedbackConfig").Parent
-local reactModule = require(parent.React)
-local responsiveModule = require(parent.Responsive)
-local appUserLayers = require(parent.ExperimentLayers).AppUserLayers
-local roactAppExperimentModule = require(parent.RoactAppExperiment)
-local interactionFeedbackContext = require(parent.InteractionFeedback).InteractionFeedbackContext
-local spatialConfigModule = require(script.Parent.SpatialConfig)
-local directionalConfigModule = require(script.Parent.DirectionalConfig)
-local pointerConfigModule = require(script.Parent.PointerConfig)
-local touchConfigModule = require(script.Parent.TouchConfig)
-local useUserExperiment = roactAppExperimentModule.useUserExperiment
-local mobileSoundAndHapticsEnabledIXP = game:DefineFastFlag("MobileSoundAndHapticsEnabledIXP", false)
-local mobileSoundAndHapticsIXPBypass = game:DefineFastFlag("MobileSoundAndHapticsIXPBypass", false)
+﻿local Parent = script:FindFirstAncestor("RobloxAppInteractionFeedbackConfig").Parent
+local ReactModule = require(Parent.React)
+local ResponsiveModule = require(Parent.Responsive)
+local AppUserLayers = require(Parent.ExperimentLayers).AppUserLayers
+local InteractionFeedbackContext = require(Parent.InteractionFeedback).InteractionFeedbackContext
+local SpatialConfigModule = require(script.Parent.SpatialConfig)
+local DirectionalConfigModule = require(script.Parent.DirectionalConfig)
+local PointerConfigModule = require(script.Parent.PointerConfig)
+local TouchConfigModule = require(script.Parent.TouchConfig)
+local UseUserExperimentFunction = require(Parent.RoactAppExperiment).useUserExperiment
+local MobileSoundAndHapticsEnabledIXP = game:DefineFastFlag("MobileSoundAndHapticsEnabledIXP", false)
+local MobileSoundAndHapticsIXPBypass = game:DefineFastFlag("MobileSoundAndHapticsIXPBypass", false)
 
-return function(p1)
-	-- upvalues: responsiveModule (ref), mobileSoundAndHapticsEnabledIXP (ref), useUserExperiment (ref), appUserLayers (ref), reactModule (ref), spatialConfigModule (ref), mobileSoundAndHapticsIXPBypass (ref), touchConfigModule (ref), directionalConfigModule (ref), pointerConfigModule (ref), interactionFeedbackContext (ref)
-	local var1 = responsiveModule.useLastInput()
-	local var2 = responsiveModule.useIsSpatial()
-	local var3 = if mobileSoundAndHapticsEnabledIXP then useUserExperiment({ appUserLayers.MobileSoundAndHapticsLayer }, function(p2)
-		-- upvalues: appUserLayers (copy)
-		return (p2[appUserLayers.MobileSoundAndHapticsLayer] or {}).mobileSoundAndHapticsEnabled
+return function(p1) --[[ Line: 17 | Named "InteractionFeedbackProvider" ]]
+	-- upvalues: ResponsiveModule (copy), MobileSoundAndHapticsEnabledIXP (copy), UseUserExperimentFunction (copy), AppUserLayers (copy), ReactModule (copy), SpatialConfigModule (copy), MobileSoundAndHapticsIXPBypass (copy), TouchConfigModule (copy), DirectionalConfigModule (copy), PointerConfigModule (copy), InteractionFeedbackContext (copy)
+	local UseLastInputResult = ResponsiveModule.useLastInput()
+	local UseIsSpatialResult = ResponsiveModule.useIsSpatial()
+	local UseUserExperimentResult = if MobileSoundAndHapticsEnabledIXP then UseUserExperimentFunction({ AppUserLayers.MobileSoundAndHapticsLayer }, function(p2) --[[ Line: 22 ]]
+		-- upvalues: AppUserLayers (upval)
+		return (p2[AppUserLayers.MobileSoundAndHapticsLayer] or {}).mobileSoundAndHapticsEnabled
 	end) else nil
 	
-	return reactModule.createElement(interactionFeedbackContext.Provider, {
-		value = reactModule.useMemo(function()
-			-- upvalues: var2 (ref), spatialConfigModule (copy), var1 (ref), responsiveModule (copy), mobileSoundAndHapticsIXPBypass (copy), mobileSoundAndHapticsEnabledIXP (copy), var3 (write), touchConfigModule (copy), directionalConfigModule (copy), pointerConfigModule (copy)
-			return if var2 then spatialConfigModule elseif var1 == responsiveModule.Input.Touch then if mobileSoundAndHapticsIXPBypass or mobileSoundAndHapticsEnabledIXP and var3 then touchConfigModule else {} elseif var1 == responsiveModule.Input.Directional then directionalConfigModule elseif var1 == responsiveModule.Input.Pointer then pointerConfigModule else {}
-		end, { var2, var1 })
+	return ReactModule.createElement(InteractionFeedbackContext.Provider, {
+		value = ReactModule.useMemo(function() --[[ Line: 28 ]]
+			-- upvalues: UseIsSpatialResult (copy), SpatialConfigModule (upval), UseLastInputResult (copy), ResponsiveModule (upval), MobileSoundAndHapticsIXPBypass (upval), MobileSoundAndHapticsEnabledIXP (upval), UseUserExperimentResult (ref), TouchConfigModule (upval), DirectionalConfigModule (upval), PointerConfigModule (upval)
+			return if UseIsSpatialResult then SpatialConfigModule elseif UseLastInputResult == ResponsiveModule.Input.Touch then if MobileSoundAndHapticsIXPBypass or MobileSoundAndHapticsEnabledIXP and UseUserExperimentResult then TouchConfigModule else {} elseif UseLastInputResult == ResponsiveModule.Input.Directional then DirectionalConfigModule elseif UseLastInputResult == ResponsiveModule.Input.Pointer then PointerConfigModule else {}
+		end, { UseIsSpatialResult, UseLastInputResult })
 	}, p1.children)
 end

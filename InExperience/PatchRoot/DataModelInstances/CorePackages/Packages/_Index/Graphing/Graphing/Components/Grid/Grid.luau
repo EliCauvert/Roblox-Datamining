@@ -1,70 +1,70 @@
-﻿local graphing = script:FindFirstAncestor("Graphing")
-local parent = graphing.Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local canvasContextModule = require(graphing.CanvasContext)
-local typesModule = require(graphing.Types)
-local gridLineModule = require(graphing.Components.GridLine)
-local gridUtilModule = require(graphing.Util.GridUtil)
-local styleUtilModule = require(graphing.Util.StyleUtil)
+﻿local Graphing = script:FindFirstAncestor("Graphing")
+local Parent = Graphing.Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local CanvasContextModule = require(Graphing.CanvasContext)
+local TypesModule = require(Graphing.Types)
+local GridLineModule = require(Graphing.Components.GridLine)
+local GridUtilModule = require(Graphing.Util.GridUtil)
+local StyleUtilModule = require(Graphing.Util.StyleUtil)
 
-function Grid(p1)
-	-- upvalues: reactModule (ref), canvasContextModule (ref), signalsReactModule (ref), gridUtilModule (ref), typesModule (ref), gridLineModule (ref), styleUtilModule (ref)
-	local var1 = reactModule.useContext(canvasContextModule)
-	signalsReactModule.useSignalState(var1.viewportRectGetter)
-	local zIndex = p1.ZIndex or -1
-	local var2 = if p1.XAxis then gridUtilModule.getValues(typesModule.AXIS_X, p1.XAxis, var1) else {}
-	local var3 = if p1.YAxis then gridUtilModule.getValues(typesModule.AXIS_Y, p1.YAxis, var1) else {}
-	local var4 = if p1.XAxisMinor then gridUtilModule.getValues(typesModule.AXIS_X, p1.XAxisMinor, var1, var2) else {}
-	local var5 = if p1.YAxisMinor then gridUtilModule.getValues(typesModule.AXIS_Y, p1.YAxisMinor, var1, var3) else {}
-	local t = {}
+function Grid(p1) --[[ Line: 34 ]]
+	-- upvalues: ReactModule (copy), CanvasContextModule (copy), SignalsReactModule (copy), GridUtilModule (copy), TypesModule (copy), GridLineModule (copy), StyleUtilModule (copy)
+	local UseContextResult = ReactModule.useContext(CanvasContextModule)
+	SignalsReactModule.useSignalState(UseContextResult.viewportRectGetter)
+	local ZIndex = p1.ZIndex or -1
+	local Values = if p1.XAxis then GridUtilModule.getValues(TypesModule.AXIS_X, p1.XAxis, UseContextResult) else {}
+	local Values1 = if p1.YAxis then GridUtilModule.getValues(TypesModule.AXIS_Y, p1.YAxis, UseContextResult) else {}
+	local Values2 = if p1.XAxisMinor then GridUtilModule.getValues(TypesModule.AXIS_X, p1.XAxisMinor, UseContextResult, Values) else {}
+	local Values3 = if p1.YAxisMinor then GridUtilModule.getValues(TypesModule.AXIS_Y, p1.YAxisMinor, UseContextResult, Values1) else {}
+	local Elements = {}
 	
-	for i, v in var2 do
-		t[`X{v}`] = reactModule.createElement(gridLineModule, {
+	for _, value in Values do
+		Elements[`X{value}`] = ReactModule.createElement(GridLineModule, {
 			Orientation = "Vertical",
-			Position = v,
+			Position = value,
 			Tag = p1.Tag,
-			Color3 = styleUtilModule.GRID_COLOR3,
-			Thickness = styleUtilModule.GRID_THICKNESS,
-			Transparency = styleUtilModule.GRID_TRANSPARENCY
+			Color3 = StyleUtilModule.GRID_COLOR3,
+			Thickness = StyleUtilModule.GRID_THICKNESS,
+			Transparency = StyleUtilModule.GRID_TRANSPARENCY
 		})
 	end
-	for i, v_1 in var4 do
-		t[`Xm{v_1}`] = reactModule.createElement(gridLineModule, {
+	for _, Position in Values2 do
+		Elements[`Xm{Position}`] = ReactModule.createElement(GridLineModule, {
 			Orientation = "Vertical",
-			Position = v_1,
+			Position = Position,
 			Tag = p1.Tag,
-			Color3 = styleUtilModule.GRID_COLOR3_MINOR,
-			Thickness = styleUtilModule.GRID_THICKNESS_MINOR,
-			Transparency = styleUtilModule.GRID_TRANSPARENCY_MINOR
+			Color3 = StyleUtilModule.GRID_COLOR3_MINOR,
+			Thickness = StyleUtilModule.GRID_THICKNESS_MINOR,
+			Transparency = StyleUtilModule.GRID_TRANSPARENCY_MINOR
 		})
 	end
-	for i, v_2 in var3 do
-		t[`Y{v_2}`] = reactModule.createElement(gridLineModule, {
+	for _, Position1 in Values1 do
+		Elements[`Y{Position1}`] = ReactModule.createElement(GridLineModule, {
 			Orientation = "Horizontal",
-			Position = v_2,
+			Position = Position1,
 			Tag = p1.Tag,
-			Color3 = styleUtilModule.GRID_COLOR3,
-			Thickness = styleUtilModule.GRID_THICKNESS,
-			Transparency = styleUtilModule.GRID_TRANSPARENCY
+			Color3 = StyleUtilModule.GRID_COLOR3,
+			Thickness = StyleUtilModule.GRID_THICKNESS,
+			Transparency = StyleUtilModule.GRID_TRANSPARENCY
 		})
 	end
-	for i, v_3 in var5 do
-		t[`Ym{v_3}`] = reactModule.createElement(gridLineModule, {
+	for _, Position2 in Values3 do
+		Elements[`Ym{Position2}`] = ReactModule.createElement(GridLineModule, {
 			Orientation = "Horizontal",
-			Position = v_3,
+			Position = Position2,
 			Tag = p1.Tag,
-			Color3 = styleUtilModule.GRID_COLOR3_MINOR,
-			Thickness = styleUtilModule.GRID_THICKNESS_MINOR,
-			Transparency = styleUtilModule.GRID_TRANSPARENCY_MINOR
+			Color3 = StyleUtilModule.GRID_COLOR3_MINOR,
+			Thickness = StyleUtilModule.GRID_THICKNESS_MINOR,
+			Transparency = StyleUtilModule.GRID_TRANSPARENCY_MINOR
 		})
 	end
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		Size = UDim2.fromScale(1, 1),
-		ZIndex = zIndex
-	}, t)
+		ZIndex = ZIndex
+	}, Elements)
 end
 
 return Grid

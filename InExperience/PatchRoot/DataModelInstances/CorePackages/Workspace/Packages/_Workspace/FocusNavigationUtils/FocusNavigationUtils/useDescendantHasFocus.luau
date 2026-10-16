@@ -1,108 +1,59 @@
-﻿local guiService = game:GetService("GuiService")
-local reactModule = require(script:FindFirstAncestor("FocusNavigationUtils").Parent.React)
+﻿local GuiService = game:GetService("GuiService")
+local ReactModule = require(script:FindFirstAncestor("FocusNavigationUtils").Parent.React)
 
-local function _(p1)
-	-- upvalues: guiService (ref)
-	local selectedCoreObject = guiService.SelectedCoreObject
+local function _(Ancestor): boolean --[[ Line: 6 | Named "hasFocus" ]]
+	-- upvalues: GuiService (copy)
+	local SelectedCoreObject = GuiService.SelectedCoreObject
 	
-	return not (not p1 or not selectedCoreObject) and ((if selectedCoreObject ~= p1 then selectedCoreObject:IsDescendantOf(p1) else true) and selectedCoreObject:FindFirstAncestorOfClass("CoreGui") ~= nil)
+	return if Ancestor and SelectedCoreObject then (SelectedCoreObject == Ancestor or SelectedCoreObject:IsDescendantOf(Ancestor)) and SelectedCoreObject:FindFirstAncestorOfClass("CoreGui") ~= nil else false
 end
 
-return function(p1)
-	-- upvalues: guiService (ref), reactModule (ref)
-	local var1
-	local selectedCoreObject = guiService.SelectedCoreObject
-	
-	if p1 and selectedCoreObject then
-		var1 = if selectedCoreObject ~= p1 then selectedCoreObject:IsDescendantOf(p1) else true
+return function(Ancestor) --[[ Line: 18 | Named "useDescendantHasFocus" ]]
+	-- upvalues: GuiService (copy), ReactModule (copy)
+	local SelectedCoreObject = GuiService.SelectedCoreObject
+	local UseStateResult, UseStateResult2 = ReactModule.useState(if Ancestor and SelectedCoreObject then (SelectedCoreObject == Ancestor or SelectedCoreObject:IsDescendantOf(Ancestor)) and SelectedCoreObject:FindFirstAncestorOfClass("CoreGui") ~= nil else false)
+	ReactModule.useEffect(function() --[[ Line: 22 ]]
+		-- upvalues: Ancestor (copy), UseStateResult2 (copy), GuiService (upval)
+		local Connection = nil
+		local AncestryChangedConnection = nil
 		
-		if var1 then
-			var1 = selectedCoreObject:FindFirstAncestorOfClass("CoreGui") ~= nil
-			var1 = nil
-		end
-	else
-		var1 = false
-	end
-	local var2, var3 = reactModule.useState(var1)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var3 (ref), guiService (copy)
-		local var4 = nil
-		local var5 = nil
-		
-		if p1 then
-			local var6
-			local selectedCoreObject = guiService.SelectedCoreObject
-			
-			if p1 and selectedCoreObject then
-				var6 = if selectedCoreObject ~= p1 then selectedCoreObject:IsDescendantOf(p1) else true
-				
-				if var6 then
-					var6 = selectedCoreObject:FindFirstAncestorOfClass("CoreGui") ~= nil
-					var6 = nil
+		if Ancestor then
+			local SelectedCoreObject = GuiService.SelectedCoreObject
+			UseStateResult2(if Ancestor and SelectedCoreObject then (SelectedCoreObject == Ancestor or SelectedCoreObject:IsDescendantOf(Ancestor)) and SelectedCoreObject:FindFirstAncestorOfClass("CoreGui") ~= nil else false)
+			Connection = GuiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function() --[[ Line: 28 ]]
+				-- upvalues: AncestryChangedConnection (ref), Ancestor (upval), GuiService (upval), UseStateResult2 (upval)
+				if AncestryChangedConnection then
+					AncestryChangedConnection:Disconnect()
 				end
-			else
-				var6 = false
-			end
-			var3(var6)
-			var4 = guiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function()
-				-- upvalues: var5 (write), p1 (copy), guiService (copy), var3 (copy)
-				if var5 then
-					var5:Disconnect()
-				end
-				local var7
-				local selectedCoreObject = guiService.SelectedCoreObject
+				local SelectedCoreObject = GuiService.SelectedCoreObject
+				local HasCoreGui: boolean = if Ancestor and SelectedCoreObject then (SelectedCoreObject == Ancestor or SelectedCoreObject:IsDescendantOf(Ancestor)) and SelectedCoreObject:FindFirstAncestorOfClass("CoreGui") ~= nil else false
+				local SelectedCoreObject1 = GuiService.SelectedCoreObject
 				
-				if p1 and selectedCoreObject then
-					var7 = if selectedCoreObject ~= p1 then selectedCoreObject:IsDescendantOf(p1) else true
-					
-					if var7 then
-						var7 = selectedCoreObject:FindFirstAncestorOfClass("CoreGui") ~= nil
-						var7 = nil
-					end
-				else
-					var7 = false
-				end
-				local selectedCoreObject_1 = guiService.SelectedCoreObject
-				
-				if var7 and selectedCoreObject_1 then
-					var5 = selectedCoreObject_1.AncestryChanged:Connect(function()
-						-- upvalues: selectedCoreObject_1 (ref), var5 (copy), var3 (copy), p1 (copy), guiService (copy)
-						if selectedCoreObject_1:FindFirstAncestorOfClass("CoreGui") == nil then
-							local var8
-							var5:Disconnect()
-							local var9 = var3
-							local var10 = p1
-							local selectedCoreObject = guiService.SelectedCoreObject
-							
-							if var10 and selectedCoreObject then
-								var8 = if selectedCoreObject ~= var10 then selectedCoreObject:IsDescendantOf(var10) else true
-								
-								if var8 then
-									var8 = selectedCoreObject:FindFirstAncestorOfClass("CoreGui") ~= nil
-									var8 = nil
-								end
-							else
-								var8 = false
-							end
-							var9(var8)
+				if HasCoreGui and SelectedCoreObject1 then
+					AncestryChangedConnection = SelectedCoreObject1.AncestryChanged:Connect(function() --[[ Line: 36 ]]
+						-- upvalues: SelectedCoreObject1 (copy), AncestryChangedConnection (upval), UseStateResult2 (upval), Ancestor (upval), GuiService (upval)
+						if SelectedCoreObject1:FindFirstAncestorOfClass("CoreGui") == nil then
+							AncestryChangedConnection:Disconnect()
+							local SelectedCoreObject1 = GuiService.SelectedCoreObject
+							UseStateResult2(if Ancestor and SelectedCoreObject1 then (SelectedCoreObject1 == Ancestor or SelectedCoreObject1:IsDescendantOf(Ancestor)) and SelectedCoreObject1:FindFirstAncestorOfClass("CoreGui") ~= nil else false)
 						end
 					end)
 				end
-				var3(var7)
+				UseStateResult2(HasCoreGui)
 			end)
 		else
-			var3(false)
+			UseStateResult2(false)
 		end
-		return function()
-			-- upvalues: var4 (write), var5 (write)
-			if var4 then
-				var4:Disconnect()
+		return function() --[[ Line: 50 ]]
+			-- upvalues: Connection (ref), AncestryChangedConnection (ref)
+			if Connection then
+				Connection:Disconnect()
 			end
-			if var5 then
-				var5:Disconnect()
+			if AncestryChangedConnection then
+				AncestryChangedConnection:Disconnect()
 			end
 		end
-	end, { p1 })
+	end, { Ancestor })
 	
-	return var2
+	return UseStateResult
 end

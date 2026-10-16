@@ -1,9 +1,9 @@
-﻿return function(p1, p2)
+﻿return function(List, Callback) --[[ Line: 6 | Named "filter" ]]
 	local t = {}
 	
-	for i, v in p1 do
-		if p2(v, i) then
-			t[i] = v
+	for i, value in List do
+		if Callback(value, i) then
+			t[i] = value
 		end
 	end
 	return t

@@ -1,15 +1,15 @@
-﻿local purchasePrompt = script:FindFirstAncestor("PurchasePrompt")
-local parent = purchasePrompt.Parent
-local loggingProtocolModule = require(parent.LoggingProtocol)
-local productPurchaseSurface = require(parent.PurchasePromptLite).Enums.ProductPurchaseSurface
-local appContextModule = require(purchasePrompt.Utils.AppContext)
-local typesModule = require(purchasePrompt.types)
+﻿local PurchasePrompt = script:FindFirstAncestor("PurchasePrompt")
+local Parent = PurchasePrompt.Parent
+local LoggingProtocolModule = require(Parent.LoggingProtocol)
+local ProductPurchaseSurface = require(Parent.PurchasePromptLite).Enums.ProductPurchaseSurface
+local AppContextModule = require(PurchasePrompt.Utils.AppContext)
+local TypesModule = require(PurchasePrompt.types)
 
-return function(value, p1, p2)
-	-- upvalues: loggingProtocolModule (ref), appContextModule (ref), productPurchaseSurface (ref), typesModule (ref)
-	loggingProtocolModule.default:logRobloxTelemetryCounter(value, 1, {
-		appContext = appContextModule.get(),
-		surface = p1 or productPurchaseSurface.Unknown,
-		productType = p2 or typesModule.ProductTypeEnum.Unknown
+return function(p1, p2, p3) --[[ Line: 12 | Named "logUnifiedPurchaseTelemetryCounter" ]]
+	-- upvalues: LoggingProtocolModule (copy), AppContextModule (copy), ProductPurchaseSurface (copy), TypesModule (copy)
+	LoggingProtocolModule.default:logRobloxTelemetryCounter(p1, 1, {
+		appContext = AppContextModule.get(),
+		surface = p2 or ProductPurchaseSurface.Unknown,
+		productType = p3 or TypesModule.ProductTypeEnum.Unknown
 	})
 end

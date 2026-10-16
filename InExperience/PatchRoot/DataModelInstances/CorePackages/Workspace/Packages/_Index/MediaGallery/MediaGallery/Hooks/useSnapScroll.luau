@@ -1,116 +1,115 @@
-﻿local mediaGallery = script:FindFirstAncestor("MediaGallery")
-local parent = mediaGallery.Parent
-local otterModule = require(parent.Otter)
-local reactModule = require(parent.React)
-local _ = require(parent.ReactOtter)
-local signal = require(parent.AppCommonLib).Signal
-local _ = require(mediaGallery.MediaGalleryTypes)
+﻿local MediaGallery = script:FindFirstAncestor("MediaGallery")
+local Parent = MediaGallery.Parent
+local OtterModule = require(Parent.Otter)
+local ReactModule = require(Parent.React)
+local _ = require(Parent.ReactOtter)
+local Signal = require(Parent.AppCommonLib).Signal
+local _ = require(MediaGallery.MediaGalleryTypes)
 
-return function(p1)
-	-- upvalues: reactModule (ref), signal (ref), otterModule (ref)
-	local var1, var2 = reactModule.useState(p1.targetIndex or 1)
-	local var3 = reactModule.useRef(var1)
-	var3.current = var1
-	local var4, var5 = reactModule.useBinding(Vector2.new(0, 0))
-	local var6 = reactModule.useRef(nil)
-	local var7 = reactModule.useRef(false)
-	local var8 = reactModule.useRef(nil)
-	local var9 = reactModule.useCallback(function(p2)
-		-- upvalues: var4 (ref), p1 (ref)
-		return if p2 == 1 then Vector2.new(0, 0) else Vector2.new(var4:getValue().X + p1.itemPadding, 0)
+return function(p1) --[[ Line: 51 | Named "useSnapScroll" ]]
+	-- upvalues: ReactModule (copy), Signal (copy), OtterModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(p1.targetIndex or 1)
+	local UseRefResult = ReactModule.useRef(UseStateResult)
+	UseRefResult.current = UseStateResult
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(Vector2.new(0, 0))
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseRefResult2 = ReactModule.useRef(false)
+	local UseRefResult3 = ReactModule.useRef(nil)
+	local UseResult = ReactModule.useCallback(function(p2): Vector2 --[[ Line: 65 ]]
+		-- upvalues: UseBindingResult (copy), p1 (copy)
+		return if p2 == 1 then Vector2.new(0, 0) else Vector2.new(UseBindingResult:getValue().X + p1.itemPadding, 0)
 	end, { p1.itemPadding })
-	local var10, var11 = reactModule.useBinding(var9(var1))
-	reactModule.useEffect(function()
-		-- upvalues: var4 (ref), var11 (ref), var9 (ref), var1 (ref)
-		if var4:getValue().X > 0 then
-			var11(var9(var1))
+	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(UseResult(UseStateResult))
+	ReactModule.useEffect(function() --[[ Line: 79 ]]
+		-- upvalues: UseBindingResult (copy), UseBindingResult2_1 (copy), UseResult (copy), UseStateResult (copy)
+		if UseBindingResult:getValue().X > 0 then
+			UseBindingResult2_1(UseResult(UseStateResult))
 		end
-	end, { var9, var1 })
-	local var12 = reactModule.useRef(signal.new())
-	local var13 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: var7 (ref), var10 (ref), var4 (ref), p1 (ref), var3 (ref), var12 (ref), var8 (ref), otterModule (copy), var11 (ref), var2 (ref)
-		if var7.current then return end
-		local var14, var15
-		local value = var10:getValue()
-		local var16 = var4:getValue().X + p1.itemPadding
-		local current = var3.current
-		local _ = nil
-		local _ = nil
+	end, { UseResult, UseStateResult })
+	local UseRefResult4 = ReactModule.useRef(Signal.new())
+	local UseResult1 = ReactModule.useCallback(function(p2, p3) --[[ Line: 88 ]]
+		-- upvalues: UseRefResult2 (copy), UseBindingResult1 (copy), UseBindingResult (copy), p1 (copy), UseRefResult (copy), UseRefResult4 (copy), UseRefResult3 (copy), OtterModule (upval), UseBindingResult2_1 (copy), UseStateResult2 (copy)
+		if UseRefResult2.current then return end
+		local Value = UseBindingResult1:getValue()
+		local NewX = UseBindingResult:getValue().X + p1.itemPadding
+		local Current: number = UseRefResult.current
+		local NewCurrent = nil
+		local NewValue = nil
 		
 		if p2 == "Right" then
-			var14 = current + 1
-			var15 = value + Vector2.new(var16, 0)
+			NewCurrent = Current + 1
+			NewValue = Value + Vector2.new(NewX, 0)
 		else
-			var14 = current - 1
-			var15 = value - Vector2.new(var16, 0)
+			NewCurrent = Current - 1
+			NewValue = Value - Vector2.new(NewX, 0)
 		end
-		if var14 < 1 or p1.itemCount < var14 then return end
-		var7.current = true
-		var12.current:fire(var14)
+		if NewCurrent < 1 or p1.itemCount < NewCurrent then return end
+		UseRefResult2.current = true
+		UseRefResult4.current:fire(NewCurrent)
 		
-		if var8.current then
-			var8.current:destroy()
+		if UseRefResult3.current then
+			UseRefResult3.current:destroy()
 		end
-		local var17 = otterModule.createSingleMotor(0)
-		var8.current = var17
-		var17:onStep(function(p4)
-			-- upvalues: var11 (copy), value (ref), var15 (write)
-			var11(value:Lerp(var15, p4))
+		local SingleMotor = OtterModule.createSingleMotor(0)
+		UseRefResult3.current = SingleMotor
+		SingleMotor:onStep(function(Alpha) --[[ Line: 121 ]]
+			-- upvalues: UseBindingResult2_1 (upval), Value (copy), NewValue (ref)
+			UseBindingResult2_1(Value:Lerp(NewValue, Alpha))
 		end)
-		var17:onComplete(function()
-			-- upvalues: var7 (copy), var8 (copy), var3 (copy), var14 (write), var2 (copy), p1 (copy), p3 (ref)
-			var7.current = false
-			var8.current = nil
-			var3.current = var14
-			var2(var14)
+		SingleMotor:onComplete(function() --[[ Line: 125 ]]
+			-- upvalues: UseRefResult2 (upval), UseRefResult3 (upval), UseRefResult (upval), NewCurrent (ref), UseStateResult2 (upval), p1 (upval), p3 (copy)
+			UseRefResult2.current = false
+			UseRefResult3.current = nil
+			UseRefResult.current = NewCurrent
+			UseStateResult2(NewCurrent)
 			
 			if p1.onScrollComplete then
-				p1.onScrollComplete(var14, p3)
+				p1.onScrollComplete(NewCurrent, p3)
 			end
 		end)
 		
 		if p1.springConfig then
-			var17:setGoal(otterModule.spring(1, p1.springConfig))
+			SingleMotor:setGoal(OtterModule.spring(1, p1.springConfig))
 		else
-			var17:setGoal(otterModule.instant(1))
+			SingleMotor:setGoal(OtterModule.instant(1))
 		end
 	end, {
 		p1.itemCount,
 		p1.itemPadding,
 		p1.springConfig,
 		p1.onScrollComplete,
-		var10
+		UseBindingResult1
 	})
-	local var14 = reactModule.useCallback(function(p2)
-		-- upvalues: var5 (ref), var7 (ref), var11 (ref), var9 (ref), var3 (ref)
-		var5(p2.AbsoluteSize)
+	local UseResult2 = ReactModule.useCallback(function(Frame) --[[ Line: 151 ]]
+		-- upvalues: UseBindingResult2 (copy), UseRefResult2 (copy), UseBindingResult2_1 (copy), UseResult (copy), UseRefResult (copy)
+		UseBindingResult2(Frame.AbsoluteSize)
 		
-		if not var7.current then
-			var11(var9(var3.current))
+		if not UseRefResult2.current then
+			UseBindingResult2_1(UseResult(UseRefResult.current))
 		end
-	end, { var9 })
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), p1 (ref)
-		var2(p1.targetIndex or 1)
+	end, { UseResult })
+	ReactModule.useEffect(function() --[[ Line: 159 ]]
+		-- upvalues: UseStateResult2 (copy), p1 (copy)
+		UseStateResult2(p1.targetIndex or 1)
 	end, { p1.targetIndex })
-	reactModule.useEffect(function()
-		-- upvalues: var8 (ref)
-		return function()
-			-- upvalues: var8 (copy)
-			if var8.current then
-				var8.current:destroy()
-				var8.current = nil
+	ReactModule.useEffect(function() --[[ Line: 165 ]]
+		-- upvalues: UseRefResult3 (copy)
+		return function() --[[ Line: 166 ]]
+			-- upvalues: UseRefResult3 (upval)
+			if UseRefResult3.current then
+				UseRefResult3.current:destroy()
+				UseRefResult3.current = nil
 			end
 		end
 	end, {})
 	
 	return {
-		currentIndex = var1,
-		canvasPosition = var10,
-		scrolledSignal = var12.current,
-		scrollingFrameRef = var6,
-		absoluteSizeBinding = var4,
-		scrollInDirection = var13,
-		onAbsoluteSizeChanged = var14
+		currentIndex = UseStateResult,
+		canvasPosition = UseBindingResult1,
+		scrolledSignal = UseRefResult4.current,
+		scrollingFrameRef = UseRefResult1,
+		absoluteSizeBinding = UseBindingResult,
+		scrollInDirection = UseResult1,
+		onAbsoluteSizeChanged = UseResult2
 	}
 end

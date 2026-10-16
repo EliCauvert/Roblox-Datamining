@@ -1,8 +1,8 @@
-﻿local avatarExperienceSave = script:FindFirstAncestor("AvatarExperienceSave")
-local tutilsModule = require(avatarExperienceSave.Parent.tutils)
-local _ = require(avatarExperienceSave.Context.AvatarSaveContext)
+﻿local AvatarExperienceSave = script:FindFirstAncestor("AvatarExperienceSave")
+local TutilsModule = require(AvatarExperienceSave.Parent.tutils)
+local _ = require(AvatarExperienceSave.Context.AvatarSaveContext)
 
-return function(p1)
-	-- upvalues: tutilsModule (ref)
-	return tutilsModule.fieldCount(if p1.tryOn.OutfitTryOn then p1.tryOn.OutfitTryOn.TryOnItems else {}) > 0
+return function(p1): boolean --[[ Line: 14 | Named "checkCharacterDataHasTryOnItems" ]]
+	-- upvalues: TutilsModule (copy)
+	return TutilsModule.fieldCount(p1.tryOn.OutfitTryOn and p1.tryOn.OutfitTryOn.TryOnItems or {}) > 0
 end

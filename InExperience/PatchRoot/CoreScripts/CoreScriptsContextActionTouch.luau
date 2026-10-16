@@ -1,16 +1,12 @@
-﻿local contextActionService = game:GetService("ContextActionService")
-local userInputService = game:GetService("UserInputService")
-local playersService = game:GetService("Players")
-local guiService = game:GetService("GuiService")
-local fixCASGetButtonYieldedEngineFeature = game:GetEngineFeature("FixCASGetButtonYielded")
-local fixCASMaxTouchButtons = game:DefineFastFlag("FixCASMaxTouchButtons", false)
-local _ = userInputService.TouchEnabled
+﻿local ContextActionService = game:GetService("ContextActionService")
+local UserInputService = game:GetService("UserInputService")
+local Players = game:GetService("Players")
+local GuiService = game:GetService("GuiService")
 local t = {}
-local t_1 = {}
-local var1 = nil
-local var2 = nil
-local _ = {}
-local t_2 = {
+local NewButtons = {}
+local ScreenGui = nil
+local Frame = nil
+local config = {
 	[1] = UDim2.new(0, 123, 0, 70),
 	[2] = UDim2.new(0, 30, 0, 60),
 	[3] = UDim2.new(0, 180, 0, 160),
@@ -19,283 +15,278 @@ local t_2 = {
 	[6] = UDim2.new(0, 185, 0, 260),
 	[7] = UDim2.new(0, 216, 0, 65)
 }
-local t_2Count = #t_2
+local CountConfig = #config
 game:GetService("ContentProvider"):Preload("https://www.roblox.com/asset/?id=97166756")
 game:GetService("ContentProvider"):Preload("https://www.roblox.com/asset/?id=97166444")
 local _ = game:GetService("CorePackages")
-local coreUtilityModule = require(game:GetService("CoreGui").RobloxGui.Modules.CoreUtility)
-local localPlayer = playersService.LocalPlayer
-while not localPlayer do
-	playersService.ChildAdded:wait()
-	localPlayer = playersService.LocalPlayer
+local CoreUtilityModule = require(game:GetService("CoreGui").RobloxGui.Modules.CoreUtility)
+local LocalPlayer = Players.LocalPlayer
+while not LocalPlayer do
+	Players.ChildAdded:wait()
+	LocalPlayer = Players.LocalPlayer
 end
-local playerGui = coreUtilityModule.waitForChildOfClass(localPlayer, "PlayerGui")
+local PlayerGui = CoreUtilityModule.waitForChildOfClass(LocalPlayer, "PlayerGui")
 
-function createContextActionGui()
-	-- upvalues: var1 (write), var2 (write), userInputService (ref), guiService (ref)
-	if not var1 then
-		var1 = Instance.new("ScreenGui")
-		var1.Name = "ContextActionGui"
-		var1.ResetOnSpawn = false
-		var2 = Instance.new("Frame")
-		var2.BackgroundTransparency = 1
-		var2.Size = UDim2.new(0.3, 0, 0.5, 0)
-		var2.Position = UDim2.new(0.7, 0, 0.5, 0)
-		var2.Name = "ContextButtonFrame"
-		var2.Parent = var1
+function createContextActionGui() --[[ Line: 57 ]]
+	-- upvalues: ScreenGui (ref), Frame (ref), UserInputService (copy), GuiService (copy)
+	if not ScreenGui then
+		ScreenGui = Instance.new("ScreenGui")
+		ScreenGui.Name = "ContextActionGui"
+		ScreenGui.ResetOnSpawn = false
+		Frame = Instance.new("Frame")
+		Frame.BackgroundTransparency = 1
+		Frame.Size = UDim2.new(0.3, 0, 0.5, 0)
+		Frame.Position = UDim2.new(0.7, 0, 0.5, 0)
+		Frame.Name = "ContextButtonFrame"
+		Frame.Parent = ScreenGui
 		
-		local var3 = function()
-			-- upvalues: var2 (copy), userInputService (copy), guiService (copy)
-			var2.Visible = userInputService.PreferredInput == Enum.PreferredInput.Touch and guiService.TouchControlsEnabled
+		local function Callback() --[[ Line: 69 ]]
+			-- upvalues: Frame (upval), UserInputService (upval), GuiService (upval)
+			Frame.Visible = UserInputService.PreferredInput == Enum.PreferredInput.Touch and GuiService.TouchControlsEnabled
 		end
 		
-		guiService:GetPropertyChangedSignal("TouchControlsEnabled"):Connect(var3)
-		userInputService:GetPropertyChangedSignal("PreferredInput"):Connect(var3)
-		var2.Visible = userInputService.PreferredInput == Enum.PreferredInput.Touch and guiService.TouchControlsEnabled
+		GuiService:GetPropertyChangedSignal("TouchControlsEnabled"):Connect(Callback)
+		UserInputService:GetPropertyChangedSignal("PreferredInput"):Connect(Callback)
+		Frame.Visible = UserInputService.PreferredInput == Enum.PreferredInput.Touch and GuiService.TouchControlsEnabled
 	end
 end
 
-function setButtonSizeAndPosition(value)
-	local var3 = 55
-	local var4 = 10
-	
-	if game:GetService("CoreGui").RobloxGui.AbsoluteSize.X >= 600 then
-		var3 = 85
-		var4 = 40
-	end
-	value.Size = UDim2.new(0, var3, 0, var3)
+function setButtonSizeAndPosition(p1) --[[ Line: 80 ]]
+	local XOffset: number = if game:GetService("CoreGui").RobloxGui.AbsoluteSize.X < 600 then 55 else 85
+	p1.Size = UDim2.new(0, XOffset, 0, XOffset)
 end
 
-function contextActionButtonDown(p1, p2, p3)
-	-- upvalues: contextActionService (ref)
+function contextActionButtonDown(p1, InputObject, ActionName) --[[ Line: 95 ]]
+	-- upvalues: ContextActionService (copy)
 	p1.Image = "https://www.roblox.com/asset/?id=97166756"
-	contextActionService:CallFunction(p3, Enum.UserInputState.Begin, p2)
+	ContextActionService:CallFunction(ActionName, Enum.UserInputState.Begin, InputObject)
 end
 
-function contextActionButtonMoved(p1, p2, p3)
-	-- upvalues: contextActionService (ref)
+function contextActionButtonMoved(p1, InputObject, ActionName) --[[ Line: 100 ]]
+	-- upvalues: ContextActionService (copy)
 	p1.Image = "https://www.roblox.com/asset/?id=97166756"
-	contextActionService:CallFunction(p3, Enum.UserInputState.Change, p2)
+	ContextActionService:CallFunction(ActionName, Enum.UserInputState.Change, InputObject)
 end
 
-function contextActionButtonUp(p1, p2, p3)
-	-- upvalues: contextActionService (ref)
+function contextActionButtonUp(p1, InputObject, ActionName) --[[ Line: 105 ]]
+	-- upvalues: ContextActionService (copy)
 	p1.Image = "https://www.roblox.com/asset/?id=97166444"
-	contextActionService:CallFunction(p3, Enum.UserInputState.End, p2)
+	ContextActionService:CallFunction(ActionName, Enum.UserInputState.End, InputObject)
 end
 
-function contextActionButtonCancel(p1, p2, p3)
-	-- upvalues: contextActionService (ref)
+function contextActionButtonCancel(p1, InputObject, ActionName) --[[ Line: 110 ]]
+	-- upvalues: ContextActionService (copy)
 	p1.Image = "https://www.roblox.com/asset/?id=97166444"
-	contextActionService:CallFunction(p3, Enum.UserInputState.Cancel, p2)
+	ContextActionService:CallFunction(ActionName, Enum.UserInputState.Cancel, InputObject)
 end
 
-function isSmallScreenDevice()
+function isSmallScreenDevice(): boolean --[[ Line: 115 ]]
 	return game:GetService("GuiService"):GetScreenResolution().Y <= 320
 end
 
-function createNewButton(p1, p2)
-	-- upvalues: var2 (write), userInputService (ref)
-	local contextActionButton = Instance.new("ImageButton")
-	contextActionButton.Name = "ContextActionButton"
-	contextActionButton.BackgroundTransparency = 1
-	contextActionButton.Size = UDim2.new(0, 45, 0, 45)
-	contextActionButton.Active = true
+function createNewButton(p1, p2) --[[ Line: 120 ]]
+	-- upvalues: Frame (ref), UserInputService (copy)
+	local ContextActionButton = Instance.new("ImageButton")
+	ContextActionButton.Name = "ContextActionButton"
+	ContextActionButton.BackgroundTransparency = 1
+	ContextActionButton.Size = UDim2.new(0, 45, 0, 45)
+	ContextActionButton.Active = true
 	
 	if isSmallScreenDevice() then
-		contextActionButton.Size = UDim2.new(0, 35, 0, 35)
+		ContextActionButton.Size = UDim2.new(0, 35, 0, 35)
 	end
-	contextActionButton.Image = "https://www.roblox.com/asset/?id=97166444"
-	contextActionButton.Parent = var2
-	local var3 = nil
-	local var4 = false
-	userInputService.InputEnded:connect(function(p3)
-		-- upvalues: var3 (write), var4 (write), contextActionButton (ref), p1 (ref)
-		if p3.UserInputType ~= Enum.UserInputType.Touch then return end
-		if var3 ~= p3 then return end
-		if p3.UserInputState == Enum.UserInputState.End and var4 then
-			contextActionButtonCancel(contextActionButton, p3, p1)
+	ContextActionButton.Image = "https://www.roblox.com/asset/?id=97166444"
+	ContextActionButton.Parent = Frame
+	local Input = nil
+	local Flag = false
+	UserInputService.InputEnded:connect(function(Input1) --[[ Line: 147 ]]
+		-- upvalues: Input (ref), Flag (ref), ContextActionButton (copy), p1 (copy)
+		if Input1.UserInputType ~= Enum.UserInputType.Touch then return end
+		if Input ~= Input1 then return end
+		if Input1.UserInputState == Enum.UserInputState.End and Flag then
+			contextActionButtonCancel(ContextActionButton, Input1, p1)
 		end
-		var3 = nil
-		var4 = false
+		Input = nil
+		Flag = false
 	end)
-	contextActionButton.InputBegan:connect(function(p3)
-		-- upvalues: var3 (write), var4 (write), contextActionButton (ref), p1 (ref)
-		if p3.UserInputType ~= Enum.UserInputType.Touch then return end
-		if p3.UserInputState == Enum.UserInputState.Begin then
-			var3 = p3
-			var4 = false
-			contextActionButtonDown(contextActionButton, p3, p1)
-			
-			return
-		elseif p3.UserInputState == Enum.UserInputState.Change then
-			if var3 ~= p3 then return end
-			var4 = false
-		end
-	end)
-	contextActionButton.InputEnded:connect(function(p3)
-		-- upvalues: var3 (write), var4 (write), contextActionButton (ref), p1 (ref)
-		if p3.UserInputType ~= Enum.UserInputType.Touch then return end
-		if var3 ~= p3 then return end
-		if p3.UserInputState == Enum.UserInputState.End then
-			var3 = nil
-			var4 = false
-			contextActionButtonUp(contextActionButton, p3, p1)
-			
-			return
-		elseif p3.UserInputState == Enum.UserInputState.Change then
-			var4 = true
-		end
-	end)
-	contextActionButton.InputChanged:connect(function(p3)
-		-- upvalues: var3 (write), contextActionButton (ref), p1 (ref)
-		if p3.UserInputType ~= Enum.UserInputType.Touch then return end
-		if var3 == p3 then
-			contextActionButtonMoved(contextActionButton, p3, p1)
+	ContextActionButton.InputBegan:connect(function(Input1) --[[ Line: 163 ]]
+		-- upvalues: Input (ref), Flag (ref), ContextActionButton (copy), p1 (copy)
+		if Input1.UserInputType ~= Enum.UserInputType.Touch then return end
+		if Input1.UserInputState == Enum.UserInputState.Begin then
+			Input = Input1
+			Flag = false
+			contextActionButtonDown(ContextActionButton, Input1, p1)
 			
 			return
 		end
+		if Input1.UserInputState == Enum.UserInputState.Change then
+			if Input ~= Input1 then return end
+			Flag = false
+		end
 	end)
-	local actionIcon = Instance.new("ImageLabel")
-	actionIcon.Name = "ActionIcon"
-	actionIcon.Position = UDim2.new(0.175, 0, 0.175, 0)
-	actionIcon.Size = UDim2.new(0.65, 0, 0.65, 0)
-	actionIcon.BackgroundTransparency = 1
+	ContextActionButton.InputEnded:connect(function(Input1) --[[ Line: 182 ]]
+		-- upvalues: Input (ref), Flag (ref), ContextActionButton (copy), p1 (copy)
+		if Input1.UserInputType ~= Enum.UserInputType.Touch then return end
+		if Input ~= Input1 then return end
+		if Input1.UserInputState == Enum.UserInputState.End then
+			Input = nil
+			Flag = false
+			contextActionButtonUp(ContextActionButton, Input1, p1)
+			
+			return
+		elseif Input1.UserInputState == Enum.UserInputState.Change then
+			Flag = true
+		end
+	end)
+	ContextActionButton.InputChanged:connect(function(Input1) --[[ Line: 201 ]]
+		-- upvalues: Input (ref), ContextActionButton (copy), p1 (copy)
+		if Input1.UserInputType ~= Enum.UserInputType.Touch then return end
+		if Input == Input1 then
+			contextActionButtonMoved(ContextActionButton, Input1, p1)
+			
+			return
+		end
+	end)
+	local ActionIcon = Instance.new("ImageLabel")
+	ActionIcon.Name = "ActionIcon"
+	ActionIcon.Position = UDim2.new(0.175, 0, 0.175, 0)
+	ActionIcon.Size = UDim2.new(0.65, 0, 0.65, 0)
+	ActionIcon.BackgroundTransparency = 1
 	
 	if p2.image and type(p2.image) == "string" then
-		actionIcon.Image = p2.image
+		ActionIcon.Image = p2.image
 	end
-	actionIcon.Parent = contextActionButton
-	local actionTitle = Instance.new("TextLabel")
-	actionTitle.Name = "ActionTitle"
-	actionTitle.Size = UDim2.new(1, 0, 1, 0)
-	actionTitle.BackgroundTransparency = 1
-	actionTitle.Font = Enum.Font.SourceSansBold
-	actionTitle.TextColor3 = Color3.new(1, 1, 1)
-	actionTitle.TextStrokeTransparency = 0
-	actionTitle.FontSize = Enum.FontSize.Size18
-	actionTitle.TextWrapped = true
-	actionTitle.Text = ""
+	ActionIcon.Parent = ContextActionButton
+	local ActionTitle = Instance.new("TextLabel")
+	ActionTitle.Name = "ActionTitle"
+	ActionTitle.Size = UDim2.new(1, 0, 1, 0)
+	ActionTitle.BackgroundTransparency = 1
+	ActionTitle.Font = Enum.Font.SourceSansBold
+	ActionTitle.TextColor3 = Color3.new(1, 1, 1)
+	ActionTitle.TextStrokeTransparency = 0
+	ActionTitle.FontSize = Enum.FontSize.Size18
+	ActionTitle.TextWrapped = true
+	ActionTitle.Text = ""
 	
 	if p2.title and type(p2.title) == "string" then
-		actionTitle.Text = p2.title
+		ActionTitle.Text = p2.title
 	end
-	actionTitle.Parent = contextActionButton
+	ActionTitle.Parent = ContextActionButton
 	
-	return contextActionButton
+	return ContextActionButton
 end
 
-function createButton(p1, p2)
-	-- upvalues: fixCASMaxTouchButtons (ref), t_1 (ref), t_2Count (ref), t (ref), t_2 (ref), var2 (write), var1 (write), playerGui (ref)
-	local var3 = if not fixCASMaxTouchButtons then createNewButton(p1, p2) else nil
-	local var4 = nil
+function createButton(Text, p1) --[[ Line: 239 ]]
+	-- upvalues: NewButtons (copy), CountConfig (copy), t (copy), config (copy), Frame (ref), ScreenGui (ref), PlayerGui (copy)
+	local v1: number? = nil
 	
-	for i = 1, #t_1 do
-		if t_1[i] ~= "empty" then
+	for i = 1, #NewButtons do
+		if NewButtons[i] ~= "empty" then
 			continue
 		end
-		var4 = i
+		v1 = i
 		break
 	end
-	var4 = var4 or #t_1 + 1
-	
-	if t_2Count < var4 then
-		if fixCASMaxTouchButtons then
-			warn("Maximum of 7 allowed touch buttons, new touch button not created for " .. p1 .. ".")
-		end
-		return
-	elseif fixCASMaxTouchButtons then
-		var3 = createNewButton(p1, p2)
+	if not v1 then
+		v1 = #NewButtons + 1
 	end
-	t_1[var4] = var3
-	t[p1].button = var3
-	var3.Position = t_2[var4]
-	var3.Parent = var2
-	
-	if var1 and var1.Parent == nil then
-		var1.Parent = playerGui
+	if CountConfig < v1 then
+		warn("Maximum of 7 allowed touch buttons, new touch button not created for " .. Text .. ".")
 		
-		if not var2.Parent then
-			var2.Parent = var1
+		return
+	end
+	local NewButton = createNewButton(Text, p1)
+	NewButtons[v1] = NewButton
+	t[Text].button = NewButton
+	NewButton.Position = config[v1]
+	NewButton.Parent = Frame
+	
+	if ScreenGui and ScreenGui.Parent == nil then
+		ScreenGui.Parent = PlayerGui
+		
+		if not Frame.Parent then
+			Frame.Parent = ScreenGui
 		end
 	end
 end
 
-function removeAction(p3)
-	-- upvalues: t (ref), t_1 (ref)
-	if not t[p3] then return end
-	local button = t[p3].button
+function removeAction(Key) --[[ Line: 275 ]]
+	-- upvalues: t (copy), NewButtons (copy)
+	if not t[Key] then return end
+	local Button = t[Key].button
 	
-	if button then
-		button.Parent = nil
+	if Button then
+		Button.Parent = nil
 		
-		for i = 1, #t_1 do
-			if t_1[i] ~= button then
+		for i = 1, #NewButtons do
+			if NewButtons[i] ~= Button then
 				continue
 			end
-			t_1[i] = "empty"
+			NewButtons[i] = "empty"
 			break
 		end
-		button:Destroy()
+		Button:Destroy()
 	end
-	t[p3] = nil
+	t[Key] = nil
 end
 
-function addAction(p4, p5, p6)
-	-- upvalues: t (ref)
-	if t[p4] then
-		removeAction(p4)
+function addAction(Key, p2, p3) --[[ Line: 296 ]]
+	-- upvalues: t (copy)
+	if t[Key] then
+		removeAction(Key)
 	end
-	t[p4] = { p6 }
+	t[Key] = { p3 }
 	
-	if p5 then
+	if p2 then
 		createContextActionGui()
-		createButton(p4, p6)
+		createButton(Key, p3)
 	end
 end
 
-contextActionService.BoundActionChanged:connect(function(p4, p5, p6)
-	-- upvalues: t (ref)
-	if t[p4] and p6 then
-		local button = t[p4].button
-		local var5 = p6[p5]
+ContextActionService.BoundActionChanged:connect(function(ActionChanged, ChangeName, ChangeTable) --[[ Line: 308 ]]
+	-- upvalues: t (copy)
+	if t[ActionChanged] and ChangeTable then
+		local Button = t[ActionChanged].button
+		local Change = ChangeTable[ChangeName]
 		
-		if not var5 and (p5 == "image" or p5 == "title" or p5 == "description") then
-			var5 = ""
+		if not Change and (ChangeName == "image" or ChangeName == "title" or ChangeName == "description") then
+			Change = ""
 		end
-		if button then
-			if p5 == "image" then
-				button.ActionIcon.Image = var5
+		if Button then
+			if ChangeName == "image" then
+				Button.ActionIcon.Image = Change
 				
 				return
-			elseif p5 == "title" then
-				button.ActionTitle.Text = var5
+			end
+			if ChangeName == "title" then
+				Button.ActionTitle.Text = Change
 				
 				return
-			elseif p5 == "description" then return end
-			if p5 == "position" then
-				button.Position = var5
+			end
+			if ChangeName == "description" then return end
+			if ChangeName == "position" then
+				Button.Position = Change
 			end
 		end
 	end
 end)
-contextActionService.BoundActionAdded:connect(function(p4, p5, p6)
-	addAction(p4, p5, p6)
+ContextActionService.BoundActionAdded:connect(function(ActionAdded, CreateTouchButton, FunctionInfoTable) --[[ Line: 330 ]]
+	addAction(ActionAdded, CreateTouchButton, FunctionInfoTable)
 end)
-contextActionService.BoundActionRemoved:connect(function(p4, _)
-	removeAction(p4)
+ContextActionService.BoundActionRemoved:connect(function(ActionRemoved, _) --[[ Line: 334 ]]
+	removeAction(ActionRemoved)
 end)
-contextActionService.GetActionButtonEvent:connect(function(p4)
-	-- upvalues: t (ref), contextActionService (ref)
-	if t[p4] then
-		contextActionService:FireActionButtonFoundSignal(p4, t[p4].button)
+ContextActionService.GetActionButtonEvent:connect(function(ActionName) --[[ Line: 338 ]]
+	-- upvalues: t (copy), ContextActionService (copy)
+	if t[ActionName] then
+		ContextActionService:FireActionButtonFoundSignal(ActionName, t[ActionName].button)
 	end
 end)
 
-for i, v in pairs(contextActionService:GetAllBoundActionInfo()) do
-	addAction(i, v.createTouchButton, v)
+for i, value in pairs((ContextActionService:GetAllBoundActionInfo())) do
+	addAction(i, value.createTouchButton, value)
 	
-	if fixCASGetButtonYieldedEngineFeature and t[i] and t[i].button then
-		contextActionService:FireActionButtonFoundSignal(i, t[i].button)
+	if t[i] and t[i].button then
+		ContextActionService:FireActionButtonFoundSignal(i, t[i].button)
 	end
 end

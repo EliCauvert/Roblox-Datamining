@@ -1,11 +1,11 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local httpClientModule = require(parent.HttpClient)
-local monetizationOptionsModule = require(parent.DataHydration.MonetizationOptions)
-local createManageDevProductNetworkModule = require(script.Parent.createManageDevProductNetwork)
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local HttpClientModule = require(Parent.HttpClient)
+local MonetizationOptionsModule = require(Parent.DataHydration.MonetizationOptions)
+local CreateManageDevProductNetworkModule = require(script.Parent.createManageDevProductNetwork)
 
-return function()
-	-- upvalues: monetizationOptionsModule (ref), createManageDevProductNetworkModule (ref), httpClientModule (ref)
-	return monetizationOptionsModule.createMonetizationOptionsStore({
-		network = createManageDevProductNetworkModule(httpClientModule.createRequestInternalNetwork(), { label = "MonetizationOptions" })
+return function() --[[ Line: 10 | Named "createManageMonetizationOptionsStore" ]]
+	-- upvalues: MonetizationOptionsModule (copy), CreateManageDevProductNetworkModule (copy), HttpClientModule (copy)
+	return MonetizationOptionsModule.createMonetizationOptionsStore({
+		network = CreateManageDevProductNetworkModule(HttpClientModule.createRequestInternalNetwork(), { label = "MonetizationOptions" })
 	})
 end

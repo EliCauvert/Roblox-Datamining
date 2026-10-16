@@ -1,6 +1,6 @@
-﻿local getInExperienceShopStoreModule = require(script:FindFirstAncestor("InExperienceShop").Stores.getInExperienceShopStore)
+﻿local GetInExperienceShopStoreModule = require(script:FindFirstAncestor("InExperienceShop").Stores.getInExperienceShopStore)
 
-return function(value)
-	-- upvalues: getInExperienceShopStoreModule (ref)
-	getInExperienceShopStoreModule(false).setOpenedFromBuyRobux(value)
+return function(p1) --[[ Line: 5 | Named "setOpenedFromBuyRobux" ]]
+	-- upvalues: GetInExperienceShopStoreModule (copy)
+	GetInExperienceShopStoreModule(false).setOpenedFromBuyRobux(p1)
 end

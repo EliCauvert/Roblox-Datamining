@@ -1,46 +1,45 @@
-﻿local parent = script.Parent.Parent.Parent
-local reactModule = require(parent.Parent.React)
-local invariantModule = require(parent.utils.invariant)
-local stackViewCard = reactModule.Component:extend("StackViewCard")
+﻿local Parent = script.Parent.Parent.Parent
+local ReactModule = require(Parent.Parent.React)
+local InvariantModule = require(Parent.utils.invariant)
+local StackViewCard = ReactModule.Component:extend("StackViewCard")
 
-function stackViewCard.init(p1)
-	-- upvalues: reactModule (ref)
-	local index = p1.props.navigation.state.index
+function StackViewCard.init(p1) --[[ Line: 29 ]]
+	-- upvalues: ReactModule (copy)
 	p1._isMounted = false
-	p1._positionLastValue = index
-	p1._ref = reactModule.createRef()
+	p1._positionLastValue = p1.props.navigation.state.index
+	p1._ref = ReactModule.createRef()
 end
 
-function stackViewCard.render(p1)
-	-- upvalues: invariantModule (ref), reactModule (ref)
-	local forceHidden = p1.props.forceHidden
-	local cardColor3 = p1.props.cardColor3
-	local initialPosition = p1.props.initialPosition
-	local renderScene = p1.props.renderScene
-	local scene = p1.props.scene
-	invariantModule(type(renderScene) == "function", "renderScene must be a function")
+function StackViewCard.render(p1) --[[ Line: 38 ]]
+	-- upvalues: InvariantModule (copy), ReactModule (copy)
+	local ForceHidden = p1.props.forceHidden
+	local CardColor3 = p1.props.cardColor3
+	local InitialPosition = p1.props.initialPosition
+	local RenderSceneFunction = p1.props.renderScene
+	local Scene = p1.props.scene
+	InvariantModule(type(RenderSceneFunction) == "function", "renderScene must be a function")
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
 		ClipsDescendants = false,
-		Position = initialPosition,
+		Position = InitialPosition,
 		Size = UDim2.new(1, 0, 1, 0),
-		BackgroundColor3 = cardColor3,
-		BackgroundTransparency = if cardColor3 == nil then 1 else nil,
-		Visible = not forceHidden,
+		BackgroundColor3 = CardColor3,
+		BackgroundTransparency = if CardColor3 == nil then 1 else nil,
+		Visible = not ForceHidden,
 		ref = p1._ref
-	}, { Content = renderScene(scene) })
+	}, { Content = RenderSceneFunction(Scene) })
 end
 
-function stackViewCard.didMount(p1)
+function StackViewCard.didMount(p1) --[[ Line: 61 ]]
 	p1._isMounted = true
-	p1._positionDisconnector = p1.props.position:onStep(function(...)
-		-- upvalues: p1 (ref)
+	p1._positionDisconnector = p1.props.position:onStep(function(...) --[[ Line: 65 ]]
+		-- upvalues: p1 (copy)
 		p1:_onPositionStep(...)
 	end)
 end
 
-function stackViewCard.willUnmount(p1)
+function StackViewCard.willUnmount(p1) --[[ Line: 70 ]]
 	p1._isMounted = false
 	
 	if p1._positionDisconnector then
@@ -49,30 +48,30 @@ function stackViewCard.willUnmount(p1)
 	end
 end
 
-function stackViewCard.didUpdate(p1, p2)
-	local position = p1.props.position
-	local positionStep = p1.props.positionStep
+function StackViewCard.didUpdate(p1, p2) --[[ Line: 79 ]]
+	local Position = p1.props.position
+	local PositionStep = p1.props.positionStep
 	
-	if position ~= p2.position then
+	if Position ~= p2.position then
 		p1._positionDisconnector()
-		p1._positionDisconnector = position:onStep(function(...)
-			-- upvalues: p1 (ref)
+		p1._positionDisconnector = Position:onStep(function(...) --[[ Line: 85 ]]
+			-- upvalues: p1 (copy)
 			p1:_onPositionStep(...)
 		end)
 	end
-	if positionStep ~= p2.positionStep then
+	if PositionStep ~= p2.positionStep then
 		p1:_onPositionStep(p1._positionLastValue)
 	end
 end
 
-function stackViewCard._onPositionStep(p1, p2)
+function StackViewCard._onPositionStep(p1, _positionLastValue) --[[ Line: 97 ]]
 	if not p1._isMounted then return end
-	local positionStep = p1.props.positionStep
+	local PositionStepFunction: (any, any) -> () = p1.props.positionStep
 	
-	if positionStep then
-		positionStep(p1._ref, p2)
+	if PositionStepFunction then
+		PositionStepFunction(p1._ref, _positionLastValue)
 	end
-	p1._positionLastValue = p2
+	p1._positionLastValue = _positionLastValue
 end
 
-return stackViewCard
+return StackViewCard

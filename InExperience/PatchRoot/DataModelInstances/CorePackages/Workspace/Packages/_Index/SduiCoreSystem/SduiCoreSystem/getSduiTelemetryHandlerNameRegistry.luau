@@ -1,47 +1,48 @@
 ﻿local _ = require(script:FindFirstAncestor("SduiCoreSystem").SduiBuilderTypes)
 
-local function createSduiTelemetryHandlerNameRegistry()
-	local t = {}
+local function createSduiTelemetryHandlerNameRegistry() --[[ Line: 23 ]]
+	local Tbl = {}
 	
 	return {
-		getTelemetryHandler = function(p1)
-			-- upvalues: t (ref)
-			local var1 = t[p1]
+		getTelemetryHandler = function(p1) --[[ Line: 26 ]]
+			-- upvalues: Tbl (copy)
+			local Entry = Tbl[p1]
 			
-			if var1 == nil then
+			if Entry == nil then
 				return nil
-			elseif not var1.handler and var1.lazyHandler then
-				var1.handler = var1.lazyHandler()
 			end
-			return var1.handler
+			if not Entry.handler and Entry.lazyHandler then
+				Entry.handler = Entry.lazyHandler()
+			end
+			return Entry.handler
 		end,
-		registerTelemetryHandler = function(p1, p2)
-			-- upvalues: t (ref)
-			t[p1] = p2
+		registerTelemetryHandler = function(Key, p1) --[[ Line: 38 ]]
+			-- upvalues: Tbl (copy)
+			Tbl[Key] = p1
 		end,
-		registerTelemetryHandlers = function(p1)
-			-- upvalues: t (ref)
-			for i, v in p1 do
-				t[i] = v
+		registerTelemetryHandlers = function(List) --[[ Line: 42 ]]
+			-- upvalues: Tbl (copy)
+			for i, value in List do
+				Tbl[i] = value
 			end
 		end,
-		debug_clear = function()
-			-- upvalues: t (ref)
-			table.clear(t)
+		debug_clear = function() --[[ Line: 48 ]]
+			-- upvalues: Tbl (copy)
+			table.clear(Tbl)
 		end,
-		debug_getRegisteredConfigs = function()
-			-- upvalues: t (ref)
-			return t
+		debug_getRegisteredConfigs = function() --[[ Line: 52 ]]
+			-- upvalues: Tbl (copy)
+			return Tbl
 		end
 	}
 end
 
-local var1 = nil
+local v1 = nil
 
-return function()
-	-- upvalues: var1 (write), createSduiTelemetryHandlerNameRegistry (ref)
-	if var1 == nil then
-		var1 = createSduiTelemetryHandlerNameRegistry()
+return function() --[[ Line: 67 | Named "getSduiTelemetryHandlerNameRegistry" ]]
+	-- upvalues: v1 (ref), createSduiTelemetryHandlerNameRegistry (copy)
+	if v1 == nil then
+		v1 = createSduiTelemetryHandlerNameRegistry()
 	end
-	return var1
+	return v1
 end

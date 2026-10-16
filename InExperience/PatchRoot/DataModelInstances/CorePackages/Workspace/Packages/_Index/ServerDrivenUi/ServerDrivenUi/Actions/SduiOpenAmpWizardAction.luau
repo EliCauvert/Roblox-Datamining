@@ -1,37 +1,38 @@
-﻿local serverDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
-local parent = serverDrivenUi.Parent
-local openAmpWizardContainer = require(parent.AmpUpsell).OpenAmpWizardContainer
-local onAmpWizardCompletionModule = require(serverDrivenUi.Actions.onAmpWizardCompletion)
-local fFlagLuaAppDismissUnlockUpsell = require(parent.SharedFlags).FFlagLuaAppDismissUnlockUpsell
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
-local sduiActionType = sduiCoreSystemModule.SduiActionType
+﻿local ServerDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
+local Parent = ServerDrivenUi.Parent
+local OpenAmpWizardContainerFunction = require(Parent.AmpUpsell).OpenAmpWizardContainer
+local OnAmpWizardCompletionModule = require(ServerDrivenUi.Actions.onAmpWizardCompletion)
+local FFlagLuaAppDismissUnlockUpsell = require(Parent.SharedFlags).FFlagLuaAppDismissUnlockUpsell
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
+local SduiActionType = SduiCoreSystemModule.SduiActionType
 
-local function noopCompletion(_, _) end
+local function noopCompletion(_, _) --[[ Line: 15 ]] end
 
-return function(p1, _, p2, _)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref), fFlagLuaAppDismissUnlockUpsell (ref), onAmpWizardCompletionModule (ref), noopCompletion (ref), openAmpWizardContainer (ref)
-	local var1 = if p1 then p1.actionParams else nil
+return function(p1, _, p2, _) --[[ Line: 30 ]]
+	-- upvalues: SduiErrorType (copy), SduiActionType (copy), FFlagLuaAppDismissUnlockUpsell (copy), OnAmpWizardCompletionModule (copy), noopCompletion (copy), OpenAmpWizardContainerFunction (copy)
+	local ActionParams = p1 and p1.actionParams or nil
 	
-	if var1 == nil then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if ActionParams == nil then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
-			name = sduiActionType.OpenAmpWizard
+			name = SduiActionType.OpenAmpWizard
 		}, p2.appPage)
 		
 		return
 	end
-	assert(var1, "actionParams must exist")
-	local featureName = var1.featureName
+	assert(ActionParams, "actionParams must exist")
+	local FeatureName = ActionParams.featureName
 	
-	if featureName == nil then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if FeatureName == nil then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing actionParam: featureName",
 			propName = "featureName",
-			name = sduiActionType.OpenAmpWizard
+			name = SduiActionType.OpenAmpWizard
 		}, p2.appPage)
 		
 		return
+	else
+		p2.dependencies.dispatch(OpenAmpWizardContainerFunction(FeatureName, if FFlagLuaAppDismissUnlockUpsell then OnAmpWizardCompletionModule else noopCompletion, nil, ActionParams.entryPointEventCtx, nil, ActionParams.nameSpace, ActionParams.skipFacialAgeEstimationWebLinkModal))
 	end
-	p2.dependencies.dispatch(openAmpWizardContainer(featureName, if fFlagLuaAppDismissUnlockUpsell then onAmpWizardCompletionModule else noopCompletion, nil, var1.entryPointEventCtx, nil, var1.nameSpace, var1.skipFacialAgeEstimationWebLinkModal))
 end

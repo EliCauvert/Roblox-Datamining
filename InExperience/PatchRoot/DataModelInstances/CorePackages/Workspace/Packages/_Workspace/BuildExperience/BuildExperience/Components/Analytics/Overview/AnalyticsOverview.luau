@@ -1,28 +1,31 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local reactModule = require(buildExperience.Parent.React)
-local _ = require(buildExperience.Analytics.AnalyticsMetric)
-local analyticsWindowModule = require(buildExperience.Analytics.AnalyticsWindow)
-local analyticsOverviewViewModule = require(script.Parent.AnalyticsOverviewView)
-local useAnalyticsOverviewViewModelModule = require(script.Parent.useAnalyticsOverviewViewModel)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local ReactModule = require(BuildExperience.Parent.React)
+local _ = require(BuildExperience.Analytics.AnalyticsMetric)
+local AnalyticsWindowModule = require(BuildExperience.Analytics.AnalyticsWindow)
+local AnalyticsOverviewViewModule = require(script.Parent.AnalyticsOverviewView)
+local UseAnalyticsOverviewViewModelModule = require(script.Parent.useAnalyticsOverviewViewModel)
 
-return function(p1)
-	-- upvalues: reactModule (ref), analyticsWindowModule (ref), useAnalyticsOverviewViewModelModule (ref), analyticsOverviewViewModule (ref)
-	local var1, var2 = reactModule.useState(p1.initialWindowId or analyticsWindowModule.DEFAULT_WINDOW_ID)
-	local var3, var4 = reactModule.useState(nil)
-	local var5 = useAnalyticsOverviewViewModelModule(p1.universeId, analyticsWindowModule.WindowById[var1] or analyticsWindowModule.LastWeek, p1.initialMetricId or "UniqueUsersWithPlaySessions", var3, var4)
+return function(p1) --[[ Line: 24 | Named "AnalyticsOverview" ]]
+	-- upvalues: ReactModule (copy), AnalyticsWindowModule (copy), UseAnalyticsOverviewViewModelModule (copy), AnalyticsOverviewViewModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(p1.initialWindowId or AnalyticsWindowModule.DEFAULT_WINDOW_ID)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
+	local WindowByIdEntry = AnalyticsWindowModule.WindowById[UseStateResult] or AnalyticsWindowModule.LastWeek
+	local UseAnalyticsOverviewViewModelModuleResult = UseAnalyticsOverviewViewModelModule(p1.universeId, WindowByIdEntry, p1.initialMetricId or "UniqueUsersWithPlaySessions", UseStateResult1, UseStateResult2_1)
 	
-	return reactModule.createElement(analyticsOverviewViewModule, {
-		overviewTitle = var5.overviewTitle,
-		keyStatsTitle = var5.keyStatsTitle,
-		instantStats = var5.instantStats,
-		statsCards = var5.statsCards,
-		windows = var5.windows,
-		selectedWindowId = var1,
-		onWindowSelected = var2,
-		sheet = var5.sheet,
-		onSheetClose = reactModule.useCallback(function()
-			-- upvalues: var4 (ref)
-			var4(nil)
+	return ReactModule.createElement(AnalyticsOverviewViewModule, {
+		overviewTitle = UseAnalyticsOverviewViewModelModuleResult.overviewTitle,
+		keyStatsTitle = UseAnalyticsOverviewViewModelModuleResult.keyStatsTitle,
+		instantStats = UseAnalyticsOverviewViewModelModuleResult.instantStats,
+		statsCards = UseAnalyticsOverviewViewModelModuleResult.statsCards,
+		windows = UseAnalyticsOverviewViewModelModuleResult.windows,
+		selectedWindowId = UseStateResult,
+		onWindowSelected = UseStateResult2,
+		universeId = p1.universeId,
+		window = WindowByIdEntry,
+		sheet = UseAnalyticsOverviewViewModelModuleResult.sheet,
+		onSheetClose = ReactModule.useCallback(function() --[[ Line: 37 ]]
+			-- upvalues: UseStateResult2_1 (copy)
+			UseStateResult2_1(nil)
 		end, {}),
 		onOpenChat = p1.onOpenChat,
 		layoutOrder = p1.layoutOrder,

@@ -1,1 +1,1 @@
-﻿return require(script.Signals)
+﻿return (require(script.Signals))

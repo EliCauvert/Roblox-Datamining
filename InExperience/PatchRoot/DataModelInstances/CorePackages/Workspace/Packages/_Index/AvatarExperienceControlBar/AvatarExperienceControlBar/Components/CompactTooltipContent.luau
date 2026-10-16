@@ -1,34 +1,32 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceControlBar").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local inputHandlersModule = require(parent.InputHandlers)
-local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
-local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
-local t = { Selectable = false }
-local t_1 = {
-	[Enum.KeyCode.ButtonB] = focusNavigationEventNameEnum.NavigateBack,
-	[Enum.KeyCode.Escape] = focusNavigationEventNameEnum.NavigateBack
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceControlBar").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local InputHandlersModule = require(Parent.InputHandlers)
+local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
+local FocusNavigationEventNameEnum = require(Parent.FocusNavigationUtils).FocusNavigationEventNameEnum
+local Selection = { Selectable = false }
+local config = {
+	[Enum.KeyCode.ButtonB] = FocusNavigationEventNameEnum.NavigateBack,
+	[Enum.KeyCode.Escape] = FocusNavigationEventNameEnum.NavigateBack
 }
 
-return function(p1)
-	-- upvalues: foundationModule (ref), reactModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), reactFocusNavigationModule (ref), t_1 (ref), t (ref)
-	local var1 = foundationModule.Hooks.useTokens()
-	local var2 = foundationModule.Hooks.useScaledValue(296)
-	local var3 = p1.onDismiss ~= nil
-	local var4 = if var3 then var1.Size.Size_800 else 0
-	local var5 = var2 - var1.Padding.Medium * 2 - var4 - (if var3 then var1.Gap.XSmall else 0)
+return function(p1) --[[ Line: 23 | Named "CompactTooltipContent" ]]
+	-- upvalues: FoundationModule (copy), ReactModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), ReactFocusNavigationModule (copy), config (copy), Selection (copy)
+	local UseTokensResult = FoundationModule.Hooks.useTokens()
+	local HasOnDismiss = p1.onDismiss ~= nil
+	local Size800 = if HasOnDismiss then UseTokensResult.Size.Size_800 else 0
+	local UseScaledValueResultDelta = FoundationModule.Hooks.useScaledValue(296) - UseTokensResult.Padding.Medium * 2 - Size800 - (if HasOnDismiss then UseTokensResult.Gap.XSmall else 0)
 	
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		selectionGroup = false,
 		tag = "row align-y-center gap-xsmall auto-xy padding-medium",
 		testId = "--control-bar-compact-tooltip",
-		ref = reactFocusNavigationModule.useEventHandlerMap(reactModule.useMemo(function()
-			-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), p1 (ref)
+		ref = ReactFocusNavigationModule.useEventHandlerMap(ReactModule.useMemo(function() --[[ Line: 36 ]]
+			-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), p1 (copy)
 			return {
-				[focusNavigationEventNameEnum.NavigateBack] = {
-					handler = inputHandlersModule.onRelease(function(p2)
-						-- upvalues: p1 (copy)
+				[FocusNavigationEventNameEnum.NavigateBack] = {
+					handler = InputHandlersModule.onRelease(function(p2) --[[ Line: 39 ]]
+						-- upvalues: p1 (upval)
 						if p1.onDismiss then
 							p1.onDismiss()
 							p2:cancel()
@@ -36,33 +34,33 @@ return function(p1)
 					end)
 				}
 			}
-		end, { p1.onDismiss }), reactFocusNavigationModule.useEventMap(t_1)),
-		selection = t
+		end, { p1.onDismiss }), (ReactFocusNavigationModule.useEventMap(config))),
+		selection = Selection
 	}, {
-		Body = reactModule.createElement(foundationModule.Text, {
+		Body = ReactModule.createElement(FoundationModule.Text, {
 			LayoutOrder = 1,
 			tag = "auto-xy text-body-medium text-wrap text-align-x-left content-inverse-default",
 			Text = p1.bodyText,
-			sizeConstraint = reactModule.useMemo(function()
-				-- upvalues: var5 (ref)
-				return { MaxSize = Vector2.new(var5, 1e999) }
-			end, { var5 })
+			sizeConstraint = ReactModule.useMemo(function() --[[ Line: 30 ]]
+				-- upvalues: UseScaledValueResultDelta (copy)
+				return { MaxSize = Vector2.new(UseScaledValueResultDelta, 1e999) }
+			end, { UseScaledValueResultDelta })
 		}),
-		CloseSlot = if var3 then reactModule.createElement(foundationModule.View, {
+		CloseSlot = if HasOnDismiss then ReactModule.createElement(FoundationModule.View, {
 			LayoutOrder = 2,
-			Size = UDim2.fromOffset(var4, var1.Size.Size_500 + var1.Size.Size_50)
+			Size = UDim2.fromOffset(Size800, UseTokensResult.Size.Size_500 + UseTokensResult.Size.Size_50)
 		}, {
-			Close = reactModule.createElement(foundationModule.View, {
+			Close = ReactModule.createElement(FoundationModule.View, {
 				tag = "position-center-center anchor-center-center size-800-800 radius-medium",
 				testId = "--control-bar-tooltip-close",
 				onActivated = p1.onDismiss,
-				stateLayer = { mode = foundationModule.Enums.StateLayerMode.Inverse },
+				stateLayer = { mode = FoundationModule.Enums.StateLayerMode.Inverse },
 				selection = { Selectable = true }
 			}, {
-				Icon = reactModule.createElement(foundationModule.Icon, {
-					name = foundationModule.Enums.IconName.X,
-					size = foundationModule.Enums.IconSize.Medium,
-					style = var1.Inverse.Content.Emphasis,
+				Icon = ReactModule.createElement(FoundationModule.Icon, {
+					name = FoundationModule.Enums.IconName.X,
+					size = FoundationModule.Enums.IconSize.Medium,
+					style = UseTokensResult.Inverse.Content.Emphasis,
 					Position = UDim2.fromScale(0.5, 0.5),
 					AnchorPoint = Vector2.new(0.5, 0.5)
 				})

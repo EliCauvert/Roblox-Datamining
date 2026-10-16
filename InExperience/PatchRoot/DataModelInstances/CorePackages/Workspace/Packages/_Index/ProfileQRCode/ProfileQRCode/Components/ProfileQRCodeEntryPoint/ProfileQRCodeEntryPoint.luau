@@ -1,22 +1,22 @@
-﻿local profileQRCode = script:FindFirstAncestor("ProfileQRCode")
-local parent = profileQRCode.Parent
-local analyticsServiceModule = require(profileQRCode.Analytics.AnalyticsService)
-local analyticsModule = require(profileQRCode.Analytics)
-local reactModule = require(parent.React)
-local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
-local profileQRCodePageModule = require(profileQRCode.Components.ProfileQRCodePage.ProfileQRCodePage)
+﻿local ProfileQRCode = script:FindFirstAncestor("ProfileQRCode")
+local Parent = ProfileQRCode.Parent
+local AnalyticsServiceModule = require(ProfileQRCode.Analytics.AnalyticsService)
+local AnalyticsModule = require(ProfileQRCode.Analytics)
+local ReactModule = require(Parent.React)
+local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
+local ProfileQRCodePageModule = require(ProfileQRCode.Components.ProfileQRCodePage.ProfileQRCodePage)
 
-return function(p1)
-	-- upvalues: analyticsModule (ref), analyticsServiceModule (ref), useLocalUserId (ref), reactModule (ref), profileQRCodePageModule (ref)
-	return reactModule.createElement(analyticsModule.Context.Provider, {
+return function(p1) --[[ Line: 22 ]]
+	-- upvalues: AnalyticsModule (copy), AnalyticsServiceModule (copy), UseLocalUserIdFunction (copy), ReactModule (copy), ProfileQRCodePageModule (copy)
+	return ReactModule.createElement(AnalyticsModule.Context.Provider, {
 		value = {
-			fireEvent = analyticsModule.setupFireEvent({
-				analytics = if p1.analyticsService then p1.analyticsService else analyticsServiceModule,
-				infoForAllEvents = { uid = useLocalUserId(), source = p1.source }
+			fireEvent = AnalyticsModule.setupFireEvent({
+				analytics = if p1.analyticsService then p1.analyticsService else AnalyticsServiceModule,
+				infoForAllEvents = { uid = UseLocalUserIdFunction(), source = p1.source }
 			})
 		}
 	}, {
-		Window = reactModule.createElement(profileQRCodePageModule, {
+		Window = ReactModule.createElement(ProfileQRCodePageModule, {
 			appStorageService = p1.appStorageService,
 			robloxEventReceiver = p1.robloxEventReceiver,
 			onClose = p1.onClose,

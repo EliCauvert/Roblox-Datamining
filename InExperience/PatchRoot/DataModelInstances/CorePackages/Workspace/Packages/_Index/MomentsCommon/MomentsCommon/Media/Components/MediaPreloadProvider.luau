@@ -1,16 +1,16 @@
-﻿local momentsCommon = script:FindFirstAncestor("MomentsCommon")
-local reactModule = require(momentsCommon.Parent.React)
-local _ = require(momentsCommon.Media.MediaTypes)
-local var1 = reactModule.createContext(nil)
+﻿local MomentsCommon = script:FindFirstAncestor("MomentsCommon")
+local ReactModule = require(MomentsCommon.Parent.React)
+local _ = require(MomentsCommon.Media.MediaTypes)
+local Context = ReactModule.createContext(nil)
 
 return {
-	Provider = function(p1)
-		-- upvalues: reactModule (ref), var1 (ref)
-		return reactModule.createElement(var1.Provider, { value = p1.controllerProvider }, p1.children)
+	Provider = function(p1) --[[ Line: 34 ]]
+		-- upvalues: ReactModule (copy), Context (copy)
+		return ReactModule.createElement(Context.Provider, { value = p1.controllerProvider }, p1.children)
 	end,
-	Context = var1,
-	useMediaControllerProvider = function()
-		-- upvalues: reactModule (ref), var1 (ref)
-		return reactModule.useContext(var1)
+	Context = Context,
+	useMediaControllerProvider = function() --[[ Line: 40 ]]
+		-- upvalues: ReactModule (copy), Context (copy)
+		return ReactModule.useContext(Context)
 	end
 }

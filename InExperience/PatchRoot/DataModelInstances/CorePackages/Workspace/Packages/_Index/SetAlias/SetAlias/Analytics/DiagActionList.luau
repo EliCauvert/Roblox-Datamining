@@ -1,22 +1,22 @@
-﻿local eventNamesModule = require(script.Parent.Enums.EventNames)
+﻿local EventNamesModule = require(script.Parent.Enums.EventNames)
 
 return {
-	[eventNamesModule.CustomizeNameModalOpened] = {
+	[EventNamesModule.CustomizeNameModalOpened] = {
 		name = game:DefineFastString("CustomizeNameModalOpened", "CustomizeNameModalOpened")
 	},
-	[eventNamesModule.CustomizeNameClearedInput] = {
+	[EventNamesModule.CustomizeNameClearedInput] = {
 		name = game:DefineFastString("CustomizeNameClearedInput", "CustomizeNameClearedInput")
 	},
-	[eventNamesModule.CustomizeNameMaximumCharLimitTyped] = {
+	[EventNamesModule.CustomizeNameMaximumCharLimitTyped] = {
 		name = game:DefineFastString("CustomizeNameMaximumCharLimitTyped", "CustomizeNameMaximumCharLimitTyped")
 	},
-	[eventNamesModule.CustomizeNameModalClosed] = {
+	[EventNamesModule.CustomizeNameModalClosed] = {
 		name = game:DefineFastString("CustomizeNameModalClosed", "CustomizeNameModalClosed")
 	},
-	[eventNamesModule.CustomizeNameSaved] = {
+	[EventNamesModule.CustomizeNameSaved] = {
 		name = game:DefineFastString("CustomizeNameSaved", "CustomizeNameSaved")
 	},
-	[eventNamesModule.CustomizeNameSaveAttemptInvalidInput] = {
+	[EventNamesModule.CustomizeNameSaveAttemptInvalidInput] = {
 		name = game:DefineFastString("CustomizeNameSaveAttemptInvalidInput", "CustomizeNameSaveAttemptInvalidInput")
 	}
 }

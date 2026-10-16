@@ -1,46 +1,49 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local cryoModule = require(parent.Cryo)
-local enumScreensModule = require(appChat.EnumScreens)
-local reactModule = require(parent.React)
-local useCallback = reactModule.useCallback
-local useEffectOnMount = require(parent.RoactUtils).Hooks.useEffectOnMount
-local createUnfilteredChatPartialModalContainerModule = require(script.Parent.CreateUnfilteredChatPartialModalContainer)
-local loggerModule = require(script.Parent.Logger)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local CryoModule = require(Parent.Cryo)
+local EnumScreensModule = require(AppChat.EnumScreens)
+local ReactModule = require(Parent.React)
+local UseCallbackFunction = ReactModule.useCallback
+local UseEffectOnMountFunction = require(Parent.RoactUtils).Hooks.useEffectOnMount
+local CreateUnfilteredChatPartialModalContainerModule = require(script.Parent.CreateUnfilteredChatPartialModalContainer)
+local LoggerModule = require(script.Parent.Logger)
 local t = {}
 
-return function(p1)
-	-- upvalues: cryoModule (ref), t (ref), useEffectOnMount (ref), loggerModule (ref), useCallback (ref), enumScreensModule (ref), reactModule (ref), createUnfilteredChatPartialModalContainerModule (ref)
-	local var1 = cryoModule.Dictionary.union(t, p1)
-	local navigation = var1.navigation
-	assert(type(navigation) ~= "nil", "CreateUnfilteredChatPartialModalScreen should be wrapped with React Navigation")
-	local conversationId = navigation and (navigation.getParam and navigation.getParam("conversationId", nil))
-	useEffectOnMount(function()
-		-- upvalues: loggerModule (copy)
-		loggerModule:info("LearnMorePartialModalScreen mounted")
+return function(p1) --[[ Line: 19 | Named "CreateUnfilteredChatPartialModalScreen" ]]
+	-- upvalues: CryoModule (copy), t (copy), UseEffectOnMountFunction (copy), LoggerModule (copy), UseCallbackFunction (copy), EnumScreensModule (copy), ReactModule (copy), CreateUnfilteredChatPartialModalContainerModule (copy)
+	local UnionResult = CryoModule.Dictionary.union(t, p1)
+	local Navigation = UnionResult.navigation
+	assert(type(Navigation) ~= "nil", "CreateUnfilteredChatPartialModalScreen should be wrapped with React Navigation")
+	local ConversationIdParam = Navigation and (Navigation.getParam and Navigation.getParam("conversationId", nil))
+	UseEffectOnMountFunction(function() --[[ Line: 25 ]]
+		-- upvalues: LoggerModule (upval)
+		LoggerModule:info("LearnMorePartialModalScreen mounted")
 	end)
-	local var2 = useCallback(function()
-		-- upvalues: navigation (ref)
-		navigation.goBack()
-	end, { navigation })
-	local var3 = useCallback(function(p2)
-		-- upvalues: navigation (ref), enumScreensModule (copy)
-		navigation.navigate(enumScreensModule.ChatConversation, { conversationId = p2 })
-	end, { navigation })
-	local var4 = useCallback(function(p2)
-		-- upvalues: var1 (ref), enumScreensModule (copy)
-		var1.navigation.navigate(enumScreensModule.RoactChatToast, { toastProps = { toastContent = { toastTitle = p2 } } })
-	end, { navigation })
+	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 29 ]]
+		-- upvalues: Navigation (copy)
+		Navigation.goBack()
+	end, { Navigation })
+	local UseCallbackResult1 = UseCallbackFunction(function(ConversationId) --[[ Line: 33 ]]
+		-- upvalues: Navigation (copy), EnumScreensModule (upval)
+		Navigation.navigate(EnumScreensModule.ChatConversation, { conversationId = ConversationId })
+	end, { Navigation })
+	local UseCallbackResult2 = UseCallbackFunction(function(ToastTitle) --[[ Line: 37 ]]
+		-- upvalues: UnionResult (copy), EnumScreensModule (upval)
+		UnionResult.navigation.navigate(EnumScreensModule.RoactChatToast, {
+			toastProps = { toastContent = { toastTitle = ToastTitle } }
+		})
+	end, { Navigation })
 	
-	if conversationId == nil then
-		loggerModule:warning("ConversationId is required to open CreateUnfilteredChatPartialModalScreen")
+	if ConversationIdParam == nil then
+		LoggerModule:warning("ConversationId is required to open CreateUnfilteredChatPartialModalScreen")
 		
 		return nil
+	else
+		return ReactModule.createElement(CreateUnfilteredChatPartialModalContainerModule, {
+			conversationId = ConversationIdParam,
+			onDismissed = UseCallbackResult,
+			navigateToConversation = UseCallbackResult1,
+			navigateToToast = UseCallbackResult2
+		})
 	end
-	return reactModule.createElement(createUnfilteredChatPartialModalContainerModule, {
-		conversationId = conversationId,
-		onDismissed = var2,
-		navigateToConversation = var3,
-		navigateToToast = var4
-	})
 end

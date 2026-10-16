@@ -1,45 +1,54 @@
-﻿local sduiSharedContent = script:FindFirstAncestor("SduiSharedContent")
-local parent = sduiSharedContent.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local _ = require(parent.SduiCompat)
-local fFlagSduiContentRowStateLayerModule = require(sduiSharedContent.Flags.FFlagSduiContentRowStateLayer)
-local fFlagSduiContentRowTrailingHover = require(parent.SharedFlags).FFlagSduiContentRowTrailingHover
-local view = foundationModule.View
-local controlState = foundationModule.Enums.ControlState
+﻿local SduiSharedContent = script:FindFirstAncestor("SduiSharedContent")
+local Parent = SduiSharedContent.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local _ = require(Parent.SduiCompat)
+local FFlagSduiContentRowStateLayerModule = require(SduiSharedContent.Flags.FFlagSduiContentRowStateLayer)
+local FFlagSDUIContentRowSelectableModule = require(SduiSharedContent.Flags.FFlagSDUIContentRowSelectable)
+local FFlagSduiContentRowTrailingHover = require(Parent.SharedFlags).FFlagSduiContentRowTrailingHover
+local View = FoundationModule.View
+local ControlState = FoundationModule.Enums.ControlState
+local CursorType = FoundationModule.Enums.CursorType
+local UseCursorFunction = FoundationModule.Hooks.useCursor
 
-return reactModule.memo(function(p1)
-	-- upvalues: fFlagSduiContentRowTrailingHover (ref), reactModule (ref), controlState (ref), view (ref), fFlagSduiContentRowStateLayerModule (ref), foundationModule (ref)
-	local var1 = nil
-	local var2 = nil
+return ReactModule.memo(function(p1) --[[ Line: 44 | Named "SduiContentRow" ]]
+	-- upvalues: FFlagSduiContentRowTrailingHover (copy), ReactModule (copy), ControlState (copy), FFlagSDUIContentRowSelectableModule (copy), UseCursorFunction (copy), CursorType (copy), View (copy), FFlagSduiContentRowStateLayerModule (copy), FoundationModule (copy)
+	local UseResult = nil
+	local Trailing = nil
 	
-	if fFlagSduiContentRowTrailingHover then
-		local var3, var4 = reactModule.useState(false)
-		var1 = reactModule.useCallback(function(p2)
-			-- upvalues: var4 (ref), controlState (copy)
-			var4(if p2 ~= controlState.Hover then p2 == controlState.Pressed else true)
+	if FFlagSduiContentRowTrailingHover then
+		local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+		UseResult = ReactModule.useCallback(function(Hover) --[[ Line: 51 ]]
+			-- upvalues: UseStateResult2 (copy), ControlState (upval)
+			UseStateResult2(Hover == ControlState.Hover or Hover == ControlState.Pressed)
 		end, {})
-		var2 = if p1.trailingHover == nil or not var3 then p1.trailing else p1.trailingHover
+		Trailing = if p1.trailingHover == nil or not UseStateResult then p1.trailing else p1.trailingHover
 	end
-	return reactModule.createElement(view, {
+	local IsSelectable: boolean = FFlagSDUIContentRowSelectableModule and p1.selectable == true
+	local UseCursorResult = if FFlagSDUIContentRowSelectableModule then UseCursorFunction(CursorType.RoundedRect) else nil
+	
+	return ReactModule.createElement(View, {
 		tag = if p1.tag then p1.tag else "row auto-y gap-large",
 		LayoutOrder = p1.layoutOrder,
 		Position = p1.position,
 		ZIndex = p1.zIndex,
 		Active = p1.onActivated ~= nil,
 		onActivated = p1.onActivated,
-		onStateChanged = if fFlagSduiContentRowTrailingHover and p1.trailingHover ~= nil then var1 else nil,
-		selection = { Selectable = false },
+		onStateChanged = if FFlagSduiContentRowTrailingHover and p1.trailingHover ~= nil then UseResult else nil,
+		selection = {
+			Selectable = IsSelectable,
+			SelectionImageObject = if IsSelectable then UseCursorResult else nil
+		},
 		stateLayer = {
-			affordance = if fFlagSduiContentRowStateLayerModule then p1.stateLayerAffordance or foundationModule.Enums.StateLayerAffordance.None else foundationModule.Enums.StateLayerAffordance.None
+			affordance = FFlagSduiContentRowStateLayerModule and p1.stateLayerAffordance or FoundationModule.Enums.StateLayerAffordance.None
 		},
 		testId = p1.testId
 	}, {
-		LeadingColumn = if p1.leading then reactModule.createElement(view, { LayoutOrder = 1, tag = p1.leadingTag or "col auto-xy" }, p1.leading) else nil,
-		ContentColumn = if p1.content then reactModule.createElement(view, {
+		LeadingColumn = if p1.leading then ReactModule.createElement(View, { LayoutOrder = 1, tag = p1.leadingTag or "col auto-xy" }, p1.leading) else nil,
+		ContentColumn = if p1.content then ReactModule.createElement(View, {
 			LayoutOrder = 2,
 			tag = p1.contentTag or "col fill gap-small auto-xy"
 		}, p1.content) else nil,
-		TrailingColumn = if if fFlagSduiContentRowTrailingHover then var2 else p1.trailing then reactModule.createElement(view, { LayoutOrder = 3, tag = p1.trailingTag or "col auto-xy" }, if fFlagSduiContentRowTrailingHover then var2 else p1.trailing) else nil
+		TrailingColumn = if if FFlagSduiContentRowTrailingHover then Trailing else p1.trailing then ReactModule.createElement(View, { LayoutOrder = 3, tag = p1.trailingTag or "col auto-xy" }, if FFlagSduiContentRowTrailingHover then Trailing else p1.trailing) else nil
 	})
 end)

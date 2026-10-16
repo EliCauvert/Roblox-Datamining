@@ -1,55 +1,56 @@
-﻿local onPlatformSurveys = script:FindFirstAncestor("OnPlatformSurveys")
-local parent = onPlatformSurveys.Parent
-local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagInlineSurveyEnhancements = sharedFlagsModule.FFlagInlineSurveyEnhancements
-local fFlagInlineSurveyChoiceTextEntry = sharedFlagsModule.FFlagInlineSurveyChoiceTextEntry
-local inlineQuestionTypeModule = require(onPlatformSurveys.Enums.InlineQuestionType)
-local multipleChoiceQuestionModule = require(onPlatformSurveys.Components.Questions.MultipleChoiceQuestion)
-local textQuestionModule = require(onPlatformSurveys.Components.Questions.TextQuestion)
-local thumbsQuestionModule = require(onPlatformSurveys.Components.Questions.ThumbsQuestion)
-local _ = require(onPlatformSurveys.Types.InlineSurveyTypes)
+﻿local OnPlatformSurveys = script:FindFirstAncestor("OnPlatformSurveys")
+local Parent = OnPlatformSurveys.Parent
+local ReactModule = require(Parent.React)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagInlineSurveyEnhancements = SharedFlagsModule.FFlagInlineSurveyEnhancements
+local FFlagInlineSurveyChoiceTextEntry = SharedFlagsModule.FFlagInlineSurveyChoiceTextEntry
+local InlineQuestionTypeModule = require(OnPlatformSurveys.Enums.InlineQuestionType)
+local MultipleChoiceQuestionModule = require(OnPlatformSurveys.Components.Questions.MultipleChoiceQuestion)
+local TextQuestionModule = require(OnPlatformSurveys.Components.Questions.TextQuestion)
+local ThumbsQuestionModule = require(OnPlatformSurveys.Components.Questions.ThumbsQuestion)
+local _ = require(OnPlatformSurveys.Types.InlineSurveyTypes)
 
-local function isThumbsQuestion(p1)
-	-- upvalues: inlineQuestionTypeModule (ref), fFlagInlineSurveyChoiceTextEntry (ref)
-	if p1.type ~= inlineQuestionTypeModule.MultipleChoiceSingle then
+local function isThumbsQuestion(Question): boolean --[[ Line: 35 ]]
+	-- upvalues: InlineQuestionTypeModule (copy), FFlagInlineSurveyChoiceTextEntry (copy)
+	if Question.type ~= InlineQuestionTypeModule.MultipleChoiceSingle then
 		return false
 	end
-	local choices = p1.choices
+	local Choices = Question.choices
 	
-	if choices == nil or #choices ~= 2 then
+	if Choices == nil or #Choices ~= 2 then
 		return false
-	elseif fFlagInlineSurveyChoiceTextEntry then
-		for i, v in choices do
-			if v.requiresText == true then
+	end
+	if FFlagInlineSurveyChoiceTextEntry then
+		for _, choice in Choices do
+			if choice.requiresText == true then
 				return false
 			end
 		end
 	end
 	local t = {}
 	
-	for v, v in choices do
-		t[v.id] = true
+	for _, choice1 in Choices do
+		t[choice1.id] = true
 	end
 	return t["1"] == true and t["2"] == true
 end
 
 return {
-	renderQuestion = function(p2)
-		-- upvalues: isThumbsQuestion (ref), reactModule (ref), thumbsQuestionModule (ref), fFlagInlineSurveyEnhancements (ref), inlineQuestionTypeModule (ref), textQuestionModule (ref), multipleChoiceQuestionModule (ref)
-		local question = p2.question
+	renderQuestion = function(p1) --[[ Line: 58 ]]
+		-- upvalues: isThumbsQuestion (copy), ReactModule (copy), ThumbsQuestionModule (copy), FFlagInlineSurveyEnhancements (copy), InlineQuestionTypeModule (copy), TextQuestionModule (copy), MultipleChoiceQuestionModule (copy)
+		local Question = p1.question
 		
-		return if isThumbsQuestion(question) then reactModule.createElement(thumbsQuestionModule, p2) elseif fFlagInlineSurveyEnhancements and question.type == inlineQuestionTypeModule.Text then reactModule.createElement(textQuestionModule, {
-			answer = p2.answer,
-			onAnswerChanged = p2.onAnswerChanged,
-			isDisabled = p2.isDisabled,
-			layoutOrder = p2.layoutOrder
-		}) elseif question.type == inlineQuestionTypeModule.MultipleChoiceSingle or question.type == inlineQuestionTypeModule.MultipleChoiceMulti then reactModule.createElement(multipleChoiceQuestionModule, {
-			question = question,
-			answer = p2.answer,
-			onAnswerChanged = p2.onAnswerChanged,
-			isDisabled = p2.isDisabled,
-			layoutOrder = p2.layoutOrder
+		return if isThumbsQuestion(Question) then ReactModule.createElement(ThumbsQuestionModule, p1) elseif FFlagInlineSurveyEnhancements and Question.type == InlineQuestionTypeModule.Text then ReactModule.createElement(TextQuestionModule, {
+			answer = p1.answer,
+			onAnswerChanged = p1.onAnswerChanged,
+			isDisabled = p1.isDisabled,
+			layoutOrder = p1.layoutOrder
+		}) elseif Question.type == InlineQuestionTypeModule.MultipleChoiceSingle or Question.type == InlineQuestionTypeModule.MultipleChoiceMulti then ReactModule.createElement(MultipleChoiceQuestionModule, {
+			question = Question,
+			answer = p1.answer,
+			onAnswerChanged = p1.onAnswerChanged,
+			isDisabled = p1.isDisabled,
+			layoutOrder = p1.layoutOrder
 		}) else nil
 	end,
 	isThumbsQuestion = isThumbsQuestion

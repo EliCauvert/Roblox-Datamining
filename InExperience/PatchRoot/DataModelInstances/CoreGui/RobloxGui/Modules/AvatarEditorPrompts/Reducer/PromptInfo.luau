@@ -1,10 +1,9 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local roduxModule = require(corePackagesService.Packages.Rodux)
-local cryoModule = require(corePackagesService.Packages.Cryo)
-local parent = script.Parent.Parent
-local promptTypeModule = require(parent.PromptType)
+﻿local CorePackages = game:GetService("CorePackages")
+local CryoModule = require(CorePackages.Packages.Cryo)
+local Parent = script.Parent.Parent
+local PromptTypeModule = require(Parent.PromptType)
 
-return roduxModule.createReducer({
+return (require(CorePackages.Packages.Rodux).createReducer({
 	promptType = nil,
 	humanoidDescription = nil,
 	rigType = nil,
@@ -15,23 +14,23 @@ return roduxModule.createReducer({
 	queue = {},
 	infoQueue = {}
 }, {
-	[require(parent.Actions.CloseOpenPrompt).name] = function(p1, _)
-		-- upvalues: cryoModule (ref)
-		return if cryoModule.isEmpty(p1.queue) then { queue = p1.queue, infoQueue = p1.infoQueue } else cryoModule.Dictionary.join(p1.infoQueue[1], {
+	[require(Parent.Actions.CloseOpenPrompt).name] = function(p1, _) --[[ Line: 32 ]]
+		-- upvalues: CryoModule (copy)
+		return if CryoModule.isEmpty(p1.queue) then { queue = p1.queue, infoQueue = p1.infoQueue } else CryoModule.Dictionary.join(p1.infoQueue[1], {
 			promptType = p1.queue[1],
-			queue = cryoModule.List.removeIndex(p1.queue, 1),
-			infoQueue = cryoModule.List.removeIndex(p1.infoQueue, 1)
+			queue = CryoModule.List.removeIndex(p1.queue, 1),
+			infoQueue = CryoModule.List.removeIndex(p1.infoQueue, 1)
 		})
 	end,
-	[require(parent.Actions.OpenPrompt).name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return if p1.promptType == nil then cryoModule.Dictionary.join(p1, { promptType = p2.promptType }, p2.promptInfo) else cryoModule.Dictionary.join(p1, {
-			queue = cryoModule.List.join(p1.queue, { p2.promptType }),
-			infoQueue = cryoModule.List.join(p1.infoQueue, { p2.promptInfo })
+	[require(Parent.Actions.OpenPrompt).name] = function(p1, p2) --[[ Line: 47 ]]
+		-- upvalues: CryoModule (copy)
+		return if p1.promptType == nil then CryoModule.Dictionary.join(p1, { promptType = p2.promptType }, p2.promptInfo) else CryoModule.Dictionary.join(p1, {
+			queue = CryoModule.List.join(p1.queue, { p2.promptType }),
+			infoQueue = CryoModule.List.join(p1.infoQueue, { p2.promptInfo })
 		})
 	end,
-	[require(parent.Actions.CreateOutfitConfirmed).name] = function(p1, _)
-		-- upvalues: cryoModule (ref), promptTypeModule (ref)
-		return cryoModule.Dictionary.join(p1, { promptType = promptTypeModule.EnterOutfitName })
+	[require(Parent.Actions.CreateOutfitConfirmed).name] = function(p1, _) --[[ Line: 60 ]]
+		-- upvalues: CryoModule (copy), PromptTypeModule (copy)
+		return CryoModule.Dictionary.join(p1, { promptType = PromptTypeModule.EnterOutfitName })
 	end
-})
+}))

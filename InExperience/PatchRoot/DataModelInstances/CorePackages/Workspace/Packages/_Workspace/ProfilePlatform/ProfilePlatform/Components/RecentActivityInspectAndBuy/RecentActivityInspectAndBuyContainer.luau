@@ -1,19 +1,19 @@
-﻿local parent = script:FindFirstAncestor("ProfilePlatform").Parent
-local reactModule = require(parent.React)
-local useNavigation = require(parent.Navigation).useNavigation
-local recentActivityInspectAndBuyViewModule = require(script.Parent.RecentActivityInspectAndBuyView)
-local useRecentActivityInspectAndBuyViewModelModule = require(script.Parent.useRecentActivityInspectAndBuyViewModel)
+﻿local Parent = script:FindFirstAncestor("ProfilePlatform").Parent
+local ReactModule = require(Parent.React)
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local RecentActivityInspectAndBuyViewModule = require(script.Parent.RecentActivityInspectAndBuyView)
+local UseRecentActivityInspectAndBuyViewModelModule = require(script.Parent.useRecentActivityInspectAndBuyViewModel)
 local t = {}
 
-return function()
-	-- upvalues: useNavigation (ref), reactModule (ref), t (ref), useRecentActivityInspectAndBuyViewModelModule (ref), recentActivityInspectAndBuyViewModule (ref)
-	local var1 = useNavigation()
+return function() --[[ Line: 12 | Named "RecentActivityInspectAndBuyContainer" ]]
+	-- upvalues: UseNavigationFunction (copy), ReactModule (copy), t (copy), UseRecentActivityInspectAndBuyViewModelModule (copy), RecentActivityInspectAndBuyViewModule (copy)
+	local UseNavigationResult = UseNavigationFunction()
 	
-	return reactModule.createElement(recentActivityInspectAndBuyViewModule, useRecentActivityInspectAndBuyViewModelModule({
-		assetIds = var1.getParam("assetIds") or t,
-		onClose = reactModule.useCallback(function()
-			-- upvalues: var1 (ref)
-			var1.goBack()
-		end, { var1 })
-	}))
+	return ReactModule.createElement(RecentActivityInspectAndBuyViewModule, (UseRecentActivityInspectAndBuyViewModelModule({
+		assetIds = UseNavigationResult.getParam("assetIds") or t,
+		onClose = ReactModule.useCallback(function() --[[ Line: 15 ]]
+			-- upvalues: UseNavigationResult (copy)
+			UseNavigationResult.goBack()
+		end, { UseNavigationResult })
+	})))
 end

@@ -1,114 +1,120 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local textChatService = game:GetService("TextChatService")
-local reactModule = require(corePackagesService.Packages.React)
-local signalsReactModule = require(corePackagesService.Packages.SignalsReact)
-local expChatModule = require(corePackagesService.Workspace.Packages.ExpChat)
-local getGlobalChatTooltipStore = expChatModule.Stores.GetGlobalChatTooltipStore
-local getChatTooltipStore = expChatModule.Stores.GetChatTooltipStore
-local getChatStatusStore = expChatModule.Stores.GetChatStatusStore
-local isUserChatEnabled = expChatModule.isUserChatEnabled
-local expChatSharedModule = require(corePackagesService.Workspace.Packages.ExpChatShared)
-local getFFlagTextChatEnableUniverseChatTabs = expChatSharedModule.Flags.GetFFlagTextChatEnableUniverseChatTabs
-local fFlagExpChatPresetChatEnabled = expChatSharedModule.Flags.FFlagExpChatPresetChatEnabled
-local fFlagExpChatUseUnifiedTooltipStore = expChatSharedModule.Flags.FFlagExpChatUseUnifiedTooltipStore
-local expChatPresetChatBadgeFTUXExperimentation = require(corePackagesService.Workspace.Packages.SocialExperiments).ExpChatPresetChatBadgeFTUXExperimentation
-local fFlagExpChatPresetChatBadgeExperimentCleanup = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagExpChatPresetChatBadgeExperimentCleanup
-local expChatShowPresetTooltipToNonAgeChecked2 = game:DefineFastFlag("ExpChatShowPresetTooltipToNonAgeChecked2", false)
-local _ = require(corePackagesService.Workspace.Packages.Chrome)
+﻿local CorePackages = game:GetService("CorePackages")
+local TextChatService = game:GetService("TextChatService")
+local ReactModule = require(CorePackages.Packages.React)
+local SignalsReactModule = require(CorePackages.Packages.SignalsReact)
+local ExpChatModule = require(CorePackages.Workspace.Packages.ExpChat)
+local GetGlobalChatTooltipStoreFunction = ExpChatModule.Stores.GetGlobalChatTooltipStore
+local GetChatTooltipStoreFunction = ExpChatModule.Stores.GetChatTooltipStore
+local GetChatStatusStoreFunction = ExpChatModule.Stores.GetChatStatusStore
+local IsUserChatEnabledFunction = ExpChatModule.isUserChatEnabled
+local ExpChatSharedModule = require(CorePackages.Workspace.Packages.ExpChatShared)
+local GetFFlagTextChatEnableUniverseChatTabsFunction = ExpChatSharedModule.Flags.GetFFlagTextChatEnableUniverseChatTabs
+local FFlagExpChatPresetChatEnabled = ExpChatSharedModule.Flags.FFlagExpChatPresetChatEnabled
+local FFlagExpChatUseUnifiedTooltipStore = ExpChatSharedModule.Flags.FFlagExpChatUseUnifiedTooltipStore
+local ExpChatPresetChatBadgeFTUXExperimentation = require(CorePackages.Workspace.Packages.SocialExperiments).ExpChatPresetChatBadgeFTUXExperimentation
+local FFlagExpChatPresetChatBadgeExperimentCleanup = require(CorePackages.Workspace.Packages.SharedFlags).FFlagExpChatPresetChatBadgeExperimentCleanup
+local ExpChatShowPresetTooltipToNonAgeChecked2 = game:DefineFastFlag("ExpChatShowPresetTooltipToNonAgeChecked2", false)
+local _ = require(CorePackages.Workspace.Packages.Chrome)
 
-return function(p1)
-	-- upvalues: textChatService (ref), fFlagExpChatUseUnifiedTooltipStore (ref), getChatTooltipStore (ref), signalsReactModule (ref), fFlagExpChatPresetChatEnabled (ref), reactModule (ref), expChatShowPresetTooltipToNonAgeChecked2 (ref), getGlobalChatTooltipStore (ref), getChatStatusStore (ref), isUserChatEnabled (ref), getFFlagTextChatEnableUniverseChatTabs (ref), fFlagExpChatPresetChatBadgeExperimentCleanup (ref), expChatPresetChatBadgeFTUXExperimentation (ref)
-	local var1, var2, var3
-	local iconHostProps = p1.iconHostProps
-	local isChat = iconHostProps.integration.id == "chat"
-	local chatWindowConfiguration = textChatService:FindFirstChildOfClass("ChatWindowConfiguration")
-	local var4 = if chatWindowConfiguration ~= nil then chatWindowConfiguration.HorizontalAlignment == Enum.HorizontalAlignment.Left and chatWindowConfiguration.VerticalAlignment == Enum.VerticalAlignment.Top else true
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local var5 = false
+return function(p1) --[[ Line: 44 | Named "ChatNotificationBadge" ]]
+	-- upvalues: TextChatService (copy), FFlagExpChatUseUnifiedTooltipStore (copy), GetChatTooltipStoreFunction (copy), SignalsReactModule (copy), FFlagExpChatPresetChatEnabled (copy), ReactModule (copy), ExpChatShowPresetTooltipToNonAgeChecked2 (copy), GetGlobalChatTooltipStoreFunction (copy), GetChatStatusStoreFunction (copy), IsUserChatEnabledFunction (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), FFlagExpChatPresetChatBadgeExperimentCleanup (copy), ExpChatPresetChatBadgeFTUXExperimentation (copy)
+	local IconHostProps = p1.iconHostProps
+	local IsChat = IconHostProps.integration.id == "chat"
+	local ChatWindowConfiguration = TextChatService:FindFirstChildOfClass("ChatWindowConfiguration")
+	local NoChatWindowConfiguration: boolean = ChatWindowConfiguration == nil or ChatWindowConfiguration.HorizontalAlignment == Enum.HorizontalAlignment.Left and ChatWindowConfiguration.VerticalAlignment == Enum.VerticalAlignment.Top
+	local NoChatWindowConfiguration1_1_1 = nil
+	local ChatTooltipStore = nil
+	local UseSignalStateResult = nil
+	local v1 = false
 	
-	if fFlagExpChatUseUnifiedTooltipStore then
-		var1 = getChatTooltipStore(false)
-		var2 = signalsReactModule.useSignalState(var1.getIsChatWindowOpen)
-		local var6 = signalsReactModule.useSignalState(var1.getActiveTooltipKey)
-		local var7 = signalsReactModule.useSignalState(var1.getIsChatInputBarVisible)
-		local var8 = isChat and (signalsReactModule.useSignalState(var1.getIsScreenWideEnough) and var4)
-		local var9 = var6 == "GlobalChatTooltip" and var8
-		var5 = fFlagExpChatPresetChatEnabled and (var6 == "PresetChatTooltip" and var8)
-		reactModule.useEffect(function()
-			-- upvalues: isChat (ref), expChatShowPresetTooltipToNonAgeChecked2 (copy), var5 (write), var7 (ref), var2 (write), var1 (write), var9 (ref), fFlagExpChatPresetChatEnabled (copy)
-			if not isChat then return end
-			local _ = false
-			local var10 = if expChatShowPresetTooltipToNonAgeChecked2 then var5 and (var7 or var2) else var5 and var7
-			var1.setShouldShow("GlobalChatTooltip", var9 and var2)
+	if FFlagExpChatUseUnifiedTooltipStore then
+		ChatTooltipStore = GetChatTooltipStoreFunction(false)
+		UseSignalStateResult = SignalsReactModule.useSignalState(ChatTooltipStore.getIsChatWindowOpen)
+		local UseSignalStateResult1 = SignalsReactModule.useSignalState(ChatTooltipStore.getActiveTooltipKey)
+		local UseSignalStateResult2 = SignalsReactModule.useSignalState(ChatTooltipStore.getIsChatInputBarVisible)
+		local UseSignalStateResult3 = SignalsReactModule.useSignalState(ChatTooltipStore.getIsScreenWideEnough)
+		local NoChatWindowConfiguration1: boolean = IsChat and (UseSignalStateResult3 and NoChatWindowConfiguration)
+		local NoChatWindowConfiguration1_1: boolean = UseSignalStateResult1 == "GlobalChatTooltip" and NoChatWindowConfiguration1
+		v1 = FFlagExpChatPresetChatEnabled and (UseSignalStateResult1 == "PresetChatTooltip" and NoChatWindowConfiguration1)
+		ReactModule.useEffect(function() --[[ Line: 72 ]]
+			-- upvalues: IsChat (copy), ExpChatShowPresetTooltipToNonAgeChecked2 (upval), v1 (ref), UseSignalStateResult2 (copy), UseSignalStateResult (ref), ChatTooltipStore (ref), NoChatWindowConfiguration1_1 (copy), FFlagExpChatPresetChatEnabled (upval)
+			if not IsChat then return end
+			local UseSignalStateResult2_1 = if ExpChatShowPresetTooltipToNonAgeChecked2 then v1 and (UseSignalStateResult2 or UseSignalStateResult) else v1 and UseSignalStateResult2
+			ChatTooltipStore.setShouldShow("GlobalChatTooltip", NoChatWindowConfiguration1_1 and UseSignalStateResult)
 			
-			if fFlagExpChatPresetChatEnabled then
-				var1.setShouldShow("PresetChatTooltip", var10)
+			if FFlagExpChatPresetChatEnabled then
+				ChatTooltipStore.setShouldShow("PresetChatTooltip", UseSignalStateResult2_1)
 			end
 		end, {
-			isChat, var9, var5, var7, var2, var1.setShouldShow
+			IsChat, NoChatWindowConfiguration1_1, v1, UseSignalStateResult2,
+			UseSignalStateResult, ChatTooltipStore.setShouldShow
 		})
-		var3 = var9 or var5
+		NoChatWindowConfiguration1_1_1 = NoChatWindowConfiguration1_1 or v1
 	else
-		var1 = getGlobalChatTooltipStore(false)
-		var2 = signalsReactModule.useSignalState(var1.getIsChatWindowOpen)
-		local var10 = isUserChatEnabled(signalsReactModule.useSignalState(getChatStatusStore(false).getChatStatus))
-		local var11 = signalsReactModule.useSignalState(var1.getIsGlobalChatTooltipDismissed)
-		local var12 = signalsReactModule.useSignalState(var1.getIsGlobalChatTooltipEligible)
-		local var13 = signalsReactModule.useSignalState(var1.getIsScreenWideEnough)
-		local var14, var15 = reactModule.useState(false)
-		reactModule.useEffect(function()
-			-- upvalues: getFFlagTextChatEnableUniverseChatTabs (copy), textChatService (copy), var15 (ref)
-			if not getFFlagTextChatEnableUniverseChatTabs() then return end
-			if textChatService:HasAllocatedUniverseChatContext("global") then
-				var15(true)
+		ChatTooltipStore = GetGlobalChatTooltipStoreFunction(false)
+		local ChatStatusStore = GetChatStatusStoreFunction(false)
+		UseSignalStateResult = SignalsReactModule.useSignalState(ChatTooltipStore.getIsChatWindowOpen)
+		local IsUserChatEnabled = IsUserChatEnabledFunction((SignalsReactModule.useSignalState(ChatStatusStore.getChatStatus)))
+		local UseSignalStateResult4 = SignalsReactModule.useSignalState(ChatTooltipStore.getIsGlobalChatTooltipDismissed)
+		local UseSignalStateResult5 = SignalsReactModule.useSignalState(ChatTooltipStore.getIsGlobalChatTooltipEligible)
+		local UseSignalStateResult6 = SignalsReactModule.useSignalState(ChatTooltipStore.getIsScreenWideEnough)
+		local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+		ReactModule.useEffect(function() --[[ Line: 114 ]]
+			-- upvalues: GetFFlagTextChatEnableUniverseChatTabsFunction (upval), TextChatService (upval), UseStateResult2 (copy)
+			if not GetFFlagTextChatEnableUniverseChatTabsFunction() then return end
+			if TextChatService:HasAllocatedUniverseChatContext("global") then
+				UseStateResult2(true)
 			end
-			local universeChatChannelAllocatedConnection = textChatService.UniverseChatChannelAllocated:Connect(function(p2)
-				-- upvalues: var15 (copy)
-				if p2 == "global" then
-					var15(true)
+			local UniverseChatChannelAllocatedConnection = TextChatService.UniverseChatChannelAllocated:Connect(function(Context) --[[ Line: 123 ]]
+				-- upvalues: UseStateResult2 (upval)
+				if Context == "global" then
+					UseStateResult2(true)
 				end
 			end)
 			
-			return function()
-				-- upvalues: universeChatChannelAllocatedConnection (ref)
-				universeChatChannelAllocatedConnection:Disconnect()
+			return function() --[[ Line: 129 ]]
+				-- upvalues: UniverseChatChannelAllocatedConnection (copy)
+				UniverseChatChannelAllocatedConnection:Disconnect()
 			end
 		end, {})
-		var3 = isChat and (var10 and (var12 and (var14 and (var4 and (var13 and not var11)))))
-		local setShouldShowGlobalChatTooltip = var1.setShouldShowGlobalChatTooltip
-		reactModule.useEffect(function()
-			-- upvalues: isChat (ref), setShouldShowGlobalChatTooltip (ref), var3 (write), var2 (write)
-			if isChat then
-				setShouldShowGlobalChatTooltip(var3 and var2)
+		NoChatWindowConfiguration1_1_1 = IsChat and (IsUserChatEnabled and (UseSignalStateResult5 and (UseStateResult and (NoChatWindowConfiguration and (UseSignalStateResult6 and not UseSignalStateResult4)))))
+		local SetShouldShowGlobalChatTooltipFunction = ChatTooltipStore.setShouldShowGlobalChatTooltip
+		ReactModule.useEffect(function() --[[ Line: 143 ]]
+			-- upvalues: IsChat (copy), SetShouldShowGlobalChatTooltipFunction (copy), NoChatWindowConfiguration1_1_1 (ref), UseSignalStateResult (ref)
+			if IsChat then
+				SetShouldShowGlobalChatTooltipFunction(NoChatWindowConfiguration1_1_1 and UseSignalStateResult)
 			end
-		end, { isChat, var3, var2, setShouldShowGlobalChatTooltip })
+		end, {
+			IsChat,
+			NoChatWindowConfiguration1_1_1,
+			UseSignalStateResult,
+			SetShouldShowGlobalChatTooltipFunction
+		})
 	end
-	local var16, var17 = reactModule.useState(false)
-	reactModule.useEffect(function()
-		-- upvalues: var3 (write), var2 (write), var17 (ref)
-		if var3 and var2 then
-			var17(true)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
+	ReactModule.useEffect(function() --[[ Line: 151 ]]
+		-- upvalues: NoChatWindowConfiguration1_1_1 (ref), UseSignalStateResult (ref), UseStateResult2_1 (copy)
+		if NoChatWindowConfiguration1_1_1 and UseSignalStateResult then
+			UseStateResult2_1(true)
 		end
-	end, { var3, var2 })
-	local var18 = var3 and not var16
+	end, { NoChatWindowConfiguration1_1_1, UseSignalStateResult })
+	local NoUseStateResult1: boolean = NoChatWindowConfiguration1_1_1 and not UseStateResult1
 	
-	if fFlagExpChatPresetChatBadgeExperimentCleanup then
-		local var19 = var18 and (var5 and not var2)
-		reactModule.useEffect(function()
-			-- upvalues: var19 (ref), expChatPresetChatBadgeFTUXExperimentation (copy)
-			if var19 and expChatPresetChatBadgeFTUXExperimentation.isExperimentEnabled then
-				expChatPresetChatBadgeFTUXExperimentation.logExposure()
+	if FFlagExpChatPresetChatBadgeExperimentCleanup then
+		local NoUseSignalStateResult: boolean = NoUseStateResult1 and (v1 and not UseSignalStateResult)
+		ReactModule.useEffect(function() --[[ Line: 162 ]]
+			-- upvalues: NoUseSignalStateResult (copy), ExpChatPresetChatBadgeFTUXExperimentation (upval)
+			if NoUseSignalStateResult and ExpChatPresetChatBadgeFTUXExperimentation.isExperimentEnabled then
+				ExpChatPresetChatBadgeFTUXExperimentation.logExposure()
 				
 				return
 			end
-		end, { var19 })
+		end, { NoUseSignalStateResult })
 	end
-	local cloned = table.clone(iconHostProps)
+	local Copy = table.clone(IconHostProps)
 	
-	if var18 and (not var5 or expChatPresetChatBadgeFTUXExperimentation.getShouldShowPresetChatIconBadge()) then
-		cloned.minBadgeCount = 1
+	if NoUseStateResult1 and (not v1 or ExpChatPresetChatBadgeFTUXExperimentation.getShouldShowPresetChatIconBadge()) then
+		Copy.minBadgeCount = 1
 	end
-	return reactModule.createElement(p1.NotificationBadge, cloned)
+	return ReactModule.createElement(p1.NotificationBadge, Copy)
 end

@@ -1,16 +1,15 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local _ = require(appChat.types)
-local UIBloxModule = require(parent.UIBlox)
-local loggerModule = require(script.Parent.Logger)
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local memo = reactModule.memo
-local useTelemetryModule = require(appChat.Telemetry.useTelemetry)
-local chatDetailsTelemetryEventsModule = require(appChat.Components.ChatDetails.ChatDetailsTelemetryEvents)
-local chatDialogTelemetryLayerModule = require(appChat.Telemetry.Layers.ChatDialogTelemetryLayer)
-local modalBottomSheet = UIBloxModule.ModalBottomSheet
-local t = {
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local _ = require(AppChat.types)
+local LoggerModule = require(script.Parent.Logger)
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local MemoFunction = ReactModule.memo
+local UseTelemetryModule = require(AppChat.Telemetry.useTelemetry)
+local ChatDetailsTelemetryEventsModule = require(AppChat.Components.ChatDetails.ChatDetailsTelemetryEvents)
+local ChatDialogTelemetryLayerModule = require(AppChat.Telemetry.Layers.ChatDialogTelemetryLayer)
+local ModalBottomSheet = require(Parent.UIBlox).ModalBottomSheet
+local config = {
 	conversationId = nil,
 	participantId = nil,
 	showRemoveUserButton = false,
@@ -21,104 +20,104 @@ local t = {
 	reportUserText = "localizedText.ReportUser",
 	removeFromGroupText = "localizedText.RemoveFromGroup",
 	cancelText = "localizedText.Cancel",
-	openViewProfile = function(_)
-		-- upvalues: loggerModule (ref)
-		loggerModule:warning("openViewProfile was not passed to ParticipantDialogDeprecated")
+	openViewProfile = function(_) --[[ Line: 61 ]]
+		-- upvalues: LoggerModule (copy)
+		LoggerModule:warning("openViewProfile was not passed to ParticipantDialogDeprecated")
 	end,
-	openChat = function(...)
-		-- upvalues: loggerModule (ref)
-		loggerModule:warning("openChat was not passed to ParticipantDialogDeprecated")
+	openChat = function(...) --[[ Line: 64 ]]
+		-- upvalues: LoggerModule (copy)
+		LoggerModule:warning("openChat was not passed to ParticipantDialogDeprecated")
 	end,
-	openReportUser = function(...)
-		-- upvalues: loggerModule (ref)
-		loggerModule:warning("openReportUser was not passed to ParticipantDialogDeprecated")
+	openReportUser = function(...) --[[ Line: 67 ]]
+		-- upvalues: LoggerModule (copy)
+		LoggerModule:warning("openReportUser was not passed to ParticipantDialogDeprecated")
 	end,
-	openRemoveUserDialog = function(...)
-		-- upvalues: loggerModule (ref)
-		loggerModule:warning("openRemoveUserDialog was not passed to ParticipantDialogDeprecated")
+	openRemoveUserDialog = function(...) --[[ Line: 70 ]]
+		-- upvalues: LoggerModule (copy)
+		LoggerModule:warning("openRemoveUserDialog was not passed to ParticipantDialogDeprecated")
 	end,
-	onDismiss = function(_)
-		-- upvalues: loggerModule (ref)
-		loggerModule:warning("onDismiss was not passed to ParticipantDialogDeprecated")
+	onDismiss = function(_) --[[ Line: 73 ]]
+		-- upvalues: LoggerModule (copy)
+		LoggerModule:warning("onDismiss was not passed to ParticipantDialogDeprecated")
 	end
 }
 
-function ParticipantDialogDeprecated(p1)
-	-- upvalues: cryoModule (ref), t (ref), useTelemetryModule (ref), chatDialogTelemetryLayerModule (ref), loggerModule (ref), chatDetailsTelemetryEventsModule (ref), reactModule (ref), modalBottomSheet (ref)
-	local var1 = cryoModule.Dictionary.join(t, p1)
-	local var2 = useTelemetryModule(chatDialogTelemetryLayerModule.Context)
-	local conversationId = var1.conversationId
-	local participantId = var1.participantId
-	local showRemoveUserButton = var1.showRemoveUserButton
-	local onDismiss = var1.onDismiss or function() end
-	local t_1 = {}
+function ParticipantDialogDeprecated(p1) --[[ Line: 80 ]]
+	-- upvalues: CryoModule (copy), config (copy), UseTelemetryModule (copy), ChatDialogTelemetryLayerModule (copy), LoggerModule (copy), ChatDetailsTelemetryEventsModule (copy), ReactModule (copy), ModalBottomSheet (copy)
+	local JoinResult = CryoModule.Dictionary.join(config, p1)
+	local UseTelemetryModuleResult = UseTelemetryModule(ChatDialogTelemetryLayerModule.Context)
+	local ConversationId = JoinResult.conversationId
+	local ParticipantId = JoinResult.participantId
+	local ShowRemoveUserButton = JoinResult.showRemoveUserButton
+	local OnDismiss = JoinResult.onDismiss or function() --[[ Line: 86 ]] end
+	local List = {}
 	
-	local function _(p2, p3, p4)
-		-- upvalues: t_1 (ref)
-		table.insert(t_1, {
-			text = p2,
-			stayOnActivated = if p4 then true else nil,
-			onActivated = if p4 then nil else p3
+	local function _(Text, p2, p3) --[[ Line: 90 | Named "insertAction" ]]
+		-- upvalues: List (copy)
+		table.insert(List, {
+			text = Text,
+			stayOnActivated = if p3 then true else nil,
+			onActivated = if p3 then nil else p2
 		})
 	end
 	
-	if var1.showViewProfileButton then
-		table.insert(t_1, {
+	if JoinResult.showViewProfileButton then
+		table.insert(List, {
 			stayOnActivated = nil,
-			text = var1.viewProfileText,
-			onActivated = function()
-				-- upvalues: loggerModule (copy), participantId (ref), var1 (ref)
-				loggerModule:info("User activated viewProfile | userId: {}", participantId)
-				var1.openViewProfile(participantId)
+			text = JoinResult.viewProfileText,
+			onActivated = function() --[[ Line: 102 ]]
+				-- upvalues: LoggerModule (upval), ParticipantId (copy), JoinResult (copy)
+				LoggerModule:info("User activated viewProfile | userId: {}", ParticipantId)
+				JoinResult.openViewProfile(ParticipantId)
 			end
 		})
 	end
-	if var1.showChatButton then
-		table.insert(t_1, {
+	if JoinResult.showChatButton then
+		table.insert(List, {
 			stayOnActivated = nil,
-			text = var1.chatText,
-			onActivated = function()
-				-- upvalues: loggerModule (copy), participantId (ref), var2 (ref), chatDetailsTelemetryEventsModule (copy), var1 (ref)
-				loggerModule:info("User activated openChat | userId: {}", participantId)
-				var2.emit(chatDetailsTelemetryEventsModule.ParticipantDialogChatClicked, {})
-				var1.openChat(participantId)
+			text = JoinResult.chatText,
+			onActivated = function() --[[ Line: 109 ]]
+				-- upvalues: LoggerModule (upval), ParticipantId (copy), UseTelemetryModuleResult (copy), ChatDetailsTelemetryEventsModule (upval), JoinResult (copy)
+				LoggerModule:info("User activated openChat | userId: {}", ParticipantId)
+				UseTelemetryModuleResult.emit(ChatDetailsTelemetryEventsModule.ParticipantDialogChatClicked, {})
+				JoinResult.openChat(ParticipantId)
 			end
 		})
 	end
-	table.insert(t_1, {
+	table.insert(List, {
 		stayOnActivated = nil,
-		text = var1.reportUserText,
-		onActivated = function()
-			-- upvalues: loggerModule (copy), participantId (ref), conversationId (ref), var2 (ref), chatDetailsTelemetryEventsModule (copy), var1 (ref)
-			loggerModule:info("User activated reportUser | userId: {}, conversationId: {}", participantId, conversationId)
-			var2.emit(chatDetailsTelemetryEventsModule.ParticipantDialogReportUserClicked, {})
-			var1.openReportUser(participantId, conversationId)
+		text = JoinResult.reportUserText,
+		onActivated = function() --[[ Line: 116 ]]
+			-- upvalues: LoggerModule (upval), ParticipantId (copy), ConversationId (copy), UseTelemetryModuleResult (copy), ChatDetailsTelemetryEventsModule (upval), JoinResult (copy)
+			LoggerModule:info("User activated reportUser | userId: {}, conversationId: {}", ParticipantId, ConversationId)
+			UseTelemetryModuleResult.emit(ChatDetailsTelemetryEventsModule.ParticipantDialogReportUserClicked, {})
+			JoinResult.openReportUser(ParticipantId, ConversationId)
 		end
 	})
 	
-	if showRemoveUserButton then
-		table.insert(t_1, {
+	if ShowRemoveUserButton then
+		table.insert(List, {
 			stayOnActivated = nil,
-			text = var1.removeFromGroupText,
-			onActivated = function()
-				-- upvalues: var1 (ref), participantId (ref), conversationId (ref)
-				var1.openRemoveUserDialog(participantId, conversationId)
+			text = JoinResult.removeFromGroupText,
+			onActivated = function() --[[ Line: 123 ]]
+				-- upvalues: JoinResult (copy), ParticipantId (copy), ConversationId (copy)
+				JoinResult.openRemoveUserDialog(ParticipantId, ConversationId)
 			end
 		})
 	end
-	table.insert(t_1, {
+	table.insert(List, {
 		stayOnActivated = nil,
-		text = var1.cancelText,
-		onActivated = onDismiss
+		text = JoinResult.cancelText,
+		onActivated = OnDismiss
 	})
 	
-	return reactModule.createElement(modalBottomSheet, {
+	return ReactModule.createElement(ModalBottomSheet, {
 		bottomGap = 10,
 		screenWidth = 400,
 		showImages = false,
-		onDismiss = onDismiss,
-		buttonModels = t_1
+		onDismiss = OnDismiss,
+		buttonModels = List
 	})
 end
 
-return memo(ParticipantDialogDeprecated)
+return MemoFunction(ParticipantDialogDeprecated)

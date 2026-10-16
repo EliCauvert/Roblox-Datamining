@@ -1,13 +1,13 @@
-﻿local appPageShell = script:FindFirstAncestor("AppPageShell")
-local _ = require(appPageShell.PageTypes)
-local compositionTags = require(appPageShell.Parent.AppComposition).CompositionTags
-local frozen = table.freeze({})
+﻿local AppPageShell = script:FindFirstAncestor("AppPageShell")
+local _ = require(AppPageShell.PageTypes)
+local CompositionTags = require(AppPageShell.Parent.AppComposition).CompositionTags
+local Frozen = table.freeze({})
 
-return function(p1)
-	-- upvalues: frozen (ref), compositionTags (ref)
-	return if p1 and p1.enabled == false then frozen else {
-		root = `{compositionTags.ContentRegion.Root} {if p1 then p1.layout else compositionTags.Layout.Discovery}`,
-		body = compositionTags.ContentRegion.Body,
-		header = compositionTags.ContentRegion.Header
+return function(p1) --[[ Line: 20 | Named "resolveCompositionTags" ]]
+	-- upvalues: Frozen (copy), CompositionTags (copy)
+	return if p1 and p1.enabled == false then Frozen else {
+		root = `{CompositionTags.ContentRegion.Root} {p1 and p1.layout or CompositionTags.Layout.Discovery}`,
+		body = CompositionTags.ContentRegion.Body,
+		header = CompositionTags.ContentRegion.Header
 	}
 end

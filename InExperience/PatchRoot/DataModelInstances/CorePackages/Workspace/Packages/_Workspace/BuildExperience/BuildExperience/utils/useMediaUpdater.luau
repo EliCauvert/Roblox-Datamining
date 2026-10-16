@@ -1,136 +1,138 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local reactModule = require(parent.React)
-local promiseModule = require(parent.Promise)
-local getAssetUserAuthStore = require(parent.DataHydration.AssetUserAuth).getAssetUserAuthStore
-local debug = require(parent.DataHydration.CreatorAgentChat).debug
-local formatErrorModule = require(script.Parent.formatError)
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local ReactModule = require(Parent.React)
+local PromiseModule = require(Parent.Promise)
+local GetAssetUserAuthStoreFunction = require(Parent.DataHydration.AssetUserAuth).getAssetUserAuthStore
+local Debug = require(Parent.DataHydration.CreatorAgentChat).debug
+local FormatErrorModule = require(script.Parent.formatError)
 
-return function(p1)
-	-- upvalues: reactModule (ref), promiseModule (ref), debug (ref), getAssetUserAuthStore (ref), formatErrorModule (ref)
-	local var1 = reactModule.useRef(promiseModule.resolve())
-	local onSuccess = p1 and p1.onSuccess
-	local onError = p1 and p1.onError
-	local var2 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: debug (copy), var1 (ref), getAssetUserAuthStore (copy), promiseModule (copy), onSuccess (ref), formatErrorModule (copy), onError (ref)
-		debug.log("info", `media_updater {p3} enqueued`)
-		local var3 = var1.current:catch(function()
+return function(p1) --[[ Line: 34 | Named "useMediaUpdater" ]]
+	-- upvalues: ReactModule (copy), PromiseModule (copy), Debug (copy), GetAssetUserAuthStoreFunction (copy), FormatErrorModule (copy)
+	local UseRefResult = ReactModule.useRef(PromiseModule.resolve())
+	local OnSuccess = p1 and p1.onSuccess
+	local OnError = p1 and p1.onError
+	local UseResult = ReactModule.useCallback(function(p2, p3) --[[ Line: 39 ]]
+		-- upvalues: Debug (upval), UseRefResult (copy), GetAssetUserAuthStoreFunction (upval), PromiseModule (upval), OnSuccess (copy), FormatErrorModule (upval), OnError (copy)
+		Debug.log("info", `media_updater {p3} enqueued`)
+		local Promise = UseRefResult.current:catch(function() --[[ Line: 42 ]]
 			return nil
-		end):andThen(p2):andThen(function(p4)
-			-- upvalues: getAssetUserAuthStore (copy)
-			return getAssetUserAuthStore().pollUntilDone(p4)
-		end):andThen(function(p4)
-			-- upvalues: promiseModule (copy)
-			return if typeof(p4) == "table" and p4.status == "timed_out" then promiseModule.reject("Operation did not complete in time") elseif p4.status == "done" then p4.operation else p4
+		end):andThen(p2):andThen(function(Result) --[[ Line: 46 ]]
+			-- upvalues: GetAssetUserAuthStoreFunction (upval)
+			return GetAssetUserAuthStoreFunction().pollUntilDone(Result)
+		end):andThen(function(Result) --[[ Line: 49 ]]
+			-- upvalues: PromiseModule (upval)
+			return if typeof(Result) == "table" and Result.status == "timed_out" then PromiseModule.reject("Operation did not complete in time") elseif Result.status == "done" then Result.operation else Result
 		end)
-		var1.current = var3:catch(function()
+		UseRefResult.current = Promise:catch(function() --[[ Line: 56 ]]
 			return nil
 		end)
 		
-		return var3:andThen(function(p4)
-			-- upvalues: debug (copy), p3 (ref), onSuccess (copy)
-			debug.log("info", `media_updater {p3} succeeded`)
+		return Promise:andThen(function(Result) --[[ Line: 61 ]]
+			-- upvalues: Debug (upval), p3 (copy), OnSuccess (upval)
+			Debug.log("info", `media_updater {p3} succeeded`)
 			
-			if onSuccess then
-				onSuccess()
+			if OnSuccess then
+				OnSuccess()
 			end
-			return p4
-		end):catch(function(p4)
-			-- upvalues: formatErrorModule (copy), debug (copy), p3 (ref), onError (copy), promiseModule (copy)
-			local var4 = formatErrorModule(p4)
-			debug.log("warn", `media_updater {p3} failed`, { error = var4 })
+			return Result
+		end):catch(function(Err) --[[ Line: 68 ]]
+			-- upvalues: FormatErrorModule (upval), Debug (upval), p3 (copy), OnError (upval), PromiseModule (upval)
+			local FormatErrorModuleResult = FormatErrorModule(Err)
+			Debug.log("warn", `media_updater {p3} failed`, { error = FormatErrorModuleResult })
 			
-			if onError then
-				onError(var4)
+			if OnError then
+				OnError(FormatErrorModuleResult)
 			end
-			return promiseModule.reject(p4)
+			return PromiseModule.reject(Err)
 		end)
-	end, { onSuccess, onError })
+	end, { OnSuccess, OnError })
 	
 	return {
-		setIcon = reactModule.useCallback(function(p2, p3)
-			-- upvalues: var2 (ref), promiseModule (copy), getAssetUserAuthStore (copy)
-			return var2(function()
-				-- upvalues: promiseModule (copy), p3 (ref), getAssetUserAuthStore (copy), p2 (ref)
-				return promiseModule.resolve(p3):andThen(function(p4)
-					-- upvalues: getAssetUserAuthStore (copy), p2 (copy)
-					return getAssetUserAuthStore().updateIcon(p2, p4)
+		setIcon = ReactModule.useCallback(function(p2, p3) --[[ Line: 78 ]]
+			-- upvalues: UseResult (copy), PromiseModule (upval), GetAssetUserAuthStoreFunction (upval)
+			return UseResult(function() --[[ Line: 79 ]]
+				-- upvalues: PromiseModule (upval), p3 (copy), GetAssetUserAuthStoreFunction (upval), p2 (copy)
+				return PromiseModule.resolve(p3):andThen(function(Result) --[[ Line: 80 ]]
+					-- upvalues: GetAssetUserAuthStoreFunction (upval), p2 (upval)
+					return GetAssetUserAuthStoreFunction().updateIcon(p2, Result)
 				end)
 			end, "setIcon")
-		end, { var2 }),
-		addPreview = reactModule.useCallback(function(p2, p3)
-			-- upvalues: var2 (ref), getAssetUserAuthStore (copy), promiseModule (copy)
-			return var2(function()
-				-- upvalues: getAssetUserAuthStore (copy), promiseModule (copy), p3 (ref), p2 (ref)
-				local var3 = getAssetUserAuthStore()
+		end, { UseResult }),
+		addPreview = ReactModule.useCallback(function(p2, p3) --[[ Line: 87 ]]
+			-- upvalues: UseResult (copy), GetAssetUserAuthStoreFunction (upval), PromiseModule (upval)
+			return UseResult(function() --[[ Line: 88 ]]
+				-- upvalues: GetAssetUserAuthStoreFunction (upval), PromiseModule (upval), p3 (copy), p2 (copy)
+				local AssetUserAuthStore = GetAssetUserAuthStoreFunction()
 				
-				return promiseModule.resolve(p3):andThen(function(p4)
-					-- upvalues: var3 (ref), p2 (copy)
-					return var3.getPreviews(p2):andThen(function(p5)
-						-- upvalues: p4 (ref), var3 (copy), p2 (copy)
-						local cloned = table.clone(p5)
-						table.insert(cloned, { asset = `assets/{p4}` })
+				return PromiseModule.resolve(p3):andThen(function(Result) --[[ Line: 90 ]]
+					-- upvalues: AssetUserAuthStore (copy), p2 (upval)
+					return AssetUserAuthStore.getPreviews(p2):andThen(function(Tbl) --[[ Line: 91 ]]
+						-- upvalues: Result (copy), AssetUserAuthStore (upval), p2 (upval)
+						local Copy = table.clone(Tbl)
+						table.insert(Copy, { asset = `assets/{Result}` })
 						
-						return var3.updatePreviews(p2, cloned)
+						return AssetUserAuthStore.updatePreviews(p2, Copy)
 					end)
 				end)
 			end, "addPreview")
-		end, { var2 }),
-		replacePreview = reactModule.useCallback(function(p2, p3, p4)
-			-- upvalues: var2 (ref), getAssetUserAuthStore (copy), promiseModule (copy)
-			return var2(function()
-				-- upvalues: getAssetUserAuthStore (copy), promiseModule (copy), p3 (ref), p2 (ref), p4 (ref)
-				local var3 = getAssetUserAuthStore()
+		end, { UseResult }),
+		replacePreview = ReactModule.useCallback(function(p2, p3, Asset) --[[ Line: 103 ]]
+			-- upvalues: UseResult (copy), GetAssetUserAuthStoreFunction (upval), PromiseModule (upval)
+			return UseResult(function() --[[ Line: 104 ]]
+				-- upvalues: GetAssetUserAuthStoreFunction (upval), PromiseModule (upval), p3 (copy), p2 (copy), Asset (copy)
+				local AssetUserAuthStore = GetAssetUserAuthStoreFunction()
 				
-				return promiseModule.resolve(p3):andThen(function(p5)
-					-- upvalues: var3 (ref), p2 (copy), p4 (copy), promiseModule (copy)
-					return var3.getPreviews(p2):andThen(function(p6)
-						-- upvalues: p4 (copy), promiseModule (copy), p5 (ref), var3 (copy), p2 (copy)
-						local var4 = nil
+				return PromiseModule.resolve(p3):andThen(function(Result) --[[ Line: 106 ]]
+					-- upvalues: AssetUserAuthStore (copy), p2 (upval), Asset (upval), PromiseModule (upval)
+					return AssetUserAuthStore.getPreviews(p2):andThen(function(Tbl) --[[ Line: 107 ]]
+						-- upvalues: Asset (upval), PromiseModule (upval), Result (copy), AssetUserAuthStore (upval), p2 (upval)
+						local v1 = nil
 						
-						for i, v in p6 do
-							if v.asset == p4 then
-								var4 = i
+						for i, value in Tbl do
+							if value.asset == Asset then
+								v1 = i
 								break
 							end
 						end
-						if var4 == nil then
-							return promiseModule.reject(`Preview "{p16}" not found`)
+						if v1 == nil then
+							return PromiseModule.reject(`Preview "{Asset}" not found`)
+						else
+							local Copy = table.clone(Tbl)
+							local Copy1 = table.clone(Tbl[v1])
+							Copy1.asset = `assets/{Result}`
+							Copy[v1] = Copy1
+							
+							return AssetUserAuthStore.updatePreviews(p2, Copy)
 						end
-						local cloned = table.clone(p6)
-						local cloned_1 = table.clone(p6[var4])
-						cloned_1.asset = `assets/{p5}`
-						cloned[var4] = cloned_1
-						
-						return var3.updatePreviews(p2, cloned)
 					end)
 				end)
 			end, "replacePreview")
-		end, { var2 }),
-		removePreview = reactModule.useCallback(function(p5, p6)
-			-- upvalues: var2 (ref), getAssetUserAuthStore (copy), promiseModule (copy)
-			return var2(function()
-				-- upvalues: getAssetUserAuthStore (copy), p5 (ref), p6 (ref), promiseModule (copy)
-				local var3 = getAssetUserAuthStore()
+		end, { UseResult }),
+		removePreview = ReactModule.useCallback(function(p4, Asset) --[[ Line: 130 ]]
+			-- upvalues: UseResult (copy), GetAssetUserAuthStoreFunction (upval), PromiseModule (upval)
+			return UseResult(function() --[[ Line: 131 ]]
+				-- upvalues: GetAssetUserAuthStoreFunction (upval), p4 (copy), Asset (copy), PromiseModule (upval)
+				local AssetUserAuthStore = GetAssetUserAuthStoreFunction()
 				
-				return var3.getPreviews(p5):andThen(function(p7)
-					-- upvalues: p6 (copy), promiseModule (copy), var3 (ref), p5 (copy)
-					local var4 = nil
+				return AssetUserAuthStore.getPreviews(p4):andThen(function(Tbl) --[[ Line: 133 ]]
+					-- upvalues: Asset (upval), PromiseModule (upval), AssetUserAuthStore (copy), p4 (upval)
+					local Index = nil
 					
-					for i, v in p7 do
-						if v.asset == p6 then
-							var4 = i
+					for i, value in Tbl do
+						if value.asset == Asset then
+							Index = i
 							break
 						end
 					end
-					if var4 == nil then
-						return promiseModule.reject(`Preview "{p20}" not found`)
+					if Index == nil then
+						return PromiseModule.reject(`Preview "{Asset}" not found`)
+					else
+						local Copy = table.clone(Tbl)
+						table.remove(Copy, Index)
+						
+						return AssetUserAuthStore.updatePreviews(p4, Copy)
 					end
-					local cloned = table.clone(p7)
-					table.remove(cloned, var4)
-					
-					return var3.updatePreviews(p5, cloned)
 				end)
 			end, "removePreview")
-		end, { var2 })
+		end, { UseResult })
 	}
 end

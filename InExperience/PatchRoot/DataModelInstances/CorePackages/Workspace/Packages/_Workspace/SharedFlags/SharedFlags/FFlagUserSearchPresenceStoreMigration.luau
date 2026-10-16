@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("UserSearchPresenceStoreMigration_v2", false)

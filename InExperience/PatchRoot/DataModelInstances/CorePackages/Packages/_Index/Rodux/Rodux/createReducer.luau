@@ -1,11 +1,11 @@
-﻿return function(p1, p2)
-	return function(p3, p4)
-		-- upvalues: p1 (ref), p2 (ref)
+﻿return function(p1, p2) --[[ Line: 1 ]]
+	return function(p3, p4) --[[ Line: 2 ]]
+		-- upvalues: p1 (copy), p2 (copy)
 		if p3 == nil then
 			p3 = p1
 		end
-		local type = p2[p4.type]
+		local Callback = p2[p4.type]
 		
-		return if type then type(p3, p4) else p3
+		return if Callback then Callback(p3, p4) else p3
 	end
 end

@@ -1,5 +1,5 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local _ = require(parent.Signals)
-local _ = require(parent.SduiCoreSystem)
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local _ = require(Parent.Signals)
+local _ = require(Parent.SduiCoreSystem)
 
 return nil

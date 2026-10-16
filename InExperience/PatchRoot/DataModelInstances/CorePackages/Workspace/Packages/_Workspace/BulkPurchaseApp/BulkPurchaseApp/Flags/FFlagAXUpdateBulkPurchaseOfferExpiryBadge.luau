@@ -1,0 +1,3 @@
+﻿local FFlagAXAddOffersToBulkPurchaseModule = require(script:FindFirstAncestor("BulkPurchaseApp").Flags.FFlagAXAddOffersToBulkPurchase)
+
+return game:DefineFastFlag("AXUpdateBulkPurchaseOfferExpiryBadge", false) and FFlagAXAddOffersToBulkPurchaseModule

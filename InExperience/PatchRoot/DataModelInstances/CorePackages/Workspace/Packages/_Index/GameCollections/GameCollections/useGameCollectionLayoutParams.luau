@@ -1,18 +1,18 @@
-﻿local gameCollections = script:FindFirstAncestor("GameCollections")
-local parent = gameCollections.Parent
-local _ = require(parent.Style)
-local collectionViewsModule = require(parent.CollectionViews)
-local gameCollectionLayoutCalculatorsModule = require(gameCollections.GameCollectionLayoutCalculators)
-local collectionItemSize = collectionViewsModule.CollectionViewTypes.CollectionItemSize
-local useCollectionLayoutParams = collectionViewsModule.useCollectionLayoutParams
-local gameTileLayoutType = require(parent.GameTile).GameTileTypes.GameTileLayoutType
-local t = {
-	[gameTileLayoutType.Event] = collectionItemSize.Large,
-	[gameTileLayoutType.Wide] = collectionItemSize.Medium,
-	[gameTileLayoutType.Narrow] = collectionItemSize.Small
+﻿local GameCollections = script:FindFirstAncestor("GameCollections")
+local Parent = GameCollections.Parent
+local _ = require(Parent.Style)
+local CollectionViewsModule = require(Parent.CollectionViews)
+local GameCollectionLayoutCalculatorsModule = require(GameCollections.GameCollectionLayoutCalculators)
+local CollectionItemSize = CollectionViewsModule.CollectionViewTypes.CollectionItemSize
+local UseCollectionLayoutParamsFunction = CollectionViewsModule.useCollectionLayoutParams
+local GameTileLayoutType = require(Parent.GameTile).GameTileTypes.GameTileLayoutType
+local config = {
+	[GameTileLayoutType.Event] = CollectionItemSize.Large,
+	[GameTileLayoutType.Wide] = CollectionItemSize.Medium,
+	[GameTileLayoutType.Narrow] = CollectionItemSize.Small
 }
 
-return function(p1, p2, p3, p4, p5)
-	-- upvalues: t (ref), collectionItemSize (ref), useCollectionLayoutParams (ref), gameCollectionLayoutCalculatorsModule (ref)
-	return useCollectionLayoutParams(t[p1] or collectionItemSize.Small, p2, p3, p4, gameCollectionLayoutCalculatorsModule, p5)
+return function(p1, p2, p3, p4, p5) --[[ Line: 29 | Named "useGameCollectionLayoutParams" ]]
+	-- upvalues: config (copy), CollectionItemSize (copy), UseCollectionLayoutParamsFunction (copy), GameCollectionLayoutCalculatorsModule (copy)
+	return UseCollectionLayoutParamsFunction(config[p1] or CollectionItemSize.Small, p2, p3, p4, GameCollectionLayoutCalculatorsModule, p5)
 end

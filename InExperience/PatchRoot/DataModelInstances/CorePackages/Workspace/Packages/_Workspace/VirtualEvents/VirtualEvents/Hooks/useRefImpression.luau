@@ -1,39 +1,40 @@
-﻿local reactModule = require(script:FindFirstAncestor("VirtualEvents").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("VirtualEvents").Parent.React)
 
-return function(p1, p2)
-	-- upvalues: reactModule (ref)
-	local var1 = reactModule.useRef(false)
-	local var2 = reactModule.useCallback(function(p3, p4)
-		-- upvalues: var1 (ref), p2 (ref)
-		if p3.AbsolutePosition.Y <= p4.AbsoluteSize.Y then
-			var1.current = true
-			p2()
+return function(p1, Callback) --[[ Line: 5 | Named "useRefImpression" ]]
+	-- upvalues: ReactModule (copy)
+	local UseRefResult = ReactModule.useRef(false)
+	local UseResult = ReactModule.useCallback(function(Frame, Frame1) --[[ Line: 8 ]]
+		-- upvalues: UseRefResult (copy), Callback (copy)
+		if Frame.AbsolutePosition.Y <= Frame1.AbsoluteSize.Y then
+			UseRefResult.current = true
+			Callback()
 		end
-	end, { p2 })
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), p1 (ref), var2 (ref)
-		if var1.current then return end
-		local current = p1.current
-		local var3 = nil
+	end, { Callback })
+	ReactModule.useEffect(function() --[[ Line: 15 ]]
+		-- upvalues: UseRefResult (copy), p1 (copy), UseResult (copy)
+		if UseRefResult.current then return end
+		local Current = p1.current
+		local Connection = nil
 		
-		if current then
-			local screenGui = current:FindFirstAncestorWhichIsA("ScreenGui")
+		if Current then
+			local ScreenGui = Current:FindFirstAncestorWhichIsA("ScreenGui")
 			
-			if screenGui then
-				var2(current, screenGui)
-				var3 = current:GetPropertyChangedSignal("AbsolutePosition"):Connect(function()
-					-- upvalues: var1 (copy), var2 (copy), current (ref), screenGui (ref)
-					if var1.current then
+			if ScreenGui then
+				UseResult(Current, ScreenGui)
+				Connection = Current:GetPropertyChangedSignal("AbsolutePosition"):Connect(function() --[[ Line: 29 ]]
+					-- upvalues: UseRefResult (upval), UseResult (upval), Current (copy), ScreenGui (copy)
+					if not UseRefResult.current then
+						UseResult(Current, ScreenGui)
+						
 						return
 					end
-					var2(current, screenGui)
 				end)
 			end
 		end
-		return function()
-			-- upvalues: var3 (write)
-			if var3 then
-				var3:Disconnect()
+		return function() --[[ Line: 39 ]]
+			-- upvalues: Connection (ref)
+			if Connection then
+				Connection:Disconnect()
 			end
 		end
 	end)

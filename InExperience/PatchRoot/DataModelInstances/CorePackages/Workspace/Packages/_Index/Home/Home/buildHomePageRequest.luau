@@ -1,24 +1,24 @@
-﻿local buildHomeSystemContextFeaturesModule = require(script:FindFirstAncestor("Home").buildHomeSystemContextFeatures)
+﻿local BuildHomeSystemContextFeaturesModule = require(script:FindFirstAncestor("Home").buildHomeSystemContextFeatures)
 
-local function buildContextualFeatures(p1)
-	-- upvalues: buildHomeSystemContextFeaturesModule (ref)
-	local var1 = buildHomeSystemContextFeaturesModule()
+local function buildContextualFeatures(p1) --[[ Line: 25 ]]
+	-- upvalues: BuildHomeSystemContextFeaturesModule (copy)
+	local HomeSystemContextFeaturesModule = BuildHomeSystemContextFeaturesModule()
 	
 	if typeof(p1.contextualFeatures) == "table" then
-		for i, v in p1.contextualFeatures do
-			if typeof(i) == "string" and v ~= nil then
-				var1[i] = tostring(v)
+		for i, contextualFeature in p1.contextualFeatures do
+			if typeof(i) == "string" and contextualFeature ~= nil then
+				HomeSystemContextFeaturesModule[i] = tostring(contextualFeature)
 			end
 		end
 	end
 	if p1.requestIntent and p1.requestIntent ~= "" then
-		var1.request_intent = p1.requestIntent
+		HomeSystemContextFeaturesModule.request_intent = p1.requestIntent
 	end
-	return if next(var1) == nil then nil else var1
+	return if next(HomeSystemContextFeaturesModule) == nil then nil else HomeSystemContextFeaturesModule
 end
 
-return function(p2, p3)
-	-- upvalues: buildContextualFeatures (ref)
+return function(p2, p3) --[[ Line: 46 | Named "buildHomePageRequest" ]]
+	-- upvalues: buildContextualFeatures (copy)
 	local t = {}
 	
 	if p3 then

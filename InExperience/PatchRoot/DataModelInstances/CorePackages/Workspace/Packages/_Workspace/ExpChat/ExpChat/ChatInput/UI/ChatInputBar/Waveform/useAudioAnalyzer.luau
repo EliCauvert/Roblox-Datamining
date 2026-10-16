@@ -1,29 +1,28 @@
-﻿local reactModule = require(script:FindFirstAncestor("ExpChat").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("ExpChat").Parent.React)
 
-return function(p1)
-	-- upvalues: reactModule (ref)
-	local var1 = reactModule.useRef(nil)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var1 (ref)
-		if p1 then
-			local waveformAnalyzer = Instance.new("AudioAnalyzer")
-			waveformAnalyzer.SpectrumEnabled = false
-			waveformAnalyzer.Name = "WaveformAnalyzer"
-			waveformAnalyzer.Parent = p1.Parent
-			var1.current = waveformAnalyzer
-			local wire = Instance.new("Wire")
-			wire.SourceInstance = p1
-			wire.TargetInstance = waveformAnalyzer
-			wire.Parent = p1.Parent
-			
-			return function()
-				-- upvalues: wire (ref), waveformAnalyzer (ref), var1 (copy)
-				wire:Destroy()
-				waveformAnalyzer:Destroy()
-				var1.current = nil
-			end
+return function(SourceInstance) --[[ Line: 10 | Named "useAudioAnalyzer" ]]
+	-- upvalues: ReactModule (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	ReactModule.useEffect(function() --[[ Line: 13 ]]
+		-- upvalues: SourceInstance (copy), UseRefResult (copy)
+		if not SourceInstance then return end
+		local WaveformAnalyzer = Instance.new("AudioAnalyzer")
+		WaveformAnalyzer.SpectrumEnabled = false
+		WaveformAnalyzer.Name = "WaveformAnalyzer"
+		WaveformAnalyzer.Parent = SourceInstance.Parent
+		UseRefResult.current = WaveformAnalyzer
+		local Wire = Instance.new("Wire")
+		Wire.SourceInstance = SourceInstance
+		Wire.TargetInstance = WaveformAnalyzer
+		Wire.Parent = SourceInstance.Parent
+		
+		return function() --[[ Line: 29 ]]
+			-- upvalues: Wire (copy), WaveformAnalyzer (copy), UseRefResult (upval)
+			Wire:Destroy()
+			WaveformAnalyzer:Destroy()
+			UseRefResult.current = nil
 		end
-	end, { p1 })
+	end, { SourceInstance })
 	
-	return var1
+	return UseRefResult
 end

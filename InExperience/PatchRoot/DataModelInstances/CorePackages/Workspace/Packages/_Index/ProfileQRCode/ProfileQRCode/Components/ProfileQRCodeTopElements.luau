@@ -1,1 +1,1 @@
-﻿return require(script.ProfileQRCodeTopElements)
+﻿return (require(script.ProfileQRCodeTopElements))

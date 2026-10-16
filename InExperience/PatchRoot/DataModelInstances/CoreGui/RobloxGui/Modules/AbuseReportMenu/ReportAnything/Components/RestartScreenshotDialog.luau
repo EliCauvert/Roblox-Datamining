@@ -1,118 +1,118 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local reactModule = require(corePackagesService.Packages.React)
-local buttonStack = UIBloxModule.App.Button.ButtonStack
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local headerBar = UIBloxModule.App.Bar.HeaderBar
-local useStyle = UIBloxModule.Core.Style.useStyle
-local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
-local dividerModule = require(script.Parent.Parent.Components.Divider)
+﻿local CorePackages = game:GetService("CorePackages")
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local ReactModule = require(CorePackages.Packages.React)
+local ButtonStack = UIBloxModule.App.Button.ButtonStack
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local HeaderBar = UIBloxModule.App.Bar.HeaderBar
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
+local DividerModule = require(script.Parent.Parent.Components.Divider)
 
-return function(p1)
-	-- upvalues: useStyle (ref), reactModule (ref), headerBar (ref), robloxTranslatorModule (ref), dividerModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), buttonStack (ref), buttonType (ref)
-	local var1 = useStyle()
-	local theme = var1.Theme
-	local font = var1.Font
-	local var2 = 48
-	local var3 = 180
-	local var4 = 50
+return function(p1) --[[ Line: 29 | Named "RestartScreenshotDialog" ]]
+	-- upvalues: UseStyleFunction (copy), ReactModule (copy), HeaderBar (copy), RobloxTranslatorModule (copy), DividerModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ButtonStack (copy), ButtonType (copy)
+	local UseStyleResult = UseStyleFunction()
+	local Theme = UseStyleResult.Theme
+	local UseStyleResultFont = UseStyleResult.Font
+	local YOffset2 = 48
+	local YOffset1 = 180
+	local YOffset = 50
 	
 	if p1.isSmallPortraitMode then
-		var2 = 84
-		var3 = 260
-		var4 = 100
+		YOffset2 = 84
+		YOffset1 = 260
+		YOffset = 100
 	end
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		ZIndex = 5,
-		Size = UDim2.new(0, if p1.isSmallPortraitMode then 343 else 480, 0, var3),
+		Size = UDim2.new(0, if p1.isSmallPortraitMode then 343 else 480, 0, YOffset1),
 		AnchorPoint = Vector2.new(0.5, 0.5),
 		Position = UDim2.new(0.5, 0, 0.5, 0),
 		BackgroundColor3 = Color3.fromHex("#4F545F")
 	}, {
-		Corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) }),
-		HeaderAndContent = reactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
-			Layout = reactModule.createElement("UIListLayout", {
+		Corner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) }),
+		HeaderAndContent = ReactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
+			Layout = ReactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Vertical,
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
 				SortOrder = Enum.SortOrder.LayoutOrder
 			}),
-			Header = reactModule.createElement(headerBar, {
+			Header = ReactModule.createElement(HeaderBar, {
 				backgroundTransparency = 1,
 				barHeight = 48,
 				LayoutOrder = 1,
-				renderLeft = function() end,
-				renderRight = function() end,
-				title = robloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Action.RetakeScene")
+				renderLeft = function() --[[ Line: 66 ]] end,
+				renderRight = function() --[[ Line: 68 ]] end,
+				title = RobloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Action.RetakeScene")
 			}),
-			Divider = reactModule.createElement(dividerModule, { LayoutOrder = 2 }),
-			Description = reactModule.createElement("Frame", {
+			Divider = ReactModule.createElement(DividerModule, { LayoutOrder = 2 }),
+			Description = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 3,
-				Size = UDim2.new(1, 0, 1, (-var2) - 1)
+				Size = UDim2.new(1, 0, 1, -YOffset2 - 1)
 			}, {
-				Padding = reactModule.createElement("UIPadding", {
+				Padding = ReactModule.createElement("UIPadding", {
 					PaddingTop = UDim.new(0, 8),
 					PaddingBottom = UDim.new(0, 8),
 					PaddingLeft = UDim.new(0, 16),
 					PaddingRight = UDim.new(0, 16)
 				}),
-				TextBody = reactModule.createElement("TextLabel", {
+				TextBody = ReactModule.createElement("TextLabel", {
 					LayoutOrder = 3,
 					TextSize = 16,
 					TextWrapped = true,
 					BackgroundTransparency = 1,
-					Text = robloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Message.RetakeScene"),
-					Font = if foundationFontFaceMigration then nil else font.Body.Font,
-					FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Tokens.Typography.BodyLarge.Font) else nil,
-					TextColor3 = theme.TextEmphasis.Color,
-					TextTransparency = theme.TextEmphasis.Transparency,
+					Text = RobloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Message.RetakeScene"),
+					Font = if FoundationFontFaceMigration then nil else UseStyleResultFont.Body.Font,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
+					TextColor3 = Theme.TextEmphasis.Color,
+					TextTransparency = Theme.TextEmphasis.Transparency,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextYAlignment = Enum.TextYAlignment.Top,
-					Size = UDim2.new(1, 0, 0, var4)
+					Size = UDim2.new(1, 0, 0, YOffset)
 				})
 			})
 		}),
-		Footer = reactModule.createElement("Frame", {
+		Footer = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			LayoutOrder = 4,
-			Size = UDim2.new(1, 0, 0, var2),
-			Position = UDim2.new(0, 0, 1, -var2)
+			Size = UDim2.new(1, 0, 0, YOffset2),
+			Position = UDim2.new(0, 0, 1, -YOffset2)
 		}, {
-			Padding = reactModule.createElement("UIPadding", {
+			Padding = ReactModule.createElement("UIPadding", {
 				PaddingTop = UDim.new(0, 6),
 				PaddingBottom = UDim.new(0, 6),
 				PaddingLeft = UDim.new(0, 16),
 				PaddingRight = UDim.new(0, 16)
 			}),
-			ActionButtons = reactModule.createElement(buttonStack, {
+			ActionButtons = ReactModule.createElement(ButtonStack, {
 				forcedFillDirection = if p1.isSmallPortraitMode then Enum.FillDirection.Vertical else Enum.FillDirection.Horizontal,
 				buttons = {
 					{
-						buttonType = buttonType.Secondary,
+						buttonType = ButtonType.Secondary,
 						props = if p1.isSmallPortraitMode then {
 							onActivated = p1.onCancel,
-							text = robloxTranslatorModule:FormatByKey("InGame.InspectMenu.Action.Cancel"),
+							text = RobloxTranslatorModule:FormatByKey("InGame.InspectMenu.Action.Cancel"),
 							size = UDim2.new(1, 0, 0, 28),
-							fontStyle = font.Body2
+							fontStyle = UseStyleResultFont.Body2
 						} else {
 							onActivated = p1.onCancel,
-							text = robloxTranslatorModule:FormatByKey("InGame.InspectMenu.Action.Cancel")
+							text = RobloxTranslatorModule:FormatByKey("InGame.InspectMenu.Action.Cancel")
 						}
 					},
 					{
-						buttonType = buttonType.PrimarySystem,
+						buttonType = ButtonType.PrimarySystem,
 						props = if p1.isSmallPortraitMode then {
 							onActivated = p1.onRestart,
-							text = robloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Action.BackToExperience"),
+							text = RobloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Action.BackToExperience"),
 							size = UDim2.new(1, 0, 0, 28),
-							fontStyle = font.Body2
+							fontStyle = UseStyleResultFont.Body2
 						} else {
 							onActivated = p1.onRestart,
-							text = robloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Action.BackToExperience")
+							text = RobloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Action.BackToExperience")
 						}
 					}
 				}

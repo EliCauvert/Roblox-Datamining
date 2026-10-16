@@ -1,66 +1,68 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local dateTime = require(parent.Time).DateTime
-local getConversationTimestampModule = require(appChat.Utils.getConversationTimestamp)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local _DateTime = require(Parent.Time).DateTime
+local GetConversationTimestampModule = require(AppChat.Utils.getConversationTimestamp)
 
-local function computeTimestamp(p1)
-	-- upvalues: getConversationTimestampModule (ref), dateTime (ref)
-	return if p1 == nil then "" else getConversationTimestampModule(dateTime.fromUnixTimestamp(p1))
+local function computeTimestamp(p1) --[[ Line: 19 ]]
+	-- upvalues: GetConversationTimestampModule (copy), _DateTime (copy)
+	return if p1 == nil then "" else GetConversationTimestampModule(_DateTime.fromUnixTimestamp(p1))
 end
 
-return function(value, p1)
-	-- upvalues: reactModule (ref), signalsModule (ref), computeTimestamp (ref), signalsReactModule (ref)
-	local var1 = reactModule.useState(function()
-		-- upvalues: signalsModule (copy)
-		local var2, var3 = signalsModule.createSignal(0)
+return function(Callback1, Callback) --[[ Line: 28 | Named "useRelativeTimestampSignalBinding" ]]
+	-- upvalues: ReactModule (copy), SignalsModule (copy), computeTimestamp (copy), SignalsReactModule (copy)
+	local UseStateResult = ReactModule.useState(function() --[[ Line: 32 ]]
+		-- upvalues: SignalsModule (upval)
+		local Signal, Signal2 = SignalsModule.createSignal(0)
 		
-		return { signal = var2, setSignal = var3 }
+		return { signal = Signal, setSignal = Signal2 }
 	end)
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref)
-		local var2 = false
-		local var3 = 0
+	ReactModule.useEffect(function() --[[ Line: 40 ]]
+		-- upvalues: UseStateResult (copy)
+		local Flag = false
+		local Count = 0
 		
-		local function scheduleUpdate()
-			-- upvalues: var2 (write), var3 (write), var1 (copy), scheduleUpdate (ref)
-			task.delay(30, function()
-				-- upvalues: var2 (copy), var3 (copy), var1 (copy), scheduleUpdate (copy)
-				if var2 then
+		local function scheduleUpdate() --[[ Line: 44 ]]
+			-- upvalues: Flag (ref), Count (ref), UseStateResult (upval), scheduleUpdate (copy)
+			task.delay(30, function() --[[ Line: 45 ]]
+				-- upvalues: Flag (upval), Count (upval), UseStateResult (upval), scheduleUpdate (upval)
+				if not Flag then
+					Count += 1
+					UseStateResult.setSignal(Count)
+					scheduleUpdate()
+					
 					return
 				end
-				var3 += 1
-				var1.setSignal(var3)
-				scheduleUpdate()
 			end)
 		end
 		
-		task.delay(30, function()
-			-- upvalues: var2 (write), var3 (write), var1 (copy), scheduleUpdate (ref)
-			if var2 then
+		task.delay(30, function() --[[ Line: 45 ]]
+			-- upvalues: Flag (ref), Count (ref), UseStateResult (upval), scheduleUpdate (copy)
+			if not Flag then
+				Count += 1
+				UseStateResult.setSignal(Count)
+				scheduleUpdate()
+				
 				return
 			end
-			var3 += 1
-			var1.setSignal(var3)
-			scheduleUpdate()
 		end)
 		
-		return function()
-			-- upvalues: var2 (write)
-			var2 = true
+		return function() --[[ Line: 57 ]]
+			-- upvalues: Flag (ref)
+			Flag = true
 		end
-	end, { var1 })
-	local var2 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: var1 (ref), computeTimestamp (copy), p1 (ref)
-		var1.signal(p3)
+	end, { UseStateResult })
+	local UseResult = ReactModule.useCallback(function(p1, p2) --[[ Line: 62 ]]
+		-- upvalues: UseStateResult (copy), computeTimestamp (upval), Callback (copy)
+		UseStateResult.signal(p2)
 		
-		return computeTimestamp(p1(p2, p3))
-	end, { var1, p1 })
+		return computeTimestamp(Callback(p1, p2))
+	end, { UseStateResult, Callback })
 	
-	return signalsReactModule.useSignalBinding(function(p2)
-		-- upvalues: var2 (ref), value (ref)
-		return var2(value(p2), p2)
+	return SignalsReactModule.useSignalBinding(function(p1) --[[ Line: 67 ]]
+		-- upvalues: UseResult (copy), Callback1 (copy)
+		return UseResult(Callback1(p1), p1)
 	end)
 end

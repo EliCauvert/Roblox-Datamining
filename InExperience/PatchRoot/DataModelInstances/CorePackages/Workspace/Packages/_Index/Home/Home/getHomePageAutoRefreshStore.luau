@@ -1,7 +1,7 @@
-﻿local home = script:FindFirstAncestor("Home")
-local createHomePageAutoRefreshStoreModule = require(home.createHomePageAutoRefreshStore)
+﻿local Home = script:FindFirstAncestor("Home")
+local CreateHomePageAutoRefreshStoreModule = require(Home.createHomePageAutoRefreshStore)
 
-return require(home.Parent.Signals).createComputed(function()
-	-- upvalues: createHomePageAutoRefreshStoreModule (ref)
-	return createHomePageAutoRefreshStoreModule()
+return require(Home.Parent.Signals).createComputed(function() --[[ Line: 7 ]]
+	-- upvalues: CreateHomePageAutoRefreshStoreModule (copy)
+	return CreateHomePageAutoRefreshStoreModule()
 end)

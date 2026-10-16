@@ -1,59 +1,59 @@
-﻿local parent = script:FindFirstAncestor("AppBlox").Parent
-local UIBloxModule = require(parent.UIBlox)
-local guiService = game:GetService("GuiService")
-local useSelectionCursor = UIBloxModule.App.SelectionImage.useSelectionCursor
-local cursorKind = UIBloxModule.App.SelectionImage.CursorKind
+﻿local Parent = script:FindFirstAncestor("AppBlox").Parent
+local UIBloxModule = require(Parent.UIBlox)
+local GuiService = game:GetService("GuiService")
+local UseSelectionCursorFunction = UIBloxModule.App.SelectionImage.useSelectionCursor
+local CursorKind = UIBloxModule.App.SelectionImage.CursorKind
 local _ = require(script.Parent.Types)
-local reactModule = require(parent.React)
+local ReactModule = require(Parent.React)
 
-local function onSelectionGained(p1)
-	-- upvalues: guiService (ref)
-	guiService:Select(p1)
+local function onSelectionGained(SelectionParent) --[[ Line: 21 ]]
+	-- upvalues: GuiService (copy)
+	GuiService:Select(SelectionParent)
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), useSelectionCursor (ref), cursorKind (ref), onSelectionGained (ref)
-	local item = p1.item
-	local safeArea = p1.safeArea
-	local itemPadding = p1.itemPadding
-	local var1 = reactModule.useMemo(function()
-		-- upvalues: item (ref)
-		return item.renderComponent()
-	end, { item.renderComponent })
-	local var2, var3 = reactModule.useBinding(0)
+return function(p1) --[[ Line: 25 | Named "DetailsPageRenderItem" ]]
+	-- upvalues: ReactModule (copy), UseSelectionCursorFunction (copy), CursorKind (copy), onSelectionGained (copy)
+	local Item = p1.item
+	local SafeArea = p1.safeArea
+	local ItemPadding = p1.itemPadding
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 30 ]]
+		-- upvalues: Item (copy)
+		return Item.renderComponent()
+	end, { Item.renderComponent })
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
 	
-	return reactModule.createElement("CanvasGroup", {
-		key = item.key,
+	return ReactModule.createElement("CanvasGroup", {
+		key = Item.key,
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
-		ref = reactModule.useRef(nil),
-		[reactModule.Change.AbsolutePosition] = reactModule.useCallback(function(p2)
-			-- upvalues: safeArea (ref), itemPadding (ref), var3 (ref)
-			local scrollingFrame = p2:FindFirstAncestorOfClass("ScrollingFrame")
+		ref = ReactModule.useRef(nil),
+		[ReactModule.Change.AbsolutePosition] = ReactModule.useCallback(function(Frame: Frame) --[[ Line: 37 ]]
+			-- upvalues: SafeArea (copy), ItemPadding (copy), UseBindingResult2 (copy)
+			local ScrollingFrame = Frame:FindFirstAncestorOfClass("ScrollingFrame")
 			
-			if scrollingFrame == nil then
+			if ScrollingFrame == nil then
 				return nil
 			end
-			local var4 = p2.AbsolutePosition.Y - scrollingFrame.AbsolutePosition.Y - safeArea.Y
-			local var5 = -(p2.AbsoluteSize.Y + itemPadding)
+			local YDelta = Frame.AbsolutePosition.Y - ScrollingFrame.AbsolutePosition.Y - SafeArea.Y
+			local Negated = -(Frame.AbsoluteSize.Y + ItemPadding)
 			
-			if var4 < 1 and var5 < var4 + safeArea.Y + 1 then
-				var3(var4 / var5)
+			if YDelta < 1 and Negated < YDelta + SafeArea.Y + 1 then
+				UseBindingResult2(YDelta / Negated)
 			else
-				var3(0)
+				UseBindingResult2(0)
 			end
 			return nil
-		end, { safeArea, itemPadding }),
-		GroupTransparency = var2,
+		end, { SafeArea, ItemPadding }),
+		GroupTransparency = UseBindingResult,
 		BackgroundTransparency = 1,
-		Selectable = item.useSelectionBumper,
-		SelectionImageObject = useSelectionCursor(cursorKind.Invisible),
-		[reactModule.Event.SelectionGained] = onSelectionGained
+		Selectable = Item.useSelectionBumper,
+		SelectionImageObject = UseSelectionCursorFunction(CursorKind.Invisible),
+		[ReactModule.Event.SelectionGained] = onSelectionGained
 	}, {
-		Padding = reactModule.createElement("UIPadding", {
-			PaddingLeft = UDim.new(0, safeArea.X),
-			PaddingRight = UDim.new(0, safeArea.X)
+		Padding = ReactModule.createElement("UIPadding", {
+			PaddingLeft = UDim.new(0, SafeArea.X),
+			PaddingRight = UDim.new(0, SafeArea.X)
 		}),
-		View = var1
+		View = UseMemoResult
 	})
 end

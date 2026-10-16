@@ -1,84 +1,79 @@
-﻿local parent = script:FindFirstAncestor("SponsoredAdViewability").Parent
-local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
-local useViewportBounds = require(parent.ViewportUtils).useViewportBounds
-local sponsoredAdViewabilityDetectorModule = require(script.Parent.SponsoredAdViewabilityDetector)
-local sponsoredAdViewabilityTelemetryModule = require(script.Parent.sponsoredAdViewabilityTelemetry)
-local fFlagLuaAppSponsoredAdVideoViewabilityEnabled = sharedFlagsModule.FFlagLuaAppSponsoredAdVideoViewabilityEnabled
+﻿local Parent = script:FindFirstAncestor("SponsoredAdViewability").Parent
+local ReactModule = require(Parent.React)
+local UseViewportBoundsFunction = require(Parent.ViewportUtils).useViewportBounds
+local SponsoredAdViewabilityDetectorModule = require(script.Parent.SponsoredAdViewabilityDetector)
+local SponsoredAdViewabilityTelemetryModule = require(script.Parent.sponsoredAdViewabilityTelemetry)
+local FFlagLuaAppSponsoredAdVideoViewabilityEnabled = require(Parent.SharedFlags).FFlagLuaAppSponsoredAdVideoViewabilityEnabled
 
-return function(p1, p2, p3)
-	-- upvalues: useViewportBounds (ref), reactModule (ref), sponsoredAdViewabilityDetectorModule (ref), sponsoredAdViewabilityTelemetryModule (ref), fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref)
-	local var1 = useViewportBounds()
-	local var2 = reactModule.useRef(nil)
+return function(p1, Current, AppLifecycleObserverService) --[[ Line: 19 | Named "useSponsoredAdViewabilityDetector" ]]
+	-- upvalues: UseViewportBoundsFunction (copy), ReactModule (copy), SponsoredAdViewabilityDetectorModule (copy), SponsoredAdViewabilityTelemetryModule (copy), FFlagLuaAppSponsoredAdVideoViewabilityEnabled (copy)
+	local UseViewportBoundsResult = UseViewportBoundsFunction()
+	local UseRefResult = ReactModule.useRef(nil)
 	
-	if var2.current == nil then
-		var2.current = sponsoredAdViewabilityDetectorModule.new({
-			onSessionStart = sponsoredAdViewabilityTelemetryModule.logSponsoredAdLoad,
-			onMilestone = sponsoredAdViewabilityTelemetryModule.logSponsoredAdViewableImpression,
-			onVideoProgress = if fFlagLuaAppSponsoredAdVideoViewabilityEnabled then sponsoredAdViewabilityTelemetryModule.logSponsoredAdVideoProgress else nil,
-			onUnload = sponsoredAdViewabilityTelemetryModule.logSponsoredAdUnload
+	if UseRefResult.current == nil then
+		UseRefResult.current = SponsoredAdViewabilityDetectorModule.new({
+			onSessionStart = SponsoredAdViewabilityTelemetryModule.logSponsoredAdLoad,
+			onMilestone = SponsoredAdViewabilityTelemetryModule.logSponsoredAdViewableImpression,
+			onVideoProgress = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then SponsoredAdViewabilityTelemetryModule.logSponsoredAdVideoProgress else nil,
+			onUnload = SponsoredAdViewabilityTelemetryModule.logSponsoredAdUnload
 		})
 	end
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), var1 (ref)
-		local current = var2.current
+	ReactModule.useEffect(function() --[[ Line: 39 ]]
+		-- upvalues: UseRefResult (copy), UseViewportBoundsResult (copy)
+		local Current = UseRefResult.current
 		
-		if current ~= nil then
-			current:setViewportBounds(var1)
+		if Current ~= nil then
+			Current:setViewportBounds(UseViewportBoundsResult)
 		end
-	end, { var1 })
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), p1 (ref)
-		local current = var2.current
+	end, { UseViewportBoundsResult })
+	ReactModule.useEffect(function() --[[ Line: 49 ]]
+		-- upvalues: UseRefResult (copy), p1 (copy)
+		local Current = UseRefResult.current
 		
-		if current == nil then return end
-		current:setSurfaceScope(p1)
+		if Current == nil then return end
+		Current:setSurfaceScope(p1)
 		
-		if p1 == nil then
-			return
-		end
-		current:start()
+		if p1 == nil then return end
+		Current:start()
 		
-		return function()
-			-- upvalues: current (ref)
-			current:reset()
+		return function() --[[ Line: 62 ]]
+			-- upvalues: Current (copy)
+			Current:reset()
 		end
 	end, { p1 })
-	reactModule.useEffect(function()
-		-- upvalues: p3 (ref), var2 (ref)
-		if p3 == nil then return end
-		local current = var2.current
+	ReactModule.useEffect(function() --[[ Line: 67 ]]
+		-- upvalues: AppLifecycleObserverService (copy), UseRefResult (copy)
+		if AppLifecycleObserverService == nil then return end
+		local Current = UseRefResult.current
 		
-		if current == nil then
-			return
-		end
-		local list = {
-			p3.OnHide:Connect(function()
-				-- upvalues: current (ref)
-				current:pause()
+		if Current == nil then return end
+		local Connections = {
+			AppLifecycleObserverService.OnHide:Connect(function() --[[ Line: 77 ]]
+				-- upvalues: Current (copy)
+				Current:pause()
 			end),
-			p3.OnUnhide:Connect(function()
-				-- upvalues: current (ref)
-				current:resume()
+			AppLifecycleObserverService.OnUnhide:Connect(function() --[[ Line: 80 ]]
+				-- upvalues: Current (copy)
+				Current:resume()
 			end)
 		}
 		
-		return function()
-			-- upvalues: list (ref)
-			for i, v in list do
-				v:Disconnect()
+		return function() --[[ Line: 84 ]]
+			-- upvalues: Connections (copy)
+			for _, connection in Connections do
+				connection:Disconnect()
 			end
 		end
-	end, { p3 })
-	local var3 = reactModule.useRef(p2)
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), var3 (ref), p2 (ref)
-		local current = var2.current
-		local current_1 = var3.current
-		var3.current = p2
+	end, { AppLifecycleObserverService })
+	local UseRefResult1 = ReactModule.useRef(Current)
+	ReactModule.useEffect(function() --[[ Line: 95 ]]
+		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), Current (copy)
+		local Current1 = UseRefResult.current
+		local Current2 = UseRefResult1.current
+		UseRefResult1.current = Current
 		
-		if current ~= nil and current_1 ~= nil and current_1 ~= p2 then
-			current:onFeedRefresh()
+		if Current1 ~= nil and Current2 ~= nil and Current2 ~= Current then
+			Current1:onFeedRefresh()
 		end
-	end, { p2 })
+	end, { Current })
 end

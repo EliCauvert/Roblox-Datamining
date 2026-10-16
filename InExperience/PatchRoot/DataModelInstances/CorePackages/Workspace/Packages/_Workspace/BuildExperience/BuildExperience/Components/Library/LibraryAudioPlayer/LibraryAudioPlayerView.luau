@@ -1,16 +1,16 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local libraryAudioPlayerContentViewModule = require(script.Parent.LibraryAudioPlayerContentView)
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local LibraryAudioPlayerContentViewModule = require(script.Parent.LibraryAudioPlayerContentView)
 
-return function(p1)
-	-- upvalues: foundationModule (ref), reactModule (ref), libraryAudioPlayerContentViewModule (ref)
-	local var1 = foundationModule.Hooks.useScaledValue(168)
+return function(p1) --[[ Line: 10 | Named "LibraryAudioPlayerView" ]]
+	-- upvalues: FoundationModule (copy), ReactModule (copy), LibraryAudioPlayerContentViewModule (copy)
+	local UseScaledValueResult = FoundationModule.Hooks.useScaledValue(168)
 	
-	return if p1.status == "Failed" then reactModule.createElement(foundationModule.Text, {
+	return if p1.status == "Failed" then ReactModule.createElement(FoundationModule.Text, {
 		tag = "auto-xy text-body-medium content-default",
 		Text = p1.unavailableText
-	}) elseif p1.status == "Ready" then reactModule.createElement(libraryAudioPlayerContentViewModule, {
+	}) elseif p1.status == "Ready" then ReactModule.createElement(LibraryAudioPlayerContentViewModule, {
 		isCompact = p1.isCompact,
 		title = p1.title,
 		artist = p1.artist,
@@ -21,9 +21,9 @@ return function(p1)
 		onSeek = p1.onSeek,
 		onSeekStarted = p1.onSeekStarted,
 		onSeekEnded = p1.onSeekEnded
-	}) else reactModule.createElement(foundationModule.Skeleton, {
+	}) else ReactModule.createElement(FoundationModule.Skeleton, {
 		testId = "Library.Preview.SoundLoading",
-		Size = UDim2.fromOffset(var1, var1),
-		radius = foundationModule.Enums.Radius.Medium
+		Size = UDim2.fromOffset(UseScaledValueResult, UseScaledValueResult),
+		radius = FoundationModule.Enums.Radius.Medium
 	})
 end

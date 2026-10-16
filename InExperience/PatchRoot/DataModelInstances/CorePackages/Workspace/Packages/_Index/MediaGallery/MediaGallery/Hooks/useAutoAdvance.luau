@@ -1,46 +1,47 @@
-﻿local mediaGallery = script:FindFirstAncestor("MediaGallery")
-local reactModule = require(mediaGallery.Parent.React)
-local mediaGalleryConstantsModule = require(mediaGallery.MediaGalleryConstants)
-local useGuiObjectVisibilityModule = require(mediaGallery.Hooks.useGuiObjectVisibility)
+﻿local MediaGallery = script:FindFirstAncestor("MediaGallery")
+local ReactModule = require(MediaGallery.Parent.React)
+local MediaGalleryConstantsModule = require(MediaGallery.MediaGalleryConstants)
+local UseGuiObjectVisibilityModule = require(MediaGallery.Hooks.useGuiObjectVisibility)
 
-return function(p1)
-	-- upvalues: mediaGalleryConstantsModule (ref), reactModule (ref), useGuiObjectVisibilityModule (ref)
-	local intervalSeconds = p1.intervalSeconds or mediaGalleryConstantsModule.AUTO_ADVANCE_DURATION_SECONDS
-	local var1, var2 = reactModule.useBinding(0)
-	local var3, var4 = reactModule.useBinding(0)
-	local var5 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref), var4 (ref)
-		var2(0)
-		var4(0)
+return function(p1) --[[ Line: 39 | Named "useAutoAdvance" ]]
+	-- upvalues: MediaGalleryConstantsModule (copy), ReactModule (copy), UseGuiObjectVisibilityModule (copy)
+	local IntervalSeconds = p1.intervalSeconds or MediaGalleryConstantsModule.AUTO_ADVANCE_DURATION_SECONDS
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
+	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(0)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 45 ]]
+		-- upvalues: UseBindingResult2 (copy), UseBindingResult2_1 (copy)
+		UseBindingResult2(0)
+		UseBindingResult2_1(0)
 	end, {})
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref)
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 50 ]]
+		-- upvalues: p1 (copy)
 		if p1.enabled then
 			p1.scrollRight()
 			
 			return
 		end
 	end, { p1.enabled, p1.scrollRight })
-	useGuiObjectVisibilityModule(p1.galleryRef, p1.enabled and (not p1.isMediaGalleryOccluded and not p1.isAutoAdvanceTimerSuspended), reactModule.useCallback(function(p2)
-		-- upvalues: var1 (ref), intervalSeconds (ref), var2 (ref), var4 (ref), p1 (ref)
-		local var7 = var1:getValue() + p2
+	UseGuiObjectVisibilityModule(p1.galleryRef, p1.enabled and (not p1.isMediaGalleryOccluded and not p1.isAutoAdvanceTimerSuspended), ReactModule.useCallback(function(p2) --[[ Line: 57 ]]
+		-- upvalues: UseBindingResult (copy), IntervalSeconds (copy), UseBindingResult2 (copy), UseBindingResult2_1 (copy), p1 (copy)
+		local NewValue = UseBindingResult:getValue() + p2
 		
-		if intervalSeconds <= var7 then
-			var2(0)
-			var4(0)
+		if IntervalSeconds <= NewValue then
+			UseBindingResult2(0)
+			UseBindingResult2_1(0)
 			p1.scrollRight()
 			
 			return
+		else
+			UseBindingResult2(NewValue)
+			UseBindingResult2_1(NewValue / IntervalSeconds)
 		end
-		var2(var7)
-		var4(var7 / intervalSeconds)
-	end, { var1, p1.scrollRight, intervalSeconds }), var5)
+	end, { UseBindingResult, p1.scrollRight, IntervalSeconds }), UseResult)
 	
 	return {
-		elapsedTimeBinding = var1,
-		progressBinding = var3,
-		resetProgress = var5,
-		onVideoEnded = var6,
-		onVideoProgressChanged = var4
+		elapsedTimeBinding = UseBindingResult,
+		progressBinding = UseBindingResult1,
+		resetProgress = UseResult,
+		onVideoEnded = UseResult1,
+		onVideoProgressChanged = UseBindingResult2_1
 	}
 end

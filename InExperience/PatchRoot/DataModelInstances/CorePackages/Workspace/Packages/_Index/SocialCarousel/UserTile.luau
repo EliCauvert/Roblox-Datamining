@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.UserTile.UserTile)
+﻿return (require(script.Parent.Parent.Parent._Index.UserTile.UserTile))

@@ -1,49 +1,49 @@
-﻿local markdown = script:FindFirstAncestor("Markdown")
-local parent = markdown.Parent
-local dashModule = require(parent.Dash)
-local _ = require(markdown.Types)
-local _ = require(parent.InlineLayout)
-local inlineEngineTag = require(parent.MarkdownCore).Enums.InlineEngineTag
+﻿local Markdown = script:FindFirstAncestor("Markdown")
+local Parent = Markdown.Parent
+local DashModule = require(Parent.Dash)
+local _ = require(Markdown.Types)
+local _ = require(Parent.InlineLayout)
+local InlineEngineTag = require(Parent.MarkdownCore).Enums.InlineEngineTag
 
 return {
-	getCodeTextStyles = function(p1)
-		-- upvalues: dashModule (ref)
-		return dashModule.joinDeep(p1.textStyles, p1.codeStyles)
+	getCodeTextStyles = function(p1) --[[ Line: 8 ]]
+		-- upvalues: DashModule (copy)
+		return DashModule.joinDeep(p1.textStyles, p1.codeStyles)
 	end,
-	getBaseTextElementEngineTags = function(value)
-		-- upvalues: inlineEngineTag (ref)
-		if not value then
+	getBaseTextElementEngineTags = function(p1) --[[ Line: 12 ]]
+		-- upvalues: InlineEngineTag (copy)
+		if not p1 then
 			return nil
 		end
-		local t = {}
+		local List = {}
 		
-		if value.bold then
-			table.insert(t, { name = inlineEngineTag.BOLD, attributes = {} })
+		if p1.bold then
+			table.insert(List, { name = InlineEngineTag.BOLD, attributes = {} })
 		end
-		if value.italic then
-			table.insert(t, { name = inlineEngineTag.ITALIC, attributes = {} })
+		if p1.italic then
+			table.insert(List, { name = InlineEngineTag.ITALIC, attributes = {} })
 		end
-		if value.strike then
-			table.insert(t, { name = inlineEngineTag.STRIKE, attributes = {} })
+		if p1.strike then
+			table.insert(List, { name = InlineEngineTag.STRIKE, attributes = {} })
 		end
-		if value.color then
-			table.insert(t, {
-				name = inlineEngineTag.FONT,
-				attributes = { color = value.color }
+		if p1.color then
+			table.insert(List, {
+				name = InlineEngineTag.FONT,
+				attributes = { color = p1.color }
 			})
 		end
-		return t
+		return List
 	end,
-	normalizeStyleFont = function(p1)
-		-- upvalues: dashModule (ref)
+	normalizeStyleFont = function(p1) --[[ Line: 47 ]]
+		-- upvalues: DashModule (copy)
 		if not p1 then
 			return p1
 		end
-		local var1 = dashModule.omit(p1, { "font" })
+		local OmitResult = DashModule.omit(p1, { "font" })
 		
-		if var1.fontFace == nil and p1.font ~= nil then
-			var1.fontFace = if typeof(p1.font) == "Font" then p1.font else Font.fromEnum(p1.font)
+		if OmitResult.fontFace == nil and p1.font ~= nil then
+			OmitResult.fontFace = if typeof(p1.font) == "Font" then p1.font else Font.fromEnum(p1.font)
 		end
-		return var1
+		return OmitResult
 	end
 }

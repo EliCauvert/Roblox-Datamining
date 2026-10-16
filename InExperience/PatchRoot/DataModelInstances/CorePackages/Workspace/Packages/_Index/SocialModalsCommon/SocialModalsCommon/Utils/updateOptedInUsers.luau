@@ -1,46 +1,43 @@
-﻿local constantsModule = require(script.Parent.Parent.Constants)
-local universal_app_contact_importer_storage_keysEngineFeature = game:GetEngineFeature(constantsModule.UNIVERSAL_APP_CONTACT_IMPORTER_STORAGE_KEYS)
+﻿local ConstantsModule = require(script.Parent.Parent.Constants)
+local EngineFeature = game:GetEngineFeature(ConstantsModule.UNIVERSAL_APP_CONTACT_IMPORTER_STORAGE_KEYS)
 
 return {
-	clearLocalStorage = function(_, p1)
-		-- upvalues: universal_app_contact_importer_storage_keysEngineFeature (ref), constantsModule (ref)
-		if universal_app_contact_importer_storage_keysEngineFeature then
-			pcall(function()
-				-- upvalues: p1 (ref), constantsModule (copy)
-				p1:SetItem(constantsModule.LOCAL_STORAGE_KEY_OPTED_IN_USERS, "")
+	clearLocalStorage = function(_, p1) --[[ Line: 6 ]]
+		-- upvalues: EngineFeature (copy), ConstantsModule (copy)
+		if EngineFeature then
+			pcall(function() --[[ Line: 10 ]]
+				-- upvalues: p1 (copy), ConstantsModule (upval)
+				p1:SetItem(ConstantsModule.LOCAL_STORAGE_KEY_OPTED_IN_USERS, "")
 				p1:Flush()
 			end)
 			
 			return
 		end
 	end,
-	addUserToLocalStorage = function(_, p1, p2)
-		-- upvalues: universal_app_contact_importer_storage_keysEngineFeature (ref), constantsModule (ref)
-		if not universal_app_contact_importer_storage_keysEngineFeature then return end
-		local ok, status = pcall(function()
-			-- upvalues: p1 (ref), constantsModule (copy)
-			return p1:GetItem(constantsModule.LOCAL_STORAGE_KEY_OPTED_IN_USERS)
+	addUserToLocalStorage = function(_, p1, p2) --[[ Line: 16 ]]
+		-- upvalues: EngineFeature (copy), ConstantsModule (copy)
+		if not EngineFeature then return end
+		local Success, Result = pcall(function() --[[ Line: 21 ]]
+			-- upvalues: p1 (copy), ConstantsModule (upval)
+			return p1:GetItem(ConstantsModule.LOCAL_STORAGE_KEY_OPTED_IN_USERS)
 		end)
 		
-		if ok then
-			local t = { [1] = p2 }
+		if Success then
+			local config = { [1] = p2 }
 			
-			if status ~= nil and status ~= "" then
-				local var1 = #t + 1
+			if Result ~= nil and Result ~= "" then
+				local Count = #config + 1
 				
-				for i in string.gmatch(status, "([^,]+)") do
-					if i ~= p2 then
-						t[var1] = i
-						var1 += 1
-						continue
-					end
-					return
+				for i in string.gmatch(Result, "([^,]+)") do
+					if i == p2 then return end
+					config[Count] = i
+					Count += 1
 				end
 			end
-			local var2 = table.concat(t, ","):gsub("%s+", "")
-			pcall(function()
-				-- upvalues: p1 (ref), constantsModule (copy), var2 (write)
-				p1:SetItem(constantsModule.LOCAL_STORAGE_KEY_OPTED_IN_USERS, var2)
+			local S = table.concat(config, ","):gsub("%s+", "")
+			pcall(function() --[[ Line: 41 ]]
+				-- upvalues: p1 (copy), ConstantsModule (upval), S (ref)
+				p1:SetItem(ConstantsModule.LOCAL_STORAGE_KEY_OPTED_IN_USERS, S)
 				p1:Flush()
 			end)
 		end

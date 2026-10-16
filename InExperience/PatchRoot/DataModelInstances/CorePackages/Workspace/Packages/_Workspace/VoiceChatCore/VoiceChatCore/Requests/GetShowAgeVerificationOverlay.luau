@@ -1,28 +1,28 @@
-﻿local constantsModule = require(script:FindFirstAncestor("VoiceChatCore").Constants)
+﻿local ConstantsModule = require(script:FindFirstAncestor("VoiceChatCore").Constants)
 
-local function createQueryParams(p1)
-	local var1 = ""
-	local var2 = 0
+local function createQueryParams(List): string --[[ Line: 9 ]]
+	local Text = ""
+	local Count = 0
 	
-	for i, v in p1 do
-		var1 ..= if var2 > 0 then "&" else "" .. i .. "=" .. v
-		var2 += 1
+	for i, value in List do
+		Text ..= if Count > 0 then "&" else "" .. i .. "=" .. value
+		Count += 1
 	end
-	return if var2 == 0 then "" else "?" .. var2
+	return if Count == 0 then "" else "?" .. Text
 end
 
-return function(p2, p3, p4, p5)
-	-- upvalues: constantsModule (ref), createQueryParams (ref)
-	assert(type(p4) == "string", "GetShowAgeVerificationOverlay request expects placeId to be a string")
-	assert(type(p3) == "string", "GetShowAgeVerificationOverlay request expects universeId to be a string")
-	assert(if type(p5) ~= "boolean" then type(p5) == "nil" else true, "GetShowAgeVerificationOverlay request expects hasMicPermissions to be a boolean or nil")
+return function(Callback, p1, PlaceId, p2) --[[ Line: 19 ]]
+	-- upvalues: ConstantsModule (copy), createQueryParams (copy)
+	assert(type(PlaceId) == "string", "GetShowAgeVerificationOverlay request expects placeId to be a string")
+	assert(type(p1) == "string", "GetShowAgeVerificationOverlay request expects universeId to be a string")
+	assert(type(p2) == "boolean" or type(p2) == "nil", "GetShowAgeVerificationOverlay request expects hasMicPermissions to be a boolean or nil")
 	local t = {}
 	
-	if p5 ~= nil then
-		t.userHasDisabledMicDevicePermissions = tostring(not p5)
+	if p2 ~= nil then
+		t.userHasDisabledMicDevicePermissions = tostring(not p2)
 	end
-	if p4 ~= "" and p4 ~= nil then
-		t.placeId = p4
+	if PlaceId ~= "" and PlaceId ~= nil then
+		t.placeId = PlaceId
 	end
-	return p2(string.format("%s/v1/settings/verify/show-age-verification-overlay/%s%s", constantsModule.VOICE_URL, p3, createQueryParams(t)), "GET")
+	return Callback(string.format("%s/v1/settings/verify/show-age-verification-overlay/%s%s", ConstantsModule.VOICE_URL, p1, (createQueryParams(t))), "GET")
 end

@@ -1,8 +1,8 @@
-﻿return function(value, ...)
-	for i_1 = 1, select("#", ...) do
-		for i, v in pairs(select(i_1, ...)) do
-			value[i] = v
+﻿return function(p1, ...) --[[ Line: 1 | Named "assign" ]]
+	for i = 1, select("#", ...) do
+		for i1, value in pairs((select(i, ...))) do
+			p1[i1] = value
 		end
 	end
-	return value
+	return p1
 end

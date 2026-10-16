@@ -1,42 +1,43 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local sharedFlagsModule = require(parent.SharedFlags)
-local appPage = require(parent.RobloxAppEnums).AppPage
-local navigateDown = require(parent.NavigationRodux).Thunks.NavigateDown
-local fFlagSignalsNavP3Dispatch = sharedFlagsModule.FFlagSignalsNavP3Dispatch
-local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
-local enumsModule = require(profilePlatform.Common.Enums)
-local _ = require(profilePlatform.Components.CTARow.Types)
-local eventNamesModule = require(profilePlatform.Analytics.EventNames)
-local profileTypes = enumsModule.ProfileTypes
-local fFlagProfileAboutDetailsUseSheet = sharedFlagsModule.FFlagProfileAboutDetailsUseSheet
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local SharedFlagsModule = require(Parent.SharedFlags)
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local NavigateDownFunction = require(Parent.NavigationRodux).Thunks.NavigateDown
+local FFlagSignalsNavP3Dispatch = SharedFlagsModule.FFlagSignalsNavP3Dispatch
+local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local _ = require(ProfilePlatform.Components.CTARow.Types)
+local EventNamesModule = require(ProfilePlatform.Analytics.EventNames)
+local ProfileTypes = EnumsModule.ProfileTypes
+local FFlagProfileAboutDetailsUseSheet = SharedFlagsModule.FFlagProfileAboutDetailsUseSheet
 
 return {
-	[enumsModule.ProfileActions.ViewAbout] = if sharedFlagsModule.FFlagProfilePlatformNewProfileHeader then function(p1)
-		-- upvalues: enumsModule (ref), profileTypes (ref), eventNamesModule (ref), appPage (ref), fFlagProfileAboutDetailsUseSheet (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref)
+	[EnumsModule.ProfileActions.ViewAbout] = if SharedFlagsModule.FFlagProfilePlatformNewProfileHeader then function(p1) --[[ Line: 25 ]]
+		-- upvalues: EnumsModule (copy), ProfileTypes (copy), EventNamesModule (copy), AppPage (copy), FFlagProfileAboutDetailsUseSheet (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy)
 		return {
-			text = p1.localized[enumsModule.ProfileActions.ViewAbout],
+			text = p1.localized[EnumsModule.ProfileActions.ViewAbout],
 			onActivated = {
-				[profileTypes.User] = function()
-					-- upvalues: p1 (ref), eventNamesModule (copy), appPage (copy), fFlagProfileAboutDetailsUseSheet (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), navigateDown (copy)
-					p1.analytics.fireAnalyticsEvent(eventNamesModule.CTAButtonViewFullProfile, {
+				[ProfileTypes.User] = function() --[[ Line: 29 ]]
+					-- upvalues: p1 (copy), EventNamesModule (upval), AppPage (upval), FFlagProfileAboutDetailsUseSheet (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), NavigateDownFunction (upval)
+					p1.analytics.fireAnalyticsEvent(EventNamesModule.CTAButtonViewFullProfile, {
 						buttonSurface = p1.buttonSurface,
 						btnContext = p1.profileWrapperContext.sourceInfo.source
 					})
-					local t = {
-						name = appPage.AboutDetailsSheet,
+					local config = {
+						name = AppPage.AboutDetailsSheet,
 						extraProps = {
 							sections = p1.aboutSections,
-							profileName = if fFlagProfileAboutDetailsUseSheet then p1.aboutProfileName else nil
+							profileName = if FFlagProfileAboutDetailsUseSheet then p1.aboutProfileName else nil
 						}
 					}
 					
-					if fFlagSignalsNavP3Dispatch then
-						var1.down(var1.fromLegacyPage(t))
+					if FFlagSignalsNavP3Dispatch then
+						NavigationCommands.down(NavigationCommands.fromLegacyPage(config))
 						
 						return
+					else
+						p1.dispatch(NavigateDownFunction(config))
 					end
-					p1.dispatch(navigateDown(t))
 				end
 			}
 		}

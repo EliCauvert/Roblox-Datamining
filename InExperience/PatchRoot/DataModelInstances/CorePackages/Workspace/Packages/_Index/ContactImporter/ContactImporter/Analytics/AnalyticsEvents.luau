@@ -1,104 +1,102 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local eventNamesModule = require(script.Parent.Enums.EventNames)
-local dash = require(parent.dependencies).Dash
-local enums = require(parent_1.SocialLuaAnalytics).Analytics.Enums
-local contexts = enums.Contexts
-local eventTypes = enums.EventTypes
-local btnValuesModule = require(script.Parent.Enums.BtnValues)
-local fieldNamesModule = require(script.Parent.FieldNames)
-local getFIntContactImporterUploadContactsMaxModule = require(parent.Flags.getFIntContactImporterUploadContactsMax)
-local getFIntContactImporterUploadContactsMinModule = require(parent.Flags.getFIntContactImporterUploadContactsMin)
-local identity = dash.identity
+﻿local Parent = script.Parent.Parent
+local EventNamesModule = require(script.Parent.Enums.EventNames)
+local Enums = require(Parent.Parent.SocialLuaAnalytics).Analytics.Enums
+local Contexts = Enums.Contexts
+local EventTypes = Enums.EventTypes
+local BtnValuesModule = require(script.Parent.Enums.BtnValues)
+local FieldNamesModule = require(script.Parent.FieldNames)
+local GetFIntContactImporterUploadContactsMaxModule = require(Parent.Flags.getFIntContactImporterUploadContactsMax)
+local GetFIntContactImporterUploadContactsMinModule = require(Parent.Flags.getFIntContactImporterUploadContactsMin)
+local Identity = require(Parent.dependencies).Dash.identity
 
 return {
-	[eventNamesModule.ContactImportModalPageLoad] = {
-		context = contexts.ContactImport,
-		eventType = eventTypes.ContactImportModalPageLoad
+	[EventNamesModule.ContactImportModalPageLoad] = {
+		context = Contexts.ContactImport,
+		eventType = EventTypes.ContactImportModalPageLoad
 	},
-	[eventNamesModule.ContactImportModalContinue] = {
-		context = contexts.ContactImport,
-		eventType = eventTypes.ContactImportModalClick,
-		additionalInfo = { btn = btnValuesModule.ContactImporter }
+	[EventNamesModule.ContactImportModalContinue] = {
+		context = Contexts.ContactImport,
+		eventType = EventTypes.ContactImportModalClick,
+		additionalInfo = { btn = BtnValuesModule.ContactImporter }
 	},
-	[eventNamesModule.ContactImportModalAddFriends] = {
-		context = contexts.ContactImport,
-		eventType = eventTypes.ContactImportModalClick,
-		additionalInfo = { btn = btnValuesModule.AddFriends },
-		formatRulesForAdditionalInfo = { isLoaded = identity, loadingTime = identity }
+	[EventNamesModule.ContactImportModalAddFriends] = {
+		context = Contexts.ContactImport,
+		eventType = EventTypes.ContactImportModalClick,
+		additionalInfo = { btn = BtnValuesModule.AddFriends },
+		formatRulesForAdditionalInfo = { isLoaded = Identity, loadingTime = Identity }
 	},
-	[eventNamesModule.ContactImportModalClose] = {
-		context = contexts.ContactImport,
-		eventType = eventTypes.ContactImportModalClick,
-		additionalInfo = { btn = btnValuesModule.Close },
-		formatRulesForAdditionalInfo = { isLoaded = identity, loadingTime = identity }
+	[EventNamesModule.ContactImportModalClose] = {
+		context = Contexts.ContactImport,
+		eventType = EventTypes.ContactImportModalClick,
+		additionalInfo = { btn = BtnValuesModule.Close },
+		formatRulesForAdditionalInfo = { isLoaded = Identity, loadingTime = Identity }
 	},
-	[eventNamesModule.ContactsListLoaded] = {
-		context = contexts.ContactImport,
-		eventType = eventTypes.ContactsListLoaded,
+	[EventNamesModule.ContactsListLoaded] = {
+		context = Contexts.ContactImport,
+		eventType = EventTypes.ContactsListLoaded,
 		formatRulesForAdditionalInfo = {
-			[fieldNamesModule.NumTotalContactsImported] = identity,
-			[fieldNamesModule.NumMatchedContacts] = identity,
-			didBypassFetchContacts = identity,
-			[fieldNamesModule.NumTotalContactsOnDevice] = identity,
-			[fieldNamesModule.NumMaxContacts] = getFIntContactImporterUploadContactsMaxModule,
-			[fieldNamesModule.NumMinContacts] = getFIntContactImporterUploadContactsMinModule
+			[FieldNamesModule.NumTotalContactsImported] = Identity,
+			[FieldNamesModule.NumMatchedContacts] = Identity,
+			didBypassFetchContacts = Identity,
+			[FieldNamesModule.NumTotalContactsOnDevice] = Identity,
+			[FieldNamesModule.NumMaxContacts] = GetFIntContactImporterUploadContactsMaxModule,
+			[FieldNamesModule.NumMinContacts] = GetFIntContactImporterUploadContactsMinModule
 		}
 	},
-	[eventNamesModule.RequestFriendship] = {
-		context = contexts.ContactImport,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = { btn = btnValuesModule.RequestFriendship },
-		formatRulesForAdditionalInfo = { requestedId = identity }
+	[EventNamesModule.RequestFriendship] = {
+		context = Contexts.ContactImport,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = { btn = BtnValuesModule.RequestFriendship },
+		formatRulesForAdditionalInfo = { requestedId = Identity }
 	},
-	[eventNamesModule.InviteContact] = {
-		context = contexts.ContactImport,
-		eventType = eventTypes.ButtonClick,
+	[EventNamesModule.InviteContact] = {
+		context = Contexts.ContactImport,
+		eventType = EventTypes.ButtonClick,
 		additionalInfo = {
 			isShortUrlEnabled = true,
-			btn = btnValuesModule.InviteContact
+			btn = BtnValuesModule.InviteContact
 		},
-		formatRulesForAdditionalInfo = { offNetworkFriendRequestLinkId = identity }
+		formatRulesForAdditionalInfo = { offNetworkFriendRequestLinkId = Identity }
 	},
-	[eventNamesModule.CloseContactListButton] = {
-		context = contexts.ContactImport,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = { btn = btnValuesModule.CloseContactListButton },
-		formatRulesForAdditionalInfo = { isLoading = identity, loadingTime = identity }
+	[EventNamesModule.CloseContactListButton] = {
+		context = Contexts.ContactImport,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = { btn = BtnValuesModule.CloseContactListButton },
+		formatRulesForAdditionalInfo = { isLoading = Identity, loadingTime = Identity }
 	},
-	[eventNamesModule.CloseContactListCross] = {
-		context = contexts.ContactImport,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = { btn = btnValuesModule.CloseContactListCross },
-		formatRulesForAdditionalInfo = { isLoading = identity, loadingTime = identity }
+	[EventNamesModule.CloseContactListCross] = {
+		context = Contexts.ContactImport,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = { btn = BtnValuesModule.CloseContactListCross },
+		formatRulesForAdditionalInfo = { isLoading = Identity, loadingTime = Identity }
 	},
-	[eventNamesModule.ContactImportingTime] = {
-		context = contexts.ContactImport,
-		eventType = eventTypes.ContactImportingTime,
+	[EventNamesModule.ContactImportingTime] = {
+		context = Contexts.ContactImport,
+		eventType = EventTypes.ContactImportingTime,
 		formatRulesForAdditionalInfo = {
-			isSuccessfulUpload = identity,
-			failedStep = identity,
-			[fieldNamesModule.NumTotalContactsImported] = identity,
-			[fieldNamesModule.NumMatchedContacts] = identity,
-			loadingTime = identity,
-			didBypassFetchContacts = identity,
-			[fieldNamesModule.NumTotalContactsOnDevice] = identity,
-			[fieldNamesModule.NumMaxContacts] = getFIntContactImporterUploadContactsMaxModule,
-			[fieldNamesModule.NumMinContacts] = getFIntContactImporterUploadContactsMinModule
+			isSuccessfulUpload = Identity,
+			failedStep = Identity,
+			[FieldNamesModule.NumTotalContactsImported] = Identity,
+			[FieldNamesModule.NumMatchedContacts] = Identity,
+			loadingTime = Identity,
+			didBypassFetchContacts = Identity,
+			[FieldNamesModule.NumTotalContactsOnDevice] = Identity,
+			[FieldNamesModule.NumMaxContacts] = GetFIntContactImporterUploadContactsMaxModule,
+			[FieldNamesModule.NumMinContacts] = GetFIntContactImporterUploadContactsMinModule
 		}
 	},
-	[eventNamesModule.PhoneVerificationWebview] = {
-		context = contexts.ContactImport,
-		eventType = eventTypes.NavigateToPhoneVerification
+	[EventNamesModule.PhoneVerificationWebview] = {
+		context = Contexts.ContactImport,
+		eventType = EventTypes.NavigateToPhoneVerification
 	},
-	[eventNamesModule.PhoneVerificationClose] = {
-		context = contexts.ContactImport,
-		eventType = eventTypes.PhoneVerificationClose,
-		formatRulesForAdditionalInfo = { isPhoneVerified = identity }
+	[EventNamesModule.PhoneVerificationClose] = {
+		context = Contexts.ContactImport,
+		eventType = EventTypes.PhoneVerificationClose,
+		formatRulesForAdditionalInfo = { isPhoneVerified = Identity }
 	},
-	[eventNamesModule.FindFriendsButtonClicked] = {
-		context = contexts.ContactImport,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = { btn = btnValuesModule.FindFriendsButton }
+	[EventNamesModule.FindFriendsButtonClicked] = {
+		context = Contexts.ContactImport,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = { btn = BtnValuesModule.FindFriendsButton }
 	}
 }

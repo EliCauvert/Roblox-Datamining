@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.AvatarExperienceFormValidation.AvatarExperienceFormValidation)
+﻿return (require(script.Parent.Parent.Parent._Index.AvatarExperienceFormValidation.AvatarExperienceFormValidation))

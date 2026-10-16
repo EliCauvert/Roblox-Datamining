@@ -1,120 +1,122 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local reactModule = require(parent.React)
-local reactOtterModule = require(parent.ReactOtter)
-local analytics = require(parent.MomentsCommon).Analytics
-local fireAnalyticsEvent = analytics.fireAnalyticsEvent
-local eventNames = analytics.EventNames
-local makeFeedActionFieldsModule = require(moments.Analytics.makeFeedActionFields)
-local foundationModule = require(parent.Foundation)
-local skeleton = foundationModule.Skeleton
-local text = foundationModule.Text
-local view = foundationModule.View
-local radius = foundationModule.Enums.Radius
-local thumbnailType = foundationModule.Enums.ThumbnailType
-local thumbnailSize = foundationModule.Enums.ThumbnailSize
-local controlState = foundationModule.Enums.ControlState
-local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
-local getRbxThumb = foundationModule.Utility.getRbxThumb
-local useTokens = foundationModule.Hooks.useTokens
-local useUsernameModule = require(moments.Hooks.useUsername)
-local useCreatorVerifiedModule = require(moments.Hooks.useCreatorVerified)
-local getFFlagMomentsCreatorVerifiedBadgeModule = require(moments.Flags.GetFFlagMomentsCreatorVerifiedBadge)
-local fFlagMomentsFlushDwellBeforeNavigationModule = require(moments.Flags.FFlagMomentsFlushDwellBeforeNavigation)
-local imageWithSkeletonModule = require(moments.Components.ImageWithSkeleton)
-local feedContextModule = require(moments.Components.Feed.FeedContext)
-local useMomentsHost = require(moments.MomentsHostContext).useMomentsHost
-local momentContextModule = require(script.Parent.Parent.Parent.MomentContext)
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local ReactModule = require(Parent.React)
+local ReactOtterModule = require(Parent.ReactOtter)
+local Analytics = require(Parent.MomentsCommon).Analytics
+local FireAnalyticsEventFunction = Analytics.fireAnalyticsEvent
+local EventNames = Analytics.EventNames
+local MakeFeedActionFieldsModule = require(Moments.Analytics.makeFeedActionFields)
+local FoundationModule = require(Parent.Foundation)
+local Skeleton = FoundationModule.Skeleton
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local Radius = FoundationModule.Enums.Radius
+local ThumbnailType = FoundationModule.Enums.ThumbnailType
+local ThumbnailSize = FoundationModule.Enums.ThumbnailSize
+local ControlState = FoundationModule.Enums.ControlState
+local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
+local GetRbxThumbFunction = FoundationModule.Utility.getRbxThumb
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseUsernameModule = require(Moments.Hooks.useUsername)
+local UseCreatorVerifiedModule = require(Moments.Hooks.useCreatorVerified)
+local GetFFlagMomentsCreatorVerifiedBadgeModule = require(Moments.Flags.GetFFlagMomentsCreatorVerifiedBadge)
+local FFlagMomentsFlushDwellBeforeNavigationModule = require(Moments.Flags.FFlagMomentsFlushDwellBeforeNavigation)
+local NavigationDestinationTypeModule = require(Moments.Enums.NavigationDestinationType)
+local FFlagMomentsNavigationEventModule = require(Moments.Flags.FFlagMomentsNavigationEvent)
+local ImageWithSkeletonModule = require(Moments.Components.ImageWithSkeleton)
+local FeedContextModule = require(Moments.Components.Feed.FeedContext)
+local UseMomentsHostFunction = require(Moments.MomentsHostContext).useMomentsHost
+local MomentContextModule = require(script.Parent.Parent.Parent.MomentContext)
 local _ = require(script.Parent.Parent.Parent.createMomentStore)
-local getColorStyleWithTransparencyModule = require(moments.Utils.getColorStyleWithTransparency)
-local vector2 = Vector2.new(120, 16)
-local t = { Transparency = 0, Color3 = Color3.new(1, 1, 1) }
-local char = utf8.char(57344)
+local GetColorStyleWithTransparencyModule = require(Moments.Utils.getColorStyleWithTransparency)
+local _Vector2 = Vector2.new(120, 16)
+local config = { Transparency = 0, Color3 = Color3.new(1, 1, 1) }
+local Character = utf8.char(57344)
 
-return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), momentContextModule (ref), reactModule (ref), reactOtterModule (ref), useUsernameModule (ref), getFFlagMomentsCreatorVerifiedBadgeModule (ref), useCreatorVerifiedModule (ref), useMomentsHost (ref), fFlagMomentsFlushDwellBeforeNavigationModule (ref), feedContextModule (ref), makeFeedActionFieldsModule (ref), fireAnalyticsEvent (ref), eventNames (ref), char (ref), view (ref), stateLayerAffordance (ref), controlState (ref), imageWithSkeletonModule (ref), getRbxThumb (ref), thumbnailType (ref), thumbnailSize (ref), radius (ref), getColorStyleWithTransparencyModule (ref), t (ref), text (ref), skeleton (ref), vector2 (ref)
-	local var1 = useTokens()
-	local var2 = momentContextModule.useMoment()
-	local data = var2.store.getData(false)
-	local var3, var4 = reactModule.useState(false)
-	local var5, var6 = reactOtterModule.useAnimatedBinding(0)
-	reactModule.useEffect(function()
-		-- upvalues: var6 (ref), reactOtterModule (copy), var3 (ref)
-		var6(reactOtterModule.ease(if var3 then 0.6 else 0, {
-			duration = if var3 then 0.05 else 0.03,
+return ReactModule.memo(function(Frame) --[[ Line: 65 | Named "CreatorAttribution" ]]
+	-- upvalues: UseTokensFunction (copy), MomentContextModule (copy), ReactModule (copy), ReactOtterModule (copy), UseUsernameModule (copy), GetFFlagMomentsCreatorVerifiedBadgeModule (copy), UseCreatorVerifiedModule (copy), UseMomentsHostFunction (copy), FFlagMomentsFlushDwellBeforeNavigationModule (copy), FeedContextModule (copy), MakeFeedActionFieldsModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), FFlagMomentsNavigationEventModule (copy), NavigationDestinationTypeModule (copy), Character (copy), View (copy), StateLayerAffordance (copy), ControlState (copy), ImageWithSkeletonModule (copy), GetRbxThumbFunction (copy), ThumbnailType (copy), ThumbnailSize (copy), Radius (copy), GetColorStyleWithTransparencyModule (copy), config (copy), Text (copy), Skeleton (copy), _Vector2 (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseMomentResult = MomentContextModule.useMoment()
+	local Data = UseMomentResult.store.getData(false)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0)
+	ReactModule.useEffect(function() --[[ Line: 74 ]]
+		-- upvalues: UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), UseStateResult (copy)
+		UseAnimatedBindingResult2(ReactOtterModule.ease(if UseStateResult then 0.6 else 0, {
+			duration = if UseStateResult then 0.05 else 0.03,
 			easingStyle = Enum.EasingStyle.Quad
 		}))
-	end, { var3 })
-	local var7 = reactModule.joinBindings({ var2.animationRatio, var5 }):map(function(p2)
-		return 1 - (1 - p2[1]) * (1 - p2[2])
+	end, { UseStateResult })
+	local MapResult = ReactModule.joinBindings({ UseMomentResult.animationRatio, UseAnimatedBindingResult }):map(function(Entry): number --[[ Line: 82 ]]
+		return 1 - (1 - Entry[1]) * (1 - Entry[2])
 	end)
-	local var8 = useUsernameModule(data.creatorId)
-	local var9 = if getFFlagMomentsCreatorVerifiedBadgeModule() then useCreatorVerifiedModule(data.creatorId) else data.creatorIsVerified
-	local openProfile = useMomentsHost().openProfile
-	local var10 = if fFlagMomentsFlushDwellBeforeNavigationModule then feedContextModule.useFeedOptional() else nil
-	local var11 = reactModule.useCallback(function()
-		-- upvalues: openProfile (ref), makeFeedActionFieldsModule (copy), data (ref), fireAnalyticsEvent (copy), eventNames (copy), fFlagMomentsFlushDwellBeforeNavigationModule (copy), var10 (write)
-		if openProfile ~= nil then
-			local var12 = makeFeedActionFieldsModule(data.momentId, data.feedItemId, data.feedSessionId)
+	local UseUsernameModuleResult = UseUsernameModule(Data.creatorId)
+	local UseCreatorVerifiedModuleResult = if GetFFlagMomentsCreatorVerifiedBadgeModule() then UseCreatorVerifiedModule(Data.creatorId) else Data.creatorIsVerified
+	local OpenProfileFunction = UseMomentsHostFunction().openProfile
+	local UseFeedOptionalResult = if FFlagMomentsFlushDwellBeforeNavigationModule then FeedContextModule.useFeedOptional() else nil
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 112 ]]
+		-- upvalues: OpenProfileFunction (copy), MakeFeedActionFieldsModule (upval), Data (copy), FireAnalyticsEventFunction (upval), EventNames (upval), FFlagMomentsFlushDwellBeforeNavigationModule (upval), UseFeedOptionalResult (ref), FFlagMomentsNavigationEventModule (upval), NavigationDestinationTypeModule (upval)
+		if OpenProfileFunction ~= nil then
+			local FeedActionFieldsModule = MakeFeedActionFieldsModule(Data.momentId, Data.feedItemId, Data.feedSessionId)
 			
-			if var12 ~= nil then
-				fireAnalyticsEvent(eventNames.ProfileCreatorInfoTapped, var12)
+			if FeedActionFieldsModule ~= nil then
+				FireAnalyticsEventFunction(EventNames.ProfileCreatorInfoTapped, FeedActionFieldsModule)
 			end
-			if fFlagMomentsFlushDwellBeforeNavigationModule and var10 ~= nil then
-				var10.flushView()
+			if FFlagMomentsFlushDwellBeforeNavigationModule and UseFeedOptionalResult ~= nil then
+				UseFeedOptionalResult.flushView(if FFlagMomentsNavigationEventModule then NavigationDestinationTypeModule.CreatorProfile else nil)
 			end
-			openProfile(data.creatorId)
+			OpenProfileFunction(Data.creatorId)
 		end
-	end, if fFlagMomentsFlushDwellBeforeNavigationModule then {
-		openProfile, var10, data.creatorId, data.momentId, data.feedItemId,
-		data.feedSessionId
+	end, if FFlagMomentsFlushDwellBeforeNavigationModule then {
+		OpenProfileFunction, UseFeedOptionalResult, Data.creatorId, Data.momentId,
+		Data.feedItemId, Data.feedSessionId
 	} else {
-		openProfile,
-		data.creatorId,
-		data.momentId,
-		data.feedItemId,
-		data.feedSessionId
+		OpenProfileFunction,
+		Data.creatorId,
+		Data.momentId,
+		Data.feedItemId,
+		Data.feedSessionId
 	})
-	local size800 = var1.Size.Size_800
-	local var12 = if var8 and var9 then `{var8} {char}` else var8
+	local Size800 = UseTokensResult.Size.Size_800
+	local Text1 = if UseUsernameModuleResult and UseCreatorVerifiedModuleResult then `{UseUsernameModuleResult} {Character}` else UseUsernameModuleResult
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "row align-x-left align-y-center gap-small auto-xy",
-		LayoutOrder = p1.LayoutOrder,
-		testId = if fFlagMomentsFlushDwellBeforeNavigationModule then "--moments-creator-attribution" else nil,
-		stateLayer = { affordance = stateLayerAffordance.None },
-		onActivated = if openProfile ~= nil then nil else var11,
-		onStateChanged = function(p2)
-			-- upvalues: var4 (ref), controlState (copy)
-			var4(if p2 ~= controlState.Pressed then p2 == controlState.SelectedPressed else true)
+		LayoutOrder = Frame.LayoutOrder,
+		testId = if FFlagMomentsFlushDwellBeforeNavigationModule then "--moments-creator-attribution" else nil,
+		stateLayer = { affordance = StateLayerAffordance.None },
+		onActivated = if OpenProfileFunction == nil then nil else UseResult,
+		onStateChanged = function(Pressed) --[[ Line: 145 ]]
+			-- upvalues: UseStateResult2 (copy), ControlState (upval)
+			UseStateResult2(Pressed == ControlState.Pressed or Pressed == ControlState.SelectedPressed)
 		end
 	}, {
-		Avatar = reactModule.createElement(imageWithSkeletonModule, {
+		Avatar = ReactModule.createElement(ImageWithSkeletonModule, {
 			LayoutOrder = 1,
-			Image = getRbxThumb(thumbnailType.AvatarHeadShot, data.creatorId, thumbnailSize.Medium),
-			Size = UDim2.fromOffset(size800, size800),
-			radius = radius.Circle,
-			backgroundStyle = var7:map(function(p2)
-				-- upvalues: getColorStyleWithTransparencyModule (copy), var1 (ref)
-				return getColorStyleWithTransparencyModule(var1.Color.Shift.Shift_300, p2)
+			Image = GetRbxThumbFunction(ThumbnailType.AvatarHeadShot, Data.creatorId, ThumbnailSize.Medium),
+			Size = UDim2.fromOffset(Size800, Size800),
+			radius = Radius.Circle,
+			backgroundStyle = MapResult:map(function(p1) --[[ Line: 156 ]]
+				-- upvalues: GetColorStyleWithTransparencyModule (upval), UseTokensResult (copy)
+				return GetColorStyleWithTransparencyModule(UseTokensResult.Color.Shift.Shift_300, p1)
 			end),
-			imageStyle = var7:map(function(p2)
-				-- upvalues: getColorStyleWithTransparencyModule (copy), t (copy)
-				return getColorStyleWithTransparencyModule(t, p2)
+			imageStyle = MapResult:map(function(p1) --[[ Line: 159 ]]
+				-- upvalues: GetColorStyleWithTransparencyModule (upval), config (upval)
+				return GetColorStyleWithTransparencyModule(config, p1)
 			end)
 		}),
-		Username = if var12 then reactModule.createElement(text, {
+		Username = if Text1 then ReactModule.createElement(Text, {
 			LayoutOrder = 2,
 			tag = "auto-xy text-title-large text-align-x-left text-align-y-center text-truncate-end content-emphasis",
-			Text = var12,
-			textStyle = var7:map(function(p2)
-				-- upvalues: getColorStyleWithTransparencyModule (copy), var1 (ref)
-				return getColorStyleWithTransparencyModule(var1.Color.Content.Emphasis, p2)
+			Text = Text1,
+			textStyle = MapResult:map(function(p1) --[[ Line: 169 ]]
+				-- upvalues: GetColorStyleWithTransparencyModule (upval), UseTokensResult (copy)
+				return GetColorStyleWithTransparencyModule(UseTokensResult.Color.Content.Emphasis, p1)
 			end)
-		}) else reactModule.createElement(skeleton, {
+		}) else ReactModule.createElement(Skeleton, {
 			LayoutOrder = 2,
-			radius = radius.Medium,
-			Size = UDim2.fromOffset(vector2.X, vector2.Y)
+			radius = Radius.Medium,
+			Size = UDim2.fromOffset(_Vector2.X, _Vector2.Y)
 		})
 	})
 end)

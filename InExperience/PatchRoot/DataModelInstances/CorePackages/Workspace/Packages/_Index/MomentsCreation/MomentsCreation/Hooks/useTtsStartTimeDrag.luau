@@ -1,88 +1,90 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local reactModule = require(momentsCreation.Parent.React)
-local useCallback = reactModule.useCallback
-local useEffect = reactModule.useEffect
-local useRef = reactModule.useRef
-local useState = reactModule.useState
-local clampTtsStartTimeModule = require(momentsCreation.Utils.clampTtsStartTime)
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local ReactModule = require(MomentsCreation.Parent.React)
+local UseCallbackFunction = ReactModule.useCallback
+local UseEffectFunction = ReactModule.useEffect
+local UseRefFunction = ReactModule.useRef
+local UseStateFunction = ReactModule.useState
+local ClampTtsStartTimeModule = require(MomentsCreation.Utils.clampTtsStartTime)
 
-return function(value, p1, p2, p3, p4, p5)
-	-- upvalues: useRef (ref), useState (ref), useEffect (ref), useCallback (ref), clampTtsStartTimeModule (ref)
-	local var1 = useRef(nil)
-	local var2 = useRef(false)
-	local var3, var4 = useState(false)
-	local var5 = useRef(p2)
-	local var6 = useRef(0)
-	useEffect(function()
-		-- upvalues: var5 (ref), p2 (ref)
-		var5.current = p2
-	end, { p2 })
-	local var7 = useCallback(function()
-		-- upvalues: var2 (ref), var6 (ref), var5 (ref), var4 (ref), p4 (ref)
-		if var2.current then return end
-		var2.current = true
-		var6.current = var5.current
-		var4(true)
+return function(p1, p2, Current, Callback1, Callback, Callback2) --[[ Line: 31 | Named "useTtsStartTimeDrag" ]]
+	-- upvalues: UseRefFunction (copy), UseStateFunction (copy), UseEffectFunction (copy), UseCallbackFunction (copy), ClampTtsStartTimeModule (copy)
+	local UseRefResult = UseRefFunction(nil)
+	local UseRefResult1 = UseRefFunction(false)
+	local UseStateResult, UseStateResult2 = UseStateFunction(false)
+	local UseRefResult2 = UseRefFunction(Current)
+	local UseRefResult3 = UseRefFunction(0)
+	UseEffectFunction(function() --[[ Line: 50 ]]
+		-- upvalues: UseRefResult2 (copy), Current (copy)
+		UseRefResult2.current = Current
+	end, { Current })
+	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 54 ]]
+		-- upvalues: UseRefResult1 (copy), UseRefResult3 (copy), UseRefResult2 (copy), UseStateResult2 (copy), Callback (copy)
+		if UseRefResult1.current then return end
+		UseRefResult1.current = true
+		UseRefResult3.current = UseRefResult2.current
+		UseStateResult2(true)
 		
-		if p4 ~= nil then
-			p4()
+		if Callback ~= nil then
+			Callback()
 		end
-	end, { p4 })
-	local var8 = useCallback(function()
-		-- upvalues: var2 (ref), var1 (ref), p1 (ref), p3 (ref), clampTtsStartTimeModule (copy), var6 (ref)
-		if not var2.current then return end
-		local current = var1.current
+	end, { Callback })
+	local UseCallbackResult1 = UseCallbackFunction(function() --[[ Line: 66 ]]
+		-- upvalues: UseRefResult1 (copy), UseRefResult (copy), p2 (copy), Callback1 (copy), ClampTtsStartTimeModule (upval), UseRefResult3 (copy)
+		if not UseRefResult1.current then return end
+		local Current = UseRefResult.current
 		
-		if current == nil or p1 <= 0 then
+		if Current ~= nil and p2 > 0 then
+			Callback1(ClampTtsStartTimeModule(UseRefResult3.current + Current.DragUDim2.X.Scale * p2, p2))
+			
 			return
 		end
-		p3(clampTtsStartTimeModule(var6.current + current.DragUDim2.X.Scale * p1, p1))
-	end, { p1, p3 })
-	local var9 = useCallback(function()
-		-- upvalues: var2 (ref), var4 (ref), p5 (ref)
-		if not var2.current then return end
-		var2.current = false
-		var4(false)
+	end, { p2, Callback1 })
+	local UseCallbackResult2 = UseCallbackFunction(function() --[[ Line: 78 ]]
+		-- upvalues: UseRefResult1 (copy), UseStateResult2 (copy), Callback2 (copy)
+		if not UseRefResult1.current then return end
+		UseRefResult1.current = false
+		UseStateResult2(false)
 		
-		if p5 ~= nil then
-			p5(false)
+		if Callback2 ~= nil then
+			Callback2(false)
 		end
-	end, { p5 })
-	useEffect(function()
-		-- upvalues: value (ref), var1 (ref), var7 (ref), var8 (ref), var9 (ref), var2 (ref), var4 (ref), p5 (ref)
-		if not value then return end
-		local current = var1.current
+	end, { Callback2 })
+	UseEffectFunction(function() --[[ Line: 89 ]]
+		-- upvalues: p1 (copy), UseRefResult (copy), UseCallbackResult (copy), UseCallbackResult1 (copy), UseCallbackResult2 (copy), UseRefResult1 (copy), UseStateResult2 (copy), Callback2 (copy)
+		if not p1 then return end
+		local Current = UseRefResult.current
 		
-		if current == nil then
-			return
-		end
-		local list = {
-			current.DragStart:Connect(var7),
-			current.DragContinue:Connect(var8),
-			current.DragEnd:Connect(var9)
+		if Current == nil then return end
+		local Connections = {
+			Current.DragStart:Connect(UseCallbackResult),
+			Current.DragContinue:Connect(UseCallbackResult1),
+			Current.DragEnd:Connect(UseCallbackResult2)
 		}
 		
-		return function()
-			-- upvalues: list (ref), var2 (copy), var4 (copy), p5 (copy)
-			for i, v in list do
-				v:Disconnect()
+		return function() --[[ Line: 102 ]]
+			-- upvalues: Connections (copy), UseRefResult1 (upval), UseStateResult2 (upval), Callback2 (upval)
+			for _, connection in Connections do
+				connection:Disconnect()
 			end
-			if var2.current then
-				var2.current = false
-				var4(false)
+			if UseRefResult1.current then
+				UseRefResult1.current = false
+				UseStateResult2(false)
 				
-				if p5 ~= nil then
-					p5(true)
+				if Callback2 ~= nil then
+					Callback2(true)
 				end
 			end
 		end
 	end, {
-		value,
-		var7,
-		var8,
-		var9,
-		p5
+		p1,
+		UseCallbackResult,
+		UseCallbackResult1,
+		UseCallbackResult2,
+		Callback2
 	})
 	
-	return { dragDetectorRef = var1, isSelected = var3 }
+	return {
+		dragDetectorRef = UseRefResult,
+		isSelected = UseStateResult
+	}
 end

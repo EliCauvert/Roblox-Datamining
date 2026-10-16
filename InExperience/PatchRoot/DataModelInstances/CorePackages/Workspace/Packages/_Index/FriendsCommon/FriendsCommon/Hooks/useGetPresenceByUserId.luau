@@ -1,26 +1,26 @@
-﻿local parent = script:FindFirstAncestor("FriendsCommon").Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local var1 = require(parent.DataHydration).Presence.PresenceStore.get()
-local fFlagPresenceForceFetchOnRemount = require(parent.SharedFlags).FFlagPresenceForceFetchOnRemount
-local t = { skipFetch = true }
+﻿local Parent = script:FindFirstAncestor("FriendsCommon").Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local GetResult = require(Parent.DataHydration).Presence.PresenceStore.get()
+local FFlagPresenceForceFetchOnRemount = require(Parent.SharedFlags).FFlagPresenceForceFetchOnRemount
+local config = { skipFetch = true }
 
-return function(p1, p2)
-	-- upvalues: reactModule (ref), t (ref), var1 (ref), fFlagPresenceForceFetchOnRemount (ref), signalsReactModule (ref)
-	local var2 = if p1 then tostring(p1) else ""
-	local var3 = reactModule.useMemo(function()
-		-- upvalues: var2 (ref), t (copy), p2 (ref), var1 (copy)
-		return var1.GetPresenceByUserId(var2, if var2 == "" then t else p2)
-	end, { var2, p2 })
+return function(p1, p2) --[[ Line: 20 | Named "useGetPresenceByUserId" ]]
+	-- upvalues: ReactModule (copy), config (copy), GetResult (copy), FFlagPresenceForceFetchOnRemount (copy), SignalsReactModule (copy)
+	local Text: string = if p1 then tostring(p1) else ""
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 26 ]]
+		-- upvalues: Text (copy), config (upval), p2 (copy), GetResult (upval)
+		return GetResult.GetPresenceByUserId(Text, if Text == "" then config else p2)
+	end, { Text, p2 })
 	
-	if fFlagPresenceForceFetchOnRemount then
-		local var4 = p2 ~= nil and p2.forceFetch == true
-		reactModule.useEffect(function()
-			-- upvalues: var2 (ref), var4 (ref), var1 (copy)
-			if var2 ~= "" and var4 then
-				var1.RefreshPresenceByUserId(var2)
+	if FFlagPresenceForceFetchOnRemount then
+		local IsForceFetch: boolean = p2 ~= nil and p2.forceFetch == true
+		ReactModule.useEffect(function() --[[ Line: 33 ]]
+			-- upvalues: Text (copy), IsForceFetch (copy), GetResult (upval)
+			if Text ~= "" and IsForceFetch then
+				GetResult.RefreshPresenceByUserId(Text)
 			end
-		end, { var2, var4 })
+		end, { Text, IsForceFetch })
 	end
-	return signalsReactModule.useSignalState(var3.data), signalsReactModule.useSignalState(var3.status)
+	return SignalsReactModule.useSignalState(UseMemoResult.data), (SignalsReactModule.useSignalState(UseMemoResult.status))
 end

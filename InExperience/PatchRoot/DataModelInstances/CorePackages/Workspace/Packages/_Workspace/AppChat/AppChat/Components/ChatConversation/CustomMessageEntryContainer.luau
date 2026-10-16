@@ -1,11 +1,11 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local reactModule = require(appChat.Parent.React)
-local enumCustomEntryTypesModule = require(appChat.Components.ChatConversation.EnumCustomEntryTypes)
-local osaContextCardOneToOneContainerModule = require(appChat.Components.ChatConversation.ConversationCards.OsaContextCardOneToOneContainer)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local ReactModule = require(AppChat.Parent.React)
+local EnumCustomEntryTypesModule = require(AppChat.Components.ChatConversation.EnumCustomEntryTypes)
+local OsaContextCardOneToOneContainerModule = require(AppChat.Components.ChatConversation.ConversationCards.OsaContextCardOneToOneContainer)
 
-return reactModule.memo(function(p1)
-	-- upvalues: enumCustomEntryTypesModule (ref), reactModule (ref), osaContextCardOneToOneContainerModule (ref)
-	return if p1.customEntryType == enumCustomEntryTypesModule.OsaContextCardOneToOne then reactModule.createElement(osaContextCardOneToOneContainerModule, {
+return ReactModule.memo(function(p1) --[[ Line: 15 | Named "CustomMessageEntryContainer" ]]
+	-- upvalues: EnumCustomEntryTypesModule (copy), ReactModule (copy), OsaContextCardOneToOneContainerModule (copy)
+	return if p1.customEntryType == EnumCustomEntryTypesModule.OsaContextCardOneToOne then ReactModule.createElement(OsaContextCardOneToOneContainerModule, {
 		conversationId = p1.conversationId,
 		openViewProfile = p1.openViewProfile
 	}) else nil

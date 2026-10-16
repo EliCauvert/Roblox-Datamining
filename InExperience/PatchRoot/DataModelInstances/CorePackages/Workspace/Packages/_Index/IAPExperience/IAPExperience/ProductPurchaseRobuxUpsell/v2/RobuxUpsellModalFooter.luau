@@ -1,23 +1,23 @@
-﻿local parent = script.Parent.Parent.Parent.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local text = foundationModule.Text
-local useTokens = foundationModule.Hooks.useTokens
-local useLocalization = require(parent.Localization).Hooks.useLocalization
+﻿local Parent = script.Parent.Parent.Parent.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local Text = FoundationModule.Text
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-return function()
-	-- upvalues: useLocalization (ref), useTokens (ref), reactModule (ref), text (ref)
-	local var1 = useLocalization({
+return function() --[[ Line: 16 | Named "RobuxUpsellModalFooter" ]]
+	-- upvalues: UseLocalizationFunction (copy), UseTokensFunction (copy), ReactModule (copy), Text (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
 		DisclosurePayment = "IAPExperience.RobuxUpsell.Text.DisclosurePayment",
 		DisclosureTerms = "IAPExperience.RobuxUpsell.Text.DisclosureTerms"
 	})
 	
-	return reactModule.createElement(text, {
+	return ReactModule.createElement(Text, {
 		tag = "content-muted text-caption-small size-full align-x-center padding-top-small",
-		Text = var1.DisclosurePayment .. " " .. var2.DisclosureTerms
+		Text = UseLocalizationResult.DisclosurePayment .. " " .. UseLocalizationResult.DisclosureTerms
 	}, {
-		UITextSizeConstraint = reactModule.createElement("UITextSizeConstraint", {
-			MaxTextSize = useTokens().Typography.CaptionSmall.FontSize
+		UITextSizeConstraint = ReactModule.createElement("UITextSizeConstraint", {
+			MaxTextSize = UseTokensFunction().Typography.CaptionSmall.FontSize
 		})
 	})
 end

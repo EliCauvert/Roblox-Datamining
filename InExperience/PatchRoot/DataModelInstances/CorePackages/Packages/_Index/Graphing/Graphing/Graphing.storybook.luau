@@ -1,9 +1,9 @@
-﻿local graphing = script:FindFirstAncestor("Graphing")
-local parent = graphing.Parent
+﻿local Graphing = script:FindFirstAncestor("Graphing")
+local Parent = Graphing.Parent
 
 return {
 	name = "Graphing",
-	storyRoots = { graphing.Components },
-	roact = require(parent.React),
-	reactRoblox = require(parent.ReactRoblox)
+	storyRoots = { Graphing.Components },
+	roact = require(Parent.React),
+	reactRoblox = require(Parent.ReactRoblox)
 }

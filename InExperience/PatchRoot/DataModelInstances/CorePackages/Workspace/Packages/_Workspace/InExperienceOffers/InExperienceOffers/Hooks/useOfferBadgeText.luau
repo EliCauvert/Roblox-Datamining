@@ -1,9 +1,9 @@
-﻿local inExperienceOffers = script:FindFirstAncestor("InExperienceOffers")
-local signalsReactModule = require(inExperienceOffers.Parent.SignalsReact)
-local getOffersStoreModule = require(inExperienceOffers.Stores.GetOffersStore)
-local getOfferBadgeTextModule = require(inExperienceOffers.Utils.getOfferBadgeText)
+﻿local InExperienceOffers = script:FindFirstAncestor("InExperienceOffers")
+local SignalsReactModule = require(InExperienceOffers.Parent.SignalsReact)
+local GetOffersStoreModule = require(InExperienceOffers.Stores.GetOffersStore)
+local GetOfferBadgeTextModule = require(InExperienceOffers.Utils.getOfferBadgeText)
 
-return function(p1)
-	-- upvalues: signalsReactModule (ref), getOffersStoreModule (ref), getOfferBadgeTextModule (ref)
-	return getOfferBadgeTextModule(signalsReactModule.useSignalState(getOffersStoreModule(false).getOffers), p1)
+return function(p1) --[[ Line: 9 | Named "useOfferBadgeText" ]]
+	-- upvalues: SignalsReactModule (copy), GetOffersStoreModule (copy), GetOfferBadgeTextModule (copy)
+	return GetOfferBadgeTextModule(SignalsReactModule.useSignalState(GetOffersStoreModule(false).getOffers), p1)
 end

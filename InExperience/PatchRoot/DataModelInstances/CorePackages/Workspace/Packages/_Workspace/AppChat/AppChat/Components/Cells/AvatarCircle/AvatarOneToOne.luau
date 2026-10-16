@@ -1,14 +1,14 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local reactModule = require(parent.React)
-local frameModule = require(appChat.Components.Common.Frame)
-local avatarThumbnailModule = require(script.Parent.AvatarThumbnail)
-local circleMaskModule = require(script.Parent.CircleMask)
-local imageSetLabel = require(parent.UIBlox).Core.ImageSet.ImageSetLabel
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local ReactModule = require(Parent.React)
+local FrameModule = require(AppChat.Components.Common.Frame)
+local AvatarThumbnailModule = require(script.Parent.AvatarThumbnail)
+local CircleMaskModule = require(script.Parent.CircleMask)
+local ImageSetLabel = require(Parent.UIBlox).Core.ImageSet.ImageSetLabel
 
-return function(p1)
-	-- upvalues: reactModule (ref), imageSetLabel (ref), circleMaskModule (ref), frameModule (ref), avatarThumbnailModule (ref)
-	return reactModule.createElement(circleMaskModule, {
+return function(p1) --[[ Line: 30 | Named "AvatarOneToOne" ]]
+	-- upvalues: ReactModule (copy), ImageSetLabel (copy), CircleMaskModule (copy), FrameModule (copy), AvatarThumbnailModule (copy)
+	return ReactModule.createElement(CircleMaskModule, {
 		circleColor3 = p1.circleColor3,
 		circleTransparency = p1.circleTransparency,
 		circleInteriorBackgroundColor3 = p1.circleInteriorBackgroundColor3,
@@ -16,18 +16,18 @@ return function(p1)
 		circleDividerColor3 = p1.circleDividerColor3,
 		circleDividerTransparency = p1.circleDividerTransparency,
 		overlaySize = p1.overlaySize,
-		renderAboveMask = reactModule.createElement(frameModule, {}, {
-			layout = reactModule.createElement("UIListLayout", {
+		renderAboveMask = ReactModule.createElement(FrameModule, {}, {
+			layout = ReactModule.createElement("UIListLayout", {
 				HorizontalAlignment = Enum.HorizontalAlignment.Right,
 				VerticalAlignment = Enum.VerticalAlignment.Bottom
 			}),
-			presenceIndicator = if p1.showNewPresenceImage then reactModule.createElement(imageSetLabel, {
+			presenceIndicator = if p1.showNewPresenceImage then ReactModule.createElement(ImageSetLabel, {
 				BackgroundTransparency = 1,
 				Size = UDim2.fromOffset(p1.presenceIndicatorSize, p1.presenceIndicatorSize),
 				Image = p1.presenceImage,
 				ImageColor3 = p1.presenceImageColor3,
 				ImageTransparency = p1.presenceImageTransparency
-			}) else reactModule.createElement("ImageLabel", {
+			}) else ReactModule.createElement("ImageLabel", {
 				BackgroundTransparency = 1,
 				Size = UDim2.new(0, p1.presenceIndicatorSize, 0, p1.presenceIndicatorSize),
 				Image = p1.presenceImage
@@ -36,7 +36,7 @@ return function(p1)
 		onActivated = p1.onActivated,
 		selectable = p1.selectable
 	}, {
-		uiCorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) }),
-		avatar = reactModule.createElement(avatarThumbnailModule, { thumbnail = p1.thumbnail, cornerRadius = UDim.new(1, 0) })
+		uiCorner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) }),
+		avatar = ReactModule.createElement(AvatarThumbnailModule, { thumbnail = p1.thumbnail, cornerRadius = UDim.new(1, 0) })
 	})
 end

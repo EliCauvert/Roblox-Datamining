@@ -1,13 +1,14 @@
-﻿local refreshOwnMomentsAfterPublishModule = require(script.Parent.refreshOwnMomentsAfterPublish)
+﻿local RefreshOwnMomentsAfterPublishModule = require(script.Parent.refreshOwnMomentsAfterPublish)
 
-return function(value, p1, p2)
-	-- upvalues: refreshOwnMomentsAfterPublishModule (ref)
-	local var1 = refreshOwnMomentsAfterPublishModule(value, p2)
+return function(p1, p2, p3) --[[ Line: 23 | Named "setPublishedMomentOnUploadStore" ]]
+	-- upvalues: RefreshOwnMomentsAfterPublishModule (copy)
+	local RefreshOwnMomentsAfterPublishModuleResult = RefreshOwnMomentsAfterPublishModule(p1, p3)
 	
-	if var1 == nil then
-		p1.setSuccess(value)
+	if RefreshOwnMomentsAfterPublishModuleResult == nil then
+		p2.setSuccess(p1)
 		
 		return
+	else
+		p2.setSuccess(RefreshOwnMomentsAfterPublishModuleResult)
 	end
-	p1.setSuccess(var1)
 end

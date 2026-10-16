@@ -1,17 +1,19 @@
-﻿local profileQRCode = script:FindFirstAncestor("ProfileQRCode")
-local parent = profileQRCode.Parent
-local roactUtilsModule = require(parent.RoactUtils)
-local configureRoduxFriendsModule = require(profileQRCode.Networking.configureRoduxFriends)
-local fFlagMigrateFriendshipStatusesRemainingActions = require(parent.SharedFlags).FFlagMigrateFriendshipStatusesRemainingActions
-local var1 = require(parent.DataHydration).Friends.FriendsStore.get()
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
+﻿local ProfileQRCode = script:FindFirstAncestor("ProfileQRCode")
+local Parent = ProfileQRCode.Parent
+local ConfigureRoduxFriendsModule = require(ProfileQRCode.Networking.configureRoduxFriends)
+local FFlagMigrateFriendshipStatusesRemainingActions = require(Parent.SharedFlags).FFlagMigrateFriendshipStatusesRemainingActions
+local GetResult = require(Parent.DataHydration).Friends.FriendsStore.get()
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
 
-return function()
-	-- upvalues: useDispatch (ref), fFlagMigrateFriendshipStatusesRemainingActions (ref), var1 (ref), configureRoduxFriendsModule (ref)
-	local var2 = useDispatch()
+return function() --[[ Line: 15 ]]
+	-- upvalues: UseDispatchFunction (copy), FFlagMigrateFriendshipStatusesRemainingActions (copy), GetResult (copy), ConfigureRoduxFriendsModule (copy)
+	local UseDispatchResult = UseDispatchFunction()
 	
-	return function(p1, p2)
-		-- upvalues: fFlagMigrateFriendshipStatusesRemainingActions (copy), var1 (copy), var2 (ref), configureRoduxFriendsModule (copy)
-		return if fFlagMigrateFriendshipStatusesRemainingActions then var1.AcceptFriendRequest(p2) else var2(configureRoduxFriendsModule.AcceptFriendRequestFromUserId.API({ currentUserId = p1, targetUserId = p2 }))
+	return function(CurrentUserId, TargetUserId) --[[ Line: 18 ]]
+		-- upvalues: FFlagMigrateFriendshipStatusesRemainingActions (upval), GetResult (upval), UseDispatchResult (copy), ConfigureRoduxFriendsModule (upval)
+		return if FFlagMigrateFriendshipStatusesRemainingActions then GetResult.AcceptFriendRequest(TargetUserId) else UseDispatchResult(ConfigureRoduxFriendsModule.AcceptFriendRequestFromUserId.API({
+			currentUserId = CurrentUserId,
+			targetUserId = TargetUserId
+		}))
 	end
 end

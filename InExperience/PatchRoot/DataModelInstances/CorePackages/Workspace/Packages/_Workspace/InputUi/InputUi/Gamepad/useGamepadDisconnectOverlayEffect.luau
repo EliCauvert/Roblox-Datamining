@@ -1,29 +1,30 @@
-﻿local parent = script:FindFirstAncestor("InputUi").Parent
-local reactModule = require(parent.React)
-local useInputType = require(parent.RoactUtils).Hooks.useInputType
-local inputTypeConstants = require(parent.InputType).InputTypeConstants
-local useIsGamepad = require(parent.RoactUtils).Hooks.useIsGamepad
-local useGamepadConnectedEventModule = require(script.Parent.useGamepadConnectedEvent)
-local enableGamepadHookForCorescriptGlobalEffects = game:DefineFastFlag("EnableGamepadHookForCorescriptGlobalEffects", false)
+﻿local Parent = script:FindFirstAncestor("InputUi").Parent
+local ReactModule = require(Parent.React)
+local UseInputTypeFunction = require(Parent.RoactUtils).Hooks.useInputType
+local InputTypeConstants = require(Parent.InputType).InputTypeConstants
+local UseIsGamepadFunction = require(Parent.RoactUtils).Hooks.useIsGamepad
+local UseGamepadConnectedEventModule = require(script.Parent.useGamepadConnectedEvent)
+local EnableGamepadHookForCorescriptGlobalEffects = game:DefineFastFlag("EnableGamepadHookForCorescriptGlobalEffects", false)
 
-return function(p1, p2, p3, p4)
-	-- upvalues: enableGamepadHookForCorescriptGlobalEffects (ref), useIsGamepad (ref), useInputType (ref), inputTypeConstants (ref), reactModule (ref), useGamepadConnectedEventModule (ref)
-	local var1 = if enableGamepadHookForCorescriptGlobalEffects then useIsGamepad() else useInputType() == inputTypeConstants.Gamepad
-	local var2 = reactModule.useRef(false)
-	useGamepadConnectedEventModule(reactModule.useCallback(function()
-		-- upvalues: var2 (ref), p3 (ref), p4 (ref), p2 (ref)
-		if var2.current then
-			p3:sendEventDeferred(p4 or "", "gamepadConnectionEvent", { connectionEvent = "gamepadReconnected" })
-			var2.current = false
-			p2()
+return function(Callback1, Callback, p1, p2) --[[ Line: 11 | Named "useGamepadDisconnectOverlayEffect" ]]
+	-- upvalues: EnableGamepadHookForCorescriptGlobalEffects (copy), UseIsGamepadFunction (copy), UseInputTypeFunction (copy), InputTypeConstants (copy), ReactModule (copy), UseGamepadConnectedEventModule (copy)
+	local UseIsGamepadResult = nil
+	UseIsGamepadResult = if EnableGamepadHookForCorescriptGlobalEffects then UseIsGamepadFunction() else UseInputTypeFunction() == InputTypeConstants.Gamepad
+	local UseRefResult = ReactModule.useRef(false)
+	UseGamepadConnectedEventModule(ReactModule.useCallback(function() --[[ Line: 26 ]]
+		-- upvalues: UseRefResult (copy), p1 (copy), p2 (copy), Callback (copy)
+		if UseRefResult.current then
+			p1:sendEventDeferred(p2 or "", "gamepadConnectionEvent", { connectionEvent = "gamepadReconnected" })
+			UseRefResult.current = false
+			Callback()
 		end
-	end, { p2 }), reactModule.useCallback(function()
-		-- upvalues: var1 (write), var2 (ref), p3 (ref), p4 (ref), p1 (ref)
-		if not var1 then return end
-		if not var2.current then
-			p3:sendEventDeferred(p4 or "", "gamepadConnectionEvent", { connectionEvent = "gamepadDisconnected" })
-			var2.current = true
-			p1()
+	end, { Callback }), (ReactModule.useCallback(function() --[[ Line: 38 ]]
+		-- upvalues: UseIsGamepadResult (ref), UseRefResult (copy), p1 (copy), p2 (copy), Callback1 (copy)
+		if not UseIsGamepadResult then return end
+		if not UseRefResult.current then
+			p1:sendEventDeferred(p2 or "", "gamepadConnectionEvent", { connectionEvent = "gamepadDisconnected" })
+			UseRefResult.current = true
+			Callback1()
 		end
-	end, { var1, p1 }))
+	end, { UseIsGamepadResult, Callback1 })))
 end

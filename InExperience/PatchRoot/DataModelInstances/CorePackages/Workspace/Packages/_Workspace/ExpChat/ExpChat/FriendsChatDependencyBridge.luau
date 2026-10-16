@@ -1,10 +1,10 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local reactModule = require(parent.React)
-local friendsChatDependencyContextModule = require(parent.FriendsChat.FriendsChatDependencyContext)
-local t = { ChatWindow = require(expChat.ChatWindow.UI.ChatWindow) }
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local ReactModule = require(Parent.React)
+local FriendsChatDependencyContextModule = require(Parent.FriendsChat.FriendsChatDependencyContext)
+local config = { ChatWindow = require(ExpChat.ChatWindow.UI.ChatWindow) }
 
-return function(p1)
-	-- upvalues: reactModule (ref), friendsChatDependencyContextModule (ref), t (ref)
-	return reactModule.createElement(friendsChatDependencyContextModule.Provider, { value = t }, p1.children)
+return function(p1) --[[ Line: 31 | Named "FriendsChatDependencyBridge" ]]
+	-- upvalues: ReactModule (copy), FriendsChatDependencyContextModule (copy), config (copy)
+	return ReactModule.createElement(FriendsChatDependencyContextModule.Provider, { value = config }, p1.children)
 end

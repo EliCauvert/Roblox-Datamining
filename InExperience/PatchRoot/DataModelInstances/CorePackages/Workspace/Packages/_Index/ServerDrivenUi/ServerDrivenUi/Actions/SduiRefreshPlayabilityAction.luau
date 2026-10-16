@@ -1,35 +1,36 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local fetchGamePlayabilityAndProductInfo = require(parent.GameDetailRodux).FetchGamePlayabilityAndProductInfo
-local gamePlayButtonModule = require(parent.GamePlayButton)
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
-local sduiActionType = sduiCoreSystemModule.SduiActionType
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local FetchGamePlayabilityAndProductInfo = require(Parent.GameDetailRodux).FetchGamePlayabilityAndProductInfo
+local GamePlayButtonModule = require(Parent.GamePlayButton)
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
+local SduiActionType = SduiCoreSystemModule.SduiActionType
 
-return function(p1, _, p2)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref), gamePlayButtonModule (ref), fetchGamePlayabilityAndProductInfo (ref)
-	local var1 = if p1 then p1.actionParams else nil
+return function(p1, _, p2) --[[ Line: 15 | Named "SduiRefreshPlayabilityAction" ]]
+	-- upvalues: SduiErrorType (copy), SduiActionType (copy), GamePlayButtonModule (copy), FetchGamePlayabilityAndProductInfo (copy)
+	local ActionParams = p1 and p1.actionParams or nil
 	
-	if var1 == nil then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if ActionParams == nil then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
-			name = sduiActionType.RefreshPlayability
+			name = SduiActionType.RefreshPlayability
 		}, p2.appPage)
 		
 		return
 	end
-	local universeId = var1.universeId
+	local UniverseId = ActionParams.universeId
 	
-	if universeId == nil then return end
-	if gamePlayButtonModule.Flags.GetFFlagLuaAppFetchPlayabilityKillSwitch() then return end
-	local networking = p2.dependencies.networking
+	if UniverseId == nil then return end
+	if GamePlayButtonModule.Flags.GetFFlagLuaAppFetchPlayabilityKillSwitch() then return end
+	local Networking = p2.dependencies.networking
 	
-	if networking == nil then
-		p2.dependencies.logger.reportError(sduiErrorType.GetNilDependencies, {
+	if Networking == nil then
+		p2.dependencies.logger.reportError(SduiErrorType.GetNilDependencies, {
 			message = "RefreshPlayability requires networking dependency",
-			name = sduiActionType.RefreshPlayability
+			name = SduiActionType.RefreshPlayability
 		}, p2.appPage)
 		
 		return
+	else
+		p2.dependencies.dispatch(FetchGamePlayabilityAndProductInfo.Fetch(Networking, UniverseId))
 	end
-	p2.dependencies.dispatch(fetchGamePlayabilityAndProductInfo.Fetch(networking, universeId))
 end

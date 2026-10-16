@@ -1,151 +1,147 @@
-﻿local parent = script:FindFirstAncestor("AppBlox").Parent
-local UIBloxModule = require(parent.UIBlox)
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local responsiveModule = require(parent.Responsive)
-local foundationModule = require(parent.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local core = UIBloxModule.Core
-local app = UIBloxModule.App
-local useStyle = core.Style.useStyle
-local button = UIBloxModule.App.Button.Button
-local images = app.ImageSet.Images
-local iconButton = app.Button.IconButton
-local iconSize = app.ImageSet.Enum.IconSize
-local imageSetLabel = core.ImageSet.ImageSetLabel
-local getIconSize = app.ImageSet.getIconSize
-local close = images["icons/navigation/close"]
+﻿local Parent = script:FindFirstAncestor("AppBlox").Parent
+local UIBloxModule = require(Parent.UIBlox)
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local ResponsiveModule = require(Parent.Responsive)
+local FoundationModule = require(Parent.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local Core = UIBloxModule.Core
+local App = UIBloxModule.App
+local UseStyleFunction = Core.Style.useStyle
+local Button = UIBloxModule.App.Button.Button
+local IconButton = App.Button.IconButton
+local IconSize = App.ImageSet.Enum.IconSize
+local ImageSetLabel = Core.ImageSet.ImageSetLabel
+local GetIconSizeFunction = App.ImageSet.getIconSize
+local IconsNavigationClose = App.ImageSet.Images["icons/navigation/close"]
 
-return function(p1)
-	-- upvalues: useStyle (ref), getIconSize (ref), iconSize (ref), reactModule (ref), responsiveModule (ref), imageSetLabel (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), button (ref), cryoModule (ref), iconButton (ref), close (ref)
-	local var1 = useStyle()
-	local tokens = var1.Tokens
-	local var2 = (if p1.iconImage then 36 else 0) + (if p1.onDismiss then getIconSize(iconSize.Small) else 0)
-	local var3 = reactModule.useRef(nil)
-	local var4 = responsiveModule.useBreakpointXOrSmaller(responsiveModule.Keys.Small)
-	local createElement = reactModule.createElement
-	createElement = createElement("Frame", {
-		BackgroundTransparency = 1,
-		LayoutOrder = 1,
-		Size = UDim2.new(1, 0, 0, 0),
-		AutomaticSize = Enum.AutomaticSize.Y
-	}, {
-		UILayout = reactModule.createElement("UIListLayout", {
-			SortOrder = Enum.SortOrder.LayoutOrder,
-			FillDirection = Enum.FillDirection.Horizontal,
-			VerticalAlignment = if var4 then Enum.VerticalAlignment.Top else Enum.VerticalAlignment.Center
-		}),
-		Icon = if p1.iconImage then reactModule.createElement(imageSetLabel, {
-			LayoutOrder = 1,
-			Selectable = false,
-			BackgroundTransparency = 1,
-			Size = UDim2.fromOffset(36, 36),
-			Image = p1.iconImage,
-			ImageColor3 = tokens.Color.Content.Emphasis.Color3,
-			ImageTransparency = tokens.Color.Content.Emphasis.Transparency
-		}) else nil,
-		MiddleFrame = reactModule.createElement("Frame", {
-			LayoutOrder = 2,
-			BackgroundTransparency = 1,
-			Size = UDim2.new(1, -var2, 0, 0),
-			AutomaticSize = Enum.AutomaticSize.Y
-		}, {
-			UILayout = reactModule.createElement("UIListLayout", {
-				SortOrder = Enum.SortOrder.LayoutOrder,
-				FillDirection = Enum.FillDirection.Horizontal,
-				VerticalAlignment = Enum.VerticalAlignment.Center,
-				HorizontalFlex = Enum.UIFlexAlignment.SpaceBetween
-			}),
-			UIPadding = reactModule.createElement("UIPadding", {
-				PaddingLeft = UDim.new(0, 8),
-				PaddingRight = UDim.new(0, 12)
-			}),
-			Text = reactModule.createElement("Frame", {
-				LayoutOrder = 1,
-				BackgroundTransparency = 1,
-				AutomaticSize = Enum.AutomaticSize.XY
-			}, {
-				UIFlexItem = reactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Fill }),
-				TextLayout = reactModule.createElement("UIListLayout", {
-					SortOrder = Enum.SortOrder.LayoutOrder,
-					FillDirection = Enum.FillDirection.Vertical,
-					HorizontalAlignment = Enum.HorizontalAlignment.Left,
-					VerticalAlignment = Enum.VerticalAlignment.Center
-				}),
-				UIPadding = reactModule.createElement("UIPadding", { PaddingRight = UDim.new(0, 12) }),
-				Title = reactModule.createElement("TextLabel", {
-					LayoutOrder = 1,
-					BackgroundTransparency = 1,
-					TextWrapped = true,
-					TextScaled = false,
-					Text = p1.titleMessage,
-					TextColor3 = var1.Tokens.Color.Content.Emphasis.Color3,
-					TextTransparency = var1.Tokens.Color.Content.Emphasis.Transparency,
-					TextSize = var1.Tokens.Typography.CaptionLarge.FontSize,
-					Font = if foundationFontFaceMigration then nil else var1.Tokens.Typography.CaptionLarge.Font,
-					FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Tokens.Typography.CaptionLarge.Font) else nil,
-					TextXAlignment = Enum.TextXAlignment.Left,
-					Size = UDim2.new(1, 0, 0, 0),
-					AutomaticSize = Enum.AutomaticSize.Y,
-					LineHeight = var1.Tokens.LineHeight.LineHeight_140
-				}),
-				Subline = if p1.sublineMessage then reactModule.createElement("TextLabel", {
-					LayoutOrder = 2,
-					BackgroundTransparency = 1,
-					TextWrapped = true,
-					TextScaled = false,
-					LineHeight = 1,
-					Text = p1.sublineMessage,
-					TextColor3 = var1.Tokens.Color.Content.Default.Color3,
-					TextTransparency = var1.Tokens.Color.Content.Default.Transparency,
-					TextSize = var1.Tokens.Typography.BodySmall.FontSize,
-					Font = if foundationFontFaceMigration then nil else var1.Tokens.Typography.BodySmall.Font,
-					FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Tokens.Typography.BodySmall.Font) else nil,
-					TextXAlignment = Enum.TextXAlignment.Left,
-					Size = UDim2.new(1, 0, 0, 0),
-					AutomaticSize = Enum.AutomaticSize.Y
-				}) else nil
-			}),
-			Button = if var4 or not p1.buttonProps then nil else reactModule.createElement(button, cryoModule.Dictionary.join({
-				layoutOrder = 2,
-				size = UDim2.new(0, 0, 0, 0),
-				automaticSize = Enum.AutomaticSize.XY
-			}, p1.buttonProps))
-		}),
-		DismissButtonFrame = if p1.onDismiss then reactModule.createElement(iconButton, {
-			backgroundTransparency = 1,
-			layoutOrder = 3,
-			icon = close,
-			iconSize = iconSize.Small,
-			size = UDim2.new(0, iconSize.Small, 0, iconSize.Small),
-			onActivated = p1.onDismiss
-		}) else nil
-	})
+return function(p1) --[[ Line: 57 | Named "InlinePrompt" ]]
+	-- upvalues: UseStyleFunction (copy), GetIconSizeFunction (copy), IconSize (copy), ReactModule (copy), ResponsiveModule (copy), ImageSetLabel (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), Button (copy), CryoModule (copy), IconButton (copy), IconsNavigationClose (copy)
+	local UseStyleResult = UseStyleFunction()
+	local Tokens = UseStyleResult.Tokens
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseBreakpointXOrSmallerResult = ResponsiveModule.useBreakpointXOrSmaller(ResponsiveModule.Keys.Small)
 	
-	return reactModule.createElement("Frame", {
-		BackgroundTransparency = p1.backgroundTransparency or tokens.Color.Surface.Surface_300.Transparency,
-		BackgroundColor3 = p1.backgroundColor3 or tokens.Color.Surface.Surface_300.Color3,
+	return ReactModule.createElement("Frame", {
+		BackgroundTransparency = p1.backgroundTransparency or Tokens.Color.Surface.Surface_300.Transparency,
+		BackgroundColor3 = p1.backgroundColor3 or Tokens.Color.Surface.Surface_300.Color3,
 		AutomaticSize = Enum.AutomaticSize.Y,
 		Size = UDim2.new(1, 0, 0, 0),
-		ref = var3
+		ref = UseRefResult
 	}, {
-		UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) }),
-		ContainerRef = reactModule.createElement(responsiveModule.ContainerRef.Provider, { value = var3 }, {
-			UIPadding = reactModule.createElement("UIPadding", {
+		UICorner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) }),
+		ContainerRef = ReactModule.createElement(ResponsiveModule.ContainerRef.Provider, { value = UseRefResult }, {
+			UIPadding = ReactModule.createElement("UIPadding", {
 				PaddingLeft = UDim.new(0, 8),
 				PaddingRight = UDim.new(0, 12),
 				PaddingTop = UDim.new(0, 12),
 				PaddingBottom = UDim.new(0, 12)
 			}),
-			UILayout = reactModule.createElement("UIListLayout", {
+			UILayout = ReactModule.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				FillDirection = Enum.FillDirection.Vertical,
 				VerticalAlignment = Enum.VerticalAlignment.Center,
 				Padding = UDim.new(0, 12)
 			}),
-			HorizontalContent = createElement,
-			Button = if var4 and p1.buttonProps then reactModule.createElement(button, cryoModule.Dictionary.join({
+			HorizontalContent = ReactModule.createElement("Frame", {
+				BackgroundTransparency = 1,
+				LayoutOrder = 1,
+				Size = UDim2.new(1, 0, 0, 0),
+				AutomaticSize = Enum.AutomaticSize.Y
+			}, {
+				UILayout = ReactModule.createElement("UIListLayout", {
+					SortOrder = Enum.SortOrder.LayoutOrder,
+					FillDirection = Enum.FillDirection.Horizontal,
+					VerticalAlignment = if UseBreakpointXOrSmallerResult then Enum.VerticalAlignment.Top else Enum.VerticalAlignment.Center
+				}),
+				Icon = if p1.iconImage then ReactModule.createElement(ImageSetLabel, {
+					LayoutOrder = 1,
+					Selectable = false,
+					BackgroundTransparency = 1,
+					Size = UDim2.fromOffset(36, 36),
+					Image = p1.iconImage,
+					ImageColor3 = Tokens.Color.Content.Emphasis.Color3,
+					ImageTransparency = Tokens.Color.Content.Emphasis.Transparency
+				}) else nil,
+				MiddleFrame = ReactModule.createElement("Frame", {
+					LayoutOrder = 2,
+					BackgroundTransparency = 1,
+					Size = UDim2.new(1, -((if p1.iconImage then 36 else 0) + (if p1.onDismiss then GetIconSizeFunction(IconSize.Small) else 0)), 0, 0),
+					AutomaticSize = Enum.AutomaticSize.Y
+				}, {
+					UILayout = ReactModule.createElement("UIListLayout", {
+						SortOrder = Enum.SortOrder.LayoutOrder,
+						FillDirection = Enum.FillDirection.Horizontal,
+						VerticalAlignment = Enum.VerticalAlignment.Center,
+						HorizontalFlex = Enum.UIFlexAlignment.SpaceBetween
+					}),
+					UIPadding = ReactModule.createElement("UIPadding", {
+						PaddingLeft = UDim.new(0, 8),
+						PaddingRight = UDim.new(0, 12)
+					}),
+					Text = ReactModule.createElement("Frame", {
+						LayoutOrder = 1,
+						BackgroundTransparency = 1,
+						AutomaticSize = Enum.AutomaticSize.XY
+					}, {
+						UIFlexItem = ReactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Fill }),
+						TextLayout = ReactModule.createElement("UIListLayout", {
+							SortOrder = Enum.SortOrder.LayoutOrder,
+							FillDirection = Enum.FillDirection.Vertical,
+							HorizontalAlignment = Enum.HorizontalAlignment.Left,
+							VerticalAlignment = Enum.VerticalAlignment.Center
+						}),
+						UIPadding = ReactModule.createElement("UIPadding", { PaddingRight = UDim.new(0, 12) }),
+						Title = ReactModule.createElement("TextLabel", {
+							LayoutOrder = 1,
+							BackgroundTransparency = 1,
+							TextWrapped = true,
+							TextScaled = false,
+							Text = p1.titleMessage,
+							TextColor3 = UseStyleResult.Tokens.Color.Content.Emphasis.Color3,
+							TextTransparency = UseStyleResult.Tokens.Color.Content.Emphasis.Transparency,
+							TextSize = UseStyleResult.Tokens.Typography.CaptionLarge.FontSize,
+							Font = if FoundationFontFaceMigration then nil else UseStyleResult.Tokens.Typography.CaptionLarge.Font,
+							FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.CaptionLarge.Font) else nil,
+							TextXAlignment = Enum.TextXAlignment.Left,
+							Size = UDim2.new(1, 0, 0, 0),
+							AutomaticSize = Enum.AutomaticSize.Y,
+							LineHeight = UseStyleResult.Tokens.LineHeight.LineHeight_140
+						}),
+						Subline = if p1.sublineMessage then ReactModule.createElement("TextLabel", {
+							LayoutOrder = 2,
+							BackgroundTransparency = 1,
+							TextWrapped = true,
+							TextScaled = false,
+							LineHeight = 1,
+							Text = p1.sublineMessage,
+							TextColor3 = UseStyleResult.Tokens.Color.Content.Default.Color3,
+							TextTransparency = UseStyleResult.Tokens.Color.Content.Default.Transparency,
+							TextSize = UseStyleResult.Tokens.Typography.BodySmall.FontSize,
+							Font = if FoundationFontFaceMigration then nil else UseStyleResult.Tokens.Typography.BodySmall.Font,
+							FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodySmall.Font) else nil,
+							TextXAlignment = Enum.TextXAlignment.Left,
+							Size = UDim2.new(1, 0, 0, 0),
+							AutomaticSize = Enum.AutomaticSize.Y
+						}) else nil
+					}),
+					Button = if UseBreakpointXOrSmallerResult or not p1.buttonProps then nil else ReactModule.createElement(Button, CryoModule.Dictionary.join({
+						layoutOrder = 2,
+						size = UDim2.new(0, 0, 0, 0),
+						automaticSize = Enum.AutomaticSize.XY
+					}, p1.buttonProps))
+				}),
+				DismissButtonFrame = if p1.onDismiss then ReactModule.createElement(IconButton, {
+					backgroundTransparency = 1,
+					layoutOrder = 3,
+					icon = IconsNavigationClose,
+					iconSize = IconSize.Small,
+					size = UDim2.new(0, IconSize.Small, 0, IconSize.Small),
+					onActivated = p1.onDismiss
+				}) else nil
+			}),
+			Button = if UseBreakpointXOrSmallerResult and p1.buttonProps then ReactModule.createElement(Button, CryoModule.Dictionary.join({
 				fitContent = false,
 				layoutOrder = 2,
 				size = UDim2.new(1, 0, 0, 0),

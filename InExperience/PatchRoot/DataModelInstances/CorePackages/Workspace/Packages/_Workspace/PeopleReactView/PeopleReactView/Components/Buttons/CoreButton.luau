@@ -1,48 +1,47 @@
-﻿local parent = script:FindFirstAncestor("PeopleReactView").Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local signalsModule = require(parent.Signals)
-local view = foundationModule.View
-local text = foundationModule.Text
-local icon = foundationModule.Icon
-local iconSize = foundationModule.Enums.IconSize
-local useTokens = foundationModule.Hooks.useTokens
-local useSignalState = signalsReactModule.useSignalState
+﻿local Parent = script:FindFirstAncestor("PeopleReactView").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local Icon = FoundationModule.Icon
+local IconSize = FoundationModule.Enums.IconSize
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 
-return function(p1)
-	-- upvalues: useTokens (ref), useSignalState (ref), signalsModule (ref), reactModule (ref), view (ref), icon (ref), iconSize (ref), text (ref)
-	local var1 = useTokens()
-	local var2 = useSignalState(p1.animatedIcon or signalsModule.createSignal(""))
-	local var3 = useSignalState(p1.buttonState or signalsModule.createSignal(false))
-	local var4 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), var3 (ref)
-		return if p1.icon.off and p1.buttonState then if var3 then p1.icon.off else p1.icon.on else p1.icon.on
-	end, { var3, p1.icon })
+return function(Frame) --[[ Line: 30 | Named "CoreButton" ]]
+	-- upvalues: UseTokensFunction (copy), UseSignalStateFunction (copy), SignalsModule (copy), ReactModule (copy), View (copy), Icon (copy), IconSize (copy), Text (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseSignalStateResult = UseSignalStateFunction(Frame.animatedIcon or SignalsModule.createSignal(""))
+	local UseSignalStateResult1 = UseSignalStateFunction(Frame.buttonState or SignalsModule.createSignal(false))
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 36 ]]
+		-- upvalues: Frame (copy), UseSignalStateResult1 (copy)
+		return Frame.icon.off and Frame.buttonState and (UseSignalStateResult1 and Frame.icon.off) or Frame.icon.on
+	end, { UseSignalStateResult1, Frame.icon })
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "size-0-1200 flex-x-fill grow radius-medium padding-x-small align-y-center row gap-xsmall bg-surface-200",
-		onActivated = p1.onActivated,
-		LayoutOrder = p1.LayoutOrder,
-		ref = p1.onMount
+		onActivated = Frame.onActivated,
+		LayoutOrder = Frame.LayoutOrder,
+		ref = Frame.onMount
 	}, {
-		IconContainer = reactModule.createElement(view, {
+		IconContainer = ReactModule.createElement(View, {
 			tag = "size-1100 align-y-center align-x-center row",
 			LayoutOrder = 1
 		}, {
-			Icon = reactModule.createElement(icon, {
-				name = reactModule.useMemo(function()
-					-- upvalues: p1 (ref), var2 (ref), var4 (ref)
-					return if p1.animatedIcon then var2 else var4
-				end, { var2, var4 }),
-				size = if p1.isNewIcon then iconSize.Large else iconSize.Medium
+			Icon = ReactModule.createElement(Icon, {
+				name = ReactModule.useMemo(function() --[[ Line: 46 ]]
+					-- upvalues: Frame (copy), UseSignalStateResult (copy), UseMemoResult (copy)
+					return if Frame.animatedIcon then UseSignalStateResult else UseMemoResult
+				end, { UseSignalStateResult, UseMemoResult }),
+				size = if Frame.isNewIcon then IconSize.Large else IconSize.Medium
 			})
 		}),
-		Text = reactModule.createElement(text, {
+		Text = ReactModule.createElement(Text, {
 			tag = "text-label-medium size-full text-align-x-left",
 			LayoutOrder = 2,
-			Text = p1.text,
-			textStyle = { Color3 = var1.Color.Content.Default.Color3 },
+			Text = Frame.text,
+			textStyle = { Color3 = UseTokensResult.Color.Content.Default.Color3 },
 			TextTruncate = Enum.TextTruncate.SplitWord
 		})
 	})

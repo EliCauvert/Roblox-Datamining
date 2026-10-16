@@ -1,5 +1,5 @@
-﻿local reactModule = require(script:FindFirstAncestor("AppChat").Parent.React)
-local t = {
+﻿local ReactModule = require(script:FindFirstAncestor("AppChat").Parent.React)
+local config = {
 	[Enum.HorizontalAlignment.Center] = {
 		[Enum.VerticalAlignment.Center] = {
 			anchor = Vector2.new(0.5, 0.5),
@@ -44,26 +44,27 @@ local t = {
 	}
 }
 
-return function(p1)
-	-- upvalues: reactModule (ref), t (ref)
-	local var1, var2 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), t (copy)
-		if p1.horizontalAlignment and p1.verticalAlignment then
-			return t[p1.horizontalAlignment][p1.verticalAlignment].anchor, t[p1.horizontalAlignment][p1.verticalAlignment].position
+return function(Frame: Frame) --[[ Line: 36 | Named "Frame" ]]
+	-- upvalues: ReactModule (copy), config (copy)
+	local UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 37 ]]
+		-- upvalues: Frame (copy), config (upval)
+		if Frame.horizontalAlignment and Frame.verticalAlignment then
+			return config[Frame.horizontalAlignment][Frame.verticalAlignment].anchor, config[Frame.horizontalAlignment][Frame.verticalAlignment].position
+		else
+			return nil, nil
 		end
-		return nil, nil
-	end, { p1.horizontalAlignment, p1.verticalAlignment })
+	end, { Frame.horizontalAlignment, Frame.verticalAlignment })
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
-		AnchorPoint = p1.AnchorPoint or var1,
-		BackgroundColor3 = p1.BackgroundColor3,
-		BackgroundTransparency = p1.BackgroundTransparency or 1,
-		ClipsDescendants = p1.ClipsDescendants,
-		LayoutOrder = p1.LayoutOrder,
-		Position = p1.Position or var2,
-		Size = p1.Size or UDim2.fromScale(1, 1),
-		ZIndex = p1.ZIndex,
-		children = p1.children
+		AnchorPoint = Frame.AnchorPoint or UseMemoResult,
+		BackgroundColor3 = Frame.BackgroundColor3,
+		BackgroundTransparency = Frame.BackgroundTransparency or 1,
+		ClipsDescendants = Frame.ClipsDescendants,
+		LayoutOrder = Frame.LayoutOrder,
+		Position = Frame.Position or UseMemoResult2,
+		Size = Frame.Size or UDim2.fromScale(1, 1),
+		ZIndex = Frame.ZIndex,
+		children = Frame.children
 	})
 end

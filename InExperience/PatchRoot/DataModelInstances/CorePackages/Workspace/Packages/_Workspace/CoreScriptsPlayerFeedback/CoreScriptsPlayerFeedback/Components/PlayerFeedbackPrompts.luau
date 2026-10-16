@@ -1,59 +1,57 @@
-﻿local coreScriptsPlayerFeedback = script:FindFirstAncestor("CoreScriptsPlayerFeedback")
-local parent = coreScriptsPlayerFeedback.Parent
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local focusRoot = focusNavigationUtilsModule.FocusRoot
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local promptConnectionsModule = require(script.Parent.PromptConnections)
-local playerFeedbackPromptModule = require(coreScriptsPlayerFeedback.Components.PlayerFeedbackPrompt)
-local playerSupportPromptModule = require(coreScriptsPlayerFeedback.Components.PlayerSupportPrompt)
-local unavailablePromptModule = require(coreScriptsPlayerFeedback.Components.UnavailablePrompt)
-local playerSupportUnavailablePromptModule = require(coreScriptsPlayerFeedback.Components.PlayerSupportUnavailablePrompt)
-local playerSupportToastModule = require(coreScriptsPlayerFeedback.Components.PlayerSupportToast)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local var1 = require(coreScriptsPlayerFeedback.Flags.GetFFlagEnablePlayerSupportPrompt)()
-local t = {
+﻿local CoreScriptsPlayerFeedback = script:FindFirstAncestor("CoreScriptsPlayerFeedback")
+local Parent = CoreScriptsPlayerFeedback.Parent
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local FocusRoot = FocusNavigationUtilsModule.FocusRoot
+local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+local PromptConnectionsModule = require(script.Parent.PromptConnections)
+local PlayerFeedbackPromptModule = require(CoreScriptsPlayerFeedback.Components.PlayerFeedbackPrompt)
+local PlayerSupportPromptModule = require(CoreScriptsPlayerFeedback.Components.PlayerSupportPrompt)
+local UnavailablePromptModule = require(CoreScriptsPlayerFeedback.Components.UnavailablePrompt)
+local PlayerSupportUnavailablePromptModule = require(CoreScriptsPlayerFeedback.Components.PlayerSupportUnavailablePrompt)
+local PlayerSupportToastModule = require(CoreScriptsPlayerFeedback.Components.PlayerSupportToast)
+local FFlagPlayerSupportPromptEventIngestModule = require(CoreScriptsPlayerFeedback.Flags.FFlagPlayerSupportPromptEventIngest)
+local PlayerSupportPromptTelemetryModule = require(CoreScriptsPlayerFeedback.Telemetry.PlayerSupportPromptTelemetry)
+local ConstantsModule = require(CoreScriptsPlayerFeedback.constants)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local v1 = require(CoreScriptsPlayerFeedback.Flags.GetFFlagEnablePlayerSupportPrompt)()
+local config = {
 	TICKET_CREATION_SUBMITTED = "ToastSubmitted",
 	TICKET_CREATION_FAILED = "ToastFailed"
 }
-local t_1 = {
+local config1 = {
 	TICKET_CREATION_TEXT_FILTER_ERROR = true,
 	TICKET_CREATION_GIBBERISH_ERROR = true
 }
-local _ = {
-	PromptFeedback = "PromptFeedback",
-	PromptPlayerSupport = "PromptPlayerSupport",
-	PromptUnavailable = "PromptUnavailable",
-	PromptPlayerSupportUnavailable = "PromptPlayerSupportUnavailable"
-}
-local var2 = reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), cryoModule (ref), unavailablePromptModule (ref), playerFeedbackPromptModule (ref), promptConnectionsModule (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
-	local var3, var4 = reactModule.useState({ promptType = nil, promptData = nil, promptQueue = {} })
-	local promptData = var3.promptData
-	local promptType = var3.promptType
-	local var5 = reactModule.useCallback(function()
-		-- upvalues: var4 (ref), cryoModule (copy)
-		var4(function(p2)
-			-- upvalues: cryoModule (copy)
-			local promptQueue = p2.promptQueue or {}
+local MemoResult = ReactModule.memo(function(p1) --[[ Line: 67 ]]
+	-- upvalues: ReactModule (copy), CryoModule (copy), UnavailablePromptModule (copy), PlayerFeedbackPromptModule (copy), PromptConnectionsModule (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState({ promptType = nil, promptData = nil, promptQueue = {} })
+	local PromptData = UseStateResult.promptData
+	local PromptType = UseStateResult.promptType
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 77 ]]
+		-- upvalues: UseStateResult2 (copy), CryoModule (upval)
+		UseStateResult2(function(p2) --[[ Line: 78 ]]
+			-- upvalues: CryoModule (upval)
+			local PromptQueue = p2.promptQueue or {}
 			
-			if cryoModule.isEmpty(promptQueue) then
+			if CryoModule.isEmpty(PromptQueue) then
 				return { promptType = nil, promptData = {}, promptQueue = {} }
+			else
+				local PromptQueueEntry = PromptQueue[1]
+				
+				return {
+					promptType = PromptQueueEntry.promptType,
+					promptData = PromptQueueEntry.promptData,
+					promptQueue = CryoModule.List.removeIndex(PromptQueue, 1)
+				}
 			end
-			local var6 = promptQueue[1]
-			
-			return {
-				promptType = var6.promptType,
-				promptData = var6.promptData,
-				promptQueue = cryoModule.List.removeIndex(promptQueue, 1)
-			}
 		end)
 	end, {})
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: var4 (ref), cryoModule (copy)
-		var4(function(p2)
-			-- upvalues: cryoModule (copy)
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 96 ]]
+		-- upvalues: UseStateResult2 (copy), CryoModule (upval)
+		UseStateResult2(function(p2) --[[ Line: 97 ]]
+			-- upvalues: CryoModule (upval)
 			return if p2.promptType == nil then {
 				promptType = "PromptFeedback",
 				promptData = {},
@@ -61,109 +59,110 @@ local var2 = reactModule.memo(function(p1)
 			} else {
 				promptType = p2.promptType,
 				promptData = p2.promptData,
-				promptQueue = cryoModule.List.join(p2.promptQueue or {}, { { promptType = "PromptFeedback", promptData = {} } })
+				promptQueue = CryoModule.List.join(p2.promptQueue or {}, { { promptType = "PromptFeedback", promptData = {} } })
 			}
 		end)
 	end, {})
-	local var7 = reactModule.useCallback(function(p2)
-		-- upvalues: var4 (ref), cryoModule (copy)
-		var4(function(p3)
-			-- upvalues: cryoModule (copy), p2 (ref)
-			return if p3.promptType == nil then {
+	local UseResult2 = ReactModule.useCallback(function(Reason) --[[ Line: 119 ]]
+		-- upvalues: UseStateResult2 (copy), CryoModule (upval)
+		UseStateResult2(function(p2) --[[ Line: 120 ]]
+			-- upvalues: CryoModule (upval), Reason (copy)
+			return if p2.promptType == nil then {
 				promptType = "PromptUnavailable",
-				promptData = { reason = p2 },
+				promptData = { reason = Reason },
 				promptQueue = {}
 			} else {
-				promptType = p3.promptType,
-				promptData = p3.promptData,
-				promptQueue = cryoModule.List.join(p3.promptQueue or {}, {
+				promptType = p2.promptType,
+				promptData = p2.promptData,
+				promptQueue = CryoModule.List.join(p2.promptQueue or {}, {
 					{
 						promptType = "PromptUnavailable",
-						promptData = { reason = p2 }
+						promptData = { reason = Reason }
 					}
 				})
 			}
 		end)
 	end, {})
-	local var8 = nil
+	local Element = nil
 	
-	if promptType then
-		if promptType == "PromptUnavailable" then
-			var8 = reactModule.createElement(unavailablePromptModule, {
+	if PromptType then
+		if PromptType == "PromptUnavailable" then
+			Element = ReactModule.createElement(UnavailablePromptModule, {
 				enableInputDelayed = p1.enableInputDelayed,
-				reason = if promptData then promptData.reason else nil,
-				closePrompt = var5
+				reason = if PromptData then PromptData.reason else nil,
+				closePrompt = UseResult
 			})
-		elseif promptType == "PromptFeedback" then
-			var8 = reactModule.createElement(playerFeedbackPromptModule, {
+		elseif PromptType == "PromptFeedback" then
+			Element = ReactModule.createElement(PlayerFeedbackPromptModule, {
 				enableInputDelayed = p1.enableInputDelayed,
-				promptData = promptData,
-				closePrompt = var5
+				promptData = PromptData,
+				closePrompt = UseResult
 			})
 		else
-			error(string.format("Unexpected prompt type: %s!", tostring(promptType)))
+			error(string.format("Unexpected prompt type: %s!", (tostring(PromptType))))
 		end
 	end
-	return reactModule.createElement(reactModule.Fragment, {}, {
-		PromptConnections = reactModule.createElement(promptConnectionsModule, {
+	return ReactModule.createElement(ReactModule.Fragment, {}, {
+		PromptConnections = ReactModule.createElement(PromptConnectionsModule, {
 			openPlayerSupportPrompt = nil,
 			openPlayerSupportUnavailablePrompt = nil,
-			openFeedbackPrompt = var6,
-			openUnavailablePrompt = var7,
-			closePrompt = var5
+			openFeedbackPrompt = UseResult1,
+			openUnavailablePrompt = UseResult2,
+			closePrompt = UseResult
 		}),
-		FocusNavigationCoreScriptsWrapper = var8 and reactModule.createElement(focusRoot, {
+		FocusNavigationCoreScriptsWrapper = if Element then ReactModule.createElement(FocusRoot, {
 			isIsolated = true,
 			isAutoFocusRoot = true,
-			surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.CentralOverlay
-		}, { Prompt = var8 })
+			surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.CentralOverlay
+		}, { Prompt = Element }) else Element
 	})
 end)
-local var3 = reactModule.memo(function(p1)
-	-- upvalues: useLocalization (ref), reactModule (ref), cryoModule (ref), t (ref), unavailablePromptModule (ref), playerSupportUnavailablePromptModule (ref), t_1 (ref), playerSupportPromptModule (ref), playerFeedbackPromptModule (ref), promptConnectionsModule (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), playerSupportToastModule (ref)
-	local var4 = useLocalization({
+local MemoResult1 = ReactModule.memo(function(p1) --[[ Line: 182 ]]
+	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), CryoModule (copy), FFlagPlayerSupportPromptEventIngestModule (copy), PlayerSupportPromptTelemetryModule (copy), ConstantsModule (copy), config (copy), UnavailablePromptModule (copy), PlayerSupportUnavailablePromptModule (copy), config1 (copy), PlayerSupportPromptModule (copy), PlayerFeedbackPromptModule (copy), PromptConnectionsModule (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), PlayerSupportToastModule (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
 		ToastSubmitted = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Toast.Submitted",
 		ToastFailed = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Toast.Failed"
 	})
-	local var5, var6 = reactModule.useState({ promptType = nil, promptData = nil, promptQueue = {} })
-	local var7, var8 = reactModule.useState(nil)
-	local var9, var10 = reactModule.useState("")
-	local var11, var12 = reactModule.useState("")
-	local var13, var14 = reactModule.useState(false)
-	local promptData = var5.promptData
-	local promptType = var5.promptType
-	local var15 = reactModule.useCallback(function()
-		-- upvalues: var10 (ref), var12 (ref), var14 (ref)
-		var10("")
-		var12("")
-		var14(false)
+	local UseStateResult, UseStateResult2 = ReactModule.useState({ promptType = nil, promptData = nil, promptQueue = {} })
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState("")
+	local UseStateResult4, UseStateResult2_3 = ReactModule.useState("")
+	local UseStateResult5, UseStateResult2_4 = ReactModule.useState(false)
+	local PromptData = UseStateResult.promptData
+	local PromptType = UseStateResult.promptType
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 201 ]]
+		-- upvalues: UseStateResult2_2 (copy), UseStateResult2_3 (copy), UseStateResult2_4 (copy)
+		UseStateResult2_2("")
+		UseStateResult2_3("")
+		UseStateResult2_4(false)
 	end, {})
-	local var16 = reactModule.useCallback(function()
-		-- upvalues: var8 (ref)
-		var8(nil)
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 207 ]]
+		-- upvalues: UseStateResult2_1 (copy)
+		UseStateResult2_1(nil)
 	end, {})
-	local var17 = reactModule.useCallback(function()
-		-- upvalues: var6 (ref), cryoModule (copy)
-		var6(function(p2)
-			-- upvalues: cryoModule (copy)
-			local promptQueue = p2.promptQueue or {}
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 211 ]]
+		-- upvalues: UseStateResult2 (copy), CryoModule (upval)
+		UseStateResult2(function(p2) --[[ Line: 212 ]]
+			-- upvalues: CryoModule (upval)
+			local PromptQueue = p2.promptQueue or {}
 			
-			if cryoModule.isEmpty(promptQueue) then
+			if CryoModule.isEmpty(PromptQueue) then
 				return { promptType = nil, promptData = {}, promptQueue = {} }
+			else
+				local PromptQueueEntry = PromptQueue[1]
+				
+				return {
+					promptType = PromptQueueEntry.promptType,
+					promptData = PromptQueueEntry.promptData,
+					promptQueue = CryoModule.List.removeIndex(PromptQueue, 1)
+				}
 			end
-			local var18 = promptQueue[1]
-			
-			return {
-				promptType = var18.promptType,
-				promptData = var18.promptData,
-				promptQueue = cryoModule.List.removeIndex(promptQueue, 1)
-			}
 		end)
 	end, {})
-	local var18 = reactModule.useCallback(function()
-		-- upvalues: var6 (ref), cryoModule (copy)
-		var6(function(p2)
-			-- upvalues: cryoModule (copy)
+	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 230 ]]
+		-- upvalues: UseStateResult2 (copy), CryoModule (upval)
+		UseStateResult2(function(p2) --[[ Line: 231 ]]
+			-- upvalues: CryoModule (upval)
 			return if p2.promptType == nil then {
 				promptType = "PromptFeedback",
 				promptData = {},
@@ -171,14 +170,14 @@ local var3 = reactModule.memo(function(p1)
 			} else {
 				promptType = p2.promptType,
 				promptData = p2.promptData,
-				promptQueue = cryoModule.List.join(p2.promptQueue or {}, { { promptType = "PromptFeedback", promptData = {} } })
+				promptQueue = CryoModule.List.join(p2.promptQueue or {}, { { promptType = "PromptFeedback", promptData = {} } })
 			}
 		end)
 	end, {})
-	local var19 = reactModule.useCallback(function()
-		-- upvalues: var6 (ref), cryoModule (copy)
-		var6(function(p2)
-			-- upvalues: cryoModule (copy)
+	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 253 ]]
+		-- upvalues: UseStateResult2 (copy), CryoModule (upval)
+		UseStateResult2(function(p2) --[[ Line: 254 ]]
+			-- upvalues: CryoModule (upval)
 			return if p2.promptType == nil then {
 				promptType = "PromptPlayerSupport",
 				promptData = {},
@@ -186,116 +185,130 @@ local var3 = reactModule.memo(function(p1)
 			} else {
 				promptType = p2.promptType,
 				promptData = p2.promptData,
-				promptQueue = cryoModule.List.join(p2.promptQueue or {}, { { promptType = "PromptPlayerSupport", promptData = {} } })
+				promptQueue = CryoModule.List.join(p2.promptQueue or {}, { { promptType = "PromptPlayerSupport", promptData = {} } })
 			}
 		end)
 	end, {})
-	local var20 = reactModule.useCallback(function(p2)
-		-- upvalues: var6 (ref), cryoModule (copy)
-		var6(function(p3)
-			-- upvalues: cryoModule (copy), p2 (ref)
-			return if p3.promptType == nil then {
+	local UseResult5 = ReactModule.useCallback(function(Reason) --[[ Line: 276 ]]
+		-- upvalues: UseStateResult2 (copy), CryoModule (upval)
+		UseStateResult2(function(p2) --[[ Line: 277 ]]
+			-- upvalues: CryoModule (upval), Reason (copy)
+			return if p2.promptType == nil then {
 				promptType = "PromptUnavailable",
-				promptData = { reason = p2 },
+				promptData = { reason = Reason },
 				promptQueue = {}
 			} else {
-				promptType = p3.promptType,
-				promptData = p3.promptData,
-				promptQueue = cryoModule.List.join(p3.promptQueue or {}, {
+				promptType = p2.promptType,
+				promptData = p2.promptData,
+				promptQueue = CryoModule.List.join(p2.promptQueue or {}, {
 					{
 						promptType = "PromptUnavailable",
-						promptData = { reason = p2 }
+						promptData = { reason = Reason }
 					}
 				})
 			}
 		end)
 	end, {})
-	local var21 = reactModule.useCallback(function(p2)
-		-- upvalues: t (copy), var15 (ref), var8 (ref), var4 (ref), var6 (ref), cryoModule (copy)
-		local var22 = t[p2]
+	local UseResult6 = ReactModule.useCallback(function(Reason) --[[ Line: 302 ]]
+		-- upvalues: FFlagPlayerSupportPromptEventIngestModule (upval), PlayerSupportPromptTelemetryModule (upval), UseStateResult4 (copy), ConstantsModule (upval), UseStateResult5 (copy), UseStateResult3 (copy), config (upval), UseResult (copy), UseStateResult2_1 (copy), UseLocalizationResult (copy), UseStateResult2 (copy), CryoModule (upval)
+		if FFlagPlayerSupportPromptEventIngestModule then
+			PlayerSupportPromptTelemetryModule.logTicketResult(Reason, {
+				category = UseStateResult4,
+				shareUserId = ConstantsModule.PLAYER_SUPPORT_CATEGORIES_REQUIRING_USER_ID[UseStateResult4] == true or UseStateResult5,
+				descriptionLength = #UseStateResult3
+			})
+		end
+		local Entry = config[Reason]
 		
-		if var22 then
-			var15()
-			var8(var4[var22])
+		if Entry then
+			UseResult()
+			UseStateResult2_1(UseLocalizationResult[Entry])
 			
 			return
+		else
+			UseStateResult2(function(p2) --[[ Line: 317 ]]
+				-- upvalues: CryoModule (upval), Reason (copy)
+				return if p2.promptType == nil then {
+					promptType = "PromptPlayerSupportUnavailable",
+					promptData = { reason = Reason },
+					promptQueue = {}
+				} else {
+					promptType = p2.promptType,
+					promptData = p2.promptData,
+					promptQueue = CryoModule.List.join(p2.promptQueue or {}, {
+						{
+							promptType = "PromptPlayerSupportUnavailable",
+							promptData = { reason = Reason }
+						}
+					})
+				}
+			end)
 		end
-		var6(function(p3)
-			-- upvalues: cryoModule (copy), p2 (ref)
-			return if p3.promptType == nil then {
-				promptType = "PromptPlayerSupportUnavailable",
-				promptData = { reason = p2 },
-				promptQueue = {}
-			} else {
-				promptType = p3.promptType,
-				promptData = p3.promptData,
-				promptQueue = cryoModule.List.join(p3.promptQueue or {}, {
-					{
-						promptType = "PromptPlayerSupportUnavailable",
-						promptData = { reason = p2 }
-					}
-				})
-			}
-		end)
-	end, { var4, var15 })
-	local var22 = nil
+	end, if FFlagPlayerSupportPromptEventIngestModule then {
+		UseLocalizationResult,
+		UseResult,
+		UseStateResult4,
+		UseStateResult5,
+		UseStateResult3
+	} else { UseLocalizationResult, UseResult })
+	local Element = nil
 	
-	if promptType then
-		if promptType == "PromptUnavailable" then
-			var22 = reactModule.createElement(unavailablePromptModule, {
+	if PromptType then
+		if PromptType == "PromptUnavailable" then
+			Element = ReactModule.createElement(UnavailablePromptModule, {
 				enableInputDelayed = p1.enableInputDelayed,
-				reason = if promptData then promptData.reason else nil,
-				closePrompt = var17
+				reason = if PromptData then PromptData.reason else nil,
+				closePrompt = UseResult2
 			})
-		elseif promptType == "PromptPlayerSupportUnavailable" then
-			local var23 = if promptData then promptData.reason else nil
-			var22 = reactModule.createElement(playerSupportUnavailablePromptModule, {
+		elseif PromptType == "PromptPlayerSupportUnavailable" then
+			local Reason = if PromptData then PromptData.reason else nil
+			Element = ReactModule.createElement(PlayerSupportUnavailablePromptModule, {
 				enableInputDelayed = p1.enableInputDelayed,
-				reason = var23,
-				closePrompt = var17,
-				openPlayerSupportPrompt = if t_1[var23] then var19 else nil
+				reason = Reason,
+				closePrompt = UseResult2,
+				openPlayerSupportPrompt = if config1[Reason] then UseResult4 else nil
 			})
-		elseif promptType == "PromptPlayerSupport" then
-			var22 = reactModule.createElement(playerSupportPromptModule, {
+		elseif PromptType == "PromptPlayerSupport" then
+			Element = ReactModule.createElement(PlayerSupportPromptModule, {
 				enableInputDelayed = p1.enableInputDelayed,
-				promptData = promptData,
-				closePrompt = var17,
-				description = var9,
-				setDescription = var10,
-				category = var11,
-				setCategory = var12,
-				shareUserId = var13,
-				setShareUserId = var14,
-				onFormAbandoned = var15
+				promptData = PromptData,
+				closePrompt = UseResult2,
+				description = UseStateResult3,
+				setDescription = UseStateResult2_2,
+				category = UseStateResult4,
+				setCategory = UseStateResult2_3,
+				shareUserId = UseStateResult5,
+				setShareUserId = UseStateResult2_4,
+				onFormAbandoned = UseResult
 			})
-		elseif promptType == "PromptFeedback" then
-			var22 = reactModule.createElement(playerFeedbackPromptModule, {
+		elseif PromptType == "PromptFeedback" then
+			Element = ReactModule.createElement(PlayerFeedbackPromptModule, {
 				enableInputDelayed = p1.enableInputDelayed,
-				promptData = promptData,
-				closePrompt = var17
+				promptData = PromptData,
+				closePrompt = UseResult2
 			})
 		else
-			error(string.format("Unexpected prompt type: %s!", tostring(promptType)))
+			error(string.format("Unexpected prompt type: %s!", (tostring(PromptType))))
 		end
 	end
-	return reactModule.createElement(reactModule.Fragment, {}, {
-		PromptConnections = reactModule.createElement(promptConnectionsModule, {
-			openFeedbackPrompt = var18,
-			openPlayerSupportPrompt = var19,
-			openUnavailablePrompt = var20,
-			openPlayerSupportUnavailablePrompt = var21,
-			closePrompt = var17
+	return ReactModule.createElement(ReactModule.Fragment, {}, {
+		PromptConnections = ReactModule.createElement(PromptConnectionsModule, {
+			openFeedbackPrompt = UseResult3,
+			openPlayerSupportPrompt = UseResult4,
+			openUnavailablePrompt = UseResult5,
+			openPlayerSupportUnavailablePrompt = UseResult6,
+			closePrompt = UseResult2
 		}),
-		FocusNavigationCoreScriptsWrapper = var22 and reactModule.createElement(focusRoot, {
+		FocusNavigationCoreScriptsWrapper = if Element then ReactModule.createElement(FocusRoot, {
 			isIsolated = true,
 			isAutoFocusRoot = true,
-			surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.CentralOverlay
-		}, { Prompt = var22 }),
-		Toast = if var7 then reactModule.createElement(playerSupportToastModule, { text = var7, onDismiss = var16 }) else nil
+			surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.CentralOverlay
+		}, { Prompt = Element }) else Element,
+		Toast = if UseStateResult1 then ReactModule.createElement(PlayerSupportToastModule, { text = UseStateResult1, onDismiss = UseResult1 }) else nil
 	})
 end)
 
-return reactModule.memo(function(p1)
-	-- upvalues: var1 (ref), reactModule (ref), var3 (ref), var2 (ref)
-	return if var1 then reactModule.createElement(var3, p1) else reactModule.createElement(var2, p1)
-end)
+return (ReactModule.memo(function(p1) --[[ Line: 413 ]]
+	-- upvalues: v1 (copy), ReactModule (copy), MemoResult1 (copy), MemoResult (copy)
+	return if v1 then ReactModule.createElement(MemoResult1, p1) else ReactModule.createElement(MemoResult, p1)
+end))

@@ -1,38 +1,37 @@
-﻿local socialCards = script:FindFirstAncestor("SocialCards")
-local parent = socialCards.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local reactRobloxModule = require(parent.Dev.ReactRoblox)
-local appStyleProvider = require(parent.Dev.UIBlox).App.Style.AppStyleProvider
-local t = {
-	Default = foundationModule.Enums.ColorMode.Dark,
-	Light = foundationModule.Enums.ColorMode.Light,
-	Dark = foundationModule.Enums.ColorMode.Dark
+﻿local SocialCards = script:FindFirstAncestor("SocialCards")
+local Parent = SocialCards.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local AppStyleProvider = require(Parent.Dev.UIBlox).App.Style.AppStyleProvider
+local config = {
+	Default = FoundationModule.Enums.ColorMode.Dark,
+	Light = FoundationModule.Enums.ColorMode.Light,
+	Dark = FoundationModule.Enums.ColorMode.Dark
 }
-local t_1 = {
+local config1 = {
 	Default = "Desktop",
 	Desktop = "Desktop",
 	Console = "Console"
 }
 
 return {
-	name = socialCards.Name,
-	roact = reactModule,
-	reactRoblox = reactRobloxModule,
-	storyRoot = socialCards,
-	mapStory = function(p1)
-		-- upvalues: t (ref), reactModule (ref), foundationModule (ref), t_1 (ref), appStyleProvider (ref)
-		return function(p2)
-			-- upvalues: t (copy), reactModule (copy), foundationModule (copy), t_1 (copy), appStyleProvider (copy), p1 (ref)
-			local var1 = if p2 then t[p2.theme] else t.Default
+	name = SocialCards.Name,
+	roact = ReactModule,
+	reactRoblox = require(Parent.Dev.ReactRoblox),
+	storyRoot = SocialCards,
+	mapStory = function(p1) --[[ Line: 29 ]]
+		-- upvalues: config (copy), ReactModule (copy), FoundationModule (copy), config1 (copy), AppStyleProvider (copy)
+		return function(p2) --[[ Line: 30 ]]
+			-- upvalues: config (upval), ReactModule (upval), FoundationModule (upval), config1 (upval), AppStyleProvider (upval), p1 (copy)
+			local Entry = p2 and config[p2.theme] or config.Default
 			
-			return reactModule.createElement(foundationModule.FoundationProvider, {
-				colorMode = var1,
-				device = if p2 then t_1[p2.platform] else "Desktop"
+			return ReactModule.createElement(FoundationModule.FoundationProvider, {
+				colorMode = Entry,
+				device = p2 and config1[p2.platform] or "Desktop"
 			}, {
-				AppStyleProvider = reactModule.createElement(appStyleProvider, {
-					style = { fontName = "Gotham", themeName = var1.themeName }
-				}, { Child = reactModule.createElement(p1, p2) })
+				AppStyleProvider = ReactModule.createElement(AppStyleProvider, {
+					style = { fontName = "Gotham", themeName = Entry.themeName }
+				}, { Child = ReactModule.createElement(p1, p2) })
 			})
 		end
 	end

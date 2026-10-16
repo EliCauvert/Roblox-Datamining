@@ -1,85 +1,84 @@
-﻿local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
-local corePackagesService = game:GetService("CorePackages")
+﻿local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
 local _ = game:GetService("GuiService")
 local _ = game:GetService("CoreGui"):WaitForChild("RobloxGui")
 local _ = game:GetService("UserInputService")
 local _ = game:GetService("Players")
-local rbxAnalyticsServiceExposePlaySessionIdEngineFeature = game:GetEngineFeature("RbxAnalyticsServiceExposePlaySessionId")
-local cryoModule = require(corePackagesService.Packages.Cryo)
-local parent = script.Parent
-local constantsModule = require(parent.Constants)
-local _ = require(parent.Flags.GetFFlagEnableTopBarAnalytics)()
-local t = {}
-t.__index = t
+local RbxAnalyticsServiceExposePlaySessionIdEngineFeature = game:GetEngineFeature("RbxAnalyticsServiceExposePlaySessionId")
+local CryoModule = require(game:GetService("CorePackages").Packages.Cryo)
+local Parent = script.Parent
+local ConstantsModule = require(Parent.Constants)
+local _ = require(Parent.Flags.GetFFlagEnableTopBarAnalytics)()
+local AnalyticsModule = {}
+AnalyticsModule.__index = AnalyticsModule
 
-function t.new()
-	-- upvalues: rbxAnalyticsService (ref), t (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (ref), cryoModule (ref), constantsModule (ref)
-	local tbl = setmetatable({
+function AnalyticsModule.new() --[[ Line: 42 ]]
+	-- upvalues: RbxAnalyticsService (copy), AnalyticsModule (copy), RbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), CryoModule (copy), ConstantsModule (copy)
+	local self = setmetatable({
 		_target = "client",
 		_context = "topbar",
 		_defaultProps = {
 			universeid = tostring(game.GameId),
 			placeid = tostring(game.PlaceId),
-			sessionid = rbxAnalyticsService:GetSessionId()
+			sessionid = RbxAnalyticsService:GetSessionId()
 		}
-	}, t)
+	}, AnalyticsModule)
 	
-	if rbxAnalyticsServiceExposePlaySessionIdEngineFeature then
-		tbl._defaultProps.playsessionid = rbxAnalyticsService:GetPlaySessionId()
+	if RbxAnalyticsServiceExposePlaySessionIdEngineFeature then
+		self._defaultProps.playsessionid = RbxAnalyticsService:GetPlaySessionId()
 	end
-	function tbl._sendEvent(p1, p2)
-		-- upvalues: cryoModule (copy), tbl (ref), rbxAnalyticsService (copy)
-		rbxAnalyticsService:SendEventDeferred(tbl._target, tbl._context, p1, cryoModule.Dictionary.join(tbl._defaultProps, p2 or {}))
+	function self._sendEvent(DismissGamepadNavigationDialog, p1) --[[ Line: 59 ]]
+		-- upvalues: CryoModule (upval), self (copy), RbxAnalyticsService (upval)
+		RbxAnalyticsService:SendEventDeferred(self._target, self._context, DismissGamepadNavigationDialog, (CryoModule.Dictionary.join(self._defaultProps, p1 or {})))
 		
 		return nil
 	end
 	
-	function tbl._onButtonActivated(p1, p2)
-		-- upvalues: tbl (ref), constantsModule (copy)
-		return tbl._sendEvent(constantsModule.Analytics.EventNameTopBarButtonActivated, {
-			button = p1,
-			status = if p2 then constantsModule.Analytics.StatusActive else constantsModule.Analytics.StatusInactive
+	function self._onButtonActivated(Button, p1) --[[ Line: 65 ]]
+		-- upvalues: self (copy), ConstantsModule (upval)
+		return self._sendEvent(ConstantsModule.Analytics.EventNameTopBarButtonActivated, {
+			button = Button,
+			status = if p1 then ConstantsModule.Analytics.StatusActive else ConstantsModule.Analytics.StatusInactive
 		})
 	end
 	
-	return tbl
+	return self
 end
 
-function t:onChatButtonActivated(p1)
-	-- upvalues: constantsModule (ref)
-	return self._onButtonActivated(constantsModule.Analytics.ChatButtonName, p1)
+function AnalyticsModule:onChatButtonActivated(p1) --[[ Line: 75 ]]
+	-- upvalues: ConstantsModule (copy)
+	return self._onButtonActivated(ConstantsModule.Analytics.ChatButtonName, p1)
 end
 
-function t:onMoreMenuActivated()
-	-- upvalues: constantsModule (ref)
-	return self._onButtonActivated(constantsModule.Analytics.MoreMenuButtonName, true)
+function AnalyticsModule:onMoreMenuActivated() --[[ Line: 79 ]]
+	-- upvalues: ConstantsModule (copy)
+	return self._onButtonActivated(ConstantsModule.Analytics.MoreMenuButtonName, true)
 end
 
-function t:onInventoryActivated(p1)
-	-- upvalues: constantsModule (ref)
-	return self._onButtonActivated(constantsModule.Analytics.InventoryButtonName, p1)
+function AnalyticsModule:onInventoryActivated(p1) --[[ Line: 84 ]]
+	-- upvalues: ConstantsModule (copy)
+	return self._onButtonActivated(ConstantsModule.Analytics.InventoryButtonName, p1)
 end
 
-function t:onLeaderboardActivated(p1)
-	-- upvalues: constantsModule (ref)
-	return self._onButtonActivated(constantsModule.Analytics.LeaderboardButtonName, p1)
+function AnalyticsModule:onLeaderboardActivated(p1) --[[ Line: 88 ]]
+	-- upvalues: ConstantsModule (copy)
+	return self._onButtonActivated(ConstantsModule.Analytics.LeaderboardButtonName, p1)
 end
 
-function t:onEmotesActivated(p1)
-	-- upvalues: constantsModule (ref)
-	return self._onButtonActivated(constantsModule.Analytics.EmotesButtonName, p1)
+function AnalyticsModule:onEmotesActivated(p1) --[[ Line: 92 ]]
+	-- upvalues: ConstantsModule (copy)
+	return self._onButtonActivated(ConstantsModule.Analytics.EmotesButtonName, p1)
 end
 
-function t:onShowGamepadNavigationDialog()
-	-- upvalues: constantsModule (ref)
-	return self._sendEvent(constantsModule.Analytics.ShowGamepadNavigationDialog)
+function AnalyticsModule:onShowGamepadNavigationDialog() --[[ Line: 96 ]]
+	-- upvalues: ConstantsModule (copy)
+	return self._sendEvent(ConstantsModule.Analytics.ShowGamepadNavigationDialog)
 end
 
-function t:onDismissGamepadNavigationDialog()
-	-- upvalues: constantsModule (ref)
-	return self._sendEvent(constantsModule.Analytics.DismissGamepadNavigationDialog)
+function AnalyticsModule:onDismissGamepadNavigationDialog() --[[ Line: 100 ]]
+	-- upvalues: ConstantsModule (copy)
+	return self._sendEvent(ConstantsModule.Analytics.DismissGamepadNavigationDialog)
 end
 
-t.default = t.new()
+AnalyticsModule.default = AnalyticsModule.new()
 
-return t
+return AnalyticsModule

@@ -1,11 +1,11 @@
-﻿local parent = script:FindFirstAncestor("Impressions").Parent
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local useRouteName = require(parent.Navigation).useRouteName
+﻿local Parent = script:FindFirstAncestor("Impressions").Parent
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local UseRouteNameFunction = require(Parent.Navigation).useRouteName
 local _ = require(script.Parent.ImpressionsVisualizer)
-local impressionsTrackerWithoutNavigationModule = require(script.Parent.ImpressionsTrackerWithoutNavigation)
+local ImpressionsTrackerWithoutNavigationModule = require(script.Parent.ImpressionsTrackerWithoutNavigation)
 
-return function(p1)
-	-- upvalues: useRouteName (ref), cryoModule (ref), reactModule (ref), impressionsTrackerWithoutNavigationModule (ref)
-	return reactModule.createElement(impressionsTrackerWithoutNavigationModule, cryoModule.Dictionary.join(p1, { routeName = useRouteName() }))
+return function(p1) --[[ Line: 28 ]]
+	-- upvalues: UseRouteNameFunction (copy), CryoModule (copy), ReactModule (copy), ImpressionsTrackerWithoutNavigationModule (copy)
+	return ReactModule.createElement(ImpressionsTrackerWithoutNavigationModule, (CryoModule.Dictionary.join(p1, { routeName = UseRouteNameFunction() })))
 end

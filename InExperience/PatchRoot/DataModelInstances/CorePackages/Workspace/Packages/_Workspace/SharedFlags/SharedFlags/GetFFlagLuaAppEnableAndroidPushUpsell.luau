@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("LuaAppEnableAndroidPushUpsell", false)
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastFlag("LuaAppEnableAndroidPushUpsell")
 end

@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("CoreGuiCommon").Parent.Signals).createComputed(require(script.createUILessStore))
+﻿return require(script:FindFirstAncestor("CoreGuiCommon").Parent.Signals).createComputed((require(script.createUILessStore)))

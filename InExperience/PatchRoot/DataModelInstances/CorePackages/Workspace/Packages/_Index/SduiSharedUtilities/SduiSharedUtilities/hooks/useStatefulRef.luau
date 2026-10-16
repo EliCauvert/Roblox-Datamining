@@ -1,16 +1,16 @@
-﻿local reactModule = require(script:FindFirstAncestor("SduiSharedUtilities").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("SduiSharedUtilities").Parent.React)
 
-return function(p1)
-	-- upvalues: reactModule (ref)
-	local var1, var2 = reactModule.useState(nil)
+return function(Callback) --[[ Line: 5 | Named "useStatefulRef" ]]
+	-- upvalues: ReactModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	
-	return var1, reactModule.useCallback(function(p2)
-		-- upvalues: p1 (ref), var2 (ref)
-		if typeof(p1) == "function" then
-			p1(p2)
-		elseif typeof(p1) == "table" then
-			p1.current = p2
+	return UseStateResult, (ReactModule.useCallback(function(Current) --[[ Line: 7 ]]
+		-- upvalues: Callback (copy), UseStateResult2 (copy)
+		if typeof(Callback) == "function" then
+			Callback(Current)
+		elseif typeof(Callback) == "table" then
+			Callback.current = Current
 		end
-		var2(p2)
-	end, { p1 })
+		UseStateResult2(Current)
+	end, { Callback }))
 end

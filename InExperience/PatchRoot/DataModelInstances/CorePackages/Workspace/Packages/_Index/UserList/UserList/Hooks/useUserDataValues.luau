@@ -1,86 +1,93 @@
-﻿local parent = script:FindFirstAncestor("UserList").Parent
-local signalsModule = require(parent.Signals)
-local useSignalState = require(parent.SignalsReact).useSignalState
-local userProfilesModule = require(parent.UserProfiles)
-local reactModule = require(parent.React)
+﻿local Parent = script:FindFirstAncestor("UserList").Parent
+local SignalsModule = require(Parent.Signals)
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local UserProfilesModule = require(Parent.UserProfiles)
+local ReactModule = require(Parent.React)
 
-local function _(p1, p2, p3)
-	-- upvalues: signalsModule (ref)
-	return signalsModule.createComputed(function(p4)
-		-- upvalues: p2 (ref), p1 (ref), p3 (ref)
+local function _(p1, p2, p3) --[[ Line: 17 | Named "createUserProfileNameGetter" ]]
+	-- upvalues: SignalsModule (copy)
+	return SignalsModule.createComputed(function(p4) --[[ Line: 18 ]]
+		-- upvalues: p2 (copy), p1 (copy), p3 (copy)
 		if p2(p4) then
 			return ""
+		else
+			local v1 = p1(p4)
+			
+			return v1.data and #v1.data ~= 0 and p3(v1.data[1].names) or ""
 		end
-		local var1 = p1(p4)
-		
-		return if var1.data and #var1.data ~= 0 then p3(var1.data[1].names) or "" else ""
 	end)
 end
 
-return function(p1)
-	-- upvalues: userProfilesModule (ref), signalsModule (ref), useSignalState (ref), reactModule (ref)
-	local var1 = if p1 and p1 ~= "" then userProfilesModule.Stores.UserProfileStore.get().fetchNamesByUserIds({ p1 }) else nil
-	local var2 = signalsModule.createComputed(function(p2)
-		-- upvalues: var1 (ref)
-		return if var1 then var1(p2).status ~= "success" else true
+return function(p1) --[[ Line: 31 | Named "useUserDataValues" ]]
+	-- upvalues: UserProfilesModule (copy), SignalsModule (copy), UseSignalStateFunction (copy), ReactModule (copy)
+	local GetResult = UserProfilesModule.Stores.UserProfileStore.get()
+	local NamesByUserIds = if p1 and p1 ~= "" then GetResult.fetchNamesByUserIds({ p1 }) else nil
+	local Computed = SignalsModule.createComputed(function(p2): boolean --[[ Line: 35 ]]
+		-- upvalues: NamesByUserIds (copy)
+		return not NamesByUserIds or NamesByUserIds(p2).status ~= "success"
 	end)
-	local var3 = useSignalState(var2)
+	local UseSignalStateResult = UseSignalStateFunction(Computed)
 	
-	local var4 = function(p2)
-		return p2.getDisplayName(false) or p2.getUsername(false)
+	local function v10(p2) --[[ Line: 44 ]]
+		local Username = p2.getUsername(false)
+		
+		return p2.getDisplayName(false) or Username
 	end
 	
-	var4 = useSignalState(signalsModule.createComputed(function(p2)
-		-- upvalues: var2 (ref), var1 (ref), var4 (ref)
-		if var2(p2) then
+	local UseSignalStateResult1 = UseSignalStateFunction((SignalsModule.createComputed(function(p2) --[[ Line: 18 ]]
+		-- upvalues: Computed (copy), NamesByUserIds (copy), v10 (copy)
+		if Computed(p2) then
 			return ""
+		else
+			local v1 = NamesByUserIds(p2)
+			
+			return v1.data and #v1.data ~= 0 and v10(v1.data[1].names) or ""
 		end
-		local var5 = var1(p2)
-		
-		return if var5.data and #var5.data ~= 0 then var4(var5.data[1].names) or "" else ""
-	end))
+	end)))
 	
-	local var5 = function(p2)
+	local function v12(p2) --[[ Line: 51 ]]
 		return p2.getUsername(false)
 	end
 	
-	var5 = useSignalState(signalsModule.createComputed(function(p2)
-		-- upvalues: var2 (ref), var1 (ref), var5 (ref)
-		if var2(p2) then
+	local UseSignalStateResult2 = UseSignalStateFunction((SignalsModule.createComputed(function(p2) --[[ Line: 18 ]]
+		-- upvalues: Computed (copy), NamesByUserIds (copy), v12 (copy)
+		if Computed(p2) then
 			return ""
+		else
+			local v1 = NamesByUserIds(p2)
+			
+			return v1.data and #v1.data ~= 0 and v12(v1.data[1].names) or ""
 		end
-		local var6 = var1(p2)
-		
-		return if var6.data and #var6.data ~= 0 then var5(var6.data[1].names) or "" else ""
-	end))
+	end)))
 	
-	local var6 = function(p2)
-		return p2.getCombinedName(false)
+	local function v14(Names) --[[ Line: 56 ]]
+		return Names.getCombinedName(false)
 	end
 	
-	var6 = useSignalState(signalsModule.createComputed(function(p2)
-		-- upvalues: var2 (ref), var1 (ref), var6 (ref)
-		if var2(p2) then
+	local UseSignalStateResult3 = UseSignalStateFunction((SignalsModule.createComputed(function(p2) --[[ Line: 18 ]]
+		-- upvalues: Computed (copy), NamesByUserIds (copy), v14 (copy)
+		if Computed(p2) then
 			return ""
+		else
+			local v1 = NamesByUserIds(p2)
+			
+			return v1.data and #v1.data ~= 0 and v14(v1.data[1].names) or ""
 		end
-		local var7 = var1(p2)
-		
-		return if var7.data and #var7.data ~= 0 then var6(var7.data[1].names) or "" else ""
-	end))
+	end)))
 	
-	return reactModule.useMemo(function()
-		-- upvalues: var3 (ref), var4 (ref), var6 (ref), var5 (ref)
+	return ReactModule.useMemo(function() --[[ Line: 62 ]]
+		-- upvalues: UseSignalStateResult (copy), UseSignalStateResult1 (copy), UseSignalStateResult3 (copy), UseSignalStateResult2 (copy)
 		return {
-			isLoading = var3 or false,
-			displayName = var4 or "",
-			combinedName = var6 or "",
-			username = var5 or ""
+			isLoading = UseSignalStateResult or false,
+			displayName = UseSignalStateResult1 or "",
+			combinedName = UseSignalStateResult3 or "",
+			username = UseSignalStateResult2 or ""
 		}
 	end, {
 		p1,
-		var3,
-		var4,
-		var6,
-		var5
+		UseSignalStateResult,
+		UseSignalStateResult1,
+		UseSignalStateResult3,
+		UseSignalStateResult2
 	})
 end

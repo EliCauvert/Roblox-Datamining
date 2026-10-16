@@ -1,13 +1,13 @@
 ﻿game:DefineFastString("UGCValidationMaxAnimationDeltas", "1.5")
-local t = {
-	asString = function()
+local GetFStringUGCValidationMaxAnimationDeltasModule = {
+	asString = function() --[[ Line: 9 ]]
 		return game:GetFastString("UGCValidationMaxAnimationDeltas")
 	end
 }
 
-function t.asNumber()
-	-- upvalues: t (ref)
-	return tonumber(t.asString())
+function GetFStringUGCValidationMaxAnimationDeltasModule.asNumber(): number --[[ Line: 13 ]]
+	-- upvalues: GetFStringUGCValidationMaxAnimationDeltasModule (copy)
+	return (tonumber(GetFStringUGCValidationMaxAnimationDeltasModule.asString()))
 end
 
-return t
+return GetFStringUGCValidationMaxAnimationDeltasModule

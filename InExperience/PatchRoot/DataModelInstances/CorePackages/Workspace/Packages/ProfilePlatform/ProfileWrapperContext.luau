@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent._Workspace.ProfilePlatform.ProfilePlatform.Contexts.ProfileWrapperContext)
+﻿return (require(script.Parent.Parent._Workspace.ProfilePlatform.ProfilePlatform.Contexts.ProfileWrapperContext))

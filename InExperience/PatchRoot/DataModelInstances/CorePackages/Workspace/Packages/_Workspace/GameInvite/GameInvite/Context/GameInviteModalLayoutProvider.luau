@@ -1,134 +1,113 @@
-﻿local guiService = game:GetService("GuiService")
-local gameInvite = script:FindFirstAncestor("GameInvite")
-local context = gameInvite.Context
-local parent = gameInvite.Parent
-local sharedFlagsModule = require(parent.SharedFlags)
-local reactModule = require(parent.React)
-local _ = require(gameInvite.gameInviteModalType)
-local gameInviteModalLayoutContextModule = require(context.GameInviteModalLayoutContext)
-local getFFlagLuaAppEnableTopBanner = sharedFlagsModule.GetFFlagLuaAppEnableTopBanner
-local isInExperienceUIVREnabled = require(parent.SharedExperimentDefinition).isInExperienceUIVREnabled
-local fFlagEnableInExperienceUIPCVRFix = sharedFlagsModule.FFlagEnableInExperienceUIPCVRFix
+﻿local GuiService = game:GetService("GuiService")
+local GameInvite = script:FindFirstAncestor("GameInvite")
+local Parent = GameInvite.Parent
+local SharedFlagsModule = require(Parent.SharedFlags)
+local ReactModule = require(Parent.React)
+local _ = require(GameInvite.gameInviteModalType)
+local GameInviteModalLayoutContextModule = require(GameInvite.Context.GameInviteModalLayoutContext)
+local GetFFlagLuaAppEnableTopBannerFunction = SharedFlagsModule.GetFFlagLuaAppEnableTopBanner
+local IsInExperienceUIVREnabled = require(Parent.SharedExperimentDefinition).isInExperienceUIVREnabled
+local FFlagEnableInExperienceUIPCVRFix = SharedFlagsModule.FFlagEnableInExperienceUIPCVRFix
 
-local _ = function(p1)
-	-- upvalues: getFFlagLuaAppEnableTopBanner (ref), guiService (ref)
-	local var1 = 0
+local function _(p1) --[[ Line: 26 ]]
+	-- upvalues: GetFFlagLuaAppEnableTopBannerFunction (copy), GuiService (copy)
+	local v1 = 0
 	
-	if not getFFlagLuaAppEnableTopBanner() or p1 then
-		if guiService then
-			return guiService:GetGuiInset().Y
+	if not GetFFlagLuaAppEnableTopBannerFunction() or p1 then
+		if GuiService then
+			return GuiService:GetGuiInset().Y
 		end
-		var1 = 50
+		v1 = 50
 	end
-	return var1
+	return v1
 end
 
-local _ = function()
+local _ = function() --[[ Line: 36 ]]
 	return workspace.CurrentCamera.ViewportSize
 end
 
-local _ = function(p1)
+local _ = function(p1: number): boolean --[[ Line: 41 ]]
 	return p1 < 800
 end
 
-local _ = function(p1)
+local _ = function(p1: number): boolean --[[ Line: 45 ]]
 	return p1 < 624
 end
 
-local _ = function(p1)
-	local x
-	if p1.X >= 800 then
-		x = p1.Y < 624 and (p1.X or 800)
-	end
-	return x
+local _ = function(Vector) --[[ Line: 49 ]]
+	return (if Vector.X < 800 then Vector.X else Vector.Y < 624 and Vector.X) or 800
 end
 
-local _ = function(p1, p2)
-	-- upvalues: getFFlagLuaAppEnableTopBanner (ref), guiService (ref)
-	local var1
-	if p1.X < 800 or p1.Y < 624 then
-		var1 = p1.Y - (if not (getFFlagLuaAppEnableTopBanner() and not p2) then if guiService then guiService:GetGuiInset().Y else 50 else 0) or 624
-	end
-	return var1
+local _ = function(Vector, p1) --[[ Line: 53 ]]
+	-- upvalues: GetFFlagLuaAppEnableTopBannerFunction (copy), GuiService (copy)
+	return (if Vector.X < 800 then Vector.Y - (if GetFFlagLuaAppEnableTopBannerFunction() and not p1 then 0 elseif GuiService then GuiService:GetGuiInset().Y else 50) else Vector.Y < 624 and Vector.Y - (if GetFFlagLuaAppEnableTopBannerFunction() and not p1 then 0 elseif GuiService then GuiService:GetGuiInset().Y else 50)) or 624
 end
 
-local var1 = function(p1, p2)
-	-- upvalues: getFFlagLuaAppEnableTopBanner (ref), guiService (ref)
-	local x
-	local new = UDim.new
-	local var2 = 0
-	
-	if p1.X >= 800 then
-		x = p1.Y < 624 and (p1.X or 800)
-	end
-	local var3
-	new = new(var2, x)
-	local new_1 = UDim.new
-	local var4 = 0
-	
-	if p1.X < 800 or p1.Y < 624 then
-		var3 = p1.Y - (if not (getFFlagLuaAppEnableTopBanner() and not p2) then if guiService then guiService:GetGuiInset().Y else 50 else 0) or 624
-	end
-	return UDim2.new(new, new_1(var4, var3))
+local function v15(Vector, IsCoreScript): UDim2 --[[ Line: 59 ]]
+	-- upvalues: GetFFlagLuaAppEnableTopBannerFunction (copy), GuiService (copy)
+	return UDim2.new(UDim.new(0, (if Vector.X < 800 then Vector.X else Vector.Y < 624 and Vector.X) or 800), (UDim.new(0, (if Vector.X < 800 then Vector.Y - (if GetFFlagLuaAppEnableTopBannerFunction() and not IsCoreScript then 0 elseif GuiService then GuiService:GetGuiInset().Y else 50) else Vector.Y < 624 and Vector.Y - (if GetFFlagLuaAppEnableTopBannerFunction() and not IsCoreScript then 0 elseif GuiService then GuiService:GetGuiInset().Y else 50)) or 624)))
 end
 
-local _ = function(p1)
-	return if p1.X < 800 or p1.Y < 624 then "compact" else "default"
+local _ = function(Vector): string --[[ Line: 65 ]]
+	if Vector.X < 800 or Vector.Y < 624 then
+		return "compact"
+	else
+		return "default"
+	end
 end
 
-return function(p1)
-	-- upvalues: isInExperienceUIVREnabled (ref), fFlagEnableInExperienceUIPCVRFix (ref), reactModule (ref), var1 (ref), gameInviteModalLayoutContextModule (ref)
-	local isCoreScript = p1.isCoreScript
-	local var2 = if isInExperienceUIVREnabled and fFlagEnableInExperienceUIPCVRFix and p1.screenSizeOverride then p1.screenSizeOverride else workspace.CurrentCamera.ViewportSize
-	local var3, var4 = reactModule.useState(var1(var2, isCoreScript))
-	local var5, var6 = reactModule.useState(var2.Y < 624)
-	local var7, var8 = reactModule.useState(var2.X < 800)
-	local useState = reactModule.useState
-	local var9 = if var2.X < 800 or var2.Y < 624 then "compact" else "default"
-	useState, var20 = useState(var9)
-	local var10 = if fFlagEnableInExperienceUIPCVRFix then reactModule.useCallback(function()
-		-- upvalues: var1 (copy), isCoreScript (ref), var6 (ref), var8 (ref), var4 (ref), var9 (ref)
-		local viewportSize = workspace.CurrentCamera.ViewportSize
-		viewportSize = viewportSize.Y < 624
-		local var11 = viewportSize.X < 800
-		local var12 = var1(viewportSize, isCoreScript)
-		var6(viewportSize)
-		var8(var11)
-		var4(var12)
-		var9(if viewportSize.X < 800 or viewportSize.Y < 624 then "compact" else "default")
-	end, { isCoreScript }) else function()
-		-- upvalues: var1 (copy), isCoreScript (ref), var6 (ref), var8 (ref), var4 (ref), var9 (ref)
-		local viewportSize = workspace.CurrentCamera.ViewportSize
-		viewportSize = viewportSize.Y < 624
-		local var11 = viewportSize.X < 800
-		local var12 = var1(viewportSize, isCoreScript)
-		var6(viewportSize)
-		var8(var11)
-		var4(var12)
-		var9(if viewportSize.X < 800 or viewportSize.Y < 624 then "compact" else "default")
+return function(p1) --[[ Line: 69 ]]
+	-- upvalues: IsInExperienceUIVREnabled (copy), FFlagEnableInExperienceUIPCVRFix (copy), ReactModule (copy), v15 (copy), GameInviteModalLayoutContextModule (copy)
+	local IsCoreScript = p1.isCoreScript
+	local ScreenSizeOverride = if IsInExperienceUIVREnabled and FFlagEnableInExperienceUIPCVRFix and p1.screenSizeOverride then p1.screenSizeOverride else workspace.CurrentCamera.ViewportSize
+	local UseStateResult, UseStateResult2 = ReactModule.useState(v15(ScreenSizeOverride, IsCoreScript))
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(ScreenSizeOverride.Y < 624)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(ScreenSizeOverride.X < 800)
+	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(if ScreenSizeOverride.X < 800 then "compact" elseif ScreenSizeOverride.Y < 624 then "compact" else "default")
+	local UseResult = if FFlagEnableInExperienceUIPCVRFix then ReactModule.useCallback(function() --[[ Line: 83 ]]
+		-- upvalues: v15 (upval), IsCoreScript (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy), UseStateResult2 (copy), UseStateResult2_3 (copy)
+		local ViewportSize = workspace.CurrentCamera.ViewportSize
+		local IsYBelow = ViewportSize.Y < 624
+		local IsXBelow = ViewportSize.X < 800
+		local v1 = v15(ViewportSize, IsCoreScript)
+		UseStateResult2_1(IsYBelow)
+		UseStateResult2_2(IsXBelow)
+		UseStateResult2(v1)
+		UseStateResult2_3(if ViewportSize.X < 800 then "compact" elseif ViewportSize.Y < 624 then "compact" else "default")
+	end, { IsCoreScript }) else function() --[[ Line: 94 ]]
+		-- upvalues: v15 (upval), IsCoreScript (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy), UseStateResult2 (copy), UseStateResult2_3 (copy)
+		local ViewportSize = workspace.CurrentCamera.ViewportSize
+		local IsYBelow = ViewportSize.Y < 624
+		local IsXBelow = ViewportSize.X < 800
+		local v1 = v15(ViewportSize, IsCoreScript)
+		UseStateResult2_1(IsYBelow)
+		UseStateResult2_2(IsXBelow)
+		UseStateResult2(v1)
+		UseStateResult2_3(if ViewportSize.X < 800 then "compact" elseif ViewportSize.Y < 624 then "compact" else "default")
 	end
-	reactModule.useEffect(function()
-		-- upvalues: isInExperienceUIVREnabled (copy), fFlagEnableInExperienceUIPCVRFix (copy), p1 (ref), var10 (ref)
-		if isInExperienceUIVREnabled and fFlagEnableInExperienceUIPCVRFix and p1.screenSizeOverride then
-			return function() end
-		end
-		var10()
-		local var11 = workspace.CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(var10)
-		
-		return function()
-			-- upvalues: var11 (ref)
-			if var11 then
-				var11:Disconnect()
+	ReactModule.useEffect(function() --[[ Line: 107 ]]
+		-- upvalues: IsInExperienceUIVREnabled (upval), FFlagEnableInExperienceUIPCVRFix (upval), p1 (copy), UseResult (copy)
+		if IsInExperienceUIVREnabled and FFlagEnableInExperienceUIPCVRFix and p1.screenSizeOverride then
+			return function() --[[ Line: 111 ]] end
+		else
+			UseResult()
+			local Connection = workspace.CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(UseResult)
+			
+			return function() --[[ Line: 119 ]]
+				-- upvalues: Connection (copy)
+				if Connection then
+					Connection:Disconnect()
+				end
 			end
 		end
-	end, if isInExperienceUIVREnabled and fFlagEnableInExperienceUIPCVRFix then { p1.screenSizeOverride, var10 } else {})
+	end, if IsInExperienceUIVREnabled and FFlagEnableInExperienceUIPCVRFix then { p1.screenSizeOverride, UseResult } else {})
 	
-	return reactModule.createElement(gameInviteModalLayoutContextModule.Provider, {
+	return ReactModule.createElement(GameInviteModalLayoutContextModule.Provider, {
 		value = {
-			isFullHeight = var5,
-			isFullWidth = var7,
-			modalSize = var3,
-			modalMode = useState
+			isFullHeight = UseStateResult1,
+			isFullWidth = UseStateResult3,
+			modalSize = UseStateResult,
+			modalMode = UseStateResult4
 		}
 	}, p1.children)
 end

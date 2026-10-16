@@ -1,63 +1,68 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local builderIconsModule = require(parent.BuilderIcons)
-local _ = require(parent.React)
-local matrixGridModule = require(foundation.Utility.Stories.Shared.MatrixGrid)
-local icon = builderIconsModule.Icon
-local uiblox = builderIconsModule.Migration.uiblox
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local BuilderIconsModule = require(Parent.BuilderIcons)
+local _ = require(Parent.React)
+local MatrixGridModule = require(Foundation.Utility.Stories.Shared.MatrixGrid)
+local Icon = BuilderIconsModule.Icon
+local Uiblox = BuilderIconsModule.Migration.uiblox
 
-local function _(p1)
-	-- upvalues: uiblox (ref)
-	local var1 = uiblox[p1]
+local function _(p1): string --[[ Line: 16 | Named "formatMigratedLegacySubtitle" ]]
+	-- upvalues: Uiblox (copy)
+	local UibloxEntry = Uiblox[p1]
 	
-	return `{p1} \226\134\146 {var1.name} ({var1.variant})`
+	return `{p1} → {UibloxEntry.name} ({UibloxEntry.variant})`
 end
 
-local t = {}
-local t_1 = {
-	title = "Builder icon \194\183 Icon component",
-	name = icon.RobloxPlus,
-	subtitle = icon.RobloxPlus
+local IconsPlaceholderPlaceholderOnSmall = Uiblox["icons/placeholder/placeholderOn_small"]
+local list = {
+	{
+		title = "Builder icon · Icon component",
+		name = Icon.RobloxPlus,
+		subtitle = Icon.RobloxPlus
+	},
+	{
+		name = "icons/placeholder/placeholderOn_small",
+		title = "Migrated legacy string · Icon component",
+		subtitle = `icons/placeholder/placeholderOn_small → {IconsPlaceholderPlaceholderOnSmall.name} ({IconsPlaceholderPlaceholderOnSmall.variant})`
+	},
+	{
+		name = "icons/menu/clothing/limited_on",
+		title = "Non-migrated legacy string · Image component",
+		subtitle = "icons/menu/clothing/limited_on"
+	}
 }
-local t_2 = {
-	name = "icons/placeholder/placeholderOn_small",
-	title = "Migrated legacy string \194\183 Icon component"
-}
-local placeholderOnSmall = uiblox["icons/placeholder/placeholderOn_small"]
-t_2.subtitle = `icons/placeholder/placeholderOn_small \226\134\146 {placeholderOnSmall.name} ({placeholderOnSmall.variant})`
--- Unknown statement at pc 13: <SetList>
 
 return {
-	ICON_TYPE_EXAMPLES = t,
-	buildIconControlOptions = function(p1)
-		-- upvalues: t (ref)
-		local list = { "" }
+	ICON_TYPE_EXAMPLES = list,
+	buildIconControlOptions = function(p1) --[[ Line: 51 ]]
+		-- upvalues: list (copy)
+		local List = { "" }
 		
-		for i, v in t do
-			table.insert(list, v.name)
+		for _, value in list do
+			table.insert(List, value.name)
 		end
-		local var1 = if p1 then p1.additional else nil
+		local Additional = if p1 then p1.additional else nil
 		
-		if var1 then
-			for i_1, v_1 in var1 do
-				table.insert(list, v_1)
+		if Additional then
+			for _, value1 in Additional do
+				table.insert(List, value1)
 			end
 		end
-		return list
+		return List
 	end,
-	buildIconTypeMatrixRows = function(p2)
-		-- upvalues: t (ref), matrixGridModule (ref)
-		local t_1 = {}
+	buildIconTypeMatrixRows = function(Callback) --[[ Line: 72 ]]
+		-- upvalues: list (copy), MatrixGridModule (copy)
+		local List = {}
 		
-		for i, v in t do
-			table.insert(t_1, {
-				label = matrixGridModule.matrixInfoLabel(v.title, v.subtitle),
-				cells = p2(v)
+		for _, value in list do
+			table.insert(List, {
+				label = MatrixGridModule.matrixInfoLabel(value.title, value.subtitle),
+				cells = Callback(value)
 			})
 		end
-		return t_1
+		return List
 	end,
-	parseIconControl = function(p3)
-		return if p3 == "" then nil else p3
+	parseIconControl = function(p2) --[[ Line: 65 ]]
+		return if p2 == "" then nil else p2
 	end
 }

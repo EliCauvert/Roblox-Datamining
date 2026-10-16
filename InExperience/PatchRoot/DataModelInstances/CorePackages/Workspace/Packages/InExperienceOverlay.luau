@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.InExperienceOverlay.InExperienceOverlay)
+﻿return (require(script.Parent._Workspace.InExperienceOverlay.InExperienceOverlay))

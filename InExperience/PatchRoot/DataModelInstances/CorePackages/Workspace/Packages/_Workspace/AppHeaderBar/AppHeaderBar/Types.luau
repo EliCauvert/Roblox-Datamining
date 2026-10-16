@@ -1,5 +1,5 @@
-﻿local parent = script.Parent.Parent
-local _ = require(parent.React)
-local _ = require(parent.UIBlox)
+﻿local Parent = script.Parent.Parent
+local _ = require(Parent.React)
+local _ = require(Parent.UIBlox)
 
 return {}

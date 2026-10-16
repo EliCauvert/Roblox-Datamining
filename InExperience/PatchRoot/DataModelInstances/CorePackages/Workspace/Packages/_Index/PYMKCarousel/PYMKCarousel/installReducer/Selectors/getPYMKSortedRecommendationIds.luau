@@ -1,18 +1,18 @@
-﻿local dependenciesModule = require(script.Parent.Parent.Parent.dependencies)
-local roduxFriends = dependenciesModule.RoduxFriends
-local llama = dependenciesModule.llama
-local _ = roduxFriends.Enums.RecommendationContextType
-local filterOutPYMKRecommendationsModule = require(script.Parent.filterOutPYMKRecommendations)
+﻿local DependenciesModule = require(script.Parent.Parent.Parent.dependencies)
+local RoduxFriends = DependenciesModule.RoduxFriends
+local Llama = DependenciesModule.llama
+local _ = RoduxFriends.Enums.RecommendationContextType
+local FilterOutPYMKRecommendationsModule = require(script.Parent.filterOutPYMKRecommendations)
 
-return function(p1)
-	-- upvalues: filterOutPYMKRecommendationsModule (ref), roduxFriends (ref), llama (ref)
-	return function(p2)
-		-- upvalues: filterOutPYMKRecommendationsModule (copy), roduxFriends (copy), p1 (ref), llama (copy)
-		return llama.List.map(filterOutPYMKRecommendationsModule(roduxFriends.Selectors.getSortedByRankRecommendations(p2, p1))(p2), function(p3, p4)
+return function(p1) --[[ Line: 23 ]]
+	-- upvalues: FilterOutPYMKRecommendationsModule (copy), RoduxFriends (copy), Llama (copy)
+	return function(p2) --[[ Line: 24 ]]
+		-- upvalues: FilterOutPYMKRecommendationsModule (upval), RoduxFriends (upval), p1 (copy), Llama (upval)
+		return Llama.List.map(FilterOutPYMKRecommendationsModule(RoduxFriends.Selectors.getSortedByRankRecommendations(p2, p1))(p2), function(p3, AbsolutePosition) --[[ Line: 28 ]]
 			return {
 				hasIncomingFriendRequest = nil,
 				id = p3.id,
-				absolutePosition = p4,
+				absolutePosition = AbsolutePosition,
 				recommendationRank = p3.rank,
 				recommendationContextType = p3.contextType
 			}

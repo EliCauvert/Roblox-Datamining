@@ -1,162 +1,161 @@
-﻿local parent = script:FindFirstAncestor("AppShortcutBar").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local motionModule = require(parent.Motion)
-local isBuilderIcon = foundationModule.Utility.isBuilderIcon
-local useTokens = foundationModule.Hooks.useTokens
-local icon = foundationModule.Icon
+﻿local Parent = script:FindFirstAncestor("AppShortcutBar").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local MotionModule = require(Parent.Motion)
+local IsBuilderIconFunction = FoundationModule.Utility.isBuilderIcon
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local Icon = FoundationModule.Icon
 
-local function useAnimationValues(p1)
-	-- upvalues: reactModule (ref), motionModule (ref)
-	local var1 = reactModule.useMemo(function()
-		-- upvalues: motionModule (copy)
+local function useAnimationValues(Progress) --[[ Line: 35 ]]
+	-- upvalues: ReactModule (copy), MotionModule (copy)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 36 ]]
+		-- upvalues: MotionModule (upval)
 		return {
-			initial = motionModule.createState({ scale = 1, ringScale = 1 }, { default = motionModule.transition({ duration = 0.2 }) }),
-			target = motionModule.createState({ scale = 0.8, ringScale = 1.15 }, { default = motionModule.transition({ duration = 0.3 }) })
+			initial = MotionModule.createState({ scale = 1, ringScale = 1 }, { default = MotionModule.transition({ duration = 0.2 }) }),
+			target = MotionModule.createState({ scale = 0.8, ringScale = 1.15 }, { default = MotionModule.transition({ duration = 0.3 }) })
 		}
 	end, {})
-	local var2, var3 = motionModule.useMotion(var1.initial)
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), p1 (ref), var1 (ref)
-		var3(if p1 then var1.target else var1.initial)
-	end, { p1, var3, var1 })
+	local UseMotionResult, UseMotionResult2 = MotionModule.useMotion(UseMemoResult.initial)
+	ReactModule.useEffect(function() --[[ Line: 55 ]]
+		-- upvalues: UseMotionResult2 (copy), Progress (copy), UseMemoResult (copy)
+		UseMotionResult2(if Progress then UseMemoResult.target else UseMemoResult.initial)
+	end, { Progress, UseMotionResult2, UseMemoResult })
 	
-	return var2
+	return UseMotionResult
 end
 
-local function CircularProgress(p1)
-	-- upvalues: useTokens (ref), reactModule (ref)
-	local var1 = useTokens()
-	local size = p1.size
-	local progress = p1.progress
-	local var2 = reactModule.useMemo(function()
-		-- upvalues: var1 (ref)
+local function CircularProgress(p1) --[[ Line: 62 ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	local Progress = p1.progress
+	local UseMemoResult = ReactModule.useMemo(function(): NumberSequence --[[ Line: 67 ]]
+		-- upvalues: UseTokensResult (copy)
 		return NumberSequence.new({
-			NumberSequenceKeypoint.new(0, var1.Color.Content.Emphasis.Transparency),
-			NumberSequenceKeypoint.new(0.4999, var1.Color.Content.Emphasis.Transparency),
+			NumberSequenceKeypoint.new(0, UseTokensResult.Color.Content.Emphasis.Transparency),
+			NumberSequenceKeypoint.new(0.4999, UseTokensResult.Color.Content.Emphasis.Transparency),
 			NumberSequenceKeypoint.new(0.5, 0.5),
 			NumberSequenceKeypoint.new(1, 0.5)
 		})
-	end, { var1 })
-	local var3 = reactModule.useMemo(function()
-		-- upvalues: var1 (ref)
+	end, { UseTokensResult })
+	local UseMemoResult1 = ReactModule.useMemo(function(): ColorSequence --[[ Line: 76 ]]
+		-- upvalues: UseTokensResult (copy)
 		return ColorSequence.new({
-			ColorSequenceKeypoint.new(0, var1.Color.Content.Emphasis.Color3),
-			ColorSequenceKeypoint.new(0.4999, var1.Color.Content.Emphasis.Color3),
-			ColorSequenceKeypoint.new(0.5, var1.Color.Content.Muted.Color3),
-			ColorSequenceKeypoint.new(1, var1.Color.Content.Muted.Color3)
+			ColorSequenceKeypoint.new(0, UseTokensResult.Color.Content.Emphasis.Color3),
+			ColorSequenceKeypoint.new(0.4999, UseTokensResult.Color.Content.Emphasis.Color3),
+			ColorSequenceKeypoint.new(0.5, UseTokensResult.Color.Content.Muted.Color3),
+			ColorSequenceKeypoint.new(1, UseTokensResult.Color.Content.Muted.Color3)
 		})
-	end, { var1 })
+	end, { UseTokensResult })
 	
-	return reactModule.createElement("Frame", { BackgroundTransparency = 1, Size = size }, {
-		Left = reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", { BackgroundTransparency = 1, Size = p1.size }, {
+		Left = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			ClipsDescendants = true,
 			Size = UDim2.fromScale(0.5, 1)
 		}, {
-			Image = reactModule.createElement("ImageLabel", {
+			Image = ReactModule.createElement("ImageLabel", {
 				Image = "rbxasset://textures/ui/Controls/RadialFill@3x.png",
 				BackgroundTransparency = 1,
 				Size = UDim2.fromScale(2, 1)
 			}, {
-				Gradient = reactModule.createElement("UIGradient", {
-					Transparency = var2,
-					Color = var3,
-					Rotation = reactModule.useMemo(function()
-						-- upvalues: progress (ref)
-						return if progress then progress:map(function(p2)
-							return math.clamp(p2 * 360, 180, 360)
+				Gradient = ReactModule.createElement("UIGradient", {
+					Transparency = UseMemoResult,
+					Color = UseMemoResult1,
+					Rotation = ReactModule.useMemo(function() --[[ Line: 85 ]]
+						-- upvalues: Progress (copy)
+						return if Progress then Progress:map(function(p2: number): number --[[ Line: 87 ]]
+							return (math.clamp(p2 * 360, 180, 360))
 						end) else 180
-					end, { progress })
+					end, { Progress })
 				})
 			})
 		}),
-		Right = reactModule.createElement("Frame", {
+		Right = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			ClipsDescendants = true,
 			Size = UDim2.fromScale(0.5, 1),
 			Position = UDim2.fromScale(0.5, 0)
 		}, {
-			Image = reactModule.createElement("ImageLabel", {
+			Image = ReactModule.createElement("ImageLabel", {
 				Image = "rbxasset://textures/ui/Controls/RadialFill@3x.png",
 				BackgroundTransparency = 1,
 				Size = UDim2.fromScale(2, 1),
 				Position = UDim2.fromScale(-1, 0)
 			}, {
-				Gradient = reactModule.createElement("UIGradient", {
-					Transparency = var2,
-					Color = var3,
-					Rotation = reactModule.useMemo(function()
-						-- upvalues: progress (ref)
-						return if progress then progress:map(function(p2)
-							return math.clamp(p2 * 360, 0, 180)
+				Gradient = ReactModule.createElement("UIGradient", {
+					Transparency = UseMemoResult,
+					Color = UseMemoResult1,
+					Rotation = ReactModule.useMemo(function() --[[ Line: 93 ]]
+						-- upvalues: Progress (copy)
+						return if Progress then Progress:map(function(p2: number): number --[[ Line: 95 ]]
+							return (math.clamp(p2 * 360, 0, 180))
 						end) else 0
-					end, { progress })
+					end, { Progress })
 				})
 			})
 		})
 	})
 end
 
-function IconWithHoldAnimation(p1)
-	-- upvalues: useAnimationValues (ref), reactModule (ref), useTokens (ref), CircularProgress (ref), isBuilderIcon (ref), icon (ref)
-	local layoutOrder = p1.layoutOrder
-	local size = p1.size
-	local position = p1.position
-	local anchorPoint = p1.anchorPoint
-	local progress = p1.progress
-	local icon_1 = p1.icon
-	local iconSize = p1.iconSize
-	local var1 = useAnimationValues(progress)
-	local var2, var3 = reactModule.useBinding(iconSize)
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), iconSize (ref)
-		var3(iconSize)
-	end, { iconSize })
-	local default = useTokens().Color.Content.Default
+function IconWithHoldAnimation(p1) --[[ Line: 144 ]]
+	-- upvalues: useAnimationValues (copy), ReactModule (copy), UseTokensFunction (copy), CircularProgress (copy), IsBuilderIconFunction (copy), Icon (copy)
+	local LayoutOrder = p1.layoutOrder
+	local Size = p1.size
+	local Position = p1.position
+	local AnchorPoint = p1.anchorPoint
+	local Progress = p1.progress
+	local Icon1 = p1.icon
+	local IconSize = p1.iconSize
+	local UseAnimationValuesResult = useAnimationValues(Progress)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(IconSize)
+	ReactModule.useEffect(function() --[[ Line: 156 ]]
+		-- upvalues: UseBindingResult2 (copy), IconSize (copy)
+		UseBindingResult2(IconSize)
+	end, { IconSize })
+	local Default = UseTokensFunction().Color.Content.Default
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		LayoutOrder = layoutOrder,
-		Size = size,
-		Position = position,
-		AnchorPoint = anchorPoint
+		LayoutOrder = LayoutOrder,
+		Size = Size,
+		Position = Position,
+		AnchorPoint = AnchorPoint
 	}, {
-		AnimationFrame = reactModule.createElement("Frame", {
+		AnimationFrame = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.fromScale(1, 1),
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.fromScale(0.5, 0.5)
 		}, {
-			UIScale = reactModule.createElement("UIScale", { Scale = var1.scale }),
-			RingFrame = reactModule.createElement("Frame", {
+			UIScale = ReactModule.createElement("UIScale", { Scale = UseAnimationValuesResult.scale }),
+			RingFrame = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				Size = UDim2.fromScale(1, 1),
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Position = UDim2.fromScale(0.5, 0.5)
 			}, {
-				RingScale = reactModule.createElement("UIScale", { Scale = var1.ringScale }),
-				Progress = reactModule.createElement(CircularProgress, { size = UDim2.fromScale(1, 1), progress = progress })
+				RingScale = ReactModule.createElement("UIScale", { Scale = UseAnimationValuesResult.ringScale }),
+				Progress = ReactModule.createElement(CircularProgress, { size = UDim2.fromScale(1, 1), progress = Progress })
 			}),
-			IconFrame = reactModule.createElement("Frame", {
+			IconFrame = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				Size = UDim2.fromScale(1, 1),
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Position = UDim2.fromScale(0.5, 0.5)
 			}, {
-				Icon = if not isBuilderIcon(icon_1) then reactModule.createElement("ImageLabel", {
-					BackgroundTransparency = 1,
-					Image = icon_1,
-					ImageColor3 = default.Color3,
-					ImageTransparency = default.Transparency,
-					AnchorPoint = Vector2.new(0.5, 0.5),
-					Position = UDim2.fromScale(0.5, 0.5),
-					Size = UDim2.fromOffset(iconSize, iconSize)
-				}) else reactModule.createElement(icon, {
-					name = icon_1,
-					size = var2,
+				Icon = if IsBuilderIconFunction(Icon1) then ReactModule.createElement(Icon, {
+					name = Icon1,
+					size = UseBindingResult,
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					Position = UDim2.fromScale(0.5, 0.5)
+				}) else ReactModule.createElement("ImageLabel", {
+					BackgroundTransparency = 1,
+					Image = Icon1,
+					ImageColor3 = Default.Color3,
+					ImageTransparency = Default.Transparency,
+					AnchorPoint = Vector2.new(0.5, 0.5),
+					Position = UDim2.fromScale(0.5, 0.5),
+					Size = UDim2.fromOffset(IconSize, IconSize)
 				})
 			})
 		})

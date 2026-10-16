@@ -1,4 +1,4 @@
-﻿local var1 = require(script.Parent.Parent.Parent.Logger).new()
-var1:setContext({ foo = "foo" })
+﻿local NewResult = require(script.Parent.Parent.Parent.Logger).new()
+NewResult:setContext({ foo = "foo" })
 
-return var1
+return NewResult

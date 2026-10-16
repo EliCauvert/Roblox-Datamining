@@ -1,55 +1,60 @@
-﻿local userInputService = game:GetService("UserInputService")
-local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local reactModule = require(parent.React)
-local roactModule = require(parent.Roact)
-local roactRoduxModule = require(parent.RoactRodux)
-local analytics = require(parent.ExpChatShared).Analytics
-local configModule = require(expChat.Config)
-local fFlagExpChatUseChatConfigStore = require(parent.SharedFlags).FFlagExpChatUseChatConfigStore
-local fFlagExpChatLogGlobalChatTabClickedModule = require(expChat.Flags.FFlagExpChatLogGlobalChatTabClicked)
-local fFlagGlobalTextChatAddPlaySessionFieldModule = require(expChat.Flags.FFlagGlobalTextChatAddPlaySessionField)
-local getChatConfigurationStoreModule = require(expChat.Stores.GetChatConfigurationStore)
-local selectTabByTypeModule = require(expChat.TabNavigation.selectTabByType)
-local fFlagDebugFriendsChatModule = require(parent.FriendsChat.FFlagDebugFriendsChat)
-local localTextChannelParticipantAddedModule = require(expChat.Actions.LocalTextChannelParticipantAdded)
-local channelTabsConfigurationEnabledModule = require(expChat.Actions.ChannelTabsConfigurationEnabled)
-local getChannelTabsStoreModule = require(expChat.Stores.GetChannelTabsStore)
-local createEffect = require(parent.Signals).createEffect
-local channelBarModule = require(script.Parent.UI.ChannelBar)
-local channelBarApp = roactModule.Component:extend("ChannelBarApp")
+﻿local TextChatService = game:GetService("TextChatService")
+local UserInputService = game:GetService("UserInputService")
+local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local ReactModule = require(Parent.React)
+local RoactRoduxModule = require(Parent.RoactRodux)
+local CryoModule = require(Parent.Cryo)
+local SignalsReactModule = require(Parent.SignalsReact)
+local Analytics = require(Parent.ExpChatShared).Analytics
+local ConfigModule = require(ExpChat.Config)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagExpChatUseChannelTabsStore = SharedFlagsModule.FFlagExpChatUseChannelTabsStore
+local FFlagExpChatUseChatConfigStore = SharedFlagsModule.FFlagExpChatUseChatConfigStore
+local FFlagExpChatLogGlobalChatTabClickedModule = require(ExpChat.Flags.FFlagExpChatLogGlobalChatTabClicked)
+local FFlagGlobalTextChatAddPlaySessionFieldModule = require(ExpChat.Flags.FFlagGlobalTextChatAddPlaySessionField)
+local GetChatConfigurationStoreModule = require(ExpChat.Stores.GetChatConfigurationStore)
+local SelectTabByTypeModule = require(ExpChat.TabNavigation.selectTabByType)
+local FFlagDebugFriendsChatModule = require(Parent.FriendsChat.FFlagDebugFriendsChat)
+local LocalTextChannelParticipantAddedModule = require(ExpChat.Actions.LocalTextChannelParticipantAdded)
+local ChannelTabsConfigurationEnabledModule = require(ExpChat.Actions.ChannelTabsConfigurationEnabled)
+local GetChannelTabsStoreModule = require(ExpChat.Stores.GetChannelTabsStore)
+local SignalsModule = require(Parent.Signals)
+local CreateEffectFunction = SignalsModule.createEffect
+local ChannelBarModule = require(script.Parent.UI.ChannelBar)
+local ChannelBarApp = require(Parent.Roact).Component:extend("ChannelBarApp")
 
-if fFlagExpChatUseChatConfigStore then
-	function channelBarApp.init(p1)
-		-- upvalues: getChatConfigurationStoreModule (ref)
-		p1.chatConfigStore = getChatConfigurationStoreModule(false)
+if FFlagExpChatUseChatConfigStore then
+	function ChannelBarApp.init(p1) --[[ Line: 38 ]]
+		-- upvalues: GetChatConfigurationStoreModule (copy)
+		p1.chatConfigStore = GetChatConfigurationStoreModule(false)
 		p1.state = {
 			channelTabsSettings = p1.chatConfigStore.getChannelTabsSettings(false)
 		}
 	end
 end
-function channelBarApp.didMount(p1)
-	-- upvalues: fFlagExpChatUseChatConfigStore (ref), createEffect (ref), fFlagDebugFriendsChatModule (ref), userInputService (ref)
-	if fFlagExpChatUseChatConfigStore then
-		p1.updateChannelTabsSettingsEffect = createEffect(function(p2)
-			-- upvalues: p1 (ref)
+function ChannelBarApp.didMount(p1) --[[ Line: 46 ]]
+	-- upvalues: FFlagExpChatUseChatConfigStore (copy), CreateEffectFunction (copy), FFlagDebugFriendsChatModule (copy), UserInputService (copy)
+	if FFlagExpChatUseChatConfigStore then
+		p1.updateChannelTabsSettingsEffect = CreateEffectFunction(function(p2) --[[ Line: 49 ]]
+			-- upvalues: p1 (copy)
 			p1:setState({
 				channelTabsSettings = p1.chatConfigStore.getChannelTabsSettings(p2)
 			})
 		end)
 	end
-	if fFlagDebugFriendsChatModule then
-		p1.debugAddTabsConnection = userInputService.InputBegan:Connect(function(p2, p3)
-			-- upvalues: p1 (ref)
-			if p3 then return end
-			if p2.KeyCode == Enum.KeyCode.J and p2:IsModifierKeyDown(Enum.ModifierKey.Ctrl) and p1.props.debugAddFakeTabs then
+	if FFlagDebugFriendsChatModule then
+		p1.debugAddTabsConnection = UserInputService.InputBegan:Connect(function(Input, GameProcessed) --[[ Line: 58 ]]
+			-- upvalues: p1 (copy)
+			if GameProcessed then return end
+			if Input.KeyCode == Enum.KeyCode.J and Input:IsModifierKeyDown(Enum.ModifierKey.Ctrl) and p1.props.debugAddFakeTabs then
 				p1.props.debugAddFakeTabs(3)
 			end
 		end)
 	end
 end
 
-function channelBarApp.willUnmount(p1)
+function ChannelBarApp.willUnmount(p1) --[[ Line: 73 ]]
 	if p1.updateChannelTabsSettingsEffect then
 		p1.updateChannelTabsSettingsEffect()
 		p1.updateChannelTabsSettingsEffect = nil
@@ -60,26 +65,26 @@ function channelBarApp.willUnmount(p1)
 	end
 end
 
-function channelBarApp.render(p1)
-	-- upvalues: fFlagExpChatUseChatConfigStore (ref), reactModule (ref), channelBarModule (ref), fFlagExpChatLogGlobalChatTabClickedModule (ref), analytics (ref), fFlagGlobalTextChatAddPlaySessionFieldModule (ref)
-	return reactModule.createElement(channelBarModule, {
-		channelTabsSettings = if fFlagExpChatUseChatConfigStore then p1.state.channelTabsSettings else p1.props.channelTabsSettings,
+function ChannelBarApp.render(p1) --[[ Line: 84 ]]
+	-- upvalues: FFlagExpChatUseChatConfigStore (copy), ReactModule (copy), ChannelBarModule (copy), FFlagExpChatLogGlobalChatTabClickedModule (copy), Analytics (copy), FFlagGlobalTextChatAddPlaySessionFieldModule (copy)
+	return ReactModule.createElement(ChannelBarModule, {
+		channelTabsSettings = if FFlagExpChatUseChatConfigStore then p1.state.channelTabsSettings else p1.props.channelTabsSettings,
 		chatWindowSettings = p1.props.chatWindowSettings,
 		allChannelTabs = p1.props.allChannelTabs,
 		allTextChannels = p1.props.allTextChannels,
 		selectedTabName = p1.props.selectedTabName,
-		onTabSelected = function(value, p2, p3, p4)
-			-- upvalues: fFlagExpChatLogGlobalChatTabClickedModule (copy), p1 (ref), analytics (copy), fFlagGlobalTextChatAddPlaySessionFieldModule (copy)
-			if p4 == "UniverseChat" and fFlagExpChatLogGlobalChatTabClickedModule and p3 ~= p1.props.selectedTabName then
-				local cloned = table.clone(analytics.DefaultStandardizedFields)
-				table.insert(cloned, "addPlaceInstanceId")
+		onTabSelected = function(p2, p3, ChannelName, p4) --[[ Line: 99 ]]
+			-- upvalues: FFlagExpChatLogGlobalChatTabClickedModule (upval), p1 (copy), Analytics (upval), FFlagGlobalTextChatAddPlaySessionFieldModule (upval)
+			if p4 == "UniverseChat" and FFlagExpChatLogGlobalChatTabClickedModule and ChannelName ~= p1.props.selectedTabName then
+				local Copy = table.clone(Analytics.DefaultStandardizedFields)
+				table.insert(Copy, "addPlaceInstanceId")
 				
-				if fFlagGlobalTextChatAddPlaySessionFieldModule then
-					table.insert(cloned, "addPlaySessionId")
+				if FFlagGlobalTextChatAddPlaySessionFieldModule then
+					table.insert(Copy, "addPlaySessionId")
 				end
-				analytics:TelemetryLogEvent(analytics.ExpChatGlobalChatTabClickedConfig, { channelName = p3 }, cloned)
+				Analytics:TelemetryLogEvent(Analytics.ExpChatGlobalChatTabClickedConfig, { channelName = ChannelName }, Copy)
 			end
-			p1.props.onTabSelected(value, p2, p3, p4)
+			p1.props.onTabSelected(p2, p3, ChannelName, p4)
 		end,
 		onHovered = p1.props.onHovered,
 		onUnhovered = p1.props.onUnhovered,
@@ -89,48 +94,90 @@ function channelBarApp.render(p1)
 	})
 end
 
-return roactRoduxModule.connect(function(p1)
-	-- upvalues: fFlagExpChatUseChatConfigStore (ref), configModule (ref)
+local v1 = RoactRoduxModule.connect(function(p1) --[[ Line: 127 ]]
+	-- upvalues: FFlagExpChatUseChatConfigStore (copy), ConfigModule (copy), FFlagExpChatUseChannelTabsStore (copy)
 	return {
-		channelTabsSettings = if fFlagExpChatUseChatConfigStore then nil else p1.ChatLayout.ChannelTabsSettings or {
-			BackgroundTransparency = configModule.ChannelTabsSettings.BackgroundTransparency,
-			BackgroundColor3 = configModule.ChannelTabsSettings.BackgroundColor3,
-			HoverBackgroundColor3 = configModule.ChannelTabsSettings.HoverBackgroundColor3,
-			FontFace = configModule.ChannelTabsSettings.FontFace,
-			TextSize = configModule.ChannelTabsSettings.TextSize,
-			TextColor3 = configModule.ChannelTabsSettings.TextColor3,
-			SelectedTabTextColor3 = configModule.ChannelTabsSettings.SelectedTabTextColor3,
-			TextStrokeColor3 = configModule.ChannelTabsSettings.TextStrokeColor3,
-			TextStrokeTransparency = configModule.ChannelTabsSettings.TextStrokeTransparency
+		channelTabsSettings = if FFlagExpChatUseChatConfigStore then nil else p1.ChatLayout.ChannelTabsSettings or {
+			BackgroundTransparency = ConfigModule.ChannelTabsSettings.BackgroundTransparency,
+			BackgroundColor3 = ConfigModule.ChannelTabsSettings.BackgroundColor3,
+			HoverBackgroundColor3 = ConfigModule.ChannelTabsSettings.HoverBackgroundColor3,
+			FontFace = ConfigModule.ChannelTabsSettings.FontFace,
+			TextSize = ConfigModule.ChannelTabsSettings.TextSize,
+			TextColor3 = ConfigModule.ChannelTabsSettings.TextColor3,
+			SelectedTabTextColor3 = ConfigModule.ChannelTabsSettings.SelectedTabTextColor3,
+			TextStrokeColor3 = ConfigModule.ChannelTabsSettings.TextStrokeColor3,
+			TextStrokeTransparency = ConfigModule.ChannelTabsSettings.TextStrokeTransparency
 		},
-		allChannelTabs = p1.ChannelTabs.allChannelTabs or {},
-		selectedTabName = p1.ChannelTabs.selectedTabName or "",
+		allChannelTabs = if FFlagExpChatUseChannelTabsStore then nil else p1.ChannelTabs.allChannelTabs or {},
+		selectedTabName = if FFlagExpChatUseChannelTabsStore then nil else p1.ChannelTabs.selectedTabName or "",
 		allTextChannels = p1.TextChannels.allTextChannels
 	}
-end, function(p1)
-	-- upvalues: selectTabByTypeModule (ref), fFlagDebugFriendsChatModule (ref), channelTabsConfigurationEnabledModule (ref), getChannelTabsStoreModule (ref), localTextChannelParticipantAddedModule (ref)
+end, function(Callback) --[[ Line: 146 ]]
+	-- upvalues: SelectTabByTypeModule (copy), FFlagDebugFriendsChatModule (copy), ChannelTabsConfigurationEnabledModule (copy), GetChannelTabsStoreModule (copy), TextChatService (copy), LocalTextChannelParticipantAddedModule (copy)
 	return {
-		onTabSelected = function(value, p2, p3, p4)
-			-- upvalues: selectTabByTypeModule (copy), p1 (ref)
-			selectTabByTypeModule(p1, {
-				channelName = p3,
-				tabType = p4,
-				shouldReorderTabs = p2,
-				textChannel = value
+		onTabSelected = function(TextChannel, ShouldReorderTabs, ChannelName, TabType) --[[ Line: 148 ]]
+			-- upvalues: SelectTabByTypeModule (upval), Callback (copy)
+			SelectTabByTypeModule(Callback, {
+				channelName = ChannelName,
+				tabType = TabType,
+				shouldReorderTabs = ShouldReorderTabs,
+				textChannel = TextChannel
 			})
 		end,
-		debugAddFakeTabs = if fFlagDebugFriendsChatModule then function(p2)
-			-- upvalues: p1 (ref), channelTabsConfigurationEnabledModule (copy), getChannelTabsStoreModule (copy), localTextChannelParticipantAddedModule (copy)
-			p1(channelTabsConfigurationEnabledModule(true))
-			local var1 = getChannelTabsStoreModule(false)
+		debugAddFakeTabs = if FFlagDebugFriendsChatModule then function(p1) --[[ Line: 160 ]]
+			-- upvalues: Callback (copy), ChannelTabsConfigurationEnabledModule (upval), GetChannelTabsStoreModule (upval), TextChatService (upval), LocalTextChannelParticipantAddedModule (upval)
+			Callback(ChannelTabsConfigurationEnabledModule(true))
+			local ChannelTabsStoreModule = GetChannelTabsStoreModule(false)
+			ChannelTabsStoreModule.setChannelTabsConfigurationEnabled(true)
 			
-			for i = 1, p2 do
-				local text = "D" .. tostring(i)
-				local textChannel = Instance.new("TextChannel")
-				textChannel.Name = text
-				p1(localTextChannelParticipantAddedModule(textChannel))
-				var1.addChannelTab({ type = "TextChat", name = text }, nil)
+			for i = 1, p1 do
+				local Text = "D" .. tostring(i)
+				local TextChannel = Instance.new("TextChannel")
+				TextChannel.Name = Text
+				TextChannel.Parent = TextChatService:FindFirstChild("TextChannels") or TextChatService
+				Callback(LocalTextChannelParticipantAddedModule(TextChannel))
+				ChannelTabsStoreModule.addChannelTab({ type = "TextChat", name = Text }, nil)
 			end
 		end else nil
 	}
-end)(channelBarApp)
+end)(ChannelBarApp)
+
+local function areChannelTabsEqual(AllChannelTabs, AllChannelTabs1): boolean --[[ Line: 185 ]]
+	if AllChannelTabs == AllChannelTabs1 then
+		return true
+	end
+	for i, allChannelTab in AllChannelTabs do
+		local AllChannelTab = AllChannelTabs1[i]
+		
+		if AllChannelTab == nil or AllChannelTab.tabIndex ~= allChannelTab.tabIndex or AllChannelTab.type ~= allChannelTab.type or AllChannelTab.HasUnreadMessages ~= allChannelTab.HasUnreadMessages then
+			return false
+		end
+	end
+	for i1 in AllChannelTabs1 do
+		if AllChannelTabs[i1] == nil then
+			return false
+		end
+	end
+	return true
+end
+
+local function ChannelBarAppWithSignals(p1) --[[ Line: 208 ]]
+	-- upvalues: ReactModule (copy), SignalsModule (copy), GetChannelTabsStoreModule (copy), areChannelTabsEqual (copy), SignalsReactModule (copy), v1 (ref), CryoModule (copy)
+	return ReactModule.createElement(v1, CryoModule.Dictionary.union(p1, (SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 209 ]]
+		-- upvalues: SignalsModule (upval), GetChannelTabsStoreModule (upval), areChannelTabsEqual (upval)
+		return SignalsModule.createComputed(function(p2) --[[ Line: 210 ]]
+			-- upvalues: GetChannelTabsStoreModule (upval)
+			local ChannelTabsState = GetChannelTabsStoreModule(false).getChannelTabsState(p2)
+			
+			return {
+				allChannelTabs = ChannelTabsState.allChannelTabs,
+				selectedTabName = ChannelTabsState.selectedTabName or ""
+			}
+		end, function(p2, p3) --[[ Line: 217 ]]
+			-- upvalues: areChannelTabsEqual (upval)
+			return p2.selectedTabName == p3.selectedTabName and areChannelTabsEqual(p2.allChannelTabs, p3.allChannelTabs)
+		end)
+	end, {}))))))
+end
+
+return if FFlagExpChatUseChannelTabsStore then ReactModule.memo(ChannelBarAppWithSignals) else v1

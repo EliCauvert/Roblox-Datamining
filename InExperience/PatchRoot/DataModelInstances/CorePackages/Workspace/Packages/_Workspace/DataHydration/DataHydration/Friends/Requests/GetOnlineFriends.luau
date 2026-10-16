@@ -1,36 +1,37 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local promiseModule = require(parent.Promise)
-local url = require(parent.Http).Url
-local fFlagFriendsSignalMigrationTelemetry = require(parent.SharedFlags).FFlagFriendsSignalMigrationTelemetry
-local myHttpRequestModule = require(dataHydration.Friends.Networking.myHttpRequest)
-local friendsRequestTelemetryModule = require(script.Parent.FriendsRequestTelemetry)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local PromiseModule = require(Parent.Promise)
+local Url = require(Parent.Http).Url
+local FFlagFriendsSignalMigrationTelemetry = require(Parent.SharedFlags).FFlagFriendsSignalMigrationTelemetry
+local MyHttpRequestModule = require(DataHydration.Friends.Networking.myHttpRequest)
+local FriendsRequestTelemetryModule = require(script.Parent.FriendsRequestTelemetry)
 
-local function collectFriendIdsFromResponse(p1)
-	local t = {}
-	
-	for i, v in if p1 then p1.data else {} do
-		if v.id ~= nil then
-			table.insert(t, tostring(v.id))
+local function collectFriendIdsFromResponse(ResponseBody) --[[ Line: 33 ]]
+	local List = {}
+	local Data = ResponseBody and ResponseBody.data or {}
+	for _, entry in Data do
+		if entry.id ~= nil then
+			table.insert(List, (tostring(entry.id)))
 		end
 	end
-	return t
+	return List
 end
 
-return function(p2)
-	-- upvalues: promiseModule (ref), fFlagFriendsSignalMigrationTelemetry (ref), friendsRequestTelemetryModule (ref), url (ref), myHttpRequestModule (ref), collectFriendIdsFromResponse (ref)
-	if p2 == nil or tostring(p2) == "" then
-		return promiseModule.reject("GetOnlineFriends called with nil userId")
-	end
-	local var1 = if fFlagFriendsSignalMigrationTelemetry then friendsRequestTelemetryModule.generateRequestId() else nil
-	
-	return myHttpRequestModule(string.format("%s/users/%s/friends/online", url.FRIEND_URL, tostring(p2)), "GET", if fFlagFriendsSignalMigrationTelemetry then friendsRequestTelemetryModule.getRequestOptions(var1) else nil):andThen(function(p3)
-		-- upvalues: fFlagFriendsSignalMigrationTelemetry (copy), var1 (ref), friendsRequestTelemetryModule (copy), collectFriendIdsFromResponse (copy)
-		local var2 = if p3 then p3.responseBody else nil
+return function(p1) --[[ Line: 43 ]]
+	-- upvalues: PromiseModule (copy), FFlagFriendsSignalMigrationTelemetry (copy), FriendsRequestTelemetryModule (copy), Url (copy), MyHttpRequestModule (copy), collectFriendIdsFromResponse (copy)
+	if p1 == nil or tostring(p1) == "" then
+		return PromiseModule.reject("GetOnlineFriends called with nil userId")
+	else
+		local RequestId = if FFlagFriendsSignalMigrationTelemetry then FriendsRequestTelemetryModule.generateRequestId() else nil
 		
-		if fFlagFriendsSignalMigrationTelemetry and var1 and var2 then
-			friendsRequestTelemetryModule.emitGetAllOnlineFriendsResponse(var1, collectFriendIdsFromResponse(var2))
-		end
-		return var2
-	end)
+		return MyHttpRequestModule(string.format("%s/users/%s/friends/online", Url.FRIEND_URL, (tostring(p1))), "GET", if FFlagFriendsSignalMigrationTelemetry then FriendsRequestTelemetryModule.getRequestOptions(RequestId) else nil):andThen(function(Result) --[[ Line: 54 ]]
+			-- upvalues: FFlagFriendsSignalMigrationTelemetry (upval), RequestId (copy), FriendsRequestTelemetryModule (upval), collectFriendIdsFromResponse (upval)
+			local ResponseBody = if Result then Result.responseBody else nil
+			
+			if FFlagFriendsSignalMigrationTelemetry and RequestId and ResponseBody then
+				FriendsRequestTelemetryModule.emitGetAllOnlineFriendsResponse(RequestId, (collectFriendIdsFromResponse(ResponseBody)))
+			end
+			return ResponseBody
+		end)
+	end
 end

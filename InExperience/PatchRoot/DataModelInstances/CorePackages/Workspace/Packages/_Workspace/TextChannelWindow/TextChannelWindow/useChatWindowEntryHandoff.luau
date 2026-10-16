@@ -1,65 +1,64 @@
-﻿local guiService = game:GetService("GuiService")
-local reactModule = require(script.Parent.Parent.React)
-local useSelectionActivateActionModule = require(script.Parent.FocusNavigation.useSelectionActivateAction)
+﻿local GuiService = game:GetService("GuiService")
+local ReactModule = require(script.Parent.Parent.React)
+local UseSelectionActivateActionModule = require(script.Parent.FocusNavigation.useSelectionActivateAction)
 
-return function(p1)
-	-- upvalues: guiService (ref), reactModule (ref), useSelectionActivateActionModule (ref)
-	local guiService_1 = p1.guiService or guiService
-	local enabled = p1.enabled
-	local windowInstance = p1.windowInstance
-	local focusTargetRef = p1.focusTargetRef
-	local var1 = reactModule.useRef(p1.setSelection)
-	var1.current = p1.setSelection
-	reactModule.useEffect(function()
-		-- upvalues: enabled (ref), windowInstance (ref), focusTargetRef (ref), guiService_1 (ref)
-		if enabled and windowInstance ~= nil then
-			local selectable = windowInstance.Selectable
-			windowInstance.Selectable = true
+return function(p1) --[[ Line: 29 | Named "useChatWindowEntryHandoff" ]]
+	-- upvalues: GuiService (copy), ReactModule (copy), UseSelectionActivateActionModule (copy)
+	local GuiService1 = p1.guiService or GuiService
+	local Enabled = p1.enabled
+	local WindowInstance = p1.windowInstance
+	local FocusTargetRef = p1.focusTargetRef
+	local UseRefResult = ReactModule.useRef(p1.setSelection)
+	UseRefResult.current = p1.setSelection
+	ReactModule.useEffect(function() --[[ Line: 41 ]]
+		-- upvalues: Enabled (copy), WindowInstance (copy), FocusTargetRef (copy), GuiService1 (copy)
+		if not Enabled or WindowInstance == nil then return end
+		local Selectable = WindowInstance.Selectable
+		WindowInstance.Selectable = true
+		
+		return function() --[[ Line: 47 ]]
+			-- upvalues: WindowInstance (upval), Selectable (copy), FocusTargetRef (upval), GuiService1 (upval)
+			WindowInstance.Selectable = Selectable
 			
-			return function()
-				-- upvalues: windowInstance (copy), selectable (ref), focusTargetRef (copy), guiService_1 (copy)
-				windowInstance.Selectable = selectable
+			if FocusTargetRef.current ~= nil and GuiService1.SelectedCoreObject == FocusTargetRef.current then
+				GuiService1.SelectedCoreObject = nil
 				
-				if focusTargetRef.current ~= nil and guiService_1.SelectedCoreObject == focusTargetRef.current then
-					guiService_1.SelectedCoreObject = nil
-					
-					if windowInstance:IsDescendantOf(game) then
-						guiService_1.SelectedObject = windowInstance
-					end
+				if WindowInstance:IsDescendantOf(game) then
+					GuiService1.SelectedObject = WindowInstance
 				end
 			end
 		end
-	end, { enabled, windowInstance, focusTargetRef, guiService_1 })
-	useSelectionActivateActionModule({
+	end, { Enabled, WindowInstance, FocusTargetRef, GuiService1 })
+	UseSelectionActivateActionModule({
 		actionNamePrefix = "EnterTextChannelWindow",
-		enabled = enabled,
-		active = windowInstance ~= nil,
-		onAction = reactModule.useCallback(function(p2)
-			-- upvalues: focusTargetRef (ref), var1 (ref), guiService_1 (ref)
-			if p2 == Enum.UserInputState.Begin then
-				local current = focusTargetRef.current
+		enabled = Enabled,
+		active = WindowInstance ~= nil,
+		onAction = ReactModule.useCallback(function(UserInputState) --[[ Line: 58 ]]
+			-- upvalues: FocusTargetRef (copy), UseRefResult (copy), GuiService1 (copy)
+			if UserInputState == Enum.UserInputState.Begin then
+				local Current = FocusTargetRef.current
 				
-				if current ~= nil then
-					local current_1 = var1.current
+				if Current ~= nil then
+					local CurrentFunction: (any) -> () = UseRefResult.current
 					
-					if current_1 then
-						current_1(current)
+					if CurrentFunction then
+						CurrentFunction(Current)
 					else
-						guiService_1.SelectedCoreObject = current
+						GuiService1.SelectedCoreObject = Current
 					end
 				end
-				guiService_1.SelectedObject = nil
+				GuiService1.SelectedObject = nil
 			end
 			return Enum.ContextActionResult.Sink
-		end, { guiService_1, focusTargetRef }),
-		shouldBind = reactModule.useCallback(function()
-			-- upvalues: guiService_1 (ref), windowInstance (ref)
-			return guiService_1.SelectedObject == windowInstance
-		end, { guiService_1, windowInstance }),
-		rebindSignal = reactModule.useMemo(function()
-			-- upvalues: windowInstance (ref), guiService_1 (ref)
-			return if windowInstance == nil then nil else guiService_1:GetPropertyChangedSignal("SelectedObject")
-		end, { guiService_1, windowInstance }),
+		end, { GuiService1, FocusTargetRef }),
+		shouldBind = ReactModule.useCallback(function(): boolean --[[ Line: 75 ]]
+			-- upvalues: GuiService1 (copy), WindowInstance (copy)
+			return GuiService1.SelectedObject == WindowInstance
+		end, { GuiService1, WindowInstance }),
+		rebindSignal = ReactModule.useMemo(function() --[[ Line: 79 ]]
+			-- upvalues: WindowInstance (copy), GuiService1 (copy)
+			return if WindowInstance == nil then nil else GuiService1:GetPropertyChangedSignal("SelectedObject")
+		end, { GuiService1, WindowInstance }),
 		contextActionService = p1.contextActionService
 	})
 end

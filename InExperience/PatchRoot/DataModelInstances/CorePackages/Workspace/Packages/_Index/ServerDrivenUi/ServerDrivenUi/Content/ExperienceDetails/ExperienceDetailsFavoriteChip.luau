@@ -1,62 +1,62 @@
-﻿local serverDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
-local parent = serverDrivenUi.Parent
-local playersService = game:GetService("Players")
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local signalsReactModule = require(parent.SignalsReact)
-local game = require(parent.DataHydration).Game
-local roactUtilsModule = require(parent.RoactUtils)
-local localizationModule = require(parent.Localization)
-local sduiChip = require(parent.SduiSharedContent).SduiChip
-local toastRoduxModule = require(parent.ToastRodux)
-local toastType = toastRoduxModule.Enums.ToastType
-local setCurrentToastMessage = toastRoduxModule.Actions.SetCurrentToastMessage
-local gameFavorite = require(parent.DiscoveryAnalytics).Events.gameFavorite
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local useLocalization = localizationModule.Hooks.useLocalization
-local useOptimisticUpdateStatusModule = require(serverDrivenUi.Content.ExperienceDetails.Hooks.useOptimisticUpdateStatus)
+﻿local ServerDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
+local Parent = ServerDrivenUi.Parent
+local Players = game:GetService("Players")
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local SignalsReactModule = require(Parent.SignalsReact)
+local Game1 = require(Parent.DataHydration).Game
+local SduiChip = require(Parent.SduiSharedContent).SduiChip
+local ToastRoduxModule = require(Parent.ToastRodux)
+local ToastType = ToastRoduxModule.Enums.ToastType
+local SetCurrentToastMessageFunction = ToastRoduxModule.Actions.SetCurrentToastMessage
+local GameFavoriteFunction = require(Parent.DiscoveryAnalytics).Events.gameFavorite
+local FFlagLuaAppAddUniverseIdToEngagementEvents = require(Parent.SharedFlags).FFlagLuaAppAddUniverseIdToEngagementEvents
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseOptimisticUpdateStatusModule = require(ServerDrivenUi.Content.ExperienceDetails.Hooks.useOptimisticUpdateStatus)
 
-return reactModule.memo(function(p1)
-	-- upvalues: useDispatch (ref), game (ref), signalsReactModule (ref), useLocalization (ref), reactModule (ref), playersService (ref), gameFavorite (ref), setCurrentToastMessage (ref), toastType (ref), useOptimisticUpdateStatusModule (ref), sduiChip (ref), foundationModule (ref)
-	local layoutOrder = p1.layoutOrder
-	local universeId = p1.universeId
-	local var1 = useDispatch()
-	local andFetchFavorite = game.getFavoritesStore(false).getAndFetchFavorite(universeId)
-	local var2 = signalsReactModule.useSignalState(function(p2)
-		-- upvalues: andFetchFavorite (ref)
-		local var3 = andFetchFavorite.data(p2)
+return ReactModule.memo(function(p1) --[[ Line: 37 | Named "ExperienceDetailsFavoriteChip" ]]
+	-- upvalues: UseDispatchFunction (copy), Game1 (copy), SignalsReactModule (copy), UseLocalizationFunction (copy), ReactModule (copy), Players (copy), GameFavoriteFunction (copy), FFlagLuaAppAddUniverseIdToEngagementEvents (copy), SetCurrentToastMessageFunction (copy), ToastType (copy), UseOptimisticUpdateStatusModule (copy), SduiChip (copy), FoundationModule (copy)
+	local LayoutOrder = p1.layoutOrder
+	local UniverseId = p1.universeId
+	local UseDispatchResult = UseDispatchFunction()
+	local AndFetchFavorite = Game1.getFavoritesStore(false).getAndFetchFavorite(UniverseId)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(function(p2) --[[ Line: 43 ]]
+		-- upvalues: AndFetchFavorite (copy)
+		local DataResult = AndFetchFavorite.data(p2)
 		
-		return var3 ~= nil and var3.isFavorited
+		return DataResult ~= nil and DataResult.isFavorited
 	end)
-	local var3 = signalsReactModule.useSignalState(game.getGameInfoStore(false).getAndFetchGameInfo(universeId).data)
-	local var4 = if var3 then var3.rootPlaceId else nil
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(Game1.getGameInfoStore(false).getAndFetchGameInfo(UniverseId).data)
+	local RootPlaceId = UseSignalStateResult1 and UseSignalStateResult1.rootPlaceId or nil
 	
-	return reactModule.createElement(sduiChip, {
-		text = useLocalization({ favorite = "Feature.Favorites.Label.Favorite" }).favorite,
-		leadingIconName = foundationModule.Enums.IconName.Star,
-		leadingIconVariant = if var2 then foundationModule.Enums.IconVariant.Filled else nil,
-		onActivated = useOptimisticUpdateStatusModule(reactModule.useCallback(function()
-			-- upvalues: var2 (ref), var4 (ref), playersService (copy), gameFavorite (copy), game (copy), universeId (ref)
-			local var5 = not var2
+	return ReactModule.createElement(SduiChip, {
+		text = UseLocalizationFunction({ favorite = "Feature.Favorites.Label.Favorite" }).favorite,
+		leadingIconName = FoundationModule.Enums.IconName.Star,
+		leadingIconVariant = if UseSignalStateResult then FoundationModule.Enums.IconVariant.Filled else nil,
+		onActivated = UseOptimisticUpdateStatusModule(ReactModule.useCallback(function() --[[ Line: 55 ]]
+			-- upvalues: UseSignalStateResult (copy), RootPlaceId (copy), Players (upval), GameFavoriteFunction (upval), FFlagLuaAppAddUniverseIdToEngagementEvents (upval), UniverseId (copy), Game1 (upval)
+			local NoUseSignalStateResult = not UseSignalStateResult
 			
-			if var4 then
-				gameFavorite({
+			if RootPlaceId then
+				GameFavoriteFunction({
 					ctx = "ExperienceDetailsFavoriteChip",
-					uid = tostring(playersService.LocalPlayer and playersService.LocalPlayer.UserId),
-					placeId = var4,
-					state = if var5 then "on" else "off"
+					uid = tostring(Players.LocalPlayer and Players.LocalPlayer.UserId),
+					placeId = RootPlaceId,
+					state = if NoUseSignalStateResult then "on" else "off",
+					universeId = if FFlagLuaAppAddUniverseIdToEngagementEvents then UniverseId else nil
 				}, "ExperienceDetailsFavoriteChip")
 			end
-			return game.getFavoritesStore(false).updateFavorite(universeId, var5)
-		end, { universeId, var4, var2 }), reactModule.useCallback(function(p2)
-			-- upvalues: var1 (ref), setCurrentToastMessage (copy), toastType (copy)
+			return Game1.getFavoritesStore(false).updateFavorite(UniverseId, NoUseSignalStateResult)
+		end, { UniverseId, RootPlaceId, UseSignalStateResult }), (ReactModule.useCallback(function(p2) --[[ Line: 72 ]]
+			-- upvalues: UseDispatchResult (copy), SetCurrentToastMessageFunction (upval), ToastType (upval)
 			if p2 and p2.type == "error" then
-				var1(setCurrentToastMessage({
+				UseDispatchResult(SetCurrentToastMessageFunction({
 					toastMessage = "Feature.Toast.NetworkingError.SomethingIsWrong",
-					toastType = toastType.NetworkingError
+					toastType = ToastType.NetworkingError
 				}))
 			end
-		end, { var1 })),
-		layoutOrder = layoutOrder
+		end, { UseDispatchResult }))),
+		layoutOrder = LayoutOrder
 	})
 end)

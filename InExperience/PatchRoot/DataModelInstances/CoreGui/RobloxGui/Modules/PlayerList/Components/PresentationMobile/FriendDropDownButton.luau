@@ -1,129 +1,123 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local playersService = game:GetService("Players")
-local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
-local localizationService = game:GetService("LocalizationService")
-local cryoModule = require(corePackagesService.Packages.Cryo)
-local roactModule = require(corePackagesService.Packages.Roact)
-local tModule = require(corePackagesService.Packages.t)
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local localization = require(corePackagesService.Workspace.Packages.InExperienceLocales).Localization
-local useFocusGuiObject = require(corePackagesService.Packages.ReactFocusNavigation).useFocusGuiObject
-local dropDownButtonAnimatorModule = require(script.Parent.DropDownButtonAnimator)
-local images = UIBloxModule.App.ImageSet.Images
-local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
-local fFlagConnectionsToFriendsRename = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagConnectionsToFriendsRename
-local localPlayer = playersService.LocalPlayer
-local t = {
-	unfriend = if fFlagConnectionsToFriendsRename then "Feature.Friends.Action.Unfriend" else nil,
-	friendRequest = if fFlagConnectionsToFriendsRename then "Feature.Friends.Label.FriendRequest" else nil,
-	removeConnection = if fFlagConnectionsToFriendsRename then nil else "CommonUI.Features.Label.RemoveConnection",
-	connectionRequest = if fFlagConnectionsToFriendsRename then nil else "InGame.PlayerDropDown.Action.ConnectionRequest"
-}
-local friendDropDownButton = roactModule.PureComponent:extend("FriendDropDownButton")
-friendDropDownButton.validateProps = tModule.strictInterface({
-	layoutOrder = tModule.integer,
-	playerRelationship = tModule.strictInterface({
-		isBlocked = tModule.boolean,
-		friendStatus = tModule.enum(Enum.FriendStatus),
-		isFollowing = tModule.boolean,
-		isFollower = tModule.boolean
+﻿local CorePackages = game:GetService("CorePackages")
+local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
+local LocalizationService = game:GetService("LocalizationService")
+local CryoModule = require(CorePackages.Packages.Cryo)
+local RoactModule = require(CorePackages.Packages.Roact)
+local TModule = require(CorePackages.Packages.t)
+local Localization = require(CorePackages.Workspace.Packages.InExperienceLocales).Localization
+local UseFocusGuiObjectFunction = require(CorePackages.Packages.ReactFocusNavigation).useFocusGuiObject
+local DropDownButtonAnimatorModule = require(script.Parent.DropDownButtonAnimator)
+local Images = require(CorePackages.Packages.UIBlox).App.ImageSet.Images
+local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
+local LocalPlayer = game:GetService("Players").LocalPlayer
+local FriendDropDownButton = RoactModule.PureComponent:extend("FriendDropDownButton")
+FriendDropDownButton.validateProps = TModule.strictInterface({
+	layoutOrder = TModule.integer,
+	playerRelationship = TModule.strictInterface({
+		isBlocked = TModule.boolean,
+		friendStatus = TModule.enum(Enum.FriendStatus),
+		isFollowing = TModule.boolean,
+		isFollower = TModule.boolean
 	}),
-	selectedPlayer = tModule.optional(tModule.instanceIsA("Player")),
-	dropDownOpen = tModule.boolean,
-	requestFriendship = tModule.callback,
-	contentVisible = tModule.boolean,
-	isUsingGamepad = tModule.optional(tModule.boolean),
-	focusGuiObject = tModule.callback
+	selectedPlayer = TModule.optional(TModule.instanceIsA("Player")),
+	dropDownOpen = TModule.boolean,
+	requestFriendship = TModule.callback,
+	contentVisible = TModule.boolean,
+	isUsingGamepad = TModule.optional(TModule.boolean),
+	focusGuiObject = TModule.callback
 })
 
-local function getFriendTextAndIcon(p1)
-	-- upvalues: images (ref), localization (ref), localizationService (ref), fFlagConnectionsToFriendsRename (ref), t (ref), robloxTranslatorModule (ref)
-	local friendAdd = images["icons/actions/friends/friendAdd"]
-	local friendRemove = images["icons/actions/friends/friendRemove"]
-	local var1 = localization.new(localizationService.RobloxLocaleId)
+local function getFriendTextAndIcon(FriendStatus) --[[ Line: 46 ]]
+	-- upvalues: Images (copy), Localization (copy), LocalizationService (copy), RobloxTranslatorModule (copy)
+	local IconsActionsFriendsFriendAdd = Images["icons/actions/friends/friendAdd"]
+	local IconsActionsFriendsFriendRemove = Images["icons/actions/friends/friendRemove"]
+	local NewLocalization = Localization.new(LocalizationService.RobloxLocaleId)
 	
-	if p1 == Enum.FriendStatus.Friend then
-		return var1:Format(if fFlagConnectionsToFriendsRename then t.unfriend else t.removeConnection), friendRemove
-	elseif p1 == Enum.FriendStatus.Unknown or p1 == Enum.FriendStatus.NotFriend then
-		return var1:Format(if fFlagConnectionsToFriendsRename then t.friendRequest else t.connectionRequest), friendAdd
-	elseif p1 == Enum.FriendStatus.FriendRequestSent then
-		return robloxTranslatorModule:FormatByKey("InGame.PlayerDropDown.CancelRequest"), friendAdd
-	elseif p1 == Enum.FriendStatus.FriendRequestReceived then
-		return robloxTranslatorModule:FormatByKey("InGame.PlayerDropDown.Accept"), friendAdd
+	if FriendStatus == Enum.FriendStatus.Friend then
+		return NewLocalization:Format("Feature.Friends.Action.Unfriend"), IconsActionsFriendsFriendRemove
+	elseif FriendStatus == Enum.FriendStatus.Unknown or FriendStatus == Enum.FriendStatus.NotFriend then
+		return NewLocalization:Format("Feature.Friends.Label.FriendRequest"), IconsActionsFriendsFriendAdd
+	elseif FriendStatus == Enum.FriendStatus.FriendRequestSent then
+		return RobloxTranslatorModule:FormatByKey("InGame.PlayerDropDown.CancelRequest"), IconsActionsFriendsFriendAdd
+	elseif FriendStatus == Enum.FriendStatus.FriendRequestReceived then
+		return RobloxTranslatorModule:FormatByKey("InGame.PlayerDropDown.Accept"), IconsActionsFriendsFriendAdd
+	else
+		return NewLocalization:Format("Feature.Friends.Label.FriendRequest"), IconsActionsFriendsFriendAdd
 	end
-	return var1:Format(t.connectionRequest), friendAdd
 end
 
-function friendDropDownButton.init(p1)
-	-- upvalues: roactModule (ref)
+function FriendDropDownButton.init(p1) --[[ Line: 64 ]]
+	-- upvalues: RoactModule (copy)
 	p1.state = { unfriendConfirm = false }
-	p1.dropDownButtonAnimatorRef = roactModule.createRef()
+	p1.dropDownButtonAnimatorRef = RoactModule.createRef()
 	
-	function p1.onAnimationComplete()
-		-- upvalues: p1 (ref)
+	function p1.onAnimationComplete() --[[ Line: 71 ]]
+		-- upvalues: p1 (copy)
 		if p1.props.isUsingGamepad then
 			p1.props.focusGuiObject(p1.dropDownButtonAnimatorRef.current)
 		end
 	end
 end
 
-function friendDropDownButton.render(p1)
-	-- upvalues: localPlayer (ref), rbxAnalyticsService (ref), getFriendTextAndIcon (ref), roactModule (ref), dropDownButtonAnimatorModule (ref)
-	local playerRelationship = p1.props.playerRelationship
-	local selectedPlayer = p1.props.selectedPlayer
-	local _ = nil
-	local var1 = if playerRelationship.friendStatus == Enum.FriendStatus.Friend and not p1.state.unfriendConfirm then function()
-		-- upvalues: p1 (ref)
+function FriendDropDownButton.render(p1) --[[ Line: 78 ]]
+	-- upvalues: LocalPlayer (copy), RbxAnalyticsService (copy), getFriendTextAndIcon (copy), RoactModule (copy), DropDownButtonAnimatorModule (copy)
+	local PlayerRelationship = p1.props.playerRelationship
+	local SelectedPlayer = p1.props.selectedPlayer
+	local OnActivated = if PlayerRelationship.friendStatus == Enum.FriendStatus.Friend and not p1.state.unfriendConfirm then function() --[[ Line: 84 ]]
+		-- upvalues: p1 (copy)
 		p1:setState({ unfriendConfirm = true })
-	end else function()
-		-- upvalues: playerRelationship (ref), localPlayer (copy), selectedPlayer (ref), p1 (ref), rbxAnalyticsService (copy)
-		if playerRelationship.friendStatus == Enum.FriendStatus.Friend then
-			localPlayer:RevokeFriendship(selectedPlayer)
+	end else function() --[[ Line: 90 ]]
+		-- upvalues: PlayerRelationship (copy), LocalPlayer (upval), SelectedPlayer (copy), p1 (copy), RbxAnalyticsService (upval)
+		if PlayerRelationship.friendStatus == Enum.FriendStatus.Friend then
+			LocalPlayer:RevokeFriendship(SelectedPlayer)
 			
 			return
-		elseif playerRelationship.friendStatus == Enum.FriendStatus.Unknown or playerRelationship.friendStatus == Enum.FriendStatus.NotFriend then
-			p1.props.requestFriendship(selectedPlayer, false)
+		end
+		if PlayerRelationship.friendStatus == Enum.FriendStatus.Unknown or PlayerRelationship.friendStatus == Enum.FriendStatus.NotFriend then
+			p1.props.requestFriendship(SelectedPlayer, false)
 			
 			return
-		elseif playerRelationship.friendStatus == Enum.FriendStatus.FriendRequestSent then
-			rbxAnalyticsService:ReportCounter("PlayerDropDown-RevokeFriendship")
-			rbxAnalyticsService:TrackEvent("Game", "RevokeFriendship", "PlayerDropDown")
-			localPlayer:RevokeFriendship(selectedPlayer)
+		end
+		if PlayerRelationship.friendStatus == Enum.FriendStatus.FriendRequestSent then
+			RbxAnalyticsService:ReportCounter("PlayerDropDown-RevokeFriendship")
+			RbxAnalyticsService:TrackEvent("Game", "RevokeFriendship", "PlayerDropDown")
+			LocalPlayer:RevokeFriendship(SelectedPlayer)
 			
 			return
-		elseif playerRelationship.friendStatus == Enum.FriendStatus.FriendRequestReceived then
-			rbxAnalyticsService:ReportCounter("PlayerDropDown-RequestFriendship")
-			rbxAnalyticsService:TrackEvent("Game", "RequestFriendship", "PlayerDropDown")
-			p1.props.requestFriendship(selectedPlayer, true)
+		end
+		if PlayerRelationship.friendStatus == Enum.FriendStatus.FriendRequestReceived then
+			RbxAnalyticsService:ReportCounter("PlayerDropDown-RequestFriendship")
+			RbxAnalyticsService:TrackEvent("Game", "RequestFriendship", "PlayerDropDown")
+			p1.props.requestFriendship(SelectedPlayer, true)
 		end
 	end
-	local var2 = if playerRelationship.friendStatus == Enum.FriendStatus.FriendRequestReceived then function()
-		-- upvalues: localPlayer (copy), selectedPlayer (ref)
-		localPlayer:RevokeFriendship(selectedPlayer)
+	local OnDecline = if PlayerRelationship.friendStatus == Enum.FriendStatus.FriendRequestReceived then function() --[[ Line: 112 ]]
+		-- upvalues: LocalPlayer (upval), SelectedPlayer (copy)
+		LocalPlayer:RevokeFriendship(SelectedPlayer)
 	end else nil
-	local var3 = if p1.state.unfriendConfirm then function()
-		-- upvalues: p1 (ref)
+	local OnDismiss = if p1.state.unfriendConfirm then function() --[[ Line: 118 ]]
+		-- upvalues: p1 (copy)
 		p1:setState({ unfriendConfirm = false })
 	end else nil
-	local var4, var5 = getFriendTextAndIcon(playerRelationship.friendStatus)
+	local FriendTextAndIcon, FriendTextAndIcon2 = getFriendTextAndIcon(PlayerRelationship.friendStatus)
 	
-	return roactModule.createElement(dropDownButtonAnimatorModule, {
+	return RoactModule.createElement(DropDownButtonAnimatorModule, {
 		lastButton = false,
 		layoutOrder = p1.props.layoutOrder,
-		text = var4,
-		icon = var5,
-		onActivated = var1,
+		text = FriendTextAndIcon,
+		icon = FriendTextAndIcon2,
+		onActivated = OnActivated,
 		forceShowOptions = p1.state.unfriendConfirm,
-		selectedPlayer = selectedPlayer,
-		onDecline = var2,
-		onDismiss = var3,
+		selectedPlayer = SelectedPlayer,
+		onDecline = OnDecline,
+		onDismiss = OnDismiss,
 		contentVisible = p1.props.contentVisible,
 		forwardRef = p1.dropDownButtonAnimatorRef,
 		onAnimationComplete = p1.onAnimationComplete
 	})
 end
 
-function friendDropDownButton.didUpdate(p1, p2, p3)
+function FriendDropDownButton.didUpdate(p1, p2, p3) --[[ Line: 142 ]]
 	if p2.playerRelationship.friendStatus ~= p1.props.playerRelationship.friendStatus then
 		p1:setState({ unfriendConfirm = false })
 	end
@@ -131,9 +125,10 @@ function friendDropDownButton.didUpdate(p1, p2, p3)
 		p1:setState({ unfriendConfirm = false })
 	end
 	if p1.props.isUsingGamepad then
-		local unfriendConfirm = p1.state.unfriendConfirm or p1.props.playerRelationship.friendStatus == Enum.FriendStatus.FriendRequestReceived
+		local UnfriendConfirm = p1.state.unfriendConfirm or p1.props.playerRelationship.friendStatus == Enum.FriendStatus.FriendRequestReceived
+		local UnfriendConfirm1 = p3.unfriendConfirm or p2.playerRelationship.friendStatus == Enum.FriendStatus.FriendRequestReceived
 		
-		if unfriendConfirm and unfriendConfirm ~= (p3.unfriendConfirm or p2.playerRelationship.friendStatus == Enum.FriendStatus.FriendRequestReceived) then
+		if UnfriendConfirm and UnfriendConfirm ~= UnfriendConfirm1 then
 			p1.props.focusGuiObject(p1.dropDownButtonAnimatorRef.current)
 			
 			return
@@ -143,9 +138,9 @@ function friendDropDownButton.didUpdate(p1, p2, p3)
 	end
 end
 
-function FriendDropDownButtonWrapper(p1)
-	-- upvalues: useFocusGuiObject (ref), roactModule (ref), friendDropDownButton (ref), cryoModule (ref)
-	return roactModule.createElement(friendDropDownButton, cryoModule.Dictionary.join(p1, { focusGuiObject = useFocusGuiObject() }))
+function FriendDropDownButtonWrapper(p1) --[[ Line: 171 ]]
+	-- upvalues: UseFocusGuiObjectFunction (copy), RoactModule (copy), FriendDropDownButton (copy), CryoModule (copy)
+	return RoactModule.createElement(FriendDropDownButton, CryoModule.Dictionary.join(p1, { focusGuiObject = UseFocusGuiObjectFunction() }))
 end
 
 return FriendDropDownButtonWrapper

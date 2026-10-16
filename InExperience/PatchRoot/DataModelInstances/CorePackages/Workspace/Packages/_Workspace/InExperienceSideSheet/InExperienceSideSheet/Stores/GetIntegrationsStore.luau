@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("InExperienceSideSheet").Parent.Signals).createComputed(require(script.createIntegrationsStore))
+﻿return require(script:FindFirstAncestor("InExperienceSideSheet").Parent.Signals).createComputed((require(script.createIntegrationsStore)))

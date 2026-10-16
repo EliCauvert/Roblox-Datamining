@@ -1,8 +1,8 @@
-﻿return function(p1, p2)
-	task.delay(p1, function()
-		-- upvalues: p2 (ref)
+﻿return function(Delay, Callback) --[[ Line: 4 | Named "schedulePrefetchDelay" ]]
+	task.delay(Delay, function() --[[ Line: 5 | Named "guardedCallback" ]]
+		-- upvalues: Callback (copy)
 		if game:IsLoaded() then
-			p2()
+			Callback()
 			
 			return
 		end

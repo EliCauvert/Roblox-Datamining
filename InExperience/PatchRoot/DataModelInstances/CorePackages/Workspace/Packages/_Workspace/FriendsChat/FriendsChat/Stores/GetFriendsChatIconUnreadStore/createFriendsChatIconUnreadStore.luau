@@ -1,56 +1,56 @@
-﻿local parent = script:FindFirstAncestor("FriendsChat").Parent
-local signalsModule = require(parent.Signals)
-local inExperienceAppChatModalModule = require(parent.AppChat.InExperienceAppChatModal)
-local getFriendsTabVisibilityStoreModule = require(script.Parent.Parent.GetFriendsTabVisibilityStore)
-local createSignal = signalsModule.createSignal
-local createComputed = signalsModule.createComputed
+﻿local Parent = script:FindFirstAncestor("FriendsChat").Parent
+local SignalsModule = require(Parent.Signals)
+local InExperienceAppChatModalModule = require(Parent.AppChat.InExperienceAppChatModal)
+local GetFriendsTabVisibilityStoreModule = require(script.Parent.Parent.GetFriendsTabVisibilityStore)
+local CreateSignalFunction = SignalsModule.createSignal
+local CreateComputedFunction = SignalsModule.createComputed
 
-return function()
-	-- upvalues: createSignal (ref), createComputed (ref), getFriendsTabVisibilityStoreModule (ref), inExperienceAppChatModalModule (ref)
-	local var1, var2 = createSignal(0)
-	local var3 = 0
-	local var4 = false
-	local var5 = createComputed(function(p1)
-		-- upvalues: getFriendsTabVisibilityStoreModule (copy), var1 (ref)
-		return if getFriendsTabVisibilityStoreModule(p1).getIsFriendsTabVisible(p1) then var1(p1) else 0
+return function() --[[ Line: 41 ]]
+	-- upvalues: CreateSignalFunction (copy), CreateComputedFunction (copy), GetFriendsTabVisibilityStoreModule (copy), InExperienceAppChatModalModule (copy)
+	local Signal, Signal2 = CreateSignalFunction(0)
+	local UnreadCount = 0
+	local Flag = false
+	local Computed = CreateComputedFunction(function(p1) --[[ Line: 50 ]]
+		-- upvalues: GetFriendsTabVisibilityStoreModule (upval), Signal (copy)
+		return if GetFriendsTabVisibilityStoreModule(p1).getIsFriendsTabVisible(p1) then Signal(p1) else 0
 	end)
 	
-	local function establishBaseline(p1)
-		-- upvalues: var4 (write), var3 (write), var2 (ref)
-		var4 = true
-		var3 = p1
-		var2(0)
+	local function establishBaseline(p1) --[[ Line: 57 ]]
+		-- upvalues: Flag (ref), UnreadCount (ref), Signal2 (copy)
+		Flag = true
+		UnreadCount = p1
+		Signal2(0)
 	end
 	
-	local function recordCanonicalCount(p1)
-		-- upvalues: var4 (write), getFriendsTabVisibilityStoreModule (copy), var3 (write), var2 (ref), var1 (ref)
-		if var4 and getFriendsTabVisibilityStoreModule(false).getIsFriendsTabVisible(false) then
-			local var6 = p1 - var3
+	local function recordCanonicalCount(p1) --[[ Line: 63 ]]
+		-- upvalues: Flag (ref), GetFriendsTabVisibilityStoreModule (upval), UnreadCount (ref), Signal2 (copy), Signal (copy)
+		if Flag and GetFriendsTabVisibilityStoreModule(false).getIsFriendsTabVisible(false) then
+			local v1 = p1 - UnreadCount
 			
-			if var6 > 0 then
-				var2(var1(false) + var6)
+			if v1 > 0 then
+				Signal2(Signal(false) + v1)
 			end
 		end
-		var3 = p1
+		UnreadCount = p1
 	end
 	
-	local function clearDisplayCount()
-		-- upvalues: var2 (ref)
-		var2(0)
+	local function clearDisplayCount() --[[ Line: 75 ]]
+		-- upvalues: Signal2 (copy)
+		Signal2(0)
 	end
 	
-	local default = inExperienceAppChatModalModule.default
+	local Default = InExperienceAppChatModalModule.default
 	
-	if default.hasReceivedInitialUnreadCount then
-		var4 = true
-		var3 = default.unreadCount or 0
-		var2(0)
+	if Default.hasReceivedInitialUnreadCount then
+		Flag = true
+		UnreadCount = Default.unreadCount or 0
+		Signal2(0)
 	end
-	default.initialUnreadCountSignal.Event:Connect(establishBaseline)
-	default.unreadCountSignal.Event:Connect(recordCanonicalCount)
+	Default.initialUnreadCountSignal.Event:Connect(establishBaseline)
+	Default.unreadCountSignal.Event:Connect(recordCanonicalCount)
 	
 	return {
-		getUnreadCountToDisplay = var5,
+		getUnreadCountToDisplay = Computed,
 		clearDisplayCount = clearDisplayCount
 	}
 end

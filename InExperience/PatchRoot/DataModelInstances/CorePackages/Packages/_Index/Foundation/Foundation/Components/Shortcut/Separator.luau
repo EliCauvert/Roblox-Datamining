@@ -1,19 +1,19 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local textModule = require(foundation.Components.Text)
-local shortcutSeparatorModule = require(foundation.Enums.ShortcutSeparator)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local TextModule = require(Foundation.Components.Text)
+local ShortcutSeparatorModule = require(Foundation.Enums.ShortcutSeparator)
 local _ = require(script.Parent.useShortcutVariants)
-local t = {
-	[shortcutSeparatorModule.Or] = "/",
-	[shortcutSeparatorModule.More] = "\226\128\166"
+local config = {
+	[ShortcutSeparatorModule.Or] = "/",
+	[ShortcutSeparatorModule.More] = "…"
 }
 
-return function(p1)
-	-- upvalues: reactModule (ref), textModule (ref), t (ref)
-	return reactModule.createElement(textModule, {
-		Text = t[p1.separator],
-		tag = p1.variantProps.separator.tag,
-		LayoutOrder = p1.LayoutOrder,
-		testId = p1.testId
+return function(Frame) --[[ Line: 27 | Named "Separator" ]]
+	-- upvalues: ReactModule (copy), TextModule (copy), config (copy)
+	return ReactModule.createElement(TextModule, {
+		Text = config[Frame.separator],
+		tag = Frame.variantProps.separator.tag,
+		LayoutOrder = Frame.LayoutOrder,
+		testId = Frame.testId
 	})
 end

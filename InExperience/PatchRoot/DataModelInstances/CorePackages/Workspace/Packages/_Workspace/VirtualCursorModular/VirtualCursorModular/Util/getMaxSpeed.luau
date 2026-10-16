@@ -1,7 +1,7 @@
-﻿local guiService = game:GetService("GuiService")
-local propertiesModule = require(script.Parent.Parent.Properties)
+﻿local GuiService = game:GetService("GuiService")
+local PropertiesModule = require(script.Parent.Parent.Properties)
 
-return function()
-	-- upvalues: guiService (ref), propertiesModule (ref)
-	return guiService:GetScreenResolution().Magnitude * propertiesModule.MaxSpeedRelative
+return function() --[[ Line: 8 | Named "getMaxSpeed" ]]
+	-- upvalues: GuiService (copy), PropertiesModule (copy)
+	return GuiService:GetScreenResolution().Magnitude * PropertiesModule.MaxSpeedRelative
 end

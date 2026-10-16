@@ -1,56 +1,54 @@
-﻿local getSceneOverridesStore = require(script:FindFirstAncestor("VrSpatialUi").Parent.Style).getSceneOverridesStore
-local var1 = nil
+﻿local GetSceneOverridesStoreFunction = require(script:FindFirstAncestor("VrSpatialUi").Parent.Style).getSceneOverridesStore
+local SubscribeResult = nil
 
-local function getVrEnvironment()
-	return workspace:FindFirstChild("VR Environment")
-end
-
-local function applyColorToBaseParts(p1, p2)
-	for i, v in p1:GetDescendants() do
-		if v:IsA("BasePart") then
-			v.Color = p2
+local function applyColorToBaseParts(CorePlatform, LargerShapes) --[[ Line: 28 ]]
+	for _, Part in CorePlatform:GetDescendants() do
+		if Part:IsA("BasePart") then
+			Part.Color = LargerShapes
 		end
 	end
 end
 
-local function applySceneOverrides(p3)
-	-- upvalues: applyColorToBaseParts (ref)
-	if not p3 then return end
-	local var2 = workspace:FindFirstChild("VR Environment")
+local function applySceneOverrides(SceneOverrides) --[[ Line: 36 ]]
+	-- upvalues: applyColorToBaseParts (copy)
+	if not SceneOverrides then return end
+	local VREnvironment = workspace:FindFirstChild("VR Environment")
 	
-	if not var2 then return end
-	local corePlatform = var2:FindFirstChild("Core_Platform")
+	if not VREnvironment then return end
+	local CorePlatform = VREnvironment:FindFirstChild("Core_Platform")
 	
-	if corePlatform then
-		applyColorToBaseParts(corePlatform, p3.LargerShapes)
+	if CorePlatform then
+		applyColorToBaseParts(CorePlatform, SceneOverrides.LargerShapes)
 	end
-	local midGroundCubeFloor = var2:FindFirstChild("MidGround_CubeFloor")
+	local MidGroundCubeFloor = VREnvironment:FindFirstChild("MidGround_CubeFloor")
 	
-	if midGroundCubeFloor then
-		applyColorToBaseParts(midGroundCubeFloor, p3.LargerShapes)
+	if MidGroundCubeFloor then
+		applyColorToBaseParts(MidGroundCubeFloor, SceneOverrides.LargerShapes)
 	end
 end
 
 return {
-	initialize = function()
-		-- upvalues: var1 (write), getSceneOverridesStore (ref), applySceneOverrides (ref)
-		if var1 then
-			var1()
-			var1 = nil
+	initialize = function() --[[ Line: 64 ]]
+		-- upvalues: SubscribeResult (ref), GetSceneOverridesStoreFunction (copy), applySceneOverrides (copy)
+		if SubscribeResult then
+			SubscribeResult()
+			SubscribeResult = nil
 		end
-		local var2 = getSceneOverridesStore()
-		applySceneOverrides(var2.getSceneOverrides())
-		var1 = var2.subscribe(function(p3)
-			-- upvalues: applySceneOverrides (copy)
-			applySceneOverrides(p3)
+		local SceneOverridesStore = GetSceneOverridesStoreFunction()
+		applySceneOverrides(SceneOverridesStore.getSceneOverrides())
+		SubscribeResult = SceneOverridesStore.subscribe(function(p1) --[[ Line: 69 ]]
+			-- upvalues: applySceneOverrides (upval)
+			applySceneOverrides(p1)
 		end)
 	end,
-	deinitialize = function()
-		-- upvalues: var1 (write)
-		if var1 then
-			var1()
-			var1 = nil
+	deinitialize = function() --[[ Line: 57 ]]
+		-- upvalues: SubscribeResult (ref)
+		if SubscribeResult then
+			SubscribeResult()
+			SubscribeResult = nil
 		end
 	end,
-	getVrEnvironment = getVrEnvironment
+	getVrEnvironment = function() --[[ Line: 24 ]]
+		return workspace:FindFirstChild("VR Environment")
+	end
 }

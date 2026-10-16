@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("FixGetPlayerByUserIdStringCast", false)
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastFlag("FixGetPlayerByUserIdStringCast")
 end

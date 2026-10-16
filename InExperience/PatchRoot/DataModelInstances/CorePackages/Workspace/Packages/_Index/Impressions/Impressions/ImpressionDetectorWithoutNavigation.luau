@@ -1,164 +1,167 @@
-﻿local collectionService = game:GetService("CollectionService")
-local parent = script:FindFirstAncestor("Impressions").Parent
-local roactModule = require(parent.Roact)
-local argCheckModule = require(parent.ArgCheck)
-local tModule = require(parent.t)
-local fFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions = require(parent.SharedFlags).FFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions
-local constantsModule = require(script.Parent.Constants)
-local impressionsDetectorWithoutNavigation = roactModule.PureComponent:extend("ImpressionsDetectorWithoutNavigation")
-impressionsDetectorWithoutNavigation.validateProps = tModule.strictInterface({
-	scanDebounceSeconds = tModule.optional(tModule.number),
-	viewFillPercent = tModule.optional(tModule.number),
-	parentRef = tModule.optional(tModule.table),
-	impressionsTag = tModule.string,
-	onRequestImpressionsSignal = tModule.table,
-	viewPortBounds = tModule.strictInterface({ min = tModule.Vector2, max = tModule.Vector2 }),
-	viewPortFillBounds = if fFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions then tModule.optional(tModule.strictInterface({ min = tModule.Vector2, max = tModule.Vector2 })) else nil,
-	filterImpressionFunc = tModule.optional(tModule.callback),
-	onImpressionsDetected = tModule.union(tModule.callback, tModule.table),
-	skipZeroSizes = tModule.optional(tModule.boolean),
-	isFocused = tModule.optional(tModule.boolean),
-	navigation = tModule.optional(tModule.table)
+﻿local CollectionService = game:GetService("CollectionService")
+local Parent = script:FindFirstAncestor("Impressions").Parent
+local ArgCheckModule = require(Parent.ArgCheck)
+local TModule = require(Parent.t)
+local FFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions = require(Parent.SharedFlags).FFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions
+local ConstantsModule = require(script.Parent.Constants)
+local ImpressionsDetectorWithoutNavigation = require(Parent.Roact).PureComponent:extend("ImpressionsDetectorWithoutNavigation")
+ImpressionsDetectorWithoutNavigation.validateProps = TModule.strictInterface({
+	scanDebounceSeconds = TModule.optional(TModule.number),
+	viewFillPercent = TModule.optional(TModule.number),
+	parentRef = TModule.optional(TModule.table),
+	impressionsTag = TModule.string,
+	onRequestImpressionsSignal = TModule.table,
+	viewPortBounds = TModule.strictInterface({ min = TModule.Vector2, max = TModule.Vector2 }),
+	viewPortFillBounds = if FFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions then TModule.optional(TModule.strictInterface({ min = TModule.Vector2, max = TModule.Vector2 })) else nil,
+	filterImpressionFunc = TModule.optional(TModule.callback),
+	onImpressionsDetected = TModule.union(TModule.callback, TModule.table),
+	skipZeroSizes = TModule.optional(TModule.boolean),
+	isFocused = TModule.optional(TModule.boolean),
+	navigation = TModule.optional(TModule.table)
 })
-impressionsDetectorWithoutNavigation.defaultProps = { scanDebounceSeconds = 1, viewFillPercent = 0.25 }
+ImpressionsDetectorWithoutNavigation.defaultProps = { scanDebounceSeconds = 1, viewFillPercent = 0.25 }
 
-function impressionsDetectorWithoutNavigation.init(p1)
+function ImpressionsDetectorWithoutNavigation.init(p1) --[[ Line: 53 ]]
 	p1.isMounted = false
 	p1.lastImpressionTick = nil
 	p1.nextImpressionTick = nil
 end
 
-function impressionsDetectorWithoutNavigation._boundingBoxIntersectsView(p1, p2)
-	-- upvalues: argCheckModule (ref)
-	if not p2 then
+function ImpressionsDetectorWithoutNavigation._boundingBoxIntersectsView(p1, Frame: Frame): boolean --[[ Line: 59 ]]
+	-- upvalues: ArgCheckModule (copy)
+	if not Frame then
 		return false
 	end
-	local viewPortBounds = p1.props.viewPortBounds
-	argCheckModule.assert(viewPortBounds ~= nil)
+	local ViewPortBounds = p1.props.viewPortBounds
+	ArgCheckModule.assert(ViewPortBounds ~= nil)
 	
-	if not viewPortBounds then
+	if ViewPortBounds then
+		local AbsolutePosition = Frame.AbsolutePosition
+		local NewAbsolutePosition = AbsolutePosition + Frame.AbsoluteSize
+		local IsXBelow: boolean = ViewPortBounds.min.X < NewAbsolutePosition.X and AbsolutePosition.X < ViewPortBounds.max.X
+		local IsYBelow: boolean = ViewPortBounds.min.Y < NewAbsolutePosition.Y and AbsolutePosition.Y < ViewPortBounds.max.Y
+		
+		return if IsXBelow and IsYBelow then true else false
+	else
 		return false
 	end
-	local absolutePosition = p2.AbsolutePosition
-	local var1 = absolutePosition + p2.AbsoluteSize
-	
-	return (viewPortBounds.min.X < var1.X and absolutePosition.X < viewPortBounds.max.X) and (viewPortBounds.min.Y < var1.Y and absolutePosition.Y < viewPortBounds.max.Y)
 end
 
-function impressionsDetectorWithoutNavigation._isInstanceVisible(p1, p2)
-	-- upvalues: argCheckModule (ref), fFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions (ref)
-	if not p1:_boundingBoxIntersectsView(p2) then
+function ImpressionsDetectorWithoutNavigation._isInstanceVisible(p1, Frame: Frame): boolean --[[ Line: 84 ]]
+	-- upvalues: ArgCheckModule (copy), FFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions (copy)
+	if not p1:_boundingBoxIntersectsView(Frame) then
 		return false
 	end
-	local viewPortBounds = p1.props.viewPortBounds
-	argCheckModule.assert(viewPortBounds ~= nil)
-	local _ = nil
-	local var1 = if fFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions then p1.props.viewPortFillBounds or viewPortBounds else viewPortBounds
-	local var2 = var1.max - var1.min
+	local ViewPortBounds = p1.props.viewPortBounds
+	ArgCheckModule.assert(ViewPortBounds ~= nil)
+	local ViewPortFillBounds = FFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions and p1.props.viewPortFillBounds or ViewPortBounds
+	local MaxDelta = ViewPortFillBounds.max - ViewPortFillBounds.min
 	
-	if var2.X <= 0 or var2.Y <= 0 then
+	if MaxDelta.X <= 0 or MaxDelta.Y <= 0 then
 		return false
 	end
-	local var3 = var2 * p1.props.viewFillPercent
-	argCheckModule.assert(var3.X > 0 and var3.Y > 0)
+	local ScaledMaxDelta = MaxDelta * p1.props.viewFillPercent
+	ArgCheckModule.assert(ScaledMaxDelta.X > 0 and ScaledMaxDelta.Y > 0)
 	
-	if var3.X <= 0 or var3.Y <= 0 then
+	if ScaledMaxDelta.X <= 0 or ScaledMaxDelta.Y <= 0 then
 		return false
 	end
-	local absolutePosition = p2.AbsolutePosition
-	var2 = p2.AbsoluteSize
+	local AbsolutePosition: number = Frame.AbsolutePosition
+	local AbsoluteSize: number = Frame.AbsoluteSize
 	
-	if p1.props.skipZeroSizes and (var2.X == 0 or var2.Y == 0) then
+	if p1.props.skipZeroSizes and (AbsoluteSize.X == 0 or AbsoluteSize.Y == 0) then
 		return false
 	end
-	local var4 = absolutePosition + var2 / 2
-	local var5 = absolutePosition + var2
-	local var6 = viewPortBounds.min.X < var4.X and var4.X < viewPortBounds.max.X
-	local var7 = viewPortBounds.min.Y < var4.Y and var4.Y < viewPortBounds.max.Y
+	local NewAbsolutePosition = AbsolutePosition + AbsoluteSize / 2
+	local NewAbsolutePosition1 = AbsolutePosition + AbsoluteSize
+	local IsXBelow: boolean = ViewPortBounds.min.X < NewAbsolutePosition.X and NewAbsolutePosition.X < ViewPortBounds.max.X
+	local IsYBelow: boolean = ViewPortBounds.min.Y < NewAbsolutePosition.Y and NewAbsolutePosition.Y < ViewPortBounds.max.Y
 	
-	if var6 and var7 then
+	if IsXBelow and IsYBelow then
 		return true
 	end
-	local var8 = var5:Min(viewPortBounds.max) - absolutePosition:Max(viewPortBounds.min)
-	local var9 = var3.X <= var8.X
+	local MinResultDelta = NewAbsolutePosition1:Min(ViewPortBounds.max) - AbsolutePosition:Max(ViewPortBounds.min)
+	local IsXAbove = MinResultDelta.X >= ScaledMaxDelta.X
 	
-	if var7 and var9 then
+	if IsYBelow and IsXAbove then
 		return true
+	else
+		local IsYAbove = MinResultDelta.Y >= ScaledMaxDelta.Y
+		
+		return if IsXBelow and IsYAbove then true elseif IsXAbove and IsYAbove then true else false
 	end
-	local var10 = var3.Y <= var8.Y
-	
-	return if var6 and var10 then true else var9 and var10
 end
 
-function impressionsDetectorWithoutNavigation._calculateImpressions(p1)
-	-- upvalues: collectionService (ref), constantsModule (ref), argCheckModule (ref)
+function ImpressionsDetectorWithoutNavigation._calculateImpressions(p1) --[[ Line: 157 ]]
+	-- upvalues: CollectionService (copy), ConstantsModule (copy), ArgCheckModule (copy)
 	if not p1.isMounted then return end
 	if p1.props.isFocused == false then return end
 	p1.lastImpressionTick = tick()
 	
 	if p1.props.parentRef ~= nil then
-		local current = p1.props.parentRef.current
+		local Current = p1.props.parentRef.current
 		
-		if current == nil or not p1:_boundingBoxIntersectsView(current) then return end
+		if Current == nil or not p1:_boundingBoxIntersectsView(Current) then return end
 	end
-	local t = {}
+	local List = {}
 	
-	for i, v in ipairs(collectionService:GetTagged(p1.props.impressionsTag)) do
-		local itemIndexAttribute = v:GetAttribute(constantsModule.ItemIndex)
+	for _, Gui in ipairs((CollectionService:GetTagged(p1.props.impressionsTag))) do
+		local Attribute = Gui:GetAttribute(ConstantsModule.ItemIndex)
 		
-		if itemIndexAttribute and v:IsA("GuiObject") and p1:_isInstanceVisible(v) and (p1.props.filterImpressionFunc == nil or p1.props.filterImpressionFunc(itemIndexAttribute)) then
-			table.insert(t, itemIndexAttribute)
+		if Attribute and Gui:IsA("GuiObject") and p1:_isInstanceVisible(Gui) and (p1.props.filterImpressionFunc == nil or p1.props.filterImpressionFunc(Attribute)) then
+			table.insert(List, Attribute)
 		end
 	end
-	if #t > 0 then
-		argCheckModule.assert(p1.props.onImpressionsDetected ~= nil)
-		p1.props.onImpressionsDetected(t)
+	if #List > 0 then
+		ArgCheckModule.assert(p1.props.onImpressionsDetected ~= nil)
+		p1.props.onImpressionsDetected(List)
 	end
 end
 
-function impressionsDetectorWithoutNavigation._requestImpressions(p2)
-	-- upvalues: argCheckModule (ref)
+function ImpressionsDetectorWithoutNavigation._requestImpressions(p2) --[[ Line: 195 ]]
+	-- upvalues: ArgCheckModule (copy)
 	if not p2.isMounted then return end
 	if p2.props.isFocused == false then return end
 	if p2.nextImpressionTick ~= nil then return end
 	if not p2.props.impressionsTag then return end
-	local var1 = 0
+	local Delay = 0
 	
 	if p2.lastImpressionTick ~= nil then
 		p2.nextImpressionTick = p2.lastImpressionTick + p2.props.scanDebounceSeconds
-		var1 = p2.nextImpressionTick - tick()
+		Delay = p2.nextImpressionTick - tick()
 	end
-	if var1 > 0 then
-		task.delay(var1, function()
-			-- upvalues: argCheckModule (copy), p2 (ref)
-			argCheckModule.assert(p2.nextImpressionTick ~= nil and p2.nextImpressionTick < tick())
+	if Delay > 0 then
+		task.delay(Delay, function() --[[ Line: 217 ]]
+			-- upvalues: ArgCheckModule (upval), p2 (copy)
+			ArgCheckModule.assert(p2.nextImpressionTick ~= nil and p2.nextImpressionTick < tick())
 			p2.nextImpressionTick = nil
 			p2:_calculateImpressions()
 		end)
 		
 		return
+	else
+		p2.nextImpressionTick = nil
+		p2:_calculateImpressions()
 	end
-	p2.nextImpressionTick = nil
-	p2:_calculateImpressions()
 end
 
-function impressionsDetectorWithoutNavigation.render(_)
+function ImpressionsDetectorWithoutNavigation:render() --[[ Line: 229 ]]
 	return nil
 end
 
-function impressionsDetectorWithoutNavigation.didMount(p2)
+function ImpressionsDetectorWithoutNavigation.didMount(p2) --[[ Line: 233 ]]
 	p2.isMounted = true
 	p2:_requestImpressions()
 	
 	if p2.props.onRequestImpressionsSignal then
-		p2.onRequestImpressionsConnection = p2.props.onRequestImpressionsSignal:connect(function()
-			-- upvalues: p2 (ref)
+		p2.onRequestImpressionsConnection = p2.props.onRequestImpressionsSignal:connect(function() --[[ Line: 237 ]]
+			-- upvalues: p2 (copy)
 			p2:_requestImpressions()
 		end)
 	end
 end
 
-function impressionsDetectorWithoutNavigation.willUnmount(p2)
+function ImpressionsDetectorWithoutNavigation.willUnmount(p2) --[[ Line: 243 ]]
 	p2.isMounted = false
 	
 	if p2.onRequestImpressionsConnection ~= nil then
@@ -167,8 +170,8 @@ function impressionsDetectorWithoutNavigation.willUnmount(p2)
 	end
 end
 
-function impressionsDetectorWithoutNavigation.didUpdate(p2, _, _)
+function ImpressionsDetectorWithoutNavigation.didUpdate(p2, _, _) --[[ Line: 251 ]]
 	p2:_requestImpressions()
 end
 
-return impressionsDetectorWithoutNavigation
+return ImpressionsDetectorWithoutNavigation

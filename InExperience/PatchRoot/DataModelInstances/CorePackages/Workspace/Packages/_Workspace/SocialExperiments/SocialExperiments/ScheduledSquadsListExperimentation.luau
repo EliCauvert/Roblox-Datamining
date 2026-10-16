@@ -1,40 +1,39 @@
-﻿local experimentCacheManager = require(script:FindFirstAncestor("SocialExperiments").Parent.ExperimentCacheManager).ExperimentCacheManager
-local scheduledSquadsListExpLayer = game:DefineFastString("ScheduledSquadsListExpLayer", "")
-local scheduledSquadsListChatLandingScreenEntrypointVariant = game:DefineFastString("ScheduledSquadsListChatLandingScreenEntrypointVariant", "enableTopBarEntrypoint")
-local enableScheduledSquadsListExperimentationDev = game:DefineFastFlag("EnableScheduledSquadsListExperimentation_dev", false)
-local enableScheduledSquadsTopBarEntrypointDev = game:DefineFastFlag("EnableScheduledSquadsTopBarEntrypoint_dev", false)
+﻿local ExperimentCacheManager = require(script:FindFirstAncestor("SocialExperiments").Parent.ExperimentCacheManager).ExperimentCacheManager
+local ScheduledSquadsListExpLayer = game:DefineFastString("ScheduledSquadsListExpLayer", "")
+local ScheduledSquadsListChatLandingScreenEntrypointVariant = game:DefineFastString("ScheduledSquadsListChatLandingScreenEntrypointVariant", "enableTopBarEntrypoint")
+local EnableScheduledSquadsListExperimentationDev = game:DefineFastFlag("EnableScheduledSquadsListExperimentation_dev", false)
+local EnableScheduledSquadsTopBarEntrypointDev = game:DefineFastFlag("EnableScheduledSquadsTopBarEntrypoint_dev", false)
 
-local function _(p1)
-	-- upvalues: experimentCacheManager (ref), scheduledSquadsListExpLayer (ref)
-	local var1 = experimentCacheManager.default:getLayerVariables(scheduledSquadsListExpLayer)
+local function _(p1) --[[ Line: 15 | Named "getIsUserInTreatment" ]]
+	-- upvalues: ExperimentCacheManager (copy), ScheduledSquadsListExpLayer (copy)
+	local LayerVariables = ExperimentCacheManager.default:getLayerVariables(ScheduledSquadsListExpLayer)
 	
-	return if var1 and var1[p1] ~= nil then var1[p1] else false
+	return if LayerVariables and LayerVariables[p1] ~= nil then LayerVariables[p1] else false
 end
 
 return {
-	getIsTopBarEntrypointEnabled = function()
-		-- upvalues: enableScheduledSquadsTopBarEntrypointDev (ref), enableScheduledSquadsListExperimentationDev (ref), scheduledSquadsListChatLandingScreenEntrypointVariant (ref), experimentCacheManager (ref), scheduledSquadsListExpLayer (ref)
-		local var1 = enableScheduledSquadsTopBarEntrypointDev
+	getIsTopBarEntrypointEnabled = function() --[[ Line: 25 ]]
+		-- upvalues: EnableScheduledSquadsTopBarEntrypointDev (copy), EnableScheduledSquadsListExperimentationDev (copy), ScheduledSquadsListChatLandingScreenEntrypointVariant (copy), ExperimentCacheManager (copy), ScheduledSquadsListExpLayer (copy)
+		local EnableScheduledSquadsTopBarEntrypointDev1: boolean = EnableScheduledSquadsTopBarEntrypointDev
 		
-		if not var1 then
-			var1 = enableScheduledSquadsListExperimentationDev
+		if not EnableScheduledSquadsTopBarEntrypointDev1 then
+			EnableScheduledSquadsTopBarEntrypointDev1 = EnableScheduledSquadsListExperimentationDev
 			
-			if var1 then
-				local var2 = scheduledSquadsListChatLandingScreenEntrypointVariant
-				local var3 = experimentCacheManager.default:getLayerVariables(scheduledSquadsListExpLayer)
+			if EnableScheduledSquadsTopBarEntrypointDev1 then
+				local LayerVariables = ExperimentCacheManager.default:getLayerVariables(ScheduledSquadsListExpLayer)
 				
-				if var3 and var3[var2] ~= nil then
-					return var3[var2]
+				if LayerVariables and LayerVariables[ScheduledSquadsListChatLandingScreenEntrypointVariant] ~= nil then
+					return LayerVariables[ScheduledSquadsListChatLandingScreenEntrypointVariant]
 				end
-				var1 = false
+				EnableScheduledSquadsTopBarEntrypointDev1 = false
 			end
 		end
-		return var1
+		return EnableScheduledSquadsTopBarEntrypointDev1
 	end,
-	logExposure = function()
-		-- upvalues: enableScheduledSquadsListExperimentationDev (ref), experimentCacheManager (ref), scheduledSquadsListExpLayer (ref)
-		if enableScheduledSquadsListExperimentationDev and experimentCacheManager.default:getLayerVariables(scheduledSquadsListExpLayer) ~= nil then
-			experimentCacheManager.default:logLayerExposure(scheduledSquadsListExpLayer)
+	logExposure = function() --[[ Line: 33 ]]
+		-- upvalues: EnableScheduledSquadsListExperimentationDev (copy), ExperimentCacheManager (copy), ScheduledSquadsListExpLayer (copy)
+		if EnableScheduledSquadsListExperimentationDev and ExperimentCacheManager.default:getLayerVariables(ScheduledSquadsListExpLayer) ~= nil then
+			ExperimentCacheManager.default:logLayerExposure(ScheduledSquadsListExpLayer)
 		end
 	end
 }

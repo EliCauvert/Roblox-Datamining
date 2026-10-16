@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Workspace.UserLib.UserLib)
+﻿return (require(script.Parent.Parent.Parent._Workspace.UserLib.UserLib))

@@ -1,106 +1,118 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local configModule = require(expChat.Config)
-local getTransparencyStoreModule = require(expChat.Stores.GetTransparencyStore)
-local getChatTooltipStoreModule = require(expChat.Stores.GetChatTooltipStore)
-local _ = require(expChat.Stores.GetChatTooltipStore.createChatTooltipStore)
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local ConfigModule = require(ExpChat.Config)
+local GetTransparencyStoreModule = require(ExpChat.Stores.GetTransparencyStore)
+local GetChatTooltipStoreModule = require(ExpChat.Stores.GetChatTooltipStore)
+local _ = require(ExpChat.Stores.GetChatTooltipStore.createChatTooltipStore)
 
-return function(p1)
-	-- upvalues: getChatTooltipStoreModule (ref), getTransparencyStoreModule (ref), signalsReactModule (ref), reactModule (ref), configModule (ref)
-	local tooltipKey = p1.tooltipKey
-	local targetTextChannel = p1.targetTextChannel
-	local var1 = getChatTooltipStoreModule(false)
-	local var2 = getTransparencyStoreModule(false)
-	local var3 = signalsReactModule.useSignalState(var1.getShouldShow(tooltipKey))
-	local var4 = signalsReactModule.useSignalState(var1.getIsScreenWideEnough)
-	local var5 = signalsReactModule.useSignalState(var2.getLastActivity)
-	local var6 = signalsReactModule.useSignalState(var2.getIsFocused or var2.getIsTextBoxFocused)
-	local var7, var8 = reactModule.useState(true)
-	local var9, var10 = reactModule.useState(false)
-	local var11 = reactModule.useRef(false)
-	local var12 = reactModule.useRef(0)
-	local var13 = reactModule.useRef(targetTextChannel)
-	local setIsDismissed = var1.setIsDismissed
-	local reportImpression = var1.reportImpression
-	local var14 = reactModule.useCallback(function()
-		-- upvalues: var11 (ref), reportImpression (ref), tooltipKey (ref), setIsDismissed (ref)
-		if not var11.current then
-			var11.current = true
-			reportImpression(tooltipKey)
+return function(p1) --[[ Line: 49 | Named "useChatTooltipLifecycle" ]]
+	-- upvalues: GetChatTooltipStoreModule (copy), GetTransparencyStoreModule (copy), SignalsReactModule (copy), ReactModule (copy), ConfigModule (copy)
+	local TooltipKey = p1.tooltipKey
+	local TargetTextChannel = p1.targetTextChannel
+	local ChatTooltipStoreModule = GetChatTooltipStoreModule(false)
+	local TransparencyStoreModule = GetTransparencyStoreModule(false)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(ChatTooltipStoreModule.getShouldShow(TooltipKey))
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(ChatTooltipStoreModule.getIsScreenWideEnough)
+	local UseSignalStateResult2 = SignalsReactModule.useSignalState(TransparencyStoreModule.getLastActivity)
+	local UseSignalStateResult3 = SignalsReactModule.useSignalState(TransparencyStoreModule.getIsFocused or TransparencyStoreModule.getIsTextBoxFocused)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(true)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
+	local UseRefResult = ReactModule.useRef(false)
+	local UseRefResult1 = ReactModule.useRef(0)
+	local UseRefResult2 = ReactModule.useRef(TargetTextChannel)
+	local SetIsDismissedFunction = ChatTooltipStoreModule.setIsDismissed
+	local ReportImpressionFunction = ChatTooltipStoreModule.reportImpression
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 71 ]]
+		-- upvalues: UseRefResult (copy), ReportImpressionFunction (copy), TooltipKey (copy), SetIsDismissedFunction (copy)
+		if not UseRefResult.current then
+			UseRefResult.current = true
+			ReportImpressionFunction(TooltipKey)
 		end
-		setIsDismissed(tooltipKey, true)
-	end, { tooltipKey, setIsDismissed, reportImpression })
-	reactModule.useEffect(function()
-		-- upvalues: var6 (ref), var8 (ref), configModule (copy), var5 (ref)
-		if var6 then
-			var8(true)
+		SetIsDismissedFunction(TooltipKey, true)
+	end, {
+		TooltipKey,
+		SetIsDismissedFunction,
+		ReportImpressionFunction
+	})
+	ReactModule.useEffect(function() --[[ Line: 79 ]]
+		-- upvalues: UseSignalStateResult3 (copy), UseStateResult2 (copy), ConfigModule (upval), UseSignalStateResult2 (copy)
+		if UseSignalStateResult3 then
+			UseStateResult2(true)
 			
 			return nil
 		end
-		local var15 = configModule.ChatWindowBackgroundFadeOutTime - (os.clock() - var5)
+		local ChatWindowBackgroundFadeOutTimeDelta = ConfigModule.ChatWindowBackgroundFadeOutTime - (os.clock() - UseSignalStateResult2)
 		
-		if var15 <= 0 then
-			var8(false)
+		if ChatWindowBackgroundFadeOutTimeDelta <= 0 then
+			UseStateResult2(false)
 			
 			return nil
-		end
-		var8(true)
-		local delayedThread = task.delay(var15, function()
-			-- upvalues: var8 (copy)
-			var8(false)
-		end)
-		
-		return function()
-			-- upvalues: delayedThread (ref)
-			task.cancel(delayedThread)
-		end
-	end, { var5, var6 })
-	reactModule.useEffect(function()
-		-- upvalues: var7 (ref), var4 (ref), var9 (ref), var3 (ref), var12 (ref), var10 (ref)
-		if var7 and var4 and not var9 and var3 then
-			local processTime = os.clock()
-			local delayedThread = task.delay(math.max(0, 10 - var12.current), function()
-				-- upvalues: var10 (copy)
-				var10(true)
+		else
+			UseStateResult2(true)
+			local DelayedThread = task.delay(ChatWindowBackgroundFadeOutTimeDelta, function() --[[ Line: 93 ]]
+				-- upvalues: UseStateResult2 (upval)
+				UseStateResult2(false)
 			end)
 			
-			return function()
-				-- upvalues: var12 (copy), processTime (ref), delayedThread (ref)
-				var12.current += os.clock() - processTime
-				task.cancel(delayedThread)
+			return function() --[[ Line: 96 ]]
+				-- upvalues: DelayedThread (copy)
+				task.cancel(DelayedThread)
 			end
 		end
-		return nil
-	end, { var7, var4, var9, var3 })
-	reactModule.useEffect(function()
-		-- upvalues: var9 (ref), var14 (ref)
-		if var9 then
-			local delayedThread = task.delay(1, function()
-				-- upvalues: var14 (copy)
-				var14()
+	end, { UseSignalStateResult2, UseSignalStateResult3 })
+	ReactModule.useEffect(function() --[[ Line: 105 ]]
+		-- upvalues: UseStateResult (copy), UseSignalStateResult1 (copy), UseStateResult1 (copy), UseSignalStateResult (copy), UseRefResult1 (copy), UseStateResult2_1 (copy)
+		if UseStateResult and UseSignalStateResult1 and not UseStateResult1 and UseSignalStateResult then
+			local ClockTime = os.clock()
+			local DelayedThread = task.delay(math.max(0, 10 - UseRefResult1.current), function() --[[ Line: 112 ]]
+				-- upvalues: UseStateResult2_1 (upval)
+				UseStateResult2_1(true)
 			end)
 			
-			return function()
-				-- upvalues: delayedThread (ref)
-				task.cancel(delayedThread)
+			return function() --[[ Line: 115 ]]
+				-- upvalues: UseRefResult1 (upval), ClockTime (copy), DelayedThread (copy)
+				UseRefResult1.current += os.clock() - ClockTime
+				task.cancel(DelayedThread)
 			end
+		else
+			return nil
 		end
-		return nil
-	end, { var9, var14 })
-	reactModule.useEffect(function()
-		-- upvalues: var13 (ref), targetTextChannel (ref), var3 (ref), var9 (ref), var10 (ref)
-		local current = var13.current
-		var13.current = targetTextChannel
+	end, {
+		UseStateResult,
+		UseSignalStateResult1,
+		UseStateResult1,
+		UseSignalStateResult
+	})
+	ReactModule.useEffect(function() --[[ Line: 122 ]]
+		-- upvalues: UseStateResult1 (copy), UseResult (copy)
+		if UseStateResult1 then
+			local DelayedThread = task.delay(1, function() --[[ Line: 126 ]]
+				-- upvalues: UseResult (upval)
+				UseResult()
+			end)
+			
+			return function() --[[ Line: 129 ]]
+				-- upvalues: DelayedThread (copy)
+				task.cancel(DelayedThread)
+			end
+		else
+			return nil
+		end
+	end, { UseStateResult1, UseResult })
+	ReactModule.useEffect(function() --[[ Line: 135 ]]
+		-- upvalues: UseRefResult2 (copy), TargetTextChannel (copy), UseSignalStateResult (copy), UseStateResult1 (copy), UseStateResult2_1 (copy)
+		local Current = UseRefResult2.current
+		UseRefResult2.current = TargetTextChannel
 		
-		if current and current ~= targetTextChannel and (var3 and not var9) then
-			var10(true)
+		if Current and Current ~= TargetTextChannel and UseSignalStateResult and not UseStateResult1 then
+			UseStateResult2_1(true)
 		end
-	end, { targetTextChannel, var3, var9 })
+	end, { TargetTextChannel, UseSignalStateResult, UseStateResult1 })
 	
 	return {
-		isActive = var3 and (var7 and (var4 and not var9)),
-		onDismiss = var14
+		isActive = UseSignalStateResult and (UseStateResult and (UseSignalStateResult1 and not UseStateResult1)),
+		onDismiss = UseResult
 	}
 end

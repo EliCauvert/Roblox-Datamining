@@ -1,46 +1,47 @@
-﻿local parent = script.Parent.Parent.Parent.Parent
-local dependenciesModule = require(parent.dependencies)
-local parent_1 = parent.Parent
-local networkingUserSettings = dependenciesModule.NetworkingUserSettings
-local updateContactImporterModalLogic = dependenciesModule.SocialModalsCommon.Actions.UpdateContactImporterModalLogic
-local appPage = require(parent_1.RobloxAppEnums).AppPage
-local navigateDown = require(parent_1.NavigationRodux).Thunks.NavigateDown
-local fFlagSignalsNavP3Dispatch = require(parent_1.SharedFlags).FFlagSignalsNavP3Dispatch
-local var1 = if fFlagSignalsNavP3Dispatch then require(parent_1.RobloxAppNavigation).NavigationCommands else nil
-local toastRoduxModule = require(parent_1.ToastRodux)
+﻿local Parent = script.Parent.Parent.Parent.Parent
+local DependenciesModule = require(Parent.dependencies)
+local Parent1 = Parent.Parent
+local NetworkingUserSettings = DependenciesModule.NetworkingUserSettings
+local UpdateContactImporterModalLogicFunction = DependenciesModule.SocialModalsCommon.Actions.UpdateContactImporterModalLogic
+local AppPage = require(Parent1.RobloxAppEnums).AppPage
+local NavigateDownFunction = require(Parent1.NavigationRodux).Thunks.NavigateDown
+local FFlagSignalsNavP3Dispatch = require(Parent1.SharedFlags).FFlagSignalsNavP3Dispatch
+local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent1.RobloxAppNavigation).NavigationCommands else nil
+local ToastRoduxModule = require(Parent1.ToastRodux)
 
-return function(p1)
-	-- upvalues: updateContactImporterModalLogic (ref), networkingUserSettings (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), toastRoduxModule (ref)
+return function(Callback) --[[ Line: 19 ]]
+	-- upvalues: UpdateContactImporterModalLogicFunction (copy), NetworkingUserSettings (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), ToastRoduxModule (copy)
 	return {
-		hideContactImporterModal = function()
-			-- upvalues: p1 (ref), updateContactImporterModalLogic (copy)
-			return p1(updateContactImporterModalLogic({
+		hideContactImporterModal = function() --[[ Line: 21 ]]
+			-- upvalues: Callback (copy), UpdateContactImporterModalLogicFunction (upval)
+			return Callback(UpdateContactImporterModalLogicFunction({
 				hasOSPermissions = true,
 				shouldShowContactImporterUpsellModal = false
 			}))
 		end,
-		getUserSettingsMetadata = function()
-			-- upvalues: p1 (ref), networkingUserSettings (copy)
-			return p1(networkingUserSettings.GetUserSettingsMetadata.API())
+		getUserSettingsMetadata = function() --[[ Line: 27 ]]
+			-- upvalues: Callback (copy), NetworkingUserSettings (upval)
+			return Callback(NetworkingUserSettings.GetUserSettingsMetadata.API())
 		end,
-		openLearnMoreLink = function()
-			-- upvalues: appPage (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), p1 (ref), navigateDown (copy)
-			local t = {
+		openLearnMoreLink = function() --[[ Line: 30 ]]
+			-- upvalues: AppPage (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), Callback (copy), NavigateDownFunction (upval)
+			local config = {
 				detail = "https://en.help.roblox.com/hc/articles/7416652004884",
-				name = appPage.GenericWebPage,
+				name = AppPage.GenericWebPage,
 				extraProps = { title = "" }
 			}
 			
-			if fFlagSignalsNavP3Dispatch then
-				var1.down(var1.fromLegacyPage(t))
+			if FFlagSignalsNavP3Dispatch then
+				NavigationCommands.down(NavigationCommands.fromLegacyPage(config))
 				
 				return
+			else
+				Callback(NavigateDownFunction(config, nil))
 			end
-			p1(navigateDown(t, nil))
 		end,
-		showToast = function(p2)
-			-- upvalues: p1 (ref), toastRoduxModule (copy)
-			p1(toastRoduxModule.Actions.SetCurrentToastMessage({ toastMessage = p2 }))
+		showToast = function(ToastMessage) --[[ Line: 44 ]]
+			-- upvalues: Callback (copy), ToastRoduxModule (upval)
+			Callback(ToastRoduxModule.Actions.SetCurrentToastMessage({ toastMessage = ToastMessage }))
 		end
 	}
 end

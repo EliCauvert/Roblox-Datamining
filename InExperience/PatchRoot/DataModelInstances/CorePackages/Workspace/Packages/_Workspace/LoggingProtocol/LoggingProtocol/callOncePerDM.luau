@@ -1,10 +1,11 @@
 ﻿local t = {}
 
-return function(p1, p2)
-	-- upvalues: t (ref)
-	if t[p1] then
+return function(Key, Callback: () -> ()) --[[ Line: 3 ]]
+	-- upvalues: t (copy)
+	if not t[Key] then
+		t[Key] = true
+		Callback()
+		
 		return
 	end
-	t[p1] = true
-	p2()
 end

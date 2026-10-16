@@ -1,43 +1,43 @@
-﻿local guiService = game:GetService("GuiService")
-local reactModule = require(script:FindFirstAncestor("GuiObjectUtils").Parent.React)
+﻿local GuiService = game:GetService("GuiService")
+local ReactModule = require(script:FindFirstAncestor("GuiObjectUtils").Parent.React)
 
-local function _(p1)
-	-- upvalues: guiService (ref)
-	return if p1.current == nil then false elseif guiService.SelectedCoreObject ~= p1.current then guiService.SelectedObject == p1.current else true
+local function _(p1): boolean --[[ Line: 12 | Named "isGuiObjectSelected" ]]
+	-- upvalues: GuiService (copy)
+	return p1.current ~= nil and (GuiService.SelectedCoreObject == p1.current or GuiService.SelectedObject == p1.current)
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), guiService (ref)
-	local var1, var2 = reactModule.useState(function()
-		-- upvalues: p1 (ref), guiService (copy)
-		return if p1.current == nil then false elseif guiService.SelectedCoreObject ~= p1.current then guiService.SelectedObject == p1.current else true
+return function(p1) --[[ Line: 19 | Named "useSelected" ]]
+	-- upvalues: ReactModule (copy), GuiService (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function(): boolean --[[ Line: 20 ]]
+		-- upvalues: p1 (copy), GuiService (upval)
+		return p1.current ~= nil and (GuiService.SelectedCoreObject == p1.current or GuiService.SelectedObject == p1.current)
 	end)
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), p1 (ref), guiService (copy)
-		var2(if p1.current == nil then false elseif guiService.SelectedCoreObject ~= p1.current then guiService.SelectedObject == p1.current else true)
+	ReactModule.useEffect(function() --[[ Line: 25 ]]
+		-- upvalues: UseStateResult2 (copy), p1 (copy), GuiService (upval)
+		UseStateResult2(p1.current ~= nil and (GuiService.SelectedCoreObject == p1.current or GuiService.SelectedObject == p1.current))
 	end, { p1 })
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var2 (ref)
-		local t = {}
-		local current = p1.current
+	ReactModule.useEffect(function() --[[ Line: 33 ]]
+		-- upvalues: p1 (copy), UseStateResult2 (copy)
+		local List = {}
+		local Current = p1.current
 		
-		if current then
-			table.insert(t, current.SelectionGained:Connect(function()
-				-- upvalues: var2 (copy)
-				var2(true)
+		if Current then
+			table.insert(List, Current.SelectionGained:Connect(function() --[[ Line: 39 ]]
+				-- upvalues: UseStateResult2 (upval)
+				UseStateResult2(true)
 			end))
-			table.insert(t, current.SelectionLost:Connect(function()
-				-- upvalues: var2 (copy)
-				var2(false)
+			table.insert(List, Current.SelectionLost:Connect(function() --[[ Line: 45 ]]
+				-- upvalues: UseStateResult2 (upval)
+				UseStateResult2(false)
 			end))
 		end
-		return function()
-			-- upvalues: t (ref)
-			for i, v in ipairs(t) do
-				v:Disconnect()
+		return function() --[[ Line: 51 ]]
+			-- upvalues: List (copy)
+			for _, Connection in ipairs(List) do
+				Connection:Disconnect()
 			end
 		end
 	end, { p1 })
 	
-	return var1
+	return UseStateResult
 end

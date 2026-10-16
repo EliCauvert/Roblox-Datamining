@@ -1,27 +1,27 @@
-﻿local sduiSharedUtilities = script:FindFirstAncestor("SduiSharedUtilities")
-local parent = sduiSharedUtilities.Parent
-local reactModule = require(parent.React)
-local loading = require(parent.Foundation).Loading
-local sduiFeatureErrorUiModule = require(sduiSharedUtilities.ui.SduiFeatureErrorUi)
-local _ = require(sduiSharedUtilities.SduiIntegrationTypes)
-local fFlagSduiFeatureEntryPointTakesAbsoluteSizeHandler = require(parent.SharedFlags).FFlagSduiFeatureEntryPointTakesAbsoluteSizeHandler
+﻿local SduiSharedUtilities = script:FindFirstAncestor("SduiSharedUtilities")
+local Parent = SduiSharedUtilities.Parent
+local ReactModule = require(Parent.React)
+local Loading = require(Parent.Foundation).Loading
+local SduiFeatureErrorUiModule = require(SduiSharedUtilities.ui.SduiFeatureErrorUi)
+local _ = require(SduiSharedUtilities.SduiIntegrationTypes)
+local FFlagSduiFeatureEntryPointTakesAbsoluteSizeHandler = require(Parent.SharedFlags).FFlagSduiFeatureEntryPointTakesAbsoluteSizeHandler
 
-return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: reactModule (ref), fFlagSduiFeatureEntryPointTakesAbsoluteSizeHandler (ref), loading (ref), sduiFeatureErrorUiModule (ref)
-	return reactModule.createElement("Frame", {
-		Size = if p1.Size then p1.Size else UDim2.new(1, 0, 0, 0),
-		AutomaticSize = if p1.AutomaticSize then p1.AutomaticSize else Enum.AutomaticSize.Y,
-		Position = p1.Position,
-		LayoutOrder = p1.LayoutOrder,
+return ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 33 | Named "SduiFeatureEntryPointUi" ]]
+	-- upvalues: ReactModule (copy), FFlagSduiFeatureEntryPointTakesAbsoluteSizeHandler (copy), Loading (copy), SduiFeatureErrorUiModule (copy)
+	return ReactModule.createElement("Frame", {
+		Size = if Frame.Size then Frame.Size else UDim2.new(1, 0, 0, 0),
+		AutomaticSize = if Frame.AutomaticSize then Frame.AutomaticSize else Enum.AutomaticSize.Y,
+		Position = Frame.Position,
+		LayoutOrder = Frame.LayoutOrder,
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
-		[reactModule.Change.AbsoluteSize] = if fFlagSduiFeatureEntryPointTakesAbsoluteSizeHandler then p1.onAbsoluteSizeChange else nil,
-		ref = p2
+		[ReactModule.Change.AbsoluteSize] = if FFlagSduiFeatureEntryPointTakesAbsoluteSizeHandler then Frame.onAbsoluteSizeChange else nil,
+		ref = Ref
 	}, {
-		Content = if p1.uiStatus == "Loading" and p1.shouldDisplayLoading then if p1.loadingSlot then p1.loadingSlot else reactModule.createElement(loading, {
+		Content = if Frame.uiStatus == "Loading" and Frame.shouldDisplayLoading then if Frame.loadingSlot then Frame.loadingSlot else ReactModule.createElement(Loading, {
 			testId = "sdui-feature-entry-point-loading",
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.fromScale(0.5, 0.5)
-		}) elseif p1.uiStatus == "Error" and p1.shouldDisplayError then if p1.errorSlot then p1.errorSlot else reactModule.createElement(sduiFeatureErrorUiModule, { onRetry = p1.onRetry }) elseif p1.uiStatus == "Resolved" then p1.contentSlot else nil
+		}) elseif Frame.uiStatus == "Error" and Frame.shouldDisplayError then if Frame.errorSlot then Frame.errorSlot else ReactModule.createElement(SduiFeatureErrorUiModule, { onRetry = Frame.onRetry }) elseif Frame.uiStatus == "Resolved" then Frame.contentSlot else nil
 	})
 end)

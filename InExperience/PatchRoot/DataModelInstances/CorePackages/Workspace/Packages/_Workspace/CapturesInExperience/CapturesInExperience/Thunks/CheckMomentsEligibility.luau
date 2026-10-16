@@ -1,21 +1,22 @@
-﻿local parent = script.Parent.Parent
-local momentsEligibilityReceivedModule = require(parent.Actions.MomentsEligibilityReceived)
-local constantsModule = require(parent.Constants)
-local fFlagCreateMomentsToastModule = require(parent.Flags.FFlagCreateMomentsToast)
-local contentSharingNetworking = require(parent.App.Networking).ContentSharingNetworking
+﻿local Parent = script.Parent.Parent
+local MomentsEligibilityReceivedModule = require(Parent.Actions.MomentsEligibilityReceived)
+local ConstantsModule = require(Parent.Constants)
+local FFlagCreateMomentsToastModule = require(Parent.Flags.FFlagCreateMomentsToast)
+local ContentSharingNetworking = require(Parent.App.Networking).ContentSharingNetworking
 
-return function(p1)
-	-- upvalues: fFlagCreateMomentsToastModule (ref), contentSharingNetworking (ref), constantsModule (ref), momentsEligibilityReceivedModule (ref)
-	return function(p2)
-		-- upvalues: fFlagCreateMomentsToastModule (copy), contentSharingNetworking (copy), constantsModule (copy), p1 (ref), momentsEligibilityReceivedModule (copy)
-		if not fFlagCreateMomentsToastModule or contentSharingNetworking == nil then return end
-		if type(p2:getState()[constantsModule.RoduxKey].MomentsEligibility.byUniverseId[p1]) == "boolean" then
+return function(p1) --[[ Line: 14 ]]
+	-- upvalues: FFlagCreateMomentsToastModule (copy), ContentSharingNetworking (copy), ConstantsModule (copy), MomentsEligibilityReceivedModule (copy)
+	return function(p2) --[[ Line: 15 ]]
+		-- upvalues: FFlagCreateMomentsToastModule (upval), ContentSharingNetworking (upval), ConstantsModule (upval), p1 (copy), MomentsEligibilityReceivedModule (upval)
+		if not FFlagCreateMomentsToastModule or ContentSharingNetworking == nil then return end
+		if type(p2:getState()[ConstantsModule.RoduxKey].MomentsEligibility.byUniverseId[p1]) ~= "boolean" then
+			p2:dispatch(ContentSharingNetworking.CheckMomentsEligibility.API({ contentType = "experience", experienceId = tostring(p1) })):andThen(function(Result) --[[ Line: 31 ]]
+				-- upvalues: p2 (copy), MomentsEligibilityReceivedModule (upval), p1 (upval)
+				local ResponseBody = Result.responseBody
+				p2:dispatch(MomentsEligibilityReceivedModule(p1, type(ResponseBody) == "table" and ResponseBody.isEligible == true))
+			end):catch(function() --[[ Line: 36 ]] end)
+			
 			return
 		end
-		p2:dispatch(contentSharingNetworking.CheckMomentsEligibility.API({ contentType = "experience", experienceId = tostring(p1) })):andThen(function(p3)
-			-- upvalues: p2 (ref), momentsEligibilityReceivedModule (copy), p1 (copy)
-			local responseBody = p3.responseBody
-			p2:dispatch(momentsEligibilityReceivedModule(p1, type(responseBody) == "table" and responseBody.isEligible == true))
-		end):catch(function() end)
 	end
 end

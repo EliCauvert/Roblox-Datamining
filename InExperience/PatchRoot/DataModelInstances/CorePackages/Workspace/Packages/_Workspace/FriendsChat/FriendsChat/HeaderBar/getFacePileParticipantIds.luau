@@ -1,13 +1,13 @@
-﻿return function(p1, p2)
-	if #p1 <= 1 then
-		return { p2 }
+﻿return function(List, p1) --[[ Line: 13 | Named "getFacePileParticipantIds" ]]
+	if #List <= 1 then
+		return { p1 }
 	end
-	local t = {}
+	local List1 = {}
 	
-	for i, v in p1 do
-		if v ~= p2 then
-			table.insert(t, v)
+	for _, value in List do
+		if value ~= p1 then
+			table.insert(List1, value)
 		end
 	end
-	return if #t == 0 then { p2 } else t
+	return if #List1 == 0 then { p1 } else List1
 end

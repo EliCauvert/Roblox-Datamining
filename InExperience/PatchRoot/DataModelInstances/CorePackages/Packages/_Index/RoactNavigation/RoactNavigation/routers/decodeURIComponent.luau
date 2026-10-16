@@ -1,124 +1,128 @@
-﻿local parent = script.Parent.Parent.Parent
-local array = require(parent.LuauPolyfill).Array
-local regExpModule = require(parent.RegExp)
+﻿local Parent = script.Parent.Parent.Parent
+local Array = require(Parent.LuauPolyfill).Array
+local RegExpModule = require(Parent.RegExp)
 
-local function stringMatch(p1, p2)
-	local var1 = p2:exec(p1)
-	local t = {}
-	while var1 do
-		local var2 = var1[1]
-		table.insert(t, var2)
-		var1 = p2:exec(var1.input:sub(var1.index + var2:len()))
+local function stringMatch(Joined, AFAF) --[[ Line: 11 ]]
+	local ExecResult = AFAF:exec(Joined)
+	local List = {}
+	while ExecResult do
+		local ExecResultEntry = ExecResult[1]
+		table.insert(List, ExecResultEntry)
+		ExecResult = AFAF:exec((ExecResult.input:sub(ExecResult.index + ExecResultEntry:len())))
 	end
-	return t
+	return List
 end
 
-local function _(p3)
-	return p3
+local function _(p1) --[[ Line: 25 | Named "TypeError" ]]
+	return p1
 end
 
-local var3 = regExpModule("(%[a-fA-F0-9]{2})+", "i")
+local AFAF092 = RegExpModule("(%[a-fA-F0-9]{2})+", "i")
 
-local function decodeURIComponent(p3)
-	-- upvalues: var3 (ref)
-	local var4 = var3:exec(p3)
-	local var5 = p3
+local function decodeURIComponent(Character): string --[[ Line: 33 ]]
+	-- upvalues: AFAF092 (copy)
+	local ExecResult = AFAF092:exec(Character)
+	local Character1: string = Character
 	
-	if var4 then
-		local t = {}
+	if ExecResult then
+		local List = {}
 		
-		for i in var4[1]:gmatch("%%(%x%x)") do
-			local var6 = tonumber(i, 16)
+		for i in ExecResult[1]:gmatch("%%(%x%x)") do
+			local Number: number? = tonumber(i, 16)
 			
-			if var6 >= 128 then
+			if Number >= 128 then
 				error("malformed URI sequence")
 			end
-			table.insert(t, var6)
+			table.insert(List, Number)
 		end
-		var5 = utf8.char(unpack(t))
+		Character1 = utf8.char(unpack(List))
 	end
-	return var5
+	return Character1
 end
 
-local var7 = regExpModule("%[a-fA-F0-9]{2}", "i")
-local var8 = regExpModule("(%[a-fA-F0-9]{2})+", "i")
+local AFAF092_1 = RegExpModule("%[a-fA-F0-9]{2}", "i")
+local AFAF092_2 = RegExpModule("(%[a-fA-F0-9]{2})+", "i")
 
-local function decodeComponents(p4, p5)
-	-- upvalues: decodeURIComponent (ref), array (ref), decodeComponents (ref)
-	local ok, status = pcall(decodeURIComponent, table.concat(p4, ""))
+local function decodeComponents(List, Count) --[[ Line: 61 ]]
+	-- upvalues: decodeURIComponent (copy), Array (copy), decodeComponents (copy)
+	local Success, Result = pcall(decodeURIComponent, table.concat(List, ""))
 	
-	if ok then
-		return status
-	elseif #p4 == 1 then
-		return p4
-	end
-	p5 = p5 or 1
-	
-	return array.concat(decodeComponents(array.slice(p4, 1, p5 + 1)), decodeComponents(array.slice(p4, p5 + 1)))
-end
-
-local function decode(p4)
-	-- upvalues: decodeURIComponent (ref), stringMatch (ref), var7 (ref), decodeComponents (ref)
-	local ok, status = pcall(decodeURIComponent, p4)
-	
-	if ok then
-		return status
-	end
-	local var9 = stringMatch(p4, var7)
-	local var10 = 2
-	while var9[var10] do
-		p4 = table.concat(decodeComponents(var9, var10), "")
-		var9 = stringMatch(p4, var7)
-		var10 += 1
-	end
-	return p4
-end
-
-local _ = function(p5)
-	return p5:gsub("%%", "%%%%")
-end
-
-local function customDecodeURIComponent(p5)
-	-- upvalues: var8 (ref), decodeURIComponent (ref), decode (ref)
-	local char = utf8.char(65533)
-	local t = { ["%FE%FF"] = char .. char, ["%FF%FE"] = char .. char }
-	local list = { "%FE%FF", "%FF%FE" }
-	local var11 = var8:exec(p5)
-	while var11 do
-		local var12 = var11[1]
-		local ok, status = xpcall(decodeURIComponent, function(_)
-			-- upvalues: decode (copy), var12 (ref), t (ref), list (ref)
-			local var13 = decode(var12)
-			
-			if var13 ~= var12 then
-				if t[var12] == nil then
-					table.insert(list, var12)
-				end
-				t[var12] = var13
-			end
-		end, var12)
+	if Success then
+		return Result
+	elseif #List == 1 then
+		return List
+	else
+		local Count1 = Count or 1
 		
-		if ok then
-			if t[var12] == nil then
-				table.insert(list, var12)
-			end
-			t[var12] = status
-		end
-		var11 = var8:exec(var11.input:sub(var11.index + var12:len()))
+		return Array.concat(decodeComponents((Array.slice(List, 1, Count1 + 1))), decodeComponents((Array.slice(List, Count1 + 1))))
 	end
-	t["%C2"] = char
-	table.insert(list, "%C2")
-	
-	for i, v in list do
-		p5 = string.gsub(p5, v:gsub("%%", "%%%%"), t[v]:gsub("%%", "%%%%"))
-	end
-	return p5
 end
 
-return function(p6)
-	-- upvalues: customDecodeURIComponent (ref)
-	if type(p6) ~= "string" then
-		error("Expected `encodedURI` to be of type `string`, got `" .. typeof(p6) .. "`")
+local function decode(p1: string) --[[ Line: 83 ]]
+	-- upvalues: decodeURIComponent (copy), stringMatch (copy), AFAF092_1 (copy), decodeComponents (copy)
+	local Success, Result = pcall(decodeURIComponent, p1)
+	
+	if Success then
+		return Result
 	end
-	return customDecodeURIComponent(p6:gsub("%+", " "))
+	local StringMatchResult = stringMatch(p1, AFAF092_1)
+	local Count = 2
+	while StringMatchResult[Count] do
+		p1 = table.concat(decodeComponents(StringMatchResult, Count), "")
+		StringMatchResult = stringMatch(p1, AFAF092_1)
+		Count += 1
+	end
+	return p1
+end
+
+local _ = function(Text: string): string --[[ Line: 107 | Named "escapePercent" ]]
+	return (Text:gsub("%%", "%%%%"))
+end
+
+local function customDecodeURIComponent(Text: string): string --[[ Line: 112 ]]
+	-- upvalues: AFAF092_2 (copy), decodeURIComponent (copy), decode (copy)
+	local Character = utf8.char(65533)
+	local config = {
+		["%FE%FF"] = Character .. Character,
+		["%FF%FE"] = Character .. Character
+	}
+	local List = { "%FE%FF", "%FF%FE" }
+	local ExecResult = AFAF092_2:exec(Text)
+	while ExecResult do
+		local ExecResultEntry = ExecResult[1]
+		local Success, Result = xpcall(decodeURIComponent, function(_) --[[ Line: 130 ]]
+			-- upvalues: decode (upval), ExecResultEntry (copy), config (copy), List (copy)
+			local DecodeResult = decode(ExecResultEntry)
+			
+			if DecodeResult ~= ExecResultEntry then
+				if config[ExecResultEntry] == nil then
+					table.insert(List, ExecResultEntry)
+				end
+				config[ExecResultEntry] = DecodeResult
+			end
+		end, ExecResultEntry)
+		
+		if Success then
+			if config[ExecResultEntry] == nil then
+				table.insert(List, ExecResultEntry)
+			end
+			config[ExecResultEntry] = Result
+		end
+		ExecResult = AFAF092_2:exec((ExecResult.input:sub(ExecResult.index + ExecResultEntry:len())))
+	end
+	config["%C2"] = Character
+	table.insert(List, "%C2")
+	
+	for _, Text1 in List do
+		Text = string.gsub(Text, Text1:gsub("%%", "%%%%"), (config[Text1]:gsub("%%", "%%%%")))
+	end
+	return Text
+end
+
+return function(Text: string) --[[ Line: 172 | Named "decodeComponent" ]]
+	-- upvalues: customDecodeURIComponent (copy)
+	if type(Text) ~= "string" then
+		error("Expected `encodedURI` to be of type `string`, got `" .. typeof(Text) .. "`")
+	end
+	return (customDecodeURIComponent((Text:gsub("%+", " "))))
 end

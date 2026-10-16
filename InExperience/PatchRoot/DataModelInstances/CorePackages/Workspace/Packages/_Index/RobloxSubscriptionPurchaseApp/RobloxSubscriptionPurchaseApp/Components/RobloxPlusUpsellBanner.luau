@@ -1,17 +1,17 @@
-﻿local robloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
-local useRobloxPlusUpsellBannerViewModelModule = require(robloxSubscriptionPurchaseApp.Hooks.useRobloxPlusUpsellBannerViewModel)
+﻿local RobloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
+local UseRobloxPlusUpsellBannerViewModelModule = require(RobloxSubscriptionPurchaseApp.Hooks.useRobloxPlusUpsellBannerViewModel)
 
-return require(robloxSubscriptionPurchaseApp.Parent.React).memo(function(p1)
-	-- upvalues: useRobloxPlusUpsellBannerViewModelModule (ref)
-	return p1.renderBanner({
-		message = p1.message,
-		actionText = useRobloxPlusUpsellBannerViewModelModule({
-			subscribeText = p1.subscribeText,
-			freeTrialText = p1.freeTrialText
+return require(RobloxSubscriptionPurchaseApp.Parent.React).memo(function(Frame) --[[ Line: 28 | Named "RobloxPlusUpsellBanner" ]]
+	-- upvalues: UseRobloxPlusUpsellBannerViewModelModule (copy)
+	return Frame.renderBanner({
+		message = Frame.message,
+		actionText = UseRobloxPlusUpsellBannerViewModelModule({
+			subscribeText = Frame.subscribeText,
+			freeTrialText = Frame.freeTrialText
 		}).actionText,
-		onActivated = p1.onActivated,
-		showPlusIcon = p1.showPlusIcon,
-		LayoutOrder = p1.LayoutOrder,
-		testId = p1.testId
+		onActivated = Frame.onActivated,
+		showPlusIcon = Frame.showPlusIcon,
+		LayoutOrder = Frame.LayoutOrder,
+		testId = Frame.testId
 	})
 end)

@@ -1,35 +1,30 @@
-﻿local parent = script:FindFirstAncestor("SocialTabsPage").Parent
-local friendsNetworkingModule = require(parent.FriendsNetworking)
-local socialCommonModule = require(parent.SocialCommon)
-local appPage = require(parent.RobloxAppEnums).AppPage
-local ctaSurfaces = require(parent.UserList).Enums.CtaSurfaces
-local t = {
+﻿local Parent = script:FindFirstAncestor("SocialTabsPage").Parent
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local CtaSurfaces = require(Parent.UserList).Enums.CtaSurfaces
+local Tbl = {
 	primaryCtaMinWidth = 64,
 	primaryCtaMaxWidth = 90,
-	friendshipOriginSourceType = friendsNetworkingModule.Enums.FriendshipOriginSourceType.SocialTabsPage.rawValue(),
-	chatEntryPoint = socialCommonModule.Enums.ChatEntryPointNames.SocialTabsPage
+	friendshipOriginSourceType = require(Parent.FriendsNetworking).Enums.FriendshipOriginSourceType.SocialTabsPage.rawValue(),
+	chatEntryPoint = require(Parent.SocialCommon).Enums.ChatEntryPointNames.SocialTabsPage
 }
 
-local function _(p1)
-	-- upvalues: t (ref), ctaSurfaces (ref)
-	local cloned = table.clone(t)
-	cloned.analytics = { surface = ctaSurfaces.SocialTabsPage, subpage = p1 }
+local function _(Subpage) --[[ Line: 31 | Named "forTab" ]]
+	-- upvalues: Tbl (copy), CtaSurfaces (copy)
+	local Copy = table.clone(Tbl)
+	Copy.analytics = { surface = CtaSurfaces.SocialTabsPage, subpage = Subpage }
 	
-	return cloned
+	return Copy
 end
 
-local t_1 = {}
-local cloned = table.clone(t)
-cloned.analytics = {
-	surface = ctaSurfaces.SocialTabsPage,
-	subpage = appPage.SocialTabsFriends
+local Copy = table.clone(Tbl)
+Copy.analytics = {
+	surface = CtaSurfaces.SocialTabsPage,
+	subpage = AppPage.SocialTabsFriends
 }
-t_1.Friends = cloned
-local cloned_1 = table.clone(t)
-cloned_1.analytics = {
-	surface = ctaSurfaces.SocialTabsPage,
-	subpage = appPage.SocialTabsMutuals
+local Copy1 = table.clone(Tbl)
+Copy1.analytics = {
+	surface = CtaSurfaces.SocialTabsPage,
+	subpage = AppPage.SocialTabsMutuals
 }
-t_1.Mutuals = cloned_1
 
-return t_1
+return { Friends = Copy, Mutuals = Copy1 }

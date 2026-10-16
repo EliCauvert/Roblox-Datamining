@@ -1,27 +1,27 @@
-﻿local parent = script.Parent.Parent
-local captureService = game:GetService("CaptureService")
-local captureTypeModule = require(parent.Enums.CaptureType)
-local retrieveCapturesModule = require(parent.Thunks.RetrieveCaptures)
-local _ = require(parent.Types)
-local fFlagUseRbxstorageInGalleryModule = require(parent.Flags.FFlagUseRbxstorageInGallery)
-local fFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
+﻿local Parent = script.Parent.Parent
+local CaptureService = game:GetService("CaptureService")
+local CaptureTypeModule = require(Parent.Enums.CaptureType)
+local RetrieveCapturesModule = require(Parent.Thunks.RetrieveCaptures)
+local _ = require(Parent.Types)
+local FFlagUseRbxstorageInGalleryModule = require(Parent.Flags.FFlagUseRbxstorageInGallery)
+local FFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(Parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
 
-return function(p1)
-	-- upvalues: fFlagEnableCapturesGalleryRetrievalCoreScriptModule (ref), fFlagUseRbxstorageInGalleryModule (ref), captureTypeModule (ref), captureService (ref), retrieveCapturesModule (ref)
-	local t = {}
+return function(List) --[[ Line: 14 ]]
+	-- upvalues: FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), FFlagUseRbxstorageInGalleryModule (copy), CaptureTypeModule (copy), CaptureService (copy), RetrieveCapturesModule (copy)
+	local List1 = {}
 	
-	for i, v in ipairs(p1) do
-		if fFlagEnableCapturesGalleryRetrievalCoreScriptModule then
-			table.insert(t, v)
-		elseif fFlagUseRbxstorageInGalleryModule and v.type == captureTypeModule.Video then
-			table.insert(t, v.videoCapture)
-		elseif v.type == captureTypeModule.Screenshot then
-			table.insert(t, v.filePath)
+	for _, value in ipairs(List) do
+		if FFlagEnableCapturesGalleryRetrievalCoreScriptModule then
+			table.insert(List1, value)
+		elseif FFlagUseRbxstorageInGalleryModule and value.type == CaptureTypeModule.Video then
+			table.insert(List1, value.videoCapture)
+		elseif value.type == CaptureTypeModule.Screenshot then
+			table.insert(List1, value.filePath)
 		end
 	end
-	return function(p2)
-		-- upvalues: captureService (copy), t (ref), retrieveCapturesModule (copy)
-		captureService:DeleteCapturesAsync(t)
-		p2:dispatch(retrieveCapturesModule())
+	return function(p1) --[[ Line: 26 ]]
+		-- upvalues: CaptureService (upval), List1 (copy), RetrieveCapturesModule (upval)
+		CaptureService:DeleteCapturesAsync(List1)
+		p1:dispatch(RetrieveCapturesModule())
 	end
 end

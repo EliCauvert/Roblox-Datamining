@@ -1,33 +1,33 @@
-﻿local function deduplicateBodyColor3s(p1)
+﻿local function deduplicateBodyColor3s(List) --[[ Line: 5 ]]
+	local List1 = {}
 	local t = {}
-	local t_1 = {}
 	
-	for i, v in p1 do
-		local var1 = tostring(v)
+	for _, value in List do
+		local Text = tostring(value)
 		
-		if not t_1[var1] then
-			table.insert(t, v)
-			t_1[var1] = true
+		if not t[Text] then
+			table.insert(List1, value)
+			t[Text] = true
 		end
 	end
-	return t
+	return List1
 end
 
-return function(p2)
-	-- upvalues: deduplicateBodyColor3s (ref)
-	local var2 = deduplicateBodyColor3s(p2)
-	local var4Count = #var2
+return function(p1): ColorSequence --[[ Line: 23 | Named "generateColorSequence" ]]
+	-- upvalues: deduplicateBodyColor3s (copy)
+	local DeduplicateBodyColor3sResult = deduplicateBodyColor3s(p1)
+	local CountDeduplicateBodyColor3sResult = #DeduplicateBodyColor3sResult
 	
-	if var4Count == 1 then
-		local var3 = var2[1]
+	if CountDeduplicateBodyColor3sResult == 1 then
+		local DeduplicateBodyColor3sResultEntry = DeduplicateBodyColor3sResult[1]
 		
-		return ColorSequence.new(var3, var3)
+		return ColorSequence.new(DeduplicateBodyColor3sResultEntry, DeduplicateBodyColor3sResultEntry)
 	end
-	local t = {}
-	local var4 = 1 / (var4Count - 1 + 1.6)
+	local ColorSequenceKeypoints = {}
+	local v1 = 1 / (CountDeduplicateBodyColor3sResult - 1 + 1.6)
 	
-	for i, v in var2 do
-		table.insert(t, ColorSequenceKeypoint.new(if i == 1 then 0 elseif i == var4Count then 1 else (i - 1 + 0.8) * var4, v))
+	for i, value in DeduplicateBodyColor3sResult do
+		table.insert(ColorSequenceKeypoints, ColorSequenceKeypoint.new(if i == 1 then 0 elseif i == CountDeduplicateBodyColor3sResult then 1 else (i - 1 + 0.8) * v1, value))
 	end
-	return ColorSequence.new(t)
+	return ColorSequence.new(ColorSequenceKeypoints)
 end

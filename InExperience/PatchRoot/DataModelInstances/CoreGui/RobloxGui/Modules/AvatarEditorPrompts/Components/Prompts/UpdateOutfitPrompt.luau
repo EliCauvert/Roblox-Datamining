@@ -1,50 +1,49 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local coreGuiService = game:GetService("CoreGui")
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local tModule = require(corePackagesService.Packages.t)
-local buttonType = require(corePackagesService.Packages.UIBlox).App.Button.Enum.ButtonType
-local _ = coreGuiService:WaitForChild("RobloxGui")
-local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
-local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local signalUpdateOutfitPermissionDeniedModule = require(parent_1.Thunks.SignalUpdateOutfitPermissionDenied)
-local performUpdateOutfitModule = require(parent_1.Thunks.PerformUpdateOutfit)
-local promptWithAvatarViewportModule = require(parent.Prompts.PromptWithAvatarViewport)
-local avatarEditorPromptsPolicyModule = require(parent_1.AvatarEditorPromptsPolicy)
-local updateOutfitPrompt = roactModule.PureComponent:extend("UpdateOutfitPrompt")
-updateOutfitPrompt.validateProps = tModule.strictInterface({
-	screenSize = tModule.Vector2,
-	humanoidDescription = tModule.instanceOf("HumanoidDescription"),
-	rigType = tModule.enum(Enum.HumanoidRigType),
-	outfitName = tModule.string,
-	signalUpdateOutfitPermissionDenied = tModule.callback,
-	performUpdateOutfit = tModule.callback,
-	showCustomOutfitNames = tModule.boolean
+﻿local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local TModule = require(CorePackages.Packages.t)
+local ButtonType = require(CorePackages.Packages.UIBlox).App.Button.Enum.ButtonType
+local _ = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
+local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local SignalUpdateOutfitPermissionDeniedModule = require(Parent1.Thunks.SignalUpdateOutfitPermissionDenied)
+local PerformUpdateOutfitModule = require(Parent1.Thunks.PerformUpdateOutfit)
+local PromptWithAvatarViewportModule = require(Parent.Prompts.PromptWithAvatarViewport)
+local AvatarEditorPromptsPolicyModule = require(Parent1.AvatarEditorPromptsPolicy)
+local UpdateOutfitPrompt = RoactModule.PureComponent:extend("UpdateOutfitPrompt")
+UpdateOutfitPrompt.validateProps = TModule.strictInterface({
+	screenSize = TModule.Vector2,
+	humanoidDescription = TModule.instanceOf("HumanoidDescription"),
+	rigType = TModule.enum(Enum.HumanoidRigType),
+	outfitName = TModule.string,
+	signalUpdateOutfitPermissionDenied = TModule.callback,
+	performUpdateOutfit = TModule.callback,
+	showCustomOutfitNames = TModule.boolean
 })
 
-function updateOutfitPrompt.render(p1)
-	-- upvalues: robloxTranslatorModule (ref), roactModule (ref), promptWithAvatarViewportModule (ref), buttonType (ref)
-	return roactModule.createElement(promptWithAvatarViewportModule, {
+function UpdateOutfitPrompt.render(p1) --[[ Line: 45 ]]
+	-- upvalues: RobloxTranslatorModule (copy), RoactModule (copy), PromptWithAvatarViewportModule (copy), ButtonType (copy)
+	return RoactModule.createElement(PromptWithAvatarViewportModule, {
 		humanoidDescription = p1.props.humanoidDescription,
 		rigType = p1.props.rigType,
-		title = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.UpdateOutfitPromptTitle"),
-		bodyText = if p1.props.showCustomOutfitNames then robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.UpdateOutfitPromptText", { RBX_NAME = p1.props.outfitName }) else robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.UpdateOutfitPromptTextNoOutfitName"),
+		title = RobloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.UpdateOutfitPromptTitle"),
+		bodyText = if p1.props.showCustomOutfitNames then RobloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.UpdateOutfitPromptText", { RBX_NAME = p1.props.outfitName }) else RobloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.UpdateOutfitPromptTextNoOutfitName"),
 		buttonStackInfo = {
 			buttons = {
 				{
 					isDefaultChild = true,
 					props = {
 						onActivated = p1.props.signalUpdateOutfitPermissionDenied,
-						text = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.UpdateOutfitPromptNo")
+						text = RobloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.UpdateOutfitPromptNo")
 					}
 				},
 				{
 					isDefaultChild = false,
-					buttonType = buttonType.PrimarySystem,
+					buttonType = ButtonType.PrimarySystem,
 					props = {
 						onActivated = p1.props.performUpdateOutfit,
-						text = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.UpdateOutfitPromptYes")
+						text = RobloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.UpdateOutfitPromptYes")
 					}
 				}
 			}
@@ -52,25 +51,25 @@ function updateOutfitPrompt.render(p1)
 	})
 end
 
-return avatarEditorPromptsPolicyModule.connect(function(p1, _)
+return (AvatarEditorPromptsPolicyModule.connect(function(p1, _) --[[ Line: 106 ]]
 	return { showCustomOutfitNames = p1.getCustomOutfitNames() }
-end)(roactRoduxModule.connect(function(p1)
+end)((RoactRoduxModule.connect(function(p1) --[[ Line: 83 | Named "mapStateToProps" ]]
 	return {
 		screenSize = p1.screenSize,
 		humanoidDescription = p1.promptInfo.humanoidDescription,
 		rigType = p1.promptInfo.rigType,
 		outfitName = p1.promptInfo.outfitName
 	}
-end, function(p1)
-	-- upvalues: signalUpdateOutfitPermissionDeniedModule (ref), performUpdateOutfitModule (ref)
+end, function(Callback) --[[ Line: 92 | Named "mapDispatchToProps" ]]
+	-- upvalues: SignalUpdateOutfitPermissionDeniedModule (copy), PerformUpdateOutfitModule (copy)
 	return {
-		signalUpdateOutfitPermissionDenied = function()
-			-- upvalues: p1 (ref), signalUpdateOutfitPermissionDeniedModule (copy)
-			return p1(signalUpdateOutfitPermissionDeniedModule)
+		signalUpdateOutfitPermissionDenied = function() --[[ Line: 94 ]]
+			-- upvalues: Callback (copy), SignalUpdateOutfitPermissionDeniedModule (upval)
+			return Callback(SignalUpdateOutfitPermissionDeniedModule)
 		end,
-		performUpdateOutfit = function()
-			-- upvalues: p1 (ref), performUpdateOutfitModule (copy)
-			return p1(performUpdateOutfitModule)
+		performUpdateOutfit = function() --[[ Line: 98 ]]
+			-- upvalues: Callback (copy), PerformUpdateOutfitModule (upval)
+			return Callback(PerformUpdateOutfitModule)
 		end or nil
 	}
-end)(updateOutfitPrompt))
+end)(UpdateOutfitPrompt))))

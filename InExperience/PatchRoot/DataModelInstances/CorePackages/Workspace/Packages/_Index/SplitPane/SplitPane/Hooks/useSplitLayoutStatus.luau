@@ -1,124 +1,135 @@
-﻿local parent = script:FindFirstAncestor("SplitPane").Parent
-local reactModule = require(parent.React)
-local roactNavigationModule = require(parent.RoactNavigation)
-local signalsReactModule = require(parent.SignalsReact)
-local appSplitViewModule = require(parent.AppSplitView)
-local viewState = require(parent.Navigation).ViewState
-local constants = require(parent.NavigationRodux).Constants
-local splitPaneContextModule = require(script.Parent.Parent.Context.SplitPaneContext)
-local splitPaneStoreModule = require(script.Parent.Parent.Stores.SplitPaneStore)
-local computeSplitEligibilityModule = require(script.Parent.Parent.Utils.computeSplitEligibility)
-local splitPaneVariantModule = require(script.Parent.Parent.Utils.SplitPaneVariant)
-local supportPaneMode = appSplitViewModule.Enums.SupportPaneMode
-local splitPaneSlot = appSplitViewModule.Enums.SplitPaneSlot
-local tempRnSwitchNavigatorName = constants.TempRnSwitchNavigatorName
+﻿local Parent = script:FindFirstAncestor("SplitPane").Parent
+local ReactModule = require(Parent.React)
+local FFlagEnableSplitPaneTelemetry = require(Parent.SharedFlags).FFlagEnableSplitPaneTelemetry
+local RoactNavigationModule = require(Parent.RoactNavigation)
+local SignalsReactModule = require(Parent.SignalsReact)
+local AppSplitViewModule = require(Parent.AppSplitView)
+local ViewState = require(Parent.Navigation).ViewState
+local SplitPaneContextModule = require(script.Parent.Parent.Context.SplitPaneContext)
+local SplitPaneStoreModule = require(script.Parent.Parent.Stores.SplitPaneStore)
+local UseInitializeSplitPaneTelemetrySessionModule = require(script.Parent.useInitializeSplitPaneTelemetrySession)
+local ComputeSplitEligibilityModule = require(script.Parent.Parent.Utils.computeSplitEligibility)
+local SplitPaneVariantModule = require(script.Parent.Parent.Utils.SplitPaneVariant)
+local SupportPaneMode = AppSplitViewModule.Enums.SupportPaneMode
+local SplitPaneSlot = AppSplitViewModule.Enums.SplitPaneSlot
+local TempRnSwitchNavigatorName = require(Parent.NavigationRodux).Constants.TempRnSwitchNavigatorName
 
-return function(p1, p2)
-	-- upvalues: splitPaneStoreModule (ref), signalsReactModule (ref), computeSplitEligibilityModule (ref), reactModule (ref), splitPaneContextModule (ref), tempRnSwitchNavigatorName (ref), splitPaneVariantModule (ref), supportPaneMode (ref), splitPaneSlot (ref), viewState (ref), roactNavigationModule (ref)
-	local options, v
-	local store = splitPaneStoreModule.getStore()
-	local var1 = signalsReactModule.useSignalState(store.getIsBreakpointEnabled)
-	local var2 = signalsReactModule.useSignalState(store.getSupportPaneMode)
-	local var3 = computeSplitEligibilityModule(p1)
-	local var4 = var1 and var3
-	local var5 = reactModule.useContext(splitPaneContextModule).renderSupportContent ~= nil
-	local var6 = p1[1] ~= nil and (p1[1].descriptor ~= nil and (p1[1].descriptor.state ~= nil and p1[1].descriptor.state.routeName == tempRnSwitchNavigatorName))
-	local t = {}
-	local var7 = nil
-	local var8 = false
-	local var9 = splitPaneVariantModule.isPaneCollapsedByDefault() and (not splitPaneVariantModule.shouldAutoExpandOnSupportOpen() and var2 == supportPaneMode.Collapsed)
-	
-	if var4 then
-		for i = #p1, 1, -1 do
-			options = p1[i].descriptor.options
-			v = options.splitPaneEligibility
-			
-			if var9 and v == splitPaneSlot.Support then
-				v = nil
+return function(Entry, p1: number) --[[ Line: 34 | Named "useSplitLayoutStatus" ]]
+	-- upvalues: SplitPaneStoreModule (copy), SignalsReactModule (copy), ComputeSplitEligibilityModule (copy), ReactModule (copy), SplitPaneContextModule (copy), TempRnSwitchNavigatorName (copy), SplitPaneVariantModule (copy), SupportPaneMode (copy), SplitPaneSlot (copy), ViewState (copy), RoactNavigationModule (copy), FFlagEnableSplitPaneTelemetry (copy), UseInitializeSplitPaneTelemetrySessionModule (copy)
+	local Store = SplitPaneStoreModule.getStore()
+	local UseSignalStateResult = SignalsReactModule.useSignalState(Store.getIsBreakpointEnabled)
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(Store.getSupportPaneMode)
+	local SplitEligibilityModule = ComputeSplitEligibilityModule(Entry)
+	local SplitEligibilityModule1 = UseSignalStateResult and SplitEligibilityModule
+	local HasRenderSupportContent = ReactModule.useContext(SplitPaneContextModule).renderSupportContent ~= nil
+	local IsRouteNameMatch: boolean = Entry[1] ~= nil and (Entry[1].descriptor ~= nil and (Entry[1].descriptor.state ~= nil and Entry[1].descriptor.state.routeName == TempRnSwitchNavigatorName))
+	local PaneIndices = {}
+	local SplitPrimaryIndex: number? = nil
+	local Flag = false
+	local IsUseSignalStateResultMatch: boolean = SplitPaneVariantModule.isPaneCollapsedByDefault() and (not SplitPaneVariantModule.shouldAutoExpandOnSupportOpen() and UseSignalStateResult1 == SupportPaneMode.Collapsed)
+	repeat
+		if SplitEligibilityModule1 then
+			for i = #Entry, 1, -1 do
+				local Options = Entry[i].descriptor.options
+				local SplitPaneEligibility = Options.splitPaneEligibility
+				
+				if IsUseSignalStateResultMatch and SplitPaneEligibility == SplitPaneSlot.Support then
+					SplitPaneEligibility = nil
+				end
+				if SplitPaneEligibility == SplitPaneSlot.Support then
+					table.insert(PaneIndices, 1, i)
+				elseif (not Options.transparent and not Options.overlayEnabled or SplitPaneEligibility ~= nil) and #PaneIndices > 0 then
+					SplitPrimaryIndex = i
+					break
+				end
 			end
-			if v == splitPaneSlot.Support then
-				table.insert(t, 1, i)
-			elseif (options.transparent or options.overlayEnabled) and v == nil or #t <= 0 then
+			break
+		end
+		if UseSignalStateResult then break end
+		for _, value in Entry do
+			if value.descriptor.options.splitPaneEligibility == SplitPaneSlot.Support and value.viewState ~= ViewState.Closing then
+				Flag = true
+			else
 				continue
 			end
-			var7 = i
 		end
-	elseif not var1 then
-		for i, v in p1 do
-			if v.descriptor.options.splitPaneEligibility == splitPaneSlot.Support and v.viewState ~= viewState.Closing then
-				var8 = true
-				break
-			end
-		end
-	end
-	local var10 = var7 ~= nil and #t > 0
-	options = var8 or (var10 or var4 and (var5 and p2 >= 1))
-	v = nil
+		break
+	until true
+	local IsRouteActiveOnPane: boolean = SplitPrimaryIndex ~= nil and #PaneIndices > 0
+	local Flag1: boolean = Flag or (IsRouteActiveOnPane or SplitEligibilityModule1 and (HasRenderSupportContent and p1 >= 1))
+	local ContentTopCandidate: number? = nil
 	
-	if var4 then
-		for i_1 = #p1, 1, -1 do
-			local options_1 = p1[i_1].descriptor.options
-			local splitPaneEligibility = options_1.splitPaneEligibility
+	if SplitEligibilityModule1 then
+		for i1 = #Entry, 1, -1 do
+			local Options = Entry[i1].descriptor.options
+			local SplitPaneEligibility = Options.splitPaneEligibility
 			
-			if var9 and splitPaneEligibility == splitPaneSlot.Support then
-				splitPaneEligibility = nil
+			if IsUseSignalStateResultMatch and SplitPaneEligibility == SplitPaneSlot.Support then
+				SplitPaneEligibility = nil
 			end
-			if splitPaneEligibility == splitPaneSlot.Support or (options_1.transparent or options_1.overlayEnabled) and splitPaneEligibility == nil then
+			if SplitPaneEligibility == SplitPaneSlot.Support or (Options.transparent or Options.overlayEnabled) and SplitPaneEligibility == nil then
 				continue
 			end
-			v = i_1
+			ContentTopCandidate = i1
 			break
 		end
 	end
-	reactModule.useEffect(function()
-		-- upvalues: var6 (ref), store (ref), var3 (ref), p1 (ref), splitPaneSlot (copy), roactNavigationModule (copy)
-		if not var6 then return end
-		local isSplitEligible = store.getIsSplitEligible(false)
-		store.setIsSplitEligible(var3)
+	ReactModule.useEffect(function() --[[ Line: 115 ]]
+		-- upvalues: IsRouteNameMatch (copy), Store (copy), SplitEligibilityModule (copy), Entry (copy), SplitPaneSlot (upval), RoactNavigationModule (upval)
+		if not IsRouteNameMatch then return end
+		local IsSplitEligible = Store.getIsSplitEligible(false)
+		Store.setIsSplitEligible(SplitEligibilityModule)
 		
-		if not isSplitEligible or var3 then return end
-		local descriptor = p1[1].descriptor
+		if not IsSplitEligible or SplitEligibilityModule then return end
+		local Descriptor = Entry[1].descriptor
 		
-		if descriptor == nil or descriptor.navigation == nil then return end
-		local navigation = descriptor.navigation
+		if Descriptor == nil or Descriptor.navigation == nil then return end
+		local Navigation = Descriptor.navigation
 		
-		for i = #p1, 2, -1 do
-			local descriptor_1 = p1[i].descriptor
+		for i = #Entry, 2, -1 do
+			local Descriptor1 = Entry[i].descriptor
+			local NoDescriptor = Descriptor1 == nil
 			
-			if descriptor_1 ~= nil then
-				local splitPaneEligibility = descriptor_1.options.splitPaneEligibility
-				
-				if splitPaneEligibility ~= nil and splitPaneEligibility ~= splitPaneSlot.Content then
-					local var11 = if descriptor_1.state ~= nil then descriptor_1.state.key else nil
-					
-					if var11 ~= nil then
-						navigation.dispatch(roactNavigationModule.StackActions.pop({ prune = false, immediate = true, key = var11 }))
-					end
-				end
+			if not NoDescriptor then
+				local SplitPaneEligibility = Descriptor1.options.splitPaneEligibility
+				NoDescriptor = SplitPaneEligibility == nil or SplitPaneEligibility == SplitPaneSlot.Content
+			end
+			local NoKey: boolean = NoDescriptor
+			local Key = nil
+			
+			if not NoKey then
+				Key = if Descriptor1.state == nil then nil else Descriptor1.state.key or nil
+				NoKey = Key == nil
+			end
+			if not NoKey then
+				Navigation.dispatch(RoactNavigationModule.StackActions.pop({ prune = false, immediate = true, key = Key }))
 			end
 		end
-	end, { var6, var3, p1, store })
-	reactModule.useEffect(function()
-		-- upvalues: options (ref), var6 (ref), store (ref), p1 (ref), viewState (copy), splitPaneSlot (copy)
-		if options then return end
-		if var6 then
-			store.setTemporarySupportPaneMode(nil)
+	end, { IsRouteNameMatch, SplitEligibilityModule, Entry, Store })
+	ReactModule.useEffect(function() --[[ Line: 152 ]]
+		-- upvalues: Flag1 (copy), IsRouteNameMatch (copy), Store (copy), Entry (copy), ViewState (upval), SplitPaneSlot (upval)
+		if Flag1 then return end
+		if IsRouteNameMatch then
+			Store.setTemporarySupportPaneMode(nil)
 		end
-		for i, v in p1 do
-			if v.viewState == viewState.Closing and v.descriptor.options.splitPaneEligibility == splitPaneSlot.Support then
-				v.setClosed()
+		for _, value in Entry do
+			if value.viewState == ViewState.Closing and value.descriptor.options.splitPaneEligibility == SplitPaneSlot.Support then
+				value.setClosed()
 			end
 		end
-	end, { var6, options, p1, store })
+	end, { IsRouteNameMatch, Flag1, Entry, Store })
 	
+	if FFlagEnableSplitPaneTelemetry then
+		UseInitializeSplitPaneTelemetrySessionModule(IsRouteNameMatch)
+	end
 	return {
-		isSplitLayoutEnabled = options,
-		isRouteActiveOnPane = var10,
-		paneIndices = t,
-		contentTopCandidate = v,
-		splitPrimaryIndex = var7,
-		supportPaneMode = var2,
-		isRootAppStack = var6,
-		isSplitEnabled = var4
+		isSplitLayoutEnabled = Flag1,
+		isRouteActiveOnPane = IsRouteActiveOnPane,
+		paneIndices = PaneIndices,
+		contentTopCandidate = ContentTopCandidate,
+		splitPrimaryIndex = SplitPrimaryIndex,
+		supportPaneMode = UseSignalStateResult1,
+		isRootAppStack = IsRouteNameMatch,
+		isSplitEnabled = SplitEligibilityModule1
 	}
 end

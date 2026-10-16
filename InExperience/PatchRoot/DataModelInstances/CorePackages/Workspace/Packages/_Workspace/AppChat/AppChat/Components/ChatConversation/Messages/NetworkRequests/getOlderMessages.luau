@@ -1,44 +1,44 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local appChatNetworkingModule = require(appChat.Parent.AppChatNetworking)
-local fFlagAppChatPerfTrackingModule = require(appChat.Flags.FFlagAppChatPerfTracking)
-local fFlagAppChatMessageTTIMilestonesModule = require(appChat.Flags.FFlagAppChatMessageTTIMilestones)
-local fFlagAppChatIncrementalPaginationProjectionModule = require(appChat.Flags.FFlagAppChatIncrementalPaginationProjection)
-local appChatPerfTrackerModule = require(appChat.Telemetry.AppChatPerfTracker)
-local getConversationMessageViewModelStoreModule = require(appChat.Stores.GetConversationMessageViewModelStore)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local AppChatNetworkingModule = require(AppChat.Parent.AppChatNetworking)
+local FFlagAppChatPerfTrackingModule = require(AppChat.Flags.FFlagAppChatPerfTracking)
+local FFlagAppChatMessageTTIMilestonesModule = require(AppChat.Flags.FFlagAppChatMessageTTIMilestones)
+local FFlagAppChatIncrementalPaginationProjectionModule = require(AppChat.Flags.FFlagAppChatIncrementalPaginationProjection)
+local AppChatPerfTrackerModule = require(AppChat.Telemetry.AppChatPerfTracker)
+local GetConversationMessageViewModelStoreModule = require(AppChat.Stores.GetConversationMessageViewModelStore)
 
-return function(p1, _, p2)
-	-- upvalues: fFlagAppChatPerfTrackingModule (ref), fFlagAppChatMessageTTIMilestonesModule (ref), appChatPerfTrackerModule (ref), fFlagAppChatIncrementalPaginationProjectionModule (ref), getConversationMessageViewModelStoreModule (ref), appChatNetworkingModule (ref)
-	return function(p3)
-		-- upvalues: fFlagAppChatPerfTrackingModule (copy), fFlagAppChatMessageTTIMilestonesModule (copy), p2 (ref), p1 (ref), appChatPerfTrackerModule (copy), fFlagAppChatIncrementalPaginationProjectionModule (copy), getConversationMessageViewModelStoreModule (copy), appChatNetworkingModule (copy)
-		local var1 = fFlagAppChatPerfTrackingModule and (fFlagAppChatMessageTTIMilestonesModule and p2 == nil)
+return function(ConversationId, _, p1) --[[ Line: 11 ]]
+	-- upvalues: FFlagAppChatPerfTrackingModule (copy), FFlagAppChatMessageTTIMilestonesModule (copy), AppChatPerfTrackerModule (copy), FFlagAppChatIncrementalPaginationProjectionModule (copy), GetConversationMessageViewModelStoreModule (copy), AppChatNetworkingModule (copy)
+	return function(p2) --[[ Line: 12 ]]
+		-- upvalues: FFlagAppChatPerfTrackingModule (upval), FFlagAppChatMessageTTIMilestonesModule (upval), p1 (copy), ConversationId (copy), AppChatPerfTrackerModule (upval), FFlagAppChatIncrementalPaginationProjectionModule (upval), GetConversationMessageViewModelStoreModule (upval), AppChatNetworkingModule (upval)
+		local v1: boolean = FFlagAppChatPerfTrackingModule and (FFlagAppChatMessageTTIMilestonesModule and p1 == nil)
 		
-		if var1 then
-			local t = { conversationId = p1 }
-			appChatPerfTrackerModule.trackMilestone(appChatPerfTrackerModule.Events.ChatConversationTTI, appChatPerfTrackerModule.Milestone.PrimaryDataStarted.Name, t)
-			appChatPerfTrackerModule.trackSubphase(appChatPerfTrackerModule.Events.ChatConversationTTI, appChatPerfTrackerModule.Milestone.PrimaryDataStarted.Name, appChatPerfTrackerModule.Milestone.PrimaryDataStarted.Subphase.NetworkFetch, t)
-			appChatPerfTrackerModule.trackRequest(appChatPerfTrackerModule.Events.ChatConversationTTI, appChatPerfTrackerModule.Milestone.PrimaryDataStarted.Name, "GetOlderMessages", t)
+		if v1 then
+			local config = { conversationId = ConversationId }
+			AppChatPerfTrackerModule.trackMilestone(AppChatPerfTrackerModule.Events.ChatConversationTTI, AppChatPerfTrackerModule.Milestone.PrimaryDataStarted.Name, config)
+			AppChatPerfTrackerModule.trackSubphase(AppChatPerfTrackerModule.Events.ChatConversationTTI, AppChatPerfTrackerModule.Milestone.PrimaryDataStarted.Name, AppChatPerfTrackerModule.Milestone.PrimaryDataStarted.Subphase.NetworkFetch, config)
+			AppChatPerfTrackerModule.trackRequest(AppChatPerfTrackerModule.Events.ChatConversationTTI, AppChatPerfTrackerModule.Milestone.PrimaryDataStarted.Name, "GetOlderMessages", config)
 		end
-		if fFlagAppChatIncrementalPaginationProjectionModule then
-			getConversationMessageViewModelStoreModule(false).conversationMessageListStore.setLoading(p1, true)
+		if FFlagAppChatIncrementalPaginationProjectionModule then
+			GetConversationMessageViewModelStoreModule(false).conversationMessageListStore.setLoading(ConversationId, true)
 		end
-		local var2 = p3:dispatch(appChatNetworkingModule.rodux.GetOlderMessages.API(p1, p2))
+		local DispatchResult = p2:dispatch(AppChatNetworkingModule.rodux.GetOlderMessages.API(ConversationId, p1))
 		
-		if var1 then
-			var2 = var2:tap(function()
-				-- upvalues: p1 (copy), appChatPerfTrackerModule (copy)
-				local t = { conversationId = p1 }
-				appChatPerfTrackerModule.trackMilestone(appChatPerfTrackerModule.Events.ChatConversationTTI, appChatPerfTrackerModule.Milestone.PrimaryDataReady.Name, t)
-				appChatPerfTrackerModule.trackSubphase(appChatPerfTrackerModule.Events.ChatConversationTTI, appChatPerfTrackerModule.Milestone.PrimaryDataReady.Name, appChatPerfTrackerModule.Milestone.PrimaryDataReady.Subphase.ResponseReceived, t)
+		if v1 then
+			DispatchResult = DispatchResult:tap(function() --[[ Line: 44 ]]
+				-- upvalues: ConversationId (upval), AppChatPerfTrackerModule (upval)
+				local config = { conversationId = ConversationId }
+				AppChatPerfTrackerModule.trackMilestone(AppChatPerfTrackerModule.Events.ChatConversationTTI, AppChatPerfTrackerModule.Milestone.PrimaryDataReady.Name, config)
+				AppChatPerfTrackerModule.trackSubphase(AppChatPerfTrackerModule.Events.ChatConversationTTI, AppChatPerfTrackerModule.Milestone.PrimaryDataReady.Name, AppChatPerfTrackerModule.Milestone.PrimaryDataReady.Subphase.ResponseReceived, config)
 			end)
 		end
-		if fFlagAppChatIncrementalPaginationProjectionModule then
-			var2 = var2:finally(function()
-				-- upvalues: getConversationMessageViewModelStoreModule (copy), p1 (copy)
-				getConversationMessageViewModelStoreModule(false).conversationMessageListStore.setLoading(p1, false)
+		if FFlagAppChatIncrementalPaginationProjectionModule then
+			DispatchResult = DispatchResult:finally(function() --[[ Line: 61 ]]
+				-- upvalues: GetConversationMessageViewModelStoreModule (upval), ConversationId (upval)
+				GetConversationMessageViewModelStoreModule(false).conversationMessageListStore.setLoading(ConversationId, false)
 			end)
 		end
-		return var2:catch(function(p4)
-			warn("AppChatNetworking failure in getOlderMessages, Status: " .. tostring(p4))
+		return DispatchResult:catch(function(Err) --[[ Line: 66 ]]
+			warn("AppChatNetworking failure in getOlderMessages, Status: " .. tostring(Err))
 		end)
 	end
 end

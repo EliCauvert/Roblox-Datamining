@@ -1,8 +1,8 @@
-﻿local interventionTypes = require(script:FindFirstAncestor("InterventionShared").InterventionAnalytics).Constants.InterventionTypes
+﻿local InterventionTypes = require(script:FindFirstAncestor("InterventionShared").InterventionAnalytics).Constants.InterventionTypes
 
-return function(p1)
-	-- upvalues: interventionTypes (ref)
-	local var1 = if p1 then p1:lower() else ""
+return function(Text: string) --[[ Line: 13 ]]
+	-- upvalues: InterventionTypes (copy)
+	local Lowered = if Text then Text:lower() else ""
 	
-	return if string.find(var1, "nudge") then interventionTypes.UFRNudge elseif string.find(var1, "timeout") then interventionTypes.UFRTimeout else interventionTypes.UFRTimeout
+	return if string.find(Lowered, "nudge") then InterventionTypes.UFRNudge elseif string.find(Lowered, "timeout") then InterventionTypes.UFRTimeout else InterventionTypes.UFRTimeout
 end

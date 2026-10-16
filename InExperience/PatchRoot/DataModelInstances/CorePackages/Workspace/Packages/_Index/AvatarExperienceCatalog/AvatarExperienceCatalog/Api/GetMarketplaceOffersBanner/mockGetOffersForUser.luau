@@ -1,12 +1,12 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local parent = avatarExperienceCatalog.Parent
-local _ = require(parent.LuauPolyfill)
-local promiseModule = require(parent.Promise)
-local makeAXResponseHandlerModule = require(avatarExperienceCatalog.Utils.makeAXResponseHandler)
-local normalizeMarketplaceOffersBannerResponseModule = require(script.Parent.normalizeMarketplaceOffersBannerResponse)
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local Parent = AvatarExperienceCatalog.Parent
+local _ = require(Parent.LuauPolyfill)
+local PromiseModule = require(Parent.Promise)
+local MakeAXResponseHandlerModule = require(AvatarExperienceCatalog.Utils.makeAXResponseHandler)
+local NormalizeMarketplaceOffersBannerResponseModule = require(script.Parent.normalizeMarketplaceOffersBannerResponse)
 local _ = require(script.Parent.MarketplaceOffersBannerTypes)
-local constantsModule = require(script.Parent.constants)
-local t = {
+local ConstantsModule = require(script.Parent.constants)
+local ResponseBody = {
 	offers = {
 		{
 			icon = "Star",
@@ -44,27 +44,28 @@ local t = {
 }
 
 return {
-	mockGetOffersForUser = function()
-		-- upvalues: promiseModule (ref), t (ref), makeAXResponseHandlerModule (ref), normalizeMarketplaceOffersBannerResponseModule (ref), constantsModule (ref)
-		local var1 = false
+	mockGetOffersForUser = function() --[[ Line: 85 ]]
+		-- upvalues: PromiseModule (copy), ResponseBody (copy), MakeAXResponseHandlerModule (copy), NormalizeMarketplaceOffersBannerResponseModule (copy), ConstantsModule (copy)
+		local Flag = false
 		
-		return makeAXResponseHandlerModule(promiseModule.new(function(p1)
-			-- upvalues: var1 (write), t (copy)
-			task.delay(2, function()
-				-- upvalues: var1 (copy), p1 (ref), t (copy)
-				if var1 then
-					p1(nil)
+		return MakeAXResponseHandlerModule(PromiseModule.new(function(Callback) --[[ Line: 90 ]]
+			-- upvalues: Flag (ref), ResponseBody (upval)
+			task.delay(2, function() --[[ Line: 91 ]]
+				-- upvalues: Flag (upval), Callback (copy), ResponseBody (upval)
+				if Flag then
+					Callback(nil)
 					
 					return
+				else
+					Callback({ responseBody = ResponseBody })
 				end
-				p1({ responseBody = t })
 			end)
-		end), normalizeMarketplaceOffersBannerResponseModule, {
-			modelMismatchCounter = constantsModule.FETCH_MARKETPLACE_OFFERS_BANNER_MODEL_MISMATCH_COUNTER_NAME,
-			latencyCounter = constantsModule.FETCH_MARKETPLACE_OFFERS_BANNER_LATENCY_COUNTER_NAME
-		}), function()
-			-- upvalues: var1 (write)
-			var1 = true
+		end), NormalizeMarketplaceOffersBannerResponseModule, {
+			modelMismatchCounter = ConstantsModule.FETCH_MARKETPLACE_OFFERS_BANNER_MODEL_MISMATCH_COUNTER_NAME,
+			latencyCounter = ConstantsModule.FETCH_MARKETPLACE_OFFERS_BANNER_LATENCY_COUNTER_NAME
+		}), function() --[[ Line: 105 ]]
+			-- upvalues: Flag (ref)
+			Flag = true
 		end
 	end
 }

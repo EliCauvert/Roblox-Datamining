@@ -1,20 +1,20 @@
-﻿local signalsModule = require(script:FindFirstAncestor("AuthCommon").Parent.Signals)
+﻿local SignalsModule = require(script:FindFirstAncestor("AuthCommon").Parent.Signals)
 
-return function()
-	-- upvalues: signalsModule (ref)
-	local var1, var2 = signalsModule.createSignal(false)
-	local var3, var4 = signalsModule.createSignal(false)
-	local var5, var6 = signalsModule.createSignal(false)
-	local var7, var8 = signalsModule.createSignal(false)
+return function() --[[ Line: 17 ]]
+	-- upvalues: SignalsModule (copy)
+	local Signal, Signal2 = SignalsModule.createSignal(false)
+	local Signal1, Signal2_1 = SignalsModule.createSignal(false)
+	local Signal3, Signal2_2 = SignalsModule.createSignal(false)
+	local Signal4, Signal2_3 = SignalsModule.createSignal(false)
 	
 	return {
-		getFido2Available = var1,
-		setFido2Available = var2,
-		getFido2SupportsDeviceBoundOnly = var3,
-		setFido2SupportsDeviceBoundOnly = var4,
-		getPasswordsAvailable = var5,
-		setPasswordsAvailable = var6,
-		getV2InterfaceSupported = var7,
-		setV2InterfaceSupported = var8
+		getFido2Available = Signal,
+		setFido2Available = Signal2,
+		getFido2SupportsDeviceBoundOnly = Signal1,
+		setFido2SupportsDeviceBoundOnly = Signal2_1,
+		getPasswordsAvailable = Signal3,
+		setPasswordsAvailable = Signal2_2,
+		getV2InterfaceSupported = Signal4,
+		setV2InterfaceSupported = Signal2_3
 	}
 end

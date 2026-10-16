@@ -1,87 +1,87 @@
-﻿local userInputService = game:GetService("UserInputService")
-local runService = game:GetService("RunService")
-local reactModule = require(script:FindFirstAncestor("ToastNotification").Parent.React)
+﻿local UserInputService = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+local ReactModule = require(script:FindFirstAncestor("ToastNotification").Parent.React)
 
-return function(p1, p2, p3, p4, p5)
-	-- upvalues: reactModule (ref), userInputService (ref), runService (ref)
-	local var1, var2 = reactModule.useState(false)
-	local var3, var4 = reactModule.useBinding(0)
-	local var5 = reactModule.useRef(nil)
-	reactModule.useEffect(function()
-		-- upvalues: p5 (ref), userInputService (copy), p1 (ref), var2 (ref)
-		if p5 then
-			return
-		end
-		local inputBeganConnection = userInputService.InputBegan:Connect(function(p6, p7)
-			-- upvalues: p1 (copy), var2 (copy)
-			if p7 then return end
-			if p6.KeyCode == p1 then
-				var2(true)
+return function(KeyCode, p1, p2, Callback, p3) --[[ Line: 14 | Named "useKeyCodeHold" ]]
+	-- upvalues: ReactModule (copy), UserInputService (copy), RunService (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
+	local UseRefResult = ReactModule.useRef(nil)
+	ReactModule.useEffect(function() --[[ Line: 25 ]]
+		-- upvalues: p3 (copy), UserInputService (upval), KeyCode (copy), UseStateResult2 (copy)
+		if p3 then return end
+		local InputBeganConnection = UserInputService.InputBegan:Connect(function(Input, GameProcessed) --[[ Line: 30 ]]
+			-- upvalues: KeyCode (upval), UseStateResult2 (upval)
+			if GameProcessed then return end
+			if Input.KeyCode == KeyCode then
+				UseStateResult2(true)
 			end
 		end)
-		local inputEndedConnection = userInputService.InputEnded:Connect(function(p6)
-			-- upvalues: p1 (copy), var2 (copy)
-			if p6.KeyCode == p1 then
-				var2(false)
+		local InputEndedConnection = UserInputService.InputEnded:Connect(function(Input) --[[ Line: 40 ]]
+			-- upvalues: KeyCode (upval), UseStateResult2 (upval)
+			if Input.KeyCode == KeyCode then
+				UseStateResult2(false)
 			end
 		end)
 		
-		return function()
-			-- upvalues: inputBeganConnection (ref), inputEndedConnection (ref), var2 (copy)
-			inputBeganConnection:Disconnect()
-			inputEndedConnection:Disconnect()
-			var2(false)
+		return function() --[[ Line: 46 ]]
+			-- upvalues: InputBeganConnection (copy), InputEndedConnection (copy), UseStateResult2 (upval)
+			InputBeganConnection:Disconnect()
+			InputEndedConnection:Disconnect()
+			UseStateResult2(false)
 		end
-	end, { p5, p1 })
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), var5 (ref), runService (copy), p2 (ref), p3 (ref), p4 (ref), var4 (ref)
-		if var1 then
-			local function _()
-				-- upvalues: var5 (copy)
-				if var5.current then
-					var5.current:Disconnect()
-					var5.current = nil
-				end
+	end, { p3, KeyCode })
+	ReactModule.useEffect(function() --[[ Line: 53 ]]
+		-- upvalues: UseStateResult (copy), UseRefResult (copy), RunService (upval), p1 (copy), p2 (copy), Callback (copy), UseBindingResult2 (copy)
+		if not UseStateResult then return end
+		local function _() --[[ Line: 58 | Named "disconnect" ]]
+			-- upvalues: UseRefResult (upval)
+			if UseRefResult.current then
+				UseRefResult.current:Disconnect()
+				UseRefResult.current = nil
 			end
+		end
+		
+		local Total = 0
+		UseRefResult.current = RunService.Heartbeat:Connect(function(DeltaTime) --[[ Line: 66 ]]
+			-- upvalues: Total (ref), p1 (upval), p2 (upval), UseRefResult (upval), Callback (upval), UseBindingResult2 (upval)
+			Total += DeltaTime
 			
-			local var6 = 0
-			var5.current = runService.Heartbeat:Connect(function(p6)
-				-- upvalues: var6 (write), p2 (copy), p3 (copy), var5 (copy), p4 (copy), var4 (copy)
-				var6 += p6
+			if Total < p1 then return end
+			if p2 == 0 then
+				if UseRefResult.current then
+					UseRefResult.current:Disconnect()
+					UseRefResult.current = nil
+				end
+				Callback()
 				
-				if var6 < p2 then return end
-				if p3 == 0 then
-					if var5.current then
-						var5.current:Disconnect()
-						var5.current = nil
+				return
+			else
+				local ClampedValue = math.clamp((Total - p1) / p2, 0, 1)
+				UseBindingResult2(ClampedValue)
+				
+				if ClampedValue >= 1 then
+					if UseRefResult.current then
+						UseRefResult.current:Disconnect()
+						UseRefResult.current = nil
 					end
-					p4()
-					
-					return
-				else
-					local clampedValue = math.clamp((var6 - p2) / p3, 0, 1)
-					var4(clampedValue)
-					
-					if clampedValue >= 1 then
-						if var5.current then
-							var5.current:Disconnect()
-							var5.current = nil
-						end
-						p4()
-					end
+					Callback()
 				end
-			end)
-			
-			return function()
-				-- upvalues: var5 (copy), var4 (copy)
-				if var5.current then
-					var5.current:Disconnect()
-					var5.current = nil
-				end
-				var4(0)
 			end
+		end)
+		
+		return function() --[[ Line: 89 ]]
+			-- upvalues: UseRefResult (upval), UseBindingResult2 (upval)
+			if UseRefResult.current then
+				UseRefResult.current:Disconnect()
+				UseRefResult.current = nil
+			end
+			UseBindingResult2(0)
 		end
-	end, { var1, p4, p2, p3 })
+	end, { UseStateResult, Callback, p1, p2 })
 	
-	return { holding = var1, holdProgress = var3 }
+	return {
+		holding = UseStateResult,
+		holdProgress = UseBindingResult
+	}
 end

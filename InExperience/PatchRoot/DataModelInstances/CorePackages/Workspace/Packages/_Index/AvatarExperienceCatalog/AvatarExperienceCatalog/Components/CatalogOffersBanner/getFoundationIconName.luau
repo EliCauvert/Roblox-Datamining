@@ -1,10 +1,15 @@
-﻿local iconName = require(script:FindFirstAncestor("AvatarExperienceCatalog").Parent.Foundation).Enums.IconName
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
+local IconName = require(Parent.Foundation).Enums.IconName
+local FFlagAXRemoveOfferBannerIcon = require(Parent.AvatarExperienceFlags).FFlagAXRemoveOfferBannerIcon
 
-return function(p1)
-	-- upvalues: iconName (ref)
+return function(p1) --[[ Line: 11 | Named "getFoundationIconName" ]]
+	-- upvalues: IconName (copy), FFlagAXRemoveOfferBannerIcon (copy)
 	if p1 then
-		local var1 = iconName[p1]
+		local IconNameEntry = IconName[p1]
 		
-		return var1 or iconName.TagSparkle
+		if IconNameEntry then
+			return IconNameEntry
+		end
 	end
+	return if FFlagAXRemoveOfferBannerIcon then nil else IconName.TagSparkle
 end

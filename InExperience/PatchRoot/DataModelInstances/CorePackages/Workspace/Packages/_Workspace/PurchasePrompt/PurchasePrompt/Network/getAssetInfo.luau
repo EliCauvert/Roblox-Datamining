@@ -1,14 +1,14 @@
-﻿local parent = script.Parent.Parent
-local purchaseErrorModule = require(parent.Enums.PurchaseError)
-local promiseModule = require(parent.Promise)
+﻿local Parent = script.Parent.Parent
+local PurchaseErrorModule = require(Parent.Enums.PurchaseError)
+local PromiseModule = require(Parent.Promise)
 
-return function(value, p1)
-	-- upvalues: promiseModule (ref), purchaseErrorModule (ref)
-	return value.getAssetInfo(p1):andThen(function(p2)
-		-- upvalues: promiseModule (copy)
-		return promiseModule.resolve(p2)
-	end):catch(function(_)
-		-- upvalues: promiseModule (copy), purchaseErrorModule (copy)
-		return promiseModule.reject(purchaseErrorModule.UnknownFailure)
+return function(p1, p2) --[[ Line: 6 | Named "getAssetInfo" ]]
+	-- upvalues: PromiseModule (copy), PurchaseErrorModule (copy)
+	return p1.getAssetInfo(p2):andThen(function(Result) --[[ Line: 9 ]]
+		-- upvalues: PromiseModule (upval)
+		return PromiseModule.resolve(Result)
+	end):catch(function(_) --[[ Line: 12 ]]
+		-- upvalues: PromiseModule (upval), PurchaseErrorModule (upval)
+		return PromiseModule.reject(PurchaseErrorModule.UnknownFailure)
 	end)
 end

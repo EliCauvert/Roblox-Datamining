@@ -1,18 +1,18 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local formatNumberModule = require(parent.Utility.formatNumber)
-local localizationService = game:GetService("LocalizationService")
-local foundationModule = require(parent_1.Foundation)
-local enums = foundationModule.Enums
-local getIconRichText = foundationModule.Utility.getIconRichText
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local FormatNumberModule = require(Parent.Utility.formatNumber)
+local LocalizationService = game:GetService("LocalizationService")
+local FoundationModule = require(Parent1.Foundation)
+local Enums = FoundationModule.Enums
+local GetIconRichTextFunction = FoundationModule.Utility.getIconRichText
 
-function useRobuxText(p1)
-	-- upvalues: reactModule (ref), formatNumberModule (ref), localizationService (ref), getIconRichText (ref), enums (ref)
-	return reactModule.useMemo(function()
-		-- upvalues: formatNumberModule (copy), localizationService (copy), p1 (ref), getIconRichText (copy), enums (copy)
-		return `{getIconRichText(enums.IconName.Robux)} {formatNumberModule(localizationService.RobloxLocaleId, p1 or 0)}`
-	end, { p1, localizationService.RobloxLocaleId })
+function useRobuxText(p1) --[[ Line: 10 ]]
+	-- upvalues: ReactModule (copy), FormatNumberModule (copy), LocalizationService (copy), GetIconRichTextFunction (copy), Enums (copy)
+	return (ReactModule.useMemo(function(): string --[[ Line: 11 ]]
+		-- upvalues: FormatNumberModule (upval), LocalizationService (upval), p1 (copy), GetIconRichTextFunction (upval), Enums (upval)
+		return `{GetIconRichTextFunction(Enums.IconName.Robux)} {FormatNumberModule(LocalizationService.RobloxLocaleId, p1 or 0)}`
+	end, { p1, LocalizationService.RobloxLocaleId }))
 end
 
 return useRobuxText

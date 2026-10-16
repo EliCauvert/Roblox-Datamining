@@ -1,27 +1,27 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local foundationModule = require(parent_1.Foundation)
-local buttonVariant = require(parent_1.Foundation).Enums.ButtonVariant
-local iconName = foundationModule.Enums.IconName
-local view = foundationModule.View
-local text = foundationModule.Text
-local icon = foundationModule.Icon
-local dialog = foundationModule.Dialog
-local dialogSize = foundationModule.Enums.DialogSize
-local orientation = foundationModule.Enums.Orientation
-local useTokens = foundationModule.Hooks.useTokens
-local loggingProtocolModule = require(parent_1.LoggingProtocol)
-local unifiedProductPurchaseCompletionModalShownCounter = require(parent.Generic.Events.UnifiedPurchaseCompletionCounter).UnifiedProductPurchaseCompletionModalShownCounter
-local useLocalization = require(parent_1.Localization).Hooks.useLocalization
-local formatTextWithParamsModule = require(parent.Utility.formatTextWithParams)
-local useFocusNavigationRefsModule = require(parent.Generic.Hooks.useFocusNavigationRefs)
-local fFlagEnableLaunchAfterPurchase = require(parent_1.SharedFlags).FFlagEnableLaunchAfterPurchase
-local var1 = if require(parent_1.SharedFlags).FFlagEnableLargerLaunchAfterPurchasePlayIcon then iconName.PlayXlarge else iconName.PlaySmall
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local FoundationModule = require(Parent1.Foundation)
+local ButtonVariant = require(Parent1.Foundation).Enums.ButtonVariant
+local IconName = FoundationModule.Enums.IconName
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local Icon = FoundationModule.Icon
+local Dialog = FoundationModule.Dialog
+local DialogSize = FoundationModule.Enums.DialogSize
+local Orientation = FoundationModule.Enums.Orientation
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local LoggingProtocolModule = require(Parent1.LoggingProtocol)
+local UnifiedProductPurchaseCompletionModalShownCounter = require(Parent.Generic.Events.UnifiedPurchaseCompletionCounter).UnifiedProductPurchaseCompletionModalShownCounter
+local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
+local FormatTextWithParamsModule = require(Parent.Utility.formatTextWithParams)
+local UseFocusNavigationRefsModule = require(Parent.Generic.Hooks.useFocusNavigationRefs)
+local FFlagEnableLaunchAfterPurchase = require(Parent1.SharedFlags).FFlagEnableLaunchAfterPurchase
+local PlayXlarge = if require(Parent1.SharedFlags).FFlagEnableLargerLaunchAfterPurchasePlayIcon then IconName.PlayXlarge else IconName.PlaySmall
 
-return function(p1)
-	-- upvalues: useLocalization (ref), useFocusNavigationRefsModule (ref), useTokens (ref), reactModule (ref), foundationModule (ref), fFlagEnableLaunchAfterPurchase (ref), loggingProtocolModule (ref), unifiedProductPurchaseCompletionModalShownCounter (ref), formatTextWithParamsModule (ref), dialog (ref), dialogSize (ref), view (ref), icon (ref), text (ref), orientation (ref), var1 (ref), buttonVariant (ref)
-	local var2 = useLocalization({
+return function(p1) --[[ Line: 61 | Named "UnifiedPurchaseCompletionModalV2" ]]
+	-- upvalues: UseLocalizationFunction (copy), UseFocusNavigationRefsModule (copy), UseTokensFunction (copy), ReactModule (copy), FoundationModule (copy), FFlagEnableLaunchAfterPurchase (copy), LoggingProtocolModule (copy), UnifiedProductPurchaseCompletionModalShownCounter (copy), FormatTextWithParamsModule (copy), Dialog (copy), DialogSize (copy), View (copy), Icon (copy), Text (copy), Orientation (copy), PlayXlarge (copy), ButtonVariant (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
 		PurchaseCompleteTitle = "IAPExperience.PurchasePrompt.Title.PurchaseCompleted",
 		PurchaseCompleteBody = "IAPExperience.PurchasePrompt.Body.PurchaseCompleted",
 		ErrorTitle = "CoreScripts.PremiumModal.Title.Error",
@@ -29,80 +29,79 @@ return function(p1)
 		OkButtonText = "CoreScripts.PurchasePrompt.Button.OK",
 		MultiItemPurchaseCompleteBody = "IAPExperience.PurchasePrompt.Body.PurchaseItemsSuccess"
 	})
-	local _ = nil
-	local _ = nil
-	local var3, var4 = useFocusNavigationRefsModule(p1.buttons.onClose or p1.buttons.onActivated, nil)
-	local var5 = useTokens()
-	local var6, var7 = reactModule.useState(foundationModule.Enums.IconName.CircleCheck)
-	local var8 = fFlagEnableLaunchAfterPurchase and (p1.enableLaunchAfterPurchase == true and not p1.isError)
-	local var9 = reactModule.useRef(p1.buttons.onShown)
-	var9.current = p1.buttons.onShown
-	reactModule.useEffect(function()
-		-- upvalues: loggingProtocolModule (copy), unifiedProductPurchaseCompletionModalShownCounter (copy), fFlagEnableLaunchAfterPurchase (copy), var9 (ref)
-		loggingProtocolModule.default:logRobloxTelemetryCounter(unifiedProductPurchaseCompletionModalShownCounter, 1, {})
+	local UseFocusNavigationRefsModuleResult, UseFocusNavigationRefsModuleResult2 = UseFocusNavigationRefsModule(p1.buttons.onClose or p1.buttons.onActivated, nil)
+	local UseTokensResult = UseTokensFunction()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(FoundationModule.Enums.IconName.CircleCheck)
+	local NoIsError: boolean = FFlagEnableLaunchAfterPurchase and (p1.enableLaunchAfterPurchase == true and not p1.isError)
+	local UseRefResult = ReactModule.useRef(p1.buttons.onShown)
+	UseRefResult.current = p1.buttons.onShown
+	ReactModule.useEffect(function() --[[ Line: 85 ]]
+		-- upvalues: LoggingProtocolModule (upval), UnifiedProductPurchaseCompletionModalShownCounter (upval), FFlagEnableLaunchAfterPurchase (upval), UseRefResult (copy)
+		LoggingProtocolModule.default:logRobloxTelemetryCounter(UnifiedProductPurchaseCompletionModalShownCounter, 1, {})
 		
-		if fFlagEnableLaunchAfterPurchase and var9.current then
-			var9.current()
+		if FFlagEnableLaunchAfterPurchase and UseRefResult.current then
+			UseRefResult.current()
 		end
 	end, {})
-	local var10 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), var2 (ref)
-		return if p1.title then p1.title elseif p1.isError then var2.ErrorTitle else var2.PurchaseCompleteTitle
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 92 ]]
+		-- upvalues: p1 (copy), UseLocalizationResult (copy)
+		return if p1.title then p1.title elseif p1.isError then UseLocalizationResult.ErrorTitle else UseLocalizationResult.PurchaseCompleteTitle
 	end, { p1.title, p1.isError })
-	local var11 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), var2 (ref), formatTextWithParamsModule (copy)
-		return if p1.bodyText then p1.bodyText elseif p1.isError then var2.GenericErrorBody elseif p1.isMultiItem then var2.MultiItemPurchaseCompleteBody else formatTextWithParamsModule(var2.PurchaseCompleteBody, { ITEM_NAME = p1.itemName or "" })
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 102 ]]
+		-- upvalues: p1 (copy), UseLocalizationResult (copy), FormatTextWithParamsModule (upval)
+		return if p1.bodyText then p1.bodyText elseif p1.isError then UseLocalizationResult.GenericErrorBody elseif p1.isMultiItem then UseLocalizationResult.MultiItemPurchaseCompleteBody else FormatTextWithParamsModule(UseLocalizationResult.PurchaseCompleteBody, { ITEM_NAME = p1.itemName or "" })
 	end, { p1.bodyText, p1.isError, p1.isMultiItem, p1.itemName })
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var7 (ref), foundationModule (copy)
+	ReactModule.useEffect(function() --[[ Line: 116 ]]
+		-- upvalues: p1 (copy), UseStateResult2 (copy), FoundationModule (upval)
 		if p1.isError then
-			var7(foundationModule.Enums.IconName.TriangleExclamation)
+			UseStateResult2(FoundationModule.Enums.IconName.TriangleExclamation)
 			
 			return
+		else
+			UseStateResult2(FoundationModule.Enums.IconName.CircleCheck)
 		end
-		var7(foundationModule.Enums.IconName.CircleCheck)
 	end, { p1.isError })
 	
-	return reactModule.createElement(dialog.Root, {
+	return ReactModule.createElement(Dialog.Root, {
 		closeOnClickOutside = true,
 		disablePortal = false,
-		size = dialogSize.Medium,
+		size = DialogSize.Medium,
 		onClose = if p1.buttons.onClose then p1.buttons.onClose else p1.buttons.onActivated,
-		ref = var3
+		ref = UseFocusNavigationRefsModuleResult
 	}, {
-		DialogTitle = reactModule.createElement(dialog.Title, { text = var10 }),
-		DialogContent = reactModule.createElement(dialog.Content, nil, {
-			Body = reactModule.createElement(view, {
+		DialogTitle = ReactModule.createElement(Dialog.Title, { text = UseMemoResult }),
+		DialogContent = ReactModule.createElement(Dialog.Content, nil, {
+			Body = ReactModule.createElement(View, {
 				tag = "col gap-large auto-y size-full-0 align-x-center align-y-center padding-top-small"
 			}, {
-				DialogIcon = reactModule.createElement(icon, {
+				DialogIcon = ReactModule.createElement(Icon, {
 					tag = "auto-xy",
-					name = var6,
-					size = var5.Size.Size_1200
+					name = UseStateResult,
+					size = UseTokensResult.Size.Size_1200
 				}),
-				Message = reactModule.createElement(text, {
+				Message = ReactModule.createElement(Text, {
 					tag = "auto-xy text-body content-default text-align-x-left text-body-medium text-wrap",
-					Text = var11
+					Text = UseMemoResult1
 				})
 			})
 		}),
-		DialogActions = reactModule.createElement(dialog.Actions, {
-			orientation = orientation.Horizontal,
-			actions = if var8 then {
+		DialogActions = ReactModule.createElement(Dialog.Actions, {
+			orientation = Orientation.Horizontal,
+			actions = if NoIsError then {
 				{
 					isDisabled = false,
-					icon = var1,
-					variant = buttonVariant.Emphasis,
+					icon = PlayXlarge,
+					variant = ButtonVariant.Emphasis,
 					onActivated = p1.buttons.onActivated,
-					ref = var4
+					ref = UseFocusNavigationRefsModuleResult2
 				}
 			} else {
 				{
 					isDisabled = false,
-					text = if p1.buttons and p1.buttons.text then p1.buttons.text else var2.OkButtonText,
-					variant = buttonVariant.Emphasis,
+					text = if p1.buttons and p1.buttons.text then p1.buttons.text else UseLocalizationResult.OkButtonText,
+					variant = ButtonVariant.Emphasis,
 					onActivated = p1.buttons.onActivated,
-					ref = var4
+					ref = UseFocusNavigationRefsModuleResult2
 				}
 			}
 		})

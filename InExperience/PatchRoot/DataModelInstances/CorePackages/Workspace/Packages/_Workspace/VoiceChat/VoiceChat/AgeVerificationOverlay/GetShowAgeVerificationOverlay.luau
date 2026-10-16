@@ -1,9 +1,9 @@
-﻿local url = require(script:FindFirstAncestor("VoiceChat").Parent.Http).Url
+﻿local Url = require(script:FindFirstAncestor("VoiceChat").Parent.Http).Url
 
-return function(p1, p2, p3)
-	-- upvalues: url (ref)
-	assert(type(p3) == "string", "GetShowAgeVerificationOverlay request expects placeId to be a string")
-	assert(type(p2) == "string", "GetShowAgeVerificationOverlay request expects universeId to be a string")
+return function(Callback, Text, Text1) --[[ Line: 10 ]]
+	-- upvalues: Url (copy)
+	assert(type(Text1) == "string", "GetShowAgeVerificationOverlay request expects placeId to be a string")
+	assert(type(Text) == "string", "GetShowAgeVerificationOverlay request expects universeId to be a string")
 	
-	return p1(string.format("%s/v1/settings/verify/show-age-verification-overlay/%s", url.VOICE_URL, if p3 == "" or p3 == nil then p2 else p2 .. "?placeId=" .. p2), "GET")
+	return Callback(string.format("%s/v1/settings/verify/show-age-verification-overlay/%s", Url.VOICE_URL, if Text1 == "" or Text1 == nil then Text else Text .. "?placeId=" .. Text1), "GET")
 end

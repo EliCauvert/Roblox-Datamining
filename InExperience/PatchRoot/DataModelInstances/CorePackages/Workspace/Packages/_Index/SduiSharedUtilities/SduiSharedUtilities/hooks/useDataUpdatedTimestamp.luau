@@ -1,13 +1,13 @@
-﻿local sduiSharedUtilities = script:FindFirstAncestor("SduiSharedUtilities")
-local parent = sduiSharedUtilities.Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local getSduiApiStoreModule = require(sduiSharedUtilities.getSduiApiStore)
+﻿local SduiSharedUtilities = script:FindFirstAncestor("SduiSharedUtilities")
+local Parent = SduiSharedUtilities.Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local GetSduiApiStoreModule = require(SduiSharedUtilities.getSduiApiStore)
 
-return function(p1, p2)
-	-- upvalues: reactModule (ref), getSduiApiStoreModule (ref), signalsReactModule (ref)
-	return signalsReactModule.useSignalState(reactModule.useCallback(function(p3)
-		-- upvalues: p2 (ref), p1 (ref), getSduiApiStoreModule (copy)
-		return getSduiApiStoreModule().getDataUpdatedTimestamp(p1, p3, if p2 then `{p1}_{p2}` else nil)
-	end, { p1, p2 }))
+return function(p1, p2) --[[ Line: 7 | Named "useDataUpdatedTimestamp" ]]
+	-- upvalues: ReactModule (copy), GetSduiApiStoreModule (copy), SignalsReactModule (copy)
+	return SignalsReactModule.useSignalState((ReactModule.useCallback(function(p3) --[[ Line: 8 ]]
+		-- upvalues: p2 (copy), p1 (copy), GetSduiApiStoreModule (upval)
+		return GetSduiApiStoreModule().getDataUpdatedTimestamp(p1, p3, if p2 then `{p1}_{p2}` else nil)
+	end, { p1, p2 })))
 end

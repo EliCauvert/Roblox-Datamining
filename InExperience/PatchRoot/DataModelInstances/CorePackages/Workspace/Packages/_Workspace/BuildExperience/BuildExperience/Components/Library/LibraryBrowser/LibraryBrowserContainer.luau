@@ -1,8 +1,8 @@
-﻿local reactModule = require(script:FindFirstAncestor("BuildExperience").Parent.React)
-local libraryBrowserViewModule = require(script.Parent.LibraryBrowserView)
-local useLibraryBrowserViewModelModule = require(script.Parent.useLibraryBrowserViewModel)
+﻿local ReactModule = require(script:FindFirstAncestor("BuildExperience").Parent.React)
+local LibraryBrowserViewModule = require(script.Parent.LibraryBrowserView)
+local UseLibraryBrowserViewModelModule = require(script.Parent.useLibraryBrowserViewModel)
 
-return function(p1)
-	-- upvalues: useLibraryBrowserViewModelModule (ref), reactModule (ref), libraryBrowserViewModule (ref)
-	return reactModule.createElement(libraryBrowserViewModule, useLibraryBrowserViewModelModule(p1))
+return function(p1) --[[ Line: 11 | Named "LibraryBrowserContainer" ]]
+	-- upvalues: UseLibraryBrowserViewModelModule (copy), ReactModule (copy), LibraryBrowserViewModule (copy)
+	return ReactModule.createElement(LibraryBrowserViewModule, (UseLibraryBrowserViewModelModule(p1)))
 end

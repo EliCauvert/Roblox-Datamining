@@ -1,70 +1,72 @@
-﻿local flyoutSidePanel = script:FindFirstAncestor("FlyoutSidePanel")
-local parent = flyoutSidePanel.Parent
-local reactModule = require(parent.React)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local appPage = require(parent.RobloxAppEnums).AppPage
-local navigateDown = require(parent.NavigationRodux).Thunks.NavigateDown
-local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
-local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
-local foundationModule = require(parent.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local text = foundationModule.Text
-local icon = foundationModule.Icon
-local iconSize = foundationModule.Enums.IconSize
-local iconName = foundationModule.Enums.IconName
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local flyoutAnalyticsModule = require(script.Parent.Parent.Analytics.FlyoutAnalytics)
-local usePlusReferralFlyoutNewBadgeModule = require(flyoutSidePanel.Hooks.usePlusReferralFlyoutNewBadge)
+﻿local FlyoutSidePanel = script:FindFirstAncestor("FlyoutSidePanel")
+local Parent = FlyoutSidePanel.Parent
+local ReactModule = require(Parent.React)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local NavigateDownFunction = require(Parent.NavigationRodux).Thunks.NavigateDown
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagSignalsNavP3Dispatch = SharedFlagsModule.FFlagSignalsNavP3Dispatch
+local FIntPlusReferralRewardRobux = SharedFlagsModule.FIntPlusReferralRewardRobux
+local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
+local FoundationModule = require(Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local Text = FoundationModule.Text
+local Icon = FoundationModule.Icon
+local IconSize = FoundationModule.Enums.IconSize
+local IconName = FoundationModule.Enums.IconName
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local FlyoutAnalyticsModule = require(script.Parent.Parent.Analytics.FlyoutAnalytics)
+local UsePlusReferralFlyoutNewBadgeModule = require(FlyoutSidePanel.Hooks.usePlusReferralFlyoutNewBadge)
 
-return function(p1)
-	-- upvalues: useTokens (ref), useDispatch (ref), useLocalization (ref), reactModule (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), flyoutAnalyticsModule (ref), usePlusReferralFlyoutNewBadgeModule (ref), foundationModule (ref), icon (ref), iconName (ref), iconSize (ref), text (ref)
-	local var2 = useTokens()
-	local var3 = useDispatch()
-	local var4 = useLocalization({
+return function(p1) --[[ Line: 30 | Named "PlusReferralBanner" ]]
+	-- upvalues: UseTokensFunction (copy), UseDispatchFunction (copy), UseLocalizationFunction (copy), FIntPlusReferralRewardRobux (copy), ReactModule (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), FlyoutAnalyticsModule (copy), UsePlusReferralFlyoutNewBadgeModule (copy), FoundationModule (copy), Icon (copy), IconName (copy), IconSize (copy), Text (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseDispatchResult = UseDispatchFunction()
+	local UseLocalizationResult = UseLocalizationFunction({
 		newBadgeText = "Feature.RobloxSubscription.Label.New",
 		bannerText = {
 			"Feature.RobloxSubscription.Heading.ReferralEntry",
-			robuxAmount = 100
+			amount = FIntPlusReferralRewardRobux
 		}
 	})
-	local var5 = usePlusReferralFlyoutNewBadgeModule(reactModule.useCallback(function()
-		-- upvalues: p1 (ref), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var3 (ref), navigateDown (copy), flyoutAnalyticsModule (copy)
+	local RobloxPlusUpsellImpressionCount1 = UsePlusReferralFlyoutNewBadgeModule(ReactModule.useCallback(function() --[[ Line: 38 ]]
+		-- upvalues: p1 (copy), AppPage (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval), FlyoutAnalyticsModule (upval)
 		p1.closeDrawer()
-		local t = { name = appPage.PlusReferralDashboard }
+		local config = { name = AppPage.PlusReferralDashboard }
 		
-		if fFlagSignalsNavP3Dispatch then
-			var1.down(var1.fromLegacyPage(t))
+		if FFlagSignalsNavP3Dispatch then
+			NavigationCommands.down(NavigationCommands.fromLegacyPage(config))
 		else
-			var3(navigateDown(t))
+			UseDispatchResult(NavigateDownFunction(config))
 		end
-		flyoutAnalyticsModule.onFlyoutContentItemClicked({ integrationId = "PlusReferral", source = "click" })
-	end, { p1.closeDrawer, var3 }), "RobloxPlusUpsellImpressionCount1")
+		FlyoutAnalyticsModule.onFlyoutContentItemClicked({ integrationId = "PlusReferral", source = "click" })
+	end, { p1.closeDrawer, UseDispatchResult }), "RobloxPlusUpsellImpressionCount1")
 	
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "row align-y-center gap-medium size-full-0 auto-y padding-x-medium padding-y-medium",
 		testId = "--core-ui-flyout-plus-referral",
-		onActivated = var5.onActivated,
+		onActivated = RobloxPlusUpsellImpressionCount1.onActivated,
 		LayoutOrder = p1.layoutOrder
 	}, {
-		PlusIcon = reactModule.createElement(icon, {
+		PlusIcon = ReactModule.createElement(Icon, {
 			LayoutOrder = 1,
-			style = var2.Color.Content.Emphasis,
-			name = iconName.RobloxPlus,
-			size = iconSize.Medium
+			style = UseTokensResult.Color.Content.Emphasis,
+			name = IconName.RobloxPlus,
+			size = IconSize.Medium
 		}),
-		BannerText = reactModule.createElement(text, {
+		BannerText = ReactModule.createElement(Text, {
 			tag = "fill auto-y text-body-small text-wrap text-align-x-left content-emphasis",
 			LayoutOrder = 2,
-			Text = var4.bannerText
+			Text = UseLocalizationResult.bannerText
 		}),
-		NewBadge = if var5.shouldShowNewBadge then reactModule.createElement(foundationModule.View, {
+		NewBadge = if RobloxPlusUpsellImpressionCount1.shouldShowNewBadge then ReactModule.createElement(FoundationModule.View, {
 			tag = "auto-xy padding-x-xsmall padding-y-xxsmall radius-circle bg-system-contrast",
 			LayoutOrder = 3
 		}, {
-			Text = reactModule.createElement(text, {
+			Text = ReactModule.createElement(Text, {
 				tag = "auto-xy text-title-small",
-				Text = var4.newBadgeText,
-				textStyle = var2.Color.Surface.Surface_0
+				Text = UseLocalizationResult.newBadgeText,
+				textStyle = UseTokensResult.Color.Surface.Surface_0
 			})
 		}) else nil
 	})

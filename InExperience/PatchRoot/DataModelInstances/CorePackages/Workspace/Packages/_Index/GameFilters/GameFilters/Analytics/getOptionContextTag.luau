@@ -1,12 +1,12 @@
 ﻿local _ = require(script:FindFirstAncestor("GameFilters").Parent.DiscoveryTypes)
 
-return function(p1, p2)
-	if p2 == nil then
+return function(p1, OptionId) --[[ Line: 6 ]]
+	if OptionId == nil then
 		return nil
 	end
-	for i, v in p1.filterOptions do
-		if v.optionId == p2 then
-			return if v.optionContextTag and v.optionContextTag ~= "" then v.optionContextTag else nil
+	for _, filterOption in p1.filterOptions do
+		if filterOption.optionId == OptionId then
+			return if filterOption.optionContextTag and filterOption.optionContextTag ~= "" then filterOption.optionContextTag else nil
 		end
 	end
 	return nil

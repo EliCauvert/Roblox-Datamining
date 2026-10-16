@@ -1,20 +1,20 @@
-﻿local parent = script.Parent.Parent
-local purchaseErrorModule = require(parent.Enums.PurchaseError)
-local promiseModule = require(parent.Promise)
-local fFlagAddPurchaseOptionForProvidingBalance = require(parent.Parent.SharedFlags).FFlagAddPurchaseOptionForProvidingBalance
+﻿local Parent = script.Parent.Parent
+local PurchaseErrorModule = require(Parent.Enums.PurchaseError)
+local PromiseModule = require(Parent.Promise)
+local FFlagAddPurchaseOptionForProvidingBalance = require(Parent.Parent.SharedFlags).FFlagAddPurchaseOptionForProvidingBalance
 
-return function(p1, p2, p3, p4, p5)
-	-- upvalues: fFlagAddPurchaseOptionForProvidingBalance (ref), promiseModule (ref), purchaseErrorModule (ref)
-	return if fFlagAddPurchaseOptionForProvidingBalance and p5 ~= nil then promiseModule.resolve({ hasFailed = false, robux = p5 }) else p1.getBalanceInfo():andThen(function(p6)
-		-- upvalues: p2 (ref), p3 (ref), promiseModule (copy)
+return function(p1, p2, p3, p4, Robux) --[[ Line: 10 | Named "getBalanceInfo" ]]
+	-- upvalues: FFlagAddPurchaseOptionForProvidingBalance (copy), PromiseModule (copy), PurchaseErrorModule (copy)
+	return if FFlagAddPurchaseOptionForProvidingBalance and Robux ~= nil then PromiseModule.resolve({ hasFailed = false, robux = Robux }) else p1.getBalanceInfo():andThen(function(Result) --[[ Line: 22 ]]
+		-- upvalues: p2 (copy), p3 (copy), PromiseModule (upval)
 		if p2.isStudio() and not p3 then
-			p6.robux = 2147483647
+			Result.robux = 2147483647
 		end
-		p6.hasFailed = false
+		Result.hasFailed = false
 		
-		return promiseModule.resolve(p6)
-	end):catch(function(_)
-		-- upvalues: p4 (ref), promiseModule (copy), purchaseErrorModule (copy)
-		return if p4 then promiseModule.resolve({ robux = 0, hasFailed = true }) else promiseModule.reject(purchaseErrorModule.UnknownFailure)
+		return PromiseModule.resolve(Result)
+	end):catch(function(_) --[[ Line: 33 ]]
+		-- upvalues: p4 (copy), PromiseModule (upval), PurchaseErrorModule (upval)
+		return if p4 then PromiseModule.resolve({ robux = 0, hasFailed = true }) else PromiseModule.reject(PurchaseErrorModule.UnknownFailure)
 	end)
 end

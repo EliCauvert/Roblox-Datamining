@@ -1,75 +1,73 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local parent = momentsCreation.Parent
-local localizationModule = require(parent.Localization)
-local momentsCommonModule = require(parent.MomentsCommon)
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local useLocalization = localizationModule.Hooks.useLocalization
-local useState = reactModule.useState
-local useSignalState = signalsReactModule.useSignalState
-local getCreationFlowStoreModule = require(momentsCreation.Stores.GetCreationFlowStore)
-local useCreationControllerModule = require(momentsCreation.CreationController.useCreationController)
-local fireAnalyticsEventModule = require(momentsCreation.Analytics.fireAnalyticsEvent)
-local makeCreationEventFieldsModule = require(momentsCreation.Analytics.makeCreationEventFields)
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local Parent = MomentsCreation.Parent
+local MomentsCommonModule = require(Parent.MomentsCommon)
+local UseLocalization = require(Parent.Localization).Hooks.useLocalization
+local UseStateFunction = require(Parent.React).useState
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local GetCreationFlowStoreModule = require(MomentsCreation.Stores.GetCreationFlowStore)
+local UseCreationControllerModule = require(MomentsCreation.CreationController.useCreationController)
+local FireAnalyticsEventModule = require(MomentsCreation.Analytics.fireAnalyticsEvent)
+local MakeCreationEventFieldsModule = require(MomentsCreation.Analytics.makeCreationEventFields)
 local _ = require(script.Parent.GeneratedTextFeedbackView)
-local eventNames = momentsCommonModule.Analytics.EventNames
-local sessionManager = momentsCommonModule.Analytics.SessionManager
-local funnelEventNames = momentsCommonModule.Analytics.FunnelEventNames
-local t = {
+local EventNames = MomentsCommonModule.Analytics.EventNames
+local SessionManager = MomentsCommonModule.Analytics.SessionManager
+local FunnelEventNames = MomentsCommonModule.Analytics.FunnelEventNames
+local config = {
 	disclosure = "Feature.Moments.Description.GenerateTextFeedbackDisclosure"
 }
 
-local function _(p1)
-	-- upvalues: sessionManager (ref), funnelEventNames (ref), fireAnalyticsEventModule (ref), makeCreationEventFieldsModule (ref)
-	fireAnalyticsEventModule(p1, makeCreationEventFieldsModule.makeCreationBaseFields(sessionManager.getSessionId(funnelEventNames.FunnelTypes.CreationFlow)))
+local function _(p1) --[[ Line: 36 | Named "fireFeedbackEvent" ]]
+	-- upvalues: SessionManager (copy), FunnelEventNames (copy), FireAnalyticsEventModule (copy), MakeCreationEventFieldsModule (copy)
+	FireAnalyticsEventModule(p1, MakeCreationEventFieldsModule.makeCreationBaseFields((SessionManager.getSessionId(FunnelEventNames.FunnelTypes.CreationFlow))))
 end
 
-return function(p1)
-	-- upvalues: getCreationFlowStoreModule (ref), useCreationControllerModule (ref), useLocalization (ref), t (ref), useSignalState (ref), useState (ref), eventNames (ref), sessionManager (ref), funnelEventNames (ref), fireAnalyticsEventModule (ref), makeCreationEventFieldsModule (ref)
-	local var1 = getCreationFlowStoreModule(false)
-	local var2 = useCreationControllerModule()
-	local ok, status = pcall(useLocalization, t)
-	local var3 = if ok then status else {}
-	local var4 = useSignalState(var1.getGeneratedDescription)
-	local var5, var6 = useState(nil)
-	local var7, var8 = useState(false)
+return function(p1) --[[ Line: 41 | Named "useGeneratedTextFeedbackViewModel" ]]
+	-- upvalues: GetCreationFlowStoreModule (copy), UseCreationControllerModule (copy), UseLocalization (copy), config (copy), UseSignalStateFunction (copy), UseStateFunction (copy), EventNames (copy), SessionManager (copy), FunnelEventNames (copy), FireAnalyticsEventModule (copy), MakeCreationEventFieldsModule (copy)
+	local CreationFlowStoreModule = GetCreationFlowStoreModule(false)
+	local UseCreationControllerModuleResult = UseCreationControllerModule()
+	local Success, Result = pcall(UseLocalization, config)
+	local Result1 = if Success then Result else {}
+	local UseSignalStateResult = UseSignalStateFunction(CreationFlowStoreModule.getGeneratedDescription)
+	local UseStateResult, UseStateResult2 = UseStateFunction(nil)
+	local UseStateResult1, UseStateResult2_1 = UseStateFunction(false)
 	
 	return {
-		visible = var4 ~= nil,
+		visible = UseSignalStateResult ~= nil,
 		layoutOrder = p1.layoutOrder,
-		disclosureText = var3.disclosure or "",
-		selectedAction = var5,
-		showReasonDialog = var7,
-		onThumbsUp = function()
-			-- upvalues: var5 (ref), var6 (ref), eventNames (copy), sessionManager (copy), funnelEventNames (copy), fireAnalyticsEventModule (copy), makeCreationEventFieldsModule (copy), var2 (ref)
-			if var5 == "thumbs_up" then
+		disclosureText = Result1.disclosure or "",
+		selectedAction = UseStateResult,
+		showReasonDialog = UseStateResult1,
+		onThumbsUp = function() --[[ Line: 55 ]]
+			-- upvalues: UseStateResult (copy), UseStateResult2 (copy), EventNames (upval), SessionManager (upval), FunnelEventNames (upval), FireAnalyticsEventModule (upval), MakeCreationEventFieldsModule (upval), UseCreationControllerModuleResult (copy)
+			if UseStateResult ~= "thumbs_up" then
+				UseStateResult2("thumbs_up")
+				FireAnalyticsEventModule(EventNames.EditingFlowGenerateTextFeedbackThumbsUp, MakeCreationEventFieldsModule.makeCreationBaseFields((SessionManager.getSessionId(FunnelEventNames.FunnelTypes.CreationFlow))))
+				UseCreationControllerModuleResult.submitGeneratedTextFeedback("thumbs_up")
+				
 				return
 			end
-			var6("thumbs_up")
-			fireAnalyticsEventModule(eventNames.EditingFlowGenerateTextFeedbackThumbsUp, makeCreationEventFieldsModule.makeCreationBaseFields(sessionManager.getSessionId(funnelEventNames.FunnelTypes.CreationFlow)))
-			var2.submitGeneratedTextFeedback("thumbs_up")
 		end,
-		onThumbsDown = function()
-			-- upvalues: var8 (ref)
-			var8(true)
+		onThumbsDown = function() --[[ Line: 64 ]]
+			-- upvalues: UseStateResult2_1 (copy)
+			UseStateResult2_1(true)
 		end,
-		onNotHelpful = function()
-			-- upvalues: var6 (ref), var8 (ref), eventNames (copy), sessionManager (copy), funnelEventNames (copy), fireAnalyticsEventModule (copy), makeCreationEventFieldsModule (copy), var2 (ref)
-			var6("thumbs_down")
-			var8(false)
-			fireAnalyticsEventModule(eventNames.EditingFlowGenerateTextFeedbackThumbsDownNotHelpful, makeCreationEventFieldsModule.makeCreationBaseFields(sessionManager.getSessionId(funnelEventNames.FunnelTypes.CreationFlow)))
-			var2.submitGeneratedTextFeedback("not_helpful")
+		onNotHelpful = function() --[[ Line: 68 ]]
+			-- upvalues: UseStateResult2 (copy), UseStateResult2_1 (copy), EventNames (upval), SessionManager (upval), FunnelEventNames (upval), FireAnalyticsEventModule (upval), MakeCreationEventFieldsModule (upval), UseCreationControllerModuleResult (copy)
+			UseStateResult2("thumbs_down")
+			UseStateResult2_1(false)
+			FireAnalyticsEventModule(EventNames.EditingFlowGenerateTextFeedbackThumbsDownNotHelpful, MakeCreationEventFieldsModule.makeCreationBaseFields((SessionManager.getSessionId(FunnelEventNames.FunnelTypes.CreationFlow))))
+			UseCreationControllerModuleResult.submitGeneratedTextFeedback("not_helpful")
 		end,
-		onPolicyViolation = function()
-			-- upvalues: var6 (ref), var8 (ref), eventNames (copy), sessionManager (copy), funnelEventNames (copy), fireAnalyticsEventModule (copy), makeCreationEventFieldsModule (copy), var2 (ref)
-			var6("thumbs_down")
-			var8(false)
-			fireAnalyticsEventModule(eventNames.EditingFlowGenerateTextFeedbackThumbsDownPolicy, makeCreationEventFieldsModule.makeCreationBaseFields(sessionManager.getSessionId(funnelEventNames.FunnelTypes.CreationFlow)))
-			var2.submitGeneratedTextFeedback("policy_violation")
+		onPolicyViolation = function() --[[ Line: 75 ]]
+			-- upvalues: UseStateResult2 (copy), UseStateResult2_1 (copy), EventNames (upval), SessionManager (upval), FunnelEventNames (upval), FireAnalyticsEventModule (upval), MakeCreationEventFieldsModule (upval), UseCreationControllerModuleResult (copy)
+			UseStateResult2("thumbs_down")
+			UseStateResult2_1(false)
+			FireAnalyticsEventModule(EventNames.EditingFlowGenerateTextFeedbackThumbsDownPolicy, MakeCreationEventFieldsModule.makeCreationBaseFields((SessionManager.getSessionId(FunnelEventNames.FunnelTypes.CreationFlow))))
+			UseCreationControllerModuleResult.submitGeneratedTextFeedback("policy_violation")
 		end,
-		onDismissDialog = function()
-			-- upvalues: var8 (ref)
-			var8(false)
+		onDismissDialog = function() --[[ Line: 82 ]]
+			-- upvalues: UseStateResult2_1 (copy)
+			UseStateResult2_1(false)
 		end
 	}
 end

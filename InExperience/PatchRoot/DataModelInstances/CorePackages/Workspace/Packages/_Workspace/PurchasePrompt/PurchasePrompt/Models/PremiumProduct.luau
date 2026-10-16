@@ -1,24 +1,24 @@
-﻿local purchasePrompt = script:FindFirstAncestor("PurchasePrompt")
-local t = require(purchasePrompt.Parent.PurchasePromptDeps).t
-local _ = require(purchasePrompt.strict)
-local var1 = t.interface({
-	productId = t.number,
-	mobileProductId = t.string,
-	robuxAmount = t.number,
-	isSubscriptionOnly = t.boolean,
-	premiumFeatureTypeName = t.string,
-	description = t.string,
-	price = t.interface({
-		amount = t.number,
-		currency = t.interface({ currencySymbol = t.string })
+﻿local PurchasePrompt = script:FindFirstAncestor("PurchasePrompt")
+local T = require(PurchasePrompt.Parent.PurchasePromptDeps).t
+local _ = require(PurchasePrompt.strict)
+local InterfaceResult = T.interface({
+	productId = T.number,
+	mobileProductId = T.string,
+	robuxAmount = T.number,
+	isSubscriptionOnly = T.boolean,
+	premiumFeatureTypeName = T.string,
+	description = T.string,
+	price = T.interface({
+		amount = T.number,
+		currency = T.interface({ currencySymbol = T.string })
 	})
 })
 
-return function(p1)
-	-- upvalues: var1 (ref)
-	local var2, _ = var1(p1)
+return function(p1) --[[ Line: 29 ]]
+	-- upvalues: InterfaceResult (copy)
+	local InterfaceResultResult, _ = InterfaceResult(p1)
 	
-	return if var2 then {
+	return if InterfaceResultResult then {
 		productId = p1.productId,
 		mobileProductId = p1.mobileProductId,
 		robuxAmount = p1.robuxAmount,

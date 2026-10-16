@@ -1,70 +1,70 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local inGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
-local roact = inGameMenuDependenciesModule.Roact
-local t = inGameMenuDependenciesModule.t
-local userGameSettingsService = UserSettings():GetService("UserGameSettings")
-local masterVolumePropertyChangedSignal = userGameSettingsService:GetPropertyChangedSignal("MasterVolume")
-local parent = script.Parent.Parent.Parent
-local fFlagRenameVolumeToMainVolumeModule = require(coreGuiService.RobloxGui.Modules.Flags.FFlagRenameVolumeToMainVolume)
-local externalEventConnectionModule = require(parent.Utility.ExternalEventConnection)
-local sliderEntryModule = require(script.Parent.SliderEntry)
-local sendAnalyticsModule = require(parent.Utility.SendAnalytics)
-local constantsModule = require(parent.Resources.Constants)
+﻿local CoreGui = game:GetService("CoreGui")
+local InGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
+local Roact = InGameMenuDependenciesModule.Roact
+local T = InGameMenuDependenciesModule.t
+local UserGameSettings = UserSettings():GetService("UserGameSettings")
+local MasterVolumePropertyChangedSignal = UserGameSettings:GetPropertyChangedSignal("MasterVolume")
+local Parent = script.Parent.Parent.Parent
+local FFlagRenameVolumeToMainVolumeModule = require(CoreGui.RobloxGui.Modules.Flags.FFlagRenameVolumeToMainVolume)
+local ExternalEventConnectionModule = require(Parent.Utility.ExternalEventConnection)
+local SliderEntryModule = require(script.Parent.SliderEntry)
+local SendAnalyticsModule = require(Parent.Utility.SendAnalytics)
+local ConstantsModule = require(Parent.Resources.Constants)
 
-if coreGuiService.RobloxGui:FindFirstChild("Sounds") == nil then
-	local sounds = Instance.new("Folder")
-	sounds.Name = "Sounds"
-	sounds.Parent = coreGuiService.RobloxGui
+if CoreGui.RobloxGui:FindFirstChild("Sounds") == nil then
+	local Sounds = Instance.new("Folder")
+	Sounds.Name = "Sounds"
+	Sounds.Parent = CoreGui.RobloxGui
 end
-local volumeChangeSound = Instance.new("Sound", coreGuiService.RobloxGui.Sounds)
-volumeChangeSound.Name = "VolumeChangeSound"
-volumeChangeSound.Volume = 1
-volumeChangeSound.SoundId = "rbxasset://sounds/uuhhh.mp3"
-local volumeEntry = roact.PureComponent:extend("VolumeEntry")
-volumeEntry.validateProps = t.strictInterface({
-	LayoutOrder = t.integer,
-	canCaptureFocus = t.optional(t.boolean),
-	isMenuOpen = t.optional(t.boolean),
-	buttonRef = t.optional(t.table)
+local VolumeChangeSound = Instance.new("Sound", CoreGui.RobloxGui.Sounds)
+VolumeChangeSound.Name = "VolumeChangeSound"
+VolumeChangeSound.Volume = 1
+VolumeChangeSound.SoundId = "rbxasset://sounds/uuhhh.mp3"
+local VolumeEntry = Roact.PureComponent:extend("VolumeEntry")
+VolumeEntry.validateProps = T.strictInterface({
+	LayoutOrder = T.integer,
+	canCaptureFocus = T.optional(T.boolean),
+	isMenuOpen = T.optional(T.boolean),
+	buttonRef = T.optional(T.table)
 })
 
-function volumeEntry.init(p1)
-	-- upvalues: userGameSettingsService (ref)
-	function p0.onVolumeChanged()
-		-- upvalues: p1 (ref), userGameSettingsService (copy)
+function VolumeEntry.init(p1) --[[ Line: 41 ]]
+	-- upvalues: UserGameSettings (copy)
+	function p1.onVolumeChanged() --[[ Line: 42 ]]
+		-- upvalues: p1 (copy), UserGameSettings (upval)
 		p1:setState({
-			volume = math.floor(userGameSettingsService.MasterVolume * 10 + 0.5)
+			volume = math.floor(UserGameSettings.MasterVolume * 10 + 0.5)
 		})
 	end
 	
 	p1.onVolumeChanged()
 end
 
-function volumeEntry.render(p1)
-	-- upvalues: roact (ref), sliderEntryModule (ref), fFlagRenameVolumeToMainVolumeModule (ref), userGameSettingsService (ref), volumeChangeSound (ref), sendAnalyticsModule (ref), constantsModule (ref), externalEventConnectionModule (ref), masterVolumePropertyChangedSignal (ref)
-	return roact.createFragment({
-		VolumeSlider = roact.createElement(sliderEntryModule, {
+function VolumeEntry.render(p1) --[[ Line: 51 ]]
+	-- upvalues: Roact (copy), SliderEntryModule (copy), FFlagRenameVolumeToMainVolumeModule (copy), UserGameSettings (copy), VolumeChangeSound (copy), SendAnalyticsModule (copy), ConstantsModule (copy), ExternalEventConnectionModule (copy), MasterVolumePropertyChangedSignal (copy)
+	return Roact.createFragment({
+		VolumeSlider = Roact.createElement(SliderEntryModule, {
 			min = 0,
 			max = 10,
 			stepInterval = 1,
-			labelKey = if fFlagRenameVolumeToMainVolumeModule then "CoreScripts.InGameMenu.GameSettings.MainVolume" else "CoreScripts.InGameMenu.GameSettings.Volume",
+			labelKey = if FFlagRenameVolumeToMainVolumeModule then "CoreScripts.InGameMenu.GameSettings.MainVolume" else "CoreScripts.InGameMenu.GameSettings.Volume",
 			LayoutOrder = p1.props.LayoutOrder,
 			value = p1.state.volume,
-			valueChanged = function(p2)
-				-- upvalues: userGameSettingsService (copy), volumeChangeSound (copy), sendAnalyticsModule (copy), constantsModule (copy)
-				userGameSettingsService.MasterVolume = p2 / 10
-				volumeChangeSound:Play()
-				sendAnalyticsModule(constantsModule.AnalyticsSettingsChangeName, nil, {}, true)
+			valueChanged = function(p2: number) --[[ Line: 62 ]]
+				-- upvalues: UserGameSettings (upval), VolumeChangeSound (upval), SendAnalyticsModule (upval), ConstantsModule (upval)
+				UserGameSettings.MasterVolume = p2 / 10
+				VolumeChangeSound:Play()
+				SendAnalyticsModule(ConstantsModule.AnalyticsSettingsChangeName, nil, {}, true)
 			end,
 			canCaptureFocus = p1.props.canCaptureFocus,
 			isMenuOpen = p1.props.isMenuOpen,
 			buttonRef = p1.props.buttonRef
 		}),
-		VolumeListener = roact.createElement(externalEventConnectionModule, {
-			event = masterVolumePropertyChangedSignal,
+		VolumeListener = Roact.createElement(ExternalEventConnectionModule, {
+			event = MasterVolumePropertyChangedSignal,
 			callback = p1.onVolumeChanged
 		})
 	})
 end
 
-return volumeEntry
+return VolumeEntry

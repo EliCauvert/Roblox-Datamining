@@ -1,14 +1,14 @@
-﻿local parent = script:FindFirstAncestor("DataHydration").Parent
-local httpRequestModule = require(parent.HttpRequest)
-local _ = require(parent.Http)
-local userVoteFeedbackMetdataUrlBuilderModule = require(script.Parent.UserVoteFeedbackMetdataUrlBuilder)
+﻿local Parent = script:FindFirstAncestor("DataHydration").Parent
+local HttpRequestModule = require(Parent.HttpRequest)
+local _ = require(Parent.Http)
+local UserVoteFeedbackMetdataUrlBuilderModule = require(script.Parent.UserVoteFeedbackMetdataUrlBuilder)
 
-return function(p1)
-	-- upvalues: userVoteFeedbackMetdataUrlBuilderModule (ref), httpRequestModule (ref)
-	return httpRequestModule.config({
-		requestFunction = function(p2, p3, p4)
-			-- upvalues: httpRequestModule (copy)
-			return httpRequestModule.requestFunctions.HttpRbxApi(p2, p3, p4)
+return function(p1) --[[ Line: 13 | Named "fetchUserVoteFeedbackMetadata" ]]
+	-- upvalues: UserVoteFeedbackMetdataUrlBuilderModule (copy), HttpRequestModule (copy)
+	return HttpRequestModule.config({
+		requestFunction = function(p2, p3, p4) --[[ Line: 17 ]]
+			-- upvalues: HttpRequestModule (upval)
+			return HttpRequestModule.requestFunctions.HttpRbxApi(p2, p3, p4)
 		end
-	})(userVoteFeedbackMetdataUrlBuilderModule.buildUserVoteFeedbackMetadataUrl(p1), "GET")
+	})(UserVoteFeedbackMetdataUrlBuilderModule.buildUserVoteFeedbackMetadataUrl(p1), "GET")
 end

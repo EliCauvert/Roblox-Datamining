@@ -1,10 +1,10 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local _ = require(dataHydration.Parent.HttpClient)
-local createSingleEntityResolverModule = require(dataHydration.createSingleEntityResolver)
-local fetchExperienceGenreModule = require(script.Parent.fetchExperienceGenre)
-local syncExperienceGenreToGameInfo = require(script.Parent.syncExperienceGenreToGameInfo).syncExperienceGenreToGameInfo
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local _ = require(DataHydration.Parent.HttpClient)
+local CreateSingleEntityResolverModule = require(DataHydration.createSingleEntityResolver)
+local FetchExperienceGenreModule = require(script.Parent.fetchExperienceGenre)
+local SyncExperienceGenreToGameInfoFunction = require(script.Parent.syncExperienceGenreToGameInfo).syncExperienceGenreToGameInfo
 local _ = require(script.Parent.ExperienceGenreStoreTypes)
-local t = {
+local config = {
 	includeGenreTaxonomyVersion = true,
 	includeUpdateLockExpirationTime = true,
 	includeVerificationState = true,
@@ -13,32 +13,32 @@ local t = {
 	includeNotifyGenreChange = true
 }
 
-return function(p1)
-	-- upvalues: t (ref), createSingleEntityResolverModule (ref), fetchExperienceGenreModule (ref), syncExperienceGenreToGameInfo (ref)
-	p1 = p1 or {}
-	local t_1 = { network = p1.network, baseUrl = p1.baseUrl }
-	local defaultGetOptions = p1.defaultGetOptions or t
-	local var1 = createSingleEntityResolverModule(function(p2)
-		-- upvalues: fetchExperienceGenreModule (copy), defaultGetOptions (ref), t_1 (ref)
-		return fetchExperienceGenreModule.fetchExperienceGenre(p2, defaultGetOptions, t_1)
+return function(p1) --[[ Line: 31 | Named "createExperienceGenreStore" ]]
+	-- upvalues: config (copy), CreateSingleEntityResolverModule (copy), FetchExperienceGenreModule (copy), SyncExperienceGenreToGameInfoFunction (copy)
+	local P0 = p1 or {}
+	local config1 = { network = P0.network, baseUrl = P0.baseUrl }
+	local DefaultGetOptions = P0.defaultGetOptions or config
+	local SingleEntityResolverModule = CreateSingleEntityResolverModule(function(p2) --[[ Line: 36 ]]
+		-- upvalues: FetchExperienceGenreModule (upval), DefaultGetOptions (copy), config1 (copy)
+		return FetchExperienceGenreModule.fetchExperienceGenre(p2, DefaultGetOptions, config1)
 	end)
 	
 	return {
-		getExperienceGenre = var1.get,
-		fetchExperienceGenre = var1.fetch,
-		getAndFetchExperienceGenre = var1.getAndFetch,
-		setExperienceGenre = function(value)
-			-- upvalues: fetchExperienceGenreModule (copy), t_1 (ref), var1 (ref), syncExperienceGenreToGameInfo (copy)
-			return fetchExperienceGenreModule.setExperienceGenre(value, t_1):andThen(function(p2)
-				-- upvalues: var1 (copy), value (ref), syncExperienceGenreToGameInfo (copy)
-				var1.update(value.universeId, p2)
-				syncExperienceGenreToGameInfo(value.universeId, nil, p2.genre)
+		getExperienceGenre = SingleEntityResolverModule.get,
+		fetchExperienceGenre = SingleEntityResolverModule.fetch,
+		getAndFetchExperienceGenre = SingleEntityResolverModule.getAndFetch,
+		setExperienceGenre = function(p2) --[[ Line: 40 ]]
+			-- upvalues: FetchExperienceGenreModule (upval), config1 (copy), SingleEntityResolverModule (copy), SyncExperienceGenreToGameInfoFunction (upval)
+			return FetchExperienceGenreModule.setExperienceGenre(p2, config1):andThen(function(Result) --[[ Line: 41 ]]
+				-- upvalues: SingleEntityResolverModule (upval), p2 (copy), SyncExperienceGenreToGameInfoFunction (upval)
+				SingleEntityResolverModule.update(p2.universeId, Result)
+				SyncExperienceGenreToGameInfoFunction(p2.universeId, nil, Result.genre)
 				
-				return p2
+				return Result
 			end)
 		end,
-		updateExperienceGenre = var1.update,
-		clear = var1.clear,
-		dispose = var1.dispose
+		updateExperienceGenre = SingleEntityResolverModule.update,
+		clear = SingleEntityResolverModule.clear,
+		dispose = SingleEntityResolverModule.dispose
 	}
 end

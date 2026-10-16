@@ -1,6 +1,6 @@
-﻿local parent = script.Parent.Parent
-local _ = require(parent.Types)
+﻿local Parent = script.Parent.Parent
+local _ = require(Parent.Types)
 
-return require(parent.Parent.Rodux).makeActionCreator(script.Name, function(p1)
-	return { selectedCaptures = p1 }
+return require(Parent.Parent.Rodux).makeActionCreator(script.Name, function(SelectedCaptures) --[[ Line: 12 ]]
+	return { selectedCaptures = SelectedCaptures }
 end)

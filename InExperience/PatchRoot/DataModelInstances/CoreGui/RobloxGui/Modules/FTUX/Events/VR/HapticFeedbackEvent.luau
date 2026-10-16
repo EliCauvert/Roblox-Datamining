@@ -1,16 +1,16 @@
-﻿local hapticService = game:GetService("HapticService")
+﻿local HapticsService = game:GetService("HapticService")
 local _ = require(script.Parent.Parent.EventType)
 
 return {
 	Name = "HapticFeedbackEvent",
-	StartEvent = function()
-		-- upvalues: hapticService (ref)
-		local gamepad1 = Enum.UserInputType.Gamepad1
-		local gamepad2 = Enum.UserInputType.Gamepad2
-		hapticService:SetMotor(gamepad1, Enum.VibrationMotor.Large, 10)
-		hapticService:SetMotor(gamepad2, Enum.VibrationMotor.Large, 10)
+	StartEvent = function() --[[ Line: 10 ]]
+		-- upvalues: HapticsService (copy)
+		local Gamepad1 = Enum.UserInputType.Gamepad1
+		local Gamepad2 = Enum.UserInputType.Gamepad2
+		HapticsService:SetMotor(Gamepad1, Enum.VibrationMotor.Large, 10)
+		HapticsService:SetMotor(Gamepad2, Enum.VibrationMotor.Large, 10)
 		task.wait(1)
-		hapticService:SetMotor(gamepad1, Enum.VibrationMotor.Large, 0)
-		hapticService:SetMotor(gamepad2, Enum.VibrationMotor.Large, 0)
+		HapticsService:SetMotor(Gamepad1, Enum.VibrationMotor.Large, 0)
+		HapticsService:SetMotor(Gamepad2, Enum.VibrationMotor.Large, 0)
 	end
 }

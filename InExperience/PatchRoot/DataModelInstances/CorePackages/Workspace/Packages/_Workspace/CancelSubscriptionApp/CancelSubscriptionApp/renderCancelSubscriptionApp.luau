@@ -1,72 +1,72 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local localizationService = game:GetService("LocalizationService")
-local cancelSubscriptionApp = script:FindFirstAncestor("CancelSubscriptionApp")
-local parent = cancelSubscriptionApp.Parent
-local roduxModule = require(parent.Rodux)
-local reactRobloxModule = require(parent.ReactRoblox)
-local roactRoduxModule = require(parent.RoactRodux)
-local reactModule = require(parent.React)
-local httpRequestModule = require(parent.HttpRequest)
-local designTokenProvider = require(parent.Style).DesignTokenProvider
-local appStyleProvider = require(parent.Style).AppStyleProvider
-local localizationProvider = require(parent.Localization).LocalizationProvider
-local localization = require(parent.InExperienceLocales).Localization
-local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
-local provider = require(parent.FocusNavigationUtils).FocusNavigableSurfaceRegistry.Provider
-local foundationModule = require(parent.Foundation)
-local UIBloxModule = require(parent.UIBlox)
-local selectionCursorProvider = UIBloxModule.App.SelectionImage.SelectionCursorProvider
-local cursorProvider = UIBloxModule.App.SelectionCursor.CursorProvider
-local cancelSubscriptionReducerModule = require(cancelSubscriptionApp.Store.Reducers.CancelSubscriptionReducer)
-local cancelSubscriptionAppModule = require(cancelSubscriptionApp.CancelSubscriptionApp)
-local networkContext = require(parent.EconomyCommonCoreScriptHooks).NetworkContext
-local fFlagLuaAppDefaultHttpRetry = require(parent.SharedFlags).FFlagLuaAppDefaultHttpRetry
-local t = { themeName = "dark", fontName = "gotham" }
+﻿local CoreGui = game:GetService("CoreGui")
+local LocalizationService = game:GetService("LocalizationService")
+local CancelSubscriptionApp = script:FindFirstAncestor("CancelSubscriptionApp")
+local Parent = CancelSubscriptionApp.Parent
+local RoduxModule = require(Parent.Rodux)
+local ReactRobloxModule = require(Parent.ReactRoblox)
+local RoactRoduxModule = require(Parent.RoactRodux)
+local ReactModule = require(Parent.React)
+local HttpRequestModule = require(Parent.HttpRequest)
+local DesignTokenProvider = require(Parent.Style).DesignTokenProvider
+local AppStyleProvider = require(Parent.Style).AppStyleProvider
+local LocalizationProvider = require(Parent.Localization).LocalizationProvider
+local Localization = require(Parent.InExperienceLocales).Localization
+local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
+local Provider = require(Parent.FocusNavigationUtils).FocusNavigableSurfaceRegistry.Provider
+local FoundationModule = require(Parent.Foundation)
+local UIBloxModule = require(Parent.UIBlox)
+local SelectionCursorProvider = UIBloxModule.App.SelectionImage.SelectionCursorProvider
+local CursorProvider = UIBloxModule.App.SelectionCursor.CursorProvider
+local CancelSubscriptionReducerModule = require(CancelSubscriptionApp.Store.Reducers.CancelSubscriptionReducer)
+local CancelSubscriptionAppModule = require(CancelSubscriptionApp.CancelSubscriptionApp)
+local NetworkContext = require(Parent.EconomyCommonCoreScriptHooks).NetworkContext
+local FFlagLuaAppDefaultHttpRetry = require(Parent.SharedFlags).FFlagLuaAppDefaultHttpRetry
+local Style = { themeName = "dark", fontName = "gotham" }
 
-local function _()
-	-- upvalues: reactFocusNavigationModule (ref)
-	return reactFocusNavigationModule.FocusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui)
+local function _() --[[ Line: 35 | Named "createFocusNavigationService" ]]
+	-- upvalues: ReactFocusNavigationModule (copy)
+	return ReactFocusNavigationModule.FocusNavigationService.new(ReactFocusNavigationModule.EngineInterface.CoreGui)
 end
 
-local function createNetworkImpl()
-	-- upvalues: httpRequestModule (ref), fFlagLuaAppDefaultHttpRetry (ref)
-	return httpRequestModule.config({
-		requestFunction = function(p1, p2, p3)
-			-- upvalues: httpRequestModule (copy)
-			return httpRequestModule.requestFunctions.HttpRbxApi(p1, p2, p3)
+local function createNetworkImpl() --[[ Line: 39 ]]
+	-- upvalues: HttpRequestModule (copy), FFlagLuaAppDefaultHttpRetry (copy)
+	return HttpRequestModule.config({
+		requestFunction = function(p1, p2, p3) --[[ Line: 41 ]]
+			-- upvalues: HttpRequestModule (upval)
+			return (HttpRequestModule.requestFunctions.HttpRbxApi(p1, p2, p3))
 		end,
-		maxRetryCount = if fFlagLuaAppDefaultHttpRetry then game:DefineFastInt("RenderCancelSubscriptionAppHttpRetryCount", 4) else nil
+		maxRetryCount = if FFlagLuaAppDefaultHttpRetry then game:DefineFastInt("RenderCancelSubscriptionAppHttpRetryCount", 4) else nil
 	})
 end
 
-local _ = function()
-	-- upvalues: roduxModule (ref), cancelSubscriptionReducerModule (ref)
-	return roduxModule.Store.new(cancelSubscriptionReducerModule, nil, { roduxModule.makeThunkMiddleware() })
+local _ = function() --[[ Line: 51 | Named "createStore" ]]
+	-- upvalues: RoduxModule (copy), CancelSubscriptionReducerModule (copy)
+	return RoduxModule.Store.new(CancelSubscriptionReducerModule, nil, { RoduxModule.makeThunkMiddleware() })
 end
 
-return function()
-	-- upvalues: coreGuiService (ref), roduxModule (ref), cancelSubscriptionReducerModule (ref), createNetworkImpl (ref), reactFocusNavigationModule (ref), reactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), appStyleProvider (ref), t (ref), networkContext (ref), roactRoduxModule (ref), designTokenProvider (ref), selectionCursorProvider (ref), cursorProvider (ref), provider (ref), cancelSubscriptionAppModule (ref), foundationModule (ref), reactRobloxModule (ref)
-	local cancelSubscriptionApp = Instance.new("Folder")
-	cancelSubscriptionApp.Name = "CancelSubscriptionApp"
-	cancelSubscriptionApp.Parent = coreGuiService
-	local var1 = reactRobloxModule.createRoot(cancelSubscriptionApp)
-	var1:render(reactModule.createElement(foundationModule.FoundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, {
-		LocalizationProvider = reactModule.createElement(localizationProvider, {
-			localization = localization.new(localizationService.RobloxLocaleId)
+return function() --[[ Line: 57 | Named "renderCancelSubscriptionApp" ]]
+	-- upvalues: CoreGui (copy), RoduxModule (copy), CancelSubscriptionReducerModule (copy), createNetworkImpl (copy), ReactFocusNavigationModule (copy), ReactModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), AppStyleProvider (copy), Style (copy), NetworkContext (copy), RoactRoduxModule (copy), DesignTokenProvider (copy), SelectionCursorProvider (copy), CursorProvider (copy), Provider (copy), CancelSubscriptionAppModule (copy), FoundationModule (copy), ReactRobloxModule (copy)
+	local CancelSubscriptionApp = Instance.new("Folder")
+	CancelSubscriptionApp.Name = "CancelSubscriptionApp"
+	CancelSubscriptionApp.Parent = CoreGui
+	local Root = ReactRobloxModule.createRoot(CancelSubscriptionApp)
+	Root:render((ReactModule.createElement(FoundationModule.FoundationProvider, { colorMode = FoundationModule.Enums.ColorMode.Dark }, {
+		LocalizationProvider = ReactModule.createElement(LocalizationProvider, {
+			localization = Localization.new(LocalizationService.RobloxLocaleId)
 		}, {
-			StyleProvider = reactModule.createElement(appStyleProvider, { style = t }, {
-				NetworkProvider = reactModule.createElement(networkContext.Provider, { value = createNetworkImpl() }, {
-					StoreProvider = reactModule.createElement(roactRoduxModule.StoreProvider, {
-						store = roduxModule.Store.new(cancelSubscriptionReducerModule, nil, { roduxModule.makeThunkMiddleware() })
+			StyleProvider = ReactModule.createElement(AppStyleProvider, { style = Style }, {
+				NetworkProvider = ReactModule.createElement(NetworkContext.Provider, { value = createNetworkImpl() }, {
+					StoreProvider = ReactModule.createElement(RoactRoduxModule.StoreProvider, {
+						store = RoduxModule.Store.new(CancelSubscriptionReducerModule, nil, { RoduxModule.makeThunkMiddleware() })
 					}, {
-						DesignTokenProvider = reactModule.createElement(designTokenProvider, { tokenMappers = {} }, {
-							CursorProvider = reactModule.createElement(selectionCursorProvider, {}, {
-								NewCursorProvider = reactModule.createElement(cursorProvider, {}, {
-									FocusNavigationProvider = reactModule.createElement(reactFocusNavigationModule.FocusNavigationContext.Provider, {
-										value = reactFocusNavigationModule.FocusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui)
+						DesignTokenProvider = ReactModule.createElement(DesignTokenProvider, { tokenMappers = {} }, {
+							CursorProvider = ReactModule.createElement(SelectionCursorProvider, {}, {
+								NewCursorProvider = ReactModule.createElement(CursorProvider, {}, {
+									FocusNavigationProvider = ReactModule.createElement(ReactFocusNavigationModule.FocusNavigationContext.Provider, {
+										value = ReactFocusNavigationModule.FocusNavigationService.new(ReactFocusNavigationModule.EngineInterface.CoreGui)
 									}, {
-										FocusNavigationRegistryProvider = reactModule.createElement(provider, nil, {
-											CancelSubscriptionApp = reactModule.createElement(cancelSubscriptionAppModule)
+										FocusNavigationRegistryProvider = ReactModule.createElement(Provider, nil, {
+											CancelSubscriptionApp = ReactModule.createElement(CancelSubscriptionAppModule)
 										})
 									})
 								})
@@ -76,7 +76,7 @@ return function()
 				})
 			})
 		})
-	}))
+	})))
 	
-	return var1
+	return Root
 end

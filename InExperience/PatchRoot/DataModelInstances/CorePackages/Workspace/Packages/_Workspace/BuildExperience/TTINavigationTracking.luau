@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.TTINavigationTracking.TTINavigationTracking)
+﻿return (require(script.Parent.Parent.Parent._Index.TTINavigationTracking.TTINavigationTracking))

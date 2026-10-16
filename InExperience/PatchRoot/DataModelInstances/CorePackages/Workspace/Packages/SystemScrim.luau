@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.SystemScrim.SystemScrim)
+﻿return (require(script.Parent._Workspace.SystemScrim.SystemScrim))

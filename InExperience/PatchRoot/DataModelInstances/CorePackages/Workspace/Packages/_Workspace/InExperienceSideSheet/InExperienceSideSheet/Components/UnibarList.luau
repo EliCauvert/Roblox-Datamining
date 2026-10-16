@@ -1,39 +1,38 @@
-﻿local inExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
-local parent = inExperienceSideSheet.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local view = foundationModule.View
-local getIntegrationsStoreModule = require(inExperienceSideSheet.Stores.GetIntegrationsStore)
-local unibarItemModule = require(inExperienceSideSheet.Components.UnibarItem)
-local fFlagSideSheetFocusNav = require(parent.SharedFlags).FFlagSideSheetFocusNav
+﻿local InExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
+local Parent = InExperienceSideSheet.Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local View = require(Parent.Foundation).View
+local GetIntegrationsStoreModule = require(InExperienceSideSheet.Stores.GetIntegrationsStore)
+local UnibarItemModule = require(InExperienceSideSheet.Components.UnibarItem)
+local FFlagSideSheetFocusNav = require(Parent.SharedFlags).FFlagSideSheetFocusNav
 
-local function getIntegrations(p1)
-	-- upvalues: getIntegrationsStoreModule (ref)
-	return getIntegrationsStoreModule(p1).getUnibarIntegrations(p1)
+local function getIntegrations(p1) --[[ Line: 21 ]]
+	-- upvalues: GetIntegrationsStoreModule (copy)
+	return GetIntegrationsStoreModule(p1).getUnibarIntegrations(p1)
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: signalsReactModule (ref), getIntegrations (ref), reactModule (ref), unibarItemModule (ref), fFlagSideSheetFocusNav (ref), view (ref)
-	local var1 = signalsReactModule.useSignalState(getIntegrations)
+return ReactModule.memo(function(p1) --[[ Line: 26 | Named "UnibarList" ]]
+	-- upvalues: SignalsReactModule (copy), getIntegrations (copy), ReactModule (copy), UnibarItemModule (copy), FFlagSideSheetFocusNav (copy), View (copy)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(getIntegrations)
 	
-	if #var1 == 0 then
+	if #UseSignalStateResult == 0 then
 		return nil
 	end
-	local t = {}
+	local Elements = {}
 	
-	for i, v in var1 do
-		t[v.id] = reactModule.createElement(unibarItemModule, {
-			label = v.integration.label,
-			layoutOrder = i,
-			onActivated = v.activated,
-			icon = v.component,
-			notification = v.integration.notification,
-			disableGamepadDirections = if fFlagSideSheetFocusNav and i == 1 then { left = true } else nil
+	for LayoutOrder, value in UseSignalStateResult do
+		Elements[value.id] = ReactModule.createElement(UnibarItemModule, {
+			label = value.integration.label,
+			layoutOrder = LayoutOrder,
+			onActivated = value.activated,
+			icon = value.component,
+			notification = value.integration.notification,
+			disableGamepadDirections = if FFlagSideSheetFocusNav and LayoutOrder == 1 then { left = true } else nil
 		})
 	end
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "auto-xy row gap-xsmall align-y-center",
 		LayoutOrder = p1.layoutOrder
-	}, t)
+	}, Elements)
 end)

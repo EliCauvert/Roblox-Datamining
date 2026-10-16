@@ -1,8 +1,8 @@
-﻿local verifiedParentalConsentDialog = script:FindFirstAncestor("VerifiedParentalConsentDialog")
-local reactModule = require(verifiedParentalConsentDialog.Parent.React)
-local networkContextModule = require(verifiedParentalConsentDialog.Hooks.NetworkContext)
+﻿local VerifiedParentalConsentDialog = script:FindFirstAncestor("VerifiedParentalConsentDialog")
+local ReactModule = require(VerifiedParentalConsentDialog.Parent.React)
+local NetworkContextModule = require(VerifiedParentalConsentDialog.Hooks.NetworkContext)
 
-return function()
-	-- upvalues: reactModule (ref), networkContextModule (ref)
-	return reactModule.useContext(networkContextModule)
+return function() --[[ Line: 7 | Named "useNetwork" ]]
+	-- upvalues: ReactModule (copy), NetworkContextModule (copy)
+	return ReactModule.useContext(NetworkContextModule)
 end

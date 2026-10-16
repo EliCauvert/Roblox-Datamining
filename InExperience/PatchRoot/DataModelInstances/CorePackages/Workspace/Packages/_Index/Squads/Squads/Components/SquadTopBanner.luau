@@ -1,1 +1,1 @@
-﻿return require(script.SquadTopBanner)
+﻿return (require(script.SquadTopBanner))

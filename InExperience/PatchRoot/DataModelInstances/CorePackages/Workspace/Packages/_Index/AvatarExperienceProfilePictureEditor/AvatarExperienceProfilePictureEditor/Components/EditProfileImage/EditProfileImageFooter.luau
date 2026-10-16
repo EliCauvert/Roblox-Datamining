@@ -1,40 +1,40 @@
-﻿local avatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
-local parent = avatarExperienceProfilePictureEditor.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local button = foundationModule.Button
-local view = foundationModule.View
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local fillBehavior = foundationModule.Enums.FillBehavior
-local inputSize = foundationModule.Enums.InputSize
-local _ = require(avatarExperienceProfilePictureEditor.Utils.editProfileImageHelpers)
+﻿local AvatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
+local Parent = AvatarExperienceProfilePictureEditor.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local Button = FoundationModule.Button
+local View = FoundationModule.View
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local FillBehavior = FoundationModule.Enums.FillBehavior
+local InputSize = FoundationModule.Enums.InputSize
+local _ = require(AvatarExperienceProfilePictureEditor.Utils.editProfileImageHelpers)
 
-return function(p1)
-	-- upvalues: reactModule (ref), button (ref), buttonVariant (ref), inputSize (ref), fillBehavior (ref), view (ref)
-	return reactModule.createElement(view, {
+return function(p1) --[[ Line: 29 | Named "EditProfileImageFooter" ]]
+	-- upvalues: ReactModule (copy), Button (copy), ButtonVariant (copy), InputSize (copy), FillBehavior (copy), View (copy)
+	return ReactModule.createElement(View, {
 		tag = "row gap-small size-full-0 auto-y padding-x-xlarge padding-bottom-medium padding-top-medium",
 		LayoutOrder = p1.layoutOrder
 	}, if p1.footerCta == "purchaseEmote" then {
 		Purchase = p1.renderRecommendedEmotePurchaseFooter(p1.selectedEmoteId)
 	} elseif p1.footerCta == "subscribePlus" then {
-		Subscribe = reactModule.createElement(button, {
+		Subscribe = ReactModule.createElement(Button, {
 			LayoutOrder = 1,
 			text = p1.localizedSubscribeLabel,
-			variant = buttonVariant.Emphasis,
-			size = inputSize.Medium,
-			fillBehavior = fillBehavior.Fill,
-			onActivated = function()
-				-- upvalues: p1 (ref)
+			variant = ButtonVariant.Emphasis,
+			size = InputSize.Medium,
+			fillBehavior = FillBehavior.Fill,
+			onActivated = function() --[[ Line: 44 ]]
+				-- upvalues: p1 (copy)
 				p1.onOpenProfileFramesSubscriptionUpsell("footer")
 			end
 		})
 	} else {
-		Save = reactModule.createElement(button, {
+		Save = ReactModule.createElement(Button, {
 			LayoutOrder = 1,
 			text = p1.localizedSaveLabel,
-			variant = buttonVariant.Emphasis,
-			size = inputSize.Medium,
-			fillBehavior = fillBehavior.Fill,
+			variant = ButtonVariant.Emphasis,
+			size = InputSize.Medium,
+			fillBehavior = FillBehavior.Fill,
 			isLoading = p1.isSaving,
 			isDisabled = p1.isSaving,
 			onActivated = p1.onSave

@@ -1,22 +1,21 @@
-﻿local sponsoredTiles = script:FindFirstAncestor("SponsoredTiles")
-local parent = sponsoredTiles.Parent
-local gameCollectionItemTypes = require(parent.DiscoveryTypes).GameCollectionItemTypes
-local reactModule = require(parent.React)
-local oneByTwoTileModule = require(sponsoredTiles.OneByTwoTile)
-local getTileBadgeByPositionConfigFromEntry = require(parent.GameTile).getTileBadgeByPositionConfigFromEntry
-local _ = require(parent.VideoUtils)
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagLuaAppEnableReportExperience = sharedFlagsModule.FFlagLuaAppEnableReportExperience
-local fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor = sharedFlagsModule.FFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor
-local fFlagLuaAppEnableOneByTwoTileFunnelTelemetry = sharedFlagsModule.FFlagLuaAppEnableOneByTwoTileFunnelTelemetry
-local var1 = reactModule.memo(function(p1)
-	-- upvalues: getTileBadgeByPositionConfigFromEntry (ref), reactModule (ref), oneByTwoTileModule (ref), fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor (ref), fFlagLuaAppEnableReportExperience (ref), fFlagLuaAppEnableOneByTwoTileFunnelTelemetry (ref)
-	local var2 = -((p1.maxItemIndex or 0) + 1)
+﻿local SponsoredTiles = script:FindFirstAncestor("SponsoredTiles")
+local Parent = SponsoredTiles.Parent
+local GameCollectionItemTypes = require(Parent.DiscoveryTypes).GameCollectionItemTypes
+local ReactModule = require(Parent.React)
+local OneByTwoTileModule = require(SponsoredTiles.OneByTwoTile)
+local GetTileBadgeByPositionConfigFromEntryFunction = require(Parent.GameTile).getTileBadgeByPositionConfigFromEntry
+local _ = require(Parent.VideoUtils)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagLuaAppEnableReportExperience = SharedFlagsModule.FFlagLuaAppEnableReportExperience
+local FFlagLuaAppEnableOneByTwoTileFunnelTelemetry = SharedFlagsModule.FFlagLuaAppEnableOneByTwoTileFunnelTelemetry
+local MemoResult = ReactModule.memo(function(p1) --[[ Line: 51 ]]
+	-- upvalues: GetTileBadgeByPositionConfigFromEntryFunction (copy), ReactModule (copy), OneByTwoTileModule (copy), FFlagLuaAppEnableReportExperience (copy), FFlagLuaAppEnableOneByTwoTileFunnelTelemetry (copy)
+	local Negated = -((p1.maxItemIndex or 0) + 1)
 	
-	return reactModule.createElement(oneByTwoTileModule, {
+	return ReactModule.createElement(OneByTwoTileModule, {
 		size = p1.item.sizeOverride,
-		alignmentType = if fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor and p1.item.spanOverride ~= nil then p1.item.spanOverride.alignmentType else nil,
-		zIndex = if p1.zIndex then p1.zIndex + var2 else var2,
+		alignmentType = if p1.item.spanOverride == nil then nil else p1.item.spanOverride.alignmentType,
+		zIndex = if p1.zIndex then p1.zIndex + Negated else Negated,
 		hoverKey = `OneByTwoTile_{p1.impressionsTag or ""}_{p1.index or "0"}_{p1.item.universeId or p1.item.clickoutUrl}`,
 		contentType = p1.item.contentType,
 		universeId = p1.item.universeId,
@@ -28,7 +27,7 @@ local var1 = reactModule.memo(function(p1)
 		reportExperienceLaunched = p1.reportExperienceLaunched,
 		launchExperienceEventContext = p1.launchExperienceEventContext,
 		topicId = p1.topicId,
-		badgeOverride = getTileBadgeByPositionConfigFromEntry(p1.item),
+		badgeOverride = GetTileBadgeByPositionConfigFromEntryFunction(p1.item),
 		primaryImageAssetId = p1.item.primaryImageAssetId,
 		primaryVideoAssetId = p1.item.primaryVideoAssetId,
 		attributionThumbnailAssetId = p1.item.attributionThumbnailAssetId,
@@ -50,23 +49,23 @@ local var1 = reactModule.memo(function(p1)
 		setGameHidden = p1.setGameHidden,
 		enableSponsoredFeedback = p1.enableSponsoredFeedback,
 		enableReportAd = p1.enableReportAd,
-		enableReportExperience = if fFlagLuaAppEnableReportExperience then p1.enableReportExperience else nil,
+		enableReportExperience = if FFlagLuaAppEnableReportExperience then p1.enableReportExperience else nil,
 		enableExplicitFeedback = p1.enableExplicitFeedback,
-		onSelectionGained = reactModule.useCallback(function()
-			-- upvalues: p1 (ref)
+		onSelectionGained = ReactModule.useCallback(function() --[[ Line: 59 ]]
+			-- upvalues: p1 (copy)
 			if p1.onSelectionGained then
 				p1.onSelectionGained(p1.item, p1.index, p1.item.universeId)
 			end
 		end, { p1.onSelectionGained, p1.item, p1.index }),
 		onSelectionLost = p1.onSelectionLost,
 		SelectionOrder = p1.SelectionOrder,
-		oneByTwoTileFlowId = if fFlagLuaAppEnableOneByTwoTileFunnelTelemetry then p1.item.oneByTwoTileFlowId else nil,
-		recommendationsRequestId = if fFlagLuaAppEnableOneByTwoTileFunnelTelemetry then p1.item.recommendationsRequestId else nil,
-		isSdui = if fFlagLuaAppEnableOneByTwoTileFunnelTelemetry then false else nil
+		oneByTwoTileFlowId = if FFlagLuaAppEnableOneByTwoTileFunnelTelemetry then p1.item.oneByTwoTileFlowId else nil,
+		recommendationsRequestId = if FFlagLuaAppEnableOneByTwoTileFunnelTelemetry then p1.item.recommendationsRequestId else nil,
+		isSdui = not FFlagLuaAppEnableOneByTwoTileFunnelTelemetry and nil
 	})
 end)
 
-return function(p1)
-	-- upvalues: reactModule (ref), var1 (ref), gameCollectionItemTypes (ref)
-	return reactModule.createElement(var1, p1), gameCollectionItemTypes.GameCollectionItemType.OneByTwoTile
+return function(p1) --[[ Line: 119 ]]
+	-- upvalues: ReactModule (copy), MemoResult (copy), GameCollectionItemTypes (copy)
+	return ReactModule.createElement(MemoResult, p1), GameCollectionItemTypes.GameCollectionItemType.OneByTwoTile
 end

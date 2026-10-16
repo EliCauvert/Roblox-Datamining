@@ -1,10 +1,10 @@
 ﻿local _ = require(script.Parent.Parent.Types)
 
-return function(p1)
-	local t = {}
+return function(List) --[[ Line: 4 | Named "buildStringsToLocalize" ]]
+	local NameTranslationKeys = {}
 	
-	for i, v in p1 do
-		t[v.nameTranslationKey] = v.nameTranslationKey
+	for _, value in List do
+		NameTranslationKeys[value.nameTranslationKey] = value.nameTranslationKey
 	end
-	return t
+	return NameTranslationKeys
 end

@@ -1,34 +1,35 @@
-﻿local signal = require(script:FindFirstAncestor("GameTile").Parent.AppCommonLib).Signal
-local t = {}
-t.__index = t
+﻿local Signal = require(script:FindFirstAncestor("GameTile").Parent.AppCommonLib).Signal
+local HoverTileCoordinatorModule = {}
+HoverTileCoordinatorModule.__index = HoverTileCoordinatorModule
 
-function t.new()
-	-- upvalues: signal (ref), t (ref)
-	local t_1 = {
+function HoverTileCoordinatorModule.new() --[[ Line: 24 ]]
+	-- upvalues: Signal (copy), HoverTileCoordinatorModule (copy)
+	local config = {
 		hoveredKey = nil,
 		waitingForHover = nil,
-		changed = signal.new()
+		changed = Signal.new()
 	}
-	setmetatable(t_1, t)
+	setmetatable(config, HoverTileCoordinatorModule)
 	
-	return t_1
+	return config
 end
 
-function t:requestHover(p1)
-	if self.hoveredKey == p1 then return end
-	if self.waitingForHover == p1 then return end
+function HoverTileCoordinatorModule:requestHover(HoveredKey) --[[ Line: 34 ]]
+	if self.hoveredKey == HoveredKey then return end
+	if self.waitingForHover == HoveredKey then return end
 	if self.hoveredKey == nil or self.waitingForHover ~= nil then
-		self.hoveredKey = p1
+		self.hoveredKey = HoveredKey
 		self.waitingForHover = nil
 		self.changed:fire(self.hoveredKey)
 		
 		return
+	else
+		self.waitingForHover = HoveredKey
 	end
-	self.waitingForHover = p1
 end
 
-function t:cancelHover(p1)
-	if self.hoveredKey == p1 then
+function HoverTileCoordinatorModule:cancelHover(HoveredKey) --[[ Line: 57 ]]
+	if self.hoveredKey == HoveredKey then
 		if self.waitingForHover == nil then
 			self.hoveredKey = nil
 		else
@@ -38,21 +39,20 @@ function t:cancelHover(p1)
 		self.changed:fire(self.hoveredKey)
 		
 		return
-	elseif self.waitingForHover == p1 then
+	elseif self.waitingForHover == HoveredKey then
 		self.waitingForHover = nil
 	end
 end
 
-function t:reset()
-	local hoveredKey = self.hoveredKey
+function HoverTileCoordinatorModule:reset() --[[ Line: 72 ]]
 	self.waitingForHover = nil
 	self.hoveredKey = nil
 	
-	if hoveredKey ~= nil then
+	if self.hoveredKey ~= nil then
 		self.changed:fire(self.hoveredKey)
 	end
 end
 
-t.default = t.new()
+HoverTileCoordinatorModule.default = HoverTileCoordinatorModule.new()
 
-return t
+return HoverTileCoordinatorModule

@@ -1,25 +1,23 @@
-﻿local inGameAssetReporting = script:FindFirstAncestor("InGameAssetReporting")
-local parent = inGameAssetReporting.Parent
-local localizationModule = require(parent.Localization)
-local reactModule = require(parent.React)
-local view = require(parent.Foundation).View
-local dsaIllegalContentReportingModule = require(parent.DsaIllegalContentReporting)
-local isShowUKOSAIllegalContentReportingLink = dsaIllegalContentReportingModule.isShowUKOSAIllegalContentReportingLink
-local OSAReportLink = dsaIllegalContentReportingModule.OSAReportLink
-local useLocalization = localizationModule.Hooks.useLocalization
-local defaultDualDropdownDialogModule = require(parent.GenericAbuseReporting.DefaultDualDropdownDialog)
-local defaultDualDropdownDialogV2Module = require(parent.GenericAbuseReporting.DefaultDualDropdownDialogV2)
-local constantsModule = require(inGameAssetReporting.InGameAssetReportUI.Resources.Constants)
-local getPreselectedSurfaceValueModule = require(inGameAssetReporting.Utility.getPreselectedSurfaceValue)
-local _ = require(inGameAssetReporting.Analysis.SceneAnalysis)
-local fFlagPrefillPreciseSelectionChoices = require(parent.SharedFlags).FFlagPrefillPreciseSelectionChoices
-local fFlagGenericAbuseReportingGranularExports = require(parent.SharedFlags).FFlagGenericAbuseReportingGranularExports
-local fFlagUpdateInGameAssetReportingCTAs = require(parent.SharedFlags).FFlagUpdateInGameAssetReportingCTAs
-local fFlagDropUnroutableMultiReportOptions = require(parent.SharedFlags).FFlagDropUnroutableMultiReportOptions
+﻿local InGameAssetReporting = script:FindFirstAncestor("InGameAssetReporting")
+local Parent = InGameAssetReporting.Parent
+local ReactModule = require(Parent.React)
+local View = require(Parent.Foundation).View
+local DsaIllegalContentReportingModule = require(Parent.DsaIllegalContentReporting)
+local IsShowUKOSAIllegalContentReportingLinkFunction = DsaIllegalContentReportingModule.isShowUKOSAIllegalContentReportingLink
+local OSAReportLink = DsaIllegalContentReportingModule.OSAReportLink
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local DefaultDualDropdownDialogModule = require(Parent.GenericAbuseReporting.DefaultDualDropdownDialog)
+local DefaultDualDropdownDialogV2Module = require(Parent.GenericAbuseReporting.DefaultDualDropdownDialogV2)
+local ConstantsModule = require(InGameAssetReporting.InGameAssetReportUI.Resources.Constants)
+local GetPreselectedSurfaceValueModule = require(InGameAssetReporting.Utility.getPreselectedSurfaceValue)
+local _ = require(InGameAssetReporting.Analysis.SceneAnalysis)
+local FFlagPrefillPreciseSelectionChoices = require(Parent.SharedFlags).FFlagPrefillPreciseSelectionChoices
+local FFlagGenericAbuseReportingGranularExports = require(Parent.SharedFlags).FFlagGenericAbuseReportingGranularExports
+local FFlagDropUnroutableMultiReportOptions = require(Parent.SharedFlags).FFlagDropUnroutableMultiReportOptions
 
-return function(value)
-	-- upvalues: fFlagPrefillPreciseSelectionChoices (ref), useLocalization (ref), getPreselectedSurfaceValueModule (ref), reactModule (ref), constantsModule (ref), fFlagDropUnroutableMultiReportOptions (ref), defaultDualDropdownDialogV2Module (ref), defaultDualDropdownDialogModule (ref), fFlagUpdateInGameAssetReportingCTAs (ref), fFlagGenericAbuseReportingGranularExports (ref), isShowUKOSAIllegalContentReportingLink (ref), view (ref), OSAReportLink (ref)
-	local var1 = if fFlagPrefillPreciseSelectionChoices then useLocalization({
+return function(p1) --[[ Line: 37 | Named "InGameAssetReportSubmitDialog" ]]
+	-- upvalues: FFlagPrefillPreciseSelectionChoices (copy), UseLocalizationFunction (copy), GetPreselectedSurfaceValueModule (copy), ReactModule (copy), ConstantsModule (copy), FFlagDropUnroutableMultiReportOptions (copy), DefaultDualDropdownDialogV2Module (copy), DefaultDualDropdownDialogModule (copy), FFlagGenericAbuseReportingGranularExports (copy), IsShowUKOSAIllegalContentReportingLinkFunction (copy), View (copy), OSAReportLink (copy)
+	local UseLocalizationResult = if FFlagPrefillPreciseSelectionChoices then UseLocalizationFunction({
 		title = "Feature.ReportAbuse.Title.SelectInSceneFinishYourReport",
 		problemBullying = "Feature.ReportAbuse.Problem.Bullying",
 		problemBullyingDesc = "Feature.ReportAbuse.ProblemDescription.Bullying",
@@ -51,336 +49,386 @@ return function(value)
 		problemIPInfringementDesc = "Feature.ReportAbuse.ProblemDescription.IpInfringement"
 	}) else nil
 	
-	if fFlagPrefillPreciseSelectionChoices then
-		local var2 = getPreselectedSurfaceValueModule(value.extractionResult)
-		local var3 = if var2 == "avatar" then var1.surfaceAvatar elseif var2 == "item" then var1.surfaceItem elseif var2 == "text" then var1.surfaceTextChat else nil
-		reactModule.useEffect(function()
-			-- upvalues: var3 (ref), value (ref), constantsModule (copy)
-			if var3 then
-				value.analyticsDispatch({
-					type = constantsModule.AnalyticsActions.SetPrefilledSurfaceSelection,
-					prefilled_surface_selection = var3
+	if FFlagPrefillPreciseSelectionChoices then
+		local PreselectedSurfaceValueModule = GetPreselectedSurfaceValueModule(p1.extractionResult)
+		local SurfaceAvatar = if PreselectedSurfaceValueModule == "avatar" then UseLocalizationResult.surfaceAvatar elseif PreselectedSurfaceValueModule == "item" then UseLocalizationResult.surfaceItem elseif PreselectedSurfaceValueModule == "text" then UseLocalizationResult.surfaceTextChat else nil
+		ReactModule.useEffect(function() --[[ Line: 81 ]]
+			-- upvalues: SurfaceAvatar (copy), p1 (copy), ConstantsModule (upval)
+			if SurfaceAvatar then
+				p1.analyticsDispatch({
+					type = ConstantsModule.AnalyticsActions.SetPrefilledSurfaceSelection,
+					prefilled_surface_selection = SurfaceAvatar
 				})
 			end
-		end, { var3 })
-		local var4 = reactModule.useMemo(function()
-			-- upvalues: fFlagDropUnroutableMultiReportOptions (copy), var1 (write)
-			return if fFlagDropUnroutableMultiReportOptions then {
-				{ value = "avatar", label = var1.surfaceAvatar },
-				{ value = "drawing", label = var1.surfaceDrawing },
-				{ value = "experience", label = var1.surfaceExperience },
-				{ value = "item", label = var1.surfaceItem },
-				{ value = "text", label = var1.surfaceTextChat }
+		end, { SurfaceAvatar })
+		local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 195 ]]
+			-- upvalues: FFlagDropUnroutableMultiReportOptions (upval), UseLocalizationResult (ref)
+			return if FFlagDropUnroutableMultiReportOptions then {
+				{
+					value = "avatar",
+					label = UseLocalizationResult.surfaceAvatar
+				},
+				{
+					value = "drawing",
+					label = UseLocalizationResult.surfaceDrawing
+				},
+				{
+					value = "experience",
+					label = UseLocalizationResult.surfaceExperience
+				},
+				{
+					value = "item",
+					label = UseLocalizationResult.surfaceItem
+				},
+				{
+					value = "text",
+					label = UseLocalizationResult.surfaceTextChat
+				}
 			} else {
-				{ value = "avatar", label = var1.surfaceAvatar },
-				{ value = "drawing", label = var1.surfaceDrawing },
-				{ value = "experience", label = var1.surfaceExperience },
-				{ value = "item", label = var1.surfaceItem },
-				{ value = "movement", label = var1.surfaceMovement },
-				{ value = "music", label = var1.surfaceMusic },
-				{ value = "text", label = var1.surfaceTextChat },
-				{ value = "username", label = var1.surfaceUsername }
+				{
+					value = "avatar",
+					label = UseLocalizationResult.surfaceAvatar
+				},
+				{
+					value = "drawing",
+					label = UseLocalizationResult.surfaceDrawing
+				},
+				{
+					value = "experience",
+					label = UseLocalizationResult.surfaceExperience
+				},
+				{
+					value = "item",
+					label = UseLocalizationResult.surfaceItem
+				},
+				{
+					value = "movement",
+					label = UseLocalizationResult.surfaceMovement
+				},
+				{
+					value = "music",
+					label = UseLocalizationResult.surfaceMusic
+				},
+				{
+					value = "text",
+					label = UseLocalizationResult.surfaceTextChat
+				},
+				{
+					value = "username",
+					label = UseLocalizationResult.surfaceUsername
+				}
 			}
 		end, {
-			var1.surfaceAvatar, var1.surfaceDrawing, var1.surfaceExperience,
-			var1.surfaceItem, var1.surfaceMovement, var1.surfaceMusic,
-			var1.surfaceTextChat, var1.surfaceUsername
+			UseLocalizationResult.surfaceAvatar, UseLocalizationResult.surfaceDrawing,
+			UseLocalizationResult.surfaceExperience, UseLocalizationResult.surfaceItem,
+			UseLocalizationResult.surfaceMovement, UseLocalizationResult.surfaceMusic,
+			UseLocalizationResult.surfaceTextChat, UseLocalizationResult.surfaceUsername
 		})
 		
-		return reactModule.createElement(defaultDualDropdownDialogV2Module, {
-			title = var1.title,
-			problems = reactModule.useMemo(function()
-				-- upvalues: fFlagDropUnroutableMultiReportOptions (copy), var1 (write)
-				return if fFlagDropUnroutableMultiReportOptions then {
+		return ReactModule.createElement(DefaultDualDropdownDialogV2Module, {
+			title = UseLocalizationResult.title,
+			problems = ReactModule.useMemo(function() --[[ Line: 90 ]]
+				-- upvalues: FFlagDropUnroutableMultiReportOptions (upval), UseLocalizationResult (ref)
+				return if FFlagDropUnroutableMultiReportOptions then {
 					{
 						value = "bullying",
-						label = var1.problemBullying,
-						description = var1.problemBullyingDesc
+						label = UseLocalizationResult.problemBullying,
+						description = UseLocalizationResult.problemBullyingDesc
 					},
 					{
 						value = "dating",
-						label = var1.problemDating,
-						description = var1.problemDatingDesc
+						label = UseLocalizationResult.problemDating,
+						description = UseLocalizationResult.problemDatingDesc
 					},
 					{
 						value = "hate",
-						label = var1.problemHate,
-						description = var1.problemHateDesc
+						label = UseLocalizationResult.problemHate,
+						description = UseLocalizationResult.problemHateDesc
 					},
 					{
 						value = "offsite links",
-						label = var1.problemLinks,
-						description = var1.problemLinksDesc
+						label = UseLocalizationResult.problemLinks,
+						description = UseLocalizationResult.problemLinksDesc
 					},
 					{
 						value = "personal question",
-						label = var1.problemPersonal,
-						description = var1.problemPersonalDesc
+						label = UseLocalizationResult.problemPersonal,
+						description = UseLocalizationResult.problemPersonalDesc
 					},
 					{
 						value = "swearing",
-						label = var1.problemSwearing,
-						description = var1.problemSwearingDesc
+						label = UseLocalizationResult.problemSwearing,
+						description = UseLocalizationResult.problemSwearingDesc
 					},
 					{
 						value = "violence",
-						label = var1.problemViolence,
-						description = var1.problemViolenceDesc
+						label = UseLocalizationResult.problemViolence,
+						description = UseLocalizationResult.problemViolenceDesc
 					},
 					{
 						value = "ip infringement",
-						label = var1.problemIPInfringement,
-						description = var1.problemIPInfringementDesc
+						label = UseLocalizationResult.problemIPInfringement,
+						description = UseLocalizationResult.problemIPInfringementDesc
 					}
 				} else {
 					{
 						value = "bullying",
-						label = var1.problemBullying,
-						description = var1.problemBullyingDesc
+						label = UseLocalizationResult.problemBullying,
+						description = UseLocalizationResult.problemBullyingDesc
 					},
 					{
 						value = "exploiting",
-						label = var1.problemCheating,
-						description = var1.problemCheatingDesc
+						label = UseLocalizationResult.problemCheating,
+						description = UseLocalizationResult.problemCheatingDesc
 					},
 					{
 						value = "dating",
-						label = var1.problemDating,
-						description = var1.problemDatingDesc
+						label = UseLocalizationResult.problemDating,
+						description = UseLocalizationResult.problemDatingDesc
 					},
 					{
 						value = "hate",
-						label = var1.problemHate,
-						description = var1.problemHateDesc
+						label = UseLocalizationResult.problemHate,
+						description = UseLocalizationResult.problemHateDesc
 					},
 					{
 						value = "offsite links",
-						label = var1.problemLinks,
-						description = var1.problemLinksDesc
+						label = UseLocalizationResult.problemLinks,
+						description = UseLocalizationResult.problemLinksDesc
 					},
 					{
 						value = "personal question",
-						label = var1.problemPersonal,
-						description = var1.problemPersonalDesc
+						label = UseLocalizationResult.problemPersonal,
+						description = UseLocalizationResult.problemPersonalDesc
 					},
 					{
 						value = "scamming",
-						label = var1.problemScamming,
-						description = var1.problemScammingDesc
+						label = UseLocalizationResult.problemScamming,
+						description = UseLocalizationResult.problemScammingDesc
 					},
 					{
 						value = "swearing",
-						label = var1.problemSwearing,
-						description = var1.problemSwearingDesc
+						label = UseLocalizationResult.problemSwearing,
+						description = UseLocalizationResult.problemSwearingDesc
 					},
 					{
 						value = "violence",
-						label = var1.problemViolence,
-						description = var1.problemViolenceDesc
+						label = UseLocalizationResult.problemViolence,
+						description = UseLocalizationResult.problemViolenceDesc
 					},
 					{
 						value = "ip infringement",
-						label = var1.problemIPInfringement,
-						description = var1.problemIPInfringementDesc
+						label = UseLocalizationResult.problemIPInfringement,
+						description = UseLocalizationResult.problemIPInfringementDesc
 					}
 				}
 			end, {
-				var1.problemBullying, var1.problemBullyingDesc, var1.problemCheating,
-				var1.problemCheatingDesc, var1.problemDating, var1.problemDatingDesc,
-				var1.problemHate, var1.problemHateDesc, var1.problemLinks,
-				var1.problemLinksDesc, var1.problemPersonal, var1.problemPersonalDesc,
-				var1.problemScamming, var1.problemScammingDesc, var1.problemSwearing,
-				var1.problemSwearingDesc, var1.problemViolence, var1.problemViolenceDesc,
-				var1.problemIPInfringement, var1.problemIPInfringementDesc
+				UseLocalizationResult.problemBullying,
+				UseLocalizationResult.problemBullyingDesc,
+				UseLocalizationResult.problemCheating,
+				UseLocalizationResult.problemCheatingDesc, UseLocalizationResult.problemDating,
+				UseLocalizationResult.problemDatingDesc, UseLocalizationResult.problemHate,
+				UseLocalizationResult.problemHateDesc, UseLocalizationResult.problemLinks,
+				UseLocalizationResult.problemLinksDesc, UseLocalizationResult.problemPersonal,
+				UseLocalizationResult.problemPersonalDesc,
+				UseLocalizationResult.problemScamming,
+				UseLocalizationResult.problemScammingDesc,
+				UseLocalizationResult.problemSwearing,
+				UseLocalizationResult.problemSwearingDesc,
+				UseLocalizationResult.problemViolence,
+				UseLocalizationResult.problemViolenceDesc,
+				UseLocalizationResult.problemIPInfringement,
+				UseLocalizationResult.problemIPInfringementDesc
 			}),
-			surfaces = var4,
-			preselected = reactModule.useMemo(function()
-				-- upvalues: var2 (ref), var4 (ref)
-				local var5 = nil
+			surfaces = UseMemoResult,
+			preselected = ReactModule.useMemo(function() --[[ Line: 227 ]]
+				-- upvalues: PreselectedSurfaceValueModule (copy), UseMemoResult (copy)
+				local Surface = nil
 				
-				if var2 ~= nil and var4 ~= nil then
-					local var6
-					for i = 1, #var4 do
-						var6 = var4[i]
+				if PreselectedSurfaceValueModule ~= nil and UseMemoResult ~= nil then
+					local UseMemoResultEntry = nil
+					for i = 1, #UseMemoResult do
+						UseMemoResultEntry = UseMemoResult[i]
 						
-						if not var6 or var6.value ~= var2 then
+						if not UseMemoResultEntry or UseMemoResultEntry.value ~= PreselectedSurfaceValueModule then
 							continue
 						end
-						var5 = var6
+						Surface = UseMemoResultEntry
 						break
 					end
 				end
-				return { surface = var5 }
-			end, { var2, var4 }),
-			onClose = value.onBack,
-			onSubmit = value.onSubmit
+				return { surface = Surface }
+			end, { PreselectedSurfaceValueModule, UseMemoResult }),
+			onClose = p1.onBack,
+			onSubmit = p1.onSubmit
+		})
+	else
+		return ReactModule.createElement("Frame", {
+			BackgroundTransparency = 1,
+			ZIndex = 10,
+			Size = UDim2.new(1, 0, 1, 0),
+			Position = UDim2.fromScale(0.5, 0.5),
+			AnchorPoint = Vector2.new(0.5, 0.5)
+		}, {
+			SubmitReportDialog = ReactModule.createElement(DefaultDualDropdownDialogModule, {
+				analyticsContext = "Test",
+				localizationKeys = {
+					formTitle = "Feature.ReportAbuse.Title.SelectInSceneFinishYourReport",
+					formSubmit = "Feature.ReportAbuse.Label.Report"
+				},
+				onSubmitProps = {
+					hasNextSteps = true,
+					onProceedToNextStep = if FFlagGenericAbuseReportingGranularExports then function(p2, p3, p4): boolean --[[ Line: 371 ]]
+						-- upvalues: p1 (copy)
+						p1.onSubmit(p2, p3, p4)
+						
+						return true
+					end else p1.onSubmit
+				},
+				onCloseProps = { hasPreviousSteps = false, onAbandon = p1.onBack },
+				footerContent = function() --[[ Line: 381 ]]
+					-- upvalues: IsShowUKOSAIllegalContentReportingLinkFunction (upval), ReactModule (upval), View (upval), OSAReportLink (upval)
+					return if IsShowUKOSAIllegalContentReportingLinkFunction() then ReactModule.createElement(View, { tag = "size-full-0 auto-y" }, { OSALink = ReactModule.createElement(OSAReportLink) }) else nil
+				end,
+				reportProblems = if FFlagDropUnroutableMultiReportOptions then {
+					{
+						localizationKey = "Feature.ReportAbuse.Problem.Bullying",
+						value = "bullying",
+						descriptionLocalizationKey = "Feature.ReportAbuse.ProblemDescription.Bullying"
+					},
+					{
+						localizationKey = "Feature.ReportAbuse.Problem.Dating",
+						value = "dating",
+						descriptionLocalizationKey = "Feature.ReportAbuse.ProblemDescription.Dating"
+					},
+					{
+						localizationKey = "Feature.ReportAbuse.Problem.Hate",
+						value = "hate",
+						descriptionLocalizationKey = "Feature.ReportAbuse.ProblemDescription.Hate"
+					},
+					{
+						localizationKey = "Feature.ReportAbuse.Problem.Links",
+						value = "offsite links",
+						descriptionLocalizationKey = "Feature.ReportAbuse.ProblemDescription.Links"
+					},
+					{
+						localizationKey = "Feature.ReportAbuse.Problem.Personal",
+						value = "personal question",
+						descriptionLocalizationKey = "Feature.ReportAbuse.ProblemDescription.Personal"
+					},
+					{
+						localizationKey = "Feature.ReportAbuse.Problem.Swearing",
+						value = "swearing",
+						descriptionLocalizationKey = "Feature.ReportAbuse.ProblemDescription.Swearing"
+					},
+					{
+						localizationKey = "Feature.ReportAbuse.Problem.Violence",
+						value = "violence",
+						descriptionLocalizationKey = "Feature.ReportAbuse.ProblemDescription.Violence"
+					}
+				} else {
+					{
+						localizationKey = "Feature.ReportAbuse.Problem.Bullying",
+						value = "bullying",
+						descriptionLocalizationKey = "Feature.ReportAbuse.ProblemDescription.Bullying"
+					},
+					{
+						localizationKey = "Feature.ReportAbuse.Problem.Cheating",
+						value = "exploiting",
+						descriptionLocalizationKey = "Feature.ReportAbuse.ProblemDescription.Cheating"
+					},
+					{
+						localizationKey = "Feature.ReportAbuse.Problem.Dating",
+						value = "dating",
+						descriptionLocalizationKey = "Feature.ReportAbuse.ProblemDescription.Dating"
+					},
+					{
+						localizationKey = "Feature.ReportAbuse.Problem.Hate",
+						value = "hate",
+						descriptionLocalizationKey = "Feature.ReportAbuse.ProblemDescription.Hate"
+					},
+					{
+						localizationKey = "Feature.ReportAbuse.Problem.Links",
+						value = "offsite links",
+						descriptionLocalizationKey = "Feature.ReportAbuse.ProblemDescription.Links"
+					},
+					{
+						localizationKey = "Feature.ReportAbuse.Problem.Personal",
+						value = "personal question",
+						descriptionLocalizationKey = "Feature.ReportAbuse.ProblemDescription.Personal"
+					},
+					{
+						localizationKey = "Feature.ReportAbuse.Problem.Scamming",
+						value = "scamming",
+						descriptionLocalizationKey = "Feature.ReportAbuse.ProblemDescription.Scamming"
+					},
+					{
+						localizationKey = "Feature.ReportAbuse.Problem.Swearing",
+						value = "swearing",
+						descriptionLocalizationKey = "Feature.ReportAbuse.ProblemDescription.Swearing"
+					},
+					{
+						localizationKey = "Feature.ReportAbuse.Problem.Violence",
+						value = "violence",
+						descriptionLocalizationKey = "Feature.ReportAbuse.ProblemDescription.Violence"
+					}
+				},
+				reportSurfaces = if FFlagDropUnroutableMultiReportOptions then {
+					{
+						localizationKey = "Feature.ReportAbuse.ProblemSurface.Avatar",
+						value = "avatar"
+					},
+					{
+						localizationKey = "Feature.ReportAbuse.ProblemSurface.DrawingOrCreation",
+						value = "drawing"
+					},
+					{
+						localizationKey = "Feature.ReportAbuse.ProblemSurface.Experience",
+						value = "experience"
+					},
+					{
+						localizationKey = "Feature.ReportAbuse.ProblemSurface.ItemOrAsset",
+						value = "item"
+					},
+					{
+						localizationKey = "Feature.ReportAbuse.ProblemSurface.TextChat",
+						value = "text"
+					}
+				} else {
+					{
+						localizationKey = "Feature.ReportAbuse.ProblemSurface.Avatar",
+						value = "avatar"
+					},
+					{
+						localizationKey = "Feature.ReportAbuse.ProblemSurface.DrawingOrCreation",
+						value = "drawing"
+					},
+					{
+						localizationKey = "Feature.ReportAbuse.ProblemSurface.Experience",
+						value = "experience"
+					},
+					{
+						localizationKey = "Feature.ReportAbuse.ProblemSurface.ItemOrAsset",
+						value = "item"
+					},
+					{
+						localizationKey = "Feature.ReportAbuse.ProblemSurface.Movement",
+						value = "movement"
+					},
+					{
+						localizationKey = "Feature.ReportAbuse.ProblemSurface.MusicOrSoundEffect",
+						value = "music"
+					},
+					{
+						localizationKey = "Feature.ReportAbuse.ProblemSurface.TextChat",
+						value = "text"
+					},
+					{
+						localizationKey = "Feature.ReportAbuse.ProblemSurface.Username",
+						value = "username"
+					}
+				}
+			})
 		})
 	end
-	return reactModule.createElement("Frame", {
-		BackgroundTransparency = 1,
-		ZIndex = 10,
-		Size = UDim2.new(1, 0, 1, 0),
-		Position = UDim2.fromScale(0.5, 0.5),
-		AnchorPoint = Vector2.new(0.5, 0.5)
-	}, {
-		SubmitReportDialog = reactModule.createElement(defaultDualDropdownDialogModule, {
-			analyticsContext = "Test",
-			localizationKeys = {
-				formTitle = "Feature.ReportAbuse.Title.SelectInSceneFinishYourReport",
-				formSubmit = if fFlagUpdateInGameAssetReportingCTAs then "Feature.ReportAbuse.Label.Report" else "Feature.ReportAbuse.Action.Submit"
-			},
-			onSubmitProps = {
-				hasNextSteps = true,
-				onProceedToNextStep = if fFlagGenericAbuseReportingGranularExports then function(p1, p2, p3)
-					-- upvalues: value (ref)
-					value.onSubmit(p1, p2, p3)
-					
-					return true
-				end else value.onSubmit
-			},
-			onCloseProps = { hasPreviousSteps = false, onAbandon = value.onBack },
-			footerContent = function()
-				-- upvalues: isShowUKOSAIllegalContentReportingLink (copy), reactModule (copy), view (copy), OSAReportLink (copy)
-				return if isShowUKOSAIllegalContentReportingLink() then reactModule.createElement(view, { tag = "size-full-0 auto-y" }, { OSALink = reactModule.createElement(OSAReportLink) }) else nil
-			end,
-			reportProblems = if fFlagDropUnroutableMultiReportOptions then {
-				{
-					localizationKey = "Feature.ReportAbuse.Problem.Bullying",
-					value = "bullying",
-					descriptionLocalizationKey = "Feature.ReportAbuse.ProblemDescription.Bullying"
-				},
-				{
-					localizationKey = "Feature.ReportAbuse.Problem.Dating",
-					value = "dating",
-					descriptionLocalizationKey = "Feature.ReportAbuse.ProblemDescription.Dating"
-				},
-				{
-					localizationKey = "Feature.ReportAbuse.Problem.Hate",
-					value = "hate",
-					descriptionLocalizationKey = "Feature.ReportAbuse.ProblemDescription.Hate"
-				},
-				{
-					localizationKey = "Feature.ReportAbuse.Problem.Links",
-					value = "offsite links",
-					descriptionLocalizationKey = "Feature.ReportAbuse.ProblemDescription.Links"
-				},
-				{
-					localizationKey = "Feature.ReportAbuse.Problem.Personal",
-					value = "personal question",
-					descriptionLocalizationKey = "Feature.ReportAbuse.ProblemDescription.Personal"
-				},
-				{
-					localizationKey = "Feature.ReportAbuse.Problem.Swearing",
-					value = "swearing",
-					descriptionLocalizationKey = "Feature.ReportAbuse.ProblemDescription.Swearing"
-				},
-				{
-					localizationKey = "Feature.ReportAbuse.Problem.Violence",
-					value = "violence",
-					descriptionLocalizationKey = "Feature.ReportAbuse.ProblemDescription.Violence"
-				}
-			} else {
-				{
-					localizationKey = "Feature.ReportAbuse.Problem.Bullying",
-					value = "bullying",
-					descriptionLocalizationKey = "Feature.ReportAbuse.ProblemDescription.Bullying"
-				},
-				{
-					localizationKey = "Feature.ReportAbuse.Problem.Cheating",
-					value = "exploiting",
-					descriptionLocalizationKey = "Feature.ReportAbuse.ProblemDescription.Cheating"
-				},
-				{
-					localizationKey = "Feature.ReportAbuse.Problem.Dating",
-					value = "dating",
-					descriptionLocalizationKey = "Feature.ReportAbuse.ProblemDescription.Dating"
-				},
-				{
-					localizationKey = "Feature.ReportAbuse.Problem.Hate",
-					value = "hate",
-					descriptionLocalizationKey = "Feature.ReportAbuse.ProblemDescription.Hate"
-				},
-				{
-					localizationKey = "Feature.ReportAbuse.Problem.Links",
-					value = "offsite links",
-					descriptionLocalizationKey = "Feature.ReportAbuse.ProblemDescription.Links"
-				},
-				{
-					localizationKey = "Feature.ReportAbuse.Problem.Personal",
-					value = "personal question",
-					descriptionLocalizationKey = "Feature.ReportAbuse.ProblemDescription.Personal"
-				},
-				{
-					localizationKey = "Feature.ReportAbuse.Problem.Scamming",
-					value = "scamming",
-					descriptionLocalizationKey = "Feature.ReportAbuse.ProblemDescription.Scamming"
-				},
-				{
-					localizationKey = "Feature.ReportAbuse.Problem.Swearing",
-					value = "swearing",
-					descriptionLocalizationKey = "Feature.ReportAbuse.ProblemDescription.Swearing"
-				},
-				{
-					localizationKey = "Feature.ReportAbuse.Problem.Violence",
-					value = "violence",
-					descriptionLocalizationKey = "Feature.ReportAbuse.ProblemDescription.Violence"
-				}
-			},
-			reportSurfaces = if fFlagDropUnroutableMultiReportOptions then {
-				{
-					localizationKey = "Feature.ReportAbuse.ProblemSurface.Avatar",
-					value = "avatar"
-				},
-				{
-					localizationKey = "Feature.ReportAbuse.ProblemSurface.DrawingOrCreation",
-					value = "drawing"
-				},
-				{
-					localizationKey = "Feature.ReportAbuse.ProblemSurface.Experience",
-					value = "experience"
-				},
-				{
-					localizationKey = "Feature.ReportAbuse.ProblemSurface.ItemOrAsset",
-					value = "item"
-				},
-				{
-					localizationKey = "Feature.ReportAbuse.ProblemSurface.TextChat",
-					value = "text"
-				}
-			} else {
-				{
-					localizationKey = "Feature.ReportAbuse.ProblemSurface.Avatar",
-					value = "avatar"
-				},
-				{
-					localizationKey = "Feature.ReportAbuse.ProblemSurface.DrawingOrCreation",
-					value = "drawing"
-				},
-				{
-					localizationKey = "Feature.ReportAbuse.ProblemSurface.Experience",
-					value = "experience"
-				},
-				{
-					localizationKey = "Feature.ReportAbuse.ProblemSurface.ItemOrAsset",
-					value = "item"
-				},
-				{
-					localizationKey = "Feature.ReportAbuse.ProblemSurface.Movement",
-					value = "movement"
-				},
-				{
-					localizationKey = "Feature.ReportAbuse.ProblemSurface.MusicOrSoundEffect",
-					value = "music"
-				},
-				{
-					localizationKey = "Feature.ReportAbuse.ProblemSurface.TextChat",
-					value = "text"
-				},
-				{
-					localizationKey = "Feature.ReportAbuse.ProblemSurface.Username",
-					value = "username"
-				}
-			}
-		})
-	})
 end

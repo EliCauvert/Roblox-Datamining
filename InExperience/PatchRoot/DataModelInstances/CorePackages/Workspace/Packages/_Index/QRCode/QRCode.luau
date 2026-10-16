@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CorePackages").Packages.QRCode)
+﻿return (require(game:GetService("CorePackages").Packages.QRCode))

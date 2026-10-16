@@ -1,10 +1,10 @@
-﻿local inExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
-local getDidSideSheetOpenWithPeoplePageModule = require(inExperienceSideSheet.Utils.getDidSideSheetOpenWithPeoplePage)
-local registerInGameMenuPeoplePageActionsModule = require(inExperienceSideSheet.Utils.registerInGameMenuPeoplePageActions)
+﻿local InExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
+local GetDidSideSheetOpenWithPeoplePageModule = require(InExperienceSideSheet.Utils.getDidSideSheetOpenWithPeoplePage)
+local RegisterInGameMenuPeoplePageActionsModule = require(InExperienceSideSheet.Utils.registerInGameMenuPeoplePageActions)
 
-return function()
-	-- upvalues: getDidSideSheetOpenWithPeoplePageModule (ref), registerInGameMenuPeoplePageActionsModule (ref)
-	if getDidSideSheetOpenWithPeoplePageModule() then
-		registerInGameMenuPeoplePageActionsModule.closePeoplePage()
+return function() --[[ Line: 8 ]]
+	-- upvalues: GetDidSideSheetOpenWithPeoplePageModule (copy), RegisterInGameMenuPeoplePageActionsModule (copy)
+	if GetDidSideSheetOpenWithPeoplePageModule() then
+		RegisterInGameMenuPeoplePageActionsModule.closePeoplePage()
 	end
 end

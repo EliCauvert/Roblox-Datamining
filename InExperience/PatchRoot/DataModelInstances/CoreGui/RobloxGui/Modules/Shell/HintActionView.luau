@@ -1,113 +1,116 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local shell = game:GetService("CoreGui"):FindFirstChild("RobloxGui"):FindFirstChild("Modules"):FindFirstChild("Shell")
-local contextActionService = game:GetService("ContextActionService")
-local textService = game:GetService("TextService")
-local globalSettingsModule = require(shell:FindFirstChild("GlobalSettings"))
-local utilityModule = require(shell:FindFirstChild("Utility"))
-local roactGamepadModule = require(corePackagesService.Packages.RoactGamepad)
-local create = require(corePackagesService.Workspace.Packages.AppCommonLib).Create
-local getFFlagDebugLuaAppAlwaysUseGamepad = require(corePackagesService.Workspace.Packages.SharedFlags).getFFlagDebugLuaAppAlwaysUseGamepad
+﻿local CorePackages = game:GetService("CorePackages")
+local Shell = game:GetService("CoreGui"):FindFirstChild("RobloxGui"):FindFirstChild("Modules"):FindFirstChild("Shell")
+local ContextActionService = game:GetService("ContextActionService")
+local TextService = game:GetService("TextService")
+local GlobalSettingsModule = require(Shell:FindFirstChild("GlobalSettings"))
+local UtilityModule = require(Shell:FindFirstChild("Utility"))
+local RoactGamepadModule = require(CorePackages.Packages.RoactGamepad)
+local CreateFunction = require(CorePackages.Workspace.Packages.AppCommonLib).Create
+local GetFFlagDebugLuaAppAlwaysUseGamepadFunction = require(CorePackages.Workspace.Packages.SharedFlags).getFFlagDebugLuaAppAlwaysUseGamepad
 
-return function(p1, p2, p3)
-	-- upvalues: create (ref), globalSettingsModule (ref), textService (ref), utilityModule (ref), contextActionService (ref), getFFlagDebugLuaAppAlwaysUseGamepad (ref), roactGamepadModule (ref)
-	if p3 == nil then
-		p3 = UDim2.new(1, -1, 1, -1)
+return function(Parent, ActionName: string, Vector: UDim2) --[[ Line: 26 | Named "createHintActionView" ]]
+	-- upvalues: CreateFunction (copy), GlobalSettingsModule (copy), TextService (copy), UtilityModule (copy), ContextActionService (copy), GetFFlagDebugLuaAppAlwaysUseGamepadFunction (copy), RoactGamepadModule (copy)
+	if Vector == nil then
+		Vector = UDim2.new(1, -1, 1, -1)
 	end
 	local t = {}
 	
-	if p2 == nil or #p2 == 0 then
-		p2 = "DefaultHintAction"
+	if ActionName == nil or #ActionName == 0 then
+		ActionName = "DefaultHintAction"
 	end
-	local var1 = create("Frame")({
+	local Parent1 = CreateFunction("Frame")({
 		Name = "HintActionContainer",
 		BackgroundTransparency = 1,
 		Size = UDim2.new(0, 0, 0, 0),
-		Parent = p1
+		Parent = Parent
 	})
-	local var2 = create("TextLabel")({
+	local Label = CreateFunction("TextLabel")({
 		Name = "HintActionText",
 		BackgroundTransparency = 1,
 		Text = "",
 		ZIndex = 10,
-		Font = globalSettingsModule.RegularFont,
-		FontSize = globalSettingsModule.TitleSize,
-		TextColor3 = globalSettingsModule.WhiteTextColor,
+		Font = GlobalSettingsModule.RegularFont,
+		FontSize = GlobalSettingsModule.TitleSize,
+		TextColor3 = GlobalSettingsModule.WhiteTextColor,
 		TextXAlignment = Enum.TextXAlignment.Right,
-		Parent = var1
+		Parent = Parent1
 	})
-	local var3 = create("ImageLabel")({
+	local Image = CreateFunction("ImageLabel")({
 		Name = "HintActionImage",
 		BackgroundTransparency = 1,
 		Image = "",
 		ZIndex = 10,
 		Size = UDim2.new(0, 83, 0, 83),
-		Parent = var1
+		Parent = Parent1
 	})
 	
-	local function updateLayout()
-		-- upvalues: textService (copy), var2 (ref), utilityModule (copy), var3 (ref), var1 (ref), p3 (write)
-		local textTextSize = textService:GetTextSize(var2.Text, utilityModule.ConvertFontSizeEnumToInt(var2.FontSize), var2.Font, Vector2.new(0, 0))
-		var2.Size = UDim2.new(0, textTextSize.x, 0, var3.Size.Y.Offset)
-		var2.Position = UDim2.new(1, -textTextSize.x, 0, -4)
-		var1.Size = UDim2.new(0, textTextSize.x + var3.Size.X.Offset + 8, 0, var3.Size.Y.Offset)
-		var1.Position = UDim2.new(p3.X.Scale, p3.X.Offset * var1.Size.X.Offset, p3.Y.Scale, p3.Y.Offset * var1.Size.Y.Offset)
+	local function updateLayout() --[[ Line: 69 ]]
+		-- upvalues: TextService (upval), Label (copy), UtilityModule (upval), Image (copy), Parent1 (copy), Vector (ref)
+		local TextSize = TextService:GetTextSize(Label.Text, UtilityModule.ConvertFontSizeEnumToInt(Label.FontSize), Label.Font, Vector2.new(0, 0))
+		Label.Size = UDim2.new(0, TextSize.x, 0, Image.Size.Y.Offset)
+		Label.Position = UDim2.new(1, -TextSize.x, 0, -4)
+		Parent1.Size = UDim2.new(0, TextSize.x + Image.Size.X.Offset + 8, 0, Image.Size.Y.Offset)
+		Parent1.Position = UDim2.new(Vector.X.Scale, Vector.X.Offset * Parent1.Size.X.Offset, Vector.Y.Scale, Vector.Y.Offset * Parent1.Size.Y.Offset)
 	end
 	
-	function t.BindAction(_, p4, p5)
-		-- upvalues: contextActionService (copy), p2 (write), getFFlagDebugLuaAppAlwaysUseGamepad (copy), roactGamepadModule (copy)
-		if not p4 then return end
-		contextActionService:UnbindCoreAction(p2)
+	function t:BindAction(FunctionToBind, p1) --[[ Line: 86 ]]
+		-- upvalues: ContextActionService (upval), ActionName (ref), GetFFlagDebugLuaAppAlwaysUseGamepadFunction (upval), RoactGamepadModule (upval)
+		if not FunctionToBind then return end
+		ContextActionService:UnbindCoreAction(ActionName)
 		
-		if getFFlagDebugLuaAppAlwaysUseGamepad() and roactGamepadModule.Config.DebugKeyboardBindings then
-			contextActionService:BindCoreAction(p2, p4, false, p5, table.unpack(roactGamepadModule.Config.DebugKeyboardBindings[p5] or {}))
+		if GetFFlagDebugLuaAppAlwaysUseGamepadFunction() and RoactGamepadModule.Config.DebugKeyboardBindings then
+			ContextActionService:BindCoreAction(ActionName, FunctionToBind, false, p1, table.unpack(RoactGamepadModule.Config.DebugKeyboardBindings[p1] or {}))
+			
+			return
+		else
+			ContextActionService:BindCoreAction(ActionName, FunctionToBind, false, p1)
+		end
+	end
+	
+	function t:UnbindAction() --[[ Line: 100 ]]
+		-- upvalues: ContextActionService (upval), ActionName (ref)
+		ContextActionService:UnbindCoreAction(ActionName)
+	end
+	
+	function t:SetParent(Parent) --[[ Line: 104 ]]
+		-- upvalues: Parent1 (copy)
+		Parent1.Parent = Parent
+	end
+	
+	function t:SetVisible(Visible) --[[ Line: 108 ]]
+		-- upvalues: Parent1 (copy)
+		Parent1.Visible = Visible
+	end
+	
+	function t:SetTransparency(ImageTransparency) --[[ Line: 112 ]]
+		-- upvalues: Label (copy), Image (copy)
+		Label.TextTransparency = ImageTransparency
+		Image.ImageTransparency = ImageTransparency
+	end
+	
+	function t:SetVisibleWithTween(p1) --[[ Line: 117 ]]
+		-- upvalues: UtilityModule (upval), Label (copy), Image (copy)
+		UtilityModule.PropertyTweener(Label, "TextTransparency", Label.TextTransparency, p1, 0.25, UtilityModule.EaseOutQuad, true)
+		UtilityModule.PropertyTweener(Image, "ImageTransparency", Image.ImageTransparency, p1, 0.25, UtilityModule.EaseOutQuad, true)
+	end
+	
+	function t:SetText(Text) --[[ Line: 122 ]]
+		-- upvalues: Label (copy), updateLayout (copy)
+		if Text ~= Label.Text then
+			Label.Text = Text
+			updateLayout()
 			
 			return
 		end
-		contextActionService:BindCoreAction(p2, p4, false, p5)
 	end
 	
-	function t.UnbindAction(_)
-		-- upvalues: contextActionService (copy), p2 (write)
-		contextActionService:UnbindCoreAction(p2)
-	end
-	
-	function t.SetParent(_, p4)
-		-- upvalues: var1 (ref)
-		var1.Parent = p4
-	end
-	
-	function t.SetVisible(_, p4)
-		-- upvalues: var1 (ref)
-		var1.Visible = p4
-	end
-	
-	function t.SetTransparency(_, p4)
-		-- upvalues: var2 (ref), var3 (ref)
-		var2.TextTransparency = p4
-		var3.ImageTransparency = p4
-	end
-	
-	function t.SetVisibleWithTween(_, p4)
-		-- upvalues: utilityModule (copy), var2 (ref), var3 (ref)
-		utilityModule.PropertyTweener(var2, "TextTransparency", var2.TextTransparency, p4, 0.25, utilityModule.EaseOutQuad, true)
-		utilityModule.PropertyTweener(var3, "ImageTransparency", var3.ImageTransparency, p4, 0.25, utilityModule.EaseOutQuad, true)
-	end
-	
-	function t.SetText(_, p4)
-		-- upvalues: var2 (ref), updateLayout (ref)
-		if p4 == var2.Text then
+	function t:SetImage(Image1) --[[ Line: 131 ]]
+		-- upvalues: Image (copy)
+		if Image1 ~= Image.Image then
+			Image.Image = Image1
+			
 			return
 		end
-		var2.Text = p4
-		updateLayout()
-	end
-	
-	function t.SetImage(_, p4)
-		-- upvalues: var3 (ref)
-		if p4 == var3.Image then
-			return
-		end
-		var3.Image = p4
 	end
 	
 	return t

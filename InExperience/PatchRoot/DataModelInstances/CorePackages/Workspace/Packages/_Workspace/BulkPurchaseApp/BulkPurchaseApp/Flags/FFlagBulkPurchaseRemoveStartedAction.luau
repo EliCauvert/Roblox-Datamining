@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("BulkPurchaseRemoveStartedAction", false)
+﻿return (game:DefineFastFlag("BulkPurchaseRemoveStartedAction", false))

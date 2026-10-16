@@ -1,38 +1,45 @@
-﻿local momentsCommon = script:FindFirstAncestor("MomentsCommon")
-local parent = momentsCommon.Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local _ = require(momentsCommon.Media.MediaTypes)
-local useHasPresentedFrameModule = require(momentsCommon.Media.useHasPresentedFrame)
-local momentsSurfaceLoadManagerModule = require(script.Parent.MomentsSurfaceLoadManager)
-local fFlagMomentsMediaSmoothnessTelemetryModule = require(momentsCommon.Flags.FFlagMomentsMediaSmoothnessTelemetry)
-local captureKindModule = require(momentsCommon.Enums.CaptureKind)
+﻿local MomentsCommon = script:FindFirstAncestor("MomentsCommon")
+local Parent = MomentsCommon.Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local _ = require(MomentsCommon.Media.MediaTypes)
+local UseHasPresentedFrameModule = require(MomentsCommon.Media.useHasPresentedFrame)
+local MomentsSurfaceLoadManagerModule = require(script.Parent.MomentsSurfaceLoadManager)
+local FFlagMomentsMediaSmoothnessTelemetryModule = require(MomentsCommon.Flags.FFlagMomentsMediaSmoothnessTelemetry)
+local CaptureKindModule = require(MomentsCommon.Enums.CaptureKind)
 
-return function(p1)
-	-- upvalues: reactModule (ref), useHasPresentedFrameModule (ref), signalsModule (ref), signalsReactModule (ref), fFlagMomentsMediaSmoothnessTelemetryModule (ref), momentsSurfaceLoadManagerModule (ref), captureKindModule (ref)
-	local controller = p1.controller
-	local isVideo = p1.isVideo
-	local enabled = p1.enabled
-	local var1 = reactModule.useRef(nil)
-	local var2 = if isVideo then useHasPresentedFrameModule(controller, enabled and isVideo) else signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), controller (ref)
-		return signalsModule.createComputed(function(p2)
-			-- upvalues: controller (copy)
-			return if controller == nil then nil else controller.getState(p2).readiness
+return function(p1) --[[ Line: 23 | Named "useMomentsSurfaceReadyTracking" ]]
+	-- upvalues: ReactModule (copy), UseHasPresentedFrameModule (copy), SignalsModule (copy), SignalsReactModule (copy), FFlagMomentsMediaSmoothnessTelemetryModule (copy), MomentsSurfaceLoadManagerModule (copy), CaptureKindModule (copy)
+	local Controller = p1.controller
+	local IsVideo = p1.isVideo
+	local Enabled = p1.enabled
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseHasPresentedFrameModuleResult = UseHasPresentedFrameModule(Controller, Enabled and IsVideo)
+	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 38 ]]
+		-- upvalues: SignalsModule (upval), Controller (copy)
+		return SignalsModule.createComputed(function(p2) --[[ Line: 39 ]]
+			-- upvalues: Controller (upval)
+			return if Controller == nil then nil else Controller.getState(p2).readiness
 		end)
-	end, { controller })) == "Ready"
-	reactModule.useEffect(function()
-		-- upvalues: enabled (ref), var2 (ref), controller (ref), var1 (ref), fFlagMomentsMediaSmoothnessTelemetryModule (copy), momentsSurfaceLoadManagerModule (copy), isVideo (ref), captureKindModule (copy)
-		if enabled and var2 and (controller ~= nil and var1.current ~= controller) then
-			var1.current = controller
+	end, { Controller })))
+	local UseHasPresentedFrameModuleResult1 = if IsVideo then UseHasPresentedFrameModuleResult else UseSignalStateResult == "Ready"
+	ReactModule.useEffect(function() --[[ Line: 50 ]]
+		-- upvalues: Enabled (copy), UseHasPresentedFrameModuleResult1 (copy), Controller (copy), UseRefResult (copy), FFlagMomentsMediaSmoothnessTelemetryModule (upval), MomentsSurfaceLoadManagerModule (upval), IsVideo (copy), CaptureKindModule (upval)
+		if Enabled and UseHasPresentedFrameModuleResult1 and Controller ~= nil and UseRefResult.current ~= Controller then
+			UseRefResult.current = Controller
 			
-			if fFlagMomentsMediaSmoothnessTelemetryModule then
-				momentsSurfaceLoadManagerModule.markSurfaceReady(if isVideo then captureKindModule.Video else captureKindModule.Screenshot)
+			if FFlagMomentsMediaSmoothnessTelemetryModule then
+				MomentsSurfaceLoadManagerModule.markSurfaceReady(if IsVideo then CaptureKindModule.Video else CaptureKindModule.Screenshot)
 				
 				return
 			end
-			momentsSurfaceLoadManagerModule.markSurfaceReady()
+			MomentsSurfaceLoadManagerModule.markSurfaceReady()
 		end
-	end, { enabled, var2, isVideo, controller })
+	end, {
+		Enabled,
+		UseHasPresentedFrameModuleResult1,
+		IsVideo,
+		Controller
+	})
 end

@@ -1,17 +1,17 @@
-﻿local parent = script:FindFirstAncestor("FriendsCalling").Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local text = foundationModule.Text
-local view = foundationModule.View
+﻿local Parent = script:FindFirstAncestor("FriendsCalling").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local Text = FoundationModule.Text
+local View = FoundationModule.View
 
-return function(p1)
-	-- upvalues: reactModule (ref), view (ref), text (ref)
-	return reactModule.createElement(view, {
+return function(p1) --[[ Line: 16 | Named "AvatarPlaceholder" ]]
+	-- upvalues: ReactModule (copy), View (copy), Text (copy)
+	return ReactModule.createElement(View, {
 		tag = "align-x-center align-y-center radius-circle bg-surface-300",
 		Size = UDim2.fromOffset(p1.size, p1.size),
 		testId = p1.testId
 	}, {
-		Label = reactModule.createElement(text, {
+		Label = ReactModule.createElement(Text, {
 			Text = "Avatar Here",
 			tag = "auto-xy text-body-small content-default"
 		})

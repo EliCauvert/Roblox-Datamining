@@ -1,9 +1,9 @@
-﻿return function(p1, p2)
+﻿return function(Callback, p1) --[[ Line: 1 | Named "validateProps" ]]
 	if _G.__DEV__ or _G.__DISABLE_ALL_WARNINGS_EXCEPT_PROP_VALIDATION__ then
-		local var1, var2 = p1(p2)
+		local CallbackResult, CallbackResult2 = Callback(p1)
 		
-		if not var1 then
-			error(`prop validation failed: {var2}`)
+		if not CallbackResult then
+			error(`prop validation failed: {CallbackResult2}`)
 		end
 	end
 end

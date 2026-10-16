@@ -1,6 +1,6 @@
-﻿local tableDifferenceModule = require(script.Parent.tableDifference)
+﻿local TableDifferenceModule = require(script.Parent.tableDifference)
 
-local function _(p1)
+local function _(p1) --[[ Line: 8 | Named "membershipTable" ]]
 	local t = {}
 	
 	for i = 1, #p1 do
@@ -9,31 +9,31 @@ local function _(p1)
 	return t
 end
 
-local _ = function(p2)
-	local t = {}
+local _ = function(List) --[[ Line: 20 | Named "listOfKeys" ]]
+	local List1 = {}
 	
-	for i, v in pairs(p2) do
-		table.insert(t, i)
+	for i, _ in pairs(List) do
+		table.insert(List1, i)
 	end
-	return t
+	return List1
 end
 
-return function(p3, p4)
-	-- upvalues: tableDifferenceModule (ref)
+return function(p2, p3) --[[ Line: 33 ]]
+	-- upvalues: TableDifferenceModule (copy)
 	local t = {}
 	
-	for i = 1, #p3 do
-		t[p3[i]] = true
+	for i = 1, #p2 do
+		t[p2[i]] = true
 	end
-	local t_1 = {}
+	local t1 = {}
 	
-	for i_1 = 1, #p4 do
-		t_1[p4[i_1]] = true
+	for i1 = 1, #p3 do
+		t1[p3[i1]] = true
 	end
-	local t_2 = {}
+	local List = {}
 	
-	for i_2, v in pairs(tableDifferenceModule(t, t_1)) do
-		table.insert(t_2, i_2)
+	for i2, _ in pairs((TableDifferenceModule(t, t1))) do
+		table.insert(List, i2)
 	end
-	return t_2
+	return List
 end

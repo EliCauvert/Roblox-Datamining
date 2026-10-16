@@ -1,71 +1,71 @@
-﻿local parent = script:FindFirstAncestor("AppChat").Parent
-local roactModule = require(parent.Roact)
-local UIBloxModule = require(parent.UIBlox)
-local images = UIBloxModule.App.ImageSet.Images
-local iconSize = UIBloxModule.App.Constant.IconSize
-local toast = UIBloxModule.App.Dialog.Toast
-local loggerModule = require(script.Parent.Logger)
-local toastScreen = roactModule.PureComponent:extend("ToastScreen")
-toastScreen.defaultProps = { navigation = nil }
+﻿local Parent = script:FindFirstAncestor("AppChat").Parent
+local RoactModule = require(Parent.Roact)
+local UIBloxModule = require(Parent.UIBlox)
+local Images = UIBloxModule.App.ImageSet.Images
+local IconSize = UIBloxModule.App.Constant.IconSize
+local Toast = UIBloxModule.App.Dialog.Toast
+local LoggerModule = require(script.Parent.Logger)
+local ToastScreen = RoactModule.PureComponent:extend("ToastScreen")
+ToastScreen.defaultProps = { navigation = nil }
 
-function toastScreen.init(p1)
-	-- upvalues: images (ref), iconSize (ref)
+function ToastScreen.init(p1) --[[ Line: 17 ]]
+	-- upvalues: Images (copy), IconSize (copy)
 	p1.hasToastChanged = false
 	
-	function p0.getToastProps(p2)
-		-- upvalues: images (copy), iconSize (copy), p1 (ref)
-		local toastContent = p2.toastContent
+	function p1.getToastProps(ToastProps) --[[ Line: 20 ]]
+		-- upvalues: Images (upval), IconSize (upval), p1 (copy)
+		local ToastContent = ToastProps.toastContent
 		
 		return {
 			toastContent = {
-				toastTitle = toastContent.toastTitle,
-				toastSubtitle = toastContent.toastSubtitle,
-				iconColorStyle = toastContent.iconColorStyle,
-				iconImage = if p2.shouldHideIcon then nil else toastContent.iconImage or images["icons/status/alert"],
-				iconSize = toastContent.iconSize or Vector2.new(iconSize.Regular, iconSize.Regular),
-				swipeUpDismiss = toastContent.swipeUpDismiss,
-				onAppeared = function()
-					-- upvalues: toastContent (ref), p1 (copy)
-					if toastContent.onAppeared then
-						toastContent.onAppeared()
+				toastTitle = ToastContent.toastTitle,
+				toastSubtitle = ToastContent.toastSubtitle,
+				iconColorStyle = ToastContent.iconColorStyle,
+				iconImage = if ToastProps.shouldHideIcon then nil else ToastContent.iconImage or Images["icons/status/alert"],
+				iconSize = ToastContent.iconSize or Vector2.new(IconSize.Regular, IconSize.Regular),
+				swipeUpDismiss = ToastContent.swipeUpDismiss,
+				onAppeared = function() --[[ Line: 33 ]]
+					-- upvalues: ToastContent (copy), p1 (upval)
+					if ToastContent.onAppeared then
+						ToastContent.onAppeared()
 					end
 					p1.hasToastChanged = false
 				end,
-				onActivated = toastContent.onActivated,
-				onDismissed = function()
-					-- upvalues: toastContent (ref), p1 (copy)
-					if toastContent.onDismissed then
-						toastContent.onDismissed()
+				onActivated = ToastContent.onActivated,
+				onDismissed = function() --[[ Line: 40 ]]
+					-- upvalues: ToastContent (copy), p1 (upval)
+					if ToastContent.onDismissed then
+						ToastContent.onDismissed()
 					end
 					if not p1.hasToastChanged then
 						p1.props.navigation.goBack()
 					end
 				end
 			},
-			anchorPoint = p2.anchorPoint,
-			duration = p2.duration or 2,
-			layoutOrder = p2.layoutOrder,
-			position = p2.position,
-			size = p2.size,
-			show = p2.show
+			anchorPoint = ToastProps.anchorPoint,
+			duration = ToastProps.duration or 2,
+			layoutOrder = ToastProps.layoutOrder,
+			position = ToastProps.position,
+			size = ToastProps.size,
+			show = ToastProps.show
 		}
 	end
 end
 
-function toastScreen.render(p1)
-	-- upvalues: roactModule (ref), toast (ref)
+function ToastScreen.render(p1) --[[ Line: 61 ]]
+	-- upvalues: RoactModule (copy), Toast (copy)
 	assert(type(p1.props.navigation) ~= "nil", "ToastScreen should be wrapped with Roact Navigation")
 	
-	return roactModule.createElement(toast, p1.getToastProps(p1.props.navigation.getParam("toastProps", {})))
+	return RoactModule.createElement(Toast, (p1.getToastProps(p1.props.navigation.getParam("toastProps", {}))))
 end
 
-function toastScreen.didUpdate(p1, _, _)
+function ToastScreen.didUpdate(p1, _, _) --[[ Line: 69 ]]
 	p1.hasToastChanged = true
 end
 
-function toastScreen.didMount(_)
-	-- upvalues: loggerModule (ref)
-	loggerModule:info("{screen} mounted")
+function ToastScreen:didMount() --[[ Line: 73 ]]
+	-- upvalues: LoggerModule (copy)
+	LoggerModule:info("{screen} mounted")
 end
 
-return toastScreen
+return ToastScreen

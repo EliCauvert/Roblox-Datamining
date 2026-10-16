@@ -1,93 +1,100 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local luaUtils = parent.luaUtils
-local luauPolyfillModule = require(parent_1.LuauPolyfill)
-local error = luauPolyfillModule.Error
-local number = luauPolyfillModule.Number
-local regExpModule = require(parent_1.RegExp)
-local inspect = require(parent.jsutils.inspect).inspect
-local invariant = require(parent.jsutils.invariant).invariant
-local isObjectLike = require(parent.jsutils.isObjectLike).isObjectLike
-local isIteratableObject = require(parent.jsutils.isIteratableObject).isIteratableObject
-local _ = require(parent.language.ast)
-local kind = require(parent.language.kinds).Kind
-local graphQLID = require(parent.type.scalars).GraphQLID
-local definitionModule = require(parent.type.definition)
-local isLeafType = definitionModule.isLeafType
-local isEnumType = definitionModule.isEnumType
-local isInputObjectType = definitionModule.isInputObjectType
-local isListType = definitionModule.isListType
-local isNonNullType = definitionModule.isNonNullType
-local nullModule = require(luaUtils.null)
-local isNillishModule = require(luaUtils.isNillish)
-local isNillish = isNillishModule.isNillish
-local isNotNillish = isNillishModule.isNotNillish
-local var1 = nil
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local LuaUtils = Parent.luaUtils
+local LuauPolyfillModule = require(Parent1.LuauPolyfill)
+local Error1 = LuauPolyfillModule.Error
+local Number = LuauPolyfillModule.Number
+local InspectFunction = require(Parent.jsutils.inspect).inspect
+local InvariantFunction = require(Parent.jsutils.invariant).invariant
+local IsObjectLikeFunction = require(Parent.jsutils.isObjectLike).isObjectLike
+local IsIteratableObjectFunction = require(Parent.jsutils.isIteratableObject).isIteratableObject
+local _ = require(Parent.language.ast)
+local Kind = require(Parent.language.kinds).Kind
+local GraphQLID = require(Parent.type.scalars).GraphQLID
+local DefinitionModule = require(Parent.type.definition)
+local IsLeafTypeFunction = DefinitionModule.isLeafType
+local IsEnumTypeFunction = DefinitionModule.isEnumType
+local IsInputObjectTypeFunction = DefinitionModule.isInputObjectType
+local IsListTypeFunction = DefinitionModule.isListType
+local IsNonNullTypeFunction = DefinitionModule.isNonNullType
+local NullModule = require(LuaUtils.null)
+local IsNillishModule = require(LuaUtils.isNillish)
+local IsNillishFunction = IsNillishModule.isNillish
+local IsNotNillishFunction = IsNillishModule.isNotNillish
+local _01909 = nil
 
-local function astFromValue(p1, p2)
-	-- upvalues: isNonNullType (ref), astFromValue (ref), nullModule (ref), kind (ref), isListType (ref), isIteratableObject (ref), isNotNillish (ref), isInputObjectType (ref), isObjectLike (ref), isLeafType (ref), isNillish (ref), number (ref), var1 (write), isEnumType (ref), graphQLID (ref), error (ref), inspect (ref), invariant (ref)
-	if isNonNullType(p2) then
-		local var2 = astFromValue(p1, p2.ofType)
+local function astFromValue(List, OfType) --[[ Line: 70 ]]
+	-- upvalues: IsNonNullTypeFunction (copy), astFromValue (copy), NullModule (copy), Kind (copy), IsListTypeFunction (copy), IsIteratableObjectFunction (copy), IsNotNillishFunction (copy), IsInputObjectTypeFunction (copy), IsObjectLikeFunction (copy), IsLeafTypeFunction (copy), IsNillishFunction (copy), Number (copy), _01909 (ref), IsEnumTypeFunction (copy), GraphQLID (copy), Error1 (copy), InspectFunction (copy), InvariantFunction (copy)
+	if IsNonNullTypeFunction(OfType) then
+		local AstFromValueResult = astFromValue(List, OfType.ofType)
+		local Kind1 = AstFromValueResult ~= nil and (AstFromValueResult ~= NullModule and AstFromValueResult.kind)
 		
-		return if (var2 ~= nil and (var2 ~= nullModule and var2.kind)) == kind.NULL then nullModule else var2
-	elseif p1 == nullModule then
-		return { kind = kind.NULL }
-	elseif p1 == nil then
-		return nullModule
-	elseif isListType(p2) then
-		local ofType = p2.ofType
+		return if Kind1 == Kind.NULL then NullModule else AstFromValueResult
+	end
+	if List == NullModule then
+		return { kind = Kind.NULL }
+	end
+	if List == nil then
+		return NullModule
+	end
+	if IsListTypeFunction(OfType) then
+		local OfType1 = OfType.ofType
 		
-		if isIteratableObject(p1) then
-			local t = {}
+		if not IsIteratableObjectFunction(List) then
+			return astFromValue(List, OfType1)
+		end
+		local Values = {}
+		
+		for _, value in pairs(List) do
+			local AstFromValueResult = astFromValue(value, OfType1)
 			
-			for i, v in pairs(p1) do
-				local var3 = astFromValue(v, ofType)
-				
-				if isNotNillish(var3) then
-					table.insert(t, var3)
-				end
+			if IsNotNillishFunction(AstFromValueResult) then
+				table.insert(Values, AstFromValueResult)
 			end
-			return { kind = kind.LIST, values = t }
-		else
-			return astFromValue(p1, ofType)
 		end
-	elseif isInputObjectType(p2) then
-		if not isObjectLike(p1) then
-			return nullModule
+		return { kind = Kind.LIST, values = Values }
+	elseif IsInputObjectTypeFunction(OfType) then
+		if not IsObjectLikeFunction(List) then
+			return NullModule
 		end
-		local t = {}
+		local Fields = {}
 		
-		for i, v in ipairs(p2:getFields():values()) do
-			local var4 = astFromValue(p1[v.name], v.type)
+		for _, value1 in ipairs(OfType:getFields():values()) do
+			local AstFromValueResult = astFromValue(List[value1.name], value1.type)
 			
-			if isNotNillish(var4) then
-				table.insert(t, {
-					kind = kind.OBJECT_FIELD,
-					name = { kind = kind.NAME, value = v.name },
-					value = var4
+			if IsNotNillishFunction(AstFromValueResult) then
+				table.insert(Fields, {
+					kind = Kind.OBJECT_FIELD,
+					name = { kind = Kind.NAME, value = value1.name },
+					value = AstFromValueResult
 				})
 			end
 		end
-		return { kind = kind.OBJECT, fields = t }
-	elseif isLeafType(p2) then
-		local var5 = p2:serialize(p1)
-		
-		if isNillish(var5) then
-			return nullModule
-		elseif typeof(var5) == "boolean" then
-			return { kind = kind.BOOLEAN, value = var5 }
-		elseif typeof(var5) == "number" and number.isFinite(var5) then
-			local var6 = tostring(var5)
+		return { kind = Kind.OBJECT, fields = Fields }
+	else
+		if IsLeafTypeFunction(OfType) then
+			local SerializeResult = OfType:serialize(List)
 			
-			return if var1:test(var6) then { kind = kind.INT, value = var6 } else { kind = kind.FLOAT, value = var6 }
-		elseif typeof(var5) == "string" then
-			return if isEnumType(p2) then { kind = kind.ENUM, value = var5 } elseif p2 == graphQLID and var1:test(var5) then { kind = kind.INT, value = var5 } else { kind = kind.STRING, value = var5 }
+			if IsNillishFunction(SerializeResult) then
+				return NullModule
+			end
+			if typeof(SerializeResult) == "boolean" then
+				return { kind = Kind.BOOLEAN, value = SerializeResult }
+			end
+			if typeof(SerializeResult) == "number" and Number.isFinite(SerializeResult) then
+				local Text = tostring(SerializeResult)
+				
+				return if _01909:test(Text) then { kind = Kind.INT, value = Text } else { kind = Kind.FLOAT, value = Text }
+			end
+			if typeof(SerializeResult) == "string" then
+				return if IsEnumTypeFunction(OfType) then { kind = Kind.ENUM, value = SerializeResult } elseif OfType == GraphQLID and _01909:test(SerializeResult) then { kind = Kind.INT, value = SerializeResult } else { kind = Kind.STRING, value = SerializeResult }
+			end
+			error(Error1.new(("Cannot convert value to AST: %s."):format(InspectFunction(SerializeResult))))
 		end
-		error(error.new(("Cannot convert value to AST: %s."):format(inspect(var5))))
+		InvariantFunction(false, "Unexpected input type: " .. InspectFunction(OfType))
 	end
-	invariant(false, "Unexpected input type: " .. inspect(p2))
 end
 
-var1 = regExpModule("^-?(?:0|[1-9][0-9]*)$")
+_01909 = require(Parent1.RegExp)("^-?(?:0|[1-9][0-9]*)$")
 
-return { astFromValue = astFromValue, NULL = nullModule }
+return { astFromValue = astFromValue, NULL = NullModule }

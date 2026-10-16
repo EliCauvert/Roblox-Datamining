@@ -1,36 +1,36 @@
-﻿local parent = script:FindFirstAncestor("VerifiedBadges").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local icon = foundationModule.Icon
-local view = foundationModule.View
-local useTokens = foundationModule.Hooks.useTokens
-local iconName = foundationModule.Enums.IconName
-local iconSize = foundationModule.Enums.IconSize
-local iconVariant = foundationModule.Enums.IconVariant
+﻿local Parent = script:FindFirstAncestor("VerifiedBadges").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local Icon = FoundationModule.Icon
+local View = FoundationModule.View
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local IconName = FoundationModule.Enums.IconName
+local IconSize = FoundationModule.Enums.IconSize
+local IconVariant = FoundationModule.Enums.IconVariant
 
-return function(p1)
-	-- upvalues: useTokens (ref), iconSize (ref), reactModule (ref), view (ref), icon (ref), iconName (ref), iconVariant (ref)
-	local var1 = useTokens()
-	local size = p1.size or iconSize.Small
+return function(Frame) --[[ Line: 51 | Named "VerifiedBadge" ]]
+	-- upvalues: UseTokensFunction (copy), IconSize (copy), ReactModule (copy), View (copy), Icon (copy), IconName (copy), IconVariant (copy)
+	local UseTokensResult = UseTokensFunction()
+	local Size = Frame.size or IconSize.Small
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "auto-xy",
-		LayoutOrder = p1.LayoutOrder,
-		testId = p1.testId
+		LayoutOrder = Frame.LayoutOrder,
+		testId = Frame.testId
 	}, {
-		Backplate = reactModule.createElement(icon, {
+		Backplate = ReactModule.createElement(Icon, {
 			ZIndex = 1,
-			name = iconName.VerifiedBackplate,
-			variant = iconVariant.Filled,
-			size = size,
-			style = p1.backplateStyle or var1.Color.System.Emphasis
+			name = IconName.VerifiedBackplate,
+			variant = IconVariant.Filled,
+			size = Size,
+			style = Frame.backplateStyle or UseTokensResult.Color.System.Emphasis
 		}),
-		Check = reactModule.createElement(icon, {
+		Check = ReactModule.createElement(Icon, {
 			ZIndex = 2,
-			name = iconName.VerifiedCheck,
-			variant = iconVariant.Filled,
-			size = size,
-			style = p1.checkStyle or var1.Color.Extended.White.White_100
+			name = IconName.VerifiedCheck,
+			variant = IconVariant.Filled,
+			size = Size,
+			style = Frame.checkStyle or UseTokensResult.Color.Extended.White.White_100
 		})
 	})
 end

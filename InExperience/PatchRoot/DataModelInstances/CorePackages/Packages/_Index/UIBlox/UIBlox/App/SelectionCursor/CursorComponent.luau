@@ -1,59 +1,63 @@
-﻿local runService = game:GetService("RunService")
-local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local eventConnection = require(parent_1.ReactUtils).EventConnection
-local useStyleModule = require(parent.Core.Style.useStyle)
+﻿local RunService = game:GetService("RunService")
+local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local EventConnection = require(Parent1.ReactUtils).EventConnection
+local UseStyleModule = require(Parent.Core.Style.useStyle)
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useStyleModule (ref), reactModule (ref), eventConnection (ref), runService (ref)
-	local var1 = useStyleModule()
-	local selectionCursor = var1.Tokens.Component.SelectionCursor
-	local reducedMotion = var1.Settings.ReducedMotion
-	local colorSequence = ColorSequence.new({
-		ColorSequenceKeypoint.new(0, selectionCursor.Gradient.Start.Color3),
-		ColorSequenceKeypoint.new(1, selectionCursor.Gradient.End.Color3)
+return ReactModule.memo((ReactModule.forwardRef(function(p1, Ref) --[[ Line: 22 ]]
+	-- upvalues: UseStyleModule (copy), ReactModule (copy), EventConnection (copy), RunService (copy)
+	local UseStyleModuleResult = UseStyleModule()
+	local Selection = UseStyleModuleResult.Tokens.Color.Selection
+	local ReducedMotion = UseStyleModuleResult.Settings.ReducedMotion
+	local ColorSequence1 = ColorSequence.new({
+		ColorSequenceKeypoint.new(0, Selection.Start.Color3),
+		ColorSequenceKeypoint.new(1, Selection.End.Color3)
 	})
-	local numberSequence = NumberSequence.new({
-		NumberSequenceKeypoint.new(0, selectionCursor.Gradient.Start.Transparency),
-		NumberSequenceKeypoint.new(1, selectionCursor.Gradient.End.Transparency)
+	local NumberSequence1 = NumberSequence.new({
+		NumberSequenceKeypoint.new(0, Selection.Start.Transparency),
+		NumberSequenceKeypoint.new(1, Selection.End.Transparency)
 	})
-	local var2, var3 = reactModule.useBinding(0)
-	local var4, var5 = reactModule.useBinding(colorSequence)
-	local var6, var7 = reactModule.useBinding(numberSequence)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
+	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(ColorSequence1)
+	local UseBindingResult3, UseBindingResult2_2 = ReactModule.useBinding(NumberSequence1)
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Position = UDim2.fromOffset(-p1.offset, -p1.offset),
 		Size = UDim2.new(1, p1.offset * 2, 1, p1.offset * 2),
-		ref = p2
+		ref = Ref
 	}, {
-		UICorner = reactModule.createElement("UICorner", { CornerRadius = p1.cornerRadius }),
-		UIStroke = reactModule.createElement("UIStroke", {
+		UICorner = ReactModule.createElement("UICorner", { CornerRadius = p1.cornerRadius }),
+		UIStroke = ReactModule.createElement("UIStroke", {
 			Transparency = 0,
 			Color = Color3.new(1, 1, 1),
 			Thickness = p1.borderWidth
 		}, {
-			UIGradient = reactModule.createElement("UIGradient", { Rotation = var2, Color = var4, Transparency = var6 })
+			UIGradient = ReactModule.createElement("UIGradient", {
+				Rotation = UseBindingResult,
+				Color = UseBindingResult1,
+				Transparency = UseBindingResult3
+			})
 		}),
-		HeartbeatConnection = p1.isVisible and reactModule.createElement(eventConnection, {
-			event = runService.Heartbeat,
-			callback = function(_)
-				-- upvalues: var2 (ref), colorSequence (ref), numberSequence (ref), reducedMotion (ref), var3 (ref), var5 (ref), var7 (ref)
-				local var8 = var2:getValue() + 2
-				local var9 = colorSequence
-				local var10 = numberSequence
+		HeartbeatConnection = p1.isVisible and ReactModule.createElement(EventConnection, {
+			event = RunService.Heartbeat,
+			callback = function(_) --[[ Line: 60 ]]
+				-- upvalues: UseBindingResult (copy), ColorSequence1 (copy), NumberSequence1 (copy), ReducedMotion (copy), UseBindingResult2 (copy), UseBindingResult2_1 (copy), UseBindingResult2_2 (copy)
+				local NewValue = UseBindingResult:getValue() + 2
+				local ColorSequence2: ColorSequence = ColorSequence1
+				local NumberSequence2: NumberSequence = NumberSequence1
 				
-				if reducedMotion then
-					local var11 = (math.sin(math.rad(var8)) + 1) / 2
-					var9 = ColorSequence.new(var9.Keypoints[1].Value:Lerp(var9.Keypoints[#var9.Keypoints].Value, var11))
-					local value = var10.Keypoints[1].Value
-					var10 = NumberSequence.new(value + (var10.Keypoints[#var10.Keypoints].Value - value) * var11)
+				if ReducedMotion then
+					local SineRatio = (math.sin((math.rad(NewValue))) + 1) / 2
+					ColorSequence2 = ColorSequence.new(ColorSequence2.Keypoints[1].Value:Lerp(ColorSequence2.Keypoints[#ColorSequence2.Keypoints].Value, SineRatio))
+					local Value = NumberSequence2.Keypoints[1].Value
+					NumberSequence2 = NumberSequence.new(Value + (NumberSequence2.Keypoints[#NumberSequence2.Keypoints].Value - Value) * SineRatio)
 				end
-				var3(var8)
-				var5(var9)
-				var7(var10)
+				UseBindingResult2(NewValue)
+				UseBindingResult2_1(ColorSequence2)
+				UseBindingResult2_2(NumberSequence2)
 			end
 		})
 	})
-end))
+end)))

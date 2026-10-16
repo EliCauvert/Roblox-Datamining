@@ -1,24 +1,24 @@
-﻿local roduxModule = require(script.Parent.Rodux)
-local cryoModule = require(script.Parent.Parent.Cryo)
-local buildActionNameModule = require(script.Parent.buildActionName)
+﻿local RoduxModule = require(script.Parent.Rodux)
+local CryoModule = require(script.Parent.Parent.Cryo)
+local BuildActionNameModule = require(script.Parent.buildActionName)
 
-return function(p1)
-	-- upvalues: roduxModule (ref), buildActionNameModule (ref), cryoModule (ref)
-	return function()
-		-- upvalues: roduxModule (copy), buildActionNameModule (copy), p1 (ref), cryoModule (copy)
-		return roduxModule.createReducer({}, {
-			[buildActionNameModule(p1)] = function(p2, p3)
-				-- upvalues: cryoModule (copy)
-				local t = {}
+return function(p1) --[[ Line: 11 ]]
+	-- upvalues: RoduxModule (copy), BuildActionNameModule (copy), CryoModule (copy)
+	return function() --[[ Line: 12 ]]
+		-- upvalues: RoduxModule (upval), BuildActionNameModule (upval), p1 (copy), CryoModule (upval)
+		return RoduxModule.createReducer({}, {
+			[BuildActionNameModule(p1)] = function(p2, p3) --[[ Line: 14 ]]
+				-- upvalues: CryoModule (upval)
+				local Statuses = {}
 				
 				if #p3.ids == 0 then
-					t[p3.keymapper()] = p3.status
+					Statuses[p3.keymapper()] = p3.status
 				else
-					for i, v in ipairs(p3.ids) do
-						t[p3.keymapper(v)] = p3.status
+					for _, id in ipairs(p3.ids) do
+						Statuses[p3.keymapper(id)] = p3.status
 					end
 				end
-				return cryoModule.Dictionary.join(p2, t)
+				return CryoModule.Dictionary.join(p2, Statuses)
 			end
 		})
 	end

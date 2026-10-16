@@ -1,76 +1,77 @@
-﻿local parent = script:FindFirstAncestor("SduiSharedContent").Parent
-local guiService = game:GetService("GuiService")
-local tweenService = game:GetService("TweenService")
-local userGameSettingsService = UserSettings():GetService("UserGameSettings")
-local appPageShellModule = require(parent.AppPageShell)
-local discoveryAnalyticsModule = require(parent.DiscoveryAnalytics)
-local foundationModule = require(parent.Foundation)
-local localizationModule = require(parent.Localization)
-local reactModule = require(parent.React)
-local responsiveModule = require(parent.Responsive)
-local scrollToTop = appPageShellModule.scrollToTop
-local backToTopClickEvent = discoveryAnalyticsModule.Events.backToTopClickEvent
-local useTokens = foundationModule.Hooks.useTokens
-local useCursor = foundationModule.Hooks.useCursor
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local cursorType = foundationModule.Enums.CursorType
-local useLocalization = localizationModule.Hooks.useLocalization
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local fFlagAppPageShellScrollToTopFocus = require(parent.SharedFlags).FFlagAppPageShellScrollToTopFocus
-local var1 = if fFlagAppPageShellScrollToTopFocus then 1000000 else 1e999
+﻿local Parent = script:FindFirstAncestor("SduiSharedContent").Parent
+local GuiService = game:GetService("GuiService")
+local TweenService = game:GetService("TweenService")
+local UserGameSettings = UserSettings():GetService("UserGameSettings")
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local ResponsiveModule = require(Parent.Responsive)
+local ScrollToTopFunction = require(Parent.AppPageShell).scrollToTop
+local BackToTopClickEventFunction = require(Parent.DiscoveryAnalytics).Events.backToTopClickEvent
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseCursorFunction = FoundationModule.Hooks.useCursor
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local CursorType = FoundationModule.Enums.CursorType
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local FFlagAppPageShellScrollToTopFocus = require(Parent.SharedFlags).FFlagAppPageShellScrollToTopFocus
+local SelectionOrder: number = if FFlagAppPageShellScrollToTopFocus then 1000000 else 1e999
 
-local function scrollBackWithFocus(p1)
-	-- upvalues: tweenService (ref), guiService (ref)
-	local var2 = tweenService:Create(p1, TweenInfo.new(0.3), { CanvasPosition = Vector2.new(0, 0) })
-	var2:Play()
-	var2.Completed:Connect(function()
-		-- upvalues: guiService (copy), p1 (ref)
-		guiService:Select(p1)
+local function scrollBackWithFocus(Target) --[[ Line: 40 ]]
+	-- upvalues: TweenService (copy), GuiService (copy)
+	local Tween = TweenService:Create(Target, TweenInfo.new(0.3), { CanvasPosition = Vector2.new(0, 0) })
+	Tween:Play()
+	Tween.Completed:Connect(function() --[[ Line: 45 ]]
+		-- upvalues: GuiService (upval), Target (copy)
+		GuiService:Select(Target)
 	end)
 end
 
-return function(p1)
-	-- upvalues: useTokens (ref), useCursor (ref), cursorType (ref), fFlagAppPageShellScrollToTopFocus (ref), responsiveModule (ref), useLocalization (ref), reactModule (ref), scrollToTop (ref), userGameSettingsService (ref), scrollBackWithFocus (ref), backToTopClickEvent (ref), var1 (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
-	local var2 = useTokens()
-	local var3 = if fFlagAppPageShellScrollToTopFocus then nil else responsiveModule.useLastInput() == responsiveModule.Input.Directional
+return function(p1) --[[ Line: 50 | Named "BackToTopButton" ]]
+	-- upvalues: UseTokensFunction (copy), UseCursorFunction (copy), CursorType (copy), FFlagAppPageShellScrollToTopFocus (copy), ResponsiveModule (copy), UseLocalizationFunction (copy), ReactModule (copy), ScrollToTopFunction (copy), UserGameSettings (copy), scrollBackWithFocus (copy), BackToTopClickEventFunction (copy), SelectionOrder (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	local UseTokensResult = UseTokensFunction()
+	local IsUseLastInputResultMatch = if FFlagAppPageShellScrollToTopFocus then nil else ResponsiveModule.useLastInput() == ResponsiveModule.Input.Directional
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 0, 70),
 		LayoutOrder = p1.layoutOrder
 	}, {
-		BackToTopButton = reactModule.createElement("TextButton", {
+		BackToTopButton = ReactModule.createElement("TextButton", {
 			Size = UDim2.new(0.5, 0, 0, 30),
 			Position = UDim2.new(0.25, 0, 0, 20),
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			AutoButtonColor = false,
-			SelectionOrder = var1,
-			Text = useLocalization({ backToTop = "Feature.GamePage.Action.BackToTop" }).backToTop,
-			Font = if foundationFontFaceMigration then nil else var2.Typography.BodyLarge.Font,
-			FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Typography.BodyLarge.Font) else nil,
-			TextSize = var2.Typography.BodyLarge.FontSize,
-			TextColor3 = var2.Color.Content.Emphasis.Color3,
-			TextTransparency = var2.Color.Content.Emphasis.Transparency,
+			SelectionOrder = SelectionOrder,
+			Text = UseLocalizationFunction({ backToTop = "Feature.GamePage.Action.BackToTop" }).backToTop,
+			Font = if FoundationFontFaceMigration then nil else UseTokensResult.Typography.BodyLarge.Font,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.BodyLarge.Font) else nil,
+			TextSize = UseTokensResult.Typography.BodyLarge.FontSize,
+			TextColor3 = UseTokensResult.Color.Content.Emphasis.Color3,
+			TextTransparency = UseTokensResult.Color.Content.Emphasis.Transparency,
 			TextXAlignment = Enum.TextXAlignment.Center,
 			TextYAlignment = Enum.TextYAlignment.Center,
-			SelectionImageObject = useCursor(cursorType.RoundedRect),
-			[reactModule.Event.Activated] = reactModule.useCallback(function()
-				-- upvalues: p1 (ref), fFlagAppPageShellScrollToTopFocus (copy), scrollToTop (copy), userGameSettingsService (copy), var3 (ref), scrollBackWithFocus (copy), backToTopClickEvent (copy)
-				local current = p1.scrollingFrameRef.current
+			SelectionImageObject = UseCursorFunction(CursorType.RoundedRect),
+			[ReactModule.Event.Activated] = ReactModule.useCallback(function() --[[ Line: 60 ]]
+				-- upvalues: p1 (copy), FFlagAppPageShellScrollToTopFocus (upval), ScrollToTopFunction (upval), UserGameSettings (upval), IsUseLastInputResultMatch (copy), scrollBackWithFocus (upval), BackToTopClickEventFunction (upval)
+				local Current = p1.scrollingFrameRef.current
 				
-				if not current then return end
-				if fFlagAppPageShellScrollToTopFocus then
-					scrollToTop(current)
-				elseif userGameSettingsService.ReducedMotion then
-					current.CanvasPosition = Vector2.new(0, 0)
-				elseif var3 then
-					scrollBackWithFocus(current)
+				if not Current then return end
+				if FFlagAppPageShellScrollToTopFocus then
+					ScrollToTopFunction(Current)
+				elseif UserGameSettings.ReducedMotion then
+					Current.CanvasPosition = Vector2.new(0, 0)
+				elseif IsUseLastInputResultMatch then
+					scrollBackWithFocus(Current)
 				else
-					current:ScrollToTop()
+					Current:ScrollToTop()
 				end
-				backToTopClickEvent(p1.pageContext)
-			end, { p1.scrollingFrameRef, p1.pageContext, var3 })
+				BackToTopClickEventFunction(p1.pageContext)
+			end, {
+				p1.scrollingFrameRef,
+				p1.pageContext,
+				IsUseLastInputResultMatch
+			})
 		})
 	})
 end

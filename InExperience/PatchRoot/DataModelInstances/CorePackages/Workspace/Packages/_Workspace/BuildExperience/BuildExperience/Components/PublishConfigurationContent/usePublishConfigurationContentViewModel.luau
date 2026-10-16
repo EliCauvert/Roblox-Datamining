@@ -1,67 +1,66 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
-local signalsReactModule = require(parent.SignalsReact)
-local useOpenWebView = require(parent.WebViewUtils).useOpenWebView
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local UseOpenWebViewFunction = require(Parent.WebViewUtils).useOpenWebView
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local _ = require(script.Parent.PublishConfigurationContentView)
-local experienceGuidelinesModule = require(parent.DataHydration.ExperienceGuidelines)
-local universeActivationModule = require(parent.DataHydration.UniverseActivation)
-local contentMaturityUtilsModule = require(buildExperience.utils.ContentMaturityUtils)
-local gameConfigurationActionsModule = require(buildExperience.utils.GameConfigurationActions)
-local gameConfigurationLabelsModule = require(buildExperience.utils.GameConfigurationLabels)
-local refreshPublishEligibilityModule = require(buildExperience.utils.refreshPublishEligibility)
-local fFlagMyStatsMediaSelector = sharedFlagsModule.FFlagMyStatsMediaSelector
+local ExperienceGuidelinesModule = require(Parent.DataHydration.ExperienceGuidelines)
+local UniverseActivationModule = require(Parent.DataHydration.UniverseActivation)
+local ContentMaturityUtilsModule = require(BuildExperience.utils.ContentMaturityUtils)
+local GameConfigurationActionsModule = require(BuildExperience.utils.GameConfigurationActions)
+local GameConfigurationLabelsModule = require(BuildExperience.utils.GameConfigurationLabels)
+local RefreshPublishEligibilityModule = require(BuildExperience.utils.refreshPublishEligibility)
+local FFlagMyStatsMediaSelector = require(Parent.SharedFlags).FFlagMyStatsMediaSelector
 
-return function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), useOpenWebView (ref), experienceGuidelinesModule (ref), reactModule (ref), signalsReactModule (ref), universeActivationModule (ref), contentMaturityUtilsModule (ref), gameConfigurationLabelsModule (ref), gameConfigurationActionsModule (ref), refreshPublishEligibilityModule (ref), fFlagMyStatsMediaSelector (ref)
-	local var1 = useLocalization({
-		creatorHub = localizationStringsModule.GAME_CONFIGURATION_CREATOR_HUB,
-		loading = localizationStringsModule.GAME_CONFIGURATION_LOADING,
-		questionnaireRequiredBanner = localizationStringsModule.GAME_CONFIGURATION_QUESTIONNAIRE_REQUIRED_BANNER
+return function(p1) --[[ Line: 33 | Named "usePublishConfigurationContentViewModel" ]]
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseOpenWebViewFunction (copy), ExperienceGuidelinesModule (copy), ReactModule (copy), SignalsReactModule (copy), UniverseActivationModule (copy), ContentMaturityUtilsModule (copy), GameConfigurationLabelsModule (copy), GameConfigurationActionsModule (copy), RefreshPublishEligibilityModule (copy), FFlagMyStatsMediaSelector (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
+		creatorHub = LocalizationStringsModule.GAME_CONFIGURATION_CREATOR_HUB,
+		loading = LocalizationStringsModule.GAME_CONFIGURATION_LOADING,
+		questionnaireRequiredBanner = LocalizationStringsModule.GAME_CONFIGURATION_QUESTIONNAIRE_REQUIRED_BANNER
 	})
-	local creatorHub = var1.creatorHub
-	local loading = var1.loading
-	local questionnaireRequiredBanner = var1.questionnaireRequiredBanner
-	local var2 = useOpenWebView()
-	local experienceGuidelinesStore = experienceGuidelinesModule.getExperienceGuidelinesStore()
-	local var3 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: experienceGuidelinesStore (ref), p1 (ref)
-		return experienceGuidelinesStore.getAndFetchDetailedGuidelines(p1.universeId)
-	end, { experienceGuidelinesStore, p1.universeId }).data)
-	local var4 = nil
-	local _ = nil
-	local _ = false
-	local universeActivationStore = universeActivationModule.getUniverseActivationStore()
-	local var5 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: universeActivationStore (ref), p1 (ref)
-		return universeActivationStore.getAndFetchEligibility(p1.universeId)
-	end, { universeActivationStore, p1.universeId }).data)
-	local var6 = contentMaturityUtilsModule.isContentUnrated(p1.universeId)
-	local var7 = contentMaturityUtilsModule.isSealBroken(p1.universeId)
-	local var8 = if var5 then var5.provisionalRating else nil
-	local var9 = var6 and not var7
+	local CreatorHub = UseLocalizationResult.creatorHub
+	local Loading = UseLocalizationResult.loading
+	local QuestionnaireRequiredBanner = UseLocalizationResult.questionnaireRequiredBanner
+	local UseOpenWebViewResult = UseOpenWebViewFunction()
+	local ExperienceGuidelinesStore = ExperienceGuidelinesModule.getExperienceGuidelinesStore()
+	local UseSignalStateResult = SignalsReactModule.useSignalState(ReactModule.useMemo(function() --[[ Line: 44 ]]
+		-- upvalues: ExperienceGuidelinesStore (copy), p1 (copy)
+		return ExperienceGuidelinesStore.getAndFetchDetailedGuidelines(p1.universeId)
+	end, { ExperienceGuidelinesStore, p1.universeId }).data)
+	local BuildMaturityBannerText = nil
+	local UniverseActivationStore = UniverseActivationModule.getUniverseActivationStore()
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(ReactModule.useMemo(function() --[[ Line: 53 ]]
+		-- upvalues: UniverseActivationStore (copy), p1 (copy)
+		return UniverseActivationStore.getAndFetchEligibility(p1.universeId)
+	end, { UniverseActivationStore, p1.universeId }).data)
+	local IsContentUnrated = ContentMaturityUtilsModule.isContentUnrated(p1.universeId)
+	local IsSealBroken = ContentMaturityUtilsModule.isSealBroken(p1.universeId)
+	local ProvisionalRating = if UseSignalStateResult1 then UseSignalStateResult1.provisionalRating else nil
+	local NoIsSealBroken: boolean = IsContentUnrated and not IsSealBroken
 	
-	if var7 and var6 then
-		var4 = questionnaireRequiredBanner
+	if IsSealBroken and IsContentUnrated then
+		BuildMaturityBannerText = QuestionnaireRequiredBanner
 	end
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 73 ]]
+		-- upvalues: UseOpenWebViewResult (copy), GameConfigurationActionsModule (upval), p1 (copy), CreatorHub (copy)
+		UseOpenWebViewResult(GameConfigurationActionsModule.getCreatorHubConfigureUrl(p1.universeId), CreatorHub)
+	end, { CreatorHub, UseOpenWebViewResult, p1.universeId })
+	
 	return {
-		buildMaturityBannerText = var4,
-		contentMaturityText = gameConfigurationLabelsModule.getContentMaturityText(var3, var8, var9) or loading,
-		onOpenIconAndThumbnails = if fFlagMyStatsMediaSelector then p1.onOpenMediaSelectionPage else reactModule.useCallback(function()
-			-- upvalues: var2 (ref), gameConfigurationActionsModule (copy), p1 (ref), creatorHub (ref)
-			var2(gameConfigurationActionsModule.getCreatorHubConfigureUrl(p1.universeId), creatorHub)
-		end, { creatorHub, var2, p1.universeId }),
+		buildMaturityBannerText = BuildMaturityBannerText,
+		contentMaturityText = GameConfigurationLabelsModule.getContentMaturityText(UseSignalStateResult, ProvisionalRating, NoIsSealBroken) or Loading,
+		onOpenIconAndThumbnails = if FFlagMyStatsMediaSelector then p1.onOpenMediaSelectionPage else UseResult,
 		onOpenTitleDescriptionPage = p1.onOpenTitleDescriptionPage,
-		onOpenContentMaturity = reactModule.useCallback(function()
-			-- upvalues: var2 (ref), gameConfigurationActionsModule (copy), p1 (ref), creatorHub (ref), refreshPublishEligibilityModule (copy)
-			var2(gameConfigurationActionsModule.getExperienceQuestionnaireUrl(p1.universeId), creatorHub, function()
-				-- upvalues: refreshPublishEligibilityModule (copy), p1 (copy)
-				refreshPublishEligibilityModule(p1.universeId)
+		onOpenContentMaturity = ReactModule.useCallback(function() --[[ Line: 77 ]]
+			-- upvalues: UseOpenWebViewResult (copy), GameConfigurationActionsModule (upval), p1 (copy), CreatorHub (copy), RefreshPublishEligibilityModule (upval)
+			UseOpenWebViewResult(GameConfigurationActionsModule.getExperienceQuestionnaireUrl(p1.universeId), CreatorHub, function() --[[ Line: 78 ]]
+				-- upvalues: RefreshPublishEligibilityModule (upval), p1 (upval)
+				RefreshPublishEligibilityModule(p1.universeId)
 			end)
-		end, { creatorHub, var2, p1.universeId }),
+		end, { CreatorHub, UseOpenWebViewResult, p1.universeId }),
 		onOpenVersionTitleDescriptionPage = p1.onOpenVersionTitleDescriptionPage,
 		onOpenVersionHistory = p1.onOpenVersionHistory,
 		layoutOrder = p1.layoutOrder,

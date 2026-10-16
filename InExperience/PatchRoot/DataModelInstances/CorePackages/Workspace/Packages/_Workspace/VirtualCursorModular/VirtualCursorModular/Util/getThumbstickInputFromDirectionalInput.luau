@@ -1,23 +1,26 @@
 ﻿local _ = game:GetService("GuiService")
 local _ = require(script.Parent.Parent.Properties)
 
-return function(p1, p2)
-	local zero = Vector2.zero
+return function(KeyCode, Y) --[[ Line: 8 | Named "getThumbstickInputFromDirectionalInput" ]]
+	local ZeroVector = Vector2.zero
 	
-	if p1 == Enum.KeyCode.ButtonUp then
-		zero = Vector2.new(0, p2)
+	if KeyCode == Enum.KeyCode.ButtonUp then
+		ZeroVector = Vector2.new(0, Y)
 		
-		return zero
-	elseif p1 == Enum.KeyCode.ButtonDown then
-		zero = Vector2.new(0, -p2)
-		
-		return zero
-	elseif p1 == Enum.KeyCode.ButtonLeft then
-		zero = Vector2.new(-p2, 0)
-		
-		return zero
-	elseif p1 == Enum.KeyCode.ButtonRight then
-		zero = Vector2.new(p2, 0)
+		return ZeroVector
 	end
-	return zero
+	if KeyCode == Enum.KeyCode.ButtonDown then
+		ZeroVector = Vector2.new(0, -Y)
+		
+		return ZeroVector
+	end
+	if KeyCode == Enum.KeyCode.ButtonLeft then
+		ZeroVector = Vector2.new(-Y, 0)
+		
+		return ZeroVector
+	end
+	if KeyCode == Enum.KeyCode.ButtonRight then
+		ZeroVector = Vector2.new(Y, 0)
+	end
+	return ZeroVector
 end

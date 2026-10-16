@@ -1,13 +1,13 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local getDeepValueModule = require(appChat.Utils.getDeepValue)
-local cryoModule = require(parent.Cryo)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local GetDeepValueModule = require(AppChat.Utils.getDeepValue)
+local CryoModule = require(Parent.Cryo)
 
-return function()
-	-- upvalues: useSelector (ref), cryoModule (ref), getDeepValueModule (ref)
-	return useSelector(function(p1)
-		-- upvalues: cryoModule (copy), getDeepValueModule (copy)
-		return not cryoModule.isEmpty(getDeepValueModule(p1, "ChatAppReducer.Conversations") or {})
+return function() --[[ Line: 8 ]]
+	-- upvalues: UseSelectorFunction (copy), CryoModule (copy), GetDeepValueModule (copy)
+	return UseSelectorFunction(function(p1): boolean --[[ Line: 9 ]]
+		-- upvalues: CryoModule (upval), GetDeepValueModule (upval)
+		return not CryoModule.isEmpty(GetDeepValueModule(p1, "ChatAppReducer.Conversations") or {})
 	end)
 end

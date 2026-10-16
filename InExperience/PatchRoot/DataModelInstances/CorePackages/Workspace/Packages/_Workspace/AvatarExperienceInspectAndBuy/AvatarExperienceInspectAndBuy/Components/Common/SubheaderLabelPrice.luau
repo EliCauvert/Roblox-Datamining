@@ -1,49 +1,49 @@
-﻿local avatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
-local parent = avatarExperienceInspectAndBuy.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local icon = foundationModule.Icon
-local iconSize = foundationModule.Enums.IconSize
-local text = foundationModule.Text
-local shouldShowPriceLabel = require(avatarExperienceInspectAndBuy.Utils.itemDetailsUtils).shouldShowPriceLabel
-local _ = require(avatarExperienceInspectAndBuy.Enums.PriceStatus)
+﻿local AvatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
+local Parent = AvatarExperienceInspectAndBuy.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local Icon = FoundationModule.Icon
+local IconSize = FoundationModule.Enums.IconSize
+local Text = FoundationModule.Text
+local ShouldShowPriceLabelFunction = require(AvatarExperienceInspectAndBuy.Utils.itemDetailsUtils).shouldShowPriceLabel
+local _ = require(AvatarExperienceInspectAndBuy.Enums.PriceStatus)
 
-return function(p1)
-	-- upvalues: reactModule (ref), shouldShowPriceLabel (ref), foundationModule (ref), text (ref), icon (ref), iconSize (ref)
-	local var1 = reactModule.useMemo(function()
-		-- upvalues: shouldShowPriceLabel (copy), p1 (ref)
-		return shouldShowPriceLabel(p1.priceStatus)
-	end, { p1.priceStatus })
+return function(Frame) --[[ Line: 35 | Named "SubheaderLabelPrice" ]]
+	-- upvalues: ReactModule (copy), ShouldShowPriceLabelFunction (copy), FoundationModule (copy), Text (copy), Icon (copy), IconSize (copy)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 36 ]]
+		-- upvalues: ShouldShowPriceLabelFunction (upval), Frame (copy)
+		return ShouldShowPriceLabelFunction(Frame.priceStatus)
+	end, { Frame.priceStatus })
 	
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "auto-xy row align-y-center align-x-left gap-xxsmall",
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		LeftSlotLabel = if p1.subheaderText.leftSlotLabel then reactModule.createElement(text, {
+		LeftSlotLabel = if Frame.subheaderText.leftSlotLabel then ReactModule.createElement(Text, {
 			tag = "auto-xy text-align-x-left text-body-large content-default text-truncate-split",
 			LayoutOrder = 1,
-			Text = p1.subheaderText.leftSlotLabel
+			Text = Frame.subheaderText.leftSlotLabel
 		}) else nil,
-		Spacer = if var1 and p1.subheaderText.leftSlotLabel and p1.subheaderText.leftSlotLabel ~= "" then reactModule.createElement(icon, {
+		Spacer = if UseMemoResult and Frame.subheaderText.leftSlotLabel and Frame.subheaderText.leftSlotLabel ~= "" then ReactModule.createElement(Icon, {
 			name = "icons/controls/keys/period",
 			LayoutOrder = 2,
-			size = iconSize.Small
+			size = IconSize.Small
 		}) else nil,
-		RightSlotLabel = if var1 and p1.subheaderText.rightSlotPrice then reactModule.createElement(foundationModule.View, {
+		RightSlotLabel = if UseMemoResult and Frame.subheaderText.rightSlotPrice then ReactModule.createElement(FoundationModule.View, {
 			tag = "auto-xy row align-y-center align-x-left gap-xxsmall",
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			LayoutOrder = 3
 		}, {
-			Icon = reactModule.createElement(icon, {
+			Icon = ReactModule.createElement(Icon, {
 				name = "icons/common/robux",
 				LayoutOrder = 1,
-				size = iconSize.Small
+				size = IconSize.Small
 			}),
-			RightSlotLabel = reactModule.createElement(text, {
+			RightSlotLabel = ReactModule.createElement(Text, {
 				tag = "auto-xy text-align-x-left text-body-large content-default text-truncate-split",
 				LayoutOrder = 2,
-				Text = p1.subheaderText.rightSlotPrice
+				Text = Frame.subheaderText.rightSlotPrice
 			})
 		}) else nil
 	})

@@ -1,300 +1,310 @@
-﻿local serverDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
-local parent = serverDrivenUi.Parent
-local reactModule = require(parent.React)
-local _ = require(parent.AppCommonLib)
-local cryoModule = require(parent.Cryo)
-local signalsReactModule = require(parent.SignalsReact)
-local collectionViewsModule = require(parent.CollectionViews)
-local collectionGrid = collectionViewsModule.CollectionGrid
-local collectionItemSize = collectionViewsModule.CollectionViewTypes.CollectionItemSize
-local useCollectionImpressionsSignal = collectionViewsModule.useCollectionImpressionsSignal
-local useCollectionLayout = collectionViewsModule.useCollectionLayout
-local useCollectionLayoutParams = collectionViewsModule.useCollectionLayoutParams
-local waitForPropWrapper = require(parent.GameCollections).WaitForPropWrapper
-local impressionsModule = require(parent.Impressions)
-local frameBoundsImpressionsTracker = impressionsModule.FrameBoundsImpressionsTracker
-local screenSizeImpressionsTracker = impressionsModule.ScreenSizeImpressionsTracker
-local useTokens = require(parent.Foundation).Hooks.useTokens
-local usePreferredTextSizeLineBudget = require(parent.SduiSharedUtilities).usePreferredTextSizeLineBudget
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local findAnalyticsField = sduiCoreSystemModule.findAnalyticsField
-local getImpressionsTagModule = require(serverDrivenUi.Analytics.getImpressionsTag)
-local sendLegacyGameImpressionsForSduiModule = require(serverDrivenUi.Analytics.sendLegacyGameImpressionsForSdui)
-local reportUnifiedLoggingImpressions = sduiCoreSystemModule.reportUnifiedLoggingImpressions
-local sduiBuilder = sduiCoreSystemModule.SduiBuilder
-local sduiCollectionAnalyticsBuilder = sduiCoreSystemModule.SduiCollectionAnalyticsBuilder
-local sduiErrors = sduiCoreSystemModule.SduiErrors
-local sduiParseHelpers = sduiCoreSystemModule.SduiParseHelpers
-local getSduiComponentWrapper = sduiCoreSystemModule.getSduiComponentWrapper
-local sduiCollectionItemModule = require(serverDrivenUi.Content.Collections.SduiCollectionItem)
-local sduiCollectionGridRevealRowsModule = require(serverDrivenUi.Content.Collections.SduiCollectionGridRevealRows)
-local useCollectionAnalyticsContext = require(parent.SduiSharedContent).useCollectionAnalyticsContext
-local fFlagLuaAppLayoutParamsInContext = require(parent.SharedFlags).FFlagLuaAppLayoutParamsInContext
-local fFlagSduiCollectionGridMaxNumRows = require(parent.SharedFlags).FFlagSduiCollectionGridMaxNumRows
-local fFlagLuaAppCompositionAlways = require(parent.SharedFlags).FFlagLuaAppCompositionAlways
-local fFlagSduiFixSearchTelemetry = require(parent.SharedFlags).FFlagSduiFixSearchTelemetry
-local fFlagSduiPreferredTextSizeLineBudgets = require(parent.SharedFlags).FFlagSduiPreferredTextSizeLineBudgets
-local fFlagSduiCollectionGridRevealRows = require(parent.SharedFlags).FFlagSduiCollectionGridRevealRows
-local fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor = require(parent.SharedFlags).FFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor
+﻿local ServerDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
+local Parent = ServerDrivenUi.Parent
+local ReactModule = require(Parent.React)
+local _ = require(Parent.AppCommonLib)
+local CryoModule = require(Parent.Cryo)
+local SignalsReactModule = require(Parent.SignalsReact)
+local CollectionViewsModule = require(Parent.CollectionViews)
+local CollectionGrid = CollectionViewsModule.CollectionGrid
+local CollectionItemSize = CollectionViewsModule.CollectionViewTypes.CollectionItemSize
+local UseCollectionImpressionsSignalFunction = CollectionViewsModule.useCollectionImpressionsSignal
+local UseCollectionLayoutFunction = CollectionViewsModule.useCollectionLayout
+local UseCollectionLayoutParamsFunction = CollectionViewsModule.useCollectionLayoutParams
+local WaitForPropWrapper = require(Parent.GameCollections).WaitForPropWrapper
+local ImpressionsModule = require(Parent.Impressions)
+local FrameBoundsImpressionsTracker = ImpressionsModule.FrameBoundsImpressionsTracker
+local ScreenSizeImpressionsTracker = ImpressionsModule.ScreenSizeImpressionsTracker
+local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+local UsePreferredTextSizeLineBudgetFunction = require(Parent.SduiSharedUtilities).usePreferredTextSizeLineBudget
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local FindAnalyticsFieldFunction = SduiCoreSystemModule.findAnalyticsField
+local GetImpressionsTagModule = require(ServerDrivenUi.Analytics.getImpressionsTag)
+local SendLegacyGameImpressionsForSduiModule = require(ServerDrivenUi.Analytics.sendLegacyGameImpressionsForSdui)
+local ReportUnifiedLoggingImpressionsFunction = SduiCoreSystemModule.reportUnifiedLoggingImpressions
+local SduiBuilder = SduiCoreSystemModule.SduiBuilder
+local SduiCollectionAnalyticsBuilder = SduiCoreSystemModule.SduiCollectionAnalyticsBuilder
+local SduiErrors = SduiCoreSystemModule.SduiErrors
+local SduiParseHelpers = SduiCoreSystemModule.SduiParseHelpers
+local GetSduiComponentWrapperFunction = SduiCoreSystemModule.getSduiComponentWrapper
+local SduiCollectionItemModule = require(ServerDrivenUi.Content.Collections.SduiCollectionItem)
+local SduiCollectionGridRevealRowsModule = require(ServerDrivenUi.Content.Collections.SduiCollectionGridRevealRows)
+local UseCollectionAnalyticsContextFunction = require(Parent.SduiSharedContent).useCollectionAnalyticsContext
+local FFlagLuaAppLayoutParamsInContext = require(Parent.SharedFlags).FFlagLuaAppLayoutParamsInContext
+local FFlagLuaAppCompositionAlways = require(Parent.SharedFlags).FFlagLuaAppCompositionAlways
+local FFlagSduiFixSearchTelemetry = require(Parent.SharedFlags).FFlagSduiFixSearchTelemetry
+local FFlagSduiPreferredTextSizeLineBudgets = require(Parent.SharedFlags).FFlagSduiPreferredTextSizeLineBudgets
+local FFlagSduiCollectionGridRevealRows = require(Parent.SharedFlags).FFlagSduiCollectionGridRevealRows
 
-local function _(p1, p2, p3)
-	local colSpan = p1.colSpan or 1
-	local rowSpan = p1.rowSpan or 1
+local function _(p1, p2, p3): UDim2 --[[ Line: 56 | Named "cellSizeFromSpan" ]]
+	local ColSpan = p1.colSpan or 1
+	local RowSpan = p1.rowSpan or 1
 	
-	return UDim2.new(colSpan, p2 * (colSpan - 1), rowSpan, p3 * (rowSpan - 1))
+	return UDim2.new(ColSpan, p2 * (ColSpan - 1), RowSpan, p3 * (RowSpan - 1))
 end
 
 local t = {}
 
-return reactModule.memo(function(p1)
-	-- upvalues: fFlagLuaAppCompositionAlways (ref), reactModule (ref), t (ref), fFlagLuaAppLayoutParamsInContext (ref), signalsReactModule (ref), useCollectionLayoutParams (ref), collectionItemSize (ref), cryoModule (ref), useCollectionLayout (ref), findAnalyticsField (ref), sduiBuilder (ref), useCollectionAnalyticsContext (ref), useCollectionImpressionsSignal (ref), getImpressionsTagModule (ref), sduiParseHelpers (ref), sduiErrors (ref), reportUnifiedLoggingImpressions (ref), sendLegacyGameImpressionsForSduiModule (ref), useTokens (ref), fFlagSduiPreferredTextSizeLineBudgets (ref), usePreferredTextSizeLineBudget (ref), fFlagSduiFixSearchTelemetry (ref), sduiCollectionAnalyticsBuilder (ref), getSduiComponentWrapper (ref), fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor (ref), sduiCollectionItemModule (ref), fFlagSduiCollectionGridMaxNumRows (ref), fFlagSduiCollectionGridRevealRows (ref), sduiCollectionGridRevealRowsModule (ref), collectionGrid (ref), waitForPropWrapper (ref), frameBoundsImpressionsTracker (ref), screenSizeImpressionsTracker (ref)
-	local fFlagLuaAppCompositionAlways_1 = fFlagLuaAppCompositionAlways or (p1.appCompositionEnabled or p1.sduiContext.appCompositionEnabled)
-	local layoutOrder = p1.layoutOrder
-	local sduiContext = p1.sduiContext
-	local var1 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), t (copy)
+return ReactModule.memo(function(p1) --[[ Line: 148 | Named "SduiCollectionGrid" ]]
+	-- upvalues: FFlagLuaAppCompositionAlways (copy), ReactModule (copy), t (copy), FFlagLuaAppLayoutParamsInContext (copy), SignalsReactModule (copy), UseCollectionLayoutParamsFunction (copy), CollectionItemSize (copy), CryoModule (copy), UseCollectionLayoutFunction (copy), FindAnalyticsFieldFunction (copy), SduiBuilder (copy), UseCollectionAnalyticsContextFunction (copy), UseCollectionImpressionsSignalFunction (copy), GetImpressionsTagModule (copy), SduiParseHelpers (copy), SduiErrors (copy), ReportUnifiedLoggingImpressionsFunction (copy), SendLegacyGameImpressionsForSduiModule (copy), UseTokensFunction (copy), FFlagSduiPreferredTextSizeLineBudgets (copy), UsePreferredTextSizeLineBudgetFunction (copy), FFlagSduiFixSearchTelemetry (copy), SduiCollectionAnalyticsBuilder (copy), GetSduiComponentWrapperFunction (copy), SduiCollectionItemModule (copy), FFlagSduiCollectionGridRevealRows (copy), SduiCollectionGridRevealRowsModule (copy), CollectionGrid (copy), WaitForPropWrapper (copy), FrameBoundsImpressionsTracker (copy), ScreenSizeImpressionsTracker (copy)
+	local FFlagLuaAppCompositionAlways1 = FFlagLuaAppCompositionAlways or (p1.appCompositionEnabled or p1.sduiContext.appCompositionEnabled)
+	local LayoutOrder = p1.layoutOrder
+	local SduiContext = p1.sduiContext
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 158 ]]
+		-- upvalues: p1 (copy), t (upval)
 		if p1.items == nil then
 			return t
 		end
-		for i, v in p1.items do
-			if p1.itemTemplateKey and v.templateKey == nil then
-				v.templateKey = p1.itemTemplateKey
+		for _, item in p1.items do
+			if p1.itemTemplateKey and item.templateKey == nil then
+				item.templateKey = p1.itemTemplateKey
 			end
 		end
 		return p1.items
 	end, { p1.items, p1.itemTemplateKey })
-	local var2, var3 = reactModule.useState(nil)
-	local var4 = reactModule.useRef(nil)
-	var4.current = var2
-	local var5 = if not fFlagLuaAppCompositionAlways then if fFlagLuaAppLayoutParamsInContext then signalsReactModule.useSignalState(reactModule.useCallback(function(p2)
-		-- upvalues: sduiContext (ref), p1 (ref)
-		return sduiContext.getPageLayoutConfig(p1.collectionItemSize)(p2)
-	end, { p1.collectionItemSize, sduiContext.getPageLayoutConfig })) else useCollectionLayoutParams(p1.collectionItemSize or collectionItemSize.Small, var2, false, if p1.layoutOverrides then cryoModule.Dictionary.join(p1.layoutOverrides, {
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local UseRefResult = ReactModule.useRef(nil)
+	UseRefResult.current = UseStateResult
+	local UseSignalStateResult = if FFlagLuaAppCompositionAlways then nil elseif FFlagLuaAppLayoutParamsInContext then SignalsReactModule.useSignalState((ReactModule.useCallback(function(p2) --[[ Line: 180 ]]
+		-- upvalues: SduiContext (copy), p1 (copy)
+		return SduiContext.getPageLayoutConfig(p1.collectionItemSize)(p2)
+	end, { p1.collectionItemSize, SduiContext.getPageLayoutConfig }))) else UseCollectionLayoutParamsFunction(p1.collectionItemSize or CollectionItemSize.Small, UseStateResult, false, if p1.layoutOverrides then CryoModule.Dictionary.join(p1.layoutOverrides, {
 		overrideLoadMoreThreshold = 1e999,
 		sideMargin = p1.pageSideMargin
 	}) else {
 		overrideLoadMoreThreshold = 1e999,
 		sideMargin = p1.pageSideMargin
-	}) else nil
-	local var6 = 0
+	})
+	local Count = 0
 	
-	if var1 then
-		for i, v in var1 do
-			if not v.isBlank then
-				var6 += 1
+	if UseMemoResult then
+		for _, value in UseMemoResult do
+			if not value.isBlank then
+				Count += 1
 			end
 		end
 	end
-	local var7 = useCollectionLayout(p1.collectionItemSize)
-	local var8 = if fFlagLuaAppCompositionAlways_1 then var7.itemsPerRow else var5.numColumns
-	local var9 = if fFlagLuaAppCompositionAlways_1 then var7.gutter elseif var5 then var5.columnGap else 0
-	local var10 = if fFlagLuaAppCompositionAlways_1 then var7.verticalGap elseif var5 then var5.verticalPadding else 0
-	local var11, var12 = useCollectionAnalyticsContext(p1.analyticsContext, findAnalyticsField("componentType", p1.analyticsContext.analyticsData or t) or sduiBuilder.getComponentType(p1.componentConfig, sduiContext), var8, var6, sduiContext, p1.startRow, p1.componentConfig.__isClientBinding)
-	local var13 = reactModule.useRef({})
-	local var14, var15 = useCollectionImpressionsSignal(p1.scrollViewPositionChangedSignal)
-	local var16 = reactModule.useCallback(function(_, _)
-		-- upvalues: p1 (ref), var15 (ref)
+	local UseCollectionLayoutResult = UseCollectionLayoutFunction(p1.collectionItemSize)
+	local ItemsPerRow = UseCollectionLayoutResult.itemsPerRow
+	local ItemsPerRow1 = if FFlagLuaAppCompositionAlways1 then ItemsPerRow else UseSignalStateResult.numColumns
+	local Gutter = if FFlagLuaAppCompositionAlways1 then UseCollectionLayoutResult.gutter else UseSignalStateResult and UseSignalStateResult.columnGap or 0
+	local VerticalGap = if FFlagLuaAppCompositionAlways1 then UseCollectionLayoutResult.verticalGap else UseSignalStateResult and UseSignalStateResult.verticalPadding or 0
+	local UseCollectionAnalyticsContextResult, UseCollectionAnalyticsContextResult2 = UseCollectionAnalyticsContextFunction(p1.analyticsContext, FindAnalyticsFieldFunction("componentType", p1.analyticsContext.analyticsData or t) or SduiBuilder.getComponentType(p1.componentConfig, SduiContext), ItemsPerRow1, Count, SduiContext, p1.startRow, p1.componentConfig.__isClientBinding)
+	local UseRefResult1 = ReactModule.useRef({})
+	local UseCollectionImpressionsSignalResult, UseCollectionImpressionsSignalResult2 = UseCollectionImpressionsSignalFunction(p1.scrollViewPositionChangedSignal)
+	local UseResult = ReactModule.useCallback(function(_, _) --[[ Line: 242 ]]
+		-- upvalues: p1 (copy), UseCollectionImpressionsSignalResult2 (copy)
 		if p1.onCollectionViewabilityChanged then
 			p1.onCollectionViewabilityChanged()
 		end
-		if var15 then
-			var15()
-		end
-	end, { var15, p1.onCollectionViewabilityChanged })
-	local impressionsTag = p1.impressionsTag or getImpressionsTagModule(p1.index, var12.current, sduiContext, p1.debugName)
-	local var17 = reactModule.useCallback(function(p2)
-		-- upvalues: var1 (ref), var11 (ref), sduiParseHelpers (copy), sduiContext (ref), sduiErrors (copy), impressionsTag (ref), p1 (ref), var12 (ref), reportUnifiedLoggingImpressions (copy), var13 (ref), sendLegacyGameImpressionsForSduiModule (copy)
-		if var1 == nil or #var1 == 0 then
-			if p2 and #p2 > 0 then
-				sduiContext.dependencies.logger.reportError(sduiErrors.SduiErrorType.FailedToLogImpressions, {
-					componentType = "CollectionGrid",
-					name = impressionsTag,
-					message = `Failed to log impressions. No configs. indexes: {table.concat(p2, ",")} analytics: {if var11 then sduiParseHelpers.stringifyValue(var11.analyticsData) else nil}`
-				}, sduiContext.appPage)
-			end
-			return
-		else
-			assert(var1, "itemConfigs must exist")
-			
-			if (p1.impressionEventName or not var12.current or var12.current.contentType ~= "Game") and not p1.sendGameImpressions then
-				reportUnifiedLoggingImpressions(sduiContext, p2, var13.current, var12.current, p1.startRow, p1.impressionEventName, p1.skipItemImpressionsLog, impressionsTag)
-				
-				return
-			elseif var12.current and var12.current.contentType == "Game" then
-				sendLegacyGameImpressionsForSduiModule(p2, var13.current, var1, var11, var12.current, p1.startRow, sduiContext, p1.sendGameImpressions, var12.current.itemsPerRow, impressionsTag)
-			end
-			reportUnifiedLoggingImpressions(sduiContext, p2, var13.current, var12.current)
+		if UseCollectionImpressionsSignalResult2 then
+			UseCollectionImpressionsSignalResult2()
 		end
 	end, {
-		var1, p1.startRow, sduiContext, var12, var13, var11, p1.sendGameImpressions,
-		impressionsTag, p1.impressionEventName, p1.skipItemImpressionsLog
+		UseCollectionImpressionsSignalResult2,
+		p1.onCollectionViewabilityChanged
 	})
-	reactModule.useLayoutEffect(function()
-		-- upvalues: p1 (ref), var17 (ref)
-		if p1.setLogImpressions then
-			p1.setLogImpressions(var17)
+	local ImpressionsTag = p1.impressionsTag or GetImpressionsTagModule(p1.index, UseCollectionAnalyticsContextResult2.current, SduiContext, p1.debugName)
+	local UseResult1 = ReactModule.useCallback(function(List) --[[ Line: 258 ]]
+		-- upvalues: UseMemoResult (copy), UseCollectionAnalyticsContextResult (copy), SduiParseHelpers (upval), SduiContext (copy), SduiErrors (upval), ImpressionsTag (copy), p1 (copy), UseCollectionAnalyticsContextResult2 (copy), ReportUnifiedLoggingImpressionsFunction (upval), UseRefResult1 (copy), SendLegacyGameImpressionsForSduiModule (upval)
+		if UseMemoResult ~= nil and #UseMemoResult ~= 0 then
+			assert(UseMemoResult, "itemConfigs must exist")
+			
+			if (p1.impressionEventName or not UseCollectionAnalyticsContextResult2.current or UseCollectionAnalyticsContextResult2.current.contentType ~= "Game") and not p1.sendGameImpressions then
+				ReportUnifiedLoggingImpressionsFunction(SduiContext, List, UseRefResult1.current, UseCollectionAnalyticsContextResult2.current, p1.startRow, p1.impressionEventName, p1.skipItemImpressionsLog, ImpressionsTag)
+				
+				return
+			end
+			if UseCollectionAnalyticsContextResult2.current and UseCollectionAnalyticsContextResult2.current.contentType == "Game" then
+				SendLegacyGameImpressionsForSduiModule(List, UseRefResult1.current, UseMemoResult, UseCollectionAnalyticsContextResult, UseCollectionAnalyticsContextResult2.current, p1.startRow, SduiContext, p1.sendGameImpressions, UseCollectionAnalyticsContextResult2.current.itemsPerRow, ImpressionsTag)
+			end
+			ReportUnifiedLoggingImpressionsFunction(SduiContext, List, UseRefResult1.current, UseCollectionAnalyticsContextResult2.current)
+			
+			return
+		elseif List and #List > 0 then
+			SduiContext.dependencies.logger.reportError(SduiErrors.SduiErrorType.FailedToLogImpressions, {
+				componentType = "CollectionGrid",
+				name = ImpressionsTag,
+				message = `Failed to log impressions. No configs. indexes: {table.concat(List, ",")} analytics: {if UseCollectionAnalyticsContextResult then SduiParseHelpers.stringifyValue(UseCollectionAnalyticsContextResult.analyticsData) else nil}`
+			}, SduiContext.appPage)
 		end
-	end, { var17, p1.setLogImpressions })
-	local scale = useTokens().Config.UI.Scale
-	local var18 = if fFlagSduiPreferredTextSizeLineBudgets then usePreferredTextSizeLineBudget(p1.preferredTextSizeLineCount) else nil
-	local t_1 = {
+	end, {
+		UseMemoResult, p1.startRow, SduiContext, UseCollectionAnalyticsContextResult2,
+		UseRefResult1, UseCollectionAnalyticsContextResult, p1.sendGameImpressions,
+		ImpressionsTag, p1.impressionEventName, p1.skipItemImpressionsLog
+	})
+	ReactModule.useLayoutEffect(function() --[[ Line: 337 ]]
+		-- upvalues: p1 (copy), UseResult1 (copy)
+		if p1.setLogImpressions then
+			p1.setLogImpressions(UseResult1)
+		end
+	end, { UseResult1, p1.setLogImpressions })
+	local Scale = UseTokensFunction().Config.UI.Scale
+	local UsePreferredTextSizeLineBudgetResult = if FFlagSduiPreferredTextSizeLineBudgets then UsePreferredTextSizeLineBudgetFunction(p1.preferredTextSizeLineCount) else nil
+	local GridProps = {
 		disableRelativeGap = true,
-		collectionItemSize = if fFlagLuaAppCompositionAlways_1 then p1.collectionItemSize else nil,
+		collectionItemSize = if FFlagLuaAppCompositionAlways1 then p1.collectionItemSize else nil,
 		verticalScrollingFrameRef = p1.verticalScrollingFrameRef,
-		containerRef = var3,
-		getItemHeight = reactModule.useCallback(function(p3)
-			-- upvalues: p1 (ref), scale (ref), var18 (write)
-			return p3 * p1.itemHeightFromWidth.Scale + p1.itemHeightFromWidth.Offset * scale + (var18 or 0)
+		containerRef = UseStateResult2,
+		getItemHeight = ReactModule.useCallback(function(p2) --[[ Line: 351 ]]
+			-- upvalues: p1 (copy), Scale (copy), UsePreferredTextSizeLineBudgetResult (ref)
+			return p2 * p1.itemHeightFromWidth.Scale + p1.itemHeightFromWidth.Offset * Scale + (UsePreferredTextSizeLineBudgetResult or 0)
 		end, {
 			p1.itemHeightFromWidth,
-			scale,
-			if fFlagSduiPreferredTextSizeLineBudgets then var18 else nil
+			Scale,
+			if FFlagSduiPreferredTextSizeLineBudgets then UsePreferredTextSizeLineBudgetResult else nil
 		}),
-		items = var1,
-		renderItem = reactModule.useCallback(function(p3, p4, p5, _)
-			-- upvalues: reactModule (copy), sduiContext (ref), sduiErrors (copy), impressionsTag (ref), findAnalyticsField (copy), t (copy), sduiBuilder (copy), fFlagSduiFixSearchTelemetry (copy), var13 (ref), sduiCollectionAnalyticsBuilder (copy), getSduiComponentWrapper (copy), var11 (ref), p1 (ref), fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor (copy), var10 (ref), sduiCollectionItemModule (copy), var9 (ref)
-			if p3 and p3.isBlank then
-				return reactModule.createElement("Frame", { BackgroundTransparency = 1, LayoutOrder = p4 }), "blank"
-			elseif not p3 then
-				sduiContext.dependencies.logger.reportError(sduiErrors.SduiErrorType.NilItem, {
-					componentType = "CollectionGrid",
-					name = impressionsTag,
-					message = `Nil item in SduiCollectionGrid.renderItem at index {p4}`
-				}, sduiContext.appPage)
-				
-				return reactModule.createElement(reactModule.Fragment), "nil"
+		items = UseMemoResult,
+		renderItem = ReactModule.useCallback(function(ComponentConfig, Index, Size, _) --[[ Line: 365 ]]
+			-- upvalues: ReactModule (upval), SduiContext (copy), SduiErrors (upval), ImpressionsTag (copy), FindAnalyticsFieldFunction (upval), t (upval), SduiBuilder (upval), FFlagSduiFixSearchTelemetry (upval), UseRefResult1 (copy), SduiCollectionAnalyticsBuilder (upval), GetSduiComponentWrapperFunction (upval), UseCollectionAnalyticsContextResult (copy), p1 (copy), VerticalGap (copy), SduiCollectionItemModule (upval), Gutter (copy)
+			if ComponentConfig and ComponentConfig.isBlank then
+				return ReactModule.createElement("Frame", { BackgroundTransparency = 1, LayoutOrder = Index }), "blank"
 			end
-			local componentType = findAnalyticsField("componentType", p3.analyticsData or t) or sduiBuilder.getComponentType(p3, sduiContext)
+			if not ComponentConfig then
+				SduiContext.dependencies.logger.reportError(SduiErrors.SduiErrorType.NilItem, {
+					componentType = "CollectionGrid",
+					name = ImpressionsTag,
+					message = `Nil item in SduiCollectionGrid.renderItem at index {Index}`
+				}, SduiContext.appPage)
+				
+				return ReactModule.createElement(ReactModule.Fragment), "nil"
+			end
+			local ComponentType = FindAnalyticsFieldFunction("componentType", ComponentConfig.analyticsData or t) or SduiBuilder.getComponentType(ComponentConfig, SduiContext)
 			
-			if not componentType then
-				sduiContext.dependencies.logger.reportError(sduiErrors.SduiErrorType.NilComponentType, {
+			if not ComponentType then
+				SduiContext.dependencies.logger.reportError(SduiErrors.SduiErrorType.NilComponentType, {
 					componentType = "CollectionGrid",
-					name = impressionsTag,
-					message = `Nil componentType in CollectionGrid.renderItem at index {p4}`
-				}, sduiContext.appPage)
+					name = ImpressionsTag,
+					message = `Nil componentType in CollectionGrid.renderItem at index {Index}`
+				}, SduiContext.appPage)
 				
-				return reactModule.createElement(reactModule.Fragment), "nil"
+				return ReactModule.createElement(ReactModule.Fragment), "nil"
 			end
-			local uDim2
-			local t_1 = {
-				itemPosition = p4,
-				itemComponentType = componentType,
-				componentType = componentType,
-				topicContentsIndex = p3.realIndex,
-				topicDataPosition = if fFlagSduiFixSearchTelemetry then p3.realIndex else nil
+			local LocalAnalyticsData = {
+				itemPosition = Index,
+				itemComponentType = ComponentType,
+				componentType = ComponentType,
+				topicContentsIndex = ComponentConfig.realIndex,
+				topicDataPosition = if FFlagSduiFixSearchTelemetry then ComponentConfig.realIndex else nil
 			}
-			var13.current[p4] = sduiCollectionAnalyticsBuilder.buildAndValidateItemAnalyticsData(sduiContext, p3.analyticsData, nil, t_1, componentType)
-			local createElement = reactModule.createElement
-			createElement = createElement(getSduiComponentWrapper(p3), {
-				componentConfig = p3,
-				sduiContext = sduiContext,
-				parentAnalyticsContext = if p3.__isClientBinding then nil else var11,
+			UseRefResult1.current[Index] = SduiCollectionAnalyticsBuilder.buildAndValidateItemAnalyticsData(SduiContext, ComponentConfig.analyticsData, nil, LocalAnalyticsData, ComponentType)
+			local Element = ReactModule.createElement(GetSduiComponentWrapperFunction(ComponentConfig), {
+				componentConfig = ComponentConfig,
+				sduiContext = SduiContext,
+				parentAnalyticsContext = if ComponentConfig.__isClientBinding then nil else UseCollectionAnalyticsContextResult,
 				extraLocalProps = {
 					scrollViewPositionChangedSignal = p1.scrollViewPositionChangedSignal,
 					verticalScrollingFrameRef = p1.verticalScrollingFrameRef,
-					index = p4,
-					selectionOrder = if p1.disableSelectionOrder or not p1.selectionOrderBase then nil else p1.selectionOrderBase + p4,
-					alignmentType = if fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor and p3.spanOverride ~= nil then p3.spanOverride.alignmentType else nil,
-					cellVerticalPadding = if fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor and p3.spanOverride ~= nil then var10 else nil
+					index = Index,
+					selectionOrder = if p1.disableSelectionOrder or not p1.selectionOrderBase then nil else p1.selectionOrderBase + Index,
+					alignmentType = if ComponentConfig.spanOverride == nil then nil else ComponentConfig.spanOverride.alignmentType,
+					cellVerticalPadding = if ComponentConfig.spanOverride == nil then nil else VerticalGap
 				},
-				debugName = `{componentType}_{p4}`,
-				localAnalyticsData = t_1
+				debugName = `{ComponentType}_{Index}`,
+				localAnalyticsData = LocalAnalyticsData
 			})
-			local createElement_1 = reactModule.createElement
-			local t_2 = {
-				index = p4,
-				impressionsTag = impressionsTag,
-				size = p5,
-				zIndex = -p4
+			local CreateElementFunction = ReactModule.createElement
+			local config = {
+				index = Index,
+				impressionsTag = ImpressionsTag,
+				size = Size,
+				zIndex = -Index
 			}
+			local InnerWrapperSize = nil
 			
-			if p3.spanOverride == nil then
-				uDim2 = nil
+			if ComponentConfig.spanOverride == nil then
+				InnerWrapperSize = nil
 			else
-				local spanOverride = p3.spanOverride
-				local var19 = var9
-				local var20 = var10
-				local colSpan = spanOverride.colSpan or 1
-				local rowSpan = spanOverride.rowSpan or 1
-				uDim2 = UDim2.new(colSpan, var19 * (colSpan - 1), rowSpan, var20 * (rowSpan - 1))
+				local SpanOverride = ComponentConfig.spanOverride
+				local ColSpan = SpanOverride.colSpan or 1
+				local RowSpan = SpanOverride.rowSpan or 1
+				InnerWrapperSize = UDim2.new(ColSpan, Gutter * (ColSpan - 1), RowSpan, VerticalGap * (RowSpan - 1))
 			end
-			t_2.innerWrapperSize = uDim2
+			config.innerWrapperSize = InnerWrapperSize
 			
-			return createElement_1(sduiCollectionItemModule, t_2, { Item = createElement }), componentType or "unknown"
+			return CreateElementFunction(SduiCollectionItemModule, config, { Item = Element }), ComponentType or "unknown"
 		end, {
-			sduiContext, p1.analyticsContext, p1.scrollViewPositionChangedSignal,
-			p1.verticalScrollingFrameRef, var11, impressionsTag, p1.index,
-			p1.disableSelectionOrder, p1.selectionOrderBase, var9, var10
+			SduiContext, p1.analyticsContext, p1.scrollViewPositionChangedSignal,
+			p1.verticalScrollingFrameRef, UseCollectionAnalyticsContextResult,
+			ImpressionsTag, p1.index, p1.disableSelectionOrder, p1.selectionOrderBase,
+			Gutter, VerticalGap
 		}),
-		numColumns = if fFlagLuaAppCompositionAlways_1 then nil else var5.numColumns,
-		columnGap = if fFlagLuaAppCompositionAlways_1 then nil else var5.columnGap,
-		sideMargin = if fFlagLuaAppCompositionAlways_1 then nil else var5.sideMargin,
-		onViewableItemsChanged = var16,
-		LayoutOrder = layoutOrder,
-		verticalPadding = if fFlagLuaAppCompositionAlways_1 then nil else var5.verticalPadding,
-		headerComponent = reactModule.useMemo(function()
-			-- upvalues: p1 (ref), reactModule (copy), var11 (ref)
-			return if p1.headerComponent then reactModule.cloneElement(p1.headerComponent, { parentAnalyticsContext = var11 }) else nil
-		end, { var11, p1.headerComponent }),
+		numColumns = if FFlagLuaAppCompositionAlways1 then nil else UseSignalStateResult.numColumns,
+		columnGap = if FFlagLuaAppCompositionAlways1 then nil else UseSignalStateResult.columnGap,
+		sideMargin = if FFlagLuaAppCompositionAlways1 then nil else UseSignalStateResult.sideMargin,
+		onViewableItemsChanged = UseResult,
+		LayoutOrder = LayoutOrder,
+		verticalPadding = if FFlagLuaAppCompositionAlways1 then nil else UseSignalStateResult.verticalPadding,
+		headerComponent = ReactModule.useMemo(function() --[[ Line: 489 ]]
+			-- upvalues: p1 (copy), ReactModule (upval), UseCollectionAnalyticsContextResult (copy)
+			return if p1.headerComponent then ReactModule.cloneElement(p1.headerComponent, {
+				parentAnalyticsContext = UseCollectionAnalyticsContextResult
+			}) else nil
+		end, { UseCollectionAnalyticsContextResult, p1.headerComponent }),
 		testId = if p1.testId then p1.testId else "--sdui-collection-grid",
 		onReachedThresholdFromEnd = p1.onReachedThresholdFromEnd,
 		thresholdRowsFromBottom = p1.thresholdRowsFromBottom,
-		maxNumRows = if fFlagSduiCollectionGridMaxNumRows then p1.maxNumRows else nil
+		maxNumRows = p1.maxNumRows
 	}
 	
-	return reactModule.createElement(reactModule.Fragment, nil, cryoModule.Dictionary.join(reactModule.useMemo(function()
-		-- upvalues: p1 (ref), reactModule (copy), var11 (ref)
-		local t = nil
+	return ReactModule.createElement(ReactModule.Fragment, nil, CryoModule.Dictionary.join(ReactModule.useMemo(function() --[[ Line: 474 ]]
+		-- upvalues: p1 (copy), ReactModule (upval), UseCollectionAnalyticsContextResult (copy)
+		local CloneElementResults = nil
 		
 		if p1.children then
-			t = {}
+			CloneElementResults = {}
 			
-			for i, v in p1.children do
-				t[i] = reactModule.cloneElement(v, { parentAnalyticsContext = var11 })
+			for i, child in p1.children do
+				CloneElementResults[i] = ReactModule.cloneElement(child, {
+					parentAnalyticsContext = UseCollectionAnalyticsContextResult
+				})
 			end
 		end
-		return t
-	end, { var11, p1.children }) or t, {
-		CollectionGrid = if fFlagSduiCollectionGridRevealRows and (p1.initialFeedVisibleRows ~= nil or p1.visibleRowsPerReveal ~= nil) and (p1.setDisplayedRowCount ~= nil and p1.revealRowsComponent ~= nil) then reactModule.createElement(sduiCollectionGridRevealRowsModule, {
-			gridProps = t_1,
+		return CloneElementResults
+	end, { UseCollectionAnalyticsContextResult, p1.children }) or t, {
+		CollectionGrid = if FFlagSduiCollectionGridRevealRows and (p1.initialFeedVisibleRows ~= nil or p1.visibleRowsPerReveal ~= nil) then if p1.setDisplayedRowCount == nil or p1.revealRowsComponent == nil then ReactModule.createElement(CollectionGrid, GridProps) else ReactModule.createElement(SduiCollectionGridRevealRowsModule, {
+			gridProps = GridProps,
 			sduiContext = p1.sduiContext,
 			analyticsContext = p1.analyticsContext,
-			itemCount = #var1,
-			itemsPerRow = var8,
+			itemCount = #UseMemoResult,
+			itemsPerRow = ItemsPerRow1,
 			maxNumRows = p1.maxNumRows,
 			initialFeedVisibleRows = p1.initialFeedVisibleRows,
 			visibleRowsPerReveal = p1.visibleRowsPerReveal,
 			startRow = p1.startRow,
 			setDisplayedRowCount = p1.setDisplayedRowCount,
 			revealRowsComponent = p1.revealRowsComponent,
-			containerFrame = var2,
-			setContainerFrame = var3
-		}) else reactModule.createElement(collectionGrid, t_1),
-		ImpressionDetector = if p1.disableImpressionsDetector then nil else reactModule.createElement(waitForPropWrapper, {
+			containerFrame = UseStateResult,
+			setContainerFrame = UseStateResult2
+		}) else ReactModule.createElement(CollectionGrid, GridProps),
+		ImpressionDetector = if p1.disableImpressionsDetector then nil else ReactModule.createElement(WaitForPropWrapper, {
 			waitForProp = p1.startRow,
 			maxUpdatesToDelay = p1.numUpdatesToDelayImpressions,
-			wrappedComponent = if p1.shouldUseFrameBoundsForImpressions then reactModule.createElement(frameBoundsImpressionsTracker, {
-				parentRef = var4,
-				pageContext = sduiContext.routeName or sduiContext.appPage,
-				impressionsTag = impressionsTag,
-				scrollViewPositionChangedSignal = var14,
-				sendImpressions = var17,
+			wrappedComponent = if p1.shouldUseFrameBoundsForImpressions then ReactModule.createElement(FrameBoundsImpressionsTracker, {
+				parentRef = UseRefResult,
+				pageContext = SduiContext.routeName or SduiContext.appPage,
+				impressionsTag = ImpressionsTag,
+				scrollViewPositionChangedSignal = UseCollectionImpressionsSignalResult,
+				sendImpressions = UseResult1,
 				dataUpdatedTimestamp = p1.sduiContext.dataUpdatedTimestamp
-			}) else reactModule.createElement(screenSizeImpressionsTracker, {
-				parentRef = var4,
-				pageContext = sduiContext.routeName or sduiContext.appPage,
-				impressionsTag = impressionsTag,
-				scrollViewPositionChangedSignal = var14,
-				sendImpressions = var17,
+			}) else ReactModule.createElement(ScreenSizeImpressionsTracker, {
+				parentRef = UseRefResult,
+				pageContext = SduiContext.routeName or SduiContext.appPage,
+				impressionsTag = ImpressionsTag,
+				scrollViewPositionChangedSignal = UseCollectionImpressionsSignalResult,
+				sendImpressions = UseResult1,
 				dataUpdatedTimestamp = p1.sduiContext.dataUpdatedTimestamp
 			})
 		}),
-		FocusNavActions = reactModule.useMemo(function()
-			-- upvalues: p1 (ref), reactModule (copy), var11 (ref), var2 (ref)
-			return if p1.focusNavActionsComponent then reactModule.cloneElement(p1.focusNavActionsComponent, {
-				parentAnalyticsContext = var11,
-				extraLocalProps = { guiObject = var2 }
+		FocusNavActions = ReactModule.useMemo(function() --[[ Line: 498 ]]
+			-- upvalues: p1 (copy), ReactModule (upval), UseCollectionAnalyticsContextResult (copy), UseStateResult (copy)
+			return if p1.focusNavActionsComponent then ReactModule.cloneElement(p1.focusNavActionsComponent, {
+				parentAnalyticsContext = UseCollectionAnalyticsContextResult,
+				extraLocalProps = { guiObject = UseStateResult }
 			}) else nil
-		end, { var11, p1.focusNavActionsComponent, var2 })
+		end, {
+			UseCollectionAnalyticsContextResult,
+			p1.focusNavActionsComponent,
+			UseStateResult
+		})
 	}))
 end)

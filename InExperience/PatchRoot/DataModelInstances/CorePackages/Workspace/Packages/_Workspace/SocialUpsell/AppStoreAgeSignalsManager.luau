@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.AppStoreAgeSignalsManager.AppStoreAgeSignalsManager)
+﻿return (require(script.Parent.Parent.Parent._Index.AppStoreAgeSignalsManager.AppStoreAgeSignalsManager))

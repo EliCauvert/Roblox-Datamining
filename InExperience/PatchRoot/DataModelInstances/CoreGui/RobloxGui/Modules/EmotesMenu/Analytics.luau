@@ -1,64 +1,64 @@
-﻿local playersService = game:GetService("Players")
-local statsService = game:GetService("Stats")
-local t = {}
-t.__index = t
-t.EventName = {
+﻿local Players = game:GetService("Players")
+local StatsService = game:GetService("Stats")
+local AnalyticsModule = {}
+AnalyticsModule.__index = AnalyticsModule
+AnalyticsModule.EventName = {
 	MenuOpened = "emoteMenuOpened",
 	EmotePlayed = "emoteTriggered",
 	EmoteFailed = "emoteTriggerFailed"
 }
 
-function t.new()
-	-- upvalues: t (ref)
-	local t_1 = { eventStreamImpl = nil }
-	setmetatable(t_1, t)
+function AnalyticsModule.new() --[[ Line: 13 ]]
+	-- upvalues: AnalyticsModule (copy)
+	local config = { eventStreamImpl = nil }
+	setmetatable(config, AnalyticsModule)
 	
-	return t_1
+	return config
 end
 
-function t:withEventStream(p1)
-	self.eventStreamImpl = p1
+function AnalyticsModule:withEventStream(EventStreamImpl) --[[ Line: 22 ]]
+	self.eventStreamImpl = EventStreamImpl
 	
 	return self
 end
 
-function t:onMenuOpened()
-	-- upvalues: playersService (ref), statsService (ref)
+function AnalyticsModule:onMenuOpened() --[[ Line: 27 ]]
+	-- upvalues: Players (copy), StatsService (copy)
 	self:_getEventStream():setRBXEventStream("emoteMenu", self.EventName.MenuOpened, {
 		pid = tostring(game.PlaceId),
-		uid = tostring(playersService.LocalPlayer.UserId),
-		btid = statsService:GetBrowserTrackerId()
+		uid = tostring(Players.LocalPlayer.UserId),
+		btid = StatsService:GetBrowserTrackerId()
 	})
 end
 
-function t:onEmotePlayed(p1, p2)
-	-- upvalues: playersService (ref), statsService (ref)
+function AnalyticsModule:onEmotePlayed(SlotNumber, AssetID) --[[ Line: 40 ]]
+	-- upvalues: Players (copy), StatsService (copy)
 	self:_getEventStream():setRBXEventStream("emoteMenu", self.EventName.EmotePlayed, {
 		pid = tostring(game.PlaceId),
-		uid = tostring(playersService.LocalPlayer.UserId),
-		btid = statsService:GetBrowserTrackerId(),
-		slotNumber = p1,
-		assetID = p2
+		uid = tostring(Players.LocalPlayer.UserId),
+		btid = StatsService:GetBrowserTrackerId(),
+		slotNumber = SlotNumber,
+		assetID = AssetID
 	})
 end
 
-function t:onEmoteFailed(p1, p2, p3)
-	-- upvalues: playersService (ref), statsService (ref)
+function AnalyticsModule:onEmoteFailed(SlotNumber, AssetID, ErrorType) --[[ Line: 55 ]]
+	-- upvalues: Players (copy), StatsService (copy)
 	self:_getEventStream():setRBXEventStream("emoteMenu", self.EventName.EmoteFailed, {
 		invokedByCoreGui = true,
 		pid = tostring(game.PlaceId),
-		uid = tostring(playersService.LocalPlayer.UserId),
-		btid = statsService:GetBrowserTrackerId(),
-		slotNumber = p1,
-		assetID = p2,
-		errorType = p3
+		uid = tostring(Players.LocalPlayer.UserId),
+		btid = StatsService:GetBrowserTrackerId(),
+		slotNumber = SlotNumber,
+		assetID = AssetID,
+		errorType = ErrorType
 	})
 end
 
-function t:_getEventStream()
+function AnalyticsModule:_getEventStream() --[[ Line: 72 ]]
 	assert(self.eventStreamImpl, "EventStream implementation not found. Did you forget to construct withEventStream?")
 	
 	return self.eventStreamImpl
 end
 
-return t
+return AnalyticsModule

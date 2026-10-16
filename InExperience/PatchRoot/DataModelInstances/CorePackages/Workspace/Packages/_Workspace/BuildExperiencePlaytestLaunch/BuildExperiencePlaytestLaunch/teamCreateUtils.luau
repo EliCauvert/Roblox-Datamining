@@ -1,10 +1,10 @@
-﻿local fFlagBuildExperienceLibrary = require(script:FindFirstAncestor("BuildExperiencePlaytestLaunch").Parent.SharedFlags).FFlagBuildExperienceLibrary
+﻿local FFlagBuildExperienceLibrary = require(script:FindFirstAncestor("BuildExperiencePlaytestLaunch").Parent.SharedFlags).FFlagBuildExperienceLibrary
 
 return {
-	isViewer = function(p1)
-		-- upvalues: fFlagBuildExperienceLibrary (ref)
-		p1 = p1 or game
+	isViewer = function(p1) --[[ Line: 4 ]]
+		-- upvalues: FFlagBuildExperienceLibrary (copy)
+		local P0 = p1 or game
 		
-		return fFlagBuildExperienceLibrary and (p1:GetEngineFeature("IsTeamCreateViewerEnabled") and p1:GetService("RunService"):IsTeamCreateViewer())
+		return FFlagBuildExperienceLibrary and (P0:GetEngineFeature("IsTeamCreateViewerEnabled") and P0:GetService("RunService"):IsTeamCreateViewer())
 	end
 }

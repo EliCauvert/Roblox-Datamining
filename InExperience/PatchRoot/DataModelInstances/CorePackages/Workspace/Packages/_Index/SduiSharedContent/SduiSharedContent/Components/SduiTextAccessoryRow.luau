@@ -1,92 +1,102 @@
-﻿local parent = script:FindFirstAncestor("SduiSharedContent").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local _ = require(parent.SduiCompat)
-local view = foundationModule.View
-local text = foundationModule.Text
-local avatarGroup = foundationModule.AvatarGroup
-local icon = foundationModule.Icon
-local useTokens = foundationModule.Hooks.useTokens
-local var1 = reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), avatarGroup (ref), icon (ref)
-	local layoutOrder = p1.LayoutOrder
+﻿local Parent = script:FindFirstAncestor("SduiSharedContent").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local _ = require(Parent.SduiCompat)
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local AvatarGroup = FoundationModule.AvatarGroup
+local Icon = FoundationModule.Icon
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local MemoResult = ReactModule.memo(function(Frame) --[[ Line: 65 | Named "AccessoryComponent" ]]
+	-- upvalues: ReactModule (copy), AvatarGroup (copy), Icon (copy)
+	local LayoutOrder = Frame.LayoutOrder
 	
-	if p1.accessory.type == "AvatarGroup" then
-		local accessory = p1.accessory
+	if Frame.accessory.type == "AvatarGroup" then
+		local Accessory = Frame.accessory
 		
-		return reactModule.createElement(avatarGroup, {
-			LayoutOrder = layoutOrder,
-			avatars = accessory.avatars,
-			type = accessory.groupType,
-			max = accessory.max,
-			backplateStyle = p1.accessory.backplateStyle,
-			size = accessory.size,
-			testId = `{p1.testIdPrefix}--{p0.position}-avatar-group`
+		return ReactModule.createElement(AvatarGroup, {
+			LayoutOrder = LayoutOrder,
+			avatars = Accessory.avatars,
+			type = Accessory.groupType,
+			max = Accessory.max,
+			backplateStyle = Frame.accessory.backplateStyle,
+			size = Accessory.size,
+			testId = `{Frame.testIdPrefix}--{Frame.position}-avatar-group`
 		})
-	elseif p1.accessory.type == "Icon" then
-		local accessory = p1.accessory
+	elseif Frame.accessory.type == "Icon" then
+		local Accessory = Frame.accessory
 		
-		return reactModule.createElement(icon, {
-			LayoutOrder = layoutOrder,
-			name = accessory.name,
-			variant = accessory.variant,
-			size = accessory.size,
-			style = accessory.style,
-			testId = `{p1.testIdPrefix}--{p0.position}-icon`
+		return ReactModule.createElement(Icon, {
+			LayoutOrder = LayoutOrder,
+			name = Accessory.name,
+			variant = Accessory.variant,
+			size = Accessory.size,
+			style = Accessory.style,
+			testId = `{Frame.testIdPrefix}--{Frame.position}-icon`
 		})
+	else
+		return nil
 	end
-	return nil
 end)
 
-return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), view (ref), foundationModule (ref), var1 (ref), text (ref)
-	local testId = p1.testId or "--sdui-text-accessory-row"
+return ReactModule.memo(function(p1) --[[ Line: 96 | Named "SduiTextAccessoryRow" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), FoundationModule (copy), MemoResult (copy), Text (copy)
+	local LayoutOrder = p1.layoutOrder
+	local AnchorPoint = p1.anchorPoint
+	local Size = p1.size
+	local Position = p1.position
+	local UseTokensResult = UseTokensFunction()
+	local TextStyle = p1.textStyle or UseTokensResult.Color.Content.Emphasis
+	local TextCaptionLarge = if p1.fontStyle then nil else "text-caption-large"
+	local LayoutOrder1: number = if p1.leading then 2 else 1
+	local LayoutOrder2: number = if p1.leading then 3 else 2
+	local TestId = p1.testId or "--sdui-text-accessory-row"
 	
-	return reactModule.createElement(view, {
-		tag = reactModule.useMemo(function()
-			-- upvalues: p1 (ref)
+	return ReactModule.createElement(View, {
+		tag = ReactModule.useMemo(function() --[[ Line: 114 ]]
+			-- upvalues: p1 (copy)
 			return {
 				["row align-y-center auto-xy"] = true,
 				["gap-small"] = not p1.gap
 			}
 		end, { p1.gap }),
-		LayoutOrder = p1.layoutOrder,
-		AnchorPoint = p1.anchorPoint,
-		Size = p1.size,
-		Position = p1.position,
+		LayoutOrder = LayoutOrder,
+		AnchorPoint = AnchorPoint,
+		Size = Size,
+		Position = Position,
 		onActivated = p1.onActivated,
-		testId = testId,
+		testId = TestId,
 		stateLayer = {
-			affordance = foundationModule.Enums.StateLayerAffordance.None
+			affordance = FoundationModule.Enums.StateLayerAffordance.None
 		}
 	}, {
-		ListLayout = if p1.gap then reactModule.createElement("UIListLayout", {
+		ListLayout = if p1.gap then ReactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Horizontal,
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
 			Padding = UDim.new(0, p1.gap)
 		}) else nil,
-		LeadingAccessory = if p1.leading then reactModule.createElement(var1, {
+		LeadingAccessory = if p1.leading then ReactModule.createElement(MemoResult, {
 			LayoutOrder = 1,
 			position = "leading",
 			accessory = p1.leading,
-			testIdPrefix = testId
+			testIdPrefix = TestId
 		}) else nil,
-		TextElement = if p1.text then reactModule.createElement(text, {
+		TextElement = if p1.text then ReactModule.createElement(Text, {
 			RichText = true,
 			Text = p1.text,
-			textStyle = p1.textStyle or useTokens().Color.Content.Emphasis,
+			textStyle = TextStyle,
 			fontStyle = p1.fontStyle,
-			tag = `auto-xy {(if p1.fontStyle then nil else "text-caption-large") or ""}`,
-			LayoutOrder = if p1.leading then 2 else 1,
-			testId = `{testId}--text`
+			tag = `auto-xy {TextCaptionLarge or ""}`,
+			LayoutOrder = LayoutOrder1,
+			testId = `{TestId}--text`
 		}) else nil,
-		TrailingAccessory = if p1.trailing then reactModule.createElement(var1, {
+		TrailingAccessory = if p1.trailing then ReactModule.createElement(MemoResult, {
 			position = "trailing",
 			accessory = p1.trailing,
-			LayoutOrder = if p1.leading then 3 else 2,
-			testIdPrefix = testId
+			LayoutOrder = LayoutOrder2,
+			testIdPrefix = TestId
 		}) else nil
 	})
 end)

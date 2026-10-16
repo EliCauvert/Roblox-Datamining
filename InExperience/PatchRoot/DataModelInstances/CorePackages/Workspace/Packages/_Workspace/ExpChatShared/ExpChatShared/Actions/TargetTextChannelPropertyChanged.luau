@@ -1,3 +1,6 @@
-﻿return require(script:FindFirstAncestor("ExpChatShared").Parent.Rodux).makeActionCreator(script.Name, function(p1, p2)
-	return { textChannel = p1, shouldReorderTabs = p2 }
+﻿return require(script:FindFirstAncestor("ExpChatShared").Parent.Rodux).makeActionCreator(script.Name, function(TextChannel, ShouldReorderTabs) --[[ Line: 11 ]]
+	return {
+		textChannel = TextChannel,
+		shouldReorderTabs = ShouldReorderTabs
+	}
 end)

@@ -1,52 +1,49 @@
-﻿local guiService = game:GetService("GuiService")
-local parent = script:FindFirstAncestor("PeekView").Parent
-local userInputService = game:GetService("UserInputService")
-local userGameSettingsService = UserSettings():GetService("UserGameSettings")
-local eventIngestService = game:GetService("EventIngestService")
-local runService = game:GetService("RunService")
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local roactModule = require(parent.Roact)
-local UIBloxModule = require(parent.UIBlox)
-local roactGamepadModule = require(parent.RoactGamepad)
-local focusable = roactGamepadModule.Focusable
-local roactRoduxModule = require(parent.RoactRodux)
-local peekViewStateModule = require(script.Parent.PeekViewState)
-local scrimModule = require(script.Parent.Scrim)
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local images = UIBloxModule.App.ImageSet.Images
-local externalEventConnection = require(parent.RoactUtils).ExternalEventConnection
-local argCheckModule = require(parent.ArgCheck)
-local inputTypeConstants = require(parent.InputType).InputTypeConstants
-local gamepadUtils = require(parent.InputUi).Gamepad.GamepadUtils
-local getInputGroup = require(parent.InputType).getInputGroup
-local peekViewDismissedEventModule = require(script.Parent.analytics.peekViewDismissedEvent)
-local var1 = require(parent.Analytics).AnalyticsReporters.EventIngest.new(eventIngestService)
-local switchAccountScrimError = require(parent.UiShellEvents).switchAccountScrimError
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local focusNavigableSurfaceWrapper = focusNavigationUtilsModule.FocusNavigableSurfaceWrapper
-local usePeekViewFocusNavigationBindingsModule = require(script.Parent.usePeekViewFocusNavigationBindings)
-local getFFlagEnablePeekViewStateOnMountParam = require(parent.SharedFlags).GetFFlagEnablePeekViewStateOnMountParam
-local getFIntPeekViewTransitionDelayTiming = require(parent.SharedFlags).GetFIntPeekViewTransitionDelayTiming
-local fFlagProfilePlatformNewProfileHeader = require(parent.SharedFlags).FFlagProfilePlatformNewProfileHeader
-local fFlagProfilePlatformPeekDraggerContrast = require(parent.SharedFlags).FFlagProfilePlatformPeekDraggerContrast
-local enableFastScrollingFixTest = game:DefineFastFlag("EnableFastScrollingFixTest", false)
-local fFlagEnablePeekViewFocusNav = require(parent.SharedFlags).FFlagEnablePeekViewFocusNav
-local getFFlagPreventSuperBriefPeekViewClose = require(parent.SharedFlags).GetFFlagPreventSuperBriefPeekViewClose
+﻿local GuiService = game:GetService("GuiService")
+local Parent = script:FindFirstAncestor("PeekView").Parent
+local UserInputService = game:GetService("UserInputService")
+local UserGameSettings = UserSettings():GetService("UserGameSettings")
+local RunService = game:GetService("RunService")
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local RoactModule = require(Parent.Roact)
+local UIBloxModule = require(Parent.UIBlox)
+local RoactGamepadModule = require(Parent.RoactGamepad)
+local Focusable = RoactGamepadModule.Focusable
+local RoactRoduxModule = require(Parent.RoactRodux)
+local PeekViewStateModule = require(script.Parent.PeekViewState)
+local ScrimModule = require(script.Parent.Scrim)
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local ExternalEventConnection = require(Parent.RoactUtils).ExternalEventConnection
+local ArgCheckModule = require(Parent.ArgCheck)
+local InputTypeConstants = require(Parent.InputType).InputTypeConstants
+local GamepadUtils = require(Parent.InputUi).Gamepad.GamepadUtils
+local GetInputGroupFunction = require(Parent.InputType).getInputGroup
+local PeekViewDismissedEventModule = require(script.Parent.analytics.peekViewDismissedEvent)
+local NewResult = require(Parent.Analytics).AnalyticsReporters.EventIngest.new((game:GetService("EventIngestService")))
+local SwitchAccountScrimErrorFunction = require(Parent.UiShellEvents).switchAccountScrimError
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local FocusNavigableSurfaceWrapper = FocusNavigationUtilsModule.FocusNavigableSurfaceWrapper
+local UsePeekViewFocusNavigationBindingsModule = require(script.Parent.usePeekViewFocusNavigationBindings)
+local GetFFlagEnablePeekViewStateOnMountParamFunction = require(Parent.SharedFlags).GetFFlagEnablePeekViewStateOnMountParam
+local FFlagProfilePlatformNewProfileHeader = require(Parent.SharedFlags).FFlagProfilePlatformNewProfileHeader
+local FFlagProfilePlatformPeekDraggerContrast = require(Parent.SharedFlags).FFlagProfilePlatformPeekDraggerContrast
+local EnableFastScrollingFixTest = game:DefineFastFlag("EnableFastScrollingFixTest", false)
+local FFlagEnablePeekViewFocusNav = require(Parent.SharedFlags).FFlagEnablePeekViewFocusNav
+local GetFFlagPreventSuperBriefPeekViewCloseFunction = require(Parent.SharedFlags).GetFFlagPreventSuperBriefPeekViewClose
 local AXMigratePeekViewToFocusNavigation = game:DefineFastFlag("AXMigratePeekViewToFocusNavigation", false)
-local fixPeekViewAnimationJitter = game:DefineFastFlag("FixPeekViewAnimationJitter", false)
-local fFlagPeekViewFixBriefHeightLayoutRace = require(parent.SharedFlags).FFlagPeekViewFixBriefHeightLayoutRace
-local rect = Rect.new(9, 9, 9, 9)
-local swipe = images["icons/navigation/swipe"]
-local var2 = 0.1 * getFIntPeekViewTransitionDelayTiming()
-local hidden = peekViewStateModule.Hidden
-local closed = peekViewStateModule.Closed
-local superBrief = peekViewStateModule.SuperBrief
-local brief = peekViewStateModule.Brief
-local full = peekViewStateModule.Full
-local extended = peekViewStateModule.Extended
-local peekView = roactModule.PureComponent:extend("PeekView")
-peekView.defaultProps = {
+local FixPeekViewAnimationJitter = game:DefineFastFlag("FixPeekViewAnimationJitter", false)
+local FFlagPeekViewFixBriefHeightLayoutRace = require(Parent.SharedFlags).FFlagPeekViewFixBriefHeightLayoutRace
+local _Rect = Rect.new(9, 9, 9, 9)
+local IconsNavigationSwipe = UIBloxModule.App.ImageSet.Images["icons/navigation/swipe"]
+local ScaledFIntPeekViewTransitionDelayTiming = 0.1 * require(Parent.SharedFlags).GetFIntPeekViewTransitionDelayTiming()
+local Hidden = PeekViewStateModule.Hidden
+local Closed = PeekViewStateModule.Closed
+local SuperBrief = PeekViewStateModule.SuperBrief
+local Brief = PeekViewStateModule.Brief
+local Full = PeekViewStateModule.Full
+local Extended = PeekViewStateModule.Extended
+local PeekView = RoactModule.PureComponent:extend("PeekView")
+PeekView.defaultProps = {
 	superBriefViewContentHeight = nil,
 	bottomDockedContainerHeight = 0,
 	bottomDockedContainerContent = nil,
@@ -71,36 +68,34 @@ peekView.defaultProps = {
 	hasSolidDragger = true,
 	draggerImageStyle = nil,
 	briefViewContentHeight = UDim.new(0.5, 0),
-	fullViewContentHeight = if not AXMigratePeekViewToFocusNavigation then UDim.new(1, 0) else nil,
+	fullViewContentHeight = if AXMigratePeekViewToFocusNavigation then nil else UDim.new(1, 0),
 	elasticBehavior = Enum.ElasticBehavior.Always
 }
 
-function peekView.init(p1)
-	-- upvalues: userGameSettingsService (ref), hidden (ref), getInputGroup (ref), userInputService (ref), roactModule (ref), UIBloxModule (ref), closed (ref), superBrief (ref), brief (ref), full (ref), AXMigratePeekViewToFocusNavigation (ref), switchAccountScrimError (ref), var1 (ref), fixPeekViewAnimationJitter (ref), fFlagPeekViewFixBriefHeightLayoutRace (ref), enableFastScrollingFixTest (ref), getFFlagPreventSuperBriefPeekViewClose (ref), peekViewStateModule (ref), inputTypeConstants (ref), peekViewDismissedEventModule (ref), extended (ref), argCheckModule (ref), runService (ref), var2 (ref), guiService (ref)
+function PeekView.init(p1) --[[ Line: 139 ]]
+	-- upvalues: UserGameSettings (copy), Hidden (copy), GetInputGroupFunction (copy), UserInputService (copy), RoactModule (copy), UIBloxModule (copy), Closed (copy), SuperBrief (copy), Brief (copy), Full (copy), AXMigratePeekViewToFocusNavigation (copy), SwitchAccountScrimErrorFunction (copy), NewResult (copy), FixPeekViewAnimationJitter (copy), FFlagPeekViewFixBriefHeightLayoutRace (copy), EnableFastScrollingFixTest (copy), GetFFlagPreventSuperBriefPeekViewCloseFunction (copy), PeekViewStateModule (copy), InputTypeConstants (copy), PeekViewDismissedEventModule (copy), Extended (copy), ArgCheckModule (copy), RunService (copy), ScaledFIntPeekViewTransitionDelayTiming (copy), GuiService (copy)
 	p1.isMounted = false
 	p1.isTouched = false
 	p1.isInGoToState = false
-	p1.useReducedMotion = userGameSettingsService.ReducedMotion
-	p1.viewType = hidden
+	p1.useReducedMotion = UserGameSettings.ReducedMotion
+	p1.viewType = Hidden
 	p1:setState({
 		scrollableViewType = false,
 		absoluteWindowSizeX = 0,
 		absoluteWindowSizeY = 0,
 		canvasGroupTransparency = 0,
-		lastInputGroup = getInputGroup(userInputService:GetLastInputType())
+		lastInputGroup = GetInputGroupFunction(UserInputService:GetLastInputType())
 	})
-	p1.containerFrameRef = roactModule.createRef()
-	p1.clipFrameRef = roactModule.createRef()
-	p1.shadowRef = roactModule.createRef()
-	p1.fillingAreaRef = roactModule.createRef()
-	p1.swipeScrollingFrameRef = roactModule.createRef()
-	p1.bottomContainerRef = roactModule.createRef()
-	local var3, var4 = roactModule.createBinding(0)
-	p1.transitionPercent = var3
-	p1.setTransitionPercent = var4
+	p1.containerFrameRef = RoactModule.createRef()
+	p1.clipFrameRef = RoactModule.createRef()
+	p1.shadowRef = RoactModule.createRef()
+	p1.fillingAreaRef = RoactModule.createRef()
+	p1.swipeScrollingFrameRef = RoactModule.createRef()
+	p1.bottomContainerRef = RoactModule.createRef()
+	p1.transitionPercent, p1.setTransitionPercent = RoactModule.createBinding(0)
 	
-	function p0.onAbsoluteWindowSizeChanged(p2)
-		-- upvalues: p1 (ref)
+	function p1.onAbsoluteWindowSizeChanged(p2) --[[ Line: 165 ]]
+		-- upvalues: p1 (copy)
 		if p2.AbsoluteWindowSize.X ~= p1.state.absoluteWindowSizeX or p2.AbsoluteWindowSize.Y ~= p1.state.absoluteWindowSizeY then
 			p1:setState({
 				absoluteWindowSizeX = p2.AbsoluteWindowSize.X,
@@ -109,9 +104,9 @@ function peekView.init(p1)
 		end
 	end
 	
-	function p0.withStyle(p2)
-		-- upvalues: p1 (ref), UIBloxModule (copy)
-		return if p1.props.withNewThemeProvider then UIBloxModule.Style.withStyle(p2) else p2({
+	function p1.withStyle(Callback) --[[ Line: 177 ]]
+		-- upvalues: p1 (copy), UIBloxModule (upval)
+		return if p1.props.withNewThemeProvider then UIBloxModule.Style.withStyle(Callback) else Callback({
 			Theme = {
 				BackgroundDefault = { Transparency = 0, Color = Color3.fromRGB(35, 37, 39) },
 				UIEmphasis = {
@@ -124,20 +119,20 @@ function peekView.init(p1)
 		})
 	end
 	
-	function p0.inputBeganCallback(p2)
-		-- upvalues: p1 (ref)
+	function p1.inputBeganCallback(Input) --[[ Line: 203 ]]
+		-- upvalues: p1 (copy)
 		if not p1.isMounted then return end
-		if p2.UserInputType == Enum.UserInputType.Touch then
+		if Input.UserInputType == Enum.UserInputType.Touch then
 			p1.isTouched = true
 			
 			return
 		end
 	end
 	
-	function p0.inputEndedCallback(p2)
-		-- upvalues: p1 (ref)
+	function p1.inputEndedCallback(Input) --[[ Line: 215 ]]
+		-- upvalues: p1 (copy)
 		if not p1.isMounted then return end
-		if p2.UserInputType == Enum.UserInputType.Touch then
+		if Input.UserInputType == Enum.UserInputType.Touch then
 			p1.isTouched = false
 			p1.checkGoTo()
 			
@@ -145,325 +140,328 @@ function peekView.init(p1)
 		end
 	end
 	
-	function p0.getViewSize(p2)
-		-- upvalues: hidden (copy), closed (copy), superBrief (copy), p1 (ref), brief (copy), full (copy)
-		if p2 == hidden then
+	function p1.getViewSize(ViewType) --[[ Line: 228 ]]
+		-- upvalues: Hidden (upval), Closed (upval), SuperBrief (upval), p1 (copy), Brief (upval), Full (upval)
+		if ViewType == Hidden then
 			return UDim.new(0, 0)
-		elseif p2 == closed then
+		elseif ViewType == Closed then
 			return UDim.new(0, 0)
-		elseif p2 == superBrief then
+		elseif ViewType == SuperBrief then
 			if p1.props.superBriefViewContentHeight then
-				local superBriefViewContentHeight = p1.props.superBriefViewContentHeight
+				local SuperBriefViewContentHeight = p1.props.superBriefViewContentHeight
 				
-				return UDim.new(superBriefViewContentHeight.Scale, superBriefViewContentHeight.Offset + 25)
+				return UDim.new(SuperBriefViewContentHeight.Scale, SuperBriefViewContentHeight.Offset + 25)
+			else
+				return UDim.new(0, 0)
 			end
-			return UDim.new(0, 0)
-		elseif p2 == brief then
-			local briefViewContentHeight = p1.props.briefViewContentHeight
+		elseif ViewType == Brief then
+			local BriefViewContentHeight = p1.props.briefViewContentHeight
 			
-			return UDim.new(briefViewContentHeight.Scale, briefViewContentHeight.Offset + 25)
+			return UDim.new(BriefViewContentHeight.Scale, BriefViewContentHeight.Offset + 25)
+		else
+			return if ViewType == Full then p1.props.fullViewContentHeight else nil
 		end
-		return if p2 == full then p1.props.fullViewContentHeight else nil
 	end
 	
-	function p0.hasNilRefs()
-		-- upvalues: AXMigratePeekViewToFocusNavigation (copy), p1 (ref)
-		return not ((if AXMigratePeekViewToFocusNavigation then p1.props.swipeScrollingFrameRef.current else p1.swipeScrollingFrameRef.current) and ((if AXMigratePeekViewToFocusNavigation then p1.props.containerFrameRef.current else p1.containerFrameRef.current) and (p1.clipFrameRef.current and (p1.shadowRef.current and p1.fillingAreaRef.current))))
+	function p1.hasNilRefs(): boolean --[[ Line: 253 ]]
+		-- upvalues: AXMigratePeekViewToFocusNavigation (upval), p1 (copy)
+		local Current = if AXMigratePeekViewToFocusNavigation then p1.props.containerFrameRef.current else p1.containerFrameRef.current
+		local Current1 = p1.clipFrameRef.current
+		local Current2 = p1.shadowRef.current
+		local Current3 = p1.fillingAreaRef.current
+		
+		return not ((if AXMigratePeekViewToFocusNavigation then p1.props.swipeScrollingFrameRef.current else p1.swipeScrollingFrameRef.current) and (Current and (Current1 and (Current2 and Current3))))
 	end
 	
-	function p0.reportRefStatus(p2, p3, p4, p5, p6, p7)
-		-- upvalues: switchAccountScrimError (copy), var1 (copy)
-		switchAccountScrimError(var1, "switchAccountScrimError", {
-			callSite = p2,
-			swipeScrollingFrame = if p3 then "true" else "nil",
-			containerFrame = if p4 then "true" else "nil",
-			clipFrame = if p5 then "true" else "nil",
-			shadow = if p6 then "true" else "nil",
-			fillingArea = if p7 then "true" else "nil"
+	function p1.reportRefStatus(CallSite, Current, Current1, Current2, Current3, Current4) --[[ Line: 267 ]]
+		-- upvalues: SwitchAccountScrimErrorFunction (upval), NewResult (upval)
+		SwitchAccountScrimErrorFunction(NewResult, "switchAccountScrimError", {
+			callSite = CallSite,
+			swipeScrollingFrame = if Current then "true" else "nil",
+			containerFrame = if Current1 then "true" else "nil",
+			clipFrame = if Current2 then "true" else "nil",
+			shadow = if Current3 then "true" else "nil",
+			fillingArea = if Current4 then "true" else "nil"
 		})
 	end
 	
-	function p0.reconcileRbxInstances(p2)
-		-- upvalues: AXMigratePeekViewToFocusNavigation (copy), p1 (ref)
-		local var5 = if AXMigratePeekViewToFocusNavigation then p1.props.swipeScrollingFrameRef.current else p1.swipeScrollingFrameRef.current
-		local var6 = if var5 then var5.CanvasPosition.Y else 0
-		local var7 = if AXMigratePeekViewToFocusNavigation then p1.props.containerFrameRef.current else p1.containerFrameRef.current
-		local current = p1.clipFrameRef.current
-		local current_1 = p1.shadowRef.current
-		local current_2 = p1.fillingAreaRef.current
+	function p1.reconcileRbxInstances(CallSite) --[[ Line: 279 ]]
+		-- upvalues: AXMigratePeekViewToFocusNavigation (upval), p1 (copy)
+		local Current = if AXMigratePeekViewToFocusNavigation then p1.props.swipeScrollingFrameRef.current else p1.swipeScrollingFrameRef.current
+		local Y = Current and Current.CanvasPosition.Y or 0
+		local Current1 = if AXMigratePeekViewToFocusNavigation then p1.props.containerFrameRef.current else p1.containerFrameRef.current
+		local Current2 = p1.clipFrameRef.current
+		local Current3 = p1.shadowRef.current
+		local Current4 = p1.fillingAreaRef.current
 		
 		if p1.hasNilRefs() then
-			p1.reportRefStatus(p2, var5, var7, current, current_1, current_2)
+			p1.reportRefStatus(CallSite, Current, Current1, Current2, Current3, Current4)
 			
 			return
 		end
-		local x = var7.AbsoluteSize.X
-		local y = var7.AbsoluteSize.Y
-		current.Size = UDim2.new(0, x, 0, var6)
-		current_1.Size = UDim2.new(0, x, 0, 36)
-		current.Position = UDim2.new(0, 0, 1, -var6)
-		current_1.Position = UDim2.new(0, 0, 1, (-var6) - 30)
-		var5.Size = UDim2.new(0, x, 0, y)
-		var5.Position = UDim2.new(0, 0, 0, -(y - var6))
-		current_2.Size = UDim2.new(0, x, 0, y)
-		local current_3 = p1.bottomContainerRef.current
+		local X = Current1.AbsoluteSize.X
+		local Y1 = Current1.AbsoluteSize.Y
+		Current2.Size = UDim2.new(0, X, 0, Y)
+		Current3.Size = UDim2.new(0, X, 0, 36)
+		Current2.Position = UDim2.new(0, 0, 1, -Y)
+		Current3.Position = UDim2.new(0, 0, 1, -Y - 30)
+		Current.Size = UDim2.new(0, X, 0, Y1)
+		Current.Position = UDim2.new(0, 0, 0, -(Y1 - Y))
+		Current4.Size = UDim2.new(0, X, 0, Y1)
+		local Current5 = p1.bottomContainerRef.current
 		
-		if current_3 then
-			local bottomDockedContainerHeight = p1.props.bottomDockedContainerHeight
+		if Current5 then
+			local BottomDockedContainerHeight: number = p1.props.bottomDockedContainerHeight
 			
-			if 25 + bottomDockedContainerHeight < current.AbsoluteSize.Y then
-				current_3.Active = true
-				current_3.Position = UDim2.new(0, 0, 1, -bottomDockedContainerHeight)
+			if 25 + BottomDockedContainerHeight < Current2.AbsoluteSize.Y then
+				Current5.Active = true
+				Current5.Position = UDim2.new(0, 0, 1, -BottomDockedContainerHeight)
 			else
-				current_3.Active = false
-				current_3.Position = UDim2.new(0, 0, 1, -current.AbsoluteSize.Y + 25)
+				Current5.Active = false
+				Current5.Position = UDim2.new(0, 0, 1, -Current2.AbsoluteSize.Y + 25)
 			end
 		end
 		p1.transitionCallbacks()
 		
 		if p1.props.peekHeaderPositionYChange then
-			p1.props.peekHeaderPositionYChange(var6)
+			p1.props.peekHeaderPositionYChange(Y)
 		end
 	end
 	
-	function p0.updateSwipeScrollingFrame()
-		-- upvalues: p1 (ref), AXMigratePeekViewToFocusNavigation (copy)
-		local viewSize = p1.getViewSize(p1.viewType)
-		local _ = nil
+	function p1.updateSwipeScrollingFrame() --[[ Line: 329 ]]
+		-- upvalues: p1 (copy), AXMigratePeekViewToFocusNavigation (upval)
+		local ViewSize = p1.getViewSize(p1.viewType)
+		local Current = if AXMigratePeekViewToFocusNavigation then p1.props.containerFrameRef.current and p1.props.swipeScrollingFrameRef.current else p1.containerFrameRef.current and p1.swipeScrollingFrameRef.current
 		
-		if viewSize and (if AXMigratePeekViewToFocusNavigation then p1.props.containerFrameRef.current and p1.props.swipeScrollingFrameRef.current else p1.containerFrameRef.current and p1.swipeScrollingFrameRef.current) then
-			local var5 = if AXMigratePeekViewToFocusNavigation then p1.props.swipeScrollingFrameRef.current else p1.swipeScrollingFrameRef.current
-			local var6 = (if AXMigratePeekViewToFocusNavigation then p1.props.containerFrameRef.current else p1.containerFrameRef.current).AbsoluteSize.Y * viewSize.Scale + viewSize.Offset
+		if ViewSize and Current then
+			local Current1 = if AXMigratePeekViewToFocusNavigation then p1.props.swipeScrollingFrameRef.current else p1.swipeScrollingFrameRef.current
+			local NewY = (if AXMigratePeekViewToFocusNavigation then p1.props.containerFrameRef.current else p1.containerFrameRef.current).AbsoluteSize.Y * ViewSize.Scale + ViewSize.Offset
 			
-			if var5.CanvasPosition.Y ~= var6 then
-				var5.CanvasPosition = Vector2.new(0, var6)
+			if Current1.CanvasPosition.Y ~= NewY then
+				Current1.CanvasPosition = Vector2.new(0, NewY)
 				
 				if p1.props.peekHeaderPositionYChange then
-					p1.props.peekHeaderPositionYChange(var6)
+					p1.props.peekHeaderPositionYChange(NewY)
 				end
 			end
 		end
 	end
 	
-	function p0.onContainerFrameAbsoluteSizeChanged()
-		-- upvalues: p1 (ref), fixPeekViewAnimationJitter (copy), hidden (copy)
+	function p1.onContainerFrameAbsoluteSizeChanged() --[[ Line: 358 ]]
+		-- upvalues: p1 (copy), FixPeekViewAnimationJitter (upval), Hidden (upval)
 		if not p1.isMounted then return end
 		p1.reconcileRbxInstances("onContainerFrameAbsoluteSizeChanged")
 		
-		if fixPeekViewAnimationJitter then
-			if p1:isAnimating() and p1.viewType == hidden then
-				return
-			else
-				p1.updateSwipeScrollingFrame()
-				
-				return
-			end
-		else
+		if not FixPeekViewAnimationJitter then
 			p1.updateSwipeScrollingFrame()
+		elseif not p1:isAnimating() or p1.viewType ~= Hidden then
+			p1.updateSwipeScrollingFrame()
+			
+			return
 		end
 	end
 	
-	if fFlagPeekViewFixBriefHeightLayoutRace then
-		function p0.onAbsoluteCanvasSizeChanged()
-			-- upvalues: p1 (ref), brief (copy), superBrief (copy), AXMigratePeekViewToFocusNavigation (copy)
+	if FFlagPeekViewFixBriefHeightLayoutRace then
+		function p1.onAbsoluteCanvasSizeChanged() --[[ Line: 380 ]]
+			-- upvalues: p1 (copy), Brief (upval), SuperBrief (upval), AXMigratePeekViewToFocusNavigation (upval)
 			if not p1.isMounted or p1:isAnimating() or p1.isTouched then return end
-			if p1.viewType ~= brief and p1.viewType ~= superBrief then return end
-			local viewSize = p1.getViewSize(p1.viewType)
+			if p1.viewType ~= Brief and p1.viewType ~= SuperBrief then return end
+			local ViewSize = p1.getViewSize(p1.viewType)
 			
-			if not viewSize then return end
-			local var5 = if AXMigratePeekViewToFocusNavigation then p1.props.swipeScrollingFrameRef.current else p1.swipeScrollingFrameRef.current
-			local var6 = if AXMigratePeekViewToFocusNavigation then p1.props.containerFrameRef.current else p1.containerFrameRef.current
+			if not ViewSize then return end
+			local Current = if AXMigratePeekViewToFocusNavigation then p1.props.swipeScrollingFrameRef.current else p1.swipeScrollingFrameRef.current
+			local Current1 = if AXMigratePeekViewToFocusNavigation then p1.props.containerFrameRef.current else p1.containerFrameRef.current
 			
-			if not var5 or not var6 then return end
-			local var7 = var6.AbsoluteSize.Y * viewSize.Scale + viewSize.Offset
+			if not Current or not Current1 then return end
+			local NewY = Current1.AbsoluteSize.Y * ViewSize.Scale + ViewSize.Offset
+			local YDelta = Current.AbsoluteCanvasSize.Y - Current.AbsoluteWindowSize.Y
 			
-			if var5.CanvasPosition.Y < var7 and var7 <= var5.AbsoluteCanvasSize.Y - var5.AbsoluteWindowSize.Y then
-				var5.CanvasPosition = Vector2.new(0, var7)
+			if Current.CanvasPosition.Y < NewY and NewY <= YDelta then
+				Current.CanvasPosition = Vector2.new(0, NewY)
 			end
 		end
 	end
-	function p0.onSwipeScrollingFrameCanvasPositionChanged()
-		-- upvalues: p1 (ref), AXMigratePeekViewToFocusNavigation (copy), enableFastScrollingFixTest (copy), getFFlagPreventSuperBriefPeekViewClose (copy), peekViewStateModule (copy), inputTypeConstants (copy)
+	function p1.onSwipeScrollingFrameCanvasPositionChanged() --[[ Line: 411 ]]
+		-- upvalues: p1 (copy), AXMigratePeekViewToFocusNavigation (upval), EnableFastScrollingFixTest (upval), GetFFlagPreventSuperBriefPeekViewCloseFunction (upval), PeekViewStateModule (upval), InputTypeConstants (upval)
 		if not p1.isMounted then return end
-		local var5 = if AXMigratePeekViewToFocusNavigation then p1.props.swipeScrollingFrameRef.current else p1.swipeScrollingFrameRef.current
-		local y = var5.CanvasPosition.Y
+		local Current = if AXMigratePeekViewToFocusNavigation then p1.props.swipeScrollingFrameRef.current else p1.swipeScrollingFrameRef.current
+		local Y: number = Current.CanvasPosition.Y
 		
-		if y ~= math.floor(y) then
-			if not enableFastScrollingFixTest then
-				if getFFlagPreventSuperBriefPeekViewClose() then
-					local floored = math.floor(y + 0.5)
+		if Y ~= math.floor(Y) then
+			if not EnableFastScrollingFixTest then
+				if GetFFlagPreventSuperBriefPeekViewCloseFunction() then
+					local Floored = math.floor(Y + 0.5)
 					
-					if p1.viewType == peekViewStateModule.SuperBrief and p1.props.minimizeToSuperBrief then
-						local superBriefViewY = p1.getSuperBriefViewY()
+					if p1.viewType == PeekViewStateModule.SuperBrief and p1.props.minimizeToSuperBrief then
+						local SuperBriefViewY = p1.getSuperBriefViewY()
 						
-						if superBriefViewY ~= nil and floored ~= nil and floored < superBriefViewY then
-							floored = superBriefViewY
+						if SuperBriefViewY ~= nil and Floored ~= nil and Floored < SuperBriefViewY then
+							Floored = SuperBriefViewY
 						end
 					end
-					var5.CanvasPosition = Vector2.new(0, floored)
+					Current.CanvasPosition = Vector2.new(0, Floored)
 				else
-					var5.CanvasPosition = Vector2.new(0, math.floor(y + 0.5))
+					Current.CanvasPosition = Vector2.new(0, (math.floor(Y + 0.5)))
 				end
 			end
 			if p1.props.peekHeaderPositionYChange then
-				p1.props.peekHeaderPositionYChange(y)
+				p1.props.peekHeaderPositionYChange(Y)
 			end
-			if not enableFastScrollingFixTest then return end
+			if not EnableFastScrollingFixTest then return end
 		end
 		p1.reconcileRbxInstances("onSwipeScrollingFrameCanvasPositionChanged")
 		
-		if p1.state.lastInputGroup ~= inputTypeConstants.Gamepad then
+		if p1.state.lastInputGroup ~= InputTypeConstants.Gamepad then
 			p1.checkGoTo()
 		end
 	end
 	
-	function p0.getBriefViewY()
-		-- upvalues: AXMigratePeekViewToFocusNavigation (copy), p1 (ref)
-		local briefViewContentHeight = p1.props.briefViewContentHeight
+	function p1.getBriefViewY(): number --[[ Line: 460 ]]
+		-- upvalues: AXMigratePeekViewToFocusNavigation (upval), p1 (copy)
+		local BriefViewContentHeight = p1.props.briefViewContentHeight
 		
-		return (if AXMigratePeekViewToFocusNavigation then p1.props.containerFrameRef.current.AbsoluteSize.Y else p1.containerFrameRef.current.AbsoluteSize.Y) * briefViewContentHeight.Scale + briefViewContentHeight.Offset + 25
+		return (if AXMigratePeekViewToFocusNavigation then p1.props.containerFrameRef.current.AbsoluteSize.Y else p1.containerFrameRef.current.AbsoluteSize.Y) * BriefViewContentHeight.Scale + BriefViewContentHeight.Offset + 25
 	end
 	
-	function p0.getSuperBriefViewY()
-		-- upvalues: AXMigratePeekViewToFocusNavigation (copy), p1 (ref)
+	function p1.getSuperBriefViewY(): number? --[[ Line: 468 ]]
+		-- upvalues: AXMigratePeekViewToFocusNavigation (upval), p1 (copy)
 		if AXMigratePeekViewToFocusNavigation then
-			if p1.props.superBriefViewContentHeight and p1.props.containerFrameRef:getValue() then
-				local superBriefViewContentHeight = p1.props.superBriefViewContentHeight
-				
-				return (if AXMigratePeekViewToFocusNavigation then p1.props.containerFrameRef:getValue().AbsoluteSize.Y else p1.containerFrameRef:getValue().AbsoluteSize.Y) * superBriefViewContentHeight.Scale + superBriefViewContentHeight.Offset + 25
-			else
+			if not p1.props.superBriefViewContentHeight or not p1.props.containerFrameRef:getValue() then
 				return nil
 			end
-		elseif p1.props.superBriefViewContentHeight and p1.containerFrameRef:getValue() then
-		else
+		elseif not p1.props.superBriefViewContentHeight or not p1.containerFrameRef:getValue() then
 			return nil
 		end
+		local SuperBriefViewContentHeight = p1.props.superBriefViewContentHeight
+		
+		return (if AXMigratePeekViewToFocusNavigation then p1.props.containerFrameRef:getValue().AbsoluteSize.Y else p1.containerFrameRef:getValue().AbsoluteSize.Y) * SuperBriefViewContentHeight.Scale + SuperBriefViewContentHeight.Offset + 25
 	end
 	
-	function p0.getFullViewY()
-		-- upvalues: p1 (ref)
+	function p1.getFullViewY() --[[ Line: 486 ]]
+		-- upvalues: p1 (copy)
 		return p1.containerFrameRef.current.AbsoluteSize.Y * p1.props.fullViewContentHeight.Scale + p1.props.fullViewContentHeight.Offset
 	end
 	
-	function p0.transitionCallbacks()
-		-- upvalues: p1 (ref), AXMigratePeekViewToFocusNavigation (copy)
-		local briefToFullTransitionPercent = p1.props.briefToFullTransitionPercent
-		local y = (if AXMigratePeekViewToFocusNavigation then p1.props.swipeScrollingFrameRef.current else p1.swipeScrollingFrameRef.current).CanvasPosition.Y
-		local briefViewY = p1.getBriefViewY()
-		local var5 = if AXMigratePeekViewToFocusNavigation then p1.props.getFullViewY() else p1.getFullViewY()
-		local var6 = var5 - briefViewY
-		local var7 = 0
+	function p1.transitionCallbacks() --[[ Line: 491 ]]
+		-- upvalues: p1 (copy), AXMigratePeekViewToFocusNavigation (upval)
+		local BriefToFullTransitionPercentFunction: (any) -> () = p1.props.briefToFullTransitionPercent
+		local Y = (if AXMigratePeekViewToFocusNavigation then p1.props.swipeScrollingFrameRef.current else p1.swipeScrollingFrameRef.current).CanvasPosition.Y
+		local BriefViewY = p1.getBriefViewY()
+		local FullViewY = if AXMigratePeekViewToFocusNavigation then p1.props.getFullViewY() else p1.getFullViewY()
+		local FullViewYDelta = FullViewY - BriefViewY
+		local YRatio = if BriefViewY < Y and Y <= FullViewY then (Y - BriefViewY) / FullViewYDelta elseif FullViewY < Y then 1 else 0
+		p1.setTransitionPercent(YRatio)
 		
-		if briefViewY < y and y <= var5 then
-			var7 = (y - briefViewY) / var6
-		elseif var5 < y then
-			var7 = 1
-		end
-		p1.setTransitionPercent(var7)
-		
-		if briefToFullTransitionPercent then
-			briefToFullTransitionPercent(var7)
+		if BriefToFullTransitionPercentFunction then
+			BriefToFullTransitionPercentFunction(YRatio)
 		end
 	end
 	
-	function p0.checkGoTo()
-		-- upvalues: p1 (ref), AXMigratePeekViewToFocusNavigation (copy), peekViewStateModule (copy)
+	function p1.checkGoTo() --[[ Line: 528 ]]
+		-- upvalues: p1 (copy), AXMigratePeekViewToFocusNavigation (upval), PeekViewStateModule (upval)
 		if p1.isInGoToState then return end
 		if p1.isTouched then return end
-		local var5 = if AXMigratePeekViewToFocusNavigation then p1.props.swipeScrollingFrameRef.current else p1.swipeScrollingFrameRef.current
+		local Current = if AXMigratePeekViewToFocusNavigation then p1.props.swipeScrollingFrameRef.current else p1.swipeScrollingFrameRef.current
 		
-		if var5 and p1.state.absoluteWindowSizeX == 0 and p1.state.absoluteWindowSizeY == 0 then return end
-		local briefViewY = p1.getBriefViewY()
-		local superBriefViewY = p1.getSuperBriefViewY()
-		local var6 = if AXMigratePeekViewToFocusNavigation then p1.props.getFullViewY() else p1.getFullViewY()
+		if Current and p1.state.absoluteWindowSizeX == 0 and p1.state.absoluteWindowSizeY == 0 then return end
+		local BriefViewY = p1.getBriefViewY()
+		local SuperBriefViewY = p1.getSuperBriefViewY()
+		local FullViewY = if AXMigratePeekViewToFocusNavigation then p1.props.getFullViewY() else p1.getFullViewY()
 		
-		if var6 < briefViewY then return end
-		if superBriefViewY and briefViewY < superBriefViewY then return end
-		if (var5.AbsoluteCanvasSize.Y or var5.CanvasSize.Y.Offset) < var5.AbsoluteWindowSize.Y + 25 + p1.props.bottomDockedContainerHeight then return end
-		local y = var5.ScrollVelocity.Y
-		local var7 = y < 0
-		local var8 = y > 0
-		local y_1 = var5.CanvasPosition.Y
+		if FullViewY < BriefViewY then return end
+		if SuperBriefViewY and BriefViewY < SuperBriefViewY then return end
+		if (Current.AbsoluteCanvasSize.Y or Current.CanvasSize.Y.Offset) < Current.AbsoluteWindowSize.Y + 25 + p1.props.bottomDockedContainerHeight then return end
+		local Y: number = Current.ScrollVelocity.Y
+		local IsYBelow = Y < 0
+		local IsYAbove = Y > 0
+		local Y1 = Current.CanvasPosition.Y
+		local IsYMatch: boolean = p1.viewType == PeekViewStateModule.Full and Y1 == FullViewY
 		
-		if ((p1.viewType == peekViewStateModule.Brief and y_1 == briefViewY) or (p1.viewType == peekViewStateModule.Full and y_1 == var6)) and y == 0 then return end
-		if var6 < y_1 then
-			p1:handleCurYAboveFullViewY(var7)
+		if (p1.viewType == PeekViewStateModule.Brief and Y1 == BriefViewY or IsYMatch) and Y == 0 then return end
+		if FullViewY < Y1 then
+			p1:handleCurYAboveFullViewY(IsYBelow)
 			
 			return
-		elseif briefViewY < y_1 and y_1 <= var6 then
-			p1:handleCurYFromBriefToFull(y_1, y, var7, var8)
+		end
+		if BriefViewY < Y1 and Y1 <= FullViewY then
+			p1:handleCurYFromBriefToFull(Y1, Y, IsYBelow, IsYAbove)
 			
 			return
-		elseif superBriefViewY then
-			if superBriefViewY < y_1 and y_1 <= briefViewY then
-				p1:handleCurYFromSuperBriefToBrief(y_1, superBriefViewY, y, var7, var8)
-				
-				return
-			elseif y_1 <= superBriefViewY then
-				p1:handleCurYFromClosedToSuperBrief(y_1, superBriefViewY, y, var8, var7)
+		end
+		if SuperBriefViewY then
+			if SuperBriefViewY < Y1 and Y1 <= BriefViewY then
+				p1:handleCurYFromSuperBriefToBrief(Y1, SuperBriefViewY, Y, IsYBelow, IsYAbove)
 				
 				return
 			end
-		elseif y_1 <= briefViewY then
-			p1:handleCurYFromClosedToBrief(y_1, var8, var7)
+			if Y1 <= SuperBriefViewY then
+				p1:handleCurYFromClosedToSuperBrief(Y1, SuperBriefViewY, Y, IsYAbove, IsYBelow)
+				
+				return
+			end
+		elseif Y1 <= BriefViewY then
+			p1:handleCurYFromClosedToBrief(Y1, IsYAbove, IsYBelow)
 		end
 	end
 	
-	function p0.onPeekHeaderActivated()
-		-- upvalues: p1 (ref), closed (copy), brief (copy), full (copy), superBrief (copy), peekViewDismissedEventModule (copy)
-		if p1.viewType == closed then
-			p1.goTo(brief)
+	function p1.onPeekHeaderActivated() --[[ Line: 615 ]]
+		-- upvalues: p1 (copy), Closed (upval), Brief (upval), Full (upval), SuperBrief (upval), PeekViewDismissedEventModule (upval)
+		if p1.viewType == Closed then
+			p1.goTo(Brief)
 			
 			return
-		elseif p1.viewType == brief then
-			p1.goTo(full)
+		end
+		if p1.viewType == Brief then
+			p1.goTo(Full)
 			
 			return
-		elseif p1.viewType == superBrief then
-			p1.goTo(brief)
+		end
+		if p1.viewType == SuperBrief then
+			p1.goTo(Brief)
 			
 			return
-		elseif p1.viewType == full then
+		end
+		if p1.viewType == Full then
 			if p1.props.peekHeaderClose then
-				p1.goTo(closed, nil, nil, {
-					dismissMethod = peekViewDismissedEventModule.dismissMethodEnum.handleTap
+				p1.goTo(Closed, nil, nil, {
+					dismissMethod = PeekViewDismissedEventModule.dismissMethodEnum.handleTap
 				})
 				
 				return
 			end
-			p1.goTo(brief)
+			p1.goTo(Brief)
 		end
 	end
 	
-	function p0.setViewType(p2, p3)
-		-- upvalues: p1 (ref), extended (copy), full (copy)
+	function p1.setViewType(ViewType, p2) --[[ Line: 633 ]]
+		-- upvalues: p1 (copy), Extended (upval), Full (upval)
 		if p1.goToAnimationConnection then
 			p1.goToAnimationConnection:disconnect()
 			p1.goToAnimationConnection = nil
 		end
 		p1.isInGoToState = false
 		p1.clipFrameRef.current.Active = false
-		local viewType = p1.viewType
+		local ViewType1 = p1.viewType
 		
-		if viewType ~= p2 then
-			p1.viewType = p2
+		if ViewType1 ~= ViewType then
+			p1.viewType = ViewType
 			p1:setState({
-				scrollableViewType = if p1.viewType ~= extended then p1.viewType == full else true
+				scrollableViewType = p1.viewType == Extended or p1.viewType == Full
 			})
-			local viewStateChanged = p1.props.viewStateChanged
+			local ViewStateChangedFunction: (any, any, any) -> () = p1.props.viewStateChanged
 			
-			if viewStateChanged then
-				viewStateChanged(p2, viewType, p3 or {})
+			if ViewStateChangedFunction then
+				ViewStateChangedFunction(ViewType, ViewType1, p2 or {})
 			end
 		end
 		p1.updateSwipeScrollingFrame()
 	end
 	
-	function p0.goTo(p2, p3, p4, p5)
-		-- upvalues: p1 (ref), argCheckModule (copy), AXMigratePeekViewToFocusNavigation (copy), full (copy), closed (copy), runService (copy), brief (copy), var2 (copy)
-		if p1.viewType == p2 then return end
-		if argCheckModule.isEqual(p1.isInGoToState, false, "self.isInGoToState") then return end
-		if argCheckModule.isEqual(p1.goToAnimationConnection, nil, "self.goToAnimationConnection") then return end
+	function p1.goTo(Brief1, Enabled, UseReducedMotion, p2) --[[ Line: 661 ]]
+		-- upvalues: p1 (copy), ArgCheckModule (upval), AXMigratePeekViewToFocusNavigation (upval), Full (upval), Closed (upval), RunService (upval), Brief (upval), ScaledFIntPeekViewTransitionDelayTiming (upval)
+		if p1.viewType == Brief1 then return end
+		if ArgCheckModule.isEqual(p1.isInGoToState, false, "self.isInGoToState") then return end
+		if ArgCheckModule.isEqual(p1.goToAnimationConnection, nil, "self.goToAnimationConnection") then return end
 		p1.isInGoToState = true
 		
 		if AXMigratePeekViewToFocusNavigation then
@@ -473,359 +471,368 @@ function peekView.init(p1)
 		end
 		p1.clipFrameRef.current.Active = true
 		
-		if p3 == false then
-			p1.setViewType(p2, p5)
+		if Enabled == false then
+			p1.setViewType(Brief1, p2)
 			
-			if p2 == full then
+			if Brief1 == Full then
 				p1:adjustScrollingFramePosition()
 				
 				return
 			end
 		else
-			local currentTime = tick()
+			local CurrentTime = tick()
 			
-			if not p4 then
-				p1:setState({ canvasGroupTransparency = if p2 == closed then 1 else 0 })
-				p1.goToAnimationConnection = runService.RenderStepped:Connect(function()
-					-- upvalues: p1 (copy), currentTime (ref), p2 (ref), brief (copy), var2 (copy), AXMigratePeekViewToFocusNavigation (copy), argCheckModule (copy), p5 (ref), full (copy)
+			if not UseReducedMotion then
+				p1:setState({
+					canvasGroupTransparency = if Brief1 == Closed then 1 else 0
+				})
+				p1.goToAnimationConnection = RunService.RenderStepped:Connect(function() --[[ Line: 696 ]]
+					-- upvalues: p1 (upval), CurrentTime (copy), Brief1 (copy), Brief (upval), ScaledFIntPeekViewTransitionDelayTiming (upval), AXMigratePeekViewToFocusNavigation (upval), ArgCheckModule (upval), p2 (copy), Full (upval)
 					if not p1.isMounted then return end
-					local var5 = tick() - currentTime
+					local Elapsed = tick() - CurrentTime
 					
-					if p2 ~= brief or var2 <= var5 then
+					if Brief1 ~= Brief or ScaledFIntPeekViewTransitionDelayTiming <= Elapsed then
 						if AXMigratePeekViewToFocusNavigation then
 							p1.props.swipeScrollingFrameRef:getValue().ScrollVelocity = Vector2.new(0, 0)
 						else
 							p1.swipeScrollingFrameRef:getValue().ScrollVelocity = Vector2.new(0, 0)
 						end
-						local var6 = if AXMigratePeekViewToFocusNavigation then p1.props.swipeScrollingFrameRef.current else p1.swipeScrollingFrameRef.current
-						local var7 = argCheckModule.isNotNil(p1.getViewSize(p2), "self.goTo.viewSize")
-						local var8 = (if AXMigratePeekViewToFocusNavigation then p1.props.containerFrameRef.current.AbsoluteSize.Y else p1.containerFrameRef.current.AbsoluteSize.Y) * var7.Scale + var7.Offset
+						local Current = if AXMigratePeekViewToFocusNavigation then p1.props.swipeScrollingFrameRef.current else p1.swipeScrollingFrameRef.current
+						local SelfGoToViewSize = ArgCheckModule.isNotNil(p1.getViewSize(Brief1), "self.goTo.viewSize")
+						local NewScale = (if AXMigratePeekViewToFocusNavigation then p1.props.containerFrameRef.current.AbsoluteSize.Y else p1.containerFrameRef.current.AbsoluteSize.Y) * SelfGoToViewSize.Scale + SelfGoToViewSize.Offset
 						
-						if p2 == brief then
-							var5 -= var2
+						if Brief1 == Brief then
+							Elapsed -= ScaledFIntPeekViewTransitionDelayTiming
 						end
-						if var5 >= 0.35 then
-							p1.setViewType(p2, p5)
+						if Elapsed >= 0.35 then
+							p1.setViewType(Brief1, p2)
 							
-							if p2 == full then
+							if Brief1 == Full then
 								p1:adjustScrollingFramePosition()
 							end
 							return
 						else
-							local y = var6.CanvasPosition.Y
-							var6.CanvasPosition = Vector2.new(0, y + (var8 - y) * math.sin(var5 * 2.468394227821))
+							local Y = Current.CanvasPosition.Y
+							Current.CanvasPosition = Vector2.new(0, Y + (NewScale - Y) * math.sin(Elapsed * 2.468394227820552))
 						end
 					end
 				end)
 				
 				return
-			elseif p2 ~= closed then
-				p1.setViewType(p2, p5)
+			end
+			if Brief1 ~= Closed then
+				p1.setViewType(Brief1, p2)
 				
-				if p2 == full then
+				if Brief1 == Full then
 					p1:adjustScrollingFramePosition()
 				end
 			end
-			p1:setState({ canvasGroupTransparency = if p2 == closed then 0 else 1 })
-			p1.goToAnimationConnection = runService.RenderStepped:Connect(function()
-				-- upvalues: p1 (copy), p2 (ref), full (copy), currentTime (ref), closed (copy), p5 (ref)
+			p1:setState({
+				canvasGroupTransparency = if Brief1 == Closed then 0 else 1
+			})
+			p1.goToAnimationConnection = RunService.RenderStepped:Connect(function() --[[ Line: 749 ]]
+				-- upvalues: p1 (upval), Brief1 (copy), Full (upval), CurrentTime (copy), Closed (upval), p2 (copy)
 				if not p1.isMounted then return end
-				if p2 == full then
+				if Brief1 == Full then
 					p1.updateSwipeScrollingFrame()
 				end
-				local var5 = tick() - currentTime
+				local Elapsed = tick() - CurrentTime
 				
-				if var5 < 0.35 then
+				if Elapsed < 0.35 then
 					p1:setState({
-						canvasGroupTransparency = if p2 == closed then var5 / 0.35 else 1 - var5 / 0.35
+						canvasGroupTransparency = if Brief1 == Closed then Elapsed / 0.35 else 1 - Elapsed / 0.35
 					})
 					
 					return
 				end
-				p1:setState({ canvasGroupTransparency = if p2 == closed then 1 else 0 })
-				p1.setViewType(p2, p5)
+				p1:setState({
+					canvasGroupTransparency = if Brief1 == Closed then 1 else 0
+				})
+				p1.setViewType(Brief1, p2)
 				
-				if p2 == full then
+				if Brief1 == Full then
 					p1:adjustScrollingFramePosition()
 				end
 			end)
 		end
 	end
 	
-	p1.selectedCoreObjectConnection = guiService:GetPropertyChangedSignal("SelectedCoreObject"):connect(function()
-		-- upvalues: AXMigratePeekViewToFocusNavigation (copy), p1 (ref), inputTypeConstants (copy)
+	p1.selectedCoreObjectConnection = GuiService:GetPropertyChangedSignal("SelectedCoreObject"):connect(function() --[[ Line: 783 ]]
+		-- upvalues: AXMigratePeekViewToFocusNavigation (upval), p1 (copy), InputTypeConstants (upval)
 		if AXMigratePeekViewToFocusNavigation then
-			if p1.props.swipeScrollingFrameRef.current and p1.state.lastInputGroup == inputTypeConstants.Gamepad then
+			if p1.props.swipeScrollingFrameRef.current and p1.state.lastInputGroup == InputTypeConstants.Gamepad then
 				p1:adjustScrollingFramePosition()
 				
 				return
 			end
-		elseif p1.swipeScrollingFrameRef.current and p1.state.lastInputGroup == inputTypeConstants.Gamepad then
+		elseif p1.swipeScrollingFrameRef.current and p1.state.lastInputGroup == InputTypeConstants.Gamepad then
 			p1:adjustScrollingFramePosition()
 		end
 	end)
 end
 
-function peekView.handleCurYAboveFullViewY(p1, p2)
-	-- upvalues: full (ref), extended (ref)
-	if p1.viewType == full or p1.viewType == extended then
-		if p1.viewType == full then
-			p1.setViewType(extended)
+function PeekView.handleCurYAboveFullViewY(p1, p2) --[[ Line: 809 ]]
+	-- upvalues: Full (copy), Extended (copy)
+	if p1.viewType == Full or p1.viewType == Extended then
+		if p1.viewType == Full then
+			p1.setViewType(Extended)
 		end
 		return
 	elseif p2 then
-		p1.goTo(full)
+		p1.goTo(Full)
 		
 		return
+	else
+		p1.setViewType(Extended)
 	end
-	p1.setViewType(extended)
 end
 
-function peekView.handleCurYFromBriefToFull(p1, p2, p3, p4, p5)
-	-- upvalues: AXMigratePeekViewToFocusNavigation (ref), full (ref), brief (ref), closed (ref), peekViewDismissedEventModule (ref), extended (ref)
-	local canDragFullViewToBrief = p1.props.canDragFullViewToBrief
-	local minimizeToSuperBrief = p1.props.minimizeToSuperBrief
-	local var3 = if AXMigratePeekViewToFocusNavigation then p1.props.swipeScrollingFrameRef:getValue() else p1.swipeScrollingFrameRef:getValue()
-	local briefViewY = p1.getBriefViewY()
-	local var4 = (if AXMigratePeekViewToFocusNavigation then p1.props.getFullViewY() else p1.getFullViewY()) - briefViewY
+function PeekView.handleCurYFromBriefToFull(p1, Y, Y1: number, p2, p3) --[[ Line: 821 ]]
+	-- upvalues: AXMigratePeekViewToFocusNavigation (copy), Full (copy), Brief (copy), Closed (copy), PeekViewDismissedEventModule (copy), Extended (copy)
+	local CanDragFullViewToBrief = p1.props.canDragFullViewToBrief
+	local MinimizeToSuperBrief = p1.props.minimizeToSuperBrief
+	local Value = if AXMigratePeekViewToFocusNavigation then p1.props.swipeScrollingFrameRef:getValue() else p1.swipeScrollingFrameRef:getValue()
+	local BriefViewY = p1.getBriefViewY()
+	local v1 = (if AXMigratePeekViewToFocusNavigation then p1.props.getFullViewY() else p1.getFullViewY()) - BriefViewY
 	
-	if p1.viewType == full then
-		if var3.AbsoluteCanvasSize.Y - var3.AbsoluteWindowSize.Y - 1 < p2 then return end
-		if not p5 and p2 >= briefViewY + var4 * 0.8 then return end
-		if canDragFullViewToBrief and (not (p5 and p3 > 500) or minimizeToSuperBrief) then
-			p1.goTo(brief)
-			
-			return
-		end
-		p1.goTo(closed, nil, nil, {
-			dismissMethod = peekViewDismissedEventModule.dismissMethodEnum.swipe
-		})
-		
-		return
-	elseif p1.viewType == extended then
-		if p5 and p2 >= briefViewY + var4 * 0.8 and p3 <= -1 then
-		else
-			p1.goTo(full)
-			
-			return
-		end
-	elseif p4 or briefViewY + var4 * 0.2 < p2 then
-		p1.goTo(full)
-		
-		return
-	end
-	p1.goTo(brief)
-end
-
-function peekView.handleCurYFromSuperBriefToBrief(p1, p2, p3, p4, p5, p6)
-	-- upvalues: AXMigratePeekViewToFocusNavigation (ref), full (ref), superBrief (ref), closed (ref), peekViewDismissedEventModule (ref), brief (ref), extended (ref)
-	local var3
-	local canDragFullViewToBrief = p1.props.canDragFullViewToBrief
-	local minimizeToSuperBrief = p1.props.minimizeToSuperBrief
-	local var4 = (if AXMigratePeekViewToFocusNavigation then p1.props.getFullViewY() else p1.getFullViewY()) - p3
-	
-	if p1.viewType == full then
-		if p6 or p2 < p3 + var4 * 0.8 then
-			var3 = p6 and p4 > 500
-			
-			if canDragFullViewToBrief and (not var3 or minimizeToSuperBrief) then
-				p1.goTo(superBrief)
+	if p1.viewType == Full then
+		if Value.AbsoluteCanvasSize.Y - Value.AbsoluteWindowSize.Y - 1 < Y then return end
+		if p3 or Y < BriefViewY + v1 * 0.8 then
+			if CanDragFullViewToBrief and (not (p3 and Y1 > 500) or MinimizeToSuperBrief) then
+				p1.goTo(Brief)
+				
+				return
+			else
+				p1.goTo(Closed, nil, nil, {
+					dismissMethod = PeekViewDismissedEventModule.dismissMethodEnum.swipe
+				})
 				
 				return
 			end
-			p1.goTo(closed, nil, nil, {
-				dismissMethod = peekViewDismissedEventModule.dismissMethodEnum.swipe
-			})
-			
-			return
-		else
-			p1.goTo(brief)
+		end
+	elseif p1.viewType == Extended then
+		if not p3 or Y < BriefViewY + v1 * 0.8 or Y1 > -1 then
+			p1.goTo(Full)
 			
 			return
 		end
-	elseif p1.viewType == extended then
-		if p6 and p2 >= p3 + var4 * 0.8 and p4 <= -1 then
-			return
-		else
-			p1.goTo(brief)
-			
-			return
-		end
-	elseif p5 or p3 + var4 * 0.2 < p2 then
-		p1.goTo(brief)
+	elseif p2 or BriefViewY + v1 * 0.2 < Y then
+		p1.goTo(Full)
 		
 		return
+	else
+		p1.goTo(Brief)
 	end
-	var3 = p6 and p4 > 500
-	
-	if canDragFullViewToBrief and (not var3 or minimizeToSuperBrief) then
-		p1.goTo(superBrief)
-		
-		return
-	end
-	p1.goTo(closed, nil, nil, {
-		dismissMethod = peekViewDismissedEventModule.dismissMethodEnum.swipe
-	})
 end
 
-function peekView.handleCurYFromClosedToSuperBrief(p1, p2, p3, p4, p5, p6)
-	-- upvalues: superBrief (ref), closed (ref), peekViewDismissedEventModule (ref)
-	local var3 = p3 - 0
-	local minimizeToSuperBrief = p1.props.minimizeToSuperBrief
+function PeekView.handleCurYFromSuperBriefToBrief(p1, Y, SuperBriefViewY, Y1: number, p2, p3) --[[ Line: 862 ]]
+	-- upvalues: AXMigratePeekViewToFocusNavigation (copy), Full (copy), SuperBrief (copy), Closed (copy), PeekViewDismissedEventModule (copy), Brief (copy), Extended (copy)
+	local CanDragFullViewToBrief = p1.props.canDragFullViewToBrief
+	local MinimizeToSuperBrief = p1.props.minimizeToSuperBrief
+	local v1 = (if AXMigratePeekViewToFocusNavigation then p1.props.getFullViewY() else p1.getFullViewY()) - SuperBriefViewY
 	
-	if p1.viewType == superBrief then
-		if (p5 or p2 < var3 * 0.8) and not minimizeToSuperBrief then
-			p1.goTo(closed, nil, nil, {
-				dismissMethod = peekViewDismissedEventModule.dismissMethodEnum.swipe
+	if p1.viewType == Full then
+		if not p3 and Y >= SuperBriefViewY + v1 * 0.8 then
+			p1.goTo(Brief)
+			
+			return
+		end
+		if CanDragFullViewToBrief and (not (p3 and Y1 > 500) or MinimizeToSuperBrief) then
+			p1.goTo(SuperBrief)
+			
+			return
+		else
+			p1.goTo(Closed, nil, nil, {
+				dismissMethod = PeekViewDismissedEventModule.dismissMethodEnum.swipe
 			})
 			
 			return
 		end
-		p1.goTo(superBrief)
+	elseif p1.viewType == Extended then
+		if not p3 or Y < SuperBriefViewY + v1 * 0.8 or Y1 > -1 then
+			p1.goTo(Brief)
+			
+			return
+		end
+	elseif p2 or SuperBriefViewY + v1 * 0.2 < Y then
+		p1.goTo(Brief)
 		
 		return
-	elseif (p5 and p4 > 500 or not p6 and var3 * 0.8 >= p2) and not minimizeToSuperBrief then
-		p1.goTo(closed, nil, nil, {
-			dismissMethod = peekViewDismissedEventModule.dismissMethodEnum.swipe
+	else
+		if CanDragFullViewToBrief and (not (p3 and Y1 > 500) or MinimizeToSuperBrief) then
+			p1.goTo(SuperBrief)
+			
+			return
+		end
+		p1.goTo(Closed, nil, nil, {
+			dismissMethod = PeekViewDismissedEventModule.dismissMethodEnum.swipe
+		})
+	end
+end
+
+function PeekView.handleCurYFromClosedToSuperBrief(p1, Y, SuperBriefViewY: number, Y1: number, p2, p3) --[[ Line: 900 ]]
+	-- upvalues: SuperBrief (copy), Closed (copy), PeekViewDismissedEventModule (copy)
+	local SuperBriefViewYDelta = SuperBriefViewY - 0
+	local MinimizeToSuperBrief = p1.props.minimizeToSuperBrief
+	
+	if p1.viewType == SuperBrief then
+		if (p2 or Y < SuperBriefViewYDelta * 0.8) and not MinimizeToSuperBrief then
+			p1.goTo(Closed, nil, nil, {
+				dismissMethod = PeekViewDismissedEventModule.dismissMethodEnum.swipe
+			})
+			
+			return
+		else
+			p1.goTo(SuperBrief)
+			
+			return
+		end
+	elseif (p2 and Y1 > 500 or not p3 and SuperBriefViewYDelta * 0.8 >= Y) and not MinimizeToSuperBrief then
+		p1.goTo(Closed, nil, nil, {
+			dismissMethod = PeekViewDismissedEventModule.dismissMethodEnum.swipe
 		})
 		
 		return
+	else
+		p1.goTo(SuperBrief)
 	end
-	p1.goTo(superBrief)
 end
 
-function peekView.handleCurYFromClosedToBrief(p1, p2, p3, p4)
-	-- upvalues: brief (ref), closed (ref), peekViewDismissedEventModule (ref)
-	local var3 = p1.getBriefViewY() - 0
+function PeekView.handleCurYFromClosedToBrief(p1, Y, p2, p3) --[[ Line: 923 ]]
+	-- upvalues: Brief (copy), Closed (copy), PeekViewDismissedEventModule (copy)
+	local BriefViewYDelta = p1.getBriefViewY() - 0
 	
-	if p1.viewType == brief then
-		if p3 or p2 < 0 + var3 * 0.8 then
-			p1.goTo(closed, nil, nil, {
-				dismissMethod = peekViewDismissedEventModule.dismissMethodEnum.swipe
+	if p1.viewType == Brief then
+		if p2 or Y < 0 + BriefViewYDelta * 0.8 then
+			p1.goTo(Closed, nil, nil, {
+				dismissMethod = PeekViewDismissedEventModule.dismissMethodEnum.swipe
 			})
 			
 			return
+		else
+			p1.goTo(Brief)
+			
+			return
 		end
-		p1.goTo(brief)
+	elseif p3 or 0 + BriefViewYDelta * 0.2 < Y then
+		p1.goTo(Brief)
 		
 		return
-	elseif p4 or 0 + var3 * 0.2 < p2 then
-		p1.goTo(brief)
-		
-		return
-	end
-	p1.goTo(closed, nil, nil, {
-		dismissMethod = peekViewDismissedEventModule.dismissMethodEnum.swipe
-	})
-end
-
-function peekView.adjustScrollingFramePosition(p1)
-	-- upvalues: guiService (ref), AXMigratePeekViewToFocusNavigation (ref), extended (ref), full (ref), argCheckModule (ref)
-	local selectedCoreObject = guiService.SelectedCoreObject
-	
-	if not selectedCoreObject or not p1.props.contentFrameRef or not selectedCoreObject:IsDescendantOf(p1.props.contentFrameRef.current) then return end
-	local var3 = if AXMigratePeekViewToFocusNavigation then p1.props.swipeScrollingFrameRef.current else p1.swipeScrollingFrameRef.current
-	
-	if p1.viewType ~= extended and p1.viewType ~= full then
-		var3.CanvasPosition = Vector2.new(var3.CanvasPosition.X, argCheckModule.isNotNil(p1.getViewSize(p1.viewType), "self.adjustScrollingFramePosition.viewSize").Offset)
-		
-		return
-	end
-	local var4 = selectedCoreObject.AbsolutePosition.Y - p1.props.topBarHeight
-	local y = selectedCoreObject.AbsoluteSize.Y
-	local y_1 = var3.AbsoluteWindowSize.Y
-	local var5 = y_1 - (var4 + y)
-	local y_2 = var3.CanvasPosition.Y
-	
-	if var5 < p1.props.bottomDockedContainerHeight then
-		y_2 = y_2 + p1.props.bottomDockedContainerHeight - var5
-	elseif var4 + y + (y_2 - y_1) < y_1 - p1.props.bottomDockedContainerHeight then
-		y_2 = y_1
-	end
-	var3.CanvasPosition = Vector2.new(var3.CanvasPosition.X, math.max(0, math.min(y_2, (var3.AbsoluteCanvasSize.Y or var3.CanvasSize.Y.Offset) - var3.AbsoluteWindowSize.Y)))
-end
-
-function peekView.handleThumbstickInput(p1, p2, p3)
-	-- upvalues: gamepadUtils (ref)
-	local position = p2.Position
-	local value = p1.swipeScrollingFrameRef:getValue()
-	
-	if p1.containerFrameRef:getValue() and value then
-		local var3 = value.CanvasPosition.Y + p3 * -gamepadUtils.normalizeStickByDeadzone(position).Y * 1000
-		
-		if p1.getFullViewY() < var3 then
-			value.CanvasPosition = Vector2.new(0, var3)
-		end
-	end
-end
-
-function peekView.renderWithStyle(p1, p2)
-	-- upvalues: roactModule (ref), fFlagProfilePlatformNewProfileHeader (ref), fFlagProfilePlatformPeekDraggerContrast (ref), AXMigratePeekViewToFocusNavigation (ref), superBrief (ref), imageSetLabel (ref), swipe (ref), focusable (ref), roactGamepadModule (ref), fFlagEnablePeekViewFocusNav (ref), fFlagPeekViewFixBriefHeightLayoutRace (ref), rect (ref), brief (ref), full (ref), focusNavigableSurfaceWrapper (ref), focusNavigationUtilsModule (ref), externalEventConnection (ref), userInputService (ref)
-	local color_1, transparency
-	local children = p1.props[roactModule.Children]
-	local bottomDockedContainerHeight = p1.props.bottomDockedContainerHeight
-	local bottomDockedContainerContent = p1.props.bottomDockedContainerContent
-	local scrollableViewType = p1.props.thumbstickScrollEnabled and p1.state.scrollableViewType
-	local color = p2.Theme.BackgroundContrast.Color
-	local var3 = fFlagProfilePlatformNewProfileHeader and not p1.props.hasSolidDragger
-	local _ = nil
-	local _ = nil
-	
-	if fFlagProfilePlatformPeekDraggerContrast then
-		local draggerImageStyle = p1.props.draggerImageStyle
-		color_1 = if draggerImageStyle then draggerImageStyle.Color3 else p2.Theme.UIEmphasis.Color
-		transparency = if draggerImageStyle then draggerImageStyle.Transparency else p2.Theme.UIEmphasis.Transparency
 	else
-		color_1 = p2.Theme.UIEmphasis.Color
-		transparency = p2.Theme.UIEmphasis.Transparency
+		p1.goTo(Closed, nil, nil, {
+			dismissMethod = PeekViewDismissedEventModule.dismissMethodEnum.swipe
+		})
 	end
-	local createElement = roactModule.createElement
-	createElement = createElement("TextButton", {
+end
+
+function PeekView.adjustScrollingFramePosition(p1) --[[ Line: 946 ]]
+	-- upvalues: GuiService (copy), AXMigratePeekViewToFocusNavigation (copy), Extended (copy), Full (copy), ArgCheckModule (copy)
+	local SelectedCoreObject = GuiService.SelectedCoreObject
+	
+	if not SelectedCoreObject or not p1.props.contentFrameRef or not SelectedCoreObject:IsDescendantOf(p1.props.contentFrameRef.current) then return end
+	local Current = if AXMigratePeekViewToFocusNavigation then p1.props.swipeScrollingFrameRef.current else p1.swipeScrollingFrameRef.current
+	
+	if p1.viewType ~= Extended and p1.viewType ~= Full then
+		Current.CanvasPosition = Vector2.new(Current.CanvasPosition.X, ArgCheckModule.isNotNil(p1.getViewSize(p1.viewType), "self.adjustScrollingFramePosition.viewSize").Offset)
+		
+		return
+	end
+	local YDelta = SelectedCoreObject.AbsolutePosition.Y - p1.props.topBarHeight
+	local Y = SelectedCoreObject.AbsoluteSize.Y
+	local Y1: number = Current.AbsoluteWindowSize.Y
+	local YDelta1 = Y1 - (YDelta + Y)
+	local Y2 = Current.CanvasPosition.Y
+	
+	if YDelta1 < p1.props.bottomDockedContainerHeight then
+		Y2 = Y2 + p1.props.bottomDockedContainerHeight - YDelta1
+	elseif YDelta + Y + (Y2 - Y1) < Y1 - p1.props.bottomDockedContainerHeight then
+		Y2 = Y1
+	end
+	Current.CanvasPosition = Vector2.new(Current.CanvasPosition.X, (math.max(0, (math.min(Y2, (Current.AbsoluteCanvasSize.Y or Current.CanvasSize.Y.Offset) - Current.AbsoluteWindowSize.Y)))))
+end
+
+function PeekView.handleThumbstickInput(p1, p2, p3) --[[ Line: 993 ]]
+	-- upvalues: GamepadUtils (copy)
+	local Position = p2.Position
+	local Value = p1.swipeScrollingFrameRef:getValue()
+	
+	if p1.containerFrameRef:getValue() and Value then
+		local NewY = Value.CanvasPosition.Y + p3 * -GamepadUtils.normalizeStickByDeadzone(Position).Y * 1000
+		
+		if p1.getFullViewY() < NewY then
+			Value.CanvasPosition = Vector2.new(0, NewY)
+		end
+	end
+end
+
+function PeekView.renderWithStyle(p1, p2) --[[ Line: 1006 ]]
+	-- upvalues: RoactModule (copy), FFlagProfilePlatformNewProfileHeader (copy), FFlagProfilePlatformPeekDraggerContrast (copy), AXMigratePeekViewToFocusNavigation (copy), SuperBrief (copy), ImageSetLabel (copy), IconsNavigationSwipe (copy), Focusable (copy), RoactGamepadModule (copy), FFlagEnablePeekViewFocusNav (copy), FFlagPeekViewFixBriefHeightLayoutRace (copy), _Rect (copy), Brief (copy), Full (copy), FocusNavigableSurfaceWrapper (copy), FocusNavigationUtilsModule (copy), ExternalEventConnection (copy), UserInputService (copy)
+	local Prop = p1.props[RoactModule.Children]
+	local BottomDockedContainerHeight: number = p1.props.bottomDockedContainerHeight
+	local BottomDockedContainerContent = p1.props.bottomDockedContainerContent
+	local ScrollableViewType = p1.props.thumbstickScrollEnabled and p1.state.scrollableViewType
+	local Color = p2.Theme.BackgroundContrast.Color
+	local NoHasSolidDragger: boolean = FFlagProfilePlatformNewProfileHeader and not p1.props.hasSolidDragger
+	local Transparency = nil
+	local DraggerImageStyleColor3 = nil
+	
+	if FFlagProfilePlatformPeekDraggerContrast then
+		local DraggerImageStyle = p1.props.draggerImageStyle
+		DraggerImageStyleColor3 = if DraggerImageStyle then DraggerImageStyle.Color3 else p2.Theme.UIEmphasis.Color
+		Transparency = if DraggerImageStyle then DraggerImageStyle.Transparency else p2.Theme.UIEmphasis.Transparency
+	else
+		DraggerImageStyleColor3 = p2.Theme.UIEmphasis.Color
+		Transparency = p2.Theme.UIEmphasis.Transparency
+	end
+	local function getDraggerTransparency(): number --[[ Line: 1033 ]]
+		-- upvalues: AXMigratePeekViewToFocusNavigation (upval), p1 (copy), Transparency (ref)
+		local Current = if AXMigratePeekViewToFocusNavigation then p1.props.swipeScrollingFrameRef.current else p1.swipeScrollingFrameRef.current
+		
+		if Current then
+			local BriefViewY = p1.getBriefViewY()
+			
+			return Transparency + math.max(0, (math.min(1, (Current.CanvasPosition.Y - BriefViewY) / ((if AXMigratePeekViewToFocusNavigation then p1.props.getFullViewY() else p1.getFullViewY()) - BriefViewY)))) * (1 - Transparency)
+		else
+			return Transparency
+		end
+	end
+	
+	local DraggerTransparency = if NoHasSolidDragger then getDraggerTransparency() else Transparency
+	local TextButton = RoactModule.createElement("TextButton", {
 		Text = "",
 		LayoutOrder = 3,
 		ZIndex = 3,
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 0, 25),
-		[roactModule.Event.Activated] = p1.onPeekHeaderActivated,
+		[RoactModule.Event.Activated] = p1.onPeekHeaderActivated,
 		Selectable = false
 	}, {
-		Dragger = if p1.props.hideDraggerInSuperBrief and p1.props.peekViewState == superBrief then nil else roactModule.createElement(imageSetLabel, {
+		Dragger = if p1.props.hideDraggerInSuperBrief and p1.props.peekViewState == SuperBrief then nil else RoactModule.createElement(ImageSetLabel, {
 			BackgroundTransparency = 1,
 			Active = false,
 			Size = UDim2.new(0, 36, 0, 36),
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.new(0.5, 0, 0.5, 0),
-			Image = swipe,
-			ImageColor3 = color_1,
-			ImageTransparency = if var3 then (function()
-				-- upvalues: AXMigratePeekViewToFocusNavigation (copy), p1 (ref), transparency (write)
-				local var4 = if AXMigratePeekViewToFocusNavigation then p1.props.swipeScrollingFrameRef.current else p1.swipeScrollingFrameRef.current
-				
-				if var4 then
-					local briefViewY = p1.getBriefViewY()
-					
-					return transparency + math.max(0, math.min(1, (var4.CanvasPosition.Y - briefViewY) / ((if AXMigratePeekViewToFocusNavigation then p1.props.getFullViewY() else p1.getFullViewY()) - briefViewY))) * (1 - transparency)
-				end
-				return transparency
-			end)() else transparency
+			Image = IconsNavigationSwipe,
+			ImageColor3 = DraggerImageStyleColor3,
+			ImageTransparency = DraggerTransparency
 		})
 	})
-	local createElement_1 = roactModule.createElement
-	createElement_1 = createElement_1(focusable.Frame, {
+	local Element = RoactModule.createElement(Focusable.Frame, {
 		BackgroundTransparency = 1,
 		ClipsDescendants = true,
-		[roactModule.Ref] = p1.clipFrameRef,
+		[RoactModule.Ref] = p1.clipFrameRef,
 		restorePreviousChildFocus = true,
-		inputBindings = if AXMigratePeekViewToFocusNavigation or not scrollableViewType then nil else {
-			ScrollPeekView = roactGamepadModule.Input.onStep(Enum.KeyCode.Thumbstick2, function(p3, p4)
-				-- upvalues: p1 (ref)
+		inputBindings = if AXMigratePeekViewToFocusNavigation or not ScrollableViewType then nil else {
+			ScrollPeekView = RoactGamepadModule.Input.onStep(Enum.KeyCode.Thumbstick2, function(p3, p4) --[[ Line: 1084 ]]
+				-- upvalues: p1 (copy)
 				p1:handleThumbstickInput(p3, p4)
 			end)
 		}
 	}, {
-		SwipeScrollingFrame = roactModule.createElement("ScrollingFrame", {
+		SwipeScrollingFrame = RoactModule.createElement("ScrollingFrame", {
 			AutomaticCanvasSize = Enum.AutomaticSize.Y,
-			Selectable = if fFlagEnablePeekViewFocusNav then false else nil,
+			Selectable = not FFlagEnablePeekViewFocusNav and nil,
 			CanvasSize = UDim2.fromScale(1, 0),
 			Active = true,
 			BackgroundTransparency = 1,
@@ -836,41 +843,41 @@ function peekView.renderWithStyle(p1, p2)
 			ScrollingDirection = Enum.ScrollingDirection.Y,
 			ElasticBehavior = p1.props.elasticBehavior,
 			ScrollingEnabled = p1.props.isScrollingEnabled,
-			[roactModule.Ref] = if AXMigratePeekViewToFocusNavigation then p1.props.swipeScrollingFrameRef else p1.swipeScrollingFrameRef,
-			[roactModule.Change.CanvasPosition] = p1.onSwipeScrollingFrameCanvasPositionChanged,
-			[roactModule.Change.AbsoluteWindowSize] = p1.onAbsoluteWindowSizeChanged,
-			[roactModule.Change.AbsoluteCanvasSize] = if fFlagPeekViewFixBriefHeightLayoutRace then p1.onAbsoluteCanvasSizeChanged else nil
+			[RoactModule.Ref] = if AXMigratePeekViewToFocusNavigation then p1.props.swipeScrollingFrameRef else p1.swipeScrollingFrameRef,
+			[RoactModule.Change.CanvasPosition] = p1.onSwipeScrollingFrameCanvasPositionChanged,
+			[RoactModule.Change.AbsoluteWindowSize] = p1.onAbsoluteWindowSizeChanged,
+			[RoactModule.Change.AbsoluteCanvasSize] = if FFlagPeekViewFixBriefHeightLayoutRace then p1.onAbsoluteCanvasSizeChanged else nil
 		}, {
-			UIListLayout = roactModule.createElement("UIListLayout", {
+			UIListLayout = RoactModule.createElement("UIListLayout", {
 				Padding = UDim.new(0, 0),
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				HorizontalAlignment = Enum.HorizontalAlignment.Left,
 				VerticalAlignment = Enum.VerticalAlignment.Top
 			}),
-			FillingArea = roactModule.createElement("Frame", {
+			FillingArea = RoactModule.createElement("Frame", {
 				LayoutOrder = 1,
 				BackgroundTransparency = 1,
 				Active = false,
-				[roactModule.Ref] = p1.fillingAreaRef
+				[RoactModule.Ref] = p1.fillingAreaRef
 			}),
-			BackgroundFrame = roactModule.createElement("Frame", {
+			BackgroundFrame = RoactModule.createElement("Frame", {
 				LayoutOrder = 2,
 				ZIndex = 1,
 				Active = false,
 				Size = UDim2.new(1, 0, 0, 0)
 			}, {
-				BackgroundImage = roactModule.createElement(imageSetLabel, {
+				BackgroundImage = RoactModule.createElement(ImageSetLabel, {
 					BackgroundTransparency = 0,
 					BorderSizePixel = 0,
 					Active = false,
 					Size = UDim2.new(1, 0, 0, 9999),
 					ScaleType = Enum.ScaleType.Slice,
-					SliceCenter = rect,
-					BackgroundColor3 = if p1.props.customBackground then p1.props.customBackground else color
+					SliceCenter = _Rect,
+					BackgroundColor3 = if p1.props.customBackground then p1.props.customBackground else Color
 				})
 			}),
-			PeekHeader = if fFlagProfilePlatformNewProfileHeader and not p1.props.hasSolidDragger then nil else createElement,
-			ContentFrame = roactModule.createElement(focusable.Frame, {
+			PeekHeader = if FFlagProfilePlatformNewProfileHeader and not p1.props.hasSolidDragger then nil else TextButton,
+			ContentFrame = RoactModule.createElement(Focusable.Frame, {
 				LayoutOrder = 4,
 				ZIndex = 2,
 				BackgroundTransparency = 1,
@@ -878,46 +885,46 @@ function peekView.renderWithStyle(p1, p2)
 				ClipsDescendants = false,
 				Size = UDim2.new(1, 0, 0, 0),
 				AutomaticSize = Enum.AutomaticSize.Y,
-				[roactModule.Ref] = p1.props.contentFrameRef,
+				[RoactModule.Ref] = p1.props.contentFrameRef,
 				restorePreviousChildFocus = true,
-				onFocusGained = function()
-					-- upvalues: p1 (ref), brief (copy), full (copy)
-					if p1.viewType == brief and p1.props.peekViewState ~= full then
-						p1.goTo(full)
+				onFocusGained = function() --[[ Line: 1158 ]]
+					-- upvalues: p1 (copy), Brief (upval), Full (upval)
+					if p1.viewType == Brief and p1.props.peekViewState ~= Full then
+						p1.goTo(Full)
 					end
 				end
-			}, if fFlagProfilePlatformNewProfileHeader and not p1.props.hasSolidDragger then {
-				PeekHeader = createElement,
-				Content = roactModule.createElement("Frame", {
+			}, if FFlagProfilePlatformNewProfileHeader and not p1.props.hasSolidDragger then {
+				PeekHeader = TextButton,
+				Content = RoactModule.createElement("Frame", {
 					LayoutOrder = 2,
 					BackgroundTransparency = 1,
 					Size = UDim2.new(1, 0, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y
-				}, children)
-			} else children),
-			BottomContainerPlaceHolder = bottomDockedContainerHeight > 0 and roactModule.createElement("Frame", {
+				}, Prop)
+			} else Prop),
+			BottomContainerPlaceHolder = BottomDockedContainerHeight > 0 and RoactModule.createElement("Frame", {
 				LayoutOrder = 5,
 				BackgroundTransparency = 1,
 				Active = false,
-				Size = UDim2.new(1, 0, 0, bottomDockedContainerHeight)
+				Size = UDim2.new(1, 0, 0, BottomDockedContainerHeight)
 			})
 		}),
-		BottomContainer = bottomDockedContainerHeight > 0 and roactModule.createElement("Frame", {
+		BottomContainer = BottomDockedContainerHeight > 0 and RoactModule.createElement("Frame", {
 			Active = true,
 			ZIndex = 2,
-			Size = UDim2.new(1, 0, 0, bottomDockedContainerHeight),
+			Size = UDim2.new(1, 0, 0, BottomDockedContainerHeight),
 			BackgroundTransparency = 1,
-			[roactModule.Ref] = p1.bottomContainerRef
-		}, bottomDockedContainerContent)
+			[RoactModule.Ref] = p1.bottomContainerRef
+		}, BottomDockedContainerContent)
 	})
 	
-	return roactModule.createFragment({
-		DropShadowBackground = roactModule.createElement("Frame", {
+	return RoactModule.createFragment({
+		DropShadowBackground = RoactModule.createElement("Frame", {
 			ZIndex = 0,
 			Visible = p1.props.showDropShadow,
-			[roactModule.Ref] = p1.shadowRef
+			[RoactModule.Ref] = p1.shadowRef
 		}, {
-			UIGradient = roactModule.createElement("UIGradient", {
+			UIGradient = RoactModule.createElement("UIGradient", {
 				Rotation = 90,
 				Color = ColorSequence.new({
 					ColorSequenceKeypoint.new(0, p2.Theme.DropShadow.Color),
@@ -929,121 +936,122 @@ function peekView.renderWithStyle(p1, p2)
 				})
 			})
 		}),
-		ClipFrameContainer = if not p1.props.shouldCaptureFocus then nil elseif fFlagEnablePeekViewFocusNav then roactModule.createElement(focusNavigableSurfaceWrapper, {
+		ClipFrameContainer = if p1.props.shouldCaptureFocus and FFlagEnablePeekViewFocusNav then RoactModule.createElement(FocusNavigableSurfaceWrapper, {
 			isIsolated = true,
-			surfaceIdentifier = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum.PeekView
-		}, { ClipFrame = createElement_1 }) else nil,
-		ClipFrame = if not p1.props.shouldCaptureFocus then createElement_1 elseif fFlagEnablePeekViewFocusNav then nil else createElement_1,
-		InputBegan = roactModule.createElement(externalEventConnection, {
-			event = userInputService.InputBegan,
+			surfaceIdentifier = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum.PeekView
+		}, { ClipFrame = Element }) else nil,
+		ClipFrame = if p1.props.shouldCaptureFocus and FFlagEnablePeekViewFocusNav then nil else Element,
+		InputBegan = RoactModule.createElement(ExternalEventConnection, {
+			event = UserInputService.InputBegan,
 			callback = p1.inputBeganCallback
 		}),
-		InputEnded = roactModule.createElement(externalEventConnection, {
-			event = userInputService.InputEnded,
+		InputEnded = RoactModule.createElement(ExternalEventConnection, {
+			event = UserInputService.InputEnded,
 			callback = p1.inputEndedCallback
 		})
 	})
 end
 
-function peekView.render(p1)
-	-- upvalues: roactModule (ref), scrimModule (ref), AXMigratePeekViewToFocusNavigation (ref), closed (ref), peekViewDismissedEventModule (ref)
-	return p1.withStyle(function(p2)
-		-- upvalues: p1 (ref), roactModule (copy), scrimModule (copy), AXMigratePeekViewToFocusNavigation (copy), closed (copy), peekViewDismissedEventModule (copy)
-		local var3 = if p1.useReducedMotion then roactModule.createElement("CanvasGroup", {
+function PeekView.render(p1) --[[ Line: 1237 ]]
+	-- upvalues: RoactModule (copy), ScrimModule (copy), AXMigratePeekViewToFocusNavigation (copy), Closed (copy), PeekViewDismissedEventModule (copy)
+	return p1.withStyle(function(p2) --[[ Line: 1238 ]]
+		-- upvalues: p1 (copy), RoactModule (upval), ScrimModule (upval), AXMigratePeekViewToFocusNavigation (upval), Closed (upval), PeekViewDismissedEventModule (upval)
+		local CanvasGroup = if p1.useReducedMotion then RoactModule.createElement("CanvasGroup", {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 1, 0),
 			GroupTransparency = p1.state.canvasGroupTransparency
 		}, { p1:renderWithStyle(p2) }) else p1:renderWithStyle(p2)
 		
-		return if p1.props.hasScrim then roactModule.createElement(scrimModule, {
-			[roactModule.Ref] = if AXMigratePeekViewToFocusNavigation then p1.props.containerFrameRef else p1.containerFrameRef,
-			onActivated = function()
-				-- upvalues: p1 (copy), closed (copy), peekViewDismissedEventModule (copy)
-				if p1.isInGoToState then
+		return if p1.props.hasScrim then RoactModule.createElement(ScrimModule, {
+			[RoactModule.Ref] = if AXMigratePeekViewToFocusNavigation then p1.props.containerFrameRef else p1.containerFrameRef,
+			onActivated = function() --[[ Line: 1254 ]]
+				-- upvalues: p1 (upval), Closed (upval), PeekViewDismissedEventModule (upval)
+				if not p1.isInGoToState then
+					p1.goTo(Closed, nil, nil, {
+						dismissMethod = PeekViewDismissedEventModule.dismissMethodEnum.scrimTap
+					})
+					
 					return
 				end
-				p1.goTo(closed, nil, nil, {
-					dismissMethod = peekViewDismissedEventModule.dismissMethodEnum.scrimTap
-				})
 			end,
 			onSizeChanged = p1.onContainerFrameAbsoluteSizeChanged
-		}, var3) else roactModule.createElement("Frame", {
+		}, CanvasGroup) else RoactModule.createElement("Frame", {
 			Size = UDim2.new(1, 0, 1, 0),
 			BackgroundTransparency = 1,
 			ClipsDescendants = false,
-			[roactModule.Ref] = if AXMigratePeekViewToFocusNavigation then p1.props.containerFrameRef else p1.containerFrameRef,
-			[roactModule.Change.AbsoluteSize] = p1.onContainerFrameAbsoluteSizeChanged
-		}, var3)
+			[RoactModule.Ref] = if AXMigratePeekViewToFocusNavigation then p1.props.containerFrameRef else p1.containerFrameRef,
+			[RoactModule.Change.AbsoluteSize] = p1.onContainerFrameAbsoluteSizeChanged
+		}, CanvasGroup)
 	end)
 end
 
-function peekView.didMount(p1)
-	-- upvalues: closed (ref), getFFlagEnablePeekViewStateOnMountParam (ref), full (ref), brief (ref), getInputGroup (ref), userInputService (ref)
+function PeekView.didMount(p1) --[[ Line: 1279 ]]
+	-- upvalues: Closed (copy), GetFFlagEnablePeekViewStateOnMountParamFunction (copy), Full (copy), Brief (copy), GetInputGroupFunction (copy), UserInputService (copy)
 	p1.isMounted = true
 	
 	if p1.props.closeSignal then
-		p1.closeSignalConnection = p1.props.closeSignal:connect(function()
-			-- upvalues: p1 (ref), closed (copy)
+		p1.closeSignalConnection = p1.props.closeSignal:connect(function() --[[ Line: 1283 ]]
+			-- upvalues: p1 (copy), Closed (upval)
 			if not p1.isInGoToState then
-				p1.goTo(closed, true, p1.useReducedMotion)
+				p1.goTo(Closed, true, p1.useReducedMotion)
 			end
 		end)
 	end
-	local hidden = p1.props.hidden
-	local mountAsFullView = p1.props.mountAsFullView
-	local mountAnimation = p1.props.mountAnimation
-	local var3 = if getFFlagEnablePeekViewStateOnMountParam() then p1.props.stateOnMount else nil
+	local MountAsFullView = p1.props.mountAsFullView
+	local MountAnimation = p1.props.mountAnimation
+	local StateOnMount = if GetFFlagEnablePeekViewStateOnMountParamFunction() then p1.props.stateOnMount else nil
 	
-	if not hidden then
-		if mountAsFullView then
-			p1.goTo(full, mountAnimation, p1.useReducedMotion)
-		elseif var3 == nil then
-			p1.goTo(brief, mountAnimation, p1.useReducedMotion)
+	if not p1.props.hidden then
+		if MountAsFullView then
+			p1.goTo(Full, MountAnimation, p1.useReducedMotion)
+		elseif StateOnMount == nil then
+			p1.goTo(Brief, MountAnimation, p1.useReducedMotion)
 		else
-			p1.goTo(var3, mountAnimation, p1.useReducedMotion)
+			p1.goTo(StateOnMount, MountAnimation, p1.useReducedMotion)
 		end
 	end
 	p1:setState({
-		lastInputGroup = getInputGroup(userInputService:GetLastInputType())
+		lastInputGroup = GetInputGroupFunction(UserInputService:GetLastInputType())
 	})
-	userInputService.LastInputTypeChanged:Connect(function(p2)
-		-- upvalues: p1 (ref), getInputGroup (copy)
-		p1:setState({ lastInputGroup = getInputGroup(p2) })
+	UserInputService.LastInputTypeChanged:Connect(function(LastInputType) --[[ Line: 1311 ]]
+		-- upvalues: p1 (copy), GetInputGroupFunction (upval)
+		p1:setState({ lastInputGroup = GetInputGroupFunction(LastInputType) })
 	end)
 end
 
-function peekView.isAnimating(p1)
+function PeekView.isAnimating(p1): boolean --[[ Line: 1316 ]]
 	return p1.goToAnimationConnection ~= nil
 end
 
-function peekView.didUpdate(p1, p2, p3)
-	-- upvalues: hidden (ref), brief (ref), extended (ref)
-	if p3.absoluteWindowSizeX ~= p1.state.absoluteWindowSizeX or p3.absoluteWindowSizeY ~= p1.state.absoluteWindowSizeY then
+function PeekView.didUpdate(p1, DefaultProps, p2) --[[ Line: 1320 ]]
+	-- upvalues: Hidden (copy), Brief (copy), Extended (copy)
+	if p2.absoluteWindowSizeX ~= p1.state.absoluteWindowSizeX or p2.absoluteWindowSizeY ~= p1.state.absoluteWindowSizeY then
 		p1.reconcileRbxInstances("didUpdate")
 		
 		if not p1:isAnimating() then
 			p1.updateSwipeScrollingFrame()
 		end
 	end
-	if p2.bottomDockedContainerHeight ~= p1.props.bottomDockedContainerHeight then
+	if DefaultProps.bottomDockedContainerHeight ~= p1.props.bottomDockedContainerHeight then
 		p1.onContainerFrameAbsoluteSizeChanged()
 	end
-	if p2.briefViewContentHeight ~= p1.props.briefViewContentHeight and not p1:isAnimating() then
+	if DefaultProps.briefViewContentHeight ~= p1.props.briefViewContentHeight and not p1:isAnimating() then
 		p1.updateSwipeScrollingFrame()
 	end
-	if p2.hidden == false and p1.props.hidden == true then
-		p1.goTo(hidden)
-	elseif p2.hidden == true and p1.props.hidden == false then
-		p1.goTo(brief)
+	if DefaultProps.hidden == false and p1.props.hidden == true then
+		p1.goTo(Hidden)
+	elseif DefaultProps.hidden == true and p1.props.hidden == false then
+		p1.goTo(Brief)
 	end
-	local peekViewState = p1.props.peekViewState
+	local PeekViewState = p1.props.peekViewState
+	local IsInGoToState = p1.isInGoToState
 	
-	if peekViewState ~= p2.peekViewState and p1.viewType == p2.peekViewState and (peekViewState ~= extended and not p1.isInGoToState) then
+	if PeekViewState ~= DefaultProps.peekViewState and p1.viewType == DefaultProps.peekViewState and PeekViewState ~= Extended and not IsInGoToState then
 		p1.goTo(p1.props.peekViewState)
 	end
 end
 
-function peekView.willUnmount(p1)
+function PeekView.willUnmount(p1) --[[ Line: 1367 ]]
 	p1.isMounted = false
 	
 	if p1.closeSignalConnection then
@@ -1060,41 +1068,42 @@ function peekView.willUnmount(p1)
 	end
 end
 
-local function PeekViewContainer(p1)
-	-- upvalues: reactModule (ref), gamepadUtils (ref), usePeekViewFocusNavigationBindingsModule (ref), peekView (write), cryoModule (ref)
-	local var3 = if p1.scrollingFrameRef then p1.scrollingFrameRef else reactModule.useRef(nil)
-	local var4 = reactModule.useRef(nil)
-	local var5 = if p1.fullViewContentHeight then p1.fullViewContentHeight else UDim.new(1, 0)
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: var4 (ref), var5 (write)
-		return var4.current.AbsoluteSize.Y * var5.Scale + var5.Offset
-	end, { var5, var4 })
-	usePeekViewFocusNavigationBindingsModule(reactModule.useCallback(function(p2, p3)
-		-- upvalues: var3 (write), var4 (ref), gamepadUtils (copy), var6 (ref)
-		local position = p2.Position
-		local value = var3:getValue()
+local function PeekViewContainer(p1) --[[ Line: 1392 ]]
+	-- upvalues: ReactModule (copy), GamepadUtils (copy), UsePeekViewFocusNavigationBindingsModule (copy), PeekView (ref), CryoModule (copy)
+	local ScrollingFrameRef = if p1.scrollingFrameRef then p1.scrollingFrameRef else ReactModule.useRef(nil)
+	local UseRefResult = ReactModule.useRef(nil)
+	local FullViewContentHeight = nil
+	FullViewContentHeight = if p1.fullViewContentHeight then p1.fullViewContentHeight else UDim.new(1, 0)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 1406 ]]
+		-- upvalues: UseRefResult (copy), FullViewContentHeight (ref)
+		return UseRefResult.current.AbsoluteSize.Y * FullViewContentHeight.Scale + FullViewContentHeight.Offset
+	end, { FullViewContentHeight, UseRefResult })
+	UsePeekViewFocusNavigationBindingsModule((ReactModule.useCallback(function(p2, p3) --[[ Line: 1411 ]]
+		-- upvalues: ScrollingFrameRef (ref), UseRefResult (copy), GamepadUtils (upval), UseResult (copy)
+		local Position = p2.Position
+		local Value = ScrollingFrameRef:getValue()
 		
-		if var4:getValue() and value then
-			local var7 = value.CanvasPosition.Y + p3 * -gamepadUtils.normalizeStickByDeadzone(position).Y * 1000
+		if UseRefResult:getValue() and Value then
+			local NewY = Value.CanvasPosition.Y + p3 * -GamepadUtils.normalizeStickByDeadzone(Position).Y * 1000
 			
-			if var6() < var7 then
-				value.CanvasPosition = Vector2.new(0, var7)
+			if UseResult() < NewY then
+				Value.CanvasPosition = Vector2.new(0, NewY)
 			end
 		end
-	end, { var6, var3, var4 }))
+	end, { UseResult, ScrollingFrameRef, UseRefResult })))
 	
-	return reactModule.createElement(peekView, cryoModule.Dictionary.join(p1, {
-		swipeScrollingFrameRef = var3,
-		containerFrameRef = var4,
-		fullViewContentHeight = var5,
-		getFullViewY = var6
+	return ReactModule.createElement(PeekView, CryoModule.Dictionary.join(p1, {
+		swipeScrollingFrameRef = ScrollingFrameRef,
+		containerFrameRef = UseRefResult,
+		fullViewContentHeight = FullViewContentHeight,
+		getFullViewY = UseResult
 	}))
 end
 
-peekView = roactRoduxModule.connect(function(p1, _)
+PeekView = RoactRoduxModule.connect(function(p1, _) --[[ Line: 1386 | Named "mapStateToProps" ]]
 	return {
-		topBarHeight = if p1.TopBar then p1.TopBar.topBarHeight else 0
+		topBarHeight = p1.TopBar and p1.TopBar.topBarHeight or 0
 	}
-end, nil)(peekView)
+end, nil)(PeekView)
 
-return if AXMigratePeekViewToFocusNavigation then PeekViewContainer else peekView
+return if AXMigratePeekViewToFocusNavigation then PeekViewContainer else PeekView

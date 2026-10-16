@@ -1,23 +1,16 @@
-﻿local cryoModule = require(script:FindFirstAncestor("HttpRequest").Parent.Cryo)
+﻿local CryoModule = require(script:FindFirstAncestor("HttpRequest").Parent.Cryo)
 
-return function(p1, p2, p3)
-	-- upvalues: cryoModule (ref)
+return function(Url, Method, p1) --[[ Line: 4 ]]
+	-- upvalues: CryoModule (copy)
 	return {
-		Start = function(_, p4)
-			-- upvalues: p3 (ref), cryoModule (copy), p1 (ref), p2 (ref)
-			local t = {}
-			
-			if type(p3.mockResponse) == "function" then
-				t = p3.mockResponse()
-			elseif p3.mockResponse then
-				t = p3.mockResponse
-			end
-			p4(p3.success, cryoModule.Dictionary.join({ Url = p1, Method = p2 }, t))
+		Start = function(_, Callback: (any, any) -> ()) --[[ Line: 6 ]]
+			-- upvalues: p1 (copy), CryoModule (upval), Url (copy), Method (copy)
+			Callback(p1.success, (CryoModule.Dictionary.join({ Url = Url, Method = Method }, if type(p1.mockResponse) == "function" then p1.mockResponse() elseif p1.mockResponse then p1.mockResponse else {})))
 		end,
-		Cancel = function()
-			-- upvalues: p3 (ref)
-			if p3.cancel then
-				p3.cancel()
+		Cancel = function() --[[ Line: 21 ]]
+			-- upvalues: p1 (copy)
+			if p1.cancel then
+				p1.cancel()
 			end
 		end
 	}

@@ -1,13 +1,13 @@
-﻿local tModule = require(game:GetService("CorePackages").Packages.t)
+﻿local TModule = require(game:GetService("CorePackages").Packages.t)
 
 return {
-	validate = tModule.strictInterface({
-		thumbnailKeyframe = tModule.number,
-		thumbnailTime = tModule.number,
-		thumbnailZoom = tModule.number,
-		thumbnailVerticalOffset = tModule.number,
-		thumbnailHorizontalOffset = tModule.number,
-		thumbnailCharacterRotation = tModule.number
+	validate = TModule.strictInterface({
+		thumbnailKeyframe = TModule.number,
+		thumbnailTime = TModule.number,
+		thumbnailZoom = TModule.number,
+		thumbnailVerticalOffset = TModule.number,
+		thumbnailHorizontalOffset = TModule.number,
+		thumbnailCharacterRotation = TModule.number
 	}),
 	defaultParameters = {
 		thumbnailKeyframe = 1,
@@ -17,7 +17,7 @@ return {
 		thumbnailHorizontalOffset = 0,
 		thumbnailCharacterRotation = 0
 	},
-	encodeAsATable = function(p1)
+	encodeAsATable = function(p1) --[[ Line: 41 ]]
 		return {
 			ThumbnailBundleId = 515,
 			ThumbnailCharacterRotation = p1.thumbnailCharacterRotation,

@@ -1,93 +1,102 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local _ = require(appChat.types)
-local appChatNetworkingModule = require(parent.AppChatNetworking)
-local reactModule = require(parent.React)
-local trustedContactsModule = require(parent.TrustedContacts)
-local appTabBarRoduxModule = require(parent.AppTabBarRodux)
-local _ = appChatNetworkingModule.Constants.ConversationOverlay
-local useIsAppChatVerticallyConstrainedModule = require(appChat.App.Hooks.useIsAppChatVerticallyConstrained)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local sharedFlagsModule = require(parent.SharedFlags)
-local refreshConversationUnfilteredThreadsDetailsModule = require(appChat.Conversations.Thunks.refreshConversationUnfilteredThreadsDetails)
-local promiseModule = require(parent.Promise)
-local useIsInExperienceModule = require(appChat.Hooks.useIsInExperience)
-local setTabBarVisibleFromChat = appTabBarRoduxModule.Thunks.SetTabBarVisibleFromChat
-local conversationOverlayTelemetryModule = require(appChat.Components.ChatConversation.PartialModal.ConversationOverlayTelemetry)
-local modalTelemetryModule = require(appChat.Components.ModalTelemetry)
-local useTelemetryModule = require(appChat.Telemetry.useTelemetry)
-local appTelemetryLayerModule = require(appChat.Telemetry.Layers.AppTelemetryLayer)
-local trustedFriendsModalEntry = trustedContactsModule.TrustedFriendsModalEntry
-local fFlagAppChatEnableDoubleOptIn = sharedFlagsModule.FFlagAppChatEnableDoubleOptIn
-local fFlagAppChatEnableTrustedFriendEntryPointModule = require(appChat.Flags.FFlagAppChatEnableTrustedFriendEntryPoint)
-local fIntUnfilteredThreadsPvDelayMsModule = require(appChat.Flags.FIntUnfilteredThreadsPvDelayMs)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local _ = require(AppChat.types)
+local ReactModule = require(Parent.React)
+local _ = require(Parent.AppChatNetworking).Constants.ConversationOverlay
+local UseIsAppChatVerticallyConstrainedModule = require(AppChat.App.Hooks.useIsAppChatVerticallyConstrained)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local RefreshConversationUnfilteredThreadsDetailsModule = require(AppChat.Conversations.Thunks.refreshConversationUnfilteredThreadsDetails)
+local PromiseModule = require(Parent.Promise)
+local UseIsInExperienceModule = require(AppChat.Hooks.useIsInExperience)
+local SetTabBarVisibleFromChatFunction = require(Parent.AppTabBarRodux).Thunks.SetTabBarVisibleFromChat
+local ConversationOverlayTelemetryModule = require(AppChat.Components.ChatConversation.PartialModal.ConversationOverlayTelemetry)
+local ModalTelemetryModule = require(AppChat.Components.ModalTelemetry)
+local UseTelemetryModule = require(AppChat.Telemetry.useTelemetry)
+local AppTelemetryLayerModule = require(AppChat.Telemetry.Layers.AppTelemetryLayer)
+local TrustedFriendsModalEntry = require(Parent.TrustedContacts).TrustedFriendsModalEntry
+local FFlagAppChatEnableDoubleOptIn = require(Parent.SharedFlags).FFlagAppChatEnableDoubleOptIn
+local FFlagAppChatEnableTrustedFriendEntryPointModule = require(AppChat.Flags.FFlagAppChatEnableTrustedFriendEntryPoint)
+local FIntUnfilteredThreadsPvDelayMsModule = require(AppChat.Flags.FIntUnfilteredThreadsPvDelayMs)
 
-return function(p1)
-	-- upvalues: useIsAppChatVerticallyConstrainedModule (ref), useDispatch (ref), fFlagAppChatEnableDoubleOptIn (ref), useIsInExperienceModule (ref), useTelemetryModule (ref), appTelemetryLayerModule (ref), reactModule (ref), conversationOverlayTelemetryModule (ref), fFlagAppChatEnableTrustedFriendEntryPointModule (ref), setTabBarVisibleFromChat (ref), promiseModule (ref), fIntUnfilteredThreadsPvDelayMsModule (ref), refreshConversationUnfilteredThreadsDetailsModule (ref), modalTelemetryModule (ref), trustedFriendsModalEntry (ref)
-	local var1 = useIsAppChatVerticallyConstrainedModule()
-	local var2 = useDispatch()
-	local var3 = if fFlagAppChatEnableDoubleOptIn then useIsInExperienceModule() else nil
-	local analyticsModalVariant = p1.analyticsModalVariant
-	local conversationId = p1.conversationId
-	local var4 = useTelemetryModule(appTelemetryLayerModule.Context)
-	reactModule.useEffect(function()
-		-- upvalues: analyticsModalVariant (ref), var4 (ref), conversationOverlayTelemetryModule (copy)
-		if analyticsModalVariant == nil then
+return function(p1) --[[ Line: 50 ]]
+	-- upvalues: UseIsAppChatVerticallyConstrainedModule (copy), UseDispatchFunction (copy), FFlagAppChatEnableDoubleOptIn (copy), UseIsInExperienceModule (copy), UseTelemetryModule (copy), AppTelemetryLayerModule (copy), ReactModule (copy), ConversationOverlayTelemetryModule (copy), FFlagAppChatEnableTrustedFriendEntryPointModule (copy), SetTabBarVisibleFromChatFunction (copy), PromiseModule (copy), FIntUnfilteredThreadsPvDelayMsModule (copy), RefreshConversationUnfilteredThreadsDetailsModule (copy), ModalTelemetryModule (copy), TrustedFriendsModalEntry (copy)
+	local UseIsAppChatVerticallyConstrainedModuleResult = UseIsAppChatVerticallyConstrainedModule()
+	local UseDispatchResult = UseDispatchFunction()
+	local UseIsInExperienceModuleResult = if FFlagAppChatEnableDoubleOptIn then UseIsInExperienceModule() else nil
+	local AnalyticsModalVariant = p1.analyticsModalVariant
+	local ConversationId = p1.conversationId
+	local UseTelemetryModuleResult = UseTelemetryModule(AppTelemetryLayerModule.Context)
+	ReactModule.useEffect(function() --[[ Line: 58 ]]
+		-- upvalues: AnalyticsModalVariant (copy), UseTelemetryModuleResult (copy), ConversationOverlayTelemetryModule (upval)
+		if AnalyticsModalVariant ~= nil then
+			UseTelemetryModuleResult.emit(ConversationOverlayTelemetryModule.Events.ModalRendered, { modalVariant = AnalyticsModalVariant })
+			
 			return
 		end
-		var4.emit(conversationOverlayTelemetryModule.Events.ModalRendered, { modalVariant = analyticsModalVariant })
-	end, { analyticsModalVariant })
-	reactModule.useEffect(function()
-		-- upvalues: fFlagAppChatEnableTrustedFriendEntryPointModule (copy), var2 (ref), setTabBarVisibleFromChat (copy)
-		if fFlagAppChatEnableTrustedFriendEntryPointModule then
-			var2(setTabBarVisibleFromChat(false))
-			
-			return function()
-				-- upvalues: var2 (copy), setTabBarVisibleFromChat (copy)
-				var2(setTabBarVisibleFromChat(true))
-			end
+	end, { AnalyticsModalVariant })
+	ReactModule.useEffect(function() --[[ Line: 70 ]]
+		-- upvalues: FFlagAppChatEnableTrustedFriendEntryPointModule (upval), UseDispatchResult (copy), SetTabBarVisibleFromChatFunction (upval)
+		if not FFlagAppChatEnableTrustedFriendEntryPointModule then return end
+		UseDispatchResult(SetTabBarVisibleFromChatFunction(false))
+		
+		return function() --[[ Line: 75 ]]
+			-- upvalues: UseDispatchResult (upval), SetTabBarVisibleFromChatFunction (upval)
+			UseDispatchResult(SetTabBarVisibleFromChatFunction(true))
 		end
-	end, { var2 })
-	local var5 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref), conversationId (ref), fFlagAppChatEnableDoubleOptIn (copy), promiseModule (copy), fIntUnfilteredThreadsPvDelayMsModule (copy), var2 (ref), refreshConversationUnfilteredThreadsDetailsModule (copy), var3 (ref)
+	end, { UseDispatchResult })
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 80 ]]
+		-- upvalues: p1 (copy), ConversationId (copy), FFlagAppChatEnableDoubleOptIn (upval), PromiseModule (upval), FIntUnfilteredThreadsPvDelayMsModule (upval), UseDispatchResult (copy), RefreshConversationUnfilteredThreadsDetailsModule (upval), UseIsInExperienceModuleResult (copy)
 		p1.dismissModal()
 		
-		if conversationId ~= nil and fFlagAppChatEnableDoubleOptIn then
-			promiseModule.delay(fIntUnfilteredThreadsPvDelayMsModule / 1000):andThen(function()
-				-- upvalues: var2 (copy), refreshConversationUnfilteredThreadsDetailsModule (copy), conversationId (copy), var3 (copy)
-				var2(refreshConversationUnfilteredThreadsDetailsModule(conversationId, var3))
+		if ConversationId ~= nil and FFlagAppChatEnableDoubleOptIn then
+			PromiseModule.delay(FIntUnfilteredThreadsPvDelayMsModule / 1000):andThen(function() --[[ Line: 83 ]]
+				-- upvalues: UseDispatchResult (upval), RefreshConversationUnfilteredThreadsDetailsModule (upval), ConversationId (upval), UseIsInExperienceModuleResult (upval)
+				UseDispatchResult(RefreshConversationUnfilteredThreadsDetailsModule(ConversationId, UseIsInExperienceModuleResult))
 			end)
 		end
-	end, { conversationId, var2, p1.dismissModal, var3 })
+	end, {
+		ConversationId,
+		UseDispatchResult,
+		p1.dismissModal,
+		UseIsInExperienceModuleResult
+	})
 	
-	return reactModule.createElement(trustedFriendsModalEntry, {
+	return ReactModule.createElement(TrustedFriendsModalEntry, {
 		userId = p1.userId,
 		source = p1.source,
-		isVerticallyConstrained = var1,
+		isVerticallyConstrained = UseIsAppChatVerticallyConstrainedModuleResult,
 		modalVariantOverride = p1.modalVariantOverride,
 		onRequestSent = p1.onRequestSent,
 		onRequestAccepted = p1.onRequestAccepted,
-		onAcknowledged = reactModule.useCallback(function()
-			-- upvalues: analyticsModalVariant (ref), var4 (ref), conversationOverlayTelemetryModule (copy), modalTelemetryModule (copy), p1 (ref)
-			if analyticsModalVariant ~= nil then
-				var4.emit(conversationOverlayTelemetryModule.Events.ModalAction, {
-					modalVariant = analyticsModalVariant,
-					action = modalTelemetryModule.Enums.ModalActions.PrimaryCta
+		onAcknowledged = ReactModule.useCallback(function() --[[ Line: 97 ]]
+			-- upvalues: AnalyticsModalVariant (copy), UseTelemetryModuleResult (copy), ConversationOverlayTelemetryModule (upval), ModalTelemetryModule (upval), p1 (copy)
+			if AnalyticsModalVariant ~= nil then
+				UseTelemetryModuleResult.emit(ConversationOverlayTelemetryModule.Events.ModalAction, {
+					modalVariant = AnalyticsModalVariant,
+					action = ModalTelemetryModule.Enums.ModalActions.PrimaryCta
 				})
 			end
 			if p1.onAcknowledged ~= nil then
 				p1.onAcknowledged()
 			end
-		end, { var4, analyticsModalVariant, p1.onAcknowledged }),
-		onClosed = reactModule.useCallback(function()
-			-- upvalues: analyticsModalVariant (ref), var4 (ref), conversationOverlayTelemetryModule (copy), modalTelemetryModule (copy), var5 (ref)
-			if analyticsModalVariant ~= nil then
-				var4.emit(conversationOverlayTelemetryModule.Events.ModalAction, {
-					modalVariant = analyticsModalVariant,
-					action = modalTelemetryModule.Enums.ModalActions.Dismiss
+		end, {
+			UseTelemetryModuleResult,
+			AnalyticsModalVariant,
+			p1.onAcknowledged
+		}),
+		onClosed = ReactModule.useCallback(function() --[[ Line: 88 ]]
+			-- upvalues: AnalyticsModalVariant (copy), UseTelemetryModuleResult (copy), ConversationOverlayTelemetryModule (upval), ModalTelemetryModule (upval), UseResult (copy)
+			if AnalyticsModalVariant ~= nil then
+				UseTelemetryModuleResult.emit(ConversationOverlayTelemetryModule.Events.ModalAction, {
+					modalVariant = AnalyticsModalVariant,
+					action = ModalTelemetryModule.Enums.ModalActions.Dismiss
 				})
 			end
-			var5()
-		end, { var5, var4, analyticsModalVariant })
+			UseResult()
+		end, {
+			UseResult,
+			UseTelemetryModuleResult,
+			AnalyticsModalVariant
+		})
 	})
 end

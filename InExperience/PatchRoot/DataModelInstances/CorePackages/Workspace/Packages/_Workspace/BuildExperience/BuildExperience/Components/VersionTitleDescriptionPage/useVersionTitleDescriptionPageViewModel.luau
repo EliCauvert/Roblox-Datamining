@@ -1,85 +1,91 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local dataHydrationModule = require(parent.DataHydration)
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local placeVersionHistoryModule = require(parent.DataHydration.PlaceVersionHistory)
-local fFlagBuildExperienceForceRefreshVersionHistoryModule = require(buildExperience.Flags.FFlagBuildExperienceForceRefreshVersionHistory)
-local getVersionInformationStoreModule = require(buildExperience.Stores.GetVersionInformationStore)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local PlaceVersionHistoryModule = require(Parent.DataHydration.PlaceVersionHistory)
+local GetVersionInformationStoreModule = require(BuildExperience.Stores.GetVersionInformationStore)
 local _ = require(script.Parent.VersionTitleDescriptionPageView)
-local dataStatus = dataHydrationModule.DataStatus
+local DataStatus = require(Parent.DataHydration).DataStatus
 
-return function(p1)
-	-- upvalues: getVersionInformationStoreModule (ref), placeVersionHistoryModule (ref), reactModule (ref), fFlagBuildExperienceForceRefreshVersionHistoryModule (ref), signalsReactModule (ref), dataStatus (ref)
-	local var1 = getVersionInformationStoreModule()
-	local placeVersionHistoryStore = placeVersionHistoryModule.getPlaceVersionHistoryStore()
-	local var2 = reactModule.useMemo(function()
-		-- upvalues: fFlagBuildExperienceForceRefreshVersionHistoryModule (copy), placeVersionHistoryStore (ref), p1 (ref)
-		return if fFlagBuildExperienceForceRefreshVersionHistoryModule then placeVersionHistoryStore.fetchHistory(p1.placeId) else placeVersionHistoryStore.getAndFetchHistory(p1.placeId)
-	end, { p1.placeId, placeVersionHistoryStore })
-	local var3 = signalsReactModule.useSignalState(var2.data)
-	local var4 = signalsReactModule.useSignalState(var2.status)
-	local var5 = signalsReactModule.useSignalState(var1.getDraft)
-	local var6 = if var5 == nil or var5.placeId ~= p1.placeId then nil else var5
-	local var7 = if var3 ~= nil then nil else var3.placeVersions[1]
-	local var8 = if var6 ~= nil then (if var7 ~= nil then nil else var7.title) or "" else var6.title
-	local var9 = if var6 ~= nil then (if var7 ~= nil then nil else var7.description) or "" else var6.description
-	local var10 = if var6 == nil then if var4 ~= dataStatus.Ready then var4 == dataStatus.Failed else true else true
-	local var11, var12 = reactModule.useBinding("")
-	local var13, var14 = reactModule.useBinding("")
-	local var15 = reactModule.useRef("")
-	local var16 = reactModule.useRef("")
-	local var17, var18 = reactModule.useState(nil)
-	reactModule.useEffect(function()
-		-- upvalues: var10 (ref), var11 (ref), var15 (ref), var13 (ref), var16 (ref), fFlagBuildExperienceForceRefreshVersionHistoryModule (copy), var17 (ref), p1 (ref), var8 (ref), var9 (ref), var12 (ref), var14 (ref), var18 (ref)
-		if not var10 then return end
-		if var17 == p1.placeId and not (fFlagBuildExperienceForceRefreshVersionHistoryModule and not (if var11:getValue() == var15.current then var13:getValue() ~= var16.current else true)) then
-			return
-		end
-		var15.current = var8
-		var16.current = var9
-		var12(var8)
-		var14(var9)
-		var18(p1.placeId)
-	end, {
-		var13, var9, var8, var17, var10, p1.placeId, var11
-	})
-	local var19 = reactModule.useCallback(function()
-		-- upvalues: var17 (ref), p1 (ref), var11 (ref), var13 (ref), var15 (ref), var16 (ref), var1 (ref)
-		if var17 ~= p1.placeId then return end
-		local value = var11:getValue()
-		local value_1 = var13:getValue()
+return function(p1) --[[ Line: 22 | Named "useVersionTitleDescriptionPageViewModel" ]]
+	-- upvalues: GetVersionInformationStoreModule (copy), PlaceVersionHistoryModule (copy), ReactModule (copy), SignalsReactModule (copy), DataStatus (copy)
+	local VersionInformationStoreModule = GetVersionInformationStoreModule()
+	local PlaceVersionHistoryStore = PlaceVersionHistoryModule.getPlaceVersionHistoryStore()
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 25 ]]
+		-- upvalues: PlaceVersionHistoryStore (copy), p1 (copy)
+		return PlaceVersionHistoryStore.fetchHistory(p1.placeId)
+	end, { p1.placeId, PlaceVersionHistoryStore })
+	local UseSignalStateResult = SignalsReactModule.useSignalState(UseMemoResult.data)
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(UseMemoResult.status)
+	local UseSignalStateResult2 = SignalsReactModule.useSignalState(VersionInformationStoreModule.getDraft)
+	local UseSignalStateResult3 = if UseSignalStateResult2 == nil or UseSignalStateResult2.placeId ~= p1.placeId then nil else UseSignalStateResult2
+	local PlaceVersion = if UseSignalStateResult == nil then nil else UseSignalStateResult.placeVersions[1]
+	local Title = if PlaceVersion == nil then nil else PlaceVersion.title
+	local Description = if PlaceVersion == nil then nil else PlaceVersion.description
+	local Title1 = if UseSignalStateResult3 == nil then Title or "" else UseSignalStateResult3.title
+	local Description1 = if UseSignalStateResult3 == nil then Description or "" else UseSignalStateResult3.description
+	local IsUseSignalStateResultMatch: boolean = UseSignalStateResult1 == DataStatus.Ready or UseSignalStateResult1 == DataStatus.Failed
+	local HasUseSignalStateResult: boolean = UseSignalStateResult3 ~= nil or IsUseSignalStateResultMatch
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding("")
+	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding("")
+	local UseRefResult = ReactModule.useRef("")
+	local UseRefResult1 = ReactModule.useRef("")
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	ReactModule.useEffect(function() --[[ Line: 47 ]]
+		-- upvalues: HasUseSignalStateResult (copy), UseBindingResult (copy), UseRefResult (copy), UseBindingResult1 (copy), UseRefResult1 (copy), UseStateResult (copy), p1 (copy), Title1 (copy), Description1 (copy), UseBindingResult2 (copy), UseBindingResult2_1 (copy), UseStateResult2 (copy)
+		if not HasUseSignalStateResult then return end
+		local IsNotValueMatch: boolean = UseBindingResult:getValue() ~= UseRefResult.current or UseBindingResult1:getValue() ~= UseRefResult1.current
 		
-		if value == var15.current and value_1 == var16.current then
+		if UseStateResult ~= p1.placeId or not IsNotValueMatch then
+			UseRefResult.current = Title1
+			UseRefResult1.current = Description1
+			UseBindingResult2(Title1)
+			UseBindingResult2_1(Description1)
+			UseStateResult2(p1.placeId)
+			
 			return
 		end
-		var1.setDraft(p1.placeId, value, value_1)
-		var15.current = value
-		var16.current = value_1
 	end, {
-		var13,
-		var17,
-		p1.placeId,
-		var11,
-		var1
+		UseBindingResult1, Description1, Title1, UseStateResult,
+		HasUseSignalStateResult, p1.placeId, UseBindingResult
 	})
-	reactModule.useEffect(function()
-		-- upvalues: var19 (ref)
-		return var19
-	end, { var19 })
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 77 ]]
+		-- upvalues: UseStateResult (copy), p1 (copy), UseBindingResult (copy), UseBindingResult1 (copy), UseRefResult (copy), UseRefResult1 (copy), VersionInformationStoreModule (copy)
+		if UseStateResult ~= p1.placeId then return end
+		local Value = UseBindingResult:getValue()
+		local Value1 = UseBindingResult1:getValue()
+		
+		if Value ~= UseRefResult.current or Value1 ~= UseRefResult1.current then
+			VersionInformationStoreModule.setDraft(p1.placeId, Value, Value1)
+			UseRefResult.current = Value
+			UseRefResult1.current = Value1
+			
+			return
+		end
+	end, {
+		UseBindingResult1,
+		UseStateResult,
+		p1.placeId,
+		UseBindingResult,
+		VersionInformationStoreModule
+	})
+	ReactModule.useEffect(function() --[[ Line: 101 ]]
+		-- upvalues: UseResult (copy)
+		return UseResult
+	end, { UseResult })
 	
 	return {
-		isReady = var17 == p1.placeId,
-		onBack = reactModule.useCallback(function()
-			-- upvalues: var19 (ref), p1 (ref)
-			var19()
+		isReady = UseStateResult == p1.placeId,
+		onBack = ReactModule.useCallback(function() --[[ Line: 105 ]]
+			-- upvalues: UseResult (copy), p1 (copy)
+			UseResult()
 			p1.onBack()
-		end, { p1.onBack, var19 }),
-		onDescriptionChanged = var14,
-		onFocusLost = var19,
-		onTitleChanged = var12,
-		titleText = var11,
-		descriptionText = var13,
+		end, { p1.onBack, UseResult }),
+		onDescriptionChanged = UseBindingResult2_1,
+		onFocusLost = UseResult,
+		onTitleChanged = UseBindingResult2,
+		titleText = UseBindingResult,
+		descriptionText = UseBindingResult1,
 		layoutOrder = p1.layoutOrder,
 		testId = p1.testId
 	}

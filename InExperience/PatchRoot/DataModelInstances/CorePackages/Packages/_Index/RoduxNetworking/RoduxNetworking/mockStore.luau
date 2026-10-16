@@ -1,21 +1,21 @@
 ﻿return {
-	config = function(p1)
-		p1 = p1 or {}
-		local state = p1.state or {}
+	config = function(p1) --[[ Line: 7 ]]
+		local P0 = p1 or {}
+		local State = P0.state or {}
 		
 		return {
-			dispatch = p1.dispatch or function(p2, p3)
-				if type(p3) == "function" then
-					p3(p2)
+			dispatch = P0.dispatch or function(p2, Callback: (any) -> ()) --[[ Line: 12 ]]
+				if type(Callback) == "function" then
+					Callback(p2)
 				end
 			end,
-			getState = function()
-				-- upvalues: state (write)
-				return state
+			getState = function() --[[ Line: 18 ]]
+				-- upvalues: State (ref)
+				return State
 			end,
-			setState = function(_, p2)
-				-- upvalues: state (write)
-				state = p2
+			setState = function(_, Value) --[[ Line: 22 ]]
+				-- upvalues: State (ref)
+				State = Value
 			end
 		}
 	end

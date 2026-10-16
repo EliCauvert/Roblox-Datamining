@@ -1,215 +1,225 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local reactModule = require(corePackagesService.Packages.React)
-local signalsReactModule = require(corePackagesService.Packages.SignalsReact)
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local playerListModule = require(corePackagesService.Workspace.Packages.PlayerList)
-local _ = require(corePackagesService.Workspace.Packages.LeaderboardStore)
-local useLayoutValues = playerListModule.Common.useLayoutValues
-local useStyle = UIBloxModule.Core.Style.useStyle
-local entryFrameView = playerListModule.Presentation.EntryFrameView
-local statEntryContainerModule = require(parent_1.Components.Container.StatEntryContainer)
-local fFlagPlayerListFixLeaderstatsStacking = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagPlayerListFixLeaderstatsStacking
-local fFlagEnableMobilePlayerListOnConsole = playerListModule.Flags.FFlagEnableMobilePlayerListOnConsole
-local cellExtenderModule = require(parent.Presentation.CellExtender)
+﻿local CorePackages = game:GetService("CorePackages")
+local Parent = script.Parent.Parent
+local ReactModule = require(CorePackages.Packages.React)
+local SignalsReactModule = require(CorePackages.Packages.SignalsReact)
+local PlayerListModule = require(CorePackages.Workspace.Packages.PlayerList)
+local _ = require(CorePackages.Workspace.Packages.LeaderboardStore)
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseLayoutValuesFunction = PlayerListModule.Common.useLayoutValues
+local UseStyleFunction = require(CorePackages.Packages.UIBlox).Core.Style.useStyle
+local EntryFrameView = PlayerListModule.Presentation.EntryFrameView
+local StatEntryContainerModule = require(Parent.Parent.Components.Container.StatEntryContainer)
+local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
+local FFlagPlayerListFixLeaderstatsStacking = SharedFlagsModule.FFlagPlayerListFixLeaderstatsStacking
+local FoundationFontFaceMigration = SharedFlagsModule.FFlagFontFacePlayerList and FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local FFlagEnableMobilePlayerListOnConsole = PlayerListModule.Flags.FFlagEnableMobilePlayerListOnConsole
+local CellExtenderModule = require(Parent.Presentation.CellExtender)
 
-return reactModule.memo(function(p1)
-	-- upvalues: useLayoutValues (ref), useStyle (ref), fFlagEnableMobilePlayerListOnConsole (ref), reactModule (ref), fFlagPlayerListFixLeaderstatsStacking (ref), signalsReactModule (ref), statEntryContainerModule (ref), entryFrameView (ref), cellExtenderModule (ref)
-	local var1 = useLayoutValues()
-	local var2 = useStyle()
-	local isSmallTouchDevice = p1.isSmallTouchDevice or false
-	local isDirectionalPreferred = p1.isDirectionalPreferred or false
-	local textEmphasis = var2.Theme.TextEmphasis
-	local var3 = if fFlagEnableMobilePlayerListOnConsole then var1.TeamNameTextSize else var2.Font.CaptionHeader.RelativeSize * var2.Font.BaseSize
-	local font = var2.Font.CaptionHeader.Font
+return ReactModule.memo(function(p1) --[[ Line: 59 | Named "TeamEntryView" ]]
+	-- upvalues: UseLayoutValuesFunction (copy), UseStyleFunction (copy), FoundationFontFaceMigration (copy), UseTokensFunction (copy), FFlagEnableMobilePlayerListOnConsole (copy), NormalizeFontFaceFunction (copy), ReactModule (copy), FFlagPlayerListFixLeaderstatsStacking (copy), SignalsReactModule (copy), StatEntryContainerModule (copy), EntryFrameView (copy), CellExtenderModule (copy)
+	local UseLayoutValuesResult = UseLayoutValuesFunction()
+	local UseStyleResult = UseStyleFunction()
+	local UseTokensResult = if FoundationFontFaceMigration then UseTokensFunction() else nil
+	local IsSmallTouchDevice = p1.isSmallTouchDevice or false
+	local IsDirectionalPreferred = p1.isDirectionalPreferred or false
+	local TextEmphasis = UseStyleResult.Theme.TextEmphasis
+	local TeamNameTextSize = if FFlagEnableMobilePlayerListOnConsole then UseLayoutValuesResult.TeamNameTextSize else UseStyleResult.Font.CaptionHeader.RelativeSize * UseStyleResult.Font.BaseSize
+	local NormalizeFontFaceResult = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.CaptionLarge.Font) else UseStyleResult.Font.CaptionHeader.Font
 	
-	if isDirectionalPreferred then
-		textEmphasis = var1.DefaultTextStyle
-		var3 = var1.PlayerNameTextSize
-		font = var1.TeamEntryFont
+	if IsDirectionalPreferred then
+		TextEmphasis = UseLayoutValuesResult.DefaultTextStyle
+		TeamNameTextSize = UseLayoutValuesResult.PlayerNameTextSize
+		NormalizeFontFaceResult = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseLayoutValuesResult.TeamEntryFont) else UseLayoutValuesResult.TeamEntryFont
 	end
-	local var4 = reactModule.useMemo(function()
-		-- upvalues: isSmallTouchDevice (ref), var2 (ref), p1 (ref), isDirectionalPreferred (ref), var1 (ref)
-		return if isSmallTouchDevice then {
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 84 ]]
+		-- upvalues: IsSmallTouchDevice (copy), UseStyleResult (copy), p1 (copy), IsDirectionalPreferred (copy), UseLayoutValuesResult (copy)
+		return if IsSmallTouchDevice then {
 			Color = p1.teamColor,
-			Transparency = var2.Settings.PreferredTransparency * 0.5
-		} elseif isDirectionalPreferred then {
+			Transparency = UseStyleResult.Settings.PreferredTransparency * 0.5
+		} elseif IsDirectionalPreferred then {
 			Color = p1.teamColor,
-			Transparency = if var1.BackgroundStyle then var1.BackgroundStyle.Default.Transparency else 0
+			Transparency = if UseLayoutValuesResult.BackgroundStyle then UseLayoutValuesResult.BackgroundStyle.Default.Transparency else 0
 		} else {
 			Color = p1.teamColor,
-			Transparency = var1.TeamEntryBackgroundTransparency * var2.Settings.PreferredTransparency
+			Transparency = UseLayoutValuesResult.TeamEntryBackgroundTransparency * UseStyleResult.Settings.PreferredTransparency
 		}
 	end, {
-		isSmallTouchDevice,
-		isDirectionalPreferred,
+		IsSmallTouchDevice,
+		IsDirectionalPreferred,
 		p1.teamColor,
-		var2,
-		var1
+		UseStyleResult,
+		UseLayoutValuesResult
 	})
-	local t = { Transparency = 1, Color = Color3.new(1, 1, 1) }
-	local maxLeaderstats = var1.MaxLeaderstats
-	local var5 = if fFlagPlayerListFixLeaderstatsStacking then signalsReactModule.useSignalState(p1.gameStats.getAllData) else nil
+	local OverlayStyle = { Transparency = 1, Color = Color3.new(1, 1, 1) }
+	local MaxLeaderstats = UseLayoutValuesResult.MaxLeaderstats
+	local UseSignalStateResult = if FFlagPlayerListFixLeaderstatsStacking then SignalsReactModule.useSignalState(p1.gameStats.getAllData) else nil
 	
-	if isSmallTouchDevice then
-		local t_1 = {
-			UIListLayout = reactModule.createElement("UIListLayout", {
+	if IsSmallTouchDevice then
+		local Elements = {
+			UIListLayout = ReactModule.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				FillDirection = Enum.FillDirection.Horizontal,
 				VerticalAlignment = Enum.VerticalAlignment.Center
 			}),
-			NameFrame = reactModule.createElement("TextLabel", {
+			NameFrame = ReactModule.createElement("TextLabel", {
 				LayoutOrder = 0,
 				BackgroundTransparency = 1,
-				Size = UDim2.new(0, var1.PlayerNameSizeXMobile, 1, 0),
+				Size = UDim2.new(0, UseLayoutValuesResult.PlayerNameSizeXMobile, 1, 0),
 				TextXAlignment = Enum.TextXAlignment.Left,
-				Font = font,
-				TextSize = var3,
-				TextColor3 = textEmphasis.Color,
-				TextStrokeTransparency = textEmphasis.StrokeTransparency,
-				TextStrokeColor3 = textEmphasis.StrokeColor,
+				Font = if FoundationFontFaceMigration then nil else NormalizeFontFaceResult,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceResult else nil,
+				TextSize = TeamNameTextSize,
+				TextColor3 = TextEmphasis.Color,
+				TextStrokeTransparency = TextEmphasis.StrokeTransparency,
+				TextStrokeColor3 = TextEmphasis.StrokeColor,
 				Text = p1.teamName,
 				TextTruncate = Enum.TextTruncate.AtEnd
 			}, {
-				UIPadding = reactModule.createElement("UIPadding", {
-					PaddingLeft = UDim.new(0, var1.TeamEntryTextPaddingMobile)
+				UIPadding = ReactModule.createElement("UIPadding", {
+					PaddingLeft = UDim.new(0, UseLayoutValuesResult.TeamEntryTextPaddingMobile)
 				})
 			})
 		}
 		
-		if fFlagPlayerListFixLeaderstatsStacking then
-			for i, v in var5 do
-				if maxLeaderstats >= v.order(false) then
-					t_1["GameStat_" .. i] = reactModule.createElement(statEntryContainerModule, {
+		if FFlagPlayerListFixLeaderstatsStacking then
+			for StatName, value in UseSignalStateResult do
+				if MaxLeaderstats >= value.order(false) then
+					Elements["GameStat_" .. StatName] = ReactModule.createElement(StatEntryContainerModule, {
 						isTeamEntry = true,
 						showStatTitle = false,
-						statName = i,
-						stat = p1.teamStats.getData(i, false),
-						textStyle = textEmphasis
+						statName = StatName,
+						stat = p1.teamStats.getData(StatName, false),
+						textStyle = TextEmphasis
 					})
 				end
 			end
-		elseif p1.gameStatsCount and p1.teamStatsCount and (p1.gameStatsCount > 0 and p1.teamStatsCount >= 0) then
-			p1.gameStats.iterateData(function(p2, p3)
-				-- upvalues: maxLeaderstats (ref), p1 (ref), t_1 (ref), reactModule (copy), statEntryContainerModule (copy), textEmphasis (write)
-				if maxLeaderstats < p3.order(false) then
+		elseif p1.gameStatsCount and p1.teamStatsCount and p1.gameStatsCount > 0 and p1.teamStatsCount >= 0 then
+			p1.gameStats.iterateData(function(StatName, p2) --[[ Line: 169 ]]
+				-- upvalues: MaxLeaderstats (copy), p1 (copy), Elements (copy), ReactModule (upval), StatEntryContainerModule (upval), TextEmphasis (ref)
+				if MaxLeaderstats >= p2.order(false) then
+					Elements["GameStat_" .. StatName] = ReactModule.createElement(StatEntryContainerModule, {
+						isTeamEntry = true,
+						showStatTitle = false,
+						statName = StatName,
+						stat = p1.teamStats.getData(StatName, false),
+						textStyle = TextEmphasis
+					})
+					
 					return
 				end
-				t_1["GameStat_" .. p1] = reactModule.createElement(statEntryContainerModule, {
-					isTeamEntry = true,
-					showStatTitle = false,
-					statName = p2,
-					stat = p1.teamStats.getData(p2, false),
-					textStyle = textEmphasis
-				})
 			end, false)
 		end
-		return reactModule.createElement("Frame", {
+		return ReactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			GroupTransparency = nil,
 			LayoutOrder = p1.layoutOrder,
 			Size = p1.size,
-			BackgroundColor3 = var4.Color,
-			BackgroundTransparency = var4.Transparency
-		}, t_1)
+			BackgroundColor3 = UseMemoResult.Color,
+			BackgroundTransparency = UseMemoResult.Transparency
+		}, Elements)
 	else
-		local t_1 = {
-			UIListLayout = reactModule.createElement("UIListLayout", {
+		local Elements1 = {
+			UIListLayout = ReactModule.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				FillDirection = Enum.FillDirection.Horizontal,
 				VerticalAlignment = Enum.VerticalAlignment.Center,
-				Padding = if isDirectionalPreferred then UDim.new(0, var1.PlayerEntryPadding) else nil
+				Padding = if IsDirectionalPreferred then UDim.new(0, UseLayoutValuesResult.PlayerEntryPadding) else nil
 			}),
-			NameFrame = reactModule.createElement("Frame", {
+			NameFrame = ReactModule.createElement("Frame", {
 				LayoutOrder = 0,
 				BackgroundTransparency = 1,
-				Size = UDim2.new(0, p1.entrySizeX, 0, var1.TeamEntrySizeY)
+				Size = UDim2.new(0, p1.entrySizeX, 0, UseLayoutValuesResult.TeamEntrySizeY)
 			}, {
-				Shadow = reactModule.createElement("ImageLabel", {
+				Shadow = ReactModule.createElement("ImageLabel", {
 					BackgroundTransparency = 1,
-					Image = var1.ShadowImage,
-					Position = UDim2.new(0, -var1.ShadowSize, 0, 0),
-					Size = UDim2.new(1, var1.ShadowSize * 2, 1, var1.ShadowSize),
+					Image = UseLayoutValuesResult.ShadowImage,
+					Position = UDim2.new(0, -UseLayoutValuesResult.ShadowSize, 0, 0),
+					Size = UDim2.new(1, UseLayoutValuesResult.ShadowSize * 2, 1, UseLayoutValuesResult.ShadowSize),
 					ScaleType = Enum.ScaleType.Slice,
-					SliceCenter = var1.ShadowSliceRect,
-					Visible = isDirectionalPreferred
+					SliceCenter = UseLayoutValuesResult.ShadowSliceRect,
+					Visible = IsDirectionalPreferred
 				}),
-				BGFrame = reactModule.createElement(entryFrameView, {
+				BGFrame = ReactModule.createElement(EntryFrameView, {
 					isTeamFrame = true,
 					doubleOverlay = false,
-					size = UDim2.new(0, p1.entrySizeX, 0, var1.TeamEntrySizeY),
-					backgroundStyle = var4,
-					overlayStyle = t
+					size = UDim2.new(0, p1.entrySizeX, 0, UseLayoutValuesResult.TeamEntrySizeY),
+					backgroundStyle = UseMemoResult,
+					overlayStyle = OverlayStyle
 				}, {
-					TeamName = reactModule.createElement("TextLabel", {
+					TeamName = ReactModule.createElement("TextLabel", {
 						BackgroundTransparency = 1,
 						Position = UDim2.new(0, 0, 0, 0),
 						Size = UDim2.new(1, 0, 1, 0),
 						TextXAlignment = Enum.TextXAlignment.Left,
-						Font = font,
-						TextSize = var3,
-						TextColor3 = textEmphasis.Color,
-						TextStrokeTransparency = textEmphasis.StrokeTransparency,
-						TextStrokeColor3 = textEmphasis.StrokeColor,
+						Font = if FoundationFontFaceMigration then nil else NormalizeFontFaceResult,
+						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceResult else nil,
+						TextSize = TeamNameTextSize,
+						TextColor3 = TextEmphasis.Color,
+						TextStrokeTransparency = TextEmphasis.StrokeTransparency,
+						TextStrokeColor3 = TextEmphasis.StrokeColor,
 						Text = p1.teamName,
 						TextTruncate = Enum.TextTruncate.AtEnd
 					}, {
-						reactModule.createElement("UIPadding", { PaddingLeft = UDim.new(0, var1.TeamEntryTextPadding) })
+						ReactModule.createElement("UIPadding", {
+							PaddingLeft = UDim.new(0, UseLayoutValuesResult.TeamEntryTextPadding)
+						})
 					})
 				})
 			})
 		}
 		
-		if fFlagPlayerListFixLeaderstatsStacking then
-			for i, v in var5 do
-				if maxLeaderstats >= v.order(false) then
-					t_1["GameStat_" .. i] = reactModule.createElement(statEntryContainerModule, {
+		if FFlagPlayerListFixLeaderstatsStacking then
+			for StatName1, value1 in UseSignalStateResult do
+				if MaxLeaderstats >= value1.order(false) then
+					Elements1["GameStat_" .. StatName1] = ReactModule.createElement(StatEntryContainerModule, {
 						isTeamEntry = true,
 						showStatTitle = false,
 						doubleOverlay = false,
-						statName = i,
-						stat = p1.teamStats.getData(i, false),
-						backgroundStyle = var4,
-						overlayStyle = t,
-						textStyle = textEmphasis
+						statName = StatName1,
+						stat = p1.teamStats.getData(StatName1, false),
+						backgroundStyle = UseMemoResult,
+						overlayStyle = OverlayStyle,
+						textStyle = TextEmphasis
 					})
 				end
 			end
-		elseif p1.gameStatsCount and p1.teamStatsCount and (p1.gameStatsCount > 0 and p1.teamStatsCount >= 0) then
-			p1.gameStats.iterateData(function(p2, p3)
-				-- upvalues: maxLeaderstats (ref), p1 (ref), t_1 (ref), reactModule (copy), statEntryContainerModule (copy), var4 (ref), t (ref), textEmphasis (write)
-				if maxLeaderstats < p3.order(false) then
+		elseif p1.gameStatsCount and p1.teamStatsCount and p1.gameStatsCount > 0 and p1.teamStatsCount >= 0 then
+			p1.gameStats.iterateData(function(StatName, p2) --[[ Line: 275 ]]
+				-- upvalues: MaxLeaderstats (copy), p1 (copy), Elements1 (copy), ReactModule (upval), StatEntryContainerModule (upval), UseMemoResult (copy), OverlayStyle (copy), TextEmphasis (ref)
+				if MaxLeaderstats >= p2.order(false) then
+					Elements1["GameStat_" .. StatName] = ReactModule.createElement(StatEntryContainerModule, {
+						isTeamEntry = true,
+						showStatTitle = false,
+						doubleOverlay = false,
+						statName = StatName,
+						stat = p1.teamStats.getData(StatName, false),
+						backgroundStyle = UseMemoResult,
+						overlayStyle = OverlayStyle,
+						textStyle = TextEmphasis
+					})
+					
 					return
 				end
-				t_1["GameStat_" .. p3] = reactModule.createElement(statEntryContainerModule, {
-					isTeamEntry = true,
-					showStatTitle = false,
-					doubleOverlay = false,
-					statName = p2,
-					stat = p1.teamStats.getData(p2, false),
-					backgroundStyle = var4,
-					overlayStyle = t,
-					textStyle = textEmphasis
-				})
 			end, false)
 		end
-		if not isDirectionalPreferred then
-			t_1.BackgroundExtender = reactModule.createElement(cellExtenderModule, {
+		if not IsDirectionalPreferred then
+			Elements1.BackgroundExtender = ReactModule.createElement(CellExtenderModule, {
 				layoutOrder = 100,
 				doubleOverlay = false,
-				size = UDim2.new(0, var1.ExtraContainerPadding, 1, 0),
-				backgroundStyle = var4,
-				overlayStyle = t
+				size = UDim2.new(0, UseLayoutValuesResult.ExtraContainerPadding, 1, 0),
+				backgroundStyle = UseMemoResult,
+				overlayStyle = OverlayStyle
 			})
 		end
-		return reactModule.createElement("Frame", {
+		return ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			GroupTransparency = nil,
 			Size = p1.size,
 			BackgroundColor3 = Color3.new(1, 1, 1),
 			LayoutOrder = p1.layoutOrder
-		}, t_1)
+		}, Elements1)
 	end
 end)

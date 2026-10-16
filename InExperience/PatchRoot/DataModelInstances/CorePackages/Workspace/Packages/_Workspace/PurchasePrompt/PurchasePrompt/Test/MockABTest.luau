@@ -1,18 +1,16 @@
 ﻿return {
-	new = function(p1)
-		local t = {}
-		p1 = p1 or {}
+	new = function(p1) --[[ Line: 9 ]]
+		local P0 = p1 or {}
 		
-		function t.getLayerData(p2)
-			-- upvalues: p1 (ref)
-			return p1[p2]
-		end
-		
-		function t.logUserLayerExposure(p2)
-			-- upvalues: p1 (ref)
-			return p1[p2]
-		end
-		
-		return t
+		return {
+			getLayerData = function(p2) --[[ Line: 14 ]]
+				-- upvalues: P0 (copy)
+				return P0[p2]
+			end,
+			logUserLayerExposure = function(p2) --[[ Line: 18 ]]
+				-- upvalues: P0 (copy)
+				return P0[p2]
+			end
+		}
 	end
 }

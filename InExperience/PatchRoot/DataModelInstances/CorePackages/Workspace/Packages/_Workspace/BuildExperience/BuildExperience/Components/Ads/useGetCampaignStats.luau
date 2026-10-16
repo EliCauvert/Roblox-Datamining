@@ -1,56 +1,56 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local campaignStatsModule = require(parent.DataHydration.CampaignStats)
-local useSignalState = require(parent.SignalsReact).useSignalState
-local createComputed = signalsModule.createComputed
-local t = {
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local ReactModule = require(Parent.React)
+local CampaignStatsModule = require(Parent.DataHydration.CampaignStats)
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local CreateComputedFunction = require(Parent.Signals).createComputed
+local config = {
 	plays = false,
 	adClicks = false,
 	adViews = false,
 	playtimeSeconds = false
 }
-local var1 = createComputed(function()
+local Computed = CreateComputedFunction(function() --[[ Line: 29 ]]
 	return nil
 end)
-local var2 = createComputed(function()
+local Computed1 = CreateComputedFunction(function(): string --[[ Line: 32 ]]
 	return "NotReady"
 end)
 
-local function hasFailedMetric(p1)
+local function hasFailedMetric(p1) --[[ Line: 36 ]]
 	if p1 == nil then
 		return false
+	else
+		local FailedMetrics = p1.failedMetrics
+		
+		return FailedMetrics.plays or (FailedMetrics.adClicks or (FailedMetrics.adViews or FailedMetrics.playtimeSeconds))
 	end
-	local failedMetrics = p1.failedMetrics
-	
-	return failedMetrics.plays or (failedMetrics.adClicks or (failedMetrics.adViews or failedMetrics.playtimeSeconds))
 end
 
-return function(p1, p2)
-	-- upvalues: campaignStatsModule (ref), reactModule (ref), hasFailedMetric (ref), useSignalState (ref), var1 (ref), var2 (ref), t (ref)
-	local current
-	p2 = p2 or campaignStatsModule.getCampaignStatsStore(false)
-	local var3 = p1 ~= nil and p1 ~= 0
-	local var4 = reactModule.useRef(nil)
-	local var5 = nil
+return function(UniverseId, p1) --[[ Line: 44 | Named "useGetCampaignStats" ]]
+	-- upvalues: CampaignStatsModule (copy), ReactModule (copy), hasFailedMetric (copy), UseSignalStateFunction (copy), Computed (copy), Computed1 (copy), config (copy)
+	local P2 = p1 or CampaignStatsModule.getCampaignStatsStore(false)
+	local IsNotUniverseIdMatch: boolean = UniverseId ~= nil and UniverseId ~= 0
+	local UseRefResult = ReactModule.useRef(nil)
+	local v1 = nil
 	
-	if var3 then
-		current = var4.current
+	if IsNotUniverseIdMatch then
+		local Current = UseRefResult.current
 		
-		if current == nil or current.store ~= p2 or current.universeId ~= p1 then
-			var5 = hasFailedMetric
-			var4.current = { store = p2, universeId = p1 }
+		if Current == nil or Current.store ~= P2 or Current.universeId ~= UniverseId then
+			v1 = hasFailedMetric
+			UseRefResult.current = { store = P2, universeId = UniverseId }
 		end
 	else
-		var4.current = nil
+		UseRefResult.current = nil
 	end
-	current = if var3 then p2.getAndFetchCampaignStats(p1, var5) else nil
-	local var6 = useSignalState(if current ~= nil then var1 else current.data)
-	local var7 = useSignalState(if current ~= nil then var2 else current.status)
-	local var8 = if var6 ~= nil then nil else var6.byCampaign
+	local AndFetchCampaignStats = if IsNotUniverseIdMatch then P2.getAndFetchCampaignStats(UniverseId, v1) else nil
+	local UseSignalStateResult = UseSignalStateFunction(if AndFetchCampaignStats == nil then Computed else AndFetchCampaignStats.data)
+	local UseSignalStateResult1 = UseSignalStateFunction(if AndFetchCampaignStats == nil then Computed1 else AndFetchCampaignStats.status)
+	local ByCampaign = if UseSignalStateResult == nil then nil else UseSignalStateResult.byCampaign
 	
-	if var6 == nil then
-		return var8, var7, t
+	if UseSignalStateResult == nil then
+		return ByCampaign, UseSignalStateResult1, config
+	else
+		return ByCampaign, UseSignalStateResult1, UseSignalStateResult.failedMetrics
 	end
-	return var8, var7, var6.failedMetrics
 end

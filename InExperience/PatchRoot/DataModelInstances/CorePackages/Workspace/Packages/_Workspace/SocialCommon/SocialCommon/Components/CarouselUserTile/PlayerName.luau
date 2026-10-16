@@ -1,42 +1,42 @@
-﻿local parent = script:FindFirstAncestor("SocialCommon").Parent
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local UIBloxModule = require(parent.UIBlox)
-local getTextSize = require(parent.Style).GetTextSize
-local foundationFontFaceMigration = require(parent.Foundation).Utility.Flags.FoundationFontFaceMigration
-local styledTextLabel = UIBloxModule.App.Text.StyledTextLabel
-local useStyle = UIBloxModule.Core.Style.useStyle
-local text = require(parent.AppCommonLib).Text
-local t = { width = require(script.Parent.Constants).TILE_SIZE }
+﻿local Parent = script:FindFirstAncestor("SocialCommon").Parent
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local UIBloxModule = require(Parent.UIBlox)
+local GetTextSizeFunction = require(Parent.Style).GetTextSize
+local FoundationFontFaceMigration = require(Parent.Foundation).Utility.Flags.FoundationFontFaceMigration
+local StyledTextLabel = UIBloxModule.App.Text.StyledTextLabel
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local Text = require(Parent.AppCommonLib).Text
+local config = { width = require(script.Parent.Constants).TILE_SIZE }
 
-return function(p1)
-	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), foundationFontFaceMigration (ref), reactModule (ref), getTextSize (ref), text (ref), styledTextLabel (ref)
-	local var1 = cryoModule.Dictionary.join(t, p1)
-	local var2 = useStyle()
-	local font = var2.Font
+return function(p1) --[[ Line: 28 ]]
+	-- upvalues: CryoModule (copy), config (copy), UseStyleFunction (copy), FoundationFontFaceMigration (copy), ReactModule (copy), GetTextSizeFunction (copy), Text (copy), StyledTextLabel (copy)
+	local JoinResult = CryoModule.Dictionary.join(config, p1)
+	local UseStyleResult = UseStyleFunction()
+	local UseStyleResultFont = UseStyleResult.Font
 	
-	return reactModule.createElement(styledTextLabel, {
+	return ReactModule.createElement(StyledTextLabel, {
 		lineHeight = 1,
 		fluidSizing = false,
 		richText = true,
-		layoutOrder = var1.layoutOrder,
-		text = var1.name,
-		fontStyle = font.CaptionHeader,
-		colorStyle = var2.Theme.TextEmphasis,
-		size = UDim2.fromOffset(var1.width, if foundationFontFaceMigration then reactModule.useMemo(function()
-			-- upvalues: getTextSize (copy), var1 (ref), font (ref), var2 (ref)
-			return getTextSize(var1.name, font.BaseSize * font.CaptionHeader.RelativeSize, var2.Tokens.Typography.CaptionLarge.Font, Vector2.new(10000, 10000)).Y
+		layoutOrder = JoinResult.layoutOrder,
+		text = JoinResult.name,
+		fontStyle = UseStyleResultFont.CaptionHeader,
+		colorStyle = UseStyleResult.Theme.TextEmphasis,
+		size = UDim2.fromOffset(JoinResult.width, if FoundationFontFaceMigration then ReactModule.useMemo(function() --[[ Line: 38 ]]
+			-- upvalues: GetTextSizeFunction (upval), JoinResult (copy), UseStyleResultFont (copy), UseStyleResult (copy)
+			return GetTextSizeFunction(JoinResult.name, UseStyleResultFont.BaseSize * UseStyleResultFont.CaptionHeader.RelativeSize, UseStyleResult.Tokens.Typography.CaptionLarge.Font, Vector2.new(10000, 10000)).Y
 		end, {
-			var1.name,
-			font.BaseSize * font.CaptionHeader.RelativeSize,
-			var2.Tokens.Typography.CaptionLarge.Font
-		}) else reactModule.useMemo(function()
-			-- upvalues: text (copy), var1 (ref), font (ref)
-			return text.GetTextHeight(var1.name, font.CaptionHeader.Font, font.BaseSize * font.CaptionHeader.RelativeSize, 10000)
+			JoinResult.name,
+			UseStyleResultFont.BaseSize * UseStyleResultFont.CaptionHeader.RelativeSize,
+			UseStyleResult.Tokens.Typography.CaptionLarge.Font
+		}) else ReactModule.useMemo(function() --[[ Line: 53 ]]
+			-- upvalues: Text (upval), JoinResult (copy), UseStyleResultFont (copy)
+			return Text.GetTextHeight(JoinResult.name, UseStyleResultFont.CaptionHeader.Font, UseStyleResultFont.BaseSize * UseStyleResultFont.CaptionHeader.RelativeSize, 10000)
 		end, {
-			var1.name,
-			font.CaptionHeader.Font,
-			font.BaseSize * font.CaptionHeader.RelativeSize
+			JoinResult.name,
+			UseStyleResultFont.CaptionHeader.Font,
+			UseStyleResultFont.BaseSize * UseStyleResultFont.CaptionHeader.RelativeSize
 		})),
 		textTruncate = Enum.TextTruncate.AtEnd,
 		textXAlignment = Enum.TextXAlignment.Left,

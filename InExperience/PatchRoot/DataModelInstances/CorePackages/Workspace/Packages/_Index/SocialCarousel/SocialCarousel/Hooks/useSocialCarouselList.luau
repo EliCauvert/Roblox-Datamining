@@ -1,116 +1,134 @@
-﻿local socialCarousel = script:FindFirstAncestor("SocialCarousel")
-local thirdPartyUserService = game:GetService("ThirdPartyUserService")
-local parent = socialCarousel.Parent
-local friendsCommonModule = require(parent.FriendsCommon)
-local gameJoinCardModule = require(parent.GameJoinCard)
-local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local roactUtilsModule = require(parent.RoactUtils)
-local responsiveModule = require(parent.Responsive)
-local useFriendsListOrderedByPresence = friendsCommonModule.Hooks.useFriendsListOrderedByPresence
-local usePrefetchInGameFriendsMedia = gameJoinCardModule.usePrefetchInGameFriendsMedia
-local useGetRecommendationsModule = require(socialCarousel.Hooks.useGetRecommendations)
-local getDeepValueModule = require(socialCarousel.Utils.getDeepValue)
-local enumsModule = require(socialCarousel.Common.Enums)
-local constantsModule = require(socialCarousel.Common.Constants)
-local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
-local usePreferredInput = responsiveModule.usePreferredInput
-local useIsSpatial = responsiveModule.useIsSpatial
-local useGetFriendsCountByUserId = require(parent.FriendsHydrationReact).useGetFriendsCountByUserId
-local fIntSocialCarouselShowRecsLimit = require(socialCarousel.Flags).FIntSocialCarouselShowRecsLimit
-local fFlagSocialCarouselShowLoadingSkeletonModule = require(socialCarousel.Flags.FFlagSocialCarouselShowLoadingSkeleton)
-local fFlagSocialCarouselShareQREnabled = require(parent.SharedFlags).FFlagSocialCarouselShareQREnabled
-local fIntFriendsCarouselInitialFetchSize = require(parent.SharedFlags).FIntFriendsCarouselInitialFetchSize
-local fFlagEnableRecommendationsForPCGDK = require(parent.SharedFlags).FFlagEnableRecommendationsForPCGDK
-local fFlagFixIsConsoleCheckForSocialCarousel = require(parent.SharedFlags).FFlagFixIsConsoleCheckForSocialCarousel
-local prefetchFriendGameMedia = game:DefineFastFlag("PrefetchFriendGameMedia", false)
-local fFlagFriendsCountDataHydrationMigrationEnabled = require(parent.SharedFlags).FFlagFriendsCountDataHydrationMigrationEnabled
-local tile = enumsModule.Tile
-local tileGroup = enumsModule.TileGroup
+﻿local SocialCarousel = script:FindFirstAncestor("SocialCarousel")
+local ThirdPartyUserService = game:GetService("ThirdPartyUserService")
+local Parent = SocialCarousel.Parent
+local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local ResponsiveModule = require(Parent.Responsive)
+local UseFriendsListOrderedByPresenceFunction = require(Parent.FriendsCommon).Hooks.useFriendsListOrderedByPresence
+local UsePrefetchInGameFriendsMediaFunction = require(Parent.GameJoinCard).usePrefetchInGameFriendsMedia
+local UseGetRecommendationsModule = require(SocialCarousel.Hooks.useGetRecommendations)
+local GetDeepValueModule = require(SocialCarousel.Utils.getDeepValue)
+local EnumsModule = require(SocialCarousel.Common.Enums)
+local ConstantsModule = require(SocialCarousel.Common.Constants)
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local UsePreferredInputFunction = ResponsiveModule.usePreferredInput
+local UseIsSpatialFunction = ResponsiveModule.useIsSpatial
+local UseGetFriendsCountByUserIdFunction = require(Parent.FriendsHydrationReact).useGetFriendsCountByUserId
+local FIntSocialCarouselShowRecsLimit = require(SocialCarousel.Flags).FIntSocialCarouselShowRecsLimit
+local FFlagSocialCarouselShowLoadingSkeletonModule = require(SocialCarousel.Flags.FFlagSocialCarouselShowLoadingSkeleton)
+local FFlagSocialCarouselShareQREnabled = require(Parent.SharedFlags).FFlagSocialCarouselShareQREnabled
+local FIntFriendsCarouselInitialFetchSize = require(Parent.SharedFlags).FIntFriendsCarouselInitialFetchSize
+local FFlagEnableRecommendationsForPCGDK = require(Parent.SharedFlags).FFlagEnableRecommendationsForPCGDK
+local FFlagFixIsConsoleCheckForSocialCarousel = require(Parent.SharedFlags).FFlagFixIsConsoleCheckForSocialCarousel
+local PrefetchFriendGameMedia = game:DefineFastFlag("PrefetchFriendGameMedia", false)
+local FFlagFriendsCountDataHydrationMigrationEnabled = require(Parent.SharedFlags).FFlagFriendsCountDataHydrationMigrationEnabled
+local Tile = EnumsModule.Tile
+local TileGroup = EnumsModule.TileGroup
 local list = {
-	{ tileGroup = tileGroup.AddFriends },
-	{ tileGroup = tileGroup.FriendsListWithRecommendations }
+	{ tileGroup = TileGroup.AddFriends },
+	{ tileGroup = TileGroup.FriendsListWithRecommendations }
 }
-local t = { skipFetch = true }
+local config = { skipFetch = true }
 
-return function(p1, p2)
-	-- upvalues: list (ref), useLocalUserId (ref), useGetRecommendationsModule (ref), useFriendsListOrderedByPresence (ref), fIntFriendsCarouselInitialFetchSize (ref), prefetchFriendGameMedia (ref), usePrefetchInGameFriendsMedia (ref), fFlagFixIsConsoleCheckForSocialCarousel (ref), usePreferredInput (ref), responsiveModule (ref), fFlagEnableRecommendationsForPCGDK (ref), thirdPartyUserService (ref), fFlagSocialCarouselShareQREnabled (ref), useIsSpatial (ref), useSelector (ref), fFlagFriendsCountDataHydrationMigrationEnabled (ref), getDeepValueModule (ref), constantsModule (ref), useGetFriendsCountByUserId (ref), t (ref), fIntSocialCarouselShowRecsLimit (ref), reactModule (ref), tileGroup (ref), tile (ref), cryoModule (ref), fFlagSocialCarouselShowLoadingSkeletonModule (ref)
-	local var1
-	p2 = p2 or list
-	local var2 = useLocalUserId()
-	local var3 = useGetRecommendationsModule(var2)
-	local var4 = useFriendsListOrderedByPresence({
-		userId = var2,
-		pageSize = fIntFriendsCarouselInitialFetchSize
+return function(p1, p2) --[[ Line: 52 ]]
+	-- upvalues: list (copy), UseLocalUserIdFunction (copy), UseGetRecommendationsModule (copy), UseFriendsListOrderedByPresenceFunction (copy), FIntFriendsCarouselInitialFetchSize (copy), PrefetchFriendGameMedia (copy), UsePrefetchInGameFriendsMediaFunction (copy), FFlagFixIsConsoleCheckForSocialCarousel (copy), UsePreferredInputFunction (copy), ResponsiveModule (copy), FFlagEnableRecommendationsForPCGDK (copy), ThirdPartyUserService (copy), FFlagSocialCarouselShareQREnabled (copy), UseIsSpatialFunction (copy), UseSelectorFunction (copy), FFlagFriendsCountDataHydrationMigrationEnabled (copy), GetDeepValueModule (copy), ConstantsModule (copy), UseGetFriendsCountByUserIdFunction (copy), config (copy), FIntSocialCarouselShowRecsLimit (copy), ReactModule (copy), TileGroup (copy), Tile (copy), CryoModule (copy), FFlagSocialCarouselShowLoadingSkeletonModule (copy)
+	local P1 = p2 or list
+	local UseLocalUserIdResult = UseLocalUserIdFunction()
+	local UseGetRecommendationsModuleResult = UseGetRecommendationsModule(UseLocalUserIdResult)
+	local UseFriendsListOrderedByPresenceResult = UseFriendsListOrderedByPresenceFunction({
+		userId = UseLocalUserIdResult,
+		pageSize = FIntFriendsCarouselInitialFetchSize
 	})
 	
-	if prefetchFriendGameMedia then
-		usePrefetchInGameFriendsMedia(var4.onlineFriends)
+	if PrefetchFriendGameMedia then
+		UsePrefetchInGameFriendsMediaFunction(UseFriendsListOrderedByPresenceResult.onlineFriends)
 	end
-	if fFlagFixIsConsoleCheckForSocialCarousel then
-		local _ = usePreferredInput() == responsiveModule.Input.Directional
-	var1 = if fFlagEnableRecommendationsForPCGDK and thirdPartyUserService then thirdPartyUserService:HaveActiveUser() else usePreferredInput() == responsiveModule.Input.Directional
-	local var5 = if fFlagSocialCarouselShareQREnabled then useIsSpatial() else false
-	local var6 = useSelector(function(p3)
-		-- upvalues: fFlagFriendsCountDataHydrationMigrationEnabled (copy), getDeepValueModule (copy), p1 (ref), constantsModule (copy), var2 (ref)
+	local IsUsePreferredInputResultMatch = if FFlagFixIsConsoleCheckForSocialCarousel then UsePreferredInputFunction() == ResponsiveModule.Input.Directional elseif FFlagEnableRecommendationsForPCGDK and ThirdPartyUserService then ThirdPartyUserService:HaveActiveUser() else UsePreferredInputFunction() == ResponsiveModule.Input.Directional
+	local UseIsSpatialResult = if FFlagSocialCarouselShareQREnabled then UseIsSpatialFunction() else false
+	local UseSelectorResult = UseSelectorFunction(function(p3) --[[ Line: 71 ]]
+		-- upvalues: FFlagFriendsCountDataHydrationMigrationEnabled (upval), GetDeepValueModule (upval), p1 (copy), ConstantsModule (upval), UseLocalUserIdResult (copy)
 		return {
-			friendCount = if fFlagFriendsCountDataHydrationMigrationEnabled then nil else getDeepValueModule(p3, string.format("%s.Friends.countsByUserId.%s", p1 or constantsModule.RODUX_KEY, var2 or "")) or 0,
-			friendRequestCount = getDeepValueModule(p3, string.format("%s.Friends.requests.receivedCount", p1 or constantsModule.RODUX_KEY)) or 0
+			friendCount = if FFlagFriendsCountDataHydrationMigrationEnabled then nil else GetDeepValueModule(p3, string.format("%s.Friends.countsByUserId.%s", p1 or ConstantsModule.RODUX_KEY, UseLocalUserIdResult or "")) or 0,
+			friendRequestCount = GetDeepValueModule(p3, string.format("%s.Friends.requests.receivedCount", p1 or ConstantsModule.RODUX_KEY)) or 0
 		}
 	end)
-	local var7 = if fFlagFriendsCountDataHydrationMigrationEnabled then useGetFriendsCountByUserId(tostring(var2 or ""), t) or 0 else var6.friendCount
-	local var8 = var1 and var7 <= fIntSocialCarouselShowRecsLimit
-	local var9 = var7 == 0 and not var1
-	local var10 = fFlagSocialCarouselShareQREnabled and (var7 == 0 and (not var1 and not var5))
-	local var11 = reactModule.useMemo(function()
-		-- upvalues: tileGroup (copy), var4 (ref), tile (copy), var8 (ref), var3 (ref), var10 (ref), var9 (ref)
+	local UseGetFriendsCountByUserIdResult = if FFlagFriendsCountDataHydrationMigrationEnabled then UseGetFriendsCountByUserIdFunction(tostring(UseLocalUserIdResult or ""), config) or 0 else UseSelectorResult.friendCount
+	local IsUseGetFriendsCountByUserIdResultBelow: boolean = IsUsePreferredInputResultMatch and UseGetFriendsCountByUserIdResult <= FIntSocialCarouselShowRecsLimit
+	local NoIsUsePreferredInputResultMatch: boolean = UseGetFriendsCountByUserIdResult == 0 and not IsUsePreferredInputResultMatch
+	local NoUseIsSpatialResult: boolean = FFlagSocialCarouselShareQREnabled and (UseGetFriendsCountByUserIdResult == 0 and (not IsUsePreferredInputResultMatch and not UseIsSpatialResult))
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 100 ]]
+		-- upvalues: TileGroup (upval), UseFriendsListOrderedByPresenceResult (copy), Tile (upval), IsUseGetFriendsCountByUserIdResultBelow (copy), UseGetRecommendationsModuleResult (copy), NoUseIsSpatialResult (copy), NoIsUsePreferredInputResultMatch (copy)
 		return {
-			[tileGroup.FriendsList] = {
-				{ tiles = var4.onlineFriends, tileType = tile.Friend },
-				{ tiles = var4.offlineFriends, tileType = tile.Friend }
+			[TileGroup.FriendsList] = {
+				{
+					tiles = UseFriendsListOrderedByPresenceResult.onlineFriends,
+					tileType = Tile.Friend
+				},
+				{
+					tiles = UseFriendsListOrderedByPresenceResult.offlineFriends,
+					tileType = Tile.Friend
+				}
 			},
-			[tileGroup.FriendsListWithRecommendations] = {
-				{ tiles = var4.onlineFriends, tileType = tile.Friend },
-				if var8 then { tiles = var3, tileType = tile.Recommendation } else nil,
-				{ tiles = var4.offlineFriends, tileType = tile.Friend }
+			[TileGroup.FriendsListWithRecommendations] = {
+				{
+					tiles = UseFriendsListOrderedByPresenceResult.onlineFriends,
+					tileType = Tile.Friend
+				},
+				if IsUseGetFriendsCountByUserIdResultBelow then {
+					tiles = UseGetRecommendationsModuleResult,
+					tileType = Tile.Recommendation
+				} else nil,
+				{
+					tiles = UseFriendsListOrderedByPresenceResult.offlineFriends,
+					tileType = Tile.Friend
+				}
 			},
-			[tileGroup.AddFriends] = {
-				{ tileType = tile.AddFriends },
-				if var10 then { tileType = tile.ShareQR } else nil,
-				if var9 then { tileType = tile.FriendsHint } else nil
+			[TileGroup.AddFriends] = {
+				{ tileType = Tile.AddFriends },
+				if NoUseIsSpatialResult then { tileType = Tile.ShareQR } else nil,
+				if NoIsUsePreferredInputResultMatch then { tileType = Tile.FriendsHint } else nil
 			},
-			[tileGroup.StartSquad] = { { tileType = tile.StartSquad } }
+			[TileGroup.StartSquad] = { { tileType = Tile.StartSquad } }
 		}
 	end, {
-		var4.onlineFriends, var4.offlineFriends, var3, var8, var9,
-		if fFlagSocialCarouselShareQREnabled then var10 else nil
+		UseFriendsListOrderedByPresenceResult.onlineFriends,
+		UseFriendsListOrderedByPresenceResult.offlineFriends,
+		UseGetRecommendationsModuleResult, IsUseGetFriendsCountByUserIdResultBelow,
+		NoIsUsePreferredInputResultMatch,
+		if FFlagSocialCarouselShareQREnabled then NoUseIsSpatialResult else nil
 	})
 	
 	return {
-		tiles = reactModule.useMemo(function()
-			-- upvalues: p2 (ref), var11 (ref), cryoModule (copy)
-			local t = {}
+		tiles = ReactModule.useMemo(function() --[[ Line: 133 ]]
+			-- upvalues: P1 (copy), UseMemoResult (copy), CryoModule (upval)
+			local List = {}
 			
-			for i, v in p2 do
-				for i_1, v_1 in var11[v.tileGroup] do
-					if v_1 then
-						if v_1.tiles then
-							for i_2, v_2 in v_1.tiles do
-								table.insert(t, cryoModule.Dictionary.join(v_2, { tileType = v_1.tileType, onActivated = v.onActivated }))
-							end
-						else
-							table.insert(t, { tileType = v_1.tileType, onActivated = v.onActivated })
+			for _, value in P1 do
+				for _, value1 in UseMemoResult[value.tileGroup] do
+					if value1 then
+						if not value1.tiles then
+							table.insert(List, {
+								tileType = value1.tileType,
+								onActivated = value.onActivated
+							})
+							continue
+						end
+						for _, tile in value1.tiles do
+							table.insert(List, CryoModule.Dictionary.join(tile, {
+								tileType = value1.tileType,
+								onActivated = value.onActivated
+							}))
 						end
 					end
 				end
 			end
-			return t
-		end, { var11, p2 }),
-		friendCount = var7,
-		friendRequestCount = var6.friendRequestCount,
-		recommendationCount = #var3,
-		refreshFriendsList = var4.refreshFriendsData,
-		isLoading = fFlagSocialCarouselShowLoadingSkeletonModule and var4.isLoading
+			return List
+		end, { UseMemoResult, P1 }),
+		friendCount = UseGetFriendsCountByUserIdResult,
+		friendRequestCount = UseSelectorResult.friendRequestCount,
+		recommendationCount = #UseGetRecommendationsModuleResult,
+		refreshFriendsList = UseFriendsListOrderedByPresenceResult.refreshFriendsData,
+		isLoading = FFlagSocialCarouselShowLoadingSkeletonModule and UseFriendsListOrderedByPresenceResult.isLoading
 	}
 end

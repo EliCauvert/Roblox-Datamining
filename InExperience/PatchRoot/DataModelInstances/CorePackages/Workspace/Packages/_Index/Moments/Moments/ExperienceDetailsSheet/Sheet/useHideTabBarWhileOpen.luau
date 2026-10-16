@@ -1,21 +1,21 @@
-﻿local parent = script:FindFirstAncestor("Moments").Parent
-local reactModule = require(parent.React)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local setTabBarVisible = require(parent.AppTabBarRodux).Actions.SetTabBarVisible
+﻿local Parent = script:FindFirstAncestor("Moments").Parent
+local ReactModule = require(Parent.React)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local SetTabBarVisibleFunction = require(Parent.AppTabBarRodux).Actions.SetTabBarVisible
 
-return function(p1)
-	-- upvalues: useDispatch (ref), reactModule (ref), setTabBarVisible (ref)
-	local var1 = useDispatch()
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var1 (ref), setTabBarVisible (copy)
+return function(p1) --[[ Line: 22 | Named "useHideTabBarWhileOpen" ]]
+	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), SetTabBarVisibleFunction (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	ReactModule.useEffect(function() --[[ Line: 27 ]]
+		-- upvalues: p1 (copy), UseDispatchResult (copy), SetTabBarVisibleFunction (upval)
 		if p1 then
-			var1(setTabBarVisible(false))
+			UseDispatchResult(SetTabBarVisibleFunction(false))
 		end
-		return function()
-			-- upvalues: p1 (copy), var1 (copy), setTabBarVisible (copy)
+		return function() --[[ Line: 32 ]]
+			-- upvalues: p1 (upval), UseDispatchResult (upval), SetTabBarVisibleFunction (upval)
 			if p1 then
-				var1(setTabBarVisible(true))
+				UseDispatchResult(SetTabBarVisibleFunction(true))
 			end
 		end
-	end, { p1, var1 })
+	end, { p1, UseDispatchResult })
 end

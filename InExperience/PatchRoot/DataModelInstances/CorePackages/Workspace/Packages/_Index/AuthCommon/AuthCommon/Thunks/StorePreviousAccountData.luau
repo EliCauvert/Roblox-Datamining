@@ -1,30 +1,30 @@
-﻿local authCommon = script:FindFirstAncestor("AuthCommon")
-local appStorageUtilitiesModule = require(authCommon.Utils.AppStorageUtilities)
-local userModule = require(authCommon.Thunks.User)
-local parent = authCommon.Parent
-local cryoModule = require(parent.Cryo)
-local fFlagFixPreviousAccountsListEntries = require(parent.SharedFlags).FFlagFixPreviousAccountsListEntries
+﻿local AuthCommon = script:FindFirstAncestor("AuthCommon")
+local AppStorageUtilitiesModule = require(AuthCommon.Utils.AppStorageUtilities)
+local UserModule = require(AuthCommon.Thunks.User)
+local Parent = AuthCommon.Parent
+local CryoModule = require(Parent.Cryo)
+local FFlagFixPreviousAccountsListEntries = require(Parent.SharedFlags).FFlagFixPreviousAccountsListEntries
 
-return function()
-	-- upvalues: userModule (ref), appStorageUtilitiesModule (ref), fFlagFixPreviousAccountsListEntries (ref), cryoModule (ref)
-	local var1 = userModule.fromLocalStorage()
+return function() --[[ Line: 8 ]]
+	-- upvalues: UserModule (copy), AppStorageUtilitiesModule (copy), FFlagFixPreviousAccountsListEntries (copy), CryoModule (copy)
+	local FromLocalStorageResult = UserModule.fromLocalStorage()
 	
-	if var1 == nil or var1.userId == -1 then return end
-	if var1.username == nil or var1.username == "" then return end
-	local previousAccountsList = appStorageUtilitiesModule.getPreviousAccountsList()
-	local var2 = tostring(var1.userId)
-	local t = {
-		username = var1.username,
-		displayName = if var1.displayName and var1.displayName ~= "nil" then var1.displayName else "",
+	if FromLocalStorageResult == nil or FromLocalStorageResult.userId == -1 then return end
+	if FromLocalStorageResult.username == nil or FromLocalStorageResult.username == "" then return end
+	local PreviousAccountsList = AppStorageUtilitiesModule.getPreviousAccountsList()
+	local Text = tostring(FromLocalStorageResult.userId)
+	local config = {
+		username = FromLocalStorageResult.username,
+		displayName = if FromLocalStorageResult.displayName and FromLocalStorageResult.displayName ~= "nil" then FromLocalStorageResult.displayName else "",
 		timestamp = os.time()
 	}
 	
-	if fFlagFixPreviousAccountsListEntries then
-		t.userId = var2
-		previousAccountsList[var2] = cryoModule.Dictionary.join(previousAccountsList[var2] or {}, t)
+	if FFlagFixPreviousAccountsListEntries then
+		config.userId = Text
+		PreviousAccountsList[Text] = CryoModule.Dictionary.join(PreviousAccountsList[Text] or {}, config)
 	else
-		previousAccountsList[var2] = t
+		PreviousAccountsList[Text] = config
 	end
-	appStorageUtilitiesModule.setPreviousAccountsList(previousAccountsList)
-	appStorageUtilitiesModule.flush()
+	AppStorageUtilitiesModule.setPreviousAccountsList(PreviousAccountsList)
+	AppStorageUtilitiesModule.flush()
 end

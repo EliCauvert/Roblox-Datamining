@@ -1,69 +1,68 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local foundationModule = require(parent_1.Foundation)
-local signalsReactModule = require(parent_1.SignalsReact)
-local useTokens = foundationModule.Hooks.useTokens
-local useScaledValue = foundationModule.Hooks.useScaledValue
-local constantsModule = require(parent.Common.Constants)
-local computeMobilePanelSizeModule = require(parent.Common.computeMobilePanelSize)
-local computeDesktopPanelHeightModule = require(parent.Common.computeDesktopPanelHeight)
-local panelContentHeightStoreModule = require(parent.Common.PanelContentHeightStore)
-local layoutValuesContextModule = require(parent.Common.LayoutValuesContext)
-local getDeviceBottomInsetModule = require(parent.Common.getDeviceBottomInset)
-local useViewportSizeModule = require(parent.Hooks.useViewportSize)
-local fFlagPlayerListReskinModule = require(parent.Flags.FFlagPlayerListReskin)
-local fFlagPlayerListFixPlatformLeaderboardSizingModule = require(parent.Flags.FFlagPlayerListFixPlatformLeaderboardSizing)
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local FoundationModule = require(Parent1.Foundation)
+local SignalsReactModule = require(Parent1.SignalsReact)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseScaledValueFunction = FoundationModule.Hooks.useScaledValue
+local ConstantsModule = require(Parent.Common.Constants)
+local ComputeMobilePanelSizeModule = require(Parent.Common.computeMobilePanelSize)
+local ComputeDesktopPanelHeightModule = require(Parent.Common.computeDesktopPanelHeight)
+local PanelContentHeightStoreModule = require(Parent.Common.PanelContentHeightStore)
+local LayoutValuesContextModule = require(Parent.Common.LayoutValuesContext)
+local GetDeviceBottomInsetModule = require(Parent.Common.getDeviceBottomInset)
+local UseViewportSizeModule = require(Parent.Hooks.useViewportSize)
+local FFlagPlayerListReskinModule = require(Parent.Flags.FFlagPlayerListReskin)
+local FFlagPlayerListFixPlatformLeaderboardSizingModule = require(Parent.Flags.FFlagPlayerListFixPlatformLeaderboardSizing)
 
-return function(p1, p2, p3)
-	-- upvalues: useViewportSizeModule (ref), useTokens (ref), reactModule (ref), layoutValuesContextModule (ref), signalsReactModule (ref), panelContentHeightStoreModule (ref), constantsModule (ref), useScaledValue (ref), getDeviceBottomInsetModule (ref), computeMobilePanelSizeModule (ref), fFlagPlayerListReskinModule (ref), fFlagPlayerListFixPlatformLeaderboardSizingModule (ref), computeDesktopPanelHeightModule (ref)
-	local var1, var2
-	local var3 = useViewportSizeModule()
-	local var4 = useTokens()
-	local scale = var4.Config.UI.Scale
-	local topBarOffset = reactModule.useContext(layoutValuesContextModule).TopBarOffset or 0
-	local var5 = signalsReactModule.useSignalState(panelContentHeightStoreModule.getBodyContentHeight)
-	local var6 = constantsModule.HEADER_HEIGHT * scale
-	local var7 = constantsModule.COLUMN_HEADER_HEIGHT * scale
-	local var8 = constantsModule.PLATFORM_ROW_HEIGHT * scale
-	local var9 = constantsModule.ROW_PITCH * scale
-	local var10 = constantsModule.STAT_COLUMN_WIDTH * scale
-	local var11 = constantsModule.PEOPLE_MIN_WIDTH * scale
-	local size200 = var4.Size.Size_200
-	local var12 = useScaledValue(constantsModule.PANEL_SIZE_MIN_CAP)
-	local var13 = useScaledValue(constantsModule.PANEL_SIZE_MAX_CAP)
-	local var14 = if p1 then constantsModule.MOBILE_MAX_STAT_COLUMNS else constantsModule.DESKTOP_MAX_STAT_COLUMNS
-	local var15 = var11 + math.min(p2, var14) * var10
-	local _ = nil
-	local _ = nil
+return function(p1, p2: number, p3) --[[ Line: 31 | Named "usePanelLayout" ]]
+	-- upvalues: UseViewportSizeModule (copy), UseTokensFunction (copy), ReactModule (copy), LayoutValuesContextModule (copy), SignalsReactModule (copy), PanelContentHeightStoreModule (copy), ConstantsModule (copy), UseScaledValueFunction (copy), GetDeviceBottomInsetModule (copy), ComputeMobilePanelSizeModule (copy), FFlagPlayerListReskinModule (copy), FFlagPlayerListFixPlatformLeaderboardSizingModule (copy), ComputeDesktopPanelHeightModule (copy)
+	local UseViewportSizeModuleResult = UseViewportSizeModule()
+	local UseTokensResult = UseTokensFunction()
+	local Scale = UseTokensResult.Config.UI.Scale
+	local TopBarOffset = ReactModule.useContext(LayoutValuesContextModule).TopBarOffset or 0
+	local UseSignalStateResult: number = SignalsReactModule.useSignalState(PanelContentHeightStoreModule.getBodyContentHeight)
+	local ScaledHEADERHEIGHT = ConstantsModule.HEADER_HEIGHT * Scale
+	local ScaledCOLUMNHEADERHEIGHT = ConstantsModule.COLUMN_HEADER_HEIGHT * Scale
+	local ScaledPLATFORMROWHEIGHT = ConstantsModule.PLATFORM_ROW_HEIGHT * Scale
+	local ScaledROWPITCH = ConstantsModule.ROW_PITCH * Scale
+	local ScaledSTATCOLUMNWIDTH = ConstantsModule.STAT_COLUMN_WIDTH * Scale
+	local ScaledPEOPLEMINWIDTH = ConstantsModule.PEOPLE_MIN_WIDTH * Scale
+	local Size200: number = UseTokensResult.Size.Size_200
+	local UseScaledValueResult = UseScaledValueFunction(ConstantsModule.PANEL_SIZE_MIN_CAP)
+	local UseScaledValueResult1 = UseScaledValueFunction(ConstantsModule.PANEL_SIZE_MAX_CAP)
+	local MOBILEMAXSTATCOLUMNS = if p1 then ConstantsModule.MOBILE_MAX_STAT_COLUMNS else ConstantsModule.DESKTOP_MAX_STAT_COLUMNS
+	local NewScaledPEOPLEMINWIDTH = ScaledPEOPLEMINWIDTH + math.min(p2, MOBILEMAXSTATCOLUMNS) * ScaledSTATCOLUMNWIDTH
+	local Y = nil
+	local X = nil
 	
 	if p1 then
-		local maxValue = math.max(constantsModule.MOBILE_EDGE_GAP, constantsModule.MOBILE_EDGE_GAP * scale)
-		local var16 = computeMobilePanelSizeModule(var3, var12, var13, topBarOffset + maxValue + getDeviceBottomInsetModule() + maxValue)
-		var1 = var16.X
-		var2 = var16.Y
+		local Largest = math.max(ConstantsModule.MOBILE_EDGE_GAP, ConstantsModule.MOBILE_EDGE_GAP * Scale)
+		local MobilePanelSizeModule = ComputeMobilePanelSizeModule(UseViewportSizeModuleResult, UseScaledValueResult, UseScaledValueResult1, TopBarOffset + Largest + GetDeviceBottomInsetModule() + Largest)
+		X = MobilePanelSizeModule.X
+		Y = MobilePanelSizeModule.Y
 	else
-		var1 = if p3 then constantsModule.PLATFORM_PANEL_WIDTH * scale else 2 * size200 + var15
-		local var17 = var6 + constantsModule.PANEL_HEADER_DIVIDER_HEIGHT * scale
+		X = if p3 then ConstantsModule.PLATFORM_PANEL_WIDTH * Scale else 2 * Size200 + NewScaledPEOPLEMINWIDTH
+		local NewScaledHEADERHEIGHT = ScaledHEADERHEIGHT + ConstantsModule.PANEL_HEADER_DIVIDER_HEIGHT * Scale
 		
-		if fFlagPlayerListReskinModule and p3 then
-			var17 += constantsModule.PANEL_TABS_HEIGHT * scale
+		if FFlagPlayerListReskinModule and p3 then
+			NewScaledHEADERHEIGHT += ConstantsModule.PANEL_TABS_HEIGHT * Scale
 		end
-		local var18 = var17 + var5
-		local var19 = var7 + constantsModule.DESKTOP_MIN_VISIBLE_ROWS * var9
+		local NewNewScaledHEADERHEIGHT = NewScaledHEADERHEIGHT + UseSignalStateResult
+		local NewScaledCOLUMNHEADERHEIGHT = ScaledCOLUMNHEADERHEIGHT + ConstantsModule.DESKTOP_MIN_VISIBLE_ROWS * ScaledROWPITCH
 		
-		if fFlagPlayerListFixPlatformLeaderboardSizingModule and p3 then
-			var19 = math.max(var19, constantsModule.PLATFORM_BODY_MIN_HEIGHT * scale)
+		if FFlagPlayerListFixPlatformLeaderboardSizingModule and p3 then
+			NewScaledCOLUMNHEADERHEIGHT = math.max(NewScaledCOLUMNHEADERHEIGHT, ConstantsModule.PLATFORM_BODY_MIN_HEIGHT * Scale)
 		end
-		var2 = computeDesktopPanelHeightModule(var3.Y, var18, var17 + var19)
+		Y = ComputeDesktopPanelHeightModule(UseViewportSizeModuleResult.Y, NewNewScaledHEADERHEIGHT, NewScaledHEADERHEIGHT + NewScaledCOLUMNHEADERHEIGHT)
 	end
 	return {
-		panelWidth = var1,
-		panelHeight = var2,
-		headerHeight = var6,
-		columnHeaderHeight = var7,
-		rowHeight = var8,
-		statWidth = var10,
-		maxStatColumns = var14
+		panelWidth = X,
+		panelHeight = Y,
+		headerHeight = ScaledHEADERHEIGHT,
+		columnHeaderHeight = ScaledCOLUMNHEADERHEIGHT,
+		rowHeight = ScaledPLATFORMROWHEIGHT,
+		statWidth = ScaledSTATCOLUMNWIDTH,
+		maxStatColumns = MOBILEMAXSTATCOLUMNS
 	}
 end

@@ -1,114 +1,116 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local fFlagAppChatUseProfileFrameThumbnailModule = require(appChat.Flags.FFlagAppChatUseProfileFrameThumbnail)
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local text = require(parent.AppCommonLib).Text
-local getTextSize = require(parent.Style).GetTextSize
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local useUserDataModule = require(appChat.Hooks.useUserData)
-local useTokens = foundationModule.Hooks.useTokens
-local fFlagEnableBlackbirdCheck = require(parent.SharedFlags).FFlagEnableBlackbirdCheck
-local useIsRobloxSubscriber = require(parent.UserProfiles).Hooks.useIsRobloxSubscriber
-local repeated = string.rep("W", 20)
-local t = { showDivider = true }
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local FFlagAppChatUseProfileFrameThumbnailModule = require(AppChat.Flags.FFlagAppChatUseProfileFrameThumbnail)
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local Text = require(Parent.AppCommonLib).Text
+local GetTextSizeFunction = require(Parent.Style).GetTextSize
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local UseUserDataModule = require(AppChat.Hooks.useUserData)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local FFlagEnableBlackbirdCheck = require(Parent.SharedFlags).FFlagEnableBlackbirdCheck
+local UseIsRobloxSubscriberFunction = require(Parent.UserProfiles).Hooks.useIsRobloxSubscriber
+local Repeated = string.rep("W", 20)
+local config = { showDivider = true }
 
-return reactModule.memo(function(p1)
-	-- upvalues: cryoModule (ref), t (ref), useUserDataModule (ref), useTokens (ref), useIsRobloxSubscriber (ref), fFlagEnableBlackbirdCheck (ref), reactModule (ref), foundationFontFaceMigration (ref), getTextSize (ref), repeated (ref), text (ref), foundationModule (ref), fFlagAppChatUseProfileFrameThumbnailModule (ref)
-	local var1 = cryoModule.Dictionary.union(t, p1)
-	local var2 = useUserDataModule(var1.userId)
-	local var3 = useTokens()
-	local var4 = reactModule.useMemo(function()
-		-- upvalues: foundationFontFaceMigration (copy), getTextSize (copy), repeated (copy), var3 (ref), text (copy)
-		local var5 = if foundationFontFaceMigration then getTextSize(repeated, var3.Typography.TitleLarge.FontSize, var3.Typography.TitleLarge.Font, Vector2.zero) else text.GetTextBounds(repeated, var3.Typography.TitleLarge.Font, var3.Typography.TitleLarge.FontSize, Vector2.zero)
+return ReactModule.memo(function(p1) --[[ Line: 35 | Named "ParticipantEntry" ]]
+	-- upvalues: CryoModule (copy), config (copy), UseUserDataModule (copy), UseTokensFunction (copy), UseIsRobloxSubscriberFunction (copy), FFlagEnableBlackbirdCheck (copy), ReactModule (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), Repeated (copy), Text (copy), FoundationModule (copy), FFlagAppChatUseProfileFrameThumbnailModule (copy)
+	local UnionResult = CryoModule.Dictionary.union(config, p1)
+	local UseUserDataModuleResult = UseUserDataModule(UnionResult.userId)
+	local UseTokensResult = UseTokensFunction()
+	local UseIsRobloxSubscriberResult = UseIsRobloxSubscriberFunction(if FFlagEnableBlackbirdCheck then UnionResult.userId else nil)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 42 ]]
+		-- upvalues: UnionResult (copy)
+		if UnionResult.onActivated then
+			UnionResult.onActivated()
+		end
+	end, { UnionResult.onActivated })
+	local UseMemoResult = ReactModule.useMemo(function(): UDim2 --[[ Line: 48 ]]
+		-- upvalues: FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), Repeated (upval), UseTokensResult (copy), Text (upval)
+		local TextSize = if FoundationFontFaceMigration then GetTextSizeFunction(Repeated, UseTokensResult.Typography.TitleLarge.FontSize, UseTokensResult.Typography.TitleLarge.Font, Vector2.zero) else Text.GetTextBounds(Repeated, UseTokensResult.Typography.TitleLarge.Font, UseTokensResult.Typography.TitleLarge.FontSize, Vector2.zero)
 		
-		return UDim2.fromOffset(var5.X, var5.Y)
+		return UDim2.fromOffset(TextSize.X, TextSize.Y)
 	end, {
-		var3.Typography.TitleLarge.Font,
-		var3.Typography.TitleLarge.FontSize
+		UseTokensResult.Typography.TitleLarge.Font,
+		UseTokensResult.Typography.TitleLarge.FontSize
 	})
 	
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		Name = "ParticipantEntryContainer",
 		tag = {
 			["row align-y-center gap-medium size-full padding-x-medium"] = true,
-			["stroke-thin stroke-muted"] = var1.showDivider
+			["stroke-thin stroke-muted"] = UnionResult.showDivider
 		},
-		onActivated = if var1.onActivated then reactModule.useCallback(function()
-			-- upvalues: var1 (ref)
-			if var1.onActivated then
-				var1.onActivated()
-			end
-		end, { var1.onActivated }) else nil
+		onActivated = if UnionResult.onActivated then UseResult else nil
 	}, {
-		Avatar = reactModule.createElement(foundationModule.Avatar, {
+		Avatar = ReactModule.createElement(FoundationModule.Avatar, {
 			LayoutOrder = 1,
-			userId = var2.id,
-			userPresence = var2.presence,
-			size = foundationModule.Enums.InputSize.Medium,
-			backgroundStyle = var3.Color.Shift.Shift_300,
-			includeProfileFrame = fFlagAppChatUseProfileFrameThumbnailModule
+			userId = UseUserDataModuleResult.id,
+			userPresence = UseUserDataModuleResult.presence,
+			size = FoundationModule.Enums.InputSize.Medium,
+			backgroundStyle = UseTokensResult.Color.Shift.Shift_300,
+			includeProfileFrame = FFlagAppChatUseProfileFrameThumbnailModule
 		}),
-		UserInfo = reactModule.createElement(foundationModule.View, { tag = "col fill auto-y clip", LayoutOrder = 2 }, {
-			UserDataSkeleton = reactModule.createElement(foundationModule.Skeleton, {
+		UserInfo = ReactModule.createElement(FoundationModule.View, { tag = "col fill auto-y clip", LayoutOrder = 2 }, {
+			UserDataSkeleton = ReactModule.createElement(FoundationModule.Skeleton, {
 				LayoutOrder = 1,
-				Size = UDim2.new(var4.X, var4.Y + reactModule.useMemo(function()
-					-- upvalues: foundationFontFaceMigration (copy), getTextSize (copy), var3 (ref), text (copy)
-					local var5 = if foundationFontFaceMigration then getTextSize("Roblox Studio", var3.Typography.CaptionMedium.FontSize, var3.Typography.CaptionMedium.Font, Vector2.zero) else text.GetTextBounds("Roblox Studio", var3.Typography.CaptionMedium.Font, var3.Typography.CaptionMedium.FontSize, Vector2.zero)
+				Size = UDim2.new(UseMemoResult.X, UseMemoResult.Y + ReactModule.useMemo(function(): UDim2 --[[ Line: 65 ]]
+					-- upvalues: FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), UseTokensResult (copy), Text (upval)
+					local RobloxStudio = if FoundationFontFaceMigration then GetTextSizeFunction("Roblox Studio", UseTokensResult.Typography.CaptionMedium.FontSize, UseTokensResult.Typography.CaptionMedium.Font, Vector2.zero) else Text.GetTextBounds("Roblox Studio", UseTokensResult.Typography.CaptionMedium.Font, UseTokensResult.Typography.CaptionMedium.FontSize, Vector2.zero)
 					
-					return UDim2.fromOffset(var5.X, var5.Y)
+					return UDim2.fromOffset(RobloxStudio.X, RobloxStudio.Y)
 				end, {
-					var3.Typography.CaptionMedium.Font,
-					var3.Typography.CaptionMedium.FontSize
+					UseTokensResult.Typography.CaptionMedium.Font,
+					UseTokensResult.Typography.CaptionMedium.FontSize
 				}).Y),
-				Visible = var2.isLoading
+				Visible = UseUserDataModuleResult.isLoading
 			}),
-			DisplayName = if fFlagEnableBlackbirdCheck and useIsRobloxSubscriber(if fFlagEnableBlackbirdCheck then var1.userId else nil) then reactModule.createElement(foundationModule.View, {
+			DisplayName = if FFlagEnableBlackbirdCheck and UseIsRobloxSubscriberResult then ReactModule.createElement(FoundationModule.View, {
 				tag = "row align-y-center gap-xxsmall auto-xy",
 				LayoutOrder = 1,
-				Visible = var2.isLoading:map(function(p2)
+				Visible = UseUserDataModuleResult.isLoading:map(function(p2): boolean --[[ Line: 112 ]]
 					return not p2
 				end)
 			}, {
-				NameText = reactModule.createElement(foundationModule.Text, {
+				NameText = ReactModule.createElement(FoundationModule.Text, {
 					tag = "shrink auto-xy text-title-large text-truncate-end content-emphasis",
 					LayoutOrder = 1,
-					Text = var2.combinedName
+					Text = UseUserDataModuleResult.combinedName
 				}),
-				SubscriptionBadge = reactModule.createElement(foundationModule.Icon, {
+				SubscriptionBadge = ReactModule.createElement(FoundationModule.Icon, {
 					LayoutOrder = 2,
-					name = foundationModule.Enums.IconName.RobloxPlus,
-					size = foundationModule.Enums.IconSize.Small,
-					style = var3.Color.Content.Emphasis
+					name = FoundationModule.Enums.IconName.RobloxPlus,
+					size = FoundationModule.Enums.IconSize.Small,
+					style = UseTokensResult.Color.Content.Emphasis
 				})
-			}) else reactModule.createElement(foundationModule.Text, {
+			}) else ReactModule.createElement(FoundationModule.Text, {
 				tag = "auto-xy text-title-large text-truncate-end content-emphasis",
 				LayoutOrder = 1,
-				Text = var2.combinedName,
-				Visible = var2.isLoading:map(function(p2)
+				Text = UseUserDataModuleResult.combinedName,
+				Visible = UseUserDataModuleResult.isLoading:map(function(p2): boolean --[[ Line: 132 ]]
 					return not p2
 				end)
 			}),
-			PresenceText = reactModule.createElement(foundationModule.Text, {
+			PresenceText = ReactModule.createElement(FoundationModule.Text, {
 				tag = "auto-xy text-caption-medium text-truncate-end content-muted",
 				LayoutOrder = 3,
-				Text = if var1.statusText then var2.presenceText:map(function(p2)
-					-- upvalues: var1 (ref)
-					return p2 .. " . " .. var8.statusText
-				end) else var2.presenceText,
-				Visible = var2.isLoading:map(function(p2)
+				Text = if UnionResult.statusText then UseUserDataModuleResult.presenceText:map(function(Text): string --[[ Line: 140 ]]
+					-- upvalues: UnionResult (copy)
+					return Text .. " . " .. UnionResult.statusText
+				end) else UseUserDataModuleResult.presenceText,
+				Visible = UseUserDataModuleResult.isLoading:map(function(p2): boolean --[[ Line: 145 ]]
 					return not p2
 				end)
 			})
 		}),
-		ChildrenContainer = if var1.children then reactModule.createElement(foundationModule.View, {
+		ChildrenContainer = if UnionResult.children then ReactModule.createElement(FoundationModule.View, {
 			tag = "row align-x-right align-y-center auto-y",
 			LayoutOrder = 3,
 			selection = { Selectable = false },
 			stateLayer = {
-				affordance = foundationModule.Enums.StateLayerAffordance.None
+				affordance = FoundationModule.Enums.StateLayerAffordance.None
 			}
-		}, var1.children) else nil
+		}, UnionResult.children) else nil
 	})
 end)

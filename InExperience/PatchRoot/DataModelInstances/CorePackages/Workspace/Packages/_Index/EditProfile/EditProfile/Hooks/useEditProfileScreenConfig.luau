@@ -1,67 +1,65 @@
-﻿local editProfile = script:FindFirstAncestor("EditProfile")
-local parent = editProfile.Parent
-local reactModule = require(parent.React)
-local enumsModule = require(editProfile.Common.Enums)
-local editDisplayNameModule = require(editProfile.Components.EditDisplayName)
-local editBioModule = require(editProfile.Components.EditBio)
-local textKeysModule = require(editProfile.Common.TextKeys)
-local useRealNamesInDisplayNamesEnabledModule = require(editProfile.Hooks.useRealNamesInDisplayNamesEnabled)
-local useNavigation = require(parent.Navigation).useNavigation
-local promiseModule = require(parent.Promise)
-local profileRefreshSignal = require(parent.ProfilePlatformCommon).Signals.ProfileRefreshSignal
-local t = {
-	[enumsModule.Screens.EditDisplayName] = {
-		component = editDisplayNameModule,
-		titleKey = textKeysModule.EditDisplayName
+﻿local EditProfile = script:FindFirstAncestor("EditProfile")
+local Parent = EditProfile.Parent
+local ReactModule = require(Parent.React)
+local EnumsModule = require(EditProfile.Common.Enums)
+local TextKeysModule = require(EditProfile.Common.TextKeys)
+local UseRealNamesInDisplayNamesEnabledModule = require(EditProfile.Hooks.useRealNamesInDisplayNamesEnabled)
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local PromiseModule = require(Parent.Promise)
+local ProfileRefreshSignal = require(Parent.ProfilePlatformCommon).Signals.ProfileRefreshSignal
+local config = {
+	[EnumsModule.Screens.EditDisplayName] = {
+		component = require(EditProfile.Components.EditDisplayName),
+		titleKey = TextKeysModule.EditDisplayName
 	},
-	[enumsModule.Screens.EditBio] = {
-		component = editBioModule,
-		titleKey = textKeysModule.About
+	[EnumsModule.Screens.EditBio] = {
+		component = require(EditProfile.Components.EditBio),
+		titleKey = TextKeysModule.About
 	}
 }
 
-return function(p1)
-	-- upvalues: t (ref), useNavigation (ref), useRealNamesInDisplayNamesEnabledModule (ref), reactModule (ref), profileRefreshSignal (ref), promiseModule (ref), enumsModule (ref), textKeysModule (ref)
-	local var1 = t[p1]
-	local var2 = useNavigation()
-	local var3 = useRealNamesInDisplayNamesEnabledModule()
-	local var4 = reactModule.useRef(nil)
-	local var5, var6 = reactModule.useState(false)
-	local var7, var8 = reactModule.useState(false)
-	local var9 = reactModule.useCallback(function()
-		-- upvalues: profileRefreshSignal (copy), var2 (ref)
-		profileRefreshSignal.notifyProfileRefresh()
-		var2.goBack()
-	end, { var2 })
+return function(EditDisplayName) --[[ Line: 38 ]]
+	-- upvalues: config (copy), UseNavigationFunction (copy), UseRealNamesInDisplayNamesEnabledModule (copy), ReactModule (copy), ProfileRefreshSignal (copy), PromiseModule (copy), EnumsModule (copy), TextKeysModule (copy)
+	local Entry = config[EditDisplayName]
+	local UseNavigationResult = UseNavigationFunction()
+	local UseRealNamesInDisplayNamesEnabledModuleResult = UseRealNamesInDisplayNamesEnabledModule()
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 51 ]]
+		-- upvalues: ProfileRefreshSignal (upval), UseNavigationResult (copy)
+		ProfileRefreshSignal.notifyProfileRefresh()
+		UseNavigationResult.goBack()
+	end, { UseNavigationResult })
 	
 	return {
-		component = var1.component,
-		titleKey = if p1 == enumsModule.Screens.EditDisplayName then if var3 then textKeysModule.EditAgedUpDisplayName else textKeysModule.EditDisplayName else var1.titleKey,
-		saveKey = textKeysModule.SaveButtonText,
-		onClose = var9,
-		onSave = reactModule.useCallback(function()
-			-- upvalues: var4 (ref), var7 (ref), var6 (ref), promiseModule (copy), var9 (ref)
-			if var4.current and not var7 then
-				var6(true)
-				promiseModule.resolve(var4.current()):andThen(function()
-					-- upvalues: var6 (copy), var9 (copy)
-					var6(false)
-					var9()
-				end):catch(function(_)
-					-- upvalues: var6 (copy)
-					var6(false)
+		component = Entry.component,
+		titleKey = if EditDisplayName == EnumsModule.Screens.EditDisplayName then if UseRealNamesInDisplayNamesEnabledModuleResult then TextKeysModule.EditAgedUpDisplayName else TextKeysModule.EditDisplayName else Entry.titleKey,
+		saveKey = TextKeysModule.SaveButtonText,
+		onClose = UseResult,
+		onSave = ReactModule.useCallback(function() --[[ Line: 60 ]]
+			-- upvalues: UseRefResult (copy), UseStateResult1 (copy), UseStateResult2 (copy), PromiseModule (upval), UseResult (copy)
+			if UseRefResult.current and not UseStateResult1 then
+				UseStateResult2(true)
+				PromiseModule.resolve(UseRefResult.current()):andThen(function() --[[ Line: 64 ]]
+					-- upvalues: UseStateResult2 (upval), UseResult (upval)
+					UseStateResult2(false)
+					UseResult()
+				end):catch(function(_) --[[ Line: 68 ]]
+					-- upvalues: UseStateResult2 (upval)
+					UseStateResult2(false)
 				end)
 			end
-		end, { var7 }),
-		isLoading = var5,
-		registerSaveHandler = reactModule.useCallback(function(p2)
-			-- upvalues: var4 (ref)
-			var4.current = p2
+		end, { UseStateResult1 }),
+		isLoading = UseStateResult,
+		registerSaveHandler = ReactModule.useCallback(function(Current) --[[ Line: 56 ]]
+			-- upvalues: UseRefResult (copy)
+			UseRefResult.current = Current
 		end, {}),
-		updateErrorState = reactModule.useCallback(function(p2)
-			-- upvalues: var8 (ref)
-			var8(p2)
+		updateErrorState = ReactModule.useCallback(function(p1) --[[ Line: 47 ]]
+			-- upvalues: UseStateResult2_1 (copy)
+			UseStateResult2_1(p1)
 		end, {}),
-		hasError = var7
+		hasError = UseStateResult1
 	}
 end

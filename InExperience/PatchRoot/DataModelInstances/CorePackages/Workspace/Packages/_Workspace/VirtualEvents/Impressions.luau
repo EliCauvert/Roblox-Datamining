@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.Impressions.Impressions)
+﻿return (require(script.Parent.Parent.Parent._Index.Impressions.Impressions))

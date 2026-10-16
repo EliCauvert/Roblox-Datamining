@@ -1,10 +1,10 @@
-﻿local reactModule = require(script:FindFirstAncestor("SocialTabsPage").Parent.React)
-local socialTabsContextModule = require(script.Parent.SocialTabsContext)
+﻿local ReactModule = require(script:FindFirstAncestor("SocialTabsPage").Parent.React)
+local SocialTabsContextModule = require(script.Parent.SocialTabsContext)
 
-return function()
-	-- upvalues: reactModule (ref), socialTabsContextModule (ref)
-	local var1 = reactModule.useContext(socialTabsContextModule)
-	assert(var1 ~= nil, "useSocialTabsContext must be used within a SocialTabsContext.Provider")
+return function() --[[ Line: 7 | Named "useSocialTabsContext" ]]
+	-- upvalues: ReactModule (copy), SocialTabsContextModule (copy)
+	local UseContextResult = ReactModule.useContext(SocialTabsContextModule)
+	assert(UseContextResult ~= nil, "useSocialTabsContext must be used within a SocialTabsContext.Provider")
 	
-	return var1
+	return UseContextResult
 end

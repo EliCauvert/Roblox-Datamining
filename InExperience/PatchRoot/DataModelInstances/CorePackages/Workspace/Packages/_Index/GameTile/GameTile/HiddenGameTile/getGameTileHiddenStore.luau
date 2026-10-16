@@ -1,13 +1,13 @@
-﻿local createGameTileHiddenStoreModule = require(script:FindFirstAncestor("GameTile").HiddenGameTile.createGameTileHiddenStore)
+﻿local CreateGameTileHiddenStoreModule = require(script:FindFirstAncestor("GameTile").HiddenGameTile.createGameTileHiddenStore)
 local t = {}
 
-return function(p1)
-	-- upvalues: t (ref), createGameTileHiddenStoreModule (ref)
-	local var1 = t[p1]
+return function(Key) --[[ Line: 8 | Named "getGameTileHiddenStore" ]]
+	-- upvalues: t (copy), CreateGameTileHiddenStoreModule (copy)
+	local Entry = t[Key]
 	
-	if var1 == nil then
-		t[p1] = createGameTileHiddenStoreModule()
-		var1 = t[p1]
+	if Entry == nil then
+		t[Key] = CreateGameTileHiddenStoreModule()
+		Entry = t[Key]
 	end
-	return var1
+	return Entry
 end

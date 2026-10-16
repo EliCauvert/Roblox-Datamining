@@ -1,15 +1,15 @@
-﻿local function _(p1)
-	return p1 * 0.659649122807
+﻿local function _(p1: number): number --[[ Line: 6 | Named "getWidth" ]]
+	return p1 * 0.6596491228070176
 end
 
 return {
-	getSize = function(p1, p2)
-		local minValue = math.min(math.round(p1.Y * 0.7), 285)
-		local var1 = minValue * 0.659649122807
+	getSize = function(p1, p2): Vector2 --[[ Line: 10 ]]
+		local Smallest = math.min(math.round(p1.Y * 0.7), 285)
+		local X = Smallest * 0.6596491228070176
 		
 		if not p2 then
-			minValue *= 0.456140350877
+			Smallest *= 0.45614035087719296
 		end
-		return Vector2.new(var1, minValue)
+		return Vector2.new(X, Smallest)
 	end
 }

@@ -1,26 +1,26 @@
 ﻿local _ = require(script.Parent.LibraryTypes)
 
-local function getFolderPreview(p1, p2)
-	-- upvalues: getFolderPreview (ref)
+local function getFolderPreview(p1, List) --[[ Line: 3 ]]
+	-- upvalues: getFolderPreview (copy)
 	if p1.className ~= "Folder" then
 		return nil
 	end
-	local t = {}
+	local List1 = {}
 	
-	for i, v in p2 do
-		if v.folderId == p1.id and v.kind == p1.kind then
-			if v.className == "Folder" then
-				table.insert(t, v)
-				continue
+	for _, value in List do
+		if value.folderId == p1.id and value.kind == p1.kind then
+			if value.className ~= "Folder" then
+				return value
 			end
-			return v
+			table.insert(List1, value)
 		end
 	end
-	for i, v in t do
-		local var1 = getFolderPreview(v, p2)
+	local FolderPreview = nil
+	for _, value1 in List1 do
+		FolderPreview = getFolderPreview(value1, List)
 		
-		if var1 ~= nil then
-			return var1
+		if FolderPreview ~= nil then
+			return FolderPreview
 		end
 	end
 	return nil

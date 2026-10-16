@@ -1,70 +1,71 @@
-﻿local avatarEditorService = game:GetService("AvatarEditorService")
-local promiseModule = require(game:GetService("CorePackages").Packages.Promise)
-local var1 = nil
-local var2 = nil
+﻿local AvatarEditorService = game:GetService("AvatarEditorService")
+local PromiseModule = require(game:GetService("CorePackages").Packages.Promise)
+local HumanoidDescription = nil
+local v1 = nil
 
-local function removeDefaultClothing(p1, p2, p3)
-	-- upvalues: avatarEditorService (ref)
-	local avatarRulesAsync = avatarEditorService:GetAvatarRulesAsync()
+local function removeDefaultClothing(Object, Callback1: (any) -> (), Callback: (any) -> ()) --[[ Line: 14 ]]
+	-- upvalues: AvatarEditorService (copy)
+	local AvatarRulesAsync = AvatarEditorService:GetAvatarRulesAsync()
 	
-	if not avatarRulesAsync.DefaultClothingAssetLists then
-		p3("No default clothing in avatar rules")
+	if not AvatarRulesAsync.DefaultClothingAssetLists then
+		Callback("No default clothing in avatar rules")
 		
 		return
 	end
-	local defaultShirtAssetIds = avatarRulesAsync.DefaultClothingAssetLists.DefaultShirtAssetIds
-	local defaultPantAssetIds = avatarRulesAsync.DefaultClothingAssetLists.DefaultPantAssetIds
+	local DefaultShirtAssetIds = AvatarRulesAsync.DefaultClothingAssetLists.DefaultShirtAssetIds
+	local DefaultPantAssetIds = AvatarRulesAsync.DefaultClothingAssetLists.DefaultPantAssetIds
 	
-	if not defaultShirtAssetIds or not defaultPantAssetIds then
-		p3("No default clothing ids in avatar rules")
+	if not DefaultShirtAssetIds or not DefaultPantAssetIds then
+		Callback("No default clothing ids in avatar rules")
 		
 		return
 	end
-	local var3 = nil
+	local v2 = nil
 	
-	for i, v in ipairs(defaultShirtAssetIds) do
-		if v == p1.Shirt then
-			var3 = var3 or p1:Clone()
-			var3.Shirt = 0
+	for _, defaultShirtAssetId in ipairs(DefaultShirtAssetIds) do
+		if defaultShirtAssetId == Object.Shirt then
+			v2 = v2 or Object:Clone()
+			v2.Shirt = 0
 		end
 	end
-	for i, v_1 in ipairs(defaultPantAssetIds) do
-		if v_1 == p1.Pants then
-			var3 = var3 or p1:Clone()
-			var3.Pants = 0
+	for _, defaultPantAssetId in ipairs(DefaultPantAssetIds) do
+		if defaultPantAssetId == Object.Pants then
+			v2 = v2 or Object:Clone()
+			v2.Pants = 0
 		end
 	end
-	p2(var3 or p1)
+	Callback1(v2 or Object)
 end
 
-return function(p4, p5)
-	-- upvalues: var1 (write), promiseModule (ref), var2 (write), removeDefaultClothing (ref), avatarEditorService (ref)
-	return if p4 == var1 then if p5 then promiseModule.resolve(var2) else promiseModule.new(function(p6, p7)
-		-- upvalues: removeDefaultClothing (copy), var2 (copy)
-		removeDefaultClothing(var2, p6, p7)
-	end) else promiseModule.new(function(p6, p7)
-		-- upvalues: avatarEditorService (copy), p4 (ref), var1 (copy), var2 (copy), p5 (ref), removeDefaultClothing (copy)
-		coroutine.wrap(function()
-			-- upvalues: avatarEditorService (copy), p4 (copy), var1 (copy), var2 (copy), p5 (copy), p6 (ref), removeDefaultClothing (copy), p7 (ref)
-			local ok, status = pcall(function()
-				-- upvalues: avatarEditorService (copy), p4 (copy)
-				return avatarEditorService:ConformToAvatarRulesAsync(p4)
+return function(HumanoidDescription1, p1) --[[ Line: 48 | Named "GetConformedHumanoidDescription" ]]
+	-- upvalues: HumanoidDescription (ref), PromiseModule (copy), v1 (ref), removeDefaultClothing (copy), AvatarEditorService (copy)
+	return if HumanoidDescription1 == HumanoidDescription then if p1 then PromiseModule.resolve(v1) else PromiseModule.new(function(p2, p3) --[[ Line: 53 ]]
+		-- upvalues: removeDefaultClothing (upval), v1 (upval)
+		removeDefaultClothing(v1, p2, p3)
+	end) else PromiseModule.new(function(Callback, Callback1) --[[ Line: 59 ]]
+		-- upvalues: AvatarEditorService (upval), HumanoidDescription1 (copy), HumanoidDescription (upval), v1 (upval), p1 (copy), removeDefaultClothing (upval)
+		coroutine.wrap(function() --[[ Line: 60 ]]
+			-- upvalues: AvatarEditorService (upval), HumanoidDescription1 (upval), HumanoidDescription (upval), v1 (upval), p1 (upval), Callback (copy), removeDefaultClothing (upval), Callback1 (copy)
+			local Success, Result = pcall(function() --[[ Line: 61 ]]
+				-- upvalues: AvatarEditorService (upval), HumanoidDescription1 (upval)
+				return AvatarEditorService:ConformToAvatarRulesAsync(HumanoidDescription1)
 			end)
 			
-			if not ok then
-				p7(status)
+			if not Success then
+				Callback1(Result)
 				
 				return
 			end
-			var1 = p4
-			var2 = status
+			HumanoidDescription = HumanoidDescription1
+			v1 = Result
 			
-			if p5 then
-				p6(status)
+			if p1 then
+				Callback(Result)
 				
 				return
+			else
+				removeDefaultClothing(Result, Callback, Callback1)
 			end
-			removeDefaultClothing(status, p6, p7)
 		end)()
 	end)
 end

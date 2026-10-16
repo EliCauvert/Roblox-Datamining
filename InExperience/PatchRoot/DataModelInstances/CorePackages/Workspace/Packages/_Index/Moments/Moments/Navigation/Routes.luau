@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("Moments").Enums.NavigationRoute)
+﻿return (require(script:FindFirstAncestor("Moments").Enums.NavigationRoute))

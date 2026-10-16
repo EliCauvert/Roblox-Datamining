@@ -1,22 +1,22 @@
-﻿local t = {}
-t.__index = t
+﻿local MockAppStorageService = {}
+MockAppStorageService.__index = MockAppStorageService
 
-function t.new(p1)
-	-- upvalues: t (ref)
-	p1 = p1 or {}
-	setmetatable(p1, { __index = t })
+function MockAppStorageService.new(p1) --[[ Line: 4 ]]
+	-- upvalues: MockAppStorageService (copy)
+	local P0 = p1 or {}
+	setmetatable(P0, { __index = MockAppStorageService })
 	
-	return p1
+	return P0
 end
 
-function t:GetItem(p1)
+function MockAppStorageService:GetItem(p1) --[[ Line: 13 ]]
 	return self[p1]
 end
 
-function t:SetItem(p1, p2)
-	self[p1] = tostring(p2)
+function MockAppStorageService:SetItem(Key, p1) --[[ Line: 18 ]]
+	self[Key] = tostring(p1)
 end
 
-function t.flush(_) end
+function MockAppStorageService:flush() --[[ Line: 22 ]] end
 
-return t
+return MockAppStorageService

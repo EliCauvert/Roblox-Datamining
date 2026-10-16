@@ -1,27 +1,27 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local _ = require(appChat.types)
-local foundationModule = require(parent.Foundation)
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local inputHandlersModule = require(parent.InputHandlers)
-local loggerModule = require(script.Parent.Logger)
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local memo = reactModule.memo
-local useLayerCollector = require(parent.UIBlox).Core.Layout.LayerCollector.useLayerCollector
-local useTelemetryModule = require(appChat.Telemetry.useTelemetry)
-local chatDetailsTelemetryEventsModule = require(appChat.Components.ChatDetails.ChatDetailsTelemetryEvents)
-local chatDialogTelemetryLayerModule = require(appChat.Telemetry.Layers.ChatDialogTelemetryLayer)
-local menu = foundationModule.Menu
-local popoverAlign = foundationModule.Enums.PopoverAlign
-local popoverSide = foundationModule.Enums.PopoverSide
-local inputSize = foundationModule.Enums.InputSize
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
-local useAppFocusRoot = focusNavigationUtilsModule.useAppFocusRoot
-local fFlagAppChatParticipantDialogGamepadFocusModule = require(appChat.Flags.FFlagAppChatParticipantDialogGamepadFocus)
-local uDim = UDim.new(0, 400)
-local t = {
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local _ = require(AppChat.types)
+local FoundationModule = require(Parent.Foundation)
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local InputHandlersModule = require(Parent.InputHandlers)
+local LoggerModule = require(script.Parent.Logger)
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local MemoFunction = ReactModule.memo
+local UseLayerCollectorFunction = require(Parent.UIBlox).Core.Layout.LayerCollector.useLayerCollector
+local UseTelemetryModule = require(AppChat.Telemetry.useTelemetry)
+local ChatDetailsTelemetryEventsModule = require(AppChat.Components.ChatDetails.ChatDetailsTelemetryEvents)
+local ChatDialogTelemetryLayerModule = require(AppChat.Telemetry.Layers.ChatDialogTelemetryLayer)
+local Menu = FoundationModule.Menu
+local PopoverAlign = FoundationModule.Enums.PopoverAlign
+local PopoverSide = FoundationModule.Enums.PopoverSide
+local InputSize = FoundationModule.Enums.InputSize
+local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
+local UseAppFocusRootFunction = FocusNavigationUtilsModule.useAppFocusRoot
+local FFlagAppChatParticipantDialogGamepadFocusModule = require(AppChat.Flags.FFlagAppChatParticipantDialogGamepadFocus)
+local _UDim = UDim.new(0, 400)
+local config = {
 	conversationId = nil,
 	participantId = nil,
 	anchorRef = nil,
@@ -37,233 +37,231 @@ local t = {
 	removeFromGroupText = "localizedText.RemoveFromGroup",
 	trustedFriendText = "localizedText.AddTrustedFriend",
 	isTrustedFriendButtonDisabled = false,
-	openViewProfile = function(_)
-		-- upvalues: loggerModule (ref)
-		loggerModule:warning("openViewProfile was not passed to ParticipantDialog")
+	openViewProfile = function(_) --[[ Line: 81 ]]
+		-- upvalues: LoggerModule (copy)
+		LoggerModule:warning("openViewProfile was not passed to ParticipantDialog")
 	end,
-	openChat = function(...)
-		-- upvalues: loggerModule (ref)
-		loggerModule:warning("openChat was not passed to ParticipantDialog")
+	openChat = function(...) --[[ Line: 84 ]]
+		-- upvalues: LoggerModule (copy)
+		LoggerModule:warning("openChat was not passed to ParticipantDialog")
 	end,
-	openReportUser = function(...)
-		-- upvalues: loggerModule (ref)
-		loggerModule:warning("openReportUser was not passed to ParticipantDialog")
+	openReportUser = function(...) --[[ Line: 87 ]]
+		-- upvalues: LoggerModule (copy)
+		LoggerModule:warning("openReportUser was not passed to ParticipantDialog")
 	end,
-	openRemoveUserDialog = function(...)
-		-- upvalues: loggerModule (ref)
-		loggerModule:warning("openRemoveUserDialog was not passed to ParticipantDialog")
+	openRemoveUserDialog = function(...) --[[ Line: 90 ]]
+		-- upvalues: LoggerModule (copy)
+		LoggerModule:warning("openRemoveUserDialog was not passed to ParticipantDialog")
 	end,
-	openTrustedFriend = function(...)
-		-- upvalues: loggerModule (ref)
-		loggerModule:warning("openTrustedFriend was not passed to ParticipantDialog")
+	openTrustedFriend = function(...) --[[ Line: 93 ]]
+		-- upvalues: LoggerModule (copy)
+		LoggerModule:warning("openTrustedFriend was not passed to ParticipantDialog")
 	end,
-	onDismiss = function(_)
-		-- upvalues: loggerModule (ref)
-		loggerModule:warning("onDismiss was not passed to ParticipantDialog")
+	onDismiss = function(_) --[[ Line: 96 ]]
+		-- upvalues: LoggerModule (copy)
+		LoggerModule:warning("onDismiss was not passed to ParticipantDialog")
 	end
 }
 
-function ParticipantDialog(p1)
-	-- upvalues: cryoModule (ref), t (ref), useTelemetryModule (ref), chatDialogTelemetryLayerModule (ref), reactModule (ref), useLayerCollector (ref), fFlagAppChatParticipantDialogGamepadFocusModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useAppFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), loggerModule (ref), chatDetailsTelemetryEventsModule (ref), popoverSide (ref), menu (ref), popoverAlign (ref), inputSize (ref), uDim (ref), foundationModule (ref)
-	local var1 = cryoModule.Dictionary.join(t, p1)
-	local var2 = useTelemetryModule(chatDialogTelemetryLayerModule.Context)
-	local var3 = reactModule.useRef(nil)
-	local var4 = useLayerCollector()
-	local var5, var6 = reactModule.useState(true)
-	local conversationId = var1.conversationId
-	local participantId = var1.participantId
-	local showRemoveUserButton = var1.showRemoveUserButton
-	local unitTestScreenSize = var1.unitTestScreenSize or var4.absoluteSize
-	local var7 = if var1.anchorRef and var1.anchorRef.current then var1.anchorRef else nil
-	local onDismiss = var1.onDismiss or function() end
+function ParticipantDialog(p1) --[[ Line: 103 ]]
+	-- upvalues: CryoModule (copy), config (copy), UseTelemetryModule (copy), ChatDialogTelemetryLayerModule (copy), ReactModule (copy), UseLayerCollectorFunction (copy), FFlagAppChatParticipantDialogGamepadFocusModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseAppFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), LoggerModule (copy), ChatDetailsTelemetryEventsModule (copy), PopoverSide (copy), Menu (copy), PopoverAlign (copy), InputSize (copy), _UDim (copy), FoundationModule (copy)
+	local JoinResult = CryoModule.Dictionary.join(config, p1)
+	local UseTelemetryModuleResult = UseTelemetryModule(ChatDialogTelemetryLayerModule.Context)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseLayerCollectorResult = UseLayerCollectorFunction()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(true)
+	local ConversationId = JoinResult.conversationId
+	local ParticipantId = JoinResult.participantId
+	local ShowRemoveUserButton = JoinResult.showRemoveUserButton
+	local UnitTestScreenSize = JoinResult.unitTestScreenSize or UseLayerCollectorResult.absoluteSize
+	local AnchorRef = if JoinResult.anchorRef and JoinResult.anchorRef.current then JoinResult.anchorRef else nil
+	local OnDismiss = JoinResult.onDismiss or function() --[[ Line: 114 ]] end
 	
-	local var8 = function()
-		-- upvalues: var6 (ref), onDismiss (ref)
-		var6(false)
-		onDismiss()
+	local function OnPressedOutside() --[[ Line: 116 ]]
+		-- upvalues: UseStateResult2 (copy), OnDismiss (copy)
+		UseStateResult2(false)
+		OnDismiss()
 	end
 	
-	local var9 = if fFlagAppChatParticipantDialogGamepadFocusModule then useAppFocusRoot({
-		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.ContextualMenu,
-		isFocusable = var5,
+	local UseAppFocusRootResult = if FFlagAppChatParticipantDialogGamepadFocusModule then UseAppFocusRootFunction({
+		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.ContextualMenu,
+		isFocusable = UseStateResult,
 		customEventHandlers = {
-			[focusNavigationEventNameEnum.NavigateBack] = {
-				handler = inputHandlersModule.onRelease(function(p2)
-					-- upvalues: var6 (ref), onDismiss (ref)
+			[FocusNavigationEventNameEnum.NavigateBack] = {
+				handler = InputHandlersModule.onRelease(function(p2) --[[ Line: 125 ]]
+					-- upvalues: UseStateResult2 (copy), OnDismiss (copy)
 					p2.cancelled = true
-					var6(false)
-					onDismiss()
+					UseStateResult2(false)
+					OnDismiss()
 				end)
 			}
 		}
 	}) else nil
-	local var10 = reactModule.useRef(false)
-	local t_1 = {}
+	local UseRefResult1 = ReactModule.useRef(false)
+	local List = {}
 	
-	local function onDisabledActivated() end
+	local function onDisabledActivated() --[[ Line: 145 ]] end
 	
-	local function _(p2, p3, p4)
-		-- upvalues: t_1 (ref), onDisabledActivated (ref), var10 (ref), var6 (ref)
-		table.insert(t_1, {
-			text = p2,
-			isDisabled = p4,
-			onActivated = if p4 then onDisabledActivated else function()
-				-- upvalues: var10 (copy), var6 (copy), p3 (ref)
-				if var10.current then return end
-				var10.current = true
-				var6(false)
+	local function _(Text, Callback, IsDisabled) --[[ Line: 147 | Named "insertAction" ]]
+		-- upvalues: List (copy), onDisabledActivated (copy), UseRefResult1 (copy), UseStateResult2 (copy)
+		table.insert(List, {
+			text = Text,
+			isDisabled = IsDisabled,
+			onActivated = if IsDisabled then onDisabledActivated else function() --[[ Line: 155 ]]
+				-- upvalues: UseRefResult1 (upval), UseStateResult2 (upval), Callback (copy)
+				if UseRefResult1.current then return end
+				UseRefResult1.current = true
+				UseStateResult2(false)
 				
-				if p3 then
-					p3()
+				if Callback then
+					Callback()
 				end
 			end
 		})
 	end
 	
-	if var1.showViewProfileButton then
-		local var11 = function()
-			-- upvalues: loggerModule (copy), participantId (ref), var1 (ref)
-			loggerModule:info("User activated viewProfile | userId: {}", participantId)
-			var1.openViewProfile(participantId)
+	if JoinResult.showViewProfileButton then
+		local function v39() --[[ Line: 170 ]]
+			-- upvalues: LoggerModule (upval), ParticipantId (copy), JoinResult (copy)
+			LoggerModule:info("User activated viewProfile | userId: {}", ParticipantId)
+			JoinResult.openViewProfile(ParticipantId)
 		end
 		
-		table.insert(t_1, {
+		table.insert(List, {
 			isDisabled = nil,
-			text = var1.viewProfileText,
-			onActivated = function()
-				-- upvalues: var10 (ref), var6 (ref), var11 (ref)
-				if var10.current then return end
-				var10.current = true
-				var6(false)
+			text = JoinResult.viewProfileText,
+			onActivated = function() --[[ Line: 155 ]]
+				-- upvalues: UseRefResult1 (copy), UseStateResult2 (copy), v39 (copy)
+				if UseRefResult1.current then return end
+				UseRefResult1.current = true
+				UseStateResult2(false)
 				
-				if var11 then
-					var11()
+				if v39 then
+					v39()
 				end
 			end
 		})
 	end
-	if var1.showTrustedFriendButton then
-		local trustedFriendText = var1.trustedFriendText
-		
-		local var12 = function()
-			-- upvalues: loggerModule (copy), participantId (ref), var1 (ref)
-			loggerModule:info("User activated openTrustedFriend | userId: {}", participantId)
-			var1.openTrustedFriend(participantId)
+	if JoinResult.showTrustedFriendButton then
+		local function v40() --[[ Line: 177 ]]
+			-- upvalues: LoggerModule (upval), ParticipantId (copy), JoinResult (copy)
+			LoggerModule:info("User activated openTrustedFriend | userId: {}", ParticipantId)
+			JoinResult.openTrustedFriend(ParticipantId)
 		end
 		
-		local isTrustedFriendButtonDisabled = var1.isTrustedFriendButtonDisabled
-		table.insert(t_1, {
-			text = trustedFriendText,
-			isDisabled = isTrustedFriendButtonDisabled,
-			onActivated = if isTrustedFriendButtonDisabled then onDisabledActivated else function()
-				-- upvalues: var10 (ref), var6 (ref), var12 (ref)
-				if var10.current then return end
-				var10.current = true
-				var6(false)
+		local IsTrustedFriendButtonDisabled = JoinResult.isTrustedFriendButtonDisabled
+		table.insert(List, {
+			text = JoinResult.trustedFriendText,
+			isDisabled = IsTrustedFriendButtonDisabled,
+			onActivated = if IsTrustedFriendButtonDisabled then onDisabledActivated else function() --[[ Line: 155 ]]
+				-- upvalues: UseRefResult1 (copy), UseStateResult2 (copy), v40 (copy)
+				if UseRefResult1.current then return end
+				UseRefResult1.current = true
+				UseStateResult2(false)
 				
-				if var12 then
-					var12()
+				if v40 then
+					v40()
 				end
 			end
 		})
 	end
-	if var1.showChatButton then
-		local var13 = function()
-			-- upvalues: loggerModule (copy), participantId (ref), var2 (ref), chatDetailsTelemetryEventsModule (copy), var1 (ref)
-			loggerModule:info("User activated openChat | userId: {}", participantId)
-			var2.emit(chatDetailsTelemetryEventsModule.ParticipantDialogChatClicked, {})
-			var1.openChat(participantId)
+	if JoinResult.showChatButton then
+		local function v42() --[[ Line: 184 ]]
+			-- upvalues: LoggerModule (upval), ParticipantId (copy), UseTelemetryModuleResult (copy), ChatDetailsTelemetryEventsModule (upval), JoinResult (copy)
+			LoggerModule:info("User activated openChat | userId: {}", ParticipantId)
+			UseTelemetryModuleResult.emit(ChatDetailsTelemetryEventsModule.ParticipantDialogChatClicked, {})
+			JoinResult.openChat(ParticipantId)
 		end
 		
-		table.insert(t_1, {
+		table.insert(List, {
 			isDisabled = nil,
-			text = var1.chatText,
-			onActivated = function()
-				-- upvalues: var10 (ref), var6 (ref), var13 (ref)
-				if var10.current then return end
-				var10.current = true
-				var6(false)
+			text = JoinResult.chatText,
+			onActivated = function() --[[ Line: 155 ]]
+				-- upvalues: UseRefResult1 (copy), UseStateResult2 (copy), v42 (copy)
+				if UseRefResult1.current then return end
+				UseRefResult1.current = true
+				UseStateResult2(false)
 				
-				if var13 then
-					var13()
+				if v42 then
+					v42()
 				end
 			end
 		})
 	end
-	local var14 = function()
-		-- upvalues: loggerModule (copy), participantId (ref), conversationId (ref), var2 (ref), chatDetailsTelemetryEventsModule (copy), var1 (ref)
-		loggerModule:info("User activated reportUser | userId: {}, conversationId: {}", participantId, conversationId)
-		var2.emit(chatDetailsTelemetryEventsModule.ParticipantDialogReportUserClicked, {})
-		var1.openReportUser(participantId, conversationId)
+	local function v43() --[[ Line: 191 ]]
+		-- upvalues: LoggerModule (upval), ParticipantId (copy), ConversationId (copy), UseTelemetryModuleResult (copy), ChatDetailsTelemetryEventsModule (upval), JoinResult (copy)
+		LoggerModule:info("User activated reportUser | userId: {}, conversationId: {}", ParticipantId, ConversationId)
+		UseTelemetryModuleResult.emit(ChatDetailsTelemetryEventsModule.ParticipantDialogReportUserClicked, {})
+		JoinResult.openReportUser(ParticipantId, ConversationId)
 	end
 	
-	table.insert(t_1, {
+	table.insert(List, {
 		isDisabled = nil,
-		text = var1.reportUserText,
-		onActivated = function()
-			-- upvalues: var10 (ref), var6 (ref), var14 (ref)
-			if var10.current then return end
-			var10.current = true
-			var6(false)
+		text = JoinResult.reportUserText,
+		onActivated = function() --[[ Line: 155 ]]
+			-- upvalues: UseRefResult1 (copy), UseStateResult2 (copy), v43 (copy)
+			if UseRefResult1.current then return end
+			UseRefResult1.current = true
+			UseStateResult2(false)
 			
-			if var14 then
-				var14()
+			if v43 then
+				v43()
 			end
 		end
 	})
 	
-	if showRemoveUserButton then
-		local var15 = function()
-			-- upvalues: var1 (ref), participantId (ref), conversationId (ref)
-			var1.openRemoveUserDialog(participantId, conversationId)
+	if ShowRemoveUserButton then
+		local function v44() --[[ Line: 198 ]]
+			-- upvalues: JoinResult (copy), ParticipantId (copy), ConversationId (copy)
+			JoinResult.openRemoveUserDialog(ParticipantId, ConversationId)
 		end
 		
-		table.insert(t_1, {
+		table.insert(List, {
 			isDisabled = nil,
-			text = var1.removeFromGroupText,
-			onActivated = function()
-				-- upvalues: var10 (ref), var6 (ref), var15 (ref)
-				if var10.current then return end
-				var10.current = true
-				var6(false)
+			text = JoinResult.removeFromGroupText,
+			onActivated = function() --[[ Line: 155 ]]
+				-- upvalues: UseRefResult1 (copy), UseStateResult2 (copy), v44 (copy)
+				if UseRefResult1.current then return end
+				UseRefResult1.current = true
+				UseStateResult2(false)
 				
-				if var15 then
-					var15()
+				if v44 then
+					v44()
 				end
 			end
 		})
 	end
-	return if var7 then reactModule.createElement(menu, {
-		align = popoverAlign.End,
-		anchorRef = var7,
-		isOpen = var5,
-		items = t_1,
-		onPressedOutside = var8,
-		ref = if fFlagAppChatParticipantDialogGamepadFocusModule then var9 else nil,
-		side = if unitTestScreenSize.Y / 2 < var7.current.AbsolutePosition.Y + var7.current.AbsoluteSize.Y / 2 then popoverSide.Top else popoverSide.Bottom,
-		size = inputSize.Medium,
-		width = if var1.isWideMode then uDim else nil
-	}) else reactModule.createElement(foundationModule.View, { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, {
-		MenuAnchor = reactModule.createElement("Frame", {
+	return if AnchorRef then ReactModule.createElement(Menu, {
+		align = PopoverAlign.End,
+		anchorRef = AnchorRef,
+		isOpen = UseStateResult,
+		items = List,
+		onPressedOutside = OnPressedOutside,
+		ref = if FFlagAppChatParticipantDialogGamepadFocusModule then UseAppFocusRootResult else nil,
+		side = if UnitTestScreenSize.Y / 2 < AnchorRef.current.AbsolutePosition.Y + AnchorRef.current.AbsoluteSize.Y / 2 then PopoverSide.Top else PopoverSide.Bottom,
+		size = InputSize.Medium,
+		width = if JoinResult.isWideMode then _UDim else nil
+	}) else ReactModule.createElement(FoundationModule.View, { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, {
+		MenuAnchor = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			AnchorPoint = Vector2.new(0.5, 1),
 			Position = UDim2.new(0.5, 0, 1, -10),
 			Size = UDim2.fromOffset(400, 1),
-			ref = var3
+			ref = UseRefResult
 		}),
-		Menu = reactModule.createElement(menu, {
-			align = popoverAlign.Center,
-			anchorRef = var3,
-			isOpen = var5,
-			items = t_1,
-			onPressedOutside = var8,
-			ref = if fFlagAppChatParticipantDialogGamepadFocusModule then var9 else nil,
-			side = popoverSide.Top,
-			size = inputSize.Medium,
-			width = if var1.isWideMode then uDim else nil
+		Menu = ReactModule.createElement(Menu, {
+			align = PopoverAlign.Center,
+			anchorRef = UseRefResult,
+			isOpen = UseStateResult,
+			items = List,
+			onPressedOutside = OnPressedOutside,
+			ref = if FFlagAppChatParticipantDialogGamepadFocusModule then UseAppFocusRootResult else nil,
+			side = PopoverSide.Top,
+			size = InputSize.Medium,
+			width = if JoinResult.isWideMode then _UDim else nil
 		})
 	})
 end
 
-return memo(ParticipantDialog)
+return MemoFunction(ParticipantDialog)

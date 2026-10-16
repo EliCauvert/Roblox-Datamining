@@ -1,8 +1,8 @@
-﻿local reactModule = require(script:FindFirstAncestor("InExperienceShop").Parent.React)
-local searchResultsViewModule = require(script.Parent.SearchResultsView)
-local useSearchResultsViewModelModule = require(script.Parent.useSearchResultsViewModel)
+﻿local ReactModule = require(script:FindFirstAncestor("InExperienceShop").Parent.React)
+local SearchResultsViewModule = require(script.Parent.SearchResultsView)
+local UseSearchResultsViewModelModule = require(script.Parent.useSearchResultsViewModel)
 
-return function(p1)
-	-- upvalues: useSearchResultsViewModelModule (ref), reactModule (ref), searchResultsViewModule (ref)
-	return reactModule.createElement(searchResultsViewModule, useSearchResultsViewModelModule(p1))
+return function(p1) --[[ Line: 10 | Named "SearchResultsContainer" ]]
+	-- upvalues: UseSearchResultsViewModelModule (copy), ReactModule (copy), SearchResultsViewModule (copy)
+	return ReactModule.createElement(SearchResultsViewModule, (UseSearchResultsViewModelModule(p1)))
 end

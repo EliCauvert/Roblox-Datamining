@@ -1,24 +1,24 @@
-﻿local parent = script:FindFirstAncestor("BulkPurchaseApp").Parent
-local default = require(parent.LoggingProtocol).default
-local bulkPurchaseMissingPurchaseOptionsCounter = require(parent.AvatarExperienceAnalytics).Events.BulkPurchaseMissingPurchaseOptionsCounter
+﻿local Parent = script:FindFirstAncestor("BulkPurchaseApp").Parent
+local Default = require(Parent.LoggingProtocol).default
+local BulkPurchaseMissingPurchaseOptionsCounter = require(Parent.AvatarExperienceAnalytics).Events.BulkPurchaseMissingPurchaseOptionsCounter
 
-local function reportMissingPurchaseOptions(p1)
-	-- upvalues: default (ref), bulkPurchaseMissingPurchaseOptionsCounter (ref)
-	for i, v in p1 do
-		local purchaseOptions = v.purchaseOptions
+local function reportMissingPurchaseOptions(List) --[[ Line: 8 ]]
+	-- upvalues: Default (copy), BulkPurchaseMissingPurchaseOptionsCounter (copy)
+	for _, value in List do
+		local PurchaseOptions = value.purchaseOptions
 		
-		if purchaseOptions == nil or #purchaseOptions == 0 then
-			default:logRobloxTelemetryCounter(bulkPurchaseMissingPurchaseOptionsCounter, 1, {})
-			
-			return
+		if PurchaseOptions == nil or #PurchaseOptions == 0 then
+			Default:logRobloxTelemetryCounter(BulkPurchaseMissingPurchaseOptionsCounter, 1, {})
+			break
 		end
 	end
 end
 
-return function(p2)
-	-- upvalues: reportMissingPurchaseOptions (ref)
-	if p2 == nil then
+return function(p1) --[[ Line: 20 | Named "reportBulkPurchaseRequestIssues" ]]
+	-- upvalues: reportMissingPurchaseOptions (copy)
+	if p1 ~= nil then
+		reportMissingPurchaseOptions(p1)
+		
 		return
 	end
-	reportMissingPurchaseOptions(p2)
 end

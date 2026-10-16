@@ -1,64 +1,64 @@
-﻿local roduxSquads = script:FindFirstAncestor("RoduxSquads")
-local loggerModule = require(roduxSquads.Logger)
-local parent = roduxSquads.Parent
-local cryoModule = require(parent.Cryo)
-local roduxModule = require(parent.Rodux)
-local currentExperienceInviteUpdated = require(roduxSquads.Actions).CurrentExperienceInviteUpdated
-local currentExperienceInviteDismissed = require(roduxSquads.Actions).CurrentExperienceInviteDismissed
-local currentExperienceInviteReceived = require(roduxSquads.Actions).CurrentExperienceInviteReceived
-local experienceInviteModel = require(roduxSquads.Models).ExperienceInviteModel
+﻿local RoduxSquads = script:FindFirstAncestor("RoduxSquads")
+local LoggerModule = require(RoduxSquads.Logger)
+local Parent = RoduxSquads.Parent
+local CryoModule = require(Parent.Cryo)
+local RoduxModule = require(Parent.Rodux)
+local CurrentExperienceInviteUpdated = require(RoduxSquads.Actions).CurrentExperienceInviteUpdated
+local CurrentExperienceInviteDismissed = require(RoduxSquads.Actions).CurrentExperienceInviteDismissed
+local CurrentExperienceInviteReceived = require(RoduxSquads.Actions).CurrentExperienceInviteReceived
+local ExperienceInviteModel = require(RoduxSquads.Models).ExperienceInviteModel
 local _ = require(script.Parent.Parent.RoduxSquadsTypes)
 
-return function(p1)
-	-- upvalues: cryoModule (ref), roduxModule (ref), loggerModule (ref), experienceInviteModel (ref), currentExperienceInviteUpdated (ref), currentExperienceInviteReceived (ref), currentExperienceInviteDismissed (ref)
-	local networkingSquads = p1.NetworkingSquads
+return function(p1) --[[ Line: 17 ]]
+	-- upvalues: CryoModule (copy), RoduxModule (copy), LoggerModule (copy), ExperienceInviteModel (copy), CurrentExperienceInviteUpdated (copy), CurrentExperienceInviteReceived (copy), CurrentExperienceInviteDismissed (copy)
+	local NetworkingSquads = p1.NetworkingSquads
 	
-	local var1 = function(p2, p3)
-		-- upvalues: cryoModule (copy)
-		return if p2 and p2.notification.experienceInviteId == p3.experienceInviteId and (p2.model == nil or p2.model.versionId < p3.versionId) then cryoModule.Dictionary.join(p2, { model = p3 }) else p2
+	local function v11(p2, FormatResult) --[[ Line: 20 ]]
+		-- upvalues: CryoModule (upval)
+		return if p2 and p2.notification.experienceInviteId == FormatResult.experienceInviteId and (p2.model == nil or p2.model.versionId < FormatResult.versionId) then CryoModule.Dictionary.join(p2, { model = FormatResult }) else p2
 	end
 	
-	return roduxModule.createReducer(nil, {
-		[networkingSquads.CreateExperienceInvite.Succeeded.name] = function(p2, p3)
-			-- upvalues: loggerModule (copy)
-			loggerModule:debug("Create experience invite success. ExperienceInviteId: {}", p3.responseBody.experienceInviteId)
+	return RoduxModule.createReducer(nil, {
+		[NetworkingSquads.CreateExperienceInvite.Succeeded.name] = function(p2, p3) --[[ Line: 35 ]]
+			-- upvalues: LoggerModule (upval)
+			LoggerModule:debug("Create experience invite success. ExperienceInviteId: {}", p3.responseBody.experienceInviteId)
 			
 			return p2
 		end,
-		[networkingSquads.GetExperienceInvite.Succeeded.name] = function(p2, p3)
-			-- upvalues: var1 (ref), experienceInviteModel (copy)
-			local responseBody = p3.responseBody
-			assert(responseBody, "Experience invite must exist.")
+		[NetworkingSquads.GetExperienceInvite.Succeeded.name] = function(p2, p3) --[[ Line: 48 ]]
+			-- upvalues: v11 (copy), ExperienceInviteModel (upval)
+			local ResponseBody = p3.responseBody
+			assert(ResponseBody, "Experience invite must exist.")
 			
-			return var1(p2, experienceInviteModel.format(responseBody))
+			return v11(p2, ExperienceInviteModel.format(ResponseBody))
 		end,
-		[networkingSquads.VoteForExperienceInvite.Succeeded.name] = function(p2, p3)
-			-- upvalues: loggerModule (copy), var1 (ref), experienceInviteModel (copy)
-			local responseBody = p3.responseBody
-			loggerModule:debug("Vote experience invite success. ExperienceInviteId: {}", responseBody.experienceInviteId)
+		[NetworkingSquads.VoteForExperienceInvite.Succeeded.name] = function(p2, p3) --[[ Line: 58 ]]
+			-- upvalues: LoggerModule (upval), v11 (copy), ExperienceInviteModel (upval)
+			local ResponseBody = p3.responseBody
+			LoggerModule:debug("Vote experience invite success. ExperienceInviteId: {}", ResponseBody.experienceInviteId)
 			
-			return var1(p2, experienceInviteModel.format(responseBody))
+			return v11(p2, ExperienceInviteModel.format(ResponseBody))
 		end,
-		[currentExperienceInviteUpdated.name] = function(p2, p3)
-			-- upvalues: var1 (ref), experienceInviteModel (copy)
-			local experienceInvite = p3.payload.experienceInvite
-			assert(experienceInvite, "Experience invite must exist.")
+		[CurrentExperienceInviteUpdated.name] = function(p2, p3) --[[ Line: 67 ]]
+			-- upvalues: v11 (copy), ExperienceInviteModel (upval)
+			local ExperienceInvite = p3.payload.experienceInvite
+			assert(ExperienceInvite, "Experience invite must exist.")
 			
-			return var1(p2, experienceInviteModel.format(experienceInvite))
+			return v11(p2, ExperienceInviteModel.format(ExperienceInvite))
 		end,
-		[currentExperienceInviteReceived.name] = function(p2, p3)
-			local experienceInviteId = p3.payload.experienceInviteId
+		[CurrentExperienceInviteReceived.name] = function(p2, p3) --[[ Line: 76 ]]
+			local ExperienceInviteId = p3.payload.experienceInviteId
 			
-			return if p2 == nil or p2.notification.experienceInviteId ~= experienceInviteId then {
+			return if p2 == nil or p2.notification.experienceInviteId ~= ExperienceInviteId then {
 				notification = {
-					experienceInviteId = experienceInviteId,
+					experienceInviteId = ExperienceInviteId,
 					membershipEntityId = p3.payload.membershipEntityId,
 					notificationId = p3.payload.notificationId,
 					isInviter = p3.payload.isInviter
 				}
 			} else p2
 		end,
-		[currentExperienceInviteDismissed.name] = function(p2, p3)
+		[CurrentExperienceInviteDismissed.name] = function(p2, p3) --[[ Line: 100 ]]
 			return if p2 and p2.notification.notificationId == p3.payload.notificationId then nil else p2
 		end
 	})

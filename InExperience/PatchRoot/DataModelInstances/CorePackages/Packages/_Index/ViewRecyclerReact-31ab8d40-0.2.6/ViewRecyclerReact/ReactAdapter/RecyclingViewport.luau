@@ -1,97 +1,100 @@
-﻿local viewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
-local viewRecyclerModule = require(viewRecyclerReact.Parent.ViewRecycler)
-local viewRecyclerRobloxModule = require(viewRecyclerReact.Parent.ViewRecyclerRoblox)
-local axis = viewRecyclerModule.Axis
-local reactModule = require(viewRecyclerReact.Parent.React)
-local recyclingScopeModule = require(viewRecyclerReact.ReactAdapter.RecyclingScope)
-local recyclingScopeContextModule = require(viewRecyclerReact.ReactAdapter.Private.RecyclingScopeContext)
-local recyclingViewportContextModule = require(viewRecyclerReact.ReactAdapter.Private.RecyclingViewportContext)
-local createElement = reactModule.createElement
-local shallowTable = viewRecyclerModule.Adapter._Private.ShallowTable
-local frozen = table.freeze({ "axis", "activationMargin", "retentionMargin" })
+﻿local ViewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
+local ViewRecyclerModule = require(ViewRecyclerReact.Parent.ViewRecycler)
+local ViewRecyclerRobloxModule = require(ViewRecyclerReact.Parent.ViewRecyclerRoblox)
+local Axis = ViewRecyclerModule.Axis
+local ReactModule = require(ViewRecyclerReact.Parent.React)
+local RecyclingScopeModule = require(ViewRecyclerReact.ReactAdapter.RecyclingScope)
+local RecyclingScopeContextModule = require(ViewRecyclerReact.ReactAdapter.Private.RecyclingScopeContext)
+local RecyclingViewportContextModule = require(ViewRecyclerReact.ReactAdapter.Private.RecyclingViewportContext)
+local CreateElementFunction = ReactModule.createElement
+local ShallowTable = ViewRecyclerModule.Adapter._Private.ShallowTable
+local Frozen = table.freeze({ "axis", "activationMargin", "retentionMargin" })
 
-local function _(value, p1)
-	if value == nil then return end
-	if type(value) == "function" then
-		value(p1)
+local function _(Callback: (any) -> (), Current) --[[ Line: 26 | Named "assignRef" ]]
+	if Callback == nil then return end
+	if type(Callback) == "function" then
+		Callback(Current)
 		
 		return
+	else
+		Callback.current = Current
 	end
-	value.current = p1
 end
 
 return {
-	create = function(p1)
-		-- upvalues: recyclingScopeModule (ref), reactModule (ref), recyclingScopeContextModule (ref), shallowTable (ref), frozen (ref), viewRecyclerRobloxModule (ref), axis (ref), createElement (ref), recyclingViewportContextModule (ref)
-		local var1 = recyclingScopeModule.create(p1)
+	create = function(p1) --[[ Line: 37 ]]
+		-- upvalues: RecyclingScopeModule (copy), ReactModule (copy), RecyclingScopeContextModule (copy), ShallowTable (copy), Frozen (copy), ViewRecyclerRobloxModule (copy), Axis (copy), CreateElementFunction (copy), RecyclingViewportContextModule (copy)
+		local NewRecyclingScope = RecyclingScopeModule.create(p1)
 		
-		return function(p2)
-			-- upvalues: reactModule (copy), recyclingScopeContextModule (copy), shallowTable (copy), frozen (copy), viewRecyclerRobloxModule (copy), axis (copy), createElement (copy), recyclingViewportContextModule (copy), var1 (ref)
-			local var2 = reactModule.useContext(recyclingScopeContextModule)
-			local var3 = reactModule.useState(function()
-				-- upvalues: p2 (ref)
+		return function(p2) --[[ Line: 40 | Named "RecyclingViewport" ]]
+			-- upvalues: ReactModule (upval), RecyclingScopeContextModule (upval), ShallowTable (upval), Frozen (upval), ViewRecyclerRobloxModule (upval), Axis (upval), CreateElementFunction (upval), RecyclingViewportContextModule (upval), NewRecyclingScope (copy)
+			local UseContextResult = ReactModule.useContext(RecyclingScopeContextModule)
+			local UseStateResult = ReactModule.useState(function() --[[ Line: 42 ]]
+				-- upvalues: p2 (copy)
 				return {
 					axis = p2.axis,
 					activationMargin = p2.activationMargin,
 					retentionMargin = p2.retentionMargin
 				}
 			end)
-			assert(shallowTable.containsEqual(p2, var3, frozen), "RecyclingViewport: axis and margins cannot change during its lifetime")
-			local var4 = reactModule.useState(function()
-				-- upvalues: viewRecyclerRobloxModule (copy), var3 (ref)
-				return viewRecyclerRobloxModule.ViewportCoordinator.new(var3)
+			assert(ShallowTable.containsEqual(p2, UseStateResult, Frozen), "RecyclingViewport: axis and margins cannot change during its lifetime")
+			local UseStateResult1 = ReactModule.useState(function() --[[ Line: 54 ]]
+				-- upvalues: ViewRecyclerRobloxModule (upval), UseStateResult (copy)
+				return ViewRecyclerRobloxModule.ViewportCoordinator.new(UseStateResult)
 			end)
-			local var5 = reactModule.useState(function()
-				-- upvalues: var4 (ref)
-				return { register = var4.register }
+			local UseStateResult2 = ReactModule.useState(function() --[[ Line: 57 ]]
+				-- upvalues: UseStateResult1 (copy)
+				return { register = UseStateResult1.register }
 			end)
-			local scrollingFrameRef = p2.scrollingFrameRef
-			local var6 = reactModule.useCallback(function(p3)
-				-- upvalues: var4 (ref), scrollingFrameRef (ref)
-				var4.setViewport(p3)
+			local ScrollingFrameRefFunction = p2.scrollingFrameRef
+			local UseResult = ReactModule.useCallback(function(Current) --[[ Line: 63 ]]
+				-- upvalues: UseStateResult1 (copy), ScrollingFrameRefFunction (copy)
+				UseStateResult1.setViewport(Current)
 				
-				if scrollingFrameRef == nil then return end
-				if type(scrollingFrameRef) == "function" then
-					scrollingFrameRef(p3)
+				if ScrollingFrameRefFunction == nil then return end
+				if type(ScrollingFrameRefFunction) == "function" then
+					ScrollingFrameRefFunction(Current)
 					
 					return
+				else
+					ScrollingFrameRefFunction.current = Current
 				end
-				scrollingFrameRef.current = p3
-			end, { var4, scrollingFrameRef })
-			reactModule.useEffect(function()
-				-- upvalues: var4 (ref)
-				return function()
-					-- upvalues: var4 (copy)
-					var4.destroy()
+			end, { UseStateResult1, ScrollingFrameRefFunction })
+			ReactModule.useEffect(function() --[[ Line: 68 ]]
+				-- upvalues: UseStateResult1 (copy)
+				return function() --[[ Line: 69 ]]
+					-- upvalues: UseStateResult1 (upval)
+					UseStateResult1.destroy()
 				end
-			end, { var4 })
-			local t = {
+			end, { UseStateResult1 })
+			local config = {
 				Size = UDim2.fromScale(1, 1),
-				ScrollingDirection = if p2.axis == axis.X then Enum.ScrollingDirection.X else Enum.ScrollingDirection.Y,
-				ref = var6
+				ScrollingDirection = if p2.axis == Axis.X then Enum.ScrollingDirection.X else Enum.ScrollingDirection.Y,
+				ref = UseResult
 			}
 			
 			if p2.scrollingFrameProps ~= nil then
-				for i, v in p2.scrollingFrameProps do
-					if t[i] ~= nil then
+				for i, scrollingFrameProp in p2.scrollingFrameProps do
+					if config[i] ~= nil then
 						error(`RecyclingViewport: {tostring(i)} is already used by ViewRecycler`)
 					end
-					t[i] = v
+					config[i] = scrollingFrameProp
 				end
 			end
-			local var7 = createElement(recyclingViewportContextModule.Provider, { value = var5 }, {
-				Viewport = createElement("ScrollingFrame", t, p2.children)
+			local Element = CreateElementFunction(RecyclingViewportContextModule.Provider, { value = UseStateResult2 }, {
+				Viewport = CreateElementFunction("ScrollingFrame", config, p2.children)
 			})
 			
-			if var2 == nil then
-				return createElement(var1, {
+			if UseContextResult == nil then
+				return CreateElementFunction(NewRecyclingScope, {
 					maxPoolSize = p2.maxPoolSize,
 					diagnostics = p2.diagnostics
-				}, { Viewport = var7 })
+				}, { Viewport = Element })
+			else
+				assert(p2.maxPoolSize == nil and p2.diagnostics == nil, "RecyclingViewport: configure recycling options on the ancestor RecyclingScope")
+				
+				return Element
 			end
-			assert(p2.maxPoolSize == nil and p2.diagnostics == nil, "RecyclingViewport: configure recycling options on the ancestor RecyclingScope")
-			
-			return var7
 		end
 	end
 }

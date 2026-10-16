@@ -1,32 +1,32 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local parent = avatarExperienceCatalog.Parent
-local reactModule = require(parent.React)
-local useSignalState = require(parent.SignalsReact).useSignalState
-local useNetworking = require(parent.AvatarExperienceCommon).Hooks.useNetworking
-local sendAXCounterV2 = require(parent.AvatarExperienceAnalytics).sendAXCounterV2
-local constantsModule = require(avatarExperienceCatalog.Constants)
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local Parent = AvatarExperienceCatalog.Parent
+local ReactModule = require(Parent.React)
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local UseNetworkingFunction = require(Parent.AvatarExperienceCommon).Hooks.useNetworking
+local SendAXCounterV2Function = require(Parent.AvatarExperienceAnalytics).sendAXCounterV2
+local ConstantsModule = require(AvatarExperienceCatalog.Constants)
 local _ = require(script.Parent.createFaeFeatureAccessStore)
 
-return function(p1)
-	-- upvalues: useNetworking (ref), reactModule (ref), sendAXCounterV2 (ref), constantsModule (ref), useSignalState (ref)
-	local var1 = useNetworking()
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var1 (ref), sendAXCounterV2 (copy), constantsModule (copy)
+return function(p1) --[[ Line: 25 ]]
+	-- upvalues: UseNetworkingFunction (copy), ReactModule (copy), SendAXCounterV2Function (copy), ConstantsModule (copy), UseSignalStateFunction (copy)
+	local UseNetworkingResult = UseNetworkingFunction()
+	ReactModule.useEffect(function() --[[ Line: 28 ]]
+		-- upvalues: p1 (copy), UseNetworkingResult (copy), SendAXCounterV2Function (upval), ConstantsModule (upval)
 		if p1.getFetchStatus(false) == "idle" then
-			p1.fetch(var1):catch(function(p2)
-				-- upvalues: sendAXCounterV2 (copy), constantsModule (copy)
-				if p2 then
-					sendAXCounterV2(constantsModule.COUNTERS.FetchFaeFeatureAccessError)
+			p1.fetch(UseNetworkingResult):catch(function(Err) --[[ Line: 32 ]]
+				-- upvalues: SendAXCounterV2Function (upval), ConstantsModule (upval)
+				if Err then
+					SendAXCounterV2Function(ConstantsModule.COUNTERS.FetchFaeFeatureAccessError)
 				end
 			end)
 			
 			return
 		end
-	end, { p1, var1 })
+	end, { p1, UseNetworkingResult })
 	
 	return {
-		canClaimFaeItem = useSignalState(p1.getCanClaimFaeItem),
-		showFaeUpsell = useSignalState(p1.getShowFaeUpsell),
-		fetchStatus = useSignalState(p1.getFetchStatus)
+		canClaimFaeItem = UseSignalStateFunction(p1.getCanClaimFaeItem),
+		showFaeUpsell = UseSignalStateFunction(p1.getShowFaeUpsell),
+		fetchStatus = UseSignalStateFunction(p1.getFetchStatus)
 	}
 end

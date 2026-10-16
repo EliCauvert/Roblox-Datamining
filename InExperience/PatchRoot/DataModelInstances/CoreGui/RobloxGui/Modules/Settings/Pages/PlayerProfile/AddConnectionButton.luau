@@ -1,49 +1,48 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local playersService = game:GetService("Players")
-local reactModule = require(corePackagesService.Packages.React)
-local signalsReactModule = require(corePackagesService.Packages.SignalsReact)
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local fillBehavior = foundationModule.Enums.FillBehavior
-local button = foundationModule.Button
-local useLocalization = require(corePackagesService.Workspace.Packages.Localization).Hooks.useLocalization
-local peopleServiceModule = require(corePackagesService.Workspace.Packages.PeopleService)
+﻿local CorePackages = game:GetService("CorePackages")
+local Players = game:GetService("Players")
+local ReactModule = require(CorePackages.Packages.React)
+local SignalsReactModule = require(CorePackages.Packages.SignalsReact)
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local FillBehavior = FoundationModule.Enums.FillBehavior
+local Button = FoundationModule.Button
+local UseLocalizationFunction = require(CorePackages.Workspace.Packages.Localization).Hooks.useLocalization
+local PeopleServiceModule = require(CorePackages.Workspace.Packages.PeopleService)
 
-return reactModule.memo(function(p1)
-	-- upvalues: useLocalization (ref), reactModule (ref), peopleServiceModule (ref), playersService (ref), signalsReactModule (ref), button (ref), buttonVariant (ref), fillBehavior (ref)
-	local var1 = useLocalization({
-		isFriend = "CommonUI.Features.Label.Connection",
-		addPerson = "CommonUI.Features.Label.Add",
-		requestSent = "CommonUI.Features.Label.Sent"
-	})
-	local var2 = reactModule.useMemo(function()
-		-- upvalues: peopleServiceModule (copy)
-		return peopleServiceModule.getService("Constants")
+return ReactModule.memo(function(p1) --[[ Line: 22 | Named "AddConnectionButton" ]]
+	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), PeopleServiceModule (copy), Players (copy), SignalsReactModule (copy), Button (copy), ButtonVariant (copy), FillBehavior (copy)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 29 ]]
+		-- upvalues: PeopleServiceModule (upval)
+		return PeopleServiceModule.getService("Constants")
 	end, {})
-	local var3 = reactModule.useMemo(function()
-		-- upvalues: peopleServiceModule (copy)
-		return peopleServiceModule.getService("PeopleAnalyticsManager")
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 33 ]]
+		-- upvalues: PeopleServiceModule (upval)
+		return PeopleServiceModule.getService("PeopleAnalyticsManager")
 	end, {})
-	local var4 = reactModule.useMemo(function()
-		-- upvalues: peopleServiceModule (copy)
-		return peopleServiceModule.getService("FriendStatusStore")
+	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 37 ]]
+		-- upvalues: PeopleServiceModule (upval)
+		return PeopleServiceModule.getService("FriendStatusStore")
 	end, {})
-	local var5 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), playersService (copy)
-		return if p1.userId then playersService:GetPlayerByUserId(p1.userId) else nil
+	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 41 ]]
+		-- upvalues: p1 (copy), Players (upval)
+		return if p1.userId then Players:GetPlayerByUserId(p1.userId) else nil
 	end, { p1.userId })
-	local var6 = signalsReactModule.useSignalState(var4.getIsFriendButtonDisabled(p1.userId))
+	local UseSignalStateResult = SignalsReactModule.useSignalState(UseMemoResult2.getIsFriendButtonDisabled(p1.userId))
 	
-	return reactModule.createElement(button, {
-		text = signalsReactModule.useSignalState(var4.getFriendButtonText(p1.userId, var1)),
-		variant = if var6 then buttonVariant.Subtle else buttonVariant.Emphasis,
-		fillBehavior = fillBehavior.Fill,
-		isDisabled = var6,
+	return ReactModule.createElement(Button, {
+		text = SignalsReactModule.useSignalState(UseMemoResult2.getFriendButtonText(p1.userId, (UseLocalizationFunction({
+			isFriend = "CommonUI.Features.Label.Connection",
+			addPerson = "CommonUI.Features.Label.Add",
+			requestSent = "CommonUI.Features.Label.Sent"
+		})))),
+		variant = if UseSignalStateResult then ButtonVariant.Subtle else ButtonVariant.Emphasis,
+		fillBehavior = FillBehavior.Fill,
+		isDisabled = UseSignalStateResult,
 		LayoutOrder = p1.layoutOrder,
-		onActivated = function()
-			-- upvalues: var3 (ref), var2 (ref), var4 (ref), var5 (ref)
-			var3:trackRequestFriendship(var2.ANALYTICS.ENTRY_POINT.PLAYER_PROFILE)
-			var4.sendFriendRequest(var5)
+		onActivated = function() --[[ Line: 54 ]]
+			-- upvalues: UseMemoResult1 (copy), UseMemoResult (copy), UseMemoResult2 (copy), UseMemoResult3 (copy)
+			UseMemoResult1:trackRequestFriendship(UseMemoResult.ANALYTICS.ENTRY_POINT.PLAYER_PROFILE)
+			UseMemoResult2.sendFriendRequest(UseMemoResult3)
 		end
 	})
 end)

@@ -1,28 +1,28 @@
-﻿local purchasePromptDepsModule = require(script:FindFirstAncestor("PurchasePrompt").Parent.PurchasePromptDeps)
-local roact = purchasePromptDepsModule.Roact
-local t = purchasePromptDepsModule.t
-local localizationContextConsumerModule = require(script.Parent.LocalizationContextConsumer)
-local var1 = t.strictInterface({ locKeys = t.table, render = t.callback })
-local var2 = t.strictInterface({ key = t.string, params = t.optional(t.table) })
+﻿local PurchasePromptDepsModule = require(script:FindFirstAncestor("PurchasePrompt").Parent.PurchasePromptDeps)
+local Roact = PurchasePromptDepsModule.Roact
+local T = PurchasePromptDepsModule.t
+local LocalizationContextConsumerModule = require(script.Parent.LocalizationContextConsumer)
+local StrictInterfaceResult = T.strictInterface({ locKeys = T.table, render = T.callback })
+local StrictInterfaceResult1 = T.strictInterface({ key = T.string, params = T.optional(T.table) })
 
-return function(p1)
-	-- upvalues: var1 (ref), var2 (ref), roact (ref), localizationContextConsumerModule (ref)
-	assert(var1(p1))
+return function(p1) --[[ Line: 20 | Named "MultiTextLocalizer" ]]
+	-- upvalues: StrictInterfaceResult (copy), StrictInterfaceResult1 (copy), Roact (copy), LocalizationContextConsumerModule (copy)
+	assert(StrictInterfaceResult(p1))
 	
-	for i, v in pairs(p1.locKeys) do
-		assert(var2(v))
+	for _, locKey in pairs(p1.locKeys) do
+		assert(StrictInterfaceResult1(locKey))
 	end
-	local render = p1.render
+	local RenderFunction = p1.render
 	
-	return roact.createElement(localizationContextConsumerModule, {
-		render = function(p2)
-			-- upvalues: p1 (ref), render (ref)
-			local t = {}
+	return Roact.createElement(LocalizationContextConsumerModule, {
+		render = function(p2) --[[ Line: 29 ]]
+			-- upvalues: p1 (copy), RenderFunction (copy)
+			local FormatResults = {}
 			
-			for i, v in pairs(p1.locKeys) do
-				t[i] = p2:Format(v.key, v.params)
+			for i, locKey in pairs(p1.locKeys) do
+				FormatResults[i] = p2:Format(locKey.key, locKey.params)
 			end
-			return render(t)
+			return RenderFunction(FormatResults)
 		end
 	})
 end

@@ -1,37 +1,37 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local urlBuilder = require(parent_1.UrlBuilder).UrlBuilder
-local navigateDown = require(parent_1.NavigationRodux).Thunks.NavigateDown
-local fFlagSignalsNavP3Dispatch = require(parent_1.SharedFlags).FFlagSignalsNavP3Dispatch
-local var1 = if fFlagSignalsNavP3Dispatch then require(parent_1.RobloxAppNavigation).NavigationCommands else nil
-local useDispatch = require(parent_1.RoactUtils).Hooks.RoactRodux.useDispatch
-local appPage = require(parent_1.RobloxAppEnums).AppPage
-local textService = game:GetService("TextService")
-local verifiedBadgesModule = require(parent_1.VerifiedBadges)
-local reactModule = require(parent_1.React)
-local getTextSize = require(parent_1.Style).GetTextSize
-local UIBloxModule = require(parent_1.UIBlox)
-local partialPageModal = UIBloxModule.App.Dialog.Modal.PartialPageModal
-local getPartialPageModalMiddleContentWidth = UIBloxModule.App.Dialog.Modal.getPartialPageModalMiddleContentWidth
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local withStyle = UIBloxModule.Style.withStyle
-local foundationModule = require(parent_1.Foundation)
-local view = foundationModule.View
-local text = foundationModule.Text
-local enums = foundationModule.Enums
-local getIconRichText = foundationModule.Utility.getIconRichText
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local useTokens = foundationModule.Hooks.useTokens
-local multiTextLocalizerModule = require(parent.Locale.MultiTextLocalizer)
-local subscriptionTitleModule = require(parent.Subscription.SubscriptionTitle)
-local fFlagHideDevSubsPriceIfSubscribed = require(parent.Parent.SharedFlags).FFlagHideDevSubsPriceIfSubscribed
-local fFlagEnableDevSubsFastFollowFixes = require(parent.Parent.SharedFlags).FFlagEnableDevSubsFastFollowFixes
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local UrlBuilder = require(Parent1.UrlBuilder).UrlBuilder
+local NavigateDownFunction = require(Parent1.NavigationRodux).Thunks.NavigateDown
+local FFlagSignalsNavP3Dispatch = require(Parent1.SharedFlags).FFlagSignalsNavP3Dispatch
+local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent1.RobloxAppNavigation).NavigationCommands else nil
+local UseDispatchFunction = require(Parent1.RoactUtils).Hooks.RoactRodux.useDispatch
+local AppPage = require(Parent1.RobloxAppEnums).AppPage
+local TextService = game:GetService("TextService")
+local VerifiedBadgesModule = require(Parent1.VerifiedBadges)
+local ReactModule = require(Parent1.React)
+local GetTextSizeFunction = require(Parent1.Style).GetTextSize
+local UIBloxModule = require(Parent1.UIBlox)
+local PartialPageModal = UIBloxModule.App.Dialog.Modal.PartialPageModal
+local GetPartialPageModalMiddleContentWidthFunction = UIBloxModule.App.Dialog.Modal.getPartialPageModalMiddleContentWidth
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local WithStyleFunction = UIBloxModule.Style.withStyle
+local FoundationModule = require(Parent1.Foundation)
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local Enums = FoundationModule.Enums
+local GetIconRichTextFunction = FoundationModule.Utility.getIconRichText
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local MultiTextLocalizerModule = require(Parent.Locale.MultiTextLocalizer)
+local SubscriptionTitleModule = require(Parent.Subscription.SubscriptionTitle)
+local FFlagHideDevSubsPriceIfSubscribed = require(Parent.Parent.SharedFlags).FFlagHideDevSubsPriceIfSubscribed
+local FFlagEnableDevSubsFastFollowFixes = require(Parent.Parent.SharedFlags).FFlagEnableDevSubsFastFollowFixes
 
-local function generateTestmodeDisclaimer(p1, p2, p3, p4, p5)
-	-- upvalues: foundationFontFaceMigration (ref), getTextSize (ref), textService (ref), reactModule (ref), normalizeFontFace (ref)
-	return reactModule.createElement("Frame", {
+local function generateTestmodeDisclaimer(FooterText, p1, Theme, X, p2) --[[ Line: 89 ]]
+	-- upvalues: FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy), ReactModule (copy), NormalizeFontFaceFunction (copy)
+	return ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
 		LayoutOrder = 2,
@@ -40,98 +40,86 @@ local function generateTestmodeDisclaimer(p1, p2, p3, p4, p5)
 		Size = UDim2.new(1, -48, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y
 	}, {
-		DisclaimerText = reactModule.createElement("TextLabel", {
+		DisclaimerText = ReactModule.createElement("TextLabel", {
 			LayoutOrder = 1,
 			BackgroundTransparency = 1,
 			TextWrapped = true,
 			TextSize = 12,
-			Size = UDim2.new(1, 0, 0, if foundationFontFaceMigration then getTextSize(p1, 12, p5.Typography.CaptionSmall.Font, Vector2.new(p4, 1e999), { addTemporaryPadding = false }).Y + 2 else textService:GetTextSize(p1, 12, p2.Footer.Font, Vector2.new(p4, 1e999)).Y + 2),
-			Font = if foundationFontFaceMigration then nil else p2.Footer.Font,
-			FontFace = if foundationFontFaceMigration then normalizeFontFace(p5.Typography.CaptionSmall.Font) else nil,
+			Size = UDim2.new(1, 0, 0, if FoundationFontFaceMigration then GetTextSizeFunction(FooterText, 12, p2.Typography.CaptionSmall.Font, Vector2.new(X, 1e999), { addTemporaryPadding = false }).Y + 2 else TextService:GetTextSize(FooterText, 12, p1.Footer.Font, Vector2.new(X, 1e999)).Y + 2),
+			Font = if FoundationFontFaceMigration then nil else p1.Footer.Font,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Typography.CaptionSmall.Font) else nil,
 			TextXAlignment = Enum.TextXAlignment.Left,
-			Text = p1,
-			TextColor3 = p3.TextDefault.Color
+			Text = FooterText,
+			TextColor3 = Theme.TextDefault.Color
 		})
 	})
 end
 
-local function generatePromptText(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: reactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), getTextSize (ref), textService (ref)
-	return reactModule.createElement("TextLabel", {
-		LayoutOrder = p6 or 2,
+local function generatePromptText(p1, p2, Theme, XOffset, Callback, p3, p4) --[[ Line: 138 ]]
+	-- upvalues: ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), GetTextSizeFunction (copy), TextService (copy)
+	return ReactModule.createElement("TextLabel", {
+		LayoutOrder = p3 or 2,
 		BackgroundTransparency = 1,
-		Size = UDim2.new(0, p4, 0, 0),
+		Size = UDim2.new(0, XOffset, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
 		TextXAlignment = Enum.TextXAlignment.Left,
-		Font = if foundationFontFaceMigration then nil else p2.Body.Font,
-		FontFace = if foundationFontFaceMigration then normalizeFontFace(p7.Typography.BodyLarge.Font) else nil,
+		Font = if FoundationFontFaceMigration then nil else p2.Body.Font,
+		FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p4.Typography.BodyLarge.Font) else nil,
 		Text = p1.description,
 		TextSize = 16,
 		TextWrapped = true,
-		TextColor3 = p3.TextDefault.Color,
-		TextTransparency = p3.TextDefault.Transparency,
+		TextColor3 = Theme.TextDefault.Color,
+		TextTransparency = Theme.TextDefault.Transparency,
 		RichText = true,
-		[reactModule.Change.AbsoluteSize] = function(p8)
-			-- upvalues: foundationFontFaceMigration (copy), getTextSize (copy), p7 (ref), textService (copy), p5 (ref)
-			p5(if foundationFontFaceMigration then getTextSize(p8.Text, p8.TextSize, p7.Typography.BodyLarge.Font, Vector2.new(p8.AbsoluteSize.X, 1e999), { addTemporaryPadding = false }).Y else textService:GetTextSize(p8.Text, p8.TextSize, p8.Font, Vector2.new(p8.AbsoluteSize.X, 1e999)).Y)
+		[ReactModule.Change.AbsoluteSize] = function(Frame: Frame) --[[ Line: 163 ]]
+			-- upvalues: FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), p4 (copy), TextService (upval), Callback (copy)
+			Callback(if FoundationFontFaceMigration then GetTextSizeFunction(Frame.Text, Frame.TextSize, p4.Typography.BodyLarge.Font, Vector2.new(Frame.AbsoluteSize.X, 1e999), { addTemporaryPadding = false }).Y else TextService:GetTextSize(Frame.Text, Frame.TextSize, Frame.Font, Vector2.new(Frame.AbsoluteSize.X, 1e999)).Y)
 		end
 	})
 end
 
-local function createSubscribeButtonStacks(p1, p2)
-	-- upvalues: buttonType (ref)
-	if p1.disablePurchase then
-		return {
-			{
-				buttonType = buttonType.PrimarySystem,
-				props = {
-					isDisabled = true,
-					layoutOrder = 0,
-					onActivated = function() end,
-					text = p1.disablePurchaseText
-				}
-			}
-		}
-	elseif p1.secondaryPaymentMethod == nil or p1.secondaryPaymentMethod == "" then
-		return {
-			{
-				buttonType = buttonType.PrimarySystem,
-				props = {
-					layoutOrder = 0,
-					onActivated = function()
-						-- upvalues: p1 (ref)
-						p1.purchaseSubscriptionActivated(p1.primaryPaymentMethod)
-					end,
-					text = p2.subscribe
-				}
-			}
-		}
-	end
-	local subscribeWithRobloxCredit = nil
-	
-	if p1.primaryPaymentMethod == "Stripe" then
-		subscribeWithRobloxCredit = p2.subscribeWithCreditDebitCard
-	elseif p1.primaryPaymentMethod == "CreditBalance" then
-		subscribeWithRobloxCredit = p2.subscribeWithRobloxCredit
-	end
-	return {
+local function createSubscribeButtonStacks(p1, p2) --[[ Line: 185 ]]
+	-- upvalues: ButtonType (copy)
+	return if p1.disablePurchase then {
 		{
-			buttonType = buttonType.PrimarySystem,
+			buttonType = ButtonType.PrimarySystem,
+			props = {
+				isDisabled = true,
+				layoutOrder = 0,
+				onActivated = function() --[[ Line: 191 ]] end,
+				text = p1.disablePurchaseText
+			}
+		}
+	} elseif p1.secondaryPaymentMethod == nil or p1.secondaryPaymentMethod == "" then {
+		{
+			buttonType = ButtonType.PrimarySystem,
 			props = {
 				layoutOrder = 0,
-				onActivated = function()
-					-- upvalues: p1 (ref)
+				onActivated = function() --[[ Line: 205 ]]
+					-- upvalues: p1 (copy)
 					p1.purchaseSubscriptionActivated(p1.primaryPaymentMethod)
 				end,
-				text = subscribeWithRobloxCredit
+				text = p2.subscribe
+			}
+		}
+	} else {
+		{
+			buttonType = ButtonType.PrimarySystem,
+			props = {
+				layoutOrder = 0,
+				onActivated = function() --[[ Line: 226 ]]
+					-- upvalues: p1 (copy)
+					p1.purchaseSubscriptionActivated(p1.primaryPaymentMethod)
+				end,
+				text = if p1.primaryPaymentMethod == "Stripe" then p2.subscribeWithCreditDebitCard elseif p1.primaryPaymentMethod == "CreditBalance" then p2.subscribeWithRobloxCredit else nil
 			}
 		},
 		{
-			buttonType = buttonType.Secondary,
+			buttonType = ButtonType.Secondary,
 			props = {
 				layoutOrder = 1,
-				onActivated = function()
-					-- upvalues: p1 (ref)
+				onActivated = function() --[[ Line: 236 ]]
+					-- upvalues: p1 (copy)
 					p1.purchaseSubscriptionActivated(p1.secondaryPaymentMethod)
 				end,
 				text = p2.payAnotherWay
@@ -140,176 +128,180 @@ local function createSubscribeButtonStacks(p1, p2)
 	}
 end
 
-local function generateDisclosure(p1, p2)
-	-- upvalues: reactModule (ref), view (ref), text (ref)
-	local parts = string.split(p1.DisclosureTermsURL, " {termsofuse} ")
+local function generateDisclosure(p1, OnActivated) --[[ Line: 246 ]]
+	-- upvalues: ReactModule (copy), View (copy), Text (copy)
+	local Parts = string.split(p1.DisclosureTermsURL, " {termsofuse} ")
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "row wrap auto-y align-y-center align-x-center size-full-0 gap-xsmall padding-x-xsmall padding-bottom-xsmall"
 	}, {
-		DisclosurePayment = reactModule.createElement(text, {
+		DisclosurePayment = ReactModule.createElement(Text, {
 			LayoutOrder = 1,
 			tag = "auto-xy text-body content-default text-align-x-left content-muted text-caption-small",
 			Text = p1.DisclosurePayment
 		}),
-		BeforeText = reactModule.createElement(text, {
+		BeforeText = ReactModule.createElement(Text, {
 			LayoutOrder = 2,
 			tag = "auto-xy text-body content-default text-align-x-left content-muted text-caption-small",
-			Text = parts[1]
+			Text = Parts[1]
 		}),
-		TextLink = reactModule.createElement(text, {
+		TextLink = ReactModule.createElement(Text, {
 			LayoutOrder = 3,
 			RichText = true,
 			tag = "auto-xy text-body content-default text-align-x-left content-muted text-caption-small",
-			Text = "<u>" .. p15.TermsOfUse .. "</u>",
-			onActivated = p2
+			Text = "<u>" .. p1.TermsOfUse .. "</u>",
+			onActivated = OnActivated
 		}),
-		AfterText = reactModule.createElement(text, {
+		AfterText = ReactModule.createElement(Text, {
 			LayoutOrder = 4,
 			tag = "auto-xy text-body content-default text-align-x-left content-muted text-caption-small",
-			Text = parts[2]
+			Text = Parts[2]
 		})
 	})
 end
 
-local function renderNewModalDesign(value, p1, p2, p3, p4, p5, p6, p7, p8)
-	-- upvalues: verifiedBadgesModule (ref), getIconRichText (ref), enums (ref), reactModule (ref), partialPageModal (ref), createSubscribeButtonStacks (ref), generateTestmodeDisclaimer (ref), fFlagEnableDevSubsFastFollowFixes (ref), generateDisclosure (ref), imageSetLabel (ref), view (ref), text (ref), fFlagHideDevSubsPriceIfSubscribed (ref), foundationModule (ref), generatePromptText (ref)
-	return reactModule.createElement(partialPageModal, {
-		screenSize = value.screenSize,
+local function renderNewModalDesign(p1, p2, Theme, p3, X, YOffset: number, OnActivated, CalculatePromptHeight, p4) --[[ Line: 279 ]]
+	-- upvalues: VerifiedBadgesModule (copy), GetIconRichTextFunction (copy), Enums (copy), ReactModule (copy), PartialPageModal (copy), createSubscribeButtonStacks (copy), generateTestmodeDisclaimer (copy), FFlagEnableDevSubsFastFollowFixes (copy), generateDisclosure (copy), ImageSetLabel (copy), View (copy), Text (copy), FFlagHideDevSubsPriceIfSubscribed (copy), FoundationModule (copy), generatePromptText (copy)
+	local Text1 = (if p1.isRobuxSubscription then GetIconRichTextFunction(Enums.IconName.Robux) .. " " else "") .. p1.displayPrice .. p1.period
+	
+	return ReactModule.createElement(PartialPageModal, {
+		screenSize = p1.screenSize,
 		contentPadding = UDim.new(0, 24),
 		buttonStackProps = {
 			buttonHeight = 48,
-			buttons = createSubscribeButtonStacks(value, p1),
+			buttons = createSubscribeButtonStacks(p1, p2),
 			forcedFillDirection = Enum.FillDirection.Vertical
 		},
-		onCloseClicked = value.cancelPurchaseActivated,
-		footerContent = function()
-			-- upvalues: value (ref), generateTestmodeDisclaimer (copy), p1 (ref), p3 (ref), p2 (ref), p4 (ref), p8 (ref), fFlagEnableDevSubsFastFollowFixes (copy), generateDisclosure (copy), p6 (ref)
-			return if value.isTestingMode then generateTestmodeDisclaimer(p1.footerText, p3, p2, p4, p8) elseif fFlagEnableDevSubsFastFollowFixes then nil else generateDisclosure(p1, p6)
+		onCloseClicked = p1.cancelPurchaseActivated,
+		footerContent = function() --[[ Line: 305 ]]
+			-- upvalues: p1 (copy), generateTestmodeDisclaimer (upval), p2 (copy), p3 (copy), Theme (copy), X (copy), p4 (copy), FFlagEnableDevSubsFastFollowFixes (upval), generateDisclosure (upval), OnActivated (copy)
+			return if p1.isTestingMode then generateTestmodeDisclaimer(p2.footerText, p3, Theme, X, p4) elseif FFlagEnableDevSubsFastFollowFixes then nil else generateDisclosure(p2, OnActivated)
 		end
 	}, {
-		reactModule.createElement("Frame", {
+		ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y
 		}, {
-			PromptScroll = reactModule.createElement("ScrollingFrame", {
+			PromptScroll = ReactModule.createElement("ScrollingFrame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 3,
 				BorderSizePixel = 0,
 				ZIndex = 2,
 				Selectable = false,
-				Size = UDim2.new(1, 0, 0, math.min(p5, value.screenSize.Y - 240)),
-				ScrollingEnabled = value.screenSize.Y - 240 < p5,
-				ScrollBarThickness = if value.screenSize.Y - 240 < p5 then 5 else nil,
+				Size = UDim2.new(1, 0, 0, (math.min(YOffset, p1.screenSize.Y - 240))),
+				ScrollingEnabled = p1.screenSize.Y - 240 < YOffset,
+				ScrollBarThickness = if p1.screenSize.Y - 240 < YOffset then 5 else nil,
 				ScrollingDirection = Enum.ScrollingDirection.Y,
-				CanvasSize = UDim2.new(1, 0, 0, p5)
+				CanvasSize = UDim2.new(1, 0, 0, YOffset)
 			}, {
-				Padding = reactModule.createElement("UIPadding", {
+				Padding = ReactModule.createElement("UIPadding", {
 					PaddingTop = UDim.new(0, 24),
 					PaddingBottom = UDim.new(0, 24)
 				}),
-				Layout = reactModule.createElement("UIListLayout", {
+				Layout = ReactModule.createElement("UIListLayout", {
 					SortOrder = Enum.SortOrder.LayoutOrder,
 					HorizontalAlignment = Enum.HorizontalAlignment.Center,
 					Padding = UDim.new(0, 24)
 				}),
-				HeroImage = reactModule.createElement(imageSetLabel, {
+				HeroImage = ReactModule.createElement(ImageSetLabel, {
 					LayoutOrder = 0,
 					BackgroundTransparency = 1,
 					Size = UDim2.new(0, 150, 0, 150),
 					ScaleType = Enum.ScaleType.Fit,
-					Image = value.itemIcon
+					Image = p1.itemIcon
 				}, {
-					UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 12) })
+					UICorner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 12) })
 				}),
-				AttributionSection = reactModule.createElement(view, {
+				AttributionSection = ReactModule.createElement(View, {
 					LayoutOrder = 1,
 					tag = "auto-xy col align-x-start size-full-0"
 				}, {
-					Layout = reactModule.createElement("UIListLayout", {
+					Layout = ReactModule.createElement("UIListLayout", {
 						SortOrder = Enum.SortOrder.LayoutOrder,
 						FillDirection = Enum.FillDirection.Vertical,
 						HorizontalAlignment = Enum.HorizontalAlignment.Left,
 						Padding = UDim.new(0, 4)
 					}),
-					SubscriptionName = reactModule.createElement(text, {
+					SubscriptionName = ReactModule.createElement(Text, {
 						LayoutOrder = 1,
 						tag = "auto-xy content-emphasis text-align-x-left",
-						Text = value.name,
-						fontStyle = p8.Typography.HeadingSmall
+						Text = p1.name,
+						fontStyle = p4.Typography.HeadingSmall
 					}),
-					CreatorName = reactModule.createElement(text, {
+					CreatorName = ReactModule.createElement(Text, {
 						LayoutOrder = 2,
 						tag = "auto-xy content-default text-align-x-left",
-						Text = if value.creatorName then value.creatorName .. " " .. (if value.creatorVerified then verifiedBadgesModule.emoji.verified else "") else nil,
-						fontStyle = p8.Typography.TitleLarge
+						Text = if p1.creatorName then p1.creatorName .. " " .. (p1.creatorVerified and VerifiedBadgesModule.emoji.verified or "") else nil,
+						fontStyle = p4.Typography.TitleLarge
 					}),
-					PriceRow = if value.disablePurchase and fFlagHideDevSubsPriceIfSubscribed then nil else reactModule.createElement(text, {
+					PriceRow = if p1.disablePurchase and FFlagHideDevSubsPriceIfSubscribed then nil else ReactModule.createElement(Text, {
 						LayoutOrder = 3,
 						RichText = true,
 						tag = "auto-xy content-emphasis text-align-x-left",
-						Text = (if value.isRobuxSubscription then getIconRichText(enums.IconName.Robux) .. " " else "") .. value.displayPrice .. value.period,
-						fontStyle = p8.Typography.TitleLarge
+						Text = Text1,
+						fontStyle = p4.Typography.TitleLarge
 					})
 				}),
-				ActionButtonsRow = reactModule.createElement(view, {
+				ActionButtonsRow = ReactModule.createElement(View, {
 					LayoutOrder = 2,
 					tag = "row gap-small auto-y size-full-0 align-x-left"
 				}, {
-					ShareButton = if value.onShare then reactModule.createElement(foundationModule.Chip, {
+					ShareButton = if p1.onShare then ReactModule.createElement(FoundationModule.Chip, {
 						LayoutOrder = 1,
-						text = p1.shareText,
-						leading = { iconName = enums.IconName.ArrowThickToRight },
-						size = enums.ChipSize.Small,
-						onActivated = value.onShare
+						text = p2.shareText,
+						leading = { iconName = Enums.IconName.ArrowThickToRight },
+						size = Enums.ChipSize.Small,
+						onActivated = p1.onShare
 					}) else nil,
-					ReportButton = if value.onReport then reactModule.createElement(foundationModule.Chip, {
+					ReportButton = if p1.onReport then ReactModule.createElement(FoundationModule.Chip, {
 						LayoutOrder = 2,
-						text = p1.reportText,
-						leading = { iconName = enums.IconName.Flag },
-						size = enums.ChipSize.Small,
-						onActivated = value.onReport
+						text = p2.reportText,
+						leading = { iconName = Enums.IconName.Flag },
+						size = Enums.ChipSize.Small,
+						onActivated = p1.onReport
 					}) else nil
 				}),
-				generatePromptText(value, p3, p2, p4, p7, 3, p8)
+				generatePromptText(p1, p3, Theme, X, CalculatePromptHeight, 3, p4)
 			})
 		})
 	})
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), useDispatch (ref), useTokens (ref), urlBuilder (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), subscriptionTitleModule (ref), multiTextLocalizerModule (ref), withStyle (ref), getPartialPageModalMiddleContentWidth (ref), renderNewModalDesign (ref), partialPageModal (ref), createSubscribeButtonStacks (ref), generateTestmodeDisclaimer (ref), fFlagEnableDevSubsFastFollowFixes (ref), generateDisclosure (ref), generatePromptText (ref)
-	local var2, var3 = reactModule.useState(0)
-	local var4 = useDispatch()
-	local var5 = useTokens()
+return function(p1) --[[ Line: 417 | Named "SubscriptionPurchasePrompt" ]]
+	-- upvalues: ReactModule (copy), UseDispatchFunction (copy), UseTokensFunction (copy), UrlBuilder (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), SubscriptionTitleModule (copy), MultiTextLocalizerModule (copy), WithStyleFunction (copy), GetPartialPageModalMiddleContentWidthFunction (copy), renderNewModalDesign (copy), PartialPageModal (copy), createSubscribeButtonStacks (copy), generateTestmodeDisclaimer (copy), FFlagEnableDevSubsFastFollowFixes (copy), generateDisclosure (copy), generatePromptText (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseTokensResult = UseTokensFunction()
 	
-	local function openTermsOfUse()
-		-- upvalues: urlBuilder (copy), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var4 (ref), navigateDown (copy)
-		local t = {
-			name = appPage.GenericWebPage,
-			detail = urlBuilder.static.about.terms()
+	local function openTermsOfUse() --[[ Line: 422 ]]
+		-- upvalues: UrlBuilder (upval), AppPage (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval)
+		local config = {
+			name = AppPage.GenericWebPage,
+			detail = UrlBuilder.static.about.terms()
 		}
 		
-		if fFlagSignalsNavP3Dispatch then
-			var1.down(var1.fromLegacyPage(t))
+		if FFlagSignalsNavP3Dispatch then
+			NavigationCommands.down(NavigationCommands.fromLegacyPage(config))
 			
 			return
+		else
+			UseDispatchResult(NavigateDownFunction(config))
 		end
-		var4(navigateDown(t))
 	end
 	
-	local function calculatePromptHeight(p2)
-		-- upvalues: p1 (ref), var3 (ref), subscriptionTitleModule (copy)
+	local function calculatePromptHeight(p2: number) --[[ Line: 435 ]]
+		-- upvalues: p1 (copy), UseStateResult2 (copy), SubscriptionTitleModule (upval)
 		if p1.shouldUseNewModalDesign then
-			var3(338 + p2 + 24)
+			UseStateResult2(338 + p2 + 24)
 			
 			return
+		else
+			UseStateResult2(24 + SubscriptionTitleModule:getTitleHeight(p1.screenSize.Y - 240) + 24 + p2)
 		end
-		var3(24 + subscriptionTitleModule:getTitleHeight(p1.screenSize.Y - 240) + 24 + p2)
 	end
 	
-	return reactModule.createElement(multiTextLocalizerModule, {
+	return ReactModule.createElement(MultiTextLocalizerModule, {
 		keys = {
 			titleText = {
 				key = "IAPExperience.SubscriptionPurchasePrompt.Label.GetSubscription"
@@ -335,15 +327,15 @@ return function(p1)
 			shareText = { key = "Feature.SocialShare.Action.Share" },
 			reportText = { key = "Feature.GameDetails.Action.Report" }
 		},
-		render = function(p2)
-			-- upvalues: withStyle (copy), getPartialPageModalMiddleContentWidth (copy), p1 (ref), renderNewModalDesign (copy), var2 (ref), openTermsOfUse (ref), calculatePromptHeight (ref), var5 (ref), reactModule (copy), partialPageModal (copy), createSubscribeButtonStacks (copy), generateTestmodeDisclaimer (copy), fFlagEnableDevSubsFastFollowFixes (copy), generateDisclosure (copy), subscriptionTitleModule (copy), generatePromptText (copy)
-			return withStyle(function(p3)
-				-- upvalues: getPartialPageModalMiddleContentWidth (copy), p1 (copy), renderNewModalDesign (copy), p2 (ref), var2 (copy), openTermsOfUse (copy), calculatePromptHeight (copy), var5 (copy), reactModule (copy), partialPageModal (copy), createSubscribeButtonStacks (copy), generateTestmodeDisclaimer (copy), fFlagEnableDevSubsFastFollowFixes (copy), generateDisclosure (copy), subscriptionTitleModule (copy), generatePromptText (copy)
-				local theme = p3.Theme
-				local font = p3.Font
-				local var6 = getPartialPageModalMiddleContentWidth(p1.screenSize.X)
+		render = function(p2) --[[ Line: 472 ]]
+			-- upvalues: WithStyleFunction (upval), GetPartialPageModalMiddleContentWidthFunction (upval), p1 (copy), renderNewModalDesign (upval), UseStateResult (copy), openTermsOfUse (copy), calculatePromptHeight (copy), UseTokensResult (copy), ReactModule (upval), PartialPageModal (upval), createSubscribeButtonStacks (upval), generateTestmodeDisclaimer (upval), FFlagEnableDevSubsFastFollowFixes (upval), generateDisclosure (upval), SubscriptionTitleModule (upval), generatePromptText (upval)
+			return WithStyleFunction(function(p3) --[[ Line: 473 ]]
+				-- upvalues: GetPartialPageModalMiddleContentWidthFunction (upval), p1 (upval), renderNewModalDesign (upval), p2 (copy), UseStateResult (upval), openTermsOfUse (upval), calculatePromptHeight (upval), UseTokensResult (upval), ReactModule (upval), PartialPageModal (upval), createSubscribeButtonStacks (upval), generateTestmodeDisclaimer (upval), FFlagEnableDevSubsFastFollowFixes (upval), generateDisclosure (upval), SubscriptionTitleModule (upval), generatePromptText (upval)
+				local Theme = p3.Theme
+				local _Font = p3.Font
+				local PartialPageModalMiddleContentWidth = GetPartialPageModalMiddleContentWidthFunction(p1.screenSize.X)
 				
-				return if p1.shouldUseNewModalDesign then renderNewModalDesign(p1, p2, theme, font, var6, var2, openTermsOfUse, calculatePromptHeight, var5) else reactModule.createElement(partialPageModal, {
+				return if p1.shouldUseNewModalDesign then renderNewModalDesign(p1, p2, Theme, _Font, PartialPageModalMiddleContentWidth, UseStateResult, openTermsOfUse, calculatePromptHeight, UseTokensResult) else ReactModule.createElement(PartialPageModal, {
 					title = p2.titleText,
 					screenSize = p1.screenSize,
 					contentPadding = UDim.new(0, 24),
@@ -353,38 +345,38 @@ return function(p1)
 						forcedFillDirection = Enum.FillDirection.Vertical
 					},
 					onCloseClicked = p1.cancelPurchaseActivated,
-					footerContent = function()
-						-- upvalues: p1 (copy), generateTestmodeDisclaimer (copy), p2 (copy), font (ref), theme (ref), var6 (ref), var5 (copy), fFlagEnableDevSubsFastFollowFixes (copy), generateDisclosure (copy), openTermsOfUse (copy)
-						return if p1.isTestingMode then generateTestmodeDisclaimer(p2.footerText, font, theme, var6, var5) elseif fFlagEnableDevSubsFastFollowFixes then nil else generateDisclosure(p2, openTermsOfUse)
+					footerContent = function() --[[ Line: 502 ]]
+						-- upvalues: p1 (upval), generateTestmodeDisclaimer (upval), p2 (upval), _Font (copy), Theme (copy), PartialPageModalMiddleContentWidth (copy), UseTokensResult (upval), FFlagEnableDevSubsFastFollowFixes (upval), generateDisclosure (upval), openTermsOfUse (upval)
+						return if p1.isTestingMode then generateTestmodeDisclaimer(p2.footerText, _Font, Theme, PartialPageModalMiddleContentWidth, UseTokensResult) elseif FFlagEnableDevSubsFastFollowFixes then nil else generateDisclosure(p2, openTermsOfUse)
 					end
 				}, {
-					reactModule.createElement("Frame", {
+					ReactModule.createElement("Frame", {
 						BackgroundTransparency = 1,
 						Size = UDim2.new(1, 0, 0, 0),
 						AutomaticSize = Enum.AutomaticSize.Y
 					}, {
-						PromptScroll = reactModule.createElement("ScrollingFrame", {
+						PromptScroll = ReactModule.createElement("ScrollingFrame", {
 							BackgroundTransparency = 1,
 							LayoutOrder = 3,
 							BorderSizePixel = 0,
 							ZIndex = 2,
 							Selectable = false,
-							Size = UDim2.new(1, 0, 0, math.min(var2, p1.screenSize.Y - 240)),
-							ScrollingEnabled = p1.screenSize.Y - 240 < var2,
-							ScrollBarThickness = if p1.screenSize.Y - 240 < var2 then 5 else nil,
+							Size = UDim2.new(1, 0, 0, (math.min(UseStateResult, p1.screenSize.Y - 240))),
+							ScrollingEnabled = p1.screenSize.Y - 240 < UseStateResult,
+							ScrollBarThickness = if p1.screenSize.Y - 240 < UseStateResult then 5 else nil,
 							ScrollingDirection = Enum.ScrollingDirection.Y,
-							CanvasSize = UDim2.new(1, 0, 0, var2)
+							CanvasSize = UDim2.new(1, 0, 0, UseStateResult)
 						}, {
-							Padding = reactModule.createElement("UIPadding", {
+							Padding = ReactModule.createElement("UIPadding", {
 								PaddingTop = UDim.new(0, 24),
 								PaddingBottom = UDim.new(0, 24)
 							}),
-							Layout = reactModule.createElement("UIListLayout", {
+							Layout = ReactModule.createElement("UIListLayout", {
 								SortOrder = Enum.SortOrder.LayoutOrder,
 								HorizontalAlignment = Enum.HorizontalAlignment.Center,
 								Padding = UDim.new(0, 24)
 							}),
-							SubscriptionTitleSection = reactModule.createElement(subscriptionTitleModule, {
+							SubscriptionTitleSection = ReactModule.createElement(SubscriptionTitleModule, {
 								layoutOrder = 2,
 								subscriptionProviderName = p1.subscriptionProviderName,
 								name = p1.name,
@@ -394,7 +386,7 @@ return function(p1)
 								contentHeight = p1.screenSize.Y - 240,
 								itemIcon = p1.itemIcon
 							}),
-							generatePromptText(p1, font, theme, var6, calculatePromptHeight, 2, var5)
+							generatePromptText(p1, _Font, Theme, PartialPageModalMiddleContentWidth, calculatePromptHeight, 2, UseTokensResult)
 						})
 					})
 				})

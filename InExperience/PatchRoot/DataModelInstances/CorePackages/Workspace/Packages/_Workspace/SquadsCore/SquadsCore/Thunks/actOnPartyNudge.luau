@@ -1,125 +1,114 @@
-﻿local squadsCore = script:FindFirstAncestor("SquadsCore")
-local parent = squadsCore.Parent
-local leaveSquadModule = require(script.Parent.leaveSquad)
-local constantsModule = require(squadsCore.Common.Constants)
-local logInExpCoplayTelemetryModule = require(squadsCore.Analytics.logInExpCoplayTelemetry)
-local squadCoplayJoinModule = require(squadsCore.Enums.SquadCoplayJoin)
-local _ = require(squadsCore.Enums.SquadLocationEnum)
-local squadPromptTypeModule = require(squadsCore.Enums.SquadPromptType)
-local networkingSquadsModule = require(squadsCore.Http.NetworkingSquads)
-local promiseModule = require(parent.Promise)
-local fFlagPartyDevAPIToRespectThirdPartySettingsEnabled = require(parent.SharedFlags).FFlagPartyDevAPIToRespectThirdPartySettingsEnabled
+﻿local SquadsCore = script:FindFirstAncestor("SquadsCore")
+local Parent = SquadsCore.Parent
+local LeaveSquadModule = require(script.Parent.leaveSquad)
+local ConstantsModule = require(SquadsCore.Common.Constants)
+local LogInExpCoplayTelemetryModule = require(SquadsCore.Analytics.logInExpCoplayTelemetry)
+local SquadCoplayJoinModule = require(SquadsCore.Enums.SquadCoplayJoin)
+local _ = require(SquadsCore.Enums.SquadLocationEnum)
+local SquadPromptTypeModule = require(SquadsCore.Enums.SquadPromptType)
+local NetworkingSquadsModule = require(SquadsCore.Http.NetworkingSquads)
+local PromiseModule = require(Parent.Promise)
+local FFlagPartyDevAPIToRespectThirdPartySettingsEnabled = require(Parent.SharedFlags).FFlagPartyDevAPIToRespectThirdPartySettingsEnabled
 
-local _ = function(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: networkingSquadsModule (ref), constantsModule (ref), squadCoplayJoinModule (ref), logInExpCoplayTelemetryModule (ref), squadPromptTypeModule (ref)
-	return function(p8)
-		-- upvalues: networkingSquadsModule (copy), p1 (ref), p2 (ref), p6 (ref), p5 (ref), p7 (ref), constantsModule (copy), squadCoplayJoinModule (copy), logInExpCoplayTelemetryModule (copy), p4 (ref), p3 (ref), squadPromptTypeModule (copy)
-		return p8:dispatch(networkingSquadsModule.ActOnPartyNudge.API({
+local function _(p1, p2, p3, p4, p5, p6, p7) --[[ Line: 20 ]]
+	-- upvalues: NetworkingSquadsModule (copy), ConstantsModule (copy), SquadCoplayJoinModule (copy), LogInExpCoplayTelemetryModule (copy), SquadPromptTypeModule (copy)
+	return function(p8) --[[ Line: 29 ]]
+		-- upvalues: NetworkingSquadsModule (upval), p1 (copy), p2 (copy), p6 (copy), p5 (copy), p7 (copy), ConstantsModule (upval), SquadCoplayJoinModule (upval), LogInExpCoplayTelemetryModule (upval), p4 (copy), p3 (copy), SquadPromptTypeModule (upval)
+		return p8:dispatch(NetworkingSquadsModule.ActOnPartyNudge.API({
 			leaveExisting = true,
 			action = p1,
 			nudgeId = p2,
 			partyAttemptId = p6,
 			squadLocation = p5,
 			parentChannelId = p7
-		})):andThen(function(p9)
-			-- upvalues: p1 (copy), constantsModule (copy), squadCoplayJoinModule (copy), logInExpCoplayTelemetryModule (copy), p5 (copy), p4 (copy)
-			if if p1 ~= constantsModule.ACCEPT_START_PARTY_REQUEST_ACTION then p1 == constantsModule.ACCEPT_PARTY_INVITE_ACTION else true then
-				local groupUpId = p9.responseBody.groupUp.groupUpId
-				local members = p9.responseBody.groupUp.members
+		})):andThen(function(Result) --[[ Line: 38 ]]
+			-- upvalues: p1 (upval), ConstantsModule (upval), SquadCoplayJoinModule (upval), LogInExpCoplayTelemetryModule (upval), p5 (upval), p4 (upval)
+			if p1 == ConstantsModule.ACCEPT_START_PARTY_REQUEST_ACTION or p1 == ConstantsModule.ACCEPT_PARTY_INVITE_ACTION then
+				local GroupUpId = Result.responseBody.groupUp.groupUpId
+				local Members = Result.responseBody.groupUp.members
 				
-				if groupUpId and members then
-					logInExpCoplayTelemetryModule(groupUpId, members, p5, if p1 == constantsModule.ACCEPT_START_PARTY_REQUEST_ACTION then squadCoplayJoinModule.SquadNudgeCreation else squadCoplayJoinModule.SquadNudgeJoin, p4)
+				if GroupUpId and Members then
+					LogInExpCoplayTelemetryModule(GroupUpId, Members, p5, if p1 == ConstantsModule.ACCEPT_START_PARTY_REQUEST_ACTION then SquadCoplayJoinModule.SquadNudgeCreation else SquadCoplayJoinModule.SquadNudgeJoin, p4)
 				end
 			end
-		end):catch(function(_)
-			-- upvalues: p1 (copy), constantsModule (copy), p3 (copy), p8 (ref), squadPromptTypeModule (copy)
-			if p1 == constantsModule.ACCEPT_START_PARTY_REQUEST_ACTION or p1 == constantsModule.ACCEPT_PARTY_INVITE_ACTION then
+		end):catch(function(_) --[[ Line: 58 ]]
+			-- upvalues: p1 (upval), ConstantsModule (upval), p3 (upval), p8 (copy), SquadPromptTypeModule (upval)
+			if p1 == ConstantsModule.ACCEPT_START_PARTY_REQUEST_ACTION or p1 == ConstantsModule.ACCEPT_PARTY_INVITE_ACTION then
 				p3(p8, {
 					hideCancelButton = true,
-					promptType = squadPromptTypeModule.Error
+					promptType = SquadPromptTypeModule.Error
 				})
 			end
 		end)
 	end
 end
 
-return function(p1, p2, p3, p4, p5, p6, p7, p8, p9)
-	-- upvalues: networkingSquadsModule (ref), constantsModule (ref), squadCoplayJoinModule (ref), logInExpCoplayTelemetryModule (ref), squadPromptTypeModule (ref), promiseModule (ref), leaveSquadModule (ref), fFlagPartyDevAPIToRespectThirdPartySettingsEnabled (ref)
-	return function(p10)
-		-- upvalues: p3 (ref), p1 (ref), p2 (ref), p4 (ref), p5 (ref), p6 (ref), p8 (ref), p9 (ref), networkingSquadsModule (copy), constantsModule (copy), squadCoplayJoinModule (copy), logInExpCoplayTelemetryModule (copy), squadPromptTypeModule (copy), promiseModule (copy), leaveSquadModule (copy), fFlagPartyDevAPIToRespectThirdPartySettingsEnabled (copy), p7 (ref)
-		local state = p10:getState()
-		local squadId = state.Squad and (state.Squad.Squad and (state.Squad.Squad.currentSquad and state.Squad.Squad.currentSquad.squadId))
+return function(ACCEPTSTARTPARTYREQUESTACTION, NudgeId, p1, Callback, p2, SquadLocation, p3, PartyAttemptId, ParentChannelId) --[[ Line: 73 ]]
+	-- upvalues: NetworkingSquadsModule (copy), ConstantsModule (copy), SquadCoplayJoinModule (copy), LogInExpCoplayTelemetryModule (copy), SquadPromptTypeModule (copy), PromiseModule (copy), LeaveSquadModule (copy), FFlagPartyDevAPIToRespectThirdPartySettingsEnabled (copy)
+	return function(p4) --[[ Line: 84 ]]
+		-- upvalues: p1 (copy), ACCEPTSTARTPARTYREQUESTACTION (copy), NudgeId (copy), Callback (copy), p2 (copy), SquadLocation (copy), PartyAttemptId (copy), ParentChannelId (copy), NetworkingSquadsModule (upval), ConstantsModule (upval), SquadCoplayJoinModule (upval), LogInExpCoplayTelemetryModule (upval), SquadPromptTypeModule (upval), PromiseModule (upval), LeaveSquadModule (upval), FFlagPartyDevAPIToRespectThirdPartySettingsEnabled (upval), p3 (copy)
+		local State = p4:getState()
+		local SquadId = State.Squad and (State.Squad.Squad and (State.Squad.Squad.currentSquad and State.Squad.Squad.currentSquad.squadId))
 		
-		if squadId and squadId ~= "" and p3 then
-			return promiseModule.new(function(p11, p12)
-				-- upvalues: p10 (ref), leaveSquadModule (copy), squadPromptTypeModule (copy), p4 (copy), p1 (copy), p2 (copy), p5 (copy), p6 (copy), p8 (copy), p9 (copy), networkingSquadsModule (copy), constantsModule (copy), squadCoplayJoinModule (copy), logInExpCoplayTelemetryModule (copy), fFlagPartyDevAPIToRespectThirdPartySettingsEnabled (copy), p7 (copy)
-				p10:dispatch(leaveSquadModule(squadPromptTypeModule.JoinAnotherSquad, p4, function()
-					-- upvalues: p10 (copy), p1 (copy), p2 (copy), p4 (copy), p5 (copy), p6 (copy), p8 (copy), p9 (copy), networkingSquadsModule (copy), constantsModule (copy), squadCoplayJoinModule (copy), logInExpCoplayTelemetryModule (copy), squadPromptTypeModule (copy), p11 (ref), p12 (ref)
-					p10:dispatch(function(p13)
-						-- upvalues: networkingSquadsModule (copy), p1 (ref), p2 (ref), p8 (ref), p6 (ref), p9 (ref), constantsModule (copy), squadCoplayJoinModule (copy), logInExpCoplayTelemetryModule (copy), p5 (ref), p4 (ref), squadPromptTypeModule (copy)
-						return p13:dispatch(networkingSquadsModule.ActOnPartyNudge.API({
-							leaveExisting = true,
-							action = p1,
-							nudgeId = p2,
-							partyAttemptId = p8,
-							squadLocation = p6,
-							parentChannelId = p9
-						})):andThen(function(p14)
-							-- upvalues: p1 (copy), constantsModule (copy), squadCoplayJoinModule (copy), logInExpCoplayTelemetryModule (copy), p6 (copy), p5 (copy)
-							if if p1 ~= constantsModule.ACCEPT_START_PARTY_REQUEST_ACTION then p1 == constantsModule.ACCEPT_PARTY_INVITE_ACTION else true then
-								local groupUpId = p14.responseBody.groupUp.groupUpId
-								local members = p14.responseBody.groupUp.members
-								
-								if groupUpId and members then
-									logInExpCoplayTelemetryModule(groupUpId, members, p6, if p1 == constantsModule.ACCEPT_START_PARTY_REQUEST_ACTION then squadCoplayJoinModule.SquadNudgeCreation else squadCoplayJoinModule.SquadNudgeJoin, p5)
-								end
+		return if SquadId and SquadId ~= "" and p1 then PromiseModule.new(function(p5, p6) --[[ Line: 104 ]]
+			-- upvalues: p4 (copy), LeaveSquadModule (upval), SquadPromptTypeModule (upval), Callback (upval), ACCEPTSTARTPARTYREQUESTACTION (upval), NudgeId (upval), p2 (upval), SquadLocation (upval), PartyAttemptId (upval), ParentChannelId (upval), NetworkingSquadsModule (upval), ConstantsModule (upval), SquadCoplayJoinModule (upval), LogInExpCoplayTelemetryModule (upval), FFlagPartyDevAPIToRespectThirdPartySettingsEnabled (upval), p3 (upval)
+			p4:dispatch(LeaveSquadModule(SquadPromptTypeModule.JoinAnotherSquad, Callback, function() --[[ Line: 105 ]]
+				-- upvalues: p4 (upval), ACCEPTSTARTPARTYREQUESTACTION (upval), NudgeId (upval), Callback (upval), p2 (upval), SquadLocation (upval), PartyAttemptId (upval), ParentChannelId (upval), NetworkingSquadsModule (upval), ConstantsModule (upval), SquadCoplayJoinModule (upval), LogInExpCoplayTelemetryModule (upval), SquadPromptTypeModule (upval), p5 (copy), p6 (copy)
+				p4:dispatch(function(p7) --[[ Line: 29 ]]
+					-- upvalues: NetworkingSquadsModule (upval), ACCEPTSTARTPARTYREQUESTACTION (copy), NudgeId (copy), PartyAttemptId (copy), SquadLocation (copy), ParentChannelId (copy), ConstantsModule (upval), SquadCoplayJoinModule (upval), LogInExpCoplayTelemetryModule (upval), p2 (copy), Callback (copy), SquadPromptTypeModule (upval)
+					return p7:dispatch(NetworkingSquadsModule.ActOnPartyNudge.API({
+						leaveExisting = true,
+						action = ACCEPTSTARTPARTYREQUESTACTION,
+						nudgeId = NudgeId,
+						partyAttemptId = PartyAttemptId,
+						squadLocation = SquadLocation,
+						parentChannelId = ParentChannelId
+					})):andThen(function(Result) --[[ Line: 38 ]]
+						-- upvalues: ACCEPTSTARTPARTYREQUESTACTION (upval), ConstantsModule (upval), SquadCoplayJoinModule (upval), LogInExpCoplayTelemetryModule (upval), SquadLocation (upval), p2 (upval)
+						if ACCEPTSTARTPARTYREQUESTACTION == ConstantsModule.ACCEPT_START_PARTY_REQUEST_ACTION or ACCEPTSTARTPARTYREQUESTACTION == ConstantsModule.ACCEPT_PARTY_INVITE_ACTION then
+							local GroupUpId = Result.responseBody.groupUp.groupUpId
+							local Members = Result.responseBody.groupUp.members
+							
+							if GroupUpId and Members then
+								LogInExpCoplayTelemetryModule(GroupUpId, Members, SquadLocation, if ACCEPTSTARTPARTYREQUESTACTION == ConstantsModule.ACCEPT_START_PARTY_REQUEST_ACTION then SquadCoplayJoinModule.SquadNudgeCreation else SquadCoplayJoinModule.SquadNudgeJoin, p2)
 							end
-						end):catch(function(_)
-							-- upvalues: p1 (copy), constantsModule (copy), p4 (copy), p13 (ref), squadPromptTypeModule (copy)
-							if p1 == constantsModule.ACCEPT_START_PARTY_REQUEST_ACTION or p1 == constantsModule.ACCEPT_PARTY_INVITE_ACTION then
-								p4(p13, {
-									hideCancelButton = true,
-									promptType = squadPromptTypeModule.Error
-								})
-							end
-						end)
-					end):andThen(p11):catch(p12)
-				end, p6, if fFlagPartyDevAPIToRespectThirdPartySettingsEnabled then p7 else true))
-			end)
-		end
-		local var1 = p1
-		local var2 = p2
-		local var3 = p4
-		local var4 = p5
-		local var5 = p6
-		local var6 = p8
-		local var7 = p9
-		
-		return p10:dispatch(function(p11)
-			-- upvalues: networkingSquadsModule (copy), var1 (ref), var2 (ref), var6 (ref), var5 (ref), var7 (ref), constantsModule (copy), squadCoplayJoinModule (copy), logInExpCoplayTelemetryModule (copy), var4 (ref), var3 (ref), squadPromptTypeModule (copy)
-			return p11:dispatch(networkingSquadsModule.ActOnPartyNudge.API({
+						end
+					end):catch(function(_) --[[ Line: 58 ]]
+						-- upvalues: ACCEPTSTARTPARTYREQUESTACTION (upval), ConstantsModule (upval), Callback (upval), p7 (copy), SquadPromptTypeModule (upval)
+						if ACCEPTSTARTPARTYREQUESTACTION == ConstantsModule.ACCEPT_START_PARTY_REQUEST_ACTION or ACCEPTSTARTPARTYREQUESTACTION == ConstantsModule.ACCEPT_PARTY_INVITE_ACTION then
+							Callback(p7, {
+								hideCancelButton = true,
+								promptType = SquadPromptTypeModule.Error
+							})
+						end
+					end)
+				end):andThen(p5):catch(p6)
+			end, SquadLocation, not FFlagPartyDevAPIToRespectThirdPartySettingsEnabled or p3))
+		end) else p4:dispatch(function(p5) --[[ Line: 29 ]]
+			-- upvalues: NetworkingSquadsModule (upval), ACCEPTSTARTPARTYREQUESTACTION (copy), NudgeId (copy), PartyAttemptId (copy), SquadLocation (copy), ParentChannelId (copy), ConstantsModule (upval), SquadCoplayJoinModule (upval), LogInExpCoplayTelemetryModule (upval), p2 (copy), Callback (copy), SquadPromptTypeModule (upval)
+			return p5:dispatch(NetworkingSquadsModule.ActOnPartyNudge.API({
 				leaveExisting = true,
-				action = var1,
-				nudgeId = var2,
-				partyAttemptId = var6,
-				squadLocation = var5,
-				parentChannelId = var7
-			})):andThen(function(p12)
-				-- upvalues: var1 (copy), constantsModule (copy), squadCoplayJoinModule (copy), logInExpCoplayTelemetryModule (copy), var5 (copy), var4 (copy)
-				if if var1 ~= constantsModule.ACCEPT_START_PARTY_REQUEST_ACTION then var1 == constantsModule.ACCEPT_PARTY_INVITE_ACTION else true then
-					local groupUpId = p12.responseBody.groupUp.groupUpId
-					local members = p12.responseBody.groupUp.members
+				action = ACCEPTSTARTPARTYREQUESTACTION,
+				nudgeId = NudgeId,
+				partyAttemptId = PartyAttemptId,
+				squadLocation = SquadLocation,
+				parentChannelId = ParentChannelId
+			})):andThen(function(Result) --[[ Line: 38 ]]
+				-- upvalues: ACCEPTSTARTPARTYREQUESTACTION (upval), ConstantsModule (upval), SquadCoplayJoinModule (upval), LogInExpCoplayTelemetryModule (upval), SquadLocation (upval), p2 (upval)
+				if ACCEPTSTARTPARTYREQUESTACTION == ConstantsModule.ACCEPT_START_PARTY_REQUEST_ACTION or ACCEPTSTARTPARTYREQUESTACTION == ConstantsModule.ACCEPT_PARTY_INVITE_ACTION then
+					local GroupUpId = Result.responseBody.groupUp.groupUpId
+					local Members = Result.responseBody.groupUp.members
 					
-					if groupUpId and members then
-						logInExpCoplayTelemetryModule(groupUpId, members, var5, if var1 == constantsModule.ACCEPT_START_PARTY_REQUEST_ACTION then squadCoplayJoinModule.SquadNudgeCreation else squadCoplayJoinModule.SquadNudgeJoin, var4)
+					if GroupUpId and Members then
+						LogInExpCoplayTelemetryModule(GroupUpId, Members, SquadLocation, if ACCEPTSTARTPARTYREQUESTACTION == ConstantsModule.ACCEPT_START_PARTY_REQUEST_ACTION then SquadCoplayJoinModule.SquadNudgeCreation else SquadCoplayJoinModule.SquadNudgeJoin, p2)
 					end
 				end
-			end):catch(function(_)
-				-- upvalues: var1 (copy), constantsModule (copy), var3 (copy), p11 (ref), squadPromptTypeModule (copy)
-				if var1 == constantsModule.ACCEPT_START_PARTY_REQUEST_ACTION or var1 == constantsModule.ACCEPT_PARTY_INVITE_ACTION then
-					var3(p11, {
+			end):catch(function(_) --[[ Line: 58 ]]
+				-- upvalues: ACCEPTSTARTPARTYREQUESTACTION (upval), ConstantsModule (upval), Callback (upval), p5 (copy), SquadPromptTypeModule (upval)
+				if ACCEPTSTARTPARTYREQUESTACTION == ConstantsModule.ACCEPT_START_PARTY_REQUEST_ACTION or ACCEPTSTARTPARTYREQUESTACTION == ConstantsModule.ACCEPT_PARTY_INVITE_ACTION then
+					Callback(p5, {
 						hideCancelButton = true,
-						promptType = squadPromptTypeModule.Error
+						promptType = SquadPromptTypeModule.Error
 					})
 				end
 			end)

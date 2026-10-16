@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("FullscreenTitleBarInjectGameServices", false)
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastFlag("FullscreenTitleBarInjectGameServices")
 end

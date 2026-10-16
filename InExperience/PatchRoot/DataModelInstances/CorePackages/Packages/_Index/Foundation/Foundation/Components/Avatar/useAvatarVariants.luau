@@ -1,30 +1,30 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant)
-local flagsModule = require(foundation.Utility.Flags)
-local _ = require(foundation.Providers.Style.Tokens)
-local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
-local avatarSizeModule = require(foundation.Enums.AvatarSize)
-local userPresenceModule = require(foundation.Enums.UserPresence)
-local statusIndicatorVariantModule = require(foundation.Enums.StatusIndicatorVariant)
-local statusIndicatorSizeModule = require(foundation.Enums.StatusIndicatorSize)
-local statusIndicatorShapeModule = require(foundation.Enums.StatusIndicatorShape)
-local _ = require(foundation.Components.Types)
-local indexBindableModule = require(foundation.Utility.indexBindable)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ComposeStyleVariantModule = require(Foundation.Utility.composeStyleVariant)
+local FlagsModule = require(Foundation.Utility.Flags)
+local _ = require(Foundation.Providers.Style.Tokens)
+local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
+local AvatarSizeModule = require(Foundation.Enums.AvatarSize)
+local UserPresenceModule = require(Foundation.Enums.UserPresence)
+local StatusIndicatorVariantModule = require(Foundation.Enums.StatusIndicatorVariant)
+local StatusIndicatorSizeModule = require(Foundation.Enums.StatusIndicatorSize)
+local StatusIndicatorShapeModule = require(Foundation.Enums.StatusIndicatorShape)
+local _ = require(Foundation.Components.Types)
+local IndexBindableModule = require(Foundation.Utility.indexBindable)
 
-local function variantsFactory(p1)
-	-- upvalues: flagsModule (ref), avatarSizeModule (ref), statusIndicatorSizeModule (ref), userPresenceModule (ref), statusIndicatorShapeModule (ref), statusIndicatorVariantModule (ref)
+local function variantsFactory(p1) --[[ Line: 61 ]]
+	-- upvalues: FlagsModule (copy), AvatarSizeModule (copy), StatusIndicatorSizeModule (copy), UserPresenceModule (copy), StatusIndicatorShapeModule (copy), StatusIndicatorVariantModule (copy)
 	return {
 		common = {
 			container = { tag = "radius-circle" },
 			avatar = { tag = "size-full radius-circle" },
-			statusIndicatorBackplate = if flagsModule.FoundationStatusIndicatorMask then nil else {
+			statusIndicatorBackplate = if FlagsModule.FoundationStatusIndicatorMask then nil else {
 				ZIndex = 2,
 				tag = "auto-xy radius-circle bg-surface-0",
 				AnchorPoint = Vector2.new(1, 1),
 				Position = UDim2.fromScale(1, 1),
 				padding = UDim2.fromOffset(p1.Size.Size_150 / 2, p1.Size.Size_150 / 2)
 			},
-			statusIndicatorMask = if flagsModule.FoundationStatusIndicatorMask then {
+			statusIndicatorMask = if FlagsModule.FoundationStatusIndicatorMask then {
 				ZIndex = 2,
 				AnchorPoint = Vector2.new(1, 1),
 				Position = UDim2.new(1, -p1.Size.Size_150 / 2, 1, -p1.Size.Size_150 / 2),
@@ -32,75 +32,78 @@ local function variantsFactory(p1)
 			} else nil
 		},
 		sizes = {
-			[avatarSizeModule.XSmall] = {
-				statusIndicator = { size = statusIndicatorSizeModule.XSmall }
+			[AvatarSizeModule.XSmall] = {
+				statusIndicator = { size = StatusIndicatorSizeModule.XSmall }
 			},
-			[avatarSizeModule.Small] = {
-				statusIndicator = { size = statusIndicatorSizeModule.XSmall }
+			[AvatarSizeModule.Small] = {
+				statusIndicator = { size = StatusIndicatorSizeModule.XSmall }
 			},
-			[avatarSizeModule.Medium] = {
-				statusIndicator = { size = statusIndicatorSizeModule.Small }
+			[AvatarSizeModule.Medium] = {
+				statusIndicator = { size = StatusIndicatorSizeModule.Small }
 			},
-			[avatarSizeModule.Large] = {
-				statusIndicator = { size = statusIndicatorSizeModule.Small }
+			[AvatarSizeModule.Large] = {
+				statusIndicator = { size = StatusIndicatorSizeModule.Small }
 			},
-			[avatarSizeModule.XLarge] = {
-				statusIndicator = { size = statusIndicatorSizeModule.Medium }
+			[AvatarSizeModule.XLarge] = {
+				statusIndicator = { size = StatusIndicatorSizeModule.Medium }
 			},
-			[avatarSizeModule.Pictogram] = {
-				statusIndicator = { size = statusIndicatorSizeModule.Pictogram }
+			[AvatarSizeModule.Pictogram] = {
+				statusIndicator = {
+					size = if FlagsModule.FoundationStatusIndicatorDesignUpdate then StatusIndicatorSizeModule.Large else StatusIndicatorSizeModule.Pictogram
+				}
 			}
 		},
 		presence = {
-			[userPresenceModule.InExperience] = {},
-			[userPresenceModule.Away] = {
+			[UserPresenceModule.InExperience] = {},
+			[UserPresenceModule.Away] = {
 				statusIndicator = {
-					shape = statusIndicatorShapeModule.Ring,
-					variant = statusIndicatorVariantModule.Neutral
+					shape = StatusIndicatorShapeModule.Ring,
+					variant = StatusIndicatorVariantModule.Neutral
 				}
 			},
-			[userPresenceModule.Active] = {
+			[UserPresenceModule.Active] = {
 				statusIndicator = {
-					shape = statusIndicatorShapeModule.Circle,
-					variant = statusIndicatorVariantModule.Success
+					shape = StatusIndicatorShapeModule.Circle,
+					variant = StatusIndicatorVariantModule.Success
 				}
 			},
-			[userPresenceModule.None] = {}
+			[UserPresenceModule.None] = {}
 		},
 		iconSizeStrokes = {
-			[avatarSizeModule.XSmall] = p1.Stroke.Standard,
-			[avatarSizeModule.Small] = p1.Stroke.Thick,
-			[avatarSizeModule.Medium] = p1.Stroke.Thick,
-			[avatarSizeModule.Large] = p1.Stroke.Thicker,
-			[avatarSizeModule.XLarge] = p1.Stroke.Thicker,
-			[avatarSizeModule.Pictogram] = p1.Stroke.Thicker
+			[AvatarSizeModule.XSmall] = p1.Stroke.Standard,
+			[AvatarSizeModule.Small] = p1.Stroke.Thick,
+			[AvatarSizeModule.Medium] = p1.Stroke.Thick,
+			[AvatarSizeModule.Large] = p1.Stroke.Thicker,
+			[AvatarSizeModule.XLarge] = p1.Stroke.Thicker,
+			[AvatarSizeModule.Pictogram] = p1.Stroke.Thicker
 		},
 		sizeStrokes = {
-			[avatarSizeModule.Small] = p1.Stroke.Thicker,
-			[avatarSizeModule.Medium] = p1.Stroke.Thicker,
-			[avatarSizeModule.Large] = p1.Stroke.Thicker,
-			[avatarSizeModule.XLarge] = p1.Stroke.Thicker,
-			[avatarSizeModule.Pictogram] = p1.Stroke.Thicker + p1.Stroke.Standard
+			[AvatarSizeModule.Small] = p1.Stroke.Thicker,
+			[AvatarSizeModule.Medium] = p1.Stroke.Thicker,
+			[AvatarSizeModule.Large] = p1.Stroke.Thicker,
+			[AvatarSizeModule.XLarge] = p1.Stroke.Thicker,
+			[AvatarSizeModule.Pictogram] = p1.Stroke.Thicker + p1.Stroke.Standard
 		}
 	}
 end
 
-return function(p1, p2, p3, p4, p5)
-	-- upvalues: variantsContextModule (ref), variantsFactory (ref), userPresenceModule (ref), composeStyleVariantModule (ref), indexBindableModule (ref)
-	local avatar = variantsContextModule.useVariants("Avatar", variantsFactory, p1)
-	local var1 = if p5 or p3 ~= userPresenceModule.InExperience then p4 else p1.Color.System.Emphasis
+return function(p1, p2, Active, BackgroundStyle, p3) --[[ Line: 137 ]]
+	-- upvalues: VariantsContextModule (copy), variantsFactory (copy), UserPresenceModule (copy), ComposeStyleVariantModule (copy), IndexBindableModule (copy)
+	local Avatar = VariantsContextModule.useVariants("Avatar", variantsFactory, p1)
+	local BackgroundStyle1 = if p3 or Active ~= UserPresenceModule.InExperience then BackgroundStyle else p1.Color.System.Emphasis
+	local IconSizeStroke = if p3 then Avatar.iconSizeStrokes[p2] else Avatar.sizeStrokes[p2]
 	
-	return composeStyleVariantModule(avatar.common, avatar.sizes[p2], avatar.presence[p3], {
+	return ComposeStyleVariantModule(Avatar.common, Avatar.sizes[p2], Avatar.presence[Active], {
 		container = {
-			stroke = if var1 then {
-				Color = indexBindableModule(var1, "Color3"),
-				Transparency = indexBindableModule(var1, "Transparency"),
-				Thickness = if p5 then avatar.iconSizeStrokes[p2] else avatar.sizeStrokes[p2]
+			stroke = if BackgroundStyle1 then {
+				Color = IndexBindableModule(BackgroundStyle1, "Color3"),
+				Transparency = IndexBindableModule(BackgroundStyle1, "Transparency"),
+				Thickness = IconSizeStroke
 			} else nil,
-			backgroundStyle = p4
+			backgroundStyle = BackgroundStyle
 		},
 		statusIndicator = {
-			isVisible = not p5 and (if p3 ~= userPresenceModule.Active then p3 == userPresenceModule.Away else true)
+			isVisible = not p3 and (Active == UserPresenceModule.Active or Active == UserPresenceModule.Away)
 		}
 	})
 end

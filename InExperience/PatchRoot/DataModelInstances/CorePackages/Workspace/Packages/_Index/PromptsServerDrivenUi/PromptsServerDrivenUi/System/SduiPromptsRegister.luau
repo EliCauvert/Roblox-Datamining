@@ -1,20 +1,20 @@
-﻿local promptsServerDrivenUi = script:FindFirstAncestor("PromptsServerDrivenUi")
-local parent = promptsServerDrivenUi.Parent
-local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagLuaAppSduiMovePromptsActions = sharedFlagsModule.FFlagLuaAppSduiMovePromptsActions
-local fFlagSduiRequestPushNotificationPermissionActionHandler = sharedFlagsModule.FFlagSduiRequestPushNotificationPermissionActionHandler
-local registerPromptsActionsModule = require(promptsServerDrivenUi.Actions.registerPromptsActions)
-local registerPromptsImpressionsModule = require(promptsServerDrivenUi.Impressions.registerPromptsImpressions)
+﻿local PromptsServerDrivenUi = script:FindFirstAncestor("PromptsServerDrivenUi")
+local Parent = PromptsServerDrivenUi.Parent
+local ReactModule = require(Parent.React)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagLuaAppSduiMovePromptsActions = SharedFlagsModule.FFlagLuaAppSduiMovePromptsActions
+local FFlagSduiRequestPushNotificationPermissionActionHandler = SharedFlagsModule.FFlagSduiRequestPushNotificationPermissionActionHandler
+local RegisterPromptsActionsModule = require(PromptsServerDrivenUi.Actions.registerPromptsActions)
+local RegisterPromptsImpressionsModule = require(PromptsServerDrivenUi.Impressions.registerPromptsImpressions)
 
-return reactModule.memo(function()
-	-- upvalues: reactModule (ref), fFlagLuaAppSduiMovePromptsActions (ref), fFlagSduiRequestPushNotificationPermissionActionHandler (ref), registerPromptsActionsModule (ref), registerPromptsImpressionsModule (ref)
-	reactModule.useEffect(function()
-		-- upvalues: fFlagLuaAppSduiMovePromptsActions (copy), fFlagSduiRequestPushNotificationPermissionActionHandler (copy), registerPromptsActionsModule (copy), registerPromptsImpressionsModule (copy)
-		if fFlagLuaAppSduiMovePromptsActions or fFlagSduiRequestPushNotificationPermissionActionHandler then
-			registerPromptsActionsModule()
+return ReactModule.memo(function() --[[ Line: 13 | Named "SduiPromptsRegister" ]]
+	-- upvalues: ReactModule (copy), FFlagLuaAppSduiMovePromptsActions (copy), FFlagSduiRequestPushNotificationPermissionActionHandler (copy), RegisterPromptsActionsModule (copy), RegisterPromptsImpressionsModule (copy)
+	ReactModule.useEffect(function() --[[ Line: 14 ]]
+		-- upvalues: FFlagLuaAppSduiMovePromptsActions (upval), FFlagSduiRequestPushNotificationPermissionActionHandler (upval), RegisterPromptsActionsModule (upval), RegisterPromptsImpressionsModule (upval)
+		if FFlagLuaAppSduiMovePromptsActions or FFlagSduiRequestPushNotificationPermissionActionHandler then
+			RegisterPromptsActionsModule()
 		end
-		registerPromptsImpressionsModule()
+		RegisterPromptsImpressionsModule()
 	end, {})
 	
 	return nil

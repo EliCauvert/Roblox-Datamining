@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.IdentityProtocol.IdentityProtocol)
+﻿return (require(script.Parent.Parent.Parent._Index.IdentityProtocol.IdentityProtocol))

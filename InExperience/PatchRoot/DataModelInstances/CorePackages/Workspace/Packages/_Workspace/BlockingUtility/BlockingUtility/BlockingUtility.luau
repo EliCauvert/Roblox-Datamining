@@ -1,355 +1,338 @@
-﻿local parent = script:FindFirstAncestor("BlockingUtility").Parent
-local httpRbxApiService = game:GetService("HttpRbxApiService")
-local httpService = game:GetService("HttpService")
-local playersService = game:GetService("Players")
-local starterGuiService = game:GetService("StarterGui")
-local robloxReplicatedStorageService = game:GetService("RobloxReplicatedStorage")
-local url = require(parent.Http).Url
-local t = {}
-t.__index = t
-local var1 = nil
-spawn(function()
-	-- upvalues: var1 (write), robloxReplicatedStorageService (ref)
-	var1 = robloxReplicatedStorageService:WaitForChild("UpdatePlayerBlockList", 1e999)
+﻿local HttpRbxApiService = game:GetService("HttpRbxApiService")
+local HttpService = game:GetService("HttpService")
+local Players = game:GetService("Players")
+local StarterGui = game:GetService("StarterGui")
+local RobloxReplicatedStorage = game:GetService("RobloxReplicatedStorage")
+local Url = require(script:FindFirstAncestor("BlockingUtility").Parent.Http).Url
+local BlockingUtilityModule = {}
+BlockingUtilityModule.__index = BlockingUtilityModule
+local UpdatePlayerBlockList = nil
+spawn(function() --[[ Line: 19 ]]
+	-- upvalues: UpdatePlayerBlockList (ref), RobloxReplicatedStorage (copy)
+	UpdatePlayerBlockList = RobloxReplicatedStorage:WaitForChild("UpdatePlayerBlockList", 1e999)
 end)
-local bindableEvent = Instance.new("BindableEvent")
-local bindableEvent_1 = Instance.new("BindableEvent")
-local bindableEvent_2 = Instance.new("BindableEvent")
-local var2 = false
-local bindableEvent_3 = Instance.new("BindableEvent")
-local t_1 = {}
-local t_2 = {}
+local BindableEvent = Instance.new("BindableEvent")
+local BindableEvent1 = Instance.new("BindableEvent")
+local BindableEvent2 = Instance.new("BindableEvent")
+local Flag = false
+local BindableEvent3 = Instance.new("BindableEvent")
+local t = {}
+local t1 = {}
 
-local function _()
-	-- upvalues: t_1 (write)
-	local t = {}
+local function _() --[[ Line: 32 | Named "getBlockedUserIdsFromBlockedList" ]]
+	-- upvalues: t (ref)
+	local List = {}
 	
-	for i, v in t_1 do
-		table.insert(t, i)
+	for i, _ in t do
+		table.insert(List, i)
 	end
-	return t
+	return List
 end
 
-local function getBlockedUserIds()
-	-- upvalues: playersService (ref), var2 (write), t_1 (write)
-	if playersService.LocalPlayer.UserId > 0 then
-		local var3 = 0
+local function getBlockedUserIds() --[[ Line: 40 ]]
+	-- upvalues: Players (copy), Flag (ref), t (ref)
+	if Players.LocalPlayer.UserId > 0 then
+		local NewElapsed = 0
 		while true do
-			if not var2 then
-				var3 += wait()
-				
-				if var3 > 5 then
-					return {}
-				end
-			end
-			local t = {}
+			if Flag then break end
+			NewElapsed += wait()
 			
-			for i, v in t_1 do
-				table.insert(t, i)
+			if NewElapsed > 5 then
+				return {}
 			end
-			return t
 		end
 	end
 	return {}
 end
 
-local _ = function(p1)
-	-- upvalues: t_1 (write)
-	return t_1[p1]
+local _ = function(p1): boolean --[[ Line: 57 | Named "isBlocked" ]]
+	-- upvalues: t (ref)
+	return if t[p1] then true else false
 end
 
-local _ = function(p1)
-	-- upvalues: t_2 (ref)
-	return t_2[p1] == nil or t_2[p1] ~= true
+local _ = function(p1): boolean --[[ Line: 64 | Named "isMuted" ]]
+	-- upvalues: t1 (copy)
+	return t1[p1] ~= nil and t1[p1] == true
 end
 
-local function BlockPlayerAsync(p1)
-	-- upvalues: playersService (ref), t_1 (write), bindableEvent (ref), url (ref), httpRbxApiService (ref), httpService (ref), var1 (write), bindableEvent_1 (ref)
-	if p1 and playersService.LocalPlayer ~= p1 then
-		local userId = p1.UserId
+local function BlockPlayerAsync(Player: Player) --[[ Line: 71 ]]
+	-- upvalues: Players (copy), t (ref), BindableEvent (copy), Url (copy), HttpRbxApiService (copy), HttpService (copy), UpdatePlayerBlockList (ref), BindableEvent1 (copy)
+	local LocalPlayer = Players.LocalPlayer
+	
+	if Player and LocalPlayer ~= Player then
+		local UserId: number = Player.UserId
 		
-		if userId <= 0 then
-			return false
+		if UserId > 0 then
+			if if t[UserId] then true else false then
+				return true
+			end
+			t[UserId] = true
+			BindableEvent:Fire(UserId, true)
+			local Success, Result = pcall(function() --[[ Line: 81 ]]
+				-- upvalues: Url (upval), Player (copy), HttpRbxApiService (upval), HttpService (upval)
+				local PostAsyncFullUrlResult = HttpRbxApiService:PostAsyncFullUrl(Url.APIS_URL .. "user-blocking-api/v1/users/" .. tostring(Player.UserId) .. "/block-user", "")
+				
+				if not PostAsyncFullUrlResult then return end
+				return (HttpService:JSONDecode(PostAsyncFullUrlResult))
+			end)
+			
+			if Success and Result then
+				if UpdatePlayerBlockList then
+					UpdatePlayerBlockList:FireServer(UserId, true)
+				end
+				BindableEvent1:Fire(UserId, true)
+			else
+				t[UserId] = nil
+				BindableEvent:Fire(UserId, false)
+			end
+			return Success and Result
 		end
-		if if t_1[userId] then true else false then
+	end
+	return false
+end
+
+local function UnblockPlayerAsync(Player: Player) --[[ Line: 115 ]]
+	-- upvalues: t (ref), BindableEvent (copy), Url (copy), HttpRbxApiService (copy), HttpService (copy), UpdatePlayerBlockList (ref), BindableEvent1 (copy)
+	if not Player then
+		return false
+	end
+	local UserId = Player.UserId
+	
+	if not (if t[UserId] then true else false) then
+		return true
+	end
+	t[UserId] = nil
+	BindableEvent:Fire(UserId, false)
+	local Success, Result = pcall(function(): boolean? --[[ Line: 124 ]]
+		-- upvalues: Url (upval), Player (copy), HttpRbxApiService (upval), HttpService (upval)
+		local PostAsyncFullUrlResult = HttpRbxApiService:PostAsyncFullUrl(Url.APIS_URL .. "user-blocking-api/v1/users/" .. tostring(Player.UserId) .. "/unblock-user", "")
+		
+		if not PostAsyncFullUrlResult then return end
+		local Data = HttpService:JSONDecode(PostAsyncFullUrlResult)
+		
+		return Data and not Data.errors
+	end)
+	
+	if Success and Result then
+		if UpdatePlayerBlockList then
+			UpdatePlayerBlockList:FireServer(UserId, false)
+		end
+		BindableEvent1:Fire(UserId, false)
+	else
+		t[UserId] = true
+		BindableEvent:Fire(UserId, true)
+	end
+	return Success and Result
+end
+
+local function AddPlayerToBlockList(Player): boolean --[[ Line: 161 ]]
+	-- upvalues: Players (copy), t (ref), BindableEvent (copy), UpdatePlayerBlockList (ref), BindableEvent1 (copy)
+	local LocalPlayer = Players.LocalPlayer
+	
+	if Player and LocalPlayer ~= Player then
+		local UserId: number = Player.UserId
+		
+		if UserId > 0 then
+			if not (if t[UserId] then true else false) then
+				t[UserId] = true
+				BindableEvent:Fire(UserId, true)
+				
+				if UpdatePlayerBlockList then
+					UpdatePlayerBlockList:FireServer(UserId, true)
+				end
+				if BindableEvent1 then
+					BindableEvent1:Fire(UserId, true)
+				end
+			end
 			return true
 		end
-		t_1[userId] = true
-		bindableEvent:Fire(userId, true)
-		local _ = nil
-		local _ = nil
-		local ok, status = pcall(function()
-			-- upvalues: url (copy), p1 (ref), httpRbxApiService (copy), httpService (copy)
-			local var4 = httpRbxApiService:PostAsyncFullUrl(url.APIS_URL .. "user-blocking-api/v1/users/" .. tostring(p1.UserId) .. "/block-user", "")
-			
-			if var4 then
-				return httpService:JSONDecode(var4)
-			end
-		end)
-		local var4 = ok
-		local var5 = status
-		
-		if var4 and var5 then
-			if var1 then
-				var1:FireServer(userId, true)
-			end
-			bindableEvent_1:Fire(userId, true)
-		else
-			t_1[userId] = nil
-			bindableEvent:Fire(userId, false)
-		end
-		return var4 and var5
 	end
+	return false
 end
 
-local function UnblockPlayerAsync(p1)
-	-- upvalues: t_1 (write), bindableEvent (ref), url (ref), httpRbxApiService (ref), httpService (ref), var1 (write), bindableEvent_1 (ref)
-	if not p1 then
+local function RemovePlayerFromBlockList(Player): boolean --[[ Line: 189 ]]
+	-- upvalues: t (ref), BindableEvent (copy), UpdatePlayerBlockList (ref), BindableEvent1 (copy)
+	if not Player then
 		return false
 	end
-	local userId = p1.UserId
+	local UserId = Player.UserId
 	
-	if not (if t_1[userId] then true else false) then
-		return true
-	end
-	t_1[userId] = nil
-	bindableEvent:Fire(userId, false)
-	local _ = nil
-	local _ = nil
-	local ok, status = pcall(function()
-		-- upvalues: url (copy), p1 (ref), httpRbxApiService (copy), httpService (copy)
-		local var4 = httpRbxApiService:PostAsyncFullUrl(url.APIS_URL .. "user-blocking-api/v1/users/" .. tostring(p1.UserId) .. "/unblock-user", "")
+	if if t[UserId] then true else false then
+		t[UserId] = nil
+		BindableEvent:Fire(UserId, false)
 		
-		if var4 then
-			var4 = httpService:JSONDecode(var4)
-			
-			return var4 and not var4.errors
+		if UpdatePlayerBlockList then
+			UpdatePlayerBlockList:FireServer(UserId, false)
 		end
-	end)
-	local var4 = ok
-	local var5 = status
-	
-	if var4 and var5 then
-		if var1 then
-			var1:FireServer(userId, false)
-		end
-		bindableEvent_1:Fire(userId, false)
-	else
-		t_1[userId] = true
-		bindableEvent:Fire(userId, true)
-	end
-	return var4 and var5
-end
-
-local function AddPlayerToBlockList(p1)
-	-- upvalues: playersService (ref), t_1 (write), bindableEvent (ref), var1 (write), bindableEvent_1 (ref)
-	if p1 and playersService.LocalPlayer ~= p1 then
-		local userId = p1.UserId
-		
-		if userId <= 0 then
-			return false
-		end
-		if not (if t_1[userId] then true else false) then
-			t_1[userId] = true
-			bindableEvent:Fire(userId, true)
-			
-			if var1 then
-				var1:FireServer(userId, true)
-			end
-			if bindableEvent_1 then
-				bindableEvent_1:Fire(userId, true)
-			end
-		end
-		return true
-	end
-end
-
-local function RemovePlayerFromBlockList(p1)
-	-- upvalues: t_1 (write), bindableEvent (ref), var1 (write), bindableEvent_1 (ref)
-	if not p1 then
-		return false
-	end
-	local userId = p1.UserId
-	
-	if if t_1[userId] then true else false then
-		t_1[userId] = nil
-		bindableEvent:Fire(userId, false)
-		
-		if var1 then
-			var1:FireServer(userId, false)
-		end
-		if bindableEvent_1 then
-			bindableEvent_1:Fire(userId, false)
+		if BindableEvent1 then
+			BindableEvent1:Fire(UserId, false)
 		end
 	end
 	return true
 end
 
-local function MutePlayer(p1)
-	-- upvalues: playersService (ref), t_2 (ref), bindableEvent_2 (ref)
-	if p1 and playersService.LocalPlayer ~= p1 then
-		local userId = p1.UserId
+local function MutePlayer(Player) --[[ Line: 211 ]]
+	-- upvalues: Players (copy), t1 (copy), BindableEvent2 (copy)
+	local LocalPlayer = Players.LocalPlayer
+	
+	if Player and LocalPlayer ~= Player then
+		local UserId: number = Player.UserId
 		
-		if userId > 0 then
-			local var4
-			if t_2[userId] ~= nil then
-				var4 = t_2[userId] ~= true
-			end
-			if not var4 then
-				t_2[userId] = true
-				bindableEvent_2:Fire(userId, true)
-			end
+		if UserId > 0 and (t1[UserId] == nil or t1[UserId] ~= true) then
+			t1[UserId] = true
+			BindableEvent2:Fire(UserId, true)
 		end
 	end
 end
 
-local function UnmutePlayer(p1)
-	-- upvalues: t_2 (ref), bindableEvent_2 (ref)
-	if p1 then
-		local userId = p1.UserId
-		t_2[userId] = nil
-		bindableEvent_2:Fire(userId, false)
+local function UnmutePlayer(Player) --[[ Line: 224 ]]
+	-- upvalues: t1 (copy), BindableEvent2 (copy)
+	if Player then
+		local UserId = Player.UserId
+		t1[UserId] = nil
+		BindableEvent2:Fire(UserId, false)
 	end
 end
 
-local bindableEvent_4 = Instance.new("BindableEvent")
-local bindableEvent_5 = Instance.new("BindableEvent")
-local bindableEvent_6 = Instance.new("BindableEvent")
-local bindableEvent_7 = Instance.new("BindableEvent")
-bindableEvent.Event:Connect(function(p1, p2)
-	-- upvalues: playersService (ref), bindableEvent_4 (ref), bindableEvent_5 (ref)
-	local var4 = playersService:GetPlayerByUserId(p1)
+local BindableEvent4 = Instance.new("BindableEvent")
+local BindableEvent5 = Instance.new("BindableEvent")
+local BindableEvent6 = Instance.new("BindableEvent")
+local BindableEvent7 = Instance.new("BindableEvent")
+BindableEvent.Event:Connect(function(UserId, p1) --[[ Line: 239 | Named "blockedStatusChanged" ]]
+	-- upvalues: Players (copy), BindableEvent4 (copy), BindableEvent5 (copy)
+	local Player = Players:GetPlayerByUserId(UserId)
 	
-	if var4 then
-		if p2 then
-			bindableEvent_4:Fire(var4)
+	if Player then
+		if p1 then
+			BindableEvent4:Fire(Player)
 			
 			return
 		end
-		bindableEvent_5:Fire(var4)
+		BindableEvent5:Fire(Player)
 	end
 end)
-bindableEvent_2.Event:Connect(function(p1, p2)
-	-- upvalues: playersService (ref), bindableEvent_6 (ref), bindableEvent_7 (ref)
-	local var4 = playersService:GetPlayerByUserId(p1)
+BindableEvent2.Event:Connect(function(UserId, p1) --[[ Line: 252 | Named "muteStatusChanged" ]]
+	-- upvalues: Players (copy), BindableEvent6 (copy), BindableEvent7 (copy)
+	local Player = Players:GetPlayerByUserId(UserId)
 	
-	if var4 then
-		if p2 then
-			bindableEvent_6:Fire(var4)
+	if Player then
+		if p1 then
+			BindableEvent6:Fire(Player)
 			
 			return
 		end
-		bindableEvent_7:Fire(var4)
+		BindableEvent7:Fire(Player)
 	end
 end)
-starterGuiService:RegisterGetCore("PlayerBlockedEvent", function()
-	-- upvalues: bindableEvent_4 (ref)
-	return bindableEvent_4
+StarterGui:RegisterGetCore("PlayerBlockedEvent", function() --[[ Line: 265 ]]
+	-- upvalues: BindableEvent4 (copy)
+	return BindableEvent4
 end)
-starterGuiService:RegisterGetCore("PlayerUnblockedEvent", function()
-	-- upvalues: bindableEvent_5 (ref)
-	return bindableEvent_5
+StarterGui:RegisterGetCore("PlayerUnblockedEvent", function() --[[ Line: 268 ]]
+	-- upvalues: BindableEvent5 (copy)
+	return BindableEvent5
 end)
-starterGuiService:RegisterGetCore("PlayerMutedEvent", function()
-	-- upvalues: bindableEvent_6 (ref)
-	return bindableEvent_6
+StarterGui:RegisterGetCore("PlayerMutedEvent", function() --[[ Line: 271 ]]
+	-- upvalues: BindableEvent6 (copy)
+	return BindableEvent6
 end)
-starterGuiService:RegisterGetCore("PlayerUnmutedEvent", function()
-	-- upvalues: bindableEvent_7 (ref)
-	return bindableEvent_7
+StarterGui:RegisterGetCore("PlayerUnmutedEvent", function() --[[ Line: 274 ]]
+	-- upvalues: BindableEvent7 (copy)
+	return BindableEvent7
 end)
-task.spawn(function()
-	-- upvalues: t_1 (write), var2 (write), bindableEvent (ref), bindableEvent_3 (ref)
-	game:GetService("RobloxReplicatedStorage"):WaitForChild("SendPlayerBlockList", 1e999).OnClientEvent:Connect(function(p1)
-		-- upvalues: t_1 (copy), var2 (copy), bindableEvent (copy), bindableEvent_3 (copy)
-		local t = {}
+task.spawn(function() --[[ Line: 278 ]]
+	-- upvalues: t (ref), Flag (ref), BindableEvent (copy), BindableEvent3 (copy)
+	game:GetService("RobloxReplicatedStorage"):WaitForChild("SendPlayerBlockList", 1e999).OnClientEvent:Connect(function(List) --[[ Line: 281 ]]
+		-- upvalues: t (upval), Flag (upval), BindableEvent (upval), BindableEvent3 (upval)
+		local t2 = {}
 		
-		for i, v in p1 do
-			t[tonumber(i)] = true
+		for i, _ in List do
+			t2[tonumber(i)] = true
 		end
-		t_1 = t
-		var2 = true
+		local t3 = t
+		t = t2
+		Flag = true
 		
-		for i_1 in t do
-			if not t_1[i_1] then
-				bindableEvent:Fire(i_1, true)
+		for i1 in t2 do
+			if not t3[i1] then
+				BindableEvent:Fire(i1, true)
 			end
 		end
-		for i_2 in t_1 do
-			if not t[i_2] then
-				bindableEvent:Fire(i_2, false)
+		for i2 in t3 do
+			if not t2[i2] then
+				BindableEvent:Fire(i2, false)
 			end
 		end
-		bindableEvent_3:Fire()
+		BindableEvent3:Fire()
 	end)
 end)
-task.spawn(function()
-	-- upvalues: t_1 (write), bindableEvent (ref)
-	game:GetService("RobloxReplicatedStorage"):WaitForChild("UpdateLocalPlayerBlockList", 1e999).OnClientEvent:Connect(function(p2, p3)
-		-- upvalues: t_1 (copy), bindableEvent (copy)
-		t_1[p2] = if p3 then true else nil
-		bindableEvent:Fire(p2, p3)
+task.spawn(function() --[[ Line: 306 ]]
+	-- upvalues: t (ref), BindableEvent (copy)
+	game:GetService("RobloxReplicatedStorage"):WaitForChild("UpdateLocalPlayerBlockList", 1e999).OnClientEvent:Connect(function(Key, p1) --[[ Line: 310 ]]
+		-- upvalues: t (upval), BindableEvent (upval)
+		t[Key] = if p1 then true else nil
+		BindableEvent:Fire(Key, p1)
 	end)
 end)
 
-function t.BlockPlayerAsync(_, p2)
-	-- upvalues: BlockPlayerAsync (ref)
-	return BlockPlayerAsync(p2)
+function BlockingUtilityModule:BlockPlayerAsync(Player) --[[ Line: 316 ]]
+	-- upvalues: BlockPlayerAsync (copy)
+	return (BlockPlayerAsync(Player))
 end
 
-function t.UnblockPlayerAsync(_, p2)
-	-- upvalues: UnblockPlayerAsync (ref)
-	return UnblockPlayerAsync(p2)
+function BlockingUtilityModule:UnblockPlayerAsync(Player) --[[ Line: 320 ]]
+	-- upvalues: UnblockPlayerAsync (copy)
+	return (UnblockPlayerAsync(Player))
 end
 
-function t.MutePlayer(_, p2)
-	-- upvalues: MutePlayer (ref)
-	return MutePlayer(p2)
+function BlockingUtilityModule:MutePlayer(Player) --[[ Line: 324 ]]
+	-- upvalues: MutePlayer (copy)
+	return MutePlayer(Player)
 end
 
-function t.UnmutePlayer(_, p2)
-	-- upvalues: UnmutePlayer (ref)
-	return UnmutePlayer(p2)
+function BlockingUtilityModule:UnmutePlayer(Player) --[[ Line: 328 ]]
+	-- upvalues: UnmutePlayer (copy)
+	return UnmutePlayer(Player)
 end
 
-function t.IsPlayerBlockedByUserId(_, p2)
-	-- upvalues: t_1 (write)
-	return t_1[p2]
+function BlockingUtilityModule:IsPlayerBlockedByUserId(p1): boolean --[[ Line: 332 ]]
+	-- upvalues: t (ref)
+	return if t[p1] then true else false
 end
 
-function t.GetBlockedStatusChangedEvent(_)
-	-- upvalues: bindableEvent (ref)
-	return bindableEvent.Event
+function BlockingUtilityModule:GetBlockedStatusChangedEvent() --[[ Line: 336 ]]
+	-- upvalues: BindableEvent (copy)
+	return BindableEvent.Event
 end
 
-function t.GetAfterBlockedStatusChangedEvent(_)
-	-- upvalues: bindableEvent_1 (ref)
-	return bindableEvent_1.Event
+function BlockingUtilityModule:GetAfterBlockedStatusChangedEvent() --[[ Line: 342 ]]
+	-- upvalues: BindableEvent1 (copy)
+	return BindableEvent1.Event
 end
 
-function t.GetMutedStatusChangedEvent(_)
-	-- upvalues: bindableEvent_2 (ref)
-	return bindableEvent_2.Event
+function BlockingUtilityModule:GetMutedStatusChangedEvent() --[[ Line: 346 ]]
+	-- upvalues: BindableEvent2 (copy)
+	return BindableEvent2.Event
 end
 
-function t.IsPlayerMutedByUserId(_, p2)
-	-- upvalues: t_2 (ref)
-	return t_2[p2] == nil or t_2[p2] ~= true
+function BlockingUtilityModule:IsPlayerMutedByUserId(p1): boolean --[[ Line: 350 ]]
+	-- upvalues: t2 (copy)
+	return t2[p1] ~= nil and t2[p1] == true
 end
 
-function t.GetBlockedUserIdsAsync(_)
-	-- upvalues: getBlockedUserIds (ref)
-	return getBlockedUserIds()
+function BlockingUtilityModule:GetBlockedUserIdsAsync() --[[ Line: 354 ]]
+	-- upvalues: getBlockedUserIds (copy)
+	return (getBlockedUserIds())
 end
 
-function t.AddPlayerToBlockList(_, p2)
-	-- upvalues: AddPlayerToBlockList (ref)
-	return AddPlayerToBlockList(p2)
+function BlockingUtilityModule:AddPlayerToBlockList(Player) --[[ Line: 358 ]]
+	-- upvalues: AddPlayerToBlockList (copy)
+	return (AddPlayerToBlockList(Player))
 end
 
-function t.RemovePlayerFromBlockList(_, p2)
-	-- upvalues: RemovePlayerFromBlockList (ref)
-	return RemovePlayerFromBlockList(p2)
+function BlockingUtilityModule:RemovePlayerFromBlockList(Player) --[[ Line: 362 ]]
+	-- upvalues: RemovePlayerFromBlockList (copy)
+	return (RemovePlayerFromBlockList(Player))
 end
 
-return t
+return BlockingUtilityModule

@@ -1,10 +1,10 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local widgetListBreakPointEnumModule = require(avatarExperienceCatalog.Components.ResultsList.WidgetListBreakPointEnum)
-local widgetListBreakPointThresholdsModule = require(avatarExperienceCatalog.Components.ResultsList.WidgetListBreakPointThresholds)
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local WidgetListBreakPointEnumModule = require(AvatarExperienceCatalog.Components.ResultsList.WidgetListBreakPointEnum)
+local WidgetListBreakPointThresholdsModule = require(AvatarExperienceCatalog.Components.ResultsList.WidgetListBreakPointThresholds)
 
-return function(p1, p2)
-	-- upvalues: widgetListBreakPointEnumModule (ref), widgetListBreakPointThresholdsModule (ref)
-	p2 = p2 or 1
+return function(p1, p2) --[[ Line: 14 | Named "getBreakpointFromRowWidth" ]]
+	-- upvalues: WidgetListBreakPointEnumModule (copy), WidgetListBreakPointThresholdsModule (copy)
+	local P1 = p2 or 1
 	
-	return if p1 then if p1 <= widgetListBreakPointThresholdsModule.XSmall * p2 then widgetListBreakPointEnumModule.XSmall elseif p1 <= widgetListBreakPointThresholdsModule.Small * p2 then widgetListBreakPointEnumModule.Small elseif p1 <= widgetListBreakPointThresholdsModule.Medium * p2 then widgetListBreakPointEnumModule.Medium elseif p1 <= widgetListBreakPointThresholdsModule.Large * p2 then widgetListBreakPointEnumModule.Large elseif p1 <= widgetListBreakPointThresholdsModule.XLarge * p2 then widgetListBreakPointEnumModule.XLarge else widgetListBreakPointEnumModule.X2Large else widgetListBreakPointEnumModule.Default
+	return if p1 then if p1 <= WidgetListBreakPointThresholdsModule.XSmall * P1 then WidgetListBreakPointEnumModule.XSmall elseif p1 <= WidgetListBreakPointThresholdsModule.Small * P1 then WidgetListBreakPointEnumModule.Small elseif p1 <= WidgetListBreakPointThresholdsModule.Medium * P1 then WidgetListBreakPointEnumModule.Medium elseif p1 <= WidgetListBreakPointThresholdsModule.Large * P1 then WidgetListBreakPointEnumModule.Large elseif p1 <= WidgetListBreakPointThresholdsModule.XLarge * P1 then WidgetListBreakPointEnumModule.XLarge else WidgetListBreakPointEnumModule.X2Large else WidgetListBreakPointEnumModule.Default
 end

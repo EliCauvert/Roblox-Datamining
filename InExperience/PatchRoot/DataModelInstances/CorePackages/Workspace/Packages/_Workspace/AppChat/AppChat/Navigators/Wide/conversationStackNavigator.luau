@@ -1,29 +1,29 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local roactNavigationModule = require(parent.RoactNavigation)
-local cryoModule = require(parent.Cryo)
-local autoFocusNavigationModule = require(script.Parent.Parent.autoFocusNavigation)
-local enumScreensModule = require(appChat.EnumScreens)
-local chatConversationScreenModule = require(appChat.Components.ChatConversation.ChatConversationScreen)
-local chatDetailsScreenModule = require(appChat.Components.ChatDetails.ChatDetailsScreen)
-local squadInviteFriendsScreenModule = require(appChat.Components.Squads.SquadInviteFriendsScreen)
-local squadLobbyScreenModule = require(appChat.Components.Squads.SquadLobbyScreen)
-local getFFlagIsSquadEnabled = require(parent.SharedFlags).GetFFlagIsSquadEnabled
-local fFlagAppChatDisableAbsorbInputSelectableModule = require(appChat.Flags.FFlagAppChatDisableAbsorbInputSelectable)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local RoactNavigationModule = require(Parent.RoactNavigation)
+local CryoModule = require(Parent.Cryo)
+local AutoFocusNavigationModule = require(script.Parent.Parent.autoFocusNavigation)
+local EnumScreensModule = require(AppChat.EnumScreens)
+local ChatConversationScreenModule = require(AppChat.Components.ChatConversation.ChatConversationScreen)
+local ChatDetailsScreenModule = require(AppChat.Components.ChatDetails.ChatDetailsScreen)
+local SquadInviteFriendsScreenModule = require(AppChat.Components.Squads.SquadInviteFriendsScreen)
+local SquadLobbyScreenModule = require(AppChat.Components.Squads.SquadLobbyScreen)
+local GetFFlagIsSquadEnabledFunction = require(Parent.SharedFlags).GetFFlagIsSquadEnabled
+local FFlagAppChatDisableAbsorbInputSelectableModule = require(AppChat.Flags.FFlagAppChatDisableAbsorbInputSelectable)
 
-local function instantTransitionConfig()
+local function instantTransitionConfig() --[[ Line: 19 ]]
 	return {
 		transitionSpec = { frequency = 1000000, dampingRatio = 1 }
 	}
 end
 
-return function(p1, p2)
-	-- upvalues: enumScreensModule (ref), chatConversationScreenModule (ref), cryoModule (ref), autoFocusNavigationModule (ref), chatDetailsScreenModule (ref), getFFlagIsSquadEnabled (ref), squadLobbyScreenModule (ref), squadInviteFriendsScreenModule (ref), fFlagAppChatDisableAbsorbInputSelectableModule (ref), roactNavigationModule (ref), instantTransitionConfig (ref)
-	local list = {
+return function(p1, p2) --[[ Line: 28 ]]
+	-- upvalues: EnumScreensModule (copy), ChatConversationScreenModule (copy), CryoModule (copy), AutoFocusNavigationModule (copy), ChatDetailsScreenModule (copy), GetFFlagIsSquadEnabledFunction (copy), SquadLobbyScreenModule (copy), SquadInviteFriendsScreenModule (copy), FFlagAppChatDisableAbsorbInputSelectableModule (copy), RoactNavigationModule (copy), instantTransitionConfig (copy)
+	local List = {
 		{
-			[enumScreensModule.ChatConversation] = {
-				screen = chatConversationScreenModule,
-				navigationOptions = cryoModule.Dictionary.join({
+			[EnumScreensModule.ChatConversation] = {
+				screen = ChatConversationScreenModule,
+				navigationOptions = CryoModule.Dictionary.join({
 					backButtonEnabled = false,
 					isRoot = true,
 					lockIconEnabled = true,
@@ -32,34 +32,34 @@ return function(p1, p2)
 			}
 		},
 		{
-			[enumScreensModule.ChatDetails] = {
-				screen = autoFocusNavigationModule(chatDetailsScreenModule),
+			[EnumScreensModule.ChatDetails] = {
+				screen = AutoFocusNavigationModule(ChatDetailsScreenModule),
 				navigationOptions = p1 or {}
 			}
 		}
 	}
 	
-	if getFFlagIsSquadEnabled() then
-		table.insert(list, {
-			[enumScreensModule.SquadLobby] = {
-				screen = autoFocusNavigationModule(squadLobbyScreenModule.WideSquadLobbyScreen),
+	if GetFFlagIsSquadEnabledFunction() then
+		table.insert(List, {
+			[EnumScreensModule.SquadLobby] = {
+				screen = AutoFocusNavigationModule(SquadLobbyScreenModule.WideSquadLobbyScreen),
 				navigationOptions = p1 or {}
 			}
 		})
-		table.insert(list, {
-			[enumScreensModule.SquadInviteFriends] = {
-				screen = autoFocusNavigationModule(squadInviteFriendsScreenModule),
+		table.insert(List, {
+			[EnumScreensModule.SquadInviteFriends] = {
+				screen = AutoFocusNavigationModule(SquadInviteFriendsScreenModule),
 				navigationOptions = p1 or {}
 			}
 		})
 	end
-	local t = { tabBarVisible = true }
+	local DefaultNavigationOptions = { tabBarVisible = true }
 	
-	if fFlagAppChatDisableAbsorbInputSelectableModule then
-		t.absorbInputSelectable = false
+	if FFlagAppChatDisableAbsorbInputSelectableModule then
+		DefaultNavigationOptions.absorbInputSelectable = false
 	end
-	return roactNavigationModule.createRobloxStackNavigator(list, {
-		defaultNavigationOptions = t,
+	return RoactNavigationModule.createRobloxStackNavigator(List, {
+		defaultNavigationOptions = DefaultNavigationOptions,
 		transitionConfig = if p2 then instantTransitionConfig else nil
 	})
 end

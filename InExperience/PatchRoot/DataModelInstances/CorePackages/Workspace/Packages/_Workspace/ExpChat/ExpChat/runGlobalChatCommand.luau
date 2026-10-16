@@ -1,45 +1,44 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local expChatSharedModule = require(parent.ExpChatShared)
-local sharedFlagsModule = require(parent.SharedFlags)
-local getMessagesStoreModule = require(expChat.Stores.GetMessagesStore)
-local getChannelTabsStoreModule = require(expChat.Stores.GetChannelTabsStore)
-local fFlagExpChatUseChannelTabsStore = sharedFlagsModule.FFlagExpChatUseChannelTabsStore
-local context = expChatSharedModule.context
-local globalCommands = expChatSharedModule.GlobalCommands
-local var1 = expChatSharedModule.Logger:new("ExpChat/" .. script.Name)
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local ExpChatSharedModule = require(Parent.ExpChatShared)
+local GetMessagesStoreModule = require(ExpChat.Stores.GetMessagesStore)
+local GetChannelTabsStoreModule = require(ExpChat.Stores.GetChannelTabsStore)
+local FFlagExpChatUseChannelTabsStore = require(Parent.SharedFlags).FFlagExpChatUseChannelTabsStore
+local Context = ExpChatSharedModule.context
+local GlobalCommands = ExpChatSharedModule.GlobalCommands
+local NewResult = ExpChatSharedModule.Logger:new("ExpChat/" .. script.Name)
 
-return function(p1, p2)
-	-- upvalues: context (ref), var1 (ref), globalCommands (ref), getMessagesStoreModule (ref), fFlagExpChatUseChannelTabsStore (ref), getChannelTabsStoreModule (ref)
-	if not context.translator then
-		var1:warning("context.translator is nil, cannot execute command")
+return function(Text: string, p1): boolean --[[ Line: 16 ]]
+	-- upvalues: Context (copy), NewResult (copy), GlobalCommands (copy), GetMessagesStoreModule (copy), FFlagExpChatUseChannelTabsStore (copy), GetChannelTabsStoreModule (copy)
+	if not Context.translator then
+		NewResult:warning("context.translator is nil, cannot execute command")
 		
 		return false
 	end
-	for i, v in ipairs(globalCommands.getGlobalEnabledCommands()) do
-		for i_1, v_1 in ipairs(v.alias) do
-			if p1 == v_1 or string.find(p1, "^" .. v_1 .. "%s") ~= nil then
-				local var2 = v.clientRun(context.store, p2, p1, context)
+	for _, value in ipairs(GlobalCommands.getGlobalEnabledCommands()) do
+		for _, alia in ipairs(value.alias) do
+			if Text == alia or string.find(Text, "^" .. alia .. "%s") ~= nil then
+				local ClientRunResult = value.clientRun(Context.store, p1, Text, Context)
 				
-				if var2 ~= nil then
-					local key = var2.key
-					local joined = nil
+				if ClientRunResult ~= nil then
+					local Key = ClientRunResult.key
+					local FormatByKeyResult = nil
 					
-					if type(key) == "string" and key ~= "" then
-						joined = context.translator:FormatByKey(key, var2.args)
-					elseif type(key) == "table" and #key > 0 then
-						local t = {}
+					if type(Key) == "string" and Key ~= "" then
+						FormatByKeyResult = Context.translator:FormatByKey(Key, ClientRunResult.args)
+					elseif type(Key) == "table" and #Key > 0 then
+						local List = {}
 						
-						for i_2, v_2 in key do
-							table.insert(t, context.translator:FormatByKey(v_2, var2.args))
+						for _, value1 in Key do
+							table.insert(List, Context.translator:FormatByKey(value1, ClientRunResult.args))
 						end
-						joined = table.concat(t, "\n")
+						FormatByKeyResult = table.concat(List, "\n")
 					end
-					if joined then
-						getMessagesStoreModule(false).addSystemMessage(joined, "RBXGlobal")
+					if FormatByKeyResult then
+						GetMessagesStoreModule(false).addSystemMessage(FormatByKeyResult, "RBXGlobal")
 						
-						if fFlagExpChatUseChannelTabsStore then
-							getChannelTabsStoreModule(false).markChannelUnread("RBXGlobal")
+						if FFlagExpChatUseChannelTabsStore then
+							GetChannelTabsStoreModule(false).markChannelUnread("RBXGlobal")
 						end
 					end
 				end

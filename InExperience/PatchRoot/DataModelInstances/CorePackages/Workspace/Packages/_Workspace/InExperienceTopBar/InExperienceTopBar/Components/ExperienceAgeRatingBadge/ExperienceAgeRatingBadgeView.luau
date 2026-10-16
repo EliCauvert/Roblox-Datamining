@@ -1,25 +1,25 @@
-﻿local parent = script:FindFirstAncestor("InExperienceTopBar").Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local badge = foundationModule.Badge
-local badgeVariant = foundationModule.Enums.BadgeVariant
-local badgeShape = foundationModule.Enums.BadgeShape
-local badgeSize = foundationModule.Enums.BadgeSize
-local view = foundationModule.View
+﻿local Parent = script:FindFirstAncestor("InExperienceTopBar").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local Badge = FoundationModule.Badge
+local BadgeVariant = FoundationModule.Enums.BadgeVariant
+local BadgeShape = FoundationModule.Enums.BadgeShape
+local BadgeSize = FoundationModule.Enums.BadgeSize
+local View = FoundationModule.View
 
-return function(p1)
-	-- upvalues: reactModule (ref), view (ref), badge (ref), badgeVariant (ref), badgeShape (ref), badgeSize (ref)
-	return reactModule.createElement(view, {
+return function(p1) --[[ Line: 20 | Named "ExperienceAgeRatingBadgeView" ]]
+	-- upvalues: ReactModule (copy), View (copy), Badge (copy), BadgeVariant (copy), BadgeShape (copy), BadgeSize (copy)
+	return ReactModule.createElement(View, {
 		tag = "row align-x-center align-y-center auto-xy",
 		LayoutOrder = p1.layoutOrder,
 		onAbsoluteSizeChanged = p1.onAbsoluteSizeChanged,
 		onAbsolutePositionChanged = p1.onAbsolutePositionChanged
 	}, {
-		Rating = reactModule.createElement(badge, {
+		Rating = ReactModule.createElement(Badge, {
 			text = `<b>{p1.text}</b>`,
-			variant = badgeVariant.Contrast,
-			shape = badgeShape.Pill,
-			size = badgeSize.Small
+			variant = BadgeVariant.Contrast,
+			shape = BadgeShape.Pill,
+			size = BadgeSize.Small
 		})
 	})
 end

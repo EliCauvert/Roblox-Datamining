@@ -1,6 +1,6 @@
-﻿local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
-local sessionService = game:GetService("SessionService")
-local telemetryService = game:GetService("TelemetryService")
+﻿local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
+local SessionService = game:GetService("SessionService")
+local TelemetryService = game:GetService("TelemetryService")
 game:DefineFastInt("LuaVoiceChatThrottleHundrethsPercent", 10000)
 game:DefineFastInt("LuaVoiceVolumeControlsEligibilityThrottleHundredthsPercent", 10000)
 game:DefineFastInt("LuaVoiceVolumeControlsImpressionsThrottleHundredthsPercent", 10000)
@@ -10,26 +10,26 @@ game:DefineFastFlag("LuaVoiceChatAnalyticsUseCounterV2", false)
 game:DefineFastFlag("LuaVoiceChatAnalyticsUseEventsV2", false)
 game:DefineFastFlag("LuaVoiceChatAnalyticsBanMessage", true)
 game:DefineFastFlag("LuaVoiceChatReconnectMissedSequence", false)
-local t = {}
-t.__index = t
-t.INFO = "info"
-t.WARNING = "warning"
-t.ERROR = "error"
+local AnalyticsModule = {}
+AnalyticsModule.__index = AnalyticsModule
+AnalyticsModule.INFO = "info"
+AnalyticsModule.WARNING = "warning"
+AnalyticsModule.ERROR = "error"
 
-function t.new(p1)
-	-- upvalues: rbxAnalyticsService (ref), t (ref)
-	if not p1 then
-		p1 = rbxAnalyticsService
+function AnalyticsModule.new(_impl) --[[ Line: 158 ]]
+	-- upvalues: RbxAnalyticsService (copy), AnalyticsModule (copy)
+	if not _impl then
+		_impl = RbxAnalyticsService
 	end
-	assert(p1, "Analytics impl must not be nil.")
+	assert(_impl, "Analytics impl must not be nil.")
 	
-	return setmetatable({ _impl = p1 }, t)
+	return (setmetatable({ _impl = _impl }, AnalyticsModule))
 end
 
-local function stub() end
+local function stub() --[[ Line: 171 ]] end
 
-function t.stubService()
-	-- upvalues: stub (ref)
+function AnalyticsModule.stubService() --[[ Line: 173 ]]
+	-- upvalues: stub (copy)
 	return {
 		SetRBXEvent = stub,
 		SetRBXEventStream = stub,
@@ -40,96 +40,108 @@ function t.stubService()
 	}
 end
 
-function t:setImpl(p1)
-	self._impl = p1
+function AnalyticsModule:setImpl(_impl) --[[ Line: 184 ]]
+	self._impl = _impl
 end
 
-function t:_report(p1, p2, p3, p4)
-	local text = p1 .. "-" .. p3
+function AnalyticsModule:_report(Text, Text1, Text2, AdditionalArgs) --[[ Line: 188 ]]
+	local Text3 = Text .. "-" .. Text1
 	
 	if game:GetFastFlag("LuaVoiceChatAnalyticsUsePointsV2") then
-		self._impl:ReportInfluxSeries(text, p4, game:GetFastInt("LuaVoiceChatAnalyticsPointsThrottle"))
+		self._impl:ReportInfluxSeries(Text3, AdditionalArgs, game:GetFastInt("LuaVoiceChatAnalyticsPointsThrottle"))
 	end
 	if game:GetFastFlag("LuaVoiceChatAnalyticsUseCounterV2") then
-		local var1 = text
+		local Text4: string = Text3
 		
-		if p3 then
-			var1 ..= "-" .. p4
+		if Text2 then
+			Text4 ..= "-" .. Text2
 		end
-		local var2 = var1
+		local Text5: string = Text4
 		
-		if p4 and p4.result then
-			var2 ..= "-" .. p5.result
+		if AdditionalArgs and AdditionalArgs.result then
+			Text5 ..= "-" .. AdditionalArgs.result
 		end
-		self._impl:ReportCounter(var2, 1)
+		self._impl:ReportCounter(Text5, 1)
 	end
 	if game:GetFastFlag("LuaVoiceChatAnalyticsUseEventsV2") then
-		self._impl:SendEventDeferred("client", p1, p2, p4)
+		self._impl:SendEventDeferred("client", Text, Text1, AdditionalArgs)
 	end
 end
 
-function t:reportVoiceChatJoinResult(p1, p2, p3)
-	-- upvalues: t (ref)
-	self:_report("voiceChat", "defaultChannelJoinResults", p2, { success = p1, result = p2, logLevel = p3 or t.INFO })
-end
-
-function t:reportBanMessageEvent(p1)
-	if game:GetFastFlag("LuaVoiceChatAnalyticsBanMessage") then
-		self._impl:ReportCounter("voiceChat-reportBanMessage" .. p9, 1)
-	end
-end
-
-function t:reportBanMessageEventV2(p1, p2, p3, p4)
-	self:_report("voiceChat", "reportBanEvent", nil, {
-		eventType = p1,
-		banReason = p2,
-		userId = p3,
-		voiceSessionId = p4
+function AnalyticsModule:reportVoiceChatJoinResult(Success, Result, p1) --[[ Line: 210 ]]
+	-- upvalues: AnalyticsModule (copy)
+	self:_report("voiceChat", "defaultChannelJoinResults", Result, {
+		success = Success,
+		result = Result,
+		logLevel = if p1 then p1 else AnalyticsModule.INFO
 	})
 end
 
-function t:reportReconnectDueToMissedSequence()
+function AnalyticsModule:reportBanMessageEvent(Text) --[[ Line: 218 ]]
+	if game:GetFastFlag("LuaVoiceChatAnalyticsBanMessage") then
+		self._impl:ReportCounter("voiceChat-reportBanMessage" .. Text, 1)
+	end
+end
+
+function AnalyticsModule:reportBanMessageEventV2(EventType, BanReason, UserId, VoiceSessionId) --[[ Line: 224 ]]
+	self:_report("voiceChat", "reportBanEvent", nil, {
+		eventType = EventType,
+		banReason = BanReason,
+		userId = UserId,
+		voiceSessionId = VoiceSessionId
+	})
+end
+
+function AnalyticsModule:reportReconnectDueToMissedSequence() --[[ Line: 233 ]]
 	if game:GetFastFlag("LuaVoiceChatReconnectMissedSequence") then
 		self._impl:ReportCounter("voiceChat-reconnectMissedSequence", 1)
 	end
 end
 
-function t:reportOutOfOrderSequence()
+function AnalyticsModule:reportOutOfOrderSequence() --[[ Line: 239 ]]
 	self._impl:ReportCounter("voiceChat-outOfOrderSequence", 1)
 end
 
-function t:reportReceivedNudge(p1, p2, p3)
-	local var1 = DateTime.now().UnixTimestampMillis - DateTime.fromIsoDate(p1.deliveryTime).UnixTimestampMillis
+function AnalyticsModule:reportReceivedNudge(p1, UserId, VoiceSessionId) --[[ Line: 243 ]]
+	local UnixTimestampMillisDelta = DateTime.now().UnixTimestampMillis - DateTime.fromIsoDate(p1.deliveryTime).UnixTimestampMillis
 	self._impl:ReportCounter("voicechat-receivednudge", 1)
-	self._impl:ReportCounter("voicechat-receivednudgeduration", var1)
+	self._impl:ReportCounter("voicechat-receivednudgeduration", UnixTimestampMillisDelta)
 	self._impl:SendEventDeferred("client", "voiceChat", "receivedNudge", {
 		type = p1.type,
-		durationInMs = var1,
-		userId = p2,
-		voiceSessionId = p3
+		durationInMs = UnixTimestampMillisDelta,
+		userId = UserId,
+		voiceSessionId = VoiceSessionId
 	})
 end
 
-function t:reportClosedNudge(p1, p2)
+function AnalyticsModule:reportClosedNudge(UserId, VoiceSessionId) --[[ Line: 260 ]]
 	self._impl:ReportCounter("voicechat-closednudge", 1)
-	self._impl:SendEventDeferred("client", "voiceChat", "closedNudge", { closeType = "CLOSED", userId = p1, voiceSessionId = p2 })
+	self._impl:SendEventDeferred("client", "voiceChat", "closedNudge", {
+		closeType = "CLOSED",
+		userId = UserId,
+		voiceSessionId = VoiceSessionId
+	})
 end
 
-function t:reportAcknowledgedNudge(p1, p2)
+function AnalyticsModule:reportAcknowledgedNudge(UserId, VoiceSessionId) --[[ Line: 269 ]]
 	self._impl:ReportCounter("voicechat-acknowledgednudge", 1)
 	self._impl:SendEventDeferred("client", "voiceChat", "closedNudge", {
 		closeType = "ACKNOWLEDGED",
-		userId = p1,
-		voiceSessionId = p2
+		userId = UserId,
+		voiceSessionId = VoiceSessionId
 	})
 end
 
-function t:reportDeniedNudge(p1, p2)
+function AnalyticsModule:reportDeniedNudge(UserId, VoiceSessionId) --[[ Line: 278 ]]
 	self._impl:ReportCounter("voicechat-deniednudge", 1)
-	self._impl:SendEventDeferred("client", "voiceChat", "closedNudge", { closeType = "DENIED", userId = p1, voiceSessionId = p2 })
+	self._impl:SendEventDeferred("client", "voiceChat", "closedNudge", {
+		closeType = "DENIED",
+		userId = UserId,
+		voiceSessionId = VoiceSessionId
+	})
 end
 
-function t:reportVoiceMuteIndividual(p1)
+function AnalyticsModule:reportVoiceMuteIndividual(p1) --[[ Line: 287 ]]
 	self._impl:SendEventDeferred("client", "voice", "voiceUIMuteUnmuteIndividual", {
 		user_id = p1.userId,
 		client_session_id = p1.clientSessionId,
@@ -140,7 +152,7 @@ function t:reportVoiceMuteIndividual(p1)
 	})
 end
 
-function t:reportVoiceMuteGroup(p1)
+function AnalyticsModule:reportVoiceMuteGroup(p1) --[[ Line: 298 ]]
 	self._impl:SendEventDeferred("client", "voice", "voiceUIMuteUnmuteGroup", {
 		user_id = p1.userId,
 		client_session_id = p1.clientSessionId,
@@ -151,7 +163,7 @@ function t:reportVoiceMuteGroup(p1)
 	})
 end
 
-function t:reportVoiceMuteSelf(p1)
+function AnalyticsModule:reportVoiceMuteSelf(p1) --[[ Line: 309 ]]
 	self._impl:SendEventDeferred("client", "voice", "voiceUIMuteUnmuteSelf", {
 		user_id = p1.userId,
 		client_session_id = p1.clientSessionId,
@@ -161,93 +173,93 @@ function t:reportVoiceMuteSelf(p1)
 	})
 end
 
-function t:reportJoinVoiceButtonEvent(p1, p2, p3, p4, p5, p6)
+function AnalyticsModule:reportJoinVoiceButtonEvent(EventType, UniverseId, PlaceId, PlaySessionId, ButtonContext, ButtonConsequence) --[[ Line: 319 ]]
 	self._impl:SendEventDeferred("client", "voice", "joinVoiceButtonEvent", {
-		eventType = p1,
-		universeId = p2,
-		placeId = p3,
-		playSessionId = p4,
-		buttonContext = p5,
-		buttonConsequence = p6
+		eventType = EventType,
+		universeId = UniverseId,
+		placeId = PlaceId,
+		playSessionId = PlaySessionId,
+		buttonContext = ButtonContext,
+		buttonConsequence = ButtonConsequence
 	})
 end
 
-function t:reportJoinVoiceButtonEventWithVoiceSessionId(p1, p2, p3, p4, p5, p6, p7)
+function AnalyticsModule:reportJoinVoiceButtonEventWithVoiceSessionId(EventType, UniverseId, PlaceId, PlaySessionId, VoiceSessionId, ButtonContext, ButtonConsequence) --[[ Line: 337 ]]
 	self._impl:SendEventDeferred("client", "voice", "joinVoiceButtonEvent", {
-		eventType = p1,
-		universeId = p2,
-		placeId = p3,
-		playSessionId = p4,
-		voiceSessionId = p5,
-		buttonContext = p6,
-		buttonConsequence = p7
+		eventType = EventType,
+		universeId = UniverseId,
+		placeId = PlaceId,
+		playSessionId = PlaySessionId,
+		voiceSessionId = VoiceSessionId,
+		buttonContext = ButtonContext,
+		buttonConsequence = ButtonConsequence
 	})
 end
 
-function t.reportJoinVoiceUpsellEvent(_, p1, p2, p3, p4, p5)
-	-- upvalues: sessionService (ref), telemetryService (ref)
-	telemetryService:LogEvent({
+function AnalyticsModule:reportJoinVoiceUpsellEvent(Text, PlaySessionId, User_is_age_verified, Button_context, Button_consequence) --[[ Line: 357 ]]
+	-- upvalues: SessionService (copy), TelemetryService (copy)
+	TelemetryService:LogEvent({
 		description = "Event fired when user sees or interacts with Join Voice button",
 		links = "https://github.rbx.com/Roblox/proto-schemas/pull/8530",
-		eventName = "joinVoiceUpsell" .. p39,
+		eventName = "joinVoiceUpsell" .. Text,
 		backends = { "EventIngest" },
 		throttlingPercentage = game:GetFastInt("LuaVoiceChatThrottleHundrethsPercent"),
 		lastUpdated = { 2025, 10, 30 }
 	}, {
 		customFields = {
-			user_is_age_verified = p3,
-			button_context = p4,
-			button_consequence = p5,
+			user_is_age_verified = User_is_age_verified,
+			button_context = Button_context,
+			button_consequence = Button_consequence,
 			clientTimeStamp = DateTime.now().UnixTimestampMillis,
-			playSessionId = p2,
-			sd_platform_id = sessionService:GetSessionID("level0"),
-			sd_logged_in_id = sessionService:GetSessionID("level1")
+			playSessionId = PlaySessionId,
+			sd_platform_id = SessionService:GetSessionID("level0"),
+			sd_logged_in_id = SessionService:GetSessionID("level1")
 		},
 		standardizedFields = { "addPlaceId", "addUniverseId", "addSessionInfo" }
 	})
 end
 
-function t:reportLeaveVoiceButtonEvent(p1, p2, p3, p4, p5)
+function AnalyticsModule:reportLeaveVoiceButtonEvent(EventType, UniverseId, PlaceId, PlaySessionId, VoiceSessionId) --[[ Line: 390 ]]
 	self._impl:SendEventDeferred("client", "voice", "leaveVoiceButtonEvent", {
-		eventType = p1,
-		universeId = p2,
-		placeId = p3,
-		playSessionId = p4,
-		voiceSessionId = p5
+		eventType = EventType,
+		universeId = UniverseId,
+		placeId = PlaceId,
+		playSessionId = PlaySessionId,
+		voiceSessionId = VoiceSessionId
 	})
 end
 
-function t:reportInExpConsent(p1, p2, p3, p4, p5)
+function AnalyticsModule:reportInExpConsent(EventType, Entry, UniverseId, PlaceId, PlaySessionId) --[[ Line: 406 ]]
 	self._impl:SendEventDeferred("client", "voiceChat", "inExpConsentModalEvent", {
-		eventType = p1,
-		entry = p2,
-		universeId = p3,
-		placeId = p4,
-		playSessionId = p5
+		eventType = EventType,
+		entry = Entry,
+		universeId = UniverseId,
+		placeId = PlaceId,
+		playSessionId = PlaySessionId
 	})
 end
 
-function t:reportDevicePermissionsModalEvent(p1, p2, p3, p4, p5)
+function AnalyticsModule:reportDevicePermissionsModalEvent(EventType, VoiceSessionId, UniverseId, PlaceId, Text: string) --[[ Line: 422 ]]
 	self._impl:SendEventDeferred("client", "voiceChat", "devicePermissionsModalEvent", {
-		eventType = p1,
-		universeId = p3,
-		placeId = p4,
-		playSessionId = string.sub(p5, 2, #p5 - 1),
-		voiceSessionId = p2
+		eventType = EventType,
+		universeId = UniverseId,
+		placeId = PlaceId,
+		playSessionId = string.sub(Text, 2, #Text - 1),
+		voiceSessionId = VoiceSessionId
 	})
 end
 
-function t:reportConnectDisconnectEvents(p1, p2)
-	self._impl:SendEventDeferred("client", "voiceChat", p1, p2)
+function AnalyticsModule:reportConnectDisconnectEvents(EventName, AdditionalArgs) --[[ Line: 441 ]]
+	self._impl:SendEventDeferred("client", "voiceChat", EventName, AdditionalArgs)
 end
 
-function t:reportVoiceEvents(p1, p2)
-	self._impl:SendEventDeferred("client", "voice", p1, p2)
+function AnalyticsModule:reportVoiceEvents(EventName, AdditionalArgs) --[[ Line: 445 ]]
+	self._impl:SendEventDeferred("client", "voice", EventName, AdditionalArgs)
 end
 
-function t.reportVoiceVolumeEligibility(_, p1)
-	-- upvalues: telemetryService (ref)
-	telemetryService:LogEvent({
+function AnalyticsModule:reportVoiceVolumeEligibility(p1) --[[ Line: 449 ]]
+	-- upvalues: TelemetryService (copy)
+	TelemetryService:LogEvent({
 		eventName = "VoiceVolumeControlsEligibility",
 		description = "Records voice volume eligibility state on voice join for VVC telemetry",
 		links = "https://github.rbx.com/Roblox/proto-schemas/blob/master/production/eventstream/voice/voice_volume_controls_eligibility.proto",
@@ -267,9 +279,9 @@ function t.reportVoiceVolumeEligibility(_, p1)
 	})
 end
 
-function t.reportVoiceVolumeImpressions(_, p1)
-	-- upvalues: telemetryService (ref)
-	telemetryService:LogEvent({
+function AnalyticsModule:reportVoiceVolumeImpressions(p1) --[[ Line: 470 ]]
+	-- upvalues: TelemetryService (copy)
+	TelemetryService:LogEvent({
 		eventName = "VoiceVolumeControlsImpressions",
 		description = "Records whether the voice volume slider was seen during a voice session for Voice Volume Controls telemetry. Only recorded for voice volume control eligible users",
 		links = "https://github.rbx.com/Roblox/proto-schemas/blob/master/production/eventstream/voice/voice_volume_controls_impressions.proto",
@@ -288,4 +300,4 @@ function t.reportVoiceVolumeImpressions(_, p1)
 	})
 end
 
-return t
+return AnalyticsModule

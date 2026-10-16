@@ -1,7 +1,7 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local url = require(appChat.Parent.Http).Url
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Url = require(AppChat.Parent.Http).Url
 
-return require(appChat.Http.RoduxNetworking).GET(script.Name, function(p1)
-	-- upvalues: url (ref)
-	return p1(url.CHAT_URL):path("chat-settings")
+return require(AppChat.Http.RoduxNetworking).GET(script.Name, function(Callback) --[[ Line: 7 ]]
+	-- upvalues: Url (copy)
+	return Callback(Url.CHAT_URL):path("chat-settings")
 end)

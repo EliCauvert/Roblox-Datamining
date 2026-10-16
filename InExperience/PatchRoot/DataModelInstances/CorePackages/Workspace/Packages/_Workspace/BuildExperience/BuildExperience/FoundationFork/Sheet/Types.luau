@@ -1,10 +1,9 @@
-﻿local foundation = game:GetService("CorePackages").Packages._Index.Foundation.Foundation
-local parent = foundation.Parent
-local constantsModule = require(foundation.Constants)
-local _ = require(foundation.Enums.DialogSize)
-local _ = require(parent.React)
+﻿local Foundation = game:GetService("CorePackages").Packages._Index.Foundation.Foundation
+local ConstantsModule = require(Foundation.Constants)
+local _ = require(Foundation.Enums.DialogSize)
+local _ = require(Foundation.Parent.React)
 
 return {
-	nonSelectable = constantsModule.MODAL.DISABLE_SELECTION,
-	isolatedSelectionGroup = constantsModule.MODAL.TRAP_FOCUS
+	nonSelectable = ConstantsModule.MODAL.DISABLE_SELECTION,
+	isolatedSelectionGroup = ConstantsModule.MODAL.TRAP_FOCUS
 }

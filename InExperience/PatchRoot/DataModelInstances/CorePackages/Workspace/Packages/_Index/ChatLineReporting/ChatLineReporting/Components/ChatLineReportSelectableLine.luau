@@ -1,39 +1,40 @@
-﻿local chatLineReporting = script:FindFirstAncestor("ChatLineReporting")
-local parent = chatLineReporting.Parent
-local expChatSharedModule = require(parent.ExpChatShared)
-local fFlagExpChatPresetChatEnabled = expChatSharedModule.Flags.FFlagExpChatPresetChatEnabled
-local getPresetIconRichText = expChatSharedModule.getPresetIconRichText
-local isPresetMessage = expChatSharedModule.isPresetMessage
-local getMessageTextModule = require(chatLineReporting.Common.getMessageText)
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local text = foundationModule.Text
-local view = foundationModule.View
-local constantsModule = require(chatLineReporting.Common.Constants)
-local chatLineReportEyebrowModule = require(chatLineReporting.Components.ChatLineReportEyebrow)
+﻿local ChatLineReporting = script:FindFirstAncestor("ChatLineReporting")
+local Parent = ChatLineReporting.Parent
+local ExpChatSharedModule = require(Parent.ExpChatShared)
+local FFlagExpChatPresetChatEnabled = ExpChatSharedModule.Flags.FFlagExpChatPresetChatEnabled
+local GetPresetIconRichTextFunction = ExpChatSharedModule.getPresetIconRichText
+local IsPresetMessageFunction = ExpChatSharedModule.isPresetMessage
+local GetMessageTextModule = require(ChatLineReporting.Common.getMessageText)
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local ConstantsModule = require(ChatLineReporting.Common.Constants)
+local ChatLineReportEyebrowModule = require(ChatLineReporting.Components.ChatLineReportEyebrow)
 
-return function(p1)
-	-- upvalues: reactModule (ref), getMessageTextModule (ref), view (ref), constantsModule (ref), chatLineReportEyebrowModule (ref), text (ref), fFlagExpChatPresetChatEnabled (ref), isPresetMessage (ref), getPresetIconRichText (ref)
-	local var1, var2 = reactModule.useState(nil)
-	local var3 = getMessageTextModule(p1.message.useTranslation, p1.message.translation, p1.message.text)
-	local var4 = var1 or (p1.message.prefixText or "")
-	local userId = p1.message.userId
+return function(p1) --[[ Line: 33 | Named "ChatLineReportSelectableLine" ]]
+	-- upvalues: ReactModule (copy), GetMessageTextModule (copy), View (copy), ConstantsModule (copy), ChatLineReportEyebrowModule (copy), Text (copy), FFlagExpChatPresetChatEnabled (copy), IsPresetMessageFunction (copy), GetPresetIconRichTextFunction (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local MessageTextModule = GetMessageTextModule(p1.message.useTranslation, p1.message.translation, p1.message.text)
+	local PrefixText = p1.message.prefixText or ""
+	local Text1 = UseStateResult or PrefixText
+	local UserId = p1.message.userId
 	
-	if userId and userId.data then
-		local names = userId.data.userProfiles[1].names
-		var2(string.gsub(var4, names.displayName, names.combinedName))
+	if UserId and UserId.data then
+		local Names = UserId.data.userProfiles[1].names
+		UseStateResult2((string.gsub(Text1, Names.displayName, Names.combinedName)))
 	end
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		LayoutOrder = 2,
 		tag = "col",
-		Size = UDim2.new(0, p1.scrollViewSizeX - constantsModule.SelectableLineScrollbarOffset, 1, 0)
+		Size = UDim2.new(0, p1.scrollViewSizeX - ConstantsModule.SelectableLineScrollbarOffset, 1, 0)
 	}, {
-		eyebrow = reactModule.createElement(chatLineReportEyebrowModule, { message = p1.message, localizedText = p1.localizedText }),
-		chatText = reactModule.createElement(text, {
+		eyebrow = ReactModule.createElement(ChatLineReportEyebrowModule, { message = p1.message, localizedText = p1.localizedText }),
+		chatText = ReactModule.createElement(Text, {
 			RichText = true,
 			tag = "auto-xy text-wrap text-align-x-left",
 			LayoutOrder = 2,
-			Text = if fFlagExpChatPresetChatEnabled and isPresetMessage(p1.message) then `{var4} {var3} {getPresetIconRichText(18)}` else `{var4} {var3}`
+			Text = if FFlagExpChatPresetChatEnabled and IsPresetMessageFunction(p1.message) then `{Text1} {MessageTextModule} {GetPresetIconRichTextFunction(18)}` else `{Text1} {MessageTextModule}`
 		})
 	})
 end

@@ -1,64 +1,63 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local coreGuiService = game:GetService("CoreGui")
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local tModule = require(corePackagesService.Packages.t)
-local buttonType = require(corePackagesService.Packages.UIBlox).App.Button.Enum.ButtonType
-local _ = coreGuiService:WaitForChild("RobloxGui")
-local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
-local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local promptWithTextFieldModule = require(parent.Prompts.PromptWithTextField)
-local signalCreateOutfitPermissionDeniedModule = require(parent_1.Thunks.SignalCreateOutfitPermissionDenied)
-local performCreateOutfitModule = require(parent_1.Thunks.PerformCreateOutfit)
-local enterOutfitNamePrompt = roactModule.PureComponent:extend("EnterOutfitNamePrompt")
-enterOutfitNamePrompt.validateProps = tModule.strictInterface({
-	screenSize = tModule.Vector2,
-	signalCreateOutfitPermissionDenied = tModule.callback,
-	performCreateOutfit = tModule.callback
+﻿local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local TModule = require(CorePackages.Packages.t)
+local ButtonType = require(CorePackages.Packages.UIBlox).App.Button.Enum.ButtonType
+local _ = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
+local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local PromptWithTextFieldModule = require(Parent.Prompts.PromptWithTextField)
+local SignalCreateOutfitPermissionDeniedModule = require(Parent1.Thunks.SignalCreateOutfitPermissionDenied)
+local PerformCreateOutfitModule = require(Parent1.Thunks.PerformCreateOutfit)
+local EnterOutfitNamePrompt = RoactModule.PureComponent:extend("EnterOutfitNamePrompt")
+EnterOutfitNamePrompt.validateProps = TModule.strictInterface({
+	screenSize = TModule.Vector2,
+	signalCreateOutfitPermissionDenied = TModule.callback,
+	performCreateOutfit = TModule.callback
 })
 
-function enterOutfitNamePrompt.init(p1)
-	-- upvalues: roactModule (ref)
+function EnterOutfitNamePrompt.init(p1) --[[ Line: 33 ]]
+	-- upvalues: RoactModule (copy)
 	p1:setState({
 		outfitName = "",
 		alertPosition = UDim2.fromScale(0.5, 0.5)
 	})
-	p1.textBoxRef = roactModule.createRef()
+	p1.textBoxRef = RoactModule.createRef()
 	
-	function p0.confirmCreateOutfit()
-		-- upvalues: p1 (ref)
+	function p1.confirmCreateOutfit() --[[ Line: 41 ]]
+		-- upvalues: p1 (copy)
 		p1.props.performCreateOutfit(p1.state.outfitName)
 	end
 	
-	function p0.textUpdated(p2)
-		-- upvalues: p1 (ref)
-		p1:setState({ outfitName = p2 })
+	function p1.textUpdated(OutfitName) --[[ Line: 45 ]]
+		-- upvalues: p1 (copy)
+		p1:setState({ outfitName = OutfitName })
 	end
 end
 
-function enterOutfitNamePrompt.render(p1)
-	-- upvalues: roactModule (ref), promptWithTextFieldModule (ref), robloxTranslatorModule (ref), buttonType (ref)
-	return roactModule.createElement(promptWithTextFieldModule, {
+function EnterOutfitNamePrompt.render(p1) --[[ Line: 52 ]]
+	-- upvalues: RoactModule (copy), PromptWithTextFieldModule (copy), RobloxTranslatorModule (copy), ButtonType (copy)
+	return RoactModule.createElement(PromptWithTextFieldModule, {
 		fieldText = p1.state.outfitName,
 		onFieldTextUpdated = p1.textUpdated,
-		title = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.EnterOutfitNamePromptTitle"),
+		title = RobloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.EnterOutfitNamePromptTitle"),
 		buttonStackInfo = {
 			buttons = {
 				{
 					isDefaultChild = true,
 					props = {
 						onActivated = p1.props.signalCreateOutfitPermissionDenied,
-						text = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.EnterOutfitNamePromptNo")
+						text = RobloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.EnterOutfitNamePromptNo")
 					}
 				},
 				{
 					isDefaultChild = false,
-					buttonType = buttonType.PrimarySystem,
+					buttonType = ButtonType.PrimarySystem,
 					props = {
 						isDisabled = p1.state.outfitName == "",
 						onActivated = p1.confirmCreateOutfit,
-						text = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.EnterOutfitNamePromptYes")
+						text = RobloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.EnterOutfitNamePromptYes")
 					}
 				}
 			}
@@ -66,18 +65,18 @@ function enterOutfitNamePrompt.render(p1)
 	})
 end
 
-return roactRoduxModule.connect(function(p1)
+return RoactRoduxModule.connect(function(p1) --[[ Line: 82 | Named "mapStateToProps" ]]
 	return { screenSize = p1.screenSize }
-end, function(p1)
-	-- upvalues: signalCreateOutfitPermissionDeniedModule (ref), performCreateOutfitModule (ref)
+end, function(Callback) --[[ Line: 88 | Named "mapDispatchToProps" ]]
+	-- upvalues: SignalCreateOutfitPermissionDeniedModule (copy), PerformCreateOutfitModule (copy)
 	return {
-		signalCreateOutfitPermissionDenied = function()
-			-- upvalues: p1 (ref), signalCreateOutfitPermissionDeniedModule (copy)
-			return p1(signalCreateOutfitPermissionDeniedModule)
+		signalCreateOutfitPermissionDenied = function() --[[ Line: 90 ]]
+			-- upvalues: Callback (copy), SignalCreateOutfitPermissionDeniedModule (upval)
+			return Callback(SignalCreateOutfitPermissionDeniedModule)
 		end,
-		performCreateOutfit = function(p2)
-			-- upvalues: p1 (ref), performCreateOutfitModule (copy)
-			return p1(performCreateOutfitModule(p2))
+		performCreateOutfit = function(p1) --[[ Line: 94 ]]
+			-- upvalues: Callback (copy), PerformCreateOutfitModule (upval)
+			return Callback(PerformCreateOutfitModule(p1))
 		end
 	}
-end)(enterOutfitNamePrompt)
+end)(EnterOutfitNamePrompt)

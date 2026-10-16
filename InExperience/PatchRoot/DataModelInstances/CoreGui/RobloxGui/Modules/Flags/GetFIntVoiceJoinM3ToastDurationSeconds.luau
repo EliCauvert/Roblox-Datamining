@@ -1,5 +1,5 @@
 ﻿game:DefineFastInt("VoiceJoinM3ToastDurationSeconds", 5)
 
-return function()
+return function() --[[ Line: 2 ]]
 	return game:GetFastInt("VoiceJoinM3ToastDurationSeconds")
 end

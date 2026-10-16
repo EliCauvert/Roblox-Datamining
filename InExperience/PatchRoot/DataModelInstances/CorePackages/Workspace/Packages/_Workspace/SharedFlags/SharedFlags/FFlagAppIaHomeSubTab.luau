@@ -1,1 +1,5 @@
-﻿return game:DefineFastFlag("LuaAppIaHomeSubTab", false) or game:DefineFastFlag("SubTabAddMomentsFlagGating", false) and (require(script.Parent.FFlagEnableArgus) and require(script.Parent.FFlagArgoEnableMoments))
+﻿local FFlagEnableArgusModule = require(script.Parent.FFlagEnableArgus)
+local FFlagArgoEnableMomentsModule = require(script.Parent.FFlagArgoEnableMoments)
+local SubTabAddMomentsFlagGating = game:DefineFastFlag("SubTabAddMomentsFlagGating", false)
+
+return game:DefineFastFlag("LuaAppIaHomeSubTab", false) or SubTabAddMomentsFlagGating and (FFlagEnableArgusModule and FFlagArgoEnableMomentsModule)

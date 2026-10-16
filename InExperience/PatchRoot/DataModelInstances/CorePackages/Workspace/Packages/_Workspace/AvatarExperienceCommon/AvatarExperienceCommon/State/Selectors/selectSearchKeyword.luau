@@ -1,26 +1,27 @@
-﻿local avatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
-local parent = avatarExperienceCommon.Parent
-local avatarScreen = require(parent.AvatarExperienceNavigation).Enums.AvatarScreen
-local fFlagUseNavigationSelectors = require(parent.SharedFlags).FFlagUseNavigationSelectors
-local fFlagSignalsNavP3gAvatarExperience = require(parent.SharedFlags).FFlagSignalsNavP3gAvatarExperience
-local selectors = require(parent.NavigationRodux).Selectors
-local getLegacyNavigationStore = require(parent.NavigationRodux).GetLegacyNavigationStore
-local selectCurrentAvatarRouteModule = require(avatarExperienceCommon.State.Selectors.selectCurrentAvatarRoute)
+﻿local AvatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
+local Parent = AvatarExperienceCommon.Parent
+local AvatarScreen = require(Parent.AvatarExperienceNavigation).Enums.AvatarScreen
+local FFlagUseNavigationSelectors = require(Parent.SharedFlags).FFlagUseNavigationSelectors
+local FFlagSignalsNavP3gAvatarExperience = require(Parent.SharedFlags).FFlagSignalsNavP3gAvatarExperience
+local Selectors = require(Parent.NavigationRodux).Selectors
+local GetLegacyNavigationStoreFunction = require(Parent.NavigationRodux).GetLegacyNavigationStore
+local SelectCurrentAvatarRouteModule = require(AvatarExperienceCommon.State.Selectors.selectCurrentAvatarRoute)
 
-return function(p1)
-	-- upvalues: fFlagSignalsNavP3gAvatarExperience (ref), getLegacyNavigationStore (ref), fFlagUseNavigationSelectors (ref), selectors (ref), selectCurrentAvatarRouteModule (ref), avatarScreen (ref)
-	local var1 = if fFlagSignalsNavP3gAvatarExperience then getLegacyNavigationStore(false).getCurrentRoute(false) elseif fFlagUseNavigationSelectors then p1.Navigation and selectors.selectCurrentRoactNavigationRoute(p1) else p1.Navigation and p1.Navigation.currentRoute
-	local searchKeyword = var1 and (var1.params and (var1.params.searchParams and var1.params.searchParams.searchKeyword))
+return function(p1) --[[ Line: 10 | Named "selectSearchKeyword" ]]
+	-- upvalues: FFlagSignalsNavP3gAvatarExperience (copy), GetLegacyNavigationStoreFunction (copy), FFlagUseNavigationSelectors (copy), Selectors (copy), SelectCurrentAvatarRouteModule (copy), AvatarScreen (copy)
+	local CurrentRoute = if FFlagSignalsNavP3gAvatarExperience then GetLegacyNavigationStoreFunction(false).getCurrentRoute(false) elseif FFlagUseNavigationSelectors then p1.Navigation and Selectors.selectCurrentRoactNavigationRoute(p1) else p1.Navigation and p1.Navigation.currentRoute
+	local SearchKeyword = CurrentRoute and (CurrentRoute.params and (CurrentRoute.params.searchParams and CurrentRoute.params.searchParams.searchKeyword))
 	
-	if searchKeyword then
-		return searchKeyword
+	if SearchKeyword then
+		return SearchKeyword
 	end
-	local var2 = selectCurrentAvatarRouteModule(p1)
+	local SelectCurrentAvatarRouteModuleResult = SelectCurrentAvatarRouteModule(p1)
 	
-	if var2 and var2.name == avatarScreen.CatalogSearch then
-		local key = var2.key
+	if SelectCurrentAvatarRouteModuleResult and SelectCurrentAvatarRouteModuleResult.name == AvatarScreen.CatalogSearch then
+		local Key = SelectCurrentAvatarRouteModuleResult.key
 		
-		return p1.Search and (p1.Search.SearchesInCatalog and (p1.Search.SearchesInCatalog[key] and p1.Search.SearchesInCatalog[key].keyword))
+		return p1.Search and (p1.Search.SearchesInCatalog and (p1.Search.SearchesInCatalog[Key] and p1.Search.SearchesInCatalog[Key].keyword))
+	else
+		return nil
 	end
-	return nil
 end

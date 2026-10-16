@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.ServerTriggeredModalImpressions.ServerTriggeredModalImpressions)
+﻿return (require(script.Parent.Parent.Parent._Index.ServerTriggeredModalImpressions.ServerTriggeredModalImpressions))

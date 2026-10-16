@@ -1,99 +1,109 @@
-﻿local guiService = game:GetService("GuiService")
-local serverDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
-local parent = serverDrivenUi.Parent
-local reactModule = require(parent.React)
-local responsiveModule = require(parent.Responsive)
-local getInputModeStore = responsiveModule.GetInputModeStore
-local constants = require(parent.HoldToPlay).Constants
-local appShortcutBarContext = require(parent.AppShortcutBar).AppShortcutBarContext
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
-local useButtonHold = focusNavigationUtilsModule.useButtonHold
-local buttonHoldStateEnum = focusNavigationUtilsModule.ButtonHoldStateEnum
-local gamePlayButtonModule = require(parent.GamePlayButton)
-local useOnPlayButtonCallback = gamePlayButtonModule.useOnPlayButtonCallback
-local usePlayButtonState = gamePlayButtonModule.usePlayButtonState
-local playButtonStates = gamePlayButtonModule.PlayButtonStates
-local robloxAppSessionizationModule = require(parent.RobloxAppSessionization)
-local setGamePlaySession = robloxAppSessionizationModule.SetGamePlaySession
-local sessionType = robloxAppSessionizationModule.SessionType
-local holdToPlayLauncher = require(parent.DiscoveryAnalytics).Constants.Context.HoldToPlayLauncher
-local _ = require(parent.SduiCoreSystem)
-local sduiFocusNavActionsModule = require(serverDrivenUi.FocusNavigation.SduiFocusNavActions)
-local useSduiReportExperienceLaunched = require(parent.SduiSharedContent).useSduiReportExperienceLaunched
+﻿local GuiService = game:GetService("GuiService")
+local ServerDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
+local Parent = ServerDrivenUi.Parent
+local ReactModule = require(Parent.React)
+local ResponsiveModule = require(Parent.Responsive)
+local GetInputModeStoreFunction = ResponsiveModule.GetInputModeStore
+local Constants = require(Parent.HoldToPlay).Constants
+local AppShortcutBarContext = require(Parent.AppShortcutBar).AppShortcutBarContext
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
+local UseButtonHoldFunction = FocusNavigationUtilsModule.useButtonHold
+local ButtonHoldStateEnum = FocusNavigationUtilsModule.ButtonHoldStateEnum
+local GamePlayButtonModule = require(Parent.GamePlayButton)
+local UseOnPlayButtonCallbackFunction = GamePlayButtonModule.useOnPlayButtonCallback
+local UsePlayButtonStateFunction = GamePlayButtonModule.usePlayButtonState
+local PlayButtonStates = GamePlayButtonModule.PlayButtonStates
+local RobloxAppSessionizationModule = require(Parent.RobloxAppSessionization)
+local SetGamePlaySessionFunction = RobloxAppSessionizationModule.SetGamePlaySession
+local SessionType = RobloxAppSessionizationModule.SessionType
+local HoldToPlayLauncher = require(Parent.DiscoveryAnalytics).Constants.Context.HoldToPlayLauncher
+local _ = require(Parent.SduiCoreSystem)
+local SduiFocusNavActionsModule = require(ServerDrivenUi.FocusNavigation.SduiFocusNavActions)
+local UseSduiReportExperienceLaunchedFunction = require(Parent.SduiSharedContent).useSduiReportExperienceLaunched
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), useButtonHold (ref), constants (ref), buttonHoldStateEnum (ref), appShortcutBarContext (ref), guiService (ref), getInputModeStore (ref), responsiveModule (ref), focusNavigationEventNameEnum (ref), usePlayButtonState (ref), useOnPlayButtonCallback (ref), holdToPlayLauncher (ref), useSduiReportExperienceLaunched (ref), setGamePlaySession (ref), sessionType (ref), playButtonStates (ref), sduiFocusNavActionsModule (ref)
-	local dependencies = p1.sduiContext.dependencies
-	local networking = dependencies.networking
-	local sessionService = dependencies.sessionService
-	local var1 = reactModule.useRef(nil)
-	local var2 = useButtonHold(constants.SIGNAL_HOLD_INTENT_SECONDS, constants.SIGNAL_HOLD_COMPLETE_SECONDS)
-	local var3 = if var2.holdState ~= buttonHoldStateEnum.HOLDING then if var2.holdState ~= buttonHoldStateEnum.JUST_PRESSED then var2.holdState == buttonHoldStateEnum.COMPLETED else true else true
-	local var4 = var2.holdState == buttonHoldStateEnum.COMPLETED
-	local var5 = appShortcutBarContext.useDispatchButtonHoldStarted()
-	local var6 = appShortcutBarContext.useDispatchButtonHoldEnded()
-	local var7 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), guiService (copy)
-		return if p1.guiObject then p1.guiObject else guiService.SelectedCoreObject
+return ReactModule.memo(function(p1) --[[ Line: 50 | Named "SduiHoldToPlay" ]]
+	-- upvalues: ReactModule (copy), UseButtonHoldFunction (copy), Constants (copy), ButtonHoldStateEnum (copy), AppShortcutBarContext (copy), GuiService (copy), GetInputModeStoreFunction (copy), ResponsiveModule (copy), FocusNavigationEventNameEnum (copy), UsePlayButtonStateFunction (copy), UseOnPlayButtonCallbackFunction (copy), HoldToPlayLauncher (copy), UseSduiReportExperienceLaunchedFunction (copy), SetGamePlaySessionFunction (copy), SessionType (copy), PlayButtonStates (copy), SduiFocusNavActionsModule (copy)
+	local Dependencies = p1.sduiContext.dependencies
+	local Networking = Dependencies.networking
+	local SessionService = Dependencies.sessionService
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseButtonHoldResult = UseButtonHoldFunction(Constants.SIGNAL_HOLD_INTENT_SECONDS, Constants.SIGNAL_HOLD_COMPLETE_SECONDS)
+	local IsHoldStateMatch: boolean = UseButtonHoldResult.holdState == ButtonHoldStateEnum.HOLDING or (UseButtonHoldResult.holdState == ButtonHoldStateEnum.JUST_PRESSED or UseButtonHoldResult.holdState == ButtonHoldStateEnum.COMPLETED)
+	local IsHoldStateMatch1 = UseButtonHoldResult.holdState == ButtonHoldStateEnum.COMPLETED
+	local UseDispatchButtonHoldStartedResult = AppShortcutBarContext.useDispatchButtonHoldStarted()
+	local UseDispatchButtonHoldEndedResult = AppShortcutBarContext.useDispatchButtonHoldEnded()
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 65 ]]
+		-- upvalues: p1 (copy), GuiService (upval)
+		return if p1.guiObject then p1.guiObject else GuiService.SelectedCoreObject
 	end, { p1.guiObject })
-	local var8 = if var2.holdState ~= buttonHoldStateEnum.HOLDING then var2.holdState == buttonHoldStateEnum.COMPLETED else true
-	reactModule.useEffect(function()
-		-- upvalues: var8 (ref), getInputModeStore (copy), p1 (ref), responsiveModule (copy)
-		if var8 then
-			if p1.setDisabledForHold and getInputModeStore(false).getLastInputType(false) == responsiveModule.Input.Directional then
+	local IsHoldStateMatch2: boolean = UseButtonHoldResult.holdState == ButtonHoldStateEnum.HOLDING or UseButtonHoldResult.holdState == ButtonHoldStateEnum.COMPLETED
+	ReactModule.useEffect(function() --[[ Line: 76 ]]
+		-- upvalues: IsHoldStateMatch2 (copy), GetInputModeStoreFunction (upval), p1 (copy), ResponsiveModule (upval)
+		if IsHoldStateMatch2 then
+			local LastInputType = GetInputModeStoreFunction(false).getLastInputType(false)
+			
+			if p1.setDisabledForHold and LastInputType == ResponsiveModule.Input.Directional then
 				p1.setDisabledForHold(true)
 			end
 		end
-		return function()
-			-- upvalues: p1 (copy)
+		return function() --[[ Line: 84 ]]
+			-- upvalues: p1 (upval)
 			if p1.setDisabledForHold then
 				p1.setDisabledForHold(false)
 			end
 		end
-	end, { var8, p1.setDisabledForHold })
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), var3 (ref), var5 (ref), focusNavigationEventNameEnum (copy), var2 (ref), var6 (ref)
-		if not var1.current and var3 then
-			var1.current = true
-			var5(focusNavigationEventNameEnum.HoldToPlay, var2.holdProgress)
+	end, { IsHoldStateMatch2, p1.setDisabledForHold })
+	ReactModule.useEffect(function() --[[ Line: 96 ]]
+		-- upvalues: UseRefResult (copy), IsHoldStateMatch (copy), UseDispatchButtonHoldStartedResult (copy), FocusNavigationEventNameEnum (upval), UseButtonHoldResult (copy), UseDispatchButtonHoldEndedResult (copy)
+		if not UseRefResult.current and IsHoldStateMatch then
+			UseRefResult.current = true
+			UseDispatchButtonHoldStartedResult(FocusNavigationEventNameEnum.HoldToPlay, UseButtonHoldResult.holdProgress)
 			
 			return
-		elseif var1.current and not var3 then
-			var6(focusNavigationEventNameEnum.HoldToPlay)
-			var1.current = false
 		end
-	end, { var3, var2.holdProgress, var5, var6 })
-	local var9 = usePlayButtonState(networking, p1.universeId)
-	local var10 = useOnPlayButtonCallback(p1.universeId, nil, holdToPlayLauncher, nil, nil)
-	local var11 = useSduiReportExperienceLaunched(p1.sduiContext, p1.analyticsContext, p1.universeId, p1.placeId)
-	reactModule.useEffect(function()
-		-- upvalues: var4 (ref), var9 (ref), setGamePlaySession (copy), sessionService (ref), sessionType (copy), var10 (ref), var11 (ref), var2 (ref), playButtonStates (copy)
-		if var4 then
-			local playButtonState = var9.playButtonState
-			setGamePlaySession(sessionService, sessionType.StructuralIdentifier.GamePlayFromHoldToPlay, true)
-			var10(playButtonState, var11)
+		if UseRefResult.current and not IsHoldStateMatch then
+			UseDispatchButtonHoldEndedResult(FocusNavigationEventNameEnum.HoldToPlay)
+			UseRefResult.current = false
+		end
+	end, {
+		IsHoldStateMatch,
+		UseButtonHoldResult.holdProgress,
+		UseDispatchButtonHoldStartedResult,
+		UseDispatchButtonHoldEndedResult
+	})
+	local UsePlayButtonStateResult = UsePlayButtonStateFunction(Networking, p1.universeId)
+	local UseOnPlayButtonCallbackResult = UseOnPlayButtonCallbackFunction(p1.universeId, nil, HoldToPlayLauncher, nil, nil)
+	local UseSduiReportExperienceLaunchedResult = UseSduiReportExperienceLaunchedFunction(p1.sduiContext, p1.analyticsContext, p1.universeId, p1.placeId)
+	ReactModule.useEffect(function() --[[ Line: 112 ]]
+		-- upvalues: IsHoldStateMatch1 (copy), UsePlayButtonStateResult (copy), SetGamePlaySessionFunction (upval), SessionService (copy), SessionType (upval), UseOnPlayButtonCallbackResult (copy), UseSduiReportExperienceLaunchedResult (copy), UseButtonHoldResult (copy), PlayButtonStates (upval)
+		if IsHoldStateMatch1 then
+			local PlayButtonState = UsePlayButtonStateResult.playButtonState
+			SetGamePlaySessionFunction(SessionService, SessionType.StructuralIdentifier.GamePlayFromHoldToPlay, true)
+			UseOnPlayButtonCallbackResult(PlayButtonState, UseSduiReportExperienceLaunchedResult)
 			
-			if var2.cancelHold and playButtonState == playButtonStates.Playable then
-				var2.cancelHold()
+			if UseButtonHoldResult.cancelHold and PlayButtonState == PlayButtonStates.Playable then
+				UseButtonHoldResult.cancelHold()
 			end
 		end
 	end, {
-		var4, var2.cancelHold, var9.playButtonState, sessionService, var11, var10
+		IsHoldStateMatch1, UseButtonHoldResult.cancelHold,
+		UsePlayButtonStateResult.playButtonState, SessionService,
+		UseSduiReportExperienceLaunchedResult, UseOnPlayButtonCallbackResult
 	})
 	
-	return reactModule.createElement(sduiFocusNavActionsModule, {
-		focusNavActions = reactModule.useMemo(function()
-			-- upvalues: focusNavigationEventNameEnum (copy), var2 (ref)
+	return ReactModule.createElement(SduiFocusNavActionsModule, {
+		focusNavActions = ReactModule.useMemo(function() --[[ Line: 132 ]]
+			-- upvalues: FocusNavigationEventNameEnum (upval), UseButtonHoldResult (copy)
 			return {
 				keys = {
-					[Enum.KeyCode.ButtonA] = focusNavigationEventNameEnum.HoldToPlay
+					[Enum.KeyCode.ButtonA] = FocusNavigationEventNameEnum.HoldToPlay
 				},
 				events = {
-					[focusNavigationEventNameEnum.HoldToPlay] = { handler = var2.eventHandler }
+					[FocusNavigationEventNameEnum.HoldToPlay] = { handler = UseButtonHoldResult.eventHandler }
 				}
 			}
-		end, { var2.eventHandler }),
-		guiObject = var7
+		end, { UseButtonHoldResult.eventHandler }),
+		guiObject = UseMemoResult
 	})
 end)

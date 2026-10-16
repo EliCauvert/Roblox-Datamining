@@ -1,60 +1,60 @@
-﻿local collectionViews = script:FindFirstAncestor("CollectionViews")
-local parent = collectionViews.Parent
-local signalsModule = require(parent.Signals)
-local displayModule = require(parent.Display)
-local collectionItemSize = require(collectionViews.CollectionViewTypes).CollectionItemSize
-local collectionBreakpointConfigModule = require(script.Parent.CollectionBreakpointConfig)
-local resolveBreakpoint = collectionBreakpointConfigModule.resolveBreakpoint
-local getItemsPerRow = collectionBreakpointConfigModule.getItemsPerRow
+﻿local CollectionViews = script:FindFirstAncestor("CollectionViews")
+local Parent = CollectionViews.Parent
+local SignalsModule = require(Parent.Signals)
+local DisplayModule = require(Parent.Display)
+local CollectionItemSize = require(CollectionViews.CollectionViewTypes).CollectionItemSize
+local CollectionBreakpointConfigModule = require(script.Parent.CollectionBreakpointConfig)
+local ResolveBreakpointFunction = CollectionBreakpointConfigModule.resolveBreakpoint
+local GetItemsPerRowFunction = CollectionBreakpointConfigModule.getItemsPerRow
 
-return function(p1, p2)
-	-- upvalues: displayModule (ref), signalsModule (ref), resolveBreakpoint (ref), collectionItemSize (ref), getItemsPerRow (ref)
-	local getPlatformScale = displayModule.GetDisplayStore(false).getPlatformScale
-	local var1 = signalsModule.createComputed(function(p3)
-		-- upvalues: p1 (ref)
-		return p1(p3) > 0
+return function(Callback, p1) --[[ Line: 24 | Named "createCollectionLayoutStore" ]]
+	-- upvalues: DisplayModule (copy), SignalsModule (copy), ResolveBreakpointFunction (copy), CollectionItemSize (copy), GetItemsPerRowFunction (copy)
+	local GetPlatformScaleFunction = DisplayModule.GetDisplayStore(false).getPlatformScale
+	local Computed = SignalsModule.createComputed(function(p2): boolean --[[ Line: 30 ]]
+		-- upvalues: Callback (copy)
+		return Callback(p2) > 0
 	end)
-	local var2 = if p2 then signalsModule.createComputed(function(p3)
-		-- upvalues: p1 (ref), p2 (ref)
-		local var3 = p1(p3)
+	local Computed1 = if p1 then SignalsModule.createComputed(function(p2) --[[ Line: 35 ]]
+		-- upvalues: Callback (copy), p1 (copy)
+		local CallbackResult: number = Callback(p2)
 		
-		return if var3 > 0 then var3 else p2.getContainerWidth(p3)
-	end) else p1
-	local var3 = signalsModule.createComputed(function(p3)
-		-- upvalues: var2 (ref), getPlatformScale (ref)
-		return var2(p3) / getPlatformScale(p3)
+		return if CallbackResult > 0 then CallbackResult else p1.getContainerWidth(p2)
+	end) else Callback
+	local Computed2 = SignalsModule.createComputed(function(p2) --[[ Line: 44 ]]
+		-- upvalues: Computed1 (copy), GetPlatformScaleFunction (copy)
+		return Computed1(p2) / GetPlatformScaleFunction(p2)
 	end)
-	local var4 = signalsModule.createComputed(function(p3)
-		-- upvalues: resolveBreakpoint (copy), var3 (ref)
-		return resolveBreakpoint(var3(p3))
+	local Computed3 = SignalsModule.createComputed(function(p2) --[[ Line: 48 ]]
+		-- upvalues: ResolveBreakpointFunction (upval), Computed2 (copy)
+		return ResolveBreakpointFunction(Computed2(p2))
 	end)
-	local t = {}
+	local GetItemsPerRow = {}
 	
-	for i, v in {
-		collectionItemSize.XSmall,
-		collectionItemSize.Small,
-		collectionItemSize.Medium,
-		collectionItemSize.Large,
-		collectionItemSize.XLarge
+	for _, value in {
+		CollectionItemSize.XSmall,
+		CollectionItemSize.Small,
+		CollectionItemSize.Medium,
+		CollectionItemSize.Large,
+		CollectionItemSize.XLarge
 	} do
-		t[v] = signalsModule.createComputed(function(p3)
-			-- upvalues: getItemsPerRow (copy), var4 (ref), v (ref)
-			return getItemsPerRow(var4(p3), v)
+		GetItemsPerRow[value] = SignalsModule.createComputed(function(p2) --[[ Line: 62 ]]
+			-- upvalues: GetItemsPerRowFunction (upval), Computed3 (copy), value (copy)
+			return GetItemsPerRowFunction(Computed3(p2), value)
 		end)
 	end
 	return {
-		getContainerWidth = var2,
-		getDesignSpaceContainerWidth = var3,
-		getItemsPerRow = t,
-		getNumItemsForAllCategories = signalsModule.createComputed(function(p3)
-			-- upvalues: t (ref)
-			local t_1 = {}
+		getContainerWidth = Computed1,
+		getDesignSpaceContainerWidth = Computed2,
+		getItemsPerRow = GetItemsPerRow,
+		getNumItemsForAllCategories = SignalsModule.createComputed(function(p2) --[[ Line: 68 ]]
+			-- upvalues: GetItemsPerRow (copy)
+			local t = {}
 			
-			for i, v in t do
-				t_1[i] = v(p3)
+			for i, value in GetItemsPerRow do
+				t[i] = value(p2)
 			end
-			return t_1
+			return t
 		end),
-		getIsContainerMeasured = var1
+		getIsContainerMeasured = Computed
 	}
 end

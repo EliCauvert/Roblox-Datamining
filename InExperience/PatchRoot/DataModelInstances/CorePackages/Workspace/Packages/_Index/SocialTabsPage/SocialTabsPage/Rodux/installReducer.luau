@@ -1,8 +1,8 @@
-﻿local socialTabsPage = script:FindFirstAncestor("SocialTabsPage")
-local roduxModule = require(socialTabsPage.Parent.Rodux)
-local myRoduxNetworkingModule = require(socialTabsPage.Networking.myRoduxNetworking)
+﻿local SocialTabsPage = script:FindFirstAncestor("SocialTabsPage")
+local RoduxModule = require(SocialTabsPage.Parent.Rodux)
+local MyRoduxNetworkingModule = require(SocialTabsPage.Networking.myRoduxNetworking)
 
-return function()
-	-- upvalues: roduxModule (ref), myRoduxNetworkingModule (ref)
-	return roduxModule.combineReducers({ NetworkStatus = myRoduxNetworkingModule.installReducer() })
+return function() --[[ Line: 7 ]]
+	-- upvalues: RoduxModule (copy), MyRoduxNetworkingModule (copy)
+	return RoduxModule.combineReducers({ NetworkStatus = MyRoduxNetworkingModule.installReducer() })
 end

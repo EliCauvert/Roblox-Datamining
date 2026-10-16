@@ -1,72 +1,73 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventErrorLogger
-local createDataCacheModule = require(dataHydration.createDataCache)
-local createDataResolverModule = require(dataHydration.createDataResolver)
-local _ = require(dataHydration.DataHydrationTypes)
-local fetchGameMediaModule = require(script.Parent.fetchGameMedia)
-local gameMediaStoreTypesModule = require(script.Parent.GameMediaStoreTypes)
-local fFlagMyStatsMediaSelector = require(parent.SharedFlags).FFlagMyStatsMediaSelector
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local DiscoveryEventErrorLogger = require(Parent.DiscoveryUtils).DiscoveryEventErrorLogger
+local CreateDataCacheModule = require(DataHydration.createDataCache)
+local CreateDataResolverModule = require(DataHydration.createDataResolver)
+local _ = require(DataHydration.DataHydrationTypes)
+local FetchGameMediaModule = require(script.Parent.fetchGameMedia)
+local GameMediaStoreTypesModule = require(script.Parent.GameMediaStoreTypes)
+local FFlagMyStatsMediaSelector = require(Parent.SharedFlags).FFlagMyStatsMediaSelector
 
-return function()
-	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), fFlagMyStatsMediaSelector (ref), discoveryEventErrorLogger (ref), fetchGameMediaModule (ref), gameMediaStoreTypesModule (ref)
-	local var1 = createDataResolverModule({
+return function() --[[ Line: 17 | Named "createGameMediaStore" ]]
+	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), FFlagMyStatsMediaSelector (copy), DiscoveryEventErrorLogger (copy), FetchGameMediaModule (copy), GameMediaStoreTypesModule (copy)
+	local DataResolverModule = CreateDataResolverModule({
 		supportsMultiGet = false,
-		cache = createDataCacheModule(),
-		replaceItems = fFlagMyStatsMediaSelector,
-		logError = function(p1)
-			-- upvalues: discoveryEventErrorLogger (copy)
+		cache = CreateDataCacheModule(),
+		replaceItems = FFlagMyStatsMediaSelector,
+		logError = function(p1) --[[ Line: 23 ]]
+			-- upvalues: DiscoveryEventErrorLogger (upval)
 			if type(p1) == "table" and p1.errorType then
-				discoveryEventErrorLogger.reportError(p1.errorType, p1.errorMessage)
+				DiscoveryEventErrorLogger.reportError(p1.errorType, p1.errorMessage)
 				
 				return
+			else
+				DiscoveryEventErrorLogger.reportError("FetchGameMediaError", (tostring(p1)))
 			end
-			discoveryEventErrorLogger.reportError("FetchGameMediaError", tostring(p1))
 		end,
-		fetchFn = function(p1, _)
-			-- upvalues: fetchGameMediaModule (copy), gameMediaStoreTypesModule (copy)
-			return fetchGameMediaModule(p1):andThen(function(p2)
-				-- upvalues: gameMediaStoreTypesModule (copy)
-				if not p2 or not p2.responseBody then
+		fetchFn = function(p1, _) --[[ Line: 30 ]]
+			-- upvalues: FetchGameMediaModule (upval), GameMediaStoreTypesModule (upval)
+			return FetchGameMediaModule(p1):andThen(function(Result) --[[ Line: 31 ]]
+				-- upvalues: GameMediaStoreTypesModule (upval)
+				if not Result or not Result.responseBody then
 					error({
 						errorType = "FetchGameMediaResponseError",
-						errorMessage = if p2 then "Missing response body" else "No response"
+						errorMessage = if Result then "Missing response body" else "No response"
 					})
 				end
-				local var2, var3 = gameMediaStoreTypesModule.gameMediaResponseValidator(p2.responseBody)
+				local GameMediaResponseValidatorResult, GameMediaResponseValidatorResult2 = GameMediaStoreTypesModule.gameMediaResponseValidator(Result.responseBody)
 				
-				if not var2 then
+				if not GameMediaResponseValidatorResult then
 					error({
 						errorType = "FetchGameMediaResponseInvalidInterface",
-						errorMessage = var3
+						errorMessage = GameMediaResponseValidatorResult2
 					})
 				end
-				local t = {}
-				local data = p2.responseBody.data
+				local List = {}
+				local Data = Result.responseBody.data
 				
-				if data then
-					for i, v in data do
-						if v.imageId then
-							table.insert(t, {
-								imageId = v.imageId,
-								assetTypeId = v.assetTypeId,
-								videoId = v.videoId,
-								videoHash = v.videoHash,
-								videoTitle = v.videoTitle
+				if Data then
+					for _, entry in Data do
+						if entry.imageId then
+							table.insert(List, {
+								imageId = entry.imageId,
+								assetTypeId = entry.assetTypeId,
+								videoId = entry.videoId,
+								videoHash = entry.videoHash,
+								videoTitle = entry.videoTitle
 							})
 						end
 					end
 				end
-				return t
+				return List
 			end)
 		end
 	})
 	
 	return {
-		getAndFetchGameMedia = var1.getAndFetchItem,
-		getGameMedia = var1.getCachedItem,
-		fetchGameMedia = var1.fetchItem,
-		clear = var1.clear,
-		dispose = var1.dispose
+		getAndFetchGameMedia = DataResolverModule.getAndFetchItem,
+		getGameMedia = DataResolverModule.getCachedItem,
+		fetchGameMedia = DataResolverModule.fetchItem,
+		clear = DataResolverModule.clear,
+		dispose = DataResolverModule.dispose
 	}
 end

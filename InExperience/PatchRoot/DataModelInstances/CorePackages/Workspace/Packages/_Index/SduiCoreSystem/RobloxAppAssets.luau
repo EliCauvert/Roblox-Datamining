@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.RobloxAppAssets.RobloxAppAssets)
+﻿return (require(script.Parent.Parent.Parent._Index.RobloxAppAssets.RobloxAppAssets))

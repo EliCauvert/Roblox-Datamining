@@ -1,19 +1,19 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local _ = require(dataHydration.Parent.MomentsTypes)
-local convertApiCommentToCommentModule = require(dataHydration.Moments.Util.convertApiCommentToComment)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local _ = require(DataHydration.Parent.MomentsTypes)
+local ConvertApiCommentToCommentModule = require(DataHydration.Moments.Util.convertApiCommentToComment)
 
-return function(p1)
-	-- upvalues: convertApiCommentToCommentModule (ref)
+return function(p1) --[[ Line: 11 | Named "extractCommentsFromPage" ]]
+	-- upvalues: ConvertApiCommentToCommentModule (copy)
 	local t = {}
 	
 	if type(p1) ~= "table" or type(p1.comments) ~= "table" then
 		return t
 	end
-	for i, v in p1.comments do
-		local var1 = convertApiCommentToCommentModule(v)
+	for _, comment in p1.comments do
+		local ConvertApiCommentToCommentModuleResult = ConvertApiCommentToCommentModule(comment)
 		
-		if var1 ~= nil then
-			t[var1.commentId] = var1
+		if ConvertApiCommentToCommentModuleResult ~= nil then
+			t[ConvertApiCommentToCommentModuleResult.commentId] = ConvertApiCommentToCommentModuleResult
 		end
 	end
 	return t

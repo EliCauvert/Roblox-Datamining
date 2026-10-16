@@ -1,50 +1,51 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor").Parent
-local sharedFlagsModule = require(parent.SharedFlags)
-local guiService = game:GetService("GuiService")
-local userInputService = game:GetService("UserInputService")
-local reactModule = require(parent.React)
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor").Parent
+local SharedFlagsModule = require(Parent.SharedFlags)
+local GuiService = game:GetService("GuiService")
+local UserInputService = game:GetService("UserInputService")
+local ReactModule = require(Parent.React)
 
-local function computeGuiInset()
-	-- upvalues: sharedFlagsModule (ref), guiService (ref), userInputService (ref)
-	local fFlagLuaAppSupportDeviceSafeInsets = sharedFlagsModule.FFlagLuaAppUseDeviceSafeInsetsForAppContainer and sharedFlagsModule.FFlagLuaAppSupportDeviceSafeInsets
-	local guiInset, guiInset_1 = guiService:GetGuiInset()
-	local y = userInputService.BottomBarSize.Y
+local function computeGuiInset() --[[ Line: 17 ]]
+	-- upvalues: SharedFlagsModule (copy), GuiService (copy), UserInputService (copy)
+	local FFlagLuaAppSupportDeviceSafeInsets = SharedFlagsModule.FFlagLuaAppUseDeviceSafeInsetsForAppContainer and SharedFlagsModule.FFlagLuaAppSupportDeviceSafeInsets
+	local GuiInset, GuiInset2 = GuiService:GetGuiInset()
+	local Y = UserInputService.BottomBarSize.Y
+	local Bottom = GuiService:GetSafeZoneOffsets().bottom
 	
 	return {
-		top = if fFlagLuaAppSupportDeviceSafeInsets then 0 else userInputService.StatusBarSize.Y,
-		left = guiInset.X,
-		right = guiInset_1.X,
-		bottom = if y == 0 then guiService:GetSafeZoneOffsets().bottom else y
+		top = if FFlagLuaAppSupportDeviceSafeInsets then 0 else UserInputService.StatusBarSize.Y,
+		left = GuiInset.X,
+		right = GuiInset2.X,
+		bottom = if Y == 0 then Bottom else Y
 	}
 end
 
 return {
-	useGuiInset = function()
-		-- upvalues: reactModule (ref), computeGuiInset (ref), guiService (ref), userInputService (ref)
-		local var1, var2 = reactModule.useState(computeGuiInset)
-		reactModule.useEffect(function()
-			-- upvalues: var2 (ref), computeGuiInset (copy), guiService (copy), userInputService (copy)
-			local function updateGuiInset()
-				-- upvalues: var2 (copy), computeGuiInset (copy)
-				var2(computeGuiInset())
+	useGuiInset = function() --[[ Line: 32 ]]
+		-- upvalues: ReactModule (copy), computeGuiInset (copy), GuiService (copy), UserInputService (copy)
+		local UseStateResult, UseStateResult2 = ReactModule.useState(computeGuiInset)
+		ReactModule.useEffect(function() --[[ Line: 35 ]]
+			-- upvalues: UseStateResult2 (copy), computeGuiInset (upval), GuiService (upval), UserInputService (upval)
+			local function updateGuiInset() --[[ Line: 36 ]]
+				-- upvalues: UseStateResult2 (upval), computeGuiInset (upval)
+				UseStateResult2((computeGuiInset()))
 			end
 			
-			local list = {
-				guiService.SafeZoneOffsetsChanged:Connect(updateGuiInset),
-				userInputService:GetPropertyChangedSignal("StatusBarSize"):Connect(updateGuiInset),
-				userInputService:GetPropertyChangedSignal("BottomBarSize"):Connect(updateGuiInset),
-				userInputService:GetPropertyChangedSignal("RightBarSize"):Connect(updateGuiInset)
+			local Connections = {
+				GuiService.SafeZoneOffsetsChanged:Connect(updateGuiInset),
+				UserInputService:GetPropertyChangedSignal("StatusBarSize"):Connect(updateGuiInset),
+				UserInputService:GetPropertyChangedSignal("BottomBarSize"):Connect(updateGuiInset),
+				UserInputService:GetPropertyChangedSignal("RightBarSize"):Connect(updateGuiInset)
 			}
 			
-			return function()
-				-- upvalues: list (ref)
-				for i, v in list do
-					v:Disconnect()
+			return function() --[[ Line: 47 ]]
+				-- upvalues: Connections (copy)
+				for _, connection in Connections do
+					connection:Disconnect()
 				end
 			end
 		end, {})
 		
-		return var1
+		return UseStateResult
 	end,
 	computeGuiInset = computeGuiInset
 }

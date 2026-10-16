@@ -1,3 +1,6 @@
-﻿local corePackagesService = game:GetService("CorePackages")
+﻿local CorePackages = game:GetService("CorePackages")
+local FFlagEnableConsoleExpControls = require(CorePackages.Workspace.Packages.SharedFlags).FFlagEnableConsoleExpControls
+local EnabledFunction = require(CorePackages.Workspace.Packages.Chrome).Enabled
+local FFlagTopBarSignalizeHealthBar = require(CorePackages.Workspace.Packages.CoreGuiCommon).Flags.FFlagTopBarSignalizeHealthBar
 
-return game:DefineFastFlag("TopBarDeprecateCoreGuiRodux2", false) and (require(corePackagesService.Workspace.Packages.CoreGuiCommon).Flags.FFlagTopBarSignalizeHealthBar and (require(corePackagesService.Workspace.Packages.SharedFlags).FFlagEnableConsoleExpControls and require(corePackagesService.Workspace.Packages.Chrome).Enabled()))
+return game:DefineFastFlag("TopBarDeprecateCoreGuiRodux2", false) and (FFlagTopBarSignalizeHealthBar and (FFlagEnableConsoleExpControls and EnabledFunction()))

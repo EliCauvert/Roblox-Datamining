@@ -1,45 +1,46 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local virtualEventsModule = require(parent.VirtualEvents)
-local closeCentralOverlay = require(parent.CentralOverlay).Thunks.CloseCentralOverlay
-local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
-local sduiParseHelpers = sduiCoreSystemModule.SduiParseHelpers
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local VirtualEventsModule = require(Parent.VirtualEvents)
+local CloseCentralOverlayFunction = require(Parent.CentralOverlay).Thunks.CloseCentralOverlay
+local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
+local SduiParseHelpers = SduiCoreSystemModule.SduiParseHelpers
 
-return function(p1, _, p2)
-	-- upvalues: sduiErrorType (ref), virtualEventsModule (ref), sduiParseHelpers (ref), closeCentralOverlay (ref)
-	local var1 = if p1 then p1.actionParams else nil
+return function(p1, _, p2) --[[ Line: 17 | Named "SduiEnableEventNotificationsAction" ]]
+	-- upvalues: SduiErrorType (copy), VirtualEventsModule (copy), SduiParseHelpers (copy), CloseCentralOverlayFunction (copy)
+	local ActionParams = p1 and p1.actionParams or nil
 	
-	if var1 == nil then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if ActionParams == nil then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			name = "EnableEventNotifications",
 			message = "Missing actionParams"
 		}, p2.appPage)
 		
 		return
+	else
+		assert(ActionParams, "actionParams must exist")
+		local EventId = ActionParams.eventId
+		local UniverseId = ActionParams.universeId
+		local Channel = ActionParams.channel
+		local Networking = p2.dependencies.networking
+		VirtualEventsModule.enablePushNotifications(Networking):catch(function(Err) --[[ Line: 39 ]]
+			-- upvalues: p2 (copy), SduiErrorType (upval), SduiParseHelpers (upval)
+			p2.dependencies.logger.reportError(SduiErrorType.ActionNetworkRequestFailed, {
+				name = "EnableEventNotifications",
+				message = "enablePushNotifications failed: " .. SduiParseHelpers.stringifyValue(Err)
+			}, p2.appPage)
+		end)
+		VirtualEventsModule.neverShowNotificationsModalAgain(Networking):catch(function(Err) --[[ Line: 46 ]]
+			-- upvalues: p2 (copy), SduiErrorType (upval), SduiParseHelpers (upval)
+			p2.dependencies.logger.reportError(SduiErrorType.ActionNetworkRequestFailed, {
+				name = "EnableEventNotifications",
+				message = "neverShowNotificationsModalAgain failed: " .. SduiParseHelpers.stringifyValue(Err)
+			}, p2.appPage)
+		end)
+		VirtualEventsModule.fireEventNotificationEnabled({
+			virtualEventId = if EventId then tostring(EventId) else nil,
+			universeId = if UniverseId then tostring(UniverseId) else nil,
+			channel = if Channel then tostring(Channel) else nil
+		})
+		p2.dependencies.dispatch(CloseCentralOverlayFunction())
 	end
-	assert(var1, "actionParams must exist")
-	local eventId = var1.eventId
-	local universeId = var1.universeId
-	local channel = var1.channel
-	local networking = p2.dependencies.networking
-	virtualEventsModule.enablePushNotifications(networking):catch(function(p3)
-		-- upvalues: p2 (ref), sduiErrorType (copy), sduiParseHelpers (copy)
-		p2.dependencies.logger.reportError(sduiErrorType.ActionNetworkRequestFailed, {
-			name = "EnableEventNotifications",
-			message = "enablePushNotifications failed: " .. sduiParseHelpers.stringifyValue(p3)
-		}, p2.appPage)
-	end)
-	virtualEventsModule.neverShowNotificationsModalAgain(networking):catch(function(p3)
-		-- upvalues: p2 (ref), sduiErrorType (copy), sduiParseHelpers (copy)
-		p2.dependencies.logger.reportError(sduiErrorType.ActionNetworkRequestFailed, {
-			name = "EnableEventNotifications",
-			message = "neverShowNotificationsModalAgain failed: " .. sduiParseHelpers.stringifyValue(p3)
-		}, p2.appPage)
-	end)
-	virtualEventsModule.fireEventNotificationEnabled({
-		virtualEventId = if eventId then tostring(eventId) else nil,
-		universeId = if universeId then tostring(universeId) else nil,
-		channel = if channel then tostring(channel) else nil
-	})
-	p2.dependencies.dispatch(closeCentralOverlay())
 end

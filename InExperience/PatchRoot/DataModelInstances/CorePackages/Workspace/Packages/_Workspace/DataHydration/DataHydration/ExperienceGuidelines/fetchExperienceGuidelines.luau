@@ -1,24 +1,24 @@
-﻿local parent = script:FindFirstAncestor("DataHydration").Parent
-local httpClientModule = require(parent.HttpClient)
-local urlBase = require(parent.UrlBuilder).UrlBase
+﻿local Parent = script:FindFirstAncestor("DataHydration").Parent
+local HttpClientModule = require(Parent.HttpClient)
+local UrlBase = require(Parent.UrlBuilder).UrlBase
 local _ = require(script.Parent.ExperienceGuidelinesStoreTypes)
-local fetch = httpClientModule.fetch
-local asPromise = httpClientModule.asPromise
+local FetchFunction = HttpClientModule.fetch
+local AsPromiseFunction = HttpClientModule.asPromise
 
 return {
-	fetchDetailedGuidelines = function(p1, p2)
-		-- upvalues: urlBase (ref), fetch (ref), asPromise (ref)
-		p2 = p2 or {}
+	fetchDetailedGuidelines = function(UniverseId, p1) --[[ Line: 21 ]]
+		-- upvalues: UrlBase (copy), FetchFunction (copy), AsPromiseFunction (copy)
+		local P1 = p1 or {}
 		
-		return asPromise(fetch({
+		return AsPromiseFunction((FetchFunction({
 			method = "POST",
 			analyticsKey = "experience-guidelines.get",
-			network = p2.network,
-			url = (p2.baseUrl or urlBase.APIS) .. "/experience-guidelines-service/v1beta1/detailed-guidelines",
-			body = { universeId = p1 },
-			decode = function(p3)
-				return p3
+			network = P1.network,
+			url = (P1.baseUrl or UrlBase.APIS) .. "/experience-guidelines-service/v1beta1/detailed-guidelines",
+			body = { universeId = UniverseId },
+			decode = function(p2) --[[ Line: 33 ]]
+				return p2
 			end
-		}))
+		})))
 	end
 }

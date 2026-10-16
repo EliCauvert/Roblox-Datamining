@@ -1,58 +1,58 @@
-﻿local getMutedUsersStoreModule = require(script.GetMutedUsersStore)
+﻿local GetMutedUsersStoreModule = require(script.GetMutedUsersStore)
 
-local function _()
-	-- upvalues: getMutedUsersStoreModule (ref)
-	return getMutedUsersStoreModule(false)
+local function _() --[[ Line: 3 | Named "store" ]]
+	-- upvalues: GetMutedUsersStoreModule (copy)
+	return GetMutedUsersStoreModule(false)
 end
 
 return {
-	mutePlayer = function(p1)
-		-- upvalues: getMutedUsersStoreModule (ref)
+	mutePlayer = function(p1) --[[ Line: 16 ]]
+		-- upvalues: GetMutedUsersStoreModule (copy)
 		if p1.userId then
-			getMutedUsersStoreModule(false).muteGlobalUserId(p1.userId)
+			GetMutedUsersStoreModule(false).muteGlobalUserId(p1.userId)
 		end
 		if p1.username then
-			getMutedUsersStoreModule(false).muteGlobalUsername(p1.username)
+			GetMutedUsersStoreModule(false).muteGlobalUsername(p1.username)
 		end
 		if p1.displayName then
-			getMutedUsersStoreModule(false).muteGlobalDisplayName(p1.displayName)
+			GetMutedUsersStoreModule(false).muteGlobalDisplayName(p1.displayName)
 		end
 	end,
-	unmutePlayer = function(p1)
-		-- upvalues: getMutedUsersStoreModule (ref)
+	unmutePlayer = function(p1) --[[ Line: 28 ]]
+		-- upvalues: GetMutedUsersStoreModule (copy)
 		if p1.userId then
-			getMutedUsersStoreModule(false).unmuteGlobalUserId(p1.userId)
+			GetMutedUsersStoreModule(false).unmuteGlobalUserId(p1.userId)
 		end
 		if p1.username then
-			getMutedUsersStoreModule(false).unmuteGlobalUsername(p1.username)
+			GetMutedUsersStoreModule(false).unmuteGlobalUsername(p1.username)
 		end
 		if p1.displayName then
-			getMutedUsersStoreModule(false).unmuteGlobalDisplayName(p1.displayName)
+			GetMutedUsersStoreModule(false).unmuteGlobalDisplayName(p1.displayName)
 		end
 	end,
-	isUserIdMuted = function(p1)
-		-- upvalues: getMutedUsersStoreModule (ref)
-		return getMutedUsersStoreModule(false).isUserIdMuted(p1)
+	isUserIdMuted = function(p1) --[[ Line: 41 ]]
+		-- upvalues: GetMutedUsersStoreModule (copy)
+		return GetMutedUsersStoreModule(false).isUserIdMuted(p1)
 	end,
-	isUsernameMuted = function(p1)
-		-- upvalues: getMutedUsersStoreModule (ref)
-		return getMutedUsersStoreModule(false).isUsernameMuted(p1)
+	isUsernameMuted = function(p1) --[[ Line: 44 ]]
+		-- upvalues: GetMutedUsersStoreModule (copy)
+		return GetMutedUsersStoreModule(false).isUsernameMuted(p1)
 	end,
-	isDisplayNameMuted = function(p1)
-		-- upvalues: getMutedUsersStoreModule (ref)
-		return getMutedUsersStoreModule(false).isDisplayNameMuted(p1)
+	isDisplayNameMuted = function(p1) --[[ Line: 47 ]]
+		-- upvalues: GetMutedUsersStoreModule (copy)
+		return GetMutedUsersStoreModule(false).isDisplayNameMuted(p1)
 	end,
-	getMutedUserIds = function()
-		-- upvalues: getMutedUsersStoreModule (ref)
-		return getMutedUsersStoreModule(false).getMutedUserIds
+	getMutedUserIds = function() --[[ Line: 52 ]]
+		-- upvalues: GetMutedUsersStoreModule (copy)
+		return GetMutedUsersStoreModule(false).getMutedUserIds
 	end,
-	getMutedUsernames = function()
-		-- upvalues: getMutedUsersStoreModule (ref)
-		return getMutedUsersStoreModule(false).getMutedUsernames
+	getMutedUsernames = function() --[[ Line: 55 ]]
+		-- upvalues: GetMutedUsersStoreModule (copy)
+		return GetMutedUsersStoreModule(false).getMutedUsernames
 	end,
-	getMutedDisplayNames = function()
-		-- upvalues: getMutedUsersStoreModule (ref)
-		return getMutedUsersStoreModule(false).getMutedDisplayNames
+	getMutedDisplayNames = function() --[[ Line: 58 ]]
+		-- upvalues: GetMutedUsersStoreModule (copy)
+		return GetMutedUsersStoreModule(false).getMutedDisplayNames
 	end,
 	resolveMuteTarget = require(script.resolveMuteTarget),
 	resolveUnmuteTarget = require(script.resolveUnmuteTarget),

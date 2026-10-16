@@ -1,16 +1,16 @@
-﻿local appStorageService = game:GetService("AppStorageService")
-local playersService = game:GetService("Players")
-local parent = script.Parent.Parent
-local constantsModule = require(parent.Constants)
-local getLocalUserIdModule = require(parent.Utils.getLocalUserId)
-local getUserIdsFromStringModule = require(parent.Utils.getUserIdsFromString)
+﻿local AppStorageService = game:GetService("AppStorageService")
+local Players = game:GetService("Players")
+local Parent = script.Parent.Parent
+local ConstantsModule = require(Parent.Constants)
+local GetLocalUserIdModule = require(Parent.Utils.getLocalUserId)
+local GetUserIdsFromStringModule = require(Parent.Utils.getUserIdsFromString)
 
-return function()
-	-- upvalues: appStorageService (ref), constantsModule (ref), getUserIdsFromStringModule (ref), getLocalUserIdModule (ref), playersService (ref)
-	local ok, status = pcall(function()
-		-- upvalues: appStorageService (copy), constantsModule (copy)
-		return appStorageService:GetItem(constantsModule.DeleteWarningModalOptOutStorageKey)
+return function(): boolean --[[ Line: 10 ]]
+	-- upvalues: AppStorageService (copy), ConstantsModule (copy), GetUserIdsFromStringModule (copy), GetLocalUserIdModule (copy), Players (copy)
+	local Success, Result = pcall(function() --[[ Line: 11 ]]
+		-- upvalues: AppStorageService (upval), ConstantsModule (upval)
+		return AppStorageService:GetItem(ConstantsModule.DeleteWarningModalOptOutStorageKey)
 	end)
 	
-	return ok and status ~= "" and getUserIdsFromStringModule(status)[getLocalUserIdModule(playersService) or ""]
+	return if Success and Result ~= "" and GetUserIdsFromStringModule(Result)[GetLocalUserIdModule(Players) or ""] then true else false
 end

@@ -1,65 +1,65 @@
-﻿local runService = game:GetService("RunService")
+﻿local RunService = game:GetService("RunService")
 local IXPService = game:GetService("IXPService")
 game:DefineFastFlag("IXPServiceWrapperWaitRefactor", false)
 
-local _ = function()
+local function _() --[[ Line: 17 ]]
 	return game:GetFastFlag("IXPServiceWrapperWaitRefactor")
 end
 
 return {
-	InitializeAsync = function(p1, p2, p3)
-		-- upvalues: runService (ref), IXPService (ref)
-		local ok, status = pcall(function()
-			-- upvalues: runService (copy), IXPService (copy), p3 (ref), p2 (ref), p1 (ref)
-			if runService:IsStudio() then
+	InitializeAsync = function(p1, UserId, UserLayers) --[[ Line: 35 ]]
+		-- upvalues: RunService (copy), IXPService (copy)
+		local Success, Result = pcall(function() --[[ Line: 36 ]]
+			-- upvalues: RunService (upval), IXPService (upval), UserLayers (copy), UserId (copy), p1 (copy)
+			if RunService:IsStudio() then
 				IXPService:ClearUserLayers()
 			end
-			IXPService:RegisterUserLayers(p3)
-			IXPService:InitializeUserLayers(p2)
+			IXPService:RegisterUserLayers(UserLayers)
+			IXPService:InitializeUserLayers(UserId)
 			
 			if game:GetFastFlag("IXPServiceWrapperWaitRefactor") then
 				return p1:WaitForInitialization()
 			end
-			local userLayerLoadingStatus = IXPService:GetUserLayerLoadingStatus()
-			while userLayerLoadingStatus == Enum.IXPLoadingStatus.None or userLayerLoadingStatus == Enum.IXPLoadingStatus.Pending do
+			local UserLayerLoadingStatus = IXPService:GetUserLayerLoadingStatus()
+			while UserLayerLoadingStatus == Enum.IXPLoadingStatus.None or UserLayerLoadingStatus == Enum.IXPLoadingStatus.Pending do
 				IXPService.OnUserLayerLoadingStatusChanged:Wait()
-				userLayerLoadingStatus = IXPService:GetUserLayerLoadingStatus()
+				UserLayerLoadingStatus = IXPService:GetUserLayerLoadingStatus()
 			end
-			return userLayerLoadingStatus
+			return UserLayerLoadingStatus
 		end)
 		
-		return ok, status
+		return Success, Result
 	end,
-	WaitForInitialization = function(_)
-		-- upvalues: IXPService (ref)
-		local userLayerLoadingStatus = IXPService:GetUserLayerLoadingStatus()
-		while userLayerLoadingStatus == Enum.IXPLoadingStatus.None or userLayerLoadingStatus == Enum.IXPLoadingStatus.Pending do
+	WaitForInitialization = function(_) --[[ Line: 64 ]]
+		-- upvalues: IXPService (copy)
+		local UserLayerLoadingStatus = IXPService:GetUserLayerLoadingStatus()
+		while UserLayerLoadingStatus == Enum.IXPLoadingStatus.None or UserLayerLoadingStatus == Enum.IXPLoadingStatus.Pending do
 			IXPService.OnUserLayerLoadingStatusChanged:Wait()
-			userLayerLoadingStatus = IXPService:GetUserLayerLoadingStatus()
+			UserLayerLoadingStatus = IXPService:GetUserLayerLoadingStatus()
 		end
-		return userLayerLoadingStatus
+		return UserLayerLoadingStatus
 	end,
-	GetLayerData = function(_, p4)
-		-- upvalues: IXPService (ref)
-		local ok, status = pcall(function()
-			-- upvalues: IXPService (copy), p4 (ref)
-			return IXPService:GetUserLayerVariables(p4)
+	GetLayerData = function(_, LayerName) --[[ Line: 82 ]]
+		-- upvalues: IXPService (copy)
+		local Success, Result = pcall(function() --[[ Line: 83 ]]
+			-- upvalues: IXPService (upval), LayerName (copy)
+			return IXPService:GetUserLayerVariables(LayerName)
 		end)
 		
-		return if ok then status else nil
+		return Success and Result or nil
 	end,
-	LogUserLayerExposure = function(_, p4)
-		-- upvalues: IXPService (ref)
-		pcall(function()
-			-- upvalues: IXPService (copy), p4 (ref)
-			IXPService:LogUserLayerExposure(p4)
+	LogUserLayerExposure = function(_, LayerName) --[[ Line: 95 ]]
+		-- upvalues: IXPService (copy)
+		pcall(function() --[[ Line: 96 ]]
+			-- upvalues: IXPService (upval), LayerName (copy)
+			IXPService:LogUserLayerExposure(LayerName)
 		end)
 	end,
-	LogBrowserTrackerLayerExposure = function(_, p4)
-		-- upvalues: IXPService (ref)
-		pcall(function()
-			-- upvalues: IXPService (copy), p4 (ref)
-			IXPService:LogBrowserTrackerLayerExposure(p4)
+	LogBrowserTrackerLayerExposure = function(_, LayerName) --[[ Line: 106 ]]
+		-- upvalues: IXPService (copy)
+		pcall(function() --[[ Line: 107 ]]
+			-- upvalues: IXPService (upval), LayerName (copy)
+			IXPService:LogBrowserTrackerLayerExposure(LayerName)
 		end)
 	end
 }

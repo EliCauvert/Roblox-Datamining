@@ -1,20 +1,20 @@
-﻿local constantsModule = require(script:FindFirstAncestor("AvatarExperienceCommon").Constants)
+﻿local ConstantsModule = require(script:FindFirstAncestor("AvatarExperienceCommon").Constants)
 
-return function(p1)
-	-- upvalues: constantsModule (ref)
-	local equippedAssets = p1.AvatarExperience.AvatarEditor.Character.EquippedAssets
+return function(p1) --[[ Line: 5 ]]
+	-- upvalues: ConstantsModule (copy)
+	local EquippedAssets = p1.AvatarExperience.AvatarEditor.Character.EquippedAssets
 	
-	if equippedAssets == nil then
+	if EquippedAssets == nil then
 		return {}
 	end
-	local t = {}
+	local List = {}
 	
-	for i, v in constantsModule.ASSET_TYPE_ID_STRING_TO_MAKEUP_TYPE do
-		if equippedAssets[i] then
-			for i_1, v_1 in equippedAssets[i] do
-				table.insert(t, v_1)
+	for i, _ in ConstantsModule.ASSET_TYPE_ID_STRING_TO_MAKEUP_TYPE do
+		if EquippedAssets[i] then
+			for _, value in EquippedAssets[i] do
+				table.insert(List, value)
 			end
 		end
 	end
-	return t
+	return List
 end

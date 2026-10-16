@@ -1,53 +1,53 @@
-﻿local telemetryService = game:GetService("TelemetryService")
-local socialUpsell = script:FindFirstAncestor("SocialUpsell")
-local _ = require(socialUpsell.Types)
-local parent = socialUpsell.Parent
-local cryoModule = require(parent.Cryo)
-local upsellEntrySurfaceTypeModule = require(socialUpsell.Analytics.Enum.UpsellEntrySurfaceType)
-local upsellComponentModule = require(socialUpsell.Analytics.Enum.UpsellComponent)
-local upsellStageModule = require(socialUpsell.Analytics.Enum.UpsellStage)
-local _ = require(parent.SocialLuaAnalytics).Analytics.Enums.EventTypes
-local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
-local t = {
+﻿local TelemetryService = game:GetService("TelemetryService")
+local SocialUpsell = script:FindFirstAncestor("SocialUpsell")
+local _ = require(SocialUpsell.Types)
+local Parent = SocialUpsell.Parent
+local CryoModule = require(Parent.Cryo)
+local UpsellEntrySurfaceTypeModule = require(SocialUpsell.Analytics.Enum.UpsellEntrySurfaceType)
+local UpsellComponentModule = require(SocialUpsell.Analytics.Enum.UpsellComponent)
+local UpsellStageModule = require(SocialUpsell.Analytics.Enum.UpsellStage)
+local _ = require(Parent.SocialLuaAnalytics).Analytics.Enums.EventTypes
+local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
+local config = {
 	description = "Upsell Banner Analytics Event",
 	backends = { "EventIngest" },
 	throttlingPercentage = game:DefineFastInt("FIntSocialUpsellEventThrottleHunderedthsPercent", 10000),
 	lastUpdated = { 2025, 9, 26 }
 }
 
-function evaluateUpsellStage(p1, p2, p3)
-	-- upvalues: upsellComponentModule (ref), upsellEntrySurfaceTypeModule (ref), upsellStageModule (ref)
-	return if p2 == upsellComponentModule.Modal then if p3 == upsellComponentModule.Modal and (p1 == upsellEntrySurfaceTypeModule.Homepage or p1 == upsellEntrySurfaceTypeModule.InExperienceChatInputBar or p1 == upsellEntrySurfaceTypeModule.InExperienceVoiceChatIcon) then upsellStageModule.Fae else upsellStageModule.FaeDetails else upsellStageModule.Fae
+function evaluateUpsellStage(Homepage, Modal, Modal1) --[[ Line: 26 ]]
+	-- upvalues: UpsellComponentModule (copy), UpsellEntrySurfaceTypeModule (copy), UpsellStageModule (copy)
+	return if Modal == UpsellComponentModule.Modal then if Modal1 == UpsellComponentModule.Modal and (Homepage == UpsellEntrySurfaceTypeModule.Homepage or Homepage == UpsellEntrySurfaceTypeModule.InExperienceChatInputBar or Homepage == UpsellEntrySurfaceTypeModule.InExperienceVoiceChatIcon) then UpsellStageModule.Fae else UpsellStageModule.FaeDetails else UpsellStageModule.Fae
 end
 
-local function _(p1, p2, p3)
-	return if p1 and p2 and p3 then p1 .. p4 .. p5 else nil
+local function _(Text, Text1, Text2) --[[ Line: 52 | Named "generateUpsellIdentifier" ]]
+	return if Text and Text1 and Text2 then Text .. Text1 .. Text2 else nil
 end
 
-function logUpsellEvent(p1, p2)
-	-- upvalues: cryoModule (ref), t (ref), rbxAnalyticsService (ref), telemetryService (ref)
-	local var1 = cryoModule.Dictionary.join(t, { eventName = p1 })
-	local playSessionId = rbxAnalyticsService:GetPlaySessionId()
-	local t_1 = {
-		upsellEntrySurface = p2.upsellEntrySurface,
-		upsellStage = p2.upsellStage,
-		upsellImpressionId = p2.upsellImpressionId,
-		upsellComponent = p2.upsellComponent,
-		btn = p2.btn or nil,
-		conversationId = p2.conversationId or nil,
-		playSessionId = if playSessionId ~= "" then nil else playSessionId,
+function logUpsellEvent(EventName, CustomFields) --[[ Line: 63 ]]
+	-- upvalues: CryoModule (copy), config (copy), RbxAnalyticsService (copy), TelemetryService (copy)
+	local JoinResult = CryoModule.Dictionary.join(config, { eventName = EventName })
+	local PlaySessionId = RbxAnalyticsService:GetPlaySessionId()
+	local UpsellPurpose = CustomFields.upsellPurpose
+	local UpsellEntrySurface = CustomFields.upsellEntrySurface
+	local UpsellComponent = CustomFields.upsellComponent
+	local CustomFields1 = {
+		upsellEntrySurface = CustomFields.upsellEntrySurface,
+		upsellStage = CustomFields.upsellStage,
+		upsellImpressionId = CustomFields.upsellImpressionId,
+		upsellComponent = CustomFields.upsellComponent,
+		btn = CustomFields.btn or nil,
+		conversationId = CustomFields.conversationId or nil,
+		playSessionId = if PlaySessionId == "" then nil else PlaySessionId,
 		clientTimeStamp = os.time(),
-		upsellEntryComponent = p2.upsellEntryComponent
+		upsellEntryComponent = CustomFields.upsellEntryComponent,
+		upsellIdentifier = if UpsellPurpose and UpsellEntrySurface and UpsellComponent then UpsellPurpose .. UpsellEntrySurface .. UpsellComponent else nil,
+		upsellPurpose = CustomFields.upsellPurpose
 	}
-	local upsellPurpose = p2.upsellPurpose
-	local upsellEntrySurface = p2.upsellEntrySurface
-	local upsellComponent = p2.upsellComponent
-	t_1.upsellIdentifier = if upsellPurpose and upsellEntrySurface and upsellComponent then upsellPurpose .. upsellEntrySurface .. upsellComponent else nil
-	t_1.upsellPurpose = p2.upsellPurpose
-	local list = { "addSessionInfo" }
-	table.insert(list, "addPlaceId")
-	table.insert(list, "addUniverseId")
-	telemetryService:LogEvent(var1, { customFields = t_1, standardizedFields = list })
+	local List = { "addSessionInfo" }
+	table.insert(List, "addPlaceId")
+	table.insert(List, "addUniverseId")
+	TelemetryService:LogEvent(JoinResult, { customFields = CustomFields1, standardizedFields = List })
 end
 
 return {

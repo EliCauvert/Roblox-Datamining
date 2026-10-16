@@ -1,17 +1,17 @@
-﻿local reactModule = require(game:GetService("CorePackages").Packages.React)
-local playersService = game:GetService("Players")
+﻿local ReactModule = require(game:GetService("CorePackages").Packages.React)
+local Players = game:GetService("Players")
 
-return function()
-	-- upvalues: reactModule (ref), playersService (ref)
-	return reactModule.useMemo(function()
-		-- upvalues: playersService (copy)
-		local localPlayer = playersService.LocalPlayer
-		while not localPlayer do
-			playersService:GetPropertyChangedSignal("LocalPlayer"):Wait()
-			localPlayer = playersService.LocalPlayer
+return function() --[[ Line: 8 | Named "useLocalPlayer" ]]
+	-- upvalues: ReactModule (copy), Players (copy)
+	return ReactModule.useMemo(function() --[[ Line: 9 ]]
+		-- upvalues: Players (upval)
+		local LocalPlayer = Players.LocalPlayer
+		while not LocalPlayer do
+			Players:GetPropertyChangedSignal("LocalPlayer"):Wait()
+			LocalPlayer = Players.LocalPlayer
 		end
-		assert(localPlayer ~= nil)
+		assert(LocalPlayer ~= nil)
 		
-		return localPlayer
+		return LocalPlayer
 	end)
 end

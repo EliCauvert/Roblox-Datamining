@@ -1,66 +1,67 @@
-﻿local parent = script.Parent.Parent
-local thunkModule = require(parent.Thunk)
-local getProductInfoModule = require(parent.Thunks.GetProductInfo)
-local getVersionInfoModule = require(parent.Thunks.GetVersionInfo)
-local assetInfoModule = require(parent.Models.AssetInfo)
-local setAssetsModule = require(parent.Actions.SetAssets)
-local setEquippedAssetsModule = require(parent.Actions.SetEquippedAssets)
-local constantsModule = require(parent.Constants)
-local getAssetBundlesModule = require(parent.Thunks.GetAssetBundles)
-local batchGetAssetsModule = require(parent.Thunks.BatchGetAssets)
-local fFlagAXEnableRegionalFilteringofAssetsModule = require(parent.Flags.FFlagAXEnableRegionalFilteringofAssets)
+﻿local Parent = script.Parent.Parent
+local ThunkModule = require(Parent.Thunk)
+local GetProductInfoModule = require(Parent.Thunks.GetProductInfo)
+local GetVersionInfoModule = require(Parent.Thunks.GetVersionInfo)
+local AssetInfoModule = require(Parent.Models.AssetInfo)
+local SetAssetsModule = require(Parent.Actions.SetAssets)
+local SetEquippedAssetsModule = require(Parent.Actions.SetEquippedAssets)
+local ConstantsModule = require(Parent.Constants)
+local GetAssetBundlesModule = require(Parent.Thunks.GetAssetBundles)
+local BatchGetAssetsModule = require(Parent.Thunks.BatchGetAssets)
+local FFlagAXEnableRegionalFilteringofAssetsModule = require(Parent.Flags.FFlagAXEnableRegionalFilteringofAssets)
 local t = {}
 
-local function getAssetIds(value)
-	-- upvalues: constantsModule (ref), assetInfoModule (ref)
-	local t = {}
+local function getAssetIds(Humanoid: Humanoid) --[[ Line: 18 ]]
+	-- upvalues: ConstantsModule (copy), AssetInfoModule (copy)
+	local FromHumanoidDescriptionResults = {}
 	
-	for i, v in pairs(constantsModule.AssetTypeIdStringToHumanoidDescriptionProp) do
-		if constantsModule.AssetTypeIdToAccessoryTypeEnum[i] == nil then
-			for i_1, v_1 in pairs(string.split(value[v] or "")) do
-				if tonumber(v_1) and v_1 ~= "0" then
-					table.insert(t, assetInfoModule.fromHumanoidDescription(v_1))
+	for i, value in pairs(ConstantsModule.AssetTypeIdStringToHumanoidDescriptionProp) do
+		if ConstantsModule.AssetTypeIdToAccessoryTypeEnum[i] == nil then
+			for _, value1 in pairs(string.split(Humanoid[value] or "")) do
+				if tonumber(value1) and value1 ~= "0" then
+					table.insert(FromHumanoidDescriptionResults, AssetInfoModule.fromHumanoidDescription(value1))
 				end
 			end
 		end
 	end
-	for i_1, v_1 in pairs(value:GetAccessories(true)) do
-		t[#t + 1] = assetInfoModule.fromHumanoidDescription(v_1.AssetId)
+	for _, accessory in pairs((Humanoid:GetAccessories(true))) do
+		FromHumanoidDescriptionResults[#FromHumanoidDescriptionResults + 1] = AssetInfoModule.fromHumanoidDescription(accessory.AssetId)
 	end
-	for i_2, v_2 in pairs(value:GetEmotes()) do
-		for i_3, v_3 in pairs(v_2) do
-			t[#t + 1] = assetInfoModule.fromHumanoidDescription(v_3)
+	for _, emote in pairs((Humanoid:GetEmotes())) do
+		for _, value2 in pairs(emote) do
+			FromHumanoidDescriptionResults[#FromHumanoidDescriptionResults + 1] = AssetInfoModule.fromHumanoidDescription(value2)
 		end
 	end
-	return t
+	return FromHumanoidDescriptionResults
 end
 
-return function(value, p1)
-	-- upvalues: thunkModule (ref), t (ref), getAssetIds (ref), fFlagAXEnableRegionalFilteringofAssetsModule (ref), batchGetAssetsModule (ref), getProductInfoModule (ref), getAssetBundlesModule (ref), getVersionInfoModule (ref), setAssetsModule (ref), setEquippedAssetsModule (ref)
-	return thunkModule.new(script.Name, t, function(p2, _)
-		-- upvalues: getAssetIds (copy), value (ref), p1 (ref), fFlagAXEnableRegionalFilteringofAssetsModule (copy), batchGetAssetsModule (copy), getProductInfoModule (copy), getAssetBundlesModule (copy), getVersionInfoModule (copy), setAssetsModule (copy), setEquippedAssetsModule (copy)
-		local var1 = getAssetIds(value)
+return function(Humanoid, p1) --[[ Line: 52 | Named "GetAssetsFromHumanoidDescription" ]]
+	-- upvalues: ThunkModule (copy), t (copy), getAssetIds (copy), FFlagAXEnableRegionalFilteringofAssetsModule (copy), BatchGetAssetsModule (copy), GetProductInfoModule (copy), GetAssetBundlesModule (copy), GetVersionInfoModule (copy), SetAssetsModule (copy), SetEquippedAssetsModule (copy)
+	return ThunkModule.new(script.Name, t, function(p2, _) --[[ Line: 53 ]]
+		-- upvalues: getAssetIds (upval), Humanoid (copy), p1 (copy), FFlagAXEnableRegionalFilteringofAssetsModule (upval), BatchGetAssetsModule (upval), GetProductInfoModule (upval), GetAssetBundlesModule (upval), GetVersionInfoModule (upval), SetAssetsModule (upval), SetEquippedAssetsModule (upval)
+		local AssetIds = getAssetIds(Humanoid)
 		
 		if p1 then
-			p2:dispatch(setEquippedAssetsModule(var1))
-			
-			return
-		elseif fFlagAXEnableRegionalFilteringofAssetsModule then
-			p2:dispatch(batchGetAssetsModule(var1))
+			p2:dispatch(SetEquippedAssetsModule(AssetIds))
 			
 			return
 		end
-		for i, v in ipairs(var1) do
-			coroutine.wrap(function()
-				-- upvalues: p2 (ref), getProductInfoModule (copy), v (ref), getAssetBundlesModule (copy), getVersionInfoModule (copy)
-				p2:dispatch(getProductInfoModule(v.assetId))
+		if FFlagAXEnableRegionalFilteringofAssetsModule then
+			p2:dispatch(BatchGetAssetsModule(AssetIds))
+			
+			return
+		end
+		for _, assetId in ipairs(AssetIds) do
+			coroutine.wrap(function() --[[ Line: 61 ]]
+				-- upvalues: p2 (copy), GetProductInfoModule (upval), assetId (copy), GetAssetBundlesModule (upval), GetVersionInfoModule (upval)
+				p2:dispatch(GetProductInfoModule(assetId.assetId))
 				
-				if v.parentBundleId == nil then
-					p2:dispatch(getAssetBundlesModule(v.assetId))
+				if assetId.parentBundleId == nil then
+					p2:dispatch(GetAssetBundlesModule(assetId.assetId))
 				end
-				p2:dispatch(getVersionInfoModule(v.assetId))
+				p2:dispatch(GetVersionInfoModule(assetId.assetId))
 			end)()
 		end
-		p2:dispatch(setAssetsModule(var1))
+		p2:dispatch(SetAssetsModule(AssetIds))
 	end)
 end

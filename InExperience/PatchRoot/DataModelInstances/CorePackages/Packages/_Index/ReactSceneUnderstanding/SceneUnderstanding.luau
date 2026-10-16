@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.SceneUnderstanding.SceneUnderstanding)
+﻿return (require(script.Parent.Parent.Parent._Index.SceneUnderstanding.SceneUnderstanding))

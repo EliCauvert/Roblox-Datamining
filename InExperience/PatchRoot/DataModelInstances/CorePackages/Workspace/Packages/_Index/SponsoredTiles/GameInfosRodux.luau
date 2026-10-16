@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.GameInfosRodux.GameInfosRodux)
+﻿return (require(script.Parent.Parent.Parent._Index.GameInfosRodux.GameInfosRodux))

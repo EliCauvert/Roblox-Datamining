@@ -1,49 +1,50 @@
-﻿local parent = script:FindFirstAncestor("SocialServerDrivenUi").Parent
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
-local sduiActionType = sduiCoreSystemModule.SduiActionType
-local appPage = require(parent.RobloxAppEnums).AppPage
-local sources = require(parent.SocialLuaAnalytics).Analytics.Enums.Sources
-local navigateDown = require(parent.NavigationRodux).Thunks.NavigateDown
-local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
-local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
+﻿local Parent = script:FindFirstAncestor("SocialServerDrivenUi").Parent
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
+local SduiActionType = SduiCoreSystemModule.SduiActionType
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local Sources = require(Parent.SocialLuaAnalytics).Analytics.Enums.Sources
+local NavigateDownFunction = require(Parent.NavigationRodux).Thunks.NavigateDown
+local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
+local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 
-return function(p1, _, p2)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref), sources (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref)
-	local var2 = if p1 then p1.actionParams else nil
+return function(p1, _, p2) --[[ Line: 23 | Named "SduiOpenTrustedFriendsUpsellModalAction" ]]
+	-- upvalues: SduiErrorType (copy), SduiActionType (copy), Sources (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy)
+	local ActionParams = p1 and p1.actionParams or nil
 	
-	if var2 == nil then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if ActionParams == nil then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
-			name = sduiActionType.OpenTrustedFriendsUpsellModal
+			name = SduiActionType.OpenTrustedFriendsUpsellModal
 		}, p2.appPage)
 		
 		return
 	end
-	local targetUserId = var2.targetUserId
+	local TargetUserId = ActionParams.targetUserId
 	
-	if targetUserId == nil or targetUserId == "" then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if TargetUserId == nil or TargetUserId == "" then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing actionParam: targetUserId",
 			propName = "targetUserId",
-			name = sduiActionType.OpenTrustedFriendsUpsellModal
+			name = SduiActionType.OpenTrustedFriendsUpsellModal
 		}, p2.appPage)
 		
 		return
 	end
-	local source = var2.source
-	local t = {
-		name = appPage.TrustedContactsModal,
+	local Source = ActionParams.source
+	local config = {
+		name = AppPage.TrustedContactsModal,
 		props = {
-			userId = targetUserId,
-			source = if typeof(source) == "string" and source ~= "" then source else sources.PartyChatConversationUpsell
+			userId = TargetUserId,
+			source = if typeof(Source) == "string" and Source ~= "" then Source else Sources.PartyChatConversationUpsell
 		}
 	}
 	
-	if fFlagSignalsNavP3Dispatch then
-		var1.down(var1.fromLegacyPage(t))
+	if FFlagSignalsNavP3Dispatch then
+		NavigationCommands.down(NavigationCommands.fromLegacyPage(config))
 		
 		return
+	else
+		p2.dependencies.dispatch(NavigateDownFunction(config))
 	end
-	p2.dependencies.dispatch(navigateDown(t))
 end

@@ -1,13 +1,13 @@
-﻿local authCommon = script:FindFirstAncestor("AuthCommon")
-local parent = authCommon.Parent
-local _ = require(parent.Http)
-local getSingleSignOnUrlsModule = require(authCommon.Utils.getSingleSignOnUrls)
-local consoleAuthRequestWrapper = require(parent.Http).Utils.ConsoleAuthRequestWrapper
-local promiseModule = require(parent.Promise)
+﻿local AuthCommon = script:FindFirstAncestor("AuthCommon")
+local Parent = AuthCommon.Parent
+local _ = require(Parent.Http)
+local GetSingleSignOnUrlsModule = require(AuthCommon.Utils.getSingleSignOnUrls)
+local ConsoleAuthRequestWrapperFunction = require(Parent.Http).Utils.ConsoleAuthRequestWrapper
+local PromiseModule = require(Parent.Promise)
 
-return function(p1)
-	-- upvalues: getSingleSignOnUrlsModule (ref), consoleAuthRequestWrapper (ref), promiseModule (ref)
-	local disconnect = getSingleSignOnUrlsModule().disconnect
+return function(p1) --[[ Line: 9 ]]
+	-- upvalues: GetSingleSignOnUrlsModule (copy), ConsoleAuthRequestWrapperFunction (copy), PromiseModule (copy)
+	local DisconnectFunction = GetSingleSignOnUrlsModule().disconnect
 	
-	return if disconnect then consoleAuthRequestWrapper(p1, disconnect(), "POST", { postBody = "", maxRetryCount = 0 }) else promiseModule.reject({})
+	return if DisconnectFunction then ConsoleAuthRequestWrapperFunction(p1, DisconnectFunction(), "POST", { postBody = "", maxRetryCount = 0 }) else PromiseModule.reject({})
 end

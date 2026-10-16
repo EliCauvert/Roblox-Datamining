@@ -1,30 +1,30 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local iconSizeModule = require(foundation.Enums.IconSize)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local IconSizeModule = require(Foundation.Enums.IconSize)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 
-return function(p1, p2)
-	-- upvalues: useTokensModule (ref), reactModule (ref), iconSizeModule (ref)
-	local var1 = useTokensModule()
-	local var2 = reactModule.useMemo(function()
-		-- upvalues: p2 (ref), iconSizeModule (copy), var1 (ref)
-		return if p2 then {
-			[iconSizeModule.XSmall] = var1.Size.Size_150,
-			[iconSizeModule.Small] = var1.Size.Size_200,
-			[iconSizeModule.Medium] = var1.Size.Size_250,
-			[iconSizeModule.Large] = var1.Size.Size_350
+return function(Text, p1) --[[ Line: 11 | Named "useIconButtonPadding" ]]
+	-- upvalues: UseTokensModule (copy), ReactModule (copy), IconSizeModule (copy)
+	local UseTokensModuleResult = UseTokensModule()
+	local UseMemoResultEntry = ReactModule.useMemo(function() --[[ Line: 14 ]]
+		-- upvalues: p1 (copy), IconSizeModule (upval), UseTokensModuleResult (copy)
+		return if p1 then {
+			[IconSizeModule.XSmall] = UseTokensModuleResult.Size.Size_150,
+			[IconSizeModule.Small] = UseTokensModuleResult.Size.Size_200,
+			[IconSizeModule.Medium] = UseTokensModuleResult.Size.Size_250,
+			[IconSizeModule.Large] = UseTokensModuleResult.Size.Size_350
 		} else {
-			[iconSizeModule.XSmall] = var1.Size.Size_50,
-			[iconSizeModule.Small] = var1.Size.Size_50,
-			[iconSizeModule.Medium] = var1.Size.Size_100,
-			[iconSizeModule.Large] = var1.Size.Size_150,
-			[iconSizeModule.XLarge] = var1.Size.Size_200,
-			[iconSizeModule.XXLarge] = var1.Size.Size_250
+			[IconSizeModule.XSmall] = UseTokensModuleResult.Size.Size_50,
+			[IconSizeModule.Small] = UseTokensModuleResult.Size.Size_50,
+			[IconSizeModule.Medium] = UseTokensModuleResult.Size.Size_100,
+			[IconSizeModule.Large] = UseTokensModuleResult.Size.Size_150,
+			[IconSizeModule.XLarge] = UseTokensModuleResult.Size.Size_200,
+			[IconSizeModule.XXLarge] = UseTokensModuleResult.Size.Size_250
 		}
-	end, { var1, p2 })[p1]
+	end, { UseTokensModuleResult, p1 })[Text]
 	
-	if var2 == nil then
-		error("Invalid icon button size: " .. p0)
+	if UseMemoResultEntry == nil then
+		error("Invalid icon button size: " .. Text)
 	end
-	return var2
+	return UseMemoResultEntry
 end

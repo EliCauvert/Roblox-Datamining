@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CorePackages").Packages.Roact).createContext(nil)
+﻿return (require(game:GetService("CorePackages").Packages.Roact).createContext(nil))

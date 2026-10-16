@@ -1,94 +1,97 @@
-﻿local onPlatformSurveys = script:FindFirstAncestor("OnPlatformSurveys")
-local parent = onPlatformSurveys.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local list = foundationModule.List
-local listItemInputType = foundationModule.Enums.ListItemInputType
-local textInput = foundationModule.TextInput
-local view = foundationModule.View
-local fFlagInlineSurveyChoiceTextEntry = require(parent.SharedFlags).FFlagInlineSurveyChoiceTextEntry
-local inlineSurveyHelpersModule = require(onPlatformSurveys.Utils.inlineSurveyHelpers)
-local inlineQuestionTypeModule = require(onPlatformSurveys.Enums.InlineQuestionType)
-local _ = require(onPlatformSurveys.Types.InlineSurveyTypes)
+﻿local OnPlatformSurveys = script:FindFirstAncestor("OnPlatformSurveys")
+local Parent = OnPlatformSurveys.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local List = FoundationModule.List
+local ListItemInputType = FoundationModule.Enums.ListItemInputType
+local TextInput = FoundationModule.TextInput
+local View = FoundationModule.View
+local FFlagInlineSurveyChoiceTextEntry = require(Parent.SharedFlags).FFlagInlineSurveyChoiceTextEntry
+local InlineSurveyHelpersModule = require(OnPlatformSurveys.Utils.inlineSurveyHelpers)
+local InlineQuestionTypeModule = require(OnPlatformSurveys.Enums.InlineQuestionType)
+local _ = require(OnPlatformSurveys.Types.InlineSurveyTypes)
 local t = {}
-local t_1 = {}
+local t1 = {}
 
-return reactModule.memo(function(p1)
-	-- upvalues: inlineQuestionTypeModule (ref), t_1 (ref), reactModule (ref), t (ref), list (ref), fFlagInlineSurveyChoiceTextEntry (ref), inlineSurveyHelpersModule (ref), listItemInputType (ref), textInput (ref), view (ref)
-	local question = p1.question
-	local answer = p1.answer
-	local onAnswerChanged = p1.onAnswerChanged
-	local var1 = p1.isDisabled == true
-	local var2 = question.type == inlineQuestionTypeModule.MultipleChoiceMulti
-	local choices = question.choices or t_1
-	local var3 = reactModule.useMemo(function()
-		-- upvalues: answer (ref), t (copy)
-		local t_1 = {}
-		
-		for i, v in answer.choiceIds or t do
-			t_1[v] = true
+return ReactModule.memo(function(p1) --[[ Line: 33 | Named "MultipleChoiceQuestion" ]]
+	-- upvalues: InlineQuestionTypeModule (copy), t1 (copy), ReactModule (copy), t (copy), List (copy), FFlagInlineSurveyChoiceTextEntry (copy), InlineSurveyHelpersModule (copy), ListItemInputType (copy), TextInput (copy), View (copy)
+	local Question = p1.question
+	local Answer = p1.answer
+	local OnAnswerChangedFunction = p1.onAnswerChanged
+	local IsIsDisabled = p1.isDisabled == true
+	local IsTypeMatch = Question.type == InlineQuestionTypeModule.MultipleChoiceMulti
+	local Choices = Question.choices or t1
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 41 ]]
+		-- upvalues: Answer (copy), t (upval)
+		local t2 = {}
+		local ChoiceIds = Answer.choiceIds or t
+		for _, choiceId in ChoiceIds do
+			t2[choiceId] = true
 		end
-		return t_1
-	end, { answer })
-	local var4 = reactModule.useRef(answer)
-	var4.current = answer
+		return t2
+	end, { Answer })
+	local UseRefResult = ReactModule.useRef(Answer)
+	UseRefResult.current = Answer
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col gap-small size-full-0 auto-y",
 		LayoutOrder = p1.layoutOrder
 	}, {
-		Choices = reactModule.createElement(list.Root, {
+		Choices = ReactModule.createElement(List.Root, {
 			LayoutOrder = 1,
 			hasDivider = { hasDivider = true, isInset = false },
 			isContained = { isContained = false, hasMargin = false }
-		}, reactModule.useMemo(function()
-			-- upvalues: choices (ref), reactModule (copy), list (copy), fFlagInlineSurveyChoiceTextEntry (copy), var1 (ref), onAnswerChanged (ref), inlineSurveyHelpersModule (copy), answer (ref), var2 (ref), listItemInputType (copy), var3 (ref), textInput (copy), var4 (ref)
-			local t = {}
+		}, (ReactModule.useMemo(function() --[[ Line: 53 ]]
+			-- upvalues: Choices (copy), ReactModule (upval), List (upval), FFlagInlineSurveyChoiceTextEntry (upval), IsIsDisabled (copy), OnAnswerChangedFunction (copy), InlineSurveyHelpersModule (upval), Answer (copy), IsTypeMatch (copy), ListItemInputType (upval), UseMemoResult (copy), TextInput (upval), UseRefResult (copy)
+			local Elements = {}
 			
-			for i, v in choices do
-				local id = v.id
-				t[string.format("Choice_%d_%s", i, id)] = reactModule.createElement(list.Item, {
-					title = v.label,
-					LayoutOrder = if fFlagInlineSurveyChoiceTextEntry then i * 2 else i,
+			for i, choice in Choices do
+				local Id = choice.id
+				Elements[string.format("Choice_%d_%s", i, Id)] = ReactModule.createElement(List.Item, {
+					title = choice.label,
+					LayoutOrder = if FFlagInlineSurveyChoiceTextEntry then i * 2 else i,
 					onActivated = {
-						onActivated = function()
-							-- upvalues: var1 (copy), onAnswerChanged (copy), inlineSurveyHelpersModule (copy), answer (copy), id (ref), var2 (copy), fFlagInlineSurveyChoiceTextEntry (copy)
-							if var1 then
+						onActivated = function() --[[ Line: 63 ]]
+							-- upvalues: IsIsDisabled (upval), OnAnswerChangedFunction (upval), InlineSurveyHelpersModule (upval), Answer (upval), Id (copy), IsTypeMatch (upval), FFlagInlineSurveyChoiceTextEntry (upval)
+							if not IsIsDisabled then
+								OnAnswerChangedFunction({
+									choiceIds = InlineSurveyHelpersModule.toggleChoice(Answer, Id, IsTypeMatch),
+									choiceTexts = if FFlagInlineSurveyChoiceTextEntry then Answer.choiceTexts else nil
+								})
+								
 								return
 							end
-							onAnswerChanged({
-								choiceIds = inlineSurveyHelpersModule.toggleChoice(answer, id, var2),
-								choiceTexts = if fFlagInlineSurveyChoiceTextEntry then answer.choiceTexts else nil
-							})
 						end,
-						inputType = if var2 then listItemInputType.Checkbox else listItemInputType.Radio,
-						isChecked = var3[id] == true
+						inputType = if IsTypeMatch then ListItemInputType.Checkbox else ListItemInputType.Radio,
+						isChecked = UseMemoResult[Id] == true
 					}
 				})
 				
-				if fFlagInlineSurveyChoiceTextEntry and v.requiresText == true then
-					t[string.format("ChoiceText_%d_%s", i, id)] = reactModule.createElement(textInput, {
+				if FFlagInlineSurveyChoiceTextEntry and choice.requiresText == true then
+					Elements[string.format("ChoiceText_%d_%s", i, Id)] = ReactModule.createElement(TextInput, {
 						label = "",
-						text = if answer.choiceTexts ~= nil then "" else answer.choiceTexts[id] or "",
+						text = if Answer.choiceTexts == nil then "" else Answer.choiceTexts[Id] or "",
 						width = UDim.new(1, 0),
-						isDisabled = var1,
+						isDisabled = IsIsDisabled,
 						LayoutOrder = i * 2 + 1,
-						onChanged = function(p2)
-							-- upvalues: var1 (copy), var4 (copy), id (ref), onAnswerChanged (copy)
-							if var1 then
+						onChanged = function(p2) --[[ Line: 85 ]]
+							-- upvalues: IsIsDisabled (upval), UseRefResult (upval), Id (copy), OnAnswerChangedFunction (upval)
+							if not IsIsDisabled then
+								local Current = UseRefResult.current
+								local T = if Current.choiceTexts == nil then {} else table.clone(Current.choiceTexts)
+								T[Id] = p2
+								OnAnswerChangedFunction({ choiceIds = Current.choiceIds, choiceTexts = T })
+								
 								return
 							end
-							local current = var4.current
-							local var5 = if current.choiceTexts ~= nil then {} else table.clone(current.choiceTexts)
-							var5[id] = p2
-							onAnswerChanged({ choiceIds = current.choiceIds, choiceTexts = var5 })
 						end
 					})
 				end
 			end
-			return t
+			return Elements
 		end, {
-			choices, answer, var3, var2, var1, onAnswerChanged
-		}))
+			Choices, Answer, UseMemoResult, IsTypeMatch, IsIsDisabled,
+			OnAnswerChangedFunction
+		})))
 	})
 end)

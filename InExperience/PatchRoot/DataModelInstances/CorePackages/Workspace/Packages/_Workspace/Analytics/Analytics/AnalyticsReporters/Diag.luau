@@ -1,50 +1,50 @@
-﻿local userInputService = game:GetService("UserInputService")
-local t = {}
-t.__index = t
+﻿local UserInputService = game:GetService("UserInputService")
+local DiagModule = {}
+DiagModule.__index = DiagModule
 
-function t.new(p1)
-	-- upvalues: t (ref)
-	local var1 = type(p1)
-	assert(if var1 ~= "table" then var1 == "userdata" else true, "Unexpected value for reportingService")
-	local t_1 = { _isEnabled = true, _reporter = p1 }
-	setmetatable(t_1, t)
+function DiagModule.new(_reporter) --[[ Line: 27 ]]
+	-- upvalues: DiagModule (copy)
+	local ValueType = type(_reporter)
+	assert(ValueType == "table" or ValueType == "userdata", "Unexpected value for reportingService")
+	local config = { _isEnabled = true, _reporter = _reporter }
+	setmetatable(config, DiagModule)
 	
-	return t_1
+	return config
 end
 
-function t:setEnabled(p1)
-	assert(type(p1) == "boolean", "Expected isEnabled to be a boolean")
-	self._isEnabled = p1
+function DiagModule:setEnabled(_isEnabled) --[[ Line: 40 ]]
+	assert(type(_isEnabled) == "boolean", "Expected isEnabled to be a boolean")
+	self._isEnabled = _isEnabled
 end
 
-function t:reportCounter(p1, p2)
-	-- upvalues: userInputService (ref)
-	assert(type(p1) == "string", "Expected counterName to be a string")
-	assert(type(p2) == "number", "Expected amount to be a number")
+function DiagModule:reportCounter(CounterName: string, Amount) --[[ Line: 47 ]]
+	-- upvalues: UserInputService (copy)
+	assert(type(CounterName) == "string", "Expected counterName to be a string")
+	assert(type(Amount) == "number", "Expected amount to be a number")
 	assert(self._isEnabled, "This reporting service is disabled")
-	local none = Enum.Platform.None
-	pcall(function()
-		-- upvalues: none (write), userInputService (copy)
-		none = userInputService:GetPlatform()
+	local None = Enum.Platform.None
+	pcall(function() --[[ Line: 56 ]]
+		-- upvalues: None (ref), UserInputService (upval)
+		None = UserInputService:GetPlatform()
 	end)
 	
-	if none == Enum.Platform.XBoxOne then
-		p1 = "Xbox-" .. tostring(p1)
+	if None == Enum.Platform.XBoxOne then
+		CounterName = "Xbox-" .. tostring(CounterName)
 	end
-	self._reporter:ReportCounter(p1, p2)
+	self._reporter:ReportCounter(CounterName, Amount)
 end
 
-function t:reportCounterSimple(p1, p2)
+function DiagModule:reportCounterSimple(CounterName, Amount) --[[ Line: 69 ]]
 	if self._isEnabled then
-		self._reporter:ReportCounter(p1, p2)
+		self._reporter:ReportCounter(CounterName, Amount)
 	end
 end
 
-function t:reportStats(p1, p2)
-	assert(type(p1) == "string", "Expected category to be a string")
-	assert(type(p2) == "number", "Expected value to be a number")
+function DiagModule:reportStats(Category, p1) --[[ Line: 77 ]]
+	assert(type(Category) == "string", "Expected category to be a string")
+	assert(type(p1) == "number", "Expected value to be a number")
 	assert(self._isEnabled, "This reporting service is disabled")
-	self._reporter:ReportStats(p1, p2)
+	self._reporter:ReportStats(Category, p1)
 end
 
-return t
+return DiagModule

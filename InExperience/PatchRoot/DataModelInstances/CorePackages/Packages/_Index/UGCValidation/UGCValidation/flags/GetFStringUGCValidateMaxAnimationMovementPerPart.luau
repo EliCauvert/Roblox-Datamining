@@ -1,8 +1,8 @@
-﻿local getFStringUGCValidateMaxAnimationMovementModule = require(script.Parent.Parent.flags.GetFStringUGCValidateMaxAnimationMovement)
+﻿local GetFStringUGCValidateMaxAnimationMovementModule = require(script.Parent.Parent.flags.GetFStringUGCValidateMaxAnimationMovement)
 
-local function getFallbackValue()
-	-- upvalues: getFStringUGCValidateMaxAnimationMovementModule (ref)
-	return getFStringUGCValidateMaxAnimationMovementModule.asString()
+local function getFallbackValue() --[[ Line: 25 ]]
+	-- upvalues: GetFStringUGCValidateMaxAnimationMovementModule (copy)
+	return GetFStringUGCValidateMaxAnimationMovementModule.asString()
 end
 
 game:DefineFastString("UGCValidateMaxAnimationMovementHead", "")
@@ -19,67 +19,68 @@ game:DefineFastString("UGCValidateMaxAnimationMovementLeftFoot", "")
 game:DefineFastString("UGCValidateMaxAnimationMovementRightUpperLeg", "")
 game:DefineFastString("UGCValidateMaxAnimationMovementRightLowerLeg", "")
 game:DefineFastString("UGCValidateMaxAnimationMovementRightFoot", "")
-local t = {}
-local t_1 = {
-	Head = function()
+local config = {
+	Head = function() --[[ Line: 47 ]]
 		return game:GetFastString("UGCValidateMaxAnimationMovementHead")
 	end,
-	UpperTorso = function()
+	UpperTorso = function() --[[ Line: 50 ]]
 		return game:GetFastString("UGCValidateMaxAnimationMovementUpperTorso")
 	end,
-	LeftUpperLeg = function()
+	LeftUpperLeg = function() --[[ Line: 53 ]]
 		return game:GetFastString("UGCValidateMaxAnimationMovementLeftUpperLeg")
 	end,
-	LeftLowerLeg = function()
+	LeftLowerLeg = function() --[[ Line: 56 ]]
 		return game:GetFastString("UGCValidateMaxAnimationMovementLeftLowerLeg")
 	end,
-	LeftHand = function()
+	LeftHand = function() --[[ Line: 59 ]]
 		return game:GetFastString("UGCValidateMaxAnimationMovementLeftHand")
 	end,
-	RightUpperArm = function()
+	RightUpperArm = function() --[[ Line: 62 ]]
 		return game:GetFastString("UGCValidateMaxAnimationMovementRightUpperArm")
 	end,
-	RightLowerArm = function()
+	RightLowerArm = function() --[[ Line: 65 ]]
 		return game:GetFastString("UGCValidateMaxAnimationMovementRightLowerArm")
 	end,
-	RightHand = function()
+	RightHand = function() --[[ Line: 68 ]]
 		return game:GetFastString("UGCValidateMaxAnimationMovementRightHand")
 	end,
-	LeftUpperArm = function()
+	LeftUpperArm = function() --[[ Line: 71 ]]
 		return game:GetFastString("UGCValidateMaxAnimationMovementLeftUpperArm")
 	end,
-	LeftLowerArm = function()
+	LeftLowerArm = function() --[[ Line: 74 ]]
 		return game:GetFastString("UGCValidateMaxAnimationMovementLeftLowerArm")
 	end,
-	LeftFoot = function()
+	LeftFoot = function() --[[ Line: 77 ]]
 		return game:GetFastString("UGCValidateMaxAnimationMovementLeftFoot")
 	end,
-	RightUpperLeg = function()
+	RightUpperLeg = function() --[[ Line: 80 ]]
 		return game:GetFastString("UGCValidateMaxAnimationMovementRightUpperLeg")
 	end,
-	RightLowerLeg = function()
+	RightLowerLeg = function() --[[ Line: 83 ]]
 		return game:GetFastString("UGCValidateMaxAnimationMovementRightLowerLeg")
 	end,
-	RightFoot = function()
+	RightFoot = function() --[[ Line: 86 ]]
 		return game:GetFastString("UGCValidateMaxAnimationMovementRightFoot")
 	end
 }
-
-function t.asString(p1)
-	-- upvalues: t_1 (ref), getFallbackValue (ref)
-	local var1 = t_1[p1]
-	
-	if not var1 then
-		return getFallbackValue()
+local GetFStringUGCValidateMaxAnimationMovementPerPartModule = {
+	asString = function(p1) --[[ Line: 91 ]]
+		-- upvalues: config (copy), getFallbackValue (copy)
+		local Entry = config[p1]
+		
+		if Entry then
+			local EntryResult = Entry()
+			
+			return if #EntryResult == 0 then getFallbackValue() else EntryResult
+		else
+			return getFallbackValue()
+		end
 	end
-	local var2 = var1()
-	
-	return if #var2 == 0 then getFallbackValue() else var2
+}
+
+function GetFStringUGCValidateMaxAnimationMovementPerPartModule.asNumber(p1): number --[[ Line: 103 ]]
+	-- upvalues: GetFStringUGCValidateMaxAnimationMovementPerPartModule (copy)
+	return (tonumber(GetFStringUGCValidateMaxAnimationMovementPerPartModule.asString(p1)))
 end
 
-function t.asNumber(p1)
-	-- upvalues: t (ref)
-	return tonumber(t.asString(p1))
-end
-
-return t
+return GetFStringUGCValidateMaxAnimationMovementPerPartModule

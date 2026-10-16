@@ -1,18 +1,19 @@
-﻿local parent = script:FindFirstAncestor("DataHydration").Parent
-local httpModule = require(parent.Http)
-local httpRequestModule = require(parent.HttpRequest)
-local httpService = game:GetService("HttpService")
-local var1 = require(parent.UrlBuilder).UrlBuilder.new({
+﻿local Parent = script:FindFirstAncestor("DataHydration").Parent
+local HttpRequestModule = require(Parent.HttpRequest)
+local HttpService = game:GetService("HttpService")
+local v1 = require(Parent.UrlBuilder).UrlBuilder.new({
 	path = "experience-guidelines-api/experience-guidelines/get-age-recommendation",
-	base = httpModule.Url.APIS_URL
+	base = require(Parent.Http).Url.APIS_URL
 })()
 
-return function(p1)
-	-- upvalues: httpService (ref), httpRequestModule (ref), var1 (ref)
-	return httpRequestModule.config({
-		requestFunction = function(p2, p3, p4)
-			-- upvalues: httpRequestModule (copy)
-			return httpRequestModule.requestFunctions.HttpRbxApi(p2, p3, p4)
+return function(UniverseId) --[[ Line: 20 | Named "requestAgeRecommendation" ]]
+	-- upvalues: HttpService (copy), HttpRequestModule (copy), v1 (copy)
+	return HttpRequestModule.config({
+		requestFunction = function(p1, p2, p3) --[[ Line: 23 ]]
+			-- upvalues: HttpRequestModule (upval)
+			return HttpRequestModule.requestFunctions.HttpRbxApi(p1, p2, p3)
 		end
-	})(var1, "POST", { postBody = httpService:JSONEncode({ universeId = p1 }) })
+	})(v1, "POST", {
+		postBody = HttpService:JSONEncode({ universeId = UniverseId })
+	})
 end

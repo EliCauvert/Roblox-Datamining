@@ -1,25 +1,27 @@
-﻿local inExperienceOffers = script:FindFirstAncestor("InExperienceOffers")
-local _ = require(inExperienceOffers.Types)
-local fFlagOffersRespectExpirationModule = require(inExperienceOffers.Flags.FFlagOffersRespectExpiration)
-local isOfferExpiredModule = require(inExperienceOffers.Utils.isOfferExpired)
-local inExperienceOffersNotificationMaxExposureCount = game:DefineFastInt("InExperienceOffersNotificationMaxExposureCount", 3)
-local inExperienceOffersNotificationCooldownSeconds = game:DefineFastInt("InExperienceOffersNotificationCooldownSeconds", 86400)
+﻿local InExperienceOffers = script:FindFirstAncestor("InExperienceOffers")
+local _ = require(InExperienceOffers.Types)
+local FFlagOffersRespectExpirationModule = require(InExperienceOffers.Flags.FFlagOffersRespectExpiration)
+local IsOfferExpiredModule = require(InExperienceOffers.Utils.isOfferExpired)
+local InExperienceOffersNotificationMaxExposureCount = game:DefineFastInt("InExperienceOffersNotificationMaxExposureCount", 3)
+local InExperienceOffersNotificationCooldownSeconds = game:DefineFastInt("InExperienceOffersNotificationCooldownSeconds", 86400)
 
-return function(p1, p2)
-	-- upvalues: fFlagOffersRespectExpirationModule (ref), isOfferExpiredModule (ref), inExperienceOffersNotificationMaxExposureCount (ref), inExperienceOffersNotificationCooldownSeconds (ref)
+return function(p1, p2): boolean --[[ Line: 24 | Named "isNotificationEligible" ]]
+	-- upvalues: FFlagOffersRespectExpirationModule (copy), IsOfferExpiredModule (copy), InExperienceOffersNotificationMaxExposureCount (copy), InExperienceOffersNotificationCooldownSeconds (copy)
 	if p1.offerStatus ~= "AVAILABLE" then
 		return false
-	elseif fFlagOffersRespectExpirationModule and isOfferExpiredModule(p1) then
+	elseif FFlagOffersRespectExpirationModule and IsOfferExpiredModule(p1) then
 		return false
+	else
+		local v1 = p2[p1.offerId]
+		
+		if v1 == nil then
+			return true
+		elseif InExperienceOffersNotificationMaxExposureCount <= v1.exposureCount then
+			return false
+		else
+			local _DateTime = DateTime.fromIsoDate(v1.lastExposureUTCTime)
+			
+			return _DateTime ~= nil and InExperienceOffersNotificationCooldownSeconds <= DateTime.now().UnixTimestamp - _DateTime.UnixTimestamp
+		end
 	end
-	local offerId = p2[p1.offerId]
-	
-	if offerId == nil then
-		return true
-	elseif inExperienceOffersNotificationMaxExposureCount <= offerId.exposureCount then
-		return false
-	end
-	local dateTime = DateTime.fromIsoDate(offerId.lastExposureUTCTime)
-	
-	return if dateTime == nil then false else inExperienceOffersNotificationCooldownSeconds <= DateTime.now().UnixTimestamp - dateTime.UnixTimestamp
 end

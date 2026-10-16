@@ -1,25 +1,25 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local _ = require(dataHydration.Parent.HttpClient)
-local fetchUniverseCreateModule = require(script.Parent.fetchUniverseCreate)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local _ = require(DataHydration.Parent.HttpClient)
+local FetchUniverseCreateModule = require(script.Parent.fetchUniverseCreate)
 local _ = require(script.Parent.UniverseCreateStoreTypes)
-local universeSearchModule = require(dataHydration.UniverseSearch)
+local UniverseSearchModule = require(DataHydration.UniverseSearch)
 
-return function(p1)
-	-- upvalues: universeSearchModule (ref), fetchUniverseCreateModule (ref)
-	p1 = p1 or {}
-	local getSearchStore = p1.getSearchStore or function()
-		-- upvalues: universeSearchModule (copy)
-		return universeSearchModule.getUniverseSearchStore()
+return function(p1) --[[ Line: 20 | Named "createUniverseCreateStore" ]]
+	-- upvalues: UniverseSearchModule (copy), FetchUniverseCreateModule (copy)
+	local P0 = p1 or {}
+	local GetSearchStore = P0.getSearchStore or function() --[[ Line: 22 ]]
+		-- upvalues: UniverseSearchModule (upval)
+		return UniverseSearchModule.getUniverseSearchStore()
 	end
 	
 	return {
-		createUniverse = function(p2)
-			-- upvalues: fetchUniverseCreateModule (copy), p1 (ref), getSearchStore (ref)
-			return fetchUniverseCreateModule(p2, { network = p1.network, baseUrl = p1.baseUrl }):andThen(function(p3)
-				-- upvalues: getSearchStore (copy)
-				getSearchStore().invalidateAll()
+		createUniverse = function(p2) --[[ Line: 26 ]]
+			-- upvalues: FetchUniverseCreateModule (upval), P0 (copy), GetSearchStore (copy)
+			return FetchUniverseCreateModule(p2, { network = P0.network, baseUrl = P0.baseUrl }):andThen(function(Result) --[[ Line: 30 ]]
+				-- upvalues: GetSearchStore (upval)
+				GetSearchStore().invalidateAll()
 				
-				return p3
+				return Result
 			end)
 		end
 	}

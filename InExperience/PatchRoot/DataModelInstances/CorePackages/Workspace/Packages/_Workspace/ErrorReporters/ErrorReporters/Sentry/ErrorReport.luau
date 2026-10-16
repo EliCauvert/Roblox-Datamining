@@ -1,216 +1,221 @@
-﻿local parent = script:FindFirstAncestor("ErrorReporters").Parent
-local cryoModule = require(parent.Cryo)
-local tModule = require(parent.t)
-local _ = require(parent.SentrySdk)
-local processErrorStackModule = require(script.Parent.Parent.ProcessErrorStack)
-local constantsModule = require(script.Parent.Constants)
-local var1 = tModule.optional(tModule.map(tModule.string, tModule.some(tModule.string, tModule.number, tModule.boolean)))
-local var2 = tModule.optional(tModule.map(tModule.string, function(p1)
-	-- upvalues: tModule (ref)
-	local function checkTypeRecursive(p2)
-		-- upvalues: checkTypeRecursive (ref), tModule (copy)
-		if type(p2) ~= "table" then
-			return tModule.some(tModule.string, tModule.number, tModule.boolean)(p2), nil
+﻿local Parent = script:FindFirstAncestor("ErrorReporters").Parent
+local CryoModule = require(Parent.Cryo)
+local TModule = require(Parent.t)
+local _ = require(Parent.SentrySdk)
+local ProcessErrorStackModule = require(script.Parent.Parent.ProcessErrorStack)
+local ConstantsModule = require(script.Parent.Constants)
+local OptionalResult = TModule.optional(TModule.map(TModule.string, TModule.some(TModule.string, TModule.number, TModule.boolean)))
+local OptionalResult1 = TModule.optional(TModule.map(TModule.string, function(p1) --[[ Line: 58 ]]
+	-- upvalues: TModule (copy)
+	local function checkTypeRecursive(List) --[[ Line: 59 ]]
+		-- upvalues: checkTypeRecursive (copy), TModule (upval)
+		if type(List) ~= "table" then
+			return TModule.some(TModule.string, TModule.number, TModule.boolean)(List), nil
 		end
-		for i, v in pairs(p2) do
-			local var3, var4 = checkTypeRecursive(v)
+		local CheckTypeRecursiveResult2 = nil
+		for i, value in pairs(List) do
+			local CheckTypeRecursiveResult
+			CheckTypeRecursiveResult, CheckTypeRecursiveResult2 = checkTypeRecursive(value)
 			
-			if not var3 then
-				return false, string.format("error when checking key: %s - %s", i, var4 or "unknown error")
+			if not CheckTypeRecursiveResult then
+				return false, string.format("error when checking key: %s - %s", i, CheckTypeRecursiveResult2 or "unknown error")
 			end
 		end
 		return true, nil
 	end
 	
-	local var5, var6 = checkTypeRecursive(p1)
+	local CheckTypeRecursiveResult, CheckTypeRecursiveResult2 = checkTypeRecursive(p1)
 	
-	return var5, var6
+	return CheckTypeRecursiveResult, CheckTypeRecursiveResult2
 end))
-local var3 = tModule.optional(tModule.map(tModule.string, tModule.map(tModule.string, tModule.some(tModule.string, tModule.number, tModule.boolean))))
-local var4 = tModule.optional(tModule.array(tModule.interface({
-	type = tModule.optional(tModule.string),
-	category = tModule.optional(tModule.string),
-	message = tModule.optional(tModule.string),
-	data = tModule.optional(tModule.table),
-	level = tModule.optional(tModule.string),
-	timestamp = tModule.optional(tModule.number),
-	origin = tModule.optional(tModule.string)
-})))
-local var5 = tModule.intersection(tModule.strictInterface({
-	threads = tModule.map(tModule.string, tModule.strictInterface({
-		name = tModule.optional(tModule.string),
-		fault = tModule.optional(tModule.boolean),
-		stack = tModule.optional(tModule.array(tModule.strictInterface({
-			guessed_frame = tModule.optional(tModule.boolean),
-			funcName = tModule.optional(tModule.string),
-			address = tModule.optional(tModule.string),
-			line = tModule.optional(tModule.string),
-			column = tModule.optional(tModule.string),
-			sourceCode = tModule.optional(tModule.string),
-			library = tModule.optional(tModule.string),
-			debug_identifier = tModule.optional(tModule.string),
-			faulted = tModule.optional(tModule.boolean),
-			registers = tModule.optional(tModule.map(tModule.string, tModule.some(tModule.string, tModule.number)))
-		})))
-	})),
-	message = tModule.optional(tModule.string),
-	level = tModule.optional(tModule.string),
-	attributes = var1,
-	annotations = var2,
-	tags = tModule.optional(tModule.map(tModule.string, tModule.string)),
-	customMetadata = var3,
-	breadcrumbs = var4,
-	timestamp = tModule.optional(tModule.number)
+local OptionalResult2 = TModule.optional(TModule.map(TModule.string, (TModule.map(TModule.string, TModule.some(TModule.string, TModule.number, TModule.boolean)))))
+local OptionalResult3 = TModule.optional(TModule.array((TModule.interface({
+	type = TModule.optional(TModule.string),
+	category = TModule.optional(TModule.string),
+	message = TModule.optional(TModule.string),
+	data = TModule.optional(TModule.table),
+	level = TModule.optional(TModule.string),
+	timestamp = TModule.optional(TModule.number),
+	origin = TModule.optional(TModule.string)
+}))))
+local IntersectionResult = TModule.intersection(TModule.strictInterface({
+	threads = TModule.map(TModule.string, (TModule.strictInterface({
+		name = TModule.optional(TModule.string),
+		fault = TModule.optional(TModule.boolean),
+		stack = TModule.optional(TModule.array((TModule.strictInterface({
+			guessed_frame = TModule.optional(TModule.boolean),
+			funcName = TModule.optional(TModule.string),
+			address = TModule.optional(TModule.string),
+			line = TModule.optional(TModule.string),
+			column = TModule.optional(TModule.string),
+			sourceCode = TModule.optional(TModule.string),
+			library = TModule.optional(TModule.string),
+			debug_identifier = TModule.optional(TModule.string),
+			faulted = TModule.optional(TModule.boolean),
+			registers = TModule.optional(TModule.map(TModule.string, TModule.some(TModule.string, TModule.number)))
+		}))))
+	}))),
+	message = TModule.optional(TModule.string),
+	level = TModule.optional(TModule.string),
+	attributes = OptionalResult,
+	annotations = OptionalResult1,
+	tags = TModule.optional(TModule.map(TModule.string, TModule.string)),
+	customMetadata = OptionalResult2,
+	breadcrumbs = OptionalResult3,
+	timestamp = TModule.optional(TModule.number)
 }))
-local t = {
-	IAttributes = var1,
-	IAnnotations = var2,
-	ICustomMetadata = var3,
-	IBreadcrumbs = var4
+local ErrorReportModule = {
+	IAttributes = OptionalResult,
+	IAnnotations = OptionalResult1,
+	ICustomMetadata = OptionalResult2,
+	IBreadcrumbs = OptionalResult3
 }
-t.__index = t
+ErrorReportModule.__index = ErrorReportModule
 
-function t.validate(p2)
-	-- upvalues: var5 (ref)
-	return var5(p2)
+function ErrorReportModule.validate(p2) --[[ Line: 170 ]]
+	-- upvalues: IntersectionResult (copy)
+	return IntersectionResult(p2)
 end
 
-function t.new()
-	-- upvalues: t (ref)
-	local t_1 = {
+function ErrorReportModule.new() --[[ Line: 180 ]]
+	-- upvalues: ErrorReportModule (copy)
+	local config = {
 		threads = {},
 		attributes = {},
 		annotations = {},
 		customMetadata = {},
 		breadcrumbs = {}
 	}
-	setmetatable(t_1, t)
+	setmetatable(config, ErrorReportModule)
 	
-	return t_1
+	return config
 end
 
-function t:addAttributes(p2)
-	-- upvalues: cryoModule (ref)
+function ErrorReportModule:addAttributes(p2) --[[ Line: 199 ]]
+	-- upvalues: CryoModule (copy)
 	if type(p2) == "table" then
-		self.attributes = cryoModule.Dictionary.join(self.attributes, p2)
+		self.attributes = CryoModule.Dictionary.join(self.attributes, p2)
 		
 		return
+	else
+		warn("Cannot add attributes of type: ", (type(p2)))
 	end
-	warn("Cannot add attributes of type: ", type(p2))
 end
 
-function t:addAnnotations(p2)
-	-- upvalues: cryoModule (ref)
-	if type(p2) == "table" then
-		self.annotations = cryoModule.Dictionary.join(self.annotations, p2)
+function ErrorReportModule:addAnnotations(Annotations) --[[ Line: 217 ]]
+	-- upvalues: CryoModule (copy)
+	if type(Annotations) == "table" then
+		self.annotations = CryoModule.Dictionary.join(self.annotations, Annotations)
 		
 		return
+	else
+		warn("Cannot add annotations of type: ", (type(Annotations)))
 	end
-	warn("Cannot add annotations of type: ", type(p2))
 end
 
-local function sanitizeCustomMetadataGroup(p2)
-	if type(p2) ~= "table" then
+local function sanitizeCustomMetadataGroup(List) --[[ Line: 239 ]]
+	if type(List) ~= "table" then
 		return nil
 	end
 	local t = {}
 	
-	for i, v in pairs(p2) do
-		local var6 = type(v)
+	for i, value in pairs(List) do
+		local ValueType = type(value)
 		
-		if var6 == "string" or var6 == "number" or var6 == "boolean" then
-			t[i] = v
+		if ValueType == "string" or ValueType == "number" or ValueType == "boolean" then
+			t[i] = value
 		end
 	end
 	return if next(t) == nil then nil else t
 end
 
-function t:addCustomMetadata(p3)
-	-- upvalues: sanitizeCustomMetadataGroup (ref), cryoModule (ref)
-	if type(p3) ~= "table" then
-		warn("Cannot add custom metadata of type: ", type(p3))
+function ErrorReportModule:addCustomMetadata(List) --[[ Line: 271 ]]
+	-- upvalues: sanitizeCustomMetadataGroup (copy), CryoModule (copy)
+	if type(List) ~= "table" then
+		warn("Cannot add custom metadata of type: ", (type(List)))
 		
 		return
 	end
-	local customMetadata = self.customMetadata
+	local CustomMetadata = self.customMetadata
 	
-	for i, v in pairs(p3) do
-		local var7 = sanitizeCustomMetadataGroup(v)
+	for i, value in pairs(List) do
+		local SanitizeCustomMetadataGroupResult = sanitizeCustomMetadataGroup(value)
 		
-		if var7 ~= nil then
-			local var8 = customMetadata[i]
+		if SanitizeCustomMetadataGroupResult ~= nil then
+			local CustomMeta = CustomMetadata[i]
 			
-			if var8 == nil then
-				customMetadata[i] = var7
+			if CustomMeta == nil then
+				CustomMetadata[i] = SanitizeCustomMetadataGroupResult
 			else
-				customMetadata[i] = cryoModule.Dictionary.join(var8, var7)
+				CustomMetadata[i] = CryoModule.Dictionary.join(CustomMeta, SanitizeCustomMetadataGroupResult)
 			end
 		end
 	end
-	self.customMetadata = customMetadata
+	self.customMetadata = CustomMetadata
 end
 
-function t:addBreadcrumb(p4)
-	if type(p4) == "table" then
+function ErrorReportModule:addBreadcrumb(p2) --[[ Line: 304 ]]
+	if type(p2) == "table" then
 		table.insert(self.breadcrumbs, {
-			type = p4.type or "default",
-			category = p4.category,
-			message = p4.message,
-			data = p4.data,
-			level = p4.level or "info",
-			origin = p4.origin,
-			timestamp = p4.timestamp or os.time()
+			type = p2.type or "default",
+			category = p2.category,
+			message = p2.message,
+			data = p2.data,
+			level = p2.level or "info",
+			origin = p2.origin,
+			timestamp = p2.timestamp or os.time()
 		})
 		
 		return
+	else
+		warn("Cannot add breadcrumb of type: ", (type(p2)))
 	end
-	warn("Cannot add breadcrumb of type: ", type(p4))
 end
 
-function t:addBreadcrumbs(p4)
-	if type(p4) ~= "table" then
-		warn("Cannot add breadcrumbs of type: ", type(p4))
+function ErrorReportModule:addBreadcrumbs(List) --[[ Line: 331 ]]
+	if type(List) ~= "table" then
+		warn("Cannot add breadcrumbs of type: ", (type(List)))
 		
 		return
 	end
-	for i, v in ipairs(p4) do
-		self:addBreadcrumb(v)
+	for _, value in ipairs(List) do
+		self:addBreadcrumb(value)
 	end
 end
 
-function t.fromMessageAndStack(p5, p6, p7)
-	-- upvalues: t (ref), constantsModule (ref), processErrorStackModule (ref)
-	local var9 = t.new()
-	var9.message = p5
-	var9.level = p7 or constantsModule.DEFAULT_ERROR_LEVEL
-	local var10, var11 = processErrorStackModule(p6)
+function ErrorReportModule.fromMessageAndStack(Message, Stack, Level) --[[ Line: 350 ]]
+	-- upvalues: ErrorReportModule (copy), ConstantsModule (copy), ProcessErrorStackModule (copy)
+	local NewErrorReport = ErrorReportModule.new()
+	NewErrorReport.message = Message
+	NewErrorReport.level = Level or ConstantsModule.DEFAULT_ERROR_LEVEL
+	local ProcessErrorStackModuleResult, ProcessErrorStackModuleResult2 = ProcessErrorStackModule(Stack)
 	
-	for i, v in var10 do
-		if v.sourceCode and var11[v.sourceCode] then
-			v.sourceCode = var11[v.sourceCode].path
+	for _, value in ProcessErrorStackModuleResult do
+		if value.sourceCode and ProcessErrorStackModuleResult2[value.sourceCode] then
+			value.sourceCode = ProcessErrorStackModuleResult2[value.sourceCode].path
 		end
 	end
-	var9.threads = { main = { name = "main", stack = var10 } }
+	NewErrorReport.threads = {
+		main = { name = "main", stack = ProcessErrorStackModuleResult }
+	}
 	
-	return var9
+	return NewErrorReport
 end
 
-function t:fromDetails()
-	-- upvalues: t (ref), constantsModule (ref)
-	local var12
-	local _ = nil
-	
+function ErrorReportModule:fromDetails() --[[ Line: 382 ]]
+	-- upvalues: ErrorReportModule (copy), ConstantsModule (copy)
+	local FromMessageAndStackResult = nil
 	if self.stack then
-		var12 = t.fromMessageAndStack(self.message, self.stack, self.level)
+		FromMessageAndStackResult = ErrorReportModule.fromMessageAndStack(self.message, self.stack, self.level)
 	else
-		var12 = t.new()
-		var12.message = self.message
-		var12.level = self.level or constantsModule.DEFAULT_ERROR_LEVEL
+		FromMessageAndStackResult = ErrorReportModule.new()
+		FromMessageAndStackResult.message = self.message
+		FromMessageAndStackResult.level = self.level or ConstantsModule.DEFAULT_ERROR_LEVEL
 	end
 	if self.annotations then
-		var12:addAnnotations(self.annotations)
+		FromMessageAndStackResult:addAnnotations(self.annotations)
 	end
-	return var12
+	return FromMessageAndStackResult
 end
 
-return t
+return ErrorReportModule

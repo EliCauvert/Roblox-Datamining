@@ -1,195 +1,200 @@
-﻿local guiService = game:GetService("GuiService")
-local userInputService = game:GetService("UserInputService")
-local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local otterModule = require(parent.Otter)
-local signalsReactModule = require(parent.SignalsReact)
-local configModule = require(expChat.Config)
-local getPresetChatStoreModule = require(expChat.Stores.GetPresetChatStore)
-local presetChatContainerModule = require(script.Parent.PresetChatContainer)
-local useAutoTrayHeightModule = require(script.Parent.useAutoTrayHeight)
-local setIsPresetTrayOpenModule = require(script.Parent.Thunks.setIsPresetTrayOpen)
-local compactWidthThreshold = configModule.PresetTray.CompactWidthThreshold
-local slideSpring = configModule.PresetTray.SlideSpring
+﻿local GuiService = game:GetService("GuiService")
+local UserInputService = game:GetService("UserInputService")
+local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local OtterModule = require(Parent.Otter)
+local SignalsReactModule = require(Parent.SignalsReact)
+local FFlagExpChatPresetTrayDismissAnalyticsModule = require(ExpChat.Flags.FFlagExpChatPresetTrayDismissAnalytics)
+local ConfigModule = require(ExpChat.Config)
+local GetPresetChatStoreModule = require(ExpChat.Stores.GetPresetChatStore)
+local PresetChatContainerModule = require(script.Parent.PresetChatContainer)
+local UseAutoTrayHeightModule = require(script.Parent.useAutoTrayHeight)
+local SetIsPresetTrayOpenModule = require(script.Parent.Thunks.setIsPresetTrayOpen)
+local CompactWidthThreshold = ConfigModule.PresetTray.CompactWidthThreshold
+local SlideSpring = ConfigModule.PresetTray.SlideSpring
 
-local function _()
-	-- upvalues: compactWidthThreshold (ref)
-	local currentCamera = workspace.CurrentCamera
+local function _(): boolean --[[ Line: 31 | Named "isCompactMode" ]]
+	-- upvalues: CompactWidthThreshold (copy)
+	local CurrentCamera = workspace.CurrentCamera
 	
-	return if currentCamera then currentCamera.ViewportSize.X < compactWidthThreshold else false
+	return if CurrentCamera then CurrentCamera.ViewportSize.X < CompactWidthThreshold else false
 end
 
-return reactModule.memo(function(value)
-	-- upvalues: getPresetChatStoreModule (ref), signalsReactModule (ref), compactWidthThreshold (ref), foundationModule (ref), useAutoTrayHeightModule (ref), reactModule (ref), guiService (ref), setIsPresetTrayOpenModule (ref), otterModule (ref), slideSpring (ref), userInputService (ref), configModule (ref), presetChatContainerModule (ref)
-	local var1
-	local var2 = getPresetChatStoreModule(false)
-	local var3 = signalsReactModule.useSignalState(var2.getIsTrayOpen)
-	local currentCamera = workspace.CurrentCamera
-	
-	if currentCamera then
-		var1 = currentCamera.ViewportSize.X < compactWidthThreshold
-		var1 = nil
-	else
-		var1 = false
-	end
-	local var4 = foundationModule.Hooks.useTokens()
-	local var5, var6 = useAutoTrayHeightModule()
-	local var7, var8 = reactModule.useState(false)
-	local var9, var10 = reactModule.useBinding(1)
-	local var11 = reactModule.useRef(nil)
-	local var12, var13 = reactModule.useState(0)
-	local var14, var15 = reactModule.useState(0)
-	local var16, var17 = reactModule.useState(guiService.TopbarInset.Height)
-	local var18 = var5 + math.max(0, var12 - var14 - var16)
-	reactModule.useEffect(function()
-		-- upvalues: guiService (copy), var17 (ref)
-		local var19 = guiService:GetPropertyChangedSignal("TopbarInset"):Connect(function()
-			-- upvalues: var17 (copy), guiService (copy)
-			var17(guiService.TopbarInset.Height)
+return ReactModule.memo(function(p1) --[[ Line: 39 | Named "PresetChatTray" ]]
+	-- upvalues: GetPresetChatStoreModule (copy), SignalsReactModule (copy), CompactWidthThreshold (copy), FoundationModule (copy), UseAutoTrayHeightModule (copy), ReactModule (copy), GuiService (copy), SetIsPresetTrayOpenModule (copy), OtterModule (copy), SlideSpring (copy), UserInputService (copy), FFlagExpChatPresetTrayDismissAnalyticsModule (copy), ConfigModule (copy), PresetChatContainerModule (copy)
+	local PresetChatStoreModule = GetPresetChatStoreModule(false)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(PresetChatStoreModule.getIsTrayOpen)
+	local CurrentCamera = workspace.CurrentCamera
+	local IsXBelow: boolean = if CurrentCamera then CurrentCamera.ViewportSize.X < CompactWidthThreshold else false
+	local UseTokensResult = FoundationModule.Hooks.useTokens()
+	local UseAutoTrayHeightModuleResult, UseAutoTrayHeightModuleResult2 = UseAutoTrayHeightModule()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(1)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(0)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(0)
+	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(GuiService.TopbarInset.Height)
+	local NewUseAutoTrayHeightModuleResult = UseAutoTrayHeightModuleResult + math.max(0, UseStateResult1 - UseStateResult3 - UseStateResult4)
+	ReactModule.useEffect(function() --[[ Line: 57 ]]
+		-- upvalues: GuiService (upval), UseStateResult2_3 (copy)
+		local Connection = GuiService:GetPropertyChangedSignal("TopbarInset"):Connect(function() --[[ Line: 58 ]]
+			-- upvalues: UseStateResult2_3 (upval), GuiService (upval)
+			UseStateResult2_3(GuiService.TopbarInset.Height)
 		end)
 		
-		return function()
-			-- upvalues: var19 (ref)
-			var19:Disconnect()
+		return function() --[[ Line: 61 ]]
+			-- upvalues: Connection (copy)
+			Connection:Disconnect()
 		end
 	end, {})
-	local var19, var20 = reactModule.useState(false)
-	local var21 = reactModule.useCallback(function(p1)
-		-- upvalues: var13 (ref), var20 (ref)
-		var13(p1.AbsoluteSize.Y)
-		var20(p1.AbsoluteSize.X < p1.AbsoluteSize.Y)
+	local UseStateResult5, UseStateResult2_4 = ReactModule.useState(false)
+	local UseResult = ReactModule.useCallback(function(Frame: Frame) --[[ Line: 68 ]]
+		-- upvalues: UseStateResult2_1 (copy), UseStateResult2_4 (copy)
+		UseStateResult2_1(Frame.AbsoluteSize.Y)
+		UseStateResult2_4(Frame.AbsoluteSize.X < Frame.AbsoluteSize.Y)
 	end, {})
-	local var22 = reactModule.useCallback(function(p1)
-		-- upvalues: var15 (ref), var6 (ref)
-		var15(p1.AbsoluteSize.Y)
-		var6(p1)
-	end, { var6 })
-	local var23 = reactModule.useCallback(function()
-		-- upvalues: setIsPresetTrayOpenModule (copy), var2 (ref)
-		setIsPresetTrayOpenModule(var2, false)
-	end, { var2 })
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), var8 (ref), var11 (ref), otterModule (copy), var10 (ref), slideSpring (copy)
-		if var3 then
-			var8(true)
+	local UseResult1 = ReactModule.useCallback(function(Frame) --[[ Line: 73 ]]
+		-- upvalues: UseStateResult2_2 (copy), UseAutoTrayHeightModuleResult2 (copy)
+		UseStateResult2_2(Frame.AbsoluteSize.Y)
+		UseAutoTrayHeightModuleResult2(Frame)
+	end, { UseAutoTrayHeightModuleResult2 })
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 78 ]]
+		-- upvalues: SetIsPresetTrayOpenModule (upval), PresetChatStoreModule (copy)
+		SetIsPresetTrayOpenModule(PresetChatStoreModule, false)
+	end, { PresetChatStoreModule })
+	ReactModule.useEffect(function() --[[ Line: 82 ]]
+		-- upvalues: UseSignalStateResult (copy), UseStateResult2 (copy), UseRefResult (copy), OtterModule (upval), UseBindingResult2 (copy), SlideSpring (upval)
+		if UseSignalStateResult then
+			UseStateResult2(true)
 			
-			if var11.current then
-				var11.current:destroy()
+			if UseRefResult.current then
+				UseRefResult.current:destroy()
 			end
-			local var24 = otterModule.createSingleMotor(1)
-			var11.current = var24
-			var24:onStep(function(p1)
-				-- upvalues: var10 (copy)
-				var10(p1)
+			local SingleMotor = OtterModule.createSingleMotor(1)
+			UseRefResult.current = SingleMotor
+			SingleMotor:onStep(function(p2) --[[ Line: 90 ]]
+				-- upvalues: UseBindingResult2 (upval)
+				UseBindingResult2(p2)
 			end)
-			var24:setGoal(otterModule.spring(0, slideSpring))
+			SingleMotor:setGoal(OtterModule.spring(0, SlideSpring))
 			
 			return
-		elseif var11.current then
-			var11.current:setGoal(otterModule.spring(1, slideSpring))
-			var11.current:onComplete(function()
-				-- upvalues: var8 (copy)
-				var8(false)
+		elseif UseRefResult.current then
+			UseRefResult.current:setGoal(OtterModule.spring(1, SlideSpring))
+			UseRefResult.current:onComplete(function() --[[ Line: 97 ]]
+				-- upvalues: UseStateResult2 (upval)
+				UseStateResult2(false)
 			end)
 		end
-	end, { var3 })
-	reactModule.useEffect(function()
-		-- upvalues: var11 (ref)
-		return function()
-			-- upvalues: var11 (copy)
-			if var11.current then
-				var11.current:destroy()
-				var11.current = nil
+	end, { UseSignalStateResult })
+	ReactModule.useEffect(function() --[[ Line: 104 ]]
+		-- upvalues: UseRefResult (copy)
+		return function() --[[ Line: 105 ]]
+			-- upvalues: UseRefResult (upval)
+			if UseRefResult.current then
+				UseRefResult.current:destroy()
+				UseRefResult.current = nil
 			end
 		end
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), userInputService (copy), setIsPresetTrayOpenModule (copy), var2 (ref), guiService (copy)
-		if var3 then
-			local inputBeganConnection = userInputService.InputBegan:Connect(function(p1, _)
-				-- upvalues: setIsPresetTrayOpenModule (copy), var2 (copy)
-				if p1.KeyCode == Enum.KeyCode.Escape or p1.KeyCode == Enum.KeyCode.ButtonB then
-					setIsPresetTrayOpenModule(var2, false)
-				end
-			end)
-			local menuOpenedConnection = guiService.MenuOpened:Connect(function()
-				-- upvalues: var2 (copy)
-				var2.setIsTrayOpen(false)
-			end)
-			
-			return function()
-				-- upvalues: inputBeganConnection (ref), menuOpenedConnection (ref)
-				inputBeganConnection:Disconnect()
-				menuOpenedConnection:Disconnect()
+	ReactModule.useEffect(function() --[[ Line: 113 ]]
+		-- upvalues: UseSignalStateResult (copy), UserInputService (upval), SetIsPresetTrayOpenModule (upval), PresetChatStoreModule (copy), GuiService (upval), FFlagExpChatPresetTrayDismissAnalyticsModule (upval)
+		if not UseSignalStateResult then return end
+		local InputBeganConnection = UserInputService.InputBegan:Connect(function(Input, _) --[[ Line: 118 ]]
+			-- upvalues: SetIsPresetTrayOpenModule (upval), PresetChatStoreModule (upval)
+			if Input.KeyCode == Enum.KeyCode.Escape or Input.KeyCode == Enum.KeyCode.ButtonB then
+				SetIsPresetTrayOpenModule(PresetChatStoreModule, false)
 			end
+		end)
+		local MenuOpenedConnection = GuiService.MenuOpened:Connect(function() --[[ Line: 124 ]]
+			-- upvalues: FFlagExpChatPresetTrayDismissAnalyticsModule (upval), SetIsPresetTrayOpenModule (upval), PresetChatStoreModule (upval)
+			if FFlagExpChatPresetTrayDismissAnalyticsModule then
+				SetIsPresetTrayOpenModule(PresetChatStoreModule, false)
+				
+				return
+			else
+				PresetChatStoreModule.setIsTrayOpen(false)
+			end
+		end)
+		
+		return function() --[[ Line: 132 ]]
+			-- upvalues: InputBeganConnection (copy), MenuOpenedConnection (copy)
+			InputBeganConnection:Disconnect()
+			MenuOpenedConnection:Disconnect()
 		end
-	end, { var3, var2, setIsPresetTrayOpenModule })
+	end, {
+		UseSignalStateResult,
+		PresetChatStoreModule,
+		SetIsPresetTrayOpenModule
+	})
 	
-	return if var7 then reactModule.createElement(reactModule.Fragment, nil, {
-		OuterScreenGui = reactModule.createElement("ScreenGui", {
+	return if UseStateResult then ReactModule.createElement(ReactModule.Fragment, nil, {
+		OuterScreenGui = ReactModule.createElement("ScreenGui", {
 			DisplayOrder = 9,
 			ScreenInsets = Enum.ScreenInsets.None,
 			ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 		}, {
-			SizeTracker = reactModule.createElement("Frame", {
+			SizeTracker = ReactModule.createElement("Frame", {
 				Size = UDim2.fromScale(1, 1),
 				BackgroundTransparency = 1,
-				[reactModule.Change.AbsoluteSize] = var21
+				[ReactModule.Change.AbsoluteSize] = UseResult
 			}),
-			FullFrame = if not var19 then reactModule.createElement(foundationModule.View, {
+			FullFrame = if UseStateResult5 then nil else ReactModule.createElement(FoundationModule.View, {
 				tag = "bg-surface-200",
 				AnchorPoint = Vector2.new(0, 1),
-				Position = var9:map(function(p1)
-					-- upvalues: var18 (ref)
-					return UDim2.new(0, 0, 1, math.round(p1 * var18))
+				Position = UseBindingResult:map(function(p2): UDim2 --[[ Line: 156 ]]
+					-- upvalues: NewUseAutoTrayHeightModuleResult (copy)
+					return UDim2.new(0, 0, 1, (math.round(p2 * NewUseAutoTrayHeightModuleResult)))
 				end),
-				Size = UDim2.new(1, 0, 0, var18)
-			}) else nil
+				Size = UDim2.new(1, 0, 0, NewUseAutoTrayHeightModuleResult)
+			})
 		}),
-		InnerScreenGui = reactModule.createElement("ScreenGui", {
+		InnerScreenGui = ReactModule.createElement("ScreenGui", {
 			DisplayOrder = 10,
 			ScreenInsets = Enum.ScreenInsets.CoreUISafeInsets,
 			ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 		}, {
-			Backdrop = reactModule.createElement("TextButton", {
+			Backdrop = ReactModule.createElement("TextButton", {
 				AutoButtonColor = false,
 				BackgroundTransparency = 1,
 				Position = UDim2.fromScale(0, 0),
 				Size = UDim2.fromScale(1, 1),
 				Text = "",
 				ZIndex = 1,
-				[reactModule.Event.Activated] = var23,
-				[reactModule.Change.AbsoluteSize] = var22
+				[ReactModule.Event.Activated] = UseResult2,
+				[ReactModule.Change.AbsoluteSize] = UseResult1
 			}),
-			Tray = reactModule.createElement(foundationModule.View, {
+			Tray = ReactModule.createElement(FoundationModule.View, {
 				tag = "stroke-standard stroke-default bg-surface-200",
 				ClipsDescendants = true,
 				ZIndex = 1,
 				AnchorPoint = Vector2.new(0, 1),
-				Position = var9:map(function(p1)
-					-- upvalues: var5 (ref)
-					return UDim2.new(0, 0, 1, math.round(p1 * var5))
+				Position = UseBindingResult:map(function(p2): UDim2 --[[ Line: 181 ]]
+					-- upvalues: UseAutoTrayHeightModuleResult (copy)
+					return UDim2.new(0, 0, 1, (math.round(p2 * UseAutoTrayHeightModuleResult)))
 				end),
-				Size = UDim2.new(1, 0, 0, var5)
+				Size = UDim2.new(1, 0, 0, UseAutoTrayHeightModuleResult)
 			}, {
-				Handle = reactModule.createElement(foundationModule.View, {
+				Handle = ReactModule.createElement(FoundationModule.View, {
 					ZIndex = 2,
 					tag = "bg-divider radius-full",
-					Size = UDim2.new(0, configModule.PresetTray.HandleWidth, 0, var4.Padding.XSmall),
+					Size = UDim2.new(0, ConfigModule.PresetTray.HandleWidth, 0, UseTokensResult.Padding.XSmall),
 					AnchorPoint = Vector2.new(0.5, 0),
-					Position = UDim2.new(0.5, 0, 0, var4.Padding.XSmall)
+					Position = UDim2.new(0.5, 0, 0, UseTokensResult.Padding.XSmall)
 				}),
-				Content = reactModule.createElement(foundationModule.View, {
+				Content = ReactModule.createElement(FoundationModule.View, {
 					tag = "auto-xy",
 					Size = UDim2.fromScale(1, 1),
 					Position = UDim2.fromScale(0, 0)
 				}, {
-					Container = reactModule.createElement(presetChatContainerModule, {
+					Container = ReactModule.createElement(PresetChatContainerModule, {
 						shouldShowKeyboardButton = true,
-						textChannel = value.textChannel,
-						compact = var1
+						textChannel = p1.textChannel,
+						compact = IsXBelow,
+						onSendChat = p1.onSendChat,
+						onSendGlobalChat = p1.onSendGlobalChat
 					})
 				})
 			})

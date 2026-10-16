@@ -1,326 +1,266 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local creatorAgentChatModule = require(parent.DataHydration.CreatorAgentChat)
-local signalsModule = require(parent.Signals)
-local universeConfigurationModule = require(parent.DataHydration.UniverseConfiguration)
-local chatTypesModule = require(buildExperience.Chat.chatTypes)
-local fFlagBuildAgentAdCampaignCardModule = require(buildExperience.Flags.FFlagBuildAgentAdCampaignCard)
-local getAdUpsellEligibilityModule = require(buildExperience.Components.Ads.getAdUpsellEligibility)
-local observeAdUpsellEligibilityModule = require(buildExperience.Components.Ads.observeAdUpsellEligibility)
-local gameConfigurationLabelsModule = require(buildExperience.utils.GameConfigurationLabels)
-local buildAppStorageKeyEngineFeature = game:GetEngineFeature("BuildAppStorageKey")
-local var1 = if buildAppStorageKeyEngineFeature then require(buildExperience.Storage.BuildAppStorage) else nil
-local _ = require(buildExperience.Storage.createAdCampaignCardStorage)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local CreatorAgentChatModule = require(Parent.DataHydration.CreatorAgentChat)
+local SignalsModule = require(Parent.Signals)
+local UniverseConfigurationModule = require(Parent.DataHydration.UniverseConfiguration)
+local ChatTypesModule = require(BuildExperience.Chat.chatTypes)
+local FFlagBuildAgentAdCampaignCardModule = require(BuildExperience.Flags.FFlagBuildAgentAdCampaignCard)
+local FFlagBuildAdUpsellPinnedModule = require(BuildExperience.Flags.FFlagBuildAdUpsellPinned)
+local GetAdUpsellEligibilityModule = require(BuildExperience.Components.Ads.getAdUpsellEligibility)
+local ObserveAdUpsellEligibilityModule = require(BuildExperience.Components.Ads.observeAdUpsellEligibility)
+local GameConfigurationLabelsModule = require(BuildExperience.utils.GameConfigurationLabels)
+local BuildAppStorageKeyEngineFeature = game:GetEngineFeature("BuildAppStorageKey")
+local BuildAppStorageModule = if BuildAppStorageKeyEngineFeature then require(BuildExperience.Storage.BuildAppStorage) else nil
+local _ = require(BuildExperience.Storage.createAdCampaignCardStorage)
 
-local function defaultDependencies()
-	-- upvalues: buildAppStorageKeyEngineFeature (ref), fFlagBuildAgentAdCampaignCardModule (ref), var1 (ref), universeConfigurationModule (ref), gameConfigurationLabelsModule (ref), getAdUpsellEligibilityModule (ref), observeAdUpsellEligibilityModule (ref)
-	return if buildAppStorageKeyEngineFeature then {
-		getAdCampaignCardStorage = if fFlagBuildAgentAdCampaignCardModule then var1.getAdCampaignCardStorage else nil,
-		recordCompletedTurn = var1.recordAdUpsellCompletedTurn,
-		recordPublish = var1.recordAdUpsellPublish,
-		attachPendingMilestones = var1.attachPendingAdUpsellMilestones,
-		pruneAnchors = var1.pruneAdUpsellAnchors,
-		markAnchorImpressed = var1.markAdUpsellAnchorImpressed,
-		dismissPermanently = var1.markAdUpsellDismissedPermanently,
-		isDismissedPermanently = function(p1)
-			-- upvalues: var1 (copy)
-			local adUpsellState = var1.getAdUpsellState(p1, nil)
+local function defaultDependencies() --[[ Line: 98 ]]
+	-- upvalues: BuildAppStorageKeyEngineFeature (copy), FFlagBuildAgentAdCampaignCardModule (copy), BuildAppStorageModule (copy), UniverseConfigurationModule (copy), GameConfigurationLabelsModule (copy), GetAdUpsellEligibilityModule (copy), ObserveAdUpsellEligibilityModule (copy)
+	return if BuildAppStorageKeyEngineFeature then {
+		getAdCampaignCardStorage = if FFlagBuildAgentAdCampaignCardModule then BuildAppStorageModule.getAdCampaignCardStorage else nil,
+		recordCompletedTurn = BuildAppStorageModule.recordAdUpsellCompletedTurn,
+		recordPublish = BuildAppStorageModule.recordAdUpsellPublish,
+		attachPendingMilestones = BuildAppStorageModule.attachPendingAdUpsellMilestones,
+		pruneAnchors = BuildAppStorageModule.pruneAdUpsellAnchors,
+		markAnchorImpressed = BuildAppStorageModule.markAdUpsellAnchorImpressed,
+		dismissPermanently = BuildAppStorageModule.markAdUpsellDismissedPermanently,
+		isDismissedPermanently = function(UniverseId) --[[ Line: 112 ]]
+			-- upvalues: BuildAppStorageModule (upval)
+			local AdUpsellState = BuildAppStorageModule.getAdUpsellState(UniverseId, nil)
 			
-			return adUpsellState.isAvailable and adUpsellState.dismissedPermanently
+			return AdUpsellState.isAvailable and AdUpsellState.dismissedPermanently
 		end,
-		retryStorageRead = var1.retryAdUpsellRead,
-		refreshSummary = function(p1)
-			-- upvalues: universeConfigurationModule (copy)
-			return universeConfigurationModule.getUniverseConfigurationStore().refreshSummary(p1)
+		retryStorageRead = BuildAppStorageModule.retryAdUpsellRead,
+		refreshSummary = function(p1) --[[ Line: 117 ]]
+			-- upvalues: UniverseConfigurationModule (upval)
+			return UniverseConfigurationModule.getUniverseConfigurationStore().refreshSummary(p1)
 		end,
-		getAudience = function(p1)
-			-- upvalues: gameConfigurationLabelsModule (copy)
-			return gameConfigurationLabelsModule.getAudience(p1)
+		getAudience = function(p1) --[[ Line: 120 ]]
+			-- upvalues: GameConfigurationLabelsModule (upval)
+			return GameConfigurationLabelsModule.getAudience(p1)
 		end,
-		publicAudience = universeConfigurationModule.PrivacyType.Public,
-		getEligibility = getAdUpsellEligibilityModule,
-		observeEligibility = observeAdUpsellEligibilityModule,
-		scheduleRetry = function(p1, p2)
-			return task.delay(p1, p2)
+		publicAudience = UniverseConfigurationModule.PrivacyType.Public,
+		getEligibility = GetAdUpsellEligibilityModule,
+		observeEligibility = ObserveAdUpsellEligibilityModule,
+		scheduleRetry = function(Delay, p1) --[[ Line: 126 ]]
+			return task.delay(Delay, p1)
 		end,
-		cancelRetry = function(p1)
-			task.cancel(p1)
+		cancelRetry = function(ScheduleRetryResult) --[[ Line: 129 ]]
+			task.cancel(ScheduleRetryResult)
 		end
 	} else nil
 end
 
-local function _(p1)
-	-- upvalues: creatorAgentChatModule (ref)
-	return creatorAgentChatModule.PublishToolUtils.getLatestSuccessfulResult(p1, { parseDirectText = true }) ~= nil
+local function _(p1): boolean --[[ Line: 135 | Named "hasSuccessfulPublish" ]]
+	-- upvalues: CreatorAgentChatModule (copy)
+	return CreatorAgentChatModule.PublishToolUtils.getLatestSuccessfulResult(p1, { parseDirectText = true }) ~= nil
 end
 
-return function(p1)
-	-- upvalues: defaultDependencies (ref), signalsModule (ref), chatTypesModule (ref), creatorAgentChatModule (ref), fFlagBuildAgentAdCampaignCardModule (ref)
-	p1 = p1 or defaultDependencies()
-	local var2, var3 = signalsModule.createSignal(0)
-	local var4, var5 = signalsModule.createSignal(0)
-	local t = {}
-	local t_1 = {}
-	local var6 = nil
-	local t_2 = {}
-	local var7 = 0
-	local var8 = nil
+return function(p1) --[[ Line: 141 | Named "createAdUpsellEventStore" ]]
+	-- upvalues: defaultDependencies (copy), SignalsModule (copy), FFlagBuildAdUpsellPinnedModule (copy), ChatTypesModule (copy), CreatorAgentChatModule (copy), FFlagBuildAgentAdCampaignCardModule (copy)
+	local P6 = p1 or defaultDependencies()
+	local Signal, Signal2 = SignalsModule.createSignal(0)
+	local Signal1, Signal2_1 = SignalsModule.createSignal(0)
+	local Tbl = {}
+	local List = {}
+	local AfterMessageKeys = {}
+	local ScheduleRetryResult = nil
+	local ObserveEligibilityResults = {}
+	local Count = 0
+	local Callback = nil
 	local _ = nil
 	
-	local function _()
-		-- upvalues: var3 (ref)
-		var3(function(p2)
+	local function _() --[[ Line: 155 | Named "bumpRevision" ]]
+		-- upvalues: Signal2 (copy)
+		Signal2(function(p2: number): number --[[ Line: 156 ]]
 			return p2 + 1
 		end)
 	end
 	
-	local _ = function()
-		-- upvalues: p1 (ref)
-		return if p1 == nil then nil else p1.getAdCampaignCardStorage()
+	local _ = function() --[[ Line: 161 | Named "getCardStorage" ]]
+		-- upvalues: P6 (copy)
+		return if P6 == nil then nil else P6.getAdCampaignCardStorage()
 	end
 	
-	local _ = function()
-		-- upvalues: var5 (ref), var3 (ref)
-		var5(function(p2)
+	local _ = function() --[[ Line: 165 | Named "bumpAdCampaignRevision" ]]
+		-- upvalues: Signal2_1 (copy), Signal2 (copy)
+		Signal2_1(function(p2: number): number --[[ Line: 166 ]]
 			return p2 + 1
 		end)
-		var3(function(p2)
+		Signal2(function(p2: number): number --[[ Line: 156 ]]
 			return p2 + 1
 		end)
 	end
 	
-	local function recordCardMutation(p2, p3, p4)
-		-- upvalues: var5 (ref), var3 (ref)
-		if p3 or p2 and p4 then
-			var5(function(p5)
-				return p5 + 1
+	local function recordCardMutation(p2, p3, HasPendingWrites) --[[ Line: 172 ]]
+		-- upvalues: Signal2_1 (copy), Signal2 (copy)
+		if p3 or p2 and HasPendingWrites then
+			Signal2_1(function(p4: number): number --[[ Line: 166 ]]
+				return p4 + 1
 			end)
-			var3(function(p5)
-				return p5 + 1
+			Signal2(function(p4: number): number --[[ Line: 156 ]]
+				return p4 + 1
 			end)
 		end
 		return p2, p3
 	end
 	
-	local _ = function(p2)
-		-- upvalues: t_2 (ref)
-		local var9 = t_2[p2]
+	local _ = function(Key) --[[ Line: 183 | Named "disposeEligibilitySubscription" ]]
+		-- upvalues: ObserveEligibilityResults (copy)
+		local ObserveEligibilityResult: () -> () = ObserveEligibilityResults[Key]
 		
-		if var9 == nil then
+		if ObserveEligibilityResult ~= nil then
+			ObserveEligibilityResults[Key] = nil
+			ObserveEligibilityResult()
+			
 			return
 		end
-		t_2[p2] = nil
-		var9()
 	end
 	
-	local _ = function(p2)
-		-- upvalues: t (ref), t_2 (ref), t_1 (ref)
-		if t[p2] == nil then return end
-		local var9 = t_2[p2]
+	local _ = function(Value) --[[ Line: 193 | Named "removePending" ]]
+		-- upvalues: Tbl (copy), ObserveEligibilityResults (copy), List (copy)
+		if Tbl[Value] == nil then return end
+		local ObserveEligibilityResult: () -> () = ObserveEligibilityResults[Value]
 		
-		if var9 ~= nil then
-			t_2[p2] = nil
-			var9()
+		if ObserveEligibilityResult ~= nil then
+			ObserveEligibilityResults[Value] = nil
+			ObserveEligibilityResult()
 		end
-		t[p2] = nil
-		local index = table.find(t_1, p2)
+		Tbl[Value] = nil
+		local FoundIndex: number? = table.find(List, Value)
 		
-		if index ~= nil then
-			table.remove(t_1, index)
+		if FoundIndex ~= nil then
+			table.remove(List, FoundIndex)
 		end
 	end
 	
-	local function retainPending(p2)
-		-- upvalues: t (ref), t_1 (ref), t_2 (ref)
-		local id = t[p2.id]
+	local function retainPending(p2) --[[ Line: 205 ]]
+		-- upvalues: Tbl (copy), List (copy), ObserveEligibilityResults (copy)
+		local Entry = Tbl[p2.id]
 		
-		if id ~= nil then
-			return id
+		if Entry ~= nil then
+			return Entry
 		end
-		t[p2.id] = p2
-		table.insert(t_1, p2.id)
-		while #t_1 > 50 do
-			local removed = table.remove(t_1, 1)
+		Tbl[p2.id] = p2
+		table.insert(List, p2.id)
+		while #List > 50 do
+			local Removed = table.remove(List, 1)
 			
-			if removed == nil then continue end
-			local var9 = t_2[removed]
+			if Removed == nil then continue end
+			local ObserveEligibilityResult: () -> () = ObserveEligibilityResults[Removed]
 			
-			if var9 ~= nil then
-				t_2[removed] = nil
-				var9()
+			if ObserveEligibilityResult ~= nil then
+				ObserveEligibilityResults[Removed] = nil
+				ObserveEligibilityResult()
 			end
-			t[removed] = nil
+			Tbl[Removed] = nil
 		end
 		return p2
 	end
 	
-	local _ = function(p3)
-		return if p3.isAwaitingEligibility then false elseif p3.requiresAudienceVerification and p3.isEligiblePublish == nil then not p3.isVerifyingAudience and p3.audienceVerificationAttempts < 3 else p3.storagePersistenceAttempts < 3
+	local _ = function(p3): boolean --[[ Line: 224 | Named "canRetryAutomatically" ]]
+		return not p3.isAwaitingEligibility and (if p3.requiresAudienceVerification and p3.isEligiblePublish == nil then not p3.isVerifyingAudience and p3.audienceVerificationAttempts < 3 else p3.storagePersistenceAttempts < 3)
 	end
 	
-	local _ = function()
-		-- upvalues: t_1 (ref), t (ref)
-		for i, v in t_1 do
-			local var10 = t[v]
+	local _ = function(): boolean --[[ Line: 237 | Named "hasAutomaticallyRetryableEvent" ]]
+		-- upvalues: List (copy), Tbl (copy)
+		for _, value in List do
+			local Entry = Tbl[value]
 			
-			if var10 ~= nil then
-				local var11
-				if var10.isAwaitingEligibility then
-					var11 = false
-				elseif var10.requiresAudienceVerification and var10.isEligiblePublish == nil then
-					var11 = not var10.isVerifyingAudience
-					
-					if var11 then
-						var11 = var10.audienceVerificationAttempts < 3
-						var11 = nil
-					end
-				else
-					var11 = var10.storagePersistenceAttempts < 3
-				end
-				if var11 then
-					return true
-				end
+			if Entry ~= nil and (not Entry.isAwaitingEligibility and (if Entry.requiresAudienceVerification and Entry.isEligiblePublish == nil then not Entry.isVerifyingAudience and Entry.audienceVerificationAttempts < 3 else Entry.storagePersistenceAttempts < 3)) then
+				return true
 			end
 		end
 		return false
 	end
 	
-	local var12 = function()
-		-- upvalues: p1 (ref), var6 (write), t_1 (ref), t (ref), var7 (write), var8 (write), var12 (write)
-		if p1 ~= nil and var6 == nil then
-			local var13
-			for i, v in t_1 do
-				local var14 = t[v]
+	local function v38() --[[ Line: 247 ]]
+		-- upvalues: P6 (copy), ScheduleRetryResult (ref), List (copy), Tbl (copy), Count (ref), Callback (ref), v38 (ref)
+		if P6 ~= nil and ScheduleRetryResult == nil then
+			local Flag = false
+			
+			for _, value in List do
+				local Entry = Tbl[value]
 				
-				if var14 ~= nil then
-					local var15
-					if var14.isAwaitingEligibility then
-						var15 = false
-					elseif var14.requiresAudienceVerification and var14.isEligiblePublish == nil then
-						var15 = not var14.isVerifyingAudience
-						
-						if var15 then
-							var15 = var14.audienceVerificationAttempts < 3
-							var15 = nil
-						end
-					else
-						var15 = var14.storagePersistenceAttempts < 3
-					end
-					if var15 then
-						var13 = true
-						if var13 then
-							var6 = p1.scheduleRetry(1, function()
-								-- upvalues: var6 (copy), var7 (copy), var7 (ref), t_1 (copy), t (copy), var8 (copy), var12 (copy)
-								var6 = nil
-								
-								if var7 ~= var7 then return end
-								local v_1
-								for i, v in table.clone(t_1) do
-									v_1 = t[v]
-									
-									if v_1 ~= nil then
-										local var16
-										if v_1.isAwaitingEligibility then
-											var16 = false
-										elseif v_1.requiresAudienceVerification and v_1.isEligiblePublish == nil then
-											var16 = not v_1.isVerifyingAudience
-											
-											if var16 then
-												var16 = v_1.audienceVerificationAttempts < 3
-												var16 = nil
-											end
-										else
-											var16 = v_1.storagePersistenceAttempts < 3
-										end
-										if var16 then
-											var8(v_1)
-										end
-									end
-								end
-								local var17
-								for i_1, v_1 in t_1 do
-									local var18 = t[v_1]
-									
-									if var18 ~= nil then
-										local var19
-										if var18.isAwaitingEligibility then
-											var19 = false
-										elseif var18.requiresAudienceVerification and var18.isEligiblePublish == nil then
-											var19 = not var18.isVerifyingAudience
-											
-											if var19 then
-												var19 = var18.audienceVerificationAttempts < 3
-												var19 = nil
-											end
-										else
-											var19 = var18.storagePersistenceAttempts < 3
-										end
-										if var19 then
-											var17 = true
-											if var17 then
-												var12()
-											end
-											return
-										end
-									end
-								end
-								var17 = false
-							end)
-							
-							return
-						end
-					end
+				if Entry ~= nil and (not Entry.isAwaitingEligibility and (if Entry.requiresAudienceVerification and Entry.isEligiblePublish == nil then not Entry.isVerifyingAudience and Entry.audienceVerificationAttempts < 3 else Entry.storagePersistenceAttempts < 3)) then
+					Flag = true
+					break
 				end
 			end
-			var13 = false
+			if Flag then
+				local Count1 = Count
+				ScheduleRetryResult = P6.scheduleRetry(1, function() --[[ Line: 252 ]]
+					-- upvalues: ScheduleRetryResult (upval), Count (upval), Count1 (copy), List (upval), Tbl (upval), Callback (upval), v38 (upval)
+					ScheduleRetryResult = nil
+					
+					if Count ~= Count1 then return end
+					for _, value in table.clone(List) do
+						local Entry = Tbl[value]
+						
+						if Entry ~= nil and (not Entry.isAwaitingEligibility and (if Entry.requiresAudienceVerification and Entry.isEligiblePublish == nil then not Entry.isVerifyingAudience and Entry.audienceVerificationAttempts < 3 else Entry.storagePersistenceAttempts < 3)) then
+							Callback(Entry)
+						end
+					end
+					local Flag = false
+					
+					for _, value1 in List do
+						local Entry = Tbl[value1]
+						
+						if Entry ~= nil and (not Entry.isAwaitingEligibility and (if Entry.requiresAudienceVerification and Entry.isEligiblePublish == nil then not Entry.isVerifyingAudience and Entry.audienceVerificationAttempts < 3 else Entry.storagePersistenceAttempts < 3)) then
+							Flag = true
+							break
+						end
+					end
+					if Flag then
+						v38()
+					end
+				end)
+				
+				return
+			end
 		end
 	end
 	
-	local function persistEvent(p3)
-		-- upvalues: p1 (ref), var3 (ref), t (ref), t_2 (ref), t_1 (ref), var12 (write)
-		if p1 == nil then return end
-		local var16, var17
-		local t_3 = {
+	local function persistEvent(p3) --[[ Line: 270 ]]
+		-- upvalues: P6 (copy), FFlagBuildAdUpsellPinnedModule (upval), AfterMessageKeys (copy), Signal2 (copy), Tbl (copy), ObserveEligibilityResults (copy), List (copy), v38 (ref)
+		if P6 == nil then return end
+		local config = {
 			universeId = p3.universeId,
 			sessionId = p3.sessionId,
 			eventId = p3.id,
 			afterMessageKey = p3.afterMessageKey,
 			isEligiblePublish = p3.isEligiblePublish == true
 		}
-		local _ = nil
-		local _ = nil
+		local RecordCompletedTurnResult = nil
+		local RecordCompletedTurnResult2 = nil
 		
 		if p3.isCompletedTurn then
-			local var18, var19 = p1.recordCompletedTurn(t_3)
-			var16 = var18
-			var17 = var19
+			RecordCompletedTurnResult, RecordCompletedTurnResult2 = P6.recordCompletedTurn(config)
 		else
-			local var20, var21 = p1.recordPublish(t_3)
-			var16 = var20
-			var17 = var21
+			RecordCompletedTurnResult, RecordCompletedTurnResult2 = P6.recordPublish(config)
 		end
-		if var17 then
-			var3(function(p4)
+		if RecordCompletedTurnResult2 then
+			if FFlagBuildAdUpsellPinnedModule and p3.afterMessageKey ~= nil then
+				AfterMessageKeys[p3.id] = p3.afterMessageKey
+			end
+			Signal2(function(p4: number): number --[[ Line: 156 ]]
 				return p4 + 1
 			end)
 		end
-		if var16 or var17 then
-			local id = p3.id
+		if RecordCompletedTurnResult or RecordCompletedTurnResult2 then
+			local Id = p3.id
 			
-			if t[id] == nil then return end
-			local var22 = t_2[id]
+			if Tbl[Id] == nil then return end
+			local ObserveEligibilityResult: () -> () = ObserveEligibilityResults[Id]
 			
-			if var22 ~= nil then
-				t_2[id] = nil
-				var22()
+			if ObserveEligibilityResult ~= nil then
+				ObserveEligibilityResults[Id] = nil
+				ObserveEligibilityResult()
 			end
-			t[id] = nil
-			local index = table.find(t_1, id)
+			Tbl[Id] = nil
+			local FoundIndex: number? = table.find(List, Id)
 			
-			if index == nil then
-				return
-			else
-				table.remove(t_1, index)
+			if FoundIndex ~= nil then
+				table.remove(List, FoundIndex)
 				
 				return
 			end
@@ -328,89 +268,100 @@ return function(p1)
 			p3.storagePersistenceAttempts += 1
 			
 			if p3.storagePersistenceAttempts < 3 then
-				var12()
+				v38()
 			end
 		end
 	end
 	
-	local _ = function(p3)
-		-- upvalues: var12 (write)
+	local _ = function(p3) --[[ Line: 304 | Named "handleAudienceVerificationFailure" ]]
+		-- upvalues: v38 (ref)
 		p3.isVerifyingAudience = false
 		p3.audienceVerificationAttempts += 1
 		
 		if p3.audienceVerificationAttempts < 3 then
-			var12()
+			v38()
 		end
 	end
 	
-	local function awaitEligibility(p3, p4)
-		-- upvalues: p1 (ref), var7 (write), t (ref), t_2 (ref), persistEvent (ref)
-		if p1 == nil then return end
+	local function awaitEligibility(p3, p4) --[[ Line: 317 ]]
+		-- upvalues: P6 (copy), Count (ref), Tbl (copy), ObserveEligibilityResults (copy), persistEvent (copy)
+		if P6 == nil then return end
 		p3.isVerifyingAudience = false
 		
 		if p3.isAwaitingEligibility then return end
 		p3.isAwaitingEligibility = true
-		local var16 = nil
-		local var17 = false
-		local var18 = p1.observeEligibility(p3.universeId, function()
-			-- upvalues: var7 (copy), var7 (ref), t (copy), p3 (ref), p1 (copy), var16 (write), t_2 (copy), var17 (write), p4 (ref), persistEvent (copy)
-			if var7 ~= var7 or t[p3.id] ~= p3 then return end
-			local eligibility = p1.getEligibility(p3.universeId)
+		local Count1 = Count
+		local v1 = nil
+		local Flag = false
+		local ObserveEligibilityResult: () -> () = P6.observeEligibility(p3.universeId, function() --[[ Line: 330 | Named "onEligibilityChanged" ]]
+			-- upvalues: Count (upval), Count1 (copy), Tbl (upval), p3 (copy), P6 (upval), v1 (ref), ObserveEligibilityResults (upval), Flag (ref), p4 (copy), persistEvent (upval)
+			if Count ~= Count1 or Tbl[p3.id] ~= p3 then return end
+			local Eligibility = P6.getEligibility(p3.universeId)
 			
-			if not eligibility.isResolved then return end
+			if not Eligibility.isResolved then return end
 			p3.isAwaitingEligibility = false
 			
-			if var16 == nil then
-				var17 = true
+			if v1 == nil then
+				Flag = true
 			else
-				local id = p3.id
-				local var19 = t_2[id]
+				local Id = p3.id
+				local ObserveEligibilityResult: () -> () = ObserveEligibilityResults[Id]
 				
-				if var19 ~= nil then
-					t_2[id] = nil
-					var19()
+				if ObserveEligibilityResult ~= nil then
+					ObserveEligibilityResults[Id] = nil
+					ObserveEligibilityResult()
 				end
 			end
-			p3.isEligiblePublish = p1.getAudience(p4) == p1.publicAudience and (eligibility.isEligible and eligibility.freePromotionsRemaining > 0)
+			p3.isEligiblePublish = P6.getAudience(p4) == P6.publicAudience and (Eligibility.isEligible and Eligibility.freePromotionsRemaining > 0)
 			persistEvent(p3)
 		end)
-		var16 = var18
-		t_2[p3.id] = var18
+		v1 = ObserveEligibilityResult
+		
+		if Flag then
+			ObserveEligibilityResult()
+			
+			return
+		else
+			ObserveEligibilityResults[p3.id] = ObserveEligibilityResult
+		end
 	end
 	
-	var8 = function(p3)
-		-- upvalues: p1 (ref), t (ref), persistEvent (ref), var12 (write), var7 (write), awaitEligibility (ref)
-		if p1 == nil or t[p3.id] ~= p3 then return end
+	Callback = function(p3) --[[ Line: 363 ]]
+		-- upvalues: P6 (copy), Tbl (copy), persistEvent (copy), v38 (ref), Count (ref), awaitEligibility (copy)
+		if P6 == nil or Tbl[p3.id] ~= p3 then return end
 		if not p3.requiresAudienceVerification or p3.isEligiblePublish ~= nil then
 			persistEvent(p3)
 			
 			return
-		elseif p3.isVerifyingAudience or p3.isAwaitingEligibility then return end
+		end
+		if p3.isVerifyingAudience or p3.isAwaitingEligibility then return end
 		p3.isVerifyingAudience = true
-		local ok, status = pcall(p1.refreshSummary, p3.universeId)
+		local Success, Result = pcall(P6.refreshSummary, p3.universeId)
 		
-		if ok and status ~= nil then
-			status:andThen(function(p4)
-				-- upvalues: var7 (copy), var7 (ref), t (copy), p3 (ref), p1 (copy), awaitEligibility (copy), persistEvent (copy)
-				if var7 ~= var7 or t[p3.id] ~= p3 then return end
-				local eligibility = p1.getEligibility(p3.universeId)
+		if Success and Result ~= nil then
+			local Count1 = Count
+			Result:andThen(function(Result) --[[ Line: 382 ]]
+				-- upvalues: Count (upval), Count1 (copy), Tbl (upval), p3 (copy), P6 (upval), awaitEligibility (upval), persistEvent (upval)
+				if Count ~= Count1 or Tbl[p3.id] ~= p3 then return end
+				local Eligibility = P6.getEligibility(p3.universeId)
 				
-				if eligibility.isResolved then
+				if Eligibility.isResolved then
 					p3.isVerifyingAudience = false
-					p3.isEligiblePublish = p1.getAudience(p4) == p1.publicAudience and (eligibility.isEligible and eligibility.freePromotionsRemaining > 0)
+					p3.isEligiblePublish = P6.getAudience(Result) == P6.publicAudience and (Eligibility.isEligible and Eligibility.freePromotionsRemaining > 0)
 					persistEvent(p3)
 					
 					return
+				else
+					awaitEligibility(p3, Result)
 				end
-				awaitEligibility(p3, p4)
-			end, function()
-				-- upvalues: var7 (copy), var7 (ref), t (copy), p3 (ref), var12 (copy)
-				if var7 ~= var7 or t[p3.id] ~= p3 then return end
+			end, function() --[[ Line: 399 ]]
+				-- upvalues: Count (upval), Count1 (copy), Tbl (upval), p3 (copy), v38 (upval)
+				if Count ~= Count1 or Tbl[p3.id] ~= p3 then return end
 				p3.isVerifyingAudience = false
 				p3.audienceVerificationAttempts += 1
 				
 				if p3.audienceVerificationAttempts < 3 then
-					var12()
+					v38()
 				end
 			end)
 			
@@ -420,252 +371,281 @@ return function(p1)
 		p3.audienceVerificationAttempts += 1
 		
 		if p3.audienceVerificationAttempts < 3 then
-			var12()
+			v38()
 		end
 	end
 	
-	local function disposeAllEligibilitySubscriptions()
-		-- upvalues: t_2 (ref)
-		local t = {}
+	local function disposeAllEligibilitySubscriptions() --[[ Line: 527 ]]
+		-- upvalues: ObserveEligibilityResults (copy)
+		local List = {}
 		
-		for i in t_2 do
-			table.insert(t, i)
+		for observeEligibilityResult in ObserveEligibilityResults do
+			table.insert(List, observeEligibilityResult)
 		end
-		for i_1, v in t do
-			local var16 = t_2[v]
+		for _, value in List do
+			local ObserveEligibilityResult: () -> () = ObserveEligibilityResults[value]
 			
-			if var16 ~= nil then
-				t_2[v] = nil
-				var16()
+			if ObserveEligibilityResult ~= nil then
+				ObserveEligibilityResults[value] = nil
+				ObserveEligibilityResult()
 			end
 		end
 	end
 	
 	return {
-		getAdCampaignCard = if fFlagBuildAgentAdCampaignCardModule then function(p3, p4)
-			-- upvalues: p1 (ref)
-			local var17 = if p1 ~= nil then nil else p1.getAdCampaignCardStorage()
+		recordAdCampaignAttempt = if FFlagBuildAgentAdCampaignCardModule then function(p3, p4): boolean --[[ Line: 573 ]]
+			-- upvalues: P6 (copy), Signal2_1 (copy), Signal2 (copy)
+			local AdCampaignCardStorage = if P6 == nil then nil else P6.getAdCampaignCardStorage()
 			
-			return if var17 == nil then { isAvailable = false, isPersisted = false } else var17.get(p3, p4)
+			if AdCampaignCardStorage == nil or not AdCampaignCardStorage.saveAttempt(p3, p4) then
+				return false
+			else
+				Signal2_1(function(p5: number): number --[[ Line: 166 ]]
+					return p5 + 1
+				end)
+				Signal2(function(p5: number): number --[[ Line: 156 ]]
+					return p5 + 1
+				end)
+				
+				return true
+			end
 		end else nil,
-		listAdCampaignCards = if fFlagBuildAgentAdCampaignCardModule then function(p3)
-			-- upvalues: p1 (ref)
-			local var17 = if p1 ~= nil then nil else p1.getAdCampaignCardStorage()
+		getAdCampaignCard = if FFlagBuildAgentAdCampaignCardModule then function(p3, p4) --[[ Line: 583 ]]
+			-- upvalues: P6 (copy)
+			local AdCampaignCardStorage = if P6 == nil then nil else P6.getAdCampaignCardStorage()
 			
-			return if var17 == nil then { isAvailable = false, records = {} } else var17.list(p3)
+			return if AdCampaignCardStorage == nil then { isAvailable = false, isPersisted = false } else AdCampaignCardStorage.get(p3, p4)
 		end else nil,
-		recordAdCampaignCreatedReceipt = if fFlagBuildAgentAdCampaignCardModule then function(p3)
-			-- upvalues: p1 (ref), recordCardMutation (ref)
-			local var17 = if p1 ~= nil then nil else p1.getAdCampaignCardStorage()
+		listAdCampaignCards = if FFlagBuildAgentAdCampaignCardModule then function(p3) --[[ Line: 592 ]]
+			-- upvalues: P6 (copy)
+			local AdCampaignCardStorage = if P6 == nil then nil else P6.getAdCampaignCardStorage()
 			
-			if var17 == nil then
+			return if AdCampaignCardStorage == nil then { isAvailable = false, records = {} } else AdCampaignCardStorage.list(p3)
+		end else nil,
+		recordAdCampaignCreatedReceipt = if FFlagBuildAgentAdCampaignCardModule then function(p3) --[[ Line: 601 ]]
+			-- upvalues: P6 (copy), recordCardMutation (copy)
+			local AdCampaignCardStorage = if P6 == nil then nil else P6.getAdCampaignCardStorage()
+			
+			if AdCampaignCardStorage == nil then
 				return false, false
+			else
+				local HasPendingWrites = AdCampaignCardStorage.hasPendingWrites()
+				local ConfirmResult, ConfirmResult2 = AdCampaignCardStorage.confirm(p3)
+				
+				return recordCardMutation(ConfirmResult, ConfirmResult2, HasPendingWrites)
 			end
-			local var18 = var17.hasPendingWrites()
-			local var19, var20 = var17.confirm(p3)
-			
-			return recordCardMutation(var19, var20, var18)
 		end else nil,
-		retryAdCampaignCardWrites = if fFlagBuildAgentAdCampaignCardModule then function()
-			-- upvalues: p1 (ref), var5 (ref), var3 (ref)
-			local var17 = if p1 ~= nil then nil else p1.getAdCampaignCardStorage()
+		retryAdCampaignCardWrites = if FFlagBuildAgentAdCampaignCardModule then function(): boolean --[[ Line: 612 ]]
+			-- upvalues: P6 (copy), Signal2_1 (copy), Signal2 (copy)
+			local AdCampaignCardStorage = if P6 == nil then nil else P6.getAdCampaignCardStorage()
 			
-			if var17 == nil then
+			if AdCampaignCardStorage == nil then
 				return false
 			end
-			local var18 = var17.hasPendingWrites()
+			local HasPendingWrites = AdCampaignCardStorage.hasPendingWrites()
 			
-			if not var17.retryWrites() then
+			if not AdCampaignCardStorage.retryWrites() then
 				return false
-			elseif var18 then
-				var5(function(p3)
+			end
+			if HasPendingWrites then
+				Signal2_1(function(p3: number): number --[[ Line: 166 ]]
 					return p3 + 1
 				end)
-				var3(function(p3)
+				Signal2(function(p3: number): number --[[ Line: 156 ]]
 					return p3 + 1
 				end)
 			end
 			return true
 		end else nil,
-		pruneAdCampaignCards = if fFlagBuildAgentAdCampaignCardModule then function(p3)
-			-- upvalues: p1 (ref), var5 (ref), var3 (ref)
-			local var17 = if p1 ~= nil then nil else p1.getAdCampaignCardStorage()
+		pruneAdCampaignCards = if FFlagBuildAgentAdCampaignCardModule then function(p3) --[[ Line: 628 ]]
+			-- upvalues: P6 (copy), Signal2_1 (copy), Signal2 (copy)
+			local AdCampaignCardStorage = if P6 == nil then nil else P6.getAdCampaignCardStorage()
 			
-			if var17 == nil then
+			if AdCampaignCardStorage == nil then
 				return false, false
 			end
-			local var18, var19 = var17.prune(p3)
+			local PruneResult, PruneResult2 = AdCampaignCardStorage.prune(p3)
 			
-			if var19 then
-				var5(function(p4)
+			if PruneResult2 then
+				Signal2_1(function(p4: number): number --[[ Line: 166 ]]
 					return p4 + 1
 				end)
-				var3(function(p4)
+				Signal2(function(p4: number): number --[[ Line: 156 ]]
 					return p4 + 1
 				end)
 			end
-			return var18, var19
+			return PruneResult, PruneResult2
 		end else nil,
-		getRevision = var2,
-		getAdCampaignRevision = var4,
-		reportAssistantTurnCompleted = function(p3)
-			-- upvalues: p1 (ref), chatTypesModule (copy), creatorAgentChatModule (copy), retainPending (ref), var8 (write)
-			if p1 == nil or p3.universeId == 0 or p1.isDismissedPermanently(p3.universeId) then return end
-			local var17 = chatTypesModule.makeAssistantTurnAnchorKey(p3.sessionId, p3.latestSequenceId)
+		getRevision = Signal,
+		getAdCampaignRevision = Signal1,
+		reportAssistantTurnCompleted = function(p3) --[[ Line: 407 ]]
+			-- upvalues: P6 (copy), ChatTypesModule (upval), CreatorAgentChatModule (upval), retainPending (copy), Callback (ref)
+			if P6 == nil or p3.universeId == 0 or P6.isDismissedPermanently(p3.universeId) then return end
+			local AssistantTurnAnchorKey = ChatTypesModule.makeAssistantTurnAnchorKey(p3.sessionId, p3.latestSequenceId)
 			
-			if var17 == nil then
-				return
-			end
-			local var18 = creatorAgentChatModule.PublishToolUtils.getLatestSuccessfulResult(p3.turnState, { parseDirectText = true }) ~= nil
-			var8(retainPending({
-				isCompletedTurn = true,
-				isVerifyingAudience = false,
-				isAwaitingEligibility = false,
-				audienceVerificationAttempts = 0,
-				storagePersistenceAttempts = 0,
-				id = `chat:{p3.universeId}:{var17}`,
-				universeId = p3.universeId,
-				sessionId = if p3.sessionId == "" then nil else p3.sessionId,
-				afterMessageKey = var17,
-				isEligiblePublish = if var18 then nil else false,
-				requiresAudienceVerification = var18
-			}))
-		end,
-		reportMenuPublish = function(p3, p4, p5, p6)
-			-- upvalues: p1 (ref), retainPending (ref), var8 (write)
-			if p1 == nil or p3 == 0 or (p5 == "" or p1.isDismissedPermanently(p3)) then
-				return
-			end
-			local eligibility = p1.getEligibility(p3)
-			local var17 = p6 and not eligibility.isResolved
-			var8(retainPending({
-				afterMessageKey = nil,
-				isCompletedTurn = false,
-				isVerifyingAudience = false,
-				isAwaitingEligibility = false,
-				audienceVerificationAttempts = 0,
-				storagePersistenceAttempts = 0,
-				id = `menu:{p3}:{p5}`,
-				universeId = p3,
-				sessionId = if p4 == "" then nil else p4,
-				isEligiblePublish = if var17 then nil else p6 and (eligibility.isEligible and eligibility.freePromotionsRemaining > 0),
-				requiresAudienceVerification = var17
-			}))
-		end,
-		retryStorageRead = function()
-			-- upvalues: fFlagBuildAgentAdCampaignCardModule (copy), p1 (ref), var5 (ref), var3 (ref), t_1 (ref), t (ref), var8 (write)
-			if fFlagBuildAgentAdCampaignCardModule then
-				local var17 = if p1 ~= nil then nil else p1.getAdCampaignCardStorage()
+			if AssistantTurnAnchorKey ~= nil then
+				local HasLatestSuccessfulResult = CreatorAgentChatModule.PublishToolUtils.getLatestSuccessfulResult(p3.turnState, { parseDirectText = true }) ~= nil
+				Callback((retainPending({
+					isCompletedTurn = true,
+					isVerifyingAudience = false,
+					isAwaitingEligibility = false,
+					audienceVerificationAttempts = 0,
+					storagePersistenceAttempts = 0,
+					id = `chat:{p3.universeId}:{AssistantTurnAnchorKey}`,
+					universeId = p3.universeId,
+					sessionId = if p3.sessionId == "" then nil else p3.sessionId,
+					afterMessageKey = AssistantTurnAnchorKey,
+					isEligiblePublish = if HasLatestSuccessfulResult then nil else false,
+					requiresAudienceVerification = HasLatestSuccessfulResult
+				})))
 				
-				if var17 ~= nil and var17.hasPendingWrites() and var17.retryWrites() then
-					var5(function(p3)
+				return
+			end
+		end,
+		reportMenuPublish = function(UniverseId, p3, p4, p5) --[[ Line: 438 ]]
+			-- upvalues: P6 (copy), retainPending (copy), Callback (ref)
+			if P6 ~= nil and UniverseId ~= 0 and p4 ~= "" and not P6.isDismissedPermanently(UniverseId) then
+				local Eligibility = P6.getEligibility(UniverseId)
+				local NoIsResolved: boolean = p5 and not Eligibility.isResolved
+				Callback((retainPending({
+					afterMessageKey = nil,
+					isCompletedTurn = false,
+					isVerifyingAudience = false,
+					isAwaitingEligibility = false,
+					audienceVerificationAttempts = 0,
+					storagePersistenceAttempts = 0,
+					id = `menu:{UniverseId}:{p4}`,
+					universeId = UniverseId,
+					sessionId = if p3 == "" then nil else p3,
+					isEligiblePublish = if NoIsResolved then nil else p5 and (Eligibility.isEligible and Eligibility.freePromotionsRemaining > 0),
+					requiresAudienceVerification = NoIsResolved
+				})))
+				
+				return
+			end
+		end,
+		retryStorageRead = function() --[[ Line: 466 ]]
+			-- upvalues: FFlagBuildAgentAdCampaignCardModule (upval), P6 (copy), Signal2_1 (copy), Signal2 (copy), List (copy), Tbl (copy), Callback (ref)
+			if FFlagBuildAgentAdCampaignCardModule then
+				local AdCampaignCardStorage = if P6 == nil then nil else P6.getAdCampaignCardStorage()
+				
+				if AdCampaignCardStorage ~= nil and AdCampaignCardStorage.hasPendingWrites() and AdCampaignCardStorage.retryWrites() then
+					Signal2_1(function(p3: number): number --[[ Line: 166 ]]
 						return p3 + 1
 					end)
-					var3(function(p3)
+					Signal2(function(p3: number): number --[[ Line: 156 ]]
 						return p3 + 1
 					end)
 				end
 			end
-			if p1 ~= nil and p1.retryStorageRead() then
-				if fFlagBuildAgentAdCampaignCardModule then
-					var5(function(p3)
+			if P6 ~= nil and P6.retryStorageRead() then
+				if FFlagBuildAgentAdCampaignCardModule then
+					Signal2_1(function(p3: number): number --[[ Line: 166 ]]
 						return p3 + 1
 					end)
-					var3(function(p3)
+					Signal2(function(p3: number): number --[[ Line: 156 ]]
 						return p3 + 1
 					end)
 				else
-					var3(function(p3)
+					Signal2(function(p3: number): number --[[ Line: 156 ]]
 						return p3 + 1
 					end)
 				end
-				for i, v in table.clone(t_1) do
-					local var18 = t[v]
+				for _, value in table.clone(List) do
+					local Entry = Tbl[value]
 					
-					if var18 ~= nil then
-						var18.storagePersistenceAttempts = 0
-						var8(var18)
+					if Entry ~= nil then
+						Entry.storagePersistenceAttempts = 0
+						Callback(Entry)
 					end
 				end
 			end
 		end,
-		attachPendingMilestones = function(p3, p4, p5)
-			-- upvalues: p1 (ref), var3 (ref)
-			if p1 ~= nil then
-				p1.attachPendingMilestones(p3, p4, p5)
-				var3(function(p6)
+		attachPendingMilestones = function(p3, p4, p5) --[[ Line: 490 ]]
+			-- upvalues: P6 (copy), Signal2 (copy)
+			if P6 ~= nil then
+				P6.attachPendingMilestones(p3, p4, p5)
+				Signal2(function(p6: number): number --[[ Line: 156 ]]
 					return p6 + 1
 				end)
 			end
 		end,
-		pruneAnchors = function(p3, p4, p5)
-			-- upvalues: p1 (ref), var3 (ref)
-			if p1 == nil then
+		pruneAnchors = function(p3, p4, p5) --[[ Line: 497 ]]
+			-- upvalues: FFlagBuildAdUpsellPinnedModule (upval), P6 (copy), Signal2 (copy)
+			if FFlagBuildAdUpsellPinnedModule or P6 == nil then
 				return false
 			end
-			local var19, var20 = p1.pruneAnchors(p3, p4, p5)
+			local PruneAnchorsResult, PruneAnchorsResult2 = P6.pruneAnchors(p3, p4, p5)
 			
-			if var20 then
-				var3(function(p6)
+			if PruneAnchorsResult2 then
+				Signal2(function(p6: number): number --[[ Line: 156 ]]
 					return p6 + 1
 				end)
 			end
-			return var19
+			return PruneAnchorsResult
 		end,
-		markAnchorImpressed = function(p3, p4, p5)
-			-- upvalues: p1 (ref), var3 (ref)
-			if p1 == nil then
+		getTransientCongratsMessageKey = function(p3) --[[ Line: 512 ]]
+			-- upvalues: FFlagBuildAdUpsellPinnedModule (upval), AfterMessageKeys (copy)
+			return if FFlagBuildAdUpsellPinnedModule then AfterMessageKeys[p3] else nil
+		end,
+		markAnchorImpressed = function(p3, p4, p5) --[[ Line: 516 ]]
+			-- upvalues: P6 (copy), Signal2 (copy)
+			if P6 == nil then
 				return false
 			end
-			local var19 = p1.markAnchorImpressed(p3, p4, p5)
+			local MarkAnchorImpressedResult = P6.markAnchorImpressed(p3, p4, p5)
 			
-			if var19 then
-				var3(function(p6)
+			if MarkAnchorImpressedResult then
+				Signal2(function(p6: number): number --[[ Line: 156 ]]
 					return p6 + 1
 				end)
 			end
-			return var19
+			return MarkAnchorImpressedResult
 		end,
-		dismissPermanently = function(p3)
-			-- upvalues: p1 (ref), t_1 (ref), t (ref), t_2 (ref), var3 (ref)
-			if p1 ~= nil then
-				for i, v in table.clone(t_1) do
-					local var19 = t[v]
+		dismissPermanently = function(UniverseId) --[[ Line: 538 ]]
+			-- upvalues: P6 (copy), List (copy), Tbl (copy), ObserveEligibilityResults (copy), Signal2 (copy)
+			if P6 ~= nil then
+				for _, value in table.clone(List) do
+					local Entry = Tbl[value]
 					
-					if var19 ~= nil and var19.universeId == p3 and t[v] ~= nil then
-						local var20 = t_2[v]
+					if Entry ~= nil and Entry.universeId == UniverseId and Tbl[value] ~= nil then
+						local ObserveEligibilityResult: () -> () = ObserveEligibilityResults[value]
 						
-						if var20 ~= nil then
-							t_2[v] = nil
-							var20()
+						if ObserveEligibilityResult ~= nil then
+							ObserveEligibilityResults[value] = nil
+							ObserveEligibilityResult()
 						end
-						t[v] = nil
-						local index = table.find(t_1, v)
+						Tbl[value] = nil
+						local FoundIndex: number? = table.find(List, value)
 						
-						if index ~= nil then
-							table.remove(t_1, index)
+						if FoundIndex ~= nil then
+							table.remove(List, FoundIndex)
 						end
 					end
 				end
-				p1.dismissPermanently(p3)
-				var3(function(p4)
-					return p4 + 1
+				P6.dismissPermanently(UniverseId)
+				Signal2(function(p3: number): number --[[ Line: 156 ]]
+					return p3 + 1
 				end)
 			end
 		end,
-		reset = function()
-			-- upvalues: var7 (write), p1 (ref), var6 (write), disposeAllEligibilitySubscriptions (ref), t (ref), t_1 (ref), var3 (ref), var5 (ref)
-			var7 += 1
+		reset = function() --[[ Line: 555 ]]
+			-- upvalues: Count (ref), P6 (copy), ScheduleRetryResult (ref), disposeAllEligibilitySubscriptions (copy), Tbl (copy), List (copy), FFlagBuildAdUpsellPinnedModule (upval), AfterMessageKeys (copy), Signal2 (copy), Signal2_1 (copy)
+			Count += 1
 			
-			if p1 ~= nil and var6 ~= nil then
-				p1.cancelRetry(var6)
+			if P6 ~= nil and ScheduleRetryResult ~= nil then
+				P6.cancelRetry(ScheduleRetryResult)
 			end
-			var6 = nil
+			ScheduleRetryResult = nil
 			disposeAllEligibilitySubscriptions()
-			table.clear(t)
-			table.clear(t_1)
-			var3(0)
-			var5(0)
+			table.clear(Tbl)
+			table.clear(List)
+			
+			if FFlagBuildAdUpsellPinnedModule then
+				table.clear(AfterMessageKeys)
+			end
+			Signal2(0)
+			Signal2_1(0)
 		end
 	}
 end

@@ -1,49 +1,54 @@
-﻿local purchasePrompt = script:FindFirstAncestor("PurchasePrompt")
-local parent = purchasePrompt.Parent
-local deriveCartPricingView = require(parent.IAPExperience).deriveCartPricingView
-local productTypeEnum = require(purchasePrompt.types).ProductTypeEnum
-local requestTypeModule = require(purchasePrompt.Enums.RequestType)
-local fFlagEnableInExperienceOffersPurchaseFlow = require(parent.SharedFlags).FFlagEnableInExperienceOffersPurchaseFlow
+﻿local PurchasePrompt = script:FindFirstAncestor("PurchasePrompt")
+local Parent = PurchasePrompt.Parent
+local DeriveCartPricingViewFunction = require(Parent.IAPExperience).deriveCartPricingView
+local ProductTypeEnum = require(PurchasePrompt.types).ProductTypeEnum
+local RequestTypeModule = require(PurchasePrompt.Enums.RequestType)
+local FFlagEnableInExperienceOffersPurchaseFlow = require(Parent.SharedFlags).FFlagEnableInExperienceOffersPurchaseFlow
 
-local function _(p1, p2)
-	-- upvalues: productTypeEnum (ref), fFlagEnableInExperienceOffersPurchaseFlow (ref), requestTypeModule (ref)
+local function _(p1, GamePass): boolean --[[ Line: 45 | Named "isCartPricingKind" ]]
+	-- upvalues: ProductTypeEnum (copy), FFlagEnableInExperienceOffersPurchaseFlow (copy), RequestTypeModule (copy)
 	if type(p1) == "table" then
-		local kind = p1.kind
+		local Kind = p1.kind
 		
-		return kind == productTypeEnum.Asset or kind == productTypeEnum.Bundle or kind == productTypeEnum.Look or fFlagEnableInExperienceOffersPurchaseFlow and (p2 == requestTypeModule.GamePass or p2 == requestTypeModule.Product)
+		if Kind == ProductTypeEnum.Asset or Kind == ProductTypeEnum.Bundle or Kind == ProductTypeEnum.Look then
+			return true
+		end
 	end
+	return FFlagEnableInExperienceOffersPurchaseFlow and (GamePass == RequestTypeModule.GamePass or GamePass == RequestTypeModule.Product) or false
 end
 
-return function(p1)
-	-- upvalues: productTypeEnum (ref), fFlagEnableInExperienceOffersPurchaseFlow (ref), requestTypeModule (ref), deriveCartPricingView (ref)
+return function(p1) --[[ Line: 61 | Named "selectCartPricingOverride" ]]
+	-- upvalues: ProductTypeEnum (copy), FFlagEnableInExperienceOffersPurchaseFlow (copy), RequestTypeModule (copy), DeriveCartPricingViewFunction (copy)
 	if p1 == nil then
 		return nil
 	end
-	local var1
-	local productPayload = p1.productPayload
-	local requestType = p1.promptRequest and p1.promptRequest.requestType
+	local ProductPayload = p1.productPayload
+	local RequestType = p1.promptRequest and p1.promptRequest.requestType
+	local IsRequestTypeMatch = nil
+	repeat
+		if type(ProductPayload) == "table" then
+			local Kind = ProductPayload.kind
+			
+			if Kind == ProductTypeEnum.Asset or Kind == ProductTypeEnum.Bundle or Kind == ProductTypeEnum.Look then
+				IsRequestTypeMatch = true
+				break
+			end
+		end
+		IsRequestTypeMatch = FFlagEnableInExperienceOffersPurchaseFlow and (RequestType == RequestTypeModule.GamePass or RequestType == RequestTypeModule.Product) or false
+	until true
+	if not IsRequestTypeMatch then
+		return nil
+	end
+	local CartPricing = p1.cartPricing
 	
-	if type(productPayload) == "table" then
-		local kind = productPayload.kind
+	if CartPricing == nil then
+		return nil
+	else
+		local DeriveCartPricingViewResult = DeriveCartPricingViewFunction(CartPricing.response)
 		
-		if kind == productTypeEnum.Asset or kind == productTypeEnum.Bundle or kind == productTypeEnum.Look then
-			var1 = true
-		elseif fFlagEnableInExperienceOffersPurchaseFlow and requestType ~= requestTypeModule.GamePass then
-			var1 = requestType ~= requestTypeModule.Product
-		end
-		if not var1 then
-			return nil
-		end
-		local cartPricing = p1.cartPricing
-		
-		if cartPricing == nil then
-			return nil
-		end
-		productPayload = deriveCartPricingView(cartPricing.response)
-		
-		return if productPayload == nil then nil else {
-			priceInRobux = productPayload.priceAfterDiscount,
-			basePriceInRobux = productPayload.originalPrice
+		return if DeriveCartPricingViewResult == nil then nil else {
+			priceInRobux = DeriveCartPricingViewResult.priceAfterDiscount,
+			basePriceInRobux = DeriveCartPricingViewResult.originalPrice
 		}
 	end
 end

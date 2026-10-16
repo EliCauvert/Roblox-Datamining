@@ -1,23 +1,24 @@
-﻿local squadsCore = script:FindFirstAncestor("SquadsCore")
-local parent = squadsCore.Parent
-local networkingSquadsModule = require(squadsCore.Http.NetworkingSquads)
-local squadPromptTypeModule = require(squadsCore.Enums.SquadPromptType)
-local promiseModule = require(parent.Promise)
-local squadsCore_1 = require(parent.Loggers).Logger:new("SquadsCore")
+﻿local SquadsCore = script:FindFirstAncestor("SquadsCore")
+local Parent = SquadsCore.Parent
+local NetworkingSquadsModule = require(SquadsCore.Http.NetworkingSquads)
+local SquadPromptTypeModule = require(SquadsCore.Enums.SquadPromptType)
+local Logger = require(Parent.Loggers).Logger
+local PromiseModule = require(Parent.Promise)
+local SquadsCore1 = Logger.new(Logger, "SquadsCore")
 
-return function(p1, p2)
-	-- upvalues: networkingSquadsModule (ref), squadsCore_1 (ref), squadPromptTypeModule (ref), promiseModule (ref)
-	return function(p3)
-		-- upvalues: networkingSquadsModule (copy), p1 (ref), squadsCore_1 (copy), p2 (ref), squadPromptTypeModule (copy), promiseModule (copy)
-		return p3:dispatch(networkingSquadsModule.ReinviteToSquad.API({ squadId = p1 })):catch(function(p4)
-			-- upvalues: squadsCore_1 (copy), p2 (copy), p3 (ref), squadPromptTypeModule (copy), promiseModule (copy)
-			squadsCore_1:warning("Error reinviting parent channel participants to squad: {}", if p4.StatusCode then p4.StatusCode else -1)
-			p2(p3, {
+return function(SquadId, Callback) --[[ Line: 12 ]]
+	-- upvalues: NetworkingSquadsModule (copy), SquadsCore1 (copy), SquadPromptTypeModule (copy), PromiseModule (copy)
+	return function(p1) --[[ Line: 13 ]]
+		-- upvalues: NetworkingSquadsModule (upval), SquadId (copy), SquadsCore1 (upval), Callback (copy), SquadPromptTypeModule (upval), PromiseModule (upval)
+		return p1:dispatch(NetworkingSquadsModule.ReinviteToSquad.API({ squadId = SquadId })):catch(function(Err) --[[ Line: 14 ]]
+			-- upvalues: SquadsCore1 (upval), Callback (upval), p1 (copy), SquadPromptTypeModule (upval), PromiseModule (upval)
+			SquadsCore1:warning("Error reinviting parent channel participants to squad: {}", if Err.StatusCode then Err.StatusCode else -1)
+			Callback(p1, {
 				hideCancelButton = true,
-				promptType = squadPromptTypeModule.Error
+				promptType = SquadPromptTypeModule.Error
 			})
 			
-			return promiseModule.reject(p4)
+			return PromiseModule.reject(Err)
 		end)
 	end
 end

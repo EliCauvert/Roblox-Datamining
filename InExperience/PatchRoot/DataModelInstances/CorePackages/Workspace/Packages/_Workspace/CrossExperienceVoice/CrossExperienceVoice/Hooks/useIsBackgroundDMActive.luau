@@ -1,9 +1,9 @@
-﻿local useBackgroundExperienceModule = require(script:FindFirstAncestor("CrossExperienceVoice").Hooks.useBackgroundExperience)
+﻿local UseBackgroundExperienceModule = require(script:FindFirstAncestor("CrossExperienceVoice").Hooks.useBackgroundExperience)
 
-return function()
-	-- upvalues: useBackgroundExperienceModule (ref)
-	local var1 = useBackgroundExperienceModule()
-	local jobId = var1 and var1.jobId
+return function(): boolean --[[ Line: 5 ]]
+	-- upvalues: UseBackgroundExperienceModule (copy)
+	local UseBackgroundExperienceModuleResult = UseBackgroundExperienceModule()
+	local JobId = UseBackgroundExperienceModuleResult and UseBackgroundExperienceModuleResult.jobId
 	
-	return jobId ~= nil and jobId ~= ""
+	return JobId ~= nil and JobId ~= ""
 end

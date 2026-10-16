@@ -1,11 +1,11 @@
-﻿return function(p1, p2)
+﻿return function(p1, p2) --[[ Line: 1 | Named "makeHttpServiceMock" ]]
 	return {
-		RequestInternal = function(_)
-			-- upvalues: p1 (ref), p2 (ref)
+		RequestInternal = function(_) --[[ Line: 3 ]]
+			-- upvalues: p1 (copy), p2 (copy)
 			return {
-				Start = function(_, p3)
-					-- upvalues: p1 (copy), p2 (copy)
-					p3(p1, p2)
+				Start = function(_, Callback: (any, any) -> ()) --[[ Line: 5 ]]
+					-- upvalues: p1 (upval), p2 (upval)
+					Callback(p1, p2)
 				end
 			}
 		end

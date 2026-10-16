@@ -1,10 +1,10 @@
-﻿local dashModule = require(script:FindFirstAncestor("AvatarExperienceCommon").Parent.Dash)
-local getTryOnItemReducerKeyModule = require(script.Parent.getTryOnItemReducerKey)
+﻿local DashModule = require(script:FindFirstAncestor("AvatarExperienceCommon").Parent.Dash)
+local GetTryOnItemReducerKeyModule = require(script.Parent.getTryOnItemReducerKey)
 
-return function(a, b, p1)
-	-- upvalues: getTryOnItemReducerKeyModule (ref), dashModule (ref)
-	return if p1 then a[getTryOnItemReducerKeyModule(tostring(b), p1)] else dashModule.find(a, function(p2)
-		-- upvalues: b (ref)
-		return tostring(p2.itemId) == tostring(b)
+return function(p1, p2, p3) --[[ Line: 8 | Named "findItemInTryOnItems" ]]
+	-- upvalues: GetTryOnItemReducerKeyModule (copy), DashModule (copy)
+	return if p3 then p1[GetTryOnItemReducerKeyModule(tostring(p2), p3)] else DashModule.find(p1, function(p4): boolean --[[ Line: 19 ]]
+		-- upvalues: p2 (copy)
+		return tostring(p4.itemId) == tostring(p2)
 	end)
 end

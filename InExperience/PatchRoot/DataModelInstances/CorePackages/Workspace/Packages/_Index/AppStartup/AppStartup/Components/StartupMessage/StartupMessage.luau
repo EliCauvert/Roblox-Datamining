@@ -1,96 +1,99 @@
-﻿local parent = script:FindFirstAncestor("AppStartup").Parent
-local dashModule = require(parent.Dash)
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local images = UIBloxModule.App.ImageSet.Images
-local linkButton = UIBloxModule.App.Button.LinkButton
-local startupMessageActionButtonEnabledEngineFeature = game:GetEngineFeature("StartupMessageActionButtonEnabled")
+﻿local Parent = script:FindFirstAncestor("AppStartup").Parent
+local DashModule = require(Parent.Dash)
+local ReactModule = require(Parent.React)
+local UIBloxModule = require(Parent.UIBlox)
+local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local Images = UIBloxModule.App.ImageSet.Images
+local LinkButton = UIBloxModule.App.Button.LinkButton
+local StartupMessageActionButtonEnabledEngineFeature = game:GetEngineFeature("StartupMessageActionButtonEnabled")
 
-return function(p1)
-	-- upvalues: startupMessageActionButtonEnabledEngineFeature (ref), buttonType (ref), dashModule (ref), reactModule (ref), linkButton (ref), interactiveAlert (ref), images (ref)
-	local localizedStrings = p1.localizedStrings
-	local message = p1.message
-	local overlayColor = p1.overlayColor
-	local onDismissed = p1.onDismissed
-	local onActionButtonActivated = p1.onActionButtonActivated
-	local screenSize = p1.screenSize
-	local var1 = if startupMessageActionButtonEnabledEngineFeature then localizedStrings.actionButtonText else nil
-	local var2 = nil
+return function(p1) --[[ Line: 44 | Named "StartupMessage" ]]
+	-- upvalues: StartupMessageActionButtonEnabledEngineFeature (copy), ButtonType (copy), DashModule (copy), ReactModule (copy), LinkButton (copy), InteractiveAlert (copy), Images (copy)
+	local LocalizedStrings = p1.localizedStrings
+	local Message = p1.message
+	local OverlayColor = p1.overlayColor
+	local OnDismissed = p1.onDismissed
+	local OnActionButtonActivated = p1.onActionButtonActivated
+	local ScreenSize = p1.screenSize
+	local ActionButtonText = if StartupMessageActionButtonEnabledEngineFeature then LocalizedStrings.actionButtonText else nil
+	local v1 = nil
 	
-	if startupMessageActionButtonEnabledEngineFeature then
-		local t = {}
+	if StartupMessageActionButtonEnabledEngineFeature then
+		local List = {}
 		
-		if var1 then
-			table.insert(t, {
-				buttonType = buttonType.PrimaryContextual,
-				props = { onActivated = onActionButtonActivated, text = var1 }
-			})
-		end
-		if not message.isBlocking then
-			table.insert(t, {
-				buttonType = if var1 then buttonType.Secondary else buttonType.PrimarySystem,
+		if ActionButtonText then
+			table.insert(List, {
+				buttonType = ButtonType.PrimaryContextual,
 				props = {
-					onActivated = onDismissed,
-					text = localizedStrings.buttonText
+					onActivated = OnActionButtonActivated,
+					text = ActionButtonText
 				}
 			})
 		end
-		var2 = if #t > 0 then { buttons = t } else nil
+		if not Message.isBlocking then
+			table.insert(List, {
+				buttonType = if ActionButtonText then ButtonType.Secondary else ButtonType.PrimarySystem,
+				props = {
+					onActivated = OnDismissed,
+					text = LocalizedStrings.buttonText
+				}
+			})
+		end
+		v1 = if #List > 0 then { buttons = List } else nil
 	end
-	local var3 = dashModule.map(p1.localizedLinks, function(p2)
-		-- upvalues: reactModule (copy), linkButton (copy), p1 (ref)
-		return reactModule.createElement(linkButton, {
+	local MapResult = DashModule.map(p1.localizedLinks, function(p2) --[[ Line: 80 ]]
+		-- upvalues: ReactModule (upval), LinkButton (upval), p1 (copy)
+		return ReactModule.createElement(LinkButton, {
 			text = p2.label,
-			onActivated = function()
-				-- upvalues: p1 (copy), p2 (ref)
+			onActivated = function() --[[ Line: 83 ]]
+				-- upvalues: p1 (upval), p2 (copy)
 				p1.onOpenUrl(p2.url, p2.label)
 			end
 		})
 	end)
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		Active = true,
 		SelectionGroup = true,
 		Size = UDim2.new(1, 0, 1, 0),
 		Position = UDim2.new(0, 0, 0, 0),
-		BackgroundTransparency = if message.isBlocking then 0 else overlayColor.Transparency,
-		BackgroundColor3 = overlayColor.Color3,
+		BackgroundTransparency = if Message.isBlocking then 0 else OverlayColor.Transparency,
+		BackgroundColor3 = OverlayColor.Color3,
 		ref = p1.focusNavRef,
 		SelectionBehaviorDown = Enum.SelectionBehavior.Stop,
 		SelectionBehaviorUp = Enum.SelectionBehavior.Stop,
 		SelectionBehaviorLeft = Enum.SelectionBehavior.Stop,
 		SelectionBehaviorRight = Enum.SelectionBehavior.Stop
 	}, {
-		InteractiveAlert = reactModule.createElement(interactiveAlert, {
-			screenSize = screenSize,
-			title = localizedStrings.titleText or "",
-			bodyText = localizedStrings.bodyText or "",
-			titleIcon = images["icons/status/error_large"],
-			middleContent = function()
-				-- upvalues: reactModule (copy), dashModule (copy), var3 (ref)
-				return reactModule.createElement("Frame", {
+		InteractiveAlert = ReactModule.createElement(InteractiveAlert, {
+			screenSize = ScreenSize,
+			title = LocalizedStrings.titleText or "",
+			bodyText = LocalizedStrings.bodyText or "",
+			titleIcon = Images["icons/status/error_large"],
+			middleContent = function() --[[ Line: 107 ]]
+				-- upvalues: ReactModule (upval), DashModule (upval), MapResult (copy)
+				return ReactModule.createElement("Frame", {
 					BorderSizePixel = 0,
 					BackgroundTransparency = 1,
 					Size = UDim2.fromScale(1, 0),
 					AutomaticSize = Enum.AutomaticSize.Y
-				}, dashModule.append({
-					UIListLayout = reactModule.createElement("UIListLayout", {
+				}, DashModule.append({
+					UIListLayout = ReactModule.createElement("UIListLayout", {
 						SortOrder = Enum.SortOrder.LayoutOrder,
 						FillDirection = Enum.FillDirection.Vertical,
 						VerticalAlignment = Enum.VerticalAlignment.Top,
 						HorizontalAlignment = Enum.HorizontalAlignment.Center
 					})
-				}, var3))
+				}, MapResult))
 			end,
-			buttonStackInfo = if startupMessageActionButtonEnabledEngineFeature then var2 elseif message.isBlocking then nil else {
+			buttonStackInfo = if StartupMessageActionButtonEnabledEngineFeature then v1 elseif Message.isBlocking then nil else {
 				buttons = {
 					{
-						buttonType = buttonType.PrimarySystem,
+						buttonType = ButtonType.PrimarySystem,
 						props = {
-							onActivated = onDismissed,
-							text = localizedStrings.buttonText
+							onActivated = OnDismissed,
+							text = LocalizedStrings.buttonText
 						}
 					}
 				}

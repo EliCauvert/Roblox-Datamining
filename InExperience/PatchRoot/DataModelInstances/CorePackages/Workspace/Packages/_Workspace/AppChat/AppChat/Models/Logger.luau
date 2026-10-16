@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("AppChat").Logger):new("RoactChat.Models")
+﻿return (require(script:FindFirstAncestor("AppChat").Logger):new("RoactChat.Models"))

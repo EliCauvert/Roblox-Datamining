@@ -1,50 +1,50 @@
-﻿local reactModule = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.React)
-local userInputService = game:GetService("UserInputService")
+﻿local ReactModule = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.React)
+local UserInputService = game:GetService("UserInputService")
 
-return function()
-	-- upvalues: reactModule (ref), userInputService (ref)
-	local var1, var2 = reactModule.useState(false)
-	local var3, var4 = reactModule.useState(0)
-	local var5, var6 = reactModule.useState(0)
-	reactModule.useEffect(function()
-		-- upvalues: userInputService (copy), var2 (ref), var4 (ref), var6 (ref)
-		local function updateKeyboardState()
-			-- upvalues: userInputService (copy), var2 (copy), var4 (copy), var6 (copy)
-			local onScreenKeyboardVisible = userInputService.OnScreenKeyboardVisible
-			local y = userInputService.OnScreenKeyboardSize.Y
-			local y_1 = userInputService.OnScreenKeyboardPosition.Y
-			var2(onScreenKeyboardVisible)
-			var4(if onScreenKeyboardVisible then y else 0)
-			var6(if onScreenKeyboardVisible then y_1 else 0)
+return function() --[[ Line: 14 ]]
+	-- upvalues: ReactModule (copy), UserInputService (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(0)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(0)
+	ReactModule.useEffect(function() --[[ Line: 19 ]]
+		-- upvalues: UserInputService (upval), UseStateResult2 (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy)
+		local function updateKeyboardState() --[[ Line: 20 ]]
+			-- upvalues: UserInputService (upval), UseStateResult2 (upval), UseStateResult2_1 (upval), UseStateResult2_2 (upval)
+			local OnScreenKeyboardVisible = UserInputService.OnScreenKeyboardVisible
+			local Y = UserInputService.OnScreenKeyboardSize.Y
+			local Y1 = UserInputService.OnScreenKeyboardPosition.Y
+			UseStateResult2(OnScreenKeyboardVisible)
+			UseStateResult2_1(if OnScreenKeyboardVisible then Y else 0)
+			UseStateResult2_2(if OnScreenKeyboardVisible then Y1 else 0)
 		end
 		
-		local onScreenKeyboardVisible = userInputService.OnScreenKeyboardVisible
-		local y = userInputService.OnScreenKeyboardSize.Y
-		local y_1 = userInputService.OnScreenKeyboardPosition.Y
-		var2(onScreenKeyboardVisible)
-		var4(if onScreenKeyboardVisible then y else 0)
-		var6(if onScreenKeyboardVisible then y_1 else 0)
-		local var7 = userInputService:GetPropertyChangedSignal("OnScreenKeyboardVisible"):Connect(updateKeyboardState)
-		local var8 = userInputService:GetPropertyChangedSignal("OnScreenKeyboardSize"):Connect(updateKeyboardState)
-		local var9 = userInputService:GetPropertyChangedSignal("OnScreenKeyboardPosition"):Connect(updateKeyboardState)
+		local OnScreenKeyboardVisible = UserInputService.OnScreenKeyboardVisible
+		local Y = UserInputService.OnScreenKeyboardSize.Y
+		local Y1 = UserInputService.OnScreenKeyboardPosition.Y
+		UseStateResult2(OnScreenKeyboardVisible)
+		UseStateResult2_1(if OnScreenKeyboardVisible then Y else 0)
+		UseStateResult2_2(if OnScreenKeyboardVisible then Y1 else 0)
+		local Connection = UserInputService:GetPropertyChangedSignal("OnScreenKeyboardVisible"):Connect(updateKeyboardState)
+		local Connection1 = UserInputService:GetPropertyChangedSignal("OnScreenKeyboardSize"):Connect(updateKeyboardState)
+		local Connection2 = UserInputService:GetPropertyChangedSignal("OnScreenKeyboardPosition"):Connect(updateKeyboardState)
 		
-		return function()
-			-- upvalues: var7 (ref), var8 (ref), var9 (ref)
-			if var7 then
-				var7:Disconnect()
+		return function() --[[ Line: 38 ]]
+			-- upvalues: Connection (copy), Connection1 (copy), Connection2 (copy)
+			if Connection then
+				Connection:Disconnect()
 			end
-			if var8 then
-				var8:Disconnect()
+			if Connection1 then
+				Connection1:Disconnect()
 			end
-			if var9 then
-				var9:Disconnect()
+			if Connection2 then
+				Connection2:Disconnect()
 			end
 		end
 	end, {})
 	
 	return {
-		isKeyboardShowing = var1,
-		onScreenKeyboardHeight = var3,
-		keyboardPositionY = var5
+		isKeyboardShowing = UseStateResult,
+		onScreenKeyboardHeight = UseStateResult1,
+		keyboardPositionY = UseStateResult3
 	}
 end

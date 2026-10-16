@@ -1,49 +1,50 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local localizationService = game:GetService("LocalizationService")
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local numberLocalization = require(parent.Localization).NumberLocalization
-local useOpenRobuxUpsellModule = require(profilePlatform.Components.InspectAvatar.useOpenRobuxUpsell)
-local view = foundationModule.View
-local text = foundationModule.Text
-local dialog = foundationModule.Dialog
-local dialogSize = foundationModule.Enums.DialogSize
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local orientation = foundationModule.Enums.Orientation
-local iconName = foundationModule.Enums.IconName
-local getIconRichText = foundationModule.Utility.getIconRichText
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local LocalizationService = game:GetService("LocalizationService")
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local NumberLocalization = require(Parent.Localization).NumberLocalization
+local UseOpenRobuxUpsellModule = require(ProfilePlatform.Components.InspectAvatar.useOpenRobuxUpsell)
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local Dialog = FoundationModule.Dialog
+local DialogSize = FoundationModule.Enums.DialogSize
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local Orientation = FoundationModule.Enums.Orientation
+local IconName = FoundationModule.Enums.IconName
+local GetIconRichTextFunction = FoundationModule.Utility.getIconRichText
 
-local function AmountLine(p1)
-	-- upvalues: numberLocalization (ref), localizationService (ref), reactModule (ref), view (ref), text (ref), getIconRichText (ref), iconName (ref)
-	local var1 = if p1.isAlert then "text-title-medium content-alert" else "text-body-medium content-default"
+local function AmountLine(p1) --[[ Line: 23 ]]
+	-- upvalues: NumberLocalization (copy), LocalizationService (copy), ReactModule (copy), View (copy), Text (copy), GetIconRichTextFunction (copy), IconName (copy)
+	local TextTitleMediumContentAlert: string = if p1.isAlert then "text-title-medium content-alert" else "text-body-medium content-default"
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "row align-y-center gap-large size-full-0 auto-y",
 		LayoutOrder = p1.layoutOrder
 	}, {
-		Label = reactModule.createElement(view, { LayoutOrder = 1, tag = "fill auto-y" }, {
-			Text = reactModule.createElement(text, {
+		Label = ReactModule.createElement(View, { LayoutOrder = 1, tag = "fill auto-y" }, {
+			Text = ReactModule.createElement(Text, {
 				Text = p1.label,
-				tag = `auto-xy text-align-x-left {var1}`
+				tag = `auto-xy text-align-x-left {TextTitleMediumContentAlert}`
 			})
 		}),
-		Amount = reactModule.createElement(view, { LayoutOrder = 2, tag = "auto-xy" }, {
-			Text = reactModule.createElement(text, {
+		Amount = ReactModule.createElement(View, { LayoutOrder = 2, tag = "auto-xy" }, {
+			Text = ReactModule.createElement(Text, {
 				RichText = true,
-				Text = `{getIconRichText(iconName.Robux)} {numberLocalization.localize(p1.amount, localizationService.RobloxLocaleId)}`,
-				tag = `auto-xy text-align-x-right {var1}`
+				Text = `{GetIconRichTextFunction(IconName.Robux)} {NumberLocalization.localize(p1.amount, LocalizationService.RobloxLocaleId)}`,
+				tag = `auto-xy text-align-x-right {TextTitleMediumContentAlert}`
 			})
 		})
 	})
 end
 
-return function(p1)
-	-- upvalues: useLocalization (ref), useOpenRobuxUpsellModule (ref), reactModule (ref), dialog (ref), dialogSize (ref), view (ref), AmountLine (ref), orientation (ref), buttonVariant (ref)
-	local totalPrice = p1.totalPrice
-	local robuxBalance = p1.robuxBalance
-	local var1 = useLocalization({
+return function(p1) --[[ Line: 64 | Named "RecentActivityInsufficientRobuxDialog" ]]
+	-- upvalues: UseLocalizationFunction (copy), UseOpenRobuxUpsellModule (copy), ReactModule (copy), Dialog (copy), DialogSize (copy), View (copy), AmountLine (copy), Orientation (copy), ButtonVariant (copy)
+	local TotalPrice = p1.totalPrice
+	local RobuxBalance = p1.robuxBalance
+	local Largest = math.max(TotalPrice - RobuxBalance, 0)
+	local UseLocalizationResult = UseLocalizationFunction({
 		title = "IAPExperience.InsufficientRobux.Title.InsufficientRobux",
 		currentBalance = "IAPExperience.InsufficientRobux.Text.CurrentBalance",
 		missingRobux = "IAPExperience.InsufficientRobux.Text.MissingRobux",
@@ -51,50 +52,50 @@ return function(p1)
 		buyRobux = "IAPExperience.InsufficientRobux.Action.BuyRobux"
 	})
 	
-	return reactModule.createElement(dialog.Root, {
+	return ReactModule.createElement(Dialog.Root, {
 		hasBackdrop = true,
 		disablePortal = false,
-		size = dialogSize.Small,
+		size = DialogSize.Small,
 		onClose = p1.onClose
 	}, {
-		Title = reactModule.createElement(dialog.Title, { LayoutOrder = 1, text = var1.title }),
-		Content = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
-			PriceBoxPadding = reactModule.createElement(view, { tag = "size-full-0 auto-y padding-xxsmall" }, {
-				PriceBox = reactModule.createElement(view, {
+		Title = ReactModule.createElement(Dialog.Title, { LayoutOrder = 1, text = UseLocalizationResult.title }),
+		Content = ReactModule.createElement(Dialog.Content, { LayoutOrder = 2 }, {
+			PriceBoxPadding = ReactModule.createElement(View, { tag = "size-full-0 auto-y padding-xxsmall" }, {
+				PriceBox = ReactModule.createElement(View, {
 					tag = "col gap-large size-full-0 auto-y padding-medium stroke-standard stroke-default radius-medium"
 				}, {
-					BalanceLines = reactModule.createElement(view, {
+					BalanceLines = ReactModule.createElement(View, {
 						LayoutOrder = 1,
 						tag = "col gap-xsmall size-full-0 auto-y"
 					}, {
-						CurrentBalance = reactModule.createElement(AmountLine, {
+						CurrentBalance = ReactModule.createElement(AmountLine, {
 							layoutOrder = 1,
-							label = var1.currentBalance,
-							amount = robuxBalance
+							label = UseLocalizationResult.currentBalance,
+							amount = RobuxBalance
 						}),
-						MissingRobux = reactModule.createElement(AmountLine, {
+						MissingRobux = ReactModule.createElement(AmountLine, {
 							layoutOrder = 2,
 							isAlert = true,
-							label = var1.missingRobux,
-							amount = math.max(totalPrice - robuxBalance, 0)
+							label = UseLocalizationResult.missingRobux,
+							amount = Largest
 						})
 					}),
-					OrderTotal = reactModule.createElement(AmountLine, {
+					OrderTotal = ReactModule.createElement(AmountLine, {
 						layoutOrder = 2,
-						label = var1.orderTotal,
-						amount = totalPrice
+						label = UseLocalizationResult.orderTotal,
+						amount = TotalPrice
 					})
 				})
 			})
 		}),
-		Actions = reactModule.createElement(dialog.Actions, {
+		Actions = ReactModule.createElement(Dialog.Actions, {
 			LayoutOrder = 3,
-			orientation = orientation.Horizontal,
+			orientation = Orientation.Horizontal,
 			actions = {
 				{
-					text = var1.buyRobux,
-					variant = buttonVariant.Emphasis,
-					onActivated = useOpenRobuxUpsellModule(totalPrice, p1.onClose)
+					text = UseLocalizationResult.buyRobux,
+					variant = ButtonVariant.Emphasis,
+					onActivated = UseOpenRobuxUpsellModule(TotalPrice, p1.onClose)
 				}
 			}
 		})

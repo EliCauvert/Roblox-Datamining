@@ -1,5 +1,8 @@
 ﻿local _ = require(script.RoduxTypes)
 local _ = require(script.EnumGameDetailErrorTypes)
+local FFlagEnableTopSongsSort = require(script.Parent.SharedFlags).FFlagEnableTopSongsSort
+local GetFFlagUIBloxUseFoundationButtonFunction = require(script.Parent.SharedFlags).UIBlox.GetFFlagUIBloxUseFoundationButton
+local FFlagSearchOmniAutocompletePage = require(script.Parent.SharedFlags).FFlagSearchOmniAutocompletePage
 
 return {
 	OmniFeedPropsKey = require(script.Parent.AppCommonLib).Symbol.named("OmniFeedProps"),
@@ -14,7 +17,7 @@ return {
 		GAME_GRID_CHILD_PADDING = 12,
 		GAME_GRID_PADDING = 15,
 		GAME_GRID_TILE_FOOTER_HEIGHT = 70,
-		GAME_DETAILS_ACTION_BAR_HEIGHT = if require(script.Parent.SharedFlags).FFlagLuaAppUnifyPlayButtonMobileEdp or require(script.Parent.SharedFlags).UIBlox.GetFFlagUIBloxUseFoundationButton() then 50 else 48,
+		GAME_DETAILS_ACTION_BAR_HEIGHT = if require(script.Parent.SharedFlags).FFlagLuaAppUnifyPlayButtonMobileEdp or GetFFlagUIBloxUseFoundationButtonFunction() then 50 else 48,
 		MAX_RECOMMENDED_GAMES_FETCH_COUNT = require(script.Flags.GetFIntLuaAppRecommendedGamesCount)()
 	},
 	DataSourceType = {
@@ -24,7 +27,7 @@ return {
 		Local = "Local",
 		SearchApi = "SearchApi",
 		Unknown = "Unknown",
-		OmniAutocompleteApi = if require(script.Parent.SharedFlags).FFlagSearchOmniAutocompletePage then "OmniAutocompleteApi" else nil
+		OmniAutocompleteApi = if FFlagSearchOmniAutocompletePage then "OmniAutocompleteApi" else nil
 	},
 	ExperienceDetailsNoticeType = { InExperiencePurchase = "InExperiencePurchase" },
 	ExploreContentType = require(script.ExploreContentType),
@@ -43,7 +46,7 @@ return {
 	SearchSourceEvent = require(script.SearchSourceEvent),
 	SearchTextTopicIds = require(script.SearchTextTopicIds),
 	SearchLandingPageSurface = require(script.SearchLandingPageSurface),
-	SortContentType = if require(script.Parent.SharedFlags).FFlagEnableTopSongsSort then require(script.SortContentType) else nil,
+	SortContentType = if FFlagEnableTopSongsSort then require(script.SortContentType) else nil,
 	GameCollectionItemTypes = require(script.GameCollectionItemTypes),
 	["jest.config"] = script["jest.config"]
 }

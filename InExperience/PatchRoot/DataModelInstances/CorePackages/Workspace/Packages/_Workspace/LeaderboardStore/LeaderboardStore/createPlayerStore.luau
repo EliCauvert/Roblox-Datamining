@@ -1,241 +1,235 @@
-﻿local parent = script.Parent.Parent
-local signalsModule = require(parent.Signals)
-local createSignalMap = require(parent.CoreScriptsRoactCommon).Utilities.createSignalMap
-local createRBXEventSignalModule = require(script.Parent.createRBXEventSignal)
-local isValidStatModule = require(script.Parent.isValidStat)
-local getScoreValueModule = require(script.Parent.getScoreValue)
+﻿local Parent = script.Parent.Parent
+local SignalsModule = require(Parent.Signals)
+local CreateSignalMapFunction = require(Parent.CoreScriptsRoactCommon).Utilities.createSignalMap
+local CreateRBXEventSignalModule = require(script.Parent.createRBXEventSignal)
+local IsValidStatModule = require(script.Parent.isValidStat)
+local GetScoreValueModule = require(script.Parent.getScoreValue)
 local _ = require(script.Parent.LeaderboardStoreTypes)
-local fFlagPlayerListFixLeaderstatsStacking = require(parent.SharedFlags).FFlagPlayerListFixLeaderstatsStacking
-local _ = {
-	PlayerChildAdded = "PlayerChildAdded",
-	PlayerChildRemoved = "PlayerChildRemoved",
-	LeaderstatNameChanged = "LeaderstatNameChanged",
-	StatChanged = "StatChanged",
-	StatChildAdded = "StatChildAdded",
-	StatChildRemoved = "StatChildRemoved"
-}
+local FFlagPlayerListFixLeaderstatsStacking = require(Parent.SharedFlags).FFlagPlayerListFixLeaderstatsStacking
 
-return function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: signalsModule (ref), createSignalMap (ref), createRBXEventSignalModule (ref), getScoreValueModule (ref), isValidStatModule (ref), fFlagPlayerListFixLeaderstatsStacking (ref)
+return function(Player: Player, Callback, Callback3, Callback2, Callback1, Callback4) --[[ Line: 54 | Named "createPlayerStore" ]]
+	-- upvalues: SignalsModule (copy), CreateSignalMapFunction (copy), CreateRBXEventSignalModule (copy), GetScoreValueModule (copy), IsValidStatModule (copy), FFlagPlayerListFixLeaderstatsStacking (copy)
+	local Connections = {}
 	local t = {}
-	local t_1 = {}
-	local var1, var2 = signalsModule.createSignal(0)
-	local var3 = createSignalMap()
-	local var4 = "Neutral"
-	local t_2 = { order = var1, stats = var3 }
+	local Signal, Signal2 = SignalsModule.createSignal(0)
+	local SignalMap = CreateSignalMapFunction()
+	local Team = "Neutral"
+	local config = { order = Signal, stats = SignalMap }
 	
-	local function _()
-		-- upvalues: p1 (ref)
-		return p1.Team or "Neutral"
+	local function _() --[[ Line: 75 | Named "getPlayerTeam" ]]
+		-- upvalues: Player (copy)
+		return Player.Team or "Neutral"
 	end
 	
-	local _ = function(p7, p8, p9)
-		-- upvalues: t_1 (write)
-		if t_1[p7] == nil then
-			t_1[p7] = {}
+	local _ = function(Key, p1, p2) --[[ Line: 80 | Named "addStatConnection" ]]
+		-- upvalues: t (ref)
+		if t[Key] == nil then
+			t[Key] = {}
 		end
-		t_1[p7][p8] = p9
+		t[Key][p1] = p2
 	end
 	
-	local _ = function(p7, p8)
-		-- upvalues: t_1 (write)
-		local var5 = t_1[p7]
+	local _ = function(p1, Key) --[[ Line: 87 | Named "_removeStatConnection" ]]
+		-- upvalues: t (ref)
+		local Entry = t[p1]
 		
-		if var5 == nil then return end
-		local var6 = var5[p8]
+		if Entry == nil then return end
+		local Entry1 = Entry[Key]
 		
-		if var6 then
-			if var6.Disconnect then
-				var6:Disconnect()
+		if Entry1 then
+			if Entry1.Disconnect then
+				Entry1:Disconnect()
 			end
-			var5[p8] = nil
+			Entry[Key] = nil
 		end
 	end
 	
-	local function onStatAdded(p7)
-		-- upvalues: createRBXEventSignalModule (copy), signalsModule (copy), getScoreValueModule (copy), p2 (ref), var3 (ref), p4 (ref), var4 (write), p5 (ref), t_1 (write)
-		local var5, var6 = createRBXEventSignalModule(p7.Changed, p7.Value)
-		local var7 = signalsModule.createComputed(function(p8)
-			-- upvalues: getScoreValueModule (copy), var5 (ref)
-			return getScoreValueModule(var5(p8))
+	local function onStatAdded(p1) --[[ Line: 102 ]]
+		-- upvalues: CreateRBXEventSignalModule (upval), SignalsModule (upval), GetScoreValueModule (upval), Callback (copy), SignalMap (copy), Callback2 (copy), Team (ref), Callback1 (copy), t (ref)
+		local RBXEventSignalModule, RBXEventSignalModule2 = CreateRBXEventSignalModule(p1.Changed, p1.Value)
+		local Computed = SignalsModule.createComputed(function(p2) --[[ Line: 105 ]]
+			-- upvalues: GetScoreValueModule (upval), RBXEventSignalModule (copy)
+			return GetScoreValueModule(RBXEventSignalModule(p2))
 		end)
-		p2(p7)
-		var3.setData(p7.Name, var7, false)
-		local var8 = signalsModule.createEffect(function(p8)
-			-- upvalues: var7 (ref), p4 (copy), var4 (copy), p7 (ref), p5 (copy)
-			var7(p8)
-			p4(var4, p7.Name)
-			p5(var4, p7.Name)
+		Callback(p1)
+		SignalMap.setData(p1.Name, Computed, false)
+		local Effect = SignalsModule.createEffect(function(p2) --[[ Line: 114 ]]
+			-- upvalues: Computed (copy), Callback2 (upval), Team (upval), p1 (copy), Callback1 (upval)
+			Computed(p2)
+			Callback2(Team, p1.Name)
+			Callback1(Team, p1.Name)
 		end)
-		local name = p7.Name
-		local t = {
-			Disconnect = function()
-				-- upvalues: var8 (ref), var6 (ref)
-				var8()
-				var6:Disconnect()
+		local Name = p1.Name
+		local StatChanged = {
+			Disconnect = function() --[[ Line: 121 ]]
+				-- upvalues: Effect (copy), RBXEventSignalModule2 (copy)
+				Effect()
+				RBXEventSignalModule2:Disconnect()
 			end
 		}
 		
-		if t_1[name] == nil then
-			t_1[name] = {}
+		if t[Name] == nil then
+			t[Name] = {}
 		end
-		t_1[name].StatChanged = t
-		local childAddedConnection = p7.ChildAdded:Connect(function()
-			-- upvalues: p2 (copy), p7 (ref)
-			p2(p7)
+		t[Name].StatChanged = StatChanged
+		local ChildAddedConnection = p1.ChildAdded:Connect(function() --[[ Line: 128 ]]
+			-- upvalues: Callback (upval), p1 (copy)
+			Callback(p1)
 		end)
-		local name_1 = p7.Name
+		local Name1 = p1.Name
 		
-		if t_1[name_1] == nil then
-			t_1[name_1] = {}
+		if t[Name1] == nil then
+			t[Name1] = {}
 		end
-		t_1[name_1].StatChildAdded = childAddedConnection
-		local childRemovedConnection = p7.ChildRemoved:Connect(function()
-			-- upvalues: p2 (copy), p7 (ref)
-			p2(p7)
+		t[Name1].StatChildAdded = ChildAddedConnection
+		local ChildRemovedConnection = p1.ChildRemoved:Connect(function() --[[ Line: 133 ]]
+			-- upvalues: Callback (upval), p1 (copy)
+			Callback(p1)
 		end)
-		local name_2 = p7.Name
+		local Name2 = p1.Name
 		
-		if t_1[name_2] == nil then
-			t_1[name_2] = {}
+		if t[Name2] == nil then
+			t[Name2] = {}
 		end
-		t_1[name_2].StatChildRemoved = childRemovedConnection
+		t[Name2].StatChildRemoved = ChildRemovedConnection
 	end
 	
-	local function onStatRemoved(p7)
-		-- upvalues: t_1 (write), var3 (ref), p3 (ref)
-		local name = t_1[p7.Name]
+	local function onStatRemoved(p1) --[[ Line: 139 ]]
+		-- upvalues: t (ref), SignalMap (copy), Callback3 (copy)
+		local Entry = t[p1.Name]
 		
-		if name == nil then return end
-		for i, v in pairs(name) do
-			if v.Disconnect then
-				v:Disconnect()
+		if Entry == nil then return end
+		for _, Connection in pairs(Entry) do
+			if Connection.Disconnect then
+				Connection:Disconnect()
 			end
 		end
-		t_1[p7.Name] = nil
-		var3.removeData(p7.Name, false)
-		p3(p7)
+		t[p1.Name] = nil
+		SignalMap.removeData(p1.Name, false)
+		Callback3(p1)
 	end
 	
-	local function leaderstatsAdded(p8)
-		-- upvalues: isValidStatModule (copy), onStatAdded (ref), t (write), onStatRemoved (ref)
-		t.leaderstatsChildAdded = p8.ChildAdded:Connect(function(p9)
-			-- upvalues: isValidStatModule (copy), onStatAdded (copy)
-			if isValidStatModule(p9) then
-				onStatAdded(p9)
+	local function leaderstatsAdded(Leaderstats) --[[ Line: 155 ]]
+		-- upvalues: IsValidStatModule (upval), onStatAdded (copy), Connections (ref), onStatRemoved (copy)
+		Connections.leaderstatsChildAdded = Leaderstats.ChildAdded:Connect(function(Child) --[[ Line: 156 ]]
+			-- upvalues: IsValidStatModule (upval), onStatAdded (upval)
+			if IsValidStatModule(Child) then
+				onStatAdded(Child)
 			end
 		end)
-		t.leaderstatsChildRemoved = p8.ChildRemoved:Connect(function(p9)
-			-- upvalues: isValidStatModule (copy), onStatRemoved (copy)
-			if isValidStatModule(p9) then
-				onStatRemoved(p9)
+		Connections.leaderstatsChildRemoved = Leaderstats.ChildRemoved:Connect(function(Child) --[[ Line: 163 ]]
+			-- upvalues: IsValidStatModule (upval), onStatRemoved (upval)
+			if IsValidStatModule(Child) then
+				onStatRemoved(Child)
 			end
 		end)
 		
-		for i, v in ipairs(p8:GetChildren()) do
-			if isValidStatModule(v) then
-				onStatAdded(v)
+		for _, child in ipairs((Leaderstats:GetChildren())) do
+			if IsValidStatModule(child) then
+				onStatAdded(child)
 			end
-		end
-	end
-	
-	local function onPlayerChildAdded(p9)
-		-- upvalues: leaderstatsAdded (ref), t (write)
-		if p9.Name ~= "leaderstats" and not (p9:IsA("ValueBase") or (p9:IsA("Folder") or p9:IsA("Model"))) then return end
-		t.LeaderstatNameChanged = p9.Changed:Connect(function(p10)
-			-- upvalues: p9 (ref), leaderstatsAdded (copy)
-			if p10 == "Name" and p9.Name == "leaderstats" then
-				leaderstatsAdded(p9)
-			end
-		end)
-		
-		if p9.Name == "leaderstats" then
-			leaderstatsAdded(p9)
 		end
 	end
 	
-	local function onPlayerChildRemoved(p9)
-		-- upvalues: isValidStatModule (copy), onStatRemoved (ref), fFlagPlayerListFixLeaderstatsStacking (copy), p6 (ref), p5 (ref), var4 (write)
-		if p9.Name == "leaderstats" then
-			for i, v in ipairs(p9:GetChildren()) do
-				if isValidStatModule(v) then
-					onStatRemoved(v)
+	local function onPlayerChildAdded(Object) --[[ Line: 179 ]]
+		-- upvalues: leaderstatsAdded (copy), Connections (ref)
+		local IsValueBase = Object:IsA("ValueBase") or (Object:IsA("Folder") or Object:IsA("Model"))
+		
+		if Object.Name ~= "leaderstats" and not IsValueBase then return end
+		Connections.LeaderstatNameChanged = Object.Changed:Connect(function(p2) --[[ Line: 186 ]]
+			-- upvalues: Object (copy), leaderstatsAdded (upval)
+			if p2 == "Name" and Object.Name == "leaderstats" then
+				leaderstatsAdded(Object)
+			end
+		end)
+		
+		if Object.Name == "leaderstats" then
+			leaderstatsAdded(Object)
+		end
+	end
+	
+	local function onPlayerChildRemoved(Object) --[[ Line: 200 ]]
+		-- upvalues: IsValidStatModule (upval), onStatRemoved (copy), FFlagPlayerListFixLeaderstatsStacking (upval), Callback4 (copy), Callback1 (copy), Team (ref)
+		if Object.Name == "leaderstats" then
+			for _, child in ipairs((Object:GetChildren())) do
+				if IsValidStatModule(child) then
+					onStatRemoved(child)
 				end
 			end
-			if fFlagPlayerListFixLeaderstatsStacking then
-				p6()
+			if FFlagPlayerListFixLeaderstatsStacking then
+				Callback4()
 			end
 		end
-		p5(var4)
+		Callback1(Team)
 	end
 	
-	var4 = p1.Team or "Neutral";
-	(function()
-		-- upvalues: p1 (ref), onPlayerChildAdded (ref), t (write), onPlayerChildRemoved (ref), leaderstatsAdded (ref)
-		t.PlayerChildAdded = p1.ChildAdded:Connect(function(p10)
-			-- upvalues: onPlayerChildAdded (copy)
-			onPlayerChildAdded(p10)
+	Team = Player.Team or "Neutral";
+	(function() --[[ Line: 217 | Named "connectPlayerEvents" ]]
+		-- upvalues: Player (copy), onPlayerChildAdded (copy), Connections (ref), onPlayerChildRemoved (copy), leaderstatsAdded (copy)
+		Connections.PlayerChildAdded = Player.ChildAdded:Connect(function(Child) --[[ Line: 218 ]]
+			-- upvalues: onPlayerChildAdded (upval)
+			onPlayerChildAdded(Child)
 		end)
-		t.PlayerChildRemoved = p1.ChildRemoved:Connect(function(p10)
-			-- upvalues: onPlayerChildRemoved (copy)
-			onPlayerChildRemoved(p10)
+		Connections.PlayerChildRemoved = Player.ChildRemoved:Connect(function(Child) --[[ Line: 223 ]]
+			-- upvalues: onPlayerChildRemoved (upval)
+			onPlayerChildRemoved(Child)
 		end)
-		local leaderstats = p1:FindFirstChild("leaderstats")
+		local Leaderstats = Player:FindFirstChild("leaderstats")
 		
-		if leaderstats then
-			leaderstatsAdded(leaderstats)
+		if Leaderstats then
+			leaderstatsAdded(Leaderstats)
 			
 			return
 		end
-		for i, v in ipairs(p1:GetChildren()) do
-			onPlayerChildAdded(v)
+		for _, child in ipairs(Player:GetChildren()) do
+			onPlayerChildAdded(child)
 		end
 	end)()
 	
 	return {
-		getPlayer = function()
-			-- upvalues: p1 (ref)
-			return p1
+		getPlayer = function() --[[ Line: 281 ]]
+			-- upvalues: Player (copy)
+			return Player
 		end,
-		getPlayerEntry = function()
-			-- upvalues: t_2 (ref)
-			return t_2
+		getPlayerEntry = function() --[[ Line: 284 ]]
+			-- upvalues: config (copy)
+			return config
 		end,
-		getStatValue = function(p10, p11)
-			-- upvalues: var3 (ref)
-			local data = var3.getData(p10, false)
+		getStatValue = function(p2, p3) --[[ Line: 243 ]]
+			-- upvalues: SignalMap (copy)
+			local Data = SignalMap.getData(p2, false)
 			
-			return if data then data(p11) else nil
+			return if Data then Data(p3) else nil
 		end,
-		getTeam = function()
-			-- upvalues: var4 (write)
-			return var4
+		getTeam = function() --[[ Line: 288 ]]
+			-- upvalues: Team (ref)
+			return Team
 		end,
-		setOrder = function(value)
-			-- upvalues: var2 (ref)
-			var2(value)
+		setOrder = function(p2) --[[ Line: 251 ]]
+			-- upvalues: Signal2 (copy)
+			Signal2(p2)
 		end,
-		setTeam = function(value)
-			-- upvalues: var4 (write)
-			var4 = value
+		setTeam = function(Value) --[[ Line: 255 ]]
+			-- upvalues: Team (ref)
+			Team = Value
 		end,
-		destroy = function()
-			-- upvalues: t_1 (write), t (write)
-			for i, v in pairs(t_1) do
-				for i_2, v_1 in pairs(v) do
-					if v_1.Disconnect then
-						v_1:Disconnect()
+		destroy = function() --[[ Line: 259 ]]
+			-- upvalues: t (ref), Connections (ref)
+			for _, value in pairs(t) do
+				for _, Connection in pairs(value) do
+					if Connection.Disconnect then
+						Connection:Disconnect()
 					end
 				end
 			end
-			t_1 = {}
+			t = {}
 			
-			for i, v_1 in pairs(t) do
-				if v_1.Disconnect then
-					v_1:Disconnect()
+			for _, connection in pairs(Connections) do
+				if connection.Disconnect then
+					connection:Disconnect()
 				end
 			end
-			t = {}
+			Connections = {}
 		end
 	}
 end

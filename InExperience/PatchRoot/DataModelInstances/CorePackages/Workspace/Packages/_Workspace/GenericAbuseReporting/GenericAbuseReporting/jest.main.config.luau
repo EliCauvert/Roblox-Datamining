@@ -1,15 +1,15 @@
-﻿local parent = script.Parent
-local jestConfigsModule = require(parent.Parent.Dev.JestConfigs)
+﻿local Parent = script.Parent
+local JestConfigsModule = require(Parent.Parent.Dev.JestConfigs)
 
 return {
 	displayName = "GenericAbuseReporting",
 	testMatch = { "**/*.test" },
 	testPathIgnorePatterns = { "analyticsService" },
 	setupFilesAfterEnv = {
-		jestConfigsModule.setupFiles.ErrorLogHandler,
-		jestConfigsModule.setupFiles.UIBloxInitializer,
-		jestConfigsModule.setupFiles.createPromiseRejectionHandler(),
-		parent.extendExpectations,
-		jestConfigsModule.setupFiles.RetryTimes
+		JestConfigsModule.setupFiles.ErrorLogHandler,
+		JestConfigsModule.setupFiles.UIBloxInitializer,
+		JestConfigsModule.setupFiles.createPromiseRejectionHandler(),
+		Parent.extendExpectations,
+		JestConfigsModule.setupFiles.RetryTimes
 	}
 }

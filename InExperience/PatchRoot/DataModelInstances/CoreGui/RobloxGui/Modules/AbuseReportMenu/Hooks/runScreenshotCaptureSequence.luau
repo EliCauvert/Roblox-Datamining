@@ -1,97 +1,96 @@
-﻿local abuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
-local corePackagesService = game:GetService("CorePackages")
-local guiService = game:GetService("GuiService")
-local runService = game:GetService("RunService")
-local _ = require(abuseReportMenu.Components.Types)
-local fFlagIEMTabFocusNav = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagIEMTabFocusNav
-local tnSAvatarIdentificationModule = require(corePackagesService.Workspace.Packages.TnSAvatarIdentification)
-local tnSAdIdentificationModule = require(corePackagesService.Workspace.Packages.TnSAdIdentification)
-local screenshotManager = require(corePackagesService.Workspace.Packages.TnSScreenshot).ScreenshotManager
-local avatarIdentification = tnSAvatarIdentificationModule.AvatarIdentification
-local adIdentification = tnSAdIdentificationModule.AdIdentification
-local abuseReportMenuScreenshotReduceMotionWaitFrames = game:DefineFastInt("AbuseReportMenuScreenshotReduceMotionWaitFrames", 20)
-local abuseReportMenuScreenshotWaitFrames = game:DefineFastInt("AbuseReportMenuScreenshotWaitFrames", 10)
-local userGameSettingsService = UserSettings():GetService("UserGameSettings")
+﻿local CorePackages = game:GetService("CorePackages")
+local GuiService = game:GetService("GuiService")
+local RunService = game:GetService("RunService")
+local _ = require(script:FindFirstAncestor("AbuseReportMenu").Components.Types)
+local FFlagIEMTabFocusNav = require(CorePackages.Workspace.Packages.SharedFlags).FFlagIEMTabFocusNav
+local ScreenshotManager = require(CorePackages.Workspace.Packages.TnSScreenshot).ScreenshotManager
+local AvatarIdentification = require(CorePackages.Workspace.Packages.TnSAvatarIdentification).AvatarIdentification
+local AdIdentification = require(CorePackages.Workspace.Packages.TnSAdIdentification).AdIdentification
+local AbuseReportMenuScreenshotReduceMotionWaitFrames = game:DefineFastInt("AbuseReportMenuScreenshotReduceMotionWaitFrames", 20)
+local AbuseReportMenuScreenshotWaitFrames = game:DefineFastInt("AbuseReportMenuScreenshotWaitFrames", 10)
+local UserGameSettings = UserSettings():GetService("UserGameSettings")
 
-local function defaultGetWaitFrames()
-	-- upvalues: userGameSettingsService (ref), abuseReportMenuScreenshotReduceMotionWaitFrames (ref), abuseReportMenuScreenshotWaitFrames (ref)
-	return if userGameSettingsService.ReducedMotion then abuseReportMenuScreenshotReduceMotionWaitFrames else abuseReportMenuScreenshotWaitFrames
+local function defaultGetWaitFrames() --[[ Line: 62 ]]
+	-- upvalues: UserGameSettings (copy), AbuseReportMenuScreenshotReduceMotionWaitFrames (copy), AbuseReportMenuScreenshotWaitFrames (copy)
+	return if UserGameSettings.ReducedMotion then AbuseReportMenuScreenshotReduceMotionWaitFrames else AbuseReportMenuScreenshotWaitFrames
 end
 
-local function defaultGetWaitTime()
-	-- upvalues: userGameSettingsService (ref), abuseReportMenuScreenshotReduceMotionWaitFrames (ref), abuseReportMenuScreenshotWaitFrames (ref)
-	return (if userGameSettingsService.ReducedMotion then abuseReportMenuScreenshotReduceMotionWaitFrames else abuseReportMenuScreenshotWaitFrames) / 60
+local function defaultGetWaitTime() --[[ Line: 69 ]]
+	-- upvalues: UserGameSettings (copy), AbuseReportMenuScreenshotReduceMotionWaitFrames (copy), AbuseReportMenuScreenshotWaitFrames (copy)
+	return (if UserGameSettings.ReducedMotion then AbuseReportMenuScreenshotReduceMotionWaitFrames else AbuseReportMenuScreenshotWaitFrames) / 60
 end
 
-local function defaultDeps()
-	-- upvalues: screenshotManager (ref), avatarIdentification (ref), adIdentification (ref), runService (ref), defaultGetWaitFrames (ref), defaultGetWaitTime (ref)
+local function defaultDeps() --[[ Line: 73 ]]
+	-- upvalues: ScreenshotManager (copy), AvatarIdentification (copy), AdIdentification (copy), RunService (copy), defaultGetWaitFrames (copy), defaultGetWaitTime (copy)
 	return {
-		takeScreenshot = function(p1)
-			-- upvalues: screenshotManager (copy)
-			return screenshotManager:TakeScreenshotWithCallback(p1)
+		takeScreenshot = function(OnScreenshotUploaded) --[[ Line: 75 ]]
+			-- upvalues: ScreenshotManager (upval)
+			return ScreenshotManager:TakeScreenshotWithCallback(OnScreenshotUploaded)
 		end,
-		getVisibleAvatars = function()
-			-- upvalues: avatarIdentification (copy)
-			return avatarIdentification.getVisibleAvatars()
+		getVisibleAvatars = function() --[[ Line: 78 ]]
+			-- upvalues: AvatarIdentification (upval)
+			return AvatarIdentification.getVisibleAvatars()
 		end,
-		getVisibleAds = function()
-			-- upvalues: adIdentification (copy)
-			return adIdentification.getVisibleAds()
+		getVisibleAds = function() --[[ Line: 81 ]]
+			-- upvalues: AdIdentification (upval)
+			return AdIdentification.getVisibleAds()
 		end,
-		runService = runService,
+		runService = RunService,
 		getWaitFrames = defaultGetWaitFrames,
 		getWaitTime = defaultGetWaitTime
 	}
 end
 
-local function _(p1)
-	local visibleAvatars, visibleAvatars_1 = p1.getVisibleAvatars()
-	local visibleAds, visibleAds_1 = p1.getVisibleAds()
+local function _(p1) --[[ Line: 90 | Named "runIdentification" ]]
+	local VisibleAvatars, VisibleAvatars2 = p1.getVisibleAvatars()
+	local VisibleAds, VisibleAds2 = p1.getVisibleAds()
 	
 	return {
-		identifiedAvatars = visibleAvatars,
-		identifiedAds = visibleAds,
-		avatarIDStats = visibleAvatars_1,
-		adIDStats = visibleAds_1
+		identifiedAvatars = VisibleAvatars,
+		identifiedAds = VisibleAds,
+		avatarIDStats = VisibleAvatars2,
+		adIDStats = VisibleAds2
 	}
 end
 
-return function(p1, p2)
-	-- upvalues: defaultDeps (ref), fFlagIEMTabFocusNav (ref), guiService (ref)
-	p2 = p2 or defaultDeps()
-	local var1 = if fFlagIEMTabFocusNav then guiService.SelectedCoreObject else nil
+return function(p1, p2) --[[ Line: 101 | Named "runScreenshotCaptureSequence" ]]
+	-- upvalues: defaultDeps (copy), FFlagIEMTabFocusNav (copy), GuiService (copy)
+	local P3 = p2 or defaultDeps()
+	local SelectedCoreObject = if FFlagIEMTabFocusNav then GuiService.SelectedCoreObject else nil
 	p1.hide()
-	local var2 = 0
-	local processTime = os.clock()
-	local var3 = false
-	local heartbeatConnection = nil
-	heartbeatConnection = p2.runService.Heartbeat:Connect(function()
-		-- upvalues: var3 (write), var2 (write), p2 (ref), p1 (ref), processTime (ref), heartbeatConnection (write), fFlagIEMTabFocusNav (copy), var1 (write), guiService (copy)
-		if not var3 and var2 >= 1 then
-			var3 = true
-			p2.takeScreenshot(p1.onScreenshotUploaded)
+	local Count = 0
+	local ClockTime = os.clock()
+	local Flag = false
+	local Connection = nil
+	Connection = P3.runService.Heartbeat:Connect(function() --[[ Line: 116 ]]
+		-- upvalues: Flag (ref), Count (ref), P3 (copy), p1 (copy), ClockTime (copy), Connection (ref), FFlagIEMTabFocusNav (upval), SelectedCoreObject (ref), GuiService (upval)
+		if not Flag and Count >= 1 then
+			Flag = true
+			P3.takeScreenshot(p1.onScreenshotUploaded)
 			p1.onScreenshotTaken()
-			local onIdentificationCompleted = p1.onIdentificationCompleted
-			local var4 = p2
-			local visibleAvatars, visibleAvatars_1 = var4.getVisibleAvatars()
-			local visibleAds, visibleAds_1 = var4.getVisibleAds()
-			onIdentificationCompleted({
-				identifiedAvatars = visibleAvatars,
-				identifiedAds = visibleAds,
-				avatarIDStats = visibleAvatars_1,
-				adIDStats = visibleAds_1
+			local OnIdentificationCompletedFunction: (any) -> () = p1.onIdentificationCompleted
+			local VisibleAvatars, VisibleAvatars2 = P3.getVisibleAvatars()
+			local VisibleAds, VisibleAds2 = P3.getVisibleAds()
+			OnIdentificationCompletedFunction({
+				identifiedAvatars = VisibleAvatars,
+				identifiedAds = VisibleAds,
+				avatarIDStats = VisibleAvatars2,
+				adIDStats = VisibleAds2
 			})
 		end
-		if not var3 or not (p2.getWaitFrames() <= var2) or not (p2.getWaitTime() <= os.clock() - processTime) then
-			var2 += 1
+		local IsWaitFramesBelow = P3.getWaitFrames() <= Count
+		local IsClockTimeAbove = os.clock() - ClockTime >= P3.getWaitTime()
+		
+		if not Flag or not IsWaitFramesBelow or not IsClockTimeAbove then
+			Count += 1
 			
 			return
 		end
-		heartbeatConnection:Disconnect()
+		Connection:Disconnect()
 		p1.show()
 		
-		if fFlagIEMTabFocusNav and var1 and var1:IsDescendantOf(game) then
-			guiService.SelectedCoreObject = var1
+		if FFlagIEMTabFocusNav and SelectedCoreObject and SelectedCoreObject:IsDescendantOf(game) then
+			GuiService.SelectedCoreObject = SelectedCoreObject
 		end
 		p1.onCaptureEnd()
 	end)

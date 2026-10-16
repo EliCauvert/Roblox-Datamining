@@ -1,21 +1,24 @@
 ﻿local _ = require(script.Parent.AXPagesTypes)
 
 return {
-	new = function(p1, p2, p3)
+	new = function(_currentPage, _cursor, _fetchNextPage) --[[ Line: 5 ]]
 		return {
-			_currentPage = p1,
-			_cursor = p2,
-			_fetchNextPage = p3,
-			IsFinished = if p2 ~= nil then p2 == "" else true,
-			GetCurrentPage = function(p4)
-				return p4._currentPage
+			_currentPage = _currentPage,
+			_cursor = _cursor,
+			_fetchNextPage = _fetchNextPage,
+			IsFinished = _cursor == nil or _cursor == "",
+			GetCurrentPage = function(p1) --[[ Line: 12 ]]
+				return p1._currentPage
 			end,
-			AdvanceToNextPageAsync = function(p4)
-				if p4.IsFinished then return end
-				local var1 = p4._fetchNextPage(p4._cursor)
-				p4._currentPage = var1.data
-				p4._cursor = var1.nextPageCursor
-				p4.IsFinished = if p4._cursor ~= nil then p4._cursor == "" else true
+			AdvanceToNextPageAsync = function(Pages) --[[ Line: 16 ]]
+				if not Pages.IsFinished then
+					local NextPage = Pages._fetchNextPage(Pages._cursor)
+					Pages._currentPage = NextPage.data
+					Pages._cursor = NextPage.nextPageCursor
+					Pages.IsFinished = Pages._cursor == nil or Pages._cursor == ""
+					
+					return
+				end
 			end
 		}
 	end

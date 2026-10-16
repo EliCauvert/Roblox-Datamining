@@ -1,92 +1,82 @@
-﻿local parent = script:FindFirstAncestor("ExpChat").Parent
-local signalsModule = require(parent.Signals)
-local createSignal = signalsModule.createSignal
-local createComputed = signalsModule.createComputed
-local VOICE_STATE = require(parent.VoiceChat).Constants.VOICE_STATE
+﻿local Parent = script:FindFirstAncestor("ExpChat").Parent
+local SignalsModule = require(Parent.Signals)
+local CreateSignalFunction = SignalsModule.createSignal
+local CreateComputedFunction = SignalsModule.createComputed
+local VOICESTATE = require(Parent.VoiceChat).Constants.VOICE_STATE
 
-return function()
-	-- upvalues: createSignal (ref), createComputed (ref), VOICE_STATE (ref)
-	local var1, var2 = createSignal({})
+return function() --[[ Line: 26 | Named "createVoiceStore" ]]
+	-- upvalues: CreateSignalFunction (copy), CreateComputedFunction (copy), VOICESTATE (copy)
+	local Signal, Signal2 = CreateSignalFunction({})
 	local t = {}
 	
-	local function _(p1)
-		return tostring(p1)
+	local function _(p1): string --[[ Line: 32 | Named "getKey" ]]
+		return (tostring(p1))
 	end
 	
 	return {
-		getOrCreateVoiceState = function(p1)
-			-- upvalues: t (ref), createComputed (copy), var1 (ref)
-			local var3 = tostring(p1)
+		getOrCreateVoiceState = function(p1) --[[ Line: 36 ]]
+			-- upvalues: t (copy), CreateComputedFunction (upval), Signal (copy)
+			local Text = tostring(p1)
 			
-			if not t[var3] then
-				t[var3] = createComputed(function(p2)
-					-- upvalues: var1 (copy), var3 (ref)
-					return var1(p2)[var3]
+			if not t[Text] then
+				t[Text] = CreateComputedFunction(function(p2) --[[ Line: 39 ]]
+					-- upvalues: Signal (upval), Text (copy)
+					return Signal(p2)[Text]
 				end)
 			end
-			return t[var3]
+			return t[Text]
 		end,
-		getVoiceParticipants = var1,
-		handleVoiceParticipantAdded = function(p1)
-			-- upvalues: var2 (ref), VOICE_STATE (copy)
-			local var3 = tostring(p1)
-			var2(function(p2)
-				-- upvalues: var3 (ref), VOICE_STATE (copy)
-				local cloned = table.clone(p2)
-				cloned[var3] = cloned[var3] or VOICE_STATE.HIDDEN
+		getVoiceParticipants = Signal,
+		handleVoiceParticipantAdded = function(p1) --[[ Line: 48 ]]
+			-- upvalues: Signal2 (copy), VOICESTATE (upval)
+			local Text = tostring(p1)
+			Signal2(function(Tbl) --[[ Line: 51 ]]
+				-- upvalues: Text (copy), VOICESTATE (upval)
+				local Copy = table.clone(Tbl)
+				Copy[Text] = Copy[Text] or VOICESTATE.HIDDEN
 				
-				return cloned
+				return Copy
 			end)
 		end,
-		handleVoiceParticipantRemoved = function(p1)
-			-- upvalues: var2 (ref), t (ref)
-			local var3 = tostring(p1)
-			var2(function(p2)
-				-- upvalues: t (copy), var3 (ref)
-				if t[var3] then
-					t[var3] = nil
+		handleVoiceParticipantRemoved = function(p1) --[[ Line: 61 ]]
+			-- upvalues: Signal2 (copy), t (copy)
+			local Text = tostring(p1)
+			Signal2(function(Tbl) --[[ Line: 64 ]]
+				-- upvalues: t (upval), Text (copy)
+				if t[Text] then
+					t[Text] = nil
 				end
-				local cloned = table.clone(p2)
-				cloned[var3] = nil
+				local Copy = table.clone(Tbl)
+				Copy[Text] = nil
 				
-				return cloned
+				return Copy
 			end)
 		end,
-		handleVoiceParticipantsChanged = function(p1)
-			-- upvalues: var2 (ref), VOICE_STATE (copy)
-			var2(function(p2)
-				-- upvalues: p1 (ref), VOICE_STATE (copy)
-				local cloned = table.clone(p2)
+		handleVoiceParticipantsChanged = function(p1) --[[ Line: 75 ]]
+			-- upvalues: Signal2 (copy), VOICESTATE (upval)
+			Signal2(function(Tbl) --[[ Line: 76 ]]
+				-- upvalues: p1 (copy), VOICESTATE (upval)
+				local Copy = table.clone(Tbl)
 				
-				for i, v in p1 do
-					local INACTIVE = VOICE_STATE.INACTIVE
+				for i, value in p1 do
+					Copy[tostring(i)] = if value.subscriptionCompleted then if value.isMutedLocally then VOICESTATE.LOCAL_MUTED elseif value.isMuted then VOICESTATE.MUTED elseif value.isSignalActive then VOICESTATE.TALKING else VOICESTATE.INACTIVE else VOICESTATE.CONNECTING
+				end
+				return Copy
+			end)
+		end,
+		handleVoiceStateChanged = function(p2, p3) --[[ Line: 96 ]]
+			-- upvalues: Signal2 (copy)
+			local Text = tostring(p2)
+			Signal2(function(Tbl) --[[ Line: 99 ]]
+				-- upvalues: Text (copy), p3 (copy)
+				if Tbl[Text] then
+					local Copy = table.clone(Tbl)
+					Copy[Text] = p3
 					
-					if not v.subscriptionCompleted then
-						INACTIVE = VOICE_STATE.CONNECTING
-					elseif v.isMutedLocally then
-						INACTIVE = VOICE_STATE.LOCAL_MUTED
-					elseif v.isMuted then
-						INACTIVE = VOICE_STATE.MUTED
-					elseif v.isSignalActive then
-						INACTIVE = VOICE_STATE.TALKING
-					end
-					cloned[tostring(i)] = INACTIVE
+					return Copy
+				else
+					return Tbl
 				end
-				return cloned
-			end)
-		end,
-		handleVoiceStateChanged = function(p2, p3)
-			-- upvalues: var2 (ref)
-			local var3 = tostring(p2)
-			var2(function(p4)
-				-- upvalues: var3 (ref), p3 (ref)
-				if p4[var3] then
-					local cloned = table.clone(p4)
-					cloned[var3] = p3
-					
-					return cloned
-				end
-				return p4
 			end)
 		end
 	}

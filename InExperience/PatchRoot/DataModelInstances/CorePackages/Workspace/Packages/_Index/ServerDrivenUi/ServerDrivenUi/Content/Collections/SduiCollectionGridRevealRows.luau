@@ -1,180 +1,189 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local collectionGrid = require(parent.CollectionViews).CollectionGrid
-local guiService = game:GetService("GuiService")
-local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
-local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventErrorLogger
-local showMoreClickEvent = require(parent.DiscoveryAnalytics).Events.showMoreClickEvent
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local findAnalyticsFieldInAncestors = sduiCoreSystemModule.findAnalyticsFieldInAncestors
-local getSduiComponentWrapper = sduiCoreSystemModule.getSduiComponentWrapper
-local fIntLuaAppGameGridRevealMoreButtonGapPx = require(parent.SharedFlags).FIntLuaAppGameGridRevealMoreButtonGapPx
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local CollectionGrid = require(Parent.CollectionViews).CollectionGrid
+local GuiService = game:GetService("GuiService")
+local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
+local DiscoveryEventErrorLogger = require(Parent.DiscoveryUtils).DiscoveryEventErrorLogger
+local ShowMoreClickEventFunction = require(Parent.DiscoveryAnalytics).Events.showMoreClickEvent
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local FindAnalyticsFieldInAncestorsFunction = SduiCoreSystemModule.findAnalyticsFieldInAncestors
+local GetSduiComponentWrapperFunction = SduiCoreSystemModule.getSduiComponentWrapper
+local FIntLuaAppGameGridRevealMoreButtonGapPx = require(Parent.SharedFlags).FIntLuaAppGameGridRevealMoreButtonGapPx
 
-local function _(p1)
+local function _(p1: number): boolean --[[ Line: 41 | Named "isPositive" ]]
 	return p1 ~= nil and p1 > 0
 end
 
-local _ = function(p1, p2, p3)
+local _ = function(p1, p2: number, p3: number): number? --[[ Line: 45 | Named "getTotalRowsInGrid" ]]
 	if p2 <= 0 then
 		return nil
 	end
-	local ceiled = math.ceil(p1 / p2)
+	local Ceiled = math.ceil(p1 / p2)
 	
 	if p3 ~= nil and p3 > 0 then
-		ceiled = math.min(ceiled, p3)
+		Ceiled = math.min(Ceiled, p3)
 	end
-	return ceiled
+	return Ceiled
 end
 
-local _ = function(p1, p2)
+local _ = function(p1, p2: number) --[[ Line: 57 | Named "getInitialVisibleRowsInGrid" ]]
 	if p1 == nil or p2 == nil then
 		return nil, false
 	end
-	local var1 = p1 - (p2 - 1)
+	local v1 = p1 - (p2 - 1)
 	
-	if var1 <= 0 then
+	if v1 <= 0 then
 		return nil, true
+	else
+		return v1, false
 	end
-	return var1, false
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), discoveryEventErrorLogger (ref), reactFocusNavigationModule (ref), findAnalyticsFieldInAncestors (ref), guiService (ref), showMoreClickEvent (ref), getSduiComponentWrapper (ref), fIntLuaAppGameGridRevealMoreButtonGapPx (ref), collectionGrid (ref), cryoModule (ref)
-	local var1
-	local itemCount = p1.itemCount
-	local itemsPerRow = p1.itemsPerRow
-	local maxNumRows = p1.maxNumRows
+return ReactModule.memo(function(p1) --[[ Line: 77 | Named "SduiCollectionGridRevealRows" ]]
+	-- upvalues: ReactModule (copy), DiscoveryEventErrorLogger (copy), ReactFocusNavigationModule (copy), FindAnalyticsFieldInAncestorsFunction (copy), GuiService (copy), ShowMoreClickEventFunction (copy), GetSduiComponentWrapperFunction (copy), FIntLuaAppGameGridRevealMoreButtonGapPx (copy), CollectionGrid (copy), CryoModule (copy)
+	local ItemCount = p1.itemCount
+	local ItemsPerRow: number = p1.itemsPerRow
+	local MaxNumRows: number = p1.maxNumRows
+	local TotalNumberOfRows = nil
 	
-	if itemsPerRow <= 0 then
-		var1 = nil
+	if ItemsPerRow <= 0 then
+		TotalNumberOfRows = nil
 	else
-		local ceiled = math.ceil(itemCount / itemsPerRow)
+		local Ceiled = math.ceil(ItemCount / ItemsPerRow)
 		
-		if maxNumRows ~= nil and maxNumRows > 0 then
-			ceiled = math.min(ceiled, maxNumRows)
+		if MaxNumRows ~= nil and MaxNumRows > 0 then
+			Ceiled = math.min(Ceiled, MaxNumRows)
 		end
-		var1 = ceiled
+		TotalNumberOfRows = Ceiled
 	end
-	local initialFeedVisibleRows = p1.initialFeedVisibleRows
-	local var2 = initialFeedVisibleRows ~= nil and initialFeedVisibleRows > 0
+	local InitialFeedVisibleRows: number = p1.initialFeedVisibleRows
+	local IsInitialFeedVisibleRowsAbove: boolean = InitialFeedVisibleRows ~= nil and InitialFeedVisibleRows > 0
 	
-	if var2 then
-		local visibleRowsPerReveal = p1.visibleRowsPerReveal
-		var2 = visibleRowsPerReveal ~= nil and visibleRowsPerReveal > 0
+	if IsInitialFeedVisibleRowsAbove then
+		local VisibleRowsPerReveal: number = p1.visibleRowsPerReveal
+		IsInitialFeedVisibleRowsAbove = VisibleRowsPerReveal ~= nil and VisibleRowsPerReveal > 0
 	end
-	local var3, var4
-	local initialFeedVisibleRows_1 = p1.initialFeedVisibleRows
-	local startRow = p1.startRow
+	local InitialFeedVisibleRows1 = p1.initialFeedVisibleRows
+	local StartRow: number = p1.startRow
+	local v1 = nil
+	local Flag = nil
 	
-	if initialFeedVisibleRows_1 == nil or startRow == nil then
-		var3 = nil
-		var4 = false
+	if InitialFeedVisibleRows1 == nil or StartRow == nil then
+		v1 = nil
+		Flag = false
 	else
-		local var5 = initialFeedVisibleRows_1 - (startRow - 1)
+		local InitialFeedVisibleRowsDelta = InitialFeedVisibleRows1 - (StartRow - 1)
 		
-		if var5 <= 0 then
-			var3 = nil
-			var4 = true
+		if InitialFeedVisibleRowsDelta <= 0 then
+			v1 = nil
+			Flag = true
 		else
-			var3 = var5
-			var4 = false
+			v1 = InitialFeedVisibleRowsDelta
+			Flag = false
 		end
 	end
-	initialFeedVisibleRows_1, var13 = reactModule.useState(var3)
-	reactModule.useEffect(function()
-		-- upvalues: var13 (ref), var3 (ref)
-		var13(var3)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(v1)
+	ReactModule.useEffect(function() --[[ Line: 86 ]]
+		-- upvalues: UseStateResult2 (copy), v1 (copy)
+		UseStateResult2(v1)
 	end, {
-		var3,
+		v1,
 		p1.initialFeedVisibleRows,
 		p1.visibleRowsPerReveal,
 		p1.startRow,
 		p1.sduiContext.dataUpdatedTimestamp
 	})
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), var4 (ref), discoveryEventErrorLogger (copy), p1 (ref)
-		if var2 and var4 then
-			discoveryEventErrorLogger.reportError("SduiCollectionGridRevealRowsInvalidFeedThreshold", "Unable to reveal CollectionGrid rows because the grid starts after the feed threshold", {
+	ReactModule.useEffect(function() --[[ Line: 99 ]]
+		-- upvalues: IsInitialFeedVisibleRowsAbove (copy), Flag (copy), DiscoveryEventErrorLogger (upval), p1 (copy)
+		if IsInitialFeedVisibleRowsAbove and Flag then
+			DiscoveryEventErrorLogger.reportError("SduiCollectionGridRevealRowsInvalidFeedThreshold", "Unable to reveal CollectionGrid rows because the grid starts after the feed threshold", {
 				initialFeedVisibleRows = p1.initialFeedVisibleRows,
 				startRow = p1.startRow
 			})
 		end
-	end, { var2, var4, p1.initialFeedVisibleRows, p1.startRow })
-	local var6 = var2 and (not var4 and (var1 ~= nil and initialFeedVisibleRows_1 ~= nil))
-	local var7 = if var6 then math.min(initialFeedVisibleRows_1, var1) else nil
-	local var8 = var6 and var7 < var1
-	local var9 = if var8 then var7 else nil
-	reactModule.useLayoutEffect(function()
-		-- upvalues: p1 (ref), var9 (ref)
-		p1.setDisplayedRowCount(var9)
-	end, { p1.setDisplayedRowCount, var9 })
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref)
-		local setDisplayedRowCount = p1.setDisplayedRowCount
+	end, {
+		IsInitialFeedVisibleRowsAbove,
+		Flag,
+		p1.initialFeedVisibleRows,
+		p1.startRow
+	})
+	local HasUseStateResult: boolean = IsInitialFeedVisibleRowsAbove and (not Flag and (TotalNumberOfRows ~= nil and UseStateResult ~= nil))
+	local Smallest = if HasUseStateResult then math.min(UseStateResult, TotalNumberOfRows) else nil
+	local IsSmallestBelow: boolean = HasUseStateResult and Smallest < TotalNumberOfRows
+	local Smallest1 = if IsSmallestBelow then Smallest else nil
+	ReactModule.useLayoutEffect(function() --[[ Line: 129 ]]
+		-- upvalues: p1 (copy), Smallest1 (copy)
+		p1.setDisplayedRowCount(Smallest1)
+	end, { p1.setDisplayedRowCount, Smallest1 })
+	ReactModule.useEffect(function() --[[ Line: 134 ]]
+		-- upvalues: p1 (copy)
+		local SetDisplayedRowCountFunction = p1.setDisplayedRowCount
 		
-		return function()
-			-- upvalues: setDisplayedRowCount (ref)
-			setDisplayedRowCount(nil)
+		return function() --[[ Line: 136 ]]
+			-- upvalues: SetDisplayedRowCountFunction (copy)
+			SetDisplayedRowCountFunction(nil)
 		end
 	end, { p1.setDisplayedRowCount })
-	local var10 = reactFocusNavigationModule.useMostRecentFocusBehavior(p1.setContainerFrame)
-	local var11 = reactFocusNavigationModule.useFocusGuiObject()
-	local var12 = findAnalyticsFieldInAncestors("collectionId", p1.analyticsContext)
-	local var13 = findAnalyticsFieldInAncestors("collectionPosition", p1.analyticsContext)
+	local UseMostRecentFocusBehaviorResult = ReactFocusNavigationModule.useMostRecentFocusBehavior(p1.setContainerFrame)
+	local UseFocusGuiObjectResult = ReactFocusNavigationModule.useFocusGuiObject()
+	local CollectionId = FindAnalyticsFieldInAncestorsFunction("collectionId", p1.analyticsContext)
+	local CollectionPosition = FindAnalyticsFieldInAncestorsFunction("collectionPosition", p1.analyticsContext)
+	local Element = ReactModule.createElement(GetSduiComponentWrapperFunction(p1.revealRowsComponent), {
+		debugName = "SduiCollectionGridRevealRows.RevealRowsComponent",
+		componentConfig = p1.revealRowsComponent,
+		sduiContext = p1.sduiContext,
+		extraLocalProps = {
+			layoutOrder = 2,
+			zIndex = 1,
+			onActivated = ReactModule.useCallback(function() --[[ Line: 147 ]]
+				-- upvalues: Smallest (copy), TotalNumberOfRows (copy), p1 (copy), GuiService (upval), UseFocusGuiObjectResult (copy), UseStateResult2 (copy), CollectionId (copy), CollectionPosition (copy), ShowMoreClickEventFunction (upval), DiscoveryEventErrorLogger (upval)
+				if Smallest == nil or TotalNumberOfRows == nil or p1.visibleRowsPerReveal == nil then return end
+				if GuiService.SelectedCoreObject ~= nil and p1.containerFrame ~= nil then
+					UseFocusGuiObjectResult(p1.containerFrame)
+				end
+				local Smallest1 = math.min(Smallest + p1.visibleRowsPerReveal, TotalNumberOfRows)
+				UseStateResult2(Smallest1)
+				
+				if typeof(CollectionId) == "string" and typeof(CollectionPosition) == "number" then
+					ShowMoreClickEventFunction(p1.sduiContext.appPage or (p1.sduiContext.routeName or ""), {
+						topicId = CollectionId,
+						sortIndex = CollectionPosition,
+						previousVisibleRows = Smallest,
+						newVisibleRows = Smallest1,
+						visibleRowsPerReveal = p1.visibleRowsPerReveal,
+						totalNumberOfRows = TotalNumberOfRows
+					})
+					
+					return
+				else
+					DiscoveryEventErrorLogger.reportError("SduiCollectionGridRevealRowsMissingAnalytics", "Revealed CollectionGrid rows without valid collection analytics", { topicId = CollectionId, sortIndex = CollectionPosition })
+				end
+			end, {
+				TotalNumberOfRows, UseFocusGuiObjectResult, p1.containerFrame, p1.sduiContext,
+				p1.visibleRowsPerReveal, CollectionPosition, CollectionId, Smallest
+			})
+		}
+	})
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
 		LayoutOrder = p1.gridProps.LayoutOrder
 	}, {
-		UIListLayout = reactModule.createElement("UIListLayout", {
+		UIListLayout = ReactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
 			SortOrder = Enum.SortOrder.LayoutOrder,
-			Padding = UDim.new(0, fIntLuaAppGameGridRevealMoreButtonGapPx)
+			Padding = UDim.new(0, FIntLuaAppGameGridRevealMoreButtonGapPx)
 		}),
-		CollectionGrid = reactModule.createElement(collectionGrid, cryoModule.Dictionary.join(p1.gridProps, {
+		CollectionGrid = ReactModule.createElement(CollectionGrid, CryoModule.Dictionary.join(p1.gridProps, {
 			LayoutOrder = 1,
-			containerRef = var10,
-			ZIndex = if var6 then 2 else p1.gridProps.ZIndex,
-			maxNumRows = if var6 then var7 else p1.gridProps.maxNumRows
+			containerRef = UseMostRecentFocusBehaviorResult,
+			ZIndex = if HasUseStateResult then 2 else p1.gridProps.ZIndex,
+			maxNumRows = if HasUseStateResult then Smallest else p1.gridProps.maxNumRows
 		})),
-		RevealMoreButton = if var8 then reactModule.createElement(getSduiComponentWrapper(p1.revealRowsComponent), {
-			debugName = "SduiCollectionGridRevealRows.RevealRowsComponent",
-			componentConfig = p1.revealRowsComponent,
-			sduiContext = p1.sduiContext,
-			extraLocalProps = {
-				layoutOrder = 2,
-				zIndex = 1,
-				onActivated = reactModule.useCallback(function()
-					-- upvalues: var7 (ref), var1 (ref), p1 (ref), guiService (copy), var11 (ref), var13 (ref), var12 (ref), var13 (ref), showMoreClickEvent (copy), discoveryEventErrorLogger (copy)
-					if var7 == nil or var1 == nil or p1.visibleRowsPerReveal == nil then return end
-					if guiService.SelectedCoreObject ~= nil and p1.containerFrame ~= nil then
-						var11(p1.containerFrame)
-					end
-					local minValue = math.min(var7 + p1.visibleRowsPerReveal, var1)
-					var13(minValue)
-					
-					if typeof(var12) == "string" and typeof(var13) == "number" then
-						showMoreClickEvent(p1.sduiContext.appPage or (p1.sduiContext.routeName or ""), {
-							topicId = var12,
-							sortIndex = var13,
-							previousVisibleRows = var7,
-							newVisibleRows = minValue,
-							visibleRowsPerReveal = p1.visibleRowsPerReveal,
-							totalNumberOfRows = var1
-						})
-						
-						return
-					end
-					discoveryEventErrorLogger.reportError("SduiCollectionGridRevealRowsMissingAnalytics", "Revealed CollectionGrid rows without valid collection analytics", { topicId = var12, sortIndex = var13 })
-				end, {
-					var1, var11, p1.containerFrame, p1.sduiContext, p1.visibleRowsPerReveal, var13,
-					var12, var7
-				})
-			}
-		}) else nil
+		RevealMoreButton = if IsSmallestBelow then Element else nil
 	})
 end)

@@ -1,153 +1,153 @@
-﻿local serverDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
-local parent = serverDrivenUi.Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local useTokens = require(parent.Foundation).Hooks.useTokens
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local sduiTileFooterModule = require(serverDrivenUi.Content.SduiTileFooter)
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local sduiActionType = sduiCoreSystemModule.SduiActionType
-local sduiParsers = sduiCoreSystemModule.SduiParsers
-local userProfilesModule = require(parent.UserProfiles)
-local useUserProfilesFetch = userProfilesModule.Hooks.useUserProfilesFetch
-local sduiInGameFriendsDataModule = require(serverDrivenUi.DataStore.SduiInGameFriendsData)
+﻿local ServerDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
+local Parent = ServerDrivenUi.Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local SduiTileFooterModule = require(ServerDrivenUi.Content.SduiTileFooter)
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiActionType = SduiCoreSystemModule.SduiActionType
+local SduiParsers = SduiCoreSystemModule.SduiParsers
+local UserProfilesModule = require(Parent.UserProfiles)
+local UseUserProfilesFetchFunction = UserProfilesModule.Hooks.useUserProfilesFetch
+local SduiInGameFriendsDataModule = require(ServerDrivenUi.DataStore.SduiInGameFriendsData)
 
-local function _(p1, p2)
-	local t = {}
+local function _(p1, p2) --[[ Line: 51 | Named "getUserIdsForFacePile" ]]
+	local UserIds = {}
 	
 	for i = 1, p2 do
-		t[i] = p1[i].userId
+		UserIds[i] = p1[i].userId
 	end
-	return t
+	return UserIds
 end
 
-local function getDisplayText(p3, p4, p5)
-	local t = {}
+local function getDisplayText(UseMemoResult, Separator: string, Smallest): string --[[ Line: 60 ]]
+	local DisplayNames = {}
 	
-	for i = 1, p5 do
-		t[i] = p3[i].displayName
+	for i = 1, Smallest do
+		DisplayNames[i] = UseMemoResult[i].displayName
 	end
-	return table.concat(t, p4)
+	return table.concat(DisplayNames, Separator)
 end
 
-local function alphabeticalSort(x, p6)
-	return if x.displayName then if p6.displayName then x.displayName:lower() < p6.displayName:lower() else true else false
+local function alphabeticalSort(A, B): boolean --[[ Line: 69 ]]
+	return if A.displayName then not B.displayName or A.displayName:lower() < B.displayName:lower() else false
 end
 
-local function getSortedFriendDisplayNames(p6, p7)
-	-- upvalues: userProfilesModule (ref), alphabeticalSort (ref)
-	if not p6 or not p7 or not p7.data then
+local function getSortedFriendDisplayNames(UseMemoResult, p3) --[[ Line: 79 ]]
+	-- upvalues: UserProfilesModule (copy), alphabeticalSort (copy)
+	if not UseMemoResult or not p3 or not p3.data then
 		return {}
 	end
-	local t = {}
+	local List = {}
 	
-	for i, v in p6 do
-		table.insert(t, {
-			userId = v,
-			displayName = userProfilesModule.Selectors.getCombinedNameFromId(p7.data, v)
+	for _, UserId in UseMemoResult do
+		table.insert(List, {
+			userId = UserId,
+			displayName = UserProfilesModule.Selectors.getCombinedNameFromId(p3.data, UserId)
 		})
 	end
-	table.sort(t, alphabeticalSort)
+	table.sort(List, alphabeticalSort)
 	
-	return t
+	return List
 end
 
-return reactModule.memo(function(p8)
-	-- upvalues: useTokens (ref), reactModule (ref), sduiParsers (ref), sduiActionType (ref), useLocalization (ref), sduiInGameFriendsDataModule (ref), signalsReactModule (ref), useUserProfilesFetch (ref), userProfilesModule (ref), getSortedFriendDisplayNames (ref), getDisplayText (ref), sduiTileFooterModule (ref)
-	local layoutOrder = p8.layoutOrder
-	local anchorPoint = p8.anchorPoint
-	local automaticSize = p8.automaticSize
-	local size = p8.size
-	local zIndex = p8.zIndex
-	local position = p8.position
-	local var1 = useTokens()
-	local iconWidth = p8.iconWidth or var1.Size.Size_500
-	local var2 = reactModule.useCallback(function(p9)
-		-- upvalues: p8 (ref), sduiParsers (copy), sduiActionType (copy)
-		if p8.onActivated then
-			p8.onActivated(p9)
+return ReactModule.memo(function(p4) --[[ Line: 98 | Named "SduiGameTileActiveFriendsFooter" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), SduiParsers (copy), SduiActionType (copy), UseLocalizationFunction (copy), SduiInGameFriendsDataModule (copy), SignalsReactModule (copy), UseUserProfilesFetchFunction (copy), UserProfilesModule (copy), getSortedFriendDisplayNames (copy), getDisplayText (copy), SduiTileFooterModule (copy)
+	local LayoutOrder = p4.layoutOrder
+	local AnchorPoint = p4.anchorPoint
+	local AutomaticSize = p4.automaticSize
+	local Size = p4.size
+	local ZIndex = p4.zIndex
+	local Position = p4.position
+	local UseTokensResult = UseTokensFunction()
+	local IconWidth = p4.iconWidth or UseTokensResult.Size.Size_500
+	local UseResult = ReactModule.useCallback(function(p5) --[[ Line: 110 ]]
+		-- upvalues: p4 (copy), SduiParsers (upval), SduiActionType (upval)
+		if p4.onActivated then
+			p4.onActivated(p5)
 			
 			return
 		end
-		local var3 = sduiParsers.safeParseCallback({
-			actionType = sduiActionType.OpenJoinFriends,
-			actionParams = { placeId = p8.placeId, universeId = p8.universeId }
-		}, p8.sduiContext, p8.analyticsContext)
+		local SafeParseResult: (any) -> () = SduiParsers.safeParseCallback({
+			actionType = SduiActionType.OpenJoinFriends,
+			actionParams = { placeId = p4.placeId, universeId = p4.universeId }
+		}, p4.sduiContext, p4.analyticsContext)
 		
-		if var3 then
-			var3(p9)
+		if SafeParseResult then
+			SafeParseResult(p5)
 		end
 	end, {
-		p8.placeId,
-		p8.universeId,
-		p8.analyticsContext,
-		p8.onActivated,
-		p8.sduiContext
+		p4.placeId,
+		p4.universeId,
+		p4.analyticsContext,
+		p4.onActivated,
+		p4.sduiContext
 	})
-	local var3 = useLocalization({ separator = "Feature.GameDetails.Label.FriendsSeparator" })
-	local var4 = signalsReactModule.useSignalState(sduiInGameFriendsDataModule.getInGameFriendsByGame)
-	local var5 = reactModule.useMemo(function()
-		-- upvalues: var4 (ref), p8 (ref)
-		local t = {}
-		
-		for i, v in var4[p8.universeId] or {} do
-			table.insert(t, i)
+	local UseLocalizationResult = UseLocalizationFunction({ separator = "Feature.GameDetails.Label.FriendsSeparator" })
+	local UseSignalStateResult = SignalsReactModule.useSignalState(SduiInGameFriendsDataModule.getInGameFriendsByGame)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 134 ]]
+		-- upvalues: UseSignalStateResult (copy), p4 (copy)
+		local List = {}
+		local UseSignalStateResultEntry = UseSignalStateResult[p4.universeId] or {}
+		for i, _ in UseSignalStateResultEntry do
+			table.insert(List, i)
 		end
-		return t
-	end, { var4, p8.universeId })
-	local var6 = useUserProfilesFetch({
-		userIds = var5,
-		query = userProfilesModule.Queries.userProfilesCombinedNameByUserIds,
-		skip = #var5 == 0
+		return List
+	end, { UseSignalStateResult, p4.universeId })
+	local UseUserProfilesFetchResult = UseUserProfilesFetchFunction({
+		userIds = UseMemoResult,
+		query = UserProfilesModule.Queries.userProfilesCombinedNameByUserIds,
+		skip = #UseMemoResult == 0
 	})
-	local var7 = reactModule.useMemo(function()
-		-- upvalues: getSortedFriendDisplayNames (copy), var5 (ref), var6 (ref)
-		return getSortedFriendDisplayNames(var5, var6)
-	end, { var5, var6 })
-	local minValue = math.min(p8.maxAvatars or 3, #var7)
-	local var8 = getDisplayText(var7, var3.separator, minValue)
-	local t = {}
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 148 ]]
+		-- upvalues: getSortedFriendDisplayNames (upval), UseMemoResult (copy), UseUserProfilesFetchResult (copy)
+		return (getSortedFriendDisplayNames(UseMemoResult, UseUserProfilesFetchResult))
+	end, { UseMemoResult, UseUserProfilesFetchResult })
+	local Smallest = math.min(p4.maxAvatars or 3, #UseMemoResult1)
+	local DisplayText = getDisplayText(UseMemoResult1, UseLocalizationResult.separator, Smallest)
+	local UserIds = {}
 	
-	for i = 1, minValue do
-		t[i] = var7[i].userId
+	for i = 1, Smallest do
+		UserIds[i] = UseMemoResult1[i].userId
 	end
-	local t_1 = {}
+	local ImageLabels = {}
 	
-	for i_1 = 1, minValue do
-		t_1[`userId_{i_1}`] = reactModule.createElement("ImageLabel", {
+	for i1 = 1, Smallest do
+		ImageLabels[`userId_{i1}`] = ReactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 0,
-			LayoutOrder = i_1,
-			BackgroundColor3 = var1.Color.Content.Muted.Color3,
-			Image = `rbxthumb://type=AvatarHeadShot&id={t[i_1]}&w=100&h=100`,
-			Size = UDim2.fromOffset(iconWidth, iconWidth),
-			Position = UDim2.fromOffset((i_1 - 1) * iconWidth / 2, 0)
+			LayoutOrder = i1,
+			BackgroundColor3 = UseTokensResult.Color.Content.Muted.Color3,
+			Image = `rbxthumb://type=AvatarHeadShot&id={UserIds[i1]}&w=100&h=100`,
+			Size = UDim2.fromOffset(IconWidth, IconWidth),
+			Position = UDim2.fromOffset((i1 - 1) * IconWidth / 2, 0)
 		}, {
-			BorderRadius = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0.5, 0) }),
-			Border = if p8.hideBorder then nil else reactModule.createElement("UIStroke", {
+			BorderRadius = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0.5, 0) }),
+			Border = if p4.hideBorder then nil else ReactModule.createElement("UIStroke", {
 				Transparency = 0,
 				Thickness = 1,
 				ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
-				Color = var1.Color.System.Emphasis.Color3
+				Color = UseTokensResult.Color.System.Emphasis.Color3
 			})
 		})
 	end
-	return reactModule.createElement(sduiTileFooterModule, {
-		position = position,
-		anchorPoint = anchorPoint,
-		automaticSize = automaticSize,
-		size = size,
-		layoutOrder = layoutOrder,
-		zIndex = zIndex,
-		sduiContext = p8.sduiContext,
-		textIconGap = var1.Gap.Small,
-		leftText = var8,
+	return ReactModule.createElement(SduiTileFooterModule, {
+		position = Position,
+		anchorPoint = AnchorPoint,
+		automaticSize = AutomaticSize,
+		size = Size,
+		layoutOrder = LayoutOrder,
+		zIndex = ZIndex,
+		sduiContext = p4.sduiContext,
+		textIconGap = UseTokensResult.Gap.Small,
+		leftText = DisplayText,
 		leftTextFlexMode = Enum.UIFlexMode.Shrink,
-		leftIconComponent = reactModule.createElement("Frame", {
+		leftIconComponent = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			AutomaticSize = Enum.AutomaticSize.XY
-		}, t_1),
-		onActivated = var2,
-		testId = p8.testId
+		}, ImageLabels),
+		onActivated = UseResult,
+		testId = p4.testId
 	})
 end)

@@ -1,124 +1,53 @@
-﻿local symbolsModule = require(script.Parent.symbols)
-local spyModule = require(script.Parent.Spy)
-local setReturnValueModule = require(script.Parent.setReturnValue)
-local setSideEffectModule = require(script.Parent.setSideEffect)
+﻿local SymbolsModule = require(script.Parent.symbols)
+local SpyModule = require(script.Parent.Spy)
+local SetReturnValueModule = require(script.Parent.setReturnValue)
+local SetSideEffectModule = require(script.Parent.setSideEffect)
 
-local function _(p1, p2)
-	-- upvalues: symbolsModule (ref)
-	local spec = p1[symbolsModule.Spec]
+local function _(p1, p2) --[[ Line: 8 | Named "isKeyInSpec" ]]
+	-- upvalues: SymbolsModule (copy)
+	local v1 = p1[SymbolsModule.Spec]
 	
-	if spec then
-		local ok, status = pcall(function()
-			-- upvalues: spec (ref), p2 (ref)
-			return spec[p2]
+	if v1 then
+		local Success, Result = pcall(function() --[[ Line: 11 ]]
+			-- upvalues: v1 (copy), p2 (copy)
+			return v1[p2]
 		end)
 		
-		return ok and status
-	end
-	return true
-end
-
-local t = { is = require(script.Parent.isAMagicMock) }
-local t_1 = {
-	__tostring = function(p1)
-		-- upvalues: symbolsModule (ref)
-		local var1 = getmetatable(p1)
-		local list = { "id=" .. var15[symbolsModule.Address] }
-		local name = var1[symbolsModule.Name]
-		
-		if name ~= nil and name ~= "mock" then
-			table.insert(list, "name=" .. name)
-		end
-		return "<MagicMock " .. table.concat(list, " ") .. ">"
-	end,
-	__index = function(p1, p2)
-		-- upvalues: symbolsModule (ref), t (ref)
-		local status_1
-		local var1 = getmetatable(p1)
-		local spec = var1[symbolsModule.Spec]
-		
-		if spec then
-			local ok, status = pcall(function()
-				-- upvalues: spec (ref), p2 (ref)
-				return spec[p2]
-			end)
-			status_1 = ok and status
-		else
-			status_1 = true
-		end
-		if not status_1 then
-			error(string.format("MagicMock Error: Cannot index key %q since it is out of spec.", tostring(p2)))
-		end
-		local var2 = var1[symbolsModule.Children][p2]
-		
-		if var2 == nil then
-			var2 = t.new({ name = var1[symbolsModule.Name] .. "." .. tostring(p2) })
-			var1[symbolsModule.Children][p2] = var2
-			
-			return var2
-		end
-		return if var2 == symbolsModule.None then nil else var2
-	end,
-	__newindex = function(p1, p2, p3)
-		-- upvalues: symbolsModule (ref), spyModule (ref)
-		local status_1
-		local var1 = getmetatable(p1)
-		local spec = var1[symbolsModule.Spec]
-		
-		if spec then
-			local ok, status = pcall(function()
-				-- upvalues: spec (ref), p2 (ref)
-				return spec[p2]
-			end)
-			status_1 = ok and status
-		else
-			status_1 = true
-		end
-		if not status_1 then
-			error(string.format("MagicMock Error: Cannot write key %q since it is out of spec", tostring(p2)))
-		end
-		if type(p3) == "function" then
-			local _, var2 = spyModule.new(p3)
-			p3 = var2
-		elseif p3 == nil then
-			p3 = symbolsModule.None
-		end
-		if p2 == symbolsModule.ReturnValue then
-			var1[symbolsModule.ReturnValue] = { p3, n = 1 }
-			
-			return
-		end
-		var1[symbolsModule.Children][p2] = p3
-	end
-}
-
-local _ = function(p1)
-	-- upvalues: symbolsModule (ref), t (ref)
-	if type(p1) == "table" and p1[symbolsModule.isTuple] then
-		return not t.is(p1)
+		return Success and Result
+	else
+		return true
 	end
 end
 
-local function getReturnValue(p1, ...)
-	-- upvalues: symbolsModule (ref), spyModule (ref), t (ref)
-	if p1[symbolsModule.ReturnValue] then
-		return p1[symbolsModule.ReturnValue]
+local MagicMockModule = { is = require(script.Parent.isAMagicMock) }
+
+local _ = function(p1): boolean? --[[ Line: 78 | Named "isTuple" ]]
+	-- upvalues: SymbolsModule (copy), MagicMockModule (copy)
+	if type(p1) ~= "table" or not p1[SymbolsModule.isTuple] then return end
+	return not MagicMockModule.is(p1)
+end
+
+local function getReturnValue(p1, ...) --[[ Line: 84 ]]
+	-- upvalues: SymbolsModule (copy), SpyModule (copy), MagicMockModule (copy)
+	if p1[SymbolsModule.ReturnValue] then
+		return p1[SymbolsModule.ReturnValue]
 	end
-	local sideEffect = p1[symbolsModule.SideEffect]
+	local v1 = p1[SymbolsModule.SideEffect]
 	
-	if sideEffect then
-		sideEffect.calls += 1
+	if v1 then
+		v1.calls += 1
 		
-		if type(sideEffect.value) == "function" or spyModule.is(sideEffect.value) then
-			return { sideEffect.value(...) }
-		elseif type(sideEffect.value) == "table" then
-			local calls = sideEffect.calls
-			local _ = nil
-			local value = sideEffect.value
-			local var1 = if if type(value) == "table" and value[symbolsModule.isTuple] then not t.is(value) else nil then sideEffect.value.values[calls] else sideEffect.value[calls]
+		if type(v1.value) == "function" or SpyModule.is(v1.value) then
+			return { v1.value(...) }
+		end
+		if type(v1.value) == "table" then
+			local Calls = v1.calls
+			local Value = v1.value
+			local Inverted = if type(Value) == "table" and Value[SymbolsModule.isTuple] then not MagicMockModule.is(Value) else nil
+			local Value1 = if Inverted then v1.value.values[Calls] else v1.value[Calls]
 			
-			if var1 then
-				return { var1 }
+			if Value1 then
+				return { Value1 }
 			end
 			error("MagicMock Error: SideEffect iteration reached")
 		else
@@ -128,310 +57,380 @@ local function getReturnValue(p1, ...)
 	return nil
 end
 
-function t_1:__call(...)
-	-- upvalues: getReturnValue (ref), t (ref), symbolsModule (ref)
-	local var1 = getmetatable(self)
-	local t_1 = {
-		args = table.pack(...),
-		result = getReturnValue(var1, ...)
-	}
-	
-	if t_1.result == nil then
-		t_1.result = {
-			t.new({ name = var1[symbolsModule.Name] .. "()" }),
-			n = 1
-		}
-		var1[symbolsModule.ReturnValue] = t_1.result
-	elseif t_1.result == symbolsModule.None then
-		t_1.result = { n = 1 }
-	else
-		local var2 = t_1.result[1]
-		
-		if if type(var2) == "table" and var2[symbolsModule.isTuple] then not t.is(var2) else nil then
-			t_1.result = t_1.result[1].values
-		end
-	end
-	table.insert(var1[symbolsModule.Calls], t_1)
-	
-	return table.unpack(t_1.result)
-end
-
-local _ = function(p1)
-	-- upvalues: symbolsModule (ref), t (ref)
-	return function(p2, p3)
-		-- upvalues: p1 (ref), symbolsModule (copy), t (copy)
-		local var1, formattedText
-		local _ = nil
-		local _ = nil
-		
+local _ = function(p1) --[[ Line: 144 | Named "operation" ]]
+	-- upvalues: SymbolsModule (copy), MagicMockModule (copy)
+	return function(p2, p3) --[[ Line: 145 ]]
+		-- upvalues: p1 (copy), SymbolsModule (upval), MagicMockModule (upval)
+		local Meta = nil
+		local Formatted = nil
 		if type(p2) == "string" or not getmetatable(p2) then
-			var1 = getmetatable(p3)
-			formattedText = string.format("__r_%s()", p1)
+			Meta = getmetatable(p3)
+			Formatted = string.format("__r_%s()", p1)
 		else
-			var1 = getmetatable(p2)
-			formattedText = string.format("__%s()", p1)
+			Meta = getmetatable(p2)
+			Formatted = string.format("__%s()", p1)
 		end
-		local var2 = var1[symbolsModule.Operations][formattedText]
+		local Entry = Meta[SymbolsModule.Operations][Formatted]
 		
-		if var2 == nil then
-			local var3 = t.new({ name = var1[symbolsModule.Name] .. "." .. formattedText })
-			var1[symbolsModule.Operations][formattedText] = var3
+		if Entry == nil then
+			local NewMagicMock = MagicMockModule.new({ name = Meta[SymbolsModule.Name] .. "." .. Formatted })
+			Meta[SymbolsModule.Operations][Formatted] = NewMagicMock
 			
-			return var3
+			return NewMagicMock
+		else
+			return Entry
 		end
-		return var2
 	end
 end
 
-local var1 = "add"
+local v1 = "add"
 
-function t_1:__add(p1)
-	-- upvalues: var1 (ref), symbolsModule (ref), t (ref)
-	local var2, formattedText
-	local _ = nil
-	local _ = nil
-	
-	if type(self) == "string" or not getmetatable(self) then
-		var2 = getmetatable(p1)
-		formattedText = string.format("__r_%s()", var1)
+local function v9(p1, p2) --[[ Line: 145 ]]
+	-- upvalues: v1 (copy), SymbolsModule (copy), MagicMockModule (copy)
+	local Meta = nil
+	local Formatted = nil
+	if type(p1) == "string" or not getmetatable(p1) then
+		Meta = getmetatable(p2)
+		Formatted = string.format("__r_%s()", v1)
 	else
-		var2 = getmetatable(self)
-		formattedText = string.format("__%s()", var1)
+		Meta = getmetatable(p1)
+		Formatted = string.format("__%s()", v1)
 	end
-	local var3 = var2[symbolsModule.Operations][formattedText]
+	local Entry = Meta[SymbolsModule.Operations][Formatted]
 	
-	if var3 == nil then
-		local var4 = t.new({ name = var2[symbolsModule.Name] .. "." .. formattedText })
-		var2[symbolsModule.Operations][formattedText] = var4
+	if Entry == nil then
+		local NewMagicMock = MagicMockModule.new({ name = Meta[SymbolsModule.Name] .. "." .. Formatted })
+		Meta[SymbolsModule.Operations][Formatted] = NewMagicMock
 		
-		return var4
-	end
-	return var3
-end
-
-local var2 = "sub"
-
-function t_1:__sub(p1)
-	-- upvalues: var2 (ref), symbolsModule (ref), t (ref)
-	local var3, formattedText
-	local _ = nil
-	local _ = nil
-	
-	if type(self) == "string" or not getmetatable(self) then
-		var3 = getmetatable(p1)
-		formattedText = string.format("__r_%s()", var2)
+		return NewMagicMock
 	else
-		var3 = getmetatable(self)
-		formattedText = string.format("__%s()", var2)
+		return Entry
 	end
-	local var4 = var3[symbolsModule.Operations][formattedText]
-	
-	if var4 == nil then
-		local var5 = t.new({ name = var3[symbolsModule.Name] .. "." .. formattedText })
-		var3[symbolsModule.Operations][formattedText] = var5
-		
-		return var5
-	end
-	return var4
 end
 
-local var3 = "div"
+local v2 = "sub"
 
-function t_1:__div(p1)
-	-- upvalues: var3 (ref), symbolsModule (ref), t (ref)
-	local var4, formattedText
-	local _ = nil
-	local _ = nil
-	
-	if type(self) == "string" or not getmetatable(self) then
-		var4 = getmetatable(p1)
-		formattedText = string.format("__r_%s()", var3)
+local function v11(p1, p2) --[[ Line: 145 ]]
+	-- upvalues: v2 (copy), SymbolsModule (copy), MagicMockModule (copy)
+	local Meta = nil
+	local Formatted = nil
+	if type(p1) == "string" or not getmetatable(p1) then
+		Meta = getmetatable(p2)
+		Formatted = string.format("__r_%s()", v2)
 	else
-		var4 = getmetatable(self)
-		formattedText = string.format("__%s()", var3)
+		Meta = getmetatable(p1)
+		Formatted = string.format("__%s()", v2)
 	end
-	local var5 = var4[symbolsModule.Operations][formattedText]
+	local Entry = Meta[SymbolsModule.Operations][Formatted]
 	
-	if var5 == nil then
-		local var6 = t.new({ name = var4[symbolsModule.Name] .. "." .. formattedText })
-		var4[symbolsModule.Operations][formattedText] = var6
+	if Entry == nil then
+		local NewMagicMock = MagicMockModule.new({ name = Meta[SymbolsModule.Name] .. "." .. Formatted })
+		Meta[SymbolsModule.Operations][Formatted] = NewMagicMock
 		
-		return var6
-	end
-	return var5
-end
-
-local var4 = "mul"
-
-function t_1:__mul(p1)
-	-- upvalues: var4 (ref), symbolsModule (ref), t (ref)
-	local var5, formattedText
-	local _ = nil
-	local _ = nil
-	
-	if type(self) == "string" or not getmetatable(self) then
-		var5 = getmetatable(p1)
-		formattedText = string.format("__r_%s()", var4)
+		return NewMagicMock
 	else
-		var5 = getmetatable(self)
-		formattedText = string.format("__%s()", var4)
+		return Entry
 	end
-	local var6 = var5[symbolsModule.Operations][formattedText]
-	
-	if var6 == nil then
-		local var7 = t.new({ name = var5[symbolsModule.Name] .. "." .. formattedText })
-		var5[symbolsModule.Operations][formattedText] = var7
-		
-		return var7
-	end
-	return var6
 end
 
-local var5 = "mod"
+local v3 = "div"
 
-function t_1:__mod(p1)
-	-- upvalues: var5 (ref), symbolsModule (ref), t (ref)
-	local var6, formattedText
-	local _ = nil
-	local _ = nil
-	
-	if type(self) == "string" or not getmetatable(self) then
-		var6 = getmetatable(p1)
-		formattedText = string.format("__r_%s()", var5)
+local function v13(p1, p2) --[[ Line: 145 ]]
+	-- upvalues: v3 (copy), SymbolsModule (copy), MagicMockModule (copy)
+	local Meta = nil
+	local Formatted = nil
+	if type(p1) == "string" or not getmetatable(p1) then
+		Meta = getmetatable(p2)
+		Formatted = string.format("__r_%s()", v3)
 	else
-		var6 = getmetatable(self)
-		formattedText = string.format("__%s()", var5)
+		Meta = getmetatable(p1)
+		Formatted = string.format("__%s()", v3)
 	end
-	local var7 = var6[symbolsModule.Operations][formattedText]
+	local Entry = Meta[SymbolsModule.Operations][Formatted]
 	
-	if var7 == nil then
-		local var8 = t.new({ name = var6[symbolsModule.Name] .. "." .. formattedText })
-		var6[symbolsModule.Operations][formattedText] = var8
+	if Entry == nil then
+		local NewMagicMock = MagicMockModule.new({ name = Meta[SymbolsModule.Name] .. "." .. Formatted })
+		Meta[SymbolsModule.Operations][Formatted] = NewMagicMock
 		
-		return var8
-	end
-	return var7
-end
-
-local var6 = "pow"
-
-function t_1:__pow(p1)
-	-- upvalues: var6 (ref), symbolsModule (ref), t (ref)
-	local var7, formattedText
-	local _ = nil
-	local _ = nil
-	
-	if type(self) == "string" or not getmetatable(self) then
-		var7 = getmetatable(p1)
-		formattedText = string.format("__r_%s()", var6)
+		return NewMagicMock
 	else
-		var7 = getmetatable(self)
-		formattedText = string.format("__%s()", var6)
+		return Entry
 	end
-	local var8 = var7[symbolsModule.Operations][formattedText]
-	
-	if var8 == nil then
-		local var9 = t.new({ name = var7[symbolsModule.Name] .. "." .. formattedText })
-		var7[symbolsModule.Operations][formattedText] = var9
-		
-		return var9
-	end
-	return var8
 end
 
-local var7 = "neg"
+local v4 = "mul"
 
-function t_1:__unm(p1)
-	-- upvalues: var7 (ref), symbolsModule (ref), t (ref)
-	local var8, formattedText
-	local _ = nil
-	local _ = nil
-	
-	if type(self) == "string" or not getmetatable(self) then
-		var8 = getmetatable(p1)
-		formattedText = string.format("__r_%s()", var7)
+local function v15(p1, p2) --[[ Line: 145 ]]
+	-- upvalues: v4 (copy), SymbolsModule (copy), MagicMockModule (copy)
+	local Meta = nil
+	local Formatted = nil
+	if type(p1) == "string" or not getmetatable(p1) then
+		Meta = getmetatable(p2)
+		Formatted = string.format("__r_%s()", v4)
 	else
-		var8 = getmetatable(self)
-		formattedText = string.format("__%s()", var7)
+		Meta = getmetatable(p1)
+		Formatted = string.format("__%s()", v4)
 	end
-	local var9 = var8[symbolsModule.Operations][formattedText]
+	local Entry = Meta[SymbolsModule.Operations][Formatted]
 	
-	if var9 == nil then
-		local var10 = t.new({ name = var8[symbolsModule.Name] .. "." .. formattedText })
-		var8[symbolsModule.Operations][formattedText] = var10
+	if Entry == nil then
+		local NewMagicMock = MagicMockModule.new({ name = Meta[SymbolsModule.Name] .. "." .. Formatted })
+		Meta[SymbolsModule.Operations][Formatted] = NewMagicMock
 		
-		return var10
-	end
-	return var9
-end
-
-local var8 = "concat"
-
-function t_1:__concat(p1)
-	-- upvalues: var8 (ref), symbolsModule (ref), t (ref)
-	local var9, formattedText
-	local _ = nil
-	local _ = nil
-	
-	if type(self) == "string" or not getmetatable(self) then
-		var9 = getmetatable(p1)
-		formattedText = string.format("__r_%s()", var8)
+		return NewMagicMock
 	else
-		var9 = getmetatable(self)
-		formattedText = string.format("__%s()", var8)
+		return Entry
 	end
-	local var10 = var9[symbolsModule.Operations][formattedText]
-	
-	if var10 == nil then
-		local var11 = t.new({ name = var9[symbolsModule.Name] .. "." .. formattedText })
-		var9[symbolsModule.Operations][formattedText] = var11
-		
-		return var11
-	end
-	return var10
 end
 
-function t.new(p1)
-	-- upvalues: symbolsModule (ref), t_1 (ref), setReturnValueModule (ref), setSideEffectModule (ref)
-	p1 = p1 or {}
+local v5 = "mod"
+
+local function v17(p1, p2) --[[ Line: 145 ]]
+	-- upvalues: v5 (copy), SymbolsModule (copy), MagicMockModule (copy)
+	local Meta = nil
+	local Formatted = nil
+	if type(p1) == "string" or not getmetatable(p1) then
+		Meta = getmetatable(p2)
+		Formatted = string.format("__r_%s()", v5)
+	else
+		Meta = getmetatable(p1)
+		Formatted = string.format("__%s()", v5)
+	end
+	local Entry = Meta[SymbolsModule.Operations][Formatted]
 	
-	local function _()
-		-- upvalues: p1 (write)
-		return if p1.name then p1.name elseif p1.spec then tostring(p1.spec) else "mock"
+	if Entry == nil then
+		local NewMagicMock = MagicMockModule.new({ name = Meta[SymbolsModule.Name] .. "." .. Formatted })
+		Meta[SymbolsModule.Operations][Formatted] = NewMagicMock
+		
+		return NewMagicMock
+	else
+		return Entry
+	end
+end
+
+local v6 = "pow"
+
+local function v19(p1, p2) --[[ Line: 145 ]]
+	-- upvalues: v6 (copy), SymbolsModule (copy), MagicMockModule (copy)
+	local Meta = nil
+	local Formatted = nil
+	if type(p1) == "string" or not getmetatable(p1) then
+		Meta = getmetatable(p2)
+		Formatted = string.format("__r_%s()", v6)
+	else
+		Meta = getmetatable(p1)
+		Formatted = string.format("__%s()", v6)
+	end
+	local Entry = Meta[SymbolsModule.Operations][Formatted]
+	
+	if Entry == nil then
+		local NewMagicMock = MagicMockModule.new({ name = Meta[SymbolsModule.Name] .. "." .. Formatted })
+		Meta[SymbolsModule.Operations][Formatted] = NewMagicMock
+		
+		return NewMagicMock
+	else
+		return Entry
+	end
+end
+
+local v7 = "neg"
+
+local function v21(p1, p2) --[[ Line: 145 ]]
+	-- upvalues: v7 (copy), SymbolsModule (copy), MagicMockModule (copy)
+	local Meta = nil
+	local Formatted = nil
+	if type(p1) == "string" or not getmetatable(p1) then
+		Meta = getmetatable(p2)
+		Formatted = string.format("__r_%s()", v7)
+	else
+		Meta = getmetatable(p1)
+		Formatted = string.format("__%s()", v7)
+	end
+	local Entry = Meta[SymbolsModule.Operations][Formatted]
+	
+	if Entry == nil then
+		local NewMagicMock = MagicMockModule.new({ name = Meta[SymbolsModule.Name] .. "." .. Formatted })
+		Meta[SymbolsModule.Operations][Formatted] = NewMagicMock
+		
+		return NewMagicMock
+	else
+		return Entry
+	end
+end
+
+local v8 = "concat"
+local config = {
+	__tostring = function(p1): string --[[ Line: 24 ]]
+		-- upvalues: SymbolsModule (copy)
+		local Meta = getmetatable(p1)
+		local List = { "id=" .. Meta[SymbolsModule.Address] }
+		local Entry = Meta[SymbolsModule.Name]
+		
+		if Entry ~= nil and Entry ~= "mock" then
+			table.insert(List, "name=" .. Entry)
+		end
+		return "<MagicMock " .. table.concat(List, " ") .. ">"
+	end,
+	__index = function(p1, p2) --[[ Line: 36 ]]
+		-- upvalues: SymbolsModule (copy), MagicMockModule (copy)
+		local Meta = getmetatable(p1)
+		local Entry = Meta[SymbolsModule.Spec]
+		local Result1 = nil
+		
+		if Entry then
+			local Success, Result = pcall(function() --[[ Line: 11 ]]
+				-- upvalues: Entry (copy), p2 (copy)
+				return Entry[p2]
+			end)
+			Result1 = Success and Result
+		else
+			Result1 = true
+		end
+		if not Result1 then
+			error(string.format("MagicMock Error: Cannot index key %q since it is out of spec.", (tostring(p2))))
+		end
+		local Entry1 = Meta[SymbolsModule.Children][p2]
+		
+		if Entry1 == nil then
+			Entry1 = MagicMockModule.new({ name = Meta[SymbolsModule.Name] .. "." .. tostring(p2) })
+			Meta[SymbolsModule.Children][p2] = Entry1
+			
+			return Entry1
+		else
+			return if Entry1 == SymbolsModule.None then nil else Entry1
+		end
+	end,
+	__newindex = function(p1, ReturnValue, NoneFunction) --[[ Line: 56 ]]
+		-- upvalues: SymbolsModule (copy), SpyModule (copy)
+		local Meta = getmetatable(p1)
+		local Entry = Meta[SymbolsModule.Spec]
+		local Result1 = nil
+		
+		if Entry then
+			local Success, Result = pcall(function() --[[ Line: 11 ]]
+				-- upvalues: Entry (copy), ReturnValue (copy)
+				return Entry[ReturnValue]
+			end)
+			Result1 = Success and Result
+		else
+			Result1 = true
+		end
+		if not Result1 then
+			error(string.format("MagicMock Error: Cannot write key %q since it is out of spec", (tostring(ReturnValue))))
+		end
+		if type(NoneFunction) == "function" then
+			local _, NewSpy2 = SpyModule.new(NoneFunction)
+			NoneFunction = NewSpy2
+		elseif NoneFunction == nil then
+			NoneFunction = SymbolsModule.None
+		end
+		if ReturnValue == SymbolsModule.ReturnValue then
+			Meta[SymbolsModule.ReturnValue] = { NoneFunction, n = 1 }
+			
+			return
+		else
+			Meta[SymbolsModule.Children][ReturnValue] = NoneFunction
+		end
+	end,
+	__call = function(p1, ...) --[[ Line: 117 ]]
+		-- upvalues: getReturnValue (copy), MagicMockModule (copy), SymbolsModule (copy)
+		local Meta = getmetatable(p1)
+		local config = {
+			args = table.pack(...),
+			result = getReturnValue(Meta, ...)
+		}
+		
+		if config.result == nil then
+			config.result = {
+				MagicMockModule.new({ name = Meta[SymbolsModule.Name] .. "()" }),
+				n = 1
+			}
+			Meta[SymbolsModule.ReturnValue] = config.result
+		elseif config.result == SymbolsModule.None then
+			config.result = { n = 1 }
+		else
+			local Entry = config.result[1]
+			
+			if if type(Entry) == "table" and Entry[SymbolsModule.isTuple] then not MagicMockModule.is(Entry) else nil then
+				config.result = config.result[1].values
+			end
+		end
+		table.insert(Meta[SymbolsModule.Calls], config)
+		
+		return table.unpack(config.result)
+	end,
+	__add = v9,
+	__sub = v11,
+	__div = v13,
+	__mul = v15,
+	__mod = v17,
+	__pow = v19,
+	__unm = v21,
+	__concat = function(p1, p2) --[[ Line: 145 ]]
+		-- upvalues: v8 (copy), SymbolsModule (copy), MagicMockModule (copy)
+		local Meta = nil
+		local Formatted = nil
+		if type(p1) == "string" or not getmetatable(p1) then
+			Meta = getmetatable(p2)
+			Formatted = string.format("__r_%s()", v8)
+		else
+			Meta = getmetatable(p1)
+			Formatted = string.format("__%s()", v8)
+		end
+		local Entry = Meta[SymbolsModule.Operations][Formatted]
+		
+		if Entry == nil then
+			local NewMagicMock = MagicMockModule.new({ name = Meta[SymbolsModule.Name] .. "." .. Formatted })
+			Meta[SymbolsModule.Operations][Formatted] = NewMagicMock
+			
+			return NewMagicMock
+		else
+			return Entry
+		end
+	end
+}
+
+function MagicMockModule.new(None) --[[ Line: 176 ]]
+	-- upvalues: SymbolsModule (copy), config (copy), SetReturnValueModule (copy), SetSideEffectModule (copy)
+	local None1 = None or {}
+	
+	local function _() --[[ Line: 179 | Named "getName" ]]
+		-- upvalues: None1 (ref)
+		return if None1.name then None1.name elseif None1.spec then tostring(None1.spec) else "mock"
 	end
 	
 	local t = {}
-	local t_2 = {
-		[symbolsModule.isMagicMock] = true,
-		[symbolsModule.Address] = tostring(t),
-		[symbolsModule.Name] = if p1.name then p1.name elseif p1.spec then tostring(p1.spec) else "mock",
-		[symbolsModule.Operations] = {},
-		[symbolsModule.Calls] = {},
-		[symbolsModule.Children] = {},
-		[symbolsModule.Spec] = p1.spec or nil,
-		[symbolsModule.ReturnValue] = nil,
-		[symbolsModule.SideEffect] = nil
+	local config1 = {
+		[SymbolsModule.isMagicMock] = true,
+		[SymbolsModule.Address] = tostring(t),
+		[SymbolsModule.Name] = if None1.name then None1.name elseif None1.spec then tostring(None1.spec) else "mock",
+		[SymbolsModule.Operations] = {},
+		[SymbolsModule.Calls] = {},
+		[SymbolsModule.Children] = {},
+		[SymbolsModule.Spec] = None1.spec or nil,
+		[SymbolsModule.ReturnValue] = nil,
+		[SymbolsModule.SideEffect] = nil
 	}
 	
-	for i, v in pairs(t_1) do
-		t_2[i] = v
+	for i, value in pairs(config) do
+		config1[i] = value
 	end
-	local tbl = setmetatable(t, t_2)
+	local self = setmetatable(t, config1)
 	
-	if p1.returnValue then
-		setReturnValueModule(tbl, p1.returnValue)
+	if None1.returnValue then
+		SetReturnValueModule(self, None1.returnValue)
 	end
-	if p1.sideEffect then
-		setSideEffectModule(tbl, p1.sideEffect)
+	if None1.sideEffect then
+		SetSideEffectModule(self, None1.sideEffect)
 	end
-	return tbl
+	return self
 end
 
-function t.is(p2)
-	-- upvalues: symbolsModule (ref)
-	local var9 = getmetatable(p2)
+function MagicMockModule.is(p1): boolean --[[ Line: 218 ]]
+	-- upvalues: SymbolsModule (copy)
+	local Meta = getmetatable(p1)
 	
-	return if var9 then var9[symbolsModule.isMagicMock] ~= nil else false
+	return if Meta then Meta[SymbolsModule.isMagicMock] ~= nil else false
 end
 
-return t
+return MagicMockModule

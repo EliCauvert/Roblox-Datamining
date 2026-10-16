@@ -1,48 +1,46 @@
-﻿local app = script:FindFirstAncestor("App")
-local parent = app.Parent
-local core = parent.Core
-local parent_1 = parent.Parent
-local tModule = require(parent_1.t)
-local roactModule = require(parent_1.Roact)
-local controlStateModule = require(core.Control.Enum.ControlState)
-local genericTextLabelModule = require(core.Text.GenericTextLabel.GenericTextLabel)
-local withStyleModule = require(core.Style.withStyle)
-local getContentStyleModule = require(core.Button.getContentStyle)
-local getIconSizeModule = require(app.ImageSet.getIconSize)
-local imageSetComponentModule = require(parent.Core.ImageSet.ImageSetComponent)
-local iconSizeModule = require(app.ImageSet.Enum.IconSize)
-local validateFontInfoModule = require(parent.Core.Style.Validator.validateFontInfo)
-local validateTypographyInfoModule = require(parent.Core.Style.Validator.validateTypographyInfo)
-local validateColorInfoModule = require(parent.Core.Style.Validator.validateColorInfo)
-local playerContext = roactModule.PureComponent:extend("PlayerContext")
-local t = { [controlStateModule.Default] = "TextDefault" }
-local t_1 = {
-	[controlStateModule.Default] = "IconOnHover",
-	[controlStateModule.Hover] = "IconDefault"
+﻿local App = script:FindFirstAncestor("App")
+local Parent = App.Parent
+local Core = Parent.Core
+local Parent1 = Parent.Parent
+local TModule = require(Parent1.t)
+local RoactModule = require(Parent1.Roact)
+local ControlStateModule = require(Core.Control.Enum.ControlState)
+local GenericTextLabelModule = require(Core.Text.GenericTextLabel.GenericTextLabel)
+local WithStyleModule = require(Core.Style.withStyle)
+local GetContentStyleModule = require(Core.Button.getContentStyle)
+local GetIconSizeModule = require(App.ImageSet.getIconSize)
+local ImageSetComponentModule = require(Parent.Core.ImageSet.ImageSetComponent)
+local IconSizeModule = require(App.ImageSet.Enum.IconSize)
+local PlayerContext = RoactModule.PureComponent:extend("PlayerContext")
+local config = { [ControlStateModule.Default] = "TextDefault" }
+local config1 = {
+	[ControlStateModule.Default] = "IconOnHover",
+	[ControlStateModule.Hover] = "IconDefault"
 }
-playerContext.validateProps = tModule.strictInterface({
-	text = tModule.optional(tModule.string),
-	icon = tModule.optional(tModule.union(tModule.string, tModule.table)),
-	iconSize = tModule.optional(tModule.intersection(tModule.UDim2, function(p1)
-		if p1.X.Scale == 0 and p1.Y.Scale == 0 then
+PlayerContext.validateProps = TModule.strictInterface({
+	text = TModule.optional(TModule.string),
+	icon = TModule.optional(TModule.union(TModule.string, TModule.table)),
+	iconSize = TModule.optional(TModule.intersection(TModule.UDim2, function(Vector) --[[ Line: 33 | Named "doesNotUseScale" ]]
+		if Vector.X.Scale == 0 and Vector.Y.Scale == 0 then
 			return true
+		else
+			return false, "Only Offset values are allowed"
 		end
-		return false, "Only Offset values are allowed"
 	end)),
-	iconColor = tModule.optional(tModule.Color3),
-	iconTransparency = tModule.optional(tModule.number),
-	onActivated = tModule.optional(tModule.callback),
-	Selectable = tModule.optional(tModule.boolean),
-	fontStyle = tModule.optional(tModule.union(validateFontInfoModule, validateTypographyInfoModule)),
-	textHeight = tModule.optional(tModule.number),
-	textColorStyle = tModule.optional(validateColorInfoModule),
-	iconPadding = tModule.optional(tModule.number),
-	iconTextSpacing = tModule.optional(tModule.number),
-	layoutOrder = tModule.optional(tModule.number),
-	horizontalAlignment = tModule.optional(tModule.EnumItem),
-	textXAlignment = tModule.optional(tModule.EnumItem)
+	iconColor = TModule.optional(TModule.Color3),
+	iconTransparency = TModule.optional(TModule.number),
+	onActivated = TModule.optional(TModule.callback),
+	Selectable = TModule.optional(TModule.boolean),
+	fontStyle = TModule.optional(TModule.union(require(Parent.Core.Style.Validator.validateFontInfo), (require(Parent.Core.Style.Validator.validateTypographyInfo)))),
+	textHeight = TModule.optional(TModule.number),
+	textColorStyle = TModule.optional((require(Parent.Core.Style.Validator.validateColorInfo))),
+	iconPadding = TModule.optional(TModule.number),
+	iconTextSpacing = TModule.optional(TModule.number),
+	layoutOrder = TModule.optional(TModule.number),
+	horizontalAlignment = TModule.optional(TModule.EnumItem),
+	textXAlignment = TModule.optional(TModule.EnumItem)
 })
-playerContext.defaultProps = {
+PlayerContext.defaultProps = {
 	text = "",
 	icon = nil,
 	Selectable = true,
@@ -50,82 +48,83 @@ playerContext.defaultProps = {
 	iconPadding = 4,
 	iconTextSpacing = 4,
 	layoutOrder = 1,
-	iconSize = UDim2.fromOffset(getIconSizeModule(iconSizeModule.Small), getIconSizeModule(iconSizeModule.Small)),
+	iconSize = UDim2.fromOffset(GetIconSizeModule(IconSizeModule.Small), GetIconSizeModule(IconSizeModule.Small)),
 	horizontalAlignment = Enum.HorizontalAlignment.Left,
 	textXAlignment = Enum.TextXAlignment.Left
 }
 
-function playerContext.init(p1)
+function PlayerContext.init(p1) --[[ Line: 87 ]]
 	p1.state = {}
 end
 
-function playerContext.render(p1)
-	-- upvalues: withStyleModule (ref), getContentStyleModule (ref), t_1 (ref), t (ref), roactModule (ref), imageSetComponentModule (ref), genericTextLabelModule (ref)
-	local controlState = p1.state.controlState
-	local text = p1.props.text
-	local icon = p1.props.icon
-	local iconSize = p1.props.iconSize
-	local horizontalAlignment = p1.props.horizontalAlignment
-	local onActivated = p1.props.onActivated
+function PlayerContext.render(p1) --[[ Line: 91 ]]
+	-- upvalues: WithStyleModule (copy), GetContentStyleModule (copy), config1 (copy), config (copy), RoactModule (copy), ImageSetComponentModule (copy), GenericTextLabelModule (copy)
+	local ControlState = p1.state.controlState
+	local Text = p1.props.text
+	local Icon = p1.props.icon
+	local IconSize = p1.props.iconSize
+	local HorizontalAlignment = p1.props.horizontalAlignment
+	local OnActivated = p1.props.onActivated
 	
-	return withStyleModule(function(p2)
-		-- upvalues: getContentStyleModule (copy), t_1 (copy), controlState (ref), t (copy), onActivated (ref), p1 (ref), iconSize (ref), roactModule (copy), horizontalAlignment (ref), icon (ref), imageSetComponentModule (copy), text (ref), genericTextLabelModule (copy)
-		local var1 = getContentStyleModule(t_1, controlState, p2)
-		local var2 = getContentStyleModule(t, controlState, p2)
-		local var3 = if onActivated then var1 else var2
-		local var4 = if not p1.props.iconTransparency then if p1.props.iconColor then 0 else var3.Transparency else p1.props.iconTransparency
-		local var5 = if not p1.props.iconColor then var3.Color else p1.props.iconColor
-		local textHeight = p1.props.textHeight
-		local textColorStyle = p1.props.textColorStyle or (if onActivated then var1 else var2)
-		local iconPadding = p1.props.iconPadding
-		local iconTextSpacing = p1.props.iconTextSpacing
-		local var6 = iconSize.X.Offset + iconPadding * 2
+	return WithStyleModule(function(p2) --[[ Line: 101 ]]
+		-- upvalues: GetContentStyleModule (upval), config1 (upval), ControlState (copy), config (upval), OnActivated (copy), p1 (copy), IconSize (copy), RoactModule (upval), HorizontalAlignment (copy), Icon (copy), ImageSetComponentModule (upval), Text (copy), GenericTextLabelModule (upval)
+		local ContentStyleModule = GetContentStyleModule(config1, ControlState, p2)
+		local ContentStyleModule1 = GetContentStyleModule(config, ControlState, p2)
+		local ContentStyleModule2 = OnActivated and ContentStyleModule or ContentStyleModule1
+		local IconTransparency = if p1.props.iconTransparency then p1.props.iconTransparency elseif p1.props.iconColor then 0 else ContentStyleModule2.Transparency
+		local IconColor = if p1.props.iconColor then p1.props.iconColor else ContentStyleModule2.Color
+		local TextColorStyle = p1.props.textColorStyle or (if OnActivated then ContentStyleModule else ContentStyleModule1)
+		local IconPadding: number = p1.props.iconPadding
+		local IconTextSpacing = p1.props.iconTextSpacing
+		local NewOffset = IconSize.X.Offset + IconPadding * 2
+		local NewOffset1 = IconSize.Y.Offset + IconPadding * 2
+		local FontStyle = p1.props.fontStyle or p2.Font.CaptionHeader
 		
-		return roactModule.createElement("ImageButton", {
-			Size = UDim2.new(1, 0, 0, textHeight),
+		return RoactModule.createElement("ImageButton", {
+			Size = UDim2.new(1, 0, 0, p1.props.textHeight),
 			BackgroundTransparency = 1,
 			Selectable = p1.props.Selectable,
-			Active = if onActivated then true else false,
+			Active = if OnActivated then true else false,
 			LayoutOrder = p1.props.layoutOrder,
-			[roactModule.Event.Activated] = onActivated
+			[RoactModule.Event.Activated] = OnActivated
 		}, {
-			UIListLayout = roactModule.createElement("UIListLayout", {
+			UIListLayout = RoactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Horizontal,
 				VerticalAlignment = Enum.VerticalAlignment.Center,
-				HorizontalAlignment = horizontalAlignment,
+				HorizontalAlignment = HorizontalAlignment,
 				SortOrder = Enum.SortOrder.LayoutOrder,
-				Padding = UDim.new(0, iconTextSpacing)
+				Padding = UDim.new(0, IconTextSpacing)
 			}),
-			IconFrame = icon and roactModule.createElement("Frame", {
+			IconFrame = Icon and RoactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
-				Size = UDim2.fromOffset(var6, iconSize.Y.Offset + iconPadding * 2)
+				Size = UDim2.fromOffset(NewOffset, NewOffset1)
 			}, {
-				layout = roactModule.createElement("UIListLayout", {
+				layout = RoactModule.createElement("UIListLayout", {
 					VerticalAlignment = Enum.VerticalAlignment.Center,
 					HorizontalAlignment = Enum.HorizontalAlignment.Center
 				}),
-				icon = roactModule.createElement(imageSetComponentModule.Label, {
+				icon = RoactModule.createElement(ImageSetComponentModule.Label, {
 					BackgroundTransparency = 1,
 					AnchorPoint = Vector2.new(0.5, 0.5),
-					Size = iconSize,
-					Image = icon,
-					ImageColor3 = var5,
-					ImageTransparency = var4
+					Size = IconSize,
+					Image = Icon,
+					ImageColor3 = IconColor,
+					ImageTransparency = IconTransparency
 				})
 			}),
-			Text = text and roactModule.createElement(genericTextLabelModule, {
+			Text = Text and RoactModule.createElement(GenericTextLabelModule, {
 				TextWrapped = true,
 				LayoutOrder = 2,
 				AutomaticSize = Enum.AutomaticSize.Y,
-				Size = UDim2.new(1, if icon then -(var6 + iconTextSpacing) else 0, 0, 0),
-				Text = text,
+				Size = UDim2.new(1, if Icon then -(NewOffset + IconTextSpacing) else 0, 0, 0),
+				Text = Text,
 				TextXAlignment = p1.props.textXAlignment,
-				fontStyle = p1.props.fontStyle or p2.Font.CaptionHeader,
-				colorStyle = textColorStyle,
+				fontStyle = FontStyle,
+				colorStyle = TextColorStyle,
 				TextTruncate = Enum.TextTruncate.AtEnd
 			})
 		})
 	end)
 end
 
-return playerContext
+return PlayerContext

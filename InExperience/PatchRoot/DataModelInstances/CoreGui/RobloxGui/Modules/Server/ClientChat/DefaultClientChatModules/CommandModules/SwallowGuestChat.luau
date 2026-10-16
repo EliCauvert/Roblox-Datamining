@@ -1,34 +1,34 @@
-﻿local utilModule = require(script.Parent:WaitForChild("Util"))
-local runService = game:GetService("RunService")
-local t = nil
-pcall(function()
-	-- upvalues: t (write)
-	t = require(game:GetService("Chat").ClientChatModules.ChatLocalization)
+﻿local UtilModule = require(script.Parent:WaitForChild("Util"))
+local RunService = game:GetService("RunService")
+local ChatLocalizationModule = nil
+pcall(function() --[[ Line: 12 ]]
+	-- upvalues: ChatLocalizationModule (ref)
+	ChatLocalizationModule = require(game:GetService("Chat").ClientChatModules.ChatLocalization)
 end)
 
-if t == nil then
-	t = {
-		Get = function(_, _, p1)
+if ChatLocalizationModule == nil then
+	ChatLocalizationModule = {
+		Get = function(_, _, p1) --[[ Line: 13 ]]
 			return p1
 		end
 	}
 end
-function ProcessMessage(_, p1, _)
-	-- upvalues: runService (ref), utilModule (ref), t (write)
-	local localPlayer = game:GetService("Players").LocalPlayer
+function ProcessMessage(_, p1, _): boolean --[[ Line: 15 ]]
+	-- upvalues: RunService (copy), UtilModule (copy), ChatLocalizationModule (ref)
+	local LocalPlayer = game:GetService("Players").LocalPlayer
 	
-	if not localPlayer or localPlayer.UserId >= 0 or runService:IsStudio() then
+	if not LocalPlayer or LocalPlayer.UserId >= 0 or RunService:IsStudio() then
 		return false
 	end
-	local currentChannel = p1:GetCurrentChannel()
+	local CurrentChannel = p1:GetCurrentChannel()
 	
-	if currentChannel then
-		utilModule:SendSystemMessageToSelf(t:Get("GameChat_SwallowGuestChat_Message", "Create a free account to get access to chat permissions!"), currentChannel, {})
+	if CurrentChannel then
+		UtilModule:SendSystemMessageToSelf(ChatLocalizationModule:Get("GameChat_SwallowGuestChat_Message", "Create a free account to get access to chat permissions!"), CurrentChannel, {})
 	end
 	return true
 end
 
 return {
-	[utilModule.KEY_COMMAND_PROCESSOR_TYPE] = utilModule.COMPLETED_MESSAGE_PROCESSOR,
-	[utilModule.KEY_PROCESSOR_FUNCTION] = ProcessMessage
+	[UtilModule.KEY_COMMAND_PROCESSOR_TYPE] = UtilModule.COMPLETED_MESSAGE_PROCESSOR,
+	[UtilModule.KEY_PROCESSOR_FUNCTION] = ProcessMessage
 }

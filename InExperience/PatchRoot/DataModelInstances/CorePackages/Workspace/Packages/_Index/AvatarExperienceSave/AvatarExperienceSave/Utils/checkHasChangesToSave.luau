@@ -1,10 +1,10 @@
 ﻿local _ = require(script:FindFirstAncestor("AvatarExperienceSave").Context.AvatarSaveContext)
-local getSaveDictModule = require(script.Parent.getSaveDict)
+local GetSaveDictModule = require(script.Parent.getSaveDict)
 
-return function(p1, p2)
-	-- upvalues: getSaveDictModule (ref)
-	for i, v in getSaveDictModule(p1, p2) do
-		if v then
+return function(p1, p2): boolean --[[ Line: 6 | Named "checkHasChangesToSave" ]]
+	-- upvalues: GetSaveDictModule (copy)
+	for _, value in GetSaveDictModule(p1, p2) do
+		if value then
 			return true
 		end
 	end

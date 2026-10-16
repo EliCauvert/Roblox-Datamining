@@ -1,8 +1,8 @@
-﻿local parent = script.Parent
-local _ = require(parent.Parent.Parent.Navigation)
-local getPageNameFromRouteModule = require(parent.getPageNameFromRoute)
+﻿local Parent = script.Parent
+local _ = require(Parent.Parent.Parent.Navigation)
+local GetPageNameFromRouteModule = require(Parent.getPageNameFromRoute)
 
-return function(p1)
-	-- upvalues: getPageNameFromRouteModule (ref)
-	return if p1 and p1.routes and p1.routes[1] then getPageNameFromRouteModule(p1.routes[1]) else nil
+return function(p1) --[[ Line: 11 ]]
+	-- upvalues: GetPageNameFromRouteModule (copy)
+	return if p1 and p1.routes and p1.routes[1] then GetPageNameFromRouteModule(p1.routes[1]) else nil
 end

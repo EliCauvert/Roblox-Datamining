@@ -1,37 +1,36 @@
-﻿local userInputService = game:GetService("UserInputService")
-local parent = script:FindFirstAncestor("Responsive").Parent
-local appCommonLibModule = require(parent.AppCommonLib)
-local signal = appCommonLibModule.Signal
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagLuaAppResponsiveEnginePreferredInput = sharedFlagsModule.FFlagLuaAppResponsiveEnginePreferredInput
-local fFlagLuaSupportMicroGamepadPreferredInput = sharedFlagsModule.FFlagLuaSupportMicroGamepadPreferredInput
-local t = {
+﻿local UserInputService = game:GetService("UserInputService")
+local Parent = script:FindFirstAncestor("Responsive").Parent
+local AppCommonLibModule = require(Parent.AppCommonLib)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagLuaAppResponsiveEnginePreferredInput = SharedFlagsModule.FFlagLuaAppResponsiveEnginePreferredInput
+local FFlagLuaSupportMicroGamepadPreferredInput = SharedFlagsModule.FFlagLuaSupportMicroGamepadPreferredInput
+local config = {
 	Pointer = "Pointer",
 	Touch = "Touch",
 	Directional = "Directional"
 }
-local t_1 = {
-	[Enum.UserInputType.MouseButton1] = t.Pointer,
-	[Enum.UserInputType.MouseButton2] = t.Pointer,
-	[Enum.UserInputType.MouseButton3] = t.Pointer,
-	[Enum.UserInputType.MouseWheel] = t.Pointer,
-	[Enum.UserInputType.MouseMovement] = t.Pointer,
-	[Enum.UserInputType.Keyboard] = t.Pointer,
-	[Enum.UserInputType.TextInput] = t.Pointer,
-	[Enum.UserInputType.Gamepad1] = t.Directional,
-	[Enum.UserInputType.Gamepad2] = t.Directional,
-	[Enum.UserInputType.Gamepad3] = t.Directional,
-	[Enum.UserInputType.Gamepad4] = t.Directional,
-	[Enum.UserInputType.Gamepad5] = t.Directional,
-	[Enum.UserInputType.Gamepad6] = t.Directional,
-	[Enum.UserInputType.Gamepad7] = t.Directional,
-	[Enum.UserInputType.Gamepad8] = t.Directional,
-	[Enum.UserInputType.Touch] = t.Touch,
-	[Enum.UserInputType.None] = t.Pointer
+local config1 = {
+	[Enum.UserInputType.MouseButton1] = config.Pointer,
+	[Enum.UserInputType.MouseButton2] = config.Pointer,
+	[Enum.UserInputType.MouseButton3] = config.Pointer,
+	[Enum.UserInputType.MouseWheel] = config.Pointer,
+	[Enum.UserInputType.MouseMovement] = config.Pointer,
+	[Enum.UserInputType.Keyboard] = config.Pointer,
+	[Enum.UserInputType.TextInput] = config.Pointer,
+	[Enum.UserInputType.Gamepad1] = config.Directional,
+	[Enum.UserInputType.Gamepad2] = config.Directional,
+	[Enum.UserInputType.Gamepad3] = config.Directional,
+	[Enum.UserInputType.Gamepad4] = config.Directional,
+	[Enum.UserInputType.Gamepad5] = config.Directional,
+	[Enum.UserInputType.Gamepad6] = config.Directional,
+	[Enum.UserInputType.Gamepad7] = config.Directional,
+	[Enum.UserInputType.Gamepad8] = config.Directional,
+	[Enum.UserInputType.Touch] = config.Touch,
+	[Enum.UserInputType.None] = config.Pointer
 }
-local var1 = signal.new()
-local t_2 = { preferred = nil, last = nil }
-local t_3 = {
+local NewResult = AppCommonLibModule.Signal.new()
+local config2 = { preferred = nil, last = nil }
+local config3 = {
 	[Enum.Platform.XBoxOne] = true,
 	[Enum.Platform.XBox360] = true,
 	[Enum.Platform.WiiU] = true,
@@ -41,65 +40,68 @@ local t_3 = {
 	[Enum.Platform.Ouya] = true,
 	[Enum.Platform.AndroidTV] = true
 }
-local t_4 = {
+local config4 = {
 	[Enum.Platform.IOS] = true,
 	[Enum.Platform.Android] = true
 }
-local var2 = if fFlagLuaAppResponsiveEnginePreferredInput then {
-	[Enum.PreferredInput.Gamepad] = t.Directional,
-	[Enum.PreferredInput.Touch] = t.Touch,
-	[Enum.PreferredInput.KeyboardAndMouse] = t.Pointer
+local Config = if FFlagLuaAppResponsiveEnginePreferredInput then {
+	[Enum.PreferredInput.Gamepad] = config.Directional,
+	[Enum.PreferredInput.Touch] = config.Touch,
+	[Enum.PreferredInput.KeyboardAndMouse] = config.Pointer
 } else nil
 
-if fFlagLuaAppResponsiveEnginePreferredInput and fFlagLuaSupportMicroGamepadPreferredInput then
-	var2[Enum.PreferredInput.MicroGamepad] = t.Directional
+if FFlagLuaAppResponsiveEnginePreferredInput and FFlagLuaSupportMicroGamepadPreferredInput then
+	Config[Enum.PreferredInput.MicroGamepad] = config.Directional
 end
-function getPreferredInput()
-	-- upvalues: fFlagLuaAppResponsiveEnginePreferredInput (ref), userInputService (ref), var2 (ref), t (ref), appCommonLibModule (ref), t_3 (ref), t_4 (ref)
-	if fFlagLuaAppResponsiveEnginePreferredInput then
-		return var2[userInputService.PreferredInput or Enum.PreferredInput.KeyboardAndMouse] or t.Pointer
-	end
-	local platform = userInputService:GetPlatform()
-	
-	return if appCommonLibModule.isSpatial() then t.Pointer elseif t_3[platform] or false then t.Directional elseif t_4[platform] or false then t.Touch else t.Pointer
-end
-
-function updatePreferredInput()
-	-- upvalues: t_2 (ref), var1 (ref)
-	local var3 = getPreferredInput()
-	
-	if var3 ~= t_2.preferred then
-		t_2.preferred = var3
+function getPreferredInput() --[[ Line: 75 ]]
+	-- upvalues: FFlagLuaAppResponsiveEnginePreferredInput (copy), UserInputService (copy), Config (copy), config (copy), AppCommonLibModule (copy), config3 (copy), config4 (copy)
+	if FFlagLuaAppResponsiveEnginePreferredInput then
+		return Config[UserInputService.PreferredInput or Enum.PreferredInput.KeyboardAndMouse] or config.Pointer
+	else
+		local Platform = UserInputService:GetPlatform()
+		local Entry = config3[Platform] or false
+		local Entry1 = config4[Platform] or false
 		
-		if t_2.last == nil then
-			t_2.last = t_2.preferred
-		end
-		var1:fire()
+		return if AppCommonLibModule.isSpatial() then config.Pointer elseif Entry then config.Directional elseif Entry1 then config.Touch else config.Pointer
 	end
 end
 
-function updateLastInput()
-	-- upvalues: t_1 (ref), userInputService (ref), t_2 (ref), var1 (ref)
-	local var3 = t_1[userInputService:GetLastInputType()]
+function updatePreferredInput() --[[ Line: 97 ]]
+	-- upvalues: config2 (copy), NewResult (copy)
+	local PreferredInput = getPreferredInput()
 	
-	if var3 and var3 ~= t_2.last then
-		t_2.last = var3
-		var1:fire()
+	if PreferredInput ~= config2.preferred then
+		config2.preferred = PreferredInput
+		
+		if config2.last == nil then
+			config2.last = config2.preferred
+		end
+		NewResult:fire()
 	end
 end
 
-function init()
-	-- upvalues: fFlagLuaAppResponsiveEnginePreferredInput (ref), userInputService (ref), appCommonLibModule (ref)
-	if fFlagLuaAppResponsiveEnginePreferredInput then
-		userInputService:GetPropertyChangedSignal("PreferredInput"):Connect(updatePreferredInput)
+function updateLastInput() --[[ Line: 108 ]]
+	-- upvalues: config1 (copy), UserInputService (copy), config2 (copy), NewResult (copy)
+	local Entry = config1[UserInputService:GetLastInputType()]
+	
+	if Entry and Entry ~= config2.last then
+		config2.last = Entry
+		NewResult:fire()
 	end
-	userInputService.GamepadConnected:Connect(updatePreferredInput)
-	userInputService:GetPropertyChangedSignal("KeyboardEnabled"):Connect(updatePreferredInput)
-	userInputService:GetPropertyChangedSignal("MouseEnabled"):Connect(updatePreferredInput)
-	userInputService:GetPropertyChangedSignal("TouchEnabled"):Connect(updatePreferredInput)
-	userInputService:GetPropertyChangedSignal("GamepadEnabled"):Connect(updatePreferredInput)
-	appCommonLibModule.connectToIsSpatialChanged(updatePreferredInput)
-	userInputService.LastInputTypeChanged:Connect(updateLastInput)
+end
+
+function init() --[[ Line: 116 ]]
+	-- upvalues: FFlagLuaAppResponsiveEnginePreferredInput (copy), UserInputService (copy), AppCommonLibModule (copy)
+	if FFlagLuaAppResponsiveEnginePreferredInput then
+		UserInputService:GetPropertyChangedSignal("PreferredInput"):Connect(updatePreferredInput)
+	end
+	UserInputService.GamepadConnected:Connect(updatePreferredInput)
+	UserInputService:GetPropertyChangedSignal("KeyboardEnabled"):Connect(updatePreferredInput)
+	UserInputService:GetPropertyChangedSignal("MouseEnabled"):Connect(updatePreferredInput)
+	UserInputService:GetPropertyChangedSignal("TouchEnabled"):Connect(updatePreferredInput)
+	UserInputService:GetPropertyChangedSignal("GamepadEnabled"):Connect(updatePreferredInput)
+	AppCommonLibModule.connectToIsSpatialChanged(updatePreferredInput)
+	UserInputService.LastInputTypeChanged:Connect(updateLastInput)
 	updateLastInput()
 	updatePreferredInput()
 end
@@ -107,27 +109,30 @@ end
 init()
 
 return {
-	Enum = t,
+	Enum = config,
 	preferredInputRules = {
-		{ Key = t.Directional, preferredInput = t.Directional },
-		{ Key = t.Pointer, preferredInput = t.Pointer },
-		{ Key = t.Touch, preferredInput = t.Touch }
+		{
+			Key = config.Directional,
+			preferredInput = config.Directional
+		},
+		{ Key = config.Pointer, preferredInput = config.Pointer },
+		{ Key = config.Touch, preferredInput = config.Touch }
 	},
 	lastInputRules = {
-		{ Key = t.Directional, lastInput = t.Directional },
-		{ Key = t.Pointer, lastInput = t.Pointer },
-		{ Key = t.Touch, lastInput = t.Touch }
+		{ Key = config.Directional, lastInput = config.Directional },
+		{ Key = config.Pointer, lastInput = config.Pointer },
+		{ Key = config.Touch, lastInput = config.Touch }
 	},
-	connect = function(p1)
-		-- upvalues: var1 (ref)
-		return var1:connect(p1)
+	connect = function(p1) --[[ Line: 149 ]]
+		-- upvalues: NewResult (copy)
+		return NewResult:connect(p1)
 	end,
-	preferred = function()
-		-- upvalues: t_2 (ref)
-		return t_2.preferred
+	preferred = function() --[[ Line: 152 ]]
+		-- upvalues: config2 (copy)
+		return config2.preferred
 	end,
-	last = function()
-		-- upvalues: t_2 (ref)
-		return t_2.last
+	last = function() --[[ Line: 155 ]]
+		-- upvalues: config2 (copy)
+		return config2.last
 	end
 }

@@ -1,33 +1,30 @@
-﻿local parent = script.Parent.Parent
-local signalsModule = require(parent.Signals)
-local _ = require(parent.InternalHttpStore)
-local createHttpStoreModule = require(script.Parent.createHttpStore)
-local var1 = nil
-local _ = nil
-local _ = nil
-local var2, var3 = signalsModule.createSignal(nil)
-local var4 = var2
-local var5 = var3
+﻿local Parent = script.Parent.Parent
+local _ = require(Parent.InternalHttpStore)
+local CreateHttpStoreModule = require(script.Parent.createHttpStore)
+local v1 = nil
+local Signal = nil
+local Signal2 = nil
+Signal, Signal2 = require(Parent.Signals).createSignal(nil)
 
 return {
-	_create = function(p1)
-		-- upvalues: var1 (write), createHttpStoreModule (ref), var5 (write)
-		var1 = createHttpStoreModule(p1)
-		var5(var1)
+	_create = function(p1) --[[ Line: 24 ]]
+		-- upvalues: v1 (ref), CreateHttpStoreModule (copy), Signal2 (ref)
+		v1 = CreateHttpStoreModule(p1)
+		Signal2(v1)
 		
-		return var1
+		return v1
 	end,
-	_dispose = function()
-		-- upvalues: var4 (write), var5 (write)
-		local var6 = var4()
+	_dispose = function() --[[ Line: 30 ]]
+		-- upvalues: Signal (ref), Signal2 (ref)
+		local SignalResult = Signal()
 		
-		if var6 ~= nil then
-			var6.cancelAll()
+		if SignalResult ~= nil then
+			SignalResult.cancelAll()
 		end
-		var5(nil)
+		Signal2(nil)
 	end,
-	get = function(p1)
-		-- upvalues: var4 (write)
-		return var4(p1)
+	get = function(p1) --[[ Line: 38 ]]
+		-- upvalues: Signal (ref)
+		return Signal(p1)
 	end
 }

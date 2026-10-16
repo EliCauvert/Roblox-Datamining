@@ -1,35 +1,34 @@
-﻿local experimentCacheManager = require(script:FindFirstAncestor("SocialExperiments").Parent.ExperimentCacheManager).ExperimentCacheManager
-local squadQuickStartExperimentLayer = game:DefineFastString("SquadQuickStartExperimentLayer", "Party.Formation.Create.User")
-local squadEnablePartyQuickStartVariant = game:DefineFastString("SquadEnablePartyQuickStartVariant", "enablePartyQuickStartChanges")
-local enablePartyQuickStartChanges2 = game:DefineFastFlag("EnablePartyQuickStartChanges2", false)
+﻿local ExperimentCacheManager = require(script:FindFirstAncestor("SocialExperiments").Parent.ExperimentCacheManager).ExperimentCacheManager
+local SquadQuickStartExperimentLayer = game:DefineFastString("SquadQuickStartExperimentLayer", "Party.Formation.Create.User")
+local SquadEnablePartyQuickStartVariant = game:DefineFastString("SquadEnablePartyQuickStartVariant", "enablePartyQuickStartChanges")
+local EnablePartyQuickStartChanges2 = game:DefineFastFlag("EnablePartyQuickStartChanges2", false)
 
-local function _(p1)
-	-- upvalues: experimentCacheManager (ref), squadQuickStartExperimentLayer (ref)
-	local var1 = experimentCacheManager.default:getLayerVariables(squadQuickStartExperimentLayer)
+local function _(p1) --[[ Line: 12 | Named "getIsUserInTreatment" ]]
+	-- upvalues: ExperimentCacheManager (copy), SquadQuickStartExperimentLayer (copy)
+	local LayerVariables = ExperimentCacheManager.default:getLayerVariables(SquadQuickStartExperimentLayer)
 	
-	return if var1 and var1[p1] ~= nil then var1[p1] else false
+	return if LayerVariables and LayerVariables[p1] ~= nil then LayerVariables[p1] else false
 end
 
 return {
-	getPartyQuickStartChangesEnabled = function()
-		-- upvalues: enablePartyQuickStartChanges2 (ref), squadEnablePartyQuickStartVariant (ref), experimentCacheManager (ref), squadQuickStartExperimentLayer (ref)
-		local var1 = enablePartyQuickStartChanges2
+	getPartyQuickStartChangesEnabled = function() --[[ Line: 22 ]]
+		-- upvalues: EnablePartyQuickStartChanges2 (copy), SquadEnablePartyQuickStartVariant (copy), ExperimentCacheManager (copy), SquadQuickStartExperimentLayer (copy)
+		local EnablePartyQuickStartChanges: boolean = EnablePartyQuickStartChanges2
 		
-		if not var1 then
-			local var2 = squadEnablePartyQuickStartVariant
-			local var3 = experimentCacheManager.default:getLayerVariables(squadQuickStartExperimentLayer)
+		if not EnablePartyQuickStartChanges then
+			local LayerVariables = ExperimentCacheManager.default:getLayerVariables(SquadQuickStartExperimentLayer)
 			
-			if var3 and var3[var2] ~= nil then
-				return var3[var2]
+			if LayerVariables and LayerVariables[SquadEnablePartyQuickStartVariant] ~= nil then
+				return LayerVariables[SquadEnablePartyQuickStartVariant]
 			end
-			var1 = false
+			EnablePartyQuickStartChanges = false
 		end
-		return var1
+		return EnablePartyQuickStartChanges
 	end,
-	logExposure = function()
-		-- upvalues: experimentCacheManager (ref), squadQuickStartExperimentLayer (ref)
-		if experimentCacheManager.default:getLayerVariables(squadQuickStartExperimentLayer) ~= nil then
-			experimentCacheManager.default:logLayerExposure(squadQuickStartExperimentLayer)
+	logExposure = function() --[[ Line: 26 ]]
+		-- upvalues: ExperimentCacheManager (copy), SquadQuickStartExperimentLayer (copy)
+		if ExperimentCacheManager.default:getLayerVariables(SquadQuickStartExperimentLayer) ~= nil then
+			ExperimentCacheManager.default:logLayerExposure(SquadQuickStartExperimentLayer)
 		end
 	end
 }

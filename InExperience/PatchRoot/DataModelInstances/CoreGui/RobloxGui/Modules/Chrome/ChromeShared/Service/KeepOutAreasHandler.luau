@@ -1,82 +1,84 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local guiService = game:GetService("GuiService")
-local reactModule = require(corePackagesService.Packages.React)
-local useSelector = require(corePackagesService.Workspace.Packages.RoactUtils).Hooks.RoactRodux.useSelector
+﻿local CorePackages = game:GetService("CorePackages")
+local GuiService = game:GetService("GuiService")
+local ReactModule = require(CorePackages.Packages.React)
+local UseSelectorFunction = require(CorePackages.Workspace.Packages.RoactUtils).Hooks.RoactRodux.useSelector
 
-local var1 = function(p1, p2, p3)
-	local t = {}
-	local x = p1.X
-	local y = p1.Y
-	local x_1 = p2.X
-	local var2 = p2.Y - y
-	local var3 = x
-	local var4 = 0
+local function v3(Vector, Vector1, List) --[[ Line: 27 ]]
+	local List1 = {}
+	local Y = Vector.Y
+	local X: number = Vector1.X
+	local YDelta = Vector1.Y - Y
+	local X1 = Vector.X
+	local X2 = 0
 	
-	for i, v in ipairs(p3) do
-		local var5 = var3 + var4
-		table.insert(t, {
-			Position = { X = var5, Y = y },
-			Size = { X = v.position.X - var5, Y = var2 }
+	for _, value in ipairs(List) do
+		local NewX = X1 + X2
+		table.insert(List1, {
+			Position = { X = NewX, Y = Y },
+			Size = { X = value.position.X - NewX, Y = YDelta }
 		})
-		var3 = v.position.X
-		var4 = v.size.X
+		X1 = value.position.X
+		X2 = value.size.X
 	end
-	local var6 = var3 + var4
-	table.insert(t, {
-		Position = { X = var6, Y = y },
-		Size = { X = x_1 - var6, Y = var2 }
+	local NewX = X1 + X2
+	table.insert(List1, {
+		Position = { X = NewX, Y = Y },
+		Size = { X = X - NewX, Y = YDelta }
 	})
 	
-	return t
+	return List1
 end
 
-local var7 = function(p4, p5)
-	-- upvalues: guiService (ref), var1 (ref)
-	local _ = {}
-	local t = {}
+local function v4(p1, List): Rect --[[ Line: 79 ]]
+	-- upvalues: GuiService (copy), v3 (copy)
+	local List1 = {}
 	
-	for i, v in pairs(p5) do
-		table.insert(t, { id = v.id, size = v.size, position = v.position })
+	for _, value in pairs(List) do
+		table.insert(List1, {
+			id = value.id,
+			size = value.size,
+			position = value.position
+		})
 	end
-	table.sort(t, function(p6, p7)
-		return p6.position.X < p7.position.X and p6.position.X + p6.size.X < p7.size.X + p7.position.X
+	table.sort(List1, function(A, B): boolean --[[ Line: 94 ]]
+		return A.position.X < B.position.X and A.position.X + A.size.X < B.size.X + B.position.X
 	end)
-	local guiInset, _ = guiService:GetGuiInset()
-	local rect = nil
+	local GuiInset, _ = GuiService:GetGuiInset()
+	local v1: Rect? = nil
 	
-	for i_1, v_1 in ipairs(var1(Vector2.new(0, 0), Vector2.new(p4.X, guiInset.Y), t)) do
-		if not rect or rect.Width < v_1.Size.X then
-			rect = Rect.new(v_1.Position.X, v_1.Position.Y, v_1.Position.X + v_1.Size.X, v_1.Position.Y + v_1.Size.Y)
+	for _, value1 in ipairs((v3(Vector2.new(0, 0), Vector2.new(p1.X, GuiInset.Y), List1))) do
+		if not v1 or v1.Width < value1.Size.X then
+			v1 = Rect.new(value1.Position.X, value1.Position.Y, value1.Position.X + value1.Size.X, value1.Position.Y + value1.Size.Y)
 		end
 	end
-	return rect
+	return v1
 end
 
-local _ = function(p6, p7)
-	-- upvalues: var7 (ref), guiService (ref)
-	local var8 = var7(p6, p7)
+local function _(p2, p3) --[[ Line: 117 ]]
+	-- upvalues: v4 (copy), GuiService (copy)
+	local TopbarInset = v4(p2, p3)
 	
-	if var8 then
-		guiService:SetTopbarInset(var8)
+	if TopbarInset then
+		GuiService:SetTopbarInset(TopbarInset)
 	end
 end
 
-function KeepOutAreasHandler(_)
-	-- upvalues: useSelector (ref), reactModule (ref), var7 (ref), guiService (ref)
-	local var8 = useSelector(function(p6)
-		return p6.displayOptions.screenSize
+function KeepOutAreasHandler(_) --[[ Line: 124 ]]
+	-- upvalues: UseSelectorFunction (copy), ReactModule (copy), v4 (copy), GuiService (copy)
+	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 125 ]]
+		return p2.displayOptions.screenSize
 	end)
-	local var9 = useSelector(function(p6)
-		return p6.displayOptions.keepOutAreas
+	local UseSelectorResult1 = UseSelectorFunction(function(p2) --[[ Line: 129 ]]
+		return p2.displayOptions.keepOutAreas
 	end)
-	reactModule.useEffect(function()
-		-- upvalues: var8 (ref), var9 (ref), var7 (copy), guiService (copy)
-		local var10 = var7(var8, var9)
+	ReactModule.useEffect(function() --[[ Line: 133 ]]
+		-- upvalues: UseSelectorResult (copy), UseSelectorResult1 (copy), v4 (upval), GuiService (upval)
+		local TopbarInset = v4(UseSelectorResult, UseSelectorResult1)
 		
-		if var10 then
-			guiService:SetTopbarInset(var10)
+		if TopbarInset then
+			GuiService:SetTopbarInset(TopbarInset)
 		end
-	end, { var8, var9 })
+	end, { UseSelectorResult, UseSelectorResult1 })
 end
 
 return KeepOutAreasHandler

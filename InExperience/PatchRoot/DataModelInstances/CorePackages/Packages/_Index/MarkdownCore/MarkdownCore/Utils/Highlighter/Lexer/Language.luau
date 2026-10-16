@@ -1,4 +1,4 @@
-﻿local t = {
+﻿local LanguageModule = {
 	keyword = {
 		["and"] = "keyword",
 		["break"] = "keyword",
@@ -402,9 +402,9 @@
 		Vector3int16 = { new = "function" }
 	}
 }
-local enum = t.libraries.Enum
+local LibrariesEnum = LanguageModule.libraries.Enum
 
-for i, v in ipairs(Enum:GetEnums()) do
-	enum[tostring(v)] = "Enum"
+for _, enum in ipairs(Enum:GetEnums()) do
+	LibrariesEnum[tostring(enum)] = "Enum"
 end
-return t
+return LanguageModule

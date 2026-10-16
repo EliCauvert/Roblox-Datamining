@@ -1,18 +1,18 @@
-﻿local enums = require(script:FindFirstAncestor("EditProfileBackground").Parent.SocialLuaAnalytics).Analytics.Enums
-local contexts = enums.Contexts
-local eventTypes = enums.EventTypes
-local eventNamesModule = require(script.Parent.Enums.EventNames)
-local buttonNamesModule = require(script.Parent.Enums.ButtonNames)
+﻿local Enums = require(script:FindFirstAncestor("EditProfileBackground").Parent.SocialLuaAnalytics).Analytics.Enums
+local Contexts = Enums.Contexts
+local EventTypes = Enums.EventTypes
+local EventNamesModule = require(script.Parent.Enums.EventNames)
+local ButtonNamesModule = require(script.Parent.Enums.ButtonNames)
 
 return {
-	[eventNamesModule.EditProfileBackgroundOpened] = {
-		context = contexts.EditProfile,
-		eventType = eventTypes.PageLoad,
-		additionalInfo = { btn = buttonNamesModule.EditProfileBackgroundOpened }
+	[EventNamesModule.EditProfileBackgroundOpened] = {
+		context = Contexts.EditProfile,
+		eventType = EventTypes.PageLoad,
+		additionalInfo = { btn = ButtonNamesModule.EditProfileBackgroundOpened }
 	},
-	[eventNamesModule.BackgroundSelected] = {
-		context = contexts.EditProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = { btn = buttonNamesModule.BackgroundSelected }
+	[EventNamesModule.BackgroundSelected] = {
+		context = Contexts.EditProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = { btn = ButtonNamesModule.BackgroundSelected }
 	}
 }

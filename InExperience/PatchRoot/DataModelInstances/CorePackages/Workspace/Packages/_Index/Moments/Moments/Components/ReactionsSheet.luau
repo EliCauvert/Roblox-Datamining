@@ -1,63 +1,63 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local foundationModule = require(parent.Foundation)
-local momentsCommonModule = require(parent.MomentsCommon)
-local _ = require(parent.MomentsTypes)
-local reactModule = require(parent.React)
-local sheet = foundationModule.Sheet
-local text = foundationModule.Text
-local view = foundationModule.View
-local localizationService = game:GetService("LocalizationService")
-local localizationModule = require(parent.Localization)
-local useLocalization = localizationModule.Hooks.useLocalization
-local abbreviateCount = localizationModule.abbreviateCount
-local reaction = momentsCommonModule.Components.Reaction
-local reactionSize = momentsCommonModule.Enums.ReactionSize
-local useConfigurationModule = require(moments.Hooks.useConfiguration)
-local t = { title = "Feature.Moments.Label.Reactions" }
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local FoundationModule = require(Parent.Foundation)
+local MomentsCommonModule = require(Parent.MomentsCommon)
+local _ = require(Parent.MomentsTypes)
+local ReactModule = require(Parent.React)
+local Sheet = FoundationModule.Sheet
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local LocalizationService = game:GetService("LocalizationService")
+local LocalizationModule = require(Parent.Localization)
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
+local AbbreviateCountFunction = LocalizationModule.abbreviateCount
+local Reaction = MomentsCommonModule.Components.Reaction
+local ReactionSize = MomentsCommonModule.Enums.ReactionSize
+local UseConfigurationModule = require(Moments.Hooks.useConfiguration)
+local config = { title = "Feature.Moments.Label.Reactions" }
 
-return function(p1)
-	-- upvalues: useLocalization (ref), t (ref), useConfigurationModule (ref), reactModule (ref), view (ref), reaction (ref), reactionSize (ref), text (ref), abbreviateCount (ref), localizationService (ref), sheet (ref), foundationModule (ref)
-	return reactModule.createElement(sheet.Root, {
+return function(p1) --[[ Line: 35 | Named "ReactionsSheet" ]]
+	-- upvalues: UseLocalizationFunction (copy), config (copy), UseConfigurationModule (copy), ReactModule (copy), View (copy), Reaction (copy), ReactionSize (copy), Text (copy), AbbreviateCountFunction (copy), LocalizationService (copy), Sheet (copy), FoundationModule (copy)
+	return ReactModule.createElement(Sheet.Root, {
 		isOpen = true,
 		preferCenterSheet = true,
 		onClose = p1.onClose,
-		size = foundationModule.Enums.DialogSize.Large
+		size = FoundationModule.Enums.DialogSize.Large
 	}, {
-		Header = reactModule.createElement(sheet.Header, nil, {
-			Title = reactModule.createElement(text, {
+		Header = ReactModule.createElement(Sheet.Header, nil, {
+			Title = ReactModule.createElement(Text, {
 				tag = "auto-xy text-heading-small content-emphasis",
-				Text = useLocalization(t).title
+				Text = UseLocalizationFunction(config).title
 			})
 		}),
-		Content = reactModule.createElement(sheet.Content, if useConfigurationModule("android_tv_enabled", false) then { Selectable = false } else nil, {
-			ReactionsContainer = reactModule.createElement(view, {
+		Content = ReactModule.createElement(Sheet.Content, if UseConfigurationModule("android_tv_enabled", false) then { Selectable = false } else nil, {
+			ReactionsContainer = ReactModule.createElement(View, {
 				tag = "row wrap align-y-center gap-small size-full-0 auto-y padding-bottom-large"
-			}, reactModule.useMemo(function()
-				-- upvalues: p1 (ref), reactModule (copy), view (copy), reaction (copy), reactionSize (copy), text (copy), abbreviateCount (copy), localizationService (copy)
-				local t = {}
+			}, (ReactModule.useMemo(function() --[[ Line: 39 ]]
+				-- upvalues: p1 (copy), ReactModule (upval), View (upval), Reaction (upval), ReactionSize (upval), Text (upval), AbbreviateCountFunction (upval), LocalizationService (upval)
+				local Elements = {}
 				
-				for i, v in ipairs(p1.reactionCounts) do
-					if v.count > 0 then
-						t[v.reaction] = reactModule.createElement(view, {
+				for LayoutOrder, reactionCount in ipairs(p1.reactionCounts) do
+					if reactionCount.count > 0 then
+						Elements[reactionCount.reaction] = ReactModule.createElement(View, {
 							tag = "row align-y-center gap-xsmall auto-xy padding-xsmall",
-							LayoutOrder = i
+							LayoutOrder = LayoutOrder
 						}, {
-							Icon = reactModule.createElement(reaction, {
+							Icon = ReactModule.createElement(Reaction, {
 								layoutOrder = 1,
-								reactionType = v.reaction,
-								size = reactionSize.XSmall
+								reactionType = reactionCount.reaction,
+								size = ReactionSize.XSmall
 							}),
-							Count = reactModule.createElement(text, {
+							Count = ReactModule.createElement(Text, {
 								LayoutOrder = 2,
 								tag = "auto-xy text-body-medium content-emphasis",
-								Text = abbreviateCount(v.count, localizationService.RobloxLocaleId)
+								Text = AbbreviateCountFunction(reactionCount.count, LocalizationService.RobloxLocaleId)
 							})
 						})
 					end
 				end
-				return t
-			end, { p1.reactionCounts }))
+				return Elements
+			end, { p1.reactionCounts })))
 		})
 	})
 end

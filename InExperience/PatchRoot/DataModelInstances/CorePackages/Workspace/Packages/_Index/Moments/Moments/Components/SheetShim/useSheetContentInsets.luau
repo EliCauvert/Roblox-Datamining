@@ -1,62 +1,62 @@
-﻿local reactModule = require(script:FindFirstAncestor("Moments").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("Moments").Parent.React)
 local _ = require(script.Parent.SheetShimTypes)
 local _ = require(script.Parent.getSheetStructure)
-local readSheetContentInsetsModule = require(script.Parent.readSheetContentInsets)
-local runService = game:GetService("RunService")
-local frozen = table.freeze({ bottom = 0, right = 0 })
+local ReadSheetContentInsetsModule = require(script.Parent.readSheetContentInsets)
+local RunService = game:GetService("RunService")
+local Frozen = table.freeze({ bottom = 0, right = 0 })
 
-return function(value, p1)
-	-- upvalues: reactModule (ref), readSheetContentInsetsModule (ref), runService (ref), frozen (ref)
-	local var1 = reactModule.useRef(p1)
-	var1.current = p1
-	local var2 = reactModule.useRef(nil)
-	local var3 = reactModule.useRef(false)
-	local var4 = reactModule.useCallback(function(p2)
-		-- upvalues: var2 (ref), var1 (ref)
-		local current = var2.current
+return function(p1, Current) --[[ Line: 22 | Named "useSheetContentInsets" ]]
+	-- upvalues: ReactModule (copy), ReadSheetContentInsetsModule (copy), RunService (copy), Frozen (copy)
+	local UseRefResult = ReactModule.useRef(Current)
+	UseRefResult.current = Current
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseRefResult2 = ReactModule.useRef(false)
+	local UseResult = ReactModule.useCallback(function(Current) --[[ Line: 32 ]]
+		-- upvalues: UseRefResult1 (copy), UseRefResult (copy)
+		local Current1 = UseRefResult1.current
 		
-		if current ~= nil and current.bottom == p2.bottom and current.right == p2.right then return end
-		var2.current = p2
+		if Current1 ~= nil and Current1.bottom == Current.bottom and Current1.right == Current.right then return end
+		UseRefResult1.current = Current
 		
-		if var1.current ~= nil then
-			var1.current(p2)
+		if UseRefResult.current ~= nil then
+			UseRefResult.current(Current)
 		end
 	end, {})
-	local var5 = p1 ~= nil
-	reactModule.useLayoutEffect(function()
-		-- upvalues: value (ref), var5 (ref), var3 (ref), var4 (ref), readSheetContentInsetsModule (copy), runService (copy), frozen (copy)
-		if value == nil or not var5 then
+	local HasCurrent = Current ~= nil
+	ReactModule.useLayoutEffect(function() --[[ Line: 45 ]]
+		-- upvalues: p1 (copy), HasCurrent (copy), UseRefResult2 (copy), UseResult (copy), ReadSheetContentInsetsModule (upval), RunService (upval), Frozen (upval)
+		if p1 == nil or not HasCurrent then
 			return nil
 		end
-		var3.current = false
+		UseRefResult2.current = false
 		
-		local function sample()
-			-- upvalues: var3 (copy), var4 (copy), readSheetContentInsetsModule (copy), value (copy)
-			if not var3.current then
-				var4(readSheetContentInsetsModule(value))
+		local function sample() --[[ Line: 51 ]]
+			-- upvalues: UseRefResult2 (upval), UseResult (upval), ReadSheetContentInsetsModule (upval), p1 (upval)
+			if not UseRefResult2.current then
+				UseResult(ReadSheetContentInsetsModule(p1))
 			end
 		end
 		
-		if not var3.current then
-			var4(readSheetContentInsetsModule(value))
+		if not UseRefResult2.current then
+			UseResult(ReadSheetContentInsetsModule(p1))
 		end
-		local list = {
-			(if value.scroller ~= nil then value.sheet:GetPropertyChangedSignal("Position") else value.scroller:GetPropertyChangedSignal("CanvasPosition")):Connect(sample),
-			runService.RenderStepped:Connect(sample)
+		local Connections = {
+			(if p1.scroller == nil then p1.sheet:GetPropertyChangedSignal("Position") else p1.scroller:GetPropertyChangedSignal("CanvasPosition")):Connect(sample),
+			RunService.RenderStepped:Connect(sample)
 		}
 		
-		return function()
-			-- upvalues: list (ref), var4 (copy), frozen (copy)
-			for i, v in list do
-				v:Disconnect()
+		return function() --[[ Line: 69 ]]
+			-- upvalues: Connections (copy), UseResult (upval), Frozen (upval)
+			for _, connection in Connections do
+				connection:Disconnect()
 			end
-			var4(frozen)
+			UseResult(Frozen)
 		end
-	end, { value, var5, var4 })
+	end, { p1, HasCurrent, UseResult })
 	
-	return reactModule.useCallback(function()
-		-- upvalues: var3 (ref), var4 (ref), frozen (copy)
-		var3.current = true
-		var4(frozen)
-	end, { var4 })
+	return ReactModule.useCallback(function() --[[ Line: 77 ]]
+		-- upvalues: UseRefResult2 (copy), UseResult (copy), Frozen (upval)
+		UseRefResult2.current = true
+		UseResult(Frozen)
+	end, { UseResult })
 end

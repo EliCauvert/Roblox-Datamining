@@ -1,10 +1,10 @@
-﻿local socialLuaAnalyticsModule = require(script:FindFirstAncestor("Groups").Parent.SocialLuaAnalytics)
+﻿local SocialLuaAnalyticsModule = require(script:FindFirstAncestor("Groups").Parent.SocialLuaAnalytics)
 
-return socialLuaAnalyticsModule.Analytics.AnalyticsFactory.setUpAnalyticsFactory({
+return SocialLuaAnalyticsModule.Analytics.AnalyticsFactory.setUpAnalyticsFactory({
 	eventLists = {
 		EventStream = require(script.Parent.EventStreamActionList)
 	},
 	analyticsImpl = {
-		EventStream = socialLuaAnalyticsModule.Analytics.DefaultAnalyticsService.EventStream
+		EventStream = SocialLuaAnalyticsModule.Analytics.DefaultAnalyticsService.EventStream
 	}
 })

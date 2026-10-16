@@ -1,244 +1,249 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local parent = avatarExperienceCatalog.Parent
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local roactUtilsModule = require(parent.RoactUtils)
-local mutedError = require(parent.Loggers).mutedError
-local tutilsModule = require(parent.tutils)
-local signalsReactModule = require(parent.SignalsReact)
-local toastRoduxModule = require(parent.ToastRodux)
-local avatarExperienceCommonModule = require(parent.AvatarExperienceCommon)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local postCartPricingForOffersModule = require(avatarExperienceCatalog.Api.PostCartPricingForOffers.postCartPricingForOffers)
-local useAXCatalogStoreContextModule = require(avatarExperienceCatalog.Context.useAXCatalogStoreContext)
-local decodeLuauUnicodeEscapesModule = require(avatarExperienceCatalog.Api.GetMarketplaceOffersBanner.decodeLuauUnicodeEscapes)
-local toastType = toastRoduxModule.Enums.ToastType
-local discountTypeEnum = avatarExperienceCommonModule.Enums.DiscountTypeEnum
-local useSignalState = signalsReactModule.useSignalState
-local useNetworking = avatarExperienceCommonModule.Hooks.useNetworking
-local setCurrentToastMessage = toastRoduxModule.Actions.SetCurrentToastMessage
-local constants = avatarExperienceCommonModule.Constants
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local Parent = AvatarExperienceCatalog.Parent
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local MutedErrorFunction = require(Parent.Loggers).mutedError
+local TutilsModule = require(Parent.tutils)
+local ToastRoduxModule = require(Parent.ToastRodux)
+local AvatarExperienceCommonModule = require(Parent.AvatarExperienceCommon)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local PostCartPricingForOffersModule = require(AvatarExperienceCatalog.Api.PostCartPricingForOffers.postCartPricingForOffers)
+local UseAXCatalogStoreContextModule = require(AvatarExperienceCatalog.Context.useAXCatalogStoreContext)
+local DecodeLuauUnicodeEscapesModule = require(AvatarExperienceCatalog.Api.GetMarketplaceOffersBanner.decodeLuauUnicodeEscapes)
+local ToastType = ToastRoduxModule.Enums.ToastType
+local DiscountTypeEnum = AvatarExperienceCommonModule.Enums.DiscountTypeEnum
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local UseNetworkingFunction = AvatarExperienceCommonModule.Hooks.useNetworking
+local SetCurrentToastMessageFunction = ToastRoduxModule.Actions.SetCurrentToastMessage
+local Constants = AvatarExperienceCommonModule.Constants
 local AXDoNotPass356FetchCartPricing = game:DefineFastFlag("AXDoNotPass356FetchCartPricing", false)
 
-local function buildItemsForOffersCartPricingRequest(p1)
-	-- upvalues: AXDoNotPass356FetchCartPricing (ref), constants (ref)
-	local t = {}
+local function buildItemsForOffersCartPricingRequest(List) --[[ Line: 40 ]]
+	-- upvalues: AXDoNotPass356FetchCartPricing (copy), Constants (copy)
+	local List1 = {}
 	
-	for i, v in p1 do
-		local var1 = if v.selectedTimedOptionDays ~= nil then v.selectedTimedOptionDays == 0 else true
+	for _, value in List do
+		local NoSelectedTimedOptionDays: boolean = value.selectedTimedOptionDays == nil or value.selectedTimedOptionDays == 0
 		
-		if not AXDoNotPass356FetchCartPricing or v.itemId ~= constants.AVATAR_BLOCKY_DEFAULT_BUNDLE_ID then
-			table.insert(t, {
-				collectibleItemId = v.collectibleItemId,
-				collectibleProductId = v.collectibleProductId,
-				isPermanent = if v.selectedTimedOptionDays ~= nil then v.selectedTimedOptionDays == 0 else true,
-				rentalDays = if not var1 then v.selectedTimedOptionDays else nil
+		if not AXDoNotPass356FetchCartPricing or value.itemId ~= Constants.AVATAR_BLOCKY_DEFAULT_BUNDLE_ID then
+			table.insert(List1, {
+				collectibleItemId = value.collectibleItemId,
+				collectibleProductId = value.collectibleProductId,
+				isPermanent = value.selectedTimedOptionDays == nil or value.selectedTimedOptionDays == 0,
+				rentalDays = if NoSelectedTimedOptionDays then nil else value.selectedTimedOptionDays
 			})
 		end
 	end
-	return t
+	return List1
 end
 
-local function getOffersAvailableMap(p2)
-	-- upvalues: decodeLuauUnicodeEscapesModule (ref)
+local function getOffersAvailableMap(AvailableOffers) --[[ Line: 59 ]]
+	-- upvalues: DecodeLuauUnicodeEscapesModule (copy)
 	local t = {}
 	
-	if p2 ~= nil then
-		for i, v in p2 do
-			t[v.offerId] = v
+	if AvailableOffers ~= nil then
+		for _, availableOffer in AvailableOffers do
+			t[availableOffer.offerId] = availableOffer
 			
-			if v.localizedDescription then
-				v.localizedDescription = decodeLuauUnicodeEscapesModule(v.localizedDescription)
+			if availableOffer.localizedDescription then
+				availableOffer.localizedDescription = DecodeLuauUnicodeEscapesModule(availableOffer.localizedDescription)
 			end
 		end
 	end
 	return t
 end
 
-local function calculateTotalDiscountFromSelectedOffers(p3, p4)
+local function calculateTotalDiscountFromSelectedOffers(Items, List): number --[[ Line: 72 ]]
 	local t = {}
 	
-	for i, v in p4 do
-		if v.selected then
-			t[v.offerId] = true
+	for _, value in List do
+		if value.selected then
+			t[value.offerId] = true
 		end
 	end
-	local var2 = 0
+	local NewRobuxDiscountAmount = 0
 	
-	for i_1, v_1 in p3 do
-		local discountInformation = v_1.discountInformation
+	for _, item in Items do
+		local DiscountInformation = item.discountInformation
 		
-		if discountInformation ~= nil and discountInformation.discounts ~= nil then
-			for i_2, v_2 in discountInformation.discounts do
-				if t[v_2.discountCampaign] then
-					var2 += v_2.robuxDiscountAmount
+		if DiscountInformation ~= nil and DiscountInformation.discounts ~= nil then
+			for _, discount in DiscountInformation.discounts do
+				if t[discount.discountCampaign] then
+					NewRobuxDiscountAmount += discount.robuxDiscountAmount
 				end
 			end
 		end
 	end
-	return var2
+	return NewRobuxDiscountAmount
 end
 
-local function getDiscountedItemsFromItemsData(p5, p6)
+local function getDiscountedItemsFromItemsData(Items, p1) --[[ Line: 95 ]]
 	local t = {}
 	
-	for i, v in p5 do
-		local t_1 = {}
+	for _, item in Items do
+		local OfferIdsApplied = {}
 		
-		if v.discountInformation and v.discountInformation.discounts then
-			for i_1, v_1 in v.discountInformation.discounts do
-				if p6[v_1.discountCampaign] and p6[v_1.discountCampaign].selected then
-					table.insert(t_1, v_1.discountCampaign)
+		if item.discountInformation and item.discountInformation.discounts then
+			for _, discount in item.discountInformation.discounts do
+				if p1[discount.discountCampaign] and p1[discount.discountCampaign].selected then
+					table.insert(OfferIdsApplied, discount.discountCampaign)
 				end
 			end
 		end
-		t[v.collectibleItemId] = {
-			collectibleItemId = v.collectibleItemId,
-			priceInRobux = v.priceInRobux,
-			discountInformation = v.discountInformation,
-			offerIdsApplied = t_1
+		t[item.collectibleItemId] = {
+			collectibleItemId = item.collectibleItemId,
+			priceInRobux = item.priceInRobux,
+			discountInformation = item.discountInformation,
+			offerIdsApplied = OfferIdsApplied
 		}
 	end
 	return t
 end
 
-local function getAllDiscountSummaryEntries(p7, p8)
-	-- upvalues: discountTypeEnum (ref)
-	local t = {}
+local function getAllDiscountSummaryEntries(Items, p2) --[[ Line: 121 ]]
+	-- upvalues: DiscountTypeEnum (copy)
+	local List = {}
 	
-	for i, v in p7 do
-		local discountInformation = v.discountInformation
+	for _, item in Items do
+		local DiscountInformation = item.discountInformation
 		
-		if discountInformation ~= nil and discountInformation.discounts ~= nil then
-			for i_1, v_1 in discountInformation.discounts do
-				if p8[v_1.discountCampaign] ~= nil then
-					table.insert(t, {
-						type = discountTypeEnum.Uncategorized,
-						amountInRobux = v_1.robuxDiscountAmount,
-						percent = v_1.robuxDiscountPercentage,
-						localizedDiscountAttribution = v_1.localizedDiscountAttribution
+		if DiscountInformation ~= nil and DiscountInformation.discounts ~= nil then
+			for _, discount in DiscountInformation.discounts do
+				if p2[discount.discountCampaign] ~= nil then
+					table.insert(List, {
+						type = DiscountTypeEnum.Uncategorized,
+						amountInRobux = discount.robuxDiscountAmount,
+						percent = discount.robuxDiscountPercentage,
+						localizedDiscountAttribution = discount.localizedDiscountAttribution
 					})
 				end
 			end
 		end
 	end
-	return t
+	return List
 end
 
-local t = {}
+local Tbl = {}
 
-return function(p9, p10, p11)
-	-- upvalues: useAXCatalogStoreContextModule (ref), useNetworking (ref), useDispatch (ref), useSignalState (ref), reactModule (ref), buildItemsForOffersCartPricingRequest (ref), useLocalization (ref), toastType (ref), setCurrentToastMessage (ref), tutilsModule (ref), postCartPricingForOffersModule (ref), cryoModule (ref), t (write), getOffersAvailableMap (ref), getDiscountedItemsFromItemsData (ref), calculateTotalDiscountFromSelectedOffers (ref), getAllDiscountSummaryEntries (ref), mutedError (ref), decodeLuauUnicodeEscapesModule (ref)
-	local catalogOffersBannerStore = useAXCatalogStoreContextModule().catalogOffersBannerStore
-	local var3 = useNetworking()
-	local var4 = useDispatch()
-	local var5 = useSignalState(catalogOffersBannerStore.getPayload)
-	local var6, var7 = reactModule.useState(nil)
-	local var8, var9 = reactModule.useState({})
-	local var10, var11 = reactModule.useState({})
-	local var12, var13 = reactModule.useState(0)
-	local var14, var15 = reactModule.useState({})
-	local var16 = reactModule.useRef(false)
-	local var17 = buildItemsForOffersCartPricingRequest(p9)
-	local var18 = reactModule.useRef({})
-	local var19 = useLocalization({
+return function(p3, p4, p5) --[[ Line: 146 | Named "useOffersCartPricingCalculationsForCartItems" ]]
+	-- upvalues: UseAXCatalogStoreContextModule (copy), UseNetworkingFunction (copy), UseDispatchFunction (copy), UseSignalStateFunction (copy), ReactModule (copy), buildItemsForOffersCartPricingRequest (copy), UseLocalizationFunction (copy), ToastType (copy), SetCurrentToastMessageFunction (copy), TutilsModule (copy), PostCartPricingForOffersModule (copy), CryoModule (copy), Tbl (ref), getOffersAvailableMap (copy), getDiscountedItemsFromItemsData (copy), calculateTotalDiscountFromSelectedOffers (copy), getAllDiscountSummaryEntries (copy), MutedErrorFunction (copy), DecodeLuauUnicodeEscapesModule (copy)
+	local CatalogOffersBannerStore = UseAXCatalogStoreContextModule().catalogOffersBannerStore
+	local UseNetworkingResult = UseNetworkingFunction()
+	local UseDispatchResult = UseDispatchFunction()
+	local UseSignalStateResult = UseSignalStateFunction(CatalogOffersBannerStore.getPayload)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState({})
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState({})
+	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(0)
+	local UseStateResult5, UseStateResult2_4 = ReactModule.useState({})
+	local UseRefResult = ReactModule.useRef(false)
+	local ItemsForOffersCartPricingRequest = buildItemsForOffersCartPricingRequest(p3)
+	local UseRefResult1 = ReactModule.useRef({})
+	local UseLocalizationResult = UseLocalizationFunction({
 		fetchFailed = "Feature.Catalog.Title.Checkout.OfferFailedToFetch",
 		toggleFailed = "Feature.Catalog.Title.Checkout.OfferFailedToUpdate"
 	})
-	local var20 = reactModule.useCallback(function(p12)
-		-- upvalues: toastType (copy), var4 (ref), setCurrentToastMessage (copy)
-		var4(setCurrentToastMessage({
+	local UseResult = ReactModule.useCallback(function(ToastMessage) --[[ Line: 173 ]]
+		-- upvalues: ToastType (upval), UseDispatchResult (copy), SetCurrentToastMessageFunction (upval)
+		UseDispatchResult(SetCurrentToastMessageFunction({
 			isLocalized = true,
-			toastMessage = p12,
-			toastType = toastType.NetworkingError
+			toastMessage = ToastMessage,
+			toastType = ToastType.NetworkingError
 		}))
-	end, { var4 })
-	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), p11 (ref), var17 (ref), tutilsModule (copy), var18 (ref), postCartPricingForOffersModule (copy), var3 (ref), cryoModule (copy), t (copy), getOffersAvailableMap (copy), var7 (ref), var9 (ref), var11 (ref), getDiscountedItemsFromItemsData (copy), var13 (ref), calculateTotalDiscountFromSelectedOffers (copy), var15 (ref), getAllDiscountSummaryEntries (copy), mutedError (copy), var20 (ref), var19 (ref)
-		if var5 and p11 and (#var17 ~= 0 and not tutilsModule.deepEqual(var17, var18.current)) then
-			var18.current = var17
-			local var21, _ = postCartPricingForOffersModule(var3, {
+	end, { UseDispatchResult })
+	ReactModule.useEffect(function() --[[ Line: 182 ]]
+		-- upvalues: UseSignalStateResult (copy), p5 (copy), ItemsForOffersCartPricingRequest (copy), TutilsModule (upval), UseRefResult1 (copy), PostCartPricingForOffersModule (upval), UseNetworkingResult (copy), CryoModule (upval), Tbl (upval), getOffersAvailableMap (upval), UseStateResult2 (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy), getDiscountedItemsFromItemsData (upval), UseStateResult2_3 (copy), calculateTotalDiscountFromSelectedOffers (upval), UseStateResult2_4 (copy), getAllDiscountSummaryEntries (upval), MutedErrorFunction (upval), UseResult (copy), UseLocalizationResult (copy)
+		if UseSignalStateResult and p5 and #ItemsForOffersCartPricingRequest ~= 0 and not TutilsModule.deepEqual(ItemsForOffersCartPricingRequest, UseRefResult1.current) then
+			UseRefResult1.current = ItemsForOffersCartPricingRequest
+			local PostCartPricingForOffersModuleResult, _ = PostCartPricingForOffersModule(UseNetworkingResult, {
 				featureKey = "MARKETPLACE_CART",
-				items = var17,
-				unselectedOffers = cryoModule.Dictionary.keys(t)
+				items = ItemsForOffersCartPricingRequest,
+				unselectedOffers = CryoModule.Dictionary.keys(Tbl)
 			})
-			var21:andThen(function(p12)
-				-- upvalues: getOffersAvailableMap (copy), var7 (copy), var9 (copy), var11 (copy), getDiscountedItemsFromItemsData (copy), var13 (copy), calculateTotalDiscountFromSelectedOffers (copy), var15 (copy), getAllDiscountSummaryEntries (copy), mutedError (copy)
-				if p12 and p12.items then
-					local var22 = getOffersAvailableMap(p12.availableOffers)
-					var7(p12.savingsSummary)
-					var9(var22)
-					var11(getDiscountedItemsFromItemsData(p12.items, var22))
-					var13(calculateTotalDiscountFromSelectedOffers(p12.items, var22))
-					var15(getAllDiscountSummaryEntries(p12.items, var22))
+			PostCartPricingForOffersModuleResult:andThen(function(Result) --[[ Line: 200 ]]
+				-- upvalues: getOffersAvailableMap (upval), UseStateResult2 (upval), UseStateResult2_1 (upval), UseStateResult2_2 (upval), getDiscountedItemsFromItemsData (upval), UseStateResult2_3 (upval), calculateTotalDiscountFromSelectedOffers (upval), UseStateResult2_4 (upval), getAllDiscountSummaryEntries (upval), MutedErrorFunction (upval)
+				if Result and Result.items then
+					local OffersAvailableMap = getOffersAvailableMap(Result.availableOffers)
+					UseStateResult2(Result.savingsSummary)
+					UseStateResult2_1(OffersAvailableMap)
+					UseStateResult2_2((getDiscountedItemsFromItemsData(Result.items, OffersAvailableMap)))
+					UseStateResult2_3((calculateTotalDiscountFromSelectedOffers(Result.items, OffersAvailableMap)))
+					UseStateResult2_4((getAllDiscountSummaryEntries(Result.items, OffersAvailableMap)))
 					
 					return
+				else
+					MutedErrorFunction("marketplace-sales/v1/cart-pricing did not return items in payload")
 				end
-				mutedError("marketplace-sales/v1/cart-pricing did not return items in payload")
-			end):catch(function(_)
-				-- upvalues: var20 (copy), var19 (copy)
-				var20(var19.fetchFailed)
+			end):catch(function(_) --[[ Line: 214 ]]
+				-- upvalues: UseResult (upval), UseLocalizationResult (upval)
+				UseResult(UseLocalizationResult.fetchFailed)
 			end)
 			
 			return
 		end
 	end, {
-		var3, var17, var5, p11, var20, var19
+		UseNetworkingResult, ItemsForOffersCartPricingRequest, UseSignalStateResult,
+		p5, UseResult, UseLocalizationResult
 	})
-	reactModule.useEffect(function()
-		-- upvalues: p10 (ref), var18 (ref), var7 (ref), var9 (ref), var11 (ref), var13 (ref), var15 (ref)
-		if not p10 then
-			var18.current = {}
-			var7(nil)
-			var9({})
-			var11({})
-			var13(0)
-			var15({})
+	ReactModule.useEffect(function() --[[ Line: 226 ]]
+		-- upvalues: p4 (copy), UseRefResult1 (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy), UseStateResult2_3 (copy), UseStateResult2_4 (copy)
+		if not p4 then
+			UseRefResult1.current = {}
+			UseStateResult2(nil)
+			UseStateResult2_1({})
+			UseStateResult2_2({})
+			UseStateResult2_3(0)
+			UseStateResult2_4({})
 		end
-	end, { p10 })
+	end, { p4 })
 	
 	return {
-		offersAvailable = var8,
-		discountedItemsFromOffers = var10,
-		totalSelectedOffersDiscount = var12,
-		discountSummaryEntriesFromOffers = var14,
-		savingsSummary = if var6 then decodeLuauUnicodeEscapesModule(var6) else nil,
-		handleDeselectOfferId = reactModule.useCallback(function(p12)
-			-- upvalues: var16 (ref), t (copy), postCartPricingForOffersModule (copy), var3 (ref), var17 (ref), cryoModule (copy), getOffersAvailableMap (copy), var7 (ref), var9 (ref), var11 (ref), getDiscountedItemsFromItemsData (copy), var13 (ref), calculateTotalDiscountFromSelectedOffers (copy), var15 (ref), getAllDiscountSummaryEntries (copy), mutedError (copy), var20 (ref), var19 (ref)
-			if var16.current then return end
-			var16.current = true
-			local cloned = table.clone(t)
+		offersAvailable = UseStateResult1,
+		discountedItemsFromOffers = UseStateResult3,
+		totalSelectedOffersDiscount = UseStateResult4,
+		discountSummaryEntriesFromOffers = UseStateResult5,
+		savingsSummary = if UseStateResult then DecodeLuauUnicodeEscapesModule(UseStateResult) else nil,
+		handleDeselectOfferId = ReactModule.useCallback(function(Key) --[[ Line: 238 ]]
+			-- upvalues: UseRefResult (copy), Tbl (upval), PostCartPricingForOffersModule (upval), UseNetworkingResult (copy), ItemsForOffersCartPricingRequest (copy), CryoModule (upval), getOffersAvailableMap (upval), UseStateResult2 (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy), getDiscountedItemsFromItemsData (upval), UseStateResult2_3 (copy), calculateTotalDiscountFromSelectedOffers (upval), UseStateResult2_4 (copy), getAllDiscountSummaryEntries (upval), MutedErrorFunction (upval), UseResult (copy), UseLocalizationResult (copy)
+			if UseRefResult.current then return end
+			UseRefResult.current = true
+			local Copy = table.clone(Tbl)
 			
-			if t[p12] then
-				t[p12] = nil
+			if Tbl[Key] then
+				Tbl[Key] = nil
 			else
-				t[p12] = true
+				Tbl[Key] = true
 			end
-			local var21, _ = postCartPricingForOffersModule(var3, {
+			local PostCartPricingForOffersModuleResult, _ = PostCartPricingForOffersModule(UseNetworkingResult, {
 				featureKey = "MARKETPLACE_CART",
-				items = var17,
-				unselectedOffers = cryoModule.Dictionary.keys(t)
+				items = ItemsForOffersCartPricingRequest,
+				unselectedOffers = CryoModule.Dictionary.keys(Tbl)
 			})
-			var21:andThen(function(p13)
-				-- upvalues: getOffersAvailableMap (copy), var7 (copy), var9 (copy), var11 (copy), getDiscountedItemsFromItemsData (copy), var13 (copy), calculateTotalDiscountFromSelectedOffers (copy), var15 (copy), getAllDiscountSummaryEntries (copy), mutedError (copy), var16 (copy)
-				if p13 and p13.items then
-					local var22 = getOffersAvailableMap(p13.availableOffers)
-					var7(p13.savingsSummary)
-					var9(var22)
-					var11(getDiscountedItemsFromItemsData(p13.items, var22))
-					var13(calculateTotalDiscountFromSelectedOffers(p13.items, var22))
-					var15(getAllDiscountSummaryEntries(p13.items, var22))
+			PostCartPricingForOffersModuleResult:andThen(function(Result) --[[ Line: 260 ]]
+				-- upvalues: getOffersAvailableMap (upval), UseStateResult2 (upval), UseStateResult2_1 (upval), UseStateResult2_2 (upval), getDiscountedItemsFromItemsData (upval), UseStateResult2_3 (upval), calculateTotalDiscountFromSelectedOffers (upval), UseStateResult2_4 (upval), getAllDiscountSummaryEntries (upval), MutedErrorFunction (upval), UseRefResult (upval)
+				if Result and Result.items then
+					local OffersAvailableMap = getOffersAvailableMap(Result.availableOffers)
+					UseStateResult2(Result.savingsSummary)
+					UseStateResult2_1(OffersAvailableMap)
+					UseStateResult2_2((getDiscountedItemsFromItemsData(Result.items, OffersAvailableMap)))
+					UseStateResult2_3((calculateTotalDiscountFromSelectedOffers(Result.items, OffersAvailableMap)))
+					UseStateResult2_4((getAllDiscountSummaryEntries(Result.items, OffersAvailableMap)))
 				else
-					mutedError("marketplace-sales/v1/cart-pricing did not return items in payload")
+					MutedErrorFunction("marketplace-sales/v1/cart-pricing did not return items in payload")
 				end
-				var16.current = false
-			end):catch(function(_)
-				-- upvalues: t (copy), cloned (ref), var20 (copy), var19 (copy), var16 (copy)
-				t = cloned
-				var20(var19.toggleFailed)
-				var16.current = false
+				UseRefResult.current = false
+			end):catch(function(_) --[[ Line: 276 ]]
+				-- upvalues: Tbl (upval), Copy (copy), UseResult (upval), UseLocalizationResult (upval), UseRefResult (upval)
+				Tbl = Copy
+				UseResult(UseLocalizationResult.toggleFailed)
+				UseRefResult.current = false
 			end)
-		end, { var3, var17, var20, var19 })
+		end, {
+			UseNetworkingResult,
+			ItemsForOffersCartPricingRequest,
+			UseResult,
+			UseLocalizationResult
+		})
 	}
 end

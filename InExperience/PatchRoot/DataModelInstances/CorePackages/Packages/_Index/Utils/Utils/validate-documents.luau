@@ -1,110 +1,111 @@
-﻿local parent = script.Parent.Parent
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local error = luauPolyfillModule.Error
-local map = luauPolyfillModule.Map
-local promiseModule = require(parent.Promise)
-local t = {}
-local graphQLModule = require(parent.GraphQL)
-local kind = graphQLModule.Kind
-local validate = graphQLModule.validate
-local specifiedRules = graphQLModule.specifiedRules
-local concatAST = graphQLModule.concatAST
-local versionInfo = graphQLModule.versionInfo
+﻿local Parent = script.Parent.Parent
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Error1 = LuauPolyfillModule.Error
+local Map = LuauPolyfillModule.Map
+local PromiseModule = require(Parent.Promise)
+local GraphQLModule = require(Parent.GraphQL)
+local Kind = GraphQLModule.Kind
+local ValidateFunction = GraphQLModule.validate
+local SpecifiedRules = GraphQLModule.specifiedRules
+local ConcatASTFunction = GraphQLModule.concatAST
+local VersionInfo = GraphQLModule.versionInfo
 local _ = require(script.Parent.loaders)
-local aggregateError = require(script.Parent.AggregateError).AggregateError
-local var1 = nil
+local AggregateError = require(script.Parent.AggregateError).AggregateError
+local Callback = nil
 
-function t.validateGraphQlDocuments(p1, p2, p3)
-	-- upvalues: var1 (write), promiseModule (ref), map (ref), kind (ref), array (ref), concatAST (ref), validate (ref)
-	local var2 = if p3 ~= nil then var1() else p3
+local function validateGraphQlDocuments(p1, p2, p3) --[[ Line: 66 ]]
+	-- upvalues: Callback (ref), PromiseModule (copy), Map (copy), Kind (copy), Array (copy), ConcatASTFunction (copy), ValidateFunction (copy)
+	local CallbackResult = if p3 == nil then Callback() else p3
 	
-	return promiseModule.resolve():andThen(function()
-		-- upvalues: map (copy), p2 (ref), kind (copy), array (copy), promiseModule (copy), concatAST (copy), validate (copy), p1 (ref), var2 (ref)
-		local var3 = map.new()
-		local t = {}
+	return PromiseModule.resolve():andThen(function() --[[ Line: 74 ]]
+		-- upvalues: Map (upval), p2 (copy), Kind (upval), Array (upval), PromiseModule (upval), ConcatASTFunction (upval), ValidateFunction (upval), p1 (copy), CallbackResult (copy)
+		local NewMap = Map.new()
+		local List = {}
 		
-		for i, v in p2 do
-			if v.document then
-				local t_1 = {}
+		for _, value in p2 do
+			if value.document then
+				local Definitions = {}
 				
-				for i_1, v_1 in v.document.definitions do
-					if v_1.kind == kind.FRAGMENT_DEFINITION then
-						var3:set(v_1.name.value, v_1)
+				for _, definition in value.document.definitions do
+					if definition.kind == Kind.FRAGMENT_DEFINITION then
+						NewMap:set(definition.name.value, definition)
 					else
-						table.insert(t_1, v_1)
+						table.insert(Definitions, definition)
 					end
 				end
-				table.insert(t, {
-					location = v.location,
-					document = { kind = kind.DOCUMENT, definitions = t_1 }
+				table.insert(List, {
+					location = value.location,
+					document = { kind = Kind.DOCUMENT, definitions = Definitions }
 				})
 			end
 		end
-		local t_1 = {}
-		local t_2 = {
-			kind = kind.DOCUMENT,
-			definitions = array.concat({}, var3:values())
+		local List1 = {}
+		local config = {
+			kind = Kind.DOCUMENT,
+			definitions = Array.concat({}, NewMap:values())
 		}
-		promiseModule.all(array.map(t, function(p4)
-			-- upvalues: promiseModule (copy), concatAST (copy), t_2 (ref), validate (copy), p1 (copy), var2 (copy), t_1 (ref)
-			return promiseModule.resolve():andThen(function()
-				-- upvalues: concatAST (copy), t_2 (copy), p4 (ref), validate (copy), p1 (copy), var2 (copy), t_1 (copy)
-				local var4 = validate(p1, concatAST({ t_2, p4.document }), var2)
+		PromiseModule.all(Array.map(List, function(p4) --[[ Line: 104 ]]
+			-- upvalues: PromiseModule (upval), ConcatASTFunction (upval), config (copy), ValidateFunction (upval), p1 (upval), CallbackResult (upval), List1 (copy)
+			return PromiseModule.resolve():andThen(function() --[[ Line: 105 ]]
+				-- upvalues: ConcatASTFunction (upval), config (upval), p4 (copy), ValidateFunction (upval), p1 (upval), CallbackResult (upval), List1 (upval)
+				local ValidateResult = ValidateFunction(p1, ConcatASTFunction({ config, p4.document }), CallbackResult)
 				
-				if #var4 > 0 then
-					table.insert(t_1, { filePath = p4.location, errors = var4 })
+				if #ValidateResult > 0 then
+					table.insert(List1, { filePath = p4.location, errors = ValidateResult })
 				end
 			end)
 		end)):expect()
 		
-		return t_1
+		return List1
 	end)
 end
 
-function t.checkValidationErrors(p4)
-	-- upvalues: error (ref), aggregateError (ref), array (ref)
-	if #p4 > 0 then
-		local t = {}
-		
-		for i, v in p4 do
-			for i_1, v_1 in v.errors do
-				local graphQLDocumentError = error.new()
-				graphQLDocumentError.name = "GraphQLDocumentError"
-				graphQLDocumentError.message = ("%s: %s"):format(tostring(graphQLDocumentError.name), tostring(v_1.message))
-				graphQLDocumentError.stack = graphQLDocumentError.message
-				
-				if v_1.locations then
-					for i_2, v_2 in v_1.locations do
-						graphQLDocumentError.stack = tostring(graphQLDocumentError.stack) .. ("\n    at %s:%s:%s"):format(tostring(v.filePath), tostring(v_2.line), tostring(v_2.column))
-					end
-				end
-				table.insert(t, graphQLDocumentError)
-			end
-		end
-		error(aggregateError.new(t, ("GraphQL Document Validation failed with %s errors;\n  %s"):format(tostring(#t), tostring(array.join(array.map(t, function(p5, p6)
-			return ("Error %s: %s"):format(tostring(p6), tostring(p5.stack))
-		end), "\n\n")))))
-	end
-end
-
-function t.createDefaultRules()
-	-- upvalues: versionInfo (ref), array (ref), specifiedRules (ref)
-	local list = {
+Callback = function() --[[ Line: 185 | Named "createDefaultRules" ]]
+	-- upvalues: VersionInfo (copy), Array (copy), SpecifiedRules (copy)
+	local MapResult = {
 		"NoUnusedFragmentsRule",
 		"NoUnusedVariablesRule",
 		"KnownDirectivesRule"
 	}
 	
-	if versionInfo.major < 15 then
-		list = array.map(list, function(p5)
-			return p5:gsub("Rule$", "", 1)
+	if VersionInfo.major < 15 then
+		MapResult = Array.map(MapResult, function(Text: string): string --[[ Line: 192 ]]
+			return (Text:gsub("Rule$", "", 1))
 		end)
 	end
-	return array.filter(specifiedRules, function(p5)
-		-- upvalues: array (copy), list (write)
-		return not array.includes(list, debug.info(p5, "n"))
+	return Array.filter(SpecifiedRules, function(p4): boolean --[[ Line: 200 ]]
+		-- upvalues: Array (upval), MapResult (ref)
+		return not Array.includes(MapResult, (debug.info(p4, "n")))
 	end)
 end
 
-return t
+return {
+	validateGraphQlDocuments = validateGraphQlDocuments,
+	checkValidationErrors = function(List) --[[ Line: 123 ]]
+		-- upvalues: Error1 (copy), AggregateError (copy), Array (copy)
+		if #List > 0 then
+			local List1 = {}
+			
+			for _, value in List do
+				for _, _error in value.errors do
+					local NewError = Error1.new()
+					NewError.name = "GraphQLDocumentError"
+					NewError.message = ("%s: %s"):format(tostring(NewError.name), (tostring(_error.message)))
+					NewError.stack = NewError.message
+					
+					if _error.locations then
+						for _, location in _error.locations do
+							NewError.stack = tostring(NewError.stack) .. ("\n    at %s:%s:%s"):format(tostring(value.filePath), tostring(location.line), (tostring(location.column)))
+						end
+					end
+					table.insert(List1, NewError)
+				end
+			end
+			error(AggregateError.new(List1, ("GraphQL Document Validation failed with %s errors;\n  %s"):format(tostring(#List1), (tostring(Array.join(Array.map(List1, function(p4, p5): string --[[ Line: 170 ]]
+				return ("Error %s: %s"):format(tostring(p5), (tostring(p4.stack)))
+			end), "\n\n"))))))
+		end
+	end,
+	createDefaultRules = Callback
+}

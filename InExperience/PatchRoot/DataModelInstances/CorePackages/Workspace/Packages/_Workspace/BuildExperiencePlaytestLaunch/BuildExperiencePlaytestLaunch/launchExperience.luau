@@ -1,32 +1,32 @@
-﻿local parent = script:FindFirstAncestor("BuildExperiencePlaytestLaunch").Parent
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagBuildExperienceLibrary = sharedFlagsModule.FFlagBuildExperienceLibrary
-local fFlagDeferInExperienceRbxmDownload = sharedFlagsModule.FFlagDeferInExperienceRbxmDownload
-local fFlagEnableDeferredAssetManagerService = sharedFlagsModule.FFlagEnableDeferredAssetManagerService
-local creatorAgentChatModule = require(parent.DataHydration.CreatorAgentChat)
-local experienceServiceModule = require(parent.ExperienceService)
-local experienceService = experienceServiceModule.ExperienceService
-local gameParams = experienceServiceModule.GameParams
-local buildModeLaunchModule = require(script.Parent.BuildModeLaunch)
-local debug = creatorAgentChatModule.debug
+﻿local Parent = script:FindFirstAncestor("BuildExperiencePlaytestLaunch").Parent
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagBuildExperienceLibrary = SharedFlagsModule.FFlagBuildExperienceLibrary
+local FFlagConnectionRelaunchBuildPlaytest = SharedFlagsModule.FFlagConnectionRelaunchBuildPlaytest
+local FFlagDeferInExperienceRbxmDownload = SharedFlagsModule.FFlagDeferInExperienceRbxmDownload
+local FFlagEnableDeferredAssetManagerService = SharedFlagsModule.FFlagEnableDeferredAssetManagerService
+local ExperienceServiceModule = require(Parent.ExperienceService)
+local ExperienceService = ExperienceServiceModule.ExperienceService
+local GameParams = ExperienceServiceModule.GameParams
+local BuildModeLaunchModule = require(script.Parent.BuildModeLaunch)
+local Debug = require(Parent.DataHydration.CreatorAgentChat).debug
 
-return function(p1, p2, p3, p4)
-	-- upvalues: buildModeLaunchModule (ref), gameParams (ref), fFlagBuildExperienceLibrary (ref), parent (ref), fFlagDeferInExperienceRbxmDownload (ref), fFlagEnableDeferredAssetManagerService (ref), debug (ref), experienceService (ref)
-	buildModeLaunchModule:set(if p4 ~= nil then nil else p4.sessionId, p1)
-	local var1 = gameParams.fromPlaceId(p1, p3)
+return function(JoiningPlaceId, Source, p1, p2) --[[ Line: 22 | Named "launchExperience" ]]
+	-- upvalues: BuildModeLaunchModule (copy), FFlagConnectionRelaunchBuildPlaytest (copy), GameParams (copy), FFlagBuildExperienceLibrary (copy), Parent (copy), FFlagDeferInExperienceRbxmDownload (copy), FFlagEnableDeferredAssetManagerService (copy), Debug (copy), ExperienceService (copy)
+	BuildModeLaunchModule:set(if p2 == nil then nil else p2.sessionId, JoiningPlaceId, if FFlagConnectionRelaunchBuildPlaytest then p1 else nil)
+	local FromPlaceIdResult = GameParams.fromPlaceId(JoiningPlaceId, p1)
 	
-	if fFlagBuildExperienceLibrary then
-		var1.isTeamCreateViewer = if p4 ~= nil then nil else true
+	if FFlagBuildExperienceLibrary then
+		FromPlaceIdResult.isTeamCreateViewer = p2 ~= nil or nil
 		
-		if p4 == nil then
-			require(parent.ProgressLoading).PregameOverride.setPregameOverride(nil)
+		if p2 == nil then
+			require(Parent.ProgressLoading).PregameOverride.setPregameOverride(nil)
 		end
-		if fFlagDeferInExperienceRbxmDownload and fFlagEnableDeferredAssetManagerService then
-			local deferredAssetManagerService = game:GetService("DeferredAssetManagerService")
-			deferredAssetManagerService.JoiningPlaceId = p1
-			deferredAssetManagerService.JoiningUniverseId = 0
+		if FFlagDeferInExperienceRbxmDownload and FFlagEnableDeferredAssetManagerService then
+			local DeferredAssetManagerService = game:GetService("DeferredAssetManagerService")
+			DeferredAssetManagerService.JoiningPlaceId = JoiningPlaceId
+			DeferredAssetManagerService.JoiningUniverseId = 0
 		end
 	end
-	debug.log("info", "LaunchExperience gameParams", { gameParams = var1, source = p2 })
-	experienceService:LaunchExperience(var1, p2)
+	Debug.log("info", "LaunchExperience gameParams", { gameParams = FromPlaceIdResult, source = Source })
+	ExperienceService:LaunchExperience(FromPlaceIdResult, Source)
 end

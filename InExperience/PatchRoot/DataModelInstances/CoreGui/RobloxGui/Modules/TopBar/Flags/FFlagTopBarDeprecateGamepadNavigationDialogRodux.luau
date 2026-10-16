@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("TopBarDeprecateGamepadNavigationDialogRodux", false)
+﻿return (game:DefineFastFlag("TopBarDeprecateGamepadNavigationDialogRodux", false))

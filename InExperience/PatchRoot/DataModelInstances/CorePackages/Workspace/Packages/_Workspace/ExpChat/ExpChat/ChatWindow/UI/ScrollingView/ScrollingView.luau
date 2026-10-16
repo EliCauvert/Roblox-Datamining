@@ -1,18 +1,17 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local roactModule = require(parent.Roact)
-local dictionary = require(parent.llama).Dictionary
-local expChatSharedModule = require(parent.ExpChatShared)
-local fFlagExpChatEnableV2ChatWindowModule = require(expChat.Flags.FFlagExpChatEnableV2ChatWindow)
-local fFlagExpChatEnableFriendsTab = require(parent.SharedFlags).FFlagExpChatEnableFriendsTab
-local getFFlagTextChatEnableUniverseChatTabs = expChatSharedModule.Flags.GetFFlagTextChatEnableUniverseChatTabs
-local bottomLockedScrollViewV3Module = require(expChat.ChatWindow.UI.BottomLockedScrollViewV3)
-local scrollingView = roactModule.PureComponent:extend("ScrollingView")
-scrollingView.defaultProps = {}
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local RoactModule = require(Parent.Roact)
+local Dictionary = require(Parent.llama).Dictionary
+local FFlagExpChatEnableV2ChatWindowModule = require(ExpChat.Flags.FFlagExpChatEnableV2ChatWindow)
+local FFlagExpChatEnableFriendsTab = require(Parent.SharedFlags).FFlagExpChatEnableFriendsTab
+local GetFFlagTextChatEnableUniverseChatTabsFunction = require(Parent.ExpChatShared).Flags.GetFFlagTextChatEnableUniverseChatTabs
+local BottomLockedScrollViewV3Module = require(ExpChat.ChatWindow.UI.BottomLockedScrollViewV3)
+local ScrollingView = RoactModule.PureComponent:extend("ScrollingView")
+ScrollingView.defaultProps = {}
 
-function scrollingView.render(p1)
-	-- upvalues: fFlagExpChatEnableV2ChatWindowModule (ref), getFFlagTextChatEnableUniverseChatTabs (ref), roactModule (ref), bottomLockedScrollViewV3Module (ref), dictionary (ref), fFlagExpChatEnableFriendsTab (ref)
-	local var1 = if fFlagExpChatEnableV2ChatWindowModule then {
+function ScrollingView.render(p1) --[[ Line: 15 ]]
+	-- upvalues: FFlagExpChatEnableV2ChatWindowModule (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), RoactModule (copy), BottomLockedScrollViewV3Module (copy), Dictionary (copy), FFlagExpChatEnableFriendsTab (copy)
+	local Config = if FFlagExpChatEnableV2ChatWindowModule then {
 		showTranslationButton = p1.props.showTranslationButton,
 		chatWindowSettings = p1.props.chatWindowSettings,
 		textTransparency = p1.props.textTransparency,
@@ -20,24 +19,25 @@ function scrollingView.render(p1)
 		isSpatialUIEnabled = p1.props.isSpatialUIEnabled,
 		chatWindowTransparencyBindable = p1.props.chatWindowTransparencyBindable,
 		visible = p1.props.visible,
-		selectedChannelName = if getFFlagTextChatEnableUniverseChatTabs() then p1.props.selectedChannelName else nil
+		selectedChannelName = if GetFFlagTextChatEnableUniverseChatTabsFunction() then p1.props.selectedChannelName else nil,
+		historicalMessageCountSignal = p1.props.historicalMessageCountSignal
 	} else {}
-	var1.messageComponentsSignal = p1.props.messageComponentsSignal
+	Config.messageComponentsSignal = p1.props.messageComponentsSignal
 	
-	return roactModule.createElement("ImageButton", {
+	return RoactModule.createElement("ImageButton", {
 		BackgroundTransparency = 1,
 		Selectable = false,
 		Size = p1.props.size
 	}, {
-		bottomLockedScrollView = roactModule.createElement(bottomLockedScrollViewV3Module, dictionary.join({
+		bottomLockedScrollView = RoactModule.createElement(BottomLockedScrollViewV3Module, Dictionary.join({
 			Size = UDim2.fromScale(1, 1),
 			isChannelBarVisible = p1.props.isChannelBarVisible,
 			scrollResetKey = p1.props.scrollResetKey,
-			scrollToTopOnReset = if fFlagExpChatEnableFriendsTab then p1.props.scrollToTopOnReset else nil,
-			onCanvasPositionChanged = if fFlagExpChatEnableFriendsTab then p1.props.onCanvasPositionChanged else nil,
-			contentTopPadding = if fFlagExpChatEnableFriendsTab then p1.props.contentTopPadding else nil
-		}, var1))
+			scrollToTopOnReset = if FFlagExpChatEnableFriendsTab then p1.props.scrollToTopOnReset else nil,
+			onCanvasPositionChanged = if FFlagExpChatEnableFriendsTab then p1.props.onCanvasPositionChanged else nil,
+			contentTopPadding = if FFlagExpChatEnableFriendsTab then p1.props.contentTopPadding else nil
+		}, Config))
 	})
 end
 
-return scrollingView
+return ScrollingView

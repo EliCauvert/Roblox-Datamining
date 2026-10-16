@@ -1,6 +1,6 @@
-﻿local t = { week = true }
+﻿local config = { week = true }
 
-return function(p1)
-	-- upvalues: t (ref)
-	return if p1 == nil then false else t[string.lower(p1)] == true
+return function(Text: string): boolean --[[ Line: 7 | Named "isSupportedTrialPeriodType" ]]
+	-- upvalues: config (copy)
+	return Text ~= nil and config[string.lower(Text)] == true
 end

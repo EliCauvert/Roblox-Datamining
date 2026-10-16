@@ -1,35 +1,35 @@
-﻿local createSignal = require(script:FindFirstAncestor("ExpChat").Parent.Signals).createSignal
+﻿local CreateSignalFunction = require(script:FindFirstAncestor("ExpChat").Parent.Signals).createSignal
 
-return function()
-	-- upvalues: createSignal (ref)
-	local var1, var2 = createSignal({})
+return function() --[[ Line: 19 | Named "createCharacterStore" ]]
+	-- upvalues: CreateSignalFunction (copy)
+	local Signal, Signal2 = CreateSignalFunction({})
 	
-	local function _(p1)
-		return tostring(p1)
+	local function _(p1): string --[[ Line: 23 | Named "getKey" ]]
+		return (tostring(p1))
 	end
 	
 	return {
-		getCharacters = var1,
-		handleCharacterAdded = function(p1, p2)
-			-- upvalues: var2 (ref)
-			local var3 = tostring(p1)
-			var2(function(p3)
-				-- upvalues: var3 (ref), p2 (ref)
-				local cloned = table.clone(p3)
-				cloned[var3] = p2
+		getCharacters = Signal,
+		handleCharacterAdded = function(p1, p2) --[[ Line: 27 ]]
+			-- upvalues: Signal2 (copy)
+			local Text = tostring(p1)
+			Signal2(function(Tbl) --[[ Line: 30 ]]
+				-- upvalues: Text (copy), p2 (copy)
+				local Copy = table.clone(Tbl)
+				Copy[Text] = p2
 				
-				return cloned
+				return Copy
 			end)
 		end,
-		handlePlayerRemoved = function(p1)
-			-- upvalues: var2 (ref)
-			local var3 = tostring(p1)
-			var2(function(p2)
-				-- upvalues: var3 (ref)
-				local cloned = table.clone(p2)
-				cloned[var3] = nil
+		handlePlayerRemoved = function(p1) --[[ Line: 37 ]]
+			-- upvalues: Signal2 (copy)
+			local Text = tostring(p1)
+			Signal2(function(Tbl) --[[ Line: 40 ]]
+				-- upvalues: Text (copy)
+				local Copy = table.clone(Tbl)
+				Copy[Text] = nil
 				
-				return cloned
+				return Copy
 			end)
 		end
 	}

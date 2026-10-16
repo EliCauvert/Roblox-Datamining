@@ -1,8 +1,8 @@
-﻿local socialLuaAnalyticsModule = require(script:FindFirstAncestor("UserRelationshipModals").Parent.SocialLuaAnalytics)
+﻿local SocialLuaAnalyticsModule = require(script:FindFirstAncestor("UserRelationshipModals").Parent.SocialLuaAnalytics)
 
-return socialLuaAnalyticsModule.Analytics.AnalyticsFactory.setUpAnalyticsFactory({
+return SocialLuaAnalyticsModule.Analytics.AnalyticsFactory.setUpAnalyticsFactory({
 	eventLists = { Telemetry = require(script.Parent.TelemetryActionList) },
 	analyticsImpl = {
-		Telemetry = socialLuaAnalyticsModule.Analytics.DefaultAnalyticsService.Telemetry
+		Telemetry = SocialLuaAnalyticsModule.Analytics.DefaultAnalyticsService.Telemetry
 	}
 })

@@ -1,131 +1,132 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local setCurrentToastMessage = require(parent.ToastRodux).Actions.SetCurrentToastMessage
-local catalogNetworkingModule = require(parent.CatalogNetworking)
-local purchaseDetailsStore = catalogNetworkingModule.PurchaseDetailsStore
-local bundleOwnershipStore = catalogNetworkingModule.BundleOwnershipStore
-local _ = require(profilePlatform.Contexts.ProfileWrapperContext)
-local marketplaceUnifiedAction = require(parent.AvatarExperienceAnalytics).UnifiedEventLogEnums.MarketplaceUnifiedAction
-local enumsModule = require(profilePlatform.Common.Enums)
-local sendProfilePurchaseEventsModule = require(profilePlatform.Analytics.sendProfilePurchaseEvents)
-local fFlagProfileInspectAndBuyRefreshBalanceAfterPurchaseModule = require(profilePlatform.Flags.FFlagProfileInspectAndBuyRefreshBalanceAfterPurchase)
-local fFlagProfileUnifiedPurchaseLoggingModule = require(profilePlatform.Flags.FFlagProfileUnifiedPurchaseLogging)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local SetCurrentToastMessageFunction = require(Parent.ToastRodux).Actions.SetCurrentToastMessage
+local CatalogNetworkingModule = require(Parent.CatalogNetworking)
+local PurchaseDetailsStore = CatalogNetworkingModule.PurchaseDetailsStore
+local BundleOwnershipStore = CatalogNetworkingModule.BundleOwnershipStore
+local _ = require(ProfilePlatform.Contexts.ProfileWrapperContext)
+local MarketplaceUnifiedAction = require(Parent.AvatarExperienceAnalytics).UnifiedEventLogEnums.MarketplaceUnifiedAction
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local SendProfilePurchaseEventsModule = require(ProfilePlatform.Analytics.sendProfilePurchaseEvents)
+local FFlagProfileInspectAndBuyRefreshBalanceAfterPurchaseModule = require(ProfilePlatform.Flags.FFlagProfileInspectAndBuyRefreshBalanceAfterPurchase)
+local FFlagProfileUnifiedPurchaseLoggingModule = require(ProfilePlatform.Flags.FFlagProfileUnifiedPurchaseLogging)
 
-local function buildEquippableAssets(value, p1, p2)
+local function buildEquippableAssets(PurchasedWearIds, OwnedAssetIds, WearTypeMap) --[[ Line: 75 ]]
+	local List = {}
 	local t = {}
-	local t_1 = {}
 	
-	local function append(p3)
-		-- upvalues: t_1 (ref), p2 (ref), t (ref)
-		for i, v in p3 do
-			if not t_1[v] then
-				local var1 = p2[v]
+	local function append(List1) --[[ Line: 83 ]]
+		-- upvalues: t (copy), WearTypeMap (copy), List (copy)
+		for _, value in List1 do
+			if not t[value] then
+				local WearType = WearTypeMap[value]
 				
-				if var1 then
-					t_1[v] = true
-					table.insert(t, { assetTypeId = tostring(var1), assetId = tostring(v) })
+				if WearType then
+					t[value] = true
+					table.insert(List, {
+						assetTypeId = tostring(WearType),
+						assetId = tostring(value)
+					})
 				end
 			end
 		end
 	end
 	
-	append(value)
-	append(p1)
+	append(PurchasedWearIds)
+	append(OwnedAssetIds)
 	
-	return t
+	return List
 end
 
-local function parseLineItems(p3)
-	local t = {}
-	local t_1 = {}
-	local var1 = 0
+local function parseLineItems(LineItems) --[[ Line: 106 ]]
+	local List = {}
+	local List1 = {}
+	local Count = 0
 	
-	for i, v in p3 do
-		if v.status ~= "SUCCEEDED" then
-			var1 += 1
-		elseif v.bundleId then
-			table.insert(t_1, tostring(v.bundleId))
-			table.insert(t, tostring(v.bundleId))
-		elseif v.assetId then
-			table.insert(t, tostring(v.assetId))
+	for _, lineItem in LineItems do
+		if lineItem.status ~= "SUCCEEDED" then
+			Count += 1
+			continue
+		end
+		if lineItem.bundleId then
+			table.insert(List1, (tostring(lineItem.bundleId)))
+			table.insert(List, (tostring(lineItem.bundleId)))
+		elseif lineItem.assetId then
+			table.insert(List, (tostring(lineItem.assetId)))
 		end
 	end
-	return t, t_1, var1
+	return List, List1, Count
 end
 
-local function buildPurchasedItems(p4, p5)
-	-- upvalues: enumsModule (ref)
-	local t = {}
+local function buildPurchasedItems(LineItems, PurchasedItems) --[[ Line: 130 ]]
+	-- upvalues: EnumsModule (copy)
+	local ItemSubTypes = {}
 	
-	if p5 then
-		for i, v in p5 do
-			if v.itemSubType then
-				t[v.itemId] = v.itemSubType
+	if PurchasedItems then
+		for _, purchasedItem in PurchasedItems do
+			if purchasedItem.itemSubType then
+				ItemSubTypes[purchasedItem.itemId] = purchasedItem.itemSubType
 			end
 		end
 	end
-	local t_1 = {}
+	local List = {}
 	
-	for i, v in p4 do
-		if v.status == "SUCCEEDED" then
-			local var2 = if v.bundleId then tostring(v.bundleId) elseif v.assetId then tostring(v.assetId) else nil
+	for _, lineItem in LineItems do
+		if lineItem.status == "SUCCEEDED" then
+			local Text = if lineItem.bundleId then tostring(lineItem.bundleId) elseif lineItem.assetId then tostring(lineItem.assetId) else nil
 			
-			if var2 then
-				table.insert(t_1, {
-					itemId = var2,
-					itemType = if v.bundleId then enumsModule.ItemTypes.Bundle else enumsModule.ItemTypes.Asset,
-					itemSubType = t[var2],
-					priceInRobux = v.agreedPriceRobux
+			if Text then
+				table.insert(List, {
+					itemId = Text,
+					itemType = if lineItem.bundleId then EnumsModule.ItemTypes.Bundle else EnumsModule.ItemTypes.Asset,
+					itemSubType = ItemSubTypes[Text],
+					priceInRobux = lineItem.agreedPriceRobux
 				})
 			end
 		end
 	end
-	return t_1
+	return List
 end
 
-return function(p6)
-	-- upvalues: parseLineItems (ref), fFlagProfileUnifiedPurchaseLoggingModule (ref), sendProfilePurchaseEventsModule (ref), marketplaceUnifiedAction (ref), buildPurchasedItems (ref), purchaseDetailsStore (ref), bundleOwnershipStore (ref), buildEquippableAssets (ref), fFlagProfileInspectAndBuyRefreshBalanceAfterPurchaseModule (ref), setCurrentToastMessage (ref)
-	local lineItems
-	local responseBody = p6.result and p6.result.responseBody
-	local fulfillmentGroups = responseBody and responseBody.fulfillmentGroups
+return function(p1) --[[ Line: 170 | Named "HandlePurchaseItemsSuccess" ]]
+	-- upvalues: parseLineItems (copy), FFlagProfileUnifiedPurchaseLoggingModule (copy), SendProfilePurchaseEventsModule (copy), MarketplaceUnifiedAction (copy), buildPurchasedItems (copy), PurchaseDetailsStore (copy), BundleOwnershipStore (copy), buildEquippableAssets (copy), FFlagProfileInspectAndBuyRefreshBalanceAfterPurchaseModule (copy), SetCurrentToastMessageFunction (copy)
+	local ResponseBody = p1.result and p1.result.responseBody
+	local FulfillmentGroups = ResponseBody and ResponseBody.fulfillmentGroups
+	local LineItems = FulfillmentGroups and FulfillmentGroups[1] and FulfillmentGroups[1].lineItems or {}
+	local ParseLineItemsResult, ParseLineItemsResult2, ParseLineItemsResult3 = parseLineItems(LineItems)
 	
-	if fulfillmentGroups then
-		lineItems = fulfillmentGroups[1] and (fulfillmentGroups[1].lineItems or {})
+	if FFlagProfileUnifiedPurchaseLoggingModule then
+		SendProfilePurchaseEventsModule(MarketplaceUnifiedAction.PURCHASE_SUCCESS, buildPurchasedItems(LineItems, p1.purchasedItems), p1.profileWrapperContext.profileType)
 	end
-	local var3, var4, var5 = parseLineItems(lineItems)
+	PurchaseDetailsStore.markItemsOwned(ParseLineItemsResult)
 	
-	if fFlagProfileUnifiedPurchaseLoggingModule then
-		sendProfilePurchaseEventsModule(marketplaceUnifiedAction.PURCHASE_SUCCESS, buildPurchasedItems(lineItems, p6.purchasedItems), p6.profileWrapperContext.profileType)
+	if #ParseLineItemsResult2 > 0 then
+		BundleOwnershipStore.markOwned(ParseLineItemsResult2)
 	end
-	purchaseDetailsStore.markItemsOwned(var3)
-	
-	if #var4 > 0 then
-		bundleOwnershipStore.markOwned(var4)
-	end
-	if p6.isWearAfterPurchaseChecked and p6.profileWrapperContext.postPurchase then
-		local var6 = buildEquippableAssets(p6.purchasedWearIds or {}, p6.ownedAssetIds or {}, p6.wearTypeMap or {})
+	if p1.isWearAfterPurchaseChecked and p1.profileWrapperContext.postPurchase then
+		local EquippableAssets = buildEquippableAssets(p1.purchasedWearIds or {}, p1.ownedAssetIds or {}, p1.wearTypeMap or {})
 		
-		if #var6 > 0 then
-			if p6.avatarSaveContext and p6.avatarSaveContext.autoSaveNextNewSaveData then
-				p6.avatarSaveContext.autoSaveNextNewSaveData()
+		if #EquippableAssets > 0 then
+			if p1.avatarSaveContext and p1.avatarSaveContext.autoSaveNextNewSaveData then
+				p1.avatarSaveContext.autoSaveNextNewSaveData()
 			end
-			p6.profileWrapperContext.postPurchase.wearAfterPurchase(var6)
+			p1.profileWrapperContext.postPurchase.wearAfterPurchase(EquippableAssets)
 		end
 	end
-	if fFlagProfileInspectAndBuyRefreshBalanceAfterPurchaseModule and #var3 > 0 then
-		local postPurchase = p6.profileWrapperContext.postPurchase
+	if FFlagProfileInspectAndBuyRefreshBalanceAfterPurchaseModule and #ParseLineItemsResult > 0 then
+		local PostPurchase = p1.profileWrapperContext.postPurchase
 		
-		if postPurchase and postPurchase.refreshRobuxBalance then
-			postPurchase.refreshRobuxBalance()
+		if PostPurchase and PostPurchase.refreshRobuxBalance then
+			PostPurchase.refreshRobuxBalance()
 		end
 	end
-	p6.dispatch(setCurrentToastMessage(if var5 == 0 then {
+	p1.dispatch(SetCurrentToastMessageFunction(if ParseLineItemsResult3 == 0 then {
 		isLocalized = true,
 		toastType = "PurchaseMessage",
-		toastMessage = if #var3 == 1 then p6.localized.purchaseSuccessSingular else p6.localized.purchaseSuccessPlural
+		toastMessage = if #ParseLineItemsResult == 1 then p1.localized.purchaseSuccessSingular else p1.localized.purchaseSuccessPlural
 	} else {
 		isLocalized = true,
 		toastType = "PurchaseMessage",
-		toastMessage = p6.localized.purchasePartialFailure
+		toastMessage = p1.localized.purchasePartialFailure
 	}))
 end

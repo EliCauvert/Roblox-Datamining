@@ -1,16 +1,16 @@
-﻿local t = {}
-t.__index = t
+﻿local OpenTypeSupportModule = {}
+OpenTypeSupportModule.__index = OpenTypeSupportModule
 
-function t.getSupportedFeatures(_)
+function OpenTypeSupportModule:getSupportedFeatures(): string --[[ Line: 5 ]]
 	return "zero, ss03"
 end
 
-function t.getPasswordStylisticAlternative(_)
+function OpenTypeSupportModule:getPasswordStylisticAlternative(): string --[[ Line: 9 ]]
 	return "zero, ss03"
 end
 
-function t.getUserNameStylisticAlternative(_)
+function OpenTypeSupportModule:getUserNameStylisticAlternative(): string --[[ Line: 13 ]]
 	return "zero, ss03"
 end
 
-return t
+return OpenTypeSupportModule

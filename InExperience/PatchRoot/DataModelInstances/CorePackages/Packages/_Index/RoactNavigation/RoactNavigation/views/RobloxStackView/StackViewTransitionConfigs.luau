@@ -1,33 +1,33 @@
-﻿local parent = script.Parent
-local object = require(parent.Parent.Parent.Parent.LuauPolyfill).Object
-local stackViewInterpolatorModule = require(parent.StackViewInterpolator)
-local stackPresentationStyleModule = require(parent.StackPresentationStyle)
-local t = { frequency = 3, dampingRatio = 1 }
-local t_1 = {
-	transitionSpec = t,
-	screenInterpolator = stackViewInterpolatorModule.forHorizontal
+﻿local Parent = script.Parent
+local Object = require(Parent.Parent.Parent.Parent.LuauPolyfill).Object
+local StackViewInterpolatorModule = require(Parent.StackViewInterpolator)
+local StackPresentationStyleModule = require(Parent.StackPresentationStyle)
+local TransitionSpec = { frequency = 3, dampingRatio = 1 }
+local SlideFromRight = {
+	transitionSpec = TransitionSpec,
+	screenInterpolator = StackViewInterpolatorModule.forHorizontal
 }
-local t_2 = {
-	transitionSpec = t,
-	screenInterpolator = stackViewInterpolatorModule.forVertical
+local ModalSlideFromBottom = {
+	transitionSpec = TransitionSpec,
+	screenInterpolator = StackViewInterpolatorModule.forVertical
 }
-local t_3 = {
-	transitionSpec = t,
-	screenInterpolator = stackViewInterpolatorModule.forFade
+local FadeInPlace = {
+	transitionSpec = TransitionSpec,
+	screenInterpolator = StackViewInterpolatorModule.forFade
 }
 
 return {
-	getDefaultTransitionConfig = function(_, _, p1)
-		-- upvalues: stackPresentationStyleModule (ref), t_2 (ref), t_3 (ref), t_1 (ref)
-		return if p1 == stackPresentationStyleModule.Modal then t_2 elseif p1 == stackPresentationStyleModule.Overlay then t_3 else t_1
+	getDefaultTransitionConfig = function(_, _, Modal) --[[ Line: 31 ]]
+		-- upvalues: StackPresentationStyleModule (copy), ModalSlideFromBottom (copy), FadeInPlace (copy), SlideFromRight (copy)
+		return if Modal == StackPresentationStyleModule.Modal then ModalSlideFromBottom elseif Modal == StackPresentationStyleModule.Overlay then FadeInPlace else SlideFromRight
 	end,
-	getTransitionConfig = function(p1, p2, p3, p4)
-		-- upvalues: stackPresentationStyleModule (ref), t_2 (ref), t_3 (ref), t_1 (ref), object (ref)
-		local var1 = if p4 == stackPresentationStyleModule.Modal then t_2 elseif p4 == stackPresentationStyleModule.Overlay then t_3 else t_1
+	getTransitionConfig = function(Callback, p1, p2, Modal) --[[ Line: 41 ]]
+		-- upvalues: StackPresentationStyleModule (copy), ModalSlideFromBottom (copy), FadeInPlace (copy), SlideFromRight (copy), Object (copy)
+		local ModalSlideFromBottom1 = if Modal == StackPresentationStyleModule.Modal then ModalSlideFromBottom elseif Modal == StackPresentationStyleModule.Overlay then FadeInPlace else SlideFromRight
 		
-		return if p1 then object.assign(table.clone(var1), p1(p2, p3, p4)) else var1
+		return if Callback then Object.assign(table.clone(ModalSlideFromBottom1), Callback(p1, p2, Modal)) else ModalSlideFromBottom1
 	end,
-	SlideFromRight = t_1,
-	ModalSlideFromBottom = t_2,
-	FadeInPlace = t_3
+	SlideFromRight = SlideFromRight,
+	ModalSlideFromBottom = ModalSlideFromBottom,
+	FadeInPlace = FadeInPlace
 }

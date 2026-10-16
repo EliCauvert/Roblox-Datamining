@@ -1,45 +1,42 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local roactUtilsModule = require(parent_1.RoactUtils)
-local constantsModule = require(parent.Constants)
-local promptConnectionsModule = require(parent.Components.CaptureService.PromptConnections)
-local promptTypeModule = require(parent.Enums.PromptType)
-local saveCapturesPromptModule = require(parent.Components.CaptureService.SaveCapturesPrompt)
-local shareCapturePromptModule = require(parent.Components.CaptureService.ShareCapturePrompt)
-local capturePermissionsPromptV2Module = require(parent.Components.CaptureService.CapturePermissionsPromptV2)
-local _ = require(parent.Types)
-local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
-local t = {
-	[promptTypeModule.SaveCaptures] = saveCapturesPromptModule,
-	[promptTypeModule.ShareCapture] = shareCapturePromptModule
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local ConstantsModule = require(Parent.Constants)
+local PromptConnectionsModule = require(Parent.Components.CaptureService.PromptConnections)
+local PromptTypeModule = require(Parent.Enums.PromptType)
+local CapturePermissionsPromptV2Module = require(Parent.Components.CaptureService.CapturePermissionsPromptV2)
+local _ = require(Parent.Types)
+local UseSelectorFunction = require(Parent1.RoactUtils).Hooks.RoactRodux.useSelector
+local config = {
+	[PromptTypeModule.SaveCaptures] = require(Parent.Components.CaptureService.SaveCapturesPrompt),
+	[PromptTypeModule.ShareCapture] = require(Parent.Components.CaptureService.ShareCapturePrompt)
 }
 
 if game:GetEngineFeature("CaptureServiceGalleryPermissionPrompt") then
-	t[promptTypeModule.CapturePermissions] = capturePermissionsPromptV2Module
+	config[PromptTypeModule.CapturePermissions] = CapturePermissionsPromptV2Module
 end
-return function(_)
-	-- upvalues: useSelector (ref), constantsModule (ref), t (ref), reactModule (ref), promptConnectionsModule (ref)
-	local var1 = useSelector(function(p1)
-		-- upvalues: constantsModule (copy)
-		return p1[constantsModule.RoduxKey].Prompts[1]
+return function(_) --[[ Line: 30 ]]
+	-- upvalues: UseSelectorFunction (copy), ConstantsModule (copy), config (copy), ReactModule (copy), PromptConnectionsModule (copy)
+	local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 31 ]]
+		-- upvalues: ConstantsModule (upval)
+		return p1[ConstantsModule.RoduxKey].Prompts[1]
 	end)
-	local promptData = var1 and var1.PromptData
-	local promptId = var1 and var1.PromptId
-	local promptType = var1 and var1.PromptType
-	local var2 = nil
+	local PromptData = UseSelectorResult and UseSelectorResult.PromptData
+	local PromptId = UseSelectorResult and UseSelectorResult.PromptId
+	local PromptType = UseSelectorResult and UseSelectorResult.PromptType
+	local Element = nil
 	
-	if promptType then
-		local var3 = t[promptType]
+	if PromptType then
+		local Entry = config[PromptType]
 		
-		if var3 then
-			var2 = reactModule.createElement(var3, { promptData = promptData, promptId = promptId })
+		if Entry then
+			Element = ReactModule.createElement(Entry, { promptData = PromptData, promptId = PromptId })
 		else
-			error(`Unexpected prompt type: {promptType}!`)
+			error(`Unexpected prompt type: {PromptType}!`)
 		end
 	end
-	return reactModule.createElement(reactModule.Fragment, {}, {
-		PromptConnections = reactModule.createElement(promptConnectionsModule),
-		Prompt = var2
+	return ReactModule.createElement(ReactModule.Fragment, {}, {
+		PromptConnections = ReactModule.createElement(PromptConnectionsModule),
+		Prompt = Element
 	})
 end

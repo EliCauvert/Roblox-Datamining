@@ -1,108 +1,108 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local _ = require(dataHydration.Parent.HttpClient)
-local createDataCacheModule = require(dataHydration.createDataCache)
-local createDataResolverModule = require(dataHydration.createDataResolver)
-local _ = require(dataHydration.DataHydrationTypes)
-local createSingleEntityResolverModule = require(dataHydration.createSingleEntityResolver)
-local fetchExperienceQuestionnaireModule = require(script.Parent.fetchExperienceQuestionnaire)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local _ = require(DataHydration.Parent.HttpClient)
+local CreateDataCacheModule = require(DataHydration.createDataCache)
+local CreateDataResolverModule = require(DataHydration.createDataResolver)
+local _ = require(DataHydration.DataHydrationTypes)
+local CreateSingleEntityResolverModule = require(DataHydration.createSingleEntityResolver)
+local FetchExperienceQuestionnaireModule = require(script.Parent.fetchExperienceQuestionnaire)
 local _ = require(script.Parent.ExperienceQuestionnaireStoreTypes)
 
-return function(p1)
-	-- upvalues: createSingleEntityResolverModule (ref), fetchExperienceQuestionnaireModule (ref), createDataCacheModule (ref), createDataResolverModule (ref)
-	p1 = p1 or {}
-	local t = { network = p1.network, baseUrl = p1.baseUrl }
-	local var1 = createSingleEntityResolverModule(function(p2)
-		-- upvalues: fetchExperienceQuestionnaireModule (copy), t (ref)
-		return fetchExperienceQuestionnaireModule.fetchEligibility(p2, t)
+return function(p1) --[[ Line: 23 | Named "createExperienceQuestionnaireStore" ]]
+	-- upvalues: CreateSingleEntityResolverModule (copy), FetchExperienceQuestionnaireModule (copy), CreateDataCacheModule (copy), CreateDataResolverModule (copy)
+	local P0 = p1 or {}
+	local config = { network = P0.network, baseUrl = P0.baseUrl }
+	local SingleEntityResolverModule = CreateSingleEntityResolverModule(function(p2) --[[ Line: 27 ]]
+		-- upvalues: FetchExperienceQuestionnaireModule (upval), config (copy)
+		return FetchExperienceQuestionnaireModule.fetchEligibility(p2, config)
 	end)
-	local var2 = createSingleEntityResolverModule(function(p2)
-		-- upvalues: fetchExperienceQuestionnaireModule (copy), t (ref)
-		return fetchExperienceQuestionnaireModule.fetchMetadataStatus(p2, t)
+	local SingleEntityResolverModule1 = CreateSingleEntityResolverModule(function(p2) --[[ Line: 30 ]]
+		-- upvalues: FetchExperienceQuestionnaireModule (upval), config (copy)
+		return FetchExperienceQuestionnaireModule.fetchMetadataStatus(p2, config)
 	end)
-	local var3 = createSingleEntityResolverModule(function(p2)
-		-- upvalues: fetchExperienceQuestionnaireModule (copy), t (ref)
-		return fetchExperienceQuestionnaireModule.fetchActiveResponse(p2, t)
+	local SingleEntityResolverModule2 = CreateSingleEntityResolverModule(function(p2) --[[ Line: 33 ]]
+		-- upvalues: FetchExperienceQuestionnaireModule (upval), config (copy)
+		return FetchExperienceQuestionnaireModule.fetchActiveResponse(p2, config)
 	end)
-	local var4 = createSingleEntityResolverModule(function(p2)
-		-- upvalues: fetchExperienceQuestionnaireModule (copy), t (ref)
-		return fetchExperienceQuestionnaireModule.fetchLatestQuestionnaire(p2, t)
+	local SingleEntityResolverModule3 = CreateSingleEntityResolverModule(function(p2) --[[ Line: 36 ]]
+		-- upvalues: FetchExperienceQuestionnaireModule (upval), config (copy)
+		return FetchExperienceQuestionnaireModule.fetchLatestQuestionnaire(p2, config)
 	end)
-	local var5 = createSingleEntityResolverModule(function(p2)
-		-- upvalues: fetchExperienceQuestionnaireModule (copy), t (ref)
-		return fetchExperienceQuestionnaireModule.fetchLatestSubmission(p2, t)
+	local SingleEntityResolverModule4 = CreateSingleEntityResolverModule(function(p2) --[[ Line: 39 ]]
+		-- upvalues: FetchExperienceQuestionnaireModule (upval), config (copy)
+		return FetchExperienceQuestionnaireModule.fetchLatestSubmission(p2, config)
 	end)
-	local var6 = createDataResolverModule({
+	local DataResolverModule = CreateDataResolverModule({
 		supportsMultiGet = false,
-		cache = createDataCacheModule(),
-		fetchFn = function(p2, _)
-			-- upvalues: fetchExperienceQuestionnaireModule (copy), t (ref)
-			return fetchExperienceQuestionnaireModule.fetchQuestionnaireById(p2, t)
+		cache = CreateDataCacheModule(),
+		fetchFn = function(p2, _) --[[ Line: 49 ]]
+			-- upvalues: FetchExperienceQuestionnaireModule (upval), config (copy)
+			return FetchExperienceQuestionnaireModule.fetchQuestionnaireById(p2, config)
 		end
 	})
 	
 	return {
-		getEligibility = var1.get,
-		fetchEligibility = var1.fetch,
-		getAndFetchEligibility = var1.getAndFetch,
-		getMetadataStatus = var2.get,
-		fetchMetadataStatus = var2.fetch,
-		getAndFetchMetadataStatus = var2.getAndFetch,
-		getActiveResponse = var3.get,
-		fetchActiveResponse = var3.fetch,
-		getAndFetchActiveResponse = var3.getAndFetch,
-		getLatestQuestionnaire = var4.get,
-		fetchLatestQuestionnaire = var4.fetch,
-		getAndFetchLatestQuestionnaire = var4.getAndFetch,
-		getQuestionnaireById = function(p2)
-			-- upvalues: var6 (ref)
-			return var6.getCachedItem(p2)
+		getEligibility = SingleEntityResolverModule.get,
+		fetchEligibility = SingleEntityResolverModule.fetch,
+		getAndFetchEligibility = SingleEntityResolverModule.getAndFetch,
+		getMetadataStatus = SingleEntityResolverModule1.get,
+		fetchMetadataStatus = SingleEntityResolverModule1.fetch,
+		getAndFetchMetadataStatus = SingleEntityResolverModule1.getAndFetch,
+		getActiveResponse = SingleEntityResolverModule2.get,
+		fetchActiveResponse = SingleEntityResolverModule2.fetch,
+		getAndFetchActiveResponse = SingleEntityResolverModule2.getAndFetch,
+		getLatestQuestionnaire = SingleEntityResolverModule3.get,
+		fetchLatestQuestionnaire = SingleEntityResolverModule3.fetch,
+		getAndFetchLatestQuestionnaire = SingleEntityResolverModule3.getAndFetch,
+		getQuestionnaireById = function(p2) --[[ Line: 104 ]]
+			-- upvalues: DataResolverModule (copy)
+			return DataResolverModule.getCachedItem(p2)
 		end,
-		fetchQuestionnaireById = function(p2)
-			-- upvalues: var6 (ref)
-			return var6.fetchItem(p2)
+		fetchQuestionnaireById = function(p2) --[[ Line: 107 ]]
+			-- upvalues: DataResolverModule (copy)
+			return DataResolverModule.fetchItem(p2)
 		end,
-		getAndFetchQuestionnaireById = function(p2)
-			-- upvalues: var6 (ref)
-			return var6.getAndFetchItem(p2)
+		getAndFetchQuestionnaireById = function(p2) --[[ Line: 110 ]]
+			-- upvalues: DataResolverModule (copy)
+			return DataResolverModule.getAndFetchItem(p2)
 		end,
-		getLatestSubmission = var5.get,
-		fetchLatestSubmission = var5.fetch,
-		getAndFetchLatestSubmission = var5.getAndFetch,
-		saveSubmission = function(p2, p3)
-			-- upvalues: fetchExperienceQuestionnaireModule (copy), t (ref), var3 (ref), var5 (ref)
-			return fetchExperienceQuestionnaireModule.saveSubmission(p2, p3, t):andThen(function(p4)
-				-- upvalues: var3 (copy), p2 (ref), var5 (copy)
-				var3.fetch(p2)
-				var5.fetch(p2)
+		getLatestSubmission = SingleEntityResolverModule4.get,
+		fetchLatestSubmission = SingleEntityResolverModule4.fetch,
+		getAndFetchLatestSubmission = SingleEntityResolverModule4.getAndFetch,
+		saveSubmission = function(p2, p3) --[[ Line: 57 ]]
+			-- upvalues: FetchExperienceQuestionnaireModule (upval), config (copy), SingleEntityResolverModule2 (copy), SingleEntityResolverModule4 (copy)
+			return FetchExperienceQuestionnaireModule.saveSubmission(p2, p3, config):andThen(function(Result) --[[ Line: 61 ]]
+				-- upvalues: SingleEntityResolverModule2 (upval), p2 (copy), SingleEntityResolverModule4 (upval)
+				SingleEntityResolverModule2.fetch(p2)
+				SingleEntityResolverModule4.fetch(p2)
 				
-				return p4
+				return Result
 			end)
 		end,
-		validateResponses = function(p2)
-			-- upvalues: fetchExperienceQuestionnaireModule (copy), t (ref)
-			return fetchExperienceQuestionnaireModule.validateResponses(p2, t)
+		validateResponses = function(p2) --[[ Line: 119 ]]
+			-- upvalues: FetchExperienceQuestionnaireModule (upval), config (copy)
+			return FetchExperienceQuestionnaireModule.validateResponses(p2, config)
 		end,
-		previewSubmission = function(p2)
-			-- upvalues: fetchExperienceQuestionnaireModule (copy), t (ref)
-			return fetchExperienceQuestionnaireModule.previewSubmission(p2, t)
+		previewSubmission = function(p2) --[[ Line: 122 ]]
+			-- upvalues: FetchExperienceQuestionnaireModule (upval), config (copy)
+			return FetchExperienceQuestionnaireModule.previewSubmission(p2, config)
 		end,
-		clear = function()
-			-- upvalues: var1 (ref), var2 (ref), var3 (ref), var4 (ref), var6 (ref), var5 (ref)
-			var1.clear()
-			var2.clear()
-			var3.clear()
-			var4.clear()
-			var6.clear()
-			var5.clear()
+		clear = function() --[[ Line: 69 ]]
+			-- upvalues: SingleEntityResolverModule (copy), SingleEntityResolverModule1 (copy), SingleEntityResolverModule2 (copy), SingleEntityResolverModule3 (copy), DataResolverModule (copy), SingleEntityResolverModule4 (copy)
+			SingleEntityResolverModule.clear()
+			SingleEntityResolverModule1.clear()
+			SingleEntityResolverModule2.clear()
+			SingleEntityResolverModule3.clear()
+			DataResolverModule.clear()
+			SingleEntityResolverModule4.clear()
 		end,
-		dispose = function()
-			-- upvalues: var1 (ref), var2 (ref), var3 (ref), var4 (ref), var6 (ref), var5 (ref)
-			var1.dispose()
-			var2.dispose()
-			var3.dispose()
-			var4.dispose()
-			var6.dispose()
-			var5.dispose()
+		dispose = function() --[[ Line: 78 ]]
+			-- upvalues: SingleEntityResolverModule (copy), SingleEntityResolverModule1 (copy), SingleEntityResolverModule2 (copy), SingleEntityResolverModule3 (copy), DataResolverModule (copy), SingleEntityResolverModule4 (copy)
+			SingleEntityResolverModule.dispose()
+			SingleEntityResolverModule1.dispose()
+			SingleEntityResolverModule2.dispose()
+			SingleEntityResolverModule3.dispose()
+			DataResolverModule.dispose()
+			SingleEntityResolverModule4.dispose()
 		end
 	}
 end

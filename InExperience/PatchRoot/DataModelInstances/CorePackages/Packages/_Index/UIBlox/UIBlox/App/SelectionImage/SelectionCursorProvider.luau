@@ -1,43 +1,43 @@
-﻿local parent = script.Parent.Parent.Parent.Parent
-local roactModule = require(parent.Roact)
-local roactGamepadModule = require(parent.RoactGamepad)
-local cryoModule = require(parent.Cryo)
-local cursorKindModule = require(script.Parent.CursorKind)
-local selectionImageContextModule = require(script.Parent.SelectionImageContext)
-local onRootedListenerModule = require(script.Parent.OnRootedListener)
-local guiService = game:GetService("GuiService")
-local coreGuiService = game:GetService("CoreGui")
-local selectionCursorProvider = roactModule.PureComponent:extend("SelectionCursorProvider")
+﻿local Parent = script.Parent.Parent.Parent.Parent
+local RoactModule = require(Parent.Roact)
+local RoactGamepadModule = require(Parent.RoactGamepad)
+local CryoModule = require(Parent.Cryo)
+local CursorKindModule = require(script.Parent.CursorKind)
+local SelectionImageContextModule = require(script.Parent.SelectionImageContext)
+local OnRootedListenerModule = require(script.Parent.OnRootedListener)
+local GuiService = game:GetService("GuiService")
+local CoreGui = game:GetService("CoreGui")
+local SelectionCursorProvider = RoactModule.PureComponent:extend("SelectionCursorProvider")
 
-function selectionCursorProvider.init(p1)
-	-- upvalues: roactModule (ref), roactGamepadModule (ref), cursorKindModule (ref), cryoModule (ref), coreGuiService (ref), guiService (ref)
-	p1.ref = roactModule.createRef()
-	p1.refs = roactGamepadModule.createRefCache()
+function SelectionCursorProvider.init(p1) --[[ Line: 16 ]]
+	-- upvalues: RoactModule (copy), RoactGamepadModule (copy), CursorKindModule (copy), CryoModule (copy), CoreGui (copy), GuiService (copy)
+	p1.ref = RoactModule.createRef()
+	p1.refs = RoactGamepadModule.createRefCache()
 	p1.state = {
 		currentSelection = nil,
 		currentCoreSelection = nil,
 		mountedCursors = {}
 	}
 	
-	function p0.getSelectionCursor(p2)
-		-- upvalues: cursorKindModule (copy), p1 (ref), cryoModule (copy)
-		assert(cursorKindModule.isEnumValue(p2), ("Invalid arg #1: expected a CursorKind enum variant, got %s"):format(tostring(p2)))
+	function p1.getSelectionCursor(p2) --[[ Line: 25 ]]
+		-- upvalues: CursorKindModule (upval), p1 (copy), CryoModule (upval)
+		assert(CursorKindModule.isEnumValue(p2), ("Invalid arg #1: expected a CursorKind enum variant, got %s"):format((tostring(p2))))
 		warn("UIBlox's SelectionCursor is deprecated and should not be used anymore.")
 		
 		if p1.state.mountedCursors[p2] == nil then
-			p1:setState(function(p3)
-				-- upvalues: cryoModule (copy), p2 (ref)
+			p1:setState(function(p3) --[[ Line: 33 ]]
+				-- upvalues: CryoModule (upval), p2 (copy)
 				return {
-					mountedCursors = cryoModule.Dictionary.join(p3.mountedCursors, { [p2] = true })
+					mountedCursors = CryoModule.Dictionary.join(p3.mountedCursors, { [p2] = true })
 				}
 			end)
 		end
 		return p1.refs[p2]
 	end
 	
-	function p0.initSelectionChangedListener(p2)
-		-- upvalues: p1 (ref), coreGuiService (copy), guiService (copy)
-		if p2 == nil then return end
+	function p1.initSelectionChangedListener(Object) --[[ Line: 49 ]]
+		-- upvalues: p1 (copy), CoreGui (upval), GuiService (upval)
+		if Object == nil then return end
 		if p1.coreSelectionListener ~= nil then
 			p1.coreSelectionListener:Disconnect()
 			p1.coreSelectionListener = nil
@@ -46,30 +46,31 @@ function selectionCursorProvider.init(p1)
 			p1.selectionListener:Disconnect()
 			p1.selectionListener = nil
 		end
-		if p2:IsDescendantOf(coreGuiService) then
-			p1.coreSelectionListener = guiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function()
-				-- upvalues: p1 (copy), guiService (copy)
-				if p1.state.currentCoreSelection == nil or guiService.SelectedCoreObject == nil or p1.state.currentCoreSelection.SelectionImageObject ~= guiService.SelectedCoreObject.SelectionImageObject then
-					p1:setState({ currentCoreSelection = guiService.SelectedCoreObject })
+		if Object:IsDescendantOf(CoreGui) then
+			p1.coreSelectionListener = GuiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function() --[[ Line: 66 ]]
+				-- upvalues: p1 (upval), GuiService (upval)
+				if p1.state.currentCoreSelection == nil or GuiService.SelectedCoreObject == nil or p1.state.currentCoreSelection.SelectionImageObject ~= GuiService.SelectedCoreObject.SelectionImageObject then
+					p1:setState({ currentCoreSelection = GuiService.SelectedCoreObject })
 				end
 			end)
 			
 			return
+		else
+			p1.selectionListener = GuiService:GetPropertyChangedSignal("SelectedObject"):Connect(function() --[[ Line: 79 ]]
+				-- upvalues: p1 (upval), GuiService (upval)
+				if p1.state.currentSelection == nil or GuiService.SelectedObject == nil or p1.state.currentSelection.SelectionImageObject ~= GuiService.SelectedObject.SelectionImageObject then
+					p1:setState({ currentSelection = GuiService.SelectedObject })
+				end
+			end)
 		end
-		p1.selectionListener = guiService:GetPropertyChangedSignal("SelectedObject"):Connect(function()
-			-- upvalues: p1 (copy), guiService (copy)
-			if p1.state.currentSelection == nil or guiService.SelectedObject == nil or p1.state.currentSelection.SelectionImageObject ~= guiService.SelectedObject.SelectionImageObject then
-				p1:setState({ currentSelection = guiService.SelectedObject })
-			end
-		end)
 	end
 end
 
-function selectionCursorProvider.didMount(p1)
+function SelectionCursorProvider.didMount(p1) --[[ Line: 93 ]]
 	p1.initSelectionChangedListener(p1.ref:getValue())
 end
 
-function selectionCursorProvider.willUnmount(p1)
+function SelectionCursorProvider.willUnmount(p1) --[[ Line: 97 ]]
 	if p1.coreSelectionListener ~= nil then
 		p1.coreSelectionListener:Disconnect()
 		p1.coreSelectionListener = nil
@@ -80,22 +81,25 @@ function selectionCursorProvider.willUnmount(p1)
 	end
 end
 
-function selectionCursorProvider.render(p1)
-	-- upvalues: roactModule (ref), selectionImageContextModule (ref), onRootedListenerModule (ref)
-	local t = {}
+function SelectionCursorProvider.render(p1) --[[ Line: 109 ]]
+	-- upvalues: RoactModule (copy), SelectionImageContextModule (copy), OnRootedListenerModule (copy)
+	local Elements = {}
 	
-	for i, v in pairs(p1.state.mountedCursors) do
-		local var1 = i.rawValue()
-		t[tostring(var1)] = roactModule.createElement(var1, {
-			isVisible = not (p1.refs[i] == nil or (p1.state.currentSelection == nil or p1.refs[i].current ~= p1.state.currentSelection.SelectionImageObject) and (p1.state.currentCoreSelection == nil or p1.refs[i].current ~= p1.state.currentCoreSelection.SelectionImageObject)) and true,
-			cursorRef = p1.refs[i]
-		})
+	for i, _ in pairs(p1.state.mountedCursors) do
+		local RawValueResult = i.rawValue()
+		local Text = tostring(RawValueResult)
+		local IsVisible = false
+		
+		if p1.refs[i] ~= nil and (p1.state.currentSelection ~= nil and p1.refs[i].current == p1.state.currentSelection.SelectionImageObject or p1.state.currentCoreSelection ~= nil and p1.refs[i].current == p1.state.currentCoreSelection.SelectionImageObject) then
+			IsVisible = true
+		end
+		Elements[Text] = RoactModule.createElement(RawValueResult, { isVisible = IsVisible, cursorRef = p1.refs[i] })
 	end
-	return roactModule.createElement(selectionImageContextModule.Provider, { value = p1.getSelectionCursor }, {
-		CursorContainer = roactModule.createElement("Frame", { Visible = false, Size = UDim2.new(0, 0, 0, 0) }, t),
-		OnRootedListener = roactModule.createElement(onRootedListenerModule, { onRooted = p1.initSelectionChangedListener }),
-		Children = roactModule.createFragment(p1.props[roactModule.Children])
+	return RoactModule.createElement(SelectionImageContextModule.Provider, { value = p1.getSelectionCursor }, {
+		CursorContainer = RoactModule.createElement("Frame", { Visible = false, Size = UDim2.new(0, 0, 0, 0) }, Elements),
+		OnRootedListener = RoactModule.createElement(OnRootedListenerModule, { onRooted = p1.initSelectionChangedListener }),
+		Children = RoactModule.createFragment(p1.props[RoactModule.Children])
 	})
 end
 
-return selectionCursorProvider
+return SelectionCursorProvider

@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("SduiGameTileDirectAction", false) and require(script.Parent.FFlagLuaAppSduiGameTileFeedback)
+﻿local FFlagLuaAppSduiGameTileFeedbackModule = require(script.Parent.FFlagLuaAppSduiGameTileFeedback)
+
+return game:DefineFastFlag("SduiGameTileDirectAction", false) and FFlagLuaAppSduiGameTileFeedbackModule

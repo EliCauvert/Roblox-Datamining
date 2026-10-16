@@ -1,33 +1,33 @@
-﻿local robloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
-local reactModule = require(robloxSubscriptionPurchaseApp.Parent.React)
-local getRobloxSubscriptionProductsModule = require(robloxSubscriptionPurchaseApp.Network.getRobloxSubscriptionProducts)
-local isRobloxPlusFreeTrialEligibleModule = require(robloxSubscriptionPurchaseApp.Utils.isRobloxPlusFreeTrialEligible)
+﻿local RobloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
+local ReactModule = require(RobloxSubscriptionPurchaseApp.Parent.React)
+local GetRobloxSubscriptionProductsModule = require(RobloxSubscriptionPurchaseApp.Network.getRobloxSubscriptionProducts)
+local IsRobloxPlusFreeTrialEligibleModule = require(RobloxSubscriptionPurchaseApp.Utils.isRobloxPlusFreeTrialEligible)
 
-return function(p1)
-	-- upvalues: reactModule (ref), getRobloxSubscriptionProductsModule (ref), isRobloxPlusFreeTrialEligibleModule (ref)
-	local var1, var2 = reactModule.useState(false)
-	reactModule.useEffect(function()
-		-- upvalues: getRobloxSubscriptionProductsModule (copy), var2 (ref), isRobloxPlusFreeTrialEligibleModule (copy)
-		local var3 = false
-		getRobloxSubscriptionProductsModule():andThen(function(p2)
-			-- upvalues: var3 (write), var2 (copy), isRobloxPlusFreeTrialEligibleModule (copy)
-			if not var3 then
-				var2(isRobloxPlusFreeTrialEligibleModule(p2))
+return function(p1) --[[ Line: 18 | Named "useRobloxPlusUpsellBannerViewModel" ]]
+	-- upvalues: ReactModule (copy), GetRobloxSubscriptionProductsModule (copy), IsRobloxPlusFreeTrialEligibleModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	ReactModule.useEffect(function() --[[ Line: 21 ]]
+		-- upvalues: GetRobloxSubscriptionProductsModule (upval), UseStateResult2 (copy), IsRobloxPlusFreeTrialEligibleModule (upval)
+		local Flag = false
+		GetRobloxSubscriptionProductsModule():andThen(function(Result) --[[ Line: 24 ]]
+			-- upvalues: Flag (ref), UseStateResult2 (upval), IsRobloxPlusFreeTrialEligibleModule (upval)
+			if not Flag then
+				UseStateResult2(IsRobloxPlusFreeTrialEligibleModule(Result))
 			end
-		end):catch(function()
-			-- upvalues: var3 (write), var2 (copy)
-			if not var3 then
-				var2(false)
+		end):catch(function() --[[ Line: 29 ]]
+			-- upvalues: Flag (ref), UseStateResult2 (upval)
+			if not Flag then
+				UseStateResult2(false)
 			end
 		end)
 		
-		return function()
-			-- upvalues: var3 (write)
-			var3 = true
+		return function() --[[ Line: 35 ]]
+			-- upvalues: Flag (ref)
+			Flag = true
 		end
 	end, {})
 	
 	return {
-		actionText = if var1 then p1.freeTrialText else p1.subscribeText
+		actionText = if UseStateResult then p1.freeTrialText else p1.subscribeText
 	}
 end

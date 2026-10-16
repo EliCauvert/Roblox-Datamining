@@ -1,111 +1,102 @@
-﻿local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local getFStringUGCValidationMaxAnimationLengthModule = require(parent.flags.GetFStringUGCValidationMaxAnimationLength)
-local getFStringUGCValidateFrameDeltaKeyTimeTolModule = require(parent.flags.GetFStringUGCValidateFrameDeltaKeyTimeTol)
-local getFIntUGCValidateMaxAnimationFPSModule = require(parent.flags.getFIntUGCValidateMaxAnimationFPS)
-local getFIntUGCValidateMaxMarkerCurveValueLengthModule = require(parent.flags.getFIntUGCValidateMaxMarkerCurveValueLength)
-local getFIntUGCValidateMaxTotalInternalMarkersModule = require(parent.flags.getFIntUGCValidateMaxTotalInternalMarkers)
-local t = {
-	categories = {
-		validationEnumsModule.UploadCategory.EMOTE_ANIMATION,
-		validationEnumsModule.UploadCategory.ANIMATION
-	},
-	requiredData = { validationEnumsModule.SharedDataMember.curveAnimations },
-	expectedFailures = {},
-	prereqTests = {
-		validationEnumsModule.ValidationModule.CurveAnimDataAvailable
-	}
-}
+﻿local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local GetFStringUGCValidationMaxAnimationLengthModule = require(Parent.flags.GetFStringUGCValidationMaxAnimationLength)
+local GetFStringUGCValidateFrameDeltaKeyTimeTolModule = require(Parent.flags.GetFStringUGCValidateFrameDeltaKeyTimeTol)
+local GetFIntUGCValidateMaxAnimationFPSModule = require(Parent.flags.getFIntUGCValidateMaxAnimationFPS)
+local GetFIntUGCValidateMaxMarkerCurveValueLengthModule = require(Parent.flags.getFIntUGCValidateMaxMarkerCurveValueLength)
+local GetFIntUGCValidateMaxTotalInternalMarkersModule = require(Parent.flags.getFIntUGCValidateMaxTotalInternalMarkers)
 
-local function areNumbersGood(...)
-	local function _(p1)
+local function areNumbersGood(...): boolean --[[ Line: 22 ]]
+	local function _(p1): boolean --[[ Line: 23 | Named "isNaN" ]]
 		return p1 ~= p1
 	end
 	
-	local _ = function(p1)
-		return if p1 ~= 1e999 then p1 == -1e999 else true
+	local _ = function(p1): boolean --[[ Line: 27 | Named "isInfinite" ]]
+		return p1 == 1e999 or p1 == -1e999
 	end
 	
-	for i, v in { ... } do
-		if v == v then
-			if if v ~= 1e999 then v == -1e999 else true then
-				return false
-			end
+	for _, value in { ... } do
+		if value ~= value then
+			return false
+		elseif value == 1e999 or value == -1e999 then
+			return false
 		end
-		return false
 	end
 	return true
 end
 
-function t.run(p1, p2)
-	-- upvalues: getFIntUGCValidateMaxAnimationFPSModule (ref), getFStringUGCValidateFrameDeltaKeyTimeTolModule (ref), getFStringUGCValidationMaxAnimationLengthModule (ref), getFIntUGCValidateMaxTotalInternalMarkersModule (ref), errorSourceStringsModule (ref), areNumbersGood (ref), getFIntUGCValidateMaxMarkerCurveValueLengthModule (ref)
-	local minValue
-	local var1 = 1 / getFIntUGCValidateMaxAnimationFPSModule() * getFStringUGCValidateFrameDeltaKeyTimeTolModule.asNumber()
-	local ceiled = math.ceil(1 / var1 * getFStringUGCValidationMaxAnimationLengthModule.asNumber())
-	
-	for i, v in p2.curveAnimations do
-		for i_1, v_1 in v:GetDescendants() do
-			local markers
-			if not v_1:IsA("MarkerCurve") then
-				if v_1:IsA("FloatCurve") then
-					markers = v_1:GetKeys()
-					
-					if ceiled >= #markers then
-						minValue = nil
+return {
+	categories = {
+		ValidationEnumsModule.UploadCategory.EMOTE_ANIMATION,
+		ValidationEnumsModule.UploadCategory.ANIMATION
+	},
+	requiredData = { ValidationEnumsModule.SharedDataMember.curveAnimations },
+	expectedFailures = {},
+	prereqTests = {
+		ValidationEnumsModule.ValidationModule.CurveAnimDataAvailable
+	},
+	run = function(p1, p2) --[[ Line: 42 ]]
+		-- upvalues: GetFIntUGCValidateMaxAnimationFPSModule (copy), GetFStringUGCValidateFrameDeltaKeyTimeTolModule (copy), GetFStringUGCValidationMaxAnimationLengthModule (copy), GetFIntUGCValidateMaxTotalInternalMarkersModule (copy), ErrorSourceStringsModule (copy), areNumbersGood (copy), GetFIntUGCValidateMaxMarkerCurveValueLengthModule (copy)
+		local ScaledFIntUGCValidateMaxAnimationFPSModule = 1 / GetFIntUGCValidateMaxAnimationFPSModule() * GetFStringUGCValidateFrameDeltaKeyTimeTolModule.asNumber()
+		local Ceiled = math.ceil(1 / ScaledFIntUGCValidateMaxAnimationFPSModule * GetFStringUGCValidationMaxAnimationLengthModule.asNumber())
+		
+		for _, curveAnimation in p2.curveAnimations do
+			local Markers = nil
+			local Smallest = nil
+			for _, descendant in curveAnimation:GetDescendants() do
+				if not descendant:IsA("MarkerCurve") then
+					if descendant:IsA("FloatCurve") then
+						local Keys = descendant:GetKeys()
 						
-						for i_2, v_2 in markers do
-							if v_2.Time and areNumbersGood(v_2.Time) and (v_2.Value and areNumbersGood(v_2.Value)) then
-								if minValue then
-									if v_2.Time >= minValue + var1 then
-										minValue = v_2.Time
-										continue
-									end
-									p1:fail(errorSourceStringsModule.Keys.CurveAnim_KeysTooClose, {
-										curvePath = `{if v_1.Parent.Parent then v_1.Parent.Parent.Name else "-"}.{v_1.Parent.Name}.{v_1.Name}`,
-										maxFPS = tostring(getFIntUGCValidateMaxAnimationFPSModule())
-									})
-									
-									return
-								elseif v_2.Time >= 0 then
-								end
-								p1:fail(errorSourceStringsModule.Keys.CurveAnim_NegativeKeyTime, {
-									curvePath = `{if v_1.Parent.Parent then v_1.Parent.Parent.Name else "-"}.{v_1.Parent.Name}.{v_1.Name}`
-								})
-								
-								return
+						if Ceiled < #Keys then
+							p1:fail(ErrorSourceStringsModule.Keys.CurveAnim_TooManyKeys, { maxAllowed = tostring(Ceiled) })
+							break
+						end
+						local Time = nil
+						
+						for _, key in Keys do
+							if not key.Time or not areNumbersGood(key.Time) or not key.Value or not areNumbersGood(key.Value) then
+								p1:fail(ErrorSourceStringsModule.Keys.CurveAnim_InvalidCurveData)
+								break
 							end
-							p1:fail(errorSourceStringsModule.Keys.CurveAnim_InvalidCurveData)
-							
-							return
+							if Time then
+								if key.Time < Time + ScaledFIntUGCValidateMaxAnimationFPSModule then
+									p1:fail(ErrorSourceStringsModule.Keys.CurveAnim_KeysTooClose, {
+										curvePath = `{if descendant.Parent.Parent then descendant.Parent.Parent.Name else "-"}.{descendant.Parent.Name}.{descendant.Name}`,
+										maxFPS = tostring(GetFIntUGCValidateMaxAnimationFPSModule())
+									})
+									break
+								end
+							elseif key.Time < 0 then
+								p1:fail(ErrorSourceStringsModule.Keys.CurveAnim_NegativeKeyTime, {
+									curvePath = `{if descendant.Parent.Parent then descendant.Parent.Parent.Name else "-"}.{descendant.Parent.Name}.{descendant.Name}`
+								})
+								break
+							end
+							Time = key.Time
 						end
 					end
-					p1:fail(errorSourceStringsModule.Keys.CurveAnim_TooManyKeys, { maxAllowed = tostring(ceiled) })
-					
-					return
+					continue
 				end
-			end
-			markers = v_1:GetMarkers()
-			minValue = math.min(getFIntUGCValidateMaxTotalInternalMarkersModule(), ceiled)
-			
-			if minValue >= #markers then
-				for i_2, v_2 in markers do
-					if not v_2.Time or not areNumbersGood(v_2.Time) or (not v_2.Value or getFIntUGCValidateMaxMarkerCurveValueLengthModule() < #v_2.Value) then
-						p1:fail(errorSourceStringsModule.Keys.CurveAnim_InvalidMarkerData)
-						
-						return
+				Markers = descendant:GetMarkers()
+				Smallest = math.min(GetFIntUGCValidateMaxTotalInternalMarkersModule(), Ceiled)
+				
+				if Smallest < #Markers then
+					p1:fail(ErrorSourceStringsModule.Keys.CurveAnim_TooManyMarkers, {
+						count = tostring(#Markers),
+						maxAllowed = tostring(Smallest)
+					})
+					break
+				end
+				for _, marker in Markers do
+					if not marker.Time or not areNumbersGood(marker.Time) or not marker.Value or GetFIntUGCValidateMaxMarkerCurveValueLengthModule() < #marker.Value then
+						p1:fail(ErrorSourceStringsModule.Keys.CurveAnim_InvalidMarkerData)
+						break
 					end
 				end
 			end
-			p1:fail(errorSourceStringsModule.Keys.CurveAnim_TooManyMarkers, {
-				count = tostring(#markers),
-				maxAllowed = tostring(minValue)
-			})
-			
-			return
 		end
 	end
-end
-
-return t
+}

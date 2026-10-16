@@ -1,39 +1,39 @@
-﻿local parent = script:FindFirstAncestor("AppChat").Parent
-local roactModule = require(parent.Roact)
-local withStyle = require(parent.UIBlox).Style.withStyle
-local chatLoadingIndicatorModule = require(script.Parent.ChatLoadingIndicator)
-local fFlagAppIaScrollAway = require(parent.SharedFlags).FFlagAppIaScrollAway
-local chatLoadingContainer = roactModule.PureComponent:extend("ChatLoadingContainer")
-chatLoadingContainer.defaultProps = {
+﻿local Parent = script:FindFirstAncestor("AppChat").Parent
+local RoactModule = require(Parent.Roact)
+local WithStyleFunction = require(Parent.UIBlox).Style.withStyle
+local ChatLoadingIndicatorModule = require(script.Parent.ChatLoadingIndicator)
+local FFlagAppIaScrollAway = require(Parent.SharedFlags).FFlagAppIaScrollAway
+local ChatLoadingContainer = RoactModule.PureComponent:extend("ChatLoadingContainer")
+ChatLoadingContainer.defaultProps = {
 	topBarHeight = 0,
 	cellHeight = 64,
 	cellWidth = 375,
-	topPadding = if fFlagAppIaScrollAway then 0 else nil
+	topPadding = if FFlagAppIaScrollAway then 0 else nil
 }
 
-function chatLoadingContainer.render(p1)
-	-- upvalues: withStyle (ref), roactModule (ref), fFlagAppIaScrollAway (ref), chatLoadingIndicatorModule (ref)
-	return withStyle(function(p2)
-		-- upvalues: roactModule (copy), fFlagAppIaScrollAway (copy), p1 (ref), chatLoadingIndicatorModule (copy)
-		return roactModule.createElement("Frame", {
+function ChatLoadingContainer.render(p1) --[[ Line: 21 ]]
+	-- upvalues: WithStyleFunction (copy), RoactModule (copy), FFlagAppIaScrollAway (copy), ChatLoadingIndicatorModule (copy)
+	return WithStyleFunction(function(p2) --[[ Line: 22 ]]
+		-- upvalues: RoactModule (upval), FFlagAppIaScrollAway (upval), p1 (copy), ChatLoadingIndicatorModule (upval)
+		return RoactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			ClipsDescendants = true,
 			Size = UDim2.new(1, 0, 1, 0),
 			BackgroundColor3 = p2.Theme.BackgroundDefault.Color,
 			BackgroundTransparency = p2.Tokens.Color.None.Transparency
 		}, {
-			UIListLayout = roactModule.createElement("UIListLayout", {
+			UIListLayout = RoactModule.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
 				FillDirection = Enum.FillDirection.Vertical
 			}),
-			UIPadding = if fFlagAppIaScrollAway and p1.props.topPadding > 0 then roactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, p1.props.topPadding) }) else nil,
-			ChatLoadingFrame = roactModule.createElement("Frame", {
+			UIPadding = if FFlagAppIaScrollAway and p1.props.topPadding > 0 then RoactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, p1.props.topPadding) }) else nil,
+			ChatLoadingFrame = RoactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 2,
 				Size = UDim2.new(1, 0, 1, 0)
 			}, {
-				ChatLoadingIndicator = roactModule.createElement(chatLoadingIndicatorModule, {
+				ChatLoadingIndicator = RoactModule.createElement(ChatLoadingIndicatorModule, {
 					cellHeight = p1.props.cellHeight,
 					cellWidth = p1.props.cellWidth
 				})
@@ -42,4 +42,4 @@ function chatLoadingContainer.render(p1)
 	end)
 end
 
-return chatLoadingContainer
+return ChatLoadingContainer

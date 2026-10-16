@@ -1,29 +1,29 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local httpClientModule = require(parent.HttpClient)
-local promiseModule = require(parent.Promise)
-local getThumbnailUrlAsyncModule = require(script.Parent.getThumbnailUrlAsync)
-local asPromise = httpClientModule.asPromise
-local fetch = httpClientModule.fetch
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local HttpClientModule = require(Parent.HttpClient)
+local PromiseModule = require(Parent.Promise)
+local GetThumbnailUrlAsyncModule = require(script.Parent.getThumbnailUrlAsync)
+local AsPromiseFunction = HttpClientModule.asPromise
+local FetchFunction = HttpClientModule.fetch
 
-return function(p1)
-	-- upvalues: getThumbnailUrlAsyncModule (ref), promiseModule (ref), fetch (ref), asPromise (ref)
-	return getThumbnailUrlAsyncModule(p1):andThen(function(p2)
-		-- upvalues: promiseModule (copy), fetch (copy), asPromise (copy), p1 (ref)
-		return if p2.status == "completed" then asPromise(fetch({
+return function(p1) --[[ Line: 20 | Named "downloadGeneratedImageAsync" ]]
+	-- upvalues: GetThumbnailUrlAsyncModule (copy), PromiseModule (copy), FetchFunction (copy), AsPromiseFunction (copy)
+	return GetThumbnailUrlAsyncModule(p1):andThen(function(Result) --[[ Line: 21 ]]
+		-- upvalues: PromiseModule (upval), FetchFunction (upval), AsPromiseFunction (upval), p1 (copy)
+		return if Result.status == "completed" then AsPromiseFunction((FetchFunction({
 			method = "GET",
 			analyticsKey = "build-experience.download-developer-product-image",
 			responseEncoding = "protobuf",
-			url = p2.imageUrl,
-			decode = function(p3)
-				return p3
+			url = Result.imageUrl,
+			decode = function(p2) --[[ Line: 31 ]]
+				return p2
 			end
-		})):andThen(function(p3)
-			-- upvalues: promiseModule (copy), p1 (copy)
-			return if buffer.len(p3) > 5242880 then promiseModule.reject("The generated image exceeds the 5 MB developer-product limit.") else {
+		}))):andThen(function(Buf) --[[ Line: 35 ]]
+			-- upvalues: PromiseModule (upval), p1 (upval)
+			return if buffer.len(Buf) > 5242880 then PromiseModule.reject("The generated image exceeds the 5 MB developer-product limit.") else {
 				contentType = "image/png",
-				content = buffer.tostring(p3),
+				content = buffer.tostring(Buf),
 				fileName = `generated-{p1}.png`
 			}
-		end) else promiseModule.reject("The generated image is still under review.")
+		end) else PromiseModule.reject("The generated image is still under review.")
 	end)
 end

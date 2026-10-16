@@ -1,62 +1,62 @@
-﻿local sduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
-local parent = sduiCoreSystem.Parent
-local cryoModule = require(parent.Cryo)
-local _ = require(parent.Signals)
-local _ = require(parent.UnifiedLogging)
-local _ = require(sduiCoreSystem.SduiBuilderTypes)
-local sduiErrorsModule = require(sduiCoreSystem.SduiErrors)
-local sduiLoggerModule = require(sduiCoreSystem.SduiLogger)
-local _ = require(sduiCoreSystem.ClientBinding.SduiClientBindingTypes)
-local _ = require(sduiCoreSystem.SduiComponentType)
+﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
+local Parent = SduiCoreSystem.Parent
+local CryoModule = require(Parent.Cryo)
+local _ = require(Parent.Signals)
+local _ = require(Parent.UnifiedLogging)
+local _ = require(SduiCoreSystem.SduiBuilderTypes)
+local SduiErrorsModule = require(SduiCoreSystem.SduiErrors)
+local SduiLoggerModule = require(SduiCoreSystem.SduiLogger)
+local _ = require(SduiCoreSystem.ClientBinding.SduiClientBindingTypes)
+local _ = require(SduiCoreSystem.SduiComponentType)
 local t = {}
-local t_1 = {
-	__index = function(p1, p2)
+local config = {
+	__index = function(p1, p2) --[[ Line: 31 ]]
 		return if p2 == "analyticsData" then p1.getAnalyticsDataSnapshot() elseif p2 == "ancestorAnalyticsData" then p1.getAncestorAnalyticsDataSnapshot() else nil
 	end
 }
 
-return function(p1, p2, p3, p4)
-	-- upvalues: t (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), cryoModule (ref), t_1 (ref)
-	local currentComponentType = p4.currentComponentType
-	local currentParserName = p4.currentParserName
-	local var1 = nil
-	local t_2 = {
-		getAnalyticsDataSnapshot = function()
-			-- upvalues: p1 (ref), t (copy), p2 (ref), sduiLoggerModule (copy), sduiErrorsModule (copy), p4 (ref), currentComponentType (ref), currentParserName (ref), var1 (write), cryoModule (copy)
-			local cloned = table.clone(p1 or t)
+return function(p1, p2, p3, p4) --[[ Line: 64 | Named "buildAnalyticsContextForClientBinding" ]]
+	-- upvalues: t (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), CryoModule (copy), config (copy)
+	local CurrentComponentType = p4.currentComponentType
+	local CurrentParserName = p4.currentParserName
+	local LocalAnalyticsData = nil
+	local config1 = {
+		getAnalyticsDataSnapshot = function() --[[ Line: 85 ]]
+			-- upvalues: p1 (copy), t (upval), p2 (copy), SduiLoggerModule (upval), SduiErrorsModule (upval), p4 (copy), CurrentComponentType (copy), CurrentParserName (copy), LocalAnalyticsData (ref), CryoModule (upval)
+			local Copy = table.clone(p1 or t)
 			
 			if p2 then
-				xpcall(function()
-					-- upvalues: p2 (copy), cloned (ref)
-					for i, v in p2 do
-						cloned[i] = v(false).data
+				xpcall(function() --[[ Line: 88 ]]
+					-- upvalues: p2 (upval), Copy (copy)
+					for i, value in p2 do
+						Copy[i] = value(false).data
 					end
-				end, function(p5)
-					-- upvalues: sduiLoggerModule (copy), sduiErrorsModule (copy), p4 (copy), currentComponentType (copy), currentParserName (copy)
-					sduiLoggerModule.reportError(sduiErrorsModule.SduiErrorType.FailedToComputeAnalyticsData, {
-						message = p5,
+				end, function(Err) --[[ Line: 92 ]]
+					-- upvalues: SduiLoggerModule (upval), SduiErrorsModule (upval), p4 (upval), CurrentComponentType (upval), CurrentParserName (upval)
+					SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToComputeAnalyticsData, {
+						message = Err,
 						name = p4.debugName,
-						componentType = currentComponentType,
-						parserName = currentParserName
+						componentType = CurrentComponentType,
+						parserName = CurrentParserName
 					}, p4.appPage)
 				end)
 			end
-			return if var1 then cryoModule.Dictionary.join(cloned, var1) else cloned
+			return if LocalAnalyticsData then CryoModule.Dictionary.join(Copy, LocalAnalyticsData) else Copy
 		end,
-		getAncestorAnalyticsDataSnapshot = function()
-			-- upvalues: p3 (ref), t (copy), cryoModule (copy)
-			return if p3 then cryoModule.Dictionary.join(p3.ancestorAnalyticsData or t, p3.analyticsData or t) else t
+		getAncestorAnalyticsDataSnapshot = function() --[[ Line: 112 ]]
+			-- upvalues: p3 (copy), t (upval), CryoModule (upval)
+			return if p3 then CryoModule.Dictionary.join(p3.ancestorAnalyticsData or t, p3.analyticsData or t) else t
 		end,
-		setLocalAnalyticsData = function(value)
-			-- upvalues: var1 (write)
-			var1 = value
+		setLocalAnalyticsData = function(Value) --[[ Line: 129 ]]
+			-- upvalues: LocalAnalyticsData (ref)
+			LocalAnalyticsData = Value
 		end,
-		getCollectionData = function()
-			-- upvalues: p3 (ref)
+		getCollectionData = function() --[[ Line: 141 ]]
+			-- upvalues: p3 (copy)
 			return if p3 and p3.getCollectionData then p3.getCollectionData() else nil
 		end
 	}
-	setmetatable(t_2, t_1)
+	setmetatable(config1, config)
 	
-	return t_2
+	return config1
 end

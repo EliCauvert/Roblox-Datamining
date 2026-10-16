@@ -1,119 +1,121 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local skeleton = foundationModule.Skeleton
-local text = foundationModule.Text
-local view = foundationModule.View
-local radius = foundationModule.Enums.Radius
-local isTapReleaseModule = require(script.Parent.isTapRelease)
-local uDim2 = UDim2.new(1, 0, 0, 100000)
-local t = {
-	AspectRatio = 1.777777777778,
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local Skeleton = FoundationModule.Skeleton
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local Radius = FoundationModule.Enums.Radius
+local IsTapReleaseModule = require(script.Parent.isTapRelease)
+local _UDim2 = UDim2.new(1, 0, 0, 100000)
+local AspectRatio = {
+	AspectRatio = 1.7777777777777777,
 	DominantAxis = Enum.DominantAxis.Width
 }
 
-local function useScreenHeight(p1)
-	-- upvalues: reactModule (ref)
-	local var1, var2 = reactModule.useState(0)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var2 (ref)
-		local var3 = if p1 ~= nil then nil else p1:FindFirstAncestorWhichIsA("LayerCollector")
+local function useScreenHeight(p1) --[[ Line: 23 ]]
+	-- upvalues: ReactModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
+	ReactModule.useEffect(function() --[[ Line: 25 ]]
+		-- upvalues: p1 (copy), UseStateResult2 (copy)
+		local LayerCollector = if p1 == nil then nil else p1:FindFirstAncestorWhichIsA("LayerCollector")
 		
-		if var3 == nil then
+		if LayerCollector == nil then
 			return nil
-		end
-		var2(var3.AbsoluteSize.Y)
-		local var4 = var3:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
-			-- upvalues: var2 (copy), var3 (ref)
-			var2(var3.AbsoluteSize.Y)
-		end)
-		
-		return function()
-			-- upvalues: var4 (ref)
-			var4:Disconnect()
+		else
+			UseStateResult2(LayerCollector.AbsoluteSize.Y)
+			local Connection = LayerCollector:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 31 ]]
+				-- upvalues: UseStateResult2 (upval), LayerCollector (copy)
+				UseStateResult2(LayerCollector.AbsoluteSize.Y)
+			end)
+			
+			return function() --[[ Line: 34 ]]
+				-- upvalues: Connection (copy)
+				Connection:Disconnect()
+			end
 		end
 	end, { p1 })
 	
-	return var1
+	return UseStateResult
 end
 
-return function(p1)
-	-- upvalues: foundationModule (ref), reactModule (ref), useScreenHeight (ref), isTapReleaseModule (ref), view (ref), skeleton (ref), radius (ref), text (ref), uDim2 (ref), t (ref)
-	local var1 = foundationModule.Hooks.useTokens()
-	local uDim = UDim.new(0, p1.inset)
-	local var2 = reactModule.useRef(nil)
-	local var3, var4 = reactModule.useState(nil)
-	local var5 = useScreenHeight(var3)
-	local onActivated = p1.onActivated
+return function(Frame) --[[ Line: 53 | Named "LibraryWorldCutoutView" ]]
+	-- upvalues: FoundationModule (copy), ReactModule (copy), useScreenHeight (copy), IsTapReleaseModule (copy), View (copy), Skeleton (copy), Radius (copy), Text (copy), _UDim2 (copy), AspectRatio (copy)
+	local UseTokensResult = FoundationModule.Hooks.useTokens()
+	local _UDim = UDim.new(0, Frame.inset)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local UseScreenHeightResult: number = useScreenHeight(UseStateResult)
+	local OnActivatedFunction = Frame.onActivated
+	local UseResult = ReactModule.useCallback(function(_, p1) --[[ Line: 63 ]]
+		-- upvalues: UseRefResult (copy), IsTapReleaseModule (upval), OnActivatedFunction (copy)
+		UseRefResult.current = nil
+		
+		if IsTapReleaseModule(UseRefResult.current, p1) then
+			OnActivatedFunction()
+		end
+	end, { OnActivatedFunction })
+	local UseResult1 = ReactModule.useCallback(function(_, Input) --[[ Line: 70 ]]
+		-- upvalues: UseRefResult (copy)
+		if Input.UserInputType == Enum.UserInputType.Touch or Input.UserInputType == Enum.UserInputType.MouseButton1 then
+			UseRefResult.current = Input.Position
+		end
+	end, {})
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col gap-large size-full-0 auto-y",
 		testId = "Library.WorldCutout",
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Header = reactModule.createElement(view, {
+		Header = ReactModule.createElement(View, {
 			LayoutOrder = 1,
 			tag = "row align-y-center size-full-600",
 			testId = "Library.WorldCutout.Header",
-			padding = { left = uDim, right = uDim }
+			padding = { left = _UDim, right = _UDim }
 		}, {
-			Title = if p1.isLoading then reactModule.createElement(skeleton, {
+			Title = if Frame.isLoading then ReactModule.createElement(Skeleton, {
 				testId = "Library.WorldCutout.TitleSkeleton",
-				Size = UDim2.fromOffset(var1.Size.Size_2800, var1.Size.Size_600),
-				radius = radius.Small
-			}) else reactModule.createElement(text, {
+				Size = UDim2.fromOffset(UseTokensResult.Size.Size_2800, UseTokensResult.Size.Size_600),
+				radius = Radius.Small
+			}) else ReactModule.createElement(Text, {
 				tag = "auto-xy text-heading-small text-align-x-left content-emphasis",
 				testId = "Library.WorldCutout.Title",
-				Text = p1.title
+				Text = Frame.title
 			})
 		}),
-		Cell = reactModule.createElement(view, {
+		Cell = ReactModule.createElement(View, {
 			LayoutOrder = 2,
 			tag = "size-full-0 auto-y",
-			padding = { left = uDim, right = uDim },
-			ref = var4,
+			padding = { left = _UDim, right = _UDim },
+			ref = UseStateResult2,
 			sizeConstraint = {
-				MaxSize = Vector2.new((if var5 > 0 then math.min(800, math.floor(var5 * 0.5 * 16 / 9)) else 800) + 2 * p1.inset, 1e999)
+				MaxSize = Vector2.new((if UseScreenHeightResult > 0 then math.min(800, (math.floor(UseScreenHeightResult * 0.5 * 16 / 9))) else 800) + 2 * Frame.inset, 1e999)
 			}
 		}, {
-			Window = if p1.isLoading then reactModule.createElement(view, {
+			Window = if Frame.isLoading then ReactModule.createElement(View, {
 				testId = "Library.WorldCutout.Skeleton",
-				Size = uDim2,
-				aspectRatio = t
+				Size = _UDim2,
+				aspectRatio = AspectRatio
 			}, {
-				Skeleton = reactModule.createElement(skeleton, { radius = radius.Medium })
-			}) else reactModule.createElement(view, {
+				Skeleton = ReactModule.createElement(Skeleton, { radius = Radius.Medium })
+			}) else ReactModule.createElement(View, {
 				tag = "radius-medium",
 				testId = "Library.WorldCutout.Window",
-				Size = uDim2,
-				aspectRatio = t,
+				Size = _UDim2,
+				aspectRatio = AspectRatio,
 				backgroundStyle = { Transparency = 1 },
-				onActivated = reactModule.useCallback(function(_, p2)
-					-- upvalues: var2 (ref), isTapReleaseModule (copy), onActivated (ref)
-					local current = var2.current
-					var2.current = nil
-					
-					if isTapReleaseModule(current, p2) then
-						onActivated()
-					end
-				end, { onActivated }),
+				onActivated = UseResult,
 				selection = { Selectable = true },
 				stateLayer = {
-					affordance = foundationModule.Enums.StateLayerAffordance.None
+					affordance = FoundationModule.Enums.StateLayerAffordance.None
 				},
-				ref = p1.onRectChanged,
-				onAbsolutePositionChanged = p1.onRectChanged,
-				onAbsoluteSizeChanged = p1.onRectChanged
+				ref = Frame.onRectChanged,
+				onAbsolutePositionChanged = Frame.onRectChanged,
+				onAbsoluteSizeChanged = Frame.onRectChanged
 			}, {
-				PressTracker = reactModule.createElement("Frame", {
+				PressTracker = ReactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					Size = UDim2.fromScale(1, 1),
-					[reactModule.Event.InputBegan] = reactModule.useCallback(function(_, p2)
-						-- upvalues: var2 (ref)
-						if p2.UserInputType == Enum.UserInputType.Touch or p2.UserInputType == Enum.UserInputType.MouseButton1 then
-							var2.current = p2.Position
-						end
-					end, {})
+					[ReactModule.Event.InputBegan] = UseResult1
 				})
 			})
 		})

@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Workspace.RobloxTranslator.RobloxTranslator)
+﻿return (require(script.Parent.Parent.Parent._Workspace.RobloxTranslator.RobloxTranslator))

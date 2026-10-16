@@ -1,15 +1,16 @@
-﻿return function(p1, p2)
-	if type(p1) ~= "string" then
+﻿return function(Replaced, List) --[[ Line: 9 ]]
+	if type(Replaced) ~= "string" then
 		return ""
-	elseif type(p2) ~= "table" then
-		return p1
 	end
-	local var1 = p1
+	if type(List) ~= "table" then
+		return Replaced
+	end
+	local Text: string = Replaced
 	
-	for i, v in pairs(p2) do
-		if type(i) == "string" and type(v) == "string" then
-			var1 = string.gsub(var1, i, v)
+	for i, value in pairs(List) do
+		if type(i) == "string" and type(value) == "string" then
+			Text = string.gsub(Text, i, value)
 		end
 	end
-	return var1
+	return Text
 end

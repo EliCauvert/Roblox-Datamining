@@ -1,78 +1,83 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local _ = require(profilePlatform.Common.Types)
-local chip = foundationModule.Chip
-local view = foundationModule.View
-local uDim2 = UDim2.new(1, 0, 0, 32)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local _ = require(ProfilePlatform.Common.Types)
+local Chip = FoundationModule.Chip
+local View = FoundationModule.View
+local _UDim2 = UDim2.new(1, 0, 0, 32)
 
-function ChipGroup(p1)
-	-- upvalues: reactModule (ref), chip (ref), uDim2 (ref), view (ref)
-	local var1 = reactModule.useRef(nil)
-	local var2 = reactModule.useRef(nil)
-	local var3, var4 = reactModule.useState(0)
-	local var5, var6 = reactModule.useState(0)
-	local var7, var8 = reactModule.useState(false)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var8 (ref), var3 (ref), var5 (ref)
+function ChipGroup(p1) --[[ Line: 24 ]]
+	-- upvalues: ReactModule (copy), Chip (copy), _UDim2 (copy), View (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(0)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(false)
+	ReactModule.useEffect(function() --[[ Line: 31 ]]
+		-- upvalues: p1 (copy), UseStateResult2_2 (copy), UseStateResult (copy), UseStateResult1 (copy)
 		if p1.scrollingEnabledOverride == nil then
-			var8(var5 < var3)
+			UseStateResult2_2(UseStateResult1 < UseStateResult)
 			
 			return
+		else
+			UseStateResult2_2(p1.scrollingEnabledOverride)
 		end
-		var8(p1.scrollingEnabledOverride)
-	end, { var3, var5, p1.scrollingEnabledOverride })
+	end, {
+		UseStateResult,
+		UseStateResult1,
+		p1.scrollingEnabledOverride
+	})
 	
-	return if #p1.chips == 0 then nil else reactModule.createElement("Frame", {
+	return if #p1.chips == 0 then nil else ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		LayoutOrder = p1.layoutOrder,
-		Size = p1.size or uDim2
+		Size = p1.size or _UDim2
 	}, {
-		DynamicScrollingFrame = reactModule.createElement("ScrollingFrame", {
-			ref = var1,
+		DynamicScrollingFrame = ReactModule.createElement("ScrollingFrame", {
+			ref = UseRefResult,
 			AutomaticCanvasSize = Enum.AutomaticSize.X,
 			BackgroundTransparency = 1,
-			CanvasSize = p1.size or uDim2,
+			CanvasSize = p1.size or _UDim2,
 			ClipsDescendants = false,
 			ElasticBehavior = Enum.ElasticBehavior.Always,
 			ScrollBarThickness = 0,
 			ScrollingDirection = Enum.ScrollingDirection.X,
-			ScrollingEnabled = var7,
+			ScrollingEnabled = UseStateResult3,
 			Selectable = false,
-			Size = p1.size or uDim2,
+			Size = p1.size or _UDim2,
 			ZIndex = 1,
-			[reactModule.Change.AbsoluteSize] = reactModule.useCallback(function(p2)
-				-- upvalues: var6 (ref)
-				var6(p2.AbsoluteSize.X)
+			[ReactModule.Change.AbsoluteSize] = ReactModule.useCallback(function(Frame) --[[ Line: 68 ]]
+				-- upvalues: UseStateResult2_1 (copy)
+				UseStateResult2_1(Frame.AbsoluteSize.X)
 			end, {})
 		}, {
-			ChipRow = reactModule.createElement(view, {
+			ChipRow = ReactModule.createElement(View, {
 				tag = "row gap-small auto-y size-full-0",
-				ref = var2,
+				ref = UseRefResult1,
 				AutomaticSize = Enum.AutomaticSize.X,
-				onAbsoluteSizeChanged = reactModule.useCallback(function(p2)
-					-- upvalues: var4 (ref)
-					var4(p2.AbsoluteSize.X)
+				onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame) --[[ Line: 72 ]]
+					-- upvalues: UseStateResult2 (copy)
+					UseStateResult2(Frame.AbsoluteSize.X)
 				end, {})
-			}, table.unpack(reactModule.useMemo(function()
-				-- upvalues: p1 (ref), reactModule (copy), chip (copy)
-				local t = {}
+			}, table.unpack((ReactModule.useMemo(function() --[[ Line: 43 ]]
+				-- upvalues: p1 (copy), ReactModule (upval), Chip (upval)
+				local Elements = {}
 				
-				for i, v in ipairs(p1.chips) do
-					t[i] = reactModule.createElement(chip, {
+				for i, chip in ipairs(p1.chips) do
+					Elements[i] = ReactModule.createElement(Chip, {
 						isChecked = false,
-						text = if v.count then `{v.count} {v.text}` else v.text,
-						onActivated = v.onActivated,
-						isDisabled = v.isDisabled or false,
-						LayoutOrder = v.layoutOrder or i,
-						size = v.size or "Medium",
-						leading = v.leading,
-						trailing = v.trailing
+						text = if chip.count then `{chip.count} {chip.text}` else chip.text,
+						onActivated = chip.onActivated,
+						isDisabled = chip.isDisabled or false,
+						LayoutOrder = chip.layoutOrder or i,
+						size = chip.size or "Medium",
+						leading = chip.leading,
+						trailing = chip.trailing
 					})
 				end
-				return t
-			end, { p1.chips })))
+				return Elements
+			end, { p1.chips }))))
 		})
 	})
 end

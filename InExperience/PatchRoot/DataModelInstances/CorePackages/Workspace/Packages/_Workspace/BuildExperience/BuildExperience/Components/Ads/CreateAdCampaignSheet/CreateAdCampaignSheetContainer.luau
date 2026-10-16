@@ -1,56 +1,63 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local reactModule = require(buildExperience.Parent.React)
-local fFlagEnablePaidAdsModule = require(buildExperience.Flags.FFlagEnablePaidAds)
-local createAdCampaignSheetViewModule = require(script.Parent.CreateAdCampaignSheetView)
-local useCreateAdCampaignSheetViewModelModule = require(script.Parent.useCreateAdCampaignSheetViewModel)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local ReactModule = require(BuildExperience.Parent.React)
+local FFlagEnablePaidAdsModule = require(BuildExperience.Flags.FFlagEnablePaidAds)
+local FFlagBuildAgentAdCampaignCardModule = require(BuildExperience.Flags.FFlagBuildAgentAdCampaignCard)
+local CreateAdCampaignSheetViewModule = require(script.Parent.CreateAdCampaignSheetView)
+local UseCreateAdCampaignSheetViewModelModule = require(script.Parent.useCreateAdCampaignSheetViewModel)
 
-local function _(p1)
+local function _(p1) --[[ Line: 21 | Named "getCampaignTerms" ]]
 	return if p1.runStartTimeMs == nil then nil else { runStartTimeMs = p1.runStartTimeMs }
 end
 
-local function MountedCreateAdCampaignSheet(p1)
-	-- upvalues: useCreateAdCampaignSheetViewModelModule (ref), reactModule (ref), createAdCampaignSheetViewModule (ref)
-	return reactModule.createElement(createAdCampaignSheetViewModule, useCreateAdCampaignSheetViewModelModule(p1))
+local function MountedCreateAdCampaignSheet(p1) --[[ Line: 31 ]]
+	-- upvalues: UseCreateAdCampaignSheetViewModelModule (copy), ReactModule (copy), CreateAdCampaignSheetViewModule (copy)
+	return ReactModule.createElement(CreateAdCampaignSheetViewModule, (UseCreateAdCampaignSheetViewModelModule(p1)))
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), fFlagEnablePaidAdsModule (ref), MountedCreateAdCampaignSheet (ref)
-	local var1, var2 = reactModule.useState(p1.isOpen)
-	local isOpen = fFlagEnablePaidAdsModule and p1.isOpen
-	local var3, var4 = reactModule.useState({
-		wasOpen = isOpen,
-		terms = if isOpen then if p1.runStartTimeMs == nil then nil else { runStartTimeMs = p1.runStartTimeMs } else nil
+return function(Tbl) --[[ Line: 38 | Named "CreateAdCampaignSheetContainer" ]]
+	-- upvalues: ReactModule (copy), FFlagEnablePaidAdsModule (copy), FFlagBuildAgentAdCampaignCardModule (copy), MountedCreateAdCampaignSheet (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(Tbl.isOpen)
+	local IsOpen = FFlagEnablePaidAdsModule and Tbl.isOpen
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState({
+		wasOpen = IsOpen,
+		terms = if IsOpen then if Tbl.runStartTimeMs == nil then nil else { runStartTimeMs = Tbl.runStartTimeMs } else nil
 	})
-	local var5 = var3
+	local UseStateResult3 = UseStateResult1
+	local IsNotWasOpenMatch = UseStateResult1.wasOpen ~= IsOpen
+	local v1 = false
 	
-	if var3.wasOpen ~= isOpen then
-		local t = {
-			wasOpen = isOpen,
-			terms = if isOpen then if p1.runStartTimeMs == nil then nil else { runStartTimeMs = p1.runStartTimeMs } else var3.terms
-		}
-		var4(t)
-		var5 = t
+	if FFlagBuildAgentAdCampaignCardModule and IsOpen and Tbl.runStartTimeMs ~= nil then
+		local Terms = UseStateResult1.terms
+		v1 = Terms == nil or Terms.runStartTimeMs ~= Tbl.runStartTimeMs
 	end
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var2 (ref)
-		if p1.isOpen then
-			var2(true)
+	if IsNotWasOpenMatch or FFlagBuildAgentAdCampaignCardModule and v1 then
+		local config = {
+			wasOpen = IsOpen,
+			terms = if IsOpen then if Tbl.runStartTimeMs == nil then nil else { runStartTimeMs = Tbl.runStartTimeMs } else UseStateResult1.terms
+		}
+		UseStateResult2_1(config)
+		UseStateResult3 = config
+	end
+	ReactModule.useEffect(function() --[[ Line: 64 ]]
+		-- upvalues: Tbl (copy), UseStateResult2 (copy)
+		if Tbl.isOpen then
+			UseStateResult2(true)
 		end
-	end, { p1.isOpen })
+	end, { Tbl.isOpen })
 	
-	if not var1 or fFlagEnablePaidAdsModule and p1.campaignOffers == nil then
+	if not UseStateResult or FFlagEnablePaidAdsModule and Tbl.campaignOffers == nil then
 		return nil
 	end
-	local var6 = p1
+	local Tbl1 = Tbl
 	
-	if fFlagEnablePaidAdsModule then
-		local terms = var5.terms
+	if FFlagEnablePaidAdsModule then
+		local Terms = UseStateResult3.terms
 		
-		if terms == nil then
+		if Terms == nil then
 			return nil
 		end
-		var6 = table.clone(p1)
-		var6.runStartTimeMs = terms.runStartTimeMs
+		Tbl1 = table.clone(Tbl)
+		Tbl1.runStartTimeMs = Terms.runStartTimeMs
 	end
-	return reactModule.createElement(MountedCreateAdCampaignSheet, var6)
+	return ReactModule.createElement(MountedCreateAdCampaignSheet, Tbl1)
 end

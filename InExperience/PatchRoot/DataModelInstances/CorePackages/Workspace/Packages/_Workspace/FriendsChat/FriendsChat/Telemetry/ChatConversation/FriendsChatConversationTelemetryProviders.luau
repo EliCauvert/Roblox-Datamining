@@ -1,31 +1,31 @@
-﻿local parent = script:FindFirstAncestor("FriendsChat").Parent
-local reactModule = require(parent.React)
-local chatConversationTelemetryLayerModule = require(parent.AppChat.ChatConversationTelemetryLayer)
-local expChatConversationListAdapterModule = require(script.Parent.Parent.Parent.ConversationList.ExpChatConversationListAdapter)
+﻿local Parent = script:FindFirstAncestor("FriendsChat").Parent
+local ReactModule = require(Parent.React)
+local ChatConversationTelemetryLayerModule = require(Parent.AppChat.ChatConversationTelemetryLayer)
+local ExpChatConversationListAdapterModule = require(script.Parent.Parent.Parent.ConversationList.ExpChatConversationListAdapter)
 
-return function(p1)
-	-- upvalues: reactModule (ref), expChatConversationListAdapterModule (ref), chatConversationTelemetryLayerModule (ref)
-	local conversationId = p1.conversationId
+return function(p1) --[[ Line: 24 | Named "FriendsChatConversationTelemetryProviders" ]]
+	-- upvalues: ReactModule (copy), ExpChatConversationListAdapterModule (copy), ChatConversationTelemetryLayerModule (copy)
+	local ConversationId = p1.conversationId
 	
-	return reactModule.createElement(chatConversationTelemetryLayerModule.Provider, {
-		value = reactModule.useCallback(function()
-			-- upvalues: conversationId (ref), expChatConversationListAdapterModule (copy)
-			local moderationType = nil
-			local userPendingStatus = nil
+	return ReactModule.createElement(ChatConversationTelemetryLayerModule.Provider, {
+		value = ReactModule.useCallback(function() --[[ Line: 30 ]]
+			-- upvalues: ConversationId (copy), ExpChatConversationListAdapterModule (upval)
+			local ModerationType = nil
+			local UserPendingStatus = nil
 			
-			if conversationId ~= nil and conversationId ~= "" then
-				local conversation = expChatConversationListAdapterModule.getConversationStore().getConversation(conversationId, false)
+			if ConversationId ~= nil and ConversationId ~= "" then
+				local Conversation = ExpChatConversationListAdapterModule.getConversationStore().getConversation(ConversationId, false)
 				
-				if conversation ~= nil then
-					moderationType = conversation.moderationType
-					userPendingStatus = conversation.userPendingStatus
+				if Conversation ~= nil then
+					ModerationType = Conversation.moderationType
+					UserPendingStatus = Conversation.userPendingStatus
 				end
 			end
 			return {
-				conversationId = conversationId,
-				moderationType = moderationType,
-				userPendingStatus = userPendingStatus
+				conversationId = ConversationId,
+				moderationType = ModerationType,
+				userPendingStatus = UserPendingStatus
 			}
-		end, { conversationId })
+		end, { ConversationId })
 	}, p1.children)
 end

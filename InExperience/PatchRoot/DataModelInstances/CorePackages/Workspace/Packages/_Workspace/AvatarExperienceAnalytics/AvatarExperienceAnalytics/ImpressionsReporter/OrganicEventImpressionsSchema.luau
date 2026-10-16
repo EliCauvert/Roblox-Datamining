@@ -1,18 +1,33 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceAnalytics").Parent
-local constantsModule = require(script.Parent.Parent.Constants)
-local impressionEnumsModule = require(script.Parent.Parent.Enums.ImpressionEnums)
-local fFlagAXFixUnifiedPurchaseFieldLanding = require(parent.AvatarExperienceFlags).FFlagAXFixUnifiedPurchaseFieldLanding
-local t = {
-	defaultItem = require(script.Parent.ImpressionsUtil).buildSchema(constantsModule.IMPRESSIONS_EVENTS.AvatarItems, {
+﻿local ImpressionEnumsModule = require(script.Parent.Parent.Enums.ImpressionEnums)
+local config = {
+	__newindex = function(_, Text) --[[ Line: 18 ]]
+		error("Attempt to insert into impressions schemas: " .. Text)
+	end,
+	__index = function(p1, Text) --[[ Line: 22 ]]
+		if not Text then
+			warn("Nil ImpressionsSchema lookup")
+			
+			return
+		end
+		local RawValue = rawget(p1, Text)
+		
+		if not RawValue then
+			warn("No such impressions schema: " .. Text)
+		end
+		return RawValue
+	end
+}
+local config1 = {
+	defaultItem = require(script.Parent.ImpressionsUtil).buildSchema(require(script.Parent.Parent.Constants).IMPRESSIONS_EVENTS.AvatarItems, {
 		enumMap = {
 			contentType = {
-				Asset = impressionEnumsModule.MarketplaceItemType.ASSET,
-				Bundle = impressionEnumsModule.MarketplaceItemType.BUNDLE,
-				Look = impressionEnumsModule.MarketplaceItemType.LOOK
+				Asset = ImpressionEnumsModule.MarketplaceItemType.ASSET,
+				Bundle = ImpressionEnumsModule.MarketplaceItemType.BUNDLE,
+				Look = ImpressionEnumsModule.MarketplaceItemType.LOOK
 			}
 		},
 		surfaceSpecificAnalyticsMetadata = {
-			[impressionEnumsModule.MarketplaceSurfaceType.HOMEPAGE] = {
+			[ImpressionEnumsModule.MarketplaceSurfaceType.HOMEPAGE] = {
 				{ prop = "sortEnumValue", out = "sort" },
 				{
 					prop = "filterSalesTypeEnumValue",
@@ -31,45 +46,29 @@ local t = {
 				{ prop = "filterPriceMin", out = "filterPriceMin" },
 				{ prop = "filterPriceMax", out = "filterPriceMax" }
 			},
-			[impressionEnumsModule.MarketplaceSurfaceType.SEARCH] = {},
-			[impressionEnumsModule.MarketplaceSurfaceType.MARKETPLACE_USER_INVENTORY] = {}
+			[ImpressionEnumsModule.MarketplaceSurfaceType.SEARCH] = {},
+			[ImpressionEnumsModule.MarketplaceSurfaceType.MARKETPLACE_USER_INVENTORY] = {}
 		},
 		mapping = {
-			{ prop = "index", out = "absPositions" }, { prop = "itemId", out = "itemId" },
+			{ prop = "index", out = "absPositions" },
+			{ prop = "itemId", out = "itemId" },
 			{ prop = "itemType", out = "contentType" },
 			{ prop = "impressionsGroup", out = "group" },
 			{ prop = "impressionsSearch", out = "keyword" },
 			{ prop = "impressionsCategory", out = "category" },
 			{ prop = "impressionsSubcategory", out = "subcategory" },
-			{ prop = "surface", out = "surface" }, { prop = "sort", out = "sort" }
+			{ prop = "surface", out = "surface" },
+			{ prop = "sort", out = "sort" }
 		},
 		groupBy = { "itemId" }
 	})
 }
-local t_1 = {
-	__newindex = function(_, p1)
-		error("Attempt to insert into impressions schemas: " .. p0)
-	end,
-	__index = function(p1, p2)
-		if not p2 then
-			warn("Nil ImpressionsSchema lookup")
-			
-			return
-		end
-		local var1 = rawget(p1, p2)
-		
-		if not var1 then
-			warn("No such impressions schema: " .. p2)
-		end
-		return var1
-	end
-}
 
-if fFlagAXFixUnifiedPurchaseFieldLanding then
-	local surfaceSpecificAnalyticsMetadata = t.defaultItem.surfaceSpecificAnalyticsMetadata
+if require(script:FindFirstAncestor("AvatarExperienceAnalytics").Parent.AvatarExperienceFlags).FFlagAXFixUnifiedPurchaseFieldLanding then
+	local SurfaceSpecificAnalyticsMetadata = config1.defaultItem.surfaceSpecificAnalyticsMetadata
 	
-	if surfaceSpecificAnalyticsMetadata then
-		surfaceSpecificAnalyticsMetadata[impressionEnumsModule.MarketplaceSurfaceType.HOMEPAGE] = {
+	if SurfaceSpecificAnalyticsMetadata then
+		SurfaceSpecificAnalyticsMetadata[ImpressionEnumsModule.MarketplaceSurfaceType.HOMEPAGE] = {
 			{ prop = "sort", out = "sort" },
 			{ prop = "filterSalesType", out = "filterSalesType" },
 			{ prop = "filterCreators", out = "filterCreators" },
@@ -84,6 +83,6 @@ if fFlagAXFixUnifiedPurchaseFieldLanding then
 		}
 	end
 end
-setmetatable(t, t_1)
+setmetatable(config1, config)
 
-return t
+return config1

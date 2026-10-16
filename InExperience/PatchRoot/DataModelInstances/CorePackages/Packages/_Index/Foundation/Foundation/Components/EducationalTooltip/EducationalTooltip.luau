@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("Foundation").Components.Coachmark)
+﻿return (require(script:FindFirstAncestor("Foundation").Components.Coachmark))

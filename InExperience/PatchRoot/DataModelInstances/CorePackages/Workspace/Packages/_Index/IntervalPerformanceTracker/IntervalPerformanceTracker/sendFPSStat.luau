@@ -1,38 +1,37 @@
-﻿local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
-local runService = game:GetService("RunService")
-local httpService = game:GetService("HttpService")
-local userInputService = game:GetService("UserInputService")
-local parent = script:FindFirstAncestor("IntervalPerformanceTracker").Parent
-local var1 = require(parent.Analytics).Analytics.new(rbxAnalyticsService)
-local dashModule = require(parent.Dash)
-local default = require(parent.LoggingProtocol).default
-local isSpatial = require(parent.AppCommonLib).isSpatial
+﻿local RunService = game:GetService("RunService")
+local HttpService = game:GetService("HttpService")
+local UserInputService = game:GetService("UserInputService")
+local Parent = script:FindFirstAncestor("IntervalPerformanceTracker").Parent
+local NewResult = require(Parent.Analytics).Analytics.new((game:GetService("RbxAnalyticsService")))
+local DashModule = require(Parent.Dash)
+local Default = require(Parent.LoggingProtocol).default
+local IsSpatialFunction = require(Parent.AppCommonLib).isSpatial
 
-local function getDefaultMetadata(p1)
-	-- upvalues: userInputService (ref), isSpatial (ref), runService (ref), httpService (ref), dashModule (ref)
-	return dashModule.assign({
-		appVersion = runService:GetRobloxVersion(),
-		userAgent = httpService:GetUserAgent(),
-		coreScriptVersion = runService:GetCoreScriptVersion(),
-		platform = if isSpatial() then "VR" else userInputService:GetPlatform()
-	}, p1)
+local function getDefaultMetadata(MetaData) --[[ Line: 17 ]]
+	-- upvalues: UserInputService (copy), IsSpatialFunction (copy), RunService (copy), HttpService (copy), DashModule (copy)
+	return (DashModule.assign({
+		appVersion = RunService:GetRobloxVersion(),
+		userAgent = HttpService:GetUserAgent(),
+		coreScriptVersion = RunService:GetCoreScriptVersion(),
+		platform = if IsSpatialFunction() then "VR" else UserInputService:GetPlatform()
+	}, MetaData))
 end
 
-return function(p1)
-	-- upvalues: getDefaultMetadata (ref), default (ref), var1 (ref)
-	local var2 = p1.excludeEventStream ~= false
-	local var3 = getDefaultMetadata(p1.metaData)
+return function(p1) --[[ Line: 42 | Named "sendFPSStat" ]]
+	-- upvalues: getDefaultMetadata (copy), Default (copy), NewResult (copy)
+	local IsExcludeEventStream = p1.excludeEventStream ~= false
+	local DefaultMetadata = getDefaultMetadata(p1.metaData)
 	
 	if not p1.excludeStat then
-		default:logRobloxTelemetryStat({
+		Default:logRobloxTelemetryStat({
 			description = "Stat to track FPS metrics.",
 			links = "",
 			eventName = p1.statName,
 			backends = { "RobloxTelemetryStat" },
 			lastUpdated = { 2025, 4, 28 }
-		}, p1.interval, var3)
+		}, p1.interval, DefaultMetadata)
 	end
-	if not var2 and p1.eventStreamName then
-		var1.EventStream:sendEventDeferred(p1.eventStreamName, "robloxFPSMetrics", var3)
+	if not IsExcludeEventStream and p1.eventStreamName then
+		NewResult.EventStream:sendEventDeferred(p1.eventStreamName, "robloxFPSMetrics", DefaultMetadata)
 	end
 end

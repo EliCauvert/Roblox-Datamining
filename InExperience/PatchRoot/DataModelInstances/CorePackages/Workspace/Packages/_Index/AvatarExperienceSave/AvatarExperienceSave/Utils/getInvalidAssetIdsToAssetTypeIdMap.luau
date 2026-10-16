@@ -1,9 +1,9 @@
-﻿return function(value, p1)
+﻿return function(List, p1) --[[ Line: 1 | Named "getInvalidAssetIdsToAssetTypeIdMap" ]]
 	local t = {}
 	
-	for i, v in value do
+	for i, value in List do
 		if not p1[i] then
-			t[i] = v
+			t[i] = value
 		end
 	end
 	return t

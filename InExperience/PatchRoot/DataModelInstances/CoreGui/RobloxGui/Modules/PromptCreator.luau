@@ -1,20 +1,18 @@
-﻿local var1
-local t = {}
-local coreGuiService = game:GetService("CoreGui")
-local userInputService = game:GetService("UserInputService")
-local contextActionService = game:GetService("ContextActionService")
-local textService = game:GetService("TextService")
-local guiService = game:GetService("GuiService")
-local promptCreatorTransientDialog = game:DefineFastFlag("PromptCreatorTransientDialog", false)
-local robloxGui = coreGuiService:WaitForChild("RobloxGui")
-local modules = robloxGui:WaitForChild("Modules")
-local tenFootInterfaceModule = require(modules:WaitForChild("TenFootInterface"))
-local dialogModule = require(modules:WaitForChild("VR"):WaitForChild("Dialog"))
-local var2 = nil
-local var3 = nil
-local var4 = nil
+﻿local t = {}
+local UserInputService = game:GetService("UserInputService")
+local ContextActionService = game:GetService("ContextActionService")
+local TextService = game:GetService("TextService")
+local GuiService = game:GetService("GuiService")
+local PromptCreatorTransientDialog = game:DefineFastFlag("PromptCreatorTransientDialog", false)
+local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+local Modules = RobloxGui:WaitForChild("Modules")
+local TenFootInterfaceModule = require(Modules:WaitForChild("TenFootInterface"))
+local DialogModule = require(Modules:WaitForChild("VR"):WaitForChild("Dialog"))
+local NewResult = nil
+local PromptDialog = nil
+local ContainerFrame = nil
 
-function getViewportSize()
+function getViewportSize() --[[ Line: 32 ]]
 	while not game.Workspace.CurrentCamera do
 		game.Workspace.Changed:Wait()
 	end
@@ -25,17 +23,17 @@ function getViewportSize()
 	return game.Workspace.CurrentCamera.ViewportSize
 end
 
-local var5 = tenFootInterfaceModule:IsEnabled()
-local var6 = false
-local var7 = userInputService.TouchEnabled == true and userInputService.MouseEnabled == false
-local var8 = var7 and getViewportSize().Y <= 370
-local var9 = var7 and not var8
-local var10 = false
-local var11 = false
-local var12 = false
-local var13 = false
-local var14 = false
-local t_1 = {
+local IsEnabled = TenFootInterfaceModule:IsEnabled()
+local Flag = false
+local IsNotMouseEnabled: boolean = UserInputService.TouchEnabled == true and UserInputService.MouseEnabled == false
+local IsYBelow: boolean = IsNotMouseEnabled and getViewportSize().Y <= 370
+local NoIsYBelow: boolean = IsNotMouseEnabled and not IsYBelow
+local Flag1 = false
+local Flag2 = false
+local CoreGuiNavigationEnabled = false
+local GuiNavigationEnabled = false
+local AutoSelectGuiEnabled = false
+local config = {
 	WindowTitle = "Confirm",
 	MainText = "Is this okay?",
 	ConfirmationText = "Confirm",
@@ -46,573 +44,567 @@ local t_1 = {
 	PromptCompletedCallback = nil,
 	StripeColor = Color3.new(0.01, 0.72, 0.34)
 }
-local var15 = nil
-local var16 = nil
-local t_2 = {}
-local uDim2 = UDim2.new(0, 438, 0, 300)
-local uDim2_1 = UDim2.new(0.5, -219, 0, -300)
-local uDim2_2 = UDim2.new(0.5, -219, 0.5, -150)
-local var17 = 52
-local _ = 24
+local PromptCompletedCallback = nil
+local v1 = nil
+local List = {}
+local _UDim2 = UDim2.new(0, 438, 0, 300)
+local _UDim2_1 = UDim2.new(0.5, -219, 0, -300)
+local _UDim2_2 = UDim2.new(0.5, -219, 0.5, -150)
+local YOffset = 52
+local TextSize = 24
 
-if var5 then
-	uDim2 = UDim2.new(1, 0, 0, 690)
-	uDim2_1 = UDim2.new(0, 0, 0, -690)
-	uDim2_2 = UDim2.new(0, 0, 0.5, -345)
-elseif var8 then
-	uDim2 = UDim2.new(0.9, 0, 0.9, 0)
-	uDim2_1 = UDim2.new(0.05, 0, -0.9, 0)
-	uDim2_2 = UDim2.new(0.05, 0, 0.05, 0)
-elseif var9 then
-	uDim2 = UDim2.new(0, 400, 0, 305)
-	uDim2_1 = UDim2.new(0.5, -200, 0, -305)
-	uDim2_2 = UDim2.new(0.5, -200, 0.5, -152)
+if IsEnabled or Flag then
+	_UDim2 = UDim2.new(1, 0, 0, 690)
+	_UDim2_1 = UDim2.new(0, 0, 0, -690)
+	_UDim2_2 = UDim2.new(0, 0, 0.5, -345)
+elseif IsYBelow then
+	_UDim2 = UDim2.new(0.9, 0, 0.9, 0)
+	_UDim2_1 = UDim2.new(0.05, 0, -0.9, 0)
+	_UDim2_2 = UDim2.new(0.05, 0, 0.05, 0)
+elseif NoIsYBelow then
+	_UDim2 = UDim2.new(0, 400, 0, 305)
+	_UDim2_1 = UDim2.new(0.5, -200, 0, -305)
+	_UDim2_2 = UDim2.new(0.5, -200, 0.5, -152)
 end
-if var8 then
-	var17 = 44
+if IsYBelow then
+	YOffset = 44
 end
-if var5 then
-	var1 = 42
+if IsEnabled or Flag then
+	TextSize = 42
 end
-local function createFrame(p1, p2, p3, p4, p5)
-	local frame = Instance.new("Frame")
-	frame.Name = p1
-	frame.Size = p2
-	frame.Position = p3 or UDim2.new(0, 0, 0, 0)
-	frame.BackgroundTransparency = p4
-	frame.BackgroundColor3 = p5 or Color3.new()
-	frame.BorderSizePixel = 0
-	frame.ZIndex = 8
+local function createFrame(Name, Size, Position, BackgroundTransparency, StripeColor) --[[ Line: 125 ]]
+	local Frame = Instance.new("Frame")
+	Frame.Name = Name
+	Frame.Size = Size
+	Frame.Position = Position or UDim2.new(0, 0, 0, 0)
+	Frame.BackgroundTransparency = BackgroundTransparency
+	Frame.BackgroundColor3 = StripeColor or Color3.new()
+	Frame.BorderSizePixel = 0
+	Frame.ZIndex = 8
 	
-	return frame
-end
-
-local function createTextLabel(p1, p2, p3, p4, p5, p6)
-	local textLabel = Instance.new("TextLabel")
-	textLabel.Name = p1
-	textLabel.Size = p2 or UDim2.new(0, 0, 0, 0)
-	textLabel.Position = p3
-	textLabel.BackgroundTransparency = 1
-	textLabel.Font = p4
-	textLabel.TextSize = p5
-	textLabel.TextColor3 = Color3.new(1, 1, 1)
-	textLabel.Text = p6
-	textLabel.ZIndex = 8
-	
-	return textLabel
+	return Frame
 end
 
-local function createScrollingTextLabel(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: createTextLabel (ref), textService (ref)
-	local var18 = createTextLabel(p1, p2, p3, p4, p5, p6)
-	var18.TextXAlignment = Enum.TextXAlignment.Left
-	var18.TextYAlignment = Enum.TextYAlignment.Top
-	var18.TextWrapped = true
+local function createTextLabel(Name, Size, Position, SourceSansBold, TextSize, WindowTitle) --[[ Line: 138 ]]
+	local Label = Instance.new("TextLabel")
+	Label.Name = Name
+	Label.Size = Size or UDim2.new(0, 0, 0, 0)
+	Label.Position = Position
+	Label.BackgroundTransparency = 1
+	Label.Font = SourceSansBold
+	Label.TextSize = TextSize
+	Label.TextColor3 = Color3.new(1, 1, 1)
+	Label.Text = WindowTitle
+	Label.ZIndex = 8
 	
-	if p2.Y.Offset < textService:GetTextSize(p6, p5, p4, Vector2.new(p2.X.Offset, 10000)).Y then
-		local vector2 = Vector2.new(p2.X.Offset - (p7 + 20), 10000)
-		local var19 = textService:GetTextSize(p6, p5, p4, vector2)
-		local scrollingTextParent = Instance.new("Frame")
-		scrollingTextParent.Name = "ScrollingTextParent"
-		scrollingTextParent.BackgroundTransparency = 1
-		scrollingTextParent.BackgroundColor3 = Color3.new(1, 1, 1)
-		scrollingTextParent.BorderSizePixel = 0
-		scrollingTextParent.Position = p3
-		scrollingTextParent.Size = p2 - UDim2.new(0, p7 * 2, 0, 0)
-		local emptySelectionImage = Instance.new("ScrollingFrame")
-		emptySelectionImage.Selectable = true
-		emptySelectionImage.Name = "ScrollingFrame"
-		emptySelectionImage.BackgroundTransparency = 1
-		emptySelectionImage.BackgroundColor3 = Color3.new(1, 1, 1)
-		emptySelectionImage.BorderSizePixel = 0
-		emptySelectionImage.Position = UDim2.new(0, 0, 0, 0)
-		emptySelectionImage.Size = p2
-		emptySelectionImage.CanvasSize = UDim2.new(0, vector2.X - p7 * 2, 0, var19.Y)
-		emptySelectionImage.ScrollBarThickness = p7
-		emptySelectionImage.SelectionImageObject = Instance.new("ImageLabel")
-		emptySelectionImage.SelectionImageObject.Name = "EmptySelectionImage"
-		emptySelectionImage.SelectionImageObject.BackgroundTransparency = 1
-		emptySelectionImage.SelectionImageObject.Image = ""
-		emptySelectionImage.Active = false
-		emptySelectionImage.SelectionGained:connect(function()
-			-- upvalues: scrollingTextParent (ref)
-			scrollingTextParent.BackgroundTransparency = 0.15
+	return Label
+end
+
+local function createScrollingTextLabel(Name, Size, Position, SourceSansBold, TextSize, MainText, ScrollBarThickness: number) --[[ Line: 153 ]]
+	-- upvalues: createTextLabel (copy), TextService (copy)
+	local TextLabel = createTextLabel(Name, Size, Position, SourceSansBold, TextSize, MainText)
+	TextLabel.TextXAlignment = Enum.TextXAlignment.Left
+	TextLabel.TextYAlignment = Enum.TextYAlignment.Top
+	TextLabel.TextWrapped = true
+	
+	if Size.Y.Offset < TextService:GetTextSize(MainText, TextSize, SourceSansBold, Vector2.new(Size.X.Offset, 10000)).Y then
+		local _Vector2 = Vector2.new(Size.X.Offset - (ScrollBarThickness + 20), 10000)
+		local TextSize1 = TextService:GetTextSize(MainText, TextSize, SourceSansBold, _Vector2)
+		local ScrollingTextParent = Instance.new("Frame")
+		ScrollingTextParent.Name = "ScrollingTextParent"
+		ScrollingTextParent.BackgroundTransparency = 1
+		ScrollingTextParent.BackgroundColor3 = Color3.new(1, 1, 1)
+		ScrollingTextParent.BorderSizePixel = 0
+		ScrollingTextParent.Position = Position
+		ScrollingTextParent.Size = Size - UDim2.new(0, ScrollBarThickness * 2, 0, 0)
+		local ScrollingFrame = Instance.new("ScrollingFrame")
+		ScrollingFrame.Selectable = true
+		ScrollingFrame.Name = "ScrollingFrame"
+		ScrollingFrame.BackgroundTransparency = 1
+		ScrollingFrame.BackgroundColor3 = Color3.new(1, 1, 1)
+		ScrollingFrame.BorderSizePixel = 0
+		ScrollingFrame.Position = UDim2.new(0, 0, 0, 0)
+		ScrollingFrame.Size = Size
+		ScrollingFrame.CanvasSize = UDim2.new(0, _Vector2.X - ScrollBarThickness * 2, 0, TextSize1.Y)
+		ScrollingFrame.ScrollBarThickness = ScrollBarThickness
+		ScrollingFrame.SelectionImageObject = Instance.new("ImageLabel")
+		ScrollingFrame.SelectionImageObject.Name = "EmptySelectionImage"
+		ScrollingFrame.SelectionImageObject.BackgroundTransparency = 1
+		ScrollingFrame.SelectionImageObject.Image = ""
+		ScrollingFrame.Active = false
+		ScrollingFrame.SelectionGained:connect(function() --[[ Line: 189 ]]
+			-- upvalues: ScrollingTextParent (copy)
+			ScrollingTextParent.BackgroundTransparency = 0.15
 		end)
-		emptySelectionImage.SelectionLost:connect(function()
-			-- upvalues: scrollingTextParent (ref)
-			scrollingTextParent.BackgroundTransparency = 1
+		ScrollingFrame.SelectionLost:connect(function() --[[ Line: 193 ]]
+			-- upvalues: ScrollingTextParent (copy)
+			ScrollingTextParent.BackgroundTransparency = 1
 		end)
-		var18.Position = UDim2.new(0, 10, 0, 0)
-		var18.Size = UDim2.new(0, vector2.X, 0, var19.Y)
-		var18.Parent = emptySelectionImage
-		emptySelectionImage.Parent = scrollingTextParent
+		TextLabel.Position = UDim2.new(0, 10, 0, 0)
+		TextLabel.Size = UDim2.new(0, _Vector2.X, 0, TextSize1.Y)
+		TextLabel.Parent = ScrollingFrame
+		ScrollingFrame.Parent = ScrollingTextParent
 		
-		return scrollingTextParent
+		return ScrollingTextParent
+	else
+		return TextLabel
 	end
-	return var18
 end
 
-local function _(p1, p2, p3, p4, p5)
-	local imageLabel = Instance.new("ImageLabel")
-	imageLabel.Name = p1
-	imageLabel.Size = p2
-	imageLabel.BackgroundTransparency = 1
-	imageLabel.Position = p3
-	imageLabel.Image = p4
+local function _(Name, Size, Position, Image, Callback: (any) -> ()) --[[ Line: 210 | Named "createImageLabel" ]]
+	local Image1 = Instance.new("ImageLabel")
+	Image1.Name = Name
+	Image1.Size = Size
+	Image1.BackgroundTransparency = 1
+	Image1.Position = Position
+	Image1.Image = Image
 	
-	if p5 then
-		p5(imageLabel)
+	if Callback then
+		Callback(Image1)
 	end
-	return imageLabel
+	return Image1
 end
 
-local function createImageButtonWithText(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: createTextLabel (ref), var1 (write)
-	local emptySelectionImage = Instance.new("ImageButton")
-	emptySelectionImage.Name = p1
-	emptySelectionImage.Size = p2
-	emptySelectionImage.Position = p3
-	emptySelectionImage.Image = p4
-	emptySelectionImage.BackgroundTransparency = 1
-	emptySelectionImage.AutoButtonColor = false
-	emptySelectionImage.ZIndex = 8
-	emptySelectionImage.Modal = true
-	emptySelectionImage.Selectable = true
-	emptySelectionImage.SelectionImageObject = Instance.new("ImageLabel")
-	emptySelectionImage.SelectionImageObject.Name = "EmptySelectionImage"
-	emptySelectionImage.SelectionImageObject.BackgroundTransparency = 1
-	emptySelectionImage.SelectionImageObject.Image = ""
-	local var18 = createTextLabel(p1 .. "Text", UDim2.new(1, 0, 1, 0), UDim2.new(0, 0, 0, 0), p7, var1, p6)
-	var18.ZIndex = 9
-	var18.Parent = emptySelectionImage
-	emptySelectionImage.MouseEnter:connect(function()
-		-- upvalues: emptySelectionImage (ref), p5 (ref)
-		emptySelectionImage.Image = p5
+local function createImageButtonWithText(Name, Size, Position, Image, Image1, ConfirmationText, SourceSans) --[[ Line: 225 ]]
+	-- upvalues: createTextLabel (copy), TextSize (ref)
+	local ImageButton = Instance.new("ImageButton")
+	ImageButton.Name = Name
+	ImageButton.Size = Size
+	ImageButton.Position = Position
+	ImageButton.Image = Image
+	ImageButton.BackgroundTransparency = 1
+	ImageButton.AutoButtonColor = false
+	ImageButton.ZIndex = 8
+	ImageButton.Modal = true
+	ImageButton.Selectable = true
+	ImageButton.SelectionImageObject = Instance.new("ImageLabel")
+	ImageButton.SelectionImageObject.Name = "EmptySelectionImage"
+	ImageButton.SelectionImageObject.BackgroundTransparency = 1
+	ImageButton.SelectionImageObject.Image = ""
+	local TextLabel = createTextLabel(Name .. "Text", UDim2.new(1, 0, 1, 0), UDim2.new(0, 0, 0, 0), SourceSans, TextSize, ConfirmationText)
+	TextLabel.ZIndex = 9
+	TextLabel.Parent = ImageButton
+	ImageButton.MouseEnter:connect(function() --[[ Line: 245 ]]
+		-- upvalues: ImageButton (copy), Image1 (copy)
+		ImageButton.Image = Image1
 	end)
-	emptySelectionImage.MouseLeave:connect(function()
-		-- upvalues: emptySelectionImage (ref), p4 (ref)
-		emptySelectionImage.Image = p4
+	ImageButton.MouseLeave:connect(function() --[[ Line: 248 ]]
+		-- upvalues: ImageButton (copy), Image (copy)
+		ImageButton.Image = Image
 	end)
-	emptySelectionImage.MouseButton1Click:connect(function()
-		-- upvalues: emptySelectionImage (ref), p4 (ref)
-		emptySelectionImage.Image = p4
+	ImageButton.MouseButton1Click:connect(function() --[[ Line: 251 ]]
+		-- upvalues: ImageButton (copy), Image (copy)
+		ImageButton.Image = Image
 	end)
-	emptySelectionImage.SelectionGained:connect(function()
-		-- upvalues: emptySelectionImage (ref), p5 (ref)
-		emptySelectionImage.Image = p5
+	ImageButton.SelectionGained:connect(function() --[[ Line: 254 ]]
+		-- upvalues: ImageButton (copy), Image1 (copy)
+		ImageButton.Image = Image1
 	end)
-	emptySelectionImage.SelectionLost:connect(function()
-		-- upvalues: emptySelectionImage (ref), p4 (ref)
-		emptySelectionImage.Image = p4
+	ImageButton.SelectionLost:connect(function() --[[ Line: 257 ]]
+		-- upvalues: ImageButton (copy), Image (copy)
+		ImageButton.Image = Image
 	end)
 	
-	return emptySelectionImage
+	return ImageButton
 end
 
-local function createPromptDialog()
-	-- upvalues: var3 (write), createFrame (ref), uDim2 (write), uDim2_1 (write), robloxGui (ref), var4 (write)
-	var3 = createFrame("PromptDialog", uDim2, uDim2_1, 1, nil)
-	var3.Visible = false
-	var3.Active = true
-	var3.Parent = robloxGui
-	var4 = createFrame("ContainerFrame", UDim2.new(1, 0, 1, 0), nil, 0.36, Color3.new(0, 0, 0))
-	var4.ZIndex = 8
-	var4.Parent = var3
+local function createPromptDialog() --[[ Line: 265 ]]
+	-- upvalues: PromptDialog (ref), createFrame (copy), _UDim2 (ref), _UDim2_1 (ref), RobloxGui (copy), ContainerFrame (ref)
+	PromptDialog = createFrame("PromptDialog", _UDim2, _UDim2_1, 1, nil)
+	PromptDialog.Visible = false
+	PromptDialog.Active = true
+	PromptDialog.Parent = RobloxGui
+	ContainerFrame = createFrame("ContainerFrame", UDim2.new(1, 0, 1, 0), nil, 0.36, Color3.new(0, 0, 0))
+	ContainerFrame.ZIndex = 8
+	ContainerFrame.Parent = PromptDialog
 end
 
-local _ = function()
-	-- upvalues: var3 (write), var4 (write)
-	if var3 then
-		var3:Destroy()
-		var3 = nil
-		var4 = nil
+local _ = function() --[[ Line: 276 | Named "destroyPromptDialog" ]]
+	-- upvalues: PromptDialog (ref), ContainerFrame (ref)
+	if PromptDialog then
+		PromptDialog:Destroy()
+		PromptDialog = nil
+		ContainerFrame = nil
 	end
 end
 
-function AddDefaultsToPromptOptions(p1, p2)
-	for i, v in pairs(p2) do
+function AddDefaultsToPromptOptions(p1, List) --[[ Line: 284 ]]
+	for i, value in pairs(List) do
 		if p1[i] == nil then
-			p1[i] = v
+			p1[i] = value
 		end
 	end
 end
 
-function CreatePromptVRorConsole(p3)
-	-- upvalues: var4 (write), createTextLabel (ref), createFrame (ref), createScrollingTextLabel (ref), createImageButtonWithText (ref)
-	local var18 = 90
+function CreatePromptVRorConsole(p2) --[[ Line: 293 ]]
+	-- upvalues: ContainerFrame (ref), createTextLabel (copy), createFrame (copy), createScrollingTextLabel (copy), createImageButtonWithText (copy)
+	local XOffset = 90
 	
-	if p3.ImageConsoleVR then
-		local uDim2 = UDim2.new(0, 600, 0, 600)
-		local uDim2_1 = UDim2.new(0, 100, 0, 45)
-		local imageConsoleVR = p3.ImageConsoleVR
-		local fetchImageFunctionConsoleVR = p3.FetchImageFunctionConsoleVR
-		local image = Instance.new("ImageLabel")
-		image.Name = "Image"
-		image.Size = uDim2
-		image.BackgroundTransparency = 1
-		image.Position = uDim2_1
-		image.Image = imageConsoleVR
+	if p2.ImageConsoleVR then
+		local _UDim2 = UDim2.new(0, 100, 0, 45)
+		local ImageConsoleVR = p2.ImageConsoleVR
+		local FetchImageFunctionConsoleVRFunction: (any) -> () = p2.FetchImageFunctionConsoleVR
+		local Image = Instance.new("ImageLabel")
+		Image.Name = "Image"
+		Image.Size = UDim2.new(0, 600, 0, 600)
+		Image.BackgroundTransparency = 1
+		Image.Position = _UDim2
+		Image.Image = ImageConsoleVR
 		
-		if fetchImageFunctionConsoleVR then
-			fetchImageFunctionConsoleVR(image)
+		if FetchImageFunctionConsoleVRFunction then
+			FetchImageFunctionConsoleVRFunction(Image)
 		end
-		local var19 = image
-		var19.ZIndex = 9
-		var19.Parent = var4
-		var18 = 800
+		Image.ZIndex = 9
+		Image.Parent = ContainerFrame
+		XOffset = 800
 	end
-	local var20 = createTextLabel("WindowTitle", UDim2.new(0, 800, 0, 60), UDim2.new(0, var18, 0, 60), Enum.Font.SourceSansBold, 48, p3.WindowTitle)
-	var20.TextXAlignment = Enum.TextXAlignment.Left
-	var20.TextYAlignment = Enum.TextYAlignment.Center
-	var20.Parent = var4
-	var20.ZIndex = 9
-	local var21 = createFrame("ColorStripe", UDim2.new(0, 832, 0, 4), UDim2.new(0, var18, 0, 120), 0, p3.StripeColor)
-	var21.ZIndex = 9
-	var21.Parent = var4
-	createScrollingTextLabel("MainText", UDim2.new(0, 800, 0, 450), UDim2.new(0, var18, 0, 152), Enum.Font.SourceSansBold, 44, p3.MainText, 16).Parent = var4
-	local rect = Rect.new(8, 8, 56, 56)
-	local slice = Enum.ScaleType.Slice
-	local var22 = createImageButtonWithText("ConfirmButton", UDim2.new(0, 320, 0, 80), UDim2.new(0, var18, 1, -125), "rbxasset://textures/ui/VR/button.png", "rbxasset://textures/ui/VR/buttonSelected.png", p3.ConfirmationText, Enum.Font.SourceSans)
-	var22.Parent = var4
-	var22.ScaleType = slice
-	var22.SliceCenter = rect
-	var22.MouseButton1Click:connect(function()
+	local WindowTitle = createTextLabel("WindowTitle", UDim2.new(0, 800, 0, 60), UDim2.new(0, XOffset, 0, 60), Enum.Font.SourceSansBold, 48, p2.WindowTitle)
+	WindowTitle.TextXAlignment = Enum.TextXAlignment.Left
+	WindowTitle.TextYAlignment = Enum.TextYAlignment.Center
+	WindowTitle.Parent = ContainerFrame
+	WindowTitle.ZIndex = 9
+	local ColorStripe = createFrame("ColorStripe", UDim2.new(0, 832, 0, 4), UDim2.new(0, XOffset, 0, 120), 0, p2.StripeColor)
+	ColorStripe.ZIndex = 9
+	ColorStripe.Parent = ContainerFrame
+	createScrollingTextLabel("MainText", UDim2.new(0, 800, 0, 450), UDim2.new(0, XOffset, 0, 152), Enum.Font.SourceSansBold, 44, p2.MainText, 16).Parent = ContainerFrame
+	local _Rect = Rect.new(8, 8, 56, 56)
+	local Slice = Enum.ScaleType.Slice
+	local ConfirmButton = createImageButtonWithText("ConfirmButton", UDim2.new(0, 320, 0, 80), UDim2.new(0, XOffset, 1, -125), "rbxasset://textures/ui/VR/button.png", "rbxasset://textures/ui/VR/buttonSelected.png", p2.ConfirmationText, Enum.Font.SourceSans)
+	ConfirmButton.Parent = ContainerFrame
+	ConfirmButton.ScaleType = Slice
+	ConfirmButton.SliceCenter = _Rect
+	ConfirmButton.MouseButton1Click:connect(function() --[[ Line: 330 ]]
 		OnPromptEnded(true)
 	end)
 	
-	if p3.CancelActive then
-		local var23 = createImageButtonWithText("CancelButton", UDim2.new(0, 320, 0, 80), UDim2.new(0, var18 + 340, 1, -125), "rbxasset://textures/ui/VR/button.png", "rbxasset://textures/ui/VR/buttonSelected.png", p3.CancelText, Enum.Font.SourceSans)
-		var23.Parent = var4
-		var23.ScaleType = slice
-		var23.SliceCenter = rect
-		var23.MouseButton1Click:connect(function()
+	if p2.CancelActive then
+		local CancelButton = createImageButtonWithText("CancelButton", UDim2.new(0, 320, 0, 80), UDim2.new(0, XOffset + 340, 1, -125), "rbxasset://textures/ui/VR/button.png", "rbxasset://textures/ui/VR/buttonSelected.png", p2.CancelText, Enum.Font.SourceSans)
+		CancelButton.Parent = ContainerFrame
+		CancelButton.ScaleType = Slice
+		CancelButton.SliceCenter = _Rect
+		CancelButton.MouseButton1Click:connect(function() --[[ Line: 342 ]]
 			OnPromptEnded(false)
 		end)
 	end
 end
 
-function CreatePromptPCorTablet(p3)
-	-- upvalues: createTextLabel (ref), var17 (write), var4 (write), createFrame (ref), var9 (ref), createScrollingTextLabel (ref), createImageButtonWithText (ref)
-	local var18
-	local var19 = createTextLabel("WindowTitle", UDim2.new(1, 0, 0, var17), UDim2.new(0, 0, 0, 0), Enum.Font.SourceSansBold, 24, p3.WindowTitle)
-	var19.Parent = var4
-	var19.ZIndex = 9
-	local var20 = createFrame("ColorStripe", UDim2.new(1, 0, 0, 2), nil, 0, p3.StripeColor)
-	var20.Position = UDim2.new(0, 0, 0, var17)
-	var20.ZIndex = 9
-	var20.Parent = var4
-	local _ = nil
-	local _ = nil
+function CreatePromptPCorTablet(p2) --[[ Line: 348 ]]
+	-- upvalues: createTextLabel (copy), YOffset (ref), ContainerFrame (ref), createFrame (copy), NoIsYBelow (copy), createScrollingTextLabel (copy), createImageButtonWithText (copy)
+	local WindowTitle = createTextLabel("WindowTitle", UDim2.new(1, 0, 0, YOffset), UDim2.new(0, 0, 0, 0), Enum.Font.SourceSansBold, 24, p2.WindowTitle)
+	WindowTitle.Parent = ContainerFrame
+	WindowTitle.ZIndex = 9
+	local ColorStripe = createFrame("ColorStripe", UDim2.new(1, 0, 0, 2), nil, 0, p2.StripeColor)
+	ColorStripe.Position = UDim2.new(0, 0, 0, YOffset)
+	ColorStripe.ZIndex = 9
+	ColorStripe.Parent = ContainerFrame
+	local MainText = nil
 	
-	if p3.Image then
-		local uDim2 = UDim2.new(0, 150, 0, 150)
-		local uDim2_1 = UDim2.new(0, 15, 0, var17 + 17)
-		local image = p3.Image
-		local fetchImageFunction = p3.FetchImageFunction
-		local image_1 = Instance.new("ImageLabel")
-		image_1.Name = "Image"
-		image_1.Size = uDim2
-		image_1.BackgroundTransparency = 1
-		image_1.Position = uDim2_1
-		image_1.Image = image
+	if p2.Image then
+		local _UDim2 = UDim2.new(0, 15, 0, YOffset + 17)
+		local Image = p2.Image
+		local FetchImageFunctionFunction: (any) -> () = p2.FetchImageFunction
+		local Image1 = Instance.new("ImageLabel")
+		Image1.Name = "Image"
+		Image1.Size = UDim2.new(0, 150, 0, 150)
+		Image1.BackgroundTransparency = 1
+		Image1.Position = _UDim2
+		Image1.Image = Image
 		
-		if fetchImageFunction then
-			fetchImageFunction(image_1)
+		if FetchImageFunctionFunction then
+			FetchImageFunctionFunction(Image1)
 		end
-		local var21 = image_1
-		var21.ZIndex = 9
-		var21.Parent = var4
-		var18 = if var9 then createScrollingTextLabel("MainText", UDim2.new(0, 195, 0, 150), UDim2.new(0, 185, 0, var17 + 17), Enum.Font.SourceSansBold, 22, p3.MainText, 8) else createScrollingTextLabel("MainText", UDim2.new(0, 233, 0, 150), UDim2.new(0, 185, 0, var17 + 17), Enum.Font.SourceSansBold, 22, p3.MainText, 8)
+		Image1.ZIndex = 9
+		Image1.Parent = ContainerFrame
+		MainText = if NoIsYBelow then createScrollingTextLabel("MainText", UDim2.new(0, 195, 0, 150), UDim2.new(0, 185, 0, YOffset + 17), Enum.Font.SourceSansBold, 22, p2.MainText, 8) else createScrollingTextLabel("MainText", UDim2.new(0, 233, 0, 150), UDim2.new(0, 185, 0, YOffset + 17), Enum.Font.SourceSansBold, 22, p2.MainText, 8)
 	else
-		var18 = if var9 then createScrollingTextLabel("MainText", UDim2.new(0, 360, 0, 150), UDim2.new(0, 20, 0, var17 + 17), Enum.Font.SourceSansBold, 22, p3.MainText, 8) else createScrollingTextLabel("MainText", UDim2.new(0, 398, 0, 150), UDim2.new(0, 20, 0, var17 + 17), Enum.Font.SourceSansBold, 22, p3.MainText, 8)
+		MainText = if NoIsYBelow then createScrollingTextLabel("MainText", UDim2.new(0, 360, 0, 150), UDim2.new(0, 20, 0, YOffset + 17), Enum.Font.SourceSansBold, 22, p2.MainText, 8) else createScrollingTextLabel("MainText", UDim2.new(0, 398, 0, 150), UDim2.new(0, 20, 0, YOffset + 17), Enum.Font.SourceSansBold, 22, p2.MainText, 8)
 	end
-	var18.Parent = var4
-	local rect = Rect.new(8, 8, 56, 56)
-	local slice = Enum.ScaleType.Slice
-	local var22 = if var9 then if p3.CancelActive then createImageButtonWithText("ConfirmButton", UDim2.new(0, 128, 0, 44), UDim2.new(0.5, -138, 1, -59), "rbxasset://textures/ui/VR/button.png", "rbxasset://textures/ui/VR/buttonSelected.png", p3.ConfirmationText, Enum.Font.SourceSansBold) else createImageButtonWithText("ConfirmButton", UDim2.new(0, 128, 0, 44), UDim2.new(0.5, -64, 1, -59), "rbxasset://textures/ui/VR/button.png", "rbxasset://textures/ui/VR/buttonSelected.png", p3.ConfirmationText, Enum.Font.SourceSans) elseif p3.CancelActive then createImageButtonWithText("ConfirmButton", UDim2.new(0, 128, 0, 38), UDim2.new(0.5, -138, 1, -53), "rbxasset://textures/ui/VR/button.png", "rbxasset://textures/ui/VR/buttonSelected.png", p3.ConfirmationText, Enum.Font.SourceSansBold) else createImageButtonWithText("ConfirmButton", UDim2.new(0, 128, 0, 38), UDim2.new(0.5, -64, 1, -53), "rbxasset://textures/ui/VR/button.png", "rbxasset://textures/ui/VR/buttonSelected.png", p3.ConfirmationText, Enum.Font.SourceSans)
-	var22.Parent = var4
-	var22.ScaleType = slice
-	var22.SliceCenter = rect
-	var22.MouseButton1Click:connect(function()
+	MainText.Parent = ContainerFrame
+	local _Rect = Rect.new(8, 8, 56, 56)
+	local Slice = Enum.ScaleType.Slice
+	local ConfirmButton = if NoIsYBelow then if p2.CancelActive then createImageButtonWithText("ConfirmButton", UDim2.new(0, 128, 0, 44), UDim2.new(0.5, -138, 1, -59), "rbxasset://textures/ui/VR/button.png", "rbxasset://textures/ui/VR/buttonSelected.png", p2.ConfirmationText, Enum.Font.SourceSansBold) else createImageButtonWithText("ConfirmButton", UDim2.new(0, 128, 0, 44), UDim2.new(0.5, -64, 1, -59), "rbxasset://textures/ui/VR/button.png", "rbxasset://textures/ui/VR/buttonSelected.png", p2.ConfirmationText, Enum.Font.SourceSans) elseif p2.CancelActive then createImageButtonWithText("ConfirmButton", UDim2.new(0, 128, 0, 38), UDim2.new(0.5, -138, 1, -53), "rbxasset://textures/ui/VR/button.png", "rbxasset://textures/ui/VR/buttonSelected.png", p2.ConfirmationText, Enum.Font.SourceSansBold) else createImageButtonWithText("ConfirmButton", UDim2.new(0, 128, 0, 38), UDim2.new(0.5, -64, 1, -53), "rbxasset://textures/ui/VR/button.png", "rbxasset://textures/ui/VR/buttonSelected.png", p2.ConfirmationText, Enum.Font.SourceSans)
+	ConfirmButton.Parent = ContainerFrame
+	ConfirmButton.ScaleType = Slice
+	ConfirmButton.SliceCenter = _Rect
+	ConfirmButton.MouseButton1Click:connect(function() --[[ Line: 414 ]]
 		OnPromptEnded(true)
 	end)
 	
-	if p3.CancelActive then
-		local var23 = if var9 then createImageButtonWithText("CancelButton", UDim2.new(0, 128, 0, 44), UDim2.new(0.5, 10, 1, -59), "rbxasset://textures/ui/VR/button.png", "rbxasset://textures/ui/VR/buttonSelected.png", p3.CancelText, Enum.Font.SourceSans) else createImageButtonWithText("CancelButton", UDim2.new(0, 128, 0, 38), UDim2.new(0.5, 10, 1, -53), "rbxasset://textures/ui/VR/button.png", "rbxasset://textures/ui/VR/buttonSelected.png", p3.CancelText, Enum.Font.SourceSans)
-		var23.Parent = var4
-		var23.ScaleType = slice
-		var23.SliceCenter = rect
-		var23.MouseButton1Click:connect(function()
+	if p2.CancelActive then
+		local CancelButton = if NoIsYBelow then createImageButtonWithText("CancelButton", UDim2.new(0, 128, 0, 44), UDim2.new(0.5, 10, 1, -59), "rbxasset://textures/ui/VR/button.png", "rbxasset://textures/ui/VR/buttonSelected.png", p2.CancelText, Enum.Font.SourceSans) else createImageButtonWithText("CancelButton", UDim2.new(0, 128, 0, 38), UDim2.new(0.5, 10, 1, -53), "rbxasset://textures/ui/VR/button.png", "rbxasset://textures/ui/VR/buttonSelected.png", p2.CancelText, Enum.Font.SourceSans)
+		CancelButton.Parent = ContainerFrame
+		CancelButton.ScaleType = Slice
+		CancelButton.SliceCenter = _Rect
+		CancelButton.MouseButton1Click:connect(function() --[[ Line: 432 ]]
 			OnPromptEnded(false)
 		end)
-		var23.NextSelectionLeft = var22
-		var22.NextSelectionRight = var23
+		CancelButton.NextSelectionLeft = ConfirmButton
+		ConfirmButton.NextSelectionRight = CancelButton
 	end
 end
 
-function CreatePromptPhone(p3)
-	-- upvalues: createTextLabel (ref), var17 (write), var4 (write), createFrame (ref), createScrollingTextLabel (ref), createImageButtonWithText (ref)
-	local var18
-	local var19 = createTextLabel("WindowTitle", UDim2.new(1, 0, 0, var17), UDim2.new(0, 0, 0, 0), Enum.Font.SourceSansBold, 24, p3.WindowTitle)
-	var19.Parent = var4
-	var19.ZIndex = 9
-	local var20 = createFrame("ColorStripe", UDim2.new(1, 0, 0, 2), nil, 0, p3.StripeColor)
-	var20.Position = UDim2.new(0, 0, 0, var17)
-	var20.ZIndex = 9
-	var20.Parent = var4
-	local _ = nil
-	local _ = nil
+function CreatePromptPhone(p2) --[[ Line: 441 ]]
+	-- upvalues: createTextLabel (copy), YOffset (ref), ContainerFrame (ref), createFrame (copy), createScrollingTextLabel (copy), createImageButtonWithText (copy)
+	local WindowTitle = createTextLabel("WindowTitle", UDim2.new(1, 0, 0, YOffset), UDim2.new(0, 0, 0, 0), Enum.Font.SourceSansBold, 24, p2.WindowTitle)
+	WindowTitle.Parent = ContainerFrame
+	WindowTitle.ZIndex = 9
+	local ColorStripe = createFrame("ColorStripe", UDim2.new(1, 0, 0, 2), nil, 0, p2.StripeColor)
+	ColorStripe.Position = UDim2.new(0, 0, 0, YOffset)
+	ColorStripe.ZIndex = 9
+	ColorStripe.Parent = ContainerFrame
+	local MainText = nil
 	
-	if p3.Image then
-		local uDim2 = UDim2.new(0, 120, 0, 120)
-		local uDim2_1 = UDim2.new(0, 15, 0, var17 + 17)
-		local image = p3.Image
-		local fetchImageFunction = p3.FetchImageFunction
-		local image_1 = Instance.new("ImageLabel")
-		image_1.Name = "Image"
-		image_1.Size = uDim2
-		image_1.BackgroundTransparency = 1
-		image_1.Position = uDim2_1
-		image_1.Image = image
+	if p2.Image then
+		local _UDim2 = UDim2.new(0, 15, 0, YOffset + 17)
+		local Image = p2.Image
+		local FetchImageFunctionFunction: (any) -> () = p2.FetchImageFunction
+		local Image1 = Instance.new("ImageLabel")
+		Image1.Name = "Image"
+		Image1.Size = UDim2.new(0, 120, 0, 120)
+		Image1.BackgroundTransparency = 1
+		Image1.Position = _UDim2
+		Image1.Image = Image
 		
-		if fetchImageFunction then
-			fetchImageFunction(image_1)
+		if FetchImageFunctionFunction then
+			FetchImageFunctionFunction(Image1)
 		end
-		local var21 = image_1
-		var21.ZIndex = 9
-		var21.Parent = var4
-		var18 = createScrollingTextLabel("MainText", UDim2.new(0, var4.AbsoluteSize.X - 175, 0, 120), UDim2.new(0, 155, 0, var17 + 17), Enum.Font.SourceSansBold, 20, p3.MainText, 8)
+		Image1.ZIndex = 9
+		Image1.Parent = ContainerFrame
+		MainText = createScrollingTextLabel("MainText", UDim2.new(0, ContainerFrame.AbsoluteSize.X - 175, 0, 120), UDim2.new(0, 155, 0, YOffset + 17), Enum.Font.SourceSansBold, 20, p2.MainText, 8)
 	else
-		var18 = createScrollingTextLabel("MainText", UDim2.new(1, var4.AbsoluteSize.X - 40, 0, 120), UDim2.new(0, 20, 0, var17 + 17), Enum.Font.SourceSansBold, 20, p3.MainText, 8)
+		MainText = createScrollingTextLabel("MainText", UDim2.new(1, ContainerFrame.AbsoluteSize.X - 40, 0, 120), UDim2.new(0, 20, 0, YOffset + 17), Enum.Font.SourceSansBold, 20, p2.MainText, 8)
 	end
-	var18.Parent = var4
-	local rect = Rect.new(8, 8, 56, 56)
-	local slice = Enum.ScaleType.Slice
-	local var22 = if p3.CancelActive then createImageButtonWithText("ConfirmButton", UDim2.new(0, 128, 0, 44), UDim2.new(0.5, -138, 1, -59), "rbxasset://textures/ui/VR/button.png", "rbxasset://textures/ui/VR/buttonSelected.png", p3.ConfirmationText, Enum.Font.SourceSansBold) else createImageButtonWithText("ConfirmButton", UDim2.new(0, 128, 0, 44), UDim2.new(0.5, -64, 1, -59), "rbxasset://textures/ui/VR/button.png", "rbxasset://textures/ui/VR/buttonSelected.png", p3.ConfirmationText, Enum.Font.SourceSans)
-	var22.Parent = var4
-	var22.ScaleType = slice
-	var22.SliceCenter = rect
-	var22.MouseButton1Click:connect(function()
+	MainText.Parent = ContainerFrame
+	local _Rect = Rect.new(8, 8, 56, 56)
+	local Slice = Enum.ScaleType.Slice
+	local ConfirmButton = if p2.CancelActive then createImageButtonWithText("ConfirmButton", UDim2.new(0, 128, 0, 44), UDim2.new(0.5, -138, 1, -59), "rbxasset://textures/ui/VR/button.png", "rbxasset://textures/ui/VR/buttonSelected.png", p2.ConfirmationText, Enum.Font.SourceSansBold) else createImageButtonWithText("ConfirmButton", UDim2.new(0, 128, 0, 44), UDim2.new(0.5, -64, 1, -59), "rbxasset://textures/ui/VR/button.png", "rbxasset://textures/ui/VR/buttonSelected.png", p2.ConfirmationText, Enum.Font.SourceSans)
+	ConfirmButton.Parent = ContainerFrame
+	ConfirmButton.ScaleType = Slice
+	ConfirmButton.SliceCenter = _Rect
+	ConfirmButton.MouseButton1Click:connect(function() --[[ Line: 487 ]]
 		OnPromptEnded(true)
 	end)
 	
-	if p3.CancelActive then
-		local var23 = createImageButtonWithText("CancelButton", UDim2.new(0, 128, 0, 44), UDim2.new(0.5, 10, 1, -59), "rbxasset://textures/ui/VR/button.png", "rbxasset://textures/ui/VR/buttonSelected.png", p3.CancelText, Enum.Font.SourceSans)
-		var23.Parent = var4
-		var23.ScaleType = slice
-		var23.SliceCenter = rect
-		var23.MouseButton1Click:connect(function()
+	if p2.CancelActive then
+		local CancelButton = createImageButtonWithText("CancelButton", UDim2.new(0, 128, 0, 44), UDim2.new(0.5, 10, 1, -59), "rbxasset://textures/ui/VR/button.png", "rbxasset://textures/ui/VR/buttonSelected.png", p2.CancelText, Enum.Font.SourceSans)
+		CancelButton.Parent = ContainerFrame
+		CancelButton.ScaleType = Slice
+		CancelButton.SliceCenter = _Rect
+		CancelButton.MouseButton1Click:connect(function() --[[ Line: 498 ]]
 			OnPromptEnded(false)
 		end)
 	end
 end
 
-function CreatePromptFromOptions(p3)
-	-- upvalues: var4 (write), var6 (write), var5 (ref), var8 (ref)
-	var4:ClearAllChildren()
+function CreatePromptFromOptions(p2) --[[ Line: 504 ]]
+	-- upvalues: ContainerFrame (ref), Flag (ref), IsEnabled (copy), IsYBelow (copy)
+	ContainerFrame:ClearAllChildren()
 	
-	if var6 or var5 then
-		CreatePromptVRorConsole(p3)
-		
-		return
-	elseif var8 then
-		CreatePromptPhone(p3)
+	if Flag or IsEnabled then
+		CreatePromptVRorConsole(p2)
 		
 		return
 	end
-	CreatePromptPCorTablet(p3)
-end
-
-function SetSelectedObject()
-	-- upvalues: var4 (write), guiService (ref)
-	local cancelButton = var4:FindFirstChild("CancelButton")
-	
-	if cancelButton then
-		guiService.SelectedCoreObject = cancelButton
+	if IsYBelow then
+		CreatePromptPhone(p2)
 		
 		return
-	end
-	local confirmButton = var4:FindFirstChild("ConfirmButton")
-	
-	if confirmButton then
-		guiService.SelectedCoreObject = confirmButton
+	else
+		CreatePromptPCorTablet(p2)
 	end
 end
 
-function OnTweenInFinished()
-	-- upvalues: var11 (write), var5 (ref)
-	if var11 or var5 then
+function SetSelectedObject() --[[ Line: 516 ]]
+	-- upvalues: ContainerFrame (ref), GuiService (copy)
+	local CancelButton = ContainerFrame:FindFirstChild("CancelButton")
+	
+	if CancelButton then
+		GuiService.SelectedCoreObject = CancelButton
+		
+		return
+	end
+	local ConfirmButton = ContainerFrame:FindFirstChild("ConfirmButton")
+	
+	if ConfirmButton then
+		GuiService.SelectedCoreObject = ConfirmButton
+	end
+end
+
+function OnTweenInFinished() --[[ Line: 528 ]]
+	-- upvalues: Flag2 (ref), IsEnabled (copy)
+	if Flag2 or IsEnabled then
 		SetSelectedObject()
 	end
 end
 
-function ConnectActiveEvents()
-	-- upvalues: var6 (write), var11 (write), t_2 (write), userInputService (ref), guiService (ref), var10 (write), var12 (write), var13 (write), var14 (write)
-	local function OnInputChanged(p3)
-		-- upvalues: var6 (copy), var11 (copy)
-		local userInputType = Enum.UserInputType
+function ConnectActiveEvents() --[[ Line: 534 ]]
+	-- upvalues: Flag (ref), Flag2 (ref), List (ref), UserInputService (copy), GuiService (copy), Flag1 (ref), CoreGuiNavigationEnabled (ref), GuiNavigationEnabled (ref), AutoSelectGuiEnabled (ref)
+	local function OnInputChanged(Input) --[[ Line: 535 ]]
+		-- upvalues: Flag (upval), Flag2 (upval)
+		local UserInputType = Input.UserInputType
+		local UserInputType1 = Enum.UserInputType
 		
-		if var6 or not valueInTable(p3.UserInputType, {
-			userInputType.Gamepad1,
-			userInputType.Gamepad2,
-			userInputType.Gamepad3,
-			userInputType.Gamepad4
+		if Flag or not valueInTable(UserInputType, {
+			UserInputType1.Gamepad1,
+			UserInputType1.Gamepad2,
+			UserInputType1.Gamepad3,
+			UserInputType1.Gamepad4
 		}) then
-			var11 = false
-		elseif p3.KeyCode ~= Enum.KeyCode.Thumbstick1 and p3.KeyCode ~= Enum.KeyCode.Thumbstick2 then
-			var11 = true
+			Flag2 = false
+		elseif Input.KeyCode ~= Enum.KeyCode.Thumbstick1 and Input.KeyCode ~= Enum.KeyCode.Thumbstick2 then
+			Flag2 = true
 			
 			return
-		elseif math.abs(p3.Position.X) > 0.1 or math.abs(p3.Position.Z) > 0.1 or math.abs(p3.Position.Y) > 0.1 then
-			var11 = true
-			
-			return
+		else
+			if math.abs(Input.Position.X) > 0.1 or math.abs(Input.Position.Z) > 0.1 or math.abs(Input.Position.Y) > 0.1 then
+				Flag2 = true
+				
+				return
+			end
 		end
 	end
 	
-	table.insert(t_2, userInputService.InputChanged:connect(OnInputChanged))
-	table.insert(t_2, userInputService.InputBegan:connect(OnInputChanged))
-	table.insert(t_2, guiService.Changed:connect(function(p3)
-		-- upvalues: var10 (copy), guiService (copy), var12 (copy), var13 (copy), var14 (copy)
-		if var10 then
-			if p3 == "CoreGuiNavigationEnabled" then
-				if guiService.CoreGuiNavigationEnabled == true then
-					return
-				else
-					var12 = guiService.CoreGuiNavigationEnabled
-					guiService.CoreGuiNavigationEnabled = true
+	table.insert(List, UserInputService.InputChanged:connect(OnInputChanged))
+	table.insert(List, UserInputService.InputBegan:connect(OnInputChanged))
+	table.insert(List, GuiService.Changed:connect(function(p2) --[[ Line: 554 ]]
+		-- upvalues: Flag1 (upval), GuiService (upval), CoreGuiNavigationEnabled (upval), GuiNavigationEnabled (upval), AutoSelectGuiEnabled (upval)
+		if Flag1 then
+			if p2 == "CoreGuiNavigationEnabled" then
+				if GuiService.CoreGuiNavigationEnabled ~= true then
+					CoreGuiNavigationEnabled = GuiService.CoreGuiNavigationEnabled
+					GuiService.CoreGuiNavigationEnabled = true
 					
 					return
 				end
-			elseif p3 == "GuiNavigationEnabled" then
-				if guiService.GuiNavigationEnabled == false then
-				else
-					var13 = guiService.GuiNavigationEnabled
-					guiService.GuiNavigationEnabled = false
+			elseif p2 == "GuiNavigationEnabled" then
+				if GuiService.GuiNavigationEnabled ~= false then
+					GuiNavigationEnabled = GuiService.GuiNavigationEnabled
+					GuiService.GuiNavigationEnabled = false
 					
 					return
 				end
-			elseif p3 == "AutoSelectGuiEnabled" and guiService.AutoSelectGuiEnabled ~= false then
-				var14 = guiService.AutoSelectGuiEnabled
-				guiService.AutoSelectGuiEnabled = false
+			elseif p2 == "AutoSelectGuiEnabled" and GuiService.AutoSelectGuiEnabled ~= false then
+				AutoSelectGuiEnabled = GuiService.AutoSelectGuiEnabled
+				GuiService.AutoSelectGuiEnabled = false
 			end
 		end
 	end))
 end
 
-function DisconnectActiveEvents()
-	-- upvalues: t_2 (write)
-	for i, v in ipairs(t_2) do
-		v:Disconnect()
+function DisconnectActiveEvents() --[[ Line: 576 ]]
+	-- upvalues: List (ref)
+	for _, Connection in ipairs(List) do
+		Connection:Disconnect()
 	end
-	t_2 = {}
+	List = {}
 end
 
-function ShowPrompt()
-	-- upvalues: var3 (write), var5 (ref), userInputService (ref), var6 (write), var2 (write), dialogModule (ref), uDim2_2 (write)
-	var3.Visible = true
+function ShowPrompt() --[[ Line: 583 ]]
+	-- upvalues: PromptDialog (ref), IsEnabled (copy), UserInputService (copy), Flag (ref), NewResult (ref), DialogModule (copy), _UDim2_2 (ref)
+	PromptDialog.Visible = true
 	
-	if var5 then
-		userInputService.OverrideMouseIconBehavior = Enum.OverrideMouseIconBehavior.ForceHide
+	if IsEnabled then
+		UserInputService.OverrideMouseIconBehavior = Enum.OverrideMouseIconBehavior.ForceHide
 	end
-	if not var6 then
-		var3:TweenPositionInternal(uDim2_2, Enum.EasingDirection.InOut, Enum.EasingStyle.Quad, 0.3, true, OnTweenInFinished)
+	if not Flag then
+		PromptDialog:TweenPositionInternal(_UDim2_2, Enum.EasingDirection.InOut, Enum.EasingStyle.Quad, 0.3, true, OnTweenInFinished)
 		DisableControllerMovement()
 		EnableControllerInput()
 		
 		return
-	elseif not var2 then
-		var2 = dialogModule.new()
 	end
-	var3.Position = uDim2_2
-	var2:SetContent(var3)
-	var2:Show(true)
+	if not NewResult then
+		NewResult = DialogModule.new()
+	end
+	PromptDialog.Position = _UDim2_2
+	NewResult:SetContent(PromptDialog)
+	NewResult:Show(true)
 	DisableControllerMovement()
 end
 
-function HidePrompt()
-	-- upvalues: var10 (write), guiService (ref), var12 (write), var13 (write), var14 (write), var5 (ref), userInputService (ref), promptCreatorTransientDialog (ref), var3 (write), var4 (write), var6 (write), uDim2_1 (write), var2 (write)
-	local function onClosed()
-		-- upvalues: var10 (copy), guiService (copy), var12 (copy), var13 (copy), var14 (copy), var5 (copy), userInputService (copy), promptCreatorTransientDialog (copy), var3 (copy), var4 (copy)
-		var10 = false
-		guiService.CoreGuiNavigationEnabled = var12
-		guiService.GuiNavigationEnabled = var13
-		guiService.AutoSelectGuiEnabled = var14
-		guiService.SelectedCoreObject = nil
+function HidePrompt() --[[ Line: 603 ]]
+	-- upvalues: Flag1 (ref), GuiService (copy), CoreGuiNavigationEnabled (ref), GuiNavigationEnabled (ref), AutoSelectGuiEnabled (ref), IsEnabled (copy), UserInputService (copy), PromptCreatorTransientDialog (copy), PromptDialog (ref), ContainerFrame (ref), Flag (ref), _UDim2_1 (ref), NewResult (ref)
+	local function onClosed() --[[ Line: 604 ]]
+		-- upvalues: Flag1 (upval), GuiService (upval), CoreGuiNavigationEnabled (upval), GuiNavigationEnabled (upval), AutoSelectGuiEnabled (upval), IsEnabled (upval), UserInputService (upval), PromptCreatorTransientDialog (upval), PromptDialog (upval), ContainerFrame (upval)
+		Flag1 = false
+		GuiService.CoreGuiNavigationEnabled = CoreGuiNavigationEnabled
+		GuiService.GuiNavigationEnabled = GuiNavigationEnabled
+		GuiService.AutoSelectGuiEnabled = AutoSelectGuiEnabled
+		GuiService.SelectedCoreObject = nil
 		
-		if var5 then
-			userInputService.OverrideMouseIconBehavior = Enum.OverrideMouseIconBehavior.None
+		if IsEnabled then
+			UserInputService.OverrideMouseIconBehavior = Enum.OverrideMouseIconBehavior.None
 		end
-		if promptCreatorTransientDialog then
+		if PromptCreatorTransientDialog then
 			DisconnectActiveEvents()
 			
-			if var3 then
-				var3:Destroy()
-				var3 = nil
-				var4 = nil
+			if PromptDialog then
+				PromptDialog:Destroy()
+				PromptDialog = nil
+				ContainerFrame = nil
 				
 				return
 			end
 		else
-			var3.Visible = false
+			PromptDialog.Visible = false
 		end
 	end
 	
-	if var6 then
-		var3.Position = uDim2_1
+	if Flag then
+		PromptDialog.Position = _UDim2_1
 		
-		if var2 then
-			var2:Close()
+		if NewResult then
+			NewResult:Close()
 		end
-		var10 = false
-		guiService.CoreGuiNavigationEnabled = var12
-		guiService.GuiNavigationEnabled = var13
-		guiService.AutoSelectGuiEnabled = var14
-		guiService.SelectedCoreObject = nil
+		Flag1 = false
+		GuiService.CoreGuiNavigationEnabled = CoreGuiNavigationEnabled
+		GuiService.GuiNavigationEnabled = GuiNavigationEnabled
+		GuiService.AutoSelectGuiEnabled = AutoSelectGuiEnabled
+		GuiService.SelectedCoreObject = nil
 		
-		if var5 then
-			userInputService.OverrideMouseIconBehavior = Enum.OverrideMouseIconBehavior.None
+		if IsEnabled then
+			UserInputService.OverrideMouseIconBehavior = Enum.OverrideMouseIconBehavior.None
 		end
-		if not promptCreatorTransientDialog then
-			var3.Visible = false
+		if not PromptCreatorTransientDialog then
+			PromptDialog.Visible = false
 			
 			return
 		end
 		DisconnectActiveEvents()
 		
-		if var3 then
-			var3:Destroy()
-			var3 = nil
-			var4 = nil
+		if PromptDialog then
+			PromptDialog:Destroy()
+			PromptDialog = nil
+			ContainerFrame = nil
 			
 			return
 		end
 	else
-		var3:TweenPositionInternal(uDim2_1, Enum.EasingDirection.InOut, Enum.EasingStyle.Quad, 0.3, true, onClosed)
+		PromptDialog:TweenPositionInternal(_UDim2_1, Enum.EasingDirection.InOut, Enum.EasingStyle.Quad, 0.3, true, onClosed)
 	end
 end
 
-function DoCreatePrompt(p3)
-	-- upvalues: var15 (write), t_1 (ref), var16 (write)
-	var15 = p3.PromptCompletedCallback
-	AddDefaultsToPromptOptions(p3, t_1)
-	var16 = p3
-	CreatePromptFromOptions(p3)
+function DoCreatePrompt(p2) --[[ Line: 631 ]]
+	-- upvalues: PromptCompletedCallback (ref), config (copy), v1 (ref)
+	PromptCompletedCallback = p2.PromptCompletedCallback
+	AddDefaultsToPromptOptions(p2, config)
+	v1 = p2
+	CreatePromptFromOptions(p2)
 	ShowPrompt()
 end
 
-function OnPromptEnded(p3)
-	-- upvalues: var15 (write), var16 (write)
-	if var15 then
-		if var16.CancelActive then
-			spawn(function()
-				-- upvalues: var15 (copy), p3 (ref)
-				var15(p3)
+function OnPromptEnded(p2) --[[ Line: 639 ]]
+	-- upvalues: PromptCompletedCallback (ref), v1 (ref)
+	if PromptCompletedCallback then
+		if v1.CancelActive then
+			spawn(function() --[[ Line: 642 ]]
+				-- upvalues: PromptCompletedCallback (upval), p2 (copy)
+				PromptCompletedCallback(p2)
 			end)
 		else
-			spawn(function()
-				-- upvalues: var15 (copy)
-				var15(true)
+			spawn(function() --[[ Line: 644 ]]
+				-- upvalues: PromptCompletedCallback (upval)
+				PromptCompletedCallback(true)
 			end)
 		end
 	end
@@ -621,199 +613,199 @@ function OnPromptEnded(p3)
 	DisableControllerInput()
 end
 
-function NoOpFunc() end
+function NoOpFunc() --[[ Line: 654 ]] end
 
-function EnableControllerMovement()
-	-- upvalues: contextActionService (ref)
-	contextActionService:UnbindCoreAction("doNothingThumbstick2PromptCreator")
-	contextActionService:UnbindCoreAction("doNothingAButtonPromptCreator")
+function EnableControllerMovement() --[[ Line: 656 ]]
+	-- upvalues: ContextActionService (copy)
+	ContextActionService:UnbindCoreAction("doNothingThumbstick2PromptCreator")
+	ContextActionService:UnbindCoreAction("doNothingAButtonPromptCreator")
 end
 
-function DisableControllerMovement()
-	-- upvalues: contextActionService (ref)
-	contextActionService:BindCoreAction("doNothingThumbstick2PromptCreator", NoOpFunc, false, Enum.KeyCode.Thumbstick2)
-	contextActionService:BindCoreAction("doNothingAButtonPromptCreator", NoOpFunc, false, Enum.KeyCode.ButtonA)
+function DisableControllerMovement() --[[ Line: 661 ]]
+	-- upvalues: ContextActionService (copy)
+	ContextActionService:BindCoreAction("doNothingThumbstick2PromptCreator", NoOpFunc, false, Enum.KeyCode.Thumbstick2)
+	ContextActionService:BindCoreAction("doNothingAButtonPromptCreator", NoOpFunc, false, Enum.KeyCode.ButtonA)
 end
 
-function EnableControllerInput()
-	-- upvalues: contextActionService (ref), var16 (write), guiService (ref)
-	contextActionService:BindCoreAction("CoreScriptPromptCreatorCancel", function(_, p3, _)
-		-- upvalues: var16 (copy)
-		if p3 ~= Enum.UserInputState.Begin then return end
-		if var16.CancelActive then
+function EnableControllerInput() --[[ Line: 666 ]]
+	-- upvalues: ContextActionService (copy), v1 (ref), GuiService (copy)
+	ContextActionService:BindCoreAction("CoreScriptPromptCreatorCancel", function(_, UserInputState, _) --[[ Line: 669 ]]
+		-- upvalues: v1 (upval)
+		if UserInputState ~= Enum.UserInputState.Begin then return end
+		if v1.CancelActive then
 			OnPromptEnded(false)
 		end
 	end, false, Enum.KeyCode.ButtonB)
-	contextActionService:BindCoreAction("CoreScriptPromptCreatorSelect", function(_, p3, _)
-		-- upvalues: guiService (copy)
-		if p3 ~= Enum.UserInputState.Begin then return end
-		if guiService.SelectedCoreObject == nil then
+	ContextActionService:BindCoreAction("CoreScriptPromptCreatorSelect", function(_, UserInputState, _) --[[ Line: 682 ]]
+		-- upvalues: GuiService (upval)
+		if UserInputState ~= Enum.UserInputState.Begin then return end
+		if GuiService.SelectedCoreObject == nil then
 			SetSelectedObject()
 		end
 	end, false, Enum.KeyCode.ButtonSelect)
 end
 
-function DisableControllerInput()
-	-- upvalues: contextActionService (ref)
-	contextActionService:UnbindCoreAction("CoreScriptPromptCreatorCancel")
-	contextActionService:UnbindCoreAction("CoreScriptPromptCreatorSelect")
+function DisableControllerInput() --[[ Line: 694 ]]
+	-- upvalues: ContextActionService (copy)
+	ContextActionService:UnbindCoreAction("CoreScriptPromptCreatorCancel")
+	ContextActionService:UnbindCoreAction("CoreScriptPromptCreatorSelect")
 end
 
-function valueInTable(p3, p4)
-	for i, v in pairs(p4) do
-		if v == p3 then
+function valueInTable(p2, List): boolean --[[ Line: 699 ]]
+	for _, value in pairs(List) do
+		if value == p2 then
 			return true
 		end
 	end
 	return false
 end
 
-function SetupGamepadSelection()
-	-- upvalues: var12 (write), guiService (ref), var13 (write), var14 (write)
-	var12 = guiService.CoreGuiNavigationEnabled
-	var13 = guiService.GuiNavigationEnabled
-	var14 = guiService.AutoSelectGuiEnabled
-	guiService.SelectedCoreObject = nil
-	guiService.CoreGuiNavigationEnabled = true
-	guiService.GuiNavigationEnabled = false
-	guiService.AutoSelectGuiEnabled = false
+function SetupGamepadSelection() --[[ Line: 708 ]]
+	-- upvalues: CoreGuiNavigationEnabled (ref), GuiService (copy), GuiNavigationEnabled (ref), AutoSelectGuiEnabled (ref)
+	CoreGuiNavigationEnabled = GuiService.CoreGuiNavigationEnabled
+	GuiNavigationEnabled = GuiService.GuiNavigationEnabled
+	AutoSelectGuiEnabled = GuiService.AutoSelectGuiEnabled
+	GuiService.SelectedCoreObject = nil
+	GuiService.CoreGuiNavigationEnabled = true
+	GuiService.GuiNavigationEnabled = false
+	GuiService.AutoSelectGuiEnabled = false
 end
 
-if not promptCreatorTransientDialog then
+if not PromptCreatorTransientDialog then
 	createPromptDialog()
 	
-	local function OnInputChanged(p5)
-		-- upvalues: var6 (write), var11 (write)
-		local userInputType = Enum.UserInputType
+	local function OnInputChanged(Input) --[[ Line: 723 ]]
+		-- upvalues: Flag (ref), Flag2 (ref)
+		local UserInputType = Input.UserInputType
+		local UserInputType1 = Enum.UserInputType
 		
-		if var6 or not valueInTable(p5.UserInputType, {
-			userInputType.Gamepad1,
-			userInputType.Gamepad2,
-			userInputType.Gamepad3,
-			userInputType.Gamepad4
+		if Flag or not valueInTable(UserInputType, {
+			UserInputType1.Gamepad1,
+			UserInputType1.Gamepad2,
+			UserInputType1.Gamepad3,
+			UserInputType1.Gamepad4
 		}) then
-			var11 = false
-		elseif p5.KeyCode ~= Enum.KeyCode.Thumbstick1 and p5.KeyCode ~= Enum.KeyCode.Thumbstick2 then
-			var11 = true
-			
-			return
-		elseif math.abs(p5.Position.X) > 0.1 or math.abs(p5.Position.Z) > 0.1 or math.abs(p5.Position.Y) > 0.1 then
-			var11 = true
-			
-			return
-		end
-	end
-	
-	userInputService.InputChanged:connect(OnInputChanged)
-	userInputService.InputBegan:connect(OnInputChanged)
-	
-	local _ = function(p5)
-		-- upvalues: var2 (write), dialogModule (ref), var3 (write), var6 (write), robloxGui (ref)
-		if p5 then
-			if not var2 then
-				var2 = dialogModule.new()
-			end
-			var2:SetContent(var3)
-			var6 = true
+			Flag2 = false
+		elseif Input.KeyCode ~= Enum.KeyCode.Thumbstick1 and Input.KeyCode ~= Enum.KeyCode.Thumbstick2 then
+			Flag2 = true
 			
 			return
 		else
-			var6 = false
-			
-			if var2 then
-				var2:SetContent(nil)
+			if math.abs(Input.Position.X) > 0.1 or math.abs(Input.Position.Z) > 0.1 or math.abs(Input.Position.Y) > 0.1 then
+				Flag2 = true
+				
+				return
 			end
-			var3.Parent = robloxGui
 		end
 	end
 	
-	spawn(function()
-		-- upvalues: userInputService (ref), var2 (write), dialogModule (ref), var3 (write), var6 (write), robloxGui (ref)
-		if userInputService.VREnabled then
-			if not var2 then
-				var2 = dialogModule.new()
+	UserInputService.InputChanged:connect(OnInputChanged)
+	UserInputService.InputBegan:connect(OnInputChanged)
+	
+	local _ = function(p3) --[[ Line: 741 | Named "OnVREnabled" ]]
+		-- upvalues: NewResult (ref), DialogModule (copy), PromptDialog (ref), Flag (ref), RobloxGui (copy)
+		if p3 then
+			if not NewResult then
+				NewResult = DialogModule.new()
 			end
-			var2:SetContent(var3)
-			var6 = true
+			NewResult:SetContent(PromptDialog)
+			Flag = true
 			
 			return
 		else
-			var6 = false
+			Flag = false
 			
-			if var2 then
-				var2:SetContent(nil)
+			if NewResult then
+				NewResult:SetContent(nil)
 			end
-			var3.Parent = robloxGui
+			PromptDialog.Parent = RobloxGui
+		end
+	end
+	
+	spawn(function() --[[ Line: 757 ]]
+		-- upvalues: UserInputService (copy), NewResult (ref), DialogModule (copy), PromptDialog (ref), Flag (ref), RobloxGui (copy)
+		if UserInputService.VREnabled then
+			if not NewResult then
+				NewResult = DialogModule.new()
+			end
+			NewResult:SetContent(PromptDialog)
+			Flag = true
+			
+			return
+		else
+			Flag = false
+			
+			if NewResult then
+				NewResult:SetContent(nil)
+			end
+			PromptDialog.Parent = RobloxGui
 		end
 	end)
-	userInputService.Changed:connect(function(p5)
-		-- upvalues: userInputService (ref), var2 (write), dialogModule (ref), var3 (write), var6 (write), robloxGui (ref)
-		if p5 == "VREnabled" then
-			if userInputService.VREnabled then
-				if not var2 then
-					var2 = dialogModule.new()
+	UserInputService.Changed:connect(function(Property) --[[ Line: 761 ]]
+		-- upvalues: UserInputService (copy), NewResult (ref), DialogModule (copy), PromptDialog (ref), Flag (ref), RobloxGui (copy)
+		if Property == "VREnabled" then
+			if UserInputService.VREnabled then
+				if not NewResult then
+					NewResult = DialogModule.new()
 				end
-				var2:SetContent(var3)
-				var6 = true
+				NewResult:SetContent(PromptDialog)
+				Flag = true
 				
 				return
 			else
-				var6 = false
+				Flag = false
 				
-				if var2 then
-					var2:SetContent(nil)
+				if NewResult then
+					NewResult:SetContent(nil)
 				end
-				var3.Parent = robloxGui
+				PromptDialog.Parent = RobloxGui
 			end
 		end
 	end)
-	guiService.Changed:connect(function(p5)
-		-- upvalues: var10 (write), guiService (ref), var12 (write), var13 (write), var14 (write)
-		if var10 then
-			if p5 == "CoreGuiNavigationEnabled" then
-				if guiService.CoreGuiNavigationEnabled == true then
-					return
-				else
-					var12 = guiService.CoreGuiNavigationEnabled
-					guiService.CoreGuiNavigationEnabled = true
+	GuiService.Changed:connect(function(Property) --[[ Line: 767 ]]
+		-- upvalues: Flag1 (ref), GuiService (copy), CoreGuiNavigationEnabled (ref), GuiNavigationEnabled (ref), AutoSelectGuiEnabled (ref)
+		if Flag1 then
+			if Property == "CoreGuiNavigationEnabled" then
+				if GuiService.CoreGuiNavigationEnabled ~= true then
+					CoreGuiNavigationEnabled = GuiService.CoreGuiNavigationEnabled
+					GuiService.CoreGuiNavigationEnabled = true
 					
 					return
 				end
-			elseif p5 == "GuiNavigationEnabled" then
-				if guiService.GuiNavigationEnabled == false then
-				else
-					var13 = guiService.GuiNavigationEnabled
-					guiService.GuiNavigationEnabled = false
+			elseif Property == "GuiNavigationEnabled" then
+				if GuiService.GuiNavigationEnabled ~= false then
+					GuiNavigationEnabled = GuiService.GuiNavigationEnabled
+					GuiService.GuiNavigationEnabled = false
 					
 					return
 				end
-			elseif p5 == "AutoSelectGuiEnabled" and guiService.AutoSelectGuiEnabled ~= false then
-				var14 = guiService.AutoSelectGuiEnabled
-				guiService.AutoSelectGuiEnabled = false
+			elseif Property == "AutoSelectGuiEnabled" and GuiService.AutoSelectGuiEnabled ~= false then
+				AutoSelectGuiEnabled = GuiService.AutoSelectGuiEnabled
+				GuiService.AutoSelectGuiEnabled = false
 			end
 		end
 	end)
 end
-function t.CreatePrompt(_, p5)
-	-- upvalues: var10 (write), promptCreatorTransientDialog (ref), createPromptDialog (ref)
-	if var10 then
+function t:CreatePrompt(p3): boolean --[[ Line: 790 ]]
+	-- upvalues: Flag1 (ref), PromptCreatorTransientDialog (copy), createPromptDialog (copy)
+	if Flag1 then
 		return false
 	end
-	var10 = true
+	Flag1 = true
 	
-	if promptCreatorTransientDialog then
+	if PromptCreatorTransientDialog then
 		createPromptDialog()
 		ConnectActiveEvents()
 	end
 	SetupGamepadSelection()
-	DoCreatePrompt(p5)
+	DoCreatePrompt(p3)
 	
 	return true
 end
 
-function t.IsCurrentlyPrompting(_)
-	-- upvalues: var10 (write)
-	return var10
+function t:IsCurrentlyPrompting() --[[ Line: 806 ]]
+	-- upvalues: Flag1 (ref)
+	return Flag1
 end
 
 return t

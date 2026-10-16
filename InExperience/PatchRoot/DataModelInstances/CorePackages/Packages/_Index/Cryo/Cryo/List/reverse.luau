@@ -1,10 +1,10 @@
-﻿return function(p1)
+﻿return function(p1) --[[ Line: 5 | Named "reverse" ]]
 	local t = {}
-	local p0Count = #p1
-	local var1 = p0Count + 1
+	local CountP0 = #p1
+	local NewCountP = CountP0 + 1
 	
-	for i = 1, p0Count do
-		t[i] = p1[var1 - i]
+	for i = 1, CountP0 do
+		t[i] = p1[NewCountP - i]
 	end
 	return t
 end

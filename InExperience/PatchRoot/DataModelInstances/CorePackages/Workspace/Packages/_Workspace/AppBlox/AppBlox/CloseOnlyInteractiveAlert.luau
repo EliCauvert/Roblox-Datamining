@@ -1,24 +1,27 @@
-﻿local parent = script:FindFirstAncestor("AppBlox").Parent
-local reactModule = require(parent.React)
-local useScreenSize = require(parent.RobloxAppHooks).useScreenSize
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local UIBloxModule = require(parent.UIBlox)
-local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
+﻿local Parent = script:FindFirstAncestor("AppBlox").Parent
+local ReactModule = require(Parent.React)
+local UseScreenSizeFunction = require(Parent.RobloxAppHooks).useScreenSize
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UIBloxModule = require(Parent.UIBlox)
+local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
 
-return function(p1)
-	-- upvalues: useScreenSize (ref), useLocalization (ref), reactModule (ref), interactiveAlert (ref), buttonType (ref)
-	return reactModule.createElement(interactiveAlert, {
-		screenSize = useScreenSize(),
+return function(p1) --[[ Line: 21 ]]
+	-- upvalues: UseScreenSizeFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), InteractiveAlert (copy), ButtonType (copy)
+	local UseScreenSizeResult = UseScreenSizeFunction()
+	local UseLocalizationResult = UseLocalizationFunction({ closeButtonText = "Feature.ProfileBadges.action.close" })
+	
+	return ReactModule.createElement(InteractiveAlert, {
+		screenSize = UseScreenSizeResult,
 		title = p1.title,
 		bodyText = p1.body,
 		buttonStackInfo = {
 			buttons = {
 				{
-					buttonType = buttonType.Secondary,
+					buttonType = ButtonType.Secondary,
 					props = {
 						onActivated = p1.closeAlert,
-						text = p1.buttonText or useLocalization({ closeButtonText = "Feature.ProfileBadges.action.close" }).closeButtonText
+						text = p1.buttonText or UseLocalizationResult.closeButtonText
 					}
 				}
 			}

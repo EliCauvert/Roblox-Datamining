@@ -1,125 +1,125 @@
-﻿local runService = game:GetService("RunService")
-local httpService = game:GetService("HttpService")
-local userInputService = game:GetService("UserInputService")
-local parent = script:FindFirstAncestor("TimeToInteractiveTracker").Parent
-local dashModule = require(parent.Dash)
-local loggingProtocolModule = require(parent.LoggingProtocol)
-local default = loggingProtocolModule.default
-local var1 = require(parent.TelemetryService).EventStreamReporter.new(default)
-local isSpatial = require(parent.AppCommonLib).isSpatial
-local ttiDebugLogModule = require(script.Parent.ttiDebugLog)
-local utilModule = require(script.Parent.Util)
-local fFlagTTITrackerMemoryTrackingModule = require(script.Parent.FFlagTTITrackerMemoryTracking)
+﻿local RunService = game:GetService("RunService")
+local HttpService = game:GetService("HttpService")
+local UserInputService = game:GetService("UserInputService")
+local Parent = script:FindFirstAncestor("TimeToInteractiveTracker").Parent
+local DashModule = require(Parent.Dash)
+local LoggingProtocolModule = require(Parent.LoggingProtocol)
+local Default = LoggingProtocolModule.default
+local NewResult = require(Parent.TelemetryService).EventStreamReporter.new(Default)
+local IsSpatialFunction = require(Parent.AppCommonLib).isSpatial
+local TtiDebugLogModule = require(script.Parent.ttiDebugLog)
+local UtilModule = require(script.Parent.Util)
+local FFlagTTITrackerMemoryTrackingModule = require(script.Parent.FFlagTTITrackerMemoryTracking)
 local _ = require(script.Parent.Parent.Stores.types)
 local TTIMetricsTableName = game:DefineFastString("TTIMetricsTableName", "marketplacePerformanceMetric")
 local AXTTIAddNumElementsRendered = game:DefineFastFlag("AXTTIAddNumElementsRendered", false)
 local TTIEmitPointsEvent = game:DefineFastFlag("TTIEmitPointsEvent", false)
-local t = {
+local config = {
 	eventName = "ua_page_load_time",
 	description = "Raw per-page-load TTI event to Elasticsearch (Points) for exact-percentile PLT dashboards.",
 	links = "",
-	backends = { loggingProtocolModule.TelemetryBackends.Points },
+	backends = { LoggingProtocolModule.TelemetryBackends.Points },
 	lastUpdated = { 2026, 9, 3 }
 }
 game:DefineFastInt("TimeToInteractiveTrackerSampleRate", 0)
 game:DefineFastInt("TTIPointsEventSampleRate", 0)
 
-local function getDefaultMetadata(p1)
-	-- upvalues: userInputService (ref), isSpatial (ref), runService (ref), httpService (ref), dashModule (ref)
-	return dashModule.assign({
-		AppVersion = runService:GetRobloxVersion(),
-		UserAgent = httpService:GetUserAgent(),
-		CoreScriptVersion = runService:GetCoreScriptVersion(),
-		Platform = if isSpatial() then "VR" else tostring(userInputService:GetPlatform())
-	}, p1)
+local function getDefaultMetadata(MetaData) --[[ Line: 74 ]]
+	-- upvalues: UserInputService (copy), IsSpatialFunction (copy), RunService (copy), HttpService (copy), DashModule (copy)
+	return DashModule.assign({
+		AppVersion = RunService:GetRobloxVersion(),
+		UserAgent = HttpService:GetUserAgent(),
+		CoreScriptVersion = RunService:GetCoreScriptVersion(),
+		Platform = if IsSpatialFunction() then "VR" else tostring(UserInputService:GetPlatform())
+	}, MetaData)
 end
 
-return function(p1)
-	-- upvalues: runService (ref), getDefaultMetadata (ref), default (ref), utilModule (ref), fFlagTTITrackerMemoryTrackingModule (ref), AXTTIAddNumElementsRendered (ref), httpService (ref), var1 (ref), TTIMetricsTableName (ref), TTIEmitPointsEvent (ref), t (ref), ttiDebugLogModule (ref)
-	if math.clamp(if p1.samplingRateOverride ~= nil then game:GetFastInt("TimeToInteractiveTrackerSampleRate") else p1.samplingRateOverride, 0, 1000) < math.random(1, 1000) and not runService:IsStudio() then return end
-	local t_1 = {
+return function(p1) --[[ Line: 97 | Named "sendTTIStat" ]]
+	-- upvalues: RunService (copy), getDefaultMetadata (copy), Default (copy), UtilModule (copy), FFlagTTITrackerMemoryTrackingModule (copy), AXTTIAddNumElementsRendered (copy), HttpService (copy), NewResult (copy), TTIMetricsTableName (copy), TTIEmitPointsEvent (copy), config (copy), TtiDebugLogModule (copy)
+	if math.clamp(if p1.samplingRateOverride == nil then game:GetFastInt("TimeToInteractiveTrackerSampleRate") else p1.samplingRateOverride, 0, 1000) < math.random(1, 1000) and not RunService:IsStudio() then return end
+	local Tbl = {
 		description = "Stat to track Time-To-Interactive (TTI) latency metrics.",
 		links = "",
 		eventName = p1.statName,
 		backends = { "RobloxTelemetryStat" },
 		lastUpdated = { 2026, 1, 14 }
 	}
-	local var2 = getDefaultMetadata(p1.metaData)
+	local DefaultMetadata = getDefaultMetadata(p1.metaData)
 	
-	local function logMemoryStats(p2, p3, p4)
-		-- upvalues: t_1 (ref), default (copy), var2 (ref)
-		if p3 then
-			local cloned = table.clone(t_1)
-			cloned.eventName = p2 .. "_TotalMemoryMB"
-			default:logRobloxTelemetryStat(cloned, p3, var2)
+	local function logMemoryStats(Text, TotalMemoryMB, LuaHeapMB) --[[ Line: 134 ]]
+		-- upvalues: Tbl (copy), Default (upval), DefaultMetadata (copy)
+		if TotalMemoryMB then
+			local Copy = table.clone(Tbl)
+			Copy.eventName = Text .. "_TotalMemoryMB"
+			Default:logRobloxTelemetryStat(Copy, TotalMemoryMB, DefaultMetadata)
 		end
-		if p4 then
-			local cloned = table.clone(t_1)
-			cloned.eventName = p2 .. "_LuaHeapMB"
-			default:logRobloxTelemetryStat(cloned, p4, var2)
+		if LuaHeapMB then
+			local Copy = table.clone(Tbl)
+			Copy.eventName = Text .. "_LuaHeapMB"
+			Default:logRobloxTelemetryStat(Copy, LuaHeapMB, DefaultMetadata)
 		end
 	end
 	
-	default:logRobloxTelemetryStat(t_1, p1.deltaMs, var2)
+	Default:logRobloxTelemetryStat(Tbl, p1.deltaMs, DefaultMetadata)
 	
 	if p1.milestones then
-		for i, v in utilModule.generateMilestoneStats(p1.statName, p1.milestones) do
-			local cloned = table.clone(t_1)
-			cloned.eventName = v.eventName
-			default:logRobloxTelemetryStat(cloned, v.deltaMs, var2)
+		for _, value in UtilModule.generateMilestoneStats(p1.statName, p1.milestones) do
+			local Copy = table.clone(Tbl)
+			Copy.eventName = value.eventName
+			Default:logRobloxTelemetryStat(Copy, value.deltaMs, DefaultMetadata)
 			
-			if fFlagTTITrackerMemoryTrackingModule then
-				logMemoryStats(v.eventName, v.totalMemoryMB, v.luaHeapMB)
+			if FFlagTTITrackerMemoryTrackingModule then
+				logMemoryStats(value.eventName, value.totalMemoryMB, value.luaHeapMB)
 			end
 		end
 	end
-	if fFlagTTITrackerMemoryTrackingModule then
+	if FFlagTTITrackerMemoryTrackingModule then
 		logMemoryStats(p1.statName, p1.totalMemoryMB, p1.luaHeapMB)
 	end
-	local t_2 = { deltaMs = p1.deltaMs, metricName = p1.statName }
+	local config1 = { deltaMs = p1.deltaMs, metricName = p1.statName }
 	
 	if p1.metaData then
-		t_2.coldStart = p1.metaData.coldStart
-		t_2.category = p1.metaData.category
-		t_2.subcategory = p1.metaData.subcategory
-		t_2.page = p1.metaData.page
-		t_2.opaquePage = p1.metaData.opaquePage
+		config1.coldStart = p1.metaData.coldStart
+		config1.category = p1.metaData.category
+		config1.subcategory = p1.metaData.subcategory
+		config1.page = p1.metaData.page
+		config1.opaquePage = p1.metaData.opaquePage
 		
 		if AXTTIAddNumElementsRendered then
-			t_2.num_elements_rendered = p1.metaData.numElementsRendered
+			config1.num_elements_rendered = p1.metaData.numElementsRendered
 		end
 	end
-	local var3 = getDefaultMetadata({})
-	t_2.appVersion = var3.AppVersion
-	t_2.userAgent = var3.UserAgent
-	t_2.coreScriptVersion = var3.CoreScriptVersion
-	t_2.platform = var3.Platform
-	t_2.total_memory_mb = p1.totalMemoryMB
-	t_2.lua_heap_mb = p1.luaHeapMB
+	local DefaultMetadata1 = getDefaultMetadata({})
+	config1.appVersion = DefaultMetadata1.AppVersion
+	config1.userAgent = DefaultMetadata1.UserAgent
+	config1.coreScriptVersion = DefaultMetadata1.CoreScriptVersion
+	config1.platform = DefaultMetadata1.Platform
+	config1.total_memory_mb = p1.totalMemoryMB
+	config1.lua_heap_mb = p1.luaHeapMB
 	
 	if p1.milestones then
-		local var4 = utilModule.milestonesToProto(p1.milestones)
-		local ok, status = pcall(function()
-			-- upvalues: httpService (copy), var4 (ref)
-			return httpService:JSONEncode(var4)
+		local MilestonesToProtoResult = UtilModule.milestonesToProto(p1.milestones)
+		local Success, Result = pcall(function() --[[ Line: 203 ]]
+			-- upvalues: HttpService (upval), MilestonesToProtoResult (copy)
+			return HttpService:JSONEncode(MilestonesToProtoResult)
 		end)
 		
-		if ok then
-			t_2.milestones_json = status
+		if Success then
+			config1.milestones_json = Result
 		end
 	end
-	var1:sendTelemetryEvent(TTIMetricsTableName, TTIMetricsTableName, t_2)
+	NewResult:sendTelemetryEvent(TTIMetricsTableName, TTIMetricsTableName, config1)
 	
-	if TTIEmitPointsEvent and (math.random(1, 1000) <= math.clamp(game:GetFastInt("TTIPointsEventSampleRate"), 0, 1000) or runService:IsStudio()) then
-		local cloned = table.clone(t_2)
-		cloned.milestones_json = nil
+	if TTIEmitPointsEvent and (math.random(1, 1000) <= math.clamp(game:GetFastInt("TTIPointsEventSampleRate"), 0, 1000) or RunService:IsStudio()) then
+		local Copy = table.clone(config1)
+		Copy.milestones_json = nil
 		
 		if p1.milestones then
-			for i, v in utilModule.milestonesToPointsFields(p1.milestones) do
-				cloned[i] = v
+			for i, value1 in UtilModule.milestonesToPointsFields(p1.milestones) do
+				Copy[i] = value1
 			end
 		end
-		default:logRobloxTelemetryEvent(t, nil, cloned)
+		Default:logRobloxTelemetryEvent(config, nil, Copy)
 	end
-	ttiDebugLogModule("sendTTIStat", p1.statName, p1.deltaMs, t_2, p1.milestones)
+	TtiDebugLogModule("sendTTIStat", p1.statName, p1.deltaMs, config1, p1.milestones)
 end

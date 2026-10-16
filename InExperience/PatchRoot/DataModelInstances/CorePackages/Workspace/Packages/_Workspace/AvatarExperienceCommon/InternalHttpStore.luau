@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.InternalHttpStore.InternalHttpStore)
+﻿return (require(script.Parent.Parent.Parent._Index.InternalHttpStore.InternalHttpStore))

@@ -1,36 +1,35 @@
-﻿local vrCommon = script:FindFirstAncestor("VrCommon")
-local parent = vrCommon.Parent
+﻿local VrCommon = script:FindFirstAncestor("VrCommon")
 local VRService = game:GetService("VRService")
-local runService = game:GetService("RunService")
-local guiService = game:GetService("GuiService")
-local coreGuiService = game:GetService("CoreGui")
-local VRUtilModule = require(vrCommon.VRUtil)
-local create = require(parent.AppCommonLib).Create
-local text = "Panel3DRenderStep-" .. game:GetService("HttpService"):GenerateGUID()
-local vector2 = Vector2.new(0, 0)
-local cFrame = CFrame.new(0, -0.5, -5.5)
-local cFrame_1 = CFrame.new(0, 0, -3)
-local var1 = CFrame.new(0, 0, -0.1) * CFrame.Angles(0, 3.14159265359, 0)
-local var2 = nil
-local var3 = nil
-local var4 = 1e999
-local var5 = nil
-local var6 = vector2
-local t = {}
-local var7 = create("ImageLabel")({
+local RunService = game:GetService("RunService")
+local GuiService = game:GetService("GuiService")
+local CoreGui = game:GetService("CoreGui")
+local VRUtilModule = require(VrCommon.VRUtil)
+local CreateFunction = require(VrCommon.Parent.AppCommonLib).Create
+local Text = "Panel3DRenderStep-" .. game:GetService("HttpService"):GenerateGUID()
+local _Vector2 = Vector2.new(0, 0)
+local _CFrame = CFrame.new(0, -0.5, -5.5)
+local _CFrame1 = CFrame.new(0, 0, -3)
+local v1 = CFrame.new(0, 0, -0.1) * CFrame.Angles(0, 3.141592653589793, 0)
+local ModalPanel = nil
+local ModalPanel1 = nil
+local LookAtDistance = 1e999
+local v2 = nil
+local CursorPos: Vector2 = _Vector2
+local NewResults = {}
+local Frame = CreateFunction("ImageLabel")({
 	Image = "rbxasset://textures/Cursors/Gamepad/Pointer.png",
 	BackgroundTransparency = 1,
 	ZIndex = 1000000000,
 	ImageColor3 = Color3.new(0, 1, 0)
 })
-local var8 = create("Folder")({ Name = "VRCorePanelParts", Archivable = false })
-local var9 = create("Folder")({ Name = "VRCoreEffectParts", Archivable = false })
-pcall(function()
-	-- upvalues: guiService (ref), var8 (ref), var9 (ref)
-	guiService.CoreGuiFolder = var8
-	guiService.CoreEffectFolder = var9
+local Parent = CreateFunction("Folder")({ Name = "VRCorePanelParts", Archivable = false })
+local CoreEffectFolder = CreateFunction("Folder")({ Name = "VRCoreEffectParts", Archivable = false })
+pcall(function() --[[ Line: 57 ]]
+	-- upvalues: GuiService (copy), Parent (copy), CoreEffectFolder (copy)
+	GuiService.CoreGuiFolder = Parent
+	GuiService.CoreEffectFolder = CoreEffectFolder
 end)
-local t_1 = {
+local Panel3DModule = {
 	Type = {
 		None = 0,
 		Standard = 1,
@@ -42,81 +41,83 @@ local t_1 = {
 		PositionLocked = 7,
 		UIManagerManaged = 8
 	},
-	OnPanelClosed = create("BindableEvent")({ Name = "OnPanelClosed" }),
-	GetHeadLookXZ = function(p1)
-		-- upvalues: VRService (ref)
-		local headUserCFrame = VRService:GetUserCFrame(Enum.UserCFrame.Head)
-		local lookVector = headUserCFrame.lookVector
-		local cframe = CFrame.Angles(0, math.atan2(-lookVector.Z, lookVector.X) - 1.570796326795, 0)
+	OnPanelClosed = CreateFunction("BindableEvent")({ Name = "OnPanelClosed" }),
+	GetHeadLookXZ = function(p1): CFrame --[[ Line: 81 ]]
+		-- upvalues: VRService (copy)
+		local UserCFrame = VRService:GetUserCFrame(Enum.UserCFrame.Head)
+		local LookVector = UserCFrame.lookVector
+		local _CFrame = CFrame.Angles(0, math.atan2(-LookVector.Z, LookVector.X) - 1.5707963267948966, 0)
 		
 		if p1 then
-			cframe += headUserCFrame.p
+			_CFrame += UserCFrame.p
 		end
-		return cframe
+		return _CFrame
 	end,
-	FindContainerOf = function(p1)
-		-- upvalues: t (ref)
-		for i, v in pairs(t) do
-			if not v.gui or not v.gui:IsAncestorOf(p1) then
-				for i_1, v_1 in pairs(v.subpanels) do
-					if v_1.gui and v_1.gui:IsAncestorOf(p1) then
-						return v
-					end
+	FindContainerOf = function(Descendant) --[[ Line: 93 ]]
+		-- upvalues: NewResults (copy)
+		for _, newResult in pairs(NewResults) do
+			if newResult.gui and newResult.gui:IsAncestorOf(Descendant) then
+				return newResult
+			end
+			for _, subpanel in pairs(newResult.subpanels) do
+				if subpanel.gui and subpanel.gui:IsAncestorOf(Descendant) then
+					return newResult
 				end
 			end
-			return v
 		end
 		return nil
 	end,
-	SetModalPanel = function(value)
-		-- upvalues: var2 (write), var3 (write)
-		if var2 == value then return end
-		if var2 then
-			var2:OnModalChanged(false)
+	SetModalPanel = function(ModalPanel2) --[[ Line: 107 ]]
+		-- upvalues: ModalPanel (ref), ModalPanel1 (ref)
+		if ModalPanel == ModalPanel2 then return end
+		if ModalPanel then
+			ModalPanel:OnModalChanged(false)
 		end
-		if value then
-			value:OnModalChanged(true)
+		if ModalPanel2 then
+			ModalPanel2:OnModalChanged(true)
 		end
-		var3 = var2
-		var2 = value
+		ModalPanel1 = ModalPanel
+		ModalPanel = ModalPanel2
 	end,
-	RaycastOntoPanel = function(p2, p3, p4, p5)
-		-- upvalues: VRUtilModule (ref)
-		local size = p2.Size
-		local z = size.Z
-		local x = size.X
-		local y = size.Y
-		local renderCFrame = p2:GetRenderCFrame()
-		local lookVector = renderCFrame.lookVector
-		local var10 = VRUtilModule.RayPlaneIntersection(p5, lookVector, renderCFrame.p + lookVector * z * 0.5)
+	RaycastOntoPanel = function(Part, Frame: Frame, Frame1: Frame, p1) --[[ Line: 121 ]]
+		-- upvalues: VRUtilModule (copy)
+		local Size = Part.Size
+		local X: number = Size.X
+		local Y = Size.Y
+		local RenderCFrame = Part:GetRenderCFrame()
+		local LookVector = RenderCFrame.lookVector
+		local RayPlaneIntersectionResult = VRUtilModule.RayPlaneIntersection(p1, LookVector, RenderCFrame.p + LookVector * Size.Z * 0.5)
 		
-		if not var10 then
+		if RayPlaneIntersectionResult then
+			local NewVector = RenderCFrame:pointToObjectSpace(RayPlaneIntersectionResult) * vector.create(-1, 1, 1) + Vector3.new(X / 2, -Y / 2, 0)
+			local _Vector2 = Vector2.new(NewVector.X / X * Frame.AbsoluteSize.X, NewVector.Y / Y * -Frame.AbsoluteSize.Y)
+			local X1 = _Vector2.X
+			local Y1 = _Vector2.Y
+			local X11 = Frame1.AbsolutePosition.X
+			local Y11 = Frame1.AbsolutePosition.Y
+			local X2 = Frame1.AbsoluteSize.X
+			local Y2 = Frame1.AbsoluteSize.Y
+			
+			return RayPlaneIntersectionResult, NewVector, _Vector2, Frame.Enabled and X11 <= X1 and X1 <= X11 + X2 and Y11 <= Y1 and Y1 <= Y11 + Y2 or false
+		else
 			return nil, nil, nil, false
 		end
-		local var11 = renderCFrame:pointToObjectSpace(var10) * Vector3.new(-1, 1, 1) + Vector3.new(x / 2, -y / 2, 0)
-		local vector2 = Vector2.new(var11.X / x * p3.AbsoluteSize.X, var11.Y / y * -p3.AbsoluteSize.Y)
-		local x_1 = vector2.X
-		local y_1 = vector2.Y
-		local x_2 = p4.AbsolutePosition.X
-		local y_2 = p4.AbsolutePosition.Y
-		
-		return var10, var11, vector2, if p3.Enabled and x_2 <= x_1 and (x_1 <= x_2 + p4.AbsoluteSize.X and y_2 <= y_1) and y_1 <= y_2 + p4.AbsoluteSize.Y then true else false
 	end
 }
-local t_2 = {}
-t_2.__index = t_2
+local Module = {}
+Module.__index = Module
 
-function t_2.new(p2)
-	-- upvalues: t_1 (ref), t (ref), t_2 (ref)
-	local t_3 = {
-		name = p2,
+function Module.new(Name) --[[ Line: 169 ]]
+	-- upvalues: Panel3DModule (copy), NewResults (copy), Module (copy)
+	local config = {
+		name = Name,
 		part = false,
 		gui = false,
 		width = 1,
 		height = 1,
 		isVisible = false,
 		isEnabled = false,
-		panelType = t_1.Type.None,
+		panelType = Panel3DModule.Type.None,
 		pixelScale = 1,
 		showCursor = true,
 		canFade = true,
@@ -148,43 +149,43 @@ function t_2.new(p2)
 		lerpInitialSize = Vector2.new(0, 0),
 		FollowView = true,
 		LastFollowCF = nil,
-		LastCameraPos = Vector3.new(0, 0, 0),
+		LastCameraPos = vector.create(0, 0, 0),
 		wristTargetPosition = Vector3.new()
 	}
 	
-	if t[p2] then
-		error("A panel by the name of " .. p6 .. " already exists.")
+	if NewResults[Name] then
+		error("A panel by the name of " .. Name .. " already exists.")
 	end
-	t[p2] = t_3
+	NewResults[Name] = config
 	
-	return setmetatable(t_3, t_2)
+	return (setmetatable(config, Module))
 end
 
-function t_2:GetPart()
-	-- upvalues: create (ref), var8 (ref)
+function Module:GetPart() --[[ Line: 232 ]]
+	-- upvalues: CreateFunction (copy), Parent (copy)
 	if not self.part then
-		self.part = create("Part")({
+		self.part = CreateFunction("Part")({
 			Transparency = 1,
 			CanCollide = false,
 			CanTouch = false,
 			Anchored = true,
-			Size = Vector3.new(1, 1, 0.20000000298),
+			Size = vector.create(1, 1, 0.20000000298023224),
 			Name = self.name,
-			Parent = var8
+			Parent = Parent
 		})
 	end
 	return self.part
 end
 
-function t_2:GetGUI()
-	-- upvalues: create (ref), coreGuiService (ref)
+function Module:GetGUI() --[[ Line: 250 ]]
+	-- upvalues: CreateFunction (copy), CoreGui (copy)
 	if not self.gui then
-		self.gui = create("SurfaceGui")({
+		self.gui = CreateFunction("SurfaceGui")({
 			Archivable = false,
 			Active = true,
 			ToolPunchThroughDistance = 1000,
 			AlwaysOnTop = true,
-			Parent = coreGuiService,
+			Parent = CoreGui,
 			Name = self.name,
 			Adornee = self:GetPart(),
 			CanvasSize = self.CanvasSize or Vector2.new(1000, 1000),
@@ -194,135 +195,136 @@ function t_2:GetGUI()
 	return self.gui
 end
 
-function t_2:FindHoveredGuiElement(p2)
-	local x = self.lookAtPixel.X
-	local y = self.lookAtPixel.Y
+function Module:FindHoveredGuiElement(Frames) --[[ Line: 268 ]]
+	local X = self.lookAtPixel.X
+	local Y = self.lookAtPixel.Y
 	
-	for i, v in pairs(p2) do
-		local absolutePosition = v.AbsolutePosition
-		local var10 = v.AbsolutePosition + v.AbsoluteSize
+	for i, frame in pairs(Frames) do
+		local AbsolutePosition = frame.AbsolutePosition
+		local NewAbsolutePosition = frame.AbsolutePosition + frame.AbsoluteSize
 		
-		if absolutePosition.X <= x and x <= var10.X and (absolutePosition.Y <= y and y <= var10.Y) then
-			return v, i
+		if AbsolutePosition.X <= X and X <= NewAbsolutePosition.X and AbsolutePosition.Y <= Y and Y <= NewAbsolutePosition.Y then
+			return frame, i
 		end
 	end
 end
 
-function t_2:SetPartCFrame(p3)
-	-- upvalues: var1 (ref)
-	self:GetPart().CFrame = p3 * var1
+function Module:SetPartCFrame(ScaledLocalCF) --[[ Line: 282 ]]
+	-- upvalues: v1 (copy)
+	self:GetPart().CFrame = ScaledLocalCF * v1
 end
 
-function t_2:SetEnabled(p3)
-	-- upvalues: var8 (ref)
-	if self.isEnabled == p3 then return end
-	self.isEnabled = p3
+function Module:SetEnabled(IsEnabled) --[[ Line: 286 ]]
+	-- upvalues: Parent (copy)
+	if self.isEnabled == IsEnabled then return end
+	self.isEnabled = IsEnabled
 	
-	if p3 then
-		self:GetPart().Parent = var8
+	if IsEnabled then
+		self:GetPart().Parent = Parent
 		self:GetGUI().Enabled = true
 		
-		for i, v in pairs(self.subpanels) do
-			v:SetEnabled(v:GetEnabled())
+		for _, subpanel in pairs(self.subpanels) do
+			subpanel:SetEnabled(subpanel:GetEnabled())
 		end
 	else
 		self:GetPart().Parent = nil
 		self:GetGUI().Enabled = false
 		
-		for i, v in pairs(self.subpanels) do
-			v:SetEnabled(v:GetEnabled())
+		for _, subpanel1 in pairs(self.subpanels) do
+			subpanel1:SetEnabled(subpanel1:GetEnabled())
 		end
 	end
-	self:OnEnabled(p3)
+	self:OnEnabled(IsEnabled)
 end
 
-function t_2:StartLerp(endValue)
-	-- upvalues: t_1 (ref)
-	if self.panelType == t_1.Type.UIManagerManaged then
+function Module:StartLerp(p1) --[[ Line: 309 ]]
+	-- upvalues: Panel3DModule (copy)
+	if self.panelType ~= Panel3DModule.Type.UIManagerManaged then
+		self.lerpInitialCF = self:GetPart().CFrame * CFrame.new(0, -1.5, 0)
+		self.lerpTime = 1
+		self.lerpInitialSize = Vector2.new(self.width, self.height)
+		self.lerpScaleSize = p1 and p1 or Vector2.new(0, 0)
+		
 		return
 	end
-	self.lerpInitialCF = self:GetPart().CFrame * CFrame.new(0, -1.5, 0)
-	self.lerpTime = 1
-	self.lerpInitialSize = Vector2.new(self.width, self.height)
-	self.lerpScaleSize = endValue or Vector2.new(0, 0)
 end
 
-function t_2:EvaluatePositioning(p4, p5, p6, p7)
-	-- upvalues: t_1 (ref), cFrame (ref), VRService (ref), cFrame_1 (ref), VRUtilModule (ref)
-	if self.panelType == t_1.Type.UIManagerManaged then return end
-	if self.panelType == t_1.Type.Fixed then
-		self:SetPartCFrame(p4 * (self.localCF - self.localCF.p + self.localCF.p * workspace.CurrentCamera.HeadScale))
-	elseif self.panelType == t_1.Type.HorizontalFollow then
-		self:SetPartCFrame(p4 * (CFrame.new(p6.p, p6.p + p6.lookVector * Vector3.new(1, 0, 1)) * self.angleFromForward * self.angleFromHorizon * CFrame.new(0, 0, workspace.CurrentCamera.HeadScale * -self.distance)))
-	elseif self.panelType == t_1.Type.FixedToHead then
-		self:SetPartCFrame(p5 * (self.localCF - self.localCF.p + self.localCF.p * workspace.CurrentCamera.HeadScale))
-	elseif self.panelType == t_1.Type.Standard then
+function Module:EvaluatePositioning(p1, p2, p3, p4: number) --[[ Line: 320 ]]
+	-- upvalues: Panel3DModule (copy), _CFrame (copy), VRService (copy), _CFrame1 (copy), VRUtilModule (copy)
+	if self.panelType == Panel3DModule.Type.UIManagerManaged then return end
+	if self.panelType == Panel3DModule.Type.Fixed then
+		self:SetPartCFrame(p1 * (self.localCF - self.localCF.p + self.localCF.p * workspace.CurrentCamera.HeadScale))
+	elseif self.panelType == Panel3DModule.Type.HorizontalFollow then
+		self:SetPartCFrame(p1 * (CFrame.new(p3.p, p3.p + p3.lookVector * vector.create(1, 0, 1)) * self.angleFromForward * self.angleFromHorizon * CFrame.new(0, 0, workspace.CurrentCamera.HeadScale * -self.distance)))
+	elseif self.panelType == Panel3DModule.Type.FixedToHead then
+		self:SetPartCFrame(p2 * (self.localCF - self.localCF.p + self.localCF.p * workspace.CurrentCamera.HeadScale))
+	elseif self.panelType == Panel3DModule.Type.Standard then
 		if self.needsPositionUpdate or self.alwaysUpdatePosition then
 			self.needsPositionUpdate = false
-			self.originCF = t_1.GetHeadLookXZ(true) * CFrame.new(cFrame.Position * workspace.CurrentCamera.HeadScale)
+			self.originCF = Panel3DModule.GetHeadLookXZ(true) * CFrame.new(_CFrame.Position * workspace.CurrentCamera.HeadScale)
 		end
-		self:SetPartCFrame(p4 * self.originCF * self.localCF)
-	elseif self.panelType == t_1.Type.NewStandard then
+		self:SetPartCFrame(p1 * self.originCF * self.localCF)
+	elseif self.panelType == Panel3DModule.Type.NewStandard then
 		if self.needsPositionUpdate or self.alwaysUpdatePosition then
 			self.needsPositionUpdate = false
-			self.originCF = VRService:GetUserCFrame(Enum.UserCFrame.Head) * CFrame.new(cFrame_1.Position * workspace.CurrentCamera.HeadScale)
+			self.originCF = VRService:GetUserCFrame(Enum.UserCFrame.Head) * CFrame.new(_CFrame1.Position * workspace.CurrentCamera.HeadScale)
 		end
-		self:SetPartCFrame(p4 * self.originCF * self.localCF)
-	elseif self.panelType == t_1.Type.WristView then
+		self:SetPartCFrame(p1 * self.originCF * self.localCF)
+	elseif self.panelType == Panel3DModule.Type.WristView then
 		if VRService:GetUserCFrameEnabled(Enum.UserCFrame.LeftHand) then
 			if self.needsPositionUpdate or self.alwaysUpdatePosition then
 				self.needsPositionUpdate = false
 				self.originCF = CFrame.new(VRService:GetUserCFrame(Enum.UserCFrame.LeftHand).Position * workspace.CurrentCamera.HeadScale)
 			end
-			local var11 = p4 * VRService:GetUserCFrame(Enum.UserCFrame.Head)
-			local position = (p4 * self.originCF).Position
+			local ScaledUserCFrame = p1 * VRService:GetUserCFrame(Enum.UserCFrame.Head)
+			local Position = (p1 * self.originCF).Position
 			
 			if self.distance > 0 then
-				local vector3 = Vector3.new(position.x, var11.Position.y - 0.33, position.z)
-				position = var11.Position + (vector3 - var11.Position).Unit * math.clamp((vector3 - var11.Position).Magnitude, self.distance - 0.5, self.distance + 0.5)
+				local _Vector3 = Vector3.new(Position.x, ScaledUserCFrame.Position.y - 0.33, Position.z)
+				Position = ScaledUserCFrame.Position + (_Vector3 - ScaledUserCFrame.Position).Unit * math.clamp((_Vector3 - ScaledUserCFrame.Position).Magnitude, self.distance - 0.5, self.distance + 0.5)
 			end
-			self:GetPart().CFrame = CFrame.new(position, Vector3.new(var11.Position.x, position.y, var11.Position.z))
+			self:GetPart().CFrame = CFrame.new(Position, (Vector3.new(ScaledUserCFrame.Position.x, Position.y, ScaledUserCFrame.Position.z)))
 		else
-			self:SetPartCFrame(p4 * (self.localCF - self.localCF.p + self.localCF.p * workspace.CurrentCamera.HeadScale))
+			self:SetPartCFrame(p1 * (self.localCF - self.localCF.p + self.localCF.p * workspace.CurrentCamera.HeadScale))
 		end
-	elseif self.panelType == t_1.Type.PositionLocked then
-		local userCFrameWorldSpace = VRUtilModule.GetUserCFrameWorldSpace(Enum.UserCFrame.Head)
+	elseif self.panelType == Panel3DModule.Type.PositionLocked then
+		local UserCFrameWorldSpace = VRUtilModule.GetUserCFrameWorldSpace(Enum.UserCFrame.Head)
 		
 		if not self.LastFollowCF then
-			self.LastFollowCF = userCFrameWorldSpace
+			self.LastFollowCF = UserCFrameWorldSpace
 		end
-		if (self.LastCameraPos - p4.Position).Magnitude > 0.1 then
-			self.LastFollowCF = userCFrameWorldSpace
+		if (self.LastCameraPos - p1.Position).Magnitude > 0.1 then
+			self.LastFollowCF = UserCFrameWorldSpace
 		end
-		self.LastCameraPos = p4.Position
+		self.LastCameraPos = p1.Position
 		
-		if self.LastFollowCF.LookVector:Dot(userCFrameWorldSpace.LookVector) < 0.85 then
+		if self.LastFollowCF.LookVector:Dot(UserCFrameWorldSpace.LookVector) < 0.85 then
 			self.FollowView = true
-		elseif self.LastFollowCF.LookVector:Dot(userCFrameWorldSpace.LookVector) > 0.99 then
+		elseif self.LastFollowCF.LookVector:Dot(UserCFrameWorldSpace.LookVector) > 0.99 then
 			self.FollowView = false
 		end
 		if self.FollowView then
-			self.LastFollowCF = self.LastFollowCF:Lerp(userCFrameWorldSpace, 0.1)
+			self.LastFollowCF = self.LastFollowCF:Lerp(UserCFrameWorldSpace, 0.1)
 		end
-		local var12 = userCFrameWorldSpace.Position + self.LastFollowCF.LookVector * (self.distance * workspace.CurrentCamera.HeadScale + 0.1)
-		var12 = Vector3.new(var12.X, userCFrameWorldSpace.Position.Y - 0.5 * workspace.CurrentCamera.HeadScale, var12.Z)
-		self:GetPart().CFrame = CFrame.new(var12, Vector3.new(userCFrameWorldSpace.Position.x, var12.y, userCFrameWorldSpace.Position.z))
+		local NewPosition = UserCFrameWorldSpace.Position + self.LastFollowCF.LookVector * (self.distance * workspace.CurrentCamera.HeadScale + 0.1)
+		local _Vector3 = Vector3.new(NewPosition.X, UserCFrameWorldSpace.Position.Y - 0.5 * workspace.CurrentCamera.HeadScale, NewPosition.Z)
+		self:GetPart().CFrame = CFrame.new(_Vector3, (Vector3.new(UserCFrameWorldSpace.Position.x, _Vector3.y, UserCFrameWorldSpace.Position.z)))
 	end
 	if self.lerpInitialCF and self.lerpTime > 0 then
-		local cFrame_2 = self:GetPart().CFrame
-		self.lerpTime -= p7 * 4
-		local clampedValue = math.clamp(1 - self.lerpTime, 0, 1)
-		self:GetPart().CFrame = self.lerpInitialCF:Lerp(cFrame_2, clampedValue)
+		local _CFrame2 = self:GetPart().CFrame
+		self.lerpTime -= p4 * 4
+		local ClampedValue = math.clamp(1 - self.lerpTime, 0, 1)
+		self:GetPart().CFrame = self.lerpInitialCF:Lerp(_CFrame2, ClampedValue)
 		
 		if self.lerpScaleSize.x > 0 or self.lerpScaleSize.y > 0 then
-			local lerpScaleSize = self.lerpInitialSize:Lerp(self.lerpScaleSize, clampedValue)
-			self:ResizeStuds(lerpScaleSize.x, lerpScaleSize.y, self.pixelsPerStud)
+			local Interpolated = self.lerpInitialSize:Lerp(self.lerpScaleSize, ClampedValue)
+			self:ResizeStuds(Interpolated.x, Interpolated.y, self.pixelsPerStud)
 		end
 	end
 end
 
-function t_2:SetLookedAt(p4)
-	if not self.isLookedAt and p4 then
+function Module:SetLookedAt(p1) --[[ Line: 462 ]]
+	if not self.isLookedAt and p1 then
 		self.isLookedAt = true
 		self:OnMouseEnter(self.lookAtPixel.X, self.lookAtPixel.Y)
 		
@@ -331,82 +333,80 @@ function t_2:SetLookedAt(p4)
 			
 			return
 		end
-	elseif self.isLookedAt and not p4 then
+	elseif self.isLookedAt and not p1 then
 		self.isLookedAt = false
 		self:OnMouseLeave(self.lookAtPixel.X, self.lookAtPixel.Y)
 	end
 end
 
-function t_2:EvaluateGaze(p4, p5, _, _, p6)
-	-- upvalues: vector2 (ref), t_1 (ref), var6 (write), var5 (write), VRService (ref), var4 (write)
+function Module:EvaluateGaze(p1, p2, _, _, p3) --[[ Line: 475 ]]
+	-- upvalues: _Vector2 (copy), Panel3DModule (copy), CursorPos (ref), v2 (ref), VRService (copy), LookAtDistance (ref)
 	self.isClosest = false
-	self.lookAtPixel = vector2
+	self.lookAtPixel = _Vector2
 	self.lookAtDistance = 1e999
-	local var11 = nil
-	local var12 = 0
+	local v3 = nil
+	local DepthOffset = 0
 	
-	for i, v in pairs(self.subpanels) do
-		if v.part and v.guiElement then
-			local var13, _, var14, var15 = t_1.RaycastOntoPanel(v.part, v.gui, v.guiElement, p6)
+	for _, subpanel in pairs(self.subpanels) do
+		if subpanel.part and subpanel.guiElement then
+			local RaycastOntoPanelResult, _, RaycastOntoPanelResult3, RaycastOntoPanelResult4 = Panel3DModule.RaycastOntoPanel(subpanel.part, subpanel.gui, subpanel.guiElement, p3)
 			
-			if var13 then
-				v.lookAtPixel = var14
-				v.cursorPos = var14
+			if RaycastOntoPanelResult then
+				subpanel.lookAtPixel = RaycastOntoPanelResult3
+				subpanel.cursorPos = RaycastOntoPanelResult3
 				
-				if var15 and var12 < v.depthOffset then
-					var11 = v
-					var12 = v.depthOffset
+				if RaycastOntoPanelResult4 and DepthOffset < subpanel.depthOffset then
+					v3 = subpanel
+					DepthOffset = subpanel.depthOffset
 				end
 			end
 		end
 	end
-	if var11 and var11.depthOffset > 0 then
-		var6 = var11.cursorPos
-		var5 = var11
+	if v3 and v3.depthOffset > 0 then
+		CursorPos = v3.cursorPos
+		v2 = v3
 		
-		for i_1, v_1 in pairs(self.subpanels) do
-			if v_1 ~= var11 then
-				v_1:SetLookedAt(false)
+		for _, subpanel1 in pairs(self.subpanels) do
+			if subpanel1 ~= v3 then
+				subpanel1:SetLookedAt(false)
 			end
 		end
-		var11:SetLookedAt(true)
+		v3:SetLookedAt(true)
 	end
-	if self.panelType == t_1.Type.WristView then
+	if self.panelType == Panel3DModule.Type.WristView then
 		self.isWristHeldUp = false
-		local leftHandUserCFrame = VRService:GetUserCFrame(Enum.UserCFrame.LeftHand)
-		local var16 = p4 * CFrame.new(leftHandUserCFrame.Position * workspace.CurrentCamera.HeadScale)
+		local UserCFrame = VRService:GetUserCFrame(Enum.UserCFrame.LeftHand)
+		local v4 = p1 * CFrame.new(UserCFrame.Position * workspace.CurrentCamera.HeadScale)
 		
 		if self.distance == 0 then
-			local var17 = p4 * VRService:GetUserCFrame(Enum.UserCFrame.Head)
-			local position = var16.Position
-			local vector3 = Vector3.new(position.x, var17.Position.y - 0.33, position.z)
-			self.isWristHeldUp = (var17.Position + (vector3 - var17.Position).Unit * math.clamp((vector3 - var17.Position).Magnitude, 0.5, 1) - var16.Position).Magnitude < 0.25
+			local ScaledUserCFrame = p1 * VRService:GetUserCFrame(Enum.UserCFrame.Head)
+			local Position = v4.Position
+			local _Vector3 = Vector3.new(Position.x, ScaledUserCFrame.Position.y - 0.33, Position.z)
+			self.isWristHeldUp = (ScaledUserCFrame.Position + (_Vector3 - ScaledUserCFrame.Position).Unit * math.clamp((_Vector3 - ScaledUserCFrame.Position).Magnitude, 0.5, 1) - v4.Position).Magnitude < 0.25
 		else
-			local rightHandUserCFrame = VRService:GetUserCFrame(Enum.UserCFrame.RightHand)
+			local UserCFrame1 = VRService:GetUserCFrame(Enum.UserCFrame.RightHand)
 			
-			if (leftHandUserCFrame.Position - (rightHandUserCFrame.Position + rightHandUserCFrame.LookVector * rightHandUserCFrame.LookVector:Dot(leftHandUserCFrame.Position - rightHandUserCFrame.Position))).Magnitude < 0.5 then
+			if (UserCFrame.Position - (UserCFrame1.Position + UserCFrame1.LookVector * UserCFrame1.LookVector:Dot(UserCFrame.Position - UserCFrame1.Position))).Magnitude < 0.5 then
 				self.isWristHeldUp = true
 			end
 		end
 	end
 	local GUI = self:GetGUI()
-	local var18, _, var19, var20 = t_1.RaycastOntoPanel(self:GetPart(), GUI, GUI, p6)
+	local RaycastOntoPanelResult1, _, RaycastOntoPanelResult3_1, RaycastOntoPanelResult4_1 = Panel3DModule.RaycastOntoPanel(self:GetPart(), GUI, GUI, p3)
 	
-	if var18 then
+	if RaycastOntoPanelResult1 then
 		self.isOffscreen = false
-		self.lookAtPixel = var19
-		self.cursorPos = var19
-		self:SetLookedAt(var20)
-		self.lookAtDistance = (var18 - p5.p).magnitude
+		self.lookAtPixel = RaycastOntoPanelResult3_1
+		self.cursorPos = RaycastOntoPanelResult3_1
+		self:SetLookedAt(RaycastOntoPanelResult4_1)
+		self.lookAtDistance = (RaycastOntoPanelResult1 - p2.p).magnitude
 		
-		if self.isLookedAt and self.lookAtDistance < var4 and self.showCursor then
-			var4 = self.lookAtDistance
-			var5 = self
+		if self.isLookedAt and self.lookAtDistance < LookAtDistance and self.showCursor then
+			LookAtDistance = self.lookAtDistance
+			v2 = self
 			
-			if var11 then
-				return
-			else
-				var6 = self.cursorPos
+			if not v3 then
+				CursorPos = self.cursorPos
 				
 				return
 			end
@@ -421,248 +421,261 @@ function t_2:EvaluateGaze(p4, p5, _, _, p6)
 	end
 end
 
-function t_2:EvaluateTransparency()
-	-- upvalues: t_1 (ref)
-	if self.panelType == t_1.Type.UIManagerManaged then
-		self.transparency = 1
-		
-		return
-	elseif self.forceShowUntilLookedAt or not self.canFade or tick() < self.forceShowUntilTick then
-		self.transparency = 0
-		
-		return
-	elseif self.isLookedAt then
-		self.transparency = 0
-		
-		return
-	elseif self.isOffscreen then
+function Module:EvaluateTransparency() --[[ Line: 581 ]]
+	-- upvalues: Panel3DModule (copy)
+	if self.panelType == Panel3DModule.Type.UIManagerManaged then
 		self.transparency = 1
 		
 		return
 	end
-	self.transparency = self:CalculateTransparency()
+	if self.forceShowUntilLookedAt or not self.canFade or tick() < self.forceShowUntilTick then
+		self.transparency = 0
+		
+		return
+	end
+	if self.isLookedAt then
+		self.transparency = 0
+		
+		return
+	end
+	if self.isOffscreen then
+		self.transparency = 1
+		
+		return
+	else
+		self.transparency = self:CalculateTransparency()
+	end
 end
 
-function t_2:Update(p7, p8, p9, p10, p11, p12)
-	-- upvalues: var2 (write)
+function Module:Update(p4, p5, p6, p7, p8, p9) --[[ Line: 607 ]]
+	-- upvalues: ModalPanel (ref)
 	if (self.forceShowUntilLookedAt or tick() < self.forceShowUntilTick) and not self.part then
 		self:GetPart()
 		self:GetGUI()
 	end
 	if not self.part then return end
-	local var21 = var2 == self
+	local IsModalPanelMatch = ModalPanel == self
 	
-	if not var21 and self.linkedTo and self.linkedTo == var2 then
-		var21 = true
+	if not IsModalPanelMatch and self.linkedTo and self.linkedTo == ModalPanel then
+		IsModalPanelMatch = true
 	end
-	if var2 and not var21 then
+	if ModalPanel and not IsModalPanelMatch then
 		self:SetEnabled(false)
 		
 		return
 	end
-	self:PreUpdate(p7, p8, p9, p10, p12)
+	self:PreUpdate(p4, p5, p6, p7, p9)
 	
 	if self.isVisible then
-		self:EvaluatePositioning(p7, p8, p9, p12)
+		self:EvaluatePositioning(p4, p5, p6, p9)
 		
-		for i, v in pairs(self.subpanels) do
-			v:Update()
+		for _, subpanel in pairs(self.subpanels) do
+			subpanel:Update()
 		end
-		self:EvaluateGaze(p7, p8, p9, p10, p11)
-		self:EvaluateTransparency(p7, p8)
+		self:EvaluateGaze(p4, p5, p6, p7, p8)
+		self:EvaluateTransparency(p4, p5)
 		
 		return
 	elseif self.alwaysUpdatePosition then
-		self:EvaluatePositioning(p7, p8, p9, p12)
+		self:EvaluatePositioning(p4, p5, p6, p9)
 	end
 end
 
-function t_2.PreUpdate(_, _, _, _, _, _) end
+function Module:PreUpdate(_, _, _, _, _) --[[ Line: 644 ]] end
 
-function t_2.OnUpdate(_, _) end
+function Module:OnUpdate(_) --[[ Line: 647 ]] end
 
-function t_2.OnMouseEnter(_, _, _) end
+function Module:OnMouseEnter(_, _) --[[ Line: 650 ]] end
 
-function t_2.OnMouseLeave(_, _, _) end
+function Module:OnMouseLeave(_, _) --[[ Line: 653 ]] end
 
-function t_2.OnEnabled(_, _) end
+function Module:OnEnabled(_) --[[ Line: 656 ]] end
 
-function t_2.OnModalChanged(_, _) end
+function Module:OnModalChanged(_) --[[ Line: 659 ]] end
 
-function t_2.OnVisibilityChanged(_, _) end
+function Module:OnVisibilityChanged(_) --[[ Line: 662 ]] end
 
-function t_2:CalculateTransparency()
+function Module:CalculateTransparency(): number --[[ Line: 665 ]]
 	if not self.canFade then
 		return 0
 	end
-	local x = self.gui.AbsoluteSize.X
-	local y = self.gui.AbsoluteSize.Y
-	local x_1 = self.lookAtPixel.X
-	local y_1 = self.lookAtPixel.Y
-	local var22 = if x_1 < 0 then -x_1 else x_1 - x
-	local var23 = if y_1 < 0 then -y_1 else y_1 - y
+	local X: number = self.gui.AbsoluteSize.X
+	local Y: number = self.gui.AbsoluteSize.Y
+	local X1: number = self.lookAtPixel.X
+	local Y1: number = self.lookAtPixel.Y
+	local Negated = X1 < 0 and -X1 or X1 - X
+	local Negated1 = Y1 < 0 and -Y1 or Y1 - Y
 	
-	if x_1 > 0 and x_1 < x then
-		var22 = 0
+	if X1 > 0 and X1 < X then
+		Negated = 0
 	end
-	if y_1 > 0 and y_1 < y then
-		var23 = 0
+	if Y1 > 0 and Y1 < Y then
+		Negated1 = 0
 	end
-	return math.max(0, math.min(1, (math.sqrt(var22 ^ 2 + var23 ^ 2) - 10) / 20))
+	return (math.max(0, (math.min(1, (math.sqrt(Negated ^ 2 + Negated1 ^ 2) - 10) / 20))))
 end
 
-function t_2:ResizeStuds(p13, p14, p15)
-	-- upvalues: t_1 (ref)
-	if self.panelType == t_1.Type.UIManagerManaged then return end
-	p15 = p15 or 64
-	self.width = p13
-	self.height = p14
-	self.pixelScale = p15 / 64
-	local part = self:GetPart()
-	part.Size = Vector3.new(self.width * workspace.CurrentCamera.HeadScale, self.height * workspace.CurrentCamera.HeadScale, 0.2)
+function Module:ResizeStuds(Width, Height, PixelsPerStud) --[[ Line: 695 ]]
+	-- upvalues: Panel3DModule (copy)
+	if self.panelType == Panel3DModule.Type.UIManagerManaged then return end
+	local PixelsPerStud1 = PixelsPerStud or 64
+	self.width = Width
+	self.height = Height
+	self.pixelScale = PixelsPerStud1 / 64
+	local Part = self:GetPart()
+	Part.Size = Vector3.new(self.width * workspace.CurrentCamera.HeadScale, self.height * workspace.CurrentCamera.HeadScale, 0.2)
 	local GUI = self:GetGUI()
-	GUI.CanvasSize = Vector2.new(p15 * self.width, p15 * self.height)
+	GUI.CanvasSize = Vector2.new(PixelsPerStud1 * self.width, PixelsPerStud1 * self.height)
 	
-	for i, v in pairs(self.subpanels) do
-		if v.part then
-			v.part.Size = part.Size
+	for _, subpanel in pairs(self.subpanels) do
+		if subpanel.part then
+			subpanel.part.Size = Part.Size
 		end
-		if v.gui then
-			v.gui.CanvasSize = GUI.CanvasSize
+		if subpanel.gui then
+			subpanel.gui.CanvasSize = GUI.CanvasSize
 		end
 	end
 end
 
-function t_2:ResizePixels(p16, p17, p18)
-	p18 = p18 or 64
-	self:ResizeStuds(p16 / p18, p17 / p18, p18)
+function Module:ResizePixels(p10, p11, p12) --[[ Line: 726 ]]
+	local P67 = p12 or 64
+	self:ResizeStuds(p10 / P67, p11 / P67, P67)
 end
 
-function t_2:OnHeadScaleChanged()
+function Module:OnHeadScaleChanged() --[[ Line: 734 ]]
 	self:ResizeStuds(self.width, self.height, self.pixelScale * 64)
 end
 
-function t_2:SetType(p16, p17)
-	-- upvalues: t_1 (ref)
-	self.panelType = p16
+function Module:SetType(PanelType, p10) --[[ Line: 739 ]]
+	-- upvalues: Panel3DModule (copy)
+	self.panelType = PanelType
 	self.localCF = CFrame.new()
 	self.angleFromHorizon = false
 	self.angleFromForward = false
 	self.distance = 0
 	
-	if not p17 then
-		p17 = {}
+	if not p10 then
+		p10 = {}
 	end
-	if p16 == t_1.Type.None then return end
-	if p16 == t_1.Type.Standard then
-		self.localCF = p17.CFrame or CFrame.new()
+	if PanelType == Panel3DModule.Type.None then return end
+	if PanelType == Panel3DModule.Type.Standard then
+		self.localCF = p10.CFrame or CFrame.new()
 		
 		return
-	elseif p16 == t_1.Type.Fixed then
-		self.localCF = p17.CFrame or CFrame.new()
+	end
+	if PanelType == Panel3DModule.Type.Fixed then
+		self.localCF = p10.CFrame or CFrame.new()
 		
 		return
-	elseif p16 == t_1.Type.HorizontalFollow then
-		self.angleFromHorizon = CFrame.Angles(p17.angleFromHorizon or 0, 0, 0)
-		self.angleFromForward = CFrame.Angles(0, p17.angleFromForward or 0, 0)
-		self.distance = p17.distance or 5
+	end
+	if PanelType == Panel3DModule.Type.HorizontalFollow then
+		self.angleFromHorizon = CFrame.Angles(p10.angleFromHorizon or 0, 0, 0)
+		self.angleFromForward = CFrame.Angles(0, p10.angleFromForward or 0, 0)
+		self.distance = p10.distance or 5
 		
 		return
-	elseif p16 == t_1.Type.FixedToHead then
-		self.localCF = p17.CFrame or CFrame.new()
+	end
+	if PanelType == Panel3DModule.Type.FixedToHead then
+		self.localCF = p10.CFrame or CFrame.new()
 		
 		return
-	elseif p16 == t_1.Type.NewStandard then
-		self.localCF = p17.CFrame or CFrame.new()
+	end
+	if PanelType == Panel3DModule.Type.NewStandard then
+		self.localCF = p10.CFrame or CFrame.new()
 		
 		return
-	elseif p16 == t_1.Type.WristView then
-		self.localCF = p17.CFrame or CFrame.new()
+	end
+	if PanelType == Panel3DModule.Type.WristView then
+		self.localCF = p10.CFrame or CFrame.new()
 		self.distance = 0
 		
 		return
-	elseif p16 == t_1.Type.PositionLocked then
-		self.localCF = p17.CFrame or CFrame.new()
-		
-		return
-	elseif p16 == t_1.Type.UIManagerManaged then
-		self.part = p17.uiManagerPanelPart
+	end
+	if PanelType == Panel3DModule.Type.PositionLocked then
+		self.localCF = p10.CFrame or CFrame.new()
 		
 		return
 	end
-	error("Invalid Panel type")
-end
-
-function t_2:IsUIManagerManagedType()
-	-- upvalues: t_1 (ref)
-	return self.panelType == t_1.Type.UIManagerManaged
-end
-
-function t_2:IsPositionLockedType()
-	-- upvalues: t_1 (ref)
-	return self.panelType == t_1.Type.PositionLocked
-end
-
-function t_2:SetVisible(p16, p17)
-	-- upvalues: t_1 (ref), VRService (ref), cFrame_1 (ref), var2 (write), var3 (write)
-	if p16 ~= self.isVisible then
-		self:OnVisibilityChanged(p16)
+	if PanelType == Panel3DModule.Type.UIManagerManaged then
+		self.part = p10.uiManagerPanelPart
 		
-		if p16 then
+		return
+	else
+		error("Invalid Panel type")
+	end
+end
+
+function Module:IsUIManagerManagedType(): boolean --[[ Line: 781 ]]
+	-- upvalues: Panel3DModule (copy)
+	return self.panelType == Panel3DModule.Type.UIManagerManaged
+end
+
+function Module:IsPositionLockedType(): boolean --[[ Line: 785 ]]
+	-- upvalues: Panel3DModule (copy)
+	return self.panelType == Panel3DModule.Type.PositionLocked
+end
+
+function Module:SetVisible(IsVisible, p10) --[[ Line: 789 ]]
+	-- upvalues: Panel3DModule (copy), VRService (copy), _CFrame1 (copy), ModalPanel (ref), ModalPanel1 (ref)
+	if IsVisible ~= self.isVisible then
+		self:OnVisibilityChanged(IsVisible)
+		
+		if IsVisible then
 			self.needsPositionUpdate = true
 			
-			if self.panelType == t_1.Type.WristView then
-				self.originCF = VRService:GetUserCFrame(Enum.UserCFrame.Head) * cFrame_1
+			if self.panelType == Panel3DModule.Type.WristView then
+				self.originCF = VRService:GetUserCFrame(Enum.UserCFrame.Head) * _CFrame1
 			end
 		else
-			t_1.OnPanelClosed:Fire(self.name)
+			Panel3DModule.OnPanelClosed:Fire(self.name)
 		end
 	end
-	self.isVisible = p16
-	self:SetEnabled(p16)
+	self.isVisible = IsVisible
+	self:SetEnabled(IsVisible)
 	
-	if p16 and p17 then
-		t_1.SetModalPanel(self)
+	if IsVisible and p10 then
+		Panel3DModule.SetModalPanel(self)
 	end
-	if not p16 and var2 == self then
-		if p17 then
-			t_1.SetModalPanel(var3)
+	if not IsVisible and ModalPanel == self then
+		if p10 then
+			Panel3DModule.SetModalPanel(ModalPanel1)
 		else
-			t_1.SetModalPanel(nil)
+			Panel3DModule.SetModalPanel(nil)
 			
-			if var3 == self then
-				var3 = nil
+			if ModalPanel1 == self then
+				ModalPanel1 = nil
 			end
 		end
 	end
-	if not p16 and self.forceShowUntilLookedAt then
+	if not IsVisible and self.forceShowUntilLookedAt then
 		self.forceShowUntilLookedAt = false
 	end
 end
 
-function t_2:IsVisible()
+function Module:IsVisible() --[[ Line: 829 ]]
 	return self.isVisible
 end
 
-function t_2:LinkTo(p16)
-	-- upvalues: t_1 (ref)
-	if type(p16) == "string" then
-		self.linkedTo = t_1.Get(p16)
+function Module:LinkTo(LinkedTo) --[[ Line: 833 ]]
+	-- upvalues: Panel3DModule (copy)
+	if type(LinkedTo) == "string" then
+		self.linkedTo = Panel3DModule.Get(LinkedTo)
 		
 		return
+	else
+		self.linkedTo = LinkedTo
 	end
-	self.linkedTo = p16
 end
 
-function t_2:ForceShowUntilLookedAt(p16)
+function Module:ForceShowUntilLookedAt(p10) --[[ Line: 841 ]]
 	self:GetPart()
 	self:GetGUI()
-	self:SetVisible(true, p16)
+	self:SetVisible(true, p10)
 	self:RequestPositionUpdate()
 	self.forceShowUntilLookedAt = true
 end
 
-function t_2:ForceShowForSeconds(p16)
+function Module:ForceShowForSeconds(p10) --[[ Line: 851 ]]
 	self:GetPart()
 	self:GetGUI()
 	self:SetVisible(true)
@@ -670,42 +683,42 @@ function t_2:ForceShowForSeconds(p16)
 	if self.forceShowUntilTick < tick() then
 		self:RequestPositionUpdate()
 	end
-	self.forceShowUntilTick = tick() + p16
+	self.forceShowUntilTick = tick() + p10
 end
 
-function t_2:SetCanFade(p16)
-	self.canFade = p16
+function Module:SetCanFade(CanFade) --[[ Line: 862 ]]
+	self.canFade = CanFade
 end
 
-function t_2:RequestPositionUpdate()
+function Module:RequestPositionUpdate() --[[ Line: 866 ]]
 	self.needsPositionUpdate = true
 end
 
-function t_2:ForcePositionUpdate(p16)
-	self.alwaysUpdatePosition = p16
+function Module:ForcePositionUpdate(AlwaysUpdatePosition) --[[ Line: 870 ]]
+	self.alwaysUpdatePosition = AlwaysUpdatePosition
 end
 
-function t_2:GetGuiPositionInPanelSpace(p16)
-	local absoluteSize = self.gui.AbsoluteSize
-	local var22 = (p16 - absoluteSize / 2) / absoluteSize * Vector2.new(self.part.Size.X, self.part.Size.Y)
+function Module:GetGuiPositionInPanelSpace(p10): Vector3 --[[ Line: 874 ]]
+	local AbsoluteSize: number = self.gui.AbsoluteSize
+	local ScaledAbsoluteSize = (p10 - AbsoluteSize / 2) / AbsoluteSize * Vector2.new(self.part.Size.X, self.part.Size.Y)
 	
-	return Vector3.new(var22.X, var22.Y, 0.1)
+	return (Vector3.new(ScaledAbsoluteSize.X, ScaledAbsoluteSize.Y, 0.1))
 end
 
-function t_2:GetCFrameInCameraSpace()
-	-- upvalues: t_1 (ref)
-	return if self.panelType == t_1.Type.Standard or self.panelType == t_1.Type.NewStandard then self.originCF * self.localCF else self.localCF or CFrame.new()
+function Module.GetCFrameInCameraSpace(p10) --[[ Line: 885 ]]
+	-- upvalues: Panel3DModule (copy)
+	return if p10.panelType == Panel3DModule.Type.Standard or p10.panelType == Panel3DModule.Type.NewStandard then p10.originCF * p10.localCF else p10.localCF or CFrame.new()
 end
 
-local t_3 = {}
-t_3.__index = t_3
+local Module1 = {}
+Module1.__index = Module1
 
-function t_3.new(p16, p17)
-	-- upvalues: t_3 (ref)
-	local t = {
-		parentPanel = p16,
-		guiElement = p17,
-		lastParent = p17.Parent,
+function Module1.new(ParentPanel, GuiElement) --[[ Line: 896 ]]
+	-- upvalues: Module1 (copy)
+	local config = {
+		parentPanel = ParentPanel,
+		guiElement = GuiElement,
+		lastParent = GuiElement.Parent,
 		ancestryConn = nil,
 		changedConn = nil,
 		lookAtPixel = Vector2.new(-1, -1),
@@ -717,44 +730,44 @@ function t_3.new(p16, p17)
 		guiSurrogate = nil,
 		depthOffset = 0
 	}
-	setmetatable(t, t_3)
-	t:GetGUI()
-	t:UpdateSurrogate()
-	t:WatchParent(t.lastParent)
-	p17.Parent = t.guiSurrogate
+	setmetatable(config, Module1)
+	config:GetGUI()
+	config:UpdateSurrogate()
+	config:WatchParent(config.lastParent)
+	GuiElement.Parent = config.guiSurrogate
 	
-	local function ancestryCallback(_, p18)
-		-- upvalues: t (ref), p17 (ref), ancestryCallback (ref)
-		t:GetGUI().Enabled = t.parentPanel:GetGUI():IsAncestorOf(t.lastParent)
+	local function ancestryCallback(_, NewParent) --[[ Line: 924 ]]
+		-- upvalues: config (copy), GuiElement (copy), ancestryCallback (copy)
+		config:GetGUI().Enabled = config.parentPanel:GetGUI():IsAncestorOf(config.lastParent)
 		
-		if t:GetGUI().Enabled then
-			t:GetPart().Parent = workspace.CurrentCamera
+		if config:GetGUI().Enabled then
+			config:GetPart().Parent = workspace.CurrentCamera
 		else
-			t:GetPart().Parent = nil
+			config:GetPart().Parent = nil
 		end
-		if p18 == p17 then
-			t.ancestryConn:disconnect()
-			t.lastParent = p17.Parent
-			p17.Parent = t.guiSurrogate
-			t:WatchParent(t.lastParent)
-			t.ancestryConn = p17.AncestryChanged:connect(ancestryCallback)
+		if NewParent == GuiElement then
+			config.ancestryConn:disconnect()
+			config.lastParent = GuiElement.Parent
+			GuiElement.Parent = config.guiSurrogate
+			config:WatchParent(config.lastParent)
+			config.ancestryConn = GuiElement.AncestryChanged:connect(ancestryCallback)
 		end
 	end
 	
-	t.ancestryConn = p17.AncestryChanged:connect(ancestryCallback)
+	config.ancestryConn = GuiElement.AncestryChanged:connect(ancestryCallback)
 	
-	return t
+	return config
 end
 
-function t_3:Cleanup()
+function Module1:Cleanup() --[[ Line: 948 ]]
 	self.guiElement.Parent = self.lastParent
 	
 	if self.part then
 		self.part:Destroy()
 		self.part = nil
 	end
-	spawn(function()
-		-- upvalues: self (ref)
+	spawn(function() --[[ Line: 954 ]]
+		-- upvalues: self (copy)
 		wait()
 		
 		if self.gui then
@@ -777,310 +790,315 @@ function t_3:Cleanup()
 	self.guiSurrogate = nil
 end
 
-function t_3.OnMouseEnter(_, _, _) end
+function Module1:OnMouseEnter(_, _) --[[ Line: 975 ]] end
 
-function t_3.OnMouseLeave(_, _, _) end
+function Module1:OnMouseLeave(_, _) --[[ Line: 976 ]] end
 
-function t_3:SetLookedAt(p16)
-	if p16 and not self.lookedAt then
+function Module1:SetLookedAt(LookedAt) --[[ Line: 978 ]]
+	if LookedAt and not self.lookedAt then
 		self:OnMouseEnter(self.lookAtPixel.X, self.lookAtPixel.Y)
-	elseif not p16 and self.lookedAt then
+	elseif not LookedAt and self.lookedAt then
 		self:OnMouseLeave(self.lookAtPixel.X, self.lookAtPixel.Y)
 	end
-	self.lookedAt = p16
+	self.lookedAt = LookedAt
 end
 
-function t_3:WatchParent(p16)
+function Module1:WatchParent(LastParent) --[[ Line: 987 ]]
 	if self.changedConn then
 		self.changedConn:disconnect()
 	end
-	self.changedConn = p16.Changed:connect(function(p17)
-		-- upvalues: self (ref)
-		if p17 == "AbsolutePosition" or p17 == "AbsoluteSize" or p17 == "Parent" then
+	self.changedConn = LastParent.Changed:connect(function(p10) --[[ Line: 991 ]]
+		-- upvalues: self (copy)
+		if p10 == "AbsolutePosition" or p10 == "AbsoluteSize" or p10 == "Parent" then
 			self:UpdateSurrogate()
 		end
 	end)
 end
 
-function t_3:UpdateSurrogate()
-	local lastParent = self.lastParent
-	self.guiSurrogate.Position = UDim2.new(0, lastParent.AbsolutePosition.X, 0, lastParent.AbsolutePosition.Y)
-	self.guiSurrogate.Size = UDim2.new(0, lastParent.AbsoluteSize.X, 0, lastParent.AbsoluteSize.Y)
+function Module1:UpdateSurrogate() --[[ Line: 998 ]]
+	local LastParent = self.lastParent
+	self.guiSurrogate.Position = UDim2.new(0, LastParent.AbsolutePosition.X, 0, LastParent.AbsolutePosition.Y)
+	self.guiSurrogate.Size = UDim2.new(0, LastParent.AbsoluteSize.X, 0, LastParent.AbsoluteSize.Y)
 end
 
-function t_3:GetPart()
-	-- upvalues: var8 (ref)
+function Module1:GetPart() --[[ Line: 1004 ]]
+	-- upvalues: Parent (copy)
 	if self.part then
 		return self.part
+	else
+		self.part = self.parentPanel:GetPart():Clone()
+		self.part.Parent = Parent
+		
+		return self.part
 	end
-	self.part = self.parentPanel:GetPart():Clone()
-	self.part.Parent = var8
-	
-	return self.part
 end
 
-function t_3:GetGUI()
-	-- upvalues: create (ref), coreGuiService (ref)
+function Module1:GetGUI() --[[ Line: 1014 ]]
+	-- upvalues: CreateFunction (copy), CoreGui (copy)
 	if self.gui then
 		return self.gui
-	end
-	self.gui = create("SurfaceGui")({
-		Active = true,
-		ToolPunchThroughDistance = 1000,
-		AlwaysOnTop = true,
-		Parent = coreGuiService,
-		Adornee = self:GetPart(),
-		CanvasSize = self.parentPanel:GetGUI().CanvasSize,
-		Enabled = self.parentPanel.isEnabled
-	})
-	self.guiSurrogate = create("Frame")({
-		Active = false,
-		BackgroundTransparency = 1,
-		Parent = self.gui,
-		Position = UDim2.new(0, 0, 0, 0),
-		Size = UDim2.new(1, 0, 1, 0)
-	})
-	
-	return self.gui
-end
-
-function t_3:SetDepthOffset(p16)
-	self.depthOffset = p16
-end
-
-function t_3:Update()
-	local part = self:GetPart()
-	local part_1 = self.parentPanel:GetPart()
-	
-	if part and part_1 then
-		part.CFrame = part_1.CFrame * CFrame.new(0, 0, -self.depthOffset)
+	else
+		self.gui = CreateFunction("SurfaceGui")({
+			Active = true,
+			ToolPunchThroughDistance = 1000,
+			AlwaysOnTop = true,
+			Parent = CoreGui,
+			Adornee = self:GetPart(),
+			CanvasSize = self.parentPanel:GetGUI().CanvasSize,
+			Enabled = self.parentPanel.isEnabled
+		})
+		self.guiSurrogate = CreateFunction("Frame")({
+			Active = false,
+			BackgroundTransparency = 1,
+			Parent = self.gui,
+			Position = UDim2.new(0, 0, 0, 0),
+			Size = UDim2.new(1, 0, 1, 0)
+		})
+		
+		return self.gui
 	end
 end
 
-function t_3:SetEnabled(p16)
-	-- upvalues: var8 (ref)
-	self.isEnabled = p16
+function Module1:SetDepthOffset(DepthOffset) --[[ Line: 1041 ]]
+	self.depthOffset = DepthOffset
+end
+
+function Module1:Update() --[[ Line: 1045 ]]
+	local Part = self:GetPart()
+	local Part1 = self.parentPanel:GetPart()
 	
-	if p16 and self.parentPanel.isEnabled then
-		self:GetPart().Parent = var8
+	if Part and Part1 then
+		Part.CFrame = Part1.CFrame * CFrame.new(0, 0, -self.depthOffset)
+	end
+end
+
+function Module1:SetEnabled(IsEnabled) --[[ Line: 1054 ]]
+	-- upvalues: Parent (copy)
+	self.isEnabled = IsEnabled
+	
+	if IsEnabled and self.parentPanel.isEnabled then
+		self:GetPart().Parent = Parent
 		self:GetGUI().Enabled = true
 		
 		return
+	else
+		self:GetPart().Parent = nil
+		self:GetGUI().Enabled = false
 	end
-	self:GetPart().Parent = nil
-	self:GetGUI().Enabled = false
 end
 
-function t_3:GetEnabled()
+function Module1:GetEnabled() --[[ Line: 1067 ]]
 	return self.isEnabled
 end
 
-function t_3:GetPixelScale()
+function Module1:GetPixelScale() --[[ Line: 1071 ]]
 	return self.parentPanel:GetPixelScale()
 end
 
-function t_2:GetPixelScale()
+function Module:GetPixelScale() --[[ Line: 1074 ]]
 	return self.pixelScale
 end
 
-function t_2:AddSubpanel(p16)
-	-- upvalues: t_3 (ref)
-	local var22 = t_3.new(self, p16)
-	self.subpanels[p16] = var22
+function Module:AddSubpanel(GuiElement) --[[ Line: 1078 ]]
+	-- upvalues: Module1 (copy)
+	local NewModule = Module1.new(self, GuiElement)
+	self.subpanels[GuiElement] = NewModule
 	
-	return var22
+	return NewModule
 end
 
-function t_2:RemoveSubpanel(p16)
-	local var22 = self.subpanels[p16]
+function Module:RemoveSubpanel(p10) --[[ Line: 1084 ]]
+	local Subpanel = self.subpanels[p10]
 	
-	if var22 then
-		var22:Cleanup()
+	if Subpanel then
+		Subpanel:Cleanup()
 	end
-	self.subpanels[p16] = nil
+	self.subpanels[p10] = nil
 end
 
-function t_2:SetSubpanelDepth(p16, p17)
-	local var22 = self.subpanels[p16]
+function Module:SetSubpanelDepth(p10, DepthOffset) --[[ Line: 1092 ]]
+	local Subpanel = self.subpanels[p10]
 	
-	if p17 ~= 0 then
-		var22 = var22 or self:AddSubpanel(p16)
-		var22:SetDepthOffset(p17)
+	if DepthOffset == 0 then
+		if Subpanel then
+			self:RemoveSubpanel(p10)
+		end
+		return nil
+	else
+		if not Subpanel then
+			Subpanel = self:AddSubpanel(p10)
+		end
+		Subpanel:SetDepthOffset(DepthOffset)
 		
-		return var22
-	elseif var22 then
-		self:RemoveSubpanel(p16)
+		return Subpanel
 	end
-	return nil
 end
 
-function t_1.Get(p16)
-	-- upvalues: t (ref), t_2 (ref)
-	local var22 = t[p16]
+function Panel3DModule.Get(LinkedTo) --[[ Line: 1114 ]]
+	-- upvalues: NewResults (copy), Module (copy)
+	local NewResult = NewResults[LinkedTo]
 	
-	if not t[p16] then
-		t[p16] = t_2.new(p16)
-		var22 = t[p16]
+	if not NewResults[LinkedTo] then
+		NewResults[LinkedTo] = Module.new(LinkedTo)
+		NewResult = NewResults[LinkedTo]
 	end
-	return var22
+	return NewResult
 end
 
-local currentTime = tick()
+local CurrentTime = tick()
 
-local function onRenderStep()
-	-- upvalues: VRService (ref), currentTime (write), var5 (write), var4 (write), t (ref), var2 (write), var6 (write), var7 (ref)
+local function onRenderStep() --[[ Line: 1126 ]]
+	-- upvalues: VRService (copy), CurrentTime (ref), v2 (ref), LookAtDistance (ref), NewResults (copy), ModalPanel (ref), CursorPos (ref), Frame (copy)
 	if not VRService.VREnabled then return end
-	local currentTime_1 = tick()
-	local var22 = currentTime_1 - currentTime
-	currentTime = currentTime_1
-	var5 = nil
-	var4 = 1e999
-	local currentCamera = workspace.CurrentCamera
-	local cFrame = currentCamera.CFrame
-	local renderCFrame = currentCamera:GetRenderCFrame()
-	local headUserCFrame = VRService:GetUserCFrame(Enum.UserCFrame.Head)
-	local ray = Ray.new(renderCFrame.p, renderCFrame.lookVector)
-	local var23 = cFrame * VRService:GetUserCFrame(VRService.GuiInputUserCFrame)
-	local ray_1 = Ray.new(var23.p, var23.lookVector)
+	local CurrentTime1 = tick()
+	local CurrentTimeDelta = CurrentTime1 - CurrentTime
+	CurrentTime = CurrentTime1
+	v2 = nil
+	LookAtDistance = 1e999
+	local CurrentCamera = workspace.CurrentCamera
+	local CurrentCameraCFrame = CurrentCamera.CFrame
+	local RenderCFrame = CurrentCamera:GetRenderCFrame()
+	local UserCFrame = VRService:GetUserCFrame(Enum.UserCFrame.Head)
+	local _Ray = Ray.new(RenderCFrame.p, RenderCFrame.lookVector)
+	local ScaledCurrentCameraCFrame = CurrentCameraCFrame * VRService:GetUserCFrame(VRService.GuiInputUserCFrame)
+	local _Ray1 = Ray.new(ScaledCurrentCameraCFrame.p, ScaledCurrentCameraCFrame.lookVector)
 	
-	for i, v in pairs(t) do
-		v:Update(cFrame, renderCFrame, headUserCFrame, ray, ray_1, var22)
+	for _, newResult in pairs(NewResults) do
+		newResult:Update(CurrentCameraCFrame, RenderCFrame, UserCFrame, _Ray, _Ray1, CurrentTimeDelta)
 	end
-	local t_1 = {}
+	local t = {}
 	
-	for i_1, v_1 in pairs(t) do
-		if not t_1[v_1] and v_1.linkedTo and (v_1.isVisible and v_1.linkedTo.isVisible) then
-			t_1[v_1] = true
-			t_1[v_1.linkedTo] = true
-			local minValue = math.min(v_1.transparency, v_1.linkedTo.transparency)
-			v_1.transparency = minValue
-			v_1.linkedTo.transparency = minValue
+	for _, newResult1 in pairs(NewResults) do
+		if not t[newResult1] and newResult1.linkedTo and newResult1.isVisible and newResult1.linkedTo.isVisible then
+			t[newResult1] = true
+			t[newResult1.linkedTo] = true
+			local Smallest = math.min(newResult1.transparency, newResult1.linkedTo.transparency)
+			newResult1.transparency = Smallest
+			newResult1.linkedTo.transparency = Smallest
 		end
 	end
-	for i_2, v_2 in pairs(t) do
-		if not v_2.part or not v_2.gui then
-			v_2:OnUpdate(var22)
-			continue
+	for _, newResult2 in pairs(NewResults) do
+		if newResult2.part and newResult2.gui then
+			local IsModalPanelMatch = ModalPanel == newResult2
+			
+			if not IsModalPanelMatch and newResult2.linkedTo and newResult2.linkedTo == ModalPanel then
+				IsModalPanelMatch = true
+			end
+			newResult2:SetEnabled(if IsModalPanelMatch or not ModalPanel then if newResult2.transparency >= 1 then if newResult2.forceShowUntilLookedAt then not newResult2.canFade and newResult2.isVisible or true else not newResult2.canFade and newResult2.isVisible elseif newResult2.forceShowUntilLookedAt then not newResult2.canFade and newResult2.isVisible or true else not newResult2.canFade and newResult2.isVisible or newResult2.isVisible elseif newResult2.transparency >= 1 then if newResult2.forceShowUntilLookedAt then not newResult2.canFade and newResult2.isVisible or true else not newResult2.canFade and newResult2.isVisible elseif newResult2.forceShowUntilLookedAt then not newResult2.canFade and newResult2.isVisible or true else not newResult2.canFade and newResult2.isVisible)
 		end
-		local var24 = var2 == v_2
+		newResult2:OnUpdate(CurrentTimeDelta)
+	end
+	if v2 then
+		local X = CursorPos.X
+		local Y = CursorPos.Y
+		local PixelScale: number = v2:GetPixelScale()
+		Frame.Size = UDim2.new(0, 3 * PixelScale, 0, 3 * PixelScale)
+		Frame.Position = UDim2.new(0, X - Frame.AbsoluteSize.x * 0.5, 0, Y - Frame.AbsoluteSize.y * 0.5)
 		
-		if not var24 and v_2.linkedTo and v_2.linkedTo == var2 then
-			var24 = true
-		end
-		local var25 = if not (var24 or not var2) then false else v_2.isVisible
-		
-		if v_2.transparency >= 1 then
-			var25 = false
-		end
-		if v_2.forceShowUntilLookedAt then
-			var25 = true
-		end
-		if not v_2.canFade and v_2.isVisible then
-			var25 = true
-		end
-		v_2:SetEnabled(var25)
-	end
-	var7.Parent = nil
-end
-
-local var26 = true
-
-local function _(p16)
-	-- upvalues: var8 (ref), var9 (ref)
-	var8.Parent = p16
-	var9.Parent = p16
-end
-
-local var27 = nil
-
-local function onHeadScaleChanged()
-	-- upvalues: t (ref)
-	for i, v in pairs(t) do
-		v:OnHeadScaleChanged()
+		return
+	else
+		Frame.Parent = nil
 	end
 end
 
-local var28 = nil
+local Flag = true
 
-local function onCameraCFrameChanged()
-	-- upvalues: VRService (ref), t (ref)
-	local currentCamera = workspace.CurrentCamera
-	local cFrame = currentCamera.CFrame
-	local renderCFrame = currentCamera:GetRenderCFrame()
-	local headUserCFrame = VRService:GetUserCFrame(Enum.UserCFrame.Head)
-	local ray = Ray.new(renderCFrame.p, renderCFrame.lookVector)
-	local var29 = cFrame * VRService:GetUserCFrame(VRService.GuiInputUserCFrame)
-	local ray_1 = Ray.new(var29.p, var29.lookVector)
+local function _(Parent1) --[[ Line: 1212 | Named "putFoldersIn" ]]
+	-- upvalues: Parent (copy), CoreEffectFolder (copy)
+	Parent.Parent = Parent1
+	CoreEffectFolder.Parent = Parent1
+end
+
+local Connection = nil
+
+local function onHeadScaleChanged() --[[ Line: 1218 ]]
+	-- upvalues: NewResults (copy)
+	for _, newResult in pairs(NewResults) do
+		newResult:OnHeadScaleChanged()
+	end
+end
+
+local Connection1 = nil
+
+local function onCameraCFrameChanged() --[[ Line: 1225 ]]
+	-- upvalues: VRService (copy), NewResults (copy)
+	local CurrentCamera = workspace.CurrentCamera
+	local CurrentCameraCFrame = CurrentCamera.CFrame
+	local RenderCFrame = CurrentCamera:GetRenderCFrame()
+	local UserCFrame = VRService:GetUserCFrame(Enum.UserCFrame.Head)
+	local _Ray = Ray.new(RenderCFrame.p, RenderCFrame.lookVector)
+	local ScaledCurrentCameraCFrame = CurrentCameraCFrame * VRService:GetUserCFrame(VRService.GuiInputUserCFrame)
+	local _Ray1 = Ray.new(ScaledCurrentCameraCFrame.p, ScaledCurrentCameraCFrame.lookVector)
 	
-	for i, v in pairs(t) do
-		v:Update(cFrame, renderCFrame, headUserCFrame, ray, ray_1, 0)
+	for _, newResult in pairs(NewResults) do
+		newResult:Update(CurrentCameraCFrame, RenderCFrame, UserCFrame, _Ray, _Ray1, 0)
 	end
 end
 
-local function onCurrentCameraChanged()
-	-- upvalues: t (ref), var27 (write), onHeadScaleChanged (ref), var28 (write), onCameraCFrameChanged (ref), VRService (ref), var26 (write), var8 (ref), var9 (ref)
-	for i, v in pairs(t) do
-		v:OnHeadScaleChanged()
+local function onCurrentCameraChanged() --[[ Line: 1241 ]]
+	-- upvalues: NewResults (copy), Connection (ref), onHeadScaleChanged (copy), Connection1 (ref), onCameraCFrameChanged (copy), VRService (copy), Flag (ref), Parent (copy), CoreEffectFolder (copy)
+	for _, newResult in pairs(NewResults) do
+		newResult:OnHeadScaleChanged()
 	end
-	if var27 then
-		var27:disconnect()
+	if Connection then
+		Connection:disconnect()
 	end
-	var27 = workspace.CurrentCamera:GetPropertyChangedSignal("HeadScale"):Connect(onHeadScaleChanged)
+	Connection = workspace.CurrentCamera:GetPropertyChangedSignal("HeadScale"):Connect(onHeadScaleChanged)
 	
-	if var28 then
-		var28:disconnect()
+	if Connection1 then
+		Connection1:disconnect()
 	end
-	var28 = workspace.CurrentCamera:GetPropertyChangedSignal("CFrame"):Connect(onCameraCFrameChanged)
+	Connection1 = workspace.CurrentCamera:GetPropertyChangedSignal("CFrame"):Connect(onCameraCFrameChanged)
 	
-	if VRService.VREnabled and var26 then
-		local currentCamera = workspace.CurrentCamera
-		var8.Parent = currentCamera
-		var9.Parent = currentCamera
+	if VRService.VREnabled and Flag then
+		local CurrentCamera = workspace.CurrentCamera
+		Parent.Parent = CurrentCamera
+		CoreEffectFolder.Parent = CurrentCamera
 	end
 end
 
-local var30 = nil
-local var31 = false
+local Connection2 = nil
+local Flag1 = false
 
-local function onVREnabledChanged()
-	-- upvalues: VRService (ref), var26 (write), onCurrentCameraChanged (ref), var30 (write), var8 (ref), var9 (ref), var31 (write), runService (ref), text (ref), onRenderStep (ref)
+local function onVREnabledChanged() --[[ Line: 1264 ]]
+	-- upvalues: VRService (copy), Flag (ref), onCurrentCameraChanged (copy), Connection2 (ref), Parent (copy), CoreEffectFolder (copy), Flag1 (ref), RunService (copy), Text (copy), onRenderStep (copy)
 	if VRService.VREnabled then
-		while not var26 do
+		while not Flag do
 			wait()
 		end
 		if workspace.CurrentCamera then
 			onCurrentCameraChanged()
 		end
-		var30 = workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(onCurrentCameraChanged)
-		local currentCamera = workspace.CurrentCamera
-		var8.Parent = currentCamera
-		var9.Parent = currentCamera
+		Connection2 = workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(onCurrentCameraChanged)
+		local CurrentCamera = workspace.CurrentCamera
+		Parent.Parent = CurrentCamera
+		CoreEffectFolder.Parent = CurrentCamera
 		
-		if var31 then
-			return
-		else
-			runService:BindToRenderStep(text, Enum.RenderPriority.Last.Value, onRenderStep)
-			var31 = true
+		if not Flag1 then
+			RunService:BindToRenderStep(Text, Enum.RenderPriority.Last.Value, onRenderStep)
+			Flag1 = true
 			
 			return
 		end
-	elseif var30 then
-		var30:disconnect()
-		var30 = nil
-	end
-	var8.Parent = nil
-	var9.Parent = nil
-	
-	if var31 then
-		runService:UnbindFromRenderStep(text)
-		var31 = false
+	else
+		if Connection2 then
+			Connection2:disconnect()
+			Connection2 = nil
+		end
+		Parent.Parent = nil
+		CoreEffectFolder.Parent = nil
+		
+		if Flag1 then
+			RunService:UnbindFromRenderStep(Text)
+			Flag1 = false
+		end
 	end
 end
 
 VRService:GetPropertyChangedSignal("VREnabled"):connect(onVREnabledChanged)
 spawn(onVREnabledChanged)
-coroutine.wrap(function()
-	-- upvalues: var26 (write)
+coroutine.wrap(function() --[[ Line: 1297 ]]
+	-- upvalues: Flag (ref)
 	while true do
 		if not workspace.CurrentCamera then
 			wait()
@@ -1089,7 +1107,7 @@ coroutine.wrap(function()
 		if workspace.CurrentCamera.CameraSubject ~= nil or workspace.CurrentCamera.CameraType == Enum.CameraType.Scriptable then break end
 		workspace.CurrentCamera.Changed:Wait()
 	end
-	var26 = true
+	Flag = true
 end)()
 
-return t_1
+return Panel3DModule

@@ -1,61 +1,58 @@
-﻿local runService = game:GetService("RunService")
-local corePackagesService = game:GetService("CorePackages")
-local coreGuiService = game:GetService("CoreGui")
-local videoCaptureService = game:GetService("VideoCaptureService")
-local faceAnimatorService = game:GetService("FaceAnimatorService")
-local roactModule = require(corePackagesService.Packages.Roact)
-local tModule = require(corePackagesService.Packages.t)
-local eventConnection = require(corePackagesService.Packages.ReactUtils).EventConnection
-local modules = coreGuiService.RobloxGui.Modules
-local default = require(modules.VoiceChat.VoiceChatServiceManager).default
-local getCamMicPermissionsModule = require(modules.Settings.getCamMicPermissions)
-local flashingDot = roactModule.PureComponent:extend("FlashingDot")
+﻿local RunService = game:GetService("RunService")
+local CorePackages = game:GetService("CorePackages")
+local VideoCaptureService = game:GetService("VideoCaptureService")
+local FaceAnimatorService = game:GetService("FaceAnimatorService")
+local RoactModule = require(CorePackages.Packages.Roact)
+local EventConnection = require(CorePackages.Packages.ReactUtils).EventConnection
+local Modules = game:GetService("CoreGui").RobloxGui.Modules
+local Default = require(Modules.VoiceChat.VoiceChatServiceManager).default
+local GetCamMicPermissionsModule = require(Modules.Settings.getCamMicPermissions)
+local FlashingDot = RoactModule.PureComponent:extend("FlashingDot")
 
-local function _(startValue, endValue, alpha)
-	return startValue + (endValue - startValue) * alpha
+local function _(p1, p2, p3) --[[ Line: 26 | Named "lerpNum" ]]
+	return p1 + (p2 - p1) * p3
 end
 
-flashingDot.validateProps = tModule.strictInterface({})
+FlashingDot.validateProps = require(CorePackages.Packages.t).strictInterface({})
 
-function flashingDot.init(p1)
-	-- upvalues: roactModule (ref), default (ref), faceAnimatorService (ref), videoCaptureService (ref)
+function FlashingDot.init(p1) --[[ Line: 32 ]]
+	-- upvalues: RoactModule (copy), Default (copy), FaceAnimatorService (copy), VideoCaptureService (copy)
 	p1:setState({
 		Visible = false,
 		isUsingMic = false,
 		hasMicPermissions = false,
 		hasCameraPermissions = false
 	})
-	p1.prevTime = 1.570796326795
+	p1.prevTime = 1.5707963267948966
 	p1.prevSinTime = 1
-	local var1, var2 = roactModule.createBinding(0)
-	p1.transparencyBinding = var1
-	p1.updateTransparencyBinding = var2
+	p1.transparencyBinding, p1.updateTransparencyBinding = RoactModule.createBinding(0)
 	
-	function p0.checkNewVisibility()
-		-- upvalues: p1 (ref), default (copy), faceAnimatorService (copy), videoCaptureService (copy)
-		local var3 = p1.state.hasMicPermissions and (default.localMuted ~= nil and not default.localMuted)
-		local var4 = var3 or p1.state.hasCameraPermissions and (faceAnimatorService.VideoAnimationEnabled and videoCaptureService.Active)
+	function p1.checkNewVisibility() --[[ Line: 44 ]]
+		-- upvalues: p1 (copy), Default (upval), FaceAnimatorService (upval), VideoCaptureService (upval)
+		local NoLocalMuted: boolean = p1.state.hasMicPermissions and (Default.localMuted ~= nil and not Default.localMuted)
+		local Active = p1.state.hasCameraPermissions and (FaceAnimatorService.VideoAnimationEnabled and VideoCaptureService.Active)
+		local NoLocalMuted1 = NoLocalMuted or Active
 		
-		if p1.state.Visible ~= var4 then
-			p1:setState({ Visible = var4, isUsingMic = var3 })
+		if p1.state.Visible ~= NoLocalMuted1 then
+			p1:setState({ Visible = NoLocalMuted1, isUsingMic = NoLocalMuted })
 		end
 	end
 	
-	function p0.animationConnection(p2)
-		-- upvalues: p1 (ref)
-		local var3 = p1.prevTime + p2
-		local var4 = math.sin(var3 * 3)
+	function p1.animationConnection(p2) --[[ Line: 66 ]]
+		-- upvalues: p1 (copy)
+		local NewPrevTime = p1.prevTime + p2
+		local Sine = math.sin(NewPrevTime * 3)
 		p1.updateTransparencyBinding(math.abs(p1.prevSinTime) * -0.5 + 0.5)
-		p1.prevTime = var3
-		p1.prevSinTime = var4
+		p1.prevTime = NewPrevTime
+		p1.prevSinTime = Sine
 	end
 end
 
-function flashingDot.didMount(p1)
-	-- upvalues: getCamMicPermissionsModule (ref)
+function FlashingDot.didMount(p1) --[[ Line: 77 ]]
+	-- upvalues: GetCamMicPermissionsModule (copy)
 	p1.isMounted = true
-	getCamMicPermissionsModule(function(p2)
-		-- upvalues: p1 (ref)
+	GetCamMicPermissionsModule(function(p2) --[[ Line: 79 ]]
+		-- upvalues: p1 (copy)
 		if p1.isMounted then
 			p1:setState({
 				hasCameraPermissions = p2.hasCameraPermissions,
@@ -68,15 +65,15 @@ function flashingDot.didMount(p1)
 	p1.checkNewVisibility()
 end
 
-function flashingDot.didUpdate(p1, p2, _)
+function FlashingDot.didUpdate(p1, p2, _) --[[ Line: 93 ]]
 	if p1.state.hasMicPermissions ~= p2.hasMicPermissions or p1.state.hasCameraPermissions ~= p2.hasCameraPermissions then
 		p1.checkNewVisibility()
 	end
 end
 
-function flashingDot.render(p1)
-	-- upvalues: roactModule (ref), eventConnection (ref), default (ref), faceAnimatorService (ref), runService (ref)
-	return roactModule.createElement("Frame", {
+function FlashingDot.render(p1) --[[ Line: 102 ]]
+	-- upvalues: RoactModule (copy), EventConnection (copy), Default (copy), FaceAnimatorService (copy), RunService (copy)
+	return RoactModule.createElement("Frame", {
 		ZIndex = 2,
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
@@ -85,30 +82,30 @@ function flashingDot.render(p1)
 		Size = UDim2.fromOffset(4, 4),
 		Visible = p1.state.Visible
 	}, {
-		FlashingDot = roactModule.createElement("ImageLabel", {
+		FlashingDot = RoactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 1,
 			Image = "rbxasset://textures/AnimationEditor/FaceCaptureUI/FlashingDot.png",
 			LayoutOrder = 2,
 			Size = UDim2.fromOffset(4, 4),
 			ImageTransparency = p1.transparencyBinding
 		}),
-		MuteChangedEvent = roactModule.createElement(eventConnection, {
-			event = default.muteChanged.Event,
+		MuteChangedEvent = RoactModule.createElement(EventConnection, {
+			event = Default.muteChanged.Event,
 			callback = p1.checkNewVisibility
 		}),
-		CameraChangedEvent = roactModule.createElement(eventConnection, {
-			event = faceAnimatorService:GetPropertyChangedSignal("VideoAnimationEnabled"),
+		CameraChangedEvent = RoactModule.createElement(EventConnection, {
+			event = FaceAnimatorService:GetPropertyChangedSignal("VideoAnimationEnabled"),
 			callback = p1.checkNewVisibility
 		}),
-		AnimationConnection = if p1.state.Visible then roactModule.createElement(eventConnection, {
-			event = runService.RenderStepped,
+		AnimationConnection = if p1.state.Visible then RoactModule.createElement(EventConnection, {
+			event = RunService.RenderStepped,
 			callback = p1.animationConnection
 		}) else nil
 	})
 end
 
-function flashingDot.willUnmount(p1)
+function FlashingDot.willUnmount(p1) --[[ Line: 138 ]]
 	p1.isMounted = false
 end
 
-return flashingDot
+return FlashingDot

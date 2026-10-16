@@ -1,17 +1,17 @@
-﻿local parent = script.Parent
-local noneModule = require(parent.None)
-local _ = require(parent.Types)
+﻿local Parent = script.Parent
+local NoneModule = require(Parent.None)
+local _ = require(Parent.Types)
 
-return function(p1, p2)
-	-- upvalues: noneModule (ref)
-	local cloned = table.clone(p1)
+return function(Tbl, List) --[[ Line: 14 | Named "union" ]]
+	-- upvalues: NoneModule (copy)
+	local Copy = table.clone(Tbl)
 	
-	for i, v in p2 do
-		if v == noneModule then
-			cloned[i] = nil
+	for i, value in List do
+		if value == NoneModule then
+			Copy[i] = nil
 		else
-			cloned[i] = v
+			Copy[i] = value
 		end
 	end
-	return cloned
+	return Copy
 end

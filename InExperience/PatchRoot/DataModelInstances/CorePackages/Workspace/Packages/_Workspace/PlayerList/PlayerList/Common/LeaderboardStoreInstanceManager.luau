@@ -1,25 +1,22 @@
-﻿local parent = script.Parent.Parent.Parent
-local signalsModule = require(parent.Signals)
-local var1 = require(parent.LeaderboardStore).createLeaderboardStore()
-local _ = nil
-local _ = nil
-local var2, var3 = signalsModule.createSignal(nil)
-local var4 = var2
-local var5 = var3
+﻿local Parent = script.Parent.Parent.Parent
+local LeaderboardStore = require(Parent.LeaderboardStore).createLeaderboardStore()
+local Signal = nil
+local Signal2 = nil
+Signal, Signal2 = require(Parent.Signals).createSignal(nil)
 
 return {
-	createLeaderboardStoreInstance = function()
-		-- upvalues: var5 (write), var1 (ref)
-		var5(var1())
+	createLeaderboardStoreInstance = function() --[[ Line: 13 ]]
+		-- upvalues: Signal2 (ref), LeaderboardStore (copy)
+		Signal2(LeaderboardStore())
 	end,
-	getLeaderboardStoreInstance = var4,
-	cleanUpInstance = function()
-		-- upvalues: var4 (write), var5 (write)
-		local var6 = var4(false)
+	getLeaderboardStoreInstance = Signal,
+	cleanUpInstance = function() --[[ Line: 17 ]]
+		-- upvalues: Signal (ref), Signal2 (ref)
+		local SignalResult = Signal(false)
 		
-		if var6 ~= nil then
-			var6.cleanUp()
-			var5(nil)
+		if SignalResult ~= nil then
+			SignalResult.cleanUp()
+			Signal2(nil)
 		end
 	end
 }

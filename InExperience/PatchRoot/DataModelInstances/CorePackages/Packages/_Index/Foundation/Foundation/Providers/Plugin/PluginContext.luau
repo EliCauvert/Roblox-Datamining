@@ -1,4 +1,4 @@
-﻿local var1 = require(script:FindFirstAncestor("Foundation").Parent.React).createContext(nil)
-var1.displayName = "PluginContext"
+﻿local Context = require(script:FindFirstAncestor("Foundation").Parent.React).createContext(nil)
+Context.displayName = "PluginContext"
 
-return var1
+return Context

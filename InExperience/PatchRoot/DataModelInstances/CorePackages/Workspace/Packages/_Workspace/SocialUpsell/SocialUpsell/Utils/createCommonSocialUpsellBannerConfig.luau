@@ -1,19 +1,19 @@
-﻿local socialUpsell = script:FindFirstAncestor("SocialUpsell")
-local foundationModule = require(socialUpsell.Parent.Foundation)
-local _ = require(socialUpsell.Types)
-local socialUpsellTypeModule = require(socialUpsell.Enum.SocialUpsellType)
-local isCompactUpsellBannerModule = require(script.Parent.isCompactUpsellBanner)
-local shieldCheck = foundationModule.Enums.IconName.ShieldCheck
-local speechBubbleAlignCenter = foundationModule.Enums.IconName.SpeechBubbleAlignCenter
+﻿local SocialUpsell = script:FindFirstAncestor("SocialUpsell")
+local FoundationModule = require(SocialUpsell.Parent.Foundation)
+local _ = require(SocialUpsell.Types)
+local SocialUpsellTypeModule = require(SocialUpsell.Enum.SocialUpsellType)
+local IsCompactUpsellBannerModule = require(script.Parent.isCompactUpsellBanner)
+local ShieldCheck = FoundationModule.Enums.IconName.ShieldCheck
+local SpeechBubbleAlignCenter = FoundationModule.Enums.IconName.SpeechBubbleAlignCenter
 
-local function _(p1)
-	-- upvalues: socialUpsellTypeModule (ref), isCompactUpsellBannerModule (ref), shieldCheck (ref), speechBubbleAlignCenter (ref)
-	return if p1.image then nil elseif p1.icon then p1.icon elseif p1.type == socialUpsellTypeModule.FacialAgeEstimation then if isCompactUpsellBannerModule(p1) then shieldCheck else speechBubbleAlignCenter elseif p1.type == socialUpsellTypeModule.ConversationFacialAgeEstimation then nil else nil
+local function _(p1) --[[ Line: 16 | Named "getBannerIcon" ]]
+	-- upvalues: SocialUpsellTypeModule (copy), IsCompactUpsellBannerModule (copy), ShieldCheck (copy), SpeechBubbleAlignCenter (copy)
+	return if p1.image then nil elseif p1.icon then p1.icon elseif p1.type == SocialUpsellTypeModule.FacialAgeEstimation then if IsCompactUpsellBannerModule(p1) then ShieldCheck else SpeechBubbleAlignCenter elseif p1.type == SocialUpsellTypeModule.ConversationFacialAgeEstimation then nil else nil
 end
 
-return function(p1)
-	-- upvalues: socialUpsellTypeModule (ref), isCompactUpsellBannerModule (ref), shieldCheck (ref), speechBubbleAlignCenter (ref)
-	p1.icon = if p1.image then nil elseif p1.icon then p1.icon elseif p1.type == socialUpsellTypeModule.FacialAgeEstimation then if isCompactUpsellBannerModule(p1) then shieldCheck else speechBubbleAlignCenter elseif p1.type == socialUpsellTypeModule.ConversationFacialAgeEstimation then nil else nil
+return function(p1) --[[ Line: 32 ]]
+	-- upvalues: SocialUpsellTypeModule (copy), IsCompactUpsellBannerModule (copy), ShieldCheck (copy), SpeechBubbleAlignCenter (copy)
+	p1.icon = if p1.image then nil elseif p1.icon then p1.icon elseif p1.type == SocialUpsellTypeModule.FacialAgeEstimation then if IsCompactUpsellBannerModule(p1) then ShieldCheck else SpeechBubbleAlignCenter elseif p1.type == SocialUpsellTypeModule.ConversationFacialAgeEstimation then nil else nil
 	
 	return p1
 end

@@ -1,49 +1,56 @@
-﻿local parent = script.Parent.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local _ = require(parent.Signals)
-local chatUIPrimitivesModule = require(parent.ChatUIPrimitives)
-local textChannelWindowAnalyticsModule = require(script.Parent.TextChannelWindowAnalytics)
-local useInExperienceLocalization = require(parent.ChatUIPrimitives).Hooks.useInExperienceLocalization
-local messageLayoutContainer = chatUIPrimitivesModule.MessageLayoutContainer
+﻿local Parent = script.Parent.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local _ = require(Parent.Signals)
+local ChatUIPrimitivesModule = require(Parent.ChatUIPrimitives)
+local TextChannelWindowAnalyticsModule = require(script.Parent.TextChannelWindowAnalytics)
+local UseTranslationToggleAvailableModule = require(script.Parent.useTranslationToggleAvailable)
+local UseInExperienceLocalizationFunction = require(Parent.ChatUIPrimitives).Hooks.useInExperienceLocalization
+local FFlagTCWTranslationSupport = ChatUIPrimitivesModule.Flags.FFlagTCWTranslationSupport
+local MessageLayoutContainer = ChatUIPrimitivesModule.MessageLayoutContainer
 
-return reactModule.memo(function(p1)
-	-- upvalues: foundationModule (ref), useInExperienceLocalization (ref), reactModule (ref), textChannelWindowAnalyticsModule (ref), messageLayoutContainer (ref)
-	local var1 = foundationModule.Hooks.useTokens()
-	local var2 = useInExperienceLocalization()
+return ReactModule.memo(function(p1) --[[ Line: 38 | Named "MessageListArea" ]]
+	-- upvalues: FoundationModule (copy), UseInExperienceLocalizationFunction (copy), FFlagTCWTranslationSupport (copy), UseTranslationToggleAvailableModule (copy), ReactModule (copy), TextChannelWindowAnalyticsModule (copy), MessageLayoutContainer (copy)
+	local UseTokensResult = FoundationModule.Hooks.useTokens()
+	local UseInExperienceLocalizationResult = UseInExperienceLocalizationFunction()
+	local UseTranslationToggleAvailableModuleResult = if FFlagTCWTranslationSupport then UseTranslationToggleAvailableModule() else nil
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 49 ]]
+		-- upvalues: TextChannelWindowAnalyticsModule (upval), p1 (copy)
+		return TextChannelWindowAnalyticsModule.createOnScrollCallback(p1.windowName)
+	end, { p1.windowName })
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 53 ]]
+		-- upvalues: UseTokensResult (copy)
+		return {
+			top = UDim.new(0, UseTokensResult.Size.Size_100),
+			bottom = UDim.new(0, UseTokensResult.Size.Size_100),
+			left = UDim.new(0, UseTokensResult.Size.Size_200),
+			right = UDim.new(0, UseTokensResult.Size.Size_1400)
+		}
+	end, {
+		UseTokensResult.Size.Size_100,
+		UseTokensResult.Size.Size_200,
+		UseTokensResult.Size.Size_1400
+	})
 	
-	return if p1.channelState == "no-channel" then reactModule.createElement(foundationModule.Empty, {
+	return if p1.channelState == "no-channel" then ReactModule.createElement(FoundationModule.Empty, {
 		icon = { name = "icons/status/oof_xlarge" },
-		text = var2("CoreScripts.TextChat.Error.NoChannelSelected")
-	}) elseif p1.channelState == "not-member" then reactModule.createElement(foundationModule.Empty, {
+		text = UseInExperienceLocalizationResult("CoreScripts.TextChat.Error.NoChannelSelected")
+	}) elseif p1.channelState == "not-member" then ReactModule.createElement(FoundationModule.Empty, {
 		icon = { name = "icons/status/oof_xlarge" },
-		text = var2("CoreScripts.TextChat.Error.NoChannelAccess")
-	}) elseif p1.channelState == "member" then reactModule.createElement(messageLayoutContainer, {
+		text = UseInExperienceLocalizationResult("CoreScripts.TextChat.Error.NoChannelAccess")
+	}) elseif p1.channelState == "member" then ReactModule.createElement(MessageLayoutContainer, {
 		layoutStyle = "textLine",
 		messagesSignal = p1.messagesSignal,
 		fontFace = p1.fontFace,
 		Size = UDim2.fromScale(1, 1),
-		contentPadding = reactModule.useMemo(function()
-			-- upvalues: var1 (ref)
-			return {
-				top = UDim.new(0, var1.Size.Size_100),
-				bottom = UDim.new(0, var1.Size.Size_100),
-				left = UDim.new(0, var1.Size.Size_200),
-				right = UDim.new(0, var1.Size.Size_1400)
-			}
-		end, {
-			var1.Size.Size_100,
-			var1.Size.Size_200,
-			var1.Size.Size_1400
-		}),
-		onScroll = reactModule.useMemo(function()
-			-- upvalues: textChannelWindowAnalyticsModule (copy), p1 (ref)
-			return textChannelWindowAnalyticsModule.createOnScrollCallback(p1.windowName)
-		end, { p1.windowName }),
+		contentPadding = UseMemoResult1,
+		onScroll = UseMemoResult,
 		selectableRows = p1.selectableRows,
-		selectionCursor = p1.selectionCursor
-	}) else reactModule.createElement(foundationModule.Empty, {
+		selectionCursor = p1.selectionCursor,
+		isTranslationSettingEnabled = UseTranslationToggleAvailableModuleResult,
+		onLatestUsernameChanged = p1.onLatestUsernameChanged
+	}) else ReactModule.createElement(FoundationModule.Empty, {
 		icon = { name = "icons/status/oof_xlarge" },
-		text = var2("CoreScripts.TextChat.InputBar.Hint.ChatUnavailable")
+		text = UseInExperienceLocalizationResult("CoreScripts.TextChat.InputBar.Hint.ChatUnavailable")
 	})
 end)

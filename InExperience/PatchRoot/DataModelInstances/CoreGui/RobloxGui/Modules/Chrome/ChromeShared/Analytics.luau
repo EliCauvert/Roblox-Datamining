@@ -1,15 +1,15 @@
-﻿local chromeShared = script:FindFirstAncestor("ChromeShared")
-local corePackagesService = game:GetService("CorePackages")
-local viewportUtilModule = require(chromeShared.Service.ViewportUtil)
-local useObservableValueModule = require(chromeShared.Hooks.useObservableValue)
-local chromeAnalyticsModule = require(script.ChromeAnalytics)
-local reactModule = require(corePackagesService.Packages.React)
-local fFlagUnibarLuaOcclusionMetrics = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagUnibarLuaOcclusionMetrics()
-local occlusionMetricsManagerModule = require(script.OcclusionMetricsManager)
+﻿local ChromeShared = script:FindFirstAncestor("ChromeShared")
+local CorePackages = game:GetService("CorePackages")
+local ViewportUtilModule = require(ChromeShared.Service.ViewportUtil)
+local UseObservableValueModule = require(ChromeShared.Hooks.useObservableValue)
+local ChromeAnalyticsModule = require(script.ChromeAnalytics)
+local ReactModule = require(CorePackages.Packages.React)
+local FFlagUnibarLuaOcclusionMetrics = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagUnibarLuaOcclusionMetrics()
+local OcclusionMetricsManagerModule = require(script.OcclusionMetricsManager)
 
-return function(_)
-	-- upvalues: chromeAnalyticsModule (ref), useObservableValueModule (ref), viewportUtilModule (ref), fFlagUnibarLuaOcclusionMetrics (ref), reactModule (ref), occlusionMetricsManagerModule (ref)
-	chromeAnalyticsModule.default:setScreenSize(useObservableValueModule(viewportUtilModule.screenSize))
+return function(_) --[[ Line: 14 | Named "ChromeAnalyticsListener" ]]
+	-- upvalues: ChromeAnalyticsModule (copy), UseObservableValueModule (copy), ViewportUtilModule (copy), FFlagUnibarLuaOcclusionMetrics (copy), ReactModule (copy), OcclusionMetricsManagerModule (copy)
+	ChromeAnalyticsModule.default:setScreenSize((UseObservableValueModule(ViewportUtilModule.screenSize)))
 	
-	return if fFlagUnibarLuaOcclusionMetrics then reactModule.createElement(occlusionMetricsManagerModule) else nil
+	return if FFlagUnibarLuaOcclusionMetrics then ReactModule.createElement(OcclusionMetricsManagerModule) else nil
 end

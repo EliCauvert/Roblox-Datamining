@@ -1,96 +1,97 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local promiseModule = require(dataHydration.Parent.Promise)
-local createDataCacheModule = require(dataHydration.createDataCache)
-local _ = require(dataHydration.DataHydrationTypes)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local PromiseModule = require(DataHydration.Parent.Promise)
+local CreateDataCacheModule = require(DataHydration.createDataCache)
+local _ = require(DataHydration.DataHydrationTypes)
 local _ = require(script.Parent.CollectibleItemStoreTypes)
-local createDataResolverModule = require(dataHydration.createDataResolver)
+local CreateDataResolverModule = require(DataHydration.createDataResolver)
 
-local function normalizeCreator(p1)
+local function normalizeCreator(Creator) --[[ Line: 28 ]]
 	return {
-		id = p1.id,
-		name = p1.name,
-		type = p1.type,
-		targetId = if p1.targetId ~= nil then p1.target_id else p1.targetId,
-		hasVerifiedBadge = if p1.hasVerifiedBadge ~= nil then p1.has_verified_badge else p1.hasVerifiedBadge
+		id = Creator.id,
+		name = Creator.name,
+		type = Creator.type,
+		targetId = if Creator.targetId == nil then Creator.target_id else Creator.targetId,
+		hasVerifiedBadge = if Creator.hasVerifiedBadge == nil then Creator.has_verified_badge else Creator.hasVerifiedBadge
 	}
 end
 
-local function normalizeExperiences(p1)
-	if not p1 then
+local function normalizeExperiences(Experiences) --[[ Line: 40 ]]
+	if not Experiences then
 		return nil
 	end
-	local list = table.create(#p1)
+	local Buffer = table.create(#Experiences)
 	
-	for i, v in p1 do
-		table.insert(list, {
-			id = v.id,
-			name = v.name,
-			detailPageLink = if v.detailPageLink ~= nil then v.detail_page_link else v.detailPageLink
+	for _, experience in Experiences do
+		table.insert(Buffer, {
+			id = experience.id,
+			name = experience.name,
+			detailPageLink = if experience.detailPageLink == nil then experience.detail_page_link else experience.detailPageLink
 		})
 	end
-	return list
+	return Buffer
 end
 
-local function _(p2)
-	-- upvalues: normalizeCreator (ref), normalizeExperiences (ref)
-	if not p2.creator and not p2.experiences then
-		return p2
+local function _(Tbl) --[[ Line: 59 | Named "normalizeCollectibleItem" ]]
+	-- upvalues: normalizeCreator (copy), normalizeExperiences (copy)
+	if not Tbl.creator and not Tbl.experiences then
+		return Tbl
 	end
-	local cloned = table.clone(p2)
+	local Copy = table.clone(Tbl)
 	
-	if p2.creator then
-		cloned.creator = normalizeCreator(p2.creator)
+	if Tbl.creator then
+		Copy.creator = normalizeCreator(Tbl.creator)
 	end
-	if p2.experiences then
-		cloned.experiences = normalizeExperiences(p2.experiences)
+	if Tbl.experiences then
+		Copy.experiences = normalizeExperiences(Tbl.experiences)
 	end
-	return cloned
+	return Copy
 end
 
-return function()
-	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), promiseModule (ref), normalizeCreator (ref), normalizeExperiences (ref)
-	local var1 = createDataCacheModule()
-	local var2 = createDataResolverModule({
-		cache = var1,
-		fetchFn = function(_)
-			-- upvalues: promiseModule (copy)
-			return promiseModule.resolve({})
+return function() --[[ Line: 73 | Named "createCollectibleItemStore" ]]
+	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), PromiseModule (copy), normalizeCreator (copy), normalizeExperiences (copy)
+	local DataCacheModule = CreateDataCacheModule()
+	local DataResolverModule = CreateDataResolverModule({
+		cache = DataCacheModule,
+		fetchFn = function(_) --[[ Line: 77 ]]
+			-- upvalues: PromiseModule (upval)
+			return PromiseModule.resolve({})
 		end
 	})
 	
 	return {
-		getCollectibleItemInfo = var2.getCachedItem,
-		getCollectibleItemInfos = var2.getCachedItems,
-		getNormalizedCollectibleItemInfo = function(a)
-			-- upvalues: var2 (ref), normalizeCreator (copy), normalizeExperiences (copy)
-			local cachedItem = var2.getCachedItem(a)
+		getCollectibleItemInfo = DataResolverModule.getCachedItem,
+		getCollectibleItemInfos = DataResolverModule.getCachedItems,
+		getNormalizedCollectibleItemInfo = function(p1) --[[ Line: 85 ]]
+			-- upvalues: DataResolverModule (copy), normalizeCreator (upval), normalizeExperiences (upval)
+			local CachedItem = DataResolverModule.getCachedItem(p1)
 			
 			return {
-				data = function(p2)
-					-- upvalues: cachedItem (ref), normalizeCreator (copy), normalizeExperiences (copy)
-					local var3 = cachedItem.data(p2)
+				data = function(p2) --[[ Line: 88 ]]
+					-- upvalues: CachedItem (copy), normalizeCreator (upval), normalizeExperiences (upval)
+					local DataResult = CachedItem.data(p2)
 					
-					if not var3 then
+					if not DataResult then
 						return nil
-					elseif not var3.creator and not var3.experiences then
-						return var3
 					end
-					local cloned = table.clone(var3)
+					if not DataResult.creator and not DataResult.experiences then
+						return DataResult
+					end
+					local Copy = table.clone(DataResult)
 					
-					if var3.creator then
-						cloned.creator = normalizeCreator(var3.creator)
+					if DataResult.creator then
+						Copy.creator = normalizeCreator(DataResult.creator)
 					end
-					if var3.experiences then
-						cloned.experiences = normalizeExperiences(var3.experiences)
+					if DataResult.experiences then
+						Copy.experiences = normalizeExperiences(DataResult.experiences)
 					end
-					return cloned
+					return Copy
 				end,
-				status = cachedItem.status
+				status = CachedItem.status
 			}
 		end,
-		updateCollectibleItemInfo = var1.updateItem,
-		updateCollectibleItemInfos = var1.updateItems,
-		clear = var1.clear,
-		dispose = var1.dispose
+		updateCollectibleItemInfo = DataCacheModule.updateItem,
+		updateCollectibleItemInfos = DataCacheModule.updateItems,
+		clear = DataCacheModule.clear,
+		dispose = DataCacheModule.dispose
 	}
 end

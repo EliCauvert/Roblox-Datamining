@@ -1,113 +1,116 @@
-﻿local dsnUtilsModule = require(script.Parent.DsnUtils)
-local t = {}
-t.__index = t
+﻿local DsnUtilsModule = require(script.Parent.DsnUtils)
+local RobloxTransportModule = {}
+RobloxTransportModule.__index = RobloxTransportModule
 
-function t.new(_, p1, p2)
-	-- upvalues: dsnUtilsModule (ref), t (ref)
-	local var1, var2 = dsnUtilsModule.parse_dsn(p1 or "")
+function RobloxTransportModule:new(p1, HttpServiceImpl) --[[ Line: 47 ]]
+	-- upvalues: DsnUtilsModule (copy), RobloxTransportModule (copy)
+	local Parse_dsnResult, Parse_dsnResult2 = DsnUtilsModule.parse_dsn(p1 or "")
 	
-	if not var1 then
-		error("Invalid DSN: " .. (var2 or "Unknown error"))
+	if not Parse_dsnResult then
+		error("Invalid DSN: " .. (Parse_dsnResult2 or "Unknown error"))
 	end
-	return setmetatable({
-		httpServiceImpl = p2,
-		dsn = var1,
-		endpoint = dsnUtilsModule.build_ingest_url(var1),
+	return (setmetatable({
+		httpServiceImpl = HttpServiceImpl,
+		dsn = Parse_dsnResult,
+		endpoint = DsnUtilsModule.build_ingest_url(Parse_dsnResult),
 		headers = {
-			["X-Sentry-Auth"] = dsnUtilsModule.build_auth_header(var1)
+			["X-Sentry-Auth"] = DsnUtilsModule.build_auth_header(Parse_dsnResult)
 		}
-	}, t)
+	}, RobloxTransportModule))
 end
 
-function t:send(p1, p2)
-	local var1 = self.httpServiceImpl:JSONEncode(p1)
-	local ok, status = pcall(function()
-		-- upvalues: self (ref), var1 (ref), p2 (ref)
+function RobloxTransportModule:send(Input, Callback: (any, any) -> ()) --[[ Line: 64 ]]
+	local Json = self.httpServiceImpl:JSONEncode(Input)
+	local Success, Result = pcall(function() --[[ Line: 68 ]]
+		-- upvalues: self (copy), Json (copy), Callback (copy)
 		self.httpServiceImpl:RequestInternal({
 			Method = "POST",
 			Url = self.endpoint,
 			Headers = self.headers,
-			Body = var1
-		}):Start(function(p3, p4)
-			-- upvalues: p2 (copy)
-			if p2 then
-				if p3 then
-					p2(true, { error = nil, body = p4 })
+			Body = Json
+		}):Start(function(p1, Body) --[[ Line: 76 ]]
+			-- upvalues: Callback (upval)
+			if Callback then
+				if p1 then
+					Callback(true, { error = nil, body = Body })
 					
 					return
 				end
-				p2(false, {
+				Callback(false, {
 					body = nil,
-					error = "HTTP request failed: " .. tostring(p4)
+					error = "HTTP request failed: " .. tostring(Body)
 				})
 			end
 		end)
 	end)
 	
-	if not ok and p2 then
-		p2(false, {
+	if not Success and Callback then
+		Callback(false, {
 			body = nil,
-			error = "Failed to create HTTP request: " .. tostring(status)
+			error = "Failed to create HTTP request: " .. tostring(Result)
 		})
 	end
 end
 
-function t:send_attachments(p1, p2, p3)
-	-- upvalues: dsnUtilsModule (ref)
-	local httpServiceImpl = self.httpServiceImpl
+function RobloxTransportModule:send_attachments(Event_id, List, Callback: (any, any) -> ()) --[[ Line: 110 ]]
+	-- upvalues: DsnUtilsModule (copy)
+	local HttpServiceImpl = self.httpServiceImpl
 	
-	if p1 and #p2 ~= 0 then
-		local list = {
-			httpServiceImpl:JSONEncode({ event_id = p1, sent_at = os.date("!%Y-%m-%dT%H:%M:%SZ") })
+	if Event_id and #List ~= 0 then
+		local List1 = {
+			(HttpServiceImpl:JSONEncode({
+				event_id = Event_id,
+				sent_at = os.date("!%Y-%m-%dT%H:%M:%SZ")
+			}))
 		}
 		
-		for i, v in ipairs(p2) do
-			table.insert(list, httpServiceImpl:JSONEncode({
+		for _, value in ipairs(List) do
+			table.insert(List1, (HttpServiceImpl:JSONEncode({
 				type = "attachment",
-				length = string.len(v.data),
-				filename = v.filename,
-				content_type = v.content_type or "application/octet-stream"
-			}))
-			table.insert(list, v.data)
+				length = string.len(value.data),
+				filename = value.filename,
+				content_type = value.content_type or "application/octet-stream"
+			})))
+			table.insert(List1, value.data)
 		end
-		local joined = table.concat(list, "\n")
-		local var1 = dsnUtilsModule.build_envelope_url(self.dsn)
-		local ok, status = pcall(function()
-			-- upvalues: httpServiceImpl (ref), var1 (ref), self (ref), joined (ref), p3 (ref)
-			httpServiceImpl:RequestInternal({
+		local Joined = table.concat(List1, "\n")
+		local Envelope_url = DsnUtilsModule.build_envelope_url(self.dsn)
+		local Success, Result = pcall(function() --[[ Line: 154 ]]
+			-- upvalues: HttpServiceImpl (copy), Envelope_url (copy), self (copy), Joined (copy), Callback (copy)
+			HttpServiceImpl:RequestInternal({
 				Method = "POST",
-				Url = var1,
+				Url = Envelope_url,
 				Headers = self.headers,
-				Body = joined
-			}):Start(function(p4, p5)
-				-- upvalues: p3 (copy)
-				if p3 then
-					if p4 then
-						p3(true, { error = nil, body = p5 })
+				Body = Joined
+			}):Start(function(p1, Body) --[[ Line: 162 ]]
+				-- upvalues: Callback (upval)
+				if Callback then
+					if p1 then
+						Callback(true, { error = nil, body = Body })
 						
 						return
 					end
-					p3(false, {
+					Callback(false, {
 						body = nil,
-						error = "HTTP request failed: " .. tostring(p5)
+						error = "HTTP request failed: " .. tostring(Body)
 					})
 				end
 			end)
 		end)
 		
-		if not ok and p3 then
-			p3(false, {
+		if not Success and Callback then
+			Callback(false, {
 				body = nil,
-				error = "Failed to create HTTP request: " .. tostring(status)
+				error = "Failed to create HTTP request: " .. tostring(Result)
 			})
 		end
 		return
-	elseif p3 then
-		p3(false, {
+	elseif Callback then
+		Callback(false, {
 			error = "eventId and attachments are required",
 			body = nil
 		})
 	end
 end
 
-return t
+return RobloxTransportModule

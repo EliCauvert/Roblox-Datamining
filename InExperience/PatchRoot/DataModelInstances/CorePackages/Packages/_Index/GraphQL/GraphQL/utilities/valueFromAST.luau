@@ -1,116 +1,101 @@
-﻿local parent = script.Parent.Parent
-local _ = require(parent.jsutils.ObjMap)
-local keyMap = require(parent.jsutils.keyMap).keyMap
-local inspect = require(parent.jsutils.inspect).inspect
-local invariant = require(parent.jsutils.invariant).invariant
-local _ = require(parent.language.ast)
-local kind = require(parent.language.kinds).Kind
-local definitionModule = require(parent.type.definition)
-local isLeafType = definitionModule.isLeafType
-local isInputObjectType = definitionModule.isInputObjectType
-local isListType = definitionModule.isListType
-local isNonNullType = definitionModule.isNonNullType
-local nullModule = require(parent.luaUtils.null)
-local isMissingVariable = nil
+﻿local Parent = script.Parent.Parent
+local _ = require(Parent.jsutils.ObjMap)
+local KeyMapFunction = require(Parent.jsutils.keyMap).keyMap
+local InspectFunction = require(Parent.jsutils.inspect).inspect
+local Invariant = require(Parent.jsutils.invariant).invariant
+local _ = require(Parent.language.ast)
+local Kind = require(Parent.language.kinds).Kind
+local DefinitionModule = require(Parent.type.definition)
+local IsLeafTypeFunction = DefinitionModule.isLeafType
+local IsInputObjectTypeFunction = DefinitionModule.isInputObjectType
+local IsListTypeFunction = DefinitionModule.isListType
+local IsNonNullTypeFunction = DefinitionModule.isNonNullType
+local NullModule = require(Parent.luaUtils.null)
+local Callback = nil
 
-local function valueFromAST(p1, p2, p3)
-	-- upvalues: kind (ref), nullModule (ref), isNonNullType (ref), valueFromAST (ref), isListType (ref), isMissingVariable (write), isInputObjectType (ref), keyMap (ref), isLeafType (ref), invariant (ref), inspect (ref)
-	local ofType, var1
+local function valueFromAST(p1, OfType, p2) --[[ Line: 37 ]]
+	-- upvalues: Kind (copy), NullModule (copy), IsNonNullTypeFunction (copy), valueFromAST (copy), IsListTypeFunction (copy), Callback (ref), IsInputObjectTypeFunction (copy), KeyMapFunction (copy), IsLeafTypeFunction (copy), Invariant (copy), InspectFunction (copy)
 	if not p1 then return end
-	if p1.kind == kind.VARIABLE then
-		local value = p1.name.value
+	if p1.kind == Kind.VARIABLE then
+		local Value = p1.name.value
 		
-		if p3 == nil or p3[value] == nil then return end
-		local var2 = p3[value]
+		if p2 == nil or p2[Value] == nil then return end
+		local NullModule1 = p2[Value]
 		
-		if var2 == nullModule and isNonNullType(p2) then
-			return
+		if NullModule1 == NullModule and IsNonNullTypeFunction(OfType) then return end
+		return NullModule1
+	elseif not IsNonNullTypeFunction(OfType) then
+		if p1.kind == Kind.NULL then
+			return NullModule
 		end
-		return var2
-	elseif isNonNullType(p2) then
-		if p1.kind == kind.NULL then
-			return
-		end
-		return valueFromAST(p1, p2.ofType, p3)
-	elseif p1.kind == kind.NULL then
-		return nullModule
-	elseif isListType(p2) then
-		ofType = p2.ofType
-		
-		if p1.kind == kind.LIST then
-			local t = {}
+		if IsListTypeFunction(OfType) then
+			local OfType1 = OfType.ofType
 			
-			for i, v in ipairs(p1.values) do
-				if isMissingVariable(v, p3) then
-					if not isNonNullType(ofType) then
-						table.insert(t, nullModule)
-						continue
-					end
-					return
-				else
-					var1 = valueFromAST(v, ofType, p3)
-					
-					if var1 ~= nil then
-						table.insert(t, var1)
-						continue
-					end
-					return
-				end
-			end
-			return t
-		else
-			local var3 = valueFromAST(p1, ofType, p3)
-			
-			if var3 == nil then
-				return
-			end
-			return { var3 }
-		end
-	elseif isInputObjectType(p2) then
-		if p1.kind ~= kind.OBJECT then return end
-		ofType = {}
-		local var4 = keyMap(p1.fields, function(p4)
-			return p4.name.value
-		end)
-		
-		for i, v in ipairs(p2:getFields():values()) do
-			var1 = var4[v.name]
-			
-			if var1 and not isMissingVariable(var1.value, p3) then
-				local var5 = valueFromAST(var1.value, v.type, p3)
+			if p1.kind == Kind.LIST then
+				local List = {}
 				
-				if var5 ~= nil then
-					ofType[v.name] = var5
-					continue
+				for _, value in ipairs(p1.values) do
+					if not Callback(value, p2) then
+						local ValueFromASTResult1 = valueFromAST(value, OfType1, p2)
+						
+						if ValueFromASTResult1 == nil then return end
+						table.insert(List, ValueFromASTResult1)
+					elseif not IsNonNullTypeFunction(OfType1) then
+						table.insert(List, NullModule)
+						continue
+					else
+						return
+					end
 				end
-				return
-			elseif v.defaultValue == nil then
-				if isNonNullType(v.type) then return end
+				return List
 			else
-				ofType[v.name] = v.defaultValue
+				local ValueFromASTResult = valueFromAST(p1, OfType1, p2)
+				
+				if ValueFromASTResult == nil then return end
+				return { ValueFromASTResult }
 			end
+		elseif IsInputObjectTypeFunction(OfType) then
+			if p1.kind ~= Kind.OBJECT then return end
+			local DefaultValues = {}
+			local KeyMapResult = KeyMapFunction(p1.fields, function(p3) --[[ Line: 118 ]]
+				return p3.name.value
+			end)
+			
+			for _, value1 in ipairs(OfType:getFields():values()) do
+				local KeyMapResultEntry = KeyMapResult[value1.name]
+				
+				if KeyMapResultEntry and not Callback(KeyMapResultEntry.value, p2) then
+					local ValueFromASTResult = valueFromAST(KeyMapResultEntry.value, value1.type, p2)
+					
+					if ValueFromASTResult == nil then return end
+					DefaultValues[value1.name] = ValueFromASTResult
+				elseif value1.defaultValue ~= nil then
+					DefaultValues[value1.name] = value1.defaultValue
+				elseif IsNonNullTypeFunction(value1.type) then return end
+			end
+			return DefaultValues
+		elseif not IsLeafTypeFunction(OfType) then
+			local ParseLiteralResult: (any, any) -> () = Invariant
+			ParseLiteralResult(false, "Unexpected input type: " .. InspectFunction(OfType))
+			
+			return
+		else
+			local ParseLiteralResult = nil
+			
+			if not pcall(function() --[[ Line: 148 ]]
+				-- upvalues: ParseLiteralResult (ref), OfType (copy), p1 (copy), p2 (copy)
+				ParseLiteralResult = OfType:parseLiteral(p1, p2)
+			end) then return end
+			if ParseLiteralResult == nil then return end
+			return ParseLiteralResult
 		end
-		return ofType
-	elseif not isLeafType(p2) then
-		invariant(false, "Unexpected input type: " .. inspect(p2))
-		
-		return
-	end
-	ofType = nil
-	
-	if not pcall(function()
-		-- upvalues: ofType (write), p2 (ref), p1 (ref), p3 (ref)
-		ofType = p2:parseLiteral(p1, p3)
-	end) then return end
-	if ofType == nil then
-		return
-	end
-	return ofType
+	elseif p1.kind == Kind.NULL then return end
+	return valueFromAST(p1, OfType.ofType, p2)
 end
 
-isMissingVariable = function(p4, p5)
-	-- upvalues: kind (ref)
-	return p4.kind == kind.VARIABLE and (if p5 ~= nil then p5[p4.name.value] == nil else true)
+Callback = function(p3, p4): boolean --[[ Line: 170 | Named "isMissingVariable" ]]
+	-- upvalues: Kind (copy)
+	return p3.kind == Kind.VARIABLE and (p4 == nil or p4[p3.name.value] == nil)
 end
 
 return { valueFromAST = valueFromAST }

@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("SduiSocialDataMigrateOffLegacyPresence", false) and require(script.Parent.FFlagFriendsStoreSortOnlineFriendsByRank)
+﻿local FFlagFriendsStoreSortOnlineFriendsByRankModule = require(script.Parent.FFlagFriendsStoreSortOnlineFriendsByRank)
+
+return game:DefineFastFlag("SduiSocialDataMigrateOffLegacyPresence", false) and FFlagFriendsStoreSortOnlineFriendsByRankModule

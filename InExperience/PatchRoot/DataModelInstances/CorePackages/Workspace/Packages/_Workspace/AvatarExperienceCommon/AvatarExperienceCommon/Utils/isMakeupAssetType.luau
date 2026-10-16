@@ -1,6 +1,6 @@
-﻿local constantsModule = require(script:FindFirstAncestor("AvatarExperienceCommon").Constants)
+﻿local ConstantsModule = require(script:FindFirstAncestor("AvatarExperienceCommon").Constants)
 
-return function(value)
-	-- upvalues: constantsModule (ref)
-	return constantsModule.ASSET_TYPE_ID_STRING_TO_MAKEUP_TYPE[value] ~= nil
+return function(p1): boolean --[[ Line: 7 | Named "isMakeupAssetType" ]]
+	-- upvalues: ConstantsModule (copy)
+	return ConstantsModule.ASSET_TYPE_ID_STRING_TO_MAKEUP_TYPE[p1] ~= nil
 end

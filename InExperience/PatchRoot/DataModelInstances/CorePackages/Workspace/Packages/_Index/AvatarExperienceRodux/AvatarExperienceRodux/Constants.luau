@@ -1,26 +1,26 @@
-﻿local ASSET_TYPE_NAME_TO_ID_STRING = require(script:FindFirstAncestor("AvatarExperienceRodux").Parent.AvatarExperienceCommon).Constants.ASSET_TYPE_NAME_TO_ID_STRING
-local t = { LCTops = "LCTops", LCBottoms = "LCBottoms" }
-local t_1 = {
-	[t.LCTops] = {
-		ASSET_TYPE_NAME_TO_ID_STRING.ShirtAccessory,
-		ASSET_TYPE_NAME_TO_ID_STRING.TShirtAccessory,
-		ASSET_TYPE_NAME_TO_ID_STRING.SweaterAccessory
+﻿local ASSETTYPENAMETOIDSTRING = require(script:FindFirstAncestor("AvatarExperienceRodux").Parent.AvatarExperienceCommon).Constants.ASSET_TYPE_NAME_TO_ID_STRING
+local AssetCategory = { LCTops = "LCTops", LCBottoms = "LCBottoms" }
+local AssetCategoryToAssetTypes = {
+	[AssetCategory.LCTops] = {
+		ASSETTYPENAMETOIDSTRING.ShirtAccessory,
+		ASSETTYPENAMETOIDSTRING.TShirtAccessory,
+		ASSETTYPENAMETOIDSTRING.SweaterAccessory
 	},
-	[t.LCBottoms] = {
-		ASSET_TYPE_NAME_TO_ID_STRING.PantsAccessory,
-		ASSET_TYPE_NAME_TO_ID_STRING.ShortsAccessory,
-		ASSET_TYPE_NAME_TO_ID_STRING.DressSkirtAccessory
+	[AssetCategory.LCBottoms] = {
+		ASSETTYPENAMETOIDSTRING.PantsAccessory,
+		ASSETTYPENAMETOIDSTRING.ShortsAccessory,
+		ASSETTYPENAMETOIDSTRING.DressSkirtAccessory
 	}
 }
-local t_2 = {}
+local AssetTypeToAssetCategory = {}
 
-for i, v in t_1 do
-	for i_1, v_1 in v do
-		t_2[v_1] = i
+for i, assetCategoryToAssetType in AssetCategoryToAssetTypes do
+	for _, value in assetCategoryToAssetType do
+		AssetTypeToAssetCategory[value] = i
 	end
 end
 return {
-	AssetCategory = t,
-	AssetCategoryToAssetTypes = t_1,
-	AssetTypeToAssetCategory = t_2
+	AssetCategory = AssetCategory,
+	AssetCategoryToAssetTypes = AssetCategoryToAssetTypes,
+	AssetTypeToAssetCategory = AssetTypeToAssetCategory
 }

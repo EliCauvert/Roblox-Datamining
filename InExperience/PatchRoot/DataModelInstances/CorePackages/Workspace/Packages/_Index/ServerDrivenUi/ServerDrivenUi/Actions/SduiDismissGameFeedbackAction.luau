@@ -1,35 +1,35 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local game = require(parent.DataHydration).Game
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local sduiActionType = sduiCoreSystemModule.SduiActionType
-local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
-local getSduiClientPageScope = sduiCoreSystemModule.getSduiClientPageScope
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local Game = require(Parent.DataHydration).Game
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiActionType = SduiCoreSystemModule.SduiActionType
+local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
+local GetSduiClientPageScopeFunction = SduiCoreSystemModule.getSduiClientPageScope
 
-return function(p1, _, p2)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref), game (ref), getSduiClientPageScope (ref)
-	local var1 = if p1 then p1.actionParams else nil
+return function(p1, _, p2) --[[ Line: 16 | Named "SduiDismissGameFeedbackAction" ]]
+	-- upvalues: SduiErrorType (copy), SduiActionType (copy), Game (copy), GetSduiClientPageScopeFunction (copy)
+	local ActionParams = p1 and p1.actionParams or nil
 	
-	if var1 == nil then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if ActionParams == nil then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
-			name = sduiActionType.DismissGameFeedback
+			name = SduiActionType.DismissGameFeedback
 		}, p2.appPage)
 		
 		return
 	end
-	local rootPlaceId = var1.rootPlaceId
+	local RootPlaceId = ActionParams.rootPlaceId
 	
-	if rootPlaceId == nil or typeof(rootPlaceId) ~= "string" then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if RootPlaceId == nil or typeof(RootPlaceId) ~= "string" then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing or invalid rootPlaceId",
-			name = sduiActionType.DismissGameFeedback
+			name = SduiActionType.DismissGameFeedback
 		}, p2.appPage)
 		
 		return
 	end
-	game.getUserVoteFeedbackMetadataStore(false).clearItem(rootPlaceId)
+	Game.getUserVoteFeedbackMetadataStore(false).clearItem(RootPlaceId)
 	
 	if p2.configKey then
-		getSduiClientPageScope(p2.configKey).set("showPlayerFeedback", false)
+		GetSduiClientPageScopeFunction(p2.configKey).set("showPlayerFeedback", false)
 	end
 end

@@ -1,3 +1,3 @@
 ﻿local _ = require(script.AlertConstants)
 
-return require(script.AlertActions)
+return (require(script.AlertActions))

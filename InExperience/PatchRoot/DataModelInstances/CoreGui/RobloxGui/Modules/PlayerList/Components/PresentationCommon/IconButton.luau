@@ -1,32 +1,31 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local roactModule = require(corePackagesService.Packages.Roact)
-local tModule = require(corePackagesService.Packages.t)
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local iconSize = foundationModule.Enums.IconSize
-local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
-local fFlagCoreUiMigrateUIBloxToFoundation = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
-local withLayoutValues = require(script.Parent.Parent.Connection.LayoutValues).WithLayoutValues
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local iconButton = roactModule.PureComponent:extend("IconButton")
-iconButton.validateProps = tModule.strictInterface({
-	size = tModule.UDim2,
-	position = tModule.UDim2,
-	backgroundColor = tModule.Color3,
-	icon = tModule.union(tModule.string, tModule.table),
-	showBackground = tModule.boolean,
-	onActivated = tModule.optional(tModule.callback)
+﻿local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local TModule = require(CorePackages.Packages.t)
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local IconSize = FoundationModule.Enums.IconSize
+local WithFoundationOrUIBloxStyleFunction = require(CorePackages.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
+local FFlagCoreUiMigrateUIBloxToFoundation = require(CorePackages.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
+local WithLayoutValuesFunction = require(script.Parent.Parent.Connection.LayoutValues).WithLayoutValues
+local ImageSetLabel = require(CorePackages.Packages.UIBlox).Core.ImageSet.ImageSetLabel
+local IconButton = RoactModule.PureComponent:extend("IconButton")
+IconButton.validateProps = TModule.strictInterface({
+	size = TModule.UDim2,
+	position = TModule.UDim2,
+	backgroundColor = TModule.Color3,
+	icon = TModule.union(TModule.string, TModule.table),
+	showBackground = TModule.boolean,
+	onActivated = TModule.optional(TModule.callback)
 })
 
-function iconButton.init(p1)
+function IconButton.init(p1) --[[ Line: 32 ]]
 	p1.state = { isHovered = false, isPressed = false }
 end
 
-function iconButton.render(p1)
-	-- upvalues: withLayoutValues (ref), withFoundationOrUIBloxStyle (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), roactModule (ref), foundationModule (ref), iconSize (ref), imageSetLabel (ref)
-	return withLayoutValues(function(p2)
-		-- upvalues: withFoundationOrUIBloxStyle (copy), p1 (ref), fFlagCoreUiMigrateUIBloxToFoundation (copy), roactModule (copy), foundationModule (copy), iconSize (copy), imageSetLabel (copy)
-		return withFoundationOrUIBloxStyle(function(p3)
+function IconButton.render(p1) --[[ Line: 39 ]]
+	-- upvalues: WithLayoutValuesFunction (copy), WithFoundationOrUIBloxStyleFunction (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), RoactModule (copy), FoundationModule (copy), IconSize (copy), ImageSetLabel (copy)
+	return WithLayoutValuesFunction(function(p2) --[[ Line: 40 ]]
+		-- upvalues: WithFoundationOrUIBloxStyleFunction (upval), p1 (copy), FFlagCoreUiMigrateUIBloxToFoundation (upval), RoactModule (upval), FoundationModule (upval), IconSize (upval), ImageSetLabel (upval)
+		return WithFoundationOrUIBloxStyleFunction(function(p3) --[[ Line: 41 ]]
 			return {
 				Theme = {
 					BackgroundOnHover = {
@@ -43,32 +42,30 @@ function iconButton.render(p1)
 					}
 				}
 			}
-		end, function(p3)
-			-- upvalues: p1 (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), roactModule (copy), p2 (ref), foundationModule (copy), iconSize (copy), imageSetLabel (copy)
-			local t = { Transparency = 1, Color = Color3.new(1, 1, 1) }
+		end, function(p3) --[[ Line: 58 ]]
+			-- upvalues: p1 (upval), FFlagCoreUiMigrateUIBloxToFoundation (upval), RoactModule (upval), p2 (copy), FoundationModule (upval), IconSize (upval), ImageSetLabel (upval)
+			local BackgroundOnHover = { Transparency = 1, Color = Color3.new(1, 1, 1) }
 			
 			if p1.props.onActivated then
 				if p1.state.isPressed then
-					t = p3.Theme.BackgroundOnPress
+					BackgroundOnHover = p3.Theme.BackgroundOnPress
 				elseif p1.state.isHovered then
-					t = p3.Theme.BackgroundOnHover
+					BackgroundOnHover = p3.Theme.BackgroundOnHover
 				end
 			end
-			local var1
-			local _ = nil
-			
-			if fFlagCoreUiMigrateUIBloxToFoundation then
-				local icon = p1.props.icon
-				var1 = if typeof(icon) == "string" then roactModule.createElement("Frame", {
+			local Frame = nil
+			if FFlagCoreUiMigrateUIBloxToFoundation then
+				local Icon = p1.props.icon
+				Frame = if typeof(Icon) == "string" then RoactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					ZIndex = 2,
 					Position = UDim2.new(0.5, 0, 0.5, 0),
 					Size = UDim2.new(0, p2.DropDownIconSize, 0, p2.DropDownIconSize),
 					AnchorPoint = Vector2.new(0.5, 0.5)
 				}, {
-					Icon = roactModule.createElement(foundationModule.Icon, {
-						name = icon,
-						size = iconSize.Medium,
+					Icon = RoactModule.createElement(FoundationModule.Icon, {
+						name = Icon,
+						size = IconSize.Medium,
 						style = {
 							Color3 = p3.Theme.IconEmphasis.Color,
 							Transparency = p3.Theme.IconEmphasis.Transparency
@@ -76,11 +73,11 @@ function iconButton.render(p1)
 						AnchorPoint = Vector2.new(0.5, 0.5),
 						Position = UDim2.new(0.5, 0, 0.5, 0)
 					})
-				}) else roactModule.createElement(foundationModule.Image, {
+				}) else RoactModule.createElement(FoundationModule.Image, {
 					BackgroundTransparency = 1,
 					ZIndex = 2,
-					Image = icon.Image,
-					imageRect = { offset = icon.ImageRectOffset, size = icon.ImageRectSize },
+					Image = Icon.Image,
+					imageRect = { offset = Icon.ImageRectOffset, size = Icon.ImageRectSize },
 					Size = UDim2.new(0, p2.DropDownIconSize, 0, p2.DropDownIconSize),
 					imageStyle = {
 						Color3 = p3.Theme.IconEmphasis.Color,
@@ -90,7 +87,7 @@ function iconButton.render(p1)
 					Position = UDim2.new(0.5, 0, 0.5, 0)
 				})
 			else
-				var1 = roactModule.createElement(imageSetLabel, {
+				Frame = RoactModule.createElement(ImageSetLabel, {
 					BackgroundTransparency = 1,
 					ZIndex = 2,
 					Position = UDim2.new(0.5, 0, 0.5, 0),
@@ -99,42 +96,42 @@ function iconButton.render(p1)
 					AnchorPoint = Vector2.new(0.5, 0.5)
 				})
 			end
-			return roactModule.createElement("TextButton", {
+			return RoactModule.createElement("TextButton", {
 				Text = "",
 				BorderSizePixel = 0,
-				BackgroundTransparency = if p1.props.showBackground then p2.IconButtonBackgroundTransparency else 1,
+				BackgroundTransparency = p1.props.showBackground and p2.IconButtonBackgroundTransparency or 1,
 				BackgroundColor3 = p1.props.backgroundColor,
 				Position = p1.props.position,
 				Size = p1.props.size,
-				[roactModule.Event.Activated] = p1.props.onActivated,
-				[roactModule.Event.MouseButton1Down] = function()
-					-- upvalues: p1 (copy)
+				[RoactModule.Event.Activated] = p1.props.onActivated,
+				[RoactModule.Event.MouseButton1Down] = function() --[[ Line: 130 ]]
+					-- upvalues: p1 (upval)
 					p1:setState({ isPressed = true })
 				end,
-				[roactModule.Event.MouseButton1Up] = function()
-					-- upvalues: p1 (copy)
+				[RoactModule.Event.MouseButton1Up] = function() --[[ Line: 135 ]]
+					-- upvalues: p1 (upval)
 					p1:setState({ isPressed = false })
 				end,
-				[roactModule.Event.MouseEnter] = function()
-					-- upvalues: p1 (copy)
+				[RoactModule.Event.MouseEnter] = function() --[[ Line: 141 ]]
+					-- upvalues: p1 (upval)
 					p1:setState({ isHovered = true })
 				end,
-				[roactModule.Event.MouseLeave] = function()
-					-- upvalues: p1 (copy)
+				[RoactModule.Event.MouseLeave] = function() --[[ Line: 147 ]]
+					-- upvalues: p1 (upval)
 					p1:setState({ isHovered = false, isPressed = false })
 				end
 			}, {
-				HoverBackground = roactModule.createElement("Frame", {
+				HoverBackground = RoactModule.createElement("Frame", {
 					ZIndex = 1,
 					BorderSizePixel = 0,
 					Size = UDim2.new(1, 0, 1, 0),
-					BackgroundTransparency = t.Transparency,
-					BackgroundColor3 = t.Color
+					BackgroundTransparency = BackgroundOnHover.Transparency,
+					BackgroundColor3 = BackgroundOnHover.Color
 				}),
-				ImageButton = var1
+				ImageButton = Frame
 			})
 		end)
 	end)
 end
 
-return iconButton
+return IconButton

@@ -1,248 +1,259 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local dashModule = require(parent.Dash)
-local userLibModule = require(parent.UserLib)
-local roactUtilsModule = require(parent.RoactUtils)
-local robloxAppHooksModule = require(parent.RobloxAppHooks)
-local constants = userLibModule.Utils.Constants
-local getRbxthumbWithTypeSizeAndOptions = userLibModule.Utils.getRbxthumbWithTypeSizeAndOptions
-local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
-local constantsModule = require(profilePlatform.Common.Constants)
-local enumsModule = require(profilePlatform.Common.Enums)
-local useAvatarBackgroundFromWrapperModule = require(profilePlatform.Hooks.useAvatarBackgroundFromWrapper)
-local useProfileJsonComponentModule = require(profilePlatform.Hooks.useProfileJsonComponent)
-local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfileWrapperContext)
-local useProfileAnalyticsContextModule = require(profilePlatform.Contexts.useProfileAnalyticsContext)
-local useMarketplaceAnalyticsContextModule = require(profilePlatform.Hooks.useMarketplaceAnalyticsContext)
-local eventNamesModule = require(profilePlatform.Analytics.EventNames)
-local useProfileCardWidth = require(parent.ProfilePlatformCommon).Hooks.useProfileCardWidth
-local useProfileFormFactorModule = require(profilePlatform.Hooks.useProfileFormFactor)
-local fFlagSocialEnableProfileInspectAndBuyAnalytics = require(parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuyAnalytics
-local fFlagProfileInspectAvatarBackgroundModule = require(profilePlatform.Flags.FFlagProfileInspectAvatarBackground)
-local fFlagProfileUnifiedPurchaseLoggingModule = require(profilePlatform.Flags.FFlagProfileUnifiedPurchaseLogging)
-local useInspectAvatarDataModule = require(script.Parent.useInspectAvatarData)
-local inspectAvatarUtilsModule = require(script.Parent.InspectAvatarUtils)
-local inspectAvatarSheetModule = require(script.Parent.InspectAvatarSheet)
-local _ = require(profilePlatform.Common.Types)
-local _ = require(profilePlatform.Analytics.sendProfilePurchaseEvents)
-local isItemPurchasable = inspectAvatarUtilsModule.isItemPurchasable
-local getPriceStatus = inspectAvatarUtilsModule.getPriceStatus
-local priceStatusEnum = inspectAvatarUtilsModule.PriceStatusEnum
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local DashModule = require(Parent.Dash)
+local UserLibModule = require(Parent.UserLib)
+local RobloxAppHooksModule = require(Parent.RobloxAppHooks)
+local Constants = UserLibModule.Utils.Constants
+local GetRbxthumbWithTypeSizeAndOptionsFunction = UserLibModule.Utils.getRbxthumbWithTypeSizeAndOptions
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local ConstantsModule = require(ProfilePlatform.Common.Constants)
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local UseAvatarBackgroundFromWrapperModule = require(ProfilePlatform.Hooks.useAvatarBackgroundFromWrapper)
+local UseProfileJsonComponentModule = require(ProfilePlatform.Hooks.useProfileJsonComponent)
+local UseProfileWrapperContextModule = require(ProfilePlatform.Contexts.useProfileWrapperContext)
+local UseProfileAnalyticsContextModule = require(ProfilePlatform.Contexts.useProfileAnalyticsContext)
+local UseMarketplaceAnalyticsContextModule = require(ProfilePlatform.Hooks.useMarketplaceAnalyticsContext)
+local EventNamesModule = require(ProfilePlatform.Analytics.EventNames)
+local UseProfileCardWidthFunction = require(Parent.ProfilePlatformCommon).Hooks.useProfileCardWidth
+local UseProfileFormFactorModule = require(ProfilePlatform.Hooks.useProfileFormFactor)
+local FFlagSocialEnableProfileInspectAndBuyAnalytics = require(Parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuyAnalytics
+local FFlagProfileInspectAvatarBackgroundModule = require(ProfilePlatform.Flags.FFlagProfileInspectAvatarBackground)
+local FFlagProfileUnifiedPurchaseLoggingModule = require(ProfilePlatform.Flags.FFlagProfileUnifiedPurchaseLogging)
+local UseInspectAvatarDataModule = require(script.Parent.useInspectAvatarData)
+local InspectAvatarUtilsModule = require(script.Parent.InspectAvatarUtils)
+local InspectAvatarSheetModule = require(script.Parent.InspectAvatarSheet)
+local _ = require(ProfilePlatform.Common.Types)
+local _ = require(ProfilePlatform.Analytics.sendProfilePurchaseEvents)
+local IsItemPurchasableFunction = InspectAvatarUtilsModule.isItemPurchasable
+local GetPriceStatusFunction = InspectAvatarUtilsModule.getPriceStatus
+local PriceStatusEnum = InspectAvatarUtilsModule.PriceStatusEnum
 
-return function(p1)
-	-- upvalues: useProfileWrapperContextModule (ref), useProfileAnalyticsContextModule (ref), useMarketplaceAnalyticsContextModule (ref), robloxAppHooksModule (ref), useProfileFormFactorModule (ref), enumsModule (ref), useSelector (ref), useProfileCardWidth (ref), useProfileJsonComponentModule (ref), getRbxthumbWithTypeSizeAndOptions (ref), constants (ref), constantsModule (ref), fFlagProfileInspectAvatarBackgroundModule (ref), useAvatarBackgroundFromWrapperModule (ref), useInspectAvatarDataModule (ref), reactModule (ref), isItemPurchasable (ref), dashModule (ref), fFlagProfileUnifiedPurchaseLoggingModule (ref), inspectAvatarUtilsModule (ref), getPriceStatus (ref), priceStatusEnum (ref), fFlagSocialEnableProfileInspectAndBuyAnalytics (ref), eventNamesModule (ref), inspectAvatarSheetModule (ref)
-	local var1 = useProfileWrapperContextModule()
-	local var2 = useProfileAnalyticsContextModule()
-	local var3 = useMarketplaceAnalyticsContextModule()
-	local var4 = robloxAppHooksModule.useLocalRobuxBalance()
-	local var5 = useProfileFormFactorModule().formFactor == enumsModule.ProfileFormFactor.Wide
-	local profileId = var1.profileId
-	local var6 = if var5 then 0 else useSelector(function(p2)
+return function(p1) --[[ Line: 52 | Named "InspectAvatarSheetContainer" ]]
+	-- upvalues: UseProfileWrapperContextModule (copy), UseProfileAnalyticsContextModule (copy), UseMarketplaceAnalyticsContextModule (copy), RobloxAppHooksModule (copy), UseProfileFormFactorModule (copy), EnumsModule (copy), UseSelectorFunction (copy), UseProfileCardWidthFunction (copy), UseProfileJsonComponentModule (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), Constants (copy), ConstantsModule (copy), FFlagProfileInspectAvatarBackgroundModule (copy), UseAvatarBackgroundFromWrapperModule (copy), UseInspectAvatarDataModule (copy), ReactModule (copy), IsItemPurchasableFunction (copy), DashModule (copy), FFlagProfileUnifiedPurchaseLoggingModule (copy), InspectAvatarUtilsModule (copy), GetPriceStatusFunction (copy), PriceStatusEnum (copy), FFlagSocialEnableProfileInspectAndBuyAnalytics (copy), EventNamesModule (copy), InspectAvatarSheetModule (copy)
+	local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
+	local UseProfileAnalyticsContextModuleResult = UseProfileAnalyticsContextModule()
+	local UseMarketplaceAnalyticsContextModuleResult = UseMarketplaceAnalyticsContextModule()
+	local UseLocalRobuxBalanceResult = RobloxAppHooksModule.useLocalRobuxBalance()
+	local IsFormFactorMatch = UseProfileFormFactorModule().formFactor == EnumsModule.ProfileFormFactor.Wide
+	local ProfileId = UseProfileWrapperContextModuleResult.profileId
+	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 62 ]]
 		return p2.TopBar.statusBarHeight
 	end)
-	local var7 = useProfileCardWidth()
-	local var8 = if var5 then 400 else math.floor(var7 * 0.75)
-	local var9 = useProfileJsonComponentModule(enumsModule.Components.UserProfileHeader)
-	local var10 = if var9.names then var9.names.username else ""
-	local var11 = getRbxthumbWithTypeSizeAndOptions(profileId, constants.RbxthumbTypes.Avatar, constantsModule.AVATAR_THUMBNAIL_SIZE)
-	local var12 = if fFlagProfileInspectAvatarBackgroundModule then useAvatarBackgroundFromWrapperModule() else nil
-	local var13 = useInspectAvatarDataModule(useProfileJsonComponentModule(enumsModule.Components.CurrentlyWearing).assets or {})
-	local displayItems = var13.displayItems
-	local var14, var15 = reactModule.useState({})
-	local var16 = reactModule.useRef({})
-	reactModule.useEffect(function()
-		-- upvalues: displayItems (ref), isItemPurchasable (copy), var16 (ref), var15 (ref), dashModule (copy)
-		if #displayItems == 0 then return end
+	local UseSelectorResult1 = if IsFormFactorMatch then 0 else UseSelectorResult
+	local UseProfileCardWidthResult: number = UseProfileCardWidthFunction()
+	local Floored: number = if IsFormFactorMatch then 400 else math.floor(UseProfileCardWidthResult * 0.75)
+	local UseProfileJsonComponentModuleResult = UseProfileJsonComponentModule(EnumsModule.Components.UserProfileHeader)
+	local Username = UseProfileJsonComponentModuleResult.names and UseProfileJsonComponentModuleResult.names.username or ""
+	local RbxthumbWithTypeSizeAndOptions = GetRbxthumbWithTypeSizeAndOptionsFunction(ProfileId, Constants.RbxthumbTypes.Avatar, ConstantsModule.AVATAR_THUMBNAIL_SIZE)
+	local UseAvatarBackgroundFromWrapperModuleResult = if FFlagProfileInspectAvatarBackgroundModule then UseAvatarBackgroundFromWrapperModule() else nil
+	local UseInspectAvatarDataModuleResult = UseInspectAvatarDataModule(UseProfileJsonComponentModule(EnumsModule.Components.CurrentlyWearing).assets or {})
+	local DisplayItems = UseInspectAvatarDataModuleResult.displayItems
+	local UseStateResult, UseStateResult2 = ReactModule.useState({})
+	local UseRefResult = ReactModule.useRef({})
+	ReactModule.useEffect(function() --[[ Line: 95 ]]
+		-- upvalues: DisplayItems (copy), IsItemPurchasableFunction (upval), UseRefResult (copy), UseStateResult2 (copy), DashModule (upval)
+		if #DisplayItems == 0 then return end
 		local t = {}
-		local var17 = false
+		local Flag = false
 		
-		for i, v in displayItems do
-			local id = v.id
+		for _, displayItem in DisplayItems do
+			local Id = displayItem.id
 			
-			if isItemPurchasable(v) and not var16.current[id] then
-				var16.current[id] = true
-				t[id] = true
-				var17 = true
+			if IsItemPurchasableFunction(displayItem) and not UseRefResult.current[Id] then
+				UseRefResult.current[Id] = true
+				t[Id] = true
+				Flag = true
 			end
 		end
-		if var17 then
-			var15(function(p2)
-				-- upvalues: dashModule (copy), t (ref)
-				return dashModule.join(p2, t)
+		if Flag then
+			UseStateResult2(function(p2) --[[ Line: 112 ]]
+				-- upvalues: DashModule (upval), t (copy)
+				return DashModule.join(p2, t)
 			end)
 			
 			return
 		end
-	end, { displayItems })
-	local var18 = reactModule.useCallback(function(p2)
-		-- upvalues: var15 (ref), dashModule (copy)
-		var15(function(p3)
-			-- upvalues: dashModule (copy), p2 (ref)
-			return dashModule.join(p3, { [p2] = not p3[p2] })
-		end)
-	end, {})
-	local var19 = reactModule.useMemo(function()
-		-- upvalues: fFlagProfileUnifiedPurchaseLoggingModule (copy), displayItems (ref), var14 (ref), isItemPurchasable (copy), inspectAvatarUtilsModule (copy), getPriceStatus (copy), priceStatusEnum (copy), enumsModule (copy)
+	end, { DisplayItems })
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 124 ]]
+		-- upvalues: FFlagProfileUnifiedPurchaseLoggingModule (upval), DisplayItems (copy), UseStateResult (copy), IsItemPurchasableFunction (upval), InspectAvatarUtilsModule (upval), GetPriceStatusFunction (upval), PriceStatusEnum (upval), EnumsModule (upval)
+		local LineItems = {}
+		local TotalPrice = 0
+		local Count = 0
+		local List = {}
+		local PurchasedItemIds = {}
+		local PurchasedBundleIds = {}
+		local T = if FFlagProfileUnifiedPurchaseLoggingModule then {} else nil
 		local t = {}
-		local var20 = 0
-		local var21 = 0
-		local t_1 = {}
-		local t_2 = {}
-		local t_3 = {}
-		local var22 = if fFlagProfileUnifiedPurchaseLoggingModule then {} else nil
-		local t_4 = {}
 		
-		for i, v in displayItems do
-			if v.id then
-				local id = v.id
+		for _, displayItem in DisplayItems do
+			if displayItem.id then
+				local Id = displayItem.id
 				
-				if var14[id] and isItemPurchasable(v) then
-					local effectivePrice = inspectAvatarUtilsModule.getEffectivePrice(v)
-					table.insert(t, {
-						collectibleProductId = if getPriceStatus(v) == priceStatusEnum.PurchaseFromResale and v.collectibleItemDetails then v.collectibleItemDetails.collectibleLowestAvailableResaleProductId or v.collectibleProductId else v.collectibleProductId,
-						agreedPriceRobux = effectivePrice
+				if UseStateResult[Id] and IsItemPurchasableFunction(displayItem) then
+					local EffectivePrice: number = InspectAvatarUtilsModule.getEffectivePrice(displayItem)
+					table.insert(LineItems, {
+						collectibleProductId = GetPriceStatusFunction(displayItem) == PriceStatusEnum.PurchaseFromResale and displayItem.collectibleItemDetails and displayItem.collectibleItemDetails.collectibleLowestAvailableResaleProductId or displayItem.collectibleProductId,
+						agreedPriceRobux = EffectivePrice
 					})
-					var20 += effectivePrice
-					var21 += 1
-					table.insert(t_2, id)
+					TotalPrice += EffectivePrice
+					Count += 1
+					table.insert(PurchasedItemIds, Id)
 					
-					if fFlagProfileUnifiedPurchaseLoggingModule and var22 then
-						table.insert(var22, {
-							itemId = id,
-							itemType = v.itemType,
-							itemSubType = tonumber(v.itemSubType),
-							priceInRobux = effectivePrice
+					if FFlagProfileUnifiedPurchaseLoggingModule and T then
+						table.insert(T, {
+							itemId = Id,
+							itemType = displayItem.itemType,
+							itemSubType = tonumber(displayItem.itemSubType),
+							priceInRobux = EffectivePrice
 						})
 					end
-					if v.itemType == enumsModule.ItemTypes.Bundle then
-						table.insert(t_3, id)
+					if displayItem.itemType == EnumsModule.ItemTypes.Bundle then
+						table.insert(PurchasedBundleIds, Id)
 					end
-					if #v.bundleAssetIds > 0 then
-						for i_1, v_1 in v.bundleAssetIds do
-							if not t_4[v_1] then
-								t_4[v_1] = true
-								table.insert(t_1, v_1)
+					if #displayItem.bundleAssetIds > 0 then
+						for _, bundleAssetId in displayItem.bundleAssetIds do
+							if not t[bundleAssetId] then
+								t[bundleAssetId] = true
+								table.insert(List, bundleAssetId)
 							end
 						end
 					else
-						local var23 = tonumber(v.id)
+						local Number: number? = tonumber(displayItem.id)
 						
-						if var23 and not t_4[var23] then
-							t_4[var23] = true
-							table.insert(t_1, var23)
+						if Number and not t[Number] then
+							t[Number] = true
+							table.insert(List, Number)
 						end
 					end
 				end
 			end
 		end
 		return {
-			lineItems = t,
-			totalPrice = var20,
-			count = var21,
-			purchasedWearIds = t_1,
-			purchasedItemIds = t_2,
-			purchasedBundleIds = t_3,
-			purchasedItems = var22
+			lineItems = LineItems,
+			totalPrice = TotalPrice,
+			count = Count,
+			purchasedWearIds = List,
+			purchasedItemIds = PurchasedItemIds,
+			purchasedBundleIds = PurchasedBundleIds,
+			purchasedItems = T
 		}
-	end, { displayItems, var14 })
-	local var24 = reactModule.useMemo(function()
-		-- upvalues: displayItems (ref)
-		local t = {}
+	end, { DisplayItems, UseStateResult })
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 193 ]]
+		-- upvalues: DisplayItems (copy)
+		local Numbers = {}
 		
-		for i, v in displayItems do
-			local var25 = tonumber(v.id)
-			local var26 = tonumber(v.itemSubType)
+		for _, displayItem in DisplayItems do
+			local Number: number? = tonumber(displayItem.id)
+			local Number1: number? = tonumber(displayItem.itemSubType)
 			
-			if var25 and var26 then
-				t[var25] = var26
+			if Number and Number1 then
+				Numbers[Number] = Number1
 			end
-			if v.assetsInBundle then
-				for i_1, v_1 in v.assetsInBundle do
-					local var27 = tonumber(v_1.id)
-					local var28 = tonumber(v_1.assetType)
+			if displayItem.assetsInBundle then
+				for _, value in displayItem.assetsInBundle do
+					local Number2: number? = tonumber(value.id)
+					local Number21: number? = tonumber(value.assetType)
 					
-					if var27 and var28 then
-						t[var27] = var28
+					if Number2 and Number21 then
+						Numbers[Number2] = Number21
 					end
 				end
 			end
 		end
-		return t
-	end, { displayItems })
+		return Numbers
+	end, { DisplayItems })
 	
-	return reactModule.createElement(inspectAvatarSheetModule, {
-		displayItems = displayItems,
-		selectedItems = var14,
-		isLoading = var13.isLoading,
-		username = var10,
-		profileId = profileId,
-		avatarThumbnail = var11,
-		avatarBackgroundImage = if fFlagProfileInspectAvatarBackgroundModule then var12 else nil,
-		avatarViewportHeight = var8,
-		cardWidth = var7,
-		topOffset = var6,
-		purchaseSummary = { totalPrice = var19.totalPrice, count = var19.count },
-		onToggleItem = var18,
-		onBuyAll = reactModule.useCallback(function()
-			-- upvalues: var19 (ref), var13 (ref), fFlagSocialEnableProfileInspectAndBuyAnalytics (copy), var2 (ref), eventNamesModule (copy), var1 (ref), var4 (ref), p1 (ref), enumsModule (copy), fFlagProfileUnifiedPurchaseLoggingModule (copy), var24 (ref)
-			if #var19.lineItems == 0 or not var13.localUserId then return end
-			if fFlagSocialEnableProfileInspectAndBuyAnalytics then
-				var2.fireAnalyticsEvent(eventNamesModule.InspectAvatarBuyClicked, {
-					profileSessionId = var1.profileSessionId,
-					itemIds = table.concat(var19.purchasedItemIds, ","),
-					totalPrice = var19.totalPrice
+	return ReactModule.createElement(InspectAvatarSheetModule, {
+		displayItems = DisplayItems,
+		selectedItems = UseStateResult,
+		isLoading = UseInspectAvatarDataModuleResult.isLoading,
+		username = Username,
+		profileId = ProfileId,
+		avatarThumbnail = RbxthumbWithTypeSizeAndOptions,
+		avatarBackgroundImage = if FFlagProfileInspectAvatarBackgroundModule then UseAvatarBackgroundFromWrapperModuleResult else nil,
+		avatarViewportHeight = Floored,
+		cardWidth = UseProfileCardWidthResult,
+		topOffset = UseSelectorResult1,
+		purchaseSummary = {
+			totalPrice = UseMemoResult.totalPrice,
+			count = UseMemoResult.count
+		},
+		onToggleItem = ReactModule.useCallback(function(p2) --[[ Line: 117 ]]
+			-- upvalues: UseStateResult2 (copy), DashModule (upval)
+			UseStateResult2(function(p3) --[[ Line: 118 ]]
+				-- upvalues: DashModule (upval), p2 (copy)
+				return DashModule.join(p3, { [p2] = not p3[p2] })
+			end)
+		end, {}),
+		onBuyAll = ReactModule.useCallback(function() --[[ Line: 215 ]]
+			-- upvalues: UseMemoResult (copy), UseInspectAvatarDataModuleResult (copy), FFlagSocialEnableProfileInspectAndBuyAnalytics (upval), UseProfileAnalyticsContextModuleResult (copy), EventNamesModule (upval), UseProfileWrapperContextModuleResult (copy), UseLocalRobuxBalanceResult (copy), p1 (copy), EnumsModule (upval), FFlagProfileUnifiedPurchaseLoggingModule (upval), UseMemoResult1 (copy)
+			if #UseMemoResult.lineItems == 0 or not UseInspectAvatarDataModuleResult.localUserId then return end
+			if FFlagSocialEnableProfileInspectAndBuyAnalytics then
+				UseProfileAnalyticsContextModuleResult.fireAnalyticsEvent(EventNamesModule.InspectAvatarBuyClicked, {
+					profileSessionId = UseProfileWrapperContextModuleResult.profileSessionId,
+					itemIds = table.concat(UseMemoResult.purchasedItemIds, ","),
+					totalPrice = UseMemoResult.totalPrice
 				})
 			end
-			if var4 == nil or var4 >= var19.totalPrice then
-				p1.navigation.navigate(enumsModule.Screens.PurchaseConfirmationModal, {
-					totalPrice = var19.totalPrice,
-					itemCount = var19.count,
-					purchasableLineItems = var19.lineItems,
-					userId = var13.localUserId,
-					purchasedWearIds = var19.purchasedWearIds,
-					ownedAssetIds = var13.ownedAssetIds,
-					purchasedItemIds = var19.purchasedItemIds,
-					purchasedBundleIds = var19.purchasedBundleIds,
-					purchasedItems = if fFlagProfileUnifiedPurchaseLoggingModule then var19.purchasedItems else nil,
-					wearTypeMap = var24,
-					robuxBalance = var4
+			if UseLocalRobuxBalanceResult == nil or UseLocalRobuxBalanceResult >= UseMemoResult.totalPrice then
+				p1.navigation.navigate(EnumsModule.Screens.PurchaseConfirmationModal, {
+					totalPrice = UseMemoResult.totalPrice,
+					itemCount = UseMemoResult.count,
+					purchasableLineItems = UseMemoResult.lineItems,
+					userId = UseInspectAvatarDataModuleResult.localUserId,
+					purchasedWearIds = UseMemoResult.purchasedWearIds,
+					ownedAssetIds = UseInspectAvatarDataModuleResult.ownedAssetIds,
+					purchasedItemIds = UseMemoResult.purchasedItemIds,
+					purchasedBundleIds = UseMemoResult.purchasedBundleIds,
+					purchasedItems = if FFlagProfileUnifiedPurchaseLoggingModule then UseMemoResult.purchasedItems else nil,
+					wearTypeMap = UseMemoResult1,
+					robuxBalance = UseLocalRobuxBalanceResult
 				})
 				
 				return
+			else
+				p1.navigation.navigate(EnumsModule.Screens.InsufficientRobuxDialog, {
+					totalPrice = UseMemoResult.totalPrice,
+					robuxBalance = UseLocalRobuxBalanceResult
+				})
 			end
-			p1.navigation.navigate(enumsModule.Screens.InsufficientRobuxDialog, { totalPrice = var19.totalPrice, robuxBalance = var4 })
 		end, {
-			var19, var13.localUserId, var13.ownedAssetIds, p1.navigation, var24, var4,
-			if fFlagSocialEnableProfileInspectAndBuyAnalytics then var2 else nil,
-			if fFlagSocialEnableProfileInspectAndBuyAnalytics then var1.profileSessionId else nil
+			UseMemoResult, UseInspectAvatarDataModuleResult.localUserId,
+			UseInspectAvatarDataModuleResult.ownedAssetIds, p1.navigation, UseMemoResult1,
+			UseLocalRobuxBalanceResult,
+			if FFlagSocialEnableProfileInspectAndBuyAnalytics then UseProfileAnalyticsContextModuleResult else nil,
+			if FFlagSocialEnableProfileInspectAndBuyAnalytics then UseProfileWrapperContextModuleResult.profileSessionId else nil
 		}),
-		onClose = reactModule.useCallback(function()
-			-- upvalues: p1 (ref)
+		onClose = ReactModule.useCallback(function() --[[ Line: 263 ]]
+			-- upvalues: p1 (copy)
 			p1.navigation.pop()
 		end, { p1.navigation }),
-		onDismiss = reactModule.useCallback(function()
-			-- upvalues: p1 (ref), var1 (ref)
+		onDismiss = ReactModule.useCallback(function() --[[ Line: 267 ]]
+			-- upvalues: p1 (copy), UseProfileWrapperContextModuleResult (copy)
 			p1.navigation.pop()
-			task.defer(function()
-				-- upvalues: var1 (copy)
-				var1.navigateTo.previousView(false)
+			task.defer(function() --[[ Line: 269 ]]
+				-- upvalues: UseProfileWrapperContextModuleResult (upval)
+				UseProfileWrapperContextModuleResult.navigateTo.previousView(false)
 			end)
-		end, { p1.navigation, var1.navigateTo }),
-		openItemDetails = reactModule.useCallback(function(p2, p3, p4)
-			-- upvalues: var1 (ref), var2 (ref), eventNamesModule (copy), var3 (ref)
-			var1.navigateTo.itemOrBundleDetails(p2, p3)
-			var2.fireAnalyticsEvent(eventNamesModule.CatalogItemOpened, {
+		end, {
+			p1.navigation,
+			UseProfileWrapperContextModuleResult.navigateTo
+		}),
+		openItemDetails = ReactModule.useCallback(function(p2, p3, p4) --[[ Line: 275 ]]
+			-- upvalues: UseProfileWrapperContextModuleResult (copy), UseProfileAnalyticsContextModuleResult (copy), EventNamesModule (upval), UseMarketplaceAnalyticsContextModuleResult (copy)
+			UseProfileWrapperContextModuleResult.navigateTo.itemOrBundleDetails(p2, p3)
+			UseProfileAnalyticsContextModuleResult.fireAnalyticsEvent(EventNamesModule.CatalogItemOpened, {
 				btnContext = "InspectAvatar",
 				btnUnitId = tostring(p2),
 				btnSortPosition = tostring(p4)
 			})
-			var1.externalAnalytics.catalogAnalytics.clickCatalogItemFromProfile(var3, p2, p3, "InspectAvatar", p4)
+			UseProfileWrapperContextModuleResult.externalAnalytics.catalogAnalytics.clickCatalogItemFromProfile(UseMarketplaceAnalyticsContextModuleResult, p2, p3, "InspectAvatar", p4)
 		end, {
-			var1.navigateTo.itemOrBundleDetails,
-			var1.externalAnalytics.catalogAnalytics,
-			var2,
-			var3
+			UseProfileWrapperContextModuleResult.navigateTo.itemOrBundleDetails,
+			UseProfileWrapperContextModuleResult.externalAnalytics.catalogAnalytics,
+			UseProfileAnalyticsContextModuleResult,
+			UseMarketplaceAnalyticsContextModuleResult
 		})
 	})
 end

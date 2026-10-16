@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.MrRouterHeaders.MrRouterHeaders)
+﻿return (require(script.Parent.Parent.Parent._Index.MrRouterHeaders.MrRouterHeaders))

@@ -1,14 +1,14 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local iconSizeModule = require(foundation.Enums.IconSize)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local stepperStepStateModule = require(foundation.Enums.StepperStepState)
-local _ = require(foundation.Providers.Style.Tokens)
-local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
-local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant)
-local _ = require(foundation.Components.Types)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local IconSizeModule = require(Foundation.Enums.IconSize)
+local InputSizeModule = require(Foundation.Enums.InputSize)
+local StepperStepStateModule = require(Foundation.Enums.StepperStepState)
+local _ = require(Foundation.Providers.Style.Tokens)
+local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
+local ComposeStyleVariantModule = require(Foundation.Utility.composeStyleVariant)
+local _ = require(Foundation.Components.Types)
 
-local function variantsFactory(p1)
-	-- upvalues: inputSizeModule (ref), iconSizeModule (ref), stepperStepStateModule (ref)
+local function variantsFactory(p1) --[[ Line: 33 ]]
+	-- upvalues: InputSizeModule (copy), IconSizeModule (copy), StepperStepStateModule (copy)
 	return {
 		common = {
 			container = { tag = "auto-xy" },
@@ -21,7 +21,7 @@ local function variantsFactory(p1)
 			indicatorInner = { tag = "row align-x-center align-y-center radius-circle" }
 		},
 		sizes = {
-			[inputSizeModule.XSmall] = {
+			[InputSizeModule.XSmall] = {
 				content = {
 					tag = "size-0-800",
 					padding = {
@@ -36,9 +36,9 @@ local function variantsFactory(p1)
 				index = { tag = "text-caption-small" },
 				label = { tag = "text-label-small" },
 				description = { tag = "text-body-small" },
-				icon = { size = iconSizeModule.XSmall }
+				icon = { size = IconSizeModule.XSmall }
 			},
-			[inputSizeModule.Small] = {
+			[InputSizeModule.Small] = {
 				content = {
 					tag = "size-0-1000",
 					padding = {
@@ -53,9 +53,9 @@ local function variantsFactory(p1)
 				index = { tag = "text-caption-medium" },
 				label = { tag = "text-label-small" },
 				description = { tag = "text-body-small" },
-				icon = { size = iconSizeModule.Small }
+				icon = { size = IconSizeModule.Small }
 			},
-			[inputSizeModule.Medium] = {
+			[InputSizeModule.Medium] = {
 				content = {
 					tag = "size-0-1200",
 					padding = {
@@ -70,21 +70,21 @@ local function variantsFactory(p1)
 				index = { tag = "text-caption-large" },
 				label = { tag = "text-label-medium" },
 				description = { tag = "text-body-medium" },
-				icon = { size = iconSizeModule.Medium }
+				icon = { size = IconSizeModule.Medium }
 			}
 		},
 		isFill = { [false] = {}, [true] = { container = { tag = "grow" } } },
 		stepStates = {
-			[stepperStepStateModule.Complete] = {
+			[StepperStepStateModule.Complete] = {
 				indicatorInner = { tag = "bg-system-contrast" },
 				description = { tag = "content-default" }
 			},
-			[stepperStepStateModule.Current] = {
+			[StepperStepStateModule.Current] = {
 				indicatorInner = { tag = "bg-system-contrast" },
 				description = { tag = "content-emphasis" },
 				index = { tag = "content-inverse-emphasis" }
 			},
-			[stepperStepStateModule.Incomplete] = {
+			[StepperStepStateModule.Incomplete] = {
 				indicatorInner = { tag = "bg-shift-300" },
 				description = { tag = "content-default" },
 				index = { tag = "content-default" }
@@ -93,9 +93,9 @@ local function variantsFactory(p1)
 	}
 end
 
-return function(p1, p2, p3, p4)
-	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref)
-	local stepper = variantsContextModule.useVariants("Stepper", variantsFactory, p1)
+return function(p1, p2, p3, p4) --[[ Line: 129 ]]
+	-- upvalues: VariantsContextModule (copy), variantsFactory (copy), ComposeStyleVariantModule (copy)
+	local Stepper = VariantsContextModule.useVariants("Stepper", variantsFactory, p1)
 	
-	return composeStyleVariantModule(stepper.common, stepper.sizes[p2], stepper.isFill[p4], stepper.stepStates[p3])
+	return ComposeStyleVariantModule(Stepper.common, Stepper.sizes[p2], Stepper.isFill[p4], Stepper.stepStates[p3])
 end

@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("FixUsernameValidationBackendCriteria", false)
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastFlag("FixUsernameValidationBackendCriteria")
 end

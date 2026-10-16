@@ -1,52 +1,53 @@
-﻿local interventionShared = script:FindFirstAncestor("InterventionShared")
-local runService = game:GetService("RunService")
-local reactModule = require(interventionShared.Parent.React)
-local useBinding = reactModule.useBinding
-local useEffect = reactModule.useEffect
-local determineChatTimeoutInfoModule = require(interventionShared.Utils.determineChatTimeoutInfo)
+﻿local InterventionShared = script:FindFirstAncestor("InterventionShared")
+local RunService = game:GetService("RunService")
+local ReactModule = require(InterventionShared.Parent.React)
+local UseBindingFunction = ReactModule.useBinding
+local UseEffectFunction = ReactModule.useEffect
+local DetermineChatTimeoutInfoModule = require(InterventionShared.Utils.determineChatTimeoutInfo)
 
-return function(value, p1)
-	-- upvalues: useBinding (ref), useEffect (ref), determineChatTimeoutInfoModule (ref), runService (ref)
-	local var1, var2 = useBinding("")
-	local var3, var4 = useBinding("")
-	local var5 = if value and value ~= "" then DateTime.fromIsoDate(value) else nil
-	useEffect(function()
-		-- upvalues: determineChatTimeoutInfoModule (copy), var5 (ref), p1 (ref), var2 (ref), var4 (ref)
-		local _, var6, var7 = determineChatTimeoutInfoModule(var5, p1)
-		var2(var6)
-		var4(var7)
-	end, { var5, p1 })
-	useEffect(function()
-		-- upvalues: var5 (ref), runService (copy), determineChatTimeoutInfoModule (copy), p1 (ref), var2 (ref), var4 (ref)
-		local heartbeatConnection = nil
+return function(p1, p2) --[[ Line: 24 | Named "useTimeoutInfoBinding" ]]
+	-- upvalues: UseBindingFunction (copy), UseEffectFunction (copy), DetermineChatTimeoutInfoModule (copy), RunService (copy)
+	local UseBindingResult, UseBindingResult2 = UseBindingFunction("")
+	local UseBindingResult1, UseBindingResult2_1 = UseBindingFunction("")
+	local _DateTime = if p1 and p1 ~= "" then DateTime.fromIsoDate(p1) else nil
+	UseEffectFunction(function() --[[ Line: 30 ]]
+		-- upvalues: DetermineChatTimeoutInfoModule (upval), _DateTime (copy), p2 (copy), UseBindingResult2 (copy), UseBindingResult2_1 (copy)
+		local _, DetermineChatTimeoutInfoModuleResult2, DetermineChatTimeoutInfoModuleResult3 = DetermineChatTimeoutInfoModule(_DateTime, p2)
+		UseBindingResult2(DetermineChatTimeoutInfoModuleResult2)
+		UseBindingResult2_1(DetermineChatTimeoutInfoModuleResult3)
+	end, { _DateTime, p2 })
+	UseEffectFunction(function() --[[ Line: 36 ]]
+		-- upvalues: _DateTime (copy), RunService (upval), DetermineChatTimeoutInfoModule (upval), p2 (copy), UseBindingResult2 (copy), UseBindingResult2_1 (copy)
+		local Connection = nil
 		
-		if var5 == nil then return end
-		if var5.UnixTimestamp - DateTime.now().UnixTimestamp <= 0 then
-			return
-		end
-		local var6 = 0
-		heartbeatConnection = runService.Heartbeat:Connect(function()
-			-- upvalues: var6 (write), determineChatTimeoutInfoModule (copy), var5 (copy), p1 (copy), var2 (copy), var4 (copy), heartbeatConnection (write)
-			local processTime = os.clock()
+		if _DateTime == nil then return end
+		if _DateTime.UnixTimestamp - DateTime.now().UnixTimestamp <= 0 then return end
+		local v1 = 0
+		Connection = RunService.Heartbeat:Connect(function() --[[ Line: 52 ]]
+			-- upvalues: v1 (ref), DetermineChatTimeoutInfoModule (upval), _DateTime (upval), p2 (upval), UseBindingResult2 (upval), UseBindingResult2_1 (upval), Connection (ref)
+			local ClockTime = os.clock()
 			
-			if processTime - var6 < 1 then return end
-			var6 = processTime
-			local var7, var8, var9 = determineChatTimeoutInfoModule(var5, p1)
-			var2(var8)
-			var4(var9)
+			if ClockTime - v1 < 1 then return end
+			v1 = ClockTime
+			local DetermineChatTimeoutInfoModuleResult, DetermineChatTimeoutInfoModuleResult2, DetermineChatTimeoutInfoModuleResult3 = DetermineChatTimeoutInfoModule(_DateTime, p2)
+			UseBindingResult2(DetermineChatTimeoutInfoModuleResult2)
+			UseBindingResult2_1(DetermineChatTimeoutInfoModuleResult3)
 			
-			if var7 <= 0 and heartbeatConnection then
-				heartbeatConnection:Disconnect()
+			if DetermineChatTimeoutInfoModuleResult <= 0 and Connection then
+				Connection:Disconnect()
 			end
 		end)
 		
-		return function()
-			-- upvalues: heartbeatConnection (write)
-			if heartbeatConnection then
-				heartbeatConnection:Disconnect()
+		return function() --[[ Line: 72 ]]
+			-- upvalues: Connection (ref)
+			if Connection then
+				Connection:Disconnect()
 			end
 		end
-	end, { var5 })
+	end, { _DateTime })
 	
-	return { heading = var1, description = var3 }
+	return {
+		heading = UseBindingResult,
+		description = UseBindingResult1
+	}
 end

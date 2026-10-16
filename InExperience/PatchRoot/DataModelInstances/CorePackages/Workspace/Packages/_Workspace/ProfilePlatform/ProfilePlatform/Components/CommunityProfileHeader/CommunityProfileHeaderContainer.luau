@@ -1,28 +1,30 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local userLibModule = require(parent.UserLib)
-local constants = userLibModule.Utils.Constants
-local getRbxthumbWithTypeSizeAndOptions = userLibModule.Utils.getRbxthumbWithTypeSizeAndOptions
-local verifiedBadgesModule = require(parent.VerifiedBadges)
-local enumsModule = require(profilePlatform.Common.Enums)
-local getDeepValueModule = require(profilePlatform.Utils.getDeepValue)
-local useProfileJsonComponentModule = require(profilePlatform.Hooks.useProfileJsonComponent)
-local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfileWrapperContext)
-local fFlagEnablePressingCommunityOwnerInPeekViewModule = require(profilePlatform.Flags.FFlagEnablePressingCommunityOwnerInPeekView)
-local communityProfileHeaderModule = require(profilePlatform.Components.CommunityProfileHeader.CommunityProfileHeader)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local UserLibModule = require(Parent.UserLib)
+local Constants = UserLibModule.Utils.Constants
+local GetRbxthumbWithTypeSizeAndOptionsFunction = UserLibModule.Utils.getRbxthumbWithTypeSizeAndOptions
+local VerifiedBadgesModule = require(Parent.VerifiedBadges)
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local GetDeepValueModule = require(ProfilePlatform.Utils.getDeepValue)
+local UseProfileJsonComponentModule = require(ProfilePlatform.Hooks.useProfileJsonComponent)
+local UseProfileWrapperContextModule = require(ProfilePlatform.Contexts.useProfileWrapperContext)
+local FFlagEnablePressingCommunityOwnerInPeekViewModule = require(ProfilePlatform.Flags.FFlagEnablePressingCommunityOwnerInPeekView)
+local CommunityProfileHeaderModule = require(ProfilePlatform.Components.CommunityProfileHeader.CommunityProfileHeader)
 
-return function(p1)
-	-- upvalues: useProfileWrapperContextModule (ref), useProfileJsonComponentModule (ref), enumsModule (ref), verifiedBadgesModule (ref), getDeepValueModule (ref), getRbxthumbWithTypeSizeAndOptions (ref), constants (ref), fFlagEnablePressingCommunityOwnerInPeekViewModule (ref), reactModule (ref), communityProfileHeaderModule (ref)
-	local var1 = useProfileJsonComponentModule(enumsModule.Components.CommunityProfileHeader)
+return function(p1) --[[ Line: 36 | Named "CommunityProfileHeaderContainer" ]]
+	-- upvalues: UseProfileWrapperContextModule (copy), UseProfileJsonComponentModule (copy), EnumsModule (copy), VerifiedBadgesModule (copy), GetDeepValueModule (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), Constants (copy), FFlagEnablePressingCommunityOwnerInPeekViewModule (copy), ReactModule (copy), CommunityProfileHeaderModule (copy)
+	local ProfileId = UseProfileWrapperContextModule().profileId
+	local UseProfileJsonComponentModuleResult = UseProfileJsonComponentModule(EnumsModule.Components.CommunityProfileHeader)
+	local OwnerUserId = if FFlagEnablePressingCommunityOwnerInPeekViewModule then UseProfileJsonComponentModuleResult.ownerUserId else nil
 	
-	return reactModule.createElement(communityProfileHeaderModule, {
+	return ReactModule.createElement(CommunityProfileHeaderModule, {
 		layoutOrder = p1.layoutOrder,
-		name = if var1.isVerified then `{var1.name}{verifiedBadgesModule.emoji.verified}` else var1.name,
-		ownerName = if var1.ownerIsVerified then `{var1.ownerName}{verifiedBadgesModule.emoji.verified}` else var1.ownerName,
-		membersCount = getDeepValueModule(var1, "counts.membersCount") or 0,
-		hasSocialModules = var1.hasSocialModules,
-		thumbnail = getRbxthumbWithTypeSizeAndOptions(useProfileWrapperContextModule().profileId, constants.RbxthumbTypes.GroupIcon, 150),
-		ownerUserId = if fFlagEnablePressingCommunityOwnerInPeekViewModule then if fFlagEnablePressingCommunityOwnerInPeekViewModule then var1.ownerUserId else nil else nil
+		name = if UseProfileJsonComponentModuleResult.isVerified then `{UseProfileJsonComponentModuleResult.name}{VerifiedBadgesModule.emoji.verified}` else UseProfileJsonComponentModuleResult.name,
+		ownerName = if UseProfileJsonComponentModuleResult.ownerIsVerified then `{UseProfileJsonComponentModuleResult.ownerName}{VerifiedBadgesModule.emoji.verified}` else UseProfileJsonComponentModuleResult.ownerName,
+		membersCount = GetDeepValueModule(UseProfileJsonComponentModuleResult, "counts.membersCount") or 0,
+		hasSocialModules = UseProfileJsonComponentModuleResult.hasSocialModules,
+		thumbnail = GetRbxthumbWithTypeSizeAndOptionsFunction(ProfileId, Constants.RbxthumbTypes.GroupIcon, 150),
+		ownerUserId = if FFlagEnablePressingCommunityOwnerInPeekViewModule then OwnerUserId else nil
 	})
 end

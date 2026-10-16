@@ -1,8 +1,8 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local isGlobalTabFirstModule = require(expChat.isGlobalTabFirst)
-local fFlagExpChatGlobalTabDefaultModule = require(expChat.Flags.FFlagExpChatGlobalTabDefault)
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local IsGlobalTabFirstModule = require(ExpChat.isGlobalTabFirst)
+local FFlagExpChatGlobalTabDefaultModule = require(ExpChat.Flags.FFlagExpChatGlobalTabDefault)
 
-return function(p1)
-	-- upvalues: fFlagExpChatGlobalTabDefaultModule (ref), isGlobalTabFirstModule (ref)
-	return if fFlagExpChatGlobalTabDefaultModule and isGlobalTabFirstModule() and p1.RBXGlobal ~= nil then "RBXGlobal" elseif p1.RBXGeneral == nil then nil else "RBXGeneral"
+return function(p1) --[[ Line: 20 | Named "getDefaultTabName" ]]
+	-- upvalues: FFlagExpChatGlobalTabDefaultModule (copy), IsGlobalTabFirstModule (copy)
+	return if FFlagExpChatGlobalTabDefaultModule and IsGlobalTabFirstModule() and p1.RBXGlobal ~= nil then "RBXGlobal" elseif p1.RBXGeneral == nil then nil else "RBXGeneral"
 end

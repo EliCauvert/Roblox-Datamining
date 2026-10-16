@@ -1,32 +1,31 @@
-﻿local http = script:FindFirstAncestor("Http")
-local parent = http.Parent
-local updateFetchingStatus = require(http.Actions).UpdateFetchingStatus
-local batchUpdateFetchingStatus = require(http.Actions).BatchUpdateFetchingStatus
-local cryoModule = require(parent.Cryo)
+﻿local Http = script:FindFirstAncestor("Http")
+local UpdateFetchingStatus = require(Http.Actions).UpdateFetchingStatus
+local BatchUpdateFetchingStatus = require(Http.Actions).BatchUpdateFetchingStatus
+local CryoModule = require(Http.Parent.Cryo)
 
-local function mapStatusToValue(p1)
-	-- upvalues: cryoModule (ref)
-	local t = {}
+local function mapStatusToValue(FetchingStatuses) --[[ Line: 8 ]]
+	-- upvalues: CryoModule (copy)
+	local Nones = {}
 	
-	for i, v in pairs(p1) do
-		local status = v.status
-		t[v.key] = if status ~= nil then cryoModule.None else status
+	for _, fetchingStatus in pairs(FetchingStatuses) do
+		local Status = fetchingStatus.status
+		Nones[fetchingStatus.key] = if Status == nil then CryoModule.None else Status
 	end
-	return t
+	return Nones
 end
 
-return function(p2, p3)
-	-- upvalues: updateFetchingStatus (ref), cryoModule (ref), batchUpdateFetchingStatus (ref), mapStatusToValue (ref)
-	p2 = p2 or {}
+return function(p1, p2) --[[ Line: 27 ]]
+	-- upvalues: UpdateFetchingStatus (copy), CryoModule (copy), BatchUpdateFetchingStatus (copy), mapStatusToValue (copy)
+	local P1 = p1 or {}
 	
-	if p3.type == updateFetchingStatus.name then
-		local status = p3.status
-		p2 = cryoModule.Dictionary.join(p2, {
-			[p3.key] = if status ~= nil then cryoModule.None else status
+	if p2.type == UpdateFetchingStatus.name then
+		local Status = p2.status
+		P1 = CryoModule.Dictionary.join(P1, {
+			[p2.key] = if Status == nil then CryoModule.None else Status
 		})
 	end
-	if p3.type == batchUpdateFetchingStatus.name then
-		p2 = cryoModule.Dictionary.join(p2, mapStatusToValue(p3.fetchingStatuses))
+	if p2.type == BatchUpdateFetchingStatus.name then
+		P1 = CryoModule.Dictionary.join(P1, (mapStatusToValue(p2.fetchingStatuses)))
 	end
-	return p2
+	return P1
 end

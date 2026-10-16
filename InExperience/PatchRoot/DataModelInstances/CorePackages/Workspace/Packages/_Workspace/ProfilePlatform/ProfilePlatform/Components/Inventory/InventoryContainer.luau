@@ -1,98 +1,99 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local constantsModule = require(profilePlatform.Common.Constants)
-local roactUtilsModule = require(parent.RoactUtils)
-local appPage = require(parent.RobloxAppEnums).AppPage
-local url = require(parent.Http).Url
-local textKeysModule = require(profilePlatform.Common.TextKeys)
-local navigateDown = require(parent.NavigationRodux).Thunks.NavigateDown
-local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local enumsModule = require(profilePlatform.Common.Enums)
-local eventNamesModule = require(profilePlatform.Analytics.EventNames)
-local networkingCatalogModule = require(profilePlatform.Networking.NetworkingCatalog)
-local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfileWrapperContext)
-local useProfileAnalyticsContextModule = require(profilePlatform.Contexts.useProfileAnalyticsContext)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useProfileJsonComponentModule = require(profilePlatform.Hooks.useProfileJsonComponent)
-local useMarketplaceAnalyticsContextModule = require(profilePlatform.Hooks.useMarketplaceAnalyticsContext)
-local assetsCarouselModule = require(profilePlatform.Components.AssetsCarousel)
-local _ = require(profilePlatform.Common.AssetInfo)
-local fFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule = require(profilePlatform.Flags.FFlagProfilePlatformUseCatalogItemOpenedNewFields)
-local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
-local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local ConstantsModule = require(ProfilePlatform.Common.Constants)
+local RoactUtilsModule = require(Parent.RoactUtils)
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local Url = require(Parent.Http).Url
+local TextKeysModule = require(ProfilePlatform.Common.TextKeys)
+local NavigateDownFunction = require(Parent.NavigationRodux).Thunks.NavigateDown
+local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
+local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local EventNamesModule = require(ProfilePlatform.Analytics.EventNames)
+local NetworkingCatalogModule = require(ProfilePlatform.Networking.NetworkingCatalog)
+local UseProfileWrapperContextModule = require(ProfilePlatform.Contexts.useProfileWrapperContext)
+local UseProfileAnalyticsContextModule = require(ProfilePlatform.Contexts.useProfileAnalyticsContext)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseProfileJsonComponentModule = require(ProfilePlatform.Hooks.useProfileJsonComponent)
+local UseMarketplaceAnalyticsContextModule = require(ProfilePlatform.Hooks.useMarketplaceAnalyticsContext)
+local AssetsCarouselModule = require(ProfilePlatform.Components.AssetsCarousel)
+local _ = require(ProfilePlatform.Common.AssetInfo)
+local FFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule = require(ProfilePlatform.Flags.FFlagProfilePlatformUseCatalogItemOpenedNewFields)
+local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
+local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 
-return function(p1)
-	-- upvalues: useProfileWrapperContextModule (ref), useProfileAnalyticsContextModule (ref), useDispatch (ref), useLocalization (ref), textKeysModule (ref), useMarketplaceAnalyticsContextModule (ref), reactModule (ref), eventNamesModule (ref), fFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule (ref), enumsModule (ref), useProfileJsonComponentModule (ref), useSelector (ref), constantsModule (ref), appPage (ref), url (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), networkingCatalogModule (ref), assetsCarouselModule (ref)
-	local var2 = useProfileWrapperContextModule()
-	local var3 = useProfileAnalyticsContextModule()
-	local profileId = var2.profileId
-	local var4 = useDispatch()
-	local var5 = useLocalization({ inventory = textKeysModule.Inventory })
-	local var6 = useMarketplaceAnalyticsContextModule()
-	local var7 = reactModule.useCallback(function(p2, p3, _, _, p4)
-		-- upvalues: var2 (ref), var3 (ref), eventNamesModule (copy), fFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule (copy), enumsModule (copy), var6 (ref)
-		var2.navigateTo.itemDetails(p2)
-		var3.fireAnalyticsEvent(eventNamesModule.CatalogItemOpened, if fFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule then {
-			btnContext = tostring(enumsModule.Components.Inventory),
+return function(p1) --[[ Line: 38 | Named "InventoryContainer" ]]
+	-- upvalues: UseProfileWrapperContextModule (copy), UseProfileAnalyticsContextModule (copy), UseDispatchFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), UseMarketplaceAnalyticsContextModule (copy), ReactModule (copy), EventNamesModule (copy), FFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule (copy), EnumsModule (copy), UseProfileJsonComponentModule (copy), UseSelectorFunction (copy), ConstantsModule (copy), AppPage (copy), Url (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), NetworkingCatalogModule (copy), AssetsCarouselModule (copy)
+	local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
+	local UseProfileAnalyticsContextModuleResult = UseProfileAnalyticsContextModule()
+	local ProfileId = UseProfileWrapperContextModuleResult.profileId
+	local UseDispatchResult = UseDispatchFunction()
+	local UseLocalizationResult = UseLocalizationFunction({ inventory = TextKeysModule.Inventory })
+	local UseMarketplaceAnalyticsContextModuleResult = UseMarketplaceAnalyticsContextModule()
+	local UseResult = ReactModule.useCallback(function(p2, p3, _, _, p4) --[[ Line: 50 ]]
+		-- upvalues: UseProfileWrapperContextModuleResult (copy), UseProfileAnalyticsContextModuleResult (copy), EventNamesModule (upval), FFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule (upval), EnumsModule (upval), UseMarketplaceAnalyticsContextModuleResult (copy)
+		UseProfileWrapperContextModuleResult.navigateTo.itemDetails(p2)
+		UseProfileAnalyticsContextModuleResult.fireAnalyticsEvent(EventNamesModule.CatalogItemOpened, if FFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule then {
+			btnContext = tostring(EnumsModule.Components.Inventory),
 			btnUnitId = tostring(p2),
 			btnSortPosition = tostring(p4)
 		} else {
 			positionInComponent = tostring(p4),
-			component = tostring(enumsModule.Components.Inventory),
+			component = tostring(EnumsModule.Components.Inventory),
 			itemId = tostring(p2)
 		})
-		var2.externalAnalytics.catalogAnalytics.clickCatalogItemFromProfile(var6, p2, p3, enumsModule.Components.Inventory, p4)
+		UseProfileWrapperContextModuleResult.externalAnalytics.catalogAnalytics.clickCatalogItemFromProfile(UseMarketplaceAnalyticsContextModuleResult, p2, p3, EnumsModule.Components.Inventory, p4)
 	end, {
-		var3,
-		var2.navigateTo.itemDetails,
-		var2.externalAnalytics.catalogAnalytics
+		UseProfileAnalyticsContextModuleResult,
+		UseProfileWrapperContextModuleResult.navigateTo.itemDetails,
+		UseProfileWrapperContextModuleResult.externalAnalytics.catalogAnalytics
 	})
-	local assets = useProfileJsonComponentModule(enumsModule.Components.Inventory).assets or {}
-	local var8 = useSelector(function(p2)
-		-- upvalues: constantsModule (copy)
-		return p2[constantsModule.RODUX_KEY].AssetDetails or {}
+	local Assets = UseProfileJsonComponentModule(EnumsModule.Components.Inventory).assets or {}
+	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 83 ]]
+		-- upvalues: ConstantsModule (upval)
+		return p2[ConstantsModule.RODUX_KEY].AssetDetails or {}
 	end)
-	local var9 = reactModule.useMemo(function()
-		-- upvalues: assets (ref), var8 (ref)
-		local t = {}
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 87 ]]
+		-- upvalues: Assets (copy), UseSelectorResult (copy)
+		local List = {}
 		
-		for i, v in assets do
-			local assetId = var8[tostring(v.assetId)]
+		for _, asset in Assets do
+			local UseSelectorResultEntry = UseSelectorResult[tostring(asset.assetId)]
 			
-			if assetId then
-				assetId.itemType = v.itemType
-				table.insert(t, assetId)
+			if UseSelectorResultEntry then
+				UseSelectorResultEntry.itemType = asset.itemType
+				table.insert(List, UseSelectorResultEntry)
 			end
 		end
-		return t
-	end, { assets, var8 })
-	local var10 = reactModule.useCallback(function()
-		-- upvalues: appPage (copy), url (copy), profileId (ref), textKeysModule (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var4 (ref), navigateDown (copy)
-		local t = {
-			name = appPage.GenericWebPage,
-			detail = string.format("%susers/%s/inventory", url.BASE_URL, profileId),
-			extraProps = { titleKey = textKeysModule.Inventory }
+		return List
+	end, { Assets, UseSelectorResult })
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 100 ]]
+		-- upvalues: AppPage (upval), Url (upval), ProfileId (copy), TextKeysModule (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval)
+		local config = {
+			name = AppPage.GenericWebPage,
+			detail = string.format("%susers/%s/inventory", Url.BASE_URL, ProfileId),
+			extraProps = { titleKey = TextKeysModule.Inventory }
 		}
 		
-		if fFlagSignalsNavP3Dispatch then
-			var1.down(var1.fromLegacyPage(t))
+		if FFlagSignalsNavP3Dispatch then
+			NavigationCommands.down(NavigationCommands.fromLegacyPage(config))
 			
 			return
+		else
+			UseDispatchResult(NavigateDownFunction(config))
 		end
-		var4(navigateDown(t))
 	end)
-	reactModule.useEffect(function()
-		-- upvalues: var4 (ref), networkingCatalogModule (copy), assets (ref)
-		var4(networkingCatalogModule.GetItemAndBundleDetails.API(assets))
-	end, { assets, var4 })
+	ReactModule.useEffect(function() --[[ Line: 115 ]]
+		-- upvalues: UseDispatchResult (copy), NetworkingCatalogModule (upval), Assets (copy)
+		UseDispatchResult(NetworkingCatalogModule.GetItemAndBundleDetails.API(Assets))
+	end, { Assets, UseDispatchResult })
 	
-	return if #var9 > 0 then reactModule.createElement(assetsCarouselModule, {
-		title = var5.inventory,
+	return if #UseMemoResult > 0 then ReactModule.createElement(AssetsCarouselModule, {
+		title = UseLocalizationResult.inventory,
 		layoutOrder = p1.layoutOrder,
-		assets = var9,
-		openItemDetails = var7,
-		onActivateHeader = var10
+		assets = UseMemoResult,
+		openItemDetails = UseResult,
+		onActivateHeader = UseResult1
 	}) else nil
 end

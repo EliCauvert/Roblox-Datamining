@@ -1,381 +1,384 @@
-﻿local textService = game:GetService("TextService")
-local roactModule = require(game:GetService("CorePackages").Packages.Roact)
-local devConsoleFixMultilineContext = game:DefineFastFlag("DevConsoleFixMultilineContext", false)
-local bannerButtonModule = require(script.Parent.Parent.Parent.Components.BannerButton)
-local constantsModule = require(script.Parent.Parent.Parent.Constants)
-local mainWindow = constantsModule.DefaultFontSize.MainWindow
-local log = constantsModule.Font.Log
-local iconHeight = constantsModule.LogFormatting.IconHeight
-local textFrameHeight = constantsModule.LogFormatting.TextFrameHeight
-local textFramePadding = constantsModule.LogFormatting.TextFramePadding
-local maxStringSize = constantsModule.LogFormatting.MaxStringSize
+﻿local TextService = game:GetService("TextService")
+local RoactModule = require(game:GetService("CorePackages").Packages.Roact)
+local DevConsoleFixMultilineContext = game:DefineFastFlag("DevConsoleFixMultilineContext", false)
+local BannerButtonModule = require(script.Parent.Parent.Parent.Components.BannerButton)
+local ConstantsModule = require(script.Parent.Parent.Parent.Constants)
+local MainWindow = ConstantsModule.DefaultFontSize.MainWindow
+local Log = ConstantsModule.Font.Log
+local IconHeight = ConstantsModule.LogFormatting.IconHeight
+local TextFrameHeight = ConstantsModule.LogFormatting.TextFrameHeight
+local TextFramePadding = ConstantsModule.LogFormatting.TextFramePadding
+local MaxStringSize = ConstantsModule.LogFormatting.MaxStringSize
 
-local function _(p1, p2)
-	local _, replaced = string.gsub(`{p1}: {p2}`, "\n", "")
+local function _(p1, p2): number --[[ Line: 25 | Named "countTextLinesInKeyValuePair" ]]
+	local _, Replaced2 = string.gsub(`{p1}: {p2}`, "\n", "")
 	
-	return replaced + 1
+	return Replaced2 + 1
 end
 
-local function countContextLines(p1, p2)
-	-- upvalues: devConsoleFixMultilineContext (ref), countContextLines (ref)
-	local var1 = 0
+local function countContextLines(Context, p1: number): number --[[ Line: 30 ]]
+	-- upvalues: DevConsoleFixMultilineContext (copy), countContextLines (copy)
+	local Total = 0
 	
-	for i, v in p1 do
+	for i, value in Context do
 		if i ~= "_expanded" then
-			local var2 = type(v) == "table" and p2 + 1 < 3
+			local v1: boolean = type(value) == "table" and p1 + 1 < 3
 			
-			if devConsoleFixMultilineContext and not var2 then
-				local _, replaced = string.gsub(`{tostring(i)}: {tostring(v)}`, "\n", "")
-				var1 += replaced + 1
+			if DevConsoleFixMultilineContext and not v1 then
+				local _, Replaced2 = string.gsub(`{tostring(i)}: {tostring(value)}`, "\n", "")
+				Total += Replaced2 + 1
 			else
-				var1 += 1
+				Total += 1
 			end
-			if var2 and v._expanded then
-				var1 += countContextLines(v, p2 + 1)
+			if v1 and value._expanded then
+				Total += countContextLines(value, p1 + 1)
 			end
 		end
 	end
-	return var1
+	return Total
 end
 
-local logOutput = roactModule.Component:extend("LogOutput")
+local LogOutput = RoactModule.Component:extend("LogOutput")
 
-function logOutput.init(p3, p4)
-	-- upvalues: roactModule (ref)
-	local var3 = p4.initLogOutput and p4.initLogOutput()
+function LogOutput.init(p2, p3) --[[ Line: 52 ]]
+	-- upvalues: RoactModule (copy)
+	local InitLogOutputResult = p3.initLogOutput and p3.initLogOutput()
 	
-	function p4.onCanvasChange()
-		-- upvalues: p3 (ref)
-		local current = p3.ref.current
+	function p2.onCanvasChange() --[[ Line: 55 ]]
+		-- upvalues: p2 (copy)
+		local Current = p2.ref.current
 		
-		if current then
-			local canvasPosition = current.CanvasPosition
-			local absoluteSize = current.AbsoluteSize
+		if Current then
+			local CanvasPosition = Current.CanvasPosition
+			local AbsoluteSize = Current.AbsoluteSize
 			
-			if p3.state.canvasPos ~= canvasPosition or p3.state.absSize ~= absoluteSize then
-				p3:setState({
-					canvasPos = canvasPosition,
-					absSize = absoluteSize,
-					autoScroll = current.CanvasPosition.Y + current.AbsoluteSize.Y == current.CanvasSize.Y.Offset
+			if p2.state.canvasPos ~= CanvasPosition or p2.state.absSize ~= AbsoluteSize then
+				p2:setState({
+					canvasPos = CanvasPosition,
+					absSize = AbsoluteSize,
+					autoScroll = Current.CanvasPosition.Y + Current.AbsoluteSize.Y == Current.CanvasSize.Y.Offset
 				})
 			end
 		end
 	end
 	
-	p3.ref = roactModule.createRef()
-	p3.state = {
+	p2.ref = RoactModule.createRef()
+	p2.state = {
 		autoScroll = true,
 		wordWrap = true,
-		logData = var3,
+		logData = InitLogOutputResult,
 		absSize = Vector2.new(),
 		canvasPos = Vector2.new()
 	}
 end
 
-function logOutput.willUpdate(p3, _, _)
-	p3._canvasSignal:Disconnect()
-	p3._absSizeSignal:Disconnect()
+function LogOutput.willUpdate(p2, _, _) --[[ Line: 85 ]]
+	p2._canvasSignal:Disconnect()
+	p2._absSizeSignal:Disconnect()
 end
 
-function logOutput.didUpdate(p3)
-	p3._canvasSignal = p3.ref.current:GetPropertyChangedSignal("CanvasPosition"):Connect(p3.onCanvasChange)
-	p3._absSizeSignal = p3.ref.current:GetPropertyChangedSignal("AbsoluteSize"):Connect(p3.onCanvasChange)
+function LogOutput.didUpdate(p2) --[[ Line: 90 ]]
+	p2._canvasSignal = p2.ref.current:GetPropertyChangedSignal("CanvasPosition"):Connect(p2.onCanvasChange)
+	p2._absSizeSignal = p2.ref.current:GetPropertyChangedSignal("AbsoluteSize"):Connect(p2.onCanvasChange)
 	
-	if p3.state.autoScroll then
-		local current = p3.ref.current
+	if p2.state.autoScroll then
+		local Current = p2.ref.current
 		
-		if current then
-			current.CanvasPosition = Vector2.new(current.CanvasPosition.X, p3.ref.current.CanvasSize.Y.Offset + p3.ref.current.AbsoluteSize.Y)
+		if Current then
+			Current.CanvasPosition = Vector2.new(Current.CanvasPosition.X, p2.ref.current.CanvasSize.Y.Offset + p2.ref.current.AbsoluteSize.Y)
 		end
 	end
 end
 
-function logOutput.didMount(p3)
-	-- upvalues: textFrameHeight (ref), textFramePadding (ref)
-	p3.logConnector = p3.props.targetSignal:Connect(function(p4)
-		-- upvalues: p3 (ref), textFrameHeight (copy), textFramePadding (copy)
-		if p3.state.autoScroll or p4:getSize() ~= p4:getMaxSize() then
-			p3:setState({ logData = p4 })
+function LogOutput.didMount(p2) --[[ Line: 106 ]]
+	-- upvalues: TextFrameHeight (copy), TextFramePadding (copy)
+	p2.logConnector = p2.props.targetSignal:Connect(function(LogData) --[[ Line: 107 ]]
+		-- upvalues: p2 (copy), TextFrameHeight (upval), TextFramePadding (upval)
+		if p2.state.autoScroll or LogData:getSize() ~= LogData:getMaxSize() then
+			p2:setState({ logData = LogData })
 			
 			return
 		end
-		local canvasPos = p3.state.canvasPos
-		local y = canvasPos.Y
-		local var3 = p4:back()
+		local CanvasPos = p2.state.canvasPos
+		local Y = CanvasPos.Y
+		local BackResult = LogData:back()
 		
-		if var3 then
-			local y_1 = var3.Dims.Y
-			local var4 = p3.state.absSize.X - textFrameHeight
+		if BackResult then
+			local Y1 = BackResult.Dims.Y
+			local XDelta = p2.state.absSize.X - TextFrameHeight
 			
-			if p3.state.wordWrap and var4 > 0 then
-				y_1 = math.ceil(var3.Dims.Y * math.ceil(var3.Dims.X / var4))
+			if p2.state.wordWrap and XDelta > 0 then
+				Y1 = math.ceil(BackResult.Dims.Y * math.ceil(BackResult.Dims.X / XDelta))
 			end
-			y = math.max(0, y - y_1 - textFramePadding)
+			Y = math.max(0, Y - Y1 - TextFramePadding)
 		end
-		p3:setState({ logData = p4, canvasPos = Vector2.new(canvasPos.X, y) })
+		p2:setState({
+			logData = LogData,
+			canvasPos = Vector2.new(CanvasPos.X, Y)
+		})
 	end)
-	p3._canvasSignal = p3.ref.current:GetPropertyChangedSignal("CanvasPosition"):Connect(p3.onCanvasChange)
-	p3._absSizeSignal = p3.ref.current:GetPropertyChangedSignal("AbsoluteSize"):Connect(p3.onCanvasChange)
+	p2._canvasSignal = p2.ref.current:GetPropertyChangedSignal("CanvasPosition"):Connect(p2.onCanvasChange)
+	p2._absSizeSignal = p2.ref.current:GetPropertyChangedSignal("AbsoluteSize"):Connect(p2.onCanvasChange)
 	
-	if p3.ref.current.AbsoluteSize.Magnitude > 0 then
-		p3:setState({ absSize = p3.ref.current.AbsoluteSize })
+	if p2.ref.current.AbsoluteSize.Magnitude > 0 then
+		p2:setState({ absSize = p2.ref.current.AbsoluteSize })
 	end
 end
 
-function logOutput.willUnmount(p3)
-	p3.logConnector:Disconnect()
-	p3.logConnector = nil
+function LogOutput.willUnmount(p2) --[[ Line: 151 ]]
+	p2.logConnector:Disconnect()
+	p2.logConnector = nil
 end
 
-function logOutput.render(p3)
-	-- upvalues: textFrameHeight (ref), roactModule (ref), bannerButtonModule (ref), mainWindow (ref), log (ref), devConsoleFixMultilineContext (ref), textFramePadding (ref), countContextLines (ref), constantsModule (ref), iconHeight (ref), maxStringSize (ref), textService (ref)
-	local layoutOrder = p3.props.layoutOrder
-	local size = p3.props.size
-	local logData = p3.state.logData
-	local absSize = p3.state.absSize
-	local canvasPos = p3.state.canvasPos
-	local wordWrap = p3.state.wordWrap
-	local t = {}
-	local var3 = 1
-	local var4 = 0
+function LogOutput.render(p2) --[[ Line: 156 ]]
+	-- upvalues: TextFrameHeight (copy), RoactModule (copy), BannerButtonModule (copy), MainWindow (copy), Log (copy), DevConsoleFixMultilineContext (copy), TextFramePadding (copy), countContextLines (copy), ConstantsModule (copy), IconHeight (copy), MaxStringSize (copy), TextService (copy)
+	local LayoutOrder = p2.props.layoutOrder
+	local Size = p2.props.size
+	local LogData = p2.state.logData
+	local AbsSize = p2.state.absSize
+	local CanvasPos = p2.state.canvasPos
+	local WordWrap = p2.state.wordWrap
+	local Frames = {}
+	local LayoutOrder1 = 1
+	local YOffset1 = 0
 	
-	if p3.ref.current and logData then
-		local var5 = absSize.X - textFrameHeight
-		local var6 = -1
-		local var7 = 0
+	if p2.ref.current and LogData then
+		local XDelta = AbsSize.X - TextFrameHeight
+		local YOffset = -1
+		local v2 = 0
 		
-		local function _(p4)
-			-- upvalues: p3 (ref)
-			return function()
-				-- upvalues: p4 (ref), p3 (copy)
-				p4.Expanded = not p4.Expanded
-				p3:setState({})
+		local function _(p3) --[[ Line: 175 | Named "createOnButtonPress" ]]
+			-- upvalues: p2 (copy)
+			return function() --[[ Line: 176 ]]
+				-- upvalues: p3 (copy), p2 (upval)
+				p3.Expanded = not p3.Expanded
+				p2:setState({})
 			end
 		end
 		
-		local function addContextEntries(p4, p5, p6, p7, p8)
-			-- upvalues: roactModule (copy), bannerButtonModule (copy), mainWindow (copy), p3 (ref), log (copy), addContextEntries (ref), devConsoleFixMultilineContext (copy), textFramePadding (copy)
-			if p7 >= 3 then return end
-			local t = {}
+		local function addContextEntries(TextLabels, Context, TextColor3, p3: number, p4) --[[ Line: 182 ]]
+			-- upvalues: RoactModule (upval), BannerButtonModule (upval), MainWindow (upval), p2 (copy), Log (upval), addContextEntries (copy), DevConsoleFixMultilineContext (upval), TextFramePadding (upval)
+			if p3 >= 3 then return end
+			local List = {}
 			
-			for i in p5 do
+			for i in Context do
 				if i ~= "_expanded" then
-					table.insert(t, i)
+					table.insert(List, i)
 				end
 			end
-			table.sort(t, function(p9, p10)
-				return tostring(p9) < tostring(p10)
+			table.sort(List, function(A, B): boolean --[[ Line: 198 ]]
+				return tostring(A) < tostring(B)
 			end)
-			local var8 = p7 * 20 + 20
+			local v3 = p3 * 20 + 20
 			
-			for i_1, v in t do
-				local var9 = p5[v]
-				p8.i += 1
-				local i_2 = p8.i
-				local var10 = `Ctx_{p7}_{tostring(v)}`
+			for _, value in List do
+				local ContextEntry = Context[value]
+				p4.i += 1
+				local I = p4.i
+				local Text: string = `Ctx_{p3}_{tostring(value)}`
 				
-				if type(var9) == "table" and p7 + 1 < 3 then
-					p4[var10] = roactModule.createElement(bannerButtonModule, {
+				if type(ContextEntry) == "table" and p3 + 1 < 3 then
+					TextLabels[Text] = RoactModule.createElement(BannerButtonModule, {
 						isExpandable = true,
 						hideLines = true,
-						size = UDim2.new(1, 0, 0, mainWindow),
-						isExpanded = var9._expanded,
-						layoutOrder = i_2,
-						onButtonPress = function()
-							-- upvalues: var9 (ref), p3 (copy)
-							var9._expanded = not var9._expanded
-							p3:setState({})
+						size = UDim2.new(1, 0, 0, MainWindow),
+						isExpanded = ContextEntry._expanded,
+						layoutOrder = I,
+						onButtonPress = function() --[[ Line: 218 ]]
+							-- upvalues: ContextEntry (copy), p2 (upval)
+							ContextEntry._expanded = not ContextEntry._expanded
+							p2:setState({})
 						end
 					}, {
-						Label = roactModule.createElement("TextLabel", {
+						Label = RoactModule.createElement("TextLabel", {
 							BackgroundTransparency = 1,
-							Text = `{tostring(v)}: \{...}`,
-							TextSize = mainWindow,
-							Font = log,
-							TextColor3 = p6,
-							Size = UDim2.new(1, -(var8 + 20), 1, 0),
-							Position = UDim2.fromOffset(var8 + 20, 0),
+							Text = `{tostring(value)}: \{...}`,
+							TextSize = MainWindow,
+							Font = Log,
+							TextColor3 = TextColor3,
+							Size = UDim2.new(1, -(v3 + 20), 1, 0),
+							Position = UDim2.fromOffset(v3 + 20, 0),
 							TextXAlignment = Enum.TextXAlignment.Left
 						})
 					})
 					
-					if var9._expanded then
-						addContextEntries(p4, var9, p6, p7 + 1, p8)
+					if ContextEntry._expanded then
+						addContextEntries(TextLabels, ContextEntry, TextColor3, p3 + 1, p4)
 					end
-				elseif devConsoleFixMultilineContext then
-					local _, replaced = string.gsub(`{tostring(v)}: {tostring(var9)}`, "\n", "")
-					local var11 = replaced + 1
-					p4[var10] = roactModule.createElement("TextLabel", {
+				elseif DevConsoleFixMultilineContext then
+					local _, Replaced2 = string.gsub(`{tostring(value)}: {tostring(ContextEntry)}`, "\n", "")
+					local NewReplaced = Replaced2 + 1
+					TextLabels[Text] = RoactModule.createElement("TextLabel", {
 						BackgroundTransparency = 1,
-						Text = `{tostring(v)}: {tostring(var9)}`,
-						TextSize = mainWindow,
-						Font = log,
-						TextColor3 = p6,
-						Size = UDim2.new(1, 0, 0, var11 * mainWindow + (var11 - 1) * textFramePadding),
-						LayoutOrder = i_2,
+						Text = `{tostring(value)}: {tostring(ContextEntry)}`,
+						TextSize = MainWindow,
+						Font = Log,
+						TextColor3 = TextColor3,
+						Size = UDim2.new(1, 0, 0, NewReplaced * MainWindow + (NewReplaced - 1) * TextFramePadding),
+						LayoutOrder = I,
 						TextXAlignment = Enum.TextXAlignment.Left
 					}, {
-						Padding = roactModule.createElement("UIPadding", { PaddingLeft = UDim.new(0, var8 + 20) })
+						Padding = RoactModule.createElement("UIPadding", { PaddingLeft = UDim.new(0, v3 + 20) })
 					})
 				else
-					p4[var10] = roactModule.createElement("TextLabel", {
+					TextLabels[Text] = RoactModule.createElement("TextLabel", {
 						BackgroundTransparency = 1,
-						Text = `{tostring(v)}: {tostring(var9)}`,
-						TextSize = mainWindow,
-						Font = log,
-						TextColor3 = p6,
-						Size = UDim2.new(1, 0, 0, mainWindow),
-						LayoutOrder = i_2,
+						Text = `{tostring(value)}: {tostring(ContextEntry)}`,
+						TextSize = MainWindow,
+						Font = Log,
+						TextColor3 = TextColor3,
+						Size = UDim2.new(1, 0, 0, MainWindow),
+						LayoutOrder = I,
 						TextXAlignment = Enum.TextXAlignment.Left
 					}, {
-						Padding = roactModule.createElement("UIPadding", { PaddingLeft = UDim.new(0, var8 + 20) })
+						Padding = RoactModule.createElement("UIPadding", { PaddingLeft = UDim.new(0, v3 + 20) })
 					})
 				end
 			end
 		end
 		
-		local var12 = logData:iterator()
-		local var13 = var12:next()
-		while var13 do
-			local var14 = var13
-			local message = var14.Message
-			local charCount = var14.CharCount
-			local var15 = if wordWrap and var5 > 0 then math.ceil(var14.Dims.Y * math.ceil(var14.Dims.X / var5)) else var14.Dims.Y
-			local var16 = 0
+		local IteratorResult = LogData:iterator()
+		local Key = IteratorResult:next()
+		while Key do
+			local Key1 = Key
+			local Message = Key1.Message
+			local CharCount = Key1.CharCount
+			local Ceiled = if WordWrap and XDelta > 0 then math.ceil(Key1.Dims.Y * math.ceil(Key1.Dims.X / XDelta)) else Key1.Dims.Y
+			local YOffset3 = 0
 			
-			if var14.Context then
-				var16 = mainWindow + textFramePadding
+			if Key1.Context then
+				YOffset3 = MainWindow + TextFramePadding
 				
-				if var14.Expanded then
-					var16 += countContextLines(var14.Context, 0) * (mainWindow + textFramePadding)
+				if Key1.Expanded then
+					YOffset3 += countContextLines(Key1.Context, 0) * (MainWindow + TextFramePadding)
 				end
 			end
-			local var17 = var15 + var16
-			var3 += 1
+			local YOffset2 = Ceiled + YOffset3
+			LayoutOrder1 += 1
 			
-			if canvasPos.Y <= var4 + var17 then
-				if var7 < absSize.Y then
-					local text = constantsModule.Color.Text
-					local var18 = ""
+			if CanvasPos.Y <= YOffset1 + YOffset2 then
+				if v2 < AbsSize.Y then
+					local Text = ConstantsModule.Color.Text
+					local Error = ""
 					
-					if var14.Type == Enum.MessageType.MessageOutput.Value then
-						text = constantsModule.Color.Text
-					elseif var14.Type == Enum.MessageType.MessageInfo.Value then
-						text = constantsModule.Color.HighlightBlue
-						var18 = constantsModule.Image.Info
-					elseif var14.Type == Enum.MessageType.MessageWarning.Value then
-						text = constantsModule.Color.WarningYellow
-						var18 = constantsModule.Image.Warning
-					elseif var14.Type == Enum.MessageType.MessageError.Value then
-						text = constantsModule.Color.ErrorRed
-						var18 = constantsModule.Image.Error
+					if Key1.Type == Enum.MessageType.MessageOutput.Value then
+						Text = ConstantsModule.Color.Text
+					elseif Key1.Type == Enum.MessageType.MessageInfo.Value then
+						Text = ConstantsModule.Color.HighlightBlue
+						Error = ConstantsModule.Image.Info
+					elseif Key1.Type == Enum.MessageType.MessageWarning.Value then
+						Text = ConstantsModule.Color.WarningYellow
+						Error = ConstantsModule.Image.Warning
+					elseif Key1.Type == Enum.MessageType.MessageError.Value then
+						Text = ConstantsModule.Color.ErrorRed
+						Error = ConstantsModule.Image.Error
 					end
-					local t_1 = {}
+					local TextLabels = {}
 					
-					if var14.Context then
-						t_1.Layout = roactModule.createElement("UIListLayout", {
+					if Key1.Context then
+						TextLabels.Layout = RoactModule.createElement("UIListLayout", {
 							SortOrder = Enum.SortOrder.LayoutOrder,
-							Padding = UDim.new(0, textFramePadding)
+							Padding = UDim.new(0, TextFramePadding)
 						})
-						t_1.Header = roactModule.createElement(bannerButtonModule, {
+						TextLabels.Header = RoactModule.createElement(BannerButtonModule, {
 							isExpandable = true,
 							layoutOrder = 0,
 							hideLines = true,
-							size = UDim2.new(1, 0, 0, mainWindow),
-							isExpanded = var14.Expanded,
-							onButtonPress = function()
-								-- upvalues: var14 (ref), p3 (ref)
-								var14.Expanded = not var14.Expanded
-								p3:setState({})
+							size = UDim2.new(1, 0, 0, MainWindow),
+							isExpanded = Key1.Expanded,
+							onButtonPress = function() --[[ Line: 176 ]]
+								-- upvalues: Key1 (copy), p2 (copy)
+								Key1.Expanded = not Key1.Expanded
+								p2:setState({})
 							end
 						}, {
-							Label = roactModule.createElement("TextLabel", {
+							Label = RoactModule.createElement("TextLabel", {
 								Text = "Context: {...}",
 								BackgroundTransparency = 1,
-								TextSize = mainWindow,
-								Font = log,
-								TextColor3 = text,
+								TextSize = MainWindow,
+								Font = Log,
+								TextColor3 = Text,
 								Size = UDim2.new(1, -20, 1, 0),
 								Position = UDim2.fromOffset(20, 0),
 								TextXAlignment = Enum.TextXAlignment.Left
 							})
 						})
 						
-						if var14.Expanded then
-							addContextEntries(t_1, var14.Context, text, 0, { i = 0 })
+						if Key1.Expanded then
+							addContextEntries(TextLabels, Key1.Context, Text, 0, { i = 0 })
 						end
 					end
-					t[var3] = roactModule.createElement("Frame", {
+					Frames[LayoutOrder1] = RoactModule.createElement("Frame", {
 						BackgroundTransparency = 1,
-						Size = UDim2.new(1, 0, 0, var17),
-						LayoutOrder = var3
+						Size = UDim2.new(1, 0, 0, YOffset2),
+						LayoutOrder = LayoutOrder1
 					}, {
-						image = roactModule.createElement("ImageLabel", {
+						image = RoactModule.createElement("ImageLabel", {
 							BackgroundTransparency = 1,
-							Image = var18,
-							Size = UDim2.new(0, iconHeight, 0, iconHeight),
-							Position = UDim2.new(0, iconHeight / 4, 0, (mainWindow - iconHeight) / 2)
+							Image = Error,
+							Size = UDim2.new(0, IconHeight, 0, IconHeight),
+							Position = UDim2.new(0, IconHeight / 4, 0, (MainWindow - IconHeight) / 2)
 						}),
-						msg = roactModule.createElement("TextLabel", {
+						msg = RoactModule.createElement("TextLabel", {
 							BackgroundTransparency = 1,
-							Text = message,
-							TextColor3 = text,
-							TextSize = mainWindow,
-							Font = log,
+							Text = Message,
+							TextColor3 = Text,
+							TextSize = MainWindow,
+							Font = Log,
 							TextXAlignment = Enum.TextXAlignment.Left,
-							TextWrapped = wordWrap,
-							Size = UDim2.new(1, 0, 0, var15),
-							Position = UDim2.new(0, textFrameHeight, 0, 0)
+							TextWrapped = WordWrap,
+							Size = UDim2.new(1, 0, 0, Ceiled),
+							Position = UDim2.new(0, TextFrameHeight, 0, 0)
 						}),
-						context = var14.Context and roactModule.createElement("Frame", {
+						context = Key1.Context and RoactModule.createElement("Frame", {
 							BackgroundTransparency = 1,
-							Size = UDim2.new(1, -textFrameHeight, 0, var16),
-							Position = UDim2.new(0, textFrameHeight, 0, var15 + textFramePadding)
-						}, t_1)
+							Size = UDim2.new(1, -TextFrameHeight, 0, YOffset3),
+							Position = UDim2.new(0, TextFrameHeight, 0, Ceiled + TextFramePadding)
+						}, TextLabels)
 					})
 				end
-				if var6 < 0 then
-					var6 = var4
+				if YOffset < 0 then
+					YOffset = YOffset1
 				else
-					var7 = var7 + var17 + textFramePadding
+					v2 = v2 + YOffset2 + TextFramePadding
 				end
 			end
-			var4 = var4 + var17 + textFramePadding
+			YOffset1 = YOffset1 + YOffset2 + TextFramePadding
 			
-			if charCount < maxStringSize then
-				var13 = var12:next()
+			if CharCount < MaxStringSize then
+				Key = IteratorResult:next()
 			else
-				local formattedText = string.format(" -- Could not display entire %d character message because message exceeds max displayable length of %d", charCount, maxStringSize)
-				var13 = {
-					Message = formattedText,
-					CharCount = #formattedText,
-					Type = var14.Type,
-					Dims = textService:GetTextSize(formattedText, mainWindow, log, Vector2.new())
+				local Formatted = string.format(" -- Could not display entire %d character message because message exceeds max displayable length of %d", CharCount, MaxStringSize)
+				Key = {
+					Message = Formatted,
+					CharCount = #Formatted,
+					Type = Key1.Type,
+					Dims = TextService:GetTextSize(Formatted, MainWindow, Log, Vector2.new())
 				}
 			end
 		end
-		t.UIListLayout = roactModule.createElement("UIListLayout", {
+		Frames.UIListLayout = RoactModule.createElement("UIListLayout", {
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
 			VerticalAlignment = Enum.VerticalAlignment.Top,
 			SortOrder = Enum.SortOrder.LayoutOrder,
-			Padding = UDim.new(0, textFramePadding)
+			Padding = UDim.new(0, TextFramePadding)
 		})
-		t.WindowingPadding = roactModule.createElement("Frame", {
+		Frames.WindowingPadding = RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 1,
-			Size = UDim2.new(1, 0, 0, var6)
+			Size = UDim2.new(1, 0, 0, YOffset)
 		})
 	end
-	return roactModule.createElement("ScrollingFrame", {
-		Size = size,
+	return RoactModule.createElement("ScrollingFrame", {
+		Size = Size,
 		BackgroundTransparency = 1,
 		VerticalScrollBarInset = 1,
 		ScrollBarThickness = 6,
-		CanvasSize = UDim2.new(0, 0, 0, var4),
-		CanvasPosition = canvasPos,
-		LayoutOrder = layoutOrder,
-		[roactModule.Ref] = p3.ref
-	}, t)
+		CanvasSize = UDim2.new(0, 0, 0, YOffset1),
+		CanvasPosition = CanvasPos,
+		LayoutOrder = LayoutOrder,
+		[RoactModule.Ref] = p2.ref
+	}, Frames)
 end
 
-return logOutput
+return LogOutput

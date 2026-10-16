@@ -1,93 +1,95 @@
-﻿local httpService = game:GetService("HttpService")
-local promiseModule = require(script.Parent.Parent.Utility.Promise)
-local extreme = Enum.ThrottlingPriority.Extreme
-local applicationJson = Enum.HttpContentType.ApplicationJson
+﻿local HttpService = game:GetService("HttpService")
+local PromiseModule = require(script.Parent.Parent.Utility.Promise)
+local Extreme = Enum.ThrottlingPriority.Extreme
+local ApplicationJson = Enum.HttpContentType.ApplicationJson
 
-return function(p1)
-	-- upvalues: applicationJson (ref), extreme (ref), promiseModule (ref), httpService (ref)
-	local function _(p2, p3)
-		-- upvalues: applicationJson (copy), extreme (copy), p1 (ref)
-		assert(p3.postBody, "Expected a postBody to be specified with this request")
-		assert(type(p3.postBody) == "string", "Expected postBody to be a string")
+return function(HttpRbxApiService) --[[ Line: 9 ]]
+	-- upvalues: ApplicationJson (copy), Extreme (copy), PromiseModule (copy), HttpService (copy)
+	local function _(p1, p2) --[[ Line: 11 | Named "doHttpPost" ]]
+		-- upvalues: ApplicationJson (upval), Extreme (upval), HttpRbxApiService (copy)
+		assert(p2.postBody, "Expected a postBody to be specified with this request")
+		assert(type(p2.postBody) == "string", "Expected postBody to be a string")
 		
-		if not p3.contentType then
-			p3.contentType = applicationJson
+		if not p2.contentType then
+			p2.contentType = ApplicationJson
 		end
-		if not p3.throttlingPriority then
-			p3.throttlingPriority = extreme
+		if not p2.throttlingPriority then
+			p2.throttlingPriority = Extreme
 		end
-		return function()
-			-- upvalues: p1 (copy), p2 (ref), p3 (ref)
-			return p1:PostAsyncFullUrl(p2, p3.postBody, p3.throttlingPriority, p3.contentType)
+		return function() --[[ Line: 23 ]]
+			-- upvalues: HttpRbxApiService (upval), p1 (copy), p2 (copy)
+			return HttpRbxApiService:PostAsyncFullUrl(p1, p2.postBody, p2.throttlingPriority, p2.contentType)
 		end
 	end
 	
-	local _ = function(p2)
-		-- upvalues: p1 (ref), extreme (copy)
-		return function()
-			-- upvalues: p1 (copy), p2 (ref), extreme (copy)
-			return p1:GetAsyncFullUrl(p2, extreme)
+	local _ = function(p1) --[[ Line: 33 | Named "doHttpGet" ]]
+		-- upvalues: HttpRbxApiService (copy), Extreme (upval)
+		return function() --[[ Line: 34 ]]
+			-- upvalues: HttpRbxApiService (upval), p1 (copy), Extreme (upval)
+			return HttpRbxApiService:GetAsyncFullUrl(p1, Extreme)
 		end
 	end
 	
-	return function(p2, p3, p4)
-		-- upvalues: applicationJson (copy), extreme (copy), p1 (ref), promiseModule (copy), httpService (copy)
-		assert(type(p2) == "string", "Expected url to be a string")
-		assert(type(p3) == "string", "Expected requestMethod to be a string")
-		assert(not p4 or type(p4) == "table", "Expected options to be a table")
-		p3 = string.upper(p3)
-		local var1 = nil
+	return function(ApiUrl, Text: string, p1) --[[ Line: 47 ]]
+		-- upvalues: ApplicationJson (upval), Extreme (upval), HttpRbxApiService (copy), PromiseModule (upval), HttpService (upval)
+		assert(type(ApiUrl) == "string", "Expected url to be a string")
+		assert(type(Text) == "string", "Expected requestMethod to be a string")
+		assert(not p1 or type(p1) == "table", "Expected options to be a table")
+		local Uppered = string.upper(Text)
+		local v1: (() -> any)? = nil
 		
-		if p3 == "POST" then
-			assert(p4.postBody, "Expected a postBody to be specified with this request")
-			assert(type(p4.postBody) == "string", "Expected postBody to be a string")
+		if Uppered == "POST" then
+			assert(p1.postBody, "Expected a postBody to be specified with this request")
+			assert(type(p1.postBody) == "string", "Expected postBody to be a string")
 			
-			if not p4.contentType then
-				p4.contentType = applicationJson
+			if not p1.contentType then
+				p1.contentType = ApplicationJson
 			end
-			if not p4.throttlingPriority then
-				p4.throttlingPriority = extreme
+			if not p1.throttlingPriority then
+				p1.throttlingPriority = Extreme
 			end
-			var1 = function()
-				-- upvalues: p1 (copy), p2 (ref), p4 (ref)
-				return p1:PostAsyncFullUrl(p2, p4.postBody, p4.throttlingPriority, p4.contentType)
+			v1 = function() --[[ Line: 23 ]]
+				-- upvalues: HttpRbxApiService (upval), ApiUrl (copy), p1 (copy)
+				return HttpRbxApiService:PostAsyncFullUrl(ApiUrl, p1.postBody, p1.throttlingPriority, p1.contentType)
 			end
-		elseif p3 == "GET" then
-			var1 = function()
-				-- upvalues: p1 (copy), p2 (ref), extreme (copy)
-				return p1:GetAsyncFullUrl(p2, extreme)
+		elseif Uppered == "GET" then
+			v1 = function() --[[ Line: 34 ]]
+				-- upvalues: HttpRbxApiService (upval), ApiUrl (copy), Extreme (upval)
+				return HttpRbxApiService:GetAsyncFullUrl(ApiUrl, Extreme)
 			end
 		else
-			error(string.format("Unsupported requestMethod : %s", p3 or "nil"))
+			error(string.format("Unsupported requestMethod : %s", Uppered or "nil"))
 		end
-		return promiseModule.new(function(p5, p6)
-			-- upvalues: var1 (write), httpService (copy)
-			if var1 then
-				coroutine.wrap(function()
-					-- upvalues: var1 (copy), httpService (copy), p5 (ref), p6 (ref)
-					local ok, status = pcall(var1)
+		return PromiseModule.new(function(Callback1, Callback: () -> ()) --[[ Line: 62 ]]
+			-- upvalues: v1 (ref), HttpService (upval)
+			if v1 then
+				coroutine.wrap(function() --[[ Line: 64 ]]
+					-- upvalues: v1 (upval), HttpService (upval), Callback1 (copy), Callback (copy)
+					local Success, Result = pcall(v1)
 					
-					if not ok then
-						p6(status)
+					if not Success then
+						Callback(Result)
 						
 						return
 					end
-					local ok_1, status_1 = pcall(function()
-						-- upvalues: httpService (copy), status (ref)
-						return httpService:JSONDecode(status)
+					local Success1, Result1 = pcall(function() --[[ Line: 68 ]]
+						-- upvalues: HttpService (upval), Result (copy)
+						return HttpService:JSONDecode(Result)
 					end)
 					
-					if ok_1 then
-						p5({ responseBody = status_1 })
+					if Success1 then
+						Callback1({ responseBody = Result1 })
 						
 						return
+					else
+						Callback(Result1)
 					end
-					p6(status_1)
 				end)()
 				
 				return
+			else
+				Callback()
 			end
-			p6()
 		end)
 	end
 end

@@ -1,3 +1,3 @@
-﻿return require(script:FindFirstAncestor("ExpChat").Parent.Rodux).makeActionCreator(script.Name, function(p1, p2)
-	return { channelName = p1, tabIndex = p2 }
+﻿return require(script:FindFirstAncestor("ExpChat").Parent.Rodux).makeActionCreator(script.Name, function(ChannelName, TabIndex) --[[ Line: 10 ]]
+	return { channelName = ChannelName, tabIndex = TabIndex }
 end)

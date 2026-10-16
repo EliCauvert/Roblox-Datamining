@@ -1,11 +1,11 @@
-﻿local memStorageService = game:GetService("MemStorageService")
+﻿local MemStorageService = game:GetService("MemStorageService")
 
-return function(p1)
-	-- upvalues: memStorageService (ref)
-	local ok, status = pcall(function()
-		-- upvalues: memStorageService (copy), p1 (ref)
-		return memStorageService:GetItem(p1)
+return function(Key) --[[ Line: 3 ]]
+	-- upvalues: MemStorageService (copy)
+	local Success, Result = pcall(function() --[[ Line: 4 ]]
+		-- upvalues: MemStorageService (upval), Key (copy)
+		return MemStorageService:GetItem(Key)
 	end)
 	
-	return if ok and status and status ~= "" then status else nil
+	return if Success and Result and Result ~= "" then Result else nil
 end

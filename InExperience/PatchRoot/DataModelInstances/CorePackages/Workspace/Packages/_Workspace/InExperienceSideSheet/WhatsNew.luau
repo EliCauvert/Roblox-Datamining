@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Workspace.WhatsNew.WhatsNew)
+﻿return (require(script.Parent.Parent.Parent._Workspace.WhatsNew.WhatsNew))

@@ -1,15 +1,15 @@
-﻿local bulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
-local _ = require(bulkPurchaseApp.Store.Types)
-local purchasableStateEnumModule = require(bulkPurchaseApp.Enums.PurchasableStateEnum)
+﻿local BulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
+local _ = require(BulkPurchaseApp.Store.Types)
+local PurchasableStateEnumModule = require(BulkPurchaseApp.Enums.PurchasableStateEnum)
 
-return function(p1)
-	-- upvalues: purchasableStateEnumModule (ref)
-	local t = {}
+return function(List) --[[ Line: 8 | Named "filterPurchasableItems" ]]
+	-- upvalues: PurchasableStateEnumModule (copy)
+	local List1 = {}
 	
-	for i, v in p1 do
-		if v.purchasableState == purchasableStateEnumModule.Purchasable then
-			table.insert(t, v)
+	for _, value in List do
+		if value.purchasableState == PurchasableStateEnumModule.Purchasable then
+			table.insert(List1, value)
 		end
 	end
-	return t
+	return List1
 end

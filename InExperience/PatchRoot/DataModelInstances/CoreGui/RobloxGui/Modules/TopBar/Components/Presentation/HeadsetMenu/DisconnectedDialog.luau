@@ -1,72 +1,72 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local corePackagesService = game:GetService("CorePackages")
-local contextActionService = game:GetService("ContextActionService")
-local guiService = game:GetService("GuiService")
-local roactModule = require(corePackagesService.Packages.Roact)
-local tModule = require(corePackagesService.Packages.t)
-local fitFrameModule = require(corePackagesService.Packages.FitFrame)
-local fitFrameVertical = fitFrameModule.FitFrameVertical
-local fitTextLabel = fitFrameModule.FitTextLabel
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local withStyle = UIBloxModule.Core.Style.withStyle
-local images = UIBloxModule.App.ImageSet.Images
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
-local inGameMenuConstantsModule = require(coreGuiService.RobloxGui.Modules.InGameMenuConstants)
-local alert = images["icons/status/alert"]
-local disconnectedDialog = roactModule.PureComponent:extend("DisconnectedDialog")
-disconnectedDialog.validateProps = tModule.strictInterface({
-	visible = tModule.boolean,
-	onConfirm = tModule.callback,
-	screenSize = tModule.Vector2,
-	guiService = tModule.optional(tModule.union(tModule.instanceOf("GuiService"), tModule.table))
+﻿local CoreGui = game:GetService("CoreGui")
+local CorePackages = game:GetService("CorePackages")
+local ContextActionService = game:GetService("ContextActionService")
+local GuiService = game:GetService("GuiService")
+local RoactModule = require(CorePackages.Packages.Roact)
+local TModule = require(CorePackages.Packages.t)
+local FitFrameModule = require(CorePackages.Packages.FitFrame)
+local FitFrameVertical = FitFrameModule.FitFrameVertical
+local FitTextLabel = FitFrameModule.FitTextLabel
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
+local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local WithStyleFunction = UIBloxModule.Core.Style.withStyle
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
+local InGameMenuConstantsModule = require(CoreGui.RobloxGui.Modules.InGameMenuConstants)
+local IconsStatusAlert = UIBloxModule.App.ImageSet.Images["icons/status/alert"]
+local DisconnectedDialog = RoactModule.PureComponent:extend("DisconnectedDialog")
+DisconnectedDialog.validateProps = TModule.strictInterface({
+	visible = TModule.boolean,
+	onConfirm = TModule.callback,
+	screenSize = TModule.Vector2,
+	guiService = TModule.optional(TModule.union(TModule.instanceOf("GuiService"), TModule.table))
 })
-disconnectedDialog.defaultProps = { guiService = guiService }
+DisconnectedDialog.defaultProps = { guiService = GuiService }
 
-function disconnectedDialog.init(p1)
+function DisconnectedDialog.init(p1) --[[ Line: 50 ]]
 	p1.guiService = p1.props.guiService
 	
-	function p0.onConfirmBindingAction(_, p2, _)
-		-- upvalues: p1 (ref)
-		if p2 == Enum.UserInputState.Begin then
+	function p1:onConfirmBindingAction(UserInputState, _) --[[ Line: 53 ]]
+		-- upvalues: p1 (copy)
+		if UserInputState == Enum.UserInputState.Begin then
 			p1.props.onConfirm()
 			
 			return Enum.ContextActionResult.Sink
+		else
+			return Enum.ContextActionResult.Pass
 		end
-		return Enum.ContextActionResult.Pass
 	end
 end
 
-function disconnectedDialog.render(p1)
-	-- upvalues: withStyle (ref), robloxTranslatorModule (ref), roactModule (ref), interactiveAlert (ref), fitFrameVertical (ref), imageSetLabel (ref), alert (ref), fitTextLabel (ref), buttonType (ref), coreGuiService (ref), inGameMenuConstantsModule (ref)
-	return withStyle(function(p2)
-		-- upvalues: robloxTranslatorModule (copy), roactModule (copy), interactiveAlert (copy), fitFrameVertical (copy), imageSetLabel (copy), alert (copy), fitTextLabel (copy), buttonType (copy), p1 (ref), coreGuiService (copy), inGameMenuConstantsModule (copy)
-		local theme = p2.Theme
-		local font = p2.Font
-		local var1 = robloxTranslatorModule:FormatByKey("InGame.ConnectionError.Message.RestartApp")
+function DisconnectedDialog.render(p1) --[[ Line: 64 ]]
+	-- upvalues: WithStyleFunction (copy), RobloxTranslatorModule (copy), RoactModule (copy), InteractiveAlert (copy), FitFrameVertical (copy), ImageSetLabel (copy), IconsStatusAlert (copy), FitTextLabel (copy), ButtonType (copy), CoreGui (copy), InGameMenuConstantsModule (copy)
+	return WithStyleFunction(function(p2) --[[ Line: 65 ]]
+		-- upvalues: RobloxTranslatorModule (upval), RoactModule (upval), InteractiveAlert (upval), FitFrameVertical (upval), ImageSetLabel (upval), IconsStatusAlert (upval), FitTextLabel (upval), ButtonType (upval), p1 (copy), CoreGui (upval), InGameMenuConstantsModule (upval)
+		local Theme = p2.Theme
+		local _Font = p2.Font
+		local InGameConnectionErrorMessageRestartApp = RobloxTranslatorModule:FormatByKey("InGame.ConnectionError.Message.RestartApp")
 		
-		return roactModule.createElement(roactModule.Portal, { target = coreGuiService }, {
-			HeadsetDisconnectedDialog = roactModule.createElement("ScreenGui", {
+		return RoactModule.createElement(RoactModule.Portal, { target = CoreGui }, {
+			HeadsetDisconnectedDialog = RoactModule.createElement("ScreenGui", {
 				IgnoreGuiInset = true,
 				OnTopOfCoreBlur = true,
-				DisplayOrder = inGameMenuConstantsModule.DisplayOrder.HeadsetDisconnectedDialog,
+				DisplayOrder = InGameMenuConstantsModule.DisplayOrder.HeadsetDisconnectedDialog,
 				Enabled = p1.props.visible,
 				ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 			}, {
-				Overlay = roactModule.createElement("Frame", {
+				Overlay = RoactModule.createElement("Frame", {
 					Active = true,
 					BorderSizePixel = 0,
-					BackgroundColor3 = theme.Overlay.Color,
-					BackgroundTransparency = theme.Overlay.Transparency,
+					BackgroundColor3 = Theme.Overlay.Color,
+					BackgroundTransparency = Theme.Overlay.Transparency,
 					Size = UDim2.fromScale(1, 1)
 				}, {
-					Alert = roactModule.createElement(interactiveAlert, {
-						title = robloxTranslatorModule:FormatByKey("InGame.ConnectionError.Heading.VRDisconnected"),
-						middleContent = function()
-							-- upvalues: roactModule (copy), fitFrameVertical (copy), imageSetLabel (copy), alert (copy), fitTextLabel (copy), font (ref), var1 (ref), theme (ref)
-							return roactModule.createElement(fitFrameVertical, {
+					Alert = RoactModule.createElement(InteractiveAlert, {
+						title = RobloxTranslatorModule:FormatByKey("InGame.ConnectionError.Heading.VRDisconnected"),
+						middleContent = function() --[[ Line: 75 ]]
+							-- upvalues: RoactModule (upval), FitFrameVertical (upval), ImageSetLabel (upval), IconsStatusAlert (upval), FitTextLabel (upval), _Font (copy), InGameConnectionErrorMessageRestartApp (copy), Theme (copy)
+							return RoactModule.createElement(FitFrameVertical, {
 								BackgroundTransparency = 1,
 								width = UDim.new(1, 0),
 								FillDirection = Enum.FillDirection.Vertical,
@@ -74,32 +74,32 @@ function disconnectedDialog.render(p1)
 								VerticalAlignment = Enum.VerticalAlignment.Center,
 								contentPadding = UDim.new(0, 24)
 							}, {
-								Icon = roactModule.createElement(imageSetLabel, {
+								Icon = RoactModule.createElement(ImageSetLabel, {
 									LayoutOrder = 1,
 									BackgroundTransparency = 1,
 									ImageTransparency = 0,
 									Position = UDim2.new(0, 5, 0, 5),
 									Size = UDim2.fromOffset(40, 40),
-									Image = alert
+									Image = IconsStatusAlert
 								}),
-								BodyText = roactModule.createElement(fitTextLabel, {
+								BodyText = RoactModule.createElement(FitTextLabel, {
 									LayoutOrder = 2,
 									BackgroundTransparency = 1,
-									width = fitTextLabel.Width.FitToText,
-									Font = font.Body.Font,
-									Text = var1,
-									TextSize = font.BaseSize * font.Body.RelativeSize,
-									TextColor3 = theme.TextDefault.Color
+									width = FitTextLabel.Width.FitToText,
+									Font = _Font.Body.Font,
+									Text = InGameConnectionErrorMessageRestartApp,
+									TextSize = _Font.BaseSize * _Font.Body.RelativeSize,
+									TextColor3 = Theme.TextDefault.Color
 								})
 							})
 						end,
 						buttonStackInfo = {
 							buttons = {
 								{
-									buttonType = buttonType.PrimarySystem,
+									buttonType = ButtonType.PrimarySystem,
 									props = {
 										onActivated = p1.props.onConfirm,
-										text = robloxTranslatorModule:FormatByKey("InGame.ConnectionError.Action.Restart")
+										text = RobloxTranslatorModule:FormatByKey("InGame.ConnectionError.Action.Restart")
 									}
 								}
 							}
@@ -112,26 +112,26 @@ function disconnectedDialog.render(p1)
 	end)
 end
 
-function disconnectedDialog.bindActions(p1)
-	-- upvalues: contextActionService (ref)
-	contextActionService:BindCoreAction("TopBarGamepadDisableMenuShortcut", function() end, false, Enum.KeyCode.ButtonStart, Enum.KeyCode.Escape)
-	contextActionService:BindCoreAction("TopBarDialogConfirm", p1.onConfirmBindingAction, false, Enum.KeyCode.Return, Enum.KeyCode.ButtonA)
+function DisconnectedDialog.bindActions(p1) --[[ Line: 144 ]]
+	-- upvalues: ContextActionService (copy)
+	ContextActionService:BindCoreAction("TopBarGamepadDisableMenuShortcut", function() --[[ Line: 148 ]] end, false, Enum.KeyCode.ButtonStart, Enum.KeyCode.Escape)
+	ContextActionService:BindCoreAction("TopBarDialogConfirm", p1.onConfirmBindingAction, false, Enum.KeyCode.Return, Enum.KeyCode.ButtonA)
 end
 
-function disconnectedDialog.unbindActions(_)
-	-- upvalues: contextActionService (ref)
-	contextActionService:UnbindCoreAction("TopBarGamepadDisableMenuShortcut")
-	contextActionService:UnbindCoreAction("TopBarDialogConfirm")
+function DisconnectedDialog:unbindActions() --[[ Line: 163 ]]
+	-- upvalues: ContextActionService (copy)
+	ContextActionService:UnbindCoreAction("TopBarGamepadDisableMenuShortcut")
+	ContextActionService:UnbindCoreAction("TopBarDialogConfirm")
 end
 
-function disconnectedDialog.didMount(p1)
+function DisconnectedDialog.didMount(p1) --[[ Line: 168 ]]
 	if p1.props.visible then
 		p1:bindActions()
 		p1.guiService:SetMenuIsOpen(true, "HeadsetDisconnectedDialog")
 	end
 end
 
-function disconnectedDialog.didUpdate(p1, p2, _)
+function DisconnectedDialog.didUpdate(p1, p2, _) --[[ Line: 175 ]]
 	if p1.props.visible ~= p2.visible then
 		if p1.props.visible then
 			p1:bindActions()
@@ -144,9 +144,9 @@ function disconnectedDialog.didUpdate(p1, p2, _)
 	end
 end
 
-function disconnectedDialog.willUnmount(p1)
+function DisconnectedDialog.willUnmount(p1) --[[ Line: 187 ]]
 	p1:unbindActions()
 	p1.guiService:SetMenuIsOpen(false, "HeadsetDisconnectedDialog")
 end
 
-return disconnectedDialog
+return DisconnectedDialog

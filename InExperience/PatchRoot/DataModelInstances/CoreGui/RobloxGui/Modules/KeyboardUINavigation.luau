@@ -1,119 +1,115 @@
-﻿local playersService = game:GetService("Players")
-local guiService = game:GetService("GuiService")
-local contextActionService = game:GetService("ContextActionService")
-local coreGuiService = game:GetService("CoreGui")
-local corePackagesService = game:GetService("CorePackages")
-local gameSettings = UserSettings().GameSettings
-local sendNotificationInfo = coreGuiService:WaitForChild("RobloxGui"):WaitForChild("SendNotificationInfo")
-local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
-local var1 = nil
+﻿local Players = game:GetService("Players")
+local GuiService = game:GetService("GuiService")
+local ContextActionService = game:GetService("ContextActionService")
+local GameSettings = UserSettings().GameSettings
+local SendNotificationInfo = game:GetService("CoreGui"):WaitForChild("RobloxGui"):WaitForChild("SendNotificationInfo")
+local RobloxTranslatorModule = require(game:GetService("CorePackages").Workspace.Packages.RobloxTranslator)
+local PlayerGui = nil
 
-local function _(p1, p2)
-	-- upvalues: robloxTranslatorModule (ref)
-	pcall(function()
-		-- upvalues: p2 (write), robloxTranslatorModule (copy), p1 (ref)
-		p2 = robloxTranslatorModule:FormatByKey(p1)
+local function _(p1, Text) --[[ Line: 18 | Named "LocalizedGetString" ]]
+	-- upvalues: RobloxTranslatorModule (copy)
+	pcall(function() --[[ Line: 19 ]]
+		-- upvalues: Text (ref), RobloxTranslatorModule (upval), p1 (copy)
+		Text = RobloxTranslatorModule:FormatByKey(p1)
 	end)
 	
-	return p2
+	return Text
 end
 
-local function ScrollSelectedElement(_, p1, p2)
-	-- upvalues: guiService (ref)
-	if p1 ~= Enum.UserInputState.Begin then
+local function ScrollSelectedElement(_, InputState, InputObject) --[[ Line: 25 ]]
+	-- upvalues: GuiService (copy)
+	if InputState ~= Enum.UserInputState.Begin then
 		return Enum.ContextActionResult.Pass
 	end
-	local selectedObject = guiService.SelectedObject
+	local SelectedObject = GuiService.SelectedObject
 	
-	if selectedObject == nil then
+	if SelectedObject == nil then
 		return Enum.ContextActionResult.Pass
 	end
-	local var2 = nil
+	local ScrollFrame = nil
 	
-	if selectedObject.ClassName == "ScrollingFrame" then
-		var2 = selectedObject
+	if SelectedObject.ClassName == "ScrollingFrame" then
+		ScrollFrame = SelectedObject
 	else
-		local scrollingFrame = selectedObject:FindFirstAncestorOfClass("ScrollingFrame")
+		local ScrollingFrame = SelectedObject:FindFirstAncestorOfClass("ScrollingFrame")
 		
-		if scrollingFrame ~= nil then
-			var2 = scrollingFrame
+		if ScrollingFrame ~= nil then
+			ScrollFrame = ScrollingFrame
 		end
 	end
-	if var2 == nil then
+	if ScrollFrame == nil then
 		return Enum.ContextActionResult.Pass
 	end
-	local var3 = 0
+	local v1: number = if InputObject.KeyCode == Enum.KeyCode.PageUp or InputObject.KeyCode == Enum.KeyCode.Home then -100 elseif InputObject.KeyCode == Enum.KeyCode.PageDown or InputObject.KeyCode == Enum.KeyCode.End then 100 else 0
+	local X = ScrollFrame.CanvasPosition.X
+	local Y = ScrollFrame.CanvasPosition.Y
 	
-	if p2.KeyCode == Enum.KeyCode.PageUp or p2.KeyCode == Enum.KeyCode.Home then
-		var3 = -100
-	elseif p2.KeyCode == Enum.KeyCode.PageDown or p2.KeyCode == Enum.KeyCode.End then
-		var3 = 100
+	if InputObject.KeyCode == Enum.KeyCode.PageUp or InputObject.KeyCode == Enum.KeyCode.PageDown then
+		Y = math.max(0, (math.min(Y + v1, ScrollFrame.AbsoluteCanvasSize.Y)))
+	elseif InputObject.KeyCode == Enum.KeyCode.Home or InputObject.KeyCode == Enum.KeyCode.End then
+		X = math.max(0, (math.min(X + v1, ScrollFrame.AbsoluteCanvasSize.X)))
 	end
-	local x = var2.CanvasPosition.X
-	local y = var2.CanvasPosition.Y
-	
-	if p2.KeyCode == Enum.KeyCode.PageUp or p2.KeyCode == Enum.KeyCode.PageDown then
-		y = math.max(0, math.min(y + var3, var2.AbsoluteCanvasSize.Y))
-	elseif p2.KeyCode == Enum.KeyCode.Home or p2.KeyCode == Enum.KeyCode.End then
-		x = math.max(0, math.min(x + var3, var2.AbsoluteCanvasSize.X))
-	end
-	var2.CanvasPosition = Vector2.new(x, y)
+	ScrollFrame.CanvasPosition = Vector2.new(X, Y)
 	
 	return Enum.ContextActionResult.Pass
 end
 
-local function EnableKeyboardNavigation(_, p1, _)
-	-- upvalues: gameSettings (ref), guiService (ref), var1 (write), playersService (ref), robloxTranslatorModule (ref), sendNotificationInfo (ref)
-	if not gameSettings.UiNavigationKeyBindEnabled then
+local function EnableKeyboardNavigation(_, InputState, _) --[[ Line: 73 ]]
+	-- upvalues: GameSettings (copy), GuiService (copy), PlayerGui (ref), Players (copy), RobloxTranslatorModule (copy), SendNotificationInfo (copy)
+	if not GameSettings.UiNavigationKeyBindEnabled then
 		return Enum.ContextActionResult.Pass
-	elseif p1 ~= Enum.UserInputState.Begin then
+	end
+	if InputState ~= Enum.UserInputState.Begin then
 		return Enum.ContextActionResult.Pass
-	elseif not guiService.AutoSelectGuiEnabled then
+	end
+	if not GuiService.AutoSelectGuiEnabled then
 		return Enum.ContextActionResult.Pass
-	elseif guiService.SelectedObject then
-		guiService.SelectedObject = nil
+	end
+	if GuiService.SelectedObject then
+		GuiService.SelectedObject = nil
 		
 		return Enum.ContextActionResult.Sink
-	elseif var1 == nil then
-		var1 = playersService.LocalPlayer:FindFirstChildOfClass("PlayerGui")
 	end
-	guiService:Select(var1)
+	if PlayerGui == nil then
+		PlayerGui = Players.LocalPlayer:FindFirstChildOfClass("PlayerGui")
+	end
+	GuiService:Select(PlayerGui)
 	
-	if guiService.SelectedObject then
-		local var2 = nil
-		local var3 = "InGame.NotificationScript2.UINavigation.Title"
-		pcall(function()
-			-- upvalues: var2 (write), robloxTranslatorModule (copy), var3 (ref)
-			p1 = robloxTranslatorModule:FormatByKey(var3)
+	if GuiService.SelectedObject then
+		local FormatByKeyResult = nil
+		local v1 = "InGame.NotificationScript2.UINavigation.Title"
+		pcall(function() --[[ Line: 19 ]]
+			-- upvalues: FormatByKeyResult (ref), RobloxTranslatorModule (upval), v1 (copy)
+			FormatByKeyResult = RobloxTranslatorModule:FormatByKey(v1)
 		end)
-		local var4 = var2
-		local var5 = nil
-		local var6 = "InGame.NotificationScript2.UINavigation.Text"
-		pcall(function()
-			-- upvalues: var5 (write), robloxTranslatorModule (copy), var6 (ref)
-			p1 = robloxTranslatorModule:FormatByKey(var6)
+		local Title = FormatByKeyResult
+		local FormatByKeyResult1 = nil
+		local v2 = "InGame.NotificationScript2.UINavigation.Text"
+		pcall(function() --[[ Line: 19 ]]
+			-- upvalues: FormatByKeyResult1 (ref), RobloxTranslatorModule (upval), v2 (copy)
+			FormatByKeyResult1 = RobloxTranslatorModule:FormatByKey(v2)
 		end)
-		sendNotificationInfo:Fire({ Duration = 3, Title = var4, Text = var5 })
+		SendNotificationInfo:Fire({ Duration = 3, Title = Title, Text = FormatByKeyResult1 })
 	end
 	return Enum.ContextActionResult.Sink
 end
 
-local t = {}
-t.__index = t
+local Module = {}
+Module.__index = Module
 
-function t.new()
-	-- upvalues: t (ref), contextActionService (ref), EnableKeyboardNavigation (ref), ScrollSelectedElement (ref), gameSettings (ref), guiService (ref)
-	local tbl = setmetatable({}, t)
-	contextActionService:BindAction("EnableKeyboardUINavigation", EnableKeyboardNavigation, false, Enum.KeyCode.BackSlash)
-	contextActionService:BindAction("ScrollSelectedElement", ScrollSelectedElement, false, Enum.KeyCode.PageUp, Enum.KeyCode.PageDown, Enum.KeyCode.Home, Enum.KeyCode.End)
-	gameSettings:GetPropertyChangedSignal("UiNavigationKeyBindEnabled"):Connect(function()
-		-- upvalues: gameSettings (copy), guiService (copy)
-		if not gameSettings.UiNavigationKeyBindEnabled then
-			guiService.SelectedObject = nil
+function Module.new() --[[ Line: 116 ]]
+	-- upvalues: Module (copy), ContextActionService (copy), EnableKeyboardNavigation (copy), ScrollSelectedElement (copy), GameSettings (copy), GuiService (copy)
+	local self = setmetatable({}, Module)
+	ContextActionService:BindAction("EnableKeyboardUINavigation", EnableKeyboardNavigation, false, Enum.KeyCode.BackSlash)
+	ContextActionService:BindAction("ScrollSelectedElement", ScrollSelectedElement, false, Enum.KeyCode.PageUp, Enum.KeyCode.PageDown, Enum.KeyCode.Home, Enum.KeyCode.End)
+	GameSettings:GetPropertyChangedSignal("UiNavigationKeyBindEnabled"):Connect(function() --[[ Line: 121 ]]
+		-- upvalues: GameSettings (upval), GuiService (upval)
+		if not GameSettings.UiNavigationKeyBindEnabled then
+			GuiService.SelectedObject = nil
 		end
 	end)
 	
-	return tbl
+	return self
 end
 
-return t.new()
+return Module.new()

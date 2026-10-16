@@ -1,48 +1,41 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local socialExperimentsModule = require(parent.SocialExperiments)
-local squadExternalContractProviderModule = require(parent.SquadsCore.SquadExternalContractProvider)
-local enumsModule = require(parent.SquadsCore.Enums)
-local setSquadPrompt = require(parent.SquadsCore.Actions).SetSquadPrompt
-local closeSquadPrompt = require(parent.SquadsCore.Actions).CloseSquadPrompt
-local squadRootViewType = enumsModule.SquadRootViewType
-local makeSquadContract = squadExternalContractProviderModule.makeSquadContract
-local inExperienceAppChatModalModule = require(appChat.App.InExperienceAppChatModal)
-local squadCoordinationExperienceJoinExperimentation = socialExperimentsModule.SquadCoordinationExperienceJoinExperimentation
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local ReactModule = require(Parent.React)
+local SetSquadPromptFunction = require(Parent.SquadsCore.Actions).SetSquadPrompt
+local SquadRootViewType = require(Parent.SquadsCore.Enums).SquadRootViewType
+local InExperienceAppChatModalModule = require(AppChat.App.InExperienceAppChatModal)
+local SquadCoordinationExperienceJoinExperimentation = require(Parent.SocialExperiments).SquadCoordinationExperienceJoinExperimentation
 
-return makeSquadContract(cryoModule.Dictionary.union(require(script.Parent.SquadContract), {
-	setSquadPrompt = function(p1, p2)
-		-- upvalues: setSquadPrompt (ref)
-		p1:dispatch(setSquadPrompt(p2))
+return (require(Parent.SquadsCore.SquadExternalContractProvider).makeSquadContract(require(Parent.Cryo).Dictionary.union(require(script.Parent.SquadContract), {
+	setSquadPrompt = function(p1, p2) --[[ Line: 22 ]]
+		-- upvalues: SetSquadPromptFunction (copy)
+		p1:dispatch(SetSquadPromptFunction(p2))
 	end,
-	closeSquadPrompt = closeSquadPrompt,
-	useSquadRootView = function()
-		-- upvalues: reactModule (ref), squadCoordinationExperienceJoinExperimentation (ref), inExperienceAppChatModalModule (ref), squadRootViewType (ref)
-		local useState = reactModule.useState
-		local var1 = if squadCoordinationExperienceJoinExperimentation.getIsSquadLobbySessionEnabled and inExperienceAppChatModalModule.default:getVisible() then squadRootViewType.InExperienceAppChatModal else squadRootViewType.None
-		useState, var7 = useState(var1)
-		reactModule.useEffect(function()
-			-- upvalues: inExperienceAppChatModalModule (copy), var1 (ref), squadRootViewType (copy)
-			local eventConnection = inExperienceAppChatModalModule.default.visibilitySignal.Event:Connect(function(p1)
-				-- upvalues: var1 (copy), squadRootViewType (copy)
+	closeSquadPrompt = require(Parent.SquadsCore.Actions).CloseSquadPrompt,
+	useSquadRootView = function() --[[ Line: 26 ]]
+		-- upvalues: ReactModule (copy), SquadCoordinationExperienceJoinExperimentation (copy), InExperienceAppChatModalModule (copy), SquadRootViewType (copy)
+		local UseStateResult, UseStateResult2 = ReactModule.useState(if SquadCoordinationExperienceJoinExperimentation.getIsSquadLobbySessionEnabled and InExperienceAppChatModalModule.default:getVisible() then SquadRootViewType.InExperienceAppChatModal else SquadRootViewType.None)
+		ReactModule.useEffect(function() --[[ Line: 33 ]]
+			-- upvalues: InExperienceAppChatModalModule (upval), UseStateResult2 (copy), SquadRootViewType (upval)
+			local EventConnection = InExperienceAppChatModalModule.default.visibilitySignal.Event:Connect(function(p1) --[[ Line: 34 ]]
+				-- upvalues: UseStateResult2 (upval), SquadRootViewType (upval)
 				if p1 then
-					var1(squadRootViewType.InExperienceAppChatModal)
+					UseStateResult2(SquadRootViewType.InExperienceAppChatModal)
 					
 					return
+				else
+					UseStateResult2(SquadRootViewType.None)
 				end
-				var1(squadRootViewType.None)
 			end)
 			
-			return function()
-				-- upvalues: eventConnection (ref)
-				if eventConnection then
-					eventConnection:Disconnect()
+			return function() --[[ Line: 42 ]]
+				-- upvalues: EventConnection (copy)
+				if EventConnection then
+					EventConnection:Disconnect()
 				end
 			end
 		end, {})
 		
-		return useState
+		return UseStateResult
 	end
-}))
+})))

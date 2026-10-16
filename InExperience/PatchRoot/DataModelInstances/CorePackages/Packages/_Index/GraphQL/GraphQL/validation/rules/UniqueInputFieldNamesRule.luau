@@ -1,37 +1,38 @@
-﻿local parent = script.Parent.Parent.Parent
-local graphQLError = require(parent.error.GraphQLError).GraphQLError
-local _ = require(parent.language.visitor)
+﻿local Parent = script.Parent.Parent.Parent
+local GraphQLError = require(Parent.error.GraphQLError).GraphQLError
+local _ = require(Parent.language.visitor)
 local _ = require(script.Parent.Parent.ValidationContext)
-local _ = require(parent.language.ast)
+local _ = require(Parent.language.ast)
 
 return {
-	UniqueInputFieldNamesRule = function(p1)
-		-- upvalues: graphQLError (ref)
-		local t = {}
-		local t_1 = {}
+	UniqueInputFieldNamesRule = function(p1) --[[ Line: 30 ]]
+		-- upvalues: GraphQLError (copy)
+		local List = {}
+		local Removed = {}
 		
 		return {
 			ObjectValue = {
-				enter = function()
-					-- upvalues: t (ref), t_1 (write)
-					table.insert(t, t_1)
-					t_1 = {}
+				enter = function() --[[ Line: 36 ]]
+					-- upvalues: List (copy), Removed (ref)
+					table.insert(List, Removed)
+					Removed = {}
 				end,
-				leave = function()
-					-- upvalues: t_1 (write), t (ref)
-					t_1 = table.remove(t)
+				leave = function() --[[ Line: 40 ]]
+					-- upvalues: Removed (ref), List (copy)
+					Removed = table.remove(List)
 				end
 			},
-			ObjectField = function(_, p2)
-				-- upvalues: t_1 (write), p1 (ref), graphQLError (copy)
-				local value = p2.name.value
+			ObjectField = function(_, p2) --[[ Line: 45 ]]
+				-- upvalues: Removed (ref), p1 (copy), GraphQLError (upval)
+				local Value = p2.name.value
 				
-				if t_1[value] then
-					p1:reportError(graphQLError.new(("There can be only one input field named \"%s\"."):format(value), { t_1[value], p2.name }))
+				if Removed[Value] then
+					p1:reportError(GraphQLError.new(("There can be only one input field named \"%s\"."):format(Value), { Removed[Value], p2.name }))
 					
 					return
+				else
+					Removed[Value] = p2.name
 				end
-				t_1[value] = p2.name
 			end
 		}
 	end

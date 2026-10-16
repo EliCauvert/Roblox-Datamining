@@ -1,83 +1,86 @@
-﻿local avatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
-local avatarExperienceFlagsModule = require(avatarExperienceCommon.Parent.AvatarExperienceFlags)
-local avatarBackground = require(avatarExperienceCommon.Constants).ASSET_TYPE_NAME_TO_ID_STRING.AvatarBackground
-local nOBACKGROUNDASSETID = require(script.Parent.constants).NO_BACKGROUND_ASSET_ID
+﻿local AvatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
+local AvatarExperienceFlagsModule = require(AvatarExperienceCommon.Parent.AvatarExperienceFlags)
+local AvatarBackground = require(AvatarExperienceCommon.Constants).ASSET_TYPE_NAME_TO_ID_STRING.AvatarBackground
+local NOBACKGROUNDASSETID = require(script.Parent.constants).NO_BACKGROUND_ASSET_ID
 
-local function scanTryOnForBackground(value)
-	-- upvalues: avatarBackground (ref)
-	if not value then
+local function scanTryOnForBackground(TryOnItems): number? --[[ Line: 32 ]]
+	-- upvalues: AvatarBackground (copy)
+	if not TryOnItems then
 		return nil
 	end
-	for i, v in value do
-		if not v.isUnequipped and v.itemType == "Asset" and v.itemSubType == avatarBackground then
-			local var1 = tonumber(v.itemId)
+	local Number = nil
+	for _, tryOnItem in TryOnItems do
+		if not tryOnItem.isUnequipped and tryOnItem.itemType == "Asset" and tryOnItem.itemSubType == AvatarBackground then
+			Number = tonumber(tryOnItem.itemId)
 			
-			if var1 then
-				return var1
+			if Number then
+				return Number
 			end
 		end
 	end
 	return nil
 end
 
-local function _(value)
-	-- upvalues: avatarBackground (ref)
-	if not value then
+local function _(p1): number? --[[ Line: 50 | Named "firstEquippedBackgroundId" ]]
+	-- upvalues: AvatarBackground (copy)
+	if not p1 then
 		return nil
 	end
-	local var2 = value[avatarBackground]
+	local v1 = p1[AvatarBackground]
 	
-	if not var2 then
+	if not v1 then
 		return nil
 	end
-	for i in var2 do
-		local var3 = tonumber(i)
+	local Number = nil
+	for i in v1 do
+		Number = tonumber(i)
 		
-		if var3 then
-			return var3
+		if Number then
+			return Number
 		end
 	end
 	return nil
 end
 
-return function(value)
-	-- upvalues: avatarBackground (ref), avatarExperienceFlagsModule (ref), scanTryOnForBackground (ref), nOBACKGROUNDASSETID (ref)
-	if not avatarBackground then
+return function(p2) --[[ Line: 67 | Named "selectActiveBackground" ]]
+	-- upvalues: AvatarBackground (copy), AvatarExperienceFlagsModule (copy), scanTryOnForBackground (copy), NOBACKGROUNDASSETID (copy)
+	if not AvatarBackground then
 		return nil
 	end
-	local var4 = value and value.AvatarExperience
+	local AvatarExperience = p2 and p2.AvatarExperience or p2
 	
-	if avatarExperienceFlagsModule.FFlagAXBackgroundsCustomizeHydration then
-		local outfitTryOn = var4 and (var4.AvatarScene and var4.AvatarScene.OutfitTryOn)
-		local var5 = scanTryOnForBackground(outfitTryOn and outfitTryOn.TryOnItems)
+	if AvatarExperienceFlagsModule.FFlagAXBackgroundsCustomizeHydration then
+		local OutfitTryOn = AvatarExperience and (AvatarExperience.AvatarScene and AvatarExperience.AvatarScene.OutfitTryOn)
+		local ScanTryOnForBackgroundResult = scanTryOnForBackground(OutfitTryOn and OutfitTryOn.TryOnItems)
 		
-		if var5 then
-			return var5
+		if ScanTryOnForBackgroundResult then
+			return ScanTryOnForBackgroundResult
 		end
 	end
-	local profileConfiguration = var4 and (var4.AvatarScene and var4.AvatarScene.ProfileConfiguration)
+	local ProfileConfiguration = AvatarExperience and (AvatarExperience.AvatarScene and AvatarExperience.AvatarScene.ProfileConfiguration)
 	
-	if profileConfiguration and profileConfiguration.BackgroundAssetId ~= nil then
-		local backgroundAssetId = profileConfiguration.BackgroundAssetId
+	if ProfileConfiguration and ProfileConfiguration.BackgroundAssetId ~= nil then
+		local BackgroundAssetId = ProfileConfiguration.BackgroundAssetId
 		
-		return if backgroundAssetId == nOBACKGROUNDASSETID then nil else backgroundAssetId
+		return if BackgroundAssetId == NOBACKGROUNDASSETID then nil else BackgroundAssetId
 	end
-	local character = var4 and (var4.AvatarEditor and var4.AvatarEditor.Character)
-	local equippedAssets = character and character.EquippedAssets
+	local Character = AvatarExperience and (AvatarExperience.AvatarEditor and AvatarExperience.AvatarEditor.Character)
+	local EquippedAssets = Character and Character.EquippedAssets
 	
-	if not equippedAssets then
+	if not EquippedAssets then
 		return nil
 	end
-	local var6 = equippedAssets[avatarBackground]
+	local EquippedAsset = EquippedAssets[AvatarBackground]
 	
-	if not var6 then
+	if not EquippedAsset then
 		return nil
 	end
-	for i in var6 do
-		local var7 = tonumber(i)
+	local Number = nil
+	for i in EquippedAsset do
+		Number = tonumber(i)
 		
-		if var7 then
-			return var7
+		if Number then
+			return Number
 		end
 	end
 	return nil

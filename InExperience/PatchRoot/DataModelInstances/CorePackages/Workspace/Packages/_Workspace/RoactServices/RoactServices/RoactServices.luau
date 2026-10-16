@@ -1,90 +1,89 @@
-﻿local parent = script.Parent.Parent
-local roactModule = require(parent.Roact)
-local immutable = require(parent.AppCommonLib).Immutable
-local symbol = require(parent.AppCommonLib).Symbol
-local roactServicesContextModule = require(script.Parent.RoactServicesContext)
+﻿local Parent = script.Parent.Parent
+local RoactModule = require(Parent.Roact)
+local Immutable = require(Parent.AppCommonLib).Immutable
+local Symbol = require(Parent.AppCommonLib).Symbol
+local RoactServicesContextModule = require(script.Parent.RoactServicesContext)
 local _ = require(script.Parent.RoactServicesTypes)
-local serviceProvider = roactModule.PureComponent:extend("ServiceProvider")
-local t = {
-	ServiceProvider = serviceProvider,
-	createService = function(p1)
-		-- upvalues: symbol (ref)
-		assert(type(p1) == "string", "Expected serviceName to be a string")
-		local var1 = symbol.named(p1)
+local ServiceProvider = RoactModule.PureComponent:extend("ServiceProvider")
+
+function ServiceProvider.init(p1, p2) --[[ Line: 36 ]]
+	local Services = {}
+	
+	if p2 and p2.services then
+		assert(p2.services, "Expected some services to connect, found none")
+		assert(type(p2.services) == "table", "Expected the provided services to be a map")
+		
+		for i, service in pairs(p2.services) do
+			if type(i) == "table" then
+				i.set(Services, service)
+			end
+		end
+	end
+	p1:setState({ services = Services })
+end
+
+function ServiceProvider.render(p3) --[[ Line: 54 ]]
+	-- upvalues: RoactModule (copy), RoactServicesContextModule (copy)
+	return RoactModule.createElement(RoactServicesContextModule.Provider, { value = p3.state.services }, RoactModule.oneChild(p3.props[RoactModule.Children]))
+end
+
+return {
+	ServiceProvider = ServiceProvider,
+	createService = function(p3) --[[ Line: 62 ]]
+		-- upvalues: Symbol (copy)
+		assert(type(p3) == "string", "Expected serviceName to be a string")
+		local NamedResult = Symbol.named(p3)
 		
 		return {
-			get = function(p2)
-				-- upvalues: var1 (ref)
-				return if p2 then p2[var1] else nil
+			get = function(Services) --[[ Line: 68 ]]
+				-- upvalues: NamedResult (copy)
+				return if Services then Services[NamedResult] else nil
 			end,
-			set = function(value, p2)
-				-- upvalues: var1 (ref)
-				value[var1] = p2
+			set = function(Services, p4) --[[ Line: 72 ]]
+				-- upvalues: NamedResult (copy)
+				Services[NamedResult] = p4
 			end
 		}
 	end,
-	connect = function(p1)
-		-- upvalues: roactModule (ref), immutable (ref), roactServicesContextModule (ref)
-		assert(p1 ~= nil, "Expected some services to connect, found none.")
+	connect = function(p3) --[[ Line: 81 ]]
+		-- upvalues: RoactModule (copy), Immutable (copy), RoactServicesContextModule (copy)
+		assert(p3 ~= nil, "Expected some services to connect, found none.")
 		
-		return function(p2)
-			-- upvalues: roactModule (copy), p1 (ref), immutable (copy), roactServicesContextModule (copy)
-			assert(p2 ~= nil, "Expected a component to connect, found none.")
-			local t = {}
-			local var1 = roactModule.PureComponent:extend(("Services(%s)"):format(tostring(p2)))
+		return function(p4) --[[ Line: 83 ]]
+			-- upvalues: RoactModule (upval), p3 (copy), Immutable (upval), RoactServicesContextModule (upval)
+			assert(p4 ~= nil, "Expected a component to connect, found none.")
+			local GetResults = {}
+			local ExtendResult = RoactModule.PureComponent:extend((("Services(%s)"):format((tostring(p4)))))
 			
-			function var6.init(_, p3)
-				-- upvalues: p1 (copy), t (ref)
-				for i, v in pairs(p1) do
-					assert(type(i) == "string", string.format("serviceMap must be indexed by strings, not %s", type(i)))
-					assert(type(v) == "table", "serviceMap must have a service created by createService()")
-					assert(type(v.get) == "function", "serviceMap must have a service created by createService()")
-					assert(p3.innerProps[i] == nil, "Naming conflict with prop : " .. i)
-					t[i] = v.get(p3.services)
+			function ExtendResult:init(p5) --[[ Line: 91 ]]
+				-- upvalues: p3 (upval), GetResults (copy)
+				for i, value in pairs(p3) do
+					assert(type(i) == "string", string.format("serviceMap must be indexed by strings, not %s", (type(i))))
+					assert(type(value) == "table", "serviceMap must have a service created by createService()")
+					assert(type(value.get) == "function", "serviceMap must have a service created by createService()")
+					assert(p5.innerProps[i] == nil, "Naming conflict with prop : " .. i)
+					GetResults[i] = value.get(p5.services)
 				end
 			end
 			
-			function var6.render(p4)
-				-- upvalues: immutable (copy), t (ref), roactModule (copy), p2 (ref)
-				return roactModule.createElement(p2, immutable.JoinDictionaries(p4.props.innerProps, t))
+			function ExtendResult.render(p6) --[[ Line: 105 ]]
+				-- upvalues: Immutable (upval), GetResults (copy), RoactModule (upval), p4 (copy)
+				return RoactModule.createElement(p4, (Immutable.JoinDictionaries(p6.props.innerProps, GetResults)))
 			end
 			
-			local connectionWrapper = roactModule.PureComponent:extend("ConnectionWrapper")
+			local ConnectionWrapper = RoactModule.PureComponent:extend("ConnectionWrapper")
 			
-			function connectionWrapper.render(p4)
-				-- upvalues: roactModule (copy), roactServicesContextModule (copy), var1 (ref)
-				return roactModule.createElement(roactServicesContextModule.Consumer, {
-					render = function(p5)
-						-- upvalues: roactModule (copy), var1 (copy), p4 (ref)
-						return roactModule.createElement(var1, { innerProps = p4.props, services = p5 })
+			function ConnectionWrapper.render(p6) --[[ Line: 112 ]]
+				-- upvalues: RoactModule (upval), RoactServicesContextModule (upval), ExtendResult (copy)
+				return RoactModule.createElement(RoactServicesContextModule.Consumer, {
+					render = function(Services) --[[ Line: 114 ]]
+						-- upvalues: RoactModule (upval), ExtendResult (upval), p6 (copy)
+						return RoactModule.createElement(ExtendResult, { innerProps = p6.props, services = Services })
 					end
 				})
 			end
 			
-			return connectionWrapper
+			return ConnectionWrapper
 		end
 	end
 }
-
-function serviceProvider.init(p2, p3)
-	local t = {}
-	
-	if p3 and p3.services then
-		assert(p3.services, "Expected some services to connect, found none")
-		assert(type(p3.services) == "table", "Expected the provided services to be a map")
-		
-		for i, v in pairs(p3.services) do
-			if type(i) == "table" then
-				i.set(t, v)
-			end
-		end
-	end
-	p2:setState({ services = t })
-end
-
-function serviceProvider.render(p4)
-	-- upvalues: roactModule (ref), roactServicesContextModule (ref)
-	return roactModule.createElement(roactServicesContextModule.Provider, { value = p4.state.services }, roactModule.oneChild(p4.props[roactModule.Children]))
-end
-
-return t

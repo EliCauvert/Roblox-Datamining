@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Workspace.RoactServiceTags.RoactServiceTags)
+﻿return (require(script.Parent.Parent.Parent._Workspace.RoactServiceTags.RoactServiceTags))

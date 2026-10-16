@@ -1,26 +1,25 @@
-﻿local reactModule = require(script:FindFirstAncestor("SocialCarousel").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("SocialCarousel").Parent.React)
 
-return function(p1, p2, p3, p4)
-	-- upvalues: reactModule (ref)
-	local var1 = reactModule.useRef(not p1)
-	local var2, var3 = reactModule.useState(not var1.current)
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), var1 (ref), p1 (ref), p2 (ref), p3 (ref), var3 (ref)
-		if var2 or not var1.current then return end
-		if p1 and p2.X > 1 and (p2.Y > 1 and p3 > 1) and p2.X >= p3 then
-			local delayedThread = task.delay(0.5, function()
-				-- upvalues: var3 (copy)
-				var3(true)
-			end)
-			
-			return function()
-				-- upvalues: delayedThread (ref)
-				pcall(task.cancel, delayedThread)
-			end
+return function(p1, Vector, p2, p3) --[[ Line: 7 | Named "useColdStartLayoutReady" ]]
+	-- upvalues: ReactModule (copy)
+	local UseRefResult = ReactModule.useRef(not p1)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(not UseRefResult.current)
+	ReactModule.useEffect(function() --[[ Line: 16 ]]
+		-- upvalues: UseStateResult (copy), UseRefResult (copy), p1 (copy), Vector (copy), p2 (copy), UseStateResult2 (copy)
+		if UseStateResult or not UseRefResult.current then return end
+		if not p1 or Vector.X <= 1 or Vector.Y <= 1 or p2 <= 1 or Vector.X < p2 then return end
+		local DelayedThread = task.delay(0.5, function() --[[ Line: 30 ]]
+			-- upvalues: UseStateResult2 (upval)
+			UseStateResult2(true)
+		end)
+		
+		return function() --[[ Line: 33 ]]
+			-- upvalues: DelayedThread (copy)
+			pcall(task.cancel, DelayedThread)
 		end
 	end, {
-		var2, p1, p2.X, p2.Y, p3, p4
+		UseStateResult, p1, Vector.X, Vector.Y, p2, p3
 	})
 	
-	return var2
+	return UseStateResult
 end

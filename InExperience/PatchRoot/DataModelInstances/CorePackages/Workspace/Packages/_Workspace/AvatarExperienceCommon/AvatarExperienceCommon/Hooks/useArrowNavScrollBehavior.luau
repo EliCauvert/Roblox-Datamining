@@ -1,16 +1,16 @@
-﻿local avatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
-local runService = game:GetService("RunService")
-local parent = avatarExperienceCommon.Parent
-local otterModule = require(parent.Otter)
-local reactModule = require(parent.React)
-local constantsModule = require(avatarExperienceCommon.Constants)
-local t = { dampingRatio = 1, frequency = 3.5 }
+﻿local AvatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
+local RunService = game:GetService("RunService")
+local Parent = AvatarExperienceCommon.Parent
+local OtterModule = require(Parent.Otter)
+local ReactModule = require(Parent.React)
+local ConstantsModule = require(AvatarExperienceCommon.Constants)
+local config = { dampingRatio = 1, frequency = 3.5 }
 
-return function(p1)
-	-- upvalues: reactModule (ref), otterModule (ref), constantsModule (ref), t (ref), runService (ref)
-	local var1 = reactModule.useRef(nil)
-	local var2 = reactModule.useRef(nil)
-	local var3 = reactModule.useRef(0)
+return function(p1) --[[ Line: 42 | Named "useArrowNavScrollBehavior" ]]
+	-- upvalues: ReactModule (copy), OtterModule (copy), ConstantsModule (copy), config (copy), RunService (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseRefResult2 = ReactModule.useRef(0)
 	
 	if p1.defaultUseProps then
 		if p1.defaultUseProps.buttonRefs ~= nil then
@@ -31,183 +31,180 @@ return function(p1)
 			error("Must set either buttonRefs or (buttonWidth and numButtons)")
 		end
 	end
-	local function disconnectHoldConn()
-		-- upvalues: var1 (ref)
-		if var1.current then
-			var1.current:Disconnect()
-			var1.current = nil
+	local function disconnectHoldConn() --[[ Line: 79 ]]
+		-- upvalues: UseRefResult (copy)
+		if UseRefResult.current then
+			UseRefResult.current:Disconnect()
+			UseRefResult.current = nil
 		end
 	end
 	
-	local function _(p2)
-		-- upvalues: p1 (ref)
-		return p1.defaultUseProps.scrollingFrameRef.current.CanvasPosition + Vector2.new(p2, 0)
+	local function _(X): Vector2 --[[ Line: 86 | Named "getNewCanvasPosition" ]]
+		-- upvalues: p1 (copy)
+		return p1.defaultUseProps.scrollingFrameRef.current.CanvasPosition + Vector2.new(X, 0)
 	end
 	
-	local function setMotor(value)
-		-- upvalues: var2 (ref), otterModule (copy), p1 (ref)
-		if var2.current then
-			var2.current:destroy()
+	local function setMotor(X) --[[ Line: 91 ]]
+		-- upvalues: UseRefResult1 (copy), OtterModule (upval), p1 (copy)
+		if UseRefResult1.current then
+			UseRefResult1.current:destroy()
 		end
-		var2.current = otterModule.createSingleMotor(value)
+		UseRefResult1.current = OtterModule.createSingleMotor(X)
 		
-		if var2.current then
-			var2.current:onStep(function(p2)
-				-- upvalues: p1 (copy)
-				p1.defaultUseProps.updateCanvasPosition(Vector2.new(p2, 0))
+		if UseRefResult1.current then
+			UseRefResult1.current:onStep(function(X) --[[ Line: 97 ]]
+				-- upvalues: p1 (upval)
+				p1.defaultUseProps.updateCanvasPosition(Vector2.new(X, 0))
 			end)
-			var2.current:onComplete(function(p2)
-				-- upvalues: p1 (copy)
-				p1.defaultUseProps.updateCanvasPosition(Vector2.new(p2, 0))
+			UseRefResult1.current:onComplete(function(X) --[[ Line: 100 ]]
+				-- upvalues: p1 (upval)
+				p1.defaultUseProps.updateCanvasPosition(Vector2.new(X, 0))
 			end)
 		end
 	end
 	
-	local function getScrollToLocation(p2)
-		-- upvalues: p1 (ref), constantsModule (copy)
-		local t = {}
-		local buttonRefs = p1.defaultUseProps.buttonRefs
-		local buttonWidth = p1.defaultUseProps.buttonWidth
-		local numButtons = p1.defaultUseProps.numButtons
+	local function getScrollToLocation(ISLEFT): number --[[ Line: 106 ]]
+		-- upvalues: p1 (copy), ConstantsModule (upval)
+		local List = {}
+		local ButtonRefs = p1.defaultUseProps.buttonRefs
+		local ButtonWidth = p1.defaultUseProps.buttonWidth
+		local NumButtons = p1.defaultUseProps.numButtons
 		
-		if buttonWidth and numButtons then
-			t = table.create(numButtons, buttonWidth)
-		elseif buttonRefs then
-			for i, v in buttonRefs do
-				if v and v.current then
-					local offset = v.current.Size.X.Offset or 0
+		if ButtonWidth and NumButtons then
+			List = table.create(NumButtons, ButtonWidth)
+		elseif ButtonRefs then
+			for _, buttonRef in ButtonRefs do
+				if buttonRef and buttonRef.current then
+					local Offset = buttonRef.current.Size.X.Offset or 0
 					
-					if offset == 0 then
-						offset = v.current.AbsoluteSize.X
+					if Offset == 0 then
+						Offset = buttonRef.current.AbsoluteSize.X
 					end
-					table.insert(t, offset)
+					table.insert(List, Offset)
 				end
 			end
 		end
-		local current = p1.defaultUseProps.scrollingFrameRef.current
-		local buttonPadding = p1.defaultUseProps.buttonPadding
-		local _ = 0
+		local Current = p1.defaultUseProps.scrollingFrameRef.current
+		local ButtonPadding = p1.defaultUseProps.buttonPadding
 		
-		if p2 == constantsModule.NAVIGATION_DIRECTION.IS_LEFT then
-			local var4 = 0
-			local _ = 0
+		if ISLEFT == ConstantsModule.NAVIGATION_DIRECTION.IS_LEFT then
+			local v1 = 0
 			
-			for i, v in t do
-				if var4 + v + buttonPadding > current.CanvasPosition.X then break end
-				var4 = var4 + v + buttonPadding
+			for _, value in List do
+				if v1 + value + ButtonPadding > Current.CanvasPosition.X then break end
+				v1 = v1 + value + ButtonPadding
 			end
-			local var5 = var4
-			local var6 = 0
+			local v2: number = v1
+			local v3 = 0
 			
-			for i_1, v_1 in t do
-				if var6 + v_1 + buttonPadding > current.AbsoluteSize.X * 0.8 then break end
-				var6 = var6 + v_1 + buttonPadding
-				var5 = var5 - v_1 - buttonPadding
+			for _, value1 in List do
+				if v3 + value1 + ButtonPadding > Current.AbsoluteSize.X * 0.8 then break end
+				v3 = v3 + value1 + ButtonPadding
+				v2 = v2 - value1 - ButtonPadding
 			end
-			return math.max(0, var5)
+			return (math.max(0, v2))
 		else
-			local var7 = 0
-			local _ = 0
+			local v4 = 0
 			
-			for i, v in t do
-				if var7 + v + buttonPadding > current.CanvasPosition.X then break end
-				var7 = var7 + v + buttonPadding
+			for _, value2 in List do
+				if v4 + value2 + ButtonPadding > Current.CanvasPosition.X then break end
+				v4 = v4 + value2 + ButtonPadding
 			end
-			local var8 = var7
-			local var9 = 0
+			local v5: number = v4
+			local v6 = 0
 			
-			for i_1, v_1 in t do
-				if var9 + v_1 + buttonPadding > current.AbsoluteSize.X * 0.8 then break end
-				var9 = var9 + v_1 + buttonPadding
-				var8 = var8 + v_1 + buttonPadding
+			for _, value3 in List do
+				if v6 + value3 + ButtonPadding > Current.AbsoluteSize.X * 0.8 then break end
+				v6 = v6 + value3 + ButtonPadding
+				v5 = v5 + value3 + ButtonPadding
 			end
-			return var8
+			return v5
 		end
 	end
 	
-	local function getGoal(p3)
-		-- upvalues: otterModule (copy), getScrollToLocation (ref), t (copy)
-		return otterModule.spring(getScrollToLocation(p3), t)
+	local function getGoal(p2) --[[ Line: 193 ]]
+		-- upvalues: OtterModule (upval), getScrollToLocation (copy), config (upval)
+		return OtterModule.spring(getScrollToLocation(p2), config)
 	end
 	
-	local function onPressHoldInputBegan(p3, p4)
-		-- upvalues: var3 (ref), var1 (ref), runService (copy), constantsModule (copy), p1 (ref)
-		if p3.UserInputState ~= Enum.UserInputState.Begin then return end
-		var3.current = tick()
+	local function onPressHoldInputBegan(Input, ISLEFT) --[[ Line: 197 ]]
+		-- upvalues: UseRefResult2 (copy), UseRefResult (copy), RunService (upval), ConstantsModule (upval), p1 (copy)
+		if Input.UserInputState ~= Enum.UserInputState.Begin then return end
+		UseRefResult2.current = tick()
 		
-		if var1.current then
-			var1.current:Disconnect()
-			var1.current = nil
+		if UseRefResult.current then
+			UseRefResult.current:Disconnect()
+			UseRefResult.current = nil
 		end
-		var1.current = runService.RenderStepped:Connect(function(p5)
-			-- upvalues: var3 (copy), constantsModule (copy), p4 (ref), p1 (copy)
-			p1.defaultUseProps.updateCanvasPosition(p1.defaultUseProps.scrollingFrameRef.current.CanvasPosition + Vector2.new((if p4 == constantsModule.NAVIGATION_DIRECTION.IS_LEFT then -1 else 1) * 500 * p5 * (tick() - var3.current) ^ 2, 0))
+		UseRefResult.current = RunService.RenderStepped:Connect(function(DeltaTime) --[[ Line: 203 ]]
+			-- upvalues: UseRefResult2 (upval), ConstantsModule (upval), ISLEFT (copy), p1 (upval)
+			p1.defaultUseProps.updateCanvasPosition(p1.defaultUseProps.scrollingFrameRef.current.CanvasPosition + Vector2.new((if ISLEFT == ConstantsModule.NAVIGATION_DIRECTION.IS_LEFT then -1 else 1) * 500 * DeltaTime * (tick() - UseRefResult2.current) ^ 2, 0))
 		end)
 	end
 	
-	local function onPressHoldInputEnded(p3, p4)
-		-- upvalues: p1 (ref), var3 (ref), var2 (ref), setMotor (ref), getGoal (ref), otterModule (copy), var1 (ref)
-		if p3.UserInputState ~= Enum.UserInputState.End then return end
-		local current = p1.defaultUseProps.scrollingFrameRef.current
+	local function onPressHoldInputEnded(Input, p2) --[[ Line: 212 ]]
+		-- upvalues: p1 (copy), UseRefResult2 (copy), UseRefResult1 (copy), setMotor (copy), getGoal (copy), OtterModule (upval), UseRefResult (copy)
+		if Input.UserInputState ~= Enum.UserInputState.End then return end
+		local Current = p1.defaultUseProps.scrollingFrameRef.current
 		
-		if tick() - var3.current <= 0.5 then
-			if var2.current then
-				var2.current:destroy()
+		if tick() - UseRefResult2.current <= 0.5 then
+			if UseRefResult1.current then
+				UseRefResult1.current:destroy()
 			end
-			setMotor(current.CanvasPosition.X)
+			setMotor(Current.CanvasPosition.X)
 			
-			if var2.current then
-				var2.current:setGoal(getGoal(p4))
+			if UseRefResult1.current then
+				UseRefResult1.current:setGoal(getGoal(p2))
 			end
-		elseif var2.current then
-			var2.current:setGoal(otterModule.instant(current.CanvasPosition.X))
+		elseif UseRefResult1.current then
+			UseRefResult1.current:setGoal(OtterModule.instant(Current.CanvasPosition.X))
 		end
-		if var1.current then
-			var1.current:Disconnect()
-			var1.current = nil
+		if UseRefResult.current then
+			UseRefResult.current:Disconnect()
+			UseRefResult.current = nil
 		end
 	end
 	
-	local function handleInputBegan(_, p3)
-		-- upvalues: p1 (ref), onPressHoldInputBegan (ref)
-		local onPressHoldInputBegan_1 = p1.onPressHoldInputBegan or onPressHoldInputBegan
+	local function handleInputBegan(_, p2) --[[ Line: 233 ]]
+		-- upvalues: p1 (copy), onPressHoldInputBegan (copy)
+		local OnPressHoldInputBegan: (any, any) -> () = p1.onPressHoldInputBegan or onPressHoldInputBegan
 		
-		if onPressHoldInputBegan_1 then
-			onPressHoldInputBegan_1(p3, p1.navDirection or "")
+		if OnPressHoldInputBegan then
+			OnPressHoldInputBegan(p2, p1.navDirection or "")
 		end
 	end
 	
-	local function handleInputEnded(_, p3)
-		-- upvalues: p1 (ref), onPressHoldInputEnded (ref)
-		local onPressHoldInputEnded_1 = p1.onPressHoldInputEnded or onPressHoldInputEnded
+	local function handleInputEnded(_, p2) --[[ Line: 240 ]]
+		-- upvalues: p1 (copy), onPressHoldInputEnded (copy)
+		local OnPressHoldInputEnded: (any, any) -> () = p1.onPressHoldInputEnded or onPressHoldInputEnded
 		
-		if onPressHoldInputEnded_1 then
-			onPressHoldInputEnded_1(p3, p1.navDirection or "")
+		if OnPressHoldInputEnded then
+			OnPressHoldInputEnded(p2, p1.navDirection or "")
 		end
 	end
 	
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), setMotor (ref), var1 (ref), var2 (ref)
+	ReactModule.useEffect(function() --[[ Line: 248 ]]
+		-- upvalues: p1 (copy), setMotor (copy), UseRefResult (copy), UseRefResult1 (copy)
 		if p1.defaultUseProps then
 			setMotor(0)
 		end
-		return function()
-			-- upvalues: var1 (copy), var2 (copy)
-			if var1.current then
-				var1.current:Disconnect()
-				var1.current = nil
+		return function() --[[ Line: 254 ]]
+			-- upvalues: UseRefResult (upval), UseRefResult1 (upval)
+			if UseRefResult.current then
+				UseRefResult.current:Disconnect()
+				UseRefResult.current = nil
 			end
-			if var2.current then
-				var2.current:destroy()
-				var2.current = nil
+			if UseRefResult1.current then
+				UseRefResult1.current:destroy()
+				UseRefResult1.current = nil
 			end
 		end
 	end, {})
 	
 	return {
-		holdConnRef = var1,
-		motorRef = var2,
-		timeOfInputBeganRef = var3,
+		holdConnRef = UseRefResult,
+		motorRef = UseRefResult1,
+		timeOfInputBeganRef = UseRefResult2,
 		handleInputBegan = handleInputBegan,
 		handleInputEnded = handleInputEnded,
 		disconnectHoldConn = disconnectHoldConn

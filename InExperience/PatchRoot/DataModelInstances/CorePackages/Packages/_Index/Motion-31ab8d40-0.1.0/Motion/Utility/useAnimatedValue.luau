@@ -1,227 +1,242 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
-local parent_2 = parent_1.Parent
-local reactModule = require(parent_2.React)
-local reactOtterModule = require(parent_2.ReactOtter)
-local default = require(parent.TimingConfigs).presets[require(parent_1.Enums.TransitionPreset).Default]
-local _ = require(parent_1.Types)
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
+local Parent2 = Parent1.Parent
+local ReactModule = require(Parent2.React)
+local ReactOtterModule = require(Parent2.ReactOtter)
+local Preset = require(Parent.TimingConfigs).presets[require(Parent1.Enums.TransitionPreset).Default]
+local _ = require(Parent1.Types)
 
-local function _(p1, p2)
+local function _(p1, p2) --[[ Line: 54 | Named "validateNumber" ]]
 	return if type(p1) == "number" then p1 else p2 or 0
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), reactOtterModule (ref), default (ref)
-	local var1 = reactModule.useRef(nil)
-	local var2 = reactModule.useCallback(function(...)
-		-- upvalues: var1 (ref)
-		if var1.current ~= nil then
-			if type(var1.current) == "function" then
-				var1.current(...)
+return function(Vector) --[[ Line: 63 | Named "useAnimatedValue" ]]
+	-- upvalues: ReactModule (copy), ReactOtterModule (copy), Preset (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseResult = ReactModule.useCallback(function(...) --[[ Line: 66 ]]
+		-- upvalues: UseRefResult (copy)
+		if UseRefResult.current ~= nil then
+			if type(UseRefResult.current) == "function" then
+				UseRefResult.current(...)
 				
 				return
-			elseif var1.current._isMockFunction then
-				var1.current(...)
+			end
+			if UseRefResult.current._isMockFunction then
+				UseRefResult.current(...)
 			end
 		end
-	end, { var1 })
+	end, { UseRefResult })
 	
-	if typeof(p1) == "table" and p1.Color3 and p1.Transparency then
-		local useAnimatedBinding = reactOtterModule.useAnimatedBinding
-		local t = {}
-		local r = p1.Color3.R
-		t.r = if type(r) == "number" then r else 0
-		local g = p1.Color3.G
-		t.g = if type(g) == "number" then g else 0
-		local b = p1.Color3.B
-		t.b = if type(b) == "number" then b else 0
-		local transparency = p1.Transparency
-		t.Transparency = if type(transparency) == "number" then transparency else 0
-		useAnimatedBinding, t = useAnimatedBinding(t, var2)
+	if typeof(Vector) == "table" and Vector.Color3 and Vector.Transparency then
+		local R = Vector.Color3.R
+		local R1 = if type(R) == "number" then R else 0
+		local G = Vector.Color3.G
+		local G1 = if type(G) == "number" then G else 0
+		local B = Vector.Color3.B
+		local B1 = if type(B) == "number" then B else 0
+		local Transparency = Vector.Transparency
+		local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding({
+			r = R1,
+			g = G1,
+			b = B1,
+			Transparency = if type(Transparency) == "number" then Transparency else 0
+		}, UseResult)
 		
-		return useAnimatedBinding:map(function(p2)
+		return UseAnimatedBindingResult:map(function(p1) --[[ Line: 85 ]]
 			return {
-				Color3 = Color3.new(p2.r, p2.g, p2.b),
-				Transparency = p2.Transparency
+				Color3 = Color3.new(p1.r, p1.g, p1.b),
+				Transparency = p1.Transparency
 			}
-		end), function(p2, p3)
-			-- upvalues: var1 (ref), default (copy), t (ref), reactOtterModule (copy)
-			if typeof(p2) == "table" and p2.Color3 and p2.Transparency ~= nil then
-				var1.current = if p3 then p3.onComplete else nil
-				local var3 = if p3 then {
-					duration = p3.duration or default.duration,
-					easingStyle = p3.easingStyle
+		end), function(p1, p2) --[[ Line: 92 ]]
+			-- upvalues: UseRefResult (copy), Preset (upval), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval)
+			if typeof(p1) == "table" and p1.Color3 and p1.Transparency ~= nil then
+				UseRefResult.current = p2 and p2.onComplete or nil
+				local Config = if p2 then {
+					duration = p2.duration or Preset.duration,
+					easingStyle = p2.easingStyle
 				} else nil
-				local t_1 = {}
-				local r = p2.Color3.R
-				t_1.r = reactOtterModule.ease(if type(r) == "number" then r else 0, var3)
-				local g = p2.Color3.G
-				t_1.g = reactOtterModule.ease(if type(g) == "number" then g else 0, var3)
-				local b = p2.Color3.B
-				t_1.b = reactOtterModule.ease(if type(b) == "number" then b else 0, var3)
-				local transparency = p2.Transparency
-				t_1.Transparency = reactOtterModule.ease(if type(transparency) == "number" then transparency else 0, var3)
-				t(t_1)
+				local R = p1.Color3.R
+				local R1 = if type(R) == "number" then R else 0
+				local G = p1.Color3.G
+				local G1 = if type(G) == "number" then G else 0
+				local B = p1.Color3.B
+				local B1 = if type(B) == "number" then B else 0
+				local Transparency = p1.Transparency
+				UseAnimatedBindingResult2({
+					r = ReactOtterModule.ease(R1, Config),
+					g = ReactOtterModule.ease(G1, Config),
+					b = ReactOtterModule.ease(B1, Config),
+					Transparency = ReactOtterModule.ease(if type(Transparency) == "number" then Transparency else 0, Config)
+				})
 				
 				return
+			else
+				warn("Expected target to be a table with Color3 and Transparency fields")
 			end
-			warn("Expected target to be a table with Color3 and Transparency fields")
 		end
-	elseif typeof(p1) == "UDim" then
-		local useAnimatedBinding = reactOtterModule.useAnimatedBinding
-		local t = {}
-		local scale = p1.Scale
-		t.scale = if type(scale) == "number" then scale else 0
-		local offset = p1.Offset
-		t.offset = if type(offset) == "number" then offset else 0
-		useAnimatedBinding, t = useAnimatedBinding(t, var2)
+	elseif typeof(Vector) == "UDim" then
+		local Scale = Vector.Scale
+		local Scale1 = if type(Scale) == "number" then Scale else 0
+		local Offset = Vector.Offset
+		local UseAnimatedBindingResult1, UseAnimatedBindingResult2_1 = ReactOtterModule.useAnimatedBinding({
+			scale = Scale1,
+			offset = if type(Offset) == "number" then Offset else 0
+		}, UseResult)
 		
-		return useAnimatedBinding:map(function(p2)
-			return UDim.new(p2.scale, p2.offset)
-		end), function(p2, p3)
-			-- upvalues: var1 (ref), default (copy), t (ref), reactOtterModule (copy)
-			if not p2 then return end
-			if typeof(p2) == "UDim" then
-				var1.current = if p3 then p3.onComplete else nil
-				local var3 = if p3 then {
-					duration = p3.duration or default.duration,
-					easingStyle = p3.easingStyle
+		return UseAnimatedBindingResult1:map(function(p1): UDim --[[ Line: 125 ]]
+			return UDim.new(p1.scale, p1.offset)
+		end), function(p1, p2) --[[ Line: 129 ]]
+			-- upvalues: UseRefResult (copy), Preset (upval), UseAnimatedBindingResult2_1 (copy), ReactOtterModule (upval)
+			if not p1 then return end
+			if typeof(p1) == "UDim" then
+				UseRefResult.current = p2 and p2.onComplete or nil
+				local Config = if p2 then {
+					duration = p2.duration or Preset.duration,
+					easingStyle = p2.easingStyle
 				} else nil
-				local t_1 = {}
-				local scale = p2.Scale
-				t_1.scale = reactOtterModule.ease(if type(scale) == "number" then scale else 0, var3)
-				local offset = p2.Offset
-				t_1.offset = reactOtterModule.ease(if type(offset) == "number" then offset else 0, var3)
-				t(t_1)
+				local Scale = p1.Scale
+				local Scale1 = if type(Scale) == "number" then Scale else 0
+				local Offset = p1.Offset
+				UseAnimatedBindingResult2_1({
+					scale = ReactOtterModule.ease(Scale1, Config),
+					offset = ReactOtterModule.ease(if type(Offset) == "number" then Offset else 0, Config)
+				})
 				
 				return
+			else
+				warn("Expected UDim target but got", (typeof(p1)))
 			end
-			warn("Expected UDim target but got", typeof(p2))
 		end
-	elseif typeof(p1) == "UDim2" then
-		local useAnimatedBinding = reactOtterModule.useAnimatedBinding
-		local t = {}
-		local scale = p1.X.Scale
-		t.xScale = if type(scale) == "number" then scale else 0
-		local offset = p1.X.Offset
-		t.xOffset = if type(offset) == "number" then offset else 0
-		local scale_1 = p1.Y.Scale
-		t.yScale = if type(scale_1) == "number" then scale_1 else 0
-		local offset_1 = p1.Y.Offset
-		t.yOffset = if type(offset_1) == "number" then offset_1 else 0
-		useAnimatedBinding, t = useAnimatedBinding(t, var2)
+	elseif typeof(Vector) == "UDim2" then
+		local Scale = Vector.X.Scale
+		local Scale2 = if type(Scale) == "number" then Scale else 0
+		local Offset = Vector.X.Offset
+		local Offset1 = if type(Offset) == "number" then Offset else 0
+		local Scale3 = Vector.Y.Scale
+		local Scale31 = if type(Scale3) == "number" then Scale3 else 0
+		local Offset2 = Vector.Y.Offset
+		local UseAnimatedBindingResult3, UseAnimatedBindingResult2_2 = ReactOtterModule.useAnimatedBinding({
+			xScale = Scale2,
+			xOffset = Offset1,
+			yScale = Scale31,
+			yOffset = if type(Offset2) == "number" then Offset2 else 0
+		}, UseResult)
 		
-		return useAnimatedBinding:map(function(p2)
-			return UDim2.new(p2.xScale, p2.xOffset, p2.yScale, p2.yOffset)
-		end), function(p2, p3)
-			-- upvalues: var1 (ref), default (copy), t (ref), reactOtterModule (copy)
-			if not p2 then return end
-			if typeof(p2) == "UDim2" then
-				var1.current = if p3 then p3.onComplete else nil
-				local var3 = if p3 then {
-					duration = p3.duration or default.duration,
-					easingStyle = p3.easingStyle
+		return UseAnimatedBindingResult3:map(function(p1): UDim2 --[[ Line: 166 ]]
+			return UDim2.new(p1.xScale, p1.xOffset, p1.yScale, p1.yOffset)
+		end), function(Vector, p1) --[[ Line: 170 ]]
+			-- upvalues: UseRefResult (copy), Preset (upval), UseAnimatedBindingResult2_2 (copy), ReactOtterModule (upval)
+			if not Vector then return end
+			if typeof(Vector) == "UDim2" then
+				UseRefResult.current = p1 and p1.onComplete or nil
+				local Config = if p1 then {
+					duration = p1.duration or Preset.duration,
+					easingStyle = p1.easingStyle
 				} else nil
-				local t_1 = {}
-				local scale = p2.X.Scale
-				t_1.xScale = reactOtterModule.ease(if type(scale) == "number" then scale else 0, var3)
-				local offset = p2.X.Offset
-				t_1.xOffset = reactOtterModule.ease(if type(offset) == "number" then offset else 0, var3)
-				local scale_1 = p2.Y.Scale
-				t_1.yScale = reactOtterModule.ease(if type(scale_1) == "number" then scale_1 else 0, var3)
-				local offset_1 = p2.Y.Offset
-				t_1.yOffset = reactOtterModule.ease(if type(offset_1) == "number" then offset_1 else 0, var3)
-				t(t_1)
+				local Scale = Vector.X.Scale
+				local Scale1 = if type(Scale) == "number" then Scale else 0
+				local Offset = Vector.X.Offset
+				local Offset1 = if type(Offset) == "number" then Offset else 0
+				local Scale2 = Vector.Y.Scale
+				local Scale21 = if type(Scale2) == "number" then Scale2 else 0
+				local Offset2 = Vector.Y.Offset
+				UseAnimatedBindingResult2_2({
+					xScale = ReactOtterModule.ease(Scale1, Config),
+					xOffset = ReactOtterModule.ease(Offset1, Config),
+					yScale = ReactOtterModule.ease(Scale21, Config),
+					yOffset = ReactOtterModule.ease(if type(Offset2) == "number" then Offset2 else 0, Config)
+				})
 				
 				return
+			else
+				warn("Expected UDim2 target but got", (typeof(Vector)))
 			end
-			warn("Expected UDim2 target but got", typeof(p2))
 		end
-	elseif typeof(p1) == "Vector2" then
-		local useAnimatedBinding = reactOtterModule.useAnimatedBinding
-		local t = {}
-		local x = p1.X
-		t.x = if type(x) == "number" then x else 0
-		local y = p1.Y
-		t.y = if type(y) == "number" then y else 0
-		useAnimatedBinding, t = useAnimatedBinding(t, var2)
+	elseif typeof(Vector) == "Vector2" then
+		local X = Vector.X
+		local X1 = if type(X) == "number" then X else 0
+		local Y = Vector.Y
+		local UseAnimatedBindingResult5, UseAnimatedBindingResult2_4 = ReactOtterModule.useAnimatedBinding({ x = X1, y = if type(Y) == "number" then Y else 0 }, UseResult)
 		
-		return useAnimatedBinding:map(function(p2)
-			return Vector2.new(p2.x, p2.y)
-		end), function(p2, p3)
-			-- upvalues: var1 (ref), default (copy), t (ref), reactOtterModule (copy)
-			if not p2 then return end
-			if typeof(p2) == "Vector2" then
-				var1.current = if p3 then p3.onComplete else nil
-				local var3 = if p3 then {
-					duration = p3.duration or default.duration,
-					easingStyle = p3.easingStyle
+		return UseAnimatedBindingResult5:map(function(Vector): Vector2 --[[ Line: 205 ]]
+			return Vector2.new(Vector.x, Vector.y)
+		end), function(Vector, p1) --[[ Line: 209 ]]
+			-- upvalues: UseRefResult (copy), Preset (upval), UseAnimatedBindingResult2_4 (copy), ReactOtterModule (upval)
+			if not Vector then return end
+			if typeof(Vector) == "Vector2" then
+				UseRefResult.current = p1 and p1.onComplete or nil
+				local Config = if p1 then {
+					duration = p1.duration or Preset.duration,
+					easingStyle = p1.easingStyle
 				} else nil
-				local t_1 = {}
-				local x = p2.X
-				t_1.x = reactOtterModule.ease(if type(x) == "number" then x else 0, var3)
-				local y = p2.Y
-				t_1.y = reactOtterModule.ease(if type(y) == "number" then y else 0, var3)
-				t(t_1)
+				local X = Vector.X
+				local X1 = if type(X) == "number" then X else 0
+				local Y = Vector.Y
+				UseAnimatedBindingResult2_4({
+					x = ReactOtterModule.ease(X1, Config),
+					y = ReactOtterModule.ease(if type(Y) == "number" then Y else 0, Config)
+				})
 				
 				return
+			else
+				warn("Expected Vector2 target but got", (typeof(Vector)))
 			end
-			warn("Expected Vector2 target but got", typeof(p2))
 		end
-	elseif typeof(p1) == "Color3" then
-		local useAnimatedBinding = reactOtterModule.useAnimatedBinding
-		local t = {}
-		local r = p1.R
-		t.r = if type(r) == "number" then r else 0
-		local g = p1.G
-		t.g = if type(g) == "number" then g else 0
-		local b = p1.B
-		t.b = if type(b) == "number" then b else 0
-		useAnimatedBinding, t = useAnimatedBinding(t, var2)
+	elseif typeof(Vector) == "Color3" then
+		local R = Vector.R
+		local R2 = if type(R) == "number" then R else 0
+		local G = Vector.G
+		local G2 = if type(G) == "number" then G else 0
+		local B = Vector.B
+		local UseAnimatedBindingResult6, UseAnimatedBindingResult2_5 = ReactOtterModule.useAnimatedBinding({ r = R2, g = G2, b = if type(B) == "number" then B else 0 }, UseResult)
 		
-		return useAnimatedBinding:map(function(p2)
-			return Color3.new(p2.r, p2.g, p2.b)
-		end), function(p2, p3)
-			-- upvalues: var1 (ref), default (copy), t (ref), reactOtterModule (copy)
-			if not p2 then return end
-			if typeof(p2) == "Color3" then
-				var1.current = if p3 then p3.onComplete else nil
-				local var3 = if p3 then {
-					duration = p3.duration or default.duration,
-					easingStyle = p3.easingStyle
+		return UseAnimatedBindingResult6:map(function(p1): Color3 --[[ Line: 244 ]]
+			return Color3.new(p1.r, p1.g, p1.b)
+		end), function(p1, p2) --[[ Line: 248 ]]
+			-- upvalues: UseRefResult (copy), Preset (upval), UseAnimatedBindingResult2_5 (copy), ReactOtterModule (upval)
+			if not p1 then return end
+			if typeof(p1) == "Color3" then
+				UseRefResult.current = p2 and p2.onComplete or nil
+				local Config = if p2 then {
+					duration = p2.duration or Preset.duration,
+					easingStyle = p2.easingStyle
 				} else nil
-				local t_1 = {}
-				local r = p2.R
-				t_1.r = reactOtterModule.ease(if type(r) == "number" then r else 0, var3)
-				local g = p2.G
-				t_1.g = reactOtterModule.ease(if type(g) == "number" then g else 0, var3)
-				local b = p2.B
-				t_1.b = reactOtterModule.ease(if type(b) == "number" then b else 0, var3)
-				t(t_1)
+				local R = p1.R
+				local R1 = if type(R) == "number" then R else 0
+				local G = p1.G
+				local G1 = if type(G) == "number" then G else 0
+				local B = p1.B
+				UseAnimatedBindingResult2_5({
+					r = ReactOtterModule.ease(R1, Config),
+					g = ReactOtterModule.ease(G1, Config),
+					b = ReactOtterModule.ease(if type(B) == "number" then B else 0, Config)
+				})
 				
 				return
+			else
+				warn("Expected Color3 target but got", (typeof(p1)))
 			end
-			warn("Expected Color3 target but got", typeof(p2))
 		end
-	elseif typeof(p1) == "number" then
-		local var3, var4 = reactOtterModule.useAnimatedBinding(if type(p1) == "number" then p1 else 0, var2)
+	elseif typeof(Vector) == "number" then
+		local UseAnimatedBindingResult4, UseAnimatedBindingResult2_3 = ReactOtterModule.useAnimatedBinding(if type(Vector) == "number" then Vector else 0, UseResult)
 		
-		return var3:map(function(p2)
-			return p2
-		end), function(p2, p3)
-			-- upvalues: var1 (ref), default (copy), var4 (ref), reactOtterModule (copy)
-			if typeof(p2) == "number" then
-				var1.current = if p3 then p3.onComplete else nil
-				var4(reactOtterModule.ease(p2, if p3 then {
-					duration = p3.duration or default.duration,
-					easingStyle = p3.easingStyle
+		return UseAnimatedBindingResult4:map(function(p1) --[[ Line: 280 ]]
+			return p1
+		end), function(p1, p2) --[[ Line: 284 ]]
+			-- upvalues: UseRefResult (copy), Preset (upval), UseAnimatedBindingResult2_3 (copy), ReactOtterModule (upval)
+			if typeof(p1) == "number" then
+				UseRefResult.current = p2 and p2.onComplete or nil
+				UseAnimatedBindingResult2_3(ReactOtterModule.ease(p1, if p2 then {
+					duration = p2.duration or Preset.duration,
+					easingStyle = p2.easingStyle
 				} else nil))
 				
 				return
 			end
 		end
+	else
+		warn("Unsupported type for animated value:", (typeof(Vector)))
+		
+		return ReactModule.createBinding(Vector), function() --[[ Line: 304 ]] end
 	end
-	warn("Unsupported type for animated value:", typeof(p1))
-	
-	return reactModule.createBinding(p1), function() end
 end

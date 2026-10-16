@@ -1,28 +1,32 @@
-﻿local chatLineReporting = script:FindFirstAncestor("ChatLineReporting")
-local parent = chatLineReporting.Parent
-local constantsModule = require(chatLineReporting.Common.Constants)
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local inputLabel = foundationModule.InputLabel
-local inputLabelSize = foundationModule.Enums.InputLabelSize
-local fFlagEnableGlobalChatAbuseReporting = require(parent.SharedFlags).FFlagEnableGlobalChatAbuseReporting
+﻿local ChatLineReporting = script:FindFirstAncestor("ChatLineReporting")
+local Parent = ChatLineReporting.Parent
+local ConstantsModule = require(ChatLineReporting.Common.Constants)
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local InputLabel = FoundationModule.InputLabel
+local InputLabelSize = FoundationModule.Enums.InputLabelSize
+local FFlagEnableGlobalChatAbuseReporting = require(Parent.SharedFlags).FFlagEnableGlobalChatAbuseReporting
 
-local function _(p1, p2)
-	-- upvalues: constantsModule (ref)
-	return if string.match(p1, constantsModule.ChannelTypes.Whisper) then p2.localizedText.ChatEyebrowSentPrivately else p2.localizedText.ChatEyebrowSentInAnotherChat
+local function _(Text: string, p1) --[[ Line: 20 | Named "getEyebrowText" ]]
+	-- upvalues: ConstantsModule (copy)
+	return if string.match(Text, ConstantsModule.ChannelTypes.Whisper) then p1.localizedText.ChatEyebrowSentPrivately else p1.localizedText.ChatEyebrowSentInAnotherChat
 end
 
-return function(p1)
-	-- upvalues: fFlagEnableGlobalChatAbuseReporting (ref), constantsModule (ref), reactModule (ref), view (ref), inputLabel (ref), inputLabelSize (ref)
-	return if fFlagEnableGlobalChatAbuseReporting and not p1.message.textChannel or p1.message.textChannel.Name == constantsModule.ChannelTypes.General then nil else reactModule.createElement(view, {
-		tag = "auto-xy bg-shift-200 padding-left-xsmall padding-right-xsmall radius-small",
-		LayoutOrder = 1
-	}, {
-		eyebrowLabel = reactModule.createElement(inputLabel, {
-			RichText = true,
-			Text = if string.match(p1.message.textChannel.Name, constantsModule.ChannelTypes.Whisper) then p1.localizedText.ChatEyebrowSentPrivately else p1.localizedText.ChatEyebrowSentInAnotherChat,
-			size = inputLabelSize.Small
-		})
-	})
+return function(p1) --[[ Line: 28 | Named "ChatLineReportEyebrow" ]]
+	-- upvalues: FFlagEnableGlobalChatAbuseReporting (copy), ConstantsModule (copy), ReactModule (copy), View (copy), InputLabel (copy), InputLabelSize (copy)
+	if FFlagEnableGlobalChatAbuseReporting and not p1.message.textChannel or p1.message.textChannel.Name == ConstantsModule.ChannelTypes.General then
+		return nil
+	else
+		return (ReactModule.createElement(View, {
+			tag = "auto-xy bg-shift-200 padding-left-xsmall padding-right-xsmall radius-small",
+			LayoutOrder = 1
+		}, {
+			eyebrowLabel = ReactModule.createElement(InputLabel, {
+				RichText = true,
+				Text = if string.match(p1.message.textChannel.Name, ConstantsModule.ChannelTypes.Whisper) then p1.localizedText.ChatEyebrowSentPrivately else p1.localizedText.ChatEyebrowSentInAnotherChat,
+				size = InputLabelSize.Small
+			})
+		}))
+	end
 end

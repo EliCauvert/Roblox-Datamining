@@ -1,126 +1,141 @@
-﻿local squadsCore = script:FindFirstAncestor("SquadsCore")
-local parent = squadsCore.Parent
-local messageBusService = game:GetService("MessageBusService")
-local constantsModule = require(squadsCore.Common.Constants)
-local loggerModule = require(squadsCore.Logger)
-local roduxSquadsModule = require(squadsCore.RoduxSquads)
-local squadExternalContractContextModule = require(squadsCore.Components.SquadExternalContractProvider.SquadExternalContractContext)
-local squadStateModule = require(squadsCore.Enums.SquadState)
-local squadViewFlagsModule = require(squadsCore.Components.SquadExternalContractProvider.SquadViewFlags)
-local fetchActiveSquadModule = require(squadsCore.Thunks.fetchActiveSquad)
-local serializeTableModule = require(squadsCore.Utils.serializeTable)
-local useSquadStateModule = require(squadsCore.Hooks.useSquadState)
-local reactModule = require(parent.React)
-local realtimeDeliveryModule = require(parent.RealtimeDelivery)
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
-local clearInterval = luauPolyfillModule.clearInterval
-local clearTimeout = luauPolyfillModule.clearTimeout
-local setInterval = luauPolyfillModule.setInterval
-local setTimeout = luauPolyfillModule.setTimeout
-local activeSquadPollingCardIntervalSeconds = game:DefineFastInt("ActiveSquadPollingCardIntervalSeconds", 30)
-local activeSquadPollingLobbyIntervalSeconds = game:DefineFastInt("ActiveSquadPollingLobbyIntervalSeconds", 60)
-local activeSquadPollingIdleIntervalSeconds = game:DefineFastInt("ActiveSquadPollingIdleIntervalSeconds", 120)
-local activeSquadInitPollingDelaySeconds = game:DefineFastInt("ActiveSquadInitPollingDelaySeconds", 3)
-local realtimeMessageId = messageBusService:GetMessageId("Realtime", "appResume")
+﻿local SquadsCore = script:FindFirstAncestor("SquadsCore")
+local Parent = SquadsCore.Parent
+local MessageBusService = game:GetService("MessageBusService")
+local ConstantsModule = require(SquadsCore.Common.Constants)
+local LoggerModule = require(SquadsCore.Logger)
+local RoduxSquadsModule = require(SquadsCore.RoduxSquads)
+local SquadExternalContractContextModule = require(SquadsCore.Components.SquadExternalContractProvider.SquadExternalContractContext)
+local SquadStateModule = require(SquadsCore.Enums.SquadState)
+local SquadViewFlagsModule = require(SquadsCore.Components.SquadExternalContractProvider.SquadViewFlags)
+local FetchActiveSquadModule = require(SquadsCore.Thunks.fetchActiveSquad)
+local SerializeTableModule = require(SquadsCore.Utils.serializeTable)
+local UseSquadStateModule = require(SquadsCore.Hooks.useSquadState)
+local ReactModule = require(Parent.React)
+local RealtimeDeliveryModule = require(Parent.RealtimeDelivery)
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
+local ClearIntervalFunction = LuauPolyfillModule.clearInterval
+local ClearTimeoutFunction = LuauPolyfillModule.clearTimeout
+local SetIntervalFunction = LuauPolyfillModule.setInterval
+local SetTimeoutFunction = LuauPolyfillModule.setTimeout
+local ActiveSquadPollingCardIntervalSeconds = game:DefineFastInt("ActiveSquadPollingCardIntervalSeconds", 30)
+local ActiveSquadPollingLobbyIntervalSeconds = game:DefineFastInt("ActiveSquadPollingLobbyIntervalSeconds", 60)
+local ActiveSquadPollingIdleIntervalSeconds = game:DefineFastInt("ActiveSquadPollingIdleIntervalSeconds", 120)
+local ActiveSquadInitPollingDelaySeconds = game:DefineFastInt("ActiveSquadInitPollingDelaySeconds", 3)
+local RealtimeMessageId = MessageBusService:GetMessageId("Realtime", "appResume")
 
-return function(p1)
-	-- upvalues: useDispatch (ref), useLocalUserId (ref), reactModule (ref), squadExternalContractContextModule (ref), useSquadStateModule (ref), setTimeout (ref), fetchActiveSquadModule (ref), activeSquadInitPollingDelaySeconds (ref), clearTimeout (ref), squadViewFlagsModule (ref), activeSquadPollingCardIntervalSeconds (ref), activeSquadPollingLobbyIntervalSeconds (ref), activeSquadPollingIdleIntervalSeconds (ref), setInterval (ref), clearInterval (ref), realtimeDeliveryModule (ref), constantsModule (ref), loggerModule (ref), serializeTableModule (ref), roduxSquadsModule (ref), squadStateModule (ref), messageBusService (ref), realtimeMessageId (ref)
-	local var1 = useDispatch()
-	local var2 = tonumber(useLocalUserId()) or 0
-	local var3, var4 = reactModule.useState(false)
-	local var5 = reactModule.useContext(squadExternalContractContextModule).useSquadViewFlags()
-	local var6 = useSquadStateModule()
-	local var7, var8 = reactModule.useState(-1)
-	reactModule.useEffect(function()
-		-- upvalues: var4 (ref), p1 (ref), setTimeout (copy), var1 (ref), fetchActiveSquadModule (copy), activeSquadInitPollingDelaySeconds (copy), clearTimeout (copy)
-		var4(false)
-		local var9 = if p1.currentSquadId ~= "" then nil else setTimeout(function()
-			-- upvalues: var1 (copy), fetchActiveSquadModule (copy), var4 (copy)
-			var1(fetchActiveSquadModule())
-			var4(true)
-		end, activeSquadInitPollingDelaySeconds * 1000)
+return function(p1) --[[ Line: 41 ]]
+	-- upvalues: UseDispatchFunction (copy), UseLocalUserIdFunction (copy), ReactModule (copy), SquadExternalContractContextModule (copy), UseSquadStateModule (copy), SetTimeoutFunction (copy), FetchActiveSquadModule (copy), ActiveSquadInitPollingDelaySeconds (copy), ClearTimeoutFunction (copy), SquadViewFlagsModule (copy), ActiveSquadPollingCardIntervalSeconds (copy), ActiveSquadPollingLobbyIntervalSeconds (copy), ActiveSquadPollingIdleIntervalSeconds (copy), SetIntervalFunction (copy), ClearIntervalFunction (copy), RealtimeDeliveryModule (copy), ConstantsModule (copy), LoggerModule (copy), SerializeTableModule (copy), RoduxSquadsModule (copy), SquadStateModule (copy), MessageBusService (copy), RealtimeMessageId (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local Number: number = tonumber(UseLocalUserIdFunction()) or 0
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseSquadViewFlagsResult = ReactModule.useContext(SquadExternalContractContextModule).useSquadViewFlags()
+	local UseSquadStateModuleResult = UseSquadStateModule()
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(-1)
+	ReactModule.useEffect(function() --[[ Line: 54 ]]
+		-- upvalues: UseStateResult2 (copy), p1 (copy), SetTimeoutFunction (upval), UseDispatchResult (copy), FetchActiveSquadModule (upval), ActiveSquadInitPollingDelaySeconds (upval), ClearTimeoutFunction (upval)
+		UseStateResult2(false)
+		local SetTimeoutResult = if p1.currentSquadId == "" then nil else SetTimeoutFunction(function() --[[ Line: 57 ]]
+			-- upvalues: UseDispatchResult (upval), FetchActiveSquadModule (upval), UseStateResult2 (upval)
+			UseDispatchResult(FetchActiveSquadModule())
+			UseStateResult2(true)
+		end, ActiveSquadInitPollingDelaySeconds * 1000)
 		
-		return function()
-			-- upvalues: var9 (ref), clearTimeout (copy)
-			if var9 then
-				clearTimeout(var9)
+		return function() --[[ Line: 63 ]]
+			-- upvalues: SetTimeoutResult (copy), ClearTimeoutFunction (upval)
+			if SetTimeoutResult then
+				ClearTimeoutFunction(SetTimeoutResult)
 			end
 		end
 	end, { p1.currentSquadId })
-	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), squadViewFlagsModule (copy), activeSquadPollingCardIntervalSeconds (copy), activeSquadPollingLobbyIntervalSeconds (copy), activeSquadPollingIdleIntervalSeconds (copy), var3 (ref), p1 (ref), setInterval (copy), var1 (ref), fetchActiveSquadModule (copy), clearInterval (copy)
-		local _ = nil
-		local var9 = if var3 and p1.currentSquadId ~= "" then setInterval(function()
-			-- upvalues: var1 (copy), fetchActiveSquadModule (copy)
-			var1(fetchActiveSquadModule())
-		end, (if bit32.band(var5, squadViewFlagsModule.SquadSystemMessage) ~= 0 then if bit32.band(var5, squadViewFlagsModule.SquadLobby) ~= 0 then activeSquadPollingIdleIntervalSeconds else activeSquadPollingLobbyIntervalSeconds else activeSquadPollingCardIntervalSeconds) * 1000) else nil
+	ReactModule.useEffect(function() --[[ Line: 73 ]]
+		-- upvalues: UseSquadViewFlagsResult (copy), SquadViewFlagsModule (upval), ActiveSquadPollingCardIntervalSeconds (upval), ActiveSquadPollingLobbyIntervalSeconds (upval), ActiveSquadPollingIdleIntervalSeconds (upval), UseStateResult (copy), p1 (copy), SetIntervalFunction (upval), UseDispatchResult (copy), FetchActiveSquadModule (upval), ClearIntervalFunction (upval)
+		local ActiveSquadPollingIdleIntervalSeconds1 = if bit32.band(UseSquadViewFlagsResult, SquadViewFlagsModule.SquadSystemMessage) == 0 then if bit32.band(UseSquadViewFlagsResult, SquadViewFlagsModule.SquadLobby) == 0 then ActiveSquadPollingIdleIntervalSeconds else ActiveSquadPollingLobbyIntervalSeconds else ActiveSquadPollingCardIntervalSeconds
+		local SetIntervalResult = nil
+		SetIntervalResult = if UseStateResult and p1.currentSquadId ~= "" then SetIntervalFunction(function() --[[ Line: 85 ]]
+			-- upvalues: UseDispatchResult (upval), FetchActiveSquadModule (upval)
+			UseDispatchResult(FetchActiveSquadModule())
+		end, ActiveSquadPollingIdleIntervalSeconds1 * 1000) else nil
 		
-		return function()
-			-- upvalues: var9 (write), clearInterval (copy)
-			if var9 then
-				clearInterval(var9)
+		return function() --[[ Line: 90 ]]
+			-- upvalues: SetIntervalResult (ref), ClearIntervalFunction (upval)
+			if SetIntervalResult then
+				ClearIntervalFunction(SetIntervalResult)
 			end
 		end
-	end, { p1.currentSquadId, var5, var7, var3 })
-	local var9 = reactModule.useCallback(function(p2)
-		-- upvalues: var7 (ref), var1 (ref), fetchActiveSquadModule (copy), var8 (ref)
-		if var7 < p2 then
-			var1(fetchActiveSquadModule()):andThen(function()
-				-- upvalues: var8 (copy), p2 (ref)
-				var8(p2)
+	end, {
+		p1.currentSquadId,
+		UseSquadViewFlagsResult,
+		UseStateResult1,
+		UseStateResult
+	})
+	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 101 ]]
+		-- upvalues: UseStateResult1 (copy), UseDispatchResult (copy), FetchActiveSquadModule (upval), UseStateResult2_1 (copy)
+		if UseStateResult1 < p2 then
+			UseDispatchResult(FetchActiveSquadModule()):andThen(function() --[[ Line: 103 ]]
+				-- upvalues: UseStateResult2_1 (upval), p2 (copy)
+				UseStateResult2_1(p2)
 			end)
 		end
-	end, { var1, fetchActiveSquadModule, var8, var7 })
-	realtimeDeliveryModule.useRealtimeNamespace(constantsModule.COMMUNICATION_CHANNEL_RTN_NAMESPACE, function(p2)
-		-- upvalues: constantsModule (copy), loggerModule (copy), serializeTableModule (copy), p1 (ref), var2 (ref), var1 (ref), roduxSquadsModule (copy), var9 (ref), var6 (ref), squadStateModule (copy)
-		if p2.ChannelType == constantsModule.SQUAD_CHANNEL_TYPE then
-			loggerModule:debug("Squad RTN received. Detail: {}, CurrentSquadId: {}, LocalUserId: {}", serializeTableModule(p2), p1.currentSquadId, var2)
+	end, {
+		UseDispatchResult,
+		FetchActiveSquadModule,
+		UseStateResult2_1,
+		UseStateResult1
+	})
+	RealtimeDeliveryModule.useRealtimeNamespace(ConstantsModule.COMMUNICATION_CHANNEL_RTN_NAMESPACE, function(p2) --[[ Line: 110 ]]
+		-- upvalues: ConstantsModule (upval), LoggerModule (upval), SerializeTableModule (upval), p1 (copy), Number (copy), UseDispatchResult (copy), RoduxSquadsModule (upval), UseResult (copy), UseSquadStateModuleResult (copy), SquadStateModule (upval)
+		if p2.ChannelType == ConstantsModule.SQUAD_CHANNEL_TYPE then
+			LoggerModule:debug("Squad RTN received. Detail: {}, CurrentSquadId: {}, LocalUserId: {}", SerializeTableModule(p2), p1.currentSquadId, Number)
 			
 			if p1.currentSquadId == p2.ChannelId then
-				if p2.Type == constantsModule.CHANNEL_LOCAL_USER_REMOVED_DETAIL_TYPE or p2.Type == constantsModule.CHANNEL_DELETED_DETAIL_TYPE then
-					var1(roduxSquadsModule.Actions.CurrentSquadUpdated(nil))
-					
-					return
-				elseif p2.Type == constantsModule.CHANNEL_PARTICIPANT_ADDED_DETAIL_TYPE or p2.Type == constantsModule.CHANNEL_PARTICIPANT_REMOVED_DETAIL_TYPE or (p2.Type == constantsModule.CHANNEL_UPDATED_DETAIL_TYPE or p2.Type == constantsModule.CHANNEL_PARTICIPANT_INVITED_DETAIL_TYPE) then
-					var9(p2.SequenceNumber)
+				if p2.Type == ConstantsModule.CHANNEL_LOCAL_USER_REMOVED_DETAIL_TYPE or p2.Type == ConstantsModule.CHANNEL_DELETED_DETAIL_TYPE then
+					UseDispatchResult(RoduxSquadsModule.Actions.CurrentSquadUpdated(nil))
 					
 					return
 				end
-			elseif var6 ~= squadStateModule.Initializing then
-				if p2.Type == constantsModule.CHANNEL_CREATED_DETAIL_TYPE and (p2.Actor and (p2.Actor.Type == "User" and p2.Actor.Id == tostring(var2))) then
-					var9(p2.SequenceNumber)
+				if p2.Type == ConstantsModule.CHANNEL_PARTICIPANT_ADDED_DETAIL_TYPE or p2.Type == ConstantsModule.CHANNEL_PARTICIPANT_REMOVED_DETAIL_TYPE or p2.Type == ConstantsModule.CHANNEL_UPDATED_DETAIL_TYPE or p2.Type == ConstantsModule.CHANNEL_PARTICIPANT_INVITED_DETAIL_TYPE then
+					UseResult(p2.SequenceNumber)
 					
 					return
-				elseif p2.Type == constantsModule.CHANNEL_LOCAL_USER_ADDED_DETAIL_TYPE then
-					var9(p2.SequenceNumber)
+				end
+			elseif UseSquadStateModuleResult ~= SquadStateModule.Initializing then
+				local IsIdMatch: boolean = p2.Actor and (p2.Actor.Type == "User" and p2.Actor.Id == tostring(Number))
+				
+				if p2.Type == ConstantsModule.CHANNEL_CREATED_DETAIL_TYPE and IsIdMatch then
+					UseResult(p2.SequenceNumber)
+					
+					return
+				end
+				if p2.Type == ConstantsModule.CHANNEL_LOCAL_USER_ADDED_DETAIL_TYPE then
+					UseResult(p2.SequenceNumber)
 				end
 			end
 		end
 	end, {
 		p1.currentSquadId,
-		var1,
-		var2,
-		var9,
-		var6
+		UseDispatchResult,
+		Number,
+		UseResult,
+		UseSquadStateModuleResult
 	})
-	reactModule.useEffect(function()
-		-- upvalues: messageBusService (copy), realtimeMessageId (copy), p1 (ref), var1 (ref), fetchActiveSquadModule (copy)
-		local var10 = messageBusService:Subscribe(realtimeMessageId, function()
-			-- upvalues: p1 (copy), var1 (copy), fetchActiveSquadModule (copy)
+	ReactModule.useEffect(function() --[[ Line: 166 ]]
+		-- upvalues: MessageBusService (upval), RealtimeMessageId (upval), p1 (copy), UseDispatchResult (copy), FetchActiveSquadModule (upval)
+		local SubscribeResult = MessageBusService:Subscribe(RealtimeMessageId, function() --[[ Line: 167 ]]
+			-- upvalues: p1 (upval), UseDispatchResult (upval), FetchActiveSquadModule (upval)
 			if p1.currentSquadId ~= "" then
-				var1(fetchActiveSquadModule())
+				UseDispatchResult(FetchActiveSquadModule())
 			end
 		end, false, true)
 		
-		return function()
-			-- upvalues: var10 (ref)
-			if var10 then
-				var10:Disconnect()
+		return function() --[[ Line: 172 ]]
+			-- upvalues: SubscribeResult (copy)
+			if SubscribeResult then
+				SubscribeResult:Disconnect()
 			end
 		end
-	end, { p1.currentSquadId, var1 })
+	end, { p1.currentSquadId, UseDispatchResult })
 	
 	return nil
 end

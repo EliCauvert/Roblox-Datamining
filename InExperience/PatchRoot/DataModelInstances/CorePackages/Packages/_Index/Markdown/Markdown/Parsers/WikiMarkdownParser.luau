@@ -1,33 +1,33 @@
-﻿local markdown = script:FindFirstAncestor("Markdown")
-local dashModule = require(markdown.Parent.Dash)
-local buildTreeModule = require(script.BuildTree)
-local postProcessTreeModule = require(script.PostProcessTree)
-local tokenizeModule = require(script.Tokenize)
-local _ = require(markdown.Types)
-local unindentTagsModule = require(script.Parent.UnindentTags)
-local indexTreeModule = require(script.Parent.IndexTree)
-local defaultParserOptionsModule = require(script.Parent.DefaultParserOptions)
-local t = {}
+﻿local Markdown = script:FindFirstAncestor("Markdown")
+local DashModule = require(Markdown.Parent.Dash)
+local BuildTreeModule = require(script.BuildTree)
+local PostProcessTreeModule = require(script.PostProcessTree)
+local TokenizeModule = require(script.Tokenize)
+local _ = require(Markdown.Types)
+local UnindentTagsModule = require(script.Parent.UnindentTags)
+local IndexTreeModule = require(script.Parent.IndexTree)
+local DefaultParserOptionsModule = require(script.Parent.DefaultParserOptions)
+local WikiMarkdownParserModule = {}
 
-function t.safeParse(p1, p2)
-	-- upvalues: t (ref)
-	local ok, status = xpcall(function()
-		-- upvalues: t (copy), p1 (ref), p2 (ref)
-		return t.parse(p1, p2)
-	end, function(p3)
-		return `{p3}\n{debug.traceback()}`
+function WikiMarkdownParserModule.safeParse(p1, p2) --[[ Line: 18 ]]
+	-- upvalues: WikiMarkdownParserModule (copy)
+	local Success, Result = xpcall(function() --[[ Line: 19 ]]
+		-- upvalues: WikiMarkdownParserModule (upval), p1 (copy), p2 (copy)
+		return WikiMarkdownParserModule.parse(p1, p2)
+	end, function(Err): string --[[ Line: 21 ]]
+		return `{Err}\n{debug.traceback()}`
 	end)
 	
-	return ok, status
+	return Success, Result
 end
 
-function t.parse(p1, p2)
-	-- upvalues: dashModule (ref), defaultParserOptionsModule (ref), unindentTagsModule (ref), tokenizeModule (ref), buildTreeModule (ref), postProcessTreeModule (ref), indexTreeModule (ref)
-	local var1 = dashModule.joinDeep(defaultParserOptionsModule, p2 or {})
-	local var2 = buildTreeModule(tokenizeModule(unindentTagsModule(p1)), var1)
-	var2.children = postProcessTreeModule(var2, var1)
+function WikiMarkdownParserModule.parse(p1, p2) --[[ Line: 27 ]]
+	-- upvalues: DashModule (copy), DefaultParserOptionsModule (copy), UnindentTagsModule (copy), TokenizeModule (copy), BuildTreeModule (copy), PostProcessTreeModule (copy), IndexTreeModule (copy)
+	local JoinDeepResult = DashModule.joinDeep(DefaultParserOptionsModule, p2 or {})
+	local TreeModule = BuildTreeModule(TokenizeModule((UnindentTagsModule(p1))), JoinDeepResult)
+	TreeModule.children = PostProcessTreeModule(TreeModule, JoinDeepResult)
 	
-	return indexTreeModule(var2)
+	return IndexTreeModule(TreeModule)
 end
 
-return t
+return WikiMarkdownParserModule

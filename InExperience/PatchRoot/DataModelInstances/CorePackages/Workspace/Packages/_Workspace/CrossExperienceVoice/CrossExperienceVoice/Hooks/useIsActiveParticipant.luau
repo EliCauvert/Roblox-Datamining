@@ -1,21 +1,29 @@
-﻿local audioFocusManagementEngineFeature = game:GetEngineFeature("AudioFocusManagement")
-local crossExperienceVoice = script:FindFirstAncestor("CrossExperienceVoice")
-local dependenciesModule = require(crossExperienceVoice.dependencies)
-local useSelector = dependenciesModule.RoactUtils.Hooks.RoactRodux.useSelector
-local getFFlagEnableCrossExpVoice = dependenciesModule.SharedFlags.GetFFlagEnableCrossExpVoice
-local useIsVoiceFocusedModule = require(crossExperienceVoice.Hooks.useIsVoiceFocused)
+﻿local AudioFocusManagementEngineFeature = game:GetEngineFeature("AudioFocusManagement")
+local CrossExperienceVoice = script:FindFirstAncestor("CrossExperienceVoice")
+local DependenciesModule = require(CrossExperienceVoice.dependencies)
+local UseSelectorFunction = DependenciesModule.RoactUtils.Hooks.RoactRodux.useSelector
+local GetFFlagEnableCrossExpVoiceFunction = DependenciesModule.SharedFlags.GetFFlagEnableCrossExpVoice
+local UseIsVoiceFocusedModule = require(CrossExperienceVoice.Hooks.useIsVoiceFocused)
 
-return function(p1)
-	-- upvalues: getFFlagEnableCrossExpVoice (ref), useIsVoiceFocusedModule (ref), useSelector (ref), audioFocusManagementEngineFeature (ref)
-	return if getFFlagEnableCrossExpVoice() then if audioFocusManagementEngineFeature and not useIsVoiceFocusedModule() then false else useSelector(function(p2)
-		-- upvalues: p1 (ref)
-		if not p2 or not p2.Squad or not p2.Squad.CrossExperienceVoice then
-			return false
-		elseif table.find(p2.Squad.CrossExperienceVoice.Participants.activeUserIds, p1) == nil then
-			return false
-		end
-		local var1 = p2.Squad.CrossExperienceVoice.Participants.participants[p1]
+return function(Value) --[[ Line: 11 ]]
+	-- upvalues: GetFFlagEnableCrossExpVoiceFunction (copy), UseIsVoiceFocusedModule (copy), UseSelectorFunction (copy), AudioFocusManagementEngineFeature (copy)
+	if GetFFlagEnableCrossExpVoiceFunction() then
+		local UseIsVoiceFocusedModuleResult = UseIsVoiceFocusedModule()
+		local UseSelectorResult = UseSelectorFunction(function(p1): boolean --[[ Line: 16 ]]
+			-- upvalues: Value (copy)
+			if not p1 or not p1.Squad or not p1.Squad.CrossExperienceVoice then
+				return false
+			elseif table.find(p1.Squad.CrossExperienceVoice.Participants.activeUserIds, Value) == nil then
+				return false
+			else
+				local Participant = p1.Squad.CrossExperienceVoice.Participants.participants[Value]
+				
+				return Participant and not Participant.isMuted
+			end
+		end)
 		
-		return var1 and not var1.isMuted
-	end) else false
+		return (not AudioFocusManagementEngineFeature or UseIsVoiceFocusedModuleResult) and UseSelectorResult
+	else
+		return false
+	end
 end

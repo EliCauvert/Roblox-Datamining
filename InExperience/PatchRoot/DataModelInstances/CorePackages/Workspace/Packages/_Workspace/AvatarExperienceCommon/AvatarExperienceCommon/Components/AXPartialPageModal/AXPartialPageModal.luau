@@ -1,184 +1,183 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
-local reactModule = require(parent.React)
-local responsiveModule = require(parent.Responsive)
-local modalWindow = require(parent.UIBlox).App.Dialog.Modal.ModalWindow
-local foundationModule = require(parent.Foundation)
-local button = foundationModule.Button
-local view = foundationModule.View
-local useTokens = foundationModule.Hooks.useTokens
-local fillBehavior = foundationModule.Enums.FillBehavior
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local wrapForReactPortalModule = require(script.Parent.Parent.Wrappers.wrapForReactPortal)
-local useIsSpatial = responsiveModule.useIsSpatial
-local useAXPartialPageModalFocusHandlerModule = require(script.Parent.useAXPartialPageModalFocusHandler)
-local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
+local ReactModule = require(Parent.React)
+local ResponsiveModule = require(Parent.Responsive)
+local ModalWindow = require(Parent.UIBlox).App.Dialog.Modal.ModalWindow
+local FoundationModule = require(Parent.Foundation)
+local Button = FoundationModule.Button
+local View = FoundationModule.View
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local FillBehavior = FoundationModule.Enums.FillBehavior
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local WrapForReactPortalModule = require(script.Parent.Parent.Wrappers.wrapForReactPortal)
+local UseIsSpatialFunction = ResponsiveModule.useIsSpatial
+local UseAXPartialPageModalFocusHandlerModule = require(script.Parent.useAXPartialPageModalFocusHandler)
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local AXPartialPageModalDockedPadding = game:DefineFastFlag("AXPartialPageModalDockedPadding", false)
-local fFlagAXFixAvatarScreenVR = avatarExperienceFlagsModule.FFlagAXFixAvatarScreenVR
-local fFlagAXPartialPageModalBackgroundShim = avatarExperienceFlagsModule.FFlagAXPartialPageModalBackgroundShim
+local FFlagAXFixAvatarScreenVR = AvatarExperienceFlagsModule.FFlagAXFixAvatarScreenVR
+local FFlagAXPartialPageModalBackgroundShim = AvatarExperienceFlagsModule.FFlagAXPartialPageModalBackgroundShim
 local AXCatalogPartialPageModalBottomInsetMultiplier = game:DefineFastInt("AXCatalogPartialPageModalBottomInsetMultiplier", 25)
 
-local function selectDeviceOrientation(p1)
+local function selectDeviceOrientation(p1) --[[ Line: 35 ]]
 	return p1.DeviceOrientation
 end
 
-local var1 = function(p1)
+local function v16(p1) --[[ Line: 56 ]]
 	return p1.ScreenSize
 end
 
-local var2 = function(p1)
-	return if p1.GlobalGuiInset then p1.GlobalGuiInset.bottom else 0
+local function v17(p1) --[[ Line: 60 ]]
+	return p1.GlobalGuiInset and p1.GlobalGuiInset.bottom or 0
 end
 
-return function(p1)
-	-- upvalues: useTokens (ref), useSelector (ref), var1 (ref), reactModule (ref), fFlagAXFixAvatarScreenVR (ref), var2 (ref), useIsSpatial (ref), useAXPartialPageModalFocusHandlerModule (ref), AXPartialPageModalDockedPadding (ref), AXCatalogPartialPageModalBottomInsetMultiplier (ref), selectDeviceOrientation (ref), responsiveModule (ref), view (ref), button (ref), fillBehavior (ref), fFlagAXPartialPageModalBackgroundShim (ref), modalWindow (ref), wrapForReactPortalModule (ref)
-	local var3 = useTokens()
-	local var4 = useSelector(var1)
-	local medium = var3.Margin.Medium
-	local uDim = UDim.new(0, var3.Margin.Medium)
-	local var5 = reactModule.useRef(nil)
-	local var6 = if fFlagAXFixAvatarScreenVR then reactModule.useRef(nil) else nil
-	local var7 = nil
-	local var8 = nil
+return function(p1) --[[ Line: 64 | Named "AXPartialPageModal" ]]
+	-- upvalues: UseTokensFunction (copy), UseSelectorFunction (copy), v16 (copy), ReactModule (copy), FFlagAXFixAvatarScreenVR (copy), v17 (copy), UseIsSpatialFunction (copy), UseAXPartialPageModalFocusHandlerModule (copy), AXPartialPageModalDockedPadding (copy), AXCatalogPartialPageModalBottomInsetMultiplier (copy), selectDeviceOrientation (copy), ResponsiveModule (copy), View (copy), Button (copy), FillBehavior (copy), FFlagAXPartialPageModalBackgroundShim (copy), ModalWindow (copy), WrapForReactPortalModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseSelectorResult = UseSelectorFunction(v16)
+	local Medium = UseTokensResult.Margin.Medium
+	local _UDim = UDim.new(0, UseTokensResult.Margin.Medium)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = if FFlagAXFixAvatarScreenVR then ReactModule.useRef(nil) else nil
+	local v1 = nil
+	local Callback = nil
 	
-	if fFlagAXFixAvatarScreenVR then
-		local var9, var10 = reactModule.useState(Vector2.new(360, 700))
-		var7 = var9
-		var8 = var10
+	if FFlagAXFixAvatarScreenVR then
+		v1, Callback = ReactModule.useState(Vector2.new(360, 700))
 	end
-	local var11 = useSelector(var2)
-	local var12 = if fFlagAXFixAvatarScreenVR then useIsSpatial() else nil
-	local var13 = useAXPartialPageModalFocusHandlerModule(var5)
+	local UseSelectorResult1 = UseSelectorFunction(v17)
+	local UseIsSpatialResult = if FFlagAXFixAvatarScreenVR then UseIsSpatialFunction() else nil
+	local UseAXPartialPageModalFocusHandlerModuleResult = UseAXPartialPageModalFocusHandlerModule(UseRefResult)
 	
-	if fFlagAXFixAvatarScreenVR then
-		reactModule.useLayoutEffect(function()
-			-- upvalues: var12 (ref), var6 (ref), var8 (write)
-			if not var12 then return end
-			local current = var6.current
+	if FFlagAXFixAvatarScreenVR then
+		ReactModule.useLayoutEffect(function() --[[ Line: 84 ]]
+			-- upvalues: UseIsSpatialResult (copy), UseRefResult1 (copy), Callback (ref)
+			if not UseIsSpatialResult then return end
+			local Current = UseRefResult1.current
 			
-			if current == nil then return end
-			local surfaceGui = current:FindFirstAncestorOfClass("SurfaceGui")
+			if Current == nil then return end
+			local SurfaceGui = Current:FindFirstAncestorOfClass("SurfaceGui")
 			
-			if surfaceGui == nil then
-				return
-			end
-			local function syncSize()
-				-- upvalues: var8 (copy), surfaceGui (ref)
-				var8(surfaceGui.AbsoluteSize)
+			if SurfaceGui == nil then return end
+			local function syncSize() --[[ Line: 98 ]]
+				-- upvalues: Callback (upval), SurfaceGui (copy)
+				Callback(SurfaceGui.AbsoluteSize)
 			end
 			
-			var8(surfaceGui.AbsoluteSize)
-			local var14 = surfaceGui:GetPropertyChangedSignal("AbsoluteSize"):Connect(syncSize)
+			Callback(SurfaceGui.AbsoluteSize)
+			local Connection = SurfaceGui:GetPropertyChangedSignal("AbsoluteSize"):Connect(syncSize)
 			
-			return function()
-				-- upvalues: var14 (ref)
-				var14:Disconnect()
+			return function() --[[ Line: 104 ]]
+				-- upvalues: Connection (copy)
+				Connection:Disconnect()
 			end
-		end, { var12, var13, var8 })
+		end, {
+			UseIsSpatialResult,
+			UseAXPartialPageModalFocusHandlerModuleResult,
+			Callback
+		})
 	end
-	local var14 = if fFlagAXFixAvatarScreenVR and var12 then var7 else var4
+	local UseSelectorResult2 = if FFlagAXFixAvatarScreenVR and UseIsSpatialResult then v1 else UseSelectorResult
 	
 	if AXPartialPageModalDockedPadding then
-		if var14.X < 540 then
-			uDim = UDim.new(0, var3.Margin.Large + var11 * AXCatalogPartialPageModalBottomInsetMultiplier / 100)
+		if UseSelectorResult2.X < 540 then
+			_UDim = UDim.new(0, UseTokensResult.Margin.Large + UseSelectorResult1 * AXCatalogPartialPageModalBottomInsetMultiplier / 100)
 		end
-	elseif useSelector(selectDeviceOrientation) == responsiveModule.Keys.Portrait then
-		uDim = UDim.new(0, var3.Margin.Large + var11 * AXCatalogPartialPageModalBottomInsetMultiplier / 100)
+	elseif UseSelectorFunction(selectDeviceOrientation) == ResponsiveModule.Keys.Portrait then
+		_UDim = UDim.new(0, UseTokensResult.Margin.Large + UseSelectorResult1 * AXCatalogPartialPageModalBottomInsetMultiplier / 100)
 	end
-	local textButton
-	local var15 = if p1.position then p1.position else nil
+	local Position = if p1.position then p1.position else nil
 	
-	local var16 = function()
-		-- upvalues: p1 (ref), reactModule (copy), view (copy), button (copy), fillBehavior (copy)
-		local t = {}
+	local function v30() --[[ Line: 134 ]]
+		-- upvalues: p1 (copy), ReactModule (upval), View (upval), Button (upval), FillBehavior (upval)
+		local Elements = {}
 		
 		if p1.buttonStackProps == nil then
 			return {}
 		end
-		local buttons = p1.buttonStackProps.buttons
+		local Buttons = p1.buttonStackProps.buttons
 		
-		for i, v in ipairs(buttons) do
-			local props = buttons[i].props
-			t[i] = reactModule.createElement(view, {
+		for i, _ in ipairs(Buttons) do
+			local Props = Buttons[i].props
+			Elements[i] = ReactModule.createElement(View, {
 				tag = "row gap-small wrap auto-y size-full-0 fill-x",
-				key = props.text or i
-			}, reactModule.createElement(button, {
-				text = props.text,
-				variant = props.variant,
-				onActivated = props.onActivated,
-				LayoutOrder = props.layoutOrder or i,
-				fillBehavior = fillBehavior.Fill,
-				size = props.size
+				key = Props.text or i
+			}, ReactModule.createElement(Button, {
+				text = Props.text,
+				variant = Props.variant,
+				onActivated = Props.onActivated,
+				LayoutOrder = Props.layoutOrder or i,
+				fillBehavior = FillBehavior.Fill,
+				size = Props.size
 			}))
 		end
-		return t
+		return Elements
 	end
 	
-	local var17 = function()
-		-- upvalues: p1 (ref), reactModule (copy), button (copy), fillBehavior (copy)
-		local t = {}
+	local function v31() --[[ Line: 164 ]]
+		-- upvalues: p1 (copy), ReactModule (upval), Button (upval), FillBehavior (upval)
+		local Elements = {}
 		
 		if p1.buttonStackProps == nil then
 			return {}
 		end
-		local buttons = p1.buttonStackProps.buttons
+		local Buttons = p1.buttonStackProps.buttons
 		
-		for i, v in ipairs(buttons) do
-			local props = buttons[i].props
-			t[i] = reactModule.createElement(button, {
-				text = props.text,
-				key = props.text or i,
-				variant = props.variant,
+		for i, _ in ipairs(Buttons) do
+			local Props = Buttons[i].props
+			Elements[i] = ReactModule.createElement(Button, {
+				text = Props.text,
+				key = Props.text or i,
+				variant = Props.variant,
 				width = UDim.new(1, 0),
-				onActivated = props.onActivated,
-				LayoutOrder = props.layoutOrder or i,
-				fillBehavior = fillBehavior.Fill,
-				size = props.size
+				onActivated = Props.onActivated,
+				LayoutOrder = Props.layoutOrder or i,
+				fillBehavior = FillBehavior.Fill,
+				size = Props.size
 			})
 		end
-		return t
+		return Elements
 	end
 	
-	local var18 = p1.visible ~= nil or p1.visible
-	local _ = nil
+	local NoVisible = p1.visible == nil or p1.visible
+	local Frame = nil
 	
-	if fFlagAXPartialPageModalBackgroundShim then
-		local var19 = reactModule.createElement(modalWindow, {
+	if FFlagAXPartialPageModalBackgroundShim then
+		local Element = ReactModule.createElement(ModalWindow, {
 			isFullHeight = false,
-			screenSize = var14,
-			position = var15,
+			screenSize = UseSelectorResult2,
+			position = Position,
 			anchorPoint = p1.anchorPoint
 		}, {
-			ContentContainer = reactModule.createElement(view, {
+			ContentContainer = ReactModule.createElement(View, {
 				tag = "auto-y col size-full-0 align-x-left padding-x-xxlarge padding-top-xxlarge radius-medium",
-				Position = UDim2.new(0, 0, 0, medium),
-				backgroundStyle = var3.Color.Surface.Surface_100,
-				padding = { bottom = uDim },
-				ref = if var13 == nil then var5 else nil,
-				selectionGroup = if var13 == nil then {
+				Position = UDim2.new(0, 0, 0, Medium),
+				backgroundStyle = UseTokensResult.Color.Surface.Surface_100,
+				padding = { bottom = _UDim },
+				ref = if UseAXPartialPageModalFocusHandlerModuleResult == nil then UseRefResult else nil,
+				selectionGroup = if UseAXPartialPageModalFocusHandlerModuleResult == nil then {
 					SelectionBehaviorUp = Enum.SelectionBehavior.Stop,
 					SelectionBehaviorDown = Enum.SelectionBehavior.Stop,
 					SelectionBehaviorLeft = Enum.SelectionBehavior.Stop,
 					SelectionBehaviorRight = Enum.SelectionBehavior.Stop
 				} else nil
 			}, {
-				Content = reactModule.createElement(view, { tag = "auto-y size-full-0" }, p1.children),
-				Buttons = p1.buttonStackProps and reactModule.createElement(view, {
+				Content = ReactModule.createElement(View, { tag = "auto-y size-full-0" }, p1.children),
+				Buttons = p1.buttonStackProps and ReactModule.createElement(View, {
 					tag = {
 						["col gap-medium auto-y size-full-0 fill-x"] = not p1.buttonStackProps.rowLayout,
 						["row gap-small auto-y size-full-0 fill-x"] = p1.buttonStackProps.rowLayout
 					}
-				}, if p1.buttonStackProps.rowLayout then var17() else var16())
+				}, if p1.buttonStackProps.rowLayout then v31() else v30())
 			})
 		})
-		textButton = if p1.hasBackgroundShim == true then reactModule.createElement("Frame", {
+		Frame = if p1.hasBackgroundShim == true then ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			ZIndex = 5,
 			Size = UDim2.fromScale(1, 1),
-			Visible = var18,
-			ref = if fFlagAXFixAvatarScreenVR then var6 else nil
+			Visible = NoVisible,
+			ref = if FFlagAXFixAvatarScreenVR then UseRefResult1 else nil
 		}, {
-			Scrim = reactModule.createElement("TextButton", {
+			Scrim = ReactModule.createElement("TextButton", {
 				Text = "",
 				AutoButtonColor = false,
 				Selectable = false,
@@ -187,66 +186,66 @@ return function(p1)
 				BackgroundTransparency = 0.45,
 				BorderSizePixel = 0,
 				ZIndex = 1,
-				[reactModule.Event.Activated] = p1.onBackgroundPress
+				[ReactModule.Event.Activated] = p1.onBackgroundPress
 			}),
-			SheetLayer = reactModule.createElement("Frame", {
+			SheetLayer = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
 				ZIndex = 2,
 				Size = UDim2.fromScale(1, 1)
-			}, { PartialPageModal = var19 })
-		}) else reactModule.createElement("TextButton", {
+			}, { PartialPageModal = Element })
+		}) else ReactModule.createElement("TextButton", {
 			Text = "",
 			AutoButtonColor = false,
 			Selectable = false,
 			Size = UDim2.fromScale(1, 1),
 			BackgroundTransparency = 1,
-			[reactModule.Event.Activated] = p1.onBackgroundPress,
+			[ReactModule.Event.Activated] = p1.onBackgroundPress,
 			ZIndex = 5,
-			Visible = var18,
-			ref = if fFlagAXFixAvatarScreenVR then var6 else nil
-		}, { PartialPageModal = var19 })
+			Visible = NoVisible,
+			ref = if FFlagAXFixAvatarScreenVR then UseRefResult1 else nil
+		}, { PartialPageModal = Element })
 	else
-		textButton = reactModule.createElement("TextButton", {
+		Frame = ReactModule.createElement("TextButton", {
 			Text = "",
 			AutoButtonColor = false,
 			Selectable = false,
 			Size = UDim2.fromScale(1, 1),
 			BackgroundTransparency = 1,
-			[reactModule.Event.Activated] = p1.onBackgroundPress,
+			[ReactModule.Event.Activated] = p1.onBackgroundPress,
 			ZIndex = 5,
-			Visible = var18,
-			ref = if fFlagAXFixAvatarScreenVR then var6 else nil
+			Visible = NoVisible,
+			ref = if FFlagAXFixAvatarScreenVR then UseRefResult1 else nil
 		}, {
-			PartialPageModal = reactModule.createElement(modalWindow, {
+			PartialPageModal = ReactModule.createElement(ModalWindow, {
 				isFullHeight = false,
-				screenSize = var14,
-				position = var15,
+				screenSize = UseSelectorResult2,
+				position = Position,
 				anchorPoint = p1.anchorPoint
 			}, {
-				ContentContainer = reactModule.createElement(view, {
+				ContentContainer = ReactModule.createElement(View, {
 					tag = "auto-y col size-full-0 align-x-left padding-x-xxlarge padding-top-xxlarge radius-medium",
-					Position = UDim2.new(0, 0, 0, medium),
-					backgroundStyle = var3.Color.Surface.Surface_100,
-					padding = { bottom = uDim },
-					ref = if var13 == nil then var5 else nil,
-					selectionGroup = if var13 == nil then {
+					Position = UDim2.new(0, 0, 0, Medium),
+					backgroundStyle = UseTokensResult.Color.Surface.Surface_100,
+					padding = { bottom = _UDim },
+					ref = if UseAXPartialPageModalFocusHandlerModuleResult == nil then UseRefResult else nil,
+					selectionGroup = if UseAXPartialPageModalFocusHandlerModuleResult == nil then {
 						SelectionBehaviorUp = Enum.SelectionBehavior.Stop,
 						SelectionBehaviorDown = Enum.SelectionBehavior.Stop,
 						SelectionBehaviorLeft = Enum.SelectionBehavior.Stop,
 						SelectionBehaviorRight = Enum.SelectionBehavior.Stop
 					} else nil
 				}, {
-					Content = reactModule.createElement(view, { tag = "auto-y size-full-0" }, p1.children),
-					Buttons = p1.buttonStackProps and reactModule.createElement(view, {
+					Content = ReactModule.createElement(View, { tag = "auto-y size-full-0" }, p1.children),
+					Buttons = p1.buttonStackProps and ReactModule.createElement(View, {
 						tag = {
 							["col gap-medium auto-y size-full-0 fill-x"] = not p1.buttonStackProps.rowLayout,
 							["row gap-small auto-y size-full-0 fill-x"] = p1.buttonStackProps.rowLayout
 						}
-					}, if p1.buttonStackProps.rowLayout then var17() else var16())
+					}, if p1.buttonStackProps.rowLayout then v31() else v30())
 				})
 			})
 		})
 	end
-	return if var13 == nil then textButton else wrapForReactPortalModule(textButton, var13, var5)
+	return if UseAXPartialPageModalFocusHandlerModuleResult == nil then Frame else WrapForReactPortalModule(Frame, UseAXPartialPageModalFocusHandlerModuleResult, UseRefResult)
 end

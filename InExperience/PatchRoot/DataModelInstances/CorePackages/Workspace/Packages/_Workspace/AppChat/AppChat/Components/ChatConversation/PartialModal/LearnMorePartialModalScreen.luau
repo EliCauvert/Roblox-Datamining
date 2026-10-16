@@ -1,27 +1,27 @@
-﻿local parent = script:FindFirstAncestor("AppChat").Parent
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local useCallback = reactModule.useCallback
-local useEffectOnMount = require(parent.RoactUtils).Hooks.useEffectOnMount
-local learnMorePartialModalContainerModule = require(script.Parent.LearnMorePartialModalContainer)
-local loggerModule = require(script.Parent.Logger)
+﻿local Parent = script:FindFirstAncestor("AppChat").Parent
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local UseCallbackFunction = ReactModule.useCallback
+local UseEffectOnMountFunction = require(Parent.RoactUtils).Hooks.useEffectOnMount
+local LearnMorePartialModalContainerModule = require(script.Parent.LearnMorePartialModalContainer)
+local LoggerModule = require(script.Parent.Logger)
 local t = {}
 
-return function(p1)
-	-- upvalues: cryoModule (ref), t (ref), useEffectOnMount (ref), loggerModule (ref), useCallback (ref), reactModule (ref), learnMorePartialModalContainerModule (ref)
-	local navigation = cryoModule.Dictionary.union(t, p1).navigation
-	assert(type(navigation) ~= "nil", "LearnMorePartialModalScreen should be wrapped with React Navigation")
-	local conversationId = navigation and (navigation.getParam and navigation.getParam("conversationId", nil))
-	useEffectOnMount(function()
-		-- upvalues: loggerModule (copy)
-		loggerModule:info("LearnMorePartialModalScreen mounted")
+return function(p1) --[[ Line: 18 | Named "LearnMorePartialModalScreen" ]]
+	-- upvalues: CryoModule (copy), t (copy), UseEffectOnMountFunction (copy), LoggerModule (copy), UseCallbackFunction (copy), ReactModule (copy), LearnMorePartialModalContainerModule (copy)
+	local Navigation = CryoModule.Dictionary.union(t, p1).navigation
+	assert(type(Navigation) ~= "nil", "LearnMorePartialModalScreen should be wrapped with React Navigation")
+	local ConversationIdParam = Navigation and (Navigation.getParam and Navigation.getParam("conversationId", nil))
+	UseEffectOnMountFunction(function() --[[ Line: 24 ]]
+		-- upvalues: LoggerModule (upval)
+		LoggerModule:info("LearnMorePartialModalScreen mounted")
 	end)
 	
-	return reactModule.createElement(learnMorePartialModalContainerModule, {
-		conversationId = conversationId,
-		onDismissed = useCallback(function()
-			-- upvalues: navigation (ref)
-			navigation.goBack()
-		end, { navigation })
+	return ReactModule.createElement(LearnMorePartialModalContainerModule, {
+		conversationId = ConversationIdParam,
+		onDismissed = UseCallbackFunction(function() --[[ Line: 28 ]]
+			-- upvalues: Navigation (copy)
+			Navigation.goBack()
+		end, { Navigation })
 	})
 end

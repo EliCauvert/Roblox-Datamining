@@ -5,6 +5,7 @@
 	ExperienceDetailsBottomSheet = require(script.ExperienceDetailsPage.ExperienceDetailsBottomSheet),
 	ExperienceDetailsFullPage = require(script.ExperienceDetailsPage.ExperienceDetailsFullPage),
 	ExperienceDetailsPageUtils = require(script.ExperienceDetailsPage.ExperienceDetailsPageUtils),
+	createExperienceDetailsPageTimer = require(script.ExperienceDetailsPage.createExperienceDetailsPageTimer),
 	fetchExperienceDetailsPage = require(script.ExperienceDetailsPage.fetchExperienceDetailsPage),
 	getExperienceDetailsPageKey = require(script.ExperienceDetailsPage.getExperienceDetailsPageKey),
 	useExperienceBannerImage = require(script.ExperienceDetailsPage.useExperienceBannerImage),

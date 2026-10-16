@@ -1,45 +1,44 @@
-﻿local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local constantsModule = require(parent.Constants)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local createExpectedSchemaModule = require(parent.util.CreateExpectedSchema)
-local validateInstanceTreeAgainstSchemaModule = require(parent.util.validateInstanceTreeAgainstSchema)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local getEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule = require(parent.flags.getEngineFeatureEngineUGCValidateInstanceTreesEquivalent)
-local shouldValidateR15LegacyDuplicateModule = require(parent.util.shouldValidateR15LegacyDuplicate)
+﻿local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local CreateExpectedSchemaModule = require(Parent.util.CreateExpectedSchema)
+local ValidateInstanceTreeAgainstSchemaModule = require(Parent.util.validateInstanceTreeAgainstSchema)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local GetEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule = require(Parent.flags.getEngineFeatureEngineUGCValidateInstanceTreesEquivalent)
+local ShouldValidateR15LegacyDuplicateModule = require(Parent.util.shouldValidateR15LegacyDuplicate)
 
 return {
-	categories = constantsModule.AllUploadCategories,
+	categories = require(Parent.Constants).AllUploadCategories,
 	requiredData = {
-		validationEnumsModule.SharedDataMember.entrypointInput,
-		validationEnumsModule.SharedDataMember.rootInstance,
-		validationEnumsModule.SharedDataMember.uploadCategory,
-		validationEnumsModule.SharedDataMember.uploadEnum,
-		validationEnumsModule.SharedDataMember.consumerConfig
+		ValidationEnumsModule.SharedDataMember.entrypointInput,
+		ValidationEnumsModule.SharedDataMember.rootInstance,
+		ValidationEnumsModule.SharedDataMember.uploadCategory,
+		ValidationEnumsModule.SharedDataMember.uploadEnum,
+		ValidationEnumsModule.SharedDataMember.consumerConfig
 	},
-	run = function(p1, p2)
-		-- upvalues: errorSourceStringsModule (ref), createExpectedSchemaModule (ref), validateInstanceTreeAgainstSchemaModule (ref), getEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule (ref), shouldValidateR15LegacyDuplicateModule (ref)
-		local rootInstance = p2.rootInstance
-		local uploadCategory = p2.uploadCategory
-		local uploadEnum = p2.uploadEnum
+	run = function(p1, p2) --[[ Line: 23 ]]
+		-- upvalues: ErrorSourceStringsModule (copy), CreateExpectedSchemaModule (copy), ValidateInstanceTreeAgainstSchemaModule (copy), GetEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule (copy), ShouldValidateR15LegacyDuplicateModule (copy)
+		local RootInstance = p2.rootInstance
+		local UploadCategory = p2.uploadCategory
+		local UploadEnum = p2.uploadEnum
 		
-		if rootInstance == nil then
-			p1:fail(errorSourceStringsModule.Keys.SelectionCountNotOne)
+		if RootInstance == nil then
+			p1:fail(ErrorSourceStringsModule.Keys.SelectionCountNotOne)
 			
 			return
 		end
-		local var1 = if uploadEnum.bundleType then if uploadEnum.bundleType == Enum.BundleType.Animations then createExpectedSchemaModule.generateAnimationPackBundleSchema() else createExpectedSchemaModule.generateBundleSchema(p2.entrypointInput) else createExpectedSchemaModule.generateAssetSchema(uploadCategory, uploadEnum.assetType, rootInstance)
-		validateInstanceTreeAgainstSchemaModule(rootInstance, var1, p1)
+		local AnimationPackBundleSchema = if UploadEnum.bundleType then if UploadEnum.bundleType == Enum.BundleType.Animations then CreateExpectedSchemaModule.generateAnimationPackBundleSchema() else CreateExpectedSchemaModule.generateBundleSchema(p2.entrypointInput) else CreateExpectedSchemaModule.generateAssetSchema(UploadCategory, UploadEnum.assetType, RootInstance)
+		ValidateInstanceTreeAgainstSchemaModule(RootInstance, AnimationPackBundleSchema, p1)
 		
-		if getEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule() and shouldValidateR15LegacyDuplicateModule(p2) then
+		if GetEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule() and ShouldValidateR15LegacyDuplicateModule(p2) then
 			if p2.r15LegacyDuplicateRoot == nil then
-				p1:fail(errorSourceStringsModule.Keys.FolderStructureMismatch)
+				p1:fail(ErrorSourceStringsModule.Keys.FolderStructureMismatch)
 				
 				return
 			end
 			p1:setReportingRoot(p2.r15LegacyDuplicateRoot)
-			validateInstanceTreeAgainstSchemaModule(p2.r15LegacyDuplicateRoot, var1, p1)
-			p1:setReportingRoot(rootInstance)
+			ValidateInstanceTreeAgainstSchemaModule(p2.r15LegacyDuplicateRoot, AnimationPackBundleSchema, p1)
+			p1:setReportingRoot(RootInstance)
 		end
 	end
 }

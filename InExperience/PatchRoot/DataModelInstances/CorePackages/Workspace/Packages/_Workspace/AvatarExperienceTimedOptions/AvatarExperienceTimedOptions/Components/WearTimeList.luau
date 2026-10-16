@@ -1,27 +1,27 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceTimedOptions").Parent
-local reactModule = require(parent.React)
-local view = require(parent.Foundation).View
-local _ = require(parent.AvatarExperienceCommon)
-local wearTimeListItemModule = require(script.Parent.WearTimeListItem)
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceTimedOptions").Parent
+local ReactModule = require(Parent.React)
+local View = require(Parent.Foundation).View
+local _ = require(Parent.AvatarExperienceCommon)
+local WearTimeListItemModule = require(script.Parent.WearTimeListItem)
 
-return function(p1)
-	-- upvalues: reactModule (ref), wearTimeListItemModule (ref), view (ref)
-	local t = {}
+return function(Frame) --[[ Line: 17 | Named "WearTimeList" ]]
+	-- upvalues: ReactModule (copy), WearTimeListItemModule (copy), View (copy)
+	local Elements = {}
 	
-	for i, v in p1.options do
-		t["WearTimeListItem_" .. tostring(i)] = reactModule.createElement(wearTimeListItemModule, {
-			days = v.days,
-			price = v.price,
-			isActive = if v.selected ~= nil then false else v.selected,
-			onActivated = if p1.onOptionActivated then function()
-				-- upvalues: p1 (ref), i (ref)
-				p1.onOptionActivated(i)
+	for LayoutOrder, option in Frame.options do
+		Elements["WearTimeListItem_" .. tostring(LayoutOrder)] = ReactModule.createElement(WearTimeListItemModule, {
+			days = option.days,
+			price = option.price,
+			isActive = option.selected ~= nil and option.selected,
+			onActivated = if Frame.onOptionActivated then function() --[[ Line: 26 ]]
+				-- upvalues: Frame (copy), LayoutOrder (copy)
+				Frame.onOptionActivated(LayoutOrder)
 			end else nil,
-			LayoutOrder = i
+			LayoutOrder = LayoutOrder
 		})
 	end
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col gap-small size-full-0 auto-y padding-small radius-medium stroke-default stroke-thick",
-		LayoutOrder = p1.LayoutOrder
-	}, t)
+		LayoutOrder = Frame.LayoutOrder
+	}, Elements)
 end

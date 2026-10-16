@@ -1,121 +1,119 @@
-﻿local parent = script.Parent.Parent
-local language = parent.language
-local luauPolyfillModule = require(parent.Parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local error = luauPolyfillModule.Error
-local object = luauPolyfillModule.Object
-local httpService = game:GetService("HttpService")
-local isObjectLike = require(parent.jsutils.isObjectLike).isObjectLike
-local _ = require(language.ast)
-local _ = require(language.source)
-local getLocation = require(language.location).getLocation
-local printLocationModule = require(language.printLocation)
-local printLocation = printLocationModule.printLocation
-local printSourceLocation = printLocationModule.printSourceLocation
-local var1 = nil
-local undefinedIfEmpty = nil
-local tbl = setmetatable({}, { __index = error })
-tbl.__index = tbl
+﻿local Parent = script.Parent.Parent
+local Language = Parent.language
+local LuauPolyfillModule = require(Parent.Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Error = LuauPolyfillModule.Error
+local Object = LuauPolyfillModule.Object
+local HttpService = game:GetService("HttpService")
+local IsObjectLikeFunction = require(Parent.jsutils.isObjectLike).isObjectLike
+local _ = require(Language.ast)
+local _ = require(Language.source)
+local GetLocationFunction = require(Language.location).getLocation
+local PrintLocationModule = require(Language.printLocation)
+local PrintLocationFunction = PrintLocationModule.printLocation
+local PrintSourceLocationFunction = PrintLocationModule.printSourceLocation
+local Callback = nil
+local Callback1 = nil
+local self = setmetatable({}, { __index = Error })
+self.__index = self
 
-function tbl:__tostring()
-	-- upvalues: var1 (write)
-	return var1(self)
+function self.__tostring(p1) --[[ Line: 45 ]]
+	-- upvalues: Callback (ref)
+	return Callback(p1)
 end
 
-function tbl.new(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: error (ref), undefinedIfEmpty (write), array (ref), getLocation (ref), isObjectLike (ref), object (ref), tbl (ref)
-	local graphQLError = error.new(p1)
-	graphQLError.name = "GraphQLError"
-	graphQLError.originalError = p6
-	graphQLError.nodes = undefinedIfEmpty(if array.isArray(p2) then p2 elseif p2 then { p2 } else nil)
-	local t = {}
+function self.new(p1, p2, p3, p4, p5, OriginalError, p6) --[[ Line: 124 ]]
+	-- upvalues: Error (copy), Callback1 (ref), Array (copy), GetLocationFunction (copy), IsObjectLikeFunction (copy), Object (copy), self (copy)
+	local NewError = Error.new(p1)
+	NewError.name = "GraphQLError"
+	NewError.originalError = OriginalError
+	NewError.nodes = Callback1(if Array.isArray(p2) then p2 elseif p2 then { p2 } else nil)
+	local List = {}
 	
-	if graphQLError.nodes then
-		for i, v in ipairs(graphQLError.nodes) do
-			local loc = v.loc
+	if NewError.nodes then
+		for _, node in ipairs(NewError.nodes) do
+			local Loc = node.loc
 			
-			if loc ~= nil then
-				table.insert(t, loc)
+			if Loc ~= nil then
+				table.insert(List, Loc)
 			end
 		end
 	end
-	local var2 = undefinedIfEmpty(t)
-	graphQLError.source = p3 or (if var2 == nil then nil else var2[1].source)
-	graphQLError.positions = p4 or (if not var2 then nil else array.map(var2, function(p8)
-		return p8.start
-	end))
-	var2 = if p4 and p3 then array.map(p4, function(p8)
-		-- upvalues: getLocation (copy), p3 (ref)
-		return getLocation(p3, p8)
-	end) elseif var2 then array.map(var2, function(p8)
-		-- upvalues: getLocation (copy)
-		return getLocation(p8.source, p8.start)
+	local CallbackResult = Callback1(List)
+	NewError.source = if p3 then p3 elseif CallbackResult == nil then nil else CallbackResult[1].source
+	NewError.positions = if p4 then p4 elseif CallbackResult then Array.map(CallbackResult, function(p7) --[[ Line: 165 ]]
+		return p7.start
 	end) else nil
-	graphQLError.locations = var2
-	graphQLError.path = p5 or nil
-	local var3 = if not p6 then nil else p6.extensions
+	NewError.locations = if p4 and p3 then Array.map(p4, function(p7) --[[ Line: 170 ]]
+		-- upvalues: GetLocationFunction (upval), p3 (copy)
+		return GetLocationFunction(p3, p7)
+	end) elseif CallbackResult then Array.map(CallbackResult, function(p7) --[[ Line: 174 ]]
+		-- upvalues: GetLocationFunction (upval)
+		return GetLocationFunction(p7.source, p7.start)
+	end) else nil
+	NewError.path = p5 or nil
+	local Extensions = if OriginalError then OriginalError.extensions else nil
 	
-	if p7 == nil and isObjectLike(var3) then
-		graphQLError.extensions = object.assign({}, var3)
+	if p6 == nil and IsObjectLikeFunction(Extensions) then
+		NewError.extensions = Object.assign({}, Extensions)
 	else
-		graphQLError.extensions = p7 or nil
+		NewError.extensions = p6 or nil
 	end
-	if p6 and p6.stack then
-		graphQLError.stack = p6.stack
+	if OriginalError and OriginalError.stack then
+		NewError.stack = OriginalError.stack
 	end
-	return setmetatable(graphQLError, tbl)
+	return (setmetatable(NewError, self))
 end
 
-function tbl.toString(p8)
-	-- upvalues: var1 (write)
-	return var1(p8)
+function self.toString(p7) --[[ Line: 209 ]]
+	-- upvalues: Callback (ref)
+	return Callback(p7)
 end
 
-function tbl:toJSON()
-	-- upvalues: array (ref), httpService (ref)
-	local list = { "message" }
+function self:toJSON(): string --[[ Line: 214 ]]
+	-- upvalues: Array (copy), HttpService (copy)
+	local List = { "message" }
 	
 	if self.locations ~= nil then
-		table.insert(list, "locations")
+		table.insert(List, "locations")
 	end
 	if self.path ~= nil then
-		table.insert(list, "path")
+		table.insert(List, "path")
 	end
 	if self.extensions ~= nil then
-		table.insert(list, "extensions")
+		table.insert(List, "extensions")
 	end
-	return "{" .. array.join(array.map(list, function(p8)
-		-- upvalues: httpService (copy), self (ref)
-		return httpService:JSONEncode(p8) .. ":" .. httpService:JSONEncode(self[p8])
+	return "{" .. Array.join(Array.map(List, function(Input): string --[[ Line: 231 ]]
+		-- upvalues: HttpService (upval), self (copy)
+		return HttpService:JSONEncode(Input) .. ":" .. HttpService:JSONEncode(self[Input])
 	end), ",") .. "}"
 end
 
-undefinedIfEmpty = function(p8)
-	return if p8 == nil or #p8 == 0 then nil else p8
+Callback1 = function(p7) --[[ Line: 239 | Named "undefinedIfEmpty" ]]
+	return if p7 == nil or #p7 == 0 then nil else p7
 end
 
-return {
-	printError = function(p8)
-		-- upvalues: printLocation (ref), printSourceLocation (ref)
-		local message = p8.message
-		
-		if p8.nodes == nil then
-			if p8.source ~= nil and p8.locations ~= nil then
-				for i_1 = 1, #p8.locations do
-					message ..= "\n\n" .. printSourceLocation(p8.source, p8.locations[i_1])
-				end
+Callback = function(p7) --[[ Line: 243 | Named "printError" ]]
+	-- upvalues: PrintLocationFunction (copy), PrintSourceLocationFunction (copy)
+	local Message = p7.message
+	
+	if p7.nodes == nil then
+		if p7.source ~= nil and p7.locations ~= nil then
+			for i1 = 1, #p7.locations do
+				Message ..= "\n\n" .. PrintSourceLocationFunction(p7.source, p7.locations[i1])
 			end
-			return message
-		else
-			for i = 1, #p8.nodes do
-				local var4 = p8.nodes[i]
-				
-				if var4.loc ~= nil then
-					message ..= "\n\n" .. printLocation(var4.loc)
-				end
-			end
-			return message
 		end
-	end,
-	GraphQLError = tbl
-}
+		return Message
+	else
+		for i = 1, #p7.nodes do
+			local Node = p7.nodes[i]
+			
+			if Node.loc ~= nil then
+				Message ..= "\n\n" .. PrintLocationFunction(Node.loc)
+			end
+		end
+		return Message
+	end
+end
+
+return { printError = Callback, GraphQLError = self }

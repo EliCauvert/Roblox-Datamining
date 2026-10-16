@@ -1,76 +1,77 @@
-﻿local chatConstantsModule = require(game:GetService("Chat"):WaitForChild("ClientChatModules"):WaitForChild("ChatConstants"))
-local var1 = false
-local ok, status = pcall(function()
+﻿local ChatConstantsModule = require(game:GetService("Chat"):WaitForChild("ClientChatModules"):WaitForChild("ChatConstants"))
+local v1 = false
+local Success, Result = pcall(function() --[[ Line: 11 ]]
 	return UserSettings():IsUserFeatureEnabled("UserAddChatThrottlingToAllChannels")
 end)
 
-if ok then
-	var1 = status
+if Success then
+	v1 = Result
 end
-local var2 = var1
+local NoV1 = not v1
 local t = {}
-local t_1 = {}
-local t_2 = nil
-pcall(function()
-	-- upvalues: t_2 (write)
-	t_2 = require(game:GetService("Chat").ClientChatModules.ChatLocalization)
+local t1 = {}
+local ChatLocalizationModule = nil
+pcall(function() --[[ Line: 33 ]]
+	-- upvalues: ChatLocalizationModule (ref)
+	ChatLocalizationModule = require(game:GetService("Chat").ClientChatModules.ChatLocalization)
 end)
 
-if t_2 == nil then
-	t_2 = {}
+if ChatLocalizationModule == nil then
+	ChatLocalizationModule = {}
 end
-if not t_2.FormatMessageToSend or not t_2.LocalizeFormattedMessage then
-	function t_2.FormatMessageToSend(_, _, p1)
-		return p1
+if not ChatLocalizationModule.FormatMessageToSend or not ChatLocalizationModule.LocalizeFormattedMessage then
+	function ChatLocalizationModule:FormatMessageToSend(_, Formatted) --[[ Line: 37 ]]
+		return Formatted
 	end
 end
-local function _(p1)
-	table.insert(p1, tick() + 15)
+local function _(List) --[[ Line: 40 | Named "EnterTimeIntoLog" ]]
+	table.insert(List, tick() + 15)
 end
 
-return function(p1)
-	-- upvalues: t_1 (ref), t (ref), var2 (write), t_2 (write), chatConstantsModule (ref)
-	p1:RegisterProcessCommandsFunction("flood_detection", function(p2, _, p3)
-		-- upvalues: t_1 (copy), p1 (ref), t (copy), var2 (copy), t_2 (copy)
-		if t_1[p2] then
+return function(p1) --[[ Line: 44 | Named "Run" ]]
+	-- upvalues: t1 (copy), t (copy), NoV1 (ref), ChatLocalizationModule (ref), ChatConstantsModule (copy)
+	p1:RegisterProcessCommandsFunction("flood_detection", function(Key, _, p2): boolean --[[ Line: 45 | Named "FloodDetectionProcessCommandsFunction" ]]
+		-- upvalues: t1 (upval), p1 (copy), t (upval), NoV1 (upval), ChatLocalizationModule (upval)
+		if t1[Key] then
 			return false
 		end
-		local var3 = p1:GetSpeaker(p2)
+		local Speaker = p1:GetSpeaker(Key)
 		
-		if not var3 then
+		if not Speaker then
 			return false
-		elseif not var3:GetPlayer() then
-			return false
-		elseif not t[p2] then
-			t[p2] = {}
 		end
-		local var4
-		local _ = nil
-		
-		if var2 then
-			if not t[p2][p3] then
-				t[p2][p3] = {}
+		if not Speaker:GetPlayer() then
+			return false
+		end
+		if not t[Key] then
+			t[Key] = {}
+		end
+		local Entry = nil
+		if NoV1 then
+			if not t[Key][p2] then
+				t[Key][p2] = {}
 			end
-			var4 = t[p2][p3]
+			Entry = t[Key][p2]
 		else
-			var4 = t[p2]
+			Entry = t[Key]
 		end
-		local currentTime = tick()
-		while #var4 > 0 and var4[1] < currentTime do
-			table.remove(var4, 1)
+		local CurrentTime = tick()
+		while #Entry > 0 and Entry[1] < CurrentTime do
+			table.remove(Entry, 1)
 		end
-		if #var4 < 7 then
-			table.insert(var4, tick() + 15)
+		if #Entry < 7 then
+			table.insert(Entry, tick() + 15)
 			
 			return false
+		else
+			local Ceiled = math.ceil(Entry[1] - CurrentTime)
+			Speaker:SendSystemMessage(ChatLocalizationModule:FormatMessageToSend("GameChat_ChatFloodDetector_MessageDisplaySeconds", string.format("You must wait %d %s before sending another message!", Ceiled, if Ceiled > 1 then "seconds" else "second"), "RBX_NUMBER", (tostring(Ceiled))), p2)
+			
+			return true
 		end
-		local ceiled = math.ceil(var4[1] - currentTime)
-		var3:SendSystemMessage(t_2:FormatMessageToSend("GameChat_ChatFloodDetector_MessageDisplaySeconds", string.format("You must wait %d %s before sending another message!", ceiled, if ceiled > 1 then "seconds" else "second"), "RBX_NUMBER", tostring(ceiled)), p3)
-		
-		return true
-	end, chatConstantsModule.LowPriority)
-	p1.SpeakerRemoved:connect(function(p4)
-		-- upvalues: t (copy)
-		t[p4] = nil
+	end, ChatConstantsModule.LowPriority)
+	p1.SpeakerRemoved:connect(function(Key) --[[ Line: 102 ]]
+		-- upvalues: t (upval)
+		t[Key] = nil
 	end)
 end

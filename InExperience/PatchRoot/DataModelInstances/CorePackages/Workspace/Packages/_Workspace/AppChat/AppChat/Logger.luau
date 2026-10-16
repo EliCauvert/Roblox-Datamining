@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("AppChat").Parent.Loggers).Logger:new("AppChat")
+﻿return (require(script:FindFirstAncestor("AppChat").Parent.Loggers).Logger:new("AppChat"))

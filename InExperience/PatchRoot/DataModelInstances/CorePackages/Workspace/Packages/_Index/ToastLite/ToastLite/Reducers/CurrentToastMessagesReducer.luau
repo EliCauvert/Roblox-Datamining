@@ -1,43 +1,42 @@
-﻿local parent = script:FindFirstAncestor("ToastLite").Parent
-local cryoModule = require(parent.Cryo)
-local roduxModule = require(parent.Rodux)
-local toastRoduxModule = require(parent.ToastRodux)
+﻿local Parent = script:FindFirstAncestor("ToastLite").Parent
+local CryoModule = require(Parent.Cryo)
+local ToastRoduxModule = require(Parent.ToastRodux)
 
-local function _(p1, p2)
-	return p1.toastTitle == p2.toastTitle and (p1.toastSubtitle == p2.toastSubtitle and p1.toastType == p2.toastType)
+local function _(p1, p2): boolean --[[ Line: 8 | Named "messagesAreEqual" ]]
+	return p1.toastTitle == p2.toastTitle and p1.toastSubtitle == p2.toastSubtitle and p1.toastType == p2.toastType
 end
 
-local _ = function(p1, p2)
-	for i, v in ipairs(p1) do
-		if v.toastTitle == p2.toastTitle and (v.toastSubtitle == p2.toastSubtitle and v.toastType == p2.toastType) then
+local _ = function(List, p1): boolean --[[ Line: 14 | Named "messageIsAlreadyPresent" ]]
+	for _, value in ipairs(List) do
+		if value.toastTitle == p1.toastTitle and (value.toastSubtitle == p1.toastSubtitle and value.toastType == p1.toastType) then
 			return true
 		end
 	end
 	return false
 end
 
-local var1 = 0
+local SequenceNumber = 0
 
-return roduxModule.createReducer({}, {
-	[toastRoduxModule.Actions.SetCurrentToastMessage.name] = function(p3, p4)
-		-- upvalues: cryoModule (ref), var1 (write)
-		local var2
-		local var3 = cryoModule.Dictionary.join(p4.toastMessage, { sequenceNumber = var1 })
-		var1 += 1
+return require(Parent.Rodux).createReducer({}, {
+	[ToastRoduxModule.Actions.SetCurrentToastMessage.name] = function(List, p2) --[[ Line: 26 ]]
+		-- upvalues: CryoModule (copy), SequenceNumber (ref)
+		local JoinResult = CryoModule.Dictionary.join(p2.toastMessage, { sequenceNumber = SequenceNumber })
+		SequenceNumber += 1
+		local Flag = false
 		
-		for i, v in ipairs(p3) do
-			if v.toastTitle == var3.toastTitle and (v.toastSubtitle == var3.toastSubtitle and v.toastType == var3.toastType) then
-				var2 = true
-				return if var2 then p3 else cryoModule.List.join(p3, { var3 })
+		for _, value in ipairs(List) do
+			if value.toastTitle == JoinResult.toastTitle and (value.toastSubtitle == JoinResult.toastSubtitle and value.toastType == JoinResult.toastType) then
+				Flag = true
+				break
 			end
 		end
-		var2 = false
+		return if Flag then List else CryoModule.List.join(List, { JoinResult })
 	end,
-	[toastRoduxModule.Actions.RemoveCurrentToastMessage.name] = function(p5, _)
-		-- upvalues: cryoModule (ref)
-		return if #p5 == 0 then p5 else cryoModule.List.removeIndex(p5, 1)
+	[ToastRoduxModule.Actions.RemoveCurrentToastMessage.name] = function(p3, _) --[[ Line: 39 ]]
+		-- upvalues: CryoModule (copy)
+		return if #p3 == 0 then p3 else CryoModule.List.removeIndex(p3, 1)
 	end,
-	[toastRoduxModule.Actions.RemoveAllToastMessages.name] = function(_, _)
+	[ToastRoduxModule.Actions.RemoveAllToastMessages.name] = function(_, _) --[[ Line: 46 ]]
 		return {}
 	end
 })

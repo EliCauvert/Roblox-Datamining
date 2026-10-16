@@ -1,5 +1,6 @@
-﻿local parent = script:FindFirstAncestor("ProfilePlatform").Parent
-local fFlagProfilePlatformMeTabMobileProfileHero = require(parent.SharedFlags).FFlagProfilePlatformMeTabMobileProfileHero
+﻿local Parent = script:FindFirstAncestor("ProfilePlatform").Parent
+local FFlagProfilePlatformNewProfileHeader = require(Parent.SharedFlags).FFlagProfilePlatformNewProfileHeader
+local FFlagProfilePlatformMeTabMobileProfileHero = require(Parent.SharedFlags).FFlagProfilePlatformMeTabMobileProfileHero
 
 return {
 	RODUX_KEY = "ProfilePlatform",
@@ -15,18 +16,18 @@ return {
 		ON_DISMISS_REF = "onDismissRef"
 	},
 	USER_PROFILE_HEADER_HEIGHT = if game:DefineFastFlag("ResponsiveUnitsProfileHeader", false) then 250 else 400,
-	ME_TAB_MOBILE_AVATAR_HEIGHT_ASPECT = if fFlagProfilePlatformMeTabMobileProfileHero then 0.75 else nil,
-	ME_TAB_MOBILE_TOP_BACKGROUND_INSET_RATIO = if fFlagProfilePlatformMeTabMobileProfileHero then 0.295165394402 else nil,
-	ME_TAB_MOBILE_BACKGROUND_SCALE_X = if fFlagProfilePlatformMeTabMobileProfileHero then 1.6 else nil,
-	ME_TAB_MOBILE_BACKGROUND_OFFSET_Y_RATIO = if fFlagProfilePlatformMeTabMobileProfileHero then -0.14 else nil,
-	ME_TAB_MOBILE_BACKGROUND_SCALE_Y = if fFlagProfilePlatformMeTabMobileProfileHero then 1.16 else nil,
-	ME_TAB_MOBILE_AVATAR_OFFSET_Y_RATIO = if fFlagProfilePlatformMeTabMobileProfileHero then 0.06 else nil,
-	ME_TAB_MOBILE_AVATAR_EXTRA_HEIGHT = if fFlagProfilePlatformMeTabMobileProfileHero then 16 else nil,
-	ME_TAB_MOBILE_AVATAR_DOWN_OFFSET = if fFlagProfilePlatformMeTabMobileProfileHero then 16 else nil,
-	ME_TAB_MOBILE_CAMERA_DISTANCE_SCALE = if fFlagProfilePlatformMeTabMobileProfileHero then 1.12 else nil,
+	ME_TAB_MOBILE_AVATAR_HEIGHT_ASPECT = if FFlagProfilePlatformMeTabMobileProfileHero then 0.75 else nil,
+	ME_TAB_MOBILE_TOP_BACKGROUND_INSET_RATIO = if FFlagProfilePlatformMeTabMobileProfileHero then 0.2951653944020356 else nil,
+	ME_TAB_MOBILE_BACKGROUND_SCALE_X = if FFlagProfilePlatformMeTabMobileProfileHero then 1.6 else nil,
+	ME_TAB_MOBILE_BACKGROUND_OFFSET_Y_RATIO = if FFlagProfilePlatformMeTabMobileProfileHero then -0.14 else nil,
+	ME_TAB_MOBILE_BACKGROUND_SCALE_Y = if FFlagProfilePlatformMeTabMobileProfileHero then 1.16 else nil,
+	ME_TAB_MOBILE_AVATAR_OFFSET_Y_RATIO = if FFlagProfilePlatformMeTabMobileProfileHero then 0.06 else nil,
+	ME_TAB_MOBILE_AVATAR_EXTRA_HEIGHT = if FFlagProfilePlatformMeTabMobileProfileHero then 16 else nil,
+	ME_TAB_MOBILE_AVATAR_DOWN_OFFSET = if FFlagProfilePlatformMeTabMobileProfileHero then 16 else nil,
+	ME_TAB_MOBILE_CAMERA_DISTANCE_SCALE = if FFlagProfilePlatformMeTabMobileProfileHero then 1.12 else nil,
 	PAGE_PADDING = 24,
 	THUMBNAIL_PADDING = 48,
-	USER_PROFILE_GRADIENT_HEIGHT = if require(parent.SharedFlags).FFlagProfilePlatformNewProfileHeader then 90 else 158,
+	USER_PROFILE_GRADIENT_HEIGHT = if FFlagProfilePlatformNewProfileHeader then 90 else 158,
 	CONTACT_CARD_GRADIENT_HEIGHT = 70,
 	CONTEXTUAL_INFORMATION_HEIGHT = 20,
 	FOLLOWERS_ROW_HEIGHT = 44,

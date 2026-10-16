@@ -1,447 +1,426 @@
-﻿local sduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
-local parent = sduiCoreSystem.Parent
-local buildDefaultPropModule = require(sduiCoreSystem.ClientBinding.PropBuilder.buildDefaultProp)
-local buildStringPropModule = require(sduiCoreSystem.ClientBinding.PropBuilder.buildStringProp)
-local buildTablePropModule = require(sduiCoreSystem.ClientBinding.PropBuilder.buildTableProp)
-local buildRepeatedPropModule = require(sduiCoreSystem.ClientBinding.PropBuilder.buildRepeatedProp)
-local buildContainerPropModule = require(sduiCoreSystem.ClientBinding.PropBuilder.buildContainerProp)
-local buildNestedComponentPropModule = require(sduiCoreSystem.ClientBinding.PropBuilder.buildNestedComponentProp)
-local buildLazyNestedComponentPropModule = require(sduiCoreSystem.ClientBinding.PropBuilder.buildLazyNestedComponentProp)
-local buildLazyNestedComponentListPropModule = require(sduiCoreSystem.ClientBinding.PropBuilder.buildLazyNestedComponentListProp)
-local buildNestedComponentListPropModule = require(sduiCoreSystem.ClientBinding.PropBuilder.buildNestedComponentListProp)
-local buildActionPropModule = require(sduiCoreSystem.ClientBinding.PropBuilder.buildActionProp)
-local sduiParsersModule = require(sduiCoreSystem.SduiParsers)
-local _ = require(sduiCoreSystem.ClientBinding.SduiClientBindingTypes)
-local sduiClientBindingParsersModule = require(sduiCoreSystem.ClientBinding.PropBuilder.SduiClientBindingParsers)
-local protoVariableMapperModule = require(sduiCoreSystem.ClientBinding.ProtoVariableMapper)
-local fFlagSduiEventDetailsSupport = require(parent.SharedFlags).FFlagSduiEventDetailsSupport
-local fFlagSduiLazyNestedComponentProp = require(parent.SharedFlags).FFlagSduiLazyNestedComponentProp
-local fFlagSduiMarketplaceCatalogCategorySupport = require(parent.SharedFlags).FFlagSduiMarketplaceCatalogCategorySupport
-local fFlagSduiMarketplaceCatalogSortSupport = require(parent.SharedFlags).FFlagSduiMarketplaceCatalogSortSupport
-local fFlagSduiCatalogItemCard = require(parent.SharedFlags).FFlagSduiCatalogItemCard
-local fFlagSduiSystemBannerComponent = require(parent.SharedFlags).FFlagSduiSystemBannerComponent
-local fFlagSduiBannerContextComponent = require(parent.SharedFlags).FFlagSduiBannerContextComponent
-local fFlagLuaAppSduiColorPropMigration = require(parent.SharedFlags).FFlagLuaAppSduiColorPropMigration
-local fFlagSduiParseProtoGradientFields = require(parent.SharedFlags).FFlagSduiParseProtoGradientFields
-local fFlagLuaAppSduiHomePageSupport = require(parent.SharedFlags).FFlagLuaAppSduiHomePageSupport
-local fFlagSduiListComponents = require(parent.SharedFlags).FFlagSduiListComponents
+﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
+local Parent = SduiCoreSystem.Parent
+local BuildDefaultPropModule = require(SduiCoreSystem.ClientBinding.PropBuilder.buildDefaultProp)
+local BuildStringPropModule = require(SduiCoreSystem.ClientBinding.PropBuilder.buildStringProp)
+local BuildTablePropModule = require(SduiCoreSystem.ClientBinding.PropBuilder.buildTableProp)
+local BuildRepeatedPropModule = require(SduiCoreSystem.ClientBinding.PropBuilder.buildRepeatedProp)
+local BuildContainerPropModule = require(SduiCoreSystem.ClientBinding.PropBuilder.buildContainerProp)
+local BuildActionPropModule = require(SduiCoreSystem.ClientBinding.PropBuilder.buildActionProp)
+local SduiParsersModule = require(SduiCoreSystem.SduiParsers)
+local _ = require(SduiCoreSystem.ClientBinding.SduiClientBindingTypes)
+local SduiClientBindingParsersModule = require(SduiCoreSystem.ClientBinding.PropBuilder.SduiClientBindingParsers)
+local ProtoVariableMapperModule = require(SduiCoreSystem.ClientBinding.ProtoVariableMapper)
+local FFlagSduiMarketplaceCatalogCategorySupport = require(Parent.SharedFlags).FFlagSduiMarketplaceCatalogCategorySupport
+local FFlagSduiMarketplaceCatalogSortSupport = require(Parent.SharedFlags).FFlagSduiMarketplaceCatalogSortSupport
+local FFlagSduiCatalogItemCard = require(Parent.SharedFlags).FFlagSduiCatalogItemCard
+local FFlagSduiSystemBannerComponent = require(Parent.SharedFlags).FFlagSduiSystemBannerComponent
+local FFlagSduiBannerContextComponent = require(Parent.SharedFlags).FFlagSduiBannerContextComponent
+local FFlagSduiListComponents = require(Parent.SharedFlags).FFlagSduiListComponents
 
-local function _(p1, p2)
-	return function(p3, p4, p5, p6, p7, p8)
-		-- upvalues: p1 (ref), p2 (ref)
-		local var1, var2 = p1(p3, p4, p5, p6, p7, p8, p2)
+local function _(p1, p2) --[[ Line: 62 | Named "applyParser" ]]
+	return function(p3, p4, p5, p6, p7, p8) --[[ Line: 66 ]]
+		-- upvalues: p1 (copy), p2 (copy)
+		local v1, v2 = p1(p3, p4, p5, p6, p7, p8, p2)
 		
-		return var1, var2
+		return v1, v2
 	end
 end
 
-local _ = function(p1, p2)
-	-- upvalues: buildDefaultPropModule (ref), sduiParsersModule (ref), protoVariableMapperModule (ref)
-	local var1 = function(p3)
-		-- upvalues: sduiParsersModule (copy), p1 (ref), protoVariableMapperModule (copy), p2 (ref)
-		return protoVariableMapperModule.mapProtoEngineEnumToLua(p3, p2, sduiParsersModule.getEngineEnumParser(p1))
+local _ = function(p1, p2) --[[ Line: 87 | Named "createEngineEnumProtoBuilder" ]]
+	-- upvalues: BuildDefaultPropModule (copy), SduiParsersModule (copy), ProtoVariableMapperModule (copy)
+	local function v80(p3) --[[ Line: 88 ]]
+		-- upvalues: SduiParsersModule (upval), p1 (copy), ProtoVariableMapperModule (upval), p2 (copy)
+		return ProtoVariableMapperModule.mapProtoEngineEnumToLua(p3, p2, (SduiParsersModule.getEngineEnumParser(p1)))
 	end
 	
-	return function(p3, p4, p5, p6, p7, p8)
-		-- upvalues: buildDefaultPropModule (ref), var1 (ref)
-		local var2, var3 = buildDefaultPropModule(p3, p4, p5, p6, p7, p8, var1)
+	return function(p3, p4, p5, p6, p7, p8) --[[ Line: 66 ]]
+		-- upvalues: BuildDefaultPropModule (copy), v80 (copy)
+		local v1, v2 = BuildDefaultPropModule(p3, p4, p5, p6, p7, p8, v80)
 		
-		return var2, var3
+		return v1, v2
 	end
 end
 
-local t = {
-	StringProp = buildStringPropModule,
-	BoolProp = buildDefaultPropModule,
-	FloatProp = buildDefaultPropModule,
-	DoubleProp = buildDefaultPropModule,
-	Int32Prop = buildDefaultPropModule,
-	Int64Prop = buildDefaultPropModule
+local ParseStruct = SduiClientBindingParsersModule.parseStruct
+
+local function StructProp(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+	-- upvalues: BuildDefaultPropModule (copy), ParseStruct (copy)
+	local v1, v2 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, ParseStruct)
+	
+	return v1, v2
+end
+
+local ParseImageStringProp = SduiParsersModule.parseImageStringProp_
+
+local function ImageStringProp(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+	-- upvalues: BuildStringPropModule (copy), ParseImageStringProp (copy)
+	local v1, v2 = BuildStringPropModule(p1, p2, p3, p4, p5, p6, ParseImageStringProp)
+	
+	return v1, v2
+end
+
+local ParseImageSetOrImageProp = SduiParsersModule.parseImageSetOrImageProp_
+
+local function ImageSetProp(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+	-- upvalues: BuildStringPropModule (copy), ParseImageSetOrImageProp (copy)
+	local v1, v2 = BuildStringPropModule(p1, p2, p3, p4, p5, p6, ParseImageSetOrImageProp)
+	
+	return v1, v2
+end
+
+local ParseColorPropLegacy = SduiClientBindingParsersModule.parseColorPropLegacy
+
+local function ColorProp(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+	-- upvalues: BuildDefaultPropModule (copy), ParseColorPropLegacy (copy)
+	local v1, v2 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, ParseColorPropLegacy)
+	
+	return v1, v2
+end
+
+local ParseColor3 = SduiClientBindingParsersModule.parseColor3
+
+local function Color3Prop(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+	-- upvalues: BuildDefaultPropModule (copy), ParseColor3 (copy)
+	local v1, v2 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, ParseColor3)
+	
+	return v1, v2
+end
+
+local ParseUDim = SduiClientBindingParsersModule.parseUDim
+
+local function UDimProp(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+	-- upvalues: BuildDefaultPropModule (copy), ParseUDim (copy)
+	local v1, v2 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, ParseUDim)
+	
+	return v1, v2
+end
+
+local ParseUDim2 = SduiClientBindingParsersModule.parseUDim2
+
+local function UDim2Prop(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+	-- upvalues: BuildDefaultPropModule (copy), ParseUDim2 (copy)
+	local v1, v2 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, ParseUDim2)
+	
+	return v1, v2
+end
+
+local ParseVector2Prop = SduiParsersModule.parseVector2Prop_
+
+local function Vector2Prop(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+	-- upvalues: BuildDefaultPropModule (copy), ParseVector2Prop (copy)
+	local v1, v2 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, ParseVector2Prop)
+	
+	return v1, v2
+end
+
+local ParseStringArray = SduiClientBindingParsersModule.parseStringArray
+
+local function StringArrayProp(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+	-- upvalues: BuildDefaultPropModule (copy), ParseStringArray (copy)
+	local v1, v2 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, ParseStringArray)
+	
+	return v1, v2
+end
+
+local ParseIconProp = SduiParsersModule.parseIconProp_
+local ParseGradient = if require(Parent.SharedFlags).FFlagSduiParseProtoGradientFields then SduiClientBindingParsersModule.parseGradient else SduiParsersModule.parseGradientProp_
+local ParseArrayOfStruct = SduiClientBindingParsersModule.parseArrayOfStruct
+local config = {
+	StringProp = BuildStringPropModule,
+	BoolProp = BuildDefaultPropModule,
+	FloatProp = BuildDefaultPropModule,
+	DoubleProp = BuildDefaultPropModule,
+	Int32Prop = BuildDefaultPropModule,
+	Int64Prop = BuildDefaultPropModule,
+	StructProp = StructProp,
+	ImageStringProp = ImageStringProp,
+	ImageSetProp = ImageSetProp,
+	ColorProp = ColorProp,
+	Color3Prop = Color3Prop,
+	TypographyProp = BuildDefaultPropModule,
+	TypographyFontProp = BuildDefaultPropModule,
+	UDimProp = UDimProp,
+	UDim2Prop = UDim2Prop,
+	Vector2Prop = Vector2Prop,
+	NestedComponentProp = require(SduiCoreSystem.ClientBinding.PropBuilder.buildNestedComponentProp),
+	LazyNestedComponentProp = require(SduiCoreSystem.ClientBinding.PropBuilder.buildLazyNestedComponentProp),
+	NestedComponentListProp = require(SduiCoreSystem.ClientBinding.PropBuilder.buildNestedComponentListProp),
+	LazyNestedComponentListProp = require(SduiCoreSystem.ClientBinding.PropBuilder.buildLazyNestedComponentListProp),
+	StringArrayProp = StringArrayProp,
+	IconProp = function(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+		-- upvalues: BuildDefaultPropModule (copy), ParseIconProp (copy)
+		local v1, v2 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, ParseIconProp)
+		
+		return v1, v2
+	end,
+	GradientProp = function(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+		-- upvalues: BuildDefaultPropModule (copy), ParseGradient (copy)
+		local v1, v2 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, ParseGradient)
+		
+		return v1, v2
+	end,
+	ArrayOfStructProp = function(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+		-- upvalues: BuildDefaultPropModule (copy), ParseArrayOfStruct (copy)
+		local v1, v2 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, ParseArrayOfStruct)
+		
+		return v1, v2
+	end
 }
-local parseStruct = sduiClientBindingParsersModule.parseStruct
 
-function t.StructProp(p1, p2, p3, p4, p5, p6)
-	-- upvalues: buildDefaultPropModule (ref), parseStruct (ref)
-	local var1, var2 = buildDefaultPropModule(p1, p2, p3, p4, p5, p6, parseStruct)
+if require(Parent.SharedFlags).FFlagLuaAppSduiHomePageSupport then
+	local ParsePymkItems = SduiClientBindingParsersModule.parsePymkItems
 	
-	return var1, var2
-end
-
-local parseImageStringProp = sduiParsersModule.parseImageStringProp_
-
-function t.ImageStringProp(p1, p2, p3, p4, p5, p6)
-	-- upvalues: buildStringPropModule (ref), parseImageStringProp (ref)
-	local var1, var2 = buildStringPropModule(p1, p2, p3, p4, p5, p6, parseImageStringProp)
-	
-	return var1, var2
-end
-
-local parseImageSetOrImageProp = sduiParsersModule.parseImageSetOrImageProp_
-
-function t.ImageSetProp(p1, p2, p3, p4, p5, p6)
-	-- upvalues: buildStringPropModule (ref), parseImageSetOrImageProp (ref)
-	local var1, var2 = buildStringPropModule(p1, p2, p3, p4, p5, p6, parseImageSetOrImageProp)
-	
-	return var1, var2
-end
-
-if fFlagLuaAppSduiColorPropMigration then
-	local parseColorPropLegacy = sduiClientBindingParsersModule.parseColorPropLegacy
-	
-	local var1 = function(p1, p2, p3, p4, p5, p6)
-		-- upvalues: buildDefaultPropModule (ref), parseColorPropLegacy (ref)
-		local var2, var3 = buildDefaultPropModule(p1, p2, p3, p4, p5, p6, parseColorPropLegacy)
+	local function ArrayOfPymkItemDataProp(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+		-- upvalues: BuildDefaultPropModule (copy), ParsePymkItems (copy)
+		local v1, v2 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, ParsePymkItems)
 		
-		return var2, var3
+		return v1, v2
 	end
 else
-	local fromHex = Color3.fromHex
+	local ArrayOfPymkItemDataProp: ((any, any, any, any, any, any) -> any)? = nil
+end
+config.ArrayOfPymkItemDataProp = ArrayOfPymkItemDataProp
+config.ActionProp = BuildActionPropModule
+config.TableProp = BuildTablePropModule
+config.ContainerProp = BuildContainerPropModule
+config.ArrayOfMenuItemProp = BuildRepeatedPropModule
+config.MenuItemProp = BuildTablePropModule
+config.MenuItem = BuildTablePropModule
+config.GenericShareLinkData = BuildTablePropModule
+config.ShareLinkFetchData = BuildTablePropModule
+config.ExperienceShareLinkPayload = BuildTablePropModule
+config.EventShareLinkPayload = BuildTablePropModule
+config.MediaGallerySchema_MediaItemArrayProp = BuildRepeatedPropModule
+config.ArrayOfSystemBannerActionsProp = if FFlagSduiSystemBannerComponent then BuildRepeatedPropModule else nil
+config.SystemBannerActionProp = if FFlagSduiSystemBannerComponent then BuildTablePropModule else nil
+config.FoundationInternalNoticeLinkProp = if FFlagSduiBannerContextComponent then BuildTablePropModule else nil
+config.FoundationInternalNoticeLink = if FFlagSduiBannerContextComponent then BuildTablePropModule else nil
+config.FoundationIconConfigProp = BuildTablePropModule
+config.HoldActionConfigProp = BuildTablePropModule
+config.HoldActionConfig = BuildTablePropModule
+config.OpenPurchasePromptAction_ProductPayload = BuildTablePropModule
+config.OpenPurchasePromptAction_DisplayInfo = BuildTablePropModule
+config.OpenPurchasePromptAction_PurchaseOptions = BuildTablePropModule
+config.OpenPurchasePromptAction_PurchaseAnalyticsMetadata = BuildTablePropModule
+config.ArrayOfCatalogCategoryMenuItemProp = if FFlagSduiMarketplaceCatalogCategorySupport then BuildRepeatedPropModule else nil
+config.CatalogCategoryMenuItem = if FFlagSduiMarketplaceCatalogCategorySupport then BuildTablePropModule else nil
+config.ArrayOfCategoryMenuButtonProp = if FFlagSduiMarketplaceCatalogCategorySupport then BuildRepeatedPropModule else nil
+config.CategoryMenuButtonProp = if FFlagSduiMarketplaceCatalogCategorySupport then BuildTablePropModule else nil
+config.CategoryMenuButton = if FFlagSduiMarketplaceCatalogCategorySupport then BuildTablePropModule else nil
+config.ArrayOfCatalogCategoryMenuTooltipInfoProp = if FFlagSduiMarketplaceCatalogCategorySupport then BuildRepeatedPropModule else nil
+config.CatalogCategoryMenuTooltipInfoProp = if FFlagSduiMarketplaceCatalogCategorySupport then BuildTablePropModule else nil
+config.CatalogCategoryMenuTooltipInfo = if FFlagSduiMarketplaceCatalogCategorySupport then BuildTablePropModule else nil
+config.ArrayOfTooltipInfoActionsProp = if FFlagSduiMarketplaceCatalogCategorySupport then BuildRepeatedPropModule else nil
+config.TooltipInfoActionPropsProp = if FFlagSduiMarketplaceCatalogCategorySupport then BuildTablePropModule else nil
+config.TooltipInfoActionProps = if FFlagSduiMarketplaceCatalogCategorySupport then BuildTablePropModule else nil
+config.ArrayOfCatalogSortContentProp = if FFlagSduiMarketplaceCatalogSortSupport then BuildRepeatedPropModule else nil
+config.ArrayOfItemFooterProp = if FFlagSduiMarketplaceCatalogSortSupport then BuildRepeatedPropModule else nil
+config.CardStyleProp = if FFlagSduiMarketplaceCatalogSortSupport or FFlagSduiCatalogItemCard then BuildTablePropModule else nil
+config.AnalyticsDataField = BuildDefaultPropModule
+local AutomaticSize = Enum.AutomaticSize
+local v1 = "AUTOMATIC_SIZE_"
+
+local function v46(p1) --[[ Line: 88 ]]
+	-- upvalues: SduiParsersModule (copy), AutomaticSize (copy), ProtoVariableMapperModule (copy), v1 (copy)
+	return ProtoVariableMapperModule.mapProtoEngineEnumToLua(p1, v1, (SduiParsersModule.getEngineEnumParser(AutomaticSize)))
+end
+
+function config.AutomaticSizeProp(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+	-- upvalues: BuildDefaultPropModule (copy), v46 (copy)
+	local v2, v3 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, v46)
 	
-	local var1 = function(p1, p2, p3, p4, p5, p6)
-		-- upvalues: buildDefaultPropModule (ref), fromHex (ref)
-		local var2, var3 = buildDefaultPropModule(p1, p2, p3, p4, p5, p6, fromHex)
-		
-		return var2, var3
-	end
+	return v2, v3
 end
-t.ColorProp = var1
 
-if fFlagLuaAppSduiColorPropMigration then
-	local parseColor3 = sduiClientBindingParsersModule.parseColor3
+local TextTruncate = Enum.TextTruncate
+local v2 = "TEXT_TRUNCATE_"
+
+local function v49(p1) --[[ Line: 88 ]]
+	-- upvalues: SduiParsersModule (copy), TextTruncate (copy), ProtoVariableMapperModule (copy), v2 (copy)
+	return ProtoVariableMapperModule.mapProtoEngineEnumToLua(p1, v2, (SduiParsersModule.getEngineEnumParser(TextTruncate)))
+end
+
+function config.TextTruncateProp(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+	-- upvalues: BuildDefaultPropModule (copy), v49 (copy)
+	local v3, v4 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, v49)
 	
-	local var2 = function(p1, p2, p3, p4, p5, p6)
-		-- upvalues: buildDefaultPropModule (ref), parseColor3 (ref)
-		local var3, var4 = buildDefaultPropModule(p1, p2, p3, p4, p5, p6, parseColor3)
-		
-		return var3, var4
-	end
-else
-	local var2 = nil
+	return v3, v4
 end
-t.Color3Prop = var2
-t.TypographyProp = buildDefaultPropModule
-t.TypographyFontProp = buildDefaultPropModule
-local parseUDim = sduiClientBindingParsersModule.parseUDim
 
-function t.UDimProp(p1, p2, p3, p4, p5, p6)
-	-- upvalues: buildDefaultPropModule (ref), parseUDim (ref)
-	local var3, var4 = buildDefaultPropModule(p1, p2, p3, p4, p5, p6, parseUDim)
+local TextXAlignment = Enum.TextXAlignment
+local v3 = "TEXT_X_ALIGNMENT_"
+
+local function v52(p1) --[[ Line: 88 ]]
+	-- upvalues: SduiParsersModule (copy), TextXAlignment (copy), ProtoVariableMapperModule (copy), v3 (copy)
+	return ProtoVariableMapperModule.mapProtoEngineEnumToLua(p1, v3, (SduiParsersModule.getEngineEnumParser(TextXAlignment)))
+end
+
+function config.TextXAlignmentProp(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+	-- upvalues: BuildDefaultPropModule (copy), v52 (copy)
+	local v4, v5 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, v52)
 	
-	return var3, var4
+	return v4, v5
 end
 
-local parseUDim2 = sduiClientBindingParsersModule.parseUDim2
+local TextYAlignment = Enum.TextYAlignment
+local v4 = "TEXT_Y_ALIGNMENT_"
 
-function t.UDim2Prop(p1, p2, p3, p4, p5, p6)
-	-- upvalues: buildDefaultPropModule (ref), parseUDim2 (ref)
-	local var3, var4 = buildDefaultPropModule(p1, p2, p3, p4, p5, p6, parseUDim2)
+local function v55(p1) --[[ Line: 88 ]]
+	-- upvalues: SduiParsersModule (copy), TextYAlignment (copy), ProtoVariableMapperModule (copy), v4 (copy)
+	return ProtoVariableMapperModule.mapProtoEngineEnumToLua(p1, v4, (SduiParsersModule.getEngineEnumParser(TextYAlignment)))
+end
+
+function config.TextYAlignmentProp(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+	-- upvalues: BuildDefaultPropModule (copy), v55 (copy)
+	local v5, v6 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, v55)
 	
-	return var3, var4
-end
-
-local parseVector2Prop = sduiParsersModule.parseVector2Prop_
-
-function t.Vector2Prop(p1, p2, p3, p4, p5, p6)
-	-- upvalues: buildDefaultPropModule (ref), parseVector2Prop (ref)
-	local var3, var4 = buildDefaultPropModule(p1, p2, p3, p4, p5, p6, parseVector2Prop)
-	
-	return var3, var4
-end
-
-t.NestedComponentProp = buildNestedComponentPropModule
-t.LazyNestedComponentProp = if fFlagSduiLazyNestedComponentProp then buildLazyNestedComponentPropModule else nil
-t.NestedComponentListProp = buildNestedComponentListPropModule
-t.LazyNestedComponentListProp = buildLazyNestedComponentListPropModule
-local parseStringArray = sduiClientBindingParsersModule.parseStringArray
-
-function t.StringArrayProp(p1, p2, p3, p4, p5, p6)
-	-- upvalues: buildDefaultPropModule (ref), parseStringArray (ref)
-	local var3, var4 = buildDefaultPropModule(p1, p2, p3, p4, p5, p6, parseStringArray)
-	
-	return var3, var4
-end
-
-local parseIconProp = sduiParsersModule.parseIconProp_
-
-function t.IconProp(p1, p2, p3, p4, p5, p6)
-	-- upvalues: buildDefaultPropModule (ref), parseIconProp (ref)
-	local var3, var4 = buildDefaultPropModule(p1, p2, p3, p4, p5, p6, parseIconProp)
-	
-	return var3, var4
-end
-
-local var3 = if fFlagSduiParseProtoGradientFields then sduiClientBindingParsersModule.parseGradient else sduiParsersModule.parseGradientProp_
-
-function t.GradientProp(p1, p2, p3, p4, p5, p6)
-	-- upvalues: buildDefaultPropModule (ref), var3 (ref)
-	local var4, var5 = buildDefaultPropModule(p1, p2, p3, p4, p5, p6, var3)
-	
-	return var4, var5
-end
-
-local parseArrayOfStruct = sduiClientBindingParsersModule.parseArrayOfStruct
-
-function t.ArrayOfStructProp(p1, p2, p3, p4, p5, p6)
-	-- upvalues: buildDefaultPropModule (ref), parseArrayOfStruct (ref)
-	local var4, var5 = buildDefaultPropModule(p1, p2, p3, p4, p5, p6, parseArrayOfStruct)
-	
-	return var4, var5
-end
-
-if fFlagLuaAppSduiHomePageSupport then
-	local parsePymkItems = sduiClientBindingParsersModule.parsePymkItems
-	
-	local var4 = function(p1, p2, p3, p4, p5, p6)
-		-- upvalues: buildDefaultPropModule (ref), parsePymkItems (ref)
-		local var5, var6 = buildDefaultPropModule(p1, p2, p3, p4, p5, p6, parsePymkItems)
-		
-		return var5, var6
-	end
-else
-	local var4 = nil
-end
-t.ArrayOfPymkItemDataProp = var4
-t.ActionProp = buildActionPropModule
-t.TableProp = buildTablePropModule
-t.ContainerProp = buildContainerPropModule
-t.ArrayOfMenuItemProp = buildRepeatedPropModule
-t.MenuItemProp = buildTablePropModule
-t.MenuItem = buildTablePropModule
-t.GenericShareLinkData = buildTablePropModule
-t.ShareLinkFetchData = buildTablePropModule
-t.ExperienceShareLinkPayload = buildTablePropModule
-t.EventShareLinkPayload = if fFlagSduiEventDetailsSupport then buildTablePropModule else nil
-t.MediaGallerySchema_MediaItemArrayProp = buildRepeatedPropModule
-t.ArrayOfSystemBannerActionsProp = if fFlagSduiSystemBannerComponent then buildRepeatedPropModule else nil
-t.SystemBannerActionProp = if fFlagSduiSystemBannerComponent then buildTablePropModule else nil
-t.FoundationInternalNoticeLinkProp = if fFlagSduiBannerContextComponent then buildTablePropModule else nil
-t.FoundationInternalNoticeLink = if fFlagSduiBannerContextComponent then buildTablePropModule else nil
-t.FoundationIconConfigProp = buildTablePropModule
-t.HoldActionConfigProp = buildTablePropModule
-t.HoldActionConfig = buildTablePropModule
-t.OpenPurchasePromptAction_ProductPayload = buildTablePropModule
-t.OpenPurchasePromptAction_DisplayInfo = buildTablePropModule
-t.OpenPurchasePromptAction_PurchaseOptions = buildTablePropModule
-t.OpenPurchasePromptAction_PurchaseAnalyticsMetadata = buildTablePropModule
-t.ArrayOfCatalogCategoryMenuItemProp = if fFlagSduiMarketplaceCatalogCategorySupport then buildRepeatedPropModule else nil
-t.CatalogCategoryMenuItem = if fFlagSduiMarketplaceCatalogCategorySupport then buildTablePropModule else nil
-t.ArrayOfCategoryMenuButtonProp = if fFlagSduiMarketplaceCatalogCategorySupport then buildRepeatedPropModule else nil
-t.CategoryMenuButtonProp = if fFlagSduiMarketplaceCatalogCategorySupport then buildTablePropModule else nil
-t.CategoryMenuButton = if fFlagSduiMarketplaceCatalogCategorySupport then buildTablePropModule else nil
-t.ArrayOfCatalogCategoryMenuTooltipInfoProp = if fFlagSduiMarketplaceCatalogCategorySupport then buildRepeatedPropModule else nil
-t.CatalogCategoryMenuTooltipInfoProp = if fFlagSduiMarketplaceCatalogCategorySupport then buildTablePropModule else nil
-t.CatalogCategoryMenuTooltipInfo = if fFlagSduiMarketplaceCatalogCategorySupport then buildTablePropModule else nil
-t.ArrayOfTooltipInfoActionsProp = if fFlagSduiMarketplaceCatalogCategorySupport then buildRepeatedPropModule else nil
-t.TooltipInfoActionPropsProp = if fFlagSduiMarketplaceCatalogCategorySupport then buildTablePropModule else nil
-t.TooltipInfoActionProps = if fFlagSduiMarketplaceCatalogCategorySupport then buildTablePropModule else nil
-t.ArrayOfCatalogSortContentProp = if fFlagSduiMarketplaceCatalogSortSupport then buildRepeatedPropModule else nil
-t.ArrayOfItemFooterProp = if fFlagSduiMarketplaceCatalogSortSupport then buildRepeatedPropModule else nil
-t.CardStyleProp = if fFlagSduiMarketplaceCatalogSortSupport or fFlagSduiCatalogItemCard then buildTablePropModule else nil
-t.AnalyticsDataField = buildDefaultPropModule
-local automaticSize = Enum.AutomaticSize
-local var5 = "AUTOMATIC_SIZE_"
-
-local var6 = function(p1)
-	-- upvalues: sduiParsersModule (ref), automaticSize (ref), protoVariableMapperModule (ref), var5 (ref)
-	return protoVariableMapperModule.mapProtoEngineEnumToLua(p1, var5, sduiParsersModule.getEngineEnumParser(automaticSize))
-end
-
-function t.AutomaticSizeProp(p1, p2, p3, p4, p5, p6)
-	-- upvalues: buildDefaultPropModule (ref), var6 (ref)
-	local var7, var8 = buildDefaultPropModule(p1, p2, p3, p4, p5, p6, var6)
-	
-	return var7, var8
-end
-
-local textTruncate = Enum.TextTruncate
-local var7 = "TEXT_TRUNCATE_"
-
-local var8 = function(p1)
-	-- upvalues: sduiParsersModule (ref), textTruncate (ref), protoVariableMapperModule (ref), var7 (ref)
-	return protoVariableMapperModule.mapProtoEngineEnumToLua(p1, var7, sduiParsersModule.getEngineEnumParser(textTruncate))
-end
-
-function t.TextTruncateProp(p1, p2, p3, p4, p5, p6)
-	-- upvalues: buildDefaultPropModule (ref), var8 (ref)
-	local var9, var10 = buildDefaultPropModule(p1, p2, p3, p4, p5, p6, var8)
-	
-	return var9, var10
-end
-
-local textXAlignment = Enum.TextXAlignment
-local var9 = "TEXT_X_ALIGNMENT_"
-
-local var10 = function(p1)
-	-- upvalues: sduiParsersModule (ref), textXAlignment (ref), protoVariableMapperModule (ref), var9 (ref)
-	return protoVariableMapperModule.mapProtoEngineEnumToLua(p1, var9, sduiParsersModule.getEngineEnumParser(textXAlignment))
-end
-
-function t.TextXAlignmentProp(p1, p2, p3, p4, p5, p6)
-	-- upvalues: buildDefaultPropModule (ref), var10 (ref)
-	local var11, var12 = buildDefaultPropModule(p1, p2, p3, p4, p5, p6, var10)
-	
-	return var11, var12
-end
-
-local textYAlignment = Enum.TextYAlignment
-local var11 = "TEXT_Y_ALIGNMENT_"
-
-local var12 = function(p1)
-	-- upvalues: sduiParsersModule (ref), textYAlignment (ref), protoVariableMapperModule (ref), var11 (ref)
-	return protoVariableMapperModule.mapProtoEngineEnumToLua(p1, var11, sduiParsersModule.getEngineEnumParser(textYAlignment))
-end
-
-function t.TextYAlignmentProp(p1, p2, p3, p4, p5, p6)
-	-- upvalues: buildDefaultPropModule (ref), var12 (ref)
-	local var13, var14 = buildDefaultPropModule(p1, p2, p3, p4, p5, p6, var12)
-	
-	return var13, var14
+	return v5, v6
 end
 
 local UIFlexMode = Enum.UIFlexMode
-local var13 = "UI_FLEX_MODE_"
+local v5 = "UI_FLEX_MODE_"
 
-local var14 = function(p1)
-	-- upvalues: sduiParsersModule (ref), UIFlexMode (ref), protoVariableMapperModule (ref), var13 (ref)
-	return protoVariableMapperModule.mapProtoEngineEnumToLua(p1, var13, sduiParsersModule.getEngineEnumParser(UIFlexMode))
+local function v58(p1) --[[ Line: 88 ]]
+	-- upvalues: SduiParsersModule (copy), UIFlexMode (copy), ProtoVariableMapperModule (copy), v5 (copy)
+	return ProtoVariableMapperModule.mapProtoEngineEnumToLua(p1, v5, (SduiParsersModule.getEngineEnumParser(UIFlexMode)))
 end
 
-function t.UIFlexModeProp(p1, p2, p3, p4, p5, p6)
-	-- upvalues: buildDefaultPropModule (ref), var14 (ref)
-	local var15, var16 = buildDefaultPropModule(p1, p2, p3, p4, p5, p6, var14)
+function config.UIFlexModeProp(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+	-- upvalues: BuildDefaultPropModule (copy), v58 (copy)
+	local v6, v7 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, v58)
 	
-	return var15, var16
+	return v6, v7
 end
 
-local scaleType = Enum.ScaleType
-local var15 = "SCALE_TYPE_"
+local ScaleType = Enum.ScaleType
+local v6 = "SCALE_TYPE_"
 
-local var16 = function(p1)
-	-- upvalues: sduiParsersModule (ref), scaleType (ref), protoVariableMapperModule (ref), var15 (ref)
-	return protoVariableMapperModule.mapProtoEngineEnumToLua(p1, var15, sduiParsersModule.getEngineEnumParser(scaleType))
+local function v61(p1) --[[ Line: 88 ]]
+	-- upvalues: SduiParsersModule (copy), ScaleType (copy), ProtoVariableMapperModule (copy), v6 (copy)
+	return ProtoVariableMapperModule.mapProtoEngineEnumToLua(p1, v6, (SduiParsersModule.getEngineEnumParser(ScaleType)))
 end
 
-function t.ScaleTypeProp(p1, p2, p3, p4, p5, p6)
-	-- upvalues: buildDefaultPropModule (ref), var16 (ref)
-	local var17, var18 = buildDefaultPropModule(p1, p2, p3, p4, p5, p6, var16)
+function config.ScaleTypeProp(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+	-- upvalues: BuildDefaultPropModule (copy), v61 (copy)
+	local v7, v8 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, v61)
 	
-	return var17, var18
+	return v7, v8
 end
 
-local resamplerMode = Enum.ResamplerMode
-local var17 = "RESAMPLER_MODE_"
+local ResamplerMode = Enum.ResamplerMode
+local v7 = "RESAMPLER_MODE_"
 
-local var18 = function(p1)
-	-- upvalues: sduiParsersModule (ref), resamplerMode (ref), protoVariableMapperModule (ref), var17 (ref)
-	return protoVariableMapperModule.mapProtoEngineEnumToLua(p1, var17, sduiParsersModule.getEngineEnumParser(resamplerMode))
+local function v64(p1) --[[ Line: 88 ]]
+	-- upvalues: SduiParsersModule (copy), ResamplerMode (copy), ProtoVariableMapperModule (copy), v7 (copy)
+	return ProtoVariableMapperModule.mapProtoEngineEnumToLua(p1, v7, (SduiParsersModule.getEngineEnumParser(ResamplerMode)))
 end
 
-function t.ResamplerModeProp(p1, p2, p3, p4, p5, p6)
-	-- upvalues: buildDefaultPropModule (ref), var18 (ref)
-	local var19, var20 = buildDefaultPropModule(p1, p2, p3, p4, p5, p6, var18)
+function config.ResamplerModeProp(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+	-- upvalues: BuildDefaultPropModule (copy), v64 (copy)
+	local v8, v9 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, v64)
 	
-	return var19, var20
+	return v8, v9
 end
 
-local sizeConstraint = Enum.SizeConstraint
-local var19 = "SIZE_CONSTRAINT_"
+local SizeConstraint = Enum.SizeConstraint
+local v8 = "SIZE_CONSTRAINT_"
 
-local var20 = function(p1)
-	-- upvalues: sduiParsersModule (ref), sizeConstraint (ref), protoVariableMapperModule (ref), var19 (ref)
-	return protoVariableMapperModule.mapProtoEngineEnumToLua(p1, var19, sduiParsersModule.getEngineEnumParser(sizeConstraint))
+local function v67(p1) --[[ Line: 88 ]]
+	-- upvalues: SduiParsersModule (copy), SizeConstraint (copy), ProtoVariableMapperModule (copy), v8 (copy)
+	return ProtoVariableMapperModule.mapProtoEngineEnumToLua(p1, v8, (SduiParsersModule.getEngineEnumParser(SizeConstraint)))
 end
 
-function t.SizeConstraintProp(p1, p2, p3, p4, p5, p6)
-	-- upvalues: buildDefaultPropModule (ref), var20 (ref)
-	local var21, var22 = buildDefaultPropModule(p1, p2, p3, p4, p5, p6, var20)
+function config.SizeConstraintProp(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+	-- upvalues: BuildDefaultPropModule (copy), v67 (copy)
+	local v9, v10 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, v67)
 	
-	return var21, var22
+	return v9, v10
 end
 
-local selectionBehavior = Enum.SelectionBehavior
-local var21 = "SELECTION_BEHAVIOR_"
+local SelectionBehavior = Enum.SelectionBehavior
+local v9 = "SELECTION_BEHAVIOR_"
 
-local var22 = function(p1)
-	-- upvalues: sduiParsersModule (ref), selectionBehavior (ref), protoVariableMapperModule (ref), var21 (ref)
-	return protoVariableMapperModule.mapProtoEngineEnumToLua(p1, var21, sduiParsersModule.getEngineEnumParser(selectionBehavior))
+local function v70(p1) --[[ Line: 88 ]]
+	-- upvalues: SduiParsersModule (copy), SelectionBehavior (copy), ProtoVariableMapperModule (copy), v9 (copy)
+	return ProtoVariableMapperModule.mapProtoEngineEnumToLua(p1, v9, (SduiParsersModule.getEngineEnumParser(SelectionBehavior)))
 end
 
-function t.SelectionBehaviorProp(p1, p2, p3, p4, p5, p6)
-	-- upvalues: buildDefaultPropModule (ref), var22 (ref)
-	local var23, var24 = buildDefaultPropModule(p1, p2, p3, p4, p5, p6, var22)
+function config.SelectionBehaviorProp(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+	-- upvalues: BuildDefaultPropModule (copy), v70 (copy)
+	local v10, v11 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, v70)
 	
-	return var23, var24
+	return v10, v11
 end
 
-local keyCode = Enum.KeyCode
-local var23 = "KEY_CODE_"
+local KeyCode = Enum.KeyCode
+local v10 = "KEY_CODE_"
 
-local var24 = function(p1)
-	-- upvalues: sduiParsersModule (ref), keyCode (ref), protoVariableMapperModule (ref), var23 (ref)
-	return protoVariableMapperModule.mapProtoEngineEnumToLua(p1, var23, sduiParsersModule.getEngineEnumParser(keyCode))
+local function v73(p1) --[[ Line: 88 ]]
+	-- upvalues: SduiParsersModule (copy), KeyCode (copy), ProtoVariableMapperModule (copy), v10 (copy)
+	return ProtoVariableMapperModule.mapProtoEngineEnumToLua(p1, v10, (SduiParsersModule.getEngineEnumParser(KeyCode)))
 end
 
-function t.KeyCodeProp(p1, p2, p3, p4, p5, p6)
-	-- upvalues: buildDefaultPropModule (ref), var24 (ref)
-	local var25, var26 = buildDefaultPropModule(p1, p2, p3, p4, p5, p6, var24)
+function config.KeyCodeProp(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+	-- upvalues: BuildDefaultPropModule (copy), v73 (copy)
+	local v11, v12 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, v73)
 	
-	return var25, var26
+	return v11, v12
 end
 
-local parseFocusNavActions = sduiClientBindingParsersModule.parseFocusNavActions
+local ParseFocusNavActions = SduiClientBindingParsersModule.parseFocusNavActions
 
-function t.FocusNavActionsProp(p1, p2, p3, p4, p5, p6)
-	-- upvalues: buildTablePropModule (ref), parseFocusNavActions (ref)
-	local var25, var26 = buildTablePropModule(p1, p2, p3, p4, p5, p6, parseFocusNavActions)
+function config.FocusNavActionsProp(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+	-- upvalues: BuildTablePropModule (copy), ParseFocusNavActions (copy)
+	local v11, v12 = BuildTablePropModule(p1, p2, p3, p4, p5, p6, ParseFocusNavActions)
 	
-	return var25, var26
+	return v11, v12
 end
 
-t.ColorStyleProp = buildDefaultPropModule
-local parseUiScaledUDim2 = sduiClientBindingParsersModule.parseUiScaledUDim2
+config.ColorStyleProp = BuildDefaultPropModule
+local ParseUiScaledUDim2 = SduiClientBindingParsersModule.parseUiScaledUDim2
 
-function t.UiScaledUDim2Prop(p1, p2, p3, p4, p5, p6)
-	-- upvalues: buildDefaultPropModule (ref), parseUiScaledUDim2 (ref)
-	local var25, var26 = buildDefaultPropModule(p1, p2, p3, p4, p5, p6, parseUiScaledUDim2)
+function config.UiScaledUDim2Prop(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+	-- upvalues: BuildDefaultPropModule (copy), ParseUiScaledUDim2 (copy)
+	local v11, v12 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, ParseUiScaledUDim2)
 	
-	return var25, var26
+	return v11, v12
 end
 
-local parseUiScaledUDim = sduiClientBindingParsersModule.parseUiScaledUDim
+local ParseUiScaledUDim = SduiClientBindingParsersModule.parseUiScaledUDim
 
-function t.UiScaledUDimProp(p1, p2, p3, p4, p5, p6)
-	-- upvalues: buildDefaultPropModule (ref), parseUiScaledUDim (ref)
-	local var25, var26 = buildDefaultPropModule(p1, p2, p3, p4, p5, p6, parseUiScaledUDim)
+function config.UiScaledUDimProp(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+	-- upvalues: BuildDefaultPropModule (copy), ParseUiScaledUDim (copy)
+	local v11, v12 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, ParseUiScaledUDim)
 	
-	return var25, var26
+	return v11, v12
 end
 
-local parseUiScaledNumber = sduiClientBindingParsersModule.parseUiScaledNumber
+local ParseUiScaledNumber = SduiClientBindingParsersModule.parseUiScaledNumber
 
-function t.UiScaledFloatProp(p1, p2, p3, p4, p5, p6)
-	-- upvalues: buildDefaultPropModule (ref), parseUiScaledNumber (ref)
-	local var25, var26 = buildDefaultPropModule(p1, p2, p3, p4, p5, p6, parseUiScaledNumber)
+function config.UiScaledFloatProp(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+	-- upvalues: BuildDefaultPropModule (copy), ParseUiScaledNumber (copy)
+	local v11, v12 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, ParseUiScaledNumber)
 	
-	return var25, var26
+	return v11, v12
 end
 
-t.FillBehaviorProp = buildDefaultPropModule
-t.InputSizeProp = buildDefaultPropModule
-t.ListItemInputControlProp = if fFlagSduiListComponents then buildTablePropModule else nil
-t.LaunchExperienceAction_ExperienceJoinData = buildTablePropModule
-t.AvatarConfigProp = buildTablePropModule
-t.ArrayOfAvatarProp = buildRepeatedPropModule
+config.FillBehaviorProp = BuildDefaultPropModule
+config.InputSizeProp = BuildDefaultPropModule
+config.ListItemInputControlProp = if FFlagSduiListComponents then BuildTablePropModule else nil
+config.LaunchExperienceAction_ExperienceJoinData = BuildTablePropModule
+config.AvatarConfigProp = BuildTablePropModule
+config.ArrayOfAvatarProp = BuildRepeatedPropModule
 
-return function(p1)
-	-- upvalues: t (ref), buildDefaultPropModule (ref)
+return function(p1) --[[ Line: 218 | Named "getPropBuilder" ]]
+	-- upvalues: config (copy), BuildDefaultPropModule (copy)
 	if not p1 then
 		error("Failed to find prop builder -- missing propDescriptorName")
 	end
-	local var25 = t[p1]
+	local Entry = config[p1]
 	
-	if not var25 then
+	if not Entry then
 		warn(`Could not find propBuilder for propDescriptorName {p1}. Using default.`)
-		var25 = buildDefaultPropModule
+		Entry = BuildDefaultPropModule
 	end
-	return var25
+	return Entry
 end

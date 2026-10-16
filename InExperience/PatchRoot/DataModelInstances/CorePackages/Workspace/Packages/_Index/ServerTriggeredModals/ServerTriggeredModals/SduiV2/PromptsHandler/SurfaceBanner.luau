@@ -1,71 +1,70 @@
-﻿local serverTriggeredModals = script:FindFirstAncestor("ServerTriggeredModals")
-local parent = serverTriggeredModals.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local appNavBarModule = require(parent.AppNavBar)
-local sduiSharedUtilitiesModule = require(parent.SduiSharedUtilities)
-local signalsReactModule = require(parent.SignalsReact)
-local robloxAppHooksModule = require(parent.RobloxAppHooks)
-local view = foundationModule.View
-local sduiFeatureEntryPoint = sduiSharedUtilitiesModule.SduiFeatureEntryPoint
-local useComponentConfig = sduiSharedUtilitiesModule.useComponentConfig
-local useStatusBarHeight = robloxAppHooksModule.useStatusBarHeight
-local useTopBarHeight = robloxAppHooksModule.useTopBarHeight
-local visibilityControl = appNavBarModule.VisibilityControl
-local fFlagPromptsActionEventLoggingModule = require(serverTriggeredModals.Flags.FFlagPromptsActionEventLogging)
+﻿local ServerTriggeredModals = script:FindFirstAncestor("ServerTriggeredModals")
+local Parent = ServerTriggeredModals.Parent
+local ReactModule = require(Parent.React)
+local SduiSharedUtilitiesModule = require(Parent.SduiSharedUtilities)
+local SignalsReactModule = require(Parent.SignalsReact)
+local RobloxAppHooksModule = require(Parent.RobloxAppHooks)
+local View = require(Parent.Foundation).View
+local SduiFeatureEntryPoint = SduiSharedUtilitiesModule.SduiFeatureEntryPoint
+local UseComponentConfigFunction = SduiSharedUtilitiesModule.useComponentConfig
+local UseStatusBarHeightFunction = RobloxAppHooksModule.useStatusBarHeight
+local UseTopBarHeightFunction = RobloxAppHooksModule.useTopBarHeight
+local VisibilityControl = require(Parent.AppNavBar).VisibilityControl
+local FFlagPromptsActionEventLoggingModule = require(ServerTriggeredModals.Flags.FFlagPromptsActionEventLogging)
 
-local function noopGetter()
+local function noopGetter() --[[ Line: 31 ]]
 	return nil
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: useStatusBarHeight (ref), useTopBarHeight (ref), reactModule (ref), visibilityControl (ref), useComponentConfig (ref), noopGetter (ref), signalsReactModule (ref), view (ref), sduiFeatureEntryPoint (ref), fFlagPromptsActionEventLoggingModule (ref)
-	local var1 = useStatusBarHeight()
-	local var2 = useTopBarHeight()
-	local var3, var4 = reactModule.useState(0)
-	local headerBinding = visibilityControl.getHeaderBinding()
-	local var5 = p1.identifier ~= nil
-	local var6 = if var5 then useComponentConfig(p1.configKey, p1.identifier) else nil
-	local var7 = if var6 and var6.props then var6.props.backgroundStyle else nil
-	local var8 = signalsReactModule.useSignalState(if var6 and var6.propSignals and var6.propSignals.backgroundStyle then var6.propSignals.backgroundStyle else noopGetter)
-	local var9 = if var7 ~= nil then if var8 ~= nil then nil else var8.data else var7
-	local var10 = headerBinding:map(function(p2)
-		-- upvalues: var1 (ref), var2 (ref)
-		return UDim2.new(0, 0, 0, math.max(var1, p2 * var2))
+return ReactModule.memo(function(p1) --[[ Line: 35 | Named "SurfaceBanner" ]]
+	-- upvalues: UseStatusBarHeightFunction (copy), UseTopBarHeightFunction (copy), ReactModule (copy), VisibilityControl (copy), UseComponentConfigFunction (copy), noopGetter (copy), SignalsReactModule (copy), View (copy), SduiFeatureEntryPoint (copy), FFlagPromptsActionEventLoggingModule (copy)
+	local UseStatusBarHeightResult = UseStatusBarHeightFunction()
+	local UseTopBarHeightResult = UseTopBarHeightFunction()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
+	local HeaderBinding = VisibilityControl.getHeaderBinding()
+	local HasIdentifier = p1.identifier ~= nil
+	local UseComponentConfigResult = UseComponentConfigFunction(p1.configKey, p1.identifier)
+	local UseComponentConfigResult1 = if HasIdentifier then UseComponentConfigResult else nil
+	local BackgroundStyle = if UseComponentConfigResult1 and UseComponentConfigResult1.props then UseComponentConfigResult1.props.backgroundStyle else nil
+	local UseSignalStateResult = SignalsReactModule.useSignalState(if UseComponentConfigResult1 and UseComponentConfigResult1.propSignals and UseComponentConfigResult1.propSignals.backgroundStyle then UseComponentConfigResult1.propSignals.backgroundStyle else noopGetter)
+	local Data = if BackgroundStyle == nil then if UseSignalStateResult == nil then nil else UseSignalStateResult.data else BackgroundStyle
+	local MapResult = HeaderBinding:map(function(p2): UDim2 --[[ Line: 71 ]]
+		-- upvalues: UseStatusBarHeightResult (copy), UseTopBarHeightResult (copy)
+		return UDim2.new(0, 0, 0, (math.max(UseStatusBarHeightResult, p2 * UseTopBarHeightResult)))
 	end)
-	local surfaceBannerContent = p1.surfaceBannerContent
+	local MapResult1 = HeaderBinding:map(function(p2): UDim2 --[[ Line: 81 ]]
+		-- upvalues: UseStatusBarHeightResult (copy), UseTopBarHeightResult (copy)
+		return UDim2.new(1, 0, 0, (math.max(0, UseStatusBarHeightResult - p2 * UseTopBarHeightResult)))
+	end)
+	local SurfaceBannerContent = p1.surfaceBannerContent
+	local CanvasTopPadding = SurfaceBannerContent and SurfaceBannerContent.props and SurfaceBannerContent.props.canvasTopPadding or 0
 	
-	return reactModule.createElement(view, { tag = "size-full" }, {
-		Content = if surfaceBannerContent then reactModule.cloneElement(surfaceBannerContent, {
-			canvasTopPadding = (surfaceBannerContent and (surfaceBannerContent.props and (surfaceBannerContent.props.canvasTopPadding or 0))) + var3
-		}) else nil,
-		Filler = if var5 then reactModule.createElement(view, {
+	return ReactModule.createElement(View, { tag = "size-full" }, {
+		Content = if SurfaceBannerContent then ReactModule.cloneElement(SurfaceBannerContent, { canvasTopPadding = CanvasTopPadding + UseStateResult }) else nil,
+		Filler = if HasIdentifier then ReactModule.createElement(View, {
 			ZIndex = 2,
-			backgroundStyle = var9,
+			backgroundStyle = Data,
 			AnchorPoint = Vector2.new(0, 1),
-			Position = var10,
-			Size = headerBinding:map(function(p2)
-				-- upvalues: var1 (ref), var2 (ref)
-				return UDim2.new(1, 0, 0, math.max(0, var1 - p2 * var2))
-			end)
+			Position = MapResult,
+			Size = MapResult1
 		}) else nil,
-		Banner = reactModule.createElement(view, {
+		Banner = ReactModule.createElement(View, {
 			ZIndex = 2,
-			Position = var10,
+			Position = MapResult,
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
-			onAbsoluteSizeChanged = function(value)
-				-- upvalues: var4 (ref)
-				var4(value.AbsoluteSize.Y)
+			onAbsoluteSizeChanged = function(Frame) --[[ Line: 111 ]]
+				-- upvalues: UseStateResult2 (copy)
+				UseStateResult2(Frame.AbsoluteSize.Y)
 			end
 		}, {
-			SurfaceBanner = if var5 then reactModule.createElement(sduiFeatureEntryPoint, {
+			SurfaceBanner = if HasIdentifier then ReactModule.createElement(SduiFeatureEntryPoint, {
 				shouldDisplayLoading = false,
 				shouldDisplayError = false,
 				configKey = p1.configKey,
 				identifier = p1.identifier,
 				appPage = p1.appPage,
-				additionalAnalyticsData = if fFlagPromptsActionEventLoggingModule then {
+				additionalAnalyticsData = if FFlagPromptsActionEventLoggingModule then {
 					promptInstanceId = if p1.identifier then p1.identifier else nil
 				} else nil
 			}) else nil

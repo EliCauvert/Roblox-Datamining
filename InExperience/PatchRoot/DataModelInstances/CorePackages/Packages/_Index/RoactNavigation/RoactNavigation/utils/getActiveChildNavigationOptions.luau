@@ -1,5 +1,5 @@
-﻿return function(p1, p2)
-	local state = p1.state
+﻿return function(p1, p2) --[[ Line: 4 ]]
+	local State = p1.state
 	
-	return p1.router.getScreenOptions(p1.getChildNavigation(state.routes[state.index].key), p2)
+	return p1.router.getScreenOptions(p1.getChildNavigation(State.routes[State.index].key), p2)
 end

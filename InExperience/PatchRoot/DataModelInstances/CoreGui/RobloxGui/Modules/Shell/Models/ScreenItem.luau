@@ -1,6 +1,11 @@
 ﻿return {
 	Priority = { Default = 1, Overlay = 2, Elevated = 3, Immediate = 4 },
-	new = function(p1, p2, p3)
-		return { id = p1, priority = p2, createdAt = tick(), data = p3 }
+	new = function(Id, Priority, Data) --[[ Line: 10 ]]
+		return {
+			id = Id,
+			priority = Priority,
+			createdAt = tick(),
+			data = Data
+		}
 	end
 }

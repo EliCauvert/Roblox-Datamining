@@ -1,20 +1,20 @@
-﻿local userLib = script:FindFirstAncestor("UserLib")
-local receivedUserPresenceModule = require(userLib.Actions.ReceivedUserPresence)
-local updateFriendPresenceCounts = require(userLib.Parent.LegacyFriendsRodux).Actions.UpdateFriendPresenceCounts
-local webPresenceMapModule = require(userLib.Enum.WebPresenceMap)
+﻿local UserLib = script:FindFirstAncestor("UserLib")
+local ReceivedUserPresenceModule = require(UserLib.Actions.ReceivedUserPresence)
+local UpdateFriendPresenceCountsFunction = require(UserLib.Parent.LegacyFriendsRodux).Actions.UpdateFriendPresenceCounts
+local WebPresenceMapModule = require(UserLib.Enum.WebPresenceMap)
 
-return function(p1, p2)
-	-- upvalues: receivedUserPresenceModule (ref), webPresenceMapModule (ref), updateFriendPresenceCounts (ref)
-	for i, v in pairs(p1) do
-		local userId = p2:getState().Users[tostring(v.userId)]
-		p2:dispatch(receivedUserPresenceModule(tostring(v.userId), webPresenceMapModule[v.userPresenceType], v.lastLocation, v.placeId and tostring(v.placeId) or nil, v.rootPlaceId and tostring(v.rootPlaceId) or nil, v.gameId and tostring(v.gameId) or nil, v.lastOnline and tostring(v.lastOnline) or nil, v.universeId, if userId then userId.universeId else nil))
+return function(List, p1) --[[ Line: 8 ]]
+	-- upvalues: ReceivedUserPresenceModule (copy), WebPresenceMapModule (copy), UpdateFriendPresenceCountsFunction (copy)
+	for _, value in pairs(List) do
+		local User = p1:getState().Users[tostring(value.userId)]
+		p1:dispatch(ReceivedUserPresenceModule(tostring(value.userId), WebPresenceMapModule[value.userPresenceType], value.lastLocation, value.placeId and tostring(value.placeId) or nil, value.rootPlaceId and tostring(value.rootPlaceId) or nil, value.gameId and tostring(value.gameId) or nil, value.lastOnline and tostring(value.lastOnline) or nil, value.universeId, User and User.universeId or nil))
 	end
 	local t = {}
 	
-	for i_1, v_1 in pairs(p2:getState().Users) do
-		if v_1.isFriend and v_1.presence then
-			t[v_1.presence] = (t[v_1.presence] or 0) + 1
+	for _, user in pairs(p1:getState().Users) do
+		if user.isFriend and user.presence then
+			t[user.presence] = (t[user.presence] or 0) + 1
 		end
 	end
-	p2:dispatch(updateFriendPresenceCounts(t))
+	p1:dispatch(UpdateFriendPresenceCountsFunction(t))
 end

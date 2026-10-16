@@ -1,7 +1,7 @@
-﻿local constantsModule = require(script.Parent.Parent.TopBar.Constants)
-local createLayoutValues = require(game:GetService("CorePackages").Workspace.Packages.PlayerList).Common.CreateLayoutValues
+﻿local ConstantsModule = require(script.Parent.Parent.TopBar.Constants)
+local CreateLayoutValuesFunction = require(game:GetService("CorePackages").Workspace.Packages.PlayerList).Common.CreateLayoutValues
 
-return function(p1)
-	-- upvalues: createLayoutValues (ref), constantsModule (ref)
-	return createLayoutValues(p1, constantsModule)
+return function(p1) --[[ Line: 9 ]]
+	-- upvalues: CreateLayoutValuesFunction (copy), ConstantsModule (copy)
+	return CreateLayoutValuesFunction(p1, ConstantsModule)
 end

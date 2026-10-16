@@ -1,40 +1,40 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local reactModule = require(parent.React)
-local reactOtterModule = require(parent.ReactOtter)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local getCommentsSheetStoreModule = require(moments.Components.Comments.Sheet.getCommentsSheetStore)
-local t = {
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local ReactModule = require(Parent.React)
+local ReactOtterModule = require(Parent.ReactOtter)
+local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local GetCommentsSheetStoreModule = require(Moments.Components.Comments.Sheet.getCommentsSheetStore)
+local config = {
 	duration = require(script.Parent.MomentContext).SCRUB_FADE_SECONDS,
 	easingStyle = Enum.EasingStyle.Quad
 }
 
-return function(p1)
-	-- upvalues: reactModule (ref), getCommentsSheetStoreModule (ref), signalsModule (ref), signalsReactModule (ref), reactOtterModule (ref), t (ref)
-	local var1 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: getCommentsSheetStoreModule (copy), signalsModule (copy), p1 (ref)
-		local var2 = getCommentsSheetStoreModule(false)
+return function(FeedItemId) --[[ Line: 26 | Named "useCommentsChromeTransparency" ]]
+	-- upvalues: ReactModule (copy), GetCommentsSheetStoreModule (copy), SignalsModule (copy), SignalsReactModule (copy), ReactOtterModule (copy), config (copy)
+	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 27 ]]
+		-- upvalues: GetCommentsSheetStoreModule (upval), SignalsModule (upval), FeedItemId (copy)
+		local CommentsSheetStoreModule = GetCommentsSheetStoreModule(false)
 		
-		return signalsModule.createComputed(function(p2)
-			-- upvalues: p1 (copy), var2 (ref)
-			return p1 ~= nil and (var2.getIsOpen(p2) and var2.getFeedItemId(p2) == p1)
+		return SignalsModule.createComputed(function(p1): boolean --[[ Line: 29 ]]
+			-- upvalues: FeedItemId (upval), CommentsSheetStoreModule (copy)
+			return FeedItemId ~= nil and (CommentsSheetStoreModule.getIsOpen(p1) and CommentsSheetStoreModule.getFeedItemId(p1) == FeedItemId)
 		end)
-	end, { p1 or false }))
-	local var2, var3 = reactModule.useState(var1)
-	local var4, var5 = reactOtterModule.useAnimatedBinding(if var1 then 1 else 0, reactModule.useCallback(function(p2)
-		-- upvalues: var3 (ref)
-		if p2 <= 0 then
-			var3(false)
+	end, { FeedItemId or false })))
+	local UseStateResult, UseStateResult2 = ReactModule.useState(UseSignalStateResult)
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(if UseSignalStateResult then 1 else 0, (ReactModule.useCallback(function(p1: number) --[[ Line: 37 ]]
+		-- upvalues: UseStateResult2 (copy)
+		if p1 <= 0 then
+			UseStateResult2(false)
 		end
-	end, {}))
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), var3 (ref), var5 (ref), reactOtterModule (copy), t (copy)
-		if var1 then
-			var3(true)
+	end, {})))
+	ReactModule.useEffect(function() --[[ Line: 44 ]]
+		-- upvalues: UseSignalStateResult (copy), UseStateResult2 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), config (upval)
+		if UseSignalStateResult then
+			UseStateResult2(true)
 		end
-		var5(reactOtterModule.ease(if var1 then 1 else 0, t))
-	end, { var1 })
+		UseAnimatedBindingResult2(ReactOtterModule.ease(if UseSignalStateResult then 1 else 0, config))
+	end, { UseSignalStateResult })
 	
-	return if var1 or var2 then var4 else nil
+	return if UseSignalStateResult or UseStateResult then UseAnimatedBindingResult else nil
 end

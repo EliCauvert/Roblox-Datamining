@@ -1,34 +1,34 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local cryoModule = require(parent_1.Cryo)
-local useState = reactModule.useState
-local promptConnectionsModule = require(parent.Components.CoreUI.PromptConnections)
-local groupJoinPromptModule = require(parent.Components.CoreUI.GroupJoinPrompt)
-local focusNavigationUtilsModule = require(parent_1.FocusNavigationUtils)
-local focusRoot = focusNavigationUtilsModule.FocusRoot
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local _ = require(parent.Common.Types)
-local _ = { PromptJoinGroup = "PromptJoinGroup" }
-local t = { PromptJoinGroup = groupJoinPromptModule }
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local CryoModule = require(Parent1.Cryo)
+local UseStateFunction = ReactModule.useState
+local PromptConnectionsModule = require(Parent.Components.CoreUI.PromptConnections)
+local FocusNavigationUtilsModule = require(Parent1.FocusNavigationUtils)
+local FocusRoot = FocusNavigationUtilsModule.FocusRoot
+local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+local _ = require(Parent.Common.Types)
+local config = {
+	PromptJoinGroup = require(Parent.Components.CoreUI.GroupJoinPrompt)
+}
 
-return function(p1)
-	-- upvalues: useState (ref), reactModule (ref), cryoModule (ref), t (ref), promptConnectionsModule (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
-	local var1, var2 = useState({
+return function(p1) --[[ Line: 54 ]]
+	-- upvalues: UseStateFunction (copy), ReactModule (copy), CryoModule (copy), config (copy), PromptConnectionsModule (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy)
+	local UseStateResult, UseStateResult2 = UseStateFunction({
 		promptType = nil,
 		promptData = nil,
 		data = nil,
 		callbacks = nil,
 		promptQueue = {}
 	})
-	local promptData = var1.promptData
-	local promptType = var1.promptType
-	local data = var1.data
-	local callbacks = var1.callbacks
-	local var3 = reactModule.useCallback(function()
-		-- upvalues: cryoModule (copy), var1 (ref), var2 (ref)
-		if cryoModule.isEmpty(var1.promptQueue) then
-			var2({
+	local PromptData = UseStateResult.promptData
+	local PromptType = UseStateResult.promptType
+	local Data = UseStateResult.data
+	local Callbacks = UseStateResult.callbacks
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 68 ]]
+		-- upvalues: CryoModule (upval), UseStateResult (copy), UseStateResult2 (copy)
+		if CryoModule.isEmpty(UseStateResult.promptQueue) then
+			UseStateResult2({
 				promptType = nil,
 				promptData = nil,
 				data = nil,
@@ -37,64 +37,66 @@ return function(p1)
 			})
 			
 			return
+		else
+			UseStateResult2(CryoModule.Dictionary.join(UseStateResult, {
+				promptType = UseStateResult.promptQueue[1].promptType,
+				promptData = UseStateResult.promptQueue[1].promptData,
+				data = UseStateResult.promptQueue[1].data,
+				callbacks = UseStateResult.promptQueue[1].callbacks,
+				promptQueue = CryoModule.List.removeIndex(UseStateResult.promptQueue, 1)
+			}))
 		end
-		var2(cryoModule.Dictionary.join(var1, {
-			promptType = var1.promptQueue[1].promptType,
-			promptData = var1.promptQueue[1].promptData,
-			data = var1.promptQueue[1].data,
-			callbacks = var1.promptQueue[1].callbacks,
-			promptQueue = cryoModule.List.removeIndex(var1.promptQueue, 1)
-		}))
-	end, { var1, var2 })
-	local var4 = nil
+	end, { UseStateResult, UseStateResult2 })
+	local Element = nil
 	
-	if promptType then
-		local var5 = t[promptType]
+	if PromptType then
+		local Entry = config[PromptType]
 		
-		if var5 then
-			var4 = reactModule.createElement(var5, {
+		if Entry then
+			Element = ReactModule.createElement(Entry, {
 				enableInputDelayed = p1.enableInputDelayed,
-				groupId = if promptData then promptData.groupId else nil,
-				data = data,
-				onJoin = if callbacks then callbacks.onJoin else nil,
-				onClose = if callbacks then callbacks.onClose else nil
+				groupId = if PromptData then PromptData.groupId else nil,
+				data = Data,
+				onJoin = if Callbacks then Callbacks.onJoin else nil,
+				onClose = if Callbacks then Callbacks.onClose else nil
 			})
 		else
-			error(`Unexpected prompt type: {promptType}!`)
+			error(`Unexpected prompt type: {PromptType}!`)
 		end
 	end
-	return reactModule.createElement(reactModule.Fragment, {}, {
-		PromptConnections = reactModule.createElement(promptConnectionsModule, {
-			openGroupJoinPrompt = reactModule.useCallback(function(p2, p3, p4)
-				-- upvalues: var1 (ref), var2 (ref), cryoModule (copy)
-				if var1.promptType == nil then
-					var2({
+	return ReactModule.createElement(ReactModule.Fragment, {}, {
+		PromptConnections = ReactModule.createElement(PromptConnectionsModule, {
+			openGroupJoinPrompt = ReactModule.useCallback(function(GroupId, Data, Callbacks) --[[ Line: 105 ]]
+				-- upvalues: UseStateResult (copy), UseStateResult2 (copy), CryoModule (upval)
+				if UseStateResult.promptType == nil then
+					UseStateResult2({
 						promptType = "PromptJoinGroup",
-						promptData = { groupId = p2 },
-						data = p3,
-						callbacks = p4,
+						promptData = { groupId = GroupId },
+						data = Data,
+						callbacks = Callbacks,
 						promptQueue = {}
 					})
 					
 					return
+				else
+					UseStateResult2(CryoModule.Dictionary.join(UseStateResult, {
+						promptQueue = CryoModule.List.join(UseStateResult.promptQueue, {
+							{
+								promptType = "PromptJoinGroup",
+								promptData = { groupId = GroupId },
+								data = Data,
+								callbacks = Callbacks
+							}
+						})
+					}))
 				end
-				var2(cryoModule.Dictionary.join(var1, {
-					promptQueue = cryoModule.List.join(var1.promptQueue, {
-						{
-							promptType = "PromptJoinGroup",
-							promptData = { groupId = p2 },
-							data = p3,
-							callbacks = p4
-						}
-					})
-				}))
-			end, { var1, var2 }),
-			closePrompt = var3
+			end, { UseStateResult, UseStateResult2 }),
+			closePrompt = UseResult
 		}),
-		FocusNavigationCoreScriptsWrapper = if var4 then reactModule.createElement(focusRoot, {
+		FocusNavigationCoreScriptsWrapper = if Element then ReactModule.createElement(FocusRoot, {
 			isIsolated = true,
 			isAutoFocusRoot = true,
-			surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.CentralOverlay
-		}, { Prompt = var4 }) else nil
+			surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.CentralOverlay
+		}, { Prompt = Element }) else nil
 	})
 end

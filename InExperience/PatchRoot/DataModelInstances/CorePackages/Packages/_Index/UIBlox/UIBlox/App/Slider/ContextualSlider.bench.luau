@@ -1,32 +1,30 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent.Parent
-local parent_2 = parent_1.Parent
-local reactModule = require(parent_2.React)
-local contextualSliderModule = require(parent.ContextualSlider)
-local systemSliderModule = require(parent.SystemSlider)
-local describe = require(parent_2.Dev.JestGlobals).describe
-local benchmarksModule = require(parent_1.Utility.benchmarks)
-local mountComponentTimes = benchmarksModule.mountComponentTimes
-local scrollComponentTimes = benchmarksModule.scrollComponentTimes
-local var1 = reactModule.createElement(contextualSliderModule, {
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent.Parent
+local Parent2 = Parent1.Parent
+local ReactModule = require(Parent2.React)
+local DescribeFunction: (any, any) -> () = require(Parent2.Dev.JestGlobals).describe
+local BenchmarksModule = require(Parent1.Utility.benchmarks)
+local MountComponentTimesFunction = BenchmarksModule.mountComponentTimes
+local ScrollComponentTimesFunction = BenchmarksModule.scrollComponentTimes
+local Element = ReactModule.createElement(require(Parent.ContextualSlider), {
 	min = 0,
 	max = 100,
 	value = 0,
-	onValueChanged = function() end
+	onValueChanged = function() --[[ Line: 21 ]] end
 })
-local var2 = reactModule.createElement(systemSliderModule, {
+local Element1 = ReactModule.createElement(require(Parent.SystemSlider), {
 	min = 0,
 	max = 100,
 	value = 0,
-	onValueChanged = function() end
+	onValueChanged = function() --[[ Line: 27 ]] end
 })
-describe("ContextualSlider", function()
-	-- upvalues: mountComponentTimes (ref), var1 (ref), scrollComponentTimes (ref)
-	mountComponentTimes(var1, 100, "ContextualSlider")
-	scrollComponentTimes(var1, 100, "ContextualSlider")
+DescribeFunction("ContextualSlider", function() --[[ Line: 30 ]]
+	-- upvalues: MountComponentTimesFunction (copy), Element (copy), ScrollComponentTimesFunction (copy)
+	MountComponentTimesFunction(Element, 100, "ContextualSlider")
+	ScrollComponentTimesFunction(Element, 100, "ContextualSlider")
 end)
-describe("SystemSlider", function()
-	-- upvalues: mountComponentTimes (ref), var2 (ref), scrollComponentTimes (ref)
-	mountComponentTimes(var2, 100, "SystemSlider")
-	scrollComponentTimes(var2, 100, "SystemSlider")
+DescribeFunction("SystemSlider", function() --[[ Line: 34 ]]
+	-- upvalues: MountComponentTimesFunction (copy), Element1 (copy), ScrollComponentTimesFunction (copy)
+	MountComponentTimesFunction(Element1, 100, "SystemSlider")
+	ScrollComponentTimesFunction(Element1, 100, "SystemSlider")
 end)

@@ -1,4 +1,4 @@
-﻿return function(p1, p2)
+﻿return function(p1, p2: number): boolean --[[ Line: 2 ]]
 	assert(type(p1) == "number", "throttle must be a number")
 	assert(type(p2) == "number", "userId must be a number")
 	

@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.SoundManager.SoundManager)
+﻿return (require(script.Parent._Workspace.SoundManager.SoundManager))

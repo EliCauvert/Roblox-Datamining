@@ -1,21 +1,26 @@
-﻿local appShortcutBar = script:FindFirstAncestor("AppShortcutBar")
-local parent = appShortcutBar.Parent
-local reactModule = require(parent.React)
-local hooksModule = require(appShortcutBar.Hooks)
-local useAppPolicy = require(parent.UniversalAppPolicy).useAppPolicy
+﻿local AppShortcutBar = script:FindFirstAncestor("AppShortcutBar")
+local Parent = AppShortcutBar.Parent
+local ReactModule = require(Parent.React)
+local HooksModule = require(AppShortcutBar.Hooks)
+local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
 
-return function(p1)
-	-- upvalues: hooksModule (ref), useAppPolicy (ref), reactModule (ref)
-	local var1 = hooksModule.useAppShortcutBarHeight()
-	local var2 = useAppPolicy(function(p2)
+return function(p1) --[[ Line: 12 | Named "AppShortcutBarStatusListener" ]]
+	-- upvalues: HooksModule (copy), UseAppPolicyFunction (copy), ReactModule (copy)
+	local UseAppShortcutBarHeightResult = HooksModule.useAppShortcutBarHeight()
+	local UseShortcutBarVisibleResult = HooksModule.useShortcutBarVisible()
+	local UseShortcutBarVisibleResult1 = UseAppPolicyFunction(function(p2) --[[ Line: 15 ]]
 		return p2.getStickyShortcutBarEnabled()
-	end) and hooksModule.useShortcutBarVisible()
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var2 (ref), var1 (ref)
+	end) and UseShortcutBarVisibleResult
+	ReactModule.useEffect(function() --[[ Line: 22 ]]
+		-- upvalues: p1 (copy), UseShortcutBarVisibleResult1 (copy), UseAppShortcutBarHeightResult (copy)
 		if p1.onHeightChanged then
-			p1.onHeightChanged(if var2 then var1 else 0)
+			p1.onHeightChanged(if UseShortcutBarVisibleResult1 then UseAppShortcutBarHeightResult else 0)
 		end
-	end, { var2, var1, p1.onHeightChanged })
+	end, {
+		UseShortcutBarVisibleResult1,
+		UseAppShortcutBarHeightResult,
+		p1.onHeightChanged
+	})
 	
 	return nil
 end

@@ -1,23 +1,22 @@
-﻿local textBoundsRoundUpEngineFeature = game:GetEngineFeature("TextBoundsRoundUp")
-local textService = game:GetService("TextService")
-local t = { _TEMP_PATCHED_PADDING = Vector2.new(0, 0) }
+﻿local TextService = game:GetService("TextService")
+local TextModule = { _TEMP_PATCHED_PADDING = Vector2.new(0, 0) }
 
-if not textBoundsRoundUpEngineFeature then
-	t._TEMP_PATCHED_PADDING = Vector2.new(2, 2)
+if not game:GetEngineFeature("TextBoundsRoundUp") then
+	TextModule._TEMP_PATCHED_PADDING = Vector2.new(2, 2)
 end
-function t.GetTextBounds(p1, p2, p3, p4)
-	-- upvalues: textService (ref), t (ref)
-	return textService:GetTextSize(p1, p3, p2, p4) + t._TEMP_PATCHED_PADDING
-end
-
-function t.GetTextWidth(p1, p2, p3)
-	-- upvalues: t (ref)
-	return t.GetTextBounds(p1, p2, p3, Vector2.new(10000, 10000)).X
+function TextModule.GetTextBounds(String, p1, FontSize, Vector) --[[ Line: 18 ]]
+	-- upvalues: TextService (copy), TextModule (copy)
+	return TextService:GetTextSize(String, FontSize, p1, Vector) + TextModule._TEMP_PATCHED_PADDING
 end
 
-function t.GetTextHeight(p1, p2, p3, p4)
-	-- upvalues: t (ref)
-	return t.GetTextBounds(p1, p2, p3, Vector2.new(p4, 10000)).Y
+function TextModule.GetTextWidth(p1, p2, p3) --[[ Line: 22 ]]
+	-- upvalues: TextModule (copy)
+	return TextModule.GetTextBounds(p1, p2, p3, Vector2.new(10000, 10000)).X
 end
 
-return t
+function TextModule.GetTextHeight(p1, p2, p3, X) --[[ Line: 26 ]]
+	-- upvalues: TextModule (copy)
+	return TextModule.GetTextBounds(p1, p2, p3, Vector2.new(X, 10000)).Y
+end
+
+return TextModule

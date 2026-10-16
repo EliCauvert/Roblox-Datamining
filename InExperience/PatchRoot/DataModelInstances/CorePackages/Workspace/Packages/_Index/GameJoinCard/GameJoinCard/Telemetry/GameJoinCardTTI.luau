@@ -1,83 +1,80 @@
-﻿local parent = script:FindFirstAncestor("GameJoinCard").Parent
-local timeToInteractiveTracker = require(parent.TimeToInteractiveTracker).TimeToInteractiveTracker
-local fFlagMobileGameJoinCardTTITracking = require(parent.SharedFlags).FFlagMobileGameJoinCardTTITracking
-local t = {
+﻿local Parent = script:FindFirstAncestor("GameJoinCard").Parent
+local TimeToInteractiveTracker = require(Parent.TimeToInteractiveTracker).TimeToInteractiveTracker
+local FFlagMobileGameJoinCardTTITracking = require(Parent.SharedFlags).FFlagMobileGameJoinCardTTITracking
+local EventName = {
 	MobileCardMounted = "MobileGameJoinCardOpened_Mounted",
 	MobileBannerMounted = "MobileGameJoinCardOpened_BannerLoaded",
 	PeopleListMounted = "PeopleListContextualMenuOpen_Mounted"
 }
-local t_1 = {
+local Surface = {
 	MobileGameJoinCard = "mobile_game_join_card",
 	PeopleListContextualMenu = "people_list_contextual_menu"
 }
-local t_2 = { EventName = t, Surface = t_1 }
-local var1 = nil
+local ScaledCurrentTime = nil
 
-function t_2.trackMobileCardClickStart()
-	-- upvalues: var1 (write), fFlagMobileGameJoinCardTTITracking (ref), timeToInteractiveTracker (ref), t (ref), t_1 (ref)
-	var1 = tick() * 1000
-	
-	if fFlagMobileGameJoinCardTTITracking then
-		timeToInteractiveTracker.trackStart(t.MobileCardMounted, true)
-		timeToInteractiveTracker.updateMetadata(t.MobileCardMounted, {
-			category = "social_game_join_card",
-			page = t_1.MobileGameJoinCard
-		})
-		timeToInteractiveTracker.trackStart(t.MobileBannerMounted, true)
-		timeToInteractiveTracker.updateMetadata(t.MobileBannerMounted, {
-			category = "social_game_join_card",
-			page = t_1.MobileGameJoinCard
-		})
+return {
+	EventName = EventName,
+	Surface = Surface,
+	trackMobileCardClickStart = function() --[[ Line: 51 ]]
+		-- upvalues: ScaledCurrentTime (ref), FFlagMobileGameJoinCardTTITracking (copy), TimeToInteractiveTracker (copy), EventName (copy), Surface (copy)
+		ScaledCurrentTime = tick() * 1000
 		
-		return
-	end
-end
-
-function t_2.consumeMobileCardClickStartMs()
-	-- upvalues: var1 (write)
-	var1 = nil
-	
-	return var1
-end
-
-function t_2.trackCardMounted()
-	-- upvalues: fFlagMobileGameJoinCardTTITracking (ref), timeToInteractiveTracker (ref), t (ref)
-	if fFlagMobileGameJoinCardTTITracking then
-		timeToInteractiveTracker.trackEnd(t.MobileCardMounted)
+		if FFlagMobileGameJoinCardTTITracking then
+			TimeToInteractiveTracker.trackStart(EventName.MobileCardMounted, true)
+			TimeToInteractiveTracker.updateMetadata(EventName.MobileCardMounted, {
+				category = "social_game_join_card",
+				page = Surface.MobileGameJoinCard
+			})
+			TimeToInteractiveTracker.trackStart(EventName.MobileBannerMounted, true)
+			TimeToInteractiveTracker.updateMetadata(EventName.MobileBannerMounted, {
+				category = "social_game_join_card",
+				page = Surface.MobileGameJoinCard
+			})
+			
+			return
+		end
+	end,
+	consumeMobileCardClickStartMs = function() --[[ Line: 71 ]]
+		-- upvalues: ScaledCurrentTime (ref)
+		local ScaledCurrentTime1 = ScaledCurrentTime
+		ScaledCurrentTime = nil
 		
-		return
+		return ScaledCurrentTime1
+	end,
+	trackCardMounted = function() --[[ Line: 77 ]]
+		-- upvalues: FFlagMobileGameJoinCardTTITracking (copy), TimeToInteractiveTracker (copy), EventName (copy)
+		if FFlagMobileGameJoinCardTTITracking then
+			TimeToInteractiveTracker.trackEnd(EventName.MobileCardMounted)
+			
+			return
+		end
+	end,
+	trackBannerLoaded = function() --[[ Line: 85 ]]
+		-- upvalues: FFlagMobileGameJoinCardTTITracking (copy), TimeToInteractiveTracker (copy), EventName (copy)
+		if FFlagMobileGameJoinCardTTITracking then
+			TimeToInteractiveTracker.trackEnd(EventName.MobileBannerMounted)
+			
+			return
+		end
+	end,
+	trackPeopleListClickStart = function() --[[ Line: 93 ]]
+		-- upvalues: FFlagMobileGameJoinCardTTITracking (copy), TimeToInteractiveTracker (copy), EventName (copy), Surface (copy)
+		if FFlagMobileGameJoinCardTTITracking then
+			TimeToInteractiveTracker.trackStart(EventName.PeopleListMounted, true)
+			TimeToInteractiveTracker.updateMetadata(EventName.PeopleListMounted, {
+				category = "social_game_join_card",
+				page = Surface.PeopleListContextualMenu
+			})
+			
+			return
+		end
+	end,
+	trackPeopleListMounted = function() --[[ Line: 105 ]]
+		-- upvalues: FFlagMobileGameJoinCardTTITracking (copy), TimeToInteractiveTracker (copy), EventName (copy)
+		if FFlagMobileGameJoinCardTTITracking then
+			TimeToInteractiveTracker.trackEnd(EventName.PeopleListMounted)
+			
+			return
+		end
 	end
-end
-
-function t_2.trackBannerLoaded()
-	-- upvalues: fFlagMobileGameJoinCardTTITracking (ref), timeToInteractiveTracker (ref), t (ref)
-	if fFlagMobileGameJoinCardTTITracking then
-		timeToInteractiveTracker.trackEnd(t.MobileBannerMounted)
-		
-		return
-	end
-end
-
-function t_2.trackPeopleListClickStart()
-	-- upvalues: fFlagMobileGameJoinCardTTITracking (ref), timeToInteractiveTracker (ref), t (ref), t_1 (ref)
-	if fFlagMobileGameJoinCardTTITracking then
-		timeToInteractiveTracker.trackStart(t.PeopleListMounted, true)
-		timeToInteractiveTracker.updateMetadata(t.PeopleListMounted, {
-			category = "social_game_join_card",
-			page = t_1.PeopleListContextualMenu
-		})
-		
-		return
-	end
-end
-
-function t_2.trackPeopleListMounted()
-	-- upvalues: fFlagMobileGameJoinCardTTITracking (ref), timeToInteractiveTracker (ref), t (ref)
-	if fFlagMobileGameJoinCardTTITracking then
-		timeToInteractiveTracker.trackEnd(t.PeopleListMounted)
-		
-		return
-	end
-end
-
-return t_2
+}

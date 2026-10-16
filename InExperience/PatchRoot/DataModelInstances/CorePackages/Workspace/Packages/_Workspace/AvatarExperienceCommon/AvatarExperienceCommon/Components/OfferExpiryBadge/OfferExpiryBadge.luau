@@ -1,33 +1,34 @@
-﻿local avatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
-local parent = avatarExperienceCommon.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local builderIconsModule = require(parent.BuilderIcons)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useRemainingTimeTextModule = require(avatarExperienceCommon.Hooks.useRemainingTimeText)
-local badgeVariant = foundationModule.Enums.BadgeVariant
-local badgeShape = foundationModule.Enums.BadgeShape
-local iconVariant = foundationModule.Enums.IconVariant
-local iconPosition = foundationModule.Enums.IconPosition
+﻿local AvatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
+local Parent = AvatarExperienceCommon.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local BuilderIconsModule = require(Parent.BuilderIcons)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseRemainingTimeTextModule = require(AvatarExperienceCommon.Hooks.useRemainingTimeText)
+local BadgeVariant = FoundationModule.Enums.BadgeVariant
+local BadgeShape = FoundationModule.Enums.BadgeShape
+local IconVariant = FoundationModule.Enums.IconVariant
+local IconPosition = FoundationModule.Enums.IconPosition
 
-return function(p1)
-	-- upvalues: useRemainingTimeTextModule (ref), useLocalization (ref), reactModule (ref), foundationModule (ref), builderIconsModule (ref), iconVariant (ref), iconPosition (ref), badgeVariant (ref), badgeShape (ref)
-	local var1 = useRemainingTimeTextModule(p1.expirationTimeInUTC)
+return function(p1) --[[ Line: 21 | Named "OfferExpiryBadge" ]]
+	-- upvalues: UseRemainingTimeTextModule (copy), UseLocalizationFunction (copy), ReactModule (copy), FoundationModule (copy), BuilderIconsModule (copy), IconVariant (copy), IconPosition (copy), BadgeVariant (copy), BadgeShape (copy)
+	local UseRemainingTimeTextModuleResult = UseRemainingTimeTextModule(p1.expirationTimeInUTC)
+	local UseLocalizationResult = UseLocalizationFunction({
+		endTime = {
+			"Feature.InExperienceShop.Label.EndTime",
+			timeRemaining = UseRemainingTimeTextModuleResult or ""
+		}
+	})
 	
-	return if var1 == nil then nil else reactModule.createElement(foundationModule.Badge, {
+	return if UseRemainingTimeTextModuleResult == nil then nil else ReactModule.createElement(FoundationModule.Badge, {
 		LayoutOrder = p1.layoutOrder,
 		icon = {
-			name = builderIconsModule.Icon.Clock,
-			variant = iconVariant.Filled,
-			position = iconPosition.Left
+			name = BuilderIconsModule.Icon.Clock,
+			variant = IconVariant.Filled,
+			position = IconPosition.Left
 		},
-		text = useLocalization({
-			endTime = {
-				"Feature.InExperienceShop.Label.EndTime",
-				timeRemaining = var1 or ""
-			}
-		}).endTime,
-		variant = badgeVariant.Standard,
-		shape = badgeShape.Box
+		text = UseLocalizationResult.endTime,
+		variant = BadgeVariant.Standard,
+		shape = BadgeShape.Box
 	})
 end

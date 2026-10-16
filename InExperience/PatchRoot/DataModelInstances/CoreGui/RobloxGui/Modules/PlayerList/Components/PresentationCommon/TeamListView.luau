@@ -1,35 +1,34 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local parent = script.Parent.Parent.Parent
-local reactModule = require(corePackagesService.Packages.React)
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local playerListModule = require(corePackagesService.Workspace.Packages.PlayerList)
-local _ = require(corePackagesService.Workspace.Packages.LeaderboardStore)
-local useLayoutValues = playerListModule.Common.useLayoutValues
-local useStyle = UIBloxModule.Core.Style.useStyle
-local playerEntryContainerModule = require(parent.Components.Container.PlayerEntryContainer)
-local teamEntryContainerModule = require(parent.Components.Container.TeamEntryContainer)
-local fFlagReplacePlayerIconRoduxWithSignal = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagReplacePlayerIconRoduxWithSignal
-local fFlagPlayerListUseFocusNavHook = playerListModule.Flags.FFlagPlayerListUseFocusNavHook
-local playerIconInfoStore = require(corePackagesService.Workspace.Packages.PlayerIconInfoStore).PlayerIconInfoStore
+﻿local CorePackages = game:GetService("CorePackages")
+local Parent = script.Parent.Parent.Parent
+local ReactModule = require(CorePackages.Packages.React)
+local PlayerListModule = require(CorePackages.Workspace.Packages.PlayerList)
+local _ = require(CorePackages.Workspace.Packages.LeaderboardStore)
+local UseLayoutValuesFunction = PlayerListModule.Common.useLayoutValues
+local UseStyleFunction = require(CorePackages.Packages.UIBlox).Core.Style.useStyle
+local PlayerEntryContainerModule = require(Parent.Components.Container.PlayerEntryContainer)
+local TeamEntryContainerModule = require(Parent.Components.Container.TeamEntryContainer)
+local FFlagReplacePlayerIconRoduxWithSignal = require(CorePackages.Workspace.Packages.SharedFlags).FFlagReplacePlayerIconRoduxWithSignal
+local FFlagPlayerListUseFocusNavHook = PlayerListModule.Flags.FFlagPlayerListUseFocusNavHook
+local PlayerIconInfoStore = require(CorePackages.Workspace.Packages.PlayerIconInfoStore).PlayerIconInfoStore
 
-return reactModule.memo(function(p1)
-	-- upvalues: useLayoutValues (ref), useStyle (ref), reactModule (ref), teamEntryContainerModule (ref), fFlagReplacePlayerIconRoduxWithSignal (ref), playerIconInfoStore (ref), playerEntryContainerModule (ref), fFlagPlayerListUseFocusNavHook (ref)
-	local var1 = useLayoutValues()
-	local var2 = useStyle()
-	local t = {
-		UIListLayout = reactModule.createElement("UIListLayout", {
+return ReactModule.memo(function(p1) --[[ Line: 61 | Named "TeamListView" ]]
+	-- upvalues: UseLayoutValuesFunction (copy), UseStyleFunction (copy), ReactModule (copy), TeamEntryContainerModule (copy), FFlagReplacePlayerIconRoduxWithSignal (copy), PlayerIconInfoStore (copy), PlayerEntryContainerModule (copy), FFlagPlayerListUseFocusNavHook (copy)
+	local UseLayoutValuesResult = UseLayoutValuesFunction()
+	local UseStyleResult = UseStyleFunction()
+	local Frames = {
+		UIListLayout = ReactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			FillDirection = Enum.FillDirection.Vertical,
 			VerticalAlignment = Enum.VerticalAlignment.Top,
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
-			Padding = if p1.isDirectionalPreferred then UDim.new(0, var1.EntryPadding) else nil
+			Padding = if p1.isDirectionalPreferred then UDim.new(0, UseLayoutValuesResult.EntryPadding) else nil
 		})
 	}
 	
 	if p1.showTeamEntry then
-		t.TeamEntry = reactModule.createElement(teamEntryContainerModule, {
+		Frames.TeamEntry = ReactModule.createElement(TeamEntryContainerModule, {
 			layoutOrder = -1,
-			size = UDim2.new(1, 0, 0, var1.TeamEntrySizeY),
+			size = UDim2.new(1, 0, 0, UseLayoutValuesResult.TeamEntrySizeY),
 			teamData = p1.teamData,
 			entrySizeX = p1.entrySizeX,
 			isSmallTouchDevice = p1.isSmallTouchDevice,
@@ -37,10 +36,10 @@ return reactModule.memo(function(p1)
 		})
 	end
 	if p1.teamPlayersCount > 0 then
-		local var3 = 0
+		local Count = 0
 		
 		if p1.isSmallTouchDevice then
-			t.BottomDiv = reactModule.createElement("Frame", {
+			Frames.BottomDiv = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 0.8,
 				Size = UDim2.new(1, 0, 0, 1),
 				Position = UDim2.new(0, 0, 0, 0),
@@ -49,56 +48,56 @@ return reactModule.memo(function(p1)
 				LayoutOrder = p1.teamPlayersCount * 2
 			})
 		end
-		p1.teamData.players.iterateData(function(p2, p3)
-			-- upvalues: var3 (write), fFlagReplacePlayerIconRoduxWithSignal (copy), playerIconInfoStore (copy), p1 (ref), t (ref), reactModule (copy), playerEntryContainerModule (copy), var1 (ref), fFlagPlayerListUseFocusNavHook (copy), var2 (ref)
-			var3 += 1
-			local var4 = if fFlagReplacePlayerIconRoduxWithSignal then playerIconInfoStore.getPlayerIconInfoReactive(p2.UserId)(false) else p1.playerIconInfos[p3]
-			local var5 = p1.playerRelationships[p3]
+		p1.teamData.players.iterateData(function(Player: Player, p2) --[[ Line: 100 ]]
+			-- upvalues: Count (ref), FFlagReplacePlayerIconRoduxWithSignal (upval), PlayerIconInfoStore (upval), p1 (copy), Frames (copy), ReactModule (upval), PlayerEntryContainerModule (upval), UseLayoutValuesResult (copy), FFlagPlayerListUseFocusNavHook (upval), UseStyleResult (copy)
+			Count += 1
+			local PlayerIconInfo = if FFlagReplacePlayerIconRoduxWithSignal then PlayerIconInfoStore.getPlayerIconInfoReactive(Player.UserId)(false) else p1.playerIconInfos[p2]
+			local PlayerRelationship = p1.playerRelationships[p2]
 			
-			if not var4 or not var5 then return end
-			t["PlayerEntry_" .. tostring(p3)] = reactModule.createElement(playerEntryContainerModule, {
+			if not PlayerIconInfo or not PlayerRelationship then return end
+			Frames["PlayerEntry_" .. tostring(p2)] = ReactModule.createElement(PlayerEntryContainerModule, {
 				titlePlayerEntry = false,
-				size = UDim2.new(1, var1.EntryXOffset, 0, var1.PlayerEntrySizeY),
-				player = p2,
+				size = UDim2.new(1, UseLayoutValuesResult.EntryXOffset, 0, UseLayoutValuesResult.PlayerEntrySizeY),
+				player = Player,
 				entrySizeX = p1.entrySizeX,
-				playerIconInfo = var4,
-				playerRelationship = var5,
+				playerIconInfo = PlayerIconInfo,
+				playerRelationship = PlayerRelationship,
 				setDropDownPlayerDimensionY = p1.setDropDownPlayerDimensionY,
 				firstPlayerRef = p1.firstPlayerRef,
 				prevFocusedEntry = p1.prevFocusedEntry,
 				destroyedFocusedPlayerId = p1.destroyedFocusedPlayerId,
-				registerPlayerInstance = if fFlagPlayerListUseFocusNavHook then p1.registerPlayerInstance else nil,
-				unregisterPlayerInstance = if fFlagPlayerListUseFocusNavHook then p1.unregisterPlayerInstance else nil,
-				setSelectedPlayerId = if fFlagPlayerListUseFocusNavHook then p1.setSelectedPlayerId else nil
+				registerPlayerInstance = if FFlagPlayerListUseFocusNavHook then p1.registerPlayerInstance else nil,
+				unregisterPlayerInstance = if FFlagPlayerListUseFocusNavHook then p1.unregisterPlayerInstance else nil,
+				setSelectedPlayerId = if FFlagPlayerListUseFocusNavHook then p1.setSelectedPlayerId else nil
 			})
 			
 			if p1.isSmallTouchDevice then
-				t["TopDiv_" .. var9] = reactModule.createElement("Frame", {
+				Frames["TopDiv_" .. Count] = ReactModule.createElement("Frame", {
 					BackgroundTransparency = 0.8,
 					Size = UDim2.new(1, 0, 0, 1),
 					Position = UDim2.new(0, 0, 0, 0),
 					AnchorPoint = Vector2.new(0, 0),
 					BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-					LayoutOrder = (var3 - 1) * 2
+					LayoutOrder = (Count - 1) * 2
 				})
 			end
-			if var3 < p1.teamPlayersCount and not p1.isSmallTouchDevice and not p1.isDirectionalPreferred then
-				t["Divider_" .. var9] = reactModule.createElement("Frame", {
+			if Count < p1.teamPlayersCount and not p1.isSmallTouchDevice and not p1.isDirectionalPreferred then
+				Frames["Divider_" .. Count] = ReactModule.createElement("Frame", {
 					BorderSizePixel = 0,
 					Size = UDim2.new(1, 0, 0, 1),
 					Position = UDim2.new(0, 0, 1, 0),
 					AnchorPoint = Vector2.new(0, 1),
-					BackgroundTransparency = var2.Theme.Divider.Transparency,
-					BackgroundColor3 = var2.Theme.Divider.Color,
-					LayoutOrder = var3 * 2
+					BackgroundTransparency = UseStyleResult.Theme.Divider.Transparency,
+					BackgroundColor3 = UseStyleResult.Theme.Divider.Color,
+					LayoutOrder = Count * 2
 				})
 			end
 		end, false)
 	end
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
 		LayoutOrder = p1.layoutOrder
-	}, t)
+	}, Frames)
 end)

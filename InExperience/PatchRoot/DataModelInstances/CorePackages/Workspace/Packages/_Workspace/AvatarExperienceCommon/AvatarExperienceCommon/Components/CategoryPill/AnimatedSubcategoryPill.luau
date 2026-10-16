@@ -1,41 +1,41 @@
-﻿local avatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
-local parent = avatarExperienceCommon.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local reactOtterModule = require(parent.ReactOtter)
-local animationConstantsModule = require(avatarExperienceCommon.AnimationConstants)
-local fFlagAXDisableHiddenCatalogCategoryPills = require(parent.AvatarExperienceFlags).FFlagAXDisableHiddenCatalogCategoryPills
+﻿local AvatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
+local Parent = AvatarExperienceCommon.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local ReactOtterModule = require(Parent.ReactOtter)
+local AnimationConstantsModule = require(AvatarExperienceCommon.AnimationConstants)
+local FFlagAXDisableHiddenCatalogCategoryPills = require(Parent.AvatarExperienceFlags).FFlagAXDisableHiddenCatalogCategoryPills
 
-return function(p1)
-	-- upvalues: reactOtterModule (ref), reactModule (ref), animationConstantsModule (ref), fFlagAXDisableHiddenCatalogCategoryPills (ref), foundationModule (ref)
-	local subcategory = p1.subcategory
-	local pillIndex = p1.pillIndex
-	local renderCategoryPill = p1.renderCategoryPill
-	local isFadingOut = p1.isFadingOut
-	local var1, var2 = reactOtterModule.useAnimatedBinding(0)
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), reactOtterModule (copy), animationConstantsModule (copy)
-		var2(reactOtterModule.spring(1, {
-			frequency = animationConstantsModule.FIntAXSubcategoryPillFadeAnimationFrequency,
-			dampingRatio = animationConstantsModule.FIntAXSubcategoryPillFadeAnimationDampingRatio
+return function(p1) --[[ Line: 22 | Named "AnimatedSubcategoryPill" ]]
+	-- upvalues: ReactOtterModule (copy), ReactModule (copy), AnimationConstantsModule (copy), FFlagAXDisableHiddenCatalogCategoryPills (copy), FoundationModule (copy)
+	local Subcategory = p1.subcategory
+	local PillIndex = p1.pillIndex
+	local RenderCategoryPillFunction = p1.renderCategoryPill
+	local IsFadingOut = p1.isFadingOut
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0)
+	ReactModule.useEffect(function() --[[ Line: 32 ]]
+		-- upvalues: UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), AnimationConstantsModule (upval)
+		UseAnimatedBindingResult2(ReactOtterModule.spring(1, {
+			frequency = AnimationConstantsModule.FIntAXSubcategoryPillFadeAnimationFrequency,
+			dampingRatio = AnimationConstantsModule.FIntAXSubcategoryPillFadeAnimationDampingRatio
 		}))
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: isFadingOut (ref), var2 (ref), reactOtterModule (copy)
-		if isFadingOut then
-			var2(reactOtterModule.instant(0))
+	ReactModule.useEffect(function() --[[ Line: 41 ]]
+		-- upvalues: IsFadingOut (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval)
+		if IsFadingOut then
+			UseAnimatedBindingResult2((ReactOtterModule.instant(0)))
 		end
-	end, { isFadingOut })
+	end, { IsFadingOut })
 	
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "auto-xy anchor-center-left padding-x-xxsmall",
 		BackgroundTransparency = 1,
 		Size = UDim2.new(0, 0, 1, 0),
-		GroupTransparency = var1:map(function(p2)
+		GroupTransparency = UseAnimatedBindingResult:map(function(p2: number): number --[[ Line: 56 ]]
 			return 1 - p2
 		end),
-		LayoutOrder = pillIndex
+		LayoutOrder = PillIndex
 	}, {
-		Pill = renderCategoryPill(subcategory, pillIndex, if fFlagAXDisableHiddenCatalogCategoryPills then not isFadingOut else nil)
+		Pill = RenderCategoryPillFunction(Subcategory, PillIndex, if FFlagAXDisableHiddenCatalogCategoryPills then not IsFadingOut else nil)
 	})
 end

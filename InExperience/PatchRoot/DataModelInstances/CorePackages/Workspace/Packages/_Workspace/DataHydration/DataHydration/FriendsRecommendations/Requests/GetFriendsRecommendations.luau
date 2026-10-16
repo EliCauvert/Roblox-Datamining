@@ -1,19 +1,19 @@
-﻿local parent = script:FindFirstAncestor("DataHydration").Parent
-local httpClientModule = require(parent.HttpClient)
-local httpModule = require(parent.Http)
-local urlBuilderModule = require(parent.UrlBuilder)
+﻿local Parent = script:FindFirstAncestor("DataHydration").Parent
+local HttpClientModule = require(Parent.HttpClient)
+local HttpModule = require(Parent.Http)
+local UrlBuilderModule = require(Parent.UrlBuilder)
 local _ = require(script.Parent.Parent.FriendsRecommendationsStoreTypes)
-local fetch = httpClientModule.fetch
-local asPromise = httpClientModule.asPromise
+local FetchFunction = HttpClientModule.fetch
+local AsPromiseFunction = HttpClientModule.asPromise
 
-return function(p1, p2)
-	-- upvalues: urlBuilderModule (ref), httpModule (ref), fetch (ref), asPromise (ref)
-	return asPromise(fetch({
+return function(p1, Source) --[[ Line: 16 ]]
+	-- upvalues: UrlBuilderModule (copy), HttpModule (copy), FetchFunction (copy), AsPromiseFunction (copy)
+	return AsPromiseFunction((FetchFunction({
 		method = "GET",
 		analyticsKey = "friends.get-friend-recommendations",
-		url = urlBuilderModule.UrlBuilder.addQueryString(`{httpModule.Url.FRIEND_URL}/users/{p1}/friends/recommendations`, { source = p2 }),
-		decode = function(p3)
-			return p3
+		url = UrlBuilderModule.UrlBuilder.addQueryString(`{HttpModule.Url.FRIEND_URL}/users/{p1}/friends/recommendations`, { source = Source }),
+		decode = function(p2) --[[ Line: 29 ]]
+			return p2
 		end
-	}))
+	})))
 end

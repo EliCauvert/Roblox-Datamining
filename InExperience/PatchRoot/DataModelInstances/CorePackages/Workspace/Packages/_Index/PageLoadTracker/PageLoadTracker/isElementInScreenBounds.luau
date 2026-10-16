@@ -1,11 +1,17 @@
-﻿local pageLoadConfigModule = require(script.Parent.PageLoadConfig)
+﻿local PageLoadConfigModule = require(script.Parent.PageLoadConfig)
 
-function isElementInScreenBounds(p1, p2, p3)
-	-- upvalues: pageLoadConfigModule (ref)
-	local absolutePosition = p1.AbsolutePosition
-	local absoluteSize = p1.AbsoluteSize
+function isElementInScreenBounds(Frame: Frame, Vector, p1: number): boolean --[[ Line: 3 ]]
+	-- upvalues: PageLoadConfigModule (copy)
+	local AbsolutePosition = Frame.AbsolutePosition
+	local AbsoluteSize = Frame.AbsoluteSize
 	
-	return if absoluteSize.X <= 0 or absoluteSize.Y <= 0 then false else absoluteSize.X * pageLoadConfigModule.SCREEN_BOUNDS.MIN_VISIBILITY_RATIO <= math.max(0, math.min(absolutePosition.X + absoluteSize.X, p2.X) - math.max(absolutePosition.X, 0)) and absoluteSize.Y * pageLoadConfigModule.SCREEN_BOUNDS.MIN_VISIBILITY_RATIO <= math.max(0, math.min(absolutePosition.Y + absoluteSize.Y, p2.Y) - math.max(absolutePosition.Y, p3))
+	if AbsoluteSize.X <= 0 or AbsoluteSize.Y <= 0 then
+		return false
+	else
+		local IsYBelow = AbsoluteSize.Y * PageLoadConfigModule.SCREEN_BOUNDS.MIN_VISIBILITY_RATIO <= math.max(0, math.min(AbsolutePosition.Y + AbsoluteSize.Y, Vector.Y) - math.max(AbsolutePosition.Y, p1))
+		
+		return AbsoluteSize.X * PageLoadConfigModule.SCREEN_BOUNDS.MIN_VISIBILITY_RATIO <= math.max(0, math.min(AbsolutePosition.X + AbsoluteSize.X, Vector.X) - math.max(AbsolutePosition.X, 0)) and IsYBelow
+	end
 end
 
 return isElementInScreenBounds

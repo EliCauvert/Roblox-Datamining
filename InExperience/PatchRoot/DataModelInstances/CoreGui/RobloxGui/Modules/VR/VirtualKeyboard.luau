@@ -1,25 +1,24 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local runService = game:GetService("RunService")
+﻿local RunService = game:GetService("RunService")
 local _ = game:GetService("UserInputService")
 local _ = game:GetService("GuiService")
-local httpService = game:GetService("HttpService")
-local contextActionService = game:GetService("ContextActionService")
+local HttpService = game:GetService("HttpService")
+local ContextActionService = game:GetService("ContextActionService")
 local _ = game:GetService("Players")
-local soundService = game:GetService("SoundService")
-local textService = game:GetService("TextService")
-local corePackagesService = game:GetService("CorePackages")
-local _ = coreGuiService:WaitForChild("RobloxGui")
-local create = require(corePackagesService.Workspace.Packages.AppCommonLib).Create
-local color3 = Color3.new(0.192156862745, 0.192156862745, 0.192156862745)
-local color3_1 = Color3.new(0.192156862745, 0.192156862745, 0.192156862745)
-local color3_2 = Color3.new(0, 0.635294117647, 1)
-local color3_3 = Color3.new(0, 0.635294117647, 1)
-local color3_4 = Color3.new(1, 1, 1)
-local var1 = httpService:JSONDecode("[\n  [\n    {\n      \"a\": 7,\n      \"w\": 0.8\n    },\n    \"*\",\n    \"Q\",\n    \"W\",\n    \"E\",\n    \"R\",\n    \"T\",\n    \"Y\",\n    \"U\",\n    \"I\",\n    \"O\",\n    \"P\",\n    {\n      \"w\": 1.8\n    },\n    \"Delete\"\n  ],\n  [\n    {\n      \"w\": 1.6\n    },\n    \"Caps\",\n    \"A\",\n    \"S\",\n    \"D\",\n    \"F\",\n    \"G\",\n    \"H\",\n    \"J\",\n    \"K\",\n    \"L\",\n    \"?\",\n    {\n      \"h\": 2,\n      \"w2\": 2.4,\n      \"h2\": 1,\n      \"x2\": -1.4,\n      \"y2\": 1\n    },\n    \"Enter\"\n  ],\n  [\n    {\n      \"w\": 2.2\n    },\n    \"Shift\",\n    \"Z\",\n    \"X\",\n    \"C\",\n    \"V\",\n    \"B\",\n    \"N\",\n    \"M\",\n    \".\"\n  ],\n  [\n    {\n      \"w\": 2.2\n    },\n    \"123/sym\",\n    {\n      \"w\": 8\n    },\n    \"\",\n    {\n      \"w\": 2.4\n    },\n    \"<Speaker>\"\n  ]\n]\n")
-local var2 = httpService:JSONDecode("[\n  [\n    {\n      \"a\": 7,\n      \"w\": 0.8\n    },\n    \"*\",\n    \"1\",\n    \"2\",\n    \"3\",\n    \"4\",\n    \"5\",\n    \"6\",\n    \"7\",\n    \"8\",\n    \"9\",\n    \"0\",\n    {\n      \"w\": 1.8\n    },\n    \"Delete\"\n  ],\n  [\n    {\n      \"w\": 1.6\n    },\n    \"!\",\n    \"@\",\n    \"#\",\n    \"$\",\n    \"%\",\n    \"^\",\n    \"&\",\n    \"(\",\n    \")\",\n    \"=\",\n    \"?\",\n    {\n      \"h\": 2,\n      \"w2\": 2.4,\n      \"h2\": 1,\n      \"x2\": -1.4,\n      \"y2\": 1\n    },\n    \"Enter\"\n  ],\n  [\n    {\n      \"w\": 1.2\n    },\n    \"/\",\n    \"-\",\n    \"+\",\n    \"_\",\n    \":\",\n    \";\",\n    \"'\",\n    \"\\\"\",\n    \",\",\n    \".\"\n  ],\n  [\n    {\n      \"w\": 2.2\n    },\n    \"abc\",\n    {\n      \"w\": 8\n    },\n    \"\",\n    {\n      \"w\": 2.4\n    },\n    \"<Speaker>\"\n  ]\n]\n")
+local SoundService = game:GetService("SoundService")
+local TextService = game:GetService("TextService")
+local CorePackages = game:GetService("CorePackages")
+local _ = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+local CreateFunction = require(CorePackages.Workspace.Packages.AppCommonLib).Create
+local _Color3 = Color3.new(0.19215686274509805, 0.19215686274509805, 0.19215686274509805)
+local _Color3_1 = Color3.new(0.19215686274509805, 0.19215686274509805, 0.19215686274509805)
+local _Color3_2 = Color3.new(0, 0.6352941176470588, 1)
+local _Color3_3 = Color3.new(0, 0.6352941176470588, 1)
+local _Color3_4 = Color3.new(1, 1, 1)
+local SymW8W24Speaker = HttpService:JSONDecode("[\n  [\n    {\n      \"a\": 7,\n      \"w\": 0.8\n    },\n    \"*\",\n    \"Q\",\n    \"W\",\n    \"E\",\n    \"R\",\n    \"T\",\n    \"Y\",\n    \"U\",\n    \"I\",\n    \"O\",\n    \"P\",\n    {\n      \"w\": 1.8\n    },\n    \"Delete\"\n  ],\n  [\n    {\n      \"w\": 1.6\n    },\n    \"Caps\",\n    \"A\",\n    \"S\",\n    \"D\",\n    \"F\",\n    \"G\",\n    \"H\",\n    \"J\",\n    \"K\",\n    \"L\",\n    \"?\",\n    {\n      \"h\": 2,\n      \"w2\": 2.4,\n      \"h2\": 1,\n      \"x2\": -1.4,\n      \"y2\": 1\n    },\n    \"Enter\"\n  ],\n  [\n    {\n      \"w\": 2.2\n    },\n    \"Shift\",\n    \"Z\",\n    \"X\",\n    \"C\",\n    \"V\",\n    \"B\",\n    \"N\",\n    \"M\",\n    \".\"\n  ],\n  [\n    {\n      \"w\": 2.2\n    },\n    \"123/sym\",\n    {\n      \"w\": 8\n    },\n    \"\",\n    {\n      \"w\": 2.4\n    },\n    \"<Speaker>\"\n  ]\n]\n")
+local W22AbcW8W24Speaker = HttpService:JSONDecode("[\n  [\n    {\n      \"a\": 7,\n      \"w\": 0.8\n    },\n    \"*\",\n    \"1\",\n    \"2\",\n    \"3\",\n    \"4\",\n    \"5\",\n    \"6\",\n    \"7\",\n    \"8\",\n    \"9\",\n    \"0\",\n    {\n      \"w\": 1.8\n    },\n    \"Delete\"\n  ],\n  [\n    {\n      \"w\": 1.6\n    },\n    \"!\",\n    \"@\",\n    \"#\",\n    \"$\",\n    \"%\",\n    \"^\",\n    \"&\",\n    \"(\",\n    \")\",\n    \"=\",\n    \"?\",\n    {\n      \"h\": 2,\n      \"w2\": 2.4,\n      \"h2\": 1,\n      \"x2\": -1.4,\n      \"y2\": 1\n    },\n    \"Enter\"\n  ],\n  [\n    {\n      \"w\": 1.2\n    },\n    \"/\",\n    \"-\",\n    \"+\",\n    \"_\",\n    \":\",\n    \";\",\n    \"'\",\n    \"\\\"\",\n    \",\",\n    \".\"\n  ],\n  [\n    {\n      \"w\": 2.2\n    },\n    \"abc\",\n    {\n      \"w\": 8\n    },\n    \"\",\n    {\n      \"w\": 2.4\n    },\n    \"<Speaker>\"\n  ]\n]\n")
 local t = {}
 
-for i, v in pairs({
+for i, value in pairs({
 	"ASR_STATUS_OK", "ASR_STATUS_CANCELLED", "ASR_STATUS_UNKNOWN",
 	"ASR_STATUS_INVALID_ARGUMENTS", "ASR_STATUS_DEADLINE_EXCEEDED",
 	"ASR_STATUS_NOT_FOUND", "ASR_STATUS_ALREADY_EXISTS",
@@ -30,93 +29,95 @@ for i, v in pairs({
 	"ASR_STATUS_NOT_ENABLED", "ASR_STATUS_LOW_CONFIDENCE",
 	"ASR_STATUS_INVALID_JSON"
 }) do
-	t[v] = i - 1
+	t[value] = i - 1
 end
-local function _(p1, p2)
-	local t = {}
+local function _(Text: string, Text1) --[[ Line: 223 | Named "tokenizeString" ]]
+	local List = {}
 	
-	for i in string.gmatch(p1, "([^" .. p1 .. "]+)") do
-		table.insert(t, i)
+	for i in string.gmatch(Text, "([^" .. Text1 .. "]+)") do
+		table.insert(List, i)
 	end
-	return t
+	return List
 end
 
-local _ = function(p3)
-	local match = string.match(p3.Name, "%d+")
+local _ = function(p1): string --[[ Line: 231 | Named "ConvertFontSizeEnumToInt" ]]
+	local Match: string? = string.match(p1.Name, "%d+")
 	
-	return match and tostring(match) or 12
+	return Match and tostring(Match) or 12
 end
 
-local _ = function(p3, p4, p5)
-	p4 = p4.unit
-	p3 = p3.Unit
-	local direction = p4:Dot(p3.Direction)
+local _ = function(Direction, p1, p2) --[[ Line: 240 | Named "RayPlaneIntersection" ]]
+	local Unit = p1.unit
+	local Direction1 = Direction.Unit
+	local DotProduct = Unit:Dot(Direction1.Direction)
 	
-	if direction == 0 then
+	if DotProduct == 0 then
+		return nil
+	else
+		local DotProductRatio = Unit:Dot(p2 - Direction1.Origin) / DotProduct
+		
+		return if DotProductRatio < 0 then nil else Direction1.Origin + Direction1.Direction * DotProductRatio
+	end
+end
+
+function Clamp(p1: number, p2: number, p3: number): number --[[ Line: 261 ]]
+	return (math.max(p1, (math.min(p2, p3))))
+end
+
+local _ = function(Frame: Frame, p1, p2): boolean --[[ Line: 266 | Named "PointInGuiObject" ]]
+	local AbsolutePosition = Frame.AbsolutePosition
+	local NewAbsolutePosition = Frame.AbsolutePosition + Frame.AbsoluteSize
+	
+	return AbsolutePosition.X <= p1 and p1 <= NewAbsolutePosition.X and AbsolutePosition.Y <= p2 and p2 <= NewAbsolutePosition.Y
+end
+
+local function FindAncestorOfType(Parent, ClassName) --[[ Line: 275 ]]
+	-- upvalues: FindAncestorOfType (copy)
+	if Parent then
+		local Parent1 = Parent.Parent
+		
+		return if Parent1 and Parent1:IsA(ClassName) then Parent1 else FindAncestorOfType(Parent1, ClassName)
+	else
 		return nil
 	end
-	local var3 = p4:Dot(p5 - p3.Origin) / direction
-	
-	return if var3 < 0 then nil else p3.Origin + p3.Direction * var3
 end
 
-function Clamp(value, minValue, maxValue)
-	return math.max(value, math.min(minValue, maxValue))
-end
-
-local _ = function(p3, p4, p5)
-	local absolutePosition = p3.AbsolutePosition
-	local var3 = p3.AbsolutePosition + p3.AbsoluteSize
-	
-	return absolutePosition.X <= p4 and p4 <= var3.X and (absolutePosition.Y <= p5 and p5 <= var3.Y)
-end
-
-local function FindAncestorOfType(p3, p4)
-	-- upvalues: FindAncestorOfType (ref)
-	if not p3 then
-		return nil
-	end
-	local parent = p3.Parent
-	
-	return if parent and parent:IsA(p4) then parent else FindAncestorOfType(parent, p4)
-end
-
-local function ExtendedInstance(p3)
+local function ExtendedInstance(Frame) --[[ Line: 286 ]]
 	local t = {}
 	setmetatable(t, {
-		__index = function(_, p4)
-			-- upvalues: p3 (ref)
-			return p3[p4]
+		__index = function(_, p1) --[[ Line: 291 ]]
+			-- upvalues: Frame (copy)
+			return Frame[p1]
 		end,
-		__newindex = function(_, p4, p5)
-			-- upvalues: p3 (ref)
-			p3[p4] = p5
+		__newindex = function(_, Key, p1) --[[ Line: 295 ]]
+			-- upvalues: Frame (copy)
+			Frame[Key] = p1
 		end
 	})
 	
 	return t
 end
 
-local function CreateVRButton(p3)
-	-- upvalues: ExtendedInstance (ref)
-	local var3 = ExtendedInstance(p3)
-	rawset(var3, "OnEnter", function(_) end)
-	rawset(var3, "OnLeave", function(_) end)
-	rawset(var3, "OnDown", function(_) end)
-	rawset(var3, "OnUp", function(_) end)
-	rawset(var3, "ContainsPoint", function(_, p4, p5)
-		-- upvalues: p3 (ref)
-		local absolutePosition = p3.AbsolutePosition
-		local var4 = p3.AbsolutePosition + p3.AbsoluteSize
+local function CreateVRButton(Frame: Frame) --[[ Line: 304 ]]
+	-- upvalues: ExtendedInstance (copy)
+	local ExtendedInstanceResult = ExtendedInstance(Frame)
+	rawset(ExtendedInstanceResult, "OnEnter", function(_) --[[ Line: 307 ]] end)
+	rawset(ExtendedInstanceResult, "OnLeave", function(_) --[[ Line: 309 ]] end)
+	rawset(ExtendedInstanceResult, "OnDown", function(_) --[[ Line: 311 ]] end)
+	rawset(ExtendedInstanceResult, "OnUp", function(_) --[[ Line: 313 ]] end)
+	rawset(ExtendedInstanceResult, "ContainsPoint", function(_, p1, p2): boolean --[[ Line: 315 ]]
+		-- upvalues: Frame (copy)
+		local AbsolutePosition = Frame.AbsolutePosition
+		local NewAbsolutePosition = Frame.AbsolutePosition + Frame.AbsoluteSize
 		
-		return absolutePosition.X <= p4 and p4 <= var4.X and (absolutePosition.Y <= p5 and p5 <= var4.Y)
+		return AbsolutePosition.X <= p1 and p1 <= NewAbsolutePosition.X and AbsolutePosition.Y <= p2 and p2 <= NewAbsolutePosition.Y
 	end)
-	rawset(var3, "Update", function(_) end)
+	rawset(ExtendedInstanceResult, "Update", function(_) --[[ Line: 318 ]] end)
 	
-	return var3
+	return ExtendedInstanceResult
 end
 
-local _ = create("ImageLabel")({
+local _ = CreateFunction("ImageLabel")({
 	Name = "SelectionRing",
 	Image = "rbxasset://textures/ui/menu/buttonHover.png",
 	BackgroundTransparency = 1,
@@ -125,48 +126,48 @@ local _ = create("ImageLabel")({
 	ScaleType = Enum.ScaleType.Slice,
 	SliceCenter = Rect.new(47, 47, 47, 47)
 })
-local t_1 = {
+local config = {
 	["<Speaker>"] = {
 		Asset = "rbxasset://textures/ui/Keyboard/mic_icon.png",
 		AspectRatio = 0.615
 	}
 }
 
-local function CreateKeyboardKey(p3, p4, p5)
-	-- upvalues: create (ref), color3_4 (ref), color3 (ref), CreateVRButton (ref), t_1 (ref), color3_2 (ref), color3_1 (ref), color3_3 (ref)
-	local y2 = p4.width2 and (p4.height2 and (p4.x2 and p4.y2))
-	local var3 = create("ImageButton")({
+local function CreateKeyboardKey(p1, Vector, Entry) --[[ Line: 340 ]]
+	-- upvalues: CreateFunction (copy), _Color3_4 (copy), _Color3 (copy), CreateVRButton (copy), config (copy), _Color3_2 (copy), _Color3_1 (copy), _Color3_3 (copy)
+	local Y2 = Vector.width2 and (Vector.height2 and (Vector.x2 and Vector.y2))
+	local Parent = CreateFunction("ImageButton")({
 		BorderSizePixel = 0,
 		Image = "",
 		BackgroundTransparency = 1,
 		ZIndex = 1,
-		Name = p5[1],
-		Position = UDim2.new(p4.x, 0, p4.y, 0),
-		Size = UDim2.new(p4.width, 0, p4.height, 0)
+		Name = Entry[1],
+		Position = UDim2.new(Vector.x, 0, Vector.y, 0),
+		Size = UDim2.new(Vector.width, 0, Vector.height, 0)
 	})
-	local var4 = create("TextLabel")({
+	local v1 = CreateFunction("TextLabel")({
 		Name = "KeyText",
 		BackgroundTransparency = 1,
 		Selectable = true,
 		ZIndex = 2,
-		Text = p5[#p5],
+		Text = Entry[#Entry],
 		Position = UDim2.new(0, -10, 0, -10),
 		Size = UDim2.new(1, 0, 1, 0),
 		Font = Enum.Font.SourceSansBold,
 		FontSize = Enum.FontSize.Size96,
-		TextColor3 = color3_4,
-		Parent = var3
+		TextColor3 = _Color3_4,
+		Parent = Parent
 	})
-	local var5 = create("Frame")({
+	local Frame = CreateFunction("Frame")({
 		Name = "KeyBackground",
 		BackgroundTransparency = 0.3,
 		BorderSizePixel = 0,
 		Size = UDim2.new(1, -10, 1, -10),
 		Position = UDim2.new(0, -5, 0, -5),
-		BackgroundColor3 = color3,
-		Parent = var3
+		BackgroundColor3 = _Color3,
+		Parent = Parent
 	})
-	local var6 = create("ImageLabel")({
+	local v2 = CreateFunction("ImageLabel")({
 		Name = "SelectionObject",
 		BackgroundTransparency = 1,
 		Image = "rbxasset://textures/ui/Keyboard/key_selection_9slice.png",
@@ -176,37 +177,37 @@ local function CreateKeyboardKey(p3, p4, p5)
 		ScaleType = Enum.ScaleType.Slice,
 		SliceCenter = Rect.new(12, 12, 52, 52)
 	})
-	var3.SelectionImageObject = create("ImageLabel")({ Visible = false })
-	local var7 = nil
-	local var8 = nil
-	local var9 = nil
-	local var10 = nil
+	Parent.SelectionImageObject = CreateFunction("ImageLabel")({ Visible = false })
+	local Button = nil
+	local Object = nil
+	local v3 = nil
+	local v4 = nil
 	
-	if y2 then
-		var7 = create("ImageButton")({
+	if Y2 then
+		Button = CreateFunction("ImageButton")({
 			Name = "KeyBackground",
 			BackgroundTransparency = 0.3,
 			BorderSizePixel = 0,
 			AutoButtonColor = false,
-			Position = UDim2.new(p4.x2 / p4.width, -5, p4.y2 / p4.height, -5),
-			Size = UDim2.new(p4.width2 / p4.width, 0, p4.height2 / p4.height, -10),
-			BackgroundColor3 = color3,
-			SelectionImageObject = var3.SelectionImageObject,
-			Parent = var3
+			Position = UDim2.new(Vector.x2 / Vector.width, -5, Vector.y2 / Vector.height, -5),
+			Size = UDim2.new(Vector.width2 / Vector.width, 0, Vector.height2 / Vector.height, -10),
+			BackgroundColor3 = _Color3,
+			SelectionImageObject = Parent.SelectionImageObject,
+			Parent = Parent
 		})
 		
-		if p4.x2 <= 0 then
-			var4.Size = var7.Size - UDim2.new(0, 10, 0, 0)
-			var4.Position = var7.Position
-			var7.Size -= UDim2.new(1, 0, 0, 0)
+		if Vector.x2 <= 0 then
+			v1.Size = Button.Size - UDim2.new(0, 10, 0, 0)
+			v1.Position = Button.Position
+			Button.Size -= UDim2.new(1, 0, 0, 0)
 		end
-		var8 = create("Frame")({
+		Object = CreateFunction("Frame")({
 			Name = "SpecialSelectionObject",
 			Size = UDim2.new(1, 0, 0.5, 0),
 			Position = UDim2.new(0, 0, 0.5, 0),
 			BackgroundTransparency = 1,
 			ClipsDescendants = true,
-			create("ImageLabel")({
+			CreateFunction("ImageLabel")({
 				Name = "Borders",
 				BackgroundTransparency = 1,
 				Image = "rbxasset://textures/ui/Keyboard/key_selection_9slice.png",
@@ -217,389 +218,379 @@ local function CreateKeyboardKey(p3, p4, p5)
 				SliceCenter = Rect.new(12, 12, 52, 52)
 			})
 		})
-		var9 = var8:Clone()
-		var9.Size = UDim2.new(1, 0, 0.5, 5)
-		var9.Position = UDim2.new(0, 0, 0, 0)
-		var9.Borders.Size = UDim2.new(1, 0, 1, 30)
-		var9.Borders.Position = UDim2.new(0, 0, 0, 0)
-		var10 = var8:Clone()
-		var10.Size = UDim2.new(1, 5, 1, 0)
-		var10.Position = UDim2.new(0, 0, 0, 0)
-		var10.Borders.Size = UDim2.new(1, 30, 1, 0)
-		var10.Borders.Position = UDim2.new(0, 0, 0, 0)
+		v3 = Object:Clone()
+		v3.Size = UDim2.new(1, 0, 0.5, 5)
+		v3.Position = UDim2.new(0, 0, 0, 0)
+		v3.Borders.Size = UDim2.new(1, 0, 1, 30)
+		v3.Borders.Position = UDim2.new(0, 0, 0, 0)
+		v4 = Object:Clone()
+		v4.Size = UDim2.new(1, 5, 1, 0)
+		v4.Position = UDim2.new(0, 0, 0, 0)
+		v4.Borders.Size = UDim2.new(1, 30, 1, 0)
+		v4.Borders.Position = UDim2.new(0, 0, 0, 0)
 	end
-	local var11 = CreateVRButton(var3)
-	local var12 = false
-	local var13 = false
-	local var14 = #p5 == 1 and (type(p5[1]) == "string" and (#p5[1] == 1 and (string.byte(p5[1]) >= 65 and string.byte(p5[1]) <= 122)))
-	local var15 = nil
+	local VRButton = CreateVRButton(Parent)
+	local Flag = false
+	local Flag1 = false
+	local IsByteValueBelow: boolean = #Entry == 1 and (type(Entry[1]) == "string" and (#Entry[1] == 1 and string.byte(Entry[1]) >= 65)) and string.byte(Entry[1]) <= 122
+	local Frame1 = nil
 	
-	if p5[1] and t_1[p5[1]] then
-		var4.Visible = false
-		var15 = create("ImageLabel")({
+	if Entry[1] and config[Entry[1]] then
+		v1.Visible = false
+		Frame1 = CreateFunction("ImageLabel")({
 			Name = "KeyIcon",
 			BackgroundTransparency = 1,
-			Size = UDim2.new(t_1[p5[1]].AspectRatio, -20, 1, -20),
+			Size = UDim2.new(config[Entry[1]].AspectRatio, -20, 1, -20),
 			SizeConstraint = Enum.SizeConstraint.RelativeYY,
-			Image = t_1[p5[1]].Asset,
-			Parent = var5
+			Image = config[Entry[1]].Asset,
+			Parent = Frame
 		})
-		var15.Changed:connect(function(p6)
-			-- upvalues: var15 (write)
-			if p6 == "AbsoluteSize" then
-				var15.Position = UDim2.new(0.5, -var15.AbsoluteSize.X / 2, 0.5, -var15.AbsoluteSize.Y / 2)
+		Frame1.Changed:connect(function(p2) --[[ Line: 472 | Named "onChanged" ]]
+			-- upvalues: Frame1 (ref)
+			if p2 == "AbsoluteSize" then
+				Frame1.Position = UDim2.new(0.5, -Frame1.AbsoluteSize.X / 2, 0.5, -Frame1.AbsoluteSize.Y / 2)
 			end
 		end)
-		var15.Position = UDim2.new(0.5, -var15.AbsoluteSize.X / 2, 0.5, -var15.AbsoluteSize.Y / 2)
+		Frame1.Position = UDim2.new(0.5, -Frame1.AbsoluteSize.X / 2, 0.5, -Frame1.AbsoluteSize.Y / 2)
 	end
-	local function onClicked()
-		-- upvalues: var11 (ref), p3 (ref), var14 (ref)
-		local var16 = nil
-		local currentKeyValue = var11:GetCurrentKeyValue()
+	local function onClicked() --[[ Line: 481 ]]
+		-- upvalues: VRButton (copy), p1 (copy), IsByteValueBelow (copy)
+		local v5 = nil
+		local CurrentKeyValue = VRButton:GetCurrentKeyValue()
 		
-		if currentKeyValue == "Shift" then
-			p3:SetShift(not p3:GetShift())
-		elseif currentKeyValue == "Caps" then
-			p3:SetCaps(not p3:GetCaps())
-		elseif currentKeyValue == "Enter" then
-			p3:SubmitText(true, true)
-		elseif currentKeyValue == "Delete" then
-			p3:BackspaceAtCursor()
-		elseif currentKeyValue == "123/sym" then
-			p3:SetCurrentKeyset(2)
-		elseif currentKeyValue == "abc" then
-			p3:SetCurrentKeyset(1)
-		elseif currentKeyValue == "<Speaker>" then
-			p3:SetVoiceMode(true)
+		if CurrentKeyValue == "Shift" then
+			p1:SetShift(not p1:GetShift())
+		elseif CurrentKeyValue == "Caps" then
+			p1:SetCaps(not p1:GetCaps())
+		elseif CurrentKeyValue == "Enter" then
+			p1:SubmitText(true, true)
+		elseif CurrentKeyValue == "Delete" then
+			p1:BackspaceAtCursor()
+		elseif CurrentKeyValue == "123/sym" then
+			p1:SetCurrentKeyset(2)
+		elseif CurrentKeyValue == "abc" then
+			p1:SetCurrentKeyset(1)
+		elseif CurrentKeyValue == "<Speaker>" then
+			p1:SetVoiceMode(true)
 		else
-			var16 = if currentKeyValue == "Tab" then "\t" else currentKeyValue
+			v5 = if CurrentKeyValue == "Tab" then "\t" else CurrentKeyValue
 		end
-		if var16 ~= nil then
-			p3:SubmitCharacter(var16, var14)
+		if v5 ~= nil then
+			p1:SubmitCharacter(v5, IsByteValueBelow)
 		end
 	end
 	
-	local function _(value, p6)
-		-- upvalues: var5 (ref), var7 (write), y2 (ref), var8 (write), var9 (write), var10 (write), var6 (ref)
-		var5.BackgroundColor3 = value
+	local function _(BackgroundColor3, p2) --[[ Line: 510 | Named "setKeyColor" ]]
+		-- upvalues: Frame (copy), Button (ref), Y2 (copy), Object (ref), v3 (ref), v4 (ref), v2 (copy)
+		Frame.BackgroundColor3 = BackgroundColor3
 		
-		if var7 then
-			var7.BackgroundColor3 = value
+		if Button then
+			Button.BackgroundColor3 = BackgroundColor3
 		end
-		if y2 then
-			var8.Parent = if p6 then var5 else nil
-			var9.Parent = if p6 then var5 else nil
-			var10.Parent = if p6 then var7 else nil
+		if Y2 then
+			Object.Parent = p2 and Frame or nil
+			v3.Parent = p2 and Frame or nil
+			v4.Parent = p2 and Button or nil
 			
 			return
+		else
+			v2.Parent = p2 and Frame or nil
 		end
-		var6.Parent = if p6 then var5 else nil
 	end
 	
-	local function update()
-		-- upvalues: var11 (ref), var13 (write), color3_2 (copy), var5 (ref), var7 (write), y2 (ref), var8 (write), var9 (write), var10 (write), var6 (ref), var12 (write), color3_1 (copy), p3 (ref), color3_3 (copy), color3 (copy), var15 (write), var4 (ref)
-		local currentKeyValue = var11:GetCurrentKeyValue()
+	local function update() --[[ Line: 524 ]]
+		-- upvalues: VRButton (copy), Flag1 (ref), _Color3_2 (upval), Frame (copy), Button (ref), Y2 (copy), Object (ref), v3 (ref), v4 (ref), v2 (copy), Flag (ref), _Color3_1 (upval), p1 (copy), _Color3_3 (upval), _Color3 (upval), Frame1 (ref), v1 (copy)
+		local CurrentKeyValue = VRButton:GetCurrentKeyValue()
 		
-		if var13 then
-			local var16 = color3_2
-			var5.BackgroundColor3 = var16
+		if Flag1 then
+			Frame.BackgroundColor3 = _Color3_2
 			
-			if var7 then
-				var7.BackgroundColor3 = var16
+			if Button then
+				Button.BackgroundColor3 = _Color3_2
 			end
-			if y2 then
-				var8.Parent = nil
-				var9.Parent = nil
-				var10.Parent = nil
+			if Y2 then
+				Object.Parent = nil
+				v3.Parent = nil
+				v4.Parent = nil
 			else
-				var6.Parent = nil
+				v2.Parent = nil
 			end
-		elseif var12 then
-			local var17 = color3_1
-			var5.BackgroundColor3 = var17
+		elseif Flag then
+			Frame.BackgroundColor3 = _Color3_1
 			
-			if var7 then
-				var7.BackgroundColor3 = var17
+			if Button then
+				Button.BackgroundColor3 = _Color3_1
 			end
-			if y2 then
-				var8.Parent = var5 or nil
-				var9.Parent = var5 or nil
-				var10.Parent = var7 or nil
+			if Y2 then
+				Object.Parent = Frame or nil
+				v3.Parent = Frame or nil
+				v4.Parent = Button or nil
 			else
-				var6.Parent = var5 or nil
+				v2.Parent = Frame or nil
 			end
-		elseif currentKeyValue == "Caps" and p3:GetCaps() then
-			local var18 = color3_3
-			var5.BackgroundColor3 = var18
+		elseif CurrentKeyValue == "Caps" and p1:GetCaps() then
+			Frame.BackgroundColor3 = _Color3_3
 			
-			if var7 then
-				var7.BackgroundColor3 = var18
+			if Button then
+				Button.BackgroundColor3 = _Color3_3
 			end
-			if y2 then
-				var8.Parent = nil
-				var9.Parent = nil
-				var10.Parent = nil
+			if Y2 then
+				Object.Parent = nil
+				v3.Parent = nil
+				v4.Parent = nil
 			else
-				var6.Parent = nil
+				v2.Parent = nil
 			end
-		elseif currentKeyValue == "Shift" and p3:GetShift() then
-			local var19 = color3_3
-			var5.BackgroundColor3 = var19
+		elseif CurrentKeyValue == "Shift" and p1:GetShift() then
+			Frame.BackgroundColor3 = _Color3_3
 			
-			if var7 then
-				var7.BackgroundColor3 = var19
+			if Button then
+				Button.BackgroundColor3 = _Color3_3
 			end
-			if y2 then
-				var8.Parent = nil
-				var9.Parent = nil
-				var10.Parent = nil
+			if Y2 then
+				Object.Parent = nil
+				v3.Parent = nil
+				v4.Parent = nil
 			else
-				var6.Parent = nil
+				v2.Parent = nil
 			end
-		elseif currentKeyValue == "abc" then
-			local var20 = color3_3
-			var5.BackgroundColor3 = var20
+		elseif CurrentKeyValue == "abc" then
+			Frame.BackgroundColor3 = _Color3_3
 			
-			if var7 then
-				var7.BackgroundColor3 = var20
+			if Button then
+				Button.BackgroundColor3 = _Color3_3
 			end
-			if y2 then
-				var8.Parent = nil
-				var9.Parent = nil
-				var10.Parent = nil
+			if Y2 then
+				Object.Parent = nil
+				v3.Parent = nil
+				v4.Parent = nil
 			else
-				var6.Parent = nil
+				v2.Parent = nil
 			end
 		else
-			local var21 = color3
-			var5.BackgroundColor3 = var21
+			Frame.BackgroundColor3 = _Color3
 			
-			if var7 then
-				var7.BackgroundColor3 = var21
+			if Button then
+				Button.BackgroundColor3 = _Color3
 			end
-			if y2 then
-				var8.Parent = nil
-				var9.Parent = nil
-				var10.Parent = nil
+			if Y2 then
+				Object.Parent = nil
+				v3.Parent = nil
+				v4.Parent = nil
 			else
-				var6.Parent = nil
+				v2.Parent = nil
 			end
 		end
-		if var15 then
-			var15.ImageTransparency = 0.5
+		if Frame1 then
+			Frame1.ImageTransparency = 0.5
 		end
-		var4.Text = var11:GetCurrentKeyValue()
+		v1.Text = VRButton:GetCurrentKeyValue()
 	end
 	
 	local t = {}
-	rawset(var11, "OnEnter", function(_)
-		-- upvalues: var12 (write), update (ref)
-		var12 = true
+	rawset(VRButton, "OnEnter", function(_) --[[ Line: 550 ]]
+		-- upvalues: Flag (ref), update (copy)
+		Flag = true
 		update()
 	end)
-	rawset(var11, "OnLeave", function(_)
-		-- upvalues: t (ref), var12 (write), var13 (write), update (ref)
+	rawset(VRButton, "OnLeave", function(_) --[[ Line: 554 ]]
+		-- upvalues: t (copy), Flag (ref), Flag1 (ref), update (copy)
 		if not next(t) then
-			var12 = false
-			var13 = false
+			Flag = false
+			Flag1 = false
 			update()
 		end
 	end)
-	rawset(var11, "OnDown", function(_)
-		-- upvalues: var13 (write), update (ref), onClicked (ref)
-		var13 = true
+	rawset(VRButton, "OnDown", function(_) --[[ Line: 561 ]]
+		-- upvalues: Flag1 (ref), update (copy), onClicked (copy)
+		Flag1 = true
 		update()
 		onClicked()
 	end)
-	rawset(var11, "OnUp", function(_)
-		-- upvalues: var13 (write), update (ref)
-		var13 = false
+	rawset(VRButton, "OnUp", function(_) --[[ Line: 569 ]]
+		-- upvalues: Flag1 (ref), update (copy)
+		Flag1 = false
 		update()
 	end)
-	rawset(var11, "GetCurrentKeyValue", function(_)
-		-- upvalues: p3 (ref), var14 (ref), p5 (ref)
-		local shift = p3:GetShift()
-		local caps = p3:GetCaps()
+	rawset(VRButton, "GetCurrentKeyValue", function(_) --[[ Line: 573 ]]
+		-- upvalues: p1 (copy), IsByteValueBelow (copy), Entry (copy)
+		local Shift = p1:GetShift()
+		local Caps = p1:GetCaps()
 		
-		return if var14 then if caps and shift then string.lower(p5[#p5]) elseif caps or shift then p5[1] else string.lower(p5[#p5]) elseif shift then p5[1] else p5[#p5]
+		return if IsByteValueBelow then if Caps and Shift then string.lower(Entry[#Entry]) elseif Caps or Shift then Entry[1] else string.lower(Entry[#Entry]) elseif Shift then Entry[1] else Entry[#Entry]
 	end)
-	rawset(var11, "ContainsPoint", function(_, p6, p7)
-		-- upvalues: var5 (ref), var7 (write)
-		local var16
-		local var17 = var5
-		local absolutePosition = var17.AbsolutePosition
-		local var18 = var17.AbsolutePosition + var17.AbsoluteSize
+	rawset(VRButton, "ContainsPoint", function(_, p2, p3): boolean --[[ Line: 593 ]]
+		-- upvalues: Frame (copy), Button (ref)
+		local AbsolutePosition = Frame.AbsolutePosition
+		local NewAbsolutePosition = Frame.AbsolutePosition + Frame.AbsoluteSize
+		local IsYAbove: boolean = AbsolutePosition.X <= p2 and p2 <= NewAbsolutePosition.X and AbsolutePosition.Y <= p3 and p3 <= NewAbsolutePosition.Y
 		
-		if absolutePosition.X <= p6 and p6 <= var18.X and absolutePosition.Y <= p7 then
-			var16 = p7 > var18.Y
-		end
-		if not var16 then
-			var16 = var7
+		if not IsYAbove then
+			IsYAbove = Button
 			
-			if var16 then
-				local var19 = var7
-				local absolutePosition_1 = var19.AbsolutePosition
-				local var20 = var19.AbsolutePosition + var19.AbsoluteSize
+			if IsYAbove then
+				local Frame1 = Button
+				local AbsolutePosition1 = Frame1.AbsolutePosition
+				local NewAbsolutePosition1 = Frame1.AbsolutePosition + Frame1.AbsoluteSize
 				
-				if absolutePosition_1.X <= p6 and p6 <= var20.X and (absolutePosition_1.Y <= p7 and p7 <= var20.Y) then
+				if AbsolutePosition1.X <= p2 and p2 <= NewAbsolutePosition1.X and AbsolutePosition1.Y <= p3 and p3 <= NewAbsolutePosition1.Y then
 					return true
 				end
-				var16 = false
+				IsYAbove = false
 			end
 		end
-		return var16
+		return IsYAbove
 	end)
-	rawset(var11, "Update", function(_)
-		-- upvalues: update (ref)
+	rawset(VRButton, "Update", function(_) --[[ Line: 597 ]]
+		-- upvalues: update (copy)
 		update()
 	end)
-	rawset(var11, "GetInstance", function(_)
-		-- upvalues: var3 (ref)
-		return var3
+	rawset(VRButton, "GetInstance", function(_) --[[ Line: 600 ]]
+		-- upvalues: Parent (copy)
+		return Parent
 	end)
-	var3.MouseButton1Down:connect(function()
-		-- upvalues: var11 (ref)
-		var11:OnDown()
+	Parent.MouseButton1Down:connect(function() --[[ Line: 604 ]]
+		-- upvalues: VRButton (copy)
+		VRButton:OnDown()
 	end)
-	var3.MouseButton1Up:connect(function()
-		-- upvalues: var11 (ref)
-		var11:OnUp()
+	Parent.MouseButton1Up:connect(function() --[[ Line: 605 ]]
+		-- upvalues: VRButton (copy)
+		VRButton:OnUp()
 	end)
-	var3.SelectionGained:connect(function()
-		-- upvalues: t (ref), var3 (ref), var11 (ref)
-		t[var3] = true
-		var11:OnEnter()
+	Parent.SelectionGained:connect(function() --[[ Line: 606 ]]
+		-- upvalues: t (copy), Parent (copy), VRButton (copy)
+		t[Parent] = true
+		VRButton:OnEnter()
 	end)
-	var3.SelectionLost:connect(function()
-		-- upvalues: t (ref), var3 (ref), var11 (ref)
-		t[var3] = nil
-		var11:OnLeave()
+	Parent.SelectionLost:connect(function() --[[ Line: 607 ]]
+		-- upvalues: t (copy), Parent (copy), VRButton (copy)
+		t[Parent] = nil
+		VRButton:OnLeave()
 	end)
 	
-	if var7 then
-		var7.MouseButton1Down:connect(function()
-			-- upvalues: var11 (ref)
-			var11:OnDown()
+	if Button then
+		Button.MouseButton1Down:connect(function() --[[ Line: 613 ]]
+			-- upvalues: VRButton (copy)
+			VRButton:OnDown()
 		end)
-		var7.MouseButton1Up:connect(function()
-			-- upvalues: var11 (ref)
-			var11:OnUp()
+		Button.MouseButton1Up:connect(function() --[[ Line: 614 ]]
+			-- upvalues: VRButton (copy)
+			VRButton:OnUp()
 		end)
-		var7.SelectionGained:connect(function()
-			-- upvalues: t (ref), var7 (write), var11 (ref)
-			t[var7] = true
-			var11:OnEnter()
+		Button.SelectionGained:connect(function() --[[ Line: 615 ]]
+			-- upvalues: t (copy), Button (ref), VRButton (copy)
+			t[Button] = true
+			VRButton:OnEnter()
 		end)
-		var7.SelectionLost:connect(function()
-			-- upvalues: t (ref), var7 (write), var11 (ref)
-			t[var7] = nil
-			var11:OnLeave()
+		Button.SelectionLost:connect(function() --[[ Line: 619 ]]
+			-- upvalues: t (copy), Button (ref), VRButton (copy)
+			t[Button] = nil
+			VRButton:OnLeave()
 		end)
 	end
 	update()
 	
-	return var11
+	return VRButton
 end
 
-local function CreateBaseVoiceState()
+local function CreateBaseVoiceState() --[[ Line: 630 ]]
 	return {
 		Name = "Base",
-		TransitionFrom = function(_) end,
-		TransitionTo = function(_) end
+		TransitionFrom = function(_) --[[ Line: 634 ]] end,
+		TransitionTo = function(_) --[[ Line: 636 ]] end
 	}
 end
 
-local _ = function()
-	-- upvalues: CreateBaseVoiceState (ref), soundService (ref)
-	local listening = CreateBaseVoiceState()
-	listening.Name = "Listening"
+local _ = function() --[[ Line: 642 | Named "CreateListeningVoiceState" ]]
+	-- upvalues: CreateBaseVoiceState (copy), SoundService (copy)
+	local Listening = CreateBaseVoiceState()
+	Listening.Name = "Listening"
 	
-	function listening.TransitionTo(_)
-		-- upvalues: soundService (copy)
-		pcall(function()
-			-- upvalues: soundService (copy)
-			soundService:BeginRecording()
+	function Listening:TransitionTo() --[[ Line: 647 ]]
+		-- upvalues: SoundService (upval)
+		pcall(function() --[[ Line: 648 ]]
+			-- upvalues: SoundService (upval)
+			SoundService:BeginRecording()
 		end)
 	end
 	
-	return listening
+	return Listening
 end
 
-local _ = function()
-	-- upvalues: CreateBaseVoiceState (ref), soundService (ref)
-	local processing = CreateBaseVoiceState()
-	processing.Name = "Processing"
-	local var3 = false
-	local var4 = nil
+local _ = function() --[[ Line: 654 | Named "CreateProcessingVoiceState" ]]
+	-- upvalues: CreateBaseVoiceState (copy), SoundService (copy)
+	local Processing = CreateBaseVoiceState()
+	Processing.Name = "Processing"
+	local v1 = false
+	local v2 = nil
 	
-	function processing.TransitionTo(_)
-		-- upvalues: var4 (write), soundService (copy), var3 (write)
-		coroutine.wrap(function()
-			-- upvalues: var4 (copy), soundService (copy), var3 (copy)
-			pcall(function()
-				-- upvalues: var4 (copy), soundService (copy)
-				var4 = soundService:EndRecording()
+	function Processing:TransitionTo() --[[ Line: 662 ]]
+		-- upvalues: v2 (ref), SoundService (upval), v1 (ref)
+		coroutine.wrap(function() --[[ Line: 663 ]]
+			-- upvalues: v2 (upval), SoundService (upval), v1 (upval)
+			pcall(function() --[[ Line: 664 ]]
+				-- upvalues: v2 (upval), SoundService (upval)
+				v2 = SoundService:EndRecording()
 			end)
-			var3 = true
+			v1 = true
 		end)()
 	end
 	
-	function processing.GetResultAsync(_)
-		-- upvalues: var3 (write), var4 (write)
-		while not var3 do
+	function Processing:GetResultAsync() --[[ Line: 669 ]]
+		-- upvalues: v1 (ref), v2 (ref)
+		while not v1 do
 			wait()
 		end
-		return var4
+		return v2
 	end
 	
-	return processing
+	return Processing
 end
 
-local _ = function()
-	-- upvalues: CreateBaseVoiceState (ref)
-	local waiting = CreateBaseVoiceState()
-	waiting.Name = "Waiting"
+local _ = function() --[[ Line: 679 | Named "CreateWaitingVoiceState" ]]
+	-- upvalues: CreateBaseVoiceState (copy)
+	local Waiting = CreateBaseVoiceState()
+	Waiting.Name = "Waiting"
 	
-	return waiting
+	return Waiting
 end
 
-local t_2 = {
+local config1 = {
 	Listening = { Processing = true },
 	Processing = { Waiting = true },
 	Waiting = { Listening = true }
 }
-local t_3 = {}
-local waiting = CreateBaseVoiceState()
-waiting.Name = "Waiting"
-t_3.CurrentState = waiting
-local bindableEvent = Instance.new("BindableEvent")
+local Waiting = CreateBaseVoiceState()
+Waiting.Name = "Waiting"
+local BindableEvent = Instance.new("BindableEvent")
+local config2 = {
+	CurrentState = Waiting,
+	TransitionState = function(p1, CurrentState): boolean --[[ Line: 695 ]]
+		-- upvalues: config1 (copy), BindableEvent (copy)
+		if config1[p1.CurrentState.Name][CurrentState.Name] then
+			p1.CurrentState:TransitionFrom()
+			p1.CurrentState = CurrentState
+			p1.CurrentState:TransitionTo()
+			BindableEvent:Fire(p1.CurrentState)
+			
+			return true
+		else
+			return false
+		end
+	end,
+	GetCurrentState = function(p1) --[[ Line: 707 ]]
+		return p1.CurrentState
+	end,
+	StateTransitionedEvent = BindableEvent.Event
+}
 
-function t_3.TransitionState(p3, p4)
-	-- upvalues: t_2 (ref), bindableEvent (ref)
-	if t_2[p3.CurrentState.Name][p4.Name] then
-		p3.CurrentState:TransitionFrom()
-		p3.CurrentState = p4
-		p3.CurrentState:TransitionTo()
-		bindableEvent:Fire(p3.CurrentState)
-		
-		return true
-	end
-	return false
-end
-
-function t_3.GetCurrentState(p3)
-	return p3.CurrentState
-end
-
-t_3.StateTransitionedEvent = bindableEvent.Event
-
-local function ConstructKeyboardUI(p3)
-	-- upvalues: corePackagesService (ref), create (ref), color3_3 (ref), CreateVRButton (ref), color3 (ref), color3_4 (ref), runService (ref), ExtendedInstance (ref), textService (ref), t_3 (ref), CreateBaseVoiceState (ref), soundService (ref), contextActionService (ref), CreateKeyboardKey (ref), t (ref)
-	local panel3D = require(corePackagesService.Workspace.Packages.VrCommon).Panel3D
-	local keyboard = panel3D.Get("Keyboard")
-	keyboard:SetVisible(false)
-	local t_1 = {}
-	local var5 = create("Frame")({
+local function ConstructKeyboardUI(List) --[[ Line: 716 ]]
+	-- upvalues: CorePackages (copy), CreateFunction (copy), _Color3_3 (copy), CreateVRButton (copy), _Color3 (copy), _Color3_4 (copy), RunService (copy), ExtendedInstance (copy), TextService (copy), config2 (copy), CreateBaseVoiceState (copy), SoundService (copy), ContextActionService (copy), CreateKeyboardKey (copy), t (copy)
+	local Panel3D = require(CorePackages.Workspace.Packages.VrCommon).Panel3D
+	local Keyboard = Panel3D.Get("Keyboard")
+	Keyboard:SetVisible(false)
+	local Buttons = {}
+	local Parent = CreateFunction("Frame")({
 		Name = "VirtualKeyboard",
 		BackgroundTransparency = 1,
 		Active = true,
@@ -607,7 +598,7 @@ local function ConstructKeyboardUI(p3)
 		Size = UDim2.new(1, 0, 1, 0),
 		Position = UDim2.new(0, 0, 0, 0)
 	})
-	local var6 = create("TextButton")({
+	local Frame = CreateFunction("TextButton")({
 		Name = "TextEntryField",
 		Text = "",
 		BackgroundTransparency = 1,
@@ -617,15 +608,15 @@ local function ConstructKeyboardUI(p3)
 		Font = Enum.Font.SourceSans,
 		FontSize = Enum.FontSize.Size60,
 		TextXAlignment = Enum.TextXAlignment.Left,
-		Parent = create("Frame")({
+		Parent = CreateFunction("Frame")({
 			Name = "TextfieldBackground",
 			BackgroundTransparency = 0,
 			BorderSizePixel = 0,
 			Visible = true,
 			Position = UDim2.new(0, 2, 0, 2),
 			Size = UDim2.new(1, -4, 1, -4),
-			BackgroundColor3 = Color3.new(0.819607843137, 0.847058823529, 0.866666666667),
-			Parent = create("ImageLabel")({
+			BackgroundColor3 = Color3.new(0.8196078431372549, 0.8470588235294118, 0.8666666666666667),
+			Parent = CreateFunction("ImageLabel")({
 				Name = "TextEntryBackground",
 				Image = "",
 				BackgroundTransparency = 0.5,
@@ -633,12 +624,12 @@ local function ConstructKeyboardUI(p3)
 				ClipsDescendants = true,
 				Size = UDim2.new(0.5, 0, 0.125, 0),
 				Position = UDim2.new(0.25, 0, 0, 0),
-				BackgroundColor3 = Color3.new(0.121568627451, 0.121568627451, 0.121568627451),
-				Parent = var5
+				BackgroundColor3 = Color3.new(0.12156862745098039, 0.12156862745098039, 0.12156862745098039),
+				Parent = Parent
 			})
 		})
 	})
-	local var7 = create("Frame")({
+	local v3 = CreateFunction("Frame")({
 		Name = "TextfieldCursor",
 		BackgroundTransparency = 0,
 		BorderSizePixel = 0,
@@ -646,58 +637,58 @@ local function ConstructKeyboardUI(p3)
 		ZIndex = 2,
 		Size = UDim2.new(0, 5, 0.9, 0),
 		Position = UDim2.new(0, 0, 0.05, 0),
-		BackgroundColor3 = color3_3,
-		Parent = var6
+		BackgroundColor3 = _Color3_3,
+		Parent = Frame
 	})
-	local var8 = create("ImageButton")({
+	local Parent1 = CreateFunction("ImageButton")({
 		Name = "CloseButton",
 		Image = "rbxasset://textures/ui/Keyboard/close_button_background.png",
 		BackgroundTransparency = 1,
 		AutoButtonColor = false,
 		Size = UDim2.new(0.075, -10, 0.198, -10),
 		Position = UDim2.new(0, -5, 0, -35),
-		Parent = var5
+		Parent = Parent
 	})
-	var8.SelectionImageObject = create("ImageLabel")({
+	Parent1.SelectionImageObject = CreateFunction("ImageLabel")({
 		Name = "Selection",
 		Image = "rbxasset://textures/ui/Keyboard/close_button_selection.png",
 		BackgroundTransparency = 1,
 		Size = UDim2.new(0.9, 0, 0.9, 0),
 		Position = UDim2.new(0.05, 0, 0.05, 0)
 	})
-	create("ImageLabel")({
+	CreateFunction("ImageLabel")({
 		Name = "Icon",
 		Image = "rbxasset://textures/ui/Keyboard/close_button_icon.png",
 		BackgroundTransparency = 1,
 		Size = UDim2.new(0.5, 0, 0.5, 0),
 		Position = UDim2.new(0.25, 0, 0.25, 0),
-		Parent = var8
+		Parent = Parent1
 	})
-	local var9 = CreateVRButton(var8)
-	table.insert(t_1, var9)
-	local var10 = create("Frame")({
+	local VRButton = CreateVRButton(Parent1)
+	table.insert(Buttons, VRButton)
+	local Parent2 = CreateFunction("Frame")({
 		Name = "VoiceRecognitionContainer",
 		BackgroundTransparency = 1,
 		Active = true,
 		Visible = false,
 		Size = UDim2.new(1, 0, 0.85, 0),
 		Position = UDim2.new(0, 0, 0.15, 0),
-		Parent = var5
+		Parent = Parent
 	})
-	local var11 = create("Frame")({
+	local Copy = CreateFunction("Frame")({
 		Name = "voiceRecognitionBackground1",
 		BackgroundTransparency = 0.3,
 		BorderSizePixel = 0,
 		Active = true,
 		Size = UDim2.new(1, 0, 0.75, 0),
 		Position = UDim2.new(0, 0, 0, 0),
-		BackgroundColor3 = color3,
-		Parent = var10
+		BackgroundColor3 = _Color3,
+		Parent = Parent2
 	}):Clone()
-	var11.Size = UDim2.new(0.8, 0, 0.25, 0)
-	var11.Position = UDim2.new(0, 0, 0.75, 0)
-	var11.Parent = var10
-	local var12 = CreateVRButton(create("TextButton")({
+	Copy.Size = UDim2.new(0.8, 0, 0.25, 0)
+	Copy.Position = UDim2.new(0, 0, 0.75, 0)
+	Copy.Parent = Parent2
+	local VRButton1 = CreateVRButton(CreateFunction("TextButton")({
 		Name = "DoneButton",
 		Text = "Done",
 		BackgroundTransparency = 0,
@@ -705,14 +696,14 @@ local function ConstructKeyboardUI(p3)
 		BorderSizePixel = 0,
 		Size = UDim2.new(0.2, -5, 0.25, -5),
 		Position = UDim2.new(0.8, 5, 0.75, 5),
-		BackgroundColor3 = color3_3,
+		BackgroundColor3 = _Color3_3,
 		Font = Enum.Font.SourceSansBold,
 		FontSize = Enum.FontSize.Size96,
-		TextColor3 = color3_4,
-		Parent = var10
+		TextColor3 = _Color3_4,
+		Parent = Parent2
 	}))
-	table.insert(t_1, var12)
-	local var13 = create("TextLabel")({
+	table.insert(Buttons, VRButton1)
+	local v4 = CreateFunction("TextLabel")({
 		Name = "VoiceProcessingStatus",
 		Text = "",
 		BackgroundTransparency = 1,
@@ -721,609 +712,630 @@ local function ConstructKeyboardUI(p3)
 		Position = UDim2.new(0.5, 0, 0.33, 0),
 		Font = Enum.Font.SourceSansBold,
 		FontSize = Enum.FontSize.Size96,
-		TextColor3 = color3_4,
-		Parent = var10
+		TextColor3 = _Color3_4,
+		Parent = Parent2
 	})
-	local var14 = (function()
-		-- upvalues: create (copy), color3_4 (copy), runService (copy)
-		local t = {}
-		local t_1 = {}
-		local var15 = create("Frame")({
+	local v5 = (function() --[[ Line: 873 | Named "CreateVoiceVisualizerWidget" ]]
+		-- upvalues: CreateFunction (upval), _Color3_4 (upval), RunService (upval)
+		local List = {}
+		local Container = CreateFunction("Frame")({
 			Name = "VoiceVisualizerContainer",
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 1, 0)
 		})
-		t.Container = var15
+		local config = { Container = Container }
 		
 		for i = 1, 50 do
-			table.insert(t_1, create("Frame")({
+			table.insert(List, (CreateFunction("Frame")({
 				Name = "Bar",
 				BackgroundTransparency = 0,
 				Size = UDim2.new(0.02, -4, 1, 0),
 				Position = UDim2.new(i / 50, 0, 0, 0),
-				BackgroundColor3 = color3_4,
-				Parent = var15
-			}))
+				BackgroundColor3 = _Color3_4,
+				Parent = Container
+			})))
 		end
-		function t.StartAnimation(_)
-			-- upvalues: runService (copy), t_1 (ref)
-			runService:UnbindFromRenderStep("VoiceVisualizerWidget")
-			runService:BindToRenderStep("VoiceVisualizerWidget", Enum.RenderPriority.First.Value, function()
-				-- upvalues: t_1 (copy)
-				for i, v in pairs(t_1) do
-					local var16 = ((math.abs(math.sin(tick() * 2.5 + i * 0.502654824574)) + math.abs(math.cos(tick() * 2.5 + i * 0.502654824574))) / 2 - 0.3) * 1.428571428571
-					v.Size = UDim2.new(0.02, -4, var16, 0)
-					v.Position = UDim2.new(i / 50, 0, (1 - var16) / 2, 0)
+		function config:StartAnimation() --[[ Line: 903 ]]
+			-- upvalues: RunService (upval), List (copy)
+			RunService:UnbindFromRenderStep("VoiceVisualizerWidget")
+			RunService:BindToRenderStep("VoiceVisualizerWidget", Enum.RenderPriority.First.Value, function() --[[ Line: 906 ]]
+				-- upvalues: List (upval)
+				for i, value in pairs(List) do
+					local ScaledMagnitude = ((math.abs((math.sin(tick() * 2.5 + i * 0.5026548245743669))) + math.abs((math.cos(tick() * 2.5 + i * 0.5026548245743669)))) / 2 - 0.3) * 1.4285714285714286
+					value.Size = UDim2.new(0.02, -4, ScaledMagnitude, 0)
+					value.Position = UDim2.new(i / 50, 0, (1 - ScaledMagnitude) / 2, 0)
 				end
 			end)
 		end
 		
-		function t.StopAnimation(_)
-			-- upvalues: runService (copy)
-			runService:UnbindFromRenderStep("VoiceVisualizerWidget")
+		function config:StopAnimation() --[[ Line: 917 ]]
+			-- upvalues: RunService (upval)
+			RunService:UnbindFromRenderStep("VoiceVisualizerWidget")
 		end
 		
-		return t
+		return config
 	end)()
-	var14.Container.Parent = var10
-	var14.Container.Size = UDim2.new(0.5, 0, 0.4, 0)
-	var14.Container.Position = UDim2.new(0.25, 0, 0.4, 0)
-	local var16 = ExtendedInstance(var5)
-	local var17 = nil
-	local t_2 = {}
-	local var18 = false
-	local var19 = false
-	local var20 = 0
-	local bindableEvent = Instance.new("BindableEvent")
-	local bindableEvent_1 = Instance.new("BindableEvent")
-	local var21 = false
+	v5.Container.Parent = Parent2
+	v5.Container.Size = UDim2.new(0.5, 0, 0.4, 0)
+	v5.Container.Position = UDim2.new(0.25, 0, 0.4, 0)
+	local ExtendedInstanceResult = ExtendedInstance(Parent)
+	local v6 = nil
+	local List1 = {}
+	local v7 = false
+	local v8 = false
+	local ClampResult = 0
+	local BindableEvent = Instance.new("BindableEvent")
+	local BindableEvent1 = Instance.new("BindableEvent")
+	local Flag = false
 	
-	local function SetTextFieldCursorPosition(value)
-		-- upvalues: var20 (write), var6 (ref), textService (copy), var7 (ref)
-		var20 = if not var6.TextFits then #var6.Text else Clamp(0, #var6.Text, value)
-		local match = string.match(var6.FontSize.Name, "%d+")
-		var7.Position = UDim2.new(0, textService:GetTextSize(string.sub(var6.Text, 1, var20), if match then tostring(match) else 12, var6.Font, var6.AbsoluteSize).x, var7.Position.Y.Scale, var7.Position.Y.Offset)
+	local function SetTextFieldCursorPosition(EndIndex) --[[ Line: 943 ]]
+		-- upvalues: ClampResult (ref), Frame (copy), TextService (upval), v3 (copy)
+		ClampResult = if Frame.TextFits then Clamp(0, #Frame.Text, EndIndex) else #Frame.Text
+		local Match: string? = string.match(Frame.FontSize.Name, "%d+")
+		v3.Position = UDim2.new(0, TextService:GetTextSize(string.sub(Frame.Text, 1, ClampResult), Match and tostring(Match) or 12, Frame.Font, Frame.AbsoluteSize).x, v3.Position.Y.Scale, v3.Position.Y.Offset)
 	end
 	
-	local function _(p4)
-		-- upvalues: var6 (ref), SetTextFieldCursorPosition (ref), var20 (write)
-		var6:SetTextFromInput(p4)
-		SetTextFieldCursorPosition(var20)
+	local function _(p1) --[[ Line: 957 | Named "UpdateTextEntryFieldText" ]]
+		-- upvalues: Frame (copy), SetTextFieldCursorPosition (copy), ClampResult (ref)
+		Frame:SetTextFromInput(p1)
+		SetTextFieldCursorPosition(ClampResult)
 	end
 	
-	local var22 = ""
+	local BufferText = ""
 	
-	local _ = function()
-		-- upvalues: var17 (write), var22 (write)
-		return if var17 and var17.TextBox then var17.TextBox.Text else var22
+	local _ = function() --[[ Line: 963 | Named "getBufferText" ]]
+		-- upvalues: v6 (ref), BufferText (ref)
+		return if v6 and v6.TextBox then v6.TextBox.Text else BufferText
 	end
 	
-	local _ = function(value)
-		-- upvalues: var17 (write), var22 (write), var6 (ref), SetTextFieldCursorPosition (ref), var20 (write)
-		if var17 and var17.TextBox then
-			var17.TextBox.Text = value
+	local _ = function(Value) --[[ Line: 969 | Named "setBufferText" ]]
+		-- upvalues: v6 (ref), BufferText (ref), Frame (copy), SetTextFieldCursorPosition (copy), ClampResult (ref)
+		if v6 and v6.TextBox then
+			v6.TextBox.Text = Value
 			
 			return
-		elseif var22 ~= value then
-			var22 = value
-			var6:SetTextFromInput(var22)
-			SetTextFieldCursorPosition(var20)
+		end
+		if BufferText ~= Value then
+			BufferText = Value
+			Frame:SetTextFromInput(BufferText)
+			SetTextFieldCursorPosition(ClampResult)
 		end
 	end
 	
-	local function calculateTextCursorPosition(p4, p5)
-		-- upvalues: var6 (ref), textService (copy)
-		p4 -= var6.AbsolutePosition.x
-		p5 -= var6.AbsolutePosition.y
+	local function calculateTextCursorPosition(X, Y): number --[[ Line: 978 ]]
+		-- upvalues: Frame (copy), TextService (upval)
+		local XDelta = X - Frame.AbsolutePosition.x
+		local _ = Y - Frame.AbsolutePosition.y
 		
-		for i = 1, #var6.Text do
-			local match = string.match(var6.FontSize.Name, "%d+")
+		for i = 1, #Frame.Text do
+			local Match: string? = string.match(Frame.FontSize.Name, "%d+")
 			
-			if p4 >= textService:GetTextSize(string.sub(var6.Text, 1, i), if match then tostring(match) else 12, var6.Font, var6.AbsoluteSize).x then
-				continue
+			if XDelta < TextService:GetTextSize(string.sub(Frame.Text, 1, i), Match and tostring(Match) or 12, Frame.Font, Frame.AbsoluteSize).x then
+				return i - 1
 			end
-			return i - 1
 		end
-		return #var6.Text
+		return #Frame.Text
 	end
 	
-	local var23 = nil
-	rawset(var16, "OpenedEvent", bindableEvent.Event)
-	rawset(var16, "ClosedEvent", bindableEvent_1.Event)
-	rawset(var16, "GetCurrentKeyset", function(_)
-		-- upvalues: t_2 (ref), var23 (write)
-		return t_2[var23]
+	local v9 = nil
+	rawset(ExtendedInstanceResult, "OpenedEvent", BindableEvent.Event)
+	rawset(ExtendedInstanceResult, "ClosedEvent", BindableEvent1.Event)
+	rawset(ExtendedInstanceResult, "GetCurrentKeyset", function(_) --[[ Line: 1001 ]]
+		-- upvalues: List1 (copy), v9 (ref)
+		return List1[v9]
 	end)
-	rawset(var16, "SetCurrentKeyset", function(_, p6)
-		-- upvalues: var23 (write), t_2 (ref)
-		if p6 ~= var23 and t_2[p6] ~= nil then
-			if t_2[var23] and t_2[var23].container then
-				t_2[var23].container.Visible = false
+	rawset(ExtendedInstanceResult, "SetCurrentKeyset", function(_, p1) --[[ Line: 1005 ]]
+		-- upvalues: v9 (ref), List1 (copy)
+		if p1 ~= v9 and List1[p1] ~= nil then
+			if List1[v9] and List1[v9].container then
+				List1[v9].container.Visible = false
 			end
-			var23 = p6
+			v9 = p1
 			
-			if t_2[var23] and t_2[var23].container then
-				t_2[var23].container.Visible = true
+			if List1[v9] and List1[v9].container then
+				List1[v9].container.Visible = true
 			end
 		end
 	end)
-	rawset(var16, "SetVoiceMode", function(p6, _)
-		-- upvalues: var10 (ref), t_3 (copy), CreateBaseVoiceState (copy), soundService (copy)
-		var120 = false
-		local currentKeyset = p6:GetCurrentKeyset()
+	rawset(ExtendedInstanceResult, "SetVoiceMode", function(p1, _) --[[ Line: 1019 ]]
+		-- upvalues: Parent2 (copy), config2 (upval), CreateBaseVoiceState (upval), SoundService (upval)
+		local Visible = false
+		local CurrentKeyset = p1:GetCurrentKeyset()
 		
-		if currentKeyset and currentKeyset.container then
-			currentKeyset.container.Visible = not var120
+		if CurrentKeyset and CurrentKeyset.container then
+			CurrentKeyset.container.Visible = not Visible
 		end
-		var10.Visible = var120
-	end)
-	rawset(var16, "GetCaps", function(_)
-		-- upvalues: var18 (write)
-		return var18
-	end)
-	rawset(var16, "SetCaps", function(p6, p7)
-		-- upvalues: var18 (write)
-		var18 = p7
+		Parent2.Visible = Visible
 		
-		for i, v in pairs(p6:GetCurrentKeyset().keys) do
-			v:Update()
-		end
-	end)
-	rawset(var16, "GetShift", function(_)
-		-- upvalues: var19 (write)
-		return var19
-	end)
-	rawset(var16, "SetShift", function(p8, p9)
-		-- upvalues: var19 (write)
-		var19 = p9
-		
-		for i, v in pairs(p8:GetCurrentKeyset().keys) do
-			v:Update()
+		if Visible then
+			local Listening = CreateBaseVoiceState()
+			Listening.Name = "Listening"
+			
+			function Listening:TransitionTo() --[[ Line: 647 ]]
+				-- upvalues: SoundService (upval)
+				pcall(function() --[[ Line: 648 ]]
+					-- upvalues: SoundService (upval)
+					SoundService:BeginRecording()
+				end)
+			end
+			
+			config2:TransitionState(Listening)
 		end
 	end)
-	local var24 = false
-	local var25 = nil
-	local var26 = nil
-	local var27 = nil
+	rawset(ExtendedInstanceResult, "GetCaps", function(_) --[[ Line: 1035 ]]
+		-- upvalues: v7 (ref)
+		return v7
+	end)
+	rawset(ExtendedInstanceResult, "SetCaps", function(p1, p2) --[[ Line: 1039 ]]
+		-- upvalues: v7 (ref)
+		v7 = p2
+		
+		for _, key in pairs(p1:GetCurrentKeyset().keys) do
+			key:Update()
+		end
+	end)
+	rawset(ExtendedInstanceResult, "GetShift", function(_) --[[ Line: 1046 ]]
+		-- upvalues: v8 (ref)
+		return v8
+	end)
+	rawset(ExtendedInstanceResult, "SetShift", function(p3, p4) --[[ Line: 1050 ]]
+		-- upvalues: v8 (ref)
+		v8 = p4
+		
+		for _, key in pairs(p3:GetCurrentKeyset().keys) do
+			key:Update()
+		end
+	end)
+	local Flag1 = false
+	local ChangedConnection = nil
+	local FocusLostConnection = nil
+	local EventConnection = nil
 	
-	local _ = function()
-		-- upvalues: var25 (write), var26 (write), var27 (write)
-		if var25 then
-			var25:disconnect()
+	local _ = function() --[[ Line: 1063 | Named "disconnectKeyboardEvents" ]]
+		-- upvalues: ChangedConnection (ref), FocusLostConnection (ref), EventConnection (ref)
+		if ChangedConnection then
+			ChangedConnection:disconnect()
 		end
-		var25 = nil
+		ChangedConnection = nil
 		
-		if var26 then
-			var26:disconnect()
+		if FocusLostConnection then
+			FocusLostConnection:disconnect()
 		end
-		var26 = nil
+		FocusLostConnection = nil
 		
-		if var27 then
-			var27:disconnect()
+		if EventConnection then
+			EventConnection:disconnect()
 		end
-		var27 = nil
+		EventConnection = nil
 	end
 	
-	rawset(var16, "Open", function(p10, p11)
-		-- upvalues: var21 (write), var17 (write), var5 (ref), keyboard (ref), var25 (write), var26 (write), var27 (write), var6 (ref), SetTextFieldCursorPosition (ref), var20 (write), var24 (write), var22 (write), panel3D (ref), contextActionService (copy), var23 (write), t_2 (ref), bindableEvent (ref)
-		if var21 then return end
-		var21 = true
-		var17 = p11
-		p10:SetCurrentKeyset(1)
-		p10:SetVoiceMode(false)
-		var5.Visible = true
-		keyboard:ResizeStuds(5.9, 2.25, 320)
-		local cFrame = CFrame.new()
+	rawset(ExtendedInstanceResult, "Open", function(p5, p6) --[[ Line: 1072 ]]
+		-- upvalues: Flag (ref), v6 (ref), Parent (copy), Keyboard (copy), ChangedConnection (ref), FocusLostConnection (ref), EventConnection (ref), Frame (copy), SetTextFieldCursorPosition (copy), ClampResult (ref), Flag1 (ref), BufferText (ref), Panel3D (copy), ContextActionService (upval), v9 (ref), List1 (copy), BindableEvent (copy)
+		if Flag then return end
+		Flag = true
+		v6 = p6
+		p5:SetCurrentKeyset(1)
+		p5:SetVoiceMode(false)
+		Parent.Visible = true
+		Keyboard:ResizeStuds(5.9, 2.25, 320)
+		local _CFrame = CFrame.new()
 		
-		if var25 then
-			var25:disconnect()
+		if ChangedConnection then
+			ChangedConnection:disconnect()
 		end
-		var25 = nil
+		ChangedConnection = nil
 		
-		if var26 then
-			var26:disconnect()
+		if FocusLostConnection then
+			FocusLostConnection:disconnect()
 		end
-		var26 = nil
+		FocusLostConnection = nil
 		
-		if var27 then
-			var27:disconnect()
+		if EventConnection then
+			EventConnection:disconnect()
 		end
-		var27 = nil
+		EventConnection = nil
 		
-		if p11.TextBox then
-			var25 = p11.TextBox.Changed:connect(function(p12)
-				-- upvalues: p11 (ref), var6 (copy), SetTextFieldCursorPosition (copy), var20 (copy)
-				if p12 == "Text" then
-					var6:SetTextFromInput(p11.TextBox.Text)
-					SetTextFieldCursorPosition(var20)
+		if p6.TextBox then
+			ChangedConnection = p6.TextBox.Changed:connect(function(p7) --[[ Line: 1088 ]]
+				-- upvalues: p6 (copy), Frame (upval), SetTextFieldCursorPosition (upval), ClampResult (upval)
+				if p7 == "Text" then
+					Frame:SetTextFromInput(p6.TextBox.Text)
+					SetTextFieldCursorPosition(ClampResult)
 				end
 			end)
-			var26 = p11.TextBox.FocusLost:connect(function(p12)
-				-- upvalues: var24 (copy), p10 (ref)
-				if not var24 then
-					p10:Close(p12)
+			FocusLostConnection = p6.TextBox.FocusLost:connect(function(EnterPressed) --[[ Line: 1093 ]]
+				-- upvalues: Flag1 (upval), p5 (copy)
+				if not Flag1 then
+					p5:Close(EnterPressed)
 				end
 			end)
 			
-			if not p11.TextBox.ClearTextOnFocus then
-				var6:SetTextFromInput(p11.TextBox.Text)
-				SetTextFieldCursorPosition(var20)
-			elseif var17 and var17.TextBox then
-				var17.TextBox.Text = ""
-			elseif var22 ~= "" then
-				var22 = ""
-				var6:SetTextFromInput(var22)
-				SetTextFieldCursorPosition(var20)
+			if p6.TextBox.ClearTextOnFocus then
+				if v6 and v6.TextBox then
+					v6.TextBox.Text = ""
+				elseif BufferText ~= "" then
+					BufferText = ""
+					Frame:SetTextFromInput(BufferText)
+					SetTextFieldCursorPosition(ClampResult)
+				end
+			else
+				Frame:SetTextFromInput(p6.TextBox.Text)
+				SetTextFieldCursorPosition(ClampResult)
 			end
-			local var28 = panel3D.FindContainerOf(p11.TextBox)
+			local ContainerOf = Panel3D.FindContainerOf(p6.TextBox)
 			
-			if var28 then
-				var27 = panel3D.OnPanelClosed.Event:connect(function(p12)
-					-- upvalues: var28 (ref), p10 (ref)
-					if p12 == var28.name then
-						p10:Close(false)
+			if ContainerOf then
+				EventConnection = Panel3D.OnPanelClosed.Event:connect(function(Name) --[[ Line: 1107 ]]
+					-- upvalues: ContainerOf (copy), p5 (copy)
+					if Name == ContainerOf.name then
+						p5:Close(false)
 					end
 				end)
-				cFrame = var28:GetCFrameInCameraSpace() * CFrame.new(var28:GetGuiPositionInPanelSpace(p11.TextBox.AbsolutePosition + Vector2.new(0.5, 1) * p11.TextBox.AbsoluteSize)) * CFrame.new(0, -keyboard.height * 0.65, 0.5) * CFrame.Angles(-0.392699081699, 0, 0)
+				_CFrame = ContainerOf:GetCFrameInCameraSpace() * CFrame.new(ContainerOf:GetGuiPositionInPanelSpace(p6.TextBox.AbsolutePosition + Vector2.new(0.5, 1) * p6.TextBox.AbsoluteSize)) * CFrame.new(0, -Keyboard.height * 0.65, 0.5) * CFrame.Angles(-0.39269908169872414, 0, 0)
 			else
-				cFrame = panel3D.GetHeadLookXZ(true) * CFrame.Angles(0.392699081699, 0, 0) * CFrame.new(0, -1, -5)
+				_CFrame = Panel3D.GetHeadLookXZ(true) * CFrame.Angles(0.39269908169872414, 0, 0) * CFrame.new(0, -1, -5)
 			end
-		elseif var17 and var17.TextBox then
-			var17.TextBox.Text = ""
-		elseif var22 ~= "" then
-			var22 = ""
-			var6:SetTextFromInput(var22)
-			SetTextFieldCursorPosition(var20)
+		elseif v6 and v6.TextBox then
+			v6.TextBox.Text = ""
+		elseif BufferText ~= "" then
+			BufferText = ""
+			Frame:SetTextFromInput(BufferText)
+			SetTextFieldCursorPosition(ClampResult)
 		end
-		contextActionService:BindCoreAction("VirtualKeyboardControllerInput", function(_, p12, p13)
-			-- upvalues: SetTextFieldCursorPosition (copy), var20 (copy), p10 (ref), var23 (copy), t_2 (copy)
-			if p12 == Enum.UserInputState.End then
-				if p13.KeyCode == Enum.KeyCode.ButtonL1 then
-					SetTextFieldCursorPosition(var20 - 1)
+		ContextActionService:BindCoreAction("VirtualKeyboardControllerInput", function(_, UserInputState, Input) --[[ Line: 1125 ]]
+			-- upvalues: SetTextFieldCursorPosition (upval), ClampResult (upval), p5 (copy), v9 (upval), List1 (upval)
+			if UserInputState == Enum.UserInputState.End then
+				if Input.KeyCode == Enum.KeyCode.ButtonL1 then
+					SetTextFieldCursorPosition(ClampResult - 1)
 					
 					return
-				elseif p13.KeyCode == Enum.KeyCode.ButtonR1 then
-					SetTextFieldCursorPosition(var20 + 1)
+				end
+				if Input.KeyCode == Enum.KeyCode.ButtonR1 then
+					SetTextFieldCursorPosition(ClampResult + 1)
 					
 					return
-				elseif p13.KeyCode == Enum.KeyCode.ButtonX then
-					p10:BackspaceAtCursor()
+				end
+				if Input.KeyCode == Enum.KeyCode.ButtonX then
+					p5:BackspaceAtCursor()
 					
 					return
-				elseif p13.KeyCode == Enum.KeyCode.ButtonY then
-					p10:SubmitCharacter(" ", false)
+				end
+				if Input.KeyCode == Enum.KeyCode.ButtonY then
+					p5:SubmitCharacter(" ", false)
 					
 					return
-				elseif p13.KeyCode == Enum.KeyCode.ButtonL2 then
-					if var23 then
-						p10:SetCurrentKeyset(var23 % #t_2 + 1)
+				end
+				if Input.KeyCode == Enum.KeyCode.ButtonL2 then
+					if v9 then
+						p5:SetCurrentKeyset(v9 % #List1 + 1)
 						
 						return
 					end
-				elseif p13.KeyCode == Enum.KeyCode.ButtonL3 then
-					p10:SetCaps(not p10:GetCaps())
+				elseif Input.KeyCode == Enum.KeyCode.ButtonL3 then
+					p5:SetCaps(not p5:GetCaps())
 					
 					return
-				elseif p13.KeyCode == Enum.KeyCode.ButtonB then
-					p10:Close(false)
+				else
+					if Input.KeyCode == Enum.KeyCode.ButtonB then
+						p5:Close(false)
+					end
 				end
 			end
 		end, false, Enum.KeyCode.ButtonL1, Enum.KeyCode.ButtonR1, Enum.KeyCode.ButtonL2, Enum.KeyCode.ButtonL3, Enum.KeyCode.ButtonX, Enum.KeyCode.ButtonY, Enum.KeyCode.ButtonR2, Enum.KeyCode.ButtonB)
-		p10.Parent = keyboard:GetGUI()
-		keyboard:SetType(panel3D.Type.Fixed, { CFrame = cFrame })
-		keyboard:SetCanFade(false)
-		keyboard:SetVisible(true, true)
-		keyboard:ForceShowUntilLookedAt()
+		p5.Parent = Keyboard:GetGUI()
+		Keyboard:SetType(Panel3D.Type.Fixed, { CFrame = _CFrame })
+		Keyboard:SetCanFade(false)
+		Keyboard:SetVisible(true, true)
+		Keyboard:ForceShowUntilLookedAt()
 		
-		function keyboard.OnUpdate(_) end
+		function Keyboard:OnUpdate() --[[ Line: 1157 ]] end
 		
-		bindableEvent:Fire()
+		BindableEvent:Fire()
 	end)
-	rawset(var16, "Close", function(p10, p11)
-		-- upvalues: var21 (write), var25 (write), var26 (write), var27 (write), contextActionService (copy), keyboard (ref), var5 (ref), panel3D (ref), bindableEvent_1 (ref)
-		p11 = p11 == true
+	rawset(ExtendedInstanceResult, "Close", function(p5, Enabled) --[[ Line: 1163 ]]
+		-- upvalues: Flag (ref), ChangedConnection (ref), FocusLostConnection (ref), EventConnection (ref), ContextActionService (upval), Keyboard (copy), Parent (copy), Panel3D (copy), BindableEvent1 (copy)
+		local IsEnabled = Enabled == true
 		
-		if not var21 then return end
-		var21 = false
+		if not Flag then return end
+		Flag = false
 		
-		if var25 then
-			var25:disconnect()
+		if ChangedConnection then
+			ChangedConnection:disconnect()
 		end
-		var25 = nil
+		ChangedConnection = nil
 		
-		if var26 then
-			var26:disconnect()
+		if FocusLostConnection then
+			FocusLostConnection:disconnect()
 		end
-		var26 = nil
+		FocusLostConnection = nil
 		
-		if var27 then
-			var27:disconnect()
+		if EventConnection then
+			EventConnection:disconnect()
 		end
-		var27 = nil
-		contextActionService:UnbindCoreAction("VirtualKeyboardControllerInput")
-		keyboard:OnMouseLeave()
-		keyboard:SetVisible(false, true)
-		var5.Visible = false
-		panel3D.Get("Topbar3D"):SetVisible(true)
-		p10:SubmitText(p11, false)
-		bindableEvent_1:Fire()
+		EventConnection = nil
+		ContextActionService:UnbindCoreAction("VirtualKeyboardControllerInput")
+		Keyboard:OnMouseLeave()
+		Keyboard:SetVisible(false, true)
+		Parent.Visible = false
+		Panel3D.Get("Topbar3D"):SetVisible(true)
+		p5:SubmitText(IsEnabled, false)
+		BindableEvent1:Fire()
 	end)
-	rawset(var16, "SubmitText", function(_, p10, p11)
-		-- upvalues: var17 (write), var22 (write), panel3D (ref), keyboard (ref), var24 (write)
-		local textBox = var17 and var17.TextBox
+	rawset(ExtendedInstanceResult, "SubmitText", function(_, Submitted, p5) --[[ Line: 1183 ]]
+		-- upvalues: v6 (ref), BufferText (ref), Panel3D (copy), Keyboard (copy), Flag1 (ref)
+		local TextBox = v6 and v6.TextBox
 		
-		if textBox then
-			if p10 then
-				textBox.Text = if var17 and var17.TextBox then var17.TextBox.Text else var22
+		if TextBox then
+			if Submitted then
+				TextBox.Text = if v6 and v6.TextBox then v6.TextBox.Text else BufferText
 			end
-			local var28 = panel3D.FindContainerOf(textBox)
-			local var29 = p11 and (var28 and var28.linkedTo == keyboard)
+			local ContainerOf = Panel3D.FindContainerOf(TextBox)
+			local IsLinkedToMatch: boolean = p5 and (ContainerOf and ContainerOf.linkedTo == Keyboard)
 			
-			if var29 then
-				var24 = true
+			if IsLinkedToMatch then
+				Flag1 = true
 			end
-			textBox:ReleaseFocus(p10)
+			TextBox:ReleaseFocus(Submitted)
 			
-			if var29 then
-				textBox:CaptureFocus()
-				var24 = false
+			if IsLinkedToMatch then
+				TextBox:CaptureFocus()
+				Flag1 = false
 			end
 		end
 	end)
-	rawset(var16, "GetCurrentOptions", function(_)
-		-- upvalues: var17 (write)
-		return var17
+	rawset(ExtendedInstanceResult, "GetCurrentOptions", function(_) --[[ Line: 1206 ]]
+		-- upvalues: v6 (ref)
+		return v6
 	end)
-	rawset(var16, "BackspaceAtCursor", function(_)
-		-- upvalues: var20 (write), var17 (write), var22 (write), var6 (ref), SetTextFieldCursorPosition (ref)
-		if var20 >= 1 then
-			local var28 = if var17 and var17.TextBox then var17.TextBox.Text else var22
-			local text = string.sub(var28, 1, var20 - 1) .. string.sub(var28, var20 + 1, #var28)
-			local var29 = var20 - 1
+	rawset(ExtendedInstanceResult, "BackspaceAtCursor", function(_) --[[ Line: 1210 ]]
+		-- upvalues: ClampResult (ref), v6 (ref), BufferText (ref), Frame (copy), SetTextFieldCursorPosition (copy)
+		if ClampResult >= 1 then
+			local Text = if v6 and v6.TextBox then v6.TextBox.Text else BufferText
+			local Text1 = string.sub(Text, 1, ClampResult - 1) .. string.sub(Text, ClampResult + 1, #Text)
+			local ClampResultDelta = ClampResult - 1
 			
-			if var17 and var17.TextBox then
-				var17.TextBox.Text = text
-			elseif var22 ~= text then
-				var22 = text
-				var6:SetTextFromInput(var22)
-				SetTextFieldCursorPosition(var20)
+			if v6 and v6.TextBox then
+				v6.TextBox.Text = Text1
+			elseif BufferText ~= Text1 then
+				BufferText = Text1
+				Frame:SetTextFromInput(BufferText)
+				SetTextFieldCursorPosition(ClampResult)
 			end
-			SetTextFieldCursorPosition(var29)
+			SetTextFieldCursorPosition(ClampResultDelta)
 		end
 	end)
-	rawset(var16, "SubmitCharacter", function(p10, p11, p12)
-		-- upvalues: var17 (write), var22 (write), var20 (write), var6 (ref), SetTextFieldCursorPosition (ref)
-		local var28 = if var17 and var17.TextBox then var17.TextBox.Text else var22
-		local text = string.sub(var28, 1, var20) .. p50 .. string.sub(var28, var20 + 1, #var28)
+	rawset(ExtendedInstanceResult, "SubmitCharacter", function(p5, Text, p6) --[[ Line: 1220 ]]
+		-- upvalues: v6 (ref), BufferText (ref), ClampResult (ref), Frame (copy), SetTextFieldCursorPosition (copy)
+		local Text1 = if v6 and v6.TextBox then v6.TextBox.Text else BufferText
+		local Text2 = string.sub(Text1, 1, ClampResult) .. Text .. string.sub(Text1, ClampResult + 1, #Text1)
 		
-		if var17 and var17.TextBox then
-			var17.TextBox.Text = text
-		elseif var22 ~= text then
-			var22 = text
-			var6:SetTextFromInput(var22)
-			SetTextFieldCursorPosition(var20)
+		if v6 and v6.TextBox then
+			v6.TextBox.Text = Text2
+		elseif BufferText ~= Text2 then
+			BufferText = Text2
+			Frame:SetTextFromInput(BufferText)
+			SetTextFieldCursorPosition(ClampResult)
 		end
-		SetTextFieldCursorPosition(var20 + #p11)
+		SetTextFieldCursorPosition(ClampResult + #Text)
 		
-		if p12 and p10:GetShift() then
-			p10:SetShift(false)
+		if p6 and p5:GetShift() then
+			p5:SetShift(false)
 		end
 	end)
 	
-	for i, v in pairs(p3) do
-		local t_4 = {}
-		local var28 = create("Frame")({
+	for _, value in pairs(List) do
+		local Keys = {}
+		local Container = CreateFunction("Frame")({
 			Name = "KeyboardSizeConstrainer",
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 1, -20),
 			Position = UDim2.new(0, 0, 0, 20),
-			Parent = var5
+			Parent = Parent
 		})
-		local var29 = 0
-		local var30 = 0
-		local var31 = 0
+		local Largest = 0
+		local Largest1 = 0
+		local NewY = 0
 		
-		for i_1, v_1 in pairs(v) do
-			local var32 = 0
-			local var33 = 1
-			local var34 = 1
-			local w2 = nil
-			local h2 = nil
-			local x2 = nil
-			local y2 = nil
+		for _, value1 in pairs(value) do
+			local NewX = 0
+			local W = 1
+			local H = 1
+			local W2 = nil
+			local H2 = nil
+			local X2 = nil
+			local Y2 = nil
 			
-			for i_3, v_3 in pairs(v_1) do
-				local v_3
-				if type(v_3) ~= "table" then
-					if type(v_3) == "string" then
-						if v_3 == "" then
-							v_3 = " "
+			for _, Text in pairs(value1) do
+				if type(Text) ~= "table" then
+					if type(Text) == "string" then
+						if Text == "" then
+							Text = " "
 						end
-						local t_5 = {
-							x = var32,
-							y = var31,
-							width = var33,
-							height = var34,
-							x2 = x2,
-							y2 = y2,
-							width2 = w2,
-							height2 = h2
+						local config = {
+							x = NewX,
+							y = NewY,
+							width = W,
+							height = H,
+							x2 = X2,
+							y2 = Y2,
+							width2 = W2,
+							height2 = H2
 						}
-						local t_6 = {}
+						local List2 = {}
 						
-						for i_4 in string.gmatch(v_3, "([^\n]+)") do
-							table.insert(t_6, i_4)
+						for i in string.gmatch(Text, "([^\n]+)") do
+							table.insert(List2, i)
 						end
-						table.insert(t_4, CreateKeyboardKey(var16, t_5, t_6))
-						var32 += var33
-						var29 = math.max(var29, var32)
-						var30 = math.max(var30, var31 + var34)
-						var33 = 1
-						var34 = 1
-						w2 = nil
-						h2 = nil
-						x2 = nil
-						y2 = nil
+						table.insert(Keys, (CreateKeyboardKey(ExtendedInstanceResult, config, List2)))
+						NewX += W
+						Largest = math.max(Largest, NewX)
+						Largest1 = math.max(Largest1, NewY + H)
+						W = 1
+						H = 1
+						W2 = nil
+						H2 = nil
+						X2 = nil
+						Y2 = nil
 					end
+					continue
 				end
-				if v_3.w then
-					var33 = v_3.w
+				if Text.w then
+					W = Text.w
 				end
-				if v_3.h then
-					var34 = v_3.h
+				if Text.h then
+					H = Text.h
 				end
-				if v_3.x then
-					var32 += v_3.x
+				if Text.x then
+					NewX += Text.x
 				end
-				if v_3.y then
-					var31 += v_3.y
+				if Text.y then
+					NewY += Text.y
 				end
-				if v_3.x2 then
-					x2 = v_3.x2
+				if Text.x2 then
+					X2 = Text.x2
 				end
-				if v_3.y2 then
-					y2 = v_3.y2
+				if Text.y2 then
+					Y2 = Text.y2
 				end
-				if v_3.w2 then
-					w2 = v_3.w2
+				if Text.w2 then
+					W2 = Text.w2
 				end
-				if v_3.h2 then
-					h2 = v_3.h2
+				if Text.h2 then
+					H2 = Text.h2
 				end
 			end
-			var31 += 1
+			NewY += 1
 		end
-		for i_1, v_1 in pairs(t_4) do
-			v_1.Position = UDim2.new(v_1.Position.X.Scale / var29, 0, v_1.Position.Y.Scale / var30, 0)
-			v_1.Size = UDim2.new(v_1.Size.X.Scale / var29, 0, v_1.Size.Y.Scale / var30, 0)
-			v_1.Parent = var28
+		for _, key in pairs(Keys) do
+			key.Position = UDim2.new(key.Position.X.Scale / Largest, 0, key.Position.Y.Scale / Largest1, 0)
+			key.Size = UDim2.new(key.Size.X.Scale / Largest, 0, key.Size.Y.Scale / Largest1, 0)
+			key.Parent = Container
 		end
-		var28.SizeConstraint = Enum.SizeConstraint.RelativeXX
-		var28.Size = UDim2.new(1, 0, -var30 / var29, 0)
-		var28.Position = UDim2.new(0, 0, 1, 0)
-		var28.Visible = false
-		table.insert(t_2, { keys = t_4, container = var28 })
+		Container.SizeConstraint = Enum.SizeConstraint.RelativeXX
+		Container.Size = UDim2.new(1, 0, -Largest1 / Largest, 0)
+		Container.Position = UDim2.new(0, 0, 1, 0)
+		Container.Visible = false
+		table.insert(List1, { keys = Keys, container = Container })
 	end
-	var16:SetCurrentKeyset(1)
-	var6.MouseButton1Click:connect(function()
-		-- upvalues: SetTextFieldCursorPosition (ref), calculateTextCursorPosition (ref), keyboard (ref)
-		SetTextFieldCursorPosition(calculateTextCursorPosition(keyboard.lookAtPixel.X, keyboard.lookAtPixel.Y))
+	ExtendedInstanceResult:SetCurrentKeyset(1)
+	Frame.MouseButton1Click:connect(function() --[[ Line: 1301 ]]
+		-- upvalues: SetTextFieldCursorPosition (copy), calculateTextCursorPosition (copy), Keyboard (copy)
+		SetTextFieldCursorPosition((calculateTextCursorPosition(Keyboard.lookAtPixel.X, Keyboard.lookAtPixel.Y)))
 	end)
-	var9.MouseButton1Click:connect(function()
-		-- upvalues: var16 (ref)
-		var16:Close(false)
+	VRButton.MouseButton1Click:connect(function() --[[ Line: 1305 ]]
+		-- upvalues: ExtendedInstanceResult (copy)
+		ExtendedInstanceResult:Close(false)
 	end)
-	var12.MouseButton1Click:connect(function()
-		-- upvalues: t_3 (copy), CreateBaseVoiceState (copy), soundService (copy)
-		if t_3:GetCurrentState().Name == "Listening" then
-			local var35 = t_3
-			local processing = CreateBaseVoiceState()
-			processing.Name = "Processing"
-			local var36 = false
-			local var37 = nil
+	VRButton1.MouseButton1Click:connect(function() --[[ Line: 1309 ]]
+		-- upvalues: config2 (upval), CreateBaseVoiceState (upval), SoundService (upval)
+		if config2:GetCurrentState().Name == "Listening" then
+			local Processing = CreateBaseVoiceState()
+			Processing.Name = "Processing"
+			local v10 = false
+			local v11 = nil
 			
-			function processing.TransitionTo(_)
-				-- upvalues: var37 (write), soundService (copy), var36 (write)
-				coroutine.wrap(function()
-					-- upvalues: var37 (copy), soundService (copy), var36 (copy)
-					pcall(function()
-						-- upvalues: var37 (copy), soundService (copy)
-						var4 = soundService:EndRecording()
+			function Processing:TransitionTo() --[[ Line: 662 ]]
+				-- upvalues: v11 (ref), SoundService (upval), v10 (ref)
+				coroutine.wrap(function() --[[ Line: 663 ]]
+					-- upvalues: v11 (upval), SoundService (upval), v10 (upval)
+					pcall(function() --[[ Line: 664 ]]
+						-- upvalues: v11 (upval), SoundService (upval)
+						v11 = SoundService:EndRecording()
 					end)
-					var3 = true
+					v10 = true
 				end)()
 			end
 			
-			function processing.GetResultAsync(_)
-				-- upvalues: var36 (write), var37 (write)
-				while true do
-					while not var36 do
-						wait()
-					end
-					return var37
+			function Processing:GetResultAsync() --[[ Line: 669 ]]
+				-- upvalues: v10 (ref), v11 (ref)
+				while not v10 do
+					wait()
 				end
+				return v11
 			end
 			
-			var35:TransitionState(processing)
+			config2:TransitionState(Processing)
 		end
 	end)
 	
-	local function onVoiceProcessingStateChanged(p10)
-		-- upvalues: var13 (ref), var14 (ref), t (copy), var17 (write), var22 (write), var6 (ref), SetTextFieldCursorPosition (ref), var20 (write), t_3 (copy), CreateBaseVoiceState (copy), var16 (ref)
-		if p10.Name == "Listening" then
-			var13.Text = "Listening..."
-		elseif p10.Name == "Processing" then
-			var13.Text = "Processing..."
-		elseif p10.Name == "Waiting" then
-			var13.Text = "Done"
+	local function onVoiceProcessingStateChanged(CurrentState) --[[ Line: 1315 ]]
+		-- upvalues: v4 (copy), v5 (copy), t (upval), v6 (ref), BufferText (ref), Frame (copy), SetTextFieldCursorPosition (copy), ClampResult (ref), config2 (upval), CreateBaseVoiceState (upval), ExtendedInstanceResult (copy)
+		if CurrentState.Name == "Listening" then
+			v4.Text = "Listening..."
+		elseif CurrentState.Name == "Processing" then
+			v4.Text = "Processing..."
+		elseif CurrentState.Name == "Waiting" then
+			v4.Text = "Done"
 		end
-		if p10.Name == "Processing" then
-			coroutine.wrap(function()
-				-- upvalues: var14 (copy), p10 (ref), t (copy), var17 (copy), var22 (copy), var6 (copy), SetTextFieldCursorPosition (copy), var20 (copy), var13 (copy), t_3 (copy), CreateBaseVoiceState (copy)
-				var14:StopAnimation()
-				local resultAsync = p10:GetResultAsync()
+		if CurrentState.Name == "Processing" then
+			coroutine.wrap(function() --[[ Line: 1326 ]]
+				-- upvalues: v5 (upval), CurrentState (copy), t (upval), v6 (upval), BufferText (upval), Frame (upval), SetTextFieldCursorPosition (upval), ClampResult (upval), v4 (upval), config2 (upval), CreateBaseVoiceState (upval)
+				v5:StopAnimation()
+				local ResultAsync = CurrentState:GetResultAsync()
 				
-				if resultAsync and resultAsync.Status == t.ASR_STATUS_OK then
-					local response = resultAsync.Response
+				if ResultAsync and ResultAsync.Status == t.ASR_STATUS_OK then
+					local Response = ResultAsync.Response
 					
-					if var17 and var17.TextBox then
-						var17.TextBox.Text = response
-					elseif var22 ~= response then
-						var22 = response
-						var6:SetTextFromInput(var22)
-						SetTextFieldCursorPosition(var20)
+					if v6 and v6.TextBox then
+						v6.TextBox.Text = Response
+					elseif BufferText ~= Response then
+						BufferText = Response
+						Frame:SetTextFromInput(BufferText)
+						SetTextFieldCursorPosition(ClampResult)
 					end
 				else
-					var13.Text = "An error occurred, please try again."
+					v4.Text = "An error occurred, please try again."
 					wait(2)
 				end
-				local waiting = CreateBaseVoiceState()
-				waiting.Name = "Waiting"
-				t_3:TransitionState(waiting)
+				local Waiting = CreateBaseVoiceState()
+				Waiting.Name = "Waiting"
+				config2:TransitionState(Waiting)
 			end)()
 			
 			return
-		elseif p10.Name == "Listening" then
-			var14:StartAnimation()
+		end
+		if CurrentState.Name == "Listening" then
+			v5:StartAnimation()
 			
 			return
-		elseif p10.Name == "Waiting" then
-			var16:SetVoiceMode(false)
+		end
+		if CurrentState.Name == "Waiting" then
+			ExtendedInstanceResult:SetVoiceMode(false)
 		end
 	end
 	
-	t_3.StateTransitionedEvent:connect(onVoiceProcessingStateChanged)
-	onVoiceProcessingStateChanged(t_3:GetCurrentState())
+	config2.StateTransitionedEvent:connect(onVoiceProcessingStateChanged)
+	onVoiceProcessingStateChanged(config2:GetCurrentState())
 	
-	return var16
+	return ExtendedInstanceResult
 end
 
-local var38 = nil
+local v10 = nil
 
-local _ = function()
-	-- upvalues: var38 (write), ConstructKeyboardUI (ref), var1 (ref), var2 (ref)
-	if var38 == nil then
-		var38 = ConstructKeyboardUI({ var1, var2 })
+local _ = function() --[[ Line: 1352 | Named "GetKeyboard" ]]
+	-- upvalues: v10 (ref), ConstructKeyboardUI (copy), SymW8W24Speaker (copy), W22AbcW8W24Speaker (copy)
+	if v10 == nil then
+		v10 = ConstructKeyboardUI({ SymW8W24Speaker, W22AbcW8W24Speaker })
 	end
-	return var38
+	return v10
 end
 
-local t_4 = {
-	CreateVirtualKeyboardOptions = function(_, p10)
-		return { TextBox = p10 }
+local VirtualKeyboardModule = {
+	CreateVirtualKeyboardOptions = function(_, TextBox) --[[ Line: 1363 ]]
+		return { TextBox = TextBox }
 	end,
-	ShowVirtualKeyboard = function(_, _) end,
-	CloseVirtualKeyboard = function(_) end
+	ShowVirtualKeyboard = function(_, _) --[[ Line: 1372 ]] end,
+	CloseVirtualKeyboard = function(_) --[[ Line: 1378 ]] end
 }
 
-if var38 == nil then
-	var38 = ConstructKeyboardUI({ var1, var2 })
+if v10 == nil then
+	v10 = ConstructKeyboardUI({ SymW8W24Speaker, W22AbcW8W24Speaker })
 end
-t_4.OpenedEvent = var38.OpenedEvent
+VirtualKeyboardModule.OpenedEvent = v10.OpenedEvent
 
-if var38 == nil then
-	var38 = ConstructKeyboardUI({ var1, var2 })
+if v10 == nil then
+	v10 = ConstructKeyboardUI({ SymW8W24Speaker, W22AbcW8W24Speaker })
 end
-t_4.ClosedEvent = var38.ClosedEvent
+VirtualKeyboardModule.ClosedEvent = v10.ClosedEvent
 
-return t_4
+return VirtualKeyboardModule

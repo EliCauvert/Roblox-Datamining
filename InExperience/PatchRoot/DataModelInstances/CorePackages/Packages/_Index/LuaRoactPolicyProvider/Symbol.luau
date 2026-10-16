@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index["lua-symbol"]["lua-symbol"])
+﻿return (require(script.Parent.Parent.Parent._Index["lua-symbol"]["lua-symbol"]))

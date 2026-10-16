@@ -1,13 +1,13 @@
-﻿local parent = script:FindFirstAncestor("GenericAbuseReporting").Parent
-local default = require(parent.LinkingProtocol).LinkingProtocol.default
-local reactModule = require(parent.React)
+﻿local Parent = script:FindFirstAncestor("GenericAbuseReporting").Parent
+local Default = require(Parent.LinkingProtocol).LinkingProtocol.default
+local ReactModule = require(Parent.React)
 
-return function()
-	-- upvalues: reactModule (ref), default (ref)
-	return reactModule.useCallback(function(p1)
-		-- upvalues: default (copy)
+return function() --[[ Line: 13 | Named "useInExpOpenLink" ]]
+	-- upvalues: ReactModule (copy), Default (copy)
+	return ReactModule.useCallback(function(p1) --[[ Line: 14 ]]
+		-- upvalues: Default (upval)
 		if p1 ~= nil and p1 ~= "" then
-			default:openURL(p1)
+			Default:openURL(p1)
 		end
 	end, {})
 end

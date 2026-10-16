@@ -1,110 +1,107 @@
-﻿local parent = script:FindFirstAncestor("GameJoinCard").Parent
-local reactModule = require(parent.React)
-local fFlagPPVEnabledOnConsole = require(parent.SharedFlags).FFlagPPVEnabledOnConsole
-local fFlagEnableConsoleGameJoinCard = require(parent.SharedFlags).FFlagEnableConsoleGameJoinCard
-local fFlagBlockEDPClickthrough = require(parent.SharedFlags).FFlagBlockEDPClickthrough
+﻿local Parent = script:FindFirstAncestor("GameJoinCard").Parent
+local ReactModule = require(Parent.React)
+local FFlagBlockEDPClickthrough = require(Parent.SharedFlags).FFlagBlockEDPClickthrough
 
-return function(p1, p2, p3)
-	-- upvalues: reactModule (ref), fFlagPPVEnabledOnConsole (ref), fFlagEnableConsoleGameJoinCard (ref), fFlagBlockEDPClickthrough (ref)
-	local var1, var2 = reactModule.useState(false)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var2 (ref)
-		if not p1 then
-			var2(false)
+return function(Object, p1, p2) --[[ Line: 7 | Named "useGameJoinCardNavigation" ]]
+	-- upvalues: ReactModule (copy), FFlagBlockEDPClickthrough (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	ReactModule.useEffect(function() --[[ Line: 10 ]]
+		-- upvalues: Object (copy), UseStateResult2 (copy)
+		if not Object then
+			UseStateResult2(false)
 			
 			return
 		end
-		local guiService = game:GetService("GuiService")
+		local GuiService = game:GetService("GuiService")
 		
-		local function checkFocus()
-			-- upvalues: guiService (ref), var2 (copy), p1 (copy)
-			local selectedCoreObject = guiService.SelectedCoreObject
-			var2(not (selectedCoreObject == nil or selectedCoreObject == p1) and (selectedCoreObject:IsDescendantOf(p1) and selectedCoreObject:FindFirstAncestorOfClass("CoreGui") ~= nil))
+		local function checkFocus() --[[ Line: 16 ]]
+			-- upvalues: GuiService (copy), UseStateResult2 (upval), Object (upval)
+			local SelectedCoreObject = GuiService.SelectedCoreObject
+			UseStateResult2(SelectedCoreObject ~= nil and (if SelectedCoreObject == Object then SelectedCoreObject:FindFirstAncestorOfClass("CoreGui") ~= nil else SelectedCoreObject:IsDescendantOf(Object) and SelectedCoreObject:FindFirstAncestorOfClass("CoreGui") ~= nil))
 		end
 		
-		local selectedCoreObject = guiService.SelectedCoreObject
-		var2(not (selectedCoreObject == nil or selectedCoreObject == p1) and (selectedCoreObject:IsDescendantOf(p1) and selectedCoreObject:FindFirstAncestorOfClass("CoreGui") ~= nil))
-		local var3 = guiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(checkFocus)
+		local SelectedCoreObject = GuiService.SelectedCoreObject
+		UseStateResult2(SelectedCoreObject ~= nil and (if SelectedCoreObject == Object then SelectedCoreObject:FindFirstAncestorOfClass("CoreGui") ~= nil else SelectedCoreObject:IsDescendantOf(Object) and SelectedCoreObject:FindFirstAncestorOfClass("CoreGui") ~= nil))
+		local Connection = GuiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(checkFocus)
 		
-		return function()
-			-- upvalues: var3 (ref)
-			var3:Disconnect()
+		return function() --[[ Line: 26 ]]
+			-- upvalues: Connection (copy)
+			Connection:Disconnect()
 		end
-	end, { p1 })
-	reactModule.useEffect(function()
-		-- upvalues: fFlagPPVEnabledOnConsole (copy), fFlagEnableConsoleGameJoinCard (copy), p2 (ref), p1 (ref), p3 (ref), fFlagBlockEDPClickthrough (copy)
-		if not fFlagPPVEnabledOnConsole and not fFlagEnableConsoleGameJoinCard or not p2 then return end
+	end, { Object })
+	ReactModule.useEffect(function() --[[ Line: 31 ]]
+		-- upvalues: p1 (copy), Object (copy), p2 (copy), FFlagBlockEDPClickthrough (upval)
 		if not p1 then return end
-		local current = p3.current
+		if not Object then return end
+		local Current = p2.current
 		
-		if not current then return end
-		local content = current:FindFirstChild("Content", true)
+		if not Current then return end
+		local Content = Current:FindFirstChild("Content", true)
 		
-		if content then
-			local function wireNavigation()
-				-- upvalues: fFlagBlockEDPClickthrough (copy), p1 (copy), content (ref)
-				if fFlagBlockEDPClickthrough then
-					local platformName = p1:FindFirstChild("PlatformName", true)
-					
-					if platformName then
-						content.NextSelectionDown = platformName
-						platformName.NextSelectionUp = content
-					end
-					return
-				else
-					local thumbnail = p1:FindFirstChild("Thumbnail", true)
-					local gameName = p1:FindFirstChild("GameName", true)
-					local platformName = p1:FindFirstChild("PlatformName", true)
-					
-					if thumbnail then
-						content.NextSelectionDown = thumbnail
-						thumbnail.NextSelectionUp = content
-					end
-					if gameName then
-						gameName.NextSelectionUp = content
-					end
-					if platformName then
-						platformName.NextSelectionUp = gameName or content
-						
-						if gameName then
-							gameName.NextSelectionDown = platformName
-						end
-					end
-				end
-			end
-			
-			wireNavigation()
-			local descendantAddedConnection = p1.DescendantAdded:Connect(wireNavigation)
-			
-			return function()
-				-- upvalues: descendantAddedConnection (ref), content (ref), fFlagBlockEDPClickthrough (copy), p1 (copy)
-				descendantAddedConnection:Disconnect()
+		if not Content then return end
+		local function wireNavigation() --[[ Line: 47 ]]
+			-- upvalues: FFlagBlockEDPClickthrough (upval), Object (upval), Content (copy)
+			if FFlagBlockEDPClickthrough then
+				local PlatformName = Object:FindFirstChild("PlatformName", true)
 				
-				if content and content.Parent then
-					content.NextSelectionDown = nil
+				if PlatformName then
+					Content.NextSelectionDown = PlatformName
+					PlatformName.NextSelectionUp = Content
 				end
-				if not fFlagBlockEDPClickthrough then
-					local thumbnail = p1:FindFirstChild("Thumbnail", true)
-					
-					if thumbnail and thumbnail.Parent then
-						thumbnail.NextSelectionUp = nil
-					end
-					local gameName = p1:FindFirstChild("GameName", true)
-					
-					if gameName and gameName.Parent then
-						gameName.NextSelectionUp = nil
-						gameName.NextSelectionDown = nil
-					end
-				end
-				local platformName = p1:FindFirstChild("PlatformName", true)
+				return
+			else
+				local Thumbnail = Object:FindFirstChild("Thumbnail", true)
+				local GameName = Object:FindFirstChild("GameName", true)
+				local PlatformName1 = Object:FindFirstChild("PlatformName", true)
 				
-				if platformName and platformName.Parent then
-					platformName.NextSelectionUp = nil
-					platformName.NextSelectionDown = nil
+				if Thumbnail then
+					Content.NextSelectionDown = Thumbnail
+					Thumbnail.NextSelectionUp = Content
+				end
+				if GameName then
+					GameName.NextSelectionUp = Content
+				end
+				if PlatformName1 then
+					PlatformName1.NextSelectionUp = if GameName then GameName else Content
+					
+					if GameName then
+						GameName.NextSelectionDown = PlatformName1
+					end
 				end
 			end
 		end
-	end, { p1, p2 })
+		
+		wireNavigation()
+		local DescendantAddedConnection = Object.DescendantAdded:Connect(wireNavigation)
+		
+		return function() --[[ Line: 78 ]]
+			-- upvalues: DescendantAddedConnection (copy), Content (copy), FFlagBlockEDPClickthrough (upval), Object (upval)
+			DescendantAddedConnection:Disconnect()
+			
+			if Content and Content.Parent then
+				Content.NextSelectionDown = nil
+			end
+			if not FFlagBlockEDPClickthrough then
+				local Thumbnail = Object:FindFirstChild("Thumbnail", true)
+				
+				if Thumbnail and Thumbnail.Parent then
+					Thumbnail.NextSelectionUp = nil
+				end
+				local GameName = Object:FindFirstChild("GameName", true)
+				
+				if GameName and GameName.Parent then
+					GameName.NextSelectionUp = nil
+					GameName.NextSelectionDown = nil
+				end
+			end
+			local PlatformName = Object:FindFirstChild("PlatformName", true)
+			
+			if PlatformName and PlatformName.Parent then
+				PlatformName.NextSelectionUp = nil
+				PlatformName.NextSelectionDown = nil
+			end
+		end
+	end, { Object, p1 })
 	
-	return var1
+	return UseStateResult
 end

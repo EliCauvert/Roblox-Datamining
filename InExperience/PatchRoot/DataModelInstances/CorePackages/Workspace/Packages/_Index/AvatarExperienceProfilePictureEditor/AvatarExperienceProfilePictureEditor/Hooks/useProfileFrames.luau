@@ -1,46 +1,46 @@
-﻿local avatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
-local reactModule = require(avatarExperienceProfilePictureEditor.Parent.React)
-local fetchInternalModule = require(avatarExperienceProfilePictureEditor.Api.fetchInternal)
-local editProfileImageAnalyticsModule = require(avatarExperienceProfilePictureEditor.Analytics.EditProfileImageAnalytics)
-local profileFramesWidgetsApiModule = require(avatarExperienceProfilePictureEditor.Api.profileFramesWidgetsApi)
-local mapWidgetContentToFrameItemsModule = require(avatarExperienceProfilePictureEditor.Utils.mapWidgetContentToFrameItems)
+﻿local AvatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
+local ReactModule = require(AvatarExperienceProfilePictureEditor.Parent.React)
+local FetchInternalModule = require(AvatarExperienceProfilePictureEditor.Api.fetchInternal)
+local EditProfileImageAnalyticsModule = require(AvatarExperienceProfilePictureEditor.Analytics.EditProfileImageAnalytics)
+local ProfileFramesWidgetsApiModule = require(AvatarExperienceProfilePictureEditor.Api.profileFramesWidgetsApi)
+local MapWidgetContentToFrameItemsModule = require(AvatarExperienceProfilePictureEditor.Utils.mapWidgetContentToFrameItems)
 
-return function()
-	-- upvalues: reactModule (ref), profileFramesWidgetsApiModule (ref), fetchInternalModule (ref), mapWidgetContentToFrameItemsModule (ref), editProfileImageAnalyticsModule (ref)
-	local var1, var2 = reactModule.useState({})
-	local var3, var4 = reactModule.useState(true)
-	local var5, var6 = reactModule.useState(false)
-	local var7 = reactModule.useCallback(function()
-		-- upvalues: profileFramesWidgetsApiModule (copy), fetchInternalModule (copy), mapWidgetContentToFrameItemsModule (copy), var6 (ref), var2 (ref), var4 (ref), editProfileImageAnalyticsModule (copy)
-		profileFramesWidgetsApiModule.fetchProfileFramesWidgets(fetchInternalModule):andThen(function(p1)
-			-- upvalues: mapWidgetContentToFrameItemsModule (copy), var6 (copy), var2 (copy), var4 (copy)
-			local var8 = mapWidgetContentToFrameItemsModule.mapWidgetContentToFrameItems(if p1 and p1.widgetContent then p1.widgetContent else {}, if p1 then p1.hydrateResponseBody else nil)
-			var6(false)
-			var2(var8)
-			var4(false)
-		end):catch(function(_)
-			-- upvalues: editProfileImageAnalyticsModule (copy), var6 (copy), var2 (copy), var4 (copy)
-			editProfileImageAnalyticsModule.logFetchFailure({ assetType = "frames" })
-			var6(true)
-			var2({})
-			var4(false)
+return function() --[[ Line: 22 | Named "useProfileFrames" ]]
+	-- upvalues: ReactModule (copy), ProfileFramesWidgetsApiModule (copy), FetchInternalModule (copy), MapWidgetContentToFrameItemsModule (copy), EditProfileImageAnalyticsModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState({})
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(true)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(false)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 27 ]]
+		-- upvalues: ProfileFramesWidgetsApiModule (upval), FetchInternalModule (upval), MapWidgetContentToFrameItemsModule (upval), UseStateResult2_2 (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), EditProfileImageAnalyticsModule (upval)
+		ProfileFramesWidgetsApiModule.fetchProfileFramesWidgets(FetchInternalModule):andThen(function(Result) --[[ Line: 30 ]]
+			-- upvalues: MapWidgetContentToFrameItemsModule (upval), UseStateResult2_2 (upval), UseStateResult2 (upval), UseStateResult2_1 (upval)
+			local MapWidgetContentToFrameItemsResult = MapWidgetContentToFrameItemsModule.mapWidgetContentToFrameItems(if Result and Result.widgetContent then Result.widgetContent else {}, if Result then Result.hydrateResponseBody else nil)
+			UseStateResult2_2(false)
+			UseStateResult2(MapWidgetContentToFrameItemsResult)
+			UseStateResult2_1(false)
+		end):catch(function(_) --[[ Line: 42 ]]
+			-- upvalues: EditProfileImageAnalyticsModule (upval), UseStateResult2_2 (upval), UseStateResult2 (upval), UseStateResult2_1 (upval)
+			EditProfileImageAnalyticsModule.logFetchFailure({ assetType = "frames" })
+			UseStateResult2_2(true)
+			UseStateResult2({})
+			UseStateResult2_1(false)
 		end)
 	end, {})
-	local var8 = reactModule.useCallback(function()
-		-- upvalues: var4 (ref), var6 (ref), var7 (ref)
-		var4(true)
-		var6(false)
-		var7()
-	end, { var7 })
-	reactModule.useEffect(function()
-		-- upvalues: var7 (ref)
-		var7()
-	end, { var7 })
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 52 ]]
+		-- upvalues: UseStateResult2_1 (copy), UseStateResult2_2 (copy), UseResult (copy)
+		UseStateResult2_1(true)
+		UseStateResult2_2(false)
+		UseResult()
+	end, { UseResult })
+	ReactModule.useEffect(function() --[[ Line: 58 ]]
+		-- upvalues: UseResult (copy)
+		UseResult()
+	end, { UseResult })
 	
 	return {
-		frameItems = var1,
-		isLoading = var3,
-		hasError = var5,
-		refetch = var8
+		frameItems = UseStateResult,
+		isLoading = UseStateResult1,
+		hasError = UseStateResult3,
+		refetch = UseResult1
 	}
 end

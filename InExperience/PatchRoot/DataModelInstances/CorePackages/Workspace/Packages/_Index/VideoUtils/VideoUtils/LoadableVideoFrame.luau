@@ -1,128 +1,113 @@
-﻿local videoUtils = script:FindFirstAncestor("VideoUtils")
-local parent = videoUtils.Parent
-local videoFrameWrapperModule = require(videoUtils.VideoFrameWrapper)
-local getAuthorizedVideoUriModule = require(videoUtils.getAuthorizedVideoUri)
-local argCheckModule = require(parent.ArgCheck)
-local loadableImage = require(parent.UIBlox).App.Loading.LoadableImage
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local radius = foundationModule.Enums.Radius
-local skeleton = foundationModule.Skeleton
-local fFlagLuaAppEdpMediaGalleryAutoAdvance = require(parent.SharedFlags).FFlagLuaAppEdpMediaGalleryAutoAdvance
-local fFlagLuaAppEdpMediaGalleryFullScreen = require(parent.SharedFlags).FFlagLuaAppEdpMediaGalleryFullScreen
-local fFlagLuaAppEdpConsoleMediaGalleryVideo = require(parent.SharedFlags).FFlagLuaAppEdpConsoleMediaGalleryVideo
-local fFlagLuaAppEnableHomepageOneByTwoTile = require(parent.SharedFlags).FFlagLuaAppEnableHomepageOneByTwoTile
-local fFlagLuaAppHomePageFirstImageLoadObserver = require(parent.SharedFlags).FFlagLuaAppHomePageFirstImageLoadObserver
-local fFlagLuaAppSduiVideoThumbnail = require(parent.SharedFlags).FFlagLuaAppSduiVideoThumbnail
-local fFlagLuaAppHomeMomentVideoFallback = require(parent.SharedFlags).FFlagLuaAppHomeMomentVideoFallback
+﻿local VideoUtils = script:FindFirstAncestor("VideoUtils")
+local Parent = VideoUtils.Parent
+local VideoFrameWrapperModule = require(VideoUtils.VideoFrameWrapper)
+local GetAuthorizedVideoUriModule = require(VideoUtils.getAuthorizedVideoUri)
+local ArgCheckModule = require(Parent.ArgCheck)
+local LoadableImage = require(Parent.UIBlox).App.Loading.LoadableImage
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local Radius = FoundationModule.Enums.Radius
+local Skeleton = FoundationModule.Skeleton
+local FFlagLuaAppEdpMediaGalleryAutoAdvance = require(Parent.SharedFlags).FFlagLuaAppEdpMediaGalleryAutoAdvance
+local FFlagLuaAppEdpMediaGalleryFullScreen = require(Parent.SharedFlags).FFlagLuaAppEdpMediaGalleryFullScreen
+local FFlagLuaAppEdpConsoleMediaGalleryVideo = require(Parent.SharedFlags).FFlagLuaAppEdpConsoleMediaGalleryVideo
+local FFlagLuaAppEnableHomepageOneByTwoTile = require(Parent.SharedFlags).FFlagLuaAppEnableHomepageOneByTwoTile
+local FFlagLuaAppHomePageFirstImageLoadObserver = require(Parent.SharedFlags).FFlagLuaAppHomePageFirstImageLoadObserver
+local FFlagLuaAppSduiVideoThumbnail = require(Parent.SharedFlags).FFlagLuaAppSduiVideoThumbnail
+local FFlagLuaAppHomeMomentVideoFallback = require(Parent.SharedFlags).FFlagLuaAppHomeMomentVideoFallback
 
-local function LoadableVideoFrame(p1, p2)
-	-- upvalues: reactModule (ref), fFlagLuaAppEdpMediaGalleryAutoAdvance (ref), fFlagLuaAppEdpMediaGalleryFullScreen (ref), fFlagLuaAppEdpConsoleMediaGalleryVideo (ref), fFlagLuaAppEnableHomepageOneByTwoTile (ref), argCheckModule (ref), fFlagLuaAppHomePageFirstImageLoadObserver (ref), videoFrameWrapperModule (ref), fFlagLuaAppHomeMomentVideoFallback (ref), getAuthorizedVideoUriModule (ref), fFlagLuaAppSduiVideoThumbnail (ref), loadableImage (ref), skeleton (ref), radius (ref)
-	local var1, var2 = reactModule.useState(false)
-	local var3 = if fFlagLuaAppEdpMediaGalleryAutoAdvance or fFlagLuaAppEdpMediaGalleryFullScreen or (fFlagLuaAppEdpConsoleMediaGalleryVideo or fFlagLuaAppEnableHomepageOneByTwoTile) then nil else reactModule.useRef(nil)
-	local var4 = reactModule.useRef(nil)
+local function LoadableVideoFrame(Image, p1) --[[ Line: 45 ]]
+	-- upvalues: ReactModule (copy), FFlagLuaAppEdpMediaGalleryAutoAdvance (copy), FFlagLuaAppEdpMediaGalleryFullScreen (copy), FFlagLuaAppEdpConsoleMediaGalleryVideo (copy), FFlagLuaAppEnableHomepageOneByTwoTile (copy), ArgCheckModule (copy), FFlagLuaAppHomePageFirstImageLoadObserver (copy), VideoFrameWrapperModule (copy), FFlagLuaAppHomeMomentVideoFallback (copy), GetAuthorizedVideoUriModule (copy), FFlagLuaAppSduiVideoThumbnail (copy), LoadableImage (copy), Skeleton (copy), Radius (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseRefResult = if FFlagLuaAppEdpMediaGalleryAutoAdvance or FFlagLuaAppEdpMediaGalleryFullScreen or FFlagLuaAppEdpConsoleMediaGalleryVideo or FFlagLuaAppEnableHomepageOneByTwoTile then nil else ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(nil)
 	
-	if p1.shouldStartPlayback and var4.current == nil then
-		var4.current = tick()
-	elseif not p1.shouldStartPlayback then
-		var4.current = nil
+	if Image.shouldStartPlayback and UseRefResult1.current == nil then
+		UseRefResult1.current = tick()
+	elseif not Image.shouldStartPlayback then
+		UseRefResult1.current = nil
 	end
-	local createElement_1
-	local var5 = p1.thumbnail ~= nil and p1.thumbnail ~= ""
-	local useCallback = reactModule.useCallback
-	useCallback = useCallback(function()
-		-- upvalues: fFlagLuaAppEdpMediaGalleryAutoAdvance (copy), fFlagLuaAppEdpMediaGalleryFullScreen (copy), fFlagLuaAppEdpConsoleMediaGalleryVideo (copy), fFlagLuaAppEnableHomepageOneByTwoTile (copy), p2 (ref), var3 (ref), argCheckModule (copy), var4 (ref), p1 (ref), var2 (ref)
-		local current = nil
-		
-		if not fFlagLuaAppEdpMediaGalleryAutoAdvance and not fFlagLuaAppEdpMediaGalleryFullScreen and (not fFlagLuaAppEdpConsoleMediaGalleryVideo and not fFlagLuaAppEnableHomepageOneByTwoTile) then
-			current = var3.current
-		elseif typeof(p2) == "table" then
-			current = p2.current
-		else
-			warn(`unsupported ref type: {typeof(p2)}`)
+	local IsNotThumbnailMatch: boolean = Image.thumbnail ~= nil and Image.thumbnail ~= ""
+	local UseResult = if FFlagLuaAppEdpMediaGalleryAutoAdvance then ReactModule.useCallback(function() --[[ Line: 111 ]]
+		-- upvalues: Image (copy)
+		if Image.onVideoEnded then
+			Image.onVideoEnded()
 		end
-		if current ~= nil then
-			local currentTime = tick()
-			argCheckModule.assert(var4.current and var4.current <= currentTime)
-			local var6 = if var4.current and var4.current <= currentTime then currentTime - var4.current else -1
-			
-			if p1.onVideoLoaded then
-				p1.onVideoLoaded(current.TimeLength, var6)
-			end
-			var2(true)
-		end
-	end, {
-		p1.onVideoLoaded,
-		if fFlagLuaAppEdpMediaGalleryAutoAdvance or fFlagLuaAppEdpMediaGalleryFullScreen or (fFlagLuaAppEdpConsoleMediaGalleryVideo or fFlagLuaAppEnableHomepageOneByTwoTile) then p2 else var3,
-		var4
-	})
-	local var6 = if fFlagLuaAppEdpMediaGalleryAutoAdvance then reactModule.useCallback(function()
-		-- upvalues: p1 (ref)
-		if p1.onVideoEnded then
-			p1.onVideoEnded()
-		end
-	end, { p1.onVideoEnded }) else nil
-	local var7 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref)
-		if p1.onVideoLooped then
-			p1.onVideoLooped()
-		end
-	end, { p1.onVideoLooped })
-	local createElement = reactModule.createElement
-	local var8 = "Frame"
-	local t = {
-		[reactModule.Tag] = if fFlagLuaAppHomePageFirstImageLoadObserver then "observed-image" else nil,
+	end, { Image.onVideoEnded }) else nil
+	
+	return ReactModule.createElement("Frame", {
+		[ReactModule.Tag] = if FFlagLuaAppHomePageFirstImageLoadObserver then "observed-image" else nil,
 		Size = UDim2.fromScale(1, 1),
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		ClipsDescendants = true
-	}
-	local t_1 = {
-		VideoFrame = reactModule.createElement(videoFrameWrapperModule, {
+	}, {
+		VideoFrame = ReactModule.createElement(VideoFrameWrapperModule, {
 			zIndex = 4,
-			videoFrameRef = if fFlagLuaAppEdpMediaGalleryAutoAdvance or fFlagLuaAppEdpMediaGalleryFullScreen or (fFlagLuaAppEdpConsoleMediaGalleryVideo or fFlagLuaAppEnableHomepageOneByTwoTile) then p2 else var3,
-			video = if fFlagLuaAppHomeMomentVideoFallback then getAuthorizedVideoUriModule(p1.video, p1.accessContext) else p1.video,
-			isPlaying = p1.shouldStartPlayback,
-			looped = p1.looped,
-			volume = if p1.muted then 0 else nil,
-			onLoaded = useCallback,
-			onLooped = var7,
-			onEnded = if fFlagLuaAppEdpMediaGalleryAutoAdvance then var6 else nil,
-			cornerRadius = p1.cornerRadius
-		})
-	}
-	
-	if fFlagLuaAppSduiVideoThumbnail and p1.thumbnailComponentOverride then
-		createElement_1 = reactModule.createElement("Frame", {
+			videoFrameRef = if FFlagLuaAppEdpMediaGalleryAutoAdvance or FFlagLuaAppEdpMediaGalleryFullScreen or FFlagLuaAppEdpConsoleMediaGalleryVideo or FFlagLuaAppEnableHomepageOneByTwoTile then p1 else UseRefResult,
+			video = if FFlagLuaAppHomeMomentVideoFallback then GetAuthorizedVideoUriModule(Image.video, Image.accessContext) else Image.video,
+			isPlaying = Image.shouldStartPlayback,
+			looped = Image.looped,
+			volume = if Image.muted then 0 else nil,
+			onLoaded = ReactModule.useCallback(function() --[[ Line: 66 ]]
+				-- upvalues: FFlagLuaAppEdpMediaGalleryAutoAdvance (upval), FFlagLuaAppEdpMediaGalleryFullScreen (upval), FFlagLuaAppEdpConsoleMediaGalleryVideo (upval), FFlagLuaAppEnableHomepageOneByTwoTile (upval), p1 (copy), UseRefResult (copy), ArgCheckModule (upval), UseRefResult1 (copy), Image (copy), UseStateResult2 (copy)
+				local Current = nil
+				
+				if FFlagLuaAppEdpMediaGalleryAutoAdvance or FFlagLuaAppEdpMediaGalleryFullScreen or FFlagLuaAppEdpConsoleMediaGalleryVideo or FFlagLuaAppEnableHomepageOneByTwoTile then
+					if typeof(p1) == "table" then
+						Current = p1.current
+					else
+						warn(`unsupported ref type: {typeof(p1)}`)
+					end
+				else
+					Current = UseRefResult.current
+				end
+				if Current ~= nil then
+					local CurrentTime = tick()
+					ArgCheckModule.assert(UseRefResult1.current and UseRefResult1.current <= CurrentTime)
+					local CurrentTimeDelta: number = if UseRefResult1.current and UseRefResult1.current <= CurrentTime then CurrentTime - UseRefResult1.current else -1
+					
+					if Image.onVideoLoaded then
+						Image.onVideoLoaded(Current.TimeLength, CurrentTimeDelta)
+					end
+					UseStateResult2(true)
+				end
+			end, {
+				Image.onVideoLoaded,
+				if FFlagLuaAppEdpMediaGalleryAutoAdvance or FFlagLuaAppEdpMediaGalleryFullScreen or FFlagLuaAppEdpConsoleMediaGalleryVideo or FFlagLuaAppEnableHomepageOneByTwoTile then p1 else UseRefResult,
+				UseRefResult1
+			}),
+			onLooped = ReactModule.useCallback(function() --[[ Line: 118 ]]
+				-- upvalues: Image (copy)
+				if Image.onVideoLooped then
+					Image.onVideoLooped()
+				end
+			end, { Image.onVideoLooped }),
+			onEnded = if FFlagLuaAppEdpMediaGalleryAutoAdvance then UseResult else nil,
+			cornerRadius = Image.cornerRadius
+		}),
+		VideoThumbnail = if FFlagLuaAppSduiVideoThumbnail and Image.thumbnailComponentOverride then ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			ZIndex = 2,
 			Size = UDim2.fromScale(1, 1)
-		}, { Thumbnail = p1.thumbnailComponentOverride })
-	elseif var5 then
-		createElement_1 = reactModule.createElement
-		createElement_1 = createElement_1(loadableImage, {
+		}, { Thumbnail = Image.thumbnailComponentOverride }) elseif IsNotThumbnailMatch then ReactModule.createElement(LoadableImage, {
 			BackgroundTransparency = 1,
 			showFailedStateWhenLoadingFailed = true,
 			useShimmerAnimationWhileLoading = true,
 			ZIndex = 2,
-			Image = p1.thumbnail,
-			Size = UDim2.new(1, 0, 1, if p1.ScaleType == Enum.ScaleType.Tile then p1.cornerRadius else 0),
-			cornerRadius = UDim.new(0, p1.cornerRadius),
-			ScaleType = p1.ScaleType,
-			TileSize = if p1.ScaleType == Enum.ScaleType.Tile and p1.cornerRadius then UDim2.new(1, 0, 1, -p1.cornerRadius) else nil
-		})
-	else
-		createElement_1 = nil
-	end
-	t_1.VideoThumbnail = createElement_1
-	t_1.Skeleton = if p1.shouldStartPlayback and not var1 then reactModule.createElement(skeleton, {
-		ZIndex = 3,
-		Size = UDim2.fromScale(1, 1),
-		radius = if p1.cornerRadius then radius.Medium else nil
-	}) else nil
-	
-	return createElement(var8, t, t_1)
+			Image = Image.thumbnail,
+			Size = UDim2.new(1, 0, 1, if Image.ScaleType == Enum.ScaleType.Tile then Image.cornerRadius else 0),
+			cornerRadius = UDim.new(0, Image.cornerRadius),
+			ScaleType = Image.ScaleType,
+			TileSize = if Image.ScaleType == Enum.ScaleType.Tile and Image.cornerRadius then UDim2.new(1, 0, 1, -Image.cornerRadius) else nil
+		}) else nil,
+		Skeleton = if Image.shouldStartPlayback and not UseStateResult then ReactModule.createElement(Skeleton, {
+			ZIndex = 3,
+			Size = UDim2.fromScale(1, 1),
+			radius = if Image.cornerRadius then Radius.Medium else nil
+		}) else nil
+	})
 end
 
-return if fFlagLuaAppEdpMediaGalleryAutoAdvance or fFlagLuaAppEdpMediaGalleryFullScreen or (fFlagLuaAppEdpConsoleMediaGalleryVideo or fFlagLuaAppEnableHomepageOneByTwoTile) then reactModule.forwardRef(LoadableVideoFrame) else LoadableVideoFrame
+return if FFlagLuaAppEdpMediaGalleryAutoAdvance or FFlagLuaAppEdpMediaGalleryFullScreen or FFlagLuaAppEdpConsoleMediaGalleryVideo or FFlagLuaAppEnableHomepageOneByTwoTile then ReactModule.forwardRef(LoadableVideoFrame) else LoadableVideoFrame

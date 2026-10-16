@@ -1,13 +1,14 @@
-﻿local parent = script.Parent.Parent
-local playersService = game:GetService("Players")
-local purchaseErrorModule = require(parent.Enums.PurchaseError)
-local promiseModule = require(parent.Promise)
-local fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow = require(parent.Parent.SharedFlags).FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow
+﻿local Parent = script.Parent.Parent
+local Players = game:GetService("Players")
+local PurchaseErrorModule = require(Parent.Enums.PurchaseError)
+local PromiseModule = require(Parent.Promise)
+local FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow = require(Parent.Parent.SharedFlags).FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow
+local config = { [require(Parent.types).ProductTypeEnum.VIPServer] = true }
 
-return function(p1, p2, p3, p4)
-	-- upvalues: fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (ref), promiseModule (ref), playersService (ref), purchaseErrorModule (ref)
-	return if fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow and p4 then promiseModule.resolve(false) else p1.getPlayerOwns(playersService.LocalPlayer, p2, p3):catch(function(_)
-		-- upvalues: promiseModule (copy), purchaseErrorModule (copy)
-		return promiseModule.reject(purchaseErrorModule.UnknownFailure)
+return function(p1, p2, p3, p4) --[[ Line: 17 | Named "getIsAlreadyOwned" ]]
+	-- upvalues: FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (copy), PromiseModule (copy), config (copy), Players (copy), PurchaseErrorModule (copy)
+	return if FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow and p4 then PromiseModule.resolve(false) elseif config[p3] then PromiseModule.resolve(false) else p1.getPlayerOwns(Players.LocalPlayer, p2, p3):catch(function(_) --[[ Line: 24 ]]
+		-- upvalues: PromiseModule (upval), PurchaseErrorModule (upval)
+		return PromiseModule.reject(PurchaseErrorModule.UnknownFailure)
 	end)
 end

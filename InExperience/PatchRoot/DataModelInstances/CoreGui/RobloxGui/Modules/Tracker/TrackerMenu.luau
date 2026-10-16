@@ -1,25 +1,26 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local roactModule = require(game:GetService("CorePackages").Packages.Roact)
-local trackerPromptModule = require(coreGuiService:WaitForChild("RobloxGui").Modules.Tracker.TrackerPrompt)
-local t = {}
-t.__index = t
+﻿local CoreGui = game:GetService("CoreGui")
+local RoactModule = require(game:GetService("CorePackages").Packages.Roact)
+local TrackerPromptModule = require(CoreGui:WaitForChild("RobloxGui").Modules.Tracker.TrackerPrompt)
+local Module = {}
+Module.__index = Module
 
-function t:showPrompt(p1)
-	-- upvalues: roactModule (ref), trackerPromptModule (ref), coreGuiService (ref)
+function Module:showPrompt(PromptType) --[[ Line: 20 ]]
+	-- upvalues: RoactModule (copy), TrackerPromptModule (copy), CoreGui (copy)
 	if self.trackerPrompt then
-		roactModule.update(self.trackerPrompt, roactModule.createElement(trackerPromptModule, { promptType = p1 }))
+		RoactModule.update(self.trackerPrompt, RoactModule.createElement(TrackerPromptModule, { promptType = PromptType }))
 		
 		return
+	else
+		self.trackerPrompt = RoactModule.mount(RoactModule.createElement(TrackerPromptModule, { promptType = PromptType }), CoreGui, "RobloxTrackerPromptGui")
 	end
-	self.trackerPrompt = roactModule.mount(roactModule.createElement(trackerPromptModule, { promptType = p1 }), coreGuiService, "RobloxTrackerPromptGui")
 end
 
-function t.new()
-	-- upvalues: t (ref)
-	local t_1 = { trackerPrompt = nil }
-	setmetatable(t_1, t)
+function Module.new() --[[ Line: 39 ]]
+	-- upvalues: Module (copy)
+	local config = { trackerPrompt = nil }
+	setmetatable(config, Module)
 	
-	return t_1
+	return config
 end
 
-return t.new()
+return Module.new()

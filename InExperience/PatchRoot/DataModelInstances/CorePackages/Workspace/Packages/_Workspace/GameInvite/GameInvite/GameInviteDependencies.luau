@@ -1,8 +1,8 @@
-﻿local httpRequestModule = require(script.Parent.Parent.HttpRequest)
+﻿local HttpRequestModule = require(script.Parent.Parent.HttpRequest)
 
 return {
-	networkImpl = httpRequestModule.config({
-		requestFunction = httpRequestModule.requestFunctions.HttpRbxApi,
+	networkImpl = HttpRequestModule.config({
+		requestFunction = HttpRequestModule.requestFunctions.HttpRbxApi,
 		maxRetryCount = game:DefineFastInt("GameInviteHttpRetryCount", 0)
 	})
 }

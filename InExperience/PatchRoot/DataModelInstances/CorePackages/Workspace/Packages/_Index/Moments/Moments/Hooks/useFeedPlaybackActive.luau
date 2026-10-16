@@ -1,13 +1,17 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local momentsCommonModule = require(parent.MomentsCommon)
-local useNavigationFocus = require(parent.Navigation).useNavigationFocus
-local useSignalState = require(parent.SignalsReact).useSignalState
-local useMomentsTabIsVisibleModule = require(moments.Hooks.useMomentsTabIsVisible)
-local getMomentsPreferencesStoreModule = require(moments.Stores.GetMomentsPreferencesStore)
-local feedPlaybackSuspension = momentsCommonModule.Media.feedPlaybackSuspension
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local UseNavigationFocusFunction = require(Parent.Navigation).useNavigationFocus
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local UseMomentsTabIsVisibleModule = require(Moments.Hooks.useMomentsTabIsVisible)
+local GetMomentsPreferencesStoreModule = require(Moments.Stores.GetMomentsPreferencesStore)
+local FeedPlaybackSuspension = require(Parent.MomentsCommon).Media.feedPlaybackSuspension
 
-return function()
-	-- upvalues: useNavigationFocus (ref), useMomentsTabIsVisibleModule (ref), useSignalState (ref), feedPlaybackSuspension (ref), getMomentsPreferencesStoreModule (ref)
-	return useNavigationFocus() and (useMomentsTabIsVisibleModule() and (not useSignalState(feedPlaybackSuspension.getSuspended) and not useSignalState(getMomentsPreferencesStoreModule(false).getIsTeleporting)))
+return function(): boolean --[[ Line: 45 | Named "useFeedPlaybackActive" ]]
+	-- upvalues: UseNavigationFocusFunction (copy), UseMomentsTabIsVisibleModule (copy), UseSignalStateFunction (copy), FeedPlaybackSuspension (copy), GetMomentsPreferencesStoreModule (copy)
+	local UseNavigationFocusResult = UseNavigationFocusFunction()
+	local UseMomentsTabIsVisibleModuleResult = UseMomentsTabIsVisibleModule()
+	local UseSignalStateResult = UseSignalStateFunction(FeedPlaybackSuspension.getSuspended)
+	local UseSignalStateResult1 = UseSignalStateFunction(GetMomentsPreferencesStoreModule(false).getIsTeleporting)
+	
+	return UseNavigationFocusResult and (UseMomentsTabIsVisibleModuleResult and (not UseSignalStateResult and not UseSignalStateResult1))
 end

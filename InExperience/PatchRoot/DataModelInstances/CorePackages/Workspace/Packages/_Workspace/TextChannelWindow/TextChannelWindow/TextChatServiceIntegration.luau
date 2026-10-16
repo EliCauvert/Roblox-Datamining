@@ -1,35 +1,37 @@
-﻿local messageModule = require(script.Parent.Message)
+﻿local MessageModule = require(script.Parent.Message)
 
 return {
-	mapTextChatMessage = function(p1, p2)
-		-- upvalues: messageModule (ref)
-		return if p1.TextSource then messageModule.createUserMessageFromTextChatMessage(p1, p2) else messageModule.createSystemMessageFromTextChatMessage(p1)
+	mapTextChatMessage = function(p1, p2) --[[ Line: 14 ]]
+		-- upvalues: MessageModule (copy)
+		return if p1.TextSource then MessageModule.createUserMessageFromTextChatMessage(p1, p2) else MessageModule.createSystemMessageFromTextChatMessage(p1)
 	end,
-	mapSendingMessage = function(p1, p2)
-		-- upvalues: messageModule (ref)
-		return messageModule.createUserMessageFromTextChatMessage(p1, p2)
+	mapSendingMessage = function(p1, p2) --[[ Line: 24 ]]
+		-- upvalues: MessageModule (copy)
+		return MessageModule.createUserMessageFromTextChatMessage(p1, p2)
 	end,
-	applyMessage = function(p1, p2)
-		for i, v in p1 do
-			if v.messageId == p2.messageId then
-				local cloned = table.clone(p1)
+	applyMessage = function(Tbl, p1) --[[ Line: 33 ]]
+		for i, value in Tbl do
+			if value.messageId == p1.messageId then
+				local Copy = table.clone(Tbl)
 				
-				if p2.content == "" then
-					table.remove(cloned, i)
+				if p1.content == "" then
+					table.remove(Copy, i)
 					
-					return cloned
+					return Copy
+				else
+					Copy[i] = p1
+					
+					return Copy
 				end
-				cloned[i] = p2
-				
-				return cloned
 			end
 		end
-		if p2.content == "" then
-			return p1
+		if p1.content == "" then
+			return Tbl
+		else
+			local Copy = table.clone(Tbl)
+			table.insert(Copy, p1)
+			
+			return Copy
 		end
-		local cloned = table.clone(p1)
-		table.insert(cloned, p2)
-		
-		return cloned
 	end
 }

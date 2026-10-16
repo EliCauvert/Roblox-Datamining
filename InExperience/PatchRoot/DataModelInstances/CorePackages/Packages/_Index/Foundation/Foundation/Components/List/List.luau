@@ -1,66 +1,68 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local flagsModule = require(foundation.Utility.Flags)
-local _ = require(foundation.Enums.InputSize)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local listContextModule = require(script.Parent.ListContext)
-local t = {
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local FlagsModule = require(Foundation.Utility.Flags)
+local _ = require(Foundation.Enums.InputSize)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local ListContextModule = require(script.Parent.ListContext)
+local config = {
 	testId = "--foundation-list",
 	hasDivider = { hasDivider = true, isInset = true },
 	isContained = { isContained = false, hasMargin = true }
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), flagsModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), listContextModule (ref)
-	local var1 = withDefaultsModule(p1, t)
-	local var2 = if flagsModule.FoundationListStableContextValue then if type(var1.hasDivider) == "boolean" then var1.hasDivider else var1.hasDivider.hasDivider else nil
-	local var3 = 0
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 32 | Named "List" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), FlagsModule (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), ListContextModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	local HasDivider = if FlagsModule.FoundationListStableContextValue then if type(WithDefaultsModuleResult.hasDivider) == "boolean" then WithDefaultsModuleResult.hasDivider else WithDefaultsModuleResult.hasDivider.hasDivider else nil
+	local Largest = 0
 	
-	if not flagsModule.FoundationListStableContextValue or var2 then
-		reactModule.Children.forEach(var1.children, function(p3)
-			-- upvalues: var3 (write)
-			if p3 and p3.props and p3.props.LayoutOrder then
-				var3 = math.max(var3, p3.props.LayoutOrder)
+	if not FlagsModule.FoundationListStableContextValue or HasDivider then
+		ReactModule.Children.forEach(WithDefaultsModuleResult.children, function(p2) --[[ Line: 40 ]]
+			-- upvalues: Largest (ref)
+			if p2 and p2.props and p2.props.LayoutOrder then
+				Largest = math.max(Largest, p2.props.LayoutOrder)
 			end
 		end)
 	end
-	local var4 = if type(var1.isContained) == "boolean" then var1.isContained else var1.isContained.isContained
-	local var5 = if var4 then true elseif type(var1.isContained) == "table" then var1.isContained.hasMargin else true
-	local var6 = if type(var1.hasDivider) == "boolean" then var1.hasDivider else var1.hasDivider.isInset
+	local IsContained = if type(WithDefaultsModuleResult.isContained) == "boolean" then WithDefaultsModuleResult.isContained else WithDefaultsModuleResult.isContained.isContained
+	local IsNotTable = if IsContained then true else type(WithDefaultsModuleResult.isContained) ~= "table" or WithDefaultsModuleResult.isContained.hasMargin
+	local HasDivider1 = if type(WithDefaultsModuleResult.hasDivider) == "boolean" then WithDefaultsModuleResult.hasDivider else WithDefaultsModuleResult.hasDivider.isInset
+	local UseMemoResult = if FlagsModule.FoundationListStableContextValue then ReactModule.useMemo(function() --[[ Line: 57 ]]
+		-- upvalues: WithDefaultsModuleResult (copy), IsContained (copy), HasDivider1 (copy), IsNotTable (copy), Largest (ref)
+		return {
+			hasDivider = WithDefaultsModuleResult.hasDivider,
+			isContained = IsContained,
+			isInset = HasDivider1,
+			hasMargin = IsNotTable,
+			lastLayoutOrder = Largest,
+			size = WithDefaultsModuleResult.size,
+			testId = WithDefaultsModuleResult.testId
+		}
+	end, {
+		HasDivider, IsContained, HasDivider1, IsNotTable, Largest,
+		WithDefaultsModuleResult.size, WithDefaultsModuleResult.testId
+	}) else nil
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var1, {
+	return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, {
 		tag = {
 			["col size-full-0 auto-y"] = true,
-			["stroke-default radius-large"] = var4
+			["stroke-default radius-large"] = IsContained
 		},
-		ref = p2
+		ref = Ref
 	}), {
-		ListContext = reactModule.createElement(listContextModule.Provider, {
-			value = if flagsModule.FoundationListStableContextValue then if flagsModule.FoundationListStableContextValue then reactModule.useMemo(function()
-				-- upvalues: var1 (ref), var4 (ref), var6 (ref), var5 (ref), var3 (write)
-				return {
-					hasDivider = var1.hasDivider,
-					isContained = var4,
-					isInset = var6,
-					hasMargin = var5,
-					lastLayoutOrder = var3,
-					size = var1.size,
-					testId = var1.testId
-				}
-			end, {
-				var2, var4, var6, var5, var3, var1.size, var1.testId
-			}) else nil else {
-				hasDivider = var1.hasDivider,
-				isContained = var4,
-				isInset = var6,
-				hasMargin = var5,
-				lastLayoutOrder = var3,
-				size = var1.size,
-				testId = var1.testId
+		ListContext = ReactModule.createElement(ListContextModule.Provider, {
+			value = if FlagsModule.FoundationListStableContextValue then UseMemoResult else {
+				hasDivider = WithDefaultsModuleResult.hasDivider,
+				isContained = IsContained,
+				isInset = HasDivider1,
+				hasMargin = IsNotTable,
+				lastLayoutOrder = Largest,
+				size = WithDefaultsModuleResult.size,
+				testId = WithDefaultsModuleResult.testId
 			}
-		}, var1.children)
+		}, WithDefaultsModuleResult.children)
 	})
 end))

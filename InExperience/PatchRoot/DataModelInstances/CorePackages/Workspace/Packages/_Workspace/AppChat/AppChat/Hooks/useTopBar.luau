@@ -1,19 +1,19 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local reactModule = require(appChat.Parent.React)
-local getTopBarStoreModule = require(appChat.Stores.GetTopBarStore)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local ReactModule = require(AppChat.Parent.React)
+local GetTopBarStoreModule = require(AppChat.Stores.GetTopBarStore)
 
-return function(value)
-	-- upvalues: getTopBarStoreModule (ref), reactModule (ref)
-	local var1 = getTopBarStoreModule(false)
+return function(p1) --[[ Line: 14 | Named "useTopBar" ]]
+	-- upvalues: GetTopBarStoreModule (copy), ReactModule (copy)
+	local TopBarStoreModule = GetTopBarStoreModule(false)
 	
 	return {
-		setScreenTopBar = reactModule.useCallback(function(p1)
-			-- upvalues: var1 (ref), value (ref)
-			var1.setScreenTopBar(value, p1)
-		end, { value }),
-		clearScreenTopBar = reactModule.useCallback(function()
-			-- upvalues: var1 (ref), value (ref)
-			var1.clearScreenTopBar(value)
-		end, { value })
+		setScreenTopBar = ReactModule.useCallback(function(p2) --[[ Line: 17 ]]
+			-- upvalues: TopBarStoreModule (copy), p1 (copy)
+			TopBarStoreModule.setScreenTopBar(p1, p2)
+		end, { p1 }),
+		clearScreenTopBar = ReactModule.useCallback(function() --[[ Line: 21 ]]
+			-- upvalues: TopBarStoreModule (copy), p1 (copy)
+			TopBarStoreModule.clearScreenTopBar(p1)
+		end, { p1 })
 	}
 end

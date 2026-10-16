@@ -1,5 +1,5 @@
-﻿local fFlagAXResetAvatarButton = require(script:FindFirstAncestor("AvatarExperienceControlBar").Parent.AvatarExperienceFlags).FFlagAXResetAvatarButton
-local var1 = if fFlagAXResetAvatarButton then {
+﻿local FFlagAXResetAvatarButton = require(script:FindFirstAncestor("AvatarExperienceControlBar").Parent.AvatarExperienceFlags).FFlagAXResetAvatarButton
+local List = if FFlagAXResetAvatarButton then {
 	Enum.AssetType.Head, Enum.AssetType.Face, Enum.AssetType.Torso,
 	Enum.AssetType.RightArm, Enum.AssetType.LeftArm, Enum.AssetType.LeftLeg,
 	Enum.AssetType.RightLeg, Enum.AssetType.HairAccessory,
@@ -10,11 +10,14 @@ local var1 = if fFlagAXResetAvatarButton then {
 	Enum.AssetType.EyebrowAccessory, Enum.AssetType.EyelashAccessory,
 	Enum.AssetType.MoodAnimation, Enum.AssetType.DynamicHead
 } else nil
-local t = {}
+local AssetTypeStringsToKeep = {}
 
-if fFlagAXResetAvatarButton then
-	for i, v in var1 do
-		table.insert(t, tostring(v.Value))
+if FFlagAXResetAvatarButton then
+	for _, value in List do
+		table.insert(AssetTypeStringsToKeep, (tostring(value.Value)))
 	end
 end
-return { AssetTypesToKeep = var1, AssetTypeStringsToKeep = t }
+return {
+	AssetTypesToKeep = List,
+	AssetTypeStringsToKeep = AssetTypeStringsToKeep
+}

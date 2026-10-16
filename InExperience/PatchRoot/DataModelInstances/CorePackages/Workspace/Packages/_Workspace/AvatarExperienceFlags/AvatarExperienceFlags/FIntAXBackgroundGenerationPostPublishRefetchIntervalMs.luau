@@ -1,0 +1,1 @@
+﻿return game:DefineFastInt("AXBackgroundGenerationPostPublishRefetchIntervalMs", 30000)

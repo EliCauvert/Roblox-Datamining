@@ -1,65 +1,66 @@
-﻿local contextActionService = game:GetService("ContextActionService")
-local reactModule = require(script:FindFirstAncestor("TextChannelWindow").Parent.React)
+﻿local ContextActionService = game:GetService("ContextActionService")
+local ReactModule = require(script:FindFirstAncestor("TextChannelWindow").Parent.React)
 local _ = require(script.Parent.SelectionInputs)
-local var1 = 0
+local Current = 0
 
-return function(p1)
-	-- upvalues: contextActionService (ref), reactModule (ref), var1 (write)
-	local contextActionService_1 = p1.contextActionService or contextActionService
-	local var2 = reactModule.useRef(nil)
+return function(p1) --[[ Line: 36 | Named "useCoreActionBind" ]]
+	-- upvalues: ContextActionService (copy), ReactModule (copy), Current (ref)
+	local ContextActionService1 = p1.contextActionService or ContextActionService
+	local UseRefResult = ReactModule.useRef(nil)
 	
-	if var2.current == nil then
-		var1 += 1
-		var2.current = var1
+	if UseRefResult.current == nil then
+		Current += 1
+		UseRefResult.current = Current
 	end
-	local text = p1.actionNamePrefix .. "_" .. tostring(var2.current)
-	local enabled = p1.enabled
-	local active = p1.active
-	local inputs = p1.inputs
-	local onAction = p1.onAction
-	local shouldBind = p1.shouldBind
-	local rebindSignal = p1.rebindSignal
-	reactModule.useEffect(function()
-		-- upvalues: enabled (ref), active (ref), onAction (ref), shouldBind (ref), contextActionService_1 (ref), text (ref), inputs (ref), rebindSignal (ref)
-		if not enabled or not active then return end
-		local function handler(_, p2)
-			-- upvalues: onAction (copy)
-			return onAction(p2)
+	local Text = p1.actionNamePrefix .. "_" .. tostring(UseRefResult.current)
+	local Enabled = p1.enabled
+	local Active = p1.active
+	local Inputs = p1.inputs
+	local OnActionFunction = p1.onAction
+	local ShouldBindFunction = p1.shouldBind
+	local RebindSignal = p1.rebindSignal
+	ReactModule.useEffect(function() --[[ Line: 54 ]]
+		-- upvalues: Enabled (copy), Active (copy), OnActionFunction (copy), ShouldBindFunction (copy), ContextActionService1 (copy), Text (copy), Inputs (copy), RebindSignal (copy)
+		if not Enabled or not Active then return end
+		local function handler(_, p2) --[[ Line: 59 ]]
+			-- upvalues: OnActionFunction (upval)
+			return OnActionFunction(p2)
 		end
 		
-		local var3 = nil
+		local Connection = nil
 		
-		if shouldBind then
-			local function refresh()
-				-- upvalues: shouldBind (copy), contextActionService_1 (copy), text (copy), handler (ref), inputs (copy)
-				if shouldBind() then
-					contextActionService_1:BindCoreAction(text, handler, false, table.unpack(inputs))
+		if ShouldBindFunction then
+			local function refresh() --[[ Line: 65 ]]
+				-- upvalues: ShouldBindFunction (upval), ContextActionService1 (upval), Text (upval), handler (copy), Inputs (upval)
+				if ShouldBindFunction() then
+					ContextActionService1:BindCoreAction(Text, handler, false, table.unpack(Inputs))
 					
 					return
+				else
+					ContextActionService1:UnbindCoreAction(Text)
 				end
-				contextActionService_1:UnbindCoreAction(text)
 			end
 			
-			if shouldBind() then
-				contextActionService_1:BindCoreAction(text, handler, false, table.unpack(inputs))
+			if ShouldBindFunction() then
+				ContextActionService1:BindCoreAction(Text, handler, false, table.unpack(Inputs))
 			else
-				contextActionService_1:UnbindCoreAction(text)
+				ContextActionService1:UnbindCoreAction(Text)
 			end
-			if rebindSignal then
-				var3 = rebindSignal:Connect(refresh)
+			if RebindSignal then
+				Connection = RebindSignal:Connect(refresh)
 			end
 		else
-			contextActionService_1:BindCoreAction(text, handler, false, table.unpack(inputs))
+			ContextActionService1:BindCoreAction(Text, handler, false, table.unpack(Inputs))
 		end
-		return function()
-			-- upvalues: var3 (write), contextActionService_1 (copy), text (copy)
-			if var3 then
-				var3:Disconnect()
+		return function() --[[ Line: 80 ]]
+			-- upvalues: Connection (ref), ContextActionService1 (upval), Text (upval)
+			if Connection then
+				Connection:Disconnect()
 			end
-			contextActionService_1:UnbindCoreAction(text)
+			ContextActionService1:UnbindCoreAction(Text)
 		end
 	end, {
-		enabled, active, inputs, onAction, shouldBind, rebindSignal,
-		contextActionService_1, text
+		Enabled, Active, Inputs, OnActionFunction, ShouldBindFunction, RebindSignal,
+		ContextActionService1, Text
 	})
 end

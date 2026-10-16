@@ -1,3 +1,3 @@
-﻿local parent = script:FindFirstAncestor("RobloxAppNavigation").Parent
+﻿local Parent = script:FindFirstAncestor("RobloxAppNavigation").Parent
 
-return require(parent.React).createContext(require(parent.RobloxAppEnums).AppPage.None)
+return require(Parent.React).createContext(require(Parent.RobloxAppEnums).AppPage.None)

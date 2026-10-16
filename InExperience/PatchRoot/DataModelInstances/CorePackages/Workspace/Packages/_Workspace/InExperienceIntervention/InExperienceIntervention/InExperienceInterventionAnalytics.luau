@@ -1,15 +1,16 @@
-﻿local localPlayer = game:GetService("Players").LocalPlayer
-local parent = script:FindFirstAncestor("InExperienceIntervention").Parent
-local cryoModule = require(parent.Cryo)
-local var1 = require(parent.Analytics).AnalyticsReporters.EventIngest.new(game:GetService("EventIngestService"))
-local t = {
+﻿local LocalPlayer = game:GetService("Players").LocalPlayer
+local Parent = script:FindFirstAncestor("InExperienceIntervention").Parent
+local CryoModule = require(Parent.Cryo)
+local NewResult = require(Parent.Analytics).AnalyticsReporters.EventIngest.new((game:GetService("EventIngestService")))
+local Constants = {
 	EventContext = "InExperienceInterventionEvent",
 	EventName = "InExperienceInterventionEvent",
 	InterventionTypes = {
 		Nudge = "INTERVENTION_CHAT_NUDGE",
 		Timeout = "INTERVENTION_CHAT_TIMEOUT",
 		PartyChatNudge = "INTERVENTION_PARTY_CHAT_NUDGE",
-		PartyChatTimeout = "INTERVENTION_PARTY_CHAT_TIMEOUT"
+		PartyChatTimeout = "INTERVENTION_PARTY_CHAT_TIMEOUT",
+		DictationSafetyReminder = "INTERVENTION_DICTATION_SAFETY_REMINDER"
 	},
 	EventTypes = {
 		AppealClicked = "EVENT_APPEAL_CLICKED",
@@ -21,40 +22,42 @@ local t = {
 		NudgeToastDismissed = "EVENT_NUDGE_TOAST_DISMISSED",
 		ChatAttemptToastAppeared = "EVENT_CHAT_ATTEMPT_TOAST_APPEARED",
 		ChatAttemptToastDismissed = "EVENT_CHAT_ATTEMPT_TOAST_DISMISSED",
+		DictationSafetyReminderToastAppeared = "EVENT_DICTATION_SAFETY_REMINDER_TOAST_APPEARED",
+		DictationSafetyReminderToastDismissed = "EVENT_DICTATION_SAFETY_REMINDER_TOAST_DISMISSED",
 		GetModerationDetailFailed = "EVENT_GET_MODERATION_DETAIL_FAILED"
 	}
 }
-local var2 = if localPlayer then localPlayer.UserId else 0
+local UserId = if LocalPlayer then LocalPlayer.UserId else 0
 
-local var3 = function(p1, p2, p3, p4, p5, p6, p7, p8)
-	-- upvalues: var2 (write), t (ref), cryoModule (ref)
-	local unixTimestampMillis = DateTime.now().UnixTimestampMillis
-	local t_1 = {
-		user_id = var2,
-		timestamp_milliseconds = unixTimestampMillis,
-		event_type = p1,
-		intervention_type = p2,
-		event_id = p4,
-		evidence = p5,
-		timeout_duration_seconds = p6,
-		acknowledgeable = p8
+local function v6(Event_type, Intervention_type, p1, Event_id, Evidence, Timeout_duration_seconds, p2, Acknowledgeable) --[[ Line: 46 ]]
+	-- upvalues: UserId (ref), Constants (copy), CryoModule (copy)
+	local UnixTimestampMillis = DateTime.now().UnixTimestampMillis
+	local JoinResult = {
+		user_id = UserId,
+		timestamp_milliseconds = UnixTimestampMillis,
+		event_type = Event_type,
+		intervention_type = Intervention_type,
+		event_id = Event_id,
+		evidence = Evidence,
+		timeout_duration_seconds = Timeout_duration_seconds,
+		acknowledgeable = Acknowledgeable
 	}
 	
-	if p1 == t.EventTypes.CtaClicked or p1 == t.EventTypes.AppealClicked or (p1 == t.EventTypes.NudgeToastDismissed or p1 == t.EventTypes.ChatAttemptToastDismissed) then
-		t_1 = cryoModule.Dictionary.join({
-			time_to_interact_seconds = (unixTimestampMillis - p3) / 1000
-		}, t_1)
+	if Event_type == Constants.EventTypes.CtaClicked or Event_type == Constants.EventTypes.AppealClicked or Event_type == Constants.EventTypes.NudgeToastDismissed or Event_type == Constants.EventTypes.ChatAttemptToastDismissed or Event_type == Constants.EventTypes.DictationSafetyReminderToastDismissed then
+		JoinResult = CryoModule.Dictionary.join({
+			time_to_interact_seconds = (UnixTimestampMillis - p1) / 1000
+		}, JoinResult)
 	end
-	if p1 == t.EventTypes.GetModerationDetailFailed then
-		t_1 = cryoModule.Dictionary.join({ error = p7 }, t_1)
+	if Event_type == Constants.EventTypes.GetModerationDetailFailed then
+		JoinResult = CryoModule.Dictionary.join({ error = p2 }, JoinResult)
 	end
-	return t_1
+	return JoinResult
 end
 
 return {
-	sendAnalyticsEvent = function(p1, p2, p3, p4, p5, p6, p7, p8)
-		-- upvalues: var1 (ref), t (ref), var3 (ref)
-		var1:sendEventDeferred(t.EventContext, t.EventName, var3(p1, p2, p3, p4, p5, p6, p7, p8))
+	sendAnalyticsEvent = function(Event_type, Intervention_type, p1, Event_id, Evidence, Timeout_duration_seconds, p2, Acknowledgeable) --[[ Line: 89 ]]
+		-- upvalues: NewResult (copy), Constants (copy), v6 (copy)
+		NewResult:sendEventDeferred(Constants.EventContext, Constants.EventName, (v6(Event_type, Intervention_type, p1, Event_id, Evidence, Timeout_duration_seconds, p2, Acknowledgeable)))
 	end,
-	Constants = t
+	Constants = Constants
 }

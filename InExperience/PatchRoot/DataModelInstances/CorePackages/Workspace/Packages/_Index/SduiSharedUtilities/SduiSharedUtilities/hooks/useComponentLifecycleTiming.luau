@@ -1,19 +1,19 @@
-﻿local sduiSharedUtilities = script:FindFirstAncestor("SduiSharedUtilities")
-local reactModule = require(sduiSharedUtilities.Parent.React)
-local _ = require(sduiSharedUtilities.SduiLoadTimer)
+﻿local SduiSharedUtilities = script:FindFirstAncestor("SduiSharedUtilities")
+local ReactModule = require(SduiSharedUtilities.Parent.React)
+local _ = require(SduiSharedUtilities.SduiLoadTimer)
 
-return function(a, b)
-	-- upvalues: reactModule (ref)
-	reactModule.useEffect(function()
-		-- upvalues: a (ref)
-		if a then
-			a.logComponentMounted()
+return function(p1, p2) --[[ Line: 8 | Named "useComponentLifecycleTiming" ]]
+	-- upvalues: ReactModule (copy)
+	ReactModule.useEffect(function() --[[ Line: 10 ]]
+		-- upvalues: p1 (copy)
+		if p1 then
+			p1.logComponentMounted()
 		end
-	end, { a })
-	reactModule.useEffect(function()
-		-- upvalues: a (ref), b (ref)
-		if a and b then
-			a.logComponentReady()
+	end, { p1 })
+	ReactModule.useEffect(function() --[[ Line: 17 ]]
+		-- upvalues: p1 (copy), p2 (copy)
+		if p1 and p2 then
+			p1.logComponentReady()
 		end
-	end, { a, b })
+	end, { p1, p2 })
 end

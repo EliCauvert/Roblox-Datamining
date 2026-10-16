@@ -1,83 +1,83 @@
-﻿local parent = script:FindFirstAncestor("AppBlox").Parent
-local UIBloxModule = require(parent.UIBlox)
-local withStyle = UIBloxModule.Core.Style.withStyle
-local styledTextLabel = UIBloxModule.App.Text.StyledTextLabel
-local roactModule = require(parent.Roact)
-local tModule = require(parent.t)
-local getTextSize = require(parent.Style).GetTextSize
-local detailsPageTitleContent = roactModule.PureComponent:extend("DetailsPageTitleContent")
-detailsPageTitleContent.validateProps = tModule.strictInterface({
-	titleText = tModule.optional(tModule.string),
-	subTitleText = tModule.optional(tModule.string),
-	renderInfoContent = tModule.optional(tModule.callback),
-	layoutOrder = tModule.optional(tModule.number),
-	verticalAlignment = tModule.optional(tModule.enum(Enum.VerticalAlignment))
+﻿local Parent = script:FindFirstAncestor("AppBlox").Parent
+local UIBloxModule = require(Parent.UIBlox)
+local WithStyleFunction = UIBloxModule.Core.Style.withStyle
+local StyledTextLabel = UIBloxModule.App.Text.StyledTextLabel
+local RoactModule = require(Parent.Roact)
+local TModule = require(Parent.t)
+local GetTextSizeFunction = require(Parent.Style).GetTextSize
+local DetailsPageTitleContent = RoactModule.PureComponent:extend("DetailsPageTitleContent")
+DetailsPageTitleContent.validateProps = TModule.strictInterface({
+	titleText = TModule.optional(TModule.string),
+	subTitleText = TModule.optional(TModule.string),
+	renderInfoContent = TModule.optional(TModule.callback),
+	layoutOrder = TModule.optional(TModule.number),
+	verticalAlignment = TModule.optional(TModule.enum(Enum.VerticalAlignment))
 })
 
-function detailsPageTitleContent.init(p1)
-	-- upvalues: getTextSize (ref)
+function DetailsPageTitleContent.init(p1) --[[ Line: 27 ]]
+	-- upvalues: GetTextSizeFunction (copy)
 	p1.state = { containerWidth = nil }
 	
-	function p0.onContainerSizeChange(p2)
-		-- upvalues: p1 (ref)
-		p1:setState(function(_, _)
-			-- upvalues: p2 (ref)
-			return { containerWidth = p2.AbsoluteSize.X }
+	function p1.onContainerSizeChange(Frame) --[[ Line: 31 ]]
+		-- upvalues: p1 (copy)
+		p1:setState(function(_, _) --[[ Line: 32 ]]
+			-- upvalues: Frame (copy)
+			return { containerWidth = Frame.AbsoluteSize.X }
 		end)
 	end
 	
-	function p0.getTextSize(p2, p3, p4)
-		-- upvalues: getTextSize (copy)
-		return getTextSize(p2, p3.RelativeSize * p4.Font.BaseSize, p3.Font, Vector2.new(10000, 10000))
+	function p1.getTextSize(TitleText, Title, p2) --[[ Line: 38 ]]
+		-- upvalues: GetTextSizeFunction (upval)
+		return GetTextSizeFunction(TitleText, Title.RelativeSize * p2.Font.BaseSize, Title.Font, (Vector2.new(10000, 10000)))
 	end
 end
 
-function detailsPageTitleContent.render(p1)
-	-- upvalues: withStyle (ref), roactModule (ref), styledTextLabel (ref)
-	return withStyle(function(p2)
-		-- upvalues: p1 (ref), roactModule (copy), styledTextLabel (copy)
-		local theme = p2.Theme
-		local font = p2.Font
-		local uDim2 = UDim2.new(0, 0, 1, 0)
+function DetailsPageTitleContent.render(p1) --[[ Line: 46 ]]
+	-- upvalues: WithStyleFunction (copy), RoactModule (copy), StyledTextLabel (copy)
+	return WithStyleFunction(function(p2) --[[ Line: 47 ]]
+		-- upvalues: p1 (copy), RoactModule (upval), StyledTextLabel (upval)
+		local Theme = p2.Theme
+		local _Font = p2.Font
+		local _UDim2 = UDim2.new(0, 0, 1, 0)
 		
 		if p1.props.titleText then
-			local textSize = p1.getTextSize(p1.props.titleText, font.Title, p2)
-			local var1 = textSize.Y * 1
-			uDim2 = if p1.state.containerWidth == nil or p1.state.containerWidth > textSize.X then UDim2.new(0, 0, 0, var1) else UDim2.new(0, 0, 0, var1 * 2)
+			local TextSize = p1.getTextSize(p1.props.titleText, _Font.Title, p2)
+			local ScaledY = TextSize.Y * 1
+			_UDim2 = if p1.state.containerWidth == nil or p1.state.containerWidth > TextSize.X then UDim2.new(0, 0, 0, ScaledY) else UDim2.new(0, 0, 0, ScaledY * 2)
 		end
-		return roactModule.createElement("Frame", {
+		return RoactModule.createElement("Frame", {
 			Size = UDim2.fromScale(1, 0),
 			BackgroundTransparency = 1,
-			[roactModule.Change.AbsoluteSize] = p1.onContainerSizeChange,
+			[RoactModule.Change.AbsoluteSize] = p1.onContainerSizeChange,
 			AutomaticSize = Enum.AutomaticSize.Y,
 			LayoutOrder = p1.props.layoutOrder
 		}, {
-			ListLayout = roactModule.createElement("UIListLayout", {
+			ListLayout = RoactModule.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				FillDirection = Enum.FillDirection.Vertical,
 				VerticalAlignment = p1.props.verticalAlignment
 			}),
-			Title = p1.props.titleText and roactModule.createElement(styledTextLabel, {
+			Title = p1.props.titleText and RoactModule.createElement(StyledTextLabel, {
 				lineHeight = 1,
 				fluidSizing = false,
 				layoutOrder = 1,
 				richText = false,
 				text = p1.props.titleText,
-				size = uDim2,
+				size = _UDim2,
 				automaticSize = Enum.AutomaticSize.X,
-				fontStyle = font.Title,
-				colorStyle = theme.TextEmphasis,
+				fontStyle = _Font.Title,
+				colorStyle = Theme.TextEmphasis,
 				textTruncate = Enum.TextTruncate.AtEnd
 			}) or nil,
-			SubTitle = p1.props.subTitleText and roactModule.createElement(styledTextLabel, {
+			SubTitle = p1.props.subTitleText and RoactModule.createElement(StyledTextLabel, {
 				layoutOrder = 2,
 				richText = false,
 				text = p1.props.subTitleText,
-				fontStyle = font.Header2,
-				colorStyle = theme.TextMuted,
+				fontStyle = _Font.Header2,
+				colorStyle = Theme.TextMuted,
 				automaticSize = Enum.AutomaticSize.XY
 			}) or nil,
-			CustomContentComponentFrame = p1.props.renderInfoContent and roactModule.createElement("Frame", {
+			CustomContentComponentFrame = p1.props.renderInfoContent and RoactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 3,
 				Size = UDim2.fromScale(1, 0),
@@ -87,4 +87,4 @@ function detailsPageTitleContent.render(p1)
 	end)
 end
 
-return detailsPageTitleContent
+return DetailsPageTitleContent

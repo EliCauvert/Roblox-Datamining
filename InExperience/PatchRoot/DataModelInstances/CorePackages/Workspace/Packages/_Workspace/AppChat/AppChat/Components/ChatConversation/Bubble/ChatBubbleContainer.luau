@@ -1,23 +1,24 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-local colorSystem = UIBloxModule.Common.Style.ColorSystem
-local cryoModule = require(parent.Cryo)
-local chatBubbleEnumModule = require(script.Parent.ChatBubbleEnum)
-local chatBubbleGroupableModule = require(script.Parent.ChatBubbleGroupable)
-local useStyle = UIBloxModule.Core.Style.useStyle
-local useSelectedTheme = require(parent.RoactUtils).Hooks.useSelectedTheme
-local repliedToMarkerModule = require(script.Parent.RepliedToMarker)
-local foundationModule = require(parent.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local useCursor = foundationModule.Hooks.useCursor
-local colorMode = foundationModule.Enums.ColorMode
-local unfilteredMessageColorConfigModule = require(appChat.Flags.unfilteredMessageColorConfig)
-local fFlagAppChatConsoleFocusFixesModule = require(appChat.Flags.FFlagAppChatConsoleFocusFixes)
-local fFlagAppChatBlueSentBubblesModule = require(appChat.Flags.FFlagAppChatBlueSentBubbles)
-local BUBBLE_VARIANTS = chatBubbleEnumModule.BUBBLE_VARIANTS
-local t = {
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local ReactModule = require(Parent.React)
+local UIBloxModule = require(Parent.UIBlox)
+local ColorSystem = UIBloxModule.Common.Style.ColorSystem
+local CryoModule = require(Parent.Cryo)
+local ChatBubbleEnumModule = require(script.Parent.ChatBubbleEnum)
+local ChatBubbleGroupableModule = require(script.Parent.ChatBubbleGroupable)
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local UseSelectedThemeFunction = require(Parent.RoactUtils).Hooks.useSelectedTheme
+local RepliedToMarkerModule = require(script.Parent.RepliedToMarker)
+local FoundationModule = require(Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseCursorFunction = FoundationModule.Hooks.useCursor
+local ColorMode = FoundationModule.Enums.ColorMode
+local UnfilteredMessageColorConfigModule = require(AppChat.Flags.unfilteredMessageColorConfig)
+local FFlagAppChatConsoleFocusFixesModule = require(AppChat.Flags.FFlagAppChatConsoleFocusFixes)
+local FFlagAppChatBlueSentBubblesModule = require(AppChat.Flags.FFlagAppChatBlueSentBubbles)
+local FFlagAppChatBubbleThemeTokensModule = require(AppChat.Flags.FFlagAppChatBubbleThemeTokens)
+local BUBBLEVARIANTS = ChatBubbleEnumModule.BUBBLE_VARIANTS
+local config = {
 	isIncoming = false,
 	hasTail = false,
 	padding = 12,
@@ -28,111 +29,133 @@ local t = {
 	isRepliedTo = false,
 	isPressed = false,
 	isLastMessageInMessageGroup = false,
-	[reactModule.Change.AbsoluteSize] = function(_) end
+	[ReactModule.Change.AbsoluteSize] = function(_) --[[ Line: 52 ]] end
 }
 
-return reactModule.memo(function(p1)
-	-- upvalues: cryoModule (ref), t (ref), useTokens (ref), useCursor (ref), fFlagAppChatConsoleFocusFixesModule (ref), foundationModule (ref), useStyle (ref), useSelectedTheme (ref), reactModule (ref), colorMode (ref), colorSystem (ref), fFlagAppChatBlueSentBubblesModule (ref), unfilteredMessageColorConfigModule (ref), BUBBLE_VARIANTS (ref), chatBubbleEnumModule (ref), chatBubbleGroupableModule (ref), repliedToMarkerModule (ref)
-	local var1 = cryoModule.Dictionary.join(t, p1)
-	local var2 = useTokens()
-	local var3 = useCursor(if fFlagAppChatConsoleFocusFixesModule then { radius = UDim.new(0, var2.Size.Size_500) } else foundationModule.Enums.CursorType.RoundedSlot)
-	local var4 = useStyle()
-	local children = var1.children or {}
-	local isIncoming = var1.isIncoming
-	local isPending = var1.isPending
-	local isUnfiltered = var1.isUnfiltered
-	local var5 = useSelectedTheme()
-	local var6, var7 = reactModule.useState(var4.Theme.UIDefault)
+return ReactModule.memo(function(p1) --[[ Line: 55 | Named "ChatBubbleContainer" ]]
+	-- upvalues: CryoModule (copy), config (copy), UseTokensFunction (copy), UseCursorFunction (copy), FFlagAppChatConsoleFocusFixesModule (copy), FoundationModule (copy), UseStyleFunction (copy), UseSelectedThemeFunction (copy), ReactModule (copy), FFlagAppChatBubbleThemeTokensModule (copy), ColorMode (copy), ColorSystem (copy), FFlagAppChatBlueSentBubblesModule (copy), UnfilteredMessageColorConfigModule (copy), BUBBLEVARIANTS (copy), ChatBubbleEnumModule (copy), ChatBubbleGroupableModule (copy), RepliedToMarkerModule (copy)
+	local JoinResult = CryoModule.Dictionary.join(config, p1)
+	local UseTokensResult = UseTokensFunction()
+	local UseCursorResult = UseCursorFunction(if FFlagAppChatConsoleFocusFixesModule then { radius = UDim.new(0, UseTokensResult.Size.Size_500) } else FoundationModule.Enums.CursorType.RoundedSlot)
+	local UseStyleResult = UseStyleFunction()
+	local Children = JoinResult.children or {}
+	local IsIncoming = JoinResult.isIncoming
+	local IsPending = JoinResult.isPending
+	local IsUnfiltered = JoinResult.isUnfiltered
+	local UseSelectedThemeResult = UseSelectedThemeFunction()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(UseStyleResult.Theme.UIDefault)
 	
-	local function setBubbleStyle()
-		-- upvalues: var1 (ref), var5 (ref), colorMode (copy), colorSystem (copy), var2 (ref), isIncoming (ref), isUnfiltered (ref), fFlagAppChatBlueSentBubblesModule (copy), var7 (ref)
-		local _ = nil
-		var7(if var1.isRepliedTo then {
+	local function setBubbleStyle() --[[ Line: 74 ]]
+		-- upvalues: JoinResult (copy), FFlagAppChatBubbleThemeTokensModule (upval), UseTokensResult (copy), UseSelectedThemeResult (copy), ColorMode (upval), ColorSystem (upval), IsIncoming (copy), IsUnfiltered (copy), FFlagAppChatBlueSentBubblesModule (upval), UseStateResult2 (copy)
+		UseStateResult2(if JoinResult.isRepliedTo and FFlagAppChatBubbleThemeTokensModule then {
+			Color = UseTokensResult.Color.Shift.Shift_200.Color3,
+			Transparency = UseTokensResult.Color.Shift.Shift_200.Transparency
+		} elseif JoinResult.isRepliedTo then {
 			Transparency = 0,
-			Color = if var5 == string.lower(colorMode.Light) then colorSystem.Gray[30] else colorSystem.Gray[90]
-		} elseif var1.isAssetCard then {
-			Color = var2.Color.Shift.Shift_400.Color3,
-			Transparency = var2.Color.Shift.Shift_400.Transparency
-		} elseif isIncoming then {
-			Color = var2.Color.Shift.Shift_400.Color3,
-			Transparency = var2.Color.Shift.Shift_400.Transparency
-		} elseif isUnfiltered or fFlagAppChatBlueSentBubblesModule then {
-			Color = var2.Color.System.Emphasis.Color3,
-			Transparency = var2.Color.System.Emphasis.Transparency
+			Color = if UseSelectedThemeResult == string.lower(ColorMode.Light) then ColorSystem.Gray[30] else ColorSystem.Gray[90]
+		} elseif JoinResult.isAssetCard then {
+			Color = UseTokensResult.Color.Shift.Shift_400.Color3,
+			Transparency = UseTokensResult.Color.Shift.Shift_400.Transparency
+		} elseif IsIncoming then {
+			Color = UseTokensResult.Color.Shift.Shift_400.Color3,
+			Transparency = UseTokensResult.Color.Shift.Shift_400.Transparency
+		} elseif IsUnfiltered or FFlagAppChatBlueSentBubblesModule then {
+			Color = UseTokensResult.Color.System.Emphasis.Color3,
+			Transparency = UseTokensResult.Color.System.Emphasis.Transparency
 		} else {
-			Color = var2.Color.Extended.Gray.Gray_600.Color3,
-			Transparency = var2.Color.Extended.Gray.Gray_600.Transparency
+			Color = UseTokensResult.Color.Extended.Gray.Gray_600.Color3,
+			Transparency = UseTokensResult.Color.Extended.Gray.Gray_600.Transparency
 		})
 	end
 	
-	local function setPressedBubbleStyle()
-		-- upvalues: var1 (ref), isIncoming (ref), var5 (ref), colorMode (copy), colorSystem (copy), isUnfiltered (ref), fFlagAppChatBlueSentBubblesModule (copy), unfilteredMessageColorConfigModule (copy), var7 (ref)
-		if var1.isRepliedTo or var1.isPending then return end
-		local _ = nil
-		var7(if isIncoming then {
-			Transparency = 0.35,
-			Color = if var5 == string.lower(colorMode.Light) then colorSystem.Gray[50] else colorSystem.Gray[70]
-		} elseif (isUnfiltered or fFlagAppChatBlueSentBubblesModule) and not var1.isAssetCard then {
-			Color = if var5 == colorMode.Light then unfilteredMessageColorConfigModule.UnfilteredMessagePressedLightColor3 else unfilteredMessageColorConfigModule.UnfilteredMessagePressedDarkColor3,
-			Transparency = unfilteredMessageColorConfigModule.UnfilteredMessageTransparency
-		} else {
-			Transparency = 0.4,
-			Color = if var5 == string.lower(colorMode.Light) then colorSystem.Gray[50] else colorSystem.Gray[70]
-		})
-	end
-	
-	reactModule.useLayoutEffect(function()
-		-- upvalues: var1 (ref), setPressedBubbleStyle (ref), setBubbleStyle (ref)
-		if var1.isPressed then
-			setPressedBubbleStyle()
+	local function setPressedBubbleStyle() --[[ Line: 118 ]]
+		-- upvalues: JoinResult (copy), FFlagAppChatBubbleThemeTokensModule (upval), IsIncoming (copy), UseTokensResult (copy), IsUnfiltered (copy), FFlagAppChatBlueSentBubblesModule (upval), UseStateResult2 (copy), UseSelectedThemeResult (copy), ColorMode (upval), ColorSystem (upval), UnfilteredMessageColorConfigModule (upval)
+		if JoinResult.isRepliedTo or JoinResult.isPending then return end
+		if not FFlagAppChatBubbleThemeTokensModule then
+			UseStateResult2(if IsIncoming then {
+				Transparency = 0.35,
+				Color = if UseSelectedThemeResult == string.lower(ColorMode.Light) then ColorSystem.Gray[50] else ColorSystem.Gray[70]
+			} elseif IsUnfiltered or FFlagAppChatBlueSentBubblesModule then if JoinResult.isAssetCard then {
+				Transparency = 0.4,
+				Color = if UseSelectedThemeResult == string.lower(ColorMode.Light) then ColorSystem.Gray[50] else ColorSystem.Gray[70]
+			} else {
+				Color = if UseSelectedThemeResult == ColorMode.Light then UnfilteredMessageColorConfigModule.UnfilteredMessagePressedLightColor3 else UnfilteredMessageColorConfigModule.UnfilteredMessagePressedDarkColor3,
+				Transparency = UnfilteredMessageColorConfigModule.UnfilteredMessageTransparency
+			} else {
+				Transparency = 0.4,
+				Color = if UseSelectedThemeResult == string.lower(ColorMode.Light) then ColorSystem.Gray[50] else ColorSystem.Gray[70]
+			})
 			
 			return
 		end
-		setBubbleStyle()
-	end, {
-		var1.isPressed, var1.isRepliedTo, var5, isIncoming, isPending, isUnfiltered,
-		var1.isAssetCard
-	})
-	
-	local function _(p2, p3, p4)
-		-- upvalues: BUBBLE_VARIANTS (copy)
-		return if p2 and p3 or p4 then BUBBLE_VARIANTS.SINGLE elseif p2 then BUBBLE_VARIANTS.TOP elseif p3 then BUBBLE_VARIANTS.BOTTOM else BUBBLE_VARIANTS.MIDDLE
+		local config = nil
+		if IsIncoming or JoinResult.isAssetCard then
+			local Press = UseTokensResult.Color.State.Press
+			config = { Color = Press.Color3, Transparency = Press.Transparency }
+		else
+			config = if IsUnfiltered or FFlagAppChatBlueSentBubblesModule then {
+				Color = UseTokensResult.Color.Extended.Blue.Blue_1000.Color3,
+				Transparency = UseTokensResult.Color.Extended.Blue.Blue_1000.Transparency
+			} else {
+				Color = UseTokensResult.Color.Extended.Gray.Gray_700.Color3,
+				Transparency = UseTokensResult.Color.Extended.Gray.Gray_700.Transparency
+			}
+		end
+		UseStateResult2(config)
 	end
 	
-	local createElement = reactModule.createElement
-	local view = foundationModule.View
-	local t_1 = {
+	ReactModule.useLayoutEffect(function() --[[ Line: 183 ]]
+		-- upvalues: JoinResult (copy), setPressedBubbleStyle (copy), setBubbleStyle (copy)
+		if JoinResult.isPressed then
+			setPressedBubbleStyle()
+			
+			return
+		else
+			setBubbleStyle()
+		end
+	end, {
+		JoinResult.isPressed, JoinResult.isRepliedTo, UseSelectedThemeResult,
+		IsIncoming, IsPending, IsUnfiltered, JoinResult.isAssetCard
+	})
+	
+	local function _(p2, p3, p4) --[[ Line: 201 | Named "getBubbleVariant" ]]
+		-- upvalues: BUBBLEVARIANTS (upval)
+		return if p2 and p3 or p4 then BUBBLEVARIANTS.SINGLE elseif p2 then BUBBLEVARIANTS.TOP elseif p3 then BUBBLEVARIANTS.BOTTOM else BUBBLEVARIANTS.MIDDLE
+	end
+	
+	local HasTail = JoinResult.hasTail
+	local IsLastMessageInMessageGroup = JoinResult.isLastMessageInMessageGroup
+	local IsRepliedTo = JoinResult.isRepliedTo
+	
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "size-0-0 auto-xy",
 		BackgroundTransparency = 1,
-		LayoutOrder = var1.LayoutOrder,
+		LayoutOrder = JoinResult.LayoutOrder,
 		selection = {
-			Selectable = if fFlagAppChatConsoleFocusFixesModule then not var1.isRepliedTo else true,
-			SelectionImageObject = var3
+			Selectable = not FFlagAppChatConsoleFocusFixesModule or not JoinResult.isRepliedTo,
+			SelectionImageObject = UseCursorResult
 		},
 		layout = {
 			FillDirection = Enum.FillDirection.Horizontal,
-			HorizontalAlignment = if isIncoming then Enum.HorizontalAlignment.Left else Enum.HorizontalAlignment.Right,
-			Padding = UDim.new(0, chatBubbleEnumModule.REPLIED_TO_MARKER_GAP)
+			HorizontalAlignment = IsIncoming and Enum.HorizontalAlignment.Left or Enum.HorizontalAlignment.Right,
+			Padding = UDim.new(0, ChatBubbleEnumModule.REPLIED_TO_MARKER_GAP)
 		},
-		ref = if fFlagAppChatConsoleFocusFixesModule then var1.bubbleRef else nil
-	}
-	local t_2 = {}
-	local createElement_1 = reactModule.createElement
-	local t_3 = {
-		layoutOrder = 1,
-		alignment = if isIncoming then Enum.HorizontalAlignment.Left else Enum.HorizontalAlignment.Right,
-		children = children,
-		imageStyle = { Color3 = var6.Color, Transparency = var6.Transparency },
-		padding = var1.padding
-	}
-	local hasTail = var1.hasTail
-	local isLastMessageInMessageGroup = var1.isLastMessageInMessageGroup
-	t_3.variant = if hasTail and isLastMessageInMessageGroup or var1.isRepliedTo then BUBBLE_VARIANTS.SINGLE elseif hasTail then BUBBLE_VARIANTS.TOP elseif isLastMessageInMessageGroup then BUBBLE_VARIANTS.BOTTOM else BUBBLE_VARIANTS.MIDDLE
-	t_2.bubble = createElement_1(chatBubbleGroupableModule, t_3)
-	t_2.repliedToMarker = if var1.isRepliedTo then reactModule.createElement(repliedToMarkerModule, {
-		isIncoming = isIncoming,
-		layoutOrder = if var1.isIncoming then 0 else 2
-	}) else nil
-	
-	return createElement(view, t_1, t_2)
+		ref = if FFlagAppChatConsoleFocusFixesModule then JoinResult.bubbleRef else nil
+	}, {
+		bubble = ReactModule.createElement(ChatBubbleGroupableModule, {
+			layoutOrder = 1,
+			alignment = IsIncoming and Enum.HorizontalAlignment.Left or Enum.HorizontalAlignment.Right,
+			children = Children,
+			imageStyle = {
+				Color3 = UseStateResult.Color,
+				Transparency = UseStateResult.Transparency
+			},
+			padding = JoinResult.padding,
+			variant = if HasTail and IsLastMessageInMessageGroup then BUBBLEVARIANTS.SINGLE elseif IsRepliedTo then BUBBLEVARIANTS.SINGLE elseif HasTail then BUBBLEVARIANTS.TOP elseif IsLastMessageInMessageGroup then BUBBLEVARIANTS.BOTTOM else BUBBLEVARIANTS.MIDDLE
+		}),
+		repliedToMarker = if JoinResult.isRepliedTo then ReactModule.createElement(RepliedToMarkerModule, {
+			isIncoming = IsIncoming,
+			layoutOrder = if JoinResult.isIncoming then 0 else 2
+		}) else nil
+	})
 end)

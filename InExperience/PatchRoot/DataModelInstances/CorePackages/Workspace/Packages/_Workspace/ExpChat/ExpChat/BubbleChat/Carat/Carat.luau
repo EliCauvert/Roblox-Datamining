@@ -1,19 +1,19 @@
-﻿local reactModule = require(script:FindFirstAncestor("ExpChat").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("ExpChat").Parent.React)
 
-return function(p1)
-	-- upvalues: reactModule (ref)
-	local chatSettings = p1.chatSettings
+return function(p1) --[[ Line: 10 | Named "Carat" ]]
+	-- upvalues: ReactModule (copy)
+	local ChatSettings = p1.chatSettings
 	
-	return reactModule.createElement("ImageLabel", {
+	return ReactModule.createElement("ImageLabel", {
 		BackgroundTransparency = 1,
 		Image = "rbxasset://textures/ui/InGameChat/Caret.png",
 		LayoutOrder = p1.layoutOrder,
 		AnchorPoint = Vector2.new(0.5, 0),
 		Position = UDim2.new(0.5, 0, 1, -1),
 		Size = UDim2.fromOffset(12, 8),
-		ImageColor3 = chatSettings.BackgroundColor3,
-		ImageTransparency = chatSettings.BackgroundTransparency
+		ImageColor3 = ChatSettings.BackgroundColor3,
+		ImageTransparency = ChatSettings.BackgroundTransparency
 	}, {
-		CaratGradient = chatSettings.UIGradient and reactModule.createElement("UIGradient", chatSettings.UIGradient)
+		CaratGradient = ChatSettings.UIGradient and ReactModule.createElement("UIGradient", ChatSettings.UIGradient)
 	})
 end

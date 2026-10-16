@@ -1,15 +1,15 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local appChatNetworkingModule = require(appChat.Parent.AppChatNetworking)
-local getConversationStoreModule = require(appChat.Stores.GetConversationStore)
-local getResponseBodyModule = require(appChat.Stores.Ingestion.getResponseBody)
-local ingestConversationListPageModule = require(appChat.Stores.Ingestion.ingestConversationListPage)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local AppChatNetworkingModule = require(AppChat.Parent.AppChatNetworking)
+local GetConversationStoreModule = require(AppChat.Stores.GetConversationStore)
+local GetResponseBodyModule = require(AppChat.Stores.Ingestion.getResponseBody)
+local IngestConversationListPageModule = require(AppChat.Stores.Ingestion.ingestConversationListPage)
 
-return function(value)
-	-- upvalues: appChatNetworkingModule (ref), getConversationStoreModule (ref), getResponseBodyModule (ref), ingestConversationListPageModule (ref)
-	return appChatNetworkingModule.http.GetConversations(nil, value):andThen(function(p1)
-		-- upvalues: getConversationStoreModule (copy), getResponseBodyModule (copy), ingestConversationListPageModule (copy)
-		ingestConversationListPageModule.ingestConversationResponses(getConversationStoreModule(false), getResponseBodyModule(p1))
+return function(p1) --[[ Line: 22 | Named "fetchConversationDetailsToSignals" ]]
+	-- upvalues: AppChatNetworkingModule (copy), GetConversationStoreModule (copy), GetResponseBodyModule (copy), IngestConversationListPageModule (copy)
+	return AppChatNetworkingModule.http.GetConversations(nil, p1):andThen(function(Result) --[[ Line: 26 ]]
+		-- upvalues: GetConversationStoreModule (upval), GetResponseBodyModule (upval), IngestConversationListPageModule (upval)
+		IngestConversationListPageModule.ingestConversationResponses(GetConversationStoreModule(false), (GetResponseBodyModule(Result)))
 		
-		return p1
+		return Result
 	end)
 end

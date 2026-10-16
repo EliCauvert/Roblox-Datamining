@@ -1,185 +1,185 @@
-﻿local playersService = game:GetService("Players")
-local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local parent = momentsCreation.Parent
-local foundationModule = require(parent.Foundation)
-local localizationModule = require(parent.Localization)
-local momentsCommonModule = require(parent.MomentsCommon)
-local reactModule = require(parent.React)
-local fireAnalyticsEventModule = require(momentsCreation.Analytics.fireAnalyticsEvent)
-local eventNames = momentsCommonModule.Analytics.EventNames
+﻿local Players = game:GetService("Players")
+local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local Parent = MomentsCreation.Parent
+local FoundationModule = require(Parent.Foundation)
+local MomentsCommonModule = require(Parent.MomentsCommon)
+local ReactModule = require(Parent.React)
+local FireAnalyticsEventModule = require(MomentsCreation.Analytics.fireAnalyticsEvent)
+local EventNames = MomentsCommonModule.Analytics.EventNames
 
-local function fireVoiceCoachmarkFtuxEvent(p1)
-	-- upvalues: fireAnalyticsEventModule (ref), playersService (ref)
-	fireAnalyticsEventModule(p1, {
+local function fireVoiceCoachmarkFtuxEvent(FTUXTooltipDismissed) --[[ Line: 26 ]]
+	-- upvalues: FireAnalyticsEventModule (copy), Players (copy)
+	FireAnalyticsEventModule(FTUXTooltipDismissed, {
 		identifier = "moments_tts_voice",
-		userId = tostring(if playersService.LocalPlayer then playersService.LocalPlayer.UserId else 0),
+		userId = tostring(if Players.LocalPlayer then Players.LocalPlayer.UserId else 0),
 		timestamp = tostring(os.time())
 	})
 end
 
-local educationalTooltip = foundationModule.EducationalTooltip
-local icon = foundationModule.Icon
-local loading = foundationModule.Loading
-local text = foundationModule.Text
-local view = foundationModule.View
-local gradientBackdrop = momentsCommonModule.Components.GradientBackdrop
-local getFFlagEnableMomentTextGeneration = momentsCommonModule.Flags.GetFFlagEnableMomentTextGeneration
-local getFFlagMomentsCoachmarkPersistence = momentsCommonModule.Flags.GetFFlagMomentsCoachmarkPersistence
-local getFIntMomentsCoachmarkMaxImpressions = momentsCommonModule.Flags.GetFIntMomentsCoachmarkMaxImpressions
-local getFIntMomentsCoachmarkAutoDismissSeconds = momentsCommonModule.Flags.GetFIntMomentsCoachmarkAutoDismissSeconds
-local useDeviceInsets = momentsCommonModule.Hooks.useDeviceInsets
-local useLocalization = localizationModule.Hooks.useLocalization
-local useTokens = foundationModule.Hooks.useTokens
-local useCreationController = require(momentsCreation.CreationController).useCreationController
-local _ = require(momentsCreation.Types.CreationFlowTypes)
+local EducationalTooltip = FoundationModule.EducationalTooltip
+local Icon = FoundationModule.Icon
+local Loading = FoundationModule.Loading
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local GradientBackdrop = MomentsCommonModule.Components.GradientBackdrop
+local GetFFlagEnableMomentTextGenerationFunction = MomentsCommonModule.Flags.GetFFlagEnableMomentTextGeneration
+local GetFFlagMomentsCoachmarkPersistenceFunction = MomentsCommonModule.Flags.GetFFlagMomentsCoachmarkPersistence
+local GetFIntMomentsCoachmarkMaxImpressionsFunction = MomentsCommonModule.Flags.GetFIntMomentsCoachmarkMaxImpressions
+local GetFIntMomentsCoachmarkAutoDismissSecondsFunction = MomentsCommonModule.Flags.GetFIntMomentsCoachmarkAutoDismissSeconds
+local UseDeviceInsetsFunction = MomentsCommonModule.Hooks.useDeviceInsets
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseCreationControllerFunction = require(MomentsCreation.CreationController).useCreationController
+local _ = require(MomentsCreation.Types.CreationFlowTypes)
 
-local function VoiceCoachmark(p1)
-	-- upvalues: useCreationController (ref), useLocalization (ref), reactModule (ref), fireVoiceCoachmarkFtuxEvent (ref), eventNames (ref), educationalTooltip (ref), foundationModule (ref)
-	local var1 = useCreationController()
-	local var2 = useLocalization({ title = p1.titleKey, text = p1.textKey })
-	local var3, var4 = reactModule.useState(function()
-		-- upvalues: var1 (ref)
-		return not var1.getVoiceCoachmarkDismissed(false)
+local function VoiceCoachmark(p1) --[[ Line: 99 ]]
+	-- upvalues: UseCreationControllerFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), fireVoiceCoachmarkFtuxEvent (copy), EventNames (copy), EducationalTooltip (copy), FoundationModule (copy)
+	local UseCreationControllerResult = UseCreationControllerFunction()
+	local UseLocalizationResult = UseLocalizationFunction({ title = p1.titleKey, text = p1.textKey })
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function(): boolean --[[ Line: 110 ]]
+		-- upvalues: UseCreationControllerResult (copy)
+		return not UseCreationControllerResult.getVoiceCoachmarkDismissed(false)
 	end)
-	local var5 = reactModule.useRef(false)
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), var5 (ref), fireVoiceCoachmarkFtuxEvent (copy), eventNames (copy)
-		if var3 and not var5.current then
-			var5.current = true
-			fireVoiceCoachmarkFtuxEvent(eventNames.FTUXTooltipImpression)
+	local UseRefResult = ReactModule.useRef(false)
+	ReactModule.useEffect(function() --[[ Line: 116 ]]
+		-- upvalues: UseStateResult (copy), UseRefResult (copy), fireVoiceCoachmarkFtuxEvent (upval), EventNames (upval)
+		if UseStateResult and not UseRefResult.current then
+			UseRefResult.current = true
+			fireVoiceCoachmarkFtuxEvent(EventNames.FTUXTooltipImpression)
 		end
-	end, { var3 })
+	end, { UseStateResult })
 	
-	return if var3 then reactModule.createElement(educationalTooltip, {
+	return if UseStateResult then ReactModule.createElement(EducationalTooltip, {
 		isOpen = true,
 		LayoutOrder = p1.layoutOrder,
-		onClose = function()
-			-- upvalues: fireVoiceCoachmarkFtuxEvent (copy), eventNames (copy), var1 (ref), var4 (ref)
-			fireVoiceCoachmarkFtuxEvent(eventNames.FTUXTooltipDismissed)
-			var1.dismissVoiceCoachmark()
-			var4(false)
+		onClose = function() --[[ Line: 130 ]]
+			-- upvalues: fireVoiceCoachmarkFtuxEvent (upval), EventNames (upval), UseCreationControllerResult (copy), UseStateResult2 (copy)
+			fireVoiceCoachmarkFtuxEvent(EventNames.FTUXTooltipDismissed)
+			UseCreationControllerResult.dismissVoiceCoachmark()
+			UseStateResult2(false)
 		end,
-		side = foundationModule.Enums.PopoverSide.Bottom,
-		align = foundationModule.Enums.PopoverAlign.End,
-		title = var2.title,
-		text = var2.text
+		side = FoundationModule.Enums.PopoverSide.Bottom,
+		align = FoundationModule.Enums.PopoverAlign.End,
+		title = UseLocalizationResult.title,
+		text = UseLocalizationResult.text
 	}, p1.children) else p1.children
 end
 
-local function PersistentToolCoachmark(p1)
-	-- upvalues: useCreationController (ref), useLocalization (ref), parent (ref), reactModule (ref), fireVoiceCoachmarkFtuxEvent (ref), eventNames (ref), foundationModule (ref)
-	local var1 = useCreationController()
-	local var2 = useLocalization({ title = p1.titleKey, text = p1.textKey })
+local function PersistentToolCoachmark(p1) --[[ Line: 145 ]]
+	-- upvalues: UseCreationControllerFunction (copy), UseLocalizationFunction (copy), Parent (copy), ReactModule (copy), fireVoiceCoachmarkFtuxEvent (copy), EventNames (copy), FoundationModule (copy)
+	local UseCreationControllerResult = UseCreationControllerFunction()
+	local UseLocalizationResult = UseLocalizationFunction({ title = p1.titleKey, text = p1.textKey })
 	
-	return reactModule.createElement(require(parent.MomentsCommon.PersistentCoachmark), {
+	return ReactModule.createElement(require(Parent.MomentsCommon.PersistentCoachmark), {
 		layoutOrder = p1.layoutOrder,
-		title = var2.title,
-		text = var2.text,
+		title = UseLocalizationResult.title,
+		text = UseLocalizationResult.text,
 		impressionCache = p1.impressionCache,
 		maxImpressions = p1.maxImpressions,
 		autoDismissSeconds = p1.autoDismissSeconds,
-		isSessionHandled = var1.getVoiceCoachmarkDismissed(false),
-		onSessionHandled = var1.dismissVoiceCoachmark,
-		onImpression = function()
-			-- upvalues: fireVoiceCoachmarkFtuxEvent (copy), eventNames (copy)
-			fireVoiceCoachmarkFtuxEvent(eventNames.FTUXTooltipImpression)
+		isSessionHandled = UseCreationControllerResult.getVoiceCoachmarkDismissed(false),
+		onSessionHandled = UseCreationControllerResult.dismissVoiceCoachmark,
+		onImpression = function() --[[ Line: 173 ]]
+			-- upvalues: fireVoiceCoachmarkFtuxEvent (upval), EventNames (upval)
+			fireVoiceCoachmarkFtuxEvent(EventNames.FTUXTooltipImpression)
 		end,
-		onDismissed = function()
-			-- upvalues: fireVoiceCoachmarkFtuxEvent (copy), eventNames (copy)
-			fireVoiceCoachmarkFtuxEvent(eventNames.FTUXTooltipDismissed)
+		onDismissed = function() --[[ Line: 176 ]]
+			-- upvalues: fireVoiceCoachmarkFtuxEvent (upval), EventNames (upval)
+			fireVoiceCoachmarkFtuxEvent(EventNames.FTUXTooltipDismissed)
 		end,
-		side = foundationModule.Enums.PopoverSide.Bottom,
-		align = foundationModule.Enums.PopoverAlign.End
+		side = FoundationModule.Enums.PopoverSide.Bottom,
+		align = FoundationModule.Enums.PopoverAlign.End
 	}, p1.children)
 end
 
-return function(p1)
-	-- upvalues: useDeviceInsets (ref), useTokens (ref), useLocalization (ref), reactModule (ref), view (ref), getFFlagEnableMomentTextGeneration (ref), loading (ref), foundationModule (ref), icon (ref), text (ref), getFFlagMomentsCoachmarkPersistence (ref), PersistentToolCoachmark (ref), getFIntMomentsCoachmarkMaxImpressions (ref), getFIntMomentsCoachmarkAutoDismissSeconds (ref), VoiceCoachmark (ref), gradientBackdrop (ref)
-	local var1 = useDeviceInsets()
-	local var2 = useTokens()
-	local isLoadingMap = p1.isLoadingMap
-	local isDisabledMap = p1.isDisabledMap
-	local var3 = var2.Size.Size_600 / var2.Size.Size_1200
-	local t = {}
+return function(p1) --[[ Line: 184 ]]
+	-- upvalues: UseDeviceInsetsFunction (copy), UseTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), View (copy), GetFFlagEnableMomentTextGenerationFunction (copy), Loading (copy), FoundationModule (copy), Icon (copy), Text (copy), GetFFlagMomentsCoachmarkPersistenceFunction (copy), PersistentToolCoachmark (copy), GetFIntMomentsCoachmarkMaxImpressionsFunction (copy), GetFIntMomentsCoachmarkAutoDismissSecondsFunction (copy), VoiceCoachmark (copy), GradientBackdrop (copy)
+	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
+	local UseTokensResult = UseTokensFunction()
+	local IsLoadingMap = p1.isLoadingMap
+	local IsDisabledMap = p1.isDisabledMap
+	local SizeRatio = UseTokensResult.Size.Size_600 / UseTokensResult.Size.Size_1200
+	local LocalizationKeys = {}
 	
-	for i, v in p1.tools do
-		t[v.cta.localizationKey] = v.cta.localizationKey
+	for _, tool in p1.tools do
+		LocalizationKeys[tool.cta.localizationKey] = tool.cta.localizationKey
 	end
-	local var4 = useLocalization(t)
-	local var5, var6 = reactModule.useBinding(UDim2.fromScale(1, 0))
-	local var7 = reactModule.useCallback(function(p2)
-		-- upvalues: var6 (ref)
-		var6(UDim2.new(0, 1.5 * p2.AbsoluteSize.X, 1, 0))
+	local UseLocalizationResult = UseLocalizationFunction(LocalizationKeys)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(UDim2.fromScale(1, 0))
+	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 205 ]]
+		-- upvalues: UseBindingResult2 (copy)
+		UseBindingResult2(UDim2.new(0, 1.5 * Frame.AbsoluteSize.X, 1, 0))
 	end, {})
-	local t_1 = {}
-	local coachmark = p1.coachmark
+	local Elements = {}
+	local Coachmark = p1.coachmark
 	
-	for i_1, v_1 in p1.tools do
-		local kind = v_1.kind
-		local var8 = isLoadingMap ~= nil and isLoadingMap[kind] == true
-		local var9 = reactModule.createElement(view, {
+	for i, tool1 in p1.tools do
+		local Kind = tool1.kind
+		local IsIsLoading: boolean = IsLoadingMap ~= nil and IsLoadingMap[Kind] == true
+		local IsIsDisabled: boolean = IsDisabledMap ~= nil and IsDisabledMap[Kind] == true
+		local Element = ReactModule.createElement(View, {
 			tag = "row align-x-right align-y-center gap-medium auto-xy padding-xsmall radius-medium",
-			LayoutOrder = v_1.cta.order or i_1,
-			onActivated = if var8 then nil elseif isDisabledMap ~= nil and isDisabledMap[kind] == true then if p1.onDisabledToolActivated ~= nil then nil else function()
-				-- upvalues: p1 (ref), kind (ref)
-				p1.onDisabledToolActivated(kind)
-			end else function()
-				-- upvalues: p1 (ref), kind (ref)
-				p1.onToolSelected(kind)
+			LayoutOrder = tool1.cta.order or i,
+			onActivated = if IsIsLoading then nil elseif IsIsDisabled then if p1.onDisabledToolActivated == nil then nil else function() --[[ Line: 224 ]]
+				-- upvalues: p1 (copy), Kind (copy)
+				p1.onDisabledToolActivated(Kind)
+			end else function() --[[ Line: 228 ]]
+				-- upvalues: p1 (copy), Kind (copy)
+				p1.onToolSelected(Kind)
 			end
 		}, {
-			Icon = if var8 then if getFFlagEnableMomentTextGeneration() then reactModule.createElement(view, { LayoutOrder = 2, tag = "auto-xy", scale = var3 }, {
-				Loading = reactModule.createElement(loading, { size = foundationModule.Enums.IconSize.Large })
-			}) else reactModule.createElement(loading, {
+			Icon = if IsIsLoading then if GetFFlagEnableMomentTextGenerationFunction() then ReactModule.createElement(View, { LayoutOrder = 2, tag = "auto-xy", scale = SizeRatio }, {
+				Loading = ReactModule.createElement(Loading, { size = FoundationModule.Enums.IconSize.Large })
+			}) else ReactModule.createElement(Loading, {
 				LayoutOrder = 2,
-				size = foundationModule.Enums.IconSize.Small
-			}) else reactModule.createElement(icon, {
+				size = FoundationModule.Enums.IconSize.Small
+			}) else ReactModule.createElement(Icon, {
 				LayoutOrder = 2,
-				name = v_1.cta.icon,
-				size = foundationModule.Enums.IconSize.Large
+				name = tool1.cta.icon,
+				size = FoundationModule.Enums.IconSize.Large
 			}),
-			Text = if p1.showText then reactModule.createElement(text, {
+			Text = if p1.showText then ReactModule.createElement(Text, {
 				LayoutOrder = 1,
 				tag = "auto-xy text-label-medium content-emphasis",
-				Text = var4[v_1.cta.localizationKey]
+				Text = UseLocalizationResult[tool1.cta.localizationKey]
 			}) else nil
 		})
 		
-		if coachmark == nil or coachmark.kind ~= kind then
-			t_1["Tool_" .. kind] = var9
-		elseif getFFlagMomentsCoachmarkPersistence() and coachmark.impressionCache ~= nil then
-			t_1["Tool_" .. kind] = reactModule.createElement(PersistentToolCoachmark, {
-				layoutOrder = v_1.cta.order or i_1,
-				titleKey = coachmark.titleKey,
-				textKey = coachmark.textKey,
-				impressionCache = coachmark.impressionCache,
-				maxImpressions = coachmark.maxImpressions or getFIntMomentsCoachmarkMaxImpressions(),
-				autoDismissSeconds = coachmark.autoDismissSeconds or getFIntMomentsCoachmarkAutoDismissSeconds()
-			}, var9)
+		if Coachmark == nil or Coachmark.kind ~= Kind then
+			Elements["Tool_" .. Kind] = Element
+		elseif GetFFlagMomentsCoachmarkPersistenceFunction() and Coachmark.impressionCache ~= nil then
+			Elements["Tool_" .. Kind] = ReactModule.createElement(PersistentToolCoachmark, {
+				layoutOrder = tool1.cta.order or i,
+				titleKey = Coachmark.titleKey,
+				textKey = Coachmark.textKey,
+				impressionCache = Coachmark.impressionCache,
+				maxImpressions = Coachmark.maxImpressions or GetFIntMomentsCoachmarkMaxImpressionsFunction(),
+				autoDismissSeconds = Coachmark.autoDismissSeconds or GetFIntMomentsCoachmarkAutoDismissSecondsFunction()
+			}, Element)
 		else
-			t_1["Tool_" .. kind] = reactModule.createElement(VoiceCoachmark, {
-				layoutOrder = v_1.cta.order or i_1,
-				titleKey = coachmark.titleKey,
-				textKey = coachmark.textKey
-			}, var9)
+			Elements["Tool_" .. Kind] = ReactModule.createElement(VoiceCoachmark, {
+				layoutOrder = tool1.cta.order or i,
+				titleKey = Coachmark.titleKey,
+				textKey = Coachmark.textKey
+			}, Element)
 		end
 	end
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "position-center-right anchor-center-right size-0-full auto-x",
 		ZIndex = p1.zIndex
 	}, {
-		GradientBackdrop = reactModule.createElement(gradientBackdrop, {
+		GradientBackdrop = ReactModule.createElement(GradientBackdrop, {
 			rotation = 180,
-			color3 = var2.Color.Common.Scrim.Color3,
-			size = var5
+			color3 = UseTokensResult.Color.Common.Scrim.Color3,
+			size = UseBindingResult
 		}),
-		EditCTABar = reactModule.createElement(view, {
+		EditCTABar = ReactModule.createElement(View, {
 			tag = "col align-x-right align-y-center gap-small position-center-right anchor-center-right size-0-full auto-x",
-			onAbsoluteSizeChanged = var7,
+			onAbsoluteSizeChanged = UseResult,
 			padding = {
-				left = UDim.new(0, var2.Padding.Large),
-				right = UDim.new(0, var1.right + var2.Padding.Large)
+				left = UDim.new(0, UseTokensResult.Padding.Large),
+				right = UDim.new(0, UseDeviceInsetsResult.right + UseTokensResult.Padding.Large)
 			}
-		}, t_1)
+		}, Elements)
 	})
 end

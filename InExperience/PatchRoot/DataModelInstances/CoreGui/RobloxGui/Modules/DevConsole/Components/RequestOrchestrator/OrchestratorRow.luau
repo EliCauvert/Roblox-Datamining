@@ -1,7 +1,7 @@
-﻿local roactModule = require(game:GetService("CorePackages").Packages.Roact)
-local constantsModule = require(script.Parent.Parent.Parent.Constants)
-local mono = constantsModule.Font.Mono
-local t = {
+﻿local RoactModule = require(game:GetService("CorePackages").Packages.Roact)
+local ConstantsModule = require(script.Parent.Parent.Parent.Constants)
+local Mono = ConstantsModule.Font.Mono
+local config = {
 	inflight = Color3.fromRGB(255, 165, 0),
 	retrying = Color3.fromRGB(255, 165, 0),
 	success = Color3.fromRGB(66, 135, 245),
@@ -14,308 +14,312 @@ local t = {
 	queueText = Color3.fromRGB(160, 160, 160),
 	cacheHot = Color3.fromRGB(100, 255, 180),
 	cacheCold = Color3.fromRGB(60, 120, 95),
-	cacheEmpty = constantsModule.Color.BaseGray,
+	cacheEmpty = ConstantsModule.Color.BaseGray,
 	idleText = Color3.fromRGB(70, 70, 70),
 	timelineTick = Color3.fromRGB(50, 50, 50),
 	timelineBackground = Color3.fromRGB(20, 20, 20),
 	rowBackground = Color3.fromRGB(28, 28, 28)
 }
 
-local function _(startValue, endValue, alpha)
-	return startValue + (endValue - startValue) * alpha
+local function _(p1, p2, p3) --[[ Line: 66 | Named "lerp" ]]
+	return p1 + (p2 - p1) * p3
 end
 
-local _ = function(p1)
+local _ = function(p1: number): number --[[ Line: 71 | Named "smooth" ]]
 	return p1 * p1 * (3 - 2 * p1)
 end
 
-local function renderTypeLabel(p1)
-	-- upvalues: roactModule (ref), t (ref), mono (ref)
-	return roactModule.createElement("TextLabel", {
+local function renderTypeLabel(Text) --[[ Line: 75 ]]
+	-- upvalues: RoactModule (copy), config (copy), Mono (copy)
+	return RoactModule.createElement("TextLabel", {
 		BackgroundTransparency = 1,
 		TextSize = 12,
 		Size = UDim2.new(0, 130, 1, 0),
 		Position = UDim2.new(0, 0, 0, 0),
-		Text = p1,
-		TextColor3 = t.labelText,
-		Font = mono,
+		Text = Text,
+		TextColor3 = config.labelText,
+		Font = Mono,
 		TextXAlignment = Enum.TextXAlignment.Left,
 		TextYAlignment = Enum.TextYAlignment.Top
 	})
 end
 
-local _ = function(a)
-	local observedMaxBatchSize = a.observedMaxBatchSize
+local _ = function(p1) --[[ Line: 90 | Named "resolveMaxSize" ]]
+	local ObservedMaxBatchSize: number = p1.observedMaxBatchSize
 	
-	return if observedMaxBatchSize and observedMaxBatchSize > 0 then observedMaxBatchSize else nil
+	return if ObservedMaxBatchSize and ObservedMaxBatchSize > 0 then ObservedMaxBatchSize else nil
 end
 
-local function renderBatchOutline(p1, p2)
-	-- upvalues: roactModule (ref), t (ref), mono (ref)
-	local minValue = math.min(p2, 30)
-	local panelWidth = p1.panelWidth
+local function renderBatchOutline(Props, p1: number) --[[ Line: 99 ]]
+	-- upvalues: RoactModule (copy), config (copy), Mono (copy)
+	local Smallest = math.min(p1, 30)
+	local PanelWidth: number = Props.panelWidth
 	
-	if panelWidth and panelWidth > 0 then
-		minValue = math.min(minValue, math.floor((panelWidth - 374 - 8 - 8 + 3) / 19))
+	if PanelWidth and PanelWidth > 0 then
+		Smallest = math.min(Smallest, (math.floor((PanelWidth - 374 - 8 - 8 + 3) / 19)))
 	end
-	local maxValue = math.max(1, minValue)
+	local Largest = math.max(1, Smallest)
+	local IsLargestBelow = Largest < p1
 	
-	return roactModule.createElement("Frame", {
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
-		Size = UDim2.new(0, maxValue * 16 + math.max(0, maxValue - 1) * 3 + 8, 0, 21),
+		Size = UDim2.new(0, Largest * 16 + math.max(0, Largest - 1) * 3 + 8, 0, 21),
 		Position = UDim2.new(0, 374, 0, 1.5)
 	}, {
-		Corner = roactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 4) }),
-		Stroke = roactModule.createElement("UIStroke", {
+		Corner = RoactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 4) }),
+		Stroke = RoactModule.createElement("UIStroke", {
 			Thickness = 1.5,
 			Transparency = 0.15,
-			Color = t.batchOutline
+			Color = config.batchOutline
 		}),
-		Overflow = if maxValue < p2 then roactModule.createElement("TextLabel", {
+		Overflow = if IsLargestBelow then RoactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
-			Text = "\194\187",
+			Text = "»",
 			TextSize = 12,
 			AnchorPoint = Vector2.new(1, 0.5),
 			Position = UDim2.new(1, -2, 0.5, 0),
 			Size = UDim2.new(0, 10, 1, 0),
-			TextColor3 = t.batchOutline,
-			Font = mono,
+			TextColor3 = config.batchOutline,
+			Font = Mono,
 			TextXAlignment = Enum.TextXAlignment.Right,
 			TextYAlignment = Enum.TextYAlignment.Center
 		}) else nil
 	})
 end
 
-local function renderIdleQueue()
-	-- upvalues: roactModule (ref), t (ref), mono (ref)
-	return roactModule.createElement("TextLabel", {
+local function renderIdleQueue() --[[ Line: 143 ]]
+	-- upvalues: RoactModule (copy), config (copy), Mono (copy)
+	return RoactModule.createElement("TextLabel", {
 		BackgroundTransparency = 1,
 		Text = "idle",
 		TextSize = 10,
 		Size = UDim2.new(1, 0, 1, 0),
-		TextColor3 = t.idleText,
-		Font = mono,
+		TextColor3 = config.idleText,
+		Font = Mono,
 		TextXAlignment = Enum.TextXAlignment.Left
 	})
 end
 
-local function renderCacheChildren(p1, p2)
-	-- upvalues: roactModule (ref), t (ref), mono (ref)
-	local t_1 = {}
-	local var1 = if p1 then p1.items else {}
-	local var12Count = #var1
-	t_1.Count = roactModule.createElement("TextLabel", {
-		BackgroundTransparency = 1,
-		TextSize = 10,
-		Size = UDim2.new(1, 0, 0, 12),
-		Position = UDim2.new(0, 0, 0, 0),
-		Text = string.format("cache %d", var12Count),
-		TextColor3 = t.queueText,
-		Font = mono,
-		TextXAlignment = Enum.TextXAlignment.Left
-	})
+local function renderCacheChildren(Cache, Now) --[[ Line: 155 ]]
+	-- upvalues: RoactModule (copy), config (copy), Mono (copy)
+	local Items = if Cache then Cache.items else {}
+	local CountItems = #Items
+	local Frames = {
+		Count = RoactModule.createElement("TextLabel", {
+			BackgroundTransparency = 1,
+			TextSize = 10,
+			Size = UDim2.new(1, 0, 0, 12),
+			Position = UDim2.new(0, 0, 0, 0),
+			Text = string.format("cache %d", CountItems),
+			TextColor3 = config.queueText,
+			Font = Mono,
+			TextXAlignment = Enum.TextXAlignment.Left
+		})
+	}
 	
-	for i, v in ipairs(var1) do
+	for i, item in ipairs(Items) do
 		if i > 48 then break end
-		t_1["c" .. i] = roactModule.createElement("Frame", {
+		Frames["c" .. i] = RoactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			Position = UDim2.new(0, (i - 1) % 12 * 10, 0, math.floor((i - 1) / 12) * 10 + 12),
 			Size = UDim2.new(0, 8, 0, 8),
-			BackgroundColor3 = t.cacheCold:Lerp(t.cacheHot, if v.lastHitTime then math.clamp(1 - (p2 - v.lastHitTime) / 0.6, 0, 1) else 0)
+			BackgroundColor3 = config.cacheCold:Lerp(config.cacheHot, if item.lastHitTime then math.clamp(1 - (Now - item.lastHitTime) / 0.6, 0, 1) else 0)
 		}, {
-			Corner = roactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 2) })
+			Corner = RoactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 2) })
 		})
 	end
-	for i_1 = var12Count + 1, 48 do
-		t_1["e" .. i_1] = roactModule.createElement("Frame", {
+	for i1 = CountItems + 1, 48 do
+		Frames["e" .. i1] = RoactModule.createElement("Frame", {
 			BorderSizePixel = 0,
-			Position = UDim2.new(0, (i_1 - 1) % 12 * 10, 0, math.floor((i_1 - 1) / 12) * 10 + 12),
+			Position = UDim2.new(0, (i1 - 1) % 12 * 10, 0, math.floor((i1 - 1) / 12) * 10 + 12),
 			Size = UDim2.new(0, 8, 0, 8),
-			BackgroundColor3 = t.cacheEmpty
+			BackgroundColor3 = config.cacheEmpty
 		}, {
-			Corner = roactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 2) })
+			Corner = RoactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 2) })
 		})
 	end
-	return t_1
+	return Frames
 end
 
-local function renderTimelineChildren(p3, p4)
-	-- upvalues: t (ref), roactModule (ref)
-	local var2 = p4 - 30
-	local t_1 = {}
+local function renderTimelineChildren(Batches, Now: number) --[[ Line: 207 ]]
+	-- upvalues: config (copy), RoactModule (copy)
+	local NowDelta = Now - 30
+	local Frames = {}
 	
-	for i, v in pairs(p3) do
-		local attempts = v.attempts or {}
-		local attemptsCount = #attempts
+	for i, batch in pairs(Batches) do
+		local Attempts = batch.attempts or {}
+		local CountAttempts = #Attempts
 		
-		for i_2, v_1 in ipairs(attempts) do
-			local finish = v_1.finish or p4
+		for i1, attempt in ipairs(Attempts) do
+			local Finish = attempt.finish or Now
 			
-			if var2 <= finish then
-				local maxValue = math.max(0, (v_1.start - var2) / 30)
-				local minValue = math.min(1, (finish - var2) / 30)
+			if NowDelta <= Finish then
+				local Largest = math.max(0, (attempt.start - NowDelta) / 30)
+				local Smallest = math.min(1, (Finish - NowDelta) / 30)
 				
-				if maxValue < minValue then
-					t_1["batch_" .. i .. "_" .. i_2] = roactModule.createElement("Frame", {
+				if Largest < Smallest then
+					Frames["batch_" .. i .. "_" .. i1] = RoactModule.createElement("Frame", {
 						BorderSizePixel = 0,
-						Position = UDim2.new(maxValue, 0, 0, 2),
-						Size = UDim2.new(minValue - maxValue, 0, 1, -4),
-						BackgroundColor3 = if i_2 == attemptsCount then t[v.state] or t.inflight else t.retrying
+						Position = UDim2.new(Largest, 0, 0, 2),
+						Size = UDim2.new(Smallest - Largest, 0, 1, -4),
+						BackgroundColor3 = if i1 == CountAttempts then config[batch.state] or config.inflight else config.retrying
 					}, {
-						Corner = roactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 4) })
+						Corner = RoactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 4) })
 					})
 				end
 			end
 		end
 	end
-	for i_1 = 0, 2 do
-		t_1["tick_" .. i_1] = roactModule.createElement("Frame", {
+	for i2 = 0, 2 do
+		Frames["tick_" .. i2] = RoactModule.createElement("Frame", {
 			BorderSizePixel = 0,
-			Position = UDim2.new(1 - i_1 * 10 / 30, 0, 0, 0),
+			Position = UDim2.new(1 - i2 * 10 / 30, 0, 0, 0),
 			Size = UDim2.new(0, 1, 1, 0),
-			BackgroundColor3 = t.timelineTick
+			BackgroundColor3 = config.timelineTick
 		})
 	end
-	return t_1
+	return Frames
 end
 
-local orchestratorRow = roactModule.Component:extend("OrchestratorRow")
+local OrchestratorRow = RoactModule.Component:extend("OrchestratorRow")
 
-function orchestratorRow.init(p5)
-	p5.opAnim = {}
+function OrchestratorRow.init(p1) --[[ Line: 255 ]]
+	p1.opAnim = {}
 end
 
-function orchestratorRow.renderQueueChildren(p5, p6, p7, p8)
-	-- upvalues: roactModule (ref), t (ref), mono (ref)
-	local t_1 = {}
-	local t_2 = {}
-	
-	for i, v in ipairs(p6.retryOps or {}) do
-		table.insert(t_2, { isRetry = true, id = v })
+function OrchestratorRow.renderQueueChildren(p1, Queue, p2, Start: number) --[[ Line: 260 ]]
+	-- upvalues: RoactModule (copy), config (copy), Mono (copy)
+	local Frames = {}
+	local List = {}
+	local Iterator = ipairs
+	local RetryOps = Queue.retryOps or {}
+	for _, Id in Iterator(RetryOps) do
+		table.insert(List, { isRetry = true, id = Id })
 	end
-	for i, v_1 in ipairs(p6.ops or {}) do
-		table.insert(t_2, { isRetry = false, id = v_1 })
+	local Iterator1 = ipairs
+	local Ops = Queue.ops or {}
+	for _, Id1 in Iterator1(Ops) do
+		table.insert(List, { isRetry = false, id = Id1 })
 	end
-	local var3 = p8 - p6.createdTime
-	local t_2Count = #t_2
-	t_1.Info = roactModule.createElement("TextLabel", {
+	local StartDelta = Start - Queue.createdTime
+	local CountList = #List
+	Frames.Info = RoactModule.createElement("TextLabel", {
 		BackgroundTransparency = 1,
 		TextSize = 10,
 		Position = UDim2.new(0, 0, 0, 0),
 		Size = UDim2.new(0, 120, 1, 0),
-		Text = if p7 then string.format("%d/%d ops  %.1fs", t_2Count, p7, var3) else string.format("%d ops  %.1fs", t_2Count, var3),
-		TextColor3 = t.queueText,
-		Font = mono,
+		Text = if p2 then string.format("%d/%d ops  %.1fs", CountList, p2, StartDelta) else string.format("%d ops  %.1fs", CountList, StartDelta),
+		TextColor3 = config.queueText,
+		Font = Mono,
 		TextXAlignment = Enum.TextXAlignment.Left
 	})
-	local t_3 = {}
+	local t = {}
 	
-	for i_2, v_2 in ipairs(t_2) do
-		if i_2 > 30 then break end
-		local id = v_2.id
+	for i, value in ipairs(List) do
+		if i > 30 then break end
+		local Id2 = value.id
 		
-		if t_3[id] then
-			id ..= "#" .. i_2
+		if t[Id2] then
+			Id2 ..= "#" .. i
 		end
-		t_3[id] = true
-		local var4 = 120 + (i_2 - 1) * 19
-		local var5 = p5.opAnim[id]
+		t[Id2] = true
+		local NewI = 120 + (i - 1) * 19
+		local OpAnimEntry = p1.opAnim[Id2]
 		
-		if not var5 then
-			var5 = {
-				fromX = if v_2.isRetry then var4 - 19 else var4,
-				toX = var4,
-				start = p8
+		if OpAnimEntry then
+			if OpAnimEntry.toX ~= NewI then
+				local FromX = OpAnimEntry.fromX
+				local ClampedValue = math.clamp((Start - OpAnimEntry.start) / 0.25, 0, 1)
+				OpAnimEntry.fromX = FromX + (OpAnimEntry.toX - FromX) * (ClampedValue * ClampedValue * (3 - 2 * ClampedValue))
+				OpAnimEntry.toX = NewI
+				OpAnimEntry.start = Start
+			end
+		else
+			OpAnimEntry = {
+				fromX = if value.isRetry then NewI - 19 else NewI,
+				toX = NewI,
+				start = Start
 			}
-			p5.opAnim[id] = var5
-		elseif var5.toX ~= var4 then
-			local fromX = var5.fromX
-			local clampedValue = math.clamp((p8 - var5.start) / 0.25, 0, 1)
-			var5.fromX = fromX + (var5.toX - fromX) * (clampedValue * clampedValue * (3 - 2 * clampedValue))
-			var5.toX = var4
-			var5.start = p8
+			p1.opAnim[Id2] = OpAnimEntry
 		end
-		local fromX = var5.fromX
-		local clampedValue = math.clamp((p8 - var5.start) / 0.25, 0, 1)
-		local var6 = fromX + (var5.toX - fromX) * (clampedValue * clampedValue * (3 - 2 * clampedValue))
-		local queueOp = t.queueOp
-		local var7 = 0
+		local FromX = OpAnimEntry.fromX
+		local ClampedValue = math.clamp((Start - OpAnimEntry.start) / 0.25, 0, 1)
+		local NewFromX = FromX + (OpAnimEntry.toX - FromX) * (ClampedValue * ClampedValue * (3 - 2 * ClampedValue))
+		local QueueOp = config.queueOp
+		local ScaledSine = 0
 		
-		if v_2.isRetry then
-			queueOp = t.queueRetry
-			var7 = (math.sin(p8 * 7) * 0.5 + 0.5) * 0.75
+		if value.isRetry then
+			QueueOp = config.queueRetry
+			ScaledSine = (math.sin(Start * 7) * 0.5 + 0.5) * 0.75
 		end
-		t_1["op_" .. id] = roactModule.createElement("Frame", {
+		Frames["op_" .. Id2] = RoactModule.createElement("Frame", {
 			BorderSizePixel = 0,
-			Position = UDim2.new(0, var6, 0.5, -8),
+			Position = UDim2.new(0, NewFromX, 0.5, -8),
 			Size = UDim2.new(0, 16, 0, 16),
-			BackgroundColor3 = queueOp,
-			BackgroundTransparency = var7
+			BackgroundColor3 = QueueOp,
+			BackgroundTransparency = ScaledSine
 		}, {
-			Corner = roactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 3) })
+			Corner = RoactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 3) })
 		})
 	end
-	for i_3 in pairs(p5.opAnim) do
-		if not t_3[i_3] then
-			p5.opAnim[i_3] = nil
+	for i1 in pairs(p1.opAnim) do
+		if not t[i1] then
+			p1.opAnim[i1] = nil
 		end
 	end
-	return t_1
+	return Frames
 end
 
-function orchestratorRow.render(p9)
-	-- upvalues: renderTypeLabel (ref), roactModule (ref), renderCacheChildren (ref), renderBatchOutline (ref), renderIdleQueue (ref), t (ref), renderTimelineChildren (ref)
-	local orchestratorType = p9.props.orchestratorType
-	local batches = p9.props.batches
-	local queue = p9.props.queue
-	local now = p9.props.now
-	local size = p9.props.size
-	local layoutOrder = p9.props.layoutOrder
-	local t_1 = {
-		Label = renderTypeLabel(orchestratorType),
-		CacheGrid = roactModule.createElement("Frame", {
+function OrchestratorRow.render(p3) --[[ Line: 346 ]]
+	-- upvalues: renderTypeLabel (copy), RoactModule (copy), renderCacheChildren (copy), renderBatchOutline (copy), renderIdleQueue (copy), config (copy), renderTimelineChildren (copy)
+	local Batches = p3.props.batches
+	local Queue = p3.props.queue
+	local Now = p3.props.now
+	local Size = p3.props.size
+	local LayoutOrder = p3.props.layoutOrder
+	local config1 = {
+		Label = renderTypeLabel(p3.props.orchestratorType),
+		CacheGrid = RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			ClipsDescendants = true,
 			Size = UDim2.new(0, 120, 1, 0),
 			Position = UDim2.new(0, 134, 0, 0)
-		}, renderCacheChildren(p9.props.cache, now))
+		}, (renderCacheChildren(p3.props.cache, Now)))
 	}
-	local observedMaxBatchSize = p9.props.observedMaxBatchSize
-	local var8 = if observedMaxBatchSize and observedMaxBatchSize > 0 then observedMaxBatchSize else nil
+	local ObservedMaxBatchSize: number = p3.props.observedMaxBatchSize
+	local ObservedMaxBatchSize1 = if ObservedMaxBatchSize and ObservedMaxBatchSize > 0 then ObservedMaxBatchSize else nil
 	
-	if var8 then
-		t_1.BatchOutline = renderBatchOutline(p9.props, var8)
+	if ObservedMaxBatchSize1 then
+		config1.BatchOutline = renderBatchOutline(p3.props, ObservedMaxBatchSize1)
 	end
-	local var9
-	local _ = nil
-	
-	if queue then
-		var9 = p9:renderQueueChildren(queue, var8, now)
+	local RenderQueueChildrenResult = nil
+	if Queue then
+		RenderQueueChildrenResult = p3:renderQueueChildren(Queue, ObservedMaxBatchSize1, Now)
 	else
-		p9.opAnim = {}
-		var9 = { Idle = renderIdleQueue() }
+		p3.opAnim = {}
+		RenderQueueChildrenResult = { Idle = renderIdleQueue() }
 	end
-	t_1.Queue = roactModule.createElement("Frame", {
+	config1.Queue = RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		ClipsDescendants = true,
 		Size = UDim2.new(1, -258, 0, 24),
 		Position = UDim2.new(0, 258, 0, 0)
-	}, var9)
-	t_1.Timeline = roactModule.createElement("Frame", {
+	}, RenderQueueChildrenResult)
+	config1.Timeline = RoactModule.createElement("Frame", {
 		BorderSizePixel = 0,
 		ClipsDescendants = true,
 		Size = UDim2.new(1, -258, 0, 28),
 		Position = UDim2.new(0, 258, 0, 24),
-		BackgroundColor3 = t.timelineBackground
-	}, renderTimelineChildren(batches, now))
+		BackgroundColor3 = config.timelineBackground
+	}, (renderTimelineChildren(Batches, Now)))
 	
-	return roactModule.createElement("Frame", {
+	return RoactModule.createElement("Frame", {
 		BorderSizePixel = 0,
-		Size = size,
-		BackgroundColor3 = t.rowBackground,
-		LayoutOrder = layoutOrder
-	}, t_1)
+		Size = Size,
+		BackgroundColor3 = config.rowBackground,
+		LayoutOrder = LayoutOrder
+	}, config1)
 end
 
-return orchestratorRow
+return OrchestratorRow

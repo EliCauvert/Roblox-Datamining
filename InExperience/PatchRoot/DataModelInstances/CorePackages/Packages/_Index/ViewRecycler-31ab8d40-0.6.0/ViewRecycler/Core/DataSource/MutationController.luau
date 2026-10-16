@@ -1,82 +1,89 @@
-﻿local viewRecycler = script:FindFirstAncestor("ViewRecycler")
-local _ = require(viewRecycler.Core.Types)
-local createEventModule = require(viewRecycler.Internal.createEvent)
+﻿local ViewRecycler = script:FindFirstAncestor("ViewRecycler")
+local _ = require(ViewRecycler.Core.Types)
+local CreateEventModule = require(ViewRecycler.Internal.createEvent)
 
-return function(p1, p2, p3, p4)
-	-- upvalues: createEventModule (ref)
-	local var1 = createEventModule()
-	local var2 = 0
-	local t = {}
-	local var3 = nil
+return function(Callback, Callback1, Callback2, Callback3) --[[ Line: 15 | Named "createMutationController" ]]
+	-- upvalues: CreateEventModule (copy)
+	local EventModule = CreateEventModule()
+	local Count = 0
+	local List = {}
+	local v1 = nil
 	
-	local function flush()
-		-- upvalues: var3 (write), t (write), var1 (ref), p1 (ref)
-		t = {}
-		var3 = nil
-		var1.fire({ changes = t, previousItemCount = var3, itemCount = p1() })
+	local function flush() --[[ Line: 26 ]]
+		-- upvalues: v1 (ref), List (ref), EventModule (copy), Callback (copy)
+		local PreviousItemCount = v1
+		local Changes = List
+		List = {}
+		v1 = nil
+		EventModule.fire({
+			changes = Changes,
+			previousItemCount = PreviousItemCount,
+			itemCount = Callback()
+		})
 	end
 	
-	local function _(p5, p6)
-		-- upvalues: t (write), var3 (write)
-		if #t == 0 then
-			var3 = p6
+	local function _(List1, p1) --[[ Line: 38 | Named "queueChanges" ]]
+		-- upvalues: List (ref), v1 (ref)
+		if #List == 0 then
+			v1 = p1
 		end
-		for i, v in p5 do
-			table.insert(t, v)
+		for _, value in List1 do
+			table.insert(List, value)
 		end
 	end
 	
 	return {
-		subscribe = var1.connect,
-		emit = function(p7, p8)
-			-- upvalues: t (write), var3 (write), var2 (write), flush (ref)
-			local list = { p7 }
+		subscribe = EventModule.connect,
+		emit = function(p2, p3) --[[ Line: 54 ]]
+			-- upvalues: List (ref), v1 (ref), Count (ref), flush (copy)
+			local list = { p2 }
 			
-			if #t == 0 then
-				var3 = p8
+			if #List == 0 then
+				v1 = p3
 			end
-			for i, v in list do
-				table.insert(t, v)
+			for _, value in list do
+				table.insert(List, value)
 			end
-			if var2 == 0 then
+			if Count == 0 then
 				flush()
 			end
 		end,
-		emitMany = function(p9, p10)
-			-- upvalues: t (write), var3 (write), var2 (write), flush (ref)
-			if #t == 0 then
-				var3 = p10
+		emitMany = function(List1, p4) --[[ Line: 47 ]]
+			-- upvalues: List (ref), v1 (ref), Count (ref), flush (copy)
+			if #List == 0 then
+				v1 = p4
 			end
-			for i, v in p9 do
-				table.insert(t, v)
+			for _, value in List1 do
+				table.insert(List, value)
 			end
-			if var2 == 0 then
+			if Count == 0 then
 				flush()
 			end
 		end,
-		transaction = function(p11)
-			-- upvalues: p2 (ref), t (write), var3 (write), var2 (write), p3 (ref), p4 (ref), flush (ref)
-			local var4 = p2()
-			local cloned = table.clone(t)
-			var2 += 1
-			local packed = table.pack(pcall(function()
-				-- upvalues: p11 (ref)
-				p11()
+		transaction = function(Callback) --[[ Line: 61 ]]
+			-- upvalues: Callback1 (copy), List (ref), v1 (ref), Count (ref), Callback2 (copy), Callback3 (copy), flush (copy)
+			local CallbackResult = Callback1()
+			local Copy = table.clone(List)
+			local v2 = v1
+			Count += 1
+			local Packed = table.pack(pcall(function(): boolean --[[ Line: 66 ]]
+				-- upvalues: Callback (copy)
+				Callback()
 				
 				return true
 			end))
-			var2 -= 1
+			Count -= 1
 			
-			if not packed[1] then
-				p3(var4)
-				t = cloned
-				var3 = var3
-				error(packed[2], 0)
+			if not Packed[1] then
+				Callback2(CallbackResult)
+				List = Copy
+				v1 = v2
+				error(Packed[2], 0)
 			end
-			if p4 ~= nil then
-				p4(var4)
+			if Callback3 ~= nil then
+				Callback3(CallbackResult)
 			end
-			if var2 == 0 and #t > 0 then
+			if Count == 0 and #List > 0 then
 				flush()
 			end
 		end

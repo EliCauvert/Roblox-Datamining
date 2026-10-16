@@ -1,93 +1,93 @@
 ﻿return {
-	JoinDictionaries = function(...)
+	JoinDictionaries = function(...) --[[ Line: 10 ]]
 		local t = {}
 		
-		for i_1 = 1, select("#", ...) do
-			for i, v in pairs(select(i_1, ...)) do
-				t[i] = v
+		for i = 1, select("#", ...) do
+			for i1, value in pairs((select(i, ...))) do
+				t[i1] = value
 			end
 		end
 		return t
 	end,
-	JoinLists = function(...)
+	JoinLists = function(...) --[[ Line: 29 ]]
 		local t = {}
 		
-		for i_1 = 1, select("#", ...) do
-			local var1 = select(i_1, ...)
-			local tCount = #t
+		for i = 1, select("#", ...) do
+			local Selected = select(i, ...)
+			local CountT = #t
 			
-			for i = 1, #var1 do
-				t[tCount + i] = var1[i]
+			for i1 = 1, #Selected do
+				t[CountT + i1] = Selected[i1]
 			end
 		end
 		return t
 	end,
-	Set = function(value, p1, p2)
-		local cloned = table.clone(value)
-		cloned[p1] = p2
+	Set = function(Tbl, Key, p1) --[[ Line: 47 ]]
+		local Copy = table.clone(Tbl)
+		Copy[Key] = p1
 		
-		return cloned
+		return Copy
 	end,
-	Append = function(p1, ...)
+	Append = function(p1, ...) --[[ Line: 56 ]]
 		local t = {}
-		local p2Count = #p1
+		local CountP2 = #p1
 		
-		for i = 1, p2Count do
+		for i = 1, CountP2 do
 			t[i] = p1[i]
 		end
-		for i_1 = 1, select("#", ...) do
-			t[p2Count + i_1] = select(i_1, ...)
+		for i1 = 1, select("#", ...) do
+			t[CountP2 + i1] = select(i1, ...)
 		end
 		return t
 	end,
-	RemoveFromDictionary = function(p2, ...)
-		local var2
+	RemoveFromDictionary = function(List, ...) --[[ Line: 74 ]]
 		local t = {}
+		local Flag = nil
 		
-		for i, v in pairs(p2) do
-			var2 = false
+		for i1, value in pairs(List) do
+			Flag = false
 			
-			for i_1 = 1, select("#", ...) do
-				if i ~= select(i_1, ...) then
+			for i = 1, select("#", ...) do
+				if i1 ~= select(i, ...) then
 					continue
 				end
-				var2 = true
+				Flag = true
 				break
 			end
-			if not var2 then
-				t[i] = v
+			if not Flag then
+				t[i1] = value
 			end
 		end
 		return t
 	end,
-	RemoveFromList = function(p3, p4)
-		local t = {}
+	RemoveFromList = function(p2, p3) --[[ Line: 96 ]]
+		local List = {}
 		
-		for i = 1, #p3 do
-			if i ~= p4 then
-				table.insert(t, p3[i])
+		for i = 1, #p2 do
+			if i ~= p3 then
+				table.insert(List, p2[i])
 			end
 		end
-		return t
+		return List
 	end,
-	RemoveRangeFromList = function(p5, p6, p7)
-		local t = {}
+	RemoveRangeFromList = function(p4, p5, p6) --[[ Line: 111 ]]
+		local List = {}
 		
-		for i = 1, #p5 do
-			if i < p6 or p6 + p7 <= i then
-				table.insert(t, p5[i])
+		for i = 1, #p4 do
+			if i < p5 or p5 + p6 <= i then
+				table.insert(List, p4[i])
 			end
 		end
-		return t
+		return List
 	end,
-	RemoveValueFromList = function(p8, p9)
-		local t = {}
+	RemoveValueFromList = function(p7, p8) --[[ Line: 126 ]]
+		local List = {}
 		
-		for i = 1, #p8 do
-			if p8[i] ~= p9 then
-				table.insert(t, p8[i])
+		for i = 1, #p7 do
+			if p7[i] ~= p8 then
+				table.insert(List, p7[i])
 			end
 		end
-		return t
+		return List
 	end
 }

@@ -1,117 +1,109 @@
 ﻿return {
-	writeItemAttributes = function(p1, p2, p3)
+	writeItemAttributes = function(p1, Object, p2) --[[ Line: 58 ]]
 		if not p1 then
 			warn("Impressions schema is nil")
 			
 			return
 		end
-		for i, v in p1.mapping do
-			local var1 = p3[i]
+		for i, value in p1.mapping do
+			local Value = p2[i]
 			
-			if var1 then
-				p2:SetAttribute(v.attribute, var1)
+			if Value then
+				Object:SetAttribute(value.attribute, Value)
 			end
 		end
 	end,
-	buildSchema = function(p4, p5)
-		local t = {}
-		local groupBy = p5.groupBy
+	buildSchema = function(p3, Schema) --[[ Line: 74 ]]
+		local Mapping = {}
+		local GroupBy = Schema.groupBy
 		
-		for i, v in p5.mapping do
-			local var2
-			if groupBy then
-				var2 = table.find(groupBy, v.out) ~= nil
-				var2 = nil
-			else
-				var2 = false
-			end
-			t[v.prop] = {
-				attribute = string.format("%s_%s", p4, v.prop),
-				out = v.out,
-				isGrouping = var2
+		for _, value in Schema.mapping do
+			Mapping[value.prop] = {
+				attribute = string.format("%s_%s", p3, value.prop),
+				out = value.out,
+				isGrouping = if GroupBy then table.find(GroupBy, value.out) ~= nil else false
 			}
 		end
-		if groupBy then
-			for i, v_1 in groupBy do
-				local var3 = false
+		if GroupBy then
+			for _, value1 in GroupBy do
+				local Flag = false
 				
-				for i_2, v_2 in p5.mapping do
-					if v_2.out == v_1 then
-						var3 = true
+				for _, value2 in Schema.mapping do
+					if value2.out == value1 then
+						Flag = true
 					end
-					if var3 then break end
+					if Flag then break end
 				end
-				if not var3 then
-					error(string.format("Impression schema groupBy field '%s' not specified in output mapping", v_1))
+				if not Flag then
+					error(string.format("Impression schema groupBy field '%s' not specified in output mapping", value1))
 				end
 			end
 		end
 		return {
-			mapping = t,
-			enumMap = p5.enumMap,
-			surfaceSpecificAnalyticsMetadata = p5.surfaceSpecificAnalyticsMetadata
+			mapping = Mapping,
+			enumMap = Schema.enumMap,
+			surfaceSpecificAnalyticsMetadata = Schema.surfaceSpecificAnalyticsMetadata
 		}
 	end,
-	packEvents = function(p6, p7)
-		if not p6 then
+	packEvents = function(Schema, List) --[[ Line: 116 ]]
+		if not Schema then
 			warn("Impressions schema nil")
 			
 			return
 		end
 		local t = {}
-		local t_1 = {}
+		local List1 = {}
 		
-		for i, v in p7 do
-			local attributes = v:GetAttributes()
-			local var4 = ""
+		for i, value in List do
+			local Attributes = value:GetAttributes()
+			local Text = ""
 			
-			for i_1, v_1 in p6.mapping do
-				if v_1.isGrouping then
-					var4 ..= attributes[v_1.attribute] or "_"
+			for _, value1 in Schema.mapping do
+				if value1.isGrouping then
+					Text ..= Attributes[value1.attribute] or "_"
 				end
 			end
-			local var5 = t[var4] or {}
-			t[var4] = var5
+			local Entry = t[Text] or {}
+			t[Text] = Entry
 			
-			for v_1, v_2 in p6.mapping do
-				local attribute = attributes[v_2.attribute]
-				local out = v_2.out
+			for _, value2 in Schema.mapping do
+				local Attribute = Attributes[value2.attribute]
+				local Out = value2.out
 				
-				if v_2.isGrouping then
-					var5[out] = attribute
+				if value2.isGrouping then
+					Entry[Out] = Attribute
 				else
-					local var6 = var5[out] or {}
-					var5[out] = var6
-					var6[i] = attribute or ""
+					local Entry1 = Entry[Out] or {}
+					Entry[Out] = Entry1
+					Entry1[i] = Attribute or ""
 					
-					if p6.enumMap and p6.enumMap[out] then
-						var6[i] = p6.enumMap[out][attribute]
+					if Schema.enumMap and Schema.enumMap[Out] then
+						Entry1[i] = Schema.enumMap[Out][Attribute]
 					end
 				end
 			end
 		end
-		local t_2, out, var7
-		for i_1, v_1 in t do
-			t_2 = {}
-			table.insert(t_1, t_2)
+		for _, value3 in t do
+			local t1 = {}
+			table.insert(List1, t1)
 			
-			for i_2, v_2 in p6.mapping do
-				out = v_2.out
-				var7 = v_1[out]
+			for _, value4 in Schema.mapping do
+				local Out = value4.out
+				local Entry = value3[Out]
 				
-				if typeof(var7) ~= "table" then
-					t_2[out] = var7
+				if typeof(Entry) ~= "table" then
+					t1[Out] = Entry
 					continue
 				end
-				for i_3, v_3 in var7 do
-					if t_2[out] then
-						t_2[out] ..= "," .. tostring(v_3)
+				for _, value5 in Entry do
+					if t1[Out] then
+						t1[Out] ..= "," .. tostring(value5)
 					else
-						t_2[out] = tostring(v_3)
+						t1[Out] = tostring(value5)
 					end
 				end
 			end
 		end
-		return t_1
+		return List1
 	end
 }

@@ -1,10 +1,10 @@
-﻿local expChatGlobalTabDefaultExperimentation = require(script:FindFirstAncestor("ExpChat").Parent.SocialExperiments).ExpChatGlobalTabDefaultExperimentation
-local var1 = nil
+﻿local ExpChatGlobalTabDefaultExperimentation = require(script:FindFirstAncestor("ExpChat").Parent.SocialExperiments).ExpChatGlobalTabDefaultExperimentation
+local IsGlobalMessagePrefixEnabled = nil
 
-return function()
-	-- upvalues: var1 (write), expChatGlobalTabDefaultExperimentation (ref)
-	if var1 == nil then
-		var1 = expChatGlobalTabDefaultExperimentation.getIsGlobalMessagePrefixEnabled()
+return function() --[[ Line: 21 | Named "isGlobalMessagePrefixEnabled" ]]
+	-- upvalues: IsGlobalMessagePrefixEnabled (ref), ExpChatGlobalTabDefaultExperimentation (copy)
+	if IsGlobalMessagePrefixEnabled == nil then
+		IsGlobalMessagePrefixEnabled = ExpChatGlobalTabDefaultExperimentation.getIsGlobalMessagePrefixEnabled()
 	end
-	return var1
+	return IsGlobalMessagePrefixEnabled
 end

@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent.Parent._Workspace.GenericAbuseReporting.GenericAbuseReporting.Enums.AbuseEntrypoint)
+﻿return (require(script.Parent.Parent.Parent.Parent._Workspace.GenericAbuseReporting.GenericAbuseReporting.Enums.AbuseEntrypoint))

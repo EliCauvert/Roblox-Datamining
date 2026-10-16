@@ -1,7 +1,7 @@
-﻿local reactModule = require(script:FindFirstAncestor("AppChat").Parent.React)
-local unreadMessagesDispatchContextModule = require(script.Parent.UnreadMessagesDispatchContext)
+﻿local ReactModule = require(script:FindFirstAncestor("AppChat").Parent.React)
+local UnreadMessagesDispatchContextModule = require(script.Parent.UnreadMessagesDispatchContext)
 
-return function()
-	-- upvalues: reactModule (ref), unreadMessagesDispatchContextModule (ref)
-	return reactModule.useContext(unreadMessagesDispatchContextModule)
+return function() --[[ Line: 7 | Named "useUnreadMessagesDispatch" ]]
+	-- upvalues: ReactModule (copy), UnreadMessagesDispatchContextModule (copy)
+	return ReactModule.useContext(UnreadMessagesDispatchContextModule)
 end

@@ -1,299 +1,294 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local appCommonLibModule = require(parent_1.AppCommonLib)
-local capturesCommonModule = require(parent_1.CapturesCommon)
-local reactModule = require(parent_1.React)
-local robloxAppHooksModule = require(parent_1.RobloxAppHooks)
-local UIBloxModule = require(parent_1.UIBlox)
-local userGameSettingsService = UserSettings():GetService("UserGameSettings")
-local memoize = appCommonLibModule.memoize
-local useScreenSize = robloxAppHooksModule.useScreenSize
-local useStyle = UIBloxModule.Core.Style.useStyle
-local captureTypeModule = require(parent.Enums.CaptureType)
-local getContentFromObject = capturesCommonModule.Utils.getContentFromObject
-local getCaptureSizeModule = require(parent.Utils.getCaptureSize)
-local mediaPlayer = capturesCommonModule.Components.MediaPlayer
-local _ = require(parent.Types)
-local fFlagUseMediaPlayerInCarousel = require(parent_1.SharedFlags).FFlagUseMediaPlayerInCarousel
-local fFlagUseRbxstorageInGalleryModule = require(parent.Flags.FFlagUseRbxstorageInGallery)
-local fFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
-local var1 = memoize(function(p1, p2)
-	local var2 = p1.X / p1.Y
-	local x = p2.X
-	local floored = math.floor(x / var2)
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local CapturesCommonModule = require(Parent1.CapturesCommon)
+local ReactModule = require(Parent1.React)
+local UserGameSettings = UserSettings():GetService("UserGameSettings")
+local UseScreenSizeFunction = require(Parent1.RobloxAppHooks).useScreenSize
+local UseStyleFunction = require(Parent1.UIBlox).Core.Style.useStyle
+local CaptureTypeModule = require(Parent.Enums.CaptureType)
+local GetContentFromObjectFunction = CapturesCommonModule.Utils.getContentFromObject
+local GetCaptureSizeModule = require(Parent.Utils.getCaptureSize)
+local MediaPlayer = CapturesCommonModule.Components.MediaPlayer
+local _ = require(Parent.Types)
+local FFlagUseMediaPlayerInCarousel = require(Parent1.SharedFlags).FFlagUseMediaPlayerInCarousel
+local FFlagUseRbxstorageInGalleryModule = require(Parent.Flags.FFlagUseRbxstorageInGallery)
+local FFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(Parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
+local MemoizeResult = require(Parent1.AppCommonLib).memoize(function(Vector, Vector1): Vector2 --[[ Line: 33 ]]
+	local XRatio = Vector.X / Vector.Y
+	local X = Vector1.X
+	local Floored = math.floor(X / XRatio)
 	
-	if p2.Y < floored then
-		floored = p2.Y
-		x = math.floor(floored * var2)
+	if Vector1.Y < Floored then
+		Floored = Vector1.Y
+		X = math.floor(Floored * XRatio)
 	end
-	return Vector2.new(x, floored)
+	return Vector2.new(X, Floored)
 end)
 
-local function _(p1)
-	return UDim2.fromScale(p1, p1)
+local function _(XScale): UDim2 --[[ Line: 47 | Named "getDeleteTransitionSize" ]]
+	return UDim2.fromScale(XScale, XScale)
 end
 
-local function getDeleteTransitionTransparency(p1)
-	-- upvalues: userGameSettingsService (ref)
-	return if userGameSettingsService.ReducedMotion then p1 else 1
+local function getDeleteTransitionTransparency(p1) --[[ Line: 51 ]]
+	-- upvalues: UserGameSettings (copy)
+	return if UserGameSettings.ReducedMotion then p1 else 1
 end
 
-local function getCapturesItemSize(p1)
-	-- upvalues: userGameSettingsService (ref)
-	return if userGameSettingsService.ReducedMotion then UDim2.fromScale(1, 1) else UDim2.fromScale(p1, p1)
+local function getCapturesItemSize(XScale): UDim2 --[[ Line: 55 ]]
+	-- upvalues: UserGameSettings (copy)
+	return if UserGameSettings.ReducedMotion then UDim2.fromScale(1, 1) else UDim2.fromScale(XScale, XScale)
 end
 
-local _ = function(p1, p2)
-	local var2 = p1.X / p1.Y
-	local var3 = p2.X / var2
+local _ = function(Vector, Vector1): UDim2 --[[ Line: 59 | Named "getFullScreenSize" ]]
+	local XRatio = Vector.X / Vector.Y
+	local XRatio1 = Vector1.X / XRatio
 	
-	return if var3 <= p2.Y then UDim2.fromOffset(p2.X, var3) else UDim2.fromOffset(p2.Y * var2, p2.Y)
+	return if XRatio1 <= Vector1.Y then UDim2.fromOffset(Vector1.X, XRatio1) else UDim2.fromOffset(Vector1.Y * XRatio, Vector1.Y)
 end
 
-return function(p1)
-	-- upvalues: useStyle (ref), reactModule (ref), useScreenSize (ref), fFlagEnableCapturesGalleryRetrievalCoreScriptModule (ref), captureTypeModule (ref), getCaptureSizeModule (ref), var1 (ref), userGameSettingsService (ref), getContentFromObject (ref), getCapturesItemSize (ref), fFlagUseMediaPlayerInCarousel (ref), mediaPlayer (ref), fFlagUseRbxstorageInGalleryModule (ref), getDeleteTransitionTransparency (ref)
-	local var2
-	local var3 = useStyle()
-	local itemSize = p1.itemSize
-	local var4, var5 = reactModule.useBinding(0)
-	local var6, var7 = reactModule.useState(Vector2.new(0, 0))
-	local var8 = useScreenSize()
-	local var9 = reactModule.useRef(nil)
-	local var10 = reactModule.useRef(nil)
-	local var11, var12 = reactModule.useState(false)
-	local imagePadding = p1.imagePadding
-	local itemIndex = p1.itemIndex
-	local var13 = reactModule.useCallback(function(p2)
-		-- upvalues: var5 (ref)
-		var5(p2.AbsolutePosition.X)
-	end, { var5 })
-	reactModule.useEffect(function()
-		-- upvalues: var10 (ref)
-		return function()
-			-- upvalues: var10 (copy)
-			if var10.current then
-				var10.current.Video = ""
+return function(p1) --[[ Line: 85 ]]
+	-- upvalues: UseStyleFunction (copy), ReactModule (copy), UseScreenSizeFunction (copy), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CaptureTypeModule (copy), GetCaptureSizeModule (copy), MemoizeResult (copy), UserGameSettings (copy), GetContentFromObjectFunction (copy), getCapturesItemSize (copy), FFlagUseMediaPlayerInCarousel (copy), MediaPlayer (copy), FFlagUseRbxstorageInGalleryModule (copy), getDeleteTransitionTransparency (copy)
+	local UseStyleResult = UseStyleFunction()
+	local ItemSize = p1.itemSize
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.new(0, 0))
+	local UseScreenSizeResult = UseScreenSizeFunction()
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
+	local ImagePadding = p1.imagePadding
+	local ItemIndex = p1.itemIndex
+	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 99 ]]
+		-- upvalues: UseBindingResult2 (copy)
+		UseBindingResult2(Frame.AbsolutePosition.X)
+	end, { UseBindingResult2 })
+	ReactModule.useEffect(function() --[[ Line: 103 ]]
+		-- upvalues: UseRefResult1 (copy)
+		return function() --[[ Line: 104 ]]
+			-- upvalues: UseRefResult1 (upval)
+			if UseRefResult1.current then
+				UseRefResult1.current.Video = ""
 			end
 		end
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: fFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), p1 (ref), var7 (ref), itemSize (ref), captureTypeModule (copy), getCaptureSizeModule (copy)
-		if fFlagEnableCapturesGalleryRetrievalCoreScriptModule then
+	ReactModule.useEffect(function() --[[ Line: 111 ]]
+		-- upvalues: FFlagEnableCapturesGalleryRetrievalCoreScriptModule (upval), p1 (copy), UseStateResult2 (copy), ItemSize (copy), CaptureTypeModule (upval), GetCaptureSizeModule (upval)
+		if FFlagEnableCapturesGalleryRetrievalCoreScriptModule then
 			if p1.capture.CaptureType == Enum.CaptureType.Screenshot then
-				var7(itemSize)
+				UseStateResult2(ItemSize)
 			end
 			return
-		elseif p1.capture.type == captureTypeModule.Video then
-			return
-		end
-		task.spawn(function()
-			-- upvalues: getCaptureSizeModule (copy), p1 (copy), var7 (copy), itemSize (copy)
-			local var14 = getCaptureSizeModule(p1.capture.contentId)
-			
-			if var14 then
-				var7(var14)
+		elseif p1.capture.type ~= CaptureTypeModule.Video then
+			task.spawn(function() --[[ Line: 123 ]]
+				-- upvalues: GetCaptureSizeModule (upval), p1 (upval), UseStateResult2 (upval), ItemSize (upval)
+				local CaptureSizeModule = GetCaptureSizeModule(p1.capture.contentId)
 				
-				return
-			end
-			var7(itemSize)
-		end)
-	end, { itemSize, p1.capture })
-	local var14 = reactModule.useCallback(function(p2)
-		-- upvalues: var10 (ref), var7 (ref)
-		var10.current = p2
-		local resolution = p2.Resolution
-		var7(Vector2.new(resolution.X, resolution.Y))
-	end, {})
-	local var15 = reactModule.useCallback(function(p2)
-		-- upvalues: itemSize (ref), var8 (ref)
-		local var16 = var8.X / 2
-		local var17 = p2 + itemSize.X / 2
-		local absValue = math.abs(var16 - var17)
-		
-		return math.sign(var16 - var17), math.min(1, (if absValue < 25 then 0 else absValue - 25) / (itemSize.X - 25))
-	end, { itemSize, itemIndex, var8 })
-	local var16 = reactModule.useCallback(function(p2)
-		-- upvalues: var15 (ref), var1 (copy), var6 (ref), itemSize (ref), p1 (ref)
-		local _, var17 = var15(p2)
-		local var18 = var1(var6, itemSize)
-		
-		if var17 == 0 then
-			return UDim2.fromOffset(var18.X, var18.Y)
+				if CaptureSizeModule then
+					UseStateResult2(CaptureSizeModule)
+					
+					return
+				else
+					UseStateResult2(ItemSize)
+				end
+			end)
+			
+			return
+		else
 		end
-		local var19 = 1 - var17 * (1 - p1.unfocusedSizeMultiplier)
+	end, { ItemSize, p1.capture })
+	local UseResult1 = ReactModule.useCallback(function(Current) --[[ Line: 134 ]]
+		-- upvalues: UseRefResult1 (copy), UseStateResult2 (copy)
+		UseRefResult1.current = Current
+		local Resolution = Current.Resolution
+		UseStateResult2(Vector2.new(Resolution.X, Resolution.Y))
+	end, {})
+	local UseResult2 = ReactModule.useCallback(function(p2) --[[ Line: 140 ]]
+		-- upvalues: ItemSize (copy), UseScreenSizeResult (copy)
+		local XRatio = UseScreenSizeResult.X / 2
+		local NewX = p2 + ItemSize.X / 2
+		local Magnitude = math.abs(XRatio - NewX)
 		
-		return UDim2.fromOffset(math.floor(var18.X * var19), math.floor(var18.Y * var19))
-	end, { var6, itemSize, p1.unfocusedSizeMultiplier, var15 })
-	local var17 = reactModule.useCallback(function(p2)
-		-- upvalues: var15 (ref), var16 (ref), itemSize (ref), imagePadding (ref)
-		local var18, var19 = var15(p2)
+		return math.sign(XRatio - NewX), (math.min(1, (if Magnitude < 25 then 0 else Magnitude - 25) / (ItemSize.X - 25)))
+	end, { ItemSize, ItemIndex, UseScreenSizeResult })
+	local UseResult3 = ReactModule.useCallback(function(p2): UDim2 --[[ Line: 158 ]]
+		-- upvalues: UseResult2 (copy), MemoizeResult (upval), UseStateResult (copy), ItemSize (copy), p1 (copy)
+		local _, UseResultResult2 = UseResult2(p2)
+		local MemoizeResultResult = MemoizeResult(UseStateResult, ItemSize)
 		
-		return if var19 == 0 then UDim2.fromScale(0.5, 0.5) else UDim2.new(0.5, (itemSize.X / 2 - imagePadding - var16(p2).X.Offset / 2) * var19 * var18, 0.5, 0)
+		if UseResultResult2 == 0 then
+			return UDim2.fromOffset(MemoizeResultResult.X, MemoizeResultResult.Y)
+		else
+			local v1 = 1 - UseResultResult2 * (1 - p1.unfocusedSizeMultiplier)
+			
+			return UDim2.fromOffset(math.floor(MemoizeResultResult.X * v1), (math.floor(MemoizeResultResult.Y * v1)))
+		end
 	end, {
-		var6, imagePadding, itemSize, var8, var15, var16
+		UseStateResult,
+		ItemSize,
+		p1.unfocusedSizeMultiplier,
+		UseResult2
 	})
-	local transparency = var3.Theme.Overlay.Transparency
-	local var18 = reactModule.useCallback(function(p2)
-		-- upvalues: var15 (ref), transparency (ref)
-		local _, var19 = var15(p2)
+	local UseResult4 = ReactModule.useCallback(function(p2): UDim2 --[[ Line: 177 ]]
+		-- upvalues: UseResult2 (copy), UseResult3 (copy), ItemSize (copy), ImagePadding (copy)
+		local UseResultResult, UseResultResult2 = UseResult2(p2)
 		
-		return 1 - (1 - transparency) * var19
-	end, { transparency, var15 })
-	local var19 = reactModule.useCallback(function(p2)
-		-- upvalues: userGameSettingsService (copy), var18 (ref)
-		local absoluteXPosition = p2.absoluteXPosition
-		local fadeOutBinding = p2.fadeOutBinding
+		return if UseResultResult2 == 0 then UDim2.fromScale(0.5, 0.5) else UDim2.new(0.5, (ItemSize.X / 2 - ImagePadding - UseResult3(p2).X.Offset / 2) * UseResultResult2 * UseResultResult, 0.5, 0)
+	end, {
+		UseStateResult, ImagePadding, ItemSize, UseScreenSizeResult, UseResult2,
+		UseResult3
+	})
+	local Transparency = UseStyleResult.Theme.Overlay.Transparency
+	local UseResult5 = ReactModule.useCallback(function(p2): number --[[ Line: 198 ]]
+		-- upvalues: UseResult2 (copy), Transparency (copy)
+		local _, UseResultResult2 = UseResult2(p2)
 		
-		return if userGameSettingsService.ReducedMotion and fadeOutBinding then 1 elseif fadeOutBinding then math.min(var18(absoluteXPosition), fadeOutBinding) else var18(absoluteXPosition)
-	end, { var18 })
-	local var20 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref), var12 (ref), var11 (ref)
+		return 1 - (1 - Transparency) * UseResultResult2
+	end, { Transparency, UseResult2 })
+	local UseResult6 = ReactModule.useCallback(function(p2) --[[ Line: 203 ]]
+		-- upvalues: UserGameSettings (upval), UseResult5 (copy)
+		local AbsoluteXPosition = p2.absoluteXPosition
+		local FadeOutBinding: number = p2.fadeOutBinding
+		
+		return if UserGameSettings.ReducedMotion and FadeOutBinding then 1 elseif FadeOutBinding then math.min(UseResult5(AbsoluteXPosition), FadeOutBinding) else UseResult5(AbsoluteXPosition)
+	end, { UseResult5 })
+	local UseResult7 = ReactModule.useCallback(function() --[[ Line: 217 ]]
+		-- upvalues: p1 (copy), UseStateResult2_1 (copy), UseStateResult1 (copy)
 		if p1.onExpandCallback then
 			p1.onExpandCallback(p1.itemIndex)
 		end
-		var12(not var11)
-	end, { var11, p1.onExpandCallback, p1.itemIndex })
-	local var21 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref)
+		UseStateResult2_1(not UseStateResult1)
+	end, { UseStateResult1, p1.onExpandCallback, p1.itemIndex })
+	local UseResult8 = ReactModule.useCallback(function() --[[ Line: 224 ]]
+		-- upvalues: p1 (copy)
 		if p1.onMuteCallback then
 			p1.onMuteCallback()
 		end
 	end, { p1.onMuteCallback })
-	local var22 = reactModule.useCallback(function()
-		-- upvalues: reactModule (copy)
-		return reactModule.createElement("Frame", { Size = UDim2.fromScale(1, 1) })
+	local UseResult9 = ReactModule.useCallback(function() --[[ Line: 230 ]]
+		-- upvalues: ReactModule (upval)
+		return (ReactModule.createElement("Frame", { Size = UDim2.fromScale(1, 1) }))
 	end, {})
-	
-	if fFlagEnableCapturesGalleryRetrievalCoreScriptModule then
-		var2 = p1.capture.CaptureType == Enum.CaptureType.Screenshot
-		var2 = nil
-	else
-		var2 = p1.capture.type == captureTypeModule.Screenshot
-	end
-	local var23
-	if fFlagEnableCapturesGalleryRetrievalCoreScriptModule then
-		var23 = p1.capture.CaptureType == Enum.CaptureType.Video
-		var23 = nil
-	else
-		var23 = p1.capture.type == captureTypeModule.Video
-	end
-	local var24
-	local var25 = if fFlagEnableCapturesGalleryRetrievalCoreScriptModule then getContentFromObject(p1.capture) else p1.capture.contentId
-	local var26 = if fFlagEnableCapturesGalleryRetrievalCoreScriptModule then p1.capture else p1.capture.videoCapture
-	local createElement = reactModule.createElement
-	local var27 = "Frame"
-	local t = {
+	local IsCaptureTypeMatch: boolean = if FFlagEnableCapturesGalleryRetrievalCoreScriptModule then p1.capture.CaptureType == Enum.CaptureType.Screenshot else p1.capture.type == CaptureTypeModule.Screenshot
+	local IsCaptureTypeMatch1: boolean = if FFlagEnableCapturesGalleryRetrievalCoreScriptModule then p1.capture.CaptureType == Enum.CaptureType.Video else p1.capture.type == CaptureTypeModule.Video
+	local ContentFromObject = if FFlagEnableCapturesGalleryRetrievalCoreScriptModule then GetContentFromObjectFunction(p1.capture) else p1.capture.contentId
+	local Capture = if FFlagEnableCapturesGalleryRetrievalCoreScriptModule then p1.capture else p1.capture.videoCapture
+	local CreateElementFunction = ReactModule.createElement
+	local v1 = "Frame"
+	local config = {
 		AnchorPoint = Vector2.new(0.5, 0.5),
 		BackgroundTransparency = 1,
 		Position = UDim2.fromScale(0.5, 0.5),
 		Size = UDim2.fromScale(1, 1),
-		[reactModule.Change.AbsolutePosition] = var13
+		[ReactModule.Change.AbsolutePosition] = UseResult
 	}
-	local t_1 = {
-		FullScreenOffset = reactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, if var11 then 16 else 0) })
+	local config1 = {
+		FullScreenOffset = ReactModule.createElement("UIPadding", {
+			PaddingTop = UDim.new(0, if UseStateResult1 then 16 else 0)
+		})
 	}
-	local createElement_1 = reactModule.createElement
-	local var28 = "Frame"
-	local t_2 = {
+	local CreateElementFunction1 = ReactModule.createElement
+	local v2 = "Frame"
+	local config2 = {
 		BackgroundTransparency = 1,
 		AnchorPoint = Vector2.new(0.5, 0.5),
-		Position = if var11 then UDim2.fromScale(0.5, 0.5) else var4:map(var17)
+		Position = if UseStateResult1 then UDim2.fromScale(0.5, 0.5) else UseBindingResult:map(UseResult4)
 	}
+	local _UDim2 = nil
 	
-	if var11 then
-		local var29 = var6.X / var6.Y
-		local var30 = var8.X / var29
-		var24 = if var30 <= var8.Y then UDim2.fromOffset(var8.X, var30) else UDim2.fromOffset(var8.Y * var29, var8.Y)
+	if UseStateResult1 then
+		local XRatio = UseStateResult.X / UseStateResult.Y
+		local XRatio1 = UseScreenSizeResult.X / XRatio
+		_UDim2 = if XRatio1 <= UseScreenSizeResult.Y then UDim2.fromOffset(UseScreenSizeResult.X, XRatio1) else UDim2.fromOffset(UseScreenSizeResult.Y * XRatio, UseScreenSizeResult.Y)
 	else
-		var24 = var4:map(var16)
+		_UDim2 = UseBindingResult:map(UseResult3)
 	end
-	t_2.Size = var24
-	t_1.CaptureContainer = createElement_1(var28, t_2, {
-		CaptureImage = if var2 then reactModule.createElement("ImageLabel", {
+	config2.Size = _UDim2
+	config1.CaptureContainer = CreateElementFunction1(v2, config2, {
+		CaptureImage = if IsCaptureTypeMatch then ReactModule.createElement("ImageLabel", {
 			BorderSizePixel = 0,
 			ZIndex = 1,
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			BackgroundColor3 = var3.Theme.BackgroundContrast.Color,
-			BackgroundTransparency = if fFlagEnableCapturesGalleryRetrievalCoreScriptModule then 0 else 1,
-			Image = if fFlagEnableCapturesGalleryRetrievalCoreScriptModule then nil else var25,
-			ImageContent = if fFlagEnableCapturesGalleryRetrievalCoreScriptModule then var25 else nil,
+			BackgroundColor3 = UseStyleResult.Theme.BackgroundContrast.Color,
+			BackgroundTransparency = if FFlagEnableCapturesGalleryRetrievalCoreScriptModule then 0 else 1,
+			Image = if FFlagEnableCapturesGalleryRetrievalCoreScriptModule then nil else ContentFromObject,
+			ImageContent = if FFlagEnableCapturesGalleryRetrievalCoreScriptModule then ContentFromObject else nil,
 			Position = UDim2.fromScale(0.5, 0.5),
-			ScaleType = if fFlagEnableCapturesGalleryRetrievalCoreScriptModule then Enum.ScaleType.Fit else Enum.ScaleType.Crop,
+			ScaleType = if FFlagEnableCapturesGalleryRetrievalCoreScriptModule then Enum.ScaleType.Fit else Enum.ScaleType.Crop,
 			Size = if p1.fadeOutBinding then p1.fadeOutBinding:map(getCapturesItemSize) else UDim2.fromScale(1, 1),
-			Visible = var6 ~= Vector2.new(0, 0)
+			Visible = UseStateResult ~= Vector2.new(0, 0)
 		}) else nil,
-		CaptureVideo = if var23 then if fFlagUseMediaPlayerInCarousel then reactModule.createElement(mediaPlayer, {
+		CaptureVideo = if IsCaptureTypeMatch1 then if FFlagUseMediaPlayerInCarousel then ReactModule.createElement(MediaPlayer, {
 			BorderSizePixel = 0,
 			Looped = true,
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			BackgroundColor3 = var3.Theme.BackgroundContrast.Color,
-			BackgroundTransparency = if fFlagEnableCapturesGalleryRetrievalCoreScriptModule then 0 else 1,
+			BackgroundColor3 = UseStyleResult.Theme.BackgroundContrast.Color,
+			BackgroundTransparency = if FFlagEnableCapturesGalleryRetrievalCoreScriptModule then 0 else 1,
 			isOverlayDisabled = not p1.isSelected or p1.isDisabled,
-			isTimeHidden = var8.Y < var8.X and (var6.X < var6.Y and not var11),
-			onExpandCallback = var20,
-			onMuteCallback = var21,
-			onLoaded = var14,
-			Playing = p1.isSelected and var4:map(function(p2)
-				-- upvalues: var15 (ref)
-				local _, var31 = var15(p2)
+			isTimeHidden = UseScreenSizeResult.Y < UseScreenSizeResult.X and UseStateResult.X < UseStateResult.Y and not UseStateResult1,
+			onExpandCallback = UseResult7,
+			onMuteCallback = UseResult8,
+			onLoaded = UseResult1,
+			Playing = p1.isSelected and UseBindingResult:map(function(p2): boolean --[[ Line: 305 ]]
+				-- upvalues: UseResult2 (copy)
+				local _, UseResultResult2 = UseResult2(p2)
 				
-				return var31 < 0.5
+				return UseResultResult2 < 0.5
 			end),
 			Position = UDim2.fromScale(0.5, 0.5),
-			renderOnFailed = var22,
+			renderOnFailed = UseResult9,
 			Size = if p1.fadeOutBinding then p1.fadeOutBinding:map(getCapturesItemSize) else UDim2.fromScale(1, 1),
-			VideoContent = getContentFromObject(var26),
-			videoRef = var9,
-			ZIndex = if var11 then 5 else 1
-		}) else reactModule.createElement("VideoFrame", {
+			VideoContent = GetContentFromObjectFunction(Capture),
+			videoRef = UseRefResult,
+			ZIndex = if UseStateResult1 then 5 else 1
+		}) else ReactModule.createElement("VideoFrame", {
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			BackgroundTransparency = 1,
-			Playing = var4:map(function(p2)
-				-- upvalues: var15 (ref)
-				local _, var31 = var15(p2)
+			Playing = UseBindingResult:map(function(p2): boolean --[[ Line: 321 ]]
+				-- upvalues: UseResult2 (copy)
+				local _, UseResultResult2 = UseResult2(p2)
 				
-				return var31 < 0.5
+				return UseResultResult2 < 0.5
 			end),
 			Position = UDim2.fromScale(0.5, 0.5),
 			Looped = true,
 			Size = if p1.fadeOutBinding then p1.fadeOutBinding:map(getCapturesItemSize) else UDim2.fromScale(1, 1),
-			Video = if not fFlagUseRbxstorageInGalleryModule then p1.capture.contentId else nil,
-			VideoContent = if fFlagUseRbxstorageInGalleryModule then getContentFromObject(p1.capture.videoCapture) else nil,
+			Video = if FFlagUseRbxstorageInGalleryModule then nil else p1.capture.contentId,
+			VideoContent = if FFlagUseRbxstorageInGalleryModule then GetContentFromObjectFunction(p1.capture.videoCapture) else nil,
 			Volume = 0,
 			ZIndex = 1,
-			[reactModule.Event.Loaded] = var14
+			[ReactModule.Event.Loaded] = UseResult1
 		}) else nil,
-		Overlay = reactModule.createElement("Frame", {
+		Overlay = ReactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			ZIndex = 2,
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			BackgroundColor3 = var3.Theme.Overlay.Color,
-			BackgroundTransparency = reactModule.joinBindings({
-				absoluteXPosition = var4,
+			BackgroundColor3 = UseStyleResult.Theme.Overlay.Color,
+			BackgroundTransparency = ReactModule.joinBindings({
+				absoluteXPosition = UseBindingResult,
 				fadeOutBinding = p1.fadeOutBinding
-			}):map(var19),
+			}):map(UseResult6),
 			Position = UDim2.fromScale(0.5, 0.5),
 			Size = if p1.fadeOutBinding then p1.fadeOutBinding:map(getCapturesItemSize) else UDim2.fromScale(1, 1)
 		}),
-		TransitionOverlay = reactModule.createElement("Frame", {
+		TransitionOverlay = ReactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			ZIndex = 3,
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			BackgroundColor3 = var3.Theme.BackgroundContrast.Color,
+			BackgroundColor3 = UseStyleResult.Theme.BackgroundContrast.Color,
 			BackgroundTransparency = if p1.transitionBinding then p1.transitionBinding:map(getDeleteTransitionTransparency) else 1,
 			Position = UDim2.fromScale(0.5, 0.5),
 			Size = UDim2.fromScale(1, 1)
 		}),
-		FullScreenBackground = if fFlagUseMediaPlayerInCarousel and var11 then reactModule.createElement("Frame", {
+		FullScreenBackground = if FFlagUseMediaPlayerInCarousel and UseStateResult1 then ReactModule.createElement("Frame", {
 			BackgroundTransparency = 0,
 			BorderSizePixel = 0,
 			ZIndex = 4,
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			BackgroundColor3 = var3.Theme.BackgroundContrast.Color,
+			BackgroundColor3 = UseStyleResult.Theme.BackgroundContrast.Color,
 			Position = UDim2.fromScale(0.5, 0.5),
-			Size = UDim2.fromOffset(var8.X, var8.Y)
+			Size = UDim2.fromOffset(UseScreenSizeResult.X, UseScreenSizeResult.Y)
 		}) else nil
 	})
 	
-	return createElement(var27, t, t_1)
+	return CreateElementFunction(v1, config, config1)
 end

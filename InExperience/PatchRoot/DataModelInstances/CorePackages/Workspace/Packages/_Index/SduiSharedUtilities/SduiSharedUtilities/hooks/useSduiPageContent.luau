@@ -1,82 +1,81 @@
-﻿local sduiSharedUtilities = script:FindFirstAncestor("SduiSharedUtilities")
-local parent = sduiSharedUtilities.Parent
-local reactModule = require(parent.React)
-local appPageShellModule = require(parent.AppPageShell)
-local _ = require(parent.AppCommonLib)
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local pageContentMode = appPageShellModule.PageContentMode
-local pageContext = appPageShellModule.PageContext
-local getSduiComponentWrapper = sduiCoreSystemModule.getSduiComponentWrapper
-local fFlagAppPageShellScrollToTopFocus = require(parent.SharedFlags).FFlagAppPageShellScrollToTopFocus
-local fFlagLuaAppsDefaultSelection = require(parent.SharedFlags).FFlagLuaAppsDefaultSelection
-local fFlagSduiPageCanvasCollectionLayout = require(parent.SharedFlags).FFlagSduiPageCanvasCollectionLayout
-local useComponentConfigModule = require(sduiSharedUtilities.hooks.useComponentConfig)
-local useComponentLifecycleTimingModule = require(sduiSharedUtilities.hooks.useComponentLifecycleTiming)
-local useMissingRootWarningModule = require(sduiSharedUtilities.hooks.useMissingRootWarning)
-local fFlagDataHydrationAccountReset = require(parent.SharedFlags).FFlagDataHydrationAccountReset
-local _ = require(sduiSharedUtilities.SduiLoadTimer)
+﻿local SduiSharedUtilities = script:FindFirstAncestor("SduiSharedUtilities")
+local Parent = SduiSharedUtilities.Parent
+local ReactModule = require(Parent.React)
+local AppPageShellModule = require(Parent.AppPageShell)
+local _ = require(Parent.AppCommonLib)
+local PageContentMode = AppPageShellModule.PageContentMode
+local PageContext = AppPageShellModule.PageContext
+local GetSduiComponentWrapperFunction = require(Parent.SduiCoreSystem).getSduiComponentWrapper
+local FFlagAppPageShellScrollToTopFocus = require(Parent.SharedFlags).FFlagAppPageShellScrollToTopFocus
+local FFlagLuaAppsDefaultSelection = require(Parent.SharedFlags).FFlagLuaAppsDefaultSelection
+local FFlagSduiPageCanvasCollectionLayout = require(Parent.SharedFlags).FFlagSduiPageCanvasCollectionLayout
+local UseComponentConfigModule = require(SduiSharedUtilities.hooks.useComponentConfig)
+local UseComponentLifecycleTimingModule = require(SduiSharedUtilities.hooks.useComponentLifecycleTiming)
+local UseMissingRootWarningModule = require(SduiSharedUtilities.hooks.useMissingRootWarning)
+local FFlagDataHydrationAccountReset = require(Parent.SharedFlags).FFlagDataHydrationAccountReset
+local _ = require(SduiSharedUtilities.SduiLoadTimer)
 
-local function SduiPageWholeContent(p1)
-	-- upvalues: reactModule (ref), pageContext (ref), fFlagAppPageShellScrollToTopFocus (ref), fFlagLuaAppsDefaultSelection (ref), fFlagSduiPageCanvasCollectionLayout (ref), getSduiComponentWrapper (ref)
-	local var1 = reactModule.useContext(pageContext)
-	local verticalScrollingFrameRef = var1.verticalScrollingFrameRef
+local function SduiPageWholeContent(p1) --[[ Line: 36 ]]
+	-- upvalues: ReactModule (copy), PageContext (copy), FFlagAppPageShellScrollToTopFocus (copy), FFlagLuaAppsDefaultSelection (copy), FFlagSduiPageCanvasCollectionLayout (copy), GetSduiComponentWrapperFunction (copy)
+	local UseContextResult = ReactModule.useContext(PageContext)
+	local VerticalScrollingFrameRef = UseContextResult.verticalScrollingFrameRef
 	
-	return reactModule.createElement(getSduiComponentWrapper(p1.config), {
+	return ReactModule.createElement(GetSduiComponentWrapperFunction(p1.config), {
 		debugName = `{p1.debugName}-content`,
 		componentConfig = p1.config,
 		sduiContext = p1.sduiContext,
 		localAnalyticsData = p1.localAnalyticsData,
-		extraLocalProps = reactModule.useMemo(function()
-			-- upvalues: verticalScrollingFrameRef (ref), var1 (ref), p1 (ref), fFlagAppPageShellScrollToTopFocus (copy), fFlagLuaAppsDefaultSelection (copy), fFlagSduiPageCanvasCollectionLayout (copy)
+		extraLocalProps = ReactModule.useMemo(function() --[[ Line: 41 ]]
+			-- upvalues: VerticalScrollingFrameRef (copy), UseContextResult (copy), p1 (copy), FFlagAppPageShellScrollToTopFocus (upval), FFlagLuaAppsDefaultSelection (upval), FFlagSduiPageCanvasCollectionLayout (upval)
 			return {
 				scrollToSelectionAnimationManagedByParent = true,
-				scrollingFrameRef = verticalScrollingFrameRef,
-				verticalScrollingFrameRef = verticalScrollingFrameRef,
-				scrollViewPositionChangedSignal = var1.scrollViewPositionChangedSignal,
+				scrollingFrameRef = VerticalScrollingFrameRef,
+				verticalScrollingFrameRef = VerticalScrollingFrameRef,
+				scrollViewPositionChangedSignal = UseContextResult.scrollViewPositionChangedSignal,
 				refreshSignal = p1.refreshSignal,
-				defaultFocusRef = if fFlagAppPageShellScrollToTopFocus and fFlagLuaAppsDefaultSelection then p1.defaultFocusRef else nil,
-				disableCollectionLayoutStoreProvider = if fFlagSduiPageCanvasCollectionLayout then true else nil
+				defaultFocusRef = if FFlagAppPageShellScrollToTopFocus and FFlagLuaAppsDefaultSelection then p1.defaultFocusRef else nil,
+				disableCollectionLayoutStoreProvider = if FFlagSduiPageCanvasCollectionLayout then true else nil
 			}
 		end, {
-			var1,
+			UseContextResult,
 			p1.refreshSignal,
-			if fFlagAppPageShellScrollToTopFocus and fFlagLuaAppsDefaultSelection then p1.defaultFocusRef else nil,
-			verticalScrollingFrameRef
+			if FFlagAppPageShellScrollToTopFocus and FFlagLuaAppsDefaultSelection then p1.defaultFocusRef else nil,
+			VerticalScrollingFrameRef
 		})
 	})
 end
 
-local function buildWholePageContent(p1, p2)
-	-- upvalues: reactModule (ref), SduiPageWholeContent (ref), fFlagAppPageShellScrollToTopFocus (ref), fFlagLuaAppsDefaultSelection (ref)
+local function buildWholePageContent(Config, p1) --[[ Line: 85 ]]
+	-- upvalues: ReactModule (copy), SduiPageWholeContent (copy), FFlagAppPageShellScrollToTopFocus (copy), FFlagLuaAppsDefaultSelection (copy)
 	return {
-		reactModule.createElement(SduiPageWholeContent, {
-			config = p1,
-			sduiContext = p2.sduiContext,
-			localAnalyticsData = p2.localAnalyticsData,
-			debugName = p2.debugName,
-			refreshSignal = p2.refreshSignal,
-			defaultFocusRef = if fFlagAppPageShellScrollToTopFocus and fFlagLuaAppsDefaultSelection then p2.defaultFocusRef else nil
+		ReactModule.createElement(SduiPageWholeContent, {
+			config = Config,
+			sduiContext = p1.sduiContext,
+			localAnalyticsData = p1.localAnalyticsData,
+			debugName = p1.debugName,
+			refreshSignal = p1.refreshSignal,
+			defaultFocusRef = if FFlagAppPageShellScrollToTopFocus and FFlagLuaAppsDefaultSelection then p1.defaultFocusRef else nil
 		})
 	}
 end
 
-return function(p1)
-	-- upvalues: useComponentConfigModule (ref), fFlagDataHydrationAccountReset (ref), useMissingRootWarningModule (ref), useComponentLifecycleTimingModule (ref), pageContentMode (ref), reactModule (ref), buildWholePageContent (ref)
-	local var1 = useComponentConfigModule(p1.configKey, p1.contentIdentifier)
+return function(p1) --[[ Line: 100 | Named "useSduiPageContent" ]]
+	-- upvalues: UseComponentConfigModule (copy), FFlagDataHydrationAccountReset (copy), UseMissingRootWarningModule (copy), UseComponentLifecycleTimingModule (copy), PageContentMode (copy), ReactModule (copy), buildWholePageContent (copy)
+	local UseComponentConfigModuleResult = UseComponentConfigModule(p1.configKey, p1.contentIdentifier)
 	
-	if fFlagDataHydrationAccountReset then
-		useMissingRootWarningModule(p1.configKey, var1)
+	if FFlagDataHydrationAccountReset then
+		UseMissingRootWarningModule(p1.configKey, UseComponentConfigModuleResult)
 	end
-	useComponentLifecycleTimingModule(p1.pageTimer, var1 ~= nil)
-	local contentMode = p1.contentMode or pageContentMode.Scroll
+	UseComponentLifecycleTimingModule(p1.pageTimer, UseComponentConfigModuleResult ~= nil)
+	local ContentMode = p1.contentMode or PageContentMode.Scroll
 	
 	return {
-		contentMode = contentMode,
+		contentMode = ContentMode,
 		content = {
-			contentSlot = reactModule.useMemo(function()
-				-- upvalues: var1 (ref), contentMode (ref), pageContentMode (copy), buildWholePageContent (copy), p1 (ref)
-				return if var1 == nil then nil elseif contentMode == pageContentMode.Scroll then buildWholePageContent(var1, p1) else buildWholePageContent(var1, p1)
-			end, { var1, p1, contentMode })
+			contentSlot = ReactModule.useMemo(function() --[[ Line: 110 ]]
+				-- upvalues: UseComponentConfigModuleResult (copy), ContentMode (copy), PageContentMode (upval), buildWholePageContent (upval), p1 (copy)
+				return if UseComponentConfigModuleResult == nil then nil elseif ContentMode == PageContentMode.Scroll then buildWholePageContent(UseComponentConfigModuleResult, p1) else buildWholePageContent(UseComponentConfigModuleResult, p1)
+			end, { UseComponentConfigModuleResult, p1, ContentMode })
 		}
 	}
 end

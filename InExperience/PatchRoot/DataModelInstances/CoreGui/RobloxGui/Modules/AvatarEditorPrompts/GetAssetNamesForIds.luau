@@ -1,25 +1,25 @@
-﻿local avatarEditorService = game:GetService("AvatarEditorService")
-local promiseModule = require(game:GetService("CorePackages").Packages.Promise)
+﻿local AvatarEditorService = game:GetService("AvatarEditorService")
+local PromiseModule = require(game:GetService("CorePackages").Packages.Promise)
 
-return function(p1)
-	-- upvalues: promiseModule (ref), avatarEditorService (ref)
-	return promiseModule.new(function(p2, p3)
-		-- upvalues: avatarEditorService (copy), p1 (ref)
-		local ok, status = pcall(function()
-			-- upvalues: avatarEditorService (copy), p1 (copy)
-			return avatarEditorService:GetBatchItemDetailsAsync(p1, Enum.AvatarItemType.Asset)
+return function(ItemIds) --[[ Line: 6 ]]
+	-- upvalues: PromiseModule (copy), AvatarEditorService (copy)
+	return PromiseModule.new(function(Callback1: (any) -> (), Callback: () -> ()) --[[ Line: 7 ]]
+		-- upvalues: AvatarEditorService (upval), ItemIds (copy)
+		local Success, Result = pcall(function() --[[ Line: 8 ]]
+			-- upvalues: AvatarEditorService (upval), ItemIds (upval)
+			return AvatarEditorService:GetBatchItemDetailsAsync(ItemIds, Enum.AvatarItemType.Asset)
 		end)
 		
-		if not ok then
-			p3()
+		if not Success then
+			Callback()
 			
 			return
 		end
-		local t = {}
+		local Names = {}
 		
-		for i, v in ipairs(status) do
-			t[v.Id] = v.Name
+		for _, value in ipairs(Result) do
+			Names[value.Id] = value.Name
 		end
-		p2(t)
+		Callback1(Names)
 	end)
 end

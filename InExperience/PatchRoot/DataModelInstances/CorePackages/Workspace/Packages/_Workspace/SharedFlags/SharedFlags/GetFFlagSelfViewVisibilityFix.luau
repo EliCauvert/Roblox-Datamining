@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("SelfViewVisibilityFix", false)
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastFlag("SelfViewVisibilityFix")
 end

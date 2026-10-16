@@ -1,42 +1,46 @@
-﻿local avatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
-local parent = avatarExperienceCommon.Parent
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useIsSpatial = require(parent.Responsive).useIsSpatial
-local useEarlyIsFocused = require(parent.Navigation).useEarlyIsFocused
-local signalsReactModule = require(parent.SignalsReact)
-local AXTooltipStoreModule = require(avatarExperienceCommon.Stores.AXTooltipStore)
+﻿local AvatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
+local Parent = AvatarExperienceCommon.Parent
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseIsSpatialFunction = require(Parent.Responsive).useIsSpatial
+local UseEarlyIsFocusedFunction = require(Parent.Navigation).useEarlyIsFocused
+local SignalsReactModule = require(Parent.SignalsReact)
+local AXTooltipStoreModule = require(AvatarExperienceCommon.Stores.AXTooltipStore)
 local AXTooltipTimeToDismiss = game:DefineFastInt("AXTooltipTimeToDismiss", 5)
-local _ = require(parent.AvatarExperienceUIKit)
+local _ = require(Parent.AvatarExperienceUIKit)
 
-return function(p1)
-	-- upvalues: AXTooltipStoreModule (ref), useLocalization (ref), useIsSpatial (ref), useEarlyIsFocused (ref), signalsReactModule (ref), reactModule (ref), AXTooltipTimeToDismiss (ref)
-	local var1 = AXTooltipStoreModule(false)
-	local localizedText = p1.localizedText or useLocalization({ tooltipText = p1.tooltipLocalizationKey }).tooltipText
-	local var2 = p1.showTooltip and (signalsReactModule.useSignalState(var1.getIsTooltipAllowedToBeShown(p1.tooltipStorageKey)) and (useEarlyIsFocused() and not useIsSpatial()))
-	local var3 = reactModule.useCallback(function()
-		-- upvalues: var1 (ref), p1 (ref)
-		var1.dismissTooltip(p1.tooltipStorageKey)
+return function(p1) --[[ Line: 36 | Named "useAXTooltipViewModel" ]]
+	-- upvalues: AXTooltipStoreModule (copy), UseLocalizationFunction (copy), UseIsSpatialFunction (copy), UseEarlyIsFocusedFunction (copy), SignalsReactModule (copy), ReactModule (copy), AXTooltipTimeToDismiss (copy)
+	local AXTooltipStoreModuleResult = AXTooltipStoreModule(false)
+	local UseLocalizationResult = UseLocalizationFunction({ tooltipText = p1.tooltipLocalizationKey })
+	local LocalizedText = p1.localizedText or UseLocalizationResult.tooltipText
+	local UseIsSpatialResult = UseIsSpatialFunction()
+	local UseEarlyIsFocusedResult = UseEarlyIsFocusedFunction()
+	local UseSignalStateResult = SignalsReactModule.useSignalState(AXTooltipStoreModuleResult.getIsTooltipAllowedToBeShown(p1.tooltipStorageKey))
+	local NoUseIsSpatialResult: boolean = p1.showTooltip and (UseSignalStateResult and (UseEarlyIsFocusedResult and not UseIsSpatialResult))
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 49 ]]
+		-- upvalues: AXTooltipStoreModuleResult (copy), p1 (copy)
+		AXTooltipStoreModuleResult.dismissTooltip(p1.tooltipStorageKey)
 	end, { p1.tooltipStorageKey })
 	
 	if p1.dismissTooltipRef and p1.showTooltip then
-		p1.dismissTooltipRef.current = var3
+		p1.dismissTooltipRef.current = UseResult
 	end
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), AXTooltipTimeToDismiss (copy), var1 (ref), p1 (ref)
-		if var2 then
-			task.spawn(function()
-				-- upvalues: AXTooltipTimeToDismiss (copy), var1 (copy), p1 (copy)
+	ReactModule.useEffect(function() --[[ Line: 57 ]]
+		-- upvalues: NoUseIsSpatialResult (copy), AXTooltipTimeToDismiss (upval), AXTooltipStoreModuleResult (copy), p1 (copy)
+		if NoUseIsSpatialResult then
+			task.spawn(function() --[[ Line: 59 ]]
+				-- upvalues: AXTooltipTimeToDismiss (upval), AXTooltipStoreModuleResult (upval), p1 (upval)
 				task.wait(AXTooltipTimeToDismiss)
-				var1.dismissTooltip(p1.tooltipStorageKey, true)
+				AXTooltipStoreModuleResult.dismissTooltip(p1.tooltipStorageKey, true)
 			end)
 		end
-	end, { var2 })
+	end, { NoUseIsSpatialResult })
 	
 	return {
-		isOpen = var2,
+		isOpen = NoUseIsSpatialResult,
 		popoverSide = p1.popoverSide,
-		tooltipText = localizedText,
-		onTooltipActivated = var3
+		tooltipText = LocalizedText,
+		onTooltipActivated = UseResult
 	}
 end

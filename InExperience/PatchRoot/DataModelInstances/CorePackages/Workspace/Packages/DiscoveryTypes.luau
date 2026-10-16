@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.DiscoveryTypes.DiscoveryTypes)
+﻿return (require(script.Parent._Workspace.DiscoveryTypes.DiscoveryTypes))

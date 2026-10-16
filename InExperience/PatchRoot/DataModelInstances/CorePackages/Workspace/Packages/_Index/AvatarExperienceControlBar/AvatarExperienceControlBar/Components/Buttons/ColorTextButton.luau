@@ -1,52 +1,52 @@
-﻿local avatarExperienceControlBar = script:FindFirstAncestor("AvatarExperienceControlBar")
-local parent = avatarExperienceControlBar.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useSemanticTokensModule = require(avatarExperienceControlBar.Hooks.useSemanticTokens)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useHoverBindingModule = require(avatarExperienceControlBar.Hooks.useHoverBinding)
-local colorItemModule = require(avatarExperienceControlBar.Components.Items.ColorItem)
+﻿local AvatarExperienceControlBar = script:FindFirstAncestor("AvatarExperienceControlBar")
+local Parent = AvatarExperienceControlBar.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseSemanticTokensModule = require(AvatarExperienceControlBar.Hooks.useSemanticTokens)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseHoverBindingModule = require(AvatarExperienceControlBar.Hooks.useHoverBinding)
+local ColorItemModule = require(AvatarExperienceControlBar.Components.Items.ColorItem)
 
-return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useSemanticTokensModule (ref), useHoverBindingModule (ref), useLocalization (ref), reactModule (ref), foundationModule (ref), colorItemModule (ref)
-	local var1 = useSemanticTokensModule()
-	local var2, var3 = useHoverBindingModule()
-	local var4 = useLocalization({ text = p1.localizedTextKey })
+return (ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 27 ]]
+	-- upvalues: UseSemanticTokensModule (copy), UseHoverBindingModule (copy), UseLocalizationFunction (copy), ReactModule (copy), FoundationModule (copy), ColorItemModule (copy)
+	local UseSemanticTokensModuleResult = UseSemanticTokensModule()
+	local UseHoverBindingModuleResult, UseHoverBindingModuleResult2 = UseHoverBindingModule()
+	local UseLocalizationResult = UseLocalizationFunction({ text = Frame.localizedTextKey })
 	
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "auto-xy size-full-0 clip row gap-xsmall items-center",
-		onActivated = p1.onActivated,
-		isDisabled = p1.disabled,
-		ref = p2,
-		onStateChanged = var3,
-		backgroundStyle = var2:map(function(p3)
-			-- upvalues: var1 (ref)
+		onActivated = Frame.onActivated,
+		isDisabled = Frame.disabled,
+		ref = Ref,
+		onStateChanged = UseHoverBindingModuleResult2,
+		backgroundStyle = UseHoverBindingModuleResult:map(function(p1) --[[ Line: 44 ]]
+			-- upvalues: UseSemanticTokensModuleResult (copy)
 			return {
-				Color3 = var1.hoverIconBackgroundStyle.Color3,
-				Transparency = if p3 then var1.hoverIconBackgroundStyle.Transparency else 1
+				Color3 = UseSemanticTokensModuleResult.hoverIconBackgroundStyle.Color3,
+				Transparency = if p1 then UseSemanticTokensModuleResult.hoverIconBackgroundStyle.Transparency else 1
 			}
 		end),
 		padding = {
-			left = UDim.new(0, var1.textButtonPaddingLeft),
-			right = UDim.new(0, var1.textButtonPaddingRight),
-			top = UDim.new(0, var1.textButtonPaddingY),
-			bottom = UDim.new(0, var1.textButtonPaddingY)
+			left = UDim.new(0, UseSemanticTokensModuleResult.textButtonPaddingLeft),
+			right = UDim.new(0, UseSemanticTokensModuleResult.textButtonPaddingRight),
+			top = UDim.new(0, UseSemanticTokensModuleResult.textButtonPaddingY),
+			bottom = UDim.new(0, UseSemanticTokensModuleResult.textButtonPaddingY)
 		},
-		cornerRadius = UDim.new(0, if p1.radius then p1.radius else var1.defaultIconTextButtonRadius),
-		Visible = p1.Visible,
-		LayoutOrder = p1.LayoutOrder
+		cornerRadius = UDim.new(0, if Frame.radius then Frame.radius else UseSemanticTokensModuleResult.defaultIconTextButtonRadius),
+		Visible = Frame.Visible,
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Color = reactModule.createElement(colorItemModule, {
+		Color = ReactModule.createElement(ColorItemModule, {
 			disabled = true,
 			Selectable = false,
-			colors = p1.colors,
-			size = p1.size,
-			colorSize = p1.colorSize,
-			onActivated = p1.onActivated
+			colors = Frame.colors,
+			size = Frame.size,
+			colorSize = Frame.colorSize,
+			onActivated = Frame.onActivated
 		}),
-		Text = reactModule.createElement(foundationModule.Text, {
+		Text = ReactModule.createElement(FoundationModule.Text, {
 			tag = "auto-xy text-title-medium content-emphasis",
-			Text = if var4.text then var4.text else p1.text
+			Text = if UseLocalizationResult.text then UseLocalizationResult.text else Frame.text
 		})
 	})
-end)
+end))

@@ -1,14 +1,14 @@
-﻿local runService = game:GetService("RunService")
-local robloxGui = game:GetService("CoreGui").RobloxGui
-local parent = script.Parent.Parent
-local cryoModule = require(parent.Cryo)
-local soundManager = require(parent.Lumberyak).Logger.new(nil, "SoundManager")
-local soundsModule = require(script.Parent.Sounds)
-local soundEffectsModule = require(script.Parent.SoundEffects)
-local soundGroupsModule = require(script.Parent.SoundGroups)
-local t = {}
-t.__index = t
-local t_1 = {
+﻿local RunService = game:GetService("RunService")
+local RobloxGui = game:GetService("CoreGui").RobloxGui
+local Parent = script.Parent.Parent
+local CryoModule = require(Parent.Cryo)
+local SoundManager1 = require(Parent.Lumberyak).Logger.new(nil, "SoundManager")
+local SoundsModule = require(script.Parent.Sounds)
+local SoundEffectsModule = require(script.Parent.SoundEffects)
+local SoundGroupsModule = require(script.Parent.SoundGroups)
+local SoundManager = {}
+SoundManager.__index = SoundManager
+local config = {
 	Looped = false,
 	PlaybackSpeed = 1,
 	Volume = 1,
@@ -16,236 +16,245 @@ local t_1 = {
 	FadeOutTime = nil,
 	SoundEffects = nil
 }
-local t_2 = {}
+local HeartbeatConnections = {}
 
-local function fadeVolume(p1, p2, p3, p4)
-	-- upvalues: t_2 (ref), runService (ref)
-	if p2 < 0 then
-		error(p4 .. " cannot have a negative fadeIn/fadeOut time.")
+local function fadeVolume(Sound: Sound, FadeInTime: number, Volume, Text) --[[ Line: 36 ]]
+	-- upvalues: HeartbeatConnections (copy), RunService (copy)
+	if FadeInTime < 0 then
+		error(Text .. " cannot have a negative fadeIn/fadeOut time.")
 	end
-	local var1 = (p3 - p1.Volume) / p2
+	local VolumeRatio = (Volume - Sound.Volume) / FadeInTime
 	
-	local function onHeartBeat(p5)
-		-- upvalues: var1 (ref), p1 (ref), t_2 (copy), p3 (ref)
-		local var2 = p1.Volume + var1 * p5
+	local function onHeartBeat(DeltaTime) --[[ Line: 45 ]]
+		-- upvalues: VolumeRatio (copy), Sound (copy), HeartbeatConnections (upval), Volume (copy)
+		local NewVolume = Sound.Volume + VolumeRatio * DeltaTime
 		
-		if var2 <= 0 then
-			p1.Volume = 0
-			p1:Stop()
-			t_2[p1.SoundId]:Disconnect()
-			
-			return
-		elseif p3 <= var2 then
-			p1.Volume = p3
-			t_2[p1.SoundId]:Disconnect()
+		if NewVolume <= 0 then
+			Sound.Volume = 0
+			Sound:Stop()
+			HeartbeatConnections[Sound.SoundId]:Disconnect()
 			
 			return
 		end
-		p1.Volume = var2
-	end
-	
-	if t_2[p1.SoundId] and t_2[p1.SoundId].Connected then
-		t_2[p1.SoundId]:Disconnect()
-	end
-	t_2[p1.SoundId] = runService.Heartbeat:Connect(onHeartBeat)
-end
-
-function t._createSoundEffect(_, p1, p2, p3, p4)
-	-- upvalues: soundEffectsModule (ref)
-	if not soundEffectsModule[p1] then
-		error(p1 .. " does not exist in list of SoundEffects")
-	end
-	local var1 = Instance.new(p1)
-	
-	for i, v in pairs(p3) do
-		var1[i] = v
-	end
-	var1.Parent = p4
-	var1.Name = p2
-end
-
-function t.PlaySound(p5, p6, p7, p8)
-	-- upvalues: robloxGui (ref), soundsModule (ref), cryoModule (ref), t_1 (ref), fadeVolume (ref)
-	local soundManagerSounds = robloxGui:FindFirstChild("SoundManager_Sounds")
-	
-	if not soundManagerSounds then
-		error("SoundManager's Sounds folder is missing. SoundManager has not been initialized.")
-	end
-	local var2 = soundsModule[p6]
-	
-	if not var2 then
-		error(p6 .. " does not exist in library of Sounds")
-		
-		return
-	end
-	local var3 = cryoModule.Dictionary.join(t_1, var2.DefaultPlaybackProperties or {}, p7 or {})
-	local name = soundManagerSounds:FindFirstChild(var2.Name)
-	
-	if not name then
-		name = Instance.new("Sound")
-		name.Parent = soundManagerSounds
-		name.SoundId = var2.SoundId
-		name.Name = var2.Name
-	end
-	for i, v in pairs(name:GetChildren()) do
-		v:Destroy()
-	end
-	if p8 then
-		name.SoundGroup = robloxGui:FindFirstChild("SoundManager_SoundGroups"):FindFirstChild(p8.Name)
-	end
-	for i_1, v_1 in pairs(var3) do
-		if i_1 ~= "FadeInTime" and i_1 ~= "FadeOutTime" and i_1 ~= "Effects" then
-			name[i_1] = v_1
+		if Volume <= NewVolume then
+			Sound.Volume = Volume
+			HeartbeatConnections[Sound.SoundId]:Disconnect()
+			
+			return
+		else
+			Sound.Volume = NewVolume
 		end
 	end
-	for i_2, v_2 in ipairs(var3.SoundEffects or {}) do
-		p5:_createSoundEffect(v_2.Type, v_2.Name, v_2.Properties, name)
+	
+	if HeartbeatConnections[Sound.SoundId] and HeartbeatConnections[Sound.SoundId].Connected then
+		HeartbeatConnections[Sound.SoundId]:Disconnect()
 	end
-	if var3.FadeInTime then
-		name.Volume = 0
-		fadeVolume(name, var3.FadeInTime, var3.Volume, p6)
-	end
-	name:Play()
+	HeartbeatConnections[Sound.SoundId] = RunService.Heartbeat:Connect(onHeartBeat)
 end
 
-function t.StopSound(_, p9)
-	-- upvalues: robloxGui (ref), soundsModule (ref), fadeVolume (ref)
-	local soundManagerSounds = robloxGui:FindFirstChild("SoundManager_Sounds")
+function SoundManager:_createSoundEffect(Type, Name, Properties, Parent) --[[ Line: 76 ]]
+	-- upvalues: SoundEffectsModule (copy)
+	if not SoundEffectsModule[Type] then
+		error(Type .. " does not exist in list of SoundEffects")
+	end
+	local NewInstance = Instance.new(Type)
 	
-	if not soundManagerSounds then
+	for i, property in pairs(Properties) do
+		NewInstance[i] = property
+	end
+	NewInstance.Parent = Parent
+	NewInstance.Name = Name
+end
+
+function SoundManager.PlaySound(p1, Text, p2, p3) --[[ Line: 107 ]]
+	-- upvalues: RobloxGui (copy), SoundsModule (copy), CryoModule (copy), config (copy), fadeVolume (copy)
+	local SoundManagerSounds = RobloxGui:FindFirstChild("SoundManager_Sounds")
+	
+	if not SoundManagerSounds then
 		error("SoundManager's Sounds folder is missing. SoundManager has not been initialized.")
 	end
-	local var4 = soundsModule[p9]
+	local SoundsModuleEntry = SoundsModule[Text]
 	
-	if not var4 then
-		error(p9 .. " does not exist in list of Sounds")
+	if not SoundsModuleEntry then
+		error(Text .. " does not exist in library of Sounds")
 		
 		return
 	end
-	local name = soundManagerSounds:FindFirstChild(var4.Name)
+	local JoinResult = CryoModule.Dictionary.join(config, SoundsModuleEntry.DefaultPlaybackProperties or {}, p2 or {})
+	local Name = SoundManagerSounds:FindFirstChild(SoundsModuleEntry.Name)
 	
-	if not name then
-		error(p9 .. " does not exist")
-		
-		return
+	if not Name then
+		Name = Instance.new("Sound")
+		Name.Parent = SoundManagerSounds
+		Name.SoundId = SoundsModuleEntry.SoundId
+		Name.Name = SoundsModuleEntry.Name
 	end
-	local defaultPlaybackProperties = var4.DefaultPlaybackProperties
-	local var5 = if defaultPlaybackProperties then defaultPlaybackProperties.FadeOutTime else nil
-	
-	if var5 then
-		fadeVolume(name, var5, 0, p9)
-		
-		return
+	for i, child in pairs(Name:GetChildren()) do
+		child:Destroy()
 	end
-	name:Stop()
+	if p3 then
+		Name.SoundGroup = RobloxGui:FindFirstChild("SoundManager_SoundGroups"):FindFirstChild(p3.Name)
+	end
+	for i, value in pairs(JoinResult) do
+		if i ~= "FadeInTime" and i ~= "FadeOutTime" and i ~= "Effects" then
+			Name[i] = value
+		end
+	end
+	local Iterator = ipairs
+	local SoundEffects = JoinResult.SoundEffects or {}
+	for _, value1 in Iterator(SoundEffects) do
+		p1:_createSoundEffect(value1.Type, value1.Name, value1.Properties, Name)
+	end
+	if JoinResult.FadeInTime then
+		Name.Volume = 0
+		fadeVolume(Name, JoinResult.FadeInTime, JoinResult.Volume, Text)
+	end
+	Name:Play()
 end
 
-function t.CreateSoundGroup(p9, p10)
-	-- upvalues: soundGroupsModule (ref), robloxGui (ref)
-	local var4 = soundGroupsModule[p10]
+function SoundManager:StopSound(Text) --[[ Line: 168 ]]
+	-- upvalues: RobloxGui (copy), SoundsModule (copy), fadeVolume (copy)
+	local SoundManagerSounds = RobloxGui:FindFirstChild("SoundManager_Sounds")
 	
-	if not var4 then
+	if not SoundManagerSounds then
+		error("SoundManager's Sounds folder is missing. SoundManager has not been initialized.")
+	end
+	local SoundsModuleEntry = SoundsModule[Text]
+	
+	if not SoundsModuleEntry then
+		error(Text .. " does not exist in list of Sounds")
+		
+		return
+	end
+	local Name = SoundManagerSounds:FindFirstChild(SoundsModuleEntry.Name)
+	
+	if not Name then
+		error(Text .. " does not exist")
+		
+		return
+	end
+	local DefaultPlaybackProperties = SoundsModuleEntry.DefaultPlaybackProperties
+	local FadeOutTime = if DefaultPlaybackProperties then DefaultPlaybackProperties.FadeOutTime else nil
+	
+	if FadeOutTime then
+		fadeVolume(Name, FadeOutTime, 0, Text)
+		
+		return
+	else
+		Name:Stop()
+	end
+end
+
+function SoundManager.CreateSoundGroup(p4, ChildName) --[[ Line: 202 ]]
+	-- upvalues: SoundGroupsModule (copy), RobloxGui (copy)
+	local SoundGroupsModuleEntry = SoundGroupsModule[ChildName]
+	
+	if not SoundGroupsModuleEntry then
 		error("SoundGroup does not exist in list of SoundGroups")
 		
 		return
 	end
-	local soundManagerSoundGroups = robloxGui:FindFirstChild("SoundManager_SoundGroups")
+	local SoundManagerSoundGroups = RobloxGui:FindFirstChild("SoundManager_SoundGroups")
 	
-	if not soundManagerSoundGroups then
+	if not SoundManagerSoundGroups then
 		error("SoundManager's SoundGroups folder is missing. SoundManager has not been initialized.")
 		
 		return
-	elseif soundManagerSoundGroups:FindFirstChild(p10) then
+	end
+	if SoundManagerSoundGroups:FindFirstChild(ChildName) then
 		warn("SoundGroup already exists")
 		
 		return
 	end
-	local soundGroup = Instance.new("SoundGroup")
-	soundGroup.Name = var4.Name
-	soundGroup.Parent = soundManagerSoundGroups
-	soundGroup.Volume = var4.Volume
+	local SoundGroup = Instance.new("SoundGroup")
+	SoundGroup.Name = SoundGroupsModuleEntry.Name
+	SoundGroup.Parent = SoundManagerSoundGroups
+	SoundGroup.Volume = SoundGroupsModuleEntry.Volume
 	
-	for i, v in ipairs(var4.SoundEffects) do
-		p9:_createSoundEffect(v.Type, v.Name, v.Properties, soundGroup)
+	for _, soundEffect in ipairs(SoundGroupsModuleEntry.SoundEffects) do
+		p4:_createSoundEffect(soundEffect.Type, soundEffect.Name, soundEffect.Properties, SoundGroup)
 	end
 end
 
-function t.SoundGroupAddSoundEffect(p11, p12, p13)
-	-- upvalues: soundGroupsModule (ref), robloxGui (ref)
-	if not soundGroupsModule[p12] then
+function SoundManager.SoundGroupAddSoundEffect(p5, ChildName, p6) --[[ Line: 236 ]]
+	-- upvalues: SoundGroupsModule (copy), RobloxGui (copy)
+	if not SoundGroupsModule[ChildName] then
 		error("SoundGroup does not exist in list of SoundGroups")
 		
 		return
 	end
-	local soundManagerSoundGroups = robloxGui:FindFirstChild("SoundManager_SoundGroups")
+	local SoundManagerSoundGroups = RobloxGui:FindFirstChild("SoundManager_SoundGroups")
 	
-	if not soundManagerSoundGroups then
+	if not SoundManagerSoundGroups then
 		error("SoundManager's SoundGroups folder is missing. SoundManager has not been initialized.")
 		
 		return
 	end
-	local var5 = soundManagerSoundGroups:FindFirstChild(p12)
+	local ChildName1 = SoundManagerSoundGroups:FindFirstChild(ChildName)
 	
-	if not var5 then
+	if not ChildName1 then
 		error("SoundGroup Instance not created")
 		
 		return
-	elseif var5:FindFirstChild(p13.Name) then
-		error("SoundEffect with name " .. p18.Name .. " already exists for sound group " .. p17)
+	end
+	if ChildName1:FindFirstChild(p6.Name) then
+		error("SoundEffect with name " .. p6.Name .. " already exists for sound group " .. ChildName)
 		
 		return
+	else
+		p5:_createSoundEffect(p6.Type, p6.Name, p6.Properties, ChildName1)
 	end
-	p11:_createSoundEffect(p13.Type, p13.Name, p13.Properties, var5)
 end
 
-function t.SoundGroupRemoveSoundEffect(_, p11, p12)
-	-- upvalues: soundGroupsModule (ref), robloxGui (ref)
-	local var5 = soundGroupsModule[p11]
+function SoundManager:SoundGroupRemoveSoundEffect(ChildName, ChildName1) --[[ Line: 269 ]]
+	-- upvalues: SoundGroupsModule (copy), RobloxGui (copy)
+	local SoundGroupsModuleEntry = SoundGroupsModule[ChildName]
 	
-	if not var5 then
+	if not SoundGroupsModuleEntry then
 		error("SoundGroup does not exist in list of SoundGroups")
 		
 		return
 	end
-	local soundManagerSoundGroups = robloxGui:FindFirstChild("SoundManager_SoundGroups")
+	local SoundManagerSoundGroups = RobloxGui:FindFirstChild("SoundManager_SoundGroups")
 	
-	if not soundManagerSoundGroups then
+	if not SoundManagerSoundGroups then
 		error("SoundManager's SoundGroups folder is missing. SoundManager has not been initialized.")
 		
 		return
 	end
-	local var6 = soundManagerSoundGroups:FindFirstChild(p11)
+	local ChildName2 = SoundManagerSoundGroups:FindFirstChild(ChildName)
 	
-	if not var6 then
+	if not ChildName2 then
 		error("SoundGroup Instance not created")
 		
 		return
 	end
-	local var7 = var6:FindFirstChild(p12)
+	local ChildName3 = ChildName2:FindFirstChild(ChildName1)
 	
-	if not var7 then
-		error(p12 .. " not found in " .. var27.Name)
+	if not ChildName3 then
+		error(ChildName1 .. " not found in " .. SoundGroupsModuleEntry.Name)
 	end
-	var7:Destroy()
+	ChildName3:Destroy()
 end
 
-function t.init()
-	-- upvalues: t (ref), robloxGui (ref), soundManager (ref)
-	local tbl = setmetatable({}, t)
+function SoundManager.init() --[[ Line: 300 ]]
+	-- upvalues: SoundManager (copy), RobloxGui (copy), SoundManager1 (copy)
+	local self = setmetatable({}, SoundManager)
 	
-	if robloxGui:FindFirstChild("SoundManager_Sounds") then
-		soundManager:warning("SoundManager already initialized")
+	if RobloxGui:FindFirstChild("SoundManager_Sounds") then
+		SoundManager1:warning("SoundManager already initialized")
 		
-		return tbl
+		return self
+	else
+		local SoundManager_Sounds = Instance.new("Folder")
+		SoundManager_Sounds.Name = "SoundManager_Sounds"
+		SoundManager_Sounds.Parent = RobloxGui
+		local SoundManager_SoundGroups = Instance.new("Folder")
+		SoundManager_SoundGroups.Name = "SoundManager_SoundGroups"
+		SoundManager_SoundGroups.Parent = RobloxGui
+		
+		return self
 	end
-	local soundManagerSounds = Instance.new("Folder")
-	soundManagerSounds.Name = "SoundManager_Sounds"
-	soundManagerSounds.Parent = robloxGui
-	local soundManagerSoundGroups = Instance.new("Folder")
-	soundManagerSoundGroups.Name = "SoundManager_SoundGroups"
-	soundManagerSoundGroups.Parent = robloxGui
-	
-	return tbl
 end
 
-return t
+return SoundManager

@@ -1,66 +1,66 @@
-﻿local parent = script.Parent.Parent
-local object = require(parent.Parent.LuauPolyfill).Object
-local navigationSymbolModule = require(parent.NavigationSymbol)
-local var1 = navigationSymbolModule("POP")
-local var2 = navigationSymbolModule("POP_TO_TOP")
-local var3 = navigationSymbolModule("PUSH")
-local var4 = navigationSymbolModule("RESET")
-local var5 = navigationSymbolModule("REPLACE")
-local var6 = navigationSymbolModule("COMPLETE_TRANSITION")
-local t = {
-	Pop = var1,
-	PopToTop = var2,
-	Push = var3,
-	Reset = var4,
-	Replace = var5,
-	CompleteTransition = var6
+﻿local Parent = script.Parent.Parent
+local Object = require(Parent.Parent.LuauPolyfill).Object
+local NavigationSymbolModule = require(Parent.NavigationSymbol)
+local POP = NavigationSymbolModule("POP")
+local POPTOTOP = NavigationSymbolModule("POP_TO_TOP")
+local PUSH = NavigationSymbolModule("PUSH")
+local RESET = NavigationSymbolModule("RESET")
+local REPLACE = NavigationSymbolModule("REPLACE")
+local COMPLETETRANSITION = NavigationSymbolModule("COMPLETE_TRANSITION")
+local StackActionsModule = {
+	Pop = POP,
+	PopToTop = POPTOTOP,
+	Push = PUSH,
+	Reset = RESET,
+	Replace = REPLACE,
+	CompleteTransition = COMPLETETRANSITION
 }
-setmetatable(t, {
-	__index = function(_, p1)
-		error(("%q is not a valid member of StackActions"):format(tostring(p1)), 2)
+setmetatable(StackActionsModule, {
+	__index = function(_, p1) --[[ Line: 34 ]]
+		error(("%q is not a valid member of StackActions"):format((tostring(p1))), 2)
 	end
 })
 
-function t.pop(p1)
-	-- upvalues: var1 (ref), object (ref)
-	local t = { type = var1 }
+function StackActionsModule.pop(p1) --[[ Line: 40 ]]
+	-- upvalues: POP (copy), Object (copy)
+	local config = { type = POP }
 	
-	return if p1 then object.assign(t, p1) else t
+	return if p1 then Object.assign(config, p1) else config
 end
 
-function t.popToTop(p1)
-	-- upvalues: var2 (ref), object (ref)
-	local t = { type = var2 }
+function StackActionsModule.popToTop(p1) --[[ Line: 46 ]]
+	-- upvalues: POPTOTOP (copy), Object (copy)
+	local config = { type = POPTOTOP }
 	
-	return if p1 then object.assign(t, p1) else t
+	return if p1 then Object.assign(config, p1) else config
 end
 
-function t.push(p1)
-	-- upvalues: var3 (ref), object (ref)
-	local t = { type = var3 }
+function StackActionsModule.push(p1) --[[ Line: 52 ]]
+	-- upvalues: PUSH (copy), Object (copy)
+	local config = { type = PUSH }
 	
-	return if p1 then object.assign(t, p1) else t
+	return if p1 then Object.assign(config, p1) else config
 end
 
-function t.reset(value)
-	-- upvalues: var4 (ref), object (ref)
-	local t = { type = var4 }
+function StackActionsModule.reset(p1) --[[ Line: 59 ]]
+	-- upvalues: RESET (copy), Object (copy)
+	local config = { type = RESET }
 	
-	return if value then object.assign(t, value) else t
+	return if p1 then Object.assign(config, p1) else config
 end
 
-function t.replace(p1)
-	-- upvalues: var5 (ref), object (ref)
-	local t = { preserveFocus = true, type = var5 }
+function StackActionsModule.replace(p1) --[[ Line: 65 ]]
+	-- upvalues: REPLACE (copy), Object (copy)
+	local config = { preserveFocus = true, type = REPLACE }
 	
-	return if p1 then object.assign(t, p1) else t
+	return if p1 then Object.assign(config, p1) else config
 end
 
-function t.completeTransition(p1)
-	-- upvalues: var6 (ref), object (ref)
-	local t = { preserveFocus = true, type = var6 }
+function StackActionsModule.completeTransition(p1) --[[ Line: 70 ]]
+	-- upvalues: COMPLETETRANSITION (copy), Object (copy)
+	local config = { preserveFocus = true, type = COMPLETETRANSITION }
 	
-	return if p1 then object.assign(t, p1) else t
+	return if p1 then Object.assign(config, p1) else config
 end
 
-return t
+return StackActionsModule

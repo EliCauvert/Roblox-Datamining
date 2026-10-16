@@ -1,36 +1,29 @@
-﻿local purchasePrompt = script:FindFirstAncestor("PurchasePrompt")
-local rodux = require(purchasePrompt.Parent.PurchasePromptDeps).Rodux
-local setPromptStateModule = require(purchasePrompt.Actions.SetPromptState)
-local completeRequestModule = require(purchasePrompt.Actions.CompleteRequest)
-local errorOccurredModule = require(purchasePrompt.Actions.ErrorOccurred)
-local startPurchaseModule = require(purchasePrompt.Actions.StartPurchase)
-local promptNativeUpsellSuggestionsModule = require(purchasePrompt.Actions.PromptNativeUpsellSuggestions)
-local setWindowStateModule = require(purchasePrompt.Actions.SetWindowState)
-local windowStateModule = require(purchasePrompt.Enums.WindowState)
-local promptStateModule = require(purchasePrompt.Enums.PromptState)
+﻿local PurchasePrompt = script:FindFirstAncestor("PurchasePrompt")
+local WindowStateModule = require(PurchasePrompt.Enums.WindowState)
+local PromptStateModule = require(PurchasePrompt.Enums.PromptState)
 
-return rodux.createReducer(windowStateModule.Hidden, {
-	[setPromptStateModule.name] = function(_, p1)
-		-- upvalues: promptStateModule (ref), windowStateModule (ref)
-		return if p1.promptState == promptStateModule.None then windowStateModule.Hidden else windowStateModule.Shown
+return require(PurchasePrompt.Parent.PurchasePromptDeps).Rodux.createReducer(WindowStateModule.Hidden, {
+	[require(PurchasePrompt.Actions.SetPromptState).name] = function(_, p1) --[[ Line: 18 ]]
+		-- upvalues: PromptStateModule (copy), WindowStateModule (copy)
+		return if p1.promptState == PromptStateModule.None then WindowStateModule.Hidden else WindowStateModule.Shown
 	end,
-	[setWindowStateModule.name] = function(_, p1)
+	[require(PurchasePrompt.Actions.SetWindowState).name] = function(_, p1) --[[ Line: 25 ]]
 		return p1.state
 	end,
-	[errorOccurredModule.name] = function(_, _)
-		-- upvalues: windowStateModule (ref)
-		return windowStateModule.Shown
+	[require(PurchasePrompt.Actions.ErrorOccurred).name] = function(_, _) --[[ Line: 28 ]]
+		-- upvalues: WindowStateModule (copy)
+		return WindowStateModule.Shown
 	end,
-	[startPurchaseModule.name] = function(_, _)
-		-- upvalues: windowStateModule (ref)
-		return windowStateModule.Shown
+	[require(PurchasePrompt.Actions.StartPurchase).name] = function(_, _) --[[ Line: 31 ]]
+		-- upvalues: WindowStateModule (copy)
+		return WindowStateModule.Shown
 	end,
-	[promptNativeUpsellSuggestionsModule.name] = function(_, _)
-		-- upvalues: windowStateModule (ref)
-		return windowStateModule.Shown
+	[require(PurchasePrompt.Actions.PromptNativeUpsellSuggestions).name] = function(_, _) --[[ Line: 34 ]]
+		-- upvalues: WindowStateModule (copy)
+		return WindowStateModule.Shown
 	end,
-	[completeRequestModule.name] = function(_, _)
-		-- upvalues: windowStateModule (ref)
-		return windowStateModule.Hidden
+	[require(PurchasePrompt.Actions.CompleteRequest).name] = function(_, _) --[[ Line: 37 ]]
+		-- upvalues: WindowStateModule (copy)
+		return WindowStateModule.Hidden
 	end
 })

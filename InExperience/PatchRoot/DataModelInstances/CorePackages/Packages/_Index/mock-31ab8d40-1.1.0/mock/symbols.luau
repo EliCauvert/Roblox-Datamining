@@ -1,132 +1,131 @@
-﻿local function _(p1)
-	local var1 = newproxy(true)
-	p1 = ("Mocks.%s"):format(p1)
+﻿local function _(p1) --[[ Line: 1 | Named "newSymbol" ]]
+	local Proxy = newproxy(true)
+	local MocksName: string = ("Mocks.%s"):format(p1)
 	
-	getmetatable(var1).__tostring = function()
-		-- upvalues: p1 (write)
-		return p1
+	getmetatable(Proxy).__tostring = function() --[[ Line: 4 ]]
+		-- upvalues: MocksName (ref)
+		return MocksName
 	end
 	
-	return var1
+	return Proxy
 end
 
-local t = {}
-local var1 = newproxy(true)
-local calls = ("Mocks.%s"):format("Calls")
+local Proxy = newproxy(true)
+local MocksName: string = ("Mocks.%s"):format("Calls")
 
-getmetatable(var1).__tostring = function()
-	-- upvalues: calls (write)
-	return calls
+getmetatable(Proxy).__tostring = function() --[[ Line: 4 ]]
+	-- upvalues: MocksName (ref)
+	return MocksName
 end
 
-t.Calls = var1
-local var2 = newproxy(true)
-calls = ("Mocks.%s"):format("Children")
+local Proxy1 = newproxy(true)
+local MocksName1: string = ("Mocks.%s"):format("Children")
 
-getmetatable(var2).__tostring = function()
-	-- upvalues: calls (write)
-	return calls
+getmetatable(Proxy1).__tostring = function() --[[ Line: 4 ]]
+	-- upvalues: MocksName1 (ref)
+	return MocksName1
 end
 
-t.Children = var2
-local var3 = newproxy(true)
-calls = ("Mocks.%s"):format("None")
+local Proxy2 = newproxy(true)
+local MocksName2: string = ("Mocks.%s"):format("None")
 
-getmetatable(var3).__tostring = function()
-	-- upvalues: calls (write)
-	return calls
+getmetatable(Proxy2).__tostring = function() --[[ Line: 4 ]]
+	-- upvalues: MocksName2 (ref)
+	return MocksName2
 end
 
-t.None = var3
-local var4 = newproxy(true)
-calls = ("Mocks.%s"):format("ReturnValue")
+local Proxy3 = newproxy(true)
+local MocksName3: string = ("Mocks.%s"):format("ReturnValue")
 
-getmetatable(var4).__tostring = function()
-	-- upvalues: calls (write)
-	return calls
+getmetatable(Proxy3).__tostring = function() --[[ Line: 4 ]]
+	-- upvalues: MocksName3 (ref)
+	return MocksName3
 end
 
-t.ReturnValue = var4
-local var5 = newproxy(true)
-calls = ("Mocks.%s"):format("Name")
+local Proxy4 = newproxy(true)
+local MocksName4: string = ("Mocks.%s"):format("Name")
 
-getmetatable(var5).__tostring = function()
-	-- upvalues: calls (write)
-	return calls
+getmetatable(Proxy4).__tostring = function() --[[ Line: 4 ]]
+	-- upvalues: MocksName4 (ref)
+	return MocksName4
 end
 
-t.Name = var5
-local var6 = newproxy(true)
-calls = ("Mocks.%s"):format("Address")
+local Proxy5 = newproxy(true)
+local MocksName5: string = ("Mocks.%s"):format("Address")
 
-getmetatable(var6).__tostring = function()
-	-- upvalues: calls (write)
-	return calls
+getmetatable(Proxy5).__tostring = function() --[[ Line: 4 ]]
+	-- upvalues: MocksName5 (ref)
+	return MocksName5
 end
 
-t.Address = var6
-local var7 = newproxy(true)
-calls = ("Mocks.%s"):format("Operations")
+local Proxy6 = newproxy(true)
+local MocksName6: string = ("Mocks.%s"):format("Operations")
 
-getmetatable(var7).__tostring = function()
-	-- upvalues: calls (write)
-	return calls
+getmetatable(Proxy6).__tostring = function() --[[ Line: 4 ]]
+	-- upvalues: MocksName6 (ref)
+	return MocksName6
 end
 
-t.Operations = var7
-local var8 = newproxy(true)
-calls = ("Mocks.%s"):format("Spec")
+local Proxy7 = newproxy(true)
+local MocksName7: string = ("Mocks.%s"):format("Spec")
 
-getmetatable(var8).__tostring = function()
-	-- upvalues: calls (write)
-	return calls
+getmetatable(Proxy7).__tostring = function() --[[ Line: 4 ]]
+	-- upvalues: MocksName7 (ref)
+	return MocksName7
 end
 
-t.Spec = var8
-local var9 = newproxy(true)
-calls = ("Mocks.%s"):format("SideEffect")
+local Proxy8 = newproxy(true)
+local MocksName8: string = ("Mocks.%s"):format("SideEffect")
 
-getmetatable(var9).__tostring = function()
-	-- upvalues: calls (write)
-	return calls
+getmetatable(Proxy8).__tostring = function() --[[ Line: 4 ]]
+	-- upvalues: MocksName8 (ref)
+	return MocksName8
 end
 
-t.SideEffect = var9
-local var10 = newproxy(true)
-calls = ("Mocks.%s"):format("isSpy")
+local Proxy9 = newproxy(true)
+local MocksName9: string = ("Mocks.%s"):format("isSpy")
 
-getmetatable(var10).__tostring = function()
-	-- upvalues: calls (write)
-	return calls
+getmetatable(Proxy9).__tostring = function() --[[ Line: 4 ]]
+	-- upvalues: MocksName9 (ref)
+	return MocksName9
 end
 
-t.isSpy = var10
-local var11 = newproxy(true)
-calls = ("Mocks.%s"):format("isTuple")
+local Proxy10 = newproxy(true)
+local MocksName10: string = ("Mocks.%s"):format("isTuple")
 
-getmetatable(var11).__tostring = function()
-	-- upvalues: calls (write)
-	return calls
+getmetatable(Proxy10).__tostring = function() --[[ Line: 4 ]]
+	-- upvalues: MocksName10 (ref)
+	return MocksName10
 end
 
-t.isTuple = var11
-local var12 = newproxy(true)
-calls = ("Mocks.%s"):format("isMagicMock")
+local Proxy11 = newproxy(true)
+local MocksName11: string = ("Mocks.%s"):format("isMagicMock")
 
-getmetatable(var12).__tostring = function()
-	-- upvalues: calls (write)
-	return calls
+getmetatable(Proxy11).__tostring = function() --[[ Line: 4 ]]
+	-- upvalues: MocksName11 (ref)
+	return MocksName11
 end
 
-t.isMagicMock = var12
-local var13 = newproxy(true)
-calls = ("Mocks.%s"):format("isPredicate")
+local Proxy12 = newproxy(true)
+local MocksName12: string = ("Mocks.%s"):format("isPredicate")
 
-getmetatable(var13).__tostring = function()
-	-- upvalues: calls (write)
-	return calls
+getmetatable(Proxy12).__tostring = function() --[[ Line: 4 ]]
+	-- upvalues: MocksName12 (ref)
+	return MocksName12
 end
 
-t.isPredicate = var13
-
-return t
+return {
+	Calls = Proxy,
+	Children = Proxy1,
+	None = Proxy2,
+	ReturnValue = Proxy3,
+	Name = Proxy4,
+	Address = Proxy5,
+	Operations = Proxy6,
+	Spec = Proxy7,
+	SideEffect = Proxy8,
+	isSpy = Proxy9,
+	isTuple = Proxy10,
+	isMagicMock = Proxy11,
+	isPredicate = Proxy12
+}

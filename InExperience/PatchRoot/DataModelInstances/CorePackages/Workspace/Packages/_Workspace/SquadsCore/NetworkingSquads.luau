@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.NetworkingSquads.NetworkingSquads)
+﻿return (require(script.Parent.Parent.Parent._Index.NetworkingSquads.NetworkingSquads))

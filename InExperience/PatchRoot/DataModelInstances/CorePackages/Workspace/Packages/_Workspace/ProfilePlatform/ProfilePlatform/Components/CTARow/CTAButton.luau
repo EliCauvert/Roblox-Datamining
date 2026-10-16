@@ -1,123 +1,126 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local _ = require(profilePlatform.Components.CTARow.Types)
-local enumsModule = require(profilePlatform.Common.Enums)
-local fFlagProfileTradeItemsExposureLoggingModule = require(profilePlatform.Flags.FFlagProfileTradeItemsExposureLogging)
-local fFlagProfileTradeItemsImpressionLoggingModule = require(profilePlatform.Flags.FFlagProfileTradeItemsImpressionLogging)
-local useTradeItemsExposureLoggerModule = require(profilePlatform.Hooks.useTradeItemsExposureLogger)
-local useProfileAnalyticsContextModule = require(profilePlatform.Contexts.useProfileAnalyticsContext)
-local eventNamesModule = require(profilePlatform.Analytics.EventNames)
-local contextualMenuContainsActionModule = require(profilePlatform.Utils.contextualMenuContainsAction)
-local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfileWrapperContext)
-local fFlagProfileGamepadPrimaryActionFocusModule = require(profilePlatform.Flags.FFlagProfileGamepadPrimaryActionFocus)
-local reactModule = require(parent.React)
-local useComposedRef = require(parent.ReactUtils).useComposedRef
-local _ = require(parent.ReactFocusNavigation)
-local inputHandlersModule = require(parent.InputHandlers)
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
-local useAppFocusRoot = focusNavigationUtilsModule.useAppFocusRoot
-local contextualMenuModule = require(profilePlatform.Components.CTARow.ContextualMenu)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local button = foundationModule.Button
-local iconButton = foundationModule.IconButton
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local fillBehavior = foundationModule.Enums.FillBehavior
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local _ = require(ProfilePlatform.Components.CTARow.Types)
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local FFlagProfileTradeItemsExposureLoggingModule = require(ProfilePlatform.Flags.FFlagProfileTradeItemsExposureLogging)
+local FFlagProfileTradeItemsImpressionLoggingModule = require(ProfilePlatform.Flags.FFlagProfileTradeItemsImpressionLogging)
+local UseTradeItemsExposureLoggerModule = require(ProfilePlatform.Hooks.useTradeItemsExposureLogger)
+local UseProfileAnalyticsContextModule = require(ProfilePlatform.Contexts.useProfileAnalyticsContext)
+local EventNamesModule = require(ProfilePlatform.Analytics.EventNames)
+local ContextualMenuContainsActionModule = require(ProfilePlatform.Utils.contextualMenuContainsAction)
+local UseProfileWrapperContextModule = require(ProfilePlatform.Contexts.useProfileWrapperContext)
+local FFlagProfileGamepadPrimaryActionFocusModule = require(ProfilePlatform.Flags.FFlagProfileGamepadPrimaryActionFocus)
+local ReactModule = require(Parent.React)
+local UseComposedRefFunction = require(Parent.ReactUtils).useComposedRef
+local _ = require(Parent.ReactFocusNavigation)
+local InputHandlersModule = require(Parent.InputHandlers)
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
+local UseAppFocusRootFunction = FocusNavigationUtilsModule.useAppFocusRoot
+local ContextualMenuModule = require(ProfilePlatform.Components.CTARow.ContextualMenu)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local Button = FoundationModule.Button
+local IconButton = FoundationModule.IconButton
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local FillBehavior = FoundationModule.Enums.FillBehavior
 
-return function(p1)
-	-- upvalues: reactModule (ref), fFlagProfileTradeItemsExposureLoggingModule (ref), useTradeItemsExposureLoggerModule (ref), fFlagProfileTradeItemsImpressionLoggingModule (ref), useProfileAnalyticsContextModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useAppFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), fFlagProfileGamepadPrimaryActionFocusModule (ref), focusNavigationUtilsModule (ref), useComposedRef (ref), useProfileWrapperContextModule (ref), enumsModule (ref), buttonVariant (ref), contextualMenuContainsActionModule (ref), eventNamesModule (ref), iconButton (ref), button (ref), fillBehavior (ref), view (ref), contextualMenuModule (ref)
-	local var1, var2 = reactModule.useState(false)
-	local var3 = if fFlagProfileTradeItemsExposureLoggingModule then useTradeItemsExposureLoggerModule() else nil
-	local var4 = if fFlagProfileTradeItemsImpressionLoggingModule then useProfileAnalyticsContextModule() else nil
-	local var5 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref)
-		var2(false)
+return function(p1) --[[ Line: 50 | Named "CTAButton" ]]
+	-- upvalues: ReactModule (copy), FFlagProfileTradeItemsExposureLoggingModule (copy), UseTradeItemsExposureLoggerModule (copy), FFlagProfileTradeItemsImpressionLoggingModule (copy), UseProfileAnalyticsContextModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseAppFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), FFlagProfileGamepadPrimaryActionFocusModule (copy), FocusNavigationUtilsModule (copy), UseComposedRefFunction (copy), UseProfileWrapperContextModule (copy), EnumsModule (copy), ButtonVariant (copy), ContextualMenuContainsActionModule (copy), EventNamesModule (copy), IconButton (copy), Button (copy), FillBehavior (copy), View (copy), ContextualMenuModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseTradeItemsExposureLoggerModuleResult = if FFlagProfileTradeItemsExposureLoggingModule then UseTradeItemsExposureLoggerModule() else nil
+	local UseProfileAnalyticsContextModuleResult = if FFlagProfileTradeItemsImpressionLoggingModule then UseProfileAnalyticsContextModule() else nil
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 58 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(false)
 	end, {})
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref)
-		var2(function(p2)
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 62 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(function(p2): boolean --[[ Line: 63 ]]
 			return not p2
 		end)
 	end, {})
-	local var7 = useAppFocusRoot({
+	local UseAppFocusRootResult = UseAppFocusRootFunction({
 		isAutoFocusRoot = true,
-		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.ContextualMenu,
-		customEventHandlers = reactModule.useMemo(function()
-			-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), var5 (ref)
+		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.ContextualMenu,
+		customEventHandlers = ReactModule.useMemo(function() --[[ Line: 68 ]]
+			-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), UseResult (copy)
 			return {
-				[focusNavigationEventNameEnum.NavigateBack] = { handler = inputHandlersModule.onRelease(var5) }
+				[FocusNavigationEventNameEnum.NavigateBack] = { handler = InputHandlersModule.onRelease(UseResult) }
 			}
-		end, { var5 }),
-		isFocusable = var1
+		end, { UseResult }),
+		isFocusable = UseStateResult
 	})
-	local var8 = reactModule.useRef(nil)
-	local menuItem = p1.buttonItem.menuItem
-	local var9 = nil
+	local UseRefResult = ReactModule.useRef(nil)
+	local MenuItem = p1.buttonItem.menuItem
+	local v1 = nil
 	
-	if fFlagProfileGamepadPrimaryActionFocusModule then
-		var9 = if p1.layoutOrder == 1 and menuItem.id ~= enumsModule.ProfileActions.ContextualOverflow and useProfileWrapperContextModule().headerVariant ~= enumsModule.ProfileTabVariants.MeTab then useComposedRef(var8, focusNavigationUtilsModule.useFocusOnMount()) else var8
+	if FFlagProfileGamepadPrimaryActionFocusModule then
+		local UseComposedRefResult = UseComposedRefFunction(UseRefResult, (FocusNavigationUtilsModule.useFocusOnMount()))
+		local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
+		v1 = if p1.layoutOrder == 1 and MenuItem.id ~= EnumsModule.ProfileActions.ContextualOverflow and UseProfileWrapperContextModuleResult.headerVariant ~= EnumsModule.ProfileTabVariants.MeTab then UseComposedRefResult else UseRefResult
 	end
-	local displayValue = menuItem.displayValue
-	local icon = displayValue.icon
-	local text = displayValue.text
-	local contextualMenuItems = p1.buttonItem.contextualMenuItems
-	local var10 = if p1.buttonItem.buttonStyle then p1.buttonItem.buttonStyle else buttonVariant.Standard
-	local var11 = contextualMenuItems and #contextualMenuItems > 0
-	local isDisabled = p1.buttonItem.menuItem.isDisabled
-	local var12 = reactModule.useCallback(function()
-		-- upvalues: fFlagProfileTradeItemsExposureLoggingModule (copy), menuItem (ref), enumsModule (copy), var1 (ref), var3 (write), fFlagProfileTradeItemsImpressionLoggingModule (copy), contextualMenuContainsActionModule (copy), contextualMenuItems (ref), var4 (ref), eventNamesModule (copy), var11 (ref), var6 (ref)
-		if fFlagProfileTradeItemsExposureLoggingModule and menuItem.id == enumsModule.ProfileActions.ContextualOverflow and not var1 then
-			var3()
+	local DisplayValue = MenuItem.displayValue
+	local Icon = DisplayValue.icon
+	local Text = DisplayValue.text
+	local ContextualMenuItems = p1.buttonItem.contextualMenuItems
+	local ButtonStyle = if p1.buttonItem.buttonStyle then p1.buttonItem.buttonStyle else ButtonVariant.Standard
+	local v2: boolean = ContextualMenuItems and #ContextualMenuItems > 0
+	local IsDisabled = p1.buttonItem.menuItem.isDisabled
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 105 ]]
+		-- upvalues: FFlagProfileTradeItemsExposureLoggingModule (upval), MenuItem (copy), EnumsModule (upval), UseStateResult (copy), UseTradeItemsExposureLoggerModuleResult (ref), FFlagProfileTradeItemsImpressionLoggingModule (upval), ContextualMenuContainsActionModule (upval), ContextualMenuItems (copy), UseProfileAnalyticsContextModuleResult (copy), EventNamesModule (upval), v2 (copy), UseResult1 (copy)
+		if FFlagProfileTradeItemsExposureLoggingModule and MenuItem.id == EnumsModule.ProfileActions.ContextualOverflow and not UseStateResult then
+			UseTradeItemsExposureLoggerModuleResult()
 		end
-		if fFlagProfileTradeItemsImpressionLoggingModule and menuItem.id == enumsModule.ProfileActions.ContextualOverflow and (not var1 and contextualMenuContainsActionModule(contextualMenuItems, enumsModule.ProfileActions.TradeItems)) then
-			var4.fireAnalyticsEvent(eventNamesModule.ContextualMenuTradeItemsImpression, { buttonSurface = enumsModule.ButtonSurface.ContextualMenu })
+		if FFlagProfileTradeItemsImpressionLoggingModule and MenuItem.id == EnumsModule.ProfileActions.ContextualOverflow and not UseStateResult and ContextualMenuContainsActionModule(ContextualMenuItems, EnumsModule.ProfileActions.TradeItems) then
+			UseProfileAnalyticsContextModuleResult.fireAnalyticsEvent(EventNamesModule.ContextualMenuTradeItemsImpression, { buttonSurface = EnumsModule.ButtonSurface.ContextualMenu })
 		end
-		if not var11 then
-			menuItem.onActivated()
+		if not v2 then
+			MenuItem.onActivated()
 			
 			return
-		elseif not var1 then
-			menuItem.onActivated()
 		end
-		var6()
+		if not UseStateResult then
+			MenuItem.onActivated()
+		end
+		UseResult1()
 	end, {
-		var11, var1, menuItem.id, menuItem.onActivated, var6,
-		if fFlagProfileTradeItemsExposureLoggingModule then var3 else nil,
-		if fFlagProfileTradeItemsImpressionLoggingModule then var4 else nil,
-		if fFlagProfileTradeItemsImpressionLoggingModule then contextualMenuItems else nil
+		v2, UseStateResult, MenuItem.id, MenuItem.onActivated, UseResult1,
+		if FFlagProfileTradeItemsExposureLoggingModule then UseTradeItemsExposureLoggerModuleResult else nil,
+		if FFlagProfileTradeItemsImpressionLoggingModule then UseProfileAnalyticsContextModuleResult else nil,
+		if FFlagProfileTradeItemsImpressionLoggingModule then ContextualMenuItems else nil
 	})
-	local var13 = icon ~= nil and text == nil
+	local NoText: boolean = Icon ~= nil and Text == nil
 	
-	return reactModule.createElement(view, {
-		tag = { ["auto-xy"] = var13, ["fill auto-y"] = not var13 },
+	return ReactModule.createElement(View, {
+		tag = { ["auto-xy"] = NoText, ["fill auto-y"] = not NoText },
 		LayoutOrder = p1.layoutOrder
 	}, {
-		Button = if var13 then reactModule.createElement(iconButton, {
-			icon = icon,
+		Button = if NoText then ReactModule.createElement(IconButton, {
+			icon = Icon,
 			LayoutOrder = p1.layoutOrder,
-			onActivated = var12,
-			variant = buttonVariant.Standard,
-			ref = if fFlagProfileGamepadPrimaryActionFocusModule then var9 else var8,
-			isDisabled = isDisabled
-		}) else reactModule.createElement(button, {
-			text = text,
-			icon = icon,
-			onActivated = var12,
-			fillBehavior = fillBehavior.Fill,
-			variant = var10,
+			onActivated = UseResult2,
+			variant = ButtonVariant.Standard,
+			ref = if FFlagProfileGamepadPrimaryActionFocusModule then v1 else UseRefResult,
+			isDisabled = IsDisabled
+		}) else ReactModule.createElement(Button, {
+			text = Text,
+			icon = Icon,
+			onActivated = UseResult2,
+			fillBehavior = FillBehavior.Fill,
+			variant = ButtonStyle,
 			isLoading = p1.buttonItem.isLoading,
 			LayoutOrder = p1.layoutOrder,
-			ref = if fFlagProfileGamepadPrimaryActionFocusModule then var9 else var8,
-			isDisabled = isDisabled
+			ref = if FFlagProfileGamepadPrimaryActionFocusModule then v1 else UseRefResult,
+			isDisabled = IsDisabled
 		}),
-		ContextualMenu = if var11 then reactModule.createElement(contextualMenuModule, {
-			isOpen = var1,
-			menuItems = contextualMenuItems,
-			anchorRef = var8,
-			menuRef = var7,
-			closeMenu = var5,
+		ContextualMenu = if v2 then ReactModule.createElement(ContextualMenuModule, {
+			isOpen = UseStateResult,
+			menuItems = ContextualMenuItems,
+			anchorRef = UseRefResult,
+			menuRef = UseAppFocusRootResult,
+			closeMenu = UseResult,
 			align = p1.align
 		}) else nil
 	})

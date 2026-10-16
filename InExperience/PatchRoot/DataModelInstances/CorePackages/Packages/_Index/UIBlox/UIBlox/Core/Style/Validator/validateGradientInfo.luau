@@ -1,8 +1,8 @@
-﻿local tModule = require(script.Parent.Parent.Parent.Parent.Parent.t)
+﻿local TModule = require(script.Parent.Parent.Parent.Parent.Parent.t)
 
-return tModule.strictInterface({
-	Color = tModule.ColorSequence,
-	Transparency = tModule.NumberSequence,
-	Rotation = tModule.number,
-	Offset = tModule.optional(tModule.Vector2)
+return TModule.strictInterface({
+	Color = TModule.ColorSequence,
+	Transparency = TModule.NumberSequence,
+	Rotation = TModule.number,
+	Offset = TModule.optional(TModule.Vector2)
 })

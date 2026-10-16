@@ -1,9 +1,10 @@
-﻿return function(p1, p2)
-	if p1.X == 0 or p1.Y == 0 or (p2.X == 0 or p2.Y == 0) then
+﻿return function(Vector, Vector1): UDim2 --[[ Line: 1 | Named "getFitSize" ]]
+	if Vector.X == 0 or Vector.Y == 0 or Vector1.X == 0 or Vector1.Y == 0 then
 		return UDim2.fromScale(1, 1)
+	else
+		local XRatio = Vector.X / Vector.Y
+		local XRatio1 = Vector1.X / Vector1.Y
+		
+		return if XRatio < XRatio1 then UDim2.fromScale(1, XRatio / XRatio1) else UDim2.fromScale(XRatio1 / XRatio, 1)
 	end
-	local var1 = p1.X / p1.Y
-	local var2 = p2.X / p2.Y
-	
-	return if var1 < var2 then UDim2.fromScale(1, var1 / var2) else UDim2.fromScale(var2 / var1, 1)
 end

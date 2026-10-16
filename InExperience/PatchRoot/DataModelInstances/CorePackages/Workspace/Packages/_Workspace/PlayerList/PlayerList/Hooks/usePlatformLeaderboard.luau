@@ -1,8 +1,8 @@
-﻿local parent = script.Parent.Parent
-local reactModule = require(parent.Parent.React)
-local platformLeaderboardStoreContextModule = require(parent.Common.PlatformLeaderboardStoreContext)
+﻿local Parent = script.Parent.Parent
+local ReactModule = require(Parent.Parent.React)
+local PlatformLeaderboardStoreContextModule = require(Parent.Common.PlatformLeaderboardStoreContext)
 
-return function()
-	-- upvalues: reactModule (ref), platformLeaderboardStoreContextModule (ref)
-	return reactModule.useContext(platformLeaderboardStoreContextModule)
+return function() --[[ Line: 8 | Named "usePlatformLeaderboard" ]]
+	-- upvalues: ReactModule (copy), PlatformLeaderboardStoreContextModule (copy)
+	return (ReactModule.useContext(PlatformLeaderboardStoreContextModule))
 end

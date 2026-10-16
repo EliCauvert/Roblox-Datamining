@@ -1,48 +1,49 @@
-﻿local reportMomentsRealtimeEventModule = require(script.Parent.reportMomentsRealtimeEvent)
-local t = {
-	schedule = function(p1, p2)
-		return task.delay(p1, p2)
+﻿local ReportMomentsRealtimeEventModule = require(script.Parent.reportMomentsRealtimeEvent)
+local config = {
+	schedule = function(Delay, Tick) --[[ Line: 32 ]]
+		return task.delay(Delay, Tick)
 	end,
-	cancel = function(p1)
-		task.cancel(p1)
+	cancel = function(ScheduleResult) --[[ Line: 35 ]]
+		task.cancel(ScheduleResult)
 	end
 }
 
-return function(p1, p2, p3)
-	-- upvalues: reportMomentsRealtimeEventModule (ref), t (ref)
-	p1 = p1 or 60
-	p2 = p2 or reportMomentsRealtimeEventModule.reportMomentsSessionHeartbeat
-	p3 = p3 or t
-	local var1 = nil
-	local var2 = nil
+return function(p1, p2, p3) --[[ Line: 40 | Named "createMomentsSessionHeartbeat" ]]
+	-- upvalues: ReportMomentsRealtimeEventModule (copy), config (copy)
+	local P2 = p1 or 60
+	local Callback = p2 or ReportMomentsRealtimeEventModule.reportMomentsSessionHeartbeat
+	local P4 = p3 or config
+	local ScheduleResult = nil
+	local v1 = nil
 	
-	local function tick()
-		-- upvalues: var2 (write), p2 (ref), var1 (write), p3 (ref), p1 (ref), tick (ref)
-		if var2 == nil then
+	local function tick() --[[ Line: 54 ]]
+		-- upvalues: v1 (ref), Callback (copy), ScheduleResult (ref), P4 (copy), P2 (copy), tick (copy)
+		if v1 ~= nil then
+			Callback(v1)
+			ScheduleResult = P4.schedule(P2, tick)
+			
 			return
 		end
-		p2(var2)
-		var1 = p3.schedule(p1, tick)
 	end
 	
 	return {
-		start = function(p4)
-			-- upvalues: var1 (write), p3 (ref), var2 (write), p1 (ref), tick (ref)
-			if var1 ~= nil then
-				p3.cancel(var1)
-				var1 = nil
+		start = function(p4) --[[ Line: 70 ]]
+			-- upvalues: ScheduleResult (ref), P4 (copy), v1 (ref), P2 (copy), tick (copy)
+			if ScheduleResult ~= nil then
+				P4.cancel(ScheduleResult)
+				ScheduleResult = nil
 			end
-			var2 = nil
-			var2 = p4
-			var1 = p3.schedule(p1, tick)
+			v1 = nil
+			v1 = p4
+			ScheduleResult = P4.schedule(P2, tick)
 		end,
-		stop = function()
-			-- upvalues: var1 (write), p3 (ref), var2 (write)
-			if var1 ~= nil then
-				p3.cancel(var1)
-				var1 = nil
+		stop = function() --[[ Line: 62 ]]
+			-- upvalues: ScheduleResult (ref), P4 (copy), v1 (ref)
+			if ScheduleResult ~= nil then
+				P4.cancel(ScheduleResult)
+				ScheduleResult = nil
 			end
-			var2 = nil
+			v1 = nil
 		end
 	}
 end

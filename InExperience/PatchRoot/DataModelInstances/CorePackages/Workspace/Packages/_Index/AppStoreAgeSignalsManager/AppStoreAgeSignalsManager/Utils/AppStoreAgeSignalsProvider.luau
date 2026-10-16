@@ -1,73 +1,79 @@
-﻿local parent = script:FindFirstAncestor("AppStoreAgeSignalsManager").Parent
-local httpService = game:GetService("HttpService")
-local userInputService = game:GetService("UserInputService")
-local urlBuilder = require(parent.UrlBuilder).UrlBuilder
-local urlBase = require(parent.UrlBuilder).UrlBase
-local fetchModule = require(parent.Fetch)
-local promiseModule = require(parent.Promise)
-local fetch = fetchModule.fetch
-local response = fetchModule.Response
-local var1 = urlBuilder.new({
+﻿local Parent = script:FindFirstAncestor("AppStoreAgeSignalsManager").Parent
+local HttpService = game:GetService("HttpService")
+local UserInputService = game:GetService("UserInputService")
+local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
+local UrlBase = require(Parent.UrlBuilder).UrlBase
+local FetchModule = require(Parent.Fetch)
+local PromiseModule = require(Parent.Promise)
+local FetchFunction = FetchModule.fetch
+local Response = FetchModule.Response
+local NewUrlBuilder = UrlBuilder.new({
 	path = "app-signals-service/v1/app-signals/get-eligibility",
-	base = urlBase.APIS,
+	base = UrlBase.APIS,
 	query = { signalSource = "{signalSource}" }
 })
-local var2 = urlBuilder.new({
+local NewUrlBuilder1 = UrlBuilder.new({
 	path = "app-signals-service/v1/app-signals/store-result",
-	base = urlBase.APIS
+	base = UrlBase.APIS
 })
 
 return {
-	checkEligibility = function()
-		-- upvalues: fetch (ref), userInputService (ref), promiseModule (ref), var1 (ref), response (ref)
-		local name = userInputService:GetPlatform().Name
+	checkEligibility = function() --[[ Line: 27 ]]
+		-- upvalues: FetchFunction (copy), UserInputService (copy), PromiseModule (copy), NewUrlBuilder (copy), Response (copy)
+		local Name = UserInputService:GetPlatform().Name
 		
-		return promiseModule.new(function(p1, p2)
-			-- upvalues: var1 (copy), name (ref), fetch (ref), response (copy)
-			local var3 = fetch(var1({ signalSource = name }), { method = "GET" }):catch(function()
-				-- upvalues: response (copy)
-				return response.error()
+		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ()) --[[ Line: 30 ]]
+			-- upvalues: NewUrlBuilder (upval), Name (copy), FetchFunction (copy), Response (upval)
+			local v1 = FetchFunction(NewUrlBuilder({ signalSource = Name }), { method = "GET" }):catch(function() --[[ Line: 33 ]]
+				-- upvalues: Response (upval)
+				return Response.error()
 			end):expect()
 			
-			if not var3.ok then
-				p2(string.format("Eligibility check failed with HTTP status: %d", var3.status))
+			if not v1.ok then
+				Callback(string.format("Eligibility check failed with HTTP status: %d", v1.status))
 				
 				return
 			end
-			local var4 = var3:json():catch(function()
+			local v2 = v1:json():catch(function() --[[ Line: 45 ]]
 				return nil
 			end):expect()
 			
-			if var4 then
-				p1({ eligible = var4.eligible, signalSource = name })
+			if v2 then
+				Callback1({ eligible = v2.eligible, signalSource = Name })
 				
 				return
+			else
+				Callback("Failed to decode eligibility response as JSON")
 			end
-			p2("Failed to decode eligibility response as JSON")
 		end)
 	end,
-	publishResult = function(p1, p2, p3)
-		-- upvalues: fetch (ref), promiseModule (ref), var2 (ref), httpService (ref), response (ref)
-		return promiseModule.new(function(p4, p5)
-			-- upvalues: var2 (copy), fetch (ref), httpService (copy), p1 (ref), p2 (ref), p3 (ref), response (copy)
-			local var3 = fetch(var2(), {
+	publishResult = function(SignalSource, EncodedSignals, ResultType) --[[ Line: 62 ]]
+		-- upvalues: FetchFunction (copy), PromiseModule (copy), NewUrlBuilder1 (copy), HttpService (copy), Response (copy)
+		return PromiseModule.new(function(Callback1: () -> (), Callback: (any) -> ()) --[[ Line: 64 ]]
+			-- upvalues: NewUrlBuilder1 (upval), FetchFunction (copy), HttpService (upval), SignalSource (copy), EncodedSignals (copy), ResultType (copy), Response (upval)
+			local v1 = FetchFunction(NewUrlBuilder1(), {
 				method = "POST",
-				body = httpService:JSONEncode({ signalSource = p1, encodedSignals = p2, resultType = p3 }),
+				body = HttpService:JSONEncode({
+					signalSource = SignalSource,
+					encodedSignals = EncodedSignals,
+					resultType = ResultType
+				}),
 				headers = {
 					["Content-Type"] = "application/json",
 					Accept = "application/json"
 				}
-			}):catch(function()
-				-- upvalues: response (copy)
-				return response.error()
+			}):catch(function() --[[ Line: 78 ]]
+				-- upvalues: Response (upval)
+				return Response.error()
 			end):expect()
 			
-			if var3.ok then
-				p4()
+			if v1.ok then
+				Callback1()
 				
 				return
+			else
+				Callback(string.format("Publish result failed with HTTP status: %d", v1.status))
 			end
-			p5(string.format("Publish result failed with HTTP status: %d", var3.status))
 		end)
 	end
 }

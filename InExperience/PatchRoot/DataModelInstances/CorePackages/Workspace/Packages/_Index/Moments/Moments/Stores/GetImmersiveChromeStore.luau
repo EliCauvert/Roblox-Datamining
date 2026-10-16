@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("Moments").Parent.Signals).createComputed(require(script.createImmersiveChromeStore))
+﻿return require(script:FindFirstAncestor("Moments").Parent.Signals).createComputed((require(script.createImmersiveChromeStore)))

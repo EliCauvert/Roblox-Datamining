@@ -1,20 +1,22 @@
-﻿local editProfile = script:FindFirstAncestor("EditProfile")
-local parent = editProfile.Parent
-local reactModule = require(parent.React)
-local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
-local editProfileIXPModule = require(editProfile.Flags.EditProfileIXP)
-local analyticsModule = require(editProfile.Analytics)
-local defaultAnalyticsService = require(parent.SocialLuaAnalytics).Analytics.DefaultAnalyticsService
-local editUsernameWrapperModule = require(script.Parent.EditUsernameWrapper)
+﻿local EditProfile = script:FindFirstAncestor("EditProfile")
+local Parent = EditProfile.Parent
+local ReactModule = require(Parent.React)
+local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
+local EditProfileIXPModule = require(EditProfile.Flags.EditProfileIXP)
+local AnalyticsModule = require(EditProfile.Analytics)
+local DefaultAnalyticsService = require(Parent.SocialLuaAnalytics).Analytics.DefaultAnalyticsService
+local EditUsernameWrapperModule = require(script.Parent.EditUsernameWrapper)
 
-return function(p1)
-	-- upvalues: useLocalUserId (ref), editProfileIXPModule (ref), reactModule (ref), analyticsModule (ref), defaultAnalyticsService (ref), editUsernameWrapperModule (ref)
-	return if editProfileIXPModule.useIsExperimentEnabled() then reactModule.createElement(analyticsModule.Context.Provider, {
+return function(p1) --[[ Line: 13 ]]
+	-- upvalues: UseLocalUserIdFunction (copy), EditProfileIXPModule (copy), ReactModule (copy), AnalyticsModule (copy), DefaultAnalyticsService (copy), EditUsernameWrapperModule (copy)
+	local UseLocalUserIdResult = UseLocalUserIdFunction()
+	
+	return if EditProfileIXPModule.useIsExperimentEnabled() then ReactModule.createElement(AnalyticsModule.Context.Provider, {
 		value = {
-			fireAnalyticsEvent = analyticsModule.setupFireAnalyticsEvents({
-				analytics = defaultAnalyticsService,
-				infoForAllEvents = { uid = useLocalUserId() }
+			fireAnalyticsEvent = AnalyticsModule.setupFireAnalyticsEvents({
+				analytics = DefaultAnalyticsService,
+				infoForAllEvents = { uid = UseLocalUserIdResult }
 			})
 		}
-	}, { reactModule.createElement(editUsernameWrapperModule, p1) }) else reactModule.createElement(editUsernameWrapperModule, p1)
+	}, { ReactModule.createElement(EditUsernameWrapperModule, p1) }) else ReactModule.createElement(EditUsernameWrapperModule, p1)
 end

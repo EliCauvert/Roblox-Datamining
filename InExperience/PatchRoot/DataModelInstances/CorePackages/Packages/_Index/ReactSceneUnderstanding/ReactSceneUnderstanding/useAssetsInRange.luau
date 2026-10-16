@@ -1,11 +1,13 @@
-﻿local reactSceneUnderstanding = script:FindFirstAncestor("ReactSceneUnderstanding")
-local _ = require(reactSceneUnderstanding.Parent.SceneUnderstanding)
-local sceneAnalysisContextModule = require(reactSceneUnderstanding.SceneAnalysisContext)
-local useSourceAssetsModule = require(reactSceneUnderstanding.useSourceAssets)
+﻿local ReactSceneUnderstanding = script:FindFirstAncestor("ReactSceneUnderstanding")
+local _ = require(ReactSceneUnderstanding.Parent.SceneUnderstanding)
+local SceneAnalysisContextModule = require(ReactSceneUnderstanding.SceneAnalysisContext)
+local UseSourceAssetsModule = require(ReactSceneUnderstanding.useSourceAssets)
 
-return function(value)
-	-- upvalues: sceneAnalysisContextModule (ref), useSourceAssetsModule (ref)
-	return useSourceAssetsModule({
-		rangeQueryOptions = value or sceneAnalysisContextModule.use().rangeQueryOptions
+return function(p1) --[[ Line: 32 | Named "useAssetsInRange" ]]
+	-- upvalues: SceneAnalysisContextModule (copy), UseSourceAssetsModule (copy)
+	local UseResult = SceneAnalysisContextModule.use()
+	
+	return UseSourceAssetsModule({
+		rangeQueryOptions = if p1 then p1 else UseResult.rangeQueryOptions
 	}).assetsInRange
 end

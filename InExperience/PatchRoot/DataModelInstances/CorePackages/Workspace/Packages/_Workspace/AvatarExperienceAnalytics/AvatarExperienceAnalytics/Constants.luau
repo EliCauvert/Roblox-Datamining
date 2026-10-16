@@ -1,4 +1,4 @@
-﻿local unifiedEventLogEnumsModule = require(script.Parent.UnifiedEventLogEnums)
+﻿local UnifiedEventLogEnumsModule = require(script.Parent.UnifiedEventLogEnums)
 
 return {
 	AVATAR_EVENT_COUNTER_NAME = {
@@ -22,7 +22,10 @@ return {
 		CatalogPurchaseCompletedTwoStepAuth = "CatalogPurchaseCompletedTwoStepAuth",
 		CatalogPurchaseInvalidatedTwoStepAuth = "CatalogPurchaseInvalidatedTwoStepAuth",
 		CatalogPurchaseAbandonedTwoStepAuth = "CatalogPurchaseAbandonedTwoStepAuth",
-		CatalogPurchaseLoadFailedTwoStepAuth = "CatalogPurchaseLoadFailedTwoStepAuth"
+		CatalogPurchaseLoadFailedTwoStepAuth = "CatalogPurchaseLoadFailedTwoStepAuth",
+		SupportRegionAvatarOverlayControlPressed = "SupportRegionAvatarOverlay_ControlPressed",
+		SupportRegionAvatarOverlayDialogShown = "SupportRegionAvatarOverlay_DialogShown",
+		SupportRegionAvatarOverlayPageView = "SupportRegionAvatarOverlay_PageView"
 	},
 	AVATAR_EDITOR_SERVICE_ERRORS = {
 		GetRecommendedAssets = "AvatarEditorServiceGetRecommendedAssetsError",
@@ -55,8 +58,8 @@ return {
 		AvatarItemsCatalog = "avatarItemImpressionsCatalog"
 	},
 	TIMED_OPTION_BY_DAYS = {
-		[3] = unifiedEventLogEnumsModule.MarketplaceTimedOption.DAYS_3,
-		[7] = unifiedEventLogEnumsModule.MarketplaceTimedOption.DAYS_7,
-		[14] = unifiedEventLogEnumsModule.MarketplaceTimedOption.DAYS_14
+		[3] = UnifiedEventLogEnumsModule.MarketplaceTimedOption.DAYS_3,
+		[7] = UnifiedEventLogEnumsModule.MarketplaceTimedOption.DAYS_7,
+		[14] = UnifiedEventLogEnumsModule.MarketplaceTimedOption.DAYS_14
 	}
 }

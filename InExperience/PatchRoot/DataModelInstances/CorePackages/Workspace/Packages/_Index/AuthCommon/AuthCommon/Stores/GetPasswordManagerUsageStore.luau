@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("AuthCommon").Parent.Signals).createComputed(require(script.createPasswordManagerUsageStore))
+﻿return require(script:FindFirstAncestor("AuthCommon").Parent.Signals).createComputed((require(script.createPasswordManagerUsageStore)))

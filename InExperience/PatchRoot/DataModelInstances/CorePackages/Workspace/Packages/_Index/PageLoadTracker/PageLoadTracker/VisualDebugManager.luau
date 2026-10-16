@@ -1,74 +1,73 @@
-﻿local tweenService = game:GetService("TweenService")
-local pageLoadConfigModule = require(script.Parent.PageLoadConfig)
-local t = {}
-t.__index = t
+﻿local TweenService = game:GetService("TweenService")
+local PageLoadConfigModule = require(script.Parent.PageLoadConfig)
+local VisualDebugManager = {}
+VisualDebugManager.__index = VisualDebugManager
 
-local function getRandomHighlightColor()
+local function getRandomHighlightColor(): Color3 --[[ Line: 8 ]]
 	return Color3.new(math.random() * 0.6 + 0.4, math.random() * 0.6 + 0.4, math.random() * 0.6 + 0.4)
 end
 
-function t.new()
-	-- upvalues: t (ref)
-	local t_1 = { originalProperties = {} }
-	setmetatable(t_1, t)
+function VisualDebugManager.new() --[[ Line: 15 ]]
+	-- upvalues: VisualDebugManager (copy)
+	local config = { originalProperties = {} }
+	setmetatable(config, VisualDebugManager)
 	
-	return t_1
+	return config
 end
 
-function t:highlightComponent(p1)
-	-- upvalues: pageLoadConfigModule (ref), getRandomHighlightColor (ref), tweenService (ref)
-	if self.originalProperties[p1] then return end
-	if p1.BackgroundColor3 == pageLoadConfigModule.VISUAL_DEBUG.HIGHLIGHT_COLOR then return end
-	local backgroundColor3 = p1.BackgroundColor3
-	local backgroundTransparency = p1.BackgroundTransparency
-	local borderSizePixel = p1.BorderSizePixel
-	self.originalProperties[p1] = {
-		backgroundColor = backgroundColor3,
-		backgroundTransparency = backgroundTransparency,
-		borderColor = p1.BorderColor3,
-		borderSize = borderSizePixel
+function VisualDebugManager:highlightComponent(Frame: Frame) --[[ Line: 30 ]]
+	-- upvalues: PageLoadConfigModule (copy), getRandomHighlightColor (copy), TweenService (copy)
+	if self.originalProperties[Frame] then return end
+	if Frame.BackgroundColor3 == PageLoadConfigModule.VISUAL_DEBUG.HIGHLIGHT_COLOR then return end
+	local BackgroundTransparency: number = Frame.BackgroundTransparency
+	local BorderSizePixel: number = Frame.BorderSizePixel
+	self.originalProperties[Frame] = {
+		backgroundColor = Frame.BackgroundColor3,
+		backgroundTransparency = BackgroundTransparency,
+		borderColor = Frame.BorderColor3,
+		borderSize = BorderSizePixel
 	}
-	p1.BackgroundColor3 = pageLoadConfigModule.VISUAL_DEBUG.HIGHLIGHT_COLOR or getRandomHighlightColor()
+	Frame.BackgroundColor3 = PageLoadConfigModule.VISUAL_DEBUG.HIGHLIGHT_COLOR or getRandomHighlightColor()
 	
-	if backgroundTransparency >= 0.95 then
-		p1.BackgroundTransparency = 0.5
+	if BackgroundTransparency >= 0.95 then
+		Frame.BackgroundTransparency = 0.5
 	else
-		p1.BackgroundTransparency = math.max(0.3, backgroundTransparency - pageLoadConfigModule.VISUAL_DEBUG.TRANSPARENCY_REDUCTION)
+		Frame.BackgroundTransparency = math.max(0.3, BackgroundTransparency - PageLoadConfigModule.VISUAL_DEBUG.TRANSPARENCY_REDUCTION)
 	end
-	p1.BorderColor3 = pageLoadConfigModule.VISUAL_DEBUG.BORDER_COLOR
-	p1.BorderSizePixel = math.max(pageLoadConfigModule.VISUAL_DEBUG.MIN_BORDER_SIZE, borderSizePixel)
-	task.delay(pageLoadConfigModule.VISUAL_DEBUG.HIGHLIGHT_DURATION, function()
-		-- upvalues: p1 (ref), self (ref), pageLoadConfigModule (copy), tweenService (copy)
-		if p1.Parent and self.originalProperties[p1] then
-			local var1 = self.originalProperties[p1]
-			local var2 = tweenService:Create(p1, TweenInfo.new(pageLoadConfigModule.VISUAL_DEBUG.FADE_DURATION, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {
-				BackgroundColor3 = pageLoadConfigModule.VISUAL_DEBUG.END_COLOR,
-				BackgroundTransparency = var1.backgroundTransparency * 0.9,
-				BorderSizePixel = var1.borderSize
+	Frame.BorderColor3 = PageLoadConfigModule.VISUAL_DEBUG.BORDER_COLOR
+	Frame.BorderSizePixel = math.max(PageLoadConfigModule.VISUAL_DEBUG.MIN_BORDER_SIZE, BorderSizePixel)
+	task.delay(PageLoadConfigModule.VISUAL_DEBUG.HIGHLIGHT_DURATION, function() --[[ Line: 61 ]]
+		-- upvalues: Frame (copy), self (copy), PageLoadConfigModule (upval), TweenService (upval)
+		if Frame.Parent and self.originalProperties[Frame] then
+			local OriginalProperty = self.originalProperties[Frame]
+			local Tween = TweenService:Create(Frame, TweenInfo.new(PageLoadConfigModule.VISUAL_DEBUG.FADE_DURATION, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {
+				BackgroundColor3 = PageLoadConfigModule.VISUAL_DEBUG.END_COLOR,
+				BackgroundTransparency = OriginalProperty.backgroundTransparency * 0.9,
+				BorderSizePixel = OriginalProperty.borderSize
 			})
-			var2.Completed:Connect(function()
-				-- upvalues: self (copy), p1 (copy)
-				self.originalProperties[p1] = nil
+			Tween.Completed:Connect(function() --[[ Line: 76 ]]
+				-- upvalues: self (upval), Frame (upval)
+				self.originalProperties[Frame] = nil
 			end)
-			var2:Play()
+			Tween:Play()
 		end
 	end)
 end
 
-function t:clearAllHighlights()
-	for i, v in self.originalProperties do
+function VisualDebugManager:clearAllHighlights() --[[ Line: 85 ]]
+	for i, originalProperty in self.originalProperties do
 		if i.Parent then
-			i.BackgroundColor3 = v.backgroundColor
-			i.BackgroundTransparency = v.backgroundTransparency
-			i.BorderColor3 = v.borderColor
-			i.BorderSizePixel = v.borderSize
+			i.BackgroundColor3 = originalProperty.backgroundColor
+			i.BackgroundTransparency = originalProperty.backgroundTransparency
+			i.BorderColor3 = originalProperty.borderColor
+			i.BorderSizePixel = originalProperty.borderSize
 		end
 	end
 	self.originalProperties = {}
 end
 
-function t:destroy()
+function VisualDebugManager:destroy() --[[ Line: 97 ]]
 	self:clearAllHighlights()
 end
 
-return t
+return VisualDebugManager

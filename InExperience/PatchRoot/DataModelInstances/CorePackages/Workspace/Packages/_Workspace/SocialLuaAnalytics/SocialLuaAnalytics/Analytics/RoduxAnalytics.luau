@@ -1,18 +1,18 @@
-﻿local actionsModule = require(script.Actions)
-local selectorsModule = require(script.Selectors)
-local reducersModule = require(script.Reducers)
+﻿local ActionsModule = require(script.Actions)
+local SelectorsModule = require(script.Selectors)
+local ReducersModule = require(script.Reducers)
 local _ = require(script.AnalyticsTypes)
 
 return {
-	config = function(p1)
-		-- upvalues: reducersModule (ref), actionsModule (ref), selectorsModule (ref)
+	config = function(p1) --[[ Line: 7 ]]
+		-- upvalues: ReducersModule (copy), ActionsModule (copy), SelectorsModule (copy)
 		return {
-			installReducer = function()
-				-- upvalues: reducersModule (copy), p1 (ref)
-				return reducersModule(p1)
+			installReducer = function() --[[ Line: 9 ]]
+				-- upvalues: ReducersModule (upval), p1 (copy)
+				return ReducersModule(p1)
 			end,
-			Actions = actionsModule(p1),
-			Selectors = selectorsModule(p1)
+			Actions = ActionsModule(p1),
+			Selectors = SelectorsModule(p1)
 		}
 	end
 }

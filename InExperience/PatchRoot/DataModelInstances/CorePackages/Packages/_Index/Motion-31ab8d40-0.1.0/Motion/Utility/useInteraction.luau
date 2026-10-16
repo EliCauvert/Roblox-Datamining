@@ -1,34 +1,34 @@
-﻿local reactModule = require(script.Parent.Parent.Parent.React)
+﻿local ReactModule = require(script.Parent.Parent.Parent.React)
 
-return function(p1)
-	-- upvalues: reactModule (ref)
-	local var1, var2 = reactModule.useState(false)
-	local var3, var4 = reactModule.useState(false)
+return function(Callback) --[[ Line: 11 | Named "useInteraction" ]]
+	-- upvalues: ReactModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
 	
 	return {
-		onInputBegan = function(_, p2)
-			-- upvalues: var2 (ref)
-			if p2.UserInputType == Enum.UserInputType.MouseButton1 then
-				var2(true)
+		onInputBegan = function(_, Input) --[[ Line: 16 ]]
+			-- upvalues: UseStateResult2 (copy)
+			if Input.UserInputType == Enum.UserInputType.MouseButton1 then
+				UseStateResult2(true)
 			end
 		end,
-		onInputEnded = function(_, p2)
-			-- upvalues: var1 (ref), var3 (ref), p1 (ref), var2 (ref)
-			if p2.UserInputType == Enum.UserInputType.MouseButton1 then
-				if var1 and var3 then
-					p1()
+		onInputEnded = function(_, Input) --[[ Line: 22 ]]
+			-- upvalues: UseStateResult (copy), UseStateResult1 (copy), Callback (copy), UseStateResult2 (copy)
+			if Input.UserInputType == Enum.UserInputType.MouseButton1 then
+				if UseStateResult and UseStateResult1 then
+					Callback()
 				end
-				var2(false)
+				UseStateResult2(false)
 			end
 		end,
-		onMouseEnter = function()
-			-- upvalues: var4 (ref)
-			var4(true)
+		onMouseEnter = function() --[[ Line: 31 ]]
+			-- upvalues: UseStateResult2_1 (copy)
+			UseStateResult2_1(true)
 		end,
-		onMouseLeave = function()
-			-- upvalues: var4 (ref), var2 (ref)
-			var4(false)
-			var2(false)
+		onMouseLeave = function() --[[ Line: 35 ]]
+			-- upvalues: UseStateResult2_1 (copy), UseStateResult2 (copy)
+			UseStateResult2_1(false)
+			UseStateResult2(false)
 		end
-	}, var1, var3
+	}, UseStateResult, UseStateResult1
 end

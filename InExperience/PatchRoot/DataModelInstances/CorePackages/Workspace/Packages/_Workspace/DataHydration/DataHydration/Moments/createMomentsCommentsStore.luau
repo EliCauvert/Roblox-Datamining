@@ -1,185 +1,189 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local promiseModule = require(parent.Promise)
-local _ = require(parent.MomentsTypes)
-local signalsModule = require(parent.Signals)
-local localUserIdStore = require(parent.LocalUserIdStore).LocalUserIdStore
-local createDataCacheModule = require(dataHydration.createDataCache)
-local createDataResolverModule = require(dataHydration.createDataResolver)
-local dataHydrationTypesModule = require(dataHydration.DataHydrationTypes)
-local dataHydrationUtilsModule = require(dataHydration.DataHydrationUtils)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local PromiseModule = require(Parent.Promise)
+local _ = require(Parent.MomentsTypes)
+local SignalsModule = require(Parent.Signals)
+local LocalUserIdStore = require(Parent.LocalUserIdStore).LocalUserIdStore
+local CreateDataCacheModule = require(DataHydration.createDataCache)
+local CreateDataResolverModule = require(DataHydration.createDataResolver)
+local DataHydrationTypesModule = require(DataHydration.DataHydrationTypes)
+local DataHydrationUtilsModule = require(DataHydration.DataHydrationUtils)
 local _ = require(script.Parent.MomentsStoreTypes)
 
-return function(p1)
-	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), promiseModule (ref), signalsModule (ref), dataHydrationTypesModule (ref), localUserIdStore (ref), dataHydrationUtilsModule (ref)
-	local var1, var2
-	local _ = p1 or {}
-	local var3 = createDataCacheModule()
-	local var4 = createDataResolverModule({
+return function(p1) --[[ Line: 23 | Named "createMomentsCommentsStore" ]]
+	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), PromiseModule (copy), SignalsModule (copy), DataHydrationTypesModule (copy), LocalUserIdStore (copy), DataHydrationUtilsModule (copy)
+	local DataCacheModule = CreateDataCacheModule()
+	local DataResolverModule = CreateDataResolverModule({
 		supportsMultiGet = false,
 		replaceItems = true,
-		cache = var3,
-		fetchFn = function(_, _)
-			-- upvalues: promiseModule (copy)
-			return promiseModule.reject("Moments comments V1 has no get-comment-by-id API")
+		cache = DataCacheModule,
+		fetchFn = function(_, _) --[[ Line: 30 ]]
+			-- upvalues: PromiseModule (upval)
+			return PromiseModule.reject("Moments comments V1 has no get-comment-by-id API")
 		end
 	})
-	local var5 = createDataCacheModule()
-	local var6, var7 = signalsModule.createSignal(0)
+	local DataCacheModule1 = CreateDataCacheModule()
+	local Signal, Signal2 = SignalsModule.createSignal(0)
 	
-	local function _(p2)
+	local function _(p2): string --[[ Line: 37 | Named "normalizeOwnerId" ]]
 		if p2 == nil or p2 == "" then
 			return ""
+		else
+			local Text = tostring(p2)
+			local Number: number? = tonumber(Text)
+			
+			return if Number == nil or Number > 0 then Text else ""
 		end
-		local var8 = tostring(p2)
-		local var9 = tonumber(var8)
-		
-		return if var9 == nil or var9 > 0 then var8 else ""
 	end
 	
-	local function getGenerationAwareResult(p2, p3)
-		-- upvalues: var6 (ref), dataHydrationTypesModule (copy)
+	local function getGenerationAwareResult(CachedItem, p2) --[[ Line: 46 ]]
+		-- upvalues: Signal (copy), DataHydrationTypesModule (upval)
 		return {
-			data = function(p4)
-				-- upvalues: var6 (copy), p3 (ref), p2 (ref)
-				return if var6(p4) == p3 then p2.data(p4) else nil
+			data = function(p3) --[[ Line: 48 ]]
+				-- upvalues: Signal (upval), p2 (copy), CachedItem (copy)
+				return if Signal(p3) == p2 then CachedItem.data(p3) else nil
 			end,
-			status = function(p4)
-				-- upvalues: var6 (copy), p3 (ref), dataHydrationTypesModule (copy), p2 (ref)
-				return if var6(p4) == p3 then p2.status(p4) else dataHydrationTypesModule.DataStatus.NotReady
+			status = function(p3) --[[ Line: 54 ]]
+				-- upvalues: Signal (upval), p2 (copy), DataHydrationTypesModule (upval), CachedItem (copy)
+				return if Signal(p3) == p2 then CachedItem.status(p3) else DataHydrationTypesModule.DataStatus.NotReady
 			end
 		}
 	end
 	
-	local _ = function()
-		-- upvalues: var4 (ref), var5 (ref)
-		var4.clear()
-		var5.clear()
+	local _ = function() --[[ Line: 63 | Named "clearCaches" ]]
+		-- upvalues: DataResolverModule (copy), DataCacheModule1 (copy)
+		DataResolverModule.clear()
+		DataCacheModule1.clear()
 	end
 	
-	local _ = function()
-		-- upvalues: var4 (ref), var5 (ref), var7 (ref), var6 (ref)
-		var4.clear()
-		var5.clear()
-		var7(var6(false) + 1)
+	local _ = function() --[[ Line: 68 | Named "invalidate" ]]
+		-- upvalues: DataResolverModule (copy), DataCacheModule1 (copy), Signal2 (copy), Signal (copy)
+		DataResolverModule.clear()
+		DataCacheModule1.clear()
+		Signal2(Signal(false) + 1)
 	end
 	
-	local currentUserId = localUserIdStore.getCurrentUserId(false)
+	local CurrentUserId = LocalUserIdStore.getCurrentUserId(false)
+	local v1 = nil
 	
-	if currentUserId == nil or currentUserId == "" then
-		var1 = ""
+	if CurrentUserId == nil or CurrentUserId == "" then
+		v1 = ""
 	else
-		local var8 = tostring(currentUserId)
-		var2 = tonumber(var8)
-		var1 = if var2 == nil or var2 > 0 then var8 else ""
+		local Text = tostring(CurrentUserId)
+		local Number: number? = tonumber(Text)
+		v1 = if Number == nil or Number > 0 then Text else ""
 	end
-	local var9
-	local localPlayerUserId = dataHydrationUtilsModule.getLocalPlayerUserId()
+	local LocalPlayerUserId = DataHydrationUtilsModule.getLocalPlayerUserId()
+	local v2 = nil
 	
-	if localPlayerUserId == nil or localPlayerUserId == "" then
-		currentUserId = ""
+	if LocalPlayerUserId == nil or LocalPlayerUserId == "" then
+		v2 = ""
 	else
-		var2 = tostring(localPlayerUserId)
-		var9 = tonumber(var2)
-		currentUserId = if var9 == nil or var9 > 0 then var2 else ""
+		local Text = tostring(LocalPlayerUserId)
+		local Number: number? = tonumber(Text)
+		v2 = if Number == nil or Number > 0 then Text else ""
 	end
-	localPlayerUserId = if var1 ~= "" then currentUserId else var1
-	var9 = dataHydrationUtilsModule.observeLocalPlayerUserId(function(p2)
-		-- upvalues: localPlayerUserId (write), var4 (ref), var5 (ref), var7 (ref), var6 (ref)
-		local var10
+	local v3: string = if v1 == "" then v2 else v1
+	local ObserveLocalPlayerUserIdResult = DataHydrationUtilsModule.observeLocalPlayerUserId(function(p2) --[[ Line: 76 | Named "handleOwnerChange" ]]
+		-- upvalues: v3 (ref), DataResolverModule (copy), DataCacheModule1 (copy), Signal2 (copy), Signal (copy)
+		local v4 = nil
 		if p2 == nil or p2 == "" then
-			var10 = ""
+			v4 = ""
 		else
-			local var11 = tostring(p2)
-			local var12 = tonumber(var11)
-			var10 = if var12 == nil or var12 > 0 then var11 else ""
+			local Text = tostring(p2)
+			local Number: number? = tonumber(Text)
+			v4 = if Number == nil or Number > 0 then Text else ""
 		end
-		if var10 == localPlayerUserId then
+		if v4 ~= v3 then
+			v3 = v4
+			DataResolverModule.clear()
+			DataCacheModule1.clear()
+			Signal2(Signal(false) + 1)
+			
 			return
 		end
-		localPlayerUserId = var10
-		var4.clear()
-		var5.clear()
-		var7(var6(false) + 1)
 	end)
-	local var10 = var1
-	local var11 = signalsModule.createEffect(function(p2)
-		-- upvalues: localUserIdStore (copy), var10 (write), localPlayerUserId (write), var4 (ref), var5 (ref), var7 (ref), var6 (ref)
-		local var12, var13
-		local currentUserId = localUserIdStore.getCurrentUserId(p2)
+	local v4: string = v1
+	local Effect = SignalsModule.createEffect(function(p2) --[[ Line: 87 ]]
+		-- upvalues: LocalUserIdStore (upval), v4 (ref), v3 (ref), DataResolverModule (copy), DataCacheModule1 (copy), Signal2 (copy), Signal (copy)
+		local CurrentUserId = LocalUserIdStore.getCurrentUserId(p2)
+		local v5 = nil
 		
-		if currentUserId == nil or currentUserId == "" then
-			var12 = ""
+		if CurrentUserId == nil or CurrentUserId == "" then
+			v5 = ""
 		else
-			local var14 = tostring(currentUserId)
-			var13 = tonumber(var14)
-			var12 = if var13 == nil or var13 > 0 then var14 else ""
+			local Text = tostring(CurrentUserId)
+			local Number: number? = tonumber(Text)
+			v5 = if Number == nil or Number > 0 then Text else ""
 		end
-		if var12 == var10 then return end
-		var10 = var12
+		if v5 == v4 then return end
+		v4 = v5
+		local v6 = nil
 		
-		if var12 == nil or var12 == "" then
-			currentUserId = ""
+		if v5 == nil or v5 == "" then
+			v6 = ""
 		else
-			local var15 = tostring(var12)
-			var13 = tonumber(var15)
-			currentUserId = if var13 == nil or var13 > 0 then var15 else ""
+			local Text = tostring(v5)
+			local Number: number? = tonumber(Text)
+			v6 = if Number == nil or Number > 0 then Text else ""
 		end
-		if currentUserId == localPlayerUserId then
+		if v6 ~= v3 then
+			v3 = v6
+			DataResolverModule.clear()
+			DataCacheModule1.clear()
+			Signal2(Signal(false) + 1)
+			
 			return
 		end
-		localPlayerUserId = currentUserId
-		var4.clear()
-		var5.clear()
-		var7(var6(false) + 1)
 	end)
-	local var12 = false
+	local Flag = false
 	
 	return {
-		getCachedComment = function(p2)
-			-- upvalues: var6 (ref), var4 (ref), getGenerationAwareResult (ref)
-			return getGenerationAwareResult(var4.getCachedItem(p2), var6(false))
+		getCachedComment = function(p2) --[[ Line: 97 ]]
+			-- upvalues: Signal (copy), DataResolverModule (copy), getGenerationAwareResult (copy)
+			return (getGenerationAwareResult(DataResolverModule.getCachedItem(p2), (Signal(false))))
 		end,
-		getCachedMomentComments = function(p2)
-			-- upvalues: var6 (ref), var5 (ref), getGenerationAwareResult (ref)
-			return getGenerationAwareResult(var5.getItem(p2), var6(false))
+		getCachedMomentComments = function(p2) --[[ Line: 103 ]]
+			-- upvalues: Signal (copy), DataCacheModule1 (copy), getGenerationAwareResult (copy)
+			return (getGenerationAwareResult(DataCacheModule1.getItem(p2), (Signal(false))))
 		end,
-		upsertComments = function(p2, p3)
-			-- upvalues: var6 (ref), var3 (ref)
-			if p3 ~= nil and p3 ~= var6(false) then return end
+		upsertComments = function(List, p2) --[[ Line: 109 ]]
+			-- upvalues: Signal (copy), DataCacheModule (copy)
+			if p2 ~= nil and p2 ~= Signal(false) then return end
 			local t = {}
 			
-			for i, v in p2 do
-				t[v.commentId] = v
+			for _, value in List do
+				t[value.commentId] = value
 			end
-			var3.replaceItems(t)
+			DataCacheModule.replaceItems(t)
 		end,
-		upsertMomentComments = function(p4, p5)
-			-- upvalues: var6 (ref), var5 (ref)
-			if p5 == nil or p5 == var6(false) then
-				var5.replaceItems(p4)
+		upsertMomentComments = function(p3, p4) --[[ Line: 120 ]]
+			-- upvalues: Signal (copy), DataCacheModule1 (copy)
+			if p4 == nil or p4 == Signal(false) then
+				DataCacheModule1.replaceItems(p3)
 				
 				return
 			end
 		end,
-		getOwnerGeneration = var6,
-		clear = function()
-			-- upvalues: var4 (ref), var5 (ref), var7 (ref), var6 (ref)
-			var4.clear()
-			var5.clear()
-			var7(var6(false) + 1)
+		getOwnerGeneration = Signal,
+		clear = function() --[[ Line: 127 ]]
+			-- upvalues: DataResolverModule (copy), DataCacheModule1 (copy), Signal2 (copy), Signal (copy)
+			DataResolverModule.clear()
+			DataCacheModule1.clear()
+			Signal2(Signal(false) + 1)
 		end,
-		dispose = function()
-			-- upvalues: var12 (write), var9 (ref), var11 (ref), var7 (ref), var6 (ref), var4 (ref), var5 (ref)
-			if var12 then
+		dispose = function() --[[ Line: 131 ]]
+			-- upvalues: Flag (ref), ObserveLocalPlayerUserIdResult (copy), Effect (copy), Signal2 (copy), Signal (copy), DataResolverModule (copy), DataCacheModule1 (copy)
+			if not Flag then
+				Flag = true
+				ObserveLocalPlayerUserIdResult()
+				Effect()
+				Signal2(Signal(false) + 1)
+				DataResolverModule.dispose()
+				DataCacheModule1.dispose()
+				
 				return
 			end
-			var12 = true
-			var9()
-			var11()
-			var7(var6(false) + 1)
-			var4.dispose()
-			var5.dispose()
 		end
 	}
 end

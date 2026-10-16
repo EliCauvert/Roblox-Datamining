@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("EnableToastIconSupport", false)
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastFlag("EnableToastIconSupport")
 end

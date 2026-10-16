@@ -1,6 +1,6 @@
-﻿local httpModule = require(script:FindFirstAncestor("BulkPurchaseApp").Parent.Http)
+﻿local HttpModule = require(script:FindFirstAncestor("BulkPurchaseApp").Parent.Http)
 
-return function(p1)
-	-- upvalues: httpModule (ref)
-	return p1(("%s/users/authenticated/app-launch-info"):format(httpModule.Url.USERS_URL), "GET")
+return function(Callback) --[[ Line: 5 | Named "getAccounts" ]]
+	-- upvalues: HttpModule (copy)
+	return Callback(("%s/users/authenticated/app-launch-info"):format(HttpModule.Url.USERS_URL), "GET")
 end

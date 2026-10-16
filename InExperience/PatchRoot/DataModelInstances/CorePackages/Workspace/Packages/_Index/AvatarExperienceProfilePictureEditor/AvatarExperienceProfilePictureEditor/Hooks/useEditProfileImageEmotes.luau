@@ -1,89 +1,82 @@
-﻿local avatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
-local parent = avatarExperienceProfilePictureEditor.Parent
-local reactModule = require(parent.React)
-local useRealtimeEvent = require(parent.RealtimeDelivery).useRealtimeEvent
-local localizationModule = require(parent.Localization)
-local useOwnedEmotesModule = require(avatarExperienceProfilePictureEditor.Hooks.useOwnedEmotes)
-local useRecommendedEmotesModule = require(avatarExperienceProfilePictureEditor.Hooks.useRecommendedEmotes)
-local textKeysModule = require(avatarExperienceProfilePictureEditor.Common.TextKeys)
-local useEditProfileImageActions = require(avatarExperienceProfilePictureEditor.Context.EditProfileImageActionsContext).useEditProfileImageActions
+﻿local AvatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
+local Parent = AvatarExperienceProfilePictureEditor.Parent
+local ReactModule = require(Parent.React)
+local UseRealtimeEventFunction = require(Parent.RealtimeDelivery).useRealtimeEvent
+local LocalizationModule = require(Parent.Localization)
+local UseOwnedEmotesModule = require(AvatarExperienceProfilePictureEditor.Hooks.useOwnedEmotes)
+local UseRecommendedEmotesModule = require(AvatarExperienceProfilePictureEditor.Hooks.useRecommendedEmotes)
+local TextKeysModule = require(AvatarExperienceProfilePictureEditor.Common.TextKeys)
+local UseEditProfileImageActionsFunction = require(AvatarExperienceProfilePictureEditor.Context.EditProfileImageActionsContext).useEditProfileImageActions
 
-return function(p1)
-	-- upvalues: useEditProfileImageActions (ref), useOwnedEmotesModule (ref), useRecommendedEmotesModule (ref), reactModule (ref), useRealtimeEvent (ref), localizationModule (ref), textKeysModule (ref)
-	local var1
-	local var2 = useEditProfileImageActions()
-	local var3 = useOwnedEmotesModule()
-	local emoteItems = var3.emoteItems
-	local recommendedEmotes = useRecommendedEmotesModule().recommendedEmotes
-	local var4 = reactModule.useCallback(function(p2)
-		-- upvalues: recommendedEmotes (ref), var3 (ref)
-		local label = nil
+return function(p1) --[[ Line: 35 | Named "useEditProfileImageEmotes" ]]
+	-- upvalues: UseEditProfileImageActionsFunction (copy), UseOwnedEmotesModule (copy), UseRecommendedEmotesModule (copy), ReactModule (copy), UseRealtimeEventFunction (copy), LocalizationModule (copy), TextKeysModule (copy)
+	local UseEditProfileImageActionsResult = UseEditProfileImageActionsFunction()
+	local UseOwnedEmotesModuleResult = UseOwnedEmotesModule()
+	local EmoteItems = UseOwnedEmotesModuleResult.emoteItems
+	local RecommendedEmotes = UseRecommendedEmotesModule().recommendedEmotes
+	local UseResult = ReactModule.useCallback(function(Id) --[[ Line: 43 ]]
+		-- upvalues: RecommendedEmotes (copy), UseOwnedEmotesModuleResult (copy)
+		local Label = nil
 		
-		for i, v in recommendedEmotes do
-			if v.id == p2 then
-				label = v.label
+		for _, recommendedEmote in RecommendedEmotes do
+			if recommendedEmote.id == Id then
+				Label = recommendedEmote.label
 				break
 			end
 		end
-		var3.markEmoteOwned(p2, label)
-	end, { recommendedEmotes, var3.markEmoteOwned })
-	useRealtimeEvent("AvatarAssetOwnershipNotifications", "Grant", function(p3)
-		-- upvalues: var4 (ref)
-		if tostring(p3.AssetTypeId) == tostring(Enum.AvatarAssetType.EmoteAnimation.Value) then
-			var4(tostring(p3.AssetId))
+		UseOwnedEmotesModuleResult.markEmoteOwned(Id, Label)
+	end, {
+		RecommendedEmotes,
+		UseOwnedEmotesModuleResult.markEmoteOwned
+	})
+	UseRealtimeEventFunction("AvatarAssetOwnershipNotifications", "Grant", function(p2) --[[ Line: 60 ]]
+		-- upvalues: UseResult (copy)
+		if tostring(p2.AssetTypeId) == tostring(Enum.AvatarAssetType.EmoteAnimation.Value) then
+			UseResult((tostring(p2.AssetId)))
 		end
-	end, { var4 })
-	local var5 = reactModule.useMemo(function()
-		-- upvalues: emoteItems (ref)
+	end, { UseResult })
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 66 ]]
+		-- upvalues: EmoteItems (copy)
 		local t = {}
 		
-		for i, v in emoteItems do
-			t[v.id] = true
+		for _, emoteItem in EmoteItems do
+			t[emoteItem.id] = true
 		end
 		return t
-	end, { emoteItems })
-	local var6 = reactModule.useMemo(function()
-		-- upvalues: recommendedEmotes (ref)
+	end, { EmoteItems })
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 73 ]]
+		-- upvalues: RecommendedEmotes (copy)
 		local t = {}
 		
-		for i, v in recommendedEmotes do
-			t[v.id] = true
+		for _, recommendedEmote in RecommendedEmotes do
+			t[recommendedEmote.id] = true
 		end
 		return t
-	end, { recommendedEmotes })
-	local selectedEmoteId = p1.selectedEmoteId
-	
-	if selectedEmoteId then
-		var1 = false
-		
-		if var5[selectedEmoteId] ~= true then
-			local _ = var6[selectedEmoteId] == true
-		end
-	else
-		var1 = false
-	end
-	reactModule.useEffect(function()
-		-- upvalues: selectedEmoteId (ref), var1 (ref), var2 (ref)
-		if selectedEmoteId and var1 then
-			var2.onPrepareRecommendedEmotePurchase(selectedEmoteId)
+	end, { RecommendedEmotes })
+	local SelectedEmoteId = p1.selectedEmoteId
+	local IsUseMemoResultEntry: boolean = if SelectedEmoteId then UseMemoResult[SelectedEmoteId] ~= true and UseMemoResult1[SelectedEmoteId] == true else false
+	ReactModule.useEffect(function() --[[ Line: 85 ]]
+		-- upvalues: SelectedEmoteId (copy), IsUseMemoResultEntry (copy), UseEditProfileImageActionsResult (copy)
+		if SelectedEmoteId and IsUseMemoResultEntry then
+			UseEditProfileImageActionsResult.onPrepareRecommendedEmotePurchase(SelectedEmoteId)
 		end
 	end, {
-		selectedEmoteId,
-		var1,
-		var2.onPrepareRecommendedEmotePurchase
+		SelectedEmoteId,
+		IsUseMemoResultEntry,
+		UseEditProfileImageActionsResult.onPrepareRecommendedEmotePurchase
 	})
 	
 	return {
-		ownedEmotes = emoteItems,
-		recommendedEmotes = recommendedEmotes,
-		isLoading = var3.isLoading,
-		hasError = var3.hasError,
-		hasMoreEmotes = var3.hasMoreEmotes,
-		isLoadingMoreEmotes = var3.isLoadingMoreEmotes,
-		hasLoadMoreError = var3.hasLoadMoreError,
-		onRetry = var3.refetch,
-		onMoreEmotes = var3.onMoreEmotes,
-		isRecommendedEmoteSelected = var1,
-		freeLabel = localizationModule.Hooks.useLocalization({ free = textKeysModule.Free }).free
+		ownedEmotes = EmoteItems,
+		recommendedEmotes = RecommendedEmotes,
+		isLoading = UseOwnedEmotesModuleResult.isLoading,
+		hasError = UseOwnedEmotesModuleResult.hasError,
+		hasMoreEmotes = UseOwnedEmotesModuleResult.hasMoreEmotes,
+		isLoadingMoreEmotes = UseOwnedEmotesModuleResult.isLoadingMoreEmotes,
+		hasLoadMoreError = UseOwnedEmotesModuleResult.hasLoadMoreError,
+		onRetry = UseOwnedEmotesModuleResult.refetch,
+		onMoreEmotes = UseOwnedEmotesModuleResult.onMoreEmotes,
+		isRecommendedEmoteSelected = IsUseMemoResultEntry,
+		freeLabel = LocalizationModule.Hooks.useLocalization({ free = TextKeysModule.Free }).free
 	}
 end

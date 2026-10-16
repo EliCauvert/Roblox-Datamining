@@ -1,3 +1,3 @@
-﻿local avatarSwitcher = script:FindFirstAncestor("AvatarSwitcher")
+﻿local AvatarSwitcher = script:FindFirstAncestor("AvatarSwitcher")
 
-return require(avatarSwitcher.Parent.Signals).createComputed(require(avatarSwitcher.Stores.createAvatarSwitcherStore))
+return require(AvatarSwitcher.Parent.Signals).createComputed((require(AvatarSwitcher.Stores.createAvatarSwitcherStore)))

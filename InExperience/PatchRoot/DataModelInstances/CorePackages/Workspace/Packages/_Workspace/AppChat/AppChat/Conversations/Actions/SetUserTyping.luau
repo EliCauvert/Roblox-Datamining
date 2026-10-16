@@ -1,3 +1,7 @@
-﻿return require(script:FindFirstAncestor("AppChat").Parent.Rodux).makeActionCreator(script.Name, function(p1, p2, p3)
-	return { conversationId = p1, userId = p2, value = p3 }
+﻿return require(script:FindFirstAncestor("AppChat").Parent.Rodux).makeActionCreator(script.Name, function(ConversationId, UserId, Value) --[[ Line: 5 ]]
+	return {
+		conversationId = ConversationId,
+		userId = UserId,
+		value = Value
+	}
 end)

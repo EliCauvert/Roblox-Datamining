@@ -1,25 +1,25 @@
-﻿local generateStringId = require(script:FindFirstAncestor("PlaceInfoRodux").Parent.AppCommonLib).GenerateStringId
-local placeInfoModelModule = require(script.Parent.PlaceInfoModel)
-local t = {
-	mock = function()
-		-- upvalues: placeInfoModelModule (ref), generateStringId (ref)
-		local name = placeInfoModelModule.new()
-		name.builder = "builder"
-		name.builderId = generateStringId()
-		name.description = "description"
-		name.imageToken = generateStringId()
-		name.isPlayable = true
-		name.name = "name"
-		name.placeId = generateStringId()
-		name.price = 0
-		name.reasonProhibited = nil
-		name.universeId = generateStringId()
-		name.universeRootPlaceId = generateStringId()
-		name.url = "url"
+﻿local GenerateStringIdFunction = require(script:FindFirstAncestor("PlaceInfoRodux").Parent.AppCommonLib).GenerateStringId
+local PlaceInfoModelModule = require(script.Parent.PlaceInfoModel)
+local MockPlaceInfoModelModule = {
+	mock = function() --[[ Line: 11 ]]
+		-- upvalues: PlaceInfoModelModule (copy), GenerateStringIdFunction (copy)
+		local NewPlaceInfoModel = PlaceInfoModelModule.new()
+		NewPlaceInfoModel.builder = "builder"
+		NewPlaceInfoModel.builderId = GenerateStringIdFunction()
+		NewPlaceInfoModel.description = "description"
+		NewPlaceInfoModel.imageToken = GenerateStringIdFunction()
+		NewPlaceInfoModel.isPlayable = true
+		NewPlaceInfoModel.name = "name"
+		NewPlaceInfoModel.placeId = GenerateStringIdFunction()
+		NewPlaceInfoModel.price = 0
+		NewPlaceInfoModel.reasonProhibited = nil
+		NewPlaceInfoModel.universeId = GenerateStringIdFunction()
+		NewPlaceInfoModel.universeRootPlaceId = GenerateStringIdFunction()
+		NewPlaceInfoModel.url = "url"
 		
-		return name
+		return NewPlaceInfoModel
 	end
 }
-setmetatable(t, { __index = placeInfoModelModule })
+setmetatable(MockPlaceInfoModelModule, { __index = PlaceInfoModelModule })
 
-return t
+return MockPlaceInfoModelModule

@@ -1,28 +1,29 @@
-﻿local textService = game:GetService("TextService")
+﻿local TextService = game:GetService("TextService")
 
-local function _(p1, p2, p3, p4)
-	-- upvalues: textService (ref)
-	return textService:GetTextSize(p1, p2, p3, Vector2.new(p4, 1000000)).Y
+local function _(String, FontSize, p1, X) --[[ Line: 13 | Named "wrappedHeight" ]]
+	-- upvalues: TextService (copy)
+	return TextService:GetTextSize(String, FontSize, p1, Vector2.new(X, 1000000)).Y
 end
 
-return function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: textService (ref)
-	if p1 == "" or p4 <= 0 or (p5 <= 0 or p3 <= p6) then
-		return p3
-	elseif textService:GetTextSize(p1, p3, p2, Vector2.new(p4, 1000000)).Y <= p5 then
-		return p3
+return function(String, p1, FontSize, X: number, p2: number, p3) --[[ Line: 17 | Named "fitTextOverlayFontSize" ]]
+	-- upvalues: TextService (copy)
+	if String == "" or X <= 0 or p2 <= 0 or FontSize <= p3 then
+		return FontSize
 	end
-	local var1 = p6
-	local var2 = p3
+	if TextService:GetTextSize(String, FontSize, p1, Vector2.new(X, 1000000)).Y <= p2 then
+		return FontSize
+	end
+	local v1 = p3
+	local FontSize1 = FontSize
 	
 	for _ = 1, 8 do
-		local var3 = (var1 + var2) / 2
+		local FontSizeRatio = (v1 + FontSize1) / 2
 		
-		if textService:GetTextSize(p1, var3, p2, Vector2.new(p4, 1000000)).Y <= p5 then
-			var1 = var3
+		if TextService:GetTextSize(String, FontSizeRatio, p1, Vector2.new(X, 1000000)).Y <= p2 then
+			v1 = FontSizeRatio
 		else
-			var2 = var3
+			FontSize1 = FontSizeRatio
 		end
 	end
-	return var1
+	return v1
 end

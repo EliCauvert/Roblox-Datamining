@@ -1,244 +1,374 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local foundationModule = require(parent.Foundation)
-local localizationModule = require(parent.Localization)
-local reactModule = require(parent.React)
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local fFlagBuildExperienceMonetizationNativeUIModule = require(buildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI)
-local fFlagBuildExperienceDevProductRecoveryModule = require(buildExperience.Flags.FFlagBuildExperienceDevProductRecovery)
-local var1 = if fFlagBuildExperienceMonetizationNativeUIModule then require(parent.FoundationCloudAssets) else nil
-local localizationService = game:GetService("LocalizationService")
-local localizationRoactContext = localizationModule.LocalizationRoactContext
-local numberLocalization = localizationModule.NumberLocalization
-local useLocalization = localizationModule.Hooks.useLocalization
-local agentCardModule = require(script.Parent.AgentCard)
-local agentCardActionsModule = require(script.Parent.AgentCardActions)
-local chatCardPriorityModule = require(buildExperience.Components.Chat.ChatCardEmphasis.ChatCardPriority)
-local useChatCardEmphasisModule = require(buildExperience.Components.Chat.ChatCardEmphasis.useChatCardEmphasis)
-local fFlagBuildExperienceChatCardEmphasisModule = require(buildExperience.Flags.FFlagBuildExperienceChatCardEmphasis)
-local button = foundationModule.Button
-local image = foundationModule.Image
-local sheet = foundationModule.Sheet
-local text = foundationModule.Text
-local view = foundationModule.View
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local fillBehavior = foundationModule.Enums.FillBehavior
-local inputSize = foundationModule.Enums.InputSize
-local assetId = nil
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
+local LocalizationModule = require(Parent.Localization)
+local ReactModule = require(Parent.React)
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local FFlagBuildExperienceMonetizationNativeUIModule = require(BuildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI)
+local FFlagBuildExperienceDevProductRecoveryModule = require(BuildExperience.Flags.FFlagBuildExperienceDevProductRecovery)
+local FFlagCreatorAgentChatMonetizationToolHelpersModule = require(BuildExperience.Flags.FFlagCreatorAgentChatMonetizationToolHelpers)
+local FoundationCloudAssetsModule = if FFlagBuildExperienceMonetizationNativeUIModule then require(Parent.FoundationCloudAssets) else nil
+local LocalizationService = game:GetService("LocalizationService")
+local LocalizationRoactContext = LocalizationModule.LocalizationRoactContext
+local NumberLocalization = LocalizationModule.NumberLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
+local AgentCardModule = require(script.Parent.AgentCard)
+local AgentCardActionsModule = require(script.Parent.AgentCardActions)
+local ChatCardPriorityModule = require(BuildExperience.Components.Chat.ChatCardEmphasis.ChatCardPriority)
+local UseChatCardEmphasisModule = require(BuildExperience.Components.Chat.ChatCardEmphasis.useChatCardEmphasis)
+local FFlagBuildExperienceChatCardEmphasisModule = require(BuildExperience.Flags.FFlagBuildExperienceChatCardEmphasis)
+local Button = FoundationModule.Button
+local Image = FoundationModule.Image
+local Sheet = FoundationModule.Sheet
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local FillBehavior = FoundationModule.Enums.FillBehavior
+local InputSize = FoundationModule.Enums.InputSize
+local AssetId = nil
 
-if fFlagBuildExperienceMonetizationNativeUIModule then
-	var1.preloadAsset("pictograms/robux")
-	assetId = var1.Assets["pictograms/robux"].assetId
+if FFlagBuildExperienceMonetizationNativeUIModule then
+	FoundationCloudAssetsModule.preloadAsset("pictograms/robux")
+	AssetId = FoundationCloudAssetsModule.Assets["pictograms/robux"].assetId
 end
-local function formatSummary(p1, p2, p3)
-	return p1:Format(p2, p3)
-end
+local config = {
+	title = LocalizationStringsModule.AGENT_DEV_PRODUCT_TITLE,
+	create = LocalizationStringsModule.AGENT_DEV_PRODUCT_CREATE,
+	update = LocalizationStringsModule.AGENT_DEV_PRODUCT_UPDATE,
+	activate = LocalizationStringsModule.AGENT_DEV_PRODUCT_ACTIVATE,
+	deactivate = LocalizationStringsModule.AGENT_DEV_PRODUCT_DEACTIVATE
+}
+local config1 = {
+	gamePass = {
+		title = LocalizationStringsModule.AGENT_GAME_PASS_TITLE,
+		create = LocalizationStringsModule.AGENT_GAME_PASS_CREATE,
+		update = LocalizationStringsModule.AGENT_GAME_PASS_UPDATE,
+		activate = LocalizationStringsModule.AGENT_GAME_PASS_ACTIVATE,
+		deactivate = LocalizationStringsModule.AGENT_GAME_PASS_DEACTIVATE
+	},
+	subscription = {
+		title = LocalizationStringsModule.AGENT_SUBSCRIPTION_TITLE,
+		create = LocalizationStringsModule.AGENT_SUBSCRIPTION_CREATE,
+		update = LocalizationStringsModule.AGENT_SUBSCRIPTION_UPDATE,
+		activate = LocalizationStringsModule.AGENT_SUBSCRIPTION_ACTIVATE,
+		deactivate = LocalizationStringsModule.AGENT_SUBSCRIPTION_DEACTIVATE,
+		deactivateCancelRenewals = LocalizationStringsModule.AGENT_SUBSCRIPTION_DEACTIVATE_CANCEL_RENEWALS,
+		delete = LocalizationStringsModule.AGENT_SUBSCRIPTION_DELETE
+	}
+}
+local config2 = {
+	consumable = LocalizationStringsModule.AGENT_SUBSCRIPTION_PRODUCT_TYPE_CONSUMABLE,
+	currency = LocalizationStringsModule.AGENT_SUBSCRIPTION_PRODUCT_TYPE_CURRENCY,
+	durable = LocalizationStringsModule.AGENT_SUBSCRIPTION_PRODUCT_TYPE_DURABLE
+}
 
-local function summaryText(p1, p2, p3, p4)
-	-- upvalues: numberLocalization (ref), localizationService (ref), fFlagBuildExperienceMonetizationNativeUIModule (ref), formatSummary (ref), localizationStringsModule (ref)
-	local action = p1.action
-	
-	if action == "create" then
-		local name = p1.name or p3
-		local var2 = if p1.priceInRobux ~= nil then p4 else numberLocalization.localize(tostring(p1.priceInRobux), localizationService.RobloxLocaleId)
+local function _(p1) --[[ Line: 99 | Named "summaryKeys" ]]
+	-- upvalues: config1 (copy), config (copy)
+	local Entry = nil
+	if p1.itemKind == nil then
+		Entry = config
+	else
+		Entry = config1[p1.itemKind]
 		
-		if fFlagBuildExperienceMonetizationNativeUIModule then
-			return formatSummary(p2, localizationStringsModule.AGENT_DEV_PRODUCT_PRICE, { PRICE = var2 })
+		if not Entry then
+			return config
 		end
-		local list = {
-			formatSummary(p2, localizationStringsModule.AGENT_DEV_PRODUCT_CREATE, { NAME = name, PRICE = var2 })
+	end
+	return Entry
+end
+
+local _ = function(p1, p2) --[[ Line: 103 | Named "idActionKey" ]]
+	return if p2.action == "create" or p2.action == "update" or p2.action == "title" then nil elseif p2.action == "deactivate" and p2.cancelRenewals == true and p1.deactivateCancelRenewals ~= nil then p1.deactivateCancelRenewals else p1[p2.action]
+end
+
+local _ = function(p1) --[[ Line: 113 | Named "itemIdText" ]]
+	return p1.itemId or tostring(p1.productId)
+end
+
+local function formatSummary(p1, AGENTDEVPRODUCTDESCRIPTION, p2) --[[ Line: 119 ]]
+	return p1:Format(AGENTDEVPRODUCTDESCRIPTION, p2)
+end
+
+local function appendSubscriptionProductType(List, p1, p2) --[[ Line: 123 ]]
+	-- upvalues: config2 (copy), formatSummary (copy), LocalizationStringsModule (copy)
+	if p1.itemKind ~= "subscription" or p1.productType == nil then return end
+	local Entry = config2[p1.productType]
+	
+	if Entry ~= nil then
+		table.insert(List, formatSummary(p2, LocalizationStringsModule.AGENT_SUBSCRIPTION_PRODUCT_TYPE, { PRODUCT_TYPE = p2:Format(Entry, {}) }))
+		
+		return
+	end
+end
+
+local function devProductSummaryText(p1, UseContextResult, DefaultName, UnavailablePrice) --[[ Line: 139 ]]
+	-- upvalues: NumberLocalization (copy), LocalizationService (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), formatSummary (copy), LocalizationStringsModule (copy)
+	local Action = p1.action
+	
+	if Action == "create" then
+		local Name = p1.name or DefaultName
+		local UnavailablePrice1 = if p1.priceInRobux == nil then UnavailablePrice else NumberLocalization.localize(tostring(p1.priceInRobux), LocalizationService.RobloxLocaleId)
+		
+		if FFlagBuildExperienceMonetizationNativeUIModule then
+			return formatSummary(UseContextResult, LocalizationStringsModule.AGENT_DEV_PRODUCT_PRICE, { PRICE = UnavailablePrice1 })
+		end
+		local List = {
+			formatSummary(UseContextResult, LocalizationStringsModule.AGENT_DEV_PRODUCT_CREATE, { NAME = Name, PRICE = UnavailablePrice1 })
 		}
 		
 		if p1.description ~= nil then
-			table.insert(list, formatSummary(p2, localizationStringsModule.AGENT_DEV_PRODUCT_DESCRIPTION, { DESCRIPTION = p1.description }))
+			table.insert(List, formatSummary(UseContextResult, LocalizationStringsModule.AGENT_DEV_PRODUCT_DESCRIPTION, { DESCRIPTION = p1.description }))
 		end
-		return table.concat(list, "\n")
-	elseif action == "update" then
-		local list = {
-			formatSummary(p2, localizationStringsModule.AGENT_DEV_PRODUCT_UPDATE, { PRODUCT_ID = tostring(p1.productId) })
+		return table.concat(List, "\n")
+	else
+		if Action ~= "update" then
+			return if Action == "activate" then formatSummary(UseContextResult, LocalizationStringsModule.AGENT_DEV_PRODUCT_ACTIVATE, { PRODUCT_ID = tostring(p1.productId) }) elseif Action == "deactivate" then formatSummary(UseContextResult, LocalizationStringsModule.AGENT_DEV_PRODUCT_DEACTIVATE, { PRODUCT_ID = tostring(p1.productId) }) else formatSummary(UseContextResult, LocalizationStringsModule.AGENT_DEV_PRODUCT_MANAGE, {})
+		end
+		local List = {
+			formatSummary(UseContextResult, LocalizationStringsModule.AGENT_DEV_PRODUCT_UPDATE, { PRODUCT_ID = tostring(p1.productId) })
 		}
 		
 		if p1.name ~= nil then
-			table.insert(list, formatSummary(p2, localizationStringsModule.AGENT_DEV_PRODUCT_NAME, { NAME = p1.name }))
+			table.insert(List, formatSummary(UseContextResult, LocalizationStringsModule.AGENT_DEV_PRODUCT_NAME, { NAME = p1.name }))
 		end
 		if p1.description ~= nil then
-			table.insert(list, formatSummary(p2, localizationStringsModule.AGENT_DEV_PRODUCT_DESCRIPTION, { DESCRIPTION = p1.description }))
+			table.insert(List, formatSummary(UseContextResult, LocalizationStringsModule.AGENT_DEV_PRODUCT_DESCRIPTION, { DESCRIPTION = p1.description }))
 		end
 		if p1.priceInRobux ~= nil then
-			table.insert(list, formatSummary(p2, localizationStringsModule.AGENT_DEV_PRODUCT_PRICE, {
-				PRICE = numberLocalization.localize(tostring(p1.priceInRobux), localizationService.RobloxLocaleId)
+			table.insert(List, formatSummary(UseContextResult, LocalizationStringsModule.AGENT_DEV_PRODUCT_PRICE, {
+				PRICE = NumberLocalization.localize(tostring(p1.priceInRobux), LocalizationService.RobloxLocaleId)
 			}))
 		end
-		return table.concat(list, "\n")
-	else
-		return if action == "activate" then formatSummary(p2, localizationStringsModule.AGENT_DEV_PRODUCT_ACTIVATE, { PRODUCT_ID = tostring(p1.productId) }) elseif action == "deactivate" then formatSummary(p2, localizationStringsModule.AGENT_DEV_PRODUCT_DEACTIVATE, { PRODUCT_ID = tostring(p1.productId) }) else formatSummary(p2, localizationStringsModule.AGENT_DEV_PRODUCT_MANAGE, {})
+		return table.concat(List, "\n")
 	end
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), localizationRoactContext (ref), useLocalization (ref), localizationStringsModule (ref), fFlagBuildExperienceMonetizationNativeUIModule (ref), fFlagBuildExperienceDevProductRecoveryModule (ref), fFlagBuildExperienceChatCardEmphasisModule (ref), useChatCardEmphasisModule (ref), chatCardPriorityModule (ref), sheet (ref), text (ref), view (ref), image (ref), assetId (write), summaryText (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref), agentCardActionsModule (ref), agentCardModule (ref)
-	local var2 = reactModule.useContext(localizationRoactContext)
-	local var3 = useLocalization({
-		title = localizationStringsModule.AGENT_DEV_PRODUCT_TITLE,
-		approve = localizationStringsModule.AGENT_DEV_PRODUCT_APPROVE,
-		reject = if fFlagBuildExperienceMonetizationNativeUIModule then localizationStringsModule.MONETIZATION_CANCEL else localizationStringsModule.AGENT_DEV_PRODUCT_REJECT,
-		defaultName = localizationStringsModule.AGENT_DEV_PRODUCT_DEFAULT_NAME,
-		unavailablePrice = localizationStringsModule.AGENT_DEV_PRODUCT_PRICE_UNAVAILABLE,
-		preview = if fFlagBuildExperienceMonetizationNativeUIModule then localizationStringsModule.GAME_CONFIGURATION_PREVIEW else nil,
-		create = if fFlagBuildExperienceMonetizationNativeUIModule then localizationStringsModule.MONETIZATION_EMPTY_CREATE_PRODUCT else nil,
-		error = if fFlagBuildExperienceDevProductRecoveryModule then localizationStringsModule.BUILD_ELIGIBILITY_ERROR_TITLE else nil,
-		retry = if fFlagBuildExperienceDevProductRecoveryModule then localizationStringsModule.MONETIZATION_RETRY else nil
-	})
-	local testId = p1.testId or "agent-dev-product-card"
-	local var4 = fFlagBuildExperienceDevProductRecoveryModule and p1.isPending == true
-	local var5 = fFlagBuildExperienceDevProductRecoveryModule and p1.canRetry == true
-	local var6 = if p1.isActionDisabled ~= true then var4 else true
-	local var7 = if fFlagBuildExperienceDevProductRecoveryModule then reactModule.useRef(false) else nil
-	local var8 = fFlagBuildExperienceMonetizationNativeUIModule and p1.action == "create"
-	local var9 = if fFlagBuildExperienceChatCardEmphasisModule then useChatCardEmphasisModule(if var6 then nil else chatCardPriorityModule.AgentProposal) else nil
-	local var10 = false
-	local var11 = nil
-	local var12 = nil
+local function itemSummaryText(p1, UseContextResult, DefaultName, UnavailablePrice) --[[ Line: 223 ]]
+	-- upvalues: config1 (copy), config (copy), NumberLocalization (copy), LocalizationService (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), formatSummary (copy), LocalizationStringsModule (copy), appendSubscriptionProductType (copy)
+	local Action = p1.action
+	local Config = if p1.itemKind == nil then config else config1[p1.itemKind] or config
 	
-	if fFlagBuildExperienceMonetizationNativeUIModule then
-		local var13, var14 = reactModule.useState(false)
-		var10 = var13
-		var11 = var14
-		var12 = reactModule.useCallback(function()
-			-- upvalues: var7 (ref), var11 (write)
-			if var7 ~= nil then
-				var7.current = false
-			end
-			var11(true)
-		end, { var11 })
+	if Action == "create" then
+		local Name = p1.name or DefaultName
+		local UnavailablePrice1 = if p1.priceInRobux == nil then UnavailablePrice else NumberLocalization.localize(tostring(p1.priceInRobux), LocalizationService.RobloxLocaleId)
+		local List = if FFlagBuildExperienceMonetizationNativeUIModule then {
+			formatSummary(UseContextResult, LocalizationStringsModule.AGENT_DEV_PRODUCT_PRICE, { PRICE = UnavailablePrice1 })
+		} else {
+			formatSummary(UseContextResult, Config.create, { NAME = Name, PRICE = UnavailablePrice1 })
+		}
+		appendSubscriptionProductType(List, p1, UseContextResult)
+		
+		if FFlagBuildExperienceMonetizationNativeUIModule then
+			return table.concat(List, "\n")
+		end
+		if p1.description ~= nil then
+			table.insert(List, formatSummary(UseContextResult, LocalizationStringsModule.AGENT_DEV_PRODUCT_DESCRIPTION, { DESCRIPTION = p1.description }))
+		end
+		return table.concat(List, "\n")
+	else
+		if Action ~= "update" then
+			local DeactivateCancelRenewals = if p1.action == "create" or p1.action == "update" or p1.action == "title" then nil elseif p1.action == "deactivate" and p1.cancelRenewals == true and Config.deactivateCancelRenewals ~= nil then Config.deactivateCancelRenewals else Config[p1.action]
+			
+			return if DeactivateCancelRenewals == nil then formatSummary(UseContextResult, LocalizationStringsModule.AGENT_DEV_PRODUCT_MANAGE, {}) else formatSummary(UseContextResult, DeactivateCancelRenewals, { PRODUCT_ID = p1.itemId or tostring(p1.productId) })
+		end
+		local List = {
+			formatSummary(UseContextResult, Config.update, { PRODUCT_ID = p1.itemId or tostring(p1.productId) })
+		}
+		
+		if p1.name ~= nil then
+			table.insert(List, formatSummary(UseContextResult, LocalizationStringsModule.AGENT_DEV_PRODUCT_NAME, { NAME = p1.name }))
+		end
+		if p1.description ~= nil then
+			table.insert(List, formatSummary(UseContextResult, LocalizationStringsModule.AGENT_DEV_PRODUCT_DESCRIPTION, { DESCRIPTION = p1.description }))
+		end
+		if p1.priceInRobux ~= nil then
+			table.insert(List, formatSummary(UseContextResult, LocalizationStringsModule.AGENT_DEV_PRODUCT_PRICE, {
+				PRICE = NumberLocalization.localize(tostring(p1.priceInRobux), LocalizationService.RobloxLocaleId)
+			}))
+		end
+		return table.concat(List, "\n")
 	end
-	local var15 = if var8 then reactModule.createElement(sheet.Root, {
-		isOpen = var10,
-		onClose = function()
-			-- upvalues: fFlagBuildExperienceDevProductRecoveryModule (copy), var10 (write), var6 (ref), p1 (ref), var11 (write)
-			if not fFlagBuildExperienceDevProductRecoveryModule and not var10 and not var6 then
-				p1.onApprove()
+end
+
+local _ = function(p1, p2, p3, p4) --[[ Line: 290 | Named "summaryText" ]]
+	-- upvalues: FFlagCreatorAgentChatMonetizationToolHelpersModule (copy), devProductSummaryText (copy), itemSummaryText (copy)
+	return if FFlagCreatorAgentChatMonetizationToolHelpersModule or p1.itemKind ~= nil then itemSummaryText(p1, p2, p3, p4) else devProductSummaryText(p1, p2, p3, p4)
+end
+
+return function(p1) --[[ Line: 302 | Named "AgentDevProductCard" ]]
+	-- upvalues: ReactModule (copy), LocalizationRoactContext (copy), UseLocalizationFunction (copy), config1 (copy), config (copy), LocalizationStringsModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), FFlagBuildExperienceDevProductRecoveryModule (copy), FFlagBuildExperienceChatCardEmphasisModule (copy), UseChatCardEmphasisModule (copy), ChatCardPriorityModule (copy), Sheet (copy), Text (copy), View (copy), Image (copy), AssetId (ref), FFlagCreatorAgentChatMonetizationToolHelpersModule (copy), devProductSummaryText (copy), itemSummaryText (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy), AgentCardActionsModule (copy), AgentCardModule (copy)
+	local UseContextResult = ReactModule.useContext(LocalizationRoactContext)
+	local UseLocalizationResult = UseLocalizationFunction({
+		title = (if p1.itemKind == nil then config else config1[p1.itemKind] or config).title,
+		approve = LocalizationStringsModule.AGENT_DEV_PRODUCT_APPROVE,
+		reject = if FFlagBuildExperienceMonetizationNativeUIModule then LocalizationStringsModule.MONETIZATION_CANCEL else LocalizationStringsModule.AGENT_DEV_PRODUCT_REJECT,
+		defaultName = LocalizationStringsModule.AGENT_DEV_PRODUCT_DEFAULT_NAME,
+		unavailablePrice = LocalizationStringsModule.AGENT_DEV_PRODUCT_PRICE_UNAVAILABLE,
+		preview = if FFlagBuildExperienceMonetizationNativeUIModule then LocalizationStringsModule.GAME_CONFIGURATION_PREVIEW else nil,
+		create = if FFlagBuildExperienceMonetizationNativeUIModule then LocalizationStringsModule.MONETIZATION_EMPTY_CREATE_PRODUCT else nil,
+		error = if FFlagBuildExperienceDevProductRecoveryModule then LocalizationStringsModule.BUILD_ELIGIBILITY_ERROR_TITLE else nil,
+		retry = if FFlagBuildExperienceDevProductRecoveryModule then LocalizationStringsModule.MONETIZATION_RETRY else nil
+	})
+	local TestId = p1.testId or "agent-dev-product-card"
+	local IsIsPending: boolean = FFlagBuildExperienceDevProductRecoveryModule and p1.isPending == true
+	local IsCanRetry: boolean = FFlagBuildExperienceDevProductRecoveryModule and p1.canRetry == true
+	local IsIsActionDisabled: boolean = p1.isActionDisabled == true or IsIsPending
+	local UseRefResult = if FFlagBuildExperienceDevProductRecoveryModule then ReactModule.useRef(false) else nil
+	local IsCreate: boolean = FFlagBuildExperienceMonetizationNativeUIModule and p1.action == "create"
+	local UseChatCardEmphasisModuleResult = if FFlagBuildExperienceChatCardEmphasisModule then UseChatCardEmphasisModule(if IsIsActionDisabled then nil else ChatCardPriorityModule.AgentProposal) else nil
+	local IsOpen = false
+	local Callback = nil
+	local UseResult = nil
+	
+	if FFlagBuildExperienceMonetizationNativeUIModule then
+		IsOpen, Callback = ReactModule.useState(false)
+		UseResult = ReactModule.useCallback(function() --[[ Line: 338 ]]
+			-- upvalues: UseRefResult (copy), Callback (ref)
+			if UseRefResult ~= nil then
+				UseRefResult.current = false
 			end
-			var11(false)
-		end,
-		snapPoints = { 0.5, 1 },
-		testId = `{testId}-preview`
-	}, {
-		Header = reactModule.createElement(sheet.Header, { hasCloseAffordance = true }, {
-			Title = reactModule.createElement(text, {
-				tag = "size-full-0 auto-y text-title-large text-wrap text-align-x-left content-emphasis",
-				Text = p1.name or var3.defaultName
-			})
-		}),
-		Content = reactModule.createElement(sheet.Content, nil, {
-			Details = reactModule.createElement(view, { tag = "col align-x-center gap-large size-full-0 auto-y" }, {
-				Image = if p1.imageAssetId ~= nil then reactModule.createElement(image, {
-					LayoutOrder = 1,
-					tag = "size-3000-3000 content-emphasis",
-					Image = assetId,
-					ScaleType = Enum.ScaleType.Fit,
-					testId = `{testId}-preview-image`
-				}) else reactModule.createElement(image, {
-					LayoutOrder = 1,
-					tag = "size-3000-3000 radius-medium",
-					Image = `rbxassetid://{p1.imageAssetId}`,
-					ScaleType = Enum.ScaleType.Fit,
-					testId = `{testId}-preview-image`
-				}),
-				Price = reactModule.createElement(text, {
-					LayoutOrder = 2,
-					tag = "size-full-0 auto-y text-body-large text-wrap text-align-x-left content-emphasis",
-					Text = summaryText(p1, var2, var3.defaultName, var3.unavailablePrice)
-				}),
-				Description = reactModule.createElement(text, {
-					LayoutOrder = 3,
-					tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-default",
-					Text = p1.description or "",
-					testId = `{testId}-preview-description`
+			Callback(true)
+		end, { Callback })
+	end
+	local Element = nil
+	if IsCreate then
+		local DefaultName = UseLocalizationResult.defaultName
+		local UnavailablePrice = UseLocalizationResult.unavailablePrice
+		Element = ReactModule.createElement(Sheet.Root, {
+			isOpen = IsOpen,
+			onClose = function() --[[ Line: 348 ]]
+				-- upvalues: FFlagBuildExperienceDevProductRecoveryModule (upval), IsOpen (ref), IsIsActionDisabled (copy), p1 (copy), Callback (ref)
+				if not FFlagBuildExperienceDevProductRecoveryModule and not IsOpen and not IsIsActionDisabled then
+					p1.onApprove()
+				end
+				Callback(false)
+			end,
+			snapPoints = { 0.5, 1 },
+			testId = `{TestId}-preview`
+		}, {
+			Header = ReactModule.createElement(Sheet.Header, { hasCloseAffordance = true }, {
+				Title = ReactModule.createElement(Text, {
+					tag = "size-full-0 auto-y text-title-large text-wrap text-align-x-left content-emphasis",
+					Text = p1.name or UseLocalizationResult.defaultName
+				})
+			}),
+			Content = ReactModule.createElement(Sheet.Content, nil, {
+				Details = ReactModule.createElement(View, { tag = "col align-x-center gap-large size-full-0 auto-y" }, {
+					Image = if p1.imageAssetId == nil then ReactModule.createElement(Image, {
+						LayoutOrder = 1,
+						tag = "size-3000-3000 content-emphasis",
+						Image = AssetId,
+						ScaleType = Enum.ScaleType.Fit,
+						testId = `{TestId}-preview-image`
+					}) else ReactModule.createElement(Image, {
+						LayoutOrder = 1,
+						tag = "size-3000-3000 radius-medium",
+						Image = `rbxassetid://{p1.imageAssetId}`,
+						ScaleType = Enum.ScaleType.Fit,
+						testId = `{TestId}-preview-image`
+					}),
+					Price = ReactModule.createElement(Text, {
+						LayoutOrder = 2,
+						tag = "size-full-0 auto-y text-body-large text-wrap text-align-x-left content-emphasis",
+						Text = if FFlagCreatorAgentChatMonetizationToolHelpersModule or p1.itemKind ~= nil then itemSummaryText(p1, UseContextResult, DefaultName, UnavailablePrice) else devProductSummaryText(p1, UseContextResult, DefaultName, UnavailablePrice)
+					}),
+					Description = ReactModule.createElement(Text, {
+						LayoutOrder = 3,
+						tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-default",
+						Text = p1.description or "",
+						testId = `{TestId}-preview-description`
+					})
+				})
+			}),
+			Actions = if IsIsActionDisabled then nil else ReactModule.createElement(Sheet.Actions, nil, {
+				Create = ReactModule.createElement(Button, {
+					text = if IsCanRetry then UseLocalizationResult.retry else UseLocalizationResult.create,
+					size = InputSize.Large,
+					variant = ButtonVariant.Emphasis,
+					fillBehavior = FillBehavior.Fill,
+					isDisabled = not IsOpen,
+					onActivated = function() --[[ Line: 408 ]]
+						-- upvalues: IsIsActionDisabled (copy), IsOpen (ref), UseRefResult (copy), p1 (copy), Callback (ref)
+						if IsIsActionDisabled or not IsOpen then return end
+						if UseRefResult ~= nil then
+							if UseRefResult.current then return end
+							UseRefResult.current = true
+							p1.onApprove()
+						end
+						Callback(false)
+					end,
+					testId = `{TestId}-create-button`
 				})
 			})
-		}),
-		Actions = if not var6 then reactModule.createElement(sheet.Actions, nil, {
-			Create = reactModule.createElement(button, {
-				text = if var5 then var3.retry else var3.create,
-				size = inputSize.Large,
-				variant = buttonVariant.Emphasis,
-				fillBehavior = fillBehavior.Fill,
-				isDisabled = not var10,
-				onActivated = function()
-					-- upvalues: var6 (ref), var10 (write), var7 (ref), p1 (ref), var11 (write)
-					if var6 or not var10 then return end
-					if var7 ~= nil then
-						if var7.current then return end
-						var7.current = true
-						p1.onApprove()
-					end
-					var11(false)
-				end,
-				testId = `{testId}-create-button`
-			})
-		}) else nil
-	}) else nil
-	local createElement = reactModule.createElement
-	createElement = createElement(agentCardActionsModule, {
-		layoutOrder = if fFlagBuildExperienceDevProductRecoveryModule then 5 elseif var8 or p1.imageAssetId == nil then 3 else 4
+		})
+	else
+		Element = nil
+	end
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 428 ]]
+		-- upvalues: IsIsActionDisabled (copy), p1 (copy)
+		if not IsIsActionDisabled then
+			p1.onApprove()
+			
+			return
+		end
+	end, { IsIsActionDisabled, p1.onApprove })
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 435 ]]
+		-- upvalues: IsIsActionDisabled (copy), p1 (copy)
+		if not IsIsActionDisabled then
+			p1.onReject()
+			
+			return
+		end
+	end, { IsIsActionDisabled, p1.onReject })
+	local Element1 = ReactModule.createElement(AgentCardActionsModule, {
+		layoutOrder = if FFlagBuildExperienceDevProductRecoveryModule then 5 elseif IsCreate or p1.imageAssetId == nil then 3 else 4
 	}, {
-		Approve = reactModule.createElement(button, {
+		Approve = ReactModule.createElement(Button, {
 			LayoutOrder = 1,
-			text = if var5 then var3.retry elseif var8 then var3.preview else var3.approve,
-			size = inputSize.Small,
-			variant = if var9 == false then buttonVariant.SoftEmphasis else buttonVariant.Emphasis,
-			fillBehavior = fillBehavior.Fill,
-			isDisabled = if var8 then var4 else var6,
-			onActivated = if var8 and not var5 then var12 else reactModule.useCallback(function()
-				-- upvalues: var6 (ref), p1 (ref)
-				if var6 then
-					return
-				end
-				p1.onApprove()
-			end, { var6, p1.onApprove }),
-			testId = if var8 then `{testId}-preview-button` else `{testId}-approve-button`
+			text = if IsCanRetry then UseLocalizationResult.retry elseif IsCreate then UseLocalizationResult.preview else UseLocalizationResult.approve,
+			size = InputSize.Small,
+			variant = if UseChatCardEmphasisModuleResult == false then ButtonVariant.SoftEmphasis else ButtonVariant.Emphasis,
+			fillBehavior = FillBehavior.Fill,
+			isDisabled = if IsCreate then IsIsPending else IsIsActionDisabled,
+			onActivated = if IsCreate and not IsCanRetry then UseResult else UseResult1,
+			testId = if IsCreate then `{TestId}-preview-button` else `{TestId}-approve-button`
 		}),
-		Reject = if var8 and var6 then nil else reactModule.createElement(button, {
+		Reject = if IsCreate and IsIsActionDisabled then nil else ReactModule.createElement(Button, {
 			LayoutOrder = 2,
-			text = var3.reject,
-			size = inputSize.Small,
-			variant = buttonVariant.Standard,
-			fillBehavior = fillBehavior.Fill,
-			isDisabled = var6,
-			onActivated = reactModule.useCallback(function()
-				-- upvalues: var6 (ref), p1 (ref)
-				if var6 then
-					return
-				end
-				p1.onReject()
-			end, { var6, p1.onReject }),
-			testId = `{testId}-reject-button`
+			text = UseLocalizationResult.reject,
+			size = InputSize.Small,
+			variant = ButtonVariant.Standard,
+			fillBehavior = FillBehavior.Fill,
+			isDisabled = IsIsActionDisabled,
+			onActivated = UseResult2,
+			testId = `{TestId}-reject-button`
 		})
 	})
+	local DefaultName = UseLocalizationResult.defaultName
+	local UnavailablePrice = UseLocalizationResult.unavailablePrice
 	
-	return reactModule.createElement(agentCardModule, {
-		title = if var8 then p1.name or var3.defaultName else var3.title,
-		fitToContent = if var8 then true else nil,
-		textContent = summaryText(p1, var2, var3.defaultName, var3.unavailablePrice),
+	return ReactModule.createElement(AgentCardModule, {
+		title = if IsCreate then p1.name or UseLocalizationResult.defaultName else UseLocalizationResult.title,
+		fitToContent = if IsCreate then true else nil,
+		textContent = if FFlagCreatorAgentChatMonetizationToolHelpersModule or p1.itemKind ~= nil then itemSummaryText(p1, UseContextResult, DefaultName, UnavailablePrice) else devProductSummaryText(p1, UseContextResult, DefaultName, UnavailablePrice),
 		layoutOrder = p1.layoutOrder,
-		testId = testId,
-		footer = if fFlagBuildExperienceDevProductRecoveryModule then createElement else nil
+		testId = TestId,
+		footer = if FFlagBuildExperienceDevProductRecoveryModule then Element1 else nil
 	}, {
-		Preview = var15,
-		ImagePreview = if var8 or p1.imageAssetId == nil then nil else reactModule.createElement(image, {
+		Preview = Element,
+		ImagePreview = if IsCreate or p1.imageAssetId == nil then nil else ReactModule.createElement(Image, {
 			LayoutOrder = 3,
 			tag = "size-3000-3000 radius-medium",
 			Image = `rbxassetid://{p1.imageAssetId}`,
 			ScaleType = Enum.ScaleType.Fit,
-			testId = `{testId}-image-preview`
+			testId = `{TestId}-image-preview`
 		}),
-		Error = if fFlagBuildExperienceDevProductRecoveryModule and p1.hasError and not var4 then reactModule.createElement(text, {
+		Error = if FFlagBuildExperienceDevProductRecoveryModule and p1.hasError and not IsIsPending then ReactModule.createElement(Text, {
 			LayoutOrder = 4,
 			tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-alert",
-			Text = var3.error,
-			testId = `{testId}-error`
+			Text = UseLocalizationResult.error,
+			testId = `{TestId}-error`
 		}) else nil,
-		Actions = if fFlagBuildExperienceDevProductRecoveryModule then nil else createElement
+		Actions = if FFlagBuildExperienceDevProductRecoveryModule then nil else Element1
 	})
 end

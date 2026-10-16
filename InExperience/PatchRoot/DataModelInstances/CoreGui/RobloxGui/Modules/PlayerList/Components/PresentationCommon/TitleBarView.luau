@@ -1,21 +1,19 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local coreGuiService = game:GetService("CoreGui")
-local robloxGui = coreGuiService:WaitForChild("RobloxGui")
-local reactModule = require(corePackagesService.Packages.React)
-local signalsReactModule = require(corePackagesService.Packages.SignalsReact)
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local playerListModule = require(corePackagesService.Workspace.Packages.PlayerList)
-local _ = require(corePackagesService.Workspace.Packages.LeaderboardStore)
-local gameTranslatorModule = require(robloxGui.Modules.GameTranslator)
-local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
-local useLayoutValues = playerListModule.Common.useLayoutValues
-local useStyle = UIBloxModule.Core.Style.useStyle
-local fFlagPlayerListFixLeaderstatsStacking = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagPlayerListFixLeaderstatsStacking
-local fFlagEnableMobilePlayerListOnConsole = playerListModule.Flags.FFlagEnableMobilePlayerListOnConsole
-local t = {
+﻿local CorePackages = game:GetService("CorePackages")
+local CoreGui = game:GetService("CoreGui")
+local ReactModule = require(CorePackages.Packages.React)
+local SignalsReactModule = require(CorePackages.Packages.SignalsReact)
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local PlayerListModule = require(CorePackages.Workspace.Packages.PlayerList)
+local _ = require(CorePackages.Workspace.Packages.LeaderboardStore)
+local GameTranslatorModule = require(CoreGui:WaitForChild("RobloxGui").Modules.GameTranslator)
+local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
+local UseLayoutValuesFunction = PlayerListModule.Common.useLayoutValues
+local UseStyleFunction = require(CorePackages.Packages.UIBlox).Core.Style.useStyle
+local FFlagPlayerListFixLeaderstatsStacking = require(CorePackages.Workspace.Packages.SharedFlags).FFlagPlayerListFixLeaderstatsStacking
+local FFlagEnableMobilePlayerListOnConsole = PlayerListModule.Flags.FFlagEnableMobilePlayerListOnConsole
+local config = {
 	showDivider = false,
 	showBackground = false,
 	backgroundTransparency = 1,
@@ -24,112 +22,112 @@ local t = {
 	customTextColor = Color3.fromRGB(255, 255, 255)
 }
 
-return reactModule.memo(function(p1)
-	-- upvalues: t (ref), useLayoutValues (ref), useStyle (ref), reactModule (ref), robloxTranslatorModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), fFlagEnableMobilePlayerListOnConsole (ref), fFlagPlayerListFixLeaderstatsStacking (ref), signalsReactModule (ref), gameTranslatorModule (ref), coreGuiService (ref), corePackagesService (ref)
-	local t_1 = {}
+return ReactModule.memo(function(List) --[[ Line: 59 | Named "TitleBarView" ]]
+	-- upvalues: config (copy), UseLayoutValuesFunction (copy), UseStyleFunction (copy), ReactModule (copy), RobloxTranslatorModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), FFlagEnableMobilePlayerListOnConsole (copy), FFlagPlayerListFixLeaderstatsStacking (copy), SignalsReactModule (copy), GameTranslatorModule (copy), CoreGui (copy), CorePackages (copy)
+	local t = {}
 	
-	for i, v in pairs(t) do
-		t_1[i] = if p1[i] ~= nil then p1[i] else v
+	for i, value in pairs(config) do
+		t[i] = if List[i] == nil then value else List[i] or value
 	end
-	for i_1, v_1 in pairs(p1) do
-		t_1[i_1] = v_1
+	for i1, value1 in pairs(List) do
+		t[i1] = value1
 	end
-	local var1 = useLayoutValues()
-	local var2 = useStyle()
-	local t_2 = {
-		layout = reactModule.createElement("UIListLayout", {
+	local UseLayoutValuesResult = UseLayoutValuesFunction()
+	local UseStyleResult = UseStyleFunction()
+	local CustomTextColor = t.useCustomTextColor and t.customTextColor or UseStyleResult.Theme.TextMuted.Color
+	local Transparency = if t.useCustomTextColor then 0 else UseStyleResult.Theme.TextMuted.Transparency
+	local TextLabels = {
+		layout = ReactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			FillDirection = Enum.FillDirection.Horizontal,
 			VerticalAlignment = Enum.VerticalAlignment.Center
+		}),
+		playersHeader = ReactModule.createElement("TextLabel", {
+			LayoutOrder = 1,
+			BackgroundTransparency = 1,
+			Size = UDim2.new(0, if t.isSmallTouchDevice then UseLayoutValuesResult.PlayerNameSizeXMobile else t.entrySizeX, 1, 0),
+			Text = RobloxTranslatorModule:FormatByKey("InGame.PlayerList.Players"),
+			TextXAlignment = Enum.TextXAlignment.Left,
+			TextYAlignment = Enum.TextYAlignment.Center,
+			Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.Footer.Font,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.CaptionSmall.Font) else nil,
+			TextSize = if FFlagEnableMobilePlayerListOnConsole then UseLayoutValuesResult.TitleBarTextSize else UseStyleResult.Font.BaseSize * UseStyleResult.Font.Footer.RelativeSize,
+			TextTransparency = Transparency,
+			TextColor3 = CustomTextColor
+		}, {
+			Padding = ReactModule.createElement("UIPadding", { PaddingLeft = UDim.new(0, t.headerPaddingLeft) })
 		})
 	}
-	local var3 = if t_1.isSmallTouchDevice then var1.PlayerNameSizeXMobile else t_1.entrySizeX
-	local var4 = if t_1.useCustomTextColor then t_1.customTextColor else var2.Theme.TextMuted.Color
-	local var5 = if t_1.useCustomTextColor then 0 else var2.Theme.TextMuted.Transparency
-	t_2.playersHeader = reactModule.createElement("TextLabel", {
-		LayoutOrder = 1,
-		BackgroundTransparency = 1,
-		Size = UDim2.new(0, var3, 1, 0),
-		Text = robloxTranslatorModule:FormatByKey("InGame.PlayerList.Players"),
-		TextXAlignment = Enum.TextXAlignment.Left,
-		TextYAlignment = Enum.TextYAlignment.Center,
-		Font = if foundationFontFaceMigration then nil else var2.Font.Footer.Font,
-		FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Tokens.Typography.CaptionSmall.Font) else nil,
-		TextSize = if fFlagEnableMobilePlayerListOnConsole then var1.TitleBarTextSize else var2.Font.BaseSize * var2.Font.Footer.RelativeSize,
-		TextTransparency = var5,
-		TextColor3 = var4
-	}, {
-		Padding = reactModule.createElement("UIPadding", { PaddingLeft = UDim.new(0, t_1.headerPaddingLeft) })
-	})
-	local maxLeaderstats = var1.MaxLeaderstats
+	local MaxLeaderstats = UseLayoutValuesResult.MaxLeaderstats
 	
-	if fFlagPlayerListFixLeaderstatsStacking then
-		for i_2, v_2 in signalsReactModule.useSignalState(t_1.gameStats.getAllData) do
-			if maxLeaderstats >= v_2.order(false) then
-				t_2["stat_" .. i_2] = reactModule.createElement("TextLabel", {
+	if FFlagPlayerListFixLeaderstatsStacking then
+		for i2, value2 in SignalsReactModule.useSignalState(t.gameStats.getAllData) do
+			if MaxLeaderstats >= value2.order(false) then
+				TextLabels["stat_" .. i2] = ReactModule.createElement("TextLabel", {
 					BackgroundTransparency = 1,
-					LayoutOrder = v_2.order(false) + 1,
-					Size = UDim2.new(0, var1.StatEntrySizeX, 1, 0),
-					Text = gameTranslatorModule:TranslateGameText(coreGuiService, i_2),
+					LayoutOrder = value2.order(false) + 1,
+					Size = UDim2.new(0, UseLayoutValuesResult.StatEntrySizeX, 1, 0),
+					Text = GameTranslatorModule:TranslateGameText(CoreGui, i2),
 					TextXAlignment = Enum.TextXAlignment.Center,
 					TextYAlignment = Enum.TextYAlignment.Center,
-					Font = if foundationFontFaceMigration then nil else var2.Font.Footer.Font,
-					FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Tokens.Typography.CaptionSmall.Font) else nil,
-					TextSize = if fFlagEnableMobilePlayerListOnConsole then var1.TitleBarTextSize else var2.Font.BaseSize * var2.Font.Footer.RelativeSize,
-					TextTransparency = var5,
-					TextColor3 = var4,
+					Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.Footer.Font,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.CaptionSmall.Font) else nil,
+					TextSize = if FFlagEnableMobilePlayerListOnConsole then UseLayoutValuesResult.TitleBarTextSize else UseStyleResult.Font.BaseSize * UseStyleResult.Font.Footer.RelativeSize,
+					TextTransparency = Transparency,
+					TextColor3 = CustomTextColor,
 					TextTruncate = Enum.TextTruncate.AtEnd
 				})
 			end
 		end
-	elseif t_1.gameStatsCount and t_1.gameStatsCount > 0 then
-		t_1.gameStats.iterateData(function(p2, p3)
-			-- upvalues: maxLeaderstats (ref), gameTranslatorModule (copy), coreGuiService (copy), t_2 (ref), reactModule (copy), var1 (ref), foundationFontFaceMigration (copy), var2 (ref), normalizeFontFace (copy), fFlagEnableMobilePlayerListOnConsole (copy), var5 (ref), var4 (ref)
-			if maxLeaderstats < p3.order(false) then
+	elseif t.gameStatsCount and t.gameStatsCount > 0 then
+		t.gameStats.iterateData(function(Text, p1) --[[ Line: 147 ]]
+			-- upvalues: MaxLeaderstats (copy), GameTranslatorModule (upval), CoreGui (upval), TextLabels (copy), ReactModule (upval), UseLayoutValuesResult (copy), FoundationFontFaceMigration (upval), UseStyleResult (copy), NormalizeFontFaceFunction (upval), FFlagEnableMobilePlayerListOnConsole (upval), Transparency (copy), CustomTextColor (copy)
+			if MaxLeaderstats >= p1.order(false) then
+				TextLabels["stat_" .. Text] = ReactModule.createElement("TextLabel", {
+					BackgroundTransparency = 1,
+					LayoutOrder = p1.order(false) + 1,
+					Size = UDim2.new(0, UseLayoutValuesResult.StatEntrySizeX, 1, 0),
+					Text = GameTranslatorModule:TranslateGameText(CoreGui, Text),
+					TextXAlignment = Enum.TextXAlignment.Center,
+					TextYAlignment = Enum.TextYAlignment.Center,
+					Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.Footer.Font,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.CaptionSmall.Font) else nil,
+					TextSize = if FFlagEnableMobilePlayerListOnConsole then UseLayoutValuesResult.TitleBarTextSize else UseStyleResult.Font.BaseSize * UseStyleResult.Font.Footer.RelativeSize,
+					TextTransparency = Transparency,
+					TextColor3 = CustomTextColor,
+					TextTruncate = Enum.TextTruncate.AtEnd
+				})
+				
 				return
 			end
-			t_2["stat_" .. p1] = reactModule.createElement("TextLabel", {
-				BackgroundTransparency = 1,
-				LayoutOrder = p3.order(false) + 1,
-				Size = UDim2.new(0, var1.StatEntrySizeX, 1, 0),
-				Text = gameTranslatorModule:TranslateGameText(coreGuiService, p2),
-				TextXAlignment = Enum.TextXAlignment.Center,
-				TextYAlignment = Enum.TextYAlignment.Center,
-				Font = if foundationFontFaceMigration then nil else var2.Font.Footer.Font,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Tokens.Typography.CaptionSmall.Font) else nil,
-				TextSize = if fFlagEnableMobilePlayerListOnConsole then var1.TitleBarTextSize else var2.Font.BaseSize * var2.Font.Footer.RelativeSize,
-				TextTransparency = var5,
-				TextColor3 = var4,
-				TextTruncate = Enum.TextTruncate.AtEnd
-			})
 		end, false)
 	end
-	local var6 = if t_1.showBackground then if require(corePackagesService.Workspace.Packages.Chrome).Enabled() then var2.Theme.BackgroundUIContrast.Color else var2.Theme.BackgroundContrast.Color else Color3.fromRGB(0, 0, 0)
-	local t_3 = {}
+	local Color = if t.showBackground then if require(CorePackages.Workspace.Packages.Chrome).Enabled() then UseStyleResult.Theme.BackgroundUIContrast.Color else UseStyleResult.Theme.BackgroundContrast.Color else Color3.fromRGB(0, 0, 0)
+	local t1 = {}
 	
-	if t_1.showDivider then
-		t_3.Divider = reactModule.createElement("Frame", {
+	if t.showDivider then
+		t1.Divider = ReactModule.createElement("Frame", {
 			BorderSizePixel = 0,
-			Visible = t_1.contentsVisible,
+			Visible = t.contentsVisible,
 			Size = UDim2.new(1, 0, 0, 1),
 			Position = UDim2.new(0, 0, 1, 0),
 			AnchorPoint = Vector2.new(0, 1),
-			BackgroundTransparency = var2.Theme.Divider.Transparency,
-			BackgroundColor3 = var2.Theme.Divider.Color
+			BackgroundTransparency = UseStyleResult.Theme.Divider.Transparency,
+			BackgroundColor3 = UseStyleResult.Theme.Divider.Color
 		})
 	end
-	t_3.ChildrenFrame = reactModule.createElement("Frame", {
+	t1.ChildrenFrame = ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Visible = t_1.contentsVisible,
-		Position = t_1.showBackground and UDim2.new(0, 0, 0, -2) or UDim2.new(0, 0, 0, 0),
+		Visible = t.contentsVisible,
+		Position = t.showBackground and UDim2.new(0, 0, 0, -2) or UDim2.new(0, 0, 0, 0),
 		Size = UDim2.new(1, 0, 1, 0)
-	}, t_2)
+	}, TextLabels)
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
-		Size = t_1.size,
-		LayoutOrder = t_1.layoutOrder,
-		BackgroundTransparency = t_1.backgroundTransparency,
-		BackgroundColor3 = var6
-	}, t_3)
+		Size = t.size,
+		LayoutOrder = t.layoutOrder,
+		BackgroundTransparency = t.backgroundTransparency,
+		BackgroundColor3 = Color
+	}, t1)
 end)

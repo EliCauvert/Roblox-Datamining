@@ -1,8 +1,8 @@
-﻿local serverDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
-local getSduiComponentRegistry = require(serverDrivenUi.Parent.SduiCoreSystem).getSduiComponentRegistry
-local sduiComponentDefinitionsModule = require(serverDrivenUi.System.SduiComponentDefinitions)
+﻿local ServerDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
+local GetSduiComponentRegistryFunction = require(ServerDrivenUi.Parent.SduiCoreSystem).getSduiComponentRegistry
+local SduiComponentDefinitionsModule = require(ServerDrivenUi.System.SduiComponentDefinitions)
 
-return function()
-	-- upvalues: sduiComponentDefinitionsModule (ref), getSduiComponentRegistry (ref)
-	getSduiComponentRegistry().registerComponentDefinitions(sduiComponentDefinitionsModule.new()._registeredComponents)
+return function() --[[ Line: 15 | Named "registerDiscoveryUiComponents" ]]
+	-- upvalues: SduiComponentDefinitionsModule (copy), GetSduiComponentRegistryFunction (copy)
+	GetSduiComponentRegistryFunction().registerComponentDefinitions(SduiComponentDefinitionsModule.new()._registeredComponents)
 end

@@ -1,44 +1,45 @@
-﻿local flaggedMutedError = require(script:FindFirstAncestor("ServerDrivenUi").Parent.Loggers).flaggedMutedError
+﻿local FlaggedMutedErrorFunction = require(script:FindFirstAncestor("ServerDrivenUi").Parent.Loggers).flaggedMutedError
 
-local var1 = function(p1, p2, p3, p4)
-	p1[p2] = {
-		gridApportioningMetadata = { { sortIndex = p4, capacity = p3 } }
+local function v0(p1, Key, Capacity, SortIndex) --[[ Line: 11 ]]
+	p1[Key] = {
+		gridApportioningMetadata = { { sortIndex = SortIndex, capacity = Capacity } }
 	}
 end
 
-local var2 = function(p1, p2, p3)
-	-- upvalues: flaggedMutedError (ref)
-	for i, v in p1.gridApportioningMetadata do
-		if v.sortIndex == p3 then
-			flaggedMutedError("ApportioningSameSortIndex", `Multiple collections at sort index {p3}`)
-		elseif p3 < v.sortIndex then
-			table.insert(p1.gridApportioningMetadata, i, { sortIndex = p3, capacity = p2 })
+local function v1(p1, Capacity, SortIndex) --[[ Line: 22 ]]
+	-- upvalues: FlaggedMutedErrorFunction (copy)
+	for i, value in p1.gridApportioningMetadata do
+		if value.sortIndex == SortIndex then
+			FlaggedMutedErrorFunction("ApportioningSameSortIndex", `Multiple collections at sort index {SortIndex}`)
+		elseif SortIndex < value.sortIndex then
+			table.insert(p1.gridApportioningMetadata, i, { sortIndex = SortIndex, capacity = Capacity })
 			
 			return
 		end
 	end
-	table.insert(p1.gridApportioningMetadata, { sortIndex = p3, capacity = p2 })
+	table.insert(p1.gridApportioningMetadata, { sortIndex = SortIndex, capacity = Capacity })
 end
 
 return {
-	addToApportioningData = function(p4, p5, p6, p7)
-		-- upvalues: var2 (ref), var1 (ref)
-		local var3 = p4[p5]
+	addToApportioningData = function(p2, p3, Capacity, SortIndex) --[[ Line: 43 ]]
+		-- upvalues: v1 (copy), v0 (copy)
+		local v1 = p2[p3]
 		
-		if var3 then
-			var2(var3, p6, p7)
+		if v1 then
+			v1(v1, Capacity, SortIndex)
 			
 			return
+		else
+			v0(p2, p3, Capacity, SortIndex)
 		end
-		var1(p4, p5, p6, p7)
 	end,
-	populateStartingItemIndices = function(a)
-		for i, v in a do
-			local var3 = 1
+	populateStartingItemIndices = function(List) --[[ Line: 53 ]]
+		for _, value in List do
+			local NewCapacity = 1
 			
-			for i_1, v_1 in v.gridApportioningMetadata do
-				v_1.startingItemIndex = var3
-				var3 += v_1.capacity
+			for _, value1 in value.gridApportioningMetadata do
+				value1.startingItemIndex = NewCapacity
+				NewCapacity += value1.capacity
 			end
 		end
 	end

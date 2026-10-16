@@ -1,18 +1,18 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local reactModule = require(corePackagesService.Packages.React)
-local playersService = game:GetService("Players")
-local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-local blockedStatusChangedEvent = require(corePackagesService.Workspace.Packages.BlockingUtility):GetBlockedStatusChangedEvent()
-local default = require(script.Parent.Parent.VoiceChatServiceManager).default
-local voiceStateContextModule = require(robloxGui.Modules.VoiceChat.VoiceStateContext)
-local VOICE_STATE = require(corePackagesService.Workspace.Packages.VoiceChat).Constants.VOICE_STATE
-local localPlayer = playersService.LocalPlayer
-while not localPlayer do
-	playersService:GetPropertyChangedSignal("LocalPlayer"):Wait()
-	localPlayer = playersService.LocalPlayer
+﻿local CorePackages = game:GetService("CorePackages")
+local ReactModule = require(CorePackages.Packages.React)
+local Players = game:GetService("Players")
+local BlockedStatusChangedEvent = require(CorePackages.Workspace.Packages.BlockingUtility):GetBlockedStatusChangedEvent()
+local Default = require(script.Parent.Parent.VoiceChatServiceManager).default
+local VoiceStateContextModule = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.VoiceChat.VoiceStateContext)
+local VOICESTATE = require(CorePackages.Workspace.Packages.VoiceChat).Constants.VOICE_STATE
+local LocalPlayer = Players.LocalPlayer
+while not LocalPlayer do
+	Players:GetPropertyChangedSignal("LocalPlayer"):Wait()
+	LocalPlayer = Players.LocalPlayer
 end
-local var1 = if localPlayer then localPlayer.UserId else 0
-local var2 = if game:GetEngineFeature("VoiceChatSupported") then Enum.VoiceChatState else {
+local UserId = LocalPlayer and LocalPlayer.UserId or 0
+local VoiceChatState = nil
+VoiceChatState = if game:GetEngineFeature("VoiceChatSupported") then Enum.VoiceChatState else {
 	Idle = 1,
 	Joining = 2,
 	JoiningRetry = 3,
@@ -21,255 +21,219 @@ local var2 = if game:GetEngineFeature("VoiceChatSupported") then Enum.VoiceChatS
 	Ended = 6,
 	Failed = 7
 }
-local t = {
-	[var2.Idle] = VOICE_STATE.HIDDEN,
-	[var2.Joining] = VOICE_STATE.CONNECTING,
-	[var2.JoiningRetry] = VOICE_STATE.CONNECTING,
-	[var2.Joined] = VOICE_STATE.MUTED,
-	[var2.Leaving] = VOICE_STATE.MUTED,
-	[var2.Ended] = VOICE_STATE.HIDDEN,
-	[var2.Failed] = VOICE_STATE.ERROR
+local config = {
+	[VoiceChatState.Idle] = VOICESTATE.HIDDEN,
+	[VoiceChatState.Joining] = VOICESTATE.CONNECTING,
+	[VoiceChatState.JoiningRetry] = VOICESTATE.CONNECTING,
+	[VoiceChatState.Joined] = VOICESTATE.MUTED,
+	[VoiceChatState.Leaving] = VOICESTATE.MUTED,
+	[VoiceChatState.Ended] = VOICESTATE.HIDDEN,
+	[VoiceChatState.Failed] = VOICESTATE.ERROR
 }
 
-local function _(p1)
-	-- upvalues: t (ref), VOICE_STATE (ref)
-	return if t[p1] then t[p1] else VOICE_STATE.MUTED
+local function _(p1) --[[ Line: 74 | Named "mapVoiceChatStateToVoiceState" ]]
+	-- upvalues: config (copy), VOICESTATE (copy)
+	return if config[p1] then config[p1] else VOICESTATE.MUTED
 end
 
-local _ = function(p1)
-	-- upvalues: VOICE_STATE (ref)
-	local INACTIVE = VOICE_STATE.INACTIVE
+local _ = function(p1) --[[ Line: 82 | Named "mapParticipantStateToVoiceState" ]]
+	-- upvalues: VOICESTATE (copy)
+	local INACTIVE = VOICESTATE.INACTIVE
 	
 	if p1.subscriptionFailed then
-		INACTIVE = VOICE_STATE.ERROR
+		INACTIVE = VOICESTATE.ERROR
 		
 		return INACTIVE
-	elseif not p1.subscriptionCompleted then
-		INACTIVE = VOICE_STATE.CONNECTING
+	end
+	if not p1.subscriptionCompleted then
+		INACTIVE = VOICESTATE.CONNECTING
 		
 		return INACTIVE
-	elseif p1.isMutedLocally then
-		INACTIVE = VOICE_STATE.LOCAL_MUTED
+	end
+	if p1.isMutedLocally then
+		INACTIVE = VOICESTATE.LOCAL_MUTED
 		
 		return INACTIVE
-	elseif p1.isMuted then
-		INACTIVE = VOICE_STATE.MUTED
+	end
+	if p1.isMuted then
+		INACTIVE = VOICESTATE.MUTED
 		
 		return INACTIVE
-	elseif p1.isSignalActive then
-		INACTIVE = VOICE_STATE.TALKING
+	end
+	if p1.isSignalActive then
+		INACTIVE = VOICESTATE.TALKING
 	end
 	return INACTIVE
 end
 
-return function(p1, p2, p3)
-	-- upvalues: default (ref), reactModule (ref), voiceStateContextModule (ref), VOICE_STATE (ref), var1 (ref), t (ref), var2 (write), blockedStatusChangedEvent (ref)
-	local var3 = if p3 then p3.voiceChatServiceManager else default
-	local var4 = reactModule.useContext(voiceStateContextModule.Context)
-	local var5, var6 = reactModule.useState(VOICE_STATE.HIDDEN)
-	reactModule.useEffect(function()
-		-- upvalues: var4 (ref), p1 (ref), p2 (ref), var6 (ref), VOICE_STATE (copy), var1 (copy), var5 (ref), t (copy), var3 (ref), var2 (copy), blockedStatusChangedEvent (copy)
-		if var4.voiceEnabled and p1 and not p2 then
-			local var7 = tonumber(p1)
-			local var8 = tostring(p1)
-			local var9 = var1 == var7
-			local var10 = nil
-			local t_1 = {}
-			local var11 = false
+return function(p1, Enabled, p2) --[[ Line: 98 | Named "useVoiceState" ]]
+	-- upvalues: Default (copy), ReactModule (copy), VoiceStateContextModule (copy), VOICESTATE (copy), UserId (copy), config (copy), VoiceChatState (ref), BlockedStatusChangedEvent (copy)
+	local VoiceChatServiceManager = p2 and p2.voiceChatServiceManager or Default
+	local UseContextResult = ReactModule.useContext(VoiceStateContextModule.Context)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(VOICESTATE.HIDDEN)
+	ReactModule.useEffect(function() --[[ Line: 103 ]]
+		-- upvalues: UseContextResult (copy), p1 (copy), Enabled (copy), UseStateResult2 (copy), VOICESTATE (upval), UserId (upval), UseStateResult (copy), config (upval), VoiceChatServiceManager (copy), VoiceChatState (upval), BlockedStatusChangedEvent (upval)
+		if UseContextResult.voiceEnabled and p1 and not Enabled then
+			local Number: number? = tonumber(p1)
+			local Text = tostring(p1)
+			local IsUserIdMatch = UserId == Number
+			local Flag = nil
+			local List = {}
+			local Flag1 = false
 			
-			local function _(p4)
-				-- upvalues: var11 (write), var6 (copy)
-				if not var11 then
-					var6(p4)
+			local function _(p3) --[[ Line: 117 | Named "updateVoiceState" ]]
+				-- upvalues: Flag1 (ref), UseStateResult2 (upval)
+				if not Flag1 then
+					UseStateResult2(p3)
 				end
 			end
 			
-			local function setVoiceEnabled(value)
-				-- upvalues: var5 (copy), var9 (ref), t (copy), VOICE_STATE (copy), var3 (copy), var8 (ref), var10 (write), var2 (copy), var11 (write), var6 (copy)
-				local var12 = var5
+			local function setVoiceEnabled(VoiceState) --[[ Line: 123 ]]
+				-- upvalues: UseStateResult (upval), IsUserIdMatch (copy), config (upval), VOICESTATE (upval), VoiceChatServiceManager (upval), Text (copy), Flag (ref), VoiceChatState (upval), Flag1 (ref), UseStateResult2 (upval)
+				local ERROR = UseStateResult
 				
-				if var9 then
-					var12 = if not t[value] then VOICE_STATE.MUTED else t[value]
+				if IsUserIdMatch then
+					ERROR = if config[VoiceState] then config[VoiceState] else VOICESTATE.MUTED
 				else
-					local var13 = var3.participants[var8]
+					local Participant = VoiceChatServiceManager.participants[Text]
 					
-					if var13 and not var10 then
-						local INACTIVE = VOICE_STATE.INACTIVE
-						
-						if var13.subscriptionFailed then
-							INACTIVE = VOICE_STATE.ERROR
-						elseif not var13.subscriptionCompleted then
-							INACTIVE = VOICE_STATE.CONNECTING
-						elseif var13.isMutedLocally then
-							INACTIVE = VOICE_STATE.LOCAL_MUTED
-						elseif var13.isMuted then
-							INACTIVE = VOICE_STATE.MUTED
-						elseif var13.isSignalActive then
-							INACTIVE = VOICE_STATE.TALKING
-						end
-						var12 = INACTIVE
+					if Participant and not Flag then
+						ERROR = if Participant.subscriptionFailed then VOICESTATE.ERROR elseif Participant.subscriptionCompleted then if Participant.isMutedLocally then VOICESTATE.LOCAL_MUTED elseif Participant.isMuted then VOICESTATE.MUTED elseif Participant.isSignalActive then VOICESTATE.TALKING else VOICESTATE.INACTIVE else VOICESTATE.CONNECTING
 					end
 				end
-				if value == var2.Failed then
-					if not var9 then
-						var12 = VOICE_STATE.HIDDEN
+				if VoiceState == VoiceChatState.Failed then
+					if not IsUserIdMatch then
+						ERROR = VOICESTATE.HIDDEN
 					end
-				elseif value == var2.Joined and not var3.localMuted and var9 then
-					var12 = if var3.isTalking then VOICE_STATE.TALKING elseif var3.localMuted then VOICE_STATE.MUTED else VOICE_STATE.INACTIVE
+				elseif VoiceState == VoiceChatState.Joined and not VoiceChatServiceManager.localMuted and IsUserIdMatch then
+					ERROR = if VoiceChatServiceManager.isTalking then VOICESTATE.TALKING elseif VoiceChatServiceManager.localMuted then VOICESTATE.MUTED else VOICESTATE.INACTIVE
 				end
-				if not var11 then
-					var6(var12)
+				local ERROR1 = ERROR
+				
+				if not Flag1 then
+					UseStateResult2(ERROR1)
 				end
 			end
 			
-			setVoiceEnabled(var4.voiceState)
-			delay(0, function()
-				-- upvalues: var11 (write), setVoiceEnabled (ref), var4 (copy), var9 (ref), t_1 (ref), var3 (copy), VOICE_STATE (copy), var6 (copy), var8 (ref), var10 (write), var7 (ref), blockedStatusChangedEvent (copy)
-				if var11 then return end
-				setVoiceEnabled(var4.voiceState)
+			setVoiceEnabled(UseContextResult.voiceState)
+			delay(0, function() --[[ Line: 157 ]]
+				-- upvalues: Flag1 (ref), setVoiceEnabled (copy), UseContextResult (upval), IsUserIdMatch (copy), List (copy), VoiceChatServiceManager (upval), VOICESTATE (upval), UseStateResult2 (upval), Text (copy), Flag (ref), Number (copy), BlockedStatusChangedEvent (upval)
+				if Flag1 then return end
+				setVoiceEnabled(UseContextResult.voiceState)
 				
-				if var9 then
-					table.insert(t_1, var3.talkingChanged.Event:Connect(function(p4)
-						-- upvalues: VOICE_STATE (copy), var11 (copy), var6 (copy)
-						local var12 = if p4 then VOICE_STATE.TALKING else VOICE_STATE.INACTIVE
+				if IsUserIdMatch then
+					table.insert(List, VoiceChatServiceManager.talkingChanged.Event:Connect(function(p3) --[[ Line: 168 ]]
+						-- upvalues: VOICESTATE (upval), Flag1 (upval), UseStateResult2 (upval)
+						local TALKING = if p3 then VOICESTATE.TALKING else VOICESTATE.INACTIVE
 						
-						if not var11 then
-							var6(var12)
+						if not Flag1 then
+							UseStateResult2(TALKING)
 						end
 					end))
-					table.insert(t_1, var3.muteChanged.Event:Connect(function(p4)
-						-- upvalues: VOICE_STATE (copy), var11 (copy), var6 (copy)
-						local var12 = if p4 then VOICE_STATE.MUTED else VOICE_STATE.INACTIVE
+					table.insert(List, VoiceChatServiceManager.muteChanged.Event:Connect(function(p3) --[[ Line: 175 ]]
+						-- upvalues: VOICESTATE (upval), Flag1 (upval), UseStateResult2 (upval)
+						local MUTED = if p3 then VOICESTATE.MUTED else VOICESTATE.INACTIVE
 						
-						if not var11 then
-							var6(var12)
+						if not Flag1 then
+							UseStateResult2(MUTED)
 						end
 					end))
 					
 					return
-				end
-				table.insert(t_1, var3.participantsUpdate.Event:Connect(function(p4)
-					-- upvalues: var8 (copy), var10 (copy), VOICE_STATE (copy), var11 (copy), var6 (copy)
-					local var12 = p4[var8]
-					
-					if var12 and not var10 then
-						local INACTIVE = VOICE_STATE.INACTIVE
+				else
+					table.insert(List, VoiceChatServiceManager.participantsUpdate.Event:Connect(function(p3) --[[ Line: 183 ]]
+						-- upvalues: Text (upval), Flag (upval), VOICESTATE (upval), Flag1 (upval), UseStateResult2 (upval)
+						local v1 = p3[Text]
 						
-						if var12.subscriptionFailed then
-							INACTIVE = VOICE_STATE.ERROR
-						elseif not var12.subscriptionCompleted then
-							INACTIVE = VOICE_STATE.CONNECTING
-						elseif var12.isMutedLocally then
-							INACTIVE = VOICE_STATE.LOCAL_MUTED
-						elseif var12.isMuted then
-							INACTIVE = VOICE_STATE.MUTED
-						elseif var12.isSignalActive then
-							INACTIVE = VOICE_STATE.TALKING
-						end
-						local var13 = INACTIVE
-						
-						if var11 then
-							return
-						else
-							var6(var13)
+						if v1 and not Flag then
+							local ERROR = if v1.subscriptionFailed then VOICESTATE.ERROR elseif v1.subscriptionCompleted then if v1.isMutedLocally then VOICESTATE.LOCAL_MUTED elseif v1.isMuted then VOICESTATE.MUTED elseif v1.isSignalActive then VOICESTATE.TALKING else VOICESTATE.INACTIVE else VOICESTATE.CONNECTING
 							
-							return
-						end
-					else
-						local HIDDEN = VOICE_STATE.HIDDEN
-						
-						if not var11 then
-							var6(HIDDEN)
-						end
-					end
-				end))
-				table.insert(t_1, var3.participantLeft.Event:Connect(function(_, p4)
-					-- upvalues: var7 (copy), VOICE_STATE (copy), var11 (copy), var6 (copy)
-					if p4 == var7 then
-						local HIDDEN = VOICE_STATE.HIDDEN
-						
-						if not var11 then
-							var6(HIDDEN)
-						end
-					end
-				end))
-				table.insert(t_1, var3.participantJoined.Event:Connect(function(_, p4)
-					-- upvalues: var7 (copy), VOICE_STATE (copy), var11 (copy), var6 (copy)
-					if p4 == var7 then
-						local HIDDEN = VOICE_STATE.HIDDEN
-						
-						if not var11 then
-							var6(HIDDEN)
-						end
-					end
-				end))
-				table.insert(t_1, blockedStatusChangedEvent:Connect(function(p4, p5)
-					-- upvalues: var7 (copy), var10 (copy), VOICE_STATE (copy), var11 (copy), var6 (copy), var3 (copy), var8 (copy)
-					if var7 == p4 then
-						if p5 then
-							var10 = true
-							local HIDDEN = VOICE_STATE.HIDDEN
-							
-							if var11 then
-								return
-							else
-								var6(HIDDEN)
+							if not Flag1 then
+								UseStateResult2(ERROR)
 								
 								return
 							end
 						else
-							var10 = nil
-							local var12 = var3.participants[var8]
+							local HIDDEN = VOICESTATE.HIDDEN
 							
-							if var12 then
-								local INACTIVE = VOICE_STATE.INACTIVE
+							if not Flag1 then
+								UseStateResult2(HIDDEN)
+							end
+						end
+					end))
+					table.insert(List, VoiceChatServiceManager.participantLeft.Event:Connect(function(_, Number1) --[[ Line: 195 ]]
+						-- upvalues: Number (upval), VOICESTATE (upval), Flag1 (upval), UseStateResult2 (upval)
+						if Number1 == Number then
+							local HIDDEN = VOICESTATE.HIDDEN
+							
+							if not Flag1 then
+								UseStateResult2(HIDDEN)
+							end
+						end
+					end))
+					table.insert(List, VoiceChatServiceManager.participantJoined.Event:Connect(function(_, Number1) --[[ Line: 204 ]]
+						-- upvalues: Number (upval), VOICESTATE (upval), Flag1 (upval), UseStateResult2 (upval)
+						if Number1 == Number then
+							local HIDDEN = VOICESTATE.HIDDEN
+							
+							if not Flag1 then
+								UseStateResult2(HIDDEN)
+							end
+						end
+					end))
+					table.insert(List, BlockedStatusChangedEvent:Connect(function(Number1, p3) --[[ Line: 215 ]]
+						-- upvalues: Number (upval), Flag (upval), VOICESTATE (upval), Flag1 (upval), UseStateResult2 (upval), VoiceChatServiceManager (upval), Text (upval)
+						if Number == Number1 then
+							if p3 then
+								Flag = true
+								local HIDDEN = VOICESTATE.HIDDEN
 								
-								if var12.subscriptionFailed then
-									INACTIVE = VOICE_STATE.ERROR
-								elseif not var12.subscriptionCompleted then
-									INACTIVE = VOICE_STATE.CONNECTING
-								elseif var12.isMutedLocally then
-									INACTIVE = VOICE_STATE.LOCAL_MUTED
-								elseif var12.isMuted then
-									INACTIVE = VOICE_STATE.MUTED
-								elseif var12.isSignalActive then
-									INACTIVE = VOICE_STATE.TALKING
-								end
-								local var13 = INACTIVE
-								
-								if var11 then
-								else
-									var6(var13)
+								if not Flag1 then
+									UseStateResult2(HIDDEN)
 									
 									return
 								end
 							else
-								local HIDDEN = VOICE_STATE.HIDDEN
+								Flag = nil
+								local Participant = VoiceChatServiceManager.participants[Text]
 								
-								if not var11 then
-									var6(HIDDEN)
+								if Participant then
+									local ERROR = if Participant.subscriptionFailed then VOICESTATE.ERROR elseif Participant.subscriptionCompleted then if Participant.isMutedLocally then VOICESTATE.LOCAL_MUTED elseif Participant.isMuted then VOICESTATE.MUTED elseif Participant.isSignalActive then VOICESTATE.TALKING else VOICESTATE.INACTIVE else VOICESTATE.CONNECTING
+									
+									if not Flag1 then
+										UseStateResult2(ERROR)
+										
+										return
+									end
+								else
+									local HIDDEN = VOICESTATE.HIDDEN
+									
+									if not Flag1 then
+										UseStateResult2(HIDDEN)
+									end
 								end
 							end
 						end
-					end
-				end))
+					end))
+				end
 			end)
 			
-			return function()
-				-- upvalues: var11 (write), t_1 (ref)
-				var11 = true
-				delay(0, function()
-					-- upvalues: t_1 (copy)
-					for i, v in t_1 do
-						v:disconnect()
+			return function() --[[ Line: 235 ]]
+				-- upvalues: Flag1 (ref), List (copy)
+				Flag1 = true
+				delay(0, function() --[[ Line: 238 ]]
+					-- upvalues: List (upval)
+					for _, value in List do
+						value:disconnect()
 					end
 				end)
 			end
+		else
+			UseStateResult2(VOICESTATE.HIDDEN)
+			
+			return function() --[[ Line: 106 ]] end
 		end
-		var6(VOICE_STATE.HIDDEN)
-		
-		return function() end
-	end, { p1, var4.voiceState, p2 == true })
+	end, { p1, UseContextResult.voiceState, Enabled == true })
 	
-	return var5
+	return UseStateResult
 end

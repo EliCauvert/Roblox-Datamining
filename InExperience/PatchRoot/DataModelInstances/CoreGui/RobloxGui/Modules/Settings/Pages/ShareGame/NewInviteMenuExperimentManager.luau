@@ -1,56 +1,56 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local modules = game:GetService("CoreGui").RobloxGui.Modules
-local IXPServiceWrapper = require(corePackagesService.Workspace.Packages.IxpServiceWrapper).IXPServiceWrapper
-local getFStringInExperienceNotificationsLayerModule = require(modules.Flags.GetFStringInExperienceNotificationsLayer)
-local getFFlagEnableNewInviteMenuIXPModule = require(modules.Flags.GetFFlagEnableNewInviteMenuIXP)
-local getFFlagInviteListRerank = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagInviteListRerank
-local t = {}
-t.__index = t
+﻿local CorePackages = game:GetService("CorePackages")
+local Modules = game:GetService("CoreGui").RobloxGui.Modules
+local IXPServiceWrapper = require(CorePackages.Workspace.Packages.IxpServiceWrapper).IXPServiceWrapper
+local GetFStringInExperienceNotificationsLayerModule = require(Modules.Flags.GetFStringInExperienceNotificationsLayer)
+local GetFFlagEnableNewInviteMenuIXPModule = require(Modules.Flags.GetFFlagEnableNewInviteMenuIXP)
+local GetFFlagInviteListRerankFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagInviteListRerank
+local NewInviteMenuExperimentManager = {}
+NewInviteMenuExperimentManager.__index = NewInviteMenuExperimentManager
 
-function t.new(p1)
-	-- upvalues: IXPServiceWrapper (ref), getFFlagInviteListRerank (ref), t (ref)
-	local t_1 = {
+function NewInviteMenuExperimentManager.new(p1) --[[ Line: 20 ]]
+	-- upvalues: IXPServiceWrapper (copy), GetFFlagInviteListRerankFunction (copy), NewInviteMenuExperimentManager (copy)
+	local config = {
 		_styleEnabled = false,
 		_customizationEnabled = false,
 		_newSendEndpointEnabled = false,
 		_ixpServiceWrapper = p1 or IXPServiceWrapper,
-		_inviteListSortOrder = if getFFlagInviteListRerank() then 0 else nil
+		_inviteListSortOrder = if GetFFlagInviteListRerankFunction() then 0 else nil
 	}
-	setmetatable(t_1, t)
+	setmetatable(config, NewInviteMenuExperimentManager)
 	
-	return t_1
+	return config
 end
 
-function t:getStyleEnabled()
+function NewInviteMenuExperimentManager:getStyleEnabled() --[[ Line: 32 ]]
 	return self._styleEnabled
 end
 
-function t:getCustomizationEnabled()
+function NewInviteMenuExperimentManager:getCustomizationEnabled() --[[ Line: 36 ]]
 	return self._customizationEnabled
 end
 
-function t:getNewSendEndpointEnabled()
+function NewInviteMenuExperimentManager:getNewSendEndpointEnabled() --[[ Line: 40 ]]
 	return self._newSendEndpointEnabled
 end
 
-if getFFlagInviteListRerank() then
-	function t:getInviteListSortOrder()
+if GetFFlagInviteListRerankFunction() then
+	function NewInviteMenuExperimentManager:getInviteListSortOrder() --[[ Line: 45 ]]
 		return self._inviteListSortOrder
 	end
 end
-function t.initialize(p1)
-	-- upvalues: getFFlagEnableNewInviteMenuIXPModule (ref), getFStringInExperienceNotificationsLayerModule (ref), getFFlagInviteListRerank (ref)
-	if getFFlagEnableNewInviteMenuIXPModule() then
-		task.spawn(function()
-			-- upvalues: p1 (ref), getFStringInExperienceNotificationsLayerModule (copy), getFFlagInviteListRerank (copy)
+function NewInviteMenuExperimentManager.initialize(p1) --[[ Line: 50 ]]
+	-- upvalues: GetFFlagEnableNewInviteMenuIXPModule (copy), GetFStringInExperienceNotificationsLayerModule (copy), GetFFlagInviteListRerankFunction (copy)
+	if GetFFlagEnableNewInviteMenuIXPModule() then
+		task.spawn(function() --[[ Line: 55 ]]
+			-- upvalues: p1 (copy), GetFStringInExperienceNotificationsLayerModule (upval), GetFFlagInviteListRerankFunction (upval)
 			p1._ixpServiceWrapper:WaitForInitialization()
-			local var1 = p1._ixpServiceWrapper:GetLayerData(getFStringInExperienceNotificationsLayerModule())
+			local LayerData = p1._ixpServiceWrapper:GetLayerData(GetFStringInExperienceNotificationsLayerModule())
 			
-			if var1 then
-				p1._styleEnabled = var1.NewInviteMenuStyleEnabled or false
-				p1._customizationEnabled = var1.NewInviteMenuCustomizationEnabled or false
-				p1._newSendEndpointEnabled = var1.NewInviteMenuEndpointEnabled or false
-				p1._inviteListSortOrder = if getFFlagInviteListRerank() then var1.invite_list_sort_order or 0 else nil
+			if LayerData then
+				p1._styleEnabled = LayerData.NewInviteMenuStyleEnabled or false
+				p1._customizationEnabled = LayerData.NewInviteMenuCustomizationEnabled or false
+				p1._newSendEndpointEnabled = LayerData.NewInviteMenuEndpointEnabled or false
+				p1._inviteListSortOrder = if GetFFlagInviteListRerankFunction() then LayerData.invite_list_sort_order or 0 else nil
 			end
 		end)
 		
@@ -58,6 +58,6 @@ function t.initialize(p1)
 	end
 end
 
-t.default = t.new()
+NewInviteMenuExperimentManager.default = NewInviteMenuExperimentManager.new()
 
-return t
+return NewInviteMenuExperimentManager

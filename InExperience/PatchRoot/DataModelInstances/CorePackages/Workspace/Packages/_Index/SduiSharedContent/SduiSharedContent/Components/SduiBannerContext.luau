@@ -1,11 +1,11 @@
-﻿local parent = script:FindFirstAncestor("SduiSharedContent").Parent
-local reactModule = require(parent.React)
-local _ = require(parent.SduiCompat)
-local bannerContext = require(parent.Foundation).BannerContext
+﻿local Parent = script:FindFirstAncestor("SduiSharedContent").Parent
+local ReactModule = require(Parent.React)
+local _ = require(Parent.SduiCompat)
+local BannerContext = require(Parent.Foundation).BannerContext
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), bannerContext (ref)
-	return reactModule.createElement(bannerContext, {
+return ReactModule.memo(function(p1) --[[ Line: 28 | Named "SduiBannerContext" ]]
+	-- upvalues: ReactModule (copy), BannerContext (copy)
+	return ReactModule.createElement(BannerContext, {
 		text = p1.text,
 		variant = p1.variant,
 		presentation = p1.presentation,

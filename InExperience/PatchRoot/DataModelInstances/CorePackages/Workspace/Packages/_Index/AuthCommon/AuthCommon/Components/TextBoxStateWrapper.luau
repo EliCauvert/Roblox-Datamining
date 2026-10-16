@@ -1,35 +1,35 @@
-﻿local parent = script:FindFirstAncestor("AuthCommon").Parent
-local cryoModule = require(parent.Cryo)
-local UIBloxModule = require(parent.UIBlox)
-local foundationModule = require(parent.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local roactModule = require(parent.Roact)
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local getImageData = require(parent.RobloxAppAssets).GetImageData
-local withStyle = UIBloxModule.Style.withStyle
-local textBoxStateWrapper = roactModule.Component:extend("TextBoxStateWrapper")
-textBoxStateWrapper.defaultProps = {
+﻿local Parent = script:FindFirstAncestor("AuthCommon").Parent
+local CryoModule = require(Parent.Cryo)
+local UIBloxModule = require(Parent.UIBlox)
+local FoundationModule = require(Parent.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local RoactModule = require(Parent.Roact)
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local GetImageDataFunction = require(Parent.RobloxAppAssets).GetImageData
+local WithStyleFunction = UIBloxModule.Style.withStyle
+local TextBoxStateWrapper = RoactModule.Component:extend("TextBoxStateWrapper")
+TextBoxStateWrapper.defaultProps = {
 	TextBoxLabelPadding = 12,
 	InnerSidePadding = 0,
 	IconSize = UDim2.new(1, 0, 1, 0)
 }
 
-function textBoxStateWrapper.init(p1)
+function TextBoxStateWrapper.init(p1) --[[ Line: 27 ]]
 	p1:setState({ Focused = false, Hover = false })
 	
-	function p0.onMouseEnter()
-		-- upvalues: p1 (ref)
+	function p1.onMouseEnter() --[[ Line: 33 ]]
+		-- upvalues: p1 (copy)
 		p1:setState({ Hover = true })
 	end
 	
-	function p0.onMouseLeave()
-		-- upvalues: p1 (ref)
+	function p1.onMouseLeave() --[[ Line: 39 ]]
+		-- upvalues: p1 (copy)
 		p1:setState({ Hover = false })
 	end
 	
-	function p0.onFocused(...)
-		-- upvalues: p1 (ref)
+	function p1.onFocused(...) --[[ Line: 45 ]]
+		-- upvalues: p1 (copy)
 		p1:setState({ Focused = true })
 		
 		if p1.props.ChildProps.onFocused then
@@ -37,8 +37,8 @@ function textBoxStateWrapper.init(p1)
 		end
 	end
 	
-	function p0.onFocusLost(...)
-		-- upvalues: p1 (ref)
+	function p1.onFocusLost(...) --[[ Line: 54 ]]
+		-- upvalues: p1 (copy)
 		p1:setState({ Focused = false })
 		
 		if p1.props.ChildProps.onFocusLost then
@@ -47,30 +47,28 @@ function textBoxStateWrapper.init(p1)
 	end
 end
 
-function textBoxStateWrapper.render(p1)
-	-- upvalues: withStyle (ref), roactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), imageSetLabel (ref), getImageData (ref), cryoModule (ref)
-	local helpComponent = p1.props.HelpComponent
-	local errorText = p1.props.ErrorText
-	local labelText = p1.props.LabelText
+function TextBoxStateWrapper.render(p1) --[[ Line: 64 ]]
+	-- upvalues: WithStyleFunction (copy), RoactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ImageSetLabel (copy), GetImageDataFunction (copy), CryoModule (copy)
+	local HelpComponent = p1.props.HelpComponent
+	local ErrorText = p1.props.ErrorText
+	local LabelText = p1.props.LabelText
 	
-	return withStyle(function(p2)
-		-- upvalues: p1 (ref), roactModule (copy), labelText (ref), foundationFontFaceMigration (copy), normalizeFontFace (copy), imageSetLabel (copy), getImageData (copy), cryoModule (copy), errorText (ref), helpComponent (ref)
-		local color = p2.Theme.UIDefault.Color
-		local transparency = p2.Theme.UIDefault.Transparency
+	return WithStyleFunction(function(p2) --[[ Line: 69 ]]
+		-- upvalues: p1 (copy), RoactModule (upval), LabelText (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), ImageSetLabel (upval), GetImageDataFunction (upval), CryoModule (upval), ErrorText (copy), HelpComponent (copy)
+		local Color = p2.Theme.UIDefault.Color
+		local Transparency = p2.Theme.UIDefault.Transparency
 		
 		if p1.props.ErrorState then
-			color = p2.Theme.Alert.Color
-			transparency = p2.Theme.Alert.Transparency
+			Color = p2.Theme.Alert.Color
+			Transparency = p2.Theme.Alert.Transparency
 		elseif p1.state.Focused then
-			color = p2.Theme.IconEmphasis.Color
-			transparency = p2.Theme.IconEmphasis.Transparency
+			Color = p2.Theme.IconEmphasis.Color
+			Transparency = p2.Theme.IconEmphasis.Transparency
 		elseif p1.state.Hover then
-			color = p2.Theme.IconDefault.Color
-			transparency = p2.Theme.IconDefault.Transparency
+			Color = p2.Theme.IconDefault.Color
+			Transparency = p2.Theme.IconDefault.Transparency
 		end
-		local createElement = roactModule.createElement
-		local var1 = "Frame"
-		local t = {
+		return RoactModule.createElement("Frame", {
 			AnchorPoint = p1.props.AnchorPoint,
 			AutomaticSize = Enum.AutomaticSize.Y,
 			BackgroundTransparency = 1,
@@ -78,122 +76,103 @@ function textBoxStateWrapper.render(p1)
 			LayoutOrder = p1.props.LayoutOrder,
 			Position = p1.props.Position,
 			Size = UDim2.fromScale(1, 0),
-			[roactModule.Change.AbsolutePosition] = p1.props.onPositionChangedCallback
-		}
-		local t_1 = {
-			ListLayout = roactModule.createElement("UIListLayout", {
+			[RoactModule.Change.AbsolutePosition] = p1.props.onPositionChangedCallback
+		}, {
+			ListLayout = RoactModule.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
 				Padding = UDim.new(0, p1.props.TextBoxLabelPadding)
 			}),
-			TextBoxLabel = labelText and roactModule.createElement("TextLabel", {
+			TextBoxLabel = LabelText and RoactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 1,
 				TextWrapped = true,
 				AutomaticSize = Enum.AutomaticSize.Y,
-				Font = if foundationFontFaceMigration then nil else p2.Font.CaptionHeader.Font,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.CaptionLarge.Font) else nil,
+				Font = if FoundationFontFaceMigration then nil else p2.Font.CaptionHeader.Font,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.CaptionLarge.Font) else nil,
 				Size = UDim2.fromScale(1, 0),
-				Text = labelText,
+				Text = LabelText,
 				TextColor3 = p2.Theme.TextEmphasis.Color,
 				TextSize = p1.props.TextBoxLabelTextSize,
 				TextTransparency = p2.Theme.TextEmphasis.Transparency,
 				TextXAlignment = Enum.TextXAlignment.Left
 			}),
-			TextBox = roactModule.createElement("Frame", {
+			TextBox = RoactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
 				LayoutOrder = 2,
 				Size = p1.props.Size,
-				[roactModule.Ref] = p1.props.buttonRef
+				[RoactModule.Ref] = p1.props.buttonRef
 			}, {
-				Border = roactModule.createElement(imageSetLabel, {
+				Border = RoactModule.createElement(ImageSetLabel, {
 					ZIndex = 2,
 					BackgroundTransparency = 1,
 					Size = UDim2.new(1, 0, 1, 0),
 					ScaleType = Enum.ScaleType.Slice,
 					SliceCenter = Rect.new(9, 9, 9, 9),
-					Image = getImageData("LuaApp/buttons/buttonStroke") or "LuaApp/buttons/buttonStroke",
-					ImageColor3 = color,
-					ImageTransparency = transparency
+					Image = GetImageDataFunction("LuaApp/buttons/buttonStroke") or "LuaApp/buttons/buttonStroke",
+					ImageColor3 = Color,
+					ImageTransparency = Transparency
 				}),
-				TextBox = roactModule.createElement(p1.props.ChildClass, cryoModule.Dictionary.join(p1.props.ChildProps, {
+				TextBox = RoactModule.createElement(p1.props.ChildClass, CryoModule.Dictionary.join(p1.props.ChildProps, {
 					Size = UDim2.new(1, 0, 1, 0),
 					onMouseEnter = p1.onMouseEnter,
 					onMouseLeave = p1.onMouseLeave,
 					onFocused = p1.onFocused,
 					onFocusLost = p1.onFocusLost
 				})),
-				IconWrapper = p1.props.Icon and roactModule.createElement("Frame", {
+				IconWrapper = p1.props.Icon and RoactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					ZIndex = 2,
 					Size = UDim2.new(1, 0, 1, 0),
 					Position = UDim2.new(1, -2, 0, 0),
 					AnchorPoint = Vector2.new(1, 0)
 				}, {
-					AspectRatio = roactModule.createElement("UIAspectRatioConstraint", { AspectRatio = 1 }),
-					Icon = roactModule.createElement(imageSetLabel, {
+					AspectRatio = RoactModule.createElement("UIAspectRatioConstraint", { AspectRatio = 1 }),
+					Icon = RoactModule.createElement(ImageSetLabel, {
 						BackgroundTransparency = 1,
 						Size = p1.props.IconSize,
 						Position = UDim2.new(0.5, 0, 0.5, 0),
 						AnchorPoint = Vector2.new(0.5, 0.5),
 						Image = p1.props.Icon,
-						ImageColor3 = color,
-						ImageTransparency = transparency
+						ImageColor3 = Color,
+						ImageTransparency = Transparency
 					})
 				})
-			})
-		}
-		local var2 = errorText
-		
-		if var2 then
-			var2 = roactModule.createElement
-			var2 = var2("TextLabel", {
+			}),
+			ErrorText = ErrorText and RoactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 3,
 				TextWrapped = true,
 				AutomaticSize = Enum.AutomaticSize.Y,
-				Font = if foundationFontFaceMigration then nil else p2.Font.CaptionBody.Font,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.BodySmall.Font) else nil,
+				Font = if FoundationFontFaceMigration then nil else p2.Font.CaptionBody.Font,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.BodySmall.Font) else nil,
 				Size = UDim2.fromScale(1, 0),
-				Text = errorText,
+				Text = ErrorText,
 				TextColor3 = p2.Theme.Alert.Color,
 				TextSize = p2.Font.CaptionBody.RelativeSize * p2.Font.BaseSize,
 				TextXAlignment = Enum.TextXAlignment.Left
 			}, {
-				Padding = p1.props.InnerSidePadding ~= 0 and roactModule.createElement("UIPadding", {
+				Padding = p1.props.InnerSidePadding ~= 0 and RoactModule.createElement("UIPadding", {
 					PaddingRight = UDim.new(0, p1.props.InnerSidePadding),
 					PaddingLeft = UDim.new(0, p1.props.InnerSidePadding)
 				})
-			})
-		end
-		t_1.ErrorText = var2
-		local var3 = not errorText
-		
-		if var3 then
-			var3 = helpComponent
-			
-			if var3 then
-				var3 = roactModule.createElement
-				var3 = var3("Frame", {
-					BackgroundTransparency = 1,
-					BorderSizePixel = 0,
-					LayoutOrder = 4,
-					AutomaticSize = Enum.AutomaticSize.Y,
-					Size = UDim2.fromScale(1, 0)
-				}, {
-					Padding = p1.props.InnerSidePadding ~= 0 and roactModule.createElement("UIPadding", {
-						PaddingRight = UDim.new(0, p1.props.InnerSidePadding),
-						PaddingLeft = UDim.new(0, p1.props.InnerSidePadding)
-					}),
-					HelpComponent = helpComponent
-				})
-			end
-		end
-		t_1.HelpComponentWrapper = var3
-		
-		return createElement(var1, t, t_1)
+			}),
+			HelpComponentWrapper = not ErrorText and (HelpComponent and RoactModule.createElement("Frame", {
+				BackgroundTransparency = 1,
+				BorderSizePixel = 0,
+				LayoutOrder = 4,
+				AutomaticSize = Enum.AutomaticSize.Y,
+				Size = UDim2.fromScale(1, 0)
+			}, {
+				Padding = p1.props.InnerSidePadding ~= 0 and RoactModule.createElement("UIPadding", {
+					PaddingRight = UDim.new(0, p1.props.InnerSidePadding),
+					PaddingLeft = UDim.new(0, p1.props.InnerSidePadding)
+				}),
+				HelpComponent = HelpComponent
+			}))
+		})
 	end)
 end
 
-return textBoxStateWrapper
+return TextBoxStateWrapper

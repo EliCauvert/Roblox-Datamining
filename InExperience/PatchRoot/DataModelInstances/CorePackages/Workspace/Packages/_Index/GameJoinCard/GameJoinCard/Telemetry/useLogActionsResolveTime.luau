@@ -1,32 +1,33 @@
-﻿local parent = script:FindFirstAncestor("GameJoinCard").Parent
-local reactModule = require(parent.React)
-local fFlagJoinabilityCTARefactor = require(parent.SharedFlags).FFlagJoinabilityCTARefactor
-local dataStatus = require(parent.DataHydration).DataStatus
-local gameJoinCardTelemetryModule = require(script.Parent.GameJoinCardTelemetry)
+﻿local Parent = script:FindFirstAncestor("GameJoinCard").Parent
+local ReactModule = require(Parent.React)
+local FFlagJoinabilityCTARefactor = require(Parent.SharedFlags).FFlagJoinabilityCTARefactor
+local DataStatus = require(Parent.DataHydration).DataStatus
+local GameJoinCardTelemetryModule = require(script.Parent.GameJoinCardTelemetry)
 
-return function(p1, p2, p3)
-	-- upvalues: reactModule (ref), fFlagJoinabilityCTARefactor (ref), dataStatus (ref), gameJoinCardTelemetryModule (ref)
-	local var1 = reactModule.useRef(nil)
-	local var2 = reactModule.useRef(false)
-	reactModule.useEffect(function()
-		-- upvalues: fFlagJoinabilityCTARefactor (copy), p2 (ref), var1 (ref), var2 (ref), p1 (ref), dataStatus (copy), gameJoinCardTelemetryModule (copy), p3 (ref)
-		if not fFlagJoinabilityCTARefactor or not p2 then
-			var1.current = nil
-			var2.current = false
-			
-			return
-		elseif p1 == dataStatus.NotReady then
-			if var1.current == nil or var2.current then
-				var1.current = tick()
-				var2.current = false
-			end
-			return
-		elseif var2.current or var1.current == nil then return end
-		if p1 == dataStatus.Ready or p1 == dataStatus.Failed then
-			var2.current = true
-			gameJoinCardTelemetryModule.logActionsResolved((tick() - var1.current) * 1000, p1, p3)
+return function(Failed, p1, p2) --[[ Line: 20 | Named "useLogActionsResolveTime" ]]
+	-- upvalues: ReactModule (copy), FFlagJoinabilityCTARefactor (copy), DataStatus (copy), GameJoinCardTelemetryModule (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(false)
+	ReactModule.useEffect(function() --[[ Line: 24 ]]
+		-- upvalues: FFlagJoinabilityCTARefactor (upval), p1 (copy), UseRefResult (copy), UseRefResult1 (copy), Failed (copy), DataStatus (upval), GameJoinCardTelemetryModule (upval), p2 (copy)
+		if not FFlagJoinabilityCTARefactor or not p1 then
+			UseRefResult.current = nil
+			UseRefResult1.current = false
 			
 			return
 		end
-	end, { p1, p2, p3 })
+		if Failed == DataStatus.NotReady then
+			if UseRefResult.current == nil or UseRefResult1.current then
+				UseRefResult.current = tick()
+				UseRefResult1.current = false
+			end
+			return
+		elseif UseRefResult1.current or UseRefResult.current == nil then return end
+		if Failed == DataStatus.Ready or Failed == DataStatus.Failed then
+			UseRefResult1.current = true
+			GameJoinCardTelemetryModule.logActionsResolved((tick() - UseRefResult.current) * 1000, Failed, p2)
+			
+			return
+		end
+	end, { Failed, p1, p2 })
 end

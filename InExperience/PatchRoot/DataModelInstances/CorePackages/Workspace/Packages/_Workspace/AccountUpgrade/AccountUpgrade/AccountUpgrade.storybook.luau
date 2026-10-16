@@ -1,34 +1,32 @@
-﻿local accountUpgrade = script:FindFirstAncestor("AccountUpgrade")
-local parent = accountUpgrade.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local reactRobloxModule = require(parent.ReactRoblox)
-local httpModule = require(parent.Dev.Http)
-local mockHttpResponse = require(parent.Dev.UnitTestHelpers).mockHttpResponse
-local promiseModule = require(parent.Dev.Promise)
-local roactNetworking = require(parent.RoactServiceTags).RoactNetworking
-local mockServices = require(parent.Dev.AuthTestHelpers).TestHelpers.mockServices
-local foundationProvider = foundationModule.FoundationProvider
-local colorMode = foundationModule.Enums.ColorMode
-local device = foundationModule.Enums.Device
-local statusCodes = httpModule.StatusCodes
+﻿local AccountUpgrade = script:FindFirstAncestor("AccountUpgrade")
+local Parent = AccountUpgrade.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local MockHttpResponse = require(Parent.Dev.UnitTestHelpers).mockHttpResponse
+local PromiseModule = require(Parent.Promise)
+local RoactNetworking = require(Parent.RoactServiceTags).RoactNetworking
+local MockServicesFunction = require(Parent.Dev.AuthTestHelpers).TestHelpers.mockServices
+local FoundationProvider = FoundationModule.FoundationProvider
+local ColorMode = FoundationModule.Enums.ColorMode
+local Device = FoundationModule.Enums.Device
+local StatusCodes = require(Parent.Dev.Http).StatusCodes
 
-local function validationEndpoint(p1)
-	-- upvalues: promiseModule (ref), mockHttpResponse (ref), statusCodes (ref)
-	return promiseModule.resolve(mockHttpResponse.new(p1, { code = 0 }, 0, statusCodes.OK))
+local function validationEndpoint(p1) --[[ Line: 23 ]]
+	-- upvalues: PromiseModule (copy), MockHttpResponse (copy), StatusCodes (copy)
+	return PromiseModule.resolve(MockHttpResponse.new(p1, { code = 0 }, 0, StatusCodes.OK))
 end
 
-local t = {
+local config = {
 	Default = { themeName = "Dark", fontName = "Gotham" },
 	Dark = { themeName = "Dark", fontName = "Gotham" },
 	Light = { themeName = "Light", fontName = "Gotham" }
 }
-local t_1 = {
-	Default = colorMode.Dark,
-	Dark = colorMode.Dark,
-	Light = colorMode.Light
+local config1 = {
+	Default = ColorMode.Dark,
+	Dark = ColorMode.Dark,
+	Light = ColorMode.Light
 }
-local t_2 = {
+local config2 = {
 	Default = "Desktop",
 	Desktop = "Desktop",
 	Phone = "Phone",
@@ -38,30 +36,30 @@ local t_2 = {
 
 return {
 	name = "AccountUpgrade",
-	roact = reactModule,
-	reactRoblox = reactRobloxModule,
-	mapStory = function(p1)
-		-- upvalues: t (ref), t_2 (ref), t_1 (ref), mockServices (ref), reactModule (ref), foundationProvider (ref), device (ref), roactNetworking (ref), validationEndpoint (ref)
-		return function(p2)
-			-- upvalues: t (copy), t_2 (copy), t_1 (copy), mockServices (copy), reactModule (copy), foundationProvider (copy), device (copy), p1 (ref), roactNetworking (copy), validationEndpoint (copy)
-			local var1 = if p2 then t[p2.theme] else t.Default
+	roact = ReactModule,
+	reactRoblox = require(Parent.ReactRoblox),
+	mapStory = function(p1) --[[ Line: 47 ]]
+		-- upvalues: config (copy), config2 (copy), config1 (copy), MockServicesFunction (copy), ReactModule (copy), FoundationProvider (copy), Device (copy), RoactNetworking (copy), validationEndpoint (copy)
+		return function(p2) --[[ Line: 48 ]]
+			-- upvalues: config (upval), config2 (upval), config1 (upval), MockServicesFunction (upval), ReactModule (upval), FoundationProvider (upval), Device (upval), p1 (copy), RoactNetworking (upval), validationEndpoint (upval)
+			local Entry = p2 and config[p2.theme] or config.Default
 			
-			return mockServices({
-				FoundationProvider = reactModule.createElement(foundationProvider, {
-					colorMode = if p2 then t_1[p2.theme] else t_1.Default,
-					device = if p2 then device[p2.platform] else device.Desktop,
+			return MockServicesFunction({
+				FoundationProvider = ReactModule.createElement(FoundationProvider, {
+					colorMode = p2 and config1[p2.theme] or config1.Default,
+					device = p2 and Device[p2.platform] or Device.Desktop,
 					overlayGui = p2 and p2.focus
-				}, { Story = reactModule.createElement(p1, p2) })
+				}, { Story = ReactModule.createElement(p1, p2) })
 			}, {
 				includeStoreProvider = true,
 				appStyle = {
-					themeName = var1.themeName,
-					fontName = var1.fontName,
-					deviceType = if p2 then t_2[p2.platform] else "Desktop"
+					themeName = Entry.themeName,
+					fontName = Entry.fontName,
+					deviceType = p2 and config2[p2.platform] or "Desktop"
 				},
-				extraServices = { [roactNetworking] = validationEndpoint }
+				extraServices = { [RoactNetworking] = validationEndpoint }
 			})
 		end
 	end,
-	storyRoots = { accountUpgrade }
+	storyRoots = { AccountUpgrade }
 }

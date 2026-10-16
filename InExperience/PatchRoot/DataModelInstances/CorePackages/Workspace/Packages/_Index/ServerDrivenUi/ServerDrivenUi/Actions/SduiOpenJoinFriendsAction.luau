@@ -1,58 +1,60 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local centralOverlayType = require(parent.RobloxAppEnums).CentralOverlayType
-local setCentralOverlay = require(parent.CentralOverlay).Actions.SetCentralOverlay
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local sduiActionType = sduiCoreSystemModule.SduiActionType
-local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local CentralOverlayType = require(Parent.RobloxAppEnums).CentralOverlayType
+local SetCentralOverlayFunction = require(Parent.CentralOverlay).Actions.SetCentralOverlay
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiActionType = SduiCoreSystemModule.SduiActionType
+local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
 
-return function(p1, _, p2, p3)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref), setCentralOverlay (ref), centralOverlayType (ref)
-	local var1 = if p1 then p1.actionParams else nil
+return function(p1, _, p2, Frame: Frame) --[[ Line: 15 ]]
+	-- upvalues: SduiErrorType (copy), SduiActionType (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy)
+	local ActionParams = p1 and p1.actionParams or nil
 	
-	if var1 == nil then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if ActionParams == nil then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
-			name = sduiActionType.OpenJoinFriends
+			name = SduiActionType.OpenJoinFriends
 		}, p2.appPage)
 		
 		return
 	end
-	assert(var1, "actionParams must exist")
-	local placeId = var1.placeId
+	assert(ActionParams, "actionParams must exist")
+	local PlaceId = ActionParams.placeId
 	
-	if placeId == nil then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if PlaceId == nil then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			propName = "placeId",
-			name = sduiActionType.OpenJoinFriends,
-			message = `Missing placeId: {placeId}`
+			name = SduiActionType.OpenJoinFriends,
+			message = `Missing placeId: {PlaceId}`
 		}, p2.appPage)
 		
 		return
 	end
-	local universeId = var1.universeId
+	local UniverseId = ActionParams.universeId
 	
-	if universeId == nil then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if UniverseId == nil then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			propName = "universeId",
-			name = sduiActionType.OpenJoinFriends,
-			message = `Missing universeId: {universeId}`
+			name = SduiActionType.OpenJoinFriends,
+			message = `Missing universeId: {UniverseId}`
 		}, p2.appPage)
 		
 		return
-	elseif p3 then
-		p2.dependencies.dispatch(setCentralOverlay(centralOverlayType.PlacesList, {
+	end
+	if Frame then
+		p2.dependencies.dispatch(SetCentralOverlayFunction(CentralOverlayType.PlacesList, {
 			game = {
-				placeId = tostring(placeId),
-				universeId = tostring(universeId)
+				placeId = tostring(PlaceId),
+				universeId = tostring(UniverseId)
 			},
-			anchorSpaceSize = p3.AbsoluteSize,
-			anchorSpacePosition = p3.AbsolutePosition
+			anchorSpaceSize = Frame.AbsoluteSize,
+			anchorSpacePosition = Frame.AbsolutePosition
 		}))
 		
 		return
+	else
+		p2.dependencies.logger.reportError(SduiErrorType.FailedToExecuteAction, {
+			message = "Failed to execute -- missing guiObject anchor",
+			name = SduiActionType.OpenJoinFriends
+		}, p2.appPage)
 	end
-	p2.dependencies.logger.reportError(sduiErrorType.FailedToExecuteAction, {
-		message = "Failed to execute -- missing guiObject anchor",
-		name = sduiActionType.OpenJoinFriends
-	}, p2.appPage)
 end

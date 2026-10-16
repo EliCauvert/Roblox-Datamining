@@ -1,16 +1,16 @@
-﻿local peopleReactView = script:FindFirstAncestor("PeopleReactView")
-local reactModule = require(peopleReactView.Parent.React)
-local calculateCardLayoutModule = require(peopleReactView.Utils.calculateCardLayout)
+﻿local PeopleReactView = script:FindFirstAncestor("PeopleReactView")
+local ReactModule = require(PeopleReactView.Parent.React)
+local CalculateCardLayoutModule = require(PeopleReactView.Utils.calculateCardLayout)
 
-return function()
-	-- upvalues: reactModule (ref), calculateCardLayoutModule (ref)
-	local var1, var2 = reactModule.useBinding(0)
+return function() --[[ Line: 8 | Named "useCardWidth" ]]
+	-- upvalues: ReactModule (copy), CalculateCardLayoutModule (copy)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
 	
-	return var1, reactModule.useCallback(function(p1, p2, p3)
-		-- upvalues: calculateCardLayoutModule (copy), var2 (ref)
-		local var3 = calculateCardLayoutModule(p1, p2, p3)
-		var2(var3)
+	return UseBindingResult, (ReactModule.useCallback(function(p1, p2, p3) --[[ Line: 12 ]]
+		-- upvalues: CalculateCardLayoutModule (upval), UseBindingResult2 (copy)
+		local CardLayoutModule = CalculateCardLayoutModule(p1, p2, p3)
+		UseBindingResult2(CardLayoutModule)
 		
-		return var3
-	end, {})
+		return CardLayoutModule
+	end, {}))
 end

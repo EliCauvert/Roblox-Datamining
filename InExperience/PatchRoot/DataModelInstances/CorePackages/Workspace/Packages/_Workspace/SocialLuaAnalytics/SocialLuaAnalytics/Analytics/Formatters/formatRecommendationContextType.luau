@@ -1,15 +1,16 @@
-﻿local parent = script.Parent.Parent.Parent
-local recommendationContextTypes = require(parent.Analytics.Enums).RecommendationContextTypes
-local fFlagSocialCarouselMigrateRecommendations = require(parent.Parent.SharedFlags).FFlagSocialCarouselMigrateRecommendations
+﻿local Parent = script.Parent.Parent.Parent
+local RecommendationContextTypes = require(Parent.Analytics.Enums).RecommendationContextTypes
+local FFlagSocialCarouselMigrateRecommendations = require(Parent.Parent.SharedFlags).FFlagSocialCarouselMigrateRecommendations
 
-return function(p1)
-	-- upvalues: fFlagSocialCarouselMigrateRecommendations (ref), recommendationContextTypes (ref)
+return function(p1) --[[ Line: 9 ]]
+	-- upvalues: FFlagSocialCarouselMigrateRecommendations (copy), RecommendationContextTypes (copy)
 	if p1 == nil then
 		return nil
-	elseif not fFlagSocialCarouselMigrateRecommendations then
-		return recommendationContextTypes[p1.rawValue()].rawValue()
+	elseif FFlagSocialCarouselMigrateRecommendations then
+		local RecommendationContextType = RecommendationContextTypes[if type(p1) == "string" then p1 else p1.rawValue()]
+		
+		return if RecommendationContextType then RecommendationContextType.rawValue() else nil
+	else
+		return RecommendationContextTypes[p1.rawValue()].rawValue()
 	end
-	local var1 = recommendationContextTypes[if type(p1) == "string" then p1 else p1.rawValue()]
-	
-	return if var1 then var1.rawValue() else nil
 end

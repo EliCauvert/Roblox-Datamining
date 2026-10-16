@@ -1,10 +1,10 @@
-﻿return function(p1, p2)
-	if p1 == nil or p2 == nil then
+﻿return function(Object, p1) --[[ Line: 3 | Named "findLocalTextSource" ]]
+	if Object == nil or p1 == nil then
 		return nil
 	end
-	for i, v in p1:GetChildren() do
-		if v:IsA("TextSource") and tostring(v.UserId) == p2 then
-			return v
+	for _, TextSource in Object:GetChildren() do
+		if TextSource:IsA("TextSource") and tostring(TextSource.UserId) == p1 then
+			return TextSource
 		end
 	end
 	return nil

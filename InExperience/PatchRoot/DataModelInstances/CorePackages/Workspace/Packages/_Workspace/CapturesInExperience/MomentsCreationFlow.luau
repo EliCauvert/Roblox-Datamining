@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.MomentsCreationFlow.MomentsCreationFlow)
+﻿return (require(script.Parent.Parent.Parent._Index.MomentsCreationFlow.MomentsCreationFlow))

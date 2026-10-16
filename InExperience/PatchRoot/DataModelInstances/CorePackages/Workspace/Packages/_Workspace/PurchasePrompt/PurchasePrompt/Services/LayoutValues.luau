@@ -1,135 +1,133 @@
-﻿local parent = script.Parent.Parent
-local createSignalModule = require(parent.Misc.createSignal)
-local strictModule = require(parent.strict)
+﻿local Parent = script.Parent.Parent
+local CreateSignalModule = require(Parent.Misc.createSignal)
+local StrictModule = require(Parent.strict)
 
-local function _(p1, p2)
-	return { Path = "rbxasset://textures/" .. p0, SliceCenter = p2 }
+local function _(Text, SliceCenter) --[[ Line: 7 | Named "makeImageData" ]]
+	return {
+		Path = "rbxasset://textures/" .. Text,
+		SliceCenter = SliceCenter
+	}
 end
 
-local t = {
-	__tostring = function()
+local LayoutValuesModule = {
+	__tostring = function(): string --[[ Line: 15 ]]
 		return "Service(LayoutValues)"
 	end
 }
 
-function t.new(p1)
-	-- upvalues: t (ref), createSignalModule (ref)
-	local t_1 = {}
-	setmetatable(t_1, { __index = t })
-	t_1.signal = createSignalModule()
-	t_1.layout = t_1:generate(p1)
+function LayoutValuesModule.new(p1) --[[ Line: 19 ]]
+	-- upvalues: LayoutValuesModule (copy), CreateSignalModule (copy)
+	local t = {}
+	setmetatable(t, { __index = LayoutValuesModule })
+	t.signal = CreateSignalModule()
+	t.layout = t:generate(p1)
 	
-	return t_1
+	return t
 end
 
-function t.update(p1, p2)
+function LayoutValuesModule.update(p1, p2) --[[ Line: 31 ]]
 	p1.layout = p1:generate(p2)
 	p1.signal:fire(p1.layout)
 end
 
-function t.generate(_, p1)
-	-- upvalues: strictModule (ref)
-	local var1 = if p1 then 3 else 1
-	local var2 = 44 * var1
-	local var3 = 30 * var1
-	local var4 = 6 * var1
-	local var5 = 16 * var1
-	local var6 = 18 * var1
-	local var7 = 210 * var1
-	local var8 = 106 * var1
-	local var9 = 96 * var1
-	local var10 = 20 * var1
-	local var11 = 25 * var1
-	local var12 = 2 * var1
-	local var13 = 64 * var1
-	local var14 = 64 * var1
-	local var15 = 3 * var1
-	local var16 = 2 * var1
-	local var17 = var13 + 2 * var12
-	local var18 = var14 + 2 * var12
-	local var19 = var17 + 2 * var11
-	local var20 = var18 + 2 * var11
+function LayoutValuesModule:generate(p1) --[[ Line: 36 ]]
+	-- upvalues: StrictModule (copy)
+	local v1: number = if p1 then 3 else 1
+	local ButtonHeight = 44 * v1
+	local YOffset1 = 30 * v1
+	local v2 = 6 * v1
+	local XOffset3 = 16 * v1
+	local XOffset = 210 * v1
+	local YOffset3 = 106 * v1
+	local HorizontalPadding = 25 * v1
+	local v3 = 2 * v1
+	local XOffset1 = 64 * v1
+	local YOffset2 = 64 * v1
+	local NewXOffset = XOffset1 + 2 * v3
+	local YOffset = YOffset2 + 2 * v3
+	local XOffset2 = NewXOffset + 2 * HorizontalPadding
+	local NewYOffset = YOffset + 2 * HorizontalPadding
 	
-	return strictModule({
-		Size = strictModule({
-			AdditionalDetailsLabel = UDim2.new(1, 0, 0, var3),
-			ItemPreview = UDim2.new(0, var13, 0, var14),
-			ItemPreviewWhiteFrame = UDim2.new(0, var17, 0, var18),
-			ItemPreviewContainerFrame = UDim2.new(0, var19, 0, var20),
-			HorizontalPadding = var11,
-			ProductDescription = UDim2.new(0, var7, 0, var8),
-			ProductDescriptionPaddingTop = var6,
-			RobuxIconContainerFrame = UDim2.new(0, var5 + var4, 0, var5 + 2 * var4),
-			RobuxIcon = UDim2.new(0, var5, 0, var5),
-			PriceTextLabel = UDim2.new(0, var7 - (var5 + var4), 0, var5),
-			PurchasingAnimation = UDim2.new(0, var9, 0, var10),
-			ButtonIconPadding = var15,
-			ButtonIconYOffset = var16,
-			ButtonHeight = var2,
-			Dialog = UDim2.new(0, var19 + var7, 0, math.max(var20, var8) + var3 + var2)
+	return (StrictModule({
+		Size = StrictModule({
+			AdditionalDetailsLabel = UDim2.new(1, 0, 0, YOffset1),
+			ItemPreview = UDim2.new(0, XOffset1, 0, YOffset2),
+			ItemPreviewWhiteFrame = UDim2.new(0, NewXOffset, 0, YOffset),
+			ItemPreviewContainerFrame = UDim2.new(0, XOffset2, 0, NewYOffset),
+			HorizontalPadding = HorizontalPadding,
+			ProductDescription = UDim2.new(0, XOffset, 0, YOffset3),
+			ProductDescriptionPaddingTop = 18 * v1,
+			RobuxIconContainerFrame = UDim2.new(0, XOffset3 + v2, 0, XOffset3 + 2 * v2),
+			RobuxIcon = UDim2.new(0, XOffset3, 0, XOffset3),
+			PriceTextLabel = UDim2.new(0, XOffset - (XOffset3 + v2), 0, XOffset3),
+			PurchasingAnimation = UDim2.new(0, 96 * v1, 0, 20 * v1),
+			ButtonIconPadding = 3 * v1,
+			ButtonIconYOffset = 2 * v1,
+			ButtonHeight = ButtonHeight,
+			Dialog = UDim2.new(0, XOffset2 + XOffset, 0, math.max(NewYOffset, YOffset3) + YOffset1 + ButtonHeight)
 		}, "LayoutValues.Size"),
-		TextSize = strictModule({
-			Default = 18 * var1,
-			ProductDescription = 18 * var1,
-			Button = 24 * var1,
-			AdditionalDetails = 14 * var1,
-			Purchasing = 36 * var1
+		TextSize = StrictModule({
+			Default = 18 * v1,
+			ProductDescription = 18 * v1,
+			Button = 24 * v1,
+			AdditionalDetails = 14 * v1,
+			Purchasing = 36 * v1
 		}, "LayoutValues.TextSize"),
-		TextColor = strictModule({ PriceLabel = Color3.new(1, 1, 1) }, "LayoutValues.TextColor"),
-		Image = strictModule({
-			PromptBackground = if p1 then {
+		TextColor = StrictModule({ PriceLabel = Color3.new(1, 1, 1) }, "LayoutValues.TextColor"),
+		Image = StrictModule({
+			PromptBackground = p1 and {
 				Path = "rbxasset://textures/ui/PurchasePrompt/PurchasePromptBG@2x.png",
 				SliceCenter = Rect.new(17, 17, 19, 19)
-			} else {
+			} or {
 				Path = "rbxasset://textures/ui/PurchasePrompt/PurchasePromptBG.png",
 				SliceCenter = Rect.new(8, 9, 10, 10)
 			},
-			InProgressBackground = if p1 then {
+			InProgressBackground = p1 and {
 				Path = "rbxasset://textures/ui/PurchasePrompt/LoadingBG@2x.png",
 				SliceCenter = Rect.new(17, 17, 19, 19)
-			} else {
+			} or {
 				Path = "rbxasset://textures/ui/PurchasePrompt/LoadingBG.png",
 				SliceCenter = Rect.new(9, 9, 11, 11)
 			},
-			ButtonUpLeft = if p1 then {
+			ButtonUpLeft = p1 and {
 				Path = "rbxasset://textures/ui/PurchasePrompt/LeftButton@2x.png",
 				SliceCenter = Rect.new(18, 5, 20, 7)
-			} else {
+			} or {
 				Path = "rbxasset://textures/ui/PurchasePrompt/LeftButton.png",
 				SliceCenter = Rect.new(8, 3, 10, 4)
 			},
-			ButtonDownLeft = if p1 then {
+			ButtonDownLeft = p1 and {
 				Path = "rbxasset://textures/ui/PurchasePrompt/LeftButtonDown@2x.png",
 				SliceCenter = Rect.new(18, 5, 20, 7)
-			} else {
+			} or {
 				Path = "rbxasset://textures/ui/PurchasePrompt/LeftButtonDown.png",
 				SliceCenter = Rect.new(8, 3, 10, 4)
 			},
-			ButtonUpRight = if p1 then {
+			ButtonUpRight = p1 and {
 				Path = "rbxasset://textures/ui/PurchasePrompt/RightButton@2x.png",
 				SliceCenter = Rect.new(3, 5, 5, 7)
-			} else {
+			} or {
 				Path = "rbxasset://textures/ui/PurchasePrompt/RightButton.png",
 				SliceCenter = Rect.new(2, 3, 3, 4)
 			},
-			ButtonDownRight = if p1 then {
+			ButtonDownRight = p1 and {
 				Path = "rbxasset://textures/ui/PurchasePrompt/RightButtonDown@2x.png",
 				SliceCenter = Rect.new(3, 5, 5, 7)
-			} else {
+			} or {
 				Path = "rbxasset://textures/ui/PurchasePrompt/RightButtonDown.png",
 				SliceCenter = Rect.new(2, 3, 3, 4)
 			},
-			ButtonUp = if p1 then {
+			ButtonUp = p1 and {
 				Path = "rbxasset://textures/ui/PurchasePrompt/SingleButton@2x.png",
 				SliceCenter = Rect.new(18, 5, 20, 7)
-			} else {
+			} or {
 				Path = "rbxasset://textures/ui/PurchasePrompt/SingleButton.png",
 				SliceCenter = Rect.new(8, 3, 10, 4)
 			},
-			ButtonDown = if p1 then {
+			ButtonDown = p1 and {
 				Path = "rbxasset://textures/ui/PurchasePrompt/SingleButtonDown@2x.png",
 				SliceCenter = Rect.new(18, 5, 20, 7)
-			} else {
+			} or {
 				Path = "rbxasset://textures/ui/PurchasePrompt/SingleButtonDown.png",
 				SliceCenter = Rect.new(8, 3, 10, 4)
 			},
@@ -137,36 +135,36 @@ function t.generate(_, p1)
 				Path = "rbxasset://textures/ui/PurchasePrompt/Premium.png",
 				SliceCenter = nil
 			},
-			RobuxIcon = if p1 then {
+			RobuxIcon = p1 and {
 				Path = "rbxasset://textures/ui/common/robux_small@2x.png",
 				SliceCenter = nil
-			} else {
+			} or {
 				Path = "rbxasset://textures/ui/common/robux_small.png",
 				SliceCenter = nil
 			},
-			ErrorIcon = if p1 then {
+			ErrorIcon = p1 and {
 				Path = "rbxasset://textures/ui/ErrorIcon.png",
 				SliceCenter = nil
-			} else {
+			} or {
 				Path = "rbxasset://textures/ui/ErrorIcon.png",
 				SliceCenter = nil
 			},
-			ButtonA = if p1 then {
+			ButtonA = p1 and {
 				Path = "rbxasset://textures/ui/Settings/Help/AButtonDark@2x.png",
 				SliceCenter = nil
-			} else {
+			} or {
 				Path = "rbxasset://textures/ui/Settings/Help/AButtonDark.png",
 				SliceCenter = nil
 			},
-			ButtonB = if p1 then {
+			ButtonB = p1 and {
 				Path = "rbxasset://textures/ui/Settings/Help/BButtonDark@2x.png",
 				SliceCenter = nil
-			} else {
+			} or {
 				Path = "rbxasset://textures/ui/Settings/Help/BButtonDark.png",
 				SliceCenter = nil
 			}
 		}, "LayoutValues.Image")
-	}, "LayoutValues")
+	}, "LayoutValues"))
 end
 
-return t
+return LayoutValuesModule

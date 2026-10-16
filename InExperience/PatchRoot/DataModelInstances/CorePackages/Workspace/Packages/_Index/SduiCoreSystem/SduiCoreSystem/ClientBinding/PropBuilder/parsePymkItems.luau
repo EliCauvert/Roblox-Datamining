@@ -1,26 +1,26 @@
-﻿return function(p1)
+﻿return function(p1) --[[ Line: 7 | Named "parsePymkItems" ]]
 	if typeof(p1) ~= "table" then
 		return nil
 	end
-	local items = p1.items or p1
+	local Items = p1.items or p1
 	
-	if typeof(items) ~= "table" then
+	if typeof(Items) ~= "table" then
 		return nil
 	end
-	local t = {}
+	local List = {}
 	
-	for i, v in items do
-		if typeof(v) == "table" then
-			local itemId = v.item_id
+	for Rank, item in Items do
+		if typeof(item) == "table" then
+			local ItemId = item.item_id
 			
-			if itemId ~= nil and itemId ~= "" then
-				table.insert(t, {
-					id = tostring(itemId),
-					rank = i,
-					hasPendingFriendRequest = v.has_pending_friend_request == true
+			if ItemId ~= nil and ItemId ~= "" then
+				table.insert(List, {
+					id = tostring(ItemId),
+					rank = Rank,
+					hasPendingFriendRequest = item.has_pending_friend_request == true
 				})
 			end
 		end
 	end
-	return t
+	return List
 end

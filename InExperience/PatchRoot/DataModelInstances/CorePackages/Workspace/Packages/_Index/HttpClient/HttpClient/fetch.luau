@@ -1,124 +1,134 @@
 ﻿local _ = require(script.Parent.types)
-local createRequestModule = require(script.Parent.createRequest)
-local createRequestInternalNetworkModule = require(script.Parent.createRequestInternalNetwork)
-local withRetryModule = require(script.Parent.withRetry)
-local decodersModule = require(script.Parent.decoders)
-local encodersModule = require(script.Parent.encoders)
-local isSuccess = require(script.Parent.httpStatus).isSuccess
-local statusCodeActionsModule = require(script.Parent.statusCodeActions)
-local fFlagHttpClientRetryExtensionsModule = require(script.Parent.Flags.FFlagHttpClientRetryExtensions)
-local var1 = nil
+local CreateRequestModule = require(script.Parent.createRequest)
+local CreateRequestInternalNetworkModule = require(script.Parent.createRequestInternalNetwork)
+local WithRetryModule = require(script.Parent.withRetry)
+local DecodersModule = require(script.Parent.decoders)
+local EncodersModule = require(script.Parent.encoders)
+local IsSuccessFunction = require(script.Parent.httpStatus).isSuccess
+local StatusCodeActionsModule = require(script.Parent.statusCodeActions)
+local FFlagHttpClientRetryExtensionsModule = require(script.Parent.Flags.FFlagHttpClientRetryExtensions)
+local v1 = nil
 
-local function _()
-	-- upvalues: var1 (write), withRetryModule (ref), createRequestInternalNetworkModule (ref)
-	if var1 == nil then
-		var1 = withRetryModule(createRequestInternalNetworkModule())
+local function _() --[[ Line: 17 | Named "defaultNetwork" ]]
+	-- upvalues: v1 (ref), WithRetryModule (copy), CreateRequestInternalNetworkModule (copy)
+	if v1 == nil then
+		v1 = WithRetryModule(CreateRequestInternalNetworkModule())
 	end
-	return var1
+	return v1
 end
 
-local _ = function(p1)
-	-- upvalues: withRetryModule (ref), createRequestInternalNetworkModule (ref), var1 (write)
-	local network = p1.network
+local _ = function(p1) --[[ Line: 24 | Named "pickNetwork" ]]
+	-- upvalues: WithRetryModule (copy), CreateRequestInternalNetworkModule (copy), v1 (ref)
+	local Network = p1.network
 	
 	if typeof(p1.retry) == "table" then
-		return withRetryModule(network or createRequestInternalNetworkModule(), p1.retry)
-	elseif network ~= nil then
-		return network
-	elseif p1.retry == false then
-		return createRequestInternalNetworkModule()
-	elseif var1 == nil then
-		var1 = withRetryModule(createRequestInternalNetworkModule())
+		return WithRetryModule(Network or CreateRequestInternalNetworkModule(), p1.retry)
 	end
-	return var1
+	if Network ~= nil then
+		return Network
+	end
+	if p1.retry == false then
+		return CreateRequestInternalNetworkModule()
+	end
+	if v1 == nil then
+		v1 = WithRetryModule(CreateRequestInternalNetworkModule())
+	end
+	return v1
 end
 
-local function asBuffer(p1)
-	return if typeof(p1) == "buffer" then p1 else buffer.fromstring(p1 or "")
+local function asBuffer(ResponseBody) --[[ Line: 39 ]]
+	return if typeof(ResponseBody) == "buffer" then ResponseBody else buffer.fromstring(ResponseBody or "")
 end
 
-local _ = function(p1)
-	-- upvalues: isSuccess (ref), asBuffer (ref)
-	return function(p2)
-		-- upvalues: isSuccess (copy), p1 (ref), asBuffer (copy)
-		if isSuccess(p2.statusCode) then
+local _ = function(p1) --[[ Line: 46 | Named "buildProtobufDecoder" ]]
+	-- upvalues: IsSuccessFunction (copy), asBuffer (copy)
+	return function(p2) --[[ Line: 47 ]]
+		-- upvalues: IsSuccessFunction (upval), p1 (copy), asBuffer (upval)
+		if IsSuccessFunction(p2.statusCode) then
 			return p1(asBuffer(p2.responseBody)), nil, nil
+		else
+			return nil, `http {p2.statusCode}`, p2.statusCode
 		end
-		return nil, `http {p2.statusCode}`, p2.statusCode
 	end
 end
 
-local _ = function(p1)
-	-- upvalues: statusCodeActionsModule (ref)
-	local var2 = statusCodeActionsModule.snapshot()
+local _ = function(List) --[[ Line: 56 | Named "resolveStatusCodeActions" ]]
+	-- upvalues: StatusCodeActionsModule (copy)
+	local SnapshotResult = StatusCodeActionsModule.snapshot()
 	
-	if var2 == nil then
-		return p1
-	elseif p1 ~= nil then
-		for i, v in p1 do
-			var2[i] = v
+	if SnapshotResult == nil then
+		return List
+	end
+	if List ~= nil then
+		for i, value in List do
+			SnapshotResult[i] = value
 		end
 	end
-	return var2
+	return SnapshotResult
 end
 
-return function(p2)
-	-- upvalues: encodersModule (ref), isSuccess (ref), asBuffer (ref), decodersModule (ref), createRequestModule (ref), withRetryModule (ref), createRequestInternalNetworkModule (ref), var1 (write), statusCodeActionsModule (ref), fFlagHttpClientRetryExtensionsModule (ref)
-	local responseEncoding = p2.responseEncoding or "json"
-	local var3 = if (p2.requestEncoding or "json") == "protobuf" then encodersModule.encodeRaw("application/x-protobuf") else nil
-	local _ = nil
+return function(p1) --[[ Line: 69 | Named "fetch" ]]
+	-- upvalues: EncodersModule (copy), IsSuccessFunction (copy), asBuffer (copy), DecodersModule (copy), CreateRequestModule (copy), WithRetryModule (copy), CreateRequestInternalNetworkModule (copy), v1 (ref), StatusCodeActionsModule (copy), FFlagHttpClientRetryExtensionsModule (copy)
+	local XProtobuf = if (p1.requestEncoding or "json") == "protobuf" then EncodersModule.encodeRaw("application/x-protobuf") else nil
 	
-	if responseEncoding == "protobuf" then
-		local decode = p2.decode
+	if (p1.responseEncoding or "json") == "protobuf" then
+		local DecodeFunction = p1.decode
 		
-		local var4 = function(p3)
-			-- upvalues: isSuccess (copy), decode (ref), asBuffer (copy)
-			if isSuccess(p3.statusCode) then
-				return decode(asBuffer(p3.responseBody)), nil, nil
+		local function DecodeLegacyJsonResult(p2) --[[ Line: 47 ]]
+			-- upvalues: IsSuccessFunction (upval), DecodeFunction (copy), asBuffer (upval)
+			if IsSuccessFunction(p2.statusCode) then
+				return DecodeFunction(asBuffer(p2.responseBody)), nil, nil
+			else
+				return nil, `http {p2.statusCode}`, p2.statusCode
 			end
-			return nil, `http {p3.statusCode}`, p3.statusCode
 		end
 	else
-		local var4 = if p2.legacy then decodersModule.decodeLegacyJson(p2.decode) else decodersModule.decodeJson(p2.decode)
+		local DecodeLegacyJsonResult: (any) -> any = if p1.legacy then DecodersModule.decodeLegacyJson(p1.decode) else DecodersModule.decodeJson(p1.decode)
 	end
-	local var5
 	local t = {}
-	local network = p2.network
+	local Network = p1.network
+	local WithRetryModuleResult = nil
 	
-	if typeof(p2.retry) == "table" then
-		var5 = withRetryModule(network or createRequestInternalNetworkModule(), p2.retry)
-	elseif network ~= nil then
-		var5 = network
-	elseif p2.retry == false then
-		var5 = createRequestInternalNetworkModule()
-	elseif var1 == nil then
-		var1 = withRetryModule(createRequestInternalNetworkModule())
-	end
-	var5 = var1
-	local var6
-	t.networkImpl = var5
-	t.method = p2.method
-	t.url = p2.url
-	t.body = p2.body
-	t.headers = p2.headers
-	t.encode = var3
-	t.decode = var4
-	t.analyticsKey = p2.analyticsKey
-	t.analytics = p2.analytics
-	local statusCodeActions = p2.statusCodeActions
-	local var7 = statusCodeActionsModule.snapshot()
-	
-	if var7 == nil then
-		var6 = statusCodeActions
-	elseif statusCodeActions ~= nil then
-		for i, v in statusCodeActions do
-			var7[i] = v
+	if typeof(p1.retry) == "table" then
+		WithRetryModuleResult = WithRetryModule(Network or CreateRequestInternalNetworkModule(), p1.retry)
+	elseif Network == nil then
+		if p1.retry == false then
+			WithRetryModuleResult = CreateRequestInternalNetworkModule()
+		else
+			if v1 == nil then
+				v1 = WithRetryModule(CreateRequestInternalNetworkModule())
+			end
+			WithRetryModuleResult = v1
 		end
+	else
+		WithRetryModuleResult = Network
 	end
-	var6 = var7
-	t.statusCodeActions = var6
-	t.onMessage = if fFlagHttpClientRetryExtensionsModule then p2.onMessage else nil
-	t.priority = if fFlagHttpClientRetryExtensionsModule then p2.priority else nil
+	t.networkImpl = WithRetryModuleResult
+	t.method = p1.method
+	t.url = p1.url
+	t.body = p1.body
+	t.headers = p1.headers
+	t.encode = XProtobuf
+	t.decode = DecodeLegacyJsonResult
+	t.analyticsKey = p1.analyticsKey
+	t.analytics = p1.analytics
+	local StatusCodeActions = p1.statusCodeActions
+	local SnapshotResult = StatusCodeActionsModule.snapshot()
+	local StatusCodeActions1 = nil
 	
-	return createRequestModule(t)
+	if SnapshotResult == nil then
+		StatusCodeActions1 = StatusCodeActions
+	else
+		if StatusCodeActions ~= nil then
+			for i, statusCodeAction in StatusCodeActions do
+				SnapshotResult[i] = statusCodeAction
+			end
+		end
+		StatusCodeActions1 = SnapshotResult
+	end
+	t.statusCodeActions = StatusCodeActions1
+	t.onMessage = if FFlagHttpClientRetryExtensionsModule then p1.onMessage else nil
+	t.priority = if FFlagHttpClientRetryExtensionsModule then p1.priority else nil
+	
+	return CreateRequestModule(t)
 end

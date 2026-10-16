@@ -1,66 +1,67 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local roactModule = require(corePackagesService.Packages.Roact)
-local roduxModule = require(corePackagesService.Packages.Rodux)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local parent = script.Parent
-local reducerModule = require(parent.Reducers.Reducer)
-local provider = require(script.Parent.Components.Connection.LayoutValues).Provider
-local playerListModule = require(corePackagesService.Workspace.Packages.PlayerList)
-local layoutValuesContext = playerListModule.Common.LayoutValuesContext
-local leaderboardStoreContext = playerListModule.LeaderboardStoreContext
-local var1 = require(corePackagesService.Workspace.Packages.LeaderboardStore).dev.createMockLeaderboardStore()()
-local apolloProvider = require(corePackagesService.Packages.ApolloClient).ApolloProvider
-local mockApolloClient = require(corePackagesService.Workspace.Packages.GraphQLServer).ApolloClientTestUtils.mockApolloClient
-local array = require(corePackagesService.Packages.LuauPolyfill).Array
-local createLayoutValuesModule = require(parent.CreateLayoutValues)
+﻿local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoduxModule = require(CorePackages.Packages.Rodux)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local Parent = script.Parent
+local ReducerModule = require(Parent.Reducers.Reducer)
+local Provider = require(script.Parent.Components.Connection.LayoutValues).Provider
+local PlayerListModule = require(CorePackages.Workspace.Packages.PlayerList)
+local LayoutValuesContext = PlayerListModule.Common.LayoutValuesContext
+local LeaderboardStoreContext = PlayerListModule.LeaderboardStoreContext
+local v1 = require(CorePackages.Workspace.Packages.LeaderboardStore).dev.createMockLeaderboardStore()()
+local ApolloProvider = require(CorePackages.Packages.ApolloClient).ApolloProvider
+local MockApolloClientFunction = require(CorePackages.Workspace.Packages.GraphQLServer).ApolloClientTestUtils.mockApolloClient
+local Array = require(CorePackages.Packages.LuauPolyfill).Array
+local CreateLayoutValuesModule = require(Parent.CreateLayoutValues)
 
-return function(p1)
-	-- upvalues: roduxModule (ref), reducerModule (ref), mockApolloClient (ref), array (ref), roactModule (ref), roactRoduxModule (ref), apolloProvider (ref), provider (ref), createLayoutValuesModule (ref), UIBloxModule (ref), foundationModule (ref), layoutValuesContext (ref), leaderboardStoreContext (ref), var1 (ref)
-	return roactModule.createElement(roactRoduxModule.StoreProvider, { store = p1.store or roduxModule.Store.new(reducerModule) }, {
-		ApolloProvider = roactModule.createElement(apolloProvider, {
-			client = p1.client or mockApolloClient({
-				mockResolvers = {
-					Query = {
-						userProfiles = function(_, p2, _, _)
-							-- upvalues: array (copy)
-							return array.map(p2.userIds, function(p3)
-								return {
-									userId = p3,
-									names = {
-										alias = `alias{p3}`,
-										combinedName = `combinedName{p3}`,
-										contactName = `contactName{p3}`,
-										displayName = `displayName{p3}`,
-										username = `username{p3}`,
-										platformName = `platformName{p3}`,
-										inExperienceCombinedName = `inExperienceCombinedName{p3}`
-									}
-								}
-							end)
-						end
-					},
-					UserProfile = {
-						id = function(p2)
-							return tostring(p2.userId)
-						end,
-						names = function(p2)
-							return p2.names
-						end
-					}
-				}
-			})
-		}, {
-			LayoutValuesProvider_DEPRECATED = roactModule.createElement(provider, {
-				layoutValues = p1.layoutValues or createLayoutValuesModule(false)
+return function(p1) --[[ Line: 37 | Named "TestProviders" ]]
+	-- upvalues: RoduxModule (copy), ReducerModule (copy), MockApolloClientFunction (copy), Array (copy), RoactModule (copy), RoactRoduxModule (copy), ApolloProvider (copy), Provider (copy), CreateLayoutValuesModule (copy), UIBloxModule (copy), FoundationModule (copy), LayoutValuesContext (copy), LeaderboardStoreContext (copy), v1 (copy)
+	local NewResult = RoduxModule.Store.new(ReducerModule)
+	local MockApolloClientResult = MockApolloClientFunction({
+		mockResolvers = {
+			Query = {
+				userProfiles = function(_, p2, _, _) --[[ Line: 42 ]]
+					-- upvalues: Array (upval)
+					return (Array.map(p2.userIds, function(UserId) --[[ Line: 43 ]]
+						return {
+							userId = UserId,
+							names = {
+								alias = `alias{UserId}`,
+								combinedName = `combinedName{UserId}`,
+								contactName = `contactName{UserId}`,
+								displayName = `displayName{UserId}`,
+								username = `username{UserId}`,
+								platformName = `platformName{UserId}`,
+								inExperienceCombinedName = `inExperienceCombinedName{UserId}`
+							}
+						}
+					end))
+				end
+			},
+			UserProfile = {
+				id = function(p2): string --[[ Line: 61 ]]
+					return (tostring(p2.userId))
+				end,
+				names = function(p2) --[[ Line: 64 ]]
+					return p2.names
+				end
+			}
+		}
+	})
+	
+	return RoactModule.createElement(RoactRoduxModule.StoreProvider, { store = p1.store or NewResult }, {
+		ApolloProvider = RoactModule.createElement(ApolloProvider, { client = p1.client or MockApolloClientResult }, {
+			LayoutValuesProvider_DEPRECATED = RoactModule.createElement(Provider, {
+				layoutValues = p1.layoutValues or CreateLayoutValuesModule(false)
 			}, {
-				ThemeProvider = roactModule.createElement(UIBloxModule.App.Style.AppStyleProvider, {}, {
-					FoundationProvider = roactModule.createElement(foundationModule.FoundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, {
-						LayoutValuesProvider = roactModule.createElement(layoutValuesContext.Provider, {
-							value = p1.layoutValues or createLayoutValuesModule(false)
+				ThemeProvider = RoactModule.createElement(UIBloxModule.App.Style.AppStyleProvider, {}, {
+					FoundationProvider = RoactModule.createElement(FoundationModule.FoundationProvider, { colorMode = FoundationModule.Enums.ColorMode.Dark }, {
+						LayoutValuesProvider = RoactModule.createElement(LayoutValuesContext.Provider, {
+							value = p1.layoutValues or CreateLayoutValuesModule(false)
 						}, {
-							LeaderboardStoreProvider = roactModule.createElement(leaderboardStoreContext.Provider, { value = p1.leaderboardStore or var1 }, p1.children)
+							LeaderboardStoreProvider = RoactModule.createElement(LeaderboardStoreContext.Provider, { value = p1.leaderboardStore or v1 }, p1.children)
 						})
 					})
 				})

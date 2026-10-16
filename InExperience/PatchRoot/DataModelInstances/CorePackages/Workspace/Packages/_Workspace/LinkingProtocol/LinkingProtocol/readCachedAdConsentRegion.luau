@@ -1,6 +1,6 @@
-﻿local mockableProxyServicesModule = require(script.Parent.Parent.MockableProxyServices)
+﻿local MockableProxyServicesModule = require(script.Parent.Parent.MockableProxyServices)
 
-return function()
-	-- upvalues: mockableProxyServicesModule (ref)
-	return mockableProxyServicesModule.AppStorageService:GetItem("CountryCode")
+return function() --[[ Line: 12 | Named "readCachedAdConsentRegion" ]]
+	-- upvalues: MockableProxyServicesModule (copy)
+	return MockableProxyServicesModule.AppStorageService:GetItem("CountryCode")
 end

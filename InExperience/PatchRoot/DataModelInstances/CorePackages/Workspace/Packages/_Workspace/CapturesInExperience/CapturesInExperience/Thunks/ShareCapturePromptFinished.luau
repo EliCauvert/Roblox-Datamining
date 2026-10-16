@@ -1,59 +1,58 @@
-﻿local parent = script.Parent.Parent
-local captureServiceModule = require(parent.Services.CaptureService)
-local externalShareSourceTypeModule = require(parent.Enums.ExternalShareSourceType)
-local promptDismissedModule = require(parent.Actions.PromptDismissed)
-local shareCaptureModule = require(parent.Thunks.ShareCapture)
-local toastTriggeredModule = require(parent.Actions.ToastTriggered)
-local capturesToastTypeModule = require(parent.Enums.CapturesToastType)
-local captureTypeModule = require(parent.Enums.CaptureType)
-local _ = require(parent.Types)
-local fFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
+﻿local Parent = script.Parent.Parent
+local CaptureServiceModule = require(Parent.Services.CaptureService)
+local ExternalShareSourceTypeModule = require(Parent.Enums.ExternalShareSourceType)
+local PromptDismissedModule = require(Parent.Actions.PromptDismissed)
+local ShareCaptureModule = require(Parent.Thunks.ShareCapture)
+local ToastTriggeredModule = require(Parent.Actions.ToastTriggered)
+local CapturesToastTypeModule = require(Parent.Enums.CapturesToastType)
+local CaptureTypeModule = require(Parent.Enums.CaptureType)
+local _ = require(Parent.Types)
+local FFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(Parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
 
-return function(p1, p2, p3)
-	-- upvalues: promptDismissedModule (ref), captureServiceModule (ref), fFlagEnableCapturesGalleryRetrievalCoreScriptModule (ref), captureTypeModule (ref), toastTriggeredModule (ref), capturesToastTypeModule (ref), shareCaptureModule (ref), externalShareSourceTypeModule (ref)
-	return function(p4)
-		-- upvalues: promptDismissedModule (copy), p1 (ref), p3 (ref), p2 (ref), captureServiceModule (copy), fFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), captureTypeModule (copy), toastTriggeredModule (copy), capturesToastTypeModule (copy), shareCaptureModule (copy), externalShareSourceTypeModule (copy)
-		p4:dispatch(promptDismissedModule(p1))
+return function(PromptId, p1, Accepted) --[[ Line: 18 ]]
+	-- upvalues: PromptDismissedModule (copy), CaptureServiceModule (copy), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CaptureTypeModule (copy), ToastTriggeredModule (copy), CapturesToastTypeModule (copy), ShareCaptureModule (copy), ExternalShareSourceTypeModule (copy)
+	return function(p2) --[[ Line: 19 ]]
+		-- upvalues: PromptDismissedModule (upval), PromptId (copy), Accepted (copy), p1 (copy), CaptureServiceModule (upval), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (upval), CaptureTypeModule (upval), ToastTriggeredModule (upval), CapturesToastTypeModule (upval), ShareCaptureModule (upval), ExternalShareSourceTypeModule (upval)
+		p2:dispatch(PromptDismissedModule(PromptId))
 		
-		if p3 then
-			if p2.isU13LocalSavePrompt then
-				task.spawn(function()
-					-- upvalues: p2 (copy), captureServiceModule (copy), fFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), captureTypeModule (copy), p4 (ref), toastTriggeredModule (copy), capturesToastTypeModule (copy)
-					local content = p2.content
-					local captureSavedInternalConnection = nil
-					captureSavedInternalConnection = captureServiceModule.CaptureSavedInternal:Connect(function(p5)
-						-- upvalues: content (ref), fFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), captureTypeModule (copy), captureSavedInternalConnection (write), captureServiceModule (copy), p4 (copy), toastTriggeredModule (copy), capturesToastTypeModule (copy)
-						if content.Object ~= nil then
-							if fFlagEnableCapturesGalleryRetrievalCoreScriptModule then
-								if p5.CaptureTime ~= content.Object.CaptureTime then return end
-							elseif p5.type == captureTypeModule.Video and p5.videoCapture.CaptureTime ~= content.Object.CaptureTime then return end
+		if Accepted then
+			if p1.isU13LocalSavePrompt then
+				task.spawn(function() --[[ Line: 24 ]]
+					-- upvalues: p1 (upval), CaptureServiceModule (upval), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (upval), CaptureTypeModule (upval), p2 (copy), ToastTriggeredModule (upval), CapturesToastTypeModule (upval)
+					local Content = p1.content
+					local Connection = nil
+					Connection = CaptureServiceModule.CaptureSavedInternal:Connect(function(CaptureInfo) --[[ Line: 28 ]]
+						-- upvalues: Content (copy), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (upval), CaptureTypeModule (upval), Connection (ref), CaptureServiceModule (upval), p2 (upval), ToastTriggeredModule (upval), CapturesToastTypeModule (upval)
+						if Content.Object ~= nil then
+							if FFlagEnableCapturesGalleryRetrievalCoreScriptModule then
+								if CaptureInfo.CaptureTime ~= Content.Object.CaptureTime then return end
+							elseif CaptureInfo.type == CaptureTypeModule.Video and CaptureInfo.videoCapture.CaptureTime ~= Content.Object.CaptureTime then return end
 						end
-						local var1 = if fFlagEnableCapturesGalleryRetrievalCoreScriptModule then p5 elseif p5.type == captureTypeModule.Video then p5.videoCapture else p5.filePath
+						local CaptureInfo1 = if FFlagEnableCapturesGalleryRetrievalCoreScriptModule then CaptureInfo elseif CaptureInfo.type == CaptureTypeModule.Video then CaptureInfo.videoCapture else CaptureInfo.filePath
 						
-						if captureSavedInternalConnection then
-							captureSavedInternalConnection:Disconnect()
+						if Connection then
+							Connection:Disconnect()
 						end
-						captureServiceModule:SaveCapturesToExternalStorageAsync({ var1 })
-						p4:dispatch(toastTriggeredModule(capturesToastTypeModule.CaptureSavedToDevice, { captureInfo = var1 }))
+						CaptureServiceModule:SaveCapturesToExternalStorageAsync({ CaptureInfo1 })
+						p2:dispatch(ToastTriggeredModule(CapturesToastTypeModule.CaptureSavedToDevice, { captureInfo = CaptureInfo1 }))
 					end)
-					captureServiceModule:GetCaptureFilePathAsync(p2.content)
+					CaptureServiceModule:GetCaptureFilePathAsync(p1.content)
 				end)
 			else
-				task.spawn(function()
-					-- upvalues: captureServiceModule (copy), p2 (copy), fFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), captureTypeModule (copy), p4 (ref), shareCaptureModule (copy), externalShareSourceTypeModule (copy)
-					local contentCaptureFilePathAsync = captureServiceModule:GetCaptureFilePathAsync(p2.content)
-					local _ = nil
-					local content = p2.content
-					local var1 = content.Object ~= nil and content.Object:IsA("VideoCapture")
-					p4:dispatch(shareCaptureModule(if fFlagEnableCapturesGalleryRetrievalCoreScriptModule and content.Object ~= nil then content.Object else {
-						contentId = content.Uri or "rbxtemp://0",
-						filePath = if var1 then "" else contentCaptureFilePathAsync,
-						type = if var1 then captureTypeModule.Video else captureTypeModule.Screenshot,
-						videoCapture = if var1 then content.Object else nil
-					}, externalShareSourceTypeModule.Prompt, p2.launchData))
+				task.spawn(function() --[[ Line: 65 ]]
+					-- upvalues: CaptureServiceModule (upval), p1 (upval), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (upval), CaptureTypeModule (upval), p2 (copy), ShareCaptureModule (upval), ExternalShareSourceTypeModule (upval)
+					local CaptureFilePathAsync = CaptureServiceModule:GetCaptureFilePathAsync(p1.content)
+					local Content = p1.content
+					local IsVideoCapture = Content.Object ~= nil and Content.Object:IsA("VideoCapture")
+					p2:dispatch(ShareCaptureModule(if FFlagEnableCapturesGalleryRetrievalCoreScriptModule and Content.Object ~= nil then Content.Object else {
+						contentId = Content.Uri or "rbxtemp://0",
+						filePath = if IsVideoCapture then "" else CaptureFilePathAsync,
+						type = if IsVideoCapture then CaptureTypeModule.Video else CaptureTypeModule.Screenshot,
+						videoCapture = if IsVideoCapture then Content.Object else nil
+					}, ExternalShareSourceTypeModule.Prompt, p1.launchData))
 				end)
 			end
 		end
-		captureServiceModule:OnSharePromptFinished(p1, p3)
+		CaptureServiceModule:OnSharePromptFinished(PromptId, Accepted)
 	end
 end

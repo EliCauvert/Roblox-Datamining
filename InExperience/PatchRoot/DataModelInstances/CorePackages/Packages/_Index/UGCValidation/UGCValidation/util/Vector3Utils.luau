@@ -1,8 +1,8 @@
 ﻿return {
-	isInRange = function(p1, p2, p3, p4)
-		return if p4 == true then p2.X < p1.X and (p1.X < p3.X and (p2.Y < p1.Y and (p1.Y < p3.Y and (p2.Z < p1.Z and p1.Z < p3.Z)))) else p2.X <= p1.X and (p1.X <= p3.X and (p2.Y <= p1.Y and (p1.Y <= p3.Y and (p2.Z <= p1.Z and p1.Z <= p3.Z))))
+	isInRange = function(Vector, Vector1, Vector2, Enabled): boolean --[[ Line: 3 ]]
+		return if Enabled == true then Vector1.X < Vector.X and (Vector.X < Vector2.X and (Vector1.Y < Vector.Y and (Vector.Y < Vector2.Y and Vector1.Z < Vector.Z))) and Vector.Z < Vector2.Z else Vector1.X <= Vector.X and (Vector.X <= Vector2.X and (Vector1.Y <= Vector.Y and (Vector.Y <= Vector2.Y and Vector1.Z <= Vector.Z))) and Vector.Z <= Vector2.Z
 	end,
-	isFirstLessOrEqual = function(p1, p2)
-		return p1.X <= p2.X and (p1.Y <= p2.Y and p1.Z <= p2.Z)
+	isFirstLessOrEqual = function(Vector, Vector1): boolean --[[ Line: 10 ]]
+		return Vector.X <= Vector1.X and Vector.Y <= Vector1.Y and Vector.Z <= Vector1.Z
 	end
 }

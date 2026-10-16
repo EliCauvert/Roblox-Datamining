@@ -1,20 +1,20 @@
 ﻿return {
-	formatDescription = function(p1)
-		local t = {}
+	formatDescription = function(List): string --[[ Line: 16 ]]
+		local List1 = {}
 		
-		for i, v in p1 do
-			if v.username ~= nil and v.username ~= "" then
-				table.insert(t, `@{v.username}`)
+		for _, value in List do
+			if value.username ~= nil and value.username ~= "" then
+				table.insert(List1, `@{value.username}`)
 			end
 		end
-		return table.concat(t, ", ")
+		return table.concat(List1, ", ")
 	end,
-	formatTitle = function(p2)
-		local list = table.create(#p2)
+	formatTitle = function(List): string --[[ Line: 8 ]]
+		local Buffer = table.create(#List)
 		
-		for i, v in p2 do
-			list[i] = v.displayName
+		for i, value in List do
+			Buffer[i] = value.displayName
 		end
-		return table.concat(list, ", ")
+		return table.concat(Buffer, ", ")
 	end
 }

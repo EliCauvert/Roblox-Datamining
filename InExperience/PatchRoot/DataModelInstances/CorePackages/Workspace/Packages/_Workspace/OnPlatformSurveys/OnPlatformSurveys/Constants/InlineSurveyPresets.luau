@@ -1,33 +1,33 @@
-﻿local onPlatformSurveys = script:FindFirstAncestor("OnPlatformSurveys")
-local _ = require(onPlatformSurveys.Enums.InlineSurveyPreset)
-local surfaceModule = require(onPlatformSurveys.Enums.Surface)
-local t = {
+﻿local OnPlatformSurveys = script:FindFirstAncestor("OnPlatformSurveys")
+local _ = require(OnPlatformSurveys.Enums.InlineSurveyPreset)
+local SurfaceModule = require(OnPlatformSurveys.Enums.Surface)
+local config = {
 	NoInviteInContent = {
 		hasInvite = false,
 		inviteSurface = nil,
-		surveySurface = surfaceModule.InContent
+		surveySurface = SurfaceModule.InContent
 	},
 	NoInviteModal = {
 		hasInvite = false,
 		inviteSurface = nil,
-		surveySurface = surfaceModule.Modal
+		surveySurface = SurfaceModule.Modal
 	},
 	ModalInviteToModalSurvey = {
 		hasInvite = true,
-		inviteSurface = surfaceModule.Modal,
-		surveySurface = surfaceModule.Modal
+		inviteSurface = SurfaceModule.Modal,
+		surveySurface = SurfaceModule.Modal
 	},
 	InContentInviteToModalSurvey = {
 		hasInvite = true,
-		inviteSurface = surfaceModule.InContent,
-		surveySurface = surfaceModule.Modal
+		inviteSurface = SurfaceModule.InContent,
+		surveySurface = SurfaceModule.Modal
 	}
 }
 
 return {
 	DEFAULT_PRESET = "NoInviteModal",
-	getPresentationConfig = function(p1)
-		-- upvalues: t (ref)
-		return t[p1 or "NoInviteModal"] or t.NoInviteModal
+	getPresentationConfig = function(p1) --[[ Line: 29 ]]
+		-- upvalues: config (copy)
+		return config[p1 or "NoInviteModal"] or config.NoInviteModal
 	end
 }

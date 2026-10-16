@@ -1,40 +1,40 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local _ = require(foundation.Enums.ColorMode)
-local _ = require(foundation.Enums.Device)
-local _ = require(foundation.Enums.ThemeName)
-local tokenProcessingUtilitiesModule = require(foundation.Providers.Style.Tokens.TokenProcessingUtilities)
-local tokensModule = require(foundation.Providers.Style.Tokens)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local _ = require(Foundation.Enums.ColorMode)
+local _ = require(Foundation.Enums.Device)
+local _ = require(Foundation.Enums.ThemeName)
+local TokenProcessingUtilitiesModule = require(Foundation.Providers.Style.Tokens.TokenProcessingUtilities)
+local TokensModule = require(Foundation.Providers.Style.Tokens)
 
-local function _(p1)
-	return p1:gsub("%.", ""):gsub("_", "")
+local function _(Text: string) --[[ Line: 15 | Named "tokenPathToAttributeBase" ]]
+	return Text:gsub("%.", ""):gsub("_", "")
 end
 
-local function emitLeafAttributes(p1, p2, p3)
-	-- upvalues: emitLeafAttributes (ref)
-	if type(p3) ~= "table" then
-		p1[p2] = p3
+local function emitLeafAttributes(p1, Key, ResolveTokenOverrideResult) --[[ Line: 20 ]]
+	-- upvalues: emitLeafAttributes (copy)
+	if type(ResolveTokenOverrideResult) ~= "table" then
+		p1[Key] = ResolveTokenOverrideResult
 		
 		return
 	end
-	for i, v in p3 do
-		emitLeafAttributes(p1, p2 .. tostring(i), v)
+	for i, value in ResolveTokenOverrideResult do
+		emitLeafAttributes(p1, Key .. tostring(i), value)
 	end
 end
 
-return function(p4, p5, p6, p7)
-	-- upvalues: tokensModule (ref), tokenProcessingUtilitiesModule (ref), emitLeafAttributes (ref)
+return function(p2, p3, p4, List) --[[ Line: 37 | Named "getOverrideAttributes" ]]
+	-- upvalues: TokensModule (copy), TokenProcessingUtilitiesModule (copy), emitLeafAttributes (copy)
 	local t = {}
 	
-	if not p7 or not next(p7) then
+	if not List or not next(List) then
 		return t
 	end
-	local tokens = tokensModule.getTokens(p5, p6, 1, nil, p4)
+	local Tokens = TokensModule.getTokens(p3, p4, 1, nil, p2)
 	
-	for i, v in p7 do
-		local var1 = tokenProcessingUtilitiesModule.resolveTokenOverride(tokens, i, v)
+	for Text, value in List do
+		local ResolveTokenOverrideResult = TokenProcessingUtilitiesModule.resolveTokenOverride(Tokens, Text, value)
 		
-		if var1 ~= nil then
-			emitLeafAttributes(t, i:gsub("%.", ""):gsub("_", ""), var1)
+		if ResolveTokenOverrideResult ~= nil then
+			emitLeafAttributes(t, Text:gsub("%.", ""):gsub("_", ""), ResolveTokenOverrideResult)
 		end
 	end
 	return t

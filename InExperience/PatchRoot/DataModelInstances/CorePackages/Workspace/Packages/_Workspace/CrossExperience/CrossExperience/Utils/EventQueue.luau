@@ -1,106 +1,110 @@
-﻿local crossExperience = script:FindFirstAncestor("CrossExperience")
-local _ = require(crossExperience.Types)
-local loggerModule = require(crossExperience.Logger)
-local t = {}
-t.__index = t
+﻿local CrossExperience = script:FindFirstAncestor("CrossExperience")
+local _ = require(CrossExperience.Types)
+local LoggerModule = require(CrossExperience.Logger)
+local EventQueueModule = {}
+EventQueueModule.__index = EventQueueModule
 
-local function _(p1)
-	local var1 = nil
+local function _(List) --[[ Line: 40 | Named "getFirstKeyInTable" ]]
+	local v1 = nil
 	
-	if p1 then
-		for i, v in pairs(p1) do
-			var1 = i
+	if List then
+		for i, _ in pairs(List) do
+			v1 = i
 			
-			return var1
+			return v1
 		end
 	end
-	return var1
+	return v1
 end
 
-function t.new(p2)
-	-- upvalues: t (ref)
-	local t_1 = { queues = {}, requiresEventsInOrder = p2 }
-	setmetatable(t_1, t)
+function EventQueueModule.new(RequiresEventsInOrder) --[[ Line: 51 ]]
+	-- upvalues: EventQueueModule (copy)
+	local config = {
+		queues = {},
+		requiresEventsInOrder = RequiresEventsInOrder
+	}
+	setmetatable(config, EventQueueModule)
 	
-	return t_1
+	return config
 end
 
-function t:processNextEvent(p2, p3)
-	-- upvalues: loggerModule (ref)
-	local var2 = self.queues[p2]
+function EventQueueModule:processNextEvent(Origin, p1) --[[ Line: 60 ]]
+	-- upvalues: LoggerModule (copy)
+	local Queue = self.queues[Origin]
 	
-	if not var2 then
-		loggerModule:error("EventQueue: queue not found for origin {} abort processing", p2)
+	if not Queue then
+		LoggerModule:error("EventQueue: queue not found for origin {} abort processing", Origin)
 		
 		return
-	elseif var2.nextSequenceNumber == nil then
-		local events = var2.events
-		local var3 = nil
+	end
+	if Queue.nextSequenceNumber == nil then
+		local Events = Queue.events
+		local v2 = nil
 		
-		if events then
-			for i, v in pairs(events) do
-				var3 = i
+		if Events then
+			for i, _ in pairs(Events) do
+				v2 = i
 				break
 			end
 		end
-		local var4 = var3
+		local NextSequenceNumber = v2
 		
-		if var4 ~= nil then
-			loggerModule:info("EventQueue: sequence for {} at {}", p2, var4)
-			var2.nextSequenceNumber = var4
+		if NextSequenceNumber ~= nil then
+			LoggerModule:info("EventQueue: sequence for {} at {}", Origin, NextSequenceNumber)
+			Queue.nextSequenceNumber = NextSequenceNumber
 		end
 	end
-	local nextSequenceNumber = var2.events[var2.nextSequenceNumber]
+	local Event = Queue.events[Queue.nextSequenceNumber]
 	
-	if nextSequenceNumber then
-		loggerModule:info("EventQueue: processing event {} seq {}", nextSequenceNumber.event.NOTIFY, nextSequenceNumber.params._seq)
+	if Event then
+		LoggerModule:info("EventQueue: processing event {} seq {}", Event.event.NOTIFY, Event.params._seq)
 		
-		if not p3 then
-			loggerModule:info("EventQueue: event originally delayed {} seq {} ", nextSequenceNumber.event.NOTIFY, nextSequenceNumber.params._seq)
+		if not p1 then
+			LoggerModule:info("EventQueue: event originally delayed {} seq {} ", Event.event.NOTIFY, Event.params._seq)
 		end
-		nextSequenceNumber.callback(nextSequenceNumber.params)
-		var2.events[var2.nextSequenceNumber] = nil
-		var2.nextSequenceNumber += 1
-		self:processNextEvent(p2)
+		Event.callback(Event.params)
+		Queue.events[Queue.nextSequenceNumber] = nil
+		Queue.nextSequenceNumber += 1
+		self:processNextEvent(Origin)
 		
 		return
-	elseif p3 then
-		loggerModule:info("EventQueue: delaying processing event {} seq {} expecting {}", p3.event.NOTIFY, p3.params._seq, var2.nextSequenceNumber)
+	elseif p1 then
+		LoggerModule:info("EventQueue: delaying processing event {} seq {} expecting {}", p1.event.NOTIFY, p1.params._seq, Queue.nextSequenceNumber)
 	end
 end
 
-function t:reset()
+function EventQueueModule:reset() --[[ Line: 98 ]]
 	self.queues = {}
 end
 
-function t:process(p4, p5, p6)
-	-- upvalues: loggerModule (ref)
-	if not p5 then
-		loggerModule:error("EventQueue: invalid event {} params missing", p4.NOTIFY)
+function EventQueueModule:process(Event, Params, Callback: (any) -> ()) --[[ Line: 102 ]]
+	-- upvalues: LoggerModule (copy)
+	if not Params then
+		LoggerModule:error("EventQueue: invalid event {} params missing", Event.NOTIFY)
 		
 		return
 	end
-	local origin = p5._origin
-	local seq = p5._seq
+	local Origin = Params._origin
+	local Seq = Params._seq
 	
-	if origin and seq and self.requiresEventsInOrder then
-		if not self.queues[origin] then
-			loggerModule:info("EventQueue: initiating queue {}", origin)
-			self.queues[origin] = { nextSequenceNumber = nil, events = {} }
+	if Origin and Seq and self.requiresEventsInOrder then
+		if not self.queues[Origin] then
+			LoggerModule:info("EventQueue: initiating queue {}", Origin)
+			self.queues[Origin] = { nextSequenceNumber = nil, events = {} }
 		end
-		loggerModule:info("EventQueue: new event {} seq {} current seq {}", p4.NOTIFY, seq, self.queues[origin].nextSequenceNumber)
-		local t = { event = p4, params = p5, callback = p6 }
-		self.queues[origin].events[seq] = t
-		self:processNextEvent(origin, t)
+		LoggerModule:info("EventQueue: new event {} seq {} current seq {}", Event.NOTIFY, Seq, self.queues[Origin].nextSequenceNumber)
+		local config = { event = Event, params = Params, callback = Callback }
+		self.queues[Origin].events[Seq] = config
+		self:processNextEvent(Origin, config)
 		
 		return
 	else
-		loggerModule:info("EventQueue: event {} processing immediately", p4.NOTIFY)
+		LoggerModule:info("EventQueue: event {} processing immediately", Event.NOTIFY)
 		
-		if p6 then
-			p6(p5)
+		if Callback then
+			Callback(Params)
 		end
 	end
 end
 
-return t
+return EventQueueModule

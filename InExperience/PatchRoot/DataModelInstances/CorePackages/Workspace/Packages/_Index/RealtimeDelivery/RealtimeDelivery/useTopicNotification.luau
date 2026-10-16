@@ -1,37 +1,52 @@
-﻿local reactModule = require(script:FindFirstAncestor("RealtimeDelivery").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("RealtimeDelivery").Parent.React)
 local _ = require(script.Parent.TopicEventReceiver)
-local topicRealtimeContextModule = require(script.Parent.TopicRealtimeContext)
+local TopicRealtimeContextModule = require(script.Parent.TopicRealtimeContext)
 
-return function(value, p1)
-	-- upvalues: reactModule (ref), topicRealtimeContextModule (ref)
-	local var1 = reactModule.useContext(topicRealtimeContextModule)
-	local var2 = reactModule.useRef(p1)
-	local var3 = reactModule.useRef(nil)
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), p1 (ref)
-		var2.current = p1
-	end, { p1 })
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), value (ref), var1 (ref), var2 (ref)
-		local current = var3.current
-		var3.current = if value then var1:observeTopic(value, function(p2)
-			-- upvalues: var2 (copy)
-			var2.current(p2)
-		end) else nil
+return function(p1, Current, p2) --[[ Line: 10 | Named "useTopicNotification" ]]
+	-- upvalues: ReactModule (copy), TopicRealtimeContextModule (copy)
+	local UseContextResult = ReactModule.useContext(TopicRealtimeContextModule)
+	local UseRefResult = ReactModule.useRef(Current)
+	local OnError = if p2 then p2.onError else nil
+	local UseRefResult1 = ReactModule.useRef(OnError)
+	local UseRefResult2 = ReactModule.useRef(nil)
+	ReactModule.useEffect(function() --[[ Line: 21 ]]
+		-- upvalues: UseRefResult (copy), Current (copy)
+		UseRefResult.current = Current
+	end, { Current })
+	ReactModule.useEffect(function() --[[ Line: 25 ]]
+		-- upvalues: UseRefResult1 (copy), OnError (copy)
+		UseRefResult1.current = OnError
+	end, { OnError or false })
+	ReactModule.useEffect(function() --[[ Line: 31 ]]
+		-- upvalues: UseRefResult2 (copy), p1 (copy), UseContextResult (copy), UseRefResult (copy), UseRefResult1 (copy)
+		local Current = UseRefResult2.current
+		UseRefResult2.current = if p1 then UseContextResult:observeTopic(p1, function(p3) --[[ Line: 34 ]]
+			-- upvalues: UseRefResult (upval)
+			UseRefResult.current(p3)
+		end, {
+			onError = function(p3) --[[ Line: 37 ]]
+				-- upvalues: UseRefResult1 (upval)
+				local CurrentFunction: (any) -> () = UseRefResult1.current
+				
+				if CurrentFunction then
+					CurrentFunction(p3)
+				end
+			end
+		}) else nil
 		
-		if current then
-			current:disconnect()
+		if Current then
+			Current:disconnect()
 		end
-	end, { value or false, var1 })
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref)
-		return function()
-			-- upvalues: var3 (copy)
-			local current = var3.current
-			var3.current = nil
+	end, { p1 or false, UseContextResult })
+	ReactModule.useEffect(function() --[[ Line: 50 ]]
+		-- upvalues: UseRefResult2 (copy)
+		return function() --[[ Line: 51 ]]
+			-- upvalues: UseRefResult2 (upval)
+			local Current = UseRefResult2.current
+			UseRefResult2.current = nil
 			
-			if current then
-				current:disconnect()
+			if Current then
+				Current:disconnect()
 			end
 		end
 	end, {})

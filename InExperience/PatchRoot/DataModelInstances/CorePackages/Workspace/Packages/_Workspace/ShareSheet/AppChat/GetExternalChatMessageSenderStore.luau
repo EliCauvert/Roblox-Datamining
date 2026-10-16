@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent.Parent._Workspace.AppChat.AppChat.Stores.GetExternalChatMessageSenderStore)
+﻿return (require(script.Parent.Parent.Parent.Parent._Workspace.AppChat.AppChat.Stores.GetExternalChatMessageSenderStore))

@@ -1,6 +1,6 @@
-﻿local appPage = require(script:FindFirstAncestor("GameDetail").Parent.RobloxAppEnums).AppPage
+﻿local AppPage = require(script:FindFirstAncestor("GameDetail").Parent.RobloxAppEnums).AppPage
 
-return function(p1)
-	-- upvalues: appPage (ref)
-	return if p1 == nil then appPage.ExperienceDetail .. "-Unknown" else appPage.ExperienceDetail .. "-" .. p0
+return function(Text): string --[[ Line: 6 | Named "getExperienceDetailsPageKey" ]]
+	-- upvalues: AppPage (copy)
+	return if Text == nil then AppPage.ExperienceDetail .. "-Unknown" else AppPage.ExperienceDetail .. "-" .. Text
 end

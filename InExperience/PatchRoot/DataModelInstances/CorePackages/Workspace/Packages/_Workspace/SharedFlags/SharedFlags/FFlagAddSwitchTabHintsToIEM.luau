@@ -1,1 +1,1 @@
-﻿return require(script.Parent:WaitForChild("FFlagEnableConsoleExpControls"))
+﻿return (require(script.Parent:WaitForChild("FFlagEnableConsoleExpControls")))

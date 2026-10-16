@@ -1,89 +1,92 @@
-﻿local userInputService = game:GetService("UserInputService")
-local var1 = if require(script:FindFirstAncestor("Analytics").Parent.SharedFlags).GetFFlagShareGetPlatformTargetImpl() then require(script.Parent.Parent.getPlatformTarget) else function()
-	-- upvalues: userInputService (ref)
-	local var2 = "unknownLua"
-	local none = Enum.Platform.None
-	pcall(function()
-		-- upvalues: none (write), userInputService (copy)
-		none = userInputService:GetPlatform()
+﻿local UserInputService = game:GetService("UserInputService")
+local GetPlatformTargetModule = nil
+GetPlatformTargetModule = if require(script:FindFirstAncestor("Analytics").Parent.SharedFlags).GetFFlagShareGetPlatformTargetImpl() then require(script.Parent.Parent.getPlatformTarget) else function(): string --[[ Line: 36 | Named "getPlatformTarget" ]]
+	-- upvalues: UserInputService (copy)
+	local v1 = "unknownLua"
+	local None = Enum.Platform.None
+	pcall(function() --[[ Line: 42 ]]
+		-- upvalues: None (ref), UserInputService (upval)
+		None = UserInputService:GetPlatform()
 	end)
-	local var3 = if none ~= Enum.Platform.XBox360 then none == Enum.Platform.XBoxOne else true
+	local IsNoneMatch: boolean = None == Enum.Platform.Windows or None == Enum.Platform.OSX
+	local IsNoneMatch1: boolean = None == Enum.Platform.IOS or None == Enum.Platform.Android or None == Enum.Platform.UWP
+	local IsNoneMatch2: boolean = None == Enum.Platform.XBox360 or None == Enum.Platform.XBoxOne or (None == Enum.Platform.PS3 or (None == Enum.Platform.PS4 or game:GetEngineFeature("PlatformEnumPS5") and None == Enum.Platform.PS5)) or None == Enum.Platform.WiiU
 	
-	return if if none ~= Enum.Platform.Windows then none == Enum.Platform.OSX else true then "client" elseif (if none ~= Enum.Platform.IOS then none == Enum.Platform.Android else true) or none == Enum.Platform.UWP then "mobile" elseif (var3 or (if none ~= Enum.Platform.PS3 then if none ~= Enum.Platform.PS4 then game:GetEngineFeature("PlatformEnumPS5") and none == Enum.Platform.PS5 else true else true)) or none == Enum.Platform.WiiU then "console" else var2 .. tostring(none)
+	return if IsNoneMatch then "client" elseif IsNoneMatch1 then "mobile" elseif IsNoneMatch2 then "console" else v1 .. tostring(None)
 end
-local t = {}
-t.__index = t
+local EventStreamModule = {}
+EventStreamModule.__index = EventStreamModule
 
-function t.new(p1)
-	-- upvalues: t (ref)
-	local var2 = type(p1)
-	assert(if var2 ~= "table" then var2 == "userdata" else true, "Unexpected value for reportingService")
-	local t_1 = { _isEnabled = true, _reporter = p1 }
-	setmetatable(t_1, t)
+function EventStreamModule.new(_reporter) --[[ Line: 79 ]]
+	-- upvalues: EventStreamModule (copy)
+	local ValueType = type(_reporter)
+	assert(ValueType == "table" or ValueType == "userdata", "Unexpected value for reportingService")
+	local config = { _isEnabled = true, _reporter = _reporter }
+	setmetatable(config, EventStreamModule)
 	
-	return t_1
+	return config
 end
 
-function t:setEnabled(p1)
-	assert(type(p1) == "boolean", "Expected isEnabled to be a boolean")
-	self._isEnabled = p1
+function EventStreamModule:setEnabled(_isEnabled) --[[ Line: 92 ]]
+	assert(type(_isEnabled) == "boolean", "Expected isEnabled to be a boolean")
+	self._isEnabled = _isEnabled
 end
 
-function t:setRBXEvent(p1, p2, p3)
-	-- upvalues: var1 (write)
-	local var2 = var1()
-	p3 = p3 or {}
-	assert(type(p1) == "string", "Expected eventContext to be a string")
-	assert(type(p2) == "string", "Expected eventName to be a string")
-	assert(type(p3) == "table", "Expected additionalArgs to be a table")
+function EventStreamModule:setRBXEvent(EventContext, EventName, p1) --[[ Line: 100 ]]
+	-- upvalues: GetPlatformTargetModule (ref)
+	local PlatformTargetModule = GetPlatformTargetModule()
+	local P6 = p1 or {}
+	assert(type(EventContext) == "string", "Expected eventContext to be a string")
+	assert(type(EventName) == "string", "Expected eventName to be a string")
+	assert(type(P6) == "table", "Expected additionalArgs to be a table")
 	assert(self._isEnabled, "This reporting service is disabled")
-	self._reporter:SetRBXEvent(var2, p1, p2, p3)
+	self._reporter:SetRBXEvent(PlatformTargetModule, EventContext, EventName, P6)
 end
 
-function t:setRBXEventStream(p1, p2, p3)
-	-- upvalues: var1 (write)
-	local var2 = var1()
-	p3 = p3 or {}
-	assert(type(p1) == "string", "Expected eventContext to be a string")
-	assert(type(p2) == "string", "Expected eventName to be a string")
-	assert(type(p3) == "table", "Expected additionalArgs to be a table")
+function EventStreamModule:setRBXEventStream(EventContext, EventName, p1) --[[ Line: 116 ]]
+	-- upvalues: GetPlatformTargetModule (ref)
+	local PlatformTargetModule = GetPlatformTargetModule()
+	local P10 = p1 or {}
+	assert(type(EventContext) == "string", "Expected eventContext to be a string")
+	assert(type(EventName) == "string", "Expected eventName to be a string")
+	assert(type(P10) == "table", "Expected additionalArgs to be a table")
 	assert(self._isEnabled, "This reporting service is disabled")
-	self._reporter:SetRBXEventStream(var2, p1, p2, p3)
+	self._reporter:SetRBXEventStream(PlatformTargetModule, EventContext, EventName, P10)
 end
 
-function t:releaseRBXEventStream()
-	-- upvalues: var1 (write)
+function EventStreamModule:releaseRBXEventStream() --[[ Line: 129 ]]
+	-- upvalues: GetPlatformTargetModule (ref)
 	assert(self._isEnabled, "This reporting service is disabled")
-	self._reporter:ReleaseRBXEventStream(var1())
+	self._reporter:ReleaseRBXEventStream(GetPlatformTargetModule())
 end
 
-function t:sendEventDeferred(p1, p2, p3)
-	-- upvalues: var1 (write)
-	local var2 = var1()
-	p3 = p3 or {}
-	assert(type(p1) == "string", "Expected eventContext to be a string")
-	assert(type(p2) == "string", "Expected eventName to be a string")
-	assert(type(p3) == "table", "Expected additionalArgs to be a table")
+function EventStreamModule:sendEventDeferred(EventContext, EventName, p1) --[[ Line: 138 ]]
+	-- upvalues: GetPlatformTargetModule (ref)
+	local PlatformTargetModule = GetPlatformTargetModule()
+	local P15 = p1 or {}
+	assert(type(EventContext) == "string", "Expected eventContext to be a string")
+	assert(type(EventName) == "string", "Expected eventName to be a string")
+	assert(type(P15) == "table", "Expected additionalArgs to be a table")
 	assert(self._isEnabled, "This reporting service is disabled")
-	self._reporter:SendEventDeferred(var2, p1, p2, p3)
+	self._reporter:SendEventDeferred(PlatformTargetModule, EventContext, EventName, P15)
 end
 
-function t:sendEventImmediately(p1, p2, p3)
-	-- upvalues: var1 (write)
-	local var2 = var1()
-	p3 = p3 or {}
-	assert(type(p1) == "string", "Expected eventContext to be a string")
-	assert(type(p2) == "string", "Expected eventName to be a string")
-	assert(type(p3) == "table", "Expected additionalArgs to be a table")
+function EventStreamModule:sendEventImmediately(EventContext, EventName, p1) --[[ Line: 154 ]]
+	-- upvalues: GetPlatformTargetModule (ref)
+	local PlatformTargetModule = GetPlatformTargetModule()
+	local P19 = p1 or {}
+	assert(type(EventContext) == "string", "Expected eventContext to be a string")
+	assert(type(EventName) == "string", "Expected eventName to be a string")
+	assert(type(P19) == "table", "Expected additionalArgs to be a table")
 	assert(self._isEnabled, "This reporting service is disabled")
-	self._reporter:SendEventImmediately(var2, p1, p2, p3)
+	self._reporter:SendEventImmediately(PlatformTargetModule, EventContext, EventName, P19)
 end
 
-function t:updateHeartbeatObject(p1)
-	p1 = p1 or {}
-	assert(type(p1) == "table", "Expected additionalArgs to be a table")
+function EventStreamModule:updateHeartbeatObject(p1) --[[ Line: 168 ]]
+	local P21 = p1 or {}
+	assert(type(P21) == "table", "Expected additionalArgs to be a table")
 	assert(self._isEnabled, "This reporting service is disabled")
-	self._reporter:UpdateHeartbeatObject(p1)
+	self._reporter:UpdateHeartbeatObject(P21)
 end
 
-return t
+return EventStreamModule

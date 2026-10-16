@@ -1,99 +1,100 @@
-﻿local avatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
-local parent = avatarExperienceProfilePictureEditor.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local localizationModule = require(parent.Localization)
-local avatarExperienceUIKitModule = require(parent.AvatarExperienceUIKit)
-local view = foundationModule.View
-local useTokens = foundationModule.Hooks.useTokens
-local useLocalization = localizationModule.Hooks.useLocalization
-local textKeysModule = require(avatarExperienceProfilePictureEditor.Common.TextKeys)
-local sectionTitleModule = require(avatarExperienceProfilePictureEditor.Components.SectionTitle.SectionTitle)
-local assetPickerGridBodyModule = require(script.Parent.AssetPickerGridBody)
+﻿local AvatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
+local Parent = AvatarExperienceProfilePictureEditor.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local TextKeysModule = require(AvatarExperienceProfilePictureEditor.Common.TextKeys)
+local SectionTitleModule = require(AvatarExperienceProfilePictureEditor.Components.SectionTitle.SectionTitle)
+local AssetPickerGridBodyModule = require(script.Parent.AssetPickerGridBody)
 local _ = require(script.Parent.AssetPickerTile)
-local _ = require(avatarExperienceProfilePictureEditor.Utils.getAssetPickerStatus)
-local getGridMetricsModule = require(avatarExperienceProfilePictureEditor.Utils.getGridMetrics)
-local widgetHeader = avatarExperienceUIKitModule.WidgetComponents.WidgetHeader
+local _ = require(AvatarExperienceProfilePictureEditor.Utils.getAssetPickerStatus)
+local GetGridMetricsModule = require(AvatarExperienceProfilePictureEditor.Utils.getGridMetrics)
+local WidgetHeader = require(Parent.AvatarExperienceUIKit).WidgetComponents.WidgetHeader
 
-return function(value)
-	-- upvalues: useTokens (ref), useLocalization (ref), textKeysModule (ref), reactModule (ref), getGridMetricsModule (ref), view (ref), assetPickerGridBodyModule (ref), widgetHeader (ref), sectionTitleModule (ref)
-	local status = value.status or "ready"
-	local var1 = useTokens()
-	local containerWidth = value.containerWidth
-	local var2 = useLocalization({ details = textKeysModule.DetailsButton })
-	local tileSize = value.tileSize
-	local medium = var1.Gap.Medium
-	local shimmerTileCount = value.shimmerTileCount or 30
-	local var3 = reactModule.useMemo(function()
-		-- upvalues: var2 (ref)
-		return { details = var2.details }
-	end, { var2.details })
-	local var4 = reactModule.useMemo(function()
-		-- upvalues: getGridMetricsModule (copy), containerWidth (ref), tileSize (ref), medium (ref), var1 (ref)
-		return getGridMetricsModule({
-			containerWidth = containerWidth,
-			minTileSize = tileSize,
-			gap = medium,
-			horizontalPadding = var1.Padding.XLarge,
-			strokeInset = var1.Padding.XSmall
+return function(p1) --[[ Line: 46 | Named "AssetPickerGrid" ]]
+	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), GetGridMetricsModule (copy), View (copy), AssetPickerGridBodyModule (copy), WidgetHeader (copy), SectionTitleModule (copy)
+	local Status = p1.status or "ready"
+	local UseTokensResult = UseTokensFunction()
+	local ContainerWidth = p1.containerWidth
+	local UseLocalizationResult = UseLocalizationFunction({ details = TextKeysModule.DetailsButton })
+	local TileSize = p1.tileSize
+	local Medium = UseTokensResult.Gap.Medium
+	local ShimmerTileCount = p1.shimmerTileCount or 30
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 57 ]]
+		-- upvalues: UseLocalizationResult (copy)
+		return { details = UseLocalizationResult.details }
+	end, { UseLocalizationResult.details })
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 63 ]]
+		-- upvalues: GetGridMetricsModule (upval), ContainerWidth (copy), TileSize (copy), Medium (copy), UseTokensResult (copy)
+		return GetGridMetricsModule({
+			containerWidth = ContainerWidth,
+			minTileSize = TileSize,
+			gap = Medium,
+			horizontalPadding = UseTokensResult.Padding.XLarge,
+			strokeInset = UseTokensResult.Padding.XSmall
 		})
 	end, {
-		containerWidth,
-		tileSize,
-		medium,
-		var1.Padding.XLarge,
-		var1.Padding.XSmall
+		ContainerWidth,
+		TileSize,
+		Medium,
+		UseTokensResult.Padding.XLarge,
+		UseTokensResult.Padding.XSmall
 	})
-	local title = value.title or ""
-	local var5 = 1
+	local Title = p1.title or ""
+	local LayoutOrder = 1
 	local t = {}
 	
-	if value.bannerComponent then
-		t.Banner = reactModule.createElement(view, { tag = "size-full-0 auto-y", LayoutOrder = var5 }, { Banner = value.bannerComponent })
-		var5 += 1
+	if p1.bannerComponent then
+		t.Banner = ReactModule.createElement(View, { tag = "size-full-0 auto-y", LayoutOrder = LayoutOrder }, { Banner = p1.bannerComponent })
+		LayoutOrder += 1
 	end
-	if status ~= "ready" or #value.items > 0 then
-		t.Grid = reactModule.createElement(view, {
+	if Status ~= "ready" or #p1.items > 0 then
+		t.Grid = ReactModule.createElement(View, {
 			tag = "size-full-0 auto-y padding-x-xsmall padding-y-xsmall",
-			LayoutOrder = var5
+			LayoutOrder = LayoutOrder
 		}, {
-			Content = reactModule.createElement(assetPickerGridBodyModule, {
-				status = status,
-				items = value.items,
-				selectedId = value.selectedId,
-				itemsPerRow = var4.itemsPerRow,
-				gap = medium,
-				shimmerTileCount = shimmerTileCount,
-				onSelect = value.onSelect,
-				onDetailsActivated = value.onDetailsActivated,
-				labels = var3,
-				onRetry = value.onRetry
+			Content = ReactModule.createElement(AssetPickerGridBodyModule, {
+				status = Status,
+				items = p1.items,
+				selectedId = p1.selectedId,
+				itemsPerRow = UseMemoResult1.itemsPerRow,
+				gap = Medium,
+				shimmerTileCount = ShimmerTileCount,
+				onSelect = p1.onSelect,
+				onDetailsActivated = p1.onDetailsActivated,
+				labels = UseMemoResult,
+				onRetry = p1.onRetry
 			})
 		})
-		var5 += 1
+		LayoutOrder += 1
 	end
-	if value.footerComponent then
-		t.Footer = reactModule.createElement(view, {
+	if p1.footerComponent then
+		t.Footer = ReactModule.createElement(View, {
 			tag = "size-full-0 auto-y padding-y-medium",
-			LayoutOrder = var5
-		}, { Footer = value.footerComponent })
+			LayoutOrder = LayoutOrder
+		}, { Footer = p1.footerComponent })
 	end
-	local var6 = 1
-	local t_1 = {}
+	local LayoutOrder1 = 1
+	local t1 = {}
 	
-	if title ~= "" then
-		t_1.Title = reactModule.createElement(view, { tag = "auto-xy padding-x-xlarge", LayoutOrder = var6 }, {
-			Header = if value.seeAllCallback then reactModule.createElement(widgetHeader, { titleText = title, seeAllCallback = value.seeAllCallback }) else reactModule.createElement(sectionTitleModule, { title = title })
+	if Title ~= "" then
+		t1.Title = ReactModule.createElement(View, {
+			tag = "auto-xy padding-x-xlarge",
+			LayoutOrder = LayoutOrder1
+		}, {
+			Header = if p1.seeAllCallback then ReactModule.createElement(WidgetHeader, { titleText = Title, seeAllCallback = p1.seeAllCallback }) else ReactModule.createElement(SectionTitleModule, { title = Title })
 		})
-		var6 += 1
+		LayoutOrder1 += 1
 	end
-	t_1.Body = reactModule.createElement(view, {
+	t1.Body = ReactModule.createElement(View, {
 		tag = "col gap-small size-full-0 auto-y padding-x-xlarge",
-		LayoutOrder = var6
+		LayoutOrder = LayoutOrder1
 	}, t)
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col size-full-0 auto-y",
-		LayoutOrder = value.layoutOrder
-	}, t_1)
+		LayoutOrder = p1.layoutOrder
+	}, t1)
 end

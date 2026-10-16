@@ -1,7 +1,7 @@
-﻿local inExperienceShop = script:FindFirstAncestor("InExperienceShop")
-local promiseModule = require(inExperienceShop.Parent.Promise)
-local _ = require(inExperienceShop.Types)
-local t = {
+﻿local InExperienceShop = script:FindFirstAncestor("InExperienceShop")
+local PromiseModule = require(InExperienceShop.Parent.Promise)
+local _ = require(InExperienceShop.Types)
+local config = {
 	categories = {
 		{
 			id = 1,
@@ -12,14 +12,22 @@ local t = {
 				categoryGroup = "Featured"
 			},
 			items = {
-				{ id = 101, type = "Product" }, { id = 201, type = "GamePass" },
-				{ id = 102, type = "Product" }, { id = 202, type = "GamePass" },
-				{ id = 103, type = "Product" }, { id = 104, type = "Product" },
-				{ id = 203, type = "GamePass" }, { id = 105, type = "Product" },
-				{ id = 117, type = "Product" }, { id = 118, type = "Product" },
-				{ id = 208, type = "GamePass" }, { id = 119, type = "Product" },
-				{ id = 114, type = "Product" }, { id = 207, type = "GamePass" },
-				{ id = 115, type = "Product" }, { id = 115, type = "Product" },
+				{ id = 101, type = "Product" },
+				{ id = 201, type = "GamePass" },
+				{ id = 102, type = "Product" },
+				{ id = 202, type = "GamePass" },
+				{ id = 103, type = "Product" },
+				{ id = 104, type = "Product" },
+				{ id = 203, type = "GamePass" },
+				{ id = 105, type = "Product" },
+				{ id = 117, type = "Product" },
+				{ id = 118, type = "Product" },
+				{ id = 208, type = "GamePass" },
+				{ id = 119, type = "Product" },
+				{ id = 114, type = "Product" },
+				{ id = 207, type = "GamePass" },
+				{ id = 115, type = "Product" },
+				{ id = 115, type = "Product" },
 				{ id = 3456, type = "GamePass" }
 			}
 		},
@@ -27,42 +35,66 @@ local t = {
 			id = 2,
 			name = "Coins",
 			items = {
-				{ id = 204, type = "GamePass" }, { id = 106, type = "Product" },
-				{ id = 107, type = "Product" }, { id = 108, type = "Product" },
-				{ id = 205, type = "GamePass" }, { id = 109, type = "Product" },
-				{ id = 110, type = "Product" }, { id = 101, type = "Product" },
-				{ id = 206, type = "GamePass" }, { id = 116, type = "Product" },
-				{ id = 113, type = "Product" }, { id = 208, type = "GamePass" },
-				{ id = 119, type = "Product" }, { id = 114, type = "Product" },
-				{ id = 207, type = "GamePass" }, { id = 115, type = "Product" },
-				{ id = 112, type = "Product" }, { id = 118, type = "Product" }
+				{ id = 204, type = "GamePass" },
+				{ id = 106, type = "Product" },
+				{ id = 107, type = "Product" },
+				{ id = 108, type = "Product" },
+				{ id = 205, type = "GamePass" },
+				{ id = 109, type = "Product" },
+				{ id = 110, type = "Product" },
+				{ id = 101, type = "Product" },
+				{ id = 206, type = "GamePass" },
+				{ id = 116, type = "Product" },
+				{ id = 113, type = "Product" },
+				{ id = 208, type = "GamePass" },
+				{ id = 119, type = "Product" },
+				{ id = 114, type = "Product" },
+				{ id = 207, type = "GamePass" },
+				{ id = 115, type = "Product" },
+				{ id = 112, type = "Product" },
+				{ id = 118, type = "Product" }
 			}
 		},
 		{
 			id = 3,
 			name = "Boosts",
 			items = {
-				{ id = 102, type = "Product" }, { id = 103, type = "Product" },
-				{ id = 201, type = "GamePass" }, { id = 104, type = "Product" },
-				{ id = 105, type = "Product" }, { id = 202, type = "GamePass" },
-				{ id = 106, type = "Product" }, { id = 107, type = "Product" },
-				{ id = 108, type = "Product" }, { id = 203, type = "GamePass" },
-				{ id = 115, type = "Product" }, { id = 112, type = "Product" },
-				{ id = 118, type = "Product" }, { id = 206, type = "GamePass" },
-				{ id = 116, type = "Product" }, { id = 113, type = "Product" },
-				{ id = 208, type = "GamePass" }, { id = 119, type = "Product" },
-				{ id = 114, type = "Product" }, { id = 207, type = "GamePass" }
+				{ id = 102, type = "Product" },
+				{ id = 103, type = "Product" },
+				{ id = 201, type = "GamePass" },
+				{ id = 104, type = "Product" },
+				{ id = 105, type = "Product" },
+				{ id = 202, type = "GamePass" },
+				{ id = 106, type = "Product" },
+				{ id = 107, type = "Product" },
+				{ id = 108, type = "Product" },
+				{ id = 203, type = "GamePass" },
+				{ id = 115, type = "Product" },
+				{ id = 112, type = "Product" },
+				{ id = 118, type = "Product" },
+				{ id = 206, type = "GamePass" },
+				{ id = 116, type = "Product" },
+				{ id = 113, type = "Product" },
+				{ id = 208, type = "GamePass" },
+				{ id = 119, type = "Product" },
+				{ id = 114, type = "Product" },
+				{ id = 207, type = "GamePass" }
 			}
 		},
 		{
 			id = 4,
 			name = "Upgrades",
 			items = {
-				{ id = 109, type = "Product" }, { id = 204, type = "GamePass" },
-				{ id = 110, type = "Product" }, { id = 101, type = "Product" },
-				{ id = 102, type = "Product" }, { id = 103, type = "Product" },
-				{ id = 205, type = "GamePass" }, { id = 104, type = "Product" },
-				{ id = 116, type = "Product" }, { id = 113, type = "Product" },
+				{ id = 109, type = "Product" },
+				{ id = 204, type = "GamePass" },
+				{ id = 110, type = "Product" },
+				{ id = 101, type = "Product" },
+				{ id = 102, type = "Product" },
+				{ id = 103, type = "Product" },
+				{ id = 205, type = "GamePass" },
+				{ id = 104, type = "Product" },
+				{ id = 116, type = "Product" },
+				{ id = 113, type = "Product" },
 				{ id = 208, type = "GamePass" }
 			}
 		},
@@ -70,26 +102,40 @@ local t = {
 			id = 5,
 			name = "Cosmetics",
 			items = {
-				{ id = 201, type = "GamePass" }, { id = 105, type = "Product" },
-				{ id = 106, type = "Product" }, { id = 107, type = "Product" },
-				{ id = 108, type = "Product" }, { id = 109, type = "Product" },
-				{ id = 202, type = "GamePass" }, { id = 110, type = "Product" },
-				{ id = 101, type = "Product" }, { id = 3456, type = "GamePass" },
-				{ id = 118, type = "Product" }, { id = 117, type = "Product" },
-				{ id = 111, type = "Product" }, { id = 112, type = "Product" }
+				{ id = 201, type = "GamePass" },
+				{ id = 105, type = "Product" },
+				{ id = 106, type = "Product" },
+				{ id = 107, type = "Product" },
+				{ id = 108, type = "Product" },
+				{ id = 109, type = "Product" },
+				{ id = 202, type = "GamePass" },
+				{ id = 110, type = "Product" },
+				{ id = 101, type = "Product" },
+				{ id = 3456, type = "GamePass" },
+				{ id = 118, type = "Product" },
+				{ id = 117, type = "Product" },
+				{ id = 111, type = "Product" },
+				{ id = 112, type = "Product" }
 			}
 		},
 		{
 			id = 6,
 			name = "Gear",
 			items = {
-				{ id = 102, type = "Product" }, { id = 203, type = "GamePass" },
-				{ id = 103, type = "Product" }, { id = 104, type = "Product" },
-				{ id = 105, type = "Product" }, { id = 204, type = "GamePass" },
-				{ id = 106, type = "Product" }, { id = 107, type = "Product" },
-				{ id = 108, type = "Product" }, { id = 111, type = "Product" },
-				{ id = 118, type = "Product" }, { id = 117, type = "Product" },
-				{ id = 3456, type = "GamePass" }, { id = 112, type = "Product" },
+				{ id = 102, type = "Product" },
+				{ id = 203, type = "GamePass" },
+				{ id = 103, type = "Product" },
+				{ id = 104, type = "Product" },
+				{ id = 105, type = "Product" },
+				{ id = 204, type = "GamePass" },
+				{ id = 106, type = "Product" },
+				{ id = 107, type = "Product" },
+				{ id = 108, type = "Product" },
+				{ id = 111, type = "Product" },
+				{ id = 118, type = "Product" },
+				{ id = 117, type = "Product" },
+				{ id = 3456, type = "GamePass" },
+				{ id = 112, type = "Product" },
 				{ id = 206, type = "GamePass" }
 			}
 		},
@@ -181,17 +227,17 @@ local t = {
 		}
 	},
 	metadata = {
-		inExperienceGlobalIconEnabled = if require(inExperienceShop.Flags.FFlagInExperienceShopExpectStringMetadataValues) then "true" else true
+		inExperienceGlobalIconEnabled = not require(InExperienceShop.Flags.FFlagInExperienceShopExpectStringMetadataValues) or "true"
 	}
 }
 
 return {
-	MOCK_RESPONSE_FOR_TESTING = t,
-	getShopItemIds = function(p1)
-		-- upvalues: promiseModule (ref), t (ref)
-		return promiseModule.delay(if p1 ~= nil then 0.5 else p1):andThen(function()
-			-- upvalues: t (copy)
-			return t
+	MOCK_RESPONSE_FOR_TESTING = config,
+	getShopItemIds = function(p1) --[[ Line: 270 ]]
+		-- upvalues: PromiseModule (copy), config (copy)
+		return PromiseModule.delay(if p1 == nil then 0.5 else p1):andThen(function() --[[ Line: 272 ]]
+			-- upvalues: config (upval)
+			return config
 		end)
 	end
 }

@@ -1,78 +1,85 @@
-﻿local parent = script:FindFirstAncestor("Moments").Parent
-local foundationModule = require(parent.Foundation)
-local momentsCommonModule = require(parent.MomentsCommon)
-local reactModule = require(parent.React)
-local reactOtterModule = require(parent.ReactOtter)
-local view = foundationModule.View
-local controlState = foundationModule.Enums.ControlState
-local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
-local usePreferences = foundationModule.Hooks.usePreferences
-local reaction = momentsCommonModule.Components.Reaction
-local reactionSize = momentsCommonModule.Enums.ReactionSize
-local t = { frequency = 4, dampingRatio = 0.65 }
-local t_1 = { frequency = 4, dampingRatio = 1 }
+﻿local Parent = script:FindFirstAncestor("Moments").Parent
+local FoundationModule = require(Parent.Foundation)
+local MomentsCommonModule = require(Parent.MomentsCommon)
+local ReactModule = require(Parent.React)
+local ReactOtterModule = require(Parent.ReactOtter)
+local View = FoundationModule.View
+local ControlState = FoundationModule.Enums.ControlState
+local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
+local UsePreferencesFunction = FoundationModule.Hooks.usePreferences
+local Reaction = MomentsCommonModule.Components.Reaction
+local ReactionSize = MomentsCommonModule.Enums.ReactionSize
+local config = { frequency = 4, dampingRatio = 0.65 }
+local config1 = { frequency = 4, dampingRatio = 1 }
 
-return reactModule.memo(function(p1)
-	-- upvalues: usePreferences (ref), reactModule (ref), reactOtterModule (ref), t (ref), t_1 (ref), controlState (ref), view (ref), stateLayerAffordance (ref), reaction (ref), reactionSize (ref)
-	local reducedMotion = usePreferences().reducedMotion
-	local var1 = reactModule.useRef(nil)
-	local var2 = reactModule.useCallback(function()
-		-- upvalues: var1 (ref), p1 (ref)
-		local current = var1.current
-		p1.onSelect(p1.reaction, if current ~= nil then current.AbsolutePosition + current.AbsoluteSize / 2 else nil)
+return ReactModule.memo(function(p1) --[[ Line: 33 | Named "PickerItem" ]]
+	-- upvalues: UsePreferencesFunction (copy), ReactModule (copy), ReactOtterModule (copy), config (copy), config1 (copy), ControlState (copy), View (copy), StateLayerAffordance (copy), Reaction (copy), ReactionSize (copy)
+	local ReducedMotion = UsePreferencesFunction().reducedMotion
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 37 ]]
+		-- upvalues: UseRefResult (copy), p1 (copy)
+		local Current = UseRefResult.current
+		p1.onSelect(p1.reaction, if Current == nil then nil else Current.AbsolutePosition + Current.AbsoluteSize / 2)
 	end, { p1.onSelect, p1.reaction })
-	local var3, var4 = reactOtterModule.useAnimatedBinding(0)
-	local var5, var6 = reactOtterModule.useAnimatedBinding(0)
-	reactModule.useEffect(function()
-		-- upvalues: reducedMotion (ref), var4 (ref), reactOtterModule (copy), p1 (ref), t (copy)
-		if reducedMotion then
-			var4(reactOtterModule.instant(1))
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0)
+	local UseAnimatedBindingResult1, UseAnimatedBindingResult2_1 = ReactOtterModule.useAnimatedBinding(0)
+	ReactModule.useEffect(function() --[[ Line: 50 ]]
+		-- upvalues: ReducedMotion (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), p1 (copy), config (upval)
+		if ReducedMotion then
+			UseAnimatedBindingResult2(ReactOtterModule.instant(1))
 			
 			return
 		end
-		local delayedThread = task.delay((p1.index - 1) * 0.04, function()
-			-- upvalues: var4 (copy), reactOtterModule (copy), t (copy)
-			var4(reactOtterModule.spring(1, t))
+		local DelayedThread = task.delay((p1.index - 1) * 0.04, function() --[[ Line: 55 ]]
+			-- upvalues: UseAnimatedBindingResult2 (upval), ReactOtterModule (upval), config (upval)
+			UseAnimatedBindingResult2((ReactOtterModule.spring(1, config)))
 		end)
 		
-		return function()
-			-- upvalues: delayedThread (ref)
-			task.cancel(delayedThread)
+		return function() --[[ Line: 58 ]]
+			-- upvalues: DelayedThread (copy)
+			task.cancel(DelayedThread)
 		end
-	end, { p1.index, reducedMotion })
-	local var7, var8 = reactModule.useState(false)
-	reactModule.useEffect(function()
-		-- upvalues: var7 (ref), reducedMotion (ref), var6 (ref), reactOtterModule (copy), t_1 (copy)
-		local var9 = if var7 then 1 else 0
+	end, { p1.index, ReducedMotion })
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	ReactModule.useEffect(function() --[[ Line: 65 ]]
+		-- upvalues: UseStateResult (copy), ReducedMotion (copy), UseAnimatedBindingResult2_1 (copy), ReactOtterModule (upval), config1 (upval)
+		local v1: number = if UseStateResult then 1 else 0
 		
-		if reducedMotion then
-			var6(reactOtterModule.instant(var9))
+		if ReducedMotion then
+			UseAnimatedBindingResult2_1(ReactOtterModule.instant(v1))
 			
 			return
+		else
+			UseAnimatedBindingResult2_1((ReactOtterModule.spring(v1, config1)))
 		end
-		var6(reactOtterModule.spring(var9, t_1))
-	end, { var7, reducedMotion })
+	end, { UseStateResult, ReducedMotion })
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "size-800-800",
-		onActivated = var2,
-		onStateChanged = reactModule.useCallback(function(p2)
-			-- upvalues: var8 (ref), controlState (copy)
-			var8(if p2 ~= controlState.Hover then if p2 ~= controlState.Pressed then if p2 ~= controlState.Selected then p2 == controlState.SelectedPressed else true else true else true)
+		onActivated = UseResult,
+		onStateChanged = ReactModule.useCallback(function(Hover) --[[ Line: 74 ]]
+			-- upvalues: UseStateResult2 (copy), ControlState (upval)
+			UseStateResult2(Hover == ControlState.Hover or (Hover == ControlState.Pressed or (Hover == ControlState.Selected or Hover == ControlState.SelectedPressed)))
 		end, {}),
 		LayoutOrder = p1.index,
 		selection = { Selectable = true },
-		stateLayer = { affordance = stateLayerAffordance.None },
-		ref = var1
+		stateLayer = { affordance = StateLayerAffordance.None },
+		ref = UseRefResult
 	}, {
-		Glyph = reactModule.createElement(reaction, {
+		Glyph = ReactModule.createElement(Reaction, {
 			reactionType = p1.reaction,
-			size = reactionSize.Medium,
+			size = ReactionSize.Medium,
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			Position = reactModule.joinBindings({ entry = var3, hover = var5 }):map(function(p2)
+			Position = ReactModule.joinBindings({
+				entry = UseAnimatedBindingResult,
+				hover = UseAnimatedBindingResult1
+			}):map(function(p2): UDim2 --[[ Line: 94 ]]
 				return UDim2.new(0.5, 0, 0.5, (1 - p2.entry) * 12 - p2.hover * 8)
 			end),
-			scale = reactModule.joinBindings({ entry = var3, hover = var5 }):map(function(p2)
+			scale = ReactModule.joinBindings({
+				entry = UseAnimatedBindingResult,
+				hover = UseAnimatedBindingResult1
+			}):map(function(p2) --[[ Line: 88 ]]
 				return p2.entry * (p2.hover * 0.1 + 1)
 			end)
 		})

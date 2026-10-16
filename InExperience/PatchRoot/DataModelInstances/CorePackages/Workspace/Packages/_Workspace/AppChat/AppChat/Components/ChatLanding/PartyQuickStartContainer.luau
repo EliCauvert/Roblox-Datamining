@@ -1,62 +1,63 @@
-﻿local httpService = game:GetService("HttpService")
-local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local chatPlacementContextModule = require(appChat.Contexts.ChatPlacementContext)
-local eventNamesModule = require(appChat.Analytics.EventNames)
-local useAnalyticsModule = require(appChat.Analytics.useAnalytics)
-local useChatPlacementContext = chatPlacementContextModule.useChatPlacementContext
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local UIBloxModule = require(parent.UIBlox)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useNavigation = require(parent.Navigation).useNavigation
-local images = UIBloxModule.App.ImageSet.Images
-local iconName = foundationModule.Enums.IconName
-local domLocatorsModule = require(appChat.Utils.DomLocators)
-local customConversationListEntryModule = require(script.Parent.CustomConversationListEntry)
-local customConversationListRowModule = require(script.Parent.CustomConversationListRow.CustomConversationListRow)
-local fFlagAppChatUseFoundationCustomConversationListRowModule = require(appChat.Flags.FFlagAppChatUseFoundationCustomConversationListRow)
-local fFlagDebugAppChatEnableDomLocatorsModule = require(appChat.Flags.FFlagDebugAppChatEnableDomLocators)
-local enumScreensModule = require(appChat.EnumScreens)
-local var1 = if game.PlaceId > 0 then tostring(game.PlaceId) else nil
-local var2 = if game.GameId > 0 then tostring(game.GameId) else nil
+﻿local HttpService = game:GetService("HttpService")
+local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local EventNamesModule = require(AppChat.Analytics.EventNames)
+local UseAnalyticsModule = require(AppChat.Analytics.useAnalytics)
+local UseChatPlacementContextFunction = require(AppChat.Contexts.ChatPlacementContext).useChatPlacementContext
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local Images = require(Parent.UIBlox).App.ImageSet.Images
+local IconName = require(Parent.Foundation).Enums.IconName
+local DomLocatorsModule = require(AppChat.Utils.DomLocators)
+local CustomConversationListEntryModule = require(script.Parent.CustomConversationListEntry)
+local CustomConversationListRowModule = require(script.Parent.CustomConversationListRow.CustomConversationListRow)
+local FFlagAppChatUseFoundationCustomConversationListRowModule = require(AppChat.Flags.FFlagAppChatUseFoundationCustomConversationListRow)
+local FFlagDebugAppChatEnableDomLocatorsModule = require(AppChat.Flags.FFlagDebugAppChatEnableDomLocators)
+local EnumScreensModule = require(AppChat.EnumScreens)
+local Text = if game.PlaceId > 0 then tostring(game.PlaceId) else nil
+local Text1 = if game.GameId > 0 then tostring(game.GameId) else nil
 
-function PartyQuickStartContainer(p1)
-	-- upvalues: useAnalyticsModule (ref), useChatPlacementContext (ref), useNavigation (ref), useLocalization (ref), reactModule (ref), httpService (ref), eventNamesModule (ref), var1 (ref), var2 (ref), enumScreensModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), fFlagAppChatUseFoundationCustomConversationListRowModule (ref), customConversationListRowModule (ref), iconName (ref), customConversationListEntryModule (ref), images (ref)
-	local var3 = useAnalyticsModule()
-	local var4 = useChatPlacementContext()
-	local var5 = useNavigation()
-	local var6 = useLocalization({
+function PartyQuickStartContainer(p1) --[[ Line: 35 ]]
+	-- upvalues: UseAnalyticsModule (copy), UseChatPlacementContextFunction (copy), UseNavigationFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), HttpService (copy), EventNamesModule (copy), Text (copy), Text1 (copy), EnumScreensModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy), FFlagAppChatUseFoundationCustomConversationListRowModule (copy), CustomConversationListRowModule (copy), IconName (copy), CustomConversationListEntryModule (copy), Images (copy)
+	local UseAnalyticsModuleResult = UseAnalyticsModule()
+	local UseChatPlacementContextResult = UseChatPlacementContextFunction()
+	local UseNavigationResult = UseNavigationFunction()
+	local UseLocalizationResult = UseLocalizationFunction({
 		titleText = "Feature.Squads.Label.StartParty",
 		subTitleText = "Feature.Squads.Label.JoinExperiencesTogether"
 	})
-	local var7 = reactModule.useCallback(function()
-		-- upvalues: httpService (copy), var3 (ref), eventNamesModule (copy), var4 (ref), var1 (copy), var2 (copy), var5 (ref), enumScreensModule (copy)
-		local var8 = httpService:GenerateGUID(false)
-		var3.fireAnalyticsEvent(eventNamesModule.ChatLandingPartyQuickStartButtonClicked, {
-			clickLocation = var4.chatPlacement,
-			partyAttemptId = var8,
-			placeId = var1,
-			universeId = var2
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 44 ]]
+		-- upvalues: HttpService (upval), UseAnalyticsModuleResult (copy), EventNamesModule (upval), UseChatPlacementContextResult (copy), Text (upval), Text1 (upval), UseNavigationResult (copy), EnumScreensModule (upval)
+		local Guid = HttpService:GenerateGUID(false)
+		UseAnalyticsModuleResult.fireAnalyticsEvent(EventNamesModule.ChatLandingPartyQuickStartButtonClicked, {
+			clickLocation = UseChatPlacementContextResult.chatPlacement,
+			partyAttemptId = Guid,
+			placeId = Text,
+			universeId = Text1
 		})
-		var5.navigate(enumScreensModule.QuickStartSquadInviteFriends, { partyAttemptId = var8 })
-	end, { var3, var5, var4.chatPlacement })
-	local var8 = if fFlagDebugAppChatEnableDomLocatorsModule then domLocatorsModule.chatLandingConversationListHeader("startParty") else nil
+		UseNavigationResult.navigate(EnumScreensModule.QuickStartSquadInviteFriends, { partyAttemptId = Guid })
+	end, {
+		UseAnalyticsModuleResult,
+		UseNavigationResult,
+		UseChatPlacementContextResult.chatPlacement
+	})
+	local StartParty = if FFlagDebugAppChatEnableDomLocatorsModule then DomLocatorsModule.chatLandingConversationListHeader("startParty") else nil
 	
-	return if fFlagAppChatUseFoundationCustomConversationListRowModule then reactModule.createElement(customConversationListRowModule, {
+	return if FFlagAppChatUseFoundationCustomConversationListRowModule then ReactModule.createElement(CustomConversationListRowModule, {
 		entryHeight = p1.entryHeight,
-		entryIcon = iconName.PersonPlay,
-		onActivated = var7,
-		titleText = var6.titleText,
-		subTitleText = var6.subTitleText,
-		testId = var8
-	}) else reactModule.createElement(customConversationListEntryModule, {
+		entryIcon = IconName.PersonPlay,
+		onActivated = UseResult,
+		titleText = UseLocalizationResult.titleText,
+		subTitleText = UseLocalizationResult.subTitleText,
+		testId = StartParty
+	}) else ReactModule.createElement(CustomConversationListEntryModule, {
 		entryHeight = p1.entryHeight,
-		entryIcon = images["icons/actions/friends/friendsplaying"],
-		onActivated = var7,
-		titleText = var6.titleText,
-		subTitleText = var6.subTitleText,
-		testId = var8
+		entryIcon = Images["icons/actions/friends/friendsplaying"],
+		onActivated = UseResult,
+		titleText = UseLocalizationResult.titleText,
+		subTitleText = UseLocalizationResult.subTitleText,
+		testId = StartParty
 	})
 end
 

@@ -1,14 +1,14 @@
-﻿local selfViewVisibilityUpdatedSignalModule = require(game:GetService("CoreGui").RobloxGui.Modules.SelfView.selfViewVisibilityUpdatedSignal)
-local var1 = false
+﻿local SelfViewVisibilityUpdatedSignalModule = require(game:GetService("CoreGui").RobloxGui.Modules.SelfView.selfViewVisibilityUpdatedSignal)
+local SelfViewIsOpenAndVisible = false
 
 return {
-	getSelfViewIsOpenAndVisible = function()
-		-- upvalues: var1 (write)
-		return var1
+	getSelfViewIsOpenAndVisible = function() --[[ Line: 8 ]]
+		-- upvalues: SelfViewIsOpenAndVisible (ref)
+		return SelfViewIsOpenAndVisible
 	end,
-	setSelfViewIsOpenAndVisible = function(value)
-		-- upvalues: var1 (write), selfViewVisibilityUpdatedSignalModule (ref)
-		var1 = value
-		selfViewVisibilityUpdatedSignalModule:fire()
+	setSelfViewIsOpenAndVisible = function(Value) --[[ Line: 14 ]]
+		-- upvalues: SelfViewIsOpenAndVisible (ref), SelfViewVisibilityUpdatedSignalModule (copy)
+		SelfViewIsOpenAndVisible = Value
+		SelfViewVisibilityUpdatedSignalModule:fire()
 	end
 }

@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Workspace.PurchasePrompt.PurchasePrompt)
+﻿return (require(script.Parent.Parent.Parent._Workspace.PurchasePrompt.PurchasePrompt))

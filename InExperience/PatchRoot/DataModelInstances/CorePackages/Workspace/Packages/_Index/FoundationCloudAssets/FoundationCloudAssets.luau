@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CorePackages").Packages.FoundationCloudAssets)
+﻿return (require(game:GetService("CorePackages").Packages.FoundationCloudAssets))

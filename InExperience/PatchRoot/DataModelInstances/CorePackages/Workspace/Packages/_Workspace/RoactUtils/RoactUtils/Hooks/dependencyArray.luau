@@ -1,16 +1,16 @@
-﻿local nilDependency = require(script:FindFirstAncestor("RoactUtils").Parent.AppCommonLib).Symbol.named("NilDependency")
+﻿local NilDependency = require(script:FindFirstAncestor("RoactUtils").Parent.AppCommonLib).Symbol.named("NilDependency")
 
-return function(...)
-	-- upvalues: nilDependency (ref)
+return function(...) --[[ Line: 22 | Named "dependencyArray" ]]
+	-- upvalues: NilDependency (copy)
 	local t = {}
 	
 	for i = 1, select("#", ...) do
-		local var1 = select(i, ...)
+		local Selected = select(i, ...)
 		
-		if var1 == nil then
-			var1 = nilDependency
+		if Selected == nil then
+			Selected = NilDependency
 		end
-		t[i] = var1
+		t[i] = Selected
 	end
 	return t
 end

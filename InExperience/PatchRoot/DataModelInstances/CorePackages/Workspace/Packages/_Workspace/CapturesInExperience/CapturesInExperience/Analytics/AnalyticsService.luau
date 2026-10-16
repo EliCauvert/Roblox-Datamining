@@ -1,16 +1,15 @@
-﻿local parent = script.Parent.Parent.Parent
-local eventIngestService = game:GetService("EventIngestService")
-local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
-local analyticsModule = require(parent.Analytics)
-local getPlatformTarget = analyticsModule.getPlatformTarget
+﻿local Parent = script.Parent.Parent.Parent
+local EventIngestService = game:GetService("EventIngestService")
+local AnalyticsModule = require(Parent.Analytics)
+local GetPlatformTargetFunction = AnalyticsModule.getPlatformTarget
 
 return {
-	Diag = analyticsModule.Analytics.new(rbxAnalyticsService).Diag,
+	Diag = AnalyticsModule.Analytics.new((game:GetService("RbxAnalyticsService"))).Diag,
 	EventStream = {
-		setRBXEventStream = function(_, p1, p2, p3)
-			-- upvalues: eventIngestService (ref), getPlatformTarget (ref)
-			eventIngestService:SetRBXEventStream(getPlatformTarget(), p1, p2, p3 or {})
+		setRBXEventStream = function(_, EventContext, EventName, p1) --[[ Line: 15 ]]
+			-- upvalues: EventIngestService (copy), GetPlatformTargetFunction (copy)
+			EventIngestService:SetRBXEventStream(GetPlatformTargetFunction(), EventContext, EventName, p1 or {})
 		end
 	},
-	Telemetry = require(parent.LoggingProtocol).default
+	Telemetry = require(Parent.LoggingProtocol).default
 }

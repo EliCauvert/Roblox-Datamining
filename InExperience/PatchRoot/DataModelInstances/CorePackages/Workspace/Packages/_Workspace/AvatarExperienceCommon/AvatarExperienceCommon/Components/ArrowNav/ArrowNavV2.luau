@@ -1,72 +1,68 @@
-﻿local avatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
-local parent = avatarExperienceCommon.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local icon = foundationModule.Icon
-local enums = foundationModule.Enums
-local constantsModule = require(avatarExperienceCommon.Constants)
-local useArrowNavScrollBehaviorModule = require(avatarExperienceCommon.Hooks.useArrowNavScrollBehavior)
+﻿local AvatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
+local Parent = AvatarExperienceCommon.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local Icon = FoundationModule.Icon
+local Enums = FoundationModule.Enums
+local ConstantsModule = require(AvatarExperienceCommon.Constants)
+local UseArrowNavScrollBehaviorModule = require(AvatarExperienceCommon.Hooks.useArrowNavScrollBehavior)
 
-return function(p1)
-	-- upvalues: useArrowNavScrollBehaviorModule (ref), reactModule (ref), constantsModule (ref), foundationModule (ref), icon (ref), enums (ref)
-	local var1 = useArrowNavScrollBehaviorModule({
-		navDirection = p1.navDirection,
-		onPressHoldInputBegan = p1.onPressHoldInputBegan,
-		onPressHoldInputEnded = p1.onPressHoldInputEnded,
-		defaultUseProps = p1.defaultUseProps
+return function(Frame) --[[ Line: 39 | Named "ArrowNavV2" ]]
+	-- upvalues: UseArrowNavScrollBehaviorModule (copy), ReactModule (copy), ConstantsModule (copy), FoundationModule (copy), Icon (copy), Enums (copy)
+	local UseArrowNavScrollBehaviorModuleResult = UseArrowNavScrollBehaviorModule({
+		navDirection = Frame.navDirection,
+		onPressHoldInputBegan = Frame.onPressHoldInputBegan,
+		onPressHoldInputEnded = Frame.onPressHoldInputEnded,
+		defaultUseProps = Frame.defaultUseProps
 	})
-	local handleInputBegan = var1.handleInputBegan
-	local handleInputEnded = var1.handleInputEnded
-	local var2 = reactModule.useCallback(function() end, {})
-	local var3 = if p1.navDirection == constantsModule.NAVIGATION_DIRECTION.IS_LEFT then "chevron-small-left" else "chevron-small-right"
-	local actionStandard = p1.tokens.Color.ActionStandard
-	local color3 = p1.tokens.Color.Surface.Surface_0.Color3
-	local transparency = p1.tokens.Color.Surface.Surface_0.Transparency
-	local size900 = p1.tokens.Size.Size_900
-	local medium = p1.tokens.Padding.Medium
+	local ActionStandard = Frame.tokens.Color.ActionStandard
+	local SurfaceColor3 = Frame.tokens.Color.Surface.Surface_0.Color3
+	local Size900 = Frame.tokens.Size.Size_900
+	local Medium = Frame.tokens.Padding.Medium
+	local Size100 = Frame.tokens.Size.Size_100
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
-		AnchorPoint = p1.AnchorPoint,
-		Position = p1.Position,
-		Visible = p1.Visible,
-		Size = UDim2.fromOffset(size900, size900 + medium),
-		BackgroundColor3 = color3,
-		BackgroundTransparency = transparency
+		AnchorPoint = Frame.AnchorPoint,
+		Position = Frame.Position,
+		Visible = Frame.Visible,
+		Size = UDim2.fromOffset(Size900, Size900 + Medium),
+		BackgroundColor3 = SurfaceColor3,
+		BackgroundTransparency = Frame.tokens.Color.Surface.Surface_0.Transparency
 	}, {
-		GradientFrame = reactModule.createElement("Frame", {
+		GradientFrame = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 0,
 			BorderSizePixel = 0,
-			AnchorPoint = if p1.navDirection == constantsModule.NAVIGATION_DIRECTION.IS_LEFT then Vector2.new(0, 0.5) else Vector2.new(1, 0.5),
-			Position = if p1.navDirection == constantsModule.NAVIGATION_DIRECTION.IS_LEFT then UDim2.new(1, 0, 0.5, 0) else UDim2.new(0, 0, 0.5, 0),
-			Size = UDim2.fromOffset(p1.tokens.Size.Size_700, size900 + medium),
-			BackgroundColor3 = color3
+			AnchorPoint = if Frame.navDirection == ConstantsModule.NAVIGATION_DIRECTION.IS_LEFT then Vector2.new(0, 0.5) else Vector2.new(1, 0.5),
+			Position = if Frame.navDirection == ConstantsModule.NAVIGATION_DIRECTION.IS_LEFT then UDim2.new(1, 0, 0.5, 0) else UDim2.new(0, 0, 0.5, 0),
+			Size = UDim2.fromOffset(Frame.tokens.Size.Size_700, Size900 + Medium),
+			BackgroundColor3 = SurfaceColor3
 		}, {
-			UIGradient = reactModule.createElement("UIGradient", {
+			UIGradient = ReactModule.createElement("UIGradient", {
 				Transparency = NumberSequence.new({
 					NumberSequenceKeypoint.new(0, 1),
 					NumberSequenceKeypoint.new(0.9, 0),
 					NumberSequenceKeypoint.new(1, 0)
 				}),
-				Rotation = if p1.navDirection == constantsModule.NAVIGATION_DIRECTION.IS_LEFT then 180 else 0
+				Rotation = if Frame.navDirection == ConstantsModule.NAVIGATION_DIRECTION.IS_LEFT then 180 else 0
 			})
 		}),
-		InnerFrame = reactModule.createElement(foundationModule.View, {
-			AnchorPoint = if p1.navDirection == constantsModule.NAVIGATION_DIRECTION.IS_LEFT then Vector2.new(0, 0.5) else Vector2.new(1, 0.5),
-			Position = if p1.navDirection == constantsModule.NAVIGATION_DIRECTION.IS_LEFT then UDim2.new(0, p1.tokens.Size.Size_100, 0.5, 0) else UDim2.new(1, 0, 0.5, 0),
-			Size = UDim2.fromOffset(size900, size900),
-			backgroundStyle = actionStandard.Background,
+		InnerFrame = ReactModule.createElement(FoundationModule.View, {
+			AnchorPoint = if Frame.navDirection == ConstantsModule.NAVIGATION_DIRECTION.IS_LEFT then Vector2.new(0, 0.5) else Vector2.new(1, 0.5),
+			Position = if Frame.navDirection == ConstantsModule.NAVIGATION_DIRECTION.IS_LEFT then UDim2.new(0, Size100, 0.5, 0) else UDim2.new(1, 0, 0.5, 0),
+			Size = UDim2.fromOffset(Size900, Size900),
+			backgroundStyle = ActionStandard.Background,
 			cornerRadius = UDim.new(0.5, 0),
-			onActivated = var2
+			onActivated = ReactModule.useCallback(function() --[[ Line: 52 ]] end, {})
 		}, {
-			ArrowIcon = reactModule.createElement(icon, {
-				name = var3,
-				size = enums.IconSize.Medium,
-				style = actionStandard.Foreground,
+			ArrowIcon = ReactModule.createElement(Icon, {
+				name = if Frame.navDirection == ConstantsModule.NAVIGATION_DIRECTION.IS_LEFT then "chevron-small-left" else "chevron-small-right",
+				size = Enums.IconSize.Medium,
+				style = ActionStandard.Foreground,
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Position = UDim2.fromScale(0.5, 0.5)
 			}),
-			StopPropagationOverlay = reactModule.createElement("TextButton", {
+			StopPropagationOverlay = ReactModule.createElement("TextButton", {
 				Active = false,
 				BorderSizePixel = 0,
 				BackgroundTransparency = 1,
@@ -74,8 +70,8 @@ return function(p1)
 				Size = UDim2.new(1, 0, 1, 0),
 				Text = "",
 				ZIndex = 0,
-				[reactModule.Event.InputBegan] = handleInputBegan,
-				[reactModule.Event.InputEnded] = handleInputEnded
+				[ReactModule.Event.InputBegan] = UseArrowNavScrollBehaviorModuleResult.handleInputBegan,
+				[ReactModule.Event.InputEnded] = UseArrowNavScrollBehaviorModuleResult.handleInputEnded
 			})
 		})
 	})

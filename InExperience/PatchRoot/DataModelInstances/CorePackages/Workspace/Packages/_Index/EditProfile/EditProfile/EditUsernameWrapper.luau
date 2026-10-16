@@ -1,1 +1,1 @@
-﻿return require(script.EditUsernameAnalyticsWrapper)
+﻿return (require(script.EditUsernameAnalyticsWrapper))

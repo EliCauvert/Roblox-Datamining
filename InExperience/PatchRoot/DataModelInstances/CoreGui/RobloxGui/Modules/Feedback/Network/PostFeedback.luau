@@ -1,97 +1,97 @@
-﻿local urlModule = require(script.Parent.Parent.Parent.InGameMenu.Network.Url)
-local constantsModule = require(script.Parent.Parent.Resources.Constants)
-local httpService = game:GetService("HttpService")
-local playersService = game:GetService("Players")
-local promise = require(game:GetService("CorePackages").Packages.InGameMenuDependencies).Promise
-local getFFlagEnableSendImageFeedbackToBackendModule = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.Flags.GetFFlagEnableSendImageFeedbackToBackend)
+﻿local UrlModule = require(script.Parent.Parent.Parent.InGameMenu.Network.Url)
+local ConstantsModule = require(script.Parent.Parent.Resources.Constants)
+local HttpService = game:GetService("HttpService")
+local Players = game:GetService("Players")
+local Promise = require(game:GetService("CorePackages").Packages.InGameMenuDependencies).Promise
+local GetFFlagEnableSendImageFeedbackToBackendModule = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.Flags.GetFFlagEnableSendImageFeedbackToBackend)
 
-local function _(p1, p2, p3)
-	-- upvalues: httpService (ref)
-	return httpService:RequestInternal(p1):Start(function(p4, p5)
-		-- upvalues: p2 (ref), p3 (ref)
-		if p4 then
-			p2()
+local function _(Options, p1, p2) --[[ Line: 28 | Named "request" ]]
+	-- upvalues: HttpService (copy)
+	return HttpService:RequestInternal(Options):Start(function(p3, p4) --[[ Line: 29 ]]
+		-- upvalues: p1 (copy), p2 (copy)
+		if p3 then
+			p1()
 			
 			return
+		else
+			p2((tostring(p4.StatusMessage)))
 		end
-		p3(tostring(p5.StatusMessage))
 	end)
 end
 
-return function(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: getFFlagEnableSendImageFeedbackToBackendModule (ref), playersService (ref), constantsModule (ref), urlModule (ref), httpService (ref), promise (ref)
-	local t
-	local _ = nil
-	
-	if getFFlagEnableSendImageFeedbackToBackendModule() then
-		local inGameTranslations = constantsModule.ServiceSourceType.InGameTranslations
+return function(ContentType, Value, Value1, ExternalId: string, Value2, Comments, ReasonType) --[[ Line: 38 ]]
+	-- upvalues: GetFFlagEnableSendImageFeedbackToBackendModule (copy), Players (copy), ConstantsModule (copy), UrlModule (copy), HttpService (copy), Promise (copy)
+	local config = nil
+	if GetFFlagEnableSendImageFeedbackToBackendModule() then
+		local InGameTranslations = ConstantsModule.ServiceSourceType.InGameTranslations
 		
-		if p4 == "" or p4 == nil then
-			p4 = "UID_" .. game.GameId
-			inGameTranslations = constantsModule.ServiceSourceType.InGameTranslationsNoEntryId
+		if ExternalId == "" or ExternalId == nil then
+			ExternalId = "UID_" .. game.GameId
+			InGameTranslations = ConstantsModule.ServiceSourceType.InGameTranslationsNoEntryId
 		end
-		if p1 == constantsModule.ContentType.Image then
-			inGameTranslations = constantsModule.ServiceSourceType.InGameUniverseAndImageAsset
+		if ContentType == ConstantsModule.ContentType.Image then
+			InGameTranslations = ConstantsModule.ServiceSourceType.InGameUniverseAndImageAsset
 		end
-		t = {
+		config = {
 			LocalizationFeedback = {
 				FeedbackTarget = {
-					ServiceSource = { Type = inGameTranslations, ExternalId = p4 },
-					Source = { ContentType = p1, Value = p2 },
-					Translation = if p1 == constantsModule.ContentType.Image and (p3 == nil or p3 == "") then nil else { ContentType = p1, Value = p3 }
+					ServiceSource = { Type = InGameTranslations, ExternalId = ExternalId },
+					Source = { ContentType = ContentType, Value = Value },
+					Translation = if ContentType == ConstantsModule.ContentType.Image and (Value1 == nil or Value1 == "") then nil else { ContentType = ContentType, Value = Value1 }
 				},
-				Locale = if playersService.LocalPlayer.LocaleId then playersService.LocalPlayer.LocaleId:gsub("-", "_") else "",
-				ReasonType = p7,
+				Locale = if Players.LocalPlayer.LocaleId then Players.LocalPlayer.LocaleId:gsub("-", "_") else "",
+				ReasonType = ReasonType,
 				Suggestion = {
-					ContentType = constantsModule.ContentType.Text,
-					Value = p5
+					ContentType = ConstantsModule.ContentType.Text,
+					Value = Value2
 				},
-				Comments = p6
+				Comments = Comments
 			}
 		}
 	else
-		local var1 = 1
+		local Type = 1
 		
-		if p4 == "" or p4 == nil then
-			p4 = "UID_" .. game.GameId
-			var1 = 2
+		if ExternalId == "" or ExternalId == nil then
+			ExternalId = "UID_" .. game.GameId
+			Type = 2
 		end
-		t = {
+		config = {
 			LocalizationFeedback = {
 				FeedbackTarget = {
-					ServiceSource = { Type = var1, ExternalId = p4 },
-					Source = { ContentType = 1, Value = p2 },
-					Translation = { ContentType = 1, Value = p3 }
+					ServiceSource = { Type = Type, ExternalId = ExternalId },
+					Source = { ContentType = 1, Value = Value },
+					Translation = { ContentType = 1, Value = Value1 }
 				},
-				Locale = if playersService.LocalPlayer.LocaleId then playersService.LocalPlayer.LocaleId:gsub("-", "_") else "",
-				ReasonType = p7,
-				Suggestion = { ContentType = 1, Value = p5 },
-				Comments = p6
+				Locale = if Players.LocalPlayer.LocaleId then Players.LocalPlayer.LocaleId:gsub("-", "_") else "",
+				ReasonType = ReasonType,
+				Suggestion = { ContentType = 1, Value = Value2 },
+				Comments = Comments
 			}
 		}
 	end
-	local t_1 = {
+	local config1 = {
 		Method = "POST",
-		Url = string.format("%sfeedback-api/v1/feedback/create-localization", urlModule.APIS_URL),
-		Body = httpService:JSONEncode(t),
+		Url = string.format("%sfeedback-api/v1/feedback/create-localization", UrlModule.APIS_URL),
+		Body = HttpService:JSONEncode(config),
 		Headers = {
 			["Content-Type"] = "application/json",
 			Accept = "application/json"
 		}
 	}
 	
-	return promise.new(function(p8, p9)
-		-- upvalues: t_1 (ref), httpService (copy)
-		spawn(function()
-			-- upvalues: t_1 (copy), p8 (ref), p9 (ref), httpService (copy)
-			local _ = httpService:RequestInternal(t_1):Start(function(p10, p11)
-				-- upvalues: p8 (ref), p9 (ref)
-				if p10 then
-					p8()
+	return Promise.new(function(Callback, Callback1) --[[ Line: 144 ]]
+		-- upvalues: config1 (copy), HttpService (upval)
+		spawn(function() --[[ Line: 145 ]]
+			-- upvalues: config1 (upval), Callback (copy), Callback1 (copy), HttpService (upval)
+			local _ = HttpService:RequestInternal(config1):Start(function(p1, p2) --[[ Line: 29 ]]
+				-- upvalues: Callback (copy), Callback1 (copy)
+				if p1 then
+					Callback()
 					
 					return
+				else
+					Callback1((tostring(p2.StatusMessage)))
 				end
-				p9(tostring(p11.StatusMessage))
 			end)
 		end)
 	end)

@@ -1,3 +1,3 @@
-﻿return function(p1, p2)
-	return if p2 == nil then p1 elseif typeof(p1) == "number" then p1 * p2 elseif typeof(p1) == "UDim" then UDim.new(p1.Scale, p1.Offset * p2) elseif typeof(p1) == "UDim2" then UDim2.new(p1.X.Scale, p1.X.Offset * p2, p1.Y.Scale, p1.Y.Offset * p2) else p1
+﻿return function(Vector, p1) --[[ Line: 1 | Named "scaleValue" ]]
+	return if p1 == nil then Vector elseif typeof(Vector) == "number" then Vector * p1 elseif typeof(Vector) == "UDim" then UDim.new(Vector.Scale, Vector.Offset * p1) elseif typeof(Vector) == "UDim2" then UDim2.new(Vector.X.Scale, Vector.X.Offset * p1, Vector.Y.Scale, Vector.Y.Offset * p1) else Vector
 end

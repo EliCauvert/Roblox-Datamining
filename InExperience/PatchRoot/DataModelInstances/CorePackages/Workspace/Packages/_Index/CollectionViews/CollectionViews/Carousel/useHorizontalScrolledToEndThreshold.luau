@@ -1,63 +1,94 @@
-﻿local parent = script:FindFirstAncestor("CollectionViews").Parent
-local reactModule = require(parent.React)
-local fFlagCollectionViewMathChanges = require(parent.SharedFlags).FFlagCollectionViewMathChanges
+﻿local ReactModule = require(script:FindFirstAncestor("CollectionViews").Parent.React)
 
-return function(p1, p2, p3, p4)
-	-- upvalues: reactModule (ref), fFlagCollectionViewMathChanges (ref)
-	local var1 = reactModule.useRef(false)
-	reactModule.useEffect(function()
-		-- upvalues: p4 (ref), p1 (ref), fFlagCollectionViewMathChanges (copy), p3 (ref), p2 (ref), var1 (ref)
-		if not p4 then
+return function(p1, p2, Callback, p3) --[[ Line: 5 | Named "useHorizontalScrolledToEndThreshold" ]]
+	-- upvalues: ReactModule (copy)
+	local UseRefResult = ReactModule.useRef(false)
+	ReactModule.useEffect(function() --[[ Line: 20 ]]
+		-- upvalues: p3 (copy), p1 (copy), Callback (copy), p2 (copy), UseRefResult (copy)
+		if not p3 then
 			return nil
 		end
-		local t = {}
+		local List = {}
 		
-		if p1.current ~= nil and (fFlagCollectionViewMathChanges or (p3 ~= nil and p2 ~= nil)) then
-			local current = p1.current
+		if p1.current ~= nil and (Callback ~= nil and p2 ~= nil) then
+			local Current = p1.current
 			
-			local function checkThreshold()
-				-- upvalues: current (ref), fFlagCollectionViewMathChanges (copy), p2 (copy), var1 (copy), p3 (copy)
-				local var2 = current.AbsoluteCanvasSize.X - current.AbsoluteWindowSize.X - (if fFlagCollectionViewMathChanges then p2 or 0 else p2)
-				local x = current.CanvasPosition.X
+			local function _() --[[ Line: 32 | Named "checkThreshold" ]]
+				-- upvalues: Current (copy), p2 (upval), UseRefResult (upval), Callback (upval)
+				local XDelta = Current.AbsoluteCanvasSize.X - Current.AbsoluteWindowSize.X - p2
+				local X = Current.CanvasPosition.X
 				
-				if x < var2 and var1.current then
-					var1.current = false
+				if X < XDelta and UseRefResult.current then
+					UseRefResult.current = false
 					
 					return
-				elseif var2 < x and not var1.current then
-					var1.current = true
-					
-					if fFlagCollectionViewMathChanges then
-						if p3 then
-							p3()
-							
-							return
-						end
-					else
-						p3()
-					end
+				end
+				if XDelta < X and not UseRefResult.current then
+					UseRefResult.current = true
+					Callback()
 				end
 			end
 			
-			table.insert(t, current:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(function()
-				-- upvalues: checkThreshold (ref)
-				checkThreshold()
+			table.insert(List, Current:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(function() --[[ Line: 46 ]]
+				-- upvalues: Current (copy), p2 (upval), UseRefResult (upval), Callback (upval)
+				local XDelta = Current.AbsoluteCanvasSize.X - Current.AbsoluteWindowSize.X - p2
+				local X = Current.CanvasPosition.X
+				
+				if X < XDelta and UseRefResult.current then
+					UseRefResult.current = false
+					
+					return
+				end
+				if XDelta < X and not UseRefResult.current then
+					UseRefResult.current = true
+					Callback()
+				end
 			end))
-			table.insert(t, current:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(function()
-				-- upvalues: checkThreshold (ref)
-				checkThreshold()
+			table.insert(List, Current:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(function() --[[ Line: 53 ]]
+				-- upvalues: Current (copy), p2 (upval), UseRefResult (upval), Callback (upval)
+				local XDelta = Current.AbsoluteCanvasSize.X - Current.AbsoluteWindowSize.X - p2
+				local X = Current.CanvasPosition.X
+				
+				if X < XDelta and UseRefResult.current then
+					UseRefResult.current = false
+					
+					return
+				end
+				if XDelta < X and not UseRefResult.current then
+					UseRefResult.current = true
+					Callback()
+				end
 			end))
-			table.insert(t, current:GetPropertyChangedSignal("CanvasPosition"):Connect(function()
-				-- upvalues: checkThreshold (ref)
-				checkThreshold()
+			table.insert(List, Current:GetPropertyChangedSignal("CanvasPosition"):Connect(function() --[[ Line: 59 ]]
+				-- upvalues: Current (copy), p2 (upval), UseRefResult (upval), Callback (upval)
+				local XDelta = Current.AbsoluteCanvasSize.X - Current.AbsoluteWindowSize.X - p2
+				local X = Current.CanvasPosition.X
+				
+				if X < XDelta and UseRefResult.current then
+					UseRefResult.current = false
+					
+					return
+				end
+				if XDelta < X and not UseRefResult.current then
+					UseRefResult.current = true
+					Callback()
+				end
 			end))
-			checkThreshold()
-		end
-		return function()
-			-- upvalues: t (ref)
-			for i, v in t do
-				v:Disconnect()
+			local XDelta = Current.AbsoluteCanvasSize.X - Current.AbsoluteWindowSize.X - p2
+			local X = Current.CanvasPosition.X
+			
+			if X < XDelta and UseRefResult.current then
+				UseRefResult.current = false
+			elseif XDelta < X and not UseRefResult.current then
+				UseRefResult.current = true
+				Callback()
 			end
 		end
-	end, { p1, p4, p2, p3 })
+		return function() --[[ Line: 65 ]]
+			-- upvalues: List (copy)
+			for _, Connection in List do
+				Connection:Disconnect()
+			end
+		end
+	end, { p1, p3, p2, Callback })
 end

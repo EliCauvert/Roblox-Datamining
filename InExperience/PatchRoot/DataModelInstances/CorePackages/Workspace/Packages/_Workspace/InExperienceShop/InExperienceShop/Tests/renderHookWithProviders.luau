@@ -1,32 +1,32 @@
-﻿local parent = script:FindFirstAncestor("InExperienceShop").Parent
-local reactModule = require(parent.React)
-local reactRobloxModule = require(parent.ReactRoblox)
-local foundationProvider = require(parent.Foundation).FoundationProvider
+﻿local Parent = script:FindFirstAncestor("InExperienceShop").Parent
+local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.ReactRoblox)
+local FoundationProvider = require(Parent.Foundation).FoundationProvider
 
-return function(p1)
-	-- upvalues: reactRobloxModule (ref), reactModule (ref), foundationProvider (ref)
+return function(Callback) --[[ Line: 19 | Named "renderHookWithProviders" ]]
+	-- upvalues: ReactRobloxModule (copy), ReactModule (copy), FoundationProvider (copy)
 	local t = {}
-	local screenGui = Instance.new("ScreenGui")
-	local var1 = reactRobloxModule.createRoot(screenGui)
+	local ScreenGui = Instance.new("ScreenGui")
+	local Root = ReactRobloxModule.createRoot(ScreenGui)
 	
-	local function TestHarness()
-		-- upvalues: t (ref), p1 (ref)
-		t.current = p1()
+	local function TestHarness() --[[ Line: 24 ]]
+		-- upvalues: t (copy), Callback (copy)
+		t.current = Callback()
 		
 		return nil
 	end
 	
-	reactRobloxModule.act(function()
-		-- upvalues: var1 (ref), reactModule (copy), foundationProvider (copy), TestHarness (ref)
-		var1:render(reactModule.createElement(foundationProvider, { colorMode = "Dark" }, reactModule.createElement(TestHarness)))
+	ReactRobloxModule.act(function() --[[ Line: 29 ]]
+		-- upvalues: Root (copy), ReactModule (upval), FoundationProvider (upval), TestHarness (copy)
+		Root:render(ReactModule.createElement(FoundationProvider, { colorMode = "Dark" }, ReactModule.createElement(TestHarness)))
 	end)
 	
-	return t, function()
-		-- upvalues: reactRobloxModule (copy), var1 (ref), screenGui (ref)
-		reactRobloxModule.act(function()
-			-- upvalues: var1 (copy)
-			var1:unmount()
+	return t, function() --[[ Line: 35 | Named "cleanup" ]]
+		-- upvalues: ReactRobloxModule (upval), Root (copy), ScreenGui (copy)
+		ReactRobloxModule.act(function() --[[ Line: 36 ]]
+			-- upvalues: Root (upval)
+			Root:unmount()
 		end)
-		screenGui:Destroy()
+		ScreenGui:Destroy()
 	end
 end

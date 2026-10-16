@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CoreGui"):WaitForChild("RobloxGui"):WaitForChild("Modules"):WaitForChild("Settings"):WaitForChild("Pages"):WaitForChild("ReportAbuseMenuContainerPage"))
+﻿return (require(game:GetService("CoreGui"):WaitForChild("RobloxGui"):WaitForChild("Modules"):WaitForChild("Settings"):WaitForChild("Pages"):WaitForChild("ReportAbuseMenuContainerPage")))

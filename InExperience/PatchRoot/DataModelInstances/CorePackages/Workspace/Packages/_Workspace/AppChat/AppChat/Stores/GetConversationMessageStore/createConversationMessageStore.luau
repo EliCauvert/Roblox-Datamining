@@ -1,41 +1,50 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local cryoModule = require(parent.Cryo)
-local createProxy = require(parent.SignalsExperimental).createProxy
-local _ = require(appChat.MessageData.Types)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local CryoModule = require(Parent.Cryo)
+local CreateProxyFunction = require(Parent.SignalsExperimental).createProxy
+local _ = require(AppChat.MessageData.Types)
+local SignalsMigrationConfigModule = require(AppChat.Flags.SignalsMigrationConfig)
 
-return function()
-	-- upvalues: createProxy (ref), cryoModule (ref)
-	local var1 = createProxy({})
+local function keepSendingMessageStableKey(p1, p2) --[[ Line: 33 ]]
+	-- upvalues: CryoModule (copy)
+	return if p1 == nil or p1.stableKey == nil or p1.stableKey == p1.id or p2.stableKey ~= nil and p2.stableKey ~= p2.id then p2 else CryoModule.Dictionary.join(p2, { stableKey = p1.stableKey })
+end
+
+return function() --[[ Line: 48 | Named "createConversationMessageStore" ]]
+	-- upvalues: CreateProxyFunction (copy), SignalsMigrationConfigModule (copy), keepSendingMessageStableKey (copy), CryoModule (copy)
+	local Proxy = CreateProxyFunction({})
 	
 	return {
-		messages = var1,
-		getMessage = function(p1, p2)
-			-- upvalues: var1 (ref)
-			return var1(p2)[p1]
+		messages = Proxy,
+		getMessage = function(p1, p2) --[[ Line: 52 ]]
+			-- upvalues: Proxy (copy)
+			return Proxy(p2)[p1]
 		end,
-		upsertMessages = function(p1)
-			-- upvalues: var1 (ref)
-			for i, v in p1 do
-				var1[i] = v
+		upsertMessages = function(List) --[[ Line: 56 ]]
+			-- upvalues: SignalsMigrationConfigModule (upval), keepSendingMessageStableKey (upval), Proxy (copy)
+			for i, value in List do
+				if SignalsMigrationConfigModule.shouldUseViewRecyclerMessageList then
+					value = keepSendingMessageStableKey(Proxy[i], value)
+				end
+				Proxy[i] = value
 			end
 		end,
-		updateMessage = function(p2, p3)
-			-- upvalues: var1 (ref), cryoModule (copy)
-			local var2 = var1[p2]
+		updateMessage = function(Key, p1) --[[ Line: 65 ]]
+			-- upvalues: Proxy (copy), CryoModule (upval)
+			local ProxyEntry = Proxy[Key]
 			
-			if var2 ~= nil then
-				var1[p2] = cryoModule.Dictionary.join(var2, p3)
+			if ProxyEntry ~= nil then
+				Proxy[Key] = CryoModule.Dictionary.join(ProxyEntry, p1)
 			end
 		end,
-		removeMessage = function(p2)
-			-- upvalues: var1 (ref)
-			var1[p2] = nil
+		removeMessage = function(Key) --[[ Line: 72 ]]
+			-- upvalues: Proxy (copy)
+			Proxy[Key] = nil
 		end,
-		clear = function()
-			-- upvalues: var1 (ref)
-			for i in var1 do
-				var1[i] = nil
+		clear = function() --[[ Line: 76 ]]
+			-- upvalues: Proxy (copy)
+			for i in Proxy do
+				Proxy[i] = nil
 			end
 		end
 	}

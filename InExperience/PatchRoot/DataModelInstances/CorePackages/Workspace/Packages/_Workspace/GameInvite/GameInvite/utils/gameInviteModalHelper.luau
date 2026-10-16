@@ -1,15 +1,15 @@
-﻿local gameInvite = script:FindFirstAncestor("GameInvite")
-local gameInviteConstantsModule = require(gameInvite.GameInviteConstants)
-local _ = require(gameInvite.gameInviteModalType)
+﻿local GameInvite = script:FindFirstAncestor("GameInvite")
+local GameInviteConstantsModule = require(GameInvite.GameInviteConstants)
+local _ = require(GameInvite.gameInviteModalType)
 
-function isTriggerDDI(p1)
-	-- upvalues: gameInviteConstantsModule (ref)
-	return if p1 ~= gameInviteConstantsModule.Triggers.DeveloperSingle then p1 == gameInviteConstantsModule.Triggers.DeveloperMultiple else true
+function isTriggerDDI(DeveloperMultiple): boolean --[[ Line: 5 ]]
+	-- upvalues: GameInviteConstantsModule (copy)
+	return DeveloperMultiple == GameInviteConstantsModule.Triggers.DeveloperSingle or DeveloperMultiple == GameInviteConstantsModule.Triggers.DeveloperMultiple
 end
 
-function isTriggerGameMenu(p1)
-	-- upvalues: gameInviteConstantsModule (ref)
-	return p1 == gameInviteConstantsModule.Triggers.GameMenu
+function isTriggerGameMenu(GameMenu): boolean --[[ Line: 9 ]]
+	-- upvalues: GameInviteConstantsModule (copy)
+	return GameMenu == GameInviteConstantsModule.Triggers.GameMenu
 end
 
 return {

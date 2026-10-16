@@ -1,88 +1,88 @@
-﻿local httpRbxApiService = game:GetService("HttpRbxApiService")
-local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-local playersService = game:GetService("Players")
-local corePackagesService = game:GetService("CorePackages")
-local runService = game:GetService("RunService")
-local _ = require(corePackagesService.Packages.Dash)
-local default = require(robloxGui.Modules.VoiceChat.VoiceChatServiceManager).default
-local createVoiceAbuseReportRequestModule = require(robloxGui.Modules.VoiceChat.createVoiceAbuseReportRequest)
-local url = require(corePackagesService.Workspace.Packages.CoreScriptsCommon).Url
-local parent = script.Parent.Parent
-local constantsModule = require(parent.Resources.Constants)
-local sendAnalyticsModule = require(parent.Utility.SendAnalytics)
-local sessionUtilityModule = require(parent.Utility.SessionUtility)
+﻿local HttpRbxApiService = game:GetService("HttpRbxApiService")
+local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+local Players = game:GetService("Players")
+local CorePackages = game:GetService("CorePackages")
+local RunService = game:GetService("RunService")
+local _ = require(CorePackages.Packages.Dash)
+local Default = require(RobloxGui.Modules.VoiceChat.VoiceChatServiceManager).default
+local CreateVoiceAbuseReportRequestModule = require(RobloxGui.Modules.VoiceChat.createVoiceAbuseReportRequest)
+local Url = require(CorePackages.Workspace.Packages.CoreScriptsCommon).Url
+local Parent = script.Parent.Parent
+local ConstantsModule = require(Parent.Resources.Constants)
+local SendAnalyticsModule = require(Parent.Utility.SendAnalytics)
+local SessionUtilityModule = require(Parent.Utility.SessionUtility)
 
-function sendAnalytics(p1, p2, p3, p4)
-	-- upvalues: sendAnalyticsModule (ref), constantsModule (ref)
-	sendAnalyticsModule(p1, constantsModule.Analytics.ReportSubmittedName, {
-		reportType = p1,
-		reportedEntityId = tostring(p2),
-		reportSource = constantsModule.Analytics.ReportSourceInGame,
-		reason = p3,
-		abuseVector = p4
+function sendAnalytics(ReportType, p1, Reason, AbuseVector) --[[ Line: 36 ]]
+	-- upvalues: SendAnalyticsModule (copy), ConstantsModule (copy)
+	SendAnalyticsModule(ReportType, ConstantsModule.Analytics.ReportSubmittedName, {
+		reportType = ReportType,
+		reportedEntityId = tostring(p1),
+		reportSource = ConstantsModule.Analytics.ReportSourceInGame,
+		reason = Reason,
+		abuseVector = AbuseVector
 	})
 end
 
-function getAbuseVectorFromReportCategory(p1)
-	-- upvalues: constantsModule (ref)
-	return if p1 == constantsModule.Category.Voice then "voice" elseif p1 == constantsModule.Category.Text then "chat" else "other"
+function getAbuseVectorFromReportCategory(Voice): string --[[ Line: 50 ]]
+	-- upvalues: ConstantsModule (copy)
+	return if Voice == ConstantsModule.Category.Voice then "voice" elseif Voice == ConstantsModule.Category.Text then "chat" else "other"
 end
 
-function submitUserAbuseReport(p1, p2)
-	-- upvalues: constantsModule (ref), playersService (ref), createVoiceAbuseReportRequestModule (ref), default (ref), url (ref), httpRbxApiService (ref), sessionUtilityModule (ref)
-	local var1 = p1.reportCategory == constantsModule.Category.Voice
-	local localPlayer = playersService.LocalPlayer
+function submitUserAbuseReport(p1, Callback) --[[ Line: 59 ]]
+	-- upvalues: ConstantsModule (copy), Players (copy), CreateVoiceAbuseReportRequestModule (copy), Default (copy), Url (copy), HttpRbxApiService (copy), SessionUtilityModule (copy)
+	local IsReportCategoryMatch = p1.reportCategory == ConstantsModule.Category.Voice
+	local LocalPlayer = Players.LocalPlayer
 	
-	if localPlayer then
-		pcall(function()
-			-- upvalues: p1 (ref), var1 (ref), createVoiceAbuseReportRequestModule (copy), playersService (copy), default (copy), localPlayer (ref), url (copy), httpRbxApiService (copy), constantsModule (copy), sessionUtilityModule (copy), p2 (ref)
-			coroutine.wrap(function()
-				-- upvalues: p1 (copy), var1 (copy), createVoiceAbuseReportRequestModule (copy), playersService (copy), default (copy), localPlayer (copy), url (copy), httpRbxApiService (copy), constantsModule (copy), sessionUtilityModule (copy), p2 (copy)
-				local var2 = getAbuseVectorFromReportCategory(p1.reportCategory)
+	if LocalPlayer then
+		pcall(function() --[[ Line: 63 ]]
+			-- upvalues: p1 (copy), IsReportCategoryMatch (copy), CreateVoiceAbuseReportRequestModule (upval), Players (upval), Default (upval), LocalPlayer (copy), Url (upval), HttpRbxApiService (upval), ConstantsModule (upval), SessionUtilityModule (upval), Callback (copy)
+			coroutine.wrap(function() --[[ Line: 64 ]]
+				-- upvalues: p1 (upval), IsReportCategoryMatch (upval), CreateVoiceAbuseReportRequestModule (upval), Players (upval), Default (upval), LocalPlayer (upval), Url (upval), HttpRbxApiService (upval), ConstantsModule (upval), SessionUtilityModule (upval), Callback (upval)
+				local AbuseVectorFromReportCategory = getAbuseVectorFromReportCategory(p1.reportCategory)
 				
-				if var1 then
-					local var3 = createVoiceAbuseReportRequestModule(playersService, default, {
-						localUserId = localPlayer.UserId,
+				if IsReportCategoryMatch then
+					local VoiceAbuseReportRequestModule = CreateVoiceAbuseReportRequestModule(Players, Default, {
+						localUserId = LocalPlayer.UserId,
 						abuserUserId = p1.abusingPlayer.UserId,
 						abuseComment = p1.comment,
 						abuseReason = p1.reason,
 						inExpMenuOpenedUnixMilli = math.floor(p1.beginningTimestamp * 1000),
 						sortedPlayerListUserIds = p1.sortedUserIds,
-						abuseVector = var2
+						abuseVector = AbuseVectorFromReportCategory
 					})
 					
 					if game:GetEngineFeature("AbuseReportV3") then
-						playersService:ReportAbuseV3(localPlayer, var3)
+						Players:ReportAbuseV3(LocalPlayer, VoiceAbuseReportRequestModule)
 					else
-						httpRbxApiService:PostAsyncFullUrl(url.APIS_URL .. "/abuse-reporting/v2/abuse-report", var3)
+						HttpRbxApiService:PostAsyncFullUrl(Url.APIS_URL .. "/abuse-reporting/v2/abuse-report", VoiceAbuseReportRequestModule)
 					end
 				else
-					playersService:ReportAbuse(p1.abusingPlayer, p1.reason, p1.comment)
+					Players:ReportAbuse(p1.abusingPlayer, p1.reason, p1.comment)
 				end
-				sendAnalytics(constantsModule.Analytics.ReportTypeUser, p1.abusingPlayer.UserId, p1.reason, var2)
-				sessionUtilityModule.endAbuseReportSession()
+				sendAnalytics(ConstantsModule.Analytics.ReportTypeUser, p1.abusingPlayer.UserId, p1.reason, AbuseVectorFromReportCategory)
+				SessionUtilityModule.endAbuseReportSession()
 				
-				if p2 then
-					p2()
+				if Callback then
+					Callback()
 				end
 			end)()
 		end)
 	end
 end
 
-function submitPlaceAbuseReport(p1, p2)
-	-- upvalues: runService (ref), playersService (ref), constantsModule (ref), sessionUtilityModule (ref)
+function submitPlaceAbuseReport(p1, Callback) --[[ Line: 99 ]]
+	-- upvalues: RunService (copy), Players (copy), ConstantsModule (copy), SessionUtilityModule (copy)
 	if p1.placeName ~= "" then
-		coroutine.wrap(function()
-			-- upvalues: runService (copy), p1 (ref), playersService (copy), constantsModule (copy), sessionUtilityModule (copy), p2 (ref)
-			if not runService:IsStudio() then
-				playersService:ReportAbuse(nil, p1.reason, string.format("User Report: \n    %s \nPlace Title: \n    %s \nPlaceId: \n    %s \nPlace Description: \n    %s \n", p1.comment, p1.placeName, tostring(p1.placeId), p1.placeDescription))
+		coroutine.wrap(function() --[[ Line: 101 ]]
+			-- upvalues: RunService (upval), p1 (copy), Players (upval), ConstantsModule (upval), SessionUtilityModule (upval), Callback (copy)
+			if not RunService:IsStudio() then
+				Players:ReportAbuse(nil, p1.reason, (string.format("User Report: \n    %s \nPlace Title: \n    %s \nPlaceId: \n    %s \nPlace Description: \n    %s \n", p1.comment, p1.placeName, tostring(p1.placeId), p1.placeDescription)))
 			end
-			sendAnalytics(constantsModule.Analytics.ReportTypeGame, p1.placeId, p1.reason)
-			sessionUtilityModule.endAbuseReportSession()
+			sendAnalytics(ConstantsModule.Analytics.ReportTypeGame, p1.placeId, p1.reason)
+			SessionUtilityModule.endAbuseReportSession()
 			
-			if p2 then
-				p2()
+			if Callback then
+				Callback()
 			end
 		end)()
 	end

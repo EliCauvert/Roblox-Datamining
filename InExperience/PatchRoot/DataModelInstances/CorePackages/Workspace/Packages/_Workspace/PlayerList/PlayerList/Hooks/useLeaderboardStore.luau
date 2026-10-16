@@ -1,8 +1,8 @@
-﻿local parent = script.Parent.Parent
-local reactModule = require(parent.Parent.React)
-local leaderboardStoreContextModule = require(parent.Common.LeaderboardStoreContext)
+﻿local Parent = script.Parent.Parent
+local ReactModule = require(Parent.Parent.React)
+local LeaderboardStoreContextModule = require(Parent.Common.LeaderboardStoreContext)
 
-return function()
-	-- upvalues: reactModule (ref), leaderboardStoreContextModule (ref)
-	return reactModule.useContext(leaderboardStoreContextModule)
+return function() --[[ Line: 8 | Named "useLeaderboardStore" ]]
+	-- upvalues: ReactModule (copy), LeaderboardStoreContextModule (copy)
+	return (ReactModule.useContext(LeaderboardStoreContextModule))
 end

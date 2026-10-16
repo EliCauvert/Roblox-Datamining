@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.ContactsRodux.ContactsRodux)
+﻿return (require(script.Parent.Parent.Parent._Index.ContactsRodux.ContactsRodux))

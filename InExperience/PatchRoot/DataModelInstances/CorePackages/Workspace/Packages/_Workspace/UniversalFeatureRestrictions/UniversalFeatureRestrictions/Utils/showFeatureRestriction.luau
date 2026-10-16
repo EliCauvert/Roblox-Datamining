@@ -1,8 +1,8 @@
-﻿local universalFeatureRestrictions = script:FindFirstAncestor("UniversalFeatureRestrictions")
-local featureRestrictionDisplaySignalModule = require(universalFeatureRestrictions.Signals.featureRestrictionDisplaySignal)
-local _ = require(universalFeatureRestrictions.Common.AbuseVector)
+﻿local UniversalFeatureRestrictions = script:FindFirstAncestor("UniversalFeatureRestrictions")
+local FeatureRestrictionDisplaySignalModule = require(UniversalFeatureRestrictions.Signals.featureRestrictionDisplaySignal)
+local _ = require(UniversalFeatureRestrictions.Common.AbuseVector)
 
-return function(p1, p2)
-	-- upvalues: featureRestrictionDisplaySignalModule (ref)
-	featureRestrictionDisplaySignalModule:fire({ abuseVector = p1, options = p2 })
+return function(AbuseVector, Options) --[[ Line: 22 | Named "showFeatureRestriction" ]]
+	-- upvalues: FeatureRestrictionDisplaySignalModule (copy)
+	FeatureRestrictionDisplaySignalModule:fire({ abuseVector = AbuseVector, options = Options })
 end

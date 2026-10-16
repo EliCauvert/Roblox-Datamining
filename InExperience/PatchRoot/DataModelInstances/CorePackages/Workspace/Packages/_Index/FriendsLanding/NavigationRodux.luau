@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.NavigationRodux.NavigationRodux)
+﻿return (require(script.Parent.Parent.Parent._Index.NavigationRodux.NavigationRodux))

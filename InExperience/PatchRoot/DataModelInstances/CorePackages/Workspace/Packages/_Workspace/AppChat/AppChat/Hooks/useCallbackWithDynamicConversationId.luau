@@ -1,30 +1,30 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local _ = require(appChat.Models.ConversationChannels)
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local useGetConversationFromIdModule = require(appChat.Hooks.useGetConversationFromId)
-local useGetOneToOneFriendIdFromConversationIdModule = require(appChat.Hooks.useGetOneToOneFriendIdFromConversationId)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local _ = require(AppChat.Models.ConversationChannels)
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local UseGetConversationFromIdModule = require(AppChat.Hooks.useGetConversationFromId)
+local UseGetOneToOneFriendIdFromConversationIdModule = require(AppChat.Hooks.useGetOneToOneFriendIdFromConversationId)
 
-return function(p1, p2)
-	-- upvalues: useGetConversationFromIdModule (ref), useGetOneToOneFriendIdFromConversationIdModule (ref), reactModule (ref), cryoModule (ref)
-	local var1 = useGetConversationFromIdModule(p2)
-	local var2 = var1 ~= nil
-	local var3 = useGetOneToOneFriendIdFromConversationIdModule(p2)
-	local var4 = var1 and (var1.source == "friends" and var3)
-	local var5 = var1 and (var1.source ~= "friends" and p2)
+return function(Callback, p1) --[[ Line: 25 | Named "useCallbackWithDynamicConversationId" ]]
+	-- upvalues: UseGetConversationFromIdModule (copy), UseGetOneToOneFriendIdFromConversationIdModule (copy), ReactModule (copy), CryoModule (copy)
+	local UseGetConversationFromIdModuleResult = UseGetConversationFromIdModule(p1)
+	local HasUseGetConversationFromIdModuleResult = UseGetConversationFromIdModuleResult ~= nil
+	local UseGetOneToOneFriendIdFromConversationIdModuleResult = UseGetOneToOneFriendIdFromConversationIdModule(p1)
+	local UseGetOneToOneFriendIdFromConversationIdModuleResult1 = UseGetConversationFromIdModuleResult and (UseGetConversationFromIdModuleResult.source == "friends" and UseGetOneToOneFriendIdFromConversationIdModuleResult)
+	local P0 = UseGetConversationFromIdModuleResult and (UseGetConversationFromIdModuleResult.source ~= "friends" and p1)
 	
-	return reactModule.useCallback(function(p3)
-		-- upvalues: p1 (ref), cryoModule (copy), var5 (ref), p2 (ref), var4 (ref), var3 (ref)
-		return p1(cryoModule.Dictionary.union(p3 or {}, {
-			conversationId = if var5 then p2 else nil,
-			friendId = if var4 then var3 else nil
-		}))
+	return ReactModule.useCallback(function(p2) --[[ Line: 35 ]]
+		-- upvalues: Callback (copy), CryoModule (upval), P0 (copy), p1 (copy), UseGetOneToOneFriendIdFromConversationIdModuleResult1 (copy), UseGetOneToOneFriendIdFromConversationIdModuleResult (copy)
+		return Callback((CryoModule.Dictionary.union(p2 or {}, {
+			conversationId = if P0 then p1 else nil,
+			friendId = if UseGetOneToOneFriendIdFromConversationIdModuleResult1 then UseGetOneToOneFriendIdFromConversationIdModuleResult else nil
+		})))
 	end, {
+		Callback,
 		p1,
-		p2,
-		var4,
-		var5,
-		var3
-	}), var2
+		UseGetOneToOneFriendIdFromConversationIdModuleResult1,
+		P0,
+		UseGetOneToOneFriendIdFromConversationIdModuleResult
+	}), HasUseGetConversationFromIdModuleResult
 end

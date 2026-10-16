@@ -1,13 +1,13 @@
-﻿local eventIngestService = game:GetService("EventIngestService")
-local analytics = require(script.Parent.Parent.dependencies).Analytics
-local getPlatformTarget = analytics.getPlatformTarget
+﻿local EventIngestService = game:GetService("EventIngestService")
+local Analytics = require(script.Parent.Parent.dependencies).Analytics
+local GetPlatformTargetFunction = Analytics.getPlatformTarget
 
 return {
-	Diag = analytics.Analytics.new(game:GetService("RbxAnalyticsService")).Diag,
+	Diag = Analytics.Analytics.new((game:GetService("RbxAnalyticsService"))).Diag,
 	EventStream = {
-		setRBXEventStream = function(_, p1, p2, p3)
-			-- upvalues: eventIngestService (ref), getPlatformTarget (ref)
-			eventIngestService:SetRBXEventStream(getPlatformTarget(), p1, p2, p3 or {})
+		setRBXEventStream = function(_, EventContext, EventName, p1) --[[ Line: 13 ]]
+			-- upvalues: EventIngestService (copy), GetPlatformTargetFunction (copy)
+			EventIngestService:SetRBXEventStream(GetPlatformTargetFunction(), EventContext, EventName, p1 or {})
 		end
 	}
 }

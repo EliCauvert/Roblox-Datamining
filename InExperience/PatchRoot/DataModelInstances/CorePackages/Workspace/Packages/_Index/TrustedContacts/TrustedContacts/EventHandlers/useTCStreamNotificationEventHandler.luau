@@ -1,48 +1,49 @@
-﻿local parent = script:FindFirstAncestor("TrustedContacts").Parent
-local reactModule = require(parent.React)
-local appPage = require(parent.RobloxAppEnums).AppPage
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local setCurrentToastMessage = require(parent.ToastRodux).Actions.SetCurrentToastMessage
-local sources = require(parent.SocialLuaAnalytics).Analytics.Enums.Sources
-local navigateDown = require(parent.NavigationRodux).Thunks.NavigateDown
-local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
-local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
+﻿local Parent = script:FindFirstAncestor("TrustedContacts").Parent
+local ReactModule = require(Parent.React)
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local SetCurrentToastMessageFunction = require(Parent.ToastRodux).Actions.SetCurrentToastMessage
+local Sources = require(Parent.SocialLuaAnalytics).Analytics.Enums.Sources
+local NavigateDownFunction = require(Parent.NavigationRodux).Thunks.NavigateDown
+local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
+local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 
-return function()
-	-- upvalues: useDispatch (ref), useLocalization (ref), reactModule (ref), appPage (ref), sources (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), setCurrentToastMessage (ref)
-	local var2 = useDispatch()
-	local var3 = useLocalization({
+return function() --[[ Line: 22 ]]
+	-- upvalues: UseDispatchFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), AppPage (copy), Sources (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), SetCurrentToastMessageFunction (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseLocalizationResult = UseLocalizationFunction({
 		somethingIsWrongToast = "Feature.Toast.NetworkingError.SomethingIsWrong"
 	})
 	
-	return reactModule.useCallback(function(p1)
-		-- upvalues: appPage (copy), sources (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var2 (ref), navigateDown (copy), setCurrentToastMessage (copy), var3 (ref)
-		local callback = p1 and p1.callback
-		local senderUserid = p1 and (p1.clientEventsPayload and p1.clientEventsPayload.sender_userid)
+	return (ReactModule.useCallback(function(p1) --[[ Line: 30 ]]
+		-- upvalues: AppPage (upval), Sources (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval), SetCurrentToastMessageFunction (upval), UseLocalizationResult (copy)
+		local Callback = p1 and p1.callback
+		local SenderUserid = p1 and (p1.clientEventsPayload and p1.clientEventsPayload.sender_userid)
 		
-		if not senderUserid then
-			var2(setCurrentToastMessage({
+		if not SenderUserid then
+			UseDispatchResult(SetCurrentToastMessageFunction({
 				isLocalized = true,
-				toastMessage = var3.somethingIsWrongToast
+				toastMessage = UseLocalizationResult.somethingIsWrongToast
 			}))
 			
 			return
 		end
-		local t = {
-			name = appPage.TrustedContactsModal,
+		local config = {
+			name = AppPage.TrustedContactsModal,
 			props = {
-				userId = senderUserid,
-				source = sources.StreamNotification,
-				onRequestAccepted = callback
+				userId = SenderUserid,
+				source = Sources.StreamNotification,
+				onRequestAccepted = Callback
 			}
 		}
 		
-		if fFlagSignalsNavP3Dispatch then
-			var1.down(var1.fromLegacyPage(t), true)
+		if FFlagSignalsNavP3Dispatch then
+			NavigationCommands.down(NavigationCommands.fromLegacyPage(config), true)
 			
 			return
+		else
+			UseDispatchResult(NavigateDownFunction(config, true))
 		end
-		var2(navigateDown(t, true))
-	end, { var2, var3 })
+	end, { UseDispatchResult, UseLocalizationResult }))
 end

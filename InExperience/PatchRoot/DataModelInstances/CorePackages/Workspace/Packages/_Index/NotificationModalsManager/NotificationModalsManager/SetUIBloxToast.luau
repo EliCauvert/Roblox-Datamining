@@ -1,38 +1,38 @@
-﻿local parent = script.Parent.Parent
-local reactRobloxModule = require(parent.ReactRoblox)
-local reactModule = require(parent.React)
-local toast = require(parent.UIBlox).App.Dialog.Toast
-local localizationService = game:GetService("LocalizationService")
-local localization = require(parent.InExperienceLocales).Localization
-local localizationProvider = require(parent.Localization).LocalizationProvider
-local styleProviderWithDefaultTheme = require(parent.Style).StyleProviderWithDefaultTheme
-local var1 = nil
+﻿local Parent = script.Parent.Parent
+local ReactRobloxModule = require(Parent.ReactRoblox)
+local ReactModule = require(Parent.React)
+local Toast = require(Parent.UIBlox).App.Dialog.Toast
+local LocalizationService = game:GetService("LocalizationService")
+local Localization = require(Parent.InExperienceLocales).Localization
+local LocalizationProvider = require(Parent.Localization).LocalizationProvider
+local StyleProviderWithDefaultTheme = require(Parent.Style).StyleProviderWithDefaultTheme
+local Root = nil
 
-local var2 = function(p1)
-	-- upvalues: reactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), styleProviderWithDefaultTheme (ref), toast (ref)
-	return reactModule.createElement(localizationProvider, {
-		localization = localization.new(localizationService.RobloxLocaleId)
+local function v9(ToastContent) --[[ Line: 17 ]]
+	-- upvalues: ReactModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), StyleProviderWithDefaultTheme (copy), Toast (copy)
+	return ReactModule.createElement(LocalizationProvider, {
+		localization = Localization.new(LocalizationService.RobloxLocaleId)
 	}, {
-		StyleProvider = reactModule.createElement(styleProviderWithDefaultTheme, {}, {
-			ToastWrapper = reactModule.createElement("ScreenGui", {
+		StyleProvider = ReactModule.createElement(StyleProviderWithDefaultTheme, {}, {
+			ToastWrapper = ReactModule.createElement("ScreenGui", {
 				IgnoreGuiInset = true,
 				ResetOnSpawn = false,
 				DisplayOrder = 12,
 				ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 			}, {
-				Toast = reactModule.createElement(toast, { duration = 3, toastContent = p1 })
+				Toast = ReactModule.createElement(Toast, { duration = 3, toastContent = ToastContent })
 			})
 		})
 	})
 end
 
-return function(p1)
-	-- upvalues: var1 (write), reactRobloxModule (ref), reactModule (ref), var2 (ref)
-	if not var1 then
+return function(p1) --[[ Line: 37 ]]
+	-- upvalues: Root (ref), ReactRobloxModule (copy), ReactModule (copy), v9 (copy)
+	if not Root then
 		local UIBloxToast = Instance.new("Folder")
 		UIBloxToast.Name = "UIBloxToast"
 		UIBloxToast.Parent = game:GetService("CoreGui")
-		var1 = reactRobloxModule.createRoot(UIBloxToast)
+		Root = ReactRobloxModule.createRoot(UIBloxToast)
 	end
-	var1:render(reactModule.createElement(var2, p1))
+	Root:render(ReactModule.createElement(v9, p1))
 end

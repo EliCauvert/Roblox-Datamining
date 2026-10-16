@@ -1,32 +1,32 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local httpClientModule = require(parent.HttpClient)
-local _ = require(parent.MomentsTypes)
-local _ = require(dataHydration.Moments.MomentsStoreTypes)
-local constructApiUrlModule = require(dataHydration.Moments.Util.constructApiUrl)
-local isCanonicalNonzeroUuidModule = require(dataHydration.Moments.Util.isCanonicalNonzeroUuid)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local HttpClientModule = require(Parent.HttpClient)
+local _ = require(Parent.MomentsTypes)
+local _ = require(DataHydration.Moments.MomentsStoreTypes)
+local ConstructApiUrlModule = require(DataHydration.Moments.Util.constructApiUrl)
+local IsCanonicalNonzeroUuidModule = require(DataHydration.Moments.Util.isCanonicalNonzeroUuid)
 
-local function _(p1, p2)
+local function _(p1, p2): string --[[ Line: 14 | Named "reactionPath" ]]
 	return `moment-comments-api/v1/moments/{p1}/comments/{p2}/reactions`
 end
 
-return function(p1, p2, p3, p4, p5)
-	-- upvalues: isCanonicalNonzeroUuidModule (ref), constructApiUrlModule (ref), httpClientModule (ref)
-	assert(isCanonicalNonzeroUuidModule(p1), "deleteMomentCommentReaction: feedItemId must be a canonical nonzero UUID")
-	assert(isCanonicalNonzeroUuidModule(p2), "deleteMomentCommentReaction: commentId must be a canonical nonzero UUID")
-	assert(isCanonicalNonzeroUuidModule(p3), "deleteMomentCommentReaction: emoteId must be a canonical nonzero UUID")
-	local var1, var2 = constructApiUrlModule(`moment-comments-api/v1/moments/{p1}/comments/{p2}/reactions`)
+return function(p1, p2, EmoteId, Network, StatusCodeActions) --[[ Line: 18 | Named "deleteMomentCommentReaction" ]]
+	-- upvalues: IsCanonicalNonzeroUuidModule (copy), ConstructApiUrlModule (copy), HttpClientModule (copy)
+	assert(IsCanonicalNonzeroUuidModule(p1), "deleteMomentCommentReaction: feedItemId must be a canonical nonzero UUID")
+	assert(IsCanonicalNonzeroUuidModule(p2), "deleteMomentCommentReaction: commentId must be a canonical nonzero UUID")
+	assert(IsCanonicalNonzeroUuidModule(EmoteId), "deleteMomentCommentReaction: emoteId must be a canonical nonzero UUID")
+	local ConstructApiUrlModuleResult, ConstructApiUrlModuleResult2 = ConstructApiUrlModule(`moment-comments-api/v1/moments/{p1}/comments/{p2}/reactions`)
 	
-	return httpClientModule.fetch({
+	return HttpClientModule.fetch({
 		method = "DELETE",
 		analyticsKey = "moments.delete-comment-reaction",
 		retry = false,
-		url = var1,
-		headers = var2,
-		body = { reactionType = "thumbsup", emoteId = p3 },
-		network = p4,
-		statusCodeActions = p5,
-		decode = function(_)
+		url = ConstructApiUrlModuleResult,
+		headers = ConstructApiUrlModuleResult2,
+		body = { reactionType = "thumbsup", emoteId = EmoteId },
+		network = Network,
+		statusCodeActions = StatusCodeActions,
+		decode = function(_) --[[ Line: 46 ]]
 			return nil
 		end
 	})

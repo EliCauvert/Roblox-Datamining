@@ -1,63 +1,63 @@
-﻿local parent = script.Parent.Parent
-local runService = game:GetService("RunService")
-local userInputService = game:GetService("UserInputService")
-local isTenFootInterface = require(parent.Parent.AppCommonLib).isTenFootInterface
-local getFFlagDisableRobuxUpsellModule = require(parent.Flags.GetFFlagDisableRobuxUpsell)
+﻿local Parent = script.Parent.Parent
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+local IsTenFootInterfaceFunction = require(Parent.Parent.AppCommonLib).isTenFootInterface
+local GetFFlagDisableRobuxUpsellModule = require(Parent.Flags.GetFFlagDisableRobuxUpsell)
 
 return {
-	new = function()
-		-- upvalues: userInputService (ref), runService (ref), isTenFootInterface (ref), getFFlagDisableRobuxUpsellModule (ref)
+	new = function() --[[ Line: 10 ]]
+		-- upvalues: UserInputService (copy), RunService (copy), IsTenFootInterfaceFunction (copy), GetFFlagDisableRobuxUpsellModule (copy)
 		local t = {}
 		setmetatable(t, {
-			__tostring = function()
+			__tostring = function(): string --[[ Line: 14 ]]
 				return "Service(ExternalSettings)"
 			end
 		})
 		
-		function t.getPlatform()
-			-- upvalues: userInputService (copy)
-			return userInputService:GetPlatform()
+		function t.getPlatform() --[[ Line: 19 ]]
+			-- upvalues: UserInputService (upval)
+			return UserInputService:GetPlatform()
 		end
 		
-		function t.isStudio()
-			-- upvalues: runService (copy)
-			return runService:IsStudio()
+		function t.isStudio() --[[ Line: 23 ]]
+			-- upvalues: RunService (upval)
+			return RunService:IsStudio()
 		end
 		
-		function t.isThirdPartyPurchaseAllowed()
-			local var1 = true
-			pcall(function()
-				-- upvalues: var1 (write)
-				var1 = game:GetService("PermissionsService"):GetIsThirdPartyPurchaseAllowed()
+		function t.isThirdPartyPurchaseAllowed(): boolean --[[ Line: 27 ]]
+			local IsThirdPartyPurchaseAllowed = true
+			pcall(function() --[[ Line: 30 ]]
+				-- upvalues: IsThirdPartyPurchaseAllowed (ref)
+				IsThirdPartyPurchaseAllowed = game:GetService("PermissionsService"):GetIsThirdPartyPurchaseAllowed()
 			end)
 			
-			return var1
+			return IsThirdPartyPurchaseAllowed
 		end
 		
-		function t.getLuaUseThirdPartyPermissions()
+		function t.getLuaUseThirdPartyPermissions(): boolean --[[ Line: 36 ]]
 			return true
 		end
 		
-		function t.getFlagBypassThirdPartySettingForRobloxPurchase()
+		function t.getFlagBypassThirdPartySettingForRobloxPurchase(): boolean --[[ Line: 40 ]]
 			return true
 		end
 		
-		function t.getFlagRestrictSales2()
+		function t.getFlagRestrictSales2() --[[ Line: 45 ]]
 			return settings():GetFFlag("RestrictSales2")
 		end
 		
-		function t.getFlagOrder66()
+		function t.getFlagOrder66() --[[ Line: 49 ]]
 			return settings():GetFFlag("Order66")
 		end
 		
-		function t.isTenFootInterface()
-			-- upvalues: isTenFootInterface (copy)
-			return isTenFootInterface()
+		function t.isTenFootInterface() --[[ Line: 53 ]]
+			-- upvalues: IsTenFootInterfaceFunction (upval)
+			return IsTenFootInterfaceFunction()
 		end
 		
-		function t.getFFlagDisableRobuxUpsell()
-			-- upvalues: getFFlagDisableRobuxUpsellModule (copy)
-			return getFFlagDisableRobuxUpsellModule()
+		function t.getFFlagDisableRobuxUpsell() --[[ Line: 57 ]]
+			-- upvalues: GetFFlagDisableRobuxUpsellModule (upval)
+			return GetFFlagDisableRobuxUpsellModule()
 		end
 		
 		return t

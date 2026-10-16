@@ -1,20 +1,21 @@
-﻿local fFlagUFRAppealsAndModNoteFixModule = require(script.Parent.Parent.Flags.FFlagUFRAppealsAndModNoteFix)
+﻿local FFlagUFRAppealsAndModNoteFixModule = require(script.Parent.Parent.Flags.FFlagUFRAppealsAndModNoteFix)
 
-return function(a)
-	-- upvalues: fFlagUFRAppealsAndModNoteFixModule (ref)
-	local var1 = if a.beginDate and a.beginDate ~= "" then DateTime.fromIsoDate(a.beginDate) else nil
-	local var2 = if a.endDate and a.endDate ~= "" then DateTime.fromIsoDate(a.endDate) else nil
+return function(p1) --[[ Line: 33 | Named "determineAppealsState" ]]
+	-- upvalues: FFlagUFRAppealsAndModNoteFixModule (copy)
+	local _DateTime = if p1.beginDate and p1.beginDate ~= "" then DateTime.fromIsoDate(p1.beginDate) else nil
+	local _DateTime1 = if p1.endDate and p1.endDate ~= "" then DateTime.fromIsoDate(p1.endDate) else nil
 	
-	if var1 and var2 then
-		local var3 = var2.UnixTimestamp - var1.UnixTimestamp > 1800 or fFlagUFRAppealsAndModNoteFixModule and a.acknowledgeable
+	if _DateTime and _DateTime1 then
+		local IsUnixTimestampAbove = _DateTime1.UnixTimestamp - _DateTime.UnixTimestamp > 1800 or FFlagUFRAppealsAndModNoteFixModule and p1.acknowledgeable
 		
 		return {
-			isAppealable = var3 or a.onAppeal ~= nil,
-			shouldOpenAppealsPortal = var3
+			isAppealable = IsUnixTimestampAbove or p1.onAppeal ~= nil,
+			shouldOpenAppealsPortal = IsUnixTimestampAbove
+		}
+	else
+		return {
+			isAppealable = p1.onAppeal ~= nil or p1.acknowledgeable,
+			shouldOpenAppealsPortal = p1.acknowledgeable
 		}
 	end
-	return {
-		isAppealable = if a.onAppeal == nil then a.acknowledgeable else true,
-		shouldOpenAppealsPortal = a.acknowledgeable
-	}
 end

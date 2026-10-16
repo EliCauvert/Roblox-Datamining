@@ -1,87 +1,79 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local parent = avatarExperienceCatalog.Parent
-local reactModule = require(parent.React)
-local useTokens = require(parent.Foundation).Hooks.useTokens
-local avatarExperienceUIKitModule = require(parent.AvatarExperienceUIKit)
-local impressionsModule = require(parent.Impressions)
-local useImpressionsTagger = impressionsModule.useImpressionsTagger
-local screenSizeImpressionsDetector = impressionsModule.ScreenSizeImpressionsDetector
-local _ = require(parent.AppCommonLib)
-local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
-local fFlagAXCatalogItemInformationPopover = avatarExperienceFlagsModule.FFlagAXCatalogItemInformationPopover
-local fFlagAXCatalogUseFixedWidgetPadding = avatarExperienceFlagsModule.FFlagAXCatalogUseFixedWidgetPadding
-local fFlagAXSduiSeeAllClickLogging = avatarExperienceFlagsModule.FFlagAXSduiSeeAllClickLogging
-local widgetConstantsModule = require(avatarExperienceCatalog.WidgetConstants)
-local resolveWidgetListItemBottomPaddingPxModule = require(avatarExperienceCatalog.Utils.resolveWidgetListItemBottomPaddingPx)
-local widgetHeader = avatarExperienceUIKitModule.WidgetComponents.WidgetHeader
-local widgetLayout = avatarExperienceUIKitModule.WidgetComponents.WidgetLayout
-local widgetListItem = avatarExperienceUIKitModule.WidgetComponents.WidgetListItem
-local grid = avatarExperienceUIKitModule.GridComponents.Grid
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local Parent = AvatarExperienceCatalog.Parent
+local ReactModule = require(Parent.React)
+local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+local AvatarExperienceUIKitModule = require(Parent.AvatarExperienceUIKit)
+local ImpressionsModule = require(Parent.Impressions)
+local UseImpressionsTaggerFunction = ImpressionsModule.useImpressionsTagger
+local ScreenSizeImpressionsDetector = ImpressionsModule.ScreenSizeImpressionsDetector
+local _ = require(Parent.AppCommonLib)
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
+local FFlagAXCatalogItemInformationPopover = AvatarExperienceFlagsModule.FFlagAXCatalogItemInformationPopover
+local FFlagAXCatalogUseFixedWidgetPadding = AvatarExperienceFlagsModule.FFlagAXCatalogUseFixedWidgetPadding
+local FFlagAXSduiSeeAllClickLogging = AvatarExperienceFlagsModule.FFlagAXSduiSeeAllClickLogging
+local FFlagAXSduiSortLegacyBottomPadding = AvatarExperienceFlagsModule.FFlagAXSduiSortLegacyBottomPadding
+local WidgetConstantsModule = require(AvatarExperienceCatalog.WidgetConstants)
+local ResolveWidgetListItemBottomPaddingPxModule = require(AvatarExperienceCatalog.Utils.resolveWidgetListItemBottomPaddingPx)
+local WidgetHeader = AvatarExperienceUIKitModule.WidgetComponents.WidgetHeader
+local WidgetLayout = AvatarExperienceUIKitModule.WidgetComponents.WidgetLayout
+local WidgetListItem = AvatarExperienceUIKitModule.WidgetComponents.WidgetListItem
+local Grid = AvatarExperienceUIKitModule.GridComponents.Grid
 
-return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useImpressionsTagger (ref), widgetConstantsModule (ref), useTokens (ref), reactModule (ref), widgetListItem (ref), fFlagAXCatalogUseFixedWidgetPadding (ref), resolveWidgetListItemBottomPaddingPxModule (ref), widgetLayout (ref), widgetHeader (ref), fFlagAXCatalogItemInformationPopover (ref), fFlagAXSduiSeeAllClickLogging (ref), grid (ref), screenSizeImpressionsDetector (ref)
-	local var1
-	useImpressionsTagger(p1.containerRef, widgetConstantsModule.WidgetExposureMetadata.TagName, p1.widgetRow)
-	local var2 = useTokens()
+return ReactModule.forwardRef(function(p1, Ref) --[[ Line: 82 | Named "CatalogItemGroupSortView" ]]
+	-- upvalues: UseImpressionsTaggerFunction (copy), WidgetConstantsModule (copy), UseTokensFunction (copy), ReactModule (copy), WidgetListItem (copy), FFlagAXSduiSortLegacyBottomPadding (copy), FFlagAXCatalogUseFixedWidgetPadding (copy), ResolveWidgetListItemBottomPaddingPxModule (copy), WidgetLayout (copy), WidgetHeader (copy), FFlagAXCatalogItemInformationPopover (copy), FFlagAXSduiSeeAllClickLogging (copy), Grid (copy), ScreenSizeImpressionsDetector (copy)
+	UseImpressionsTaggerFunction(p1.containerRef, WidgetConstantsModule.WidgetExposureMetadata.TagName, p1.widgetRow)
+	local UseTokensResult = UseTokensFunction()
+	local HasSeeAllCallback: boolean = if p1.headerText == nil then if p1.headerDescription == nil then p1.seeAllCallback ~= nil else p1.headerDescription ~= "" or p1.seeAllCallback ~= nil else p1.headerText ~= "" or (if p1.headerDescription == nil then p1.seeAllCallback ~= nil else p1.headerDescription ~= "" or p1.seeAllCallback ~= nil)
 	
-	if p1.headerText ~= nil then
-		var1 = true
-		
-		if p1.headerText == "" then
-			if p1.headerDescription ~= nil then
-				var1 = if p1.headerDescription == "" then p1.seeAllCallback ~= nil else true
-			end
-		end
-		return reactModule.createElement(widgetListItem, {
-			ref = p2,
-			padding = {
-				bottom = UDim.new(0, if fFlagAXCatalogUseFixedWidgetPadding then var2.Size.Size_800 else resolveWidgetListItemBottomPaddingPxModule(var2))
-			},
-			horizontalMargin = p1.horizontalMargin
-		}, {
-			Widget = reactModule.createElement(widgetLayout, {
-				headerSlot = if var1 then reactModule.createElement(widgetHeader, {
-					LayoutOrder = 1,
-					titleText = p1.headerText,
-					descriptionText = p1.headerDescription,
-					informationPopoverText = if fFlagAXCatalogItemInformationPopover then p1.informationPopoverText else nil,
-					onInformationIconActivated = if fFlagAXCatalogItemInformationPopover then p1.onInformationIconActivated else nil,
-					seeAllCallback = p1.seeAllCallback,
-					seeAllRef = if fFlagAXSduiSeeAllClickLogging then p1.seeAllRef else nil
-				}) else nil,
-				contentSlot = reactModule.createElement(reactModule.Fragment, nil, {
-					["Widget_" .. p1.widgetId] = reactModule.createElement(grid, {
-						itemsPerRow = p1.itemsPerRow,
-						renderItem = function(p3)
-							-- upvalues: p1 (ref)
-							local item = p3.item
-							
-							return p1.renderTile({
-								id = item.id,
-								type = item.type,
-								gridInformation = p3.gridInformation
-							}, p3.index)
-						end,
-						getItemId = function(p3)
-							-- upvalues: p1 (ref)
-							return tostring(p3.id) .. "_" .. tostring(p1.itemsPerRow)
-						end,
-						items = p1.gridItems,
-						gapVertical = p1.itemGap,
-						gapHorizontal = p1.itemGap,
-						Size = UDim2.new(1, 0, 0, 0),
-						AutomaticSize = Enum.AutomaticSize.Y,
-						ref = p1.containerRef,
-						[reactModule.Tag] = "data-testid=CatalogItemGroupSortView"
-					}),
-					ImpressionsDetector = reactModule.createElement(screenSizeImpressionsDetector, {
-						onRequestImpressionsSignal = p1.onItemsUpdatedSignal,
-						onImpressionsDetected = p1.onImpressionsDetected,
-						filterImpressionFunc = p1.filterImpressionFunc,
-						impressionsTag = p1.impressionsKey
-					})
+	return ReactModule.createElement(WidgetListItem, {
+		ref = Ref,
+		padding = {
+			bottom = UDim.new(0, if FFlagAXSduiSortLegacyBottomPadding then UseTokensResult.Size.Size_600 elseif FFlagAXCatalogUseFixedWidgetPadding then UseTokensResult.Size.Size_800 else ResolveWidgetListItemBottomPaddingPxModule(UseTokensResult))
+		},
+		horizontalMargin = p1.horizontalMargin
+	}, {
+		Widget = ReactModule.createElement(WidgetLayout, {
+			headerSlot = if HasSeeAllCallback then ReactModule.createElement(WidgetHeader, {
+				LayoutOrder = 1,
+				titleText = p1.headerText,
+				descriptionText = p1.headerDescription,
+				informationPopoverText = if FFlagAXCatalogItemInformationPopover then p1.informationPopoverText else nil,
+				onInformationIconActivated = if FFlagAXCatalogItemInformationPopover then p1.onInformationIconActivated else nil,
+				seeAllCallback = p1.seeAllCallback,
+				seeAllRef = if FFlagAXSduiSeeAllClickLogging then p1.seeAllRef else nil
+			}) else nil,
+			contentSlot = ReactModule.createElement(ReactModule.Fragment, nil, {
+				["Widget_" .. p1.widgetId] = ReactModule.createElement(Grid, {
+					itemsPerRow = p1.itemsPerRow,
+					renderItem = function(p2) --[[ Line: 89 ]]
+						-- upvalues: p1 (copy)
+						local Item = p2.item
+						
+						return p1.renderTile({
+							id = Item.id,
+							type = Item.type,
+							gridInformation = p2.gridInformation
+						}, p2.index)
+					end,
+					getItemId = function(p2): string --[[ Line: 98 ]]
+						-- upvalues: p1 (copy)
+						return tostring(p2.id) .. "_" .. tostring(p1.itemsPerRow)
+					end,
+					items = p1.gridItems,
+					gapVertical = p1.itemGap,
+					gapHorizontal = p1.itemGap,
+					Size = UDim2.new(1, 0, 0, 0),
+					AutomaticSize = Enum.AutomaticSize.Y,
+					ref = p1.containerRef,
+					[ReactModule.Tag] = "data-testid=CatalogItemGroupSortView"
+				}),
+				ImpressionsDetector = ReactModule.createElement(ScreenSizeImpressionsDetector, {
+					onRequestImpressionsSignal = p1.onItemsUpdatedSignal,
+					onImpressionsDetected = p1.onImpressionsDetected,
+					filterImpressionFunc = p1.filterImpressionFunc,
+					impressionsTag = p1.impressionsKey
 				})
 			})
 		})
-	end
+	})
 end)

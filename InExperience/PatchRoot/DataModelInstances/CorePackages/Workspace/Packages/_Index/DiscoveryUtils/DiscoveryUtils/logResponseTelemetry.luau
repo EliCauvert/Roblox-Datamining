@@ -1,18 +1,18 @@
-﻿local default = require(script:FindFirstAncestor("DiscoveryUtils").Parent.LoggingProtocol).default
-local t = {
+﻿local Default = require(script:FindFirstAncestor("DiscoveryUtils").Parent.LoggingProtocol).default
+local config = {
 	eventName = "DiscoveryResponseSize",
 	description = "Response body size for discovery network requests",
 	links = "",
-	backends = { default.TelemetryBackends.Stats },
+	backends = { Default.TelemetryBackends.Stats },
 	throttlingPercentage = game:DefineFastInt("DiscoveryResponseSizeEventHundredthsPercent", 0),
 	lastUpdated = { 24, 8, 2 }
 }
 
-return function(value, p1, p2)
-	-- upvalues: default (ref), t (ref)
-	if p2 == nil then
-		p2 = default
+return function(Endpoint_name, p1, Default1) --[[ Line: 23 | Named "logResponseTelemetry" ]]
+	-- upvalues: Default (copy), config (copy)
+	if Default1 == nil then
+		Default1 = Default
 	end
-	assert(p2, "LoggingProtocol must exist")
-	p2:logRobloxTelemetryStat(t, p1.responseSize, { endpoint_name = value })
+	assert(Default1, "LoggingProtocol must exist")
+	Default1:logRobloxTelemetryStat(config, p1.responseSize, { endpoint_name = Endpoint_name })
 end

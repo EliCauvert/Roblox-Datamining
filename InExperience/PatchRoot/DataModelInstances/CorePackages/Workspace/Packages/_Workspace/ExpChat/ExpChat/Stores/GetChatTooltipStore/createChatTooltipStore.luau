@@ -1,222 +1,228 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local displayModule = require(parent.Display)
-local signalsModule = require(parent.Signals)
-local createSignal = signalsModule.createSignal
-local createComputed = signalsModule.createComputed
-local createEffect = signalsModule.createEffect
-local isUserChatEnabledModule = require(expChat.isUserChatEnabled)
-local getChatStatusStoreModule = require(script.Parent.Parent.GetChatStatusStore)
-local getPresetChatStoreModule = require(script.Parent.Parent.GetPresetChatStore)
-local promptsApiModule = require(script.Parent.promptsApi)
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local DisplayModule = require(Parent.Display)
+local SignalsModule = require(Parent.Signals)
+local CreateSignalFunction = SignalsModule.createSignal
+local CreateComputedFunction = SignalsModule.createComputed
+local CreateEffectFunction = SignalsModule.createEffect
+local IsUserChatEnabledModule = require(ExpChat.isUserChatEnabled)
+local GetChatStatusStoreModule = require(script.Parent.Parent.GetChatStatusStore)
+local GetPresetChatStoreModule = require(script.Parent.Parent.GetPresetChatStore)
+local PromptsApiModule = require(script.Parent.promptsApi)
 local list = { "GlobalChatTooltip", "PresetChatTooltip" }
-local t = {
+local config = {
 	isEligible = false,
 	isDismissed = false,
 	shouldShow = false
 }
 
-return function()
-	-- upvalues: createSignal (ref), createComputed (ref), displayModule (ref), getChatStatusStoreModule (ref), getPresetChatStoreModule (ref), isUserChatEnabledModule (ref), t (ref), list (ref), createEffect (ref), promptsApiModule (ref)
-	local var1, var2 = createSignal(false)
-	local var3, var4 = createSignal(false)
-	local var5, var6 = createSignal(false)
-	local var7 = createComputed(function(p1)
-		-- upvalues: displayModule (copy)
-		return displayModule.GetDisplayStore(p1).getViewportSize(p1).X >= 720
+return function() --[[ Line: 90 ]]
+	-- upvalues: CreateSignalFunction (copy), CreateComputedFunction (copy), DisplayModule (copy), GetChatStatusStoreModule (copy), GetPresetChatStoreModule (copy), IsUserChatEnabledModule (copy), config (copy), list (copy), CreateEffectFunction (copy), PromptsApiModule (copy)
+	local Signal, Signal2 = CreateSignalFunction(false)
+	local Signal1, Signal2_1 = CreateSignalFunction(false)
+	local Signal3, Signal2_2 = CreateSignalFunction(false)
+	local Computed = CreateComputedFunction(function(p1): boolean --[[ Line: 95 ]]
+		-- upvalues: DisplayModule (upval)
+		return DisplayModule.GetDisplayStore(p1).getViewportSize(p1).X >= 720
 	end)
-	local var8 = getChatStatusStoreModule(false)
-	local var9 = getPresetChatStoreModule(false)
-	local t_1 = {
-		GlobalChatTooltip = function(p1)
-			-- upvalues: isUserChatEnabledModule (copy), var8 (ref), var5 (ref)
-			return isUserChatEnabledModule(var8.getChatStatus(p1)) and var5(p1)
+	local ChatStatusStoreModule = GetChatStatusStoreModule(false)
+	local PresetChatStoreModule = GetPresetChatStoreModule(false)
+	local config1 = {
+		GlobalChatTooltip = function(p1) --[[ Line: 110 ]]
+			-- upvalues: IsUserChatEnabledModule (upval), ChatStatusStoreModule (copy), Signal3 (copy)
+			return IsUserChatEnabledModule(ChatStatusStoreModule.getChatStatus(p1)) and Signal3(p1)
 		end,
-		PresetChatTooltip = function(value)
-			-- upvalues: var9 (ref)
-			return var9.getIsEnabled(value) and var9.getAccessLevel(value) == "Enabled"
+		PresetChatTooltip = function(p1): boolean --[[ Line: 113 ]]
+			-- upvalues: PresetChatStoreModule (copy)
+			return PresetChatStoreModule.getIsEnabled(p1) and PresetChatStoreModule.getAccessLevel(p1) == "Enabled"
 		end
 	}
-	local t_2 = {}
+	local t = {}
 	
-	local function ensureTooltip(p1)
-		-- upvalues: t_2 (ref), createSignal (copy), t (copy), createComputed (copy)
-		local var10 = t_2[p1]
+	local function ensureTooltip(Key) --[[ Line: 123 ]]
+		-- upvalues: t (copy), CreateSignalFunction (upval), config (upval), CreateComputedFunction (upval)
+		local Entry = t[Key]
 		
-		if var10 then
-			return var10
-		end
-		local var11, var12 = createSignal(t)
-		local t_1 = {
-			getEntry = var11,
-			setEntry = var12,
-			getIsEligible = createComputed(function(p2)
-				-- upvalues: var11 (ref)
-				return var11(p2).isEligible
-			end),
-			getIsDismissed = createComputed(function(p2)
-				-- upvalues: var11 (ref)
-				return var11(p2).isDismissed
-			end),
-			getShouldShow = createComputed(function(p2)
-				-- upvalues: var11 (ref)
-				return var11(p2).shouldShow
-			end)
-		}
-		t_2[p1] = t_1
-		
-		return t_1
-	end
-	
-	for i, v in list do
-		ensureTooltip(v)
-	end
-	local function _(value, p1, p2)
-		-- upvalues: ensureTooltip (ref)
-		ensureTooltip(value).setEntry(function(p3)
-			-- upvalues: p1 (ref), p2 (ref)
-			if p3[p1] == p2 then
-				return p3
-			end
-			local cloned = table.clone(p3)
-			cloned[p1] = p2
+		if Entry then
+			return Entry
+		else
+			local Signal, Signal2 = CreateSignalFunction(config)
+			local config1 = {
+				getEntry = Signal,
+				setEntry = Signal2,
+				getIsEligible = CreateComputedFunction(function(p1) --[[ Line: 134 ]]
+					-- upvalues: Signal (copy)
+					return Signal(p1).isEligible
+				end),
+				getIsDismissed = CreateComputedFunction(function(p1) --[[ Line: 137 ]]
+					-- upvalues: Signal (copy)
+					return Signal(p1).isDismissed
+				end),
+				getShouldShow = CreateComputedFunction(function(p1) --[[ Line: 140 ]]
+					-- upvalues: Signal (copy)
+					return Signal(p1).shouldShow
+				end)
+			}
+			t[Key] = config1
 			
-			return cloned
+			return config1
+		end
+	end
+	
+	for _, value in list do
+		ensureTooltip(value)
+	end
+	local function _(p1, p2, p3) --[[ Line: 156 | Named "setField" ]]
+		-- upvalues: ensureTooltip (copy)
+		ensureTooltip(p1).setEntry(function(Tbl) --[[ Line: 158 ]]
+			-- upvalues: p2 (copy), p3 (copy)
+			if Tbl[p2] == p3 then
+				return Tbl
+			else
+				local Copy = table.clone(Tbl)
+				Copy[p2] = p3
+				
+				return Copy
+			end
 		end)
 	end
 	
-	local _ = function(p1, p2)
-		-- upvalues: t_1 (ref), t_2 (ref)
-		local var10 = t_1[p2]
+	local _ = function(p1, p2): boolean --[[ Line: 170 | Named "isTooltipValid" ]]
+		-- upvalues: config1 (copy), t (copy)
+		local Entry = config1[p2]
 		
-		if var10 ~= nil and not var10(p1) then
+		if Entry ~= nil and not Entry(p1) then
 			return false
 		end
-		local var11 = t_2[p2]
+		local Entry1 = t[p2]
 		
-		if var11 == nil then
+		if Entry1 == nil then
 			return false
+		else
+			local Entry11 = Entry1.getEntry(p1)
+			
+			return Entry11.isEligible and not Entry11.isDismissed
 		end
-		local entry = var11.getEntry(p1)
-		
-		return entry.isEligible and not entry.isDismissed
 	end
 	
-	local var10, var11 = createSignal(nil)
+	local Signal4, Signal2_3 = CreateSignalFunction(nil)
 	
 	return {
-		getIsChatWindowOpen = var1,
-		setIsChatWindowOpen = var2,
-		getIsChatInputBarVisible = var3,
-		setIsChatInputBarVisible = var4,
-		getIsScreenWideEnough = var7,
-		setIsGlobalChatAvailable = var6,
-		getActiveTooltipKey = var10,
-		getIsEligible = function(p1)
-			-- upvalues: ensureTooltip (ref)
+		getIsChatWindowOpen = Signal,
+		setIsChatWindowOpen = Signal2,
+		getIsChatInputBarVisible = Signal1,
+		setIsChatInputBarVisible = Signal2_1,
+		getIsScreenWideEnough = Computed,
+		setIsGlobalChatAvailable = Signal2_2,
+		getActiveTooltipKey = Signal4,
+		getIsEligible = function(p1) --[[ Line: 229 ]]
+			-- upvalues: ensureTooltip (copy)
 			return ensureTooltip(p1).getIsEligible
 		end,
-		setIsEligible = function(value, p1)
-			-- upvalues: ensureTooltip (ref)
-			local var12 = "isEligible"
-			ensureTooltip(value).setEntry(function(p2)
-				-- upvalues: var12 (ref), p1 (ref)
-				if p2[var12] == p1 then
-					return p2
+		setIsEligible = function(p1, p2) --[[ Line: 232 ]]
+			-- upvalues: ensureTooltip (copy)
+			local v1 = "isEligible"
+			ensureTooltip(p1).setEntry(function(Tbl) --[[ Line: 158 ]]
+				-- upvalues: v1 (copy), p2 (copy)
+				if Tbl[v1] == p2 then
+					return Tbl
+				else
+					local Copy = table.clone(Tbl)
+					Copy[v1] = p2
+					
+					return Copy
 				end
-				local cloned = table.clone(p2)
-				cloned[var12] = p1
-				
-				return cloned
 			end)
 		end,
-		getIsDismissed = function(p1)
-			-- upvalues: ensureTooltip (ref)
+		getIsDismissed = function(p1) --[[ Line: 235 ]]
+			-- upvalues: ensureTooltip (copy)
 			return ensureTooltip(p1).getIsDismissed
 		end,
-		setIsDismissed = function(value, p1)
-			-- upvalues: ensureTooltip (ref)
-			local var12 = "isDismissed"
-			ensureTooltip(value).setEntry(function(p2)
-				-- upvalues: var12 (ref), p1 (ref)
-				if p2[var12] == p1 then
-					return p2
+		setIsDismissed = function(p1, p2) --[[ Line: 238 ]]
+			-- upvalues: ensureTooltip (copy)
+			local v1 = "isDismissed"
+			ensureTooltip(p1).setEntry(function(Tbl) --[[ Line: 158 ]]
+				-- upvalues: v1 (copy), p2 (copy)
+				if Tbl[v1] == p2 then
+					return Tbl
+				else
+					local Copy = table.clone(Tbl)
+					Copy[v1] = p2
+					
+					return Copy
 				end
-				local cloned = table.clone(p2)
-				cloned[var12] = p1
-				
-				return cloned
 			end)
 		end,
-		getShouldShow = function(p1)
-			-- upvalues: ensureTooltip (ref)
+		getShouldShow = function(p1) --[[ Line: 241 ]]
+			-- upvalues: ensureTooltip (copy)
 			return ensureTooltip(p1).getShouldShow
 		end,
-		setShouldShow = function(value, p1)
-			-- upvalues: ensureTooltip (ref)
-			local var12 = "shouldShow"
-			ensureTooltip(value).setEntry(function(p2)
-				-- upvalues: var12 (ref), p1 (ref)
-				if p2[var12] == p1 then
-					return p2
+		setShouldShow = function(p1, p2) --[[ Line: 244 ]]
+			-- upvalues: ensureTooltip (copy)
+			local v1 = "shouldShow"
+			ensureTooltip(p1).setEntry(function(Tbl) --[[ Line: 158 ]]
+				-- upvalues: v1 (copy), p2 (copy)
+				if Tbl[v1] == p2 then
+					return Tbl
+				else
+					local Copy = table.clone(Tbl)
+					Copy[v1] = p2
+					
+					return Copy
 				end
-				local cloned = table.clone(p2)
-				cloned[var12] = p1
-				
-				return cloned
 			end)
 		end,
-		reportImpression = function(p1)
-			-- upvalues: promptsApiModule (copy)
-			promptsApiModule.reportImpression(p1)
+		reportImpression = function(p1) --[[ Line: 247 ]]
+			-- upvalues: PromptsApiModule (upval)
+			PromptsApiModule.reportImpression(p1)
 		end,
-		activeTooltipKeyEffect = createEffect(function(p1)
-			-- upvalues: var10 (ref), t_1 (ref), t_2 (ref), list (copy), var11 (ref)
-			local var12 = var10(false)
+		activeTooltipKeyEffect = CreateEffectFunction(function(p1) --[[ Line: 197 ]]
+			-- upvalues: Signal4 (copy), config1 (copy), t (copy), list (upval), Signal2_3 (copy)
+			local SignalResult = Signal4(false)
 			
-			if var12 ~= nil then
-				local var13
-				local var14 = t_1[var12]
+			if SignalResult ~= nil then
+				local Entry = config1[SignalResult]
+				local NoIsDismissed = nil
 				
-				if var14 == nil or var14(p1) then
-					local var15 = t_2[var12]
+				if Entry == nil or Entry(p1) then
+					local Entry1 = t[SignalResult]
 					
-					if var15 == nil then
-						var13 = false
+					if Entry1 == nil then
+						NoIsDismissed = false
 					else
-						local entry = var15.getEntry(p1)
-						var13 = entry.isEligible and not entry.isDismissed
+						local Entry11 = Entry1.getEntry(p1)
+						NoIsDismissed = Entry11.isEligible and not Entry11.isDismissed
 					end
 				else
-					var13 = false
+					NoIsDismissed = false
 				end
-				if var13 then return end
+				if NoIsDismissed then return end
 			end
-			for i, v in list do
-				local var16
-				local var17 = t_1[v]
+			for _, value in list do
+				local Entry = config1[value]
+				local NoIsDismissed = nil
 				
-				if var17 == nil or var17(p1) then
-					local var18 = t_2[v]
+				if Entry == nil or Entry(p1) then
+					local Entry2 = t[value]
 					
-					if var18 == nil then
-						var16 = false
+					if Entry2 == nil then
+						NoIsDismissed = false
 					else
-						local entry = var18.getEntry(p1)
-						var16 = entry.isEligible and not entry.isDismissed
+						local Entry21 = Entry2.getEntry(p1)
+						NoIsDismissed = Entry21.isEligible and not Entry21.isDismissed
 					end
 				else
-					var16 = false
+					NoIsDismissed = false
 				end
-				if var16 then
-					if var12 ~= v then
-						var11(v)
+				if NoIsDismissed then
+					if SignalResult ~= value then
+						Signal2_3(value)
 					end
 					return
 				end
 			end
-			if var12 ~= nil then
-				var11(nil)
+			if SignalResult ~= nil then
+				Signal2_3(nil)
 			end
 		end)
 	}

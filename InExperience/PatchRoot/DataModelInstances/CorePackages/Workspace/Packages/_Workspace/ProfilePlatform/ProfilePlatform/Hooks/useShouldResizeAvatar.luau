@@ -1,14 +1,23 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local enumsModule = require(profilePlatform.Common.Enums)
-local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfileWrapperContext)
-local useProfileFormFactorModule = require(profilePlatform.Hooks.useProfileFormFactor)
-local fFlagProfilePlatformMeTabMobileProfileHero = require(parent.SharedFlags).FFlagProfilePlatformMeTabMobileProfileHero
-local fFlagAXEnableProfileTab = require(parent.SharedFlags).FFlagAXEnableProfileTab
-local fFlagProfilePlatformEnableAvatarBackground = require(parent.SharedFlags).FFlagProfilePlatformEnableAvatarBackground
-local profilePlatformMeTabHeroDecoupleAvatarBackground = game:DefineFastFlag("ProfilePlatformMeTabHeroDecoupleAvatarBackground", false)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local UseProfileWrapperContextModule = require(ProfilePlatform.Contexts.useProfileWrapperContext)
+local UseProfileFormFactorModule = require(ProfilePlatform.Hooks.useProfileFormFactor)
+local FFlagProfilePlatformMeTabMobileProfileHero = require(Parent.SharedFlags).FFlagProfilePlatformMeTabMobileProfileHero
+local FFlagAXEnableProfileTab = require(Parent.SharedFlags).FFlagAXEnableProfileTab
+local FFlagProfilePlatformEnableAvatarBackground = require(Parent.SharedFlags).FFlagProfilePlatformEnableAvatarBackground
+local ProfilePlatformMeTabHeroDecoupleAvatarBackground = game:DefineFastFlag("ProfilePlatformMeTabHeroDecoupleAvatarBackground", false)
 
-return function()
-	-- upvalues: fFlagProfilePlatformMeTabMobileProfileHero (ref), fFlagAXEnableProfileTab (ref), profilePlatformMeTabHeroDecoupleAvatarBackground (ref), fFlagProfilePlatformEnableAvatarBackground (ref), useProfileWrapperContextModule (ref), useProfileFormFactorModule (ref), enumsModule (ref)
-	return if fFlagProfilePlatformMeTabMobileProfileHero then if fFlagAXEnableProfileTab and (profilePlatformMeTabHeroDecoupleAvatarBackground or fFlagProfilePlatformEnableAvatarBackground) then useProfileWrapperContextModule().forceFullView == true and not (useProfileFormFactorModule().formFactor == enumsModule.ProfileFormFactor.Wide) else false else false
+return function(): boolean --[[ Line: 16 | Named "useShouldResizeAvatar" ]]
+	-- upvalues: FFlagProfilePlatformMeTabMobileProfileHero (copy), FFlagAXEnableProfileTab (copy), ProfilePlatformMeTabHeroDecoupleAvatarBackground (copy), FFlagProfilePlatformEnableAvatarBackground (copy), UseProfileWrapperContextModule (copy), UseProfileFormFactorModule (copy), EnumsModule (copy)
+	if not FFlagProfilePlatformMeTabMobileProfileHero then
+		return false
+	elseif FFlagAXEnableProfileTab and (ProfilePlatformMeTabHeroDecoupleAvatarBackground or FFlagProfilePlatformEnableAvatarBackground) then
+		local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
+		local IsFormFactorMatch = UseProfileFormFactorModule().formFactor == EnumsModule.ProfileFormFactor.Wide
+		
+		return UseProfileWrapperContextModuleResult.forceFullView == true and not IsFormFactorMatch
+	else
+		return false
+	end
 end

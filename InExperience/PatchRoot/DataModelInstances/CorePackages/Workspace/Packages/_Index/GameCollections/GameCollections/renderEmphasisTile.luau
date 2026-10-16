@@ -1,12 +1,12 @@
-﻿local parent = script:FindFirstAncestor("GameCollections").Parent
-local gameCollectionItemTypes = require(parent.DiscoveryTypes).GameCollectionItemTypes
-local fFlagLuaAppEmphasisGameTileVideo = require(parent.SharedFlags).FFlagLuaAppEmphasisGameTileVideo
-local reactModule = require(parent.React)
-local emphasisGameTile = require(parent.GameTile).EmphasisGameTile
-local _ = require(parent.VideoUtils)
-local var1 = reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), emphasisGameTile (ref), fFlagLuaAppEmphasisGameTileVideo (ref)
-	return reactModule.createElement(emphasisGameTile, {
+﻿local Parent = script:FindFirstAncestor("GameCollections").Parent
+local GameCollectionItemTypes = require(Parent.DiscoveryTypes).GameCollectionItemTypes
+local FFlagLuaAppEmphasisGameTileVideo = require(Parent.SharedFlags).FFlagLuaAppEmphasisGameTileVideo
+local ReactModule = require(Parent.React)
+local EmphasisGameTile = require(Parent.GameTile).EmphasisGameTile
+local _ = require(Parent.VideoUtils)
+local MemoResult = ReactModule.memo(function(p1) --[[ Line: 48 ]]
+	-- upvalues: ReactModule (copy), EmphasisGameTile (copy), FFlagLuaAppEmphasisGameTileVideo (copy)
+	return ReactModule.createElement(EmphasisGameTile, {
 		size = p1.item.sizeOverride,
 		index = p1.index,
 		layoutOrder = p1.index,
@@ -33,12 +33,12 @@ local var1 = reactModule.memo(function(p1)
 		showDescription = p1.item.showDescription,
 		zIndex = p1.zIndex,
 		videoPlaybackContext = p1.videoPlaybackContext,
-		appPage = if fFlagLuaAppEmphasisGameTileVideo then p1.appPage else nil,
-		videoAnalytics = if fFlagLuaAppEmphasisGameTileVideo then p1.videoAnalytics else nil
+		appPage = if FFlagLuaAppEmphasisGameTileVideo then p1.appPage else nil,
+		videoAnalytics = if FFlagLuaAppEmphasisGameTileVideo then p1.videoAnalytics else nil
 	})
 end)
 
-return function(p1)
-	-- upvalues: reactModule (ref), var1 (ref), gameCollectionItemTypes (ref)
-	return reactModule.createElement(var1, p1), gameCollectionItemTypes.GameCollectionItemType.EmphasisTile
+return function(p1) --[[ Line: 82 ]]
+	-- upvalues: ReactModule (copy), MemoResult (copy), GameCollectionItemTypes (copy)
+	return ReactModule.createElement(MemoResult, p1), GameCollectionItemTypes.GameCollectionItemType.EmphasisTile
 end

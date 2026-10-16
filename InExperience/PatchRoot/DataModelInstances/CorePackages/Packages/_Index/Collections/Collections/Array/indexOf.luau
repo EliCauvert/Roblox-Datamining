@@ -1,17 +1,16 @@
 ﻿local _ = require(script.Parent.Parent.Parent.ES7Types)
 
-return function(p1, p2, p3)
-	p3 = p3 or 1
-	local p0Count = #p1
+return function(p1, p2, p3): number --[[ Line: 27 ]]
+	local Value = p3 or 1
+	local CountP0 = #p1
 	
-	if p3 < 1 then
-		p3 = math.max(p0Count - math.abs(p3), 1)
+	if Value < 1 then
+		Value = math.max(CountP0 - math.abs(Value), 1)
 	end
-	for i = p3, p0Count do
-		if p1[i] ~= p2 then
-			continue
+	for i = Value, CountP0 do
+		if p1[i] == p2 then
+			return i
 		end
-		return i
 	end
 	return -1
 end

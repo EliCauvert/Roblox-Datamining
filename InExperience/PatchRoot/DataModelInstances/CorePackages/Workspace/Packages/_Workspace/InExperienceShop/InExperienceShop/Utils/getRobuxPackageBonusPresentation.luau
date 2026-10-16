@@ -1,18 +1,19 @@
-﻿local inExperienceShop = script:FindFirstAncestor("InExperienceShop")
-local _ = require(inExperienceShop.Types)
-local _ = require(inExperienceShop.Api.promoteBonusRobuxPackageToTopPicks)
-local bonusPromotionEligibilityModule = require(inExperienceShop.Api.BonusPromotionEligibility)
+﻿local InExperienceShop = script:FindFirstAncestor("InExperienceShop")
+local _ = require(InExperienceShop.Types)
+local _ = require(InExperienceShop.Api.promoteBonusRobuxPackageToTopPicks)
+local BonusPromotionEligibilityModule = require(InExperienceShop.Api.BonusPromotionEligibility)
 
-return function(p1, p2, p3)
-	-- upvalues: bonusPromotionEligibilityModule (ref)
-	local bonusItemDetails = p1.bonusItemDetails
+return function(p1, Enabled, Ineligible) --[[ Line: 19 | Named "getRobuxPackageBonusPresentation" ]]
+	-- upvalues: BonusPromotionEligibilityModule (copy)
+	local BonusItemDetails = p1.bonusItemDetails
 	
-	if bonusItemDetails == nil then
+	if BonusItemDetails == nil then
 		return { hasBonusItem = false, bonusItemThumbnail = nil }
-	elseif p2 == true or p3 == bonusPromotionEligibilityModule.Ineligible then
+	elseif Enabled == true or Ineligible == BonusPromotionEligibilityModule.Ineligible then
 		return { hasBonusItem = false, bonusItemThumbnail = nil }
+	else
+		local Thumbnail = BonusItemDetails.thumbnail
+		
+		return if Thumbnail == nil then { hasBonusItem = false, bonusItemThumbnail = nil } else { hasBonusItem = true, bonusItemThumbnail = Thumbnail }
 	end
-	local thumbnail = bonusItemDetails.thumbnail
-	
-	return if thumbnail == nil then { hasBonusItem = false, bonusItemThumbnail = nil } else { hasBonusItem = true, bonusItemThumbnail = thumbnail }
 end

@@ -1,9 +1,9 @@
-﻿local corePackagesService = game:GetService("CorePackages")
+﻿local CorePackages = game:GetService("CorePackages")
 
-if require(corePackagesService.Workspace.Packages.SharedFlags).FFlagPlatformLeaderboardRccEnabled then
-	local platformLeaderboardsRccModule = require(corePackagesService.Workspace.Packages.PlatformLeaderboardsRcc)
-	local var1 = assert(platformLeaderboardsRccModule.PlatformLeaderboardFetcher)
-	assert(platformLeaderboardsRccModule.PlatformLeaderboardController).new(assert(platformLeaderboardsRccModule.PlatformLeaderboardConfigService).new(var1), var1):initialize()
+if require(CorePackages.Workspace.Packages.SharedFlags).FFlagPlatformLeaderboardRccEnabled then
+	local PlatformLeaderboardsRccModule = require(CorePackages.Workspace.Packages.PlatformLeaderboardsRcc)
+	local v1 = assert(PlatformLeaderboardsRccModule.PlatformLeaderboardFetcher)
+	assert(PlatformLeaderboardsRccModule.PlatformLeaderboardController).new(assert(PlatformLeaderboardsRccModule.PlatformLeaderboardConfigService).new(v1), v1):initialize()
 	
 	return
 end

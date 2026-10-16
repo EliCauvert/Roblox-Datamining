@@ -1,43 +1,43 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local localizationService = game:GetService("LocalizationService")
-local parent = script:FindFirstAncestor("InExperienceOverlay").Parent
-local coreGuiCommonModule = require(parent.CoreGuiCommon)
-local foundationModule = require(parent.Foundation)
-local localization = require(parent.InExperienceLocales).Localization
-local localizationModule = require(parent.Localization)
-local reactModule = require(parent.React)
-local reactRobloxModule = require(parent.ReactRoblox)
-local songbirdModule = require(parent.Songbird)
-local components = coreGuiCommonModule.Components
-local view = foundationModule.View
-local fFlagEnableUISelector = coreGuiCommonModule.Flags.FFlagEnableUISelector
+﻿local CoreGui = game:GetService("CoreGui")
+local LocalizationService = game:GetService("LocalizationService")
+local Parent = script:FindFirstAncestor("InExperienceOverlay").Parent
+local CoreGuiCommonModule = require(Parent.CoreGuiCommon)
+local FoundationModule = require(Parent.Foundation)
+local Localization = require(Parent.InExperienceLocales).Localization
+local LocalizationModule = require(Parent.Localization)
+local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.ReactRoblox)
+local SongbirdModule = require(Parent.Songbird)
+local Components = CoreGuiCommonModule.Components
+local View = FoundationModule.View
+local FFlagEnableUISelector = CoreGuiCommonModule.Flags.FFlagEnableUISelector
 
-return function()
-	-- upvalues: coreGuiService (ref), reactModule (ref), foundationModule (ref), localizationModule (ref), localization (ref), localizationService (ref), view (ref), components (ref), fFlagEnableUISelector (ref), songbirdModule (ref), reactRobloxModule (ref)
-	local inExperienceOverlay = Instance.new("ScreenGui")
-	inExperienceOverlay.Name = "InExperienceOverlay"
-	inExperienceOverlay.DisplayOrder = 6
-	inExperienceOverlay.IgnoreGuiInset = true
-	inExperienceOverlay.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-	inExperienceOverlay.ClipToDeviceSafeArea = false
-	inExperienceOverlay.ScreenInsets = Enum.ScreenInsets.None
-	inExperienceOverlay.SafeAreaCompatibility = Enum.SafeAreaCompatibility.None
-	inExperienceOverlay.Parent = coreGuiService
-	local var1 = reactRobloxModule.createRoot(inExperienceOverlay)
-	var1:render(reactModule.createElement(foundationModule.FoundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, {
-		LocalizationProvider = reactModule.createElement(localizationModule.LocalizationProvider, {
-			localization = localization.new(localizationService.RobloxLocaleId)
+return function() --[[ Line: 24 | Named "renderInExperienceOverlay" ]]
+	-- upvalues: CoreGui (copy), ReactModule (copy), FoundationModule (copy), LocalizationModule (copy), Localization (copy), LocalizationService (copy), View (copy), Components (copy), FFlagEnableUISelector (copy), SongbirdModule (copy), ReactRobloxModule (copy)
+	local InExperienceOverlay = Instance.new("ScreenGui")
+	InExperienceOverlay.Name = "InExperienceOverlay"
+	InExperienceOverlay.DisplayOrder = 6
+	InExperienceOverlay.IgnoreGuiInset = true
+	InExperienceOverlay.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+	InExperienceOverlay.ClipToDeviceSafeArea = false
+	InExperienceOverlay.ScreenInsets = Enum.ScreenInsets.None
+	InExperienceOverlay.SafeAreaCompatibility = Enum.SafeAreaCompatibility.None
+	InExperienceOverlay.Parent = CoreGui
+	local Root = ReactRobloxModule.createRoot(InExperienceOverlay)
+	Root:render((ReactModule.createElement(FoundationModule.FoundationProvider, { colorMode = FoundationModule.Enums.ColorMode.Dark }, {
+		LocalizationProvider = ReactModule.createElement(LocalizationModule.LocalizationProvider, {
+			localization = Localization.new(LocalizationService.RobloxLocaleId)
 		}, {
-			Popups = reactModule.createElement(view, { tag = "size-full" }, {
-				HeadsetDisconnectDialog = reactModule.createElement(components.HeadsetDisconnectDialog),
-				HurtOverlay = reactModule.createElement(components.HurtOverlay),
-				InExperienceUiSelector = if fFlagEnableUISelector then reactModule.createElement(components.InExperienceUiSelector) else nil
+			Popups = ReactModule.createElement(View, { tag = "size-full" }, {
+				HeadsetDisconnectDialog = ReactModule.createElement(Components.HeadsetDisconnectDialog),
+				HurtOverlay = ReactModule.createElement(Components.HurtOverlay),
+				InExperienceUiSelector = if FFlagEnableUISelector then ReactModule.createElement(Components.InExperienceUiSelector) else nil
 			}),
-			Binders = reactModule.createElement(reactModule.Fragment, {}, {
-				SongbirdDebugAudio = reactModule.createElement(songbirdModule.DebugAudioEmitters)
+			Binders = ReactModule.createElement(ReactModule.Fragment, {}, {
+				SongbirdDebugAudio = ReactModule.createElement(SongbirdModule.DebugAudioEmitters)
 			})
 		})
-	}))
+	})))
 	
-	return var1
+	return Root
 end

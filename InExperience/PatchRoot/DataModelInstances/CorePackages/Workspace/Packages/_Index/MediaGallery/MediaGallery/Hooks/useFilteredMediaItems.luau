@@ -1,66 +1,67 @@
-﻿local mediaGallery = script:FindFirstAncestor("MediaGallery")
-local parent = mediaGallery.Parent
-local reactModule = require(parent.React)
-local videoUtilsModule = require(parent.VideoUtils)
-local useCanDevicePlayVideoPreview = videoUtilsModule.useCanDevicePlayVideoPreview
-local edpVideoBlockingConfig = videoUtilsModule.EdpVideoBlockingConfig
-local useIsVideoEligible = require(parent.GameTile).useIsVideoEligible
-local useAppPolicy = require(parent.UniversalAppPolicy).useAppPolicy
-local loggingProtocolModule = require(parent.LoggingProtocol)
-local reportWarning = require(parent.DiscoveryAnalytics).Points.reportWarning
-local isYouTubeVideoModule = require(mediaGallery.isYouTubeVideo)
-local isValidIdentifierModule = require(mediaGallery.isValidIdentifier)
-local _ = require(mediaGallery.MediaGalleryTypes)
+﻿local MediaGallery = script:FindFirstAncestor("MediaGallery")
+local Parent = MediaGallery.Parent
+local ReactModule = require(Parent.React)
+local VideoUtilsModule = require(Parent.VideoUtils)
+local UseCanDevicePlayVideoPreviewFunction = VideoUtilsModule.useCanDevicePlayVideoPreview
+local EdpVideoBlockingConfig = VideoUtilsModule.EdpVideoBlockingConfig
+local UseIsVideoEligibleFunction = require(Parent.GameTile).useIsVideoEligible
+local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
+local LoggingProtocolModule = require(Parent.LoggingProtocol)
+local ReportWarningFunction = require(Parent.DiscoveryAnalytics).Points.reportWarning
+local IsYouTubeVideoModule = require(MediaGallery.isYouTubeVideo)
+local IsValidIdentifierModule = require(MediaGallery.isValidIdentifier)
+local _ = require(MediaGallery.MediaGalleryTypes)
 
-return function(p1, p2, p3)
-	-- upvalues: useAppPolicy (ref), useIsVideoEligible (ref), isValidIdentifierModule (ref), useCanDevicePlayVideoPreview (ref), edpVideoBlockingConfig (ref), reactModule (ref), isYouTubeVideoModule (ref), reportWarning (ref), loggingProtocolModule (ref)
-	local var1 = useAppPolicy(function(p4)
-		return p4.getShowVideoThumbnails()
+return function(p1, p2, AppPage) --[[ Line: 39 | Named "useFilteredMediaItems" ]]
+	-- upvalues: UseAppPolicyFunction (copy), UseIsVideoEligibleFunction (copy), IsValidIdentifierModule (copy), UseCanDevicePlayVideoPreviewFunction (copy), EdpVideoBlockingConfig (copy), ReactModule (copy), IsYouTubeVideoModule (copy), ReportWarningFunction (copy), LoggingProtocolModule (copy)
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p3) --[[ Line: 40 ]]
+		return p3.getShowVideoThumbnails()
 	end)
-	local var2 = not isValidIdentifierModule(p2) or useIsVideoEligible(p2)
-	local var3 = useCanDevicePlayVideoPreview(edpVideoBlockingConfig, p2, p3)
+	local UseIsVideoEligibleResult = UseIsVideoEligibleFunction(p2)
+	local Inverted = not IsValidIdentifierModule(p2) or UseIsVideoEligibleResult
+	local UseCanDevicePlayVideoPreviewResult = UseCanDevicePlayVideoPreviewFunction(EdpVideoBlockingConfig, p2, AppPage)
 	
-	return reactModule.useMemo(function()
-		-- upvalues: var3 (ref), var2 (ref), p1 (ref), isValidIdentifierModule (copy), isYouTubeVideoModule (copy), var1 (ref), reportWarning (copy), loggingProtocolModule (copy), p3 (ref)
-		local var4 = var3() and var2
-		local var5 = false
+	return ReactModule.useMemo(function() --[[ Line: 50 ]]
+		-- upvalues: UseCanDevicePlayVideoPreviewResult (copy), Inverted (copy), p1 (copy), IsValidIdentifierModule (upval), IsYouTubeVideoModule (upval), UseAppPolicyResult (copy), ReportWarningFunction (upval), LoggingProtocolModule (upval), AppPage (copy)
+		local Inverted1 = UseCanDevicePlayVideoPreviewResult() and Inverted
+		local Flag = false
 		
-		for i, v in p1 do
-			if isValidIdentifierModule(v.videoId) and not isYouTubeVideoModule(v.assetTypeId) then
-				var5 = true
+		for _, value in p1 do
+			if IsValidIdentifierModule(value.videoId) and not IsYouTubeVideoModule(value.assetTypeId) then
+				Flag = true
 				break
 			end
 		end
-		local var6 = var5 and var2
-		local t = {}
+		local Inverted2 = Flag and Inverted
+		local List = {}
 		
-		for i_1, v_1 in p1 do
-			if isYouTubeVideoModule(v_1.assetTypeId) then
-				if not var6 and var1 then
-					table.insert(t, v_1)
+		for _, value1 in p1 do
+			if IsYouTubeVideoModule(value1.assetTypeId) then
+				if not Inverted2 and UseAppPolicyResult then
+					table.insert(List, value1)
 				end
-			elseif isValidIdentifierModule(v_1.videoId) then
-				if var4 then
-					table.insert(t, v_1)
+			elseif IsValidIdentifierModule(value1.videoId) then
+				if Inverted1 then
+					table.insert(List, value1)
 				end
-			elseif isValidIdentifierModule(v_1.imageId) then
-				table.insert(t, v_1)
+			elseif IsValidIdentifierModule(value1.imageId) then
+				table.insert(List, value1)
 			else
-				reportWarning(loggingProtocolModule.default, "MediaGallery", "Dropping non-video MediaItem with invalid imageId", {
-					appPage = p3,
-					assetTypeId = tostring(v_1.assetTypeId),
-					hasVideoId = tostring(isValidIdentifierModule(v_1.videoId)),
-					hasVideoHash = tostring(isValidIdentifierModule(v_1.videoHash)),
-					hasVideoTitle = tostring(v_1.videoTitle ~= nil and v_1.videoTitle ~= "")
+				ReportWarningFunction(LoggingProtocolModule.default, "MediaGallery", "Dropping non-video MediaItem with invalid imageId", {
+					appPage = AppPage,
+					assetTypeId = tostring(value1.assetTypeId),
+					hasVideoId = tostring(IsValidIdentifierModule(value1.videoId)),
+					hasVideoHash = tostring(IsValidIdentifierModule(value1.videoHash)),
+					hasVideoTitle = tostring(value1.videoTitle ~= nil and value1.videoTitle ~= "")
 				})
 			end
 		end
-		return t
+		return List
 	end, {
 		p1,
-		var1,
-		var2,
-		var3,
-		p3
+		UseAppPolicyResult,
+		Inverted,
+		UseCanDevicePlayVideoPreviewResult,
+		AppPage
 	})
 end

@@ -1,12 +1,13 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local signalsReactModule = require(expChat.Parent.SignalsReact)
-local getChatStatusStoreModule = require(expChat.Stores.GetChatStatusStore)
-local getPresetChatStoreModule = require(expChat.Stores.GetPresetChatStore)
-local getIsARButtonVisibleModule = require(expChat.getIsARButtonVisible)
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local SignalsReactModule = require(ExpChat.Parent.SignalsReact)
+local GetChatStatusStoreModule = require(ExpChat.Stores.GetChatStatusStore)
+local GetPresetChatStoreModule = require(ExpChat.Stores.GetPresetChatStore)
+local GetIsARButtonVisibleModule = require(ExpChat.getIsARButtonVisible)
 
-return function()
-	-- upvalues: getChatStatusStoreModule (ref), signalsReactModule (ref), getPresetChatStoreModule (ref), getIsARButtonVisibleModule (ref)
-	local var1 = getPresetChatStoreModule(false)
+return function() --[[ Line: 21 | Named "useIsARButtonVisible" ]]
+	-- upvalues: GetChatStatusStoreModule (copy), SignalsReactModule (copy), GetPresetChatStoreModule (copy), GetIsARButtonVisibleModule (copy)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(GetChatStatusStoreModule(false).getChatStatus)
+	local PresetChatStoreModule = GetPresetChatStoreModule(false)
 	
-	return getIsARButtonVisibleModule(signalsReactModule.useSignalState(getChatStatusStoreModule(false).getChatStatus), signalsReactModule.useSignalState(var1.getIsEnabled), signalsReactModule.useSignalState(var1.getAccessLevel))
+	return GetIsARButtonVisibleModule(UseSignalStateResult, SignalsReactModule.useSignalState(PresetChatStoreModule.getIsEnabled), (SignalsReactModule.useSignalState(PresetChatStoreModule.getAccessLevel)))
 end

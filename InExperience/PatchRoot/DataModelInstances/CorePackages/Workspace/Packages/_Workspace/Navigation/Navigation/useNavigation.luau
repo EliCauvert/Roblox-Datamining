@@ -1,8 +1,8 @@
-﻿local parent = script:FindFirstAncestor("Navigation").Parent
-local reactModule = require(parent.React)
-local roactNavigationModule = require(parent.RoactNavigation)
+﻿local Parent = script:FindFirstAncestor("Navigation").Parent
+local ReactModule = require(Parent.React)
+local RoactNavigationModule = require(Parent.RoactNavigation)
 
-return function()
-	-- upvalues: reactModule (ref), roactNavigationModule (ref)
-	return reactModule.useContext(roactNavigationModule.Context)
+return function() --[[ Line: 11 | Named "useNavigation" ]]
+	-- upvalues: ReactModule (copy), RoactNavigationModule (copy)
+	return ReactModule.useContext(RoactNavigationModule.Context)
 end

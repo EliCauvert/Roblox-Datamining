@@ -1,42 +1,42 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
-local parent_2 = parent_1.Parent
-local roactModule = require(parent_2.Roact)
-local fitFrameVertical = require(parent_2.RoactFitComponents).FitFrameVertical
-local UIBloxModule = require(parent_2.UIBlox)
-local foundationModule = require(parent_2.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local withStyle = UIBloxModule.Core.Style.withStyle
-local multiTextLocalizerModule = require(parent_1.Locale.MultiTextLocalizer)
-local productDetailsModule = require(parent.ProductDetails)
-local name = roactModule.Component:extend(script.Name)
-name.defaultProps = {
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
+local Parent2 = Parent1.Parent
+local RoactModule = require(Parent2.Roact)
+local FitFrameVertical = require(Parent2.RoactFitComponents).FitFrameVertical
+local UIBloxModule = require(Parent2.UIBlox)
+local FoundationModule = require(Parent2.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local WithStyleFunction = UIBloxModule.Core.Style.withStyle
+local MultiTextLocalizerModule = require(Parent1.Locale.MultiTextLocalizer)
+local ProductDetailsModule = require(Parent.ProductDetails)
+local ExtendResult = RoactModule.Component:extend(script.Name)
+ExtendResult.defaultProps = {
 	anchorPoint = Vector2.new(0.5, 0.5),
 	position = UDim2.new(0.5, 0, 0.5, 0)
 }
 
-function name.init(p1)
-	-- upvalues: roactModule (ref)
-	p1.contentRef = roactModule.createRef()
+function ExtendResult.init(p1) --[[ Line: 47 ]]
+	-- upvalues: RoactModule (copy)
+	p1.contentRef = RoactModule.createRef()
 	p1.state = {
 		contentSize = Vector2.new(0, 0),
 		footerSize = Vector2.new(0, 0)
 	}
 	
-	function p0.changeContentSize(p2)
-		-- upvalues: p1 (ref)
-		if p1.state.contentSize ~= p2.AbsoluteSize then
-			p1:setState({ contentSize = p2.AbsoluteSize })
+	function p1.changeContentSize(Frame: Frame) --[[ Line: 54 ]]
+		-- upvalues: p1 (copy)
+		if p1.state.contentSize ~= Frame.AbsoluteSize then
+			p1:setState({ contentSize = Frame.AbsoluteSize })
 		end
 	end
 end
 
-function name.render(p1)
-	-- upvalues: roactModule (ref), multiTextLocalizerModule (ref)
-	return roactModule.createElement(multiTextLocalizerModule, {
+function ExtendResult.render(p1) --[[ Line: 63 ]]
+	-- upvalues: RoactModule (copy), MultiTextLocalizerModule (copy)
+	return RoactModule.createElement(MultiTextLocalizerModule, {
 		keys = {
 			InsufficientRobuxTitle = {
 				key = "IAPExperience.InsufficientRobux.Title.InsufficientRobux"
@@ -47,67 +47,67 @@ function name.render(p1)
 			},
 			ButtonCancel = { key = "IAPExperience.InsufficientRobux.Action.Cancel" }
 		},
-		render = function(p2)
-			-- upvalues: p1 (ref)
+		render = function(p2) --[[ Line: 79 ]]
+			-- upvalues: p1 (copy)
 			return p1:renderAlert(p2)
 		end
 	})
 end
 
-function name.renderAlert(p1, p2)
-	-- upvalues: withStyle (ref), roactModule (ref), interactiveAlert (ref), fitFrameVertical (ref), productDetailsModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), buttonType (ref)
-	local props = p1.props
+function ExtendResult.renderAlert(p1, p2) --[[ Line: 85 ]]
+	-- upvalues: WithStyleFunction (copy), RoactModule (copy), InteractiveAlert (copy), FitFrameVertical (copy), ProductDetailsModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ButtonType (copy)
+	local Props = p1.props
 	
-	return withStyle(function(p3)
-		-- upvalues: props (ref), p2 (ref), roactModule (copy), interactiveAlert (copy), fitFrameVertical (copy), p1 (ref), productDetailsModule (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy), buttonType (copy)
-		local theme = p3.Theme
-		local font = p3.Font
-		local var1 = p2.YouNeed:gsub("{robux}", string.format("<font color=\"rgb(%s)\">%s%s</font>", tostring(Color3.new(math.round(theme.TextEmphasis.Color.R * 255), math.round(theme.TextEmphasis.Color.G * 255), math.round(theme.TextEmphasis.Color.B * 255))), utf8.char(57346), tostring(props.itemRobuxCost - props.balanceAmount)))
+	return WithStyleFunction(function(p3) --[[ Line: 88 ]]
+		-- upvalues: Props (copy), p2 (copy), RoactModule (upval), InteractiveAlert (upval), FitFrameVertical (upval), p1 (copy), ProductDetailsModule (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), ButtonType (upval)
+		local Theme = p3.Theme
+		local _Font = p3.Font
+		local Robux = p2.YouNeed:gsub("{robux}", (string.format("<font color=\"rgb(%s)\">%s%s</font>", tostring((Color3.new(math.round(Theme.TextEmphasis.Color.R * 255), math.round(Theme.TextEmphasis.Color.G * 255), (math.round(Theme.TextEmphasis.Color.B * 255))))), utf8.char(57346), (tostring(Props.itemRobuxCost - Props.balanceAmount)))))
 		
-		return roactModule.createElement(interactiveAlert, {
-			screenSize = props.screenSize,
-			position = props.position,
-			anchorPoint = props.anchorPoint,
+		return RoactModule.createElement(InteractiveAlert, {
+			screenSize = Props.screenSize,
+			position = Props.position,
+			anchorPoint = Props.anchorPoint,
 			title = p2.InsufficientRobuxTitle,
-			middleContent = function()
-				-- upvalues: roactModule (copy), fitFrameVertical (copy), p1 (copy), productDetailsModule (copy), props (copy), theme (ref), foundationFontFaceMigration (copy), font (ref), normalizeFontFace (copy), p3 (ref), var1 (ref)
-				return roactModule.createElement(fitFrameVertical, {
+			middleContent = function() --[[ Line: 112 ]]
+				-- upvalues: RoactModule (upval), FitFrameVertical (upval), p1 (upval), ProductDetailsModule (upval), Props (upval), Theme (copy), FoundationFontFaceMigration (upval), _Font (copy), NormalizeFontFaceFunction (upval), p3 (copy), Robux (copy)
+				return RoactModule.createElement(FitFrameVertical, {
 					BackgroundTransparency = 1,
 					width = UDim.new(1, 0),
 					FillDirection = Enum.FillDirection.Vertical,
 					HorizontalAlignment = Enum.HorizontalAlignment.Center,
 					VerticalAlignment = Enum.VerticalAlignment.Center,
 					contentPadding = UDim.new(0, 15),
-					[roactModule.Ref] = p1.contentRef,
-					[roactModule.Change.AbsoluteSize] = p1.changeContentSize
+					[RoactModule.Ref] = p1.contentRef,
+					[RoactModule.Change.AbsoluteSize] = p1.changeContentSize
 				}, {
-					ProductDetails = roactModule.createElement(productDetailsModule, {
+					ProductDetails = RoactModule.createElement(ProductDetailsModule, {
 						layoutOrder = 1,
-						model = props.model,
-						itemIcon = props.itemIcon,
-						itemName = props.itemName,
-						itemRobuxCost = props.itemRobuxCost
+						model = Props.model,
+						itemIcon = Props.itemIcon,
+						itemName = Props.itemName,
+						itemRobuxCost = Props.itemRobuxCost
 					}),
-					Underline = roactModule.createElement("Frame", {
+					Underline = RoactModule.createElement("Frame", {
 						LayoutOrder = 2,
 						BorderSizePixel = 0,
-						BackgroundColor3 = theme.Divider.Color,
-						BackgroundTransparency = theme.Divider.Transparency,
+						BackgroundColor3 = Theme.Divider.Color,
+						BackgroundTransparency = Theme.Divider.Transparency,
 						Size = UDim2.new(1, 0, 0, 1)
 					}),
-					AdditionalBuyText = roactModule.createElement("TextLabel", {
+					AdditionalBuyText = RoactModule.createElement("TextLabel", {
 						LayoutOrder = 3,
 						BackgroundTransparency = 1,
 						RichText = true,
 						TextWrapped = true,
 						Size = UDim2.new(0, p1.state.contentSize.X, 0, 0),
 						AutomaticSize = Enum.AutomaticSize.Y,
-						Font = if foundationFontFaceMigration then nil else font.Body.Font,
-						FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.BodyLarge.Font) else nil,
-						Text = var1,
-						TextSize = font.BaseSize * font.Body.RelativeSize,
-						TextColor3 = theme.TextDefault.Color,
-						TextTransparency = theme.TextDefault.Transparency
+						Font = if FoundationFontFaceMigration then nil else _Font.Body.Font,
+						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p3.Tokens.Typography.BodyLarge.Font) else nil,
+						Text = Robux,
+						TextSize = _Font.BaseSize * _Font.Body.RelativeSize,
+						TextColor3 = Theme.TextDefault.Color,
+						TextTransparency = Theme.TextDefault.Transparency
 					})
 				})
 			end,
@@ -115,17 +115,17 @@ function name.renderAlert(p1, p2)
 				buttons = {
 					{
 						props = {
-							onActivated = props.cancelPurchaseActivated,
+							onActivated = Props.cancelPurchaseActivated,
 							text = p2.ButtonCancel,
-							inputIcon = props.cancelControllerIcon
+							inputIcon = Props.cancelControllerIcon
 						}
 					},
 					{
-						buttonType = buttonType.PrimarySystem,
+						buttonType = ButtonType.PrimarySystem,
 						props = {
-							onActivated = props.robuxStoreActivated,
+							onActivated = Props.robuxStoreActivated,
 							text = p2.RobuxStore,
-							inputIcon = props.acceptControllerIcon
+							inputIcon = Props.acceptControllerIcon
 						}
 					}
 				}
@@ -134,4 +134,4 @@ function name.renderAlert(p1, p2)
 	end)
 end
 
-return name
+return ExtendResult

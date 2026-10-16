@@ -1,98 +1,100 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent.Parent
-local style = parent_1.App.Style
-local roactModule = require(parent_1.Parent.Roact)
-local tModule = require(parent_1.Parent.t)
-local validateStyleModule = require(style.Validator.validateStyle)
-local styleContextModule = require(parent.StyleContext)
-local getTextSizeOffsetModule = require(parent_1.Utility.getTextSizeOffset)
-local _ = require(style.StyleTypes)
-local themesModule = require(style.Themes)
-local constantsModule = require(style.Constants)
-local getFontFromNameModule = require(style.Fonts.getFontFromName)
-local tokensModule = require(style.Tokens)
-local getTokens = tokensModule.getTokens
-local getFoundationTokens = tokensModule.getFoundationTokens
-local mappers = tokensModule.Mappers
-local parent_2 = parent_1.Parent
-local object = require(parent_2.LuauPolyfill).Object
-local var1 = require(parent_2.UIBlox.Core.Utility.GetEngineFeatureSafe)("EnablePreferredTextSizeSetting")
-local styleProvider = roactModule.Component:extend("StyleProvider")
-styleProvider.validateProps = tModule.strictInterface({
-	style = tModule.optional(validateStyleModule),
-	derivedValues = tModule.optional(tModule.table),
-	[roactModule.Children] = tModule.table
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent.Parent
+local Style = Parent1.App.Style
+local RoactModule = require(Parent1.Parent.Roact)
+local TModule = require(Parent1.Parent.t)
+local StyleContextModule = require(Parent.StyleContext)
+local GetTextSizeOffsetModule = require(Parent1.Utility.getTextSizeOffset)
+local _ = require(Style.StyleTypes)
+local ThemesModule = require(Style.Themes)
+local ConstantsModule = require(Style.Constants)
+local GetFontFromNameModule = require(Style.Fonts.getFontFromName)
+local TokensModule = require(Style.Tokens)
+local GetTokensFunction = TokensModule.getTokens
+local GetFoundationTokensFunction = TokensModule.getFoundationTokens
+local Mappers = TokensModule.Mappers
+local Parent2 = Parent1.Parent
+local Object = require(Parent2.LuauPolyfill).Object
+local EnablePreferredTextSizeSetting = require(Parent2.UIBlox.Core.Utility.GetEngineFeatureSafe)("EnablePreferredTextSizeSetting")
+local StyleProvider = RoactModule.Component:extend("StyleProvider")
+StyleProvider.validateProps = TModule.strictInterface({
+	style = TModule.optional((require(Style.Validator.validateStyle))),
+	derivedValues = TModule.optional(TModule.table),
+	[RoactModule.Children] = TModule.table
 })
-local t = {
-	Theme = themesModule.DarkTheme,
+local config = {
+	Theme = ThemesModule.DarkTheme,
 	Settings = {
 		PreferredTransparency = 1,
 		ReducedMotion = false,
 		Scale = 1,
-		PreferredTextSize = if var1 then Enum.PreferredTextSize.Medium else nil
+		PreferredTextSize = if EnablePreferredTextSizeSetting then Enum.PreferredTextSize.Medium else nil
 	}
 }
-local t_1 = { textSizeOffset = 0 }
+local config1 = { textSizeOffset = 0 }
 
-function styleProvider.init(p1)
+function StyleProvider.init(p1) --[[ Line: 54 ]]
 	p1:setState({
 		style = p1.props.style,
 		derivedValues = p1.props.derivedValues
 	})
 end
 
-function styleProvider.updateTextSizeOffset(value, p1)
-	-- upvalues: getTextSizeOffsetModule (ref)
-	local var2, var3 = getTextSizeOffsetModule(p1)
+function StyleProvider.updateTextSizeOffset(p1, BodyFont) --[[ Line: 63 ]]
+	-- upvalues: GetTextSizeOffsetModule (copy)
+	local TextSizeOffsetModule, TextSizeOffsetModule2 = GetTextSizeOffsetModule(BodyFont)
 	
-	if var2 then
-		value:setState({ derivedValues = { textSizeOffset = var3 } })
+	if TextSizeOffsetModule then
+		p1:setState({
+			derivedValues = { textSizeOffset = TextSizeOffsetModule2 }
+		})
 	end
 end
 
-function styleProvider.didUpdate(p1, _, p2)
+function StyleProvider.didUpdate(p1, _, p2) --[[ Line: 74 ]]
 	if p2.style and p2.style.Settings.PreferredTextSize ~= p1.state.style.Settings.PreferredTextSize then
 		p1:updateTextSizeOffset(p1.state.style.Font.Body.Font)
 	end
 end
 
-function styleProvider.render(p1)
-	-- upvalues: object (ref), t (ref), t_1 (ref), themesModule (ref), constantsModule (ref), getTokens (ref), getFoundationTokens (ref), mappers (ref), getFontFromNameModule (ref), roactModule (ref), styleContextModule (ref)
-	local var2 = object.assign({}, t, p1.state.style)
-	local var3 = object.assign({}, t_1, p1.state.derivedValues)
+function StyleProvider.render(p1) --[[ Line: 83 ]]
+	-- upvalues: Object (copy), config (copy), config1 (copy), ThemesModule (copy), ConstantsModule (copy), GetTokensFunction (copy), GetFoundationTokensFunction (copy), Mappers (copy), GetFontFromNameModule (copy), RoactModule (copy), StyleContextModule (copy)
+	local AssignResult = Object.assign({}, config, p1.state.style)
+	local AssignResult1 = Object.assign({}, config1, p1.state.derivedValues)
 	
-	if var2.Tokens == nil then
-		local var4 = if var2.Theme == themesModule.LightTheme then constantsModule.ThemeName.Light else constantsModule.ThemeName.Dark
-		local defaultDeviceType = constantsModule.DefaultDeviceType
-		local scale = var2.Settings.Scale
-		local var5 = getFoundationTokens(defaultDeviceType, var4, scale)
-		local var6 = mappers.mapColorTokensToFoundation(getTokens(defaultDeviceType, var4, scale), var5)
-		var2.Theme = mappers.mapThemeToFoundation(var2.Theme, var5)
-		var2.Tokens = mappers.addFoundationFlatKeys(var6, var5)
+	if AssignResult.Tokens == nil then
+		local Light = if AssignResult.Theme == ThemesModule.LightTheme then ConstantsModule.ThemeName.Light else ConstantsModule.ThemeName.Dark
+		local DefaultDeviceType = ConstantsModule.DefaultDeviceType
+		local Scale = AssignResult.Settings.Scale
+		local Tokens = GetTokensFunction(DefaultDeviceType, Light, Scale)
+		local FoundationTokens = GetFoundationTokensFunction(DefaultDeviceType, Light, Scale)
+		local MapColorTokensToFoundationResult = Mappers.mapColorTokensToFoundation(Tokens, FoundationTokens)
+		AssignResult.Theme = Mappers.mapThemeToFoundation(AssignResult.Theme, FoundationTokens)
+		AssignResult.Tokens = Mappers.addFoundationFlatKeys(MapColorTokensToFoundationResult, FoundationTokens)
 	end
-	if var2.Font == nil then
-		var2.Font = getFontFromNameModule(constantsModule.FontName.Gotham, var2.Tokens)
+	if AssignResult.Font == nil then
+		AssignResult.Font = GetFontFromNameModule(ConstantsModule.FontName.Gotham, AssignResult.Tokens)
 	end
-	return roactModule.createElement(styleContextModule.Provider, {
+	return RoactModule.createElement(StyleContextModule.Provider, {
 		value = {
-			style = var2,
-			update = function(_, p2)
-				-- upvalues: p1 (ref)
+			style = AssignResult,
+			update = function(_, Style) --[[ Line: 108 ]]
+				-- upvalues: p1 (copy)
 				if p1.mounted then
-					p1:setState({ style = p2 })
+					p1:setState({ style = Style })
 				end
 			end,
-			derivedValues = var3
+			derivedValues = AssignResult1
 		}
-	}, roactModule.oneChild(p1.props[roactModule.Children]))
+	}, RoactModule.oneChild(p1.props[RoactModule.Children]))
 end
 
-function styleProvider.didMount(p1)
+function StyleProvider.didMount(p1) --[[ Line: 121 ]]
 	p1.mounted = true
 end
 
-function styleProvider.willUnmount(p1)
+function StyleProvider.willUnmount(p1) --[[ Line: 125 ]]
 	p1.mounted = false
 end
 
-return styleProvider
+return StyleProvider

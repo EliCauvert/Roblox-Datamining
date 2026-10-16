@@ -1,78 +1,80 @@
-﻿local r15plusUtilsModule = require(script.Parent.Parent.util.R15plusUtils)
-local t = {}
+﻿local R15plusUtilsModule = require(script.Parent.Parent.util.R15plusUtils)
+local CurveAnimBoneHierarchyUtils = {}
 local list = {
 	"Head", "UpperTorso", "LeftFoot", "RightFoot", "LeftHand", "RightHand"
 }
-local var1 = nil
-local var2 = nil
-local var3 = nil
+local v1 = nil
+local v2 = nil
+local v3 = nil
 
-local function ensureCaches()
-	-- upvalues: var3 (write), list (ref), r15plusUtilsModule (ref), var1 (write), var2 (write)
-	if var3 then return end
+local function ensureCaches() --[[ Line: 14 ]]
+	-- upvalues: v3 (ref), list (copy), R15plusUtilsModule (copy), v1 (ref), v2 (ref)
+	if v3 then return end
 	local t = {}
-	local t_1 = {}
-	local t_2 = {}
+	local t1 = {}
+	local t2 = {}
 	
-	local function traverse(p1, p2, p3)
-		-- upvalues: t (ref), t_1 (ref), t_2 (ref), traverse (ref)
-		for i, v in p1 do
-			if v.ClassName == "Bone" then
+	local function traverse(AvatarBoneSchema, Key, Key1) --[[ Line: 23 ]]
+		-- upvalues: t (copy), t1 (copy), t2 (copy), traverse (copy)
+		for i, Bone in AvatarBoneSchema do
+			if Bone.ClassName == "Bone" then
 				t[i] = true
 				
-				if p2 == nil then
-					if not t_1[p3] then
-						t_1[p3] = {}
+				if Key == nil then
+					if not t1[Key1] then
+						t1[Key1] = {}
 					end
-					table.insert(t_1[p3], i)
-				elseif not t_2[p2] then
-					t_2[p2] = {}
+					table.insert(t1[Key1], i)
+				else
+					if not t2[Key] then
+						t2[Key] = {}
+					end
+					table.insert(t2[Key], i)
 				end
-				table.insert(t_2[p2], i)
-				if v._children then
-					traverse(v._children, i, p3)
+				if Bone._children then
+					traverse(Bone._children, i, Key1)
 				end
 			end
 		end
 	end
 	
-	for i, v in list do
-		traverse(r15plusUtilsModule.getAvatarBoneSchema(v), nil, v)
+	for _, value in list do
+		traverse(R15plusUtilsModule.getAvatarBoneSchema(value), nil, value)
 	end
-	var1 = t_1
-	var2 = t_2
-	var3 = t
+	v1 = t1
+	v2 = t2
+	v3 = t
 end
 
-function t.hasBoneFolders(p4)
-	-- upvalues: t (ref)
-	for i, v in p4:GetDescendants() do
-		if v:IsA("Folder") and t.isBoneFolderName(v.Name) then
+function CurveAnimBoneHierarchyUtils.hasBoneFolders(Object): boolean --[[ Line: 59 ]]
+	-- upvalues: CurveAnimBoneHierarchyUtils (copy)
+	for _, Folder in Object:GetDescendants() do
+		if Folder:IsA("Folder") and CurveAnimBoneHierarchyUtils.isBoneFolderName(Folder.Name) then
 			return true
 		end
 	end
 	return false
 end
 
-function t.isBoneFolderName(p5)
-	-- upvalues: ensureCaches (ref), var3 (write)
+function CurveAnimBoneHierarchyUtils.isBoneFolderName(Name): boolean --[[ Line: 68 ]]
+	-- upvalues: ensureCaches (copy), v3 (ref)
 	ensureCaches()
 	
-	return var3[p5] == true
+	return v3[Name] == true
 end
 
-function t.getRootBoneNamesForBodyPart(p5)
-	-- upvalues: ensureCaches (ref), var1 (write)
+function CurveAnimBoneHierarchyUtils.getRootBoneNamesForBodyPart(p1) --[[ Line: 73 ]]
+	-- upvalues: ensureCaches (copy), v1 (ref)
 	ensureCaches()
 	
-	return var1[p5] or {}
+	return v1[p1] or {}
 end
 
-function t.getChildBoneNames(p5)
-	-- upvalues: ensureCaches (ref), var2 (write)
+function CurveAnimBoneHierarchyUtils.getChildBoneNames(p1) --[[ Line: 78 ]]
+	-- upvalues: ensureCaches (copy), v2 (ref)
 	ensureCaches()
 	
-	return var2[p5] or {}
+	return v2[p1] or {}
 end
 
-return t
+return CurveAnimBoneHierarchyUtils

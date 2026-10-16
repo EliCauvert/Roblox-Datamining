@@ -1,11 +1,6 @@
-﻿local jestConfigsModule = require(script.Parent.Parent.Dev.JestConfigs)
-
-return {
-	displayName = "BulkPurchaseApp",
-	setupFilesAfterEnv = {
-		jestConfigsModule.setupFiles.LogHandler,
-		jestConfigsModule.setupFiles.UIBloxInitializer,
-		jestConfigsModule.setupFiles.createPromiseRejectionHandler(),
-		jestConfigsModule.setupFiles.RetryTimes
+﻿return {
+	projects = {
+		script.Parent["jest.main.config"],
+		script.Parent["jest.mockDataModel.config"]
 	}
 }

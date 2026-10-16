@@ -1,39 +1,39 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
-local reactModule = require(parent.React)
-local animatedFrame = require(parent.UIBlox).Utility.SpringAnimatedItem.AnimatedFrame
-local dashModule = require(parent.Dash)
-local t = { dampingRatio = 1, frequency = 3.5 }
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
+local ReactModule = require(Parent.React)
+local AnimatedFrame = require(Parent.UIBlox).Utility.SpringAnimatedItem.AnimatedFrame
+local DashModule = require(Parent.Dash)
+local SpringOptions = { dampingRatio = 1, frequency = 3.5 }
 
-local function ExpandingFrame(p1)
-	-- upvalues: reactModule (ref), animatedFrame (ref), t (ref)
-	return reactModule.createElement(animatedFrame, {
+local function ExpandingFrame(Frame) --[[ Line: 38 ]]
+	-- upvalues: ReactModule (copy), AnimatedFrame (copy), SpringOptions (copy)
+	return ReactModule.createElement(AnimatedFrame, {
 		regularProps = {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
-			LayoutOrder = p1.LayoutOrder,
+			LayoutOrder = Frame.LayoutOrder,
 			ClipsDescendants = true,
-			ref = p1.frameRef,
-			NextSelectionUp = p1.NextSelectionUp,
-			NextSelectionDown = p1.NextSelectionDown,
-			NextSelectionLeft = p1.NextSelectionLeft,
-			NextSelectionRight = p1.NextSelectionRight,
-			[reactModule.Change.AbsoluteSize] = p1.onAbsoluteSizeChanged
+			ref = Frame.frameRef,
+			NextSelectionUp = Frame.NextSelectionUp,
+			NextSelectionDown = Frame.NextSelectionDown,
+			NextSelectionLeft = Frame.NextSelectionLeft,
+			NextSelectionRight = Frame.NextSelectionRight,
+			[ReactModule.Change.AbsoluteSize] = Frame.onAbsoluteSizeChanged
 		},
 		animatedValues = {
-			yOffset = if p1.isExpanded then p1.Size.Y.Offset else 0,
-			yScale = if p1.isExpanded then p1.Size.Y.Scale else 0
+			yOffset = if Frame.isExpanded then Frame.Size.Y.Offset else 0,
+			yScale = if Frame.isExpanded then Frame.Size.Y.Scale else 0
 		},
-		mapValuesToProps = function(p2)
-			-- upvalues: p1 (ref)
+		mapValuesToProps = function(p1) --[[ Line: 58 ]]
+			-- upvalues: Frame (copy)
 			return {
-				Size = UDim2.new(p1.Size.X.Scale, p1.Size.X.Offset, p2.yScale, p2.yOffset)
+				Size = UDim2.new(Frame.Size.X.Scale, Frame.Size.X.Offset, p1.yScale, p1.yOffset)
 			}
 		end,
-		springOptions = t
-	}, p1.children)
+		springOptions = SpringOptions
+	}, Frame.children)
 end
 
-return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: reactModule (ref), ExpandingFrame (ref), dashModule (ref)
-	return reactModule.createElement(ExpandingFrame, dashModule.join(p1, { frameRef = p2 }))
+return ReactModule.forwardRef(function(p1, FrameRef) --[[ Line: 68 ]]
+	-- upvalues: ReactModule (copy), ExpandingFrame (copy), DashModule (copy)
+	return ReactModule.createElement(ExpandingFrame, DashModule.join(p1, { frameRef = FrameRef }))
 end)

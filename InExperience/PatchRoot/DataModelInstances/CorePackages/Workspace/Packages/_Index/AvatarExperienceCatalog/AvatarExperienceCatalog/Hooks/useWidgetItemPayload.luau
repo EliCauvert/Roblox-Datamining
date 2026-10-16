@@ -1,13 +1,13 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local _ = require(parent.AvatarExperienceCommon)
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local _ = require(Parent.AvatarExperienceCommon)
 
-return function(p1)
-	-- upvalues: reactModule (ref), cryoModule (ref)
-	return reactModule.useMemo(function()
-		-- upvalues: cryoModule (copy), p1 (ref)
-		return cryoModule.Dictionary.join(p1.widgetAnalyticsInfo or {}, {
+return function(p1) --[[ Line: 32 | Named "useWidgetItemPayload" ]]
+	-- upvalues: ReactModule (copy), CryoModule (copy)
+	return ReactModule.useMemo(function() --[[ Line: 34 ]]
+		-- upvalues: CryoModule (upval), p1 (copy)
+		return CryoModule.Dictionary.join(p1.widgetAnalyticsInfo or {}, {
 			action = p1.action,
 			itemId = p1.itemId,
 			itemType = p1.itemType,

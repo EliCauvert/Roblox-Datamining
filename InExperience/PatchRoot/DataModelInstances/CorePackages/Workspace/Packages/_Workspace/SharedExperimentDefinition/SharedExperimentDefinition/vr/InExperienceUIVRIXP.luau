@@ -1,77 +1,78 @@
-﻿local parent = script:FindFirstAncestor("SharedExperimentDefinition").Parent
-local experimentCacheManager = require(parent.ExperimentCacheManager).ExperimentCacheManager
-local luaAppIECVRLayerName = game:DefineFastString("LuaAppIECVRLayerName", "PlatformExcellence.VR.SpatialUI")
-local luaAppIECVRVariantKey = game:DefineFastString("LuaAppIECVRVariantKey", "spatial_ui_type")
-local luaAppIECVRVariantNoSpatialUI = game:DefineFastInt("LuaAppIECVRVariantNoSpatialUI", 0)
-local luaAppIECVRVariantSpatialUIWithDragging = game:DefineFastInt("LuaAppIECVRVariantSpatialUIWithDragging", 1)
-local luaAppIECVRVariantSpatialUIWithoutDragging = game:DefineFastInt("LuaAppIECVRVariantSpatialUIWithoutDragging", 2)
-local luaAppIECVRVariantSpatialUIMovePanelToCenter = game:DefineFastInt("LuaAppIECVRVariantSpatialUIMovePanelToCenter", 3)
-local luaAppIECVRIxpEnabled8 = game:DefineFastFlag("LuaAppIECVRIxpEnabled8", false)
-local fFlagEnableUIManagerPackgify = require(parent.SharedFlags).FFlagEnableUIManagerPackgify
-local enableSpatialUIScalingFix = game:DefineFastFlag("EnableSpatialUIScalingFix", false)
-local enableSpatialUICameraTypeFix8 = game:DefineFastFlag("EnableSpatialUICameraTypeFix8", false)
-local luaAppIECVREnabled8 = game:DefineFastFlag("LuaAppIECVREnabled8", false)
-local spatialUIEnableDrag8 = game:DefineFastFlag("SpatialUIEnableDrag8", false)
-local spatialUIEnableMovePanelToCenter8 = game:DefineFastFlag("SpatialUIEnableMovePanelToCenter8", false)
-local enableSpatialUIPlaceFilter = game:DefineFastFlag("EnableSpatialUIPlaceFilter", false)
-local t = {}
-t.__index = t
+﻿local Parent = script:FindFirstAncestor("SharedExperimentDefinition").Parent
+local ExperimentCacheManager = require(Parent.ExperimentCacheManager).ExperimentCacheManager
+local LuaAppIECVRLayerName = game:DefineFastString("LuaAppIECVRLayerName", "PlatformExcellence.VR.SpatialUI")
+local LuaAppIECVRVariantKey = game:DefineFastString("LuaAppIECVRVariantKey", "spatial_ui_type")
+local LuaAppIECVRVariantNoSpatialUI = game:DefineFastInt("LuaAppIECVRVariantNoSpatialUI", 0)
+local LuaAppIECVRVariantSpatialUIWithDragging = game:DefineFastInt("LuaAppIECVRVariantSpatialUIWithDragging", 1)
+local LuaAppIECVRVariantSpatialUIWithoutDragging = game:DefineFastInt("LuaAppIECVRVariantSpatialUIWithoutDragging", 2)
+local LuaAppIECVRVariantSpatialUIMovePanelToCenter = game:DefineFastInt("LuaAppIECVRVariantSpatialUIMovePanelToCenter", 3)
+local LuaAppIECVRIxpEnabled8 = game:DefineFastFlag("LuaAppIECVRIxpEnabled8", false)
+local FFlagEnableUIManagerPackgify = require(Parent.SharedFlags).FFlagEnableUIManagerPackgify
+local EnableSpatialUIScalingFix = game:DefineFastFlag("EnableSpatialUIScalingFix", false)
+local EnableSpatialUICameraTypeFix8 = game:DefineFastFlag("EnableSpatialUICameraTypeFix8", false)
+local LuaAppIECVREnabled8 = game:DefineFastFlag("LuaAppIECVREnabled8", false)
+local SpatialUIEnableDrag8 = game:DefineFastFlag("SpatialUIEnableDrag8", false)
+local SpatialUIEnableMovePanelToCenter8 = game:DefineFastFlag("SpatialUIEnableMovePanelToCenter8", false)
+local EnableSpatialUIPlaceFilter = game:DefineFastFlag("EnableSpatialUIPlaceFilter", false)
+local Module = {}
+Module.__index = Module
 
-function t.new()
-	-- upvalues: t (ref)
-	local t_1 = { _layer_data = nil }
-	setmetatable(t_1, t)
+function Module.new() --[[ Line: 40 ]]
+	-- upvalues: Module (copy)
+	local config = { _layer_data = nil }
+	setmetatable(config, Module)
 	
-	return t_1
+	return config
 end
 
-function t:getIXPVariant()
-	-- upvalues: experimentCacheManager (ref), luaAppIECVRLayerName (ref), luaAppIECVRVariantKey (ref), luaAppIECVRVariantNoSpatialUI (ref)
+function Module:getIXPVariant() --[[ Line: 48 ]]
+	-- upvalues: ExperimentCacheManager (copy), LuaAppIECVRLayerName (copy), LuaAppIECVRVariantKey (copy), LuaAppIECVRVariantNoSpatialUI (copy)
 	if self._layer_data == nil then
-		self._layer_data = experimentCacheManager.default:getLayerVariables(luaAppIECVRLayerName) or {}
+		self._layer_data = ExperimentCacheManager.default:getLayerVariables(LuaAppIECVRLayerName) or {}
 	end
-	local var1 = self._layer_data[luaAppIECVRVariantKey] or nil
+	local Layer = self._layer_data[LuaAppIECVRVariantKey] or nil
 	
-	return if var1 == nil then luaAppIECVRVariantNoSpatialUI else tonumber(var1)
+	return if Layer == nil then LuaAppIECVRVariantNoSpatialUI else tonumber(Layer)
 end
 
-function t.isDependencyFlagsEnabled()
-	-- upvalues: fFlagEnableUIManagerPackgify (ref), enableSpatialUIPlaceFilter (ref)
-	return fFlagEnableUIManagerPackgify and not enableSpatialUIPlaceFilter
+function Module.isDependencyFlagsEnabled(): boolean --[[ Line: 60 ]]
+	-- upvalues: FFlagEnableUIManagerPackgify (copy), EnableSpatialUIPlaceFilter (copy)
+	return FFlagEnableUIManagerPackgify and not EnableSpatialUIPlaceFilter
 end
 
-function t:isInExperienceUIVREnabled()
-	-- upvalues: luaAppIECVREnabled8 (ref), luaAppIECVRIxpEnabled8 (ref), luaAppIECVRVariantNoSpatialUI (ref)
-	return if self:isDependencyFlagsEnabled() then if luaAppIECVREnabled8 then true elseif luaAppIECVRIxpEnabled8 then self:getIXPVariant() ~= luaAppIECVRVariantNoSpatialUI else false else false
+function Module.isInExperienceUIVREnabled(p1): boolean --[[ Line: 64 ]]
+	-- upvalues: LuaAppIECVREnabled8 (copy), LuaAppIECVRIxpEnabled8 (copy), LuaAppIECVRVariantNoSpatialUI (copy)
+	return if p1:isDependencyFlagsEnabled() then if LuaAppIECVREnabled8 then true elseif LuaAppIECVRIxpEnabled8 then p1:getIXPVariant() ~= LuaAppIECVRVariantNoSpatialUI else false else false
 end
 
-function t:isDraggingAllowed()
-	-- upvalues: spatialUIEnableDrag8 (ref), spatialUIEnableMovePanelToCenter8 (ref), luaAppIECVRVariantSpatialUIWithDragging (ref), luaAppIECVRVariantSpatialUIWithoutDragging (ref), luaAppIECVRVariantSpatialUIMovePanelToCenter (ref)
+function Module:isDraggingAllowed() --[[ Line: 78 ]]
+	-- upvalues: SpatialUIEnableDrag8 (copy), SpatialUIEnableMovePanelToCenter8 (copy), LuaAppIECVRVariantSpatialUIWithDragging (copy), LuaAppIECVRVariantSpatialUIWithoutDragging (copy), LuaAppIECVRVariantSpatialUIMovePanelToCenter (copy)
 	if not self:isInExperienceUIVREnabled() then
 		return false
-	elseif spatialUIEnableDrag8 then
-		return not spatialUIEnableMovePanelToCenter8
-	elseif spatialUIEnableMovePanelToCenter8 then
+	elseif SpatialUIEnableDrag8 then
+		return not SpatialUIEnableMovePanelToCenter8
+	elseif SpatialUIEnableMovePanelToCenter8 then
 		return false
+	else
+		local IXPVariant = self:getIXPVariant()
+		
+		return IXPVariant == LuaAppIECVRVariantSpatialUIWithDragging or IXPVariant ~= LuaAppIECVRVariantSpatialUIWithoutDragging and (IXPVariant ~= LuaAppIECVRVariantSpatialUIMovePanelToCenter and SpatialUIEnableDrag8)
 	end
-	local IXPVariant = self:getIXPVariant()
-	
-	return IXPVariant == luaAppIECVRVariantSpatialUIWithDragging or (if IXPVariant == luaAppIECVRVariantSpatialUIWithoutDragging then false elseif IXPVariant == luaAppIECVRVariantSpatialUIMovePanelToCenter then false else spatialUIEnableDrag8)
 end
 
-function t:isMovePanelToCenter()
-	-- upvalues: spatialUIEnableMovePanelToCenter8 (ref), luaAppIECVRVariantSpatialUIMovePanelToCenter (ref)
-	return if self:isInExperienceUIVREnabled() then if spatialUIEnableMovePanelToCenter8 then true else self:getIXPVariant() == luaAppIECVRVariantSpatialUIMovePanelToCenter else false
+function Module.isMovePanelToCenter(p1): boolean --[[ Line: 101 ]]
+	-- upvalues: SpatialUIEnableMovePanelToCenter8 (copy), LuaAppIECVRVariantSpatialUIMovePanelToCenter (copy)
+	return if p1:isInExperienceUIVREnabled() then if SpatialUIEnableMovePanelToCenter8 then true else p1:getIXPVariant() == LuaAppIECVRVariantSpatialUIMovePanelToCenter else false
 end
 
-function t.isSpatialUICameraTypeFixEnabled(_)
-	-- upvalues: enableSpatialUICameraTypeFix8 (ref)
-	return enableSpatialUICameraTypeFix8
+function Module:isSpatialUICameraTypeFixEnabled() --[[ Line: 112 ]]
+	-- upvalues: EnableSpatialUICameraTypeFix8 (copy)
+	return EnableSpatialUICameraTypeFix8
 end
 
-function t.isSpatialUIScalingFixEnabled(_)
-	-- upvalues: enableSpatialUIScalingFix (ref)
-	return enableSpatialUIScalingFix
+function Module:isSpatialUIScalingFixEnabled() --[[ Line: 116 ]]
+	-- upvalues: EnableSpatialUIScalingFix (copy)
+	return EnableSpatialUIScalingFix
 end
 
-return t.new()
+return (Module.new())

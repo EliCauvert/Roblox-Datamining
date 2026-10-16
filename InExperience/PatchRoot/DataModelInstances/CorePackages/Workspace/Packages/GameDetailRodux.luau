@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.GameDetailRodux.GameDetailRodux)
+﻿return (require(script.Parent._Workspace.GameDetailRodux.GameDetailRodux))

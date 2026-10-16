@@ -1,73 +1,73 @@
-﻿local parent = script:FindFirstAncestor("InExperienceShop").Parent
-local collectionService = game:GetService("CollectionService")
-local reactModule = require(parent.React)
-local unifiedEventLogConstants = require(parent.AvatarExperienceAnalytics).UnifiedEventLogConstants
-local shopScreenSizeImpressionsDetectorModule = require(script.Parent.ShopScreenSizeImpressionsDetector)
+﻿local Parent = script:FindFirstAncestor("InExperienceShop").Parent
+local CollectionService = game:GetService("CollectionService")
+local ReactModule = require(Parent.React)
+local UnifiedEventLogConstants = require(Parent.AvatarExperienceAnalytics).UnifiedEventLogConstants
+local ShopScreenSizeImpressionsDetectorModule = require(script.Parent.ShopScreenSizeImpressionsDetector)
 
-return function(p1)
-	-- upvalues: reactModule (ref), collectionService (ref), unifiedEventLogConstants (ref), shopScreenSizeImpressionsDetectorModule (ref)
-	local var1 = reactModule.useRef({})
-	local var2 = reactModule.useRef({})
-	local var3 = reactModule.useCallback(function(p2)
-		-- upvalues: var1 (ref)
-		return not var1.current[p2:GetFullName()]
+return function(p1) --[[ Line: 21 | Named "ShopTagBasedImpressionsDetector" ]]
+	-- upvalues: ReactModule (copy), CollectionService (copy), UnifiedEventLogConstants (copy), ShopScreenSizeImpressionsDetectorModule (copy)
+	local UseRefResult = ReactModule.useRef({})
+	local UseRefResult1 = ReactModule.useRef({})
+	local UseResult = ReactModule.useCallback(function(Object): boolean --[[ Line: 25 ]]
+		-- upvalues: UseRefResult (copy)
+		return not UseRefResult.current[Object:GetFullName()]
 	end, {})
-	local var4 = reactModule.useCallback(function(p2)
-		-- upvalues: var1 (ref), var2 (ref), p1 (ref)
-		local t = {}
+	local UseResult1 = ReactModule.useCallback(function(List) --[[ Line: 29 ]]
+		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), p1 (copy)
+		local VisibleInstances = {}
 		
-		for i, v in p2 do
-			local fullName = v:GetFullName()
+		for _, value in List do
+			local FullName = value:GetFullName()
 			
-			if not var1.current[fullName] then
-				t[fullName] = v
+			if not UseRefResult.current[FullName] then
+				VisibleInstances[FullName] = value
 				
-				if not var2.current[fullName] then
-					var2.current[fullName] = v.AncestryChanged:Connect(function()
-						-- upvalues: v (ref), var1 (copy), fullName (ref), var2 (copy)
-						if not v.Parent then
-							var1.current[fullName] = nil
+				if not UseRefResult1.current[FullName] then
+					UseRefResult1.current[FullName] = value.AncestryChanged:Connect(function() --[[ Line: 39 ]]
+						-- upvalues: value (copy), UseRefResult (upval), FullName (copy), UseRefResult1 (upval)
+						if not value.Parent then
+							UseRefResult.current[FullName] = nil
 							
-							if var2.current[fullName] then
-								var2.current[fullName]:Disconnect()
-								var2.current[fullName] = nil
+							if UseRefResult1.current[FullName] then
+								UseRefResult1.current[FullName]:Disconnect()
+								UseRefResult1.current[FullName] = nil
 							end
 						end
 					end)
 				end
-				var1.current[fullName] = true
+				UseRefResult.current[FullName] = true
 			end
 		end
-		if next(t) and p1.extensions then
-			for i, v_1 in t do
-				for i_2, v_2 in p1.extensions do
-					v_2({ visibleInstance = v_1 })
+		if next(VisibleInstances) and p1.extensions then
+			for _, visibleInstance in VisibleInstances do
+				for _, extension in p1.extensions do
+					extension({ visibleInstance = visibleInstance })
 				end
 			end
 		end
 	end, { p1.extensions })
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref)
-		return function()
-			-- upvalues: var2 (copy)
-			for i, v in var2.current do
-				if v then
-					v:Disconnect()
+	ReactModule.useEffect(function() --[[ Line: 63 ]]
+		-- upvalues: UseRefResult1 (copy)
+		return function() --[[ Line: 64 ]]
+			-- upvalues: UseRefResult1 (upval)
+			for _, Connection in UseRefResult1.current do
+				if Connection then
+					Connection:Disconnect()
 				end
 			end
-			var2.current = {}
+			UseRefResult1.current = {}
 		end
 	end, {})
 	
-	return reactModule.createElement(shopScreenSizeImpressionsDetectorModule, {
+	return ReactModule.createElement(ShopScreenSizeImpressionsDetectorModule, {
 		parentRef = p1.parentRef,
 		pageFilter = p1.pageFilter,
 		onRequestImpressionsSignal = p1.requestImpressionsSignal,
-		filterImpressionFunc = var3,
-		onImpressionsDetected = var4,
-		collectObjectsFunc = reactModule.useCallback(function()
-			-- upvalues: collectionService (copy), unifiedEventLogConstants (copy)
-			return collectionService:GetTagged(unifiedEventLogConstants.TAG_NAME)
+		filterImpressionFunc = UseResult,
+		onImpressionsDetected = UseResult1,
+		collectObjectsFunc = ReactModule.useCallback(function() --[[ Line: 74 ]]
+			-- upvalues: CollectionService (upval), UnifiedEventLogConstants (upval)
+			return CollectionService:GetTagged(UnifiedEventLogConstants.TAG_NAME)
 		end, {})
 	})
 end

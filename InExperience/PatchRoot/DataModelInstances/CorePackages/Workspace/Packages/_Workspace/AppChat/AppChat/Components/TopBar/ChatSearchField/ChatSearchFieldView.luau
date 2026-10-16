@@ -1,27 +1,27 @@
-﻿local parent = script:FindFirstAncestor("AppChat").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local searchInput = foundationModule.SearchInput
+﻿local Parent = script:FindFirstAncestor("AppChat").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local SearchInput = FoundationModule.SearchInput
 
-return function(p1)
-	-- upvalues: reactModule (ref), foundationModule (ref), searchInput (ref)
-	local testId = p1.testId or "ChatSearchField"
+return function(Frame) --[[ Line: 23 | Named "ChatSearchFieldView" ]]
+	-- upvalues: ReactModule (copy), FoundationModule (copy), SearchInput (copy)
+	local TestId = Frame.testId or "ChatSearchField"
 	
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "size-full-0 auto-y",
-		testId = `{testId}View`,
-		LayoutOrder = p1.LayoutOrder,
-		ref = p1.containerRef
+		testId = `{TestId}View`,
+		LayoutOrder = Frame.LayoutOrder,
+		ref = Frame.containerRef
 	}, {
-		Input = reactModule.createElement(searchInput, {
-			text = p1.text,
-			placeholder = p1.placeholder,
-			onChanged = p1.onChanged,
-			onFocusGained = p1.onFocusGained,
-			onFocusLost = p1.onFocusLost,
-			ref = p1.inputRef,
+		Input = ReactModule.createElement(SearchInput, {
+			text = Frame.text,
+			placeholder = Frame.placeholder,
+			onChanged = Frame.onChanged,
+			onFocusGained = Frame.onFocusGained,
+			onFocusLost = Frame.onFocusLost,
+			ref = Frame.inputRef,
 			width = UDim.new(1, 0),
-			testId = `{testId}Input`
+			testId = `{TestId}Input`
 		})
 	})
 end

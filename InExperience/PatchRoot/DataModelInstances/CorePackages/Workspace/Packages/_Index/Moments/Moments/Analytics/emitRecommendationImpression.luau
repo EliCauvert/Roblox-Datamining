@@ -1,7 +1,7 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local constantsModule = require(moments.Constants)
-local fFlagMomentsRecommendationClientEventTimestampModule = require(moments.Flags.FFlagMomentsRecommendationClientEventTimestamp)
-local t = {
+﻿local Moments = script:FindFirstAncestor("Moments")
+local ConstantsModule = require(Moments.Constants)
+local FFlagMomentsRecommendationClientEventTimestampModule = require(Moments.Flags.FFlagMomentsRecommendationClientEventTimestamp)
+local config = {
 	eventName = "RecommendationImpressionEvent",
 	throttlingPercentage = 10000,
 	description = "Fires when a moment becomes visible in the platform feed",
@@ -9,15 +9,15 @@ local t = {
 	lastUpdated = { 26, 6, 2 }
 }
 
-return function(p1)
-	-- upvalues: t (ref), constantsModule (ref), fFlagMomentsRecommendationClientEventTimestampModule (ref)
-	game:GetService("TelemetryService"):LogEvent(t, {
+return function(p1) --[[ Line: 27 | Named "emitRecommendationImpression" ]]
+	-- upvalues: config (copy), ConstantsModule (copy), FFlagMomentsRecommendationClientEventTimestampModule (copy)
+	game:GetService("TelemetryService"):LogEvent(config, {
 		standardizedFields = { "addSessionInfo", "addSessionId", "addOSInfo" },
 		customFields = {
 			playsessionid = "",
-			universeid = constantsModule.MOMENTS_UNIVERSE_ID,
-			placeid = constantsModule.MOMENTS_PLACE_ID,
-			client_event_timestamp_ms = if fFlagMomentsRecommendationClientEventTimestampModule then DateTime.now().UnixTimestampMillis else nil,
+			universeid = ConstantsModule.MOMENTS_UNIVERSE_ID,
+			placeid = ConstantsModule.MOMENTS_PLACE_ID,
+			client_event_timestamp_ms = if FFlagMomentsRecommendationClientEventTimestampModule then DateTime.now().UnixTimestampMillis else nil,
 			item_id = p1.itemId,
 			tracing_id = p1.tracingId,
 			item_position = tostring(p1.position),
@@ -26,7 +26,7 @@ return function(p1)
 			weight = tostring(p1.weight or 1),
 			departure_intent = p1.departureIntent,
 			moments_session_id = p1.momentsSessionId,
-			source_surface = constantsModule.SOURCE_SURFACE
+			source_surface = ConstantsModule.SOURCE_SURFACE
 		}
 	})
 end

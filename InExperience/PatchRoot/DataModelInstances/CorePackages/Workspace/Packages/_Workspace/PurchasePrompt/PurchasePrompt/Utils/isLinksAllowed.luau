@@ -1,11 +1,12 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local userInputService = game:GetService("UserInputService")
-local upsellFlowModule = require(parent.Enums.UpsellFlow)
-local getUpsellFlowModule = require(parent.NativeUpsell.getUpsellFlow)
-local getAppFeaturePolicies = require(parent_1.UniversalAppPolicy).getAppFeaturePolicies
+﻿local Parent = script.Parent.Parent
+local UserInputService = game:GetService("UserInputService")
+local UpsellFlowModule = require(Parent.Enums.UpsellFlow)
+local GetUpsellFlowModule = require(Parent.NativeUpsell.getUpsellFlow)
+local GetAppFeaturePoliciesFunction = require(Parent.Parent.UniversalAppPolicy).getAppFeaturePolicies
 
-return function()
-	-- upvalues: userInputService (ref), getUpsellFlowModule (ref), getAppFeaturePolicies (ref), upsellFlowModule (ref)
-	return if getAppFeaturePolicies().getShouldUseDMCCALegalDisclosureInApp() then true else getUpsellFlowModule(userInputService:GetPlatform()) == upsellFlowModule.Web
+return function(): boolean --[[ Line: 11 ]]
+	-- upvalues: UserInputService (copy), GetUpsellFlowModule (copy), GetAppFeaturePoliciesFunction (copy), UpsellFlowModule (copy)
+	local UpsellFlowModule1 = GetUpsellFlowModule((UserInputService:GetPlatform()))
+	
+	return if GetAppFeaturePoliciesFunction().getShouldUseDMCCALegalDisclosureInApp() then true else UpsellFlowModule1 == UpsellFlowModule.Web
 end

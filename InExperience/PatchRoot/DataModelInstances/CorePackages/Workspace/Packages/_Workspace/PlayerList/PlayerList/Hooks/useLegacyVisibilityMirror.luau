@@ -1,17 +1,17 @@
-﻿local parent = script.Parent.Parent.Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
+﻿local Parent = script.Parent.Parent.Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
 
-return function(p1)
-	-- upvalues: reactModule (ref), signalsModule (ref)
-	local var1, var2 = reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), p1 (ref)
-		return signalsModule.createSignal(p1)
+return function(p1) --[[ Line: 7 | Named "useLegacyVisibilityMirror" ]]
+	-- upvalues: ReactModule (copy), SignalsModule (copy)
+	local UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 9 ]]
+		-- upvalues: SignalsModule (upval), p1 (copy)
+		return SignalsModule.createSignal(p1)
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), p1 (ref)
-		var2(p1)
+	ReactModule.useEffect(function() --[[ Line: 13 ]]
+		-- upvalues: UseMemoResult2 (copy), p1 (copy)
+		UseMemoResult2(p1)
 	end, { p1 })
 	
-	return var1
+	return UseMemoResult
 end

@@ -1,28 +1,32 @@
-﻿local avatarSwitcher = script:FindFirstAncestor("AvatarSwitcher")
-local parent = avatarSwitcher.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useSignalState = require(parent.SignalsReact).useSignalState
-local messageCardModule = require(avatarSwitcher.Components.Messages.MessageCard)
-local experienceAvatarSupportTypeModule = require(avatarSwitcher.Enums.ExperienceAvatarSupportType)
-local getAvatarSwitcherStoreModule = require(avatarSwitcher.Stores.getAvatarSwitcherStore)
-local fFlagAvatarSwitcherUiFixes = require(parent.AvatarExperienceFlags).FFlagAvatarSwitcherUiFixes
+﻿local AvatarSwitcher = script:FindFirstAncestor("AvatarSwitcher")
+local Parent = AvatarSwitcher.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local MessageCardModule = require(AvatarSwitcher.Components.Messages.MessageCard)
+local ExperienceAvatarSupportTypeModule = require(AvatarSwitcher.Enums.ExperienceAvatarSupportType)
+local GetAvatarSwitcherStoreModule = require(AvatarSwitcher.Stores.getAvatarSwitcherStore)
+local FFlagAvatarSwitcherUiFixes = require(Parent.AvatarExperienceFlags).FFlagAvatarSwitcherUiFixes
 
-return function(p1)
-	-- upvalues: useSignalState (ref), getAvatarSwitcherStoreModule (ref), useLocalization (ref), fFlagAvatarSwitcherUiFixes (ref), experienceAvatarSupportTypeModule (ref), reactModule (ref), foundationModule (ref), messageCardModule (ref)
-	local var1 = useLocalization(if fFlagAvatarSwitcherUiFixes then {
+return function(Frame) --[[ Line: 21 | Named "AvatarsUnsupportedMessage" ]]
+	-- upvalues: UseSignalStateFunction (copy), GetAvatarSwitcherStoreModule (copy), UseLocalizationFunction (copy), FFlagAvatarSwitcherUiFixes (copy), ExperienceAvatarSupportTypeModule (copy), ReactModule (copy), FoundationModule (copy), MessageCardModule (copy)
+	local UseSignalStateResult = UseSignalStateFunction(UseSignalStateFunction(GetAvatarSwitcherStoreModule).getExperienceAvatarSupportType)
+	local UseLocalizationResult = UseLocalizationFunction(if FFlagAvatarSwitcherUiFixes then {
 		messageHeader = "Feature.AvatarSwitcher.Heading.PresetAvatars"
 	} else {
 		messageHeader = "Feature.AvatarSwitcher.Heading.Unsupported",
 		messageContent = "Feature.AvatarSwitcher.Message.Unsupported"
 	})
 	
-	return if useSignalState(useSignalState(getAvatarSwitcherStoreModule).getExperienceAvatarSupportType) == experienceAvatarSupportTypeModule.NoSupport then reactModule.createElement(foundationModule.View, { tag = "size-full-0 auto-y", LayoutOrder = p1.LayoutOrder }, {
-		WarningMessage = reactModule.createElement(messageCardModule, {
+	return if UseSignalStateResult == ExperienceAvatarSupportTypeModule.NoSupport then ReactModule.createElement(FoundationModule.View, {
+		tag = "size-full-0 auto-y",
+		LayoutOrder = Frame.LayoutOrder
+	}, {
+		WarningMessage = ReactModule.createElement(MessageCardModule, {
 			icon = "Info",
-			headerText = var1.messageHeader,
-			contentText = if fFlagAvatarSwitcherUiFixes then nil else var1.messageContent,
+			headerText = UseLocalizationResult.messageHeader,
+			contentText = if FFlagAvatarSwitcherUiFixes then nil else UseLocalizationResult.messageContent,
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y
 		})

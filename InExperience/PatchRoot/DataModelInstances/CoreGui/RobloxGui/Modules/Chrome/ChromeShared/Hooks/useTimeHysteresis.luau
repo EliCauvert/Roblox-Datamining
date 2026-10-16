@@ -1,109 +1,108 @@
-﻿local reactModule = require(game:GetService("CorePackages").Packages.React)
+﻿local ReactModule = require(game:GetService("CorePackages").Packages.React)
 
-return function(p1, p2, p3, p4, _)
-	-- upvalues: reactModule (ref)
-	if not p3 then
-		p3 = p2
+return function(p1, Current, MaxValue, p2, _) --[[ Line: 32 ]]
+	-- upvalues: ReactModule (copy)
+	if not MaxValue then
+		MaxValue = Current
 	end
-	local var1, var2 = reactModule.useState(p4 or false)
-	local var3, var4 = reactModule.useState(false)
-	local var5 = reactModule.useRef(p4 or 0)
-	local var6 = reactModule.useRef(false)
-	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), var4 (ref), var3 (ref), var1 (ref), p2 (ref), p1 (ref), var6 (ref), p3 (write)
-		local currentTime = tick()
-		local delayedThread = nil
-		local var7 = false
+	local UseStateResult, UseStateResult2 = ReactModule.useState(p2 or false)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
+	local UseRefResult = ReactModule.useRef(p2 or 0)
+	local UseRefResult1 = ReactModule.useRef(false)
+	ReactModule.useEffect(function() --[[ Line: 48 ]]
+		-- upvalues: UseRefResult (copy), UseStateResult2_1 (copy), UseStateResult1 (copy), UseStateResult (copy), Current (copy), p1 (copy), UseRefResult1 (copy), MaxValue (ref)
+		local CurrentTime = tick()
+		local DelayedThread = nil
+		local Flag = false
 		
-		local _ = function(p5, p6, p7)
-			-- upvalues: delayedThread (write), var7 (write), var5 (copy), var4 (copy), var3 (copy)
-			if p5 > 0 then
-				delayedThread = task.delay(p5, function()
-					-- upvalues: var7 (copy), delayedThread (copy), var5 (copy), p7 (ref), var4 (copy), p6 (ref)
-					var7 = true
-					delayedThread = nil
-					var5.current = p7
-					var4(p6)
+		local function _(Delay: number, p3, Current) --[[ Line: 53 ]]
+			-- upvalues: DelayedThread (ref), Flag (ref), UseRefResult (upval), UseStateResult2_1 (upval), UseStateResult1 (upval)
+			if Delay > 0 then
+				DelayedThread = task.delay(Delay, function() --[[ Line: 55 ]]
+					-- upvalues: Flag (upval), DelayedThread (upval), UseRefResult (upval), Current (copy), UseStateResult2_1 (upval), p3 (copy)
+					Flag = true
+					DelayedThread = nil
+					UseRefResult.current = Current
+					UseStateResult2_1(p3)
 				end)
 				
 				return
-			elseif var3 ~= p6 then
-				var7 = true
-				var4(p6)
+			end
+			if UseStateResult1 ~= p3 then
+				Flag = true
+				UseStateResult2_1(p3)
 			end
 		end
 		
-		if var1 then
-			local var8 = p2 - var5.current
-			local var9 = p2
+		if UseStateResult then
+			local CurrentDelta = Current - UseRefResult.current
 			
-			if var8 > 0 then
-				local var10 = true
-				delayedThread = task.delay(var8, function()
-					-- upvalues: var7 (write), delayedThread (write), var5 (copy), var9 (ref), var4 (copy), var10 (ref)
-					var7 = true
-					delayedThread = nil
-					var5.current = var9
-					var4(var10)
+			if CurrentDelta > 0 then
+				local v1 = true
+				DelayedThread = task.delay(CurrentDelta, function() --[[ Line: 55 ]]
+					-- upvalues: Flag (ref), DelayedThread (ref), UseRefResult (upval), Current (copy), UseStateResult2_1 (upval), v1 (copy)
+					Flag = true
+					DelayedThread = nil
+					UseRefResult.current = Current
+					UseStateResult2_1(v1)
 				end)
-			elseif var3 ~= true then
-				var7 = true
-				var4(true)
+			elseif UseStateResult1 ~= true then
+				Flag = true
+				UseStateResult2_1(true)
 			end
 		else
-			local var11 = var5.current - p1
-			local var12 = p1
+			local CurrentDelta1 = UseRefResult.current - p1
 			
-			if var11 > 0 then
-				local var13 = false
-				delayedThread = task.delay(var11, function()
-					-- upvalues: var7 (write), delayedThread (write), var5 (copy), var12 (ref), var4 (copy), var13 (ref)
-					var7 = true
-					delayedThread = nil
-					var5.current = var12
-					var4(var13)
+			if CurrentDelta1 > 0 then
+				local v2 = false
+				DelayedThread = task.delay(CurrentDelta1, function() --[[ Line: 55 ]]
+					-- upvalues: Flag (ref), DelayedThread (ref), UseRefResult (upval), p1 (copy), UseStateResult2_1 (upval), v2 (copy)
+					Flag = true
+					DelayedThread = nil
+					UseRefResult.current = p1
+					UseStateResult2_1(v2)
 				end)
-			elseif var3 ~= false then
-				var7 = true
-				var4(false)
+			elseif UseStateResult1 ~= false then
+				Flag = true
+				UseStateResult2_1(false)
 			end
 		end
-		return function()
-			-- upvalues: var7 (write), delayedThread (write), var6 (copy), currentTime (ref), var1 (ref), var5 (copy), p3 (copy)
-			if not var7 then
-				if delayedThread then
-					task.cancel(delayedThread)
+		return function() --[[ Line: 74 ]]
+			-- upvalues: Flag (ref), DelayedThread (ref), UseRefResult1 (upval), CurrentTime (copy), UseStateResult (copy), UseRefResult (upval), MaxValue (upval)
+			if not Flag then
+				if DelayedThread then
+					task.cancel(DelayedThread)
 				end
-				if not var6.current then
-					local var14 = tick() - currentTime
+				if not UseRefResult1.current then
+					local Elapsed = tick() - CurrentTime
 					
-					if not var1 then
-						var14 *= -1
+					if not UseStateResult then
+						Elapsed *= -1
 					end
-					var5.current = math.clamp(var5.current + var14, 0, p3)
+					UseRefResult.current = math.clamp(UseRefResult.current + Elapsed, 0, MaxValue)
 				end
 			end
-			var6.current = false
+			UseRefResult1.current = false
 		end
 	end, {
-		var1,
-		var3,
+		UseStateResult,
+		UseStateResult1,
 		p1,
-		p2,
-		p3
+		Current,
+		MaxValue
 	})
 	
-	return var3, reactModule.useCallback(function(p5, p6)
-		-- upvalues: var6 (ref), var5 (ref), p3 (write), var2 (ref)
-		var6.current = p6
+	return UseStateResult1, (ReactModule.useCallback(function(p3, Current) --[[ Line: 91 ]]
+		-- upvalues: UseRefResult1 (copy), UseRefResult (copy), MaxValue (ref), UseStateResult2 (copy)
+		UseRefResult1.current = Current
 		
-		if p6 then
-			if p5 then
-				var5.current = p3
+		if Current then
+			if p3 then
+				UseRefResult.current = MaxValue
 			else
-				var5.current = 0
+				UseRefResult.current = 0
 			end
 		end
-		var2(p5)
-	end, { var2 })
+		UseStateResult2(p3)
+	end, { UseStateResult2 }))
 end

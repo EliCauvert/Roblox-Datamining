@@ -1,33 +1,32 @@
-﻿local parent = script.Parent.Parent
-local types = parent.Types
-local byContactIdModule = require(parent.Reducers.Contacts.byContactId)
-local byDeviceContactIdModule = require(parent.Reducers.Contacts.byDeviceContactId)
-local hasSentRequestModule = require(parent.Reducers.Contacts.hasSentRequest)
-local _ = require(types.ReducerTypes)
-local deviceContactToRobloxContactModule = require(parent.Reducers.Contacts.deviceContactToRobloxContact)
-local t = {
+﻿local Parent = script.Parent.Parent
+local ByContactIdModule = require(Parent.Reducers.Contacts.byContactId)
+local ByDeviceContactIdModule = require(Parent.Reducers.Contacts.byDeviceContactId)
+local HasSentRequestModule = require(Parent.Reducers.Contacts.hasSentRequest)
+local _ = require(Parent.Types.ReducerTypes)
+local DeviceContactToRobloxContactModule = require(Parent.Reducers.Contacts.deviceContactToRobloxContact)
+local config = {
 	byContactId = {},
 	byDeviceContactId = {},
 	hasSentRequest = {},
 	deviceContactToRobloxContact = {}
 }
 
-return function(p1)
-	-- upvalues: byContactIdModule (ref), byDeviceContactIdModule (ref), hasSentRequestModule (ref), deviceContactToRobloxContactModule (ref), t (ref)
-	local var1 = byContactIdModule(p1)
-	local var2 = byDeviceContactIdModule(p1)
-	local var3 = hasSentRequestModule(p1)
-	local var4 = deviceContactToRobloxContactModule(p1)
+return function(p1) --[[ Line: 16 ]]
+	-- upvalues: ByContactIdModule (copy), ByDeviceContactIdModule (copy), HasSentRequestModule (copy), DeviceContactToRobloxContactModule (copy), config (copy)
+	local ByContactIdModuleResult = ByContactIdModule(p1)
+	local ByDeviceContactIdModuleResult = ByDeviceContactIdModule(p1)
+	local HasSentRequestModule1 = HasSentRequestModule(p1)
+	local DeviceContactToRobloxContactModuleResult = DeviceContactToRobloxContactModule(p1)
 	
-	return function(p2, p3)
-		-- upvalues: t (copy), var1 (ref), var2 (ref), var3 (ref), var4 (ref)
-		p2 = p2 or t
+	return function(p2, p3) --[[ Line: 22 ]]
+		-- upvalues: config (upval), ByContactIdModuleResult (copy), ByDeviceContactIdModuleResult (copy), HasSentRequestModule1 (copy), DeviceContactToRobloxContactModuleResult (copy)
+		local P1 = p2 or config
 		
 		return {
-			byContactId = var1(p2.byContactId, p3),
-			byDeviceContactId = var2(p2.byDeviceContactId, p3),
-			hasSentRequest = var3(p2.hasSentRequest, p3),
-			deviceContactToRobloxContact = var4(p2.deviceContactToRobloxContact, p3)
+			byContactId = ByContactIdModuleResult(P1.byContactId, p3),
+			byDeviceContactId = ByDeviceContactIdModuleResult(P1.byDeviceContactId, p3),
+			hasSentRequest = HasSentRequestModule1(P1.hasSentRequest, p3),
+			deviceContactToRobloxContact = DeviceContactToRobloxContactModuleResult(P1.deviceContactToRobloxContact, p3)
 		}
 	end
 end

@@ -1,24 +1,24 @@
-﻿local momentsCommon = script:FindFirstAncestor("MomentsCommon")
-local mediaNodeRegistryModule = require(momentsCommon.Media.mediaNodeRegistry)
-local createVideoNodeModule = require(momentsCommon.Media.Nodes.createVideoNode)
-local createMusicNodeModule = require(momentsCommon.Media.Nodes.createMusicNode)
-local createTtsNodeModule = require(momentsCommon.Media.Nodes.createTtsNode)
-local createScreenshotNodeModule = require(momentsCommon.Media.Nodes.createScreenshotNode)
-local createTextOverlayNodeModule = require(momentsCommon.Media.Nodes.createTextOverlayNode)
-local createStickerOverlayNodeModule = require(momentsCommon.Media.Nodes.createStickerOverlayNode)
-local getFFlagMomentsStickerButtonModule = require(momentsCommon.Flags.GetFFlagMomentsStickerButton)
+﻿local MomentsCommon = script:FindFirstAncestor("MomentsCommon")
+local MediaNodeRegistryModule = require(MomentsCommon.Media.mediaNodeRegistry)
+local CreateVideoNodeModule = require(MomentsCommon.Media.Nodes.createVideoNode)
+local CreateMusicNodeModule = require(MomentsCommon.Media.Nodes.createMusicNode)
+local CreateTtsNodeModule = require(MomentsCommon.Media.Nodes.createTtsNode)
+local CreateScreenshotNodeModule = require(MomentsCommon.Media.Nodes.createScreenshotNode)
+local CreateTextOverlayNodeModule = require(MomentsCommon.Media.Nodes.createTextOverlayNode)
+local CreateStickerOverlayNodeModule = require(MomentsCommon.Media.Nodes.createStickerOverlayNode)
+local GetFFlagMomentsStickerButtonModule = require(MomentsCommon.Flags.GetFFlagMomentsStickerButton)
 
-return function()
-	-- upvalues: mediaNodeRegistryModule (ref), createVideoNodeModule (ref), createMusicNodeModule (ref), createTtsNodeModule (ref), createScreenshotNodeModule (ref), createTextOverlayNodeModule (ref), getFFlagMomentsStickerButtonModule (ref), createStickerOverlayNodeModule (ref)
-	local var1 = mediaNodeRegistryModule()
-	var1.register(createVideoNodeModule)
-	var1.register(createMusicNodeModule)
-	var1.register(createTtsNodeModule)
-	var1.register(createScreenshotNodeModule)
-	var1.register(createTextOverlayNodeModule)
+return function() --[[ Line: 29 | Named "createDefaultMediaNodeRegistry" ]]
+	-- upvalues: MediaNodeRegistryModule (copy), CreateVideoNodeModule (copy), CreateMusicNodeModule (copy), CreateTtsNodeModule (copy), CreateScreenshotNodeModule (copy), CreateTextOverlayNodeModule (copy), GetFFlagMomentsStickerButtonModule (copy), CreateStickerOverlayNodeModule (copy)
+	local MediaNodeRegistryModuleResult = MediaNodeRegistryModule()
+	MediaNodeRegistryModuleResult.register(CreateVideoNodeModule)
+	MediaNodeRegistryModuleResult.register(CreateMusicNodeModule)
+	MediaNodeRegistryModuleResult.register(CreateTtsNodeModule)
+	MediaNodeRegistryModuleResult.register(CreateScreenshotNodeModule)
+	MediaNodeRegistryModuleResult.register(CreateTextOverlayNodeModule)
 	
-	if getFFlagMomentsStickerButtonModule() then
-		var1.register(createStickerOverlayNodeModule)
+	if GetFFlagMomentsStickerButtonModule() then
+		MediaNodeRegistryModuleResult.register(CreateStickerOverlayNodeModule)
 	end
-	return var1
+	return MediaNodeRegistryModuleResult
 end

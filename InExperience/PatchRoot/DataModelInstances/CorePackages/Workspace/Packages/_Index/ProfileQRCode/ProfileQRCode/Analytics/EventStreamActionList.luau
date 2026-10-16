@@ -1,55 +1,54 @@
-﻿local parent = script:FindFirstAncestor("ProfileQRCode").Parent
-local dashModule = require(parent.Dash)
-local socialLuaAnalyticsModule = require(parent.SocialLuaAnalytics)
-local btnValuesModule = require(script.Parent.Parent.Analytics.BtnValues)
-local eventNamesModule = require(script.Parent.EventNames)
-local enums = socialLuaAnalyticsModule.Analytics.Enums
-local contexts = enums.Contexts
-local eventTypes = enums.EventTypes
+﻿local Parent = script:FindFirstAncestor("ProfileQRCode").Parent
+local DashModule = require(Parent.Dash)
+local BtnValuesModule = require(script.Parent.Parent.Analytics.BtnValues)
+local EventNamesModule = require(script.Parent.EventNames)
+local Enums = require(Parent.SocialLuaAnalytics).Analytics.Enums
+local Contexts = Enums.Contexts
+local EventTypes = Enums.EventTypes
 
 return {
-	[eventNamesModule.QRPageLoad] = {
-		context = contexts.ProfileQRCode,
-		eventType = eventTypes.PageLoad,
-		formatRulesForAdditionalInfo = { shareLinkId = dashModule.identity }
+	[EventNamesModule.QRPageLoad] = {
+		context = Contexts.ProfileQRCode,
+		eventType = EventTypes.PageLoad,
+		formatRulesForAdditionalInfo = { shareLinkId = DashModule.identity }
 	},
-	[eventNamesModule.QRCodeScannerOpened] = {
-		context = contexts.ProfileQRCode,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = { btn = btnValuesModule.QRCodeScannerOpened }
+	[EventNamesModule.QRCodeScannerOpened] = {
+		context = Contexts.ProfileQRCode,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = { btn = BtnValuesModule.QRCodeScannerOpened }
 	},
-	[eventNamesModule.QRCodeScannerTooltipShown] = {
-		context = contexts.ProfileQRCode,
-		eventType = eventTypes.ProfileQRCodeTooltipShown
+	[EventNamesModule.QRCodeScannerTooltipShown] = {
+		context = Contexts.ProfileQRCode,
+		eventType = EventTypes.ProfileQRCodeTooltipShown
 	},
-	[eventNamesModule.QRPageLoadFailed] = {
-		context = contexts.ProfileQRCode,
-		eventType = eventTypes.PageLoadFailed,
-		formatRulesForAdditionalInfo = { errorReason = dashModule.identity }
+	[EventNamesModule.QRPageLoadFailed] = {
+		context = Contexts.ProfileQRCode,
+		eventType = EventTypes.PageLoadFailed,
+		formatRulesForAdditionalInfo = { errorReason = DashModule.identity }
 	},
-	[eventNamesModule.QRPageFriendRequestBannerShown] = {
-		context = contexts.ProfileQRCode,
-		eventType = eventTypes.ProfileQRCodeNotificationBannerShown,
-		formatRulesForAdditionalInfo = { qrCodeBannerQueueSize = dashModule.identity }
+	[EventNamesModule.QRPageFriendRequestBannerShown] = {
+		context = Contexts.ProfileQRCode,
+		eventType = EventTypes.ProfileQRCodeNotificationBannerShown,
+		formatRulesForAdditionalInfo = { qrCodeBannerQueueSize = DashModule.identity }
 	},
-	[eventNamesModule.QRPageFriendRequestBannerAccepted] = {
-		context = contexts.ProfileQRCode,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = { btn = btnValuesModule.FriendRequestBannerAccepted },
-		formatRulesForAdditionalInfo = { qrCodeBannerQueueSize = dashModule.identity }
+	[EventNamesModule.QRPageFriendRequestBannerAccepted] = {
+		context = Contexts.ProfileQRCode,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = { btn = BtnValuesModule.FriendRequestBannerAccepted },
+		formatRulesForAdditionalInfo = { qrCodeBannerQueueSize = DashModule.identity }
 	},
-	[eventNamesModule.QRPageFriendRequestBannerDismissed] = {
-		context = contexts.ProfileQRCode,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = { btn = btnValuesModule.FriendRequestBannerDismissed },
-		formatRulesForAdditionalInfo = { qrCodeBannerQueueSize = dashModule.identity }
+	[EventNamesModule.QRPageFriendRequestBannerDismissed] = {
+		context = Contexts.ProfileQRCode,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = { btn = BtnValuesModule.FriendRequestBannerDismissed },
+		formatRulesForAdditionalInfo = { qrCodeBannerQueueSize = DashModule.identity }
 	},
-	[eventNamesModule.RefreshQrSession] = {
-		context = contexts.ProfileQRCode,
-		eventType = eventTypes.RefreshQrSession,
+	[EventNamesModule.RefreshQrSession] = {
+		context = Contexts.ProfileQRCode,
+		eventType = EventTypes.RefreshQrSession,
 		formatRulesForAdditionalInfo = {
-			success = dashModule.identity,
-			responseCode = dashModule.identity
+			success = DashModule.identity,
+			responseCode = DashModule.identity
 		}
 	}
 }

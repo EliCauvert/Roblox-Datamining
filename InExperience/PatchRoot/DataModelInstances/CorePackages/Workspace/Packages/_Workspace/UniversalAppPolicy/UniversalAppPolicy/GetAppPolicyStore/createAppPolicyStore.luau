@@ -1,15 +1,15 @@
-﻿local universalAppPolicy = script:FindFirstAncestor("UniversalAppPolicy")
-local signalsModule = require(universalAppPolicy.Parent.Signals)
-local appFeaturePoliciesModule = require(universalAppPolicy.AppFeaturePolicies)
-local universalAppGetPolicyModule = require(universalAppPolicy.UniversalAppGetPolicy)
+﻿local UniversalAppPolicy = script:FindFirstAncestor("UniversalAppPolicy")
+local SignalsModule = require(UniversalAppPolicy.Parent.Signals)
+local AppFeaturePoliciesModule = require(UniversalAppPolicy.AppFeaturePolicies)
+local UniversalAppGetPolicyModule = require(UniversalAppPolicy.UniversalAppGetPolicy)
 
-return function()
-	-- upvalues: signalsModule (ref), appFeaturePoliciesModule (ref), universalAppGetPolicyModule (ref)
-	local var1, var2 = signalsModule.createSignal(appFeaturePoliciesModule(universalAppGetPolicyModule.read() or {}))
-	universalAppGetPolicyModule.onPolicyChanged(function(p1)
-		-- upvalues: var2 (ref), appFeaturePoliciesModule (copy)
-		var2(appFeaturePoliciesModule(p1 or {}))
+return function() --[[ Line: 19 | Named "createAppPolicyStore" ]]
+	-- upvalues: SignalsModule (copy), AppFeaturePoliciesModule (copy), UniversalAppGetPolicyModule (copy)
+	local Signal, Signal2 = SignalsModule.createSignal(AppFeaturePoliciesModule(UniversalAppGetPolicyModule.read() or {}))
+	UniversalAppGetPolicyModule.onPolicyChanged(function(p1) --[[ Line: 22 ]]
+		-- upvalues: Signal2 (copy), AppFeaturePoliciesModule (upval)
+		Signal2(AppFeaturePoliciesModule(p1 or {}))
 	end)
 	
-	return { getAppPolicy = var1 }
+	return { getAppPolicy = Signal }
 end

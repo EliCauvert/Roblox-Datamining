@@ -1,100 +1,101 @@
-﻿local sceneUnderstanding = script:FindFirstAncestor("SceneUnderstanding")
-local userGameSettingsService = UserSettings():GetService("UserGameSettings")
-local safelyAccessPropertyModule = require(sceneUnderstanding.safelyAccessProperty)
-local getOutputWiresModule = require(sceneUnderstanding.wiring.getOutputWires)
-local _ = require(sceneUnderstanding.wiring.types)
-local toWirableInstanceModule = require(sceneUnderstanding.wiring.toWirableInstance)
+﻿local SceneUnderstanding = script:FindFirstAncestor("SceneUnderstanding")
+local UserGameSettings = UserSettings():GetService("UserGameSettings")
+local SafelyAccessPropertyModule = require(SceneUnderstanding.safelyAccessProperty)
+local GetOutputWiresModule = require(SceneUnderstanding.wiring.getOutputWires)
+local _ = require(SceneUnderstanding.wiring.types)
+local ToWirableInstanceModule = require(SceneUnderstanding.wiring.toWirableInstance)
 
-local function _(p1)
-	-- upvalues: safelyAccessPropertyModule (ref)
-	if not p1.IsPlaying then
+local function _(Sound) --[[ Line: 13 | Named "calculateSoundPotentialAudibility" ]]
+	-- upvalues: SafelyAccessPropertyModule (copy)
+	if not Sound.IsPlaying then
 		return 0
 	end
-	local var1 = safelyAccessPropertyModule(p1, "RollOffGain", 0)
-	local var2 = if p1.SoundGroup then p1.SoundGroup.Volume else 1
+	local RollOffGain = SafelyAccessPropertyModule(Sound, "RollOffGain", 0)
+	local Volume = if Sound.SoundGroup then Sound.SoundGroup.Volume else 1
 	
-	if var1 < 1 then
-		var1 /= 10
+	if RollOffGain < 1 then
+		RollOffGain /= 10
 	end
-	return var2 * p1.Volume * var1
+	return Volume * Sound.Volume * RollOffGain
 end
 
-local function getOutputsOf(p1)
-	-- upvalues: getOutputWiresModule (ref), toWirableInstanceModule (ref)
-	if typeof(p1) == "Instance" and p1:IsA("AudioEmitter") then
-		return p1:GetInteractingListeners()
+local function getOutputsOf(AudioEmitter) --[[ Line: 41 ]]
+	-- upvalues: GetOutputWiresModule (copy), ToWirableInstanceModule (copy)
+	if typeof(AudioEmitter) == "Instance" and AudioEmitter:IsA("AudioEmitter") then
+		return (AudioEmitter:GetInteractingListeners())
 	end
-	local t = {}
+	local List = {}
 	
-	for i, v in getOutputWiresModule(p1) do
-		local var1 = toWirableInstanceModule(v.TargetInstance)
+	for _, value in GetOutputWiresModule(AudioEmitter) do
+		local WirableInstanceModule = ToWirableInstanceModule(value.TargetInstance)
 		
-		if var1 then
-			table.insert(t, var1)
+		if WirableInstanceModule then
+			table.insert(List, WirableInstanceModule)
 		end
 	end
-	return t
+	return List
 end
 
-local _ = function(p2)
-	local var2 = 0
+local _ = function(AudioEmitter): number --[[ Line: 60 | Named "getAudibilityMultiplierFor" ]]
+	local NewAudibilityFor = 0
 	
-	for i, v in p2:GetInteractingListeners() do
-		var2 += v:GetAudibilityFor(p2)
+	for _, interactingListener in AudioEmitter:GetInteractingListeners() do
+		NewAudibilityFor += interactingListener:GetAudibilityFor(AudioEmitter)
 	end
-	return var2
+	return NewAudibilityFor
 end
 
-local function getAudibilityOf(p3, p4)
-	-- upvalues: getOutputsOf (ref), getAudibilityOf (ref)
-	local var3 = p4 or {}
+local function getAudibilityOf(Object, p1): number --[[ Line: 68 ]]
+	-- upvalues: getOutputsOf (copy), getAudibilityOf (copy)
+	local T = if p1 then p1 else {}
 	
-	if var3[p3] then
+	if T[Object] then
 		return 0
 	end
-	var3[p3] = true
-	local var4 = 1
+	T[Object] = true
+	local Volume = 1
 	
-	if typeof(p3) == "Instance" then
-		if p3:IsA("AudioPlayer") or p3:IsA("AudioFader") then
-			var4 = p3.Volume
-		elseif p3:IsA("AudioEmitter") then
-			local var5 = 0
+	if typeof(Object) == "Instance" then
+		if Object:IsA("AudioPlayer") or Object:IsA("AudioFader") then
+			Volume = Object.Volume
+		elseif Object:IsA("AudioEmitter") then
+			local NewAudibilityFor = 0
 			
-			for i, v in p3:GetInteractingListeners() do
-				var5 += v:GetAudibilityFor(p3)
+			for _, interactingListener in Object:GetInteractingListeners() do
+				NewAudibilityFor += interactingListener:GetAudibilityFor(Object)
 			end
-			var4 = var5
-		elseif p3:IsA("AudioDeviceOutput") then
+			Volume = NewAudibilityFor
+		elseif Object:IsA("AudioDeviceOutput") then
 			return 1
 		end
 	end
-	local var6 = 0
+	local Total = 0
 	
-	for i, v in getOutputsOf(p3) do
-		var6 += var4 * getAudibilityOf(v, var3)
+	for _, value in getOutputsOf(Object) do
+		Total += Volume * getAudibilityOf(value, T)
 	end
-	return var6
+	return Total
 end
 
-return function(p5)
-	-- upvalues: safelyAccessPropertyModule (ref), userGameSettingsService (ref), getAudibilityOf (ref)
-	local var7
-	local var8 = safelyAccessPropertyModule(userGameSettingsService, "MasterVolume", 0)
-	local _ = 0
+return function(Sound: Sound) --[[ Line: 105 | Named "calculatePotentialAudibility" ]]
+	-- upvalues: SafelyAccessPropertyModule (copy), UserGameSettings (copy), getAudibilityOf (copy)
+	local MasterVolume = SafelyAccessPropertyModule(UserGameSettings, "MasterVolume", 0)
+	local AudibilityOf = nil
 	
-	if not p5:IsA("Sound") then
-		var7 = getAudibilityOf(p5)
-	elseif p5.IsPlaying then
-		local var9 = safelyAccessPropertyModule(p5, "RollOffGain", 0)
-		local var10 = if p5.SoundGroup then p5.SoundGroup.Volume else 1
-		
-		if var9 < 1 then
-			var9 /= 10
+	if Sound:IsA("Sound") then
+		if Sound.IsPlaying then
+			local RollOffGain = SafelyAccessPropertyModule(Sound, "RollOffGain", 0)
+			local Volume = if Sound.SoundGroup then Sound.SoundGroup.Volume else 1
+			
+			if RollOffGain < 1 then
+				RollOffGain /= 10
+			end
+			AudibilityOf = Volume * Sound.Volume * RollOffGain
+		else
+			AudibilityOf = 0
 		end
-		var7 = var10 * p5.Volume * var9
 	else
-		var7 = 0
+		AudibilityOf = getAudibilityOf(Sound)
 	end
-	return var8 * var7
+	return MasterVolume * AudibilityOf
 end

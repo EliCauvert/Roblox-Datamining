@@ -1,19 +1,20 @@
 ﻿local _ = require(script:FindFirstAncestor("AvatarExperienceCommon").Parent.AvatarExperienceUIKit)
 
-return function(p1, p2)
-	local unit = p1.unit
-	local var1 = p1.value == 1
+return function(p1, p2) --[[ Line: 12 | Named "getRemainingTimeText" ]]
+	local Unit = p1.unit
+	local IsValueMatch = p1.value == 1
 	
-	if unit == "days" then
-		return if var1 then p2.daySingular else p2.dayPlural
-	elseif unit == "hours" then
-		return if var1 then p2.hourSingular else p2.hourPlural
-	elseif unit == "minutes" then
-		return if var1 then p2.minuteSingular else p2.minutePlural
-	elseif unit ~= "seconds" then
-		warn(`getRemainingTimeText: unexpected TimeUnit "{unit}"`)
+	if Unit == "days" then
+		return if IsValueMatch then p2.daySingular else p2.dayPlural
+	elseif Unit == "hours" then
+		return if IsValueMatch then p2.hourSingular else p2.hourPlural
+	elseif Unit == "minutes" then
+		return if IsValueMatch then p2.minuteSingular else p2.minutePlural
+	elseif Unit == "seconds" then
+		return if IsValueMatch then p2.secondSingular else p2.secondPlural
+	else
+		warn(`getRemainingTimeText: unexpected TimeUnit "{Unit}"`)
 		
 		return nil
 	end
-	return if var1 then p2.secondSingular else p2.secondPlural
 end

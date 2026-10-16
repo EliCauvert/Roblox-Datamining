@@ -1,18 +1,17 @@
-﻿local parent = script:FindFirstAncestor("DataHydration").Parent
-local httpClientModule = require(parent.HttpClient)
-local sharedFlagsModule = require(parent.SharedFlags)
+﻿local Parent = script:FindFirstAncestor("DataHydration").Parent
+local HttpClientModule = require(Parent.HttpClient)
 local _ = require(script.Parent.MomentsStoreTypes)
-local fetchMomentsByIdsModule = require(script.Parent.Requests.fetchMomentsByIds)
-local fFlagMomentsPassFeedItemIdToBackendApis = sharedFlagsModule.FFlagMomentsPassFeedItemIdToBackendApis
+local FetchMomentsByIdsModule = require(script.Parent.Requests.fetchMomentsByIds)
+local FFlagMomentsPassFeedItemIdToBackendApis = require(Parent.SharedFlags).FFlagMomentsPassFeedItemIdToBackendApis
 
-return function(p1)
-	-- upvalues: httpClientModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), fetchMomentsByIdsModule (ref)
-	p1 = p1 or {}
+return function(p1) --[[ Line: 15 | Named "createMomentsStore" ]]
+	-- upvalues: HttpClientModule (copy), FFlagMomentsPassFeedItemIdToBackendApis (copy), FetchMomentsByIdsModule (copy)
+	local P0 = p1 or {}
 	
 	return {
-		getMomentsByIds = function(p2, p3)
-			-- upvalues: httpClientModule (copy), fFlagMomentsPassFeedItemIdToBackendApis (copy), fetchMomentsByIdsModule (copy), p1 (ref)
-			return httpClientModule.asPromise(if fFlagMomentsPassFeedItemIdToBackendApis then fetchMomentsByIdsModule(p2, p1.network, p3) else fetchMomentsByIdsModule(p2, p1.network))
+		getMomentsByIds = function(p2, p3) --[[ Line: 18 ]]
+			-- upvalues: HttpClientModule (upval), FFlagMomentsPassFeedItemIdToBackendApis (upval), FetchMomentsByIdsModule (upval), P0 (copy)
+			return HttpClientModule.asPromise(if FFlagMomentsPassFeedItemIdToBackendApis then FetchMomentsByIdsModule(p2, P0.network, p3) else FetchMomentsByIdsModule(p2, P0.network))
 		end
 	}
 end

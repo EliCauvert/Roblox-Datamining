@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.AvatarExperienceNavigation.AvatarExperienceNavigation)
+﻿return (require(script.Parent._Workspace.AvatarExperienceNavigation.AvatarExperienceNavigation))

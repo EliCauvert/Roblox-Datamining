@@ -1,103 +1,104 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local playersService = game:GetService("Players")
-local reactModule = require(corePackagesService.Packages.React)
-local signalsReactModule = require(corePackagesService.Packages.SignalsReact)
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local iconName = foundationModule.Enums.IconName
-local visibility = foundationModule.Enums.Visibility
-local iconButton = foundationModule.IconButton
-local scrollView = foundationModule.ScrollView
-local text = foundationModule.Text
-local view = foundationModule.View
-local robloxAppEnumsModule = require(corePackagesService.Workspace.Packages.RobloxAppEnums)
-local useDeviceOrientation = require(corePackagesService.Workspace.Packages.RobloxAppHooks).useDeviceOrientation
-local responsiveModule = require(corePackagesService.Workspace.Packages.Responsive)
-local useBreakpointXOrLarger = responsiveModule.useBreakpointXOrLarger
-local useDispatch = require(corePackagesService.Workspace.Packages.RoactUtils).Hooks.RoactRodux.useDispatch
-local peopleServiceModule = require(corePackagesService.Workspace.Packages.PeopleService)
-local enumsModule = require(corePackagesService.Workspace.Packages.ProfilePlatform.Enums)
-local currentlyWearingModule = require(corePackagesService.Workspace.Packages.ProfilePlatform.CurrentlyWearing)
-local getProfilePlatformModule = require(corePackagesService.Workspace.Packages.ProfilePlatform.getProfilePlatform)
-local useDynamicSizeMarginModule = require(corePackagesService.Workspace.Packages.ProfilePlatform.useDynamicSizeMargin)
-local profileWrapperContextModule = require(corePackagesService.Workspace.Packages.ProfilePlatform.ProfileWrapperContext)
-local addConnectionButtonModule = require(script.Parent.AddConnectionButton)
-local profileHeaderModule = require(script.Parent.ProfileHeader)
+﻿local CorePackages = game:GetService("CorePackages")
+local Players = game:GetService("Players")
+local ReactModule = require(CorePackages.Packages.React)
+local SignalsReactModule = require(CorePackages.Packages.SignalsReact)
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local IconName = FoundationModule.Enums.IconName
+local Visibility = FoundationModule.Enums.Visibility
+local IconButton = FoundationModule.IconButton
+local ScrollView = FoundationModule.ScrollView
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local RobloxAppEnumsModule = require(CorePackages.Workspace.Packages.RobloxAppEnums)
+local UseDeviceOrientationFunction = require(CorePackages.Workspace.Packages.RobloxAppHooks).useDeviceOrientation
+local ResponsiveModule = require(CorePackages.Workspace.Packages.Responsive)
+local UseBreakpointXOrLargerFunction = ResponsiveModule.useBreakpointXOrLarger
+local UseDispatchFunction = require(CorePackages.Workspace.Packages.RoactUtils).Hooks.RoactRodux.useDispatch
+local PeopleServiceModule = require(CorePackages.Workspace.Packages.PeopleService)
+local EnumsModule = require(CorePackages.Workspace.Packages.ProfilePlatform.Enums)
+local CurrentlyWearingModule = require(CorePackages.Workspace.Packages.ProfilePlatform.CurrentlyWearing)
+local GetProfilePlatformModule = require(CorePackages.Workspace.Packages.ProfilePlatform.getProfilePlatform)
+local UseDynamicSizeMarginModule = require(CorePackages.Workspace.Packages.ProfilePlatform.useDynamicSizeMargin)
+local ProfileWrapperContextModule = require(CorePackages.Workspace.Packages.ProfilePlatform.ProfileWrapperContext)
+local AddConnectionButtonModule = require(script.Parent.AddConnectionButton)
+local ProfileHeaderModule = require(script.Parent.ProfileHeader)
 
-return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), profileWrapperContextModule (ref), peopleServiceModule (ref), playersService (ref), signalsReactModule (ref), useDeviceOrientation (ref), useBreakpointXOrLarger (ref), responsiveModule (ref), robloxAppEnumsModule (ref), useDynamicSizeMarginModule (ref), useDispatch (ref), getProfilePlatformModule (ref), enumsModule (ref), view (ref), iconButton (ref), iconName (ref), text (ref), scrollView (ref), visibility (ref), profileHeaderModule (ref), addConnectionButtonModule (ref), currentlyWearingModule (ref)
-	local var1 = useTokens()
-	local var2 = reactModule.useContext(profileWrapperContextModule)
-	local profileId = var2.profileId
-	local profileType = var2.profileType
-	local var3 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: peopleServiceModule (copy)
-		return peopleServiceModule.getService("FriendStatusStore")
-	end, {}).getShouldShowFriendButton(p1.userId, reactModule.useMemo(function()
-		-- upvalues: p1 (ref), playersService (copy)
-		return if p1.userId then playersService:GetPlayerByUserId(p1.userId) else nil
-	end, { p1.userId })))
-	local var4 = useBreakpointXOrLarger(responsiveModule.Keys.Medium)
-	local var5 = useDeviceOrientation() == robloxAppEnumsModule.DeviceOrientationMode.Portrait and not var4
-	local var6, var7 = useDynamicSizeMarginModule()
-	local var8, var9 = reactModule.useState(true)
-	local var10, var11 = reactModule.useState(false)
-	local var12 = useDispatch()
-	reactModule.useEffect(function()
-		-- upvalues: var12 (ref), getProfilePlatformModule (copy), profileId (ref), profileType (ref), enumsModule (copy), var9 (ref), var11 (ref)
-		var12(getProfilePlatformModule.API({
+return ReactModule.memo(function(p1) --[[ Line: 41 ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), ProfileWrapperContextModule (copy), PeopleServiceModule (copy), Players (copy), SignalsReactModule (copy), UseDeviceOrientationFunction (copy), UseBreakpointXOrLargerFunction (copy), ResponsiveModule (copy), RobloxAppEnumsModule (copy), UseDynamicSizeMarginModule (copy), UseDispatchFunction (copy), GetProfilePlatformModule (copy), EnumsModule (copy), View (copy), IconButton (copy), IconName (copy), Text (copy), ScrollView (copy), Visibility (copy), ProfileHeaderModule (copy), AddConnectionButtonModule (copy), CurrentlyWearingModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseContextResult = ReactModule.useContext(ProfileWrapperContextModule)
+	local ProfileId = UseContextResult.profileId
+	local ProfileType = UseContextResult.profileType
+	local UseSignalStateResult = SignalsReactModule.useSignalState(ReactModule.useMemo(function() --[[ Line: 48 ]]
+		-- upvalues: PeopleServiceModule (upval)
+		return PeopleServiceModule.getService("FriendStatusStore")
+	end, {}).getShouldShowFriendButton(p1.userId, (ReactModule.useMemo(function() --[[ Line: 52 ]]
+		-- upvalues: p1 (copy), Players (upval)
+		return if p1.userId then Players:GetPlayerByUserId(p1.userId) else nil
+	end, { p1.userId }))))
+	local UseDeviceOrientationResult = UseDeviceOrientationFunction()
+	local UseBreakpointXOrLargerResult = UseBreakpointXOrLargerFunction(ResponsiveModule.Keys.Medium)
+	local NoUseBreakpointXOrLargerResult: boolean = UseDeviceOrientationResult == RobloxAppEnumsModule.DeviceOrientationMode.Portrait and not UseBreakpointXOrLargerResult
+	local UseDynamicSizeMarginModuleResult, UseDynamicSizeMarginModuleResult2 = UseDynamicSizeMarginModule()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(true)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
+	local UseDispatchResult = UseDispatchFunction()
+	ReactModule.useEffect(function() --[[ Line: 71 ]]
+		-- upvalues: UseDispatchResult (copy), GetProfilePlatformModule (upval), ProfileId (copy), ProfileType (copy), EnumsModule (upval), UseStateResult2 (copy), UseStateResult2_1 (copy)
+		UseDispatchResult(GetProfilePlatformModule.API({
 			includeComponentOrdering = false,
 			onlyEssentialComponents = true,
-			profileId = profileId,
-			profileType = profileType,
+			profileId = ProfileId,
+			profileType = ProfileType,
 			components = {
-				{ component = enumsModule.Components.CurrentlyWearing },
-				{ component = enumsModule.Components.UserProfileHeader }
+				{ component = EnumsModule.Components.CurrentlyWearing },
+				{ component = EnumsModule.Components.UserProfileHeader }
 			}
-		})):andThen(function(_)
-			-- upvalues: var9 (copy), var11 (copy)
-			var9(false)
-			var11(false)
-		end):catch(function(_)
-			-- upvalues: var9 (copy), var11 (copy)
-			var9(false)
-			var11(true)
+		})):andThen(function(_) --[[ Line: 86 ]]
+			-- upvalues: UseStateResult2 (upval), UseStateResult2_1 (upval)
+			UseStateResult2(false)
+			UseStateResult2_1(false)
+		end):catch(function(_) --[[ Line: 90 ]]
+			-- upvalues: UseStateResult2 (upval), UseStateResult2_1 (upval)
+			UseStateResult2(false)
+			UseStateResult2_1(true)
 		end)
-	end, { profileId, profileType })
+	end, { ProfileId, ProfileType })
 	
-	return if var8 then nil elseif var10 then reactModule.createElement(view, { tag = "size-full col" }, {
-		BackBar = reactModule.createElement(view, {
+	return if UseStateResult then nil elseif UseStateResult1 then ReactModule.createElement(View, { tag = "size-full col" }, {
+		BackBar = ReactModule.createElement(View, {
 			tag = "size-full-0 auto-y row padding-xsmall",
 			LayoutOrder = 1
 		}, {
-			BackButton = reactModule.createElement(iconButton, {
-				icon = iconName.ChevronLargeLeft,
+			BackButton = ReactModule.createElement(IconButton, {
+				icon = IconName.ChevronLargeLeft,
 				onActivated = p1.closePage
 			})
 		}),
-		ErrorMessage = reactModule.createElement(text, {
+		ErrorMessage = ReactModule.createElement(Text, {
 			tag = "size-full-0 auto-y content-default text-title-medium",
 			Text = "Error loading profile",
 			LayoutOrder = 2
 		})
-	}) else reactModule.createElement(view, {
+	}) else ReactModule.createElement(View, {
 		tag = "size-full padding-bottom-medium",
-		onAbsoluteSizeChanged = var7
+		onAbsoluteSizeChanged = UseDynamicSizeMarginModuleResult2
 	}, {
-		BackBar = reactModule.createElement(view, {
+		BackBar = ReactModule.createElement(View, {
 			tag = "size-full-0 auto-y row padding-xsmall",
 			LayoutOrder = 1
 		}, {
-			BackButton = reactModule.createElement(iconButton, {
-				icon = iconName.ChevronLargeLeft,
+			BackButton = ReactModule.createElement(IconButton, {
+				icon = IconName.ChevronLargeLeft,
 				onActivated = p1.closePage
 			})
 		}),
-		ScrollView = reactModule.createElement(scrollView, {
+		ScrollView = ReactModule.createElement(ScrollView, {
 			tag = "size-full",
 			LayoutOrder = 2,
 			scroll = {
-				scrollBarVisibility = visibility.Auto,
+				scrollBarVisibility = Visibility.Auto,
 				ScrollingDirection = Enum.ScrollingDirection.Y,
 				CanvasSize = UDim2.fromScale(1, 0),
 				AutomaticCanvasSize = Enum.AutomaticSize.Y,
@@ -106,34 +107,37 @@ return reactModule.memo(function(p1)
 			layout = {
 				FillDirection = Enum.FillDirection.Vertical,
 				SortOrder = Enum.SortOrder.LayoutOrder,
-				Padding = UDim.new(0, var1.Padding.XXLarge)
+				Padding = UDim.new(0, UseTokensResult.Padding.XXLarge)
 			},
 			padding = { top = UDim.new(0, 48) }
 		}, {
-			ProfileHeaderContainer = reactModule.createElement(view, {
+			ProfileHeaderContainer = ReactModule.createElement(View, {
 				LayoutOrder = 1,
 				tag = {
 					["size-full-0 auto-y"] = true,
-					["col gap-xxlarge"] = var5
+					["col gap-xxlarge"] = NoUseBreakpointXOrLargerResult
 				}
 			}, {
-				ProfileHeader = reactModule.createElement(profileHeaderModule, { layoutOrder = 1, profileId = profileId }),
-				AddConnectionButtonContainer = if var3 then reactModule.createElement(view, {
+				ProfileHeader = ReactModule.createElement(ProfileHeaderModule, { layoutOrder = 1, profileId = ProfileId }),
+				AddConnectionButtonContainer = if UseSignalStateResult then ReactModule.createElement(View, {
 					ZIndex = 2,
 					LayoutOrder = 2,
 					tag = {
-						["size-full-0 auto-y"] = var5,
-						["size-2500-2200 row align-y-center"] = not var5 and not var4,
-						["size-3000-2200 row align-y-center"] = not var5 and var4
+						["size-full-0 auto-y"] = NoUseBreakpointXOrLargerResult,
+						["size-2500-2200 row align-y-center"] = not NoUseBreakpointXOrLargerResult and not UseBreakpointXOrLargerResult,
+						["size-3000-2200 row align-y-center"] = not NoUseBreakpointXOrLargerResult and UseBreakpointXOrLargerResult
 					},
-					padding = if var5 then { left = UDim.new(0, var6), right = UDim.new(0, var6) } else nil,
+					padding = if NoUseBreakpointXOrLargerResult then {
+						left = UDim.new(0, UseDynamicSizeMarginModuleResult),
+						right = UDim.new(0, UseDynamicSizeMarginModuleResult)
+					} else nil,
 					AnchorPoint = Vector2.new(1, 0),
-					Position = UDim2.new(1, -var6, 0, 0)
+					Position = UDim2.new(1, -UseDynamicSizeMarginModuleResult, 0, 0)
 				}, {
-					AddConnectionButton = reactModule.createElement(addConnectionButtonModule, { userId = p1.userId })
+					AddConnectionButton = ReactModule.createElement(AddConnectionButtonModule, { userId = p1.userId })
 				}) else nil
 			}),
-			CurrentlyWearingCarousel = reactModule.createElement(currentlyWearingModule, { layoutOrder = 3 })
+			CurrentlyWearingCarousel = ReactModule.createElement(CurrentlyWearingModule, { layoutOrder = 3 })
 		})
 	})
 end)

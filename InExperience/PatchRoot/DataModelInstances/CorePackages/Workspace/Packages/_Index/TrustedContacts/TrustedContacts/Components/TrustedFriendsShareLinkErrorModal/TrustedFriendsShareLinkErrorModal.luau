@@ -1,44 +1,44 @@
-﻿local parent = script:FindFirstAncestor("TrustedContacts").Parent
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local foundationModule = require(parent.Foundation)
-local dialog = foundationModule.Dialog
-local dialogSize = foundationModule.Enums.DialogSize
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local fFlagTCShareLinkErrorModalTextRename = require(parent.SharedFlags).FFlagTCShareLinkErrorModalTextRename
+﻿local Parent = script:FindFirstAncestor("TrustedContacts").Parent
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local FoundationModule = require(Parent.Foundation)
+local Dialog = FoundationModule.Dialog
+local DialogSize = FoundationModule.Enums.DialogSize
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local FFlagTCShareLinkErrorModalTextRename = require(Parent.SharedFlags).FFlagTCShareLinkErrorModalTextRename
 
-return function(p1)
-	-- upvalues: useLocalization (ref), fFlagTCShareLinkErrorModalTextRename (ref), reactModule (ref), dialog (ref), dialogSize (ref), buttonVariant (ref)
-	local navigation = p1.navigation
-	local extraProps = navigation.getParam("extraProps")
-	local var1 = useLocalization({
+return function(p1) --[[ Line: 24 | Named "TrustedFriendsShareLinkErrorModal" ]]
+	-- upvalues: UseLocalizationFunction (copy), FFlagTCShareLinkErrorModalTextRename (copy), ReactModule (copy), Dialog (copy), DialogSize (copy), ButtonVariant (copy)
+	local Navigation = p1.navigation
+	local ExtraPropsParam = Navigation.getParam("extraProps")
+	local UseLocalizationResult = UseLocalizationFunction({
 		expiredTitle = "Feature.Friends.Title.TrustedFriendsExpiredLink",
 		invalidTitle = "Feature.Friends.Title.TrustedFriendsInvalidLink",
 		invalidDescription = "Feature.Friends.Description.TrustedFriendsInvalidLink",
 		ok = "CommonUI.Controls.Action.OK",
-		expiredDescription = if fFlagTCShareLinkErrorModalTextRename then "Feature.Friends.Description.TrustedFriendsExpiredLink" else "Feature.Friends.Description.TrustedConnectionExpiredLink"
+		expiredDescription = if FFlagTCShareLinkErrorModalTextRename then "Feature.Friends.Description.TrustedFriendsExpiredLink" else "Feature.Friends.Description.TrustedConnectionExpiredLink"
 	})
 	
-	return reactModule.createElement(dialog.Root, { size = dialogSize.Medium }, {
-		Title = reactModule.createElement(dialog.Title, {
+	return ReactModule.createElement(Dialog.Root, { size = DialogSize.Medium }, {
+		Title = ReactModule.createElement(Dialog.Title, {
 			LayoutOrder = 1,
-			text = if extraProps.errorType == "Expired" then var1.expiredTitle else var1.invalidTitle
+			text = if ExtraPropsParam.errorType == "Expired" then UseLocalizationResult.expiredTitle else UseLocalizationResult.invalidTitle
 		}),
-		BodyText = reactModule.createElement(dialog.Text, {
+		BodyText = ReactModule.createElement(Dialog.Text, {
 			LayoutOrder = 2,
-			Text = if extraProps.errorType == "Expired" then var1.expiredDescription else var1.invalidDescription
+			Text = if ExtraPropsParam.errorType == "Expired" then UseLocalizationResult.expiredDescription else UseLocalizationResult.invalidDescription
 		}),
-		DialogActions = reactModule.createElement(dialog.Actions, {
+		DialogActions = ReactModule.createElement(Dialog.Actions, {
 			LayoutOrder = 3,
 			actions = {
 				{
-					text = var1.ok,
-					variant = buttonVariant.Emphasis,
-					onActivated = reactModule.useCallback(function()
-						-- upvalues: navigation (ref), extraProps (ref)
-						navigation.pop()
-						extraProps.closeModal()
-					end, { navigation, extraProps.closeModal })
+					text = UseLocalizationResult.ok,
+					variant = ButtonVariant.Emphasis,
+					onActivated = ReactModule.useCallback(function() --[[ Line: 38 ]]
+						-- upvalues: Navigation (copy), ExtraPropsParam (copy)
+						Navigation.pop()
+						ExtraPropsParam.closeModal()
+					end, { Navigation, ExtraPropsParam.closeModal })
 				}
 			}
 		})

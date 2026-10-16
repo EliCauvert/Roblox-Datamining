@@ -1,46 +1,42 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local createDataCacheModule = require(dataHydration.createDataCache)
-local createDataResolverModule = require(dataHydration.createDataResolver)
-local _ = require(dataHydration.DataHydrationTypes)
-local cryoModule = require(parent.Cryo)
-local signalsModule = require(parent.Signals)
-local requestsModule = require(dataHydration.Presence.Requests)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local CreateDataCacheModule = require(DataHydration.createDataCache)
+local CreateDataResolverModule = require(DataHydration.createDataResolver)
+local _ = require(DataHydration.DataHydrationTypes)
+local CryoModule = require(Parent.Cryo)
+local SignalsModule = require(Parent.Signals)
+local RequestsModule = require(DataHydration.Presence.Requests)
 local _ = require(script.Parent.Requests.MultiGetPresenceByUserIds)
-local normalizePresenceRawDataModule = require(script.Parent.normalizePresenceRawData)
-local fFlagProfileCTAHydratePresenceFromMetadataModule = require(dataHydration.Flags.FFlagProfileCTAHydratePresenceFromMetadata)
-local presenceStorePollingTtlSec = game:DefineFastInt("PresenceStorePollingTtlSec", 60)
+local NormalizePresenceRawDataModule = require(script.Parent.normalizePresenceRawData)
+local FFlagProfileCTAHydratePresenceFromMetadataModule = require(DataHydration.Flags.FFlagProfileCTAHydratePresenceFromMetadata)
+local PresenceStorePollingTtlSec = game:DefineFastInt("PresenceStorePollingTtlSec", 60)
 local RTEPresenceStorePollingTtlSec = game:DefineFastInt("RTEPresenceStorePollingTtlSec", 0)
 game:DefineFastInt("PresenceStoreProcessDelaySec", 1)
 
-local function _()
+local function _() --[[ Line: 53 | Named "getFIntPresenceStoreProcessDelaySec" ]]
 	return game:GetFastInt("PresenceStoreProcessDelaySec")
 end
 
-return function()
-	-- upvalues: createDataCacheModule (ref), presenceStorePollingTtlSec (ref), RTEPresenceStorePollingTtlSec (ref), createDataResolverModule (ref), cryoModule (ref), requestsModule (ref), normalizePresenceRawDataModule (ref), signalsModule (ref), fFlagProfileCTAHydratePresenceFromMetadataModule (ref)
-	local var1 = createDataCacheModule(presenceStorePollingTtlSec)
-	local var2 = createDataCacheModule(if RTEPresenceStorePollingTtlSec > 0 then RTEPresenceStorePollingTtlSec else 1e999)
+return function() --[[ Line: 57 | Named "createPresenceStore" ]]
+	-- upvalues: CreateDataCacheModule (copy), PresenceStorePollingTtlSec (copy), RTEPresenceStorePollingTtlSec (copy), CreateDataResolverModule (copy), CryoModule (copy), RequestsModule (copy), NormalizePresenceRawDataModule (copy), SignalsModule (copy), FFlagProfileCTAHydratePresenceFromMetadataModule (copy)
+	local DataCacheModule = CreateDataCacheModule(PresenceStorePollingTtlSec)
+	local DataCacheModule1 = CreateDataCacheModule(if RTEPresenceStorePollingTtlSec > 0 then RTEPresenceStorePollingTtlSec else 1e999)
 	local t = {}
-	local t_1 = {}
-	local var3 = createDataResolverModule({
-		cache = var1,
+	local Tbl = {}
+	local DataResolverModule = CreateDataResolverModule({
+		cache = DataCacheModule,
 		queueProcessDelaySec = game:GetFastInt("PresenceStoreProcessDelaySec"),
-		fetchFn = function(p1)
-			-- upvalues: cryoModule (copy), requestsModule (copy), normalizePresenceRawDataModule (copy)
-			return requestsModule.MultiGetPresenceByUserIds(cryoModule.Dictionary.keys(p1)):andThen(function(p2)
-				-- upvalues: normalizePresenceRawDataModule (copy)
-				local userPresences
+		fetchFn = function(p1) --[[ Line: 92 ]]
+			-- upvalues: CryoModule (upval), RequestsModule (upval), NormalizePresenceRawDataModule (upval)
+			return RequestsModule.MultiGetPresenceByUserIds((CryoModule.Dictionary.keys(p1))):andThen(function(Result) --[[ Line: 94 ]]
+				-- upvalues: NormalizePresenceRawDataModule (upval)
 				local t = {}
-				
-				if p2 then
-					userPresences = p2.responseBody and (p2.responseBody.userPresences or {})
-				end
-				for i, v in userPresences do
-					local var4 = normalizePresenceRawDataModule(v)
+				local UserPresences = Result and Result.responseBody and Result.responseBody.userPresences or {}
+				for _, userPresence in UserPresences do
+					local NormalizePresenceRawDataModuleResult = NormalizePresenceRawDataModule(userPresence)
 					
-					if var4 then
-						t[var4.id] = var4
+					if NormalizePresenceRawDataModuleResult then
+						t[NormalizePresenceRawDataModuleResult.id] = NormalizePresenceRawDataModuleResult
 					end
 				end
 				return t
@@ -48,65 +44,69 @@ return function()
 		end
 	})
 	
-	local function _()
-		-- upvalues: t_1 (ref)
-		for i, v in t_1 do
-			v()
+	local function _() --[[ Line: 156 | Named "disposeLockAwarePresenceEffects" ]]
+		-- upvalues: Tbl (copy)
+		for _, value in Tbl do
+			value()
 		end
-		table.clear(t_1)
+		table.clear(Tbl)
 	end
 	
 	return {
-		GetPresenceByUserId = function(p2, p3)
-			-- upvalues: var3 (ref), t_1 (ref), signalsModule (copy), var2 (ref)
-			if p3 and p3.skipFetch == true then
-				return var3.getCachedItem(p2)
-			elseif t_1[p2] == nil then
-				t_1[p2] = signalsModule.createEffect(function(p4)
-					-- upvalues: var2 (copy), p2 (ref), var3 (copy)
-					local item, _ = var2.getItem(p2)
+		GetPresenceByUserId = function(Key, p2) --[[ Line: 112 ]]
+			-- upvalues: DataResolverModule (copy), Tbl (copy), SignalsModule (upval), DataCacheModule1 (copy)
+			if p2 and p2.skipFetch == true then
+				return DataResolverModule.getCachedItem(Key)
+			end
+			if Tbl[Key] == nil then
+				Tbl[Key] = SignalsModule.createEffect(function(p3) --[[ Line: 118 ]]
+					-- upvalues: DataCacheModule1 (upval), Key (copy), DataResolverModule (upval)
+					local Item, _ = DataCacheModule1.getItem(Key)
+					local CachedItem = DataResolverModule.getCachedItem(Key)
 					
-					if item.data(p4) == true and var3.getCachedItem(p2) ~= nil then
+					if Item.data(p3) ~= true or CachedItem == nil then
+						DataResolverModule.getAndFetchItem(Key)
+						
 						return
 					end
-					var3.getAndFetchItem(p2)
 				end)
 			end
-			return var3.getCachedItem(p2)
+			return DataResolverModule.getCachedItem(Key)
 		end,
-		UpdateUserPresence = function(p2, p3, p4)
-			-- upvalues: fFlagProfileCTAHydratePresenceFromMetadataModule (copy), var1 (ref), var2 (ref), t (ref)
-			if fFlagProfileCTAHydratePresenceFromMetadataModule and p4 and p4.isRealtimeUnknown then
-				var1.replaceItem(p2, p3)
+		UpdateUserPresence = function(Key, p2, p3) --[[ Line: 133 ]]
+			-- upvalues: FFlagProfileCTAHydratePresenceFromMetadataModule (upval), DataCacheModule (copy), DataCacheModule1 (copy), t (copy)
+			if FFlagProfileCTAHydratePresenceFromMetadataModule and p3 and p3.isRealtimeUnknown then
+				DataCacheModule.replaceItem(Key, p2)
 				
 				return
+			else
+				DataCacheModule.replaceItem(Key, p2)
+				local IsIsUpdatedRealtime: boolean = if p3 then p3.isUpdatedRealtime == true else false
+				DataCacheModule1.replaceItem(Key, IsIsUpdatedRealtime)
+				t[Key] = IsIsUpdatedRealtime
 			end
-			var1.replaceItem(p2, p3)
-			local var4 = if p4 then true else false
-			var2.replaceItem(p2, var4)
-			t[p2] = var4
 		end,
-		RefreshPresenceByUserId = function(p2)
-			-- upvalues: var3 (ref)
-			var3.fetchItem(p2)
+		RefreshPresenceByUserId = function(p2) --[[ Line: 152 ]]
+			-- upvalues: DataResolverModule (copy)
+			DataResolverModule.fetchItem(p2)
 		end,
-		clear = function()
-			-- upvalues: t_1 (ref), var2 (ref), var3 (ref)
-			for i, v in t_1 do
-				v()
+		clear = function() --[[ Line: 163 ]]
+			-- upvalues: Tbl (copy), DataCacheModule1 (copy), DataResolverModule (copy)
+			for _, value in Tbl do
+				value()
 			end
-			table.clear(t_1)
-			var2.clear()
-			var3.clear()
+			table.clear(Tbl)
+			DataCacheModule1.clear()
+			DataResolverModule.clear()
 		end,
-		dispose = function()
-			-- upvalues: t_1 (ref), var2 (ref), var3 (ref)
-			for i, v in t_1 do
-				v()
+		dispose = function() --[[ Line: 169 ]]
+			-- upvalues: Tbl (copy), DataCacheModule1 (copy), DataResolverModule (copy)
+			for _, value in Tbl do
+				value()
 			end
-			table.clear(t_1)
-			var2.dispose()
-			var3.dispose()
+			table.clear(Tbl)
+			DataCacheModule1.dispose()
+			DataResolverModule.dispose()
 		end
 	}
 end

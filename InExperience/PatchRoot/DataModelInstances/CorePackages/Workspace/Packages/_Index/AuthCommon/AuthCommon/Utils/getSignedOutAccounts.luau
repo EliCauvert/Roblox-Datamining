@@ -1,53 +1,54 @@
-﻿local authCommon = script:FindFirstAncestor("AuthCommon")
-local appStorageUtilitiesModule = require(authCommon.Utils.AppStorageUtilities)
-local _ = require(authCommon.Utils.PreviousAccountEntry)
-local parent = authCommon.Parent
-local cryoModule = require(parent.Cryo)
-local getFFlagShowInvoluntarilySignedOutAccounts = require(parent.SharedFlags).GetFFlagShowInvoluntarilySignedOutAccounts
-local fFlagFixPreviousAccountsListEntries = require(parent.SharedFlags).FFlagFixPreviousAccountsListEntries
+﻿local AuthCommon = script:FindFirstAncestor("AuthCommon")
+local AppStorageUtilitiesModule = require(AuthCommon.Utils.AppStorageUtilities)
+local _ = require(AuthCommon.Utils.PreviousAccountEntry)
+local Parent = AuthCommon.Parent
+local CryoModule = require(Parent.Cryo)
+local GetFFlagShowInvoluntarilySignedOutAccountsFunction = require(Parent.SharedFlags).GetFFlagShowInvoluntarilySignedOutAccounts
+local FFlagFixPreviousAccountsListEntries = require(Parent.SharedFlags).FFlagFixPreviousAccountsListEntries
 
-local function _(p1, p2, p3)
-	local t = {}
+local function _(p1, p2, p3) --[[ Line: 13 | Named "subarray" ]]
+	local List = {}
 	
 	for i = p2, p3 do
-		table.insert(t, p1[i])
+		table.insert(List, p1[i])
 	end
-	return t
+	return List
 end
 
-return function(value, p4, p5)
-	-- upvalues: appStorageUtilitiesModule (ref), getFFlagShowInvoluntarilySignedOutAccounts (ref), cryoModule (ref), fFlagFixPreviousAccountsListEntries (ref)
-	local var1 = getFFlagShowInvoluntarilySignedOutAccounts()
-	local var2 = cryoModule.List.filter(cryoModule.Dictionary.values(appStorageUtilitiesModule.getPreviousAccountsList()), function(p6)
-		-- upvalues: fFlagFixPreviousAccountsListEntries (copy), var1 (ref), p4 (ref), p5 (ref)
-		local userId
-		if fFlagFixPreviousAccountsListEntries then
-			userId = p6.userId
+return function(p4: number, p5, Enabled) --[[ Line: 21 | Named "getSignedOutAccounts" ]]
+	-- upvalues: AppStorageUtilitiesModule (copy), GetFFlagShowInvoluntarilySignedOutAccountsFunction (copy), CryoModule (copy), FFlagFixPreviousAccountsListEntries (copy)
+	local PreviousAccountsList = AppStorageUtilitiesModule.getPreviousAccountsList()
+	local FFlagShowInvoluntarilySignedOutAccounts = GetFFlagShowInvoluntarilySignedOutAccountsFunction()
+	local FilterResult = CryoModule.List.filter(CryoModule.Dictionary.values(PreviousAccountsList), function(p6) --[[ Line: 30 ]]
+		-- upvalues: FFlagFixPreviousAccountsListEntries (upval), FFlagShowInvoluntarilySignedOutAccounts (copy), p5 (copy), Enabled (copy)
+		if FFlagFixPreviousAccountsListEntries then
+			local UserId = p6.userId
 			
-			if userId == nil or userId == "" then
+			if UserId == nil or UserId == "" then
 				return false
-			elseif not var1 then
-				return p6.signOutTimestamp
 			end
-			userId = p4 ~= nil and (p6.userId ~= nil and p4[p6.userId] == true)
+		end
+		if FFlagShowInvoluntarilySignedOutAccounts then
+			local IsNotShowInAccountPicker: boolean = Enabled == true and p6.showInAccountPicker == false
 			
-			return not userId and not (p5 == true and p6.showInAccountPicker == false)
+			return not (p5 ~= nil and (p6.userId ~= nil and p5[p6.userId] == true)) and not IsNotShowInAccountPicker
+		else
+			return p6.signOutTimestamp
 		end
 	end)
-	var2 = if var1 then cryoModule.List.sort(var2, function(p6, p7)
+	local SortResult = if FFlagShowInvoluntarilySignedOutAccounts then CryoModule.List.sort(FilterResult, function(p6, p7): boolean --[[ Line: 53 ]]
 		return (p7.signOutTimestamp or (p7.signInTimestamp or 0)) < (p6.signOutTimestamp or (p6.signInTimestamp or 0))
-	end) else cryoModule.List.sort(var2, function(p6, p7)
+	end) else CryoModule.List.sort(FilterResult, function(p6, p7): boolean --[[ Line: 62 ]]
 		return p7.signOutTimestamp < p6.signOutTimestamp
 	end)
 	
-	if not var2 then
+	if not SortResult then
 		return {}
 	end
-	local var3 = var2
-	local t = {}
+	local List = {}
 	
-	for i = 1, math.min(value, #var2) do
-		table.insert(t, var3[i])
+	for i = 1, math.min(p4, #SortResult) do
+		table.insert(List, SortResult[i])
 	end
-	return t
+	return List
 end

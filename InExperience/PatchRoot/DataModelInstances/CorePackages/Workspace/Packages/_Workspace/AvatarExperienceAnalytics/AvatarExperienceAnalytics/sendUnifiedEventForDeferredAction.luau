@@ -1,66 +1,65 @@
-﻿local avatarExperienceAnalytics = script:FindFirstAncestor("AvatarExperienceAnalytics")
-local parent = avatarExperienceAnalytics.Parent
-local collectionService = game:GetService("CollectionService")
-local cryoModule = require(parent.Cryo)
-local unifiedEventLogConstantsModule = require(script.Parent.UnifiedEventLogConstants)
-local unifiedEventLogEnumsModule = require(script.Parent.UnifiedEventLogEnums)
-local unifiedEventLoggingUtilsModule = require(avatarExperienceAnalytics.Utils.UnifiedEventLoggingUtils)
-local sendUnifiedEventLogModule = require(script.Parent.sendUnifiedEventLog)
-local sendUnifiedEventLogForInstanceModule = require(script.Parent.sendUnifiedEventLogForInstance)
-local mapAnalyticsMetadataFieldsModule = require(avatarExperienceAnalytics.Utils.mapAnalyticsMetadataFields)
-local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
-local unifiedSelectionListStoreModule = require(script.Parent.Store.UnifiedSelectionListStore)
-local lastDeferredSingleItemStoreModule = require(script.Parent.Store.LastDeferredSingleItemStore)
-local fFlagAXMISEnableMultiShoppingUnifiedEvents = avatarExperienceFlagsModule.FFlagAXMISEnableMultiShoppingUnifiedEvents
-local fFlagAXFixSingleItemPurchaseWidgetLogging = avatarExperienceFlagsModule.FFlagAXFixSingleItemPurchaseWidgetLogging
-local fFlagAXFixUnifiedPurchaseFieldLanding = avatarExperienceFlagsModule.FFlagAXFixUnifiedPurchaseFieldLanding
+﻿local AvatarExperienceAnalytics = script:FindFirstAncestor("AvatarExperienceAnalytics")
+local Parent = AvatarExperienceAnalytics.Parent
+local CollectionService = game:GetService("CollectionService")
+local CryoModule = require(Parent.Cryo)
+local UnifiedEventLogConstantsModule = require(script.Parent.UnifiedEventLogConstants)
+local UnifiedEventLogEnumsModule = require(script.Parent.UnifiedEventLogEnums)
+local UnifiedEventLoggingUtilsModule = require(AvatarExperienceAnalytics.Utils.UnifiedEventLoggingUtils)
+local SendUnifiedEventLogModule = require(script.Parent.sendUnifiedEventLog)
+local SendUnifiedEventLogForInstanceModule = require(script.Parent.sendUnifiedEventLogForInstance)
+local MapAnalyticsMetadataFieldsModule = require(AvatarExperienceAnalytics.Utils.mapAnalyticsMetadataFields)
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
+local UnifiedSelectionListStoreModule = require(script.Parent.Store.UnifiedSelectionListStore)
+local LastDeferredSingleItemStoreModule = require(script.Parent.Store.LastDeferredSingleItemStore)
+local FFlagAXMISEnableMultiShoppingUnifiedEvents = AvatarExperienceFlagsModule.FFlagAXMISEnableMultiShoppingUnifiedEvents
+local FFlagAXFixSingleItemPurchaseWidgetLogging = AvatarExperienceFlagsModule.FFlagAXFixSingleItemPurchaseWidgetLogging
+local FFlagAXFixUnifiedPurchaseFieldLanding = AvatarExperienceFlagsModule.FFlagAXFixUnifiedPurchaseFieldLanding
+local FFlagAXFixDeferredItemIdTypeMatch = AvatarExperienceFlagsModule.FFlagAXFixDeferredItemIdTypeMatch
 
-return function(p1)
-	-- upvalues: fFlagAXFixUnifiedPurchaseFieldLanding (ref), mapAnalyticsMetadataFieldsModule (ref), fFlagAXMISEnableMultiShoppingUnifiedEvents (ref), unifiedSelectionListStoreModule (ref), unifiedEventLogConstantsModule (ref), fFlagAXFixSingleItemPurchaseWidgetLogging (ref), unifiedEventLogEnumsModule (ref), lastDeferredSingleItemStoreModule (ref), unifiedEventLoggingUtilsModule (ref), sendUnifiedEventLogModule (ref), cryoModule (ref), collectionService (ref), sendUnifiedEventLogForInstanceModule (ref)
-	if fFlagAXFixUnifiedPurchaseFieldLanding then
-		p1 = mapAnalyticsMetadataFieldsModule(p1)
+return function(p1) --[[ Line: 22 ]]
+	-- upvalues: FFlagAXFixUnifiedPurchaseFieldLanding (copy), MapAnalyticsMetadataFieldsModule (copy), FFlagAXMISEnableMultiShoppingUnifiedEvents (copy), UnifiedSelectionListStoreModule (copy), UnifiedEventLogConstantsModule (copy), FFlagAXFixDeferredItemIdTypeMatch (copy), FFlagAXFixSingleItemPurchaseWidgetLogging (copy), UnifiedEventLogEnumsModule (copy), LastDeferredSingleItemStoreModule (copy), UnifiedEventLoggingUtilsModule (copy), SendUnifiedEventLogModule (copy), CryoModule (copy), CollectionService (copy), SendUnifiedEventLogForInstanceModule (copy)
+	if FFlagAXFixUnifiedPurchaseFieldLanding then
+		p1 = MapAnalyticsMetadataFieldsModule(p1)
 	end
-	if fFlagAXMISEnableMultiShoppingUnifiedEvents then
-		local selectionList = unifiedSelectionListStoreModule.getSelectionList()
-		local text = unifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "itemId"
-		local text_1 = unifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "itemType"
-		local var1 = nil
+	if FFlagAXMISEnableMultiShoppingUnifiedEvents then
+		local Text = UnifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "itemId"
+		local Text1 = UnifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "itemType"
+		local v1 = nil
 		
-		for i, v in selectionList do
-			if v[text] == p1.itemId and tostring(v[text_1]) == tostring(p1.itemType) then
-				var1 = v
+		for _, value in UnifiedSelectionListStoreModule.getSelectionList() do
+			if (if FFlagAXFixDeferredItemIdTypeMatch then tostring(value[Text]) == tostring(p1.itemId) else value[Text] == p1.itemId) and tostring(value[Text1]) == tostring(p1.itemType) then
+				v1 = value
 				break
 			end
 		end
-		if fFlagAXFixSingleItemPurchaseWidgetLogging and var1 == nil then
-			if p1.action == unifiedEventLogEnumsModule.MarketplaceUnifiedAction.PURCHASE_SUCCESS then
-				local snapshot = lastDeferredSingleItemStoreModule.getSnapshot()
-				lastDeferredSingleItemStoreModule.clearSnapshot()
+		if not FFlagAXFixSingleItemPurchaseWidgetLogging or v1 ~= nil then
+			SendUnifiedEventLogModule((CryoModule.Dictionary.join(UnifiedEventLoggingUtilsModule.getFieldsToSendFromInstanceAttributes(v1), p1)))
+			
+			return
+		end
+		if p1.action == UnifiedEventLogEnumsModule.MarketplaceUnifiedAction.PURCHASE_SUCCESS then
+			local Snapshot = LastDeferredSingleItemStoreModule.getSnapshot()
+			LastDeferredSingleItemStoreModule.clearSnapshot()
+			
+			if Snapshot then
+				SendUnifiedEventLogModule(CryoModule.Dictionary.join(UnifiedEventLoggingUtilsModule.getFieldsToSendFromInstanceAttributes(Snapshot), p1))
 				
-				if snapshot then
-					sendUnifiedEventLogModule(cryoModule.Dictionary.join(unifiedEventLoggingUtilsModule.getFieldsToSendFromInstanceAttributes(snapshot), p1))
-					
-					return
-				end
+				return
 			end
-			sendUnifiedEventLogModule(p1)
-			
-			return
-		else
-			sendUnifiedEventLogModule(cryoModule.Dictionary.join(unifiedEventLoggingUtilsModule.getFieldsToSendFromInstanceAttributes(var1), p1))
-			
-			return
 		end
-	else
-		local last_activated_tag_nameTagged = collectionService:GetTagged(unifiedEventLogConstantsModule.LAST_ACTIVATED_TAG_NAME)
+		SendUnifiedEventLogModule(p1)
 		
-		if #last_activated_tag_nameTagged <= 0 then
-			sendUnifiedEventLogModule(p1)
+		return
+	else
+		local Tagged = CollectionService:GetTagged(UnifiedEventLogConstantsModule.LAST_ACTIVATED_TAG_NAME)
+		
+		if #Tagged <= 0 then
+			SendUnifiedEventLogModule(p1)
 			
 			return
 		end
-		for i, v in last_activated_tag_nameTagged do
-			sendUnifiedEventLogForInstanceModule(v, p1, {
+		for _, value1 in Tagged do
+			SendUnifiedEventLogForInstanceModule(value1, p1, {
 				includeScreenSize = true,
 				includeElementSizeAndPosition = true
 			})

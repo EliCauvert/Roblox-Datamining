@@ -1,78 +1,79 @@
-﻿local luauModule = require("@std/luau")
-local fsModule = require("@std/fs")
-local jsonModule = require("@std/json")
-local netModule = require("@std/net")
-local processModule = require("@std/process")
-local var1 = processModule.args[1]:match("^(.*)/[^/]+$") or "."
-local var2 = processModule.args[2] or processModule.env.SENTRY_DSN
+﻿local LuauModule = require("@std/luau")
+local FsModule = require("@std/fs")
+local JsonModule = require("@std/json")
+local NetModule = require("@std/net")
+local ProcessModule = require("@std/process")
+local v1 = ProcessModule.args[1]:match("^(.*)/[^/]+$") or "."
+local Arg = ProcessModule.args[2] or ProcessModule.env.SENTRY_DSN
 
-if not var2 or var2 == "" then
+if not Arg or Arg == "" then
 	print("ERROR: no DSN provided.")
 	print("  lute test_client.lua \"<your-sentry-dsn>\"")
 	print("  or set SENTRY_DSN in the environment")
-	processModule.exit(1)
+	ProcessModule.exit(1)
 end
-if not fsModule.exists(var1 .. "/Client.lua") then
-	print(`ERROR: cannot find {var1}/Client.lua`)
-	processModule.exit(1)
+if not FsModule.exists(v1 .. "/Client.lua") then
+	print(`ERROR: cannot find {v1}/Client.lua`)
+	ProcessModule.exit(1)
 end
-local t = {
-	JSONEncode = function(_, p1)
-		-- upvalues: jsonModule (ref)
-		return jsonModule.serialize(p1)
+local HttpService = {
+	JSONEncode = function(_, p1) --[[ Line: 47 ]]
+		-- upvalues: JsonModule (copy)
+		return JsonModule.serialize(p1)
 	end,
-	JSONDecode = function(_, p1)
-		-- upvalues: jsonModule (ref)
-		return jsonModule.deserialize(p1)
+	JSONDecode = function(_, p1) --[[ Line: 50 ]]
+		-- upvalues: JsonModule (copy)
+		return JsonModule.deserialize(p1)
 	end,
-	RequestInternal = function(_, p1)
-		-- upvalues: netModule (ref)
+	RequestInternal = function(_, p1) --[[ Line: 53 ]]
+		-- upvalues: NetModule (copy)
 		return {
-			Start = function(_, p2)
-				-- upvalues: netModule (copy), p1 (ref)
-				local ok, status = pcall(function()
-					-- upvalues: netModule (copy), p1 (copy)
-					return netModule.request(p1.Url, { method = p1.Method, headers = p1.Headers, body = p1.Body })
+			Start = function(_, Callback: (any, any) -> ()) --[[ Line: 55 ]]
+				-- upvalues: NetModule (upval), p1 (copy)
+				local Success, Result = pcall(function() --[[ Line: 56 ]]
+					-- upvalues: NetModule (upval), p1 (upval)
+					return NetModule.request(p1.Url, { method = p1.Method, headers = p1.Headers, body = p1.Body })
 				end)
 				
-				if ok then
-					p2(true, {
-						Success = status.ok,
-						StatusCode = status.status,
-						Body = status.body,
-						Headers = status.headers
+				if Success then
+					Callback(true, {
+						Success = Result.ok,
+						StatusCode = Result.status,
+						Body = Result.body,
+						Headers = Result.headers
 					})
 					
 					return
+				else
+					Callback(false, (tostring(Result)))
 				end
-				p2(false, tostring(status))
 			end
 		}
 	end
 }
-local t_1 = {
-	HttpService = t,
+local config = {
+	HttpService = HttpService,
 	RunService = {
-		IsStudio = function(_)
+		IsStudio = function(_): boolean --[[ Line: 79 ]]
 			return false
 		end,
-		GetRobloxVersion = function(_)
+		GetRobloxVersion = function(_): string --[[ Line: 82 ]]
 			return "version-9.999.0.9999999"
 		end
 	}
 }
-local tbl = setmetatable({ PlaceId = 0, JobId = "lute-test-job" }, {})
+local self = setmetatable({ PlaceId = 0, JobId = "lute-test-job" }, {})
 
-function tbl.GetService(_, p1)
-	-- upvalues: t_1 (ref)
-	return t_1[p1]
+function self:GetService(p1) --[[ Line: 88 ]]
+	-- upvalues: config (copy)
+	return config[p1]
 end
 
-function tbl.DefineFastFlag(_)
+function self:DefineFastFlag(): boolean --[[ Line: 91 ]]
 	return false
 end
 
-local t_2 = {
+local config1 = {
 	print = print,
 	warn = print,
 	error = error,
@@ -102,82 +103,86 @@ local t_2 = {
 	bit32 = bit32,
 	utf8 = utf8,
 	buffer = buffer,
-	game = tbl
+	game = self
 }
-local t_3 = {}
-local t_4 = {}
-local var3 = nil
-local var4 = nil
+local t = {}
+local t1 = {}
+local v2 = nil
+local v3 = nil
 local _ = nil
 
-local function _(p1)
+local function _(p1) --[[ Line: 138 | Named "parentDir" ]]
 	return p1:match("^(.*)/[^/]+$") or "."
 end
 
-local _ = function(p1)
-	-- upvalues: var4 (write)
-	return setmetatable({ __isFolder = true, __dir = p1 }, var4)
+local _ = function(p1) --[[ Line: 142 | Named "folderNode" ]]
+	-- upvalues: v3 (ref)
+	return (setmetatable({ __isFolder = true, __dir = p1 }, v3))
 end
 
-local _ = function(p1, p2)
-	-- upvalues: var3 (write)
-	return setmetatable({ __isFile = true, __base = p1, __parent = p2 }, var3)
+local _ = function(p1, p2) --[[ Line: 148 | Named "fileNode" ]]
+	-- upvalues: v2 (ref)
+	return (setmetatable({ __isFile = true, __base = p1, __parent = p2 }, v2))
 end
 
-local var5 = function(p1)
-	-- upvalues: t_4 (ref), fsModule (ref), luauModule (ref), var5 (write), t_3 (ref), t_2 (ref)
-	assert(type(p1) == "table" and p1.__isFile, "custom require expects a module node")
-	local base = p1.__base
-	
-	if t_4[base] ~= nil then
-		return t_4[base]
+v3 = {
+	__index = function(p1, Text) --[[ Line: 153 ]]
+		-- upvalues: v3 (ref), v2 (ref)
+		return if Text == "Parent" then setmetatable({
+			__isFolder = true,
+			__dir = p1.__dir:match("^(.*)/[^/]+$") or "."
+		}, v3) else setmetatable({
+			__isFile = true,
+			__base = p1.__dir .. "/" .. Text,
+			__parent = p1
+		}, v2)
 	end
-	local text = base .. ".lua"
-	
-	if not fsModule.exists(text) then
-		text = base .. ".luau"
-	end
-	local var6 = luauModule.load(luauModule.compile(fsModule.readFileToString(text)), text, setmetatable({ script = p1, require = var5, _G = t_3 }, { __index = t_2 }))()
-	t_4[base] = var6
-	
-	return var6
-end
-
-local var6 = var5(setmetatable({
-	__isFile = true,
-	__base = var1 .. "/Client",
-	__parent = setmetatable({ __isFolder = true, __dir = var1 }, {
-		__index = function(p1, p2)
-			-- upvalues: var4 (write), var3 (write)
-			return if p2 == "Parent" then setmetatable({
-				__isFolder = true,
-				__dir = p1.__dir:match("^(.*)/[^/]+$") or "."
-			}, var4) else setmetatable({
-				__isFile = true,
-				__base = p1.__dir .. "/" .. p11,
-				__parent = p1
-			}, var3)
-		end
-	})
-}, {
-	__index = function(p1, p2)
+}
+v2 = {
+	__index = function(p1, p2) --[[ Line: 162 ]]
 		if p2 == "Parent" then
 			return p1.__parent
+		else
+			error(`unsupported instance access: .{tostring(p2)} on module file`)
 		end
-		error(`unsupported instance access: .{tostring(p2)} on module file`)
 	end
-})):new({
+}
+
+local function v19(p1) --[[ Line: 170 ]]
+	-- upvalues: t1 (copy), FsModule (copy), LuauModule (copy), v19 (ref), t (copy), config1 (copy)
+	assert(type(p1) == "table" and p1.__isFile, "custom require expects a module node")
+	local Base = p1.__base
+	
+	if t1[Base] ~= nil then
+		return t1[Base]
+	end
+	local Text = Base .. ".lua"
+	
+	if not FsModule.exists(Text) then
+		Text = Base .. ".luau"
+	end
+	local v4 = LuauModule.load(LuauModule.compile((FsModule.readFileToString(Text))), Text, (setmetatable({ script = p1, require = v19, _G = t }, { __index = config1 })))()
+	t1[Base] = v4
+	
+	return v4
+end
+
+local NewResult = v19((setmetatable({
+	__isFile = true,
+	__base = v1 .. "/Client",
+	__parent = setmetatable({ __isFolder = true, __dir = v1 }, v3)
+}, v2))):new({
 	environment = "sentry-sdk-test",
 	release = "sentry-sdk-test",
-	dsn = var2
-}, t)
-var6:set_tag("test_run", "breadcrumb-lute")
-var6:add_breadcrumb({
+	dsn = Arg
+}, HttpService)
+NewResult:set_tag("test_run", "breadcrumb-lute")
+NewResult:add_breadcrumb({
 	type = "ui",
 	category = "ui.click",
 	message = "client-level crumb"
 })
-local t_5 = {
+local Stacktrace = {
 	frames = {
 		{
 			filename = "CartService.lua",
@@ -196,7 +201,7 @@ local t_5 = {
 		}
 	}
 }
-local t_6 = {
+local config2 = {
 	app = { app_version = "1.2.3", app_build = "4567" },
 	device = {
 		name = "iPhone 15",
@@ -206,14 +211,14 @@ local t_6 = {
 	},
 	checkout = { cart_id = "cart_abc123", item_count = 3 }
 }
-local t_7 = {
+local config3 = {
 	values = {
 		{
 			id = 1,
 			name = "main",
 			main = true,
 			crashed = true,
-			stacktrace = t_5
+			stacktrace = Stacktrace
 		},
 		{
 			id = 2,
@@ -234,20 +239,20 @@ local t_7 = {
 	}
 }
 print("Sending exception to Sentry with context, threads, stacktrace, and breadcrumbs...")
-var6:capture_exception({
+NewResult:capture_exception({
 	type = "LuaError",
 	message = "Breadcrumb test from lute",
-	stacktrace = t_5
-}, "error", t_6, t_7, function(p1, p2, p3)
+	stacktrace = Stacktrace
+}, "error", config2, config3, function(p1, p2, p3) --[[ Line: 287 ]]
 	print("---- Sentry response ----")
 	print("callback success:", p1)
-	print("eventId:", tostring(p3))
+	print("eventId:", (tostring(p3)))
 	
 	if type(p2) == "table" and type(p2.body) == "table" then
-		print("HTTP status:", tostring(p2.body.StatusCode))
-		print("HTTP body:", tostring(p2.body.Body))
+		print("HTTP status:", (tostring(p2.body.StatusCode)))
+		print("HTTP body:", (tostring(p2.body.Body)))
 	elseif type(p2) == "table" then
-		print("error:", tostring(p2.error))
+		print("error:", (tostring(p2.error)))
 	end
 	print("-------------------------")
 end, {

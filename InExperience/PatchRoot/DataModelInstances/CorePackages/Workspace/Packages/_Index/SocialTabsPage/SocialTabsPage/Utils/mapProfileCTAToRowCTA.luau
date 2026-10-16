@@ -1,36 +1,37 @@
-﻿local socialTabsPage = script:FindFirstAncestor("SocialTabsPage")
-local buttonTypes = require(socialTabsPage.Parent.UserList).Enums.ButtonTypes
-local _ = require(socialTabsPage.Common.Types)
+﻿local SocialTabsPage = script:FindFirstAncestor("SocialTabsPage")
+local ButtonTypes = require(SocialTabsPage.Parent.UserList).Enums.ButtonTypes
+local _ = require(SocialTabsPage.Common.Types)
 
-local var1 = function() end
+local function v3() --[[ Line: 13 ]] end
 
-local t = {
-	JoinExperience = buttonTypes.Join,
-	Chat = buttonTypes.Chat,
-	AddFriend = buttonTypes.Add,
-	AcceptFriendRequest = buttonTypes.Accept,
-	PendingFriendRequest = buttonTypes.Pending
+local config = {
+	JoinExperience = ButtonTypes.Join,
+	Chat = ButtonTypes.Chat,
+	AddFriend = ButtonTypes.Add,
+	AcceptFriendRequest = ButtonTypes.Accept,
+	PendingFriendRequest = ButtonTypes.Pending
 }
 
-return function(p1, p2, p3)
-	-- upvalues: t (ref), var1 (ref), buttonTypes (ref)
+return function(p1, p2, p3) --[[ Line: 23 | Named "mapProfileCTAToRowCTA" ]]
+	-- upvalues: config (copy), v3 (copy), ButtonTypes (copy)
 	if not p1 or not p1.buttons then
 		return nil
 	end
-	for i, v in p1.buttons do
-		local type = t[v.type]
+	local Entry = nil
+	for _, button in p1.buttons do
+		Entry = config[button.type]
 		
-		if type then
-			local var2 = p2[type]
+		if Entry then
+			local Callback = p2[Entry]
 			
 			return {
-				type = type,
-				onActivated = if var2 then function()
-					-- upvalues: var2 (ref), p3 (ref)
-					var2(p3)
-				end else var1,
-				isDisabled = type == buttonTypes.Pending or nil,
-				disabledReason = v.disabledReason
+				type = Entry,
+				onActivated = if Callback then function() --[[ Line: 39 ]]
+					-- upvalues: Callback (copy), p3 (copy)
+					Callback(p3)
+				end else v3,
+				isDisabled = Entry == ButtonTypes.Pending or nil,
+				disabledReason = button.disabledReason
 			}
 		end
 	end

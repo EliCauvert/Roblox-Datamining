@@ -1,24 +1,24 @@
-﻿local purchasePrompt = script:FindFirstAncestor("PurchasePrompt")
-local parent = purchasePrompt.Parent
-local promiseModule = require(purchasePrompt.Promise)
-local purchaseErrorModule = require(purchasePrompt.Enums.PurchaseError)
-local _ = require(purchasePrompt.Enums.PaymentPlatform)
-local paymentPlatformToUpsellPlatformModule = require(purchasePrompt.Utils.paymentPlatformToUpsellPlatform)
+﻿local PurchasePrompt = script:FindFirstAncestor("PurchasePrompt")
+local Parent = PurchasePrompt.Parent
+local PromiseModule = require(PurchasePrompt.Promise)
+local PurchaseErrorModule = require(PurchasePrompt.Enums.PurchaseError)
+local _ = require(PurchasePrompt.Enums.PaymentPlatform)
+local PaymentPlatformToUpsellPlatformModule = require(PurchasePrompt.Utils.paymentPlatformToUpsellPlatform)
 local _ = game:GetService("HttpService")
-local getUpsellSuggestions = require(parent.PurchasePromptDeps).IAPExperience.Api.PaymentsGateway.GetUpsellSuggestions
-local upsellSuggestionsAPIMaxPackages = require(parent.SharedFlags).UpsellSuggestionsAPIMaxPackages
+local GetUpsellSuggestionsFunction = require(Parent.PurchasePromptDeps).IAPExperience.Api.PaymentsGateway.GetUpsellSuggestions
+local UpsellSuggestionsAPIMaxPackages = require(Parent.SharedFlags).UpsellSuggestionsAPIMaxPackages
 
-return function(p1, p2, p3, p4, p5, p6, p7, p8)
-	-- upvalues: paymentPlatformToUpsellPlatformModule (ref), promiseModule (ref), getUpsellSuggestions (ref), upsellSuggestionsAPIMaxPackages (ref), purchaseErrorModule (ref)
-	local var1 = paymentPlatformToUpsellPlatformModule(p3)
+return function(p1, p2, p3, p4, p5, p6, p7, p8) --[[ Line: 15 ]]
+	-- upvalues: PaymentPlatformToUpsellPlatformModule (copy), PromiseModule (copy), GetUpsellSuggestionsFunction (copy), UpsellSuggestionsAPIMaxPackages (copy), PurchaseErrorModule (copy)
+	local PaymentPlatformToUpsellPlatformModuleResult = PaymentPlatformToUpsellPlatformModule(p3)
 	
-	return promiseModule.new(function(p9, p10)
-		-- upvalues: getUpsellSuggestions (copy), var1 (ref), p2 (ref), p1 (ref), upsellSuggestionsAPIMaxPackages (copy), p5 (ref), p6 (ref), p7 (ref), p8 (ref), p4 (ref), purchaseErrorModule (copy)
-		spawn(function()
-			-- upvalues: getUpsellSuggestions (copy), var1 (copy), p2 (copy), p1 (copy), upsellSuggestionsAPIMaxPackages (copy), p5 (copy), p6 (copy), p7 (copy), p8 (copy), p4 (copy), p10 (ref), purchaseErrorModule (copy), p9 (ref)
-			local var2, var3 = getUpsellSuggestions(var1, p2, p1, upsellSuggestionsAPIMaxPackages, p5, p6, p7, p8, p4)
+	return (PromiseModule.new(function(Callback, Callback1) --[[ Line: 28 ]]
+		-- upvalues: GetUpsellSuggestionsFunction (upval), PaymentPlatformToUpsellPlatformModuleResult (copy), p2 (copy), p1 (copy), UpsellSuggestionsAPIMaxPackages (upval), p5 (copy), p6 (copy), p7 (copy), p8 (copy), p4 (copy), PurchaseErrorModule (upval)
+		spawn(function() --[[ Line: 30 ]]
+			-- upvalues: GetUpsellSuggestionsFunction (upval), PaymentPlatformToUpsellPlatformModuleResult (upval), p2 (upval), p1 (upval), UpsellSuggestionsAPIMaxPackages (upval), p5 (upval), p6 (upval), p7 (upval), p8 (upval), p4 (upval), Callback1 (copy), PurchaseErrorModule (upval), Callback (copy)
+			local UpsellSuggestions, UpsellSuggestions2 = GetUpsellSuggestionsFunction(PaymentPlatformToUpsellPlatformModuleResult, p2, p1, UpsellSuggestionsAPIMaxPackages, p5, p6, p7, p8, p4)
 			
-			return if var2 then if var3 and var3.products and #var3.products ~= 0 then p9(var3) else p10(purchaseErrorModule.UnknownFailure) else p10(purchaseErrorModule.UnknownFailure)
+			return if UpsellSuggestions and (UpsellSuggestions2 and UpsellSuggestions2.products and #UpsellSuggestions2.products ~= 0) then Callback(UpsellSuggestions2) else Callback1(PurchaseErrorModule.UnknownFailure)
 		end)
-	end)
+	end))
 end

@@ -1,13 +1,12 @@
-﻿local sduiSharedUtilities = script:FindFirstAncestor("SduiSharedUtilities")
-local parent = sduiSharedUtilities.Parent
-local _ = require(sduiSharedUtilities.SduiLoadTimer)
-local createTemplateApiPrewarmRequestConfigModule = require(sduiSharedUtilities.createTemplateApiPrewarmRequestConfig)
-local getSduiApiStoreModule = require(sduiSharedUtilities.getSduiApiStore)
-local promiseModule = require(parent.Promise)
+﻿local SduiSharedUtilities = script:FindFirstAncestor("SduiSharedUtilities")
+local _ = require(SduiSharedUtilities.SduiLoadTimer)
+local CreateTemplateApiPrewarmRequestConfigModule = require(SduiSharedUtilities.createTemplateApiPrewarmRequestConfig)
+local GetSduiApiStoreModule = require(SduiSharedUtilities.getSduiApiStore)
+local PromiseModule = require(SduiSharedUtilities.Parent.Promise)
 
-return function(p1, p2)
-	-- upvalues: createTemplateApiPrewarmRequestConfigModule (ref), promiseModule (ref), getSduiApiStoreModule (ref)
-	local var1 = createTemplateApiPrewarmRequestConfigModule(p1)
+return function(p1, p2) --[[ Line: 19 | Named "fetchSduiTemplates" ]]
+	-- upvalues: CreateTemplateApiPrewarmRequestConfigModule (copy), PromiseModule (copy), GetSduiApiStoreModule (copy)
+	local TemplateApiPrewarmRequestConfigModule = CreateTemplateApiPrewarmRequestConfigModule(p1)
 	
-	return if var1 == nil then promiseModule.reject("No valid SDUI surfaceKeys provided") else getSduiApiStoreModule().fetchIfNeeded(var1, p2)
+	return if TemplateApiPrewarmRequestConfigModule == nil then PromiseModule.reject("No valid SDUI surfaceKeys provided") else GetSduiApiStoreModule().fetchIfNeeded(TemplateApiPrewarmRequestConfigModule, p2)
 end

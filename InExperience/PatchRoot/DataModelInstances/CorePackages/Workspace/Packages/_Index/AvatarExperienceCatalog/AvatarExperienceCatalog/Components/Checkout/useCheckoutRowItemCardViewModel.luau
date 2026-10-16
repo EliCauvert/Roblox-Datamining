@@ -1,76 +1,74 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local parent = avatarExperienceCatalog.Parent
-local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
-local _ = require(avatarExperienceCatalog.Stores.createAXShoppingCartStore)
-local useTimedOptionsFtuxModule = require(avatarExperienceCatalog.Hooks.useTimedOptionsFtux)
-local fFlagAXMISWithBlackbird = sharedFlagsModule.FFlagAXMISWithBlackbird
-local fFlagAXDurables2Option = require(parent.AvatarExperienceFlags).FFlagAXDurables2Option
-local _2optionOfferPillTooltipTimeout = game:DefineFastInt("2OptionOfferPillTooltipTimeout", 5)
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local Parent = AvatarExperienceCatalog.Parent
+local ReactModule = require(Parent.React)
+local _ = require(AvatarExperienceCatalog.Stores.createAXShoppingCartStore)
+local UseTimedOptionsFtuxModule = require(AvatarExperienceCatalog.Hooks.useTimedOptionsFtux)
+local FFlagAXMISWithBlackbird = require(Parent.SharedFlags).FFlagAXMISWithBlackbird
+local FFlagAXDurables2Option = require(Parent.AvatarExperienceFlags).FFlagAXDurables2Option
+local _2OptionOfferPillTooltipTimeout = game:DefineFastInt("2OptionOfferPillTooltipTimeout", 5)
 
-return function(p1)
-	-- upvalues: reactModule (ref), fFlagAXMISWithBlackbird (ref), fFlagAXDurables2Option (ref), useTimedOptionsFtuxModule (ref), _2optionOfferPillTooltipTimeout (ref)
-	local var1, var2 = reactModule.useState(function()
-		-- upvalues: p1 (ref)
+return function(p1) --[[ Line: 19 | Named "useCheckoutRowItemCardViewModel" ]]
+	-- upvalues: ReactModule (copy), FFlagAXMISWithBlackbird (copy), FFlagAXDurables2Option (copy), UseTimedOptionsFtuxModule (copy), _2OptionOfferPillTooltipTimeout (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function() --[[ Line: 20 ]]
+		-- upvalues: p1 (copy)
 		if p1.timedOptions then
-			for i, v in p1.timedOptions do
-				if v.selected then
-					return v.price
+			for _, timedOption in p1.timedOptions do
+				if timedOption.selected then
+					return timedOption.price
 				end
 			end
 		end
 		return nil
 	end)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var2 (ref), fFlagAXMISWithBlackbird (copy)
-		if p1.selectedTimedOptionIndexInReducer ~= nil then
-			local selectedTimedOptionIndexInReducer = p1.timedOptions and p1.timedOptions[p1.selectedTimedOptionIndexInReducer]
+	ReactModule.useEffect(function() --[[ Line: 32 ]]
+		-- upvalues: p1 (copy), UseStateResult2 (copy), FFlagAXMISWithBlackbird (upval)
+		if p1.selectedTimedOptionIndexInReducer == nil then
+			if FFlagAXMISWithBlackbird and p1.timedOptions then
+				for _, timedOption in p1.timedOptions do
+					if timedOption.selected then
+						UseStateResult2(timedOption.price)
+						break
+					end
+				end
+			end
+		else
+			local TimedOption = p1.timedOptions and p1.timedOptions[p1.selectedTimedOptionIndexInReducer]
 			
-			if selectedTimedOptionIndexInReducer then
-				var2(selectedTimedOptionIndexInReducer.price)
+			if TimedOption then
+				UseStateResult2(TimedOption.price)
 				
 				return
-			end
-		elseif fFlagAXMISWithBlackbird and p1.timedOptions then
-			for i, v in p1.timedOptions do
-				if v.selected then
-					var2(v.price)
-					
-					return
-				end
 			end
 		end
 	end, {
 		p1.selectedTimedOptionIndexInReducer,
-		if fFlagAXMISWithBlackbird then p1.timedOptions else nil
+		if FFlagAXMISWithBlackbird then p1.timedOptions else nil
 	})
-	local var3 = nil
-	local _ = nil
+	local v1 = nil
+	local UseStateResult2_1 = nil
 	
-	if fFlagAXDurables2Option then
-		local var4 = useTimedOptionsFtuxModule()
-		local var5, var6 = reactModule.useState(var4.shouldShow2OptionOfferPillTooltip())
-		var3 = var5
-		local var7 = var6
-		reactModule.useEffect(function()
-			-- upvalues: var3 (write), _2optionOfferPillTooltipTimeout (copy), var7 (write), var4 (ref)
-			local var8 = if var3 then task.delay(_2optionOfferPillTooltipTimeout, function()
-				-- upvalues: var7 (copy), var4 (copy)
-				var7(false)
-				var4.hide2OptionOfferPillTooltip()
+	if FFlagAXDurables2Option then
+		local UseTimedOptionsFtuxModuleResult = UseTimedOptionsFtuxModule()
+		v1, UseStateResult2_1 = ReactModule.useState(UseTimedOptionsFtuxModuleResult.shouldShow2OptionOfferPillTooltip())
+		ReactModule.useEffect(function() --[[ Line: 60 ]]
+			-- upvalues: v1 (ref), _2OptionOfferPillTooltipTimeout (upval), UseStateResult2_1 (ref), UseTimedOptionsFtuxModuleResult (copy)
+			local DelayedThread = if v1 then task.delay(_2OptionOfferPillTooltipTimeout, function() --[[ Line: 62 ]]
+				-- upvalues: UseStateResult2_1 (upval), UseTimedOptionsFtuxModuleResult (upval)
+				UseStateResult2_1(false)
+				UseTimedOptionsFtuxModuleResult.hide2OptionOfferPillTooltip()
 			end) else nil
 			
-			return function()
-				-- upvalues: var8 (ref)
-				if var8 then
-					task.cancel(var8)
+			return function() --[[ Line: 68 ]]
+				-- upvalues: DelayedThread (copy)
+				if DelayedThread then
+					task.cancel(DelayedThread)
 				end
 			end
-		end, { var3, var7, var4 })
+		end, { v1, UseStateResult2_1, UseTimedOptionsFtuxModuleResult })
 	end
 	return {
-		selectedTimedOptionPrice = var1,
-		setSelectedTimedOptionPrice = var2,
-		showOfferPillTooltip = if fFlagAXDurables2Option then var3 else nil
+		selectedTimedOptionPrice = UseStateResult,
+		setSelectedTimedOptionPrice = UseStateResult2,
+		showOfferPillTooltip = if FFlagAXDurables2Option then v1 else nil
 	}
 end

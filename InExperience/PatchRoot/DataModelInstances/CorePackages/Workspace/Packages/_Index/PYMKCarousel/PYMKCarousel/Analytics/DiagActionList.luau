@@ -1,31 +1,29 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local dependenciesModule = require(parent.dependencies)
-local eventNamesModule = require(script.Parent.EventNames)
-local socialLuaAnalyticsModule = require(parent_1.SocialLuaAnalytics)
-local t = {
-	[eventNamesModule.CarouselLoadedWithUsers] = {
+﻿local Parent = script.Parent.Parent
+local EventNamesModule = require(script.Parent.EventNames)
+local SocialLuaAnalyticsModule = require(Parent.Parent.SocialLuaAnalytics)
+local DiagActionListModule = {
+	[EventNamesModule.CarouselLoadedWithUsers] = {
 		name = game:DefineFastString("PYMKCarouselLoadedWithUsers", "PYMKCarouselLoadedWithUsers")
 	},
-	[eventNamesModule.UserPressed] = {
+	[EventNamesModule.UserPressed] = {
 		name = game:DefineFastString("PYMKCarouselUserPressed", "PYMKCarouselUserPressed")
 	},
-	[eventNamesModule.RequestFriendship] = {
+	[EventNamesModule.RequestFriendship] = {
 		name = game:DefineFastString("PYMKCarouselRequestFriendship", "PYMKCarouselRequestFriendship")
 	},
-	[eventNamesModule.PYMKCarouselLoadingTime] = {
-		type = socialLuaAnalyticsModule.Analytics.Enums.DiagEventTypes.Stats,
-		name = eventNamesModule.PYMKCarouselLoadingTime.rawValue(),
-		stats = function(p1)
+	[EventNamesModule.PYMKCarouselLoadingTime] = {
+		type = SocialLuaAnalyticsModule.Analytics.Enums.DiagEventTypes.Stats,
+		name = EventNamesModule.PYMKCarouselLoadingTime.rawValue(),
+		stats = function(p1) --[[ Line: 24 ]]
 			return p1.loadingTime or 0
 		end,
-		platformSpecificity = socialLuaAnalyticsModule.Analytics.Enums.PlatformSpecificity.BucketsOnly
+		platformSpecificity = SocialLuaAnalyticsModule.Analytics.Enums.PlatformSpecificity.BucketsOnly
 	}
 }
 
-if dependenciesModule.getFFlagPYMKAddFriendsEntry() then
-	t[eventNamesModule.CarouselGenericTileClicked] = {
+if require(Parent.dependencies).getFFlagPYMKAddFriendsEntry() then
+	DiagActionListModule[EventNamesModule.CarouselGenericTileClicked] = {
 		name = game:DefineFastString("PYMKCarouselGenericTileClicked", "PYMKCarouselGenericTileClicked")
 	}
 end
-return t
+return DiagActionListModule

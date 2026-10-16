@@ -1,24 +1,24 @@
 ﻿local UGCValidationService = game:GetService("UGCValidationService")
-local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local r15plusUtilsModule = require(parent.util.R15plusUtils)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
+local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local R15plusUtilsModule = require(Parent.util.R15plusUtils)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 
 return {
-	fflag = require(parent.flags.getFFlagUGCValidationEnableR15plusSkinning),
-	categories = { validationEnumsModule.UploadCategory.TORSO_AND_LIMBS },
-	requiredData = { validationEnumsModule.SharedDataMember.renderMeshesData },
-	run = function(p1, p2)
-		-- upvalues: r15plusUtilsModule (ref), UGCValidationService (ref), errorSourceStringsModule (ref)
-		local jointNameWhitelist = r15plusUtilsModule.getJointNameWhitelist()
+	fflag = require(Parent.flags.getFFlagUGCValidationEnableR15plusSkinning),
+	categories = { ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS },
+	requiredData = { ValidationEnumsModule.SharedDataMember.renderMeshesData },
+	run = function(p1, p2) --[[ Line: 13 ]]
+		-- upvalues: R15plusUtilsModule (copy), UGCValidationService (copy), ErrorSourceStringsModule (copy)
+		local JointNameWhitelist = R15plusUtilsModule.getJointNameWhitelist()
 		
-		for i, v in p2.renderMeshesData do
-			for i_1, v_1 in {
-				UGCValidationService:GetSkinnedJointNamesFromEditableMesh(v.editable)
+		for PartName, value in p2.renderMeshesData do
+			for _, JointName in {
+				UGCValidationService:GetSkinnedJointNamesFromEditableMesh(value.editable)
 			} do
-				if not jointNameWhitelist[v_1] then
-					p1:fail(errorSourceStringsModule.Keys.UnallowedJointSkinned, { partName = i, jointName = v_1 })
+				if not JointNameWhitelist[JointName] then
+					p1:fail(ErrorSourceStringsModule.Keys.UnallowedJointSkinned, { partName = PartName, jointName = JointName })
 				end
 			end
 		end

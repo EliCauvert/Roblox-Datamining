@@ -1,38 +1,39 @@
-﻿local parent = script.Parent
-local signalsModule = require(parent.Parent.Signals)
-local _ = require(parent.HttpStoreTypes)
+﻿local Parent = script.Parent
+local SignalsModule = require(Parent.Parent.Signals)
+local _ = require(Parent.HttpStoreTypes)
 
-return function()
-	-- upvalues: signalsModule (ref)
+return function() --[[ Line: 20 | Named "createMockHttpStore" ]]
+	-- upvalues: SignalsModule (copy)
 	local t = {}
 	
-	local function getOrCreateResponse(p1, p2)
-		-- upvalues: t (write), signalsModule (copy)
-		if not t[p1] then
-			local var1, var2 = signalsModule.createSignal({ status = "NotStarted", config = p2 })
-			t[p1] = { get = var1, set = var2 }
+	local function getOrCreateResponse(Key, Config) --[[ Line: 29 ]]
+		-- upvalues: t (ref), SignalsModule (upval)
+		if not t[Key] then
+			local Signal, Signal2 = SignalsModule.createSignal({ status = "NotStarted", config = Config })
+			t[Key] = { get = Signal, set = Signal2 }
 		end
-		return t[p1]
+		return t[Key]
 	end
 	
 	return {
-		fetch = function(p1, p2)
-			-- upvalues: getOrCreateResponse (ref)
-			return getOrCreateResponse(p1 or p2.Url, p2).get, function() end
+		fetch = function(p1, p2) --[[ Line: 40 ]]
+			-- upvalues: getOrCreateResponse (copy)
+			return getOrCreateResponse(p1 or p2.Url, p2).get, function() --[[ Line: 43 ]] end
 		end,
-		cancelAll = function() end,
-		setResponse = function(value, p1)
-			-- upvalues: t (write), signalsModule (copy)
-			if t[value] then
-				t[value].set(p1)
+		cancelAll = function() --[[ Line: 46 ]] end,
+		setResponse = function(Key, p1) --[[ Line: 53 ]]
+			-- upvalues: t (ref), SignalsModule (upval)
+			if t[Key] then
+				t[Key].set(p1)
 				
 				return
+			else
+				local Signal, Signal2 = SignalsModule.createSignal(p1)
+				t[Key] = { get = Signal, set = Signal2 }
 			end
-			local var1, var2 = signalsModule.createSignal(p1)
-			t[value] = { get = var1, set = var2 }
 		end,
-		reset = function()
-			-- upvalues: t (write)
+		reset = function() --[[ Line: 63 ]]
+			-- upvalues: t (ref)
 			t = {}
 		end
 	}

@@ -1,1 +1,1 @@
-﻿return require(script.SquadVoiceAbuseReportScreen)
+﻿return (require(script.SquadVoiceAbuseReportScreen))

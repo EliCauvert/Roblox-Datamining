@@ -1,62 +1,59 @@
-﻿local playWithRewardComponent = script:FindFirstAncestor("PlayWithRewardComponent")
-local parent = playWithRewardComponent.Parent
-local foundationModule = require(parent.Foundation)
-local navigationModule = require(parent.Navigation)
-local reactModule = require(parent.React)
-local roactUtilsModule = require(parent.RoactUtils)
-local sharedFlagsModule = require(parent.SharedFlags)
-local playWithRewardCoachmarkStorageModule = require(playWithRewardComponent.PlayWithRewardCoachmarkStorage)
-local playWithRewardTelemetryModule = require(playWithRewardComponent.PlayWithRewardTelemetry)
-local useEarlyIsFocused = navigationModule.useEarlyIsFocused
-local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
-local coachmark = foundationModule.Coachmark
-local popoverAlign = foundationModule.Enums.PopoverAlign
-local popoverSide = foundationModule.Enums.PopoverSide
-local fFlagPlayWithRewardCoachmarkOverlayFix = sharedFlagsModule.FFlagPlayWithRewardCoachmarkOverlayFix
+﻿local PlayWithRewardComponent = script:FindFirstAncestor("PlayWithRewardComponent")
+local Parent = PlayWithRewardComponent.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local PlayWithRewardCoachmarkStorageModule = require(PlayWithRewardComponent.PlayWithRewardCoachmarkStorage)
+local PlayWithRewardTelemetryModule = require(PlayWithRewardComponent.PlayWithRewardTelemetry)
+local UseEarlyIsFocusedFunction = require(Parent.Navigation).useEarlyIsFocused
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local Coachmark = FoundationModule.Coachmark
+local PopoverAlign = FoundationModule.Enums.PopoverAlign
+local PopoverSide = FoundationModule.Enums.PopoverSide
+local FFlagPlayWithRewardCoachmarkOverlayFix = require(Parent.SharedFlags).FFlagPlayWithRewardCoachmarkOverlayFix
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), fFlagPlayWithRewardCoachmarkOverlayFix (ref), useEarlyIsFocused (ref), useSelector (ref), playWithRewardCoachmarkStorageModule (ref), playWithRewardTelemetryModule (ref), coachmark (ref), popoverSide (ref), popoverAlign (ref)
-	local var1, var2 = reactModule.useState(false)
-	local var3 = nil
-	local var4 = nil
+return ReactModule.memo(function(p1) --[[ Line: 42 | Named "PlayWithRewardCoachmark" ]]
+	-- upvalues: ReactModule (copy), FFlagPlayWithRewardCoachmarkOverlayFix (copy), UseEarlyIsFocusedFunction (copy), UseSelectorFunction (copy), PlayWithRewardCoachmarkStorageModule (copy), PlayWithRewardTelemetryModule (copy), Coachmark (copy), PopoverSide (copy), PopoverAlign (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local v1 = nil
+	local v2 = nil
 	
-	if fFlagPlayWithRewardCoachmarkOverlayFix then
-		var3 = useEarlyIsFocused()
-		var4 = useSelector(function(p2)
+	if FFlagPlayWithRewardCoachmarkOverlayFix then
+		v1 = UseEarlyIsFocusedFunction()
+		v2 = UseSelectorFunction(function(p2): boolean --[[ Line: 47 ]]
 			return p2.CentralOverlay.OverlayType ~= nil
 		end)
 	end
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), p1 (ref), playWithRewardCoachmarkStorageModule (copy), playWithRewardTelemetryModule (copy)
-		var2(false)
+	ReactModule.useEffect(function() --[[ Line: 52 ]]
+		-- upvalues: UseStateResult2 (copy), p1 (copy), PlayWithRewardCoachmarkStorageModule (upval), PlayWithRewardTelemetryModule (upval)
+		UseStateResult2(false)
 		
 		if p1.localUserId <= 0 then return end
-		if playWithRewardCoachmarkStorageModule.consumeImpressionIfEligible(p1.localUserId) then
-			var2(true)
-			playWithRewardTelemetryModule.logPlayWithRewardCoachmark("shown", p1.flowId, p1.universeId, p1.productId)
+		if PlayWithRewardCoachmarkStorageModule.consumeImpressionIfEligible(p1.localUserId) then
+			UseStateResult2(true)
+			PlayWithRewardTelemetryModule.logPlayWithRewardCoachmark("shown", p1.flowId, p1.universeId, p1.productId)
 		end
 	end, { p1.flowId, p1.localUserId, p1.productId, p1.universeId })
 	
-	if fFlagPlayWithRewardCoachmarkOverlayFix then
-		reactModule.useEffect(function()
-			-- upvalues: var3 (write), var4 (write), var2 (ref)
-			if not var3 or var4 then
-				var2(false)
+	if FFlagPlayWithRewardCoachmarkOverlayFix then
+		ReactModule.useEffect(function() --[[ Line: 66 ]]
+			-- upvalues: v1 (ref), v2 (ref), UseStateResult2 (copy)
+			if not v1 or v2 then
+				UseStateResult2(false)
 			end
-		end, { var3, var4 })
+		end, { v1, v2 })
 	end
-	return reactModule.createElement(coachmark, {
+	return ReactModule.createElement(Coachmark, {
 		title = p1.title,
 		text = p1.text,
-		isOpen = var1,
-		side = popoverSide.Bottom,
-		align = popoverAlign.Center,
+		isOpen = UseStateResult,
+		side = PopoverSide.Bottom,
+		align = PopoverAlign.Center,
 		anchorRef = p1.anchorRef,
-		onClose = reactModule.useCallback(function()
-			-- upvalues: playWithRewardCoachmarkStorageModule (copy), p1 (ref), playWithRewardTelemetryModule (copy), var2 (ref)
-			playWithRewardCoachmarkStorageModule.dismissCurrentWindow(p1.localUserId)
-			playWithRewardTelemetryModule.logPlayWithRewardCoachmark("dismissed", p1.flowId, p1.universeId, p1.productId)
-			var2(false)
+		onClose = ReactModule.useCallback(function() --[[ Line: 73 ]]
+			-- upvalues: PlayWithRewardCoachmarkStorageModule (upval), p1 (copy), PlayWithRewardTelemetryModule (upval), UseStateResult2 (copy)
+			PlayWithRewardCoachmarkStorageModule.dismissCurrentWindow(p1.localUserId)
+			PlayWithRewardTelemetryModule.logPlayWithRewardCoachmark("dismissed", p1.flowId, p1.universeId, p1.productId)
+			UseStateResult2(false)
 		end, { p1.flowId, p1.universeId, p1.productId, p1.localUserId })
 	})
 end)

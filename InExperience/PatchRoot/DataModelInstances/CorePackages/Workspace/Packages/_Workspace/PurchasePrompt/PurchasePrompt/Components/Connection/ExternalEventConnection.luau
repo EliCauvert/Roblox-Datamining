@@ -1,31 +1,31 @@
-﻿local roact = require(script:FindFirstAncestor("PurchasePrompt").Parent.PurchasePromptDeps).Roact
-local externalEventConnection = roact.Component:extend("ExternalEventConnection")
+﻿local Roact = require(script:FindFirstAncestor("PurchasePrompt").Parent.PurchasePromptDeps).Roact
+local ExternalEventConnection = Roact.Component:extend("ExternalEventConnection")
 
-function externalEventConnection.init(p1)
+function ExternalEventConnection.init(p1) --[[ Line: 12 ]]
 	p1.connection = nil
 end
 
-function externalEventConnection.render(p1)
-	-- upvalues: roact (ref)
-	return roact.oneChild(p1.props[roact.Children])
+function ExternalEventConnection.render(p1) --[[ Line: 29 ]]
+	-- upvalues: Roact (copy)
+	return Roact.oneChild(p1.props[Roact.Children])
 end
 
-function externalEventConnection.didMount(p1)
+function ExternalEventConnection.didMount(p1) --[[ Line: 33 ]]
 	p1.connection = p1.props.event:Connect(p1.props.callback)
 end
 
-function externalEventConnection.didUpdate(p1, p2)
+function ExternalEventConnection.didUpdate(p1, p2) --[[ Line: 40 ]]
 	if p1.props.event ~= p2.event or p1.props.callback ~= p2.callback then
 		p1.connection:Disconnect()
 		p1.connection = p1.props.event:Connect(p1.props.callback)
 	end
 end
 
-function externalEventConnection.willUnmount(p1)
+function ExternalEventConnection.willUnmount(p1) --[[ Line: 48 ]]
 	if p1.connection then
 		p1.connection:Disconnect()
 		p1.connection = nil
 	end
 end
 
-return externalEventConnection
+return ExternalEventConnection

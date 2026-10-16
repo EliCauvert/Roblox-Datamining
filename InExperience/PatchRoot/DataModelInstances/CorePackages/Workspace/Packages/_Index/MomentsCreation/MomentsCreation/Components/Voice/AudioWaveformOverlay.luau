@@ -1,83 +1,85 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local parent = momentsCreation.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local view = foundationModule.View
-local useTokens = foundationModule.Hooks.useTokens
-local useState = reactModule.useState
-local useMemo = reactModule.useMemo
-local useCallback = reactModule.useCallback
-local resampleWaveformPeaksModule = require(momentsCreation.Utils.resampleWaveformPeaks)
-local getFIntMomentsTTSWaveformMinBarHeightPercentModule = require(momentsCreation.Flags.GetFIntMomentsTTSWaveformMinBarHeightPercent)
-local getFIntMomentsTTSWaveformMaxBarHeightPercentModule = require(momentsCreation.Flags.GetFIntMomentsTTSWaveformMaxBarHeightPercent)
-local getFFlagMomentsTTSStartTimePositioningModule = require(momentsCreation.Flags.GetFFlagMomentsTTSStartTimePositioning)
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local Parent = MomentsCreation.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local View = FoundationModule.View
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseStateFunction = ReactModule.useState
+local UseMemoFunction = ReactModule.useMemo
+local UseCallbackFunction = ReactModule.useCallback
+local ResampleWaveformPeaksModule = require(MomentsCreation.Utils.resampleWaveformPeaks)
+local GetFIntMomentsTTSWaveformMinBarHeightPercentModule = require(MomentsCreation.Flags.GetFIntMomentsTTSWaveformMinBarHeightPercent)
+local GetFIntMomentsTTSWaveformMaxBarHeightPercentModule = require(MomentsCreation.Flags.GetFIntMomentsTTSWaveformMaxBarHeightPercent)
+local GetFFlagMomentsTTSStartTimePositioningModule = require(MomentsCreation.Flags.GetFFlagMomentsTTSStartTimePositioning)
 
-return function(p1)
-	-- upvalues: useTokens (ref), useState (ref), useCallback (ref), useMemo (ref), getFFlagMomentsTTSStartTimePositioningModule (ref), getFIntMomentsTTSWaveformMinBarHeightPercentModule (ref), getFIntMomentsTTSWaveformMaxBarHeightPercentModule (ref), resampleWaveformPeaksModule (ref), reactModule (ref), view (ref)
-	local var1 = useTokens()
-	local var2, var3 = useState(0)
-	local var4 = useCallback(function(p2)
-		-- upvalues: var3 (ref)
-		var3(p2.AbsoluteSize.X)
+return function(p1) --[[ Line: 55 | Named "AudioWaveformOverlay" ]]
+	-- upvalues: UseTokensFunction (copy), UseStateFunction (copy), UseCallbackFunction (copy), UseMemoFunction (copy), GetFFlagMomentsTTSStartTimePositioningModule (copy), GetFIntMomentsTTSWaveformMinBarHeightPercentModule (copy), GetFIntMomentsTTSWaveformMaxBarHeightPercentModule (copy), ResampleWaveformPeaksModule (copy), ReactModule (copy), View (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseStateResult, UseStateResult2 = UseStateFunction(0)
+	local UseCallbackResult = UseCallbackFunction(function(Frame) --[[ Line: 59 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(Frame.AbsoluteSize.X)
 	end, {})
-	local var5 = useMemo(function()
-		-- upvalues: var2 (ref)
-		return if var2 <= 0 then 0 else math.max(1, math.floor((var2 - 8) / 4))
-	end, { var2 })
-	local samples = p1.samples
-	local var6 = if getFFlagMomentsTTSStartTimePositioningModule and p1.audioDuration > 0 and p1.videoDuration > 0 then math.floor(#samples * math.clamp((p1.videoDuration - (p1.startTime or 0)) / p1.audioDuration, 0, 1) + 0.5) else #samples
-	local var7 = useMemo(function()
-		-- upvalues: getFIntMomentsTTSWaveformMinBarHeightPercentModule (copy), getFIntMomentsTTSWaveformMaxBarHeightPercentModule (copy), var6 (write), samples (ref), resampleWaveformPeaksModule (copy), var5 (ref), reactModule (copy), var1 (ref)
-		local t = {}
-		
-		for i, v in resampleWaveformPeaksModule(if #samples <= var6 then samples else table.move(samples, 1, var6, 1, {}), var5, getFIntMomentsTTSWaveformMinBarHeightPercentModule() / 100, getFIntMomentsTTSWaveformMaxBarHeightPercentModule() / 100) do
-			t["bar_" .. i] = reactModule.createElement("Frame", {
+	local UseMemoResult = UseMemoFunction(function(): number --[[ Line: 63 ]]
+		-- upvalues: UseStateResult (copy)
+		return if UseStateResult <= 0 then 0 else math.max(1, (math.floor((UseStateResult - 8) / 4)))
+	end, { UseStateResult })
+	local Samples = p1.samples
+	local Floored: number = if GetFFlagMomentsTTSStartTimePositioningModule and p1.audioDuration > 0 and p1.videoDuration > 0 then math.floor(#Samples * math.clamp((p1.videoDuration - (p1.startTime or 0)) / p1.audioDuration, 0, 1) + 0.5) else #Samples
+	local UseMemoResult1 = UseMemoFunction(function() --[[ Line: 81 ]]
+		-- upvalues: GetFIntMomentsTTSWaveformMinBarHeightPercentModule (upval), GetFIntMomentsTTSWaveformMaxBarHeightPercentModule (upval), Floored (ref), Samples (copy), ResampleWaveformPeaksModule (upval), UseMemoResult (copy), ReactModule (upval), UseTokensResult (copy)
+		local Frames = {}
+		local FIntMomentsTTSWaveformMinBarHeightPercentModuleRatio = GetFIntMomentsTTSWaveformMinBarHeightPercentModule() / 100
+		local FIntMomentsTTSWaveformMaxBarHeightPercentModuleRatio = GetFIntMomentsTTSWaveformMaxBarHeightPercentModule() / 100
+		local Samples1 = if #Samples <= Floored then Samples else table.move(Samples, 1, Floored, 1, {})
+		for LayoutOrder, value in ResampleWaveformPeaksModule(Samples1, UseMemoResult, FIntMomentsTTSWaveformMinBarHeightPercentModuleRatio, FIntMomentsTTSWaveformMaxBarHeightPercentModuleRatio) do
+			Frames["bar_" .. LayoutOrder] = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 0.3,
 				BorderSizePixel = 0,
-				Size = UDim2.new(0, 2, v, 0),
-				BackgroundColor3 = var1.Color.Content.Emphasis.Color3,
-				LayoutOrder = i
+				Size = UDim2.new(0, 2, value, 0),
+				BackgroundColor3 = UseTokensResult.Color.Content.Emphasis.Color3,
+				LayoutOrder = LayoutOrder
 			}, {
-				Corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 2) })
+				Corner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 2) })
 			})
 		end
-		return t
-	end, { var5, samples, var6, var1 })
+		return Frames
+	end, { UseMemoResult, Samples, Floored, UseTokensResult })
 	
 	if p1.videoDuration <= 0 then
 		return nil
 	end
-	local var8 = 0
-	local clampedValue = math.clamp(p1.audioDuration / p1.videoDuration, 0, 1)
-	local var9 = 1
+	local XScale = 0
+	local ClampedValue = math.clamp(p1.audioDuration / p1.videoDuration, 0, 1)
+	local Thickness = 1
 	
-	if getFFlagMomentsTTSStartTimePositioningModule then
-		var8 = math.clamp((p1.startTime or 0) / p1.videoDuration, 0, 1)
-		clampedValue = math.clamp(p1.audioDuration / p1.videoDuration, 0, 1 - var8)
-		var9 = 2
+	if GetFFlagMomentsTTSStartTimePositioningModule then
+		XScale = math.clamp((p1.startTime or 0) / p1.videoDuration, 0, 1)
+		ClampedValue = math.clamp(p1.audioDuration / p1.videoDuration, 0, 1 - XScale)
+		Thickness = 2
 	end
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		AnchorPoint = Vector2.new(0, 0.5),
-		Position = UDim2.fromScale(var8, 0.5),
-		Size = UDim2.new(clampedValue, 0, 1, 0),
-		BackgroundColor3 = var1.Color.ActionEmphasis.Background.Color3,
+		Position = UDim2.fromScale(XScale, 0.5),
+		Size = UDim2.new(ClampedValue, 0, 1, 0),
+		BackgroundColor3 = UseTokensResult.Color.ActionEmphasis.Background.Color3,
 		BackgroundTransparency = 0.4,
 		BorderSizePixel = 0,
 		ZIndex = 2,
-		[reactModule.Change.AbsoluteSize] = var4
+		[ReactModule.Change.AbsoluteSize] = UseCallbackResult
 	}, {
-		Corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 6) }),
-		Stroke = reactModule.createElement("UIStroke", {
+		Corner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 6) }),
+		Stroke = ReactModule.createElement("UIStroke", {
 			Color = Color3.new(1, 1, 1),
 			Transparency = if p1.isSelected then 0 else 0.6,
-			Thickness = var9
+			Thickness = Thickness
 		}),
-		DragDetector = if getFFlagMomentsTTSStartTimePositioningModule and p1.dragDetectorRef ~= nil then reactModule.createElement("UIDragDetector", {
+		DragDetector = if GetFFlagMomentsTTSStartTimePositioningModule and p1.dragDetectorRef ~= nil then ReactModule.createElement("UIDragDetector", {
 			DragStyle = Enum.UIDragDetectorDragStyle.TranslateLine,
 			ResponseStyle = Enum.UIDragDetectorResponseStyle.CustomScale,
 			ref = p1.dragDetectorRef
 		}) else nil,
-		BarsContainer = reactModule.createElement(view, {
+		BarsContainer = ReactModule.createElement(View, {
 			tag = "size-full-full clip",
 			ZIndex = 1,
 			layout = {
@@ -89,7 +91,7 @@ return function(p1)
 			},
 			padding = { left = UDim.new(0, 4), right = UDim.new(0, 4) }
 		}, {
-			Bars = reactModule.createElement(reactModule.Fragment, nil, var7)
+			Bars = ReactModule.createElement(ReactModule.Fragment, nil, UseMemoResult1)
 		})
 	})
 end

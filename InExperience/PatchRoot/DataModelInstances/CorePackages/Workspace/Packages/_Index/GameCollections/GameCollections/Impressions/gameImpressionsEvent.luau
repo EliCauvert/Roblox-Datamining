@@ -1,228 +1,231 @@
-﻿local httpService = game:GetService("HttpService")
-local telemetryService = game:GetService("TelemetryService")
-local parent = script:FindFirstAncestor("GameCollections").Parent
-local cryoModule = require(parent.Cryo)
-local getPlatformTarget = require(parent.Analytics).getPlatformTarget
-local tModule = require(parent.t)
-local appPage = require(parent.RobloxAppEnums).AppPage
-local contentType = require(parent.UnifiedLogging).ContentType
-local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventErrorLogger
-local fFlagSearchOmniAutocompletePage = require(parent.SharedFlags).FFlagSearchOmniAutocompletePage
-local fFlagLuaAppGameImpressionsMobileAdsId = require(parent.SharedFlags).FFlagLuaAppGameImpressionsMobileAdsId
-local fFlagTraversalHistoryDiscoveryTelemetry = require(parent.SharedFlags).FFlagTraversalHistoryDiscoveryTelemetry
-local fFlagLuaAppAddComponentTypeToSearchImpressions = require(parent.SharedFlags).FFlagLuaAppAddComponentTypeToSearchImpressions
-local fFlagLuaAppMigrateGameEventsTelemetryService = require(parent.SharedFlags).FFlagLuaAppMigrateGameEventsTelemetryService
-local fFlagLuaAppGameEventsTelemetryServiceShadowTraffic = require(parent.SharedFlags).FFlagLuaAppGameEventsTelemetryServiceShadowTraffic
-local luaAppGameImpressionsEventThrottlingHundredthsPercent = game:DefineFastInt("LuaAppGameImpressionsEventThrottlingHundredthsPercent", 10000)
-local luaAppGameImpressionsShadowThrottlingHundredthsPercent = game:DefineFastInt("LuaAppGameImpressionsShadowThrottlingHundredthsPercent", 10000)
-local luaAppFixRecommendedImpressionsInterface = game:DefineFastFlag("LuaAppFixRecommendedImpressionsInterface", false)
-local fFlagLuaAppGameImpressionsAddUnifiedFields = require(parent.SharedFlags).FFlagLuaAppGameImpressionsAddUnifiedFields
-local fFlagLuaAppSduiLandingPageEnabled = require(parent.SharedFlags).FFlagLuaAppSduiLandingPageEnabled
-local fFlagLuaAppAddAnalyticsDataToSeeAllImpressions = require(parent.SharedFlags).FFlagLuaAppAddAnalyticsDataToSeeAllImpressions
-local fFlagSduiSearchResultsPageEnabled = require(parent.SharedFlags).FFlagSduiSearchResultsPageEnabled
-local fFlagLuaAppSearchResultsPageGameTileVideo = require(parent.SharedFlags).FFlagLuaAppSearchResultsPageGameTileVideo
-local var1 = if fFlagLuaAppMigrateGameEventsTelemetryService then {
+﻿local HttpService = game:GetService("HttpService")
+local TelemetryService = game:GetService("TelemetryService")
+local Parent = script:FindFirstAncestor("GameCollections").Parent
+local CryoModule = require(Parent.Cryo)
+local GetPlatformTargetFunction = require(Parent.Analytics).getPlatformTarget
+local TModule = require(Parent.t)
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local ContentType = require(Parent.UnifiedLogging).ContentType
+local DiscoveryEventErrorLogger = require(Parent.DiscoveryUtils).DiscoveryEventErrorLogger
+local FFlagSearchOmniAutocompletePage = require(Parent.SharedFlags).FFlagSearchOmniAutocompletePage
+local FFlagLuaAppGameImpressionsMobileAdsId = require(Parent.SharedFlags).FFlagLuaAppGameImpressionsMobileAdsId
+local FFlagTraversalHistoryDiscoveryTelemetry = require(Parent.SharedFlags).FFlagTraversalHistoryDiscoveryTelemetry
+local FFlagLuaAppMigrateGameEventsTelemetryService = require(Parent.SharedFlags).FFlagLuaAppMigrateGameEventsTelemetryService
+local FFlagLuaAppGameEventsTelemetryServiceShadowTraffic = require(Parent.SharedFlags).FFlagLuaAppGameEventsTelemetryServiceShadowTraffic
+local LuaAppGameImpressionsEventThrottlingHundredthsPercent = game:DefineFastInt("LuaAppGameImpressionsEventThrottlingHundredthsPercent", 10000)
+local LuaAppGameImpressionsShadowThrottlingHundredthsPercent = game:DefineFastInt("LuaAppGameImpressionsShadowThrottlingHundredthsPercent", 10000)
+local FFlagLuaAppGameImpressionsAddUnifiedFields = require(Parent.SharedFlags).FFlagLuaAppGameImpressionsAddUnifiedFields
+local FFlagLuaAppSduiLandingPageEnabled = require(Parent.SharedFlags).FFlagLuaAppSduiLandingPageEnabled
+local FFlagLuaAppAddAnalyticsDataToSeeAllImpressions = require(Parent.SharedFlags).FFlagLuaAppAddAnalyticsDataToSeeAllImpressions
+local FFlagSduiSearchResultsPageEnabled = require(Parent.SharedFlags).FFlagSduiSearchResultsPageEnabled
+local FFlagLuaAppSearchResultsPageGameTileVideo = require(Parent.SharedFlags).FFlagLuaAppSearchResultsPageGameTileVideo
+local FFlagLuaAppDiscoveryMomentVideoTelemetry = require(Parent.SharedFlags).FFlagLuaAppDiscoveryMomentVideoTelemetry
+local Config = if FFlagLuaAppMigrateGameEventsTelemetryService then {
 	eventName = "gameImpressions",
 	description = "Fires when game tiles become visible to the user",
 	backends = { "EventIngest" },
-	throttlingPercentage = luaAppGameImpressionsEventThrottlingHundredthsPercent,
+	throttlingPercentage = LuaAppGameImpressionsEventThrottlingHundredthsPercent,
 	lastUpdated = { 26, 2, 4 }
 } else nil
-local var2 = if fFlagLuaAppGameEventsTelemetryServiceShadowTraffic then {
+local Config1 = if FFlagLuaAppGameEventsTelemetryServiceShadowTraffic then {
 	eventName = "gameImpressionsShadow",
 	description = "Shadow traffic for gameImpressions event recovery percentage",
 	backends = { "EventIngest" },
-	throttlingPercentage = luaAppGameImpressionsShadowThrottlingHundredthsPercent,
+	throttlingPercentage = LuaAppGameImpressionsShadowThrottlingHundredthsPercent,
 	lastUpdated = { 26, 3, 4 }
 } else nil
-local var3 = tModule.strictInterface({
-	absPositions = tModule.string,
-	topicDataPositions = tModule.string,
-	rootPlaceIds = tModule.string,
-	universeIds = tModule.string,
-	gameSetTypeId = tModule.string,
-	sortPos = tModule.number,
-	locale = tModule.string,
-	thumbnailAssetIds = tModule.optional(tModule.string),
-	thumbnailListIds = tModule.optional(tModule.string),
-	videoThumbnailAssetIds = tModule.optional(tModule.string),
-	componentType = tModule.optional(tModule.string),
-	gameSetTargetId = tModule.optional(tModule.number),
-	pageId = tModule.optional(tModule.string),
-	adFlags = tModule.optional(tModule.string),
-	adIds = tModule.optional(tModule.string),
-	rows = tModule.optional(tModule.string),
-	rowsOnPage = tModule.optional(tModule.string),
-	positionsInRows = tModule.optional(tModule.string),
-	tileBadgeContexts = tModule.optional(tModule.string),
-	appliedFilters = tModule.optional(tModule.string),
-	mobileAdvertisingId = if fFlagLuaAppGameImpressionsMobileAdsId then tModule.optional(tModule.string) else nil,
-	footerTextLiterals = tModule.optional(tModule.string),
-	footerLocalizationKeys = tModule.optional(tModule.string),
-	loadSource = tModule.optional(tModule.string),
-	tileTypes = tModule.optional(tModule.string),
-	sortSubId = tModule.optional(tModule.string),
-	analyticsData = tModule.optional(tModule.table),
-	contentType = if fFlagLuaAppGameImpressionsAddUnifiedFields then tModule.optional(tModule.string) else nil,
-	interactionUuid = if fFlagLuaAppGameImpressionsAddUnifiedFields then tModule.optional(tModule.string) else nil,
-	hasSponsoredContent = if fFlagLuaAppGameImpressionsAddUnifiedFields then tModule.optional(tModule.boolean) else nil
+local StrictInterfaceResult = TModule.strictInterface({
+	absPositions = TModule.string,
+	topicDataPositions = TModule.string,
+	rootPlaceIds = TModule.string,
+	universeIds = TModule.string,
+	gameSetTypeId = TModule.string,
+	sortPos = TModule.number,
+	locale = TModule.string,
+	thumbnailAssetIds = TModule.optional(TModule.string),
+	thumbnailListIds = TModule.optional(TModule.string),
+	videoThumbnailAssetIds = TModule.optional(TModule.string),
+	videoIsMoment_arr = if FFlagLuaAppDiscoveryMomentVideoTelemetry then TModule.optional(TModule.string) else nil,
+	componentType = TModule.optional(TModule.string),
+	gameSetTargetId = TModule.optional(TModule.number),
+	pageId = TModule.optional(TModule.string),
+	adFlags = TModule.optional(TModule.string),
+	adIds = TModule.optional(TModule.string),
+	rows = TModule.optional(TModule.string),
+	rowsOnPage = TModule.optional(TModule.string),
+	positionsInRows = TModule.optional(TModule.string),
+	tileBadgeContexts = TModule.optional(TModule.string),
+	appliedFilters = TModule.optional(TModule.string),
+	mobileAdvertisingId = if FFlagLuaAppGameImpressionsMobileAdsId then TModule.optional(TModule.string) else nil,
+	footerTextLiterals = TModule.optional(TModule.string),
+	footerLocalizationKeys = TModule.optional(TModule.string),
+	loadSource = TModule.optional(TModule.string),
+	tileTypes = TModule.optional(TModule.string),
+	sortSubId = TModule.optional(TModule.string),
+	analyticsData = TModule.optional(TModule.table),
+	contentType = if FFlagLuaAppGameImpressionsAddUnifiedFields then TModule.optional(TModule.string) else nil,
+	interactionUuid = if FFlagLuaAppGameImpressionsAddUnifiedFields then TModule.optional(TModule.string) else nil,
+	hasSponsoredContent = if FFlagLuaAppGameImpressionsAddUnifiedFields then TModule.optional(TModule.boolean) else nil
 })
-local var4 = tModule.strictInterface({
-	absPositions = tModule.string,
-	topicDataPositions = tModule.string,
-	rootPlaceIds = tModule.string,
-	universeIds = tModule.string,
-	gameSetTypeId = tModule.string,
-	locale = tModule.string,
-	seeAllFlag = tModule.number,
-	gameSetTargetId = tModule.optional(tModule.number),
-	pageId = tModule.optional(tModule.string),
-	adFlags = tModule.optional(tModule.string),
-	adIds = tModule.optional(tModule.string),
-	thumbnailAssetIds = tModule.optional(tModule.string),
-	thumbnailListIds = tModule.optional(tModule.string),
-	videoThumbnailAssetIds = tModule.optional(tModule.string),
-	tileBadgeContexts = tModule.optional(tModule.string),
-	mobileAdvertisingId = if fFlagLuaAppGameImpressionsMobileAdsId then tModule.optional(tModule.string) else nil,
-	appliedFilters = tModule.optional(tModule.string),
-	footerTextLiterals = tModule.optional(tModule.string),
-	footerLocalizationKeys = tModule.optional(tModule.string),
-	tileTypes = tModule.optional(tModule.string),
-	analyticsData = if fFlagLuaAppAddAnalyticsDataToSeeAllImpressions then tModule.optional(tModule.table) else nil,
-	contentType = if fFlagLuaAppGameImpressionsAddUnifiedFields then tModule.optional(tModule.string) else nil,
-	interactionUuid = if fFlagLuaAppGameImpressionsAddUnifiedFields then tModule.optional(tModule.string) else nil,
-	hasSponsoredContent = if fFlagLuaAppGameImpressionsAddUnifiedFields then tModule.optional(tModule.boolean) else nil
+local StrictInterfaceResult1 = TModule.strictInterface({
+	absPositions = TModule.string,
+	topicDataPositions = TModule.string,
+	rootPlaceIds = TModule.string,
+	universeIds = TModule.string,
+	gameSetTypeId = TModule.string,
+	locale = TModule.string,
+	seeAllFlag = TModule.number,
+	gameSetTargetId = TModule.optional(TModule.number),
+	pageId = TModule.optional(TModule.string),
+	adFlags = TModule.optional(TModule.string),
+	adIds = TModule.optional(TModule.string),
+	thumbnailAssetIds = TModule.optional(TModule.string),
+	thumbnailListIds = TModule.optional(TModule.string),
+	videoThumbnailAssetIds = TModule.optional(TModule.string),
+	videoIsMoment_arr = if FFlagLuaAppDiscoveryMomentVideoTelemetry then TModule.optional(TModule.string) else nil,
+	tileBadgeContexts = TModule.optional(TModule.string),
+	mobileAdvertisingId = if FFlagLuaAppGameImpressionsMobileAdsId then TModule.optional(TModule.string) else nil,
+	appliedFilters = TModule.optional(TModule.string),
+	footerTextLiterals = TModule.optional(TModule.string),
+	footerLocalizationKeys = TModule.optional(TModule.string),
+	tileTypes = TModule.optional(TModule.string),
+	analyticsData = if FFlagLuaAppAddAnalyticsDataToSeeAllImpressions then TModule.optional(TModule.table) else nil,
+	contentType = if FFlagLuaAppGameImpressionsAddUnifiedFields then TModule.optional(TModule.string) else nil,
+	interactionUuid = if FFlagLuaAppGameImpressionsAddUnifiedFields then TModule.optional(TModule.string) else nil,
+	hasSponsoredContent = if FFlagLuaAppGameImpressionsAddUnifiedFields then TModule.optional(TModule.boolean) else nil
 })
-local t = {
-	[appPage.Home] = var3,
-	[appPage.Games] = var3,
-	[appPage.SduiLandingPage] = if fFlagLuaAppSduiLandingPageEnabled then var3 else nil,
-	[appPage.SearchPage] = tModule.strictInterface({
-		absPositions = tModule.string,
-		topicDataPositions = tModule.string,
-		rootPlaceIds = tModule.string,
-		universeIds = tModule.string,
-		searchUuid = tModule.string,
-		emphasisFlag = tModule.number,
-		seeAllFlag = tModule.number,
-		sortPos = tModule.optional(tModule.number),
-		gameSetTypeId = tModule.optional(tModule.string),
-		locale = tModule.optional(tModule.string),
-		adFlags = tModule.optional(tModule.string),
-		adIds = tModule.optional(tModule.string),
-		rows = tModule.optional(tModule.string),
-		rowsOnPage = tModule.optional(tModule.string),
-		positionsInRows = tModule.optional(tModule.string),
-		mobileAdvertisingId = if fFlagLuaAppGameImpressionsMobileAdsId then tModule.optional(tModule.string) else nil,
-		thumbnailAssetIds = tModule.optional(tModule.string),
-		thumbnailListIds = tModule.optional(tModule.string),
-		videoThumbnailAssetIds = if fFlagLuaAppSearchResultsPageGameTileVideo then tModule.optional(tModule.string) else nil,
-		footerTextLiterals = tModule.optional(tModule.string),
-		footerLocalizationKeys = tModule.optional(tModule.string),
-		tileBadgeContexts = tModule.optional(tModule.string),
-		componentType = if fFlagLuaAppAddComponentTypeToSearchImpressions then tModule.optional(tModule.string) else nil,
-		tileTypes = tModule.optional(tModule.string),
-		analyticsData = if fFlagSduiSearchResultsPageEnabled then tModule.optional(tModule.table) else nil,
-		contentType = if fFlagLuaAppGameImpressionsAddUnifiedFields then tModule.optional(tModule.string) else nil,
-		interactionUuid = if fFlagLuaAppGameImpressionsAddUnifiedFields then tModule.optional(tModule.string) else nil,
-		hasSponsoredContent = if fFlagLuaAppGameImpressionsAddUnifiedFields then tModule.optional(tModule.boolean) else nil
+local StrictInterfaceResult2 = if FFlagSearchOmniAutocompletePage then TModule.strictInterface({
+	absPositions = TModule.string,
+	topicDataPositions = TModule.string,
+	rootPlaceIds = TModule.string,
+	universeIds = TModule.string,
+	sortPos = TModule.number,
+	gameSetTypeId = TModule.optional(TModule.string),
+	locale = TModule.optional(TModule.string),
+	thumbnailAssetIds = TModule.optional(TModule.string),
+	videoThumbnailAssetIds = TModule.optional(TModule.string),
+	videoIsMoment_arr = if FFlagLuaAppDiscoveryMomentVideoTelemetry then TModule.optional(TModule.string) else nil,
+	componentType = TModule.optional(TModule.string),
+	rowsOnPage = TModule.optional(TModule.string),
+	positionsInRows = TModule.optional(TModule.string),
+	mobileAdvertisingId = if FFlagLuaAppGameImpressionsMobileAdsId then TModule.optional(TModule.string) else nil,
+	gameSetTargetId = TModule.optional(TModule.number),
+	adFlags = TModule.optional(TModule.string),
+	adIds = TModule.optional(TModule.string),
+	tileBadgeContexts = TModule.optional(TModule.string),
+	thumbnailListIds = TModule.optional(TModule.string),
+	tileTypes = TModule.optional(TModule.string),
+	contentType = if FFlagLuaAppGameImpressionsAddUnifiedFields then TModule.optional(TModule.string) else nil,
+	interactionUuid = if FFlagLuaAppGameImpressionsAddUnifiedFields then TModule.optional(TModule.string) else nil,
+	hasSponsoredContent = if FFlagLuaAppGameImpressionsAddUnifiedFields then TModule.optional(TModule.boolean) else nil
+}) else nil
+local config = {
+	[AppPage.Home] = StrictInterfaceResult,
+	[AppPage.Games] = StrictInterfaceResult,
+	[AppPage.SduiLandingPage] = if FFlagLuaAppSduiLandingPageEnabled then StrictInterfaceResult else nil,
+	[AppPage.SearchPage] = TModule.strictInterface({
+		absPositions = TModule.string,
+		topicDataPositions = TModule.string,
+		rootPlaceIds = TModule.string,
+		universeIds = TModule.string,
+		searchUuid = TModule.string,
+		emphasisFlag = TModule.number,
+		seeAllFlag = TModule.number,
+		sortPos = TModule.optional(TModule.number),
+		gameSetTypeId = TModule.optional(TModule.string),
+		locale = TModule.optional(TModule.string),
+		adFlags = TModule.optional(TModule.string),
+		adIds = TModule.optional(TModule.string),
+		rows = TModule.optional(TModule.string),
+		rowsOnPage = TModule.optional(TModule.string),
+		positionsInRows = TModule.optional(TModule.string),
+		mobileAdvertisingId = if FFlagLuaAppGameImpressionsMobileAdsId then TModule.optional(TModule.string) else nil,
+		thumbnailAssetIds = TModule.optional(TModule.string),
+		thumbnailListIds = TModule.optional(TModule.string),
+		videoThumbnailAssetIds = if FFlagLuaAppSearchResultsPageGameTileVideo then TModule.optional(TModule.string) else nil,
+		videoIsMoment_arr = if FFlagLuaAppDiscoveryMomentVideoTelemetry then TModule.optional(TModule.string) else nil,
+		footerTextLiterals = TModule.optional(TModule.string),
+		footerLocalizationKeys = TModule.optional(TModule.string),
+		tileBadgeContexts = TModule.optional(TModule.string),
+		componentType = TModule.optional(TModule.string),
+		tileTypes = TModule.optional(TModule.string),
+		analyticsData = if FFlagSduiSearchResultsPageEnabled then TModule.optional(TModule.table) else nil,
+		contentType = if FFlagLuaAppGameImpressionsAddUnifiedFields then TModule.optional(TModule.string) else nil,
+		interactionUuid = if FFlagLuaAppGameImpressionsAddUnifiedFields then TModule.optional(TModule.string) else nil,
+		hasSponsoredContent = if FFlagLuaAppGameImpressionsAddUnifiedFields then TModule.optional(TModule.boolean) else nil
 	}),
-	[appPage.SearchLandingPage] = if fFlagSearchOmniAutocompletePage then if fFlagSearchOmniAutocompletePage then tModule.strictInterface({
-		absPositions = tModule.string,
-		topicDataPositions = tModule.string,
-		rootPlaceIds = tModule.string,
-		universeIds = tModule.string,
-		sortPos = tModule.number,
-		gameSetTypeId = tModule.optional(tModule.string),
-		locale = tModule.optional(tModule.string),
-		thumbnailAssetIds = tModule.optional(tModule.string),
-		videoThumbnailAssetIds = tModule.optional(tModule.string),
-		componentType = tModule.optional(tModule.string),
-		rowsOnPage = tModule.optional(tModule.string),
-		positionsInRows = tModule.optional(tModule.string),
-		mobileAdvertisingId = if fFlagLuaAppGameImpressionsMobileAdsId then tModule.optional(tModule.string) else nil,
-		gameSetTargetId = tModule.optional(tModule.number),
-		adFlags = tModule.optional(tModule.string),
-		adIds = tModule.optional(tModule.string),
-		tileBadgeContexts = tModule.optional(tModule.string),
-		thumbnailListIds = tModule.optional(tModule.string),
-		tileTypes = tModule.optional(tModule.string),
-		contentType = if fFlagLuaAppGameImpressionsAddUnifiedFields then tModule.optional(tModule.string) else nil,
-		interactionUuid = if fFlagLuaAppGameImpressionsAddUnifiedFields then tModule.optional(tModule.string) else nil,
-		hasSponsoredContent = if fFlagLuaAppGameImpressionsAddUnifiedFields then tModule.optional(tModule.boolean) else nil
-	}) else nil else nil,
-	recommended = tModule.strictInterface({
-		absPositions = tModule.string,
-		topicDataPositions = tModule.string,
-		rootPlaceIds = tModule.string,
-		universeIds = tModule.string,
-		refId = tModule.string,
-		adFlags = tModule.optional(tModule.string),
-		adIds = tModule.optional(tModule.string),
-		locale = tModule.optional(tModule.string),
-		tileBadgeContexts = tModule.optional(tModule.string),
-		mobileAdvertisingId = if fFlagLuaAppGameImpressionsMobileAdsId then tModule.optional(tModule.string) else nil,
-		tileTypes = if luaAppFixRecommendedImpressionsInterface then tModule.optional(tModule.string) else nil,
-		contentType = if fFlagLuaAppGameImpressionsAddUnifiedFields then tModule.optional(tModule.string) else nil,
-		interactionUuid = if fFlagLuaAppGameImpressionsAddUnifiedFields then tModule.optional(tModule.string) else nil,
-		hasSponsoredContent = if fFlagLuaAppGameImpressionsAddUnifiedFields then tModule.optional(tModule.boolean) else nil
+	[AppPage.SearchLandingPage] = if FFlagSearchOmniAutocompletePage then StrictInterfaceResult2 else nil,
+	recommended = TModule.strictInterface({
+		absPositions = TModule.string,
+		topicDataPositions = TModule.string,
+		rootPlaceIds = TModule.string,
+		universeIds = TModule.string,
+		refId = TModule.string,
+		adFlags = TModule.optional(TModule.string),
+		adIds = TModule.optional(TModule.string),
+		locale = TModule.optional(TModule.string),
+		tileBadgeContexts = TModule.optional(TModule.string),
+		mobileAdvertisingId = if FFlagLuaAppGameImpressionsMobileAdsId then TModule.optional(TModule.string) else nil,
+		tileTypes = TModule.optional(TModule.string),
+		contentType = if FFlagLuaAppGameImpressionsAddUnifiedFields then TModule.optional(TModule.string) else nil,
+		interactionUuid = if FFlagLuaAppGameImpressionsAddUnifiedFields then TModule.optional(TModule.string) else nil,
+		hasSponsoredContent = if FFlagLuaAppGameImpressionsAddUnifiedFields then TModule.optional(TModule.boolean) else nil
 	}),
-	Deeplink = var4,
-	InExpHistoryPage = if fFlagTraversalHistoryDiscoveryTelemetry then tModule.strictInterface({
-		absPositions = tModule.string,
-		positionsInRows = tModule.optional(tModule.string),
-		rootPlaceIds = tModule.string,
-		rows = tModule.string,
-		rowsOnPage = tModule.string,
-		topicDataPositions = tModule.string,
-		universeIds = tModule.string,
-		locale = tModule.optional(tModule.string),
-		tileBadgeContexts = tModule.optional(tModule.string),
-		contentType = if fFlagLuaAppGameImpressionsAddUnifiedFields then tModule.optional(tModule.string) else nil,
-		interactionUuid = if fFlagLuaAppGameImpressionsAddUnifiedFields then tModule.optional(tModule.string) else nil,
-		hasSponsoredContent = if fFlagLuaAppGameImpressionsAddUnifiedFields then tModule.optional(tModule.boolean) else nil
+	Deeplink = StrictInterfaceResult1,
+	InExpHistoryPage = if FFlagTraversalHistoryDiscoveryTelemetry then TModule.strictInterface({
+		absPositions = TModule.string,
+		positionsInRows = TModule.optional(TModule.string),
+		rootPlaceIds = TModule.string,
+		rows = TModule.string,
+		rowsOnPage = TModule.string,
+		topicDataPositions = TModule.string,
+		universeIds = TModule.string,
+		locale = TModule.optional(TModule.string),
+		tileBadgeContexts = TModule.optional(TModule.string),
+		contentType = if FFlagLuaAppGameImpressionsAddUnifiedFields then TModule.optional(TModule.string) else nil,
+		interactionUuid = if FFlagLuaAppGameImpressionsAddUnifiedFields then TModule.optional(TModule.string) else nil,
+		hasSponsoredContent = if FFlagLuaAppGameImpressionsAddUnifiedFields then TModule.optional(TModule.boolean) else nil
 	}) else nil
 }
 
-return function(p1, p2, p3)
-	-- upvalues: appPage (ref), var4 (ref), t (ref), discoveryEventErrorLogger (ref), fFlagLuaAppGameImpressionsAddUnifiedFields (ref), cryoModule (ref), httpService (ref), contentType (ref), fFlagLuaAppMigrateGameEventsTelemetryService (ref), telemetryService (ref), var1 (write), getPlatformTarget (ref), fFlagLuaAppGameEventsTelemetryServiceShadowTraffic (ref), var2 (write)
-	local _ = nil
-	local var5 = if p3.seeAllFlag and (p2 == appPage.Home or p2 == appPage.Games) then var4 else t[p2]
+return function(p1, EventContext, CustomFields) --[[ Line: 237 ]]
+	-- upvalues: AppPage (copy), StrictInterfaceResult1 (copy), config (copy), DiscoveryEventErrorLogger (copy), FFlagLuaAppGameImpressionsAddUnifiedFields (copy), CryoModule (copy), HttpService (copy), ContentType (copy), FFlagLuaAppMigrateGameEventsTelemetryService (copy), TelemetryService (copy), Config (ref), GetPlatformTargetFunction (copy), FFlagLuaAppGameEventsTelemetryServiceShadowTraffic (copy), Config1 (ref)
+	local StrictInterfaceResult = if CustomFields.seeAllFlag and (EventContext == AppPage.Home or EventContext == AppPage.Games) then StrictInterfaceResult1 else config[EventContext]
 	
-	if var5 then
-		local var6, var7 = var5(p3)
+	if StrictInterfaceResult then
+		local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(CustomFields)
 		
-		if not var6 then
-			discoveryEventErrorLogger.reportError("GameImpressionsEventInvalidInterface", var7)
+		if not StrictInterfaceResultResult then
+			DiscoveryEventErrorLogger.reportError("GameImpressionsEventInvalidInterface", StrictInterfaceResultResult2)
 		end
 	else
-		discoveryEventErrorLogger.reportError("GameImpressionsEventMissingInterface", `Missing interface for eventContext {p2} to type check gameImpressions event parameters`, { eventContext = p2 })
+		DiscoveryEventErrorLogger.reportError("GameImpressionsEventMissingInterface", `Missing interface for eventContext {EventContext} to type check gameImpressions event parameters`, { eventContext = EventContext })
 	end
-	if fFlagLuaAppGameImpressionsAddUnifiedFields then
-		p3 = cryoModule.Dictionary.join({
-			interactionUuid = httpService:GenerateGUID(false),
-			contentType = contentType.Game
-		}, p3)
+	if FFlagLuaAppGameImpressionsAddUnifiedFields then
+		CustomFields = CryoModule.Dictionary.join({
+			interactionUuid = HttpService:GenerateGUID(false),
+			contentType = ContentType.Game
+		}, CustomFields)
 	end
-	if p3.analyticsData then
-		p3 = cryoModule.Dictionary.join(p3.analyticsData, p3, { analyticsData = cryoModule.None })
+	if CustomFields.analyticsData then
+		CustomFields = CryoModule.Dictionary.join(CustomFields.analyticsData, CustomFields, { analyticsData = CryoModule.None })
 	end
-	if fFlagLuaAppMigrateGameEventsTelemetryService then
-		telemetryService:LogEvent(var1, {
-			eventContext = p2,
+	if FFlagLuaAppMigrateGameEventsTelemetryService then
+		TelemetryService:LogEvent(Config, {
+			eventContext = EventContext,
 			standardizedFields = { "addSessionInfo", "addSessionId", "addOSInfo" },
-			customFields = p3,
-			legacyOverrideTargetForEventIngest = getPlatformTarget()
+			customFields = CustomFields,
+			legacyOverrideTargetForEventIngest = GetPlatformTargetFunction()
 		})
 	else
-		p1:sendEventDeferred(p2, "gameImpressions", p3)
+		p1:sendEventDeferred(EventContext, "gameImpressions", CustomFields)
 	end
-	if fFlagLuaAppGameEventsTelemetryServiceShadowTraffic then
-		telemetryService:LogEvent(var2, {
-			eventContext = p2,
+	if FFlagLuaAppGameEventsTelemetryServiceShadowTraffic then
+		TelemetryService:LogEvent(Config1, {
+			eventContext = EventContext,
 			standardizedFields = { "addSessionInfo", "addSessionId", "addOSInfo" },
-			customFields = p3,
-			legacyOverrideTargetForEventIngest = getPlatformTarget()
+			customFields = CustomFields,
+			legacyOverrideTargetForEventIngest = GetPlatformTargetFunction()
 		})
 	end
 end

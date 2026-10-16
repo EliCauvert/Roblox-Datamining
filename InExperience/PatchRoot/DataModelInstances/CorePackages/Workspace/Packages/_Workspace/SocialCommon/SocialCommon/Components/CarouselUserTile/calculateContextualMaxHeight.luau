@@ -1,11 +1,11 @@
-﻿local parent = script:FindFirstAncestor("SocialCommon").Parent
-local text = require(parent.AppCommonLib).Text
-local constantsModule = require(script.Parent.Constants)
-local _ = require(parent.UIBlox)
+﻿local Parent = script:FindFirstAncestor("SocialCommon").Parent
+local Text = require(Parent.AppCommonLib).Text
+local ConstantsModule = require(script.Parent.Constants)
+local _ = require(Parent.UIBlox)
 
-return function(p1)
-	-- upvalues: constantsModule (ref), text (ref)
-	local font = p1.font
+return function(p1) --[[ Line: 16 ]]
+	-- upvalues: ConstantsModule (copy), Text (copy)
+	local _Font = p1.font
 	
-	return (if p1 then p1.nameTopPadding else constantsModule.NAME_TOP_PADDING) + text.GetTextHeight("", font.CaptionHeader.Font, font.BaseSize * font.CaptionHeader.RelativeSize, 10000) + (if p1 then p1.contextualTopPadding else constantsModule.CONTEXTUAL_TOP_PADDING) + text.GetTextHeight("", font.CaptionBody.Font, font.BaseSize * font.CaptionBody.RelativeSize, 10000) * (if p1 then p1.maxLinesNumber else constantsModule.LINES_MAX)
+	return (p1 and p1.nameTopPadding or ConstantsModule.NAME_TOP_PADDING) + Text.GetTextHeight("", _Font.CaptionHeader.Font, _Font.BaseSize * _Font.CaptionHeader.RelativeSize, 10000) + (p1 and p1.contextualTopPadding or ConstantsModule.CONTEXTUAL_TOP_PADDING) + Text.GetTextHeight("", _Font.CaptionBody.Font, _Font.BaseSize * _Font.CaptionBody.RelativeSize, 10000) * (p1 and p1.maxLinesNumber or ConstantsModule.LINES_MAX)
 end

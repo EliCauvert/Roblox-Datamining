@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.SiteMessageStore.SiteMessageStore)
+﻿return (require(script.Parent.Parent.Parent._Index.SiteMessageStore.SiteMessageStore))

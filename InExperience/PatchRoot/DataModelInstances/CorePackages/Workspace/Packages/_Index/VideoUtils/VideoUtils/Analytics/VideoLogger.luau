@@ -1,68 +1,67 @@
-﻿local telemetryService = game:GetService("TelemetryService")
-local videoUtils = script:FindFirstAncestor("VideoUtils")
-local parent = videoUtils.Parent
-local cryoModule = require(parent.Cryo)
-local loggingProtocolModule = require(parent.LoggingProtocol)
-local reportWarning = require(parent.DiscoveryAnalytics).Points.reportWarning
-local tModule = require(parent.t)
-local _ = require(videoUtils.Analytics.VideoAnalyticsTypes)
-local videoEngagementEvents = require(videoUtils.Analytics.Enums).VideoEngagementEvents
-local videoEngagementEventHundredthsPercent = game:DefineFastInt("VideoEngagementEventHundredthsPercent", 0)
+﻿local TelemetryService = game:GetService("TelemetryService")
+local VideoUtils = script:FindFirstAncestor("VideoUtils")
+local Parent = VideoUtils.Parent
+local CryoModule = require(Parent.Cryo)
+local LoggingProtocolModule = require(Parent.LoggingProtocol)
+local ReportWarningFunction = require(Parent.DiscoveryAnalytics).Points.reportWarning
+local TModule = require(Parent.t)
+local _ = require(VideoUtils.Analytics.VideoAnalyticsTypes)
+local VideoEngagementEvents = require(VideoUtils.Analytics.Enums).VideoEngagementEvents
 local t = {}
-local var1 = tModule.strictInterface({
-	videoAssetId = tModule.string,
-	source = tModule.string,
-	sourceId = tModule.string,
-	impressionId = tModule.optional(tModule.string),
-	playbackSessionId = tModule.optional(tModule.string),
-	videoAssetDuration = tModule.optional(tModule.number),
-	isVisible = tModule.optional(tModule.boolean),
-	isAudible = tModule.optional(tModule.boolean),
-	isFullscreen = tModule.optional(tModule.boolean),
-	volumeLevel = tModule.optional(tModule.number)
+local StrictInterfaceResult = TModule.strictInterface({
+	videoAssetId = TModule.string,
+	source = TModule.string,
+	sourceId = TModule.string,
+	impressionId = TModule.optional(TModule.string),
+	playbackSessionId = TModule.optional(TModule.string),
+	videoAssetDuration = TModule.optional(TModule.number),
+	isVisible = TModule.optional(TModule.boolean),
+	isAudible = TModule.optional(TModule.boolean),
+	isFullscreen = TModule.optional(TModule.boolean),
+	volumeLevel = TModule.optional(TModule.number)
 })
-local var2 = tModule.strictInterface({
-	loadTime = tModule.optional(tModule.number),
-	scrubStartTime = tModule.optional(tModule.number),
-	scrubEndTime = tModule.optional(tModule.number),
-	destination = tModule.optional(tModule.string)
+local StrictInterfaceResult1 = TModule.strictInterface({
+	loadTime = TModule.optional(TModule.number),
+	scrubStartTime = TModule.optional(TModule.number),
+	scrubEndTime = TModule.optional(TModule.number),
+	destination = TModule.optional(TModule.string)
 })
-local t_1 = {
+local config = {
 	eventName = "videoEngagementEvent",
 	description = "Fire when video engagement event is triggered",
 	links = "",
 	backends = {
-		loggingProtocolModule.TelemetryBackends.Points,
-		loggingProtocolModule.TelemetryBackends.EventIngest
+		LoggingProtocolModule.TelemetryBackends.Points,
+		LoggingProtocolModule.TelemetryBackends.EventIngest
 	},
-	throttlingPercentage = videoEngagementEventHundredthsPercent,
+	throttlingPercentage = game:DefineFastInt("VideoEngagementEventHundredthsPercent", 0),
 	lastUpdated = { 25, 6, 25 }
 }
 
 return {
-	reportVideoAction = function(p1, p2, p3, p4)
-		-- upvalues: var1 (ref), reportWarning (ref), loggingProtocolModule (ref), var2 (ref), cryoModule (ref), videoEngagementEvents (ref), t (ref), t_1 (ref), telemetryService (ref)
-		local var3, var4 = var1(p3)
+	reportVideoAction = function(ActionType, EventContext, p1, p2) --[[ Line: 59 ]]
+		-- upvalues: StrictInterfaceResult (copy), ReportWarningFunction (copy), LoggingProtocolModule (copy), StrictInterfaceResult1 (copy), CryoModule (copy), VideoEngagementEvents (copy), t (copy), config (copy), TelemetryService (copy)
+		local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(p1)
 		
-		if not var3 then
-			reportWarning(loggingProtocolModule.default, "EventLogging", var4)
+		if not StrictInterfaceResultResult then
+			ReportWarningFunction(LoggingProtocolModule.default, "EventLogging", StrictInterfaceResultResult2)
 		end
-		if p4 then
-			local var5, var6 = var2(p4)
+		if p2 then
+			local StrictInterfaceResultResult1, StrictInterfaceResultResult2_1 = StrictInterfaceResult1(p2)
 			
-			if not var5 then
-				reportWarning(loggingProtocolModule.default, "EventLogging", var6)
+			if not StrictInterfaceResultResult1 then
+				ReportWarningFunction(LoggingProtocolModule.default, "EventLogging", StrictInterfaceResultResult2_1)
 			end
 		end
-		telemetryService:LogEvent(cryoModule.Dictionary.join(t_1, { eventContext = p2 }), {
+		TelemetryService:LogEvent(CryoModule.Dictionary.join(config, { eventContext = EventContext }), {
 			standardizedFields = {
 				"addSessionInfo",
-				loggingProtocolModule.StandardizedFields.addOsInfo
+				LoggingProtocolModule.StandardizedFields.addOsInfo
 			},
-			customFields = cryoModule.Dictionary.join(p3, {
-				videoEngagementEventType = videoEngagementEvents.VIDEO_ACTION,
-				actionType = p1
-			}, p4 or t)
+			customFields = CryoModule.Dictionary.join(p1, {
+				videoEngagementEventType = VideoEngagementEvents.VIDEO_ACTION,
+				actionType = ActionType
+			}, p2 or t)
 		})
 	end
 }

@@ -1,15 +1,15 @@
-﻿local authenticationStatus = script:FindFirstAncestor("AuthenticationStatus")
-local parent = authenticationStatus.Parent
-local loginStatus = require(parent.RobloxAppEnums).LoginStatus
-local setAuthenticationStatusModule = require(authenticationStatus.Actions.SetAuthenticationStatus)
-local cryoModule = require(parent.Cryo)
+﻿local AuthenticationStatus = script:FindFirstAncestor("AuthenticationStatus")
+local Parent = AuthenticationStatus.Parent
+local LoginStatus = require(Parent.RobloxAppEnums).LoginStatus
+local SetAuthenticationStatusModule = require(AuthenticationStatus.Actions.SetAuthenticationStatus)
+local CryoModule = require(Parent.Cryo)
 
-return function(p1, p2)
-	-- upvalues: loginStatus (ref), setAuthenticationStatusModule (ref), cryoModule (ref)
-	p1 = p1 or { status = loginStatus.UNKNOWN }
+return function(p1, p2) --[[ Line: 7 ]]
+	-- upvalues: LoginStatus (copy), SetAuthenticationStatusModule (copy), CryoModule (copy)
+	local P0 = p1 or { status = LoginStatus.UNKNOWN }
 	
-	if p2.type == setAuthenticationStatusModule.name then
-		p1 = cryoModule.Dictionary.join(p1, { status = p2.status })
+	if p2.type == SetAuthenticationStatusModule.name then
+		P0 = CryoModule.Dictionary.join(P0, { status = p2.status })
 	end
-	return p1
+	return P0
 end

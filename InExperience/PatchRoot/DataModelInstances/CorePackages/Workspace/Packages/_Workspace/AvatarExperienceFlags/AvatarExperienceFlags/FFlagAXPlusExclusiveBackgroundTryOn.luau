@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("AXPlusExclusiveBackgroundTryOn", false) and require(script.Parent.FFlagAXBackgroundGeneration)
+﻿local FFlagAXBackgroundGenerationModule = require(script.Parent.FFlagAXBackgroundGeneration)
+
+return game:DefineFastFlag("AXPlusExclusiveBackgroundTryOn", false) and FFlagAXBackgroundGenerationModule

@@ -1,11 +1,11 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local dictionary = require(parent.llama).Dictionary
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local Dictionary = require(Parent.llama).Dictionary
 
-return require(parent.Rodux).createReducer({ timeoutData = { endTimestamp = 0, isEnforced = false } }, {
-	[require(expChat.Actions.ChatTimeoutUpdated).name] = function(p1, p2)
-		-- upvalues: dictionary (ref)
-		return dictionary.join(p1, {
+return require(Parent.Rodux).createReducer({ timeoutData = { endTimestamp = 0, isEnforced = false } }, {
+	[require(ExpChat.Actions.ChatTimeoutUpdated).name] = function(p1, p2) --[[ Line: 24 ]]
+		-- upvalues: Dictionary (copy)
+		return Dictionary.join(p1, {
 			timeoutData = {
 				endTimestamp = p2.endTimestamp,
 				isEnforced = p2.isEnforced

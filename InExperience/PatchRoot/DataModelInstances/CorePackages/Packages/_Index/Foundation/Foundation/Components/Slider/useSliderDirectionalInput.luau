@@ -1,190 +1,187 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local servicesModule = require(foundation.Utility.Wrappers.Services)
-local sliderStepDirectionModule = require(script.Parent.SliderStepDirection)
-local sliderStepSizeModule = require(script.Parent.SliderStepSize)
-local flagsModule = require(foundation.Utility.Flags)
-local calculateAdjacentStepValueModule = require(script.Parent.calculateAdjacentStepValue)
-local calculateDirectionalStepValueModule = require(script.Parent.calculateDirectionalStepValue)
-local constantsModule = require(script.Parent.constants)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local ServicesModule = require(Foundation.Utility.Wrappers.Services)
+local SliderStepDirectionModule = require(script.Parent.SliderStepDirection)
+local SliderStepSizeModule = require(script.Parent.SliderStepSize)
+local FlagsModule = require(Foundation.Utility.Flags)
+local CalculateAdjacentStepValueModule = require(script.Parent.calculateAdjacentStepValue)
+local CalculateDirectionalStepValueModule = require(script.Parent.calculateDirectionalStepValue)
+local ConstantsModule = require(script.Parent.constants)
 
-local function getStepForKeyCode(p1, p2)
-	-- upvalues: flagsModule (ref), constantsModule (ref), sliderStepSizeModule (ref)
-	if not flagsModule.FoundationSliderCapture then
-		if table.find(constantsModule.coarseIncrement, p1) then
-			return { sign = 1, size = sliderStepSizeModule.Page }
-		elseif table.find(constantsModule.coarseDecrement, p1) then
-			return { sign = -1, size = sliderStepSizeModule.Page }
+local function getStepForKeyCode(Value, p1) --[[ Line: 32 ]]
+	-- upvalues: FlagsModule (copy), ConstantsModule (copy), SliderStepSizeModule (copy)
+	if not FlagsModule.FoundationSliderCapture then
+		if table.find(ConstantsModule.coarseIncrement, Value) then
+			return { sign = 1, size = SliderStepSizeModule.Page }
+		elseif table.find(ConstantsModule.coarseDecrement, Value) then
+			return { sign = -1, size = SliderStepSizeModule.Page }
 		end
 	end
-	local var1 = if flagsModule.FoundationSliderBeta and p2 then "vertical" else "horizontal"
+	local Vertical: string = if p1 then "vertical" else "horizontal"
 	
-	return if table.find(constantsModule.stepIncrement[var1], p1) then { sign = 1, size = sliderStepSizeModule.Step } elseif table.find(constantsModule.stepDecrement[var1], p1) then { sign = -1, size = sliderStepSizeModule.Step } else nil
+	return if table.find(ConstantsModule.stepIncrement[Vertical], Value) then { sign = 1, size = SliderStepSizeModule.Step } elseif table.find(ConstantsModule.stepDecrement[Vertical], Value) then { sign = -1, size = SliderStepSizeModule.Step } else nil
 end
 
-local function _(p1)
-	-- upvalues: constantsModule (ref)
-	return table.find(constantsModule.exit, p1) ~= nil
+local function _(Value): boolean --[[ Line: 51 | Named "isExitKey" ]]
+	-- upvalues: ConstantsModule (copy)
+	return table.find(ConstantsModule.exit, Value) ~= nil
 end
 
-local _ = function(p1, p2)
-	-- upvalues: flagsModule (ref)
-	return if not (not flagsModule.FoundationSliderCapture or p2 ~= nil and p2 > 0) then if p1 >= 15 then 0.03 elseif p1 >= 5 then 0.06 else 0.1 else 0.1
+local _ = function(p1: number, p2: number): number --[[ Line: 55 | Named "getRepeatInterval" ]]
+	-- upvalues: FlagsModule (copy)
+	return if FlagsModule.FoundationSliderCapture and (p2 == nil or p2 <= 0) then if p1 >= 15 then 0.03 elseif p1 >= 5 then 0.06 else 0.1 else 0.1
 end
 
-return function(p1, p2, p3, p4, p5)
-	-- upvalues: reactModule (ref), sliderStepSizeModule (ref), sliderStepDirectionModule (ref), flagsModule (ref), calculateAdjacentStepValueModule (ref), calculateDirectionalStepValueModule (ref), constantsModule (ref), getStepForKeyCode (ref), servicesModule (ref)
-	local var1 = reactModule.useRef({ step = p2, range = p3, handlers = p5 })
-	var1.current = { step = p2, range = p3, handlers = p5 }
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), sliderStepSizeModule (copy), var1 (ref), sliderStepDirectionModule (copy), flagsModule (copy), calculateAdjacentStepValueModule (copy), calculateDirectionalStepValueModule (copy), constantsModule (copy), getStepForKeyCode (copy), p4 (ref), servicesModule (copy)
-		if p1 then
-			local var2 = nil
-			local var3 = 0
-			local step = sliderStepSizeModule.Step
-			local var4 = nil
-			local var5 = 0
-			local var6 = 0
+return function(p1, Step, Range, p2, Handlers) --[[ Line: 72 | Named "useSliderDirectionalInput" ]]
+	-- upvalues: ReactModule (copy), SliderStepSizeModule (copy), SliderStepDirectionModule (copy), FlagsModule (copy), CalculateAdjacentStepValueModule (copy), CalculateDirectionalStepValueModule (copy), ConstantsModule (copy), getStepForKeyCode (copy), ServicesModule (copy)
+	local UseRefResult = ReactModule.useRef({ step = Step, range = Range, handlers = Handlers })
+	UseRefResult.current = { step = Step, range = Range, handlers = Handlers }
+	ReactModule.useEffect(function() --[[ Line: 91 ]]
+		-- upvalues: p1 (copy), SliderStepSizeModule (upval), UseRefResult (copy), SliderStepDirectionModule (upval), FlagsModule (upval), CalculateAdjacentStepValueModule (upval), CalculateDirectionalStepValueModule (upval), ConstantsModule (upval), getStepForKeyCode (upval), p2 (copy), ServicesModule (upval)
+		if not p1 then return end
+		local Input = nil
+		local v1 = 0
+		local Step = SliderStepSizeModule.Step
+		local SpawnedThread = nil
+		local v2 = 0
+		local v3 = 0
+		
+		local function performStep(p3: number, Step) --[[ Line: 103 ]]
+			-- upvalues: UseRefResult (upval), SliderStepDirectionModule (upval), FlagsModule (upval), CalculateAdjacentStepValueModule (upval), CalculateDirectionalStepValueModule (upval)
+			local Current = UseRefResult.current
+			local Increment = if p3 > 0 then SliderStepDirectionModule.Increment else SliderStepDirectionModule.Decrement
+			Current.handlers.onStep(if FlagsModule.FoundationSliderCapture then CalculateAdjacentStepValueModule(Current.handlers.getValue(), Increment, Current.range, Current.step, Step) else CalculateDirectionalStepValueModule(Current.handlers.getValue(), Increment, Current.range, Current.step, Step))
+		end
+		
+		local function _(p3) --[[ Line: 127 | Named "stopStepping" ]]
+			-- upvalues: Input (ref), v1 (ref), SpawnedThread (ref)
+			if p3 ~= nil and p3 ~= Input then return end
+			Input = nil
+			v1 = 0
 			
-			local function performStep(p6, p7)
-				-- upvalues: var1 (copy), sliderStepDirectionModule (copy), flagsModule (copy), calculateAdjacentStepValueModule (copy), calculateDirectionalStepValueModule (copy)
-				local current = var1.current
-				local var7 = if p6 > 0 then sliderStepDirectionModule.Increment else sliderStepDirectionModule.Decrement
-				current.handlers.onStep(if flagsModule.FoundationSliderCapture then calculateAdjacentStepValueModule(current.handlers.getValue(), var7, current.range, current.step, p7) else calculateDirectionalStepValueModule(current.handlers.getValue(), var7, current.range, current.step, p7))
+			if SpawnedThread then
+				task.cancel(SpawnedThread)
+				SpawnedThread = nil
 			end
+		end
+		
+		local function startStepping(Input1, Sign, Step1) --[[ Line: 139 ]]
+			-- upvalues: Input (ref), v1 (ref), Step (ref), SpawnedThread (ref), performStep (copy), UseRefResult (upval), FlagsModule (upval)
+			if Input1 == Input and Sign == v1 and Step1 == Step then return end
+			Input = nil
+			v1 = 0
 			
-			local function _(p6)
-				-- upvalues: var2 (write), var3 (write), var4 (write)
-				if p6 ~= nil and p6 ~= var2 then return end
-				var2 = nil
-				var3 = 0
-				
-				if var4 then
-					task.cancel(var4)
-					var4 = nil
+			if SpawnedThread then
+				task.cancel(SpawnedThread)
+				SpawnedThread = nil
+			end
+			Input = Input1
+			v1 = Sign
+			Step = Step1
+			performStep(Sign, Step1)
+			SpawnedThread = task.spawn(function() --[[ Line: 151 ]]
+				-- upvalues: Input (upval), Input1 (copy), v1 (upval), Sign (copy), Step (upval), Step1 (copy), performStep (upval), UseRefResult (upval), FlagsModule (upval)
+				task.wait(0.4)
+				local Count = 0
+				while Input == Input1 and (v1 == Sign and Step == Step1) do
+					performStep(Sign, Step1)
+					Count += 1
+					local Step2: number = UseRefResult.current.step
+					task.wait(if FlagsModule.FoundationSliderCapture and (Step2 == nil or Step2 <= 0) then if Count >= 15 then 0.03 elseif Count >= 5 then 0.06 else 0.1 else 0.1)
 				end
-			end
-			
-			local function startStepping(p6, p7, p8)
-				-- upvalues: var2 (write), var3 (write), step (write), var4 (write), performStep (ref), var1 (copy), flagsModule (copy)
-				if p6 == var2 and p7 == var3 and p8 == step then return end
-				var2 = nil
-				var3 = 0
+			end)
+		end
+		
+		local function evaluateInput(Input1) --[[ Line: 165 ]]
+			-- upvalues: FlagsModule (upval), ConstantsModule (upval), UseRefResult (upval), getStepForKeyCode (upval), p2 (upval), startStepping (copy), v2 (ref), v3 (ref), Input (ref), v1 (ref), SpawnedThread (ref), SliderStepSizeModule (upval)
+			if FlagsModule.FoundationSliderCapture and table.find(ConstantsModule.exit, Input1.KeyCode) ~= nil then
+				local OnExitFunction: () -> () = UseRefResult.current.handlers.onExit
 				
-				if var4 then
-					task.cancel(var4)
-					var4 = nil
+				if OnExitFunction then
+					OnExitFunction()
 				end
-				var2 = p6
-				var3 = p7
-				step = p8
-				performStep(p7, p8)
-				var4 = task.spawn(function()
-					-- upvalues: var2 (copy), p6 (ref), var3 (copy), p7 (ref), step (copy), p8 (ref), performStep (copy), var1 (copy), flagsModule (copy)
-					task.wait(0.4)
-					local var7 = 0
-					while var2 == p6 and (var3 == p7 and step == p8) do
-						performStep(p7, p8)
-						var7 += 1
-						local wait = task.wait
-						local var8 = var7
-						local step_1 = var1.current.step
-						wait(if flagsModule.FoundationSliderCapture and (step_1 == nil or step_1 <= 0) then if var8 >= 15 then 0.03 elseif var8 >= 5 then 0.06 else 0.1 else 0.1)
-					end
-				end)
-			end
-			
-			local function evaluateInput(p9)
-				-- upvalues: flagsModule (copy), constantsModule (copy), var1 (copy), getStepForKeyCode (copy), p4 (copy), startStepping (ref), var5 (write), var6 (write), var2 (write), var3 (write), var4 (write), sliderStepSizeModule (copy)
-				if flagsModule.FoundationSliderCapture and table.find(constantsModule.exit, p9.KeyCode) ~= nil then
-					local onExit = var1.current.handlers.onExit
+				return
+			else
+				local StepForKeyCode = getStepForKeyCode(Input1.KeyCode, p2)
+				
+				if StepForKeyCode then
+					startStepping(Input1, StepForKeyCode.sign, StepForKeyCode.size)
 					
-					if onExit then
-						onExit()
-					end
 					return
-				else
-					local var7 = getStepForKeyCode(p9.KeyCode, p4)
+				end
+				if table.find(ConstantsModule.analogStep, Input1.KeyCode) then
+					local Y = if p2 then Input1.Position.Y else Input1.Position.X
 					
-					if var7 then
-						startStepping(p9, var7.sign, var7.size)
+					if ConstantsModule.thumbstickDeadzone <= math.abs(Y) then
+						local v4: number = if Y > 0 then 1 else -1
+						local v5: boolean = v2 ~= 0 and v4 ~= v2
+						v3 = if v5 then v3 + 1 else 0
 						
-						return
-					elseif table.find(constantsModule.analogStep, p9.KeyCode) then
-						local var8 = if flagsModule.FoundationSliderBeta and p4 then p9.Position.Y else p9.Position.X
+						if not FlagsModule.FoundationSliderCapture or not v5 or v3 >= 3 then
+							v2 = v4
+							startStepping(Input1, v4, SliderStepSizeModule.Step)
+							
+							return
+						end
+						if Input1 ~= nil and Input1 ~= Input then return end
+						Input = nil
+						v1 = 0
 						
-						if constantsModule.thumbstickDeadzone <= math.abs(var8) then
-							local var9 = if var8 > 0 then 1 else -1
-							local var10 = var5 ~= 0 and var9 ~= var5
-							var6 = if var10 then var6 + 1 else 0
+						if SpawnedThread then
+							task.cancel(SpawnedThread)
+							SpawnedThread = nil
 							
-							if flagsModule.FoundationSliderCapture and var10 and var6 < 3 then
-								if p9 ~= nil and p9 ~= var2 then return end
-								var2 = nil
-								var3 = 0
-								
-								if var4 then
-									task.cancel(var4)
-									var4 = nil
-									
-									return
-								end
-							else
-								var5 = var9
-								startStepping(p9, var9, sliderStepSizeModule.Step)
-								
-								return
-							end
-						else
-							var5 = 0
-							var6 = 0
-							
-							if p9 ~= nil and p9 ~= var2 then return end
-							var2 = nil
-							var3 = 0
-							
-							if var4 then
-								task.cancel(var4)
-								var4 = nil
-							end
+							return
+						end
+					else
+						v2 = 0
+						v3 = 0
+						
+						if Input1 ~= nil and Input1 ~= Input then return end
+						Input = nil
+						v1 = 0
+						
+						if SpawnedThread then
+							task.cancel(SpawnedThread)
+							SpawnedThread = nil
 						end
 					end
 				end
 			end
-			
-			local list = {
-				servicesModule.UserInputService.InputBegan:Connect(evaluateInput),
-				servicesModule.UserInputService.InputChanged:Connect(evaluateInput),
-				servicesModule.UserInputService.InputEnded:Connect(function(p9)
-					-- upvalues: constantsModule (copy), var5 (write), var6 (write), var2 (write), var3 (write), var4 (write)
-					if table.find(constantsModule.analogStep, p9.KeyCode) then
-						var5 = 0
-						var6 = 0
-					end
-					if p9 ~= nil and p9 ~= var2 then return end
-					var2 = nil
-					var3 = 0
-					
-					if var4 then
-						task.cancel(var4)
-						var4 = nil
-					end
-				end)
-			}
-			
-			return function()
-				-- upvalues: var2 (write), var3 (write), var4 (write), list (ref)
-				var2 = nil
-				var3 = 0
+		end
+		
+		local Connections = {
+			ServicesModule.UserInputService.InputBegan:Connect(evaluateInput),
+			ServicesModule.UserInputService.InputChanged:Connect(evaluateInput),
+			ServicesModule.UserInputService.InputEnded:Connect(function(Input1) --[[ Line: 201 | Named "handleInputEnded" ]]
+				-- upvalues: ConstantsModule (upval), v2 (ref), v3 (ref), Input (ref), v1 (ref), SpawnedThread (ref)
+				if table.find(ConstantsModule.analogStep, Input1.KeyCode) then
+					v2 = 0
+					v3 = 0
+				end
+				if Input1 ~= nil and Input1 ~= Input then return end
+				Input = nil
+				v1 = 0
 				
-				if var4 then
-					task.cancel(var4)
-					var4 = nil
+				if SpawnedThread then
+					task.cancel(SpawnedThread)
+					SpawnedThread = nil
 				end
-				for i, v in list do
-					v:Disconnect()
-				end
+			end)
+		}
+		
+		return function() --[[ Line: 215 ]]
+			-- upvalues: Input (ref), v1 (ref), SpawnedThread (ref), Connections (copy)
+			Input = nil
+			v1 = 0
+			
+			if SpawnedThread then
+				task.cancel(SpawnedThread)
+				SpawnedThread = nil
+			end
+			for _, connection in Connections do
+				connection:Disconnect()
 			end
 		end
-	end, { p1, p4 })
+	end, { p1, p2 })
 end

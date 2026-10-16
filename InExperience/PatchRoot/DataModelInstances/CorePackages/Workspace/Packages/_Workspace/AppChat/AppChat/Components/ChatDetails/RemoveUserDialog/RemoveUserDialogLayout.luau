@@ -1,27 +1,26 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local _ = require(appChat.types)
-local socialLibrariesModule = require(appChat.SocialLibraries)
-local useStyle = require(parent.UIBlox).Core.Style.useStyle
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local memo = reactModule.memo
-local responseIndicator = socialLibrariesModule.Components.ResponseIndicator
-local removeUserDialogModule = require(script.Parent.RemoveUserDialog)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local _ = require(AppChat.types)
+local UseStyleFunction = require(Parent.UIBlox).Core.Style.useStyle
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local MemoFunction = ReactModule.memo
+local ResponseIndicator = require(AppChat.SocialLibraries).Components.ResponseIndicator
+local RemoveUserDialogModule = require(script.Parent.RemoveUserDialog)
 local t = {}
 
-function RemoveUserDialogLayout(p1)
-	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), reactModule (ref), removeUserDialogModule (ref), responseIndicator (ref)
-	local var1 = cryoModule.Dictionary.join(t, p1)
-	local var2 = useStyle()
+function RemoveUserDialogLayout(p1) --[[ Line: 42 ]]
+	-- upvalues: CryoModule (copy), t (copy), UseStyleFunction (copy), ReactModule (copy), RemoveUserDialogModule (copy), ResponseIndicator (copy)
+	local JoinResult = CryoModule.Dictionary.join(t, p1)
+	local UseStyleResult = UseStyleFunction()
 	
-	return reactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
-		RemoveUserDialog = var1.isModalVisible and reactModule.createElement(removeUserDialogModule, var1),
-		ResponseIndicator = var1.isLoading and reactModule.createElement(responseIndicator, {
-			soakAreaColor3 = var2.Theme.Overlay.Color,
-			soakAreaTransparency = var2.Theme.Overlay.Transparency
+	return ReactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
+		RemoveUserDialog = JoinResult.isModalVisible and ReactModule.createElement(RemoveUserDialogModule, JoinResult),
+		ResponseIndicator = JoinResult.isLoading and ReactModule.createElement(ResponseIndicator, {
+			soakAreaColor3 = UseStyleResult.Theme.Overlay.Color,
+			soakAreaTransparency = UseStyleResult.Theme.Overlay.Transparency
 		})
 	})
 end
 
-return memo(RemoveUserDialogLayout)
+return MemoFunction(RemoveUserDialogLayout)

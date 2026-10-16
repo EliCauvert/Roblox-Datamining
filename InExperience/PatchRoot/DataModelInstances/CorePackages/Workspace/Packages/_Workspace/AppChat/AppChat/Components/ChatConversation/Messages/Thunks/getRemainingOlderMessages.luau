@@ -1,38 +1,39 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local appChatNetworkingModule = require(parent.AppChatNetworking)
-local roduxNetworkingModule = require(appChat.Http.RoduxNetworking)
-local promiseModule = require(parent.Promise)
-local name = require(appChat.Logger):new(script.Name)
-local getNewestWithNilPreviousMessageIdModule = require(appChat.Components.ChatConversation.Utils.getNewestWithNilPreviousMessageId)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local AppChatNetworkingModule = require(Parent.AppChatNetworking)
+local RoduxNetworkingModule = require(AppChat.Http.RoduxNetworking)
+local PromiseModule = require(Parent.Promise)
+local NewResult = require(AppChat.Logger):new(script.Name)
+local GetNewestWithNilPreviousMessageIdModule = require(AppChat.Components.ChatConversation.Utils.getNewestWithNilPreviousMessageId)
 
-return function(p1, p2)
-	-- upvalues: name (ref), promiseModule (ref), appChatNetworkingModule (ref), roduxNetworkingModule (ref), getNewestWithNilPreviousMessageIdModule (ref)
-	name:info("Maybe getting older messages for {}", p2)
+return function(Callback, p1) --[[ Line: 11 ]]
+	-- upvalues: NewResult (copy), PromiseModule (copy), AppChatNetworkingModule (copy), RoduxNetworkingModule (copy), GetNewestWithNilPreviousMessageIdModule (copy)
+	NewResult:info("Maybe getting older messages for {}", p1)
 	
-	return function(p3)
-		-- upvalues: promiseModule (copy), p2 (ref), appChatNetworkingModule (copy), roduxNetworkingModule (copy), name (copy), getNewestWithNilPreviousMessageIdModule (copy), p1 (ref)
-		local chatAppReducer = p3:getState().ChatAppReducer
+	return function(p2) --[[ Line: 13 ]]
+		-- upvalues: PromiseModule (upval), p1 (copy), AppChatNetworkingModule (upval), RoduxNetworkingModule (upval), NewResult (upval), GetNewestWithNilPreviousMessageIdModule (upval), Callback (copy)
+		local ChatAppReducer = p2:getState().ChatAppReducer
 		
-		if not chatAppReducer or not chatAppReducer.Conversations then
-			return promiseModule.resolve()
+		if not ChatAppReducer or not ChatAppReducer.Conversations then
+			return PromiseModule.resolve()
 		end
-		local var1 = chatAppReducer.Conversations[p2]
-		local var2 = appChatNetworkingModule.rodux.GetOlderMessages.getStatus(p3:getState(), p2) == roduxNetworkingModule.Enum.NetworkStatus.Fetching
+		local Conversation = ChatAppReducer.Conversations[p1]
+		local IsStatusMatch = AppChatNetworkingModule.rodux.GetOlderMessages.getStatus(p2:getState(), p1) == RoduxNetworkingModule.Enum.NetworkStatus.Fetching
 		
-		if not var1 then
-			name:info("Canceling since conversation id {} is not in local state", p2)
+		if not Conversation then
+			NewResult:info("Canceling since conversation id {} is not in local state", p1)
 			
-			return promiseModule.resolve()
-		elseif var2 then
-			name:info("Canceling since we are already fetching older messages for conversation id {}", p2)
+			return PromiseModule.resolve()
+		elseif IsStatusMatch then
+			NewResult:info("Canceling since we are already fetching older messages for conversation id {}", p1)
 			
-			return promiseModule.resolve()
-		elseif var1.fetchedOldestMessage then
-			name:info("Canceling since we have already fetched the oldest message for conversation id {}", p2)
+			return PromiseModule.resolve()
+		elseif Conversation.fetchedOldestMessage then
+			NewResult:info("Canceling since we have already fetched the oldest message for conversation id {}", p1)
 			
-			return promiseModule.resolve()
+			return PromiseModule.resolve()
+		else
+			return Callback(p1, GetNewestWithNilPreviousMessageIdModule(Conversation.messages), Conversation.nextCursor)
 		end
-		return p1(p2, getNewestWithNilPreviousMessageIdModule(var1.messages), var1.nextCursor)
 	end
 end

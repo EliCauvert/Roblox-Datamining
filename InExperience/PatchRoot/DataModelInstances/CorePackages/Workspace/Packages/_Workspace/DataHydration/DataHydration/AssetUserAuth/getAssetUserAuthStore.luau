@@ -1,6 +1,6 @@
-﻿local createAssetUserAuthStoreModule = require(script.Parent.createAssetUserAuthStore)
+﻿local CreateAssetUserAuthStoreModule = require(script.Parent.createAssetUserAuthStore)
 
-return require(script:FindFirstAncestor("DataHydration").Parent.Signals).createComputed(function()
-	-- upvalues: createAssetUserAuthStoreModule (ref)
-	return createAssetUserAuthStoreModule()
+return require(script:FindFirstAncestor("DataHydration").Parent.Signals).createComputed(function() --[[ Line: 8 ]]
+	-- upvalues: CreateAssetUserAuthStoreModule (copy)
+	return CreateAssetUserAuthStoreModule()
 end)

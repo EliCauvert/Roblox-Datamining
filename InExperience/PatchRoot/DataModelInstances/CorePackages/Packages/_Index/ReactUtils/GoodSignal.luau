@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.GoodSignal.GoodSignal)
+﻿return (require(script.Parent.Parent.Parent._Index.GoodSignal.GoodSignal))

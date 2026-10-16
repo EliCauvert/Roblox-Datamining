@@ -1,15 +1,15 @@
-﻿local httpService = game:GetService("HttpService")
-local url = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.Http).Url
+﻿local HttpService = game:GetService("HttpService")
+local Url = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.Http).Url
 
-return function(p1, p2)
-	-- upvalues: httpService (ref), url (ref)
-	local ok, status = pcall(function()
-		-- upvalues: httpService (copy), p2 (ref)
-		return httpService:JSONEncode(p2)
+return function(Callback, Input) --[[ Line: 10 ]]
+	-- upvalues: HttpService (copy), Url (copy)
+	local Success, Result = pcall(function() --[[ Line: 11 ]]
+		-- upvalues: HttpService (upval), Input (copy)
+		return HttpService:JSONEncode(Input)
 	end)
 	
-	if not ok then
+	if not Success then
 		warn("Failed to encode v1 report body")
 	end
-	return p1(url.APIS_URL .. "abuse-reporting/v1/abuse-report", "POST", { postBody = status })
+	return Callback(Url.APIS_URL .. "abuse-reporting/v1/abuse-report", "POST", { postBody = Result })
 end

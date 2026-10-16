@@ -1,50 +1,53 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local httpService = game:GetService("HttpService")
-local signalsModule = require(parent.Signals)
-local fFlagEnableArgus = require(parent.SharedFlags).FFlagEnableArgus
-local getMomentsPreferencesStoreModule = require(moments.Stores.GetMomentsPreferencesStore)
-local createSignal = signalsModule.createSignal
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local HttpService = game:GetService("HttpService")
+local FFlagEnableArgus = require(Parent.SharedFlags).FFlagEnableArgus
+local GetMomentsPreferencesStoreModule = require(Moments.Stores.GetMomentsPreferencesStore)
+local CreateSignalFunction = require(Parent.Signals).createSignal
 
-return function()
-	-- upvalues: createSignal (ref), httpService (ref), getMomentsPreferencesStoreModule (ref), fFlagEnableArgus (ref)
-	local var1, var2 = createSignal(httpService:GenerateGUID(false))
-	local var3, var4 = createSignal("watch_tab")
-	local var5, var6 = createSignal(os.clock())
+return function() --[[ Line: 62 | Named "createMomentsStore" ]]
+	-- upvalues: CreateSignalFunction (copy), HttpService (copy), GetMomentsPreferencesStoreModule (copy), FFlagEnableArgus (copy)
+	local Signal, Signal2 = CreateSignalFunction(HttpService:GenerateGUID(false))
+	local WatchTab, WatchTab2 = CreateSignalFunction("watch_tab")
+	local Signal1, Signal2_1 = CreateSignalFunction(os.clock())
 	
-	local function resetSession()
-		-- upvalues: var2 (ref), httpService (copy), var6 (ref), getMomentsPreferencesStoreModule (copy)
-		var2(httpService:GenerateGUID(false))
-		var6(os.clock())
-		getMomentsPreferencesStoreModule(false).setTeleporting(false)
+	local function resetSession() --[[ Line: 67 ]]
+		-- upvalues: Signal2 (copy), HttpService (upval), Signal2_1 (copy), GetMomentsPreferencesStoreModule (upval)
+		Signal2(HttpService:GenerateGUID(false))
+		Signal2_1(os.clock())
+		GetMomentsPreferencesStoreModule(false).setTeleporting(false)
 	end
 	
-	local var7, var8 = createSignal(false)
-	local var9, var10 = createSignal(nil)
+	local Signal3, Signal2_2 = CreateSignalFunction(false)
+	local Signal4, Signal2_3 = CreateSignalFunction(nil)
 	
 	return {
-		getMomentsSessionId = var1,
-		getSessionSource = var3,
-		setSessionSource = var4,
-		getSessionStartTime = var5,
+		getMomentsSessionId = Signal,
+		getSessionSource = WatchTab,
+		setSessionSource = WatchTab2,
+		getSessionStartTime = Signal1,
 		resetSession = resetSession,
-		getHideDetails = var7,
-		toggleFeedDetailVisibility = function()
-			-- upvalues: fFlagEnableArgus (copy), var8 (ref), var7 (ref)
-			if fFlagEnableArgus then
-				var8(not var7(false))
+		getHideDetails = Signal3,
+		toggleFeedDetailVisibility = function() --[[ Line: 79 ]]
+			-- upvalues: FFlagEnableArgus (upval), Signal2_2 (copy), Signal3 (copy)
+			if FFlagEnableArgus then
+				Signal2_2(not Signal3(false))
 			end
 		end,
-		getPendingDeletion = var9,
-		requestDeletion = function(p1, p2, p3)
-			-- upvalues: fFlagEnableArgus (copy), var10 (ref)
-			if fFlagEnableArgus then
-				var10({ momentId = p1, feedItemId = p2, feedSessionId = p3 })
+		getPendingDeletion = Signal4,
+		requestDeletion = function(MomentId, FeedItemId, FeedSessionId) --[[ Line: 85 ]]
+			-- upvalues: FFlagEnableArgus (upval), Signal2_3 (copy)
+			if FFlagEnableArgus then
+				Signal2_3({
+					momentId = MomentId,
+					feedItemId = FeedItemId,
+					feedSessionId = FeedSessionId
+				})
 			end
 		end,
-		clearPendingDeletion = function()
-			-- upvalues: var10 (ref)
-			var10(nil)
+		clearPendingDeletion = function() --[[ Line: 91 ]]
+			-- upvalues: Signal2_3 (copy)
+			Signal2_3(nil)
 		end
 	}
 end

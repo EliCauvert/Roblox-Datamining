@@ -1,4 +1,5 @@
-﻿local t = {
+﻿local FFlagBuildAgentAdCampaignCardModule = require(script:FindFirstAncestor("BuildExperience").Flags.FFlagBuildAgentAdCampaignCard)
+local config = {
 	creating = true,
 	processing = true,
 	created = true,
@@ -9,531 +10,675 @@
 	failed = true
 }
 
-local function _(p1)
+local function _(p1): boolean --[[ Line: 95 | Named "isNonemptyString" ]]
 	return type(p1) == "string" and p1 ~= ""
 end
 
-local _ = function(p1)
-	return type(p1) == "number" and (p1 >= 0 and (p1 < 1e999 and p1 % 1 == 0))
+local _ = function(p1: number): boolean --[[ Line: 99 | Named "isCount" ]]
+	return type(p1) == "number" and (p1 >= 0 and p1 < 1e999) and p1 % 1 == 0
 end
 
-local function isRecord(p1, p2, p3)
-	-- upvalues: t (ref)
+local function isRecord(p1, SessionId, ToolCallId): boolean --[[ Line: 103 ]]
+	-- upvalues: config (copy)
 	if type(p1) ~= "table" then
 		return false
 	end
-	local var1 = false
-	
-	if p1.sessionId == p2 then
-		var1 = false
+	local Flag = false
+	repeat
+		if p1.sessionId ~= SessionId then break end
+		Flag = false
 		
-		if p1.toolCallId == p3 then
-			var1 = type(p2) == "string" and p2 ~= ""
+		if p1.toolCallId ~= ToolCallId then break end
+		Flag = type(SessionId) == "string" and SessionId ~= ""
+		
+		if not Flag then break end
+		Flag = type(ToolCallId) == "string" and ToolCallId ~= ""
+		
+		if not Flag then break end
+		local UniverseId: number = p1.universeId
+		Flag = type(UniverseId) == "number" and (UniverseId >= 0 and (UniverseId < 1e999 and UniverseId % 1 == 0))
+		
+		if not Flag then break end
+		Flag = false
+		
+		if p1.universeId <= 0 then break end
+		local IdempotencyKey = p1.idempotencyKey
+		Flag = type(IdempotencyKey) == "string" and IdempotencyKey ~= ""
+		
+		if not Flag then break end
+		local NoCampaignOption = p1.campaignOption == nil
+		
+		if not NoCampaignOption then
+			local CampaignOption = p1.campaignOption
+			Flag = type(CampaignOption) == "string" and CampaignOption ~= ""
+			NoCampaignOption = Flag
+		end
+		if not NoCampaignOption then break end
+		local IsFree = p1.fundingType == "free"
+		
+		if not IsFree then
+			Flag = false
+			IsFree = p1.fundingType == "paid"
+		end
+		if not IsFree then break end
+		if p1.durationDays ~= nil or p1.displayAmountRobux ~= nil then
+			local DurationDays: number = p1.durationDays
+			Flag = type(DurationDays) == "number" and (DurationDays >= 0 and (DurationDays < 1e999 and DurationDays % 1 == 0))
 			
-			if var1 then
-				var1 = type(p3) == "string" and p3 ~= ""
-				
-				if var1 then
-					local universeId = p1.universeId
-					var1 = type(universeId) == "number" and (universeId >= 0 and (universeId < 1e999 and universeId % 1 == 0))
-					
-					if var1 then
-						var1 = false
-						
-						if p1.universeId > 0 then
-							local idempotencyKey = p1.idempotencyKey
-							var1 = type(idempotencyKey) == "string" and idempotencyKey ~= ""
-							
-							if var1 then
-								if p1.campaignOption ~= nil then
-									local campaignOption = p1.campaignOption
-									var1 = type(campaignOption) == "string" and campaignOption ~= ""
-									
-									if var1 then
-										if p1.fundingType ~= "free" then
-											var1 = false
-											
-											if p1.fundingType == "paid" then
-												if p1.durationDays == nil and p1.displayAmountRobux == nil then
-													var1 = false
-													
-													if type(p1.phase) == "string" then
-														var1 = false
-														
-														if t[p1.phase] == true then
-															if p1.phase == "active" or p1.phase == "created" then
-																local campaignId = p1.campaignId
-																var1 = false
-																
-																if type(campaignId) == "string" then
-																	var1 = campaignId ~= ""
-																	var1 = nil
-																end
-															else
-																var1 = p1.campaignId == nil
-															end
-															if var1 then
-																if p1.campaignStatus ~= nil then
-																	local campaignStatus = p1.campaignStatus
-																	var1 = type(campaignStatus) == "string" and campaignStatus ~= ""
-																	
-																	if var1 then
-																		if p1.lastErrorCode ~= nil and type(p1.lastErrorCode) ~= "string" then
-																			var1 = false
-																			
-																			if type(p1.lastErrorCode) == "number" then
-																				var1 = false
-																				
-																				if math.abs(p1.lastErrorCode) < 1e999 then
-																					if p1.lastErrorMessage ~= nil then
-																						var1 = false
-																						
-																						if type(p1.lastErrorMessage) == "string" then
-																							local createdAtMs = p1.createdAtMs
-																							var1 = type(createdAtMs) == "number" and (createdAtMs >= 0 and (createdAtMs < 1e999 and createdAtMs % 1 == 0))
-																							
-																							if var1 then
-																								local updatedAtMs = p1.updatedAtMs
-																								var1 = (type(updatedAtMs) == "number" and (updatedAtMs >= 0 and (updatedAtMs < 1e999 and updatedAtMs % 1 == 0))) and p1.createdAtMs <= p1.updatedAtMs
-																							end
-																						end
-																					end
-																				end
-																			end
-																		end
-																	end
-																end
-															end
-														end
-													end
-												else
-													local durationDays = p1.durationDays
-													var1 = type(durationDays) == "number" and (durationDays >= 0 and (durationDays < 1e999 and durationDays % 1 == 0))
-													
-													if var1 then
-														var1 = false
-														
-														if p1.durationDays > 0 then
-															local displayAmountRobux = p1.displayAmountRobux
-															var1 = type(displayAmountRobux) == "number" and (displayAmountRobux >= 0 and (displayAmountRobux < 1e999 and displayAmountRobux % 1 == 0))
-															
-															if var1 then
-															end
-														end
-													end
-												end
-											end
-										end
-									end
-								end
-							end
-						end
-					end
-				end
+			if not Flag then break end
+			Flag = false
+			
+			if p1.durationDays <= 0 then break end
+			local DisplayAmountRobux: number = p1.displayAmountRobux
+			Flag = type(DisplayAmountRobux) == "number" and (DisplayAmountRobux >= 0 and (DisplayAmountRobux < 1e999 and DisplayAmountRobux % 1 == 0))
+			
+			if not Flag then break end
+		end
+		Flag = false
+		
+		if type(p1.phase) ~= "string" then break end
+		Flag = false
+		
+		if config[p1.phase] ~= true then break end
+		if p1.phase == "active" or p1.phase == "created" then
+			local CampaignId = p1.campaignId
+			Flag = type(CampaignId) == "string" and CampaignId ~= ""
+		else
+			Flag = p1.campaignId == nil
+		end
+		if not Flag then break end
+		local NoCampaignStatus = p1.campaignStatus == nil
+		
+		if not NoCampaignStatus then
+			local CampaignStatus = p1.campaignStatus
+			Flag = type(CampaignStatus) == "string" and CampaignStatus ~= ""
+			NoCampaignStatus = Flag
+		end
+		if not NoCampaignStatus then break end
+		if p1.lastErrorCode ~= nil and type(p1.lastErrorCode) ~= "string" then
+			Flag = false
+			
+			if type(p1.lastErrorCode) ~= "number" then break end
+			Flag = false
+			
+			if math.abs(p1.lastErrorCode) >= 1e999 then break end
+		end
+		local NoLastErrorMessage = p1.lastErrorMessage == nil
+		
+		if not NoLastErrorMessage then
+			Flag = false
+			NoLastErrorMessage = type(p1.lastErrorMessage) == "string"
+		end
+		if not NoLastErrorMessage then break end
+		local CreatedAtMs: number = p1.createdAtMs
+		Flag = type(CreatedAtMs) == "number" and (CreatedAtMs >= 0 and (CreatedAtMs < 1e999 and CreatedAtMs % 1 == 0))
+		
+		if not Flag then break end
+		local UpdatedAtMs: number = p1.updatedAtMs
+		Flag = type(UpdatedAtMs) == "number" and (UpdatedAtMs >= 0 and (UpdatedAtMs < 1e999 and UpdatedAtMs % 1 == 0) and p1.createdAtMs <= p1.updatedAtMs)
+	until true
+	return Flag
+end
+
+local _ = function(Tbl) --[[ Line: 134 | Named "readRecord" ]]
+	local Copy = table.clone(Tbl)
+	
+	if Copy.phase == "active" then
+		Copy.phase = "created"
+	end
+	return Copy
+end
+
+local function isDurableAttempt(p1): boolean --[[ Line: 143 ]]
+	local UserId: number = p1.userId
+	local IsUserIdMatch: boolean = type(UserId) == "number" and (UserId >= 0 and (UserId < 1e999 and UserId % 1 == 0))
+	
+	if IsUserIdMatch then
+		IsUserIdMatch = false
+		
+		if p1.userId > 0 then
+			local AttemptStartedAtMs: number = p1.attemptStartedAtMs
+			IsUserIdMatch = type(AttemptStartedAtMs) == "number" and (AttemptStartedAtMs >= 0 and (AttemptStartedAtMs < 1e999 and AttemptStartedAtMs % 1 == 0) and (type(p1.hasAmbiguousFailure) == "boolean" and (if p1.campaignOption == "feedback" then p1.durationDays ~= nil and p1.displayAmountRobux ~= nil else p1.campaignOption == "plays" and (p1.durationDays ~= nil and p1.displayAmountRobux ~= nil))))
+		end
+	end
+	return IsUserIdMatch
+end
+
+local function sameAttempt(Record, p1): boolean --[[ Line: 153 ]]
+	return Record.userId == p1.userId and (Record.universeId == p1.universeId and (Record.idempotencyKey == p1.idempotencyKey and (Record.campaignOption == p1.campaignOption and (Record.fundingType == p1.fundingType and (Record.durationDays == p1.durationDays and (Record.displayAmountRobux == p1.displayAmountRobux and Record.createdAtMs == p1.createdAtMs)))))) and Record.attemptStartedAtMs == p1.attemptStartedAtMs
+end
+
+local function readNamespace(p1) --[[ Line: 165 ]]
+	local AdCampaignCards = p1.adCampaignCards
+	
+	if AdCampaignCards == nil then
+		return { sessions = {} }, nil
+	elseif type(AdCampaignCards) == "table" and type(AdCampaignCards.sessions) == "table" then
+		return AdCampaignCards, nil
+	else
+		return nil, "malformed_storage"
+	end
+end
+
+return function(p1) --[[ Line: 176 | Named "createAdCampaignCardStorage" ]]
+	-- upvalues: sameAttempt (copy), readNamespace (copy), isRecord (copy), FFlagBuildAgentAdCampaignCardModule (copy), isDurableAttempt (copy)
+	local function _() --[[ Line: 177 | Named "readData" ]]
+		-- upvalues: p1 (copy)
+		local Success, Result, Result3 = pcall(p1.readData)
+		
+		if Success then
+			Success = Result == true
+		end
+		return Success, Result3
+	end
+	
+	local _ = function(p2): boolean --[[ Line: 181 | Named "writeData" ]]
+		-- upvalues: p1 (copy)
+		local Success, Result = pcall(p1.writeData, p2)
+		
+		return Success and Result == true
+	end
+	
+	local v1 = nil
+	local Tbl = {}
+	local Tbl1 = {}
+	local Tbl2 = {}
+	
+	local function beforeUnsentPreflight(SessionId, ToolCallId, p2) --[[ Line: 194 ]]
+		-- upvalues: Tbl2 (copy), sameAttempt (upval)
+		local Entry = if Tbl2[SessionId] == nil then nil else Tbl2[SessionId][ToolCallId]
+		
+		if Entry ~= nil and p2 ~= nil then
+			local Staged = Entry.staged
+			
+			if sameAttempt(Staged, p2) and p2.phase == Staged.phase and p2.updatedAtMs == Staged.updatedAtMs and p2.hasAmbiguousFailure == Staged.hasAmbiguousFailure and p2.lastErrorCode == Staged.lastErrorCode then
+				return Entry.previous, true
 			end
 		end
-	end
-	return var1
-end
-
-local _ = function(p1)
-	local cloned = table.clone(p1)
-	
-	if cloned.phase == "active" then
-		cloned.phase = "created"
-	end
-	return cloned
-end
-
-local function readNamespace(p1)
-	local adCampaignCards = p1.adCampaignCards
-	
-	if adCampaignCards == nil then
-		return { sessions = {} }, nil
-	elseif type(adCampaignCards) == "table" and type(adCampaignCards.sessions) == "table" then
-		return adCampaignCards, nil
-	end
-	return nil, "malformed_storage"
-end
-
-return function(p1)
-	-- upvalues: readNamespace (ref), isRecord (ref)
-	local function _()
-		-- upvalues: p1 (ref)
-		local ok, status, var1 = pcall(p1.readData)
-		
-		return ok and status == true, var1
+		return p2, false
 	end
 	
-	local _ = function(p2)
-		-- upvalues: p1 (ref)
-		local ok, status = pcall(p1.writeData, p2)
-		
-		return ok and status == true
-	end
-	
-	local var1 = nil
-	local t = {}
-	local t_1 = {}
-	
-	local _ = function()
-		-- upvalues: var1 (write), p1 (ref), readNamespace (copy)
-		if var1 ~= nil then
-			return var1, nil
+	local _ = function() --[[ Line: 211 | Named "load" ]]
+		-- upvalues: v1 (ref), p1 (copy), readNamespace (upval)
+		if v1 ~= nil then
+			return v1, nil
 		end
-		local ok, status, var2 = pcall(p1.readData)
+		local Success, Result, Result3 = pcall(p1.readData)
 		
-		if ok and status == true then
-			local var3, var4 = readNamespace(var2)
-			var1 = var3
-			
-			return var3, var4
+		if Success then
+			Success = Result == true
 		end
-		return nil, "storage_unavailable"
+		if Success then
+			local Namespace, Namespace2 = readNamespace(Result3)
+			v1 = Namespace
+			
+			return Namespace, Namespace2
+		else
+			return nil, "storage_unavailable"
+		end
 	end
 	
-	local function get(p2, p3)
-		-- upvalues: t (ref), t_1 (ref), var1 (write), p1 (ref), readNamespace (copy), isRecord (copy)
-		local var2 = if t[p2] ~= nil then nil else t[p2][p3]
+	local function get(SessionId, ToolCallId) --[[ Line: 224 ]]
+		-- upvalues: Tbl (copy), Tbl1 (copy), v1 (ref), p1 (copy), readNamespace (upval), isRecord (upval), FFlagBuildAgentAdCampaignCardModule (upval), isDurableAttempt (upval), beforeUnsentPreflight (copy)
+		local Entry = if Tbl[SessionId] == nil then nil else Tbl[SessionId][ToolCallId]
 		
-		if var2 == nil then
-			local var3 = if t_1[p2] ~= nil then nil else t_1[p2][p3]
+		if Entry == nil then
+			local Entry1 = if Tbl1[SessionId] == nil then nil else Tbl1[SessionId][ToolCallId]
 			
-			if var3 == nil then
-				local var4, var5
-				if var1 == nil then
-					local ok, status, var6 = pcall(p1.readData)
-					local var7 = var6
+			if Entry1 == nil then
+				local v2 = nil
+				local v3 = nil
+				if v1 == nil then
+					local Success, Result, Result3 = pcall(p1.readData)
 					
-					if ok and status == true then
-						ok, status = readNamespace(var7)
-						var1 = ok
-						var4 = ok
-						var5 = status
+					if Success then
+						Success = Result == true
+					end
+					if Success then
+						local Namespace, Namespace2 = readNamespace(Result3)
+						v1 = Namespace
+						v3 = Namespace
+						v2 = Namespace2
 					else
-						var4 = nil
-						var5 = "storage_unavailable"
+						v3 = nil
+						v2 = "storage_unavailable"
 					end
 				else
-					var4 = var1
-					var5 = nil
+					v3 = v1
+					v2 = nil
 				end
-				if var4 == nil or not (type(p2) == "string" and p2 ~= "") or not (type(p3) == "string" and p3 ~= "") then
+				if v3 == nil or (type(SessionId) ~= "string" or SessionId == "") or (type(ToolCallId) ~= "string" or ToolCallId == "") then
 					return {
 						isAvailable = false,
 						isPersisted = false,
-						errorCode = var5 or "invalid_identity"
+						errorCode = v2 or "invalid_identity"
 					}
 				end
-				local var8 = var4.sessions[p2]
+				local Session = v3.sessions[SessionId]
 				
-				if var8 ~= nil and type(var8) ~= "table" then
+				if Session ~= nil and type(Session) ~= "table" then
 					return {
 						isAvailable = false,
 						isPersisted = false,
 						errorCode = "malformed_session"
 					}
 				end
-				local var9 = if var8 ~= nil then nil else var8[p3]
+				local Tbl2 = if Session == nil then nil else Session[ToolCallId]
 				
-				if var9 ~= nil and not isRecord(var9, p2, p3) then
+				if Tbl2 ~= nil and (not isRecord(Tbl2, SessionId, ToolCallId) or FFlagBuildAgentAdCampaignCardModule and Tbl2.userId ~= nil and not isDurableAttempt(Tbl2)) then
 					return {
 						isAvailable = false,
 						isPersisted = false,
 						errorCode = "malformed_record"
 					}
 				end
-				local var10
-				local t_2 = {
-					isAvailable = true,
-					isPersisted = if t[p2] ~= nil then t[p2][p3] == nil else true
-				}
+				local v4 = false
 				
-				if var9 == nil then
-					var10 = nil
+				if FFlagBuildAgentAdCampaignCardModule then
+					Tbl2, v65 = beforeUnsentPreflight(SessionId, ToolCallId, Tbl2)
+				end
+				local config = { isAvailable = true, isPersisted = not v4 }
+				local Record = nil
+				
+				if Tbl2 == nil then
+					Record = nil
 				else
-					local cloned = table.clone(var9)
+					local Copy = table.clone(Tbl2)
 					
-					if cloned.phase == "active" then
-						cloned.phase = "created"
+					if Copy.phase == "active" then
+						Copy.phase = "created"
 					end
-					var10 = cloned
+					Record = Copy
 				end
-				t_2.record = var10
+				config.record = Record
 				
-				return t_2
+				return config
 			else
-				local t_2 = { isAvailable = true, isPersisted = false }
-				local cloned = table.clone(var3)
+				local config = { isAvailable = true, isPersisted = false }
+				local Copy = table.clone(Entry1)
 				
-				if cloned.phase == "active" then
-					cloned.phase = "created"
+				if Copy.phase == "active" then
+					Copy.phase = "created"
 				end
-				t_2.record = cloned
+				config.record = Copy
 				
-				return t_2
+				return config
 			end
 		else
-			local t_2 = { isAvailable = true, isPersisted = false }
-			local cloned = table.clone(var2)
+			local config = { isAvailable = true, isPersisted = false }
+			local Copy = table.clone(Entry)
 			
-			if cloned.phase == "active" then
-				cloned.phase = "created"
+			if Copy.phase == "active" then
+				Copy.phase = "created"
 			end
-			t_2.record = cloned
+			config.record = Copy
 			
-			return t_2
+			return config
 		end
 	end
 	
-	local function list(p2)
-		-- upvalues: var1 (write), p1 (ref), readNamespace (copy), t_1 (ref), t (ref), isRecord (copy)
-		local var2, var3
-		if not (type(p2) == "string" and p2 ~= "") then
-			return {
-				isAvailable = false,
-				errorCode = "invalid_identity",
-				records = {}
-			}
-		elseif var1 == nil then
-			local ok, status, var4 = pcall(p1.readData)
-			local var5 = var4
-			
-			if ok and status == true then
-				ok, status = readNamespace(var5)
-				var1 = ok
-				var2 = ok
-				var3 = status
-			else
-				var2 = nil
-				var3 = "storage_unavailable"
-			end
-		else
-			var2 = var1
-			var3 = nil
-		end
-		local var6 = if var2 ~= nil then nil else var2.sessions[p2]
-		
-		if var6 ~= nil and type(var6) ~= "table" then
-			var3 = "malformed_session"
-			var6 = nil
-		end
-		local var7 = if var6 ~= nil then {} else table.clone(var6)
-		
-		for i, v in t_1[p2] or {} do
-			var7[i] = v
-		end
-		for i_1, v_1 in t[p2] or {} do
-			var7[i_1] = v_1
-		end
-		local t_2 = {}
-		
-		for i_2, v_2 in var7 do
-			if isRecord(v_2, p2, i_2) then
-				local cloned = table.clone(v_2)
-				
-				if cloned.phase == "active" then
-					cloned.phase = "created"
-				end
-				table.insert(t_2, cloned)
-			end
-		end
-		table.sort(t_2, function(p3, p4)
-			return if p3.createdAtMs == p4.createdAtMs then p3.toolCallId < p4.toolCallId else p3.createdAtMs < p4.createdAtMs
-		end)
-		
-		return {
-			isAvailable = var3 == nil,
-			records = t_2,
-			errorCode = var3
-		}
-	end
-	
-	local function retryWrites()
-		-- upvalues: t (ref), p1 (ref), readNamespace (copy), isRecord (copy), t_1 (ref), var1 (write)
-		if next(t) == nil then
+	local function retryWrites(): boolean --[[ Line: 303 ]]
+		-- upvalues: Tbl (copy), p1 (copy), readNamespace (upval), isRecord (upval), FFlagBuildAgentAdCampaignCardModule (upval), sameAttempt (upval), Tbl1 (copy), v1 (ref)
+		if next(Tbl) == nil then
 			return true
 		end
-		local ok, status, var8 = pcall(p1.readData)
+		local Success, Result, Result3 = pcall(p1.readData)
 		
-		if not ok or status ~= true then
+		if Success then
+			Success = Result == true
+		end
+		if not Success then
 			return false
 		end
-		local var9 = readNamespace(var8)
+		local Namespace = readNamespace(Result3)
 		
-		if var9 == nil then
+		if Namespace == nil then
 			return false
 		end
-		local cloned = table.clone(var9)
-		cloned.sessions = table.clone(var9.sessions)
-		local t_2 = {}
-		local var10 = false
+		local Copy = table.clone(Namespace)
+		Copy.sessions = table.clone(Namespace.sessions)
+		local t = {}
+		local Flag = false
 		
-		for i, v in t do
-			local var11 = cloned.sessions[i]
+		for i, value in Tbl do
+			local Session = Copy.sessions[i]
 			
-			if var11 ~= nil and type(var11) ~= "table" then
-				t_2[i] = {}
+			if Session == nil or type(Session) == "table" then
+				local T = if Session == nil then {} else table.clone(Session)
+				for i2, value1 in value do
+					local Entry = T[i2]
+					
+					if Entry ~= nil and not isRecord(Entry, i, i2) then
+						t[i] = t[i] or {}
+						t[i][i2] = true
+						continue
+					end
+					if Entry == nil or Entry.universeId == value1.universeId and value1.updatedAtMs >= Entry.updatedAtMs and (Entry.campaignId == nil or Entry.campaignId == value1.campaignId) and (not FFlagBuildAgentAdCampaignCardModule or value1.userId == nil or sameAttempt(Entry, value1)) then
+						T[i2] = table.clone(value1)
+						Flag = true
+					else
+						t[i] = t[i] or {}
+						t[i][i2] = true
+					end
+				end
+				Copy.sessions[i] = T
+			else
+				t[i] = {}
 				
-				for i_1 in v do
-					t_2[i][i_1] = true
+				for i1 in value do
+					t[i][i1] = true
 				end
 			end
-			local var12 = if var11 ~= nil then {} else table.clone(var11)
-			
-			for i_1, v_1 in v do
-				local var13 = var12[i_1]
-				
-				if var13 ~= nil and not isRecord(var13, i, i_1) then
-					t_2[i] = t_2[i] or {}
-					t_2[i][i_1] = true
-				elseif var13 == nil or var13.universeId == v_1.universeId and v_1.updatedAtMs >= var13.updatedAtMs and (var13.campaignId == nil or var13.campaignId == v_1.campaignId) then
-					var12[i_1] = table.clone(v_1)
-					var10 = true
-				else
-					t_2[i] = t_2[i] or {}
-					t_2[i][i_1] = true
-				end
-			end
-			cloned.sessions[i] = var12
 		end
-		for i_1, v_1 in t_2 do
-			for i_2 in v_1 do
-				local var14 = t_1[i_1] or {}
-				var14[i_2] = table.clone(t[i_1][i_2])
-				t_1[i_1] = var14
-				t[i_1][i_2] = nil
+		for i3, value2 in t do
+			for i4 in value2 do
+				local Entry = Tbl1[i3] or {}
+				Entry[i4] = table.clone(Tbl[i3][i4])
+				Tbl1[i3] = Entry
+				Tbl[i3][i4] = nil
 			end
-			if next(t[i_1]) == nil then
-				t[i_1] = nil
+			if next(Tbl[i3]) == nil then
+				Tbl[i3] = nil
 			end
 		end
-		if not var10 then
-			return next(t_2) == nil
+		if not Flag then
+			return next(t) == nil
 		end
-		local cloned_1 = table.clone(var8)
-		cloned_1.adCampaignCards = cloned
-		local ok_1, status_1 = pcall(p1.writeData, cloned_1)
+		local Copy1 = table.clone(Result3)
+		Copy1.adCampaignCards = Copy
+		local Success1, Result1 = pcall(p1.writeData, Copy1)
 		
-		if ok_1 and status_1 == true then
-			var1 = cloned
-			table.clear(t)
-			
-			return next(t_2) == nil
+		if Success1 then
+			Success1 = Result1 == true
 		end
-		return false
+		if Success1 then
+			v1 = Copy
+			table.clear(Tbl)
+			
+			return next(t) == nil
+		else
+			return false
+		end
 	end
 	
-	local function retain(p3)
-		-- upvalues: isRecord (copy), t (ref), retryWrites (ref)
-		if isRecord(p3, p3.sessionId, p3.toolCallId) then
-			local sessionId = t[p3.sessionId] or {}
-			sessionId[p3.toolCallId] = table.clone(p3)
-			t[p3.sessionId] = sessionId
+	local function retain(Tbl1) --[[ Line: 382 ]]
+		-- upvalues: isRecord (upval), Tbl (copy), retryWrites (copy)
+		if isRecord(Tbl1, Tbl1.sessionId, Tbl1.toolCallId) then
+			local Entry = Tbl[Tbl1.sessionId] or {}
+			Entry[Tbl1.toolCallId] = table.clone(Tbl1)
+			Tbl[Tbl1.sessionId] = Entry
 			
 			return retryWrites(), true
+		else
+			return false, false
 		end
-		return false, false
 	end
 	
 	return {
 		get = get,
-		list = list,
-		confirm = function(p3)
-			-- upvalues: isRecord (copy), get (ref), retryWrites (ref), retain (ref)
+		list = function(p2) --[[ Line: 262 ]]
+			-- upvalues: v1 (ref), p1 (copy), readNamespace (upval), Tbl1 (copy), Tbl (copy), isRecord (upval), FFlagBuildAgentAdCampaignCardModule (upval), isDurableAttempt (upval), beforeUnsentPreflight (copy)
+			if type(p2) ~= "string" or p2 == "" then
+				return {
+					isAvailable = false,
+					errorCode = "invalid_identity",
+					records = {}
+				}
+			end
+			local v2 = nil
+			local ErrorCode = nil
+			if v1 == nil then
+				local Success, Result, Result3 = pcall(p1.readData)
+				
+				if Success then
+					Success = Result == true
+				end
+				if Success then
+					local Namespace, Namespace2 = readNamespace(Result3)
+					v1 = Namespace
+					v2 = Namespace
+					ErrorCode = Namespace2
+				else
+					v2 = nil
+					ErrorCode = "storage_unavailable"
+				end
+			else
+				v2 = v1
+				ErrorCode = nil
+			end
+			local Session = if v2 == nil then nil else v2.sessions[p2]
+			
+			if Session ~= nil and type(Session) ~= "table" then
+				ErrorCode = "malformed_session"
+				Session = nil
+			end
+			local T = if Session == nil then {} else table.clone(Session)
+			local Entry = Tbl1[p2] or {}
+			for i, value in Entry do
+				T[i] = value
+			end
+			local Entry1 = Tbl[p2] or {}
+			for i1, value1 in Entry1 do
+				T[i1] = value1
+			end
+			local List = {}
+			
+			for i2, value2 in T do
+				if isRecord(value2, p2, i2) and (not FFlagBuildAgentAdCampaignCardModule or value2.userId == nil or isDurableAttempt(value2)) then
+					local BeforeUnsentPreflightResult = if FFlagBuildAgentAdCampaignCardModule then beforeUnsentPreflight(p2, i2, value2) else value2
+					
+					if BeforeUnsentPreflightResult ~= nil then
+						local Copy = table.clone(BeforeUnsentPreflightResult)
+						
+						if Copy.phase == "active" then
+							Copy.phase = "created"
+						end
+						table.insert(List, Copy)
+					end
+				end
+			end
+			table.sort(List, function(A, B): boolean --[[ Line: 294 ]]
+				return if A.createdAtMs == B.createdAtMs then A.toolCallId < B.toolCallId else A.createdAtMs < B.createdAtMs
+			end)
+			
+			return {
+				isAvailable = ErrorCode == nil,
+				records = List,
+				errorCode = ErrorCode
+			}
+		end,
+		confirm = function(p3) --[[ Line: 393 ]]
+			-- upvalues: isRecord (upval), get (copy), FFlagBuildAgentAdCampaignCardModule (upval), isDurableAttempt (upval), retain (copy), sameAttempt (upval), retryWrites (copy)
 			if not isRecord(p3, p3.sessionId, p3.toolCallId) or p3.phase ~= "created" then
 				return false, false
 			end
-			local record = get(p3.sessionId, p3.toolCallId).record
+			local GetResult = get(p3.sessionId, p3.toolCallId)
+			local Record = GetResult.record
 			
-			if record == nil or record.campaignId == nil then
-				return retain(p3)
-			elseif record.campaignId == p3.campaignId then
-				return retryWrites() and get(p3.sessionId, p3.toolCallId).isPersisted, false
+			if FFlagBuildAgentAdCampaignCardModule and p3.userId ~= nil then
+				if not isDurableAttempt(p3) then
+					return false, false
+				elseif Record == nil and not GetResult.isAvailable then
+					return retain(p3)
+				elseif Record == nil or not sameAttempt(Record, p3) then
+					return false, false
+				end
 			end
-			return false, false
+			if Record == nil or Record.campaignId == nil then
+				return retain(p3)
+			elseif Record.campaignId == p3.campaignId then
+				return retryWrites() and get(p3.sessionId, p3.toolCallId).isPersisted, false
+			else
+				return false, false
+			end
 		end,
-		hasPendingWrites = function()
-			-- upvalues: t (ref)
-			return next(t) ~= nil
+		saveAttempt = function(Tbl, IdempotencyKey): boolean --[[ Line: 424 ]]
+			-- upvalues: isRecord (upval), isDurableAttempt (upval), get (copy), p1 (copy), readNamespace (upval), beforeUnsentPreflight (copy), sameAttempt (upval), v1 (ref), Tbl2 (copy)
+			if not isRecord(Tbl, Tbl.sessionId, Tbl.toolCallId) or not isDurableAttempt(Tbl) or Tbl.campaignId ~= nil then
+				return false
+			end
+			local GetResult = get(Tbl.sessionId, Tbl.toolCallId)
+			
+			if GetResult.record ~= nil and GetResult.record.campaignId ~= nil then
+				return false
+			end
+			local Success, Result, Result3 = pcall(p1.readData)
+			
+			if Success then
+				Success = Result == true
+			end
+			local Namespace = if Success then readNamespace(Result3) else nil
+			
+			if Namespace == nil then
+				return false
+			end
+			local Session = Namespace.sessions[Tbl.sessionId]
+			
+			if Session ~= nil and type(Session) ~= "table" then
+				return false
+			end
+			local SessionEntry = if Session == nil then nil else Session[Tbl.toolCallId]
+			
+			if SessionEntry ~= nil and (not isRecord(SessionEntry, Tbl.sessionId, Tbl.toolCallId) or not isDurableAttempt(SessionEntry) or SessionEntry.campaignId ~= nil or SessionEntry.userId ~= Tbl.userId or SessionEntry.universeId ~= Tbl.universeId) then
+				return false
+			end
+			local BeforeUnsentPreflightResult = beforeUnsentPreflight(Tbl.sessionId, Tbl.toolCallId, SessionEntry)
+			
+			if BeforeUnsentPreflightResult ~= nil then
+				if BeforeUnsentPreflightResult.idempotencyKey == Tbl.idempotencyKey then
+					local IsCreating: boolean = Tbl.idempotencyKey == Tbl.toolCallId and (IdempotencyKey == BeforeUnsentPreflightResult.idempotencyKey and (not BeforeUnsentPreflightResult.hasAmbiguousFailure and (if BeforeUnsentPreflightResult.phase == "failed" then Tbl.phase == "creating" else BeforeUnsentPreflightResult.phase == "payment_required" and Tbl.phase == "creating")))
+					
+					if not sameAttempt(BeforeUnsentPreflightResult, Tbl) and not IsCreating or BeforeUnsentPreflightResult.hasAmbiguousFailure and not Tbl.hasAmbiguousFailure then
+						return false
+					end
+				elseif BeforeUnsentPreflightResult.idempotencyKey ~= IdempotencyKey or BeforeUnsentPreflightResult.hasAmbiguousFailure or BeforeUnsentPreflightResult.phase ~= "failed" and BeforeUnsentPreflightResult.phase ~= "payment_required" then
+					return false
+				end
+			elseif IdempotencyKey ~= nil and IdempotencyKey ~= Tbl.idempotencyKey then
+				return false
+			end
+			local Copy = table.clone(Namespace)
+			Copy.sessions = table.clone(Namespace.sessions)
+			local Copy1 = table.clone(Session or {})
+			Copy1[Tbl.toolCallId] = table.clone(Tbl)
+			Copy.sessions[Tbl.sessionId] = Copy1
+			local Copy2 = table.clone(Result3)
+			Copy2.adCampaignCards = Copy
+			v1 = nil
+			local Success1, Result1 = pcall(p1.writeData, Copy2)
+			
+			if Success1 then
+				Success1 = Result1 == true
+			end
+			if Success1 then
+				if Tbl2[Tbl.sessionId] ~= nil then
+					Tbl2[Tbl.sessionId][Tbl.toolCallId] = nil
+				end
+				v1 = Copy
+				
+				return true
+			else
+				if Tbl.phase == "creating" then
+					local Entry = Tbl2[Tbl.sessionId] or {}
+					Entry[Tbl.toolCallId] = {
+						staged = table.clone(Tbl),
+						previous = if BeforeUnsentPreflightResult == nil then nil else table.clone(BeforeUnsentPreflightResult)
+					}
+					Tbl2[Tbl.sessionId] = Entry
+				end
+				return false
+			end
+		end,
+		hasPendingWrites = function(): boolean --[[ Line: 585 ]]
+			-- upvalues: Tbl (copy)
+			return next(Tbl) ~= nil
 		end,
 		retryWrites = retryWrites,
-		prune = function(p3)
-			-- upvalues: t (ref), p1 (ref), readNamespace (copy), isRecord (copy), var1 (write)
-			if next(t) == nil then
-				local nowMs = p3.nowMs
+		prune = function(p3) --[[ Line: 511 ]]
+			-- upvalues: Tbl (copy), p1 (copy), readNamespace (upval), isRecord (upval), v1 (ref)
+			if next(Tbl) == nil then
+				local NowMs: number = p3.nowMs
 				
-				if type(nowMs) == "number" and (nowMs >= 0 and (nowMs < 1e999 and nowMs % 1 == 0)) then
-					nowMs = p3.retentionMs
+				if type(NowMs) == "number" and (NowMs >= 0 and (NowMs < 1e999 and NowMs % 1 == 0)) then
+					local RetentionMs: number = p3.retentionMs
 					
-					if type(nowMs) == "number" and (nowMs >= 0 and (nowMs < 1e999 and nowMs % 1 == 0)) then
-						nowMs = p3.maxRecords
+					if type(RetentionMs) == "number" and (RetentionMs >= 0 and (RetentionMs < 1e999 and RetentionMs % 1 == 0)) then
+						local MaxRecords: number = p3.maxRecords
 						
-						if not (type(nowMs) == "number" and (nowMs >= 0 and (nowMs < 1e999 and nowMs % 1 == 0))) then
-							return false, false
-						end
-						local ok, status, var15 = pcall(p1.readData)
-						
-						if not ok or status ~= true then
-							return false, false
-						end
-						local var16 = readNamespace(var15)
-						
-						if var16 == nil then
-							return false, false
-						end
-						local t_1 = {}
-						local var17 = 0
-						
-						for i, v in var16.sessions do
-							if type(v) == "table" then
-								local var18 = p3.loadedToolCallIdsBySession[i]
-								
-								for i_2, v_1 in v do
-									if isRecord(v_1, i, i_2) and v_1.universeId == p3.universeId then
-										var17 += 1
-										
-										if p3.retentionMs < p3.nowMs - v_1.updatedAtMs and (v_1.campaignId ~= nil and (p3.settledCampaignIds[v_1.campaignId] == true and (var18 ~= nil and not var18[i_2]))) then
-											table.insert(t_1, v_1)
+						if type(MaxRecords) == "number" and (MaxRecords >= 0 and (MaxRecords < 1e999 and MaxRecords % 1 == 0)) then
+							local Success, Result, Result3 = pcall(p1.readData)
+							
+							if Success then
+								Success = Result == true
+							end
+							if not Success then
+								return false, false
+							end
+							local Namespace = readNamespace(Result3)
+							
+							if Namespace == nil then
+								return false, false
+							end
+							local List = {}
+							local Count = 0
+							
+							for i, session in Namespace.sessions do
+								if type(session) == "table" then
+									local LoadedToolCallIdsBySessionEntry = p3.loadedToolCallIdsBySession[i]
+									
+									for i1, value in session do
+										if isRecord(value, i, i1) and value.universeId == p3.universeId then
+											Count += 1
+											local Inverted: boolean = value.campaignId ~= nil and (p3.settledCampaignIds[value.campaignId] == true and (LoadedToolCallIdsBySessionEntry ~= nil and not LoadedToolCallIdsBySessionEntry[i1]))
+											
+											if p3.retentionMs < p3.nowMs - value.updatedAtMs and Inverted then
+												table.insert(List, value)
+											end
 										end
 									end
 								end
 							end
-						end
-						if var17 <= p3.maxRecords or #t_1 == 0 then
-							return true, false
-						end
-						table.sort(t_1, function(p4, p5)
-							return if p4.updatedAtMs == p5.updatedAtMs then if p4.sessionId == p5.sessionId then p4.toolCallId < p5.toolCallId else p4.sessionId < p5.sessionId else p4.updatedAtMs < p5.updatedAtMs
-						end)
-						local cloned = table.clone(var16)
-						cloned.sessions = table.clone(var16.sessions)
-						
-						for i_1 = 1, math.min(var17 - p3.maxRecords, #t_1) do
-							local var19 = t_1[i_1]
-							local cloned_1 = table.clone(cloned.sessions[var19.sessionId])
-							cloned_1[var19.toolCallId] = nil
-							cloned.sessions[var19.sessionId] = cloned_1
-						end
-						local cloned_2 = table.clone(var15)
-						cloned_2.adCampaignCards = cloned
-						local ok_1, status_1 = pcall(p1.writeData, cloned_2)
-						
-						if ok_1 and status_1 == true then
-							var1 = cloned
+							if Count <= p3.maxRecords or #List == 0 then
+								return true, false
+							end
+							table.sort(List, function(A, B): boolean --[[ Line: 554 ]]
+								return if A.updatedAtMs == B.updatedAtMs then if A.sessionId == B.sessionId then A.toolCallId < B.toolCallId else A.sessionId < B.sessionId else A.updatedAtMs < B.updatedAtMs
+							end)
+							local Copy = table.clone(Namespace)
+							Copy.sessions = table.clone(Namespace.sessions)
 							
-							return true, true
+							for i2 = 1, math.min(Count - p3.maxRecords, #List) do
+								local Entry = List[i2]
+								local Copy1 = table.clone(Copy.sessions[Entry.sessionId])
+								Copy1[Entry.toolCallId] = nil
+								Copy.sessions[Entry.sessionId] = Copy1
+							end
+							local Copy2 = table.clone(Result3)
+							Copy2.adCampaignCards = Copy
+							local Success1, Result1 = pcall(p1.writeData, Copy2)
+							
+							if Success1 then
+								Success1 = Result1 == true
+							end
+							if Success1 then
+								v1 = Copy
+								
+								return true, true
+							else
+								return false, false
+							end
 						end
-						return false, false
 					end
 				end
 			end
+			return false, false
 		end,
-		reset = function()
-			-- upvalues: var1 (write), t (ref), t_1 (ref)
-			var1 = nil
-			table.clear(t)
-			table.clear(t_1)
+		reset = function() --[[ Line: 590 ]]
+			-- upvalues: v1 (ref), Tbl (copy), Tbl1 (copy), Tbl2 (copy)
+			v1 = nil
+			table.clear(Tbl)
+			table.clear(Tbl1)
+			table.clear(Tbl2)
 		end
 	}
 end

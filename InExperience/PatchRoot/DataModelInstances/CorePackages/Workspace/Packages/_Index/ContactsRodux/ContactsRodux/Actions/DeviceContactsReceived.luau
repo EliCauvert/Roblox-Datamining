@@ -1,6 +1,6 @@
-﻿local parent = script.Parent.Parent
-local _ = require(parent.Types.ContactTypes)
+﻿local Parent = script.Parent.Parent
+local _ = require(Parent.Types.ContactTypes)
 
-return require(parent.Parent.Rodux).makeActionCreator(require(script.Parent.ActionDomain) .. script.Name, function(p1)
-	return { payload = p1 }
+return require(Parent.Parent.Rodux).makeActionCreator(require(script.Parent.ActionDomain) .. script.Name, function(Payload) --[[ Line: 7 ]]
+	return { payload = Payload }
 end)

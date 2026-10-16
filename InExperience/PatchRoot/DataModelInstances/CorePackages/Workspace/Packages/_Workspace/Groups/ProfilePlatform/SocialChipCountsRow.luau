@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent.Parent._Workspace.ProfilePlatform.ProfilePlatform.Components.UserProfileHeader.SocialChipCountsRow.SocialChipCountsRowContainer)
+﻿return (require(script.Parent.Parent.Parent.Parent._Workspace.ProfilePlatform.ProfilePlatform.Components.UserProfileHeader.SocialChipCountsRow.SocialChipCountsRowContainer))

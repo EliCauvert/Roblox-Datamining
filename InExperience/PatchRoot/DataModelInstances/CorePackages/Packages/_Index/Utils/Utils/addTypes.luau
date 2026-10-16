@@ -1,46 +1,45 @@
-﻿local parent = script.Parent.Parent
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local boolean = luauPolyfillModule.Boolean
-local object = luauPolyfillModule.Object
-local t = {}
-local graphQLModule = require(parent.GraphQL)
-local graphQLSchema = graphQLModule.GraphQLSchema
-local isNamedType = graphQLModule.isNamedType
-local isDirective = graphQLModule.isDirective
-local getObjectTypeFromTypeMap = require(script.Parent.getObjectTypeFromTypeMap).getObjectTypeFromTypeMap
-local rewireTypes = require(script.Parent.rewire).rewireTypes
-local map = luauPolyfillModule.Map
+﻿local Parent = script.Parent.Parent
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local Boolean = LuauPolyfillModule.Boolean
+local Object = LuauPolyfillModule.Object
+local GraphQLModule = require(Parent.GraphQL)
+local GraphQLSchema = GraphQLModule.GraphQLSchema
+local IsNamedTypeFunction = GraphQLModule.isNamedType
+local IsDirectiveFunction = GraphQLModule.isDirective
+local GetObjectTypeFromTypeMapFunction = require(script.Parent.getObjectTypeFromTypeMap).getObjectTypeFromTypeMap
+local RewireTypesFunction = require(script.Parent.rewire).rewireTypes
+local Map = LuauPolyfillModule.Map
 
-function t.addTypes(p1, p2)
-	-- upvalues: map (ref), boolean (ref), isNamedType (ref), isDirective (ref), rewireTypes (ref), object (ref), graphQLSchema (ref), getObjectTypeFromTypeMap (ref)
-	local var1 = p1:toConfig()
-	local var2 = map.new()
-	
-	for i, v in var1.types do
-		var2:set(v.name, v)
-	end
-	local t = {}
-	
-	for i_1, v_1 in var1.directives do
-		t[tostring(v_1.name)] = v_1
-	end
-	for i_2, v_2 in p2 do
-		if boolean.toJSBoolean(isNamedType(v_2)) then
-			var2:set(v_2.name, v_2)
-		elseif boolean.toJSBoolean(isDirective(v_2)) then
-			t[v_2.name] = v_2
+return {
+	addTypes = function(p1, List) --[[ Line: 61 ]]
+		-- upvalues: Map (copy), Boolean (copy), IsNamedTypeFunction (copy), IsDirectiveFunction (copy), RewireTypesFunction (copy), Object (copy), GraphQLSchema (copy), GetObjectTypeFromTypeMapFunction (copy)
+		local Config = p1:toConfig()
+		local NewMap = Map.new()
+		
+		for _, _type in Config.types do
+			NewMap:set(_type.name, _type)
 		end
+		local t = {}
+		
+		for _, directive in Config.directives do
+			t[tostring(directive.name)] = directive
+		end
+		for _, value in List do
+			if Boolean.toJSBoolean(IsNamedTypeFunction(value)) then
+				NewMap:set(value.name, value)
+			elseif Boolean.toJSBoolean(IsDirectiveFunction(value)) then
+				t[value.name] = value
+			end
+		end
+		local RewireTypesResult = RewireTypesFunction(NewMap, (Object.values(t)))
+		local TypeMap = RewireTypesResult.typeMap
+		
+		return GraphQLSchema.new(Object.assign({}, Config, {
+			query = GetObjectTypeFromTypeMapFunction(TypeMap, p1:getQueryType()),
+			mutation = GetObjectTypeFromTypeMapFunction(TypeMap, p1:getMutationType()),
+			subscription = GetObjectTypeFromTypeMapFunction(TypeMap, p1:getSubscriptionType()),
+			types = TypeMap:values(),
+			directives = RewireTypesResult.directives
+		}))
 	end
-	local var3 = rewireTypes(var2, object.values(t))
-	local typeMap = var3.typeMap
-	
-	return graphQLSchema.new(object.assign({}, var1, {
-		query = getObjectTypeFromTypeMap(typeMap, p1:getQueryType()),
-		mutation = getObjectTypeFromTypeMap(typeMap, p1:getMutationType()),
-		subscription = getObjectTypeFromTypeMap(typeMap, p1:getSubscriptionType()),
-		types = typeMap:values(),
-		directives = var3.directives
-	}))
-end
-
-return t
+}

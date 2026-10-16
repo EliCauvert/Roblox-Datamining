@@ -1,57 +1,56 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local localizationModule = require(parent.Localization)
-local builderIconsModule = require(parent.BuilderIcons)
-local textKeysModule = require(profilePlatform.Common.TextKeys)
-local text = foundationModule.Text
-local view = foundationModule.View
-local icon = foundationModule.Icon
-local inputSize = foundationModule.Enums.InputSize
-local iconVariant = foundationModule.Enums.IconVariant
-local circleI = builderIconsModule.Icon.CircleI
-local useLocalization = localizationModule.Hooks.useLocalization
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local TextKeysModule = require(ProfilePlatform.Common.TextKeys)
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local Icon = FoundationModule.Icon
+local InputSize = FoundationModule.Enums.InputSize
+local IconVariant = FoundationModule.Enums.IconVariant
+local CircleI = require(Parent.BuilderIcons).Icon.CircleI
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-return function(p1)
-	-- upvalues: useLocalization (ref), textKeysModule (ref), reactModule (ref), view (ref), text (ref), icon (ref), circleI (ref), inputSize (ref), iconVariant (ref)
+return function(p1) --[[ Line: 24 | Named "JoinYear" ]]
+	-- upvalues: UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), View (copy), Text (copy), Icon (copy), CircleI (copy), InputSize (copy), IconVariant (copy)
 	if not p1.joinDateTime or p1.joinDateTime == "" then
 		return nil
 	end
-	local match = string.match(p1.joinDateTime, "^(%d%d%d%d)")
+	local Match: string? = string.match(p1.joinDateTime, "^(%d%d%d%d)")
 	
-	if match then
-		local var1 = useLocalization({
-			statistics = textKeysModule.Statistics,
-			joinedInYear = { textKeysModule.JoinedInYear, year = match }
+	if Match then
+		local UseLocalizationResult = UseLocalizationFunction({
+			statistics = TextKeysModule.Statistics,
+			joinedInYear = { TextKeysModule.JoinedInYear, year = Match }
 		})
 		
-		return reactModule.createElement(view, {
+		return ReactModule.createElement(View, {
 			tag = "col size-full-0 auto-y gap-small align-x-left",
 			LayoutOrder = p1.layoutOrder
 		}, {
-			Title = reactModule.createElement(text, {
+			Title = ReactModule.createElement(Text, {
 				LayoutOrder = 1,
 				tag = "auto-y size-full-0 text-align-x-left text-heading-small",
-				Text = var1.statistics
+				Text = UseLocalizationResult.statistics
 			}),
-			Content = reactModule.createElement(view, {
+			Content = ReactModule.createElement(View, {
 				tag = "auto-xy size-0 row align-y-center gap-xsmall",
 				LayoutOrder = p1.layoutOrder
 			}, {
-				Icon = reactModule.createElement(icon, {
+				Icon = ReactModule.createElement(Icon, {
 					LayoutOrder = 1,
-					name = circleI,
-					size = inputSize.XSmall,
-					variant = iconVariant.Filled
+					name = CircleI,
+					size = InputSize.XSmall,
+					variant = IconVariant.Filled
 				}),
-				Text = reactModule.createElement(text, {
+				Text = ReactModule.createElement(Text, {
 					LayoutOrder = 2,
 					tag = "auto-xy size-0 text-align-x-left text-body-medium",
-					Text = var1.joinedInYear
+					Text = UseLocalizationResult.joinedInYear
 				})
 			})
 		})
+	else
+		return nil
 	end
-	return nil
 end

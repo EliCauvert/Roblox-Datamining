@@ -1,10 +1,10 @@
-﻿local reactModule = require(script:FindFirstAncestor("ServerTriggeredModals").Parent.React)
-local getModalSignalStoreModule = require(script.Parent.getModalSignalStore)
+﻿local ReactModule = require(script:FindFirstAncestor("ServerTriggeredModals").Parent.React)
+local GetModalSignalStoreModule = require(script.Parent.getModalSignalStore)
 
-return function()
-	-- upvalues: reactModule (ref), getModalSignalStoreModule (ref)
-	return reactModule.useMemo(function()
-		-- upvalues: getModalSignalStoreModule (copy)
-		return getModalSignalStoreModule(false)
+return function() --[[ Line: 8 ]]
+	-- upvalues: ReactModule (copy), GetModalSignalStoreModule (copy)
+	return ReactModule.useMemo(function() --[[ Line: 9 ]]
+		-- upvalues: GetModalSignalStoreModule (upval)
+		return GetModalSignalStoreModule(false)
 	end, {})
 end

@@ -1,26 +1,32 @@
-﻿local parent = script.Parent.Parent
-local argCheckModule = require(parent.ArgCheck)
-local displayModule = require(parent.Display)
-local fFlagExtendScrollingFramesBySafeInsets = require(parent.SharedFlags).FFlagExtendScrollingFramesBySafeInsets
+﻿local Parent = script.Parent.Parent
+local ArgCheckModule = require(Parent.ArgCheck)
+local DisplayModule = require(Parent.Display)
+local FFlagExtendScrollingFramesBySafeInsets = require(Parent.SharedFlags).FFlagExtendScrollingFramesBySafeInsets
 
-return function(p1, p2)
-	-- upvalues: argCheckModule (ref), fFlagExtendScrollingFramesBySafeInsets (ref), displayModule (ref)
-	assert(typeof(p1) == "Vector2", "getSafeAreaSize expects screenSize to be a Vector2")
-	assert(type(p2) == "table", "getSafeAreaSize expects guiInset to be a table")
-	argCheckModule.isNonNegativeNumber(p2.left, "getSafeAreaSize: guiInset.left")
-	argCheckModule.isNonNegativeNumber(p2.right, "getSafeAreaSize: guiInset.right")
-	argCheckModule.isNonNegativeNumber(p2.top, "getSafeAreaSize: guiInset.top")
-	argCheckModule.isNonNegativeNumber(p2.bottom, "getSafeAreaSize: guiInset.bottom")
-	local var1 = p1.X - p2.left - p2.right
-	local var2 = p1.Y - p2.top - p2.bottom
+return function(Vector, p1, p2): UDim2 --[[ Line: 8 | Named "getSafeAreaSize" ]]
+	-- upvalues: ArgCheckModule (copy), FFlagExtendScrollingFramesBySafeInsets (copy), DisplayModule (copy)
+	assert(typeof(Vector) == "Vector2", "getSafeAreaSize expects screenSize to be a Vector2")
+	assert(type(p1) == "table", "getSafeAreaSize expects guiInset to be a table")
+	ArgCheckModule.isNonNegativeNumber(p1.left, "getSafeAreaSize: guiInset.left")
+	ArgCheckModule.isNonNegativeNumber(p1.right, "getSafeAreaSize: guiInset.right")
+	ArgCheckModule.isNonNegativeNumber(p1.top, "getSafeAreaSize: guiInset.top")
+	ArgCheckModule.isNonNegativeNumber(p1.bottom, "getSafeAreaSize: guiInset.bottom")
+	local XDelta = Vector.X - p1.left - p1.right
+	local YDelta = Vector.Y - p1.top - p1.bottom
 	
-	if fFlagExtendScrollingFramesBySafeInsets then
-		local deviceSafePadding = displayModule.GetDisplayStore().getDeviceSafePadding()
-		var1 -= deviceSafePadding.left + deviceSafePadding.right
-		var2 -= deviceSafePadding.top + deviceSafePadding.bottom
+	if p2 then
+		ArgCheckModule.isNonNegativeNumber(XDelta, "getSafeAreaSize: safeAreaWidth")
+		ArgCheckModule.isNonNegativeNumber(YDelta, "getSafeAreaSize: safeAreaHeight")
+		
+		return UDim2.new(0, XDelta, 0, YDelta)
 	end
-	argCheckModule.isNonNegativeNumber(var1, "getSafeAreaSize: safeAreaWidth")
-	argCheckModule.isNonNegativeNumber(var2, "getSafeAreaSize: safeAreaHeight")
+	if FFlagExtendScrollingFramesBySafeInsets then
+		local DeviceSafePadding = DisplayModule.GetDisplayStore().getDeviceSafePadding()
+		XDelta -= DeviceSafePadding.left + DeviceSafePadding.right
+		YDelta -= DeviceSafePadding.top + DeviceSafePadding.bottom
+	end
+	ArgCheckModule.isNonNegativeNumber(XDelta, "getSafeAreaSize: safeAreaWidth")
+	ArgCheckModule.isNonNegativeNumber(YDelta, "getSafeAreaSize: safeAreaHeight")
 	
-	return UDim2.new(0, var1, 0, var2)
+	return UDim2.new(0, XDelta, 0, YDelta)
 end

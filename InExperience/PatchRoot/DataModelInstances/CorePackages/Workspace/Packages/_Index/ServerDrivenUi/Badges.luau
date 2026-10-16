@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.Badges.Badges)
+﻿return (require(script.Parent.Parent.Parent._Index.Badges.Badges))

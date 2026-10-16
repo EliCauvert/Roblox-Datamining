@@ -1,13 +1,13 @@
-﻿local parent = script.Parent.Parent
-local API_URLModule = require(parent.API_URL)
-local _ = require(parent.Types.networkRequestsTypes)
+﻿local Parent = script.Parent.Parent
+local APIURLModule = require(Parent.API_URL)
+local _ = require(Parent.Types.networkRequestsTypes)
 game:DefineFastString("ContactImporterFindFriendsUrl", "contacts")
-local contactImporterFindFriendsUrlFastString = game:GetFastString("ContactImporterFindFriendsUrl")
+local ContactImporterFindFriendsUrlFastString = game:GetFastString("ContactImporterFindFriendsUrl")
 
-return function(p1)
-	-- upvalues: API_URLModule (ref), contactImporterFindFriendsUrlFastString (ref)
-	return p1.roduxNetworking.GET("FindContactFriends", function(p2)
-		-- upvalues: API_URLModule (copy), contactImporterFindFriendsUrlFastString (copy)
-		return p2(API_URLModule):path("contacts-api"):path("v1"):path(contactImporterFindFriendsUrlFastString)
+return function(p1) --[[ Line: 8 ]]
+	-- upvalues: APIURLModule (copy), ContactImporterFindFriendsUrlFastString (copy)
+	return p1.roduxNetworking.GET("FindContactFriends", function(Callback) --[[ Line: 11 ]]
+		-- upvalues: APIURLModule (upval), ContactImporterFindFriendsUrlFastString (upval)
+		return Callback(APIURLModule):path("contacts-api"):path("v1"):path(ContactImporterFindFriendsUrlFastString)
 	end)
 end

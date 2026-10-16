@@ -1,8 +1,9 @@
-﻿return function(value, p1, p2, p3)
-	if p3 <= 0 then
+﻿return function(p1, p2: number, p3: number, p4: number) --[[ Line: 15 | Named "getCenterScrollOffset" ]]
+	if p4 <= 0 then
 		return nil
+	else
+		local Largest = math.max(0, p1 + p2 * 0.5 - p4 * 0.5)
+		
+		return if math.abs(Largest - p3) < 1 then nil else Largest
 	end
-	local maxValue = math.max(0, value + p1 * 0.5 - p3 * 0.5)
-	
-	return if math.abs(maxValue - p2) < 1 then nil else maxValue
 end

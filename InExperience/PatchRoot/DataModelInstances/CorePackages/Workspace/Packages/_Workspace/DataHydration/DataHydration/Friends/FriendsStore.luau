@@ -1,8 +1,8 @@
-﻿local var1 = require(script:FindFirstAncestor("DataHydration").Parent.Signals).createComputed(require(script.Parent.createFriendsStore))
+﻿local Computed = require(script:FindFirstAncestor("DataHydration").Parent.Signals).createComputed((require(script.Parent.createFriendsStore)))
 
 return {
-	get = function()
-		-- upvalues: var1 (ref)
-		return var1(false)
+	get = function() --[[ Line: 11 ]]
+		-- upvalues: Computed (copy)
+		return Computed(false)
 	end
 }

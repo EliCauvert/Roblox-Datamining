@@ -1,88 +1,90 @@
-﻿local sduiSharedUtilities = script:FindFirstAncestor("SduiSharedUtilities")
-local fFlagLuaAppEnableSduiHomePage = require(sduiSharedUtilities.Parent.SharedFlags).FFlagLuaAppEnableSduiHomePage
-local _ = require(sduiSharedUtilities.SduiIntegrationTypes)
-local t = {}
+﻿local SduiSharedUtilities = script:FindFirstAncestor("SduiSharedUtilities")
+local FFlagLuaAppEnableSduiHomePage = require(SduiSharedUtilities.Parent.SharedFlags).FFlagLuaAppEnableSduiHomePage
+local _ = require(SduiSharedUtilities.SduiIntegrationTypes)
 
-local function _(p1)
+local function _(p1): boolean --[[ Line: 19 | Named "isArrayLike" ]]
 	return typeof(p1) == "table" and #p1 > 0
 end
 
-local _ = function(value, p1)
-	for i, v in p1 do
-		value[i] = v
+local _ = function(p1, List) --[[ Line: 23 | Named "shallowAssignFromNew" ]]
+	for i, value in List do
+		p1[i] = value
 	end
 end
 
-local _ = function(p2, p3)
-	for i, v in p3 do
-		table.insert(p2, v)
+local _ = function(List, List1) --[[ Line: 29 | Named "appendArray" ]]
+	for _, value in List1 do
+		table.insert(List, value)
 	end
 end
 
-local function mergeInto(p4, p5, p6, p7)
-	-- upvalues: fFlagLuaAppEnableSduiHomePage (ref), mergeInto (ref)
-	local var1
-	for i, v in p5 do
-		if typeof(v) == "table" then
-			table.insert(p7, tostring(i))
-			var1 = if p6 then p6(p7, v, p4[i]) else nil
-			
-			if fFlagLuaAppEnableSduiHomePage and var1 == "preserve" then
-				table.remove(p7)
-			elseif var1 == "replace" then
-				p4[i] = v
-			elseif var1 == "merge" then
-				if p4[i] == nil then
-					p4[i] = v
+local function mergeInto(p2, List3, Callback, List) --[[ Line: 35 ]]
+	-- upvalues: FFlagLuaAppEnableSduiHomePage (copy), mergeInto (copy)
+	for i, value in List3 do
+		if typeof(value) ~= "table" then
+			p2[i] = value
+			continue
+		end
+		table.insert(List, (tostring(i)))
+		local CallbackResult = if Callback then Callback(List, value, p2[i]) else nil
+		
+		if FFlagLuaAppEnableSduiHomePage and CallbackResult == "preserve" then
+			table.remove(List)
+		else
+			if CallbackResult == "replace" then
+				p2[i] = value
+			elseif CallbackResult == "merge" then
+				if p2[i] == nil then
+					p2[i] = value
 				else
-					local var2 = p4[i]
+					local v1 = p2[i]
 					
-					for i_1, v_1 in v do
-						var2[i_1] = v_1
+					for i1, value1 in value do
+						v1[i1] = value1
 					end
 				end
-			elseif var1 ~= "append" then
-				if p4[i] == nil then
-					p4[i] = {}
-				end
-				if typeof(v) == "table" and #v > 0 then
-					local var3 = p4[i]
+			elseif CallbackResult == "append" then
+				if p2[i] == nil then
+					p2[i] = value
+				elseif typeof(value) == "table" and #value > 0 then
+					local List1 = p2[i]
 					
-					for i_1, v_1 in v do
-						table.insert(var3, v_1)
+					for _, value2 in value do
+						table.insert(List1, value2)
 					end
 				else
-					mergeInto(p4[i], v, p6, p7)
-				end
-			elseif p4[i] == nil then
-				p4[i] = v
-			elseif typeof(v) == "table" and #v > 0 then
-				local var4 = p4[i]
-				
-				for i_1, v_1 in v do
-					table.insert(var4, v_1)
+					local v2 = p2[i]
+					
+					for i2, value3 in value do
+						v2[i2] = value3
+					end
 				end
 			else
-				local var5 = p4[i]
-				
-				for i_1, v_1 in v do
-					var5[i_1] = v_1
+				if p2[i] == nil then
+					p2[i] = {}
+				end
+				if typeof(value) == "table" and #value > 0 then
+					local List2 = p2[i]
+					
+					for _, value4 in value do
+						table.insert(List2, value4)
+					end
+				else
+					mergeInto(p2[i], value, Callback, List)
 				end
 			end
-			table.remove(p7)
+			table.remove(List)
 			continue
-		else
-			p4[i] = v
 		end
 	end
 end
 
-function t.merge(p8, p9, p10)
-	-- upvalues: mergeInto (ref)
-	local cloned = table.clone(p8)
-	mergeInto(cloned, p9, p10, {})
-	
-	return cloned
-end
-
-return t
+return {
+	merge = function(Tbl, p3, p4) --[[ Line: 87 ]]
+		-- upvalues: mergeInto (copy)
+		local Copy = table.clone(Tbl)
+		mergeInto(Copy, p3, p4, {})
+		
+		return Copy
+	end
+}

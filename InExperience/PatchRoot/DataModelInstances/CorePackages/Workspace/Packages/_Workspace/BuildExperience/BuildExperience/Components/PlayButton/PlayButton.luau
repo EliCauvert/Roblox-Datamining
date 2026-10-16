@@ -1,54 +1,54 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local iconButton = foundationModule.IconButton
-local view = foundationModule.View
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local inputSize = foundationModule.Enums.InputSize
-local disabledPlaytestTooltipModule = require(script.Parent.DisabledPlaytestTooltip)
-local fFlagBuildExperienceTooltipsLightDismissModule = require(buildExperience.Flags.FFlagBuildExperienceTooltipsLightDismiss)
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local IconButton = FoundationModule.IconButton
+local View = FoundationModule.View
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local InputSize = FoundationModule.Enums.InputSize
+local DisabledPlaytestTooltipModule = require(script.Parent.DisabledPlaytestTooltip)
 
-return function(p1)
-	-- upvalues: reactModule (ref), fFlagBuildExperienceTooltipsLightDismissModule (ref), buttonVariant (ref), inputSize (ref), iconButton (ref), disabledPlaytestTooltipModule (ref), view (ref)
-	local var1 = if p1.isActive then p1.activeIcon else p1.inActiveIcon
-	local var2 = p1.isDisabled == true
-	local var3, var4 = reactModule.useState(false)
-	local var5 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref), var4 (ref), p1 (ref)
-		if var2 then
-			var4(function(p2)
-				return not p2
+return function(Frame: Frame) --[[ Line: 28 | Named "PlayButton" ]]
+	-- upvalues: ReactModule (copy), ButtonVariant (copy), InputSize (copy), IconButton (copy), DisabledPlaytestTooltipModule (copy), View (copy)
+	local ActiveIcon = if Frame.isActive then Frame.activeIcon else Frame.inActiveIcon
+	local IsIsDisabled = Frame.isDisabled == true
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 33 ]]
+		-- upvalues: IsIsDisabled (copy), UseStateResult2 (copy), Frame (copy)
+		if IsIsDisabled then
+			UseStateResult2(function(p1): boolean --[[ Line: 35 ]]
+				return not p1
 			end)
 			
 			return
+		else
+			Frame.onActivated()
 		end
-		p1.onActivated()
-	end, { var2, p1.onActivated })
-	local var6 = reactModule.createElement(iconButton, {
+	end, { IsIsDisabled, Frame.onActivated })
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 43 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(false)
+	end, {})
+	local Element = ReactModule.createElement(IconButton, {
 		isCircular = true,
-		icon = var1,
-		variant = p1.variant or buttonVariant.OverMedia,
-		size = inputSize.Medium,
-		isDisabled = var2,
-		onActivated = var5,
-		LayoutOrder = if var2 then nil else p1.LayoutOrder,
-		testId = if var2 then nil else "build-header-play-button"
+		icon = ActiveIcon,
+		variant = Frame.variant or ButtonVariant.OverMedia,
+		size = InputSize.Medium,
+		isDisabled = IsIsDisabled,
+		onActivated = UseResult,
+		LayoutOrder = if IsIsDisabled then nil else Frame.LayoutOrder,
+		testId = if IsIsDisabled then nil else "build-header-play-button"
 	})
 	
-	return if var2 then reactModule.createElement(disabledPlaytestTooltipModule, {
-		LayoutOrder = p1.LayoutOrder,
-		isOpen = var3,
-		onPressedOutside = if fFlagBuildExperienceTooltipsLightDismissModule then reactModule.useCallback(function()
-			-- upvalues: var4 (ref)
-			var4(false)
-		end, {}) else nil
+	return if IsIsDisabled then ReactModule.createElement(DisabledPlaytestTooltipModule, {
+		LayoutOrder = Frame.LayoutOrder,
+		isOpen = UseStateResult,
+		onPressedOutside = UseResult1
 	}, {
-		PlayButtonAnchor = reactModule.createElement(view, {
+		PlayButtonAnchor = ReactModule.createElement(View, {
 			tag = "auto-xy",
 			testId = "build-header-play-button",
-			onActivated = var5,
+			onActivated = UseResult,
 			selection = { Selectable = true }
-		}, { Button = var6 })
-	}) else var6
+		}, { Button = Element })
+	}) else Element
 end

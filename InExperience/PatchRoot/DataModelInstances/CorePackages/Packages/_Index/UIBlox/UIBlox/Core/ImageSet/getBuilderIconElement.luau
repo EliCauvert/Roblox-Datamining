@@ -1,11 +1,11 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent.Parent.Parent
-local roactModule = require(parent_1.Roact)
-local _ = require(parent_1.React)
-local builderIconsModule = require(parent_1.BuilderIcons)
-local migrationSizeExceptionsModule = require(parent.migrationSizeExceptions)
-local t = { ImageLabel = "TextLabel", ImageButton = "TextButton" }
-local t_1 = {
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent.Parent.Parent
+local RoactModule = require(Parent1.Roact)
+local _ = require(Parent1.React)
+local BuilderIconsModule = require(Parent1.BuilderIcons)
+local MigrationSizeExceptionsModule = require(Parent.migrationSizeExceptions)
+local config = { ImageLabel = "TextLabel", ImageButton = "TextButton" }
+local config1 = {
 	["icons/common/goldrobux"] = ColorSequence.new({
 		ColorSequenceKeypoint.new(0, Color3.new(0.97, 0.93, 0.72)),
 		ColorSequenceKeypoint.new(0.6, Color3.new(0.67, 0.58, 0.36)),
@@ -18,190 +18,141 @@ local t_1 = {
 	})
 }
 
-local _ = function(p1)
-	local var1
-	if not p1 then
-		return true
-	elseif p1.X.Offset ~= 0 then
-		var1 = true
-		
-		if p1.Y.Scale == 0 then
-			var1 = p1.Y.Offset ~= 0 and p1.X.Scale ~= 0
-		end
-		return var1
-	end
+local function _(Vector): boolean --[[ Line: 28 ]]
+	return not Vector or (if Vector.X.Offset == 0 then Vector.Y.Offset ~= 0 and Vector.X.Scale ~= 0 else Vector.Y.Scale ~= 0 or Vector.Y.Offset ~= 0 and Vector.X.Scale ~= 0)
 end
 
-local var1 = function(p1)
-	local var2
-	local var3 = p1
-	
-	if var3 then
-		if var3.X.Offset ~= 0 then
-			var2 = true
-			
-			if var3.Y.Scale == 0 then
-				var2 = var3.Y.Offset ~= 0 and var3.X.Scale ~= 0
-			end
-		end
+local function v9(Vector: UDim2): UDim2 --[[ Line: 35 ]]
+	if not Vector or (if Vector.X.Offset == 0 then Vector.Y.Offset ~= 0 and Vector.X.Scale ~= 0 else Vector.Y.Scale ~= 0 or Vector.Y.Offset ~= 0 and Vector.X.Scale ~= 0) or Vector.X.Offset == Vector.Y.Offset and Vector.X.Scale == Vector.Y.Scale or Vector.X.Offset == 0 then
+		return Vector
 	else
-		var2 = true
-	end
-	if not var2 and (p1.X.Offset ~= p1.Y.Offset or p1.X.Scale ~= p1.Y.Scale) then
-		if p1.X.Offset == 0 then
-			var2 = true
-		else
-			var3 = math.min(p1.X.Offset, p1.Y.Offset)
-			p1 = UDim2.fromOffset(var3, var3)
-			
-			return p1
-		end
-	end
-	return p1
-end
-
-local var2 = function(p1)
-	local var3
-	if p1 then
-		if p1.X.Offset ~= 0 then
-			var3 = true
-			
-			if p1.Y.Scale == 0 then
-				var3 = p1.Y.Offset ~= 0 and p1.X.Scale ~= 0
-			end
-		end
-	else
-		var3 = true
-	end
-	if not var3 and p1.X.Offset == 0 then
-		var3 = true
-	end
-	return var3
-end
-
-local _ = function(p1, p2, p3, p4, p5)
-	-- upvalues: migrationSizeExceptionsModule (ref)
-	local offset = p1.Y.Offset
-	
-	if offset ~= 0 and not p2 and not migrationSizeExceptionsModule[p4.name] then
-		local size100 = p3.Size.Size_100
-		local size600 = p3.Size.Size_600
+		local Smallest = math.min(Vector.X.Offset, Vector.Y.Offset)
+		Vector = UDim2.fromOffset(Smallest, Smallest)
 		
-		if size600 <= offset and offset <= p5 * 38 then
-			offset = size600
-			
-			return offset
-		end
-		offset = math.round(offset / size100) * size100
+		return Vector
 	end
-	return offset
 end
 
-return function(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: var1 (ref), var2 (ref), migrationSizeExceptionsModule (ref), builderIconsModule (ref), t (ref), roactModule (ref), t_1 (ref)
-	local size
-	assert(p1.ImageRectOffset == nil and p1.ImageRectSize == nil, "ImageRect props not supported for migration icons")
-	assert(p1.SliceCenter == nil and p1.SliceScale == nil, "Image slices not supported for migration icons")
-	local cloned = table.clone(p1)
+local function v10(Vector): boolean --[[ Line: 48 ]]
+	local NoVector: boolean = not Vector or (if Vector.X.Offset == 0 then Vector.Y.Offset ~= 0 and Vector.X.Scale ~= 0 else Vector.Y.Scale ~= 0 or Vector.Y.Offset ~= 0 and Vector.X.Scale ~= 0)
 	
-	if typeof(cloned.Size) == "table" then
-		local size = cloned.Size
-		cloned.Size = size:map(var1)
-		cloned.TextScaled = size:map(var2)
-		cloned.TextSize = size:map(function(p8)
-			-- upvalues: p5 (ref), p3 (ref), p7 (ref), migrationSizeExceptionsModule (copy)
-			local var3
-			if p8 then
-				if p8.X.Offset ~= 0 then
-					var3 = true
-					
-					if p8.Y.Scale == 0 then
-						var3 = p8.Y.Offset ~= 0 and p8.X.Scale ~= 0
-					end
+	if not NoVector and Vector.X.Offset == 0 then
+		NoVector = true
+	end
+	return NoVector
+end
+
+local _ = function(p1, p2, p3, p4, p5: number) --[[ Line: 58 ]]
+	-- upvalues: MigrationSizeExceptionsModule (copy)
+	local Offset = p1.Y.Offset
+	
+	if Offset ~= 0 and not p2 and not MigrationSizeExceptionsModule[p4.name] then
+		local Size100 = p3.Size.Size_100
+		local Size600 = p3.Size.Size_600
+		
+		if Size600 <= Offset and Offset <= p5 * 38 then
+			Offset = Size600
+			
+			return Offset
+		end
+		Offset = math.round(Offset / Size100) * Size100
+	end
+	return Offset
+end
+
+return function(Tbl, Text, p1, p2, p3, p4: number, p5) --[[ Line: 74 | Named "getBuilderIconElement" ]]
+	-- upvalues: v9 (copy), v10 (copy), MigrationSizeExceptionsModule (copy), BuilderIconsModule (copy), config (copy), RoactModule (copy), config1 (copy)
+	assert(Tbl.ImageRectOffset == nil and Tbl.ImageRectSize == nil, "ImageRect props not supported for migration icons")
+	assert(Tbl.SliceCenter == nil and Tbl.SliceScale == nil, "Image slices not supported for migration icons")
+	local Copy = table.clone(Tbl)
+	
+	if typeof(Copy.Size) == "table" then
+		local Size = Copy.Size
+		Copy.Size = Size:map(v9)
+		Copy.TextScaled = Size:map(v10)
+		Copy.TextSize = Size:map(function(Vector) --[[ Line: 97 ]]
+			-- upvalues: p3 (copy), p1 (copy), p5 (copy), MigrationSizeExceptionsModule (upval)
+			local NoVector: boolean = not Vector or (if Vector.X.Offset == 0 then Vector.Y.Offset ~= 0 and Vector.X.Scale ~= 0 else Vector.Y.Scale ~= 0 or Vector.Y.Offset ~= 0 and Vector.X.Scale ~= 0)
+			
+			if not NoVector and Vector.X.Offset == 0 then
+				NoVector = true
+			end
+			local P13 = p5 or 1
+			local Offset = Vector.Y.Offset
+			
+			if Offset ~= 0 and not NoVector and not MigrationSizeExceptionsModule[p1.name] then
+				local Size100 = p3.Size.Size_100
+				local Size600 = p3.Size.Size_600
+				
+				if Size600 <= Offset and Offset <= P13 * 38 then
+					Offset = Size600
+				else
+					Offset = math.round(Offset / Size100) * Size100
 				end
-			else
-				var3 = true
 			end
-			if not var3 and p8.X.Offset == 0 then
-				var3 = true
-			end
-			local p9 = p7 or 1
-			local offset = p8.Y.Offset
-			
-			if offset ~= 0 and not var3 and not migrationSizeExceptionsModule[p3.name] then
-				local size100 = p5.Size.Size_100
-				local size600 = p5.Size.Size_600
-				offset = if size600 <= offset and offset <= p9 * 38 then size600 else math.round(offset / size100) * size100
-			end
-			return offset
+			return Offset
 		end)
 	else
-		local var3
-		size = cloned.Size
-		cloned.Size = var1(size)
+		local Size = Copy.Size
+		Copy.Size = v9(Size)
+		local NoSize: boolean = not Size or (if Size.X.Offset == 0 then Size.Y.Offset ~= 0 and Size.X.Scale ~= 0 else Size.Y.Scale ~= 0 or Size.Y.Offset ~= 0 and Size.X.Scale ~= 0)
 		
-		if size then
-			if size.X.Offset ~= 0 then
-				var3 = true
-				
-				if size.Y.Scale == 0 then
-					var3 = size.Y.Offset ~= 0 and size.X.Scale ~= 0
-				end
+		if not NoSize and Size.X.Offset == 0 then
+			NoSize = true
+		end
+		Copy.TextScaled = NoSize
+		local P13 = p5 or 1
+		local Offset = Size.Y.Offset
+		
+		if Offset ~= 0 and not NoSize and not MigrationSizeExceptionsModule[p1.name] then
+			local Size100 = p3.Size.Size_100
+			local Size600 = p3.Size.Size_600
+			
+			if Size600 <= Offset and Offset <= P13 * 38 then
+				Offset = Size600
+			else
+				Offset = math.round(Offset / Size100) * Size100
 			end
-		else
-			var3 = true
 		end
-		if not var3 and size.X.Offset == 0 then
-			var3 = true
+		Copy.TextSize = Offset
+	end
+	Copy.Text = p1.name
+	Copy.FontFace = BuilderIconsModule.Font[p1.variant]
+	Copy.TextColor3 = Copy.ImageColor3 or p3.Color.Content.Emphasis.Color3
+	Copy.TextTransparency = Copy.ImageTransparency or p3.Color.Content.Emphasis.Transparency
+	Copy.ImageColor3 = nil
+	Copy.ImageTransparency = nil
+	Copy.ResampleMode = nil
+	Copy.ScaleType = nil
+	Copy.TileSize = nil
+	Copy.Image = nil
+	local Entry = config[Text]
+	
+	if Entry == nil then
+		error("Unsupported inner component for image set icon migration: " .. Text)
+	end
+	local T = nil
+	
+	if p4 > 0 then
+		if T == nil then
+			T = {}
 		end
-		local var4 = var3
-		cloned.TextScaled = var4
-		p7 = p7 or 1
-		local offset = size.Y.Offset
+		T.UITextSizeConstraint = RoactModule.createElement("UITextSizeConstraint", { MaxTextSize = Copy.TextSize })
+	end
+	local Entry1 = config1[p2]
+	
+	if Entry1 then
+		if T == nil then
+			T = {}
+		end
+		Copy.TextColor3 = Color3.new(1, 1, 1)
+		T.UIGradient = RoactModule.createElement("UIGradient", { Rotation = 90, Color = Entry1 })
+	end
+	if T == nil then
+		return RoactModule.createElement(Entry, Copy)
+	else
+		T.Children = RoactModule.createFragment(Tbl[RoactModule.Children])
 		
-		if offset ~= 0 and not var4 and not migrationSizeExceptionsModule[p3.name] then
-			local size100 = p5.Size.Size_100
-			local size600 = p5.Size.Size_600
-			offset = if size600 <= offset and offset <= p7 * 38 then size600 else math.round(offset / size100) * size100
-		end
-		cloned.TextSize = offset
+		return RoactModule.createElement(Entry, Copy, T)
 	end
-	cloned.Text = p3.name
-	cloned.FontFace = builderIconsModule.Font[p3.variant]
-	cloned.TextColor3 = cloned.ImageColor3 or p5.Color.Content.Emphasis.Color3
-	cloned.TextTransparency = cloned.ImageTransparency or p5.Color.Content.Emphasis.Transparency
-	cloned.ImageColor3 = nil
-	cloned.ImageTransparency = nil
-	cloned.ResampleMode = nil
-	cloned.ScaleType = nil
-	cloned.TileSize = nil
-	cloned.Image = nil
-	size = t[p2]
-	
-	if size == nil then
-		error("Unsupported inner component for image set icon migration: " .. p9)
-	end
-	local t_2 = nil
-	
-	if p6 > 0 then
-		if t_2 == nil then
-			t_2 = {}
-		end
-		t_2.UITextSizeConstraint = roactModule.createElement("UITextSizeConstraint", { MaxTextSize = cloned.TextSize })
-	end
-	local var5 = t_1[p4]
-	
-	if var5 then
-		if t_2 == nil then
-			t_2 = {}
-		end
-		cloned.TextColor3 = Color3.new(1, 1, 1)
-		t_2.UIGradient = roactModule.createElement("UIGradient", { Rotation = 90, Color = var5 })
-	end
-	if t_2 == nil then
-		return roactModule.createElement(size, cloned)
-	end
-	t_2.Children = roactModule.createFragment(p1[roactModule.Children])
-	
-	return roactModule.createElement(size, cloned, t_2)
 end

@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CorePackages").Packages.enumerate)
+﻿return (require(game:GetService("CorePackages").Packages.enumerate))

@@ -1,3 +1,3 @@
-﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator(script.Name, function(p1)
-	return { sourceLanguageName = p1 }
+﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator(script.Name, function(SourceLanguageName) --[[ Line: 9 ]]
+	return { sourceLanguageName = SourceLanguageName }
 end)

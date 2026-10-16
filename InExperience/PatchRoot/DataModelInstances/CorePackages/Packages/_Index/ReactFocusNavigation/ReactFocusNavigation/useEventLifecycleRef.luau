@@ -1,17 +1,17 @@
-﻿local reactModule = require(script.Parent.Parent.React)
+﻿local ReactModule = require(script.Parent.Parent.React)
 
-return function(p1, p2)
-	-- upvalues: reactModule (ref)
-	local var1 = reactModule.useRef(nil)
+return function(Callback1, Callback) --[[ Line: 8 | Named "useEventLifecycleRef" ]]
+	-- upvalues: ReactModule (copy)
+	local UseRefResult = ReactModule.useRef(nil)
 	
-	return reactModule.useCallback(function(p3)
-		-- upvalues: var1 (ref), p2 (ref), p1 (ref)
-		if var1.current and p2 then
-			p2(var1.current)
+	return (ReactModule.useCallback(function(Current) --[[ Line: 10 ]]
+		-- upvalues: UseRefResult (copy), Callback (copy), Callback1 (copy)
+		if UseRefResult.current and Callback then
+			Callback(UseRefResult.current)
 		end
-		if p3 then
-			p1(p3)
+		if Current then
+			Callback1(Current)
 		end
-		var1.current = p3
-	end, { p1, p2 })
+		UseRefResult.current = Current
+	end, { Callback1, Callback }))
 end

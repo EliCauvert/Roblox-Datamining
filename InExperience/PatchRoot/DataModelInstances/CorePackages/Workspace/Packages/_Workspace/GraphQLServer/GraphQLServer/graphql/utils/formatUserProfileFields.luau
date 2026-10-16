@@ -1,35 +1,37 @@
-﻿local graphQLServer = script:FindFirstAncestor("GraphQLServer")
-local parent = graphQLServer.Parent
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local collectSubFields = require(parent.GraphqlToolsUtils).collectSubFields
-local userProfileNestedFieldsModule = require(graphQLServer.graphql.enums.UserProfileNestedFields)
+﻿local GraphQLServer = script:FindFirstAncestor("GraphQLServer")
+local Parent = GraphQLServer.Parent
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local CollectSubFields = require(Parent.GraphqlToolsUtils).collectSubFields
+local UserProfileNestedFieldsModule = require(GraphQLServer.graphql.enums.UserProfileNestedFields)
 
-return function(p1, p2)
-	-- upvalues: collectSubFields (ref), luauPolyfillModule (ref), userProfileNestedFieldsModule (ref)
-	local var1 = p2 or collectSubFields
-	local var2 = var1(p1.schema, p1.fragments, p1.variableValues, p1.returnType, p1.fieldNodes)
-	local t = {}
+return function(p1, p2) --[[ Line: 8 ]]
+	-- upvalues: CollectSubFields (copy), LuauPolyfillModule (copy), UserProfileNestedFieldsModule (copy)
+	local CollectSubFields1 = if p2 then p2 else CollectSubFields
+	local CollectSubFieldsResult = CollectSubFields1(p1.schema, p1.fragments, p1.variableValues, p1.returnType, p1.fieldNodes)
+	local List = {}
 	
-	local _ = function(p3)
-		-- upvalues: luauPolyfillModule (copy)
-		return if p3 ~= nil then if p3 ~= "id" then luauPolyfillModule.String.endsWith(p3, "__typename") else true else true
+	local function _(p3) --[[ Line: 20 ]]
+		-- upvalues: LuauPolyfillModule (upval)
+		return p3 == nil or (p3 == "id" or LuauPolyfillModule.String.endsWith(p3, "__typename"))
 	end
 	
-	for i, v in var2 do
-		local var3 = v[1]
+	for _, value in CollectSubFieldsResult do
+		local v1 = value[1]
 		
-		if not userProfileNestedFieldsModule[var3] then
-			if not (if var3 ~= nil then if var3 ~= "id" then luauPolyfillModule.String.endsWith(var3, "__typename") else true else true) then
-				table.insert(t, var3)
+		if not UserProfileNestedFieldsModule[v1] then
+			if v1 ~= nil and (v1 ~= "id" and not LuauPolyfillModule.String.endsWith(v1, "__typename")) then
+				table.insert(List, v1)
+				continue
 			end
+			continue
 		end
-		for i_1, v_1 in var1(p1.schema, p1.fragments, p1.variableValues, p1.returnType, var2[var3]) do
-			local var4 = `{var3}.{v_1[1]}`
+		for _, value1 in CollectSubFields1(p1.schema, p1.fragments, p1.variableValues, p1.returnType, CollectSubFieldsResult[v1]) do
+			local Text: string = `{v1}.{value1[1]}`
 			
-			if not (if var4 ~= nil then if var4 ~= "id" then luauPolyfillModule.String.endsWith(var4, "__typename") else true else true) then
-				table.insert(t, var4)
+			if Text ~= nil and (Text ~= "id" and not LuauPolyfillModule.String.endsWith(Text, "__typename")) then
+				table.insert(List, Text)
 			end
 		end
 	end
-	return t
+	return List
 end

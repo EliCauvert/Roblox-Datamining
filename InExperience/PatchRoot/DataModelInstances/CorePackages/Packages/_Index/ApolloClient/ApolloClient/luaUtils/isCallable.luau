@@ -1,9 +1,15 @@
-﻿return function(p1)
+﻿return function(p1): boolean --[[ Line: 9 | Named "isCallable" ]]
 	if typeof(p1) == "function" then
 		return true
-	elseif typeof(p1) == "table" then
-		local var1 = getmetatable(p1)
-		
-		return if var1 and rawget(var1, "__call") then true else p1._isMockFunction
 	end
+	if typeof(p1) == "table" then
+		local Meta = getmetatable(p1)
+		
+		if Meta and rawget(Meta, "__call") then
+			return true
+		elseif p1._isMockFunction then
+			return true
+		end
+	end
+	return false
 end

@@ -1,100 +1,99 @@
-﻿local avatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
-local itemTypeEnum = require(avatarExperienceInspectAndBuy.Parent.AvatarExperienceModel).Enums.ItemTypeEnum
-local _ = require(avatarExperienceInspectAndBuy.Types)
-local convertAssetInfoToItemDataModule = require(avatarExperienceInspectAndBuy.Utils.convertAssetInfoToItemData)
-local convertBundleInfoToItemDataModule = require(avatarExperienceInspectAndBuy.Utils.convertBundleInfoToItemData)
-local getPriceStatusModule = require(avatarExperienceInspectAndBuy.Utils.getPriceStatus)
-local priceStatusModule = require(avatarExperienceInspectAndBuy.Enums.PriceStatus)
-local getPriceInRobux = require(avatarExperienceInspectAndBuy.Utils.itemDetailsUtils).getPriceInRobux
-local _ = require(avatarExperienceInspectAndBuy.Stores.createItemSelectionStore)
+﻿local AvatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
+local ItemTypeEnum = require(AvatarExperienceInspectAndBuy.Parent.AvatarExperienceModel).Enums.ItemTypeEnum
+local _ = require(AvatarExperienceInspectAndBuy.Types)
+local ConvertAssetInfoToItemDataModule = require(AvatarExperienceInspectAndBuy.Utils.convertAssetInfoToItemData)
+local ConvertBundleInfoToItemDataModule = require(AvatarExperienceInspectAndBuy.Utils.convertBundleInfoToItemData)
+local GetPriceStatusModule = require(AvatarExperienceInspectAndBuy.Utils.getPriceStatus)
+local PriceStatusModule = require(AvatarExperienceInspectAndBuy.Enums.PriceStatus)
+local GetPriceInRobuxFunction = require(AvatarExperienceInspectAndBuy.Utils.itemDetailsUtils).getPriceInRobux
+local _ = require(AvatarExperienceInspectAndBuy.Stores.createItemSelectionStore)
 
-local function createBulkPurchaseRequestItem(p1)
-	-- upvalues: itemTypeEnum (ref)
+local function createBulkPurchaseRequestItem(BulkPurchaseRequestItem) --[[ Line: 62 ]]
+	-- upvalues: ItemTypeEnum (copy)
 	return {
-		id = p1.id and tonumber(p1.id) or 0,
-		itemType = if p1.itemType == itemTypeEnum.Asset then Enum.AvatarItemType.Asset.Value else Enum.AvatarItemType.Bundle.Value
+		id = BulkPurchaseRequestItem.id and tonumber(BulkPurchaseRequestItem.id) or 0,
+		itemType = if BulkPurchaseRequestItem.itemType == ItemTypeEnum.Asset then Enum.AvatarItemType.Asset.Value else Enum.AvatarItemType.Bundle.Value
 	}
 end
 
 return {
-	convertAvatarItemToItemData = function(p1, p2)
-		-- upvalues: itemTypeEnum (ref), convertAssetInfoToItemDataModule (ref), convertBundleInfoToItemDataModule (ref)
-		if p1.itemType == itemTypeEnum.Asset then
-			local id = p2.assets[p1.id]
+	convertAvatarItemToItemData = function(BulkPurchaseRequestItem, p1) --[[ Line: 31 ]]
+		-- upvalues: ItemTypeEnum (copy), ConvertAssetInfoToItemDataModule (copy), ConvertBundleInfoToItemDataModule (copy)
+		if BulkPurchaseRequestItem.itemType == ItemTypeEnum.Asset then
+			local Asset = p1.assets[BulkPurchaseRequestItem.id]
 			
-			return if id then convertAssetInfoToItemDataModule(id) else nil
-		elseif p1.itemType ~= itemTypeEnum.Bundle then
+			return if Asset then ConvertAssetInfoToItemDataModule(Asset) else nil
+		elseif BulkPurchaseRequestItem.itemType == ItemTypeEnum.Bundle then
+			local Bundle = p1.bundles[BulkPurchaseRequestItem.id]
+			
+			return if Bundle then ConvertBundleInfoToItemDataModule(Bundle) else nil
+		else
 			return nil
 		end
-		local id = p2.bundles[p1.id]
-		
-		return if id then convertBundleInfoToItemDataModule(id) else nil
 	end,
-	isPurchasableItem = function(p1)
-		-- upvalues: priceStatusModule (ref)
-		return if p1 ~= priceStatusModule.Free then if p1 ~= priceStatusModule.PurchaseFromRoblox then p1 == priceStatusModule.PurchaseFromResale else true else true
+	isPurchasableItem = function(Free): boolean --[[ Line: 52 ]]
+		-- upvalues: PriceStatusModule (copy)
+		return Free == PriceStatusModule.Free or (Free == PriceStatusModule.PurchaseFromRoblox or Free == PriceStatusModule.PurchaseFromResale)
 	end,
 	createBulkPurchaseRequestItem = createBulkPurchaseRequestItem,
-	getBulkPurchaseEligibleItems = function(p1, p2, p3)
-		-- upvalues: itemTypeEnum (ref), convertAssetInfoToItemDataModule (ref), convertBundleInfoToItemDataModule (ref), getPriceStatusModule (ref), priceStatusModule (ref), getPriceInRobux (ref), createBulkPurchaseRequestItem (ref)
-		if not p1 then
+	getBulkPurchaseEligibleItems = function(List, p1, p2) --[[ Line: 76 ]]
+		-- upvalues: ItemTypeEnum (copy), ConvertAssetInfoToItemDataModule (copy), ConvertBundleInfoToItemDataModule (copy), GetPriceStatusModule (copy), PriceStatusModule (copy), GetPriceInRobuxFunction (copy), createBulkPurchaseRequestItem (copy)
+		if not List then
 			return { totalPrice = 0, requestedItems = {} }
 		end
-		local t = {}
-		local var1 = 0
+		local List1 = {}
+		local TotalPrice = 0
+		local PriceStatusModule1 = nil
+		local ConvertAssetInfoToItemDataModuleResult = nil
+		local Price = nil
 		
-		for i, v in p1 do
-			local var2
-			if v.itemType == itemTypeEnum.Asset then
-				local id = p2.assets[v.id]
-				var2 = if not id then nil else convertAssetInfoToItemDataModule(id)
-			elseif v.itemType == itemTypeEnum.Bundle then
-				local id = p2.bundles[v.id]
-				var2 = if not id then nil else convertBundleInfoToItemDataModule(id)
+		for _, BulkPurchaseRequestItem in List do
+			if BulkPurchaseRequestItem.itemType == ItemTypeEnum.Asset then
+				local Asset = p1.assets[BulkPurchaseRequestItem.id]
+				ConvertAssetInfoToItemDataModuleResult = if Asset then ConvertAssetInfoToItemDataModule(Asset) else nil
+			elseif BulkPurchaseRequestItem.itemType == ItemTypeEnum.Bundle then
+				local Bundle = p1.bundles[BulkPurchaseRequestItem.id]
+				ConvertAssetInfoToItemDataModuleResult = if Bundle then ConvertBundleInfoToItemDataModule(Bundle) else nil
 			else
-				var2 = nil
+				ConvertAssetInfoToItemDataModuleResult = nil
 			end
-			local var3 = getPriceStatusModule(var2, true)
+			PriceStatusModule1 = GetPriceStatusModule(ConvertAssetInfoToItemDataModuleResult, true)
 			
-			if var2 then
-				local var4 = if var3 ~= priceStatusModule.Free then if var3 ~= priceStatusModule.PurchaseFromRoblox then var3 == priceStatusModule.PurchaseFromResale else true else true
+			if ConvertAssetInfoToItemDataModuleResult and (PriceStatusModule1 == PriceStatusModule.Free or (PriceStatusModule1 == PriceStatusModule.PurchaseFromRoblox or PriceStatusModule1 == PriceStatusModule.PurchaseFromResale)) then
+				Price = nil
 				
-				if var4 then
-					var4 = nil
-					local _ = nil
+				if ConvertAssetInfoToItemDataModuleResult.id then
+					local v1 = p2[ConvertAssetInfoToItemDataModuleResult.id]
 					
-					if var2.id then
-						local id = p3[var2.id]
-						
-						if id and id.timedOptions then
-							for i_1, v_1 in id.timedOptions do
-								if v_1.selected then
-									var4 = getPriceInRobux(var2, var3)
-									local var5 = createBulkPurchaseRequestItem(var2)
-									
-									if v_1.days > 0 then
-										var4 = v_1.price
-										var5.PurchaseOptions = {
-											{
-												Type = Enum.PurchaseOption.TimedOption,
-												Value = v_1.days * 86400
-											}
+					if v1 and v1.timedOptions then
+						for _, timedOption in v1.timedOptions do
+							if timedOption.selected then
+								Price = GetPriceInRobuxFunction(ConvertAssetInfoToItemDataModuleResult, PriceStatusModule1)
+								local BulkPurchaseRequestItem1 = createBulkPurchaseRequestItem(ConvertAssetInfoToItemDataModuleResult)
+								
+								if timedOption.days > 0 then
+									Price = timedOption.price
+									BulkPurchaseRequestItem1.PurchaseOptions = {
+										{
+											Type = Enum.PurchaseOption.TimedOption,
+											Value = timedOption.days * 86400
 										}
-									end
-									table.insert(t, var5)
+									}
 								end
+								table.insert(List1, BulkPurchaseRequestItem1)
+								break
 							end
-						else
-							var4 = getPriceInRobux(var2, var3)
-							table.insert(t, createBulkPurchaseRequestItem(var2))
 						end
+					else
+						Price = GetPriceInRobuxFunction(ConvertAssetInfoToItemDataModuleResult, PriceStatusModule1)
+						table.insert(List1, (createBulkPurchaseRequestItem(ConvertAssetInfoToItemDataModuleResult)))
 					end
-					if var4 ~= nil then
-						var1 += var4
-					end
+				end
+				if Price ~= nil then
+					TotalPrice += Price
 				end
 			end
 		end
-		return { requestedItems = t, totalPrice = var1 }
+		return { requestedItems = List1, totalPrice = TotalPrice }
 	end
 }

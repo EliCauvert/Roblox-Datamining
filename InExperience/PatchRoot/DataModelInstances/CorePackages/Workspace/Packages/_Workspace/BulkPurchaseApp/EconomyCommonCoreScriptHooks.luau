@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.EconomyCommonCoreScriptHooks.EconomyCommonCoreScriptHooks)
+﻿return (require(script.Parent.Parent.Parent._Index.EconomyCommonCoreScriptHooks.EconomyCommonCoreScriptHooks))

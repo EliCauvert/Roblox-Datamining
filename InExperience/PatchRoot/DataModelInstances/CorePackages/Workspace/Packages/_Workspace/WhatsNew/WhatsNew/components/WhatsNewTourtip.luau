@@ -1,126 +1,131 @@
-﻿local whatsNew = script:FindFirstAncestor("WhatsNew")
-local parent = whatsNew.Parent
-local enumsModule = require(whatsNew.Enums)
-local foundationModule = require(parent.Foundation)
-local localizationModule = require(parent.Localization)
-local reactModule = require(parent.React)
-local getWhatsNewStoreModule = require(whatsNew.store.GetWhatsNewStore)
-local useWhatsNewRuntimeStateModule = require(whatsNew.hooks.useWhatsNewRuntimeState)
-local whatsNewTelemetryModule = require(whatsNew.telemetry.WhatsNewTelemetry)
-local educationalTooltip = foundationModule.EducationalTooltip
-local view = foundationModule.View
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local popoverAlign = foundationModule.Enums.PopoverAlign
-local popoverSide = foundationModule.Enums.PopoverSide
-local useLocalization = localizationModule.Hooks.useLocalization
+﻿local WhatsNew = script:FindFirstAncestor("WhatsNew")
+local Parent = WhatsNew.Parent
+local EnumsModule = require(WhatsNew.Enums)
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local GetWhatsNewStoreModule = require(WhatsNew.store.GetWhatsNewStore)
+local UseWhatsNewRuntimeStateModule = require(WhatsNew.hooks.useWhatsNewRuntimeState)
+local WhatsNewTelemetryModule = require(WhatsNew.telemetry.WhatsNewTelemetry)
+local EducationalTooltip = FoundationModule.EducationalTooltip
+local View = FoundationModule.View
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local PopoverAlign = FoundationModule.Enums.PopoverAlign
+local PopoverSide = FoundationModule.Enums.PopoverSide
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-local function _(p1)
-	return p1.X > 0 and p1.Y > 0
+local function _(Vector): boolean --[[ Line: 28 | Named "isRectReady" ]]
+	return Vector.X > 0 and Vector.Y > 0
 end
 
-return reactModule.memo(function()
-	-- upvalues: getWhatsNewStoreModule (ref), useWhatsNewRuntimeStateModule (ref), enumsModule (ref), reactModule (ref), useLocalization (ref), whatsNewTelemetryModule (ref), buttonVariant (ref), view (ref), educationalTooltip (ref), popoverSide (ref), popoverAlign (ref)
-	local var1 = getWhatsNewStoreModule()
-	local var2 = useWhatsNewRuntimeStateModule()
-	local currentEntry = var2.currentEntry
-	local globalStepIndex = var2.globalStepIndex
-	local var3 = var2.surface == enumsModule.WhatsNewSurface.TourTip and (currentEntry ~= nil and globalStepIndex ~= nil)
-	local var4 = reactModule.useRef(nil)
-	local var5 = reactModule.useRef(nil)
-	local var6 = useLocalization({
+return ReactModule.memo(function() --[[ Line: 32 | Named "WhatsNewTourtip" ]]
+	-- upvalues: GetWhatsNewStoreModule (copy), UseWhatsNewRuntimeStateModule (copy), EnumsModule (copy), ReactModule (copy), UseLocalizationFunction (copy), WhatsNewTelemetryModule (copy), ButtonVariant (copy), View (copy), EducationalTooltip (copy), PopoverSide (copy), PopoverAlign (copy)
+	local WhatsNewStoreModule = GetWhatsNewStoreModule()
+	local UseWhatsNewRuntimeStateModuleResult = UseWhatsNewRuntimeStateModule()
+	local CurrentEntry = UseWhatsNewRuntimeStateModuleResult.currentEntry
+	local GlobalStepIndex: number = UseWhatsNewRuntimeStateModuleResult.globalStepIndex
+	local HasGlobalStepIndex: boolean = UseWhatsNewRuntimeStateModuleResult.surface == EnumsModule.WhatsNewSurface.TourTip and (CurrentEntry ~= nil and GlobalStepIndex ~= nil)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseLocalizationResult = UseLocalizationFunction({
 		back = "CommonUI.Controls.Action.Back",
 		next = "CommonUI.Controls.Action.Next",
 		done = "CommonUI.Controls.Action.Done"
 	})
-	local var7 = if globalStepIndex ~= nil then 0 else globalStepIndex + 1
-	local globalTotalSteps = var2.globalTotalSteps
-	local var8 = var3 and globalStepIndex == 0
-	local var9 = var3 and globalTotalSteps <= var7
-	local var10 = if var3 and currentEntry ~= nil then var1.getAnchorRef(currentEntry.anchorId) else nil
-	var5.current = var10
-	local var11 = false
+	local NewGlobalStepIndex: number = if GlobalStepIndex == nil then 0 else GlobalStepIndex + 1
+	local GlobalTotalSteps: number = UseWhatsNewRuntimeStateModuleResult.globalTotalSteps
+	local IsGlobalStepIndexMatch: boolean = HasGlobalStepIndex and GlobalStepIndex == 0
+	local IsNewGlobalStepIndexAbove: boolean = HasGlobalStepIndex and NewGlobalStepIndex >= GlobalTotalSteps
+	local AnchorRef = if HasGlobalStepIndex and CurrentEntry ~= nil then WhatsNewStoreModule.getAnchorRef(CurrentEntry.anchorId) else nil
+	UseRefResult1.current = AnchorRef
+	local IsYAbove = false
 	
-	if var10 ~= nil then
-		local absoluteSize = var10.AbsoluteSize
-		var11 = absoluteSize.X > 0 and absoluteSize.Y > 0
+	if AnchorRef ~= nil then
+		local AbsoluteSize = AnchorRef.AbsoluteSize
+		IsYAbove = AbsoluteSize.X > 0 and AbsoluteSize.Y > 0
 	end
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), currentEntry (ref), var4 (ref), whatsNewTelemetryModule (copy), var1 (ref)
-		if not var3 or currentEntry == nil then
-			var4.current = nil
+	ReactModule.useEffect(function() --[[ Line: 62 ]]
+		-- upvalues: HasGlobalStepIndex (copy), CurrentEntry (copy), UseRefResult (copy), WhatsNewTelemetryModule (upval), WhatsNewStoreModule (copy)
+		if not HasGlobalStepIndex or CurrentEntry == nil then
+			UseRefResult.current = nil
 			
 			return
-		elseif var4.current == currentEntry.id then
+		end
+		if UseRefResult.current ~= CurrentEntry.id then
+			UseRefResult.current = CurrentEntry.id
+			WhatsNewTelemetryModule.logTourtipInteraction(WhatsNewTelemetryModule.InteractionType.IMPRESSION, CurrentEntry.id, nil, WhatsNewStoreModule.getRuntimeState())
+			
 			return
 		end
-		var4.current = currentEntry.id
-		whatsNewTelemetryModule.logTourtipInteraction(whatsNewTelemetryModule.InteractionType.IMPRESSION, currentEntry.id, nil, var1.getRuntimeState())
-	end, { var3, currentEntry, var1 })
-	local var12 = reactModule.useCallback(function()
-		-- upvalues: currentEntry (ref), var1 (ref)
-		if currentEntry == nil then
+	end, { HasGlobalStepIndex, CurrentEntry, WhatsNewStoreModule })
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 79 ]]
+		-- upvalues: CurrentEntry (copy), WhatsNewStoreModule (copy)
+		if CurrentEntry ~= nil then
+			WhatsNewStoreModule.next()
+			
 			return
 		end
-		var1.next()
-	end, { var1, currentEntry })
-	local var13 = reactModule.useCallback(function()
-		-- upvalues: currentEntry (ref), var1 (ref)
-		if currentEntry == nil then
+	end, { WhatsNewStoreModule, CurrentEntry })
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 86 ]]
+		-- upvalues: CurrentEntry (copy), WhatsNewStoreModule (copy)
+		if CurrentEntry ~= nil then
+			WhatsNewStoreModule.back()
+			
 			return
 		end
-		var1.back()
-	end, { var1, currentEntry })
-	local var14 = reactModule.useCallback(function()
-		-- upvalues: currentEntry (ref), var1 (ref)
-		if currentEntry == nil then
+	end, { WhatsNewStoreModule, CurrentEntry })
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 93 ]]
+		-- upvalues: CurrentEntry (copy), WhatsNewStoreModule (copy)
+		if CurrentEntry ~= nil then
+			WhatsNewStoreModule.completeTour({ earlyDismiss = true })
+			
 			return
 		end
-		var1.completeTour({ earlyDismiss = true })
-	end, { var1, currentEntry })
+	end, { WhatsNewStoreModule, CurrentEntry })
 	
-	if not var3 or currentEntry == nil or globalStepIndex == nil then
-		return nil
-	elseif var10 == nil or not var11 then
+	if not HasGlobalStepIndex or CurrentEntry == nil or GlobalStepIndex == nil then
 		return nil
 	end
-	local var15 = globalTotalSteps > 1
-	local t = {}
-	local t_1 = nil
+	if AnchorRef == nil or not IsYAbove then
+		return nil
+	end
+	local IsGlobalTotalStepsAbove = GlobalTotalSteps > 1
+	local List = {}
+	local Steps = nil
 	
-	if var15 then
-		table.insert(t, {
+	if IsGlobalTotalStepsAbove then
+		table.insert(List, {
 			testId = "whats-new-tourtip--action-1",
-			isDisabled = var8,
-			text = var6.back,
-			variant = buttonVariant.Standard,
-			onActivated = var13
+			isDisabled = IsGlobalStepIndexMatch,
+			text = UseLocalizationResult.back,
+			variant = ButtonVariant.Standard,
+			onActivated = UseResult1
 		})
-		table.insert(t, {
+		table.insert(List, {
 			testId = "whats-new-tourtip--action-2",
-			text = if var9 then var6.done else var6.next,
-			variant = buttonVariant.Emphasis,
-			onActivated = var12
+			text = if IsNewGlobalStepIndexAbove then UseLocalizationResult.done else UseLocalizationResult.next,
+			variant = ButtonVariant.Emphasis,
+			onActivated = UseResult
 		})
-		t_1 = { current = var7, total = globalTotalSteps }
+		Steps = { current = NewGlobalStepIndex, total = GlobalTotalSteps }
 	end
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "size-full",
 		BackgroundTransparency = 1,
 		Active = false
 	}, {
-		[`{currentEntry.id}-{var10:GetFullName()}`] = reactModule.createElement(educationalTooltip, {
+		[`{CurrentEntry.id}-{AnchorRef:GetFullName()}`] = ReactModule.createElement(EducationalTooltip, {
 			isOpen = true,
 			testId = "whats-new-tourtip",
-			anchorRef = var5,
-			title = currentEntry.title,
-			text = currentEntry.text,
-			side = currentEntry.side or popoverSide.Bottom,
-			align = currentEntry.align or popoverAlign.Center,
-			hasActions = var15,
-			showSteps = var15,
-			steps = t_1,
-			onClose = var14,
-			actions = t
+			anchorRef = UseRefResult1,
+			title = CurrentEntry.title,
+			text = CurrentEntry.text,
+			side = CurrentEntry.side or PopoverSide.Bottom,
+			align = CurrentEntry.align or PopoverAlign.Center,
+			hasActions = IsGlobalTotalStepsAbove,
+			showSteps = IsGlobalTotalStepsAbove,
+			steps = Steps,
+			onClose = UseResult2,
+			actions = List
 		})
 	})
 end)

@@ -1,48 +1,48 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local signalsModule = require(parent.Signals)
-local fFlagEnableArgus = require(parent.SharedFlags).FFlagEnableArgus
-local getFFlagMomentsFeedStartExpandedModule = require(moments.Flags.GetFFlagMomentsFeedStartExpanded)
-local createSignal = signalsModule.createSignal
-local createComputed = signalsModule.createComputed
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local SignalsModule = require(Parent.Signals)
+local FFlagEnableArgus = require(Parent.SharedFlags).FFlagEnableArgus
+local GetFFlagMomentsFeedStartExpandedModule = require(Moments.Flags.GetFFlagMomentsFeedStartExpanded)
+local CreateSignalFunction = SignalsModule.createSignal
+local CreateComputedFunction = SignalsModule.createComputed
 
-return function()
-	-- upvalues: createSignal (ref), getFFlagMomentsFeedStartExpandedModule (ref), createComputed (ref), fFlagEnableArgus (ref)
-	local var1, var2 = createSignal(not getFFlagMomentsFeedStartExpandedModule())
-	local var3, var4 = createSignal(false)
-	local var5, var6 = createSignal(false)
-	local var7, var8 = createSignal(false)
+return function() --[[ Line: 50 | Named "createMomentsPreferencesStore" ]]
+	-- upvalues: CreateSignalFunction (copy), GetFFlagMomentsFeedStartExpandedModule (copy), CreateComputedFunction (copy), FFlagEnableArgus (copy)
+	local Signal, Signal2 = CreateSignalFunction(not GetFFlagMomentsFeedStartExpandedModule())
+	local Signal1, Signal2_1 = CreateSignalFunction(false)
+	local Signal3, Signal2_2 = CreateSignalFunction(false)
+	local Signal4, Signal2_3 = CreateSignalFunction(false)
 	
 	return {
-		getMinimized = var1,
-		getMediaScaleType = createComputed(function(p1)
-			-- upvalues: var1 (ref)
-			return if var1(p1) then Enum.ScaleType.Fit else Enum.ScaleType.Crop
+		getMinimized = Signal,
+		getMediaScaleType = CreateComputedFunction(function(p1) --[[ Line: 61 ]]
+			-- upvalues: Signal (copy)
+			return if Signal(p1) then Enum.ScaleType.Fit else Enum.ScaleType.Crop
 		end),
-		toggleFeedScaleType = function()
-			-- upvalues: fFlagEnableArgus (copy), var2 (ref), var1 (ref)
-			if fFlagEnableArgus then
-				var2(not var1(false))
+		toggleFeedScaleType = function() --[[ Line: 69 ]]
+			-- upvalues: FFlagEnableArgus (upval), Signal2 (copy), Signal (copy)
+			if FFlagEnableArgus then
+				Signal2(not Signal(false))
 			end
 		end,
-		getFeedGlobalMute = var3,
-		toggleFeedGlobalMute = function()
-			-- upvalues: fFlagEnableArgus (copy), var4 (ref), var3 (ref)
-			if fFlagEnableArgus then
-				var4(not var3(false))
+		getFeedGlobalMute = Signal1,
+		toggleFeedGlobalMute = function() --[[ Line: 75 ]]
+			-- upvalues: FFlagEnableArgus (upval), Signal2_1 (copy), Signal1 (copy)
+			if FFlagEnableArgus then
+				Signal2_1(not Signal1(false))
 			end
 		end,
-		getDebugModeEnabled = var5,
-		toggleFeedDebugMode = function()
-			-- upvalues: fFlagEnableArgus (copy), var6 (ref), var5 (ref)
-			if fFlagEnableArgus then
-				var6(not var5(false))
+		getDebugModeEnabled = Signal3,
+		toggleFeedDebugMode = function() --[[ Line: 81 ]]
+			-- upvalues: FFlagEnableArgus (upval), Signal2_2 (copy), Signal3 (copy)
+			if FFlagEnableArgus then
+				Signal2_2(not Signal3(false))
 			end
 		end,
-		getIsTeleporting = var7,
-		setTeleporting = function(value)
-			-- upvalues: var8 (ref)
-			var8(value)
+		getIsTeleporting = Signal4,
+		setTeleporting = function(p1) --[[ Line: 65 ]]
+			-- upvalues: Signal2_3 (copy)
+			Signal2_3(p1)
 		end
 	}
 end

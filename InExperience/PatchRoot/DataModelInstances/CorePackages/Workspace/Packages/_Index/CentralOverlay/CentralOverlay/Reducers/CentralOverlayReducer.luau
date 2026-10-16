@@ -1,10 +1,10 @@
-﻿local setCentralOverlayModule = require(script:FindFirstAncestor("CentralOverlay").Actions.SetCentralOverlay)
+﻿local SetCentralOverlayModule = require(script:FindFirstAncestor("CentralOverlay").Actions.SetCentralOverlay)
 
-return function(p1, p2)
-	-- upvalues: setCentralOverlayModule (ref)
-	return if p2.type == setCentralOverlayModule.name then {
+return function(p1, p2) --[[ Line: 4 ]]
+	-- upvalues: SetCentralOverlayModule (copy)
+	return if p2.type == SetCentralOverlayModule.name then {
 		OverlayType = p2.overlayType,
-		Arguments = if p2.arguments then p2.arguments else {},
-		Configs = if p2.configs then p2.configs else {}
+		Arguments = p2.arguments and p2.arguments or {},
+		Configs = p2.configs and p2.configs or {}
 	} else p1 or { OverlayType = nil, Arguments = {}, Configs = {} }
 end

@@ -1,13 +1,13 @@
-﻿local parent = script:FindFirstAncestor("AuthSignup").Parent
-local birthday = require(parent.AuthCommon).Models.Birthday
-local dateHelper = require(parent.Time).DateHelper
+﻿local Parent = script:FindFirstAncestor("AuthSignup").Parent
+local Birthday = require(Parent.AuthCommon).Models.Birthday
+local DateHelper = require(Parent.Time).DateHelper
 
-return function(p1, p2, p3, p4)
-	-- upvalues: dateHelper (ref), birthday (ref)
-	local var1, _ = dateHelper:isValidDate(p1, p2, p3)
+return function(Month, Day, Year, p1): boolean --[[ Line: 8 ]]
+	-- upvalues: DateHelper (copy), Birthday (copy)
+	local IsValidDate, _ = DateHelper:isValidDate(Month, Day, Year)
 	
-	if birthday.new({ Month = p1, Day = p2, Year = p3 }):GetAgeInYears() < p4 then
-		var1 = false
+	if Birthday.new({ Month = Month, Day = Day, Year = Year }):GetAgeInYears() < p1 then
+		IsValidDate = false
 	end
-	return var1
+	return IsValidDate
 end

@@ -1,32 +1,36 @@
-﻿local virtualEvents = script:FindFirstAncestor("VirtualEvents")
-local reactModule = require(virtualEvents.Parent.React)
-local foundationModule = require(virtualEvents.Parent.Foundation)
-local _ = require(virtualEvents.Parent.GraphQLServer)
-local text = require(virtualEvents.Parent.AppCommonLib).Text
-local useLocalization = require(virtualEvents.Parent.Localization).Hooks.useLocalization
-local formatDateModule = require(virtualEvents.Common.formatDate)
-local getVirtualEventDatesModule = require(virtualEvents.Common.getVirtualEventDates)
-local getEventCategoryModule = require(virtualEvents.Common.getEventCategory)
-local attendanceChipModule = require(virtualEvents.Components.AttendanceChip)
-local descriptionExpanderModule = require(virtualEvents.Components.DescriptionExpander)
-local _ = require(virtualEvents.Parent.VirtualEventsState)
-local useTokens = foundationModule.Hooks.useTokens
-local text_1 = foundationModule.Text
-local icon = foundationModule.Icon
-local iconSize = foundationModule.Enums.IconSize
+﻿local VirtualEvents = script:FindFirstAncestor("VirtualEvents")
+local ReactModule = require(VirtualEvents.Parent.React)
+local FoundationModule = require(VirtualEvents.Parent.Foundation)
+local _ = require(VirtualEvents.Parent.GraphQLServer)
+local Text = require(VirtualEvents.Parent.AppCommonLib).Text
+local UseLocalizationFunction = require(VirtualEvents.Parent.Localization).Hooks.useLocalization
+local FormatDateModule = require(VirtualEvents.Common.formatDate)
+local GetVirtualEventDatesModule = require(VirtualEvents.Common.getVirtualEventDates)
+local GetEventCategoryModule = require(VirtualEvents.Common.getEventCategory)
+local AttendanceChipModule = require(VirtualEvents.Components.AttendanceChip)
+local DescriptionExpanderModule = require(VirtualEvents.Components.DescriptionExpander)
+local _ = require(VirtualEvents.Parent.VirtualEventsState)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local Text1 = FoundationModule.Text
+local Icon = FoundationModule.Icon
+local IconSize = FoundationModule.Enums.IconSize
 
-return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), text (ref), getEventCategoryModule (ref), getVirtualEventDatesModule (ref), useLocalization (ref), attendanceChipModule (ref), text_1 (ref), descriptionExpanderModule (ref), icon (ref), iconSize (ref), formatDateModule (ref)
-	local var1 = useTokens()
-	local var2 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), text (copy)
-		return if p1.virtualEvent.description == nil then nil else text.Trim(p1.virtualEvent.description)
+return function(p1) --[[ Line: 36 | Named "EventDetailsBody" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), Text (copy), GetEventCategoryModule (copy), GetVirtualEventDatesModule (copy), UseLocalizationFunction (copy), AttendanceChipModule (copy), Text1 (copy), DescriptionExpanderModule (copy), Icon (copy), IconSize (copy), FormatDateModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 39 ]]
+		-- upvalues: p1 (copy), Text (upval)
+		return if p1.virtualEvent.description == nil then nil else Text.Trim(p1.virtualEvent.description)
 	end, { p1.virtualEvent.description })
-	local var3 = reactModule.useMemo(function()
-		-- upvalues: getEventCategoryModule (copy), p1 (ref)
-		return getEventCategoryModule(p1.virtualEvent)
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 46 ]]
+		-- upvalues: GetEventCategoryModule (upval), p1 (copy)
+		return GetEventCategoryModule(p1.virtualEvent)
 	end, { p1.virtualEvent })
-	local var4 = useLocalization({
+	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 50 ]]
+		-- upvalues: GetVirtualEventDatesModule (upval), p1 (copy)
+		return GetVirtualEventDatesModule(p1.virtualEvent)
+	end, { p1.virtualEvent })
+	local UseLocalizationResult = UseLocalizationFunction({
 		interested = "Feature.VirtualEvents.AttendanceBeforeEvent",
 		newContent = "Feature.VirtualEvents.Label.NewContent",
 		itemDrop = "Feature.VirtualEvents.Label.ItemDrop",
@@ -42,27 +46,27 @@ return function(p1)
 		festival = "Feature.VirtualEvents.Label.Festival"
 	})
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		AutomaticSize = Enum.AutomaticSize.Y,
 		Size = UDim2.new(1, 0, 0, 0)
 	}, {
-		BodyContainer = reactModule.createElement("Frame", {
+		BodyContainer = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			ZIndex = 1,
 			Size = UDim2.fromScale(1, 1)
 		}, {
-			Layout = reactModule.createElement("UIListLayout", {
+			Layout = ReactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Vertical,
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				Padding = UDim.new(0, 8)
 			}),
-			EventAttendace = reactModule.createElement(attendanceChipModule, {
+			EventAttendace = ReactModule.createElement(AttendanceChipModule, {
 				LayoutOrder = 1,
 				virtualEvent = p1.virtualEvent,
 				eventStatus = p1.eventStatus
 			}),
-			EventTitle = reactModule.createElement(text_1, {
+			EventTitle = ReactModule.createElement(Text1, {
 				LayoutOrder = 2,
 				RichText = true,
 				TextWrapped = false,
@@ -70,72 +74,69 @@ return function(p1)
 				Text = p1.virtualEvent.title,
 				TextTruncate = Enum.TextTruncate.None,
 				AutomaticSize = Enum.AutomaticSize.Y,
-				textStyle = var1.Color.Content.Emphasis,
-				fontStyle = var1.Typography.TitleLarge,
+				textStyle = UseTokensResult.Color.Content.Emphasis,
+				fontStyle = UseTokensResult.Typography.TitleLarge,
 				TextXAlignment = Enum.TextXAlignment.Left
 			}),
-			Description = if var2 and var2 ~= "" then reactModule.createElement(descriptionExpanderModule, {
+			Description = if UseMemoResult and UseMemoResult ~= "" then ReactModule.createElement(DescriptionExpanderModule, {
 				layoutOrder = 3,
-				description = var2,
+				description = UseMemoResult,
 				width = p1.containerSize.X - 32 - 16,
 				maxHeight = p1.containerSize.Y * 0.3,
 				isExpanded = p1.isExpanded,
 				setIsExpanded = p1.setIsExpanded
 			}) else nil,
-			EventCategory = if var3 and var4[var3] then reactModule.createElement("Frame", {
+			EventCategory = if UseMemoResult1 and UseLocalizationResult[UseMemoResult1] then ReactModule.createElement("Frame", {
 				LayoutOrder = 4,
 				BackgroundTransparency = 1,
 				AutomaticSize = Enum.AutomaticSize.Y
 			}, {
-				Layout = reactModule.createElement("UIListLayout", {
+				Layout = ReactModule.createElement("UIListLayout", {
 					SortOrder = Enum.SortOrder.LayoutOrder,
 					FillDirection = Enum.FillDirection.Horizontal,
 					VerticalAlignment = Enum.VerticalAlignment.Center,
 					Padding = UDim.new(0, 6)
 				}),
-				Icon = reactModule.createElement(icon, {
+				Icon = ReactModule.createElement(Icon, {
 					LayoutOrder = 1,
 					name = "icons/common/poi_small",
-					size = iconSize.Small,
-					style = var1.Color.Content.Emphasis
+					size = IconSize.Small,
+					style = UseTokensResult.Color.Content.Emphasis
 				}),
-				Label = reactModule.createElement(text_1, {
+				Label = ReactModule.createElement(Text1, {
 					LayoutOrder = 2,
 					TextWrapped = false,
-					Text = var4[var3],
+					Text = UseLocalizationResult[UseMemoResult1],
 					TextTruncate = Enum.TextTruncate.None,
-					textStyle = var1.Color.Content.Emphasis,
-					fontStyle = var1.Typography.BodyLarge,
+					textStyle = UseTokensResult.Color.Content.Emphasis,
+					fontStyle = UseTokensResult.Typography.BodyLarge,
 					TextXAlignment = Enum.TextXAlignment.Left
 				})
 			}) else nil,
-			EventTime = if p1.eventStatus == "Upcoming" then reactModule.createElement("Frame", {
+			EventTime = if p1.eventStatus == "Upcoming" then ReactModule.createElement("Frame", {
 				LayoutOrder = 5,
 				BackgroundTransparency = 1,
 				AutomaticSize = Enum.AutomaticSize.Y
 			}, {
-				Layout = reactModule.createElement("UIListLayout", {
+				Layout = ReactModule.createElement("UIListLayout", {
 					SortOrder = Enum.SortOrder.LayoutOrder,
 					FillDirection = Enum.FillDirection.Horizontal,
 					VerticalAlignment = Enum.VerticalAlignment.Center,
 					Padding = UDim.new(0, 6)
 				}),
-				Icon = reactModule.createElement(icon, {
+				Icon = ReactModule.createElement(Icon, {
 					LayoutOrder = 1,
 					name = "icons/actions/calendar_small",
-					size = iconSize.Small,
-					style = var1.Color.Content.Emphasis
+					size = IconSize.Small,
+					style = UseTokensResult.Color.Content.Emphasis
 				}),
-				Label = reactModule.createElement(text_1, {
+				Label = ReactModule.createElement(Text1, {
 					LayoutOrder = 2,
 					TextWrapped = false,
-					Text = formatDateModule(reactModule.useMemo(function()
-						-- upvalues: getVirtualEventDatesModule (copy), p1 (ref)
-						return getVirtualEventDatesModule(p1.virtualEvent)
-					end, { p1.virtualEvent }).startDate, true),
+					Text = FormatDateModule(UseMemoResult2.startDate, true),
 					TextTruncate = Enum.TextTruncate.None,
-					textStyle = var1.Color.Content.Emphasis,
-					fontStyle = var1.Typography.BodyLarge,
+					textStyle = UseTokensResult.Color.Content.Emphasis,
+					fontStyle = UseTokensResult.Typography.BodyLarge,
 					TextXAlignment = Enum.TextXAlignment.Left
 				})
 			}) else nil

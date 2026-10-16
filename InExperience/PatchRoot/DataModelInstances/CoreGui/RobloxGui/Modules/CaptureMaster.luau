@@ -1,50 +1,51 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local roactModule = require(game:GetService("CorePackages").Packages.Roact)
-local robloxGui = coreGuiService:WaitForChild("RobloxGui")
-local captureNotificationModule = require(robloxGui.Modules.CaptureNotification)
-local shouldSaveScreenshotToAlbumModule = require(robloxGui.Modules.shouldSaveScreenshotToAlbum)
-local t = {}
-t.__index = t
+﻿local CoreGui = game:GetService("CoreGui")
+local RoactModule = require(game:GetService("CorePackages").Packages.Roact)
+local RobloxGui = CoreGui:WaitForChild("RobloxGui")
+local CaptureNotificationModule = require(RobloxGui.Modules.CaptureNotification)
+local ShouldSaveScreenshotToAlbumModule = require(RobloxGui.Modules.shouldSaveScreenshotToAlbum)
+local Module = {}
+Module.__index = Module
 
-function t.new()
-	-- upvalues: t (ref), shouldSaveScreenshotToAlbumModule (ref), roactModule (ref), captureNotificationModule (ref)
-	local t_1 = {}
-	setmetatable(t_1, t)
-	t_1.init = false
-	t_1.captureEvent = Instance.new("BindableEvent")
-	t_1.permissionEvent = Instance.new("BindableEvent")
+function Module.new() --[[ Line: 21 ]]
+	-- upvalues: Module (copy), ShouldSaveScreenshotToAlbumModule (copy), RoactModule (copy), CaptureNotificationModule (copy)
+	local t = {}
+	setmetatable(t, Module)
+	t.init = false
+	t.captureEvent = Instance.new("BindableEvent")
+	t.permissionEvent = Instance.new("BindableEvent")
 	
-	if shouldSaveScreenshotToAlbumModule() then
-		t_1.captureNotification = roactModule.createElement(captureNotificationModule, { permissionEvent = t_1.permissionEvent })
+	if ShouldSaveScreenshotToAlbumModule() then
+		t.captureNotification = RoactModule.createElement(CaptureNotificationModule, { permissionEvent = t.permissionEvent })
 	end
-	return t_1
+	return t
 end
 
-function t:Start()
-	-- upvalues: shouldSaveScreenshotToAlbumModule (ref), roactModule (ref), coreGuiService (ref)
+function Module:Start() --[[ Line: 36 ]]
+	-- upvalues: ShouldSaveScreenshotToAlbumModule (copy), RoactModule (copy), CoreGui (copy)
 	if self.init then return end
 	self.init = true
 	
-	if shouldSaveScreenshotToAlbumModule() then
-		self.captureNotificationInstance = roactModule.mount(self.captureNotification, coreGuiService, "RobloxCaptureNotificationGui")
+	if ShouldSaveScreenshotToAlbumModule() then
+		self.captureNotificationInstance = RoactModule.mount(self.captureNotification, CoreGui, "RobloxCaptureNotificationGui")
 	end
 end
 
-local var1 = t.new()
+local NewModule = Module.new()
 
-function t:DismissNotification()
-	-- upvalues: var1 (ref), shouldSaveScreenshotToAlbumModule (ref), roactModule (ref), captureNotificationModule (ref)
+function Module:DismissNotification() --[[ Line: 50 ]]
+	-- upvalues: NewModule (copy), ShouldSaveScreenshotToAlbumModule (copy), RoactModule (copy), CaptureNotificationModule (copy)
 	if not self.init then
-		var1:Start()
+		NewModule:Start()
 		
 		return
-	elseif shouldSaveScreenshotToAlbumModule() then
-		roactModule.update(self.captureNotificationInstance, roactModule.createElement(captureNotificationModule, {
+	end
+	if ShouldSaveScreenshotToAlbumModule() then
+		RoactModule.update(self.captureNotificationInstance, RoactModule.createElement(CaptureNotificationModule, {
 			permissionEvent = self.permissionEvent,
 			forceDismissToast = {
-				onDismissed = function()
-					-- upvalues: roactModule (copy), self (ref), captureNotificationModule (copy)
-					roactModule.update(self.captureNotificationInstance, roactModule.createElement(captureNotificationModule, {
+				onDismissed = function() --[[ Line: 59 ]]
+					-- upvalues: RoactModule (upval), self (copy), CaptureNotificationModule (upval)
+					RoactModule.update(self.captureNotificationInstance, RoactModule.createElement(CaptureNotificationModule, {
 						forceDismissToast = nil,
 						permissionEvent = self.permissionEvent
 					}))
@@ -54,17 +55,17 @@ function t:DismissNotification()
 	end
 end
 
-function t:ShowPermissionToast()
-	-- upvalues: var1 (ref)
+function Module:ShowPermissionToast() --[[ Line: 74 ]]
+	-- upvalues: NewModule (copy)
 	if not self.init then
-		var1:Start()
+		NewModule:Start()
 	end
 	self.permissionEvent:Fire()
 end
 
-function t:Capture()
+function Module:Capture() --[[ Line: 81 ]]
 	self:DismissNotification()
 	self.captureEvent:Fire()
 end
 
-return var1
+return NewModule

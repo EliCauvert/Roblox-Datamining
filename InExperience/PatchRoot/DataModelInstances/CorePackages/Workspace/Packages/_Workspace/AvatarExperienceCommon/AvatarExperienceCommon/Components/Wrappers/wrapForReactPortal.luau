@@ -1,15 +1,15 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
-local reactModule = require(parent.React)
-local reactRobloxModule = require(parent.ReactRoblox)
-local foundationModule = require(parent.Foundation)
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
+local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.ReactRoblox)
+local FoundationModule = require(Parent.Foundation)
 
-local var1 = function(p1, p2)
-	-- upvalues: reactModule (ref), foundationModule (ref)
-	return reactModule.createElement(foundationModule.View, {
+local function v4(p1, Ref) --[[ Line: 8 ]]
+	-- upvalues: ReactModule (copy), FoundationModule (copy)
+	return ReactModule.createElement(FoundationModule.View, {
 		BackgroundTransparency = 1,
 		ZIndex = 5,
 		Size = UDim2.new(1, 0, 1, 0),
-		ref = p2,
+		ref = Ref,
 		selectionGroup = {
 			SelectionBehaviorUp = Enum.SelectionBehavior.Stop,
 			SelectionBehaviorDown = Enum.SelectionBehavior.Stop,
@@ -19,7 +19,7 @@ local var1 = function(p1, p2)
 	}, p1)
 end
 
-return function(p1, p2, p3)
-	-- upvalues: reactRobloxModule (ref), var1 (ref)
-	return reactRobloxModule.createPortal(var1(p1, p3), p2)
+return function(p1, p2, Ref) --[[ Line: 23 | Named "wrapForReactPortal" ]]
+	-- upvalues: ReactRobloxModule (copy), v4 (copy)
+	return ReactRobloxModule.createPortal(v4(p1, Ref), p2)
 end

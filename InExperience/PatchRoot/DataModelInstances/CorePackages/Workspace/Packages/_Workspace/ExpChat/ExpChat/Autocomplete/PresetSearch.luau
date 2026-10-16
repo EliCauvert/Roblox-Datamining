@@ -1,111 +1,117 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local engineFeaturePresetChatUseExpressionTrayOptionsEndpoint = require(expChat.Parent.SharedFlags).EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint
-local _ = require(expChat.Stores.GetPresetChatStore.createPresetChatStore)
-local constantsModule = require(expChat.PresetChat.Constants)
-local t = { Substring = 0, WordStart = 1 }
-local var1 = nil
-local var2 = nil
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint = require(ExpChat.Parent.SharedFlags).EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint
+local _ = require(ExpChat.Stores.GetPresetChatStore.createPresetChatStore)
+local ConstantsModule = require(ExpChat.PresetChat.Constants)
+local SearchMode = { Substring = 0, WordStart = 1 }
+local CategoryGroups = nil
+local v1 = nil
 
-local function flatten(p1)
-	-- upvalues: engineFeaturePresetChatUseExpressionTrayOptionsEndpoint (ref)
-	local t = {}
-	local t_1 = {}
-	local t_2 = {}
+local function flatten(CategoryGroups) --[[ Line: 59 ]]
+	-- upvalues: EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint (copy)
+	local Values = {}
+	local LowerValues = {}
+	local PresetIdByValue = {}
 	
-	for i, v in p1 do
-		for i_1, v_1 in v.categories do
-			for i_2, v_2 in if engineFeaturePresetChatUseExpressionTrayOptionsEndpoint then v_1.contents else v_1.messages do
-				local var3 = if engineFeaturePresetChatUseExpressionTrayOptionsEndpoint then v_2.text else v_2.value
-				
-				if t_2[var3] == nil then
-					t_2[var3] = v_2.presetId
-					table.insert(t, var3)
-					table.insert(t_1, string.lower(var3))
+	for _, categoryGroup in CategoryGroups do
+		for _, category in categoryGroup.categories do
+			local Contents = if EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint then category.contents else category.messages
+			for _, content in Contents do
+				if not EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint or content.kind ~= "Emoji" then
+					local Text = if EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint then content.text else content.value
+					
+					if PresetIdByValue[Text] == nil then
+						PresetIdByValue[Text] = content.presetId
+						table.insert(Values, Text)
+						table.insert(LowerValues, string.lower(Text))
+					end
 				end
 			end
 		end
 	end
-	return { values = t, lowerValues = t_1, presetIdByValue = t_2 }
+	return {
+		values = Values,
+		lowerValues = LowerValues,
+		presetIdByValue = PresetIdByValue
+	}
 end
 
-local function getCatalog(p2)
-	-- upvalues: constantsModule (ref), var2 (write), var1 (write), flatten (ref)
-	if not p2.getIsEnabled(false) or p2.getAccessLevel(false) ~= constantsModule.AccessLevel.Enabled then
+local function getCatalog(p1) --[[ Line: 96 ]]
+	-- upvalues: ConstantsModule (copy), v1 (ref), CategoryGroups (ref), flatten (copy)
+	if not p1.getIsEnabled(false) or p1.getAccessLevel(false) ~= ConstantsModule.AccessLevel.Enabled then
 		return nil
 	end
-	local categoryGroups = p2.getCategoryGroups(false)
+	local CategoryGroups1 = p1.getCategoryGroups(false)
 	
-	if var2 == nil or var1 ~= categoryGroups then
-		var1 = categoryGroups
-		var2 = flatten(categoryGroups)
+	if v1 == nil or CategoryGroups ~= CategoryGroups1 then
+		CategoryGroups = CategoryGroups1
+		v1 = flatten(CategoryGroups1)
 	end
-	return var2
+	return v1
 end
 
-local function getRank(p2, p3)
-	local matchIndex = string.find(p2, p3, 1, true)
+local function getRank(Text: string, Pattern) --[[ Line: 110 ]]
+	local FoundAt: number? = string.find(Text, Pattern, 1, true)
 	
-	return if matchIndex == nil then nil elseif matchIndex == 1 then 1 elseif string.match(string.sub(p2, matchIndex - 1, matchIndex - 1), "%w") == nil then 2 else 3
+	return if FoundAt == nil then nil elseif FoundAt == 1 then 1 elseif string.match(string.sub(Text, FoundAt - 1, FoundAt - 1), "%w") == nil then 2 else 3
 end
 
-local function getWordStartRank(p2, p3)
-	local matchIndex = string.find(p2, p3, 1, true)
-	while matchIndex ~= nil do
-		if matchIndex ~= 1 then
-			if string.match(string.sub(p2, matchIndex - 1, matchIndex - 1), "%w") ~= nil then
-				matchIndex = string.find(p2, p3, matchIndex + 1, true)
-				continue
-			end
+local function getWordStartRank(Text: string, Pattern): number? --[[ Line: 131 ]]
+	local FoundAt: number? = string.find(Text, Pattern, 1, true)
+	while FoundAt ~= nil do
+		if FoundAt == 1 then
+			return 1
+		end
+		if string.match(string.sub(Text, FoundAt - 1, FoundAt - 1), "%w") == nil then
 			return 2
 		end
-		return 1
+		FoundAt = string.find(Text, Pattern, FoundAt + 1, true)
 	end
 	return nil
 end
 
 return {
 	MIN_QUERY_LENGTH = 2,
-	SearchMode = t,
-	findMatchingPresets = function(value, p4, p5)
-		-- upvalues: getCatalog (ref), t (ref), getWordStartRank (ref), getRank (ref)
-		if (utf8.len(p4) or #p4) < (if p5 and p5.minQueryLength then p5.minQueryLength else 2) then
+	SearchMode = SearchMode,
+	findMatchingPresets = function(p1, Text: string, p2) --[[ Line: 152 ]]
+		-- upvalues: getCatalog (copy), SearchMode (copy), getWordStartRank (copy), getRank (copy)
+		if (utf8.len(Text) or #Text) < (if p2 and p2.minQueryLength then p2.minQueryLength else 2) then
 			return {}
 		end
-		local presetCooldownEndsAt = value.getPresetCooldownEndsAt(false)
+		local PresetCooldownEndsAt = p1.getPresetCooldownEndsAt(false)
 		
-		if presetCooldownEndsAt ~= nil and os.clock() < presetCooldownEndsAt then
+		if PresetCooldownEndsAt ~= nil and os.clock() < PresetCooldownEndsAt then
 			return {}
 		end
-		local var4 = getCatalog(value)
+		local Catalog = getCatalog(p1)
 		
-		if var4 == nil then
+		if Catalog == nil then
 			return {}
 		end
-		local lowerText = string.lower(p4)
-		local var5 = if p5 and p5.mode == t.WordStart then getWordStartRank else getRank
-		local t_1 = {}
+		local Lowered = string.lower(Text)
+		local GetWordStartRank = if p2 and p2.mode == SearchMode.WordStart then getWordStartRank else getRank
+		local List = {}
 		
-		for i, v in var4.lowerValues do
-			local var6 = var5(v, lowerText)
+		for Index, lowerValue in Catalog.lowerValues do
+			local WordStartRank = GetWordStartRank(lowerValue, Lowered)
 			
-			if var6 ~= nil then
-				table.insert(t_1, { rank = var6, index = i })
+			if WordStartRank ~= nil then
+				table.insert(List, { rank = WordStartRank, index = Index })
 			end
 		end
-		table.sort(t_1, function(p6, p7)
-			return if p6.rank == p7.rank then p6.index < p7.index else p6.rank < p7.rank
+		table.sort(List, function(A, B): boolean --[[ Line: 189 ]]
+			return if A.rank == B.rank then A.index < B.index else A.rank < B.rank
 		end)
-		local list = table.create(#t_1)
+		local Buffer = table.create(#List)
 		
-		for i_1, v_1 in t_1 do
-			table.insert(list, var4.values[v_1.index])
+		for _, value in List do
+			table.insert(Buffer, Catalog.values[value.index])
 		end
-		return list
+		return Buffer
 	end,
-	getPresetIdForValue = function(value, p6)
-		-- upvalues: getCatalog (ref)
-		local var7 = getCatalog(value)
+	getPresetIdForValue = function(p3, p4) --[[ Line: 209 ]]
+		-- upvalues: getCatalog (copy)
+		local Catalog = getCatalog(p3)
 		
-		return if var7 == nil then nil else var7.presetIdByValue[p6]
+		return if Catalog == nil then nil else Catalog.presetIdByValue[p4]
 	end
 }

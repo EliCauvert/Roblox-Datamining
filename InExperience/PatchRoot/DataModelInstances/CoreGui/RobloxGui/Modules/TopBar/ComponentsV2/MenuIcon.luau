@@ -1,243 +1,282 @@
 ﻿local _ = game:GetService("ContextActionService")
-local coreGuiService = game:GetService("CoreGui")
-local corePackagesService = game:GetService("CorePackages")
-local gamepadService = game:GetService("GamepadService")
-local guiService = game:GetService("GuiService")
+local CoreGui = game:GetService("CoreGui")
+local CorePackages = game:GetService("CorePackages")
+local GamepadService = game:GetService("GamepadService")
+local GuiService = game:GetService("GuiService")
 local _ = game:GetService("VRService")
-local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local chrome = parent_1.Chrome
-local serviceModule = require(chrome.Service)
-local constantsModule = require(parent.Constants)
-local inGameMenuConstantsModule = require(parent_1.InGameMenuConstants)
-local constantsModule_1 = require(chrome.ChromeShared.Unibar.Constants)
-local focusUtils = require(corePackagesService.Workspace.Packages.Chrome).FocusUtils
-local displayModule = require(corePackagesService.Workspace.Packages.Display)
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local motionModule = require(corePackagesService.Packages.Motion)
-local reactModule = require(corePackagesService.Packages.React)
-local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
-local settingsShowSignal = require(corePackagesService.Workspace.Packages.CoreScriptsCommon).SettingsShowSignal
-local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
-local signalsModule = require(corePackagesService.Packages.Signals)
-local signalsReactModule = require(corePackagesService.Packages.SignalsReact)
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local isSpatial = require(corePackagesService.Workspace.Packages.AppCommonLib).isSpatial
-local fFlagShowUnibarOnVirtualCursor = sharedFlagsModule.FFlagShowUnibarOnVirtualCursor
-local isSideSheetEnabledModule = require(corePackagesService.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
-local fFlagSideSheetFocusNav = sharedFlagsModule.FFlagSideSheetFocusNav
-local fFlagEnablePlaytestModeUnibar = sharedFlagsModule.FFlagEnablePlaytestModeUnibar
-local view = foundationModule.View
-local icon = foundationModule.Icon
-local controlState = foundationModule.Enums.ControlState
-local useTokens = foundationModule.Hooks.useTokens
-local useCursor = foundationModule.Hooks.useCursor
-local useIsPlaytestModeModule = require(chrome.ChromeShared.Hooks.useIsPlaytestMode)
-local getSideSheetVisibility = require(corePackagesService.Workspace.Packages.InExperienceSideSheet).getSideSheetVisibility
-local menuIconHoveredSignalModule = require(parent.Components.Presentation.menuIconHoveredSignal)
-local badgeOver12Module = require(parent.Components.Presentation.BadgeOver12)
-local withTooltip = UIBloxModule.App.Dialog.TooltipV2.withTooltip
-local tooltipOrientation = UIBloxModule.App.Dialog.Enum.TooltipOrientation
-local tooltipCallout = UIBloxModule.App.Dialog.TooltipCallout
-local vrSpatialUiModule = require(corePackagesService.Workspace.Packages.VrSpatialUi)
-local UIManager = vrSpatialUiModule.UIManager
-local panel3DInSpatialUI = vrSpatialUiModule.Panel3DInSpatialUI
-local panelType = vrSpatialUiModule.Constants.PanelType
-local SPATIAL_TOOLTIP_SPACING = vrSpatialUiModule.Constants.SPATIAL_TOOLTIP_SPACING
+local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local Chrome = Parent1.Chrome
+local ServiceModule = require(Chrome.Service)
+local ConstantsModule = require(Parent.Constants)
+local InGameMenuConstantsModule = require(Parent1.InGameMenuConstants)
+local ConstantsModule1 = require(Chrome.ChromeShared.Unibar.Constants)
+local FocusUtils = require(CorePackages.Workspace.Packages.Chrome).FocusUtils
+local DisplayModule = require(CorePackages.Workspace.Packages.Display)
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local MotionModule = require(CorePackages.Packages.Motion)
+local ReactModule = require(CorePackages.Packages.React)
+local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
+local SettingsShowSignal = require(CorePackages.Workspace.Packages.CoreScriptsCommon).SettingsShowSignal
+local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
+local SignalsModule = require(CorePackages.Packages.Signals)
+local SignalsReactModule = require(CorePackages.Packages.SignalsReact)
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
+local IsSpatialFunction = require(CorePackages.Workspace.Packages.AppCommonLib).isSpatial
+local FFlagShowUnibarOnVirtualCursor = SharedFlagsModule.FFlagShowUnibarOnVirtualCursor
+local IsSideSheetEnabledModule = require(CorePackages.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
+local FFlagSideSheetFocusNav = SharedFlagsModule.FFlagSideSheetFocusNav
+local FFlagEnablePlaytestModeUnibar = SharedFlagsModule.FFlagEnablePlaytestModeUnibar
+local View = FoundationModule.View
+local Icon = FoundationModule.Icon
+local ControlState = FoundationModule.Enums.ControlState
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseCursorFunction = FoundationModule.Hooks.useCursor
+local UseIsPlaytestModeModule = require(Chrome.ChromeShared.Hooks.useIsPlaytestMode)
+local GetSideSheetVisibilityFunction = require(CorePackages.Workspace.Packages.InExperienceSideSheet).getSideSheetVisibility
+local MenuIconHoveredSignalModule = require(Parent.Components.Presentation.menuIconHoveredSignal)
+local BadgeOver12Module = require(Parent.Components.Presentation.BadgeOver12)
+local WithTooltipFunction = UIBloxModule.App.Dialog.TooltipV2.withTooltip
+local TooltipOrientation = UIBloxModule.App.Dialog.Enum.TooltipOrientation
+local TooltipCallout = UIBloxModule.App.Dialog.TooltipCallout
+local VrSpatialUiModule = require(CorePackages.Workspace.Packages.VrSpatialUi)
+local UIManager = VrSpatialUiModule.UIManager
+local Panel3DInSpatialUI = VrSpatialUiModule.Panel3DInSpatialUI
+local PanelType = VrSpatialUiModule.Constants.PanelType
+local SPATIALTOOLTIPSPACING = VrSpatialUiModule.Constants.SPATIAL_TOOLTIP_SPACING
 
-local _ = function()
-	-- upvalues: isSpatial (ref), serviceModule (ref), UIManager (ref)
-	return if isSpatial() then not serviceModule:showTopBar() and not UIManager.getInstance():isBottomBarInteractionOnAnimationSupported() else false
+local function _(): boolean --[[ Line: 62 ]]
+	-- upvalues: IsSpatialFunction (copy), ServiceModule (copy), UIManager (copy)
+	if IsSpatialFunction() then
+		local IsBottomBarInteractionOnAnimationSupported = UIManager.getInstance():isBottomBarInteractionOnAnimationSupported()
+		
+		return not ServiceModule:showTopBar() and not IsBottomBarInteractionOnAnimationSupported
+	else
+		return false
+	end
 end
 
-local var1 = if fFlagEnablePlaytestModeUnibar then foundationModule.Utility.getTokens(foundationModule.Enums.ColorMode.Light) else nil
-local list = { Enum.KeyCode.Escape }
+local Tokens = if FFlagEnablePlaytestModeUnibar then FoundationModule.Utility.getTokens(FoundationModule.Enums.ColorMode.Light) else nil
+local HotkeyCodes = { Enum.KeyCode.Escape }
 
-return function(p1)
-	-- upvalues: useTokens (ref), fFlagEnablePlaytestModeUnibar (ref), useIsPlaytestModeModule (ref), var1 (ref), isSideSheetEnabledModule (ref), signalsReactModule (ref), displayModule (ref), constantsModule (ref), reactModule (ref), motionModule (ref), guiService (ref), serviceModule (ref), constantsModule_1 (ref), useCursor (ref), foundationModule (ref), list (ref), coreGuiService (ref), tooltipOrientation (ref), robloxTranslatorModule (ref), settingsShowSignal (ref), signalsModule (ref), getSideSheetVisibility (ref), focusUtils (ref), controlState (ref), isSpatial (ref), UIManager (ref), menuIconHoveredSignalModule (ref), fFlagShowUnibarOnVirtualCursor (ref), gamepadService (ref), parent_1 (ref), inGameMenuConstantsModule (ref), tooltipCallout (ref), SPATIAL_TOOLTIP_SPACING (ref), panel3DInSpatialUI (ref), panelType (ref), withTooltip (ref), view (ref), fFlagSideSheetFocusNav (ref), badgeOver12Module (ref), icon (ref)
-	local var2 = useTokens()
-	local var3 = if fFlagEnablePlaytestModeUnibar then useIsPlaytestModeModule() else nil
-	local var4 = if fFlagEnablePlaytestModeUnibar and var3 then var1.Color.Content.Emphasis elseif isSideSheetEnabledModule then var2.Color.ActionEmphasis.Foreground else nil
-	local var5 = if fFlagEnablePlaytestModeUnibar and var3 then var1.Color.OverMedia.OverMedia_0 else var2.Color.OverMedia.OverMedia_0
-	local var6 = signalsReactModule.useSignalState(function(p2)
-		-- upvalues: displayModule (copy)
-		return displayModule.GetDisplayStore(p2).getUIScale(p2)
+return function(p1) --[[ Line: 95 | Named "MenuIcon" ]]
+	-- upvalues: UseTokensFunction (copy), FFlagEnablePlaytestModeUnibar (copy), UseIsPlaytestModeModule (copy), Tokens (copy), IsSideSheetEnabledModule (copy), SignalsReactModule (copy), DisplayModule (copy), ConstantsModule (copy), ReactModule (copy), MotionModule (copy), GuiService (copy), ServiceModule (copy), ConstantsModule1 (copy), UseCursorFunction (copy), FoundationModule (copy), HotkeyCodes (copy), CoreGui (copy), TooltipOrientation (copy), RobloxTranslatorModule (copy), SettingsShowSignal (copy), SignalsModule (copy), GetSideSheetVisibilityFunction (copy), FocusUtils (copy), ControlState (copy), IsSpatialFunction (copy), UIManager (copy), MenuIconHoveredSignalModule (copy), FFlagShowUnibarOnVirtualCursor (copy), GamepadService (copy), Parent1 (copy), InGameMenuConstantsModule (copy), TooltipCallout (copy), SPATIALTOOLTIPSPACING (copy), Panel3DInSpatialUI (copy), PanelType (copy), WithTooltipFunction (copy), View (copy), FFlagSideSheetFocusNav (copy), BadgeOver12Module (copy), Icon (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseIsPlaytestModeModuleResult = if FFlagEnablePlaytestModeUnibar then UseIsPlaytestModeModule() else nil
+	local Emphasis = if FFlagEnablePlaytestModeUnibar and UseIsPlaytestModeModuleResult then Tokens.Color.Content.Emphasis elseif IsSideSheetEnabledModule then UseTokensResult.Color.ActionEmphasis.Foreground else nil
+	local OverMedia0 = if FFlagEnablePlaytestModeUnibar and UseIsPlaytestModeModuleResult then Tokens.Color.OverMedia.OverMedia_0 else UseTokensResult.Color.OverMedia.OverMedia_0
+	local UseSignalStateResult = SignalsReactModule.useSignalState(function(p2) --[[ Line: 112 ]]
+		-- upvalues: DisplayModule (upval)
+		return DisplayModule.GetDisplayStore(p2).getUIScale(p2)
 	end)
-	local var7 = constantsModule.TopBarButtonPadding * var6
-	local var8 = constantsModule.MENU_ICON_SIZE * var6
-	local var9 = reactModule.useMemo(function()
-		-- upvalues: motionModule (copy), var8 (ref), constantsModule (copy)
+	local ScaledTopBarButtonPadding = ConstantsModule.TopBarButtonPadding * UseSignalStateResult
+	local ScaledMENUICONSIZE = ConstantsModule.MENU_ICON_SIZE * UseSignalStateResult
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 118 ]]
+		-- upvalues: MotionModule (upval), ScaledMENUICONSIZE (copy), ConstantsModule (upval)
 		return {
-			menuOpen = motionModule.createState({ size = var8 * constantsModule.MenuIconOpenScale }),
-			menuClosed = motionModule.createState({ size = var8 })
+			menuOpen = MotionModule.createState({
+				size = ScaledMENUICONSIZE * ConstantsModule.MenuIconOpenScale
+			}),
+			menuClosed = MotionModule.createState({ size = ScaledMENUICONSIZE })
 		}
-	end, { var6 })
-	local var10, var11 = motionModule.useMotion(var9.menuClosed)
-	local var12, var13 = reactModule.useBinding(guiService.PreferredTransparency)
-	local var14 = reactModule.useRef(false)
-	local var15 = reactModule.useRef(false)
-	local _ = nil
-	local _ = nil
-	local var16 = nil
+	end, { UseSignalStateResult })
+	local UseMotionResult, UseMotionResult2 = MotionModule.useMotion(UseMemoResult.menuClosed)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(GuiService.PreferredTransparency)
+	local UseRefResult = ReactModule.useRef(false)
+	local UseRefResult1 = ReactModule.useRef(false)
+	local Child = nil
 	
 	if p1.unibarMenuRef and p1.unibarMenuRef.current then
-		local var17 = serviceModule:menuList():get()[1]
-		local var18 = if var17 then constantsModule_1.ICON_NAME_PREFIX .. var39.id else nil
-		var16 = if p1.unibarMenuRef.current and var18 then p1.unibarMenuRef.current:FindFirstChild(var18, true) else nil
+		local GetResultEntry = ServiceModule:menuList():get()[1]
+		local Text = if GetResultEntry then ConstantsModule1.ICON_NAME_PREFIX .. GetResultEntry.id else nil
+		Child = if p1.unibarMenuRef.current and Text then p1.unibarMenuRef.current:FindFirstChild(Text, true) else nil
 	end
-	local var19, var20 = reactModule.useState(false)
-	local var21, var22 = reactModule.useState(Vector2.zero)
-	local var23, var24 = reactModule.useState(Vector2.zero)
-	local var25 = useCursor(foundationModule.Enums.CursorType.SkinToneCircle)
-	local var26 = reactModule.useRef("Roblox Menu")
-	local t = {
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(Vector2.zero)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(Vector2.zero)
+	local UseCursorResult = UseCursorFunction(FoundationModule.Enums.CursorType.SkinToneCircle)
+	local RobloxMenu = ReactModule.useRef("Roblox Menu")
+	local config = {
 		textAlignment = Enum.TextXAlignment.Center,
-		headerText = var26.current,
-		hotkeyCodes = list
+		headerText = RobloxMenu.current,
+		hotkeyCodes = HotkeyCodes
 	}
-	local t_1 = {
+	local config1 = {
 		DisplayOrder = 10,
-		active = var19,
-		guiTarget = coreGuiService,
-		preferredOrientation = tooltipOrientation.Bottom
+		active = UseStateResult,
+		guiTarget = CoreGui,
+		preferredOrientation = TooltipOrientation.Bottom
 	}
-	reactModule.useEffect(function()
-		-- upvalues: var26 (ref), robloxTranslatorModule (copy), guiService (copy), var13 (ref), settingsShowSignal (copy), var11 (ref), var9 (ref), isSideSheetEnabledModule (copy), signalsModule (copy), getSideSheetVisibility (copy), p1 (ref), serviceModule (copy), focusUtils (copy)
-		pcall(function()
-			-- upvalues: var26 (copy), robloxTranslatorModule (copy)
-			var26.current = robloxTranslatorModule:FormatByKey("CoreScripts.TopBar.RobloxMenu")
+	ReactModule.useEffect(function() --[[ Line: 167 ]]
+		-- upvalues: RobloxMenu (copy), RobloxTranslatorModule (upval), GuiService (upval), UseBindingResult2 (copy), SettingsShowSignal (upval), UseMotionResult2 (copy), UseMemoResult (copy), IsSideSheetEnabledModule (upval), SignalsModule (upval), GetSideSheetVisibilityFunction (upval), p1 (copy), ServiceModule (upval), FocusUtils (upval)
+		pcall(function() --[[ Line: 168 ]]
+			-- upvalues: RobloxMenu (upval), RobloxTranslatorModule (upval)
+			RobloxMenu.current = RobloxTranslatorModule:FormatByKey("CoreScripts.TopBar.RobloxMenu")
 		end)
-		local var27 = guiService:GetPropertyChangedSignal("PreferredTransparency"):Connect(function()
-			-- upvalues: var13 (copy), guiService (copy)
-			var13(guiService.PreferredTransparency)
+		local Connection = GuiService:GetPropertyChangedSignal("PreferredTransparency"):Connect(function() --[[ Line: 172 ]]
+			-- upvalues: UseBindingResult2 (upval), GuiService (upval)
+			UseBindingResult2(GuiService.PreferredTransparency)
 		end)
-		local var28 = settingsShowSignal:connect(function(p2)
-			-- upvalues: var11 (copy), var9 (copy)
-			var11(if p2 then var9.menuOpen else var9.menuClosed)
+		local Connection1 = SettingsShowSignal:connect(function(p2) --[[ Line: 175 ]]
+			-- upvalues: UseMotionResult2 (upval), UseMemoResult (upval)
+			UseMotionResult2(if p2 then UseMemoResult.menuOpen else UseMemoResult.menuClosed)
 		end)
-		local var29 = if isSideSheetEnabledModule then signalsModule.createEffect(function(p2)
-			-- upvalues: getSideSheetVisibility (copy), var11 (copy), var9 (copy)
-			var11(if getSideSheetVisibility(p2) then var9.menuOpen else var9.menuClosed)
+		local Effect = if IsSideSheetEnabledModule then SignalsModule.createEffect(function(p2) --[[ Line: 181 ]]
+			-- upvalues: GetSideSheetVisibilityFunction (upval), UseMotionResult2 (upval), UseMemoResult (upval)
+			UseMotionResult2(if GetSideSheetVisibilityFunction(p2) then UseMemoResult.menuOpen else UseMemoResult.menuClosed)
 		end) else nil
-		local var30 = if p1.menuIconRef then serviceModule:onTriggerMenuIcon():connect(function()
-			-- upvalues: guiService (copy), p1 (copy), focusUtils (copy)
-			guiService.SelectedCoreObject = p1.menuIconRef.current
-			focusUtils.MenuIconSelectedSignal:set(true)
+		local Connection2 = if p1.menuIconRef then ServiceModule:onTriggerMenuIcon():connect(function() --[[ Line: 189 ]]
+			-- upvalues: GuiService (upval), p1 (upval), FocusUtils (upval)
+			GuiService.SelectedCoreObject = p1.menuIconRef.current
+			FocusUtils.MenuIconSelectedSignal:set(true)
 		end) else nil
 		
-		return function()
-			-- upvalues: isSideSheetEnabledModule (copy), var29 (write), var27 (ref), var28 (ref), var30 (write)
-			if isSideSheetEnabledModule and var29 then
-				var29()
+		return function() --[[ Line: 195 ]]
+			-- upvalues: IsSideSheetEnabledModule (upval), Effect (ref), Connection (copy), Connection1 (copy), Connection2 (ref)
+			if IsSideSheetEnabledModule and Effect then
+				Effect()
 			end
-			var27:Disconnect()
-			var28:Disconnect()
+			Connection:Disconnect()
+			Connection1:Disconnect()
 			
-			if var30 then
-				var30:disconnect()
+			if Connection2 then
+				Connection2:disconnect()
 			end
 		end
 	end, {})
-	local var27 = reactModule.useRef(controlState.Default)
-	local var28 = reactModule.useCallback(function(p2)
-		-- upvalues: controlState (copy), isSpatial (copy), serviceModule (copy), UIManager (copy), var15 (ref), menuIconHoveredSignalModule (copy), var14 (ref), var20 (ref), focusUtils (copy), var27 (ref), fFlagShowUnibarOnVirtualCursor (copy), gamepadService (copy), guiService (copy), constantsModule_1 (copy)
-		if p2 == controlState.Hover then
-			if if isSpatial() then not serviceModule:showTopBar() and not UIManager.getInstance():isBottomBarInteractionOnAnimationSupported() else false then return end
-			var15.current = true
-			menuIconHoveredSignalModule:fire(true)
-			task.delay(0.65, function()
-				-- upvalues: var15 (copy), var14 (copy), isSpatial (copy), serviceModule (copy), UIManager (copy), var20 (copy)
-				if var15.current and not var14.current then
-					if if isSpatial() then not serviceModule:showTopBar() and not UIManager.getInstance():isBottomBarInteractionOnAnimationSupported() else false then return end
-					var20(true)
+	local UseRefResult2 = ReactModule.useRef(ControlState.Default)
+	local UseResult = ReactModule.useCallback(function(Current) --[[ Line: 208 ]]
+		-- upvalues: ControlState (upval), IsSpatialFunction (upval), ServiceModule (upval), UIManager (upval), UseRefResult1 (copy), MenuIconHoveredSignalModule (upval), UseRefResult (copy), UseStateResult2 (copy), FocusUtils (upval), UseRefResult2 (copy), FFlagShowUnibarOnVirtualCursor (upval), GamepadService (upval), GuiService (upval), ConstantsModule1 (upval)
+		if Current == ControlState.Hover then
+			local NoIsBottomBarInteractionOnAnimationSupported = nil
+			if IsSpatialFunction() then
+				local IsBottomBarInteractionOnAnimationSupported = UIManager.getInstance():isBottomBarInteractionOnAnimationSupported()
+				NoIsBottomBarInteractionOnAnimationSupported = not ServiceModule:showTopBar() and not IsBottomBarInteractionOnAnimationSupported
+			else
+				NoIsBottomBarInteractionOnAnimationSupported = false
+			end
+			if NoIsBottomBarInteractionOnAnimationSupported then return end
+			UseRefResult1.current = true
+			MenuIconHoveredSignalModule:fire(true)
+			task.delay(0.65, function() --[[ Line: 216 ]]
+				-- upvalues: UseRefResult1 (upval), UseRefResult (upval), IsSpatialFunction (upval), ServiceModule (upval), UIManager (upval), UseStateResult2 (upval)
+				if UseRefResult1.current and not UseRefResult.current then
+					local NoIsBottomBarInteractionOnAnimationSupported = nil
+					if IsSpatialFunction() then
+						local IsBottomBarInteractionOnAnimationSupported = UIManager.getInstance():isBottomBarInteractionOnAnimationSupported()
+						NoIsBottomBarInteractionOnAnimationSupported = not ServiceModule:showTopBar() and not IsBottomBarInteractionOnAnimationSupported
+					else
+						NoIsBottomBarInteractionOnAnimationSupported = false
+					end
+					if NoIsBottomBarInteractionOnAnimationSupported then return end
+					UseStateResult2(true)
 				end
 			end)
-		elseif p2 == controlState.Selected then
-			focusUtils.MenuIconSelectedSignal:set(true)
-		elseif p2 == controlState.Default then
-			if var27.current == controlState.Hover then
-				var20(false)
-				var15.current = false
-				var14.current = false
-			elseif var27.current == controlState.Selected then
-				if (not fFlagShowUnibarOnVirtualCursor or not gamepadService.GamepadCursorEnabled) and (guiService.SelectedCoreObject and string.find(guiService.SelectedCoreObject.Name, constantsModule_1.ICON_NAME_PREFIX)) then
-					serviceModule:enableFocusNav()
+		elseif Current == ControlState.Selected then
+			FocusUtils.MenuIconSelectedSignal:set(true)
+		elseif Current == ControlState.Default then
+			if UseRefResult2.current == ControlState.Hover then
+				UseStateResult2(false)
+				UseRefResult1.current = false
+				UseRefResult.current = false
+			elseif UseRefResult2.current == ControlState.Selected then
+				if (not FFlagShowUnibarOnVirtualCursor or not GamepadService.GamepadCursorEnabled) and (GuiService.SelectedCoreObject and string.find(GuiService.SelectedCoreObject.Name, ConstantsModule1.ICON_NAME_PREFIX)) then
+					ServiceModule:enableFocusNav()
 				end
-				focusUtils.MenuIconSelectedSignal:set(false)
+				FocusUtils.MenuIconSelectedSignal:set(false)
 			end
 		end
-		var27.current = p2
+		UseRefResult2.current = Current
 	end, {})
-	local var29 = reactModule.useCallback(function()
-		-- upvalues: var20 (ref), var14 (ref), isSpatial (copy), serviceModule (copy), UIManager (copy), parent_1 (copy), inGameMenuConstantsModule (copy)
-		var20(false)
-		var14.current = true
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 242 ]]
+		-- upvalues: UseStateResult2 (copy), UseRefResult (copy), IsSpatialFunction (upval), ServiceModule (upval), UIManager (upval), Parent1 (upval), InGameMenuConstantsModule (upval)
+		UseStateResult2(false)
+		UseRefResult.current = true
+		local NoIsBottomBarInteractionOnAnimationSupported = nil
 		
-		if if isSpatial() then not serviceModule:showTopBar() and not UIManager.getInstance():isBottomBarInteractionOnAnimationSupported() else false then
+		if IsSpatialFunction() then
+			local IsBottomBarInteractionOnAnimationSupported = UIManager.getInstance():isBottomBarInteractionOnAnimationSupported()
+			NoIsBottomBarInteractionOnAnimationSupported = not ServiceModule:showTopBar() and not IsBottomBarInteractionOnAnimationSupported
+		else
+			NoIsBottomBarInteractionOnAnimationSupported = false
+		end
+		if not NoIsBottomBarInteractionOnAnimationSupported then
+			require(Parent1.Settings.SettingsHub):ToggleVisibility(InGameMenuConstantsModule.AnalyticsMenuOpenTypes.TopbarButton)
+			
 			return
 		end
-		require(parent_1.Settings.SettingsHub):ToggleVisibility(inGameMenuConstantsModule.AnalyticsMenuOpenTypes.TopbarButton)
 	end, {})
 	
-	return (function(p2, p3, p4)
-		-- upvalues: isSpatial (copy), var22 (ref), var24 (ref), reactModule (copy), tooltipCallout (copy), tooltipOrientation (copy), var23 (ref), var21 (ref), SPATIAL_TOOLTIP_SPACING (copy), panel3DInSpatialUI (copy), panelType (copy), withTooltip (copy)
-		return if isSpatial() then reactModule.createElement(reactModule.Fragment, nil, {
-			VRSpatialTooltip = if p3.active and var21 and panel3DInSpatialUI then reactModule.createElement(panel3DInSpatialUI, {
-				panelType = panelType.ToolTipsContainer,
-				renderFunction = reactModule.useCallback(function(p5)
-					-- upvalues: reactModule (copy), tooltipCallout (copy), p2 (ref), tooltipOrientation (copy), var23 (copy), var21 (copy), SPATIAL_TOOLTIP_SPACING (copy)
-					return reactModule.createElement(tooltipCallout, {
-						distanceOffset = 0,
-						textAlignment = Enum.TextXAlignment.Center,
-						headerText = p2.headerText,
-						orientation = tooltipOrientation.Top,
-						triggerPointCenter = Vector2.new(var23.X + var21.X / 2, p5.Y - SPATIAL_TOOLTIP_SPACING),
-						contentOffsetVector = Vector2.zero,
-						triggerPointRadius = Vector2.zero
-					})
-				end, { p2, var23, var21 })
-			}) else nil,
-			MenuIconTriggerPoint = p4(function(p5)
-				-- upvalues: var22 (copy), var24 (copy)
-				var22(p5.AbsoluteSize)
-				var24(p5.AbsolutePosition)
-			end)
-		}) else withTooltip(p2, p3, p4)
-	end)(t, t_1, reactModule.useCallback(function(p2)
-		-- upvalues: reactModule (copy), view (copy), isSideSheetEnabledModule (copy), var12 (ref), var5 (ref), p1 (ref), var16 (write), fFlagSideSheetFocusNav (copy), var25 (ref), var29 (ref), var28 (ref), badgeOver12Module (copy), var7 (ref), icon (copy), foundationModule (copy), var10 (ref), var4 (ref)
-		return reactModule.createElement(view, {
+	return (function(p2, p3, Callback) --[[ Line: 253 | Named "renderWithTooltipCompat" ]]
+		-- upvalues: IsSpatialFunction (upval), UseStateResult2_1 (copy), UseStateResult2_2 (copy), ReactModule (upval), TooltipCallout (upval), TooltipOrientation (upval), UseStateResult3 (copy), UseStateResult1 (copy), SPATIALTOOLTIPSPACING (upval), Panel3DInSpatialUI (upval), PanelType (upval), WithTooltipFunction (upval)
+		if IsSpatialFunction() then
+			local UseResult = ReactModule.useCallback(function(p4) --[[ Line: 260 ]]
+				-- upvalues: ReactModule (upval), TooltipCallout (upval), p2 (copy), TooltipOrientation (upval), UseStateResult3 (upval), UseStateResult1 (upval), SPATIALTOOLTIPSPACING (upval)
+				return ReactModule.createElement(TooltipCallout, {
+					distanceOffset = 0,
+					textAlignment = Enum.TextXAlignment.Center,
+					headerText = p2.headerText,
+					orientation = TooltipOrientation.Top,
+					triggerPointCenter = Vector2.new(UseStateResult3.X + UseStateResult1.X / 2, p4.Y - SPATIALTOOLTIPSPACING),
+					contentOffsetVector = Vector2.zero,
+					triggerPointRadius = Vector2.zero
+				})
+			end, { p2, UseStateResult3, UseStateResult1 })
+			
+			return ReactModule.createElement(ReactModule.Fragment, nil, {
+				VRSpatialTooltip = if p3.active and UseStateResult1 and Panel3DInSpatialUI then ReactModule.createElement(Panel3DInSpatialUI, {
+					panelType = PanelType.ToolTipsContainer,
+					renderFunction = UseResult
+				}) else nil,
+				MenuIconTriggerPoint = Callback(function(Frame: Frame) --[[ Line: 256 ]]
+					-- upvalues: UseStateResult2_1 (upval), UseStateResult2_2 (upval)
+					UseStateResult2_1(Frame.AbsoluteSize)
+					UseStateResult2_2(Frame.AbsolutePosition)
+				end)
+			})
+		else
+			return WithTooltipFunction(p2, p3, Callback)
+		end
+	end)(config, config1, (ReactModule.useCallback(function(OnAbsolutePositionChanged) --[[ Line: 294 ]]
+		-- upvalues: ReactModule (upval), View (upval), IsSideSheetEnabledModule (upval), UseBindingResult (copy), OverMedia0 (copy), p1 (copy), Child (ref), FFlagSideSheetFocusNav (upval), UseCursorResult (copy), UseResult1 (copy), UseResult (copy), BadgeOver12Module (upval), ScaledTopBarButtonPadding (copy), Icon (upval), FoundationModule (upval), UseMotionResult (copy), Emphasis (copy)
+		return ReactModule.createElement(View, {
 			tag = "radius-circle aspect-1-1",
-			backgroundStyle = if not isSideSheetEnabledModule then var12:map(function(p3)
-				-- upvalues: var5 (copy)
-				var5.Transparency *= p3
+			backgroundStyle = if IsSideSheetEnabledModule then nil else UseBindingResult:map(function(p2) --[[ Line: 298 ]]
+				-- upvalues: OverMedia0 (upval)
+				OverMedia0.Transparency *= p2
 				
-				return var5
-			end) else nil,
+				return OverMedia0
+			end),
 			Size = if p1.buttonSize then UDim2.fromOffset(p1.buttonSize, p1.buttonSize) else UDim2.fromScale(1, 1),
-			NextSelectionRight = var16,
-			selection = if isSideSheetEnabledModule and fFlagSideSheetFocusNav then { Selectable = false } else { Selectable = true, SelectionImageObject = var25 },
+			NextSelectionRight = Child,
+			selection = if IsSideSheetEnabledModule and FFlagSideSheetFocusNav then { Selectable = false } else {
+				Selectable = true,
+				SelectionImageObject = UseCursorResult
+			},
 			selectionGroup = {
 				SelectionBehaviorLeft = Enum.SelectionBehavior.Stop,
 				SelectionBehaviorUp = Enum.SelectionBehavior.Stop,
 				SelectionBehaviorDown = Enum.SelectionBehavior.Stop
 			},
 			ref = p1.menuIconRef,
-			onAbsoluteSizeChanged = p2,
-			onAbsolutePositionChanged = p2,
-			onActivated = if not isSideSheetEnabledModule then var29 else nil,
-			onStateChanged = if not isSideSheetEnabledModule then var28 else nil
+			onAbsoluteSizeChanged = OnAbsolutePositionChanged,
+			onAbsolutePositionChanged = OnAbsolutePositionChanged,
+			onActivated = if IsSideSheetEnabledModule then nil else UseResult1,
+			onStateChanged = if IsSideSheetEnabledModule then nil else UseResult
 		}, {
-			BadgeOver12 = if p1.showBadgeOver12 then reactModule.createElement(badgeOver12Module, { position = UDim2.new(0, 1, 1, -(var7 + 1)) }) else nil,
-			Icon = reactModule.createElement(icon, {
-				name = foundationModule.Enums.IconName.Tilt,
-				size = var10.size,
+			BadgeOver12 = if p1.showBadgeOver12 then ReactModule.createElement(BadgeOver12Module, {
+				position = UDim2.new(0, 1, 1, -(ScaledTopBarButtonPadding + 1))
+			}) else nil,
+			Icon = ReactModule.createElement(Icon, {
+				name = FoundationModule.Enums.IconName.Tilt,
+				size = UseMotionResult.size,
 				Position = UDim2.fromScale(0.5, 0.5),
 				AnchorPoint = Vector2.new(0.5, 0.5),
-				style = var4
+				style = Emphasis
 			})
 		})
 	end, {
-		var12, var16, var25, var29, var28, p1.showBadgeOver12, var4, var5,
-		p1.buttonSize
-	}))
+		UseBindingResult, Child, UseCursorResult, UseResult1, UseResult,
+		p1.showBadgeOver12, Emphasis, OverMedia0, p1.buttonSize
+	})))
 end

@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("IEMTabFocusNav2", false)
+﻿return (game:DefineFastFlag("IEMTabFocusNav2", false))

@@ -1,16 +1,16 @@
-﻿local squadsCore = script:FindFirstAncestor("SquadsCore")
-local createScheduledSquadModule = require(squadsCore.NetworkRequests.createScheduledSquad)
-local squadPromptTypeModule = require(squadsCore.Enums.SquadPromptType)
-local _ = require(squadsCore.Types)
+﻿local SquadsCore = script:FindFirstAncestor("SquadsCore")
+local CreateScheduledSquadModule = require(SquadsCore.NetworkRequests.createScheduledSquad)
+local SquadPromptTypeModule = require(SquadsCore.Enums.SquadPromptType)
+local _ = require(SquadsCore.Types)
 
-return function(p1, p2, p3)
-	-- upvalues: squadPromptTypeModule (ref), createScheduledSquadModule (ref)
-	return function(p4)
-		-- upvalues: p2 (ref), squadPromptTypeModule (copy), createScheduledSquadModule (copy), p1 (ref), p3 (ref)
-		createScheduledSquadModule(p1, p3, function(p5)
-			-- upvalues: p2 (copy), p4 (ref), squadPromptTypeModule (copy)
-			p2(p4, {
-				promptType = if p5 == 409 then squadPromptTypeModule.ScheduledSquadConflict else squadPromptTypeModule.Error
+return function(p1, Callback, p2) --[[ Line: 9 ]]
+	-- upvalues: SquadPromptTypeModule (copy), CreateScheduledSquadModule (copy)
+	return function(p3) --[[ Line: 18 ]]
+		-- upvalues: Callback (copy), SquadPromptTypeModule (upval), CreateScheduledSquadModule (upval), p1 (copy), p2 (copy)
+		CreateScheduledSquadModule(p1, p2, function(p4) --[[ Line: 19 ]]
+			-- upvalues: Callback (upval), p3 (copy), SquadPromptTypeModule (upval)
+			Callback(p3, {
+				promptType = if p4 == 409 then SquadPromptTypeModule.ScheduledSquadConflict else SquadPromptTypeModule.Error
 			})
 		end)
 	end

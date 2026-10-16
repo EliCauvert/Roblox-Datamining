@@ -1,7 +1,7 @@
-﻿local telemetryService = game:GetService("TelemetryService")
+﻿local TelemetryService = game:GetService("TelemetryService")
 local _ = require(script.Parent.LinkingProtocolTypes)
-local list = { "addOSInfo", "addSessionInfo", "addSessionId" }
-local t = {
+local StandardizedFields = { "addOSInfo", "addSessionInfo", "addSessionId" }
+local config = {
 	eventName = "StartAttributionDecisionPublishedCounter",
 	description = "\t\tCounts delayed-AppsFlyer-start decisions published to native. Custom field\n\t\t\"trigger\" is Auth / SessionStart / ConsentChanged (ConsentChanged isolates the\n\t\tlive mid-session sell/share toggle); \"applySharingFilter\" is whether the\n\t\tpartner-postback filter was applied.\n\t",
 	backends = { "RobloxTelemetryCounter" },
@@ -9,11 +9,14 @@ local t = {
 }
 
 return {
-	logDecisionPublished = function(p1, p2)
-		-- upvalues: telemetryService (ref), t (ref), list (ref)
-		telemetryService:LogCounter(t, {
-			standardizedFields = list,
-			customFields = { trigger = p1, applySharingFilter = p2 }
+	logDecisionPublished = function(Trigger, ApplySharingFilter) --[[ Line: 33 ]]
+		-- upvalues: TelemetryService (copy), config (copy), StandardizedFields (copy)
+		TelemetryService:LogCounter(config, {
+			standardizedFields = StandardizedFields,
+			customFields = {
+				trigger = Trigger,
+				applySharingFilter = ApplySharingFilter
+			}
 		}, 1)
 	end
 }

@@ -1,37 +1,37 @@
-﻿local parent = script:FindFirstAncestor("GenericAbuseReporting").Parent
-local reactModule = require(parent.React)
-local VOICE_JOIN_PROGRESS = require(parent.VoiceChatCore).Constants.VOICE_JOIN_PROGRESS
+﻿local Parent = script:FindFirstAncestor("GenericAbuseReporting").Parent
+local ReactModule = require(Parent.React)
+local VOICEJOINPROGRESS = require(Parent.VoiceChatCore).Constants.VOICE_JOIN_PROGRESS
 
 return {
-	useIsVoiceChatReportable = function(p1)
-		-- upvalues: VOICE_JOIN_PROGRESS (ref), reactModule (ref)
-		local var1, var2 = reactModule.useState(function()
-			-- upvalues: p1 (ref), VOICE_JOIN_PROGRESS (copy)
-			return p1:UserVoiceEnabled() and p1:GetVoiceJoinProgress() ~= VOICE_JOIN_PROGRESS.Suspended
+	useIsVoiceChatReportable = function(p1) --[[ Line: 25 ]]
+		-- upvalues: VOICEJOINPROGRESS (copy), ReactModule (copy)
+		local UseStateResult, UseStateResult2 = ReactModule.useState(function(): boolean --[[ Line: 26 | Named "computeIsVoiceChatReportable" ]]
+			-- upvalues: p1 (copy), VOICEJOINPROGRESS (upval)
+			return p1:UserVoiceEnabled() and p1:GetVoiceJoinProgress() ~= VOICEJOINPROGRESS.Suspended
 		end)
-		reactModule.useEffect(function()
-			-- upvalues: var2 (ref), p1 (ref), VOICE_JOIN_PROGRESS (copy)
-			local var3 = true
+		ReactModule.useEffect(function() --[[ Line: 34 ]]
+			-- upvalues: UseStateResult2 (copy), p1 (copy), VOICEJOINPROGRESS (upval)
+			local Flag = true
 			
-			local function recheck()
-				-- upvalues: var3 (write), var2 (copy), p1 (copy), VOICE_JOIN_PROGRESS (copy)
-				if var3 then
-					var2(p1:UserVoiceEnabled() and p1:GetVoiceJoinProgress() ~= VOICE_JOIN_PROGRESS.Suspended)
+			local function recheck() --[[ Line: 36 ]]
+				-- upvalues: Flag (ref), UseStateResult2 (upval), p1 (upval), VOICEJOINPROGRESS (upval)
+				if Flag then
+					UseStateResult2(p1:UserVoiceEnabled() and p1:GetVoiceJoinProgress() ~= VOICEJOINPROGRESS.Suspended)
 					
 					return
 				end
 			end
 			
 			p1:asyncInit():andThen(recheck):catch(recheck)
-			local eventConnection = p1.VoiceJoinProgressChanged.Event:Connect(recheck)
+			local EventConnection = p1.VoiceJoinProgressChanged.Event:Connect(recheck)
 			
-			return function()
-				-- upvalues: var3 (write), eventConnection (ref)
-				var3 = false
-				eventConnection:Disconnect()
+			return function() --[[ Line: 50 ]]
+				-- upvalues: Flag (ref), EventConnection (copy)
+				Flag = false
+				EventConnection:Disconnect()
 			end
 		end, { p1 })
 		
-		return var1
+		return UseStateResult
 	end
 }

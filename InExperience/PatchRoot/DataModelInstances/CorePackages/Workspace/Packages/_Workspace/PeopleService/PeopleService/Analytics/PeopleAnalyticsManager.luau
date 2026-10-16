@@ -1,38 +1,20 @@
-﻿local telemetryService = game:GetService("TelemetryService")
-local userGameSettingsService = UserSettings():GetService("UserGameSettings")
-local peopleService = script:FindFirstAncestor("PeopleService")
-local gameInviteModule = require(peopleService.Parent.GameInvite)
-local flagsModule = require(peopleService.Flags)
-local constantsModule = require(peopleService.Constants)
-local getFIntInspectButtonThrottleHundredthsPercent = flagsModule.GetFIntInspectButtonThrottleHundredthsPercent
-local getFIntGameInviteEntryPointThrottleHundredthsPercent = flagsModule.GetFIntGameInviteEntryPointThrottleHundredthsPercent
-local getFIntMuteAllThrottleHundredthsPercent = flagsModule.GetFIntMuteAllThrottleHundredthsPercent
-local getFIntUnmuteAllThrottleHundredthsPercent = flagsModule.GetFIntUnmuteAllThrottleHundredthsPercent
-local getFIntMutePlayerThrottleHundredthsPercent = flagsModule.GetFIntMutePlayerThrottleHundredthsPercent
-local getFIntUnmutePlayerThrottleHundredthsPercent = flagsModule.GetFIntUnmutePlayerThrottleHundredthsPercent
-local getFIntRequestFriendshipThrottleHundredthsPercent = flagsModule.GetFIntRequestFriendshipThrottleHundredthsPercent
-local getFIntMuteSelfThrottleHundredthsPercent = flagsModule.GetFIntMuteSelfThrottleHundredthsPercent
-local getFIntUnmuteSelfThrottleHundredthsPercent = flagsModule.GetFIntUnmuteSelfThrottleHundredthsPercent
-local getFIntBlockUserButtonClickThrottleHundredthsPercent = flagsModule.GetFIntBlockUserButtonClickThrottleHundredthsPercent
-local getFIntBlockUserThrottleHundredthsPercent = flagsModule.GetFIntBlockUserThrottleHundredthsPercent
-local getFIntUnblockUserThrottleHundredthsPercent = flagsModule.GetFIntUnblockUserThrottleHundredthsPercent
-local getFIntPeoplePageLayoutChangedThrottleHundredthsPercent = flagsModule.GetFIntPeoplePageLayoutChangedThrottleHundredthsPercent
-local getFIntPersonCardMenuToggledThrottleHundredthsPercent = flagsModule.GetFIntPersonCardMenuToggledThrottleHundredthsPercent
-local getFFlagAddPeoplePageCardLayout = flagsModule.GetFFlagAddPeoplePageCardLayout
-local fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry = flagsModule.FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry
-local fFlagVoiceVolumeControlsPerUserPlayerListButton = flagsModule.FFlagVoiceVolumeControlsPerUserPlayerListButton
-local fFlagVoiceVolumeControlsPerUserPlayerGridMenu = flagsModule.FFlagVoiceVolumeControlsPerUserPlayerGridMenu
-local fIntPerUserVoiceVolumeChangedThrottleHundredthsPercent = flagsModule.FIntPerUserVoiceVolumeChangedThrottleHundredthsPercent
-local fIntPerUserVoiceVolumeSessionThrottleHundredthsPercent = flagsModule.FIntPerUserVoiceVolumeSessionThrottleHundredthsPercent
-local fIntPerUserVoiceVolumeSliderTouchThrottleHundredthsPercent = flagsModule.FIntPerUserVoiceVolumeSliderTouchThrottleHundredthsPercent
-local fIntPerUserVoiceVolumeMutedViaSliderThrottleHundredthsPercent = flagsModule.FIntPerUserVoiceVolumeMutedViaSliderThrottleHundredthsPercent
-local fIntPerUserVoiceVolumeUnmutedViaSliderThrottleHundredthsPercent = flagsModule.FIntPerUserVoiceVolumeUnmutedViaSliderThrottleHundredthsPercent
-local fFlagVoiceChatVolumePerUserMuteVolumeSync = flagsModule.FFlagVoiceChatVolumePerUserMuteVolumeSync
-local fFlagVoiceChatVolumePerUserDisableInteractionWhenMuted = flagsModule.FFlagVoiceChatVolumePerUserDisableInteractionWhenMuted
-local VOICE_VOLUME = constantsModule.VOICE_CHAT.VOICE_VOLUME
-local ENTRY_POINT = constantsModule.ANALYTICS.ENTRY_POINT
-local uXVARIANT = constantsModule.ANALYTICS.UX_VARIANT
-local t = {
+﻿local TelemetryService = game:GetService("TelemetryService")
+local UserGameSettings = UserSettings():GetService("UserGameSettings")
+local PeopleService = script:FindFirstAncestor("PeopleService")
+local GameInviteModule = require(PeopleService.Parent.GameInvite)
+local FlagsModule = require(PeopleService.Flags)
+local ConstantsModule = require(PeopleService.Constants)
+local GetFIntGameInviteEntryPointThrottleHundredthsPercentFunction = FlagsModule.GetFIntGameInviteEntryPointThrottleHundredthsPercent
+local GetFFlagAddPeoplePageCardLayoutFunction = FlagsModule.GetFFlagAddPeoplePageCardLayout
+local FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry = FlagsModule.FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry
+local FFlagVoiceVolumeControlsPerUserPlayerListButton = FlagsModule.FFlagVoiceVolumeControlsPerUserPlayerListButton
+local FFlagVoiceVolumeControlsPerUserPlayerGridMenu = FlagsModule.FFlagVoiceVolumeControlsPerUserPlayerGridMenu
+local FFlagVoiceChatVolumePerUserMuteVolumeSync = FlagsModule.FFlagVoiceChatVolumePerUserMuteVolumeSync
+local FFlagVoiceChatVolumePerUserDisableInteractionWhenMuted = FlagsModule.FFlagVoiceChatVolumePerUserDisableInteractionWhenMuted
+local VOICEVOLUME = ConstantsModule.VOICE_CHAT.VOICE_VOLUME
+local ENTRYPOINT = ConstantsModule.ANALYTICS.ENTRY_POINT
+local UXVARIANT = ConstantsModule.ANALYTICS.UX_VARIANT
+local PeopleAnalyticsManager = {
 	ButtonName = { SettingsHub = "settingsHub" },
 	EventName = {
 		GameInviteEntryPoint = "inputShareGameEntryPoint",
@@ -58,97 +40,97 @@ local t = {
 		GameInviteEntryPointCounter = settings():GetFVariable("LuaShareGameSettingsHubEntryCounter")
 	}
 }
-local t_1 = {
+local TelemetryConfigs = {
 	GameInviteEntryPoint = {
 		eventConfig = {
 			description = "Event to track game invite entry point from people tab.",
-			eventName = t.EventName.GameInviteEntryPoint,
+			eventName = PeopleAnalyticsManager.EventName.GameInviteEntryPoint,
 			backends = { "EventIngest" },
-			throttlingPercentage = getFIntGameInviteEntryPointThrottleHundredthsPercent(),
+			throttlingPercentage = GetFIntGameInviteEntryPointThrottleHundredthsPercentFunction(),
 			lastUpdated = { 2025, 6, 25 }
 		},
 		counterConfig = {
 			description = "Counter to track game invite entry point clicks from people tab.",
-			eventName = t.EventName.GameInviteEntryPointCounter,
+			eventName = PeopleAnalyticsManager.EventName.GameInviteEntryPointCounter,
 			backends = { "RobloxTelemetryCounter" },
-			throttlingPercentage = getFIntGameInviteEntryPointThrottleHundredthsPercent(),
+			throttlingPercentage = GetFIntGameInviteEntryPointThrottleHundredthsPercentFunction(),
 			lastUpdated = { 2025, 6, 25 }
 		}
 	},
 	InspectButton = {
 		eventConfig = {
 			description = "Event to track inspect button click from people tab.",
-			eventName = t.EventName.InspectButton,
+			eventName = PeopleAnalyticsManager.EventName.InspectButton,
 			backends = { "EventIngest" },
-			throttlingPercentage = getFIntInspectButtonThrottleHundredthsPercent(),
+			throttlingPercentage = FlagsModule.GetFIntInspectButtonThrottleHundredthsPercent(),
 			lastUpdated = { 2025, 7, 14 }
 		}
 	},
 	MuteAll = {
 		eventConfig = {
 			description = "Event to track mute all button click.",
-			eventName = t.EventName.MuteAll,
+			eventName = PeopleAnalyticsManager.EventName.MuteAll,
 			backends = { "EventIngest" },
-			throttlingPercentage = getFIntMuteAllThrottleHundredthsPercent(),
+			throttlingPercentage = FlagsModule.GetFIntMuteAllThrottleHundredthsPercent(),
 			lastUpdated = { 2025, 6, 26 }
 		}
 	},
 	UnmuteAll = {
 		eventConfig = {
 			description = "Event to track unmute all button click.",
-			eventName = t.EventName.UnmuteAll,
+			eventName = PeopleAnalyticsManager.EventName.UnmuteAll,
 			backends = { "EventIngest" },
-			throttlingPercentage = getFIntUnmuteAllThrottleHundredthsPercent(),
+			throttlingPercentage = FlagsModule.GetFIntUnmuteAllThrottleHundredthsPercent(),
 			lastUpdated = { 2025, 6, 26 }
 		}
 	},
 	MutePlayer = {
 		eventConfig = {
 			description = "Event to track individual player mute button click.",
-			eventName = t.EventName.MutePlayer,
+			eventName = PeopleAnalyticsManager.EventName.MutePlayer,
 			backends = { "EventIngest" },
-			throttlingPercentage = getFIntMutePlayerThrottleHundredthsPercent(),
+			throttlingPercentage = FlagsModule.GetFIntMutePlayerThrottleHundredthsPercent(),
 			lastUpdated = { 2025, 7, 9 }
 		}
 	},
 	UnmutePlayer = {
 		eventConfig = {
 			description = "Event to track individual player unmute button click.",
-			eventName = t.EventName.UnmutePlayer,
+			eventName = PeopleAnalyticsManager.EventName.UnmutePlayer,
 			backends = { "EventIngest" },
-			throttlingPercentage = getFIntUnmutePlayerThrottleHundredthsPercent(),
+			throttlingPercentage = FlagsModule.GetFIntUnmutePlayerThrottleHundredthsPercent(),
 			lastUpdated = { 2025, 7, 9 }
 		}
 	},
 	MuteSelf = {
 		eventConfig = {
 			description = "Event to track mute self button click.",
-			eventName = t.EventName.MuteSelf,
+			eventName = PeopleAnalyticsManager.EventName.MuteSelf,
 			backends = { "EventIngest" },
-			throttlingPercentage = getFIntMuteSelfThrottleHundredthsPercent(),
+			throttlingPercentage = FlagsModule.GetFIntMuteSelfThrottleHundredthsPercent(),
 			lastUpdated = { 2025, 7, 23 }
 		}
 	},
 	UnmuteSelf = {
 		eventConfig = {
 			description = "Event to track unmute self button click.",
-			eventName = t.EventName.UnmuteSelf,
+			eventName = PeopleAnalyticsManager.EventName.UnmuteSelf,
 			backends = { "EventIngest" },
-			throttlingPercentage = getFIntUnmuteSelfThrottleHundredthsPercent(),
+			throttlingPercentage = FlagsModule.GetFIntUnmuteSelfThrottleHundredthsPercent(),
 			lastUpdated = { 2025, 7, 23 }
 		}
 	},
 	RequestFriendship = {
 		eventConfig = {
 			description = "Event to track players menu actions.",
-			eventName = if getFFlagAddPeoplePageCardLayout() then t.EventName.RequestFriendship else t.EventName.PlayersMenu,
+			eventName = if GetFFlagAddPeoplePageCardLayoutFunction() then PeopleAnalyticsManager.EventName.RequestFriendship else PeopleAnalyticsManager.EventName.PlayersMenu,
 			backends = { "EventIngest" },
-			throttlingPercentage = getFIntRequestFriendshipThrottleHundredthsPercent(),
+			throttlingPercentage = FlagsModule.GetFIntRequestFriendshipThrottleHundredthsPercent(),
 			lastUpdated = { 2025, 7, 9 }
 		},
 		counterConfig = {
 			description = "Counter to track players menu actions.",
-			eventName = t.EventName.PlayersMenu,
+			eventName = PeopleAnalyticsManager.EventName.PlayersMenu,
 			backends = { "RobloxTelemetryCounter" },
 			lastUpdated = { 2025, 7, 9 }
 		}
@@ -156,45 +138,45 @@ local t_1 = {
 	BlockUserButtonClick = {
 		eventConfig = {
 			description = "Event to track block user button clicks from people tab.",
-			eventName = t.EventName.BlockUserButtonClick,
+			eventName = PeopleAnalyticsManager.EventName.BlockUserButtonClick,
 			backends = { "EventIngest" },
-			throttlingPercentage = getFIntBlockUserButtonClickThrottleHundredthsPercent(),
+			throttlingPercentage = FlagsModule.GetFIntBlockUserButtonClickThrottleHundredthsPercent(),
 			lastUpdated = { 2025, 7, 22 }
 		}
 	},
 	BlockUser = {
 		eventConfig = {
 			description = "Event to track successful user blocking from people tab.",
-			eventName = t.EventName.BlockUser,
+			eventName = PeopleAnalyticsManager.EventName.BlockUser,
 			backends = { "EventIngest" },
-			throttlingPercentage = getFIntBlockUserThrottleHundredthsPercent(),
+			throttlingPercentage = FlagsModule.GetFIntBlockUserThrottleHundredthsPercent(),
 			lastUpdated = { 2025, 7, 22 }
 		}
 	},
 	UnblockUser = {
 		eventConfig = {
 			description = "Event to track user unblocking from people tab.",
-			eventName = t.EventName.UnblockUser,
+			eventName = PeopleAnalyticsManager.EventName.UnblockUser,
 			backends = { "EventIngest" },
-			throttlingPercentage = getFIntUnblockUserThrottleHundredthsPercent(),
+			throttlingPercentage = FlagsModule.GetFIntUnblockUserThrottleHundredthsPercent(),
 			lastUpdated = { 2025, 7, 22 }
 		}
 	},
 	PeoplePageLayoutChanged = {
 		eventConfig = {
 			description = "Event to track people page layout change.",
-			eventName = t.EventName.PeoplePageLayoutChanged,
+			eventName = PeopleAnalyticsManager.EventName.PeoplePageLayoutChanged,
 			backends = { "EventIngest" },
-			throttlingPercentage = getFIntPeoplePageLayoutChangedThrottleHundredthsPercent(),
+			throttlingPercentage = FlagsModule.GetFIntPeoplePageLayoutChangedThrottleHundredthsPercent(),
 			lastUpdated = { 2025, 9, 2 }
 		}
 	},
 	PersonCardMenuToggled = {
 		eventConfig = {
 			description = "Event to track person card menu toggle.",
-			eventName = t.EventName.PersonCardMenuToggled,
+			eventName = PeopleAnalyticsManager.EventName.PersonCardMenuToggled,
 			backends = { "EventIngest" },
-			throttlingPercentage = getFIntPersonCardMenuToggledThrottleHundredthsPercent(),
+			throttlingPercentage = FlagsModule.GetFIntPersonCardMenuToggledThrottleHundredthsPercent(),
 			lastUpdated = { 2025, 9, 2 }
 		}
 	},
@@ -202,9 +184,9 @@ local t_1 = {
 		eventConfig = {
 			description = "Per-user voice volume slider drag on People List / People Cards.",
 			links = "https://github.rbx.com/Roblox/proto-schemas/blob/master/production/eventstream/voice/per_user_voice_volume_changed.proto",
-			eventName = t.EventName.PerUserVoiceVolumeChanged,
+			eventName = PeopleAnalyticsManager.EventName.PerUserVoiceVolumeChanged,
 			backends = { "EventIngest" },
-			throttlingPercentage = fIntPerUserVoiceVolumeChangedThrottleHundredthsPercent,
+			throttlingPercentage = FlagsModule.FIntPerUserVoiceVolumeChangedThrottleHundredthsPercent,
 			lastUpdated = { 2026, 7, 27 }
 		}
 	},
@@ -212,153 +194,164 @@ local t_1 = {
 		eventConfig = {
 			description = "Session info for per-user voice volume UI open/change on People List / People Cards.",
 			links = "https://github.rbx.com/Roblox/proto-schemas/blob/master/production/eventstream/voice/per_user_voice_volume_session.proto",
-			eventName = t.EventName.PerUserVoiceVolumeSession,
+			eventName = PeopleAnalyticsManager.EventName.PerUserVoiceVolumeSession,
 			backends = { "EventIngest" },
-			throttlingPercentage = fIntPerUserVoiceVolumeSessionThrottleHundredthsPercent,
+			throttlingPercentage = FlagsModule.FIntPerUserVoiceVolumeSessionThrottleHundredthsPercent,
 			lastUpdated = { 2026, 7, 27 }
 		}
 	},
 	PerUserVoiceVolumeSliderTouch = {
 		counterConfig = {
 			description = "Counter for per-user voice volume slider drag starts.",
-			eventName = t.EventName.PerUserVoiceVolumeSliderTouch,
+			eventName = PeopleAnalyticsManager.EventName.PerUserVoiceVolumeSliderTouch,
 			backends = { "RobloxTelemetryCounter" },
-			throttlingPercentage = fIntPerUserVoiceVolumeSliderTouchThrottleHundredthsPercent,
+			throttlingPercentage = FlagsModule.FIntPerUserVoiceVolumeSliderTouchThrottleHundredthsPercent,
 			lastUpdated = { 2026, 7, 27 }
 		}
 	},
 	PerUserVoiceVolumeMutedViaSlider = {
 		counterConfig = {
 			description = "Counter for muting a player by dragging per-user volume to MIN.",
-			eventName = t.EventName.PerUserVoiceVolumeMutedViaSlider,
+			eventName = PeopleAnalyticsManager.EventName.PerUserVoiceVolumeMutedViaSlider,
 			backends = { "RobloxTelemetryCounter" },
-			throttlingPercentage = fIntPerUserVoiceVolumeMutedViaSliderThrottleHundredthsPercent,
+			throttlingPercentage = FlagsModule.FIntPerUserVoiceVolumeMutedViaSliderThrottleHundredthsPercent,
 			lastUpdated = { 2026, 7, 27 }
 		}
 	},
 	PerUserVoiceVolumeUnmutedViaSlider = {
 		counterConfig = {
 			description = "Counter for unmuting a player by raising per-user volume above MIN.",
-			eventName = t.EventName.PerUserVoiceVolumeUnmutedViaSlider,
+			eventName = PeopleAnalyticsManager.EventName.PerUserVoiceVolumeUnmutedViaSlider,
 			backends = { "RobloxTelemetryCounter" },
-			throttlingPercentage = fIntPerUserVoiceVolumeUnmutedViaSliderThrottleHundredthsPercent,
+			throttlingPercentage = FlagsModule.FIntPerUserVoiceVolumeUnmutedViaSliderThrottleHundredthsPercent,
 			lastUpdated = { 2026, 7, 27 }
 		}
 	}
 }
-t.TelemetryConfigs = t_1
-local gameInviteAnalyticsManager = gameInviteModule.GameInviteAnalyticsManager
+PeopleAnalyticsManager.TelemetryConfigs = TelemetryConfigs
+local GameInviteAnalyticsManager = GameInviteModule.GameInviteAnalyticsManager
 
-function t.trackGameInviteEntryPoint(_)
-	-- upvalues: t (ref), t_1 (ref), telemetryService (ref), gameInviteAnalyticsManager (ref)
-	local gameInviteEntryPoint = t_1.GameInviteEntryPoint
-	telemetryService:LogEvent(gameInviteEntryPoint.eventConfig, {
+function PeopleAnalyticsManager:trackGameInviteEntryPoint() --[[ Line: 286 ]]
+	-- upvalues: PeopleAnalyticsManager (copy), TelemetryConfigs (copy), TelemetryService (copy), GameInviteAnalyticsManager (copy)
+	local GameInviteEntryPoint = TelemetryConfigs.GameInviteEntryPoint
+	TelemetryService:LogEvent(GameInviteEntryPoint.eventConfig, {
 		customFields = {
-			btn = t.ButtonName.SettingsHub,
+			btn = PeopleAnalyticsManager.ButtonName.SettingsHub,
 			placeId = tostring(game.PlaceId),
 			gameId = tostring(game.GameId)
 		}
 	})
-	telemetryService:LogCounter(gameInviteEntryPoint.counterConfig, {}, 1)
-	gameInviteAnalyticsManager:withButtonName(t.ButtonName.SettingsHub)
+	TelemetryService:LogCounter(GameInviteEntryPoint.counterConfig, {}, 1)
+	GameInviteAnalyticsManager:withButtonName(PeopleAnalyticsManager.ButtonName.SettingsHub)
 end
 
-function t.trackToggleMuteSelf(_, p1)
-	-- upvalues: telemetryService (ref), t_1 (ref)
+function PeopleAnalyticsManager:trackToggleMuteSelf(p1) --[[ Line: 300 ]]
+	-- upvalues: TelemetryService (copy), TelemetryConfigs (copy)
 	if p1 then
-		telemetryService:LogEvent(t_1.UnmuteSelf.eventConfig, {})
+		TelemetryService:LogEvent(TelemetryConfigs.UnmuteSelf.eventConfig, {})
 		
 		return
+	else
+		TelemetryService:LogEvent(TelemetryConfigs.MuteSelf.eventConfig, {})
 	end
-	telemetryService:LogEvent(t_1.MuteSelf.eventConfig, {})
 end
 
-function t.trackInspectButton(_, p1, p2, p3)
-	-- upvalues: getFFlagAddPeoplePageCardLayout (ref), t_1 (ref), telemetryService (ref)
-	local t = { playsessionid = p2, universeid = tostring(p1) }
+function PeopleAnalyticsManager:trackInspectButton(p1, Playsessionid, Entrypoint) --[[ Line: 308 ]]
+	-- upvalues: GetFFlagAddPeoplePageCardLayoutFunction (copy), TelemetryConfigs (copy), TelemetryService (copy)
+	local CustomFields = { playsessionid = Playsessionid, universeid = tostring(p1) }
 	
-	if getFFlagAddPeoplePageCardLayout() then
-		t.entrypoint = p3
+	if GetFFlagAddPeoplePageCardLayoutFunction() then
+		CustomFields.entrypoint = Entrypoint
 	end
-	telemetryService:LogEvent(t_1.InspectButton.eventConfig, {
-		eventContext = if getFFlagAddPeoplePageCardLayout() then "examine_avatar" else nil,
-		customFields = t
+	TelemetryService:LogEvent(TelemetryConfigs.InspectButton.eventConfig, {
+		eventContext = if GetFFlagAddPeoplePageCardLayoutFunction() then "examine_avatar" else nil,
+		customFields = CustomFields
 	})
 end
 
-function t.trackToggleMuteAll(_, p1)
-	-- upvalues: telemetryService (ref), t_1 (ref)
+function PeopleAnalyticsManager:trackToggleMuteAll(p1) --[[ Line: 324 ]]
+	-- upvalues: TelemetryService (copy), TelemetryConfigs (copy)
 	if p1 then
-		telemetryService:LogEvent(t_1.UnmuteAll.eventConfig, {})
+		TelemetryService:LogEvent(TelemetryConfigs.UnmuteAll.eventConfig, {})
 		
 		return
+	else
+		TelemetryService:LogEvent(TelemetryConfigs.MuteAll.eventConfig, {})
 	end
-	telemetryService:LogEvent(t_1.MuteAll.eventConfig, {})
 end
 
-function t.trackToggleMutePlayer(_, p1, p2, p3)
-	-- upvalues: telemetryService (ref), t_1 (ref), getFFlagAddPeoplePageCardLayout (ref)
-	if p2 then
-		telemetryService:LogEvent(t_1.UnmutePlayer.eventConfig, {
+function PeopleAnalyticsManager:trackToggleMutePlayer(MutedUserId, p1, p2) --[[ Line: 332 ]]
+	-- upvalues: TelemetryService (copy), TelemetryConfigs (copy), GetFFlagAddPeoplePageCardLayoutFunction (copy)
+	if p1 then
+		TelemetryService:LogEvent(TelemetryConfigs.UnmutePlayer.eventConfig, {
 			customFields = {
-				mutedUserId = p1,
-				entryPoint = if getFFlagAddPeoplePageCardLayout() then p3 else nil
+				mutedUserId = MutedUserId,
+				entryPoint = if GetFFlagAddPeoplePageCardLayoutFunction() then p2 else nil
 			}
 		})
 		
 		return
+	else
+		TelemetryService:LogEvent(TelemetryConfigs.MutePlayer.eventConfig, {
+			customFields = {
+				mutedUserId = MutedUserId,
+				entryPoint = if GetFFlagAddPeoplePageCardLayoutFunction() then p2 else nil
+			}
+		})
 	end
-	telemetryService:LogEvent(t_1.MutePlayer.eventConfig, {
-		customFields = {
-			mutedUserId = p1,
-			entryPoint = if getFFlagAddPeoplePageCardLayout() then p3 else nil
-		}
-	})
 end
 
-function t.trackRequestFriendship(_, p1)
-	-- upvalues: getFFlagAddPeoplePageCardLayout (ref), t_1 (ref), telemetryService (ref)
-	local requestFriendship = t_1.RequestFriendship
-	telemetryService:LogEvent(requestFriendship.eventConfig, {
-		eventContext = if getFFlagAddPeoplePageCardLayout() then "PlayersMenu" else nil,
+function PeopleAnalyticsManager:trackRequestFriendship(p1) --[[ Line: 350 ]]
+	-- upvalues: GetFFlagAddPeoplePageCardLayoutFunction (copy), TelemetryConfigs (copy), TelemetryService (copy)
+	local RequestFriendship = TelemetryConfigs.RequestFriendship
+	TelemetryService:LogEvent(RequestFriendship.eventConfig, {
+		eventContext = if GetFFlagAddPeoplePageCardLayoutFunction() then "PlayersMenu" else nil,
 		customFields = {
 			selectedItem = "RequestFriendship",
 			category = "Game",
-			entryPoint = if getFFlagAddPeoplePageCardLayout() then p1 else nil
+			entryPoint = if GetFFlagAddPeoplePageCardLayoutFunction() then p1 else nil
 		}
 	})
-	telemetryService:LogCounter(requestFriendship.counterConfig, { customFields = { selectedItem = "RequestFriendship" } }, 1)
+	TelemetryService:LogCounter(RequestFriendship.counterConfig, { customFields = { selectedItem = "RequestFriendship" } }, 1)
 end
 
-function t.trackBlockUserButtonClick(_, p1, p2, p3)
-	-- upvalues: t_1 (ref), telemetryService (ref)
-	telemetryService:LogEvent(t_1.BlockUserButtonClick.eventConfig, {
-		customFields = { blockeeUserId = p1, blockerUserId = p2, source = p3 }
-	})
-end
-
-function t.trackBlockUser(_, p1, p2, p3)
-	-- upvalues: t_1 (ref), telemetryService (ref)
-	telemetryService:LogEvent(t_1.BlockUser.eventConfig, {
-		customFields = { blockeeUserId = p1, blockerUserId = p2, source = p3 }
-	})
-end
-
-function t.trackUnblockUser(_, p1, p2, p3)
-	-- upvalues: getFFlagAddPeoplePageCardLayout (ref), t_1 (ref), telemetryService (ref)
-	telemetryService:LogEvent(t_1.UnblockUser.eventConfig, {
+function PeopleAnalyticsManager:trackBlockUserButtonClick(BlockeeUserId, BlockerUserId, Source) --[[ Line: 365 ]]
+	-- upvalues: TelemetryConfigs (copy), TelemetryService (copy)
+	TelemetryService:LogEvent(TelemetryConfigs.BlockUserButtonClick.eventConfig, {
 		customFields = {
-			blockeeUserId = p1,
-			blockerUserId = p2,
-			entryPoint = if getFFlagAddPeoplePageCardLayout() then p3 else nil
+			blockeeUserId = BlockeeUserId,
+			blockerUserId = BlockerUserId,
+			source = Source
 		}
 	})
 end
 
-if getFFlagAddPeoplePageCardLayout() then
-	function t.trackPeoplePageLayoutChanged(_, p1)
-		-- upvalues: t_1 (ref), telemetryService (ref)
-		telemetryService:LogEvent(t_1.PeoplePageLayoutChanged.eventConfig, {
+function PeopleAnalyticsManager:trackBlockUser(BlockeeUserId, BlockerUserId, Source) --[[ Line: 376 ]]
+	-- upvalues: TelemetryConfigs (copy), TelemetryService (copy)
+	TelemetryService:LogEvent(TelemetryConfigs.BlockUser.eventConfig, {
+		customFields = {
+			blockeeUserId = BlockeeUserId,
+			blockerUserId = BlockerUserId,
+			source = Source
+		}
+	})
+end
+
+function PeopleAnalyticsManager:trackUnblockUser(BlockeeUserId, BlockerUserId, p1) --[[ Line: 387 ]]
+	-- upvalues: GetFFlagAddPeoplePageCardLayoutFunction (copy), TelemetryConfigs (copy), TelemetryService (copy)
+	TelemetryService:LogEvent(TelemetryConfigs.UnblockUser.eventConfig, {
+		customFields = {
+			blockeeUserId = BlockeeUserId,
+			blockerUserId = BlockerUserId,
+			entryPoint = if GetFFlagAddPeoplePageCardLayoutFunction() then p1 else nil
+		}
+	})
+end
+
+if GetFFlagAddPeoplePageCardLayoutFunction() then
+	function PeopleAnalyticsManager:trackPeoplePageLayoutChanged(p1) --[[ Line: 399 ]]
+		-- upvalues: TelemetryConfigs (copy), TelemetryService (copy)
+		TelemetryService:LogEvent(TelemetryConfigs.PeoplePageLayoutChanged.eventConfig, {
 			customFields = { layout = p1.Name },
 			standardizedFields = {
 				"addPlaceId",
@@ -369,9 +362,9 @@ if getFFlagAddPeoplePageCardLayout() then
 		})
 	end
 	
-	function t.trackPersonCardMenuToggled(_, p1)
-		-- upvalues: t_1 (ref), telemetryService (ref)
-		telemetryService:LogEvent(t_1.PersonCardMenuToggled.eventConfig, {
+	function PeopleAnalyticsManager:trackPersonCardMenuToggled(p1) --[[ Line: 411 ]]
+		-- upvalues: TelemetryConfigs (copy), TelemetryService (copy)
+		TelemetryService:LogEvent(TelemetryConfigs.PersonCardMenuToggled.eventConfig, {
 			customFields = { is_toggled_on = tostring(p1) },
 			standardizedFields = {
 				"addPlaceId",
@@ -382,50 +375,51 @@ if getFFlagAddPeoplePageCardLayout() then
 		})
 	end
 end
-local t_2 = {
+local config = {
 	openedVolumeUiList = false,
 	openedVolumeUiCard = false,
 	changedPerUserVolume = false,
 	reported = false
 }
 
-local function _()
-	-- upvalues: fFlagVoiceChatVolumePerUserDisableInteractionWhenMuted (ref), uXVARIANT (ref), fFlagVoiceChatVolumePerUserMuteVolumeSync (ref)
-	return if fFlagVoiceChatVolumePerUserDisableInteractionWhenMuted then uXVARIANT.DISABLE_WHEN_MUTED elseif fFlagVoiceChatVolumePerUserMuteVolumeSync then uXVARIANT.SYNC else uXVARIANT.INDEPENDENT
+local function _() --[[ Line: 442 | Named "getPerUserVoiceVolumeUxVariant" ]]
+	-- upvalues: FFlagVoiceChatVolumePerUserDisableInteractionWhenMuted (copy), UXVARIANT (copy), FFlagVoiceChatVolumePerUserMuteVolumeSync (copy)
+	return if FFlagVoiceChatVolumePerUserDisableInteractionWhenMuted then UXVARIANT.DISABLE_WHEN_MUTED elseif FFlagVoiceChatVolumePerUserMuteVolumeSync then UXVARIANT.SYNC else UXVARIANT.INDEPENDENT
 end
 
-local _ = function()
-	-- upvalues: t_2 (ref)
-	t_2.openedVolumeUiList = false
-	t_2.openedVolumeUiCard = false
-	t_2.changedPerUserVolume = false
-	t_2.reported = false
+local _ = function() --[[ Line: 452 | Named "resetPerUserVoiceVolumeSessionState" ]]
+	-- upvalues: config (copy)
+	config.openedVolumeUiList = false
+	config.openedVolumeUiCard = false
+	config.changedPerUserVolume = false
+	config.reported = false
 end
 
-function t.getPerUserVoiceVolumeUxVariant()
-	-- upvalues: fFlagVoiceChatVolumePerUserDisableInteractionWhenMuted (ref), uXVARIANT (ref), fFlagVoiceChatVolumePerUserMuteVolumeSync (ref)
-	return if fFlagVoiceChatVolumePerUserDisableInteractionWhenMuted then uXVARIANT.DISABLE_WHEN_MUTED elseif fFlagVoiceChatVolumePerUserMuteVolumeSync then uXVARIANT.SYNC else uXVARIANT.INDEPENDENT
+function PeopleAnalyticsManager.getPerUserVoiceVolumeUxVariant() --[[ Line: 459 ]]
+	-- upvalues: FFlagVoiceChatVolumePerUserDisableInteractionWhenMuted (copy), UXVARIANT (copy), FFlagVoiceChatVolumePerUserMuteVolumeSync (copy)
+	return if FFlagVoiceChatVolumePerUserDisableInteractionWhenMuted then UXVARIANT.DISABLE_WHEN_MUTED elseif FFlagVoiceChatVolumePerUserMuteVolumeSync then UXVARIANT.SYNC else UXVARIANT.INDEPENDENT
 end
 
-function t.recordPerUserVoiceVolumeUiOpened(_, p1)
-	-- upvalues: fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (ref), ENTRY_POINT (ref), t_2 (ref)
-	if not fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then return end
-	if p1 == ENTRY_POINT.PEOPLE_LIST then
-		t_2.openedVolumeUiList = true
+function PeopleAnalyticsManager:recordPerUserVoiceVolumeUiOpened(PEOPLECARD) --[[ Line: 463 ]]
+	-- upvalues: FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (copy), ENTRYPOINT (copy), config (copy)
+	if not FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then return end
+	if PEOPLECARD == ENTRYPOINT.PEOPLE_LIST then
+		config.openedVolumeUiList = true
 		
 		return
-	elseif p1 == ENTRY_POINT.PEOPLE_CARD then
-		t_2.openedVolumeUiCard = true
+	end
+	if PEOPLECARD == ENTRYPOINT.PEOPLE_CARD then
+		config.openedVolumeUiCard = true
 	end
 end
 
-function t.trackPerUserVoiceVolumeSliderTouch(_, p1)
-	-- upvalues: fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (ref), fFlagVoiceChatVolumePerUserDisableInteractionWhenMuted (ref), uXVARIANT (ref), fFlagVoiceChatVolumePerUserMuteVolumeSync (ref), telemetryService (ref), t_1 (ref)
-	if fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then
-		telemetryService:LogCounter(t_1.PerUserVoiceVolumeSliderTouch.counterConfig, {
+function PeopleAnalyticsManager:trackPerUserVoiceVolumeSliderTouch(EntryPoint) --[[ Line: 475 ]]
+	-- upvalues: FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (copy), FFlagVoiceChatVolumePerUserDisableInteractionWhenMuted (copy), UXVARIANT (copy), FFlagVoiceChatVolumePerUserMuteVolumeSync (copy), TelemetryService (copy), TelemetryConfigs (copy)
+	if FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then
+		TelemetryService:LogCounter(TelemetryConfigs.PerUserVoiceVolumeSliderTouch.counterConfig, {
 			customFields = {
-				entryPoint = p1,
-				uxVariant = if fFlagVoiceChatVolumePerUserDisableInteractionWhenMuted then uXVARIANT.DISABLE_WHEN_MUTED elseif fFlagVoiceChatVolumePerUserMuteVolumeSync then uXVARIANT.SYNC else uXVARIANT.INDEPENDENT
+				entryPoint = EntryPoint,
+				uxVariant = if FFlagVoiceChatVolumePerUserDisableInteractionWhenMuted then UXVARIANT.DISABLE_WHEN_MUTED elseif FFlagVoiceChatVolumePerUserMuteVolumeSync then UXVARIANT.SYNC else UXVARIANT.INDEPENDENT
 			}
 		}, 1)
 		
@@ -433,34 +427,15 @@ function t.trackPerUserVoiceVolumeSliderTouch(_, p1)
 	end
 end
 
-function t.trackPerUserVoiceVolumeChanged(_, p1)
-	-- upvalues: fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (ref), fFlagVoiceChatVolumePerUserDisableInteractionWhenMuted (ref), uXVARIANT (ref), fFlagVoiceChatVolumePerUserMuteVolumeSync (ref), VOICE_VOLUME (ref), userGameSettingsService (ref), telemetryService (ref), t_1 (ref), t_2 (ref)
-	if not fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then return end
+function PeopleAnalyticsManager:trackPerUserVoiceVolumeChanged(p1) --[[ Line: 490 ]]
+	-- upvalues: FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (copy), FFlagVoiceChatVolumePerUserDisableInteractionWhenMuted (copy), UXVARIANT (copy), FFlagVoiceChatVolumePerUserMuteVolumeSync (copy), VOICEVOLUME (copy), UserGameSettings (copy), TelemetryService (copy), TelemetryConfigs (copy), config (copy)
+	if not FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then return end
 	if p1.newVolume == p1.oldVolume then return end
-	local var1
-	local var2 = if fFlagVoiceChatVolumePerUserDisableInteractionWhenMuted then uXVARIANT.DISABLE_WHEN_MUTED elseif fFlagVoiceChatVolumePerUserMuteVolumeSync then uXVARIANT.SYNC else uXVARIANT.INDEPENDENT
-	local wasMutedAtStart = p1.wasMutedAtStart
-	
-	if var2 == uXVARIANT.SYNC then
-		local var3
-		var1 = false
-		
-		if wasMutedAtStart == false then
-			local _ = p1.newVolume == VOICE_VOLUME.MIN
-		end
-	else
-		var1 = nil
-	end
-	if var2 == uXVARIANT.SYNC then
-		var3 = false
-		
-		if wasMutedAtStart == true then
-			local _ = VOICE_VOLUME.MIN < p1.newVolume
-		end
-	else
-		var3 = nil
-	end
-	telemetryService:LogEvent(t_1.PerUserVoiceVolumeChanged.eventConfig, {
+	local DISABLEWHENMUTED = if FFlagVoiceChatVolumePerUserDisableInteractionWhenMuted then UXVARIANT.DISABLE_WHEN_MUTED elseif FFlagVoiceChatVolumePerUserMuteVolumeSync then UXVARIANT.SYNC else UXVARIANT.INDEPENDENT
+	local WasMutedAtStart = p1.wasMutedAtStart
+	local IsNewVolumeMatch = if DISABLEWHENMUTED == UXVARIANT.SYNC then WasMutedAtStart == false and p1.newVolume == VOICEVOLUME.MIN else nil
+	local IsMINBelow = if DISABLEWHENMUTED == UXVARIANT.SYNC then WasMutedAtStart == true and VOICEVOLUME.MIN < p1.newVolume else nil
+	TelemetryService:LogEvent(TelemetryConfigs.PerUserVoiceVolumeChanged.eventConfig, {
 		customFields = {
 			playSessionId = p1.playSessionId,
 			voiceSessionId = p1.voiceSessionId,
@@ -468,64 +443,73 @@ function t.trackPerUserVoiceVolumeChanged(_, p1)
 			targetUserId = p1.targetUserId,
 			oldVolume = p1.oldVolume,
 			newVolume = p1.newVolume,
-			wasMutedAtStart = if var2 == uXVARIANT.DISABLE_WHEN_MUTED then nil else wasMutedAtStart,
-			mutedViaSlider = var1,
-			unmutedViaSlider = var3,
-			uxVariant = var2,
-			masterVolume = userGameSettingsService.MasterVolume,
-			voiceChatVolume = userGameSettingsService.VoiceChatVolume,
+			wasMutedAtStart = if DISABLEWHENMUTED == UXVARIANT.DISABLE_WHEN_MUTED then nil else WasMutedAtStart,
+			mutedViaSlider = IsNewVolumeMatch,
+			unmutedViaSlider = IsMINBelow,
+			uxVariant = DISABLEWHENMUTED,
+			masterVolume = UserGameSettings.MasterVolume,
+			voiceChatVolume = UserGameSettings.VoiceChatVolume,
 			dragDurationMs = p1.dragDurationMs
 		},
 		standardizedFields = { "addPlaceId", "addUniverseId" }
 	})
-	t_2.changedPerUserVolume = true
+	config.changedPerUserVolume = true
 	
-	if var1 then
-		telemetryService:LogCounter(t_1.PerUserVoiceVolumeMutedViaSlider.counterConfig, {
-			customFields = { entryPoint = p1.entryPoint, uxVariant = var2 }
+	if IsNewVolumeMatch then
+		TelemetryService:LogCounter(TelemetryConfigs.PerUserVoiceVolumeMutedViaSlider.counterConfig, {
+			customFields = {
+				entryPoint = p1.entryPoint,
+				uxVariant = DISABLEWHENMUTED
+			}
 		}, 1)
 	end
-	if var3 then
-		telemetryService:LogCounter(t_1.PerUserVoiceVolumeUnmutedViaSlider.counterConfig, {
-			customFields = { entryPoint = p1.entryPoint, uxVariant = var2 }
+	if IsMINBelow then
+		TelemetryService:LogCounter(TelemetryConfigs.PerUserVoiceVolumeUnmutedViaSlider.counterConfig, {
+			customFields = {
+				entryPoint = p1.entryPoint,
+				uxVariant = DISABLEWHENMUTED
+			}
 		}, 1)
 	end
 end
 
-function t.flushPerUserVoiceVolumeSession(_, p1, p2)
-	-- upvalues: fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (ref), t_2 (ref), fFlagVoiceVolumeControlsPerUserPlayerListButton (ref), fFlagVoiceVolumeControlsPerUserPlayerGridMenu (ref), fFlagVoiceChatVolumePerUserDisableInteractionWhenMuted (ref), uXVARIANT (ref), fFlagVoiceChatVolumePerUserMuteVolumeSync (ref), telemetryService (ref), t_1 (ref)
-	if not fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then return end
-	if t_2.reported then return end
-	t_2.reported = true
-	local var1 = if fFlagVoiceVolumeControlsPerUserPlayerListButton then t_2.openedVolumeUiList else nil
-	local var2 = if fFlagVoiceVolumeControlsPerUserPlayerGridMenu then t_2.openedVolumeUiCard else nil
-	telemetryService:LogEvent(t_1.PerUserVoiceVolumeSession.eventConfig, {
-		customFields = {
-			playSessionId = p1,
-			voiceSessionId = p2,
-			openedVolumeUi = if var1 ~= true then var2 == true else true,
-			openedVolumeUiList = var1,
-			openedVolumeUiCard = var2,
-			changedPerUserVolume = t_2.changedPerUserVolume,
-			uxVariant = if fFlagVoiceChatVolumePerUserDisableInteractionWhenMuted then uXVARIANT.DISABLE_WHEN_MUTED elseif fFlagVoiceChatVolumePerUserMuteVolumeSync then uXVARIANT.SYNC else uXVARIANT.INDEPENDENT
-		},
-		standardizedFields = { "addPlaceId", "addUniverseId" }
-	})
-	t_2.openedVolumeUiList = false
-	t_2.openedVolumeUiCard = false
-	t_2.changedPerUserVolume = false
-end
-
-function t.resetPerUserVoiceVolumeSession(_)
-	-- upvalues: fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (ref), t_2 (ref)
-	if fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then
-		t_2.openedVolumeUiList = false
-		t_2.openedVolumeUiCard = false
-		t_2.changedPerUserVolume = false
-		t_2.reported = false
+function PeopleAnalyticsManager:flushPerUserVoiceVolumeSession(PlaySessionId, VoiceSessionId) --[[ Line: 552 ]]
+	-- upvalues: FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (copy), config (copy), FFlagVoiceVolumeControlsPerUserPlayerListButton (copy), FFlagVoiceVolumeControlsPerUserPlayerGridMenu (copy), FFlagVoiceChatVolumePerUserDisableInteractionWhenMuted (copy), UXVARIANT (copy), FFlagVoiceChatVolumePerUserMuteVolumeSync (copy), TelemetryService (copy), TelemetryConfigs (copy)
+	if not FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then return end
+	if not config.reported then
+		config.reported = true
+		local OpenedVolumeUiList = if FFlagVoiceVolumeControlsPerUserPlayerListButton then config.openedVolumeUiList else nil
+		local OpenedVolumeUiCard = if FFlagVoiceVolumeControlsPerUserPlayerGridMenu then config.openedVolumeUiCard else nil
+		TelemetryService:LogEvent(TelemetryConfigs.PerUserVoiceVolumeSession.eventConfig, {
+			customFields = {
+				playSessionId = PlaySessionId,
+				voiceSessionId = VoiceSessionId,
+				openedVolumeUi = OpenedVolumeUiList == true or OpenedVolumeUiCard == true,
+				openedVolumeUiList = OpenedVolumeUiList,
+				openedVolumeUiCard = OpenedVolumeUiCard,
+				changedPerUserVolume = config.changedPerUserVolume,
+				uxVariant = if FFlagVoiceChatVolumePerUserDisableInteractionWhenMuted then UXVARIANT.DISABLE_WHEN_MUTED elseif FFlagVoiceChatVolumePerUserMuteVolumeSync then UXVARIANT.SYNC else UXVARIANT.INDEPENDENT
+			},
+			standardizedFields = { "addPlaceId", "addUniverseId" }
+		})
+		config.openedVolumeUiList = false
+		config.openedVolumeUiCard = false
+		config.changedPerUserVolume = false
 		
 		return
 	end
 end
 
-return t
+function PeopleAnalyticsManager:resetPerUserVoiceVolumeSession() --[[ Line: 590 ]]
+	-- upvalues: FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (copy), config (copy)
+	if FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then
+		config.openedVolumeUiList = false
+		config.openedVolumeUiCard = false
+		config.changedPerUserVolume = false
+		config.reported = false
+		
+		return
+	end
+end
+
+return PeopleAnalyticsManager

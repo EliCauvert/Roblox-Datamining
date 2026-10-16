@@ -1,20 +1,20 @@
-﻿local t = {
-	getter = function(p1)
-		return { type = "getter", callback = p1 }
+﻿local DimensionsModule = {
+	getter = function(Callback) --[[ Line: 27 ]]
+		return { type = "getter", callback = Callback }
 	end,
-	consistentSize = function(p1)
-		return { type = "consistentSize", size = p1 }
+	consistentSize = function(Size) --[[ Line: 34 ]]
+		return { type = "consistentSize", size = Size }
 	end,
-	consistentUDim2 = function(p1)
-		return { type = "consistentUDim2", udim2 = p1 }
+	consistentUDim2 = function(Udim2) --[[ Line: 41 ]]
+		return { type = "consistentUDim2", udim2 = Udim2 }
 	end
 }
 
-function t.withSpacing(p1, p2)
-	-- upvalues: t (ref)
-	assert(p1.type ~= "getter", "withSpacing does not support getter. Instead, include your padding as part of your returned position.")
+function DimensionsModule.withSpacing(Inner, Spacing) --[[ Line: 48 ]]
+	-- upvalues: DimensionsModule (copy)
+	assert(Inner.type ~= "getter", "withSpacing does not support getter. Instead, include your padding as part of your returned position.")
 	
-	return if p1.type == "spaced" then t.withSpacing(p1.inner, p2) else { type = "spaced", spacing = p2, inner = p1 }
+	return if Inner.type == "spaced" then DimensionsModule.withSpacing(Inner.inner, Spacing) else { type = "spaced", spacing = Spacing, inner = Inner }
 end
 
-return t
+return DimensionsModule

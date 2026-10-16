@@ -1,43 +1,44 @@
-﻿local parent = script.Parent.Parent
-local captureService = game:GetService("CaptureService")
-local _ = require(parent.Types)
-local fFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
-local fFlagCaptureServiceRetrieveCapturesSafeguardModule = require(parent.Flags.FFlagCaptureServiceRetrieveCapturesSafeguard)
+﻿local Parent = script.Parent.Parent
+local CaptureService = game:GetService("CaptureService")
+local _ = require(Parent.Types)
+local FFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(Parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
+local FFlagCaptureServiceRetrieveCapturesSafeguardModule = require(Parent.Flags.FFlagCaptureServiceRetrieveCapturesSafeguard)
 
-return function()
-	-- upvalues: fFlagEnableCapturesGalleryRetrievalCoreScriptModule (ref), captureService (ref), fFlagCaptureServiceRetrieveCapturesSafeguardModule (ref)
-	if fFlagEnableCapturesGalleryRetrievalCoreScriptModule then
-		local ok, status = pcall(function()
-			-- upvalues: captureService (copy)
-			local var1, var2 = captureService:ReadCapturesFromGalleryAsync()
+return function() --[[ Line: 12 | Named "fetchCapturesFromGallery" ]]
+	-- upvalues: FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CaptureService (copy), FFlagCaptureServiceRetrieveCapturesSafeguardModule (copy)
+	if FFlagEnableCapturesGalleryRetrievalCoreScriptModule then
+		local Success, Result = pcall(function() --[[ Line: 14 ]]
+			-- upvalues: CaptureService (upval)
+			local CapturesFromGalleryAsync, CapturesFromGalleryAsync2 = CaptureService:ReadCapturesFromGalleryAsync()
 			
-			return if var1 == Enum.ReadCapturesFromGalleryResult.Success then var2 else nil
+			return if CapturesFromGalleryAsync == Enum.ReadCapturesFromGalleryResult.Success then CapturesFromGalleryAsync2 else nil
 		end)
 		
-		if ok and status then
-			local t = {}
+		if not Success or not Result then
+			warn("Failed to retrieve captures from gallery")
 			
-			for i, v in ipairs(status:GetCurrentPage()) do
-				table.insert(t, v)
-			end
-			return t
+			return {}
+		end
+		local List = {}
+		
+		for _, value in ipairs((Result:GetCurrentPage())) do
+			table.insert(List, value)
+		end
+		return List
+	elseif not FFlagCaptureServiceRetrieveCapturesSafeguardModule then
+		return CaptureService:RetrieveCaptures()
+	else
+		local Success1, Result1 = pcall(function() --[[ Line: 35 ]]
+			-- upvalues: CaptureService (upval)
+			return CaptureService:RetrieveCaptures()
+		end)
+		
+		if Success1 then
+			return Result1
 		else
 			warn("Failed to retrieve captures from gallery")
 			
 			return {}
 		end
-	elseif not fFlagCaptureServiceRetrieveCapturesSafeguardModule then
-		return captureService:RetrieveCaptures()
 	end
-	local ok, status = pcall(function()
-		-- upvalues: captureService (copy)
-		return captureService:RetrieveCaptures()
-	end)
-	
-	if ok then
-		return status
-	end
-	warn("Failed to retrieve captures from gallery")
-	
-	return {}
 end

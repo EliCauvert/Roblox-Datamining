@@ -1,13 +1,14 @@
 ﻿local APIUtilModule = require(script.Parent.Parent.util.APIUtil)
-local httpService = game:GetService("HttpService")
-local text = string.format("https://itemconfiguration.%s", APIUtilModule.getBaseDomain()) .. "v1/creations/get-asset-details"
+local HttpService = game:GetService("HttpService")
+local Text = string.format("https://itemconfiguration.%s", (APIUtilModule.getBaseDomain())) .. "v1/creations/get-asset-details"
 
-return function(value)
-	-- upvalues: APIUtilModule (ref), text (ref), httpService (ref)
-	local var1, var2 = APIUtilModule.requestAndRetryPost(text, httpService:JSONEncode({ assetIds = value }))
+return function(AssetIds) --[[ Line: 13 | Named "getAssetCreationDetails" ]]
+	-- upvalues: APIUtilModule (copy), Text (copy), HttpService (copy)
+	local RequestAndRetryPostResult, RequestAndRetryPostResult2 = APIUtilModule.requestAndRetryPost(Text, HttpService:JSONEncode({ assetIds = AssetIds }))
 	
-	if var1 then
-		return true, httpService:JSONDecode(var2)
+	if RequestAndRetryPostResult then
+		return true, HttpService:JSONDecode(RequestAndRetryPostResult2)
+	else
+		return false, RequestAndRetryPostResult2
 	end
-	return false, var2
 end

@@ -1,6 +1,6 @@
-﻿local twoStepErrorCodesModule = require(script:FindFirstAncestor("AuthCommon").Enums.TwoStepErrorCodes)
+﻿local TwoStepErrorCodesModule = require(script:FindFirstAncestor("AuthCommon").Enums.TwoStepErrorCodes)
 
-return function(p1)
-	-- upvalues: twoStepErrorCodesModule (ref)
-	return if p1 == twoStepErrorCodesModule.IllegalChildAccountLinking then "Authentication.Login.LinkIllegalChildAccountLinking" else "Authentication.Login.Response.SomethingWentWrong"
+return function(IllegalChildAccountLinking): string --[[ Line: 9 | Named "getTwoStepLoginErrorKey" ]]
+	-- upvalues: TwoStepErrorCodesModule (copy)
+	return if IllegalChildAccountLinking == TwoStepErrorCodesModule.IllegalChildAccountLinking then "Authentication.Login.LinkIllegalChildAccountLinking" else "Authentication.Login.Response.SomethingWentWrong"
 end

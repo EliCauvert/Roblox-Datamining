@@ -1,14 +1,14 @@
-﻿local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
-local parent = script.Parent.Parent.Parent
-local getPlatformTarget = require(parent.Analytics).getPlatformTarget
-local cryoModule = require(parent.Cryo)
+﻿local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
+local Parent = script.Parent.Parent.Parent
+local GetPlatformTargetFunction = require(Parent.Analytics).getPlatformTarget
+local CryoModule = require(Parent.Cryo)
 
-return function(p1)
-	-- upvalues: rbxAnalyticsService (ref), cryoModule (ref), getPlatformTarget (ref)
-	local playSessionId = rbxAnalyticsService:GetPlaySessionId()
+return function(p1) --[[ Line: 8 ]]
+	-- upvalues: RbxAnalyticsService (copy), CryoModule (copy), GetPlatformTargetFunction (copy)
+	local PlaySessionId = RbxAnalyticsService:GetPlaySessionId()
 	
-	return function(p2, p3, p4)
-		-- upvalues: cryoModule (copy), playSessionId (ref), p1 (ref), getPlatformTarget (copy)
-		p1:SendEventDeferred(getPlatformTarget(), p2, p3, cryoModule.Dictionary.join(p4 or {}, { playSessionId = playSessionId }))
+	return function(EventContext, EventName, p2) --[[ Line: 11 ]]
+		-- upvalues: CryoModule (upval), PlaySessionId (copy), p1 (copy), GetPlatformTargetFunction (upval)
+		p1:SendEventDeferred(GetPlatformTargetFunction(), EventContext, EventName, (CryoModule.Dictionary.join(p2 or {}, { playSessionId = PlaySessionId })))
 	end
 end

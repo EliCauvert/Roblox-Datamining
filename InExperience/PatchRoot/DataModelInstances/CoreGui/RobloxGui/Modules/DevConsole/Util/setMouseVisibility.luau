@@ -1,16 +1,18 @@
-﻿local userInputService = game:GetService("UserInputService")
+﻿local UserInputService = game:GetService("UserInputService")
 local VRService = game:GetService("VRService")
 
-return function(p1)
-	-- upvalues: userInputService (ref), VRService (ref)
+return function(p1) --[[ Line: 6 ]]
+	-- upvalues: UserInputService (copy), VRService (copy)
 	if p1 then
-		userInputService.OverrideMouseIconBehavior = Enum.OverrideMouseIconBehavior.ForceShow
-		
-		return
-	elseif VRService.VREnabled then
-		userInputService.OverrideMouseIconBehavior = Enum.OverrideMouseIconBehavior.ForceHide
+		UserInputService.OverrideMouseIconBehavior = Enum.OverrideMouseIconBehavior.ForceShow
 		
 		return
 	end
-	userInputService.OverrideMouseIconBehavior = Enum.OverrideMouseIconBehavior.None
+	if VRService.VREnabled then
+		UserInputService.OverrideMouseIconBehavior = Enum.OverrideMouseIconBehavior.ForceHide
+		
+		return
+	else
+		UserInputService.OverrideMouseIconBehavior = Enum.OverrideMouseIconBehavior.None
+	end
 end

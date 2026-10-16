@@ -1,8 +1,8 @@
-﻿local signalsModule = require(script:FindFirstAncestor("CoreGuiCommon").Parent.Signals)
+﻿local SignalsModule = require(script:FindFirstAncestor("CoreGuiCommon").Parent.Signals)
 
-return function()
-	-- upvalues: signalsModule (ref)
-	local var1, var2 = signalsModule.createSignal(false)
+return function() --[[ Line: 12 ]]
+	-- upvalues: SignalsModule (copy)
+	local Signal, Signal2 = SignalsModule.createSignal(false)
 	
-	return { getVisibility = var1, setVisibility = var2 }
+	return { getVisibility = Signal, setVisibility = Signal2 }
 end

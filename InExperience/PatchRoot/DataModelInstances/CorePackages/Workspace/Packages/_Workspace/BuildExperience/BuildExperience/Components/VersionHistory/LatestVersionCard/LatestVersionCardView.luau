@@ -1,78 +1,78 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local button = foundationModule.Button
-local text = foundationModule.Text
-local view = foundationModule.View
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local fillBehavior = foundationModule.Enums.FillBehavior
-local iconName = foundationModule.Enums.IconName
-local inputSize = foundationModule.Enums.InputSize
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local Button = FoundationModule.Button
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local FillBehavior = FoundationModule.Enums.FillBehavior
+local IconName = FoundationModule.Enums.IconName
+local InputSize = FoundationModule.Enums.InputSize
 
-return function(p1)
-	-- upvalues: reactModule (ref), view (ref), text (ref), button (ref), iconName (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref)
-	local testId = p1.testId or "LatestVersionCardView"
+return function(p1) --[[ Line: 30 | Named "LatestVersionCardView" ]]
+	-- upvalues: ReactModule (copy), View (copy), Text (copy), Button (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy)
+	local TestId = p1.testId or "LatestVersionCardView"
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col gap-large size-full-0 auto-y padding-x-large padding-bottom-large padding-top-medium radius-large clip bg-shift-200",
 		LayoutOrder = p1.layoutOrder,
-		testId = testId
+		testId = TestId
 	}, {
-		Content = reactModule.createElement(view, {
+		Content = ReactModule.createElement(View, {
 			LayoutOrder = 1,
 			tag = "col gap-xxsmall size-full-0 auto-y",
-			testId = `{testId}-content`
+			testId = `{TestId}-content`
 		}, {
-			Eyebrow = reactModule.createElement(view, {
+			Eyebrow = ReactModule.createElement(View, {
 				LayoutOrder = 1,
 				tag = "col align-x-left align-y-top gap-xxsmall size-full-0 auto-y",
-				testId = `{testId}-eyebrow`
+				testId = `{TestId}-eyebrow`
 			}, {
-				Version = reactModule.createElement(text, {
+				Version = ReactModule.createElement(Text, {
 					LayoutOrder = 1,
 					tag = "size-full-0 auto-y text-caption-medium text-align-x-left content-muted",
 					Text = p1.versionLabel,
-					testId = `{testId}-version`
+					testId = `{TestId}-version`
 				}),
-				Title = reactModule.createElement(text, {
+				Title = ReactModule.createElement(Text, {
 					LayoutOrder = 2,
 					tag = "size-full-0 auto-y text-title-medium text-wrap text-align-x-left content-emphasis",
 					Text = p1.title,
-					testId = `{testId}-title`
+					testId = `{TestId}-title`
 				})
 			}),
-			Description = reactModule.createElement(text, {
+			Description = ReactModule.createElement(Text, {
 				LayoutOrder = 2,
 				tag = "size-full-0 auto-y text-body-small text-wrap text-align-x-left content-emphasis",
 				Text = p1.description,
-				testId = `{testId}-description`
+				testId = `{TestId}-description`
 			})
 		}),
-		Actions = reactModule.createElement(view, {
+		Actions = ReactModule.createElement(View, {
 			LayoutOrder = 2,
 			tag = "row gap-small size-full-0 auto-y",
-			testId = `{testId}-actions`
+			testId = `{TestId}-actions`
 		}, {
-			Playtest = reactModule.createElement(button, {
+			Playtest = ReactModule.createElement(Button, {
 				LayoutOrder = 1,
 				text = p1.playtestText,
-				icon = iconName.PlaySmall,
-				size = inputSize.Small,
-				variant = buttonVariant.SoftEmphasis,
-				fillBehavior = fillBehavior.Fill,
+				icon = IconName.PlaySmall,
+				size = InputSize.Small,
+				variant = ButtonVariant.SoftEmphasis,
+				fillBehavior = FillBehavior.Fill,
 				isDisabled = p1.isPlaytestDisabled,
 				onActivated = p1.onPlaytestActivated,
-				testId = `{testId}-playtest`
+				testId = `{TestId}-playtest`
 			}),
-			Publish = reactModule.createElement(button, {
+			Publish = ReactModule.createElement(Button, {
 				LayoutOrder = 2,
 				text = p1.publishText,
-				size = inputSize.Small,
-				variant = buttonVariant.Standard,
-				fillBehavior = fillBehavior.Fill,
+				size = InputSize.Small,
+				variant = ButtonVariant.Standard,
+				fillBehavior = FillBehavior.Fill,
 				isDisabled = p1.isPublishDisabled,
 				onActivated = p1.onPublishActivated,
-				testId = `{testId}-publish`
+				testId = `{TestId}-publish`
 			})
 		})
 	})

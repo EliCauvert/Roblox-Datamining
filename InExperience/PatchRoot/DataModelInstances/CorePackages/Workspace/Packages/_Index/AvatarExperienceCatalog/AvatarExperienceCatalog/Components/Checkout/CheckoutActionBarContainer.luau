@@ -1,9 +1,9 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local reactModule = require(avatarExperienceCatalog.Parent.React)
-local useCheckoutActionBarPropsModule = require(avatarExperienceCatalog.Components.Checkout.useCheckoutActionBarProps)
-local checkoutActionBarModule = require(avatarExperienceCatalog.Components.Checkout.CheckoutActionBar)
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local ReactModule = require(AvatarExperienceCatalog.Parent.React)
+local UseCheckoutActionBarPropsModule = require(AvatarExperienceCatalog.Components.Checkout.useCheckoutActionBarProps)
+local CheckoutActionBarModule = require(AvatarExperienceCatalog.Components.Checkout.CheckoutActionBar)
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useCheckoutActionBarPropsModule (ref), reactModule (ref), checkoutActionBarModule (ref)
-	return reactModule.createElement(checkoutActionBarModule, useCheckoutActionBarPropsModule(p1, p2))
-end))
+return ReactModule.memo((ReactModule.forwardRef(function(p1, p2) --[[ Line: 10 ]]
+	-- upvalues: UseCheckoutActionBarPropsModule (copy), ReactModule (copy), CheckoutActionBarModule (copy)
+	return ReactModule.createElement(CheckoutActionBarModule, (UseCheckoutActionBarPropsModule(p1, p2)))
+end)))

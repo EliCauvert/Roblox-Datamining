@@ -1,11 +1,11 @@
-﻿local parent = script:FindFirstAncestor("SocialLuaAnalytics").Parent
-local eventIngestService = game:GetService("EventIngestService")
+﻿local Parent = script:FindFirstAncestor("SocialLuaAnalytics").Parent
+local EventIngestService = game:GetService("EventIngestService")
 
 return {
 	EventStream = {
-		setRBXEventStream = require(script.Parent.setupSetRbxEventStream)(eventIngestService),
-		sendEventDeferred = require(script.Parent.setupSendEventDeferred)(eventIngestService)
+		setRBXEventStream = require(script.Parent.setupSetRbxEventStream)(EventIngestService),
+		sendEventDeferred = require(script.Parent.setupSendEventDeferred)(EventIngestService)
 	},
-	Diag = require(parent.Analytics).Analytics.new(game:GetService("RbxAnalyticsService")).Diag,
-	Telemetry = require(parent.LoggingProtocol).default
+	Diag = require(Parent.Analytics).Analytics.new(game:GetService("RbxAnalyticsService")).Diag,
+	Telemetry = require(Parent.LoggingProtocol).default
 }

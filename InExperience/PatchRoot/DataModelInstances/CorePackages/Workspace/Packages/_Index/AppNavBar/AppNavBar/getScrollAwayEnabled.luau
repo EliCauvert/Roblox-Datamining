@@ -1,22 +1,22 @@
-﻿local parent = script.Parent.Parent
-local universalAppPolicyModule = require(parent.UniversalAppPolicy)
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagAppIaScrollAway = sharedFlagsModule.FFlagAppIaScrollAway
-local fFlagAppIaScrollAwayGuac = sharedFlagsModule.FFlagAppIaScrollAwayGuac
-local enableFlyoutWithScrollAway2 = game:DefineFastFlag("EnableFlyoutWithScrollAway2", false)
-local flyoutSidePanelIXP = require(parent.SharedExperimentDefinition).FlyoutSidePanelIXP
+﻿local Parent = script.Parent.Parent
+local UniversalAppPolicyModule = require(Parent.UniversalAppPolicy)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagAppIaScrollAway = SharedFlagsModule.FFlagAppIaScrollAway
+local FFlagAppIaScrollAwayGuac = SharedFlagsModule.FFlagAppIaScrollAwayGuac
+local EnableFlyoutWithScrollAway2 = game:DefineFastFlag("EnableFlyoutWithScrollAway2", false)
+local FlyoutSidePanelIXP = require(Parent.SharedExperimentDefinition).FlyoutSidePanelIXP
 
-local function _()
-	-- upvalues: fFlagAppIaScrollAway (ref), fFlagAppIaScrollAwayGuac (ref), universalAppPolicyModule (ref), enableFlyoutWithScrollAway2 (ref), flyoutSidePanelIXP (ref)
-	return if fFlagAppIaScrollAway then if fFlagAppIaScrollAwayGuac and not universalAppPolicyModule.getAppFeaturePolicies().getAppIaScrollAwayEnabled() then false else enableFlyoutWithScrollAway2 and flyoutSidePanelIXP.isScrollAwayEnabled() else false
+local function _(): boolean --[[ Line: 12 | Named "getScrollAwayEnabled" ]]
+	-- upvalues: FFlagAppIaScrollAway (copy), FFlagAppIaScrollAwayGuac (copy), UniversalAppPolicyModule (copy), EnableFlyoutWithScrollAway2 (copy), FlyoutSidePanelIXP (copy)
+	return if FFlagAppIaScrollAway then (not FFlagAppIaScrollAwayGuac or UniversalAppPolicyModule.getAppFeaturePolicies().getAppIaScrollAwayEnabled()) and (if EnableFlyoutWithScrollAway2 and FlyoutSidePanelIXP.isScrollAwayEnabled() then true else false) else false
 end
 
-local var1 = nil
+local v1 = nil
 
-return function()
-	-- upvalues: var1 (write), fFlagAppIaScrollAway (ref), fFlagAppIaScrollAwayGuac (ref), universalAppPolicyModule (ref), enableFlyoutWithScrollAway2 (ref), flyoutSidePanelIXP (ref)
-	if var1 == nil then
-		var1 = not fFlagAppIaScrollAway and (if fFlagAppIaScrollAwayGuac and not universalAppPolicyModule.getAppFeaturePolicies().getAppIaScrollAwayEnabled() then false elseif enableFlyoutWithScrollAway2 and flyoutSidePanelIXP.isScrollAwayEnabled() then true else false)
+return function(): boolean --[[ Line: 29 ]]
+	-- upvalues: v1 (ref), FFlagAppIaScrollAway (copy), FFlagAppIaScrollAwayGuac (copy), UniversalAppPolicyModule (copy), EnableFlyoutWithScrollAway2 (copy), FlyoutSidePanelIXP (copy)
+	if v1 == nil then
+		v1 = if FFlagAppIaScrollAway then (not FFlagAppIaScrollAwayGuac or UniversalAppPolicyModule.getAppFeaturePolicies().getAppIaScrollAwayEnabled()) and (if EnableFlyoutWithScrollAway2 and FlyoutSidePanelIXP.isScrollAwayEnabled() then true else false) else false
 	end
-	return var1
+	return v1
 end

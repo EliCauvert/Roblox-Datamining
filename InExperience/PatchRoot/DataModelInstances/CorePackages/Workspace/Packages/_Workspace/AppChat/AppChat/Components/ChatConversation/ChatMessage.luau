@@ -1,63 +1,59 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
+﻿local AppChat = script:FindFirstAncestor("AppChat")
 
-if require(appChat.Flags.FFlagAppChatRefactorChatMessage) then
-	local parent = appChat.Parent
-	local cryoModule = require(parent.Cryo)
-	local _ = require(parent.MomentsTypes)
-	local reactModule = require(parent.React)
-	local text = require(parent.AppCommonLib).Text
-	local getTextSize = require(parent.Style).GetTextSize
-	local plainTextModule = require(script.Parent.PlainText)
-	local assetCardModule = require(script.Parent.AssetCard)
-	local hiddenMessageModule = require(script.Parent.HiddenMessage)
-	local enumMessageTypesModule = require(appChat.Components.ChatConversation.EnumMessageTypes)
-	local chatMessageContainerModule = require(script.Parent.ChatMessageContainer)
-	local loggerModule = require(script.Parent.Logger)
-	local pruneConsecutiveNewLines = require(appChat.SocialLibraries).Utils.pruneConsecutiveNewLines
-	local getModeratedMaskTextModule = require(appChat.Utils.getModeratedMaskText)
-	local fFlagAppChatEnableAutotranslationModule = require(appChat.Flags.FFlagAppChatEnableAutotranslation)
-	local fFlagChatModeratedMaskRandomLength = require(parent.SharedFlags).FFlagChatModeratedMaskRandomLength
-	local messageModelModule = require(appChat.Models.MessageModel)
-	local foundationModule = require(parent.Foundation)
-	local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-	local view = foundationModule.View
-	local image = foundationModule.Image
-	local chatMessageContainerConstantsModule = require(script.Parent.ChatMessageContainerConstants)
-	local BUBBLE_PADDING = chatMessageContainerConstantsModule.BUBBLE_PADDING
-	local TEXT_BUBBLE_X_PADDING = chatMessageContainerConstantsModule.TEXT_BUBBLE_X_PADDING
-	local TEXT_BUBBLE_X_WIDE_ADDITIONAL_PADDING = chatMessageContainerConstantsModule.TEXT_BUBBLE_X_WIDE_ADDITIONAL_PADDING
-	local t = {
-		[enumMessageTypesModule.PlainText] = {
+if require(AppChat.Flags.FFlagAppChatRefactorChatMessage) then
+	local Parent = AppChat.Parent
+	local CryoModule = require(Parent.Cryo)
+	local _ = require(Parent.MomentsTypes)
+	local ReactModule = require(Parent.React)
+	local Text = require(Parent.AppCommonLib).Text
+	local GetTextSizeFunction = require(Parent.Style).GetTextSize
+	local EnumMessageTypesModule = require(AppChat.Components.ChatConversation.EnumMessageTypes)
+	local ChatMessageContainerModule = require(script.Parent.ChatMessageContainer)
+	local LoggerModule = require(script.Parent.Logger)
+	local PruneConsecutiveNewLinesFunction = require(AppChat.SocialLibraries).Utils.pruneConsecutiveNewLines
+	local GetModeratedMaskTextModule = require(AppChat.Utils.getModeratedMaskText)
+	local FFlagAppChatEnableAutotranslationModule = require(AppChat.Flags.FFlagAppChatEnableAutotranslation)
+	local MessageModelModule = require(AppChat.Models.MessageModel)
+	local FoundationModule = require(Parent.Foundation)
+	local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+	local View = FoundationModule.View
+	local Image = FoundationModule.Image
+	local ChatMessageContainerConstantsModule = require(script.Parent.ChatMessageContainerConstants)
+	local BUBBLEPADDING = ChatMessageContainerConstantsModule.BUBBLE_PADDING
+	local TEXTBUBBLEXPADDING = ChatMessageContainerConstantsModule.TEXT_BUBBLE_X_PADDING
+	local TEXTBUBBLEXWIDEADDITIONALPADDING = ChatMessageContainerConstantsModule.TEXT_BUBBLE_X_WIDE_ADDITIONAL_PADDING
+	local config = {
+		[EnumMessageTypesModule.PlainText] = {
 			name = "PlainText",
 			paddingOffset = 0,
-			component = plainTextModule
+			component = require(script.Parent.PlainText)
 		},
-		[enumMessageTypesModule.Link] = {
+		[EnumMessageTypesModule.Link] = {
 			name = "AssetCard",
 			paddingOffset = 0,
-			component = assetCardModule
+			component = require(script.Parent.AssetCard)
 		}
 	}
-	local t_1 = {
+	local config1 = {
 		name = "Hidden",
 		paddingOffset = 0,
-		component = hiddenMessageModule
+		component = require(script.Parent.HiddenMessage)
 	}
 	
-	local function _(p1)
-		-- upvalues: messageModelModule (ref), t_1 (ref), t (ref)
-		return if p1 and p1.visibility == messageModelModule.VisibilityTypes.Hidden then t_1 else t[p1.messageType]
+	local function _(p1) --[[ Line: 57 | Named "getMessageComponent" ]]
+		-- upvalues: MessageModelModule (copy), config1 (copy), config (copy)
+		return if p1 and p1.visibility == MessageModelModule.VisibilityTypes.Hidden then config1 else config[p1.messageType]
 	end
 	
-	local useTokens = require(parent.Foundation).Hooks.useTokens
-	local t_2 = {
+	local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+	local config2 = {
 		additionalProps = {
 			shareLink = nil,
 			placeId = nil,
 			universeId = nil,
 			senderUserId = nil,
-			onDetailsOpened = function() end,
-			openGameDetailsPage = function() end
+			onDetailsOpened = function() --[[ Line: 131 ]] end,
+			openGameDetailsPage = function() --[[ Line: 132 ]] end
 		},
 		conversationId = nil,
 		BackgroundColor3 = nil,
@@ -83,7 +79,7 @@ if require(appChat.Flags.FFlagAppChatRefactorChatMessage) then
 		Transparency = nil,
 		wideMode = false,
 		viewProfileOnAvatarPressed = true,
-		closeKeyboard = function() end,
+		closeKeyboard = function() --[[ Line: 158 ]] end,
 		inputBoxRef = nil,
 		repliesTo = nil,
 		translatedText = nil,
@@ -94,140 +90,144 @@ if require(appChat.Flags.FFlagAppChatRefactorChatMessage) then
 		unknownUserText = "PLACEHOLDER unknown user"
 	}
 	
-	return function(p1)
-		-- upvalues: cryoModule (ref), t_2 (ref), fFlagChatModeratedMaskRandomLength (ref), getModeratedMaskTextModule (ref), TEXT_BUBBLE_X_PADDING (ref), BUBBLE_PADDING (ref), TEXT_BUBBLE_X_WIDE_ADDITIONAL_PADDING (ref), useTokens (ref), fFlagAppChatEnableAutotranslationModule (ref), reactModule (ref), foundationFontFaceMigration (ref), getTextSize (ref), text (ref), messageModelModule (ref), t_1 (ref), t (ref), pruneConsecutiveNewLines (ref), loggerModule (ref), view (ref), chatMessageContainerModule (ref), image (ref)
-		local var1 = cryoModule.Dictionary.union(t_2, p1)
+	return function(p1) --[[ Line: 170 ]]
+		-- upvalues: CryoModule (copy), config2 (copy), GetModeratedMaskTextModule (copy), TEXTBUBBLEXPADDING (copy), BUBBLEPADDING (copy), TEXTBUBBLEXWIDEADDITIONALPADDING (copy), UseTokensFunction (copy), FFlagAppChatEnableAutotranslationModule (copy), ReactModule (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), Text (copy), MessageModelModule (copy), config1 (copy), config (copy), PruneConsecutiveNewLinesFunction (copy), LoggerModule (copy), View (copy), ChatMessageContainerModule (copy), Image (copy)
+		local UnionResult = CryoModule.Dictionary.union(config2, p1)
 		
-		local function _(p2)
-			-- upvalues: fFlagChatModeratedMaskRandomLength (copy), getModeratedMaskTextModule (copy), var1 (ref)
-			return if fFlagChatModeratedMaskRandomLength then getModeratedMaskTextModule(var1.messageId or p2) else string.gsub(p2, "[^%s]", "#")
+		local function _(p2) --[[ Line: 175 | Named "getModeratedText" ]]
+			-- upvalues: GetModeratedMaskTextModule (upval), UnionResult (copy)
+			return GetModeratedMaskTextModule(UnionResult.messageId or p2)
 		end
 		
-		local function messageMaxWidth(a, b)
-			-- upvalues: TEXT_BUBBLE_X_PADDING (copy), BUBBLE_PADDING (copy), TEXT_BUBBLE_X_WIDE_ADDITIONAL_PADDING (copy)
-			local var2 = (TEXT_BUBBLE_X_PADDING + BUBBLE_PADDING) * 2
+		local function messageMaxWidth(p2, p3) --[[ Line: 179 ]]
+			-- upvalues: TEXTBUBBLEXPADDING (upval), BUBBLEPADDING (upval), TEXTBUBBLEXWIDEADDITIONALPADDING (upval)
+			local ScaledTEXTBUBBLEXPADDING = (TEXTBUBBLEXPADDING + BUBBLEPADDING) * 2
 			
-			if a then
-				var2 += TEXT_BUBBLE_X_WIDE_ADDITIONAL_PADDING
+			if p2 then
+				ScaledTEXTBUBBLEXPADDING += TEXTBUBBLEXWIDEADDITIONALPADDING
 			end
-			return b - var2
+			return p3 - ScaledTEXTBUBBLEXPADDING
 		end
 		
-		local var2 = useTokens()
-		local var3 = if fFlagAppChatEnableAutotranslationModule then reactModule.useCallback(function(p2, p3, p4, p5, p6)
-			-- upvalues: foundationFontFaceMigration (copy), getTextSize (copy), var2 (ref), text (copy), BUBBLE_PADDING (copy)
-			return if p6 then math.max((if foundationFontFaceMigration then getTextSize(p3, var2.Typography.BodySmall.FontSize, p5, Vector2.new(p2, 10000)) else text.GetTextBounds(p3, p5, var2.Typography.BodySmall.FontSize, Vector2.new(p2, 10000))).X, (if foundationFontFaceMigration then getTextSize(p6, p4, p5, Vector2.new(p2, 10000)) else text.GetTextBounds(p6, p5, p4, Vector2.new(p2, 10000))).X) + BUBBLE_PADDING * 2 else (if foundationFontFaceMigration then getTextSize(p3, p4, p5, Vector2.new(p2, 10000)) else text.GetTextBounds(p3, p5, p4, Vector2.new(p2, 10000))).X + BUBBLE_PADDING * 2
-		end) else reactModule.useCallback(function(p2, p3, p4, p5, _)
-			-- upvalues: foundationFontFaceMigration (copy), getTextSize (copy), text (copy), BUBBLE_PADDING (copy)
-			return (if foundationFontFaceMigration then getTextSize(p3, p4, p5, Vector2.new(p2, 10000)) else text.GetTextBounds(p3, p5, p4, Vector2.new(p2, 10000))).X + BUBBLE_PADDING * 2
+		local UseTokensResult = UseTokensFunction()
+		local UseResult = nil
+		UseResult = if FFlagAppChatEnableAutotranslationModule then ReactModule.useCallback(function(X, p2, p3, p4, p5): number --[[ Line: 194 ]]
+			-- upvalues: FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), UseTokensResult (copy), Text (upval), BUBBLEPADDING (upval)
+			return if p5 then math.max((if FoundationFontFaceMigration then GetTextSizeFunction(p2, UseTokensResult.Typography.BodySmall.FontSize, p4, Vector2.new(X, 10000)) else Text.GetTextBounds(p2, p4, UseTokensResult.Typography.BodySmall.FontSize, Vector2.new(X, 10000))).X, (if FoundationFontFaceMigration then GetTextSizeFunction(p5, p3, p4, Vector2.new(X, 10000)) else Text.GetTextBounds(p5, p4, p3, Vector2.new(X, 10000))).X) + BUBBLEPADDING * 2 else (if FoundationFontFaceMigration then GetTextSizeFunction(p2, p3, p4, Vector2.new(X, 10000)) else Text.GetTextBounds(p2, p4, p3, Vector2.new(X, 10000))).X + BUBBLEPADDING * 2
+		end) else ReactModule.useCallback(function(X, p2, p3, p4, _): number --[[ Line: 229 ]]
+			-- upvalues: FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), Text (upval), BUBBLEPADDING (upval)
+			return (if FoundationFontFaceMigration then GetTextSizeFunction(p2, p3, p4, Vector2.new(X, 10000)) else Text.GetTextBounds(p2, p4, p3, Vector2.new(X, 10000))).X + BUBBLEPADDING * 2
 		end)
-		local var4 = if var1 and var1.visibility == messageModelModule.VisibilityTypes.Hidden then t_1 else t[var1.messageType]
-		local var5 = reactModule.useMemo(function()
-			-- upvalues: var1 (ref), TEXT_BUBBLE_X_PADDING (copy), BUBBLE_PADDING (copy), TEXT_BUBBLE_X_WIDE_ADDITIONAL_PADDING (copy)
-			local wideMode = var1.wideMode
-			local parentWidth = var1.parentWidth
-			local var6 = (TEXT_BUBBLE_X_PADDING + BUBBLE_PADDING) * 2
+		local Config = if UnionResult and UnionResult.visibility == MessageModelModule.VisibilityTypes.Hidden then config1 else config[UnionResult.messageType]
+		local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 245 ]]
+			-- upvalues: UnionResult (copy), TEXTBUBBLEXPADDING (upval), BUBBLEPADDING (upval), TEXTBUBBLEXWIDEADDITIONALPADDING (upval)
+			local ParentWidth = UnionResult.parentWidth
+			local ScaledTEXTBUBBLEXPADDING = (TEXTBUBBLEXPADDING + BUBBLEPADDING) * 2
 			
-			if wideMode then
-				var6 += TEXT_BUBBLE_X_WIDE_ADDITIONAL_PADDING
+			if UnionResult.wideMode then
+				ScaledTEXTBUBBLEXPADDING += TEXTBUBBLEXWIDEADDITIONALPADDING
 			end
-			return parentWidth - var6
-		end, { messageMaxWidth, var1.wideMode, var1.parentWidth })
-		local var6 = pruneConsecutiveNewLines(var1.content)
-		local var7 = if var1.moderated then var6 else nil
-		var6 = var1.moderated and ((if fFlagChatModeratedMaskRandomLength then getModeratedMaskTextModule(var1.messageId or var7) else string.gsub(var7, "[^%s]", "#")) or var6)
-		local content = var1.repliesTo and (var1.repliesTo.messageType and var1.repliesTo.content)
-		local bodyLarge = var2.Typography.BodyLarge
-		local fontSize = bodyLarge.FontSize
-		local fontSize_1 = var2.Typography.BodySmall.FontSize
+			return ParentWidth - ScaledTEXTBUBBLEXPADDING
+		end, {
+			messageMaxWidth,
+			UnionResult.wideMode,
+			UnionResult.parentWidth
+		})
+		local PruneConsecutiveNewLinesResult = PruneConsecutiveNewLinesFunction(UnionResult.content)
+		local ModeratedMaskTextModule = UnionResult.moderated and GetModeratedMaskTextModule(UnionResult.messageId or PruneConsecutiveNewLinesResult) or PruneConsecutiveNewLinesResult
+		local Content = UnionResult.repliesTo and (UnionResult.repliesTo.messageType and UnionResult.repliesTo.content)
+		local BodyLarge = UseTokensResult.Typography.BodyLarge
+		local FontSize = BodyLarge.FontSize
+		local FontSize1 = UseTokensResult.Typography.BodySmall.FontSize
 		
-		if var4 then
-			return reactModule.createElement(chatMessageContainerModule, cryoModule.Dictionary.union(var1, {
-				messageMaxWidth = var5,
-				messageTypePaddingOffset = var4.paddingOffset,
-				messageId = var1.messageId,
-				isPending = var1.isSending or (var1.moderated or var1.failed),
-				visibility = var1.visibility,
-				renderMessage = function(p2, p3)
-					-- upvalues: reactModule (copy), image (copy), cryoModule (copy), var1 (ref), content (ref), messageModelModule (copy), t_1 (copy), t (copy), bodyLarge (ref), BUBBLE_PADDING (copy), var5 (ref), fontSize_1 (ref), view (copy), var4 (ref), fFlagAppChatEnableAutotranslationModule (copy), var3 (write), var6 (ref), fontSize (ref)
-					local var8
-					local createElement = reactModule.createElement
-					local var9 = cryoModule.Dictionary.union({
+		if Config then
+			return ReactModule.createElement(ChatMessageContainerModule, CryoModule.Dictionary.union(UnionResult, {
+				messageMaxWidth = UseMemoResult,
+				messageTypePaddingOffset = Config.paddingOffset,
+				messageId = UnionResult.messageId,
+				isPending = UnionResult.isSending or (UnionResult.moderated or UnionResult.failed),
+				visibility = UnionResult.visibility,
+				renderMessage = function(p2, p3) --[[ Line: 282 ]]
+					-- upvalues: ReactModule (upval), Image (upval), CryoModule (upval), UnionResult (copy), Content (copy), MessageModelModule (upval), config1 (upval), config (upval), BodyLarge (copy), BUBBLEPADDING (upval), UseMemoResult (copy), FontSize1 (copy), View (upval), Config (copy), FFlagAppChatEnableAutotranslationModule (upval), UseResult (ref), ModeratedMaskTextModule (copy), FontSize (copy)
+					local CreateElementFunction = ReactModule.createElement
+					local UnionResult1 = CryoModule.Dictionary.union({
 						tag = {
 							["auto-xy gui-object-defaults col align-y-center"] = true,
-							["align-x-left"] = var1.isIncoming,
-							["align-x-right"] = not var1.isIncoming
+							["align-x-left"] = UnionResult.isIncoming,
+							["align-x-right"] = not UnionResult.isIncoming
 						},
 						layout = {
 							FillDirection = Enum.FillDirection.Vertical,
 							Padding = UDim.new(0, 10)
 						}
-					}, p2 or {})
-					local t_2 = {}
+					}, if p2 then p2 else {})
+					local t = {}
+					local Element = nil
 					
-					if content then
-						var8 = reactModule.createElement
-						local repliesTo = var1.repliesTo
-						var8 = var8((if repliesTo and repliesTo.visibility == messageModelModule.VisibilityTypes.Hidden then t_1 else t[repliesTo.messageType]).component, {
+					if Content then
+						local RepliesTo = UnionResult.repliesTo
+						Element = ReactModule.createElement((if RepliesTo and RepliesTo.visibility == MessageModelModule.VisibilityTypes.Hidden then config1 else config[RepliesTo.messageType]).component, {
 							hasTail = false,
 							isPending = false,
 							isRepliedTo = true,
 							LayoutOrder = 1,
-							additionalProps = var1.additionalProps,
-							font = bodyLarge.Font,
-							innerPadding = BUBBLE_PADDING,
-							isIncoming = var1.isIncoming,
-							isUnfiltered = var1.isUnfiltered,
-							isLastMessageInMessageGroup = var1.isLastMessageInMessageGroup,
-							maxWidth = var5,
-							messageDefaultNoticeText = var1.messageDefaultNoticeText,
-							messageModeratedNoticeText = var1.messageModeratedNoticeText,
-							parentWidth = var1.parentWidth,
-							text = var1.repliesTo.content,
-							textSize = fontSize_1,
-							wideMode = var1.wideMode
+							additionalProps = UnionResult.additionalProps,
+							font = BodyLarge.Font,
+							innerPadding = BUBBLEPADDING,
+							isIncoming = UnionResult.isIncoming,
+							isUnfiltered = UnionResult.isUnfiltered,
+							isLastMessageInMessageGroup = UnionResult.isLastMessageInMessageGroup,
+							maxWidth = UseMemoResult,
+							messageDefaultNoticeText = UnionResult.messageDefaultNoticeText,
+							messageModeratedNoticeText = UnionResult.messageModeratedNoticeText,
+							parentWidth = UnionResult.parentWidth,
+							text = UnionResult.repliesTo.content,
+							textSize = FontSize1,
+							wideMode = UnionResult.wideMode
 						})
 					else
-						var8 = nil
+						Element = nil
 					end
-					t_2.repliesTo = var8
-					t_2.mainMessage = reactModule.createElement(view, {
+					t.repliesTo = Element
+					t.mainMessage = ReactModule.createElement(View, {
 						tag = "row auto-xy align-y-center gap-xxsmall",
 						LayoutOrder = 2,
 						ref = if p3 then p3.ref else nil
 					}, {
 						Icons = if p3 then p3.Icons else nil,
-						[var4.name] = reactModule.createElement(var4.component, {
-							additionalProps = var1.additionalProps,
-							font = bodyLarge.Font,
-							hasTail = var1.isNewSender == true,
-							innerPadding = BUBBLE_PADDING,
-							isIncoming = var1.isIncoming,
-							isPending = var1.isSending or (var1.moderated or var1.failed),
-							isUnfiltered = var1.isUnfiltered,
-							isLastMessageInMessageGroup = var1.isLastMessageInMessageGroup,
-							isLastIncomingChatMessage = var1.isLastIncomingChatMessage,
+						[Config.name] = ReactModule.createElement(Config.component, {
+							additionalProps = UnionResult.additionalProps,
+							font = BodyLarge.Font,
+							hasTail = UnionResult.isNewSender == true,
+							innerPadding = BUBBLEPADDING,
+							isIncoming = UnionResult.isIncoming,
+							isPending = UnionResult.isSending or (UnionResult.moderated or UnionResult.failed),
+							isUnfiltered = UnionResult.isUnfiltered,
+							isLastMessageInMessageGroup = UnionResult.isLastMessageInMessageGroup,
+							isLastIncomingChatMessage = UnionResult.isLastIncomingChatMessage,
 							isPressed = if p3 then p3.isPressed else nil,
 							bubbleRef = if p3 then p3.bubbleRef else nil,
-							maxWidth = if fFlagAppChatEnableAutotranslationModule then var3(var5, var6, fontSize, bodyLarge.Font, var1.translatedText) else var3(var5, var6, fontSize, bodyLarge.Font),
-							messageDefaultNoticeText = var1.messageDefaultNoticeText,
-							messageModeratedNoticeText = var1.messageModeratedNoticeText,
-							parentWidth = var1.parentWidth,
-							text = var6,
-							textSize = fontSize,
-							wideMode = var1.wideMode,
-							LayoutOrder = if var1.isIncoming then 1 else 2,
-							translatedText = if fFlagAppChatEnableAutotranslationModule then var1.translatedText else nil
+							maxWidth = if FFlagAppChatEnableAutotranslationModule then UseResult(UseMemoResult, ModeratedMaskTextModule, FontSize, BodyLarge.Font, UnionResult.translatedText) else UseResult(UseMemoResult, ModeratedMaskTextModule, FontSize, BodyLarge.Font),
+							messageDefaultNoticeText = UnionResult.messageDefaultNoticeText,
+							messageModeratedNoticeText = UnionResult.messageModeratedNoticeText,
+							parentWidth = UnionResult.parentWidth,
+							text = ModeratedMaskTextModule,
+							textSize = FontSize,
+							wideMode = UnionResult.wideMode,
+							LayoutOrder = if UnionResult.isIncoming then 1 else 2,
+							translatedText = if FFlagAppChatEnableAutotranslationModule then UnionResult.translatedText else nil
 						})
 					})
 					
-					return createElement(image, var9, t_2)
+					return CreateElementFunction(Image, UnionResult1, t)
 				end
 			}))
+		else
+			LoggerModule:warning("ChatMessage doesn't support messageType: {}", UnionResult.messageType)
+			
+			return ReactModule.createElement(View, {})
 		end
-		loggerModule:warning("ChatMessage doesn't support messageType: {}", var1.messageType)
-		
-		return reactModule.createElement(view, {})
 	end
+else
+	return require(script.Parent.ChatMessageDeprecated)
 end
-return require(script.Parent.ChatMessageDeprecated)

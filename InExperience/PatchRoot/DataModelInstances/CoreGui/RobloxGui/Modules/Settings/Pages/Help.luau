@@ -1,60 +1,61 @@
-﻿local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-local userInputService = game:GetService("UserInputService")
-local guiService = game:GetService("GuiService")
-local textService = game:GetService("TextService")
-local corePackagesService = game:GetService("CorePackages")
-local gameSettings = UserSettings().GameSettings
-local utilityModule = require(robloxGui.Modules.Settings.Utility)
-local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
-local cachedPolicyServiceModule = require(corePackagesService.Workspace.Packages.CachedPolicyService)
-local themeModule = require(robloxGui.Modules.Settings.Theme)
-local create = require(corePackagesService.Workspace.Packages.AppCommonLib).Create
-local builderIconsModule = require(corePackagesService.Packages.BuilderIcons)
-local uiblox = builderIconsModule.Migration.uiblox
-local _ = nil
-robloxGui:WaitForChild("Modules"):WaitForChild("TenFootInterface")
-local var1 = require(robloxGui.Modules.TenFootInterface):IsEnabled()
-local isSpatial = require(corePackagesService.Workspace.Packages.AppCommonLib).isSpatial
-local isInExperienceUIVREnabled = require(corePackagesService.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled
-local var2 = if isInExperienceUIVREnabled then require(corePackagesService.Workspace.Packages.InExperienceLocales).Localization.new(game:GetService("LocalizationService").RobloxLocaleId) else nil
-local var3 = if isInExperienceUIVREnabled then require(robloxGui.Modules.Settings.Resources.HelpConstants) else nil
-local var4 = (function()
-	-- upvalues: robloxGui (ref), isInExperienceUIVREnabled (ref), isSpatial (ref), userInputService (ref), create (ref), themeModule (ref), robloxTranslatorModule (ref), cachedPolicyServiceModule (ref), var1 (ref), textService (ref), utilityModule (ref), guiService (ref), var3 (ref), var2 (write), gameSettings (ref), uiblox (ref), builderIconsModule (ref)
-	local help_1 = require(robloxGui.Modules.Settings.SettingsPageFactory):CreateNewPage()
-	help_1.HelpPages = {}
-	help_1.HelpPageContents = {}
-	help_1.ActiveHelpScheme = nil
-	local var5 = nil
+﻿local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+local UserInputService = game:GetService("UserInputService")
+local GuiService = game:GetService("GuiService")
+local TextService = game:GetService("TextService")
+local CorePackages = game:GetService("CorePackages")
+local GameSettings = UserSettings().GameSettings
+local UtilityModule = require(RobloxGui.Modules.Settings.Utility)
+local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
+local CachedPolicyServiceModule = require(CorePackages.Workspace.Packages.CachedPolicyService)
+local ThemeModule = require(RobloxGui.Modules.Settings.Theme)
+local CreateFunction = require(CorePackages.Workspace.Packages.AppCommonLib).Create
+local BuilderIconsModule = require(CorePackages.Packages.BuilderIcons)
+local Uiblox = BuilderIconsModule.Migration.uiblox
+local v1 = nil
+RobloxGui:WaitForChild("Modules"):WaitForChild("TenFootInterface")
+local IsEnabled = require(RobloxGui.Modules.TenFootInterface):IsEnabled()
+local IsSpatialFunction = require(CorePackages.Workspace.Packages.AppCommonLib).isSpatial
+local IsInExperienceUIVREnabled = require(CorePackages.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled
+local NewResult = if IsInExperienceUIVREnabled then require(CorePackages.Workspace.Packages.InExperienceLocales).Localization.new(game:GetService("LocalizationService").RobloxLocaleId) else nil
+local HelpConstantsModule = if IsInExperienceUIVREnabled then require(RobloxGui.Modules.Settings.Resources.HelpConstants) else nil
+v1 = (function() --[[ Line: 66 | Named "Initialize" ]]
+	-- upvalues: RobloxGui (copy), IsInExperienceUIVREnabled (copy), IsSpatialFunction (copy), UserInputService (copy), CreateFunction (copy), ThemeModule (copy), RobloxTranslatorModule (copy), CachedPolicyServiceModule (copy), IsEnabled (copy), TextService (copy), UtilityModule (copy), GuiService (copy), HelpConstantsModule (copy), NewResult (ref), GameSettings (copy), Uiblox (copy), BuilderIconsModule (copy)
+	local NewPage = require(RobloxGui.Modules.Settings.SettingsPageFactory):CreateNewPage()
+	NewPage.HelpPages = {}
+	NewPage.HelpPageContents = {}
+	NewPage.ActiveHelpScheme = nil
+	local LastInputType = nil
 	
-	function help_1.GetCurrentInputType(_)
-		-- upvalues: isInExperienceUIVREnabled (copy), isSpatial (copy), var5 (write), userInputService (copy)
-		if isInExperienceUIVREnabled and isSpatial() then
+	function NewPage:GetCurrentInputType(): string --[[ Line: 75 ]]
+		-- upvalues: IsInExperienceUIVREnabled (upval), IsSpatialFunction (upval), LastInputType (ref), UserInputService (upval)
+		if IsInExperienceUIVREnabled and IsSpatialFunction() then
 			return "SpatialGamepad"
-		elseif var5 == nil then
-			local platform = userInputService:GetPlatform()
+		elseif LastInputType == nil then
+			local Platform = UserInputService:GetPlatform()
 			
-			return if platform == Enum.Platform.XBoxOne or platform == Enum.Platform.WiiU then "Gamepad" elseif platform == Enum.Platform.Windows or platform == Enum.Platform.OSX then "KeyboardMouse" else "Touch"
+			return if Platform == Enum.Platform.XBoxOne or Platform == Enum.Platform.WiiU then "Gamepad" elseif Platform == Enum.Platform.Windows or Platform == Enum.Platform.OSX then "KeyboardMouse" else "Touch"
+		else
+			return if LastInputType == Enum.UserInputType.Keyboard or LastInputType == Enum.UserInputType.MouseMovement or LastInputType == Enum.UserInputType.MouseButton1 or LastInputType == Enum.UserInputType.MouseButton2 or LastInputType == Enum.UserInputType.MouseButton3 or LastInputType == Enum.UserInputType.MouseWheel then "KeyboardMouse" elseif LastInputType == Enum.UserInputType.Touch then "Touch" elseif LastInputType == Enum.UserInputType.Gamepad1 or LastInputType == Enum.UserInputType.Gamepad2 or LastInputType == Enum.UserInputType.Gamepad3 or LastInputType == Enum.UserInputType.Gamepad4 then "Gamepad" else "KeyboardMouse"
 		end
-		return if var5 == Enum.UserInputType.Keyboard or var5 == Enum.UserInputType.MouseMovement or (var5 == Enum.UserInputType.MouseButton1 or var5 == Enum.UserInputType.MouseButton2) or (var5 == Enum.UserInputType.MouseButton3 or var5 == Enum.UserInputType.MouseWheel) then "KeyboardMouse" elseif var5 == Enum.UserInputType.Touch then "Touch" elseif var5 == Enum.UserInputType.Gamepad1 or var5 == Enum.UserInputType.Gamepad2 or (var5 == Enum.UserInputType.Gamepad3 or var5 == Enum.UserInputType.Gamepad4) then "Gamepad" else "KeyboardMouse"
 	end
 	
-	local function createPCHelp(p1)
-		-- upvalues: create (copy), themeModule (copy), userInputService (copy), robloxTranslatorModule (copy), cachedPolicyServiceModule (copy)
-		local function createPCGroup(p2, p3)
-			-- upvalues: create (copy), themeModule (copy)
-			local var6 = create("Frame")({
+	local function createPCHelp(Parent) --[[ Line: 107 ]]
+		-- upvalues: CreateFunction (upval), ThemeModule (upval), UserInputService (upval), RobloxTranslatorModule (upval), CachedPolicyServiceModule (upval)
+		local function createPCGroup(Text, p1) --[[ Line: 108 ]]
+			-- upvalues: CreateFunction (upval), ThemeModule (upval)
+			local Parent = CreateFunction("Frame")({
 				BackgroundTransparency = 1,
-				Size = UDim2.new(0.333333333333, -4, 0, 0),
+				Size = UDim2.new(0.3333333333333333, -4, 0, 0),
 				AutomaticSize = Enum.AutomaticSize.Y,
-				Name = "PCGroupFrame" .. tostring(p2)
+				Name = "PCGroupFrame" .. tostring(Text)
 			})
-			local _ = create("UIListLayout")({
+			local _ = CreateFunction("UIListLayout")({
 				FillDirection = Enum.FillDirection.Vertical,
 				Padding = UDim.new(0, 2),
-				Parent = var6,
+				Parent = Parent,
 				SortOrder = Enum.SortOrder.LayoutOrder
 			})
-			local var7 = create("TextLabel")({
+			local Parent1 = CreateFunction("TextLabel")({
 				BackgroundTransparency = 1,
 				TextWrapped = true,
 				ZIndex = 2,
@@ -62,610 +63,609 @@ local var4 = (function()
 				Position = UDim2.new(0, 9, 0, 0),
 				Size = UDim2.new(1, -9, 0, 30),
 				AutomaticSize = Enum.AutomaticSize.Y,
-				Text = p2,
-				Font = themeModule.font(Enum.Font.SourceSansBold, "HelpTitle"),
-				FontSize = themeModule.fontSize(Enum.FontSize.Size18, "HelpTitle"),
+				Text = Text,
+				Font = ThemeModule.font(Enum.Font.SourceSansBold, "HelpTitle"),
+				FontSize = ThemeModule.fontSize(Enum.FontSize.Size18, "HelpTitle"),
 				TextColor3 = Color3.new(1, 1, 1),
 				TextXAlignment = Enum.TextXAlignment.Left,
-				Name = "PCGroupTitle" .. tostring(p2),
-				Parent = var6
+				Name = "PCGroupTitle" .. tostring(Text),
+				Parent = Parent
 			})
-			local _ = create("UIPadding")({ PaddingLeft = UDim.new(0, 9), Parent = var7 })
-			local var8 = 0
-			local offset = var7.Size.Y.Offset
+			local _ = CreateFunction("UIPadding")({ PaddingLeft = UDim.new(0, 9), Parent = Parent1 })
+			local Count = 0
+			local Offset = Parent1.Size.Y.Offset
 			
-			for i_1 = 1, #p3 do
-				for i, v in pairs(p3[i_1]) do
-					local var9 = create("Frame")({
+			for i = 1, #p1 do
+				for Text1, Text2 in pairs(p1[i]) do
+					local Parent2 = CreateFunction("Frame")({
 						BorderSizePixel = 0,
 						ZIndex = 2,
 						Size = UDim2.new(1, 0, 0, 42),
-						Position = UDim2.new(0, 0, 0, offset + var8 * 44),
-						BackgroundTransparency = themeModule.transparency("InputActionBackground", 0.65),
+						Position = UDim2.new(0, 0, 0, Offset + Count * 44),
+						BackgroundTransparency = ThemeModule.transparency("InputActionBackground", 0.65),
 						AutomaticSize = Enum.AutomaticSize.Y,
-						LayoutOrder = i_1 + 1,
-						Name = "ActionInputBinding" .. tostring(i),
-						Parent = var6
+						LayoutOrder = i + 1,
+						Name = "ActionInputBinding" .. tostring(Text1),
+						Parent = Parent
 					})
-					var9.BackgroundColor3 = themeModule.color("InputActionBackground")
-					create("UICorner")({ CornerRadius = UDim.new(0, 3), Parent = var9 })
-					Instance.new("UITextSizeConstraint", create("TextLabel")({
+					Parent2.BackgroundColor3 = ThemeModule.color("InputActionBackground")
+					CreateFunction("UICorner")({ CornerRadius = UDim.new(0, 3), Parent = Parent2 })
+					Instance.new("UITextSizeConstraint", (CreateFunction("TextLabel")({
 						BackgroundTransparency = 1,
 						ZIndex = 2,
 						TextWrapped = true,
 						Size = UDim2.new(0.4, -9, 0, 42),
 						AutomaticSize = Enum.AutomaticSize.Y,
 						Position = UDim2.new(0, 9, 0, 0),
-						Text = i,
-						Font = themeModule.font(Enum.Font.SourceSansBold, "HelpTitle"),
-						FontSize = themeModule.fontSize(Enum.FontSize.Size18, "HelpTitle"),
+						Text = Text1,
+						Font = ThemeModule.font(Enum.Font.SourceSansBold, "HelpTitle"),
+						FontSize = ThemeModule.fontSize(Enum.FontSize.Size18, "HelpTitle"),
 						TextColor3 = Color3.new(1, 1, 1),
 						TextXAlignment = Enum.TextXAlignment.Left,
-						Name = i .. "Label",
-						Parent = var9
-					})).MaxTextSize = themeModule.textSize(28)
-					local _ = create("TextLabel")({
+						Name = Text1 .. "Label",
+						Parent = Parent2
+					}))).MaxTextSize = ThemeModule.textSize(28)
+					local _ = CreateFunction("TextLabel")({
 						BackgroundTransparency = 1,
 						ZIndex = 2,
 						TextWrapped = true,
 						TextScaled = false,
 						Size = UDim2.new(0.5, 0, 0, 42),
 						Position = UDim2.new(0.5, -4, 0, 0),
-						Text = v,
-						Font = themeModule.font(Enum.Font.SourceSans, "HelpText"),
-						FontSize = themeModule.fontSize(Enum.FontSize.Size18, "HelpText"),
+						Text = Text2,
+						Font = ThemeModule.font(Enum.Font.SourceSans, "HelpText"),
+						FontSize = ThemeModule.fontSize(Enum.FontSize.Size18, "HelpText"),
 						TextColor3 = Color3.new(1, 1, 1),
 						TextXAlignment = Enum.TextXAlignment.Left,
-						Name = v .. "Label",
-						Parent = var9,
+						Name = Text2 .. "Label",
+						Parent = Parent2,
 						AutomaticSize = Enum.AutomaticSize.Y
 					})
-					var8 += 1
+					Count += 1
 				end
 			end
-			var6.Size = UDim2.new(var6.Size.X.Scale, var6.Size.X.Offset, 0, offset + var8 * 44)
+			Parent.Size = UDim2.new(Parent.Size.X.Scale, Parent.Size.X.Offset, 0, Offset + Count * 44)
 			
-			return var6
+			return Parent
 		end
 		
-		local var10 = userInputService:GetPlatform() == Enum.Platform.OSX
-		local var11 = createPCGroup("Character Movement", {
+		local IsPlatformMatch = UserInputService:GetPlatform() == Enum.Platform.OSX
+		local CharacterMovement = createPCGroup("Character Movement", {
 			[1] = {
-				["Move Forward"] = userInputService:GetStringForKeyCode(Enum.KeyCode.W) .. "/" .. robloxTranslatorModule:FormatByKey("InGame.HelpMenu.UpArrow")
+				["Move Forward"] = UserInputService:GetStringForKeyCode(Enum.KeyCode.W) .. "/" .. RobloxTranslatorModule:FormatByKey("InGame.HelpMenu.UpArrow")
 			},
 			[2] = {
-				["Move Backward"] = userInputService:GetStringForKeyCode(Enum.KeyCode.S) .. "/" .. robloxTranslatorModule:FormatByKey("InGame.HelpMenu.DownArrow")
+				["Move Backward"] = UserInputService:GetStringForKeyCode(Enum.KeyCode.S) .. "/" .. RobloxTranslatorModule:FormatByKey("InGame.HelpMenu.DownArrow")
 			},
 			[3] = {
-				["Move Left"] = userInputService:GetStringForKeyCode(Enum.KeyCode.A) .. "/" .. robloxTranslatorModule:FormatByKey("InGame.HelpMenu.LeftArrow")
+				["Move Left"] = UserInputService:GetStringForKeyCode(Enum.KeyCode.A) .. "/" .. RobloxTranslatorModule:FormatByKey("InGame.HelpMenu.LeftArrow")
 			},
 			[4] = {
-				["Move Right"] = userInputService:GetStringForKeyCode(Enum.KeyCode.D) .. "/" .. robloxTranslatorModule:FormatByKey("InGame.HelpMenu.RightArrow")
+				["Move Right"] = UserInputService:GetStringForKeyCode(Enum.KeyCode.D) .. "/" .. RobloxTranslatorModule:FormatByKey("InGame.HelpMenu.RightArrow")
 			},
 			[5] = { Jump = "Space" }
 		})
-		var11.Parent = p1
-		var11.LayoutOrder = 1
-		local text = userInputService:GetStringForKeyCode(Enum.KeyCode.One) .. "," .. userInputService:GetStringForKeyCode(Enum.KeyCode.Two) .. "," .. userInputService:GetStringForKeyCode(Enum.KeyCode.Three) .. "..."
-		local var12 = createPCGroup("Accessories", {
-			[1] = { ["Equip Tools"] = text },
-			[2] = { ["Unequip Tools"] = text },
+		CharacterMovement.Parent = Parent
+		CharacterMovement.LayoutOrder = 1
+		local Text = UserInputService:GetStringForKeyCode(Enum.KeyCode.One) .. "," .. UserInputService:GetStringForKeyCode(Enum.KeyCode.Two) .. "," .. UserInputService:GetStringForKeyCode(Enum.KeyCode.Three) .. "..."
+		local Accessories = createPCGroup("Accessories", {
+			[1] = { ["Equip Tools"] = Text },
+			[2] = { ["Unequip Tools"] = Text },
 			[3] = { ["Drop Tool"] = "Backspace" },
 			[4] = { ["Use Tool"] = "Left Mouse Button" }
 		})
-		var12.Position = UDim2.new(0.333333333333, 4, 0, 0)
-		var12.Parent = p1
-		var12.LayoutOrder = 2
-		local t = {}
-		table.insert(t, {
-			["UI Selection Toggle"] = userInputService:GetStringForKeyCode(Enum.KeyCode.BackSlash)
+		Accessories.Position = UDim2.new(0.3333333333333333, 4, 0, 0)
+		Accessories.Parent = Parent
+		Accessories.LayoutOrder = 2
+		local List = {}
+		table.insert(List, {
+			["UI Selection Toggle"] = UserInputService:GetStringForKeyCode(Enum.KeyCode.BackSlash)
 		})
-		local var13 = not cachedPolicyServiceModule:IsSubjectToChinaPolicies()
+		local Inverted = not CachedPolicyServiceModule:IsSubjectToChinaPolicies()
 		
-		if var13 then
-			table.insert(t, { Screenshot = if var10 then "Opt + 1" else "Alt + 1" })
+		if Inverted then
+			table.insert(List, {
+				Screenshot = if IsPlatformMatch then "Opt + 1" else "Alt + 1"
+			})
 			
-			if not var10 then
-				table.insert(t, { ["Record Video"] = "F12" })
+			if not IsPlatformMatch then
+				table.insert(List, { ["Record Video"] = "F12" })
 			end
 		end
-		if var13 then
-			table.insert(t, { ["Dev Console"] = if var10 then "F9/fn + F9" else "F9" })
+		if Inverted then
+			table.insert(List, {
+				["Dev Console"] = if IsPlatformMatch then "F9/fn + F9" else "F9"
+			})
 		end
-		table.insert(t, { Mouselock = "Shift" })
+		table.insert(List, { Mouselock = "Shift" })
 		
-		if var13 then
-			table.insert(t, {
-				["Graphics Level"] = if var10 then "F10/fn + F10" else "F10"
+		if Inverted then
+			table.insert(List, {
+				["Graphics Level"] = if IsPlatformMatch then "F10/fn + F10" else "F10"
 			})
-			table.insert(t, { Fullscreen = if var10 then "Ctrl + Cmd + F" else "F11" })
-		end
-		if var13 then
-			table.insert(t, {
-				["Perf. Stats"] = if var10 then "Fn+Opt+Cmd+F7" else "Ctrl + Shift + F7"
+			table.insert(List, {
+				Fullscreen = if IsPlatformMatch then "Ctrl + Cmd + F" else "F11"
 			})
 		end
-		local var14 = createPCGroup("Misc", t)
-		var14.Position = UDim2.new(0.666666666667, 8, 0, 0)
-		var14.Parent = p1
-		var14.LayoutOrder = 3
-		local var15 = createPCGroup("Camera Movement", {
+		if Inverted then
+			table.insert(List, {
+				["Perf. Stats"] = if IsPlatformMatch then "Fn+Opt+Cmd+F7" else "Ctrl + Shift + F7"
+			})
+		end
+		local Misc = createPCGroup("Misc", List)
+		Misc.Position = UDim2.new(0.6666666666666666, 8, 0, 0)
+		Misc.Parent = Parent
+		Misc.LayoutOrder = 3
+		local CameraMovement = createPCGroup("Camera Movement", {
 			[1] = { Rotate = "Right Mouse Button" },
 			[2] = { ["Zoom In/Out"] = "Mouse Wheel" },
 			[3] = {
-				["Zoom In"] = userInputService:GetStringForKeyCode(Enum.KeyCode.I)
+				["Zoom In"] = UserInputService:GetStringForKeyCode(Enum.KeyCode.I)
 			},
 			[4] = {
-				["Zoom Out"] = userInputService:GetStringForKeyCode(Enum.KeyCode.O)
+				["Zoom Out"] = UserInputService:GetStringForKeyCode(Enum.KeyCode.O)
 			}
 		})
-		var15.Position = UDim2.new(0, 0, var11.Size.Y.Scale, var11.Size.Y.Offset + 50)
-		var15.Parent = p1
-		var15.LayoutOrder = 4
-		local var16 = createPCGroup("Menu Items", {
+		CameraMovement.Position = UDim2.new(0, 0, CharacterMovement.Size.Y.Scale, CharacterMovement.Size.Y.Offset + 50)
+		CameraMovement.Parent = Parent
+		CameraMovement.LayoutOrder = 4
+		local MenuItems = createPCGroup("Menu Items", {
 			[1] = { ["Roblox Menu"] = "Esc" },
 			[2] = {
-				Backpack = userInputService:GetStringForKeyCode(Enum.KeyCode.Backquote)
+				Backpack = UserInputService:GetStringForKeyCode(Enum.KeyCode.Backquote)
 			},
 			[3] = { Playerlist = "Tab" },
 			[4] = {
-				Chat = userInputService:GetStringForKeyCode(Enum.KeyCode.Slash)
+				Chat = UserInputService:GetStringForKeyCode(Enum.KeyCode.Slash)
 			}
 		})
-		var16.Position = UDim2.new(0.333333333333, 4, var11.Size.Y.Scale, var11.Size.Y.Offset + 50)
-		var16.Parent = p1
-		var16.LayoutOrder = 5
-		p1.Size = UDim2.new(p1.Size.X.Scale, p1.Size.X.Offset, 0, var16.Size.Y.Offset + var16.Position.Y.Offset)
+		MenuItems.Position = UDim2.new(0.3333333333333333, 4, CharacterMovement.Size.Y.Scale, CharacterMovement.Size.Y.Offset + 50)
+		MenuItems.Parent = Parent
+		MenuItems.LayoutOrder = 5
+		Parent.Size = UDim2.new(Parent.Size.X.Scale, Parent.Size.X.Offset, 0, MenuItems.Size.Y.Offset + MenuItems.Position.Y.Offset)
 	end
 	
-	local function createGamepadHelp(p4)
-		-- upvalues: help_1 (ref), create (copy), var1 (copy), themeModule (copy), textService (copy), robloxTranslatorModule (copy)
-		local maxValue = math.max(help_1.Page.AbsoluteSize.X * 0.58, 270)
-		local uDim2 = UDim2.new(0, maxValue, 0, maxValue * 0.64)
-		local var17 = create("ImageLabel")({
+	local function createGamepadHelp(Frame: Frame) --[[ Line: 312 ]]
+		-- upvalues: NewPage (copy), CreateFunction (upval), IsEnabled (upval), ThemeModule (upval), TextService (upval), RobloxTranslatorModule (upval)
+		local Largest = math.max(NewPage.Page.AbsoluteSize.X * 0.58, 270)
+		local _UDim2 = UDim2.new(0, Largest, 0, Largest * 0.64)
+		local Parent = CreateFunction("ImageLabel")({
 			Name = "GamepadImage",
 			Image = "rbxasset://textures/ui/Settings/Help/PlatformController.png",
 			BackgroundTransparency = 1,
 			ZIndex = 2,
-			Size = uDim2,
-			Position = UDim2.new(0.5, -uDim2.X.Offset / 2 + 30, 0.5, -uDim2.Y.Offset / 2 + 7),
-			Parent = p4
+			Size = _UDim2,
+			Position = UDim2.new(0.5, -_UDim2.X.Offset / 2 + 30, 0.5, -_UDim2.Y.Offset / 2 + 7),
+			Parent = Frame
 		})
-		p4.Size = UDim2.new(p4.Size.X.Scale, p4.Size.X.Offset, 0, var17.Size.Y.Offset + 100)
-		local size36 = var1 and themeModule.fontSize(Enum.FontSize.Size36) or themeModule.fontSize(Enum.FontSize.Size24)
-		local var18 = size36 == themeModule.fontSize(Enum.FontSize.Size36) and themeModule.textSize(36) or themeModule.textSize(24)
+		Frame.Size = UDim2.new(Frame.Size.X.Scale, Frame.Size.X.Offset, 0, Parent.Size.Y.Offset + 100)
+		local FontSizeResult = IsEnabled and ThemeModule.fontSize(Enum.FontSize.Size36) or ThemeModule.fontSize(Enum.FontSize.Size24)
+		local TextSizeResult = FontSizeResult == ThemeModule.fontSize(Enum.FontSize.Size36) and ThemeModule.textSize(36) or ThemeModule.textSize(24)
 		
-		local function createGamepadLabel(p5, p6, p7, p8)
-			-- upvalues: create (copy), themeModule (copy), size36 (ref), var17 (ref), textService (copy), var18 (ref), p4 (ref)
-			local var19 = create("TextLabel")({
+		local function createGamepadLabel(Text, Position, Size, p2) --[[ Line: 332 ]]
+			-- upvalues: CreateFunction (upval), ThemeModule (upval), FontSizeResult (copy), Parent (copy), TextService (upval), TextSizeResult (copy), Frame (copy)
+			local Label = CreateFunction("TextLabel")({
 				BackgroundTransparency = 1,
 				ZIndex = 2,
-				Position = p6,
-				Size = p7,
-				Text = p5,
-				TextXAlignment = if p8 then Enum.TextXAlignment.Right else Enum.TextXAlignment.Left,
-				AnchorPoint = p8 and Vector2.new(1, 0.5) or Vector2.new(0, 0.5),
-				Font = themeModule.font(Enum.Font.SourceSansBold, "HelpGamepad"),
-				FontSize = size36,
+				Position = Position,
+				Size = Size,
+				Text = Text,
+				TextXAlignment = p2 and Enum.TextXAlignment.Right or Enum.TextXAlignment.Left,
+				AnchorPoint = p2 and Vector2.new(1, 0.5) or Vector2.new(0, 0.5),
+				Font = ThemeModule.font(Enum.Font.SourceSansBold, "HelpGamepad"),
+				FontSize = FontSizeResult,
 				TextColor3 = Color3.new(1, 1, 1),
-				Name = p5 .. "Label",
-				Parent = var17,
+				Name = Text .. "Label",
+				Parent = Parent,
 				TextTruncate = Enum.TextTruncate.AtEnd
 			})
-			var19.TextWrapped = true
-			local x = textService:GetTextSize(p5, var18, themeModule.font(Enum.Font.SourceSansBold, "Bold"), Vector2.new(0, 0)).X
-			local absValue = math.abs(p6.X.Offset)
+			Label.TextWrapped = true
+			local X = TextService:GetTextSize(Text, TextSizeResult, ThemeModule.font(Enum.Font.SourceSansBold, "Bold"), Vector2.new(0, 0)).X
+			local Magnitude = math.abs(Position.X.Offset)
 			
-			local function updateNameLabelSize()
-				-- upvalues: p8 (ref), p4 (ref), absValue (ref), var19 (ref), var18 (copy), x (ref), size36 (copy)
-				local var20 = if p8 then p4.AbsoluteSize.X / 2 + 30 - absValue else p4.AbsoluteSize.X / 2 - 30 - absValue
-				var19.Size = UDim2.new(var19.Size.X.Scale, var20, var19.Size.Y.Scale, var18 * 2)
-				var19.TextScaled = false
+			local function updateNameLabelSize() --[[ Line: 356 ]]
+				-- upvalues: p2 (copy), Frame (copy), Magnitude (copy), Label (copy), TextSizeResult (upval), X (copy), FontSizeResult (upval)
+				local XDelta: number = p2 and Frame.AbsoluteSize.X / 2 + 30 - Magnitude or Frame.AbsoluteSize.X / 2 - 30 - Magnitude
+				Label.Size = UDim2.new(Label.Size.X.Scale, XDelta, Label.Size.Y.Scale, TextSizeResult * 2)
+				Label.TextScaled = false
 				
-				if var20 >= x then
-					var19.FontSize = size36
+				if XDelta >= X then
+					Label.FontSize = FontSizeResult
 				end
 			end
 			
-			local _ = p4:GetPropertyChangedSignal("AbsoluteSize"):connect(function()
-				-- upvalues: updateNameLabelSize (ref)
+			local _ = Frame:GetPropertyChangedSignal("AbsoluteSize"):connect(function() --[[ Line: 369 ]]
+				-- upvalues: updateNameLabelSize (copy)
 				updateNameLabelSize()
 			end)
 			updateNameLabelSize()
 		end
 		
-		local var19 = -var17.Size.X.Offset / 2 - 20
-		local var20 = var17.Size.X.Offset / 2 - 20
-		local var21 = var20 + 40
-		createGamepadLabel("Switch Tool", UDim2.new(0.5, var19, 0, 15), UDim2.new(0, 100, 0, var18), true)
-		createGamepadLabel(robloxTranslatorModule:FormatByKey("InGame.HelpMenu.Controls.ToggleGameMenu"), UDim2.new(0.5, var19, 0.15, 10), UDim2.new(0, 164, 0, var18), true)
-		createGamepadLabel("Move", UDim2.new(0.5, var19, 0.31, 5), UDim2.new(0, 46, 0, var18), true)
-		createGamepadLabel("Menu Navigation", UDim2.new(0.5, var19, 0.46, 0), UDim2.new(0, 164, 0, var18), true)
-		createGamepadLabel("Use Tool", UDim2.new(0.5, var20, 0, 15), UDim2.new(0, 73, 0, var18))
-		createGamepadLabel("Roblox Menu", UDim2.new(0.5, var20, 0.15, 10), UDim2.new(0, 122, 0, var18))
-		createGamepadLabel("Back", UDim2.new(0.5, var20, 0.31, 5), UDim2.new(0, 43, 0, var18))
-		createGamepadLabel("Jump", UDim2.new(0.5, var20, 0.46, 0), UDim2.new(0, 49, 0, var18))
-		createGamepadLabel("Rotate Camera", UDim2.new(0.5, var21, 0.62, -10), UDim2.new(0, 132, 0, var18))
-		createGamepadLabel("Camera Zoom", UDim2.new(0.5, var21, 0.77, -10), UDim2.new(0, 122, 0, var18))
+		local XOffset = -Parent.Size.X.Offset / 2 - 20
+		local OffsetDelta = Parent.Size.X.Offset / 2 - 20
+		local XOffset1 = OffsetDelta + 40
+		createGamepadLabel("Switch Tool", UDim2.new(0.5, XOffset, 0, 15), UDim2.new(0, 100, 0, TextSizeResult), true)
+		createGamepadLabel(RobloxTranslatorModule:FormatByKey("InGame.HelpMenu.Controls.ToggleGameMenu"), UDim2.new(0.5, XOffset, 0.15, 10), UDim2.new(0, 164, 0, TextSizeResult), true)
+		createGamepadLabel("Move", UDim2.new(0.5, XOffset, 0.31, 5), UDim2.new(0, 46, 0, TextSizeResult), true)
+		createGamepadLabel("Menu Navigation", UDim2.new(0.5, XOffset, 0.46, 0), UDim2.new(0, 164, 0, TextSizeResult), true)
+		createGamepadLabel("Use Tool", UDim2.new(0.5, OffsetDelta, 0, 15), UDim2.new(0, 73, 0, TextSizeResult))
+		createGamepadLabel("Roblox Menu", UDim2.new(0.5, OffsetDelta, 0.15, 10), UDim2.new(0, 122, 0, TextSizeResult))
+		createGamepadLabel("Back", UDim2.new(0.5, OffsetDelta, 0.31, 5), UDim2.new(0, 43, 0, TextSizeResult))
+		createGamepadLabel("Jump", UDim2.new(0.5, OffsetDelta, 0.46, 0), UDim2.new(0, 49, 0, TextSizeResult))
+		createGamepadLabel("Rotate Camera", UDim2.new(0.5, XOffset1, 0.62, -10), UDim2.new(0, 132, 0, TextSizeResult))
+		createGamepadLabel("Camera Zoom", UDim2.new(0.5, XOffset1, 0.77, -10), UDim2.new(0, 122, 0, TextSizeResult))
 	end
 	
-	local function updateTouchLayout(p4)
-		-- upvalues: help_1 (ref), utilityModule (copy)
-		help_1.ActiveHelpScheme = p4
-		local var17 = utilityModule:IsPortrait()
+	local function updateTouchLayout(TouchMovementMode) --[[ Line: 401 ]]
+		-- upvalues: NewPage (copy), UtilityModule (upval)
+		NewPage.ActiveHelpScheme = TouchMovementMode
+		local IsPortrait = UtilityModule:IsPortrait()
 		
-		if help_1.HelpPages.Touch then
-			local t
-			local touch = help_1.HelpPageContents.Touch
+		if NewPage.HelpPages.Touch then
+			local Touch = NewPage.HelpPageContents.Touch
 			
-			local function _(p5)
-				-- upvalues: touch (ref)
-				if p5 then
-					for i, v in pairs(touch) do
-						v.Visible = not p5[i]
+			local function _(p2) --[[ Line: 409 | Named "hideUneeded" ]]
+				-- upvalues: Touch (copy)
+				if p2 then
+					for i, value in pairs(Touch) do
+						value.Visible = not p2[i]
 					end
 				end
 			end
+			local config = nil
 			
-			local _ = nil
-			
-			if p4 == Enum.TouchMovementMode.DynamicThumbstick or p4 == Enum.TouchMovementMode.Default then
-				t = { MoveImageCTM = true }
-				touch.MoveLabel.Position = var17 and UDim2.new(0.25, -touch.MoveLabel.AbsoluteSize.x / 2, 0.75, -50) or UDim2.new(0.15, -touch.MoveLabel.AbsoluteSize.x / 2, 0.85, -touch.MoveLabel.AbsoluteSize.y)
-				touch.JumpLabel.Position = var17 and UDim2.new(0.75, -touch.JumpLabel.AbsoluteSize.x / 2, 0.75, -50) or UDim2.new(0.85, -60, 0.85, -touch.JumpLabel.AbsoluteSize.y)
-				touch.RotateLabel.Position = var17 and UDim2.new(1, (-touch.RotateLabel.AbsoluteSize.x) - 20, 0.02, 0) or UDim2.new(0.85, -touch.RotateLabel.AbsoluteSize.x / 2, 0.02, 0)
-				touch.UseToolLabel.Position = var17 and UDim2.new(0.5, -touch.UseToolLabel.AbsoluteSize.x / 2, 0.5, -100) or UDim2.new(0.5, -touch.UseToolLabel.AbsoluteSize.x / 2, 0.5, -60)
-				touch.EquipLabel.Position = var17 and UDim2.new(0.5, -60, 0.75, 50) or UDim2.new(0.5, -60, 0.64, 0)
-				touch.ZoomLabel.Position = var17 and UDim2.new(0, 20, 0.02, 0) or UDim2.new(0.15, -60, 0.02, 0)
-			elseif p4 == Enum.TouchMovementMode.ClickToMove then
-				t = { MoveImageDTS = true, JumpLabel = true }
-				touch.MoveLabel.Position = var17 and UDim2.new(0.25, -touch.MoveLabel.AbsoluteSize.x / 2, 0.5, 0) or UDim2.new(0.25, -touch.MoveLabel.AbsoluteSize.x / 2, 0.5, 40)
-				touch.RotateLabel.Position = var17 and UDim2.new(1, (-touch.RotateLabel.AbsoluteSize.x) - 20, 0.02, 0) or UDim2.new(0.5, -60, 0.02, 0)
-				touch.UseToolLabel.Position = var17 and UDim2.new(0.75, -touch.UseToolLabel.AbsoluteSize.x / 2, 0.5, 0) or UDim2.new(0.85, -60, 0.02, 0)
-				touch.EquipLabel.Position = var17 and UDim2.new(0.5, -60, 0.75, 50) or UDim2.new(0.5, -60, 0.64, 0)
-				touch.ZoomLabel.Position = var17 and UDim2.new(0, 20, 0.02, 0) or UDim2.new(0.15, -60, 0.02, 0)
+			if TouchMovementMode == Enum.TouchMovementMode.DynamicThumbstick or TouchMovementMode == Enum.TouchMovementMode.Default then
+				config = { MoveImageCTM = true }
+				Touch.MoveLabel.Position = IsPortrait and UDim2.new(0.25, -Touch.MoveLabel.AbsoluteSize.x / 2, 0.75, -50) or UDim2.new(0.15, -Touch.MoveLabel.AbsoluteSize.x / 2, 0.85, -Touch.MoveLabel.AbsoluteSize.y)
+				Touch.JumpLabel.Position = IsPortrait and UDim2.new(0.75, -Touch.JumpLabel.AbsoluteSize.x / 2, 0.75, -50) or UDim2.new(0.85, -60, 0.85, -Touch.JumpLabel.AbsoluteSize.y)
+				Touch.RotateLabel.Position = IsPortrait and UDim2.new(1, -Touch.RotateLabel.AbsoluteSize.x - 20, 0.02, 0) or UDim2.new(0.85, -Touch.RotateLabel.AbsoluteSize.x / 2, 0.02, 0)
+				Touch.UseToolLabel.Position = IsPortrait and UDim2.new(0.5, -Touch.UseToolLabel.AbsoluteSize.x / 2, 0.5, -100) or UDim2.new(0.5, -Touch.UseToolLabel.AbsoluteSize.x / 2, 0.5, -60)
+				Touch.EquipLabel.Position = IsPortrait and UDim2.new(0.5, -60, 0.75, 50) or UDim2.new(0.5, -60, 0.64, 0)
+				Touch.ZoomLabel.Position = IsPortrait and UDim2.new(0, 20, 0.02, 0) or UDim2.new(0.15, -60, 0.02, 0)
+			elseif TouchMovementMode == Enum.TouchMovementMode.ClickToMove then
+				config = { MoveImageDTS = true, JumpLabel = true }
+				Touch.MoveLabel.Position = IsPortrait and UDim2.new(0.25, -Touch.MoveLabel.AbsoluteSize.x / 2, 0.5, 0) or UDim2.new(0.25, -Touch.MoveLabel.AbsoluteSize.x / 2, 0.5, 40)
+				Touch.RotateLabel.Position = IsPortrait and UDim2.new(1, -Touch.RotateLabel.AbsoluteSize.x - 20, 0.02, 0) or UDim2.new(0.5, -60, 0.02, 0)
+				Touch.UseToolLabel.Position = IsPortrait and UDim2.new(0.75, -Touch.UseToolLabel.AbsoluteSize.x / 2, 0.5, 0) or UDim2.new(0.85, -60, 0.02, 0)
+				Touch.EquipLabel.Position = IsPortrait and UDim2.new(0.5, -60, 0.75, 50) or UDim2.new(0.5, -60, 0.64, 0)
+				Touch.ZoomLabel.Position = IsPortrait and UDim2.new(0, 20, 0.02, 0) or UDim2.new(0.15, -60, 0.02, 0)
 			else
-				t = {
+				config = {
 					MoveImageDTS = true,
 					MoveImageCTM = true,
 					JumpImage = true
 				}
-				touch.MoveLabel.Position = var17 and UDim2.new(0.06, 0, 1, -120) or UDim2.new(0.06, 0, 0.58, 0)
-				touch.JumpLabel.Position = var17 and UDim2.new(0.94, -touch.JumpLabel.AbsoluteSize.x, 1, -120) or UDim2.new(0.8, 0, 0.58, 0)
-				touch.RotateLabel.Position = var17 and UDim2.new(1, (-touch.RotateLabel.AbsoluteSize.x) - 20, 0.02, 0) or UDim2.new(0.5, -60, 0.02, 0)
-				touch.UseToolLabel.Position = var17 and UDim2.new(0.5, -touch.UseToolLabel.AbsoluteSize.x / 2, 0.25, 50) or UDim2.new(0.85, -60, 0.02, 0)
-				touch.EquipLabel.Position = var17 and UDim2.new(0.5, -60, 0.75, 50) or UDim2.new(0.5, -60, 0.64, 0)
-				touch.ZoomLabel.Position = var17 and UDim2.new(0, 20, 0.02, 0) or UDim2.new(0.15, -60, 0.02, 0)
+				Touch.MoveLabel.Position = IsPortrait and UDim2.new(0.06, 0, 1, -120) or UDim2.new(0.06, 0, 0.58, 0)
+				Touch.JumpLabel.Position = IsPortrait and UDim2.new(0.94, -Touch.JumpLabel.AbsoluteSize.x, 1, -120) or UDim2.new(0.8, 0, 0.58, 0)
+				Touch.RotateLabel.Position = IsPortrait and UDim2.new(1, -Touch.RotateLabel.AbsoluteSize.x - 20, 0.02, 0) or UDim2.new(0.5, -60, 0.02, 0)
+				Touch.UseToolLabel.Position = IsPortrait and UDim2.new(0.5, -Touch.UseToolLabel.AbsoluteSize.x / 2, 0.25, 50) or UDim2.new(0.85, -60, 0.02, 0)
+				Touch.EquipLabel.Position = IsPortrait and UDim2.new(0.5, -60, 0.75, 50) or UDim2.new(0.5, -60, 0.64, 0)
+				Touch.ZoomLabel.Position = IsPortrait and UDim2.new(0, 20, 0.02, 0) or UDim2.new(0.15, -60, 0.02, 0)
 			end
-			local var18 = t
+			local config1 = config
 			
-			if var18 then
-				for i, v in pairs(touch) do
-					v.Visible = not var18[i]
+			if config1 then
+				for i, value in pairs(Touch) do
+					value.Visible = not config1[i]
 				end
 			end
 		end
 	end
 	
-	local function createTouchHelp(p5)
-		-- upvalues: utilityModule (copy), guiService (copy), create (copy), themeModule (copy)
-		local t = {}
-		local var18 = utilityModule:IsSmallTouchScreen()
-		p5.Size = UDim2.new(1, 0, 0, if var18 then guiService:GetScreenResolution().y - 100 else guiService:GetScreenResolution().y - 350)
+	local function createTouchHelp(Parent) --[[ Line: 457 ]]
+		-- upvalues: UtilityModule (upval), GuiService (upval), CreateFunction (upval), ThemeModule (upval)
+		local IsSmallTouchScreen = UtilityModule:IsSmallTouchScreen()
+		Parent.Size = UDim2.new(1, 0, 0, if IsSmallTouchScreen then GuiService:GetScreenResolution().y - 100 else GuiService:GetScreenResolution().y - 350)
 		
-		local function createTouchLabel(p6, p7, p8, p9)
-			-- upvalues: create (copy), themeModule (copy), var18 (ref)
-			local var19 = create("TextLabel")({
+		local function createTouchLabel(Text, Position, Size, Parent) --[[ Line: 466 ]]
+			-- upvalues: CreateFunction (upval), ThemeModule (upval), IsSmallTouchScreen (copy)
+			local Parent1 = CreateFunction("TextLabel")({
 				BackgroundTransparency = 1,
-				Position = p7,
-				Size = p8,
-				Name = p6 .. "Frame",
-				Parent = p9
+				Position = Position,
+				Size = Size,
+				Name = Text .. "Frame",
+				Parent = Parent
 			})
-			local var20 = create("TextLabel")({
+			local v2 = CreateFunction("TextLabel")({
 				BackgroundTransparency = 1,
 				ZIndex = 3,
 				TextScaled = true,
 				TextWrapped = true,
 				Position = UDim2.new(0, 0, 0, 0),
 				Size = UDim2.new(1, 0, 1, 0),
-				Text = p6,
-				Font = themeModule.font(Enum.Font.SourceSansBold, "HelpTouch"),
-				FontSize = themeModule.fontSize(Enum.FontSize.Size14, "HelpTouch"),
+				Text = Text,
+				Font = ThemeModule.font(Enum.Font.SourceSansBold, "HelpTouch"),
+				FontSize = ThemeModule.fontSize(Enum.FontSize.Size14, "HelpTouch"),
 				TextColor3 = Color3.new(1, 1, 1),
-				Name = p6 .. "Label",
-				Parent = var19
+				Name = Text .. "Label",
+				Parent = Parent1
 			})
 			
-			if not var18 then
-				var20.FontSize = themeModule.fontSize(Enum.FontSize.Size18, "HelpTitle")
-				var20.Size = UDim2.new(var20.Size.X.Scale, var20.Size.X.Offset, var20.Size.Y.Scale, var20.Size.Y.Offset + 4)
+			if not IsSmallTouchScreen then
+				v2.FontSize = ThemeModule.fontSize(Enum.FontSize.Size18, "HelpTitle")
+				v2.Size = UDim2.new(v2.Size.X.Scale, v2.Size.X.Offset, v2.Size.Y.Scale, v2.Size.Y.Offset + 4)
 			end
-			local _ = create("ImageLabel")({
+			local _ = CreateFunction("ImageLabel")({
 				BackgroundTransparency = 1,
 				Image = "rbxasset://textures/ui/Settings/Radial/RadialLabel.png",
 				ZIndex = 2,
-				Name = p6 .. "BackgroundImage",
+				Name = Text .. "BackgroundImage",
 				Size = UDim2.new(1.25, 0, 1.25, 0),
 				Position = UDim2.new(-0.125, 0, -0.065, 0),
 				ScaleType = Enum.ScaleType.Slice,
 				SliceCenter = Rect.new(12, 2, 65, 21),
-				Parent = var19
+				Parent = Parent1
 			})
-			Instance.new("UITextSizeConstraint", var20).MaxTextSize = themeModule.textSize(18, "HelpText")
+			Instance.new("UITextSizeConstraint", v2).MaxTextSize = ThemeModule.textSize(18, "HelpText")
 			
-			return var19
+			return Parent1
 		end
 		
-		local function _(p6, p7, p8, p9, p10)
-			-- upvalues: create (copy)
-			return create("ImageLabel")({
+		local function _(Name, Image, Position, Size, Parent) --[[ Line: 516 | Named "createTouchGestureImage" ]]
+			-- upvalues: CreateFunction (upval)
+			return (CreateFunction("ImageLabel")({
 				BackgroundTransparency = 1,
 				ZIndex = 2,
-				Name = p6,
-				Size = p9,
-				Position = p8,
-				Image = p7,
-				Parent = p10
-			})
+				Name = Name,
+				Size = Size,
+				Position = Position,
+				Image = Image,
+				Parent = Parent
+			}))
 		end
 		
-		local var19 = if var18 then 0 else 30
-		t.MoveLabel = createTouchLabel("Move", UDim2.new(0.06, 0, 0.58, 0), UDim2.new(0, var19 + 77, 0, 25), p5)
-		t.MoveImageDTS = create("ImageLabel")({
+		local v2: number = if IsSmallTouchScreen then 0 else 30
+		local config = {
+			MoveLabel = createTouchLabel("Move", UDim2.new(0.06, 0, 0.58, 0), UDim2.new(0, v2 + 77, 0, 25), Parent)
+		}
+		config.MoveImageDTS = CreateFunction("ImageLabel")({
 			Name = "MoveImageDTS",
 			BackgroundTransparency = 1,
 			Image = "rbxasset://textures/ui/Settings/Help/RotateCameraGesture.png",
 			ZIndex = 2,
 			Size = UDim2.new(0, 65, 0, 48),
 			Position = UDim2.new(0.5, -32, 1, 3),
-			Parent = t.MoveLabel
+			Parent = config.MoveLabel
 		})
-		t.MoveImageCTM = create("ImageLabel")({
+		config.MoveImageCTM = CreateFunction("ImageLabel")({
 			Name = "MoveImageCTM",
 			BackgroundTransparency = 1,
 			Image = "rbxasset://textures/ui/Settings/Help/UseToolGesture.png",
 			ZIndex = 2,
 			Size = UDim2.new(0, 38, 0, 52),
 			Position = UDim2.new(0.5, -19, 1, 3),
-			Parent = t.MoveLabel
+			Parent = config.MoveLabel
 		})
-		t.JumpLabel = createTouchLabel("Jump", UDim2.new(0.8, 0, 0.58, 0), UDim2.new(0, var19 + 77, 0, 25), p5)
-		t.JumpImage = create("ImageLabel")({
+		config.JumpLabel = createTouchLabel("Jump", UDim2.new(0.8, 0, 0.58, 0), UDim2.new(0, v2 + 77, 0, 25), Parent)
+		config.JumpImage = CreateFunction("ImageLabel")({
 			Name = "JumpImage",
 			BackgroundTransparency = 1,
 			Image = "rbxasset://textures/ui/Settings/Help/UseToolGesture.png",
 			ZIndex = 2,
 			Size = UDim2.new(0, 38, 0, 52),
 			Position = UDim2.new(0.5, -19, 1, 3),
-			Parent = t.JumpLabel
+			Parent = config.JumpLabel
 		})
-		t.EquipLabel = createTouchLabel("Equip/Unequip Tools", UDim2.new(0.5, -60, 0.64, 0), UDim2.new(0, var19 + 120, 0, 25), p5)
-		t.ZoomLabel = createTouchLabel("Zoom In/Out", UDim2.new(0.15, -60, 0.02, 0), UDim2.new(0, 120, 0, 25), p5)
-		t.ZoomImage = create("ImageLabel")({
+		config.EquipLabel = createTouchLabel("Equip/Unequip Tools", UDim2.new(0.5, -60, 0.64, 0), UDim2.new(0, v2 + 120, 0, 25), Parent)
+		config.ZoomLabel = createTouchLabel("Zoom In/Out", UDim2.new(0.15, -60, 0.02, 0), UDim2.new(0, 120, 0, 25), Parent)
+		config.ZoomImage = CreateFunction("ImageLabel")({
 			Name = "ZoomImage",
 			BackgroundTransparency = 1,
 			Image = "rbxasset://textures/ui/Settings/Help/ZoomGesture.png",
 			ZIndex = 2,
 			Size = UDim2.new(0, 53, 0, 59),
 			Position = UDim2.new(0.5, -26, 1, 3),
-			Parent = t.ZoomLabel
+			Parent = config.ZoomLabel
 		})
-		t.RotateLabel = createTouchLabel("Rotate Camera", UDim2.new(0.5, -60, 0.02, 0), UDim2.new(0, 120, 0, 25), p5)
-		t.RotateImage = create("ImageLabel")({
+		config.RotateLabel = createTouchLabel("Rotate Camera", UDim2.new(0.5, -60, 0.02, 0), UDim2.new(0, 120, 0, 25), Parent)
+		config.RotateImage = CreateFunction("ImageLabel")({
 			Name = "RotateImage",
 			BackgroundTransparency = 1,
 			Image = "rbxasset://textures/ui/Settings/Help/RotateCameraGesture.png",
 			ZIndex = 2,
 			Size = UDim2.new(0, 65, 0, 48),
 			Position = UDim2.new(0.5, -32, 1, 3),
-			Parent = t.RotateLabel
+			Parent = config.RotateLabel
 		})
-		t.UseToolLabel = createTouchLabel("Use Tool", UDim2.new(0.85, -60, 0.02, 0), UDim2.new(0, 120, 0, 25), p5)
-		t.ToolImage = create("ImageLabel")({
+		config.UseToolLabel = createTouchLabel("Use Tool", UDim2.new(0.85, -60, 0.02, 0), UDim2.new(0, 120, 0, 25), Parent)
+		config.ToolImage = CreateFunction("ImageLabel")({
 			Name = "ToolImage",
 			BackgroundTransparency = 1,
 			Image = "rbxasset://textures/ui/Settings/Help/UseToolGesture.png",
 			ZIndex = 2,
 			Size = UDim2.new(0, 38, 0, 52),
 			Position = UDim2.new(0.5, -19, 1, 3),
-			Parent = t.UseToolLabel
+			Parent = config.UseToolLabel
 		})
 		
-		return t
+		return config
 	end
 	
-	local function createSpatialGamepadHelp(p5)
-		-- upvalues: var3 (copy), create (copy), help_1 (ref), var2 (copy), themeModule (copy)
-		local gamepadQuest = var3.Images.GamepadQuest
-		local questGamepadLabels = var3.Labels.QuestGamepadLabels
-		local image = gamepadQuest.Image
-		local heightRatio = gamepadQuest.HeightRatio
-		local localizationKeyPrefix = questGamepadLabels.LocalizationKeyPrefix
-		local labelRelativeTextHeight = questGamepadLabels.LabelRelativeTextHeight
-		local labelsInfo = questGamepadLabels.LabelsInfo
-		local var18 = create("ImageLabel")({
+	local function createSpatialGamepadHelp(Parent) --[[ Line: 556 ]]
+		-- upvalues: HelpConstantsModule (upval), CreateFunction (upval), NewPage (copy), NewResult (upval), ThemeModule (upval)
+		local GamepadQuest = HelpConstantsModule.Images.GamepadQuest
+		local QuestGamepadLabels = HelpConstantsModule.Labels.QuestGamepadLabels
+		local HeightRatio = GamepadQuest.HeightRatio
+		local LocalizationKeyPrefix = QuestGamepadLabels.LocalizationKeyPrefix
+		local LabelRelativeTextHeight = QuestGamepadLabels.LabelRelativeTextHeight
+		local LabelsInfo = QuestGamepadLabels.LabelsInfo
+		local Parent1 = CreateFunction("ImageLabel")({
 			Name = "SpatialGamepadImage",
 			BackgroundTransparency = 1,
 			ZIndex = 2,
-			Size = UDim2.new(1, 0, heightRatio, 0),
+			Size = UDim2.new(1, 0, HeightRatio, 0),
 			Position = UDim2.new(0.5, 0, 0, 0),
 			AnchorPoint = Vector2.new(0.5, 0),
 			SizeConstraint = Enum.SizeConstraint.RelativeXX,
-			Image = image,
-			Parent = p5
+			Image = GamepadQuest.Image,
+			Parent = Parent
 		})
-		local UIPadding = help_1.Page:FindFirstChildOfClass("UIPadding")
-		p5.Size = UDim2.new(p5.Size.X.Scale, p5.Size.X.Offset, 0, (help_1.Page.AbsoluteSize.X - (if UIPadding then UIPadding.PaddingLeft.Offset + UIPadding.PaddingRight.Offset else 0)) * heightRatio)
+		local UIPadding = NewPage.Page:FindFirstChildOfClass("UIPadding")
+		Parent.Size = UDim2.new(Parent.Size.X.Scale, Parent.Size.X.Offset, 0, (NewPage.Page.AbsoluteSize.X - (if UIPadding then UIPadding.PaddingLeft.Offset + UIPadding.PaddingRight.Offset else 0)) * HeightRatio)
 		
-		for i, v in labelsInfo do
-			create("TextLabel")({
+		for _, value in LabelsInfo do
+			CreateFunction("TextLabel")({
 				BackgroundTransparency = 1,
 				ZIndex = 2,
 				TextScaled = true,
-				Name = v.labelKey,
-				Position = UDim2.fromScale(v.xPosition, v.yPosition),
-				Size = UDim2.fromScale(v.width, labelRelativeTextHeight),
-				Text = var2:Format(localizationKeyPrefix .. v.labelKey),
-				TextXAlignment = v.xAlignment or Enum.TextXAlignment.Right,
-				Font = themeModule.font(nil, "HelpGamepad"),
-				TextColor3 = themeModule.color("TextEmphasis"),
-				TextTransparency = themeModule.transparency("TextEmphasis"),
-				Parent = var18
+				Name = value.labelKey,
+				Position = UDim2.fromScale(value.xPosition, value.yPosition),
+				Size = UDim2.fromScale(value.width, LabelRelativeTextHeight),
+				Text = NewResult:Format(LocalizationKeyPrefix .. value.labelKey),
+				TextXAlignment = value.xAlignment or Enum.TextXAlignment.Right,
+				Font = ThemeModule.font(nil, "HelpGamepad"),
+				TextColor3 = ThemeModule.color("TextEmphasis"),
+				TextTransparency = ThemeModule.transparency("TextEmphasis"),
+				Parent = Parent1
 			})
 		end
 	end
 	
-	local function createHelpDisplay(p6)
-		-- upvalues: create (copy), createPCHelp (ref), createGamepadHelp (ref), createTouchHelp (ref), isInExperienceUIVREnabled (copy), createSpatialGamepadHelp (ref)
-		local var19 = nil
-		local var20 = create("Frame")({
+	local function createHelpDisplay(p2) --[[ Line: 608 ]]
+		-- upvalues: CreateFunction (upval), createPCHelp (copy), createGamepadHelp (copy), createTouchHelp (copy), IsInExperienceUIVREnabled (upval), createSpatialGamepadHelp (copy)
+		local v2 = nil
+		local Parent = CreateFunction("Frame")({
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 1, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
-			Name = "HelpFrame" .. tostring(p6)
+			Name = "HelpFrame" .. tostring(p2)
 		})
 		
-		if p6 == "KeyboardMouse" then
-			local _ = create("UIListLayout")({
+		if p2 == "KeyboardMouse" then
+			local _ = CreateFunction("UIListLayout")({
 				Wraps = true,
 				FillDirection = Enum.FillDirection.Horizontal,
-				Parent = var20,
+				Parent = Parent,
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				Padding = UDim.new(0, 4)
 			})
 		end
-		if p6 == "KeyboardMouse" then
-			createPCHelp(var20)
-		elseif p6 == "Gamepad" then
-			createGamepadHelp(var20)
-		elseif p6 == "Touch" then
-			var19 = createTouchHelp(var20)
-		elseif isInExperienceUIVREnabled and p6 == "SpatialGamepad" then
-			createSpatialGamepadHelp(var20)
+		if p2 == "KeyboardMouse" then
+			createPCHelp(Parent)
+		elseif p2 == "Gamepad" then
+			createGamepadHelp(Parent)
+		elseif p2 == "Touch" then
+			v2 = createTouchHelp(Parent)
+		elseif IsInExperienceUIVREnabled and p2 == "SpatialGamepad" then
+			createSpatialGamepadHelp(Parent)
 		end
-		return var20, var19
+		return Parent, v2
 	end
 	
-	local function displayHelp(p6)
-		-- upvalues: help_1 (ref), var1 (copy), userInputService (copy)
-		for i, v in pairs(help_1.HelpPages) do
-			if v == p6 then
-				v.Parent = help_1.Page
-				help_1.Page.Size = v.Size
+	local function displayHelp(HelpPage) --[[ Line: 642 ]]
+		-- upvalues: NewPage (copy), IsEnabled (upval), UserInputService (upval)
+		for _, helpPage in pairs(NewPage.HelpPages) do
+			if helpPage == HelpPage then
+				helpPage.Parent = NewPage.Page
+				NewPage.Page.Size = helpPage.Size
 				
-				if var1 then
-					help_1.Page.Size = UDim2.new(v.Size.X.Scale, v.Size.X.Offset, v.Size.Y.Scale, 0)
+				if IsEnabled then
+					NewPage.Page.Size = UDim2.new(helpPage.Size.X.Scale, helpPage.Size.X.Offset, helpPage.Size.Y.Scale, 0)
 				end
 			else
-				v.Parent = nil
+				helpPage.Parent = nil
 			end
 		end
-		if userInputService:GetPlatform() == Enum.Platform.XBoxOne then
-			help_1.HubRef.PageViewClipper.ClipsDescendants = false
-			help_1.HubRef.PageView.ClipsDescendants = false
+		if UserInputService:GetPlatform() == Enum.Platform.XBoxOne then
+			NewPage.HubRef.PageViewClipper.ClipsDescendants = false
+			NewPage.HubRef.PageView.ClipsDescendants = false
 		end
 	end
 	
-	local function switchToHelp(p7)
-		-- upvalues: help_1 (ref), displayHelp (ref), gameSettings (copy), updateTouchLayout (ref), createHelpDisplay (ref), switchToHelp (ref)
-		local var19 = help_1.HelpPages[p7]
+	local function switchToHelp(CurrentInputType) --[[ Line: 660 ]]
+		-- upvalues: NewPage (copy), displayHelp (copy), GameSettings (upval), updateTouchLayout (copy), createHelpDisplay (copy), switchToHelp (copy)
+		local HelpPage = NewPage.HelpPages[CurrentInputType]
 		
-		if var19 then
-			displayHelp(var19)
+		if HelpPage then
+			displayHelp(HelpPage)
 			
-			if p7 == "Touch" then
-				local touchMovementMode = gameSettings.TouchMovementMode
+			if CurrentInputType == "Touch" then
+				local TouchMovementMode = GameSettings.TouchMovementMode
 				
-				if help_1.ActiveHelpScheme == touchMovementMode then
-					return
-				else
-					updateTouchLayout(touchMovementMode)
+				if NewPage.ActiveHelpScheme ~= TouchMovementMode then
+					updateTouchLayout(TouchMovementMode)
 					
 					return
 				end
 			end
 		else
-			local helpPages = help_1.HelpPages
-			local helpPageContents = help_1.HelpPageContents
-			local var20, var21 = createHelpDisplay(p7)
-			helpPages[p7] = var20
-			helpPageContents[p7] = var21
-			switchToHelp(p7)
+			NewPage.HelpPages[CurrentInputType], NewPage.HelpPageContents[CurrentInputType] = createHelpDisplay(CurrentInputType)
+			switchToHelp(CurrentInputType)
 		end
 	end
 	
-	local function _()
-		-- upvalues: switchToHelp (ref), help_1 (ref)
-		switchToHelp(help_1:GetCurrentInputType())
+	local function _() --[[ Line: 677 | Named "showTypeOfHelp" ]]
+		-- upvalues: switchToHelp (copy), NewPage (copy)
+		switchToHelp(NewPage:GetCurrentInputType())
 	end
 	
-	function help_1.PageDisplayed(_)
-		-- upvalues: help_1 (ref), userInputService (copy), var5 (write), switchToHelp (ref)
-		if not help_1.LastInputTypeChangedConnection then
-			help_1.LastInputTypeChangedConnection = userInputService.LastInputTypeChanged:Connect(function(p7)
-				-- upvalues: var5 (copy), switchToHelp (copy), help_1 (copy)
-				if p7 ~= Enum.UserInputType.Focus and p7 ~= Enum.UserInputType.None then
-					var5 = p7
-					switchToHelp(help_1:GetCurrentInputType())
+	function NewPage:PageDisplayed() --[[ Line: 681 ]]
+		-- upvalues: NewPage (copy), UserInputService (upval), LastInputType (ref), switchToHelp (copy)
+		if not NewPage.LastInputTypeChangedConnection then
+			NewPage.LastInputTypeChangedConnection = UserInputService.LastInputTypeChanged:Connect(function(UserInputType) --[[ Line: 683 ]]
+				-- upvalues: LastInputType (upval), switchToHelp (upval), NewPage (upval)
+				if UserInputType ~= Enum.UserInputType.Focus and UserInputType ~= Enum.UserInputType.None then
+					LastInputType = UserInputType
+					switchToHelp(NewPage:GetCurrentInputType())
 				end
 			end)
 		end
-		var5 = userInputService:GetLastInputType()
-		switchToHelp(help_1:GetCurrentInputType())
+		LastInputType = UserInputService:GetLastInputType()
+		switchToHelp(NewPage:GetCurrentInputType())
 	end
 	
-	function help_1.PageHidden(_)
-		-- upvalues: help_1 (ref)
-		if help_1.LastInputTypeChangedConnection then
-			help_1.LastInputTypeChangedConnection:Disconnect()
-			help_1.LastInputTypeChangedConnection = nil
+	function NewPage:PageHidden() --[[ Line: 694 ]]
+		-- upvalues: NewPage (copy)
+		if NewPage.LastInputTypeChangedConnection then
+			NewPage.LastInputTypeChangedConnection:Disconnect()
+			NewPage.LastInputTypeChangedConnection = nil
 		end
 	end
 	
-	local function adjustForScreenLayout(p7)
-		-- upvalues: help_1 (ref), gameSettings (copy), utilityModule (copy), guiService (copy), updateTouchLayout (ref)
-		if help_1:GetCurrentInputType() == "Touch" then
-			local touchMovementMode = gameSettings.TouchMovementMode
-			p7 = p7 or guiService:GetScreenResolution()
-			help_1.HelpPages.Touch.Size = UDim2.new(1, 0, 0, if utilityModule:IsSmallTouchScreen() then p7.y - 120 else p7.y - 350)
-			updateTouchLayout(touchMovementMode)
+	local function adjustForScreenLayout(p2) --[[ Line: 701 ]]
+		-- upvalues: NewPage (copy), GameSettings (upval), UtilityModule (upval), GuiService (upval), updateTouchLayout (copy)
+		if NewPage:GetCurrentInputType() == "Touch" then
+			local TouchMovementMode = GameSettings.TouchMovementMode
+			local IsSmallTouchScreen = UtilityModule:IsSmallTouchScreen()
+			local P28 = p2 or GuiService:GetScreenResolution()
+			NewPage.HelpPages.Touch.Size = UDim2.new(1, 0, 0, if IsSmallTouchScreen then P28.y - 120 else P28.y - 350)
+			updateTouchLayout(TouchMovementMode)
 		end
 	end
 	
-	help_1.TabHeader.Name = "HelpTab"
-	local help = uiblox["icons/menu/help"]
-	help_1.TabHeader.TabLabel.Icon.FontFace = builderIconsModule.Font[help.variant]
-	help_1.TabHeader.TabLabel.Icon.Text = help.name
-	help_1.TabHeader.TabLabel.Title.Text = "Help"
-	help_1.Page.Name = "Help"
-	utilityModule:OnResized(help_1, function(p7, _)
-		-- upvalues: help_1 (ref), adjustForScreenLayout (ref)
-		if help_1.HelpPages.Touch then
-			adjustForScreenLayout(p7)
+	NewPage.TabHeader.Name = "HelpTab"
+	local IconsMenuHelp = Uiblox["icons/menu/help"]
+	NewPage.TabHeader.TabLabel.Icon.FontFace = BuilderIconsModule.Font[IconsMenuHelp.variant]
+	NewPage.TabHeader.TabLabel.Icon.Text = IconsMenuHelp.name
+	NewPage.TabHeader.TabLabel.Title.Text = "Help"
+	NewPage.Page.Name = "Help"
+	UtilityModule:OnResized(NewPage, function(p2, _) --[[ Line: 725 ]]
+		-- upvalues: NewPage (copy), adjustForScreenLayout (copy)
+		if NewPage.HelpPages.Touch then
+			adjustForScreenLayout(p2)
 		end
 	end)
 	
-	return help_1
+	return NewPage
 end)()
-var4.Displayed.Event:connect(function()
-	-- upvalues: var4 (write)
-	var4:PageDisplayed()
+v1.Displayed.Event:connect(function() --[[ Line: 739 ]]
+	-- upvalues: v1 (ref)
+	v1:PageDisplayed()
 	
-	if var4.HubRef.VersionContainer then
-		var4.HubRef.VersionContainer.Visible = true
+	if v1.HubRef.VersionContainer then
+		v1.HubRef.VersionContainer.Visible = true
 	end
 end)
-var4.Hidden.Event:connect(function()
-	-- upvalues: var4 (write)
-	var4:PageHidden()
-	var4.HubRef.PageViewClipper.ClipsDescendants = true
-	var4.HubRef.PageView.ClipsDescendants = true
-	var4.HubRef:ShowShield()
+v1.Hidden.Event:connect(function() --[[ Line: 746 ]]
+	-- upvalues: v1 (ref)
+	v1:PageHidden()
+	v1.HubRef.PageViewClipper.ClipsDescendants = true
+	v1.HubRef.PageView.ClipsDescendants = true
+	v1.HubRef:ShowShield()
 	
-	if var4.HubRef.VersionContainer then
-		var4.HubRef.VersionContainer.Visible = false
+	if v1.HubRef.VersionContainer then
+		v1.HubRef.VersionContainer.Visible = false
 	end
 end)
 
-return var4
+return v1

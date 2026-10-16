@@ -1,59 +1,60 @@
-﻿local parent = script.Parent.Parent.Parent
-local constantsModule = require(parent.Constants)
-local _ = require(parent.util.Types)
-local t = { categories = constantsModule.AllAssetUploadCategories }
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local getEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule = require(parent.flags.getEngineFeatureEngineUGCValidateInstanceTreesEquivalent)
+﻿local Parent = script.Parent.Parent.Parent
+local ConstantsModule = require(Parent.Constants)
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local GetEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule = require(Parent.flags.getEngineFeatureEngineUGCValidateInstanceTreesEquivalent)
 local UGCValidationService = game:GetService("UGCValidationService")
-t.requiredData = {
-	validationEnumsModule.SharedDataMember.entrypointInput,
-	validationEnumsModule.SharedDataMember.consumerConfig,
-	validationEnumsModule.SharedDataMember.uploadEnum
-}
 
-local function _(p1, p2, p3)
-	-- upvalues: getEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule (ref), validationEnumsModule (ref), UGCValidationService (ref)
-	return if getEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule() and p3 == validationEnumsModule.ConsumerEnv.Backend then UGCValidationService:AreInstanceTreesEquivalent(p1, p2) else true
+local function _(ExpectedTree, CandidateTree, Backend) --[[ Line: 20 | Named "deepEquals" ]]
+	-- upvalues: GetEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule (copy), ValidationEnumsModule (copy), UGCValidationService (copy)
+	return not GetEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule() or Backend ~= ValidationEnumsModule.ConsumerEnv.Backend or UGCValidationService:AreInstanceTreesEquivalent(ExpectedTree, CandidateTree)
 end
 
-local function getFoldersMapping(p1)
-	local t = { R15ArtistIntent = true, R15Fixed = true, R6 = true }
-	local t_1 = {}
+local function getFoldersMapping(EntrypointInput) --[[ Line: 33 ]]
+	local config = { R15ArtistIntent = true, R15Fixed = true, R6 = true }
+	local Folders = {}
 	
-	for i, v in p1 do
-		if v:IsA("Folder") and t[v.Name] then
-			t_1[v.Name] = v
+	for _, Folder in EntrypointInput do
+		if Folder:IsA("Folder") and config[Folder.Name] then
+			Folders[Folder.Name] = Folder
 		end
 	end
-	return t_1
+	return Folders
 end
 
-function t.run(p2, p3)
-	-- upvalues: constantsModule (ref), errorSourceStringsModule (ref), getFoldersMapping (ref), getEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule (ref), validationEnumsModule (ref), UGCValidationService (ref)
-	local entrypointInput = p3.entrypointInput
-	local consumerConfig = p3.consumerConfig
-	
-	if constantsModule.AssetUploadsWithFolderStructure[p3.uploadEnum.assetType] and consumerConfig.enforceR15FolderStructure then
-		if #entrypointInput ~= 3 then
-			p2:fail(errorSourceStringsModule.Keys.FolderStructureMismatch)
-			
-			return
-		end
-		local var1 = getFoldersMapping(entrypointInput)
+return {
+	categories = ConstantsModule.AllAssetUploadCategories,
+	requiredData = {
+		ValidationEnumsModule.SharedDataMember.entrypointInput,
+		ValidationEnumsModule.SharedDataMember.consumerConfig,
+		ValidationEnumsModule.SharedDataMember.uploadEnum
+	},
+	run = function(p1, p2) --[[ Line: 50 ]]
+		-- upvalues: ConstantsModule (copy), ErrorSourceStringsModule (copy), getFoldersMapping (copy), GetEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule (copy), ValidationEnumsModule (copy), UGCValidationService (copy)
+		local EntrypointInput = p2.entrypointInput
+		local ConsumerConfig = p2.consumerConfig
 		
-		if var1.R15ArtistIntent and var1.R15Fixed and (var1.R6 and #var1.R6:GetChildren() == 0) then
-			if if getEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule() and consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.Backend then UGCValidationService:AreInstanceTreesEquivalent(var1.R15ArtistIntent, var1.R15Fixed) else true then
-				return
-			else
-				p2:fail(errorSourceStringsModule.Keys.FolderStructureMismatch)
+		if ConstantsModule.AssetUploadsWithFolderStructure[p2.uploadEnum.assetType] and ConsumerConfig.enforceR15FolderStructure then
+			if #EntrypointInput ~= 3 then
+				p1:fail(ErrorSourceStringsModule.Keys.FolderStructureMismatch)
 				
 				return
 			end
+			local FoldersMapping = getFoldersMapping(EntrypointInput)
+			
+			if FoldersMapping.R15ArtistIntent and FoldersMapping.R15Fixed and FoldersMapping.R6 and #FoldersMapping.R6:GetChildren() == 0 then
+				local R15ArtistIntent = FoldersMapping.R15ArtistIntent
+				local R15Fixed = FoldersMapping.R15Fixed
+				local ConsumerEnv = ConsumerConfig.consumerEnv
+				
+				if not GetEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule() or ConsumerEnv ~= ValidationEnumsModule.ConsumerEnv.Backend or UGCValidationService:AreInstanceTreesEquivalent(R15ArtistIntent, R15Fixed) then return end
+			end
+			p1:fail(ErrorSourceStringsModule.Keys.FolderStructureMismatch)
+			
+			return
+		elseif #EntrypointInput ~= 1 then
+			p1:fail(ErrorSourceStringsModule.Keys.SelectionCountNotOne)
 		end
-	elseif #entrypointInput ~= 1 then
-		p2:fail(errorSourceStringsModule.Keys.SelectionCountNotOne)
 	end
-end
-
-return t
+}

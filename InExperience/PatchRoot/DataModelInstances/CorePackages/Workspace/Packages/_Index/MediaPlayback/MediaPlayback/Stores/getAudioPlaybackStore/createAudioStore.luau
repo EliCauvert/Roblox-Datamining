@@ -1,136 +1,134 @@
-﻿local mediaPlayback = script:FindFirstAncestor("MediaPlayback")
-local signalsModule = require(mediaPlayback.Parent.Signals)
-local signalsExperimentalModule = require(mediaPlayback.Parent.SignalsExperimental)
-local enableAudioPlaybackInAppModule = require(mediaPlayback.Common.enableAudioPlaybackInApp)
-local createAudioSystemModule = require(mediaPlayback.Stores.getAudioPlaybackStore.createAudioSystem)
-local createVolumeStoreModule = require(mediaPlayback.Stores.getAudioPlaybackStore.createVolumeStore)
-local _ = require(mediaPlayback.Stores.getAudioPlaybackStore.types)
-local createSignal = signalsModule.createSignal
-local createEffect = signalsModule.createEffect
-local onDisposed = signalsExperimentalModule.onDisposed
-local t = {
-	spawn = function(p1)
-		return task.spawn(p1)
+﻿local MediaPlayback = script:FindFirstAncestor("MediaPlayback")
+local SignalsModule = require(MediaPlayback.Parent.Signals)
+local EnableAudioPlaybackInAppModule = require(MediaPlayback.Common.enableAudioPlaybackInApp)
+local CreateAudioSystemModule = require(MediaPlayback.Stores.getAudioPlaybackStore.createAudioSystem)
+local CreateVolumeStoreModule = require(MediaPlayback.Stores.getAudioPlaybackStore.createVolumeStore)
+local _ = require(MediaPlayback.Stores.getAudioPlaybackStore.types)
+local CreateSignalFunction = SignalsModule.createSignal
+local CreateEffectFunction = SignalsModule.createEffect
+local OnDisposedFunction = require(MediaPlayback.Parent.SignalsExperimental).onDisposed
+local config = {
+	spawn = function(Callback) --[[ Line: 23 ]]
+		return task.spawn(Callback)
 	end,
-	wait = function(p1)
-		return task.wait(p1)
+	wait = function(Duration): number --[[ Line: 26 ]]
+		return task.wait(Duration)
 	end
 }
 
-return function(p1, p2, p3)
-	-- upvalues: t (ref), createSignal (ref), createVolumeStoreModule (ref), enableAudioPlaybackInAppModule (ref), createAudioSystemModule (ref), createEffect (ref), onDisposed (ref)
-	p3 = p3 or t
-	local var1, var2 = createSignal(0)
-	local var3, var4 = createSignal(0)
-	local var5, var6 = createSignal(false)
-	local var7, var8 = createSignal(false)
-	local var9, var10 = createSignal(false)
-	local var11, var12 = createSignal(false)
-	local t_1 = {}
-	local var13 = createVolumeStoreModule()
-	enableAudioPlaybackInAppModule()
-	local var14 = createAudioSystemModule(p1, p2)
-	local audioPlayer = var14.audioPlayer
+return function(AssetId, UsePreview, p1) --[[ Line: 31 | Named "createAudioStore" ]]
+	-- upvalues: config (copy), CreateSignalFunction (copy), CreateVolumeStoreModule (copy), EnableAudioPlaybackInAppModule (copy), CreateAudioSystemModule (copy), CreateEffectFunction (copy), OnDisposedFunction (copy)
+	local P2 = p1 or config
+	local Signal, Signal2 = CreateSignalFunction(0)
+	local Signal1, Signal2_1 = CreateSignalFunction(0)
+	local Signal3, Signal2_2 = CreateSignalFunction(false)
+	local Signal4, Signal2_3 = CreateSignalFunction(false)
+	local Signal5, Signal2_4 = CreateSignalFunction(false)
+	local Signal6, Signal2_5 = CreateSignalFunction(false)
+	local List = {}
+	local VolumeStoreModule = CreateVolumeStoreModule()
+	EnableAudioPlaybackInAppModule()
+	local AudioSystemModule = CreateAudioSystemModule(AssetId, UsePreview)
+	local AudioPlayer = AudioSystemModule.audioPlayer
 	
-	local function play()
-		-- upvalues: var6 (ref), var8 (ref), audioPlayer (ref)
-		var6(true)
-		var8(false)
-		audioPlayer.PlaybackSpeed = 1
+	local function play() --[[ Line: 53 ]]
+		-- upvalues: Signal2_2 (copy), Signal2_3 (copy), AudioPlayer (copy)
+		Signal2_2(true)
+		Signal2_3(false)
+		AudioPlayer.PlaybackSpeed = 1
 	end
 	
-	local function pause()
-		-- upvalues: var6 (ref), audioPlayer (ref)
-		var6(false)
-		audioPlayer.PlaybackSpeed = 0
+	local function pause() --[[ Line: 59 ]]
+		-- upvalues: Signal2_2 (copy), AudioPlayer (copy)
+		Signal2_2(false)
+		AudioPlayer.PlaybackSpeed = 0
 	end
 	
-	local function stop()
-		-- upvalues: var6 (ref), audioPlayer (ref), var4 (ref)
-		var6(false)
-		audioPlayer.PlaybackSpeed = 0
-		audioPlayer.TimePosition = 0
-		var4(0)
+	local function stop() --[[ Line: 64 ]]
+		-- upvalues: Signal2_2 (copy), AudioPlayer (copy), Signal2_1 (copy)
+		Signal2_2(false)
+		AudioPlayer.PlaybackSpeed = 0
+		AudioPlayer.TimePosition = 0
+		Signal2_1(0)
 	end
 	
-	local function seek(p4)
-		-- upvalues: audioPlayer (ref), var4 (ref)
-		local clampedValue = math.clamp(p4, 0, audioPlayer.TimeLength)
-		audioPlayer.TimePosition = clampedValue
-		var4(clampedValue)
+	local function seek(Value: number) --[[ Line: 70 ]]
+		-- upvalues: AudioPlayer (copy), Signal2_1 (copy)
+		local ClampedValue = math.clamp(Value, 0, AudioPlayer.TimeLength)
+		AudioPlayer.TimePosition = ClampedValue
+		Signal2_1(ClampedValue)
 	end
 	
-	audioPlayer:GetPropertyChangedSignal("TimeLength"):Connect(function()
-		-- upvalues: var2 (ref), audioPlayer (ref)
-		var2(audioPlayer.TimeLength)
+	AudioPlayer:GetPropertyChangedSignal("TimeLength"):Connect(function() --[[ Line: 76 ]]
+		-- upvalues: Signal2 (copy), AudioPlayer (copy)
+		Signal2(AudioPlayer.TimeLength)
 	end)
-	var2(audioPlayer.TimeLength)
-	audioPlayer:GetPropertyChangedSignal("IsReady"):Connect(function()
-		-- upvalues: var12 (ref), audioPlayer (ref)
-		var12(audioPlayer.IsReady)
+	Signal2(AudioPlayer.TimeLength)
+	AudioPlayer:GetPropertyChangedSignal("IsReady"):Connect(function() --[[ Line: 81 ]]
+		-- upvalues: Signal2_5 (copy), AudioPlayer (copy)
+		Signal2_5(AudioPlayer.IsReady)
 	end)
-	var12(audioPlayer.IsReady)
-	table.insert(t_1, createEffect(function(p4)
-		-- upvalues: var5 (ref), audioPlayer (ref), p3 (ref), var8 (ref), var6 (ref), var4 (ref), onDisposed (copy)
-		if var5(p4) then
-			if not audioPlayer.IsPlaying then
-				audioPlayer:Play()
+	Signal2_5(AudioPlayer.IsReady)
+	table.insert(List, CreateEffectFunction(function(p2) --[[ Line: 88 ]]
+		-- upvalues: Signal3 (copy), AudioPlayer (copy), P2 (copy), Signal2_3 (copy), Signal2_2 (copy), Signal2_1 (copy), OnDisposedFunction (upval)
+		if Signal3(p2) then
+			if not AudioPlayer.IsPlaying then
+				AudioPlayer:Play()
 			end
-			local var15 = true
-			p3.spawn(function()
-				-- upvalues: var15 (write), audioPlayer (copy), var8 (copy), var6 (copy), var4 (copy), p3 (copy)
-				while var15 do
-					if audioPlayer.IsPlaying then
-						var4(audioPlayer.TimePosition)
-						p3.wait(0.0625)
+			local Flag = true
+			P2.spawn(function() --[[ Line: 98 ]]
+				-- upvalues: Flag (ref), AudioPlayer (upval), Signal2_3 (upval), Signal2_2 (upval), Signal2_1 (upval), P2 (upval)
+				while Flag do
+					if AudioPlayer.IsPlaying then
+						Signal2_1(AudioPlayer.TimePosition)
+						P2.wait(0.0625)
 						continue
 					end
-					var8(true)
-					var6(false)
-					audioPlayer.PlaybackSpeed = 0
-					audioPlayer.TimePosition = 0
-					var4(0)
-					
-					return
+					Signal2_3(true)
+					Signal2_2(false)
+					AudioPlayer.PlaybackSpeed = 0
+					AudioPlayer.TimePosition = 0
+					Signal2_1(0)
+					break
 				end
 			end)
-			onDisposed(p4, function()
-				-- upvalues: var15 (write)
-				var15 = false
+			OnDisposedFunction(p2, function() --[[ Line: 111 ]]
+				-- upvalues: Flag (ref)
+				Flag = false
 			end)
 		end
 	end))
-	table.insert(t_1, createEffect(function(p5)
-		-- upvalues: audioPlayer (ref), var13 (ref)
-		audioPlayer.Volume = var13.getVolume(p5)
+	table.insert(List, CreateEffectFunction(function(p3) --[[ Line: 120 ]]
+		-- upvalues: AudioPlayer (copy), VolumeStoreModule (copy)
+		AudioPlayer.Volume = VolumeStoreModule.getVolume(p3)
 	end))
 	
 	return {
-		assetId = p1,
-		usePreview = p2,
-		getDuration = var1,
-		getElapsed = var3,
-		getIsPlaying = var5,
-		getIsElapsed = var7,
-		getIsDestroyed = var9,
-		getIsLoaded = var11,
-		destroy = function()
-			-- upvalues: var14 (ref), t_1 (ref), var10 (ref)
-			var14.destroy()
+		assetId = AssetId,
+		usePreview = UsePreview,
+		getDuration = Signal,
+		getElapsed = Signal1,
+		getIsPlaying = Signal3,
+		getIsElapsed = Signal4,
+		getIsDestroyed = Signal5,
+		getIsLoaded = Signal6,
+		destroy = function() --[[ Line: 125 ]]
+			-- upvalues: AudioSystemModule (copy), List (copy), Signal2_4 (copy)
+			AudioSystemModule.destroy()
 			
-			for i, v in t_1 do
-				v()
+			for _, value in List do
+				value()
 			end
-			var10(true)
+			Signal2_4(true)
 		end,
 		play = play,
 		pause = pause,
 		stop = stop,
 		seek = seek,
-		getIsMuted = var13.getIsMuted,
-		getVolume = var13.getVolume,
-		mute = var13.mute,
-		setVolume = var13.setVolume,
-		unmute = var13.unmute
+		getIsMuted = VolumeStoreModule.getIsMuted,
+		getVolume = VolumeStoreModule.getVolume,
+		mute = VolumeStoreModule.mute,
+		setVolume = VolumeStoreModule.setVolume,
+		unmute = VolumeStoreModule.unmute
 	}
 end

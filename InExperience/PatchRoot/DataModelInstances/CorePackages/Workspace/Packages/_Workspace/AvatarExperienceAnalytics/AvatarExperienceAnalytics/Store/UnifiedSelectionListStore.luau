@@ -1,30 +1,29 @@
-﻿local unifiedEventLogConstantsModule = require(script.Parent.Parent.UnifiedEventLogConstants)
-local t = {}
+﻿local UnifiedEventLogConstantsModule = require(script.Parent.Parent.UnifiedEventLogConstants)
+local List = {}
 
 return {
-	addToSelectionList = function(p1)
-		-- upvalues: t (write)
-		table.insert(t, p1)
+	addToSelectionList = function(p1) --[[ Line: 5 ]]
+		-- upvalues: List (ref)
+		table.insert(List, p1)
 	end,
-	removeFromSelectionList = function(p1)
-		-- upvalues: unifiedEventLogConstantsModule (ref), t (write)
-		local text = unifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "itemId"
-		local text_1 = unifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "itemType"
+	removeFromSelectionList = function(p1) --[[ Line: 9 ]]
+		-- upvalues: UnifiedEventLogConstantsModule (copy), List (ref)
+		local Text = UnifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "itemId"
+		local Text1 = UnifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "itemType"
 		
-		for i, v in t do
-			if v[text] == p1[text] and v[text_1] == p1[text_1] then
-				table.remove(t, i)
-				
-				return
+		for i, value in List do
+			if value[Text] == p1[Text] and value[Text1] == p1[Text1] then
+				table.remove(List, i)
+				break
 			end
 		end
 	end,
-	getSelectionList = function()
-		-- upvalues: t (write)
-		return t
+	getSelectionList = function() --[[ Line: 21 ]]
+		-- upvalues: List (ref)
+		return List
 	end,
-	clearSelectionList = function()
-		-- upvalues: t (write)
-		t = {}
+	clearSelectionList = function() --[[ Line: 25 ]]
+		-- upvalues: List (ref)
+		List = {}
 	end
 }

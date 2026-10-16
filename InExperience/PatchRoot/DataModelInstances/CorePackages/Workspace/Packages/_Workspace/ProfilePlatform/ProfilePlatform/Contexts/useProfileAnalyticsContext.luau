@@ -1,7 +1,7 @@
-﻿local profileAnalyticsContextModule = require(script.Parent.ProfileAnalyticsContext)
-local reactModule = require(script:FindFirstAncestor("ProfilePlatform").Parent.React)
+﻿local ProfileAnalyticsContextModule = require(script.Parent.ProfileAnalyticsContext)
+local ReactModule = require(script:FindFirstAncestor("ProfilePlatform").Parent.React)
 
-return function()
-	-- upvalues: reactModule (ref), profileAnalyticsContextModule (ref)
-	return reactModule.useContext(profileAnalyticsContextModule)
+return function() --[[ Line: 6 ]]
+	-- upvalues: ReactModule (copy), ProfileAnalyticsContextModule (copy)
+	return ReactModule.useContext(ProfileAnalyticsContextModule)
 end

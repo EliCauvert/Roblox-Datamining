@@ -1,205 +1,207 @@
-﻿local notificationService = game:GetService("NotificationService")
-local playersService = game:GetService("Players")
-local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local appCommonLibModule = require(parent.AppCommonLib)
-local formFactorModule = require(parent.FormFactor)
-local reactModule = require(parent.React)
-local realtimeDeliveryModule = require(parent.RealtimeDelivery)
-local responsiveModule = require(parent.Responsive)
-local roactUtilsModule = require(parent.RoactUtils)
-local sharedFlagsModule = require(parent.SharedFlags)
-local foundationModule = require(parent.Foundation)
-local iconSize = foundationModule.Enums.IconSize
-local iconButton = foundationModule.IconButton
-local iconName = foundationModule.Enums.IconName
-local buttonSize = foundationModule.Enums.ButtonSize
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local loading = foundationModule.Loading
-local useSignalState = require(parent.SignalsReact).useSignalState
-local setFormFactor = formFactorModule.Actions.SetFormFactor
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local appChatEntryPointModule = require(appChat.AppChatEntryPoint)
-local chatEventReceiverModule = require(appChat.Components.EventReceivers.ChatEventReceiver)
-local chatExternalEventReceiverModule = require(appChat.App.Components.ChatExternalEventReceiver)
-local chatPlacementContextModule = require(appChat.Contexts.ChatPlacementContext)
-local _ = require(appChat.App.InExperienceAppChatModal)
-local useParentContainerExtentsModule = require(appChat.Contexts.ParentContainer.useParentContainerExtents)
-local containerModule = require(appChat.Components.ExternalNavigationHandler.Container)
-local useExternalNavigationByScreenModule = require(appChat.Hooks.useExternalNavigationByScreen)
-local useAppChatIsWideModeModule = require(appChat.Hooks.useAppChatIsWideMode)
-local parentContainerContextModule = require(appChat.Contexts.ParentContainer.ParentContainerContext)
-local localPlayer = playersService.LocalPlayer
-local robloxEventReceiver = realtimeDeliveryModule.RobloxEventReceiver
-local signal = appCommonLibModule.Signal
-local squadAppChatEventReceiver = require(parent.SquadsCore.Components).SquadAppChatEventReceiver
-local useMemo = reactModule.useMemo
-local useState = reactModule.useState
-local useEffect = reactModule.useEffect
-local useCallback = reactModule.useCallback
-local useContext = reactModule.useContext
-local useRef = reactModule.useRef
-local appChatInExperienceMountMinLoadingTimeMs = game:DefineFastInt("AppChatInExperienceMountMinLoadingTimeMs", 0)
-local fFlagAppChatInExpSelectChatMembersMobileHeightModule = require(appChat.Flags.FFlagAppChatInExpSelectChatMembersMobileHeight)
-local fFlagSquadAppChatRTNFix = sharedFlagsModule.FFlagSquadAppChatRTNFix
-local fIntAppChatWideBreakpointMinHeightModule = require(appChat.Flags.FIntAppChatWideBreakpointMinHeight)
-local fIntAppChatWideBreakpointMinWidthModule = require(appChat.Flags.FIntAppChatWideBreakpointMinWidth)
-local partyPageCarouselExperimentation = require(parent.SocialExperiments).PartyPageCarouselExperimentation
-local getFFlagAppChatEnableRootedNavigationModule = require(appChat.Flags.getFFlagAppChatEnableRootedNavigation)
-local getFFlagAppChatRequestedRouteModule = require(appChat.Flags.getFFlagAppChatRequestedRoute)
-local fFlagDebugAppChatEnableDomLocatorsModule = require(appChat.Flags.FFlagDebugAppChatEnableDomLocators)
-local getRootedNavigationStoreModule = require(appChat.Stores.GetRootedNavigationStore)
-local domLocatorsModule = require(appChat.Utils.DomLocators)
+﻿local NotificationService = game:GetService("NotificationService")
+local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local FormFactorModule = require(Parent.FormFactor)
+local ReactModule = require(Parent.React)
+local ResponsiveModule = require(Parent.Responsive)
+local FoundationModule = require(Parent.Foundation)
+local IconSize = FoundationModule.Enums.IconSize
+local IconButton = FoundationModule.IconButton
+local IconName = FoundationModule.Enums.IconName
+local ButtonSize = FoundationModule.Enums.ButtonSize
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local Loading = FoundationModule.Loading
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local SetFormFactorFunction = FormFactorModule.Actions.SetFormFactor
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local AppChatEntryPointModule = require(AppChat.AppChatEntryPoint)
+local ChatEventReceiverModule = require(AppChat.Components.EventReceivers.ChatEventReceiver)
+local ChatExternalEventReceiverModule = require(AppChat.App.Components.ChatExternalEventReceiver)
+local ChatPlacementContextModule = require(AppChat.Contexts.ChatPlacementContext)
+local _ = require(AppChat.App.InExperienceAppChatModal)
+local UseParentContainerExtentsModule = require(AppChat.Contexts.ParentContainer.useParentContainerExtents)
+local ContainerModule = require(AppChat.Components.ExternalNavigationHandler.Container)
+local UseExternalNavigationByScreenModule = require(AppChat.Hooks.useExternalNavigationByScreen)
+local UseAppChatIsWideModeModule = require(AppChat.Hooks.useAppChatIsWideMode)
+local ParentContainerContextModule = require(AppChat.Contexts.ParentContainer.ParentContainerContext)
+local LocalPlayer = game:GetService("Players").LocalPlayer
+local RobloxEventReceiver = require(Parent.RealtimeDelivery).RobloxEventReceiver
+local Signal = require(Parent.AppCommonLib).Signal
+local SquadAppChatEventReceiver = require(Parent.SquadsCore.Components).SquadAppChatEventReceiver
+local UseMemoFunction = ReactModule.useMemo
+local UseStateFunction = ReactModule.useState
+local UseEffectFunction = ReactModule.useEffect
+local UseCallbackFunction = ReactModule.useCallback
+local UseContextFunction = ReactModule.useContext
+local UseRefFunction = ReactModule.useRef
+local AppChatInExperienceMountMinLoadingTimeMs = game:DefineFastInt("AppChatInExperienceMountMinLoadingTimeMs", 0)
+local FFlagAppChatInExpSelectChatMembersMobileHeightModule = require(AppChat.Flags.FFlagAppChatInExpSelectChatMembersMobileHeight)
+local FFlagSquadAppChatRTNFix = require(Parent.SharedFlags).FFlagSquadAppChatRTNFix
+local FIntAppChatWideBreakpointMinHeightModule = require(AppChat.Flags.FIntAppChatWideBreakpointMinHeight)
+local FIntAppChatWideBreakpointMinWidthModule = require(AppChat.Flags.FIntAppChatWideBreakpointMinWidth)
+local PartyPageCarouselExperimentation = require(Parent.SocialExperiments).PartyPageCarouselExperimentation
+local GetFFlagAppChatEnableRootedNavigationModule = require(AppChat.Flags.getFFlagAppChatEnableRootedNavigation)
+local GetFFlagAppChatRequestedRouteModule = require(AppChat.Flags.getFFlagAppChatRequestedRoute)
+local FFlagDebugAppChatEnableDomLocatorsModule = require(AppChat.Flags.FFlagDebugAppChatEnableDomLocators)
+local GetRootedNavigationStoreModule = require(AppChat.Stores.GetRootedNavigationStore)
+local DomLocatorsModule = require(AppChat.Utils.DomLocators)
 
-local function _()
-	-- upvalues: appChat (ref)
-	return require(appChat.EnumScreens)
+local function _() --[[ Line: 63 | Named "getEnumScreens" ]]
+	-- upvalues: AppChat (copy)
+	return require(AppChat.EnumScreens)
 end
 
-return function(p1)
-	-- upvalues: useDispatch (ref), useContext (ref), parentContainerContextModule (ref), useState (ref), useExternalNavigationByScreenModule (ref), useMemo (ref), signal (ref), robloxEventReceiver (ref), notificationService (ref), reactModule (ref), responsiveModule (ref), fIntAppChatWideBreakpointMinWidthModule (ref), fIntAppChatWideBreakpointMinHeightModule (ref), fFlagAppChatInExpSelectChatMembersMobileHeightModule (ref), useAppChatIsWideModeModule (ref), getFFlagAppChatRequestedRouteModule (ref), getFFlagAppChatEnableRootedNavigationModule (ref), appChat (ref), useRef (ref), useSignalState (ref), getRootedNavigationStoreModule (ref), useEffect (ref), partyPageCarouselExperimentation (ref), setFormFactor (ref), formFactorModule (ref), useParentContainerExtentsModule (ref), useCallback (ref), appChatInExperienceMountMinLoadingTimeMs (ref), appChatEntryPointModule (ref), localPlayer (ref), chatPlacementContextModule (ref), loading (ref), iconSize (ref), iconButton (ref), iconName (ref), buttonSize (ref), buttonVariant (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), chatEventReceiverModule (ref), chatExternalEventReceiverModule (ref), containerModule (ref), fFlagSquadAppChatRTNFix (ref), squadAppChatEventReceiver (ref)
-	local var1 = useDispatch()
-	local hideParentContainer = useContext(parentContainerContextModule).hideParentContainer
-	local var2, var3 = useState(0)
-	local var4, var5 = useExternalNavigationByScreenModule()
-	local var6 = useMemo(function()
-		-- upvalues: signal (copy)
-		return signal.new()
+return function(p1) --[[ Line: 75 ]]
+	-- upvalues: UseDispatchFunction (copy), UseContextFunction (copy), ParentContainerContextModule (copy), UseStateFunction (copy), UseExternalNavigationByScreenModule (copy), UseMemoFunction (copy), Signal (copy), RobloxEventReceiver (copy), NotificationService (copy), ReactModule (copy), ResponsiveModule (copy), FIntAppChatWideBreakpointMinWidthModule (copy), FIntAppChatWideBreakpointMinHeightModule (copy), FFlagAppChatInExpSelectChatMembersMobileHeightModule (copy), UseAppChatIsWideModeModule (copy), GetFFlagAppChatRequestedRouteModule (copy), GetFFlagAppChatEnableRootedNavigationModule (copy), AppChat (copy), UseRefFunction (copy), UseSignalStateFunction (copy), GetRootedNavigationStoreModule (copy), UseEffectFunction (copy), PartyPageCarouselExperimentation (copy), SetFormFactorFunction (copy), FormFactorModule (copy), UseParentContainerExtentsModule (copy), UseCallbackFunction (copy), AppChatInExperienceMountMinLoadingTimeMs (copy), AppChatEntryPointModule (copy), LocalPlayer (copy), ChatPlacementContextModule (copy), Loading (copy), IconSize (copy), IconButton (copy), IconName (copy), ButtonSize (copy), ButtonVariant (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy), ChatEventReceiverModule (copy), ChatExternalEventReceiverModule (copy), ContainerModule (copy), FFlagSquadAppChatRTNFix (copy), SquadAppChatEventReceiver (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local HideParentContainerFunction = UseContextFunction(ParentContainerContextModule).hideParentContainer
+	local UseStateResult, UseStateResult2 = UseStateFunction(0)
+	local UseExternalNavigationByScreenModuleResult, UseExternalNavigationByScreenModuleResult2 = UseExternalNavigationByScreenModule()
+	local UseMemoResult = UseMemoFunction(function() --[[ Line: 80 ]]
+		-- upvalues: Signal (upval)
+		return Signal.new()
 	end, {})
-	local var7 = useMemo(function()
-		-- upvalues: robloxEventReceiver (copy), notificationService (copy)
-		return robloxEventReceiver.new(notificationService)
+	local UseMemoResult1 = UseMemoFunction(function() --[[ Line: 84 ]]
+		-- upvalues: RobloxEventReceiver (upval), NotificationService (upval)
+		return RobloxEventReceiver.new(NotificationService)
 	end, {})
-	local var8 = reactModule.useRef(nil)
-	local var9 = responsiveModule.useOrientation()
-	local var10 = if not (fFlagAppChatInExpSelectChatMembersMobileHeightModule or var9 ~= responsiveModule.Keys.Portrait and responsiveModule.useResponsive({
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseOrientationResult = ResponsiveModule.useOrientation()
+	local IsWide = ResponsiveModule.useResponsive({
 		{
 			Key = "wide",
-			minWidth = fIntAppChatWideBreakpointMinWidthModule,
-			minHeight = fIntAppChatWideBreakpointMinHeightModule
+			minWidth = FIntAppChatWideBreakpointMinWidthModule,
+			minHeight = FIntAppChatWideBreakpointMinHeightModule
 		}
-	}) == "wide") then false elseif fFlagAppChatInExpSelectChatMembersMobileHeightModule then useAppChatIsWideModeModule(true) else true
-	local var11 = getFFlagAppChatRequestedRouteModule()
-	local var12 = getFFlagAppChatEnableRootedNavigationModule()
-	local var13 = useRef(false)
+	}) == "wide"
+	local NoFFlagAppChatInExpSelectChatMembersMobileHeightModule = if FFlagAppChatInExpSelectChatMembersMobileHeightModule or UseOrientationResult ~= ResponsiveModule.Keys.Portrait and IsWide then not FFlagAppChatInExpSelectChatMembersMobileHeightModule or UseAppChatIsWideModeModule(true) else false
+	local FFlagAppChatRequestedRouteModule = GetFFlagAppChatRequestedRouteModule()
+	local FFlagAppChatEnableRootedNavigationModule = GetFFlagAppChatEnableRootedNavigationModule()
+	local IsRooted: boolean = FFlagAppChatEnableRootedNavigationModule and (p1.requestedRoute ~= nil and (p1.requestedRoute.screen == require(AppChat.EnumScreens).ChatDetails and (p1.requestedRoute.params ~= nil and p1.requestedRoute.params.rooted == true)))
+	local UseRefResult1 = UseRefFunction(false)
 	
-	if var12 and (p1.requestedRoute ~= nil and (p1.requestedRoute.screen == require(appChat.EnumScreens).ChatDetails and (p1.requestedRoute.params ~= nil and p1.requestedRoute.params.rooted == true))) then
-		var13.current = true
+	if IsRooted then
+		UseRefResult1.current = true
 	end
-	local var14 = if var13.current then false else var10
-	local var15 = if var12 then useSignalState(getRootedNavigationStoreModule(false).getIsNavigationPending) else false
-	useEffect(function()
-		-- upvalues: partyPageCarouselExperimentation (copy), var14 (ref), var1 (ref), setFormFactor (copy), formFactorModule (copy)
-		if partyPageCarouselExperimentation.getAppChatFormFactorEnabled() then
-			if var14 then
-				var1(setFormFactor(formFactorModule.Enums.FormFactor.WIDE))
+	local NoFFlagAppChatInExpSelectChatMembersMobileHeightModule1 = not UseRefResult1.current and NoFFlagAppChatInExpSelectChatMembersMobileHeightModule
+	local UseSignalStateResult = if FFlagAppChatEnableRootedNavigationModule then UseSignalStateFunction(GetRootedNavigationStoreModule(false).getIsNavigationPending) else false
+	UseEffectFunction(function() --[[ Line: 127 ]]
+		-- upvalues: PartyPageCarouselExperimentation (upval), NoFFlagAppChatInExpSelectChatMembersMobileHeightModule1 (copy), UseDispatchResult (copy), SetFormFactorFunction (upval), FormFactorModule (upval)
+		if PartyPageCarouselExperimentation.getAppChatFormFactorEnabled() then
+			if NoFFlagAppChatInExpSelectChatMembersMobileHeightModule1 then
+				UseDispatchResult(SetFormFactorFunction(FormFactorModule.Enums.FormFactor.WIDE))
 				
 				return
 			end
-			var1(setFormFactor(formFactorModule.Enums.FormFactor.COMPACT))
+			UseDispatchResult(SetFormFactorFunction(FormFactorModule.Enums.FormFactor.COMPACT))
 		end
-	end, { var14, var1 })
-	local var16, var17 = useParentContainerExtentsModule()
-	local var18 = var9 == responsiveModule.DefaultKey
-	local var19, var20 = useState(var18)
-	local var21 = useRef(os.clock())
-	local var22 = useCallback(function()
-		-- upvalues: p1 (ref), hideParentContainer (ref)
+	end, {
+		NoFFlagAppChatInExpSelectChatMembersMobileHeightModule1,
+		UseDispatchResult
+	})
+	local UseParentContainerExtentsModuleResult, UseParentContainerExtentsModuleResult2 = UseParentContainerExtentsModule()
+	local IsUseOrientationResultMatch = UseOrientationResult == ResponsiveModule.DefaultKey
+	local UseStateResult1, UseStateResult2_1 = UseStateFunction(IsUseOrientationResultMatch)
+	local UseRefResult2 = UseRefFunction(os.clock())
+	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 143 ]]
+		-- upvalues: p1 (copy), HideParentContainerFunction (copy)
 		p1.hideAppChat()
-		hideParentContainer()
-	end, { hideParentContainer, p1.hideAppChat })
-	useEffect(function()
-		-- upvalues: var18 (ref), var21 (ref), appChatInExperienceMountMinLoadingTimeMs (copy), var20 (ref)
-		if not var18 then
-			local var23 = os.clock() - var21.current
-			local var24 = appChatInExperienceMountMinLoadingTimeMs / 1000
+		HideParentContainerFunction()
+	end, { HideParentContainerFunction, p1.hideAppChat })
+	UseEffectFunction(function() --[[ Line: 148 ]]
+		-- upvalues: IsUseOrientationResultMatch (copy), UseRefResult2 (copy), AppChatInExperienceMountMinLoadingTimeMs (upval), UseStateResult2_1 (copy)
+		if not IsUseOrientationResultMatch then
+			local Elapsed = os.clock() - UseRefResult2.current
+			local AppChatInExperienceMountMinLoadingTimeMsRatio = AppChatInExperienceMountMinLoadingTimeMs / 1000
 			
-			if var23 < var24 then
-				delay(var24 - var23, function()
-					-- upvalues: var20 (copy)
-					var20(false)
+			if Elapsed < AppChatInExperienceMountMinLoadingTimeMsRatio then
+				delay(AppChatInExperienceMountMinLoadingTimeMsRatio - Elapsed, function() --[[ Line: 154 ]]
+					-- upvalues: UseStateResult2_1 (upval)
+					UseStateResult2_1(false)
 				end)
 				
 				return
 			end
-			var20(false)
+			UseStateResult2_1(false)
 		end
-	end, { var18, var20 })
-	local var23 = reactModule.createElement(appChatEntryPointModule, {
+	end, { IsUseOrientationResultMatch, UseStateResult2_1 })
+	local Element = ReactModule.createElement(AppChatEntryPointModule, {
 		isVisible = true,
-		setActiveConversationId = var3,
-		localUserId = if localPlayer then localPlayer.UserId else nil,
-		chatPlacement = chatPlacementContextModule.Enum.InExperienceDefault,
+		setActiveConversationId = UseStateResult2,
+		localUserId = if LocalPlayer then LocalPlayer.UserId else nil,
+		chatPlacement = ChatPlacementContextModule.Enum.InExperienceDefault,
 		initialConversationId = p1.initialConversationId,
 		setInitialConversationId = p1.setInitialConversationId,
-		requestedRoute = if var11 then p1.requestedRoute else nil,
-		clearRequestedRoute = if var11 then p1.clearRequestedRoute else nil,
-		wideMode = var14,
-		navigateToRootStack = var22,
-		updateExternalNavigationForScreen = var5
+		requestedRoute = if FFlagAppChatRequestedRouteModule then p1.requestedRoute else nil,
+		clearRequestedRoute = if FFlagAppChatRequestedRouteModule then p1.clearRequestedRoute else nil,
+		wideMode = NoFFlagAppChatInExpSelectChatMembersMobileHeightModule1,
+		navigateToRootStack = UseCallbackResult,
+		updateExternalNavigationForScreen = UseExternalNavigationByScreenModuleResult2
 	})
 	
-	return reactModule.createElement(reactModule.Fragment, {}, {
-		AppChatWindow = reactModule.createElement("Frame", {
+	return ReactModule.createElement(ReactModule.Fragment, {}, {
+		AppChatWindow = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BackgroundColor3 = Color3.new(0, 0, 0),
-			Size = var16:map(function(p2)
-				return UDim2.fromOffset(p2.X, p2.Y)
+			Size = UseParentContainerExtentsModuleResult:map(function(Vector): UDim2 --[[ Line: 181 ]]
+				return UDim2.fromOffset(Vector.X, Vector.Y)
 			end),
-			Position = var17:map(function(p2)
-				return UDim2.fromOffset(p2.X, p2.Y)
+			Position = UseParentContainerExtentsModuleResult2:map(function(Vector): UDim2 --[[ Line: 184 ]]
+				return UDim2.fromOffset(Vector.X, Vector.Y)
 			end),
-			ref = var8
+			ref = UseRefResult
 		}, {
-			Corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) }),
-			containerRef = reactModule.createElement(responsiveModule.ContainerRef.Provider, { value = var8 }, {
-				AppChatContent = if var19 then if var15 then nil else reactModule.createElement(loading, {
-					size = iconSize.Large,
+			Corner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) }),
+			containerRef = ReactModule.createElement(ResponsiveModule.ContainerRef.Provider, { value = UseRefResult }, {
+				AppChatContent = if UseStateResult1 then if UseSignalStateResult then nil else ReactModule.createElement(Loading, {
+					size = IconSize.Large,
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					Position = UDim2.fromScale(0.5, 0.5)
-				}) elseif var12 then reactModule.createElement("Frame", {
+				}) elseif FFlagAppChatEnableRootedNavigationModule then ReactModule.createElement("Frame", {
 					Name = "AppChatContent",
-					[reactModule.Tag] = "data-testid=app-chat-content",
+					[ReactModule.Tag] = "data-testid=app-chat-content",
 					BackgroundTransparency = 1,
 					Size = UDim2.fromScale(1, 1),
-					Visible = not var15
-				}, { AppChatEntryPoint = var23 }) else var23,
-				LoadingOverlay = if var15 then reactModule.createElement("Frame", {
+					Visible = not UseSignalStateResult
+				}, { AppChatEntryPoint = Element }) else Element,
+				LoadingOverlay = if UseSignalStateResult then ReactModule.createElement("Frame", {
 					Name = "AppChatLoadingOverlay",
-					[reactModule.Tag] = "data-testid=app-chat-loading-overlay",
+					[ReactModule.Tag] = "data-testid=app-chat-loading-overlay",
 					Active = true,
 					BackgroundTransparency = 1,
 					Size = UDim2.fromScale(1, 1),
 					ZIndex = 2
 				}, {
-					Spinner = reactModule.createElement(loading, {
-						size = iconSize.Large,
+					Spinner = ReactModule.createElement(Loading, {
+						size = IconSize.Large,
 						AnchorPoint = Vector2.new(0.5, 0.5),
 						Position = UDim2.fromScale(0.5, 0.5)
 					}),
-					BackButton = reactModule.createElement(iconButton, {
+					BackButton = ReactModule.createElement(IconButton, {
 						ZIndex = 3,
-						icon = iconName.ChevronLargeLeft,
-						size = buttonSize.XSmall,
-						variant = buttonVariant.Utility,
+						icon = IconName.ChevronLargeLeft,
+						size = ButtonSize.XSmall,
+						variant = ButtonVariant.Utility,
 						AnchorPoint = Vector2.new(0, 0),
 						Position = UDim2.fromOffset(12, 12),
-						onActivated = var22,
-						testId = if fFlagDebugAppChatEnableDomLocatorsModule then domLocatorsModule.appChatLoadingOverlayBackButton() else nil
+						onActivated = UseCallbackResult,
+						testId = if FFlagDebugAppChatEnableDomLocatorsModule then DomLocatorsModule.appChatLoadingOverlayBackButton() else nil
 					})
 				}) else nil
 			})
 		}),
-		ChatEventReceiver = reactModule.createElement(chatEventReceiverModule, {
-			robloxEventReceiver = var7,
-			rnBypassActionSignal = var6,
-			activeConversationId = tostring(var2)
+		ChatEventReceiver = ReactModule.createElement(ChatEventReceiverModule, {
+			robloxEventReceiver = UseMemoResult1,
+			rnBypassActionSignal = UseMemoResult,
+			activeConversationId = tostring(UseStateResult)
 		}),
-		ChatExternalEventReceiver = reactModule.createElement(chatExternalEventReceiverModule, {
-			robloxEventReceiver = var7,
-			localUserId = if localPlayer then localPlayer.UserId else nil
+		ChatExternalEventReceiver = ReactModule.createElement(ChatExternalEventReceiverModule, {
+			robloxEventReceiver = UseMemoResult1,
+			localUserId = if LocalPlayer then LocalPlayer.UserId else nil
 		}),
-		ExternalNavigationHandler = reactModule.createElement(containerModule, { navigationByScreen = var4 }),
-		SquadAppChatEventReceiver = if fFlagSquadAppChatRTNFix then reactModule.createElement(squadAppChatEventReceiver) else nil
+		ExternalNavigationHandler = ReactModule.createElement(ContainerModule, {
+			navigationByScreen = UseExternalNavigationByScreenModuleResult
+		}),
+		SquadAppChatEventReceiver = if FFlagSquadAppChatRTNFix then ReactModule.createElement(SquadAppChatEventReceiver) else nil
 	})
 end

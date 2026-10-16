@@ -1,21 +1,20 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local enumScreensModule = require(appChat.EnumScreens)
-local isPlacementInExperience = require(appChat.Contexts.ChatPlacementContext).isPlacementInExperience
-local fFlagAppChatOnConsoles = require(parent.SharedFlags).FFlagAppChatOnConsoles
-local t = {
-	[enumScreensModule.AddFriends] = true,
-	[enumScreensModule.PrivacySettings] = true,
-	[enumScreensModule.GameDetail] = true,
-	[enumScreensModule.ViewUserProfile] = true,
-	[enumScreensModule.Groups] = true
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local EnumScreensModule = require(AppChat.EnumScreens)
+local IsPlacementInExperienceFunction = require(AppChat.Contexts.ChatPlacementContext).isPlacementInExperience
+local FFlagAppChatOnConsoles = require(AppChat.Parent.SharedFlags).FFlagAppChatOnConsoles
+local config = {
+	[EnumScreensModule.AddFriends] = true,
+	[EnumScreensModule.PrivacySettings] = true,
+	[EnumScreensModule.GameDetail] = true,
+	[EnumScreensModule.ViewUserProfile] = true,
+	[EnumScreensModule.Groups] = true
 }
-local t_1 = {
-	[enumScreensModule.Groups] = true,
-	[enumScreensModule.PrivacySettings] = require(appChat.Flags.FFlagAppChatHidePrivacySettingsWithoutWebView)
+local config1 = {
+	[EnumScreensModule.Groups] = true,
+	[EnumScreensModule.PrivacySettings] = require(AppChat.Flags.FFlagAppChatHidePrivacySettingsWithoutWebView)
 }
 
-return function(p1, p2, p3)
-	-- upvalues: isPlacementInExperience (ref), t (ref), fFlagAppChatOnConsoles (ref), t_1 (ref)
-	return if isPlacementInExperience(p2) and t[p1] then false else fFlagAppChatOnConsoles and p3 == false and t_1[p1]
+return function(p1, p2, Enabled): boolean --[[ Line: 24 ]]
+	-- upvalues: IsPlacementInExperienceFunction (copy), config (copy), FFlagAppChatOnConsoles (copy), config1 (copy)
+	return (not IsPlacementInExperienceFunction(p2) or not config[p1]) and (not FFlagAppChatOnConsoles or Enabled ~= false or not config1[p1])
 end

@@ -1,48 +1,57 @@
-﻿local kind = require(script.Parent.kinds).Kind
-local var1 = nil
-local _ = nil
-local _ = nil
-local _ = nil
-local var2 = nil
-local var3 = nil
-local var4 = nil
-local var5 = nil
+﻿local Kind = require(script.Parent.kinds).Kind
+local Callback = nil
+local Callback1 = nil
+local Callback3 = nil
+local Callback2 = nil
+local Callback4 = nil
+
+local function isDefinitionNode(p1) --[[ Line: 20 ]]
+	-- upvalues: Callback (ref), Callback1 (ref), Callback2 (ref)
+	return Callback(p1) or (Callback1(p1) or Callback2(p1))
+end
+
+Callback = function(p1): boolean --[[ Line: 26 | Named "isExecutableDefinitionNode" ]]
+	-- upvalues: Kind (copy)
+	return p1.kind == Kind.OPERATION_DEFINITION or p1.kind == Kind.FRAGMENT_DEFINITION
+end
+
+Callback1 = function(p1) --[[ Line: 54 | Named "isTypeSystemDefinitionNode" ]]
+	-- upvalues: Kind (copy), Callback3 (ref)
+	return p1.kind == Kind.SCHEMA_DEFINITION or (Callback3(p1) or p1.kind == Kind.DIRECTIVE_DEFINITION)
+end
+
+Callback3 = function(p1): boolean --[[ Line: 60 | Named "isTypeDefinitionNode" ]]
+	-- upvalues: Kind (copy)
+	return p1.kind == Kind.SCALAR_TYPE_DEFINITION or (p1.kind == Kind.OBJECT_TYPE_DEFINITION or (p1.kind == Kind.INTERFACE_TYPE_DEFINITION or (p1.kind == Kind.UNION_TYPE_DEFINITION or (p1.kind == Kind.ENUM_TYPE_DEFINITION or p1.kind == Kind.INPUT_OBJECT_TYPE_DEFINITION))))
+end
+
+Callback2 = function(p1) --[[ Line: 69 | Named "isTypeSystemExtensionNode" ]]
+	-- upvalues: Kind (copy), Callback4 (ref)
+	return p1.kind == Kind.SCHEMA_EXTENSION or Callback4(p1)
+end
+
+Callback4 = function(p1): boolean --[[ Line: 73 | Named "isTypeExtensionNode" ]]
+	-- upvalues: Kind (copy)
+	return p1.kind == Kind.SCALAR_TYPE_EXTENSION or (p1.kind == Kind.OBJECT_TYPE_EXTENSION or (p1.kind == Kind.INTERFACE_TYPE_EXTENSION or (p1.kind == Kind.UNION_TYPE_EXTENSION or (p1.kind == Kind.ENUM_TYPE_EXTENSION or p1.kind == Kind.INPUT_OBJECT_TYPE_EXTENSION))))
+end
 
 return {
-	isDefinitionNode = function(p1)
-		-- upvalues: var1 (write), var2 (write), var4 (write)
-		return var1(p1) or (var2(p1) or var4(p1))
+	isDefinitionNode = isDefinitionNode,
+	isExecutableDefinitionNode = Callback,
+	isSelectionNode = function(p1): boolean --[[ Line: 30 ]]
+		-- upvalues: Kind (copy)
+		return p1.kind == Kind.FIELD or (p1.kind == Kind.FRAGMENT_SPREAD or p1.kind == Kind.INLINE_FRAGMENT)
 	end,
-	isExecutableDefinitionNode = function(p1)
-		-- upvalues: kind (ref)
-		return if p1.kind ~= kind.OPERATION_DEFINITION then p1.kind == kind.FRAGMENT_DEFINITION else true
+	isValueNode = function(p1): boolean --[[ Line: 36 ]]
+		-- upvalues: Kind (copy)
+		return p1.kind == Kind.VARIABLE or (p1.kind == Kind.INT or (p1.kind == Kind.FLOAT or (p1.kind == Kind.STRING or (p1.kind == Kind.BOOLEAN or (p1.kind == Kind.NULL or (p1.kind == Kind.ENUM or (p1.kind == Kind.LIST or p1.kind == Kind.OBJECT)))))))
 	end,
-	isSelectionNode = function(p1)
-		-- upvalues: kind (ref)
-		return if p1.kind ~= kind.FIELD then if p1.kind ~= kind.FRAGMENT_SPREAD then p1.kind == kind.INLINE_FRAGMENT else true else true
+	isTypeNode = function(p1): boolean --[[ Line: 48 ]]
+		-- upvalues: Kind (copy)
+		return p1.kind == Kind.NAMED_TYPE or (p1.kind == Kind.LIST_TYPE or p1.kind == Kind.NON_NULL_TYPE)
 	end,
-	isValueNode = function(p1)
-		-- upvalues: kind (ref)
-		return if p1.kind ~= kind.VARIABLE then if p1.kind ~= kind.INT then if p1.kind ~= kind.FLOAT then if p1.kind ~= kind.STRING then if p1.kind ~= kind.BOOLEAN then if p1.kind ~= kind.NULL then if p1.kind ~= kind.ENUM then if p1.kind ~= kind.LIST then p1.kind == kind.OBJECT else true else true else true else true else true else true else true else true
-	end,
-	isTypeNode = function(p1)
-		-- upvalues: kind (ref)
-		return if p1.kind ~= kind.NAMED_TYPE then if p1.kind ~= kind.LIST_TYPE then p1.kind == kind.NON_NULL_TYPE else true else true
-	end,
-	isTypeSystemDefinitionNode = function(p1)
-		-- upvalues: kind (ref), var3 (write)
-		return if p1.kind ~= kind.SCHEMA_DEFINITION then var3(p1) or p1.kind == kind.DIRECTIVE_DEFINITION else true
-	end,
-	isTypeDefinitionNode = function(p1)
-		-- upvalues: kind (ref)
-		return if p1.kind ~= kind.SCALAR_TYPE_DEFINITION then if p1.kind ~= kind.OBJECT_TYPE_DEFINITION then if p1.kind ~= kind.INTERFACE_TYPE_DEFINITION then if p1.kind ~= kind.UNION_TYPE_DEFINITION then if p1.kind ~= kind.ENUM_TYPE_DEFINITION then p1.kind == kind.INPUT_OBJECT_TYPE_DEFINITION else true else true else true else true else true
-	end,
-	isTypeSystemExtensionNode = function(p1)
-		-- upvalues: kind (ref), var5 (write)
-		return if p1.kind ~= kind.SCHEMA_EXTENSION then var5(p1) else true
-	end,
-	isTypeExtensionNode = function(p1)
-		-- upvalues: kind (ref)
-		return if p1.kind ~= kind.SCALAR_TYPE_EXTENSION then if p1.kind ~= kind.OBJECT_TYPE_EXTENSION then if p1.kind ~= kind.INTERFACE_TYPE_EXTENSION then if p1.kind ~= kind.UNION_TYPE_EXTENSION then if p1.kind ~= kind.ENUM_TYPE_EXTENSION then p1.kind == kind.INPUT_OBJECT_TYPE_EXTENSION else true else true else true else true else true
-	end
+	isTypeSystemDefinitionNode = Callback1,
+	isTypeDefinitionNode = Callback3,
+	isTypeSystemExtensionNode = Callback2,
+	isTypeExtensionNode = Callback4
 }

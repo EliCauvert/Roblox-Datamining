@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.TextSize.TextSize)
+﻿return (require(script.Parent.Parent.Parent._Index.TextSize.TextSize))

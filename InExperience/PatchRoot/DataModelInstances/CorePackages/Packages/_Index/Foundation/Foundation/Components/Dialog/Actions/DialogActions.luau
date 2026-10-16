@@ -1,40 +1,43 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local buttonGroupModule = require(foundation.Components.ButtonGroup)
-local _ = require(foundation.Enums.ButtonVariant)
-local dialogSizeModule = require(foundation.Enums.DialogSize)
-local fillBehaviorModule = require(foundation.Enums.FillBehavior)
-local orientationModule = require(foundation.Enums.Orientation)
-local textModule = require(foundation.Components.Text)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local useDialogVariants = require(script.Parent.Parent.useDialogVariants).useDialogVariants
-local useDialogModule = require(script.Parent.Parent.useDialog)
-local t = { orientation = orientationModule.Horizontal }
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local ButtonGroupModule = require(Foundation.Components.ButtonGroup)
+local _ = require(Foundation.Enums.ButtonVariant)
+local DialogSizeModule = require(Foundation.Enums.DialogSize)
+local FillBehaviorModule = require(Foundation.Enums.FillBehavior)
+local OrientationModule = require(Foundation.Enums.Orientation)
+local TextModule = require(Foundation.Components.Text)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local UseDialogVariantsFunction = require(script.Parent.Parent.useDialogVariants).useDialogVariants
+local UseDialogModule = require(script.Parent.Parent.useDialog)
+local config = { orientation = OrientationModule.Horizontal }
 
-return function(p1)
-	-- upvalues: withDefaultsModule (ref), t (ref), useDialogVariants (ref), useDialogModule (ref), dialogSizeModule (ref), orientationModule (ref), reactModule (ref), viewModule (ref), buttonGroupModule (ref), fillBehaviorModule (ref), textModule (ref)
-	local var1 = withDefaultsModule(p1, t)
-	local var2 = useDialogModule()
+return function(p1) --[[ Line: 45 | Named "DialogActions" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseDialogVariantsFunction (copy), UseDialogModule (copy), DialogSizeModule (copy), OrientationModule (copy), ReactModule (copy), ViewModule (copy), ButtonGroupModule (copy), FillBehaviorModule (copy), TextModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	local UseDialogVariantsResult = UseDialogVariantsFunction()
+	local UseDialogModuleResult = UseDialogModule()
+	local IsResponsiveSizeMatch = UseDialogModuleResult.responsiveSize == DialogSizeModule.Small
+	local IsResponsiveSizeMatch1: boolean = WithDefaultsModuleResult.orientation == OrientationModule.Vertical and IsResponsiveSizeMatch
 	
-	return reactModule.createElement(viewModule, {
+	return ReactModule.createElement(ViewModule, {
 		tag = "col size-full-0 auto-y",
-		LayoutOrder = var1.LayoutOrder,
-		testId = `{var2.testId}--actions`
+		LayoutOrder = WithDefaultsModuleResult.LayoutOrder,
+		testId = `{UseDialogModuleResult.testId}--actions`
 	}, {
-		ActionsContainer = reactModule.createElement(buttonGroupModule, {
+		ActionsContainer = ReactModule.createElement(ButtonGroupModule, {
 			LayoutOrder = 1,
-			buttons = var1.actions or {},
-			orientation = if var1.orientation == orientationModule.Vertical and var2.responsiveSize == dialogSizeModule.Small then orientationModule.Vertical else orientationModule.Horizontal,
-			fillBehavior = fillBehaviorModule.Fill,
-			testId = `{var2.testId}--actions-container`
+			buttons = WithDefaultsModuleResult.actions or {},
+			orientation = if IsResponsiveSizeMatch1 then OrientationModule.Vertical else OrientationModule.Horizontal,
+			fillBehavior = FillBehaviorModule.Fill,
+			testId = `{UseDialogModuleResult.testId}--actions-container`
 		}),
-		ActionsLabel = if var1.label then reactModule.createElement(textModule, {
+		ActionsLabel = if WithDefaultsModuleResult.label then ReactModule.createElement(TextModule, {
 			LayoutOrder = 2,
-			Text = var1.label,
-			tag = useDialogVariants().actionsLabel.tag,
-			testId = `{var2.testId}--actions-label`
+			Text = WithDefaultsModuleResult.label,
+			tag = UseDialogVariantsResult.actionsLabel.tag,
+			testId = `{UseDialogModuleResult.testId}--actions-label`
 		}) else nil
 	})
 end

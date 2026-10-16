@@ -1,6 +1,6 @@
-﻿local exhaustiveMatchModule = require(script:FindFirstAncestor("ultimate-list").Util.exhaustiveMatch)
+﻿local ExhaustiveMatchModule = require(script:FindFirstAncestor("ultimate-list").Util.exhaustiveMatch)
 
-return function(p1, p2, p3)
-	-- upvalues: exhaustiveMatchModule (ref)
-	return if p3 == "x" then UDim2.new(0, p1.X.Offset - p2, p1.Y.Scale, p1.Y.Offset) elseif p3 == "y" then UDim2.new(p1.X.Scale, p1.X.Offset, 0, p1.Y.Offset - p2) else exhaustiveMatchModule(p3)
+return function(Vector, p1, p2) --[[ Line: 5 | Named "adjustPositionToScrollAxis" ]]
+	-- upvalues: ExhaustiveMatchModule (copy)
+	return if p2 == "x" then UDim2.new(0, Vector.X.Offset - p1, Vector.Y.Scale, Vector.Y.Offset) elseif p2 == "y" then UDim2.new(Vector.X.Scale, Vector.X.Offset, 0, Vector.Y.Offset - p1) else ExhaustiveMatchModule(p2)
 end

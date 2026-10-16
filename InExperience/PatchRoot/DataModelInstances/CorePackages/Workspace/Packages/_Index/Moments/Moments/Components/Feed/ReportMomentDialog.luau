@@ -1,13 +1,12 @@
-﻿local parent = script:FindFirstAncestor("Moments").Parent
-local foundationModule = require(parent.Foundation)
-local localizationModule = require(parent.Localization)
-local reactModule = require(parent.React)
-local dialog = foundationModule.Dialog
-local radioGroup = foundationModule.RadioGroup
-local text = foundationModule.Text
-local view = foundationModule.View
-local useLocalization = localizationModule.Hooks.useLocalization
-local t = {
+﻿local Parent = script:FindFirstAncestor("Moments").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local Dialog = FoundationModule.Dialog
+local RadioGroup = FoundationModule.RadioGroup
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local config = {
 	report = "Feature.Moments.Action.Report",
 	cancel = "Feature.Moments.Action.Cancel",
 	["continue"] = "Feature.Moments.Action.Continue",
@@ -20,123 +19,133 @@ local t = {
 	ipReportSubmittedTitle = "Feature.ReportAbuse.Title.SelectInSceneIpReport"
 }
 
-return function(p1)
-	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), dialog (ref), foundationModule (ref), view (ref), text (ref), radioGroup (ref)
-	local var1 = useLocalization(t)
-	local var2, var3 = reactModule.useState(false)
-	local var4, var5 = reactModule.useState(false)
-	local safety, safety_1 = reactModule.useState("Safety")
-	local var6, var7 = reactModule.useState("------")
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), safety_1 (ref), var3 (ref), var5 (ref), var7 (ref)
+return function(p1) --[[ Line: 39 | Named "ReportMomentDialog" ]]
+	-- upvalues: UseLocalizationFunction (copy), config (copy), ReactModule (copy), Dialog (copy), FoundationModule (copy), View (copy), Text (copy), RadioGroup (copy)
+	local UseLocalizationResult = UseLocalizationFunction(config)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
+	local Safety, Safety2 = ReactModule.useState("Safety")
+	local Text1, v1 = ReactModule.useState("------")
+	ReactModule.useEffect(function() --[[ Line: 46 ]]
+		-- upvalues: p1 (copy), Safety2 (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), v1 (copy)
 		if p1.isOpen then
-			safety_1("Safety")
-			var3(false)
-			var5(false)
-			var7("------")
+			Safety2("Safety")
+			UseStateResult2(false)
+			UseStateResult2_1(false)
+			v1("------")
 		end
 	end, { p1.isOpen })
-	local var8 = reactModule.useCallback(function()
-		-- upvalues: var4 (ref), safety (ref), var5 (ref), p1 (ref), var7 (ref), var3 (ref)
-		if var4 then return end
-		local isIntellectualProperty = safety == "IntellectualProperty"
-		var5(true)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 55 ]]
+		-- upvalues: UseStateResult1 (copy), Safety (copy), UseStateResult2_1 (copy), p1 (copy), v1 (copy), UseStateResult2 (copy)
+		if UseStateResult1 then return end
+		local IsIntellectualProperty = Safety == "IntellectualProperty"
+		UseStateResult2_1(true)
 		
-		if not isIntellectualProperty then
-			var5(false)
+		if not IsIntellectualProperty then
+			UseStateResult2_1(false)
 			p1.onClose()
 		end
-		task.spawn(function()
-			-- upvalues: p1 (copy), safety (ref), isIntellectualProperty (ref), var7 (copy), var3 (copy), var5 (copy)
-			local var9 = p1.onSubmitReport(safety, isIntellectualProperty)
+		task.spawn(function() --[[ Line: 69 ]]
+			-- upvalues: p1 (upval), Safety (copy), IsIntellectualProperty (copy), v1 (upval), UseStateResult2 (upval), UseStateResult2_1 (upval)
+			local OnSubmitReportResult = p1.onSubmitReport(Safety, IsIntellectualProperty)
 			
-			if isIntellectualProperty then
-				var7(if var9 and var9 ~= "" then var9 else "------")
-				var3(true)
-				var5(false)
+			if IsIntellectualProperty then
+				v1(if OnSubmitReportResult and OnSubmitReportResult ~= "" then OnSubmitReportResult else "------")
+				UseStateResult2(true)
+				UseStateResult2_1(false)
 			end
 		end)
-	end, { var4, safety, p1.onClose, p1.onSubmitReport })
-	local var9 = reactModule.useCallback(function()
-		-- upvalues: var4 (ref), p1 (ref)
-		if var4 then
+	end, { UseStateResult1, Safety, p1.onClose, p1.onSubmitReport })
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 83 ]]
+		-- upvalues: UseStateResult1 (copy), p1 (copy)
+		if not UseStateResult1 then
+			p1.onClose()
+			
 			return
 		end
-		p1.onClose()
-	end, { var4, p1.onClose })
-	local var10 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref), p1 (ref)
-		var3(false)
+	end, { UseStateResult1, p1.onClose })
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 91 ]]
+		-- upvalues: UseStateResult2 (copy), p1 (copy)
+		UseStateResult2(false)
 		p1.onClose()
 	end, { p1.onClose })
 	
-	return if var2 then reactModule.createElement(dialog.Root, {
+	return if UseStateResult then ReactModule.createElement(Dialog.Root, {
 		disablePortal = false,
 		hasBackdrop = true,
-		onClose = var10,
-		size = foundationModule.Enums.DialogSize.Medium
+		onClose = UseResult2,
+		size = FoundationModule.Enums.DialogSize.Medium
 	}, {
-		DialogTitle = reactModule.createElement(dialog.Title, { LayoutOrder = 1, text = var1.ipReportSubmittedTitle }),
-		DialogContent = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
-			ReportCodeContent = reactModule.createElement(view, { tag = "col align-x-center gap-small size-full-0 auto-y" }, {
-				ReportCodeLabel = reactModule.createElement(text, {
+		DialogTitle = ReactModule.createElement(Dialog.Title, {
+			LayoutOrder = 1,
+			text = UseLocalizationResult.ipReportSubmittedTitle
+		}),
+		DialogContent = ReactModule.createElement(Dialog.Content, { LayoutOrder = 2 }, {
+			ReportCodeContent = ReactModule.createElement(View, { tag = "col align-x-center gap-small size-full-0 auto-y" }, {
+				ReportCodeLabel = ReactModule.createElement(Text, {
 					tag = "auto-xy text-title-medium text-align-x-center content-default",
 					LayoutOrder = 1,
-					Text = var1.ipReportCodeLabel
+					Text = UseLocalizationResult.ipReportCodeLabel
 				}),
-				ReportCode = reactModule.createElement(text, {
+				ReportCode = ReactModule.createElement(Text, {
 					tag = "auto-xy text-heading-medium text-align-x-center content-emphasis",
 					LayoutOrder = 2,
-					Text = var6
+					Text = Text1
 				}),
-				ReportSubmittedBody = reactModule.createElement(text, {
+				ReportSubmittedBody = ReactModule.createElement(Text, {
 					tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-center content-default",
 					RichText = true,
 					LayoutOrder = 3,
-					Text = var1.ipReportSubmittedBody
+					Text = UseLocalizationResult.ipReportSubmittedBody
 				})
 			})
 		}),
-		DialogActions = reactModule.createElement(dialog.Actions, {
+		DialogActions = ReactModule.createElement(Dialog.Actions, {
 			LayoutOrder = 3,
 			actions = {
 				{
-					text = var1.ipReportSubmittedClose,
-					variant = foundationModule.Enums.ButtonVariant.Emphasis,
-					onActivated = var10
+					text = UseLocalizationResult.ipReportSubmittedClose,
+					variant = FoundationModule.Enums.ButtonVariant.Emphasis,
+					onActivated = UseResult2
 				}
 			}
 		})
-	}) elseif p1.isOpen then reactModule.createElement(dialog.Root, {
+	}) elseif p1.isOpen then ReactModule.createElement(Dialog.Root, {
 		disablePortal = false,
 		hasBackdrop = true,
-		onClose = var9,
-		size = foundationModule.Enums.DialogSize.Medium
+		onClose = UseResult1,
+		size = FoundationModule.Enums.DialogSize.Medium
 	}, {
-		DialogTitle = reactModule.createElement(dialog.Title, { LayoutOrder = 1, text = var1.reportDialogTitle }),
-		DialogContent = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
-			ReportReasons = reactModule.createElement(radioGroup.Root, { value = safety, onValueChanged = safety_1 }, {
-				BreaksRules = reactModule.createElement(radioGroup.Item, { value = "Safety", label = var1.reportReasonBreaksRules }),
-				IntellectualProperty = reactModule.createElement(radioGroup.Item, {
+		DialogTitle = ReactModule.createElement(Dialog.Title, {
+			LayoutOrder = 1,
+			text = UseLocalizationResult.reportDialogTitle
+		}),
+		DialogContent = ReactModule.createElement(Dialog.Content, { LayoutOrder = 2 }, {
+			ReportReasons = ReactModule.createElement(RadioGroup.Root, { value = Safety, onValueChanged = Safety2 }, {
+				BreaksRules = ReactModule.createElement(RadioGroup.Item, {
+					value = "Safety",
+					label = UseLocalizationResult.reportReasonBreaksRules
+				}),
+				IntellectualProperty = ReactModule.createElement(RadioGroup.Item, {
 					value = "IntellectualProperty",
-					label = var1.reportReasonIntellectualProperty
+					label = UseLocalizationResult.reportReasonIntellectualProperty
 				})
 			})
 		}),
-		DialogActions = reactModule.createElement(dialog.Actions, {
+		DialogActions = ReactModule.createElement(Dialog.Actions, {
 			LayoutOrder = 3,
 			actions = {
 				{
-					text = if safety == "IntellectualProperty" then var1["continue"] else var1.report,
-					variant = foundationModule.Enums.ButtonVariant.Emphasis,
-					onActivated = var8,
-					isDisabled = var4
+					text = if Safety == "IntellectualProperty" then UseLocalizationResult["continue"] else UseLocalizationResult.report,
+					variant = FoundationModule.Enums.ButtonVariant.Emphasis,
+					onActivated = UseResult,
+					isDisabled = UseStateResult1
 				},
 				{
-					text = var1.cancel,
-					variant = foundationModule.Enums.ButtonVariant.Standard,
-					onActivated = var9,
-					isDisabled = var4
+					text = UseLocalizationResult.cancel,
+					variant = FoundationModule.Enums.ButtonVariant.Standard,
+					onActivated = UseResult1,
+					isDisabled = UseStateResult1
 				}
 			}
 		})

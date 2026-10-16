@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.RobloxAppEvents.RobloxAppEvents)
+﻿return (require(script.Parent.Parent.Parent._Index.RobloxAppEvents.RobloxAppEvents))

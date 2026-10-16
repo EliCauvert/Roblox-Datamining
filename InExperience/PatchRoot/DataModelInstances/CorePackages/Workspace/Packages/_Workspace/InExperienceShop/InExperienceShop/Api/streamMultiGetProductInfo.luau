@@ -1,36 +1,37 @@
-﻿local promiseModule = require(script:FindFirstAncestor("InExperienceShop").Parent.Promise)
-local getProductInfoModule = require(script.Parent.getProductInfo)
+﻿local PromiseModule = require(script:FindFirstAncestor("InExperienceShop").Parent.Promise)
+local GetProductInfoModule = require(script.Parent.getProductInfo)
 local _ = require(script.Parent.multiGetProductInfo)
 
-return function(p1, p2)
-	-- upvalues: promiseModule (ref), getProductInfoModule (ref)
-	local p0Count = #p1
+return function(Requests, p1) --[[ Line: 20 | Named "streamMultiGetProductInfo" ]]
+	-- upvalues: PromiseModule (copy), GetProductInfoModule (copy)
+	local CountRequests = #Requests
 	
-	if p0Count == 0 then
-		return promiseModule.resolve({})
+	if CountRequests == 0 then
+		return PromiseModule.resolve({})
+	else
+		local Buffer = table.create(CountRequests)
+		local Count = 0
+		
+		return PromiseModule.new(function(Callback) --[[ Line: 32 ]]
+			-- upvalues: Requests (copy), GetProductInfoModule (upval), Buffer (copy), p1 (copy), Count (ref), CountRequests (copy)
+			for i, request in ipairs(Requests) do
+				GetProductInfoModule(request.id, request.infoType):andThen(function(Result) --[[ Line: 35 ]]
+					-- upvalues: request (copy)
+					return { ok = true, request = request, value = Result }
+				end):catch(function(Err) --[[ Line: 38 ]]
+					-- upvalues: request (copy)
+					return { ok = false, request = request, err = Err }
+				end):andThen(function(Result) --[[ Line: 41 ]]
+					-- upvalues: Buffer (upval), i (copy), p1 (upval), Count (upval), CountRequests (upval), Callback (copy)
+					Buffer[i] = Result
+					p1.onResult(Result)
+					Count += 1
+					
+					if Count == CountRequests then
+						Callback(Buffer)
+					end
+				end)
+			end
+		end)
 	end
-	local list = table.create(p0Count)
-	local var1 = 0
-	
-	return promiseModule.new(function(p3)
-		-- upvalues: p1 (ref), getProductInfoModule (copy), list (ref), p2 (ref), var1 (write), p0Count (ref)
-		for i, v in ipairs(p1) do
-			getProductInfoModule(v.id, v.infoType):andThen(function(p4)
-				-- upvalues: v (ref)
-				return { ok = true, request = v, value = p4 }
-			end):catch(function(p4)
-				-- upvalues: v (ref)
-				return { ok = false, request = v, err = p4 }
-			end):andThen(function(p4)
-				-- upvalues: list (copy), i (ref), p2 (copy), var1 (copy), p0Count (copy), p3 (ref)
-				list[i] = p4
-				p2.onResult(p4)
-				var1 += 1
-				
-				if var1 == p0Count then
-					p3(list)
-				end
-			end)
-		end
-	end)
 end

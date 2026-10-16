@@ -1,69 +1,73 @@
-﻿local signalsModule = require(script:FindFirstAncestor("UserProfiles").Parent.Signals)
-local createSignal = signalsModule.createSignal
-local createComputed = signalsModule.createComputed
+﻿local SignalsModule = require(script:FindFirstAncestor("UserProfiles").Parent.Signals)
+local CreateSignalFunction = SignalsModule.createSignal
+local CreateComputedFunction = SignalsModule.createComputed
 local t = {}
-local var1 = require(script.Parent.UserProfileStore).get()
+local GetResult = require(script.Parent.UserProfileStore).get()
 
-local function _(value)
-	-- upvalues: t (write), createSignal (ref)
-	if not t[value] then
-		local var2, var3 = createSignal(false)
-		t[value] = { getter = var2, setter = var3 }
+local function _(Key) --[[ Line: 22 | Named "getOrCreateUserSignal" ]]
+	-- upvalues: t (ref), CreateSignalFunction (copy)
+	if not t[Key] then
+		local Signal, Signal2 = CreateSignalFunction(false)
+		t[Key] = { getter = Signal, setter = Signal2 }
 	end
-	return t[value]
+	return t[Key]
 end
 
-local function hasUserVerifiedBadge(p1, p2)
-	-- upvalues: var1 (ref)
-	local ok, status = pcall(var1.fetchNamesByUserIds({ tostring(p1) }), p2)
+local function hasUserVerifiedBadge(Key, p1) --[[ Line: 35 ]]
+	-- upvalues: GetResult (copy)
+	local Success, Result = pcall(GetResult.fetchNamesByUserIds({ (tostring(Key)) }), p1)
 	
-	if not ok then
-		status = { status = "failed", data = {} }
+	if not Success then
+		Result = { status = "failed", data = {} }
 	end
-	return if status.status == "success" and #status.data > 0 and status.data[1].getIsVerified then status.data[1].getIsVerified(p2) else false
+	return if Result.status == "success" and #Result.data > 0 and Result.data[1].getIsVerified then Result.data[1].getIsVerified(p1) else false
 end
 
-local t_1 = {
-	setBadgeVisibility = function(value, p1)
-		-- upvalues: t (write), createSignal (ref)
-		if not t[value] then
-			local var2, var3 = createSignal(false)
-			t[value] = { getter = var2, setter = var3 }
+local config = {
+	setBadgeVisibility = function(Key, p1) --[[ Line: 30 ]]
+		-- upvalues: t (ref), CreateSignalFunction (copy)
+		if not t[Key] then
+			local Signal, Signal2 = CreateSignalFunction(false)
+			t[Key] = { getter = Signal, setter = Signal2 }
 		end
-		t[value].setter(p1)
+		t[Key].setter(p1)
 	end,
-	getBadgeVisibilitySignal = function(value)
-		-- upvalues: t (write), createSignal (ref), createComputed (ref), hasUserVerifiedBadge (ref)
-		if not t[value] then
-			local var2, var3 = createSignal(false)
-			t[value] = { getter = var2, setter = var3 }
+	getBadgeVisibilitySignal = function(Key) --[[ Line: 51 ]]
+		-- upvalues: t (ref), CreateSignalFunction (copy), CreateComputedFunction (copy), hasUserVerifiedBadge (copy)
+		if not t[Key] then
+			local Signal, Signal2 = CreateSignalFunction(false)
+			t[Key] = { getter = Signal, setter = Signal2 }
 		end
-		local var4 = t[value]
+		local Entry = t[Key]
 		
-		return createComputed(function(p1)
-			-- upvalues: hasUserVerifiedBadge (copy), value (ref), var4 (ref)
-			return hasUserVerifiedBadge(value, p1) and var4.getter(p1)
+		return CreateComputedFunction(function(p1) --[[ Line: 54 ]]
+			-- upvalues: hasUserVerifiedBadge (upval), Key (copy), Entry (copy)
+			local Ter = Entry.getter(p1)
+			
+			return hasUserVerifiedBadge(Key, p1) and Ter
 		end)
 	end,
-	isBadgeVisible = function(p1)
-		-- upvalues: hasUserVerifiedBadge (ref), t (write), createSignal (ref)
-		local var2 = hasUserVerifiedBadge(p1, false)
+	isBadgeVisible = function(Key) --[[ Line: 61 ]]
+		-- upvalues: hasUserVerifiedBadge (copy), t (ref), CreateSignalFunction (copy)
+		local HasUserVerifiedBadge = hasUserVerifiedBadge(Key, false)
 		
-		if not t[p1] then
-			local var3, var4 = createSignal(false)
-			t[p1] = { getter = var3, setter = var4 }
+		if not t[Key] then
+			local Signal, Signal2 = CreateSignalFunction(false)
+			t[Key] = { getter = Signal, setter = Signal2 }
 		end
-		return var2 and t[p1].getter(false)
+		local Ter = t[Key].getter(false)
+		
+		return HasUserVerifiedBadge and Ter
 	end,
-	reset = function()
-		-- upvalues: t (write)
+	reset = function() --[[ Line: 69 ]]
+		-- upvalues: t (ref)
 		t = {}
 	end
 }
 
 return {
-	get = function()
-		-- upvalues: t_1 (ref)
-		return t_1
+	get = function() --[[ Line: 81 ]]
+		-- upvalues: config (copy)
+		return config
 	end
 }

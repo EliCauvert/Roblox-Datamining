@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.PurchasePromptDeps.PurchasePromptDeps)
+﻿return (require(script.Parent.Parent.Parent._Index.PurchasePromptDeps.PurchasePromptDeps))

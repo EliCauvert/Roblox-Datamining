@@ -1,14 +1,13 @@
-﻿local sduiSharedUtilities = script:FindFirstAncestor("SduiSharedUtilities")
-local parent = sduiSharedUtilities.Parent
-local dataHydrationModule = require(parent.DataHydration)
-local signalsReactModule = require(parent.SignalsReact)
-local getSduiApiStoreModule = require(sduiSharedUtilities.getSduiApiStore)
-local uiStatus = require(sduiSharedUtilities.SduiIntegrationTypes).UiStatus
-local dataHydrationTypes = dataHydrationModule.DataHydrationTypes
+﻿local SduiSharedUtilities = script:FindFirstAncestor("SduiSharedUtilities")
+local Parent = SduiSharedUtilities.Parent
+local SignalsReactModule = require(Parent.SignalsReact)
+local GetSduiApiStoreModule = require(SduiSharedUtilities.getSduiApiStore)
+local UiStatus = require(SduiSharedUtilities.SduiIntegrationTypes).UiStatus
+local DataHydrationTypes = require(Parent.DataHydration).DataHydrationTypes
 
-return function(p1)
-	-- upvalues: signalsReactModule (ref), getSduiApiStoreModule (ref), dataHydrationTypes (ref), uiStatus (ref)
-	local var1 = signalsReactModule.useSignalState(getSduiApiStoreModule().getData(p1).status)
+return function(p1) --[[ Line: 14 | Named "useUiStatus" ]]
+	-- upvalues: SignalsReactModule (copy), GetSduiApiStoreModule (copy), DataHydrationTypes (copy), UiStatus (copy)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(GetSduiApiStoreModule().getData(p1).status)
 	
-	return if var1 == dataHydrationTypes.DataStatus.NotReady then uiStatus.Loading elseif var1 == dataHydrationTypes.DataStatus.Failed then uiStatus.Error else uiStatus.Resolved
+	return if UseSignalStateResult == DataHydrationTypes.DataStatus.NotReady then UiStatus.Loading elseif UseSignalStateResult == DataHydrationTypes.DataStatus.Failed then UiStatus.Error else UiStatus.Resolved
 end

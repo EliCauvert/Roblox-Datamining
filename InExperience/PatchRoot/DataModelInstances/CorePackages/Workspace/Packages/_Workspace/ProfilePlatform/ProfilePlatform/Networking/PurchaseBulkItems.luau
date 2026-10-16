@@ -1,12 +1,12 @@
-﻿local httpService = game:GetService("HttpService")
-local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local myRoduxNetworkingImplModule = require(profilePlatform.Networking.myRoduxNetworkingImpl)
-local apis_url = `{require(profilePlatform.Parent.Http).Url.APIS_URL}cloud/v2/avatar-marketplace-orders`
+﻿local HttpService = game:GetService("HttpService")
+local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local MyRoduxNetworkingImplModule = require(ProfilePlatform.Networking.myRoduxNetworkingImpl)
+local MarketplaceName: string = `{require(ProfilePlatform.Parent.Http).Url.APIS_URL}cloud/v2/avatar-marketplace-orders`
 
-return function(p1)
-	-- upvalues: httpService (ref), apis_url (ref), myRoduxNetworkingImplModule (ref)
-	return myRoduxNetworkingImplModule(`{apis_url}?idempotencyKey.key={httpService:GenerateGUID(false)}`, "POST", {
-		postBody = httpService:JSONEncode({
+return function(p1) --[[ Line: 21 | Named "PurchaseBulkItems" ]]
+	-- upvalues: HttpService (copy), MarketplaceName (copy), MyRoduxNetworkingImplModule (copy)
+	return MyRoduxNetworkingImplModule(`{MarketplaceName}?idempotencyKey.key={HttpService:GenerateGUID(false)}`, "POST", {
+		postBody = HttpService:JSONEncode({
 			purchasingUser = `users/{p1.userId}`,
 			context = { productSurface = "MARKETPLACE_UA" },
 			fulfillmentGroups = { { strategy = "BEST_EFFORT", lineItems = p1.lineItems } }

@@ -1,16 +1,16 @@
-﻿local parent = script:FindFirstAncestor("ProfilePlatform").Parent
-local reactModule = require(parent.React)
-local impressionsTagUtility = require(parent.Impressions).ImpressionsTagUtility
+﻿local Parent = script:FindFirstAncestor("ProfilePlatform").Parent
+local ReactModule = require(Parent.React)
+local ImpressionsTagUtility = require(Parent.Impressions).ImpressionsTagUtility
 
-return function(value, p1, p2)
-	-- upvalues: reactModule (ref), impressionsTagUtility (ref)
-	reactModule.useEffect(function()
-		-- upvalues: impressionsTagUtility (copy), value (ref), p1 (ref), p2 (ref)
-		impressionsTagUtility.AddTag(value, p1, p2)
+return function(p1, p2, p3) --[[ Line: 8 | Named "useSetupImpressionsTileTagging" ]]
+	-- upvalues: ReactModule (copy), ImpressionsTagUtility (copy)
+	ReactModule.useEffect(function() --[[ Line: 9 ]]
+		-- upvalues: ImpressionsTagUtility (upval), p1 (copy), p2 (copy), p3 (copy)
+		ImpressionsTagUtility.AddTag(p1, p2, p3)
 		
-		return function()
-			-- upvalues: impressionsTagUtility (copy), value (copy), p1 (copy), p2 (copy)
-			impressionsTagUtility.RemoveTag(value, p1, p2)
+		return function() --[[ Line: 11 ]]
+			-- upvalues: ImpressionsTagUtility (upval), p1 (upval), p2 (upval), p3 (upval)
+			ImpressionsTagUtility.RemoveTag(p1, p2, p3)
 		end
-	end, { value, p1, p2 })
+	end, { p1, p2, p3 })
 end

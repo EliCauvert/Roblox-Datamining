@@ -1,8 +1,8 @@
-﻿local reactModule = require(script:FindFirstAncestor("AvatarExperienceCommon").Parent.React)
-local backgroundHighlightModule = require(script.Parent.BackgroundHighlight)
-local useBackgroundHighlightPropsModule = require(script.Parent.useBackgroundHighlightProps)
+﻿local ReactModule = require(script:FindFirstAncestor("AvatarExperienceCommon").Parent.React)
+local BackgroundHighlightModule = require(script.Parent.BackgroundHighlight)
+local UseBackgroundHighlightPropsModule = require(script.Parent.useBackgroundHighlightProps)
 
-return function(value)
-	-- upvalues: useBackgroundHighlightPropsModule (ref), reactModule (ref), backgroundHighlightModule (ref)
-	return reactModule.createElement(backgroundHighlightModule, useBackgroundHighlightPropsModule(value))
+return function(p1) --[[ Line: 11 | Named "BackgroundHighlightContainer" ]]
+	-- upvalues: UseBackgroundHighlightPropsModule (copy), ReactModule (copy), BackgroundHighlightModule (copy)
+	return ReactModule.createElement(BackgroundHighlightModule, (UseBackgroundHighlightPropsModule(p1)))
 end

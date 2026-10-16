@@ -1,53 +1,53 @@
-﻿local avatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
-local parent = avatarExperienceInspectAndBuy.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local _ = require(parent.AvatarExperienceModel)
-local _ = require(avatarExperienceInspectAndBuy.Types)
-local _ = require(avatarExperienceInspectAndBuy.Enums.PriceStatus)
-local _ = require(avatarExperienceInspectAndBuy.Utils.getPriceLineContent)
-local selectableCardRowContainerModule = require(avatarExperienceInspectAndBuy.Components.Common.SelectableItemCardRow.SelectableCardRowContainer)
-local t = { isShopContext = true }
+﻿local AvatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
+local Parent = AvatarExperienceInspectAndBuy.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local _ = require(Parent.AvatarExperienceModel)
+local _ = require(AvatarExperienceInspectAndBuy.Types)
+local _ = require(AvatarExperienceInspectAndBuy.Enums.PriceStatus)
+local _ = require(AvatarExperienceInspectAndBuy.Utils.getPriceLineContent)
+local SelectableCardRowContainerModule = require(AvatarExperienceInspectAndBuy.Components.Common.SelectableItemCardRow.SelectableCardRowContainer)
+local config = { isShopContext = true }
 
-return function(p1)
-	-- upvalues: t (ref), reactModule (ref), selectableCardRowContainerModule (ref), foundationModule (ref)
-	local rows = p1.rows
-	local priceStatusLabels = p1.priceStatusLabels
-	local itemSubTypeLabels = p1.itemSubTypeLabels
-	local itemCardWidth = p1.itemCardWidth
-	local onSelectionChanged = p1.onSelectionChanged
-	local priceOptions = p1.priceOptions or t
+return function(Frame) --[[ Line: 59 | Named "SelectableItemCardList" ]]
+	-- upvalues: config (copy), ReactModule (copy), SelectableCardRowContainerModule (copy), FoundationModule (copy)
+	local Rows = Frame.rows
+	local PriceStatusLabels = Frame.priceStatusLabels
+	local ItemSubTypeLabels = Frame.itemSubTypeLabels
+	local ItemCardWidth = Frame.itemCardWidth
+	local OnSelectionChangedFunction = Frame.onSelectionChanged
+	local PriceOptions = Frame.priceOptions or config
 	
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "col gap-medium size-full-0 auto-y",
 		testId = "SelectableItemCardList",
-		LayoutOrder = p1.LayoutOrder
-	}, reactModule.useMemo(function()
-		-- upvalues: rows (ref), itemSubTypeLabels (ref), priceStatusLabels (ref), itemCardWidth (ref), onSelectionChanged (ref), priceOptions (ref), reactModule (copy), selectableCardRowContainerModule (copy)
-		local t = {}
+		LayoutOrder = Frame.LayoutOrder
+	}, (ReactModule.useMemo(function() --[[ Line: 68 ]]
+		-- upvalues: Rows (copy), ItemSubTypeLabels (copy), PriceStatusLabels (copy), ItemCardWidth (copy), OnSelectionChangedFunction (copy), PriceOptions (copy), ReactModule (upval), SelectableCardRowContainerModule (upval)
+		local Elements = {}
 		
-		for i, v in rows do
-			local isEquipped = v.isEquipped
-			local var1 = if itemSubTypeLabels == nil or v.itemData.itemType == nil then nil else itemSubTypeLabels[v.itemData.itemType]
-			t[if v.itemData and v.itemData.id ~= nil and v.itemData.itemType ~= nil then "Row_" .. tostring(v.itemData.id) .. "-" .. tostring(v.itemData.itemType) else "Row_" .. tostring(i)] = reactModule.createElement(selectableCardRowContainerModule, {
+		for LayoutOrder, row in Rows do
+			local IsEquipped = row.isEquipped
+			local ItemSubTypeLabel = if ItemSubTypeLabels == nil or row.itemData.itemType == nil then nil else ItemSubTypeLabels[row.itemData.itemType]
+			Elements[if row.itemData and row.itemData.id ~= nil and row.itemData.itemType ~= nil then "Row_" .. tostring(row.itemData.id) .. "-" .. tostring(row.itemData.itemType) else "Row_" .. tostring(LayoutOrder)] = ReactModule.createElement(SelectableCardRowContainerModule, {
 				isSelectionEnabled = true,
-				itemData = v.itemData,
-				priceStatusLabels = priceStatusLabels,
-				itemSubTypeLabel = if var1 == nil or v.itemData.itemSubType == nil then nil else var1[tostring(v.itemData.itemSubType)],
-				LayoutOrder = i,
-				itemCardWidth = itemCardWidth,
-				isSelected = isEquipped,
-				onSelectionChanged = onSelectionChanged,
-				onItemCardActivated = function(p2)
-					-- upvalues: onSelectionChanged (copy), isEquipped (ref)
-					onSelectionChanged(p2, not isEquipped)
+				itemData = row.itemData,
+				priceStatusLabels = PriceStatusLabels,
+				itemSubTypeLabel = if ItemSubTypeLabel == nil or row.itemData.itemSubType == nil then nil else ItemSubTypeLabel[tostring(row.itemData.itemSubType)],
+				LayoutOrder = LayoutOrder,
+				itemCardWidth = ItemCardWidth,
+				isSelected = IsEquipped,
+				onSelectionChanged = OnSelectionChangedFunction,
+				onItemCardActivated = function(p1) --[[ Line: 86 ]]
+					-- upvalues: OnSelectionChangedFunction (upval), IsEquipped (copy)
+					OnSelectionChangedFunction(p1, not IsEquipped)
 				end,
-				priceOptions = priceOptions
+				priceOptions = PriceOptions
 			})
 		end
-		return t
+		return Elements
 	end, {
-		rows, priceStatusLabels, itemSubTypeLabels, itemCardWidth, onSelectionChanged,
-		priceOptions
-	}))
+		Rows, PriceStatusLabels, ItemSubTypeLabels, ItemCardWidth,
+		OnSelectionChangedFunction, PriceOptions
+	})))
 end

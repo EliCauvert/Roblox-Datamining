@@ -1,160 +1,173 @@
-﻿local sduiSharedUtilities = script:FindFirstAncestor("SduiSharedUtilities")
-local parent = sduiSharedUtilities.Parent
-local sduiLoadTimerModule = require(sduiSharedUtilities.SduiLoadTimer)
-local timeToInteractiveTracker = require(parent.TimeToInteractiveTracker).TimeToInteractiveTracker
-local _ = require(sduiSharedUtilities.SduiPageAnalytics)
-local getSduiClientPageScope = require(parent.SduiCoreSystem).getSduiClientPageScope
-local milestone = timeToInteractiveTracker.Milestone
+﻿local SduiSharedUtilities = script:FindFirstAncestor("SduiSharedUtilities")
+local Parent = SduiSharedUtilities.Parent
+local SduiLoadTimerModule = require(SduiSharedUtilities.SduiLoadTimer)
+local TimeToInteractiveTracker = require(Parent.TimeToInteractiveTracker).TimeToInteractiveTracker
+local _ = require(SduiSharedUtilities.SduiPageAnalytics)
+local GetSduiClientPageScopeFunction = require(Parent.SduiCoreSystem).getSduiClientPageScope
+local FFlagEDPTTIParityDefinitions = require(Parent.SharedFlags).FFlagEDPTTIParityDefinitions
+local Milestone = TimeToInteractiveTracker.Milestone
 
 return {
 	SURFACE_LOAD_TIME_PAGE_SCOPE_KEY = "__sduiSurfaceLoadTimeTracker",
-	createLoadTimerWithSurfaceLoadTime = function(p1, p2, p3)
-		-- upvalues: sduiLoadTimerModule (ref), timeToInteractiveTracker (ref), milestone (ref), getSduiClientPageScope (ref)
-		local eventName = p2.eventName
-		local var1 = p2.manualSurfaceReady == true
-		local var2 = sduiLoadTimerModule.createLoadTimer(p1, p3)
-		local var3 = false
+	createLoadTimerWithSurfaceLoadTime = function(p1, p2, p3) --[[ Line: 53 ]]
+		-- upvalues: FFlagEDPTTIParityDefinitions (copy), SduiLoadTimerModule (copy), TimeToInteractiveTracker (copy), Milestone (copy), GetSduiClientPageScopeFunction (copy)
+		local EventName = p2.eventName
+		local IsManualSurfaceReady = p2.manualSurfaceReady == true
+		local IsManualFunctionallyReady: boolean = FFlagEDPTTIParityDefinitions and p2.manualFunctionallyReady == true
+		local LoadTimer = SduiLoadTimerModule.createLoadTimer(p1, p3)
+		local Flag = false
 		local t = {}
 		
-		local function trackOnce(p4)
-			-- upvalues: t (ref), timeToInteractiveTracker (copy), eventName (ref)
-			if not t[p4] then
-				t[p4] = true
-				timeToInteractiveTracker.trackMilestone(eventName, p4)
+		local function trackOnce(Key) --[[ Line: 68 ]]
+			-- upvalues: t (copy), TimeToInteractiveTracker (upval), EventName (copy)
+			if not t[Key] then
+				t[Key] = true
+				TimeToInteractiveTracker.trackMilestone(EventName, Key)
 			end
 		end
 		
-		local function trackSurfaceReady(p4)
-			-- upvalues: t (ref), milestone (copy), timeToInteractiveTracker (copy), eventName (ref)
-			if t[milestone.SurfaceReady] then return end
+		local function trackSurfaceReady(p4) --[[ Line: 75 ]]
+			-- upvalues: t (copy), Milestone (upval), TimeToInteractiveTracker (upval), EventName (copy)
+			if t[Milestone.SurfaceReady] then return end
 			if p4 then
-				timeToInteractiveTracker.updateMetadata(eventName, p4)
+				TimeToInteractiveTracker.updateMetadata(EventName, p4)
 			end
-			local surfaceReady = milestone.SurfaceReady
+			local SurfaceReady = Milestone.SurfaceReady
 			
-			if not t[surfaceReady] then
-				t[surfaceReady] = true
-				timeToInteractiveTracker.trackMilestone(eventName, surfaceReady)
+			if not t[SurfaceReady] then
+				t[SurfaceReady] = true
+				TimeToInteractiveTracker.trackMilestone(EventName, SurfaceReady)
 			end
-			timeToInteractiveTracker.trackEnd(eventName)
+			TimeToInteractiveTracker.trackEnd(EventName)
 		end
 		
-		local function _()
-			-- upvalues: var3 (write), timeToInteractiveTracker (copy), eventName (ref), p2 (ref)
-			if not var3 then
-				var3 = true
-				timeToInteractiveTracker.trackStart(eventName, true)
+		local function _() --[[ Line: 88 | Named "ensureStarted" ]]
+			-- upvalues: Flag (ref), TimeToInteractiveTracker (upval), EventName (copy), p2 (copy)
+			if not Flag then
+				Flag = true
+				TimeToInteractiveTracker.trackStart(EventName, true)
 				
 				if p2.metadata then
-					timeToInteractiveTracker.updateMetadata(eventName, p2.metadata)
+					TimeToInteractiveTracker.updateMetadata(EventName, p2.metadata)
 				end
 			end
 		end
 		
-		local logUiRequestSent = var2.logUiRequestSent
+		local LogUiRequestSentFunction = LoadTimer.logUiRequestSent
 		
-		function var2.logUiRequestSent()
-			-- upvalues: logUiRequestSent (ref), var3 (write), timeToInteractiveTracker (copy), eventName (ref), p2 (ref), milestone (copy), t (ref)
-			logUiRequestSent()
+		function LoadTimer.logUiRequestSent() --[[ Line: 100 ]]
+			-- upvalues: LogUiRequestSentFunction (copy), Flag (ref), TimeToInteractiveTracker (upval), EventName (copy), p2 (copy), Milestone (upval), t (copy)
+			LogUiRequestSentFunction()
 			
-			if not var3 then
-				var3 = true
-				timeToInteractiveTracker.trackStart(eventName, true)
+			if not Flag then
+				Flag = true
+				TimeToInteractiveTracker.trackStart(EventName, true)
 				
 				if p2.metadata then
-					timeToInteractiveTracker.updateMetadata(eventName, p2.metadata)
+					TimeToInteractiveTracker.updateMetadata(EventName, p2.metadata)
 				end
 			end
-			local name = milestone.PrimaryDataStarted.Name
+			local Name = Milestone.PrimaryDataStarted.Name
 			
-			if not t[name] then
-				t[name] = true
-				timeToInteractiveTracker.trackMilestone(eventName, name)
+			if not t[Name] then
+				t[Name] = true
+				TimeToInteractiveTracker.trackMilestone(EventName, Name)
 			end
 		end
 		
-		local logUiRequestQueued = var2.logUiRequestQueued
+		local LogUiRequestQueuedFunction = LoadTimer.logUiRequestQueued
 		
-		function var2.logUiRequestQueued()
-			-- upvalues: logUiRequestQueued (ref), var3 (write), timeToInteractiveTracker (copy), eventName (ref), p2 (ref)
-			logUiRequestQueued()
+		function LoadTimer.logUiRequestQueued() --[[ Line: 107 ]]
+			-- upvalues: LogUiRequestQueuedFunction (copy), Flag (ref), TimeToInteractiveTracker (upval), EventName (copy), p2 (copy)
+			LogUiRequestQueuedFunction()
 			
-			if not var3 then
-				var3 = true
-				timeToInteractiveTracker.trackStart(eventName, true)
+			if not Flag then
+				Flag = true
+				TimeToInteractiveTracker.trackStart(EventName, true)
 				
 				if p2.metadata then
-					timeToInteractiveTracker.updateMetadata(eventName, p2.metadata)
+					TimeToInteractiveTracker.updateMetadata(EventName, p2.metadata)
 				end
 			end
 		end
 		
-		local logResponseDecodeBegin = var2.logResponseDecodeBegin
+		local LogResponseDecodeBeginFunction = LoadTimer.logResponseDecodeBegin
 		
-		function var2.logResponseDecodeBegin()
-			-- upvalues: logResponseDecodeBegin (ref), milestone (copy), t (ref), timeToInteractiveTracker (copy), eventName (ref)
-			logResponseDecodeBegin()
-			local name = milestone.PrimaryDataReady.Name
+		function LoadTimer.logResponseDecodeBegin() --[[ Line: 113 ]]
+			-- upvalues: LogResponseDecodeBeginFunction (copy), Milestone (upval), t (copy), TimeToInteractiveTracker (upval), EventName (copy)
+			LogResponseDecodeBeginFunction()
+			local Name = Milestone.PrimaryDataReady.Name
 			
-			if not t[name] then
-				t[name] = true
-				timeToInteractiveTracker.trackMilestone(eventName, name)
+			if not t[Name] then
+				t[Name] = true
+				TimeToInteractiveTracker.trackMilestone(EventName, Name)
 			end
-			local name_1 = milestone.DataProcessingStarted.Name
+			local Name1 = Milestone.DataProcessingStarted.Name
 			
-			if not t[name_1] then
-				t[name_1] = true
-				timeToInteractiveTracker.trackMilestone(eventName, name_1)
-			end
-		end
-		
-		local logComponentMounted = var2.logComponentMounted
-		
-		function var2.logComponentMounted()
-			-- upvalues: logComponentMounted (ref), milestone (copy), t (ref), timeToInteractiveTracker (copy), eventName (ref)
-			logComponentMounted()
-			local surfaceMounted = milestone.SurfaceMounted
-			
-			if not t[surfaceMounted] then
-				t[surfaceMounted] = true
-				timeToInteractiveTracker.trackMilestone(eventName, surfaceMounted)
+			if not t[Name1] then
+				t[Name1] = true
+				TimeToInteractiveTracker.trackMilestone(EventName, Name1)
 			end
 		end
 		
-		local logComponentReady = var2.logComponentReady
+		local LogComponentMountedFunction = LoadTimer.logComponentMounted
 		
-		function var2.logComponentReady()
-			-- upvalues: milestone (copy), t (ref), timeToInteractiveTracker (copy), eventName (ref), logComponentReady (ref), var1 (ref)
-			local name = milestone.DataProcessingCompleted.Name
+		function LoadTimer.logComponentMounted() --[[ Line: 121 ]]
+			-- upvalues: LogComponentMountedFunction (copy), Milestone (upval), t (copy), TimeToInteractiveTracker (upval), EventName (copy)
+			LogComponentMountedFunction()
+			local SurfaceMounted = Milestone.SurfaceMounted
 			
-			if not t[name] then
-				t[name] = true
-				timeToInteractiveTracker.trackMilestone(eventName, name)
+			if not t[SurfaceMounted] then
+				t[SurfaceMounted] = true
+				TimeToInteractiveTracker.trackMilestone(EventName, SurfaceMounted)
 			end
-			logComponentReady()
-			local functionallyReady = milestone.FunctionallyReady
+		end
+		
+		local LogComponentReadyFunction = LoadTimer.logComponentReady
+		
+		function LoadTimer.logComponentReady() --[[ Line: 127 ]]
+			-- upvalues: Milestone (upval), t (copy), TimeToInteractiveTracker (upval), EventName (copy), LogComponentReadyFunction (copy), IsManualFunctionallyReady (copy), IsManualSurfaceReady (copy)
+			local Name = Milestone.DataProcessingCompleted.Name
 			
-			if not t[functionallyReady] then
-				t[functionallyReady] = true
-				timeToInteractiveTracker.trackMilestone(eventName, functionallyReady)
+			if not t[Name] then
+				t[Name] = true
+				TimeToInteractiveTracker.trackMilestone(EventName, Name)
 			end
-			if not var1 then
-				if t[milestone.SurfaceReady] then return end
-				local surfaceReady = milestone.SurfaceReady
+			LogComponentReadyFunction()
+			
+			if not IsManualFunctionallyReady then
+				local FunctionallyReady = Milestone.FunctionallyReady
 				
-				if not t[surfaceReady] then
-					t[surfaceReady] = true
-					timeToInteractiveTracker.trackMilestone(eventName, surfaceReady)
+				if not t[FunctionallyReady] then
+					t[FunctionallyReady] = true
+					TimeToInteractiveTracker.trackMilestone(EventName, FunctionallyReady)
 				end
-				timeToInteractiveTracker.trackEnd(eventName)
+			end
+			if not IsManualSurfaceReady then
+				if t[Milestone.SurfaceReady] then return end
+				local SurfaceReady = Milestone.SurfaceReady
+				
+				if not t[SurfaceReady] then
+					t[SurfaceReady] = true
+					TimeToInteractiveTracker.trackMilestone(EventName, SurfaceReady)
+				end
+				TimeToInteractiveTracker.trackEnd(EventName)
 			end
 		end
 		
-		var2.trackOnce = trackOnce
-		var2.trackSurfaceReady = trackSurfaceReady
-		var2.surfaceLoadTimeEventName = eventName
-		getSduiClientPageScope(p1).set("__sduiSurfaceLoadTimeTracker", var2)
+		LoadTimer.trackOnce = trackOnce
+		LoadTimer.trackSurfaceReady = trackSurfaceReady
+		LoadTimer.surfaceLoadTimeEventName = EventName
+		GetSduiClientPageScopeFunction(p1).set("__sduiSurfaceLoadTimeTracker", LoadTimer)
 		
-		return var2
+		if FFlagEDPTTIParityDefinitions and p2.startImmediately == true and not Flag then
+			Flag = true
+			TimeToInteractiveTracker.trackStart(EventName, true)
+			
+			if p2.metadata then
+				TimeToInteractiveTracker.updateMetadata(EventName, p2.metadata)
+			end
+		end
+		return LoadTimer
 	end
 }

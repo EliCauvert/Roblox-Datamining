@@ -1,5 +1,5 @@
-﻿return function(value, p1)
-	local dateTime = DateTime.fromIsoDate(value)
+﻿return function(p1, p2) --[[ Line: 3 | Named "getHoursUntilReset" ]]
+	local _DateTime = DateTime.fromIsoDate(p1)
 	
-	return if dateTime == nil then nil else math.max(0, math.ceil((dateTime.UnixTimestamp - (p1 or DateTime.now().UnixTimestamp)) / 3600))
+	return if _DateTime == nil then nil else math.max(0, (math.ceil((_DateTime.UnixTimestamp - (p2 or DateTime.now().UnixTimestamp)) / 3600)))
 end

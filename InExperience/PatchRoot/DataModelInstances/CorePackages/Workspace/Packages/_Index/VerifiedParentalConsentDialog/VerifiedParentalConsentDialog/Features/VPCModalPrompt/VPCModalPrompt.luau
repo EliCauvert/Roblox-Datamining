@@ -1,14 +1,14 @@
-﻿local verifiedParentalConsentDialog = script:FindFirstAncestor("VerifiedParentalConsentDialog")
-local parent = verifiedParentalConsentDialog.Parent
-local reactModule = require(parent.React)
-local images = require(parent.UIBlox).App.ImageSet.Images
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local alertPromptModule = require(verifiedParentalConsentDialog.Components.AlertPrompt)
-local _ = require(verifiedParentalConsentDialog.VPCModalType)
+﻿local VerifiedParentalConsentDialog = script:FindFirstAncestor("VerifiedParentalConsentDialog")
+local Parent = VerifiedParentalConsentDialog.Parent
+local ReactModule = require(Parent.React)
+local Images = require(Parent.UIBlox).App.ImageSet.Images
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local AlertPromptModule = require(VerifiedParentalConsentDialog.Components.AlertPrompt)
+local _ = require(VerifiedParentalConsentDialog.VPCModalType)
 
-return function(p1)
-	-- upvalues: useLocalization (ref), reactModule (ref), alertPromptModule (ref), images (ref)
-	local var1 = useLocalization({
+return function(p1) --[[ Line: 22 | Named "VPCModalPrompt" ]]
+	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), AlertPromptModule (copy), Images (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
 		title = "Common.VerifiedParentalConsent.Label.AskParent",
 		message = ({
 			EnablePurchase = {
@@ -17,10 +17,10 @@ return function(p1)
 		})[p1.modalType]
 	})
 	
-	return reactModule.createElement(alertPromptModule, {
-		title = var1.title,
-		titleIcon = images["icons/graphic/lock_xxlarge"],
-		bodyText = var1.message,
+	return ReactModule.createElement(AlertPromptModule, {
+		title = UseLocalizationResult.title,
+		titleIcon = Images["icons/graphic/lock_xxlarge"],
+		bodyText = UseLocalizationResult.message,
 		onDismiss = p1.onDismiss,
 		isActionable = p1.isActionable,
 		screenSize = p1.screenSize,

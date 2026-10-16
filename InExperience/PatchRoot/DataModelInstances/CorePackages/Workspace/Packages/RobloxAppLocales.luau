@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.RobloxAppLocales.RobloxAppLocales)
+﻿return (require(script.Parent._Workspace.RobloxAppLocales.RobloxAppLocales))

@@ -1,6 +1,6 @@
-﻿local createIsPrivatePlaytesterStoreModule = require(script.Parent.createIsPrivatePlaytesterStore)
+﻿local CreateIsPrivatePlaytesterStoreModule = require(script.Parent.createIsPrivatePlaytesterStore)
 
-return require(script:FindFirstAncestor("DataHydration").Parent.Signals).createComputed(function()
-	-- upvalues: createIsPrivatePlaytesterStoreModule (ref)
-	return createIsPrivatePlaytesterStoreModule()
+return require(script:FindFirstAncestor("DataHydration").Parent.Signals).createComputed(function() --[[ Line: 8 ]]
+	-- upvalues: CreateIsPrivatePlaytesterStoreModule (copy)
+	return CreateIsPrivatePlaytesterStoreModule()
 end)

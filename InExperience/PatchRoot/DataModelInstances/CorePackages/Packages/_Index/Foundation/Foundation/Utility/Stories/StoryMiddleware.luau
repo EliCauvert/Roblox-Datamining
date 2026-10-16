@@ -1,106 +1,110 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local reactModule = require(parent.React)
-local reactRobloxModule = require(parent.ReactRoblox)
-local colorModeModule = require(foundation.Enums.ColorMode)
-local deviceModule = require(foundation.Enums.Device)
-local foundationModule = require(foundation.Providers.Foundation)
-local typesModule = require(foundation.Utility.Stories.Types)
-local tokenOverridesStoreModule = require(script.Parent.TokenOverridesStore)
-local isPluginSecurityModule = require(foundation.Utility.isPluginSecurity)
-local useStyleSheet = require(foundation.Providers.Style.StyleSheetContext).useStyleSheet
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.ReactRoblox)
+local ColorModeModule = require(Foundation.Enums.ColorMode)
+local DeviceModule = require(Foundation.Enums.Device)
+local FoundationModule = require(Foundation.Providers.Foundation)
+local ThemeNameModule = require(Foundation.Enums.ThemeName)
+local TypesModule = require(Foundation.Utility.Stories.Types)
+local TokenOverridesStoreModule = require(script.Parent.TokenOverridesStore)
+local IsPluginSecurityModule = require(Foundation.Utility.isPluginSecurity)
+local UseStyleSheetFunction = require(Foundation.Providers.Style.StyleSheetContext).useStyleSheet
 
-local function useTokenOverrides()
-	-- upvalues: tokenOverridesStoreModule (ref), reactModule (ref)
-	local var1 = tokenOverridesStoreModule()
-	local var2, var3 = reactModule.useState(function()
-		-- upvalues: var1 (ref)
-		return var1.getTokenOverrides()
+local function useTokenOverrides() --[[ Line: 21 ]]
+	-- upvalues: TokenOverridesStoreModule (copy), ReactModule (copy)
+	local KenOverridesStoreModule = TokenOverridesStoreModule()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function() --[[ Line: 23 ]]
+		-- upvalues: KenOverridesStoreModule (copy)
+		return KenOverridesStoreModule.getTokenOverrides()
 	end)
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), var3 (ref)
-		local var4 = var1.subscribe(function(p1)
-			-- upvalues: var3 (copy)
-			var3(p1)
+	ReactModule.useEffect(function() --[[ Line: 27 ]]
+		-- upvalues: KenOverridesStoreModule (copy), UseStateResult2 (copy)
+		local SubscribeResult = KenOverridesStoreModule.subscribe(function(p1) --[[ Line: 28 ]]
+			-- upvalues: UseStateResult2 (upval)
+			UseStateResult2(p1)
 		end)
 		
-		return function()
-			-- upvalues: var4 (ref)
-			var4()
+		return function() --[[ Line: 31 ]]
+			-- upvalues: SubscribeResult (copy)
+			SubscribeResult()
 		end
-	end, { var1 })
+	end, { KenOverridesStoreModule })
 	
-	return var2
+	return UseStateResult
 end
 
-local function StyleLinkPortal(p1)
-	-- upvalues: useStyleSheet (ref), reactRobloxModule (ref), reactModule (ref)
-	local var1 = useStyleSheet()
+local function StyleLinkPortal(p1) --[[ Line: 51 ]]
+	-- upvalues: UseStyleSheetFunction (copy), ReactRobloxModule (copy), ReactModule (copy)
+	local UseStyleSheetResult = UseStyleSheetFunction()
 	
-	return if var1 and p1.overlay then reactRobloxModule.createPortal(reactModule.createElement("StyleLink", { StyleSheet = var1 }), p1.overlay) else nil
+	return if UseStyleSheetResult and p1.overlay then ReactRobloxModule.createPortal(ReactModule.createElement("StyleLink", { StyleSheet = UseStyleSheetResult }), p1.overlay) else nil
 end
 
-local function useCreateOverlay(p1)
-	-- upvalues: typesModule (ref), reactModule (ref)
-	local var1 = typesModule.toFlipbookStoryProps(p1)
-	local var2 = if var1 then var1.widget else p1.focus
-	local isStorybookEmbed = var2.Name == "StorybookEmbed"
-	local var3 = reactModule.useRef(Instance.new("Frame"))
+local function useCreateOverlay(p1) --[[ Line: 66 ]]
+	-- upvalues: TypesModule (copy), ReactModule (copy)
+	local FlipbookStoryProps = TypesModule.toFlipbookStoryProps(p1)
+	local Widget = if FlipbookStoryProps then FlipbookStoryProps.widget else p1.focus
+	local IsStorybookEmbed = Widget.Name == "StorybookEmbed"
+	local UseRefResult = ReactModule.useRef(Instance.new("Frame"))
 	
-	if var3.current.Parent ~= var2 then
-		var3.current.Parent = var2
+	if UseRefResult.current.Parent ~= Widget then
+		UseRefResult.current.Parent = Widget
 	end
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref)
-		var3.current.Size = UDim2.fromScale(1, 1)
-		var3.current.BackgroundTransparency = 1
+	ReactModule.useEffect(function() --[[ Line: 80 ]]
+		-- upvalues: UseRefResult (copy)
+		UseRefResult.current.Size = UDim2.fromScale(1, 1)
+		UseRefResult.current.BackgroundTransparency = 1
 		
-		return function()
-			-- upvalues: var3 (copy)
-			var3.current:Destroy()
+		return function() --[[ Line: 84 ]]
+			-- upvalues: UseRefResult (upval)
+			UseRefResult.current:Destroy()
 		end
 	end, {})
 	
-	return if isStorybookEmbed then nil else var3.current
+	return if IsStorybookEmbed then nil else UseRefResult.current
 end
 
-return function(p1)
-	-- upvalues: useCreateOverlay (ref), colorModeModule (ref), useTokenOverrides (ref), typesModule (ref), deviceModule (ref), reactModule (ref), foundationModule (ref), isPluginSecurityModule (ref), StyleLinkPortal (ref)
-	return function(p2)
-		-- upvalues: useCreateOverlay (copy), colorModeModule (copy), useTokenOverrides (copy), typesModule (copy), deviceModule (copy), reactModule (copy), foundationModule (copy), isPluginSecurityModule (copy), p1 (ref), StyleLinkPortal (copy)
-		local var1 = useCreateOverlay(p2)
-		local theme = colorModeModule[p2.theme]
-		local var2 = useTokenOverrides()
-		local var3 = typesModule.toDeveloperStorybookStoryProps(p2)
-		local platform = nil
-		local settings = nil
+return function(p1) --[[ Line: 92 | Named "StoryMiddleware" ]]
+	-- upvalues: useCreateOverlay (copy), ColorModeModule (copy), ThemeNameModule (copy), useTokenOverrides (copy), TypesModule (copy), DeviceModule (copy), ReactModule (copy), FoundationModule (copy), IsPluginSecurityModule (copy), StyleLinkPortal (copy)
+	return function(p2) --[[ Line: 94 ]]
+		-- upvalues: useCreateOverlay (upval), ColorModeModule (upval), ThemeNameModule (upval), useTokenOverrides (upval), TypesModule (upval), DeviceModule (upval), ReactModule (upval), FoundationModule (upval), IsPluginSecurityModule (upval), p1 (copy), StyleLinkPortal (upval)
+		local UseCreateOverlayResult = useCreateOverlay(p2)
+		local ColorMode = p2.colorMode or p2.theme
+		local ColorModeModuleEntry = if ColorMode == nil then nil else ColorModeModule[ColorMode]
+		local ThemeNameModuleEntry = if p2.themeName == nil then nil else ThemeNameModule[p2.themeName]
+		local UseTokenOverridesResult = useTokenOverrides()
+		local DeveloperStorybookStoryProps = TypesModule.toDeveloperStorybookStoryProps(p2)
+		local Device = nil
+		local Settings = nil
 		
-		if var3 then
-			platform = deviceModule[var3.platform]
-			settings = var3.settings
+		if DeveloperStorybookStoryProps then
+			Device = DeviceModule[DeveloperStorybookStoryProps.platform]
+			Settings = DeveloperStorybookStoryProps.settings
 		end
-		return reactModule.createElement("Frame", {
+		return ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Size = UDim2.fromScale(1, 0)
 		}, {
-			UIPadding = reactModule.createElement("UIPadding", {
+			UIPadding = ReactModule.createElement("UIPadding", {
 				PaddingTop = UDim.new(0, 10),
 				PaddingBottom = UDim.new(0, 10),
 				PaddingLeft = UDim.new(0, 10),
 				PaddingRight = UDim.new(0, 10)
 			}),
-			FoundationContext = reactModule.createElement(foundationModule, {
-				colorMode = theme,
-				device = platform,
-				preferences = settings,
-				scale = settings and settings.scale,
-				overlayGui = var1,
-				plugin = if isPluginSecurityModule() then p2.plugin else nil,
-				tokenOverrides = var2
+			FoundationContext = ReactModule.createElement(FoundationModule, {
+				themeName = ThemeNameModuleEntry,
+				colorMode = ColorModeModuleEntry,
+				device = Device,
+				preferences = Settings,
+				scale = Settings and Settings.scale,
+				overlayGui = UseCreateOverlayResult,
+				plugin = if IsPluginSecurityModule() then p2.plugin else nil,
+				tokenOverrides = UseTokenOverridesResult
 			}, {
-				Child = reactModule.createElement(p1, p2),
-				StyleLink = reactModule.createElement(StyleLinkPortal, if var1 then { overlay = var1 } else nil)
+				Child = ReactModule.createElement(p1, p2),
+				StyleLink = ReactModule.createElement(StyleLinkPortal, if UseCreateOverlayResult then { overlay = UseCreateOverlayResult } else nil)
 			})
 		})
 	end

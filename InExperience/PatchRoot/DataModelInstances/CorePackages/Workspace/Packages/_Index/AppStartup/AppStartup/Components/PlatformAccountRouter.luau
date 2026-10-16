@@ -1,38 +1,39 @@
-﻿local parent = script:FindFirstAncestor("AppStartup").Parent
-local reactModule = require(parent.React)
-local useNavigation = require(parent.Navigation).useNavigation
-local appPage = require(parent.RobloxAppEnums).AppPage
-local thirdPartyUserService = game:GetService("ThirdPartyUserService")
-local default = require(parent.LoggingProtocol).default
-local useProperty = require(parent.GuiObjectUtils).useProperty
-local fFlagLuaAppSkipStartupRouteHop = require(parent.SharedFlags).FFlagLuaAppSkipStartupRouteHop
+﻿local Parent = script:FindFirstAncestor("AppStartup").Parent
+local ReactModule = require(Parent.React)
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local ThirdPartyUserService = game:GetService("ThirdPartyUserService")
+local Default = require(Parent.LoggingProtocol).default
+local UsePropertyFunction = require(Parent.GuiObjectUtils).useProperty
+local IsPlatformSingleSignOnSupportedFunction = require(Parent.AppCommonLib).isPlatformSingleSignOnSupported
+local FFlagLuaAppSkipStartupRouteHop = require(Parent.SharedFlags).FFlagLuaAppSkipStartupRouteHop
 
-return if fFlagLuaAppSkipStartupRouteHop and require(parent.AppCommonLib).isPlatformSingleSignOnSupported(thirdPartyUserService) or not fFlagLuaAppSkipStartupRouteHop and thirdPartyUserService and (thirdPartyUserService.IsSingleSignOnSupported and thirdPartyUserService:IsSingleSignOnSupported()) then function(_)
-	-- upvalues: useNavigation (ref), useProperty (ref), thirdPartyUserService (ref), reactModule (ref), default (ref), appPage (ref)
-	local var1 = useNavigation()
-	local var2 = useProperty(thirdPartyUserService, "HasActiveUser")
-	reactModule.useEffect(function()
-		-- upvalues: default (copy)
-		default:logEventOnce("platform_account_router_page_did_mount")
+return if FFlagLuaAppSkipStartupRouteHop and IsPlatformSingleSignOnSupportedFunction(ThirdPartyUserService) or not FFlagLuaAppSkipStartupRouteHop and ThirdPartyUserService and ThirdPartyUserService.IsSingleSignOnSupported and ThirdPartyUserService:IsSingleSignOnSupported() then function(_) --[[ Line: 25 ]]
+	-- upvalues: UseNavigationFunction (copy), UsePropertyFunction (copy), ThirdPartyUserService (copy), ReactModule (copy), Default (copy), AppPage (copy)
+	local UseNavigationResult = UseNavigationFunction()
+	local HasActiveUser = UsePropertyFunction(ThirdPartyUserService, "HasActiveUser")
+	ReactModule.useEffect(function() --[[ Line: 29 ]]
+		-- upvalues: Default (upval)
+		Default:logEventOnce("platform_account_router_page_did_mount")
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), default (copy), var1 (ref), appPage (copy)
-		if var2 then
-			default:logEventOnce("platform_account_router_page_did_continue")
-			var1.replace(appPage.SingleSignOnContainer)
+	ReactModule.useEffect(function() --[[ Line: 33 ]]
+		-- upvalues: HasActiveUser (copy), Default (upval), UseNavigationResult (copy), AppPage (upval)
+		if HasActiveUser then
+			Default:logEventOnce("platform_account_router_page_did_continue")
+			UseNavigationResult.replace(AppPage.SingleSignOnContainer)
 		end
-	end, { var2, var1 })
+	end, { HasActiveUser, UseNavigationResult })
 	
 	return nil
-end else function(_)
-	-- upvalues: useNavigation (ref), reactModule (ref), default (ref), appPage (ref)
-	local var1 = useNavigation()
-	reactModule.useEffect(function()
-		-- upvalues: default (copy), var1 (ref), appPage (copy)
-		default:logEventOnce("platform_account_router_page_did_mount")
-		default:logEventOnce("platform_account_router_page_did_continue")
-		var1.replace(appPage.Startup)
-	end, { var1 })
+end else function(_) --[[ Line: 42 ]]
+	-- upvalues: UseNavigationFunction (copy), ReactModule (copy), Default (copy), AppPage (copy)
+	local UseNavigationResult = UseNavigationFunction()
+	ReactModule.useEffect(function() --[[ Line: 44 ]]
+		-- upvalues: Default (upval), UseNavigationResult (copy), AppPage (upval)
+		Default:logEventOnce("platform_account_router_page_did_mount")
+		Default:logEventOnce("platform_account_router_page_did_continue")
+		UseNavigationResult.replace(AppPage.Startup)
+	end, { UseNavigationResult })
 	
 	return nil
 end

@@ -1,16 +1,16 @@
-﻿local reactModule = require(script:FindFirstAncestor("AvatarExperienceProfilePictureEditor").Parent.React)
-local var1 = reactModule.createContext(nil)
+﻿local ReactModule = require(script:FindFirstAncestor("AvatarExperienceProfilePictureEditor").Parent.React)
+local Context = ReactModule.createContext(nil)
 
 return {
-	Context = var1,
-	Provider = var1.Provider,
-	useEditProfileImageActions = function()
-		-- upvalues: reactModule (ref), var1 (ref)
-		local var2 = reactModule.useContext(var1)
+	Context = Context,
+	Provider = Context.Provider,
+	useEditProfileImageActions = function() --[[ Line: 19 ]]
+		-- upvalues: ReactModule (copy), Context (copy)
+		local UseContextResult = ReactModule.useContext(Context)
 		
-		if var2 == nil then
+		if UseContextResult == nil then
 			error("useEditProfileImageActions must be used within an EditProfileImageActions Provider")
 		end
-		return var2
+		return UseContextResult
 	end
 }

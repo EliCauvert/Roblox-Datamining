@@ -1,6 +1,6 @@
-﻿local responsiveModule = require(script:FindFirstAncestor("AvatarExperienceUIKit").Parent.Responsive)
+﻿local ResponsiveModule = require(script:FindFirstAncestor("AvatarExperienceUIKit").Parent.Responsive)
 
-return function(p1)
-	-- upvalues: responsiveModule (ref)
-	return p1 ~= responsiveModule.Input.Touch
+return function(Touch): boolean --[[ Line: 9 | Named "shouldShowScrollArrowsForInputType" ]]
+	-- upvalues: ResponsiveModule (copy)
+	return Touch ~= ResponsiveModule.Input.Touch
 end

@@ -1,54 +1,54 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local cryoModule = require(corePackagesService.Packages.Cryo)
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactGamepadModule = require(corePackagesService.Packages.RoactGamepad)
-local tModule = require(corePackagesService.Packages.t)
-local roactFitComponents = require(corePackagesService.Packages.AvatarExperienceDeps).RoactFitComponents
-local listEntryModule = require(script.Parent.ListEntry)
-local listSection = roactModule.PureComponent:extend("ListSection")
-listSection.validateProps = tModule.strictInterface({
-	headerText = tModule.string,
-	items = tModule.array(tModule.string),
-	layoutOrder = tModule.integer,
-	isFirstSection = tModule.boolean,
-	isLastSection = tModule.boolean,
-	NextSelectionLeft = tModule.optional(tModule.table),
-	NextSelectionRight = tModule.optional(tModule.table),
-	NextSelectionUp = tModule.optional(tModule.table),
-	NextSelectionDown = tModule.optional(tModule.table),
-	forwardRef = tModule.table
+﻿local CorePackages = game:GetService("CorePackages")
+local CryoModule = require(CorePackages.Packages.Cryo)
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactGamepadModule = require(CorePackages.Packages.RoactGamepad)
+local TModule = require(CorePackages.Packages.t)
+local RoactFitComponents = require(CorePackages.Packages.AvatarExperienceDeps).RoactFitComponents
+local ListEntryModule = require(script.Parent.ListEntry)
+local ListSection = RoactModule.PureComponent:extend("ListSection")
+ListSection.validateProps = TModule.strictInterface({
+	headerText = TModule.string,
+	items = TModule.array(TModule.string),
+	layoutOrder = TModule.integer,
+	isFirstSection = TModule.boolean,
+	isLastSection = TModule.boolean,
+	NextSelectionLeft = TModule.optional(TModule.table),
+	NextSelectionRight = TModule.optional(TModule.table),
+	NextSelectionUp = TModule.optional(TModule.table),
+	NextSelectionDown = TModule.optional(TModule.table),
+	forwardRef = TModule.table
 })
 
-function listSection.init(p1)
-	-- upvalues: roactGamepadModule (ref)
-	p1.listRefCache = roactGamepadModule.createRefCache()
+function ListSection.init(p1) --[[ Line: 29 ]]
+	-- upvalues: RoactGamepadModule (copy)
+	p1.listRefCache = RoactGamepadModule.createRefCache()
 end
 
-function listSection.render(p1)
-	-- upvalues: roactModule (ref), roactGamepadModule (ref), listEntryModule (ref), roactFitComponents (ref)
-	local t = {
-		[0] = roactModule.createElement(roactGamepadModule.Focusable[listEntryModule], {
+function ListSection.render(p1) --[[ Line: 33 ]]
+	-- upvalues: RoactModule (copy), RoactGamepadModule (copy), ListEntryModule (copy), RoactFitComponents (copy)
+	local config = {
+		[0] = RoactModule.createElement(RoactGamepadModule.Focusable[ListEntryModule], {
 			text = p1.props.headerText,
 			hasBullet = false,
 			layoutOrder = 0,
-			positionChangedCallback = if p1.props.isFirstSection then p1.firstEntryPositionChanged else nil,
-			NextSelectionDown = if #p1.props.items > 0 then p1.listRefCache[1] else nil,
-			[roactModule.Ref] = p1.listRefCache[0]
+			positionChangedCallback = p1.props.isFirstSection and p1.firstEntryPositionChanged or nil,
+			NextSelectionDown = #p1.props.items > 0 and p1.listRefCache[1] or nil,
+			[RoactModule.Ref] = p1.listRefCache[0]
 		})
 	}
 	
-	for i, v in ipairs(p1.props.items) do
-		t[i] = roactModule.createElement(roactGamepadModule.Focusable[listEntryModule], {
-			text = v,
+	for CountItems, item in ipairs(p1.props.items) do
+		config[CountItems] = RoactModule.createElement(RoactGamepadModule.Focusable[ListEntryModule], {
+			text = item,
 			hasBullet = true,
-			layoutOrder = i,
-			positionChangedCallback = if p1.props.isLastSection and i == #p1.props.items then p1.lastEntryPositionChanged else nil,
-			NextSelectionUp = p1.listRefCache[i - 1],
-			NextSelectionDown = if i ~= #p1.props.items then p1.listRefCache[i + 1] else nil,
-			[roactModule.Ref] = p1.listRefCache[i]
+			layoutOrder = CountItems,
+			positionChangedCallback = if p1.props.isLastSection and CountItems == #p1.props.items then p1.lastEntryPositionChanged else nil,
+			NextSelectionUp = p1.listRefCache[CountItems - 1],
+			NextSelectionDown = if CountItems == #p1.props.items then nil else p1.listRefCache[CountItems + 1] or nil,
+			[RoactModule.Ref] = p1.listRefCache[CountItems]
 		})
 	end
-	return roactModule.createElement(roactGamepadModule.Focusable[roactFitComponents.FitFrameVertical], {
+	return RoactModule.createElement(RoactGamepadModule.Focusable[RoactFitComponents.FitFrameVertical], {
 		width = UDim.new(1, 0),
 		FillDirection = Enum.FillDirection.Vertical,
 		VerticalAlignment = Enum.VerticalAlignment.Top,
@@ -59,11 +59,11 @@ function listSection.render(p1)
 		NextSelectionRight = p1.props.NextSelectionRight,
 		NextSelectionUp = p1.props.NextSelectionUp,
 		NextSelectionDown = p1.props.NextSelectionDown,
-		[roactModule.Ref] = p1.props.forwardRef
-	}, t)
+		[RoactModule.Ref] = p1.props.forwardRef
+	}, config)
 end
 
-return roactModule.forwardRef(function(p2, p3)
-	-- upvalues: roactModule (ref), listSection (ref), cryoModule (ref)
-	return roactModule.createElement(listSection, cryoModule.Dictionary.join(p2, { forwardRef = p3 }))
+return RoactModule.forwardRef(function(p2, ForwardRef) --[[ Line: 84 ]]
+	-- upvalues: RoactModule (copy), ListSection (copy), CryoModule (copy)
+	return RoactModule.createElement(ListSection, CryoModule.Dictionary.join(p2, { forwardRef = ForwardRef }))
 end)

@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("EnableRecentActivitySingleItemDetails", false) and require(script.Parent.FFlagEnableRecentActivityInspectAndBuy)
+﻿local FFlagEnableRecentActivityInspectAndBuyModule = require(script.Parent.FFlagEnableRecentActivityInspectAndBuy)
+
+return game:DefineFastFlag("EnableRecentActivitySingleItemDetails", false) and FFlagEnableRecentActivityInspectAndBuyModule

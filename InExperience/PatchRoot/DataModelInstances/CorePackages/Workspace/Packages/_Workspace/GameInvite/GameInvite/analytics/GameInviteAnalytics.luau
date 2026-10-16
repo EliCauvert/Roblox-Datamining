@@ -1,14 +1,14 @@
-﻿local cryoModule = require(script:FindFirstAncestor("GameInvite").Parent.Cryo)
+﻿local CryoModule = require(script:FindFirstAncestor("GameInvite").Parent.Cryo)
 game:DefineFastFlag("GameInviteModalIncludeLinkIdInShareButton", false)
-local t = {}
-t.__index = t
-t.ButtonName = {
+local GameInviteAnalyticsModule = {}
+GameInviteAnalyticsModule.__index = GameInviteAnalyticsModule
+GameInviteAnalyticsModule.ButtonName = {
 	SettingsHub = "settingsHub",
 	ModalPrompt = "modalPrompt",
 	GameDetailsMoreMenu = "uaGameDetailsMoreMenu",
 	GameDetailsPlayWithFriendsMenu = "uaGameDetailsPlayWithFriendsMenu"
 }
-t.EventName = {
+GameInviteAnalyticsModule.EventName = {
 	InviteSent = "inputShareGameInviteSent",
 	EntryPoint = "inputShareGameEntryPoint",
 	LinkGenerated = "linkGenerated",
@@ -16,111 +16,109 @@ t.EventName = {
 	InviteSearchFocused = "inviteSearchFocused",
 	GameInviteModal = "gameInviteModal"
 }
-t.ActionType = {
+GameInviteAnalyticsModule.ActionType = {
 	ModalOpen = "modalOpen",
 	InviteTriggered = "inviteTriggered",
 	ModalClose = "modalClose",
 	InviteFailure = "inviteFailure"
 }
-t.DiagCounters = {
+GameInviteAnalyticsModule.DiagCounters = {
 	EntryPoint = {
-		[t.ButtonName.SettingsHub] = settings():GetFVariable("LuaShareGameSettingsHubEntryCounter"),
-		[t.ButtonName.ModalPrompt] = settings():GetFVariable("LuaShareGameModalPromptEntryCounter")
+		[GameInviteAnalyticsModule.ButtonName.SettingsHub] = settings():GetFVariable("LuaShareGameSettingsHubEntryCounter"),
+		[GameInviteAnalyticsModule.ButtonName.ModalPrompt] = settings():GetFVariable("LuaShareGameModalPromptEntryCounter")
 	},
 	InviteSent = {
-		[t.ButtonName.SettingsHub] = settings():GetFVariable("LuaShareGameSettingsHubInviteCounter"),
-		[t.ButtonName.ModalPrompt] = settings():GetFVariable("LuaShareGameModalPromptInviteCounter")
+		[GameInviteAnalyticsModule.ButtonName.SettingsHub] = settings():GetFVariable("LuaShareGameSettingsHubInviteCounter"),
+		[GameInviteAnalyticsModule.ButtonName.ModalPrompt] = settings():GetFVariable("LuaShareGameModalPromptInviteCounter")
 	}
 }
 
-function t.new()
-	-- upvalues: t (ref)
-	local t_1 = {
+function GameInviteAnalyticsModule.new() --[[ Line: 47 ]]
+	-- upvalues: GameInviteAnalyticsModule (copy)
+	local config = {
 		_eventStreamImpl = nil,
 		_diagImpl = nil,
 		_buttonName = nil
 	}
-	setmetatable(t_1, t)
+	setmetatable(config, GameInviteAnalyticsModule)
 	
-	return t_1
+	return config
 end
 
-function t:withEventStream(p1)
-	self._eventStreamImpl = p1
-	
-	return self
-end
-
-function t:withDiag(p1)
-	self._diagImpl = p1
+function GameInviteAnalyticsModule:withEventStream(_eventStreamImpl) --[[ Line: 58 ]]
+	self._eventStreamImpl = _eventStreamImpl
 	
 	return self
 end
 
-function t:withButtonName(p1)
-	self._buttonName = p1
+function GameInviteAnalyticsModule:withDiag(_diagImpl) --[[ Line: 63 ]]
+	self._diagImpl = _diagImpl
 	
 	return self
 end
 
-function t:onActivatedInviteSent(_, p1, p2, p3, p4)
-	-- upvalues: t (ref)
-	local var1, var2
-	local buttonName = self:_getButtonName()
-	local var3 = if self:_getIsUniversalApp() then "inApp" else "inGame"
-	local inviteSent = t.EventName.InviteSent
-	local joined = table.concat(p2, ",")
-	local _ = nil
-	local _ = nil
+function GameInviteAnalyticsModule:withButtonName(_buttonName) --[[ Line: 68 ]]
+	self._buttonName = _buttonName
+	
+	return self
+end
+
+function GameInviteAnalyticsModule:onActivatedInviteSent(_, p1, List, p2, p3) --[[ Line: 73 ]]
+	-- upvalues: GameInviteAnalyticsModule (copy)
+	local ButtonName = self:_getButtonName()
+	local InApp: string = if self:_getIsUniversalApp() then "inApp" else "inGame"
+	local InviteSent = GameInviteAnalyticsModule.EventName.InviteSent
+	local Joined = table.concat(List, ",")
+	local Text = nil
+	local Text1 = nil
 	
 	if self:_getIsUniversalApp() then
-		var1 = tostring(p3)
-		var2 = tostring(p4)
+		Text = tostring(p2)
+		Text1 = tostring(p3)
 	else
-		var1 = tostring(game.PlaceId)
-		var2 = tostring(game.GameId)
+		Text = tostring(game.PlaceId)
+		Text1 = tostring(game.GameId)
 	end
-	self:_getEventStream():setRBXEventStream(var3, inviteSent, {
-		btn = buttonName,
-		placeId = var1,
-		gameId = var2,
+	self:_getEventStream():setRBXEventStream(InApp, InviteSent, {
+		btn = ButtonName,
+		placeId = Text,
+		gameId = Text1,
 		conversationId = tostring(p1),
-		participants = joined
+		participants = Joined
 	})
-	local var4 = t.DiagCounters.InviteSent[self:_getButtonName()]
+	local InviteSentEntry = GameInviteAnalyticsModule.DiagCounters.InviteSent[self:_getButtonName()]
 	
-	if var4 then
-		self:_getDiag():reportCounter(var4, 1)
+	if InviteSentEntry then
+		self:_getDiag():reportCounter(InviteSentEntry, 1)
 	end
 end
 
-function t:inputShareGameEntryPoint(p1, p2)
-	-- upvalues: t (ref)
-	local var1, var2
-	local buttonName = self:_getButtonName()
-	local var3 = if self:_getIsUniversalApp() then "inApp" else "inGame"
-	local entryPoint = t.EventName.EntryPoint
-	local _ = nil
-	local _ = nil
+function GameInviteAnalyticsModule:inputShareGameEntryPoint(p1, p2) --[[ Line: 105 ]]
+	-- upvalues: GameInviteAnalyticsModule (copy)
+	local ButtonName = self:_getButtonName()
+	local InApp: string = if self:_getIsUniversalApp() then "inApp" else "inGame"
+	local EntryPoint = GameInviteAnalyticsModule.EventName.EntryPoint
+	local Text = nil
+	local Text1 = nil
 	
 	if self:_getIsUniversalApp() then
-		var1 = tostring(p1)
-		var2 = tostring(p2)
+		Text = tostring(p1)
+		Text1 = tostring(p2)
 	else
-		var1 = tostring(game.PlaceId)
-		var2 = tostring(game.GameId)
+		Text = tostring(game.PlaceId)
+		Text1 = tostring(game.GameId)
 	end
-	self:_getEventStream():setRBXEventStream(var3, entryPoint, { btn = buttonName, placeId = var1, gameId = var2 })
-	local var4 = t.DiagCounters.EntryPoint[self:_getButtonName()]
+	self:_getEventStream():setRBXEventStream(InApp, EntryPoint, { btn = ButtonName, placeId = Text, gameId = Text1 })
+	local EntryPointEntry = GameInviteAnalyticsModule.DiagCounters.EntryPoint[self:_getButtonName()]
 	
-	if var4 then
-		self:_getDiag():reportCounter(var4, 1)
+	if EntryPointEntry then
+		self:_getDiag():reportCounter(EntryPointEntry, 1)
 	end
 end
 
-function t:linkGenerated(p1)
-	-- upvalues: t (ref)
-	self:_getEventStream():setRBXEventStream("shareLinks", t.EventName.LinkGenerated, {
+function GameInviteAnalyticsModule:linkGenerated(p1) --[[ Line: 133 ]]
+	-- upvalues: GameInviteAnalyticsModule (copy)
+	self:_getEventStream():setRBXEventStream("shareLinks", GameInviteAnalyticsModule.EventName.LinkGenerated, {
 		page = "inGameMenu",
 		subpage = "inviteFriendsPage",
 		linkType = p1.linkType,
@@ -128,9 +126,9 @@ function t:linkGenerated(p1)
 	})
 end
 
-function t:onShareButtonClick(p1)
-	-- upvalues: t (ref)
-	self:_getEventStream():setRBXEventStream("shareLinks", t.EventName.ShareButtonClick, {
+function GameInviteAnalyticsModule:onShareButtonClick(p1) --[[ Line: 145 ]]
+	-- upvalues: GameInviteAnalyticsModule (copy)
+	self:_getEventStream():setRBXEventStream("shareLinks", GameInviteAnalyticsModule.EventName.ShareButtonClick, {
 		btn = "shareServerInviteLink",
 		page = "inGameMenu",
 		subpage = "inviteFriendsPage",
@@ -139,71 +137,70 @@ function t:onShareButtonClick(p1)
 	})
 end
 
-function t:onSearchFocused()
-	-- upvalues: t (ref)
-	local inviteSearchFocused = t.EventName.InviteSearchFocused
-	local var1 = "inGame"
-	local t_1 = {
+function GameInviteAnalyticsModule:onSearchFocused() --[[ Line: 158 ]]
+	-- upvalues: GameInviteAnalyticsModule (copy)
+	local InviteSearchFocused = GameInviteAnalyticsModule.EventName.InviteSearchFocused
+	local v1 = "inGame"
+	local config = {
 		page = "inGameMenu",
 		subpage = "inviteFriendsPage",
 		btn = self:_getButtonName()
 	}
 	
 	if self:_getIsUniversalApp() then
-		var1 = "inApp"
-		t_1.page = "inAppGameDetails"
+		v1 = "inApp"
+		config.page = "inAppGameDetails"
 	end
-	self:_getEventStream():setRBXEventStream(var1, inviteSearchFocused, t_1)
+	self:_getEventStream():setRBXEventStream(v1, InviteSearchFocused, config)
 end
 
-function t:sendEvent(p1, p2, p3)
-	-- upvalues: cryoModule (ref)
-	local join = cryoModule.Dictionary.join
-	join = join(p2.Args, {
+function GameInviteAnalyticsModule:sendEvent(p1, p2, p3) --[[ Line: 173 ]]
+	-- upvalues: CryoModule (copy)
+	local JoinResult = CryoModule.Dictionary.join(p2.Args, {
 		placeId = if self:_getIsUniversalApp() and p3 and p3.place_id then p3.place_id else game.PlaceId
 	})
 	
 	if p3 then
-		join = cryoModule.Dictionary.join(join, p3)
+		JoinResult = CryoModule.Dictionary.join(JoinResult, p3)
 	end
-	self:_getEventStream():setRBXEventStream(p1, p2.Type, join)
+	self:_getEventStream():setRBXEventStream(p1, p2.Type, JoinResult)
 end
 
-function t:sendGameInviteModalEvent(p1, p2)
-	-- upvalues: cryoModule (ref), t (ref)
-	local t_1 = {
+function GameInviteAnalyticsModule:sendGameInviteModalEvent(p1, p2) --[[ Line: 187 ]]
+	-- upvalues: CryoModule (copy), GameInviteAnalyticsModule (copy)
+	local JoinResult = {
 		place_id = if self:_getIsUniversalApp() and p2 and p2.place_id then p2.place_id else game.PlaceId
 	}
 	
 	if p2 then
-		t_1 = cryoModule.Dictionary.join(t_1, p2)
+		JoinResult = CryoModule.Dictionary.join(JoinResult, p2)
 	end
-	self:_getEventStream():setRBXEventStream(p1, t.EventName.GameInviteModal, t_1)
+	self:_getEventStream():setRBXEventStream(p1, GameInviteAnalyticsModule.EventName.GameInviteModal, JoinResult)
 end
 
-function t:_getEventStream()
+function GameInviteAnalyticsModule:_getEventStream() --[[ Line: 201 ]]
 	assert(self._eventStreamImpl, "EventStream implementation not found. Did you forget to construct withEventStream?")
 	
 	return self._eventStreamImpl
 end
 
-function t:_getDiag()
+function GameInviteAnalyticsModule:_getDiag() --[[ Line: 206 ]]
 	assert(self._diagImpl, "Diag implementation not found. Did you forget to construct withDiag?")
 	
 	return self._diagImpl
 end
 
-function t:_getButtonName()
+function GameInviteAnalyticsModule:_getButtonName() --[[ Line: 211 ]]
 	assert(self._buttonName, "ButtonName not found. Did you forget to construct withButtonName?")
 	
 	return self._buttonName
 end
 
-function t:_getIsUniversalApp()
-	-- upvalues: t (ref)
+function GameInviteAnalyticsModule:_getIsUniversalApp(): boolean --[[ Line: 216 ]]
+	-- upvalues: GameInviteAnalyticsModule (copy)
 	assert(self._buttonName, "ButtonName not found. Did you forget to construct withButtonName?")
 	
-	return if self._buttonName ~= t.ButtonName.GameDetailsMoreMenu then self._buttonName == t.ButtonName.GameDetailsPlayWithFriendsMenu else true
+	return self._buttonName == GameInviteAnalyticsModule.ButtonName.GameDetailsMoreMenu or self._buttonName == GameInviteAnalyticsModule.ButtonName.GameDetailsPlayWithFriendsMenu
 end
 
-return t
+return GameInviteAnalyticsModule

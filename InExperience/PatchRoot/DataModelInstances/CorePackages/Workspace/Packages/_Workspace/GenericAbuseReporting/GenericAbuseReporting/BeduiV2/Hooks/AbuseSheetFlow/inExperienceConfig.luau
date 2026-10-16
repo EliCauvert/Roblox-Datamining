@@ -1101,7 +1101,7 @@
 		["Label.SurfacePlayerAge"] = "Player age",
 		["Label.SurfaceTextChat"] = "Text chat messages",
 		["Label.SurfaceVoiceChat"] = "Voice chat messages",
-		["Label.TakeItDown"] = "{linkStart}Report non-consensual intimate imagery as defined by 47 U.S. Code \194\167 223a{linkEnd}",
+		["Label.TakeItDown"] = "{linkStart}Report non-consensual intimate imagery as defined by 47 U.S. Code § 223a{linkEnd}",
 		["Label.TextChat"] = "Text chat",
 		["Label.TheirAvatarOrName"] = "Their avatar or name",
 		["Label.UnblockedPerson"] = "You unblocked this person",

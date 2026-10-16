@@ -1,7 +1,7 @@
-﻿local react = require(script.Parent.Parent.dependencies).React
-local contactImporterAnalyticsContextModule = require(script.Parent.ContactImporterAnalyticsContext)
+﻿local React = require(script.Parent.Parent.dependencies).React
+local ContactImporterAnalyticsContextModule = require(script.Parent.ContactImporterAnalyticsContext)
 
-return function()
-	-- upvalues: react (ref), contactImporterAnalyticsContextModule (ref)
-	return react.useContext(contactImporterAnalyticsContextModule)
+return function() --[[ Line: 6 ]]
+	-- upvalues: React (copy), ContactImporterAnalyticsContextModule (copy)
+	return React.useContext(ContactImporterAnalyticsContextModule)
 end

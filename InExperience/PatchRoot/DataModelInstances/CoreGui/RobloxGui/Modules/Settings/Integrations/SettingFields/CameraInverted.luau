@@ -1,61 +1,61 @@
-﻿local settings = script:FindFirstAncestor("Settings")
-local gameSettings = UserSettings().GameSettings
-local settingsServiceModule = require(game:GetService("CorePackages").Workspace.Packages.SettingsService)
-local valueChangedSignal = settingsServiceModule.ValueChangedSignal
-local availabilitySignal = settingsServiceModule.AvailabilitySignal
-local settingEnum = settingsServiceModule.SettingEnum
-local LAYOUT_ORDER = require(settings.Integrations.Constants).GAMESETTINGS.LAYOUT_ORDER
+﻿local GameSettings = UserSettings().GameSettings
+local SettingsServiceModule = require(game:GetService("CorePackages").Workspace.Packages.SettingsService)
+local ValueChangedSignal = SettingsServiceModule.ValueChangedSignal
+local AvailabilitySignal = SettingsServiceModule.AvailabilitySignal
+local LAYOUTORDER = require(script:FindFirstAncestor("Settings").Integrations.Constants).GAMESETTINGS.LAYOUT_ORDER
 
-local function _()
-	-- upvalues: valueChangedSignal (ref), gameSettings (ref)
-	local var1 = valueChangedSignal.new(gameSettings.CameraYInverted)
-	var1:connect(function(p1)
-		-- upvalues: gameSettings (copy)
-		if gameSettings.CameraYInverted == p1 then
+local function _() --[[ Line: 22 | Named "CameraInvertedValue" ]]
+	-- upvalues: ValueChangedSignal (copy), GameSettings (copy)
+	local NewValueChangedSignal = ValueChangedSignal.new(GameSettings.CameraYInverted)
+	NewValueChangedSignal:connect(function(CameraYInverted) --[[ Line: 25 ]]
+		-- upvalues: GameSettings (upval)
+		if GameSettings.CameraYInverted ~= CameraYInverted then
+			GameSettings.CameraYInverted = CameraYInverted
+			
 			return
 		end
-		gameSettings.CameraYInverted = p1
 	end, true)
 	
-	return var1
+	return NewValueChangedSignal
 end
 
-local _ = function()
-	-- upvalues: availabilitySignal (ref), gameSettings (ref)
-	local var1 = availabilitySignal.new(gameSettings.IsUsingCameraYInverted)
-	gameSettings.Changed:Connect(function(p1)
-		-- upvalues: var1 (ref), gameSettings (copy)
+local _ = function() --[[ Line: 36 | Named "CameraInvertedAvailability" ]]
+	-- upvalues: AvailabilitySignal (copy), GameSettings (copy)
+	local NewAvailabilitySignal = AvailabilitySignal.new(GameSettings.IsUsingCameraYInverted)
+	GameSettings.Changed:Connect(function(p1) --[[ Line: 39 ]]
+		-- upvalues: NewAvailabilitySignal (copy), GameSettings (upval)
 		if p1 == "IsUsingCameraYInverted" then
-			var1:set(gameSettings.IsUsingCameraYInverted)
+			NewAvailabilitySignal:set(GameSettings.IsUsingCameraYInverted)
 		end
 	end)
 	
-	return var1
+	return NewAvailabilitySignal
 end
 
-local t = {
+local CameraInvertedModule = {
 	id = "camera-inverted",
 	label = "CoreScripts.InGameMenu.GameSettings.InvertedCamera",
 	alreadyLocalized = false,
-	field_type = settingEnum.Toggle
+	field_type = SettingsServiceModule.SettingEnum.Toggle
 }
-local var1 = valueChangedSignal.new(gameSettings.CameraYInverted)
-var1:connect(function(p1)
-	-- upvalues: gameSettings (ref)
-	if gameSettings.CameraYInverted == p1 then
+local NewValueChangedSignal = ValueChangedSignal.new(GameSettings.CameraYInverted)
+NewValueChangedSignal:connect(function(CameraYInverted) --[[ Line: 25 ]]
+	-- upvalues: GameSettings (copy)
+	if GameSettings.CameraYInverted ~= CameraYInverted then
+		GameSettings.CameraYInverted = CameraYInverted
+		
 		return
 	end
-	gameSettings.CameraYInverted = p1
 end, true)
-t.onChanged = var1
-local var2 = availabilitySignal.new(gameSettings.IsUsingCameraYInverted)
-gameSettings.Changed:Connect(function(p1)
-	-- upvalues: var2 (ref), gameSettings (ref)
+CameraInvertedModule.onChanged = NewValueChangedSignal
+local NewAvailabilitySignal = AvailabilitySignal.new(GameSettings.IsUsingCameraYInverted)
+GameSettings.Changed:Connect(function(p1) --[[ Line: 39 ]]
+	-- upvalues: NewAvailabilitySignal (copy), GameSettings (copy)
 	if p1 == "IsUsingCameraYInverted" then
-		var2:set(gameSettings.IsUsingCameraYInverted)
+		NewAvailabilitySignal:set(GameSettings.IsUsingCameraYInverted)
 	end
 end)
-t.availability = var2
-t.layoutOrder = LAYOUT_ORDER.CameraInvertedFrame
+CameraInvertedModule.availability = NewAvailabilitySignal
+CameraInvertedModule.layoutOrder = LAYOUTORDER.CameraInvertedFrame
 
-return t
+return CameraInvertedModule

@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("EnableSideSheet8", false) or require(script:FindFirstAncestor("InExperienceSideSheetUtils").Parent.PioneerUtils).isPioneerLaunch()
+﻿local IsPioneerLaunchFunction = require(script:FindFirstAncestor("InExperienceSideSheetUtils").Parent.PioneerUtils).isPioneerLaunch
+
+return game:DefineFastFlag("EnableSideSheet8", false) or IsPioneerLaunchFunction()

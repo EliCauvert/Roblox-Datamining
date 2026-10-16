@@ -1,31 +1,31 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local render = require(parent.Dev.ReactTestingLibrary).render
-local benchmark = require(parent.Dev.JestBenchmark).benchmark
-local benchmarkUtilsModule = require(parent.Dev.BenchmarkUtils)
-local benchFile = benchmarkUtilsModule.benchFile
-local mountComponentTimes = benchmarkUtilsModule.mountComponentTimes
-local scrollComponentTimes = benchmarkUtilsModule.scrollComponentTimes
-local configModule = require(expChat.Config)
-local helpers = expChat.ChatWindow.Helpers
-local getMessageSettingsModule = require(helpers.getMessageSettings)
-local getMessageTextModule = require(helpers.getMessageText)
-local translatedTextMessageV2Module = require(expChat.ChatWindow.UI.TranslatedTextMessageV2)
-local t = {
-	FontFace = configModule.ChatWindowFont,
-	TextColor3 = configModule.ChatWindowTextColor3,
-	TextSize = configModule.ChatWindowTextSize,
-	TextStrokeColor3 = configModule.ChatWindowTextStrokeColor,
-	TextStrokeTransparency = configModule.ChatWindowTextStrokeTransparency,
-	BackgroundColor3 = configModule.ChatWindowBackgroundColor3,
-	BackgroundTransparency = configModule.ChatWindowBackgroundTransparency
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local RenderFunction = require(Parent.Dev.ReactTestingLibrary).render
+local BenchmarkFunction = require(Parent.Dev.JestBenchmark).benchmark
+local BenchmarkUtilsModule = require(Parent.Dev.BenchmarkUtils)
+local BenchFileFunction: (any, any) -> () = BenchmarkUtilsModule.benchFile
+local MountComponentTimesFunction = BenchmarkUtilsModule.mountComponentTimes
+local ScrollComponentTimesFunction = BenchmarkUtilsModule.scrollComponentTimes
+local ConfigModule = require(ExpChat.Config)
+local Helpers = ExpChat.ChatWindow.Helpers
+local GetMessageSettingsModule = require(Helpers.getMessageSettings)
+local GetMessageTextModule = require(Helpers.getMessageText)
+local TranslatedTextMessageV2Module = require(ExpChat.ChatWindow.UI.TranslatedTextMessageV2)
+local ChatWindowSettings = {
+	FontFace = ConfigModule.ChatWindowFont,
+	TextColor3 = ConfigModule.ChatWindowTextColor3,
+	TextSize = ConfigModule.ChatWindowTextSize,
+	TextStrokeColor3 = ConfigModule.ChatWindowTextStrokeColor,
+	TextStrokeTransparency = ConfigModule.ChatWindowTextStrokeTransparency,
+	BackgroundColor3 = ConfigModule.ChatWindowBackgroundColor3,
+	BackgroundTransparency = ConfigModule.ChatWindowBackgroundTransparency
 }
 
-local function createMessageElement(p1)
-	-- upvalues: getMessageSettingsModule (ref), t (ref), reactModule (ref), translatedTextMessageV2Module (ref), getMessageTextModule (ref)
-	local t_1 = {
+local function createMessageElement(List) --[[ Line: 34 ]]
+	-- upvalues: GetMessageSettingsModule (copy), ChatWindowSettings (copy), ReactModule (copy), TranslatedTextMessageV2Module (copy), GetMessageTextModule (copy)
+	local config = {
 		text = "Sample text chat message text!",
 		translation = "Exemple de texte de message de chat !",
 		useTranslation = false,
@@ -38,69 +38,69 @@ local function createMessageElement(p1)
 		isRewriteWindowOpen = false
 	}
 	
-	if p1 then
-		for i, v in p1 do
-			t_1[i] = v
+	if List then
+		for i, value in List do
+			config[i] = value
 		end
 	end
-	local t_2 = {
+	local Message = {
 		current = {
 			userId = 0,
 			messageId = "0",
-			text = t_1.text,
-			translation = t_1.translation,
-			useTranslation = t_1.useTranslation,
-			prefixText = t_1.prefixText,
-			chatWindowMessageProperties = t_1.chatWindowMessageProperties
+			text = config.text,
+			translation = config.translation,
+			useTranslation = config.useTranslation,
+			prefixText = config.prefixText,
+			chatWindowMessageProperties = config.chatWindowMessageProperties
 		}
 	}
-	local var1 = getMessageSettingsModule(t_2.current, t)
+	local MessageSettingsModule = GetMessageSettingsModule(Message.current, ChatWindowSettings)
 	
-	return reactModule.createElement(translatedTextMessageV2Module, {
-		chatWindowSettings = t,
-		textTransparency = reactModule.createBinding(0),
-		onTextMessageLabelButtonActivated = function() end,
-		isSpatialUIEnabled = t_1.isSpatialUIEnabled,
-		originalBodyText = reactModule.createBinding(getMessageTextModule(t_2.current.useTranslation, var1.translation, var1.text)),
-		originalPrefixText = reactModule.createBinding(var1.prefixText or ""),
-		shouldShowTranslationToggle = reactModule.createBinding(false),
-		bodyTextProperties = reactModule.createBinding(var1.bodyTextProperties),
-		prefixTextProperties = reactModule.createBinding(var1.prefixTextProperties),
-		layoutOrder = reactModule.createBinding(0),
-		visible = reactModule.createBinding(true),
-		isUserVerified = reactModule.createBinding(t_1.isUserVerified),
-		message = t_2,
-		isTrustedConnection = reactModule.createBinding(t_1.isTrustedConnection),
-		wasRewritten = reactModule.createBinding(t_1.wasRewritten),
-		isRewriteWindowOpen = reactModule.createBinding(t_1.isRewriteWindowOpen),
-		chatWindowTransparencyBindable = reactModule.createBinding(0),
-		arButtonPadding = reactModule.createBinding(UDim.new(0, 0))
+	return ReactModule.createElement(TranslatedTextMessageV2Module, {
+		chatWindowSettings = ChatWindowSettings,
+		textTransparency = ReactModule.createBinding(0),
+		onTextMessageLabelButtonActivated = function() --[[ Line: 71 ]] end,
+		isSpatialUIEnabled = config.isSpatialUIEnabled,
+		originalBodyText = ReactModule.createBinding(GetMessageTextModule(Message.current.useTranslation, MessageSettingsModule.translation, MessageSettingsModule.text)),
+		originalPrefixText = ReactModule.createBinding(MessageSettingsModule.prefixText or ""),
+		shouldShowTranslationToggle = ReactModule.createBinding(false),
+		bodyTextProperties = ReactModule.createBinding(MessageSettingsModule.bodyTextProperties),
+		prefixTextProperties = ReactModule.createBinding(MessageSettingsModule.prefixTextProperties),
+		layoutOrder = ReactModule.createBinding(0),
+		visible = ReactModule.createBinding(true),
+		isUserVerified = ReactModule.createBinding(config.isUserVerified),
+		message = Message,
+		isTrustedConnection = ReactModule.createBinding(config.isTrustedConnection),
+		wasRewritten = ReactModule.createBinding(config.wasRewritten),
+		isRewriteWindowOpen = ReactModule.createBinding(config.isRewriteWindowOpen),
+		chatWindowTransparencyBindable = ReactModule.createBinding(0),
+		arButtonPadding = ReactModule.createBinding(UDim.new(0, 0))
 	})
 end
 
-local function _(p2)
-	-- upvalues: reactModule (ref), foundationModule (ref)
-	return reactModule.createElement(foundationModule.FoundationProvider, { device = "Desktop", colorMode = "Dark" }, p2)
+local function _(p1) --[[ Line: 92 | Named "wrapWithProviders" ]]
+	-- upvalues: ReactModule (copy), FoundationModule (copy)
+	return ReactModule.createElement(FoundationModule.FoundationProvider, { device = "Desktop", colorMode = "Dark" }, p1)
 end
 
-local var2 = reactModule.createElement(foundationModule.FoundationProvider, { device = "Desktop", colorMode = "Dark" }, createMessageElement())
-local var3 = reactModule.createElement(foundationModule.FoundationProvider, { device = "Desktop", colorMode = "Dark" }, createMessageElement({ useTranslation = true }))
-local var4 = reactModule.createElement(foundationModule.FoundationProvider, { device = "Desktop", colorMode = "Dark" }, createMessageElement({ isUserVerified = true }))
-benchFile(script, function()
-	-- upvalues: benchmark (ref), render (ref), var2 (ref), var3 (ref), var4 (ref), mountComponentTimes (ref), scrollComponentTimes (ref)
-	benchmark("Render TranslatedTextMessage", function()
-		-- upvalues: render (copy), var2 (copy)
-		render(var2):unmount()
+local Element = ReactModule.createElement(FoundationModule.FoundationProvider, { device = "Desktop", colorMode = "Dark" }, (createMessageElement()))
+local Element1 = ReactModule.createElement(FoundationModule.FoundationProvider, { device = "Desktop", colorMode = "Dark" }, (createMessageElement({ useTranslation = true })))
+local Element2 = ReactModule.createElement(FoundationModule.FoundationProvider, { device = "Desktop", colorMode = "Dark" }, (createMessageElement({ isUserVerified = true })))
+BenchFileFunction(script, function() --[[ Line: 103 ]]
+	-- upvalues: BenchmarkFunction (copy), RenderFunction (copy), Element (copy), Element1 (copy), Element2 (copy), MountComponentTimesFunction (copy), ScrollComponentTimesFunction (copy)
+	BenchmarkFunction("Render TranslatedTextMessage", function() --[[ Line: 104 ]]
+		-- upvalues: RenderFunction (upval), Element (upval)
+		RenderFunction(Element):unmount()
 	end)
-	benchmark("Render TranslatedTextMessage with translation", function()
-		-- upvalues: render (copy), var3 (copy)
-		render(var3):unmount()
+	BenchmarkFunction("Render TranslatedTextMessage with translation", function() --[[ Line: 109 ]]
+		-- upvalues: RenderFunction (upval), Element1 (upval)
+		RenderFunction(Element1):unmount()
 	end)
-	benchmark("Render TranslatedTextMessage (verified user)", function()
-		-- upvalues: render (copy), var4 (copy)
-		render(var4):unmount()
+	BenchmarkFunction("Render TranslatedTextMessage (verified user)", function() --[[ Line: 114 ]]
+		-- upvalues: RenderFunction (upval), Element2 (upval)
+		RenderFunction(Element2):unmount()
 	end)
-	mountComponentTimes(var2, "TranslatedTextMessage", 50)
-	mountComponentTimes(var2, "TranslatedTextMessage", 100)
-	scrollComponentTimes(var2, "TranslatedTextMessage", 50)
+	MountComponentTimesFunction(Element, "TranslatedTextMessage", 50)
+	MountComponentTimesFunction(Element, "TranslatedTextMessage", 100)
+	ScrollComponentTimesFunction(Element, "TranslatedTextMessage", 50)
 end)

@@ -1,8 +1,8 @@
-﻿local reactModule = require(script:FindFirstAncestor("BuildExperience").Parent.React)
-local libraryDetailViewModule = require(script.Parent.LibraryDetailView)
-local useLibraryDetailViewModelModule = require(script.Parent.useLibraryDetailViewModel)
+﻿local ReactModule = require(script:FindFirstAncestor("BuildExperience").Parent.React)
+local LibraryDetailViewModule = require(script.Parent.LibraryDetailView)
+local UseLibraryDetailViewModelModule = require(script.Parent.useLibraryDetailViewModel)
 
-return function(p1)
-	-- upvalues: useLibraryDetailViewModelModule (ref), reactModule (ref), libraryDetailViewModule (ref)
-	return reactModule.createElement(libraryDetailViewModule, useLibraryDetailViewModelModule(p1))
+return function(p1) --[[ Line: 9 | Named "LibraryDetailContainer" ]]
+	-- upvalues: UseLibraryDetailViewModelModule (copy), ReactModule (copy), LibraryDetailViewModule (copy)
+	return ReactModule.createElement(LibraryDetailViewModule, (UseLibraryDetailViewModelModule(p1)))
 end

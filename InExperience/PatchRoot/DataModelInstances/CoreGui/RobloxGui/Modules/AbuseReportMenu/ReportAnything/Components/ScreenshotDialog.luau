@@ -1,24 +1,24 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local reactModule = require(corePackagesService.Packages.React)
-local cryoModule = require(corePackagesService.Packages.Cryo)
-local imageSetButton = UIBloxModule.Core.ImageSet.ImageSetButton
-local useStyle = UIBloxModule.Core.Style.useStyle
-local buttonStack = UIBloxModule.App.Button.ButtonStack
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local parent = script.Parent.Parent
-local assetsModule = require(parent.Resources.Assets)
-local dividerModule = require(parent.Components.Divider)
-local screenshotHighlighterModule = require(parent.Components.ScreenshotHighlighter)
-local virtualKeyboardMonitorModule = require(parent.Utility.VirtualKeyboardMonitor)
-local screenshotDialogPortraitModeHeaderModule = require(parent.Components.ScreenshotDialogPortraitModeHeader)
-local screenshotDialogLandscapeModeHeaderModule = require(parent.Components.ScreenshotDialogLandscapeModeHeader)
-local _ = require(parent.Utility.ReportAnythingAnalytics)
-local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
+﻿local CorePackages = game:GetService("CorePackages")
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
+local ReactModule = require(CorePackages.Packages.React)
+local CryoModule = require(CorePackages.Packages.Cryo)
+local ImageSetButton = UIBloxModule.Core.ImageSet.ImageSetButton
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local ButtonStack = UIBloxModule.App.Button.ButtonStack
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local Parent = script.Parent.Parent
+local AssetsModule = require(Parent.Resources.Assets)
+local DividerModule = require(Parent.Components.Divider)
+local ScreenshotHighlighterModule = require(Parent.Components.ScreenshotHighlighter)
+local VirtualKeyboardMonitorModule = require(Parent.Utility.VirtualKeyboardMonitor)
+local ScreenshotDialogPortraitModeHeaderModule = require(Parent.Components.ScreenshotDialogPortraitModeHeader)
+local ScreenshotDialogLandscapeModeHeaderModule = require(Parent.Components.ScreenshotDialogLandscapeModeHeader)
+local _ = require(Parent.Utility.ReportAnythingAnalytics)
+local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
 
-local function PortraitModeFooter(p1)
-	-- upvalues: reactModule (ref), buttonStack (ref), buttonType (ref), robloxTranslatorModule (ref)
-	return reactModule.createElement("Frame", {
+local function PortraitModeFooter(p1) --[[ Line: 43 ]]
+	-- upvalues: ReactModule (copy), ButtonStack (copy), ButtonType (copy), RobloxTranslatorModule (copy)
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 0,
 		LayoutOrder = 4,
 		Size = UDim2.new(1, 0, 0, 60),
@@ -26,31 +26,31 @@ local function PortraitModeFooter(p1)
 		AnchorPoint = Vector2.new(0, 1),
 		Position = UDim2.fromScale(0, 1)
 	}, {
-		Layout = reactModule.createElement("UIListLayout", {
+		Layout = ReactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			HorizontalAlignment = Enum.HorizontalAlignment.Center
 		}),
-		Container = reactModule.createElement("Frame", {
+		Container = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(0, 400, 1, 0)
 		}, {
-			Padding = reactModule.createElement("UIPadding", {
+			Padding = ReactModule.createElement("UIPadding", {
 				PaddingTop = UDim.new(0, 12),
 				PaddingBottom = UDim.new(0, 12),
 				PaddingLeft = UDim.new(0, 32),
 				PaddingRight = UDim.new(0, 32)
 			}),
-			ActionButtons = reactModule.createElement(buttonStack, {
+			ActionButtons = ReactModule.createElement(ButtonStack, {
 				marginBetween = 8,
 				buttons = {
 					{
-						buttonType = buttonType.PrimarySystem,
+						buttonType = ButtonType.PrimarySystem,
 						props = {
-							onActivated = function()
-								-- upvalues: p1 (ref)
+							onActivated = function() --[[ Line: 74 ]]
+								-- upvalues: p1 (copy)
 								p1.finishAnnotationAction(p1.annotationPoints)
 							end,
-							text = robloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Action.Next")
+							text = RobloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Action.Next")
 						}
 					}
 				}
@@ -59,154 +59,163 @@ local function PortraitModeFooter(p1)
 	})
 end
 
-return function(p1)
-	-- upvalues: useStyle (ref), virtualKeyboardMonitorModule (ref), reactModule (ref), cryoModule (ref), imageSetButton (ref), assetsModule (ref), screenshotDialogPortraitModeHeaderModule (ref), screenshotDialogLandscapeModeHeaderModule (ref), dividerModule (ref), screenshotHighlighterModule (ref), PortraitModeFooter (ref)
-	local theme = useStyle().Theme
-	local instance = virtualKeyboardMonitorModule.getInstance()
+return function(p1) --[[ Line: 86 | Named "ScreenshotDialog" ]]
+	-- upvalues: UseStyleFunction (copy), VirtualKeyboardMonitorModule (copy), ReactModule (copy), CryoModule (copy), ImageSetButton (copy), AssetsModule (copy), ScreenshotDialogPortraitModeHeaderModule (copy), ScreenshotDialogLandscapeModeHeaderModule (copy), DividerModule (copy), ScreenshotHighlighterModule (copy), PortraitModeFooter (copy)
+	local Theme = UseStyleFunction().Theme
+	local _Instance = VirtualKeyboardMonitorModule.getInstance()
 	
-	local var1 = function()
-		-- upvalues: instance (ref), p1 (ref)
+	local function v19() --[[ Line: 92 ]]
+		-- upvalues: _Instance (copy), p1 (copy)
 		warn("OverlayActivated")
 		
-		if instance:isKeyboardJustOff() then return end
+		if _Instance:isKeyboardJustOff() then return end
 		if p1.dismissAction then
 			warn("Menu dismissed")
 			p1.dismissAction()
 		end
 	end
 	
-	local var2, var3 = reactModule.useState(cryoModule.Dictionary.join({}, p1.initialAnnotationPoints or {}))
-	local var4, var5 = reactModule.useState({})
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref), var2 (ref)
-		var3(table.clone(var2))
-	end, { var3, var2 })
-	local var7 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(CryoModule.Dictionary.join({}, p1.initialAnnotationPoints or {}))
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState({})
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 109 ]]
+		-- upvalues: UseStateResult2 (copy), UseStateResult (copy)
+		UseStateResult2(table.clone(UseStateResult))
+	end, { UseStateResult2, UseStateResult })
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 113 ]]
+		-- upvalues: p1 (copy)
 		p1.reportAnythingAnalytics.incrementAnnotationBack()
 		p1.backAction()
 	end, { p1.backAction, p1.reportAnythingAnalytics })
-	local var8 = reactModule.useCallback(function(_)
-		-- upvalues: p1 (ref), var6 (ref), var5 (ref)
-		p1.reportAnythingAnalytics.incrementAnnotationPlace()
-		var6()
-		var5({})
-	end, { var5, var6, p1.reportAnythingAnalytics })
-	local var9 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref), p1 (ref), var4 (ref), var6 (ref)
-		if #var2 > 0 then
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 125 ]]
+		-- upvalues: UseStateResult (copy), p1 (copy), UseStateResult1 (copy), UseResult (copy)
+		if #UseStateResult > 0 then
 			p1.reportAnythingAnalytics.incrementAnnotationUndo()
-			table.insert(var4, 1, var2[#var2])
-			table.remove(var2, #var2)
-			var6()
+			table.insert(UseStateResult1, 1, UseStateResult[#UseStateResult])
+			table.remove(UseStateResult, #UseStateResult)
+			UseResult()
 		end
-	end, { var6, var2, var4, p1.reportAnythingAnalytics })
-	local var10 = reactModule.useCallback(function()
-		-- upvalues: var4 (ref), p1 (ref), var2 (ref), var6 (ref)
-		if #var4 > 0 then
+	end, {
+		UseResult,
+		UseStateResult,
+		UseStateResult1,
+		p1.reportAnythingAnalytics
+	})
+	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 135 ]]
+		-- upvalues: UseStateResult1 (copy), p1 (copy), UseStateResult (copy), UseResult (copy)
+		if #UseStateResult1 > 0 then
 			p1.reportAnythingAnalytics.incrementAnnotationRedo()
-			table.insert(var2, var4[1])
-			table.remove(var4, 1)
-			var6()
+			table.insert(UseStateResult, UseStateResult1[1])
+			table.remove(UseStateResult1, 1)
+			UseResult()
 		end
-	end, { var6, var2, var4, p1.reportAnythingAnalytics })
-	local var11 = reactModule.useCallback(function(p2)
-		-- upvalues: p1 (ref)
+	end, {
+		UseResult,
+		UseStateResult,
+		UseStateResult1,
+		p1.reportAnythingAnalytics
+	})
+	local UseResult4 = ReactModule.useCallback(function(p2) --[[ Line: 145 ]]
+		-- upvalues: p1 (copy)
 		p1.reportAnythingAnalytics.setAnnotationNext()
 		p1.finishAnnotationAction(p2)
 	end, { p1.finishAnnotationAction, p1.reportAnythingAnalytics })
-	local var12 = #var2 > 0
-	local var13 = #var4 > 0
+	local IsUndoEnabled = #UseStateResult > 0
+	local IsRedoEnabled = #UseStateResult1 > 0
 	
-	return reactModule.createElement("TextButton", {
+	return ReactModule.createElement("TextButton", {
 		AutoButtonColor = false,
 		BorderSizePixel = 0,
-		BackgroundColor3 = theme.Overlay.Color,
-		BackgroundTransparency = theme.Overlay.Transparency,
+		BackgroundColor3 = Theme.Overlay.Color,
+		BackgroundTransparency = Theme.Overlay.Transparency,
 		Size = UDim2.new(1, 0, 1, 0),
 		Position = UDim2.fromScale(0.5, 0.5),
 		AnchorPoint = Vector2.new(0.5, 0.5),
 		ZIndex = 10,
 		Text = "",
-		[reactModule.Event.Activated] = var1
+		[ReactModule.Event.Activated] = v19
 	}, {
-		ScreenshotDialog = reactModule.createElement(imageSetButton, {
+		ScreenshotDialog = ReactModule.createElement(ImageSetButton, {
 			Active = true,
 			BackgroundTransparency = 1,
 			Size = UDim2.fromScale(1, 1),
-			Image = assetsModule.Images.RoundedRect.Image,
-			ImageColor3 = theme.BackgroundUIDefault.Color,
-			ImageTransparency = theme.BackgroundUIDefault.Transparency,
-			ScaleType = assetsModule.Images.RoundedRect.ScaleType,
-			SliceCenter = assetsModule.Images.RoundedRect.SliceCenter
+			Image = AssetsModule.Images.RoundedRect.Image,
+			ImageColor3 = Theme.BackgroundUIDefault.Color,
+			ImageTransparency = Theme.BackgroundUIDefault.Transparency,
+			ScaleType = AssetsModule.Images.RoundedRect.ScaleType,
+			SliceCenter = AssetsModule.Images.RoundedRect.SliceCenter
 		}, {
-			HeaderAndContent = reactModule.createElement("Frame", {
+			HeaderAndContent = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, 0, 1, if p1.isSmallPortraitMode then -60 else 0)
 			}, {
-				Layout = reactModule.createElement("UIListLayout", {
+				Layout = ReactModule.createElement("UIListLayout", {
 					FillDirection = Enum.FillDirection.Vertical,
 					HorizontalAlignment = Enum.HorizontalAlignment.Center,
 					SortOrder = Enum.SortOrder.LayoutOrder
 				}),
-				Header = if p1.isSmallPortraitMode then reactModule.createElement(screenshotDialogPortraitModeHeaderModule, {
+				Header = if p1.isSmallPortraitMode then ReactModule.createElement(ScreenshotDialogPortraitModeHeaderModule, {
 					titleText = p1.titleText,
-					backAction = var7,
-					undoAnnotationPoints = var9,
-					redoAnnotationPoints = var10,
-					isRedoEnabled = var13,
-					isUndoEnabled = var12,
-					annotationPoints = var2
-				}) else reactModule.createElement(screenshotDialogLandscapeModeHeaderModule, {
+					backAction = UseResult1,
+					undoAnnotationPoints = UseResult2,
+					redoAnnotationPoints = UseResult3,
+					isRedoEnabled = IsRedoEnabled,
+					isUndoEnabled = IsUndoEnabled,
+					annotationPoints = UseStateResult
+				}) else ReactModule.createElement(ScreenshotDialogLandscapeModeHeaderModule, {
 					titleText = p1.titleText,
-					backAction = var7,
-					finishAnnotationAction = var11,
-					undoAnnotationPoints = var9,
-					redoAnnotationPoints = var10,
-					isRedoEnabled = var13,
-					isUndoEnabled = var12,
-					annotationPoints = var2
+					backAction = UseResult1,
+					finishAnnotationAction = UseResult4,
+					undoAnnotationPoints = UseResult2,
+					redoAnnotationPoints = UseResult3,
+					isRedoEnabled = IsRedoEnabled,
+					isUndoEnabled = IsUndoEnabled,
+					annotationPoints = UseStateResult
 				}),
-				Divider = reactModule.createElement(dividerModule, { LayoutOrder = 2 }),
-				ScreenshotAnnotation = reactModule.createElement("Frame", {
+				Divider = ReactModule.createElement(DividerModule, { LayoutOrder = 2 }),
+				ScreenshotAnnotation = ReactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 3,
 					ZIndex = 1,
 					Size = UDim2.new(1, 0, 1, -49)
 				}, {
-					Container = reactModule.createElement("Frame", {
+					Container = ReactModule.createElement("Frame", {
 						BackgroundTransparency = 1,
 						Size = UDim2.fromScale(1, 1),
 						AnchorPoint = Vector2.new(0.5, 0.5),
 						Position = UDim2.fromScale(0.5, 0.5)
 					}, {
-						Layout = reactModule.createElement("UIListLayout", {
+						Layout = ReactModule.createElement("UIListLayout", {
 							HorizontalAlignment = Enum.HorizontalAlignment.Center,
 							VerticalAlignment = Enum.VerticalAlignment.Center
 						}),
-						Padding = reactModule.createElement("UIPadding", {
+						Padding = ReactModule.createElement("UIPadding", {
 							PaddingTop = UDim.new(0, 16),
 							PaddingBottom = UDim.new(0, 16),
 							PaddingLeft = UDim.new(0, 16),
 							PaddingRight = UDim.new(0, 16)
 						}),
-						AnnotationLayer = reactModule.createElement("Frame", {
+						AnnotationLayer = ReactModule.createElement("Frame", {
 							BorderSizePixel = 2,
 							Size = UDim2.new(1, 0, 1, 0),
 							BorderMode = Enum.BorderMode.Outline,
 							BorderColor3 = Color3.fromRGB(255, 255, 255)
 						}, {
-							UIAspectRatioConstraint = reactModule.createElement("UIAspectRatioConstraint", { AspectRatio = p1.imageAspectRatio }),
-							ScreenshotImage = reactModule.createElement("ImageLabel", {
+							UIAspectRatioConstraint = ReactModule.createElement("UIAspectRatioConstraint", { AspectRatio = p1.imageAspectRatio }),
+							ScreenshotImage = ReactModule.createElement("ImageLabel", {
 								ZIndex = 1,
 								Size = UDim2.fromScale(1, 1),
 								Image = p1.screenshot,
 								ScaleType = Enum.ScaleType.Fit
 							}, {}),
-							Highlighter = reactModule.createElement(screenshotHighlighterModule, {
+							Highlighter = ReactModule.createElement(ScreenshotHighlighterModule, {
 								ZIndex = 3,
-								annotationPoints = var2,
-								handleAnnotationPoints = var8,
+								annotationPoints = UseStateResult,
+								handleAnnotationPoints = ReactModule.useCallback(function(_) --[[ Line: 118 ]]
+									-- upvalues: p1 (copy), UseResult (copy), UseStateResult2_1 (copy)
+									p1.reportAnythingAnalytics.incrementAnnotationPlace()
+									UseResult()
+									UseStateResult2_1({})
+								end, { UseStateResult2_1, UseResult, p1.reportAnythingAnalytics }),
 								setAnnotationCircleRadius = p1.setAnnotationCircleRadius,
 								setAnnotationAreaDimensions = p1.setAnnotationAreaDimensions
 							}, {})
@@ -214,7 +223,10 @@ return function(p1)
 					})
 				})
 			}),
-			Footer = if p1.isSmallPortraitMode then reactModule.createElement(PortraitModeFooter, { finishAnnotationAction = var11, annotationPoints = var2 }) else nil
+			Footer = if p1.isSmallPortraitMode then ReactModule.createElement(PortraitModeFooter, {
+				finishAnnotationAction = UseResult4,
+				annotationPoints = UseStateResult
+			}) else nil
 		})
 	})
 end

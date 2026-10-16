@@ -1,7 +1,7 @@
-﻿return function(p1, p2)
-	for i, v in p1 do
-		if p2(v, i) then
-			return v
+﻿return function(List, Callback) --[[ Line: 13 | Named "find" ]]
+	for i, value in List do
+		if Callback(value, i) then
+			return value
 		end
 	end
 	return nil

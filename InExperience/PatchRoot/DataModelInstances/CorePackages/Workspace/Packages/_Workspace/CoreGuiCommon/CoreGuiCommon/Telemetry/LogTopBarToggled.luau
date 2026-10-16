@@ -1,7 +1,7 @@
-﻿local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
-local telemetryService = game:GetService("TelemetryService")
-local telemetryServicePlaySessionInfoEnabledEngineFeature = game:GetEngineFeature("TelemetryServicePlaySessionInfoEnabled")
-local t = {
+﻿local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
+local TelemetryService = game:GetService("TelemetryService")
+local TelemetryServicePlaySessionInfoEnabledEngineFeature = game:GetEngineFeature("TelemetryServicePlaySessionInfoEnabled")
+local config = {
 	eventName = "topbar_toggled",
 	description = "Event fired every time TopBar is toggled open/close in UI-less mode",
 	links = "https://github.rbx.com/Roblox/proto-schemas/pull/6270",
@@ -10,26 +10,27 @@ local t = {
 	lastUpdated = { 25, 6, 10 }
 }
 
-return function(p1)
-	-- upvalues: telemetryServicePlaySessionInfoEnabledEngineFeature (ref), rbxAnalyticsService (ref), telemetryService (ref), t (ref)
-	local list, t_1
-	local _ = nil
-	local _ = nil
-	
-	if telemetryServicePlaySessionInfoEnabledEngineFeature then
-		list = {
+return function(p1) --[[ Line: 22 ]]
+	-- upvalues: TelemetryServicePlaySessionInfoEnabledEngineFeature (copy), RbxAnalyticsService (copy), TelemetryService (copy), config (copy)
+	local StandardizedFields = nil
+	local CustomFields = nil
+	if TelemetryServicePlaySessionInfoEnabledEngineFeature then
+		StandardizedFields = {
 			"addPlaceId",
 			"addUniverseId",
 			"addPlaySessionId",
 			"addSessionInfo"
 		}
-		t_1 = { is_toggled_on = tostring(p1) }
+		CustomFields = { is_toggled_on = tostring(p1) }
 	else
-		list = { "addPlaceId", "addUniverseId", "addSessionInfo" }
-		t_1 = {
+		StandardizedFields = { "addPlaceId", "addUniverseId", "addSessionInfo" }
+		CustomFields = {
 			is_toggled_on = tostring(p1),
-			playsessionid = rbxAnalyticsService:GetPlaySessionId()
+			playsessionid = RbxAnalyticsService:GetPlaySessionId()
 		}
 	end
-	telemetryService:LogEvent(t, { standardizedFields = list, customFields = t_1 })
+	TelemetryService:LogEvent(config, {
+		standardizedFields = StandardizedFields,
+		customFields = CustomFields
+	})
 end

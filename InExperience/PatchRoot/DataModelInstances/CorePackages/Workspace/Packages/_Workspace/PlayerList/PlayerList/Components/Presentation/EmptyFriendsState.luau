@@ -1,26 +1,26 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local foundationModule = require(parent_1.Foundation)
-local useLocalization = require(parent_1.Localization).Hooks.useLocalization
-local view = foundationModule.View
-local text = foundationModule.Text
-local fFlagPlayerListLocalizeGameTextModule = require(parent.Flags.FFlagPlayerListLocalizeGameText)
-local useLegacyAndTransparencyAwarePanelStyleModule = require(parent.Hooks.useLegacyAndTransparencyAwarePanelStyle)
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local FoundationModule = require(Parent1.Foundation)
+local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local FFlagPlayerListLocalizeGameTextModule = require(Parent.Flags.FFlagPlayerListLocalizeGameText)
+local UseLegacyAndTransparencyAwarePanelStyleModule = require(Parent.Hooks.useLegacyAndTransparencyAwarePanelStyle)
 
-return reactModule.memo(function(p1)
-	-- upvalues: useLegacyAndTransparencyAwarePanelStyleModule (ref), fFlagPlayerListLocalizeGameTextModule (ref), useLocalization (ref), reactModule (ref), view (ref), text (ref)
-	local var1 = useLegacyAndTransparencyAwarePanelStyleModule(p1.useLegacyPanelStyling)
+return ReactModule.memo(function(p1) --[[ Line: 20 | Named "EmptyFriendsStateImpl" ]]
+	-- upvalues: UseLegacyAndTransparencyAwarePanelStyleModule (copy), FFlagPlayerListLocalizeGameTextModule (copy), UseLocalizationFunction (copy), ReactModule (copy), View (copy), Text (copy)
+	local UseLegacyAndTransparencyAwarePanelStyleModuleResult = UseLegacyAndTransparencyAwarePanelStyleModule(p1.useLegacyPanelStyling)
 	
-	return reactModule.createElement(view, {
-		tag = var1.panelTag,
+	return ReactModule.createElement(View, {
+		tag = UseLegacyAndTransparencyAwarePanelStyleModuleResult.panelTag,
 		LayoutOrder = p1.layoutOrder,
-		backgroundStyle = var1.backgroundStyle
+		backgroundStyle = UseLegacyAndTransparencyAwarePanelStyleModuleResult.backgroundStyle
 	}, {
-		Message = reactModule.createElement(text, {
+		Message = ReactModule.createElement(Text, {
 			tag = "size-full-0 auto-y text-body-small text-align-x-center content-default",
 			TextWrapped = true,
-			Text = if fFlagPlayerListLocalizeGameTextModule then useLocalization({ friendsEmpty = "InGame.PlayerList.FriendsEmpty" }).friendsEmpty else "None of your friends have played this experience yet."
+			Text = if FFlagPlayerListLocalizeGameTextModule then UseLocalizationFunction({ friendsEmpty = "InGame.PlayerList.FriendsEmpty" }).friendsEmpty else "None of your friends have played this experience yet."
 		})
 	})
 end)

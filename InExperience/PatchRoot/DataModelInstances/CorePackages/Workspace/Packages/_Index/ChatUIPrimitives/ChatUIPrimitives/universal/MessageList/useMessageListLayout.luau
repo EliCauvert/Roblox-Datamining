@@ -1,20 +1,23 @@
-﻿local parent = script:FindFirstAncestor("ChatUIPrimitives").Parent
-local reactModule = require(parent.React)
-local viewRecyclerModule = require(parent.ViewRecycler)
+﻿local Parent = script:FindFirstAncestor("ChatUIPrimitives").Parent
+local ReactModule = require(Parent.React)
+local ViewRecyclerModule = require(Parent.ViewRecycler)
+local MessageInlineItemMetricsModule = require(script.Parent.Inline.MessageInlineItemMetrics)
 
-return function()
-	-- upvalues: reactModule (ref), viewRecyclerModule (ref)
-	local var1 = reactModule.useState(function()
-		-- upvalues: viewRecyclerModule (copy)
-		return viewRecyclerModule.Layout.measured({ estimatedItemLength = 48 })
+return function() --[[ Line: 7 | Named "useMessageListLayout" ]]
+	-- upvalues: ReactModule (copy), ViewRecyclerModule (copy), MessageInlineItemMetricsModule (copy)
+	local UseStateResult = ReactModule.useState(function() --[[ Line: 8 ]]
+		-- upvalues: ViewRecyclerModule (upval), MessageInlineItemMetricsModule (upval)
+		return ViewRecyclerModule.Layout.measured({
+			estimatedItemLength = MessageInlineItemMetricsModule.MIN_HEIGHT
+		})
 	end)
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref)
-		return function()
-			-- upvalues: var1 (copy)
-			var1.destroy()
+	ReactModule.useEffect(function() --[[ Line: 13 ]]
+		-- upvalues: UseStateResult (copy)
+		return function() --[[ Line: 14 ]]
+			-- upvalues: UseStateResult (upval)
+			UseStateResult.destroy()
 		end
-	end, { var1 })
+	end, { UseStateResult })
 	
-	return var1
+	return UseStateResult
 end

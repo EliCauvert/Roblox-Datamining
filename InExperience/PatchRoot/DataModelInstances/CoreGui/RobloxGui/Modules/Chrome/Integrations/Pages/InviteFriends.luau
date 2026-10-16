@@ -1,43 +1,41 @@
-﻿local chrome = script:FindFirstAncestor("Chrome")
-local corePackagesService = game:GetService("CorePackages")
-local playersService = game:GetService("Players")
-local runService = game:GetService("RunService")
-local chromeModule = require(corePackagesService.Workspace.Packages.Chrome)
-local gameInviteModalManager = require(corePackagesService.Workspace.Packages.GameInvite).GameInviteModalManager
-local appCommonLibModule = require(corePackagesService.Workspace.Packages.AppCommonLib)
-local serviceModule = require(chrome.Service)
-local commonIconModule = require(chrome.Integrations.CommonIcon)
-local mappedSignal = require(chrome.ChromeShared.Service.ChromeUtils).MappedSignal
-local sideSheetPlacement = chromeModule.Enums.SideSheetPlacement
-local signal = appCommonLibModule.Signal
-local inGameMenuIntegrationUtilsModule = require(script.Parent.InGameMenuIntegrationUtils)
-local fFlagConnectionsToFriendsRename = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagConnectionsToFriendsRename
-local var1 = signal.new()
-local var2 = mappedSignal.new(var1, function()
-	-- upvalues: gameInviteModalManager (ref)
-	return gameInviteModalManager:isGameModalOpen()
+﻿local Chrome = script:FindFirstAncestor("Chrome")
+local CorePackages = game:GetService("CorePackages")
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local GameInviteModalManager = require(CorePackages.Workspace.Packages.GameInvite).GameInviteModalManager
+local ServiceModule = require(Chrome.Service)
+local CommonIconModule = require(Chrome.Integrations.CommonIcon)
+local SideSheetPlacement = require(CorePackages.Workspace.Packages.Chrome).Enums.SideSheetPlacement
+local InGameMenuIntegrationUtilsModule = require(script.Parent.InGameMenuIntegrationUtils)
+local NewResult = require(CorePackages.Workspace.Packages.AppCommonLib).Signal.new()
+local NewResult1 = require(Chrome.ChromeShared.Service.ChromeUtils).MappedSignal.new(NewResult, function() --[[ Line: 22 ]]
+	-- upvalues: GameInviteModalManager (copy)
+	return GameInviteModalManager:isGameModalOpen()
 end)
-gameInviteModalManager.ToggleGameInviteModalEvent.Event:Connect(function()
-	-- upvalues: var1 (ref)
-	var1:fire()
+GameInviteModalManager.ToggleGameInviteModalEvent.Event:Connect(function() --[[ Line: 25 ]]
+	-- upvalues: NewResult (copy)
+	NewResult:fire()
 end)
 
-local function _()
-	-- upvalues: runService (ref), playersService (ref)
-	return not runService:IsStudio() and (playersService.LocalPlayer ~= nil and playersService.LocalPlayer.UserId > 0)
+local function _(): boolean --[[ Line: 29 | Named "shouldShowInviteFriends" ]]
+	-- upvalues: RunService (copy), Players (copy)
+	return not RunService:IsStudio() and (Players.LocalPlayer ~= nil and Players.LocalPlayer.UserId > 0)
 end
 
-return serviceModule:register({
+local config = {
 	id = "invite_friends",
-	initialAvailability = if not runService:IsStudio() and (playersService.LocalPlayer ~= nil and playersService.LocalPlayer.UserId > 0) then serviceModule.AvailabilitySignal.Available else serviceModule.AvailabilitySignal.Unavailable,
-	label = if fFlagConnectionsToFriendsRename then "CoreScripts.InGameMenu.PageTitle.InviteFriends" else "CommonUI.Features.Label.InviteConnections",
-	sideSheetPlacement = sideSheetPlacement.AboveFold,
-	activated = inGameMenuIntegrationUtilsModule.toggleInviteFriendsPage,
-	isActivated = var2,
+	label = "CoreScripts.InGameMenu.PageTitle.InviteFriends",
+	initialAvailability = if IsUserIdAbove then ServiceModule.AvailabilitySignal.Available else ServiceModule.AvailabilitySignal.Unavailable,
+	sideSheetPlacement = SideSheetPlacement.AboveFold,
+	activated = InGameMenuIntegrationUtilsModule.toggleInviteFriendsPage,
+	isActivated = NewResult1,
 	components = {
-		Icon = function()
-			-- upvalues: commonIconModule (ref), var2 (ref)
-			return commonIconModule("PersonArrowFromBottomRight", nil, var2)
+		Icon = function() --[[ Line: 43 ]]
+			-- upvalues: CommonIconModule (copy), NewResult1 (copy)
+			return CommonIconModule("PersonArrowFromBottomRight", nil, NewResult1)
 		end
 	}
-})
+}
+local IsUserIdAbove: boolean = not RunService:IsStudio() and (Players.LocalPlayer ~= nil and Players.LocalPlayer.UserId > 0)
+
+return ServiceModule:register(config)

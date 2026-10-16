@@ -1,141 +1,139 @@
-﻿local profileQRCode = script:FindFirstAncestor("ProfileQRCode")
-local parent = profileQRCode.Parent
-local QRCodeDisplayModule = require(parent.QRCodeDisplay)
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-local userLibModule = require(parent.UserLib)
-local images = UIBloxModule.App.ImageSet.Images
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local lightTheme = UIBloxModule.App.Style.Themes.LightTheme
-local styledTextLabel = UIBloxModule.App.Text.StyledTextLabel
-local openTypeSupport = UIBloxModule.Utility.OpenTypeSupport
-local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
-local useLocalUserInfoModule = require(profileQRCode.Utils.useLocalUserInfo)
-local useStyle = UIBloxModule.Core.Style.useStyle
-local fFlagProfileQrCodeDeprecateUserReduxModule = require(profileQRCode.Flags.FFlagProfileQrCodeDeprecateUserRedux)
-local displayQRCode = QRCodeDisplayModule.DisplayQRCode
-local getStandardSizeAvatarHeadShotRbxthumb = userLibModule.Utils.getStandardSizeAvatarHeadShotRbxthumb
-local getFFlagLuaAppEnableOpenTypeSupport = require(parent.SharedFlags).GetFFlagLuaAppEnableOpenTypeSupport
-local dropshadow568 = images["component_assets/dropshadow_56_8"]
+﻿local ProfileQRCode = script:FindFirstAncestor("ProfileQRCode")
+local Parent = ProfileQRCode.Parent
+local QRCodeDisplayModule = require(Parent.QRCodeDisplay)
+local ReactModule = require(Parent.React)
+local UIBloxModule = require(Parent.UIBlox)
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local LightTheme = UIBloxModule.App.Style.Themes.LightTheme
+local StyledTextLabel = UIBloxModule.App.Text.StyledTextLabel
+local OpenTypeSupport = UIBloxModule.Utility.OpenTypeSupport
+local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
+local UseLocalUserInfoModule = require(ProfileQRCode.Utils.useLocalUserInfo)
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local FFlagProfileQrCodeDeprecateUserReduxModule = require(ProfileQRCode.Flags.FFlagProfileQrCodeDeprecateUserRedux)
+local DisplayQRCode = QRCodeDisplayModule.DisplayQRCode
+local GetStandardSizeAvatarHeadShotRbxthumbFunction = require(Parent.UserLib).Utils.getStandardSizeAvatarHeadShotRbxthumb
+local GetFFlagLuaAppEnableOpenTypeSupportFunction = require(Parent.SharedFlags).GetFFlagLuaAppEnableOpenTypeSupport
+local ComponentAssetsDropshadow568 = UIBloxModule.App.ImageSet.Images["component_assets/dropshadow_56_8"]
 
-return function(p1)
-	-- upvalues: useLocalUserId (ref), useLocalUserInfoModule (ref), useStyle (ref), getStandardSizeAvatarHeadShotRbxthumb (ref), reactModule (ref), lightTheme (ref), displayQRCode (ref), QRCodeDisplayModule (ref), imageSetLabel (ref), dropshadow568 (ref), styledTextLabel (ref), fFlagProfileQrCodeDeprecateUserReduxModule (ref), getFFlagLuaAppEnableOpenTypeSupport (ref), openTypeSupport (ref)
-	local var1 = useLocalUserId()
-	local var2 = useLocalUserInfoModule(var1)
-	local var3 = useStyle()
+return function(p1) --[[ Line: 40 ]]
+	-- upvalues: UseLocalUserIdFunction (copy), UseLocalUserInfoModule (copy), UseStyleFunction (copy), GetStandardSizeAvatarHeadShotRbxthumbFunction (copy), ReactModule (copy), LightTheme (copy), DisplayQRCode (copy), QRCodeDisplayModule (copy), ImageSetLabel (copy), ComponentAssetsDropshadow568 (copy), StyledTextLabel (copy), FFlagProfileQrCodeDeprecateUserReduxModule (copy), GetFFlagLuaAppEnableOpenTypeSupportFunction (copy), OpenTypeSupport (copy)
+	local UseLocalUserIdResult = UseLocalUserIdFunction()
+	local UseLocalUserInfoModuleResult = UseLocalUserInfoModule(UseLocalUserIdResult)
+	local UseStyleResult = UseStyleFunction()
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
-		BackgroundTransparency = lightTheme.BackgroundUIDefault.Transparency,
-		BackgroundColor3 = lightTheme.BackgroundUIDefault.Color,
+		BackgroundTransparency = LightTheme.BackgroundUIDefault.Transparency,
+		BackgroundColor3 = LightTheme.BackgroundUIDefault.Color,
 		Size = UDim2.new(1, 0, 1, 0)
 	}, {
-		Layout = reactModule.createElement("UIListLayout", {
+		Layout = ReactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
 			SortOrder = Enum.SortOrder.LayoutOrder
 		}),
-		Padding = reactModule.createElement("UIPadding", {
+		Padding = ReactModule.createElement("UIPadding", {
 			PaddingTop = UDim.new(0, if p1.isSmallScreen then p1.padding / 2 else p1.padding),
 			PaddingRight = UDim.new(0, p1.padding),
 			PaddingBottom = UDim.new(0, if p1.isSmallScreen then p1.padding / 2 else p1.padding),
 			PaddingLeft = UDim.new(0, p1.padding)
 		}),
-		QRCodeWrapper = reactModule.createElement("Frame", {
+		QRCodeWrapper = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 1,
 			Size = UDim2.new(0, p1.qrCodeLength, 0, p1.qrCodeLength)
 		}, {
-			QRCode = reactModule.createElement(displayQRCode, {
+			QRCode = ReactModule.createElement(DisplayQRCode, {
 				qrCodeRotation = 15,
 				toEncode = p1.url,
 				ecLevel = QRCodeDisplayModule.ECLevels.EC_LEVEL_4,
 				sideLength = p1.qrCodeLength,
-				pixelColor = lightTheme.UIEmphasis.Color
+				pixelColor = LightTheme.UIEmphasis.Color
 			}),
-			PlayerAvatar = reactModule.createElement("Frame", {
+			PlayerAvatar = ReactModule.createElement("Frame", {
 				Rotation = 15,
 				ZIndex = 3,
 				AnchorPoint = Vector2.new(0.5, 0.5),
-				BackgroundColor3 = lightTheme.BackgroundUIDefault.Color,
-				BackgroundTransparency = lightTheme.BackgroundUIDefault.Transparency,
+				BackgroundColor3 = LightTheme.BackgroundUIDefault.Color,
+				BackgroundTransparency = LightTheme.BackgroundUIDefault.Transparency,
 				Position = UDim2.fromScale(0.5, 0.5),
 				Size = UDim2.fromOffset(44, 44)
 			}, {
-				Canvas = reactModule.createElement("CanvasGroup", {
+				Canvas = ReactModule.createElement("CanvasGroup", {
 					BorderSizePixel = 0,
 					ClipsDescendants = true,
-					BackgroundColor3 = lightTheme.BackgroundUIDefault.Color,
-					BackgroundTransparency = lightTheme.BackgroundUIDefault.Transparency,
+					BackgroundColor3 = LightTheme.BackgroundUIDefault.Color,
+					BackgroundTransparency = LightTheme.BackgroundUIDefault.Transparency,
 					Size = UDim2.fromScale(1, 1)
 				}, {
-					Avatar = reactModule.createElement("ImageLabel", {
+					Avatar = ReactModule.createElement("ImageLabel", {
 						BorderSizePixel = 0,
 						Rotation = -15,
 						ZIndex = 2,
 						AnchorPoint = Vector2.new(0.5, 0.5),
-						BackgroundColor3 = lightTheme.BackgroundUIDefault.Color,
-						BackgroundTransparency = lightTheme.BackgroundUIDefault.Transparency,
-						Image = if var1 then getStandardSizeAvatarHeadShotRbxthumb(var1) else nil,
+						BackgroundColor3 = LightTheme.BackgroundUIDefault.Color,
+						BackgroundTransparency = LightTheme.BackgroundUIDefault.Transparency,
+						Image = if UseLocalUserIdResult then GetStandardSizeAvatarHeadShotRbxthumbFunction(UseLocalUserIdResult) else nil,
 						Position = UDim2.fromScale(0.5, 0.5),
 						Size = UDim2.fromOffset(60, 60)
 					})
 				}),
-				UIStroke = reactModule.createElement("UIStroke", {
+				UIStroke = ReactModule.createElement("UIStroke", {
 					Thickness = 2,
-					Color = lightTheme.BackgroundUIDefault.Color
+					Color = LightTheme.BackgroundUIDefault.Color
 				})
 			}),
-			BigShadow = reactModule.createElement(imageSetLabel, {
+			BigShadow = ReactModule.createElement(ImageSetLabel, {
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
 				ZIndex = 2,
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Position = UDim2.new(0.5, 0, 0.5, 0),
 				Size = UDim2.new(0, 70, 0, 70),
-				Image = dropshadow568,
+				Image = ComponentAssetsDropshadow568,
 				ScaleType = Enum.ScaleType.Slice,
 				SliceCenter = Rect.new(28, 28, 29, 29),
-				ImageColor3 = var3.Theme.DropShadow.Color,
-				ImageTransparency = var3.Theme.DropShadow.Transparency
+				ImageColor3 = UseStyleResult.Theme.DropShadow.Color,
+				ImageTransparency = UseStyleResult.Theme.DropShadow.Transparency
 			})
 		}),
-		Spacer1 = reactModule.createElement("Frame", {
+		Spacer1 = ReactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			BackgroundTransparency = 1,
 			LayoutOrder = 2,
 			Size = UDim2.new(0, 0, 0, 10)
 		}),
-		DisplayName = reactModule.createElement(styledTextLabel, {
+		DisplayName = ReactModule.createElement(StyledTextLabel, {
 			layoutOrder = 3,
 			lineHeight = 1,
 			fluidSizing = false,
 			richText = false,
-			text = var2.displayName,
-			fontStyle = var3.Font.SubHeader1,
-			colorStyle = lightTheme.TextEmphasis,
+			text = UseLocalUserInfoModuleResult.displayName,
+			fontStyle = UseStyleResult.Font.SubHeader1,
+			colorStyle = LightTheme.TextEmphasis,
 			automaticSize = Enum.AutomaticSize.Y,
 			textTruncate = Enum.TextTruncate.AtEnd,
 			textXAlignment = Enum.TextXAlignment.Center,
 			textYAlignment = Enum.TextYAlignment.Center,
 			size = UDim2.new(1, 0, 0, 0)
 		}),
-		Username = reactModule.createElement(styledTextLabel, {
+		Username = ReactModule.createElement(StyledTextLabel, {
 			layoutOrder = 4,
 			lineHeight = 1,
 			fluidSizing = false,
 			richText = false,
 			size = UDim2.new(1, 0, 0, 0),
-			text = "@" .. (if fFlagProfileQrCodeDeprecateUserReduxModule then var2.username or "" else var2.username),
-			fontStyle = var3.Font.CaptionBody,
+			text = "@" .. (if FFlagProfileQrCodeDeprecateUserReduxModule then UseLocalUserInfoModuleResult.username or "" else UseLocalUserInfoModuleResult.username),
+			fontStyle = UseStyleResult.Font.CaptionBody,
 			automaticSize = Enum.AutomaticSize.Y,
-			colorStyle = lightTheme.TextEmphasis,
+			colorStyle = LightTheme.TextEmphasis,
 			textTruncate = Enum.TextTruncate.AtEnd,
 			textXAlignment = Enum.TextXAlignment.Center,
 			textYAlignment = Enum.TextYAlignment.Center,
-			openTypeFeatures = if getFFlagLuaAppEnableOpenTypeSupport() then openTypeSupport:getUserNameStylisticAlternative() else nil
+			openTypeFeatures = if GetFFlagLuaAppEnableOpenTypeSupportFunction() then OpenTypeSupport:getUserNameStylisticAlternative() else nil
 		}),
-		UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0.05, 0) })
+		UICorner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0.05, 0) })
 	})
 end

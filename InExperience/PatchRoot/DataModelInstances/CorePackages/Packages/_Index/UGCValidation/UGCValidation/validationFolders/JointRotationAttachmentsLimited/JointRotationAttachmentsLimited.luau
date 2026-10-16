@@ -1,74 +1,75 @@
-﻿local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local getDiffBetweenOrientationsModule = require(parent.util.getDiffBetweenOrientations)
-local valueToStringModule = require(parent.util.valueToString)
-local getAllInstancesWithNameModule = require(parent.util.getAllInstancesWithName)
-local r15plusUtilsModule = require(parent.util.R15plusUtils)
-local t = {
-	categories = {
-		validationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
-		validationEnumsModule.UploadCategory.DYNAMIC_HEAD
-	},
-	requiredData = { validationEnumsModule.SharedDataMember.rootInstance },
-	fflag = r15plusUtilsModule.checkFlagEnabledForAllowHrd
-}
+﻿local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local GetDiffBetweenOrientationsModule = require(Parent.util.getDiffBetweenOrientations)
+local ValueToStringModule = require(Parent.util.valueToString)
+local GetAllInstancesWithNameModule = require(Parent.util.getAllInstancesWithName)
+local R15plusUtilsModule = require(Parent.util.R15plusUtils)
 local UGCValidationJointRotationMaximumHundredthPositionOffset = game:DefineFastInt("UGCValidationJointRotationMaximumHundredthPositionOffset", 1)
 local UGCValidationJointRotationMaximumDegreeOrientationOffset = game:DefineFastInt("UGCValidationJointRotationMaximumDegreeOrientationOffset", 1)
-local t_1 = {
+local config = {
 	[Enum.AssetType.Torso] = {
 		RightShoulderRigAttachment = CFrame.fromOrientation(0, 0, 0),
-		LeftShoulderRigAttachment = CFrame.fromOrientation(0, 3.14159265359, 0)
+		LeftShoulderRigAttachment = CFrame.fromOrientation(0, 3.141592653589793, 0)
 	},
 	[Enum.AssetType.RightArm] = {
-		RightShoulderRigAttachment = CFrame.fromOrientation(0, 0, -1.570796326795)
+		RightShoulderRigAttachment = CFrame.fromOrientation(0, 0, -1.5707963267948966)
 	},
 	[Enum.AssetType.LeftArm] = {
-		LeftShoulderRigAttachment = CFrame.fromOrientation(0, 3.14159265359, -1.570796326795)
+		LeftShoulderRigAttachment = CFrame.fromOrientation(0, 3.141592653589793, -1.5707963267948966)
 	}
 }
 
-function t.run(p1, p2)
-	-- upvalues: getAllInstancesWithNameModule (ref), r15plusUtilsModule (ref), errorSourceStringsModule (ref), t_1 (ref), getDiffBetweenOrientationsModule (ref), UGCValidationJointRotationMaximumDegreeOrientationOffset (ref), valueToStringModule (ref), UGCValidationJointRotationMaximumHundredthPositionOffset (ref)
-	local t = {
-		LeftShoulderRigAttachment = 0,
-		RightShoulderRigAttachment = 0
-	}
-	
-	for i, v in getAllInstancesWithNameModule(p2.rootInstance, r15plusUtilsModule.JointRotationName) do
-		local parent = v.Parent
-		p1:setReportingInstance(v)
+return {
+	categories = {
+		ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
+		ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD
+	},
+	requiredData = { ValidationEnumsModule.SharedDataMember.rootInstance },
+	fflag = R15plusUtilsModule.checkFlagEnabledForAllowHrd,
+	run = function(p1, p2) --[[ Line: 36 ]]
+		-- upvalues: GetAllInstancesWithNameModule (copy), R15plusUtilsModule (copy), ErrorSourceStringsModule (copy), config (copy), GetDiffBetweenOrientationsModule (copy), UGCValidationJointRotationMaximumDegreeOrientationOffset (copy), ValueToStringModule (copy), UGCValidationJointRotationMaximumHundredthPositionOffset (copy)
+		local config1 = {
+			LeftShoulderRigAttachment = 0,
+			RightShoulderRigAttachment = 0
+		}
 		
-		if v.ClassName ~= "Attachment" or not parent:IsA("Attachment") then
-			p1:fail(errorSourceStringsModule.Keys.JointRotAtt_WrongInstanceClass, { instPath = v:GetFullName() })
-		elseif t[parent.Name] == nil then
-			p1:fail(errorSourceStringsModule.Keys.JointRotAtt_UnrecognizedParent, { parentPath = parent:GetFullName() })
-		elseif t[parent.Name] == 1 then
-			p1:fail(errorSourceStringsModule.Keys.JointRotAtt_MultipleAttachments, { parentPath = parent:GetFullName() })
-		else
-			t[parent.Name] += 1
+		for _, Attachment in GetAllInstancesWithNameModule(p2.rootInstance, R15plusUtilsModule.JointRotationName) do
+			local Parent = Attachment.Parent
+			p1:setReportingInstance(Attachment)
 			
-			if t_1[p2.uploadEnum.assetType] ~= nil and t_1[p2.uploadEnum.assetType][parent.Name] ~= nil then
-				local name = t_1[p2.uploadEnum.assetType][parent.Name]
-				local cFrame = v.CFrame
+			if Attachment.ClassName ~= "Attachment" or not Parent:IsA("Attachment") then
+				p1:fail(ErrorSourceStringsModule.Keys.JointRotAtt_WrongInstanceClass, { instPath = Attachment:GetFullName() })
+				continue
+			end
+			if config1[Parent.Name] == nil then
+				p1:fail(ErrorSourceStringsModule.Keys.JointRotAtt_UnrecognizedParent, { parentPath = Parent:GetFullName() })
+			elseif config1[Parent.Name] == 1 then
+				p1:fail(ErrorSourceStringsModule.Keys.JointRotAtt_MultipleAttachments, { parentPath = Parent:GetFullName() })
+			else
+				local Name = Parent.Name
+				config1[Name] += 1
 				
-				if UGCValidationJointRotationMaximumDegreeOrientationOffset < getDiffBetweenOrientationsModule(name, cFrame) then
-					local vector3 = Vector3.new(name:ToOrientation())
-					p1:fail(errorSourceStringsModule.Keys.JointRotAtt_Rotated, {
-						instPath = v:GetFullName(),
-						expectedOrientation = valueToStringModule(Vector3.new(math.deg(vector3.X), math.deg(vector3.Y), math.deg(vector3.Z)))
-					})
-				end
-				if UGCValidationJointRotationMaximumHundredthPositionOffset / 100 < (cFrame.Position - Vector3.new(0, 0, 0)).Magnitude then
-					p1:fail(errorSourceStringsModule.Keys.JointRotAtt_Moved, {
-						instPath = v:GetFullName(),
-						expectedPosition = valueToStringModule(Vector3.new(0, 0, 0))
-					})
+				if config[p2.uploadEnum.assetType] ~= nil and config[p2.uploadEnum.assetType][Parent.Name] ~= nil then
+					local Entry = config[p2.uploadEnum.assetType][Parent.Name]
+					local AttachmentCFrame = Attachment.CFrame
+					
+					if UGCValidationJointRotationMaximumDegreeOrientationOffset < GetDiffBetweenOrientationsModule(Entry, AttachmentCFrame) then
+						local _Vector3 = Vector3.new(Entry:ToOrientation())
+						p1:fail(ErrorSourceStringsModule.Keys.JointRotAtt_Rotated, {
+							instPath = Attachment:GetFullName(),
+							expectedOrientation = ValueToStringModule((Vector3.new(math.deg(_Vector3.X), math.deg(_Vector3.Y), (math.deg(_Vector3.Z)))))
+						})
+					end
+					if UGCValidationJointRotationMaximumHundredthPositionOffset / 100 < (AttachmentCFrame.Position - vector.create(0, 0, 0)).Magnitude then
+						p1:fail(ErrorSourceStringsModule.Keys.JointRotAtt_Moved, {
+							instPath = Attachment:GetFullName(),
+							expectedPosition = ValueToStringModule(vector.create(0, 0, 0))
+						})
+					end
 				end
 			end
 		end
 	end
-end
-
-return t
+}

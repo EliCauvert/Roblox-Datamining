@@ -1,47 +1,47 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local foundationModule = require(parent_1.Foundation)
-local view = foundationModule.View
-local text = foundationModule.Text
-local localizationService = game:GetService("LocalizationService")
-local useLocalization = require(parent_1.Localization).Hooks.useLocalization
-local formatNumberModule = require(parent.Utility.formatNumber)
-local _ = require(parent.Api.PaymentsGateway.GetUpsellSuggestionsTypes)
-local _ = require(parent.Enums.BadgeType)
-local _ = require(parent.Enums.VirtualItemBadgeType)
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local FoundationModule = require(Parent1.Foundation)
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local LocalizationService = game:GetService("LocalizationService")
+local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
+local FormatNumberModule = require(Parent.Utility.formatNumber)
+local _ = require(Parent.Api.PaymentsGateway.GetUpsellSuggestionsTypes)
+local _ = require(Parent.Enums.BadgeType)
+local _ = require(Parent.Enums.VirtualItemBadgeType)
 
-return function(p1)
-	-- upvalues: useLocalization (ref), reactModule (ref), view (ref), text (ref), formatNumberModule (ref), localizationService (ref)
-	local var1 = useLocalization({
+return function(p1) --[[ Line: 33 | Named "RobuxUpsellModalUpsellDetailsWithBonus" ]]
+	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), View (copy), Text (copy), FormatNumberModule (copy), LocalizationService (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
 		MoreRobux = "IAPExperience.RobuxUpsell.Text.MoreRobux",
 		Bonus = "IAPExperience.RobuxUpsell.Text.Bonus"
 	})
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "flex-x-between\tflex-y-fill size-full-1700 radius-medium padding-x-large padding-y-medium row bg-surface-300 stroke-emphasis stroke-standard",
 		LayoutOrder = p1.layoutOrder
 	}, {
-		LeftSide = reactModule.createElement(view, {
+		LeftSide = ReactModule.createElement(View, {
 			LayoutOrder = 1,
 			tag = "auto-xy col align-y-top align-x-left gap-small"
 		}, {
-			BonusLabel = reactModule.createElement(text, {
+			BonusLabel = ReactModule.createElement(Text, {
 				LayoutOrder = 1,
 				tag = "auto-xy text-label-small content-default",
-				Text = var1.MoreRobux
+				Text = UseLocalizationResult.MoreRobux
 			}),
-			RobuxAmount = reactModule.createElement(text, {
+			RobuxAmount = ReactModule.createElement(Text, {
 				LayoutOrder = 2,
 				tag = "auto-xy text-title-large content-emphasis text-align-x-left",
-				Text = utf8.char(57346) .. " " .. formatNumberModule(localizationService.RobloxLocaleId, p1.robuxAmount) .. " + " .. formatNumberModule(localizationService.RobloxLocaleId, p1.bonusAmount) .. " " .. var4.Bonus
+				Text = utf8.char(57346) .. " " .. FormatNumberModule(LocalizationService.RobloxLocaleId, p1.robuxAmount) .. " + " .. FormatNumberModule(LocalizationService.RobloxLocaleId, p1.bonusAmount) .. " " .. UseLocalizationResult.Bonus
 			})
 		}),
-		RightSide = reactModule.createElement(view, {
+		RightSide = ReactModule.createElement(View, {
 			LayoutOrder = 2,
 			tag = "auto-xy row align-y-center align-x-right"
 		}, {
-			RobuxPrice = reactModule.createElement(text, {
+			RobuxPrice = ReactModule.createElement(Text, {
 				tag = "auto-xy text-title-large content-emphasis text-align-x-right",
 				Text = p1.priceString or ""
 			})

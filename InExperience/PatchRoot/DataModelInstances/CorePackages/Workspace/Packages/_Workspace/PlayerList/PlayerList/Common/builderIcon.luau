@@ -1,7 +1,7 @@
-﻿return function(p1, p2)
+﻿return function(Name, p1) --[[ Line: 1 | Named "builderIcon" ]]
 	return {
 		isFoundationIcon = true,
-		name = p1,
-		variant = p2 or "Regular"
+		name = Name,
+		variant = p1 or "Regular"
 	}
 end

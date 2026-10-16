@@ -1,16 +1,16 @@
-﻿local authCommon = script:FindFirstAncestor("AuthCommon")
-local appStorageUtilitiesModule = require(authCommon.Utils.AppStorageUtilities)
-local cryoModule = require(authCommon.Parent.Cryo)
+﻿local AuthCommon = script:FindFirstAncestor("AuthCommon")
+local AppStorageUtilitiesModule = require(AuthCommon.Utils.AppStorageUtilities)
+local CryoModule = require(AuthCommon.Parent.Cryo)
 
-return function(p1, p2)
-	-- upvalues: appStorageUtilitiesModule (ref), cryoModule (ref)
-	local previousAccountsList = appStorageUtilitiesModule.getPreviousAccountsList()
-	local var1 = previousAccountsList[p1]
+return function(Key, p1): boolean --[[ Line: 7 | Named "updateLoginEntryData" ]]
+	-- upvalues: AppStorageUtilitiesModule (copy), CryoModule (copy)
+	local PreviousAccountsList = AppStorageUtilitiesModule.getPreviousAccountsList()
+	local PreviousAccounts = PreviousAccountsList[Key]
 	
-	if var1 then
-		previousAccountsList[p1] = cryoModule.Dictionary.join(var1, p2)
+	if PreviousAccounts then
+		PreviousAccountsList[Key] = CryoModule.Dictionary.join(PreviousAccounts, p1)
 	end
-	appStorageUtilitiesModule.setPreviousAccountsList(previousAccountsList)
+	AppStorageUtilitiesModule.setPreviousAccountsList(PreviousAccountsList)
 	
 	return true
 end

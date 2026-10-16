@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CorePackages").Packages.Graphing)
+﻿return (require(game:GetService("CorePackages").Packages.Graphing))

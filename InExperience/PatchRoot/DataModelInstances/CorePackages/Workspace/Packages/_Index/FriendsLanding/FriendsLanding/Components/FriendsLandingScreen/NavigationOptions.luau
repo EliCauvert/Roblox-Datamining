@@ -1,12 +1,10 @@
-﻿local friendsLanding = script:FindFirstAncestor("FriendsLanding")
-local parent = friendsLanding.Parent
-local roact = require(friendsLanding.dependencies).Roact
-local localizedKeysModule = require(friendsLanding.Enums.LocalizedKeys)
-local headerBarRightViewModule = require(friendsLanding.Components.HeaderBarRightView)
-local fFlagConnectionsToFriendsRename = require(parent.SharedFlags).FFlagConnectionsToFriendsRename
+﻿local FriendsLanding = script:FindFirstAncestor("FriendsLanding")
+local Roact = require(FriendsLanding.dependencies).Roact
+local LocalizedKeysModule = require(FriendsLanding.Enums.LocalizedKeys)
+local HeaderBarRightViewModule = require(FriendsLanding.Components.HeaderBarRightView)
 
-return function(p1)
-	-- upvalues: fFlagConnectionsToFriendsRename (ref), localizedKeysModule (ref), roact (ref), headerBarRightViewModule (ref)
+return function(p1) --[[ Line: 9 ]]
+	-- upvalues: LocalizedKeysModule (copy), Roact (copy), HeaderBarRightViewModule (copy)
 	return {
 		useSecondaryHeader = true,
 		shouldExitNavigation = false,
@@ -15,11 +13,11 @@ return function(p1)
 		absorbInputSelectable = false,
 		headerText = {
 			shouldLocalize = true,
-			raw = if fFlagConnectionsToFriendsRename then localizedKeysModule.FriendsHeader.rawValue() else localizedKeysModule.ConnectionsHeader.rawValue()
+			raw = LocalizedKeysModule.FriendsHeader.rawValue()
 		},
-		renderRight = function()
-			-- upvalues: roact (copy), headerBarRightViewModule (copy), p1 (ref)
-			return roact.createElement(headerBarRightViewModule, p1)
+		renderRight = function() --[[ Line: 18 ]]
+			-- upvalues: Roact (upval), HeaderBarRightViewModule (upval), p1 (copy)
+			return Roact.createElement(HeaderBarRightViewModule, p1)
 		end
 	}
 end

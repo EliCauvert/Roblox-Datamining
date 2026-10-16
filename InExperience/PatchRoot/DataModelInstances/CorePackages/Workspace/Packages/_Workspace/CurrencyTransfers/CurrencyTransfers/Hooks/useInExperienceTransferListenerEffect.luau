@@ -1,46 +1,46 @@
-﻿local httpService = game:GetService("HttpService")
-local marketplaceService = game:GetService("MarketplaceService")
-local playersService = game:GetService("Players")
-local currencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
-local parent = currencyTransfers.Parent
-local reactModule = require(parent.React)
-local loggingProtocolModule = require(parent.LoggingProtocol)
-local currencyTransferTelemetryModule = require(currencyTransfers.Events.CurrencyTransferTelemetry)
-local transferDirectionModule = require(currencyTransfers.Enums.TransferDirection)
-local transferOriginationModule = require(currencyTransfers.Enums.TransferOrigination)
-local _ = require(currencyTransfers.Flows.InExperienceTransferFlow)
+﻿local HttpService = game:GetService("HttpService")
+local MarketplaceService = game:GetService("MarketplaceService")
+local Players = game:GetService("Players")
+local CurrencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
+local Parent = CurrencyTransfers.Parent
+local ReactModule = require(Parent.React)
+local LoggingProtocolModule = require(Parent.LoggingProtocol)
+local CurrencyTransferTelemetryModule = require(CurrencyTransfers.Events.CurrencyTransferTelemetry)
+local TransferDirectionModule = require(CurrencyTransfers.Enums.TransferDirection)
+local TransferOriginationModule = require(CurrencyTransfers.Enums.TransferOrigination)
+local _ = require(CurrencyTransfers.Flows.InExperienceTransferFlow)
 
-return function(p1)
-	-- upvalues: reactModule (ref), marketplaceService (ref), playersService (ref), httpService (ref), loggingProtocolModule (ref), currencyTransferTelemetryModule (ref), transferDirectionModule (ref), transferOriginationModule (ref)
-	reactModule.useEffect(function()
-		-- upvalues: marketplaceService (copy), playersService (copy), httpService (copy), loggingProtocolModule (copy), currencyTransferTelemetryModule (copy), transferDirectionModule (copy), transferOriginationModule (copy), p1 (ref)
-		local promptRobuxTransferRequestedConnection = marketplaceService.PromptRobuxTransferRequested:Connect(function(p2, p3)
-			-- upvalues: playersService (copy), httpService (copy), loggingProtocolModule (copy), currencyTransferTelemetryModule (copy), transferDirectionModule (copy), transferOriginationModule (copy), p1 (copy)
-			if p2 == playersService.LocalPlayer then
-				local ok, status = pcall(function()
-					-- upvalues: httpService (copy), p3 (ref)
-					return httpService:JSONDecode(p3)
+return function(Callback) --[[ Line: 19 | Named "useInExperienceTransferListenerEffect" ]]
+	-- upvalues: ReactModule (copy), MarketplaceService (copy), Players (copy), HttpService (copy), LoggingProtocolModule (copy), CurrencyTransferTelemetryModule (copy), TransferDirectionModule (copy), TransferOriginationModule (copy)
+	ReactModule.useEffect(function() --[[ Line: 20 ]]
+		-- upvalues: MarketplaceService (upval), Players (upval), HttpService (upval), LoggingProtocolModule (upval), CurrencyTransferTelemetryModule (upval), TransferDirectionModule (upval), TransferOriginationModule (upval), Callback (copy)
+		local PromptRobuxTransferRequestedConnection = MarketplaceService.PromptRobuxTransferRequested:Connect(function(Player, JsonResponse) --[[ Line: 22 ]]
+			-- upvalues: Players (upval), HttpService (upval), LoggingProtocolModule (upval), CurrencyTransferTelemetryModule (upval), TransferDirectionModule (upval), TransferOriginationModule (upval), Callback (upval)
+			if Player == Players.LocalPlayer then
+				local Success, Result = pcall(function() --[[ Line: 24 ]]
+					-- upvalues: HttpService (upval), JsonResponse (copy)
+					return HttpService:JSONDecode(JsonResponse)
 				end)
 				
-				if not ok then
+				if not Success then
 					warn("[InExperienceTransfer] Failed to decode transfer response")
 				end
-				if ok and status then
-					loggingProtocolModule.default:logRobloxTelemetryCounter(currencyTransferTelemetryModule.CurrencyTransferEngineSignalReceivedCounter, 1, {
-						direction = tostring(transferDirectionModule.Send),
-						transferOrigination = tostring(transferOriginationModule.InExperience)
+				if Success and Result then
+					LoggingProtocolModule.default:logRobloxTelemetryCounter(CurrencyTransferTelemetryModule.CurrencyTransferEngineSignalReceivedCounter, 1, {
+						direction = tostring(TransferDirectionModule.Send),
+						transferOrigination = tostring(TransferOriginationModule.InExperience)
 					})
-					p1(status)
+					Callback(Result)
 				end
 			end
 		end)
 		
-		return function()
-			-- upvalues: promptRobuxTransferRequestedConnection (write)
-			if promptRobuxTransferRequestedConnection then
-				promptRobuxTransferRequestedConnection:Disconnect()
-				promptRobuxTransferRequestedConnection = nil
+		return function() --[[ Line: 47 ]]
+			-- upvalues: PromptRobuxTransferRequestedConnection (ref)
+			if PromptRobuxTransferRequestedConnection then
+				PromptRobuxTransferRequestedConnection:Disconnect()
+				PromptRobuxTransferRequestedConnection = nil
 			end
 		end
-	end, { p1 })
+	end, { Callback })
 end

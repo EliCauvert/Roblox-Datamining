@@ -1,4 +1,4 @@
-﻿local t = {
+﻿local FailureReasonModule = {
 	Invalid = "Invalid",
 	InvalidInput = "InvalidInput",
 	TransferNotFound = "TransferNotFound",
@@ -20,38 +20,40 @@
 	TransferAmountExceedsMaximum = "TransferAmountExceedsMaximum",
 	TransferAmountExceedsNonSecuredMaximum = "TransferAmountExceedsNonSecuredMaximum"
 }
-local t_1 = {
-	[0] = t.Invalid,
-	[1] = t.InvalidInput,
-	[2] = t.TransferNotFound,
-	[3] = t.Unauthorized,
-	[4] = t.InternalError,
-	[5] = t.TransferDailyLimitExceeded,
-	[6] = t.TransferMonthlyLimitExceeded,
-	[7] = t.InsufficientFunds,
-	[8] = t.UserNotAllowed,
-	[9] = t.TransferExpired,
-	[10] = t.TooManyRequests,
-	[11] = t.TransferAlreadyProcessed,
-	[12] = t.InvalidTransferState,
-	[13] = t.AmpRecourseAvailable,
-	[14] = t.TransferDisabledForUser,
-	[15] = t.ReceiverNotAllowed,
-	[16] = t.TransferAmountBelowMinimum,
-	[17] = t.TransferAmountExceedsMaximum,
-	[18] = t.TransferAmountExceedsNonSecuredMaximum,
-	[19] = t.ReceiveLimitExceeded
+local config = {
+	[0] = FailureReasonModule.Invalid,
+	[1] = FailureReasonModule.InvalidInput,
+	[2] = FailureReasonModule.TransferNotFound,
+	[3] = FailureReasonModule.Unauthorized,
+	[4] = FailureReasonModule.InternalError,
+	[5] = FailureReasonModule.TransferDailyLimitExceeded,
+	[6] = FailureReasonModule.TransferMonthlyLimitExceeded,
+	[7] = FailureReasonModule.InsufficientFunds,
+	[8] = FailureReasonModule.UserNotAllowed,
+	[9] = FailureReasonModule.TransferExpired,
+	[10] = FailureReasonModule.TooManyRequests,
+	[11] = FailureReasonModule.TransferAlreadyProcessed,
+	[12] = FailureReasonModule.InvalidTransferState,
+	[13] = FailureReasonModule.AmpRecourseAvailable,
+	[14] = FailureReasonModule.TransferDisabledForUser,
+	[15] = FailureReasonModule.ReceiverNotAllowed,
+	[16] = FailureReasonModule.TransferAmountBelowMinimum,
+	[17] = FailureReasonModule.TransferAmountExceedsMaximum,
+	[18] = FailureReasonModule.TransferAmountExceedsNonSecuredMaximum,
+	[19] = FailureReasonModule.ReceiveLimitExceeded
 }
 
-function t.fromValue(p1)
-	-- upvalues: t_1 (ref), t (ref)
+function FailureReasonModule.fromValue(p1) --[[ Line: 71 ]]
+	-- upvalues: config (copy), FailureReasonModule (copy)
 	if p1 == nil then
 		return nil
-	elseif type(p1) == "number" then
-		return t_1[p1]
-	elseif type(p1) == "string" then
-		for i, v in pairs(t) do
-			if v == p1 then
+	end
+	if type(p1) == "number" then
+		return config[p1]
+	end
+	if type(p1) == "string" then
+		for _, value in pairs(FailureReasonModule) do
+			if value == p1 then
 				return p1
 			end
 		end
@@ -59,4 +61,4 @@ function t.fromValue(p1)
 	return nil
 end
 
-return t
+return FailureReasonModule

@@ -1,9 +1,9 @@
-﻿local universeConfigurationStoreTypesModule = require(script.UniverseConfigurationStoreTypes)
+﻿local UniverseConfigurationStoreTypesModule = require(script.UniverseConfigurationStoreTypes)
 
 return {
-	PrivacyType = universeConfigurationStoreTypesModule.PrivacyType,
+	PrivacyType = UniverseConfigurationStoreTypesModule.PrivacyType,
 	getPrivacyTypeForAudiences = require(script.getPrivacyTypeForAudiences),
 	createUniverseConfigurationStore = require(script.createUniverseConfigurationStore),
 	getUniverseConfigurationStore = require(script.getUniverseConfigurationStore),
-	UniverseConfigurationStoreTypes = universeConfigurationStoreTypesModule
+	UniverseConfigurationStoreTypes = UniverseConfigurationStoreTypesModule
 }

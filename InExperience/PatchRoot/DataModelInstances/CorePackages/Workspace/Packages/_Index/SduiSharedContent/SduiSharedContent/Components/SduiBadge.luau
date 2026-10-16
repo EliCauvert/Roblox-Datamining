@@ -1,11 +1,11 @@
-﻿local parent = script:FindFirstAncestor("SduiSharedContent").Parent
-local reactModule = require(parent.React)
-local _ = require(parent.SduiCompat)
-local badge = require(parent.Foundation).Badge
+﻿local Parent = script:FindFirstAncestor("SduiSharedContent").Parent
+local ReactModule = require(Parent.React)
+local _ = require(Parent.SduiCompat)
+local Badge = require(Parent.Foundation).Badge
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), badge (ref)
-	return reactModule.createElement(badge, {
+return ReactModule.memo(function(p1) --[[ Line: 28 | Named "SduiBadge" ]]
+	-- upvalues: ReactModule (copy), Badge (copy)
+	return ReactModule.createElement(Badge, {
 		text = p1.text,
 		icon = p1.icon,
 		variant = p1.variant,

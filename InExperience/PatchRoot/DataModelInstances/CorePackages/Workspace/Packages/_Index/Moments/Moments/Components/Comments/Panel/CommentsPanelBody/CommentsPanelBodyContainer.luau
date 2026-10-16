@@ -1,8 +1,8 @@
-﻿local reactModule = require(script:FindFirstAncestor("Moments").Parent.React)
-local commentsPanelBodyViewModule = require(script.Parent.CommentsPanelBodyView)
-local useCommentsPanelBodyViewModelModule = require(script.Parent.useCommentsPanelBodyViewModel)
+﻿local ReactModule = require(script:FindFirstAncestor("Moments").Parent.React)
+local CommentsPanelBodyViewModule = require(script.Parent.CommentsPanelBodyView)
+local UseCommentsPanelBodyViewModelModule = require(script.Parent.useCommentsPanelBodyViewModel)
 
-return function(p1)
-	-- upvalues: useCommentsPanelBodyViewModelModule (ref), reactModule (ref), commentsPanelBodyViewModule (ref)
-	return reactModule.createElement(commentsPanelBodyViewModule, useCommentsPanelBodyViewModelModule(p1))
+return function(p1) --[[ Line: 11 | Named "CommentsPanelBodyContainer" ]]
+	-- upvalues: UseCommentsPanelBodyViewModelModule (copy), ReactModule (copy), CommentsPanelBodyViewModule (copy)
+	return ReactModule.createElement(CommentsPanelBodyViewModule, (UseCommentsPanelBodyViewModelModule(p1)))
 end

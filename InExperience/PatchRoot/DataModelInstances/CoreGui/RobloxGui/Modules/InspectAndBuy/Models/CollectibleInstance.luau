@@ -1,16 +1,16 @@
 ﻿return {
-	new = function()
+	new = function() --[[ Line: 13 ]]
 		return {}
 	end,
-	fromGetCollectibleItemInstances = function(a)
+	fromGetCollectibleItemInstances = function(p1) --[[ Line: 19 ]]
 		return {
-			collectibleInstanceId = a.collectibleInstanceId,
-			collectibleItemId = a.collectibleItemId,
-			collectibleProductId = a.collectibleProductId,
-			serialNumber = a.serialNumber,
-			instanceState = a.instanceState,
-			saleState = a.saleState,
-			price = a.price
+			collectibleInstanceId = p1.collectibleInstanceId,
+			collectibleItemId = p1.collectibleItemId,
+			collectibleProductId = p1.collectibleProductId,
+			serialNumber = p1.serialNumber,
+			instanceState = p1.instanceState,
+			saleState = p1.saleState,
+			price = p1.price
 		}
 	end
 }

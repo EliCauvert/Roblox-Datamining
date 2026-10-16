@@ -1,23 +1,24 @@
-﻿local requestTypeModule = require(script:FindFirstAncestor("PurchasePrompt").Enums.RequestType)
-local blackbirdUpsellHiddenRequestTypes2 = game:DefineFastString("BlackbirdUpsellHiddenRequestTypes2", "")
+﻿local RequestTypeModule = require(script:FindFirstAncestor("PurchasePrompt").Enums.RequestType)
+local BlackbirdUpsellHiddenRequestTypes2 = game:DefineFastString("BlackbirdUpsellHiddenRequestTypes2", "")
 
-local function _(p1)
-	return p1:gsub("^%s+", ""):gsub("%s+$", "")
+local function _(Text: string) --[[ Line: 17 | Named "trim" ]]
+	return (Text:gsub("^%s+", ""):gsub("%s+$", ""))
 end
 
-local function matchesHiddenRequestTypeList(p1, p2)
-	-- upvalues: requestTypeModule (ref)
-	if p1 == nil or p1 == requestTypeModule.None then
-		return false
-	elseif p2 == "" then
+local function matchesHiddenRequestTypeList(None, Text: string): boolean --[[ Line: 24 ]]
+	-- upvalues: RequestTypeModule (copy)
+	if None == nil or None == RequestTypeModule.None then
 		return false
 	end
-	local lowerText = string.lower(tostring(p1))
+	if Text == "" then
+		return false
+	end
+	local Lowered = string.lower((tostring(None)))
 	
-	for i in string.gmatch(p2, "[^,]+") do
-		local lowerText_1 = string.lower(i:gsub("^%s+", ""):gsub("%s+$", ""))
+	for Text1 in string.gmatch(Text, "[^,]+") do
+		local Lowered1 = string.lower((Text1:gsub("^%s+", ""):gsub("%s+$", "")))
 		
-		if lowerText_1 ~= "" and lowerText == "requesttype." .. lowerText_1 then
+		if Lowered1 ~= "" and Lowered == "requesttype." .. Lowered1 then
 			return true
 		end
 	end
@@ -25,9 +26,9 @@ local function matchesHiddenRequestTypeList(p1, p2)
 end
 
 return {
-	isRequestTypeHiddenFromBlackbirdUpsell = function(p3)
-		-- upvalues: matchesHiddenRequestTypeList (ref), blackbirdUpsellHiddenRequestTypes2 (ref)
-		return matchesHiddenRequestTypeList(p3, blackbirdUpsellHiddenRequestTypes2)
+	isRequestTypeHiddenFromBlackbirdUpsell = function(p1) --[[ Line: 45 ]]
+		-- upvalues: matchesHiddenRequestTypeList (copy), BlackbirdUpsellHiddenRequestTypes2 (copy)
+		return (matchesHiddenRequestTypeList(p1, BlackbirdUpsellHiddenRequestTypes2))
 	end,
 	matchesHiddenRequestTypeList = matchesHiddenRequestTypeList
 }

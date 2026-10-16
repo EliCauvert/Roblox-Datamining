@@ -1,169 +1,172 @@
-﻿local shareSheet = script:FindFirstAncestor("ShareSheet")
-local parent = shareSheet.Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local userProfileModule = require(parent.DataHydration.UserProfile)
-local shareSheetConstantsModule = require(shareSheet.ShareSheetConstants)
-local _ = require(shareSheet.Components.ShareSheetSocialRow)
-local conversationUtilsModule = require(shareSheet.Utils.ConversationUtils)
-local filterConversationsByQueryModule = require(shareSheet.Utils.filterConversationsByQuery)
-local formatPeoplePickerUserInfoModule = require(shareSheet.Utils.formatPeoplePickerUserInfo)
-local playersService = game:GetService("Players")
+﻿local ShareSheet = script:FindFirstAncestor("ShareSheet")
+local Parent = ShareSheet.Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UserProfileModule = require(Parent.DataHydration.UserProfile)
+local ShareSheetConstantsModule = require(ShareSheet.ShareSheetConstants)
+local ConversationUtilsModule = require(ShareSheet.Utils.ConversationUtils)
+local FilterConversationsByQueryModule = require(ShareSheet.Utils.filterConversationsByQuery)
+local FormatPeoplePickerUserInfoModule = require(ShareSheet.Utils.formatPeoplePickerUserInfo)
+local _ = require(ShareSheet.Types)
+local Players = game:GetService("Players")
 
-local function _(p1)
-	-- upvalues: userProfileModule (ref)
-	return if p1 == nil or p1 == "" then nil else userProfileModule.getAndFetchUserInfo(p1)
+local function _(p1) --[[ Line: 57 | Named "getUserInfoResult" ]]
+	-- upvalues: UserProfileModule (copy)
+	return if p1 == nil or p1 == "" then nil else UserProfileModule.getAndFetchUserInfo(p1)
 end
 
-local _ = function(p1, p2)
+local _ = function(p1, p2) --[[ Line: 61 | Named "readUserInfo" ]]
 	if p1 == nil then
 		return nil, false
+	else
+		return p1.info(p2), p1.status(p2) == "NotReady"
 	end
-	return p1.info(p2), p1.status(p2) == "NotReady"
 end
 
-local function getDisplayNames(p1, p2, p3, p4)
-	-- upvalues: conversationUtilsModule (ref), formatPeoplePickerUserInfoModule (ref)
-	local t = {}
-	local t_1 = {}
-	local var1 = false
-	local t_2 = {}
+local function getDisplayNames(p1, List, UseMemoResult, DisplayName) --[[ Line: 68 ]]
+	-- upvalues: ConversationUtilsModule (copy), FormatPeoplePickerUserInfoModule (copy)
+	local DescriptionsByConversationId = {}
+	local DisplayNamesByConversationId = {}
+	local IsLoading = false
+	local LoadingConversationIds = {}
 	
-	for i, v in p2 do
-		local displayName = conversationUtilsModule.getDisplayName(v)
-		local id = p3[v.id]
+	for _, value in List do
+		local DisplayName1 = ConversationUtilsModule.getDisplayName(value)
+		local UseMemoResultEntry = UseMemoResult[value.id]
 		
-		if not id then
-			t_1[v.id] = displayName
-			continue
-		end
-		local var2, isNotReady
-		local primary = id.primary
-		
-		if primary == nil then
-			var2 = nil
-			isNotReady = false
-		else
-			var2 = primary.info(p1)
-			isNotReady = primary.status(p1) == "NotReady"
-		end
-		local var3, isNotReady_1
-		local second = id.second
-		
-		if second == nil then
-			var3 = nil
-			isNotReady_1 = false
-		else
-			var3 = second.info(p1)
-			isNotReady_1 = second.status(p1) == "NotReady"
-		end
-		local isNotReady_2 = isNotReady or isNotReady_1
-		
-		if isNotReady_2 then
-			var1 = true
-		end
-		local t_3 = { displayName = p4 }
-		local t_4 = {}
-		
-		if var2 then
-			table.insert(t_4, var2)
-		else
-			table.insert(t_4, t_3)
-		end
-		if id.second ~= nil then
-			if var3 then
-				table.insert(t_4, var3)
+		if UseMemoResultEntry then
+			local Primary = UseMemoResultEntry.primary
+			local InfoResult = nil
+			local IsNotReady = nil
+			
+			if Primary == nil then
+				InfoResult = nil
+				IsNotReady = false
 			else
-				table.insert(t_4, t_3)
+				InfoResult = Primary.info(p1)
+				IsNotReady = Primary.status(p1) == "NotReady"
+			end
+			local Second = UseMemoResultEntry.second
+			local InfoResult1 = nil
+			local IsNotReady1 = nil
+			
+			if Second == nil then
+				InfoResult1 = nil
+				IsNotReady1 = false
+			else
+				InfoResult1 = Second.info(p1)
+				IsNotReady1 = Second.status(p1) == "NotReady"
+			end
+			local IsNotReady2: boolean = IsNotReady or IsNotReady1
+			
+			if IsNotReady2 then
+				IsLoading = true
+			end
+			local config = { displayName = DisplayName }
+			local List1 = {}
+			
+			if InfoResult then
+				table.insert(List1, InfoResult)
+			else
+				table.insert(List1, config)
+			end
+			if UseMemoResultEntry.second ~= nil then
+				if InfoResult1 then
+					table.insert(List1, InfoResult1)
+				else
+					table.insert(List1, config)
+				end
+			end
+			if DisplayName1 == "" then
+				if IsNotReady2 then
+					LoadingConversationIds[value.id] = true
+				else
+					DisplayName1 = FormatPeoplePickerUserInfoModule.formatTitle(List1)
+				end
+			end
+			if not IsNotReady2 then
+				DescriptionsByConversationId[value.id] = FormatPeoplePickerUserInfoModule.formatDescription(List1)
 			end
 		end
-		if displayName == "" then
-			if isNotReady_2 then
-				t_2[v.id] = true
-			else
-				displayName = formatPeoplePickerUserInfoModule.formatTitle(t_4)
-			end
-		end
-		if not isNotReady_2 then
-			t[v.id] = formatPeoplePickerUserInfoModule.formatDescription(t_4)
-		end
+		DisplayNamesByConversationId[value.id] = DisplayName1
 	end
 	return {
-		descriptionsByConversationId = t,
-		displayNamesByConversationId = t_1,
-		isLoading = var1,
-		loadingConversationIds = t_2
+		descriptionsByConversationId = DescriptionsByConversationId,
+		displayNamesByConversationId = DisplayNamesByConversationId,
+		isLoading = IsLoading,
+		loadingConversationIds = LoadingConversationIds
 	}
 end
 
-local function useConversationDisplayNames(p5, p6, p7)
-	-- upvalues: reactModule (ref), conversationUtilsModule (ref), userProfileModule (ref), signalsModule (ref), getDisplayNames (ref), signalsReactModule (ref)
-	local var4 = reactModule.useMemo(function()
-		-- upvalues: p5 (ref), conversationUtilsModule (copy), p6 (ref), userProfileModule (copy)
+local function useConversationDisplayNames(Conversations, p2, DisplayName) --[[ Line: 123 ]]
+	-- upvalues: ReactModule (copy), ConversationUtilsModule (copy), UserProfileModule (copy), SignalsModule (copy), getDisplayNames (copy), SignalsReactModule (copy)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 128 ]]
+		-- upvalues: Conversations (copy), ConversationUtilsModule (upval), p2 (copy), UserProfileModule (upval)
 		local t = {}
 		
-		for i, v in p5 do
-			local participantUserIds, participantUserIds_1 = conversationUtilsModule.getParticipantUserIds(v, p6)
-			t[v.id] = {
-				primary = if participantUserIds == nil or participantUserIds == "" then nil else userProfileModule.getAndFetchUserInfo(participantUserIds),
-				second = if participantUserIds_1 == nil or participantUserIds_1 == "" then nil else userProfileModule.getAndFetchUserInfo(participantUserIds_1)
+		for _, conversation in Conversations do
+			local ParticipantUserIds, ParticipantUserIds2 = ConversationUtilsModule.getParticipantUserIds(conversation, p2)
+			t[conversation.id] = {
+				primary = if ParticipantUserIds == nil or ParticipantUserIds == "" then nil else UserProfileModule.getAndFetchUserInfo(ParticipantUserIds),
+				second = if ParticipantUserIds2 == nil or ParticipantUserIds2 == "" then nil else UserProfileModule.getAndFetchUserInfo(ParticipantUserIds2)
 			}
 		end
 		return t
-	end, { p5, p6 })
+	end, { Conversations, p2 })
 	
-	return signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), getDisplayNames (copy), p5 (ref), var4 (ref), p7 (ref)
-		return signalsModule.createComputed(function(p8)
-			-- upvalues: getDisplayNames (copy), p5 (copy), var4 (copy), p7 (copy)
-			return getDisplayNames(p8, p5, var4, p7)
+	return SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 140 ]]
+		-- upvalues: SignalsModule (upval), getDisplayNames (upval), Conversations (copy), UseMemoResult (copy), DisplayName (copy)
+		return SignalsModule.createComputed(function(p3) --[[ Line: 141 ]]
+			-- upvalues: getDisplayNames (upval), Conversations (upval), UseMemoResult (upval), DisplayName (upval)
+			return (getDisplayNames(p3, Conversations, UseMemoResult, DisplayName))
 		end)
-	end, { p5, p7, var4 }))
+	end, { Conversations, DisplayName, UseMemoResult })))
 end
 
-return function(p8)
-	-- upvalues: playersService (ref), useLocalization (ref), useConversationDisplayNames (ref), reactModule (ref), filterConversationsByQueryModule (ref), conversationUtilsModule (ref), shareSheetConstantsModule (ref)
-	local var5 = tostring(if playersService.LocalPlayer then playersService.LocalPlayer.UserId else 0)
-	local var6 = useConversationDisplayNames(p8.conversations, var5, useLocalization({ unknownUser = "Feature.Chat.Label.UnknownUser" }).unknownUser)
-	local displayNamesByConversationId = var6.displayNamesByConversationId
-	local var7 = reactModule.useMemo(function()
-		-- upvalues: filterConversationsByQueryModule (copy), p8 (ref), displayNamesByConversationId (ref), var6 (ref)
-		return filterConversationsByQueryModule(p8.conversations, p8.debouncedQuery, displayNamesByConversationId, var6.descriptionsByConversationId)
+return function(p3) --[[ Line: 149 | Named "usePeoplePickerListViewModel" ]]
+	-- upvalues: Players (copy), UseLocalizationFunction (copy), useConversationDisplayNames (copy), ReactModule (copy), FilterConversationsByQueryModule (copy), ConversationUtilsModule (copy), ShareSheetConstantsModule (copy)
+	local Text = tostring(Players.LocalPlayer and Players.LocalPlayer.UserId or 0)
+	local UseConversationDisplayNamesResult = useConversationDisplayNames(p3.conversations, Text, UseLocalizationFunction({ unknownUser = "Feature.Chat.Label.UnknownUser" }).unknownUser)
+	local DisplayNamesByConversationId = UseConversationDisplayNamesResult.displayNamesByConversationId
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 157 ]]
+		-- upvalues: FilterConversationsByQueryModule (upval), p3 (copy), DisplayNamesByConversationId (copy), UseConversationDisplayNamesResult (copy)
+		return FilterConversationsByQueryModule(p3.conversations, p3.debouncedQuery, DisplayNamesByConversationId, UseConversationDisplayNamesResult.descriptionsByConversationId)
 	end, {
-		displayNamesByConversationId,
-		var6.descriptionsByConversationId,
-		p8.conversations,
-		p8.debouncedQuery
+		DisplayNamesByConversationId,
+		UseConversationDisplayNamesResult.descriptionsByConversationId,
+		p3.conversations,
+		p3.debouncedQuery
 	})
-	local var8 = reactModule.useMemo(function()
-		-- upvalues: var7 (ref), conversationUtilsModule (copy), var5 (ref), var6 (ref), displayNamesByConversationId (ref), p8 (ref)
-		local list = table.create(#var7)
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 174 ]]
+		-- upvalues: UseMemoResult (copy), ConversationUtilsModule (upval), Text (copy), UseConversationDisplayNamesResult (copy), DisplayNamesByConversationId (copy), p3 (copy)
+		local Buffer = table.create(#UseMemoResult)
 		
-		for i, v in var7 do
-			local id = v.id
-			local participantUserIds, participantUserIds_1 = conversationUtilsModule.getParticipantUserIds(v, var5)
-			list[i] = {
-				description = var6.descriptionsByConversationId[id],
-				displayName = displayNamesByConversationId[id],
-				id = id,
-				isLoading = var6.loadingConversationIds[id] == true,
-				isSelected = p8.selectedConversationIds[id] == true,
-				primaryUserId = participantUserIds,
-				secondUserId = participantUserIds_1
+		for i, value in UseMemoResult do
+			local Id = value.id
+			local ParticipantUserIds, ParticipantUserIds2 = ConversationUtilsModule.getParticipantUserIds(value, Text)
+			Buffer[i] = {
+				description = UseConversationDisplayNamesResult.descriptionsByConversationId[Id],
+				displayName = DisplayNamesByConversationId[Id],
+				id = Id,
+				isLoading = UseConversationDisplayNamesResult.loadingConversationIds[Id] == true,
+				isSelected = p3.selectedConversationIds[Id] == true,
+				primaryUserId = ParticipantUserIds,
+				secondUserId = ParticipantUserIds2
 			}
 		end
-		return list
+		return Buffer
 	end, {
-		var6.descriptionsByConversationId, var6.loadingConversationIds,
-		displayNamesByConversationId, var5, p8.selectedConversationIds, var7
+		UseConversationDisplayNamesResult.descriptionsByConversationId,
+		UseConversationDisplayNamesResult.loadingConversationIds,
+		DisplayNamesByConversationId, Text, p3.selectedConversationIds, UseMemoResult
 	})
-	local isLoading = p8.isLoading or var6.isLoading and #var8 == 0
+	local IsLoading = p3.isLoading or UseConversationDisplayNamesResult.isLoading and #UseMemoResult1 == 0
 	
 	return {
-		items = var8,
-		shouldShowEmptyState = #var8 == 0 and not isLoading,
-		skeletonCount = if isLoading then shareSheetConstantsModule.FIntShareSheetNumAvatarSkeletons else 0
+		items = UseMemoResult1,
+		shouldShowEmptyState = #UseMemoResult1 == 0 and not IsLoading,
+		skeletonCount = if IsLoading then ShareSheetConstantsModule.FIntShareSheetNumAvatarSkeletons else 0
 	}
 end

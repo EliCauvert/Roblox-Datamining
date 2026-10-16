@@ -1,31 +1,32 @@
-﻿local parent = script:FindFirstAncestor("Style").Parent
-local argCheckModule = require(parent.ArgCheck)
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local _ = require(parent.RobloxAppEnums)
-local useUiModeInfo = require(parent.RobloxAppHooks).useUiModeInfo
-local context = require(parent.UIBlox).Style.Context
-local designTokenContextModule = require(script.Parent.DesignTokenContext)
+﻿local Parent = script:FindFirstAncestor("Style").Parent
+local ArgCheckModule = require(Parent.ArgCheck)
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local _ = require(Parent.RobloxAppEnums)
+local UseUiModeInfoFunction = require(Parent.RobloxAppHooks).useUiModeInfo
+local Context = require(Parent.UIBlox).Style.Context
+local DesignTokenContextModule = require(script.Parent.DesignTokenContext)
 
-return function(value)
-	-- upvalues: reactModule (ref), context (ref), useUiModeInfo (ref), cryoModule (ref), argCheckModule (ref), designTokenContextModule (ref)
-	local var1 = reactModule.useContext(context)
-	local uiModeInfo = value.uiModeInfo or useUiModeInfo()
-	local tokenMappers = value.tokenMappers
-	local var2 = cryoModule.Dictionary.keys(tokenMappers)
-	local tokens = var1.style.Tokens
-	argCheckModule.assert(tokens, "Design Tokens not found, ensure AppStyleProvider has been configured correctly.")
+return function(p1) --[[ Line: 27 | Named "DesignTokenProvider" ]]
+	-- upvalues: ReactModule (copy), Context (copy), UseUiModeInfoFunction (copy), CryoModule (copy), ArgCheckModule (copy), DesignTokenContextModule (copy)
+	local UseContextResult = ReactModule.useContext(Context)
+	local UseUiModeInfoResult = UseUiModeInfoFunction()
+	local UiModeInfo = p1.uiModeInfo or UseUiModeInfoResult
+	local TokenMappers = p1.tokenMappers
+	local KeysResult = CryoModule.Dictionary.keys(TokenMappers)
+	local Tokens = UseContextResult.style.Tokens
+	ArgCheckModule.assert(Tokens, "Design Tokens not found, ensure AppStyleProvider has been configured correctly.")
 	
-	if not tokens.LuaApps then
-		tokens = cryoModule.Dictionary.join(tokens, { LuaApps = {} })
+	if not Tokens.LuaApps then
+		Tokens = CryoModule.Dictionary.join(Tokens, { LuaApps = {} })
 	end
-	return reactModule.createElement(designTokenContextModule.Provider, {
-		value = cryoModule.List.foldLeft(var2, function(p1, p2)
-			-- upvalues: tokenMappers (ref), uiModeInfo (write), tokens (write), cryoModule (copy)
-			local cloned = table.clone(p1.LuaApps)
-			cloned[p2] = tokenMappers[p2](uiModeInfo, tokens)
-			
-			return cryoModule.Dictionary.join(p1, { LuaApps = cloned })
-		end, tokens)
-	}, value.children)
+	Tokens = CryoModule.List.foldLeft(KeysResult, function(p2, Key) --[[ Line: 42 ]]
+		-- upvalues: TokenMappers (copy), UiModeInfo (ref), Tokens (ref), CryoModule (upval)
+		local Copy = table.clone(p2.LuaApps)
+		Copy[Key] = TokenMappers[Key](UiModeInfo, Tokens)
+		
+		return CryoModule.Dictionary.join(p2, { LuaApps = Copy })
+	end, Tokens)
+	
+	return ReactModule.createElement(DesignTokenContextModule.Provider, { value = Tokens }, p1.children)
 end

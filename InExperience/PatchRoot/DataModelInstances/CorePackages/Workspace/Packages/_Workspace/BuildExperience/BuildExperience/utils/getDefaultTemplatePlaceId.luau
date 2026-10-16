@@ -1,17 +1,18 @@
-﻿local contentProviderService = game:GetService("ContentProvider")
-local t = {
+﻿local ContentProvider = game:GetService("ContentProvider")
+local BuildExperienceProductionTemplatePlaceId = game:DefineFastString("BuildExperienceProductionTemplatePlaceId", "95206881")
+local config = {
 	sitetest3 = 70389767,
 	sitetest1 = 75308808508742,
-	production = if game:DefineFastFlag("BuildExperienceConfigurableProductionTemplatePlaceId", false) then tonumber(game:DefineFastString("BuildExperienceProductionTemplatePlaceId", "95206881")) or 95206881 else 95206881
+	production = game:DefineFastFlag("BuildExperienceConfigurableProductionTemplatePlaceId", false) and tonumber(BuildExperienceProductionTemplatePlaceId) or 95206881
 }
 
-return function()
-	-- upvalues: contentProviderService (ref), t (ref)
-	local ok, status = pcall(function()
-		-- upvalues: contentProviderService (copy)
-		return contentProviderService.BaseUrl
+return function() --[[ Line: 21 | Named "getDefaultTemplatePlaceId" ]]
+	-- upvalues: ContentProvider (copy), config (copy)
+	local Success, Result = pcall(function() --[[ Line: 22 ]]
+		-- upvalues: ContentProvider (upval)
+		return ContentProvider.BaseUrl
 	end)
-	local var1 = if ok and typeof(status) == "string" then status else ""
+	local Text = if Success and typeof(Result) == "string" then Result else ""
 	
-	return if string.find(var1, "sitetest3", 1, true) then t.sitetest3 elseif string.find(var1, "sitetest1", 1, true) then t.sitetest1 else t.production
+	return if string.find(Text, "sitetest3", 1, true) then config.sitetest3 elseif string.find(Text, "sitetest1", 1, true) then config.sitetest1 else config.production
 end

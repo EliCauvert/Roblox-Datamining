@@ -1,27 +1,26 @@
-﻿local appUserLayers = require(game:GetService("CorePackages").Workspace.Packages.ExperimentLayers).AppUserLayers
-local makeExperimentModule = require(script.Parent.makeExperiment)
-local xboxPrimaryNavABIXPEnabled = game:DefineFastFlag("XboxPrimaryNavABIXPEnabled", false)
-local xboxPrimaryNavABIXPEnrolledForAll = game:DefineFastFlag("XboxPrimaryNavABIXPEnrolledForAll", false)
-local xboxPrimaryNavABIXPVariable = game:DefineFastString("XboxPrimaryNavABIXPVariable", "tenFootPrimaryNavEnabled")
-local t = {}
+﻿local AppUserLayers = require(game:GetService("CorePackages").Workspace.Packages.ExperimentLayers).AppUserLayers
+local XboxPrimaryNavABIXPEnabled = game:DefineFastFlag("XboxPrimaryNavABIXPEnabled", false)
+local XboxPrimaryNavABIXPEnrolledForAll = game:DefineFastFlag("XboxPrimaryNavABIXPEnrolledForAll", false)
+local XboxPrimaryNavABIXPVariable = game:DefineFastString("XboxPrimaryNavABIXPVariable", "tenFootPrimaryNavEnabled")
+local ExperimentState = {}
 
 return {
-	isEnabled = function()
-		-- upvalues: xboxPrimaryNavABIXPEnrolledForAll (ref), xboxPrimaryNavABIXPEnabled (ref)
-		return xboxPrimaryNavABIXPEnrolledForAll or xboxPrimaryNavABIXPEnabled
+	isEnabled = function() --[[ Line: 37 ]]
+		-- upvalues: XboxPrimaryNavABIXPEnrolledForAll (copy), XboxPrimaryNavABIXPEnabled (copy)
+		return XboxPrimaryNavABIXPEnrolledForAll or XboxPrimaryNavABIXPEnabled
 	end,
-	isEnrolledForAll = function()
-		-- upvalues: xboxPrimaryNavABIXPEnrolledForAll (ref)
-		return xboxPrimaryNavABIXPEnrolledForAll
+	isEnrolledForAll = function() --[[ Line: 33 ]]
+		-- upvalues: XboxPrimaryNavABIXPEnrolledForAll (copy)
+		return XboxPrimaryNavABIXPEnrolledForAll
 	end,
-	isUserEnrolled = function()
-		-- upvalues: xboxPrimaryNavABIXPEnrolledForAll (ref), xboxPrimaryNavABIXPEnabled (ref), t (write), appUserLayers (ref), xboxPrimaryNavABIXPVariable (ref)
-		return if xboxPrimaryNavABIXPEnrolledForAll then true elseif xboxPrimaryNavABIXPEnrolledForAll or xboxPrimaryNavABIXPEnabled then (t[appUserLayers.XboxClassicUILayer] or {})[xboxPrimaryNavABIXPVariable] or false else false
+	isUserEnrolled = function() --[[ Line: 41 ]]
+		-- upvalues: XboxPrimaryNavABIXPEnrolledForAll (copy), XboxPrimaryNavABIXPEnabled (copy), ExperimentState (ref), AppUserLayers (copy), XboxPrimaryNavABIXPVariable (copy)
+		return if XboxPrimaryNavABIXPEnrolledForAll then true else (XboxPrimaryNavABIXPEnrolledForAll or XboxPrimaryNavABIXPEnabled) and (ExperimentState[AppUserLayers.XboxClassicUILayer] or {})[XboxPrimaryNavABIXPVariable] or false
 	end,
-	layer = appUserLayers.XboxClassicUILayer,
-	experiment = makeExperimentModule("OnUserLayerLoadingStatusChanged", "GetUserLayerLoadingStatus", "GetUserLayerVariables", "LogUserLayerExposure", "GetUserStatusForLayer"),
-	setExperimentState = function(value)
-		-- upvalues: t (write)
-		t = value
+	layer = AppUserLayers.XboxClassicUILayer,
+	experiment = require(script.Parent.makeExperiment)("OnUserLayerLoadingStatusChanged", "GetUserLayerLoadingStatus", "GetUserLayerVariables", "LogUserLayerExposure", "GetUserStatusForLayer"),
+	setExperimentState = function(Value) --[[ Line: 29 ]]
+		-- upvalues: ExperimentState (ref)
+		ExperimentState = Value
 	end
 }

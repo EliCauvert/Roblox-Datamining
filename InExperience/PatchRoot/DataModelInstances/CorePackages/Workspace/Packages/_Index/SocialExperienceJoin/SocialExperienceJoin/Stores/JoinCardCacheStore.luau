@@ -1,52 +1,53 @@
-﻿local parent = script:FindFirstAncestor("SocialExperienceJoin").Parent
-local cryoModule = require(parent.Cryo)
-local signalsModule = require(parent.Signals)
-local createSignal = signalsModule.createSignal
-local var1 = signalsModule.createComputed(function(_)
-	-- upvalues: createSignal (ref), cryoModule (ref)
-	local var2, var3 = createSignal({})
-	local var4, var5 = createSignal(nil)
+﻿local Parent = script:FindFirstAncestor("SocialExperienceJoin").Parent
+local CryoModule = require(Parent.Cryo)
+local SignalsModule = require(Parent.Signals)
+local CreateSignalFunction = SignalsModule.createSignal
+local Computed = SignalsModule.createComputed(function(_) --[[ Line: 27 ]]
+	-- upvalues: CreateSignalFunction (copy), CryoModule (copy)
+	local Signal, Signal2 = CreateSignalFunction({})
+	local Signal1, Signal2_1 = CreateSignalFunction(nil)
 	
 	return {
-		getPlayabilityEntries = var2,
-		getUserSettings = var4,
-		setPlayabilityEntry = function(value, p1)
-			-- upvalues: var2 (ref), var3 (ref), cryoModule (copy)
-			if value and value ~= "" then
-				var3(cryoModule.Dictionary.join(var2(false), { [value] = p1 }))
+		getPlayabilityEntries = Signal,
+		getUserSettings = Signal1,
+		setPlayabilityEntry = function(p1, p2) --[[ Line: 31 ]]
+			-- upvalues: Signal (copy), Signal2 (copy), CryoModule (upval)
+			if p1 and p1 ~= "" then
+				Signal2(CryoModule.Dictionary.join(Signal(false), { [p1] = p2 }))
 				
 				return
 			end
 		end,
-		setUserSettings = function(value)
-			-- upvalues: var5 (ref)
-			var5(value)
+		setUserSettings = function(p1) --[[ Line: 39 ]]
+			-- upvalues: Signal2_1 (copy)
+			Signal2_1(p1)
 		end,
-		clearPlayabilityEntry = function(p1)
-			-- upvalues: var2 (ref), var3 (ref), cryoModule (copy)
+		clearPlayabilityEntry = function(p1) --[[ Line: 43 ]]
+			-- upvalues: Signal (copy), Signal2 (copy), CryoModule (upval)
 			if not p1 or p1 == "" then return end
-			local var6 = var2(false)
+			local SignalResult = Signal(false)
 			
-			if var6[p1] == nil then
+			if SignalResult[p1] ~= nil then
+				Signal2(CryoModule.Dictionary.join(SignalResult, { [p1] = CryoModule.None }))
+				
 				return
 			end
-			var3(cryoModule.Dictionary.join(var6, { [p1] = cryoModule.None }))
 		end,
-		clearCache = function(p1)
-			-- upvalues: var2 (ref), var3 (ref), cryoModule (copy), var5 (ref)
+		clearCache = function(p1) --[[ Line: 54 ]]
+			-- upvalues: Signal (copy), Signal2 (copy), CryoModule (upval), Signal2_1 (copy)
 			if p1 and p1 ~= "" then
-				var3(cryoModule.Dictionary.join(var2(false), { [p1] = cryoModule.None }))
+				Signal2(CryoModule.Dictionary.join(Signal(false), { [p1] = CryoModule.None }))
 			else
-				var3({})
+				Signal2({})
 			end
-			var5(nil)
+			Signal2_1(nil)
 		end
 	}
 end)
 
 return {
-	get = function()
-		-- upvalues: var1 (ref)
-		return var1(false)
+	get = function() --[[ Line: 75 ]]
+		-- upvalues: Computed (copy)
+		return Computed(false)
 	end
 }

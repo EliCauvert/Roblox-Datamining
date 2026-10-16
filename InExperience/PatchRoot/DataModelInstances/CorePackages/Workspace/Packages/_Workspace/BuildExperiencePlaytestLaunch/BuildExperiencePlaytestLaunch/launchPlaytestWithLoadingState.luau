@@ -1,50 +1,52 @@
-﻿local getPlaytestLoadingStoreModule = require(script:FindFirstAncestor("BuildExperiencePlaytestLaunch").GetPlaytestLoadingStore)
-local playtestExperienceModule = require(script.Parent.playtestExperience)
-local releaseAnyFocusModule = require(script.Parent.releaseAnyFocus)
+﻿local GetPlaytestLoadingStoreModule = require(script:FindFirstAncestor("BuildExperiencePlaytestLaunch").GetPlaytestLoadingStore)
+local PlaytestExperienceModule = require(script.Parent.playtestExperience)
+local ReleaseAnyFocusModule = require(script.Parent.releaseAnyFocus)
 
-return function(p1, p2, p3, p4)
-	-- upvalues: getPlaytestLoadingStoreModule (ref), releaseAnyFocusModule (ref), playtestExperienceModule (ref)
-	local var1 = getPlaytestLoadingStoreModule()
+return function(p1, p2, IsTeamTest, Callback): boolean --[[ Line: 7 | Named "launchPlaytestWithLoadingState" ]]
+	-- upvalues: GetPlaytestLoadingStoreModule (copy), ReleaseAnyFocusModule (copy), PlaytestExperienceModule (copy)
+	local PlaytestLoadingStoreModule = GetPlaytestLoadingStoreModule()
 	
-	if var1.getIsPlaytestLoadingForPlaceId(p1)() then
+	if PlaytestLoadingStoreModule.getIsPlaytestLoadingForPlaceId(p1)() then
 		return false
-	end
-	var1.setPlaytestStatusForPlaceId(p1, "Loading")
-	task.defer(function()
-		-- upvalues: releaseAnyFocusModule (copy), playtestExperienceModule (copy), p1 (ref), p2 (ref), p3 (ref), var1 (ref), p4 (ref)
-		local var2 = nil
-		local var3 = "experience_launch"
-		
-		if not xpcall(function()
-			-- upvalues: releaseAnyFocusModule (copy), var3 (write), playtestExperienceModule (copy), p1 (copy), p2 (copy), p3 (copy), var1 (copy), p4 (copy)
-			releaseAnyFocusModule()
-			var3 = playtestExperienceModule(p1, p2, {
-				isTeamTest = p3,
-				onTeleportFailed = function()
-					-- upvalues: var1 (copy), p1 (copy), p4 (copy)
-					var1.setPlaytestStatusForPlaceId(p1, "Idle")
-					
-					if p4 ~= nil then
-						p4()
-					end
-				end
-			})
-		end, function(p5)
-			-- upvalues: var2 (write)
-			var2 = debug.traceback(tostring(p5), 2)
-		end) then
-			var1.setPlaytestStatusForPlaceId(p1, "Idle")
+	else
+		PlaytestLoadingStoreModule.setPlaytestStatusForPlaceId(p1, "Loading")
+		task.defer(function() --[[ Line: 21 ]]
+			-- upvalues: ReleaseAnyFocusModule (upval), PlaytestExperienceModule (upval), p1 (copy), p2 (copy), IsTeamTest (copy), PlaytestLoadingStoreModule (copy), Callback (copy)
+			local Traceback = nil
+			local v1 = "experience_launch"
 			
-			if p4 ~= nil then
-				p4()
+			if not xpcall(function() --[[ Line: 24 ]]
+				-- upvalues: ReleaseAnyFocusModule (upval), v1 (ref), PlaytestExperienceModule (upval), p1 (upval), p2 (upval), IsTeamTest (upval), PlaytestLoadingStoreModule (upval), Callback (upval)
+				ReleaseAnyFocusModule()
+				v1 = PlaytestExperienceModule(p1, p2, {
+					isTeamTest = IsTeamTest,
+					onTeleportFailed = function() --[[ Line: 28 ]]
+						-- upvalues: PlaytestLoadingStoreModule (upval), p1 (upval), Callback (upval)
+						PlaytestLoadingStoreModule.setPlaytestStatusForPlaceId(p1, "Idle")
+						
+						if Callback ~= nil then
+							Callback()
+						end
+					end
+				})
+			end, function(Err) --[[ Line: 35 ]]
+				-- upvalues: Traceback (ref)
+				Traceback = debug.traceback(tostring(Err), 2)
+			end) then
+				PlaytestLoadingStoreModule.setPlaytestStatusForPlaceId(p1, "Idle")
+				
+				if Callback ~= nil then
+					Callback()
+				end
+				error(Traceback or "Failed to launch playtest", 0)
 			end
-			error(var2 or "Failed to launch playtest", 0)
-		end
-		if var3 == "teleport_pending" then
-			return
-		end
-		var1.setPlaytestStatusForPlaceId(p1, "Completed")
-	end)
-	
-	return true
+			if v1 ~= "teleport_pending" then
+				PlaytestLoadingStoreModule.setPlaytestStatusForPlaceId(p1, "Completed")
+				
+				return
+			end
+		end)
+		
+		return true
+	end
 end

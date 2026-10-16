@@ -1,59 +1,57 @@
-﻿local parent = script:FindFirstAncestor("PeopleReactView").Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local view = require(parent.Foundation).View
-local fFlagEnablePeopleListLazyRender = require(parent.PeopleService).getService("Flags").FFlagEnablePeopleListLazyRender
-local peoplePageLazyRenderThreshold = game:DefineFastInt("PeoplePageLazyRenderThreshold", 100)
+﻿local Parent = script:FindFirstAncestor("PeopleReactView").Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local View = require(Parent.Foundation).View
+local FFlagEnablePeopleListLazyRender = require(Parent.PeopleService).getService("Flags").FFlagEnablePeopleListLazyRender
+local PeoplePageLazyRenderThreshold = game:DefineFastInt("PeoplePageLazyRenderThreshold", 100)
 
-function LazyScrollingComponent(p1)
-	-- upvalues: reactModule (ref), peoplePageLazyRenderThreshold (ref), signalsModule (ref), view (ref), fFlagEnablePeopleListLazyRender (ref)
-	local var1, var2 = reactModule.useState(false)
-	local var3 = reactModule.useCallback(function(p2, p3, p4)
-		-- upvalues: peoplePageLazyRenderThreshold (copy)
-		return p2 < p3 + p4 + peoplePageLazyRenderThreshold
+function LazyScrollingComponent(p1) --[[ Line: 29 ]]
+	-- upvalues: ReactModule (copy), PeoplePageLazyRenderThreshold (copy), SignalsModule (copy), View (copy), FFlagEnablePeopleListLazyRender (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseResult = ReactModule.useCallback(function(p2, p3, p4): boolean --[[ Line: 33 ]]
+		-- upvalues: PeoplePageLazyRenderThreshold (upval)
+		return p2 < p3 + p4 + PeoplePageLazyRenderThreshold
 	end, {})
-	local var4 = reactModule.useRef(nil)
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), var4 (ref), var2 (ref), var3 (ref), p1 (ref), signalsModule (copy)
-		if var1 or not var4.current then
-			return
-		end
-		var2(var3(var4.current.AbsolutePosition.Y, p1.scrollingFrameAbsolutePositionY(false), p1.scrollingFrameAbsoluteSizeY(false)))
-		local var5 = var4.current:GetPropertyChangedSignal("AbsolutePosition"):Connect(function()
-			-- upvalues: var4 (copy), var2 (copy), var3 (copy), p1 (copy)
-			if var4.current then
-				var2(var3(var4.current.AbsolutePosition.Y, p1.scrollingFrameAbsolutePositionY(false), p1.scrollingFrameAbsoluteSizeY(false)))
+	local UseRefResult = ReactModule.useRef(nil)
+	ReactModule.useEffect(function() --[[ Line: 41 ]]
+		-- upvalues: UseStateResult (copy), UseRefResult (copy), UseStateResult2 (copy), UseResult (copy), p1 (copy), SignalsModule (upval)
+		if UseStateResult or not UseRefResult.current then return end
+		UseStateResult2(UseResult(UseRefResult.current.AbsolutePosition.Y, p1.scrollingFrameAbsolutePositionY(false), p1.scrollingFrameAbsoluteSizeY(false)))
+		local Connection = UseRefResult.current:GetPropertyChangedSignal("AbsolutePosition"):Connect(function() --[[ Line: 59 ]]
+			-- upvalues: UseRefResult (upval), UseStateResult2 (upval), UseResult (upval), p1 (upval)
+			if UseRefResult.current then
+				UseStateResult2(UseResult(UseRefResult.current.AbsolutePosition.Y, p1.scrollingFrameAbsolutePositionY(false), p1.scrollingFrameAbsoluteSizeY(false)))
 				
 				return
 			end
 		end)
-		local var6 = signalsModule.createEffect(function(p2)
-			-- upvalues: p1 (copy), var4 (copy), var2 (copy), var3 (copy)
+		local Effect = SignalsModule.createEffect(function(p2) --[[ Line: 74 ]]
+			-- upvalues: p1 (upval), UseRefResult (upval), UseStateResult2 (upval), UseResult (upval)
 			local _ = p1.scrollingFrameCanvasPositionY(p2)
-			local var7 = p1.scrollingFrameAbsolutePositionY(p2)
-			local var8 = p1.scrollingFrameAbsoluteSizeY(p2)
+			local ScrollingFrameAbsolutePositionYResult = p1.scrollingFrameAbsolutePositionY(p2)
+			local ScrollingFrameAbsoluteSizeYResult = p1.scrollingFrameAbsoluteSizeY(p2)
 			
-			if var4.current then
-				var2(var3(var4.current.AbsolutePosition.Y, var7, var8))
+			if UseRefResult.current then
+				UseStateResult2(UseResult(UseRefResult.current.AbsolutePosition.Y, ScrollingFrameAbsolutePositionYResult, ScrollingFrameAbsoluteSizeYResult))
 				
 				return
 			end
 		end)
 		
-		return function()
-			-- upvalues: var5 (ref), var6 (ref)
-			if var5 then
-				var5:Disconnect()
+		return function() --[[ Line: 89 ]]
+			-- upvalues: Connection (copy), Effect (copy)
+			if Connection then
+				Connection:Disconnect()
 			end
-			var6()
+			Effect()
 		end
-	end, { var1 })
+	end, { UseStateResult })
 	
-	return if var1 then p1.children else reactModule.createElement(view, {
-		tag = if fFlagEnablePeopleListLazyRender then "size-full-0 auto-xy" else "auto-xy",
-		ref = var4,
+	return if UseStateResult then p1.children else ReactModule.createElement(View, {
+		tag = if FFlagEnablePeopleListLazyRender then "size-full-0 auto-xy" else "auto-xy",
+		ref = UseRefResult,
 		LayoutOrder = p1.placeholderLayoutOrder
 	}, { Placeholder = p1.placeholder })
 end
 
-return reactModule.memo(LazyScrollingComponent)
+return ReactModule.memo(LazyScrollingComponent)

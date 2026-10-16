@@ -1,44 +1,44 @@
-﻿local httpService = game:GetService("HttpService")
-local inExperienceShop = script:FindFirstAncestor("InExperienceShop")
-local _ = require(inExperienceShop.Parent.Promise)
-local _ = require(inExperienceShop.Types)
-local fetchShopItemIdsModule = require(script.Parent.fetchShopItemIds)
-local multiGetProductInfoModule = require(script.Parent.multiGetProductInfo)
-local buildShopDataFromWidgetsModule = require(script.Parent.buildShopDataFromWidgets)
-local shopDebugLoggerModule = require(inExperienceShop.Internal.ShopDebugLogger)
+﻿local HttpService = game:GetService("HttpService")
+local InExperienceShop = script:FindFirstAncestor("InExperienceShop")
+local _ = require(InExperienceShop.Parent.Promise)
+local _ = require(InExperienceShop.Types)
+local FetchShopItemIdsModule = require(script.Parent.fetchShopItemIds)
+local MultiGetProductInfoModule = require(script.Parent.multiGetProductInfo)
+local BuildShopDataFromWidgetsModule = require(script.Parent.buildShopDataFromWidgets)
+local ShopDebugLoggerModule = require(InExperienceShop.Internal.ShopDebugLogger)
 
-return function()
-	-- upvalues: httpService (ref), shopDebugLoggerModule (ref), fetchShopItemIdsModule (ref), buildShopDataFromWidgetsModule (ref), multiGetProductInfoModule (ref)
-	local var1 = httpService:GenerateGUID(false)
-	local var2 = shopDebugLoggerModule.startTimer()
-	shopDebugLoggerModule.logLazy(function()
-		-- upvalues: var1 (ref)
-		return "fetchAllShopData: start requestId=" .. var6
+return function() --[[ Line: 28 | Named "fetchAllShopData" ]]
+	-- upvalues: HttpService (copy), ShopDebugLoggerModule (copy), FetchShopItemIdsModule (copy), BuildShopDataFromWidgetsModule (copy), MultiGetProductInfoModule (copy)
+	local Guid = HttpService:GenerateGUID(false)
+	local StartTimerResult = ShopDebugLoggerModule.startTimer()
+	ShopDebugLoggerModule.logLazy(function(): string --[[ Line: 36 ]]
+		-- upvalues: Guid (copy)
+		return "fetchAllShopData: start requestId=" .. Guid
 	end)
 	
-	return shopDebugLoggerModule.tracePromise(fetchShopItemIdsModule(var1):andThen(function(p1)
-		-- upvalues: buildShopDataFromWidgetsModule (copy), multiGetProductInfoModule (copy)
-		return buildShopDataFromWidgetsModule(p1, multiGetProductInfoModule)
+	return ShopDebugLoggerModule.tracePromise(FetchShopItemIdsModule(Guid):andThen(function(Result) --[[ Line: 39 ]]
+		-- upvalues: BuildShopDataFromWidgetsModule (upval), MultiGetProductInfoModule (upval)
+		return BuildShopDataFromWidgetsModule(Result, MultiGetProductInfoModule)
 	end), {
-		onSuccess = function(p1)
-			-- upvalues: shopDebugLoggerModule (copy), var1 (ref), var2 (ref)
-			shopDebugLoggerModule.logElapsedLazy(function()
-				-- upvalues: var1 (copy)
-				return "fetchAllShopData: success requestId=" .. var6
-			end, var2)
-			shopDebugLoggerModule.logLazy(function()
-				-- upvalues: p1 (ref)
+		onSuccess = function(p1) --[[ Line: 43 ]]
+			-- upvalues: ShopDebugLoggerModule (upval), Guid (copy), StartTimerResult (copy)
+			ShopDebugLoggerModule.logElapsedLazy(function(): string --[[ Line: 44 ]]
+				-- upvalues: Guid (upval)
+				return "fetchAllShopData: success requestId=" .. Guid
+			end, StartTimerResult)
+			ShopDebugLoggerModule.logLazy(function(): string --[[ Line: 47 ]]
+				-- upvalues: p1 (copy)
 				return "fetchAllShopData: result categories=" .. #p1.categories .. " sections=" .. #p1.sections .. " failedItems=" .. #(p1.failedItems or {})
 			end)
 		end,
-		onError = function(p1)
-			-- upvalues: shopDebugLoggerModule (copy), var1 (ref), var2 (ref)
-			shopDebugLoggerModule.logElapsedLazy(function()
-				-- upvalues: var1 (copy)
-				return "fetchAllShopData: error requestId=" .. var6
-			end, var2)
-			shopDebugLoggerModule.logLazy(function()
-				-- upvalues: p1 (ref)
+		onError = function(p1) --[[ Line: 56 ]]
+			-- upvalues: ShopDebugLoggerModule (upval), Guid (copy), StartTimerResult (copy)
+			ShopDebugLoggerModule.logElapsedLazy(function(): string --[[ Line: 57 ]]
+				-- upvalues: Guid (upval)
+				return "fetchAllShopData: error requestId=" .. Guid
+			end, StartTimerResult)
+			ShopDebugLoggerModule.logLazy(function(): string --[[ Line: 60 ]]
+				-- upvalues: p1 (copy)
 				return "fetchAllShopData: error kind=" .. tostring(p1 and p1.kind) .. " msg=" .. tostring(p1 and p1.message)
 			end)
 		end

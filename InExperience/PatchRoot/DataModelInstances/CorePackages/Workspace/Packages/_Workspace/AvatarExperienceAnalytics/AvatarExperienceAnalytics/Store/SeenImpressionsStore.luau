@@ -1,38 +1,37 @@
-﻿local t = {
-	WidgetItems = "WidgetItems",
-	UnifiedImpressions = "UnifiedImpressions"
-}
-local t_1 = {}
+﻿local Tbl = {}
 
-local function _(p1)
-	-- upvalues: t_1 (ref)
-	if not t_1[p1] then
-		t_1[p1] = {}
+local function _(Key) --[[ Line: 20 | Named "getOrCreateCategory" ]]
+	-- upvalues: Tbl (copy)
+	if not Tbl[Key] then
+		Tbl[Key] = {}
 	end
-	return t_1[p1]
+	return Tbl[Key]
 end
 
 return {
-	Category = t,
-	hasSeen = function(p1, p2)
-		-- upvalues: t_1 (ref)
-		local var1 = t_1[p1]
+	Category = {
+		WidgetItems = "WidgetItems",
+		UnifiedImpressions = "UnifiedImpressions"
+	},
+	hasSeen = function(p1, p2): boolean --[[ Line: 27 ]]
+		-- upvalues: Tbl (copy)
+		local Entry = Tbl[p1]
 		
-		return var1 ~= nil and var1[p2] == true
+		return Entry ~= nil and Entry[p2] == true
 	end,
-	markSeen = function(p1, p2)
-		-- upvalues: t_1 (ref)
-		if not t_1[p1] then
-			t_1[p1] = {}
+	markSeen = function(Key, p1) --[[ Line: 32 ]]
+		-- upvalues: Tbl (copy)
+		if not Tbl[Key] then
+			Tbl[Key] = {}
 		end
-		t_1[p1][p2] = true
+		Tbl[Key][p1] = true
 	end,
-	clearCategory = function(p1)
-		-- upvalues: t_1 (ref)
-		t_1[p1] = nil
+	clearCategory = function(Key) --[[ Line: 36 ]]
+		-- upvalues: Tbl (copy)
+		Tbl[Key] = nil
 	end,
-	clear = function()
-		-- upvalues: t_1 (ref)
-		table.clear(t_1)
+	clear = function() --[[ Line: 40 ]]
+		-- upvalues: Tbl (copy)
+		table.clear(Tbl)
 	end
 }

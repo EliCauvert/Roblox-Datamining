@@ -1,8 +1,8 @@
-﻿local fFlagAXCatalogBackgroundsSupport = require(script:FindFirstAncestor("AvatarExperienceCatalog").Parent.AvatarExperienceFlags).FFlagAXCatalogBackgroundsSupport
-local resolveWidgetListWindowSizeModule = require(script.Parent.Utils.resolveWidgetListWindowSize)
-local vector2 = Vector2.new(game:DefineFastInt("AXLooksImageOffsetMultiplierX", 500) / 1000, game:DefineFastInt("AXLooksImageOffsetMultiplierY", 750) / 1000)
-local var1 = game:DefineFastInt("AXLooksImageZoom", 1250) / 1000
-local t = {
+﻿local FFlagAXCatalogBackgroundsSupport = require(script:FindFirstAncestor("AvatarExperienceCatalog").Parent.AvatarExperienceFlags).FFlagAXCatalogBackgroundsSupport
+local ResolveWidgetListWindowSizeModule = require(script.Parent.Utils.resolveWidgetListWindowSize)
+local _Vector2 = Vector2.new(game:DefineFastInt("AXLooksImageOffsetMultiplierX", 500) / 1000, game:DefineFastInt("AXLooksImageOffsetMultiplierY", 750) / 1000)
+local AXLooksImageZoomRatio = game:DefineFastInt("AXLooksImageZoom", 1250) / 1000
+local config = {
 	MAX_TO_RENDER_PER_BATCH = 1,
 	UPDATE_CELLS_BATCHING_PERIOD = 30,
 	SCROLL_EVENT_THROTTLE = 0,
@@ -11,9 +11,9 @@ local t = {
 }
 
 if game:DefineFastFlag("AXWidgetListWindowSizeByMemoryTier", false) then
-	t.WINDOW_SIZE = resolveWidgetListWindowSizeModule(t.WINDOW_SIZE)
+	config.WINDOW_SIZE = ResolveWidgetListWindowSizeModule(config.WINDOW_SIZE)
 end
-local t_1 = {
+local config1 = {
 	[tostring(Enum.AssetType.TShirt.Value)] = "Feature.Avatar.Label.ClassicTShirts",
 	[tostring(Enum.AssetType.Hat.Value)] = "Feature.Avatar.Label.Hat",
 	[tostring(Enum.AssetType.HairAccessory.Value)] = "Feature.Avatar.Label.Hair",
@@ -59,8 +59,8 @@ local t_1 = {
 	[tostring(Enum.AssetType.DynamicHead.Value)] = "Feature.Avatar.Label.DynamicHead"
 }
 
-if fFlagAXCatalogBackgroundsSupport then
-	t_1[tostring(Enum.AssetType.AvatarBackground.Value)] = "Feature.Avatar.Label.Backgrounds"
+if FFlagAXCatalogBackgroundsSupport then
+	config1[tostring(Enum.AssetType.AvatarBackground.Value)] = "Feature.Avatar.Label.Backgrounds"
 end
 return {
 	CATALOG_RESULTS_HORIZONTAL_MARGIN = 15,
@@ -69,22 +69,24 @@ return {
 		TimeoutStatusPromptShown = "TimeoutStatusPromptShown",
 		ItemsUnavailablePromptShown = "ItemsUnavailablePromptShown",
 		FetchFaeFeatureAccessError = "FetchFaeFeatureAccessError",
+		MarketplaceBreakpointMeasured = "MarketplaceBreakpointMeasured",
 		LookImpressionMissingLookType = "LookImpressionMissingLookType",
+		CatalogPageSecondVariantFetched = "CatalogPageSecondVariantFetched",
 		CatalogOffersBanner = {
 			fetchSucceeded = "CatalogOffersBannerFetchSucceeded",
 			fetchFailed = "CatalogOffersBannerFetchFailed"
 		}
 	},
-	LOOKS_IMAGE_OFFSET_MULTIPLIERS = vector2,
-	LOOKS_IMAGE_ZOOM = var1,
-	ASSET_TYPE_LOCALIZED = t_1,
+	LOOKS_IMAGE_OFFSET_MULTIPLIERS = _Vector2,
+	LOOKS_IMAGE_ZOOM = AXLooksImageZoomRatio,
+	ASSET_TYPE_LOCALIZED = config1,
 	BUNDLE_TYPE_LOCALIZED = {
 		[tostring(Enum.BundleType.BodyParts.Value)] = "Feature.Catalog.Label.Body",
 		[tostring(Enum.BundleType.Animations.Value)] = "Feature.Catalog.Label.Animation",
 		[tostring(Enum.BundleType.Shoes.Value)] = "Feature.Avatar.Label.Shoes",
 		[tostring(Enum.BundleType.DynamicHead.Value)] = "Feature.Catalog.Label.DynamicHeads"
 	},
-	FLATLIST_CONFIGS = t,
+	FLATLIST_CONFIGS = config,
 	OFFERS_LOCALIZED = {
 		OfferApplied = "Feature.Catalog.Label.OfferApplied",
 		OfferAppliedTooltip = "Feature.Catalog.Text.OfferAppliedToHighestItem"

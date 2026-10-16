@@ -1,10 +1,10 @@
-﻿local urlBuilder = require(script:FindFirstAncestor("VirtualEvents").Parent.UrlBuilder).UrlBuilder
+﻿local UrlBuilder = require(script:FindFirstAncestor("VirtualEvents").Parent.UrlBuilder).UrlBuilder
 
-return function(p1, p2)
-	-- upvalues: urlBuilder (ref)
-	return p1(urlBuilder.fromString("apis:virtual-events/v1/virtual-events/{id}")({ id = p2 }), "GET"):andThen(function(p3)
-		return if p3.responseBody then p3.responseBody.thumbnails else {}
-	end, function()
+return function(Callback, Id) --[[ Line: 5 ]]
+	-- upvalues: UrlBuilder (copy)
+	return Callback(UrlBuilder.fromString("apis:virtual-events/v1/virtual-events/{id}")({ id = Id }), "GET"):andThen(function(Result) --[[ Line: 8 ]]
+		return Result.responseBody and Result.responseBody.thumbnails or {}
+	end, function() --[[ Line: 10 ]]
 		return {}
 	end)
 end

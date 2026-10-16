@@ -1,1 +1,4 @@
-﻿return require(script.Parent.FFlagMarketplaceOffersRootLowSpender) or (require(script.Parent.FFlagMarketplaceOffersRootNoSpender) or require(script.Parent.FFlagMarketplaceOffersRootRandom))
+﻿local FFlagMarketplaceOffersRootNoSpenderModule = require(script.Parent.FFlagMarketplaceOffersRootNoSpender)
+local FFlagMarketplaceOffersRootRandomModule = require(script.Parent.FFlagMarketplaceOffersRootRandom)
+
+return require(script.Parent.FFlagMarketplaceOffersRootLowSpender) or (FFlagMarketplaceOffersRootNoSpenderModule or FFlagMarketplaceOffersRootRandomModule)

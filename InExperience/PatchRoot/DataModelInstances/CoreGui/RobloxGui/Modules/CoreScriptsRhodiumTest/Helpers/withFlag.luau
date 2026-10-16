@@ -1,6 +1,6 @@
-﻿return function(p1, p2)
-	local var1 = game:SetFastFlagForTesting(p1, true)
-	local ok, status = pcall(p2)
-	game:SetFastFlagForTesting(p1, var1)
-	assert(ok, tostring(status))
+﻿return function(Name, p1) --[[ Line: 18 | Named "withFlag" ]]
+	local SetFastFlagForTestingResult = game:SetFastFlagForTesting(Name, true)
+	local Success, Result = pcall(p1)
+	game:SetFastFlagForTesting(Name, SetFastFlagForTestingResult)
+	assert(Success, (tostring(Result)))
 end

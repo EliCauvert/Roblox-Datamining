@@ -1,9 +1,9 @@
-﻿local parent = script.Parent
-local tModule = require(parent.Parent.Parent.Parent.Parent.t)
+﻿local Parent = script.Parent
+local TModule = require(Parent.Parent.Parent.Parent.Parent.t)
 
-return tModule.strictInterface({
-	Theme = tModule.optional(require(parent.validateTheme)),
-	Font = tModule.optional(require(parent.validateFont)),
-	Tokens = tModule.optional(tModule.any),
-	Settings = tModule.optional(require(parent.validateSettings))
-})
+return (TModule.strictInterface({
+	Theme = TModule.optional((require(Parent.validateTheme))),
+	Font = TModule.optional((require(Parent.validateFont))),
+	Tokens = TModule.optional(TModule.any),
+	Settings = TModule.optional((require(Parent.validateSettings)))
+}))

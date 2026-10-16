@@ -1,29 +1,29 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local roactModule = require(corePackagesService.Packages.Roact)
-local reactModule = require(corePackagesService.Packages.React)
-local tModule = require(corePackagesService.Packages.t)
-local parent = script.Parent.Parent.Parent
-local createShallowEqualAndTablesModule = require(parent.createShallowEqualAndTables)
-local fFlagPlayerListReduceRerendersModule = require(parent.Flags.FFlagPlayerListReduceRerenders)
-local cellExtender = roactModule.PureComponent:extend("CellExtender")
-cellExtender.validateProps = tModule.strictInterface({
-	layoutOrder = tModule.integer,
-	size = tModule.UDim2,
-	backgroundStyle = tModule.strictInterface({ Color = tModule.Color3, Transparency = tModule.number }),
-	overlayStyle = tModule.strictInterface({ Color = tModule.Color3, Transparency = tModule.number }),
-	doubleOverlay = tModule.boolean
+﻿local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local ReactModule = require(CorePackages.Packages.React)
+local TModule = require(CorePackages.Packages.t)
+local Parent = script.Parent.Parent.Parent
+local CreateShallowEqualAndTablesModule = require(Parent.createShallowEqualAndTables)
+local FFlagPlayerListReduceRerendersModule = require(Parent.Flags.FFlagPlayerListReduceRerenders)
+local CellExtender = RoactModule.PureComponent:extend("CellExtender")
+CellExtender.validateProps = TModule.strictInterface({
+	layoutOrder = TModule.integer,
+	size = TModule.UDim2,
+	backgroundStyle = TModule.strictInterface({ Color = TModule.Color3, Transparency = TModule.number }),
+	overlayStyle = TModule.strictInterface({ Color = TModule.Color3, Transparency = TModule.number }),
+	doubleOverlay = TModule.boolean
 })
 
-function cellExtender.render(p1)
-	-- upvalues: roactModule (ref)
-	return roactModule.createElement("Frame", {
+function CellExtender.render(p1) --[[ Line: 28 ]]
+	-- upvalues: RoactModule (copy)
+	return RoactModule.createElement("Frame", {
 		BorderSizePixel = 0,
 		LayoutOrder = p1.props.layoutOrder,
 		Size = p1.props.size,
 		BackgroundTransparency = p1.props.backgroundStyle.Transparency,
 		BackgroundColor3 = p1.props.backgroundStyle.Color
 	}, {
-		DoubleOverLay = roactModule.createElement("Frame", {
+		DoubleOverLay = RoactModule.createElement("Frame", {
 			ZIndex = 1,
 			BorderSizePixel = 0,
 			Visible = p1.props.doubleOverlay,
@@ -31,7 +31,7 @@ function cellExtender.render(p1)
 			BackgroundTransparency = p1.props.overlayStyle.Transparency,
 			BackgroundColor3 = p1.props.overlayStyle.Color
 		}),
-		OverlayFrame = roactModule.createElement("Frame", {
+		OverlayFrame = RoactModule.createElement("Frame", {
 			ZIndex = 2,
 			BorderSizePixel = 0,
 			Size = UDim2.new(1, 0, 1, 0),
@@ -41,4 +41,4 @@ function cellExtender.render(p1)
 	})
 end
 
-return if fFlagPlayerListReduceRerendersModule then reactModule.memo(cellExtender, createShallowEqualAndTablesModule({ "backgroundStyle" })) else cellExtender
+return if FFlagPlayerListReduceRerendersModule then ReactModule.memo(CellExtender, CreateShallowEqualAndTablesModule({ "backgroundStyle" })) else CellExtender

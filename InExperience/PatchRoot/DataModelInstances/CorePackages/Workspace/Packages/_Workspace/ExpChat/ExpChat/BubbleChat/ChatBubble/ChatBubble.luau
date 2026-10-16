@@ -1,289 +1,267 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local textChatService = game:GetService("TextChatService")
-local getEnablePerBubbleCustomizationModule = require(expChat.Flags.getEnablePerBubbleCustomization)
-local parent = expChat.Parent
-local roactModule = require(parent.Roact)
-local otterModule = require(parent.Otter)
-local dictionary = require(parent.llama).Dictionary
-local expChatSharedModule = require(parent.ExpChatShared)
-local configModule = require(expChat.Config)
-local memoizeModule = require(expChat.memoize)
-local helpers = expChat.BubbleChat.Helpers
-local getSpringFromSettingsModule = require(helpers.getSpringFromSettings)
-local getTextBoundsModule = require(helpers.getTextBounds)
-local getDictFromBubbleChatMessagePropertiesModule = require(helpers.getDictFromBubbleChatMessageProperties)
-local shouldSendHighFrequencyTelemetryModule = require(expChat.shouldSendHighFrequencyTelemetry)
-local clientSettingsUtilityModule = require(expChat.ClientSettings.ClientSettingsUtility)
-local getFFlagExpChatUseUpdatedMessageRenderedModule = require(expChat.Flags.getFFlagExpChatUseUpdatedMessageRendered)
-local var1 = require(expChat.Flags.getFIntExpChatMessageRenderUserThrottlePermyriad)()
-local getFFlagExpChatExcludeFOMORendersModule = require(expChat.Flags.getFFlagExpChatExcludeFOMORenders)
-local fFlagExpChatPresetChatEnabled = expChatSharedModule.Flags.FFlagExpChatPresetChatEnabled
-local engineFeatureExpChatGlobalChatEngineTelemetryEnabledModule = require(expChat.Flags.EngineFeatureExpChatGlobalChatEngineTelemetryEnabled)
-local getPresetIconRichText = expChatSharedModule.getPresetIconRichText
-local getPresetIconSize = expChatSharedModule.getPresetIconSize
-local isPresetMessage = expChatSharedModule.isPresetMessage
-local chatBubble = roactModule.Component:extend("ChatBubble")
-chatBubble.defaultProps = { isMostRecent = true, text = "", timestamp = 0 }
-local var2 = memoizeModule(function(p1, p2)
-	-- upvalues: dictionary (ref), getDictFromBubbleChatMessagePropertiesModule (ref)
-	return if p2 then dictionary.join(p1, getDictFromBubbleChatMessagePropertiesModule(p2)) else p1
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local TextChatService = game:GetService("TextChatService")
+local GetEnablePerBubbleCustomizationModule = require(ExpChat.Flags.getEnablePerBubbleCustomization)
+local Parent = ExpChat.Parent
+local RoactModule = require(Parent.Roact)
+local OtterModule = require(Parent.Otter)
+local Dictionary = require(Parent.llama).Dictionary
+local ExpChatSharedModule = require(Parent.ExpChatShared)
+local ConfigModule = require(ExpChat.Config)
+local MemoizeModule = require(ExpChat.memoize)
+local Helpers = ExpChat.BubbleChat.Helpers
+local GetSpringFromSettingsModule = require(Helpers.getSpringFromSettings)
+local GetTextBoundsModule = require(Helpers.getTextBounds)
+local GetDictFromBubbleChatMessagePropertiesModule = require(Helpers.getDictFromBubbleChatMessageProperties)
+local ShouldSendHighFrequencyTelemetryModule = require(ExpChat.shouldSendHighFrequencyTelemetry)
+local ClientSettingsUtilityModule = require(ExpChat.ClientSettings.ClientSettingsUtility)
+local GetFFlagExpChatUseUpdatedMessageRenderedModule = require(ExpChat.Flags.getFFlagExpChatUseUpdatedMessageRendered)
+local v1 = require(ExpChat.Flags.getFIntExpChatMessageRenderUserThrottlePermyriad)()
+local GetFFlagExpChatExcludeFOMORendersModule = require(ExpChat.Flags.getFFlagExpChatExcludeFOMORenders)
+local FFlagExpChatPresetChatEnabled = ExpChatSharedModule.Flags.FFlagExpChatPresetChatEnabled
+local EngineFeatureExpChatGlobalChatEngineTelemetryEnabledModule = require(ExpChat.Flags.EngineFeatureExpChatGlobalChatEngineTelemetryEnabled)
+local GetPresetIconRichTextFunction = ExpChatSharedModule.getPresetIconRichText
+local GetPresetIconSizeFunction = ExpChatSharedModule.getPresetIconSize
+local IsPresetMessageFunction = ExpChatSharedModule.isPresetMessage
+local ChatBubble = RoactModule.Component:extend("ChatBubble")
+ChatBubble.defaultProps = { isMostRecent = true, text = "", timestamp = 0 }
+local Callback = MemoizeModule(function(p1, p2) --[[ Line: 43 ]]
+	-- upvalues: Dictionary (copy), GetDictFromBubbleChatMessagePropertiesModule (copy)
+	return if p2 then Dictionary.join(p1, GetDictFromBubbleChatMessagePropertiesModule(p2)) else p1
 end)
 
-function chatBubble.init(p1)
-	-- upvalues: roactModule (ref), otterModule (ref)
-	local var3, var4 = roactModule.createBinding(0)
-	p1.width = var3
-	p1.updateWidth = var4
-	p1.widthMotor = otterModule.createSingleMotor(0)
-	p1.widthMotor:onStep(function(p2)
-		-- upvalues: p1 (ref)
-		p1.updateWidth(math.round(p2))
+function ChatBubble.init(p1) --[[ Line: 54 ]]
+	-- upvalues: RoactModule (copy), OtterModule (copy)
+	p1.width, p1.updateWidth = RoactModule.createBinding(0)
+	p1.widthMotor = OtterModule.createSingleMotor(0)
+	p1.widthMotor:onStep(function(Value: number) --[[ Line: 57 ]]
+		-- upvalues: p1 (copy)
+		p1.updateWidth((math.round(Value)))
 	end)
-	local var5, var6 = roactModule.createBinding(0)
-	p1.height = var5
-	p1.updateHeight = var6
-	p1.heightMotor = otterModule.createSingleMotor(0)
-	p1.heightMotor:onStep(function(p2)
-		-- upvalues: p1 (ref)
-		p1.updateHeight(math.round(p2))
+	p1.height, p1.updateHeight = RoactModule.createBinding(0)
+	p1.heightMotor = OtterModule.createSingleMotor(0)
+	p1.heightMotor:onStep(function(Value: number) --[[ Line: 63 ]]
+		-- upvalues: p1 (copy)
+		p1.updateHeight((math.round(Value)))
 	end)
-	local var7, var8 = roactModule.createBinding(1)
-	p1.transparency = var7
-	p1.updateTransparency = var8
-	p1.transparencyMotor = otterModule.createSingleMotor(1)
+	p1.transparency, p1.updateTransparency = RoactModule.createBinding(1)
+	p1.transparencyMotor = OtterModule.createSingleMotor(1)
 	p1.transparencyMotor:onStep(p1.updateTransparency)
-	local var9, var10 = roactModule.createBinding(1)
-	p1.backgroundTransparency = var9
-	p1.updateBackgroundTransparency = var10
-	p1.backgroundTransparencyMotor = otterModule.createSingleMotor(1)
+	p1.backgroundTransparency, p1.updateBackgroundTransparency = RoactModule.createBinding(1)
+	p1.backgroundTransparencyMotor = OtterModule.createSingleMotor(1)
 	p1.backgroundTransparencyMotor:onStep(p1.updateBackgroundTransparency)
-	p1.size = roactModule.joinBindings({ p1.width, p1.height }):map(function(p2)
-		return UDim2.fromOffset(p2[1], p2[2])
+	p1.size = RoactModule.joinBindings({ p1.width, p1.height }):map(function(Entry): UDim2 --[[ Line: 75 ]]
+		return UDim2.fromOffset(Entry[1], Entry[2])
 	end)
 end
 
-function chatBubble.render(p1)
-	-- upvalues: getEnablePerBubbleCustomizationModule (ref), var2 (ref), configModule (ref), fFlagExpChatPresetChatEnabled (ref), isPresetMessage (ref), getFFlagExpChatUseUpdatedMessageRenderedModule (ref), shouldSendHighFrequencyTelemetryModule (ref), var1 (ref), getFFlagExpChatExcludeFOMORendersModule (ref), engineFeatureExpChatGlobalChatEngineTelemetryEnabledModule (ref), textChatService (ref), getPresetIconRichText (ref), roactModule (ref), dictionary (ref)
-	local backgroundImage, backgroundGradient, var3
-	local var4 = if getEnablePerBubbleCustomizationModule() then var2(p1.props.chatSettings, p1.props.bubbleChatMessageProperties) else p1.props.chatSettings
-	local _ = nil
-	local _ = nil
-	local t = nil
-	local _ = nil
-	local fontFace = nil
+function ChatBubble.render(p1) --[[ Line: 80 ]]
+	-- upvalues: GetEnablePerBubbleCustomizationModule (copy), Callback (copy), ConfigModule (copy), FFlagExpChatPresetChatEnabled (copy), IsPresetMessageFunction (copy), GetFFlagExpChatUseUpdatedMessageRenderedModule (copy), ShouldSendHighFrequencyTelemetryModule (copy), v1 (copy), GetFFlagExpChatExcludeFOMORendersModule (copy), EngineFeatureExpChatGlobalChatEngineTelemetryEnabledModule (copy), TextChatService (copy), GetPresetIconRichTextFunction (copy), RoactModule (copy), Dictionary (copy)
+	local CallbackResult = if GetEnablePerBubbleCustomizationModule() then Callback(p1.props.chatSettings, p1.props.bubbleChatMessageProperties) else p1.props.chatSettings
+	local UICorner = nil
+	local FontFace = nil
+	local ImageLabel = nil
+	local UIGradient = nil
+	local UIPadding = nil
 	
 	if p1.props.isTextChatServiceOn then
-		backgroundImage = var4.ImageLabel
-		backgroundGradient = var4.UIGradient
-		t = var4.UICorner
-		var3 = var4.UIPadding
-		fontFace = var4.FontFace
+		ImageLabel = CallbackResult.ImageLabel
+		UIGradient = CallbackResult.UIGradient
+		UICorner = CallbackResult.UICorner
+		UIPadding = CallbackResult.UIPadding
+		FontFace = CallbackResult.FontFace
 	else
-		backgroundImage = var4.BackgroundImage
-		backgroundGradient = var4.BackgroundGradient
+		ImageLabel = CallbackResult.BackgroundImage
+		UIGradient = CallbackResult.BackgroundGradient
 		
-		if var4.CornerEnabled then
-			t = { CornerRadius = var4.CornerRadius }
-		elseif var4.CornerEnabled == false then
-			t = { CornerRadius = UDim.new(0, 0) }
+		if CallbackResult.CornerEnabled then
+			UICorner = { CornerRadius = CallbackResult.CornerRadius }
+		elseif CallbackResult.CornerEnabled == false then
+			UICorner = { CornerRadius = UDim.new(0, 0) }
 		end
-		var3 = if var4.Padding then {
-			PaddingTop = UDim.new(0, var4.Padding),
-			PaddingRight = UDim.new(0, var4.Padding),
-			PaddingBottom = UDim.new(0, var4.Padding),
-			PaddingLeft = UDim.new(0, var4.Padding)
-		} else nil
+		UIPadding = CallbackResult.Padding and {
+			PaddingTop = UDim.new(0, CallbackResult.Padding),
+			PaddingRight = UDim.new(0, CallbackResult.Padding),
+			PaddingBottom = UDim.new(0, CallbackResult.Padding),
+			PaddingLeft = UDim.new(0, CallbackResult.Padding)
+		} or nil
 	end
-	local cornerRadius = configModule.DefaultBubbleChatChildrenCustomizationProperties.UICorner.CornerRadius
-	local UIPadding = configModule.DefaultBubbleChatChildrenCustomizationProperties.UIPadding
-	local var5 = if p1.props.renderInsert then p1.props.insertSize.X + var4.Padding else 0
-	local isTextChatServiceOn = fFlagExpChatPresetChatEnabled and (isPresetMessage(p1.props) and p1.props.isTextChatServiceOn)
-	local showCaret = p1.props.isMostRecent and (var4.TailVisible and p1.props.showCaret)
+	local CornerRadius = ConfigModule.DefaultBubbleChatChildrenCustomizationProperties.UICorner.CornerRadius
+	local UIPadding1 = ConfigModule.DefaultBubbleChatChildrenCustomizationProperties.UIPadding
+	local NewX = p1.props.renderInsert and p1.props.insertSize.X + CallbackResult.Padding or 0
+	local IsTextChatServiceOn = FFlagExpChatPresetChatEnabled and (IsPresetMessageFunction(p1.props) and p1.props.isTextChatServiceOn)
+	local ShowCaret = p1.props.isMostRecent and (CallbackResult.TailVisible and p1.props.showCaret)
 	
-	if getFFlagExpChatUseUpdatedMessageRenderedModule() and p1.props.textChatMessageInstance and shouldSendHighFrequencyTelemetryModule(var1) and (not getFFlagExpChatExcludeFOMORendersModule() or not p1.props.isHiddenMessage) then
-		if engineFeatureExpChatGlobalChatEngineTelemetryEnabledModule then
-			textChatService:SendExpChatMessageClientRendered(p1.props.textChatMessageInstance, "bubble_chat", -1)
+	if GetFFlagExpChatUseUpdatedMessageRenderedModule() and p1.props.textChatMessageInstance and ShouldSendHighFrequencyTelemetryModule(v1) and (not GetFFlagExpChatExcludeFOMORendersModule() or not p1.props.isHiddenMessage) then
+		if EngineFeatureExpChatGlobalChatEngineTelemetryEnabledModule then
+			TextChatService:SendExpChatMessageClientRendered(p1.props.textChatMessageInstance, "bubble_chat", -1)
 		else
-			textChatService:SendExpChatMessageClientRendered(p1.props.textChatMessageInstance, "bubble_chat")
+			TextChatService:SendExpChatMessageClientRendered(p1.props.textChatMessageInstance, "bubble_chat")
 		end
 	end
-	local text = nil
+	local Translation = nil
 	
-	if fFlagExpChatPresetChatEnabled then
-		text = if p1.props.useTranslation and p1.props.translation and p1.props.translation ~= "" then p1.props.translation else p1.props.text
+	if FFlagExpChatPresetChatEnabled then
+		Translation = if p1.props.useTranslation and p1.props.translation and p1.props.translation ~= "" then p1.props.translation else p1.props.text
 		
-		if isTextChatServiceOn then
-			text ..= ` {getPresetIconRichText(var4.TextSize)}`
+		if IsTextChatServiceOn then
+			Translation ..= ` {GetPresetIconRichTextFunction(CallbackResult.TextSize)}`
 		end
 	end
-	local var6
-	local createElement = roactModule.createElement
-	local var7 = "Frame"
-	local t_1 = {
+	return RoactModule.createElement("Frame", {
 		Transparency = 1,
 		LayoutOrder = p1.props.timestamp,
 		AnchorPoint = Vector2.new(0.5, 0.5),
 		Size = p1.size,
 		Position = UDim2.fromScale(1, 0.5)
-	}
-	local t_2 = {
-		Layout = roactModule.createElement("UIListLayout", {
+	}, {
+		Layout = RoactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
 			Padding = UDim.new(0, -1)
-		})
-	}
-	local createElement_1 = roactModule.createElement
-	local var8 = "ImageLabel"
-	local join = dictionary.join
-	join = join(backgroundImage, {
-		LayoutOrder = 1,
-		BorderSizePixel = 0,
-		ClipsDescendants = true,
-		BackgroundColor3 = var4.BackgroundColor3,
-		AnchorPoint = Vector2.new(0.5, 0),
-		Size = UDim2.fromScale(1, 1),
-		Position = UDim2.new(0.5, 0, 0, 0),
-		BackgroundTransparency = if backgroundImage and backgroundImage.Image ~= "" then 1 else p1.backgroundTransparency or p1.transparency,
-		ImageTransparency = p1.backgroundTransparency or p1.transparency
-	})
-	t_2.ChatBubbleFrame = createElement_1(var8, join, {
-		UICorner = t and roactModule.createElement("UICorner", { CornerRadius = t.CornerRadius }) or roactModule.createElement("UICorner", { CornerRadius = cornerRadius }),
-		UIListLayout = roactModule.createElement("UIListLayout", {
-			FillDirection = Enum.FillDirection.Horizontal,
-			SortOrder = Enum.SortOrder.LayoutOrder,
-			VerticalAlignment = Enum.VerticalAlignment.Bottom,
-			Padding = UDim.new(0, var4.Padding)
 		}),
-		Padding = var3 and roactModule.createElement("UIPadding", var3) or roactModule.createElement("UIPadding", UIPadding),
-		Insert = p1.props.renderInsert and p1.props.renderInsert(),
-		Text = roactModule.createElement("TextLabel", {
-			BackgroundTransparency = 1,
-			TextWrapped = true,
-			AutoLocalize = false,
-			LayoutOrder = 2,
-			Text = if fFlagExpChatPresetChatEnabled then text elseif p1.props.useTranslation and p1.props.translation and p1.props.translation ~= "" then p1.props.translation else p1.props.text,
-			Size = UDim2.new(1, -var5, 1, 0),
-			AnchorPoint = Vector2.new(0.5, 0.5),
-			Position = UDim2.fromScale(0.5, 0.5),
-			FontFace = fontFace or nil,
-			Font = if not fontFace then var4.Font else nil,
-			TextColor3 = var4.TextColor3,
-			TextSize = var4.TextSize,
-			TextTransparency = p1.transparency,
-			RichText = p1.props.isTextChatServiceOn
+		ChatBubbleFrame = RoactModule.createElement("ImageLabel", Dictionary.join(ImageLabel, {
+			LayoutOrder = 1,
+			BorderSizePixel = 0,
+			ClipsDescendants = true,
+			BackgroundColor3 = CallbackResult.BackgroundColor3,
+			AnchorPoint = Vector2.new(0.5, 0),
+			Size = UDim2.fromScale(1, 1),
+			Position = UDim2.new(0.5, 0, 0, 0),
+			BackgroundTransparency = if ImageLabel and ImageLabel.Image ~= "" then 1 else p1.backgroundTransparency or p1.transparency,
+			ImageTransparency = p1.backgroundTransparency or p1.transparency
+		}), {
+			UICorner = UICorner and RoactModule.createElement("UICorner", { CornerRadius = UICorner.CornerRadius }) or RoactModule.createElement("UICorner", { CornerRadius = CornerRadius }),
+			UIListLayout = RoactModule.createElement("UIListLayout", {
+				FillDirection = Enum.FillDirection.Horizontal,
+				SortOrder = Enum.SortOrder.LayoutOrder,
+				VerticalAlignment = Enum.VerticalAlignment.Bottom,
+				Padding = UDim.new(0, CallbackResult.Padding)
+			}),
+			Padding = UIPadding and RoactModule.createElement("UIPadding", UIPadding) or RoactModule.createElement("UIPadding", UIPadding1),
+			Insert = p1.props.renderInsert and p1.props.renderInsert(),
+			Text = RoactModule.createElement("TextLabel", {
+				BackgroundTransparency = 1,
+				TextWrapped = true,
+				AutoLocalize = false,
+				LayoutOrder = 2,
+				Text = if FFlagExpChatPresetChatEnabled then Translation elseif p1.props.useTranslation and p1.props.translation and p1.props.translation ~= "" then p1.props.translation else p1.props.text,
+				Size = UDim2.new(1, -NewX, 1, 0),
+				AnchorPoint = Vector2.new(0.5, 0.5),
+				Position = UDim2.fromScale(0.5, 0.5),
+				FontFace = FontFace or nil,
+				Font = if FontFace then nil else CallbackResult.Font,
+				TextColor3 = CallbackResult.TextColor3,
+				TextSize = CallbackResult.TextSize,
+				TextTransparency = p1.transparency,
+				RichText = p1.props.isTextChatServiceOn
+			}),
+			Gradient = UIGradient ~= nil and RoactModule.createElement("UIGradient", UIGradient)
 		}),
-		Gradient = backgroundGradient ~= nil and roactModule.createElement("UIGradient", backgroundGradient)
-	})
-	
-	if showCaret then
-		var6 = roactModule.createElement
-		var6 = var6("ImageLabel", {
+		Caret = if ShowCaret then RoactModule.createElement("ImageLabel", {
 			LayoutOrder = 2,
 			BackgroundTransparency = 1,
 			Image = "rbxasset://textures/ui/InGameChat/Caret.png",
 			Size = UDim2.fromOffset(9, 6),
-			ImageColor3 = var4.BackgroundColor3,
+			ImageColor3 = CallbackResult.BackgroundColor3,
 			ImageTransparency = p1.backgroundTransparency
 		}, {
-			Gradient = backgroundGradient ~= nil and roactModule.createElement("UIGradient", backgroundGradient)
-		})
-	else
-		var6 = nil
-	end
-	t_2.Caret = var6
-	
-	return createElement(var7, t_1, t_2)
+			Gradient = UIGradient ~= nil and RoactModule.createElement("UIGradient", UIGradient)
+		}) else nil
+	})
 end
 
-function chatBubble.fadeOut(p1)
-	-- upvalues: getEnablePerBubbleCustomizationModule (ref), var2 (ref), getSpringFromSettingsModule (ref)
-	local var3 = if getEnablePerBubbleCustomizationModule() then var2(p1.props.chatSettings, p1.props.bubbleChatMessageProperties) else p1.props.chatSettings
+function ChatBubble.fadeOut(p1) --[[ Line: 246 ]]
+	-- upvalues: GetEnablePerBubbleCustomizationModule (copy), Callback (copy), GetSpringFromSettingsModule (copy)
+	local CallbackResult = if GetEnablePerBubbleCustomizationModule() then Callback(p1.props.chatSettings, p1.props.bubbleChatMessageProperties) else p1.props.chatSettings
 	
 	if not p1.isFadingOut then
 		p1.isFadingOut = true
-		p1.transparencyMotor:onComplete(function()
-			-- upvalues: p1 (ref)
+		p1.transparencyMotor:onComplete(function() --[[ Line: 254 ]]
+			-- upvalues: p1 (copy)
 			if p1.props.onFadeOut then
 				p1.props.onFadeOut(p1.props.messageId)
 			end
 		end)
-		local var4 = getSpringFromSettingsModule(var3, "transparency")
-		p1.transparencyMotor:setGoal(var4(1))
-		p1.backgroundTransparencyMotor:setGoal(var4(1))
+		local Transparency = GetSpringFromSettingsModule(CallbackResult, "transparency")
+		p1.transparencyMotor:setGoal(Transparency(1))
+		p1.backgroundTransparencyMotor:setGoal(Transparency(1))
 	end
 end
 
-function chatBubble.didUpdate(p1, p2)
-	-- upvalues: getEnablePerBubbleCustomizationModule (ref), var2 (ref), getTextBoundsModule (ref), getSpringFromSettingsModule (ref), fFlagExpChatPresetChatEnabled (ref), isPresetMessage (ref), getPresetIconSize (ref)
+function ChatBubble.didUpdate(p1, p2) --[[ Line: 266 ]]
+	-- upvalues: GetEnablePerBubbleCustomizationModule (copy), Callback (copy), GetTextBoundsModule (copy), GetSpringFromSettingsModule (copy), FFlagExpChatPresetChatEnabled (copy), IsPresetMessageFunction (copy), GetPresetIconSizeFunction (copy)
 	if p1.props.fadingOut then
 		p1:fadeOut()
 	end
-	local var3 = if getEnablePerBubbleCustomizationModule() then var2(p1.props.chatSettings, p1.props.bubbleChatMessageProperties) else p1.props.chatSettings
+	local CallbackResult = if GetEnablePerBubbleCustomizationModule() then Callback(p1.props.chatSettings, p1.props.bubbleChatMessageProperties) else p1.props.chatSettings
 	
-	if p2.text ~= p1.props.text or p2.useTranslation ~= p1.props.useTranslation or (p2.translation ~= p1.props.translation or p2.chatSettings ~= p1.props.chatSettings) or (p2.renderInsert ~= p1.props.renderInsert or p2.insertSize ~= p1.props.insertSize) then
-		local var4 = if p1.props.useTranslation and p1.props.translation and p1.props.translation ~= "" then getTextBoundsModule(p1.props.translation, var3) else getTextBoundsModule(p1.props.text, var3)
-		local var5 = getSpringFromSettingsModule(var3, "size")
-		local padding = var3.Padding
-		local x = var4.X
-		local y = var4.Y
+	if p2.text ~= p1.props.text or p2.useTranslation ~= p1.props.useTranslation or p2.translation ~= p1.props.translation or p2.chatSettings ~= p1.props.chatSettings or p2.renderInsert ~= p1.props.renderInsert or p2.insertSize ~= p1.props.insertSize then
+		local TextBoundsModule = if p1.props.useTranslation and p1.props.translation and p1.props.translation ~= "" then GetTextBoundsModule(p1.props.translation, CallbackResult) else GetTextBoundsModule(p1.props.text, CallbackResult)
+		local Size = GetSpringFromSettingsModule(CallbackResult, "size")
+		local Padding: number = CallbackResult.Padding
+		local X = TextBoundsModule.X
+		local Y = TextBoundsModule.Y
 		
 		if p1.props.renderInsert then
-			x += p1.props.insertSize.X + padding
-			y = math.max(y, p1.props.insertSize.Y + padding * 2)
+			X += p1.props.insertSize.X + Padding
+			Y = math.max(Y, p1.props.insertSize.Y + Padding * 2)
 		end
-		if fFlagExpChatPresetChatEnabled and (fFlagExpChatPresetChatEnabled and (isPresetMessage(p1.props) and p1.props.isTextChatServiceOn)) then
-			local var6 = getPresetIconSize(var3.TextSize)
-			x += var6 + padding
-			y = math.max(y, var6)
+		local IsTextChatServiceOn = FFlagExpChatPresetChatEnabled and (IsPresetMessageFunction(p1.props) and p1.props.isTextChatServiceOn)
+		
+		if FFlagExpChatPresetChatEnabled and IsTextChatServiceOn then
+			local PresetIconSize: number = GetPresetIconSizeFunction(CallbackResult.TextSize)
+			X += PresetIconSize + Padding
+			Y = math.max(Y, PresetIconSize)
 		end
-		p1.heightMotor:setGoal(var5(y))
-		p1.widthMotor:setGoal(var5(x))
+		p1.heightMotor:setGoal(Size(Y))
+		p1.widthMotor:setGoal(Size(X))
 	end
 end
 
-function chatBubble.didMount(p1)
-	-- upvalues: getEnablePerBubbleCustomizationModule (ref), var2 (ref), getTextBoundsModule (ref), getSpringFromSettingsModule (ref), fFlagExpChatPresetChatEnabled (ref), isPresetMessage (ref), getPresetIconSize (ref), otterModule (ref), clientSettingsUtilityModule (ref)
+function ChatBubble.didMount(p1) --[[ Line: 311 ]]
+	-- upvalues: GetEnablePerBubbleCustomizationModule (copy), Callback (copy), GetTextBoundsModule (copy), GetSpringFromSettingsModule (copy), FFlagExpChatPresetChatEnabled (copy), IsPresetMessageFunction (copy), GetPresetIconSizeFunction (copy), OtterModule (copy), ClientSettingsUtilityModule (copy)
 	p1.isMounted = true
-	local var3 = if getEnablePerBubbleCustomizationModule() then var2(p1.props.chatSettings, p1.props.bubbleChatMessageProperties) else p1.props.chatSettings
-	local var4 = if p1.props.useTranslation and p1.props.translation and p1.props.translation ~= "" then getTextBoundsModule(p1.props.translation, var3) else getTextBoundsModule(p1.props.text, var3)
-	local var5 = getSpringFromSettingsModule(var3, "size")
-	local var6 = getSpringFromSettingsModule(var3, "transparency")
-	local x = var4.X
-	local y = var4.Y
+	local CallbackResult = if GetEnablePerBubbleCustomizationModule() then Callback(p1.props.chatSettings, p1.props.bubbleChatMessageProperties) else p1.props.chatSettings
+	local TextBoundsModule = if p1.props.useTranslation and p1.props.translation and p1.props.translation ~= "" then GetTextBoundsModule(p1.props.translation, CallbackResult) else GetTextBoundsModule(p1.props.text, CallbackResult)
+	local Size = GetSpringFromSettingsModule(CallbackResult, "size")
+	local Transparency = GetSpringFromSettingsModule(CallbackResult, "transparency")
+	local X = TextBoundsModule.X
+	local Y = TextBoundsModule.Y
 	
 	if p1.props.renderInsert then
-		x += p1.props.insertSize.X + var3.Padding
-		y = math.max(y, p1.props.insertSize.Y + var3.Padding * 2)
+		X += p1.props.insertSize.X + CallbackResult.Padding
+		Y = math.max(Y, p1.props.insertSize.Y + CallbackResult.Padding * 2)
 	end
-	if fFlagExpChatPresetChatEnabled and (fFlagExpChatPresetChatEnabled and (isPresetMessage(p1.props) and p1.props.isTextChatServiceOn)) then
-		local var7 = getPresetIconSize(var3.TextSize)
-		x += var7 + var3.Padding
-		y = math.max(y, var7)
+	local IsTextChatServiceOn = FFlagExpChatPresetChatEnabled and (IsPresetMessageFunction(p1.props) and p1.props.isTextChatServiceOn)
+	
+	if FFlagExpChatPresetChatEnabled and IsTextChatServiceOn then
+		local PresetIconSize: number = GetPresetIconSizeFunction(CallbackResult.TextSize)
+		X += PresetIconSize + CallbackResult.Padding
+		Y = math.max(Y, PresetIconSize)
 	end
 	if p1.props.isMostRecent then
-		p1.heightMotor:setGoal(var5(y))
-		p1.widthMotor:setGoal(otterModule.instant(x))
+		p1.heightMotor:setGoal(Size(Y))
+		p1.widthMotor:setGoal(OtterModule.instant(X))
 	else
-		p1.heightMotor:setGoal(var5(y))
-		p1.widthMotor:setGoal(var5(x))
+		p1.heightMotor:setGoal(Size(Y))
+		p1.widthMotor:setGoal(Size(X))
 	end
-	p1.transparencyMotor:setGoal(var6(var3.Transparency))
-	local backgroundTransparency = clientSettingsUtilityModule.getBackgroundTransparency(var3, p1.props.clientSettings)
+	p1.transparencyMotor:setGoal(Transparency(CallbackResult.Transparency))
+	local BackgroundTransparency = ClientSettingsUtilityModule.getBackgroundTransparency(CallbackResult, p1.props.clientSettings)
 	
-	if getEnablePerBubbleCustomizationModule() then
-		local bubbleChatMessageProperties = p1.props.bubbleChatMessageProperties
+	if GetEnablePerBubbleCustomizationModule() then
+		local BubbleChatMessageProperties = p1.props.bubbleChatMessageProperties
 		
-		if bubbleChatMessageProperties and bubbleChatMessageProperties.BackgroundTransparency then
-			backgroundTransparency = clientSettingsUtilityModule.getBackgroundTransparency({
-				BackgroundTransparency = bubbleChatMessageProperties.BackgroundTransparency
+		if BubbleChatMessageProperties and BubbleChatMessageProperties.BackgroundTransparency then
+			BackgroundTransparency = ClientSettingsUtilityModule.getBackgroundTransparency({
+				BackgroundTransparency = BubbleChatMessageProperties.BackgroundTransparency
 			}, p1.props.clientSettings)
 		end
 	end
-	p1.backgroundTransparencyMotor:setGoal(var6(backgroundTransparency))
+	p1.backgroundTransparencyMotor:setGoal(Transparency(BackgroundTransparency))
 end
 
-function chatBubble.willUnmount(p1)
+function ChatBubble.willUnmount(p1) --[[ Line: 370 ]]
 	p1.isMounted = false
 	p1.transparencyMotor:destroy()
 	p1.backgroundTransparencyMotor:destroy()
@@ -291,4 +269,4 @@ function chatBubble.willUnmount(p1)
 	p1.widthMotor:destroy()
 end
 
-return chatBubble
+return ChatBubble

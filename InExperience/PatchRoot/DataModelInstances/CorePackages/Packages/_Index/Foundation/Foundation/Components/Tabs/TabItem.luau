@@ -1,99 +1,99 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local reactModule = require(parent.React)
-local builderIconsModule = require(parent.BuilderIcons)
-local iconModule = require(foundation.Components.Icon)
-local imageModule = require(foundation.Components.Image)
-local statusIndicatorModule = require(foundation.Components.StatusIndicator)
-local _ = require(foundation.Enums.StatusIndicatorShape)
-local _ = require(foundation.Enums.StatusIndicatorVariant)
-local textModule = require(foundation.Components.Text)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local uiblox = builderIconsModule.Migration.uiblox
-local fillBehaviorModule = require(foundation.Enums.FillBehavior)
-local _ = require(foundation.Enums.InputSize)
-local getIconScaleModule = require(foundation.Utility.getIconScale)
-local iconMigrationUtilsModule = require(foundation.Utility.iconMigrationUtils)
-local isMigrated = iconMigrationUtilsModule.isMigrated
-local isBuilderOrMigratedIcon = iconMigrationUtilsModule.isBuilderOrMigratedIcon
-local constantsModule = require(foundation.Constants)
-local useTabItemVariantsModule = require(script.Parent.useTabItemVariants)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local ReactModule = require(Parent.React)
+local BuilderIconsModule = require(Parent.BuilderIcons)
+local IconModule = require(Foundation.Components.Icon)
+local ImageModule = require(Foundation.Components.Image)
+local StatusIndicatorModule = require(Foundation.Components.StatusIndicator)
+local _ = require(Foundation.Enums.StatusIndicatorShape)
+local _ = require(Foundation.Enums.StatusIndicatorVariant)
+local TextModule = require(Foundation.Components.Text)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local Uiblox = BuilderIconsModule.Migration.uiblox
+local FillBehaviorModule = require(Foundation.Enums.FillBehavior)
+local _ = require(Foundation.Enums.InputSize)
+local GetIconScaleModule = require(Foundation.Utility.getIconScale)
+local IconMigrationUtilsModule = require(Foundation.Utility.iconMigrationUtils)
+local IsMigratedFunction = IconMigrationUtilsModule.isMigrated
+local IsBuilderOrMigratedIconFunction = IconMigrationUtilsModule.isBuilderOrMigratedIcon
+local ConstantsModule = require(Foundation.Constants)
+local UseTabItemVariantsModule = require(script.Parent.useTabItemVariants)
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useTokensModule (ref), fillBehaviorModule (ref), useTabItemVariantsModule (ref), reactModule (ref), builderIconsModule (ref), isBuilderOrMigratedIcon (ref), iconModule (ref), isMigrated (ref), uiblox (ref), getIconScaleModule (ref), imageModule (ref), viewModule (ref), constantsModule (ref), textModule (ref), statusIndicatorModule (ref)
-	local var1 = useTokensModule()
-	local var2 = if p1.isActive then var1.Color.Content.Default else var1.Color.Content.Emphasis
-	local var3 = useTabItemVariantsModule(var1, p1.size, p1.fillBehavior == fillBehaviorModule.Fill)
-	local var4 = reactModule.useMemo(function()
-		-- upvalues: var1 (ref)
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 66 | Named "TabItem" ]]
+	-- upvalues: UseTokensModule (copy), FillBehaviorModule (copy), UseTabItemVariantsModule (copy), ReactModule (copy), BuilderIconsModule (copy), IsBuilderOrMigratedIconFunction (copy), IconModule (copy), IsMigratedFunction (copy), Uiblox (copy), GetIconScaleModule (copy), ImageModule (copy), ViewModule (copy), ConstantsModule (copy), TextModule (copy), StatusIndicatorModule (copy)
+	local UseTokensModuleResult = UseTokensModule()
+	local Default = if p1.isActive then UseTokensModuleResult.Color.Content.Default else UseTokensModuleResult.Color.Content.Emphasis
+	local UseTabItemVariantsModuleResult = UseTabItemVariantsModule(UseTokensModuleResult, p1.size, p1.fillBehavior == FillBehaviorModule.Fill)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 75 ]]
+		-- upvalues: UseTokensModuleResult (copy)
 		return {
 			offset = 0,
 			radius = UDim.new(0, 0),
-			borderWidth = var1.Stroke.Thicker
+			borderWidth = UseTokensModuleResult.Stroke.Thicker
 		}
-	end, { var1 })
-	local var5 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), builderIconsModule (copy)
+	end, { UseTokensModuleResult })
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 83 ]]
+		-- upvalues: p1 (copy), BuilderIconsModule (upval)
 		return if p1.icon == nil then nil elseif typeof(p1.icon) == "string" then {
 			name = p1.icon,
-			variant = builderIconsModule.IconVariant.Regular
+			variant = BuilderIconsModule.IconVariant.Regular
 		} else p1.icon
 	end, { p1.icon })
-	local var6 = nil
+	local Element = nil
 	
-	if var5 then
-		if isBuilderOrMigratedIcon(var5.name) then
-			var6 = reactModule.createElement(iconModule, {
-				name = if isMigrated(var5.name) then uiblox[var5.name].name else var5.name,
-				variant = if isMigrated(var5.name) then uiblox[var5.name].variant else var5.variant,
-				size = var3.icon.size,
-				style = var2
+	if UseMemoResult1 then
+		if IsBuilderOrMigratedIconFunction(UseMemoResult1.name) then
+			Element = ReactModule.createElement(IconModule, {
+				name = if IsMigratedFunction(UseMemoResult1.name) then Uiblox[UseMemoResult1.name].name else UseMemoResult1.name,
+				variant = if IsMigratedFunction(UseMemoResult1.name) then Uiblox[UseMemoResult1.name].variant else UseMemoResult1.variant,
+				size = UseTabItemVariantsModuleResult.icon.size,
+				style = Default
 			})
 		else
-			local var7, var8 = getIconScaleModule(var5.name, var3.icon.size)
+			local IconScaleModule, IconScaleModule2 = GetIconScaleModule(UseMemoResult1.name, UseTabItemVariantsModuleResult.icon.size)
 			
-			if var7 then
-				var6 = reactModule.createElement(imageModule, {
-					Image = var5.name,
-					Size = UDim2.fromOffset(var7.X, var7.Y),
-					imageStyle = var2,
-					scale = var8
+			if IconScaleModule then
+				Element = ReactModule.createElement(ImageModule, {
+					Image = UseMemoResult1.name,
+					Size = UDim2.fromOffset(IconScaleModule.X, IconScaleModule.Y),
+					imageStyle = Default,
+					scale = IconScaleModule2
 				})
 			end
 		end
 	end
-	return reactModule.createElement(viewModule, {
-		tag = var3.container.tag,
-		GroupTransparency = if p1.isDisabled then constantsModule.DISABLED_TRANSPARENCY else nil,
+	return ReactModule.createElement(ViewModule, {
+		tag = UseTabItemVariantsModuleResult.container.tag,
+		GroupTransparency = if p1.isDisabled then ConstantsModule.DISABLED_TRANSPARENCY else nil,
 		testId = p1.testId
 	}, {
-		Interactive = reactModule.createElement(viewModule, {
+		Interactive = ReactModule.createElement(ViewModule, {
 			LayoutOrder = 1,
 			Size = UDim2.fromScale(1, 1),
-			onActivated = function()
-				-- upvalues: p1 (ref)
+			onActivated = function() --[[ Line: 126 ]]
+				-- upvalues: p1 (copy)
 				p1.onActivated(p1.id)
 			end,
 			selection = { Selectable = not p1.isDisabled },
-			cursor = var4,
+			cursor = UseMemoResult,
 			isDisabled = p1.isDisabled,
-			ref = p2
+			ref = Ref
 		}),
-		Content = reactModule.createElement(viewModule, {
+		Content = ReactModule.createElement(ViewModule, {
 			LayoutOrder = 2,
-			tag = var3.content.tag,
-			Size = var3.content.Size
+			tag = UseTabItemVariantsModuleResult.content.tag,
+			Size = UseTabItemVariantsModuleResult.content.Size
 		}, {
-			Icon = if p1.icon then var6 else nil,
-			Text = reactModule.createElement(textModule, {
+			Icon = if p1.icon then Element else nil,
+			Text = ReactModule.createElement(TextModule, {
 				LayoutOrder = 2,
 				Text = p1.text,
-				style = var2,
-				tag = var3.text.tag
+				style = Default,
+				tag = UseTabItemVariantsModuleResult.text.tag
 			}),
-			Indicator = if p1.indicator then reactModule.createElement(statusIndicatorModule, if p1.indicator.value then {
+			Indicator = if p1.indicator then ReactModule.createElement(StatusIndicatorModule, if p1.indicator.value then {
 				LayoutOrder = 3,
 				value = p1.indicator.value,
 				variant = p1.indicator.variant,

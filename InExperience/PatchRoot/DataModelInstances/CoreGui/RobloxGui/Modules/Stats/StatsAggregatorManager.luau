@@ -1,51 +1,51 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local statsUtilsModule = require(coreGuiService.RobloxGui.Modules.Stats.StatsUtils)
-local statsAggregatorModule = require(coreGuiService.RobloxGui.Modules.Stats.StatsAggregator)
-local getFFlagLazyPerfStatsInitModule = require(coreGuiService.RobloxGui.Modules.Flags.GetFFlagLazyPerfStatsInit)
-local t = {}
-t.__index = t
-t.SecondsBetweenUpdate = 1
-t.NumSamplesToKeep = 20
-local var1 = nil
+﻿local CoreGui = game:GetService("CoreGui")
+local StatsUtilsModule = require(CoreGui.RobloxGui.Modules.Stats.StatsUtils)
+local StatsAggregatorModule = require(CoreGui.RobloxGui.Modules.Stats.StatsAggregator)
+local GetFFlagLazyPerfStatsInitModule = require(CoreGui.RobloxGui.Modules.Flags.GetFFlagLazyPerfStatsInit)
+local StatsAggregatorManager = {}
+StatsAggregatorManager.__index = StatsAggregatorManager
+StatsAggregatorManager.SecondsBetweenUpdate = 1
+StatsAggregatorManager.NumSamplesToKeep = 20
+local NewResult = nil
 
-function t.getSingleton()
-	-- upvalues: var1 (write), t (ref), getFFlagLazyPerfStatsInitModule (ref)
-	if var1 == nil then
-		var1 = t.__new()
+function StatsAggregatorManager.getSingleton() --[[ Line: 26 ]]
+	-- upvalues: NewResult (ref), StatsAggregatorManager (copy), GetFFlagLazyPerfStatsInitModule (copy)
+	if NewResult == nil then
+		NewResult = StatsAggregatorManager.__new()
 		
-		if not getFFlagLazyPerfStatsInitModule() then
-			var1:StartListening()
+		if not GetFFlagLazyPerfStatsInitModule() then
+			NewResult:StartListening()
 		end
 	end
-	return var1
+	return NewResult
 end
 
-function t.__new()
-	-- upvalues: t (ref), statsUtilsModule (ref), statsAggregatorModule (ref)
-	local t_1 = {}
-	setmetatable(t_1, t)
-	t_1._statsAggregators = {}
+function StatsAggregatorManager.__new() --[[ Line: 36 ]]
+	-- upvalues: StatsAggregatorManager (copy), StatsUtilsModule (copy), StatsAggregatorModule (copy)
+	local t = {}
+	setmetatable(t, StatsAggregatorManager)
+	t._statsAggregators = {}
 	
-	for i, v in ipairs(statsUtilsModule.AllStatTypes) do
-		t_1._statsAggregators[v] = statsAggregatorModule.new(v, t.NumSamplesToKeep, t.SecondsBetweenUpdate)
+	for _, allStatType in ipairs(StatsUtilsModule.AllStatTypes) do
+		t._statsAggregators[allStatType] = StatsAggregatorModule.new(allStatType, StatsAggregatorManager.NumSamplesToKeep, StatsAggregatorManager.SecondsBetweenUpdate)
 	end
-	return t_1
+	return t
 end
 
-function t.StartListening(p1)
-	for i, v in pairs(p1._statsAggregators) do
-		v:StartListening()
-	end
-end
-
-function t.StopListening(p2)
-	for i, v in pairs(p2._statsAggregators) do
-		v:StopListening()
+function StatsAggregatorManager.StartListening(p1) --[[ Line: 53 ]]
+	for _, statsAggregator in pairs(p1._statsAggregators) do
+		statsAggregator:StartListening()
 	end
 end
 
-function t.GetAggregator(p3, p4)
+function StatsAggregatorManager.StopListening(p2) --[[ Line: 59 ]]
+	for _, statsAggregator in pairs(p2._statsAggregators) do
+		statsAggregator:StopListening()
+	end
+end
+
+function StatsAggregatorManager.GetAggregator(p3, p4) --[[ Line: 65 ]]
 	return p3._statsAggregators[p4]
 end
 
-return t
+return StatsAggregatorManager

@@ -1,39 +1,38 @@
-﻿local parent = script:FindFirstAncestor("MomentsCreation").Parent
-local foundationModule = require(parent.Foundation)
-local localizationModule = require(parent.Localization)
-local reactModule = require(parent.React)
-local dialog = foundationModule.Dialog
-local useLocalization = localizationModule.Hooks.useLocalization
+﻿local Parent = script:FindFirstAncestor("MomentsCreation").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local Dialog = FoundationModule.Dialog
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-return function(p1)
-	-- upvalues: useLocalization (ref), reactModule (ref), dialog (ref), foundationModule (ref)
-	local var1 = useLocalization({
+return function(p1) --[[ Line: 21 | Named "VoiceoverDeleteConfirmDialog" ]]
+	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), Dialog (copy), FoundationModule (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
 		title = "Feature.Moments.Label.DeleteVoiceoverTitle",
 		body = "Feature.Moments.Label.DeleteVoiceoverBody",
 		delete = "Feature.Moments.Action.Delete",
 		cancel = "Feature.Moments.Action.Cancel"
 	})
 	
-	return reactModule.createElement(dialog.Root, {
+	return ReactModule.createElement(Dialog.Root, {
 		hasBackdrop = true,
-		size = foundationModule.Enums.DialogSize.Small
+		size = FoundationModule.Enums.DialogSize.Small
 	}, {
-		DialogTitle = reactModule.createElement(dialog.Title, { LayoutOrder = 1, text = var1.title }),
-		DialogContent = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
-			DialogText = reactModule.createElement(dialog.Text, { Text = var1.body })
+		DialogTitle = ReactModule.createElement(Dialog.Title, { LayoutOrder = 1, text = UseLocalizationResult.title }),
+		DialogContent = ReactModule.createElement(Dialog.Content, { LayoutOrder = 2 }, {
+			DialogText = ReactModule.createElement(Dialog.Text, { Text = UseLocalizationResult.body })
 		}),
-		DialogActions = reactModule.createElement(dialog.Actions, {
+		DialogActions = ReactModule.createElement(Dialog.Actions, {
 			LayoutOrder = 3,
-			orientation = foundationModule.Enums.Orientation.Vertical,
+			orientation = FoundationModule.Enums.Orientation.Vertical,
 			actions = {
 				{
-					text = var1.delete,
-					variant = foundationModule.Enums.ButtonVariant.Alert,
+					text = UseLocalizationResult.delete,
+					variant = FoundationModule.Enums.ButtonVariant.Alert,
 					onActivated = p1.onConfirm
 				},
 				{
-					text = var1.cancel,
-					variant = foundationModule.Enums.ButtonVariant.Standard,
+					text = UseLocalizationResult.cancel,
+					variant = FoundationModule.Enums.ButtonVariant.Standard,
 					onActivated = p1.onCancel
 				}
 			}

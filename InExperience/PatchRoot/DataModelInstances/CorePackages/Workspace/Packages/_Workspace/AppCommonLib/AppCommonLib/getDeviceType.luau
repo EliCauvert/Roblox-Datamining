@@ -1,27 +1,32 @@
-﻿local userInputService = game:GetService("UserInputService")
-local parent = script:FindFirstAncestor("AppCommonLib").Parent
-local isVRAppBuildModule = require(script.Parent.IsVRAppBuild)
-local isTenFootInterfaceModule = require(script.Parent.isTenFootInterface)
-local robloxAppEnumsModule = require(parent.RobloxAppEnums)
-local deviceOrientationMode = robloxAppEnumsModule.DeviceOrientationMode
-local deviceType = robloxAppEnumsModule.DeviceType
+﻿local UserInputService = game:GetService("UserInputService")
+local IsVRAppBuildModule = require(script.Parent.IsVRAppBuild)
+local IsTenFootInterfaceModule = require(script.Parent.isTenFootInterface)
+local RobloxAppEnumsModule = require(script:FindFirstAncestor("AppCommonLib").Parent.RobloxAppEnums)
+local DeviceOrientationMode = RobloxAppEnumsModule.DeviceOrientationMode
+local DeviceType = RobloxAppEnumsModule.DeviceType
 
-return function(p1)
-	-- upvalues: isVRAppBuildModule (ref), deviceType (ref), isTenFootInterfaceModule (ref), userInputService (ref), deviceOrientationMode (ref)
-	if isVRAppBuildModule() then
-		return deviceType.VR
-	elseif isTenFootInterfaceModule() then
-		return deviceType.Console
+return function(Landscape) --[[ Line: 16 | Named "getDeviceType" ]]
+	-- upvalues: IsVRAppBuildModule (copy), DeviceType (copy), IsTenFootInterfaceModule (copy), UserInputService (copy), DeviceOrientationMode (copy)
+	if IsVRAppBuildModule() then
+		return DeviceType.VR
 	end
-	local none = Enum.Platform.None
-	pcall(function()
-		-- upvalues: none (write), userInputService (copy)
-		none = userInputService:GetPlatform()
+	if IsTenFootInterfaceModule() then
+		return DeviceType.Console
+	end
+	local None = Enum.Platform.None
+	pcall(function() --[[ Line: 26 ]]
+		-- upvalues: None (ref), UserInputService (upval)
+		None = UserInputService:GetPlatform()
 	end)
 	
-	if none == Enum.Platform.Windows or none == Enum.Platform.OSX or none == Enum.Platform.UWP then
-		return deviceType.Desktop
-	elseif none == Enum.Platform.IOS or none == Enum.Platform.Android then
-		return if p1 == deviceOrientationMode.Landscape then deviceType.Tablet elseif p1 == deviceOrientationMode.Portrait then deviceType.Phone else deviceType.Unknown
+	if None == Enum.Platform.Windows or None == Enum.Platform.OSX or None == Enum.Platform.UWP then
+		return DeviceType.Desktop
+	elseif None == Enum.Platform.IOS or None == Enum.Platform.Android then
+		if Landscape == DeviceOrientationMode.Landscape then
+			return DeviceType.Tablet
+		elseif Landscape == DeviceOrientationMode.Portrait then
+			return DeviceType.Phone
+		end
 	end
+	return DeviceType.Unknown
 end

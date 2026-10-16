@@ -1,18 +1,18 @@
-﻿local httpRbxApiService = game:GetService("HttpRbxApiService")
-local httpService = game:GetService("HttpService")
-local parent = script.Parent.Parent
-local promiseModule = require(parent.Parent.Promise)
-local APIUtilModule = require(parent.util.APIUtil)
+﻿local HttpRbxApiService = game:GetService("HttpRbxApiService")
+local HttpService = game:GetService("HttpService")
+local Parent = script.Parent.Parent
+local PromiseModule = require(Parent.Parent.Promise)
+local APIUtilModule = require(Parent.util.APIUtil)
 
 return {
-	fetch = function()
-		-- upvalues: promiseModule (ref), httpService (ref), httpRbxApiService (ref), APIUtilModule (ref)
-		return promiseModule.try(function()
-			-- upvalues: httpService (copy), httpRbxApiService (copy), APIUtilModule (copy)
-			return httpService:JSONDecode(httpRbxApiService:GetAsyncFullUrl(`https://itemconfiguration.{APIUtilModule.getBaseDomain()}/v1/bundles/metadata`))
+	fetch = function() --[[ Line: 42 ]]
+		-- upvalues: PromiseModule (copy), HttpService (copy), HttpRbxApiService (copy), APIUtilModule (copy)
+		return PromiseModule.try(function() --[[ Line: 43 ]]
+			-- upvalues: HttpService (upval), HttpRbxApiService (upval), APIUtilModule (upval)
+			return HttpService:JSONDecode(HttpRbxApiService:GetAsyncFullUrl(`https://itemconfiguration.{APIUtilModule.getBaseDomain()}/v1/bundles/metadata`))
 		end)
 	end,
-	mock = function()
+	mock = function() --[[ Line: 50 ]]
 		return {
 			isBundlesControllerEnabled = true,
 			isBundlesCreationEnabled = true,

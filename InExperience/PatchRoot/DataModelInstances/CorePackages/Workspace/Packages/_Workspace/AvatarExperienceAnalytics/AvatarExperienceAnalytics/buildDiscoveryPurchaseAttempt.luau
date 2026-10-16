@@ -1,37 +1,38 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceAnalytics").Parent
-local unifiedEventLogEnumsModule = require(script.Parent.UnifiedEventLogEnums)
-local unifiedLoggingSurface = require(parent.AvatarExperienceNavigation).Enums.UnifiedLoggingSurface
-local mutedError = require(parent.Loggers).mutedError
-local sendAXCounterV2Module = require(script.Parent.sendAXCounterV2)
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceAnalytics").Parent
+local UnifiedEventLogEnumsModule = require(script.Parent.UnifiedEventLogEnums)
+local UnifiedLoggingSurface = require(Parent.AvatarExperienceNavigation).Enums.UnifiedLoggingSurface
+local MutedErrorFunction = require(Parent.Loggers).mutedError
+local SendAXCounterV2Module = require(script.Parent.sendAXCounterV2)
 
-return function(p1)
-	-- upvalues: unifiedLoggingSurface (ref), mutedError (ref), sendAXCounterV2Module (ref), unifiedEventLogEnumsModule (ref)
-	local surface = p1.surface
+return function(p1) --[[ Line: 27 | Named "buildDiscoveryPurchaseAttempt" ]]
+	-- upvalues: UnifiedLoggingSurface (copy), MutedErrorFunction (copy), SendAXCounterV2Module (copy), UnifiedEventLogEnumsModule (copy)
+	local Surface = p1.surface
 	
-	if not (if surface ~= unifiedLoggingSurface.DISCOVERY_HOMEPAGE then surface == unifiedLoggingSurface.DISCOVERY_SEARCH_RESULTS else true) or p1.hasWidgetAttribution then
+	if Surface ~= UnifiedLoggingSurface.DISCOVERY_HOMEPAGE and Surface ~= UnifiedLoggingSurface.DISCOVERY_SEARCH_RESULTS or p1.hasWidgetAttribution then
 		return nil
 	elseif p1.itemId == nil then
-		local t = {
+		local config = {
 			reason = "missingItemId",
-			surface = tostring(surface),
+			surface = tostring(Surface),
 			itemType = tostring(p1.itemType),
 			assetType = tostring(p1.assetType),
 			bundleType = tostring(p1.bundleType),
 			hasItemPrice = tostring(p1.itemPrice ~= nil)
 		}
-		mutedError("buildDiscoveryPurchaseAttempt: dropped discovery PURCHASE_ATTEMPT with no itemId", t)
-		sendAXCounterV2Module("DiscoveryPurchaseAttemptDropped", t)
+		MutedErrorFunction("buildDiscoveryPurchaseAttempt: dropped discovery PURCHASE_ATTEMPT with no itemId", config)
+		SendAXCounterV2Module("DiscoveryPurchaseAttemptDropped", config)
 		
 		return nil
+	else
+		return {
+			action = UnifiedEventLogEnumsModule.MarketplaceUnifiedAction.PURCHASE_ATTEMPT,
+			itemId = p1.itemId,
+			itemType = p1.itemType,
+			surface = Surface,
+			organicItemPrice = p1.itemPrice,
+			assetType = p1.assetType,
+			bundleType = p1.bundleType,
+			cartId = p1.cartId
+		}
 	end
-	return {
-		action = unifiedEventLogEnumsModule.MarketplaceUnifiedAction.PURCHASE_ATTEMPT,
-		itemId = p1.itemId,
-		itemType = p1.itemType,
-		surface = surface,
-		organicItemPrice = p1.itemPrice,
-		assetType = p1.assetType,
-		bundleType = p1.bundleType,
-		cartId = p1.cartId
-	}
 end

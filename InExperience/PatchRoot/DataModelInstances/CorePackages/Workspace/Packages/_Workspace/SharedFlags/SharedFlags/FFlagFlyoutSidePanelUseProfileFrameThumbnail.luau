@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("FlyoutSidePanelUseProfileFrameThumbnail", false) and require(script.Parent.GetFFlagProfileFrameThumbnailEnabled)()
+﻿local GetFFlagProfileFrameThumbnailEnabledModule = require(script.Parent.GetFFlagProfileFrameThumbnailEnabled)
+
+return game:DefineFastFlag("FlyoutSidePanelUseProfileFrameThumbnail", false) and GetFFlagProfileFrameThumbnailEnabledModule()

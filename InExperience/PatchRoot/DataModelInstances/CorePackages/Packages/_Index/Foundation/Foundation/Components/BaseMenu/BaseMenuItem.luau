@@ -1,214 +1,171 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local builderIconsModule = require(parent.BuilderIcons)
-local loggerModule = require(foundation.Utility.Logger)
-local reactModule = require(parent.React)
-local constantsModule = require(foundation.Constants)
-local iconModule = require(foundation.Components.Icon)
-local popoverModule = require(foundation.Components.Popover)
-local textModule = require(foundation.Components.Text)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local useBindableModule = require(foundation.Utility.useBindable)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local useComposedRef = require(parent.ReactUtils).useComposedRef
-local _ = require(foundation.Enums.InputSize)
-local popoverAlignModule = require(foundation.Enums.PopoverAlign)
-local popoverSideModule = require(foundation.Enums.PopoverSide)
-local radiusModule = require(foundation.Enums.Radius)
-local flagsModule = require(foundation.Utility.Flags)
-local baseMenuItemAccessoryModule = require(script.Parent.BaseMenuItemAccessory)
-local baseMenuContextModule = require(script.Parent.BaseMenuContext)
-local baseMenuScrollContainerModule = require(script.Parent.BaseMenuScrollContainer)
-local useBaseMenuItemVariantsModule = require(script.Parent.useBaseMenuItemVariants)
-local useMenuItemHoverModule = require(script.Parent.useMenuItemHover)
-local t = { isChecked = false }
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local BuilderIconsModule = require(Parent.BuilderIcons)
+local LoggerModule = require(Foundation.Utility.Logger)
+local ReactModule = require(Parent.React)
+local ConstantsModule = require(Foundation.Constants)
+local IconModule = require(Foundation.Components.Icon)
+local PopoverModule = require(Foundation.Components.Popover)
+local TextModule = require(Foundation.Components.Text)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local UseBindableModule = require(Foundation.Utility.useBindable)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local UseComposedRefFunction = require(Parent.ReactUtils).useComposedRef
+local _ = require(Foundation.Enums.InputSize)
+local PopoverAlignModule = require(Foundation.Enums.PopoverAlign)
+local PopoverSideModule = require(Foundation.Enums.PopoverSide)
+local RadiusModule = require(Foundation.Enums.Radius)
+local FlagsModule = require(Foundation.Utility.Flags)
+local BaseMenuItemAccessoryModule = require(script.Parent.BaseMenuItemAccessory)
+local BaseMenuContextModule = require(script.Parent.BaseMenuContext)
+local BaseMenuScrollContainerModule = require(script.Parent.BaseMenuScrollContainer)
+local UseBaseMenuItemVariantsModule = require(script.Parent.useBaseMenuItemVariants)
+local UseMenuItemHoverModule = require(script.Parent.useMenuItemHover)
+local config = { isChecked = false }
 
-local function _(p1)
-	return if p1 == nil then nil elseif type(p1) == "string" then { iconName = p1 } else p1
+local function _(IconName) --[[ Line: 68 | Named "resolveAccessory" ]]
+	return if IconName == nil then nil elseif type(IconName) == "string" then { iconName = IconName } else IconName
 end
 
-local var1 = (function()
-	-- upvalues: flagsModule (ref)
-	if not flagsModule.FoundationGuiObjectInputSinkProperty then
+local InputSink = (function() --[[ Line: 81 | Named "getInputSinkAll" ]]
+	-- upvalues: FlagsModule (copy)
+	if not FlagsModule.FoundationGuiObjectInputSinkProperty then
 		return nil
 	end
-	local ok, status = pcall(game.GetEngineFeature, game, "GuiObjectInputSink")
+	local Success, Result = pcall(game.GetEngineFeature, game, "GuiObjectInputSink")
 	
-	if not ok or not status then
+	if Success and Result then
+		local Success1, Result1 = pcall(function() --[[ Line: 91 ]]
+			return Enum.InputSink.All
+		end)
+		
+		return if Success1 then Result1 else nil
+	else
 		return nil
 	end
-	local ok_1, status_1 = pcall(function()
-		return Enum.InputSink.All
-	end)
-	
-	return if ok_1 then status_1 else nil
 end)()
 
-local function getContainerPadding(p1, p2)
+local function getContainerPadding(Container, IsIsChecked) --[[ Line: 100 ]]
 	return {
-		left = UDim.new(0, (if p2 then p1.paddingLeftWithCheck else p1.paddingLeftWithoutCheck) or 0),
-		right = UDim.new(0, p1.paddingRight or 0)
+		left = UDim.new(0, (if IsIsChecked then Container.paddingLeftWithCheck else Container.paddingLeftWithoutCheck) or 0),
+		right = UDim.new(0, Container.paddingRight or 0)
 	}
 end
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), baseMenuContextModule (ref), useTokensModule (ref), flagsModule (ref), useBaseMenuItemVariantsModule (ref), useMenuItemHoverModule (ref), loggerModule (ref), useBindableModule (ref), useComposedRef (ref), getContainerPadding (ref), viewModule (ref), iconModule (ref), builderIconsModule (ref), baseMenuItemAccessoryModule (ref), textModule (ref), withCommonPropsModule (ref), constantsModule (ref), baseMenuScrollContainerModule (ref), var1 (ref), popoverModule (ref), popoverSideModule (ref), popoverAlignModule (ref), radiusModule (ref)
-	local var2 = withDefaultsModule(p1, t)
-	local var3 = reactModule.useContext(baseMenuContextModule)
-	local var4 = if var2.menuHasLeading ~= nil then var3.hasLeading == true else var2.menuHasLeading
-	local var5 = if var2.menuHasCheck ~= nil then var2.isChecked == true else var2.menuHasCheck
-	local var6 = useTokensModule()
-	local size = var2.size or var3.size
-	local depth = var3.depth
-	local var7 = var2.children ~= nil
-	local var8 = var7 and var3.hoverOpenPath[depth] == var2.id
-	local leading = var2.leading or var2.icon
-	local var9 = if leading == nil then nil elseif type(leading) == "string" then { iconName = leading } else leading
-	local trailing = var2.trailing
-	local var10 = if trailing == nil then nil elseif type(trailing) == "string" then { iconName = trailing } else trailing
-	local var11 = flagsModule.FoundationBaseMenuSubmenuMaxHeight and var3.maxHeight ~= nil
-	local var12 = useBaseMenuItemVariantsModule(var6, size, var11)
-	local var13 = reactModule.useRef(nil)
-	local var14 = var2.isChecked == true and not var7
-	local var15, var16 = reactModule.useState(false)
-	local var17 = reactModule.useCallback(function()
-		-- upvalues: var16 (ref)
-		var16(true)
+return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 109 | Named "BaseMenuItem" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), ReactModule (copy), BaseMenuContextModule (copy), UseTokensModule (copy), FlagsModule (copy), UseBaseMenuItemVariantsModule (copy), UseMenuItemHoverModule (copy), LoggerModule (copy), UseBindableModule (copy), UseComposedRefFunction (copy), getContainerPadding (copy), ViewModule (copy), IconModule (copy), BuilderIconsModule (copy), BaseMenuItemAccessoryModule (copy), TextModule (copy), WithCommonPropsModule (copy), ConstantsModule (copy), BaseMenuScrollContainerModule (copy), InputSink (copy), PopoverModule (copy), PopoverSideModule (copy), PopoverAlignModule (copy), RadiusModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	local UseContextResult = ReactModule.useContext(BaseMenuContextModule)
+	local IsHasLeading = if WithDefaultsModuleResult.menuHasLeading == nil then UseContextResult.hasLeading == true else WithDefaultsModuleResult.menuHasLeading
+	local IsIsChecked = if WithDefaultsModuleResult.menuHasCheck == nil then WithDefaultsModuleResult.isChecked == true else WithDefaultsModuleResult.menuHasCheck
+	local UseTokensModuleResult = UseTokensModule()
+	local Size = WithDefaultsModuleResult.size or UseContextResult.size
+	local Depth = UseContextResult.depth
+	local HasChildren = WithDefaultsModuleResult.children ~= nil
+	local IsHoverOpenPathEntryMatch: boolean = HasChildren and UseContextResult.hoverOpenPath[Depth] == WithDefaultsModuleResult.id
+	local Leading = WithDefaultsModuleResult.leading or WithDefaultsModuleResult.icon
+	local Config = if Leading == nil then nil elseif type(Leading) == "string" then { iconName = Leading } else Leading
+	local Trailing = WithDefaultsModuleResult.trailing
+	local Config1 = if Trailing == nil then nil elseif type(Trailing) == "string" then { iconName = Trailing } else Trailing
+	local HasMaxHeight: boolean = FlagsModule.FoundationBaseMenuSubmenuMaxHeight and UseContextResult.maxHeight ~= nil
+	local UseBaseMenuItemVariantsModuleResult = UseBaseMenuItemVariantsModule(UseTokensModuleResult, Size, HasMaxHeight)
+	local UseRefResult = ReactModule.useRef(nil)
+	local NoHasChildren: boolean = WithDefaultsModuleResult.isChecked == true and not HasChildren
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 131 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(true)
 	end, {})
-	local var18 = var9 ~= nil
-	reactModule.useEffect(function()
-		-- upvalues: var18 (ref), var3 (ref)
-		if var18 and var3.setHasLeading then
-			var3.setHasLeading()
+	local HasConfig = Config ~= nil
+	ReactModule.useEffect(function() --[[ Line: 136 ]]
+		-- upvalues: HasConfig (copy), UseContextResult (copy)
+		if HasConfig and UseContextResult.setHasLeading then
+			UseContextResult.setHasLeading()
 		end
-	end, { var18, var3.setHasLeading })
-	useMenuItemHoverModule({
-		itemRef = var13,
-		id = var2.id,
-		depth = depth,
-		isSubmenu = var7,
-		isDisabled = var2.isDisabled,
-		hoverOpenAtDepth = var3.hoverOpenAtDepth,
-		hoverCloseAtDepth = var3.hoverCloseAtDepth
+	end, { HasConfig, UseContextResult.setHasLeading })
+	UseMenuItemHoverModule({
+		itemRef = UseRefResult,
+		id = WithDefaultsModuleResult.id,
+		depth = Depth,
+		isSubmenu = HasChildren,
+		isDisabled = WithDefaultsModuleResult.isDisabled,
+		hoverOpenAtDepth = UseContextResult.hoverOpenAtDepth,
+		hoverCloseAtDepth = UseContextResult.hoverCloseAtDepth
 	})
-	local var19 = reactModule.useCallback(function()
-		-- upvalues: var7 (ref), var2 (ref), var3 (ref), var8 (ref), depth (ref), loggerModule (copy)
-		if var7 then
-			if var2.isDisabled then return end
-			if var3.hoverOpenAtDepth and not var8 then
-				var3.hoverOpenAtDepth(depth, var2.id, true)
-				
-				return
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 153 ]]
+		-- upvalues: HasChildren (copy), WithDefaultsModuleResult (copy), UseContextResult (copy), IsHoverOpenPathEntryMatch (copy), Depth (copy), LoggerModule (upval)
+		if not HasChildren then
+			if UseContextResult.hoverReset then
+				UseContextResult.hoverReset()
 			end
-		elseif var3.hoverReset then
-			var3.hoverReset()
-		end
-		local var20 = if var2.onActivated then var2.onActivated else var3.onActivated
-		
-		if var20 then
-			var20(var2.id)
-		else
-			loggerModule:warning("Menu should have either onActivated on itself or on all of its children")
-		end
-		if depth > 1 and var3.onNestedLeafActivated then
-			var3.onNestedLeafActivated()
+			local OnActivated: (any) -> () = if WithDefaultsModuleResult.onActivated then WithDefaultsModuleResult.onActivated else UseContextResult.onActivated
+			
+			if OnActivated then
+				OnActivated(WithDefaultsModuleResult.id)
+			else
+				LoggerModule:warning("Menu should have either onActivated on itself or on all of its children")
+			end
+			if Depth > 1 and UseContextResult.onNestedLeafActivated then
+				UseContextResult.onNestedLeafActivated()
+			end
+		elseif WithDefaultsModuleResult.isDisabled then return end
+		if UseContextResult.hoverOpenAtDepth and not IsHoverOpenPathEntryMatch then
+			UseContextResult.hoverOpenAtDepth(Depth, WithDefaultsModuleResult.id, true)
+			
+			return
 		end
 	end, {
-		var7, var2.isDisabled, var8, depth, var2.id, var2.onActivated,
-		var3.onActivated, var3.onNestedLeafActivated, var3.hoverOpenAtDepth,
-		var3.hoverReset
+		HasChildren, WithDefaultsModuleResult.isDisabled, IsHoverOpenPathEntryMatch,
+		Depth, WithDefaultsModuleResult.id, WithDefaultsModuleResult.onActivated,
+		UseContextResult.onActivated, UseContextResult.onNestedLeafActivated,
+		UseContextResult.hoverOpenAtDepth, UseContextResult.hoverReset
 	})
-	local var20 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref)
-		if var3.hoverReset then
-			var3.hoverReset()
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 194 ]]
+		-- upvalues: UseContextResult (copy)
+		if UseContextResult.hoverReset then
+			UseContextResult.hoverReset()
 		end
-	end, { var3.hoverReset })
-	local var21 = useBindableModule(var3.maxHeight)
-	local var22 = reactModule.useMemo(function()
-		-- upvalues: var6 (ref)
-		return {
-			radius = UDim.new(0, var6.Radius.Small),
-			offset = var6.Size.Size_200,
-			borderWidth = var6.Stroke.Thicker
-		}
-	end, { var6 })
-	local var23 = useComposedRef(var13, p2)
-	local _ = nil
-	local var24 = getContainerPadding(var12.container, var5)
-	local t_1 = {
-		FillDirection = Enum.FillDirection.Horizontal,
-		VerticalAlignment = Enum.VerticalAlignment.Center,
-		Padding = UDim.new(0, 0),
-		SortOrder = Enum.SortOrder.LayoutOrder
-	}
-	local var25 = if var12.wrapper then var12.wrapper.gap else 0
-	local var26 = if var5 then reactModule.createElement(viewModule, {
-		LayoutOrder = 1,
-		tag = `{var12.slotAlign.tag} {var12.check.tag}`,
-		testId = `{var2.testId}--check-column`
-	}, {
-		Check = if var14 then reactModule.createElement(iconModule, {
-			name = builderIconsModule.Icon.Check,
-			style = var12.check.style,
-			size = var12.check.size,
-			testId = `{var2.testId}--checkmark`
-		}) else nil
-	}) else nil
-	local var27 = nil
-	
-	if var9 ~= nil then
-		var27 = reactModule.createElement(baseMenuItemAccessoryModule, {
-			LayoutOrder = 1,
-			accessory = var9,
-			iconVariant = var12.icon,
-			size = size,
-			tokens = var6,
-			testId = `{var2.testId}--leading`
-		})
-	elseif var4 then
-		var27 = reactModule.createElement(viewModule, {
-			LayoutOrder = 1,
-			tag = `{var12.slotAlign.tag} {var12.icon.tag}`
-		})
-	end
-	local var28 = reactModule.createElement(textModule, { LayoutOrder = 2, Text = var2.text, tag = var12.text.tag })
-	local var29 = nil
-	
-	if var7 then
-		var29 = reactModule.createElement(iconModule, {
-			LayoutOrder = 3,
-			name = builderIconsModule.Icon.ChevronSmallRight,
-			style = var12.check.style,
-			size = var12.chevron.size,
-			testId = `{var2.testId}--chevron`
-		})
-	elseif var10 ~= nil then
-		var29 = reactModule.createElement(baseMenuItemAccessoryModule, {
-			LayoutOrder = 3,
-			accessory = var10,
-			iconVariant = var12.icon,
-			size = size,
-			tokens = var6,
-			testId = `{var2.testId}--trailing`
-		})
-	end
-	local var30 = reactModule.createElement(viewModule, withCommonPropsModule(var2, {
-		GroupTransparency = if var2.isDisabled then constantsModule.DISABLED_TRANSPARENCY else nil,
-		isDisabled = var2.isDisabled,
-		onActivated = var19,
-		selection = { Selectable = not var2.isDisabled },
-		cursor = var22,
-		tag = var12.container.tag,
-		padding = var24,
-		layout = t_1,
-		ref = var23
+	end, { UseContextResult.hoverReset })
+	local UseBindableModuleResult = UseBindableModule(UseContextResult.maxHeight)
+	local Element = ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, {
+		GroupTransparency = if WithDefaultsModuleResult.isDisabled then ConstantsModule.DISABLED_TRANSPARENCY else nil,
+		isDisabled = WithDefaultsModuleResult.isDisabled,
+		onActivated = UseResult1,
+		selection = { Selectable = not WithDefaultsModuleResult.isDisabled },
+		cursor = ReactModule.useMemo(function() --[[ Line: 202 ]]
+			-- upvalues: UseTokensModuleResult (copy)
+			return {
+				radius = UDim.new(0, UseTokensModuleResult.Radius.Small),
+				offset = UseTokensModuleResult.Size.Size_200,
+				borderWidth = UseTokensModuleResult.Stroke.Thicker
+			}
+		end, { UseTokensModuleResult }),
+		tag = UseBaseMenuItemVariantsModuleResult.container.tag,
+		padding = getContainerPadding(UseBaseMenuItemVariantsModuleResult.container, IsIsChecked),
+		layout = {
+			FillDirection = Enum.FillDirection.Horizontal,
+			VerticalAlignment = Enum.VerticalAlignment.Center,
+			Padding = UDim.new(0, 0),
+			SortOrder = Enum.SortOrder.LayoutOrder
+		},
+		ref = UseComposedRefFunction(UseRefResult, p2)
 	}), {
-		Check = var26,
-		Wrapper = reactModule.createElement(viewModule, {
+		Check = if IsIsChecked then ReactModule.createElement(ViewModule, {
+			LayoutOrder = 1,
+			tag = `{UseBaseMenuItemVariantsModuleResult.slotAlign.tag} {UseBaseMenuItemVariantsModuleResult.check.tag}`,
+			testId = `{WithDefaultsModuleResult.testId}--check-column`
+		}, {
+			Check = if NoHasChildren then ReactModule.createElement(IconModule, {
+				name = BuilderIconsModule.Icon.Check,
+				style = UseBaseMenuItemVariantsModuleResult.check.style,
+				size = UseBaseMenuItemVariantsModuleResult.check.size,
+				testId = `{WithDefaultsModuleResult.testId}--checkmark`
+			}) else nil
+		}) else nil,
+		Wrapper = ReactModule.createElement(ViewModule, {
 			LayoutOrder = 2,
 			tag = "auto-xy",
 			flexItem = { FlexMode = Enum.UIFlexMode.Fill },
@@ -216,57 +173,98 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 				FillDirection = Enum.FillDirection.Horizontal,
 				HorizontalFlex = Enum.UIFlexAlignment.SpaceBetween,
 				VerticalAlignment = Enum.VerticalAlignment.Center,
-				Padding = UDim.new(0, var25),
+				Padding = UDim.new(0, UseBaseMenuItemVariantsModuleResult.wrapper and UseBaseMenuItemVariantsModuleResult.wrapper.gap or 0),
 				SortOrder = Enum.SortOrder.LayoutOrder
 			}
-		}, { Leading = var27, Title = var28, Trailing = var29 })
-	})
-	local var31 = reactModule.useMemo(function()
-		-- upvalues: var3 (ref), size (ref), var15 (ref), var17 (ref), depth (ref)
-		return {
-			onActivated = var3.onActivated,
-			onNestedLeafActivated = var3.onNestedLeafActivated,
-			size = size,
-			hasLeading = var15,
-			setHasLeading = var17,
-			hoverOpenPath = var3.hoverOpenPath,
-			hoverOpenAtDepth = var3.hoverOpenAtDepth,
-			hoverCloseAtDepth = var3.hoverCloseAtDepth,
-			hoverReset = var3.hoverReset,
-			depth = depth + 1,
-			maxHeight = var3.maxHeight
-		}
-	end, {
-		var3.onActivated, var3.onNestedLeafActivated, size, var15,
-		var3.hoverOpenPath, var3.hoverOpenAtDepth, var3.hoverCloseAtDepth,
-		var3.hoverReset, depth, var3.maxHeight
-	})
-	
-	if var7 then
-		local standard = var6.Stroke.Standard
-		local size_1 = var12.groupPadding.size
-		local var32 = reactModule.createElement(baseMenuContextModule.Provider, { value = var31 }, var2.children)
-		
-		return reactModule.createElement(reactModule.Fragment, nil, {
-			Item = var30,
-			Submenu = reactModule.createElement(popoverModule.Root, { isOpen = var8, testId = `{var2.testId}--submenu` }, {
-				Anchor = reactModule.createElement(popoverModule.Anchor, { anchorRef = var13 }),
-				Content = reactModule.createElement(popoverModule.Content, {
-					hasArrow = false,
-					side = {
-						position = popoverSideModule.Right,
-						offset = size_1 / 2 + standard
-					},
-					align = { position = popoverAlignModule.Start, offset = -size_1 },
-					onPressedOutside = var20,
-					backgroundStyle = var6.Color.Surface.Surface_200,
-					radius = radiusModule.Medium
-				}, if var11 then reactModule.createElement(baseMenuScrollContainerModule, {
-					maxHeight = var21,
-					scrollViewProps = { tag = var12.submenuContent.tag, InputSink = var1 }
-				}, var32) else reactModule.createElement(viewModule, { tag = var12.submenuContent.tag, InputSink = var1 }, var32))
+		}, {
+			Leading = if Config == nil then if IsHasLeading then ReactModule.createElement(ViewModule, {
+				LayoutOrder = 1,
+				tag = `{UseBaseMenuItemVariantsModuleResult.slotAlign.tag} {UseBaseMenuItemVariantsModuleResult.icon.tag}`
+			}) else nil else ReactModule.createElement(BaseMenuItemAccessoryModule, {
+				LayoutOrder = 1,
+				accessory = Config,
+				iconVariant = UseBaseMenuItemVariantsModuleResult.icon,
+				size = Size,
+				tokens = UseTokensModuleResult,
+				testId = `{WithDefaultsModuleResult.testId}--leading`
+			}),
+			Title = ReactModule.createElement(TextModule, {
+				LayoutOrder = 2,
+				Text = WithDefaultsModuleResult.text,
+				tag = UseBaseMenuItemVariantsModuleResult.text.tag
+			}),
+			Trailing = if HasChildren then ReactModule.createElement(IconModule, {
+				LayoutOrder = 3,
+				name = BuilderIconsModule.Icon.ChevronSmallRight,
+				style = UseBaseMenuItemVariantsModuleResult.check.style,
+				size = UseBaseMenuItemVariantsModuleResult.chevron.size,
+				testId = `{WithDefaultsModuleResult.testId}--chevron`
+			}) elseif Config1 == nil then nil else ReactModule.createElement(BaseMenuItemAccessoryModule, {
+				LayoutOrder = 3,
+				accessory = Config1,
+				iconVariant = UseBaseMenuItemVariantsModuleResult.icon,
+				size = Size,
+				tokens = UseTokensModuleResult,
+				testId = `{WithDefaultsModuleResult.testId}--trailing`
 			})
 		})
+	})
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 320 ]]
+		-- upvalues: UseContextResult (copy), Size (copy), UseStateResult (copy), UseResult (copy), Depth (copy)
+		return {
+			onActivated = UseContextResult.onActivated,
+			onNestedLeafActivated = UseContextResult.onNestedLeafActivated,
+			size = Size,
+			hasLeading = UseStateResult,
+			setHasLeading = UseResult,
+			hoverOpenPath = UseContextResult.hoverOpenPath,
+			hoverOpenAtDepth = UseContextResult.hoverOpenAtDepth,
+			hoverCloseAtDepth = UseContextResult.hoverCloseAtDepth,
+			hoverReset = UseContextResult.hoverReset,
+			depth = Depth + 1,
+			maxHeight = UseContextResult.maxHeight
+		}
+	end, {
+		UseContextResult.onActivated, UseContextResult.onNestedLeafActivated, Size,
+		UseStateResult, UseContextResult.hoverOpenPath,
+		UseContextResult.hoverOpenAtDepth, UseContextResult.hoverCloseAtDepth,
+		UseContextResult.hoverReset, Depth, UseContextResult.maxHeight
+	})
+	
+	if HasChildren then
+		local Size1: number = UseBaseMenuItemVariantsModuleResult.groupPadding.size
+		local Element1 = ReactModule.createElement(BaseMenuContextModule.Provider, { value = UseMemoResult }, WithDefaultsModuleResult.children)
+		
+		return ReactModule.createElement(ReactModule.Fragment, nil, {
+			Item = Element,
+			Submenu = ReactModule.createElement(PopoverModule.Root, {
+				isOpen = IsHoverOpenPathEntryMatch,
+				testId = `{WithDefaultsModuleResult.testId}--submenu`
+			}, {
+				Anchor = ReactModule.createElement(PopoverModule.Anchor, { anchorRef = UseRefResult }),
+				Content = ReactModule.createElement(PopoverModule.Content, {
+					hasArrow = false,
+					side = {
+						position = PopoverSideModule.Right,
+						offset = Size1 / 2 + UseTokensModuleResult.Stroke.Standard
+					},
+					align = { position = PopoverAlignModule.Start, offset = -Size1 },
+					onPressedOutside = UseResult2,
+					backgroundStyle = UseTokensModuleResult.Color.Surface.Surface_200,
+					radius = RadiusModule.Medium
+				}, if HasMaxHeight then ReactModule.createElement(BaseMenuScrollContainerModule, {
+					maxHeight = UseBindableModuleResult,
+					scrollViewProps = {
+						tag = UseBaseMenuItemVariantsModuleResult.submenuContent.tag,
+						InputSink = InputSink
+					}
+				}, Element1) else ReactModule.createElement(ViewModule, {
+					tag = UseBaseMenuItemVariantsModuleResult.submenuContent.tag,
+					InputSink = InputSink
+				}, Element1))
+			})
+		})
+	else
+		return Element
 	end
-	return var30
 end))

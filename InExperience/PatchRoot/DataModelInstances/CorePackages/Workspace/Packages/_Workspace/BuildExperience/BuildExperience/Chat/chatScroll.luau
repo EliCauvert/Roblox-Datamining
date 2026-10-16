@@ -1,39 +1,40 @@
-﻿local chatConstantsModule = require(script.Parent.chatConstants)
-local buildHistoryLoadTriggerViewportHeightPercent = game:DefineFastInt("BuildHistoryLoadTriggerViewportHeightPercent", 100)
+﻿local ChatConstantsModule = require(script.Parent.chatConstants)
+local BuildHistoryLoadTriggerViewportHeightPercent = game:DefineFastInt("BuildHistoryLoadTriggerViewportHeightPercent", 100)
 
 return {
-	getBottomCanvasPosition = function(p1)
-		return math.max(0, p1.AbsoluteCanvasSize.Y - p1.AbsoluteWindowSize.Y)
+	getBottomCanvasPosition = function(ScrollFrame): number --[[ Line: 6 ]]
+		return (math.max(0, ScrollFrame.AbsoluteCanvasSize.Y - ScrollFrame.AbsoluteWindowSize.Y))
 	end,
-	getDistanceFromBottom = function(p1)
-		return math.max(0, math.max(0, p1.AbsoluteCanvasSize.Y - p1.AbsoluteWindowSize.Y) - p1.CanvasPosition.Y)
+	getDistanceFromBottom = function(ScrollFrame): number --[[ Line: 10 ]]
+		return (math.max(0, math.max(0, ScrollFrame.AbsoluteCanvasSize.Y - ScrollFrame.AbsoluteWindowSize.Y) - ScrollFrame.CanvasPosition.Y))
 	end,
-	getOffsetInViewport = function(value, p1)
-		return p1.AbsolutePosition.Y - value.AbsolutePosition.Y
+	getOffsetInViewport = function(Frame, Frame1) --[[ Line: 27 ]]
+		return Frame1.AbsolutePosition.Y - Frame.AbsolutePosition.Y
 	end,
-	isScrolledToBottom = function(p1)
-		-- upvalues: chatConstantsModule (ref)
-		return math.max(0, math.max(0, p1.AbsoluteCanvasSize.Y - p1.AbsoluteWindowSize.Y) - p1.CanvasPosition.Y) <= chatConstantsModule.BOTTOM_SCROLL_THRESHOLD
+	isScrolledToBottom = function(ScrollFrame): boolean --[[ Line: 14 ]]
+		-- upvalues: ChatConstantsModule (copy)
+		return math.max(0, math.max(0, ScrollFrame.AbsoluteCanvasSize.Y - ScrollFrame.AbsoluteWindowSize.Y) - ScrollFrame.CanvasPosition.Y) <= ChatConstantsModule.BOTTOM_SCROLL_THRESHOLD
 	end,
-	isScrolledToTop = function(p1)
-		return p1.CanvasPosition.Y <= 0
+	isScrolledToTop = function(ScrollFrame): boolean --[[ Line: 18 ]]
+		return ScrollFrame.CanvasPosition.Y <= 0
 	end,
-	isScrolledNearTop = function(p1)
-		-- upvalues: buildHistoryLoadTriggerViewportHeightPercent (ref)
-		return p1.CanvasPosition.Y / p1.AbsoluteWindowSize.Y <= buildHistoryLoadTriggerViewportHeightPercent / 100
+	isScrolledNearTop = function(ScrollFrame): boolean --[[ Line: 22 ]]
+		-- upvalues: BuildHistoryLoadTriggerViewportHeightPercent (copy)
+		return ScrollFrame.CanvasPosition.Y / ScrollFrame.AbsoluteWindowSize.Y <= BuildHistoryLoadTriggerViewportHeightPercent / 100
 	end,
-	scrollToBottom = function(p1)
-		p1.CanvasPosition = Vector2.new(0, math.max(0, p1.AbsoluteCanvasSize.Y - p1.AbsoluteWindowSize.Y))
+	scrollToBottom = function(ScrollFrame) --[[ Line: 31 ]]
+		ScrollFrame.CanvasPosition = Vector2.new(0, (math.max(0, ScrollFrame.AbsoluteCanvasSize.Y - ScrollFrame.AbsoluteWindowSize.Y)))
 	end,
-	syncScrollFromBottom = function(p1, p2)
-		-- upvalues: chatConstantsModule (ref)
-		local maxValue = math.max(0, p1.AbsoluteCanvasSize.Y - p1.AbsoluteWindowSize.Y)
+	syncScrollFromBottom = function(ScrollFrame, p1: number) --[[ Line: 36 ]]
+		-- upvalues: ChatConstantsModule (copy)
+		local Largest = math.max(0, ScrollFrame.AbsoluteCanvasSize.Y - ScrollFrame.AbsoluteWindowSize.Y)
 		
-		if p2 <= chatConstantsModule.BOTTOM_SCROLL_THRESHOLD then
-			p1.CanvasPosition = Vector2.new(0, maxValue)
+		if p1 <= ChatConstantsModule.BOTTOM_SCROLL_THRESHOLD then
+			ScrollFrame.CanvasPosition = Vector2.new(0, Largest)
 			
 			return
+		else
+			ScrollFrame.CanvasPosition = Vector2.new(0, (math.max(0, Largest - p1)))
 		end
-		p1.CanvasPosition = Vector2.new(0, math.max(0, maxValue - p2))
 	end
 }

@@ -1,55 +1,59 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
-local reactModule = require(parent.React)
-local signal = require(parent.AppCommonLib).Signal
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
+local ReactModule = require(Parent.React)
+local Signal = require(Parent.AppCommonLib).Signal
 
-return function()
-	-- upvalues: reactModule (ref), signal (ref)
-	local var1 = reactModule.useRef(nil)
+return function() --[[ Line: 20 | Named "useOnRequestImpressionsSignal" ]]
+	-- upvalues: ReactModule (copy), Signal (copy)
+	local UseRefResult = ReactModule.useRef(nil)
 	
-	if var1.current == nil then
-		var1.current = signal.new()
+	if UseRefResult.current == nil then
+		UseRefResult.current = Signal.new()
 	end
-	local current = var1.current
-	reactModule.useEffect(function()
-		-- upvalues: current (ref)
-		current:fire()
-		local var2 = false
-		local delayedThread = nil
+	local Current = UseRefResult.current
+	ReactModule.useEffect(function() --[[ Line: 29 ]]
+		-- upvalues: Current (copy)
+		Current:fire()
+		local Flag = false
+		local DelayedThread = nil
 		
-		local function scheduleNext()
-			-- upvalues: var2 (write), delayedThread (write), current (copy), scheduleNext (ref)
-			if var2 then
+		local function scheduleNext() --[[ Line: 37 ]]
+			-- upvalues: Flag (ref), DelayedThread (ref), Current (upval), scheduleNext (copy)
+			if not Flag then
+				DelayedThread = task.delay(1, function() --[[ Line: 41 ]]
+					-- upvalues: Flag (upval), Current (upval), scheduleNext (upval)
+					if not Flag then
+						Current:fire()
+						scheduleNext()
+						
+						return
+					end
+				end)
+				
 				return
 			end
-			delayedThread = task.delay(1, function()
-				-- upvalues: var2 (copy), current (copy), scheduleNext (copy)
-				if var2 then
-					return
-				end
-				current:fire()
-				scheduleNext()
-			end)
 		end
 		
-		delayedThread = task.delay(1, function()
-			-- upvalues: var2 (write), current (copy), scheduleNext (ref)
-			if var2 then
-				return
-			end
-			current:fire()
-			scheduleNext()
-		end)
-		
-		return function()
-			-- upvalues: var2 (write), delayedThread (write)
-			var2 = true
+		if not Flag then
+			DelayedThread = task.delay(1, function() --[[ Line: 41 ]]
+				-- upvalues: Flag (ref), Current (upval), scheduleNext (copy)
+				if not Flag then
+					Current:fire()
+					scheduleNext()
+					
+					return
+				end
+			end)
+		end
+		return function() --[[ Line: 51 ]]
+			-- upvalues: Flag (ref), DelayedThread (ref)
+			Flag = true
 			
-			if delayedThread then
-				task.cancel(delayedThread)
-				delayedThread = nil
+			if DelayedThread then
+				task.cancel(DelayedThread)
+				DelayedThread = nil
 			end
 		end
 	end, {})
 	
-	return current
+	return Current
 end

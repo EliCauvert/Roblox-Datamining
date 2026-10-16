@@ -1,7 +1,7 @@
-﻿local parent = script.Parent.Parent
+﻿local Parent = script.Parent.Parent
 
-return require(game:GetService("CorePackages").Packages.Rodux).createReducer(require(parent.Constants).FallbackLocale, {
-	[require(parent.Actions.SetLocale).name] = function(_, p1)
+return require(game:GetService("CorePackages").Packages.Rodux).createReducer(require(Parent.Constants).FallbackLocale, {
+	[require(Parent.Actions.SetLocale).name] = function(_, p1) --[[ Line: 14 ]]
 		return p1.locale
 	end
 })

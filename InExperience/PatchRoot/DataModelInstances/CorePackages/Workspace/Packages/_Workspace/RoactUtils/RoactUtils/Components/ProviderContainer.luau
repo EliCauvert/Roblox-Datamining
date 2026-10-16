@@ -1,17 +1,17 @@
-﻿local reactModule = require(script:FindFirstAncestor("RoactUtils").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("RoactUtils").Parent.React)
 
-return function(p1)
-	-- upvalues: reactModule (ref)
-	local providers = p1.providers or {}
-	local t = {
-		PageWrapper = reactModule.createElement("Folder", {}, p1.children)
+return function(p1) --[[ Line: 17 | Named "ProviderContainer" ]]
+	-- upvalues: ReactModule (copy)
+	local Providers = p1.providers or {}
+	local config = {
+		PageWrapper = ReactModule.createElement("Folder", {}, p1.children)
 	}
 	
-	for i = #providers, 1, -1 do
-		local var1 = providers[i]
-		t = {
-			ProviderChildren = reactModule.createElement(var1.class, var1.props, t)
+	for i = #Providers, 1, -1 do
+		local Provider = Providers[i]
+		config = {
+			ProviderChildren = ReactModule.createElement(Provider.class, Provider.props, config)
 		}
 	end
-	return reactModule.createElement("Folder", nil, t)
+	return ReactModule.createElement("Folder", nil, config)
 end

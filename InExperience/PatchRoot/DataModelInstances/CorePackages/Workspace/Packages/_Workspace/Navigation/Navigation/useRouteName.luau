@@ -1,6 +1,6 @@
-﻿local useNavigationModule = require(script.Parent.useNavigation)
+﻿local UseNavigationModule = require(script.Parent.useNavigation)
 
-return function()
-	-- upvalues: useNavigationModule (ref)
-	return useNavigationModule().state.routeName
+return function() --[[ Line: 8 | Named "useRouteName" ]]
+	-- upvalues: UseNavigationModule (copy)
+	return UseNavigationModule().state.routeName
 end

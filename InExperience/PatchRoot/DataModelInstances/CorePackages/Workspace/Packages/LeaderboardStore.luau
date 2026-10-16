@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.LeaderboardStore.LeaderboardStore)
+﻿return (require(script.Parent._Workspace.LeaderboardStore.LeaderboardStore))

@@ -1,401 +1,425 @@
-﻿local parent = script.Parent.Parent
-local reactGlobalsModule = require(parent.ReactGlobals)
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local boolean = luauPolyfillModule.Boolean
-local object = luauPolyfillModule.Object
-local console = require(parent.Shared).console
-local inspect = luauPolyfillModule.util.inspect
-local _ = require(parent.Shared)
-local isValidElementType = require(parent.Shared).isValidElementType
-local getComponentName = require(parent.Shared).getComponentName
-local reactSymbols = require(parent.Shared).ReactSymbols
-local getIteratorFn = reactSymbols.getIteratorFn
-local _ = reactSymbols.REACT_FORWARD_REF_TYPE
-local _ = reactSymbols.REACT_MEMO_TYPE
-local REACT_FRAGMENT_TYPE = reactSymbols.REACT_FRAGMENT_TYPE
-local REACT_ELEMENT_TYPE = reactSymbols.REACT_ELEMENT_TYPE
-local warnAboutSpreadingKeyToJSX = require(parent.Shared).ReactFeatureFlags.warnAboutSpreadingKeyToJSX
-local checkPropTypes = require(parent.Shared).checkPropTypes
-local reactCurrentOwner = require(parent.Shared).ReactSharedInternals.ReactCurrentOwner
-local reactElementModule = require(script.Parent.ReactElement)
-local isValidElement = reactElementModule.isValidElement
-local createElement = reactElementModule.createElement
-local cloneElement = reactElementModule.cloneElement
-local jsxDEV = reactElementModule.jsxDEV
-local setExtraStackFrame = require(parent.Shared).ReactSharedInternals.ReactDebugCurrentFrame.setExtraStackFrame
-local describeUnknownElementTypeFrameInDEV = require(parent.Shared).ReactComponentStackFrame.describeUnknownElementTypeFrameInDEV
-local t = {}
+﻿local Parent = script.Parent.Parent
+local ReactGlobalsModule = require(Parent.ReactGlobals)
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Boolean = LuauPolyfillModule.Boolean
+local Object = LuauPolyfillModule.Object
+local Console = require(Parent.Shared).console
+local InspectFunction = LuauPolyfillModule.util.inspect
+local _ = require(Parent.Shared)
+local IsValidElementTypeFunction = require(Parent.Shared).isValidElementType
+local GetComponentNameFunction = require(Parent.Shared).getComponentName
+local ReactSymbols = require(Parent.Shared).ReactSymbols
+local GetIteratorFnFunction = ReactSymbols.getIteratorFn
+local _ = ReactSymbols.REACT_FORWARD_REF_TYPE
+local _ = ReactSymbols.REACT_MEMO_TYPE
+local REACTFRAGMENTTYPE = ReactSymbols.REACT_FRAGMENT_TYPE
+local REACTELEMENTTYPE = ReactSymbols.REACT_ELEMENT_TYPE
+local WarnAboutSpreadingKeyToJSX = require(Parent.Shared).ReactFeatureFlags.warnAboutSpreadingKeyToJSX
+local CheckPropTypesFunction = require(Parent.Shared).checkPropTypes
+local ReactCurrentOwner = require(Parent.Shared).ReactSharedInternals.ReactCurrentOwner
+local ReactElementModule = require(script.Parent.ReactElement)
+local IsValidElementFunction = ReactElementModule.isValidElement
+local CreateElementFunction = ReactElementModule.createElement
+local CloneElementFunction = ReactElementModule.cloneElement
+local JsxDEVFunction = ReactElementModule.jsxDEV
+local SetExtraStackFrameFunction = require(Parent.Shared).ReactSharedInternals.ReactDebugCurrentFrame.setExtraStackFrame
+local DescribeUnknownElementTypeFrameInDEVFunction = require(Parent.Shared).ReactComponentStackFrame.describeUnknownElementTypeFrameInDEV
 
-local function _(value)
-	-- upvalues: reactGlobalsModule (ref), describeUnknownElementTypeFrameInDEV (ref), setExtraStackFrame (ref)
-	if reactGlobalsModule.__DEV__ then
-		if value then
-			local owner = value._owner
-			setExtraStackFrame(describeUnknownElementTypeFrameInDEV(value.type, value._source, if owner then owner.type else nil))
+local function _(p1) --[[ Line: 64 | Named "setCurrentlyValidatingElement" ]]
+	-- upvalues: ReactGlobalsModule (copy), DescribeUnknownElementTypeFrameInDEVFunction (copy), SetExtraStackFrameFunction (copy)
+	if ReactGlobalsModule.__DEV__ then
+		if p1 then
+			local Owner = p1._owner
+			SetExtraStackFrameFunction((DescribeUnknownElementTypeFrameInDEVFunction(p1.type, p1._source, if Owner then Owner.type else nil)))
 			
 			return
+		else
+			SetExtraStackFrameFunction(nil)
 		end
-		setExtraStackFrame(nil)
 	end
 end
 
-local var1 = if reactGlobalsModule.__DEV__ then false else nil
+local Flag = not ReactGlobalsModule.__DEV__ and nil
 
-local _ = function(p1, p2)
+local _ = function(p1, p2): boolean --[[ Line: 92 | Named "hasOwnProperty" ]]
 	return p1[p2] ~= nil
 end
 
-local _ = function()
-	-- upvalues: reactCurrentOwner (ref), getComponentName (ref)
-	if reactCurrentOwner.current then
-		local var2 = getComponentName(reactCurrentOwner.current.type)
+local _ = function(): string --[[ Line: 96 | Named "getDeclarationErrorAddendum" ]]
+	-- upvalues: ReactCurrentOwner (copy), GetComponentNameFunction (copy)
+	if ReactCurrentOwner.current then
+		local ComponentName = GetComponentNameFunction(ReactCurrentOwner.current.type)
 		
-		return if var2 then "\n\nCheck the render method of `" .. var12 .. "`." else ""
+		if ComponentName then
+			return "\n\nCheck the render method of `" .. ComponentName .. "`."
+		end
 	end
+	return ""
 end
 
-local _ = function(p1)
-	return if p1 == nil then "" else "\n\nCheck your code at " .. string.gsub(p1.fileName, "^.*[\\/]", "") .. ":" .. p2.lineNumber .. "."
+local _ = function(p1): string --[[ Line: 107 | Named "getSourceInfoErrorAddendum" ]]
+	return if p1 == nil then "" else "\n\nCheck your code at " .. string.gsub(p1.fileName, "^.*[\\/]", "") .. ":" .. p1.lineNumber .. "."
 end
 
-local _ = function(p1)
+local _ = function(p1): string --[[ Line: 117 | Named "getSourceInfoErrorAddendumForProps" ]]
 	if p1 == nil then
 		return ""
-	end
-	local source = p1.__source
-	
-	return if source == nil then "" else "\n\nCheck your code at " .. string.gsub(source.fileName, "^.*[\\/]", "") .. ":" .. source.lineNumber .. "."
-end
-
-local t_1 = {}
-
-local function getCurrentComponentErrorInfo(p1)
-	-- upvalues: reactCurrentOwner (ref), getComponentName (ref), boolean (ref)
-	local var2
-	if reactCurrentOwner.current then
-		local var3 = getComponentName(reactCurrentOwner.current.type)
-		var2 = if var3 then "\n\nCheck the render method of `" .. var13 .. "`." else ""
-	end
-	if not boolean.toJSBoolean(var2) then
-		local var4 = if typeof(p1) == "string" then p1 elseif typeof(p1) == "table" then p1.displayName or p1.name else nil
+	else
+		local Source = p1.__source
 		
-		if not var4 and typeof(p1) == "function" then
-			local debugInfo = debug.info(p1, "n")
-			var4 = if debugInfo ~= "" then nil else debugInfo
-		end
-		if var4 then
-			var2 = string.format("\n\nCheck the top-level render call using <%s>.", var4)
-		end
+		return if Source == nil then "" else "\n\nCheck your code at " .. string.gsub(Source.fileName, "^.*[\\/]", "") .. ":" .. Source.lineNumber .. "."
 	end
-	return var2
 end
 
-local function validateExplicitKey(p1, p2, p3)
-	-- upvalues: getCurrentComponentErrorInfo (ref), t_1 (ref), reactCurrentOwner (ref), getComponentName (ref), reactGlobalsModule (ref), describeUnknownElementTypeFrameInDEV (ref), setExtraStackFrame (ref), console (ref)
+local t = {}
+
+local function getCurrentComponentErrorInfo(p1): string --[[ Line: 134 ]]
+	-- upvalues: ReactCurrentOwner (copy), GetComponentNameFunction (copy), Boolean (copy)
+	local Formatted = nil
+	repeat
+		if ReactCurrentOwner.current then
+			local ComponentName = GetComponentNameFunction(ReactCurrentOwner.current.type)
+			
+			if ComponentName then
+				Formatted = "\n\nCheck the render method of `" .. ComponentName .. "`."
+				break
+			end
+		end
+		Formatted = ""
+	until true
+	if not Boolean.toJSBoolean(Formatted) then
+		local DisplayName = if typeof(p1) == "string" then p1 elseif typeof(p1) == "table" then p1.displayName or p1.name else nil
+		
+		if not DisplayName and typeof(p1) == "function" then
+			local DebugInfo = debug.info(p1, "n")
+			DisplayName = if DebugInfo == "" then nil else DebugInfo
+		end
+		if DisplayName then
+			Formatted = string.format("\n\nCheck the top-level render call using <%s>.", DisplayName)
+		end
+	end
+	return Formatted
+end
+
+local function validateExplicitKey(p1, p2, Key) --[[ Line: 176 ]]
+	-- upvalues: getCurrentComponentErrorInfo (copy), t (copy), ReactCurrentOwner (copy), GetComponentNameFunction (copy), ReactGlobalsModule (copy), DescribeUnknownElementTypeFrameInDEVFunction (copy), SetExtraStackFrameFunction (copy), Console (copy)
 	if p1._store == nil or p1._store.validated then return end
 	p1._store.validated = true
 	
-	if p1.key ~= nil ~= (p3 ~= nil) then return end
-	local var2 = getCurrentComponentErrorInfo(p2)
+	if p1.key ~= nil ~= (Key ~= nil) then return end
+	local CurrentComponentErrorInfo = getCurrentComponentErrorInfo(p2)
 	
-	if t_1[var2] then return end
-	t_1[var2] = true
-	local var3 = if p1 and p1._owner and p1._owner ~= reactCurrentOwner.current then string.format(" It was passed a child from %s.", tostring(getComponentName(p1._owner.type))) else ""
+	if t[CurrentComponentErrorInfo] then return end
+	t[CurrentComponentErrorInfo] = true
+	local Formatted: string = if p1 and p1._owner and p1._owner ~= ReactCurrentOwner.current then string.format(" It was passed a child from %s.", (tostring(GetComponentNameFunction(p1._owner.type)))) else ""
 	
-	if reactGlobalsModule.__DEV__ then
-		if reactGlobalsModule.__DEV__ then
+	if ReactGlobalsModule.__DEV__ then
+		if ReactGlobalsModule.__DEV__ then
 			if p1 then
-				local owner = p1._owner
-				setExtraStackFrame(describeUnknownElementTypeFrameInDEV(p1.type, p1._source, if owner then owner.type else nil))
+				local Owner = p1._owner
+				SetExtraStackFrameFunction((DescribeUnknownElementTypeFrameInDEVFunction(p1.type, p1._source, if Owner then Owner.type else nil)))
 			else
-				setExtraStackFrame(nil)
+				SetExtraStackFrameFunction(nil)
 			end
 		end
-		if p1.key == nil or p3 == nil then
-			console.error("Each child in a list should have a unique \"key\" prop.%s%s See https://reactjs.org/link/warning-keys for more information.", var2, var3)
+		if p1.key == nil or Key == nil then
+			Console.error("Each child in a list should have a unique \"key\" prop.%s%s See https://reactjs.org/link/warning-keys for more information.", CurrentComponentErrorInfo, Formatted)
 		else
-			console.error("Child element received a \"key\" prop (\"%s\") in addition to a key in the \"children\" table of its parent (\"%s\"). Please provide only one key definition. When both are present, the \"key\" prop will take precedence.%s%s See https://reactjs.org/link/warning-keys for more information.", tostring(p1.key), tostring(p3), var2, var3)
+			Console.error("Child element received a \"key\" prop (\"%s\") in addition to a key in the \"children\" table of its parent (\"%s\"). Please provide only one key definition. When both are present, the \"key\" prop will take precedence.%s%s See https://reactjs.org/link/warning-keys for more information.", tostring(p1.key), tostring(Key), CurrentComponentErrorInfo, Formatted)
 		end
-		if reactGlobalsModule.__DEV__ then
-			setExtraStackFrame(nil)
+		if ReactGlobalsModule.__DEV__ then
+			SetExtraStackFrameFunction(nil)
 		end
 	end
 end
 
-local function validateChildKeys(p1, p2)
-	-- upvalues: array (ref), isValidElement (ref), validateExplicitKey (ref), getIteratorFn (ref)
-	if typeof(p1) ~= "table" then return end
-	if array.isArray(p1) then
-		for i = 1, #p1 do
-			local var2 = p1[i]
+local function validateChildKeys(Children, REACTFRAGMENTTYPE) --[[ Line: 251 ]]
+	-- upvalues: Array (copy), IsValidElementFunction (copy), validateExplicitKey (copy), GetIteratorFnFunction (copy)
+	if typeof(Children) ~= "table" then return end
+	if Array.isArray(Children) then
+		for i = 1, #Children do
+			local Child = Children[i]
 			
-			if isValidElement(var2) then
-				validateExplicitKey(var2, p2)
+			if IsValidElementFunction(Child) then
+				validateExplicitKey(Child, REACTFRAGMENTTYPE)
 			end
 		end
 		return
-	elseif isValidElement(p1) then
-		if p1._store then
-			p1._store.validated = true
-			
-			return
-		end
-	elseif p1 then
-		local var3 = getIteratorFn(p1)
-		
-		if typeof(var3) == "function" and var3 ~= p1.entries then
-			local var4 = var3(p1)
-			local var5 = var4.next()
-			while not var5.done do
-				if isValidElement(var5.value) then
-					validateExplicitKey(var5.value, p2, var5.key)
+	else
+		if not IsValidElementFunction(Children) then
+			if Children then
+				local IteratorFn = GetIteratorFnFunction(Children)
+				
+				if typeof(IteratorFn) == "function" and IteratorFn ~= Children.entries then
+					local IteratorFnResult = IteratorFn(Children)
+					local v1 = IteratorFnResult.next()
+					while not v1.done do
+						if IsValidElementFunction(v1.value) then
+							validateExplicitKey(v1.value, REACTFRAGMENTTYPE, v1.key)
+						end
+						v1 = IteratorFnResult.next()
+					end
 				end
-				var5 = var4.next()
 			end
-		end
-	end
-end
-
-local function validatePropTypes(p3)
-	-- upvalues: reactGlobalsModule (ref), getComponentName (ref), checkPropTypes (ref), var1 (write), console (ref)
-	if reactGlobalsModule.__DEV__ or reactGlobalsModule.__DISABLE_ALL_WARNINGS_EXCEPT_PROP_VALIDATION__ then
-		local type = p3.type
-		
-		if type == nil or typeof(type) == "string" then return end
-		local propTypes = nil
-		local validateProps = nil
-		
-		if typeof(type) == "function" then return end
-		if typeof(type) == "table" then
-			propTypes = type.propTypes
-			validateProps = type.validateProps
-		else
+		elseif Children._store then
+			Children._store.validated = true
+			
 			return
 		end
-		if propTypes or validateProps then
-			checkPropTypes(propTypes, validateProps, p3.props, "prop", getComponentName(type), p3)
-		elseif type.PropTypes ~= nil and not var1 then
-			var1 = true
-			console.error("Component %s declared `PropTypes` instead of `propTypes`. Did you misspell the property assignment?", getComponentName(type) or "Unknown")
+	end
+end
+
+local function validatePropTypes(p1) --[[ Line: 294 ]]
+	-- upvalues: ReactGlobalsModule (copy), GetComponentNameFunction (copy), CheckPropTypesFunction (copy), Flag (ref), Console (copy)
+	if ReactGlobalsModule.__DEV__ or ReactGlobalsModule.__DISABLE_ALL_WARNINGS_EXCEPT_PROP_VALIDATION__ then
+		local Type = p1.type
+		
+		if Type == nil or typeof(Type) == "string" then return end
+		local PropTypes = nil
+		local ValidateProps = nil
+		
+		if typeof(Type) == "function" then return end
+		if typeof(Type) ~= "table" then return end
+		PropTypes = Type.propTypes
+		ValidateProps = Type.validateProps
+		if PropTypes or ValidateProps then
+			CheckPropTypesFunction(PropTypes, ValidateProps, p1.props, "prop", GetComponentNameFunction(Type), p1)
+		elseif Type.PropTypes ~= nil and not Flag then
+			Flag = true
+			Console.error("Component %s declared `PropTypes` instead of `propTypes`. Did you misspell the property assignment?", GetComponentNameFunction(Type) or "Unknown")
 		end
-		if type.getDefaultProps ~= nil then
-			console.error("getDefaultProps is only used on classic React.createClass definitions. Use a static property named `defaultProps` instead.")
+		if Type.getDefaultProps ~= nil then
+			Console.error("getDefaultProps is only used on classic React.createClass definitions. Use a static property named `defaultProps` instead.")
 		end
 	end
 end
 
-local function validateFragmentProps(p3)
-	-- upvalues: reactGlobalsModule (ref), object (ref), describeUnknownElementTypeFrameInDEV (ref), setExtraStackFrame (ref), console (ref)
-	if reactGlobalsModule.__DEV__ then
-		local var6
-		local var7 = object.keys(p3.props)
+local function validateFragmentProps(p1) --[[ Line: 347 ]]
+	-- upvalues: ReactGlobalsModule (copy), Object (copy), DescribeUnknownElementTypeFrameInDEVFunction (copy), SetExtraStackFrameFunction (copy), Console (copy)
+	if ReactGlobalsModule.__DEV__ then
+		local KeysResult = Object.keys(p1.props)
+		local KeysResultEntry = nil
 		
-		for i = 1, #var7 do
-			var6 = var7[i]
+		for i = 1, #KeysResult do
+			KeysResultEntry = KeysResult[i]
 			
-			if var6 == "children" or var6 == "key" then
+			if KeysResultEntry == "children" or KeysResultEntry == "key" then
 				continue
-			end
-			if reactGlobalsModule.__DEV__ then
-				if p3 then
-					local owner = p3._owner
-					setExtraStackFrame(describeUnknownElementTypeFrameInDEV(p3.type, p3._source, if owner then owner.type else nil))
+			elseif ReactGlobalsModule.__DEV__ then
+				if p1 then
+					local Owner = p1._owner
+					SetExtraStackFrameFunction((DescribeUnknownElementTypeFrameInDEVFunction(p1.type, p1._source, if Owner then Owner.type else nil)))
 				else
-					setExtraStackFrame(nil)
+					SetExtraStackFrameFunction(nil)
 				end
 			end
-			console.error("Invalid prop `%s` supplied to `React.Fragment`. React.Fragment can only have `key` and `children` props.", var6)
+			Console.error("Invalid prop `%s` supplied to `React.Fragment`. React.Fragment can only have `key` and `children` props.", KeysResultEntry)
 			
-			if not reactGlobalsModule.__DEV__ then break end
-			setExtraStackFrame(nil)
+			if not ReactGlobalsModule.__DEV__ then break end
+			SetExtraStackFrameFunction(nil)
 			break
 		end
-		if p3.ref ~= nil then
-			if reactGlobalsModule.__DEV__ then
-				if p3 then
-					local owner = p3._owner
-					setExtraStackFrame(describeUnknownElementTypeFrameInDEV(p3.type, p3._source, if owner then owner.type else nil))
+		if p1.ref ~= nil then
+			if ReactGlobalsModule.__DEV__ then
+				if p1 then
+					local Owner = p1._owner
+					SetExtraStackFrameFunction((DescribeUnknownElementTypeFrameInDEVFunction(p1.type, p1._source, if Owner then Owner.type else nil)))
 				else
-					setExtraStackFrame(nil)
+					SetExtraStackFrameFunction(nil)
 				end
 			end
-			console.error("Invalid attribute `ref` supplied to `React.Fragment`.")
+			Console.error("Invalid attribute `ref` supplied to `React.Fragment`.")
 			
-			if reactGlobalsModule.__DEV__ then
-				setExtraStackFrame(nil)
+			if ReactGlobalsModule.__DEV__ then
+				SetExtraStackFrameFunction(nil)
 			end
 		end
 	end
 end
 
-local function jsxWithValidation(p4, p5, p6, p7, p8, p9)
-	-- upvalues: isValidElementType (ref), object (ref), reactCurrentOwner (ref), getComponentName (ref), array (ref), REACT_ELEMENT_TYPE (ref), inspect (ref), reactGlobalsModule (ref), console (ref), jsxDEV (ref), validateChildKeys (ref), warnAboutSpreadingKeyToJSX (ref), REACT_FRAGMENT_TYPE (ref), validateFragmentProps (ref), validatePropTypes (ref)
-	local var8 = isValidElementType(p4)
+local function jsxWithValidation(REACTFRAGMENTTYPE1, p2, p3, p4, p5, p6) --[[ Line: 373 ]]
+	-- upvalues: IsValidElementTypeFunction (copy), Object (copy), ReactCurrentOwner (copy), GetComponentNameFunction (copy), Array (copy), REACTELEMENTTYPE (copy), InspectFunction (copy), ReactGlobalsModule (copy), Console (copy), JsxDEVFunction (copy), validateChildKeys (copy), WarnAboutSpreadingKeyToJSX (copy), REACTFRAGMENTTYPE (copy), validateFragmentProps (copy), validatePropTypes (copy)
+	local IsValidElementType = IsValidElementTypeFunction(REACTFRAGMENTTYPE1)
 	
-	if not var8 then
-		local var9 = ""
+	if not IsValidElementType then
+		local Text = ""
 		
-		if p4 == nil or typeof(p4) == "table" and #object.keys(p4) == 0 then
-			var9 ..= " You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports."
+		if REACTFRAGMENTTYPE1 == nil or typeof(REACTFRAGMENTTYPE1) == "table" and #Object.keys(REACTFRAGMENTTYPE1) == 0 then
+			Text ..= " You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports."
 		end
-		local var10 = if p8 ~= nil then "" else "\n\nCheck your code at " .. string.gsub(p8.fileName, "^.*[\\/]", "") .. ":" .. p16.lineNumber .. "."
-		
-		if var10 then
-			var9 ..= var10
-		else
-			local var11
-			local var12 = var9
-			
-			if reactCurrentOwner.current then
-				local var13 = getComponentName(reactCurrentOwner.current.type)
-				var11 = if var13 then "\n\nCheck the render method of `" .. var29 .. "`." else ""
+		local Text1: string = if p5 == nil then "" else "\n\nCheck your code at " .. string.gsub(p5.fileName, "^.*[\\/]", "") .. ":" .. p5.lineNumber .. "."
+		local Text2 = nil
+		repeat
+			if Text1 then
+				Text2 = Text .. Text1
+				break
 			end
-			var9 = var12 .. var30
-		end
-		local var14
-		local _ = nil
-		
-		if p4 == nil then
-			var14 = "nil"
-		elseif array.isArray(p4) then
-			var14 = "array"
-		elseif typeof(p4) == "table" and p4["$$typeof"] == REACT_ELEMENT_TYPE then
-			var14 = string.format("<%s />", getComponentName(p4.type) or "Unknown")
-			var9 ..= " Did you accidentally export a JSX literal or Element instead of a component?"
-		else
-			var14 = typeof(p4)
-			var9 ..= "\n" .. inspect(p4)
-		end
-		if reactGlobalsModule.__DEV__ then
-			console.error("React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", var14, var9)
-		end
-	end
-	local var15 = jsxDEV(p4, p5, p6, p8, p9)
-	
-	if var15 == nil then
-		return var15
-	elseif var8 then
-		local children = p5.children
-		
-		if children ~= nil then
-			if not p7 then
-				validateChildKeys(children, p4)
-			elseif array.isArray(children) then
-				for i = 1, #children do
-					validateChildKeys(children[i], p4)
+			local Text3: string = Text
+			local v2 = nil
+			repeat
+				if ReactCurrentOwner.current then
+					local ComponentName = GetComponentNameFunction(ReactCurrentOwner.current.type)
+					
+					if ComponentName then
+						v2 = "\n\nCheck the render method of `" .. ComponentName .. "`."
+						break
+					end
 				end
-				object.freeze(children)
-			elseif reactGlobalsModule.__DEV__ then
-				console.error("React.jsx: Static children should always be an array. You are likely explicitly calling React.jsxs or React.jsxDEV. Use the Babel transform instead.")
+				v2 = ""
+			until true
+			Text2 = Text3 .. v2
+		until true
+		local Formatted = nil
+		if REACTFRAGMENTTYPE1 == nil then
+			Formatted = "nil"
+		elseif Array.isArray(REACTFRAGMENTTYPE1) then
+			Formatted = "array"
+		elseif typeof(REACTFRAGMENTTYPE1) == "table" and REACTFRAGMENTTYPE1["$$typeof"] == REACTELEMENTTYPE then
+			Formatted = string.format("<%s />", GetComponentNameFunction(REACTFRAGMENTTYPE1.type) or "Unknown")
+			Text2 ..= " Did you accidentally export a JSX literal or Element instead of a component?"
+		else
+			Formatted = typeof(REACTFRAGMENTTYPE1)
+			Text2 ..= "\n" .. InspectFunction(REACTFRAGMENTTYPE1)
+		end
+		if ReactGlobalsModule.__DEV__ then
+			Console.error("React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", Formatted, Text2)
+		end
+	end
+	local JsxDEVResult = JsxDEVFunction(REACTFRAGMENTTYPE1, p2, p3, p5, p6)
+	
+	if JsxDEVResult == nil then
+		return JsxDEVResult
+	end
+	if IsValidElementType then
+		local Children = p2.children
+		
+		if Children ~= nil then
+			if p4 then
+				if Array.isArray(Children) then
+					for i = 1, #Children do
+						validateChildKeys(Children[i], REACTFRAGMENTTYPE1)
+					end
+					Object.freeze(Children)
+				elseif ReactGlobalsModule.__DEV__ then
+					Console.error("React.jsx: Static children should always be an array. You are likely explicitly calling React.jsxs or React.jsxDEV. Use the Babel transform instead.")
+				end
+			else
+				validateChildKeys(Children, REACTFRAGMENTTYPE1)
 			end
 		end
 	end
-	if reactGlobalsModule.__DEV__ and warnAboutSpreadingKeyToJSX and p5.key ~= nil then
-		console.error("React.jsx: Spreading a key to JSX is a deprecated pattern. Explicitly pass a key after spreading props in your JSX call. E.g. <%s {...props} key={key} />", getComponentName(p4) or "ComponentName")
+	if ReactGlobalsModule.__DEV__ and WarnAboutSpreadingKeyToJSX and p2.key ~= nil then
+		Console.error("React.jsx: Spreading a key to JSX is a deprecated pattern. Explicitly pass a key after spreading props in your JSX call. E.g. <%s {...props} key={key} />", GetComponentNameFunction(REACTFRAGMENTTYPE1) or "ComponentName")
 	end
-	if p4 == REACT_FRAGMENT_TYPE then
-		validateFragmentProps(var15)
+	if REACTFRAGMENTTYPE1 == REACTFRAGMENTTYPE then
+		validateFragmentProps(JsxDEVResult)
 		
-		return var15
+		return JsxDEVResult
+	else
+		validatePropTypes(JsxDEVResult)
+		
+		return JsxDEVResult
 	end
-	validatePropTypes(var15)
-	
-	return var15
 end
 
-t.jsxWithValidation = jsxWithValidation
-
-function t.jsxWithValidationStatic(p10, p11, p12)
-	-- upvalues: jsxWithValidation (ref)
-	return jsxWithValidation(p10, p11, p12, true)
-end
-
-function t.jsxWithValidationDynamic(p10, p11, p12)
-	-- upvalues: jsxWithValidation (ref)
-	return jsxWithValidation(p10, p11, p12, false)
-end
-
-function t.createElementWithValidation(p10, p11, ...)
-	-- upvalues: isValidElementType (ref), object (ref), reactCurrentOwner (ref), getComponentName (ref), array (ref), REACT_ELEMENT_TYPE (ref), inspect (ref), reactGlobalsModule (ref), console (ref), createElement (ref), validateChildKeys (ref), REACT_FRAGMENT_TYPE (ref), validateFragmentProps (ref), validatePropTypes (ref)
-	local var16 = isValidElementType(p10)
-	
-	if not var16 then
-		local var17
-		local var18 = ""
+return {
+	jsxWithValidation = jsxWithValidation,
+	jsxWithValidationStatic = function(p7, p8, p9) --[[ Line: 495 ]]
+		-- upvalues: jsxWithValidation (copy)
+		return (jsxWithValidation(p7, p8, p9, true))
+	end,
+	jsxWithValidationDynamic = function(p7, p8, p9) --[[ Line: 499 ]]
+		-- upvalues: jsxWithValidation (copy)
+		return (jsxWithValidation(p7, p8, p9, false))
+	end,
+	createElementWithValidation = function(REACTFRAGMENTTYPE1, p7, ...) --[[ Line: 504 ]]
+		-- upvalues: IsValidElementTypeFunction (copy), Object (copy), ReactCurrentOwner (copy), GetComponentNameFunction (copy), Array (copy), REACTELEMENTTYPE (copy), InspectFunction (copy), ReactGlobalsModule (copy), Console (copy), CreateElementFunction (copy), validateChildKeys (copy), REACTFRAGMENTTYPE (copy), validateFragmentProps (copy), validatePropTypes (copy)
+		local IsValidElementType = IsValidElementTypeFunction(REACTFRAGMENTTYPE1)
 		
-		if p10 == nil or typeof(p10) == "table" and #object.keys(p10) == 0 then
-			var18 ..= " You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports."
-		end
-		if p11 == nil then
-			var17 = ""
-		else
-			local source = p11.__source
-			var17 = if source ~= nil then "" else "\n\nCheck your code at " .. string.gsub(source.fileName, "^.*[\\/]", "") .. ":" .. source.lineNumber .. "."
-		end
-		if var17 then
-			var18 ..= var17
-		else
-			local var19
-			local var20 = var18
+		if not IsValidElementType then
+			local Text = ""
 			
-			if reactCurrentOwner.current then
-				local var21 = getComponentName(reactCurrentOwner.current.type)
-				var19 = if var21 then "\n\nCheck the render method of `" .. var37 .. "`." else ""
+			if REACTFRAGMENTTYPE1 == nil or typeof(REACTFRAGMENTTYPE1) == "table" and #Object.keys(REACTFRAGMENTTYPE1) == 0 then
+				Text ..= " You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports."
 			end
-			var18 = var20 .. var38
+			local Text2 = nil
+			local Text1 = nil
+			if p7 == nil then
+				Text1 = ""
+			else
+				local Source = p7.__source
+				Text1 = if Source == nil then "" else "\n\nCheck your code at " .. string.gsub(Source.fileName, "^.*[\\/]", "") .. ":" .. Source.lineNumber .. "."
+			end
+			repeat
+				if Text1 then
+					Text2 = Text .. Text1
+					break
+				end
+				local Text3: string = Text
+				local v3 = nil
+				repeat
+					if ReactCurrentOwner.current then
+						local ComponentName = GetComponentNameFunction(ReactCurrentOwner.current.type)
+						
+						if ComponentName then
+							v3 = "\n\nCheck the render method of `" .. ComponentName .. "`."
+							break
+						end
+					end
+					v3 = ""
+				until true
+				Text2 = Text3 .. v3
+			until true
+			local Formatted = nil
+			if REACTFRAGMENTTYPE1 == nil then
+				Formatted = "nil"
+			elseif Array.isArray(REACTFRAGMENTTYPE1) then
+				Formatted = "array"
+			elseif REACTFRAGMENTTYPE1 == nil or typeof(REACTFRAGMENTTYPE1) ~= "table" or REACTFRAGMENTTYPE1["$$typeof"] ~= REACTELEMENTTYPE then
+				Formatted = typeof(REACTFRAGMENTTYPE1)
+				
+				if REACTFRAGMENTTYPE1 ~= nil then
+					Text2 ..= "\n" .. InspectFunction(REACTFRAGMENTTYPE1)
+				end
+			else
+				Formatted = string.format("<%s />", GetComponentNameFunction(REACTFRAGMENTTYPE1.type) or "Unknown")
+				Text2 ..= " Did you accidentally export a JSX literal or Element instead of a component?"
+			end
+			if ReactGlobalsModule.__DEV__ then
+				Console.error("React.createElement: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", Formatted, Text2)
+			end
 		end
-		local var22
-		local _ = nil
+		local Element = CreateElementFunction(REACTFRAGMENTTYPE1, p7, ...)
 		
-		if p10 == nil then
-			var22 = "nil"
-		elseif array.isArray(p10) then
-			var22 = "array"
-		elseif p10 == nil or typeof(p10) ~= "table" or p10["$$typeof"] ~= REACT_ELEMENT_TYPE then
-			var22 = typeof(p10)
+		if Element == nil then
+			return Element
+		end
+		if IsValidElementType then
+			for i = 1, select("#", ...) do
+				validateChildKeys(select(i, ...), REACTFRAGMENTTYPE1)
+			end
+		end
+		if REACTFRAGMENTTYPE1 == REACTFRAGMENTTYPE then
+			validateFragmentProps(Element)
 			
-			if p10 ~= nil then
-				var18 ..= "\n" .. inspect(p10)
-			end
+			return Element
 		else
-			var22 = string.format("<%s />", getComponentName(p10.type) or "Unknown")
-			var18 ..= " Did you accidentally export a JSX literal or Element instead of a component?"
+			validatePropTypes(Element)
+			
+			return Element
 		end
-		if reactGlobalsModule.__DEV__ then
-			console.error("React.createElement: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", var22, var18)
-		end
-	end
-	local var23 = createElement(p10, p11, ...)
-	
-	if var23 == nil then
-		return var23
-	elseif var16 then
-		for i = 1, select("#", ...) do
-			validateChildKeys(select(i, ...), p10)
-		end
-	end
-	if p10 == REACT_FRAGMENT_TYPE then
-		validateFragmentProps(var23)
+	end,
+	cloneElementWithValidation = function(p8, p9, ...) --[[ Line: 637 ]]
+		-- upvalues: CloneElementFunction (copy), validateChildKeys (copy), validatePropTypes (copy)
+		local list = { p8, p9, ... }
+		local CloneElementResult = CloneElementFunction(p8, p9, ...)
 		
-		return var23
+		for i = 3, #list do
+			validateChildKeys(list[i], CloneElementResult.type)
+		end
+		validatePropTypes(CloneElementResult)
+		
+		return CloneElementResult
 	end
-	validatePropTypes(var23)
-	
-	return var23
-end
-
-function t.cloneElementWithValidation(p12, p13, ...)
-	-- upvalues: cloneElement (ref), validateChildKeys (ref), validatePropTypes (ref)
-	local list = { p12, p13, ... }
-	local var24 = cloneElement(p12, p13, ...)
-	
-	for i = 3, #list do
-		validateChildKeys(list[i], var24.type)
-	end
-	validatePropTypes(var24)
-	
-	return var24
-end
-
-return t
+}

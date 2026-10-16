@@ -1,129 +1,130 @@
-﻿local textChatService = game:GetService("TextChatService")
-local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local expChatSharedModule = require(parent.ExpChatShared)
-local sharedFlagsModule = require(parent.SharedFlags)
-local displaySystemMessageModule = require(expChat.displaySystemMessage)
-local expChatLocalChatEnabledMessageExperimentation = require(parent.SocialExperiments).ExpChatLocalChatEnabledMessageExperimentation
-local analytics = expChatSharedModule.Analytics
-local fFlagConnectionsToFriendsRename = sharedFlagsModule.FFlagConnectionsToFriendsRename
-local fFlagExpChatUseUpdatedUserCountStrings = expChatSharedModule.Flags.FFlagExpChatUseUpdatedUserCountStrings
-local expChatReportChatEnabledUserCountMetrics = game:DefineFastFlag("ExpChatReportChatEnabledUserCountMetrics", false)
-local expChatLocalUserCountEnabledEngineFeature = game:GetEngineFeature("ExpChatLocalUserCountEnabled")
-local expChatChatableUserCountSystemMessageMinUsers = game:DefineFastInt("ExpChatChatableUserCountSystemMessageMinUsers", 5)
-local var1 = expChatSharedModule.Logger:new("ExpChat/" .. script.Name)
+﻿local TextChatService = game:GetService("TextChatService")
+local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local ExpChatSharedModule = require(Parent.ExpChatShared)
+local DisplaySystemMessageModule = require(ExpChat.displaySystemMessage)
+local ExpChatLocalChatEnabledMessageExperimentation = require(Parent.SocialExperiments).ExpChatLocalChatEnabledMessageExperimentation
+local Analytics = ExpChatSharedModule.Analytics
+local FFlagExpChatUseUpdatedUserCountStrings = ExpChatSharedModule.Flags.FFlagExpChatUseUpdatedUserCountStrings
+local ExpChatReportChatEnabledUserCountMetrics = game:DefineFastFlag("ExpChatReportChatEnabledUserCountMetrics", false)
+local ExpChatLocalUserCountEnabledEngineFeature = game:GetEngineFeature("ExpChatLocalUserCountEnabled")
+local ExpChatChatableUserCountSystemMessageMinUsers = game:DefineFastInt("ExpChatChatableUserCountSystemMessageMinUsers", 5)
+local NewResult = ExpChatSharedModule.Logger:new("ExpChat/" .. script.Name)
 
-return function(p1)
-	-- upvalues: fFlagConnectionsToFriendsRename (ref), displaySystemMessageModule (ref), expChatLocalChatEnabledMessageExperimentation (ref), expChatLocalUserCountEnabledEngineFeature (ref), textChatService (ref), expChatReportChatEnabledUserCountMetrics (ref), analytics (ref), var1 (ref), fFlagExpChatUseUpdatedUserCountStrings (ref), expChatChatableUserCountSystemMessageMinUsers (ref)
-	local translator = p1.translator
-	local defaultSystemTextChannel = p1.defaultSystemTextChannel
-	local localPlayer = p1.localPlayer
-	local displayVirtualSystemMessage = p1.displayVirtualSystemMessage
-	local var2 = false
+return function(p1) --[[ Line: 32 | Named "createDisplayChatEnabledMessage" ]]
+	-- upvalues: DisplaySystemMessageModule (copy), ExpChatLocalChatEnabledMessageExperimentation (copy), ExpChatLocalUserCountEnabledEngineFeature (copy), TextChatService (copy), ExpChatReportChatEnabledUserCountMetrics (copy), Analytics (copy), NewResult (copy), FFlagExpChatUseUpdatedUserCountStrings (copy), ExpChatChatableUserCountSystemMessageMinUsers (copy)
+	local Translator = p1.translator
+	local DefaultSystemTextChannel = p1.defaultSystemTextChannel
+	local LocalPlayer = p1.localPlayer
+	local DisplayVirtualSystemMessageFunction = p1.displayVirtualSystemMessage
+	local Flag = false
 	
-	return function()
-		-- upvalues: fFlagConnectionsToFriendsRename (copy), displayVirtualSystemMessage (ref), displaySystemMessageModule (copy), translator (ref), defaultSystemTextChannel (ref), expChatLocalChatEnabledMessageExperimentation (copy), expChatLocalUserCountEnabledEngineFeature (copy), textChatService (copy), localPlayer (ref), expChatReportChatEnabledUserCountMetrics (copy), analytics (copy), var1 (copy), fFlagExpChatUseUpdatedUserCountStrings (copy), expChatChatableUserCountSystemMessageMinUsers (copy), var2 (write)
-		local var3 = if fFlagConnectionsToFriendsRename then "CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithAgeGroupAAndTF" else "CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithAgeGroupAndTC"
-		local var4 = if fFlagConnectionsToFriendsRename then "Only people in similar age groups and your trusted friends can chat with you." else "Only people in similar age groups and your Trusted Connections can chat with you."
-		
-		local function _()
-			-- upvalues: displayVirtualSystemMessage (copy), var3 (ref), var4 (ref), displaySystemMessageModule (copy), translator (copy), defaultSystemTextChannel (copy)
-			if displayVirtualSystemMessage then
-				displayVirtualSystemMessage(var3, nil, var4)
+	return function() --[[ Line: 40 ]]
+		-- upvalues: DisplayVirtualSystemMessageFunction (copy), DisplaySystemMessageModule (upval), Translator (copy), DefaultSystemTextChannel (copy), ExpChatLocalChatEnabledMessageExperimentation (upval), ExpChatLocalUserCountEnabledEngineFeature (upval), TextChatService (upval), LocalPlayer (copy), ExpChatReportChatEnabledUserCountMetrics (upval), Analytics (upval), NewResult (upval), FFlagExpChatUseUpdatedUserCountStrings (upval), ExpChatChatableUserCountSystemMessageMinUsers (upval), Flag (ref)
+		local function _() --[[ Line: 44 | Named "displayControlMessage" ]]
+			-- upvalues: DisplayVirtualSystemMessageFunction (upval), DisplaySystemMessageModule (upval), Translator (upval), DefaultSystemTextChannel (upval)
+			if DisplayVirtualSystemMessageFunction then
+				DisplayVirtualSystemMessageFunction("CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithAgeGroupAAndTF", nil, "Only people in similar age groups and your trusted friends can chat with you.")
 				
 				return
+			else
+				DisplaySystemMessageModule("CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithAgeGroupAAndTF", nil, "Roblox.ChatEnabled.Info", Translator, DefaultSystemTextChannel, "Only people in similar age groups and your trusted friends can chat with you.")
 			end
-			displaySystemMessageModule(var3, nil, "Roblox.ChatEnabled.Info", translator, defaultSystemTextChannel, var4)
 		end
 		
-		if expChatLocalChatEnabledMessageExperimentation.isExperimentEnabled and expChatLocalUserCountEnabledEngineFeature then
-			task.spawn(function()
-				-- upvalues: textChatService (copy), localPlayer (copy), expChatReportChatEnabledUserCountMetrics (copy), analytics (copy), var1 (copy), displayVirtualSystemMessage (copy), var3 (ref), var4 (ref), displaySystemMessageModule (copy), translator (copy), defaultSystemTextChannel (copy), expChatLocalChatEnabledMessageExperimentation (copy), fFlagExpChatUseUpdatedUserCountStrings (copy), expChatChatableUserCountSystemMessageMinUsers (copy), var2 (copy)
-				local ok, status = pcall(function()
-					-- upvalues: textChatService (copy), localPlayer (copy)
-					return textChatService:GetChatableUserCountAsync(localPlayer.UserId, "local")
+		if ExpChatLocalChatEnabledMessageExperimentation.isExperimentEnabled and ExpChatLocalUserCountEnabledEngineFeature then
+			task.spawn(function() --[[ Line: 63 ]]
+				-- upvalues: TextChatService (upval), LocalPlayer (upval), ExpChatReportChatEnabledUserCountMetrics (upval), Analytics (upval), NewResult (upval), DisplayVirtualSystemMessageFunction (upval), DisplaySystemMessageModule (upval), Translator (upval), DefaultSystemTextChannel (upval), ExpChatLocalChatEnabledMessageExperimentation (upval), FFlagExpChatUseUpdatedUserCountStrings (upval), ExpChatChatableUserCountSystemMessageMinUsers (upval), Flag (upval)
+				local Success, Result = pcall(function() --[[ Line: 64 ]]
+					-- upvalues: TextChatService (upval), LocalPlayer (upval)
+					return TextChatService:GetChatableUserCountAsync(LocalPlayer.UserId, "local")
 				end)
 				
-				if expChatReportChatEnabledUserCountMetrics then
-					analytics.reportChatEnabledUserCountFetchResult(ok and status ~= nil)
+				if ExpChatReportChatEnabledUserCountMetrics then
+					Analytics.reportChatEnabledUserCountFetchResult(Success and Result ~= nil)
 				end
-				if ok then
-					if status == nil then
-						if displayVirtualSystemMessage then
-							displayVirtualSystemMessage(var3, nil, var4)
-							
-							return
-						end
-						displaySystemMessageModule(var3, nil, "Roblox.ChatEnabled.Info", translator, defaultSystemTextChannel, var4)
+				if Success then
+					if Result ~= nil then
+						local SystemMessageKey = ExpChatLocalChatEnabledMessageExperimentation.getSystemMessageKey()
 						
-						return
-					else
-						local systemMessageKey = expChatLocalChatEnabledMessageExperimentation.getSystemMessageKey()
-						
-						if systemMessageKey == nil then
-							if displayVirtualSystemMessage then
-								displayVirtualSystemMessage(var3, nil, var4)
-								
-								return
-							end
-							displaySystemMessageModule(var3, nil, "Roblox.ChatEnabled.Info", translator, defaultSystemTextChannel, var4)
-							
-							return
-						else
-							local var5 = (function(p2)
-								-- upvalues: fFlagExpChatUseUpdatedUserCountStrings (copy), var3 (copy), status (ref), expChatChatableUserCountSystemMessageMinUsers (copy)
-								local t = {
+						if SystemMessageKey ~= nil then
+							local v1 = (function(p2) --[[ Line: 90 | Named "GetSystemMessageKey" ]]
+								-- upvalues: FFlagExpChatUseUpdatedUserCountStrings (upval), Result (copy), ExpChatChatableUserCountSystemMessageMinUsers (upval)
+								local config = {
 									FRIENDLY = "CoreScripts.TextChat.ChatWindow.ChatWithOnlinePlayers.Local.Friendly",
-									WITH_COUNT_ABOVE_THRESHOLD = if fFlagExpChatUseUpdatedUserCountStrings then "CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.Local.WithCount" else "CoreScripts.TextChat.ChatWindow.ChatWithOnlinePlayers.Local.WithCount",
-									WITH_COUNT_BELOW_THRESHOLD = if fFlagExpChatUseUpdatedUserCountStrings then "CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.BelowThreshold" else "CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.V3"
+									WITH_COUNT_ABOVE_THRESHOLD = if FFlagExpChatUseUpdatedUserCountStrings then "CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.Local.WithCount" else "CoreScripts.TextChat.ChatWindow.ChatWithOnlinePlayers.Local.WithCount",
+									WITH_COUNT_BELOW_THRESHOLD = if FFlagExpChatUseUpdatedUserCountStrings then "CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.BelowThreshold" else "CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.V3"
 								}
 								
-								return if p2 == "CONTROL" then var3 elseif p2 == "V1_WITH_COUNT" then if expChatChatableUserCountSystemMessageMinUsers <= status then t.WITH_COUNT_ABOVE_THRESHOLD else t.WITH_COUNT_BELOW_THRESHOLD elseif p2 == "V2_FRIENDLY" then t.FRIENDLY elseif p2 == "V3_WITHOUT_COUNT" then t.WITH_COUNT_BELOW_THRESHOLD else nil
-							end)(systemMessageKey)
+								return if p2 == "CONTROL" then "CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithAgeGroupAAndTF" elseif p2 == "V1_WITH_COUNT" then if ExpChatChatableUserCountSystemMessageMinUsers <= Result then config.WITH_COUNT_ABOVE_THRESHOLD else config.WITH_COUNT_BELOW_THRESHOLD elseif p2 == "V2_FRIENDLY" then config.FRIENDLY elseif p2 == "V3_WITHOUT_COUNT" then config.WITH_COUNT_BELOW_THRESHOLD else nil
+							end)(SystemMessageKey)
 							
-							if var5 == nil then
-								var1:warning("LocalChatEnabledMessage: IXP returned unrecognized identifier '{}'; showing control message, not logging exposure", systemMessageKey)
+							if v1 == nil then
+								NewResult:warning("LocalChatEnabledMessage: IXP returned unrecognized identifier '{}'; showing control message, not logging exposure", SystemMessageKey)
 								
-								if displayVirtualSystemMessage then
-									displayVirtualSystemMessage(var3, nil, var4)
+								if DisplayVirtualSystemMessageFunction then
+									DisplayVirtualSystemMessageFunction("CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithAgeGroupAAndTF", nil, "Only people in similar age groups and your trusted friends can chat with you.")
+									
+									return
+								else
+									DisplaySystemMessageModule("CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithAgeGroupAAndTF", nil, "Roblox.ChatEnabled.Info", Translator, DefaultSystemTextChannel, "Only people in similar age groups and your trusted friends can chat with you.")
 									
 									return
 								end
-								displaySystemMessageModule(var3, nil, "Roblox.ChatEnabled.Info", translator, defaultSystemTextChannel, var4)
-								
-								return
-							elseif not var2 then
-								var2 = true
-								expChatLocalChatEnabledMessageExperimentation.logExposure()
+							else
+								if not Flag then
+									Flag = true
+									ExpChatLocalChatEnabledMessageExperimentation.logExposure()
+								end
+								if DisplayVirtualSystemMessageFunction then
+									DisplayVirtualSystemMessageFunction(v1, { RBX_COUNT = Result }, "Only people in similar age groups and your trusted friends can chat with you.")
+									
+									return
+								else
+									DisplaySystemMessageModule(v1, { RBX_COUNT = Result }, "Roblox.ChatEnabled.Info", Translator, DefaultSystemTextChannel, "Only people in similar age groups and your trusted friends can chat with you.")
+									
+									return
+								end
 							end
-							if displayVirtualSystemMessage then
-								displayVirtualSystemMessage(var5, { RBX_COUNT = status }, var4)
-								
-								return
-							end
-							displaySystemMessageModule(var5, { RBX_COUNT = status }, "Roblox.ChatEnabled.Info", translator, defaultSystemTextChannel, var4)
+						elseif DisplayVirtualSystemMessageFunction then
+							DisplayVirtualSystemMessageFunction("CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithAgeGroupAAndTF", nil, "Only people in similar age groups and your trusted friends can chat with you.")
+							
+							return
+						else
+							DisplaySystemMessageModule("CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithAgeGroupAAndTF", nil, "Roblox.ChatEnabled.Info", Translator, DefaultSystemTextChannel, "Only people in similar age groups and your trusted friends can chat with you.")
 							
 							return
 						end
-					end
-				else
-					var1:warning("GetChatableUserCountAsync (local) failed: {}", tostring(status))
-					
-					if displayVirtualSystemMessage then
-						displayVirtualSystemMessage(var3, nil, var4)
+					elseif DisplayVirtualSystemMessageFunction then
+						DisplayVirtualSystemMessageFunction("CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithAgeGroupAAndTF", nil, "Only people in similar age groups and your trusted friends can chat with you.")
+						
+						return
+					else
+						DisplaySystemMessageModule("CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithAgeGroupAAndTF", nil, "Roblox.ChatEnabled.Info", Translator, DefaultSystemTextChannel, "Only people in similar age groups and your trusted friends can chat with you.")
 						
 						return
 					end
-					displaySystemMessageModule(var3, nil, "Roblox.ChatEnabled.Info", translator, defaultSystemTextChannel, var4)
+				else
+					NewResult:warning("GetChatableUserCountAsync (local) failed: {}", (tostring(Result)))
+					
+					if DisplayVirtualSystemMessageFunction then
+						DisplayVirtualSystemMessageFunction("CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithAgeGroupAAndTF", nil, "Only people in similar age groups and your trusted friends can chat with you.")
+						
+						return
+					else
+						DisplaySystemMessageModule("CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithAgeGroupAAndTF", nil, "Roblox.ChatEnabled.Info", Translator, DefaultSystemTextChannel, "Only people in similar age groups and your trusted friends can chat with you.")
+					end
 				end
 			end)
 			
 			return
-		elseif displayVirtualSystemMessage then
-			displayVirtualSystemMessage(var3, nil, var4)
+		end
+		if DisplayVirtualSystemMessageFunction then
+			DisplayVirtualSystemMessageFunction("CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithAgeGroupAAndTF", nil, "Only people in similar age groups and your trusted friends can chat with you.")
 			
 			return
+		else
+			DisplaySystemMessageModule("CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithAgeGroupAAndTF", nil, "Roblox.ChatEnabled.Info", Translator, DefaultSystemTextChannel, "Only people in similar age groups and your trusted friends can chat with you.")
 		end
-		displaySystemMessageModule(var3, nil, "Roblox.ChatEnabled.Info", translator, defaultSystemTextChannel, var4)
 	end
 end

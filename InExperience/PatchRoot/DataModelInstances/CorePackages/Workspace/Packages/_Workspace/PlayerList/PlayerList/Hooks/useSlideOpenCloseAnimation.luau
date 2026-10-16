@@ -1,12 +1,12 @@
-﻿local parent = script.Parent.Parent.Parent
-local reactModule = require(parent.React)
-local reactOtterModule = require(parent.ReactOtter)
+﻿local Parent = script.Parent.Parent.Parent
+local ReactModule = require(Parent.React)
+local ReactOtterModule = require(Parent.ReactOtter)
 
-local function _(p1, p2)
+local function _(p1, StartingValue) --[[ Line: 53 | Named "springOptions" ]]
 	return {
 		dampingRatio = p1.dampingRatio,
 		frequency = p1.frequency,
-		startingValue = p2
+		startingValue = StartingValue
 	}
 end
 
@@ -14,58 +14,63 @@ return {
 	MENU_ZOOM_CLOSED_SCALE = 1.25,
 	PANEL_RECESS_SCALE = 0.95,
 	PANEL_RECESS_TRANSPARENCY = 0.6,
-	useSlideOpenCloseAnimation = function(p1, p2, p3)
-		-- upvalues: reactModule (ref), reactOtterModule (ref)
-		local var1, var2 = reactModule.useState(p1)
-		local var3 = reactModule.useRef(p1)
-		var3.current = p1
-		local var4 = reactModule.useRef(true)
+	useSlideOpenCloseAnimation = function(Current, p1, p2) --[[ Line: 61 ]]
+		-- upvalues: ReactModule (copy), ReactOtterModule (copy)
+		local UseStateResult, UseStateResult2 = ReactModule.useState(Current)
+		local UseRefResult = ReactModule.useRef(Current)
+		UseRefResult.current = Current
+		local UseRefResult1 = ReactModule.useRef(true)
 		
-		if p1 and not var1 then
-			var2(true)
+		if Current and not UseStateResult then
+			UseStateResult2(true)
 		end
-		local var5, var6 = reactOtterModule.useAnimatedBinding(if p1 then 0 else p2.hiddenOffset, reactModule.useCallback(function()
-			-- upvalues: var3 (ref), var2 (ref)
-			if not var3.current then
-				var2(false)
+		local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(if Current then 0 else p1.hiddenOffset, (ReactModule.useCallback(function() --[[ Line: 78 ]]
+			-- upvalues: UseRefResult (copy), UseStateResult2 (copy)
+			if not UseRefResult.current then
+				UseStateResult2(false)
 			end
-		end, {}))
-		local var7 = reactModule.useMemo(function()
-			-- upvalues: var5 (ref)
-			return var5:map(function(p4)
-				return UDim2.new(p4, 0, 0, 0)
+		end, {})))
+		local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 86 ]]
+			-- upvalues: UseAnimatedBindingResult (copy)
+			return UseAnimatedBindingResult:map(function(XScale): UDim2 --[[ Line: 87 ]]
+				return UDim2.new(XScale, 0, 0, 0)
 			end)
-		end, { var5 })
-		reactModule.useEffect(function()
-			-- upvalues: var4 (ref), p1 (ref), var2 (ref), p2 (ref), var6 (ref), reactOtterModule (copy)
-			local current = var4.current
-			var4.current = false
+		end, { UseAnimatedBindingResult })
+		ReactModule.useEffect(function() --[[ Line: 94 ]]
+			-- upvalues: UseRefResult1 (copy), Current (copy), UseStateResult2 (copy), p1 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval)
+			local Current1 = UseRefResult1.current
+			UseRefResult1.current = false
 			
-			if p1 then
-				var2(true)
+			if Current then
+				UseStateResult2(true)
 				
-				if current and not p2.animateInitialOpen then
+				if not Current1 or p1.animateInitialOpen then
+					UseAnimatedBindingResult2(ReactOtterModule.spring(0, {
+						dampingRatio = p1.dampingRatio,
+						frequency = p1.frequency,
+						startingValue = p1.openStartOffset
+					}))
+					
 					return
 				end
-				local var8 = p2
-				var6(reactOtterModule.spring(0, {
-					dampingRatio = var8.dampingRatio,
-					frequency = var8.frequency,
-					startingValue = p2.openStartOffset
+				return
+			elseif not Current1 then
+				UseAnimatedBindingResult2(ReactOtterModule.spring(p1.hiddenOffset, {
+					startingValue = nil,
+					dampingRatio = p1.dampingRatio,
+					frequency = p1.frequency
 				}))
 				
 				return
-			elseif current then
-				return
+			else
 			end
-			var6(reactOtterModule.spring(p2.hiddenOffset, {
-				startingValue = nil,
-				dampingRatio = p2.dampingRatio,
-				frequency = p2.frequency
-			}))
-		end, { p1, p3, p2 })
+		end, { Current, p2, p1 })
 		
-		return { offset = var5, position = var7, shouldMount = var1 }
+		return {
+			offset = UseAnimatedBindingResult,
+			position = UseMemoResult,
+			shouldMount = UseStateResult
+		}
 	end,
 	PANEL_SLIDE_CONFIG = {
 		hiddenOffset = 1.1,

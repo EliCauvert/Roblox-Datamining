@@ -1,9 +1,9 @@
-﻿local API_URLModule = require(script.Parent.Parent.API_URL)
+﻿local APIURLModule = require(script.Parent.Parent.API_URL)
 
-return function(p1)
-	-- upvalues: API_URLModule (ref)
-	return p1.roduxNetworking.POST("RemoveReaction", function(p2, p3)
-		-- upvalues: API_URLModule (copy)
-		return p2(API_URLModule):path("posts-api"):path("v1"):path("content-posts"):path("removeReaction"):body(p3)
+return function(p1) --[[ Line: 14 ]]
+	-- upvalues: APIURLModule (copy)
+	return p1.roduxNetworking.POST("RemoveReaction", function(Callback, p2) --[[ Line: 17 ]]
+		-- upvalues: APIURLModule (upval)
+		return Callback(APIURLModule):path("posts-api"):path("v1"):path("content-posts"):path("removeReaction"):body(p2)
 	end)
 end

@@ -1,54 +1,59 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor").Parent
-local avatarScreen = require(parent.AvatarExperienceNavigation).Enums.AvatarScreen
-local fFlagAXPPEReturnToEntrySurface = require(parent.SharedFlags).FFlagAXPPEReturnToEntrySurface
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor").Parent
+local AvatarScreen = require(Parent.AvatarExperienceNavigation).Enums.AvatarScreen
+local FFlagAXPPEReturnToEntrySurface = require(Parent.SharedFlags).FFlagAXPPEReturnToEntrySurface
 
-local function _(p1)
+local function _(p1) --[[ Line: 18 | Named "resolveEntrySurface" ]]
 	if not p1.getParam then
 		return nil, nil
 	end
-	local entryOrigin = p1.getParam("entryOrigin")
+	local EntryOriginParam = p1.getParam("entryOrigin")
 	
-	if entryOrigin and entryOrigin.screenName then
-		return entryOrigin.screenName, entryOrigin.screenParams
+	if EntryOriginParam and EntryOriginParam.screenName then
+		return EntryOriginParam.screenName, EntryOriginParam.screenParams
+	else
+		return p1.getParam("prevNavPage"), nil
 	end
-	return p1.getParam("prevNavPage"), nil
 end
 
-return function(p1)
-	-- upvalues: fFlagAXPPEReturnToEntrySurface (ref), avatarScreen (ref)
-	local screenName, screenParams
+return function(p1) --[[ Line: 31 | Named "closeProfilePictureEditor" ]]
+	-- upvalues: FFlagAXPPEReturnToEntrySurface (copy), AvatarScreen (copy)
 	if not p1 then return end
+	local PrevNavPageParam = nil
+	local ScreenParams = nil
 	if p1.getParam then
-		local entryOrigin = p1.getParam("entryOrigin")
+		local EntryOriginParam = p1.getParam("entryOrigin")
 		
-		if entryOrigin and entryOrigin.screenName then
-			screenName = entryOrigin.screenName
-			screenParams = entryOrigin.screenParams
+		if EntryOriginParam and EntryOriginParam.screenName then
+			PrevNavPageParam = EntryOriginParam.screenName
+			ScreenParams = EntryOriginParam.screenParams
 		else
-			screenName = p1.getParam("prevNavPage")
-			screenParams = nil
+			PrevNavPageParam = p1.getParam("prevNavPage")
+			ScreenParams = nil
 		end
 	else
-		screenName = nil
-		screenParams = nil
+		PrevNavPageParam = nil
+		ScreenParams = nil
 	end
-	if screenName and p1.navigate then
-		if fFlagAXPPEReturnToEntrySurface then
-			p1.navigate(if screenName == avatarScreen.AvatarExperienceLandingPage then avatarScreen.AvatarExperienceLandingPage else avatarScreen.Catalog)
+	if PrevNavPageParam and p1.navigate then
+		if FFlagAXPPEReturnToEntrySurface then
+			p1.navigate(if PrevNavPageParam == AvatarScreen.AvatarExperienceLandingPage then AvatarScreen.AvatarExperienceLandingPage else AvatarScreen.Catalog)
 		end
-		if screenParams then
-			p1.navigate(screenName, screenParams)
+		if ScreenParams then
+			p1.navigate(PrevNavPageParam, ScreenParams)
+			
+			return
+		else
+			p1.navigate(PrevNavPageParam)
 			
 			return
 		end
-		p1.navigate(screenName)
-		
-		return
 	elseif p1.goBack then
 		p1.goBack()
 		
 		return
-	elseif p1.pop then
-		p1.pop()
+	else
+		if p1.pop then
+			p1.pop()
+		end
 	end
 end

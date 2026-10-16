@@ -1,82 +1,70 @@
-﻿local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
-local parent = genericAbuseReporting.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local _ = require(genericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.AbuseSheetFlowTypes)
-local slideTransitionContextModule = require(genericAbuseReporting.BeduiV2.Components.SlideTransitionContext)
-local subtitleModule = require(genericAbuseReporting.BeduiV2.Components.Subtitle)
-local textWithTranslationModule = require(genericAbuseReporting.BeduiV2.Utils.Translate.TextWithTranslation)
-local _ = require(genericAbuseReporting.BeduiV2.Utils.Translate.translate)
-local sheet = foundationModule.Sheet
-local useTokens = foundationModule.Hooks.useTokens
-local view = foundationModule.View
-local useIsSlideAnimating = slideTransitionContextModule.useIsSlideAnimating
-local var1 = reactModule.createContext(false)
-
-local var2 = function(p1)
-	-- upvalues: reactModule (ref), var1 (ref)
-	return reactModule.createElement(var1.Provider, { value = p1.value }, p1.children)
-end
-
-local var3 = function()
-	-- upvalues: reactModule (ref), var1 (ref)
-	return reactModule.useContext(var1)
-end
-
-local var4 = reactModule.forwardRef(function(p1, _)
-	-- upvalues: reactModule (ref), view (ref), textWithTranslationModule (ref), subtitleModule (ref)
-	return reactModule.createElement(view, {
-		tag = "col gap-xsmall size-full-0 auto-y",
-		LayoutOrder = p1.layoutOrder
-	}, {
-		Title = reactModule.createElement(textWithTranslationModule, {
-			tag = "size-full-0 auto-y text-title-large",
-			input = p1.input,
-			layoutOrder = p1.layoutOrder
-		}),
-		Subtitle = p1.subtitle and reactModule.createElement(subtitleModule, {
-			subtitle = p1.subtitle,
-			layoutOrder = if p1.layoutOrder then p1.layoutOrder + 1 else 2
-		})
-	})
-end)
-local t = {
-	Title = reactModule.forwardRef(function(p1, _)
-		-- upvalues: reactModule (ref), textWithTranslationModule (ref)
-		return reactModule.createElement(textWithTranslationModule, {
+﻿local GenericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
+local Parent = GenericAbuseReporting.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local _ = require(GenericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.AbuseSheetFlowTypes)
+local SubtitleModule = require(GenericAbuseReporting.BeduiV2.Components.Subtitle)
+local TextWithTranslationModule = require(GenericAbuseReporting.BeduiV2.Utils.Translate.TextWithTranslation)
+local _ = require(GenericAbuseReporting.BeduiV2.Utils.Translate.translate)
+local Sheet = FoundationModule.Sheet
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local View = FoundationModule.View
+local UseIsSlideAnimatingFunction = require(GenericAbuseReporting.BeduiV2.Components.SlideTransitionContext).useIsSlideAnimating
+local Context = ReactModule.createContext(false)
+local SheetSlots = {
+	Title = ReactModule.forwardRef(function(p1, _) --[[ Line: 70 ]]
+		-- upvalues: ReactModule (copy), TextWithTranslationModule (copy)
+		return ReactModule.createElement(TextWithTranslationModule, {
 			tag = "size-full-0 auto-y text-heading-medium",
 			input = p1.input,
 			layoutOrder = p1.layoutOrder
 		})
 	end),
-	Layout = reactModule.forwardRef(function(p1, p2)
-		-- upvalues: reactModule (ref), sheet (ref)
-		return reactModule.createElement(reactModule.Fragment, nil, {
-			Content = reactModule.createElement(sheet.Content, { ref = p2, isContentFullBleed = p1.isContentFullBleed }, p1.body),
-			Actions = if p1.actions ~= nil then nil else reactModule.createElement(sheet.Actions, nil, p1.actions)
+	Layout = ReactModule.forwardRef(function(p1, Ref) --[[ Line: 100 ]]
+		-- upvalues: ReactModule (copy), Sheet (copy)
+		return ReactModule.createElement(ReactModule.Fragment, nil, {
+			Content = ReactModule.createElement(Sheet.Content, { ref = Ref, isContentFullBleed = p1.isContentFullBleed }, p1.body),
+			Actions = if p1.actions == nil then nil else ReactModule.createElement(Sheet.Actions, nil, p1.actions)
 		})
 	end),
-	ContentInset = reactModule.forwardRef(function(p1, _)
-		-- upvalues: reactModule (ref), view (ref)
-		return reactModule.createElement(view, {
+	ContentInset = ReactModule.forwardRef(function(p1, _) --[[ Line: 116 ]]
+		-- upvalues: ReactModule (copy), View (copy)
+		return ReactModule.createElement(View, {
 			tag = "col gap-medium size-full-0 auto-y padding-x-xlarge",
 			LayoutOrder = p1.layoutOrder
 		}, p1.children)
 	end)
 }
-local var5 = reactModule.createContext(t)
+local Context1 = ReactModule.createContext(SheetSlots)
 
 return {
 	INLINE_LANDSCAPE_WIDTH = 468,
-	sheetSlots = t,
+	sheetSlots = SheetSlots,
 	inlineSlots = {
-		Title = var4,
-		Layout = reactModule.forwardRef(function(p1, p2)
-			-- upvalues: reactModule (ref), var1 (ref), useTokens (ref), useIsSlideAnimating (ref), view (ref)
-			local var6 = reactModule.useContext(var1)
+		Title = ReactModule.forwardRef(function(p1, _) --[[ Line: 78 ]]
+			-- upvalues: ReactModule (copy), View (copy), TextWithTranslationModule (copy), SubtitleModule (copy)
+			return ReactModule.createElement(View, {
+				tag = "col gap-xsmall size-full-0 auto-y",
+				LayoutOrder = p1.layoutOrder
+			}, {
+				Title = ReactModule.createElement(TextWithTranslationModule, {
+					tag = "size-full-0 auto-y text-title-large",
+					input = p1.input,
+					layoutOrder = p1.layoutOrder
+				}),
+				Subtitle = p1.subtitle and ReactModule.createElement(SubtitleModule, {
+					subtitle = p1.subtitle,
+					layoutOrder = if p1.layoutOrder then p1.layoutOrder + 1 else 2
+				})
+			})
+		end),
+		Layout = ReactModule.forwardRef(function(p1, Ref) --[[ Line: 145 ]]
+			-- upvalues: ReactModule (copy), Context (copy), UseTokensFunction (copy), UseIsSlideAnimatingFunction (copy), View (copy)
+			local UseContextResult = ReactModule.useContext(Context)
+			local UseTokensResult = UseTokensFunction()
 			
-			return reactModule.createElement(view, { tag = "col size-full", ref = p2 }, {
-				BodyWrapper = reactModule.createElement(view, { tag = "fill size-full-0", LayoutOrder = 1 }, reactModule.createElement("ScrollingFrame", {
+			return ReactModule.createElement(View, { tag = "col size-full", ref = Ref }, {
+				BodyWrapper = ReactModule.createElement(View, { tag = "fill size-full-0", LayoutOrder = 1 }, ReactModule.createElement("ScrollingFrame", {
 					ZIndex = 2,
 					BackgroundTransparency = 1,
 					BorderSizePixel = 0,
@@ -86,52 +74,58 @@ return {
 					AutomaticCanvasSize = Enum.AutomaticSize.Y,
 					CanvasSize = UDim2.new(1, 0, 0, 0),
 					ScrollingDirection = Enum.ScrollingDirection.Y,
-					ScrollBarImageTransparency = useIsSlideAnimating():map(function(p3)
-						return if p3 then 1 else 0
+					ScrollBarImageTransparency = UseIsSlideAnimatingFunction():map(function(p2): number --[[ Line: 149 ]]
+						return if p2 then 1 else 0
 					end)
-				}, reactModule.createElement(view, {
+				}, ReactModule.createElement(View, {
 					tag = {
 						["align-x-center size-full-0 auto-y margin-bottom-medium"] = true,
-						["padding-top-large"] = var6
+						["padding-top-large"] = UseContextResult
 					}
-				}, reactModule.createElement(view, {
-					Size = if var6 then UDim2.new(0, 468 * useTokens().Config.UI.Scale, 0, 0) else nil,
+				}, ReactModule.createElement(View, {
+					Size = if UseContextResult then UDim2.new(0, 468 * UseTokensResult.Config.UI.Scale, 0, 0) else nil,
 					tag = {
 						["col gap-medium auto-y"] = true,
-						["size-full-0"] = not var6
+						["size-full-0"] = not UseContextResult
 					}
 				}, {
 					Body = p1.body,
-					LandscapeActions = if var6 and p1.actions ~= nil then reactModule.createElement(view, {
+					LandscapeActions = if UseContextResult and p1.actions ~= nil then ReactModule.createElement(View, {
 						tag = "auto-xy padding-bottom-small padding-top-small",
 						LayoutOrder = 1000
 					}, p1.actions) else nil
 				})))),
-				PortraitActionsWrapper = if var6 or p1.actions == nil then nil else reactModule.createElement(view, {
+				PortraitActionsWrapper = if UseContextResult or p1.actions == nil then nil else ReactModule.createElement(View, {
 					tag = "align-x-center size-full-0 auto-y padding-bottom-small",
 					LayoutOrder = 2
-				}, reactModule.createElement(view, {
+				}, ReactModule.createElement(View, {
 					tag = "row gap-medium position-bottom-center size-full-0 auto-y",
 					ZIndex = 2
 				}, p1.actions))
 			})
 		end),
-		ContentInset = reactModule.forwardRef(function(p1, _)
-			-- upvalues: reactModule (ref), view (ref)
-			return reactModule.createElement(view, {
+		ContentInset = ReactModule.forwardRef(function(p1, _) --[[ Line: 225 ]]
+			-- upvalues: ReactModule (copy), View (copy)
+			return ReactModule.createElement(View, {
 				tag = "col gap-medium size-full-0 auto-y",
 				LayoutOrder = p1.layoutOrder
 			}, p1.children)
 		end)
 	},
-	LayoutSlotsProvider = function(p1)
-		-- upvalues: reactModule (ref), var5 (ref)
-		return reactModule.createElement(var5.Provider, { value = p1.slots }, p1.children)
+	LayoutSlotsProvider = function(p1) --[[ Line: 245 ]]
+		-- upvalues: ReactModule (copy), Context1 (copy)
+		return ReactModule.createElement(Context1.Provider, { value = p1.slots }, p1.children)
 	end,
-	useLayoutSlots = function()
-		-- upvalues: reactModule (ref), var5 (ref)
-		return reactModule.useContext(var5)
+	useLayoutSlots = function() --[[ Line: 256 ]]
+		-- upvalues: ReactModule (copy), Context1 (copy)
+		return ReactModule.useContext(Context1)
 	end,
-	OverlaidControlsProvider = var2,
-	useShouldUseOverlaidControls = var3
+	OverlaidControlsProvider = function(p1) --[[ Line: 58 ]]
+		-- upvalues: ReactModule (copy), Context (copy)
+		return ReactModule.createElement(Context.Provider, { value = p1.value }, p1.children)
+	end,
+	useShouldUseOverlaidControls = function() --[[ Line: 65 ]]
+		-- upvalues: ReactModule (copy), Context (copy)
+		return ReactModule.useContext(Context)
+	end
 }

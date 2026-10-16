@@ -1,149 +1,159 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local reactModule = require(parent.React)
-local realtimeDeliveryModule = require(parent.RealtimeDelivery)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local useSignalState = require(parent.SignalsReact).useSignalState
-local loginStatus = require(parent.RobloxAppEnums).LoginStatus
-local fFlagUseSignalsForAuthenticationStatus = require(parent.SharedFlags).FFlagUseSignalsForAuthenticationStatus
-local var1 = if fFlagUseSignalsForAuthenticationStatus then require(parent.AuthenticationStatus).GetAuthenticationStatusStore else nil
-local fetchChatMetadataModule = require(appChat.Conversations.Thunks.fetchChatMetadata)
-local useIsAppLoadedModule = require(appChat.Hooks.useIsAppLoaded)
-local useKeybindModule = require(appChat.App.Hooks.useKeybind)
-local usePrevious = require(parent.RoactUtils).Hooks.usePrevious
-local useIsChatEnabledModule = require(appChat.Hooks.useIsChatEnabled)
-local reloadAllMessagesModule = require(appChat.Conversations.Thunks.reloadAllMessages)
-local getDeepValue2Module = require(appChat.Utils.getDeepValue2)
-local appChatNetworkingModule = require(parent.AppChatNetworking)
-local dismissedAllConversationModalsForSequenceModule = require(appChat.Conversations.Actions.DismissedAllConversationModalsForSequence)
-local useIsAppChatVisibleModule = require(appChat.App.Hooks.useIsAppChatVisible)
-local getFFlagDebugAppChatModule = require(appChat.Flags.getFFlagDebugAppChat)
-local fFlagEnableAEGIS2AppChatConversationBanner = require(parent.SharedFlags).FFlagEnableAEGIS2AppChatConversationBanner
-local fStringAEGIS2AppChatAgeVerifiedRealtimeNamespace = require(parent.SharedFlags).FStringAEGIS2AppChatAgeVerifiedRealtimeNamespace
-local name = require(appChat.Logger):new(script.Name)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local ReactModule = require(Parent.React)
+local RealtimeDeliveryModule = require(Parent.RealtimeDelivery)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local LoginStatus = require(Parent.RobloxAppEnums).LoginStatus
+local FFlagUseSignalsForAuthenticationStatus = require(Parent.SharedFlags).FFlagUseSignalsForAuthenticationStatus
+local GetAuthenticationStatusStore = if FFlagUseSignalsForAuthenticationStatus then require(Parent.AuthenticationStatus).GetAuthenticationStatusStore else nil
+local FetchChatMetadataModule = require(AppChat.Conversations.Thunks.fetchChatMetadata)
+local UseIsAppLoadedModule = require(AppChat.Hooks.useIsAppLoaded)
+local UseKeybindModule = require(AppChat.App.Hooks.useKeybind)
+local UsePreviousFunction = require(Parent.RoactUtils).Hooks.usePrevious
+local UseIsChatEnabledModule = require(AppChat.Hooks.useIsChatEnabled)
+local ReloadAllMessagesModule = require(AppChat.Conversations.Thunks.reloadAllMessages)
+local GetDeepValue2Module = require(AppChat.Utils.getDeepValue2)
+local AppChatNetworkingModule = require(Parent.AppChatNetworking)
+local DismissedAllConversationModalsForSequenceModule = require(AppChat.Conversations.Actions.DismissedAllConversationModalsForSequence)
+local UseIsAppChatVisibleModule = require(AppChat.App.Hooks.useIsAppChatVisible)
+local GetFFlagDebugAppChatModule = require(AppChat.Flags.getFFlagDebugAppChat)
+local FFlagEnableAEGIS2AppChatConversationBanner = require(Parent.SharedFlags).FFlagEnableAEGIS2AppChatConversationBanner
+local FStringAEGIS2AppChatAgeVerifiedRealtimeNamespace = require(Parent.SharedFlags).FStringAEGIS2AppChatAgeVerifiedRealtimeNamespace
+local NewResult = require(AppChat.Logger):new(script.Name)
 
-return function(value)
-	-- upvalues: useDispatch (ref), useIsAppLoadedModule (ref), fFlagUseSignalsForAuthenticationStatus (ref), useSignalState (ref), var1 (ref), loginStatus (ref), useSelector (ref), getFFlagDebugAppChatModule (ref), useKeybindModule (ref), name (ref), reactModule (ref), fetchChatMetadataModule (ref), useIsAppChatVisibleModule (ref), useIsChatEnabledModule (ref), getDeepValue2Module (ref), usePrevious (ref), reloadAllMessagesModule (ref), realtimeDeliveryModule (ref), appChatNetworkingModule (ref), fFlagEnableAEGIS2AppChatConversationBanner (ref), dismissedAllConversationModalsForSequenceModule (ref), fStringAEGIS2AppChatAgeVerifiedRealtimeNamespace (ref)
-	local var2
-	local var3 = useDispatch()
-	local var4 = useIsAppLoadedModule()
+return function(p1) --[[ Line: 43 | Named "AppChatAccountSettingsEventReceiver" ]]
+	-- upvalues: UseDispatchFunction (copy), UseIsAppLoadedModule (copy), FFlagUseSignalsForAuthenticationStatus (copy), UseSignalStateFunction (copy), GetAuthenticationStatusStore (copy), LoginStatus (copy), UseSelectorFunction (copy), GetFFlagDebugAppChatModule (copy), UseKeybindModule (copy), NewResult (copy), ReactModule (copy), FetchChatMetadataModule (copy), UseIsAppChatVisibleModule (copy), UseIsChatEnabledModule (copy), GetDeepValue2Module (copy), UsePreviousFunction (copy), ReloadAllMessagesModule (copy), RealtimeDeliveryModule (copy), AppChatNetworkingModule (copy), FFlagEnableAEGIS2AppChatConversationBanner (copy), DismissedAllConversationModalsForSequenceModule (copy), FStringAEGIS2AppChatAgeVerifiedRealtimeNamespace (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseIsAppLoadedModuleResult = UseIsAppLoadedModule()
+	local IsUseSignalStateResultMatch = if FFlagUseSignalsForAuthenticationStatus then UseSignalStateFunction(GetAuthenticationStatusStore(false).getStatus) == LoginStatus.LOGGED_IN else UseSelectorFunction(function(p2): boolean --[[ Line: 48 ]]
+		-- upvalues: LoginStatus (upval)
+		return p2.AuthenticationStatus and p2.AuthenticationStatus.status == LoginStatus.LOGGED_IN
+	end)
 	
-	if fFlagUseSignalsForAuthenticationStatus then
-		var2 = useSignalState(var1(false).getStatus) == loginStatus.LOGGED_IN
-		var2 = nil
-	else
-		var2 = useSelector(function(p1)
-			-- upvalues: loginStatus (copy)
-			return p1.AuthenticationStatus and p1.AuthenticationStatus.status == loginStatus.LOGGED_IN
-		end)
-	end
-	if getFFlagDebugAppChatModule() then
-		useKeybindModule({
+	if GetFFlagDebugAppChatModule() then
+		UseKeybindModule({
 			keyCode = Enum.KeyCode.G,
 			modifierKey = Enum.ModifierKey.Ctrl
-		}, function()
-			-- upvalues: name (copy), var3 (ref)
-			name:debug("Ctrl + G pressed, toggling group chat enabled")
-			var3({ type = "Debug_GroupChatEnabledToggled" })
-		end, { var3 })
+		}, function() --[[ Line: 53 ]]
+			-- upvalues: NewResult (upval), UseDispatchResult (copy)
+			NewResult:debug("Ctrl + G pressed, toggling group chat enabled")
+			UseDispatchResult({ type = "Debug_GroupChatEnabledToggled" })
+		end, { UseDispatchResult })
 	end
-	local var5 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref), fetchChatMetadataModule (copy), name (copy)
-		var3(fetchChatMetadataModule()):andThen(function(p1)
-			-- upvalues: name (copy)
-			name:info("Finished fetching chat metadata. Determined isChatEnabled as {}", p1)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 61 ]]
+		-- upvalues: UseDispatchResult (copy), FetchChatMetadataModule (upval), NewResult (upval)
+		UseDispatchResult(FetchChatMetadataModule()):andThen(function(Result) --[[ Line: 62 ]]
+			-- upvalues: NewResult (upval)
+			NewResult:info("Finished fetching chat metadata. Determined isChatEnabled as {}", Result)
 		end)
-	end, { var3 })
-	local var6 = useIsAppChatVisibleModule()
-	reactModule.useEffect(function()
-		-- upvalues: value (ref), var2 (ref), var4 (ref), name (copy), var5 (ref)
-		local var7
-		if not value.isInExperience then
-			var7 = var2 and not var4
+	end, { UseDispatchResult })
+	local UseIsAppChatVisibleModuleResult = UseIsAppChatVisibleModule()
+	ReactModule.useEffect(function() --[[ Line: 69 ]]
+		-- upvalues: p1 (copy), IsUseSignalStateResultMatch (copy), UseIsAppLoadedModuleResult (copy), NewResult (upval), UseResult (copy)
+		if if p1.isInExperience then not UseIsAppLoadedModuleResult else IsUseSignalStateResultMatch and not UseIsAppLoadedModuleResult then
+			NewResult:info("App is not loaded, fetching chat metadata")
+			UseResult()
 		end
-		if var7 then
-			name:info("App is not loaded, fetching chat metadata")
-			var5()
-		end
-	end, { var5, var4, value.isInExperience, var2 })
-	local var7 = useIsChatEnabledModule()
-	local var8 = useSelector(function(p1)
-		-- upvalues: getDeepValue2Module (copy)
-		return getDeepValue2Module(p1, "ChatAppReducer.ChatSettings.chatUserMessagesEnabled")
+	end, {
+		UseResult,
+		UseIsAppLoadedModuleResult,
+		p1.isInExperience,
+		IsUseSignalStateResultMatch
+	})
+	local UseIsChatEnabledModuleResult = UseIsChatEnabledModule()
+	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 77 ]]
+		-- upvalues: GetDeepValue2Module (upval)
+		return GetDeepValue2Module(p2, "ChatAppReducer.ChatSettings.chatUserMessagesEnabled")
 	end)
-	local var9 = usePrevious(var8)
-	reactModule.useEffect(function()
-		-- upvalues: var7 (ref), var9 (ref), var8 (ref), name (copy), var3 (ref), reloadAllMessagesModule (copy)
-		if var7 and var9 ~= nil and var9 ~= var8 then
-			name:info("Chat messages eligibility changed, reloading all messages")
-			var3(reloadAllMessagesModule()):catch(function(p1)
-				-- upvalues: name (copy)
-				name:warn("Failed to reload all messages after chat user messages eligibility change", p1)
+	local UsePreviousResult = UsePreviousFunction(UseSelectorResult)
+	ReactModule.useEffect(function() --[[ Line: 82 ]]
+		-- upvalues: UseIsChatEnabledModuleResult (copy), UsePreviousResult (copy), UseSelectorResult (copy), NewResult (upval), UseDispatchResult (copy), ReloadAllMessagesModule (upval)
+		if UseIsChatEnabledModuleResult and UsePreviousResult ~= nil and UsePreviousResult ~= UseSelectorResult then
+			NewResult:info("Chat messages eligibility changed, reloading all messages")
+			UseDispatchResult(ReloadAllMessagesModule()):catch(function(Err) --[[ Line: 89 ]]
+				-- upvalues: NewResult (upval)
+				NewResult:warn("Failed to reload all messages after chat user messages eligibility change", Err)
 			end)
 		end
-	end, { var3, var7, var9, var8 })
-	realtimeDeliveryModule.useRealtimeNamespace("UserSettingsChanged", function(p1)
-		-- upvalues: name (copy), var3 (ref), reloadAllMessagesModule (copy), var5 (ref)
-		if p1.SettingsChanged then
-			local var10 = false
-			local index = table.find(p1.SettingsChanged, "WhoCanUsePartyChatWithMe")
+	end, {
+		UseDispatchResult,
+		UseIsChatEnabledModuleResult,
+		UsePreviousResult,
+		UseSelectorResult
+	})
+	RealtimeDeliveryModule.useRealtimeNamespace("UserSettingsChanged", function(p2) --[[ Line: 95 ]]
+		-- upvalues: NewResult (upval), UseDispatchResult (copy), ReloadAllMessagesModule (upval), UseResult (copy)
+		if p2.SettingsChanged then
+			local v1 = false
+			local FoundIndex: number? = table.find(p2.SettingsChanged, "WhoCanUsePartyChatWithMe")
 			
-			if index then
-				name:info("Received privacy setting notification, reloading all messages")
-				var3(reloadAllMessagesModule()):catch(function(p2)
-					-- upvalues: name (copy)
-					name:warn("Failed to reload all messages after party setting change", p2)
+			if FoundIndex then
+				NewResult:info("Received privacy setting notification, reloading all messages")
+				UseDispatchResult(ReloadAllMessagesModule()):catch(function(Err) --[[ Line: 101 ]]
+					-- upvalues: NewResult (upval)
+					NewResult:warn("Failed to reload all messages after party setting change", Err)
 				end)
 			end
-			if var10 or (table.find(p1.SettingsChanged, "WhoCanPartyWithMe") or (table.find(p1.SettingsChanged, "WhoCanUsePartyVoiceWithMe") or index)) then
-				name:info("Received privacy setting notification, fetching chat metadata")
-				var5()
+			if v1 or (table.find(p2.SettingsChanged, "WhoCanPartyWithMe") or (table.find(p2.SettingsChanged, "WhoCanUsePartyVoiceWithMe") or FoundIndex)) then
+				NewResult:info("Received privacy setting notification, fetching chat metadata")
+				UseResult()
 			end
 		end
-	end, { var5, var3 })
-	realtimeDeliveryModule.useRealtimeConnectionStateChanged("UserSettingsChanged", function(p1, p2)
-		-- upvalues: name (copy), var5 (ref)
-		if p1 == Enum.ConnectionState.Connected and p2 then
-			name:info("Reconnected to UserSettingsChanged, fetching chat metadata")
-			var5()
+	end, { UseResult, UseDispatchResult })
+	RealtimeDeliveryModule.useRealtimeConnectionStateChanged("UserSettingsChanged", function(ConnectionState, p2) --[[ Line: 117 ]]
+		-- upvalues: NewResult (upval), UseResult (copy)
+		if ConnectionState == Enum.ConnectionState.Connected and p2 then
+			NewResult:info("Reconnected to UserSettingsChanged, fetching chat metadata")
+			UseResult()
 		end
-	end, { var5 })
+	end, { UseResult })
 	
-	local var10 = function(p1)
-		-- upvalues: var3 (ref), appChatNetworkingModule (copy), name (copy), fFlagEnableAEGIS2AppChatConversationBanner (copy), dismissedAllConversationModalsForSequenceModule (copy)
-		var3(appChatNetworkingModule.rodux.GetChatLandingModal.API(p1)):catch(function(p2)
-			-- upvalues: name (copy)
-			name:warning("Error in GetChatLandingModal request. Error: {}", tostring(p2))
+	local function v28(IsInExperience) --[[ Line: 124 ]]
+		-- upvalues: UseDispatchResult (copy), AppChatNetworkingModule (upval), NewResult (upval), FFlagEnableAEGIS2AppChatConversationBanner (upval), DismissedAllConversationModalsForSequenceModule (upval)
+		UseDispatchResult(AppChatNetworkingModule.rodux.GetChatLandingModal.API(IsInExperience)):catch(function(Err) --[[ Line: 125 ]]
+			-- upvalues: NewResult (upval)
+			NewResult:warning("Error in GetChatLandingModal request. Error: {}", (tostring(Err)))
 		end)
 		
-		if fFlagEnableAEGIS2AppChatConversationBanner then
-			var3(dismissedAllConversationModalsForSequenceModule(appChatNetworkingModule.Constants.ModalSequence.ConversationBottomModal))
+		if FFlagEnableAEGIS2AppChatConversationBanner then
+			UseDispatchResult(DismissedAllConversationModalsForSequenceModule(AppChatNetworkingModule.Constants.ModalSequence.ConversationBottomModal))
 		end
 	end
 	
-	realtimeDeliveryModule.useRealtimeNamespace(fStringAEGIS2AppChatAgeVerifiedRealtimeNamespace, function(_)
-		-- upvalues: name (copy), fStringAEGIS2AppChatAgeVerifiedRealtimeNamespace (copy), var4 (ref), var10 (ref), value (ref), var5 (ref)
-		name:info("Received Realtime: {}", fStringAEGIS2AppChatAgeVerifiedRealtimeNamespace)
+	RealtimeDeliveryModule.useRealtimeNamespace(FStringAEGIS2AppChatAgeVerifiedRealtimeNamespace, function(_) --[[ Line: 139 ]]
+		-- upvalues: NewResult (upval), FStringAEGIS2AppChatAgeVerifiedRealtimeNamespace (upval), UseIsAppLoadedModuleResult (copy), v28 (copy), p1 (copy), UseResult (copy)
+		NewResult:info("Received Realtime: {}", FStringAEGIS2AppChatAgeVerifiedRealtimeNamespace)
 		
-		if var4 then
-			var10(value.isInExperience)
-			var5()
+		if UseIsAppLoadedModuleResult then
+			v28(p1.isInExperience)
+			UseResult()
 			
 			return
 		end
-	end, { var5, var4, value.isInExperience, var6 })
-	realtimeDeliveryModule.useRealtimeConnectionStateChanged(fStringAEGIS2AppChatAgeVerifiedRealtimeNamespace, function(p1, p2)
-		-- upvalues: name (copy), fStringAEGIS2AppChatAgeVerifiedRealtimeNamespace (copy), var4 (ref), var10 (ref), value (ref), var5 (ref)
-		name:info("Reconnected to Realtime: {}, hasMissedEvents: {}", fStringAEGIS2AppChatAgeVerifiedRealtimeNamespace, tostring(p2))
+	end, {
+		UseResult,
+		UseIsAppLoadedModuleResult,
+		p1.isInExperience,
+		UseIsAppChatVisibleModuleResult
+	})
+	RealtimeDeliveryModule.useRealtimeConnectionStateChanged(FStringAEGIS2AppChatAgeVerifiedRealtimeNamespace, function(ConnectionState, p2) --[[ Line: 151 ]]
+		-- upvalues: NewResult (upval), FStringAEGIS2AppChatAgeVerifiedRealtimeNamespace (upval), UseIsAppLoadedModuleResult (copy), v28 (copy), p1 (copy), UseResult (copy)
+		NewResult:info("Reconnected to Realtime: {}, hasMissedEvents: {}", FStringAEGIS2AppChatAgeVerifiedRealtimeNamespace, (tostring(p2)))
 		
-		if p1 == Enum.ConnectionState.Connected and p2 and var4 then
-			var10(value.isInExperience)
-			var5()
+		if ConnectionState == Enum.ConnectionState.Connected and p2 and UseIsAppLoadedModuleResult then
+			v28(p1.isInExperience)
+			UseResult()
 			
 			return
 		end
-	end, { var5, var4, value.isInExperience, var6 })
+	end, {
+		UseResult,
+		UseIsAppLoadedModuleResult,
+		p1.isInExperience,
+		UseIsAppChatVisibleModuleResult
+	})
 	
 	return nil
 end

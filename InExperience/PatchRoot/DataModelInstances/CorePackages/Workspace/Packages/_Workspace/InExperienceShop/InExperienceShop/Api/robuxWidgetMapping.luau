@@ -1,87 +1,90 @@
-﻿local inExperienceShop = script:FindFirstAncestor("InExperienceShop")
-local constantsModule = require(inExperienceShop.Constants)
-local _ = require(inExperienceShop.Types)
+﻿local InExperienceShop = script:FindFirstAncestor("InExperienceShop")
+local ConstantsModule = require(InExperienceShop.Constants)
+local _ = require(InExperienceShop.Types)
 
-local function _(p1, p2)
-	return p1 .. string.format("%.2f", p2)
+local function _(Text, p1): string --[[ Line: 10 | Named "formatCurrencyAmountStr" ]]
+	return Text .. string.format("%.2f", p1)
 end
 
-local _ = function(p1, p2)
-	warn("[Shop] toRobuxPackageItem failed (" .. p3 .. ") id=" .. tostring(p1.id))
+local _ = function(p1, Text) --[[ Line: 14 | Named "warnParseFailure" ]]
+	warn("[Shop] toRobuxPackageItem failed (" .. Text .. ") id=" .. tostring(p1.id))
 end
 
-local _ = function(p1)
-	local bonusItem = p1.bonusItem
+local _ = function(p1) --[[ Line: 18 | Named "parseBonusItem" ]]
+	local BonusItem = p1.bonusItem
 	
-	if bonusItem == nil then
+	if BonusItem == nil then
 		return nil
-	elseif bonusItem.type == "GamePass" then
-		return bonusItem
+	elseif BonusItem.type == "GamePass" then
+		return BonusItem
+	else
+		warn("[Shop] toRobuxPackageItem ignored bonusItem with invalid type=" .. tostring(BonusItem.type) .. " id=" .. tostring(p1.id))
+		
+		return nil
 	end
-	warn("[Shop] toRobuxPackageItem ignored bonusItem with invalid type=" .. tostring(bonusItem.type) .. " id=" .. tostring(p1.id))
-	
-	return nil
 end
 
 return {
-	toRobuxPackageItem = function(p1)
-		-- upvalues: constantsModule (ref)
+	toRobuxPackageItem = function(p1) --[[ Line: 37 ]]
+		-- upvalues: ConstantsModule (copy)
 		if p1.type ~= "Robux" then
 			return nil
 		end
-		local info = p1.info
+		local Info = p1.info
 		
-		if info == nil then
+		if Info == nil then
 			warn("[Shop] toRobuxPackageItem failed (" .. "missing info" .. ") id=" .. tostring(p1.id))
 			
 			return nil
 		end
-		local robux = info.robux
-		local productId = info.productId
-		local providerProductId = info.providerProductId
-		local price = info.price
+		local Robux = Info.robux
+		local ProductId = Info.productId
+		local ProviderProductId = Info.providerProductId
+		local Price = Info.price
 		
-		if typeof(robux) ~= "number" or typeof(productId) ~= "number" then
+		if typeof(Robux) ~= "number" or typeof(ProductId) ~= "number" then
 			warn("[Shop] toRobuxPackageItem failed (" .. "invalid robux or productId" .. ") id=" .. tostring(p1.id))
 			
 			return nil
-		elseif typeof(providerProductId) ~= "string" or providerProductId == "" then
+		end
+		if typeof(ProviderProductId) ~= "string" or ProviderProductId == "" then
 			warn("[Shop] toRobuxPackageItem failed (" .. "missing providerProductId" .. ") id=" .. tostring(p1.id))
 			
 			return nil
-		elseif price == nil or typeof(price.amount) ~= "number" then
+		end
+		if Price == nil or typeof(Price.amount) ~= "number" then
 			warn("[Shop] toRobuxPackageItem failed (" .. "missing price.amount" .. ") id=" .. tostring(p1.id))
 			
 			return nil
 		end
-		local currency = price.currency
+		local Currency = Price.currency
 		
-		if currency == nil or typeof(currency.currencySymbol) ~= "string" or currency.currencySymbol == "" then
+		if Currency == nil or typeof(Currency.currencySymbol) ~= "string" or Currency.currencySymbol == "" then
 			warn("[Shop] toRobuxPackageItem failed (" .. "missing price.currency.currencySymbol" .. ") id=" .. tostring(p1.id))
 			
 			return nil
 		end
-		local var1
-		local t = {
+		local config = {
 			id = tostring(p1.id),
-			robuxAmount = robux,
-			currencyAmountStr = currency.currencySymbol .. string.format("%.2f", price.amount),
-			robuxImage = constantsModule.ROBUX_PACKAGE_IMAGE,
-			productId = productId,
-			mobileProductId = providerProductId
+			robuxAmount = Robux,
+			currencyAmountStr = Currency.currencySymbol .. string.format("%.2f", Price.amount),
+			robuxImage = ConstantsModule.ROBUX_PACKAGE_IMAGE,
+			productId = ProductId,
+			mobileProductId = ProviderProductId
 		}
-		local bonusItem = p1.bonusItem
+		local BonusItem = p1.bonusItem
+		local BonusItem1 = nil
 		
-		if bonusItem == nil then
-			var1 = nil
-		elseif bonusItem.type == "GamePass" then
-			var1 = bonusItem
+		if BonusItem == nil then
+			BonusItem1 = nil
+		elseif BonusItem.type == "GamePass" then
+			BonusItem1 = BonusItem
 		else
-			warn("[Shop] toRobuxPackageItem ignored bonusItem with invalid type=" .. tostring(bonusItem.type) .. " id=" .. tostring(p1.id))
-			var1 = nil
+			warn("[Shop] toRobuxPackageItem ignored bonusItem with invalid type=" .. tostring(BonusItem.type) .. " id=" .. tostring(p1.id))
+			BonusItem1 = nil
 		end
-		t.bonusItem = var1
+		config.bonusItem = BonusItem1
 		
-		return t
+		return config
 	end
 }

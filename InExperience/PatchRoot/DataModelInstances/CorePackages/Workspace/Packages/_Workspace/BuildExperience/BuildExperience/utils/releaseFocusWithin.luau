@@ -1,13 +1,14 @@
-﻿local userInputService = game:GetService("UserInputService")
+﻿local UserInputService = game:GetService("UserInputService")
 
-return function(p1, p2)
-	-- upvalues: userInputService (ref)
-	local focusedTextBox = (p2 or userInputService):GetFocusedTextBox()
+return function(Ancestor, p1): boolean --[[ Line: 7 | Named "releaseFocusWithin" ]]
+	-- upvalues: UserInputService (copy)
+	local FocusedTextBox = (p1 or UserInputService):GetFocusedTextBox()
 	
-	if p1 == nil or focusedTextBox == nil or not focusedTextBox:IsDescendantOf(p1) then
+	if Ancestor == nil or FocusedTextBox == nil or not FocusedTextBox:IsDescendantOf(Ancestor) then
 		return false
+	else
+		FocusedTextBox:ReleaseFocus()
+		
+		return true
 	end
-	focusedTextBox:ReleaseFocus()
-	
-	return true
 end

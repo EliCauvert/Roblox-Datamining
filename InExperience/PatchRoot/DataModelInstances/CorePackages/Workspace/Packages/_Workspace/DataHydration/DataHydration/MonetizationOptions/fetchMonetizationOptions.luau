@@ -1,515 +1,470 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local httpClientModule = require(parent.HttpClient)
-local httpModule = require(parent.Http)
-local promiseModule = require(parent.Promise)
-local tModule = require(parent.t)
-local urlBuilderModule = require(parent.UrlBuilder)
-local urlBase = urlBuilderModule.UrlBase
-local withCsrfRetryModule = require(dataHydration.withCsrfRetry)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local _ = require(Parent.HttpClient)
+local HttpModule = require(Parent.Http)
+local StatusCodes = HttpModule.StatusCodes
+local PromiseModule = require(Parent.Promise)
+local TModule = require(Parent.t)
+local UrlBuilderModule = require(Parent.UrlBuilder)
+local CreatorApiHttpModule = require(DataHydration.creatorApiHttp)
 local _ = require(script.Parent.MonetizationOptionsTypes)
-local var1 = tModule.interface({
-	status = tModule.union(tModule.literal("Disabled"), tModule.literal("Pending"), tModule.literal("Accepted"))
+local FetchGamePassConfigModule = require(DataHydration.GamePassConfig.fetchGamePassConfig)
+local _ = require(DataHydration.GamePassConfig.GamePassConfigTypes)
+local InterfaceResult = TModule.interface({
+	status = TModule.union(TModule.literal("Disabled"), TModule.literal("Pending"), TModule.literal("Accepted"))
 })
-local var2 = tModule.interface({
-	errors = tModule.array(tModule.interface({
-		productId = tModule.integer,
-		error = tModule.interface({
-			errorCode = tModule.optional(tModule.string),
-			errorMessage = tModule.optional(tModule.string),
-			field = tModule.optional(tModule.string),
-			hint = tModule.optional(tModule.string)
-		})
-	}))
+local InterfaceResult1 = TModule.interface({
+	errorCode = TModule.optional(TModule.string),
+	errorMessage = TModule.optional(TModule.string),
+	field = TModule.optional(TModule.string),
+	hint = TModule.optional(TModule.string)
 })
-local var3 = tModule.interface({
-	shopId = tModule.integer,
-	status = tModule.union(tModule.literal("Draft"), tModule.literal("Active"))
+local InterfaceResult2 = TModule.interface({
+	errors = TModule.array((TModule.interface({ productId = TModule.integer, error = InterfaceResult1 })))
 })
-local var4 = tModule.interface({
-	shops = tModule.array(tModule.interface({
-		shopId = tModule.integer,
-		entryPoints = tModule.array(tModule.interface({ name = tModule.string, isEnabled = tModule.boolean }))
-	}))
+local InterfaceResult3 = TModule.interface({
+	errors = TModule.array((TModule.interface({ gamePassId = TModule.integer, error = InterfaceResult1 })))
 })
-local var5 = tModule.interface({ createdCategories = tModule.array(tModule.table) })
-local var6 = tModule.interface({ monetizeExperience = tModule.boolean })
-local var7 = tModule.interface({
-	status = tModule.union(tModule.literal("Invalid"), tModule.literal("NotMigrated"), tModule.literal("Migrating"), tModule.literal("Migrated"))
+local InterfaceResult4 = TModule.interface({
+	shopId = TModule.integer,
+	status = TModule.union(TModule.literal("Draft"), TModule.literal("Active"))
 })
-local var8 = tModule.interface({
-	permissions = tModule.optional(tModule.map(tModule.string, tModule.boolean))
+local InterfaceResult5 = TModule.interface({
+	shops = TModule.array((TModule.interface({
+		shopId = TModule.integer,
+		entryPoints = TModule.array((TModule.interface({ name = TModule.string, isEnabled = TModule.boolean })))
+	})))
+})
+local InterfaceResult6 = TModule.interface({ createdCategories = TModule.array(TModule.table) })
+local InterfaceResult7 = TModule.interface({ monetizeExperience = TModule.boolean })
+local InterfaceResult8 = TModule.interface({
+	status = TModule.union(TModule.literal("Invalid"), TModule.literal("NotMigrated"), TModule.literal("Migrating"), TModule.literal("Migrated"))
+})
+local InterfaceResult9 = TModule.interface({
+	permissions = TModule.optional(TModule.map(TModule.string, TModule.boolean))
 })
 
-local function _(p1, p2, p3)
-	local var9, var10 = p2(p3)
-	assert(var9, `Invalid {p1} response: {tostring(var10)}`)
+local function _(p1, Callback, p2) --[[ Line: 87 | Named "validateResponse" ]]
+	local CallbackResult, CallbackResult2 = Callback(p2)
+	assert(CallbackResult, `Invalid {p1} response: {tostring(CallbackResult2)}`)
+	
+	return p2
+end
+
+local function decodeManagedPricingResponse(p1) --[[ Line: 93 ]]
+	-- upvalues: InterfaceResult (copy)
+	local InterfaceResultResult, InterfaceResultResult2 = InterfaceResult(p1)
+	assert(InterfaceResultResult, `Invalid Managed Pricing response: {tostring(InterfaceResultResult2)}`)
+	
+	return p1
+end
+
+local function decodeBulkDeveloperProductUpdateResponse(p1) --[[ Line: 97 ]]
+	-- upvalues: InterfaceResult2 (copy)
+	local InterfaceResultResult, InterfaceResultResult2 = InterfaceResult2(p1)
+	assert(InterfaceResultResult, `Invalid bulk developer product update response: {tostring(InterfaceResultResult2)}`)
+	
+	return p1
+end
+
+local function decodeBulkGamePassUpdateResponse(p1, p2) --[[ Line: 105 ]]
+	-- upvalues: InterfaceResult3 (copy)
+	local InterfaceResultResult, InterfaceResultResult2 = InterfaceResult3(p2)
+	assert(InterfaceResultResult, `Invalid bulk Game Pass update response: {tostring(InterfaceResultResult2)}`)
+	local t = {}
+	
+	for _, _error in p2.errors do
+		assert(p1[_error.gamePassId], "Bulk Game Pass update error has an unexpected ID")
+		assert(not t[_error.gamePassId], "Bulk Game Pass update error has a duplicate ID")
+		t[_error.gamePassId] = true
+	end
+	return p2
+end
+
+local function decodeCreatedShop(p3) --[[ Line: 120 ]]
+	-- upvalues: InterfaceResult4 (copy)
+	local InterfaceResultResult, InterfaceResultResult2 = InterfaceResult4(p3)
+	assert(InterfaceResultResult, `Invalid created Shop response: {tostring(InterfaceResultResult2)}`)
 	
 	return p3
 end
 
-local function decodeManagedPricingResponse(p1)
-	-- upvalues: var1 (ref)
-	local var9, var10 = var1(p1)
-	assert(var9, `Invalid Managed Pricing response: {tostring(var10)}`)
+local function decodeShopListResponse(p3) --[[ Line: 124 ]]
+	-- upvalues: InterfaceResult5 (copy)
+	local InterfaceResultResult, InterfaceResultResult2 = InterfaceResult5(p3)
+	assert(InterfaceResultResult, `Invalid Shop list response: {tostring(InterfaceResultResult2)}`)
 	
-	return p1
+	return p3
 end
 
-local function decodeBulkDeveloperProductUpdateResponse(p1)
-	-- upvalues: var2 (ref)
-	local var9, var10 = var2(p1)
-	assert(var9, `Invalid bulk developer product update response: {tostring(var10)}`)
+local function decodeUniversePermissionResponse(p3) --[[ Line: 128 ]]
+	-- upvalues: InterfaceResult7 (copy)
+	local InterfaceResultResult, InterfaceResultResult2 = InterfaceResult7(p3)
+	assert(InterfaceResultResult, `Invalid universe permission response: {tostring(InterfaceResultResult2)}`)
 	
-	return p1
+	return { canMonetize = p3.monetizeExperience }
 end
 
-local function decodeCreatedShop(p1)
-	-- upvalues: var3 (ref)
-	local var9, var10 = var3(p1)
-	assert(var9, `Invalid created Shop response: {tostring(var10)}`)
+local function decodeGroupMigrationResponse(p3) --[[ Line: 133 ]]
+	-- upvalues: InterfaceResult8 (copy)
+	local InterfaceResultResult, InterfaceResultResult2 = InterfaceResult8(p3)
+	assert(InterfaceResultResult, `Invalid group migration response: {tostring(InterfaceResultResult2)}`)
 	
-	return p1
+	return p3
 end
 
-local function decodeShopListResponse(p1)
-	-- upvalues: var4 (ref)
-	local var9, var10 = var4(p1)
-	assert(var9, `Invalid Shop list response: {tostring(var10)}`)
-	
-	return p1
-end
-
-local function decodeUniversePermissionResponse(p1)
-	-- upvalues: var6 (ref)
-	local var9, var10 = var6(p1)
-	assert(var9, `Invalid universe permission response: {tostring(var10)}`)
-	
-	return { canMonetize = p1.monetizeExperience }
-end
-
-local function decodeGroupMigrationResponse(p1)
-	-- upvalues: var7 (ref)
-	local var9, var10 = var7(p1)
-	assert(var9, `Invalid group migration response: {tostring(var10)}`)
-	
-	return p1
-end
-
-local function decodeGroupPermissionResponse(p1)
-	-- upvalues: var8 (ref)
-	local var9, var10 = var8(p1)
-	assert(var9, `Invalid group permission response: {tostring(var10)}`)
+local function decodeGroupPermissionResponse(p3) --[[ Line: 137 ]]
+	-- upvalues: InterfaceResult9 (copy)
+	local InterfaceResultResult, InterfaceResultResult2 = InterfaceResult9(p3)
+	assert(InterfaceResultResult, `Invalid group permission response: {tostring(InterfaceResultResult2)}`)
 	
 	return {
-		canMonetize = p1.permissions ~= nil and p1.permissions.canMonetize == true
+		canMonetize = p3.permissions ~= nil and p3.permissions.canMonetize == true
 	}
 end
 
-local function decodeBatchUpdateShopItemsResponse(p1)
-	-- upvalues: var5 (ref)
-	local var9, var10 = var5(p1)
-	assert(var9, `Invalid Shop item update response: {tostring(var10)}`)
+local function decodeBatchUpdateShopItemsResponse(p3) --[[ Line: 142 ]]
+	-- upvalues: InterfaceResult6 (copy)
+	local InterfaceResultResult, InterfaceResultResult2 = InterfaceResult6(p3)
+	assert(InterfaceResultResult, `Invalid Shop item update response: {tostring(InterfaceResultResult2)}`)
 	
-	return p1
+	return p3
 end
 
-local function decodeEmptyResponse(_)
+local function decodeEmptyResponse(_) --[[ Line: 146 ]]
 	return nil
 end
 
-local _ = function(p1)
-	-- upvalues: urlBase (ref)
-	return (p1 or {}).baseUrl or urlBase.APIS
-end
-
-local _ = function(p1)
+local function transportOptions(p3) --[[ Line: 150 ]]
+	local P13 = p3 or {}
+	
 	return {
-		request = function(p2, p3)
-			-- upvalues: p1 (ref)
-			local var9 = nil
-			
-			if p2.headers ~= nil then
-				local t = {}
-				
-				for i, v in p2.headers do
-					if string.lower(i) ~= "accept" then
-						t[i] = v
-					end
-				end
-				var9 = t
-			end
-			return p1.request({
-				url = p2.url,
-				method = p2.method,
-				headers = var9,
-				body = p2.body,
-				onMessage = p2.onMessage,
-				priority = p2.priority
-			}, p3)
-		end
+		retryReads = false,
+		network = P13.network,
+		readNetwork = P13.readNetwork,
+		mutatingNetwork = P13.mutatingNetwork,
+		baseUrl = P13.baseUrl
 	}
 end
 
-local _ = function(p2)
-	-- upvalues: httpClientModule (ref)
-	p2 = p2 or {}
-	local readNetwork = p2.readNetwork or p2.network
-	
-	if readNetwork == nil then
-		local var9 = httpClientModule.createRequestInternalNetwork()
-		
-		return {
-			request = function(p3, p4)
-				-- upvalues: var9 (ref)
-				local var10 = nil
-				
-				if p3.headers ~= nil then
-					local t = {}
-					
-					for i, v in p3.headers do
-						if string.lower(i) ~= "accept" then
-							t[i] = v
-						end
-					end
-					var10 = t
-				end
-				return var9.request({
-					url = p3.url,
-					method = p3.method,
-					headers = var10,
-					body = p3.body,
-					onMessage = p3.onMessage,
-					priority = p3.priority
-				}, p4)
-			end
-		}
-	end
-	return {
-		request = function(p3, p4)
-			-- upvalues: readNetwork (ref)
-			local var10 = nil
-			
-			if p3.headers ~= nil then
-				local t = {}
-				
-				for i, v in p3.headers do
-					if string.lower(i) ~= "accept" then
-						t[i] = v
-					end
-				end
-				var10 = t
-			end
-			return readNetwork.request({
-				url = p3.url,
-				method = p3.method,
-				headers = var10,
-				body = p3.body,
-				onMessage = p3.onMessage,
-				priority = p3.priority
-			}, p4)
-		end
+local _ = function(p3) --[[ Line: 161 | Named "resolveBase" ]]
+	-- upvalues: CreatorApiHttpModule (copy), transportOptions (copy)
+	return CreatorApiHttpModule.baseUrl((transportOptions(p3)))
+end
+
+local function get(PermissionsName, p3, p4, DecodeUniversePermissionResponse) --[[ Line: 165 ]]
+	-- upvalues: CreatorApiHttpModule (copy), transportOptions (copy)
+	return CreatorApiHttpModule.get(transportOptions(p4), PermissionsName, p3, DecodeUniversePermissionResponse)
+end
+
+local function mutate(p3, ShopsName, p4, p5, p6, DecodeBatchUpdateShopItemsResponse) --[[ Line: 169 ]]
+	-- upvalues: transportOptions (copy), CreatorApiHttpModule (copy)
+	return CreatorApiHttpModule.json(CreatorApiHttpModule.mutatingNetwork((transportOptions(p6))), p3, ShopsName, p4, p5, CreatorApiHttpModule.jsonDecoder(DecodeBatchUpdateShopItemsResponse))
+end
+
+local function bulkUpdateGamePasses(p3, Tbl, p4, ChangedProperties, Callback, p5, p6) --[[ Line: 255 ]]
+	-- upvalues: CreatorApiHttpModule (copy), transportOptions (copy), PromiseModule (copy), FetchGamePassConfigModule (copy), decodeBulkGamePassUpdateResponse (copy), StatusCodes (copy)
+	local BaseUrlResult = CreatorApiHttpModule.baseUrl((transportOptions(p6)))
+	local Copy = table.clone(Tbl)
+	local config = {
+		baseUrl = BaseUrlResult,
+		network = CreatorApiHttpModule.readNetwork((transportOptions(p6)))
 	}
-end
-
-local function mutationNetwork(p3)
-	-- upvalues: withCsrfRetryModule (ref), httpClientModule (ref)
-	p3 = p3 or {}
-	local mutatingNetwork = p3.mutatingNetwork or p3.network
+	local Errors = {}
+	local List = {}
+	local Total = 1
+	local Frozen = table.freeze({
+		errorMessage = "The local user changed while the bulk Game Pass request was running"
+	})
 	
-	if mutatingNetwork == nil then
-		local var10 = httpClientModule.createRequestInternalNetwork()
-		
-		return withCsrfRetryModule({
-			request = function(p4, p5)
-				-- upvalues: var10 (ref)
-				local var11 = nil
-				
-				if p4.headers ~= nil then
-					local t = {}
-					
-					for i, v in p4.headers do
-						if string.lower(i) ~= "accept" then
-							t[i] = v
-						end
-					end
-					var11 = t
-				end
-				return var10.request({
-					url = p4.url,
-					method = p4.method,
-					headers = var11,
-					body = p4.body,
-					onMessage = p4.onMessage,
-					priority = p4.priority
-				}, p5)
-			end
-		})
+	local function _() --[[ Line: 273 | Named "isRequestCurrent" ]]
+		-- upvalues: p6 (copy)
+		return p6 == nil or (p6.isRequestCurrent == nil or p6.isRequestCurrent())
 	end
-	return {
-		request = function(p4, p5)
-			-- upvalues: mutatingNetwork (ref)
-			local var11 = nil
-			
-			if p4.headers ~= nil then
-				local t = {}
-				
-				for i, v in p4.headers do
-					if string.lower(i) ~= "accept" then
-						t[i] = v
-					end
-				end
-				var11 = t
-			end
-			return mutatingNetwork.request({
-				url = p4.url,
-				method = p4.method,
-				headers = var11,
-				body = p4.body,
-				onMessage = p4.onMessage,
-				priority = p4.priority
-			}, p5)
+	
+	local function appendSessionChanged(GamePassIds, p7) --[[ Line: 276 ]]
+		-- upvalues: List (copy), Frozen (copy)
+		for _, gamePassId in GamePassIds do
+			local v1 = if p7 == nil then nil else p7[gamePassId]
+			table.insert(List, if v1 == nil then {
+				status = "unverified",
+				reason = "session_changed",
+				gamePassId = gamePassId,
+				error = Frozen
+			} else {
+				status = "failed",
+				reason = "service_error",
+				gamePassId = gamePassId,
+				error = v1.error
+			})
 		end
-	}
-end
-
-local function get(p4, p5, p6, p7)
-	-- upvalues: httpClientModule (ref)
-	local t_1
-	local asPromise = httpClientModule.asPromise
-	local fetch = httpClientModule.fetch
-	local t = { method = "GET" }
-	p6 = p6 or {}
-	local readNetwork = p6.readNetwork or p6.network
-	
-	if readNetwork == nil then
-		local var11 = httpClientModule.createRequestInternalNetwork()
-		t_1 = {
-			request = function(p8, p9)
-				-- upvalues: var11 (ref)
-				local var12 = nil
-				
-				if p8.headers ~= nil then
-					local t = {}
-					
-					for i, v in p8.headers do
-						if string.lower(i) ~= "accept" then
-							t[i] = v
-						end
-					end
-					var12 = t
-				end
-				return var11.request({
-					url = p8.url,
-					method = p8.method,
-					headers = var12,
-					body = p8.body,
-					onMessage = p8.onMessage,
-					priority = p8.priority
-				}, p9)
-			end
-		}
-	else
-		t_1 = {
-			request = function(p10, p11)
-				-- upvalues: readNetwork (ref)
-				local var13 = nil
-				
-				if p10.headers ~= nil then
-					local t = {}
-					
-					for i, v in p10.headers do
-						if string.lower(i) ~= "accept" then
-							t[i] = v
-						end
-					end
-					var13 = t
-				end
-				return readNetwork.request({
-					url = p10.url,
-					method = p10.method,
-					headers = var13,
-					body = p10.body,
-					onMessage = p10.onMessage,
-					priority = p10.priority
-				}, p11)
-			end
-		}
 	end
-	t.network = t_1
-	t.url = p4
-	t.analyticsKey = p5
-	t.decode = p7
 	
-	return asPromise(fetch(t))
-end
-
-local function mutate(p8, p9, p10, p11, p12, p13)
-	-- upvalues: httpClientModule (ref), mutationNetwork (ref)
-	return httpClientModule.asPromise(httpClientModule.fetch({
-		network = mutationNetwork(p12),
-		method = p8,
-		url = p9,
-		body = p10,
-		analyticsKey = p11,
-		decode = p13
-	}))
+	local function updateNextBatch() --[[ Line: 300 ]]
+		-- upvalues: p6 (copy), Total (ref), Copy (copy), appendSessionChanged (copy), PromiseModule (upval), Errors (copy), List (copy), p4 (copy), ChangedProperties (copy), updateNextBatch (copy), FetchGamePassConfigModule (upval), p3 (copy), config (copy), Callback (copy), BaseUrlResult (copy), p5 (copy), decodeBulkGamePassUpdateResponse (upval), transportOptions (upval), CreatorApiHttpModule (upval), StatusCodes (upval)
+		if p6 == nil or (p6.isRequestCurrent == nil or p6.isRequestCurrent()) then
+			local GamePassUpdates = {}
+			local List2 = {}
+			
+			for i1 = Total, math.min(Total + 30 - 1, #Copy) do
+				table.insert(List2, Copy[i1])
+				table.insert(GamePassUpdates, {
+					gamePassId = Copy[i1],
+					changedPropertyNames = { p4 },
+					changedProperties = ChangedProperties
+				})
+			end
+			if #GamePassUpdates == 0 then
+				return PromiseModule.resolve({ errors = Errors, results = List })
+			end
+			Total += #GamePassUpdates
+			local t = {}
+			
+			for _, gamePassUpdate in GamePassUpdates do
+				t[gamePassUpdate.gamePassId] = true
+			end
+			local function readBack(p8, MutationError) --[[ Line: 328 ]]
+				-- upvalues: Errors (upval), GamePassUpdates (copy), p6 (upval), appendSessionChanged (upval), List2 (copy), updateNextBatch (upval), FetchGamePassConfigModule (upval), p3 (upval), config (upval), List (upval), Callback (upval)
+				local t = {}
+				local GamePassIds = {}
+				
+				if p8 ~= nil then
+					for _, _error in p8.errors do
+						table.insert(Errors, _error)
+						t[_error.gamePassId] = _error
+					end
+				end
+				for _, gamePassUpdate in GamePassUpdates do
+					if t[gamePassUpdate.gamePassId] == nil then
+						table.insert(GamePassIds, gamePassUpdate.gamePassId)
+					end
+				end
+				if p6 == nil or (p6.isRequestCurrent == nil or p6.isRequestCurrent()) then
+					return FetchGamePassConfigModule.batchGet(p3, GamePassIds, config):andThen(function(Result) --[[ Line: 346 ]]
+						-- upvalues: p6 (upval), appendSessionChanged (upval), List2 (upval), t (copy), updateNextBatch (upval), GamePassUpdates (upval), List (upval), MutationError (copy), Callback (upval)
+						if p6 ~= nil and (p6.isRequestCurrent ~= nil and not p6.isRequestCurrent()) then
+							appendSessionChanged(List2, t)
+							
+							return updateNextBatch()
+						end
+						local t1 = {}
+						
+						for _, gamePass in Result.gamePasses do
+							t1[gamePass.gamePassId] = gamePass
+						end
+						for _, gamePassUpdate in GamePassUpdates do
+							local GamePassId = gamePassUpdate.gamePassId
+							local Entry = t[GamePassId]
+							local Entry1 = t1[GamePassId]
+							
+							if Entry ~= nil then
+								table.insert(List, {
+									status = "failed",
+									reason = "service_error",
+									gamePassId = GamePassId,
+									error = Entry.error
+								})
+								continue
+							end
+							if Entry1 == nil then
+								table.insert(List, {
+									status = "unverified",
+									reason = "readback_failed",
+									gamePassId = GamePassId,
+									mutationError = MutationError
+								})
+							else
+								local CallbackResult = Callback(Entry1)
+								table.insert(List, {
+									gamePassId = GamePassId,
+									status = if CallbackResult then "confirmed" else "unverified",
+									reason = if CallbackResult then nil else "readback_mismatch",
+									config = Entry1,
+									mutationError = MutationError
+								})
+							end
+						end
+						return updateNextBatch()
+					end, function(p9) --[[ Line: 385 ]]
+						-- upvalues: p6 (upval), appendSessionChanged (upval), List2 (upval), t (copy), updateNextBatch (upval), GamePassUpdates (upval), List (upval), MutationError (copy)
+						if p6 ~= nil and (p6.isRequestCurrent ~= nil and not p6.isRequestCurrent()) then
+							appendSessionChanged(List2, t)
+							
+							return updateNextBatch()
+						end
+						for _, gamePassUpdate in GamePassUpdates do
+							local Entry = t[gamePassUpdate.gamePassId]
+							table.insert(List, if Entry == nil then {
+								status = "unverified",
+								reason = "readback_failed",
+								gamePassId = gamePassUpdate.gamePassId,
+								error = p9,
+								mutationError = MutationError
+							} else {
+								status = "failed",
+								reason = "service_error",
+								gamePassId = gamePassUpdate.gamePassId,
+								error = Entry.error
+							})
+						end
+						return updateNextBatch()
+					end)
+				else
+					appendSessionChanged(List2, t)
+					
+					return updateNextBatch()
+				end
+			end
+			
+			return CreatorApiHttpModule.json(CreatorApiHttpModule.mutatingNetwork((transportOptions(p6))), "POST", ("%s/game-passes/v1/game-passes/universes/%d/bulk-update"):format(BaseUrlResult, p3), { gamePassUpdates = GamePassUpdates }, p5, CreatorApiHttpModule.jsonDecoder(function(p9) --[[ Line: 419 ]]
+				-- upvalues: decodeBulkGamePassUpdateResponse (upval), t (copy)
+				return (decodeBulkGamePassUpdateResponse(t, p9))
+			end)):andThen(function(Result) --[[ Line: 422 ]]
+				-- upvalues: readBack (copy)
+				return readBack(Result, nil)
+			end, function(MutationError) --[[ Line: 424 ]]
+				-- upvalues: StatusCodes (upval), Copy (upval), Total (upval), GamePassUpdates (copy), List (upval), Errors (upval), updateNextBatch (upval), readBack (copy)
+				local ResponseCode = if typeof(MutationError) == "table" then MutationError.responseCode else nil
+				
+				if ResponseCode == nil or StatusCodes.BAD_REQUEST > ResponseCode or ResponseCode >= StatusCodes.INTERNAL_SERVER_ERROR or ResponseCode == StatusCodes.REQUEST_TIMEOUT then
+					return readBack(nil, MutationError)
+				end
+				local IsResponseCodeMatch: boolean = ResponseCode == StatusCodes.UNAUTHORIZED or (ResponseCode == StatusCodes.FORBIDDEN or ResponseCode == StatusCodes.TOO_MANY_REQUESTS)
+				local CountCopy: number = if IsResponseCodeMatch then #Copy else Total - 1
+				for i = Total - #GamePassUpdates, CountCopy do
+					table.insert(List, {
+						status = "failed",
+						reason = "service_error",
+						gamePassId = Copy[i],
+						error = MutationError
+					})
+				end
+				return if IsResponseCodeMatch then { errors = Errors, results = List } else updateNextBatch()
+			end)
+		else
+			local List1 = {}
+			
+			for i = Total, #Copy do
+				table.insert(List1, Copy[i])
+			end
+			Total = #Copy + 1
+			appendSessionChanged(List1)
+			
+			return PromiseModule.resolve({ errors = Errors, results = List })
+		end
+	end
+	
+	return updateNextBatch()
 end
 
 return {
-	getManagedPricing = function(p8, p9)
-		-- upvalues: urlBase (ref), get (ref), decodeManagedPricingResponse (ref)
-		return get(("%s/price-configuration-api/v1/universes/%d/managed-pricing"):format((p9 or {}).baseUrl or urlBase.APIS, p8), "monetization-options.managed-pricing.get", p9, decodeManagedPricingResponse)
+	getManagedPricing = function(p9, p10) --[[ Line: 190 ]]
+		-- upvalues: CreatorApiHttpModule (copy), transportOptions (copy), get (copy), decodeManagedPricingResponse (copy)
+		return get(("%s/price-configuration-api/v1/universes/%d/managed-pricing"):format(CreatorApiHttpModule.baseUrl((transportOptions(p10))), p9), "monetization-options.managed-pricing.get", p10, decodeManagedPricingResponse)
 	end,
-	acceptManagedPricing = function(p8, p9)
-		-- upvalues: urlBase (ref), mutate (ref), decodeEmptyResponse (ref)
-		return mutate("POST", ("%s/price-configuration-api/v1/universes/%d/managed-pricing:accept"):format((p9 or {}).baseUrl or urlBase.APIS, p8), nil, "monetization-options.managed-pricing.accept", p9, decodeEmptyResponse)
+	acceptManagedPricing = function(p9, p10) --[[ Line: 203 ]]
+		-- upvalues: CreatorApiHttpModule (copy), transportOptions (copy), mutate (copy), decodeEmptyResponse (copy)
+		return mutate("POST", ("%s/price-configuration-api/v1/universes/%d/managed-pricing:accept"):format(CreatorApiHttpModule.baseUrl((transportOptions(p10))), p9), nil, "monetization-options.managed-pricing.accept", p10, decodeEmptyResponse)
 	end,
-	updateDeveloperProductsManagedPricing = function(p8, p9, p10, p11)
-		-- upvalues: urlBase (ref), promiseModule (ref), mutate (ref), decodeBulkDeveloperProductUpdateResponse (ref)
-		local baseUrl = (p11 or {}).baseUrl or urlBase.APIS
-		local t = {}
-		local var12 = 1
+	updateDeveloperProductsManagedPricing = function(p9, p10, IsManagedPricingEnabled, p11) --[[ Line: 215 ]]
+		-- upvalues: CreatorApiHttpModule (copy), transportOptions (copy), PromiseModule (copy), decodeBulkDeveloperProductUpdateResponse (copy)
+		local BaseUrlResult = CreatorApiHttpModule.baseUrl((transportOptions(p11)))
+		local Errors = {}
+		local Total = 1
 		
-		local function updateNextBatch()
-			-- upvalues: var12 (write), p9 (ref), p10 (ref), promiseModule (copy), t (ref), mutate (copy), baseUrl (ref), p8 (ref), p11 (ref), decodeBulkDeveloperProductUpdateResponse (copy), updateNextBatch (ref)
-			local t_1 = {}
+		local function updateNextBatch() --[[ Line: 226 ]]
+			-- upvalues: Total (ref), p10 (copy), IsManagedPricingEnabled (copy), PromiseModule (upval), Errors (copy), BaseUrlResult (copy), p9 (copy), p11 (copy), decodeBulkDeveloperProductUpdateResponse (upval), transportOptions (upval), CreatorApiHttpModule (upval), updateNextBatch (copy)
+			local DeveloperProductUpdates = {}
 			
-			for i = var12, math.min(var12 + 29, #p9) do
-				table.insert(t_1, {
-					productId = p9[i],
-					changedProperties = { isManagedPricingEnabled = p10 }
+			for i = Total, math.min(Total + 30 - 1, #p10) do
+				table.insert(DeveloperProductUpdates, {
+					productId = p10[i],
+					changedProperties = { isManagedPricingEnabled = IsManagedPricingEnabled }
 				})
 			end
-			if #t_1 == 0 then
-				return promiseModule.resolve({ errors = t })
+			if #DeveloperProductUpdates == 0 then
+				return PromiseModule.resolve({ errors = Errors })
+			else
+				Total += #DeveloperProductUpdates
+				
+				return CreatorApiHttpModule.json(CreatorApiHttpModule.mutatingNetwork((transportOptions(p11))), "PATCH", ("%s/developer-products/v1/universes/%d/developer-products"):format(BaseUrlResult, p9), { developerProductUpdates = DeveloperProductUpdates }, "monetization-options.managed-pricing.update-products", CreatorApiHttpModule.jsonDecoder(decodeBulkDeveloperProductUpdateResponse)):andThen(function(Result) --[[ Line: 245 ]]
+					-- upvalues: Errors (upval), updateNextBatch (upval)
+					local Errors1 = Result.errors or {}
+					for _, value in Errors1 do
+						table.insert(Errors, value)
+					end
+					return updateNextBatch()
+				end)
 			end
-			var12 += #t_1
-			
-			return mutate("PATCH", ("%s/developer-products/v1/universes/%d/developer-products"):format(baseUrl, p8), { developerProductUpdates = t_1 }, "monetization-options.managed-pricing.update-products", p11, decodeBulkDeveloperProductUpdateResponse):andThen(function(p12)
-				-- upvalues: t (copy), updateNextBatch (copy)
-				for i, v in p12.errors or {} do
-					table.insert(t, v)
-				end
-				return updateNextBatch()
-			end)
 		end
 		
 		return updateNextBatch()
 	end,
-	listShops = function(p12, p13)
-		-- upvalues: urlBase (ref), urlBuilderModule (ref), get (ref), decodeShopListResponse (ref)
-		return get(urlBuilderModule.UrlBuilder.addQueryString(("%s/shops-api/v1/shops"):format((p13 or {}).baseUrl or urlBase.APIS), {
+	updateGamePassesManagedPricing = function(p12, p13, ManagedPricing, p14) --[[ Line: 453 ]]
+		-- upvalues: bulkUpdateGamePasses (copy)
+		return bulkUpdateGamePasses(p12, p13, "ManagedPricing", { ManagedPricing = ManagedPricing }, function(p15): boolean --[[ Line: 464 ]]
+			-- upvalues: ManagedPricing (copy)
+			return p15.isManagedPricingEnabled == ManagedPricing
+		end, "monetization-options.managed-pricing.update-game-passes", p14)
+	end,
+	updateGamePassesArchived = function(p12, p13, Archived, p14) --[[ Line: 472 ]]
+		-- upvalues: bulkUpdateGamePasses (copy)
+		return bulkUpdateGamePasses(p12, p13, "Archived", { Archived = Archived }, function(p15): boolean --[[ Line: 478 ]]
+			-- upvalues: Archived (copy)
+			return p15.isArchived == Archived and (not Archived or p15.isForSale == false)
+		end, "monetization-options.archive.update-game-passes", p14)
+	end,
+	listShops = function(p12, p13) --[[ Line: 483 ]]
+		-- upvalues: CreatorApiHttpModule (copy), transportOptions (copy), UrlBuilderModule (copy), get (copy), decodeShopListResponse (copy)
+		return get(UrlBuilderModule.UrlBuilder.addQueryString(("%s/shops-api/v1/shops"):format((CreatorApiHttpModule.baseUrl((transportOptions(p13))))), {
 			["scope.type"] = "Universe",
 			["scope.scopeId"] = tostring(p12)
 		}), "monetization-options.shops.list", p13, decodeShopListResponse)
 	end,
-	createShop = function(p12, p13, p14)
-		-- upvalues: urlBase (ref), mutate (ref), decodeCreatedShop (ref)
-		return mutate("POST", ("%s/shops-api/v1/shops"):format((p14 or {}).baseUrl or urlBase.APIS), {
+	createShop = function(p12, IsEnabled, p13) --[[ Line: 492 ]]
+		-- upvalues: CreatorApiHttpModule (copy), transportOptions (copy), mutate (copy), decodeCreatedShop (copy)
+		return mutate("POST", ("%s/shops-api/v1/shops"):format((CreatorApiHttpModule.baseUrl((transportOptions(p13))))), {
 			scope = { type = "Universe", scopeId = tostring(p12) },
 			entryPoints = {
-				{ name = "InExperienceGlobalIconEnabled", isEnabled = p13 }
+				{
+					name = "InExperienceGlobalIconEnabled",
+					isEnabled = IsEnabled
+				}
 			}
-		}, "monetization-options.shops.create", p14, decodeCreatedShop)
+		}, "monetization-options.shops.create", p13, decodeCreatedShop)
 	end,
-	setShopGlobalIcon = function(value, p12, p13)
-		-- upvalues: urlBase (ref), mutate (ref), decodeBatchUpdateShopItemsResponse (ref)
-		return mutate("PATCH", ("%s/shops-api/v1/shops/%d/items"):format((p13 or {}).baseUrl or urlBase.APIS, value), {
+	setShopGlobalIcon = function(p12, IsEnabled, p13) --[[ Line: 504 ]]
+		-- upvalues: CreatorApiHttpModule (copy), transportOptions (copy), mutate (copy), decodeBatchUpdateShopItemsResponse (copy)
+		return mutate("PATCH", ("%s/shops-api/v1/shops/%d/items"):format(CreatorApiHttpModule.baseUrl((transportOptions(p13))), p12), {
 			changedEntryPoints = {
-				{ name = "InExperienceGlobalIconEnabled", isEnabled = p12 }
+				{
+					name = "InExperienceGlobalIconEnabled",
+					isEnabled = IsEnabled
+				}
 			}
 		}, "monetization-options.shops.update-global-icon", p13, decodeBatchUpdateShopItemsResponse)
 	end,
-	getMonetizationPermission = function(p12, p13, p14, p15)
-		-- upvalues: urlBase (ref), get (ref), decodeUniversePermissionResponse (ref), httpModule (ref), decodeGroupMigrationResponse (ref), httpClientModule (ref), promiseModule (ref), decodeGroupPermissionResponse (ref)
-		local baseUrl = (p15 or {}).baseUrl or urlBase.APIS
+	getMonetizationPermission = function(p12, p13, p14, p15) --[[ Line: 511 ]]
+		-- upvalues: CreatorApiHttpModule (copy), transportOptions (copy), get (copy), decodeUniversePermissionResponse (copy), HttpModule (copy), decodeGroupMigrationResponse (copy), PromiseModule (copy), decodeGroupPermissionResponse (copy)
+		local BaseUrlResult = CreatorApiHttpModule.baseUrl((transportOptions(p15)))
 		
-		if p13 ~= "Group" or p14 == nil then
-			return get(("%s/orgs/v2/universes/%d/permissions/resolved"):format(baseUrl, p12), "monetization-options.permission.universe", p15, decodeUniversePermissionResponse)
-		end
-		local t_1
-		local var13 = if p15 then p15.groupsBaseUrl else httpModule.Url.GROUPS_URL
-		
-		local function getLegacyPermission()
-			-- upvalues: get (copy), baseUrl (ref), p12 (ref), p15 (ref), decodeUniversePermissionResponse (copy)
-			return get(("%s/orgs/v2/universes/%d/permissions/resolved"):format(baseUrl, p12), "monetization-options.permission.universe", p15, decodeUniversePermissionResponse)
-		end
-		
-		local var14 = ("%sv1/groups/%d/migration"):format(var13, p14)
-		local asPromise = httpClientModule.asPromise
-		local fetch = httpClientModule.fetch
-		local t = {
-			method = "GET",
-			analyticsKey = "monetization-options.permission.group-migration"
-		}
-		p15 = p15 or {}
-		local readNetwork = p15.readNetwork or p15.network
-		
-		if readNetwork == nil then
-			local var15 = httpClientModule.createRequestInternalNetwork()
-			t_1 = {
-				request = function(p16, p17)
-					-- upvalues: var15 (ref)
-					local var16 = nil
-					
-					if p16.headers ~= nil then
-						local t = {}
-						
-						for i, v in p16.headers do
-							if string.lower(i) ~= "accept" then
-								t[i] = v
-							end
-						end
-						var16 = t
-					end
-					return var15.request({
-						url = p16.url,
-						method = p16.method,
-						headers = var16,
-						body = p16.body,
-						onMessage = p16.onMessage,
-						priority = p16.priority
-					}, p17)
-				end
-			}
+		if p13 == "Group" and p14 ~= nil then
+			local GroupsBaseUrl = p15 and p15.groupsBaseUrl or HttpModule.Url.GROUPS_URL
+			
+			local function getLegacyPermission() --[[ Line: 529 ]]
+				-- upvalues: get (upval), BaseUrlResult (copy), p12 (copy), p15 (copy), decodeUniversePermissionResponse (upval)
+				return get(("%s/orgs/v2/universes/%d/permissions/resolved"):format(BaseUrlResult, p12), "monetization-options.permission.universe", p15, decodeUniversePermissionResponse)
+			end
+			
+			return CreatorApiHttpModule.get(transportOptions(p15), ("%sv1/groups/%d/migration"):format(GroupsBaseUrl, p14), "monetization-options.permission.group-migration", decodeGroupMigrationResponse):catch(function(Err) --[[ Line: 543 ]]
+				-- upvalues: PromiseModule (upval)
+				return if type(Err) == "table" and Err.responseCode == 409 then { status = "NotMigrated" } else PromiseModule.reject(Err)
+			end):andThen(function(Result) --[[ Line: 550 ]]
+				-- upvalues: getLegacyPermission (copy), get (upval), GroupsBaseUrl (copy), p14 (copy), p12 (copy), p15 (copy), decodeGroupPermissionResponse (upval)
+				return if Result.status == "Migrated" then get(("%sv2/groups/%d/universes/%d/permissions/resolved"):format(GroupsBaseUrl, p14, p12), "monetization-options.permission.group", p15, decodeGroupPermissionResponse) else getLegacyPermission()
+			end)
 		else
-			t_1 = {
-				request = function(p18, p19)
-					-- upvalues: readNetwork (ref)
-					local var17 = nil
-					
-					if p18.headers ~= nil then
-						local t = {}
-						
-						for i, v in p18.headers do
-							if string.lower(i) ~= "accept" then
-								t[i] = v
-							end
-						end
-						var17 = t
-					end
-					return readNetwork.request({
-						url = p18.url,
-						method = p18.method,
-						headers = var17,
-						body = p18.body,
-						onMessage = p18.onMessage,
-						priority = p18.priority
-					}, p19)
-				end
-			}
+			return get(("%s/orgs/v2/universes/%d/permissions/resolved"):format(BaseUrlResult, p12), "monetization-options.permission.universe", p15, decodeUniversePermissionResponse)
 		end
-		t.network = t_1
-		t.url = var14
-		t.decode = decodeGroupMigrationResponse
-		
-		return asPromise(fetch(t)):catch(function(p18)
-			-- upvalues: promiseModule (copy)
-			return if type(p18) == "table" and p18.responseCode == 409 then { status = "NotMigrated" } else promiseModule.reject(p18)
-		end):andThen(function(p18)
-			-- upvalues: getLegacyPermission (ref), get (copy), var13 (ref), p14 (ref), p12 (ref), p15 (ref), decodeGroupPermissionResponse (copy)
-			return if p18.status == "Migrated" then get(("%sv2/groups/%d/universes/%d/permissions/resolved"):format(var13, p14, p12), "monetization-options.permission.group", p15, decodeGroupPermissionResponse) else getLegacyPermission()
-		end)
 	end
 }

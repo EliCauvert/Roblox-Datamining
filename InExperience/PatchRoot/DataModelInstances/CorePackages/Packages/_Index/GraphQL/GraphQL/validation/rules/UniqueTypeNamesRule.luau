@@ -1,23 +1,24 @@
-﻿local graphQLError = require(script.Parent.Parent.Parent.error.GraphQLError).GraphQLError
+﻿local GraphQLError = require(script.Parent.Parent.Parent.error.GraphQLError).GraphQLError
 
 return {
-	UniqueTypeNamesRule = function(p1)
-		-- upvalues: graphQLError (ref)
-		local t = {}
-		local schema = p1:getSchema()
+	UniqueTypeNamesRule = function(p1) --[[ Line: 19 ]]
+		-- upvalues: GraphQLError (copy)
+		local Names = {}
+		local Schema = p1:getSchema()
 		
-		local function checkTypeName(_, p2)
-			-- upvalues: schema (ref), p1 (ref), graphQLError (copy), t (ref)
-			local value = p2.name.value
+		local function checkTypeName(_, p2): boolean? --[[ Line: 25 ]]
+			-- upvalues: Schema (copy), p1 (copy), GraphQLError (upval), Names (copy)
+			local Value = p2.name.value
 			
-			if schema and schema:getType(value) then
-				p1:reportError(graphQLError.new(("Type \"%s\" already exists in the schema. It cannot also be defined in this type definition."):format(value), p2.name))
+			if Schema and Schema:getType(Value) then
+				p1:reportError(GraphQLError.new(("Type \"%s\" already exists in the schema. It cannot also be defined in this type definition."):format(Value), p2.name))
 				
 				return
-			elseif t[value] then
-				p1:reportError(graphQLError.new(("There can be only one type named \"%s\"."):format(value), { t[value], p2.name }))
+			end
+			if Names[Value] then
+				p1:reportError(GraphQLError.new(("There can be only one type named \"%s\"."):format(Value), { Names[Value], p2.name }))
 			else
-				t[value] = p2.name
+				Names[Value] = p2.name
 			end
 			return false
 		end

@@ -1,69 +1,62 @@
-﻿local function _(p1)
-	local textChannels = p1.TextChannels
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local FFlagExpChatUseChannelTabsStore = require(ExpChat.Parent.SharedFlags).FFlagExpChatUseChannelTabsStore
+local GetChannelTabsStoreModule = if FFlagExpChatUseChannelTabsStore then require(ExpChat.Stores.GetChannelTabsStore) else nil
+
+local function getOpenChannelName(p1) --[[ Line: 10 ]]
+	-- upvalues: FFlagExpChatUseChannelTabsStore (copy), GetChannelTabsStoreModule (copy)
+	local TextChannels = p1.TextChannels
 	
-	if textChannels == nil then
+	if TextChannels == nil then
 		return nil
 	end
-	local targetTextChannel = textChannels.targetTextChannel
+	local TargetTextChannel = TextChannels.targetTextChannel
 	
-	if targetTextChannel ~= nil and targetTextChannel.Name ~= nil then
-		return targetTextChannel.Name
+	if TargetTextChannel == nil or TargetTextChannel.Name == nil then
+		local SelectedChannelName = TextChannels.selectedChannelName
+		local ChannelTabsState = if FFlagExpChatUseChannelTabsStore then GetChannelTabsStoreModule(false).getChannelTabsState(false) else p1.ChannelTabs
+		
+		return if SelectedChannelName == nil or ChannelTabsState == nil or ChannelTabsState.allChannelTabs[SelectedChannelName] == nil then if ChannelTabsState == nil then SelectedChannelName else ChannelTabsState.selectedTabName or "RBXGeneral" else SelectedChannelName
+	else
+		return TargetTextChannel.Name
 	end
-	local selectedChannelName = textChannels.selectedChannelName
-	local channelTabs = p1.ChannelTabs
-	
-	return if not (selectedChannelName ~= nil and channelTabs ~= nil and channelTabs.allChannelTabs[selectedChannelName] ~= nil) then if channelTabs == nil then selectedChannelName else channelTabs.selectedTabName or "RBXGeneral" else selectedChannelName
 end
 
-local _ = function(p1, p2)
-	local var1 = nil
+local function _(p1, p2) --[[ Line: 37 | Named "getMessageChannelName" ]]
+	local Name = nil
 	
 	if p2 == nil then
 		if p1.TextChannel == nil then
 			return nil
 		end
-		var1 = p1.TextChannel.Name
+		Name = p1.TextChannel.Name
 	else
-		var1 = p2
+		Name = p2
 	end
-	if var1 == "RBXSystem" then
-		var1 = "RBXGeneral"
+	if Name == "RBXSystem" then
+		Name = "RBXGeneral"
 	end
-	return var1
+	return Name
 end
 
-return function(p1, p2, p3)
-	local var1, targetTextChannel
-	local textChannels = p1.TextChannels
-	
-	if textChannels == nil then
-		var1 = nil
-	else
-		targetTextChannel = textChannels.targetTextChannel
-		
-		if targetTextChannel == nil or targetTextChannel.Name == nil then
-			local selectedChannelName = textChannels.selectedChannelName
-			local channelTabs = p1.ChannelTabs
-			var1 = if selectedChannelName == nil or channelTabs == nil or channelTabs.allChannelTabs[selectedChannelName] == nil then channelTabs == nil and ((if channelTabs == nil then channelTabs.selectedTabName else nil) or "RBXGeneral") else selectedChannelName
+return function(p1, p2, Name): boolean --[[ Line: 54 | Named "isMessageForOpenChannel" ]]
+	-- upvalues: getOpenChannelName (copy)
+	local OpenChannelName = getOpenChannelName(p1)
+	local v1 = nil
+	local Name1 = nil
+	repeat
+		if Name == nil then
+			if p2.TextChannel == nil then
+				v1 = nil
+				break
+			end
+			Name1 = p2.TextChannel.Name
 		else
-			var1 = targetTextChannel.Name
+			Name1 = Name
 		end
-	end
-	local var2
-	targetTextChannel = nil
-	
-	if p3 == nil then
-		if p2.TextChannel == nil then
-			var2 = nil
-		else
-			targetTextChannel = p2.TextChannel.Name
+		if Name1 == "RBXSystem" then
+			Name1 = "RBXGeneral"
 		end
-		return var1 == nil or var2 == nil or var2 == var1
-	else
-		targetTextChannel = p3
-	end
-	if targetTextChannel == "RBXSystem" then
-		targetTextChannel = "RBXGeneral"
-	end
-	var2 = targetTextChannel
+		v1 = Name1
+	until true
+	return OpenChannelName == nil or v1 == nil or v1 == OpenChannelName
 end

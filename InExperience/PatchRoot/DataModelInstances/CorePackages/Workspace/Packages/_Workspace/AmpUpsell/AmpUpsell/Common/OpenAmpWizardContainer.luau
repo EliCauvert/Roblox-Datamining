@@ -1,71 +1,75 @@
-﻿local ampUpsell = script:FindFirstAncestor("AmpUpsell")
-local parent = ampUpsell.Parent
-local appPage = require(parent.RobloxAppEnums).AppPage
-local _ = require(ampUpsell.Common.Types)
-local navigateDown = require(parent.NavigationRodux).Thunks.NavigateDown
-local navigateFromWebView = require(parent.NavigationRodux).Thunks.NavigateFromWebView
-local navigateBack = require(parent.NavigationRodux).Thunks.NavigateBack
-local selectors = require(parent.NavigationRodux).Selectors
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagAmpWizardDeepLinkReplaceOnlyWebViewModule = require(ampUpsell.Flags.FFlagAmpWizardDeepLinkReplaceOnlyWebView)
-local fFlagEnableAmpWizardDeepLink = sharedFlagsModule.FFlagEnableAmpWizardDeepLink
-local fFlagLuaAppWizardContainerBypassNavigationLock = require(parent.SharedFlags).FFlagLuaAppWizardContainerBypassNavigationLock
-local fFlagLuaAppPlayButtonWizardCloseDelay = sharedFlagsModule.FFlagLuaAppPlayButtonWizardCloseDelay
-local fFlagSignalsNavP3Dispatch = sharedFlagsModule.FFlagSignalsNavP3Dispatch
-local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
-local var2 = if fFlagSignalsNavP3Dispatch then require(parent.NavigationRodux).GetLegacyNavigationStore else nil
+﻿local AmpUpsell = script:FindFirstAncestor("AmpUpsell")
+local Parent = AmpUpsell.Parent
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local _ = require(AmpUpsell.Common.Types)
+local NavigateDownFunction = require(Parent.NavigationRodux).Thunks.NavigateDown
+local NavigateFromWebViewFunction = require(Parent.NavigationRodux).Thunks.NavigateFromWebView
+local NavigateBackFunction = require(Parent.NavigationRodux).Thunks.NavigateBack
+local Selectors = require(Parent.NavigationRodux).Selectors
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagAmpWizardDeepLinkReplaceOnlyWebViewModule = require(AmpUpsell.Flags.FFlagAmpWizardDeepLinkReplaceOnlyWebView)
+local FFlagEnableAmpWizardDeepLink = SharedFlagsModule.FFlagEnableAmpWizardDeepLink
+local FFlagLuaAppWizardContainerBypassNavigationLock = require(Parent.SharedFlags).FFlagLuaAppWizardContainerBypassNavigationLock
+local FFlagLuaAppPlayButtonWizardCloseDelay = SharedFlagsModule.FFlagLuaAppPlayButtonWizardCloseDelay
+local FFlagSignalsNavP3Dispatch = SharedFlagsModule.FFlagSignalsNavP3Dispatch
+local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
+local GetLegacyNavigationStore = if FFlagSignalsNavP3Dispatch then require(Parent.NavigationRodux).GetLegacyNavigationStore else nil
 
-return function(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11)
-	-- upvalues: fFlagEnableAmpWizardDeepLink (ref), appPage (ref), fFlagLuaAppPlayButtonWizardCloseDelay (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), fFlagLuaAppWizardContainerBypassNavigationLock (ref), navigateBack (ref), fFlagAmpWizardDeepLinkReplaceOnlyWebViewModule (ref), var2 (ref), selectors (ref), navigateFromWebView (ref), navigateDown (ref)
-	local var3 = fFlagEnableAmpWizardDeepLink and (p8 ~= nil and p8.returnPage ~= nil)
+return function(FeatureName, Callback1, RecourseData, EntryPointEventCtx, ExtraParameters, NameSpace, SkipFacialAgeEstimationWebLinkModal, Metadata, Callback, UsePrologue, PrologueOptions) --[[ Line: 24 ]]
+	-- upvalues: FFlagEnableAmpWizardDeepLink (copy), AppPage (copy), FFlagLuaAppPlayButtonWizardCloseDelay (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), FFlagLuaAppWizardContainerBypassNavigationLock (copy), NavigateBackFunction (copy), FFlagAmpWizardDeepLinkReplaceOnlyWebViewModule (copy), GetLegacyNavigationStore (copy), Selectors (copy), NavigateFromWebViewFunction (copy), NavigateDownFunction (copy)
+	local HasReturnPage: boolean = FFlagEnableAmpWizardDeepLink and (Metadata ~= nil and Metadata.returnPage ~= nil)
 	
-	return function(p12)
-		-- upvalues: appPage (copy), p1 (ref), p3 (ref), p4 (ref), p6 (ref), p5 (ref), p8 (ref), fFlagLuaAppPlayButtonWizardCloseDelay (copy), p9 (ref), fFlagSignalsNavP3Dispatch (copy), var1 (copy), fFlagLuaAppWizardContainerBypassNavigationLock (copy), navigateBack (copy), p2 (ref), p7 (ref), p10 (ref), p11 (ref), fFlagAmpWizardDeepLinkReplaceOnlyWebViewModule (copy), var3 (write), var2 (copy), selectors (copy), navigateFromWebView (copy), navigateDown (copy)
-		local t = {
-			name = appPage.AmpWizardContainer,
+	return function(p1) --[[ Line: 39 ]]
+		-- upvalues: AppPage (upval), FeatureName (copy), RecourseData (copy), EntryPointEventCtx (copy), NameSpace (copy), ExtraParameters (copy), Metadata (copy), FFlagLuaAppPlayButtonWizardCloseDelay (upval), Callback (copy), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), FFlagLuaAppWizardContainerBypassNavigationLock (upval), NavigateBackFunction (upval), Callback1 (copy), SkipFacialAgeEstimationWebLinkModal (copy), UsePrologue (copy), PrologueOptions (copy), FFlagAmpWizardDeepLinkReplaceOnlyWebViewModule (upval), HasReturnPage (ref), GetLegacyNavigationStore (upval), Selectors (upval), NavigateFromWebViewFunction (upval), NavigateDownFunction (upval)
+		local config = {
+			name = AppPage.AmpWizardContainer,
 			extraProps = {
-				featureName = p1,
-				recourseData = p3,
-				entryPointEventCtx = p4,
-				nameSpace = p6,
-				extraParameters = p5,
-				metadata = p8,
-				completionCallback = function(p13, p14)
-					-- upvalues: fFlagLuaAppPlayButtonWizardCloseDelay (copy), p9 (copy), p12 (ref), fFlagSignalsNavP3Dispatch (copy), var1 (copy), fFlagLuaAppWizardContainerBypassNavigationLock (copy), navigateBack (copy), p2 (copy)
-					if fFlagLuaAppPlayButtonWizardCloseDelay and p9 then
-						p9(p12, p13, p14)
+				featureName = FeatureName,
+				recourseData = RecourseData,
+				entryPointEventCtx = EntryPointEventCtx,
+				nameSpace = NameSpace,
+				extraParameters = ExtraParameters,
+				metadata = Metadata,
+				completionCallback = function(p2, p3) --[[ Line: 49 ]]
+					-- upvalues: FFlagLuaAppPlayButtonWizardCloseDelay (upval), Callback (upval), p1 (copy), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), FFlagLuaAppWizardContainerBypassNavigationLock (upval), NavigateBackFunction (upval), Callback1 (upval)
+					if FFlagLuaAppPlayButtonWizardCloseDelay and Callback then
+						Callback(p1, p2, p3)
 						
 						return
-					elseif fFlagSignalsNavP3Dispatch then
-						var1.back(if fFlagLuaAppWizardContainerBypassNavigationLock then true else nil)
-					else
-						p12:dispatch(navigateBack(if fFlagLuaAppWizardContainerBypassNavigationLock then true else nil))
 					end
-					p2(p13, p14)
+					if FFlagSignalsNavP3Dispatch then
+						NavigationCommands.back(if FFlagLuaAppWizardContainerBypassNavigationLock then true else nil)
+					else
+						p1:dispatch(NavigateBackFunction(if FFlagLuaAppWizardContainerBypassNavigationLock then true else nil))
+					end
+					Callback1(p2, p3)
 				end,
-				skipFacialAgeEstimationWebLinkModal = p7,
-				usePrologue = p10,
-				prologueOptions = p11
+				skipFacialAgeEstimationWebLinkModal = SkipFacialAgeEstimationWebLinkModal,
+				usePrologue = UsePrologue,
+				prologueOptions = PrologueOptions
 			}
 		}
 		
-		if fFlagAmpWizardDeepLinkReplaceOnlyWebViewModule and var3 then
-			var3 = var3 and (if fFlagSignalsNavP3Dispatch then var2(false).getCurrentPageName(false) else selectors.selectCurrentPageName(p12:getState())) == appPage.GenericWebPage
+		if FFlagAmpWizardDeepLinkReplaceOnlyWebViewModule and HasReturnPage then
+			local IsGenericWebPageMatch = (if FFlagSignalsNavP3Dispatch then GetLegacyNavigationStore(false).getCurrentPageName(false) else Selectors.selectCurrentPageName(p1:getState())) == AppPage.GenericWebPage
+			HasReturnPage = HasReturnPage and IsGenericWebPageMatch
 		end
-		if var3 then
-			if fFlagSignalsNavP3Dispatch then
-				var1.fromWebView(var1.fromLegacyPage(t), true)
+		if HasReturnPage then
+			if FFlagSignalsNavP3Dispatch then
+				NavigationCommands.fromWebView(NavigationCommands.fromLegacyPage(config), true)
+				
+				return
+			else
+				p1:dispatch(NavigateFromWebViewFunction(config, true))
 				
 				return
 			end
-			p12:dispatch(navigateFromWebView(t, true))
+		elseif FFlagSignalsNavP3Dispatch then
+			NavigationCommands.down(NavigationCommands.fromLegacyPage(config), true)
 			
 			return
-		elseif fFlagSignalsNavP3Dispatch then
-			var1.down(var1.fromLegacyPage(t), true)
-			
-			return
+		else
+			p1:dispatch(NavigateDownFunction(config, true))
 		end
-		p12:dispatch(navigateDown(t, true))
 	end
 end

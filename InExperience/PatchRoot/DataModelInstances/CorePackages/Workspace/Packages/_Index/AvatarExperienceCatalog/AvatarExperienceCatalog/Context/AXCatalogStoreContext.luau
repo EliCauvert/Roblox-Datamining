@@ -1,3 +1,3 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
 
-return require(avatarExperienceCatalog.Parent.React).createContext(require(avatarExperienceCatalog.Stores)())
+return require(AvatarExperienceCatalog.Parent.React).createContext((require(AvatarExperienceCatalog.Stores)()))

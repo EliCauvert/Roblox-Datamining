@@ -1,36 +1,40 @@
-﻿local parent = script:FindFirstAncestor("GameJoinCard").Parent
-local _ = require(parent.DataHydration)
-local buttonVariant = require(parent.Foundation).Enums.ButtonVariant
+﻿local Parent = script:FindFirstAncestor("GameJoinCard").Parent
+local _ = require(Parent.DataHydration)
+local ButtonVariant = require(Parent.Foundation).Enums.ButtonVariant
 local _ = require(script.Parent.Types)
-local actionFactoriesModule = require(script.Parent.actionFactories)
+local ActionFactoriesModule = require(script.Parent.actionFactories)
 
-return function(p1, p2)
-	-- upvalues: actionFactoriesModule (ref), buttonVariant (ref)
-	local t = {}
+return function(p1, p2) --[[ Line: 13 | Named "resolveJoinCardActions" ]]
+	-- upvalues: ActionFactoriesModule (copy), ButtonVariant (copy)
+	local List = {}
 	
 	if p1 == nil or p1.actions == nil then
-		return t
+		return List
 	end
-	local var1 = false
+	local Flag = false
 	
-	for i, v in p1.actions do
-		local type = actionFactoriesModule[v.type]
+	for _, action in p1.actions do
+		local ActionFactoriesModuleEntry = ActionFactoriesModule[action.type]
+		local NoActionFactoriesModuleEntry = ActionFactoriesModuleEntry == nil
+		local ActionFactoriesModuleEntryResult = nil
 		
-		if type ~= nil then
-			local var2 = type(p2)
-			
-			if var2 ~= nil then
-				if var2.render == nil then
-					if not var1 then
-						var2.variant = var2.variant or buttonVariant.Emphasis
-					elseif var2.variant ~= buttonVariant.Utility then
-						var2.variant = buttonVariant.Standard
+		if not NoActionFactoriesModuleEntry then
+			ActionFactoriesModuleEntryResult = ActionFactoriesModuleEntry(p2)
+			NoActionFactoriesModuleEntry = ActionFactoriesModuleEntryResult == nil
+		end
+		if not NoActionFactoriesModuleEntry then
+			if ActionFactoriesModuleEntryResult.render == nil then
+				if Flag then
+					if ActionFactoriesModuleEntryResult.variant ~= ButtonVariant.Utility then
+						ActionFactoriesModuleEntryResult.variant = ButtonVariant.Standard
 					end
-					var1 = true
+				else
+					ActionFactoriesModuleEntryResult.variant = ActionFactoriesModuleEntryResult.variant or ButtonVariant.Emphasis
 				end
-				table.insert(t, var2)
+				Flag = true
 			end
+			table.insert(List, ActionFactoriesModuleEntryResult)
 		end
 	end
-	return t
+	return List
 end

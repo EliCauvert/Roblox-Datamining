@@ -1,10 +1,10 @@
 ﻿return {
-	maybe = function(p1)
-		local _, status, var1 = xpcall(function()
-			-- upvalues: p1 (ref)
-			return p1(), true
-		end, function() end)
+	maybe = function(Callback) --[[ Line: 10 ]]
+		local _, Result, Result3 = xpcall(function() --[[ Line: 12 ]]
+			-- upvalues: Callback (copy)
+			return Callback(), true
+		end, function() --[[ Line: 14 ]] end)
 		
-		return if var1 then status else nil
+		return if Result3 then Result else nil
 	end
 }

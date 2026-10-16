@@ -1,11 +1,11 @@
-﻿local parent = script:FindFirstAncestor("ProfilePlatform").Parent
-local useAppPolicy = require(parent.UniversalAppPolicy).useAppPolicy
-local fFlagProfilePlatformEnableCurrencyTransfer = require(parent.SharedFlags).FFlagProfilePlatformEnableCurrencyTransfer
+﻿local Parent = script:FindFirstAncestor("ProfilePlatform").Parent
+local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
+local FFlagProfilePlatformEnableCurrencyTransfer = require(Parent.SharedFlags).FFlagProfilePlatformEnableCurrencyTransfer
 
-return function()
-	-- upvalues: useAppPolicy (ref), fFlagProfilePlatformEnableCurrencyTransfer (ref)
-	return useAppPolicy(function(p1)
-		-- upvalues: fFlagProfilePlatformEnableCurrencyTransfer (copy)
-		return if fFlagProfilePlatformEnableCurrencyTransfer then p1.getCanRenderTransferOnProfile() else false
+return function() --[[ Line: 9 ]]
+	-- upvalues: UseAppPolicyFunction (copy), FFlagProfilePlatformEnableCurrencyTransfer (copy)
+	return UseAppPolicyFunction(function(p1) --[[ Line: 10 ]]
+		-- upvalues: FFlagProfilePlatformEnableCurrencyTransfer (upval)
+		return if FFlagProfilePlatformEnableCurrencyTransfer then p1.getCanRenderTransferOnProfile() else false
 	end)
 end

@@ -1,134 +1,113 @@
-﻿local parent = script:FindFirstAncestor("ChatUIPrimitives").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
+﻿local Parent = script:FindFirstAncestor("ChatUIPrimitives").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
 local _ = require(script.Parent.MessageComposer)
 local _ = require(script.Parent.Parent.Types)
-local t = {
-	noopDelivery = {
-		sendMessageDraft = function(_)
-			return { accepted = false }
-		end,
-		onMessageDeliveryReceipt = function(_) end
-	},
-	draftLabel = function(p1)
-		local t = {}
+local PlainTextContentModelModule = require(script.Parent.Parent.ContentKinds.PlainText.PlainTextContentModel)
+local PresetContentModelModule = require(script.Parent.Parent.ContentKinds.Preset.PresetContentModel)
+local StorySupportModule = {
+	noopDelivery = { sendMessageDraft = function(_) --[[ Line: 19 ]] end },
+	draftLabel = function(p1): string --[[ Line: 22 ]]
+		-- upvalues: PlainTextContentModelModule (copy), PresetContentModelModule (copy)
+		local List = {}
 		
-		for i, v in p1.contents do
-			local plainText = v.plainText
+		for _, content in p1.contents do
+			local Draft = PlainTextContentModelModule.getDraft(content)
 			
-			if plainText then
-				table.insert(t, `plainText "{plainText.text}"`)
+			if Draft then
+				table.insert(List, `plainText "{Draft.text}"`)
+			end
+			local Draft1 = PresetContentModelModule.getDraft(content)
+			
+			if Draft1 then
+				table.insert(List, `preset "{Draft1.presetId}" "{Draft1.displayText}"`)
 			end
 		end
-		return if #t == 0 then "(no plainText content)" else table.concat(t, ", ")
+		return if #List == 0 then "(no content)" else table.concat(List, ", ")
 	end,
-	receiptLabel = function(p2)
-		return if p2.accepted then `Last receipt: accepted {p2.messageId}` else "Last receipt: rejected"
-	end,
-	useEventLog = function()
-		-- upvalues: reactModule (ref)
-		local var1, var2 = reactModule.useState({})
+	useEventLog = function() --[[ Line: 41 ]]
+		-- upvalues: ReactModule (copy)
+		local UseStateResult, UseStateResult2 = ReactModule.useState({})
 		
-		return var1, reactModule.useCallback(function(p2)
-			-- upvalues: var2 (ref)
-			var2(function(p3)
-				-- upvalues: p2 (ref)
-				local cloned = table.clone(p3)
-				table.insert(cloned, p2)
+		return UseStateResult, (ReactModule.useCallback(function(p2) --[[ Line: 43 ]]
+			-- upvalues: UseStateResult2 (copy)
+			UseStateResult2(function(Tbl) --[[ Line: 44 ]]
+				-- upvalues: p2 (copy)
+				local Copy = table.clone(Tbl)
+				table.insert(Copy, p2)
 				
-				return cloned
+				return Copy
 			end)
-		end, {})
+		end, {}))
 	end
 }
 
-function t.useDeliveryLog(p2)
-	-- upvalues: t (ref), reactModule (ref)
-	local var1, var2 = t.useEventLog()
-	local var3, var4 = reactModule.useState("Last receipt: none yet")
-	local var5 = reactModule.useRef(1)
-	local var6 = reactModule.useCallback(function(p3)
-		-- upvalues: t (copy), p2 (ref), var5 (ref), var2 (ref)
-		local var7 = t.draftLabel(p3)
-		
-		if p2 then
-			local var8 = tostring(var5.current)
-			var5.current += 1
-			var2(`accepted {var8}: {var7}`)
-			
-			return { accepted = true, messageId = var8 }
-		end
-		var2(`rejected: {var7}`)
-		
-		return { accepted = false }
-	end, { p2, var2 })
-	local var7 = reactModule.useCallback(function(p3)
-		-- upvalues: var4 (ref), t (copy)
-		var4(t.receiptLabel(p3))
-	end, {})
+function StorySupportModule.useDeliveryLog() --[[ Line: 59 ]]
+	-- upvalues: StorySupportModule (copy), ReactModule (copy)
+	local UseEventLogResult, UseEventLogResult2 = StorySupportModule.useEventLog()
+	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 62 ]]
+		-- upvalues: UseEventLogResult2 (copy), StorySupportModule (upval)
+		UseEventLogResult2(`sent: {StorySupportModule.draftLabel(p2)}`)
+	end, { UseEventLogResult2 })
 	
 	return {
-		messageDelivery = reactModule.useMemo(function()
-			-- upvalues: var6 (ref), var7 (ref)
-			return {
-				sendMessageDraft = var6,
-				onMessageDeliveryReceipt = var7
-			}
-		end, { var6, var7 }),
-		entries = var1,
-		lastReceipt = var3
+		messageDelivery = ReactModule.useMemo(function() --[[ Line: 66 ]]
+			-- upvalues: UseResult (copy)
+			return { sendMessageDraft = UseResult }
+		end, { UseResult }),
+		entries = UseEventLogResult
 	}
 end
 
-function t.LogPanel(p2)
-	-- upvalues: reactModule (ref), foundationModule (ref)
-	local t = {}
-	local var1 = 0
-	
-	for i, v in p2.header or {} do
-		var1 += 1
-		t[`header-{i}`] = reactModule.createElement(foundationModule.Text, {
+function StorySupportModule.LogPanel(Frame) --[[ Line: 85 ]]
+	-- upvalues: ReactModule (copy), FoundationModule (copy)
+	local Elements = {}
+	local LayoutOrder = 0
+	local Header = Frame.header or {}
+	for i, Text in Header do
+		LayoutOrder += 1
+		Elements[`header-{i}`] = ReactModule.createElement(FoundationModule.Text, {
 			tag = "size-full-0 auto-y text-wrap text-align-x-left text-caption-medium",
-			Text = v,
-			LayoutOrder = var1
+			Text = Text,
+			LayoutOrder = LayoutOrder
 		})
 	end
-	if #p2.lines == 0 then
-		t.empty = reactModule.createElement(foundationModule.Text, {
+	if #Frame.lines == 0 then
+		Elements.empty = ReactModule.createElement(FoundationModule.Text, {
 			tag = "content-muted size-full-0 auto-y text-wrap text-align-x-left text-caption-medium",
-			Text = p2.emptyText,
-			LayoutOrder = var1 + 1
+			Text = Frame.emptyText,
+			LayoutOrder = LayoutOrder + 1
 		})
 	else
-		for i_1, v_1 in p2.lines do
-			var1 += 1
-			t[`line-{i_1}`] = reactModule.createElement(foundationModule.Text, {
+		for i1, line in Frame.lines do
+			LayoutOrder += 1
+			Elements[`line-{i1}`] = ReactModule.createElement(FoundationModule.Text, {
 				tag = "size-full-0 auto-y text-wrap text-align-x-left text-caption-medium",
-				Text = v_1,
-				LayoutOrder = var1
+				Text = line,
+				LayoutOrder = LayoutOrder
 			})
 		end
 	end
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "col gap-xsmall auto-y",
 		Size = UDim2.fromOffset(300, 0),
-		LayoutOrder = p2.LayoutOrder
-	}, t)
+		LayoutOrder = Frame.LayoutOrder
+	}, Elements)
 end
 
-function t.Layout(p3)
-	-- upvalues: reactModule (ref), foundationModule (ref)
-	return reactModule.createElement(foundationModule.View, { tag = "row gap-large auto-xy" }, {
-		composerColumn = reactModule.createElement(foundationModule.View, {
+function StorySupportModule.Layout(p2) --[[ Line: 130 ]]
+	-- upvalues: ReactModule (copy), FoundationModule (copy)
+	return ReactModule.createElement(FoundationModule.View, { tag = "row gap-large auto-xy" }, {
+		composerColumn = ReactModule.createElement(FoundationModule.View, {
 			tag = "col gap-medium auto-y",
 			LayoutOrder = 1,
 			Size = UDim2.fromOffset(400, 0)
 		}, {
-			toolbar = if p3.toolbar then reactModule.createElement(foundationModule.View, { tag = "size-full-0 auto-y", LayoutOrder = 1 }, p3.toolbar) else nil,
-			composer = reactModule.createElement(foundationModule.View, { tag = "size-full-0 auto-y", LayoutOrder = 2 }, p3.composer)
+			toolbar = if p2.toolbar then ReactModule.createElement(FoundationModule.View, { tag = "size-full-0 auto-y", LayoutOrder = 1 }, p2.toolbar) else nil,
+			composer = ReactModule.createElement(FoundationModule.View, { tag = "size-full-0 auto-y", LayoutOrder = 2 }, p2.composer)
 		}),
-		panel = if p3.panel then reactModule.createElement(foundationModule.View, { tag = "auto-xy", LayoutOrder = 2 }, p3.panel) else nil
+		panel = if p2.panel then ReactModule.createElement(FoundationModule.View, { tag = "auto-xy", LayoutOrder = 2 }, p2.panel) else nil
 	})
 end
 
-return t
+return StorySupportModule

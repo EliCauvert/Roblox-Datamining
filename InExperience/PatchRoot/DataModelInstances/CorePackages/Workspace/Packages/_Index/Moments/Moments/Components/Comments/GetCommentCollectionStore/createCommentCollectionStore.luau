@@ -1,35 +1,34 @@
-﻿local httpService = game:GetService("HttpService")
-local signalsModule = require(script:FindFirstAncestor("Moments").Parent.Signals)
-local commentCollectionTypesModule = require(script.Parent.CommentCollectionTypes)
-local mergeCommentPageModule = require(script.Parent.mergeCommentPage)
-local createCommentSessionFiltersStoreModule = require(script.Parent.Parent.GetCommentSessionFiltersStore.createCommentSessionFiltersStore)
-local loadStatus = commentCollectionTypesModule.LoadStatus
-local pendingSentinel = commentCollectionTypesModule.pendingSentinel
-local createSignal = signalsModule.createSignal
+﻿local HttpService = game:GetService("HttpService")
+local CommentCollectionTypesModule = require(script.Parent.CommentCollectionTypes)
+local MergeCommentPageModule = require(script.Parent.mergeCommentPage)
+local CreateCommentSessionFiltersStoreModule = require(script.Parent.Parent.GetCommentSessionFiltersStore.createCommentSessionFiltersStore)
+local LoadStatus = CommentCollectionTypesModule.LoadStatus
+local PendingSentinelFunction = CommentCollectionTypesModule.pendingSentinel
+local CreateSignalFunction = require(script:FindFirstAncestor("Moments").Parent.Signals).createSignal
 
-local function specialOrderedIds(p1, p2)
-	-- upvalues: pendingSentinel (ref)
+local function specialOrderedIds(PendingSubmission, StickyPostedCommentIds) --[[ Line: 62 ]]
+	-- upvalues: PendingSentinelFunction (copy)
+	local List = {}
 	local t = {}
-	local t_1 = {}
-	p2 = p2 or {}
+	local StickyPostedCommentIds1 = StickyPostedCommentIds or {}
 	
-	if p1 ~= nil then
-		local var1 = pendingSentinel(p1.clientRequestId)
-		table.insert(t, var1)
-		t_1[var1] = true
+	if PendingSubmission ~= nil then
+		local PendingSentinelResult = PendingSentinelFunction(PendingSubmission.clientRequestId)
+		table.insert(List, PendingSentinelResult)
+		t[PendingSentinelResult] = true
 	end
-	for i, v in p2 do
-		if not t_1[v] then
-			table.insert(t, v)
-			t_1[v] = true
+	for _, value in StickyPostedCommentIds1 do
+		if not t[value] then
+			table.insert(List, value)
+			t[value] = true
 		end
 	end
-	return t
+	return List
 end
 
-local function defaultState(p3, p4)
-	-- upvalues: specialOrderedIds (ref), loadStatus (ref)
-	p4 = p4 or {}
+local function defaultState(PendingSubmission, StickyPostedCommentIds) --[[ Line: 80 ]]
+	-- upvalues: specialOrderedIds (copy), LoadStatus (copy)
+	local Tbl = StickyPostedCommentIds or {}
 	
 	return {
 		channelId = nil,
@@ -37,568 +36,545 @@ local function defaultState(p3, p4)
 		hasMore = false,
 		errorCode = nil,
 		submissionError = nil,
-		orderedCommentIds = specialOrderedIds(p3, p4),
-		initialLoadStatus = loadStatus.Idle,
-		loadMoreStatus = loadStatus.Idle,
-		pendingSubmission = p3,
-		stickyPostedCommentIds = table.clone(p4)
+		orderedCommentIds = specialOrderedIds(PendingSubmission, Tbl),
+		initialLoadStatus = LoadStatus.Idle,
+		loadMoreStatus = LoadStatus.Idle,
+		pendingSubmission = PendingSubmission,
+		stickyPostedCommentIds = table.clone(Tbl)
 	}
 end
 
-return function(p3)
-	-- upvalues: createCommentSessionFiltersStoreModule (ref), createSignal (ref), defaultState (ref), pendingSentinel (ref), mergeCommentPageModule (ref), loadStatus (ref), specialOrderedIds (ref), httpService (ref)
-	p3 = p3 or {}
-	local var2 = if p3.sessionFilters ~= nil then createCommentSessionFiltersStoreModule() else p3.sessionFilters
-	local var3, var4 = createSignal(nil)
-	local var5, var6 = createSignal(defaultState())
-	local t = { get = var5, set = var6 }
-	local var7 = nil
-	local var8 = false
+return function(p1) --[[ Line: 96 | Named "createCommentCollectionStore" ]]
+	-- upvalues: CreateCommentSessionFiltersStoreModule (copy), CreateSignalFunction (copy), defaultState (copy), PendingSentinelFunction (copy), MergeCommentPageModule (copy), LoadStatus (copy), specialOrderedIds (copy), HttpService (copy)
+	local P4 = p1 or {}
+	local CommentSessionFiltersStoreModule = if P4.sessionFilters == nil then CreateCommentSessionFiltersStoreModule() else P4.sessionFilters
+	local Signal, Signal2 = CreateSignalFunction(nil)
+	local Signal1, Signal2_1 = CreateSignalFunction((defaultState()))
+	local config = { get = Signal1, set = Signal2_1 }
+	local v1 = nil
+	local Flag = false
 	
-	local function _(p4)
-		-- upvalues: var8 (write), var3 (ref), t (ref)
-		assert(not var8, "Comment collection store is disposed")
-		assert(var3(false) == p4, "Comment feed must be selected before mutation")
+	local function _(p2) --[[ Line: 112 | Named "requireSelectedSlot" ]]
+		-- upvalues: Flag (ref), Signal (copy), config (copy)
+		assert(not Flag, "Comment collection store is disposed")
+		assert(Signal(false) == p2, "Comment feed must be selected before mutation")
 		
-		return t
+		return config
 	end
 	
-	local function getState(p4)
-		-- upvalues: var3 (ref), defaultState (copy), t (ref)
-		return function(p5)
-			-- upvalues: var3 (copy), p4 (ref), defaultState (copy), t (copy)
-			return if var3(p5) == p4 then t.get(p5) else defaultState()
-		end
+	local _ = function(p2) --[[ Line: 156 | Named "currentFilters" ]]
+		-- upvalues: CommentSessionFiltersStoreModule (copy)
+		return if p2 == nil then CommentSessionFiltersStoreModule.getFilters(false) else p2
 	end
 	
-	local function clear()
-		-- upvalues: var8 (write), t (ref), defaultState (copy), var7 (write), var4 (ref), var2 (ref)
-		if var8 then
-			return
-		end
-		t.set(defaultState())
-		var7 = nil
-		var4(nil)
-		var2.reset()
-	end
-	
-	local function selectFeed(p4, p5)
-		-- upvalues: var8 (write), var3 (ref), var7 (write), t (ref), defaultState (copy), var4 (ref), var2 (ref)
-		assert(not var8, "Comment collection store is disposed")
+	local _ = function(p2) --[[ Line: 163 | Named "pendingSentinelFor" ]]
+		-- upvalues: PendingSentinelFunction (upval)
+		local PendingSubmission = p2.pendingSubmission
 		
-		if var3(false) == p4 and var7 == p5 then
-			return
-		end
-		t.set(defaultState())
-		var7 = p5
-		var4(p4)
-		var2.reset()
+		return if PendingSubmission == nil then nil else PendingSentinelFunction(PendingSubmission.clientRequestId)
 	end
 	
-	local function dispose()
-		-- upvalues: var8 (write), t (ref), defaultState (copy), var7 (write), var4 (ref), var2 (ref)
-		if var8 then return end
-		if not var8 then
-			t.set(defaultState())
-			var7 = nil
-			var4(nil)
-			var2.reset()
-		end
-		var8 = true
-	end
-	
-	local _ = function(p4)
-		-- upvalues: var2 (ref)
-		return if p4 == nil then var2.getFilters(false) else p4
-	end
-	
-	local _ = function(p4)
-		-- upvalues: pendingSentinel (copy)
-		local pendingSubmission = p4.pendingSubmission
+	local function applyMerge(p2, p3, Replace, p4) --[[ Line: 171 ]]
+		-- upvalues: Flag (ref), Signal (copy), config (copy), MergeCommentPageModule (upval), CommentSessionFiltersStoreModule (copy), PendingSentinelFunction (upval), LoadStatus (upval)
+		assert(not Flag, "Comment collection store is disposed")
+		assert(Signal(false) == p2, "Comment feed must be selected before mutation")
+		local GetResult = config.get(false)
+		local VisibleIdsBeforeReconciliation = {}
 		
-		return if pendingSubmission == nil then nil else pendingSentinel(pendingSubmission.clientRequestId)
-	end
-	
-	local function applyMerge(p4, p5, p6, p7)
-		-- upvalues: var8 (write), var3 (ref), t (ref), mergeCommentPageModule (copy), var2 (ref), pendingSentinel (copy), loadStatus (copy)
-		assert(not var8, "Comment collection store is disposed")
-		assert(var3(false) == p4, "Comment feed must be selected before mutation")
-		local var9 = t.get(false)
-		local t_1 = {}
-		
-		for i, v in var9.orderedCommentIds do
-			t_1[v] = true
+		for _, orderedCommentId in GetResult.orderedCommentIds do
+			VisibleIdsBeforeReconciliation[orderedCommentId] = true
 		end
-		local t_2 = {}
-		
-		for i_1, v_1 in p5.comments do
-			t_2[v_1.commentId] = true
-		end
-		local t_3 = {}
-		local t_4 = {}
-		
-		for i_2, v_2 in var9.stickyPostedCommentIds do
-			if t_2[v_2] then
-				t_4[v_2] = true
-			else
-				table.insert(t_3, v_2)
-			end
-		end
-		local t_5 = {}
-		
-		for i_3, v_3 in var9.orderedCommentIds do
-			if not t_4[v_3] then
-				table.insert(t_5, v_3)
-			end
-		end
-		local t_6 = {
-			existingIds = t_5,
-			pageComments = p5.comments,
-			filters = if p7 ~= nil then var2.getFilters(false) else p7,
-			replace = p6
-		}
-		local pendingSubmission = var9.pendingSubmission
-		t_6.pendingSentinel = if pendingSubmission == nil then nil else pendingSentinel(pendingSubmission.clientRequestId)
-		t_6.stickyPostedCommentIds = t_3
-		t_6.visibleIdsBeforeReconciliation = t_1
-		t_6.hasMore = p5.hasMore
-		local var10 = mergeCommentPageModule(t_6)
-		t.set({
-			errorCode = nil,
-			orderedCommentIds = var10.orderedCommentIds,
-			channelId = p5.channelId or var9.channelId,
-			nextCursor = p5.nextCursor,
-			hasMore = p5.hasMore,
-			initialLoadStatus = if p6 then loadStatus.Success else var9.initialLoadStatus,
-			loadMoreStatus = if p6 then loadStatus.Idle else loadStatus.Success,
-			pendingSubmission = var9.pendingSubmission,
-			stickyPostedCommentIds = t_3,
-			submissionError = var9.submissionError
-		})
-		
-		return var10
-	end
-	
-	local function beginListSession(p8)
-		-- upvalues: var8 (write), var3 (ref), t (ref), defaultState (copy)
-		assert(not var8, "Comment collection store is disposed")
-		assert(var3(false) == p8, "Comment feed must be selected before mutation")
-		local var11 = t.get(false)
-		t.set(defaultState(var11.pendingSubmission, var11.stickyPostedCommentIds))
-	end
-	
-	local function resetListSession(value)
-		-- upvalues: var8 (write), var3 (ref), t (ref), specialOrderedIds (copy), loadStatus (copy)
-		assert(not var8, "Comment collection store is disposed")
-		assert(var3(false) == value, "Comment feed must be selected before mutation")
-		local var11 = t.get(false)
-		t.set({
-			channelId = nil,
-			nextCursor = nil,
-			hasMore = false,
-			errorCode = nil,
-			orderedCommentIds = specialOrderedIds(var11.pendingSubmission, var11.stickyPostedCommentIds),
-			initialLoadStatus = loadStatus.Idle,
-			loadMoreStatus = loadStatus.Idle,
-			pendingSubmission = var11.pendingSubmission,
-			stickyPostedCommentIds = var11.stickyPostedCommentIds,
-			submissionError = var11.submissionError
-		})
-	end
-	
-	local function beginInitialLoad(p8)
-		-- upvalues: var8 (write), var3 (ref), t (ref), loadStatus (copy)
-		assert(not var8, "Comment collection store is disposed")
-		assert(var3(false) == p8, "Comment feed must be selected before mutation")
-		local var11 = t.get(false)
-		t.set({
-			errorCode = nil,
-			orderedCommentIds = var11.orderedCommentIds,
-			channelId = var11.channelId,
-			nextCursor = var11.nextCursor,
-			hasMore = var11.hasMore,
-			initialLoadStatus = loadStatus.Loading,
-			loadMoreStatus = var11.loadMoreStatus,
-			pendingSubmission = var11.pendingSubmission,
-			stickyPostedCommentIds = var11.stickyPostedCommentIds,
-			submissionError = var11.submissionError
-		})
-	end
-	
-	local function completeInitialLoad(p8, p9, p10)
-		-- upvalues: applyMerge (ref)
-		return applyMerge(p8, p9, true, p10)
-	end
-	
-	local function beginLoadMore(p8)
-		-- upvalues: var8 (write), var3 (ref), t (ref), loadStatus (copy)
-		assert(not var8, "Comment collection store is disposed")
-		assert(var3(false) == p8, "Comment feed must be selected before mutation")
-		local var11 = t.get(false)
-		t.set({
-			orderedCommentIds = var11.orderedCommentIds,
-			channelId = var11.channelId,
-			nextCursor = var11.nextCursor,
-			hasMore = var11.hasMore,
-			initialLoadStatus = var11.initialLoadStatus,
-			loadMoreStatus = loadStatus.Loading,
-			errorCode = var11.errorCode,
-			pendingSubmission = var11.pendingSubmission,
-			stickyPostedCommentIds = var11.stickyPostedCommentIds,
-			submissionError = var11.submissionError
-		})
-	end
-	
-	local function completeLoadMore(p8, p9, p10)
-		-- upvalues: applyMerge (ref)
-		return applyMerge(p8, p9, false, p10)
-	end
-	
-	local function failLoad(p8, p9, p10)
-		-- upvalues: var8 (write), var3 (ref), t (ref), loadStatus (copy)
-		assert(not var8, "Comment collection store is disposed")
-		assert(var3(false) == p8, "Comment feed must be selected before mutation")
-		local var11 = t.get(false)
-		t.set({
-			orderedCommentIds = var11.orderedCommentIds,
-			channelId = var11.channelId,
-			nextCursor = var11.nextCursor,
-			hasMore = var11.hasMore,
-			initialLoadStatus = if p9 == "initial" then loadStatus.Failed else var11.initialLoadStatus,
-			loadMoreStatus = if p9 == "more" then loadStatus.Failed else var11.loadMoreStatus,
-			errorCode = p10,
-			pendingSubmission = var11.pendingSubmission,
-			stickyPostedCommentIds = var11.stickyPostedCommentIds,
-			submissionError = var11.submissionError
-		})
-	end
-	
-	local _ = function(p8, p9)
 		local t = {}
 		
-		for i, v in p8 do
-			if v ~= p9 then
-				table.insert(t, v)
-			end
+		for _, comment in p3.comments do
+			t[comment.commentId] = true
 		end
-		return t
-	end
-	
-	local function beginPendingSubmission(p10, p11)
-		-- upvalues: var8 (write), var3 (ref), t (ref), httpService (copy), pendingSentinel (copy)
-		assert(not var8, "Comment collection store is disposed")
-		assert(var3(false) == p10, "Comment feed must be selected before mutation")
-		local var11 = t.get(false)
-		local pendingSubmission = var11.pendingSubmission
+		local StickyPostedCommentIds = {}
+		local t1 = {}
 		
-		if pendingSubmission == nil or pendingSubmission.text ~= p11 then
-			local var12
-			local var13 = httpService:GenerateGUID(false)
-			local var14 = pendingSentinel(var13)
-			
-			if pendingSubmission == nil then
-				var12 = table.clone(var11.orderedCommentIds)
+		for _, stickyPostedCommentId in GetResult.stickyPostedCommentIds do
+			if t[stickyPostedCommentId] then
+				t1[stickyPostedCommentId] = true
 			else
-				local orderedCommentIds = var11.orderedCommentIds
-				local var15 = pendingSentinel(pendingSubmission.clientRequestId)
-				local t_1 = {}
-				
-				for i, v in orderedCommentIds do
-					if v ~= var15 then
-						table.insert(t_1, v)
-					end
-				end
-				var12 = t_1
+				table.insert(StickyPostedCommentIds, stickyPostedCommentId)
 			end
-			table.insert(var12, 1, var14)
-			t.set({
-				submissionError = nil,
-				orderedCommentIds = var12,
-				channelId = var11.channelId,
-				nextCursor = var11.nextCursor,
-				hasMore = var11.hasMore,
-				initialLoadStatus = var11.initialLoadStatus,
-				loadMoreStatus = var11.loadMoreStatus,
-				errorCode = var11.errorCode,
-				pendingSubmission = { status = "Sending", clientRequestId = var13, text = p11 },
-				stickyPostedCommentIds = var11.stickyPostedCommentIds
-			})
-			
-			return var13
-		elseif var11.submissionError ~= nil then
-			t.set({
-				submissionError = nil,
-				orderedCommentIds = var11.orderedCommentIds,
-				channelId = var11.channelId,
-				nextCursor = var11.nextCursor,
-				hasMore = var11.hasMore,
-				initialLoadStatus = var11.initialLoadStatus,
-				loadMoreStatus = var11.loadMoreStatus,
-				errorCode = var11.errorCode,
-				pendingSubmission = pendingSubmission,
-				stickyPostedCommentIds = var11.stickyPostedCommentIds
-			})
 		end
-		return pendingSubmission.clientRequestId
-	end
-	
-	local function markPendingSending(p12)
-		-- upvalues: var8 (write), var3 (ref), t (ref)
-		assert(not var8, "Comment collection store is disposed")
-		assert(var3(false) == p12, "Comment feed must be selected before mutation")
-		local var16 = t.get(false)
-		local pendingSubmission = var16.pendingSubmission
+		local ExistingIds = {}
 		
-		if pendingSubmission == nil then
-			return
+		for _, orderedCommentId1 in GetResult.orderedCommentIds do
+			if not t1[orderedCommentId1] then
+				table.insert(ExistingIds, orderedCommentId1)
+			end
 		end
-		t.set({
-			orderedCommentIds = var16.orderedCommentIds,
-			channelId = var16.channelId,
-			nextCursor = var16.nextCursor,
-			hasMore = var16.hasMore,
-			initialLoadStatus = var16.initialLoadStatus,
-			loadMoreStatus = var16.loadMoreStatus,
-			errorCode = var16.errorCode,
-			pendingSubmission = {
-				status = "Sending",
-				clientRequestId = pendingSubmission.clientRequestId,
-				text = pendingSubmission.text
-			},
-			stickyPostedCommentIds = var16.stickyPostedCommentIds,
-			submissionError = var16.submissionError
+		local PendingSubmission = GetResult.pendingSubmission
+		local MergeCommentPageModuleResult = MergeCommentPageModule({
+			existingIds = ExistingIds,
+			pageComments = p3.comments,
+			filters = if p4 == nil then CommentSessionFiltersStoreModule.getFilters(false) else p4,
+			replace = Replace,
+			pendingSentinel = if PendingSubmission == nil then nil else PendingSentinelFunction(PendingSubmission.clientRequestId),
+			stickyPostedCommentIds = StickyPostedCommentIds,
+			visibleIdsBeforeReconciliation = VisibleIdsBeforeReconciliation,
+			hasMore = p3.hasMore
 		})
-	end
-	
-	local function markPendingOutcomeUnknown(p12)
-		-- upvalues: var8 (write), var3 (ref), t (ref)
-		assert(not var8, "Comment collection store is disposed")
-		assert(var3(false) == p12, "Comment feed must be selected before mutation")
-		local var16 = t.get(false)
-		local pendingSubmission = var16.pendingSubmission
+		config.set({
+			errorCode = nil,
+			orderedCommentIds = MergeCommentPageModuleResult.orderedCommentIds,
+			channelId = p3.channelId or GetResult.channelId,
+			nextCursor = p3.nextCursor,
+			hasMore = p3.hasMore,
+			initialLoadStatus = if Replace then LoadStatus.Success else GetResult.initialLoadStatus,
+			loadMoreStatus = if Replace then LoadStatus.Idle else LoadStatus.Success,
+			pendingSubmission = GetResult.pendingSubmission,
+			stickyPostedCommentIds = StickyPostedCommentIds,
+			submissionError = GetResult.submissionError
+		})
 		
-		if pendingSubmission == nil then
-			return
-		end
-		t.set({
-			orderedCommentIds = var16.orderedCommentIds,
-			channelId = var16.channelId,
-			nextCursor = var16.nextCursor,
-			hasMore = var16.hasMore,
-			initialLoadStatus = var16.initialLoadStatus,
-			loadMoreStatus = var16.loadMoreStatus,
-			errorCode = var16.errorCode,
-			pendingSubmission = {
-				status = "OutcomeUnknown",
-				clientRequestId = pendingSubmission.clientRequestId,
-				text = pendingSubmission.text
-			},
-			stickyPostedCommentIds = var16.stickyPostedCommentIds,
-			submissionError = var16.submissionError
-		})
+		return MergeCommentPageModuleResult
 	end
 	
-	local function replaceId(p12, p13, p14)
+	local _ = function(List, p5) --[[ Line: 317 | Named "dropId" ]]
+		local List1 = {}
+		
+		for _, value in List do
+			if value ~= p5 then
+				table.insert(List1, value)
+			end
+		end
+		return List1
+	end
+	
+	local function replaceId(OrderedCommentIds, p6, CommentId) --[[ Line: 424 ]]
+		local List = {}
+		local Flag = false
 		local t = {}
-		local var16 = false
-		local t_1 = {}
 		
-		for i, v in p12 do
-			local var17 = if v == p13 then p14 else v
+		for _, orderedCommentId in OrderedCommentIds do
+			local CommentId1 = if orderedCommentId == p6 then CommentId else orderedCommentId
 			
-			if not t_1[var17] then
-				table.insert(t, var17)
-				t_1[var17] = true
+			if not t[CommentId1] then
+				table.insert(List, CommentId1)
+				t[CommentId1] = true
 				
-				if v == p13 then
-					var16 = true
+				if orderedCommentId == p6 then
+					Flag = true
 				end
 			end
 		end
-		if not var16 and not t_1[p14] then
-			table.insert(t, 1, p14)
+		if not Flag and not t[CommentId] then
+			table.insert(List, 1, CommentId)
 		end
-		return t
+		return List
 	end
 	
-	local _ = function(p15, p16)
-		local list = { p16 }
+	local _ = function(List, p7) --[[ Line: 444 | Named "moveToFront" ]]
+		local List1 = { p7 }
 		
-		for i, v in p15 do
-			if v ~= p16 then
-				table.insert(list, v)
+		for _, value in List do
+			if value ~= p7 then
+				table.insert(List1, value)
 			end
 		end
-		return list
+		return List1
 	end
 	
 	return {
-		getState = getState,
-		selectFeed = selectFeed,
-		clear = clear,
-		dispose = dispose,
-		beginListSession = beginListSession,
-		resetListSession = resetListSession,
-		beginInitialLoad = beginInitialLoad,
-		completeInitialLoad = completeInitialLoad,
-		beginLoadMore = beginLoadMore,
-		completeLoadMore = completeLoadMore,
-		failLoad = failLoad,
-		beginPendingSubmission = beginPendingSubmission,
-		markPendingSending = markPendingSending,
-		markPendingOutcomeUnknown = markPendingOutcomeUnknown,
-		resolvePendingSubmission = function(p17, p18)
-			-- upvalues: var8 (write), var3 (ref), t (ref), pendingSentinel (copy), replaceId (ref)
-			assert(not var8, "Comment collection store is disposed")
-			assert(var3(false) == p17, "Comment feed must be selected before mutation")
-			local var18 = t.get(false)
-			local pendingSubmission = var18.pendingSubmission
-			
-			if pendingSubmission == nil then return end
-			local set = t.set
-			local t_1 = {
-				pendingSubmission = nil,
-				submissionError = nil,
-				orderedCommentIds = replaceId(var18.orderedCommentIds, pendingSentinel(pendingSubmission.clientRequestId), p18.commentId),
-				channelId = var18.channelId,
-				nextCursor = var18.nextCursor,
-				hasMore = var18.hasMore,
-				initialLoadStatus = var18.initialLoadStatus,
-				loadMoreStatus = var18.loadMoreStatus,
-				errorCode = var18.errorCode
-			}
-			local stickyPostedCommentIds = var18.stickyPostedCommentIds
-			local commentId = p18.commentId
-			local list = { commentId }
-			
-			for i, v in stickyPostedCommentIds do
-				if v ~= commentId then
-					table.insert(list, v)
-				end
+		getState = function(p8) --[[ Line: 118 ]]
+			-- upvalues: Signal (copy), defaultState (upval), config (copy)
+			return function(p9) --[[ Line: 119 ]]
+				-- upvalues: Signal (upval), p8 (copy), defaultState (upval), config (upval)
+				return if Signal(p9) == p8 then config.get(p9) else defaultState()
 			end
-			t_1.stickyPostedCommentIds = list
-			set(t_1)
 		end,
-		rejectPendingSubmission = function(p19, p20)
-			-- upvalues: var8 (write), var3 (ref), t (ref), pendingSentinel (copy)
-			assert(not var8, "Comment collection store is disposed")
-			assert(var3(false) == p19, "Comment feed must be selected before mutation")
-			local var19 = t.get(false)
-			local pendingSubmission = var19.pendingSubmission
+		selectFeed = function(p8, p9) --[[ Line: 137 ]]
+			-- upvalues: Flag (ref), Signal (copy), v1 (ref), config (copy), defaultState (upval), Signal2 (copy), CommentSessionFiltersStoreModule (copy)
+			assert(not Flag, "Comment collection store is disposed")
 			
-			if pendingSubmission == nil then return end
-			local var20 = if p20 ~= nil then nil else { errorCode = p20, text = pendingSubmission.text }
-			local set = t.set
-			local t_1 = { pendingSubmission = nil }
-			local orderedCommentIds = var19.orderedCommentIds
-			local var21 = pendingSentinel(pendingSubmission.clientRequestId)
-			local t_2 = {}
-			
-			for i, v in orderedCommentIds do
-				if v ~= var21 then
-					table.insert(t_2, v)
-				end
-			end
-			t_1.orderedCommentIds = t_2
-			t_1.channelId = var19.channelId
-			t_1.nextCursor = var19.nextCursor
-			t_1.hasMore = var19.hasMore
-			t_1.initialLoadStatus = var19.initialLoadStatus
-			t_1.loadMoreStatus = var19.loadMoreStatus
-			t_1.errorCode = var19.errorCode
-			t_1.stickyPostedCommentIds = var19.stickyPostedCommentIds
-			t_1.submissionError = var20
-			set(t_1)
-		end,
-		clearSubmissionError = function(p21)
-			-- upvalues: var8 (write), var3 (ref), t (ref)
-			assert(not var8, "Comment collection store is disposed")
-			assert(var3(false) == p21, "Comment feed must be selected before mutation")
-			local var22 = t.get(false)
-			
-			if var22.submissionError == nil then
+			if Signal(false) ~= p8 or v1 ~= p9 then
+				config.set((defaultState()))
+				v1 = p9
+				Signal2(p8)
+				CommentSessionFiltersStoreModule.reset()
+				
 				return
 			end
-			t.set({
-				submissionError = nil,
-				orderedCommentIds = var22.orderedCommentIds,
-				channelId = var22.channelId,
-				nextCursor = var22.nextCursor,
-				hasMore = var22.hasMore,
-				initialLoadStatus = var22.initialLoadStatus,
-				loadMoreStatus = var22.loadMoreStatus,
-				errorCode = var22.errorCode,
-				pendingSubmission = var22.pendingSubmission,
-				stickyPostedCommentIds = var22.stickyPostedCommentIds
+		end,
+		clear = function() --[[ Line: 127 ]]
+			-- upvalues: Flag (ref), config (copy), defaultState (upval), v1 (ref), Signal2 (copy), CommentSessionFiltersStoreModule (copy)
+			if not Flag then
+				config.set((defaultState()))
+				v1 = nil
+				Signal2(nil)
+				CommentSessionFiltersStoreModule.reset()
+				
+				return
+			end
+		end,
+		dispose = function() --[[ Line: 148 ]]
+			-- upvalues: Flag (ref), config (copy), defaultState (upval), v1 (ref), Signal2 (copy), CommentSessionFiltersStoreModule (copy)
+			if Flag then return end
+			if not Flag then
+				config.set((defaultState()))
+				v1 = nil
+				Signal2(nil)
+				CommentSessionFiltersStoreModule.reset()
+			end
+			Flag = true
+		end,
+		beginListSession = function(p8) --[[ Line: 227 ]]
+			-- upvalues: Flag (ref), Signal (copy), config (copy), defaultState (upval)
+			assert(not Flag, "Comment collection store is disposed")
+			assert(Signal(false) == p8, "Comment feed must be selected before mutation")
+			local GetResult = config.get(false)
+			config.set((defaultState(GetResult.pendingSubmission, GetResult.stickyPostedCommentIds)))
+		end,
+		resetListSession = function(p8) --[[ Line: 233 ]]
+			-- upvalues: Flag (ref), Signal (copy), config (copy), specialOrderedIds (upval), LoadStatus (upval)
+			assert(not Flag, "Comment collection store is disposed")
+			assert(Signal(false) == p8, "Comment feed must be selected before mutation")
+			local GetResult = config.get(false)
+			config.set({
+				channelId = nil,
+				nextCursor = nil,
+				hasMore = false,
+				errorCode = nil,
+				orderedCommentIds = specialOrderedIds(GetResult.pendingSubmission, GetResult.stickyPostedCommentIds),
+				initialLoadStatus = LoadStatus.Idle,
+				loadMoreStatus = LoadStatus.Idle,
+				pendingSubmission = GetResult.pendingSubmission,
+				stickyPostedCommentIds = GetResult.stickyPostedCommentIds,
+				submissionError = GetResult.submissionError
 			})
 		end,
-		getPendingSubmission = function(p21)
-			-- upvalues: var3 (ref), t (ref)
-			return if var3(false) == p21 then t.get(false).pendingSubmission else nil
+		beginInitialLoad = function(p8) --[[ Line: 250 ]]
+			-- upvalues: Flag (ref), Signal (copy), config (copy), LoadStatus (upval)
+			assert(not Flag, "Comment collection store is disposed")
+			assert(Signal(false) == p8, "Comment feed must be selected before mutation")
+			local GetResult = config.get(false)
+			config.set({
+				errorCode = nil,
+				orderedCommentIds = GetResult.orderedCommentIds,
+				channelId = GetResult.channelId,
+				nextCursor = GetResult.nextCursor,
+				hasMore = GetResult.hasMore,
+				initialLoadStatus = LoadStatus.Loading,
+				loadMoreStatus = GetResult.loadMoreStatus,
+				pendingSubmission = GetResult.pendingSubmission,
+				stickyPostedCommentIds = GetResult.stickyPostedCommentIds,
+				submissionError = GetResult.submissionError
+			})
 		end,
-		removeCommentId = function(p21, p22)
-			-- upvalues: var8 (write), var3 (ref), t (ref)
-			assert(not var8, "Comment collection store is disposed")
-			assert(var3(false) == p21, "Comment feed must be selected before mutation")
-			local var22 = t.get(false)
-			local set = t.set
-			local t_1 = {}
-			local t_2 = {}
-			
-			for i, v in var22.orderedCommentIds do
-				if v ~= p22 then
-					table.insert(t_2, v)
-				end
-			end
-			t_1.orderedCommentIds = t_2
-			t_1.channelId = var22.channelId
-			t_1.nextCursor = var22.nextCursor
-			t_1.hasMore = var22.hasMore
-			t_1.initialLoadStatus = var22.initialLoadStatus
-			t_1.loadMoreStatus = var22.loadMoreStatus
-			t_1.errorCode = var22.errorCode
-			t_1.pendingSubmission = var22.pendingSubmission
-			local t_3 = {}
-			
-			for i, v_1 in var22.stickyPostedCommentIds do
-				if v_1 ~= p22 then
-					table.insert(t_3, v_1)
-				end
-			end
-			t_1.stickyPostedCommentIds = t_3
-			t_1.submissionError = var22.submissionError
-			set(t_1)
+		completeInitialLoad = function(p8, p9, p10) --[[ Line: 267 ]]
+			-- upvalues: applyMerge (copy)
+			return (applyMerge(p8, p9, true, p10))
 		end,
-		removeCommentIdsByAuthor = function(p23, p24, p25)
-			-- upvalues: var8 (write), var3 (ref), t (ref)
-			assert(not var8, "Comment collection store is disposed")
-			assert(var3(false) == p23, "Comment feed must be selected before mutation")
-			local var23 = t.get(false)
-			local t_1 = {}
+		beginLoadMore = function(p8) --[[ Line: 275 ]]
+			-- upvalues: Flag (ref), Signal (copy), config (copy), LoadStatus (upval)
+			assert(not Flag, "Comment collection store is disposed")
+			assert(Signal(false) == p8, "Comment feed must be selected before mutation")
+			local GetResult = config.get(false)
+			config.set({
+				orderedCommentIds = GetResult.orderedCommentIds,
+				channelId = GetResult.channelId,
+				nextCursor = GetResult.nextCursor,
+				hasMore = GetResult.hasMore,
+				initialLoadStatus = GetResult.initialLoadStatus,
+				loadMoreStatus = LoadStatus.Loading,
+				errorCode = GetResult.errorCode,
+				pendingSubmission = GetResult.pendingSubmission,
+				stickyPostedCommentIds = GetResult.stickyPostedCommentIds,
+				submissionError = GetResult.submissionError
+			})
+		end,
+		completeLoadMore = function(p8, p9, p10) --[[ Line: 292 ]]
+			-- upvalues: applyMerge (copy)
+			return (applyMerge(p8, p9, false, p10))
+		end,
+		failLoad = function(p8, p9, ErrorCode) --[[ Line: 300 ]]
+			-- upvalues: Flag (ref), Signal (copy), config (copy), LoadStatus (upval)
+			assert(not Flag, "Comment collection store is disposed")
+			assert(Signal(false) == p8, "Comment feed must be selected before mutation")
+			local GetResult = config.get(false)
+			config.set({
+				orderedCommentIds = GetResult.orderedCommentIds,
+				channelId = GetResult.channelId,
+				nextCursor = GetResult.nextCursor,
+				hasMore = GetResult.hasMore,
+				initialLoadStatus = if p9 == "initial" then LoadStatus.Failed else GetResult.initialLoadStatus,
+				loadMoreStatus = if p9 == "more" then LoadStatus.Failed else GetResult.loadMoreStatus,
+				errorCode = ErrorCode,
+				pendingSubmission = GetResult.pendingSubmission,
+				stickyPostedCommentIds = GetResult.stickyPostedCommentIds,
+				submissionError = GetResult.submissionError
+			})
+		end,
+		beginPendingSubmission = function(p8, Text) --[[ Line: 327 ]]
+			-- upvalues: Flag (ref), Signal (copy), config (copy), HttpService (upval), PendingSentinelFunction (upval)
+			assert(not Flag, "Comment collection store is disposed")
+			assert(Signal(false) == p8, "Comment feed must be selected before mutation")
+			local GetResult = config.get(false)
+			local PendingSubmission = GetResult.pendingSubmission
 			
-			for i, v in var23.orderedCommentIds do
-				if p25(v) ~= p24 then
-					table.insert(t_1, v)
+			if PendingSubmission == nil or PendingSubmission.text ~= Text then
+				local Guid = HttpService:GenerateGUID(false)
+				local PendingSentinelResult = PendingSentinelFunction(Guid)
+				local Copy = nil
+				
+				if PendingSubmission == nil then
+					Copy = table.clone(GetResult.orderedCommentIds)
+				else
+					local OrderedCommentIds = GetResult.orderedCommentIds
+					local PendingSentinelResult1 = PendingSentinelFunction(PendingSubmission.clientRequestId)
+					local List = {}
+					
+					for _, orderedCommentId in OrderedCommentIds do
+						if orderedCommentId ~= PendingSentinelResult1 then
+							table.insert(List, orderedCommentId)
+						end
+					end
+					Copy = List
+				end
+				table.insert(Copy, 1, PendingSentinelResult)
+				config.set({
+					submissionError = nil,
+					orderedCommentIds = Copy,
+					channelId = GetResult.channelId,
+					nextCursor = GetResult.nextCursor,
+					hasMore = GetResult.hasMore,
+					initialLoadStatus = GetResult.initialLoadStatus,
+					loadMoreStatus = GetResult.loadMoreStatus,
+					errorCode = GetResult.errorCode,
+					pendingSubmission = { status = "Sending", clientRequestId = Guid, text = Text },
+					stickyPostedCommentIds = GetResult.stickyPostedCommentIds
+				})
+				
+				return Guid
+			else
+				if GetResult.submissionError ~= nil then
+					config.set({
+						submissionError = nil,
+						orderedCommentIds = GetResult.orderedCommentIds,
+						channelId = GetResult.channelId,
+						nextCursor = GetResult.nextCursor,
+						hasMore = GetResult.hasMore,
+						initialLoadStatus = GetResult.initialLoadStatus,
+						loadMoreStatus = GetResult.loadMoreStatus,
+						errorCode = GetResult.errorCode,
+						pendingSubmission = PendingSubmission,
+						stickyPostedCommentIds = GetResult.stickyPostedCommentIds
+					})
+				end
+				return PendingSubmission.clientRequestId
+			end
+		end,
+		markPendingSending = function(p9) --[[ Line: 374 ]]
+			-- upvalues: Flag (ref), Signal (copy), config (copy)
+			assert(not Flag, "Comment collection store is disposed")
+			assert(Signal(false) == p9, "Comment feed must be selected before mutation")
+			local GetResult = config.get(false)
+			local PendingSubmission = GetResult.pendingSubmission
+			
+			if PendingSubmission ~= nil then
+				config.set({
+					orderedCommentIds = GetResult.orderedCommentIds,
+					channelId = GetResult.channelId,
+					nextCursor = GetResult.nextCursor,
+					hasMore = GetResult.hasMore,
+					initialLoadStatus = GetResult.initialLoadStatus,
+					loadMoreStatus = GetResult.loadMoreStatus,
+					errorCode = GetResult.errorCode,
+					pendingSubmission = {
+						status = "Sending",
+						clientRequestId = PendingSubmission.clientRequestId,
+						text = PendingSubmission.text
+					},
+					stickyPostedCommentIds = GetResult.stickyPostedCommentIds,
+					submissionError = GetResult.submissionError
+				})
+				
+				return
+			end
+		end,
+		markPendingOutcomeUnknown = function(p9) --[[ Line: 399 ]]
+			-- upvalues: Flag (ref), Signal (copy), config (copy)
+			assert(not Flag, "Comment collection store is disposed")
+			assert(Signal(false) == p9, "Comment feed must be selected before mutation")
+			local GetResult = config.get(false)
+			local PendingSubmission = GetResult.pendingSubmission
+			
+			if PendingSubmission ~= nil then
+				config.set({
+					orderedCommentIds = GetResult.orderedCommentIds,
+					channelId = GetResult.channelId,
+					nextCursor = GetResult.nextCursor,
+					hasMore = GetResult.hasMore,
+					initialLoadStatus = GetResult.initialLoadStatus,
+					loadMoreStatus = GetResult.loadMoreStatus,
+					errorCode = GetResult.errorCode,
+					pendingSubmission = {
+						status = "OutcomeUnknown",
+						clientRequestId = PendingSubmission.clientRequestId,
+						text = PendingSubmission.text
+					},
+					stickyPostedCommentIds = GetResult.stickyPostedCommentIds,
+					submissionError = GetResult.submissionError
+				})
+				
+				return
+			end
+		end,
+		resolvePendingSubmission = function(p9, p10) --[[ Line: 454 ]]
+			-- upvalues: Flag (ref), Signal (copy), config (copy), PendingSentinelFunction (upval), replaceId (copy)
+			assert(not Flag, "Comment collection store is disposed")
+			assert(Signal(false) == p9, "Comment feed must be selected before mutation")
+			local GetResult = config.get(false)
+			local PendingSubmission = GetResult.pendingSubmission
+			
+			if PendingSubmission == nil then return end
+			local SetFunction: (any) -> () = config.set
+			local config1 = {
+				pendingSubmission = nil,
+				submissionError = nil,
+				orderedCommentIds = replaceId(GetResult.orderedCommentIds, PendingSentinelFunction(PendingSubmission.clientRequestId), p10.commentId),
+				channelId = GetResult.channelId,
+				nextCursor = GetResult.nextCursor,
+				hasMore = GetResult.hasMore,
+				initialLoadStatus = GetResult.initialLoadStatus,
+				loadMoreStatus = GetResult.loadMoreStatus,
+				errorCode = GetResult.errorCode
+			}
+			local CommentId = p10.commentId
+			local StickyPostedCommentIds = { CommentId }
+			
+			for _, stickyPostedCommentId in GetResult.stickyPostedCommentIds do
+				if stickyPostedCommentId ~= CommentId then
+					table.insert(StickyPostedCommentIds, stickyPostedCommentId)
 				end
 			end
-			local t_2 = {}
+			config1.stickyPostedCommentIds = StickyPostedCommentIds
+			SetFunction(config1)
+		end,
+		rejectPendingSubmission = function(p11, ErrorCode) --[[ Line: 476 ]]
+			-- upvalues: Flag (ref), Signal (copy), config (copy), PendingSentinelFunction (upval)
+			assert(not Flag, "Comment collection store is disposed")
+			assert(Signal(false) == p11, "Comment feed must be selected before mutation")
+			local GetResult = config.get(false)
+			local PendingSubmission = GetResult.pendingSubmission
 			
-			for i_1, v_1 in var23.stickyPostedCommentIds do
-				if p25(v_1) ~= p24 then
-					table.insert(t_2, v_1)
+			if PendingSubmission == nil then return end
+			local Config = if ErrorCode == nil then nil else { errorCode = ErrorCode, text = PendingSubmission.text }
+			local SetFunction: (any) -> () = config.set
+			local config1 = { pendingSubmission = nil }
+			local OrderedCommentIds = GetResult.orderedCommentIds
+			local PendingSentinelResult = PendingSentinelFunction(PendingSubmission.clientRequestId)
+			local OrderedCommentIds1 = {}
+			
+			for _, orderedCommentId in OrderedCommentIds do
+				if orderedCommentId ~= PendingSentinelResult then
+					table.insert(OrderedCommentIds1, orderedCommentId)
 				end
 			end
-			t.set({
-				orderedCommentIds = t_1,
-				channelId = var23.channelId,
-				nextCursor = var23.nextCursor,
-				hasMore = var23.hasMore,
-				initialLoadStatus = var23.initialLoadStatus,
-				loadMoreStatus = var23.loadMoreStatus,
-				errorCode = var23.errorCode,
-				pendingSubmission = var23.pendingSubmission,
-				stickyPostedCommentIds = t_2,
-				submissionError = var23.submissionError
+			config1.orderedCommentIds = OrderedCommentIds1
+			config1.channelId = GetResult.channelId
+			config1.nextCursor = GetResult.nextCursor
+			config1.hasMore = GetResult.hasMore
+			config1.initialLoadStatus = GetResult.initialLoadStatus
+			config1.loadMoreStatus = GetResult.loadMoreStatus
+			config1.errorCode = GetResult.errorCode
+			config1.stickyPostedCommentIds = GetResult.stickyPostedCommentIds
+			config1.submissionError = Config
+			SetFunction(config1)
+		end,
+		clearSubmissionError = function(p12) --[[ Line: 503 ]]
+			-- upvalues: Flag (ref), Signal (copy), config (copy)
+			assert(not Flag, "Comment collection store is disposed")
+			assert(Signal(false) == p12, "Comment feed must be selected before mutation")
+			local GetResult = config.get(false)
+			
+			if GetResult.submissionError ~= nil then
+				config.set({
+					submissionError = nil,
+					orderedCommentIds = GetResult.orderedCommentIds,
+					channelId = GetResult.channelId,
+					nextCursor = GetResult.nextCursor,
+					hasMore = GetResult.hasMore,
+					initialLoadStatus = GetResult.initialLoadStatus,
+					loadMoreStatus = GetResult.loadMoreStatus,
+					errorCode = GetResult.errorCode,
+					pendingSubmission = GetResult.pendingSubmission,
+					stickyPostedCommentIds = GetResult.stickyPostedCommentIds
+				})
+				
+				return
+			end
+		end,
+		getPendingSubmission = function(p12) --[[ Line: 523 ]]
+			-- upvalues: Signal (copy), config (copy)
+			return if Signal(false) == p12 then config.get(false).pendingSubmission else nil
+		end,
+		removeCommentId = function(p12, p13) --[[ Line: 530 ]]
+			-- upvalues: Flag (ref), Signal (copy), config (copy)
+			assert(not Flag, "Comment collection store is disposed")
+			assert(Signal(false) == p12, "Comment feed must be selected before mutation")
+			local GetResult = config.get(false)
+			local SetFunction: (any) -> () = config.set
+			local t = {}
+			local OrderedCommentIds = {}
+			
+			for _, orderedCommentId in GetResult.orderedCommentIds do
+				if orderedCommentId ~= p13 then
+					table.insert(OrderedCommentIds, orderedCommentId)
+				end
+			end
+			t.orderedCommentIds = OrderedCommentIds
+			t.channelId = GetResult.channelId
+			t.nextCursor = GetResult.nextCursor
+			t.hasMore = GetResult.hasMore
+			t.initialLoadStatus = GetResult.initialLoadStatus
+			t.loadMoreStatus = GetResult.loadMoreStatus
+			t.errorCode = GetResult.errorCode
+			t.pendingSubmission = GetResult.pendingSubmission
+			local StickyPostedCommentIds = {}
+			
+			for _, stickyPostedCommentId in GetResult.stickyPostedCommentIds do
+				if stickyPostedCommentId ~= p13 then
+					table.insert(StickyPostedCommentIds, stickyPostedCommentId)
+				end
+			end
+			t.stickyPostedCommentIds = StickyPostedCommentIds
+			t.submissionError = GetResult.submissionError
+			SetFunction(t)
+		end,
+		removeCommentIdsByAuthor = function(p14, p15, Callback) --[[ Line: 547 ]]
+			-- upvalues: Flag (ref), Signal (copy), config (copy)
+			assert(not Flag, "Comment collection store is disposed")
+			assert(Signal(false) == p14, "Comment feed must be selected before mutation")
+			local GetResult = config.get(false)
+			local OrderedCommentIds = {}
+			
+			for _, orderedCommentId in GetResult.orderedCommentIds do
+				if Callback(orderedCommentId) ~= p15 then
+					table.insert(OrderedCommentIds, orderedCommentId)
+				end
+			end
+			local StickyPostedCommentIds = {}
+			
+			for _, stickyPostedCommentId in GetResult.stickyPostedCommentIds do
+				if Callback(stickyPostedCommentId) ~= p15 then
+					table.insert(StickyPostedCommentIds, stickyPostedCommentId)
+				end
+			end
+			config.set({
+				orderedCommentIds = OrderedCommentIds,
+				channelId = GetResult.channelId,
+				nextCursor = GetResult.nextCursor,
+				hasMore = GetResult.hasMore,
+				initialLoadStatus = GetResult.initialLoadStatus,
+				loadMoreStatus = GetResult.loadMoreStatus,
+				errorCode = GetResult.errorCode,
+				pendingSubmission = GetResult.pendingSubmission,
+				stickyPostedCommentIds = StickyPostedCommentIds,
+				submissionError = GetResult.submissionError
 			})
 		end
 	}

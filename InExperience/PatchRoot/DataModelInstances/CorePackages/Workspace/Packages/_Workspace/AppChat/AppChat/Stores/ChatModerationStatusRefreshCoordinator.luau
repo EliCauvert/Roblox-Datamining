@@ -1,37 +1,37 @@
-﻿local parent = script:FindFirstAncestor("AppChat").Parent
-local _ = require(parent.LuauPolyfill)
-local promiseModule = require(parent.Promise)
-local t = {}
-local var1 = false
-local var2 = 0
-local var3 = nil
+﻿local Parent = script:FindFirstAncestor("AppChat").Parent
+local _ = require(Parent.LuauPolyfill)
+local PromiseModule = require(Parent.Promise)
+local List = {}
+local Flag = false
+local Generation = 0
+local Callback = nil
 
-local function _()
-	-- upvalues: var1 (write), var3 (write)
-	var1 = false
-	var3()
+local function _() --[[ Line: 30 | Named "completeRequest" ]]
+	-- upvalues: Flag (ref), Callback (ref)
+	Flag = false
+	Callback()
 end
 
-var3 = function()
-	-- upvalues: var1 (write), t (ref), var3 (write), promiseModule (ref)
-	if var1 then return end
-	local removed = table.remove(t, 1)
-	while removed and removed.owner.cancelled do
-		removed.resolve(nil)
-		removed = table.remove(t, 1)
+Callback = function() --[[ Line: 40 ]]
+	-- upvalues: Flag (ref), List (copy), Callback (ref), PromiseModule (copy)
+	if Flag then return end
+	local Removed = table.remove(List, 1)
+	while Removed and Removed.owner.cancelled do
+		Removed.resolve(nil)
+		Removed = table.remove(List, 1)
 	end
-	if removed then
-		var1 = true
-		promiseModule.try(removed.request):andThen(function(p1)
-			-- upvalues: removed (ref), var1 (copy), var3 (copy)
-			removed.resolve(p1)
-			var1 = false
-			var3()
-		end, function(p1)
-			-- upvalues: removed (ref), var1 (copy), var3 (copy)
-			removed.reject(p1)
-			var1 = false
-			var3()
+	if Removed then
+		Flag = true
+		PromiseModule.try(Removed.request):andThen(function(Result) --[[ Line: 58 ]]
+			-- upvalues: Removed (copy), Flag (upval), Callback (upval)
+			Removed.resolve(Result)
+			Flag = false
+			Callback()
+		end, function(p1) --[[ Line: 63 ]]
+			-- upvalues: Removed (copy), Flag (upval), Callback (upval)
+			Removed.reject(p1)
+			Flag = false
+			Callback()
 		end)
 		
 		return
@@ -39,27 +39,32 @@ var3 = function()
 end
 
 return {
-	createOwner = function()
+	createOwner = function() --[[ Line: 77 ]]
 		return { cancelled = false }
 	end,
-	cancelOwner = function(p1)
+	cancelOwner = function(p1) --[[ Line: 82 ]]
 		p1.cancelled = true
 	end,
-	enqueue = function(p1, p2)
-		-- upvalues: var2 (write), promiseModule (ref), t (ref), var3 (write)
-		var2 += 1
+	enqueue = function(Owner, Request) --[[ Line: 85 ]]
+		-- upvalues: Generation (ref), PromiseModule (copy), List (copy), Callback (ref)
+		Generation += 1
 		
 		return {
-			generation = var2,
-			promise = promiseModule.new(function(p3, p4)
-				-- upvalues: t (copy), p1 (ref), p2 (ref), var3 (copy)
-				table.insert(t, { owner = p1, request = p2, resolve = p3, reject = p4 })
-				var3()
+			generation = Generation,
+			promise = PromiseModule.new(function(Resolve, Reject) --[[ Line: 89 ]]
+				-- upvalues: List (upval), Owner (copy), Request (copy), Callback (upval)
+				table.insert(List, {
+					owner = Owner,
+					request = Request,
+					resolve = Resolve,
+					reject = Reject
+				})
+				Callback()
 			end)
 		}
 	end,
-	isLatestGeneration = function(p1)
-		-- upvalues: var2 (write)
-		return p1 == var2
+	isLatestGeneration = function(Generation1): boolean --[[ Line: 105 ]]
+		-- upvalues: Generation (ref)
+		return Generation1 == Generation
 	end
 }

@@ -1,11 +1,9 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local extraKeysEnumModule = require(parent.Enums.ExtraKeysEnum)
-local touchControlsEnumModule = require(parent.Enums.TouchControlsEnum)
+﻿local Parent = script.Parent.Parent
+local ExtraKeysEnumModule = require(Parent.Enums.ExtraKeysEnum)
+local TouchControlsEnumModule = require(Parent.Enums.TouchControlsEnum)
 local _ = require(script.Parent.ConfigTypes)
-local fFlagEnableConsoleExpControls = require(parent_1.SharedFlags).FFlagEnableConsoleExpControls
-local fFlagHelpPageCCLModule = require(parent.Flags.FFlagHelpPageCCL)
-local t = {
+local FFlagHelpPageCCLModule = require(Parent.Flags.FFlagHelpPageCCL)
+local ControlGroups = {
 	CharacterMovement = {
 		layoutOrder = 1,
 		label = "CoreScripts.InGameMenu.Controls.CharacterMovementTitle",
@@ -19,12 +17,12 @@ local t = {
 	Misc = {
 		label = "CoreScripts.InGameMenu.Controls.MiscellaneousTitle",
 		id = "Misc",
-		layoutOrder = if fFlagHelpPageCCLModule then 4 else 3
+		layoutOrder = if FFlagHelpPageCCLModule then 4 else 3
 	},
 	CameraMovement = {
 		label = "CoreScripts.InGameMenu.Controls.CameraMovementTitle",
 		id = "CameraMovement",
-		layoutOrder = if fFlagHelpPageCCLModule then 3 else 4
+		layoutOrder = if FFlagHelpPageCCLModule then 3 else 4
 	},
 	MenuItems = {
 		layoutOrder = 5,
@@ -32,13 +30,13 @@ local t = {
 		id = "MenuItems"
 	}
 }
-local t_1 = {
+local Controls = {
 	MoveForward = {
 		label = "CoreScripts.InGameMenu.Controls.MoveForward",
 		keyboardInput = {
 			layoutOrder = 1,
 			input = { { Enum.KeyCode.W }, { Enum.KeyCode.Up } },
-			group = t.CharacterMovement
+			group = ControlGroups.CharacterMovement
 		}
 	},
 	MoveBackward = {
@@ -46,7 +44,7 @@ local t_1 = {
 		keyboardInput = {
 			layoutOrder = 2,
 			input = { { Enum.KeyCode.S }, { Enum.KeyCode.Down } },
-			group = t.CharacterMovement
+			group = ControlGroups.CharacterMovement
 		}
 	},
 	MoveLeft = {
@@ -54,7 +52,7 @@ local t_1 = {
 		keyboardInput = {
 			layoutOrder = 3,
 			input = { { Enum.KeyCode.A }, { Enum.KeyCode.Left } },
-			group = t.CharacterMovement
+			group = ControlGroups.CharacterMovement
 		}
 	},
 	MoveRight = {
@@ -62,15 +60,15 @@ local t_1 = {
 		keyboardInput = {
 			layoutOrder = 4,
 			input = { { Enum.KeyCode.D }, { Enum.KeyCode.Right } },
-			group = t.CharacterMovement
+			group = ControlGroups.CharacterMovement
 		}
 	},
 	Move = {
 		label = "CoreScripts.InGameMenu.Controls.MoveGamepad",
 		gamepadInput = { input = { Enum.KeyCode.Thumbstick1 } },
 		touchInput = {
-			thumbstickInput = { touchControlsEnumModule.BottomLeftRotate },
-			tapToMoveInput = { touchControlsEnumModule.BottomLeftTap }
+			thumbstickInput = { TouchControlsEnumModule.BottomLeftRotate },
+			tapToMoveInput = { TouchControlsEnumModule.BottomLeftTap }
 		}
 	},
 	Jump = {
@@ -78,24 +76,24 @@ local t_1 = {
 		keyboardInput = {
 			layoutOrder = 5,
 			input = { { Enum.KeyCode.Space } },
-			group = t.CharacterMovement
+			group = ControlGroups.CharacterMovement
 		},
 		gamepadInput = { input = { Enum.KeyCode.ButtonA } },
 		touchInput = {
-			thumbstickInput = { touchControlsEnumModule.BottomRight },
-			tapToMoveInput = { touchControlsEnumModule.BottomRight }
+			thumbstickInput = { TouchControlsEnumModule.BottomRight },
+			tapToMoveInput = { TouchControlsEnumModule.BottomRight }
 		}
 	},
 	EquipUnequipTool = {
 		label = "CoreScripts.InGameMenu.Controls.EquipUnequipTools",
 		keyboardInput = {
 			layoutOrder = 1,
-			input = { { extraKeysEnumModule.NumSequence } },
-			group = t.Accessories
+			input = { { ExtraKeysEnumModule.NumSequence } },
+			group = ControlGroups.Accessories
 		},
 		touchInput = {
-			thumbstickInput = { touchControlsEnumModule.BottomMid },
-			tapToMoveInput = { touchControlsEnumModule.BottomMid }
+			thumbstickInput = { TouchControlsEnumModule.BottomMid },
+			tapToMoveInput = { TouchControlsEnumModule.BottomMid }
 		}
 	},
 	DropTool = {
@@ -103,7 +101,7 @@ local t_1 = {
 		keyboardInput = {
 			layoutOrder = 2,
 			input = { { Enum.KeyCode.Backspace } },
-			group = t.Accessories
+			group = ControlGroups.Accessories
 		}
 	},
 	UseTool = {
@@ -111,15 +109,15 @@ local t_1 = {
 		keyboardInput = {
 			layoutOrder = 3,
 			input = { { Enum.KeyCode.MouseLeftButton } },
-			group = t.Accessories
+			group = ControlGroups.Accessories
 		},
 		gamepadInput = {
 			xboxInput = { Enum.KeyCode.ButtonR2 },
 			playstationInput = { Enum.KeyCode.ButtonR2 }
 		},
 		touchInput = {
-			thumbstickInput = { touchControlsEnumModule.TopMidTap },
-			tapToMoveInput = { touchControlsEnumModule.TopRightTap }
+			thumbstickInput = { TouchControlsEnumModule.TopMidTap },
+			tapToMoveInput = { TouchControlsEnumModule.TopRightTap }
 		}
 	},
 	SwitchTool = {
@@ -134,7 +132,7 @@ local t_1 = {
 		keyboardInput = {
 			layoutOrder = 1,
 			input = { { Enum.KeyCode.BackSlash } },
-			group = t.Misc
+			group = ControlGroups.Misc
 		}
 	},
 	Screenshot = {
@@ -143,7 +141,7 @@ local t_1 = {
 			layoutOrder = 2,
 			macInput = { { Enum.KeyCode.RightAlt, Enum.KeyCode.One } },
 			winInput = { { Enum.KeyCode.LeftAlt, Enum.KeyCode.One } },
-			group = t.Misc
+			group = ControlGroups.Misc
 		}
 	},
 	RecordVideo = {
@@ -151,7 +149,7 @@ local t_1 = {
 		keyboardInput = {
 			layoutOrder = 3,
 			winInput = { { Enum.KeyCode.F12 } },
-			group = t.Misc
+			group = ControlGroups.Misc
 		}
 	},
 	DevConsole = {
@@ -160,10 +158,10 @@ local t_1 = {
 			layoutOrder = 4,
 			macInput = {
 				{ Enum.KeyCode.F9 },
-				{ extraKeysEnumModule.Fn, Enum.KeyCode.F9 }
+				{ ExtraKeysEnumModule.Fn, Enum.KeyCode.F9 }
 			},
 			winInput = { { Enum.KeyCode.F9 } },
-			group = t.Misc
+			group = ControlGroups.Misc
 		}
 	},
 	Mouselock = {
@@ -171,7 +169,7 @@ local t_1 = {
 		keyboardInput = {
 			layoutOrder = 5,
 			input = { { Enum.KeyCode.LeftShift } },
-			group = t.Misc
+			group = ControlGroups.Misc
 		}
 	},
 	GraphicsLevel = {
@@ -180,10 +178,10 @@ local t_1 = {
 			layoutOrder = 6,
 			macInput = {
 				{ Enum.KeyCode.F10 },
-				{ extraKeysEnumModule.Fn, Enum.KeyCode.F10 }
+				{ ExtraKeysEnumModule.Fn, Enum.KeyCode.F10 }
 			},
 			winInput = { { Enum.KeyCode.F10 } },
-			group = t.Misc
+			group = ControlGroups.Misc
 		}
 	},
 	Fullscreen = {
@@ -198,7 +196,7 @@ local t_1 = {
 				}
 			},
 			winInput = { { Enum.KeyCode.F11 } },
-			group = t.Misc
+			group = ControlGroups.Misc
 		}
 	},
 	PerfStats = {
@@ -207,7 +205,7 @@ local t_1 = {
 			layoutOrder = 8,
 			macInput = {
 				{
-					extraKeysEnumModule.Fn,
+					ExtraKeysEnumModule.Fn,
 					Enum.KeyCode.RightAlt,
 					Enum.KeyCode.LeftSuper,
 					Enum.KeyCode.F7
@@ -220,7 +218,7 @@ local t_1 = {
 					Enum.KeyCode.F7
 				}
 			},
-			group = t.Misc
+			group = ControlGroups.Misc
 		}
 	},
 	Rotate = {
@@ -228,7 +226,7 @@ local t_1 = {
 		keyboardInput = {
 			layoutOrder = 1,
 			input = { { Enum.KeyCode.MouseRightButton } },
-			group = t.CameraMovement
+			group = ControlGroups.CameraMovement
 		}
 	},
 	RotateCamera = {
@@ -238,20 +236,20 @@ local t_1 = {
 			playstationInput = { Enum.KeyCode.Thumbstick2 }
 		},
 		touchInput = {
-			thumbstickInput = { touchControlsEnumModule.TopRightRotate },
-			tapToMoveInput = { touchControlsEnumModule.TopMidRotate }
+			thumbstickInput = { TouchControlsEnumModule.TopRightRotate },
+			tapToMoveInput = { TouchControlsEnumModule.TopMidRotate }
 		}
 	},
 	ZoomInOut = {
 		label = "CoreScripts.InGameMenu.Controls.ZoomInOutCamera",
 		keyboardInput = {
 			layoutOrder = 2,
-			input = { { extraKeysEnumModule.MouseWheel } },
-			group = t.CameraMovement
+			input = { { ExtraKeysEnumModule.MouseWheel } },
+			group = ControlGroups.CameraMovement
 		},
 		touchInput = {
-			thumbstickInput = { touchControlsEnumModule.TopLeft },
-			tapToMoveInput = { touchControlsEnumModule.TopLeft }
+			thumbstickInput = { TouchControlsEnumModule.TopLeft },
+			tapToMoveInput = { TouchControlsEnumModule.TopLeft }
 		}
 	},
 	ZoomIn = {
@@ -259,7 +257,7 @@ local t_1 = {
 		keyboardInput = {
 			layoutOrder = 3,
 			input = { { Enum.KeyCode.I } },
-			group = t.CameraMovement
+			group = ControlGroups.CameraMovement
 		}
 	},
 	ZoomOut = {
@@ -267,7 +265,7 @@ local t_1 = {
 		keyboardInput = {
 			layoutOrder = 4,
 			input = { { Enum.KeyCode.O } },
-			group = t.CameraMovement
+			group = ControlGroups.CameraMovement
 		}
 	},
 	CameraZoomGamepad = {
@@ -286,7 +284,7 @@ local t_1 = {
 		keyboardInput = {
 			layoutOrder = 1,
 			input = { { Enum.KeyCode.Escape } },
-			group = t.MenuItems
+			group = ControlGroups.MenuItems
 		},
 		gamepadInput = {
 			xboxInput = { Enum.KeyCode.ButtonStart },
@@ -297,14 +295,14 @@ local t_1 = {
 	MenuNavigationGamepad = {
 		label = "CoreScripts.InGameMenu.Controls.MenuNavigationGamepad",
 		gamepadInput = {
-			xboxInput = { extraKeysEnumModule.DPad },
-			playstationInput = { extraKeysEnumModule.DPad }
+			xboxInput = { ExtraKeysEnumModule.DPad },
+			playstationInput = { ExtraKeysEnumModule.DPad }
 		}
 	},
 	GameMenuToggleGamepad = {
 		label = "CoreScripts.InGameMenu.Controls.GameMenuToggle",
 		gamepadInput = {
-			playstationInput = { extraKeysEnumModule.TouchPad },
+			playstationInput = { ExtraKeysEnumModule.TouchPad },
 			xboxInput = { Enum.KeyCode.ButtonSelect }
 		}
 	},
@@ -313,7 +311,7 @@ local t_1 = {
 		keyboardInput = {
 			layoutOrder = 2,
 			input = { { Enum.KeyCode.Backquote } },
-			group = t.MenuItems
+			group = ControlGroups.MenuItems
 		}
 	},
 	Playerlist = {
@@ -321,7 +319,7 @@ local t_1 = {
 		keyboardInput = {
 			layoutOrder = 3,
 			input = { { Enum.KeyCode.Tab } },
-			group = t.MenuItems
+			group = ControlGroups.MenuItems
 		}
 	},
 	Chat = {
@@ -329,7 +327,7 @@ local t_1 = {
 		keyboardInput = {
 			layoutOrder = 4,
 			input = { { Enum.KeyCode.Slash } },
-			group = t.MenuItems
+			group = ControlGroups.MenuItems
 		},
 		gamepadInput = { xboxInput = { Enum.KeyCode.ButtonL2 } }
 	},
@@ -339,7 +337,7 @@ local t_1 = {
 	}
 }
 
-if not fFlagEnableConsoleExpControls then
-	t_1.Chat.gamepadInput = nil
+if not require(Parent.Parent.SharedFlags).FFlagEnableConsoleExpControls then
+	Controls.Chat.gamepadInput = nil
 end
-return { ControlGroups = t, Controls = t_1 }
+return { ControlGroups = ControlGroups, Controls = Controls }

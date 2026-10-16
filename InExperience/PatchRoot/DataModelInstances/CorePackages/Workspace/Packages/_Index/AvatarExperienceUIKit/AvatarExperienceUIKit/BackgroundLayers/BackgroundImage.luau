@@ -1,7 +1,7 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceUIKit").Parent
-local reactModule = require(parent.React)
-local dashModule = require(parent.Dash)
-local t = {
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceUIKit").Parent
+local ReactModule = require(Parent.React)
+local DashModule = require(Parent.Dash)
+local config = {
 	resourceIdentifier = "",
 	anchorPoint = Vector2.new(0.5, 0.5),
 	color = Color3.fromRGB(255, 255, 255),
@@ -9,23 +9,23 @@ local t = {
 	scaleType = Enum.ScaleType.Fit
 }
 
-return function(value)
-	-- upvalues: dashModule (ref), t (ref), reactModule (ref)
-	local var1 = dashModule.join(t, value)
+return function(p1) --[[ Line: 27 | Named "BackgroundImage" ]]
+	-- upvalues: DashModule (copy), config (copy), ReactModule (copy)
+	local JoinResult = DashModule.join(config, p1)
 	
-	return reactModule.createElement("ImageLabel", {
-		AnchorPoint = var1.anchorPoint,
-		Position = var1.position,
+	return ReactModule.createElement("ImageLabel", {
+		AnchorPoint = JoinResult.anchorPoint,
+		Position = JoinResult.position,
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
-		Image = var1.resourceIdentifier,
-		ImageColor3 = var1.color,
-		ImageTransparency = var1.transparency,
-		ScaleType = var1.scaleType,
+		Image = JoinResult.resourceIdentifier,
+		ImageColor3 = JoinResult.color,
+		ImageTransparency = JoinResult.transparency,
+		ScaleType = JoinResult.scaleType,
 		Size = UDim2.fromScale(1, 1),
-		ZIndex = var1.ZIndex,
-		[reactModule.Tag] = var1.tag
+		ZIndex = JoinResult.ZIndex,
+		[ReactModule.Tag] = JoinResult.tag
 	}, {
-		CornerRadius = reactModule.createElement("UICorner", { CornerRadius = var1.cornerRadius })
+		CornerRadius = ReactModule.createElement("UICorner", { CornerRadius = JoinResult.cornerRadius })
 	})
 end

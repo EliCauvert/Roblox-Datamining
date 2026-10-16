@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.AvatarExperienceInspectAndBuy.AvatarExperienceInspectAndBuy)
+﻿return (require(script.Parent._Workspace.AvatarExperienceInspectAndBuy.AvatarExperienceInspectAndBuy))

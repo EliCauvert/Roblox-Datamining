@@ -1,22 +1,22 @@
-﻿local dependenciesModule = require(script:FindFirstAncestor("FriendsLanding").dependencies)
-local t = dependenciesModule.t
-local llama = dependenciesModule.llama
-local friendsPerLoadGroupModule = require(script.Parent.friendsPerLoadGroup)
-local var1 = t.interface({
-	visibleRows = t.number,
-	itemSize = t.number,
-	filter = t.string
+﻿local DependenciesModule = require(script:FindFirstAncestor("FriendsLanding").dependencies)
+local T = DependenciesModule.t
+local Llama = DependenciesModule.llama
+local FriendsPerLoadGroupModule = require(script.Parent.friendsPerLoadGroup)
+local InterfaceResult = T.interface({
+	visibleRows = T.number,
+	itemSize = T.number,
+	filter = T.string
 })
-local var2 = t.interface({ width = t.number, filterFriendCounts = t.table })
+local InterfaceResult1 = T.interface({ width = T.number, filterFriendCounts = T.table })
 
-return function(p1, p2)
-	-- upvalues: var2 (ref), var1 (ref), friendsPerLoadGroupModule (ref), llama (ref)
-	assert(var2(p1))
-	assert(var1(p2))
+return function(p1, p2) --[[ Line: 19 ]]
+	-- upvalues: InterfaceResult1 (copy), InterfaceResult (copy), FriendsPerLoadGroupModule (copy), Llama (copy)
+	assert(InterfaceResult1(p1))
+	assert(InterfaceResult(p2))
 	
 	return {
-		filterFriendCounts = llama.Dictionary.join(p1.filterFriendCounts, {
-			[p2.filter] = p1.filterFriendCounts[p2.filter] + friendsPerLoadGroupModule(p1, p2)
+		filterFriendCounts = Llama.Dictionary.join(p1.filterFriendCounts, {
+			[p2.filter] = p1.filterFriendCounts[p2.filter] + FriendsPerLoadGroupModule(p1, p2)
 		})
 	}
 end

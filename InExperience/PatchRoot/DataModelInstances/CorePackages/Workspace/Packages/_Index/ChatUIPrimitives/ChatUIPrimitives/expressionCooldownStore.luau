@@ -1,50 +1,50 @@
-﻿local var1, var2 = require(script:FindFirstAncestor("ChatUIPrimitives").Parent.Signals).createSignal({})
+﻿local Signal, Signal2 = require(script:FindFirstAncestor("ChatUIPrimitives").Parent.Signals).createSignal({})
 
-local function _(value, p1)
-	-- upvalues: var1 (ref), var2 (ref)
-	local cloned = table.clone(var1(false))
+local function _(Key, p1) --[[ Line: 38 | Named "setDeadline" ]]
+	-- upvalues: Signal (copy), Signal2 (copy)
+	local Copy = table.clone(Signal(false))
 	
 	if p1 == nil then
-		cloned[value] = nil
+		Copy[Key] = nil
 	else
-		cloned[value] = p1
+		Copy[Key] = p1
 	end
-	var2(cloned)
+	Signal2(Copy)
 end
 
 return {
-	getCooldownEndsAtByKey = var1,
-	getCooldownEndsAt = function(p1)
-		-- upvalues: var1 (ref)
-		return var1(false)[p1]
+	getCooldownEndsAtByKey = Signal,
+	getCooldownEndsAt = function(p1) --[[ Line: 33 ]]
+		-- upvalues: Signal (copy)
+		return Signal(false)[p1]
 	end,
-	startCooldown = function(p1, p2)
-		-- upvalues: var1 (ref), var2 (ref)
-		local cloned = table.clone(var1(false))
+	startCooldown = function(Key, p1) --[[ Line: 50 ]]
+		-- upvalues: Signal (copy), Signal2 (copy)
+		local Copy = table.clone(Signal(false))
 		
-		if p2 == nil then
-			cloned[p1] = nil
+		if p1 == nil then
+			Copy[Key] = nil
 		else
-			cloned[p1] = p2
+			Copy[Key] = p1
 		end
-		var2(cloned)
-		task.delay(math.max(0, p2 - os.clock()), function()
-			-- upvalues: p1 (ref), var1 (copy), p2 (ref), var2 (copy)
-			if var1(false)[p1] == p2 then
-				local cloned = table.clone(var1(false))
-				cloned[p1] = nil
-				var2(cloned)
+		Signal2(Copy)
+		task.delay(math.max(0, p1 - os.clock()), function() --[[ Line: 52 ]]
+			-- upvalues: Key (copy), Signal (upval), p1 (copy), Signal2 (upval)
+			if Signal(false)[Key] == p1 then
+				local Copy = table.clone(Signal(false))
+				Copy[Key] = nil
+				Signal2(Copy)
 			end
 		end)
 	end,
-	clearCooldown = function(p1)
-		-- upvalues: var1 (ref), var2 (ref)
-		local cloned = table.clone(var1(false))
-		cloned[p1] = nil
-		var2(cloned)
+	clearCooldown = function(Key) --[[ Line: 59 ]]
+		-- upvalues: Signal (copy), Signal2 (copy)
+		local Copy = table.clone(Signal(false))
+		Copy[Key] = nil
+		Signal2(Copy)
 	end,
-	_resetForTesting = function()
-		-- upvalues: var2 (ref)
-		var2({})
+	_resetForTesting = function() --[[ Line: 65 ]]
+		-- upvalues: Signal2 (copy)
+		Signal2({})
 	end
 }

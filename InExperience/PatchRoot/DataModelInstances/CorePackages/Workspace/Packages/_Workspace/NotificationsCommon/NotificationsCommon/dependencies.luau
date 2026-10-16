@@ -1,11 +1,11 @@
-﻿local parent = script.Parent.Parent
-local userLibModule = require(parent.UserLib)
+﻿local Parent = script.Parent.Parent
+local UserLibModule = require(Parent.UserLib)
 
 return {
-	ToastNotificationsProtocol = require(parent.ToastNotificationsProtocol).ToastNotificationProtocol,
-	React = require(parent.React),
-	UIBlox = require(parent.UIBlox),
-	UserLib = userLibModule,
-	getRbxthumbWithTypeSizeAndOptions = userLibModule.Utils.getRbxthumbWithTypeSizeAndOptions,
-	UserLibConstants = userLibModule.Utils.Constants
+	ToastNotificationsProtocol = require(Parent.ToastNotificationsProtocol).ToastNotificationProtocol,
+	React = require(Parent.React),
+	UIBlox = require(Parent.UIBlox),
+	UserLib = UserLibModule,
+	getRbxthumbWithTypeSizeAndOptions = UserLibModule.Utils.getRbxthumbWithTypeSizeAndOptions,
+	UserLibConstants = UserLibModule.Utils.Constants
 }

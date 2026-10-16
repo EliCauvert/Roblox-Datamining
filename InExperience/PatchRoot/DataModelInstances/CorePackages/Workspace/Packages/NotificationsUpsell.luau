@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.NotificationsUpsell.NotificationsUpsell)
+﻿return (require(script.Parent._Workspace.NotificationsUpsell.NotificationsUpsell))

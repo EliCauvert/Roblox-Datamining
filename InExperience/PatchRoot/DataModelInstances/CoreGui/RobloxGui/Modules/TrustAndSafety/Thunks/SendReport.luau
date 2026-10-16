@@ -1,44 +1,45 @@
 ﻿local _ = game:GetService("Players")
 local _ = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.VoiceChat.ReportAbuseLogic)
-local parent = script.Parent.Parent
-local constantsModule = require(parent.Resources.Constants)
-local showToastModule = require(parent.Actions.ShowToast)
-local openReportSentDialogModule = require(parent.Actions.OpenReportSentDialog)
-local endReportFlowModule = require(parent.Actions.EndReportFlow)
-local reportManagerModule = require(parent.Utility.ReportManager)
+local Parent = script.Parent.Parent
+local ConstantsModule = require(Parent.Resources.Constants)
+local ShowToastModule = require(Parent.Actions.ShowToast)
+local OpenReportSentDialogModule = require(Parent.Actions.OpenReportSentDialog)
+local EndReportFlowModule = require(Parent.Actions.EndReportFlow)
+local ReportManagerModule = require(Parent.Utility.ReportManager)
 
-return function(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: constantsModule (ref), reportManagerModule (ref), openReportSentDialogModule (ref), showToastModule (ref), endReportFlowModule (ref)
-	return function(p8)
-		-- upvalues: p1 (ref), constantsModule (copy), reportManagerModule (copy), p5 (ref), p2 (ref), p3 (ref), p4 (ref), openReportSentDialogModule (copy), showToastModule (copy), p6 (ref), p7 (ref), endReportFlowModule (copy)
-		local state = p8:getState()
+return function(Place, AbusingPlayer, Reason, Comment, ReportCategory, p1, p2) --[[ Line: 15 ]]
+	-- upvalues: ConstantsModule (copy), ReportManagerModule (copy), OpenReportSentDialogModule (copy), ShowToastModule (copy), EndReportFlowModule (copy)
+	return function(p3) --[[ Line: 16 ]]
+		-- upvalues: Place (copy), ConstantsModule (upval), ReportManagerModule (upval), ReportCategory (copy), AbusingPlayer (copy), Reason (copy), Comment (copy), OpenReportSentDialogModule (upval), ShowToastModule (upval), p1 (copy), p2 (copy), EndReportFlowModule (upval)
+		local State = p3:getState()
 		
-		if p1 == constantsModule.ReportType.Player then
-			reportManagerModule.submitUserAbuseReport({
-				reportCategory = p5,
-				abusingPlayer = p2,
-				reason = p3,
-				comment = p4,
-				beginningTimestamp = state.report.beginningTimestamp,
-				sortedUserIds = state.report.sortedUserIds
-			}, function()
-				-- upvalues: p8 (ref), openReportSentDialogModule (copy), p1 (copy), p2 (copy)
-				p8:dispatch(openReportSentDialogModule(p1, p2))
+		if Place == ConstantsModule.ReportType.Player then
+			ReportManagerModule.submitUserAbuseReport({
+				reportCategory = ReportCategory,
+				abusingPlayer = AbusingPlayer,
+				reason = Reason,
+				comment = Comment,
+				beginningTimestamp = State.report.beginningTimestamp,
+				sortedUserIds = State.report.sortedUserIds
+			}, function() --[[ Line: 26 ]]
+				-- upvalues: p3 (copy), OpenReportSentDialogModule (upval), Place (upval), AbusingPlayer (upval)
+				p3:dispatch(OpenReportSentDialogModule(Place, AbusingPlayer))
 			end)
 			
 			return
-		elseif p1 == constantsModule.ReportType.Place then
-			reportManagerModule.submitPlaceAbuseReport({
+		end
+		if Place == ConstantsModule.ReportType.Place then
+			ReportManagerModule.submitPlaceAbuseReport({
 				placeId = game.PlaceId,
-				placeName = state.placeInfo.name,
-				placeDescription = state.placeInfo.description,
-				reason = p3,
-				comment = p4
-			}, function()
-				-- upvalues: p8 (ref), showToastModule (copy), p6 (copy), p7 (copy)
-				p8:dispatch(showToastModule(p6, p7))
+				placeName = State.placeInfo.name,
+				placeDescription = State.placeInfo.description,
+				reason = Reason,
+				comment = Comment
+			}, function() --[[ Line: 36 ]]
+				-- upvalues: p3 (copy), ShowToastModule (upval), p1 (upval), p2 (upval)
+				p3:dispatch(ShowToastModule(p1, p2))
 			end)
-			p8:dispatch(endReportFlowModule())
+			p3:dispatch(EndReportFlowModule())
 		end
 	end
 end

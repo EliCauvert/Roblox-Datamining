@@ -1,5 +1,5 @@
-﻿local telemetryService = game:GetService("TelemetryService")
-local t = {
+﻿local TelemetryService = game:GetService("TelemetryService")
+local config = {
 	eventName = "backToTopClick",
 	description = "User clicked the back to top button at the end of a scrollable surface",
 	backends = { "EventIngest", "Points" },
@@ -7,10 +7,10 @@ local t = {
 	lastUpdated = { 26, 7, 22 }
 }
 
-return function(p1)
-	-- upvalues: telemetryService (ref), t (ref)
-	telemetryService:LogEvent(t, {
-		eventContext = p1,
+return function(EventContext) --[[ Line: 14 ]]
+	-- upvalues: TelemetryService (copy), config (copy)
+	TelemetryService:LogEvent(config, {
+		eventContext = EventContext,
 		standardizedFields = { "addSessionInfo", "addSessionId", "addOSInfo" }
 	})
 end

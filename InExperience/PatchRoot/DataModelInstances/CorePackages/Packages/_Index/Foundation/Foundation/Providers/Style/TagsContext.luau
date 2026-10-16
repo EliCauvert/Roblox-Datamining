@@ -1,9 +1,9 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local loggerModule = require(foundation.Utility.Logger)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local LoggerModule = require(Foundation.Utility.Logger)
 
-return require(foundation.Parent.React).createContext(function()
-	-- upvalues: loggerModule (ref)
-	loggerModule:warning("No Style Provider found")
+return (require(Foundation.Parent.React).createContext(function(): string --[[ Line: 10 ]]
+	-- upvalues: LoggerModule (copy)
+	LoggerModule:warning("No Style Provider found")
 	
 	return ""
-end)
+end))

@@ -1,63 +1,64 @@
-﻿local momentsCommon = script:FindFirstAncestor("MomentsCommon")
-local parent = momentsCommon.Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local _ = require(parent.MomentsTypes)
-local useSignalState = require(parent.SignalsReact).useSignalState
-local textOverlayDisplayModule = require(momentsCommon.Components.TextOverlayDisplay)
-local _ = require(momentsCommon.Media.MediaTypes)
-local _ = require(momentsCommon.Media.mediaNodeRegistry)
-local fFlagMomentsOverlayContainerScaleFallbackModule = require(momentsCommon.Flags.FFlagMomentsOverlayContainerScaleFallback)
-local var1 = signalsModule.createSignal(Enum.ScaleType.Crop)
+﻿local MomentsCommon = script:FindFirstAncestor("MomentsCommon")
+local Parent = MomentsCommon.Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local _ = require(Parent.MomentsTypes)
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local TextOverlayDisplayModule = require(MomentsCommon.Components.TextOverlayDisplay)
+local _ = require(MomentsCommon.Media.MediaTypes)
+local _ = require(MomentsCommon.Media.mediaNodeRegistry)
+local FFlagMomentsOverlayContainerScaleFallbackModule = require(MomentsCommon.Flags.FFlagMomentsOverlayContainerScaleFallback)
+local Signal = SignalsModule.createSignal(Enum.ScaleType.Crop)
 
-local function TextOverlayLayer(p1)
-	-- upvalues: reactModule (ref), signalsModule (ref), useSignalState (ref), var1 (ref), fFlagMomentsOverlayContainerScaleFallbackModule (ref), textOverlayDisplayModule (ref)
-	local getResolution = p1.getResolution
-	local var2 = useSignalState(p1.getItemSize)
-	local var3 = useSignalState(reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), getResolution (ref)
-		return signalsModule.createComputed(function(p2)
-			-- upvalues: getResolution (copy)
-			return getResolution(p2)
+local function TextOverlayLayer(p1) --[[ Line: 78 ]]
+	-- upvalues: ReactModule (copy), SignalsModule (copy), UseSignalStateFunction (copy), Signal (copy), FFlagMomentsOverlayContainerScaleFallbackModule (copy), TextOverlayDisplayModule (copy)
+	local GetResolutionFunction = p1.getResolution
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 90 ]]
+		-- upvalues: SignalsModule (upval), GetResolutionFunction (copy)
+		return SignalsModule.createComputed(function(p2) --[[ Line: 91 ]]
+			-- upvalues: GetResolutionFunction (upval)
+			return GetResolutionFunction(p2)
 		end)
-	end, { getResolution }))
+	end, { GetResolutionFunction })
+	local UseSignalStateResult = UseSignalStateFunction(p1.getItemSize)
+	local UseSignalStateResult1 = UseSignalStateFunction(UseMemoResult)
 	
-	return reactModule.createElement(textOverlayDisplayModule, {
+	return ReactModule.createElement(TextOverlayDisplayModule, {
 		draggable = false,
 		editable = false,
-		itemResolution = if fFlagMomentsOverlayContainerScaleFallbackModule and var3 == nil then var2 else var3,
-		itemSize = var2,
-		scaleType = useSignalState(p1.getScaleType or var1),
+		itemResolution = if FFlagMomentsOverlayContainerScaleFallbackModule and UseSignalStateResult1 == nil then UseSignalStateResult else UseSignalStateResult1,
+		itemSize = UseSignalStateResult,
+		scaleType = UseSignalStateFunction(p1.getScaleType or Signal),
 		textOverlayEdits = { p1.overlay }
 	})
 end
 
 return {
 	kind = "text",
-	create = function(p1, _)
-		-- upvalues: reactModule (ref), TextOverlayLayer (ref)
-		local overlay = p1.overlay
-		assert(overlay ~= nil, "createTextOverlayNode: spec.overlay (a TextOverlayEdit) is required")
+	create = function(p1, _) --[[ Line: 120 ]]
+		-- upvalues: ReactModule (copy), TextOverlayLayer (copy)
+		local Overlay = p1.overlay
+		assert(Overlay ~= nil, "createTextOverlayNode: spec.overlay (a TextOverlayEdit) is required")
 		
 		return {
 			kind = "text",
 			usesDecoder = false,
 			id = p1.id,
-			assets = function()
+			assets = function() --[[ Line: 128 ]]
 				return {}
 			end,
-			download = function() end,
-			zIndex = p1.zIndex or overlay.zIndex,
-			render = function(p2)
-				-- upvalues: reactModule (copy), TextOverlayLayer (copy), overlay (ref)
-				return reactModule.createElement(TextOverlayLayer, {
-					overlay = overlay,
+			download = function() --[[ Line: 145 ]] end,
+			zIndex = p1.zIndex or Overlay.zIndex,
+			render = function(p2) --[[ Line: 132 ]]
+				-- upvalues: ReactModule (upval), TextOverlayLayer (upval), Overlay (copy)
+				return ReactModule.createElement(TextOverlayLayer, {
+					overlay = Overlay,
 					getItemSize = p2.getItemSize,
 					getResolution = p2.getResolution,
 					getScaleType = p2.getScaleType
 				})
 			end,
-			dispose = function() end
+			dispose = function() --[[ Line: 149 ]] end
 		}
 	end
 }

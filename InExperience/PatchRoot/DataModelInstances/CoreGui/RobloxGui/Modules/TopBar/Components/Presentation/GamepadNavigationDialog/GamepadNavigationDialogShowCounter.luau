@@ -1,71 +1,72 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local appStorageService = game:GetService("AppStorageService")
-local httpService = game:GetService("HttpService")
-local reactModule = require(corePackagesService.Packages.React)
-local _ = require(corePackagesService.Packages.UIBlox)
-local gamepadNavigationDialogModule = require(script.Parent.GamepadNavigationDialog)
-local _ = reactModule.PureComponent:extend("GamepadNavigationDialogShowCounter")
+﻿local CorePackages = game:GetService("CorePackages")
+local AppStorageService = game:GetService("AppStorageService")
+local HttpService = game:GetService("HttpService")
+local ReactModule = require(CorePackages.Packages.React)
+local _ = require(CorePackages.Packages.UIBlox)
+local GamepadNavigationDialogModule = require(script.Parent.GamepadNavigationDialog)
+local _ = ReactModule.PureComponent:extend("GamepadNavigationDialogShowCounter")
 
-local function shouldShowBasedOnCountInAppStorage(p1, p2)
-	-- upvalues: appStorageService (ref), httpService (ref)
-	local var1 = appStorageService:GetItem(p1)
-	local userIdItem = appStorageService:GetItem("UserId")
-	local ok, status = pcall(function()
-		-- upvalues: httpService (copy), var1 (ref)
-		return httpService:JSONDecode(var1)
+local function shouldShowBasedOnCountInAppStorage(AppStorageKey, MaxShownCount) --[[ Line: 20 ]]
+	-- upvalues: AppStorageService (copy), HttpService (copy)
+	local Item = AppStorageService:GetItem(AppStorageKey)
+	local UserIdItem = AppStorageService:GetItem("UserId")
+	local Success, Result = pcall(function() --[[ Line: 23 ]]
+		-- upvalues: HttpService (upval), Item (copy)
+		return HttpService:JSONDecode(Item)
 	end)
 	
-	if not ok or type(status) ~= "table" then
-		status = {}
+	if not Success or type(Result) ~= "table" then
+		Result = {}
 	end
-	local var2 = status[userIdItem]
+	local Entry = Result[UserIdItem]
 	
-	if type(var2) ~= "number" then
-		var2 = 0
+	if type(Entry) ~= "number" then
+		Entry = 0
 	end
-	status[userIdItem] = var2 + 1
+	Result[UserIdItem] = Entry + 1
 	
-	return var2 < p2, httpService:JSONEncode(status)
+	return Entry < MaxShownCount, HttpService:JSONEncode(Result)
 end
 
-local function GamepadNavigationDialogTextButton(p1)
-	-- upvalues: reactModule (ref), gamepadNavigationDialogModule (ref)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref)
+local function GamepadNavigationDialogTextButton(p1) --[[ Line: 43 ]]
+	-- upvalues: ReactModule (copy), GamepadNavigationDialogModule (copy)
+	ReactModule.useEffect(function() --[[ Line: 44 ]]
+		-- upvalues: p1 (copy)
 		return p1.onCleanup
 	end, {})
 	
-	return reactModule.createElement("TextButton", {
+	return ReactModule.createElement("TextButton", {
 		Text = "",
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		Size = UDim2.new(1, 0, 1, 0),
-		[reactModule.Event.Activated] = p1.onDismissed
+		[ReactModule.Event.Activated] = p1.onDismissed
 	}, {
-		GamepadNavigationDialog = reactModule.createElement(gamepadNavigationDialogModule, {
+		GamepadNavigationDialog = ReactModule.createElement(GamepadNavigationDialogModule, {
 			selectButtonDismissesGamepadNavigationDialog = p1.selectButtonDismissesGamepadNavigationDialog,
 			onDismissed = p1.onDismissed
 		})
 	})
 end
 
-return function(p1)
-	-- upvalues: shouldShowBasedOnCountInAppStorage (ref), reactModule (ref), GamepadNavigationDialogTextButton (ref), appStorageService (ref)
-	if not p1.isGamepadNavigationDialogEnabled or not p1.isGamepadNavigationDialogOpen then
+return function(p1) --[[ Line: 62 | Named "GamepadNavigationDialogShowCounter" ]]
+	-- upvalues: shouldShowBasedOnCountInAppStorage (copy), ReactModule (copy), GamepadNavigationDialogTextButton (copy), AppStorageService (copy)
+	if p1.isGamepadNavigationDialogEnabled and p1.isGamepadNavigationDialogOpen then
+		local ShouldShowBasedOnCountInAppStorage, ShouldShowBasedOnCountInAppStorage2 = shouldShowBasedOnCountInAppStorage(p1.appStorageKey, p1.maxShownCount)
+		
+		return if ShouldShowBasedOnCountInAppStorage then ReactModule.createElement(GamepadNavigationDialogTextButton, {
+			selectButtonDismissesGamepadNavigationDialog = p1.selectButtonDismissesGamepadNavigationDialog,
+			onDismissed = function() --[[ Line: 74 ]]
+				-- upvalues: p1 (copy)
+				p1.SetGamepadNavigationDialogOpen(false)
+			end,
+			onCleanup = function() --[[ Line: 77 ]]
+				-- upvalues: AppStorageService (upval), p1 (copy), ShouldShowBasedOnCountInAppStorage2 (copy)
+				AppStorageService:SetItem(p1.appStorageKey, ShouldShowBasedOnCountInAppStorage2)
+				AppStorageService:Flush()
+			end
+		}) else nil
+	else
 		return nil
 	end
-	local var1, var2 = shouldShowBasedOnCountInAppStorage(p1.appStorageKey, p1.maxShownCount)
-	
-	return if var1 then reactModule.createElement(GamepadNavigationDialogTextButton, {
-		selectButtonDismissesGamepadNavigationDialog = p1.selectButtonDismissesGamepadNavigationDialog,
-		onDismissed = function()
-			-- upvalues: p1 (ref)
-			p1.SetGamepadNavigationDialogOpen(false)
-		end,
-		onCleanup = function()
-			-- upvalues: appStorageService (copy), p1 (ref), var2 (ref)
-			appStorageService:SetItem(p1.appStorageKey, var2)
-			appStorageService:Flush()
-		end
-	}) else nil
 end

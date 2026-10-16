@@ -1,24 +1,24 @@
-﻿local inGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
-local roact = inGameMenuDependenciesModule.Roact
-local t = inGameMenuDependenciesModule.t
-local friendStatusConnectorModule = require(script.FriendStatusConnector)
-local lastInputTypeConnectorModule = require(script.LastInputTypeConnector)
-local mouseOverrideManagerModule = require(script.MouseOverrideManager)
-local focusHighlightManagerModule = require(script.FocusHighlightManager)
-local nativeCloseEventConnectorModule = require(script.NativeCloseEventConnector)
-local var1 = t.strictInterface({ isEducationalPopupEnabled = t.optional(t.boolean) })
+﻿local InGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
+local Roact = InGameMenuDependenciesModule.Roact
+local T = InGameMenuDependenciesModule.t
+local FriendStatusConnectorModule = require(script.FriendStatusConnector)
+local LastInputTypeConnectorModule = require(script.LastInputTypeConnector)
+local MouseOverrideManagerModule = require(script.MouseOverrideManager)
+local FocusHighlightManagerModule = require(script.FocusHighlightManager)
+local NativeCloseEventConnectorModule = require(script.NativeCloseEventConnector)
+local StrictInterfaceResult = T.strictInterface({ isEducationalPopupEnabled = T.optional(T.boolean) })
 
-return require(script.Parent.Parent.InGameMenuPolicy).connect(function(p1, _)
+return require(script.Parent.Parent.InGameMenuPolicy).connect(function(p1, _) --[[ Line: 32 ]]
 	return { isEducationalPopupEnabled = p1.enableEducationalPopup() }
-end)(function(p1)
-	-- upvalues: var1 (ref), roact (ref), friendStatusConnectorModule (ref), lastInputTypeConnectorModule (ref), mouseOverrideManagerModule (ref), focusHighlightManagerModule (ref), nativeCloseEventConnectorModule (ref)
-	assert(var1)
+end)(function(p1) --[[ Line: 20 | Named "Connection" ]]
+	-- upvalues: StrictInterfaceResult (copy), Roact (copy), FriendStatusConnectorModule (copy), LastInputTypeConnectorModule (copy), MouseOverrideManagerModule (copy), FocusHighlightManagerModule (copy), NativeCloseEventConnectorModule (copy)
+	assert(StrictInterfaceResult)
 	
-	return roact.createFragment({
-		FriendStatusConnector = roact.createElement(friendStatusConnectorModule),
-		LastInputTypeConnector = roact.createElement(lastInputTypeConnectorModule),
-		MouseOverrideManager = roact.createElement(mouseOverrideManagerModule),
-		FocusHighlightManager = roact.createElement(focusHighlightManagerModule),
-		NativeCloseEventConnector = p1.isEducationalPopupEnabled and roact.createElement(nativeCloseEventConnectorModule) or nil
+	return Roact.createFragment({
+		FriendStatusConnector = Roact.createElement(FriendStatusConnectorModule),
+		LastInputTypeConnector = Roact.createElement(LastInputTypeConnectorModule),
+		MouseOverrideManager = Roact.createElement(MouseOverrideManagerModule),
+		FocusHighlightManager = Roact.createElement(FocusHighlightManagerModule),
+		NativeCloseEventConnector = p1.isEducationalPopupEnabled and Roact.createElement(NativeCloseEventConnectorModule) or nil
 	})
 end)

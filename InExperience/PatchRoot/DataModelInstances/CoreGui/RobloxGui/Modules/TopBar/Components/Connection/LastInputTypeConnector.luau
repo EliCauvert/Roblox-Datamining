@@ -1,59 +1,59 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local userInputService = game:GetService("UserInputService")
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local parent = script.Parent.Parent.Parent
-local eventConnectionModule = require(parent.Parent.Common.EventConnection)
-local setInputTypeModule = require(parent.Actions.SetInputType)
-local inputType = require(parent.Constants).InputType
-local lastInputTypeConnector = roactModule.PureComponent:extend("LastInputTypeConnector")
-local t = {
-	[Enum.UserInputType.MouseButton2] = inputType.MouseAndKeyBoard,
-	[Enum.UserInputType.MouseButton3] = inputType.MouseAndKeyBoard,
-	[Enum.UserInputType.MouseWheel] = inputType.MouseAndKeyBoard,
-	[Enum.UserInputType.MouseMovement] = inputType.MouseAndKeyBoard,
-	[Enum.UserInputType.Keyboard] = inputType.MouseAndKeyBoard,
-	[Enum.UserInputType.Gamepad1] = inputType.Gamepad,
-	[Enum.UserInputType.Gamepad2] = inputType.Gamepad,
-	[Enum.UserInputType.Gamepad3] = inputType.Gamepad,
-	[Enum.UserInputType.Gamepad4] = inputType.Gamepad,
-	[Enum.UserInputType.Gamepad5] = inputType.Gamepad,
-	[Enum.UserInputType.Gamepad6] = inputType.Gamepad,
-	[Enum.UserInputType.Gamepad7] = inputType.Gamepad,
-	[Enum.UserInputType.Gamepad8] = inputType.Gamepad,
-	[Enum.UserInputType.Touch] = inputType.Touch
+﻿local CorePackages = game:GetService("CorePackages")
+local UserInputService = game:GetService("UserInputService")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local Parent = script.Parent.Parent.Parent
+local EventConnectionModule = require(Parent.Parent.Common.EventConnection)
+local SetInputTypeModule = require(Parent.Actions.SetInputType)
+local InputType = require(Parent.Constants).InputType
+local LastInputTypeConnector = RoactModule.PureComponent:extend("LastInputTypeConnector")
+local config = {
+	[Enum.UserInputType.MouseButton2] = InputType.MouseAndKeyBoard,
+	[Enum.UserInputType.MouseButton3] = InputType.MouseAndKeyBoard,
+	[Enum.UserInputType.MouseWheel] = InputType.MouseAndKeyBoard,
+	[Enum.UserInputType.MouseMovement] = InputType.MouseAndKeyBoard,
+	[Enum.UserInputType.Keyboard] = InputType.MouseAndKeyBoard,
+	[Enum.UserInputType.Gamepad1] = InputType.Gamepad,
+	[Enum.UserInputType.Gamepad2] = InputType.Gamepad,
+	[Enum.UserInputType.Gamepad3] = InputType.Gamepad,
+	[Enum.UserInputType.Gamepad4] = InputType.Gamepad,
+	[Enum.UserInputType.Gamepad5] = InputType.Gamepad,
+	[Enum.UserInputType.Gamepad6] = InputType.Gamepad,
+	[Enum.UserInputType.Gamepad7] = InputType.Gamepad,
+	[Enum.UserInputType.Gamepad8] = InputType.Gamepad,
+	[Enum.UserInputType.Touch] = InputType.Touch
 }
 
-function lastInputTypeConnector.didMount(p1)
-	-- upvalues: t (ref), userInputService (ref)
-	local var1 = t[userInputService:GetLastInputType()]
+function LastInputTypeConnector.didMount(p1) --[[ Line: 38 ]]
+	-- upvalues: config (copy), UserInputService (copy)
+	local Entry = config[UserInputService:GetLastInputType()]
 	
-	if var1 then
-		p1.props.setInputType(var1)
+	if Entry then
+		p1.props.setInputType(Entry)
 	end
 end
 
-function lastInputTypeConnector.render(p1)
-	-- upvalues: roactModule (ref), eventConnectionModule (ref), userInputService (ref), t (ref)
-	return roactModule.createElement(eventConnectionModule, {
-		event = userInputService.LastInputTypeChanged,
-		callback = function(p2)
-			-- upvalues: t (copy), p1 (ref)
-			local var1 = t[p2]
+function LastInputTypeConnector.render(p1) --[[ Line: 45 ]]
+	-- upvalues: RoactModule (copy), EventConnectionModule (copy), UserInputService (copy), config (copy)
+	return RoactModule.createElement(EventConnectionModule, {
+		event = UserInputService.LastInputTypeChanged,
+		callback = function(p2) --[[ Line: 48 ]]
+			-- upvalues: config (upval), p1 (copy)
+			local Entry = config[p2]
 			
-			if var1 then
-				p1.props.setInputType(var1)
+			if Entry then
+				p1.props.setInputType(Entry)
 			end
 		end
 	})
 end
 
-return roactRoduxModule.UNSTABLE_connect2(nil, function(p1)
-	-- upvalues: setInputTypeModule (ref)
+return RoactRoduxModule.UNSTABLE_connect2(nil, function(Callback) --[[ Line: 57 ]]
+	-- upvalues: SetInputTypeModule (copy)
 	return {
-		setInputType = function(value)
-			-- upvalues: p1 (ref), setInputTypeModule (copy)
-			return p1(setInputTypeModule(value))
+		setInputType = function(p1) --[[ Line: 59 ]]
+			-- upvalues: Callback (copy), SetInputTypeModule (upval)
+			return Callback(SetInputTypeModule(p1))
 		end
 	}
-end)(lastInputTypeConnector)
+end)(LastInputTypeConnector)

@@ -1,42 +1,44 @@
-﻿local appStorageService = game:GetService("AppStorageService")
-local dEV = _G.__DEV__ or false
+﻿local AppStorageService = game:GetService("AppStorageService")
+local DEV = _G.__DEV__ or false
 local t = {}
 
 return {
-	getItem = function(p1, p2)
-		-- upvalues: dEV (ref), t (write), appStorageService (ref)
-		if dEV or p2 then
-			return t[p1] or ""
+	getItem = function(Key, p1) --[[ Line: 25 ]]
+		-- upvalues: DEV (copy), t (ref), AppStorageService (copy)
+		if DEV or p1 then
+			return t[Key] or ""
+		else
+			local Success, Result = pcall(function() --[[ Line: 30 ]]
+				-- upvalues: AppStorageService (upval), Key (copy)
+				return AppStorageService:GetItem(Key)
+			end)
+			
+			return if Success then Result else t[Key] or ""
 		end
-		local ok, status = pcall(function()
-			-- upvalues: appStorageService (copy), p1 (ref)
-			return appStorageService:GetItem(p1)
-		end)
-		
-		return if ok then status else t[p1] or ""
 	end,
-	setItem = function(value, p1, p2)
-		-- upvalues: dEV (ref), t (write), appStorageService (ref)
-		if dEV or p2 then
-			t[value] = p1
+	setItem = function(Key, Value, p1) --[[ Line: 42 ]]
+		-- upvalues: DEV (copy), t (ref), AppStorageService (copy)
+		if DEV or p1 then
+			t[Key] = Value
 			
 			return
-		elseif not pcall(function()
-			-- upvalues: appStorageService (copy), value (ref), p1 (ref)
-			appStorageService:SetItem(value, p1)
+		end
+		if not pcall(function() --[[ Line: 48 ]]
+			-- upvalues: AppStorageService (upval), Key (copy), Value (copy)
+			AppStorageService:SetItem(Key, Value)
 		end) then
-			t[value] = p1
+			t[Key] = Value
 		end
 	end,
-	flush = function()
-		-- upvalues: appStorageService (ref)
-		pcall(function()
-			-- upvalues: appStorageService (copy)
-			appStorageService:Flush()
+	flush = function() --[[ Line: 56 ]]
+		-- upvalues: AppStorageService (copy)
+		pcall(function() --[[ Line: 57 ]]
+			-- upvalues: AppStorageService (upval)
+			AppStorageService:Flush()
 		end)
 	end,
-	_resetMemStorageForTesting = function(value)
-		-- upvalues: t (write)
-		t = value or {}
+	_resetMemStorageForTesting = function(p1) --[[ Line: 20 ]]
+		-- upvalues: t (ref)
+		t = p1 or {}
 	end
 }

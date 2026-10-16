@@ -1,128 +1,117 @@
-﻿local userProfiles = script:FindFirstAncestor("UserProfiles")
-local parent = userProfiles.Parent
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local roactUtilsModule = require(parent.RoactUtils)
-local setupFireDiagModule = require(userProfiles.Analytics.setupFireDiag)
-local eventNamesModule = require(userProfiles.Analytics.EventNames)
-local userProfilesAnalyticsModule = require(userProfiles.Analytics.UserProfilesAnalytics)
-local getDeepValue = require(parent.LuaSocialLibrariesDeps).SocialLibraries.config({}).Dictionary.getDeepValue
-local useApolloAutoRetry = require(parent.SocialCommon).Hooks.useApolloAutoRetry
-local useEffectOnce = roactUtilsModule.Hooks.useEffectOnce
-local useEffectOnMount = roactUtilsModule.Hooks.useEffectOnMount
-local useQuery = require(parent.ApolloClient).useQuery
-local userProfilesEnableRetries = game:DefineFastFlag("UserProfilesEnableRetries", false)
-local fFlagUserProfilesLogCancelledRequestsModule = require(userProfiles.Flags.FFlagUserProfilesLogCancelledRequests)
-local fFlagUserProfilesLogErrorCodesModule = require(userProfiles.Flags.FFlagUserProfilesLogErrorCodes)
-local userProfileDefaultRetryCount = game:DefineFastInt("UserProfileDefaultRetryCount", 2)
-local userProfilesFilterInvalidUserIds = game:DefineFastFlag("UserProfilesFilterInvalidUserIds", false)
+﻿local UserProfiles = script:FindFirstAncestor("UserProfiles")
+local Parent = UserProfiles.Parent
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local RoactUtilsModule = require(Parent.RoactUtils)
+local SetupFireDiagModule = require(UserProfiles.Analytics.setupFireDiag)
+local EventNamesModule = require(UserProfiles.Analytics.EventNames)
+local UserProfilesAnalyticsModule = require(UserProfiles.Analytics.UserProfilesAnalytics)
+local GetDeepValueFunction = require(Parent.LuaSocialLibrariesDeps).SocialLibraries.config({}).Dictionary.getDeepValue
+local UseApolloAutoRetryFunction = require(Parent.SocialCommon).Hooks.useApolloAutoRetry
+local UseEffectOnceFunction = RoactUtilsModule.Hooks.useEffectOnce
+local UseEffectOnMountFunction = RoactUtilsModule.Hooks.useEffectOnMount
+local UseQueryFunction = require(Parent.ApolloClient).useQuery
+local UserProfilesEnableRetries = game:DefineFastFlag("UserProfilesEnableRetries", false)
+local FFlagUserProfilesLogCancelledRequestsModule = require(UserProfiles.Flags.FFlagUserProfilesLogCancelledRequests)
+local FFlagUserProfilesLogErrorCodesModule = require(UserProfiles.Flags.FFlagUserProfilesLogErrorCodes)
+local UserProfileDefaultRetryCount = game:DefineFastInt("UserProfileDefaultRetryCount", 2)
+local UserProfilesFilterInvalidUserIds = game:DefineFastFlag("UserProfilesFilterInvalidUserIds", false)
 
-return function(p1)
-	-- upvalues: userProfilesFilterInvalidUserIds (ref), reactModule (ref), cryoModule (ref), useQuery (ref), userProfilesEnableRetries (ref), useApolloAutoRetry (ref), userProfileDefaultRetryCount (ref), fFlagUserProfilesLogCancelledRequestsModule (ref), setupFireDiagModule (ref), userProfilesAnalyticsModule (ref), useEffectOnMount (ref), eventNamesModule (ref), useEffectOnce (ref), fFlagUserProfilesLogErrorCodesModule (ref), getDeepValue (ref)
-	local var1
-	local var2 = if userProfilesFilterInvalidUserIds then reactModule.useMemo(function()
-		-- upvalues: cryoModule (copy), p1 (ref)
-		return cryoModule.List.filter(p1.userIds, function(p2)
+return function(p1) --[[ Line: 29 ]]
+	-- upvalues: UserProfilesFilterInvalidUserIds (copy), ReactModule (copy), CryoModule (copy), UseQueryFunction (copy), UserProfilesEnableRetries (copy), UseApolloAutoRetryFunction (copy), UserProfileDefaultRetryCount (copy), FFlagUserProfilesLogCancelledRequestsModule (copy), SetupFireDiagModule (copy), UserProfilesAnalyticsModule (copy), UseEffectOnMountFunction (copy), EventNamesModule (copy), UseEffectOnceFunction (copy), FFlagUserProfilesLogErrorCodesModule (copy), GetDeepValueFunction (copy)
+	local UseMemoResult = if UserProfilesFilterInvalidUserIds then ReactModule.useMemo(function() --[[ Line: 37 ]]
+		-- upvalues: CryoModule (upval), p1 (copy)
+		return CryoModule.List.filter(p1.userIds, function(p2): boolean --[[ Line: 38 ]]
 			return tonumber(p2) ~= nil
 		end)
 	end, { p1.userIds }) else nil
-	
-	if userProfilesFilterInvalidUserIds then
-		var1 = #var2 == 0
-		var1 = nil
-	else
-		var1 = #p1.userIds == 0
-	end
-	local var3 = useQuery(p1.query, {
+	local UseQueryResult = UseQueryFunction(p1.query, {
 		errorPolicy = "all",
-		skip = var1 or p1.skip,
+		skip = (if UserProfilesFilterInvalidUserIds then #UseMemoResult == 0 else #p1.userIds == 0) or p1.skip,
 		variables = {
-			userIds = if userProfilesFilterInvalidUserIds then var2 else p1.userIds
+			userIds = if UserProfilesFilterInvalidUserIds then UseMemoResult else p1.userIds
 		}
 	})
-	local var4 = if userProfilesEnableRetries then useApolloAutoRetry(var3, {
-		retryCount = if p1.overrideRetryCount then p1.overrideRetryCount else userProfileDefaultRetryCount
-	}) else var3
-	local var5 = reactModule.useRef(var4.loading or var4.isRetrying)
+	local UseApolloAutoRetryResult = if UserProfilesEnableRetries then UseApolloAutoRetryFunction(UseQueryResult, {
+		retryCount = if p1.overrideRetryCount then p1.overrideRetryCount else UserProfileDefaultRetryCount
+	}) else UseQueryResult
+	local UseRefResult = ReactModule.useRef(UseApolloAutoRetryResult.loading or UseApolloAutoRetryResult.isRetrying)
 	
-	if fFlagUserProfilesLogCancelledRequestsModule then
-		var5.current = var4.loading or var4.isRetrying
+	if FFlagUserProfilesLogCancelledRequestsModule then
+		UseRefResult.current = UseApolloAutoRetryResult.loading or UseApolloAutoRetryResult.isRetrying
 	end
-	local var6 = reactModule.useMemo(function()
-		-- upvalues: setupFireDiagModule (copy), userProfilesAnalyticsModule (copy)
-		return setupFireDiagModule({ analytics = { Diag = userProfilesAnalyticsModule.Diag } })
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 68 ]]
+		-- upvalues: SetupFireDiagModule (upval), UserProfilesAnalyticsModule (upval)
+		return SetupFireDiagModule({ analytics = { Diag = UserProfilesAnalyticsModule.Diag } })
 	end, {})
-	local var7 = reactModule.useRef(DateTime.now())
-	useEffectOnMount(function()
-		-- upvalues: var7 (ref), var6 (ref), eventNamesModule (copy)
-		var7.current = DateTime.now()
-		var6(eventNamesModule.UserProfilesRequestBegin)
+	local UseRefResult1 = ReactModule.useRef(DateTime.now())
+	UseEffectOnMountFunction(function() --[[ Line: 78 ]]
+		-- upvalues: UseRefResult1 (copy), UseMemoResult1 (copy), EventNamesModule (upval)
+		UseRefResult1.current = DateTime.now()
+		UseMemoResult1(EventNamesModule.UserProfilesRequestBegin)
 	end)
 	
-	if userProfilesEnableRetries then
-		useEffectOnce(function()
-			-- upvalues: var7 (ref), var6 (ref), eventNamesModule (copy), userProfilesAnalyticsModule (copy), fFlagUserProfilesLogErrorCodesModule (copy), getDeepValue (copy), var4 (write)
-			local _ = nil
-			
-			if var7.current then
-				local var8 = DateTime.now().UnixTimestampMillis - var7.current.UnixTimestampMillis
-				var6(eventNamesModule.UserProfilesRequestFail)
-				userProfilesAnalyticsModule.Diag:reportStats(eventNamesModule.UserProfilesRequestFailDuration, var8)
+	if UserProfilesEnableRetries then
+		UseEffectOnceFunction(function() --[[ Line: 84 ]]
+			-- upvalues: UseRefResult1 (copy), UseMemoResult1 (copy), EventNamesModule (upval), UserProfilesAnalyticsModule (upval), FFlagUserProfilesLogErrorCodesModule (upval), GetDeepValueFunction (upval), UseApolloAutoRetryResult (ref)
+			if UseRefResult1.current then
+				local UnixTimestampMillisDelta = DateTime.now().UnixTimestampMillis - UseRefResult1.current.UnixTimestampMillis
+				UseMemoResult1(EventNamesModule.UserProfilesRequestFail)
+				UserProfilesAnalyticsModule.Diag:reportStats(EventNamesModule.UserProfilesRequestFailDuration, UnixTimestampMillisDelta)
 				
-				if fFlagUserProfilesLogErrorCodesModule then
-					local var9 = getDeepValue(var4, "error.graphQLErrors")
+				if FFlagUserProfilesLogErrorCodesModule then
+					local ErrorGraphQLErrors = GetDeepValueFunction(UseApolloAutoRetryResult, "error.graphQLErrors")
 					
-					if var9 then
-						var6(eventNamesModule.UserProfilesErrorCode, {
-							status = getDeepValue(var9[1] or {}, "extensions.status")
+					if ErrorGraphQLErrors then
+						UseMemoResult1(EventNamesModule.UserProfilesErrorCode, {
+							status = GetDeepValueFunction(ErrorGraphQLErrors[1] or {}, "extensions.status")
 						})
 					end
 				end
 			end
-		end, var4.error)
-		useEffectOnce(function()
-			-- upvalues: var7 (ref), var4 (write), var6 (ref), eventNamesModule (copy), userProfilesAnalyticsModule (copy), fFlagUserProfilesLogErrorCodesModule (copy), getDeepValue (copy)
-			local _ = nil
-			
-			if var7.current then
-				local var8 = DateTime.now().UnixTimestampMillis - var7.current.UnixTimestampMillis
+		end, UseApolloAutoRetryResult.error)
+		UseEffectOnceFunction(function() --[[ Line: 105 ]]
+			-- upvalues: UseRefResult1 (copy), UseApolloAutoRetryResult (ref), UseMemoResult1 (copy), EventNamesModule (upval), UserProfilesAnalyticsModule (upval), FFlagUserProfilesLogErrorCodesModule (upval), GetDeepValueFunction (upval)
+			if UseRefResult1.current then
+				local UnixTimestampMillisDelta = DateTime.now().UnixTimestampMillis - UseRefResult1.current.UnixTimestampMillis
 				
-				if var4.data and var4.retryCount == 0 then
-					var6(eventNamesModule.UserProfilesRequestSuccess)
-					userProfilesAnalyticsModule.Diag:reportStats(eventNamesModule.UserProfilesRequestSuccessDuration, var8)
-					
-					return
-				elseif var4.data then
-					var6(eventNamesModule.UserProfilesRequestSuccessAfterRetry)
-					userProfilesAnalyticsModule.Diag:reportStats(eventNamesModule.UserProfilesRequestSuccessAfterRetry, var8)
+				if UseApolloAutoRetryResult.data and UseApolloAutoRetryResult.retryCount == 0 then
+					UseMemoResult1(EventNamesModule.UserProfilesRequestSuccess)
+					UserProfilesAnalyticsModule.Diag:reportStats(EventNamesModule.UserProfilesRequestSuccessDuration, UnixTimestampMillisDelta)
 					
 					return
 				end
-				var6(eventNamesModule.UserProfilesRequestFailAfterRetry)
-				userProfilesAnalyticsModule.Diag:reportStats(eventNamesModule.UserProfilesRequestFailAfterRetryDuration, var8)
-				
-				if fFlagUserProfilesLogErrorCodesModule then
-					local var9 = getDeepValue(var4, "error.graphQLErrors")
+				if UseApolloAutoRetryResult.data then
+					UseMemoResult1(EventNamesModule.UserProfilesRequestSuccessAfterRetry)
+					UserProfilesAnalyticsModule.Diag:reportStats(EventNamesModule.UserProfilesRequestSuccessAfterRetry, UnixTimestampMillisDelta)
 					
-					if var9 then
-						var6(eventNamesModule.UserProfilesErrorCode, {
-							status = getDeepValue(var9[1] or {}, "extensions.status")
+					return
+				end
+				UseMemoResult1(EventNamesModule.UserProfilesRequestFailAfterRetry)
+				UserProfilesAnalyticsModule.Diag:reportStats(EventNamesModule.UserProfilesRequestFailAfterRetryDuration, UnixTimestampMillisDelta)
+				
+				if FFlagUserProfilesLogErrorCodesModule then
+					local ErrorGraphQLErrors = GetDeepValueFunction(UseApolloAutoRetryResult, "error.graphQLErrors")
+					
+					if ErrorGraphQLErrors then
+						UseMemoResult1(EventNamesModule.UserProfilesErrorCode, {
+							status = GetDeepValueFunction(ErrorGraphQLErrors[1] or {}, "extensions.status")
 						})
 					end
 				end
 			end
-		end, if fFlagUserProfilesLogCancelledRequestsModule then not var5.current else var4.loading == false and var4.isRetrying == false)
+		end, if FFlagUserProfilesLogCancelledRequestsModule then not UseRefResult.current else UseApolloAutoRetryResult.loading == false and UseApolloAutoRetryResult.isRetrying == false)
 	end
-	if fFlagUserProfilesLogCancelledRequestsModule then
-		reactModule.useEffect(function()
-			-- upvalues: var5 (ref), var6 (ref), eventNamesModule (copy)
-			return function()
-				-- upvalues: var5 (copy), var6 (copy), eventNamesModule (copy)
-				if var5.current then
-					var6(eventNamesModule.UserProfilesUnmountEarly)
+	if FFlagUserProfilesLogCancelledRequestsModule then
+		ReactModule.useEffect(function() --[[ Line: 148 ]]
+			-- upvalues: UseRefResult (copy), UseMemoResult1 (copy), EventNamesModule (upval)
+			return function() --[[ Line: 149 ]]
+				-- upvalues: UseRefResult (upval), UseMemoResult1 (upval), EventNamesModule (upval)
+				if UseRefResult.current then
+					UseMemoResult1(EventNamesModule.UserProfilesUnmountEarly)
 				end
 			end
 		end, {})
 	end
-	return var4
+	return UseApolloAutoRetryResult
 end

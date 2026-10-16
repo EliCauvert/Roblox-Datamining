@@ -1,102 +1,105 @@
-﻿local playersService = game:GetService("Players")
-local signalsModule = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.Signals)
+﻿local Players = game:GetService("Players")
+local SignalsModule = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.Signals)
 
-local function createRecentlyLeftStore(p1)
-	-- upvalues: signalsModule (ref), playersService (ref)
-	p1 = p1 or os.clock
-	local var1, var2 = signalsModule.createSignal({})
-	local var3 = signalsModule.createComputed(function(p2)
-		-- upvalues: var1 (ref)
+local function createRecentlyLeftStore(p1) --[[ Line: 43 ]]
+	-- upvalues: SignalsModule (copy), Players (copy)
+	local Callback = p1 or os.clock
+	local Signal, Signal2 = SignalsModule.createSignal({})
+	local Computed = SignalsModule.createComputed(function(p2) --[[ Line: 46 ]]
+		-- upvalues: Signal (copy)
 		local t = {}
 		
-		for i in var1(p2) do
+		for i in Signal(p2) do
 			t[i] = true
 		end
 		return t
 	end)
-	local var4 = false
+	local Flag = false
 	
-	local function prune(p3)
-		-- upvalues: p1 (ref)
-		local var5 = p1()
+	local function prune(List) --[[ Line: 55 ]]
+		-- upvalues: Callback (copy)
+		local CallbackResult = Callback()
 		local t = {}
 		
-		for i, v in p3 do
-			if var5 - v.leftAtClock <= 120 then
-				t[i] = v
+		for i, value in List do
+			if CallbackResult - value.leftAtClock <= 120 then
+				t[i] = value
 			end
 		end
 		return t
 	end
 	
-	local function handlePlayerRemoving(p4)
-		-- upvalues: playersService (copy), var1 (ref), p1 (ref), var2 (ref), prune (ref)
-		local localPlayer = playersService.LocalPlayer
+	local function handlePlayerRemoving(Player: Player) --[[ Line: 67 ]]
+		-- upvalues: Players (upval), Signal (copy), Callback (copy), Signal2 (copy), prune (copy)
+		local LocalPlayer = Players.LocalPlayer
 		
-		if localPlayer and p4.UserId == localPlayer.UserId then
+		if not LocalPlayer or Player.UserId ~= LocalPlayer.UserId then
+			local Copy = table.clone(Signal(false))
+			Copy[tostring(Player.UserId)] = {
+				userId = Player.UserId,
+				username = Player.Name,
+				displayName = Player.DisplayName,
+				leftAtClock = Callback()
+			}
+			Signal2((prune(Copy)))
+			
 			return
 		end
-		local cloned = table.clone(var1(false))
-		cloned[tostring(p4.UserId)] = {
-			userId = p4.UserId,
-			username = p4.Name,
-			displayName = p4.DisplayName,
-			leftAtClock = p1()
-		}
-		var2(prune(cloned))
 	end
 	
-	local function handlePlayerAdded(p4)
-		-- upvalues: var1 (ref), var2 (ref), prune (ref)
-		local var6 = var1(false)
+	local function handlePlayerAdded(Player: Player) --[[ Line: 83 ]]
+		-- upvalues: Signal (copy), Signal2 (copy), prune (copy)
+		local SignalResult = Signal(false)
 		
-		if var6[tostring(p4.UserId)] == nil then
+		if SignalResult[tostring(Player.UserId)] ~= nil then
+			local Copy = table.clone(SignalResult)
+			Copy[tostring(Player.UserId)] = nil
+			Signal2((prune(Copy)))
+			
 			return
 		end
-		local cloned = table.clone(var6)
-		cloned[tostring(p4.UserId)] = nil
-		var2(prune(cloned))
 	end
 	
 	return {
-		init = function()
-			-- upvalues: var4 (write), playersService (copy), handlePlayerRemoving (ref), handlePlayerAdded (ref)
-			if var4 then
+		init = function() --[[ Line: 93 ]]
+			-- upvalues: Flag (ref), Players (upval), handlePlayerRemoving (copy), handlePlayerAdded (copy)
+			if not Flag then
+				Flag = true
+				Players.PlayerRemoving:Connect(handlePlayerRemoving)
+				Players.PlayerAdded:Connect(handlePlayerAdded)
+				
 				return
 			end
-			var4 = true
-			playersService.PlayerRemoving:Connect(handlePlayerRemoving)
-			playersService.PlayerAdded:Connect(handlePlayerAdded)
 		end,
-		getRecentlyLeft = function()
-			-- upvalues: prune (ref), var1 (ref)
-			local t = {}
+		getRecentlyLeft = function() --[[ Line: 102 ]]
+			-- upvalues: prune (copy), Signal (copy)
+			local List = {}
 			
-			for i, v in prune(var1(false)) do
-				table.insert(t, {
-					userId = v.userId,
-					username = v.username,
-					displayName = v.displayName
+			for _, value in prune(Signal(false)) do
+				table.insert(List, {
+					userId = value.userId,
+					username = value.username,
+					displayName = value.displayName
 				})
 			end
-			return t
+			return List
 		end,
-		getRecentlyLeftIds = function()
-			-- upvalues: var3 (ref)
-			return var3
+		getRecentlyLeftIds = function() --[[ Line: 115 ]]
+			-- upvalues: Computed (copy)
+			return Computed
 		end,
 		handlePlayerRemoving = handlePlayerRemoving,
 		handlePlayerAdded = handlePlayerAdded
 	}
 end
 
-local var6 = createRecentlyLeftStore()
+local RecentlyLeftStore = createRecentlyLeftStore()
 
 return {
-	init = var6.init,
-	getRecentlyLeft = var6.getRecentlyLeft,
-	getRecentlyLeftIds = var6.getRecentlyLeftIds,
-	handlePlayerRemoving = var6.handlePlayerRemoving,
-	handlePlayerAdded = var6.handlePlayerAdded,
+	init = RecentlyLeftStore.init,
+	getRecentlyLeft = RecentlyLeftStore.getRecentlyLeft,
+	getRecentlyLeftIds = RecentlyLeftStore.getRecentlyLeftIds,
+	handlePlayerRemoving = RecentlyLeftStore.handlePlayerRemoving,
+	handlePlayerAdded = RecentlyLeftStore.handlePlayerAdded,
 	createRecentlyLeftStore = createRecentlyLeftStore
 }

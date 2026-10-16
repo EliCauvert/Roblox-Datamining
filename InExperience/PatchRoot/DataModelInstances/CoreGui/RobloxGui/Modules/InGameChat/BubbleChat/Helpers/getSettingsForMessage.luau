@@ -1,21 +1,21 @@
-﻿local tModule = require(game:GetService("CorePackages").Packages.t)
-local typesModule = require(script.Parent.Parent.Types)
-local maybeAssertModule = require(script.Parent.maybeAssert)
+﻿local TModule = require(game:GetService("CorePackages").Packages.t)
+local TypesModule = require(script.Parent.Parent.Types)
+local MaybeAssertModule = require(script.Parent.maybeAssert)
 local _ = script.Parent.Parent.Parent.Parent.Flags
 
-return function(value, p1)
-	-- upvalues: maybeAssertModule (ref), typesModule (ref), tModule (ref)
-	maybeAssertModule(typesModule.IChatSettings(value))
-	maybeAssertModule(tModule.optional(typesModule.IMessage)(p1))
-	local userSpecificSettings = value.UserSpecificSettings
+return function(p1, p2) --[[ Line: 12 | Named "getSettingsForMessage" ]]
+	-- upvalues: MaybeAssertModule (copy), TypesModule (copy), TModule (copy)
+	MaybeAssertModule(TypesModule.IChatSettings(p1))
+	MaybeAssertModule(TModule.optional(TypesModule.IMessage)(p2))
+	local UserSpecificSettings = p1.UserSpecificSettings
 	
-	if not userSpecificSettings or not p1 then
-		return value
+	if not UserSpecificSettings or not p2 then
+		return p1
 	end
-	local userId = userSpecificSettings[p1.userId]
+	local UserSpecificSetting = UserSpecificSettings[p2.userId]
 	
-	if not userId and p1.adornee then
-		userId = userSpecificSettings[p1.adornee:GetFullName()]
+	if not UserSpecificSetting and p2.adornee then
+		UserSpecificSetting = UserSpecificSettings[p2.adornee:GetFullName()]
 	end
-	return userId or value
+	return UserSpecificSetting or p1
 end

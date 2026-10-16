@@ -1,18 +1,18 @@
-﻿local roactModule = require(game:GetService("CorePackages").Packages.Roact)
-local dataConsumerModule = require(script.Parent.Parent.DataConsumer)
-local logOutputModule = require(script.Parent.LogOutput)
-local clientLog = roactModule.Component:extend("ClientLog")
+﻿local RoactModule = require(game:GetService("CorePackages").Packages.Roact)
+local DataConsumerModule = require(script.Parent.Parent.DataConsumer)
+local LogOutputModule = require(script.Parent.LogOutput)
+local ClientLog = RoactModule.Component:extend("ClientLog")
 
-function clientLog.init(p1)
-	function p0.initClientLogData()
-		-- upvalues: p1 (ref)
+function ClientLog.init(p1) --[[ Line: 9 ]]
+	function p1.initClientLogData() --[[ Line: 10 ]]
+		-- upvalues: p1 (copy)
 		return p1.props.ClientLogData:getLogData()
 	end
 end
 
-function clientLog.render(p1)
-	-- upvalues: roactModule (ref), logOutputModule (ref)
-	return roactModule.createElement(logOutputModule, {
+function ClientLog.render(p1) --[[ Line: 14 ]]
+	-- upvalues: RoactModule (copy), LogOutputModule (copy)
+	return RoactModule.createElement(LogOutputModule, {
 		layoutOrder = p1.props.layoutOrder,
 		size = p1.props.size,
 		initLogOutput = p1.initClientLogData,
@@ -20,4 +20,4 @@ function clientLog.render(p1)
 	})
 end
 
-return dataConsumerModule(clientLog, "ClientLogData")
+return DataConsumerModule(ClientLog, "ClientLogData")

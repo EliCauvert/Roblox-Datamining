@@ -1,76 +1,77 @@
-﻿local dsaIllegalContentReporting = script:FindFirstAncestor("DsaIllegalContentReporting")
-local httpService = game:GetService("HttpService")
-local guiService = game:GetService("GuiService")
-local constantsModule = require(dsaIllegalContentReporting.Utility.Constants)
-local parent = dsaIllegalContentReporting.Parent
-local UIBloxModule = require(parent.UIBlox)
-local reactModule = require(parent.React)
-local styleProviderWithDefaultTheme = require(parent.Style).StyleProviderWithDefaultTheme
-local styledTextLabel = UIBloxModule.App.Text.StyledTextLabel
-local responsiveModule = require(parent.Responsive)
-local usePreferredInput = responsiveModule.usePreferredInput
-local isInExperienceUIVREnabled = require(parent.SharedExperimentDefinition).isInExperienceUIVREnabled
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local linkButton = UIBloxModule.App.Button.LinkButton
-local useStyle = UIBloxModule.Core.Style.useStyle
-local _ = { OPEN_CUSTOM_WEBVIEW = 20 }
+﻿local DsaIllegalContentReporting = script:FindFirstAncestor("DsaIllegalContentReporting")
+local HttpService = game:GetService("HttpService")
+local GuiService = game:GetService("GuiService")
+local ConstantsModule = require(DsaIllegalContentReporting.Utility.Constants)
+local Parent = DsaIllegalContentReporting.Parent
+local UIBloxModule = require(Parent.UIBlox)
+local ReactModule = require(Parent.React)
+local StyleProviderWithDefaultTheme = require(Parent.Style).StyleProviderWithDefaultTheme
+local StyledTextLabel = UIBloxModule.App.Text.StyledTextLabel
+local ResponsiveModule = require(Parent.Responsive)
+local UsePreferredInputFunction = ResponsiveModule.usePreferredInput
+local IsInExperienceUIVREnabled = require(Parent.SharedExperimentDefinition).isInExperienceUIVREnabled
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local LinkButton = UIBloxModule.App.Button.LinkButton
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 
-function DSAReportLink()
-	-- upvalues: useStyle (ref), usePreferredInput (ref), responsiveModule (ref), isInExperienceUIVREnabled (ref), useLocalization (ref), reactModule (ref), styledTextLabel (ref), linkButton (ref), httpService (ref), constantsModule (ref), guiService (ref)
-	local var1 = useStyle()
-	local var2 = usePreferredInput() == responsiveModule.Input.Directional
-	local var3 = useLocalization({
+function DSAReportLink() --[[ Line: 26 ]]
+	-- upvalues: UseStyleFunction (copy), UsePreferredInputFunction (copy), ResponsiveModule (copy), IsInExperienceUIVREnabled (copy), UseLocalizationFunction (copy), ReactModule (copy), StyledTextLabel (copy), LinkButton (copy), HttpService (copy), ConstantsModule (copy), GuiService (copy)
+	local UseStyleResult = UseStyleFunction()
+	local IsUsePreferredInputResultMatch = UsePreferredInputFunction() == ResponsiveModule.Input.Directional
+	local UseIsSpatialResult = if IsInExperienceUIVREnabled then ResponsiveModule.useIsSpatial() else false
+	local IsUsePreferredInputResultMatch1 = IsUsePreferredInputResultMatch or (if IsInExperienceUIVREnabled then UseIsSpatialResult else false)
+	local UseLocalizationResult = UseLocalizationFunction({
 		reportLinkText = "Feature.ReportAbuse.DSAIllegal.ReportLink",
 		readonlyLinkText = "Feature.DynamicUI.Translation.Reporting.IllegalContentEUBody"
 	})
 	
-	return reactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, {
-		Layout = reactModule.createElement("UIListLayout", {
+	return ReactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, {
+		Layout = ReactModule.createElement("UIListLayout", {
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
 			SortOrder = Enum.SortOrder.LayoutOrder
 		}),
-		Padding = reactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, 16) }),
-		Divider = reactModule.createElement("Frame", {
+		Padding = ReactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, 16) }),
+		Divider = ReactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			LayoutOrder = 0,
-			BackgroundColor3 = var1.Theme.Divider.Color,
-			BackgroundTransparency = var1.Theme.Divider.Transparency,
+			BackgroundColor3 = UseStyleResult.Theme.Divider.Color,
+			BackgroundTransparency = UseStyleResult.Theme.Divider.Transparency,
 			Size = UDim2.new(1, 0, 0, 1),
 			Position = UDim2.new(0, 0, 1, 0),
 			AnchorPoint = Vector2.new(0, 1)
 		}),
-		Link = if var2 or (if isInExperienceUIVREnabled then if isInExperienceUIVREnabled then responsiveModule.useIsSpatial() else false else false) then reactModule.createElement(styledTextLabel, {
+		Link = if IsUsePreferredInputResultMatch1 then ReactModule.createElement(StyledTextLabel, {
 			layoutOrder = 2,
 			lineHeight = 1,
 			fluidSizing = true,
 			richText = false,
 			size = UDim2.new(0, 500, 0, 60),
-			text = var3.readonlyLinkText,
+			text = UseLocalizationResult.readonlyLinkText,
 			textXAlignment = Enum.TextXAlignment.Center,
 			textYAlignment = Enum.TextYAlignment.Center,
-			fontStyle = var1.Font.Body,
-			colorStyle = var1.Theme.TextEmphasis
-		}) else reactModule.createElement(linkButton, {
+			fontStyle = UseStyleResult.Font.Body,
+			colorStyle = UseStyleResult.Theme.TextEmphasis
+		}) else ReactModule.createElement(LinkButton, {
 			layoutOrder = 2,
-			fontStyle = if var2 then "CaptionBody" else "Footer",
+			fontStyle = if IsUsePreferredInputResultMatch then "CaptionBody" else "Footer",
 			size = UDim2.new(0, 100, 0, 20),
-			text = var3.reportLinkText,
-			onActivated = function()
-				-- upvalues: httpService (copy), constantsModule (copy), guiService (copy)
-				guiService:BroadcastNotification(httpService:JSONEncode({
+			text = UseLocalizationResult.reportLinkText,
+			onActivated = function() --[[ Line: 59 ]]
+				-- upvalues: HttpService (upval), ConstantsModule (upval), GuiService (upval)
+				GuiService:BroadcastNotification(HttpService:JSONEncode({
 					presentationStyle = nil,
 					visible = true,
-					title = constantsModule.HELP_PAGE_TITLE,
-					url = constantsModule.DSA_REPORT_LINK
+					title = ConstantsModule.HELP_PAGE_TITLE,
+					url = ConstantsModule.DSA_REPORT_LINK
 				}), 20)
 			end
 		})
 	})
 end
 
-function WrapperContainer()
-	-- upvalues: reactModule (ref), styleProviderWithDefaultTheme (ref)
-	return reactModule.createElement(styleProviderWithDefaultTheme, { withDarkTheme = true }, { Button = reactModule.createElement(DSAReportLink) })
+function WrapperContainer() --[[ Line: 95 ]]
+	-- upvalues: ReactModule (copy), StyleProviderWithDefaultTheme (copy)
+	return ReactModule.createElement(StyleProviderWithDefaultTheme, { withDarkTheme = true }, { Button = ReactModule.createElement(DSAReportLink) })
 end
 
 return WrapperContainer

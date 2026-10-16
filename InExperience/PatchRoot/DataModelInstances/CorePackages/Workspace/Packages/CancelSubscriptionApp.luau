@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.CancelSubscriptionApp.CancelSubscriptionApp)
+﻿return (require(script.Parent._Workspace.CancelSubscriptionApp.CancelSubscriptionApp))

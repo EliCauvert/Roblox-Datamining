@@ -1,11 +1,11 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local dataHydrationModule = require(appChat.Parent.DataHydration)
-local shareLinkClassificationModule = require(appChat.Components.ChatConversation.Utils.RobloxUrlUtils.ShareLinkClassification)
-local shareLinkV2PresentationModule = require(script.Parent.ShareLinkV2Presentation)
-local fFlagAppChatMomentShareCardModule = require(appChat.Flags.FFlagAppChatMomentShareCard)
-local dataStatus = dataHydrationModule.DataStatus
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local ShareLinkClassificationModule = require(AppChat.Components.ChatConversation.Utils.RobloxUrlUtils.ShareLinkClassification)
+local ShareLinkV2PresentationModule = require(script.Parent.ShareLinkV2Presentation)
+local IsAssetCardClassificationModule = require(script.Parent.isAssetCardClassification)
+local FFlagAppChatMomentShareCardModule = require(AppChat.Flags.FFlagAppChatMomentShareCard)
+local DataStatus = require(AppChat.Parent.DataHydration).DataStatus
 
-return function(p1, p2)
-	-- upvalues: dataStatus (ref), shareLinkV2PresentationModule (ref), fFlagAppChatMomentShareCardModule (ref), shareLinkClassificationModule (ref)
-	return if p1 == nil then if p2 == dataStatus.NotReady then shareLinkV2PresentationModule.Loading else shareLinkV2PresentationModule.Fallback elseif fFlagAppChatMomentShareCardModule and p1.type == shareLinkClassificationModule.Moment then shareLinkV2PresentationModule.Card else shareLinkV2PresentationModule.Fallback
+return function(p1, NotReady) --[[ Line: 19 | Named "getShareLinkV2Presentation" ]]
+	-- upvalues: DataStatus (copy), ShareLinkV2PresentationModule (copy), FFlagAppChatMomentShareCardModule (copy), ShareLinkClassificationModule (copy), IsAssetCardClassificationModule (copy)
+	return if p1 == nil then if NotReady == DataStatus.NotReady then ShareLinkV2PresentationModule.Loading else ShareLinkV2PresentationModule.Fallback elseif FFlagAppChatMomentShareCardModule and p1.type == ShareLinkClassificationModule.Moment then ShareLinkV2PresentationModule.Card elseif IsAssetCardClassificationModule(p1) then ShareLinkV2PresentationModule.Card else ShareLinkV2PresentationModule.Fallback
 end

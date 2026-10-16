@@ -1,18 +1,18 @@
-﻿local peopleReactView = script:FindFirstAncestor("PeopleReactView")
-local parent = peopleReactView.Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local useGetPeopleServiceModule = require(peopleReactView.Hooks.useGetPeopleService)
+﻿local PeopleReactView = script:FindFirstAncestor("PeopleReactView")
+local Parent = PeopleReactView.Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local UseGetPeopleServiceModule = require(PeopleReactView.Hooks.useGetPeopleService)
 
-return function(p1, p2)
-	-- upvalues: useGetPeopleServiceModule (ref), reactModule (ref), signalsReactModule (ref)
-	local var1 = useGetPeopleServiceModule("PeopleListStore")
+return function(p1, p2) --[[ Line: 9 | Named "useInExperienceCombinedName" ]]
+	-- upvalues: UseGetPeopleServiceModule (copy), ReactModule (copy), SignalsReactModule (copy)
+	local PeopleListStore = UseGetPeopleServiceModule("PeopleListStore")
 	
-	return signalsReactModule.useSignalBinding(reactModule.useMemo(function()
-		-- upvalues: var1 (ref), p1 (ref)
-		return var1.getProfile(p1)
-	end, { p1 })):map(function(p3)
-		-- upvalues: p2 (ref)
-		return if p3 and string.len(p3) > 0 then p3 else p2
+	return SignalsReactModule.useSignalBinding((ReactModule.useMemo(function() --[[ Line: 12 ]]
+		-- upvalues: PeopleListStore (copy), p1 (copy)
+		return PeopleListStore.getProfile(p1)
+	end, { p1 }))):map(function(Text: string) --[[ Line: 18 ]]
+		-- upvalues: p2 (copy)
+		return if Text and string.len(Text) > 0 then Text else p2
 	end)
 end

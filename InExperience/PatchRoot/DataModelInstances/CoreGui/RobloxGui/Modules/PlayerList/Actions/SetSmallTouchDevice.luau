@@ -1,3 +1,3 @@
-﻿return require(script.Parent.Parent.ActionCreator)("SetSmallTouchDevice", function(p1)
-	return { isSmallTouchDevice = p1 }
+﻿return require(script.Parent.Parent.ActionCreator)("SetSmallTouchDevice", function(IsSmallTouchDevice) --[[ Line: 5 ]]
+	return { isSmallTouchDevice = IsSmallTouchDevice }
 end)

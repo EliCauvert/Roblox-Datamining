@@ -1,9 +1,9 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local tModule = require(dataHydration.Parent.t)
-local _ = require(dataHydration.DataHydrationTypes)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local TModule = require(DataHydration.Parent.t)
+local _ = require(DataHydration.DataHydrationTypes)
 
 return {
-	gameMediaResponseValidator = tModule.interface({
-		data = tModule.array(require(dataHydration.MediaAsset.MediaAssetStoreTypes).mediaAssetResponseItemValidator)
+	gameMediaResponseValidator = TModule.interface({
+		data = TModule.array(require(DataHydration.MediaAsset.MediaAssetStoreTypes).mediaAssetResponseItemValidator)
 	})
 }

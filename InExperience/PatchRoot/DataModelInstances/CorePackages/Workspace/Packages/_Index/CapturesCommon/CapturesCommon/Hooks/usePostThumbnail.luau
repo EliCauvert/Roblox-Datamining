@@ -1,72 +1,70 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local capturesCommonNetworking = require(parent.Networking).CapturesCommonNetworking
-local reactModule = require(parent_1.React)
-local roactUtilsModule = require(parent_1.RoactUtils)
-local assetTypeModule = require(parent.Enums.AssetType)
-local thumbnailStateModule = require(parent.Enums.ThumbnailState)
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local useEffect = reactModule.useEffect
-local useState = reactModule.useState
-local contentPostsThumbnailsInitialDelayTimeMs = game:DefineFastInt("ContentPostsThumbnailsInitialDelayTimeMs", 100)
-local contentPostsThumbnailsMaxRetries = game:DefineFastInt("ContentPostsThumbnailsMaxRetries", 10)
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local CapturesCommonNetworking = require(Parent.Networking).CapturesCommonNetworking
+local ReactModule = require(Parent1.React)
+local AssetTypeModule = require(Parent.Enums.AssetType)
+local ThumbnailStateModule = require(Parent.Enums.ThumbnailState)
+local UseDispatchFunction = require(Parent1.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseEffectFunction = ReactModule.useEffect
+local UseStateFunction = ReactModule.useState
+local ContentPostsThumbnailsInitialDelayTimeMs = game:DefineFastInt("ContentPostsThumbnailsInitialDelayTimeMs", 100)
+local ContentPostsThumbnailsMaxRetries = game:DefineFastInt("ContentPostsThumbnailsMaxRetries", 10)
 
-local function makeThumbnailRequest(p1, p2, p3)
-	-- upvalues: capturesCommonNetworking (ref), assetTypeModule (ref), thumbnailStateModule (ref)
-	return p1(capturesCommonNetworking.GetThumbnailByAssetId.API({
-		assetId = p2,
-		assetType = assetTypeModule.Screenshot,
-		size = p3
-	})):andThen(function(p4)
-		-- upvalues: thumbnailStateModule (copy)
-		local var1 = p4.responseBody.data[1]
+local function makeThumbnailRequest(Callback, AssetId, Size) --[[ Line: 20 ]]
+	-- upvalues: CapturesCommonNetworking (copy), AssetTypeModule (copy), ThumbnailStateModule (copy)
+	return Callback(CapturesCommonNetworking.GetThumbnailByAssetId.API({
+		assetId = AssetId,
+		assetType = AssetTypeModule.Screenshot,
+		size = Size
+	})):andThen(function(Result) --[[ Line: 26 ]]
+		-- upvalues: ThumbnailStateModule (upval)
+		local Entry = Result.responseBody.data[1]
 		
-		return if var1.imageUrl and var1.imageUrl ~= "" and var1.state == thumbnailStateModule.Completed then var1.imageUrl else nil
-	end):catch(function(_)
+		return if Entry.imageUrl and Entry.imageUrl ~= "" and Entry.state == ThumbnailStateModule.Completed then Entry.imageUrl else nil
+	end):catch(function(_) --[[ Line: 38 ]]
 		return nil
 	end):await()
 end
 
-return function(p1, p2, p3)
-	-- upvalues: useDispatch (ref), useState (ref), useEffect (ref), contentPostsThumbnailsInitialDelayTimeMs (ref), contentPostsThumbnailsMaxRetries (ref), makeThumbnailRequest (ref)
-	local var1 = useDispatch()
-	local var2, var3 = useState("")
-	local var4, var5 = useState(false)
-	local text = tostring(p2) .. "x" .. tostring(p3)
-	useEffect(function()
-		-- upvalues: contentPostsThumbnailsInitialDelayTimeMs (copy), contentPostsThumbnailsMaxRetries (copy), var5 (ref), var3 (ref), p1 (ref), makeThumbnailRequest (copy), var1 (ref), text (ref)
-		local var6 = false
-		local var7 = contentPostsThumbnailsInitialDelayTimeMs
-		local var8 = contentPostsThumbnailsMaxRetries
-		var5(false)
-		var3("")
+return function(AssetId, p1, p2) --[[ Line: 44 ]]
+	-- upvalues: UseDispatchFunction (copy), UseStateFunction (copy), UseEffectFunction (copy), ContentPostsThumbnailsInitialDelayTimeMs (copy), ContentPostsThumbnailsMaxRetries (copy), makeThumbnailRequest (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseStateResult, UseStateResult2 = UseStateFunction("")
+	local UseStateResult1, UseStateResult2_1 = UseStateFunction(false)
+	local Text = tostring(p1) .. "x" .. tostring(p2)
+	UseEffectFunction(function() --[[ Line: 52 ]]
+		-- upvalues: ContentPostsThumbnailsInitialDelayTimeMs (upval), ContentPostsThumbnailsMaxRetries (upval), UseStateResult2_1 (copy), UseStateResult2 (copy), AssetId (copy), makeThumbnailRequest (upval), UseDispatchResult (copy), Text (copy)
+		local Flag = false
+		local ContentPostsThumbnailsInitialDelayTimeMs1 = ContentPostsThumbnailsInitialDelayTimeMs
+		local Count = ContentPostsThumbnailsMaxRetries
+		UseStateResult2_1(false)
+		UseStateResult2("")
 		
-		if p1 then
-			task.spawn(function()
-				-- upvalues: var6 (write), var8 (write), makeThumbnailRequest (copy), var1 (copy), p1 (copy), text (copy), var3 (copy), var5 (copy), var7 (write)
-				while not var6 and var8 > 0 do
-					local var9, var10 = makeThumbnailRequest(var1, p1, text)
-					
-					if var6 then break end
-					if not var9 or not var10 then
-						task.wait(var7 / 1000)
-						var7 *= 2
-						var8 -= 1
-						continue
-					end
-					var3(var10)
-					var5(true)
-					
-					return
+		if not AssetId then return end
+		task.spawn(function() --[[ Line: 64 ]]
+			-- upvalues: Flag (ref), Count (ref), makeThumbnailRequest (upval), UseDispatchResult (upval), AssetId (upval), Text (upval), UseStateResult2 (upval), UseStateResult2_1 (upval), ContentPostsThumbnailsInitialDelayTimeMs1 (ref)
+			local ThumbnailRequest2 = nil
+			while not Flag and Count > 0 do
+				local ThumbnailRequest
+				ThumbnailRequest, ThumbnailRequest2 = makeThumbnailRequest(UseDispatchResult, AssetId, Text)
+				
+				if Flag then break end
+				if ThumbnailRequest and ThumbnailRequest2 then
+					UseStateResult2(ThumbnailRequest2)
+					UseStateResult2_1(true)
+					break
 				end
-			end)
-			
-			return function()
-				-- upvalues: var6 (write)
-				var6 = true
+				task.wait(ContentPostsThumbnailsInitialDelayTimeMs1 / 1000)
+				ContentPostsThumbnailsInitialDelayTimeMs1 *= 2
+				Count -= 1
 			end
+		end)
+		
+		return function() --[[ Line: 84 ]]
+			-- upvalues: Flag (ref)
+			Flag = true
 		end
-	end, { p1, text })
+	end, { AssetId, Text })
 	
-	return var2, var4
+	return UseStateResult, UseStateResult1
 end

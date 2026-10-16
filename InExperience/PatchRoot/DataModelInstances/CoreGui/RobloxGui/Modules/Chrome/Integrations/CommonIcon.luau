@@ -1,69 +1,73 @@
-﻿local chrome = script:FindFirstAncestor("Chrome")
-local corePackagesService = game:GetService("CorePackages")
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local reactModule = require(corePackagesService.Packages.React)
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local useStyle = UIBloxModule.Core.Style.useStyle
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local images = UIBloxModule.App.ImageSet.Images
-local constantsModule = require(chrome.ChromeShared.Unibar.Constants)
-local _ = require(chrome.ChromeShared.Service.ChromeUtils)
-local subMenuContextModule = require(chrome.ChromeShared.Unibar.SubMenuContext)
-local iconVariant = foundationModule.Enums.IconVariant
-local iconSize = foundationModule.Enums.IconSize
-local iconName = foundationModule.Enums.IconName
-local fFlagTokenizeUnibarConstantsWithStyleProvider = require(chrome.ChromeShared.Flags).FFlagTokenizeUnibarConstantsWithStyleProvider
-local chromeModule = require(corePackagesService.Workspace.Packages.Chrome)
-local useMappedSignal = chromeModule.Hooks.useMappedSignal
-local unibarStyle = chromeModule.UnibarStyle
+﻿local Chrome = script:FindFirstAncestor("Chrome")
+local CorePackages = game:GetService("CorePackages")
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local ReactModule = require(CorePackages.Packages.React)
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local Images = UIBloxModule.App.ImageSet.Images
+local ConstantsModule = require(Chrome.ChromeShared.Unibar.Constants)
+local _ = require(Chrome.ChromeShared.Service.ChromeUtils)
+local SubMenuContextModule = require(Chrome.ChromeShared.Unibar.SubMenuContext)
+local IconVariant = FoundationModule.Enums.IconVariant
+local IconSize = FoundationModule.Enums.IconSize
+local IconName = FoundationModule.Enums.IconName
+local FFlagTokenizeUnibarConstantsWithStyleProvider = require(Chrome.ChromeShared.Flags).FFlagTokenizeUnibarConstantsWithStyleProvider
+local ChromeModule = require(CorePackages.Workspace.Packages.Chrome)
+local UseMappedSignalFunction = ChromeModule.Hooks.useMappedSignal
+local UnibarStyle = ChromeModule.UnibarStyle
 
-local function _(p1)
-	-- upvalues: iconName (ref)
-	return iconName[p1] ~= nil
+local function _(p1): boolean --[[ Line: 27 | Named "isFoundationIconName" ]]
+	-- upvalues: IconName (copy)
+	return IconName[p1] ~= nil
 end
 
-function CommonIconComponent(p1)
-	-- upvalues: fFlagTokenizeUnibarConstantsWithStyleProvider (ref), unibarStyle (ref), constantsModule (ref), useMappedSignal (ref), useStyle (ref), reactModule (ref), subMenuContextModule (ref), iconName (ref), foundationModule (ref), iconSize (ref), iconVariant (ref), images (ref), imageSetLabel (ref)
-	local _ = nil
-	local var1 = if fFlagTokenizeUnibarConstantsWithStyleProvider then unibarStyle.use().ICON_SIZE else constantsModule.ICON_SIZE
-	local activeSignalValue = p1.activeSignalValue and useMappedSignal(p1.activeSignalValue) or false
-	local var2 = if activeSignalValue and p1.iconOn then p1.iconOn else p1.icon
-	local var3 = useStyle()
-	local var4 = reactModule.useContext(subMenuContextModule)
-	local color = var3.Theme.IconEmphasis.Color
-	local transparency = var3.Theme.IconEmphasis.Transparency
+function CommonIconComponent(p1) --[[ Line: 33 ]]
+	-- upvalues: FFlagTokenizeUnibarConstantsWithStyleProvider (copy), UnibarStyle (copy), ConstantsModule (copy), UseMappedSignalFunction (copy), UseStyleFunction (copy), ReactModule (copy), SubMenuContextModule (copy), IconName (copy), FoundationModule (copy), IconSize (copy), IconVariant (copy), Images (copy), ImageSetLabel (copy)
+	local ICONSIZE = if FFlagTokenizeUnibarConstantsWithStyleProvider then UnibarStyle.use().ICON_SIZE else ConstantsModule.ICON_SIZE
+	local UseMappedSignalResult = p1.activeSignalValue and UseMappedSignalFunction(p1.activeSignalValue) or false
+	local IconOn = if UseMappedSignalResult and p1.iconOn then p1.iconOn else p1.icon
+	local UseStyleResult = UseStyleFunction()
+	local UseContextResult = ReactModule.useContext(SubMenuContextModule)
+	local Color = UseStyleResult.Theme.IconEmphasis.Color
+	local Transparency = UseStyleResult.Theme.IconEmphasis.Transparency
 	
-	if iconName[p1.icon] ~= nil then
-		return reactModule.createElement(foundationModule.Icon, {
-			name = iconName[p1.icon],
-			size = iconSize.Large,
-			style = if var4 then var4:map(function(p2)
-				-- upvalues: color (ref), transparency (ref)
+	if IconName[p1.icon] ~= nil then
+		return ReactModule.createElement(FoundationModule.Icon, {
+			name = IconName[p1.icon],
+			size = IconSize.Large,
+			style = if UseContextResult then UseContextResult:map(function(p2: number) --[[ Line: 56 ]]
+				-- upvalues: Color (copy), Transparency (copy)
 				return {
-					Color3 = color,
-					Transparency = transparency + (1 - transparency) * (1 - p2)
+					Color3 = Color,
+					Transparency = Transparency + (1 - Transparency) * (1 - p2)
 				}
-			end) else { Color3 = color, Transparency = transparency },
-			variant = if activeSignalValue then iconVariant.Filled else iconVariant.Regular
+			end) else { Color3 = Color, Transparency = Transparency },
+			variant = if UseMappedSignalResult then IconVariant.Filled else IconVariant.Regular
 		})
-	elseif typeof(var2) == "string" and var2:sub(1, 11) ~= "rbxasset://" then
-		var2 = images[var2]
 	end
-	return reactModule.createElement(imageSetLabel, {
+	if typeof(IconOn) == "string" and IconOn:sub(1, 11) ~= "rbxasset://" then
+		IconOn = Images[IconOn]
+	end
+	return ReactModule.createElement(ImageSetLabel, {
 		BackgroundTransparency = 1,
-		Image = var2,
-		Size = UDim2.new(0, var1, 0, var1),
-		ImageColor3 = color,
-		ImageTransparency = if var4 then var4:map(function(p2)
-			-- upvalues: transparency (ref)
-			return transparency + (1 - transparency) * (1 - p2)
-		end) else transparency
+		Image = IconOn,
+		Size = UDim2.new(0, ICONSIZE, 0, ICONSIZE),
+		ImageColor3 = Color,
+		ImageTransparency = if UseContextResult then UseContextResult:map(function(p2: number): number --[[ Line: 87 ]]
+			-- upvalues: Transparency (copy)
+			return Transparency + (1 - Transparency) * (1 - p2)
+		end) else Transparency
 	})
 end
 
-function CommonIcon(p1, p2, p3)
-	-- upvalues: reactModule (ref)
-	return reactModule.createElement(CommonIconComponent, { icon = p1, iconOn = p2, activeSignalValue = p3 })
+function CommonIcon(Icon, IconOn, ActiveSignalValue) --[[ Line: 94 ]]
+	-- upvalues: ReactModule (copy)
+	return ReactModule.createElement(CommonIconComponent, {
+		icon = Icon,
+		iconOn = IconOn,
+		activeSignalValue = ActiveSignalValue
+	})
 end
 
 return CommonIcon

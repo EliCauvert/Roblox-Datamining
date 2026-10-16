@@ -1,5 +1,5 @@
-﻿local function _(p1, p2)
-	return "(" .. p1 .. (if type(p1) == "string" then p1 else table.concat(p1, "|")) .. ")"
+﻿local function _(List, Text): string --[[ Line: 29 | Named "group" ]]
+	return "(" .. Text .. (if type(List) == "string" then List else table.concat(List, "|")) .. ")"
 end
 
 return {
@@ -14,43 +14,43 @@ return {
 	NON_WHITESPACE = "\\S",
 	WHITESPACE = "\\s",
 	ALPHANUMERIC = "\\w",
-	oneOf = function(p1)
-		return "(" .. "?:" .. (if type(p1) == "string" then p1 else table.concat(p1, "|")) .. ")"
+	oneOf = function(List): string --[[ Line: 33 ]]
+		return "(" .. "?:" .. (if type(List) == "string" then List else table.concat(List, "|")) .. ")"
 	end,
-	capture = function(p1)
-		return "(" .. "" .. (if type(p1) == "string" then p1 else table.concat(p1, "|")) .. ")"
+	capture = function(List): string --[[ Line: 37 ]]
+		return "(" .. "" .. (if type(List) == "string" then List else table.concat(List, "|")) .. ")"
 	end,
-	zeroOrOneOf = function(p1)
-		return ("(" .. "?:" .. (if type(p1) == "string" then p1 else table.concat(p1, "|")) .. ")") .. "?"
+	zeroOrOneOf = function(List): string --[[ Line: 41 ]]
+		return ("(" .. "?:" .. (if type(List) == "string" then List else table.concat(List, "|")) .. ")") .. "?"
 	end,
-	zeroOrMore = function(p1)
-		return ("(" .. "?:" .. (if type(p1) == "string" then p1 else table.concat(p1, "|")) .. ")") .. "*"
+	zeroOrMore = function(List): string --[[ Line: 65 ]]
+		return ("(" .. "?:" .. (if type(List) == "string" then List else table.concat(List, "|")) .. ")") .. "*"
 	end,
-	oneOrMore = function(p1)
-		return ("(" .. "?:" .. (if type(p1) == "string" then p1 else table.concat(p1, "|")) .. ")") .. "+"
+	oneOrMore = function(List): string --[[ Line: 61 ]]
+		return ("(" .. "?:" .. (if type(List) == "string" then List else table.concat(List, "|")) .. ")") .. "+"
 	end,
-	lookahead = function(p1)
-		return "(" .. "?=" .. (if type(p1) == "string" then p1 else table.concat(p1, "|")) .. ")"
+	lookahead = function(List): string --[[ Line: 45 ]]
+		return "(" .. "?=" .. (if type(List) == "string" then List else table.concat(List, "|")) .. ")"
 	end,
-	lookbehind = function(p1)
-		return "(" .. "?<=" .. (if type(p1) == "string" then p1 else table.concat(p1, "|")) .. ")"
+	lookbehind = function(List): string --[[ Line: 53 ]]
+		return "(" .. "?<=" .. (if type(List) == "string" then List else table.concat(List, "|")) .. ")"
 	end,
-	negativeLookahead = function(p1)
-		return "(" .. "?!" .. (if type(p1) == "string" then p1 else table.concat(p1, "|")) .. ")"
+	negativeLookahead = function(List): string --[[ Line: 49 ]]
+		return "(" .. "?!" .. (if type(List) == "string" then List else table.concat(List, "|")) .. ")"
 	end,
-	negativeLookbehind = function(p1)
-		return "(" .. "?<!" .. (if type(p1) == "string" then p1 else table.concat(p1, "|")) .. ")"
+	negativeLookbehind = function(List): string --[[ Line: 57 ]]
+		return "(" .. "?<!" .. (if type(List) == "string" then List else table.concat(List, "|")) .. ")"
 	end,
-	matchWhole = function(p1)
-		return "^" .. p11 .. "$"
+	matchWhole = function(Text): string --[[ Line: 69 ]]
+		return "^" .. Text .. "$"
 	end,
-	regexOr = function(p1, p2)
-		return p1 .. "|" .. p13
+	regexOr = function(Text, Text1): string --[[ Line: 73 ]]
+		return Text .. "|" .. Text1
 	end,
-	set = function(value)
-		return "[" .. value .. "]"
+	set = function(Text): string --[[ Line: 77 ]]
+		return "[" .. Text .. "]"
 	end,
-	notSet = function(value)
-		return "[" .. "^" .. value .. "]"
+	notSet = function(Text): string --[[ Line: 81 ]]
+		return "[" .. "^" .. Text .. "]"
 	end
 }

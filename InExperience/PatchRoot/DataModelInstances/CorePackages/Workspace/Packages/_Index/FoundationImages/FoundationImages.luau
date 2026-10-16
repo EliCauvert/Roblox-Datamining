@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CorePackages").Packages.FoundationImages)
+﻿return (require(game:GetService("CorePackages").Packages.FoundationImages))

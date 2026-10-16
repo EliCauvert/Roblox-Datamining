@@ -1,1 +1,1 @@
-﻿return require(script.ChatTextArea)
+﻿return (require(script.ChatTextArea))

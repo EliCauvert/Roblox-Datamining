@@ -1,122 +1,122 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local roactModule = require(corePackagesService.Packages.Roact)
-local tModule = require(corePackagesService.Packages.t)
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local withStyle = UIBloxModule.Core.Style.withStyle
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
-local menuCell = roactModule.PureComponent:extend("MenuCell")
-menuCell.validateProps = tModule.strictInterface({
-	layoutOrder = tModule.integer,
-	icon = tModule.optional(tModule.union(tModule.table, tModule.string)),
-	iconComponent = tModule.optional(tModule.table),
-	localizationKey = tModule.string,
-	height = tModule.numberPositive,
-	hasDivider = tModule.boolean,
-	isSelected = tModule.boolean
+﻿local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local TModule = require(CorePackages.Packages.t)
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local WithStyleFunction = UIBloxModule.Core.Style.withStyle
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
+local MenuCell = RoactModule.PureComponent:extend("MenuCell")
+MenuCell.validateProps = TModule.strictInterface({
+	layoutOrder = TModule.integer,
+	icon = TModule.optional(TModule.union(TModule.table, TModule.string)),
+	iconComponent = TModule.optional(TModule.table),
+	localizationKey = TModule.string,
+	height = TModule.numberPositive,
+	hasDivider = TModule.boolean,
+	isSelected = TModule.boolean
 })
 
-function menuCell.render(p1)
-	-- upvalues: withStyle (ref), robloxTranslatorModule (ref), roactModule (ref), imageSetLabel (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
-	return withStyle(function(p2)
-		-- upvalues: robloxTranslatorModule (copy), p1 (ref), roactModule (copy), imageSetLabel (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy)
-		local theme = p2.Theme
-		local font = p2.Font
+function MenuCell.render(p1) --[[ Line: 36 ]]
+	-- upvalues: WithStyleFunction (copy), RobloxTranslatorModule (copy), RoactModule (copy), ImageSetLabel (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	return WithStyleFunction(function(p2) --[[ Line: 37 ]]
+		-- upvalues: RobloxTranslatorModule (upval), p1 (copy), RoactModule (upval), ImageSetLabel (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
+		local Theme = p2.Theme
+		local _Font = p2.Font
 		
-		return roactModule.createElement("Frame", {
+		return RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = p1.props.layoutOrder,
 			Size = UDim2.new(1, 0, 0, p1.props.height)
 		}, {
-			SelectedFrame = p1.props.isSelected and roactModule.createElement("Frame", {
+			SelectedFrame = p1.props.isSelected and RoactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, 4, 1, 4),
 				Position = UDim2.fromScale(0.5, 0.5),
 				AnchorPoint = Vector2.new(0.5, 0.5)
 			}, {
-				TopBorder = roactModule.createElement("Frame", {
+				TopBorder = RoactModule.createElement("Frame", {
 					BorderSizePixel = 0,
 					Size = UDim2.new(1, 0, 0, 2),
-					BackgroundTransparency = theme.SystemPrimaryOnHover.Transparency,
-					BackgroundColor3 = theme.SystemPrimaryOnHover.Color
+					BackgroundTransparency = Theme.SystemPrimaryOnHover.Transparency,
+					BackgroundColor3 = Theme.SystemPrimaryOnHover.Color
 				}),
-				LeftBorder = roactModule.createElement("Frame", {
+				LeftBorder = RoactModule.createElement("Frame", {
 					BorderSizePixel = 0,
 					Size = UDim2.new(0, 2, 1, 0),
-					BackgroundTransparency = theme.SystemPrimaryOnHover.Transparency,
-					BackgroundColor3 = theme.SystemPrimaryOnHover.Color
+					BackgroundTransparency = Theme.SystemPrimaryOnHover.Transparency,
+					BackgroundColor3 = Theme.SystemPrimaryOnHover.Color
 				}),
-				RightBorder = roactModule.createElement("Frame", {
+				RightBorder = RoactModule.createElement("Frame", {
 					BorderSizePixel = 0,
 					Size = UDim2.new(0, 2, 1, 0),
 					Position = UDim2.fromScale(1, 0),
 					AnchorPoint = Vector2.new(1, 0),
-					BackgroundTransparency = theme.SystemPrimaryOnHover.Transparency,
-					BackgroundColor3 = theme.SystemPrimaryOnHover.Color
+					BackgroundTransparency = Theme.SystemPrimaryOnHover.Transparency,
+					BackgroundColor3 = Theme.SystemPrimaryOnHover.Color
 				}),
-				BottomBorder = roactModule.createElement("Frame", {
+				BottomBorder = RoactModule.createElement("Frame", {
 					BorderSizePixel = 0,
 					Size = UDim2.new(1, 0, 0, 2),
 					Position = UDim2.fromScale(0, 1),
 					AnchorPoint = Vector2.new(0, 1),
-					BackgroundTransparency = theme.SystemPrimaryOnHover.Transparency,
-					BackgroundColor3 = theme.SystemPrimaryOnHover.Color
+					BackgroundTransparency = Theme.SystemPrimaryOnHover.Transparency,
+					BackgroundColor3 = Theme.SystemPrimaryOnHover.Color
 				})
 			}),
-			CellContents = roactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, {
-				Layout = roactModule.createElement("UIListLayout", {
+			CellContents = RoactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, {
+				Layout = RoactModule.createElement("UIListLayout", {
 					SortOrder = Enum.SortOrder.LayoutOrder,
 					FillDirection = Enum.FillDirection.Horizontal,
 					HorizontalAlignment = Enum.HorizontalAlignment.Left,
 					VerticalAlignment = Enum.VerticalAlignment.Center,
 					Padding = UDim.new(0, 12)
 				}),
-				Padding = roactModule.createElement("UIPadding", {
+				Padding = RoactModule.createElement("UIPadding", {
 					PaddingLeft = UDim.new(0, 12),
 					PaddingRight = UDim.new(0, 12)
 				}),
-				IconFrame = roactModule.createElement("Frame", {
+				IconFrame = RoactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 1,
 					Size = UDim2.fromOffset(36, 36)
 				}, {
-					IconLabel = p1.props.icon ~= nil and roactModule.createElement(imageSetLabel, {
+					IconLabel = p1.props.icon ~= nil and RoactModule.createElement(ImageSetLabel, {
 						BackgroundTransparency = 1,
 						Image = p1.props.icon,
 						Size = UDim2.fromScale(1, 1),
-						ImageTransparency = theme.IconEmphasis.Transparency,
-						ImageColor3 = theme.IconEmphasis.Color
+						ImageTransparency = Theme.IconEmphasis.Transparency,
+						ImageColor3 = Theme.IconEmphasis.Color
 					}),
-					IconComponent = p1.props.iconComponent ~= nil and roactModule.createElement(p1.props.iconComponent)
+					IconComponent = p1.props.iconComponent ~= nil and RoactModule.createElement(p1.props.iconComponent)
 				}),
-				Text = roactModule.createElement("TextLabel", {
+				Text = RoactModule.createElement("TextLabel", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 2,
 					Size = UDim2.new(1, -48, 1, 0),
-					Text = robloxTranslatorModule:FormatByKey(p1.props.localizationKey),
-					Font = if foundationFontFaceMigration then nil else font.Header2.Font,
-					FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.TitleLarge.Font) else nil,
-					TextSize = font.BaseSize * font.Header2.RelativeSize,
-					TextColor3 = theme.TextEmphasis.Color,
-					TextTransparency = theme.TextEmphasis.TextTransparency,
+					Text = RobloxTranslatorModule:FormatByKey(p1.props.localizationKey),
+					Font = if FoundationFontFaceMigration then nil else _Font.Header2.Font,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.TitleLarge.Font) else nil,
+					TextSize = _Font.BaseSize * _Font.Header2.RelativeSize,
+					TextColor3 = Theme.TextEmphasis.Color,
+					TextTransparency = Theme.TextEmphasis.TextTransparency,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextYAlignment = Enum.TextYAlignment.Center,
 					TextTruncate = Enum.TextTruncate.AtEnd
 				})
 			}),
-			Divider = p1.props.hasDivider and roactModule.createElement("Frame", {
+			Divider = p1.props.hasDivider and RoactModule.createElement("Frame", {
 				BorderSizePixel = 0,
 				Size = UDim2.new(1, 0, 0, 1),
 				Position = UDim2.fromScale(0, 1),
 				AnchorPoint = Vector2.new(0, 1),
-				BackgroundTransparency = theme.Divider.Transparency,
-				BackgroundColor3 = theme.Divider.Color
+				BackgroundTransparency = Theme.Divider.Transparency,
+				BackgroundColor3 = Theme.Divider.Color
 			})
 		})
 	end)
 end
 
-return menuCell
+return MenuCell

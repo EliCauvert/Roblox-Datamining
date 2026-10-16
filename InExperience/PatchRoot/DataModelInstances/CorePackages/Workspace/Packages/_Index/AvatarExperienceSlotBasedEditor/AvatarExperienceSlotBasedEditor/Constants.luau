@@ -1,193 +1,226 @@
 ﻿local _ = require(script.Parent.Types)
-local inventoryFiltersModule = require(script.Parent.Enums.InventoryFilters)
-local slotTypeModule = require(script.Parent.Enums.SlotType)
-local t = {}
-local categoriesModule = require(script.Parent.Enums.Categories)
-local parent = script:FindFirstAncestor("AvatarExperienceSlotBasedEditor").Parent
-local avatarEditorSubcategories = require(parent.AvatarExperienceModel).Enums.AvatarEditorSubcategories
-local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
-local fFlagRemoveClassicHeadsAndFaces = avatarExperienceFlagsModule.FFlagRemoveClassicHeadsAndFaces
-local fFlagAXMigrateBuilderIcons = avatarExperienceFlagsModule.FFlagAXMigrateBuilderIcons
-local fFlagAXSlotsDesktopRedesign = avatarExperienceFlagsModule.FFlagAXSlotsDesktopRedesign
-local fFlagAXInventoryDurablesExpiredFilter = avatarExperienceFlagsModule.FFlagAXInventoryDurablesExpiredFilter
-local fFlagAXCustomizeBackgrounds = avatarExperienceFlagsModule.FFlagAXCustomizeBackgrounds
-local fFlagAXDownrankMakeupCustomize = avatarExperienceFlagsModule.FFlagAXDownrankMakeupCustomize
-local iconName = require(parent.Foundation).Enums.IconName
-local iconVariant = require(parent.Foundation).Enums.IconVariant
-local t_1 = {
-	FullBody = if fFlagAXMigrateBuilderIcons then {
-		name = iconName.PersonStanding,
-		variant = iconVariant.Filled
+local InventoryFiltersModule = require(script.Parent.Enums.InventoryFilters)
+local SlotTypeModule = require(script.Parent.Enums.SlotType)
+local ConstantsModule = {}
+local CategoriesModule = require(script.Parent.Enums.Categories)
+local Parent = script:FindFirstAncestor("AvatarExperienceSlotBasedEditor").Parent
+local AvatarEditorSubcategories = require(Parent.AvatarExperienceModel).Enums.AvatarEditorSubcategories
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
+local FFlagRemoveClassicHeadsAndFaces = AvatarExperienceFlagsModule.FFlagRemoveClassicHeadsAndFaces
+local FFlagAXMigrateBuilderIcons = AvatarExperienceFlagsModule.FFlagAXMigrateBuilderIcons
+local FFlagAXSlotsDesktopRedesign = AvatarExperienceFlagsModule.FFlagAXSlotsDesktopRedesign
+local FFlagAXInventoryDurablesExpiredFilter = AvatarExperienceFlagsModule.FFlagAXInventoryDurablesExpiredFilter
+local FFlagAXCustomizeBackgrounds = AvatarExperienceFlagsModule.FFlagAXCustomizeBackgrounds
+local FFlagAXDownrankMakeupCustomize = AvatarExperienceFlagsModule.FFlagAXDownrankMakeupCustomize
+local IconName = require(Parent.Foundation).Enums.IconName
+local IconVariant = require(Parent.Foundation).Enums.IconVariant
+local Character = {
+	FullBody = if FFlagAXMigrateBuilderIcons then {
+		name = IconName.PersonStanding,
+		variant = IconVariant.Filled
 	} else "icons/menu/clothing/body_on",
-	ClassicHead = if fFlagAXMigrateBuilderIcons then { name = iconName.HeadBlank, variant = iconVariant.Filled } else "icons/menu/clothing/classicHead_on",
-	Hair = if fFlagAXMigrateBuilderIcons then { name = iconName.HeadFemale, variant = iconVariant.Filled } else "icons/menu/clothing/hair_on",
-	Faces = if fFlagAXMigrateBuilderIcons then {
-		name = iconName.FaceWinking,
-		variant = iconVariant.Filled
+	ClassicHead = if FFlagAXMigrateBuilderIcons then { name = IconName.HeadBlank, variant = IconVariant.Filled } else "icons/menu/clothing/classicHead_on",
+	Hair = if FFlagAXMigrateBuilderIcons then { name = IconName.HeadFemale, variant = IconVariant.Filled } else "icons/menu/clothing/hair_on",
+	Faces = if FFlagAXMigrateBuilderIcons then {
+		name = IconName.FaceWinking,
+		variant = IconVariant.Filled
 	} else "icons/menu/clothing/faces_on",
-	Clothing = if fFlagAXMigrateBuilderIcons then {
-		name = iconName.ClothesHanger,
-		variant = iconVariant.Filled
+	Clothing = if FFlagAXMigrateBuilderIcons then {
+		name = IconName.ClothesHanger,
+		variant = IconVariant.Filled
 	} else "icons/menu/clothing/clothing_on",
-	Jackets = if fFlagAXMigrateBuilderIcons then { name = iconName.Jacket, variant = iconVariant.Filled } else "icons/menu/clothing/jackets_on",
-	Shirts = if fFlagAXMigrateBuilderIcons then { name = iconName.Shirt, variant = iconVariant.Filled } else "icons/menu/clothing/shirts_on",
-	Pants = if fFlagAXMigrateBuilderIcons then { name = iconName.Pants, variant = iconVariant.Filled } else "icons/menu/clothing/pants_on",
-	Shoes = if fFlagAXMigrateBuilderIcons then { name = iconName.Shoe, variant = iconVariant.Filled } else "icons/menu/clothing/shoes_on",
-	ClassicTShirts = if fFlagAXMigrateBuilderIcons then {
-		name = iconName.Tshirt_2dText,
-		variant = iconVariant.Filled
+	Jackets = if FFlagAXMigrateBuilderIcons then { name = IconName.Jacket, variant = IconVariant.Filled } else "icons/menu/clothing/jackets_on",
+	Shirts = if FFlagAXMigrateBuilderIcons then { name = IconName.Shirt, variant = IconVariant.Filled } else "icons/menu/clothing/shirts_on",
+	Pants = if FFlagAXMigrateBuilderIcons then { name = IconName.Pants, variant = IconVariant.Filled } else "icons/menu/clothing/pants_on",
+	Shoes = if FFlagAXMigrateBuilderIcons then { name = IconName.Shoe, variant = IconVariant.Filled } else "icons/menu/clothing/shoes_on",
+	ClassicTShirts = if FFlagAXMigrateBuilderIcons then {
+		name = IconName.Tshirt_2dText,
+		variant = IconVariant.Filled
 	} else "icons/menu/clothing/classicTshirts_on",
-	ClassicShirts = if fFlagAXMigrateBuilderIcons then {
-		name = iconName.Shirt_2dText,
-		variant = iconVariant.Filled
+	ClassicShirts = if FFlagAXMigrateBuilderIcons then {
+		name = IconName.Shirt_2dText,
+		variant = IconVariant.Filled
 	} else "icons/menu/clothing/classicShirts_on",
-	ClassicPants = if fFlagAXMigrateBuilderIcons then {
-		name = iconName.Pants_2dText,
-		variant = iconVariant.Filled
+	ClassicPants = if FFlagAXMigrateBuilderIcons then {
+		name = IconName.Pants_2dText,
+		variant = IconVariant.Filled
 	} else "icons/menu/clothing/classicPants_on",
-	Accessories = if fFlagAXMigrateBuilderIcons then { name = iconName.BowTie, variant = iconVariant.Filled } else "icons/menu/clothing/accessories_off",
-	Head = if fFlagAXMigrateBuilderIcons then { name = iconName.HatFedora, variant = iconVariant.Filled } else "icons/menu/clothing/hats_on",
-	Face = if fFlagAXMigrateBuilderIcons then { name = iconName.Glasses, variant = iconVariant.Filled } else "icons/menu/clothing/eyes_on",
-	Neck = if fFlagAXMigrateBuilderIcons then { name = iconName.Necklace, variant = iconVariant.Filled } else "icons/menu/clothing/neck_off",
-	Shoulder = if fFlagAXMigrateBuilderIcons then { name = iconName.Parrot, variant = iconVariant.Filled } else "icons/menu/clothing/shoulder_on",
-	Front = if fFlagAXMigrateBuilderIcons then { name = iconName.Purse, variant = iconVariant.Filled } else "icons/menu/clothing/front_on",
-	Back = if fFlagAXMigrateBuilderIcons then {
-		name = iconName.ButterflyWings,
-		variant = iconVariant.Filled
+	Accessories = if FFlagAXMigrateBuilderIcons then { name = IconName.BowTie, variant = IconVariant.Filled } else "icons/menu/clothing/accessories_off",
+	Head = if FFlagAXMigrateBuilderIcons then { name = IconName.HatFedora, variant = IconVariant.Filled } else "icons/menu/clothing/hats_on",
+	Face = if FFlagAXMigrateBuilderIcons then { name = IconName.Glasses, variant = IconVariant.Filled } else "icons/menu/clothing/eyes_on",
+	Neck = if FFlagAXMigrateBuilderIcons then { name = IconName.Necklace, variant = IconVariant.Filled } else "icons/menu/clothing/neck_off",
+	Shoulder = if FFlagAXMigrateBuilderIcons then { name = IconName.Parrot, variant = IconVariant.Filled } else "icons/menu/clothing/shoulder_on",
+	Front = if FFlagAXMigrateBuilderIcons then { name = IconName.Purse, variant = IconVariant.Filled } else "icons/menu/clothing/front_on",
+	Back = if FFlagAXMigrateBuilderIcons then {
+		name = IconName.ButterflyWings,
+		variant = IconVariant.Filled
 	} else "icons/menu/clothing/back_on",
-	Waist = if fFlagAXMigrateBuilderIcons then { name = iconName.Belt, variant = iconVariant.Filled } else "icons/menu/clothing/waist_on",
-	Gear = if fFlagAXMigrateBuilderIcons then { name = iconName.Sword, variant = iconVariant.Filled } else "icons/menu/clothing/gear_on",
-	Animation = if fFlagAXMigrateBuilderIcons then {
-		name = iconName.PersonTeleport,
-		variant = iconVariant.Filled
+	Waist = if FFlagAXMigrateBuilderIcons then { name = IconName.Belt, variant = IconVariant.Filled } else "icons/menu/clothing/waist_on",
+	Gear = if FFlagAXMigrateBuilderIcons then { name = IconName.Sword, variant = IconVariant.Filled } else "icons/menu/clothing/gear_on",
+	Animation = if FFlagAXMigrateBuilderIcons then {
+		name = IconName.PersonTeleport,
+		variant = IconVariant.Filled
 	} else "icons/menu/clothing/animation_off",
-	Idle = if fFlagAXMigrateBuilderIcons then {
-		name = iconName.PersonStanding,
-		variant = iconVariant.Filled
+	Idle = if FFlagAXMigrateBuilderIcons then {
+		name = IconName.PersonStanding,
+		variant = IconVariant.Filled
 	} else "icons/menu/clothing/idle_on",
-	Walk = if fFlagAXMigrateBuilderIcons then {
-		name = iconName.PersonWalking,
-		variant = iconVariant.Filled
+	Walk = if FFlagAXMigrateBuilderIcons then {
+		name = IconName.PersonWalking,
+		variant = IconVariant.Filled
 	} else "icons/menu/clothing/walk_off",
-	Jump = if fFlagAXMigrateBuilderIcons then {
-		name = iconName.PersonJumping,
-		variant = iconVariant.Filled
+	Jump = if FFlagAXMigrateBuilderIcons then {
+		name = IconName.PersonJumping,
+		variant = IconVariant.Filled
 	} else "icons/menu/clothing/jump_off",
-	Fall = if fFlagAXMigrateBuilderIcons then {
-		name = iconName.PersonFalling,
-		variant = iconVariant.Filled
+	Fall = if FFlagAXMigrateBuilderIcons then {
+		name = IconName.PersonFalling,
+		variant = IconVariant.Filled
 	} else "icons/menu/clothing/fall_off",
-	Climb = if fFlagAXMigrateBuilderIcons then {
-		name = iconName.PersonClimbing,
-		variant = iconVariant.Filled
+	Climb = if FFlagAXMigrateBuilderIcons then {
+		name = IconName.PersonClimbing,
+		variant = IconVariant.Filled
 	} else "icons/menu/clothing/climb_off",
-	Swim = if fFlagAXMigrateBuilderIcons then {
-		name = iconName.PersonSwimming,
-		variant = iconVariant.Filled
+	Swim = if FFlagAXMigrateBuilderIcons then {
+		name = IconName.PersonSwimming,
+		variant = IconVariant.Filled
 	} else "icons/menu/clothing/swim_off",
-	Emote = if fFlagAXMigrateBuilderIcons then {
-		name = iconName.SquareFaceWavingHand,
-		variant = iconVariant.Filled
+	Emote = if FFlagAXMigrateBuilderIcons then {
+		name = IconName.SquareFaceWavingHand,
+		variant = IconVariant.Filled
 	} else "icons/controls/emoteOn",
-	Reset = if fFlagAXMigrateBuilderIcons then {
-		name = iconName.ArrowSpinClockwise,
-		variant = iconVariant.Regular
+	Reset = if FFlagAXMigrateBuilderIcons then {
+		name = IconName.ArrowSpinClockwise,
+		variant = IconVariant.Regular
 	} else "icons/actions/reset",
-	Undo = if fFlagAXMigrateBuilderIcons then {
-		name = iconName.ArrowCurlToLeft,
-		variant = iconVariant.Regular
+	Undo = if FFlagAXMigrateBuilderIcons then {
+		name = IconName.ArrowCurlToLeft,
+		variant = IconVariant.Regular
 	} else "icons/actions/edit/undo",
-	Redo = if fFlagAXMigrateBuilderIcons then {
-		name = iconName.ArrowCurlToRight,
-		variant = iconVariant.Regular
+	Redo = if FFlagAXMigrateBuilderIcons then {
+		name = IconName.ArrowCurlToRight,
+		variant = IconVariant.Regular
 	} else "icons/actions/edit/redo",
-	Torso = if fFlagAXMigrateBuilderIcons then { name = iconName.Torso, variant = iconVariant.Filled } else "icons/menu/clothing/torsos_on",
-	Arm = if fFlagAXMigrateBuilderIcons then { name = iconName.Arm, variant = iconVariant.Filled } else "icons/menu/clothing/arms_on",
-	Leg = if fFlagAXMigrateBuilderIcons then { name = iconName.Leg, variant = iconVariant.Filled } else "icons/menu/clothing/legs_on",
-	Inventory = if fFlagAXMigrateBuilderIcons then { name = iconName.Backpack, variant = iconVariant.Regular } else "icons/menu/inventoryOff",
-	Adjust = if fFlagAXMigrateBuilderIcons then {
-		name = iconName.ThreeSlidersHorizontal,
-		variant = iconVariant.Regular
+	Torso = if FFlagAXMigrateBuilderIcons then { name = IconName.Torso, variant = IconVariant.Filled } else "icons/menu/clothing/torsos_on",
+	Arm = if FFlagAXMigrateBuilderIcons then { name = IconName.Arm, variant = IconVariant.Filled } else "icons/menu/clothing/arms_on",
+	Leg = if FFlagAXMigrateBuilderIcons then { name = IconName.Leg, variant = IconVariant.Filled } else "icons/menu/clothing/legs_on",
+	Inventory = if FFlagAXMigrateBuilderIcons then { name = IconName.Backpack, variant = IconVariant.Regular } else "icons/menu/inventoryOff",
+	Adjust = if FFlagAXMigrateBuilderIcons then {
+		name = IconName.ThreeSlidersHorizontal,
+		variant = IconVariant.Regular
 	} else "icons/actions/adjust",
-	Success = if fFlagAXMigrateBuilderIcons then { name = iconName.CheckLarge, variant = iconVariant.Filled } else "icons/status/success_small",
-	Add = if fFlagAXMigrateBuilderIcons then {
-		name = iconName.CirclePlus,
-		variant = iconVariant.Regular
+	Success = if FFlagAXMigrateBuilderIcons then { name = IconName.CheckLarge, variant = IconVariant.Filled } else "icons/status/success_small",
+	Add = if FFlagAXMigrateBuilderIcons then {
+		name = IconName.CirclePlus,
+		variant = IconVariant.Regular
 	} else "icons/actions/edit/add",
-	Build = if fFlagAXMigrateBuilderIcons then {
-		name = iconName.PersonStandingDualArrowsVertical,
-		variant = iconVariant.Filled
+	Build = if FFlagAXMigrateBuilderIcons then {
+		name = IconName.PersonStandingDualArrowsVertical,
+		variant = IconVariant.Filled
 	} else "icons/menu/clothing/build_on",
-	Eyelashes = if fFlagAXMigrateBuilderIcons then { name = iconName.Eyelashes, variant = iconVariant.Regular } else iconName.Eyelashes,
-	Eyebrows = if fFlagAXMigrateBuilderIcons then { name = iconName.Eyebrows, variant = iconVariant.Regular } else iconName.Eyebrows,
-	Backgrounds = { name = iconName.Image, variant = iconVariant.Filled }
+	Eyelashes = if FFlagAXMigrateBuilderIcons then { name = IconName.Eyelashes, variant = IconVariant.Regular } else IconName.Eyelashes,
+	Eyebrows = if FFlagAXMigrateBuilderIcons then { name = IconName.Eyebrows, variant = IconVariant.Regular } else IconName.Eyebrows,
+	Backgrounds = { name = IconName.Image, variant = IconVariant.Filled }
 }
-local list = {
+local BodyAssetTypes = {
 	Enum.AssetType.LeftLeg, Enum.AssetType.RightLeg, Enum.AssetType.LeftArm,
 	Enum.AssetType.RightArm, Enum.AssetType.Torso, Enum.AssetType.Head,
 	Enum.AssetType.DynamicHead
 }
-local list_1 = {
-	categoriesModule.All,
-	categoriesModule.Avatars,
-	categoriesModule.Body
+local List = {
+	CategoriesModule.All,
+	CategoriesModule.Avatars,
+	CategoriesModule.Body
 }
 
-if not fFlagAXDownrankMakeupCustomize then
-	table.insert(list_1, categoriesModule.Makeup)
+if not FFlagAXDownrankMakeupCustomize then
+	table.insert(List, CategoriesModule.Makeup)
 end
-table.insert(list_1, categoriesModule.Clothing)
-table.insert(list_1, categoriesModule.Accessories)
+table.insert(List, CategoriesModule.Clothing)
+table.insert(List, CategoriesModule.Accessories)
 
-if fFlagAXCustomizeBackgrounds then
-	table.insert(list_1, categoriesModule.Backgrounds)
+if FFlagAXCustomizeBackgrounds then
+	table.insert(List, CategoriesModule.Backgrounds)
 end
-table.insert(list_1, categoriesModule.Animations)
-table.insert(list_1, categoriesModule.Emotes)
+table.insert(List, CategoriesModule.Animations)
+table.insert(List, CategoriesModule.Emotes)
 
-if fFlagAXDownrankMakeupCustomize then
-	table.insert(list_1, categoriesModule.Makeup)
+if FFlagAXDownrankMakeupCustomize then
+	table.insert(List, CategoriesModule.Makeup)
 end
-local t_2 = {}
+local t = {}
 
-for i, v in list_1 do
-	t_2[v] = i - 1
+for i, value in List do
+	t[value] = i - 1
 end
-local t_3 = {
-	[categoriesModule.All] = {
+ConstantsModule.Categories = CategoriesModule
+ConstantsModule.SlotEditorCategories = {
+	[CategoriesModule.All] = {
 		name = "All",
 		hide = true,
-		nameTranslationKey = if fFlagAXSlotsDesktopRedesign then "Feature.Avatar.Heading.All" else "Feature.Catalog.Label.Avatars",
-		index = t_2[categoriesModule.All],
+		nameTranslationKey = if FFlagAXSlotsDesktopRedesign then "Feature.Avatar.Heading.All" else "Feature.Catalog.Label.Avatars",
+		index = t[CategoriesModule.All],
 		slots = {}
 	},
-	[categoriesModule.Avatars] = {
+	[CategoriesModule.Avatars] = {
 		name = "Avatars",
 		nameTranslationKey = "Feature.Catalog.Label.Avatars",
-		index = t_2[categoriesModule.Avatars],
+		index = t[CategoriesModule.Avatars],
 		slots = {}
 	},
-	[categoriesModule.Body] = {
+	[CategoriesModule.Body] = {
 		name = "Body",
 		nameTranslationKey = "Feature.Catalog.Label.Body",
-		index = t_2[categoriesModule.Body],
-		slots = if not fFlagRemoveClassicHeadsAndFaces then {
+		index = t[CategoriesModule.Body],
+		slots = if FFlagRemoveClassicHeadsAndFaces then {
 			{
 				name = "Body",
 				nameTranslationKey = "Feature.Catalog.Label.FullBody",
-				editorSubcategory = avatarEditorSubcategories.PurchasedCharacters,
+				editorSubcategory = AvatarEditorSubcategories.PurchasedCharacters,
 				assetTypes = {}
 			},
 			{
 				nameTranslationKey = "Feature.Avatar.Label.Hair",
-				icon = t_1.Hair,
-				editorSubcategory = avatarEditorSubcategories.Hair,
+				icon = Character.Hair,
+				editorSubcategory = AvatarEditorSubcategories.Hair,
 				assetTypes = { Enum.AvatarAssetType.HairAccessory }
 			},
 			{
 				nameTranslationKey = "Feature.Avatar.Label.Head",
-				icon = t_1.ClassicHead,
-				editorSubcategory = avatarEditorSubcategories.Heads,
+				icon = Character.ClassicHead,
+				editorSubcategory = AvatarEditorSubcategories.Heads,
+				assetTypes = { Enum.AvatarAssetType.DynamicHead }
+			},
+			{
+				name = "Build",
+				nameTranslationKey = "Feature.Avatar.Label.Build",
+				assetTypes = {},
+				icon = Character.Build,
+				editorSubcategory = AvatarEditorSubcategories.Build
+			},
+			{
+				name = "Skin",
+				nameTranslationKey = "Feature.Avatar.Label.Skin",
+				editorSubcategory = AvatarEditorSubcategories.Skin,
+				assetTypes = {}
+			}
+		} else {
+			{
+				name = "Body",
+				nameTranslationKey = "Feature.Catalog.Label.FullBody",
+				editorSubcategory = AvatarEditorSubcategories.PurchasedCharacters,
+				assetTypes = {}
+			},
+			{
+				nameTranslationKey = "Feature.Avatar.Label.Hair",
+				icon = Character.Hair,
+				editorSubcategory = AvatarEditorSubcategories.Hair,
+				assetTypes = { Enum.AvatarAssetType.HairAccessory }
+			},
+			{
+				nameTranslationKey = "Feature.Avatar.Label.Head",
+				icon = Character.ClassicHead,
+				editorSubcategory = AvatarEditorSubcategories.Heads,
 				assetTypes = {
 					Enum.AvatarAssetType.DynamicHead,
 					Enum.AvatarAssetType.Head
@@ -196,73 +229,41 @@ local t_3 = {
 			{
 				name = "Classic Face",
 				nameTranslationKey = "Feature.Avatar.Label.Face",
-				icon = t_1.Faces,
-				editorSubcategory = avatarEditorSubcategories.ClassicFaces,
+				icon = Character.Faces,
+				editorSubcategory = AvatarEditorSubcategories.ClassicFaces,
 				assetTypes = { Enum.AvatarAssetType.Face }
 			},
 			{
 				name = "Build",
 				nameTranslationKey = "Feature.Avatar.Label.Build",
 				assetTypes = {},
-				icon = t_1.Build,
-				editorSubcategory = avatarEditorSubcategories.Build
+				icon = Character.Build,
+				editorSubcategory = AvatarEditorSubcategories.Build
 			},
 			{
 				name = "Skin",
 				nameTranslationKey = "Feature.Avatar.Label.Skin",
-				editorSubcategory = avatarEditorSubcategories.Skin,
-				assetTypes = {}
-			}
-		} else {
-			{
-				name = "Body",
-				nameTranslationKey = "Feature.Catalog.Label.FullBody",
-				editorSubcategory = avatarEditorSubcategories.PurchasedCharacters,
-				assetTypes = {}
-			},
-			{
-				nameTranslationKey = "Feature.Avatar.Label.Hair",
-				icon = t_1.Hair,
-				editorSubcategory = avatarEditorSubcategories.Hair,
-				assetTypes = { Enum.AvatarAssetType.HairAccessory }
-			},
-			{
-				nameTranslationKey = "Feature.Avatar.Label.Head",
-				icon = t_1.ClassicHead,
-				editorSubcategory = avatarEditorSubcategories.Heads,
-				assetTypes = { Enum.AvatarAssetType.DynamicHead }
-			},
-			{
-				name = "Build",
-				nameTranslationKey = "Feature.Avatar.Label.Build",
-				assetTypes = {},
-				icon = t_1.Build,
-				editorSubcategory = avatarEditorSubcategories.Build
-			},
-			{
-				name = "Skin",
-				nameTranslationKey = "Feature.Avatar.Label.Skin",
-				editorSubcategory = avatarEditorSubcategories.Skin,
+				editorSubcategory = AvatarEditorSubcategories.Skin,
 				assetTypes = {}
 			}
 		}
 	},
-	[categoriesModule.Makeup] = {
+	[CategoriesModule.Makeup] = {
 		name = "Makeup",
 		nameTranslationKey = "Feature.Avatar.Label.Makeup",
 		resetSlotOnClearAll = true,
-		index = t_2[categoriesModule.Makeup],
+		index = t[CategoriesModule.Makeup],
 		slots = {
 			{
 				nameTranslationKey = "Feature.Avatar.Label.Eyelashes",
 				hide = true,
-				icon = t_1.Eyelashes,
-				editorSubcategory = avatarEditorSubcategories.MakeupLooks,
+				icon = Character.Eyelashes,
+				editorSubcategory = AvatarEditorSubcategories.MakeupLooks,
 				eligibleSubcategories = {
-					avatarEditorSubcategories.MakeupLooks,
-					avatarEditorSubcategories.EyeMakeup,
-					avatarEditorSubcategories.FaceMakeup,
-					avatarEditorSubcategories.LipMakeup
+					AvatarEditorSubcategories.MakeupLooks,
+					AvatarEditorSubcategories.EyeMakeup,
+					AvatarEditorSubcategories.FaceMakeup,
+					AvatarEditorSubcategories.LipMakeup
 				},
 				assetTypes = {}
 			},
@@ -271,13 +272,13 @@ local t_3 = {
 				name = "Makeup",
 				nameTranslationKey = "Feature.Avatar.Label.MakeupLayer",
 				deselectable = true,
-				slotType = slotTypeModule.LayeredSlot,
+				slotType = SlotTypeModule.LayeredSlot,
 				eligibleSubcategories = {
-					avatarEditorSubcategories.EyeMakeup,
-					avatarEditorSubcategories.FaceMakeup,
-					avatarEditorSubcategories.LipMakeup
+					AvatarEditorSubcategories.EyeMakeup,
+					AvatarEditorSubcategories.FaceMakeup,
+					AvatarEditorSubcategories.LipMakeup
 				},
-				editorSubcategory = avatarEditorSubcategories.EyeMakeup,
+				editorSubcategory = AvatarEditorSubcategories.EyeMakeup,
 				assetTypes = {
 					Enum.AvatarAssetType.EyeMakeup,
 					Enum.AvatarAssetType.FaceMakeup,
@@ -287,28 +288,28 @@ local t_3 = {
 			{
 				nameTranslationKey = "Feature.Avatar.Label.Eyelashes",
 				deselectable = true,
-				icon = t_1.Eyelashes,
-				editorSubcategory = avatarEditorSubcategories.Eyelashes,
+				icon = Character.Eyelashes,
+				editorSubcategory = AvatarEditorSubcategories.Eyelashes,
 				assetTypes = { Enum.AvatarAssetType.EyelashAccessory }
 			},
 			{
 				nameTranslationKey = "Feature.Avatar.Label.Eyebrows",
 				deselectable = true,
-				icon = t_1.Eyebrows,
-				editorSubcategory = avatarEditorSubcategories.Eyebrows,
+				icon = Character.Eyebrows,
+				editorSubcategory = AvatarEditorSubcategories.Eyebrows,
 				assetTypes = { Enum.AvatarAssetType.EyebrowAccessory }
 			}
 		}
 	},
-	[categoriesModule.Clothing] = {
+	[CategoriesModule.Clothing] = {
 		name = "Clothing",
 		nameTranslationKey = "Feature.Catalog.Label.Clothing",
-		index = t_2[categoriesModule.Clothing],
+		index = t[CategoriesModule.Clothing],
 		slots = {
 			{
 				nameTranslationKey = "Feature.Avatar.Label.Top",
-				icon = t_1.Shirts,
-				editorSubcategory = avatarEditorSubcategories.Tops,
+				icon = Character.Shirts,
+				editorSubcategory = AvatarEditorSubcategories.Tops,
 				assetTypes = {
 					Enum.AvatarAssetType.ShirtAccessory,
 					Enum.AvatarAssetType.TShirtAccessory,
@@ -317,14 +318,14 @@ local t_3 = {
 			},
 			{
 				nameTranslationKey = "Feature.Avatar.Label.Outerwear",
-				icon = t_1.Jackets,
-				editorSubcategory = avatarEditorSubcategories.Outerwear,
+				icon = Character.Jackets,
+				editorSubcategory = AvatarEditorSubcategories.Outerwear,
 				assetTypes = { Enum.AvatarAssetType.JacketAccessory }
 			},
 			{
 				nameTranslationKey = "Feature.Avatar.Label.Bottom",
-				icon = t_1.Pants,
-				editorSubcategory = avatarEditorSubcategories.Bottoms,
+				icon = Character.Pants,
+				editorSubcategory = AvatarEditorSubcategories.Bottoms,
 				assetTypes = {
 					Enum.AvatarAssetType.PantsAccessory,
 					Enum.AvatarAssetType.ShortsAccessory,
@@ -333,160 +334,157 @@ local t_3 = {
 			},
 			{
 				nameTranslationKey = "Feature.Avatar.Label.Shoes",
-				icon = t_1.Shoes,
-				editorSubcategory = avatarEditorSubcategories.Shoes,
+				icon = Character.Shoes,
+				editorSubcategory = AvatarEditorSubcategories.Shoes,
 				assetTypes = { Enum.AvatarAssetType.RightShoeAccessory }
 			},
 			{
 				nameTranslationKey = "Feature.Avatar.Label.ShirtClassic",
-				icon = t_1.ClassicShirts,
-				editorSubcategory = avatarEditorSubcategories.ClassicShirts,
+				icon = Character.ClassicShirts,
+				editorSubcategory = AvatarEditorSubcategories.ClassicShirts,
 				assetTypes = { Enum.AvatarAssetType.Shirt }
 			},
 			{
 				nameTranslationKey = "Feature.Avatar.Label.PantsClassic",
-				icon = t_1.ClassicPants,
-				editorSubcategory = avatarEditorSubcategories.ClassicPants,
+				icon = Character.ClassicPants,
+				editorSubcategory = AvatarEditorSubcategories.ClassicPants,
 				assetTypes = { Enum.AvatarAssetType.Pants }
 			},
 			{
 				nameTranslationKey = "Feature.Avatar.Label.TShirtClassic",
-				icon = t_1.ClassicTShirts,
-				editorSubcategory = avatarEditorSubcategories.ClassicTShirts,
+				icon = Character.ClassicTShirts,
+				editorSubcategory = AvatarEditorSubcategories.ClassicTShirts,
 				assetTypes = { Enum.AvatarAssetType.TShirt }
 			}
 		}
 	},
-	[categoriesModule.Accessories] = {
+	[CategoriesModule.Accessories] = {
 		name = "Accessories",
 		nameTranslationKey = "Feature.Catalog.LabelAccessories",
-		index = t_2[categoriesModule.Accessories],
+		index = t[CategoriesModule.Accessories],
 		slots = {
 			{
 				name = "Head",
 				nameTranslationKey = "Feature.Avatar.Label.Head",
-				icon = t_1.Head,
-				editorSubcategory = avatarEditorSubcategories.Hats,
+				icon = Character.Head,
+				editorSubcategory = AvatarEditorSubcategories.Hats,
 				assetTypes = { Enum.AvatarAssetType.Hat }
 			},
 			{
 				nameTranslationKey = "Feature.Avatar.Label.Face",
-				icon = t_1.Face,
-				editorSubcategory = avatarEditorSubcategories.Face,
+				icon = Character.Face,
+				editorSubcategory = AvatarEditorSubcategories.Face,
 				assetTypes = { Enum.AvatarAssetType.FaceAccessory }
 			},
 			{
 				nameTranslationKey = "Feature.Avatar.Label.Neck",
-				icon = t_1.Neck,
-				editorSubcategory = avatarEditorSubcategories.Neck,
+				icon = Character.Neck,
+				editorSubcategory = AvatarEditorSubcategories.Neck,
 				assetTypes = { Enum.AvatarAssetType.NeckAccessory }
 			},
 			{
 				nameTranslationKey = "Feature.Avatar.Label.Back",
-				icon = t_1.Back,
-				editorSubcategory = avatarEditorSubcategories.Back,
+				icon = Character.Back,
+				editorSubcategory = AvatarEditorSubcategories.Back,
 				assetTypes = { Enum.AvatarAssetType.BackAccessory }
 			},
 			{
 				nameTranslationKey = "Feature.Avatar.Label.Waist",
-				icon = t_1.Waist,
-				editorSubcategory = avatarEditorSubcategories.Waist,
+				icon = Character.Waist,
+				editorSubcategory = AvatarEditorSubcategories.Waist,
 				assetTypes = { Enum.AvatarAssetType.WaistAccessory }
 			},
 			{
 				nameTranslationKey = "Feature.Avatar.Label.Shoulder",
-				icon = t_1.Shoulder,
-				editorSubcategory = avatarEditorSubcategories.Shoulder,
+				icon = Character.Shoulder,
+				editorSubcategory = AvatarEditorSubcategories.Shoulder,
 				assetTypes = { Enum.AvatarAssetType.ShoulderAccessory }
 			},
 			{
 				nameTranslationKey = "Feature.Avatar.Label.Front",
-				icon = t_1.Front,
-				editorSubcategory = avatarEditorSubcategories.Front,
+				icon = Character.Front,
+				editorSubcategory = AvatarEditorSubcategories.Front,
 				assetTypes = { Enum.AvatarAssetType.FrontAccessory }
 			},
 			{
 				nameTranslationKey = "Feature.Avatar.Label.Gear",
-				icon = t_1.Gear,
-				editorSubcategory = avatarEditorSubcategories.Gear,
+				icon = Character.Gear,
+				editorSubcategory = AvatarEditorSubcategories.Gear,
 				assetTypes = { Enum.AvatarAssetType.Gear }
 			}
 		}
 	},
-	[categoriesModule.Backgrounds] = if not fFlagAXCustomizeBackgrounds then nil else {
+	[CategoriesModule.Backgrounds] = if FFlagAXCustomizeBackgrounds then {
 		name = "Backgrounds",
 		nameTranslationKey = "Feature.Catalog.Label.Backgrounds",
-		index = t_2[categoriesModule.Backgrounds],
+		index = t[CategoriesModule.Backgrounds],
 		slots = {}
-	},
-	[categoriesModule.Animations] = {
+	} else nil,
+	[CategoriesModule.Animations] = {
 		name = "Animations",
 		nameTranslationKey = "Feature.Avatar.Heading.Animations",
-		index = t_2[categoriesModule.Animations],
+		index = t[CategoriesModule.Animations],
 		slots = {
 			{
 				nameTranslationKey = "Feature.Avatar.Label.AnimationFullSet",
-				icon = t_1.Animation,
-				editorSubcategory = avatarEditorSubcategories.AnimationFullSets,
+				icon = Character.Animation,
+				editorSubcategory = AvatarEditorSubcategories.AnimationFullSets,
 				assetTypes = { Enum.AvatarAssetType.IdleAnimation }
 			},
 			{
 				nameTranslationKey = "Feature.Avatar.Label.Idle",
-				icon = t_1.Idle,
-				editorSubcategory = avatarEditorSubcategories.IdleAnimations,
+				icon = Character.Idle,
+				editorSubcategory = AvatarEditorSubcategories.IdleAnimations,
 				assetTypes = { Enum.AvatarAssetType.IdleAnimation }
 			},
 			{
 				nameTranslationKey = "Feature.Avatar.Label.Walk",
-				icon = t_1.Walk,
-				editorSubcategory = avatarEditorSubcategories.WalkAnimations,
+				icon = Character.Walk,
+				editorSubcategory = AvatarEditorSubcategories.WalkAnimations,
 				assetTypes = { Enum.AvatarAssetType.WalkAnimation }
 			},
 			{
 				nameTranslationKey = "Feature.Avatar.Label.Run",
-				icon = t_1.Animation,
-				editorSubcategory = avatarEditorSubcategories.RunAnimations,
+				icon = Character.Animation,
+				editorSubcategory = AvatarEditorSubcategories.RunAnimations,
 				assetTypes = { Enum.AvatarAssetType.RunAnimation }
 			},
 			{
 				nameTranslationKey = "Feature.Avatar.Label.Jump",
-				icon = t_1.Jump,
-				editorSubcategory = avatarEditorSubcategories.JumpAnimations,
+				icon = Character.Jump,
+				editorSubcategory = AvatarEditorSubcategories.JumpAnimations,
 				assetTypes = { Enum.AvatarAssetType.JumpAnimation }
 			},
 			{
 				nameTranslationKey = "Feature.Avatar.Label.Fall",
-				icon = t_1.Fall,
-				editorSubcategory = avatarEditorSubcategories.FallAnimations,
+				icon = Character.Fall,
+				editorSubcategory = AvatarEditorSubcategories.FallAnimations,
 				assetTypes = { Enum.AvatarAssetType.FallAnimation }
 			},
 			{
 				nameTranslationKey = "Feature.Avatar.Label.Climb",
-				icon = t_1.Climb,
-				editorSubcategory = avatarEditorSubcategories.ClimbAnimations,
+				icon = Character.Climb,
+				editorSubcategory = AvatarEditorSubcategories.ClimbAnimations,
 				assetTypes = { Enum.AvatarAssetType.ClimbAnimation }
 			},
 			{
 				nameTranslationKey = "Feature.Avatar.Label.Swim",
-				icon = t_1.Swim,
-				editorSubcategory = avatarEditorSubcategories.SwimAnimations,
+				icon = Character.Swim,
+				editorSubcategory = AvatarEditorSubcategories.SwimAnimations,
 				assetTypes = { Enum.AvatarAssetType.SwimAnimation }
 			}
 		}
 	},
-	[categoriesModule.Emotes] = {
+	[CategoriesModule.Emotes] = {
 		name = "Emotes",
 		nameTranslationKey = "Feature.Catalog.Label.Emotes",
-		index = t_2[categoriesModule.Emotes],
+		index = t[CategoriesModule.Emotes],
 		slots = {}
 	}
 }
-local var1 = if fFlagAXInventoryDurablesExpiredFilter then { [inventoryFiltersModule.Expired] = 2 } else nil
-t.Categories = categoriesModule
-t.SlotEditorCategories = t_3
-t.Icons = t_1
-t.BodyAssetTypes = list
-t.InventoryFilterToAvailabilityStatus = var1
-t.ActionBarHeight = 64
+ConstantsModule.Icons = Character
+ConstantsModule.BodyAssetTypes = BodyAssetTypes
+ConstantsModule.InventoryFilterToAvailabilityStatus = if FFlagAXInventoryDurablesExpiredFilter then { [InventoryFiltersModule.Expired] = 2 } else nil
+ConstantsModule.ActionBarHeight = 64
 
-return t
+return ConstantsModule

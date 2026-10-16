@@ -1,181 +1,191 @@
-﻿local parent = script:FindFirstAncestor("VoiceChat").Parent
-local promiseModule = require(parent.Promise)
-local signalsModule = require(parent.Signals)
+﻿local Parent = script:FindFirstAncestor("VoiceChat").Parent
+local PromiseModule = require(Parent.Promise)
+local SignalsModule = require(Parent.Signals)
 
-return function(p1)
-	-- upvalues: signalsModule (ref), promiseModule (ref)
-	local normal, normal_1 = signalsModule.createSignal("normal")
-	local var1 = 0
-	local var2 = false
-	local var3 = nil
-	local var4 = nil
-	local var5 = false
-	local var6 = nil
+return function(p1) --[[ Line: 28 | Named "createVoiceRestrictionController" ]]
+	-- upvalues: SignalsModule (copy), PromiseModule (copy)
+	local Normal, Normal2 = SignalsModule.createSignal("normal")
+	local Count = 0
+	local Flag = false
+	local Promise = nil
+	local v1 = nil
+	local Flag1 = false
+	local DelayedThread = nil
 	
-	local function _()
-		-- upvalues: var6 (write)
-		if var6 then
-			task.cancel(var6)
-			var6 = nil
+	local function _() --[[ Line: 39 | Named "cancelExpiry" ]]
+		-- upvalues: DelayedThread (ref)
+		if DelayedThread then
+			task.cancel(DelayedThread)
+			DelayedThread = nil
 		end
 	end
 	
-	local _ = function()
-		-- upvalues: var2 (write), var6 (write), var1 (write), normal_1 (ref)
-		if var2 then return end
-		if var6 then
-			task.cancel(var6)
-			var6 = nil
+	local _ = function() --[[ Line: 47 | Named "expireRestriction" ]]
+		-- upvalues: Flag (ref), DelayedThread (ref), Count (ref), Normal2 (copy)
+		if Flag then return end
+		if DelayedThread then
+			task.cancel(DelayedThread)
+			DelayedThread = nil
 		end
-		var1 += 1
-		normal_1("hiddenUntilRejoin")
+		Count += 1
+		Normal2("hiddenUntilRejoin")
 	end
 	
-	local function scheduleExpiry(p2)
-		-- upvalues: var6 (write), var2 (write), var1 (write), normal_1 (ref)
-		if var6 then
-			task.cancel(var6)
-			var6 = nil
+	local function scheduleExpiry(Settings) --[[ Line: 58 ]]
+		-- upvalues: DelayedThread (ref), Flag (ref), Count (ref), Normal2 (copy)
+		if DelayedThread then
+			task.cancel(DelayedThread)
+			DelayedThread = nil
 		end
-		local bannedUntil = p2.bannedUntil
+		local BannedUntil = Settings.bannedUntil
 		
-		if not bannedUntil then return end
-		local var7 = bannedUntil.Seconds - DateTime.now().UnixTimestamp
+		if not BannedUntil then return end
+		local SecondsDelta = BannedUntil.Seconds - DateTime.now().UnixTimestamp
 		
-		if var7 <= 0 then
+		if SecondsDelta > 0 then
+			DelayedThread = task.delay(SecondsDelta, function() --[[ Line: 71 ]]
+				-- upvalues: DelayedThread (upval), Flag (upval), Count (upval), Normal2 (upval)
+				DelayedThread = nil
+				
+				if Flag then return end
+				if DelayedThread then
+					task.cancel(DelayedThread)
+					DelayedThread = nil
+				end
+				Count += 1
+				Normal2("hiddenUntilRejoin")
+			end)
+			
 			return
 		end
-		var6 = task.delay(var7, function()
-			-- upvalues: var6 (copy), var2 (copy), var1 (copy), normal_1 (copy)
-			var6 = nil
-			
-			if var2 then
-				return
-			end
-			var1 += 1
-			normal_1("hiddenUntilRejoin")
-		end)
 	end
 	
-	local function updateRestrictionPresentation(p2, p3, p4)
-		-- upvalues: p1 (ref), var6 (write), normal_1 (ref), scheduleExpiry (ref), var5 (write)
-		local var7 = p3
+	local function updateRestrictionPresentation(p2, Settings, Callback) --[[ Line: 78 ]]
+		-- upvalues: p1 (copy), DelayedThread (ref), Normal2 (copy), scheduleExpiry (copy), Flag1 (ref)
+		local Settings1 = Settings
 		
-		if not var7 or var7.banReason == nil then
-			var7 = p1.getSettings()
+		if not Settings1 or Settings1.banReason == nil then
+			Settings1 = p1.getSettings()
 		end
-		if not p4() then return end
-		if not var7 then
+		if not Callback() then return end
+		if not Settings1 then
 			p1.onError("SettingsUnavailable")
 			
 			return
-		elseif var7.isBanned then
-			normal_1("restricted")
-			scheduleExpiry(var7)
-			local var8 = p2 == "gameJoin" and p1.getInformedOfBan()
+		end
+		if Settings1.isBanned then
+			Normal2("restricted")
+			scheduleExpiry(Settings1)
+			local InformedOfBan = p2 == "gameJoin" and p1.getInformedOfBan()
 			
-			if not p4() then return end
-			if var8 == false then
-				p1.showRestriction(var7, p2, p4)
+			if not Callback() then return end
+			if InformedOfBan == false then
+				p1.showRestriction(Settings1, p2, Callback)
 				
 				return
-			elseif var5 then
-				p1.showRestriction(var7, "mic", p4)
+			end
+			if Flag1 then
+				p1.showRestriction(Settings1, "mic", Callback)
 				
 				return
-			elseif var8 == nil then
+			end
+			if InformedOfBan == nil then
 				p1.onError("InformedOfBanUnavailable")
 			end
 			return
-		elseif p2 == "mic" then
-			if var6 then
-				task.cancel(var6)
-				var6 = nil
-			end
-			normal_1("hiddenUntilRejoin")
-			
-			return
 		else
-			p1.onError("PlayerModeratedBadState")
+			if p2 ~= "mic" then
+				p1.onError("PlayerModeratedBadState")
+				
+				return
+			end
+			if DelayedThread then
+				task.cancel(DelayedThread)
+				DelayedThread = nil
+			end
+			Normal2("hiddenUntilRejoin")
 		end
 	end
 	
 	return {
-		getPresentationState = normal,
-		refresh = function(p2, p3)
-			-- upvalues: var2 (write), promiseModule (copy), var6 (write), var1 (write), normal_1 (ref), var3 (write), var4 (write), var5 (write), updateRestrictionPresentation (ref), p1 (ref)
-			if var2 then
-				return promiseModule.resolve()
-			elseif p2 == "expiry" then
-				if not var2 then
-					if var6 then
-						task.cancel(var6)
-						var6 = nil
+		getPresentationState = Normal,
+		refresh = function(p2, p3) --[[ Line: 127 ]]
+			-- upvalues: Flag (ref), PromiseModule (upval), DelayedThread (ref), Count (ref), Normal2 (copy), Promise (ref), v1 (ref), Flag1 (ref), updateRestrictionPresentation (copy), p1 (copy)
+			if Flag then
+				return PromiseModule.resolve()
+			end
+			if p2 == "expiry" then
+				if not Flag then
+					if DelayedThread then
+						task.cancel(DelayedThread)
+						DelayedThread = nil
 					end
-					var1 += 1
-					normal_1("hiddenUntilRejoin")
+					Count += 1
+					Normal2("hiddenUntilRejoin")
 				end
-				return promiseModule.resolve()
-			elseif p2 == "mic" and var3 then
-				if var4 == "gameJoin" then
-					var5 = true
+				return PromiseModule.resolve()
+			elseif p2 == "mic" and Promise then
+				if v1 == "gameJoin" then
+					Flag1 = true
 				end
-				return var3
-			elseif (p2 == "gameJoin" or p2 == "realtime") and var6 then
-				task.cancel(var6)
-				var6 = nil
+				return Promise
+			else
+				if (p2 == "gameJoin" or p2 == "realtime") and DelayedThread then
+					task.cancel(DelayedThread)
+					DelayedThread = nil
+				end
+				Flag1 = false
+				Count += 1
+				local Count1: number = Count
+				
+				local function isCurrent(): boolean --[[ Line: 152 ]]
+					-- upvalues: Flag (upval), Count (upval), Count1 (copy)
+					return not Flag and Count == Count1
+				end
+				
+				if p2 ~= "mic" then
+					Normal2("restricted")
+				end
+				local Promise1 = PromiseModule.defer(function(Callback: () -> ()) --[[ Line: 163 ]]
+					-- upvalues: updateRestrictionPresentation (upval), p2 (copy), p3 (copy), isCurrent (copy)
+					updateRestrictionPresentation(p2, p3, isCurrent)
+					Callback()
+				end):catch(function() --[[ Line: 166 ]]
+					-- upvalues: Flag (upval), Count (upval), Count1 (copy), p1 (upval)
+					if not Flag and Count == Count1 then
+						p1.onError("RestrictionRequestFailed")
+					end
+				end)
+				Promise = Promise1
+				v1 = p2
+				Promise1:finally(function() --[[ Line: 174 ]]
+					-- upvalues: Promise (upval), Promise1 (copy), v1 (upval), Flag1 (upval)
+					if Promise == Promise1 then
+						Promise = nil
+						v1 = nil
+						Flag1 = false
+					end
+				end)
+				
+				return Promise1
 			end
-			var5 = false
-			var1 += 1
-			local var7 = var1
-			
-			local function isCurrent()
-				-- upvalues: var2 (copy), var1 (copy), var7 (ref)
-				return not var2 and var1 == var7
-			end
-			
-			if p2 ~= "mic" then
-				normal_1("restricted")
-			end
-			local var8 = promiseModule.defer(function(p4)
-				-- upvalues: updateRestrictionPresentation (copy), p2 (ref), p3 (ref), isCurrent (ref)
-				updateRestrictionPresentation(p2, p3, isCurrent)
-				p4()
-			end):catch(function()
-				-- upvalues: var2 (copy), var1 (copy), var7 (ref), p1 (copy)
-				if not var2 and var1 == var7 then
-					p1.onError("RestrictionRequestFailed")
-				end
-			end)
-			var3 = var8
-			var4 = p2
-			var8:finally(function()
-				-- upvalues: var3 (copy), var8 (ref), var4 (copy), var5 (copy)
-				if var3 == var8 then
-					var3 = nil
-					var4 = nil
-					var5 = false
-				end
-			end)
-			
-			return var8
 		end,
-		dispose = function()
-			-- upvalues: var2 (write), var1 (write), var3 (write), var4 (write), var5 (write), var6 (write), normal_1 (ref)
-			var2 = true
-			var1 += 1
+		dispose = function() --[[ Line: 187 ]]
+			-- upvalues: Flag (ref), Count (ref), Promise (ref), v1 (ref), Flag1 (ref), DelayedThread (ref), Normal2 (copy)
+			Flag = true
+			Count += 1
 			
-			if var3 then
-				var3:cancel()
-				var3 = nil
-				var4 = nil
-				var5 = false
+			if Promise then
+				Promise:cancel()
+				Promise = nil
+				v1 = nil
+				Flag1 = false
 			end
-			if var6 then
-				task.cancel(var6)
-				var6 = nil
+			if DelayedThread then
+				task.cancel(DelayedThread)
+				DelayedThread = nil
 			end
-			normal_1("normal")
+			Normal2("normal")
 		end
 	}
 end

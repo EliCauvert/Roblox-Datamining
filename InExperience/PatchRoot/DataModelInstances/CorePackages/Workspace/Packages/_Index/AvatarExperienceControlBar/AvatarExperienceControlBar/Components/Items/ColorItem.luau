@@ -1,50 +1,50 @@
-﻿local avatarExperienceControlBar = script:FindFirstAncestor("AvatarExperienceControlBar")
-local parent = avatarExperienceControlBar.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local colorGradientCircle = require(parent.AvatarExperienceCommon).Components.ColorGradientCircle
-local useSemanticTokensModule = require(avatarExperienceControlBar.Hooks.useSemanticTokens)
-local useHoverBindingModule = require(avatarExperienceControlBar.Hooks.useHoverBinding)
-local t = {
-	affordance = foundationModule.Enums.StateLayerAffordance.None
+﻿local AvatarExperienceControlBar = script:FindFirstAncestor("AvatarExperienceControlBar")
+local Parent = AvatarExperienceControlBar.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local ColorGradientCircle = require(Parent.AvatarExperienceCommon).Components.ColorGradientCircle
+local UseSemanticTokensModule = require(AvatarExperienceControlBar.Hooks.useSemanticTokens)
+local UseHoverBindingModule = require(AvatarExperienceControlBar.Hooks.useHoverBinding)
+local StateLayer = {
+	affordance = FoundationModule.Enums.StateLayerAffordance.None
 }
 
-local function getHoverTransparency(p1)
+local function getHoverTransparency(p1): number --[[ Line: 17 ]]
 	return if p1 then 0 else 0.2
 end
 
-return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useSemanticTokensModule (ref), useHoverBindingModule (ref), reactModule (ref), foundationModule (ref), t (ref), getHoverTransparency (ref), colorGradientCircle (ref)
-	local var1 = useSemanticTokensModule()
-	local var2, var3 = useHoverBindingModule()
-	local var4 = if p1.size then p1.size else var1.defaultIconContainerSize
-	local var5 = if p1.colorSize then p1.colorSize else var4
+return ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 32 | Named "ColorItem" ]]
+	-- upvalues: UseSemanticTokensModule (copy), UseHoverBindingModule (copy), ReactModule (copy), FoundationModule (copy), StateLayer (copy), getHoverTransparency (copy), ColorGradientCircle (copy)
+	local UseSemanticTokensModuleResult = UseSemanticTokensModule()
+	local UseHoverBindingModuleResult, UseHoverBindingModuleResult2 = UseHoverBindingModule()
+	local Size = if Frame.size then Frame.size else UseSemanticTokensModuleResult.defaultIconContainerSize
+	local ColorSize = if Frame.colorSize then Frame.colorSize else Size
 	
-	return reactModule.createElement(foundationModule.View, {
-		ref = p2,
-		LayoutOrder = p1.LayoutOrder,
-		stateLayer = t,
-		onStateChanged = if p1.disabled then nil else var3,
-		onActivated = p1.onActivated,
+	return ReactModule.createElement(FoundationModule.View, {
+		ref = Ref,
+		LayoutOrder = Frame.LayoutOrder,
+		stateLayer = StateLayer,
+		onStateChanged = if Frame.disabled then nil else UseHoverBindingModuleResult2,
+		onActivated = Frame.onActivated,
 		AutomaticSize = Enum.AutomaticSize.XY,
-		disabled = p1.disabled,
-		selection = { Selectable = p1.Selectable or false }
+		disabled = Frame.disabled,
+		selection = { Selectable = Frame.Selectable or false }
 	}, {
-		HoverHandler = reactModule.createElement(foundationModule.View, {
+		HoverHandler = ReactModule.createElement(FoundationModule.View, {
 			tag = "padding-small radius-circle clip auto-xy",
-			Size = UDim2.fromOffset(var4, var4),
-			GroupTransparency = var2:map(getHoverTransparency),
-			backgroundStyle = var2:map(function(p3)
-				-- upvalues: var1 (ref), p1 (ref)
-				return if p3 then var1.hoverIconBackgroundStyle elseif p1.isActive then var1.activeIconBackgroundStyle else {
+			Size = UDim2.fromOffset(Size, Size),
+			GroupTransparency = UseHoverBindingModuleResult:map(getHoverTransparency),
+			backgroundStyle = UseHoverBindingModuleResult:map(function(p1) --[[ Line: 51 ]]
+				-- upvalues: UseSemanticTokensModuleResult (copy), Frame (copy)
+				return if p1 then UseSemanticTokensModuleResult.hoverIconBackgroundStyle elseif Frame.isActive then UseSemanticTokensModuleResult.activeIconBackgroundStyle else {
 					Transparency = 1,
-					Color3 = var1.hoverIconBackgroundStyle.Color3
+					Color3 = UseSemanticTokensModuleResult.hoverIconBackgroundStyle.Color3
 				}
 			end)
 		}, {
-			ColorGradientCircle = reactModule.createElement(colorGradientCircle, {
-				Colors = p1.colors,
-				Size = UDim2.fromOffset(var5, var5),
+			ColorGradientCircle = ReactModule.createElement(ColorGradientCircle, {
+				Colors = Frame.colors,
+				Size = UDim2.fromOffset(ColorSize, ColorSize),
 				Position = UDim2.fromScale(0.5, 0.5),
 				AnchorPoint = Vector2.new(0.5, 0.5)
 			})

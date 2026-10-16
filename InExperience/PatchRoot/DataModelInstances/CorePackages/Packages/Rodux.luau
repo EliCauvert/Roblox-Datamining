@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Index.Rodux.Rodux)
+﻿return (require(script.Parent._Index.Rodux.Rodux))

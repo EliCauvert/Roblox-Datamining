@@ -1,22 +1,22 @@
-﻿local parent = script:FindFirstAncestor("FlyoutSidePanel").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local iconSize = foundationModule.Enums.IconSize
-local builderIconsModule = require(parent.BuilderIcons)
-local fFlagEnableFlyoutUncheckedBadge = require(parent.SharedFlags).FFlagEnableFlyoutUncheckedBadge
+﻿local Parent = script:FindFirstAncestor("FlyoutSidePanel").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local IconSize = FoundationModule.Enums.IconSize
+local BuilderIconsModule = require(Parent.BuilderIcons)
+local FFlagEnableFlyoutUncheckedBadge = require(Parent.SharedFlags).FFlagEnableFlyoutUncheckedBadge
 
-return function(p1)
-	-- upvalues: reactModule (ref), foundationModule (ref), fFlagEnableFlyoutUncheckedBadge (ref), builderIconsModule (ref), iconSize (ref)
-	return reactModule.createElement(foundationModule.View, {
+return function(p1) --[[ Line: 16 | Named "ChevronSmallDownButton" ]]
+	-- upvalues: ReactModule (copy), FoundationModule (copy), FFlagEnableFlyoutUncheckedBadge (copy), BuilderIconsModule (copy), IconSize (copy)
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "position-center-right anchor-center-right auto-xy radius-circle bg-action-standard padding-xsmall",
 		testId = "--core-ui-flyout-switch-account-chevron",
 		onActivated = p1.onActivated,
-		LayoutOrder = if fFlagEnableFlyoutUncheckedBadge then p1.layoutOrder else nil
+		LayoutOrder = if FFlagEnableFlyoutUncheckedBadge then p1.layoutOrder else nil
 	}, {
-		Icon = reactModule.createElement(foundationModule.Icon, {
+		Icon = ReactModule.createElement(FoundationModule.Icon, {
 			tag = "position-center-center anchor-center-center auto-xy content-emphasis",
-			name = builderIconsModule.Icon.ChevronSmallDown,
-			size = iconSize.Medium
+			name = BuilderIconsModule.Icon.ChevronSmallDown,
+			size = IconSize.Medium
 		})
 	})
 end

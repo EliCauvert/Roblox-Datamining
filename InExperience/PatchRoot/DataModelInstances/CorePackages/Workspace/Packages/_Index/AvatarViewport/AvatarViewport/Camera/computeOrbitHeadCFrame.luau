@@ -1,18 +1,18 @@
-﻿local constantsModule = require(script.Parent.Parent.Constants)
+﻿local ConstantsModule = require(script.Parent.Parent.Constants)
 
-return function(p1)
-	-- upvalues: constantsModule (ref)
-	local var1 = p1.character:FindFirstChild(p1.focusPartName or constantsModule.DefaultFocusPartName)
+return function(p1): CFrame? --[[ Line: 18 | Named "computeOrbitHeadCFrame" ]]
+	-- upvalues: ConstantsModule (copy)
+	local Child = p1.character:FindFirstChild(p1.focusPartName or ConstantsModule.DefaultFocusPartName)
 	
-	if not var1 or not var1:IsA("BasePart") then
+	if Child and Child:IsA("BasePart") then
+		local FieldOfViewDeg = p1.fieldOfViewDeg or ConstantsModule.DefaultOrbitFieldOfViewDeg
+		local Layout = p1.layout
+		local Position = Child.Position
+		local FieldOfViewForDistanceScaleDeg = p1.fieldOfViewForDistanceScaleDeg or FieldOfViewDeg
+		local ScaledDistanceScale = (p1.baseDistance or ConstantsModule.DefaultOrbitBaseDistance) * p1.distanceScale * (if FieldOfViewForDistanceScaleDeg > 0 and FieldOfViewDeg > 0 and FieldOfViewForDistanceScaleDeg ~= FieldOfViewDeg then math.tan((math.rad(FieldOfViewForDistanceScaleDeg * 0.5))) / math.tan((math.rad(FieldOfViewDeg * 0.5))) else 1)
+		
+		return CFrame.lookAt((CFrame.new(Position) * CFrame.Angles(0, math.rad(p1.yRotDeg), 0) * CFrame.new(0, 0.05, -ScaledDistanceScale)).Position, Position + Vector3.new(0, -((0.5 - (Layout.cutoutTopOffset + Layout.cutoutDiameter * 0.5) / math.max(Layout.viewportHeight, 1)) * ScaledDistanceScale * math.tan((math.rad(FieldOfViewDeg * 0.5))) * 2), 0))
+	else
 		return nil
 	end
-	local baseDistance = p1.baseDistance or constantsModule.DefaultOrbitBaseDistance
-	local fieldOfViewDeg = p1.fieldOfViewDeg or constantsModule.DefaultOrbitFieldOfViewDeg
-	local layout = p1.layout
-	local position = var1.Position
-	local fieldOfViewForDistanceScaleDeg = p1.fieldOfViewForDistanceScaleDeg or fieldOfViewDeg
-	local var2 = baseDistance * p1.distanceScale * (if fieldOfViewForDistanceScaleDeg > 0 and fieldOfViewDeg > 0 and fieldOfViewForDistanceScaleDeg ~= fieldOfViewDeg then math.tan(math.rad(fieldOfViewForDistanceScaleDeg * 0.5)) / math.tan(math.rad(fieldOfViewDeg * 0.5)) else 1)
-	
-	return CFrame.lookAt((CFrame.new(position) * CFrame.Angles(0, math.rad(p1.yRotDeg), 0) * CFrame.new(0, 0.05, -var2)).Position, position + Vector3.new(0, -((0.5 - (layout.cutoutTopOffset + layout.cutoutDiameter * 0.5) / math.max(layout.viewportHeight, 1)) * var2 * math.tan(math.rad(fieldOfViewDeg * 0.5)) * 2), 0))
 end

@@ -1,43 +1,45 @@
-﻿local topicContentsRodux = script:FindFirstAncestor("TopicContentsRodux")
-local topicContentsModelModule = require(topicContentsRodux.TopicContentsModel)
-local addTopicContentsModule = require(topicContentsRodux.AddTopicContents)
-local parent = topicContentsRodux.Parent
-local cryoModule = require(parent.Cryo)
-local addTopicInfos = require(parent.TopicInfosRodux).AddTopicInfos
-local _ = require(parent.DiscoveryTypes)
+﻿local TopicContentsRodux = script:FindFirstAncestor("TopicContentsRodux")
+local TopicContentsModelModule = require(TopicContentsRodux.TopicContentsModel)
+local AddTopicContentsModule = require(TopicContentsRodux.AddTopicContents)
+local Parent = TopicContentsRodux.Parent
+local CryoModule = require(Parent.Cryo)
+local AddTopicInfos = require(Parent.TopicInfosRodux).AddTopicInfos
+local _ = require(Parent.DiscoveryTypes)
 
 return {
 	key = "TopicContentsKey",
-	reducer = function(p1, p2)
-		-- upvalues: addTopicInfos (ref), topicContentsModelModule (ref), cryoModule (ref), addTopicContentsModule (ref)
-		local var1 = p1 or {}
+	reducer = function(p1, p2) --[[ Line: 12 ]]
+		-- upvalues: AddTopicInfos (copy), TopicContentsModelModule (copy), CryoModule (copy), AddTopicContentsModule (copy)
+		local P0 = p1 or {}
 		
-		if p2.type == addTopicInfos.name then
+		if p2.type == AddTopicInfos.name then
 			local t = {}
 			
-			for i, v in pairs(p2.topicInfos) do
-				t[v.uniqueKey] = var1[v.uniqueKey] or topicContentsModelModule.new()
+			for _, topicInfo in pairs(p2.topicInfos) do
+				t[topicInfo.uniqueKey] = P0[topicInfo.uniqueKey] or TopicContentsModelModule.new()
 			end
-			var1 = cryoModule.Dictionary.join(var1, t)
+			P0 = CryoModule.Dictionary.join(P0, t)
 			
-			return var1
-		elseif p2.type == addTopicContentsModule.name then
-			local topicContents = p2.topicContents
-			local topicKey = var1[p2.topicKey]
-			
-			if topicKey ~= nil then
-				if p2.isAppend then
-					topicContents.entries = cryoModule.List.join(topicKey.entries, topicContents.entries)
+			return P0
+		else
+			if p2.type == AddTopicContentsModule.name then
+				local TopicContents = p2.topicContents
+				local Entry = P0[p2.topicKey]
+				
+				if Entry ~= nil then
+					if p2.isAppend then
+						TopicContents.entries = CryoModule.List.join(Entry.entries, TopicContents.entries)
+					end
+					if TopicContents.updatedTimestamp == nil then
+						TopicContents.updatedTimestamp = Entry.updatedTimestamp
+					end
 				end
-				if topicContents.updatedTimestamp == nil then
-					topicContents.updatedTimestamp = topicKey.updatedTimestamp
+				if TopicContents.updatedTimestamp == nil then
+					TopicContents.updatedTimestamp = tick()
 				end
+				P0 = CryoModule.Dictionary.join(P0, { [p2.topicKey] = TopicContents })
 			end
-			if topicContents.updatedTimestamp == nil then
-				topicContents.updatedTimestamp = tick()
-			end
-			var1 = cryoModule.Dictionary.join(var1, { [p2.topicKey] = topicContents })
+			return P0
 		end
-		return var1
 	end
 }

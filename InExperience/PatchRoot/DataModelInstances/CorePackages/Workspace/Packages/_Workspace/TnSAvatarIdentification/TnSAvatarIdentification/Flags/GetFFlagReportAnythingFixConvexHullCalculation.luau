@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("ReportAnythingFixConvexHullCalculation", false)
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastFlag("ReportAnythingFixConvexHullCalculation")
 end

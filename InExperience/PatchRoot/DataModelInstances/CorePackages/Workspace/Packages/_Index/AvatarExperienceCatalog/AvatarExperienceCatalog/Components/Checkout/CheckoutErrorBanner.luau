@@ -1,11 +1,11 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-return reactModule.memo(function(p1)
-	-- upvalues: useLocalization (ref), reactModule (ref), foundationModule (ref)
-	local var1 = useLocalization({
+return ReactModule.memo(function(p1) --[[ Line: 14 | Named "CheckoutErrorBanner" ]]
+	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), FoundationModule (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
 		checkoutErrorTitleSingular = "Feature.Catalog.Title.Checkout.PurchaseFailedSingular",
 		checkoutErrorDescription = "Feature.Catalog.Message.Checkout.PurchaseFailed",
 		checkoutErrorTitlePlural = {
@@ -14,23 +14,23 @@ return reactModule.memo(function(p1)
 		}
 	})
 	
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "size-full-0 auto-y row gap-medium bg-surface-200 items-center radius-medium padding-large",
 		testId = "CheckoutErrorBanner"
 	}, {
-		CheckoutErrorIcon = reactModule.createElement(foundationModule.Icon, {
-			name = foundationModule.Enums.IconName.TriangleExclamation,
-			variant = foundationModule.Enums.IconVariant.Filled,
-			size = foundationModule.Enums.InputSize.Large
+		CheckoutErrorIcon = ReactModule.createElement(FoundationModule.Icon, {
+			name = FoundationModule.Enums.IconName.TriangleExclamation,
+			variant = FoundationModule.Enums.IconVariant.Filled,
+			size = FoundationModule.Enums.InputSize.Large
 		}),
-		CheckoutTextRows = reactModule.createElement(foundationModule.View, { tag = "size-full-0 col gap-small fill auto-y" }, {
-			CheckoutErrorTitle = reactModule.createElement(foundationModule.Text, {
+		CheckoutTextRows = ReactModule.createElement(FoundationModule.View, { tag = "size-full-0 col gap-small fill auto-y" }, {
+			CheckoutErrorTitle = ReactModule.createElement(FoundationModule.Text, {
 				tag = "size-full-0 auto-y text-wrap fill text-label-medium text-align-x-left content-emphasis",
-				Text = if p1.erroredItemCount == 1 then var1.checkoutErrorTitleSingular else var1.checkoutErrorTitlePlural
+				Text = if p1.erroredItemCount == 1 then UseLocalizationResult.checkoutErrorTitleSingular else UseLocalizationResult.checkoutErrorTitlePlural
 			}),
-			CheckoutErrorDescription = reactModule.createElement(foundationModule.Text, {
+			CheckoutErrorDescription = ReactModule.createElement(FoundationModule.Text, {
 				tag = "size-full-0 auto-y text-wrap fill text-body-medium text-align-x-left content-default",
-				Text = var1.checkoutErrorDescription
+				Text = UseLocalizationResult.checkoutErrorDescription
 			})
 		})
 	})

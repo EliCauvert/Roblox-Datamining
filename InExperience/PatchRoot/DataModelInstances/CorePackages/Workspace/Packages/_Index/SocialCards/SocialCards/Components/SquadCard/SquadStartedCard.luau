@@ -1,20 +1,20 @@
-﻿local parent = script:FindFirstAncestor("SocialCards").Parent
-local foundationModule = require(parent.Foundation)
-local getStandardSizeAvatarHeadShotRbxthumb = require(parent.UserLib).Utils.getStandardSizeAvatarHeadShotRbxthumb
-local imagePile = require(parent.AppBlox).ImagePile
-local reactModule = require(parent.React)
-local useNavigation = require(parent.Navigation).useNavigation
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useTokens = foundationModule.Hooks.useTokens
-local squadJoinButtonModule = require(parent.Squads.SquadJoinButton)
-local squadComponentAccessWrapperModule = require(parent.Squads.SquadComponentAccessWrapper)
-local squadButtonSourceEnum = require(parent.Squads.Enums).SquadButtonSourceEnum
+﻿local Parent = script:FindFirstAncestor("SocialCards").Parent
+local FoundationModule = require(Parent.Foundation)
+local GetStandardSizeAvatarHeadShotRbxthumbFunction = require(Parent.UserLib).Utils.getStandardSizeAvatarHeadShotRbxthumb
+local ImagePile = require(Parent.AppBlox).ImagePile
+local ReactModule = require(Parent.React)
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local SquadJoinButtonModule = require(Parent.Squads.SquadJoinButton)
+local SquadComponentAccessWrapperModule = require(Parent.Squads.SquadComponentAccessWrapper)
+local SquadButtonSourceEnum = require(Parent.Squads.Enums).SquadButtonSourceEnum
 
-return function(p1)
-	-- upvalues: useNavigation (ref), useTokens (ref), useLocalization (ref), reactModule (ref), getStandardSizeAvatarHeadShotRbxthumb (ref), imagePile (ref), foundationModule (ref), squadComponentAccessWrapperModule (ref), squadJoinButtonModule (ref), squadButtonSourceEnum (ref)
-	local var1 = useNavigation()
-	local var2 = useTokens()
-	local var3 = useLocalization({
+return function(p1) --[[ Line: 23 | Named "SquadStartedCard" ]]
+	-- upvalues: UseNavigationFunction (copy), UseTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), GetStandardSizeAvatarHeadShotRbxthumbFunction (copy), ImagePile (copy), FoundationModule (copy), SquadComponentAccessWrapperModule (copy), SquadJoinButtonModule (copy), SquadButtonSourceEnum (copy)
+	local UseNavigationResult = UseNavigationFunction()
+	local UseTokensResult = UseTokensFunction()
+	local UseLocalizationResult = UseLocalizationFunction({
 		onePersonActive = "Feature.Squads.Description.OnePersonActive",
 		partyStarted = "Feature.Squads.Label.PartyStartedText",
 		manyPeopleActive = {
@@ -22,97 +22,96 @@ return function(p1)
 			userCount = #p1.participantUserIds
 		}
 	})
+	local UseResult = ReactModule.useCallback(function(List) --[[ Line: 32 ]]
+		-- upvalues: GetStandardSizeAvatarHeadShotRbxthumbFunction (upval), UseTokensResult (copy), ReactModule (upval), ImagePile (upval)
+		local Images = {}
+		
+		for _, value in ipairs(List) do
+			table.insert(Images, {
+				Image = GetStandardSizeAvatarHeadShotRbxthumbFunction((tostring(value))),
+				BackgroundColor3 = UseTokensResult.Color.Surface.Surface_200.Color3:lerp(UseTokensResult.Color.ActionStandard.Background.Color3, 1 - UseTokensResult.Color.ActionStandard.Background.Transparency)
+			})
+		end
+		return ReactModule.createElement(ImagePile, {
+			images = Images,
+			imageBorderColor = if UseTokensResult.Config.Theme.IsUIBlox == "true" then UseTokensResult.Color.Shift.Shift_200.Color3 else UseTokensResult.Color.Surface.Surface_200.Color3
+		})
+	end, {})
 	
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "bg-shift-200 radius-large",
 		AutomaticSize = Enum.AutomaticSize.Y,
 		Size = UDim2.fromScale(1, 0),
 		layout = {
 			FillDirection = Enum.FillDirection.Vertical,
-			Padding = UDim.new(0, var2.Gap.Small),
+			Padding = UDim.new(0, UseTokensResult.Gap.Small),
 			SortOrder = Enum.SortOrder.LayoutOrder
 		},
 		padding = {
-			bottom = UDim.new(0, var2.Padding.Medium),
-			left = UDim.new(0, var2.Padding.Large),
-			right = UDim.new(0, var2.Padding.Large),
-			top = UDim.new(0, var2.Padding.Medium)
+			bottom = UDim.new(0, UseTokensResult.Padding.Medium),
+			left = UDim.new(0, UseTokensResult.Padding.Large),
+			right = UDim.new(0, UseTokensResult.Padding.Large),
+			top = UDim.new(0, UseTokensResult.Padding.Medium)
 		},
 		selection = { Selectable = true }
 	}, {
-		InfoContainer = reactModule.createElement(foundationModule.View, {
+		InfoContainer = ReactModule.createElement(FoundationModule.View, {
 			LayoutOrder = 1,
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Size = UDim2.fromScale(1, 0),
 			layout = {
 				FillDirection = Enum.FillDirection.Horizontal,
 				SortOrder = Enum.SortOrder.LayoutOrder,
-				Padding = UDim.new(0, var2.Gap.Large),
+				Padding = UDim.new(0, UseTokensResult.Gap.Large),
 				VerticalAlignment = Enum.VerticalAlignment.Center
 			}
 		}, {
-			Thumbnail = if #p1.participantUserIds > 0 then reactModule.createElement(foundationModule.View, {
+			Thumbnail = if #p1.participantUserIds > 0 then ReactModule.createElement(FoundationModule.View, {
 				LayoutOrder = 1,
-				Size = UDim2.fromOffset(var2.Size.Size_1000, var2.Size.Size_1000)
-			}, {
-				reactModule.useCallback(function(p2)
-					-- upvalues: getStandardSizeAvatarHeadShotRbxthumb (copy), var2 (ref), reactModule (copy), imagePile (copy)
-					local t = {}
-					
-					for i, v in ipairs(p2) do
-						table.insert(t, {
-							Image = getStandardSizeAvatarHeadShotRbxthumb(tostring(v)),
-							BackgroundColor3 = var2.Color.Surface.Surface_200.Color3:lerp(var2.Color.ActionStandard.Background.Color3, 1 - var2.Color.ActionStandard.Background.Transparency)
-						})
-					end
-					return reactModule.createElement(imagePile, {
-						images = t,
-						imageBorderColor = if var2.Config.Theme.IsUIBlox == "true" then var2.Color.Shift.Shift_200.Color3 else var2.Color.Surface.Surface_200.Color3
-					})
-				end, {})(p1.participantUserIds)
-			}) else nil,
-			TextContainer = reactModule.createElement(foundationModule.View, {
+				Size = UDim2.fromOffset(UseTokensResult.Size.Size_1000, UseTokensResult.Size.Size_1000)
+			}, { UseResult(p1.participantUserIds) }) else nil,
+			TextContainer = ReactModule.createElement(FoundationModule.View, {
 				LayoutOrder = 2,
 				AutomaticSize = Enum.AutomaticSize.Y,
-				Size = if #p1.participantUserIds > 0 then UDim2.new(1, (-var2.Size.Size_1000) - var2.Padding.Large, 0, 0) else UDim2.fromScale(1, 0),
+				Size = if #p1.participantUserIds > 0 then UDim2.new(1, -UseTokensResult.Size.Size_1000 - UseTokensResult.Padding.Large, 0, 0) else UDim2.fromScale(1, 0),
 				layout = {
 					FillDirection = Enum.FillDirection.Vertical,
-					Padding = UDim.new(0, var2.Gap.XSmall),
+					Padding = UDim.new(0, UseTokensResult.Gap.XSmall),
 					SortOrder = Enum.SortOrder.LayoutOrder
 				}
 			}, {
-				Title = reactModule.createElement(foundationModule.Text, {
+				Title = ReactModule.createElement(FoundationModule.Text, {
 					LayoutOrder = 1,
 					AutomaticSize = Enum.AutomaticSize.XY,
-					backgroundStyle = var2.Color.None,
-					fontStyle = var2.Typography.TitleMedium,
-					Text = var3.partyStarted,
-					textStyle = var2.Color.Content.Emphasis,
+					backgroundStyle = UseTokensResult.Color.None,
+					fontStyle = UseTokensResult.Typography.TitleMedium,
+					Text = UseLocalizationResult.partyStarted,
+					textStyle = UseTokensResult.Color.Content.Emphasis,
 					TextTruncate = Enum.TextTruncate.AtEnd
 				}),
-				Status = reactModule.createElement(foundationModule.Text, {
+				Status = ReactModule.createElement(FoundationModule.Text, {
 					LayoutOrder = 2,
 					AutomaticSize = Enum.AutomaticSize.XY,
-					backgroundStyle = var2.Color.None,
-					fontStyle = var2.Typography.LabelSmall,
-					Text = if #p1.participantUserIds == 1 then var3.onePersonActive else var3.manyPeopleActive,
-					textStyle = var2.Color.Content.Muted,
+					backgroundStyle = UseTokensResult.Color.None,
+					fontStyle = UseTokensResult.Typography.LabelSmall,
+					Text = if #p1.participantUserIds == 1 then UseLocalizationResult.onePersonActive else UseLocalizationResult.manyPeopleActive,
+					textStyle = UseTokensResult.Color.Content.Muted,
 					TextTruncate = Enum.TextTruncate.AtEnd
 				})
 			})
 		}),
-		ActionButton = reactModule.createElement(squadComponentAccessWrapperModule, { parentChannelId = p1.conversationId }, {
-			reactModule.createElement(squadJoinButtonModule, {
+		ActionButton = ReactModule.createElement(SquadComponentAccessWrapperModule, { parentChannelId = p1.conversationId }, {
+			ReactModule.createElement(SquadJoinButtonModule, {
 				isFullWidth = true,
 				isInCard = true,
 				layoutOrder = 3,
 				shouldAnimate = false,
 				conversationId = p1.conversationId,
-				onActivated = function()
-					-- upvalues: var1 (ref), p1 (ref)
-					var1.navigate("SquadLobby", { conversationId = p1.conversationId })
+				onActivated = function() --[[ Line: 133 ]]
+					-- upvalues: UseNavigationResult (copy), p1 (copy)
+					UseNavigationResult.navigate("SquadLobby", { conversationId = p1.conversationId })
 				end,
-				squadButtonSource = squadButtonSourceEnum.PartyStartedCard,
+				squadButtonSource = SquadButtonSourceEnum.PartyStartedCard,
 				squadLocation = p1.squadLocation
 			})
 		})

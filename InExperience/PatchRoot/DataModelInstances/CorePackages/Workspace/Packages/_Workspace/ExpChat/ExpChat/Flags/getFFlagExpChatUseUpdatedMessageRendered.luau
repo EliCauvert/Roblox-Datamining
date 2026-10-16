@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("ExpChatUseUpdatedMessageRendered", false)
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastFlag("ExpChatUseUpdatedMessageRendered") and game:GetEngineFeature("ExpChatAddMessageRenderedSurfaceFields")
 end

@@ -1,35 +1,35 @@
 ﻿local _ = require(script:FindFirstAncestor("Foundation").Providers.Style.Tokens)
-local var1 = nil
-local t = {}
-local t_1 = {
-	getTokenOverrides = function()
-		-- upvalues: var1 (write)
-		return var1
+local TokenOverrides = nil
+local List = {}
+local config = {
+	getTokenOverrides = function() --[[ Line: 35 ]]
+		-- upvalues: TokenOverrides (ref)
+		return TokenOverrides
 	end,
-	setTokenOverrides = function(value)
-		-- upvalues: var1 (write), t (ref)
-		var1 = value
+	setTokenOverrides = function(Value) --[[ Line: 38 ]]
+		-- upvalues: TokenOverrides (ref), List (copy)
+		TokenOverrides = Value
 		
-		for i, v in t do
-			v(value)
+		for _, value in List do
+			value(Value)
 		end
 	end,
-	subscribe = function(p1)
-		-- upvalues: t (ref)
-		table.insert(t, p1)
+	subscribe = function(Value) --[[ Line: 44 ]]
+		-- upvalues: List (copy)
+		table.insert(List, Value)
 		
-		return function()
-			-- upvalues: t (copy), p1 (ref)
-			local index = table.find(t, p1)
+		return function() --[[ Line: 46 ]]
+			-- upvalues: List (upval), Value (copy)
+			local FoundIndex: number? = table.find(List, Value)
 			
-			if index then
-				table.remove(t, index)
+			if FoundIndex then
+				table.remove(List, FoundIndex)
 			end
 		end
 	end
 }
 
-return function()
-	-- upvalues: t_1 (ref)
-	return t_1
+return function() --[[ Line: 55 | Named "getTokenOverridesStore" ]]
+	-- upvalues: config (copy)
+	return config
 end

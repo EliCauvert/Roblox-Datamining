@@ -1,14 +1,14 @@
-﻿local currencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
-local reactModule = require(currencyTransfers.Parent.React)
-local transferContextModule = require(currencyTransfers.Contexts.TransferContext)
-local _ = require(currencyTransfers.Stores.createTransferStore)
+﻿local CurrencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
+local ReactModule = require(CurrencyTransfers.Parent.React)
+local TransferContextModule = require(CurrencyTransfers.Contexts.TransferContext)
+local _ = require(CurrencyTransfers.Stores.createTransferStore)
 
-return function()
-	-- upvalues: reactModule (ref), transferContextModule (ref)
-	local var1 = reactModule.useContext(transferContextModule)
+return function() --[[ Line: 9 | Named "useTransferStore" ]]
+	-- upvalues: ReactModule (copy), TransferContextModule (copy)
+	local UseContextResult = ReactModule.useContext(TransferContextModule)
 	
-	if var1 == nil then
+	if UseContextResult == nil then
 		error("useTransferStore must be used within a TransferContext")
 	end
-	return var1
+	return UseContextResult
 end

@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("MomentsMuteVideoAudioOnly", false)
 
-return function()
+return function() --[[ Line: 9 ]]
 	return game:GetFastFlag("MomentsMuteVideoAudioOnly")
 end

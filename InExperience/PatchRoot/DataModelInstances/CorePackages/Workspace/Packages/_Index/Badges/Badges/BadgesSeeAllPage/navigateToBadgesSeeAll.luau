@@ -1,16 +1,16 @@
-﻿local badges = script:FindFirstAncestor("Badges")
-local parent = badges.Parent
-local appPage = require(parent.RobloxAppEnums).AppPage
-local sduiLoadTimer = require(parent.SduiSharedUtilities).SduiLoadTimer
-local fetchBadgesSeeAllPageIfNeededModule = require(badges.BadgesSeeAllPage.fetchBadgesSeeAllPageIfNeeded)
+﻿local Badges = script:FindFirstAncestor("Badges")
+local Parent = Badges.Parent
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local SduiLoadTimer = require(Parent.SduiSharedUtilities).SduiLoadTimer
+local FetchBadgesSeeAllPageIfNeededModule = require(Badges.BadgesSeeAllPage.fetchBadgesSeeAllPageIfNeeded)
 
-return function(p1, p2)
-	-- upvalues: sduiLoadTimer (ref), appPage (ref), fetchBadgesSeeAllPageIfNeededModule (ref)
-	local var1 = sduiLoadTimer.createLoadTimer(appPage.BadgesSeeAll)
-	var1.start("navigate")
-	p1.navigate(appPage.BadgesSeeAll, {
-		universeId = p2,
-		pageTimer = var1,
-		url = fetchBadgesSeeAllPageIfNeededModule(p2, var1)
+return function(p1, UniverseId) --[[ Line: 9 | Named "navigateToBadgesSeeAll" ]]
+	-- upvalues: SduiLoadTimer (copy), AppPage (copy), FetchBadgesSeeAllPageIfNeededModule (copy)
+	local LoadTimer = SduiLoadTimer.createLoadTimer(AppPage.BadgesSeeAll)
+	LoadTimer.start("navigate")
+	p1.navigate(AppPage.BadgesSeeAll, {
+		universeId = UniverseId,
+		pageTimer = LoadTimer,
+		url = FetchBadgesSeeAllPageIfNeededModule(UniverseId, LoadTimer)
 	})
 end

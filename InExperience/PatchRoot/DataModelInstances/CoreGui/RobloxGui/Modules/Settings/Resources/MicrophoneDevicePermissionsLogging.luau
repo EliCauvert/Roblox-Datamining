@@ -1,6 +1,6 @@
-﻿local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
-local avatarChatService = game:GetService("AvatarChatService")
-local microphoneDevicePermissionsLoggingEventName = game:DefineFastString("MicrophoneDevicePermissionsLoggingEventName", "microphoneDevicePermissionPrompted")
+﻿local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
+local AvatarChatService = game:GetService("AvatarChatService")
+local MicrophoneDevicePermissionsLoggingEventName = game:DefineFastString("MicrophoneDevicePermissionsLoggingEventName", "microphoneDevicePermissionPrompted")
 
 return {
 	_initialized = false,
@@ -14,71 +14,72 @@ return {
 		PROMPT_IMPRESSION = 1,
 		PROMPT_INTERACTION = 2
 	},
-	_init = function(p1, p2, p3)
-		-- upvalues: avatarChatService (ref)
-		p1._initialized = true
-		p1.placeId = game.PlaceId
-		p1.universeId = game.GameId
-		p1.placeVoiceEnabled = avatarChatService:IsEnabled(p2, Enum.AvatarChatServiceFeature.PlaceAudio)
-		p1.universeVoiceEnabled = avatarChatService:IsEnabled(p2, Enum.AvatarChatServiceFeature.UniverseAudio)
-		p1:logExperienceJoin({ didAuthorize = p3 })
+	_init = function(EventPayload, ClientFeatures, DidAuthorize) --[[ Line: 56 ]]
+		-- upvalues: AvatarChatService (copy)
+		EventPayload._initialized = true
+		EventPayload.placeId = game.PlaceId
+		EventPayload.universeId = game.GameId
+		EventPayload.placeVoiceEnabled = AvatarChatService:IsEnabled(ClientFeatures, Enum.AvatarChatServiceFeature.PlaceAudio)
+		EventPayload.universeVoiceEnabled = AvatarChatService:IsEnabled(ClientFeatures, Enum.AvatarChatServiceFeature.UniverseAudio)
+		EventPayload:logExperienceJoin({ didAuthorize = DidAuthorize })
 	end,
-	_getEventPayload = function(p1, p2, p3)
+	_getEventPayload = function(EventPayload, UiType, EventPayload1) --[[ Line: 68 ]]
 		return {
-			uiType = p2,
-			uiContext = p3.uiContext,
-			didAuthorize = p3.didAuthorize,
-			placeId = p1.placeId,
-			universeId = p1.universeId,
-			placeVoiceEnabled = p1.placeVoiceEnabled,
-			universeVoiceEnabled = p1.universeVoiceEnabled,
-			clientSessionId = p1.clientSessionId
+			uiType = UiType,
+			uiContext = EventPayload1.uiContext,
+			didAuthorize = EventPayload1.didAuthorize,
+			placeId = EventPayload.placeId,
+			universeId = EventPayload.universeId,
+			placeVoiceEnabled = EventPayload.placeVoiceEnabled,
+			universeVoiceEnabled = EventPayload.universeVoiceEnabled,
+			clientSessionId = EventPayload.clientSessionId
 		}
 	end,
-	_isReady = function(p1)
+	_isReady = function(p1) --[[ Line: 81 ]]
 		return p1._initialized
 	end,
-	init = function(p1, p2)
-		-- upvalues: avatarChatService (ref)
-		if avatarChatService.ClientFeaturesInitialized then
-			p1:_init(avatarChatService.ClientFeatures, p2)
+	init = function(p1, DidAuthorize) --[[ Line: 85 ]]
+		-- upvalues: AvatarChatService (copy)
+		if AvatarChatService.ClientFeaturesInitialized then
+			p1:_init(AvatarChatService.ClientFeatures, DidAuthorize)
 			
 			return
+		else
+			local Connection = nil
+			Connection = AvatarChatService:GetPropertyChangedSignal("ClientFeatures"):Connect(function() --[[ Line: 90 ]]
+				-- upvalues: p1 (copy), AvatarChatService (upval), DidAuthorize (copy), Connection (ref)
+				p1:_init(AvatarChatService.ClientFeatures, DidAuthorize)
+				Connection:Disconnect()
+			end)
 		end
-		local var1 = nil
-		var1 = avatarChatService:GetPropertyChangedSignal("ClientFeatures"):Connect(function()
-			-- upvalues: p1 (ref), avatarChatService (copy), p2 (ref), var1 (write)
-			p1:_init(avatarChatService.ClientFeatures, p2)
-			var1:Disconnect()
-		end)
 	end,
-	logExperienceJoin = function(p1, p2)
-		-- upvalues: rbxAnalyticsService (ref), microphoneDevicePermissionsLoggingEventName (ref)
+	logExperienceJoin = function(p1, p2) --[[ Line: 97 ]]
+		-- upvalues: RbxAnalyticsService (copy), MicrophoneDevicePermissionsLoggingEventName (copy)
 		if p1:_isReady() then
-			rbxAnalyticsService:SendEventDeferred("client", "voice", microphoneDevicePermissionsLoggingEventName, p1:_getEventPayload(p1.UIType.EXPERIENCE_JOIN, p2))
+			RbxAnalyticsService:SendEventDeferred("client", "voice", MicrophoneDevicePermissionsLoggingEventName, p1:_getEventPayload(p1.UIType.EXPERIENCE_JOIN, p2))
 			
 			return
 		end
 	end,
-	logPromptImpression = function(p1, p2)
-		-- upvalues: rbxAnalyticsService (ref), microphoneDevicePermissionsLoggingEventName (ref)
+	logPromptImpression = function(p1, p2) --[[ Line: 110 ]]
+		-- upvalues: RbxAnalyticsService (copy), MicrophoneDevicePermissionsLoggingEventName (copy)
 		if p1:_isReady() then
-			rbxAnalyticsService:SendEventDeferred("client", "voice", microphoneDevicePermissionsLoggingEventName, p1:_getEventPayload(p1.UIType.PROMPT_IMPRESSION, p2))
+			RbxAnalyticsService:SendEventDeferred("client", "voice", MicrophoneDevicePermissionsLoggingEventName, p1:_getEventPayload(p1.UIType.PROMPT_IMPRESSION, p2))
 			
 			return
 		end
 	end,
-	logPromptInteraction = function(p1, p2)
-		-- upvalues: rbxAnalyticsService (ref), microphoneDevicePermissionsLoggingEventName (ref)
+	logPromptInteraction = function(p1, p2) --[[ Line: 123 ]]
+		-- upvalues: RbxAnalyticsService (copy), MicrophoneDevicePermissionsLoggingEventName (copy)
 		if p1:_isReady() then
-			rbxAnalyticsService:SendEventDeferred("client", "voice", microphoneDevicePermissionsLoggingEventName, p1:_getEventPayload(p1.UIType.PROMPT_INTERACTION, p2))
+			RbxAnalyticsService:SendEventDeferred("client", "voice", MicrophoneDevicePermissionsLoggingEventName, p1:_getEventPayload(p1.UIType.PROMPT_INTERACTION, p2))
 			
 			return
 		end
 	end,
-	setClientSessionId = function(value, p1)
-		if value:_isReady() and value.clientSessionId ~= p1 then
-			value.clientSessionId = p1
+	setClientSessionId = function(p1, ClientSessionId) --[[ Line: 136 ]]
+		if p1:_isReady() and p1.clientSessionId ~= ClientSessionId then
+			p1.clientSessionId = ClientSessionId
 			
 			return
 		end

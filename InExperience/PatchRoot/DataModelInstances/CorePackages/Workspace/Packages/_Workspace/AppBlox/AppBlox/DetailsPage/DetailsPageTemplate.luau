@@ -1,97 +1,98 @@
-﻿local appBlox = script:FindFirstAncestor("AppBlox")
-local parent = appBlox.Parent
-local UIBloxModule = require(parent.UIBlox)
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local roactModule = require(parent.Roact)
-local tModule = require(parent.t)
-local useTokens = require(parent.Foundation).Hooks.useTokens
-local withStyle = UIBloxModule.Core.Style.withStyle
-local loadableImage = UIBloxModule.App.Loading.LoadableImage
-local images = UIBloxModule.App.ImageSet.Images
-local iconButton = UIBloxModule.App.Button.IconButton
-local iconSize = UIBloxModule.App.ImageSet.Enum.IconSize
-local getIconSize = UIBloxModule.App.ImageSet.getIconSize
-local getIconSizeUDim2 = UIBloxModule.App.ImageSet.getIconSizeUDim2
-local verticalScrollView = UIBloxModule.App.Container.VerticalScrollView
-local actionBar = UIBloxModule.App.Button.ActionBar
-local stickyActionBarModule = require(script.Parent.Parent.StickyActionBar)
-local deviceType = require(parent.RobloxAppEnums).DeviceType
-local useLastInputMode = require(parent.FocusNavigationUtils).useLastInputMode
-local signal = require(parent.AppCommonLib).Signal
-local getPlatformConfigModule = require(script.Parent.getPlatformConfig)
-local detailsPageHeaderModule = require(script.Parent.DetailsPageHeader)
-local detailsPageBodyModule = require(script.Parent.DetailsPageBody)
-local validateDetailsPageComponentListModule = require(script.Parent.validateDetailsPageComponentList)
-local useAnimateScrollViewToSelectionModule = require(appBlox.useAnimateScrollViewToSelection)
-local getTestId = require(parent.RoactUtils).getTestId
-local fFlagLuaAppFixDetailsPageThumbnailRenderInPhone = require(parent.SharedFlags).FFlagLuaAppFixDetailsPageThumbnailRenderInPhone
-local fFlagLuaAppFixSDPLayout = require(parent.SharedFlags).FFlagLuaAppFixSDPLayout
-local fFlagLuaAppAddTestIdsForArrow = require(parent.SharedFlags).FFlagLuaAppAddTestIdsForArrow
-local fFlagLuaAppEdpConsoleMediaGalleryVideo = require(parent.SharedFlags).FFlagLuaAppEdpConsoleMediaGalleryVideo
-local detailsPageTemplate = roactModule.PureComponent:extend("DetailsPageTemplate")
+﻿local AppBlox = script:FindFirstAncestor("AppBlox")
+local Parent = AppBlox.Parent
+local UIBloxModule = require(Parent.UIBlox)
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local RoactModule = require(Parent.Roact)
+local TModule = require(Parent.t)
+local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+local WithStyleFunction = UIBloxModule.Core.Style.withStyle
+local LoadableImage = UIBloxModule.App.Loading.LoadableImage
+local Images = UIBloxModule.App.ImageSet.Images
+local IconButton = UIBloxModule.App.Button.IconButton
+local IconSize = UIBloxModule.App.ImageSet.Enum.IconSize
+local GetIconSizeFunction = UIBloxModule.App.ImageSet.getIconSize
+local GetIconSizeUDim2Function = UIBloxModule.App.ImageSet.getIconSizeUDim2
+local VerticalScrollView = UIBloxModule.App.Container.VerticalScrollView
+local ActionBar = UIBloxModule.App.Button.ActionBar
+local StickyActionBarModule = require(script.Parent.Parent.StickyActionBar)
+local DeviceType = require(Parent.RobloxAppEnums).DeviceType
+local UseLastInputModeFunction = require(Parent.FocusNavigationUtils).useLastInputMode
+local Signal = require(Parent.AppCommonLib).Signal
+local GetPlatformConfigModule = require(script.Parent.getPlatformConfig)
+local DetailsPageHeaderModule = require(script.Parent.DetailsPageHeader)
+local DetailsPageBodyModule = require(script.Parent.DetailsPageBody)
+local UseAnimateScrollViewToSelectionModule = require(AppBlox.useAnimateScrollViewToSelection)
+local GetTestIdFunction = require(Parent.RoactUtils).getTestId
+local FFlagLuaAppFixDetailsPageThumbnailRenderInPhone = require(Parent.SharedFlags).FFlagLuaAppFixDetailsPageThumbnailRenderInPhone
+local FFlagLuaAppFixSDPLayout = require(Parent.SharedFlags).FFlagLuaAppFixSDPLayout
+local FFlagLuaAppAddTestIdsForArrow = require(Parent.SharedFlags).FFlagLuaAppAddTestIdsForArrow
+local FFlagLuaAppEdpConsoleMediaGalleryVideo = require(Parent.SharedFlags).FFlagLuaAppEdpConsoleMediaGalleryVideo
+local DetailsPageTemplate = RoactModule.PureComponent:extend("DetailsPageTemplate")
 
-local function _(p1, p2)
+local function _(p1, p2) --[[ Line: 59 | Named "applyTokenScaling" ]]
 	return p1 * p2.Stroke.Standard
 end
 
-detailsPageTemplate.validateProps = tModule.strictInterface({
-	foundationTokens = tModule.table,
-	thumbnailImageUrl = tModule.optional(tModule.string),
-	thumbnailHeight = tModule.optional(tModule.number),
-	thumbnailAspectRatio = tModule.optional(tModule.Vector2),
-	thumbnailShadowHeight = if fFlagLuaAppFixDetailsPageThumbnailRenderInPhone then tModule.optional(tModule.number) else nil,
-	titleText = tModule.optional(tModule.string),
-	subTitleText = tModule.optional(tModule.string),
-	actionBarLabelText = tModule.optional(tModule.string),
-	renderInfoContent = tModule.optional(tModule.callback),
-	renderCustomHeader = tModule.optional(tModule.callback),
-	actionBarProps = tModule.optional(tModule.table),
-	actionBarWidth = tModule.optional(tModule.number),
-	actionBarHeight = tModule.optional(tModule.number),
-	renderActionBarLabelImpressionsDetector = tModule.optional(tModule.callback),
-	componentList = tModule.optional(validateDetailsPageComponentListModule),
-	dualPanelBreakpoint = tModule.optional(tModule.number),
-	sideMargin = tModule.optional(tModule.number),
-	bodyClipsDescendants = tModule.optional(tModule.boolean),
-	maxContentWidth = tModule.optional(tModule.number),
-	startingOffsetPosition = tModule.optional(tModule.number),
-	headerBarBackgroundHeight = tModule.optional(tModule.number),
-	onClose = tModule.callback,
-	bannerPlaceholderGradient = tModule.optional(tModule.table),
-	bannerImageUrl = tModule.optional(tModule.string),
-	isFullscreen = tModule.optional(tModule.boolean),
-	renderFullscreenContent = tModule.optional(tModule.callback),
-	deviceType = tModule.optional(tModule.string),
-	isMobile = tModule.optional(tModule.boolean),
-	tokens = tModule.optional(tModule.table),
-	containerRef = tModule.optional(tModule.union(tModule.table, tModule.callback)),
-	backgroundFrameSize = tModule.optional(tModule.UDim2),
-	scrollingFrameRef = tModule.optional(tModule.table),
-	disableScrollingForFocusNav = tModule.optional(tModule.boolean),
-	gradientHeight = tModule.optional(tModule.number),
-	backgroundImageTransparency = tModule.optional(tModule.number),
-	disableBackgroundAspectRatio = tModule.optional(tModule.boolean),
-	bodyContainerSafeAreaSize = if fFlagLuaAppFixSDPLayout then tModule.optional(tModule.UDim2) else nil,
-	backgroundImageSize = if fFlagLuaAppFixSDPLayout then tModule.optional(tModule.UDim2) else nil,
-	headerPadding = if fFlagLuaAppFixSDPLayout then tModule.optional(tModule.number) else nil,
-	disableStickyActionBar = tModule.optional(tModule.boolean),
-	hideCloseButton = tModule.optional(tModule.boolean),
-	backgroundContentOverride = if fFlagLuaAppEdpConsoleMediaGalleryVideo then tModule.optional(tModule.table) else nil
+DetailsPageTemplate.validateProps = TModule.strictInterface({
+	foundationTokens = TModule.table,
+	thumbnailImageUrl = TModule.optional(TModule.string),
+	thumbnailHeight = TModule.optional(TModule.number),
+	thumbnailAspectRatio = TModule.optional(TModule.Vector2),
+	thumbnailShadowHeight = if FFlagLuaAppFixDetailsPageThumbnailRenderInPhone then TModule.optional(TModule.number) else nil,
+	titleText = TModule.optional(TModule.string),
+	subTitleText = TModule.optional(TModule.string),
+	actionBarLabelText = TModule.optional(TModule.string),
+	renderInfoContent = TModule.optional(TModule.callback),
+	renderCustomHeader = TModule.optional(TModule.callback),
+	actionBarProps = TModule.optional(TModule.table),
+	actionBarWidth = TModule.optional(TModule.number),
+	actionBarHeight = TModule.optional(TModule.number),
+	renderActionBarLabelImpressionsDetector = TModule.optional(TModule.callback),
+	componentList = TModule.optional((require(script.Parent.validateDetailsPageComponentList))),
+	dualPanelBreakpoint = TModule.optional(TModule.number),
+	sideMargin = TModule.optional(TModule.number),
+	bodyClipsDescendants = TModule.optional(TModule.boolean),
+	maxContentWidth = TModule.optional(TModule.number),
+	startingOffsetPosition = TModule.optional(TModule.number),
+	headerBarBackgroundHeight = TModule.optional(TModule.number),
+	onClose = TModule.callback,
+	bannerPlaceholderGradient = TModule.optional(TModule.table),
+	bannerImageUrl = TModule.optional(TModule.string),
+	isFullscreen = TModule.optional(TModule.boolean),
+	renderFullscreenContent = TModule.optional(TModule.callback),
+	deviceType = TModule.optional(TModule.string),
+	isMobile = TModule.optional(TModule.boolean),
+	tokens = TModule.optional(TModule.table),
+	containerRef = TModule.optional(TModule.union(TModule.table, TModule.callback)),
+	backgroundFrameSize = TModule.optional(TModule.UDim2),
+	scrollingFrameRef = TModule.optional(TModule.table),
+	disableScrollingForFocusNav = TModule.optional(TModule.boolean),
+	gradientHeight = TModule.optional(TModule.number),
+	backgroundImageTransparency = TModule.optional(TModule.number),
+	disableBackgroundAspectRatio = TModule.optional(TModule.boolean),
+	bodyContainerSafeAreaSize = if FFlagLuaAppFixSDPLayout then TModule.optional(TModule.UDim2) else nil,
+	backgroundImageSize = if FFlagLuaAppFixSDPLayout then TModule.optional(TModule.UDim2) else nil,
+	headerPadding = if FFlagLuaAppFixSDPLayout then TModule.optional(TModule.number) else nil,
+	disableStickyActionBar = TModule.optional(TModule.boolean),
+	hideCloseButton = TModule.optional(TModule.boolean),
+	backgroundContentOverride = if FFlagLuaAppEdpConsoleMediaGalleryVideo then TModule.optional(TModule.table) else nil
 })
-detailsPageTemplate.defaultProps = { isFullscreen = false, deviceType = deviceType.Desktop }
+DetailsPageTemplate.defaultProps = { isFullscreen = false, deviceType = DeviceType.Desktop }
 
-local _ = function(p1, p2)
-	-- upvalues: getPlatformConfigModule (ref)
-	return p2 - (if p1.headerBarBackgroundHeight then p1.headerBarBackgroundHeight else getPlatformConfigModule(p1.deviceType).headerBarBackgroundHeight * p1.foundationTokens.Stroke.Standard)
+local _ = function(p1, p2) --[[ Line: 173 | Named "getHeaderPaddingHeight" ]]
+	-- upvalues: GetPlatformConfigModule (copy)
+	local PlatformConfigModule = GetPlatformConfigModule(p1.deviceType)
+	
+	return p2 - (if p1.headerBarBackgroundHeight then p1.headerBarBackgroundHeight else PlatformConfigModule.headerBarBackgroundHeight * p1.foundationTokens.Stroke.Standard)
 end
 
-function detailsPageTemplate.init(p1)
-	-- upvalues: roactModule (ref), signal (ref), getPlatformConfigModule (ref), deviceType (ref)
-	p1.containerRef = roactModule.createRef()
+function DetailsPageTemplate.init(p1) --[[ Line: 182 ]]
+	-- upvalues: RoactModule (copy), Signal (copy), GetPlatformConfigModule (copy), DeviceType (copy)
+	p1.containerRef = RoactModule.createRef()
 	p1.scrollingFrameRef = p1.props.scrollingFrameRef
 	p1.scrolled = false
-	p1.scrollViewPositionChangedSignal = signal.new()
+	p1.scrollViewPositionChangedSignal = Signal.new()
 	p1.state = {
 		showStickyActionTopBar = false,
 		backgroundHeight = 500,
@@ -99,200 +100,199 @@ function detailsPageTemplate.init(p1)
 		containerSize = Vector2.new(500, 500)
 	}
 	
-	function p4.onContainerSizeChange(p2)
-		-- upvalues: p1 (ref)
-		p1:setState({ containerSize = p2.AbsoluteSize })
+	function p1.onContainerSizeChange(Frame) --[[ Line: 194 ]]
+		-- upvalues: p1 (copy)
+		p1:setState({ containerSize = Frame.AbsoluteSize })
 	end
 	
-	function p4.onBackgroundComponentFrameSizeChange(p2)
-		-- upvalues: p1 (ref), getPlatformConfigModule (copy)
-		p1:setState(function(_, p3)
-			-- upvalues: p2 (ref), getPlatformConfigModule (copy)
-			local y = p2.AbsoluteSize.Y
+	function p1.onBackgroundComponentFrameSizeChange(Frame) --[[ Line: 200 ]]
+		-- upvalues: p1 (copy), GetPlatformConfigModule (upval)
+		p1:setState(function(_, p2) --[[ Line: 202 ]]
+			-- upvalues: Frame (copy), GetPlatformConfigModule (upval)
+			local Y = Frame.AbsoluteSize.Y
+			local PlatformConfigModule = GetPlatformConfigModule(p2.deviceType)
 			
 			return {
-				backgroundHeight = y,
-				backgroundComponentPosition = math.max(0, y - (if p3.headerBarBackgroundHeight then p3.headerBarBackgroundHeight else getPlatformConfigModule(p3.deviceType).headerBarBackgroundHeight * p3.foundationTokens.Stroke.Standard)) / 2
+				backgroundHeight = Y,
+				backgroundComponentPosition = math.max(0, Y - (if p2.headerBarBackgroundHeight then p2.headerBarBackgroundHeight else PlatformConfigModule.headerBarBackgroundHeight * p2.foundationTokens.Stroke.Standard)) / 2
 			}
 		end)
 	end
 	
-	function p4.canvasPositionChange(p2)
-		-- upvalues: p1 (ref), getPlatformConfigModule (copy), deviceType (copy)
+	function p1.canvasPositionChange(ScrollFrame) --[[ Line: 213 ]]
+		-- upvalues: p1 (copy), GetPlatformConfigModule (upval), DeviceType (upval)
 		p1.scrollViewPositionChangedSignal:fire()
 		p1.scrolled = true
-		p1:setState(function(p3, p4)
-			-- upvalues: getPlatformConfigModule (copy), p2 (ref), p1 (copy), deviceType (copy)
-			local var1 = p3.backgroundHeight - (if p4.headerBarBackgroundHeight then p4.headerBarBackgroundHeight else getPlatformConfigModule(p4.deviceType).headerBarBackgroundHeight * p4.foundationTokens.Stroke.Standard)
-			local var2 = math.max(0, var1 - p2.CanvasPosition.Y) / 2
+		p1:setState(function(State, p2) --[[ Line: 217 ]]
+			-- upvalues: GetPlatformConfigModule (upval), ScrollFrame (copy), p1 (upval), DeviceType (upval)
+			local BackgroundHeight = State.backgroundHeight
+			local PlatformConfigModule = GetPlatformConfigModule(p2.deviceType)
+			local BackgroundHeightDelta = BackgroundHeight - (if p2.headerBarBackgroundHeight then p2.headerBarBackgroundHeight else PlatformConfigModule.headerBarBackgroundHeight * p2.foundationTokens.Stroke.Standard)
+			local LargestRatio = math.max(0, BackgroundHeightDelta - ScrollFrame.CanvasPosition.Y) / 2
 			
-			return if var1 < p2.CanvasPosition.Y then if p3.showStickyActionTopBar == false and p1.props.deviceType ~= deviceType.Phone and not p1.props.disableStickyActionBar then { showStickyActionTopBar = true } else nil elseif p3.showStickyActionTopBar == true then {
+			return if BackgroundHeightDelta < ScrollFrame.CanvasPosition.Y then if State.showStickyActionTopBar == false and p1.props.deviceType ~= DeviceType.Phone and not p1.props.disableStickyActionBar then { showStickyActionTopBar = true } else nil elseif State.showStickyActionTopBar == true then {
 				showStickyActionTopBar = false,
-				backgroundComponentPosition = var2
-			} else { backgroundComponentPosition = var2 }
+				backgroundComponentPosition = LargestRatio
+			} else { backgroundComponentPosition = LargestRatio }
 		end)
 	end
 end
 
-function detailsPageTemplate.render(p1)
-	-- upvalues: deviceType (ref), getPlatformConfigModule (ref), fFlagLuaAppFixSDPLayout (ref), withStyle (ref), getIconSize (ref), iconSize (ref), roactModule (ref), getIconSizeUDim2 (ref), reactModule (ref), fFlagLuaAppAddTestIdsForArrow (ref), getTestId (ref), iconButton (ref), images (ref), loadableImage (ref), stickyActionBarModule (ref), verticalScrollView (ref), detailsPageHeaderModule (ref), fFlagLuaAppFixDetailsPageThumbnailRenderInPhone (ref), detailsPageBodyModule (ref), actionBar (ref)
-	local headerPadding
-	local var1 = p1.props.deviceType == deviceType.Phone
-	local var2 = getPlatformConfigModule(p1.props.deviceType)
-	local var3 = if p1.props.thumbnailHeight then p1.props.thumbnailHeight else var2.thumbnailHeight * p1.props.foundationTokens.Stroke.Standard
-	local var4 = if p1.props.headerBarBackgroundHeight then p1.props.headerBarBackgroundHeight else var2.headerBarBackgroundHeight * p1.props.foundationTokens.Stroke.Standard
-	local var5 = if p1.props.sideMargin then p1.props.sideMargin else var2.sideMargin
-	local var6 = if p1.props.dualPanelBreakpoint then p1.props.dualPanelBreakpoint else var2.dualPanelBreakpoint
-	
-	if fFlagLuaAppFixSDPLayout then
-		headerPadding = p1.props.headerPadding
-		
-		if not headerPadding then
-			local props = p1.props
-			headerPadding = p1.state.backgroundHeight - (if props.headerBarBackgroundHeight then props.headerBarBackgroundHeight else getPlatformConfigModule(props.deviceType).headerBarBackgroundHeight * props.foundationTokens.Stroke.Standard)
-		end
-		local backgroundComponentPosition = p1.state.backgroundComponentPosition
-		local containerSize = p1.state.containerSize
-		local renderFullscreenContent = p1.props.renderFullscreenContent
-		local var7 = if var1 or not p1.props.isFullscreen or not renderFullscreenContent then false else true
-		
-		return withStyle(function(p2)
-			-- upvalues: p1 (ref), var1 (ref), getIconSize (copy), iconSize (copy), var4 (ref), roactModule (copy), getIconSizeUDim2 (copy), reactModule (copy), fFlagLuaAppAddTestIdsForArrow (copy), getTestId (copy), iconButton (copy), var7 (ref), images (copy), loadableImage (copy), backgroundComponentPosition (ref), fFlagLuaAppFixSDPLayout (copy), containerSize (ref), stickyActionBarModule (copy), verticalScrollView (copy), headerPadding (ref), detailsPageHeaderModule (copy), var3 (ref), fFlagLuaAppFixDetailsPageThumbnailRenderInPhone (copy), var5 (ref), detailsPageBodyModule (copy), var6 (ref), renderFullscreenContent (ref), actionBar (copy)
-			local textButton
-			local theme = p2.Theme
-			local var8 = p1.props.bannerImageUrl == nil
-			local bannerPlaceholderGradient = p1.props.bannerPlaceholderGradient or {
-				Rotation = 90,
-				Color = ColorSequence.new({
-					ColorSequenceKeypoint.new(0, theme.BackgroundMuted.Color),
-					ColorSequenceKeypoint.new(1, theme.BackgroundUIDefault.Color)
-				})
-			}
-			local var9 = if var1 then (getIconSize(iconSize.Large) + 22) / 2 else var4 / 2
-			local actionBarProps = var1 and p1.props.actionBarProps
-			local createElement = roactModule.createElement
-			local var10 = "TextButton"
-			local t = {
-				Text = "",
-				Selectable = false,
-				AutoButtonColor = false,
-				Size = UDim2.fromScale(1, 1),
-				BackgroundColor3 = theme.BackgroundDefault.Color,
-				BackgroundTransparency = theme.BackgroundDefault.Transparency,
-				BorderSizePixel = 0,
-				ClipsDescendants = true,
-				[roactModule.Ref] = if p1.props.containerRef then p1.props.containerRef else p1.containerRef,
-				[roactModule.Change.AbsoluteSize] = p1.onContainerSizeChange
-			}
-			local t_1 = {
-				CloseButtonFrame = if not p1.props.hideCloseButton then roactModule.createElement("Frame", {
-					BackgroundTransparency = 1,
-					Size = getIconSizeUDim2(iconSize.Large),
-					AnchorPoint = Vector2.new(0, 0.5),
-					Position = UDim2.new(0, 22, 0, var9),
-					ZIndex = 2,
-					[reactModule.Tag] = if fFlagLuaAppAddTestIdsForArrow then getTestId("details-close-button") else nil
-				}, {
-					CloseButton = roactModule.createElement(iconButton, {
-						size = UDim2.fromScale(1, 1),
-						icon = if var7 then images["icons/navigation/pushBack"] else images["icons/navigation/close"],
-						iconColor3 = p2.Theme.UIEmphasis.Color,
-						iconSize = iconSize.Medium,
-						onActivated = p1.props.onClose,
-						showBackground = p1.state.showStickyActionTopBar == false,
-						backgroundColor = p2.Theme.BackgroundUIDefault
-					})
-				}) else nil,
-				BackgroundDetailsFrame = roactModule.createElement("Frame", {
-					BackgroundColor3 = theme.BackgroundMuted.Color,
-					BackgroundTransparency = theme.BackgroundMuted.Transparency,
-					Size = if p1.props.backgroundFrameSize then p1.props.backgroundFrameSize else UDim2.fromScale(1, 1),
-					AnchorPoint = Vector2.new(0.5, 0),
-					Position = UDim2.fromScale(0.5, 0),
-					[roactModule.Change.AbsoluteSize] = p1.onBackgroundComponentFrameSizeChange
-				}, {
-					GradientPlaceholder = var8 and roactModule.createElement("UIGradient", bannerPlaceholderGradient) or nil,
-					UIAspectRatioConstraint = if var8 or p1.props.disableBackgroundAspectRatio then nil else roactModule.createElement("UIAspectRatioConstraint", { AspectRatio = 1.777777777778 }),
-					BackgroundImage = var8 == false and (roactModule.createElement(loadableImage, {
-						AnchorPoint = Vector2.new(0.5, 0.5),
-						Position = UDim2.new(0.5, 0, 0, backgroundComponentPosition),
-						Size = if fFlagLuaAppFixSDPLayout then p1.props.backgroundImageSize else UDim2.new(0, containerSize.x, 1, 0),
-						Image = p1.props.bannerImageUrl,
-						ScaleType = Enum.ScaleType.Crop,
-						BackgroundTransparency = p1.props.backgroundImageTransparency
-					}) or nil)
-				})
-			}
+function DetailsPageTemplate.render(p1) --[[ Line: 254 ]]
+	-- upvalues: DeviceType (copy), GetPlatformConfigModule (copy), FFlagLuaAppFixSDPLayout (copy), WithStyleFunction (copy), GetIconSizeFunction (copy), IconSize (copy), RoactModule (copy), GetIconSizeUDim2Function (copy), ReactModule (copy), FFlagLuaAppAddTestIdsForArrow (copy), GetTestIdFunction (copy), IconButton (copy), Images (copy), LoadableImage (copy), StickyActionBarModule (copy), VerticalScrollView (copy), DetailsPageHeaderModule (copy), FFlagLuaAppFixDetailsPageThumbnailRenderInPhone (copy), DetailsPageBodyModule (copy), ActionBar (copy)
+	local IsDeviceTypeMatch = p1.props.deviceType == DeviceType.Phone
+	local PlatformConfigModule = GetPlatformConfigModule(p1.props.deviceType)
+	local ThumbnailHeight = if p1.props.thumbnailHeight then p1.props.thumbnailHeight else PlatformConfigModule.thumbnailHeight * p1.props.foundationTokens.Stroke.Standard
+	local HeaderBarBackgroundHeight = if p1.props.headerBarBackgroundHeight then p1.props.headerBarBackgroundHeight else PlatformConfigModule.headerBarBackgroundHeight * p1.props.foundationTokens.Stroke.Standard
+	local SideMargin = if p1.props.sideMargin then p1.props.sideMargin else PlatformConfigModule.sideMargin
+	local DualPanelBreakpoint = if p1.props.dualPanelBreakpoint then p1.props.dualPanelBreakpoint else PlatformConfigModule.dualPanelBreakpoint
+	local HeaderPadding = nil
+	repeat
+		if FFlagLuaAppFixSDPLayout then
+			HeaderPadding = p1.props.headerPadding
 			
-			if p1.state.showStickyActionTopBar or var7 and not p1.props.disableStickyActionBar then
-				textButton = roactModule.createElement("TextButton", {
-					Text = "",
-					AutoButtonColor = false,
-					BorderSizePixel = 0,
-					Size = UDim2.new(1, 0, 0, var4),
-					BackgroundColor3 = theme.BackgroundUIDefault.Color,
-					BackgroundTransparency = theme.BackgroundUIDefault.Transparency
-				}, {
-					StickyActionBar = roactModule.createElement(stickyActionBarModule, {
-						actionBarProps = p1.props.actionBarProps,
-						actionBarWidth = p1.props.actionBarWidth,
-						infoProps = {
-							icon = p1.props.thumbnailImageUrl,
-							title = p1.props.titleText
-						}
-					})
+			if HeaderPadding then break end
+		end
+		local Props = p1.props
+		local BackgroundHeight = p1.state.backgroundHeight
+		local PlatformConfigModule1 = GetPlatformConfigModule(Props.deviceType)
+		HeaderPadding = BackgroundHeight - (if Props.headerBarBackgroundHeight then Props.headerBarBackgroundHeight else PlatformConfigModule1.headerBarBackgroundHeight * Props.foundationTokens.Stroke.Standard)
+	until true
+	local BackgroundComponentPosition = p1.state.backgroundComponentPosition
+	local ContainerSize = p1.state.containerSize
+	local IsFullscreen = p1.props.isFullscreen
+	local RenderFullscreenContentFunction = p1.props.renderFullscreenContent
+	local RenderFullscreenContentFunction1 = not IsDeviceTypeMatch and IsFullscreen and RenderFullscreenContentFunction
+	
+	return WithStyleFunction(function(p2) --[[ Line: 278 ]]
+		-- upvalues: p1 (copy), IsDeviceTypeMatch (copy), GetIconSizeFunction (upval), IconSize (upval), HeaderBarBackgroundHeight (copy), RoactModule (upval), GetIconSizeUDim2Function (upval), ReactModule (upval), FFlagLuaAppAddTestIdsForArrow (upval), GetTestIdFunction (upval), IconButton (upval), RenderFullscreenContentFunction1 (copy), Images (upval), LoadableImage (upval), BackgroundComponentPosition (copy), FFlagLuaAppFixSDPLayout (upval), ContainerSize (copy), StickyActionBarModule (upval), VerticalScrollView (upval), HeaderPadding (copy), DetailsPageHeaderModule (upval), ThumbnailHeight (copy), FFlagLuaAppFixDetailsPageThumbnailRenderInPhone (upval), SideMargin (copy), DetailsPageBodyModule (upval), DualPanelBreakpoint (copy), RenderFullscreenContentFunction (copy), ActionBar (upval)
+		local Theme = p2.Theme
+		local NoBannerImageUrl = p1.props.bannerImageUrl == nil
+		local BannerPlaceholderGradient = p1.props.bannerPlaceholderGradient or {
+			Rotation = 90,
+			Color = ColorSequence.new({
+				ColorSequenceKeypoint.new(0, Theme.BackgroundMuted.Color),
+				ColorSequenceKeypoint.new(1, Theme.BackgroundUIDefault.Color)
+			})
+		}
+		local IconSizeRatio = IsDeviceTypeMatch and (GetIconSizeFunction(IconSize.Large) + 22) / 2 or HeaderBarBackgroundHeight / 2
+		local ActionBarProps = IsDeviceTypeMatch and p1.props.actionBarProps
+		
+		return RoactModule.createElement("TextButton", {
+			Text = "",
+			Selectable = false,
+			AutoButtonColor = false,
+			Size = UDim2.fromScale(1, 1),
+			BackgroundColor3 = Theme.BackgroundDefault.Color,
+			BackgroundTransparency = Theme.BackgroundDefault.Transparency,
+			BorderSizePixel = 0,
+			ClipsDescendants = true,
+			[RoactModule.Ref] = if p1.props.containerRef then p1.props.containerRef else p1.containerRef,
+			[RoactModule.Change.AbsoluteSize] = p1.onContainerSizeChange
+		}, {
+			CloseButtonFrame = if p1.props.hideCloseButton then nil else RoactModule.createElement("Frame", {
+				BackgroundTransparency = 1,
+				Size = GetIconSizeUDim2Function(IconSize.Large),
+				AnchorPoint = Vector2.new(0, 0.5),
+				Position = UDim2.new(0, 22, 0, IconSizeRatio),
+				ZIndex = 2,
+				[ReactModule.Tag] = if FFlagLuaAppAddTestIdsForArrow then GetTestIdFunction("details-close-button") else nil
+			}, {
+				CloseButton = RoactModule.createElement(IconButton, {
+					size = UDim2.fromScale(1, 1),
+					icon = RenderFullscreenContentFunction1 and Images["icons/navigation/pushBack"] or Images["icons/navigation/close"],
+					iconColor3 = p2.Theme.UIEmphasis.Color,
+					iconSize = IconSize.Medium,
+					onActivated = p1.props.onClose,
+					showBackground = p1.state.showStickyActionTopBar == false,
+					backgroundColor = p2.Theme.BackgroundUIDefault
+				})
+			}),
+			BackgroundDetailsFrame = RoactModule.createElement("Frame", {
+				BackgroundColor3 = Theme.BackgroundMuted.Color,
+				BackgroundTransparency = Theme.BackgroundMuted.Transparency,
+				Size = if p1.props.backgroundFrameSize then p1.props.backgroundFrameSize else UDim2.fromScale(1, 1),
+				AnchorPoint = Vector2.new(0.5, 0),
+				Position = UDim2.fromScale(0.5, 0),
+				[RoactModule.Change.AbsoluteSize] = p1.onBackgroundComponentFrameSizeChange
+			}, {
+				GradientPlaceholder = NoBannerImageUrl and RoactModule.createElement("UIGradient", BannerPlaceholderGradient) or nil,
+				UIAspectRatioConstraint = if NoBannerImageUrl or p1.props.disableBackgroundAspectRatio then nil else RoactModule.createElement("UIAspectRatioConstraint", { AspectRatio = 1.7777777777777777 }),
+				BackgroundImage = NoBannerImageUrl == false and RoactModule.createElement(LoadableImage, {
+					AnchorPoint = Vector2.new(0.5, 0.5),
+					Position = UDim2.new(0.5, 0, 0, BackgroundComponentPosition),
+					Size = FFlagLuaAppFixSDPLayout and p1.props.backgroundImageSize or UDim2.new(0, ContainerSize.x, 1, 0),
+					Image = p1.props.bannerImageUrl,
+					ScaleType = Enum.ScaleType.Crop,
+					BackgroundTransparency = p1.props.backgroundImageTransparency
 				}) or nil
-			end
-			t_1.StickyActionBarFrame = textButton
-			t_1.ContentScrollingFrame = roactModule.createElement(verticalScrollView, {
+			}),
+			StickyActionBarFrame = (p1.state.showStickyActionTopBar or RenderFullscreenContentFunction1 and not p1.props.disableStickyActionBar) and RoactModule.createElement("TextButton", {
+				Text = "",
+				AutoButtonColor = false,
+				BorderSizePixel = 0,
+				Size = UDim2.new(1, 0, 0, HeaderBarBackgroundHeight),
+				BackgroundColor3 = Theme.BackgroundUIDefault.Color,
+				BackgroundTransparency = Theme.BackgroundUIDefault.Transparency
+			}, {
+				StickyActionBar = RoactModule.createElement(StickyActionBarModule, {
+					actionBarProps = p1.props.actionBarProps,
+					actionBarWidth = p1.props.actionBarWidth,
+					infoProps = {
+						icon = p1.props.thumbnailImageUrl,
+						title = p1.props.titleText
+					}
+				})
+			}) or nil,
+			ContentScrollingFrame = RoactModule.createElement(VerticalScrollView, {
 				size = UDim2.fromScale(1, 1),
 				canvasSizeY = UDim.new(1, 0),
 				useAutomaticCanvasSize = true,
-				scrollingEnabled = not p1.props.disableScrollingForFocusNav and not var7,
-				[roactModule.Change.CanvasPosition] = p1.canvasPositionChange,
+				scrollingEnabled = not p1.props.disableScrollingForFocusNav and not RenderFullscreenContentFunction1,
+				[RoactModule.Change.CanvasPosition] = p1.canvasPositionChange,
 				scrollingFrameRef = p1.scrollingFrameRef,
 				isGamepadFocusable = false,
 				selectable = false
 			}, {
-				Layout = roactModule.createElement("UIListLayout", {
+				Layout = RoactModule.createElement("UIListLayout", {
 					SortOrder = Enum.SortOrder.LayoutOrder,
 					FillDirection = Enum.FillDirection.Vertical
 				}),
-				Padding = roactModule.createElement("Frame", {
+				Padding = RoactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 1,
-					Size = UDim2.new(1, 0, 0, headerPadding)
+					Size = UDim2.new(1, 0, 0, HeaderPadding)
 				}),
-				MainView = roactModule.createElement("Frame", {
+				MainView = RoactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 2,
 					Size = UDim2.new(1, 0, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y
 				}, {
-					Layout = roactModule.createElement("UIListLayout", {
+					Layout = RoactModule.createElement("UIListLayout", {
 						SortOrder = Enum.SortOrder.LayoutOrder,
 						FillDirection = Enum.FillDirection.Vertical
 					}),
-					HeaderContainer = roactModule.createElement("Frame", {
+					HeaderContainer = RoactModule.createElement("Frame", {
 						BackgroundTransparency = 1,
 						LayoutOrder = 1,
-						Size = UDim2.new(1, 0, 0, var4)
+						Size = UDim2.new(1, 0, 0, HeaderBarBackgroundHeight)
 					}, {
-						DetailsPageHeader = roactModule.createElement(detailsPageHeaderModule, {
+						DetailsPageHeader = RoactModule.createElement(DetailsPageHeaderModule, {
 							thumbnailImageUrl = p1.props.thumbnailImageUrl,
 							thumbnailAspectRatio = p1.props.thumbnailAspectRatio,
-							thumbnailHeight = var3,
-							thumbnailShadowHeight = if fFlagLuaAppFixDetailsPageThumbnailRenderInPhone then p1.props.thumbnailShadowHeight else nil,
+							thumbnailHeight = ThumbnailHeight,
+							thumbnailShadowHeight = if FFlagLuaAppFixDetailsPageThumbnailRenderInPhone then p1.props.thumbnailShadowHeight else nil,
 							titleText = p1.props.titleText,
 							subTitleText = p1.props.subTitleText,
 							actionBarLabelText = p1.props.actionBarLabelText,
 							renderInfoContent = p1.props.renderInfoContent,
 							renderCustomHeader = p1.props.renderCustomHeader,
-							actionBarProps = if p1.state.showStickyActionTopBar or not p1.props.disableStickyActionBar and var7 then nil else p1.props.actionBarProps,
+							actionBarProps = if p1.state.showStickyActionTopBar or not p1.props.disableStickyActionBar and RenderFullscreenContentFunction1 then nil else p1.props.actionBarProps,
 							actionBarWidth = p1.props.actionBarWidth,
 							actionBarHeight = p1.props.actionBarHeight,
-							headerBarBackgroundHeight = var4,
-							sideMargin = var5,
+							headerBarBackgroundHeight = HeaderBarBackgroundHeight,
+							sideMargin = SideMargin,
 							maxContentWidth = p1.props.maxContentWidth,
 							deviceType = p1.props.deviceType,
 							gradientHeight = p1.props.gradientHeight,
@@ -300,53 +300,53 @@ function detailsPageTemplate.render(p1)
 							scrollViewPositionChangedSignal = p1.scrollViewPositionChangedSignal
 						})
 					}),
-					BodyContainer = roactModule.createElement("Frame", {
+					BodyContainer = RoactModule.createElement("Frame", {
 						LayoutOrder = 2,
 						BorderSizePixel = 0,
 						Size = UDim2.fromScale(1, 0),
-						BackgroundColor3 = theme.BackgroundDefault.Color,
-						BackgroundTransparency = theme.BackgroundDefault.Transparency,
+						BackgroundColor3 = Theme.BackgroundDefault.Color,
+						BackgroundTransparency = Theme.BackgroundDefault.Transparency,
 						AutomaticSize = Enum.AutomaticSize.Y
 					}, {
-						BodyContainerSafeArea = roactModule.createElement("Frame", {
+						BodyContainerSafeArea = RoactModule.createElement("Frame", {
 							BackgroundTransparency = 1,
-							Size = if fFlagLuaAppFixSDPLayout then p1.props.bodyContainerSafeAreaSize else UDim2.fromOffset(math.min(containerSize.x, containerSize.y * 1.777777777778), 0),
+							Size = FFlagLuaAppFixSDPLayout and p1.props.bodyContainerSafeAreaSize or UDim2.fromOffset(math.min(ContainerSize.x, ContainerSize.y * 1.7777777777777777), 0),
 							AnchorPoint = Vector2.new(0.5, 0),
 							Position = UDim2.fromScale(0.5, 0),
 							AutomaticSize = Enum.AutomaticSize.Y
 						}, {
-							DetailsPageBody = roactModule.createElement(detailsPageBodyModule, {
+							DetailsPageBody = RoactModule.createElement(DetailsPageBodyModule, {
 								bottomPadding = 100,
 								titleText = p1.props.titleText,
 								subTitleText = p1.props.subTitleText,
 								renderInfoContent = p1.props.renderInfoContent,
 								bodyClipsDescendants = p1.props.bodyClipsDescendants,
 								componentList = p1.props.componentList,
-								dualPanelBreakpoint = var6,
-								sideMargin = var5,
+								dualPanelBreakpoint = DualPanelBreakpoint,
+								sideMargin = SideMargin,
 								maxContentWidth = p1.props.maxContentWidth,
 								deviceType = p1.props.deviceType,
-								showPageDetails = var1 and p1.props.renderCustomHeader == nil
+								showPageDetails = IsDeviceTypeMatch and p1.props.renderCustomHeader == nil
 							})
 						})
 					})
 				}),
-				MobileActionViewPadding = actionBarProps and roactModule.createElement("Frame", {
+				MobileActionViewPadding = ActionBarProps and RoactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 3,
 					Size = UDim2.new(1, 0, 0, 72)
 				})
-			})
-			t_1.FullscreenFrame = var7 and roactModule.createElement("TextButton", {
+			}),
+			FullscreenFrame = RenderFullscreenContentFunction1 and RoactModule.createElement("TextButton", {
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
 				AutoButtonColor = false,
 				ClipsDescendants = true,
 				ZIndex = 2,
-				Size = UDim2.new(1, 0, 1, -var4),
-				Position = UDim2.fromOffset(0, var4)
-			}, { FullscreenContent = renderFullscreenContent() }) or nil
-			t_1.MobileActionBarFrame = actionBarProps and roactModule.createElement("TextButton", {
+				Size = UDim2.new(1, 0, 1, -HeaderBarBackgroundHeight),
+				Position = UDim2.fromOffset(0, HeaderBarBackgroundHeight)
+			}, { FullscreenContent = RenderFullscreenContentFunction() }) or nil,
+			MobileActionBarFrame = ActionBarProps and RoactModule.createElement("TextButton", {
 				Text = "",
 				AutoButtonColor = false,
 				BorderSizePixel = 0,
@@ -354,17 +354,17 @@ function detailsPageTemplate.render(p1)
 				AnchorPoint = Vector2.new(0, 1),
 				Position = UDim2.fromScale(0, 1),
 				Size = UDim2.new(1, 0, 0, 72),
-				BackgroundColor3 = theme.BackgroundDefault.Color,
-				BackgroundTransparency = theme.BackgroundDefault.Transparency
+				BackgroundColor3 = Theme.BackgroundDefault.Color,
+				BackgroundTransparency = Theme.BackgroundDefault.Transparency
 			}, {
-				GradientBar = roactModule.createElement("Frame", {
+				GradientBar = RoactModule.createElement("Frame", {
 					BorderSizePixel = 0,
 					LayoutOrder = 1,
 					Size = UDim2.new(1, 0, 0, 24),
-					BackgroundColor3 = theme.BackgroundDefault.Color,
+					BackgroundColor3 = Theme.BackgroundDefault.Color,
 					AnchorPoint = Vector2.new(0, 1)
 				}, {
-					Gradient = roactModule.createElement("UIGradient", {
+					Gradient = RoactModule.createElement("UIGradient", {
 						Rotation = 270,
 						Transparency = NumberSequence.new({
 							NumberSequenceKeypoint.new(0, 0.25),
@@ -372,41 +372,41 @@ function detailsPageTemplate.render(p1)
 						})
 					})
 				}),
-				ActionBar = roactModule.createElement(actionBar, {
+				ActionBar = RoactModule.createElement(ActionBar, {
 					button = p1.props.actionBarProps.button,
 					icons = p1.props.actionBarProps.icons
 				})
 			})
-			
-			return createElement(var10, t, t_1)
-		end)
-	end
+		})
+	end)
 end
 
-function detailsPageTemplate.didMount(p1)
+function DetailsPageTemplate.didMount(p1) --[[ Line: 528 ]]
 	if p1.containerRef.current then
 		p1.onContainerSizeChange(p1.containerRef.current)
 	end
 end
 
-function detailsPageTemplate.didUpdate(p1)
-	-- upvalues: getPlatformConfigModule (ref)
-	local var1 = getPlatformConfigModule(p1.props.deviceType)
+function DetailsPageTemplate.didUpdate(p1) --[[ Line: 534 ]]
+	-- upvalues: GetPlatformConfigModule (copy)
+	local PlatformConfigModule = GetPlatformConfigModule(p1.props.deviceType)
 	
 	if p1.scrolled == false and p1.scrollingFrameRef.current then
-		local props = p1.props
-		p1.scrollingFrameRef.current.CanvasPosition = Vector2.new(0, math.max(0, p1.state.backgroundHeight - (if props.headerBarBackgroundHeight then props.headerBarBackgroundHeight else getPlatformConfigModule(props.deviceType).headerBarBackgroundHeight * props.foundationTokens.Stroke.Standard) - (if p1.props.startingOffsetPosition then p1.props.startingOffsetPosition else var1.startingOffsetPosition)))
+		local Props = p1.props
+		local BackgroundHeight = p1.state.backgroundHeight
+		local PlatformConfigModule1 = GetPlatformConfigModule(Props.deviceType)
+		p1.scrollingFrameRef.current.CanvasPosition = Vector2.new(0, (math.max(0, BackgroundHeight - (if Props.headerBarBackgroundHeight then Props.headerBarBackgroundHeight else PlatformConfigModule1.headerBarBackgroundHeight * Props.foundationTokens.Stroke.Standard) - (if p1.props.startingOffsetPosition then p1.props.startingOffsetPosition else PlatformConfigModule.startingOffsetPosition))))
 	end
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), useAnimateScrollViewToSelectionModule (ref), useTokens (ref), useLastInputMode (ref), detailsPageTemplate (ref), cryoModule (ref)
-	local var1 = reactModule.useRef(nil)
-	useAnimateScrollViewToSelectionModule(var1, 0.4)
+return function(p1) --[[ Line: 548 ]]
+	-- upvalues: ReactModule (copy), UseAnimateScrollViewToSelectionModule (copy), UseTokensFunction (copy), UseLastInputModeFunction (copy), DetailsPageTemplate (copy), CryoModule (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	UseAnimateScrollViewToSelectionModule(UseRefResult, 0.4)
 	
-	return reactModule.createElement(detailsPageTemplate, cryoModule.Dictionary.join(p1, {
-		foundationTokens = useTokens(),
-		scrollingFrameRef = var1,
-		disableScrollingForFocusNav = useLastInputMode() ~= "Cursor"
+	return ReactModule.createElement(DetailsPageTemplate, CryoModule.Dictionary.join(p1, {
+		foundationTokens = UseTokensFunction(),
+		scrollingFrameRef = UseRefResult,
+		disableScrollingForFocusNav = UseLastInputModeFunction() ~= "Cursor"
 	}))
 end

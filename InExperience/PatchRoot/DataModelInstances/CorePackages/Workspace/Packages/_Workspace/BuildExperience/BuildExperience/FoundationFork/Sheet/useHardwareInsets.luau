@@ -1,28 +1,28 @@
-﻿local reactModule = require(game:GetService("CorePackages").Packages._Index.Foundation.Foundation.Parent.React)
-local getHardwareSafeAreaInsetsModule = require(script.Parent.getHardwareSafeAreaInsets)
+﻿local ReactModule = require(game:GetService("CorePackages").Packages._Index.Foundation.Foundation.Parent.React)
+local GetHardwareSafeAreaInsetsModule = require(script.Parent.getHardwareSafeAreaInsets)
 
-return function(value)
-	-- upvalues: reactModule (ref), getHardwareSafeAreaInsetsModule (ref)
-	local var1, var2 = reactModule.useState(getHardwareSafeAreaInsetsModule)
-	reactModule.useEffect(function()
-		-- upvalues: value (ref), var2 (ref), getHardwareSafeAreaInsetsModule (copy)
-		local var3 = if value then value:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
-			-- upvalues: var2 (copy), getHardwareSafeAreaInsetsModule (copy)
-			var2(function(p1)
-				-- upvalues: getHardwareSafeAreaInsetsModule (copy)
-				local var4 = getHardwareSafeAreaInsetsModule()
+return function(Object) --[[ Line: 7 | Named "useHardwareInsets" ]]
+	-- upvalues: ReactModule (copy), GetHardwareSafeAreaInsetsModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(GetHardwareSafeAreaInsetsModule)
+	ReactModule.useEffect(function() --[[ Line: 10 ]]
+		-- upvalues: Object (copy), UseStateResult2 (copy), GetHardwareSafeAreaInsetsModule (upval)
+		local Connection = if Object then Object:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 14 ]]
+			-- upvalues: UseStateResult2 (upval), GetHardwareSafeAreaInsetsModule (upval)
+			UseStateResult2(function(p1) --[[ Line: 15 ]]
+				-- upvalues: GetHardwareSafeAreaInsetsModule (upval)
+				local HardwareSafeAreaInsetsModule = GetHardwareSafeAreaInsetsModule()
 				
-				return if var4.bottom == p1.bottom and var4.top == p1.top and (var4.left == p1.left and var4.right == p1.right) then p1 else var4
+				return if HardwareSafeAreaInsetsModule.bottom == p1.bottom and HardwareSafeAreaInsetsModule.top == p1.top and HardwareSafeAreaInsetsModule.left == p1.left and HardwareSafeAreaInsetsModule.right == p1.right then p1 else HardwareSafeAreaInsetsModule
 			end)
 		end) else nil
 		
-		return function()
-			-- upvalues: var3 (write)
-			if var3 then
-				var3:Disconnect()
+		return function() --[[ Line: 31 ]]
+			-- upvalues: Connection (ref)
+			if Connection then
+				Connection:Disconnect()
 			end
 		end
-	end, { value })
+	end, { Object })
 	
-	return var1
+	return UseStateResult
 end

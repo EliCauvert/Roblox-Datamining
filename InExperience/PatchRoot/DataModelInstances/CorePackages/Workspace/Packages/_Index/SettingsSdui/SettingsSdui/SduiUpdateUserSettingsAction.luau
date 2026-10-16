@@ -1,80 +1,81 @@
-﻿local parent = script:FindFirstAncestor("SettingsSdui").Parent
-local updateUserSettings = require(parent.LegallySensitiveContent).updateUserSettings
-local linkingProtocolModule = require(parent.LinkingProtocol)
-local linkingProtocol = linkingProtocolModule.LinkingProtocol
-local adConsentAttributionAdapter = linkingProtocolModule.AdConsentAttributionAdapter
-local readCachedAdConsentRegion = linkingProtocolModule.readCachedAdConsentRegion
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagEnableAdConsentUserSettingsPublish = sharedFlagsModule.FFlagEnableAdConsentUserSettingsPublish
-local fFlagAdConsentForwardCachedRegion = sharedFlagsModule.FFlagAdConsentForwardCachedRegion
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local sduiActionType = sduiCoreSystemModule.SduiActionType
-local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
+﻿local Parent = script:FindFirstAncestor("SettingsSdui").Parent
+local UpdateUserSettingsFunction = require(Parent.LegallySensitiveContent).updateUserSettings
+local LinkingProtocolModule = require(Parent.LinkingProtocol)
+local LinkingProtocol = LinkingProtocolModule.LinkingProtocol
+local AdConsentAttributionAdapter = LinkingProtocolModule.AdConsentAttributionAdapter
+local ReadCachedAdConsentRegionFunction = LinkingProtocolModule.readCachedAdConsentRegion
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagEnableAdConsentUserSettingsPublish = SharedFlagsModule.FFlagEnableAdConsentUserSettingsPublish
+local FFlagAdConsentForwardCachedRegion = SharedFlagsModule.FFlagAdConsentForwardCachedRegion
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiActionType = SduiCoreSystemModule.SduiActionType
+local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
 
-return function(p1, _, p2, _)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref), updateUserSettings (ref), fFlagEnableAdConsentUserSettingsPublish (ref), fFlagAdConsentForwardCachedRegion (ref), readCachedAdConsentRegion (ref), adConsentAttributionAdapter (ref), linkingProtocol (ref)
-	local var1 = if p1 then p1.actionParams else nil
+return function(p1, _, p2, _) --[[ Line: 24 ]]
+	-- upvalues: SduiErrorType (copy), SduiActionType (copy), UpdateUserSettingsFunction (copy), FFlagEnableAdConsentUserSettingsPublish (copy), FFlagAdConsentForwardCachedRegion (copy), ReadCachedAdConsentRegionFunction (copy), AdConsentAttributionAdapter (copy), LinkingProtocol (copy)
+	local ActionParams = p1 and p1.actionParams or nil
 	
-	if var1 == nil then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if ActionParams == nil then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
-			name = sduiActionType.UpdateUserSettings
+			name = SduiActionType.UpdateUserSettings
 		}, p2.appPage)
 		
 		return
 	end
-	assert(var1, "actionParams must exist")
-	local settings = var1.settings
+	assert(ActionParams, "actionParams must exist")
+	local Settings = ActionParams.settings
 	
-	if typeof(settings) ~= "table" or next(settings) == nil then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
-			name = sduiActionType.UpdateUserSettings,
-			message = `Invalid settings {settings}`
+	if typeof(Settings) ~= "table" or next(Settings) == nil then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
+			name = SduiActionType.UpdateUserSettings,
+			message = `Invalid settings {Settings}`
 		}, p2.appPage)
 		
 		return
 	end
-	local auditData = var1.auditData
+	local AuditData = ActionParams.auditData
 	
-	if auditData ~= nil and typeof(auditData) ~= "string" then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
-			name = sduiActionType.UpdateUserSettings,
-			message = `Invalid auditData {auditData}`
+	if AuditData ~= nil and typeof(AuditData) ~= "string" then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
+			name = SduiActionType.UpdateUserSettings,
+			message = `Invalid auditData {AuditData}`
 		}, p2.appPage)
 		
 		return
 	end
-	local ok, status = pcall(function()
-		-- upvalues: updateUserSettings (copy), settings (ref), auditData (ref), fFlagEnableAdConsentUserSettingsPublish (copy), fFlagAdConsentForwardCachedRegion (copy), readCachedAdConsentRegion (copy), adConsentAttributionAdapter (copy), linkingProtocol (copy), p2 (ref), sduiErrorType (copy), sduiActionType (copy)
-		local var2 = updateUserSettings(settings, auditData)
+	local Success, Result = pcall(function() --[[ Line: 58 ]]
+		-- upvalues: UpdateUserSettingsFunction (upval), Settings (copy), AuditData (copy), FFlagEnableAdConsentUserSettingsPublish (upval), FFlagAdConsentForwardCachedRegion (upval), ReadCachedAdConsentRegionFunction (upval), AdConsentAttributionAdapter (upval), LinkingProtocol (upval), p2 (copy), SduiErrorType (upval), SduiActionType (upval)
+		local UpdateUserSettingsResult = UpdateUserSettingsFunction(Settings, AuditData)
 		
-		if fFlagEnableAdConsentUserSettingsPublish then
-			var2 = var2:andThen(function()
-				-- upvalues: settings (copy), fFlagAdConsentForwardCachedRegion (copy), readCachedAdConsentRegion (copy), adConsentAttributionAdapter (copy), linkingProtocol (copy)
-				local allowSellShareData = settings.allowSellShareData
+		if FFlagEnableAdConsentUserSettingsPublish then
+			UpdateUserSettingsResult = UpdateUserSettingsResult:andThen(function() --[[ Line: 64 ]]
+				-- upvalues: Settings (upval), FFlagAdConsentForwardCachedRegion (upval), ReadCachedAdConsentRegionFunction (upval), AdConsentAttributionAdapter (upval), LinkingProtocol (upval)
+				local AllowSellShareData = Settings.allowSellShareData
 				
-				if allowSellShareData ~= nil then
-					adConsentAttributionAdapter.resolveAndPublish(linkingProtocol.default, "ConsentChanged", function()
-						-- upvalues: allowSellShareData (ref)
-						return allowSellShareData
-					end, if fFlagAdConsentForwardCachedRegion then readCachedAdConsentRegion() else nil)
+				if AllowSellShareData ~= nil then
+					AdConsentAttributionAdapter.resolveAndPublish(LinkingProtocol.default, "ConsentChanged", function() --[[ Line: 68 ]]
+						-- upvalues: AllowSellShareData (copy)
+						return AllowSellShareData
+					end, if FFlagAdConsentForwardCachedRegion then ReadCachedAdConsentRegionFunction() else nil)
 				end
 			end)
 		end
-		var2:catch(function(p3)
-			-- upvalues: p2 (copy), sduiErrorType (copy), sduiActionType (copy)
-			p2.dependencies.logger.reportError(sduiErrorType.FailedToExecuteAction, {
-				name = sduiActionType.UpdateUserSettings,
-				message = tostring(p3)
+		UpdateUserSettingsResult:catch(function(Err) --[[ Line: 74 ]]
+			-- upvalues: p2 (upval), SduiErrorType (upval), SduiActionType (upval)
+			p2.dependencies.logger.reportError(SduiErrorType.FailedToExecuteAction, {
+				name = SduiActionType.UpdateUserSettings,
+				message = tostring(Err)
 			}, p2.appPage)
 		end)
 	end)
 	
-	if ok then
+	if not Success then
+		p2.dependencies.logger.reportError(SduiErrorType.FailedToExecuteAction, {
+			name = SduiActionType.UpdateUserSettings,
+			message = tostring(Result)
+		}, p2.appPage)
+		
 		return
 	end
-	p2.dependencies.logger.reportError(sduiErrorType.FailedToExecuteAction, {
-		name = sduiActionType.UpdateUserSettings,
-		message = tostring(status)
-	}, p2.appPage)
 end

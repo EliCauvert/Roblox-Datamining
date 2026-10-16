@@ -1,29 +1,29 @@
-﻿local inExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
-local var1 = nil
-local var2 = nil
+﻿local InExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
+local Callback = nil
+local Callback1 = nil
 
 return {
-	registerOpenPeoplePage = function(p1)
-		-- upvalues: var1 (write)
-		var1 = p1
+	registerOpenPeoplePage = function(p1) --[[ Line: 7 ]]
+		-- upvalues: Callback (ref)
+		Callback = p1
 	end,
-	registerClosePeoplePage = function(p1)
-		-- upvalues: var2 (write)
-		var2 = p1
+	registerClosePeoplePage = function(p1) --[[ Line: 10 ]]
+		-- upvalues: Callback1 (ref)
+		Callback1 = p1
 	end,
-	openPeoplePage = function()
-		-- upvalues: var1 (write)
-		if var1 then
-			var1()
+	openPeoplePage = function() --[[ Line: 13 ]]
+		-- upvalues: Callback (ref)
+		if Callback then
+			Callback()
 		end
 	end,
-	closePeoplePage = function(p1)
-		-- upvalues: inExperienceSideSheet (ref), var2 (write)
-		if p1 ~= nil and require(inExperienceSideSheet.Flags.FFlagClosePeoplePageWhenNoRoomBesideSideSheet) and not require(inExperienceSideSheet.Utils.getHasRoomForPeoplePage)(false, p1) then
-			require(inExperienceSideSheet.Stores.GetSideSheetConfigStore)(false).setDidSideSheetOpenWithPeoplePage(false)
+	closePeoplePage = function(p1) --[[ Line: 20 ]]
+		-- upvalues: InExperienceSideSheet (copy), Callback1 (ref)
+		if p1 ~= nil and require(InExperienceSideSheet.Flags.FFlagClosePeoplePageWhenNoRoomBesideSideSheet) and not require(InExperienceSideSheet.Utils.getHasRoomForPeoplePage)(false, p1) then
+			require(InExperienceSideSheet.Stores.GetSideSheetConfigStore)(false).setDidSideSheetOpenWithPeoplePage(false)
 		end
-		if var2 then
-			var2()
+		if Callback1 then
+			Callback1()
 		end
 	end
 }

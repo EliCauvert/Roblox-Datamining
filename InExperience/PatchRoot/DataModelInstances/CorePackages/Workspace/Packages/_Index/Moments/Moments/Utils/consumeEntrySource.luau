@@ -1,30 +1,29 @@
-﻿return function(p1, p2)
+﻿return function(p1, p2) --[[ Line: 5 | Named "consumeEntrySource" ]]
 	if not p1 or not p1.getParam then
 		return "watch_tab"
 	end
-	local extraProps = p1.getParam("extraProps")
+	local ExtraPropsParam = p1.getParam("extraProps")
 	
-	if type(extraProps) == "table" and type(extraProps.source) == "string" then
-		local var1 = `extraProps:{tostring(extraProps)}:{extraProps.source}`
+	if type(ExtraPropsParam) == "table" and type(ExtraPropsParam.source) == "string" then
+		local ExtraPropsName: string = `extraProps:{tostring(ExtraPropsParam)}:{ExtraPropsParam.source}`
 		
-		if not p2[var1] then
-			p2[var1] = true
+		if not p2[ExtraPropsName] then
+			p2[ExtraPropsName] = true
 			
-			return extraProps.source
+			return ExtraPropsParam.source
 		end
 	end
-	local source = p1.getParam("source")
+	local SourceParam = p1.getParam("source")
 	
-	if type(source) == "string" then
-		local state = p1.state
-		local var2 = `params:{tostring(if type(state) == "table" and state.params ~= nil then state.params else state)}:{source}`
+	if type(SourceParam) == "string" then
+		local State = p1.state
+		local ParamsName: string = `params:{tostring(if type(State) == "table" and State.params ~= nil then State.params else State)}:{SourceParam}`
 		
-		if p2[var2] then
-			return "watch_tab"
-		else
-			p2[var2] = true
+		if not p2[ParamsName] then
+			p2[ParamsName] = true
 			
-			return source
+			return SourceParam
 		end
 	end
+	return "watch_tab"
 end

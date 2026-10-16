@@ -1,507 +1,478 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local _ = require(parent.MomentsTypes)
-local promiseModule = require(parent.Promise)
-local sharedFlagsModule = require(parent.SharedFlags)
-local signalsModule = require(parent.Signals)
-local _ = require(parent.DataHydration.MomentsStoreTypes)
-local momentsGetMomentsUserStoreModule = require(parent.DataHydration.MomentsGetMomentsUserStore)
-local getLocalUserIdModule = require(moments.Utils.getLocalUserId)
-local shouldShowMomentInFeedModule = require(moments.Stores.GetMomentsStore.shouldShowMomentInFeed)
-local postLifecycleSubscriptionModule = require(script.Parent.postLifecycleSubscription)
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local _ = require(Parent.MomentsTypes)
+local PromiseModule = require(Parent.Promise)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local SignalsModule = require(Parent.Signals)
+local _ = require(Parent.DataHydration.MomentsStoreTypes)
+local MomentsGetMomentsUserStoreModule = require(Parent.DataHydration.MomentsGetMomentsUserStore)
+local GetLocalUserIdModule = require(Moments.Utils.getLocalUserId)
+local ShouldShowMomentInFeedModule = require(Moments.Stores.GetMomentsStore.shouldShowMomentInFeed)
+local PostLifecycleSubscriptionModule = require(script.Parent.postLifecycleSubscription)
 game:DefineFastInt("MomentsPublishedPostPollIntervalSeconds", 10)
 game:DefineFastInt("MomentsPublishedPostMaxPollAttempts", 30)
-local var1 = nil
+local MomentsUpload = nil
 
-local function _()
-	-- upvalues: var1 (write), parent (ref)
-	if var1 == nil then
-		var1 = require(parent.Loggers).Logger:new("Moments.Upload")
+local function _() --[[ Line: 44 | Named "getLogger" ]]
+	-- upvalues: MomentsUpload (ref), Parent (copy)
+	if MomentsUpload == nil then
+		MomentsUpload = require(Parent.Loggers).Logger:new("Moments.Upload")
 	end
-	return var1
+	return MomentsUpload
 end
 
-local var2 = 0
+local Count = 0
 
-local function waitForLifecycleChange(p1, p2, p3, p4)
-	-- upvalues: promiseModule (ref), signalsModule (ref), postLifecycleSubscriptionModule (ref)
-	local var3 = function() end
+local function waitForLifecycleChange(WakeVersion, LocalUserId, Largest, Callback): boolean --[[ Line: 97 ]]
+	-- upvalues: PromiseModule (copy), SignalsModule (copy), PostLifecycleSubscriptionModule (copy)
+	local function Effect() --[[ Line: 103 ]] end
 	
-	local var4 = nil
-	local _, var5 = promiseModule.race({
-		promiseModule.new(function(p5)
-			-- upvalues: var3 (write), signalsModule (copy), postLifecycleSubscriptionModule (copy), p2 (ref), p1 (ref), var4 (write)
-			var3 = signalsModule.createEffect(function(p6)
-				-- upvalues: postLifecycleSubscriptionModule (copy), p2 (copy), p1 (copy), var4 (copy), p5 (ref)
-				if postLifecycleSubscriptionModule.getWakeVersion(p6, p2) ~= p1 and var4 == nil then
-					var4 = task.defer(function()
-						-- upvalues: var4 (copy), p5 (copy)
-						var4 = nil
-						p5(true)
+	local DeferredThread = nil
+	local _, v1 = PromiseModule.race({
+		PromiseModule.new(function(Callback) --[[ Line: 105 ]]
+			-- upvalues: Effect (ref), SignalsModule (upval), PostLifecycleSubscriptionModule (upval), LocalUserId (copy), WakeVersion (copy), DeferredThread (ref)
+			Effect = SignalsModule.createEffect(function(p1) --[[ Line: 106 ]]
+				-- upvalues: PostLifecycleSubscriptionModule (upval), LocalUserId (upval), WakeVersion (upval), DeferredThread (upval), Callback (copy)
+				if PostLifecycleSubscriptionModule.getWakeVersion(p1, LocalUserId) ~= WakeVersion and DeferredThread == nil then
+					DeferredThread = task.defer(function() --[[ Line: 109 ]]
+						-- upvalues: DeferredThread (upval), Callback (upval)
+						DeferredThread = nil
+						Callback(true)
 					end)
 				end
 			end)
 		end),
-		promiseModule.new(function(p5)
-			-- upvalues: p4 (ref), p3 (ref)
-			p4(p3)
-			p5(false)
-		end)
+		(PromiseModule.new(function(Callback1: (any) -> ()) --[[ Line: 116 ]]
+			-- upvalues: Callback (copy), Largest (copy)
+			Callback(Largest)
+			Callback1(false)
+		end))
 	}):await()
-	var3()
+	Effect()
 	
-	if var4 ~= nil then
-		task.cancel(var4)
+	if DeferredThread ~= nil then
+		task.cancel(DeferredThread)
 	end
-	return var5 == true
+	return v1 == true
 end
 
-local _ = function(p1, p2, p3)
-	local var3, var4 = p1.getFreshUserMoments(p2, p3):await()
+local _ = function(p1, p2, p3) --[[ Line: 128 | Named "fetchPage" ]]
+	local v1, v2 = p1.getFreshUserMoments(p2, p3):await()
 	
-	return if var3 then var4 else nil
+	return if v1 then v2 else nil
 end
 
-local function addToSnapshot(p1, p2)
-	for i, v in p2.moments do
-		p1.knownMomentIds[v.momentId] = true
-		local feedItemId = v.recommendationMetadata.feedItemId
+local function addToSnapshot(p1, p2) --[[ Line: 135 ]]
+	for _, moment in p2.moments do
+		p1.knownMomentIds[moment.momentId] = true
+		local FeedItemId = moment.recommendationMetadata.feedItemId
 		
-		if feedItemId ~= nil then
-			p1.knownMomentIds[feedItemId] = true
+		if FeedItemId ~= nil then
+			p1.knownMomentIds[FeedItemId] = true
 		end
 	end
-	for i_1, v_1 in p2.excludedMomentIds or {} do
-		p1.knownMomentIds[v_1] = true
+	local ExcludedMomentIds = p2.excludedMomentIds or {}
+	for _, excludedMomentId in ExcludedMomentIds do
+		p1.knownMomentIds[excludedMomentId] = true
 	end
 end
 
-local _ = function(p3, p4)
-	local feedItemId = p4.recommendationMetadata.feedItemId
+local _ = function(p3, p4): boolean --[[ Line: 149 | Named "isKnown" ]]
+	local FeedItemId = p4.recommendationMetadata.feedItemId
 	
-	return if p3.knownMomentIds[p4.momentId] ~= true then feedItemId ~= nil and p3.knownMomentIds[feedItemId] == true else true
+	return p3.knownMomentIds[p4.momentId] == true or FeedItemId ~= nil and p3.knownMomentIds[FeedItemId] == true
 end
 
-local _ = function(p3)
+local _ = function(p3): string --[[ Line: 155 | Named "trim" ]]
 	return string.match(p3 or "", "^%s*(.-)%s*$") or ""
 end
 
-local function textMatches(p3, p4)
-	local var3 = string.match(p3 or "", "^%s*(.-)%s*$") or ""
-	local var4 = string.match(p4 or "", "^%s*(.-)%s*$") or ""
+local function textMatches(Description, Description1): boolean --[[ Line: 160 ]]
+	local Match: string = string.match(Description or "", "^%s*(.-)%s*$") or ""
+	local Match1: string = string.match(Description1 or "", "^%s*(.-)%s*$") or ""
 	
-	if var3 == var4 then
+	if Match == Match1 then
 		return true
 	end
-	local charCount = utf8.len(var3)
+	local Length = utf8.len(Match)
 	
-	if charCount == nil or charCount ~= utf8.len(var4) then
+	if Length == nil or Length ~= utf8.len(Match1) then
 		return false
 	end
-	local t = {}
+	local List = {}
 	
-	for i, v in utf8.codes(var3) do
-		table.insert(t, v)
+	for _, value in utf8.codes(Match) do
+		table.insert(List, value)
 	end
-	local var5 = 0
+	local Count = 0
 	
-	for i_1, v_1 in utf8.codes(var4) do
-		var5 += 1
+	for _, value1 in utf8.codes(Match1) do
+		Count += 1
 		
-		if v_1 ~= t[var5] and v_1 ~= 35 then
+		if value1 ~= List[Count] and value1 ~= 35 then
 			return false
 		end
 	end
 	return true
 end
 
-local _ = function(value)
-	local var6 = if value ~= nil then nil else value.music
+local _ = function(p3) --[[ Line: 184 | Named "getMusicAssetId" ]]
+	local Music = if p3 == nil then nil else p3.music
 	
-	return if var6 == nil then nil else tonumber(var6.assetId)
+	return if Music == nil then nil else tonumber(Music.assetId)
 end
 
-local function getOverlayTexts(p5)
-	local t = {}
-	
-	for i, v in if p5 == nil or p5.textOverlays == nil then {} else p5.textOverlays do
-		table.insert(t, v.text)
+local function getOverlayTexts(Edits) --[[ Line: 189 ]]
+	local List = {}
+	local T = if Edits == nil or Edits.textOverlays == nil then {} else Edits.textOverlays
+	for _, value in T do
+		table.insert(List, value.text)
 	end
-	return t
+	return List
 end
 
-local _ = function(p6)
-	return utf8.len(string.match(p6 or "", "^%s*(.-)%s*$") or "")
+local _ = function(p3): number --[[ Line: 200 | Named "getTextLength" ]]
+	return (utf8.len(string.match(p3 or "", "^%s*(.-)%s*$") or ""))
 end
 
-local function overlayTextsMatch(p6, p7)
-	-- upvalues: getOverlayTexts (ref), textMatches (ref)
-	local var6 = getOverlayTexts(p6)
-	local var7 = getOverlayTexts(p7)
+local function overlayTextsMatch(Edits, Edits1): boolean --[[ Line: 205 ]]
+	-- upvalues: getOverlayTexts (copy), textMatches (copy)
+	local OverlayTexts = getOverlayTexts(Edits)
+	local OverlayTexts1 = getOverlayTexts(Edits1)
 	
-	if #var6 ~= #var7 then
+	if #OverlayTexts ~= #OverlayTexts1 then
 		return false
 	end
-	for i, v in var6 do
-		if not textMatches(v, var7[i]) then
+	for i, overlayText in OverlayTexts do
+		if not textMatches(overlayText, OverlayTexts1[i]) then
 			return false
 		end
 	end
 	return true
 end
 
-local _ = function(p8)
-	return p8 ~= nil and p8 > 0
+local _ = function(p3: number): boolean --[[ Line: 219 | Named "isKnownPlace" ]]
+	return p3 ~= nil and p3 > 0
 end
 
-local _ = function(p8, p9)
-	local var8 = not (p8 ~= nil and p8 > 0)
+local _ = function(p3: number, p4: number): boolean --[[ Line: 223 | Named "placeMatches" ]]
+	return not (p3 ~= nil and p3 > 0) or (not (p4 ~= nil and p4 > 0) or p3 == p4)
+end
+
+local function evaluate(Moment, Position, p3) --[[ Line: 227 ]]
+	-- upvalues: ShouldShowMomentInFeedModule (copy), textMatches (copy), overlayTextsMatch (copy)
+	local Metadata = Moment.metadata
+	local Edits = p3.edits
+	local Music = if Edits == nil then nil else Edits.music
+	local Number = if Music == nil then nil else tonumber(Music.assetId)
+	local Edits1 = Metadata.edits
+	local Music1 = if Edits1 == nil then nil else Edits1.music
+	local PlaceId: number = p3.placeId
+	local PlaceId1: number = Metadata.placeId
 	
-	if not var8 then
-		var8 = not (p9 ~= nil and p9 > 0) or p8 == p9
-	end
-	return var8
-end
-
-local function evaluate(p8, p9, p10)
-	-- upvalues: shouldShowMomentInFeedModule (ref), textMatches (ref), overlayTextsMatch (ref)
-	local metadata = p8.metadata
-	local t = {
-		moment = p8,
-		position = p9,
-		visible = shouldShowMomentInFeedModule(p8),
-		captureType = metadata.captureType == p10.captureType,
-		caption = textMatches(p10.description, metadata.description)
+	return {
+		moment = Moment,
+		position = Position,
+		visible = ShouldShowMomentInFeedModule(Moment),
+		captureType = Metadata.captureType == p3.captureType,
+		caption = textMatches(p3.description, Metadata.description),
+		music = Number == (if Music1 == nil then nil else tonumber(Music1.assetId)),
+		overlays = overlayTextsMatch(p3.edits, Metadata.edits),
+		place = not (PlaceId ~= nil and PlaceId > 0) or (not (PlaceId1 ~= nil and PlaceId1 > 0) or PlaceId == PlaceId1)
 	}
-	local edits = p10.edits
-	local var8 = if edits ~= nil then nil else edits.music
-	local var9 = if var8 ~= nil then nil else tonumber(var8.assetId)
-	local edits_1 = metadata.edits
-	local var10 = if edits_1 ~= nil then nil else edits_1.music
-	t.music = var9 == (if var10 ~= nil then nil else tonumber(var10.assetId))
-	t.overlays = overlayTextsMatch(p10.edits, metadata.edits)
-	local placeId = p10.placeId
-	local placeId_1 = metadata.placeId
-	local var11 = not (placeId ~= nil and placeId > 0)
-	
-	if not var11 then
-		var11 = not (placeId_1 ~= nil and placeId_1 > 0) or placeId == placeId_1
-	end
-	t.place = var11
-	
-	return t
 end
 
-local _ = function(p8)
-	return p8.visible and (p8.captureType and (p8.caption and (p8.music and (p8.overlays and p8.place))))
+local _ = function(p3) --[[ Line: 242 | Named "isMatch" ]]
+	return p3.visible and (p3.captureType and (p3.caption and (p3.music and (p3.overlays and p3.place))))
 end
 
-local function findPublishedPost(p8, p9, p10)
-	-- upvalues: evaluate (ref)
-	local var8 = nil
-	local t = {}
+local function findPublishedPost(p3, p4, p5) --[[ Line: 251 ]]
+	-- upvalues: evaluate (copy)
+	local v1 = nil
+	local List = {}
 	
-	for i, v in p8.moments do
-		local feedItemId = v.recommendationMetadata.feedItemId
-		local var9 = if p9.knownMomentIds[v.momentId] ~= true then feedItemId ~= nil and p9.knownMomentIds[feedItemId] == true else true
+	for i, moment in p3.moments do
+		local FeedItemId = moment.recommendationMetadata.feedItemId
 		
-		if not var9 then
-			var9 = evaluate(v, i, p10)
-			table.insert(t, var9)
+		if p4.knownMomentIds[moment.momentId] ~= true and (FeedItemId == nil or p4.knownMomentIds[FeedItemId] ~= true) then
+			local EvaluateResult = evaluate(moment, i, p5)
+			table.insert(List, EvaluateResult)
 			
-			if var8 == nil and (var9.visible and (var9.captureType and (var9.caption and (var9.music and (var9.overlays and var9.place))))) then
-				var8 = v
+			if v1 == nil and (EvaluateResult.visible and (EvaluateResult.captureType and (EvaluateResult.caption and (EvaluateResult.music and (EvaluateResult.overlays and EvaluateResult.place))))) then
+				v1 = moment
 			end
 		end
 	end
-	return var8, t
+	return v1, List
 end
 
-local function logIds(p11, p12)
-	-- upvalues: var1 (write), parent (ref)
-	for i = 1, #p12, 6 do
-		local minValue = math.min(i + 6 - 1, #p12)
+local function logIds(p6, List) --[[ Line: 271 ]]
+	-- upvalues: MomentsUpload (ref), Parent (copy)
+	for i = 1, #List, 6 do
+		local Smallest = math.min(i + 6 - 1, #List)
 		
-		if var1 == nil then
-			var1 = require(parent.Loggers).Logger:new("Moments.Upload")
+		if MomentsUpload == nil then
+			MomentsUpload = require(Parent.Loggers).Logger:new("Moments.Upload")
 		end
-		var1:debug("event={} from={} ids=[{}]", p11, tostring(i), table.concat(p12, ",", i, minValue))
+		MomentsUpload:debug("event={} from={} ids=[{}]", p6, tostring(i), table.concat(List, ",", i, Smallest))
 	end
 end
 
-local function logSnapshotPage(p13, p14, p15)
-	-- upvalues: var1 (write), parent (ref), logIds (ref)
-	local excludedMomentIds = p15.excludedMomentIds or {}
+local function logSnapshotPage(Count, p7, p8) --[[ Line: 278 ]]
+	-- upvalues: MomentsUpload (ref), Parent (copy), logIds (copy)
+	local ExcludedMomentIds = p8.excludedMomentIds or {}
 	
-	if var1 == nil then
-		var1 = require(parent.Loggers).Logger:new("Moments.Upload")
+	if MomentsUpload == nil then
+		MomentsUpload = require(Parent.Loggers).Logger:new("Moments.Upload")
 	end
-	var1:debug("event=published_post_snapshot_page resolverId={} page={} moments={} excluded={} hasNext={}", tostring(p13), tostring(p14), tostring(#p15.moments), tostring(#excludedMomentIds), tostring(p15.nextCursor ~= nil))
-	local t = {}
+	MomentsUpload:debug("event=published_post_snapshot_page resolverId={} page={} moments={} excluded={} hasNext={}", tostring(Count), tostring(p7), tostring(#p8.moments), tostring(#ExcludedMomentIds), (tostring(p8.nextCursor ~= nil)))
+	local List = {}
 	
-	for i, v in p15.moments do
-		table.insert(t, `{v.momentId}:{v.assetId}`)
+	for _, moment in p8.moments do
+		table.insert(List, `{moment.momentId}:{moment.assetId}`)
 	end
-	logIds("published_post_snapshot_moments", t)
-	logIds("published_post_snapshot_excluded", excludedMomentIds)
+	logIds("published_post_snapshot_moments", List)
+	logIds("published_post_snapshot_excluded", ExcludedMomentIds)
 end
 
-local function logExpectation(p16)
-	-- upvalues: var1 (write), parent (ref), getOverlayTexts (ref)
-	if var1 == nil then
-		var1 = require(parent.Loggers).Logger:new("Moments.Upload")
+local function logExpectation(p9) --[[ Line: 296 ]]
+	-- upvalues: MomentsUpload (ref), Parent (copy), getOverlayTexts (copy)
+	if MomentsUpload == nil then
+		MomentsUpload = require(Parent.Loggers).Logger:new("Moments.Upload")
 	end
-	local var10 = var1
-	local var11 = "event=published_post_expectation captureType={} captionLength={} musicAssetId={} overlayCount={} placeId={}"
-	local name = p16.captureType.Name
-	local var12 = tostring(utf8.len(string.match(p16.description or "", "^%s*(.-)%s*$") or ""))
-	local edits = p16.edits
-	local var13 = if edits ~= nil then nil else edits.music
-	var10:debug(var11, name, var12, tostring(if var13 ~= nil then nil else tonumber(var13.assetId)), tostring(#getOverlayTexts(p16.edits)), tostring(p16.placeId))
+	local Edits = p9.edits
+	local Music = if Edits == nil then nil else Edits.music
+	MomentsUpload:debug("event=published_post_expectation captureType={} captionLength={} musicAssetId={} overlayCount={} placeId={}", p9.captureType.Name, tostring((utf8.len(string.match(p9.description or "", "^%s*(.-)%s*$") or ""))), tostring(if Music == nil then nil else tonumber(Music.assetId)), tostring(#getOverlayTexts(p9.edits)), (tostring(p9.placeId)))
 end
 
-local function logCandidate(p16, p17)
-	-- upvalues: var1 (write), parent (ref), getOverlayTexts (ref)
-	local moment = p17.moment
-	local metadata = moment.metadata
+local function logCandidate(Count, p9) --[[ Line: 307 ]]
+	-- upvalues: MomentsUpload (ref), Parent (copy), getOverlayTexts (copy)
+	local Moment = p9.moment
+	local Metadata = Moment.metadata
 	
-	if var1 == nil then
-		var1 = require(parent.Loggers).Logger:new("Moments.Upload")
+	if MomentsUpload == nil then
+		MomentsUpload = require(Parent.Loggers).Logger:new("Moments.Upload")
 	end
-	local var10 = var1
-	local var11 = "event=published_post_candidate attempt={} position={} momentId={} feedItemId={} assetId={} status={} matched={} visible={} captureType={} caption={} music={} overlays={} place={} storedCaptureType={} storedCaptionLength={} storedMusicAssetId={} storedOverlayCount={} storedPlaceId={}"
-	local var12 = tostring(p16)
-	local var13 = tostring(p17.position)
-	local momentId = moment.momentId
-	local var14 = tostring(moment.recommendationMetadata.feedItemId)
-	local var15 = tostring(moment.assetId)
-	local var16 = tostring(moment.status)
-	local var17 = tostring(p17.visible and (p17.captureType and (p17.caption and (p17.music and (p17.overlays and p17.place)))))
-	local var18 = tostring(p17.visible)
-	local var19 = tostring(p17.captureType)
-	local var20 = tostring(p17.caption)
-	local var21 = tostring(p17.music)
-	local var22 = tostring(p17.overlays)
-	local var23 = tostring(p17.place)
-	local name = metadata.captureType.Name
-	local var24 = tostring(utf8.len(string.match(metadata.description or "", "^%s*(.-)%s*$") or ""))
-	local edits = metadata.edits
-	local var25 = if edits ~= nil then nil else edits.music
-	var10:debug(var11, var12, var13, momentId, var14, var15, var16, var17, var18, var19, var20, var21, var22, var23, name, var24, tostring(if var25 ~= nil then nil else tonumber(var25.assetId)), tostring(#getOverlayTexts(metadata.edits)), tostring(metadata.placeId))
+	local Edits = Metadata.edits
+	local Music = if Edits == nil then nil else Edits.music
+	MomentsUpload:debug("event=published_post_candidate attempt={} position={} momentId={} feedItemId={} assetId={} status={} matched={} visible={} captureType={} caption={} music={} overlays={} place={} storedCaptureType={} storedCaptionLength={} storedMusicAssetId={} storedOverlayCount={} storedPlaceId={}", tostring(Count), tostring(p9.position), Moment.momentId, tostring(Moment.recommendationMetadata.feedItemId), tostring(Moment.assetId), tostring(Moment.status), tostring(p9.visible and (p9.captureType and (p9.caption and (p9.music and (p9.overlays and p9.place))))), tostring(p9.visible), tostring(p9.captureType), tostring(p9.caption), tostring(p9.music), tostring(p9.overlays), tostring(p9.place), Metadata.captureType.Name, tostring((utf8.len(string.match(Metadata.description or "", "^%s*(.-)%s*$") or ""))), tostring(if Music == nil then nil else tonumber(Music.assetId)), tostring(#getOverlayTexts(Metadata.edits)), (tostring(Metadata.placeId)))
 end
 
-return function(p16, p17)
-	-- upvalues: momentsGetMomentsUserStoreModule (ref), var2 (write), var1 (write), parent (ref), addToSnapshot (ref), logSnapshotPage (ref), getLocalUserIdModule (ref), logExpectation (ref), promiseModule (ref), sharedFlagsModule (ref), postLifecycleSubscriptionModule (ref), waitForLifecycleChange (ref), findPublishedPost (ref), logCandidate (ref)
-	p17 = p17 or {}
-	local var10 = if p17.userStore ~= nil then momentsGetMomentsUserStoreModule(false) else p17.userStore
-	local wait = p17.wait or function(p18)
-		task.wait(p18)
+return function(p9, p10) --[[ Line: 333 | Named "createPublishedPostResolver" ]]
+	-- upvalues: MomentsGetMomentsUserStoreModule (copy), Count (ref), MomentsUpload (ref), Parent (copy), addToSnapshot (copy), logSnapshotPage (copy), GetLocalUserIdModule (copy), logExpectation (copy), PromiseModule (copy), SharedFlagsModule (copy), PostLifecycleSubscriptionModule (copy), waitForLifecycleChange (copy), findPublishedPost (copy), logCandidate (copy)
+	local P37 = p10 or {}
+	local MomentsGetMomentsUserStoreModuleResult = if P37.userStore == nil then MomentsGetMomentsUserStoreModule(false) else P37.userStore
+	local Wait = P37.wait or function(Duration) --[[ Line: 341 ]]
+		task.wait(Duration)
 	end
-	local var11 = 0
-	local var12 = nil
-	local var13 = nil
+	local Count1 = 0
+	local LocalUserId = nil
+	local NewResult = nil
 	
-	local function takeSnapshot(p18)
-		-- upvalues: wait (ref), var10 (ref), var1 (copy), parent (copy), var11 (write), addToSnapshot (copy), logSnapshotPage (copy)
-		local var14
-		local _ = nil
+	local function takeSnapshot(LocalUserId) --[[ Line: 353 ]]
+		-- upvalues: Wait (copy), MomentsGetMomentsUserStoreModuleResult (copy), MomentsUpload (upval), Parent (upval), Count1 (ref), addToSnapshot (upval), logSnapshotPage (upval)
+		local v2 = nil
 		
 		for i = 1, 3 do
 			if i > 1 then
-				wait(2)
+				Wait(2)
 			end
-			local var15, var16 = var10.getFreshUserMoments(p18, nil):await()
-			var14 = if var15 then var16 else nil
+			local v3, v4 = MomentsGetMomentsUserStoreModuleResult.getFreshUserMoments(LocalUserId, nil):await()
+			v2 = if v3 then v4 else nil
 			
-			if var14 ~= nil then break end
-			if var1 == nil then
-				var1 = require(parent.Loggers).Logger:new("Moments.Upload")
+			if v2 ~= nil then break end
+			if MomentsUpload == nil then
+				MomentsUpload = require(Parent.Loggers).Logger:new("Moments.Upload")
 			end
-			var1:debug("event=published_post_snapshot_read_failed resolverId={} attempt={}", tostring(var11), tostring(i))
+			MomentsUpload:debug("event=published_post_snapshot_read_failed resolverId={} attempt={}", tostring(Count1), (tostring(i)))
 		end
-		if var14 == nil then
+		if v2 == nil then
 			return nil
 		end
-		local t = { knownMomentIds = {} }
-		addToSnapshot(t, var14)
-		logSnapshotPage(var11, 1, var14)
-		local nextCursor = var14.nextCursor
+		local config = { knownMomentIds = {} }
+		addToSnapshot(config, v2)
+		logSnapshotPage(Count1, 1, v2)
+		local NextCursor = v2.nextCursor
 		
-		for i_1 = 2, 3 do
-			if nextCursor == nil then break end
-			local var17, var18 = var10.getFreshUserMoments(p18, nextCursor):await()
-			local var19 = if var17 then var18 else nil
+		for i1 = 2, 3 do
+			if NextCursor == nil then break end
+			local v5, v6 = MomentsGetMomentsUserStoreModuleResult.getFreshUserMoments(LocalUserId, NextCursor):await()
+			local v7 = if v5 then v6 else nil
 			
-			if var19 == nil then break end
-			addToSnapshot(t, var19)
-			logSnapshotPage(var11, i_1, var19)
-			nextCursor = if var19.nextCursor ~= nextCursor then nil else var19.nextCursor
+			if v7 == nil then break end
+			addToSnapshot(config, v7)
+			logSnapshotPage(Count1, i1, v7)
+			NextCursor = if v7.nextCursor == NextCursor then nil else v7.nextCursor
 		end
-		return t
+		return config
 	end
 	
 	return {
-		captureSnapshot = function()
-			-- upvalues: var2 (copy), var11 (write), p17 (ref), var12 (write), getLocalUserIdModule (copy), var1 (copy), parent (copy), logExpectation (copy), p16 (ref), var13 (write), promiseModule (copy), takeSnapshot (ref)
-			var2 += 1
-			var11 = var2
-			var12 = if p17.getLocalUserId ~= nil then getLocalUserIdModule() else p17.getLocalUserId()
+		captureSnapshot = function() --[[ Line: 394 ]]
+			-- upvalues: Count (upval), Count1 (ref), P37 (copy), LocalUserId (ref), GetLocalUserIdModule (upval), MomentsUpload (upval), Parent (upval), logExpectation (upval), p9 (copy), NewResult (ref), PromiseModule (upval), takeSnapshot (copy)
+			Count += 1
+			Count1 = Count
+			LocalUserId = if P37.getLocalUserId == nil then GetLocalUserIdModule() else P37.getLocalUserId()
 			
-			if var1 == nil then
-				var1 = require(parent.Loggers).Logger:new("Moments.Upload")
+			if MomentsUpload == nil then
+				MomentsUpload = require(Parent.Loggers).Logger:new("Moments.Upload")
 			end
-			var1:debug("event=published_post_snapshot_started resolverId={} hasUser={}", tostring(var11), tostring(var12 ~= nil))
-			logExpectation(p16)
-			local var20 = var12
-			var13 = promiseModule.new(function(p19)
-				-- upvalues: var20 (ref), takeSnapshot (copy)
-				p19(if var20 ~= nil then nil else takeSnapshot(var20))
+			MomentsUpload:debug("event=published_post_snapshot_started resolverId={} hasUser={}", tostring(Count1), (tostring(LocalUserId ~= nil)))
+			logExpectation(p9)
+			local LocalUserId1 = LocalUserId
+			NewResult = PromiseModule.new(function(Callback: (any) -> ()) --[[ Line: 412 ]]
+				-- upvalues: LocalUserId1 (copy), takeSnapshot (upval)
+				Callback(if LocalUserId1 == nil then nil else takeSnapshot(LocalUserId1))
 			end)
 		end,
-		resolve = function(p19)
-			-- upvalues: var13 (write), var1 (copy), parent (copy), var12 (write), var11 (write), sharedFlagsModule (copy), postLifecycleSubscriptionModule (copy), waitForLifecycleChange (copy), wait (ref), var2 (copy), var10 (ref), findPublishedPost (copy), p16 (ref), logCandidate (copy)
-			if var13 == nil then
-				if var1 == nil then
-					var1 = require(parent.Loggers).Logger:new("Moments.Upload")
+		resolve = function(MomentId) --[[ Line: 417 ]]
+			-- upvalues: NewResult (ref), MomentsUpload (upval), Parent (upval), LocalUserId (ref), Count1 (ref), SharedFlagsModule (upval), PostLifecycleSubscriptionModule (upval), waitForLifecycleChange (upval), Wait (copy), Count (upval), MomentsGetMomentsUserStoreModuleResult (copy), findPublishedPost (upval), p9 (copy), logCandidate (upval)
+			if NewResult == nil then
+				if MomentsUpload == nil then
+					MomentsUpload = require(Parent.Loggers).Logger:new("Moments.Upload")
 				end
-				var1:debug("event=published_post_unresolved reason=no_snapshot_started")
+				MomentsUpload:debug("event=published_post_unresolved reason=no_snapshot_started")
 				
 				return nil
 			else
-				local var20, var21 = var13:await()
+				local v8, v9 = NewResult:await()
+				local LocalUserId1 = LocalUserId
 				
-				if var20 and var21 ~= nil and var12 ~= nil then
-					local momentsPublishedPostPollIntervalSecondsFastInt = game:GetFastInt("MomentsPublishedPostPollIntervalSeconds")
-					local momentsPublishedPostMaxPollAttemptsFastInt = game:GetFastInt("MomentsPublishedPostMaxPollAttempts")
+				if v8 and v9 ~= nil and LocalUserId1 ~= nil then
+					local MomentsPublishedPostPollIntervalSecondsFastInt = game:GetFastInt("MomentsPublishedPostPollIntervalSeconds")
+					local MomentsPublishedPostMaxPollAttemptsFastInt = game:GetFastInt("MomentsPublishedPostMaxPollAttempts")
 					
-					if var1 == nil then
-						var1 = require(parent.Loggers).Logger:new("Moments.Upload")
+					if MomentsUpload == nil then
+						MomentsUpload = require(Parent.Loggers).Logger:new("Moments.Upload")
 					end
-					local var22
-					var1:debug("event=published_post_polling resolverId={} intervalSeconds={} maxAttempts={}", tostring(var11), tostring(momentsPublishedPostPollIntervalSecondsFastInt), tostring(momentsPublishedPostMaxPollAttemptsFastInt))
-					local var23 = sharedFlagsModule.FFlagMomentsOptimisticProfilePending and p19 ~= nil
-					local var24 = if var23 then postLifecycleSubscriptionModule.getWakeVersion(false, var12) else 0
-					local var25 = os.clock() + momentsPublishedPostPollIntervalSecondsFastInt
-					local var26 = 0
-					local var27 = 0
-					while var26 < momentsPublishedPostMaxPollAttemptsFastInt do
-						if var23 then
-							if var27 > 0 and not waitForLifecycleChange(var24, var12, math.max(0, var25 - os.clock()), wait) then
-								var26 += 1
-								var25 = os.clock() + momentsPublishedPostPollIntervalSecondsFastInt
+					MomentsUpload:debug("event=published_post_polling resolverId={} intervalSeconds={} maxAttempts={}", tostring(Count1), tostring(MomentsPublishedPostPollIntervalSecondsFastInt), (tostring(MomentsPublishedPostMaxPollAttemptsFastInt)))
+					local HasMomentId: boolean = SharedFlagsModule.FFlagMomentsOptimisticProfilePending and MomentId ~= nil
+					local WakeVersion = if HasMomentId then PostLifecycleSubscriptionModule.getWakeVersion(false, LocalUserId1) else 0
+					local NewClockTime = os.clock() + MomentsPublishedPostPollIntervalSecondsFastInt
+					local Count2 = 0
+					local Count3 = 0
+					local Flag = nil
+					local PublishedPost = nil
+					while Count2 < MomentsPublishedPostMaxPollAttemptsFastInt do
+						if HasMomentId then
+							if Count3 > 0 and not waitForLifecycleChange(WakeVersion, LocalUserId1, math.max(0, NewClockTime - os.clock()), Wait) then
+								Count2 += 1
+								NewClockTime = os.clock() + MomentsPublishedPostPollIntervalSecondsFastInt
 							end
-							var24 = postLifecycleSubscriptionModule.getWakeVersion(false, var12)
+							WakeVersion = PostLifecycleSubscriptionModule.getWakeVersion(false, LocalUserId1)
 						else
-							wait(momentsPublishedPostPollIntervalSecondsFastInt)
-							var26 += 1
+							Wait(MomentsPublishedPostPollIntervalSecondsFastInt)
+							Count2 += 1
 						end
-						var27 += 1
-						var22 = var11 ~= 0 and var11 == var2
+						Count3 += 1
 						
-						if var22 or sharedFlagsModule.FFlagMomentsOptimisticProfilePending and p19 ~= nil then
-							if sharedFlagsModule.FFlagMomentsOptimisticProfilePending and p19 ~= nil then
-								var22 = false
-								
-								for i, v in var10.getPendingUserMoments(false)[var12] or {} do
-									if v.moment.momentId == p19 then
-										if v.publishedMoment == nil then
-											var22 = true
-											break
-										end
-										return v.publishedMoment
+						if (Count1 == 0 or Count1 ~= Count) and (not SharedFlagsModule.FFlagMomentsOptimisticProfilePending or MomentId == nil) then
+							if MomentsUpload == nil then
+								MomentsUpload = require(Parent.Loggers).Logger:new("Moments.Upload")
+							end
+							MomentsUpload:debug("event=published_post_unresolved resolverId={} reason=superseded attempt={}", tostring(Count1), (tostring(Count3)))
+							
+							return nil
+						end
+						if SharedFlagsModule.FFlagMomentsOptimisticProfilePending and MomentId ~= nil then
+							Flag = false
+							local PendingUserMoment = MomentsGetMomentsUserStoreModuleResult.getPendingUserMoments(false)[LocalUserId1] or {}
+							for _, value in PendingUserMoment do
+								if value.moment.momentId == MomentId then
+									if value.publishedMoment ~= nil then
+										return value.publishedMoment
 									end
+									Flag = true
+									break
 								end
-								if var22 then
-									local t, v_1
-									local var28, var29 = var10.getFreshUserMoments(var12, nil):await()
-									var22 = if var28 then var29 else nil
-									
-									if sharedFlagsModule.FFlagMomentsOptimisticProfilePending and p19 ~= nil and var22 ~= nil then
-										local feedItemId
-										t = {}
-										
-										for v, v in var10.getPendingUserMoments(false)[var12] or {} do
-											v_1 = v.publishedMoment
-											
-											if v_1 ~= nil then
-												t[v_1.momentId] = true
-												feedItemId = v_1.recommendationMetadata.feedItemId
-												
-												if feedItemId ~= nil and feedItemId ~= "" then
-													t[feedItemId] = true
-												end
-											end
-										end
-										local t_1 = {}
-										
-										for v, v_1 in var22.moments do
-											feedItemId = v_1.recommendationMetadata.feedItemId
-											
-											if not t[v_1.momentId] and (feedItemId == nil or not t[feedItemId]) then
-												table.insert(t_1, v_1)
-											end
-										end
-										var22 = table.clone(var22)
-										var22.moments = t_1
-									end
-									if var22 == nil then
-										if var1 == nil then
-											var1 = require(parent.Loggers).Logger:new("Moments.Upload")
-										end
-										var1:debug("event=published_post_poll_read_failed resolverId={} attempt={}", tostring(var11), tostring(var27))
-									else
-										t, var96 = findPublishedPost(var22, var21, p16)
-										local excludedMomentIds = var22.excludedMomentIds or {}
-										
-										if var1 == nil then
-											var1 = require(parent.Loggers).Logger:new("Moments.Upload")
-										end
-										var1:debug("event=published_post_poll resolverId={} attempt={} moments={} excluded={} unknown={}", tostring(var11), tostring(var27), tostring(#var22.moments), tostring(#excludedMomentIds), tostring(#var96))
-										
-										for v, v_1 in var96 do
-											logCandidate(var27, v_1)
-										end
-										if t == nil then continue end
-										if sharedFlagsModule.FFlagMomentsOptimisticProfilePending and p19 ~= nil and not var10.resolvePendingUserMoment(var12, p19, t) then
-											return nil
-										end
-										var10.invalidateUser(var12)
-										
-										if var1 == nil then
-											var1 = require(parent.Loggers).Logger:new("Moments.Upload")
-										end
-										var1:debug("event=published_post_resolved resolverId={} attempt={} momentId={} feedItemId={} assetId={}", tostring(var11), tostring(var27), t.momentId, tostring(t.recommendationMetadata.feedItemId), tostring(t.assetId))
-										
-										return t
-									end
-								end
+							end
+							if not Flag then
 								return nil
 							end
 						end
-						if var1 == nil then
-							var1 = require(parent.Loggers).Logger:new("Moments.Upload")
-						end
-						var1:debug("event=published_post_unresolved resolverId={} reason=superseded attempt={}", tostring(var11), tostring(var27))
+						local v10, v11 = MomentsGetMomentsUserStoreModuleResult.getFreshUserMoments(LocalUserId1, nil):await()
+						local Tbl = if v10 then v11 else nil
 						
-						return nil
+						if SharedFlagsModule.FFlagMomentsOptimisticProfilePending and MomentId ~= nil and Tbl ~= nil then
+							local t = {}
+							local PendingUserMoment = MomentsGetMomentsUserStoreModuleResult.getPendingUserMoments(false)[LocalUserId1] or {}
+							for _, value1 in PendingUserMoment do
+								local PublishedMoment = value1.publishedMoment
+								local NoPublishedMoment = PublishedMoment == nil
+								local FeedItemId = nil
+								
+								if not NoPublishedMoment then
+									t[PublishedMoment.momentId] = true
+									FeedItemId = PublishedMoment.recommendationMetadata.feedItemId
+									NoPublishedMoment = FeedItemId == nil or FeedItemId == ""
+								end
+								if not NoPublishedMoment then
+									t[FeedItemId] = true
+								end
+							end
+							local Moments = {}
+							
+							for _, moment in Tbl.moments do
+								local FeedItemId = moment.recommendationMetadata.feedItemId
+								
+								if not t[moment.momentId] and (FeedItemId == nil or not t[FeedItemId]) then
+									table.insert(Moments, moment)
+								end
+							end
+							Tbl = table.clone(Tbl)
+							Tbl.moments = Moments
+						end
+						if Tbl == nil then
+							if MomentsUpload == nil then
+								MomentsUpload = require(Parent.Loggers).Logger:new("Moments.Upload")
+							end
+							MomentsUpload:debug("event=published_post_poll_read_failed resolverId={} attempt={}", tostring(Count1), (tostring(Count3)))
+						else
+							local PublishedPost2
+							PublishedPost, PublishedPost2 = findPublishedPost(Tbl, v9, p9)
+							local ExcludedMomentIds = Tbl.excludedMomentIds or {}
+							
+							if MomentsUpload == nil then
+								MomentsUpload = require(Parent.Loggers).Logger:new("Moments.Upload")
+							end
+							MomentsUpload:debug("event=published_post_poll resolverId={} attempt={} moments={} excluded={} unknown={}", tostring(Count1), tostring(Count3), tostring(#Tbl.moments), tostring(#ExcludedMomentIds), (tostring(#PublishedPost2)))
+							
+							for _, value2 in PublishedPost2 do
+								logCandidate(Count3, value2)
+							end
+							if PublishedPost == nil then continue end
+							if SharedFlagsModule.FFlagMomentsOptimisticProfilePending and MomentId ~= nil and not MomentsGetMomentsUserStoreModuleResult.resolvePendingUserMoment(LocalUserId1, MomentId, PublishedPost) then
+								return nil
+							end
+							MomentsGetMomentsUserStoreModuleResult.invalidateUser(LocalUserId1)
+							
+							if MomentsUpload == nil then
+								MomentsUpload = require(Parent.Loggers).Logger:new("Moments.Upload")
+							end
+							MomentsUpload:debug("event=published_post_resolved resolverId={} attempt={} momentId={} feedItemId={} assetId={}", tostring(Count1), tostring(Count3), PublishedPost.momentId, tostring(PublishedPost.recommendationMetadata.feedItemId), (tostring(PublishedPost.assetId)))
+							
+							return PublishedPost
+						end
 					end
-					if var1 == nil then
-						var1 = require(parent.Loggers).Logger:new("Moments.Upload")
+					if MomentsUpload == nil then
+						MomentsUpload = require(Parent.Loggers).Logger:new("Moments.Upload")
 					end
-					var1:debug("event=published_post_unresolved resolverId={} reason=budget_exhausted attempts={}", tostring(var11), tostring(momentsPublishedPostMaxPollAttemptsFastInt))
+					MomentsUpload:debug("event=published_post_unresolved resolverId={} reason=budget_exhausted attempts={}", tostring(Count1), (tostring(MomentsPublishedPostMaxPollAttemptsFastInt)))
 					
 					return nil
-				elseif var1 == nil then
-					var1 = require(parent.Loggers).Logger:new("Moments.Upload")
+				else
+					if MomentsUpload == nil then
+						MomentsUpload = require(Parent.Loggers).Logger:new("Moments.Upload")
+					end
+					MomentsUpload:debug("event=published_post_unresolved resolverId={} reason=snapshot_unavailable", (tostring(Count1)))
+					
+					return nil
 				end
-				var1:debug("event=published_post_unresolved resolverId={} reason=snapshot_unavailable", tostring(var11))
-				
-				return nil
 			end
 		end,
-		isCurrent = function()
-			-- upvalues: var11 (write), var2 (copy)
-			return var11 ~= 0 and var11 == var2
+		isCurrent = function(): boolean --[[ Line: 349 ]]
+			-- upvalues: Count1 (ref), Count (upval)
+			return Count1 ~= 0 and Count1 == Count
 		end
 	}
 end

@@ -1,121 +1,115 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local momentsCommonModule = require(parent.MomentsCommon)
-local useSignalState = require(parent.SignalsReact).useSignalState
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local _ = require(script.Parent.FeedTypes)
-local immersiveChromeMachineModule = require(script.Parent.immersiveChromeMachine)
-local getImmersiveChromeStoreModule = require(moments.Stores.GetImmersiveChromeStore)
-local fFlagMomentsImmersiveChromeModule = require(moments.Flags.FFlagMomentsImmersiveChrome)
-local getFIntMomentsImmersiveHideAfterAdvancesModule = require(moments.Flags.GetFIntMomentsImmersiveHideAfterAdvances)
-local getFIntMomentsImmersiveShownDwellMsModule = require(moments.Flags.GetFIntMomentsImmersiveShownDwellMs)
-local getFIntMomentsImmersiveHiddenCooldownMsModule = require(moments.Flags.GetFIntMomentsImmersiveHiddenCooldownMs)
-local getFFlagMomentsPersistHeaderOnProfilePeekModule = require(moments.Flags.GetFFlagMomentsPersistHeaderOnProfilePeek)
-local analytics = momentsCommonModule.Analytics
-local eventNames = analytics.EventNames
-local fireAnalyticsEvent = analytics.fireAnalyticsEvent
+local ImmersiveChromeMachineModule = require(script.Parent.immersiveChromeMachine)
+local GetImmersiveChromeStoreModule = require(Moments.Stores.GetImmersiveChromeStore)
+local GetFIntMomentsImmersiveHideAfterAdvancesModule = require(Moments.Flags.GetFIntMomentsImmersiveHideAfterAdvances)
+local GetFIntMomentsImmersiveShownDwellMsModule = require(Moments.Flags.GetFIntMomentsImmersiveShownDwellMs)
+local GetFIntMomentsImmersiveHiddenCooldownMsModule = require(Moments.Flags.GetFIntMomentsImmersiveHiddenCooldownMs)
+local GetFFlagMomentsPersistHeaderOnProfilePeekModule = require(Moments.Flags.GetFFlagMomentsPersistHeaderOnProfilePeek)
+local Analytics = require(Parent.MomentsCommon).Analytics
+local EventNames = Analytics.EventNames
+local FireAnalyticsEventFunction = Analytics.fireAnalyticsEvent
 
-local function defaultFireEvent(p1, p2, p3)
-	-- upvalues: eventNames (ref), fireAnalyticsEvent (ref)
-	fireAnalyticsEvent(if p1 then eventNames.MomentsChromeRestored else eventNames.MomentsChromeAutoHidden, { trigger = p2, index = tostring(p3) })
+local function defaultFireEvent(p1, Trigger, p2) --[[ Line: 75 ]]
+	-- upvalues: EventNames (copy), FireAnalyticsEventFunction (copy)
+	FireAnalyticsEventFunction(if p1 then EventNames.MomentsChromeRestored else EventNames.MomentsChromeAutoHidden, { trigger = Trigger, index = tostring(p2) })
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), getImmersiveChromeStoreModule (ref), fFlagMomentsImmersiveChromeModule (ref), defaultFireEvent (ref), getFIntMomentsImmersiveHideAfterAdvancesModule (ref), getFIntMomentsImmersiveShownDwellMsModule (ref), getFIntMomentsImmersiveHiddenCooldownMsModule (ref), immersiveChromeMachineModule (ref), signalsModule (ref), useSignalState (ref), getFFlagMomentsPersistHeaderOnProfilePeekModule (ref)
-	local pager = p1.pager
-	local active = p1.active
-	local getActiveIsPlaying = p1.getActiveIsPlaying
-	local getIsScrolling = p1.getIsScrolling
-	local inputAllowed = p1.inputAllowed
-	local reducedMotion = p1.reducedMotion
-	local var1 = p1.coveringOverlay == true
-	local var2 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), getImmersiveChromeStoreModule (copy)
-		return p1.store or getImmersiveChromeStoreModule(false)
+return function(p1) --[[ Line: 83 | Named "useImmersiveChrome" ]]
+	-- upvalues: ReactModule (copy), GetImmersiveChromeStoreModule (copy), defaultFireEvent (copy), GetFIntMomentsImmersiveHideAfterAdvancesModule (copy), GetFIntMomentsImmersiveShownDwellMsModule (copy), GetFIntMomentsImmersiveHiddenCooldownMsModule (copy), ImmersiveChromeMachineModule (copy), SignalsModule (copy), UseSignalStateFunction (copy), GetFFlagMomentsPersistHeaderOnProfilePeekModule (copy)
+	local Pager = p1.pager
+	local Active = p1.active
+	local GetActiveIsPlayingFunction = p1.getActiveIsPlaying
+	local GetIsScrollingFunction = p1.getIsScrolling
+	local InputAllowed = p1.inputAllowed
+	local ReducedMotion = p1.reducedMotion
+	local IsCoveringOverlay = p1.coveringOverlay == true
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 94 ]]
+		-- upvalues: p1 (copy), GetImmersiveChromeStoreModule (upval)
+		return p1.store or GetImmersiveChromeStoreModule(false)
 	end, {})
-	local var3 = if p1.featureEnabledOverride ~= nil then fFlagMomentsImmersiveChromeModule else p1.featureEnabledOverride
-	local var4 = reactModule.useRef(1)
-	local var5 = reactModule.useRef(var3)
-	var5.current = var3
-	local var6 = reactModule.useRef(p1.fireEvent or defaultFireEvent)
-	var6.current = p1.fireEvent or defaultFireEvent
-	local var7 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), getFIntMomentsImmersiveHideAfterAdvancesModule (copy), getFIntMomentsImmersiveShownDwellMsModule (copy), getFIntMomentsImmersiveHiddenCooldownMsModule (copy), immersiveChromeMachineModule (copy), var2 (ref), var5 (ref), var6 (ref), var4 (ref)
-		return immersiveChromeMachineModule(p1.config or {
-			hideAfterAdvances = getFIntMomentsImmersiveHideAfterAdvancesModule(),
-			shownDwellMs = getFIntMomentsImmersiveShownDwellMsModule(),
-			hiddenCooldownMs = getFIntMomentsImmersiveHiddenCooldownMsModule()
+	local NoFeatureEnabledOverride = p1.featureEnabledOverride == nil or p1.featureEnabledOverride
+	local UseRefResult = ReactModule.useRef(1)
+	local UseRefResult1 = ReactModule.useRef(NoFeatureEnabledOverride)
+	UseRefResult1.current = NoFeatureEnabledOverride
+	local UseRefResult2 = ReactModule.useRef(p1.fireEvent or defaultFireEvent)
+	UseRefResult2.current = p1.fireEvent or defaultFireEvent
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 110 ]]
+		-- upvalues: p1 (copy), GetFIntMomentsImmersiveHideAfterAdvancesModule (upval), GetFIntMomentsImmersiveShownDwellMsModule (upval), GetFIntMomentsImmersiveHiddenCooldownMsModule (upval), ImmersiveChromeMachineModule (upval), UseMemoResult (copy), UseRefResult1 (copy), UseRefResult2 (copy), UseRefResult (copy)
+		return ImmersiveChromeMachineModule(p1.config or {
+			hideAfterAdvances = GetFIntMomentsImmersiveHideAfterAdvancesModule(),
+			shownDwellMs = GetFIntMomentsImmersiveShownDwellMsModule(),
+			hiddenCooldownMs = GetFIntMomentsImmersiveHiddenCooldownMsModule()
 		}, {
-			now = p1.now or function()
+			now = p1.now or function(): number --[[ Line: 117 ]]
 				return os.clock() * 1000
 			end,
-			setChromeVisible = function(value, p2)
-				-- upvalues: var2 (copy), var5 (copy), var6 (copy), var4 (copy)
-				var2.setChromeVisible(value)
+			setChromeVisible = function(p2, p3) --[[ Line: 122 ]]
+				-- upvalues: UseMemoResult (upval), UseRefResult1 (upval), UseRefResult2 (upval), UseRefResult (upval)
+				UseMemoResult.setChromeVisible(p2)
 				
-				if var5.current then
-					var6.current(value, p2, var4.current)
+				if UseRefResult1.current then
+					UseRefResult2.current(p2, p3, UseRefResult.current)
 				end
 			end
 		})
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: signalsModule (copy), pager (ref), getActiveIsPlaying (ref), getIsScrolling (ref), var4 (ref), var7 (ref)
-		return signalsModule.createEffect(function(p2)
-			-- upvalues: pager (copy), getActiveIsPlaying (copy), getIsScrolling (copy), var4 (copy), var7 (copy)
-			local count = pager.getCount(p2)
-			local currentIndex = pager.getCurrentIndex(p2)
-			local var8 = getActiveIsPlaying(p2)
-			local var9 = getIsScrolling(p2)
-			var4.current = currentIndex
-			var7.setCount(count)
-			var7.onActiveUpdate(currentIndex, var8, var9)
-		end)
-	end, { pager, getActiveIsPlaying, getIsScrolling, var7 })
-	local var8 = useSignalState(var2.getOverlayCovering)
-	local var9 = getFFlagMomentsPersistHeaderOnProfilePeekModule()
-	local var10 = if var9 then var1 else var8 or var1
-	local var11 = reactModule.useRef(false)
-	reactModule.useEffect(function()
-		-- upvalues: var9 (ref), var8 (ref), active (ref), var11 (ref), inputAllowed (ref), reducedMotion (ref), var3 (ref), var7 (ref), var1 (ref), var10 (ref)
-		if var9 then
-			if var8 and not active then
-				var11.current = true
-			elseif active then
-				var11.current = false
+	ReactModule.useEffect(function() --[[ Line: 133 ]]
+		-- upvalues: SignalsModule (upval), Pager (copy), GetActiveIsPlayingFunction (copy), GetIsScrollingFunction (copy), UseRefResult (copy), UseMemoResult1 (copy)
+		return (SignalsModule.createEffect(function(p2) --[[ Line: 134 ]]
+			-- upvalues: Pager (upval), GetActiveIsPlayingFunction (upval), GetIsScrollingFunction (upval), UseRefResult (upval), UseMemoResult1 (upval)
+			local Count = Pager.getCount(p2)
+			local CurrentIndex = Pager.getCurrentIndex(p2)
+			local ActiveIsPlaying = GetActiveIsPlayingFunction(p2)
+			local IsScrolling = GetIsScrollingFunction(p2)
+			UseRefResult.current = CurrentIndex
+			UseMemoResult1.setCount(Count)
+			UseMemoResult1.onActiveUpdate(CurrentIndex, ActiveIsPlaying, IsScrolling)
+		end))
+	end, {
+		Pager,
+		GetActiveIsPlayingFunction,
+		GetIsScrollingFunction,
+		UseMemoResult1
+	})
+	local UseSignalStateResult = UseSignalStateFunction(UseMemoResult.getOverlayCovering)
+	local FFlagMomentsPersistHeaderOnProfilePeekModule = GetFFlagMomentsPersistHeaderOnProfilePeekModule()
+	local IsCoveringOverlay1 = if FFlagMomentsPersistHeaderOnProfilePeekModule then IsCoveringOverlay else UseSignalStateResult or IsCoveringOverlay
+	local UseRefResult3 = ReactModule.useRef(false)
+	ReactModule.useEffect(function() --[[ Line: 172 ]]
+		-- upvalues: FFlagMomentsPersistHeaderOnProfilePeekModule (copy), UseSignalStateResult (copy), Active (copy), UseRefResult3 (copy), InputAllowed (copy), ReducedMotion (copy), NoFeatureEnabledOverride (copy), UseMemoResult1 (copy), IsCoveringOverlay (copy), IsCoveringOverlay1 (copy)
+		if FFlagMomentsPersistHeaderOnProfilePeekModule then
+			if UseSignalStateResult and not Active then
+				UseRefResult3.current = true
+			elseif Active then
+				UseRefResult3.current = false
 			end
 		end
-		local var12 = not active
-		
-		if var12 then
-			var12 = not (var9 and var11.current)
-		end
-		local setForceShow = var7.setForceShow
-		local var13 = var12 or (not inputAllowed or (reducedMotion or not var3))
-		
-		if var13 then
-			var13 = not (var8 or var1)
-		end
-		setForceShow(var13)
-		var7.setForceHide(var10)
+		UseMemoResult1.setForceShow((not Active and not (FFlagMomentsPersistHeaderOnProfilePeekModule and UseRefResult3.current) or (not InputAllowed or (ReducedMotion or not NoFeatureEnabledOverride))) and not (UseSignalStateResult or IsCoveringOverlay))
+		UseMemoResult1.setForceHide(IsCoveringOverlay1)
 	end, {
-		active, inputAllowed, reducedMotion, var3, var8, var1, var10, var9, var7
+		Active, InputAllowed, ReducedMotion, NoFeatureEnabledOverride,
+		UseSignalStateResult, IsCoveringOverlay, IsCoveringOverlay1,
+		FFlagMomentsPersistHeaderOnProfilePeekModule, UseMemoResult1
 	})
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), var7 (ref)
-		var2.setRevealHandler(var7.reveal)
+	ReactModule.useEffect(function() --[[ Line: 202 ]]
+		-- upvalues: UseMemoResult (copy), UseMemoResult1 (copy)
+		UseMemoResult.setRevealHandler(UseMemoResult1.reveal)
 		
-		return function()
-			-- upvalues: var2 (copy)
-			var2.setRevealHandler(nil)
+		return function() --[[ Line: 204 ]]
+			-- upvalues: UseMemoResult (upval)
+			UseMemoResult.setRevealHandler(nil)
 		end
-	end, { var2, var7 })
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref)
-		return function()
-			-- upvalues: var2 (copy)
-			var2.setChromeVisible(true)
+	end, { UseMemoResult, UseMemoResult1 })
+	ReactModule.useEffect(function() --[[ Line: 210 ]]
+		-- upvalues: UseMemoResult (copy)
+		return function() --[[ Line: 211 ]]
+			-- upvalues: UseMemoResult (upval)
+			UseMemoResult.setChromeVisible(true)
 		end
-	end, { var2 })
+	end, { UseMemoResult })
 end

@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.PageGate.PageGate)
+﻿return (require(script.Parent.Parent.Parent._Index.PageGate.PageGate))

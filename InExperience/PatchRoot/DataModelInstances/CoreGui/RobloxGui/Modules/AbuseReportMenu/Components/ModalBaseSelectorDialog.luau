@@ -1,49 +1,48 @@
-﻿local abuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
-local corePackagesService = game:GetService("CorePackages")
-local useTokens = require(corePackagesService.Packages.Foundation).Hooks.useTokens
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local reactModule = require(corePackagesService.Packages.React)
-local scrollingListTable = UIBloxModule.App.Table.ScrollingListTable
-local cellHeadDetail = UIBloxModule.App.Table.CellHeadDetail
-local cell = UIBloxModule.App.Table.Cell
-local cellTailDescription = UIBloxModule.App.Table.CellTailDescription
-local modalWindow = UIBloxModule.App.Dialog.Modal.ModalWindow
-local dashModule = require(corePackagesService.Packages.Dash)
-local cryoModule = require(corePackagesService.Packages.Cryo)
-local useStyle = UIBloxModule.Core.Style.useStyle
-local iconButton = UIBloxModule.App.Button.IconButton
-local iconSize = UIBloxModule.App.ImageSet.Enum.IconSize
-local openTypeSupport = UIBloxModule.Utility.OpenTypeSupport
-local images = UIBloxModule.App.ImageSet.Images
-local coreScriptsRootProvider = require(corePackagesService.Workspace.Packages.CoreScriptsRoactCommon).CoreScriptsRootProvider
-local focusNavigationUtilsModule = require(corePackagesService.Workspace.Packages.FocusNavigationUtils)
-local focusRoot = focusNavigationUtilsModule.FocusRoot
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local getFFlagModalSelectorCloseButtonModule = require(abuseReportMenu.Flags.GetFFlagModalSelectorCloseButton)
-local getFFlagLuaAppEnableOpenTypeSupport = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagLuaAppEnableOpenTypeSupport
-local isInExperienceUIVREnabled = require(corePackagesService.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled
-local responsiveModule = nil
+﻿local CorePackages = game:GetService("CorePackages")
+local UseTokensFunction = require(CorePackages.Packages.Foundation).Hooks.useTokens
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
+local ReactModule = require(CorePackages.Packages.React)
+local ScrollingListTable = UIBloxModule.App.Table.ScrollingListTable
+local CellHeadDetail = UIBloxModule.App.Table.CellHeadDetail
+local Cell = UIBloxModule.App.Table.Cell
+local CellTailDescription = UIBloxModule.App.Table.CellTailDescription
+local ModalWindow = UIBloxModule.App.Dialog.Modal.ModalWindow
+local DashModule = require(CorePackages.Packages.Dash)
+local CryoModule = require(CorePackages.Packages.Cryo)
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local IconButton = UIBloxModule.App.Button.IconButton
+local IconSize = UIBloxModule.App.ImageSet.Enum.IconSize
+local OpenTypeSupport = UIBloxModule.Utility.OpenTypeSupport
+local Images = UIBloxModule.App.ImageSet.Images
+local CoreScriptsRootProvider = require(CorePackages.Workspace.Packages.CoreScriptsRoactCommon).CoreScriptsRootProvider
+local FocusNavigationUtilsModule = require(CorePackages.Workspace.Packages.FocusNavigationUtils)
+local FocusRoot = FocusNavigationUtilsModule.FocusRoot
+local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+local GetFFlagModalSelectorCloseButtonModule = require(script:FindFirstAncestor("AbuseReportMenu").Flags.GetFFlagModalSelectorCloseButton)
+local GetFFlagLuaAppEnableOpenTypeSupportFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagLuaAppEnableOpenTypeSupport
+local IsInExperienceUIVREnabled = require(CorePackages.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled
+local ResponsiveModule = nil
 local UIManager = nil
-local panelType = nil
+local PanelType = nil
 
-if isInExperienceUIVREnabled then
-	responsiveModule = require(corePackagesService.Workspace.Packages.Responsive)
-	local vrSpatialUiModule = require(corePackagesService.Workspace.Packages.VrSpatialUi)
-	UIManager = vrSpatialUiModule.UIManager
-	panelType = vrSpatialUiModule.Constants.PanelType
+if IsInExperienceUIVREnabled then
+	ResponsiveModule = require(CorePackages.Workspace.Packages.Responsive)
+	local VrSpatialUiModule = require(CorePackages.Workspace.Packages.VrSpatialUi)
+	UIManager = VrSpatialUiModule.UIManager
+	PanelType = VrSpatialUiModule.Constants.PanelType
 end
-local function ModalBaseSelectorDialog(p1)
-	-- upvalues: useTokens (ref), useStyle (ref), isInExperienceUIVREnabled (ref), responsiveModule (write), UIManager (write), panelType (write), reactModule (ref), getFFlagModalSelectorCloseButtonModule (ref), cryoModule (ref), iconButton (ref), iconSize (ref), images (ref), scrollingListTable (ref), dashModule (ref), cell (ref), cellHeadDetail (ref), getFFlagLuaAppEnableOpenTypeSupport (ref), openTypeSupport (ref), cellTailDescription (ref), modalWindow (ref)
-	local var1 = useTokens()
-	local var2 = useStyle()
-	local theme = var2.Theme
-	local size1000 = var2.Tokens.Size.Size_1000
-	local var3 = if isInExperienceUIVREnabled then math.min(#p1.cellData * var1.Size.Size_1000, (if responsiveModule.useIsSpatial() then UIManager.getInstance():getPanelObject(panelType.MoreMenu).AbsoluteSize.Y else p1.viewportHeight) - 80 - 24) else math.min(#p1.cellData * var1.Size.Size_1000, p1.viewportHeight - 80 - 24)
-	local var4 = var3 + 24
-	local var5 = 0
-	local var6 = 0
-	local t = {
-		Paddings = reactModule.createElement("UIPadding", {
+local function ModalBaseSelectorDialog(p1) --[[ Line: 63 ]]
+	-- upvalues: UseTokensFunction (copy), UseStyleFunction (copy), IsInExperienceUIVREnabled (copy), ResponsiveModule (ref), UIManager (ref), PanelType (ref), ReactModule (copy), GetFFlagModalSelectorCloseButtonModule (copy), CryoModule (copy), IconButton (copy), IconSize (copy), Images (copy), ScrollingListTable (copy), DashModule (copy), Cell (copy), CellHeadDetail (copy), GetFFlagLuaAppEnableOpenTypeSupportFunction (copy), OpenTypeSupport (copy), CellTailDescription (copy), ModalWindow (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseStyleResult = UseStyleFunction()
+	local Theme = UseStyleResult.Theme
+	local Size1000 = UseStyleResult.Tokens.Size.Size_1000
+	local Smallest: number = if IsInExperienceUIVREnabled then math.min(#p1.cellData * UseTokensResult.Size.Size_1000, (if ResponsiveModule.useIsSpatial() then UIManager.getInstance():getPanelObject(PanelType.MoreMenu).AbsoluteSize.Y else p1.viewportHeight) - 80 - 24) else math.min(#p1.cellData * UseTokensResult.Size.Size_1000, p1.viewportHeight - 80 - 24)
+	local YOffset = Smallest + 24
+	local Offset = 0
+	local YOffset1 = 0
+	local JoinResult = {
+		Paddings = ReactModule.createElement("UIPadding", {
 			PaddingTop = UDim.new(0, 12),
 			PaddingBottom = UDim.new(0, 12),
 			PaddingLeft = UDim.new(0, 12),
@@ -51,123 +50,125 @@ local function ModalBaseSelectorDialog(p1)
 		})
 	}
 	
-	if getFFlagModalSelectorCloseButtonModule() then
-		var4 = var3 + 48 + size1000
-		var5 = 12
-		var6 = -36
-		t = cryoModule.Dictionary.join(t, {
-			Layout = reactModule.createElement("UIListLayout", {
+	if GetFFlagModalSelectorCloseButtonModule() then
+		YOffset = Smallest + 48 + Size1000
+		Offset = 12
+		YOffset1 = -36
+		JoinResult = CryoModule.Dictionary.join(JoinResult, {
+			Layout = ReactModule.createElement("UIListLayout", {
 				HorizontalAlignment = 0,
 				FillDirection = Enum.FillDirection.Vertical,
 				SortOrder = Enum.SortOrder.LayoutOrder
 			}),
-			Header = reactModule.createElement("Frame", {
+			Header = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 1,
-				Size = UDim2.new(1, 0, 0, size1000)
+				Size = UDim2.new(1, 0, 0, Size1000)
 			}, {
-				Layout = reactModule.createElement("UIListLayout", {
+				Layout = ReactModule.createElement("UIListLayout", {
 					FillDirection = Enum.FillDirection.Horizontal,
 					HorizontalAlignment = Enum.HorizontalAlignment.Right
 				}),
-				CloseButton = reactModule.createElement(iconButton, {
+				CloseButton = ReactModule.createElement(IconButton, {
 					size = UDim2.fromOffset(0, 0),
-					iconSize = iconSize.Medium,
-					icon = images["icons/navigation/close"],
-					onActivated = function()
-						-- upvalues: p1 (ref)
+					iconSize = IconSize.Medium,
+					icon = Images["icons/navigation/close"],
+					onActivated = function() --[[ Line: 120 ]]
+						-- upvalues: p1 (copy)
 						p1.onClose()
 					end
 				})
 			}),
-			Divider = reactModule.createElement("Frame", {
+			Divider = ReactModule.createElement("Frame", {
 				BorderSizePixel = 0,
 				LayoutOrder = 2,
 				Size = UDim2.new(1, 0, 0, 1),
 				Position = UDim2.new(0, 0, 1, 0),
 				AnchorPoint = Vector2.new(0, 1),
-				BackgroundTransparency = var2.Theme.Divider.Transparency,
-				BackgroundColor3 = var2.Theme.Divider.Color
+				BackgroundTransparency = UseStyleResult.Theme.Divider.Transparency,
+				BackgroundColor3 = UseStyleResult.Theme.Divider.Color
 			})
 		})
 	end
-	return reactModule.createElement("Frame", {
+	local JoinResult1 = CryoModule.Dictionary.join(JoinResult, {
+		SelectorFrame = ReactModule.createElement("Frame", {
+			BackgroundTransparency = 1,
+			LayoutOrder = 3,
+			Size = UDim2.new(1, 0, 1, YOffset1)
+		}, {
+			Paddings = ReactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, Offset) }),
+			ModalSelector = ReactModule.createElement(ScrollingListTable, {
+				selectable = false,
+				size = UDim2.new(1, 0, 1, 0),
+				cells = DashModule.map(p1.cellData, function(p2) --[[ Line: 149 ]]
+					-- upvalues: ReactModule (upval), Cell (upval), CellHeadDetail (upval), GetFFlagLuaAppEnableOpenTypeSupportFunction (upval), OpenTypeSupport (upval), CellTailDescription (upval), UseTokensResult (copy), p1 (copy)
+					return ReactModule.createElement(Cell, {
+						userInteractionEnabled = true,
+						head = ReactModule.createElement(CellHeadDetail, {
+							labelText = p2.label,
+							subLabelText = p2.subLabel,
+							openTypeFeatures = if GetFFlagLuaAppEnableOpenTypeSupportFunction() then OpenTypeSupport:getUserNameStylisticAlternative() else nil
+						}),
+						tail = ReactModule.createElement(CellTailDescription, { text = "", showArrow = false }),
+						background = ReactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }),
+						size = UDim2.new(1, 0, 0, UseTokensResult.Size.Size_1000),
+						onActivated = function() --[[ Line: 168 ]]
+							-- upvalues: p1 (upval), p2 (copy)
+							p1.onSelect(p2.label, p2.subLabel, p2.identifier)
+							p1.onClose()
+						end
+					})
+				end)
+			})
+		})
+	})
+	
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 1, 0),
 		Position = UDim2.new(0, 0, 0, 0)
 	}, {
-		Overlay = if p1.isShown then reactModule.createElement("TextButton", {
+		Overlay = if p1.isShown then ReactModule.createElement("TextButton", {
 			Selectable = false,
 			AutoButtonColor = false,
 			BorderSizePixel = 0,
-			BackgroundColor3 = theme.Overlay.Color,
-			BackgroundTransparency = theme.Overlay.Transparency,
+			BackgroundColor3 = Theme.Overlay.Color,
+			BackgroundTransparency = Theme.Overlay.Transparency,
 			Size = UDim2.new(1, 0, 1, 0),
 			Position = UDim2.fromScale(0.5, 0.5),
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			ZIndex = 10,
 			Text = "",
-			[reactModule.Event.Activated] = function()
-				-- upvalues: p1 (ref)
+			[ReactModule.Event.Activated] = function() --[[ Line: 195 ]]
+				-- upvalues: p1 (copy)
 				p1.onClose()
 			end
 		}, {
-			Modal = reactModule.createElement(modalWindow, {
+			Modal = ReactModule.createElement(ModalWindow, {
 				isFullHeight = false,
 				screenSize = Vector2.new(p1.viewportWidth, p1.viewportHeight)
 			}, {
-				ModalContent = reactModule.createElement("Frame", {
+				ModalContent = ReactModule.createElement("Frame", {
 					BackgroundTransparency = 0,
-					Size = UDim2.new(1, 0, 0, var4),
-					BackgroundColor3 = theme.BackgroundDefault.Color,
+					Size = UDim2.new(1, 0, 0, YOffset),
+					BackgroundColor3 = Theme.BackgroundDefault.Color,
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					Position = UDim2.new(0.5, 0, 0.5, 20)
-				}, cryoModule.Dictionary.join(t, {
-					SelectorFrame = reactModule.createElement("Frame", {
-						BackgroundTransparency = 1,
-						LayoutOrder = 3,
-						Size = UDim2.new(1, 0, 1, var6)
-					}, {
-						Paddings = reactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, var5) }),
-						ModalSelector = reactModule.createElement(scrollingListTable, {
-							selectable = false,
-							size = UDim2.new(1, 0, 1, 0),
-							cells = dashModule.map(p1.cellData, function(p2)
-								-- upvalues: reactModule (copy), cell (copy), cellHeadDetail (copy), getFFlagLuaAppEnableOpenTypeSupport (copy), openTypeSupport (copy), cellTailDescription (copy), var1 (ref), p1 (ref)
-								return reactModule.createElement(cell, {
-									userInteractionEnabled = true,
-									head = reactModule.createElement(cellHeadDetail, {
-										labelText = p2.label,
-										subLabelText = p2.subLabel,
-										openTypeFeatures = if getFFlagLuaAppEnableOpenTypeSupport() then openTypeSupport:getUserNameStylisticAlternative() else nil
-									}),
-									tail = reactModule.createElement(cellTailDescription, { text = "", showArrow = false }),
-									background = reactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }),
-									size = UDim2.new(1, 0, 0, var1.Size.Size_1000),
-									onActivated = function()
-										-- upvalues: p1 (copy), p2 (ref)
-										p1.onSelect(p2.label, p2.subLabel, p2.identifier)
-										p1.onClose()
-									end
-								})
-							end)
-						})
-					})
-				}))
+				}, JoinResult1)
 			})
 		}) else nil
 	})
 end
 
-function DialogWrapper(p1)
-	-- upvalues: reactModule (ref), coreScriptsRootProvider (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), ModalBaseSelectorDialog (ref)
-	return reactModule.createElement(coreScriptsRootProvider, {}, {
-		FocusNavigationCoreScriptsWrapper = reactModule.createElement(focusRoot, {
+function DialogWrapper(p1) --[[ Line: 216 ]]
+	-- upvalues: ReactModule (copy), CoreScriptsRootProvider (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), ModalBaseSelectorDialog (copy)
+	return ReactModule.createElement(CoreScriptsRootProvider, {}, {
+		FocusNavigationCoreScriptsWrapper = ReactModule.createElement(FocusRoot, {
 			isIsolated = true,
 			isAutoFocusRoot = true,
-			surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.CentralOverlay
+			surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.CentralOverlay
 		}, {
-			DialogContainer = reactModule.createElement(ModalBaseSelectorDialog, p1)
+			DialogContainer = ReactModule.createElement(ModalBaseSelectorDialog, p1)
 		})
 	})
 end

@@ -1,19 +1,17 @@
-﻿local userInputService = game:GetService("UserInputService")
-local proximityPromptService = game:GetService("ProximityPromptService")
-local coreGuiService = game:GetService("CoreGui")
-local corePackagesService = game:GetService("CorePackages")
-local tweenService = game:GetService("TweenService")
-local runService = game:GetService("RunService")
-local playersService = game:GetService("Players")
-local coreUtilityModule = require(coreGuiService.RobloxGui.Modules.CoreUtility)
-local appFonts = require(corePackagesService.Workspace.Packages.Style).AppFonts
-local localPlayer = playersService.LocalPlayer
-while localPlayer == nil do
-	playersService.ChildAdded:wait()
-	localPlayer = playersService.LocalPlayer
+﻿local UserInputService = game:GetService("UserInputService")
+local ProximityPromptService = game:GetService("ProximityPromptService")
+local TweenService = game:GetService("TweenService")
+local RunService = game:GetService("RunService")
+local Players = game:GetService("Players")
+local CoreUtilityModule = require(game:GetService("CoreGui").RobloxGui.Modules.CoreUtility)
+local AppFonts = require(game:GetService("CorePackages").Workspace.Packages.Style).AppFonts
+local LocalPlayer = Players.LocalPlayer
+while LocalPlayer == nil do
+	Players.ChildAdded:wait()
+	LocalPlayer = Players.LocalPlayer
 end
-local playerGui = coreUtilityModule.waitForChildOfClass(localPlayer, "PlayerGui")
-local t = {
+local PlayerGui = CoreUtilityModule.waitForChildOfClass(LocalPlayer, "PlayerGui")
+local config = {
 	[Enum.KeyCode.Backspace] = "rbxasset://textures/ui/Controls/backspace.png",
 	[Enum.KeyCode.Return] = "rbxasset://textures/ui/Controls/return.png",
 	[Enum.KeyCode.LeftShift] = "rbxasset://textures/ui/Controls/shift.png",
@@ -21,20 +19,20 @@ local t = {
 	[Enum.KeyCode.Tab] = "rbxasset://textures/ui/Controls/tab.png"
 }
 
-if userInputService:GetPlatform() == Enum.Platform.OSX then
-	t[Enum.KeyCode.LeftMeta] = "rbxasset://textures/ui/Controls/command.png"
-	t[Enum.KeyCode.RightMeta] = "rbxasset://textures/ui/Controls/command.png"
-	t[Enum.KeyCode.LeftAlt] = "rbxasset://textures/ui/Controls/option.png"
-	t[Enum.KeyCode.RightAlt] = "rbxasset://textures/ui/Controls/option.png"
+if UserInputService:GetPlatform() == Enum.Platform.OSX then
+	config[Enum.KeyCode.LeftMeta] = "rbxasset://textures/ui/Controls/command.png"
+	config[Enum.KeyCode.RightMeta] = "rbxasset://textures/ui/Controls/command.png"
+	config[Enum.KeyCode.LeftAlt] = "rbxasset://textures/ui/Controls/option.png"
+	config[Enum.KeyCode.RightAlt] = "rbxasset://textures/ui/Controls/option.png"
 end
-local t_1 = {
+local config1 = {
 	["'"] = "rbxasset://textures/ui/Controls/apostrophe.png",
 	[","] = "rbxasset://textures/ui/Controls/comma.png",
 	["`"] = "rbxasset://textures/ui/Controls/graveaccent.png",
 	["."] = "rbxasset://textures/ui/Controls/period.png",
 	[" "] = "rbxasset://textures/ui/Controls/spacebar.png"
 }
-local t_2 = {
+local config2 = {
 	[Enum.KeyCode.LeftControl] = "Ctrl",
 	[Enum.KeyCode.RightControl] = "Ctrl",
 	[Enum.KeyCode.LeftAlt] = "Alt",
@@ -58,7 +56,7 @@ local t_2 = {
 	[Enum.KeyCode.Insert] = "Ins",
 	[Enum.KeyCode.Delete] = "Del"
 }
-local t_3 = {
+local config3 = {
 	[Enum.KeyCode.LeftControl] = 12,
 	[Enum.KeyCode.RightControl] = 12,
 	[Enum.KeyCode.LeftAlt] = 12,
@@ -73,504 +71,503 @@ local t_3 = {
 	[Enum.KeyCode.Insert] = 10,
 	[Enum.KeyCode.Delete] = 10
 }
-local color3 = Color3.new(0.07, 0.07, 0.07)
-local color3_1 = Color3.new(1, 1, 1)
-local color3_2 = Color3.new(0.7, 0.7, 0.7)
-local tweenInfo = TweenInfo.new(0.06, Enum.EasingStyle.Linear, Enum.EasingDirection.Out)
-local tweenInfo_1 = TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
-local tweenInfo_2 = TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+local _Color3 = Color3.new(0.07, 0.07, 0.07)
+local _Color3_1 = Color3.new(1, 1, 1)
+local _Color3_2 = Color3.new(0.7, 0.7, 0.7)
+local _TweenInfo = TweenInfo.new(0.06, Enum.EasingStyle.Linear, Enum.EasingDirection.Out)
+local _TweenInfo1 = TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+local _TweenInfo2 = TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
 
-local function _()
-	-- upvalues: playerGui (ref)
-	local proximityPrompts_1 = playerGui:FindFirstChild("ProximityPrompts")
+local function _() --[[ Line: 99 | Named "getScreenGui" ]]
+	-- upvalues: PlayerGui (copy)
+	local ProximityPrompts = PlayerGui:FindFirstChild("ProximityPrompts")
 	
-	if proximityPrompts_1 == nil then
-		proximityPrompts_1 = Instance.new("ScreenGui")
-		proximityPrompts_1.Name = "ProximityPrompts"
-		proximityPrompts_1.ResetOnSpawn = false
-		proximityPrompts_1.Parent = playerGui
-		proximityPrompts_1.IgnoreGuiInset = true
+	if ProximityPrompts == nil then
+		ProximityPrompts = Instance.new("ScreenGui")
+		ProximityPrompts.Name = "ProximityPrompts"
+		ProximityPrompts.ResetOnSpawn = false
+		ProximityPrompts.Parent = PlayerGui
+		ProximityPrompts.IgnoreGuiInset = true
 	end
-	return proximityPrompts_1
+	return ProximityPrompts
 end
 
-local function createProgressBarGradient(p1, p2, p3, p4)
-	-- upvalues: tweenService (ref), tweenInfo (ref)
-	local frame = Instance.new("Frame")
-	frame.Size = UDim2.fromScale(0.5, 1)
-	frame.Position = UDim2.fromScale(if p2 then 0 else 0.5, 0)
-	frame.BackgroundTransparency = 1
-	frame.ClipsDescendants = true
-	frame.Visible = false
-	frame.Parent = p1
-	local imageLabel = Instance.new("ImageLabel")
-	imageLabel.BackgroundTransparency = 1
-	imageLabel.Size = UDim2.fromScale(2, 1)
-	imageLabel.Position = UDim2.fromScale(if p2 then 0 else -1, 0)
-	imageLabel.Image = "rbxasset://textures/ui/Controls/RadialFill.png"
-	imageLabel.Parent = frame
-	local UIGradient = Instance.new("UIGradient")
-	UIGradient.Transparency = NumberSequence.new({
+local function createProgressBarGradient(Frame, p1, List, List1) --[[ Line: 112 ]]
+	-- upvalues: TweenService (copy), _TweenInfo (copy)
+	local Frame1 = Instance.new("Frame")
+	Frame1.Size = UDim2.fromScale(0.5, 1)
+	Frame1.Position = UDim2.fromScale(if p1 then 0 else 0.5, 0)
+	Frame1.BackgroundTransparency = 1
+	Frame1.ClipsDescendants = true
+	Frame1.Visible = false
+	Frame1.Parent = Frame
+	local Image = Instance.new("ImageLabel")
+	Image.BackgroundTransparency = 1
+	Image.Size = UDim2.fromScale(2, 1)
+	Image.Position = UDim2.fromScale(if p1 then 0 else -1, 0)
+	Image.Image = "rbxasset://textures/ui/Controls/RadialFill.png"
+	Image.Parent = Frame1
+	local Gradient = Instance.new("UIGradient")
+	Gradient.Transparency = NumberSequence.new({
 		NumberSequenceKeypoint.new(0, 0),
 		NumberSequenceKeypoint.new(0.5, 0),
 		NumberSequenceKeypoint.new(0.51, 1),
 		NumberSequenceKeypoint.new(1, 1)
 	})
-	UIGradient.Rotation = if p2 then 180 else 0
-	UIGradient.Parent = imageLabel
-	table.insert(p3, tweenService:Create(imageLabel, tweenInfo, { ImageTransparency = 1 }))
-	table.insert(p4, tweenService:Create(imageLabel, tweenInfo, { ImageTransparency = 0 }))
+	Gradient.Rotation = if p1 then 180 else 0
+	Gradient.Parent = Image
+	table.insert(List, TweenService:Create(Image, _TweenInfo, { ImageTransparency = 1 }))
+	table.insert(List1, TweenService:Create(Image, _TweenInfo, { ImageTransparency = 0 }))
 	
-	return UIGradient, frame
+	return Gradient, Frame1
 end
 
-local function createCircularProgressBar(p1, p2)
-	-- upvalues: createProgressBarGradient (ref)
-	local circularProgressBar = Instance.new("Frame")
-	circularProgressBar.Name = "CircularProgressBar"
-	circularProgressBar.Size = UDim2.fromOffset(58, 58)
-	circularProgressBar.AnchorPoint = Vector2.new(0.5, 0.5)
-	circularProgressBar.Position = UDim2.fromScale(0.5, 0.5)
-	circularProgressBar.BackgroundTransparency = 1
-	local var1, var2 = createProgressBarGradient(circularProgressBar, true, p1, p2)
-	local var3, var4 = createProgressBarGradient(circularProgressBar, false, p1, p2)
-	local progress = Instance.new("NumberValue")
-	progress.Name = "Progress"
-	progress.Parent = circularProgressBar
-	progress.Changed:Connect(function(p3)
-		-- upvalues: var2 (ref), progress (ref), var1 (ref), var4 (ref), var3 (ref)
-		local clampedValue = math.clamp(p3 * 360, 0, 360)
-		var2.Visible = progress.Value > 0.5
-		var1.Rotation = math.clamp(clampedValue, 180, 360)
-		var4.Visible = progress.Value > 0.01
-		var3.Rotation = math.clamp(clampedValue, 0, 180)
+local function createCircularProgressBar(CreateResults, CreateResults1) --[[ Line: 144 ]]
+	-- upvalues: createProgressBarGradient (copy)
+	local CircularProgressBar = Instance.new("Frame")
+	CircularProgressBar.Name = "CircularProgressBar"
+	CircularProgressBar.Size = UDim2.fromOffset(58, 58)
+	CircularProgressBar.AnchorPoint = Vector2.new(0.5, 0.5)
+	CircularProgressBar.Position = UDim2.fromScale(0.5, 0.5)
+	CircularProgressBar.BackgroundTransparency = 1
+	local ProgressBarGradient, ProgressBarGradient2 = createProgressBarGradient(CircularProgressBar, true, CreateResults, CreateResults1)
+	local ProgressBarGradient1, ProgressBarGradient2_1 = createProgressBarGradient(CircularProgressBar, false, CreateResults, CreateResults1)
+	local Progress = Instance.new("NumberValue")
+	Progress.Name = "Progress"
+	Progress.Parent = CircularProgressBar
+	Progress.Changed:Connect(function(Value: number) --[[ Line: 158 ]]
+		-- upvalues: ProgressBarGradient2 (copy), Progress (copy), ProgressBarGradient (copy), ProgressBarGradient2_1 (copy), ProgressBarGradient1 (copy)
+		local ClampedValue = math.clamp(Value * 360, 0, 360)
+		ProgressBarGradient2.Visible = Progress.Value > 0.5
+		ProgressBarGradient.Rotation = math.clamp(ClampedValue, 180, 360)
+		ProgressBarGradient2_1.Visible = Progress.Value > 0.01
+		ProgressBarGradient1.Rotation = math.clamp(ClampedValue, 0, 180)
 	end)
 	
-	return circularProgressBar
+	return CircularProgressBar
 end
 
-local function createPrompt(p1, p2, p3)
-	-- upvalues: color3 (ref), tweenService (ref), tweenInfo_2 (ref), appFonts (ref), color3_1 (ref), color3_2 (ref), tweenInfo (ref), userInputService (ref), t (ref), t_1 (ref), t_2 (ref), t_3 (ref), createCircularProgressBar (ref), tweenInfo_1 (ref), runService (ref)
-	local keyboardKeyCodeStringForKeyCode
-	local t_4 = {}
-	local t_5 = {}
-	local t_6 = {}
-	local t_7 = {}
-	local tweenInfo_3 = TweenInfo.new(p1.HoldDuration, Enum.EasingStyle.Linear, Enum.EasingDirection.Out)
-	local prompt = Instance.new("BillboardGui")
-	prompt.Name = "Prompt"
-	prompt.AlwaysOnTop = true
-	local frame = Instance.new("Frame")
-	frame.Size = UDim2.fromScale(0.5, 1)
-	frame.BackgroundTransparency = 1
-	frame.BackgroundColor3 = color3
-	frame.AnchorPoint = Vector2.new(0.5, 0)
-	frame.Position = UDim2.fromScale(0.5, 0)
-	frame.Size = UDim2.fromScale(0, 1)
-	frame.AutomaticSize = Enum.AutomaticSize.X
-	frame.Parent = prompt
-	local UIPadding = Instance.new("UIPadding")
-	UIPadding.Parent = frame
-	Instance.new("UICorner").Parent = frame
-	local inputFrame = Instance.new("Frame")
-	inputFrame.Name = "InputFrame"
-	inputFrame.Size = UDim2.fromScale(1, 1)
-	inputFrame.BackgroundTransparency = 1
-	inputFrame.SizeConstraint = Enum.SizeConstraint.RelativeYY
-	inputFrame.Parent = frame
-	local frame_2 = Instance.new("Frame")
-	frame_2.Size = UDim2.fromScale(1, 1)
-	frame_2.Position = UDim2.fromScale(0.5, 0.5)
-	frame_2.AnchorPoint = Vector2.new(0.5, 0.5)
-	frame_2.BackgroundTransparency = 1
-	frame_2.Parent = inputFrame
-	local UIScale = Instance.new("UIScale")
-	UIScale.Parent = frame_2
-	table.insert(t_4, tweenService:Create(UIScale, tweenInfo_2, {
-		Scale = if p2 == Enum.ProximityPromptInputType.Touch then 1.6 else 1.33
+local function createPrompt(Prompt, ProximityPromptInputType, Parent) --[[ Line: 169 ]]
+	-- upvalues: _Color3 (copy), TweenService (copy), _TweenInfo2 (copy), AppFonts (copy), _Color3_1 (copy), _Color3_2 (copy), _TweenInfo (copy), UserInputService (copy), config (copy), config1 (copy), config2 (copy), config3 (copy), createCircularProgressBar (copy), _TweenInfo1 (copy), RunService (copy)
+	local CreateResults = {}
+	local CreateResults1 = {}
+	local CreateResults2 = {}
+	local CreateResults3 = {}
+	local _TweenInfo3 = TweenInfo.new(Prompt.HoldDuration, Enum.EasingStyle.Linear, Enum.EasingDirection.Out)
+	local Prompt1 = Instance.new("BillboardGui")
+	Prompt1.Name = "Prompt"
+	Prompt1.AlwaysOnTop = true
+	local Frame = Instance.new("Frame")
+	Frame.Size = UDim2.fromScale(0.5, 1)
+	Frame.BackgroundTransparency = 1
+	Frame.BackgroundColor3 = _Color3
+	Frame.AnchorPoint = Vector2.new(0.5, 0)
+	Frame.Position = UDim2.fromScale(0.5, 0)
+	Frame.Size = UDim2.fromScale(0, 1)
+	Frame.AutomaticSize = Enum.AutomaticSize.X
+	Frame.Parent = Prompt1
+	local Padding = Instance.new("UIPadding")
+	Padding.Parent = Frame
+	Instance.new("UICorner").Parent = Frame
+	local InputFrame = Instance.new("Frame")
+	InputFrame.Name = "InputFrame"
+	InputFrame.Size = UDim2.fromScale(1, 1)
+	InputFrame.BackgroundTransparency = 1
+	InputFrame.SizeConstraint = Enum.SizeConstraint.RelativeYY
+	InputFrame.Parent = Frame
+	local Frame1 = Instance.new("Frame")
+	Frame1.Size = UDim2.fromScale(1, 1)
+	Frame1.Position = UDim2.fromScale(0.5, 0.5)
+	Frame1.AnchorPoint = Vector2.new(0.5, 0.5)
+	Frame1.BackgroundTransparency = 1
+	Frame1.Parent = InputFrame
+	local Scale = Instance.new("UIScale")
+	Scale.Parent = Frame1
+	table.insert(CreateResults, TweenService:Create(Scale, _TweenInfo2, {
+		Scale = if ProximityPromptInputType == Enum.ProximityPromptInputType.Touch then 1.6 else 1.33
 	}))
-	table.insert(t_5, tweenService:Create(UIScale, tweenInfo_2, { Scale = 1 }))
-	local actionText = Instance.new("TextLabel")
-	actionText.Name = "ActionText"
-	actionText.Font = appFonts.default:getMedium()
-	actionText.TextSize = 19
-	actionText.BackgroundTransparency = 1
-	actionText.TextTransparency = 1
-	actionText.TextColor3 = color3_1
-	actionText.TextXAlignment = Enum.TextXAlignment.Left
-	table.insert(t_4, tweenService:Create(actionText, tweenInfo_2, { TextTransparency = 1 }))
-	table.insert(t_5, tweenService:Create(actionText, tweenInfo_2, { TextTransparency = 0 }))
-	table.insert(t_6, tweenService:Create(actionText, tweenInfo_2, { TextTransparency = 1 }))
-	table.insert(t_7, tweenService:Create(actionText, tweenInfo_2, { TextTransparency = 0 }))
-	local objectText = Instance.new("TextLabel")
-	objectText.Name = "ObjectText"
-	objectText.Font = appFonts.default:getMedium()
-	objectText.TextSize = 14
-	objectText.BackgroundTransparency = 1
-	objectText.TextTransparency = 1
-	objectText.TextColor3 = color3_2
-	objectText.TextXAlignment = Enum.TextXAlignment.Left
-	local UIListLayout = Instance.new("UIListLayout")
-	UIListLayout.FillDirection = Enum.FillDirection.Horizontal
-	UIListLayout.Padding = UDim.new(-0.25, 0)
-	UIListLayout.Parent = frame
-	table.insert(t_4, tweenService:Create(UIListLayout, tweenInfo_2, { Padding = UDim.new(-0.25, 0) }))
-	table.insert(t_5, tweenService:Create(UIListLayout, tweenInfo_2, { Padding = UDim.new(0, 0) }))
-	table.insert(t_6, tweenService:Create(UIListLayout, tweenInfo_2, { Padding = UDim.new(-0.25, 0) }))
-	table.insert(t_7, tweenService:Create(UIListLayout, tweenInfo_2, { Padding = UDim.new(0, 0) }))
-	local textFrame = Instance.new("Frame")
-	textFrame.Name = "TextFrame"
-	textFrame.Size = UDim2.fromScale(0, 1)
-	textFrame.AutomaticSize = Enum.AutomaticSize.X
-	textFrame.BackgroundTransparency = 1
-	textFrame.Parent = frame
-	actionText.Size = UDim2.fromScale(0, 1)
-	actionText.AutomaticSize = Enum.AutomaticSize.X
-	actionText.Parent = textFrame
-	objectText.Size = UDim2.fromScale(0, 1)
-	objectText.AutomaticSize = Enum.AutomaticSize.X
-	objectText.Parent = textFrame
-	table.insert(t_4, tweenService:Create(objectText, tweenInfo_2, { TextTransparency = 1 }))
-	table.insert(t_5, tweenService:Create(objectText, tweenInfo_2, { TextTransparency = 0 }))
-	table.insert(t_6, tweenService:Create(objectText, tweenInfo_2, { TextTransparency = 1 }))
-	table.insert(t_7, tweenService:Create(objectText, tweenInfo_2, { TextTransparency = 0 }))
-	table.insert(t_4, tweenService:Create(frame, tweenInfo_2, { BackgroundTransparency = 1 }))
-	table.insert(t_5, tweenService:Create(frame, tweenInfo_2, { BackgroundTransparency = 0.2 }))
-	table.insert(t_6, tweenService:Create(frame, tweenInfo_2, { BackgroundTransparency = 1 }))
-	table.insert(t_7, tweenService:Create(frame, tweenInfo_2, { BackgroundTransparency = 0.2 }))
-	local roundFrame = Instance.new("Frame")
-	roundFrame.Name = "RoundFrame"
-	roundFrame.Size = UDim2.fromOffset(48, 48)
-	roundFrame.AnchorPoint = Vector2.new(0.5, 0.5)
-	roundFrame.Position = UDim2.fromScale(0.5, 0.5)
-	roundFrame.BackgroundTransparency = 1
-	roundFrame.Parent = frame_2
-	local UICorner = Instance.new("UICorner")
-	UICorner.CornerRadius = UDim.new(0.5, 0)
-	UICorner.Parent = roundFrame
-	table.insert(t_6, tweenService:Create(roundFrame, tweenInfo, { BackgroundTransparency = 1 }))
-	table.insert(t_7, tweenService:Create(roundFrame, tweenInfo, { BackgroundTransparency = 0.5 }))
+	table.insert(CreateResults1, TweenService:Create(Scale, _TweenInfo2, { Scale = 1 }))
+	local ActionText = Instance.new("TextLabel")
+	ActionText.Name = "ActionText"
+	ActionText.Font = AppFonts.default:getMedium()
+	ActionText.TextSize = 19
+	ActionText.BackgroundTransparency = 1
+	ActionText.TextTransparency = 1
+	ActionText.TextColor3 = _Color3_1
+	ActionText.TextXAlignment = Enum.TextXAlignment.Left
+	table.insert(CreateResults, TweenService:Create(ActionText, _TweenInfo2, { TextTransparency = 1 }))
+	table.insert(CreateResults1, TweenService:Create(ActionText, _TweenInfo2, { TextTransparency = 0 }))
+	table.insert(CreateResults2, TweenService:Create(ActionText, _TweenInfo2, { TextTransparency = 1 }))
+	table.insert(CreateResults3, TweenService:Create(ActionText, _TweenInfo2, { TextTransparency = 0 }))
+	local ObjectText = Instance.new("TextLabel")
+	ObjectText.Name = "ObjectText"
+	ObjectText.Font = AppFonts.default:getMedium()
+	ObjectText.TextSize = 14
+	ObjectText.BackgroundTransparency = 1
+	ObjectText.TextTransparency = 1
+	ObjectText.TextColor3 = _Color3_2
+	ObjectText.TextXAlignment = Enum.TextXAlignment.Left
+	local ListLayout = Instance.new("UIListLayout")
+	ListLayout.FillDirection = Enum.FillDirection.Horizontal
+	ListLayout.Padding = UDim.new(-0.25, 0)
+	ListLayout.Parent = Frame
+	table.insert(CreateResults, TweenService:Create(ListLayout, _TweenInfo2, { Padding = UDim.new(-0.25, 0) }))
+	table.insert(CreateResults1, TweenService:Create(ListLayout, _TweenInfo2, { Padding = UDim.new(0, 0) }))
+	table.insert(CreateResults2, TweenService:Create(ListLayout, _TweenInfo2, { Padding = UDim.new(-0.25, 0) }))
+	table.insert(CreateResults3, TweenService:Create(ListLayout, _TweenInfo2, { Padding = UDim.new(0, 0) }))
+	local TextFrame = Instance.new("Frame")
+	TextFrame.Name = "TextFrame"
+	TextFrame.Size = UDim2.fromScale(0, 1)
+	TextFrame.AutomaticSize = Enum.AutomaticSize.X
+	TextFrame.BackgroundTransparency = 1
+	TextFrame.Parent = Frame
+	ActionText.Size = UDim2.fromScale(0, 1)
+	ActionText.AutomaticSize = Enum.AutomaticSize.X
+	ActionText.Parent = TextFrame
+	ObjectText.Size = UDim2.fromScale(0, 1)
+	ObjectText.AutomaticSize = Enum.AutomaticSize.X
+	ObjectText.Parent = TextFrame
+	table.insert(CreateResults, TweenService:Create(ObjectText, _TweenInfo2, { TextTransparency = 1 }))
+	table.insert(CreateResults1, TweenService:Create(ObjectText, _TweenInfo2, { TextTransparency = 0 }))
+	table.insert(CreateResults2, TweenService:Create(ObjectText, _TweenInfo2, { TextTransparency = 1 }))
+	table.insert(CreateResults3, TweenService:Create(ObjectText, _TweenInfo2, { TextTransparency = 0 }))
+	table.insert(CreateResults, TweenService:Create(Frame, _TweenInfo2, { BackgroundTransparency = 1 }))
+	table.insert(CreateResults1, TweenService:Create(Frame, _TweenInfo2, { BackgroundTransparency = 0.2 }))
+	table.insert(CreateResults2, TweenService:Create(Frame, _TweenInfo2, { BackgroundTransparency = 1 }))
+	table.insert(CreateResults3, TweenService:Create(Frame, _TweenInfo2, { BackgroundTransparency = 0.2 }))
+	local RoundFrame = Instance.new("Frame")
+	RoundFrame.Name = "RoundFrame"
+	RoundFrame.Size = UDim2.fromOffset(48, 48)
+	RoundFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+	RoundFrame.Position = UDim2.fromScale(0.5, 0.5)
+	RoundFrame.BackgroundTransparency = 1
+	RoundFrame.Parent = Frame1
+	local Corner = Instance.new("UICorner")
+	Corner.CornerRadius = UDim.new(0.5, 0)
+	Corner.Parent = RoundFrame
+	table.insert(CreateResults2, TweenService:Create(RoundFrame, _TweenInfo, { BackgroundTransparency = 1 }))
+	table.insert(CreateResults3, TweenService:Create(RoundFrame, _TweenInfo, { BackgroundTransparency = 0.5 }))
 	
-	if p2 == Enum.ProximityPromptInputType.Gamepad then
-		local gamepadKeyCodeImageForKeyCode = userInputService:GetImageForKeyCode(p1.GamepadKeyCode)
+	if ProximityPromptInputType == Enum.ProximityPromptInputType.Gamepad then
+		local ImageForKeyCode = UserInputService:GetImageForKeyCode(Prompt.GamepadKeyCode)
 		
-		if gamepadKeyCodeImageForKeyCode then
-			local buttonImage = Instance.new("ImageLabel")
-			buttonImage.Name = "ButtonImage"
-			buttonImage.AnchorPoint = Vector2.new(0.5, 0.5)
-			buttonImage.Size = UDim2.fromOffset(24, 24)
-			buttonImage.Position = UDim2.fromScale(0.5, 0.5)
-			buttonImage.BackgroundTransparency = 1
-			buttonImage.ImageTransparency = 1
-			buttonImage.Image = gamepadKeyCodeImageForKeyCode
-			buttonImage.Parent = frame_2
-			table.insert(t_6, tweenService:Create(buttonImage, tweenInfo, { ImageTransparency = 1 }))
-			table.insert(t_7, tweenService:Create(buttonImage, tweenInfo, { ImageTransparency = 0 }))
+		if ImageForKeyCode then
+			local ButtonImage = Instance.new("ImageLabel")
+			ButtonImage.Name = "ButtonImage"
+			ButtonImage.AnchorPoint = Vector2.new(0.5, 0.5)
+			ButtonImage.Size = UDim2.fromOffset(24, 24)
+			ButtonImage.Position = UDim2.fromScale(0.5, 0.5)
+			ButtonImage.BackgroundTransparency = 1
+			ButtonImage.ImageTransparency = 1
+			ButtonImage.Image = ImageForKeyCode
+			ButtonImage.Parent = Frame1
+			table.insert(CreateResults2, TweenService:Create(ButtonImage, _TweenInfo, { ImageTransparency = 1 }))
+			table.insert(CreateResults3, TweenService:Create(ButtonImage, _TweenInfo, { ImageTransparency = 0 }))
 		end
-	elseif p2 == Enum.ProximityPromptInputType.Touch then
-		local buttonImage_1 = Instance.new("ImageLabel")
-		buttonImage_1.Name = "ButtonImage"
-		buttonImage_1.BackgroundTransparency = 1
-		buttonImage_1.ImageTransparency = 1
-		buttonImage_1.Size = UDim2.fromOffset(25, 31)
-		buttonImage_1.AnchorPoint = Vector2.new(0.5, 0.5)
-		buttonImage_1.Position = UDim2.fromScale(0.5, 0.5)
-		buttonImage_1.Image = "rbxasset://textures/ui/Controls/TouchTapIcon.png"
-		buttonImage_1.Parent = frame_2
-		table.insert(t_6, tweenService:Create(buttonImage_1, tweenInfo, { ImageTransparency = 1 }))
-		table.insert(t_7, tweenService:Create(buttonImage_1, tweenInfo, { ImageTransparency = 0 }))
+	elseif ProximityPromptInputType == Enum.ProximityPromptInputType.Touch then
+		local ButtonImage = Instance.new("ImageLabel")
+		ButtonImage.Name = "ButtonImage"
+		ButtonImage.BackgroundTransparency = 1
+		ButtonImage.ImageTransparency = 1
+		ButtonImage.Size = UDim2.fromOffset(25, 31)
+		ButtonImage.AnchorPoint = Vector2.new(0.5, 0.5)
+		ButtonImage.Position = UDim2.fromScale(0.5, 0.5)
+		ButtonImage.Image = "rbxasset://textures/ui/Controls/TouchTapIcon.png"
+		ButtonImage.Parent = Frame1
+		table.insert(CreateResults2, TweenService:Create(ButtonImage, _TweenInfo, { ImageTransparency = 1 }))
+		table.insert(CreateResults3, TweenService:Create(ButtonImage, _TweenInfo, { ImageTransparency = 0 }))
 	else
-		local buttonImage_2 = Instance.new("ImageLabel")
-		buttonImage_2.Name = "ButtonImage"
-		buttonImage_2.BackgroundTransparency = 1
-		buttonImage_2.ImageTransparency = 1
-		buttonImage_2.Size = UDim2.fromOffset(28, 30)
-		buttonImage_2.AnchorPoint = Vector2.new(0.5, 0.5)
-		buttonImage_2.Position = UDim2.fromScale(0.5, 0.5)
-		buttonImage_2.Image = "rbxasset://textures/ui/Controls/key_single.png"
-		buttonImage_2.Parent = frame_2
-		table.insert(t_6, tweenService:Create(buttonImage_2, tweenInfo, { ImageTransparency = 1 }))
-		table.insert(t_7, tweenService:Create(buttonImage_2, tweenInfo, { ImageTransparency = 0 }))
-		keyboardKeyCodeStringForKeyCode = userInputService:GetStringForKeyCode(p1.KeyboardKeyCode)
-		local keyboardKeyCode = t[p1.KeyboardKeyCode]
+		local ButtonImage = Instance.new("ImageLabel")
+		ButtonImage.Name = "ButtonImage"
+		ButtonImage.BackgroundTransparency = 1
+		ButtonImage.ImageTransparency = 1
+		ButtonImage.Size = UDim2.fromOffset(28, 30)
+		ButtonImage.AnchorPoint = Vector2.new(0.5, 0.5)
+		ButtonImage.Position = UDim2.fromScale(0.5, 0.5)
+		ButtonImage.Image = "rbxasset://textures/ui/Controls/key_single.png"
+		ButtonImage.Parent = Frame1
+		table.insert(CreateResults2, TweenService:Create(ButtonImage, _TweenInfo, { ImageTransparency = 1 }))
+		table.insert(CreateResults3, TweenService:Create(ButtonImage, _TweenInfo, { ImageTransparency = 0 }))
+		local StringForKeyCode = UserInputService:GetStringForKeyCode(Prompt.KeyboardKeyCode)
+		local Entry = config[Prompt.KeyboardKeyCode]
 		
-		if keyboardKeyCode == nil then
-			keyboardKeyCode = t_1[keyboardKeyCodeStringForKeyCode]
+		if Entry == nil then
+			Entry = config1[StringForKeyCode]
 		end
-		if keyboardKeyCode == nil then
-			local keyboardKeyCode_1 = t_2[p1.KeyboardKeyCode]
+		if Entry == nil then
+			local Entry1 = config2[Prompt.KeyboardKeyCode]
 			
-			if keyboardKeyCode_1 then
-				keyboardKeyCodeStringForKeyCode = keyboardKeyCode_1
+			if Entry1 then
+				StringForKeyCode = Entry1
 			end
 		end
-		if keyboardKeyCode then
-			local buttonImage_3 = Instance.new("ImageLabel")
-			buttonImage_3.Name = "ButtonImage"
-			buttonImage_3.AnchorPoint = Vector2.new(0.5, 0.5)
-			buttonImage_3.Size = UDim2.fromOffset(36, 36)
-			buttonImage_3.Position = UDim2.fromScale(0.5, 0.5)
-			buttonImage_3.BackgroundTransparency = 1
-			buttonImage_3.ImageTransparency = 1
-			buttonImage_3.Image = keyboardKeyCode
-			buttonImage_3.Parent = frame_2
-			table.insert(t_6, tweenService:Create(buttonImage_3, tweenInfo, { ImageTransparency = 1 }))
-			table.insert(t_7, tweenService:Create(buttonImage_3, tweenInfo, { ImageTransparency = 0 }))
-		elseif keyboardKeyCodeStringForKeyCode == nil or keyboardKeyCodeStringForKeyCode == "" then
-			error("ProximityPrompt '" .. p7.Name .. "' has an unsupported keycode for rendering UI: " .. tostring(p1.KeyboardKeyCode))
+		if Entry then
+			local ButtonImage1 = Instance.new("ImageLabel")
+			ButtonImage1.Name = "ButtonImage"
+			ButtonImage1.AnchorPoint = Vector2.new(0.5, 0.5)
+			ButtonImage1.Size = UDim2.fromOffset(36, 36)
+			ButtonImage1.Position = UDim2.fromScale(0.5, 0.5)
+			ButtonImage1.BackgroundTransparency = 1
+			ButtonImage1.ImageTransparency = 1
+			ButtonImage1.Image = Entry
+			ButtonImage1.Parent = Frame1
+			table.insert(CreateResults2, TweenService:Create(ButtonImage1, _TweenInfo, { ImageTransparency = 1 }))
+			table.insert(CreateResults3, TweenService:Create(ButtonImage1, _TweenInfo, { ImageTransparency = 0 }))
+		elseif StringForKeyCode == nil or StringForKeyCode == "" then
+			error("ProximityPrompt '" .. Prompt.Name .. "' has an unsupported keycode for rendering UI: " .. tostring(Prompt.KeyboardKeyCode))
 		else
-			local buttonText = Instance.new("TextLabel")
-			buttonText.Name = "ButtonText"
-			buttonText.AutoLocalize = false
-			buttonText.Position = UDim2.fromOffset(0, -1)
-			buttonText.Size = UDim2.fromScale(1, 1)
-			buttonText.Font = appFonts.default:getMedium()
-			local keyboardKeyCode_1 = t_3[p1.KeyboardKeyCode]
+			local ButtonText = Instance.new("TextLabel")
+			ButtonText.Name = "ButtonText"
+			ButtonText.AutoLocalize = false
+			ButtonText.Position = UDim2.fromOffset(0, -1)
+			ButtonText.Size = UDim2.fromScale(1, 1)
+			ButtonText.Font = AppFonts.default:getMedium()
+			local TextSize = config3[Prompt.KeyboardKeyCode]
 			
-			if keyboardKeyCode_1 == nil then
-				keyboardKeyCode_1 = 14
+			if TextSize == nil then
+				TextSize = 14
 			end
-			buttonText.TextSize = keyboardKeyCode_1
-			buttonText.BackgroundTransparency = 1
-			buttonText.TextTransparency = 1
-			buttonText.TextColor3 = color3_1
-			buttonText.TextXAlignment = Enum.TextXAlignment.Center
-			buttonText.Text = keyboardKeyCodeStringForKeyCode
-			buttonText.Parent = frame_2
-			table.insert(t_6, tweenService:Create(buttonText, tweenInfo, { TextTransparency = 1 }))
-			table.insert(t_7, tweenService:Create(buttonText, tweenInfo, { TextTransparency = 0 }))
+			ButtonText.TextSize = TextSize
+			ButtonText.BackgroundTransparency = 1
+			ButtonText.TextTransparency = 1
+			ButtonText.TextColor3 = _Color3_1
+			ButtonText.TextXAlignment = Enum.TextXAlignment.Center
+			ButtonText.Text = StringForKeyCode
+			ButtonText.Parent = Frame1
+			table.insert(CreateResults2, TweenService:Create(ButtonText, _TweenInfo, { TextTransparency = 1 }))
+			table.insert(CreateResults3, TweenService:Create(ButtonText, _TweenInfo, { TextTransparency = 0 }))
 		end
 	end
-	if p2 == Enum.ProximityPromptInputType.Touch or p1.ClickablePrompt then
-		local textButton = Instance.new("TextButton")
-		textButton.BackgroundTransparency = 1
-		textButton.TextTransparency = 1
-		textButton.Size = UDim2.fromScale(1, 1)
-		textButton.Parent = prompt
-		textButton.Selectable = false
-		keyboardKeyCodeStringForKeyCode = false
-		textButton.InputBegan:Connect(function(p4)
-			-- upvalues: p1 (ref), keyboardKeyCodeStringForKeyCode (write)
-			if (p4.UserInputType == Enum.UserInputType.Touch or p4.UserInputType == Enum.UserInputType.MouseButton1) and p4.UserInputState ~= Enum.UserInputState.Change then
-				p1:InputHoldBegin()
-				keyboardKeyCodeStringForKeyCode = true
+	if ProximityPromptInputType == Enum.ProximityPromptInputType.Touch or Prompt.ClickablePrompt then
+		local Button = Instance.new("TextButton")
+		Button.BackgroundTransparency = 1
+		Button.TextTransparency = 1
+		Button.Size = UDim2.fromScale(1, 1)
+		Button.Parent = Prompt1
+		Button.Selectable = false
+		local Flag = false
+		Button.InputBegan:Connect(function(Input) --[[ Line: 399 ]]
+			-- upvalues: Prompt (copy), Flag (ref)
+			if (Input.UserInputType == Enum.UserInputType.Touch or Input.UserInputType == Enum.UserInputType.MouseButton1) and Input.UserInputState ~= Enum.UserInputState.Change then
+				Prompt:InputHoldBegin()
+				Flag = true
 			end
 		end)
-		textButton.InputEnded:Connect(function(p4)
-			-- upvalues: keyboardKeyCodeStringForKeyCode (write), p1 (ref)
-			if (p4.UserInputType == Enum.UserInputType.Touch or p4.UserInputType == Enum.UserInputType.MouseButton1) and keyboardKeyCodeStringForKeyCode then
-				keyboardKeyCodeStringForKeyCode = false
-				p1:InputHoldEnd()
+		Button.InputEnded:Connect(function(Input) --[[ Line: 406 ]]
+			-- upvalues: Flag (ref), Prompt (copy)
+			if (Input.UserInputType == Enum.UserInputType.Touch or Input.UserInputType == Enum.UserInputType.MouseButton1) and Flag then
+				Flag = false
+				Prompt:InputHoldEnd()
 			end
 		end)
-		prompt.Active = true
+		Prompt1.Active = true
 	end
-	if p1.HoldDuration > 0 then
-		local var1 = createCircularProgressBar(t_6, t_7)
-		var1.Parent = frame_2
-		table.insert(t_4, tweenService:Create(var1.Progress, tweenInfo_3, { Value = 1 }))
-		table.insert(t_5, tweenService:Create(var1.Progress, tweenInfo_1, { Value = 0 }))
+	if Prompt.HoldDuration > 0 then
+		local CircularProgressBar = createCircularProgressBar(CreateResults2, CreateResults3)
+		CircularProgressBar.Parent = Frame1
+		table.insert(CreateResults, TweenService:Create(CircularProgressBar.Progress, _TweenInfo3, { Value = 1 }))
+		table.insert(CreateResults1, TweenService:Create(CircularProgressBar.Progress, _TweenInfo1, { Value = 0 }))
 	end
-	local promptButtonHoldBeganConnection = nil
-	keyboardKeyCodeStringForKeyCode = nil
-	local _ = nil
-	local _ = nil
+	local Connection = nil
+	local Connection1 = nil
+	local TriggeredConnection = nil
+	local TriggerEndedConnection = nil
 	
-	if p1.HoldDuration > 0 then
-		promptButtonHoldBeganConnection = p1.PromptButtonHoldBegan:Connect(function()
-			-- upvalues: t_4 (ref)
-			for i, v in ipairs(t_4) do
-				v:Play()
+	if Prompt.HoldDuration > 0 then
+		Connection = Prompt.PromptButtonHoldBegan:Connect(function() --[[ Line: 431 ]]
+			-- upvalues: CreateResults (copy)
+			for _, createResult in ipairs(CreateResults) do
+				createResult:Play()
 			end
 		end)
-		keyboardKeyCodeStringForKeyCode = p1.PromptButtonHoldEnded:Connect(function()
-			-- upvalues: t_5 (ref)
-			for i, v in ipairs(t_5) do
-				v:Play()
+		Connection1 = Prompt.PromptButtonHoldEnded:Connect(function() --[[ Line: 437 ]]
+			-- upvalues: CreateResults1 (copy)
+			for _, value in ipairs(CreateResults1) do
+				value:Play()
 			end
 		end)
 	end
-	local triggeredConnection = p1.Triggered:Connect(function()
-		-- upvalues: t_6 (ref)
-		for i, v in ipairs(t_6) do
-			v:Play()
+	TriggeredConnection = Prompt.Triggered:Connect(function() --[[ Line: 444 ]]
+		-- upvalues: CreateResults2 (copy)
+		for _, value in ipairs(CreateResults2) do
+			value:Play()
 		end
 	end)
-	local triggerEndedConnection = p1.TriggerEnded:Connect(function()
-		-- upvalues: t_7 (ref)
-		for i, v in ipairs(t_7) do
-			v:Play()
+	TriggerEndedConnection = Prompt.TriggerEnded:Connect(function() --[[ Line: 450 ]]
+		-- upvalues: CreateResults3 (copy)
+		for _, value in ipairs(CreateResults3) do
+			value:Play()
 		end
 	end)
 	
-	local function updateUIFromPrompt()
-		-- upvalues: p1 (ref), actionText (ref), objectText (ref), UIPadding (ref), prompt (ref), runService (copy), frame (ref)
-		local var2 = 72
-		local var3 = 24
-		local var4 = if not (p1.ObjectText == nil or p1.ObjectText == "") then 9 else 0
-		actionText.Text = p1.ActionText
-		objectText.Text = p1.ObjectText
-		actionText.AutoLocalize = p1.AutoLocalize
-		actionText.RootLocalizationTable = p1.RootLocalizationTable
-		objectText.AutoLocalize = p1.AutoLocalize
-		objectText.RootLocalizationTable = p1.RootLocalizationTable
-		var3 -= var4
+	local function updateUIFromPrompt() --[[ Line: 456 ]]
+		-- upvalues: Prompt (copy), ActionText (copy), ObjectText (copy), Padding (copy), Prompt1 (copy), RunService (upval), Frame (copy)
+		local X = 72
+		local v1 = 24
+		local YOffset: number = if Prompt.ObjectText == nil or Prompt.ObjectText == "" then 0 else 9
+		ActionText.Text = Prompt.ActionText
+		ObjectText.Text = Prompt.ObjectText
+		ActionText.AutoLocalize = Prompt.AutoLocalize
+		ActionText.RootLocalizationTable = Prompt.RootLocalizationTable
+		ObjectText.AutoLocalize = Prompt.AutoLocalize
+		ObjectText.RootLocalizationTable = Prompt.RootLocalizationTable
+		local Offset = v1 - YOffset
 		
-		if (p1.ActionText == nil or p1.ActionText == "") and (p1.ObjectText == nil or p1.ObjectText == "") then
-			UIPadding.PaddingRight = UDim.new(0, 0)
+		if (Prompt.ActionText == nil or Prompt.ActionText == "") and (Prompt.ObjectText == nil or Prompt.ObjectText == "") then
+			Padding.PaddingRight = UDim.new(0, 0)
 		else
-			UIPadding.PaddingRight = UDim.new(0, var3)
+			Padding.PaddingRight = UDim.new(0, Offset)
 		end
-		actionText.Position = UDim2.new(0, 0, 0, var4)
-		objectText.Position = UDim2.new(0, 0, 0, -10)
-		prompt.Size = UDim2.fromOffset(var2, 72)
-		prompt.SizeOffset = Vector2.new(p1.UIOffset.X / prompt.Size.Width.Offset, p1.UIOffset.Y / prompt.Size.Height.Offset)
-		task.defer(function()
-			-- upvalues: runService (copy), var2 (write), frame (copy), prompt (copy), p1 (copy)
-			runService.RenderStepped:Wait()
-			runService.RenderStepped:Wait()
-			var2 = frame.AbsoluteSize.X
-			prompt.Size = UDim2.fromOffset(var2, 72)
-			prompt.SizeOffset = Vector2.new(p1.UIOffset.X / prompt.Size.Width.Offset, p1.UIOffset.Y / prompt.Size.Height.Offset)
+		ActionText.Position = UDim2.new(0, 0, 0, YOffset)
+		ObjectText.Position = UDim2.new(0, 0, 0, -10)
+		Prompt1.Size = UDim2.fromOffset(X, 72)
+		Prompt1.SizeOffset = Vector2.new(Prompt.UIOffset.X / Prompt1.Size.Width.Offset, Prompt.UIOffset.Y / Prompt1.Size.Height.Offset)
+		task.defer(function() --[[ Line: 492 ]]
+			-- upvalues: RunService (upval), X (ref), Frame (upval), Prompt1 (upval), Prompt (upval)
+			RunService.RenderStepped:Wait()
+			RunService.RenderStepped:Wait()
+			X = Frame.AbsoluteSize.X
+			Prompt1.Size = UDim2.fromOffset(X, 72)
+			Prompt1.SizeOffset = Vector2.new(Prompt.UIOffset.X / Prompt1.Size.Width.Offset, Prompt.UIOffset.Y / Prompt1.Size.Height.Offset)
 		end)
 	end
 	
-	local changedConnection = p1.Changed:Connect(updateUIFromPrompt)
+	local ChangedConnection = Prompt.Changed:Connect(updateUIFromPrompt)
 	updateUIFromPrompt()
-	prompt.Adornee = p1.Parent
-	prompt.Parent = p3
-	local ancestryChangedConnection = p1.AncestryChanged:Connect(function()
-		-- upvalues: prompt (ref), p1 (ref)
-		prompt.Adornee = p1.Parent
+	Prompt1.Adornee = Prompt.Parent
+	Prompt1.Parent = Parent
+	local AncestryChangedConnection = Prompt.AncestryChanged:Connect(function() --[[ Line: 509 | Named "updateUIAncestry" ]]
+		-- upvalues: Prompt1 (copy), Prompt (copy)
+		Prompt1.Adornee = Prompt.Parent
 	end)
 	
-	for i, v in ipairs(t_7) do
-		v:Play()
+	for _, value in ipairs(CreateResults3) do
+		value:Play()
 	end
-	return function()
-		-- upvalues: promptButtonHoldBeganConnection (write), keyboardKeyCodeStringForKeyCode (write), triggeredConnection (write), triggerEndedConnection (write), changedConnection (ref), ancestryChangedConnection (ref), t_6 (ref), prompt (ref)
-		if promptButtonHoldBeganConnection then
-			promptButtonHoldBeganConnection:Disconnect()
+	return function() --[[ Line: 518 | Named "cleanup" ]]
+		-- upvalues: Connection (ref), Connection1 (ref), TriggeredConnection (ref), TriggerEndedConnection (ref), ChangedConnection (copy), AncestryChangedConnection (copy), CreateResults2 (copy), Prompt1 (copy)
+		if Connection then
+			Connection:Disconnect()
 		end
-		if keyboardKeyCodeStringForKeyCode then
-			keyboardKeyCodeStringForKeyCode:Disconnect()
+		if Connection1 then
+			Connection1:Disconnect()
 		end
-		triggeredConnection:Disconnect()
-		triggerEndedConnection:Disconnect()
-		changedConnection:Disconnect()
-		ancestryChangedConnection:Disconnect()
+		TriggeredConnection:Disconnect()
+		TriggerEndedConnection:Disconnect()
+		ChangedConnection:Disconnect()
+		AncestryChangedConnection:Disconnect()
 		
-		for i, v in ipairs(t_6) do
-			v:Play()
+		for _, value in ipairs(CreateResults2) do
+			value:Play()
 		end
 		wait(0.2)
-		prompt.Parent = nil
+		Prompt1.Parent = nil
 	end
 end
 
-local function createIndicator(p4, p5)
-	-- upvalues: color3 (ref), color3_1 (ref), tweenService (ref), tweenInfo (ref)
-	local t = {}
-	local t_1 = {}
-	local indicator = Instance.new("BillboardGui")
-	indicator.Name = "Indicator"
-	indicator.Size = UDim2.fromOffset(15, 15)
-	indicator.AlwaysOnTop = true
-	local frame = Instance.new("Frame")
-	frame.Size = UDim2.fromScale(1, 1)
-	frame.BackgroundTransparency = 1
-	frame.BackgroundColor3 = color3
-	frame.AnchorPoint = Vector2.new(0.5, 0)
-	frame.Position = UDim2.fromScale(0.5, 0)
-	frame.Parent = indicator
-	local UICorner = Instance.new("UICorner")
-	UICorner.CornerRadius = UDim.new(1, 0)
-	UICorner.Parent = frame
-	local UIStroke = Instance.new("UIStroke")
-	UIStroke.Color = color3_1
-	UIStroke.Thickness = 1.5
-	UIStroke.Transparency = 1
-	UIStroke.Parent = frame
-	table.insert(t, tweenService:Create(frame, tweenInfo, { BackgroundTransparency = 1 }))
-	table.insert(t, tweenService:Create(UIStroke, tweenInfo, { Transparency = 1 }))
-	table.insert(t_1, tweenService:Create(frame, tweenInfo, { BackgroundTransparency = 0.2 }))
-	table.insert(t_1, tweenService:Create(UIStroke, tweenInfo, { Transparency = 0.2 }))
-	indicator.Adornee = p4.Parent
-	indicator.Parent = p5
-	local ancestryChangedConnection = p4.AncestryChanged:Connect(function()
-		-- upvalues: indicator (ref), p4 (ref)
-		indicator.Adornee = p4.Parent
+local function createIndicator(p1, Parent) --[[ Line: 544 ]]
+	-- upvalues: _Color3 (copy), _Color3_1 (copy), TweenService (copy), _TweenInfo (copy)
+	local CreateResults = {}
+	local CreateResults1 = {}
+	local Indicator = Instance.new("BillboardGui")
+	Indicator.Name = "Indicator"
+	Indicator.Size = UDim2.fromOffset(15, 15)
+	Indicator.AlwaysOnTop = true
+	local Frame = Instance.new("Frame")
+	Frame.Size = UDim2.fromScale(1, 1)
+	Frame.BackgroundTransparency = 1
+	Frame.BackgroundColor3 = _Color3
+	Frame.AnchorPoint = Vector2.new(0.5, 0)
+	Frame.Position = UDim2.fromScale(0.5, 0)
+	Frame.Parent = Indicator
+	local Corner = Instance.new("UICorner")
+	Corner.CornerRadius = UDim.new(1, 0)
+	Corner.Parent = Frame
+	local Stroke = Instance.new("UIStroke")
+	Stroke.Color = _Color3_1
+	Stroke.Thickness = 1.5
+	Stroke.Transparency = 1
+	Stroke.Parent = Frame
+	table.insert(CreateResults, TweenService:Create(Frame, _TweenInfo, { BackgroundTransparency = 1 }))
+	table.insert(CreateResults, TweenService:Create(Stroke, _TweenInfo, { Transparency = 1 }))
+	table.insert(CreateResults1, TweenService:Create(Frame, _TweenInfo, { BackgroundTransparency = 0.2 }))
+	table.insert(CreateResults1, TweenService:Create(Stroke, _TweenInfo, { Transparency = 0.2 }))
+	Indicator.Adornee = p1.Parent
+	Indicator.Parent = Parent
+	local AncestryChangedConnection = p1.AncestryChanged:Connect(function() --[[ Line: 579 | Named "updateUIAncestry" ]]
+		-- upvalues: Indicator (copy), p1 (copy)
+		Indicator.Adornee = p1.Parent
 	end)
 	
-	for i, v in ipairs(t_1) do
-		v:Play()
+	for _, value in ipairs(CreateResults1) do
+		value:Play()
 	end
-	return function()
-		-- upvalues: ancestryChangedConnection (ref), t (ref), indicator (ref)
-		ancestryChangedConnection:Disconnect()
+	return function() --[[ Line: 588 | Named "cleanup" ]]
+		-- upvalues: AncestryChangedConnection (copy), CreateResults (copy), Indicator (copy)
+		AncestryChangedConnection:Disconnect()
 		
-		for i, v in ipairs(t) do
-			v:Play()
+		for _, createResult in ipairs(CreateResults) do
+			createResult:Play()
 		end
 		wait(0.2)
-		indicator.Parent = nil
+		Indicator.Parent = nil
 	end
 end
 
-;(function()
-	-- upvalues: proximityPromptService (ref), playerGui (ref), createPrompt (ref), createIndicator (ref)
-	proximityPromptService.PromptShown:Connect(function(p6, p7)
-		-- upvalues: playerGui (copy), createPrompt (copy)
-		if p6.Style == Enum.ProximityPromptStyle.Custom then return end
-		local proximityPrompts_1 = playerGui:FindFirstChild("ProximityPrompts")
+;(function() --[[ Line: 603 | Named "onLoad" ]]
+	-- upvalues: ProximityPromptService (copy), PlayerGui (copy), createPrompt (copy), createIndicator (copy)
+	ProximityPromptService.PromptShown:Connect(function(Prompt, ProximityPromptInputType) --[[ Line: 604 ]]
+		-- upvalues: PlayerGui (upval), createPrompt (upval)
+		if Prompt.Style == Enum.ProximityPromptStyle.Custom then return end
+		local ProximityPrompts = PlayerGui:FindFirstChild("ProximityPrompts")
 		
-		if proximityPrompts_1 == nil then
-			proximityPrompts_1 = Instance.new("ScreenGui")
-			proximityPrompts_1.Name = "ProximityPrompts"
-			proximityPrompts_1.ResetOnSpawn = false
-			proximityPrompts_1.Parent = playerGui
-			proximityPrompts_1.IgnoreGuiInset = true
+		if ProximityPrompts == nil then
+			ProximityPrompts = Instance.new("ScreenGui")
+			ProximityPrompts.Name = "ProximityPrompts"
+			ProximityPrompts.ResetOnSpawn = false
+			ProximityPrompts.Parent = PlayerGui
+			ProximityPrompts.IgnoreGuiInset = true
 		end
-		proximityPrompts_1 = createPrompt(p6, p7, proximityPrompts_1)
-		local bindableEvent = Instance.new("BindableEvent")
-		local promptHiddenConnection = p6.PromptHidden:Connect(function()
-			-- upvalues: bindableEvent (ref)
-			bindableEvent:Fire()
+		local Prompt1: () -> () = createPrompt(Prompt, ProximityPromptInputType, ProximityPrompts)
+		local BindableEvent = Instance.new("BindableEvent")
+		local PromptHiddenConnection = Prompt.PromptHidden:Connect(function() --[[ Line: 615 ]]
+			-- upvalues: BindableEvent (copy)
+			BindableEvent:Fire()
 		end)
-		local destroyingConnection = p6.Destroying:Connect(function()
-			-- upvalues: bindableEvent (ref)
-			bindableEvent:Fire()
+		local DestroyingConnection = Prompt.Destroying:Connect(function() --[[ Line: 618 ]]
+			-- upvalues: BindableEvent (copy)
+			BindableEvent:Fire()
 		end)
-		bindableEvent.Event:Wait()
-		promptHiddenConnection:Disconnect()
-		destroyingConnection:Disconnect()
-		proximityPrompts_1()
+		BindableEvent.Event:Wait()
+		PromptHiddenConnection:Disconnect()
+		DestroyingConnection:Disconnect()
+		Prompt1()
 	end)
-	proximityPromptService.IndicatorShown:Connect(function(p6)
-		-- upvalues: playerGui (copy), createIndicator (copy)
-		if p6.Style == Enum.ProximityPromptStyle.Custom then return end
-		local proximityPrompts_1 = playerGui:FindFirstChild("ProximityPrompts")
+	ProximityPromptService.IndicatorShown:Connect(function(p2) --[[ Line: 628 ]]
+		-- upvalues: PlayerGui (upval), createIndicator (upval)
+		if p2.Style == Enum.ProximityPromptStyle.Custom then return end
+		local ProximityPrompts = PlayerGui:FindFirstChild("ProximityPrompts")
 		
-		if proximityPrompts_1 == nil then
-			proximityPrompts_1 = Instance.new("ScreenGui")
-			proximityPrompts_1.Name = "ProximityPrompts"
-			proximityPrompts_1.ResetOnSpawn = false
-			proximityPrompts_1.Parent = playerGui
-			proximityPrompts_1.IgnoreGuiInset = true
+		if ProximityPrompts == nil then
+			ProximityPrompts = Instance.new("ScreenGui")
+			ProximityPrompts.Name = "ProximityPrompts"
+			ProximityPrompts.ResetOnSpawn = false
+			ProximityPrompts.Parent = PlayerGui
+			ProximityPrompts.IgnoreGuiInset = true
 		end
-		proximityPrompts_1 = createIndicator(p6, proximityPrompts_1)
-		local bindableEvent = Instance.new("BindableEvent")
-		local indicatorHiddenConnection = p6.IndicatorHidden:Connect(function()
-			-- upvalues: bindableEvent (ref)
-			bindableEvent:Fire()
+		local Indicator: () -> () = createIndicator(p2, ProximityPrompts)
+		local BindableEvent = Instance.new("BindableEvent")
+		local IndicatorHiddenConnection = p2.IndicatorHidden:Connect(function() --[[ Line: 639 ]]
+			-- upvalues: BindableEvent (copy)
+			BindableEvent:Fire()
 		end)
-		local destroyingConnection = p6.Destroying:Connect(function()
-			-- upvalues: bindableEvent (ref)
-			bindableEvent:Fire()
+		local DestroyingConnection = p2.Destroying:Connect(function() --[[ Line: 642 ]]
+			-- upvalues: BindableEvent (copy)
+			BindableEvent:Fire()
 		end)
-		bindableEvent.Event:Wait()
-		indicatorHiddenConnection:Disconnect()
-		destroyingConnection:Disconnect()
-		proximityPrompts_1()
+		BindableEvent.Event:Wait()
+		IndicatorHiddenConnection:Disconnect()
+		DestroyingConnection:Disconnect()
+		Indicator()
 	end)
 end)()

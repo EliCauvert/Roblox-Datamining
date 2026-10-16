@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.ContactImporter.ContactImporter)
+﻿return (require(script.Parent.Parent.Parent._Index.ContactImporter.ContactImporter))

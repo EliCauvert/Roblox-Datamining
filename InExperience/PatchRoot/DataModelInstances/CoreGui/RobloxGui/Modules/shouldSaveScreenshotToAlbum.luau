@@ -1,11 +1,11 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local userInputService = game:GetService("UserInputService")
-local cachedPolicyServiceModule = require(game:GetService("CorePackages").Workspace.Packages.CachedPolicyService)
-local getFFlagScreenshotHudApiModule = require(coreGuiService:WaitForChild("RobloxGui").Modules.Flags.GetFFlagScreenshotHudApi)
+﻿local UserInputService = game:GetService("UserInputService")
+local CachedPolicyServiceModule = require(game:GetService("CorePackages").Workspace.Packages.CachedPolicyService)
+local GetFFlagScreenshotHudApiModule = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.Flags.GetFFlagScreenshotHudApi)
 
-return function()
-	-- upvalues: userInputService (ref), getFFlagScreenshotHudApiModule (ref), cachedPolicyServiceModule (ref)
-	local platform = userInputService:GetPlatform()
+return function(): boolean --[[ Line: 9 ]]
+	-- upvalues: UserInputService (copy), GetFFlagScreenshotHudApiModule (copy), CachedPolicyServiceModule (copy)
+	local Platform = UserInputService:GetPlatform()
+	local IsPlatformMatch: boolean = Platform == Enum.Platform.IOS or Platform == Enum.Platform.Android
 	
-	return if getFFlagScreenshotHudApiModule() and (if platform ~= Enum.Platform.IOS then platform == Enum.Platform.Android else true) and not cachedPolicyServiceModule:IsSubjectToChinaPolicies() then true else false
+	return GetFFlagScreenshotHudApiModule() and IsPlatformMatch and not CachedPolicyServiceModule:IsSubjectToChinaPolicies() or false
 end

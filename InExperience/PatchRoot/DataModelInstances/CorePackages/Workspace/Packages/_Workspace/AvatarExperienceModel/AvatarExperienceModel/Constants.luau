@@ -1,25 +1,23 @@
-﻿local avatarExperienceModel = script:FindFirstAncestor("AvatarExperienceModel")
-local _ = require(avatarExperienceModel.Types.CommonTypes)
-local avatarExperienceFlagsModule = require(avatarExperienceModel.Parent.AvatarExperienceFlags)
-local fFlagAXCatalogBodySuits = avatarExperienceFlagsModule.FFlagAXCatalogBodySuits
-local fFlagAXInventoryDurablesSupport = avatarExperienceFlagsModule.FFlagAXInventoryDurablesSupport
-local t = {}
-local t_1 = {}
-local enumItems = Enum.BundleType:GetEnumItems()
+﻿local AvatarExperienceModel = script:FindFirstAncestor("AvatarExperienceModel")
+local _ = require(AvatarExperienceModel.Types.CommonTypes)
+local FFlagAXInventoryDurablesSupport = require(AvatarExperienceModel.Parent.AvatarExperienceFlags).FFlagAXInventoryDurablesSupport
+local BundleTypeIdStrings = {}
+local BundleTypeIdStringToName = {}
+local EnumItems = Enum.BundleType:GetEnumItems()
 
-for i, v in enumItems do
-	t[v.Name] = tostring(v.Value)
-	t_1[tostring(v.Value)] = v.Name
+for _, enumItem in EnumItems do
+	BundleTypeIdStrings[enumItem.Name] = tostring(enumItem.Value)
+	BundleTypeIdStringToName[tostring(enumItem.Value)] = enumItem.Name
 end
-if fFlagAXInventoryDurablesSupport then
-	local var1 = tostring(#enumItems + 1)
-	t.Avatars = var1
-	t_1[var1] = "Avatars"
+if FFlagAXInventoryDurablesSupport then
+	local Text = tostring(#EnumItems + 1)
+	BundleTypeIdStrings.Avatars = Text
+	BundleTypeIdStringToName[Text] = "Avatars"
 end
 return {
 	AnimationCategoryCameraZoomRadius = 5,
-	BundleTypeIdStrings = t,
-	BundleTypeIdStringToName = t_1,
+	BundleTypeIdStrings = BundleTypeIdStrings,
+	BundleTypeIdStringToName = BundleTypeIdStringToName,
 	CameraZoomRadius = {
 		BodyCategories = {
 			Heads = 8.5,
@@ -77,7 +75,7 @@ return {
 			Tops = 12,
 			Outerwear = 12,
 			Bottoms = 12,
-			Bodysuits = if fFlagAXCatalogBodySuits then 12 else nil
+			Bodysuits = 12
 		},
 		Makeup = {
 			Makeup = game:DefineFastInt("AXMakeupZoomRadius", 7),

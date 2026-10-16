@@ -1,8 +1,8 @@
-﻿local fFlagDebugEnablePioneerUX = require(script:FindFirstAncestor("PioneerUtils").Parent.SharedFlags).FFlagDebugEnablePioneerUX
-local pioneerInfoModule = require(script.Parent.PioneerInfo)
-local enablePioneerUX = game:DefineFastFlag("EnablePioneerUX", false)
+﻿local FFlagDebugEnablePioneerUX = require(script:FindFirstAncestor("PioneerUtils").Parent.SharedFlags).FFlagDebugEnablePioneerUX
+local PioneerInfoModule = require(script.Parent.PioneerInfo)
+local EnablePioneerUX = game:DefineFastFlag("EnablePioneerUX", false)
 
-return function()
-	-- upvalues: fFlagDebugEnablePioneerUX (ref), enablePioneerUX (ref), pioneerInfoModule (ref)
-	return fFlagDebugEnablePioneerUX or enablePioneerUX and pioneerInfoModule.isPioneerApp()
+return function() --[[ Line: 13 | Named "isPioneerLaunch" ]]
+	-- upvalues: FFlagDebugEnablePioneerUX (copy), EnablePioneerUX (copy), PioneerInfoModule (copy)
+	return FFlagDebugEnablePioneerUX or EnablePioneerUX and PioneerInfoModule.isPioneerApp()
 end

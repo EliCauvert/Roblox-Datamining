@@ -1,136 +1,144 @@
-﻿local parent = script:FindFirstAncestor("HttpClient").Parent
-local resourcesModule = require(parent.Resources)
-local signalsModule = require(parent.Signals)
+﻿local Parent = script:FindFirstAncestor("HttpClient").Parent
 local _ = require(script.Parent.types)
-local encodersModule = require(script.Parent.encoders)
-local analyticsModule = require(script.Parent.analytics)
-local fFlagHttpClientRetryExtensionsModule = require(script.Parent.Flags.FFlagHttpClientRetryExtensions)
-local createSignal = signalsModule.createSignal
-local createResource = resourcesModule.createResource
+local EncodersModule = require(script.Parent.encoders)
+local AnalyticsModule = require(script.Parent.analytics)
+local FFlagHttpClientRetryExtensionsModule = require(script.Parent.Flags.FFlagHttpClientRetryExtensions)
+local CreateSignalFunction = require(Parent.Signals).createSignal
+local CreateResourceFunction = require(Parent.Resources).createResource
 
-local function _(p1, p2)
-	local ok, status, var1, var2 = pcall(p1, p2)
+local function _(p1, p2) --[[ Line: 19 | Named "safeDecode" ]]
+	local Success, Result, Result3, Result4 = pcall(p1, p2)
 	
-	if ok then
-		return status, var1, var2
+	if Success then
+		return Result, Result3, Result4
+	else
+		return nil, `decode error: {tostring(Result)}`, nil
 	end
-	return nil, `decode error: {tostring(status)}`, nil
 end
 
-return function(p1)
-	-- upvalues: analyticsModule (ref), encodersModule (ref), createSignal (ref), createResource (ref), fFlagHttpClientRetryExtensionsModule (ref)
-	local analytics = p1.analytics or analyticsModule.defaultAnalytics
-	local encode = p1.encode or encodersModule.encodeJson
-	local var1, var2 = createSignal({ status = "pending" })
-	local t = { Accept = "application/json" }
+return function(p1) --[[ Line: 27 | Named "createRequest" ]]
+	-- upvalues: AnalyticsModule (copy), EncodersModule (copy), CreateSignalFunction (copy), CreateResourceFunction (copy), FFlagHttpClientRetryExtensionsModule (copy)
+	local Analytics = p1.analytics or AnalyticsModule.defaultAnalytics
+	local Encode = p1.encode or EncodersModule.encodeJson
+	local Signal, Signal2 = CreateSignalFunction({ status = "pending" })
+	local Headers = { Accept = "application/json" }
 	
 	if p1.headers then
-		for i, v in p1.headers do
-			t[i] = v
+		for i, header in p1.headers do
+			Headers[i] = header
 		end
 	end
-	local var3 = nil
+	local Body = nil
 	
 	if p1.body ~= nil then
-		local var4, var5 = encode(p1.body)
-		var3 = var4
-		t["Content-Type"] = t["Content-Type"] or var5
+		local EncodeResult2
+		Body, EncodeResult2 = Encode(p1.body)
+		Headers["Content-Type"] = Headers["Content-Type"] or EncodeResult2
 	end
 	return {
-		state = var1,
-		dispose = createResource(function(p2)
-			-- upvalues: var2 (ref), analytics (ref), p1 (ref), fFlagHttpClientRetryExtensionsModule (copy), t (ref), var3 (write)
-			local var6 = false
-			local processTime = os.clock()
+		state = Signal,
+		dispose = CreateResourceFunction(function(Callback) --[[ Line: 48 ]]
+			-- upvalues: Signal2 (copy), Analytics (copy), p1 (copy), FFlagHttpClientRetryExtensionsModule (upval), Headers (copy), Body (ref)
+			local Flag = false
+			local ClockTime = os.clock()
 			
-			local function settleFailed(value)
-				-- upvalues: var6 (write), processTime (ref), var2 (copy), analytics (copy), p1 (copy)
-				if var6 then
+			local function settleFailed(p2) --[[ Line: 52 ]]
+				-- upvalues: Flag (ref), ClockTime (copy), Signal2 (upval), Analytics (upval), p1 (upval)
+				if not Flag then
+					Flag = true
+					local ScaledClockTime = (os.clock() - ClockTime) * 1000
+					Signal2({ status = "failed", error = `transport error: {p2}` })
+					Analytics(p1.analyticsKey, p1.method, p1.url, nil, ScaledClockTime, "failed")
+					
 					return
 				end
-				var6 = true
-				local var7 = (os.clock() - processTime) * 1000
-				var2({ status = "failed", error = `transport error: {value}` })
-				analytics(p1.analyticsKey, p1.method, p1.url, nil, var7, "failed")
 			end
 			
-			local function settleResponse(value)
-				-- upvalues: var6 (write), processTime (ref), p1 (copy), fFlagHttpClientRetryExtensionsModule (copy), var2 (copy), analytics (copy)
-				if var6 then return end
-				var6 = true
-				local var7 = (os.clock() - processTime) * 1000
+			local function settleResponse(p2) --[[ Line: 62 ]]
+				-- upvalues: Flag (ref), ClockTime (copy), p1 (upval), FFlagHttpClientRetryExtensionsModule (upval), Signal2 (upval), Analytics (upval)
+				if Flag then return end
+				Flag = true
+				local ScaledClockTime = (os.clock() - ClockTime) * 1000
 				
 				if p1.statusCodeActions ~= nil then
-					local statusCode = p1.statusCodeActions[value.statusCode]
+					local StatusCodeAction = p1.statusCodeActions[p2.statusCode]
 					
-					if statusCode ~= nil then
-						for i, v in statusCode do
-							local ok, status = pcall(v, value)
+					if StatusCodeAction ~= nil then
+						for _, value in StatusCodeAction do
+							local Success1, Result1 = pcall(value, p2)
 							
-							if not ok then
-								warn(`[HttpClient] {p1.analyticsKey} status code action threw: {tostring(status)}`)
+							if not Success1 then
+								warn(`[HttpClient] {p1.analyticsKey} status code action threw: {tostring(Result1)}`)
 							end
 						end
 					end
 				end
-				local var8, var9, var10
-				local ok, status, var11, var12 = pcall(p1.decode, value)
+				local Success, Result, Result3, Result4 = pcall(p1.decode, p2)
+				local Result2 = nil
+				local DecodeName = nil
+				local ErrorCode = nil
 				
-				if ok then
-					var8 = status
-					var9 = var11
-					var10 = var12
+				if Success then
+					Result2 = Result
+					DecodeName = Result3
+					ErrorCode = Result4
 				else
-					var8 = nil
-					var9 = `decode error: {tostring(status)}`
-					var10 = nil
+					Result2 = nil
+					DecodeName = `decode error: {tostring(Result)}`
+					ErrorCode = nil
 				end
-				local var13 = if var9 ~= nil then "succeeded" else "failed"
-				local var14 = if fFlagHttpClientRetryExtensionsModule then value else nil
+				local Succeeded: string = if DecodeName == nil then "succeeded" else "failed"
+				local Response = if FFlagHttpClientRetryExtensionsModule then p2 else nil
 				
-				if var9 == nil then
-					var2({ status = "succeeded", result = var8, response = var14 })
+				if DecodeName == nil then
+					Signal2({
+						status = "succeeded",
+						result = Result2,
+						response = Response
+					})
 				else
-					var2({
+					Signal2({
 						status = "failed",
-						error = var9,
-						errorCode = var10,
-						response = var14
+						error = DecodeName,
+						errorCode = ErrorCode,
+						response = Response
 					})
 				end
-				analytics(p1.analyticsKey, p1.method, p1.url, value, var7, var13)
+				Analytics(p1.analyticsKey, p1.method, p1.url, p2, ScaledClockTime, Succeeded)
 			end
 			
-			local ok, status = pcall(function()
-				-- upvalues: p1 (copy), t (copy), var3 (copy), fFlagHttpClientRetryExtensionsModule (copy), settleResponse (ref), settleFailed (ref), p2 (ref), var6 (write)
-				local var15 = p1.networkImpl.request({
+			local Success, Result = pcall(function() --[[ Line: 94 ]]
+				-- upvalues: p1 (upval), Headers (upval), Body (upval), FFlagHttpClientRetryExtensionsModule (upval), settleResponse (copy), settleFailed (copy), Callback (copy), Flag (ref)
+				local RequestResult = p1.networkImpl.request({
 					url = p1.url,
 					method = p1.method,
-					headers = t,
-					body = var3,
-					onMessage = if fFlagHttpClientRetryExtensionsModule then p1.onMessage else nil,
-					priority = if fFlagHttpClientRetryExtensionsModule then p1.priority else nil
-				}, function(p3, p4)
-					-- upvalues: settleResponse (copy), settleFailed (copy)
+					headers = Headers,
+					body = Body,
+					onMessage = if FFlagHttpClientRetryExtensionsModule then p1.onMessage else nil,
+					priority = if FFlagHttpClientRetryExtensionsModule then p1.priority else nil
+				}, function(p3, p4) --[[ Line: 102 ]]
+					-- upvalues: settleResponse (upval), settleFailed (upval)
 					if p3 then
 						settleResponse(p4)
 						
 						return
+					else
+						settleFailed((tostring(p4)))
 					end
-					settleFailed(tostring(p4))
 				end)
-				p2(function()
-					-- upvalues: var6 (copy), var15 (ref)
-					if var6 then
+				Callback(function() --[[ Line: 109 ]]
+					-- upvalues: Flag (upval), RequestResult (copy)
+					if not Flag then
+						Flag = true
+						RequestResult()
+						
 						return
 					end
-					var6 = true
-					var15()
 				end)
 			end)
 			
-			if not ok then
-				settleFailed(tostring(status))
+			if not Success then
+				settleFailed((tostring(Result)))
 			end
 		end)
 	}

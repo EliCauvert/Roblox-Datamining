@@ -1,55 +1,56 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local appPage = require(parent.RobloxAppEnums).AppPage
-local navigateDown = require(parent.NavigationRodux).Thunks.NavigateDown
-local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
-local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local sduiActionType = sduiCoreSystemModule.SduiActionType
-local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local NavigateDownFunction = require(Parent.NavigationRodux).Thunks.NavigateDown
+local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
+local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiActionType = SduiCoreSystemModule.SduiActionType
+local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
 
-return function(p1, _, p2)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref)
-	local var2 = if p1 then p1.actionParams else nil
+return function(p1, _, p2) --[[ Line: 21 ]]
+	-- upvalues: SduiErrorType (copy), SduiActionType (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy)
+	local ActionParams = p1 and p1.actionParams or nil
 	
-	if var2 == nil then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if ActionParams == nil then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
-			name = sduiActionType.OpenSeeAll
+			name = SduiActionType.OpenSeeAll
 		}, p2.appPage)
 		
 		return
 	end
-	assert(var2, "actionParams must exist")
-	local var3 = tostring(var2.collectionId)
+	assert(ActionParams, "actionParams must exist")
+	local Text = tostring(ActionParams.collectionId)
 	
-	if var3 == nil then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if Text == nil then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			propName = "collectionId",
-			name = sduiActionType.OpenSeeAll,
-			message = `Missing collectionId: {var3}`
+			name = SduiActionType.OpenSeeAll,
+			message = `Missing collectionId: {Text}`
 		}, p2.appPage)
 		
 		return
 	end
-	local collectionPosition = var2.collectionPosition
-	local isHome = p2.appPage == "Home"
-	p2.dependencies.gameAnalytics.reportSeeAllWithId(var3, var2.gameSetTargetId, collectionPosition)
-	local t = {
-		name = appPage.GamesList,
-		detail = var3,
+	local CollectionPosition = ActionParams.collectionPosition
+	local IsHome = p2.appPage == "Home"
+	p2.dependencies.gameAnalytics.reportSeeAllWithId(Text, ActionParams.gameSetTargetId, CollectionPosition)
+	local config = {
+		name = AppPage.GamesList,
+		detail = Text,
 		extraProps = {
-			sortPageId = tostring(var3),
-			sortName = var3,
+			sortPageId = tostring(Text),
+			sortName = Text,
 			pageContext = p2.appPage,
-			isOmni = isHome,
-			sortIndex = if isHome then tonumber(collectionPosition) else nil
+			isOmni = IsHome,
+			sortIndex = if IsHome then tonumber(CollectionPosition) else nil
 		}
 	}
 	
-	if fFlagSignalsNavP3Dispatch then
-		var1.down(var1.fromLegacyPage(t))
+	if FFlagSignalsNavP3Dispatch then
+		NavigationCommands.down(NavigationCommands.fromLegacyPage(config))
 		
 		return
+	else
+		p2.dependencies.dispatch(NavigateDownFunction(config))
 	end
-	p2.dependencies.dispatch(navigateDown(t))
 end

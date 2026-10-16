@@ -1,15 +1,15 @@
-﻿return function(p1, p2)
-	local var1 = 0
+﻿return function(Callback, Delay) --[[ Line: 1 ]]
+	local CurrentTime = 0
 	
-	return function(...)
-		-- upvalues: var1 (write), p2 (ref), p1 (ref)
+	return function(...) --[[ Line: 3 ]]
+		-- upvalues: CurrentTime (ref), Delay (copy), Callback (copy)
 		local list = { ... }
-		local var2 = time()
-		var1 = var2
-		task.delay(p2, function()
-			-- upvalues: var1 (copy), var2 (ref), p1 (copy), list (ref)
-			if var1 == var2 then
-				p1(unpack(list))
+		local CurrentTime1 = time()
+		CurrentTime = CurrentTime1
+		task.delay(Delay, function() --[[ Line: 7 ]]
+			-- upvalues: CurrentTime (upval), CurrentTime1 (copy), Callback (upval), list (copy)
+			if CurrentTime == CurrentTime1 then
+				Callback(unpack(list))
 			end
 		end)
 	end

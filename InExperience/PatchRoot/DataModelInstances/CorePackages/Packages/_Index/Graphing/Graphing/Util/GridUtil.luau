@@ -1,132 +1,134 @@
-﻿local graphing = script:FindFirstAncestor("Graphing")
-local mathUtilModule = require(graphing.Util.MathUtil)
-local typesModule = require(graphing.Types)
-local t = {
-	getUniformValues = function(p1, p2, p3, p4)
-		if p3 < p2 then
-			local var1 = p2
-			p2 = p3
-			p3 = var1
+﻿local Graphing = script:FindFirstAncestor("Graphing")
+local MathUtilModule = require(Graphing.Util.MathUtil)
+local TypesModule = require(Graphing.Types)
+local GridUtil = {
+	getUniformValues = function(Direction, X, X1, p1) --[[ Line: 12 ]]
+		if X1 < X then
+			local X2 = X
+			X = X1
+			X1 = X2
 		end
-		local unit = p1.Unit
-		local offset = p1.Offset or 0
-		local t = {}
+		local Direction1: number = Direction.Unit
+		local Offset = Direction.Offset or 0
+		local List = {}
 		
-		for i = math.ceil((p2 - offset) / unit - unit * 0.000000001), math.floor((p3 - offset) / unit + unit * 0.000000001) do
-			local var2 = offset + i * unit
+		for i = math.ceil((X - Offset) / Direction1 - Direction1 * 0.000000001), math.floor((X1 - Offset) / Direction1 + Direction1 * 0.000000001) do
+			local NewOffset = Offset + i * Direction1
 			
-			if not p4[var2] then
-				table.insert(t, var2)
+			if not p1[NewOffset] then
+				table.insert(List, NewOffset)
 			end
 		end
-		return t
+		return List
 	end,
-	getLogarithmicValues = function(p5, p6, p7, p8)
-		-- upvalues: mathUtilModule (ref)
-		if p7 < p6 then
-			local var3 = p6
-			p6 = p7
-			p7 = var3
+	getLogarithmicValues = function(Direction, X, X1, p2) --[[ Line: 41 ]]
+		-- upvalues: MathUtilModule (copy)
+		if X1 < X then
+			local X2 = X
+			X = X1
+			X1 = X2
 		end
-		local base = p5.Base
-		local subdivision = p5.Subdivision or 0
-		local maxValue = math.max(p5.MinExponent or -10, mathUtilModule.log(base, p6))
-		maxValue = math.max(maxValue, mathUtilModule.log(base, p7))
-		local t = {}
-		local var4 = 0
+		local Base: number = Direction.Base
+		local Subdivision = Direction.Subdivision or 0
+		local Largest = math.max(Direction.MinExponent or -10, MathUtilModule.log(Base, X))
+		local List = {}
+		local v1 = 0
 		
-		for i_1 = math.floor(maxValue), math.ceil(maxValue) do
-			for i = math.pow(base, i_1), math.pow(base, i_1 + 1), math.pow(base, i_1 + 1 - subdivision) do
-				if p7 < i then break end
-				if i >= p6 and i ~= var4 then
-					var4 = i
-					
-					if not p8[i] then
-						table.insert(t, i)
-					end
+		for i = math.floor(Largest), math.ceil((math.max(Largest, MathUtilModule.log(Base, X1)))) do
+			for i1 = math.pow(Base, i), math.pow(Base, i + 1), math.pow(Base, i + 1 - Subdivision) do
+				if X1 < i1 then break end
+				local IsIBelow = i1 < X or i1 == v1
+				
+				if not IsIBelow then
+					v1 = i1
+					IsIBelow = p2[i1]
+				end
+				if not IsIBelow then
+					table.insert(List, i1)
 				end
 			end
 		end
-		return t
+		return List
 	end,
-	getValuesValues = function(p9, p10, p11, p12)
-		local t = {}
+	getValuesValues = function(Direction, X, X1, p3) --[[ Line: 85 ]]
+		local List = {}
 		
-		for i, v in p9.Values do
-			if p10 <= v and v <= p11 and not p12[v] then
-				table.insert(t, v)
+		for _, value in Direction.Values do
+			if X <= value and value <= X1 and not p3[value] then
+				table.insert(List, value)
 			end
 		end
-		return t
+		return List
 	end
 }
 
-function t.getValues(p13, p14, p15, p16)
-	-- upvalues: typesModule (ref), t (ref)
-	local t_1 = {}
-	local t_2 = {}
+function GridUtil.getValues(AXISX, Direction, p4, List) --[[ Line: 100 ]]
+	-- upvalues: TypesModule (copy), GridUtil (copy)
+	local LogarithmicValues = {}
+	local t = {}
 	
-	if p16 then
-		for i, v in p16 do
-			t_2[v] = true
+	if List then
+		for _, value in List do
+			t[value] = true
 		end
 	end
-	local viewportRect = p15.getViewportRect()
-	local var5 = if p13 == typesModule.AXIS_X then viewportRect.Min.X else viewportRect.Min.Y
-	local var6 = if p13 == typesModule.AXIS_X then viewportRect.Max.X else viewportRect.Max.Y
+	local ViewportRect = p4.getViewportRect()
+	local X = if AXISX == TypesModule.AXIS_X then ViewportRect.Min.X else ViewportRect.Min.Y
+	local X1 = if AXISX == TypesModule.AXIS_X then ViewportRect.Max.X else ViewportRect.Max.Y
 	
-	if p14.Type == typesModule.SCALE_UNIFORM then
-		t_1 = t.getUniformValues(p14, var5, var6, t_2)
+	if Direction.Type == TypesModule.SCALE_UNIFORM then
+		LogarithmicValues = GridUtil.getUniformValues(Direction, X, X1, t)
 		
-		return t_1
-	elseif p14.Type == typesModule.SCALE_LOGARITHMIC then
-		t_1 = t.getLogarithmicValues(p14, var5, var6, t_2)
+		return LogarithmicValues
+	elseif Direction.Type == TypesModule.SCALE_LOGARITHMIC then
+		LogarithmicValues = GridUtil.getLogarithmicValues(Direction, X, X1, t)
 		
-		return t_1
-	elseif p14.Type == typesModule.SCALE_VALUES then
-		t_1 = t.getValuesValues(p14, var5, var6, t_2)
+		return LogarithmicValues
+	elseif Direction.Type == TypesModule.SCALE_VALUES then
+		LogarithmicValues = GridUtil.getValuesValues(Direction, X, X1, t)
 		
-		return t_1
+		return LogarithmicValues
+	else
+		assert(false, `Axis schema {Direction.Type} not supported`)
+		
+		return LogarithmicValues
 	end
-	assert(false, `Axis schema {p14.Type} not supported`)
-	
-	return t_1
 end
 
-function t.trimRoundingError(value)
-	local var7 = string.format("%.10f", value):gsub("^0*(.-)%.?0*$", "%1")
+function GridUtil.trimRoundingError(p5) --[[ Line: 136 ]]
+	local _00 = string.format("%.10f", p5):gsub("^0*(.-)%.?0*$", "%1")
 	
-	if var7 == "" or var7:sub(1, 1) == "." then
-		var7 = "0" .. var19
+	if _00 == "" or _00:sub(1, 1) == "." then
+		_00 = "0" .. _00
 	end
-	return var7
+	return _00
 end
 
-function t.getAnchorPointForSide(p17)
-	-- upvalues: typesModule (ref)
-	if p17 == typesModule.SIDE_LEFT then
+function GridUtil.getAnchorPointForSide(SIDEBOTTOM): Vector2? --[[ Line: 146 ]]
+	-- upvalues: TypesModule (copy)
+	if SIDEBOTTOM == TypesModule.SIDE_LEFT then
 		return Vector2.new(1, 0.5)
-	elseif p17 == typesModule.SIDE_RIGHT then
+	elseif SIDEBOTTOM == TypesModule.SIDE_RIGHT then
 		return Vector2.new(0, 0.5)
-	elseif p17 == typesModule.SIDE_TOP then
+	elseif SIDEBOTTOM == TypesModule.SIDE_TOP then
 		return Vector2.new(0.5, 1)
-	elseif p17 == typesModule.SIDE_BOTTOM then
+	elseif SIDEBOTTOM == TypesModule.SIDE_BOTTOM then
 		return Vector2.new(0.5, 0)
+	else
+		assert(false, `Side {SIDEBOTTOM} not supported`)
 	end
-	assert(false, `Side {p17} not supported`)
 end
 
-function t.getTextAlignmentsFromAnchorPoint(p17)
-	local _ = nil
-	local _ = nil
-	local var7 = if p17.X == 0 then Enum.TextXAlignment.Left elseif p17.X == 1 then Enum.TextXAlignment.Right else Enum.TextXAlignment.Center
+function GridUtil.getTextAlignmentsFromAnchorPoint(Vector) --[[ Line: 160 ]]
+	local Left = if Vector.X == 0 then Enum.TextXAlignment.Left elseif Vector.X == 1 then Enum.TextXAlignment.Right else Enum.TextXAlignment.Center
 	
-	if p17.Y == 0 then
-		return var7, Enum.TextYAlignment.Top
-	elseif p17.Y == 1 then
-		return var7, Enum.TextYAlignment.Bottom
+	if Vector.Y == 0 then
+		return Left, Enum.TextYAlignment.Top
+	elseif Vector.Y == 1 then
+		return Left, Enum.TextYAlignment.Bottom
+	else
+		return Left, Enum.TextYAlignment.Center
 	end
-	return var7, Enum.TextYAlignment.Center
 end
 
-return t
+return GridUtil

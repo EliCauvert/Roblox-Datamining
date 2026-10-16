@@ -1,15 +1,14 @@
-﻿local signalsModule = require(script:FindFirstAncestor("ExpChat").Parent.Signals)
-local createGlobalChatTooltipStoreModule = require(script.createGlobalChatTooltipStore)
-local fetchGlobalChatTooltipEligibilityModule = require(script.fetchGlobalChatTooltipEligibility)
+﻿local CreateGlobalChatTooltipStoreModule = require(script.createGlobalChatTooltipStore)
+local FetchGlobalChatTooltipEligibilityModule = require(script.fetchGlobalChatTooltipEligibility)
 
-return signalsModule.createComputed(function()
-	-- upvalues: createGlobalChatTooltipStoreModule (ref), fetchGlobalChatTooltipEligibilityModule (ref)
-	local var1 = createGlobalChatTooltipStoreModule()
-	var1.reportImpression = fetchGlobalChatTooltipEligibilityModule.reportImpression
-	fetchGlobalChatTooltipEligibilityModule.fetchEligibility(function(p1)
-		-- upvalues: var1 (ref)
-		var1.setIsGlobalChatTooltipEligible(p1.shouldShowTooltip)
+return require(script:FindFirstAncestor("ExpChat").Parent.Signals).createComputed(function() --[[ Line: 7 ]]
+	-- upvalues: CreateGlobalChatTooltipStoreModule (copy), FetchGlobalChatTooltipEligibilityModule (copy)
+	local GlobalChatTooltipStoreModule = CreateGlobalChatTooltipStoreModule()
+	GlobalChatTooltipStoreModule.reportImpression = FetchGlobalChatTooltipEligibilityModule.reportImpression
+	FetchGlobalChatTooltipEligibilityModule.fetchEligibility(function(p1) --[[ Line: 11 ]]
+		-- upvalues: GlobalChatTooltipStoreModule (copy)
+		GlobalChatTooltipStoreModule.setIsGlobalChatTooltipEligible(p1.shouldShowTooltip)
 	end)
 	
-	return var1
+	return GlobalChatTooltipStoreModule
 end)

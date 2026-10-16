@@ -1,27 +1,28 @@
-﻿local robloxReplicatedStorageService = game:GetService("RobloxReplicatedStorage")
-local playtestTeleportRemoteModule = require(script.Parent.playtestTeleportRemote)
-local var1 = nil
+﻿local RobloxReplicatedStorage = game:GetService("RobloxReplicatedStorage")
+local PlaytestTeleportRemoteModule = require(script.Parent.playtestTeleportRemote)
+local v1 = nil
 
-local function _()
-	-- upvalues: var1 (write), robloxReplicatedStorageService (ref), playtestTeleportRemoteModule (ref)
-	if var1 == nil then
-		local remote_name = robloxReplicatedStorageService:WaitForChild(playtestTeleportRemoteModule.REMOTE_NAME, 1e999)
-		var1 = remote_name
+local function _() --[[ Line: 10 | Named "getRemote" ]]
+	-- upvalues: v1 (ref), RobloxReplicatedStorage (copy), PlaytestTeleportRemoteModule (copy)
+	if v1 == nil then
+		local REMOTENAME = RobloxReplicatedStorage:WaitForChild(PlaytestTeleportRemoteModule.REMOTE_NAME, 1e999)
+		v1 = REMOTENAME
 		
-		return remote_name
+		return REMOTENAME
+	else
+		return v1
 	end
-	return var1
 end
 
-return function(p1)
-	-- upvalues: var1 (write), robloxReplicatedStorageService (ref), playtestTeleportRemoteModule (ref)
-	local var2
-	if var1 == nil then
-		local remote_name = robloxReplicatedStorageService:WaitForChild(playtestTeleportRemoteModule.REMOTE_NAME, 1e999)
-		var1 = remote_name
-		var2 = remote_name
+return function(p1) --[[ Line: 20 | Named "teleportToPlace" ]]
+	-- upvalues: v1 (ref), RobloxReplicatedStorage (copy), PlaytestTeleportRemoteModule (copy)
+	local RemoteEvent = nil
+	if v1 == nil then
+		local REMOTENAME = RobloxReplicatedStorage:WaitForChild(PlaytestTeleportRemoteModule.REMOTE_NAME, 1e999)
+		v1 = REMOTENAME
+		RemoteEvent = REMOTENAME
 	else
-		var2 = var1
+		RemoteEvent = v1
 	end
-	var2:FireServer(p1)
+	RemoteEvent:FireServer(p1)
 end

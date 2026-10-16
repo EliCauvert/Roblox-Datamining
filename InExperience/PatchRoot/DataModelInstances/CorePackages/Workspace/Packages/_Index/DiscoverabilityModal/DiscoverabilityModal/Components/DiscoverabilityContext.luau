@@ -1,1 +1,1 @@
-﻿return require(script.DiscoverabilityContext)
+﻿return (require(script.DiscoverabilityContext))

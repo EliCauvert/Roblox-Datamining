@@ -1,215 +1,211 @@
-﻿local parent = script:FindFirstAncestor("GameDetail").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local text = foundationModule.Text
-local icon = foundationModule.Icon
-local skeleton = foundationModule.Skeleton
-local button = foundationModule.Button
-local radius = foundationModule.Enums.Radius
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local useTokens = foundationModule.Hooks.useTokens
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local dataHydrationModule = require(parent.DataHydration)
-local signalsReactModule = require(parent.SignalsReact)
-local compositionTags = require(parent.AppComposition).CompositionTags
-local experienceDetailsFallbackAttributionRowModule = require(script.Parent.ExperienceDetailsFallbackAttributionRow)
-local useGameInfoModule = require(script.Parent.Parent.useGameInfo)
-local useGameInfosSelector = require(parent.GameInfosRodux).useGameInfosSelector
-local fFlagLuaAppSduiEdpFallbackAttributionFromCache = require(parent.SharedFlags).FFlagLuaAppSduiEdpFallbackAttributionFromCache
-local fFlagMigrateGameInfoToStore = require(parent.SharedFlags).FFlagMigrateGameInfoToStore
+﻿local Parent = script:FindFirstAncestor("GameDetail").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local Icon = FoundationModule.Icon
+local Skeleton = FoundationModule.Skeleton
+local Button = FoundationModule.Button
+local Radius = FoundationModule.Enums.Radius
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local DataHydrationModule = require(Parent.DataHydration)
+local SignalsReactModule = require(Parent.SignalsReact)
+local CompositionTags = require(Parent.AppComposition).CompositionTags
+local ExperienceDetailsFallbackAttributionRowModule = require(script.Parent.ExperienceDetailsFallbackAttributionRow)
+local UseGameInfoModule = require(script.Parent.Parent.useGameInfo)
+local UseGameInfosSelectorFunction = require(Parent.GameInfosRodux).useGameInfosSelector
+local FFlagLuaAppSduiEdpFallbackAttributionFromCache = require(Parent.SharedFlags).FFlagLuaAppSduiEdpFallbackAttributionFromCache
+local FFlagMigrateGameInfoToStore = require(Parent.SharedFlags).FFlagMigrateGameInfoToStore
 
-local function ExperienceDetailsFeedSkeleton(p1)
-	-- upvalues: useTokens (ref), fFlagLuaAppSduiEdpFallbackAttributionFromCache (ref), fFlagMigrateGameInfoToStore (ref), useGameInfoModule (ref), useGameInfosSelector (ref), reactModule (ref), view (ref), compositionTags (ref), experienceDetailsFallbackAttributionRowModule (ref), skeleton (ref), radius (ref)
-	local universeId = p1.universeId
-	local var1 = useTokens()
-	local isSmallScreen = p1.isSmallScreen
-	local var2 = nil
-	local var3 = nil
+local function ExperienceDetailsFeedSkeleton(p1) --[[ Line: 46 ]]
+	-- upvalues: UseTokensFunction (copy), FFlagLuaAppSduiEdpFallbackAttributionFromCache (copy), FFlagMigrateGameInfoToStore (copy), UseGameInfoModule (copy), UseGameInfosSelectorFunction (copy), ReactModule (copy), View (copy), CompositionTags (copy), ExperienceDetailsFallbackAttributionRowModule (copy), Skeleton (copy), Radius (copy)
+	local UniverseId = p1.universeId
+	local UseTokensResult = UseTokensFunction()
+	local IsSmallScreen = p1.isSmallScreen
+	local v1 = nil
+	local v2 = nil
 	
-	if fFlagLuaAppSduiEdpFallbackAttributionFromCache then
-		if fFlagMigrateGameInfoToStore then
-			var3 = useGameInfoModule(universeId)
+	if FFlagLuaAppSduiEdpFallbackAttributionFromCache then
+		if FFlagMigrateGameInfoToStore then
+			v2 = UseGameInfoModule(UniverseId)
 		else
-			var2 = useGameInfosSelector(universeId)
+			v1 = UseGameInfosSelectorFunction(UniverseId)
 		end
 	end
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		testId = "--edp-fallback-feed-skeleton",
 		tag = {
 			["col size-full auto-y"] = true,
-			["gap-xlarge"] = isSmallScreen,
-			["gap-xxlarge"] = not isSmallScreen,
-			["padding-x-xlarge"] = isSmallScreen,
-			["align-x-left"] = not isSmallScreen,
-			[compositionTags.ContentRegion.Body] = true
+			["gap-xlarge"] = IsSmallScreen,
+			["gap-xxlarge"] = not IsSmallScreen,
+			["padding-x-xlarge"] = IsSmallScreen,
+			["align-x-left"] = not IsSmallScreen,
+			[CompositionTags.ContentRegion.Body] = true
 		}
 	}, {
-		AttributionRow = reactModule.createElement(experienceDetailsFallbackAttributionRowModule, {
+		AttributionRow = ReactModule.createElement(ExperienceDetailsFallbackAttributionRowModule, {
 			isLoading = true,
-			universeId = universeId,
-			gameName = if fFlagMigrateGameInfoToStore then var3 and var3.name else var2 and var2.name,
-			isSmallScreen = isSmallScreen,
+			universeId = UniverseId,
+			gameName = if FFlagMigrateGameInfoToStore then v2 and v2.name else v1 and v1.name,
+			isSmallScreen = IsSmallScreen,
 			launchSource = p1.launchSource,
 			referralSource = p1.referralSource,
 			experienceJoinData = p1.experienceJoinData,
 			placeIdOverride = p1.placeIdOverride
 		}),
-		MediaGallerySkeleton = reactModule.createElement(view, {
+		MediaGallerySkeleton = ReactModule.createElement(View, {
 			tag = "size-full-0",
-			LayoutOrder = if isSmallScreen then 2 else 3,
+			LayoutOrder = if IsSmallScreen then 2 else 3,
 			aspectRatio = {
-				AspectRatio = 1.777777777778,
+				AspectRatio = 1.7777777777777777,
 				AspectType = Enum.AspectType.ScaleWithParentSize,
 				DominantAxis = Enum.DominantAxis.Width
 			}
 		}, {
-			Skeleton = reactModule.createElement(skeleton, { Size = UDim2.fromScale(1, 1), radius = radius.Medium })
+			Skeleton = ReactModule.createElement(Skeleton, { Size = UDim2.fromScale(1, 1), radius = Radius.Medium })
 		}),
-		ActionModuleSkeleton = reactModule.createElement(view, {
+		ActionModuleSkeleton = ReactModule.createElement(View, {
 			tag = "row gap-small size-full-0 auto-y",
-			LayoutOrder = if isSmallScreen then 3 else 2
+			LayoutOrder = if IsSmallScreen then 3 else 2
 		}, {
-			Chip1 = reactModule.createElement(skeleton, {
+			Chip1 = ReactModule.createElement(Skeleton, {
 				LayoutOrder = 1,
-				Size = UDim2.fromOffset(var1.Size.Size_2800, var1.Size.Size_800),
-				radius = radius.Large
+				Size = UDim2.fromOffset(UseTokensResult.Size.Size_2800, UseTokensResult.Size.Size_800),
+				radius = Radius.Large
 			}),
-			Chip2 = reactModule.createElement(skeleton, {
+			Chip2 = ReactModule.createElement(Skeleton, {
 				LayoutOrder = 2,
-				Size = UDim2.fromOffset(var1.Size.Size_2800, var1.Size.Size_800),
-				radius = radius.Large
+				Size = UDim2.fromOffset(UseTokensResult.Size.Size_2800, UseTokensResult.Size.Size_800),
+				radius = Radius.Large
 			}),
-			Chip3 = reactModule.createElement(skeleton, {
+			Chip3 = ReactModule.createElement(Skeleton, {
 				LayoutOrder = 3,
-				Size = UDim2.fromOffset(var1.Size.Size_2800, var1.Size.Size_800),
-				radius = radius.Large
+				Size = UDim2.fromOffset(UseTokensResult.Size.Size_2800, UseTokensResult.Size.Size_800),
+				radius = Radius.Large
 			}),
-			Chip4 = reactModule.createElement(skeleton, {
+			Chip4 = ReactModule.createElement(Skeleton, {
 				LayoutOrder = 4,
-				Size = UDim2.fromOffset(var1.Size.Size_2800, var1.Size.Size_800),
-				radius = radius.Large
+				Size = UDim2.fromOffset(UseTokensResult.Size.Size_2800, UseTokensResult.Size.Size_800),
+				radius = Radius.Large
 			}),
-			Chip5 = reactModule.createElement(skeleton, {
+			Chip5 = ReactModule.createElement(Skeleton, {
 				LayoutOrder = 5,
-				Size = UDim2.fromOffset(var1.Size.Size_2800, var1.Size.Size_800),
-				radius = radius.Large
+				Size = UDim2.fromOffset(UseTokensResult.Size.Size_2800, UseTokensResult.Size.Size_800),
+				radius = Radius.Large
 			})
 		}),
-		DescriptionSkeleton = reactModule.createElement(view, {
+		DescriptionSkeleton = ReactModule.createElement(View, {
 			tag = "col gap-medium size-full-0 auto-y",
 			LayoutOrder = 4
 		}, {
-			HeaderSkeleton = reactModule.createElement(skeleton, {
+			HeaderSkeleton = ReactModule.createElement(Skeleton, {
 				LayoutOrder = 1,
-				Size = UDim2.fromOffset(var1.Size.Size_2800 * 2, var1.Typography.HeadingSmall.LineHeight * var1.Typography.HeadingSmall.FontSize),
-				radius = radius.Small
+				Size = UDim2.fromOffset(UseTokensResult.Size.Size_2800 * 2, UseTokensResult.Typography.HeadingSmall.LineHeight * UseTokensResult.Typography.HeadingSmall.FontSize),
+				radius = Radius.Small
 			}),
-			TextSkeleton = reactModule.createElement(skeleton, {
+			TextSkeleton = ReactModule.createElement(Skeleton, {
 				LayoutOrder = 2,
-				Size = UDim2.new(1, 0, 0, var1.Typography.BodyLarge.LineHeight * var1.Typography.BodyLarge.FontSize * 3),
-				radius = radius.Small
+				Size = UDim2.new(1, 0, 0, UseTokensResult.Typography.BodyLarge.LineHeight * UseTokensResult.Typography.BodyLarge.FontSize * 3),
+				radius = Radius.Small
 			})
 		})
 	})
 end
 
 return {
-	Skeleton = reactModule.memo(ExperienceDetailsFeedSkeleton),
-	Error = reactModule.memo(function(p1)
-		-- upvalues: useTokens (ref), useGameInfoModule (ref), signalsReactModule (ref), dataHydrationModule (ref), useLocalization (ref), reactModule (ref), ExperienceDetailsFeedSkeleton (ref), view (ref), icon (ref), foundationModule (ref), text (ref), compositionTags (ref), experienceDetailsFallbackAttributionRowModule (ref), button (ref), buttonVariant (ref)
-		local universeId = p1.universeId
-		local isSmallScreen = p1.isSmallScreen
-		local var1 = useTokens()
-		local var2 = useGameInfoModule(universeId)
-		local var3 = signalsReactModule.useSignalState(dataHydrationModule.Game.getAgeRecommendationStore(false).getAgeRecommendation(universeId).data)
-		local var4 = useLocalization({
+	Skeleton = ReactModule.memo(ExperienceDetailsFeedSkeleton),
+	Error = ReactModule.memo(function(p1) --[[ Line: 168 | Named "ExperienceDetailsFeedError" ]]
+		-- upvalues: UseTokensFunction (copy), UseGameInfoModule (copy), SignalsReactModule (copy), DataHydrationModule (copy), UseLocalizationFunction (copy), ReactModule (copy), ExperienceDetailsFeedSkeleton (copy), View (copy), Icon (copy), FoundationModule (copy), Text (copy), CompositionTags (copy), ExperienceDetailsFallbackAttributionRowModule (copy), Button (copy), ButtonVariant (copy)
+		local UniverseId = p1.universeId
+		local IsSmallScreen = p1.isSmallScreen
+		local UseTokensResult = UseTokensFunction()
+		local UseGameInfoModuleResult = UseGameInfoModule(UniverseId)
+		local UseSignalStateResult = SignalsReactModule.useSignalState(DataHydrationModule.Game.getAgeRecommendationStore(false).getAgeRecommendation(UniverseId).data)
+		local UseLocalizationResult = UseLocalizationFunction({
 			somethingWentWrongMessage = "Feature.Toast.NetworkingError.SomethingIsWrong",
 			experienceUnavailableMessage = "Feature.GamePage.QuickLaunch.LaunchError.TemporarilyUnavailable",
 			retryButtonText = "InGame.CommonUI.Button.Retry"
 		})
 		
-		if var2 == nil then
-			return reactModule.createElement(ExperienceDetailsFeedSkeleton, {
-				universeId = universeId,
-				isSmallScreen = isSmallScreen,
+		if UseGameInfoModuleResult == nil then
+			return ReactModule.createElement(ExperienceDetailsFeedSkeleton, {
+				universeId = UniverseId,
+				isSmallScreen = IsSmallScreen,
 				launchSource = p1.launchSource,
 				referralSource = p1.referralSource,
 				experienceJoinData = p1.experienceJoinData,
 				placeIdOverride = p1.placeIdOverride
 			})
-		end
-		local var5
-		local creator = var2.creator
-		local name = var2.name
-		local name_1 = creator and creator.name
-		
-		if creator then
-			var5 = creator.hasVerifiedBadge == true
-			var5 = nil
 		else
-			var5 = false
-		end
-		return if var2.isUnavailable == true then reactModule.createElement(view, {
-			tag = "col align-x-center align-y-center size-full-0 auto-y",
-			testId = "--edp-fallback-feed-unavailable"
-		}, {
-			ErrorIcon = reactModule.createElement(icon, {
-				LayoutOrder = 1,
-				size = var1.Size.Size_2500,
-				name = foundationModule.Enums.IconName.TriangleExclamation
-			}),
-			ErrorText = reactModule.createElement(text, {
-				tag = "auto-xy padding-top-medium text-body-large text-align-x-center content-default",
-				LayoutOrder = 2,
-				Text = var4.experienceUnavailableMessage
-			})
-		}) else reactModule.createElement(view, {
-			testId = "--edp-fallback-feed-error",
-			tag = {
-				["col size-full auto-y"] = true,
-				["gap-xlarge"] = isSmallScreen,
-				["gap-xxlarge"] = not isSmallScreen,
-				["padding-x-xlarge"] = isSmallScreen,
-				["align-x-left"] = not isSmallScreen,
-				[compositionTags.ContentRegion.Body] = true
-			}
-		}, {
-			AttributionRow = reactModule.createElement(experienceDetailsFallbackAttributionRowModule, {
-				universeId = universeId,
-				gameName = name,
-				creatorName = name_1,
-				hasVerifiedBadge = var5,
-				ageRecDisplayName = var3 and var3.displayNameWithHeaderShort,
-				isSmallScreen = isSmallScreen,
-				launchSource = p1.launchSource,
-				referralSource = p1.referralSource,
-				experienceJoinData = p1.experienceJoinData,
-				placeIdOverride = p1.placeIdOverride
-			}),
-			ErrorBlock = reactModule.createElement(view, {
-				tag = "col align-x-center size-full-0 auto-y padding-top-xxlarge",
-				LayoutOrder = 2,
-				testId = "--edp-fallback-error-state"
+			local Creator = UseGameInfoModuleResult.creator
+			local Name = UseGameInfoModuleResult.name
+			local Name1 = Creator and Creator.name
+			local IsHasVerifiedBadge: boolean = if Creator then Creator.hasVerifiedBadge == true else false
+			local DisplayNameWithHeaderShort = UseSignalStateResult and UseSignalStateResult.displayNameWithHeaderShort
+			
+			return if UseGameInfoModuleResult.isUnavailable == true then ReactModule.createElement(View, {
+				tag = "col align-x-center align-y-center size-full-0 auto-y",
+				testId = "--edp-fallback-feed-unavailable"
 			}, {
-				ErrorIcon = reactModule.createElement(icon, {
+				ErrorIcon = ReactModule.createElement(Icon, {
 					LayoutOrder = 1,
-					size = var1.Size.Size_2500,
-					name = foundationModule.Enums.IconName.TriangleExclamation
+					size = UseTokensResult.Size.Size_2500,
+					name = FoundationModule.Enums.IconName.TriangleExclamation
 				}),
-				ErrorText = reactModule.createElement(text, {
-					tag = "auto-xy padding-bottom-medium text-body-large text-align-x-center content-default",
+				ErrorText = ReactModule.createElement(Text, {
+					tag = "auto-xy padding-top-medium text-body-large text-align-x-center content-default",
 					LayoutOrder = 2,
-					Text = var4.somethingWentWrongMessage
+					Text = UseLocalizationResult.experienceUnavailableMessage
+				})
+			}) else ReactModule.createElement(View, {
+				testId = "--edp-fallback-feed-error",
+				tag = {
+					["col size-full auto-y"] = true,
+					["gap-xlarge"] = IsSmallScreen,
+					["gap-xxlarge"] = not IsSmallScreen,
+					["padding-x-xlarge"] = IsSmallScreen,
+					["align-x-left"] = not IsSmallScreen,
+					[CompositionTags.ContentRegion.Body] = true
+				}
+			}, {
+				AttributionRow = ReactModule.createElement(ExperienceDetailsFallbackAttributionRowModule, {
+					universeId = UniverseId,
+					gameName = Name,
+					creatorName = Name1,
+					hasVerifiedBadge = IsHasVerifiedBadge,
+					ageRecDisplayName = DisplayNameWithHeaderShort,
+					isSmallScreen = IsSmallScreen,
+					launchSource = p1.launchSource,
+					referralSource = p1.referralSource,
+					experienceJoinData = p1.experienceJoinData,
+					placeIdOverride = p1.placeIdOverride
 				}),
-				RetryButton = reactModule.createElement(button, {
-					LayoutOrder = 3,
-					testId = "--edp-fallback-error-state-retry",
-					text = var4.retryButtonText,
-					onActivated = p1.refresh,
-					variant = buttonVariant.Standard
+				ErrorBlock = ReactModule.createElement(View, {
+					tag = "col align-x-center size-full-0 auto-y padding-top-xxlarge",
+					LayoutOrder = 2,
+					testId = "--edp-fallback-error-state"
+				}, {
+					ErrorIcon = ReactModule.createElement(Icon, {
+						LayoutOrder = 1,
+						size = UseTokensResult.Size.Size_2500,
+						name = FoundationModule.Enums.IconName.TriangleExclamation
+					}),
+					ErrorText = ReactModule.createElement(Text, {
+						tag = "auto-xy padding-bottom-medium text-body-large text-align-x-center content-default",
+						LayoutOrder = 2,
+						Text = UseLocalizationResult.somethingWentWrongMessage
+					}),
+					RetryButton = ReactModule.createElement(Button, {
+						LayoutOrder = 3,
+						testId = "--edp-fallback-error-state-retry",
+						text = UseLocalizationResult.retryButtonText,
+						onActivated = p1.refresh,
+						variant = ButtonVariant.Standard
+					})
 				})
 			})
-		})
+		end
 	end)
 }

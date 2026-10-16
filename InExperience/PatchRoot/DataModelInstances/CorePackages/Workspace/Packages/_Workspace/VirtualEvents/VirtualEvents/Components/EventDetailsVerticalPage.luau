@@ -1,150 +1,152 @@
-﻿local virtualEvents = script:FindFirstAncestor("VirtualEvents")
-local apolloClientModule = require(virtualEvents.Parent.ApolloClient)
-local _ = require(virtualEvents.Parent.GraphQLServer)
-local cryoModule = require(virtualEvents.Parent.Cryo)
-local reactModule = require(virtualEvents.Parent.React)
-local UIBloxModule = require(virtualEvents.Parent.UIBlox)
-local focusNavigationUtilsModule = require(virtualEvents.Parent.FocusNavigationUtils)
-local useRoactService = require(virtualEvents.Parent.RobloxAppHooks).useRoactService
-local roactNetworking = require(virtualEvents.Parent.RoactServiceTags).RoactNetworking
-local formFactor = require(virtualEvents.Parent.FormFactor).Enums.FormFactor
-local useSelector = require(virtualEvents.Parent.RoactUtils).Hooks.RoactRodux.useSelector
-local getEventTimerStatusModule = require(virtualEvents.Common.getEventTimerStatus)
-local findFirstImageInMediaModule = require(virtualEvents.Common.findFirstImageInMedia)
-local fetchEventThumbnailModule = require(virtualEvents.Common.fetchEventThumbnail)
-local eventDetailsContainerModule = require(virtualEvents.Components.EventDetailsContainer)
-local useCTAPropsModule = require(virtualEvents.Hooks.useCTAProps)
-local useAnimationModule = require(virtualEvents.Hooks.useAnimation)
-local requestsModule = require(virtualEvents.requests)
-local _ = require(virtualEvents.Parent.VirtualEventsState)
-local constantsModule = require(virtualEvents.constants)
-local useMutation = apolloClientModule.useMutation
-local images = UIBloxModule.App.ImageSet.Images
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local utilityActionIcon = UIBloxModule.App.Button.UtilityActionIcon
-local loadableImage = UIBloxModule.App.Loading.LoadableImage
-local withStyle = UIBloxModule.Core.Style.withStyle
-local focusNavigableSurfaceWrapper = focusNavigationUtilsModule.FocusNavigableSurfaceWrapper
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local closeSmall = images["icons/navigation/close_small"]
+﻿local VirtualEvents = script:FindFirstAncestor("VirtualEvents")
+local _ = require(VirtualEvents.Parent.GraphQLServer)
+local CryoModule = require(VirtualEvents.Parent.Cryo)
+local ReactModule = require(VirtualEvents.Parent.React)
+local UIBloxModule = require(VirtualEvents.Parent.UIBlox)
+local FocusNavigationUtilsModule = require(VirtualEvents.Parent.FocusNavigationUtils)
+local UseRoactServiceFunction = require(VirtualEvents.Parent.RobloxAppHooks).useRoactService
+local RoactNetworking = require(VirtualEvents.Parent.RoactServiceTags).RoactNetworking
+local FormFactor = require(VirtualEvents.Parent.FormFactor).Enums.FormFactor
+local UseSelectorFunction = require(VirtualEvents.Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local GetEventTimerStatusModule = require(VirtualEvents.Common.getEventTimerStatus)
+local FindFirstImageInMediaModule = require(VirtualEvents.Common.findFirstImageInMedia)
+local FetchEventThumbnailModule = require(VirtualEvents.Common.fetchEventThumbnail)
+local EventDetailsContainerModule = require(VirtualEvents.Components.EventDetailsContainer)
+local UseCTAPropsModule = require(VirtualEvents.Hooks.useCTAProps)
+local UseAnimationModule = require(VirtualEvents.Hooks.useAnimation)
+local RequestsModule = require(VirtualEvents.requests)
+local _ = require(VirtualEvents.Parent.VirtualEventsState)
+local ConstantsModule = require(VirtualEvents.constants)
+local UseMutationFunction = require(VirtualEvents.Parent.ApolloClient).useMutation
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local UtilityActionIcon = UIBloxModule.App.Button.UtilityActionIcon
+local LoadableImage = UIBloxModule.App.Loading.LoadableImage
+local WithStyleFunction = UIBloxModule.Core.Style.withStyle
+local FocusNavigableSurfaceWrapper = FocusNavigationUtilsModule.FocusNavigableSurfaceWrapper
+local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+local IconsNavigationCloseSmall = UIBloxModule.App.ImageSet.Images["icons/navigation/close_small"]
 
-local var1 = function() end
+local function OnClose() --[[ Line: 45 ]] end
 
-local t = { onClose = var1, onJoinEvent = var1, onShare = var1 }
+local config = {
+	onClose = OnClose,
+	onJoinEvent = OnClose,
+	onShare = OnClose
+}
 
-return function(p1)
-	-- upvalues: cryoModule (ref), t (ref), useRoactService (ref), roactNetworking (ref), useSelector (ref), formFactor (ref), reactModule (ref), findFirstImageInMediaModule (ref), fetchEventThumbnailModule (ref), constantsModule (ref), useMutation (ref), requestsModule (ref), getEventTimerStatusModule (ref), useCTAPropsModule (ref), useAnimationModule (ref), withStyle (ref), utilityActionIcon (ref), imageSetLabel (ref), closeSmall (ref), loadableImage (ref), eventDetailsContainerModule (ref), focusNavigableSurfaceWrapper (ref), focusNavigableSurfaceIdentifierEnum (ref)
-	local var2 = cryoModule.Dictionary.join(t, p1)
-	local var3 = useRoactService(roactNetworking)
-	local var4 = useSelector(function(p2)
+return function(p1) --[[ Line: 71 | Named "EventDetailsVerticalPage" ]]
+	-- upvalues: CryoModule (copy), config (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), UseSelectorFunction (copy), FormFactor (copy), ReactModule (copy), FindFirstImageInMediaModule (copy), FetchEventThumbnailModule (copy), ConstantsModule (copy), UseMutationFunction (copy), RequestsModule (copy), GetEventTimerStatusModule (copy), UseCTAPropsModule (copy), UseAnimationModule (copy), WithStyleFunction (copy), UtilityActionIcon (copy), ImageSetLabel (copy), IconsNavigationCloseSmall (copy), LoadableImage (copy), EventDetailsContainerModule (copy), FocusNavigableSurfaceWrapper (copy), FocusNavigableSurfaceIdentifierEnum (copy)
+	local JoinResult = CryoModule.Dictionary.join(config, p1)
+	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
+	local IsUseSelectorResultMatch = UseSelectorFunction(function(p2) --[[ Line: 76 ]]
 		return p2.FormFactor
-	end) == formFactor.WIDE
-	local media = p1.virtualEvent.media
-	local var5, var6 = reactModule.useState(0)
-	local var7, var8 = reactModule.useState(0)
-	local var9, var10 = reactModule.useState(nil)
-	local var11 = if media then findFirstImageInMediaModule(media) else nil
-	reactModule.useEffect(function()
-		-- upvalues: fetchEventThumbnailModule (copy), var3 (ref), p1 (ref), var11 (ref), var10 (ref)
-		local var12 = true
-		fetchEventThumbnailModule(var3, p1.virtualEvent.id, var11):andThen(function(p2)
-			-- upvalues: var12 (write), var10 (copy)
-			if var12 then
-				var10(p2)
+	end) == FormFactor.WIDE
+	local Media = p1.virtualEvent.media
+	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(0)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(nil)
+	local FirstImageInMediaModule = if Media then FindFirstImageInMediaModule(Media) else nil
+	ReactModule.useEffect(function() --[[ Line: 88 ]]
+		-- upvalues: FetchEventThumbnailModule (upval), UseRoactServiceResult (copy), p1 (copy), FirstImageInMediaModule (copy), UseStateResult2_2 (copy)
+		local Flag = true
+		FetchEventThumbnailModule(UseRoactServiceResult, p1.virtualEvent.id, FirstImageInMediaModule):andThen(function(Result) --[[ Line: 90 ]]
+			-- upvalues: Flag (ref), UseStateResult2_2 (upval)
+			if Flag then
+				UseStateResult2_2(Result)
 			end
 		end)
 		
-		return function()
-			-- upvalues: var12 (write)
-			var12 = false
+		return function() --[[ Line: 95 ]]
+			-- upvalues: Flag (ref)
+			Flag = false
 		end
-	end, { p1.virtualEvent.id, var11 })
-	local var12 = reactModule.useCallback(function(p2)
-		-- upvalues: constantsModule (copy), var5 (ref), var6 (ref), var7 (ref), var8 (ref)
-		local minValue = math.min(constantsModule.HORIZONTAL_ASPECT_RATIO * p2.AbsoluteSize.X, p2.AbsoluteSize.Y)
+	end, { p1.virtualEvent.id, FirstImageInMediaModule })
+	local UseResult = ReactModule.useCallback(function(Frame: Frame) --[[ Line: 100 ]]
+		-- upvalues: ConstantsModule (upval), UseStateResult (copy), UseStateResult2 (copy), UseStateResult1 (copy), UseStateResult2_1 (copy)
+		local Smallest = math.min(ConstantsModule.HORIZONTAL_ASPECT_RATIO * Frame.AbsoluteSize.X, Frame.AbsoluteSize.Y)
 		
-		if minValue ~= var5 then
-			var6(minValue)
+		if Smallest ~= UseStateResult then
+			UseStateResult2(Smallest)
 		end
-		local var13 = p2.AbsoluteSize.Y - minValue + 40
+		local NewY = Frame.AbsoluteSize.Y - Smallest + 40
 		
-		if var13 ~= var7 then
-			var8(var13)
+		if NewY ~= UseStateResult1 then
+			UseStateResult2_1(NewY)
 		end
-	end, { var5, var7 })
-	local var13 = useMutation(requestsModule.UPDATE_RSVP_STATUS, {
+	end, { UseStateResult, UseStateResult1 })
+	local UseMutationResult = UseMutationFunction(RequestsModule.UPDATE_RSVP_STATUS, {
 		variables = { virtualEventId = p1.virtualEvent.id },
-		update = function(_, p2, p3)
-			-- upvalues: cryoModule (copy)
-			local virtualEvent = p3.data.virtualEventRsvp.virtualEvent
+		update = function(_, p2, p3) --[[ Line: 116 ]]
+			-- upvalues: CryoModule (upval)
+			local VirtualEvent = p3.data.virtualEventRsvp.virtualEvent
 			p2:modify({
-				id = p2:identify(virtualEvent),
+				id = p2:identify(VirtualEvent),
 				fields = {
-					rsvpCounters = function(_, p4)
-						-- upvalues: virtualEvent (ref), cryoModule (copy)
-						return cryoModule.Dictionary.join(p4, {
-							going = p4.going + (if virtualEvent.userRsvpStatus == "going" then 1 else -1)
+					rsvpCounters = function(_, p4) --[[ Line: 122 ]]
+						-- upvalues: VirtualEvent (copy), CryoModule (upval)
+						return CryoModule.Dictionary.join(p4, {
+							going = p4.going + (if VirtualEvent.userRsvpStatus == "going" then 1 else -1)
 						})
 					end
 				}
 			})
 		end
 	})
-	local var14 = reactModule.useMemo(function()
-		-- upvalues: getEventTimerStatusModule (copy), var2 (ref)
-		return getEventTimerStatusModule(var2.virtualEvent, var2.currentTime)
-	end, { var2.virtualEvent, var2.currentTime })
-	local var15 = useCTAPropsModule(var2.virtualEvent, var14, p1.notifyMeUseEmphasisVariant, {
-		onClose = var2.onClose,
-		onJoinEvent = var2.onJoinEvent,
-		onRsvpChanged = reactModule.useCallback(function()
-			-- upvalues: var2 (ref), var13 (ref)
-			var13[1]({
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 133 ]]
+		-- upvalues: GetEventTimerStatusModule (upval), JoinResult (copy)
+		return GetEventTimerStatusModule(JoinResult.virtualEvent, JoinResult.currentTime)
+	end, { JoinResult.virtualEvent, JoinResult.currentTime })
+	local UseCTAPropsModuleResult = UseCTAPropsModule(JoinResult.virtualEvent, UseMemoResult, p1.notifyMeUseEmphasisVariant, {
+		onClose = JoinResult.onClose,
+		onJoinEvent = JoinResult.onJoinEvent,
+		onRsvpChanged = ReactModule.useCallback(function() --[[ Line: 137 ]]
+			-- upvalues: JoinResult (copy), UseMutationResult (copy)
+			UseMutationResult[1]({
 				variables = {
-					rsvpStatus = if var2.virtualEvent.userRsvpStatus ~= "going" then "notGoing" else "going"
+					rsvpStatus = if JoinResult.virtualEvent.userRsvpStatus == "going" then "notGoing" else "going"
 				}
-			}):andThen(function(p2)
-				-- upvalues: var2 (copy)
-				if var2.onRsvpChanged then
-					var2.onRsvpChanged(p2.data.virtualEventRsvp.virtualEvent.userRsvpStatus, p2.data.virtualEventRsvp.shouldSeeNotificationsUpsellModal)
+			}):andThen(function(Result) --[[ Line: 151 ]]
+				-- upvalues: JoinResult (upval)
+				if JoinResult.onRsvpChanged then
+					JoinResult.onRsvpChanged(Result.data.virtualEventRsvp.virtualEvent.userRsvpStatus, Result.data.virtualEventRsvp.shouldSeeNotificationsUpsellModal)
 				end
 			end)
-		end, { var2.virtualEvent }),
-		onShare = var2.onShare
+		end, { JoinResult.virtualEvent }),
+		onShare = JoinResult.onShare
 	})
-	local var16, var17 = reactModule.useState(constantsModule.CONTAINER_WIDTH)
-	useAnimationModule({
+	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(ConstantsModule.CONTAINER_WIDTH)
+	UseAnimationModule({
 		endOffset = 0,
 		duration = 0.1,
 		easingStyle = "linear",
-		startOffset = var16,
-		setAnimationOffset = var17
+		startOffset = UseStateResult4,
+		setAnimationOffset = UseStateResult2_3
 	})
 	
-	return withStyle(function(p2)
-		-- upvalues: reactModule (copy), var4 (ref), utilityActionIcon (copy), p1 (ref), imageSetLabel (copy), closeSmall (copy), var12 (ref), loadableImage (copy), var5 (ref), var9 (ref), eventDetailsContainerModule (copy), var14 (ref), var15 (ref), var7 (ref), focusNavigableSurfaceWrapper (copy), focusNavigableSurfaceIdentifierEnum (copy), var16 (ref), constantsModule (copy)
-		return reactModule.createElement("ImageButton", {
+	return WithStyleFunction(function(p2) --[[ Line: 178 ]]
+		-- upvalues: ReactModule (upval), IsUseSelectorResultMatch (copy), UtilityActionIcon (upval), p1 (copy), ImageSetLabel (upval), IconsNavigationCloseSmall (upval), UseResult (copy), LoadableImage (upval), UseStateResult (copy), UseStateResult3 (copy), EventDetailsContainerModule (upval), UseMemoResult (copy), UseCTAPropsModuleResult (copy), UseStateResult1 (copy), FocusNavigableSurfaceWrapper (upval), FocusNavigableSurfaceIdentifierEnum (upval), UseStateResult4 (copy), ConstantsModule (upval)
+		return ReactModule.createElement("ImageButton", {
 			ZIndex = 4,
 			Size = UDim2.new(1, 0, 1, 0),
 			BackgroundTransparency = 1,
 			BackgroundColor3 = Color3.fromRGB(0, 0, 0),
 			Active = true,
 			AutoButtonColor = false,
-			[reactModule.Event.Activated] = p1.onClose
+			[ReactModule.Event.Activated] = p1.onClose
 		}, {
-			EventDetailsWindow = reactModule.createElement(focusNavigableSurfaceWrapper, {
+			EventDetailsWindow = ReactModule.createElement(FocusNavigableSurfaceWrapper, {
 				isIsolated = true,
-				surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.PopUp,
+				surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.PopUp,
 				frameProps = {
 					BorderSizePixel = 0,
 					AnchorPoint = Vector2.new(1, 0),
-					Position = UDim2.new(1, var16, 0, 0),
-					Size = if var4 then UDim2.new(0, constantsModule.CONTAINER_WIDTH, 1, 0) else UDim2.fromScale(1, 1),
+					Position = UDim2.new(1, UseStateResult4, 0, 0),
+					Size = if IsUseSelectorResultMatch then UDim2.new(0, ConstantsModule.CONTAINER_WIDTH, 1, 0) else UDim2.fromScale(1, 1),
 					BackgroundTransparency = p2.Theme.BackgroundDefault.Transparency,
 					BackgroundColor3 = p2.Theme.BackgroundDefault.Color
 				}
 			}, {
-				EventDetailsWrapper = reactModule.createElement("ScrollingFrame", {
+				EventDetailsWrapper = ReactModule.createElement("ScrollingFrame", {
 					BackgroundTransparency = 1,
 					ScrollBarThickness = 0,
 					Selectable = false,
@@ -154,50 +156,50 @@ return function(p1)
 					CanvasSize = UDim2.new(1, 0, 0, 0),
 					AutomaticCanvasSize = Enum.AutomaticSize.Y
 				}, {
-					EventDetailsVerticalPage = reactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, {
-						CloseButtonContainer = reactModule.createElement("Frame", {
+					EventDetailsVerticalPage = ReactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, {
+						CloseButtonContainer = ReactModule.createElement("Frame", {
 							ZIndex = 3,
 							BackgroundTransparency = 1,
 							Size = UDim2.fromOffset(48, 48),
-							Position = if var4 then UDim2.new(1, -64, 0, 16) else UDim2.fromOffset(16, 16)
+							Position = if IsUseSelectorResultMatch then UDim2.new(1, -64, 0, 16) else UDim2.fromOffset(16, 16)
 						}, {
-							CloseButton = reactModule.createElement(utilityActionIcon, { ZIndex = 1, onMedia = true, onActivated = p1.onClose }),
-							CloseIcon = reactModule.createElement(imageSetLabel, {
+							CloseButton = ReactModule.createElement(UtilityActionIcon, { ZIndex = 1, onMedia = true, onActivated = p1.onClose }),
+							CloseIcon = ReactModule.createElement(ImageSetLabel, {
 								ZIndex = 2,
 								BackgroundTransparency = 1,
 								Size = UDim2.fromOffset(24, 24),
-								Image = closeSmall,
+								Image = IconsNavigationCloseSmall,
 								ImageColor3 = p2.Theme.IconEmphasis.Color,
 								Position = UDim2.fromOffset(12, 12)
 							})
 						}),
-						MediaContainer = reactModule.createElement("Frame", {
+						MediaContainer = ReactModule.createElement("Frame", {
 							BackgroundTransparency = 1,
 							Size = UDim2.fromScale(1, 1),
-							[reactModule.Change.AbsoluteSize] = var12,
+							[ReactModule.Change.AbsoluteSize] = UseResult,
 							ZIndex = 1
 						}, {
-							Thumbnail = reactModule.createElement(loadableImage, {
+							Thumbnail = ReactModule.createElement(LoadableImage, {
 								BackgroundTransparency = 1,
 								useShimmerAnimationWhileLoading = true,
 								showFailedStateWhenLoadingFailed = true,
 								Position = UDim2.fromScale(0, 0),
-								Size = UDim2.new(1, 0, 0, var5),
+								Size = UDim2.new(1, 0, 0, UseStateResult),
 								ScaleType = Enum.ScaleType.Crop,
-								Image = var9
+								Image = UseStateResult3
 							})
 						}),
-						EventContainer = reactModule.createElement("Frame", {
+						EventContainer = ReactModule.createElement("Frame", {
 							BackgroundTransparency = 1,
 							ZIndex = 2,
 							Size = UDim2.fromScale(1, 1)
 						}, {
-							EventDetailsContainer = reactModule.createElement(eventDetailsContainerModule, {
+							EventDetailsContainer = ReactModule.createElement(EventDetailsContainerModule, {
 								virtualEvent = p1.virtualEvent,
-								eventStatus = var14,
-								isWideMode = var4,
-								ctaProps = var15,
-								bottomHeight = var7,
+								eventStatus = UseMemoResult,
+								isWideMode = IsUseSelectorResultMatch,
+								ctaProps = UseCTAPropsModuleResult,
+								bottomHeight = UseStateResult1,
 								onExperienceTileActivated = p1.onExperienceTileActivated
 							})
 						})

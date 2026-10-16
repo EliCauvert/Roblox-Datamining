@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.Songbird.Songbird)
+﻿return (require(script.Parent._Workspace.Songbird.Songbird))

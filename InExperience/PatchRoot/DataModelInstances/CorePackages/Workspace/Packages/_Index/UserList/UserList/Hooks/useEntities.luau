@@ -1,17 +1,17 @@
-﻿local userList = script:FindFirstAncestor("UserList")
-local reactModule = require(userList.Parent.React)
-local _ = require(userList.Common.Enums)
-local _ = require(userList.Common.Types)
+﻿local UserList = script:FindFirstAncestor("UserList")
+local ReactModule = require(UserList.Parent.React)
+local _ = require(UserList.Common.Enums)
+local _ = require(UserList.Common.Types)
 
-return function(p1)
-	-- upvalues: reactModule (ref)
-	return reactModule.useMemo(function()
-		-- upvalues: p1 (ref)
-		local t = {}
+return function(p1) --[[ Line: 19 | Named "useEntities" ]]
+	-- upvalues: ReactModule (copy)
+	return (ReactModule.useMemo(function() --[[ Line: 20 ]]
+		-- upvalues: p1 (copy)
+		local EntitiesMap = {}
 		
-		for i, v in p1 do
-			t[v.id] = v
+		for _, value in p1 do
+			EntitiesMap[value.id] = value
 		end
-		return { entitiesMap = t }
-	end, { p1 })
+		return { entitiesMap = EntitiesMap }
+	end, { p1 }))
 end

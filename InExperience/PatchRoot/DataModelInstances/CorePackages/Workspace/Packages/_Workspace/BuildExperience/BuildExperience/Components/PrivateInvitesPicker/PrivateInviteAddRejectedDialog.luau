@@ -1,46 +1,46 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local privateInviteUserRowModule = require(script.Parent.PrivateInviteUserRow)
-local dialog = foundationModule.Dialog
-local view = foundationModule.View
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local dialogSize = foundationModule.Enums.DialogSize
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local PrivateInviteUserRowModule = require(script.Parent.PrivateInviteUserRow)
+local Dialog = FoundationModule.Dialog
+local View = FoundationModule.View
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local DialogSize = FoundationModule.Enums.DialogSize
 
-return function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), reactModule (ref), privateInviteUserRowModule (ref), dialog (ref), dialogSize (ref), view (ref), buttonVariant (ref)
-	local var1 = useLocalization({
-		action = localizationStringsModule.PRIVATE_INVITES_ADD_ERROR_ACTION,
-		title = localizationStringsModule.PRIVATE_INVITES_ADD_REJECTED_TITLE,
-		unknownUser = localizationStringsModule.PRIVATE_INVITES_UNKNOWN_USER
+return function(p1) --[[ Line: 25 | Named "PrivateInviteAddRejectedDialog" ]]
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), PrivateInviteUserRowModule (copy), Dialog (copy), DialogSize (copy), View (copy), ButtonVariant (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
+		action = LocalizationStringsModule.PRIVATE_INVITES_ADD_ERROR_ACTION,
+		title = LocalizationStringsModule.PRIVATE_INVITES_ADD_REJECTED_TITLE,
+		unknownUser = LocalizationStringsModule.PRIVATE_INVITES_UNKNOWN_USER
 	})
-	local t = {}
+	local Elements = {}
 	
-	for i, v in p1.rejectedUserIds do
-		t[`user-{v}`] = reactModule.createElement(privateInviteUserRowModule, {
-			userId = v,
-			layoutOrder = i,
-			unknownText = var1.unknownUser
+	for LayoutOrder, rejectedUserId in p1.rejectedUserIds do
+		Elements[`user-{rejectedUserId}`] = ReactModule.createElement(PrivateInviteUserRowModule, {
+			userId = rejectedUserId,
+			layoutOrder = LayoutOrder,
+			unknownText = UseLocalizationResult.unknownUser
 		})
 	end
-	return reactModule.createElement(dialog.Root, {
+	return ReactModule.createElement(Dialog.Root, {
 		testId = "build-private-invite-add-rejected-dialog",
 		onClose = p1.onDismiss,
-		size = dialogSize.Small
+		size = DialogSize.Small
 	}, {
-		Title = reactModule.createElement(dialog.Title, { LayoutOrder = 1, text = var1.title }),
-		Content = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
-			Users = reactModule.createElement(view, { tag = "col gap-xsmall size-full-0 auto-y" }, t)
+		Title = ReactModule.createElement(Dialog.Title, { LayoutOrder = 1, text = UseLocalizationResult.title }),
+		Content = ReactModule.createElement(Dialog.Content, { LayoutOrder = 2 }, {
+			Users = ReactModule.createElement(View, { tag = "col gap-xsmall size-full-0 auto-y" }, Elements)
 		}),
-		Actions = reactModule.createElement(dialog.Actions, {
+		Actions = ReactModule.createElement(Dialog.Actions, {
 			LayoutOrder = 3,
 			actions = {
 				{
-					text = var1.action,
-					variant = buttonVariant.Emphasis,
+					text = UseLocalizationResult.action,
+					variant = ButtonVariant.Emphasis,
 					onActivated = p1.onDismiss
 				}
 			}

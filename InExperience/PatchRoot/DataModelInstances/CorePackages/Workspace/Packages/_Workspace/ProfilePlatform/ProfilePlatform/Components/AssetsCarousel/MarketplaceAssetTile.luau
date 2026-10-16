@@ -1,52 +1,43 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local catalogItemCard = require(parent.AvatarExperienceCommon).Components.CatalogItemCard.CatalogItemCard
-local itemCardThumbnail = require(parent.AvatarExperienceUIKit).ItemCardComponents.ItemCardThumbnail
-local userLibModule = require(parent.UserLib)
-local constants = userLibModule.Utils.Constants
-local getRbxthumbWithTypeSizeAndOptions = userLibModule.Utils.getRbxthumbWithTypeSizeAndOptions
-local enumsModule = require(profilePlatform.Common.Enums)
-local textKeysModule = require(profilePlatform.Common.TextKeys)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local fFlagProfilePlatformFixResaleLimitedPriceModule = require(profilePlatform.Flags.FFlagProfilePlatformFixResaleLimitedPrice)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local CatalogItemCard = require(Parent.AvatarExperienceCommon).Components.CatalogItemCard.CatalogItemCard
+local ItemCardThumbnail = require(Parent.AvatarExperienceUIKit).ItemCardComponents.ItemCardThumbnail
+local UserLibModule = require(Parent.UserLib)
+local Constants = UserLibModule.Utils.Constants
+local GetRbxthumbWithTypeSizeAndOptionsFunction = UserLibModule.Utils.getRbxthumbWithTypeSizeAndOptions
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local TextKeysModule = require(ProfilePlatform.Common.TextKeys)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local FFlagProfilePlatformFixResaleLimitedPriceModule = require(ProfilePlatform.Flags.FFlagProfilePlatformFixResaleLimitedPrice)
 
-return function(value)
-	-- upvalues: useLocalization (ref), textKeysModule (ref), enumsModule (ref), constants (ref), fFlagProfilePlatformFixResaleLimitedPriceModule (ref), reactModule (ref), catalogItemCard (ref), itemCardThumbnail (ref), getRbxthumbWithTypeSizeAndOptions (ref)
-	local var1 = useLocalization({
-		free = textKeysModule.CatalogLabelFree,
-		offSale = textKeysModule.CatalogLabelOffSale
+return function(p1) --[[ Line: 46 | Named "MarketplaceAssetTile" ]]
+	-- upvalues: UseLocalizationFunction (copy), TextKeysModule (copy), EnumsModule (copy), Constants (copy), FFlagProfilePlatformFixResaleLimitedPriceModule (copy), ReactModule (copy), CatalogItemCard (copy), ItemCardThumbnail (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
+		free = TextKeysModule.CatalogLabelFree,
+		offSale = TextKeysModule.CatalogLabelOffSale
 	})
-	local var2 = if value.itemType == enumsModule.ItemTypes.Bundle then constants.RbxthumbTypes.BundleThumbnail else constants.RbxthumbTypes.Asset
-	local t = nil
 	
-	if value.isOffSale then
-		t = if fFlagProfilePlatformFixResaleLimitedPriceModule and value.lowestResalePrice and value.lowestResalePrice > 0 then {
-			type = enumsModule.PriceLineContentType.Price,
-			price = value.lowestResalePrice
-		} else {
-			type = enumsModule.PriceLineContentType.Text,
-			text = var1.offSale
-		}
-	elseif value.price == 0 then
-		t = {
-			type = enumsModule.PriceLineContentType.Text,
-			text = var1.free
-		}
-	elseif value.price then
-		t = {
-			type = enumsModule.PriceLineContentType.Price,
-			price = value.price
-		}
-	end
-	return reactModule.createElement(catalogItemCard, {
+	return ReactModule.createElement(CatalogItemCard, {
 		Selectable = true,
-		title = value.name,
-		presentationSlot = reactModule.createElement(itemCardThumbnail, {
-			url = getRbxthumbWithTypeSizeAndOptions(value.assetId, var2, 150)
+		title = p1.name,
+		presentationSlot = ReactModule.createElement(ItemCardThumbnail, {
+			url = GetRbxthumbWithTypeSizeAndOptionsFunction(p1.assetId, if p1.itemType == EnumsModule.ItemTypes.Bundle then Constants.RbxthumbTypes.BundleThumbnail else Constants.RbxthumbTypes.Asset, 150)
 		}),
-		onActivated = value.onActivated,
-		priceLineContent = t,
+		onActivated = p1.onActivated,
+		priceLineContent = if p1.isOffSale then if FFlagProfilePlatformFixResaleLimitedPriceModule and p1.lowestResalePrice and p1.lowestResalePrice > 0 then {
+			type = EnumsModule.PriceLineContentType.Price,
+			price = p1.lowestResalePrice
+		} else {
+			type = EnumsModule.PriceLineContentType.Text,
+			text = UseLocalizationResult.offSale
+		} elseif p1.price == 0 then {
+			type = EnumsModule.PriceLineContentType.Text,
+			text = UseLocalizationResult.free
+		} elseif p1.price then {
+			type = EnumsModule.PriceLineContentType.Price,
+			price = p1.price
+		} else nil,
 		Size = UDim2.fromScale(1, 1)
 	})
 end

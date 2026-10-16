@@ -1,59 +1,52 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceTimedOptions").Parent
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local foundationModule = require(parent.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local view = foundationModule.View
-local text = foundationModule.Text
-local enums = foundationModule.Enums
-local localizationService = game:GetService("LocalizationService")
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceTimedOptions").Parent
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local FoundationModule = require(Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local Enums = FoundationModule.Enums
+local LocalizationService = game:GetService("LocalizationService")
 
-local function _(p1)
-	-- upvalues: localizationService (ref)
-	local dateTime = DateTime.fromIsoDate(p1)
+local function _(p1) --[[ Line: 23 | Named "formatExpirationDateTime" ]]
+	-- upvalues: LocalizationService (copy)
+	local _DateTime = DateTime.fromIsoDate(p1)
 	
-	return if dateTime then dateTime:FormatLocalTime("MMM DD, LT", localizationService.RobloxLocaleId) else p1
+	return if _DateTime then _DateTime:FormatLocalTime("MMM DD, LT", LocalizationService.RobloxLocaleId) else p1
 end
 
-return function(p1)
-	-- upvalues: useTokens (ref), useLocalization (ref), reactModule (ref), view (ref), foundationModule (ref), enums (ref), text (ref), localizationService (ref)
-	local var1 = useTokens()
-	local var2 = useLocalization({ itemExpires = "Feature.Durables.Label.ItemExpires" })
-	local createElement = reactModule.createElement
-	local t = {
+return function(Frame) --[[ Line: 34 | Named "ItemExpirationDisplay" ]]
+	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), View (copy), FoundationModule (copy), Enums (copy), Text (copy), LocalizationService (copy)
+	local ExpirationTime = Frame.expirationTime
+	local _DateTime = DateTime.fromIsoDate(ExpirationTime)
+	
+	return ReactModule.createElement(View, {
 		tag = "row align-y-center padding-large radius-medium flex-between size-full-0",
-		backgroundStyle = var1.Color.Surface.Surface_100,
-		LayoutOrder = p1.LayoutOrder,
+		backgroundStyle = UseTokensFunction().Color.Surface.Surface_100,
+		LayoutOrder = Frame.LayoutOrder,
 		AutomaticSize = Enum.AutomaticSize.Y
-	}
-	local t_1 = {
-		LeftContent = reactModule.createElement(view, {
+	}, {
+		LeftContent = ReactModule.createElement(View, {
 			tag = "row align-y-center gap-small auto-xy",
 			LayoutOrder = 1
 		}, {
-			Icon = reactModule.createElement(foundationModule.Icon, {
+			Icon = ReactModule.createElement(FoundationModule.Icon, {
 				LayoutOrder = 1,
-				name = enums.IconName.Clock,
-				variant = enums.IconVariant.Regular,
-				size = enums.IconSize.Small
+				name = Enums.IconName.Clock,
+				variant = Enums.IconVariant.Regular,
+				size = Enums.IconSize.Small
 			}),
-			Label = reactModule.createElement(text, {
+			Label = ReactModule.createElement(Text, {
 				tag = "auto-xy text-label-medium content-emphasis",
 				LayoutOrder = 2,
-				Text = var2.itemExpires
+				Text = UseLocalizationFunction({ itemExpires = "Feature.Durables.Label.ItemExpires" }).itemExpires
+			})
+		}),
+		RightContent = ReactModule.createElement(View, { tag = "auto-xy", LayoutOrder = 2 }, {
+			ExpirationText = ReactModule.createElement(Text, {
+				tag = "auto-xy text-body-medium content-emphasis",
+				Text = if _DateTime then _DateTime:FormatLocalTime("MMM DD, LT", LocalizationService.RobloxLocaleId) else ExpirationTime
 			})
 		})
-	}
-	local createElement_1 = reactModule.createElement
-	local t_2 = { tag = "auto-xy", LayoutOrder = 2 }
-	local t_3 = {}
-	local createElement_2 = reactModule.createElement
-	local t_4 = { tag = "auto-xy text-body-medium content-emphasis" }
-	local expirationTime = p1.expirationTime
-	local dateTime = DateTime.fromIsoDate(expirationTime)
-	t_4.Text = if not dateTime then expirationTime else dateTime:FormatLocalTime("MMM DD, LT", localizationService.RobloxLocaleId)
-	t_3.ExpirationText = createElement_2(text, t_4)
-	t_1.RightContent = createElement_1(view, t_2, t_3)
-	
-	return createElement(view, t, t_1)
+	})
 end

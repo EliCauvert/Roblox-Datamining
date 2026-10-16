@@ -1,11 +1,11 @@
-﻿return function(p1, p2)
-	if not p1 or p1 == "" then
+﻿return function(Text: string, p1): boolean --[[ Line: 8 ]]
+	if not Text or Text == "" then
 		return true
 	end
-	local displayName = p2.displayName
+	local DisplayName = p1.displayName
 	
-	if p2.alias ~= nil then
-		displayName ..= p2.alias
+	if p1.alias ~= nil then
+		DisplayName ..= p1.alias
 	end
-	return string.find(string.lower(displayName), string.lower(p1), 1, true) ~= nil
+	return string.find(string.lower(DisplayName), string.lower(Text), 1, true) ~= nil
 end

@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent._Workspace.DataHydration.DataHydration.Moments.MomentsStoreTypes)
+﻿return (require(script.Parent.Parent._Workspace.DataHydration.DataHydration.Moments.MomentsStoreTypes))

@@ -1,34 +1,34 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local baseMenuContextModule = require(script.Parent.BaseMenuContext)
-local baseMenuDividerModule = require(script.Parent.BaseMenuDivider)
-local baseMenuTitleItemModule = require(script.Parent.BaseMenuTitleItem)
-local viewModule = require(foundation.Components.View)
-local t = {
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local BaseMenuContextModule = require(script.Parent.BaseMenuContext)
+local BaseMenuDividerModule = require(script.Parent.BaseMenuDivider)
+local BaseMenuTitleItemModule = require(script.Parent.BaseMenuTitleItem)
+local ViewModule = require(Foundation.Components.View)
+local config = {
 	XSmall = "padding-xsmall",
 	Small = "padding-small",
 	Medium = "padding-small",
 	Large = "padding-small"
 }
 
-return function(p1)
-	-- upvalues: reactModule (ref), baseMenuContextModule (ref), baseMenuDividerModule (ref), viewModule (ref), t (ref), baseMenuTitleItemModule (ref)
-	local var1 = reactModule.useContext(baseMenuContextModule)
-	local layoutOrder = p1.LayoutOrder
+return function(Frame) --[[ Line: 27 | Named "BaseMenuGroup" ]]
+	-- upvalues: ReactModule (copy), BaseMenuContextModule (copy), BaseMenuDividerModule (copy), ViewModule (copy), config (copy), BaseMenuTitleItemModule (copy)
+	local UseContextResult = ReactModule.useContext(BaseMenuContextModule)
+	local LayoutOrder: number = Frame.LayoutOrder
 	
-	return reactModule.createElement(reactModule.Fragment, nil, {
-		Divider = if layoutOrder ~= 1 then nil else reactModule.createElement(baseMenuDividerModule, { LayoutOrder = layoutOrder * 2 - 1 }),
-		Group = reactModule.createElement(viewModule, {
-			LayoutOrder = layoutOrder * 2,
-			tag = `col gap-xxsmall size-full-0 auto-y {t[var1.size]}`
+	return ReactModule.createElement(ReactModule.Fragment, nil, {
+		Divider = if LayoutOrder == 1 then nil else ReactModule.createElement(BaseMenuDividerModule, { LayoutOrder = LayoutOrder * 2 - 1 }),
+		Group = ReactModule.createElement(ViewModule, {
+			LayoutOrder = LayoutOrder * 2,
+			tag = `col gap-xxsmall size-full-0 auto-y {config[UseContextResult.size]}`
 		}, {
-			Title = if p1.title then reactModule.createElement(baseMenuTitleItemModule, {
-				text = p1.title,
-				size = var1.size,
-				menuHasLeading = p1.menuHasLeading,
-				menuHasCheck = p1.menuHasCheck
+			Title = if Frame.title then ReactModule.createElement(BaseMenuTitleItemModule, {
+				text = Frame.title,
+				size = UseContextResult.size,
+				menuHasLeading = Frame.menuHasLeading,
+				menuHasCheck = Frame.menuHasCheck
 			}) else nil,
-			Items = reactModule.createElement(reactModule.Fragment, nil, p1.children)
+			Items = ReactModule.createElement(ReactModule.Fragment, nil, Frame.children)
 		})
 	})
 end

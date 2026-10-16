@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("ReportFocusNavCloseButton", false)
+﻿return (game:DefineFastFlag("ReportFocusNavCloseButton", false))

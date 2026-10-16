@@ -1,4 +1,4 @@
-﻿local t = {
+﻿local ConstantsModule = {
 	RbxAvatarThumbnailTypesFromEnum = {
 		HeadShot = Enum.ThumbnailType.HeadShot.Name,
 		AvatarBust = Enum.ThumbnailType.AvatarBust.Name,
@@ -22,12 +22,12 @@
 		Look = "Look"
 	}
 }
-t.RbxAvatarThumbnailTypeFromEnumToRbxthumbType = {
-	[t.RbxAvatarThumbnailTypesFromEnum.HeadShot] = t.RbxthumbTypes.AvatarHeadShot,
-	[t.RbxAvatarThumbnailTypesFromEnum.AvatarBust] = t.RbxthumbTypes.AvatarBust,
-	[t.RbxAvatarThumbnailTypesFromEnum.AvatarThumbnail] = t.RbxthumbTypes.Avatar
+ConstantsModule.RbxAvatarThumbnailTypeFromEnumToRbxthumbType = {
+	[ConstantsModule.RbxAvatarThumbnailTypesFromEnum.HeadShot] = ConstantsModule.RbxthumbTypes.AvatarHeadShot,
+	[ConstantsModule.RbxAvatarThumbnailTypesFromEnum.AvatarBust] = ConstantsModule.RbxthumbTypes.AvatarBust,
+	[ConstantsModule.RbxAvatarThumbnailTypesFromEnum.AvatarThumbnail] = ConstantsModule.RbxthumbTypes.Avatar
 }
-t.RbxThumbnailSizes = {
+ConstantsModule.RbxThumbnailSizes = {
 	Size48x48 = "Size48x48",
 	Size60x60 = "Size60x60",
 	Size100x100 = "Size100x100",
@@ -35,13 +35,13 @@ t.RbxThumbnailSizes = {
 	Size352x352 = "Size352x352",
 	Size720x720 = "Size720x720"
 }
-t.RbxThumbnailSizeToNumberSize = {
-	[t.RbxThumbnailSizes.Size48x48] = 48,
-	[t.RbxThumbnailSizes.Size60x60] = 60,
-	[t.RbxThumbnailSizes.Size100x100] = 100,
-	[t.RbxThumbnailSizes.Size150x150] = 150,
-	[t.RbxThumbnailSizes.Size352x352] = 352,
-	[t.RbxThumbnailSizes.Size720x720] = 720
+ConstantsModule.RbxThumbnailSizeToNumberSize = {
+	[ConstantsModule.RbxThumbnailSizes.Size48x48] = 48,
+	[ConstantsModule.RbxThumbnailSizes.Size60x60] = 60,
+	[ConstantsModule.RbxThumbnailSizes.Size100x100] = 100,
+	[ConstantsModule.RbxThumbnailSizes.Size150x150] = 150,
+	[ConstantsModule.RbxThumbnailSizes.Size352x352] = 352,
+	[ConstantsModule.RbxThumbnailSizes.Size720x720] = 720
 }
 
-return t
+return ConstantsModule

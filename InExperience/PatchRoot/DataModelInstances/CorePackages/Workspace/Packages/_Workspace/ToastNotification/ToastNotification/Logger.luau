@@ -1,12 +1,12 @@
-﻿local lumberyak = require(script.Parent.dependencies).Lumberyak
-local toastNotificationEventLoggingLevel = game:DefineFastString("ToastNotificationEventLoggingLevel", lumberyak.Logger.Levels.Warning)
-local toastNotification = lumberyak.Logger.new(nil, "ToastNotification")
-toastNotification:setContext({ prefix = "[ToastNotification] - " })
-toastNotification:addSink({
-	maxLevel = toastNotificationEventLoggingLevel,
-	log = function(_, p1, _)
+﻿local Lumberyak = require(script.Parent.dependencies).Lumberyak
+local ToastNotificationEventLoggingLevel = game:DefineFastString("ToastNotificationEventLoggingLevel", Lumberyak.Logger.Levels.Warning)
+local ToastNotification = Lumberyak.Logger.new(nil, "ToastNotification")
+ToastNotification:setContext({ prefix = "[ToastNotification] - " })
+ToastNotification:addSink({
+	maxLevel = ToastNotificationEventLoggingLevel,
+	log = function(_, p1, _) --[[ Line: 16 ]]
 		print(p1)
 	end
 })
 
-return toastNotification
+return ToastNotification

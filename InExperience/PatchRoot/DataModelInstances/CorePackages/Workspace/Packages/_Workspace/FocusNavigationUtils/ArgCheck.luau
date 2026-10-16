@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Workspace.ArgCheck.ArgCheck)
+﻿return (require(script.Parent.Parent.Parent._Workspace.ArgCheck.ArgCheck))

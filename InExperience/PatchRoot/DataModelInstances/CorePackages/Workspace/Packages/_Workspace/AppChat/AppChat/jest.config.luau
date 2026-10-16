@@ -1,13 +1,13 @@
-﻿local jestConfigsModule = require(script:FindFirstAncestor("AppChat").Parent.Dev.JestConfigs)
+﻿local JestConfigsModule = require(script:FindFirstAncestor("AppChat").Parent.Dev.JestConfigs)
 
 return {
 	displayName = "AppChat",
 	testMatch = { "**/*.test" },
 	setupFilesAfterEnv = {
-		jestConfigsModule.setupFiles.UIBloxInitializer,
-		jestConfigsModule.setupFiles.createPromiseRejectionHandler(),
+		JestConfigsModule.setupFiles.UIBloxInitializer,
+		JestConfigsModule.setupFiles.createPromiseRejectionHandler(),
 		script.Parent.setupJest,
 		script.Parent.setupLogger,
-		jestConfigsModule.setupFiles.RetryTimes
+		JestConfigsModule.setupFiles.RetryTimes
 	}
 }

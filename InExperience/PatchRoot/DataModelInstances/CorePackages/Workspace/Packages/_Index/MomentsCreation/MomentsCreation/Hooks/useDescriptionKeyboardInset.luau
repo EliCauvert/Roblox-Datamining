@@ -1,41 +1,40 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local reactModule = require(momentsCreation.Parent.React)
-local userInputService = game:GetService("UserInputService")
-local computeKeyboardInsetModule = require(momentsCreation.Utils.computeKeyboardInset)
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local ReactModule = require(MomentsCreation.Parent.React)
+local UserInputService = game:GetService("UserInputService")
+local ComputeKeyboardInsetModule = require(MomentsCreation.Utils.computeKeyboardInset)
 
-return function(value)
-	-- upvalues: reactModule (ref), computeKeyboardInsetModule (ref), userInputService (ref)
-	local var1, var2 = reactModule.useBinding(0)
-	local var3 = reactModule.useRef(nil)
-	local var4 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref), computeKeyboardInsetModule (copy), value (ref), userInputService (copy), var2 (ref)
-		local current = var3.current
-		var2(computeKeyboardInsetModule(value, userInputService.OnScreenKeyboardVisible, userInputService.OnScreenKeyboardPosition.Y, if current ~= nil then 0 else current.AbsolutePosition.Y + current.AbsoluteSize.Y, userInputService.OnScreenKeyboardSize.Y))
-	end, { value })
-	local var5 = reactModule.useCallback(function(p1)
-		-- upvalues: var3 (ref), var4 (ref)
-		var3.current = p1
-		var4()
-	end, { var4 })
-	reactModule.useEffect(function()
-		-- upvalues: var4 (ref), value (ref), userInputService (copy)
-		var4()
+return function(p1) --[[ Line: 31 | Named "useDescriptionKeyboardInset" ]]
+	-- upvalues: ReactModule (copy), ComputeKeyboardInsetModule (copy), UserInputService (copy)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 35 ]]
+		-- upvalues: UseRefResult (copy), ComputeKeyboardInsetModule (upval), p1 (copy), UserInputService (upval), UseBindingResult2 (copy)
+		local Current = UseRefResult.current
+		UseBindingResult2((ComputeKeyboardInsetModule(p1, UserInputService.OnScreenKeyboardVisible, UserInputService.OnScreenKeyboardPosition.Y, if Current == nil then 0 else Current.AbsolutePosition.Y + Current.AbsoluteSize.Y, UserInputService.OnScreenKeyboardSize.Y)))
+	end, { p1 })
+	local UseResult1 = ReactModule.useCallback(function(Current) --[[ Line: 48 ]]
+		-- upvalues: UseRefResult (copy), UseResult (copy)
+		UseRefResult.current = Current
+		UseResult()
+	end, { UseResult })
+	ReactModule.useEffect(function() --[[ Line: 53 ]]
+		-- upvalues: UseResult (copy), p1 (copy), UserInputService (upval)
+		UseResult()
 		
-		if value then
-			local list = {
-				userInputService:GetPropertyChangedSignal("OnScreenKeyboardVisible"):Connect(var4),
-				userInputService:GetPropertyChangedSignal("OnScreenKeyboardPosition"):Connect(var4),
-				userInputService:GetPropertyChangedSignal("OnScreenKeyboardSize"):Connect(var4)
-			}
-			
-			return function()
-				-- upvalues: list (ref)
-				for i, v in list do
-					v:Disconnect()
-				end
+		if not p1 then return end
+		local Connections = {
+			UserInputService:GetPropertyChangedSignal("OnScreenKeyboardVisible"):Connect(UseResult),
+			UserInputService:GetPropertyChangedSignal("OnScreenKeyboardPosition"):Connect(UseResult),
+			UserInputService:GetPropertyChangedSignal("OnScreenKeyboardSize"):Connect(UseResult)
+		}
+		
+		return function() --[[ Line: 65 ]]
+			-- upvalues: Connections (copy)
+			for _, connection in Connections do
+				connection:Disconnect()
 			end
 		end
-	end, { value, var4 })
+	end, { p1, UseResult })
 	
-	return var1, var5
+	return UseBindingResult, UseResult1
 end

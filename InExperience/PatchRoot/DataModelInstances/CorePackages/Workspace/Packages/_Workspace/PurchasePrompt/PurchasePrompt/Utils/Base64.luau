@@ -1,8 +1,8 @@
-﻿local t = {
-	MakeEncoder = function(p1, p2, p3)
-		local t = {}
+﻿local Base64Module = {
+	MakeEncoder = function(p1, p2, p3) --[[ Line: 8 ]]
+		local ByteValues = {}
 		
-		for i, v in pairs({
+		for i, Text in pairs({
 			[0] = "A",
 			"B",
 			"C",
@@ -69,53 +69,52 @@
 			p2 or "/",
 			p3 or "="
 		}) do
-			t[i] = v:byte()
+			ByteValues[i] = Text:byte()
 		end
-		return t
+		return ByteValues
 	end
 }
-local var1 = t.MakeEncoder()
-local char = string.char
-local concat = table.concat
-local extract = bit32.extract
+local Encoder = Base64Module.MakeEncoder()
+local CharFunction = string.char
+local ConcatFunction = table.concat
+local ExtractFunction = bit32.extract
 
-function t.Encode(p4, p5, p6)
-	-- upvalues: var1 (ref), extract (ref), char (ref), concat (ref)
-	p5 = p5 or var1
+function Base64Module.Encode(Text: string, p4, p5) --[[ Line: 88 ]]
+	-- upvalues: Encoder (copy), ExtractFunction (copy), CharFunction (copy), ConcatFunction (copy)
+	local P4 = p4 or Encoder
 	local t = {}
-	local var2 = 1
-	local p3Count = #p4
-	local var3 = p3Count % 3
-	local t_1 = {}
+	local Count = 1
+	local CountText = #Text
+	local CountTextRemainder = CountText % 3
+	local t1 = {}
 	
-	for i = 1, p3Count - var3, 3 do
-		local var4
-		local var5, var6, var7 = p4:byte(i, i + 2)
-		local var8 = var5 * 65536 + var6 * 256 + var7
-		local _ = nil
+	for i = 1, CountText - CountTextRemainder, 3 do
+		local ByteValue, ByteValue2, ByteValue3 = Text:byte(i, i + 2)
+		local NewByteValue = ByteValue * 65536 + ByteValue2 * 256 + ByteValue3
+		local Entry = nil
 		
-		if p6 then
-			var4 = t_1[var8]
+		if p5 then
+			Entry = t1[NewByteValue]
 			
-			if not var4 then
-				var4 = char(p5[extract(var8, 18, 6)], p5[extract(var8, 12, 6)], p5[extract(var8, 6, 6)], p5[extract(var8, 0, 6)])
-				t_1[var8] = var4
+			if not Entry then
+				Entry = CharFunction(P4[ExtractFunction(NewByteValue, 18, 6)], P4[ExtractFunction(NewByteValue, 12, 6)], P4[ExtractFunction(NewByteValue, 6, 6)], P4[ExtractFunction(NewByteValue, 0, 6)])
+				t1[NewByteValue] = Entry
 			end
 		else
-			var4 = char(p5[extract(var8, 18, 6)], p5[extract(var8, 12, 6)], p5[extract(var8, 6, 6)], p5[extract(var8, 0, 6)])
+			Entry = CharFunction(P4[ExtractFunction(NewByteValue, 18, 6)], P4[ExtractFunction(NewByteValue, 12, 6)], P4[ExtractFunction(NewByteValue, 6, 6)], P4[ExtractFunction(NewByteValue, 0, 6)])
 		end
-		t[var2] = var4
-		var2 += 1
+		t[Count] = Entry
+		Count += 1
 	end
-	if var3 == 2 then
-		local var9, var10 = p4:byte(p3Count - 1, p3Count)
-		local var11 = var9 * 65536 + var10 * 256
-		t[var2] = char(p5[extract(var11, 18, 6)], p5[extract(var11, 12, 6)], p5[extract(var11, 6, 6)], p5[64])
-	elseif var3 == 1 then
-		local var12 = p4:byte(p3Count) * 65536
-		t[var2] = char(p5[extract(var12, 18, 6)], p5[extract(var12, 12, 6)], p5[64], p5[64])
+	if CountTextRemainder == 2 then
+		local ByteValue1, ByteValue2_1 = Text:byte(CountText - 1, CountText)
+		local NewByteValue = ByteValue1 * 65536 + ByteValue2_1 * 256
+		t[Count] = CharFunction(P4[ExtractFunction(NewByteValue, 18, 6)], P4[ExtractFunction(NewByteValue, 12, 6)], P4[ExtractFunction(NewByteValue, 6, 6)], P4[64])
+	elseif CountTextRemainder == 1 then
+		local ScaledByteValue = Text:byte(CountText) * 65536
+		t[Count] = CharFunction(P4[ExtractFunction(ScaledByteValue, 18, 6)], P4[ExtractFunction(ScaledByteValue, 12, 6)], P4[64], P4[64])
 	end
-	return concat(t)
+	return ConcatFunction(t)
 end
 
-return t
+return Base64Module

@@ -1,187 +1,182 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local corePackagesService = game:GetService("CorePackages")
-local httpRbxApiService = game:GetService("HttpRbxApiService")
-local httpService = game:GetService("HttpService")
-local telemetryService = game:GetService("TelemetryService")
-local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
-local fStringLuaAppPlayButtonAgeCheckAmpFeatureName = sharedFlagsModule.FStringLuaAppPlayButtonAgeCheckAmpFeatureName
-local fStringLuaAppPlayButtonAgeCheckAmpNameSpace = sharedFlagsModule.FStringLuaAppPlayButtonAgeCheckAmpNameSpace
-local fFlagConnectionUpsellAnalytics = sharedFlagsModule.FFlagConnectionUpsellAnalytics
-local fFlagPioneerLeaveOnInExpFaeDownAge = sharedFlagsModule.FFlagPioneerLeaveOnInExpFaeDownAge
-local url = require(corePackagesService.Workspace.Packages.CoreScriptsCommon).Url
-local maybeLeavePioneerOnFaeDownAgeModule = require(corePackagesService.Workspace.Packages.PioneerUtils.maybeLeavePioneerOnFaeDownAge)
-local var1 = nil
-local var2 = nil
-pcall(function()
-	-- upvalues: var1 (write), var2 (write)
-	var1 = Enum.ConnectionError.PlacelaunchAgeVerificationRequired
-	var2 = Enum.ConnectionError.PlacelaunchParentalApprovalRequired
+﻿local CoreGui = game:GetService("CoreGui")
+local CorePackages = game:GetService("CorePackages")
+local HttpRbxApiService = game:GetService("HttpRbxApiService")
+local HttpService = game:GetService("HttpService")
+local TelemetryService = game:GetService("TelemetryService")
+local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
+local FStringLuaAppPlayButtonAgeCheckAmpFeatureName = SharedFlagsModule.FStringLuaAppPlayButtonAgeCheckAmpFeatureName
+local FStringLuaAppPlayButtonAgeCheckAmpNameSpace = SharedFlagsModule.FStringLuaAppPlayButtonAgeCheckAmpNameSpace
+local FFlagConnectionUpsellAnalytics = SharedFlagsModule.FFlagConnectionUpsellAnalytics
+local FFlagPioneerLeaveOnInExpFaeDownAge = SharedFlagsModule.FFlagPioneerLeaveOnInExpFaeDownAge
+local Url = require(CorePackages.Workspace.Packages.CoreScriptsCommon).Url
+local MaybeLeavePioneerOnFaeDownAgeModule = require(CorePackages.Workspace.Packages.PioneerUtils.maybeLeavePioneerOnFaeDownAge)
+local PlacelaunchAgeVerificationRequired = nil
+local PlacelaunchParentalApprovalRequired = nil
+pcall(function() --[[ Line: 35 ]]
+	-- upvalues: PlacelaunchAgeVerificationRequired (ref), PlacelaunchParentalApprovalRequired (ref)
+	PlacelaunchAgeVerificationRequired = Enum.ConnectionError.PlacelaunchAgeVerificationRequired
+	PlacelaunchParentalApprovalRequired = Enum.ConnectionError.PlacelaunchParentalApprovalRequired
 end)
 
-local function logTelemetry(p1, p2)
-	-- upvalues: telemetryService (ref)
-	telemetryService:LogCounter(p1, { customFields = { selectedItem = p2 } }, 1)
+local function logTelemetry(Config, SelectedItem) --[[ Line: 40 ]]
+	-- upvalues: TelemetryService (copy)
+	TelemetryService:LogCounter(Config, { customFields = { selectedItem = SelectedItem } }, 1)
 end
 
-local function fetchUniverseIdFromPlaceIdYielding(p1)
-	-- upvalues: url (ref), httpRbxApiService (ref), httpService (ref)
-	local ok, status = pcall(httpRbxApiService.GetAsyncFullUrl, httpRbxApiService, string.format("%suniverses/v1/places/%d/universe", url.APIS_URL, p1))
+local function fetchUniverseIdFromPlaceIdYielding(PlaceId) --[[ Line: 47 ]]
+	-- upvalues: Url (copy), HttpRbxApiService (copy), HttpService (copy)
+	local Success, Result = pcall(HttpRbxApiService.GetAsyncFullUrl, HttpRbxApiService, (string.format("%suniverses/v1/places/%d/universe", Url.APIS_URL, PlaceId)))
 	
-	if not ok or type(status) ~= "string" then
+	if not Success or type(Result) ~= "string" then
 		return nil
 	end
-	local ok_1, status_1 = pcall(httpService.JSONDecode, httpService, status)
+	local Success1, Result1 = pcall(HttpService.JSONDecode, HttpService, Result)
 	
-	if not ok_1 or type(status_1) ~= "table" then
+	if Success1 and type(Result1) == "table" then
+		local UniverseId: number = Result1.universeId
+		
+		return if type(UniverseId) == "number" and UniverseId > 0 then UniverseId else nil
+	else
 		return nil
 	end
-	local universeId = status_1.universeId
-	
-	return if type(universeId) == "number" and universeId > 0 then universeId else nil
 end
 
-local var3 = if fFlagConnectionUpsellAnalytics then {
+local Config = if FFlagConnectionUpsellAnalytics then {
 	eventName = "unlockPlayIntent",
 	description = "Fired when a user clicks Continue on an AMP age check / parental approval upsell from a game-join flow.",
 	backends = { "EventIngest" },
 	throttlingPercentage = game:DefineFastInt("ConnectionAmpUnlockPlayIntentThrottleHundredthsPercent", 10000),
 	lastUpdated = { 2026, 5, 11 }
 } else nil
-local var4 = if fFlagConnectionUpsellAnalytics then {
+local Config1 = if FFlagConnectionUpsellAnalytics then {
 	eventName = "gameJoinUpsellImpression",
 	description = "Fired when an AMP age check / parental approval upsell is shown during a game-join flow.",
 	backends = { "EventIngest" },
 	throttlingPercentage = game:DefineFastInt("ConnectionAmpGameJoinUpsellImpressionThrottleHundredthsPercent", 10000),
 	lastUpdated = { 2026, 5, 11 }
 } else nil
-local var5 = if fFlagConnectionUpsellAnalytics then { "addSessionInfo", "addSessionId", "addOSInfo" } else nil
-local var6 = if fFlagConnectionUpsellAnalytics then {
+local List = if FFlagConnectionUpsellAnalytics then { "addSessionInfo", "addSessionId", "addOSInfo" } else nil
+local Config2 = if FFlagConnectionUpsellAnalytics then {
 	upsellName = "AgeCheckRequired",
 	playabilityStatus = "ContextualPlayabilityAgeCheckRequired",
 	missingPlaceIdItem = "AmpAgeCheckMissingPlaceId",
 	universeIdLookupFailedItem = "AgeCheckImpressionUniverseIdLookupFailed"
 } else nil
-local var7 = if fFlagConnectionUpsellAnalytics then {
+local Config3 = if FFlagConnectionUpsellAnalytics then {
 	upsellName = "ParentApprovalRequired",
 	playabilityStatus = "ContextualPlayabilityRequireParentApproval",
 	missingPlaceIdItem = "AmpParentApprovalMissingPlaceId",
 	universeIdLookupFailedItem = "ParentApprovalImpressionUniverseIdLookupFailed"
 } else nil
-local var8 = if fFlagConnectionUpsellAnalytics then {} else nil
-local var9 = if fFlagConnectionUpsellAnalytics then function(p1, p2, p3, p4)
-	-- upvalues: telemetryService (ref), var5 (ref)
-	telemetryService:LogEvent(p3, {
-		eventContext = p2,
-		standardizedFields = var5,
+local T = if FFlagConnectionUpsellAnalytics then {} else nil
+local Callback = if FFlagConnectionUpsellAnalytics then function(p1, EventContext, Config, UniverseId) --[[ Line: 123 ]]
+	-- upvalues: TelemetryService (copy), List (copy)
+	TelemetryService:LogEvent(Config, {
+		eventContext = EventContext,
+		standardizedFields = List,
 		customFields = {
-			universeId = p4,
+			universeId = UniverseId,
 			upsellName = p1.upsellName,
 			playabilityStatus = p1.playabilityStatus
 		}
 	})
 end else nil
-local var10 = if fFlagConnectionUpsellAnalytics then function(p1, p2, p3)
-	-- upvalues: var8 (ref), var9 (ref), var3 (ref)
-	local var11 = if p3 ~= "" then p3 else var8[p2] or ""
+local Callback2 = if FFlagConnectionUpsellAnalytics then function(p1, Key, p2) --[[ Line: 142 ]]
+	-- upvalues: T (copy), Callback (copy), Config (copy)
+	local Entry = (if p2 == "" then T[Key] else p2 or T[Key]) or ""
 	
-	if p3 and p3 ~= "" then
-		var8[p2] = p3
+	if p2 and p2 ~= "" then
+		T[Key] = p2
 	end
-	var9(p1, "GameJoin", var3, var11)
+	Callback(p1, "GameJoin", Config, Entry)
 end else nil
-local var11 = if fFlagConnectionUpsellAnalytics then function(p1, p2, p3)
-	-- upvalues: logTelemetry (ref), var8 (ref), var9 (ref), var4 (ref), fetchUniverseIdFromPlaceIdYielding (ref)
+local Callback1 = if FFlagConnectionUpsellAnalytics then function(p1, p2, p3) --[[ Line: 153 ]]
+	-- upvalues: logTelemetry (copy), T (copy), Callback (copy), Config1 (copy), fetchUniverseIdFromPlaceIdYielding (copy)
 	if not p3 or p3 == 0 then
 		logTelemetry(p1, p2.missingPlaceIdItem)
 		
 		return
 	end
-	local var12 = var8[p3]
+	local Entry = T[p3]
 	
-	if var12 then
-		var9(p2, p2.upsellName, var4, var12)
+	if Entry then
+		Callback(p2, p2.upsellName, Config1, Entry)
 		
 		return
+	else
+		task.spawn(function() --[[ Line: 163 ]]
+			-- upvalues: fetchUniverseIdFromPlaceIdYielding (upval), p3 (copy), T (upval), logTelemetry (upval), p1 (copy), p2 (copy), Callback (upval), Config1 (upval)
+			local UniverseIdFromPlaceIdYielding = fetchUniverseIdFromPlaceIdYielding(p3)
+			local Text: string = if UniverseIdFromPlaceIdYielding then tostring(UniverseIdFromPlaceIdYielding) else ""
+			
+			if UniverseIdFromPlaceIdYielding then
+				T[p3] = Text
+			else
+				logTelemetry(p1, p2.universeIdLookupFailedItem)
+			end
+			Callback(p2, p2.upsellName, Config1, Text)
+		end)
 	end
-	task.spawn(function()
-		-- upvalues: fetchUniverseIdFromPlaceIdYielding (copy), p3 (ref), var8 (copy), logTelemetry (copy), p1 (ref), p2 (ref), var9 (copy), var4 (copy)
-		local var13 = fetchUniverseIdFromPlaceIdYielding(p3)
-		local var14 = if var13 then tostring(var13) else ""
-		
-		if var13 then
-			var8[p3] = var14
-		else
-			logTelemetry(p1, p2.universeIdLookupFailedItem)
-		end
-		var9(p2, p2.upsellName, var4, var14)
-	end)
-end else nil
-local var12 = if fFlagConnectionUpsellAnalytics then function(p1, p2)
-	-- upvalues: var11 (ref), var6 (ref)
-	var11(p1, var6, p2)
-end else nil
-local var13 = if fFlagConnectionUpsellAnalytics then function(p1, p2)
-	-- upvalues: var11 (ref), var7 (ref)
-	var11(p1, var7, p2)
 end else nil
 
-local function _()
-	-- upvalues: corePackagesService (ref)
-	local ok, status = pcall(require, corePackagesService.Workspace.Packages.AmpUpsell)
+local function _() --[[ Line: 189 | Named "loadAmpUpsell" ]]
+	-- upvalues: CorePackages (copy)
+	local Success, Result = pcall(require, CorePackages.Workspace.Packages.AmpUpsell)
 	
-	return if ok then status else nil
+	return if Success then Result else nil
 end
 
-local _ = function()
-	-- upvalues: coreGuiService (ref)
-	local ok, status = pcall(require, coreGuiService.RobloxGui.Modules.ApolloClient)
+local _ = function() --[[ Line: 196 | Named "loadCoreScriptsApolloClient" ]]
+	-- upvalues: CoreGui (copy)
+	local Success, Result = pcall(require, CoreGui.RobloxGui.Modules.ApolloClient)
 	
-	return if ok then status else nil
+	return if Success then Result else nil
 end
 
-local function openWizardThenReconnect(p1, p2, p3, p4, p5, p6, p7, p8, p9)
-	-- upvalues: logTelemetry (ref), corePackagesService (ref), coreGuiService (ref), fFlagPioneerLeaveOnInExpFaeDownAge (ref), maybeLeavePioneerOnFaeDownAgeModule (ref)
-	logTelemetry(p1, p9)
-	local ok, status = pcall(require, corePackagesService.Workspace.Packages.AmpUpsell)
-	local var14 = if ok then status else nil
+local function openWizardThenReconnect(p1, Callback, p2, FStringLuaAppPlayButtonAgeCheckAmpFeatureName, FStringLuaAppPlayButtonAgeCheckAmpNameSpace, p3, p4, p5, SelectedItem) --[[ Line: 201 ]]
+	-- upvalues: logTelemetry (copy), CorePackages (copy), CoreGui (copy), FFlagPioneerLeaveOnInExpFaeDownAge (copy), MaybeLeavePioneerOnFaeDownAgeModule (copy)
+	logTelemetry(p1, SelectedItem)
+	local Success, Result = pcall(require, CorePackages.Workspace.Packages.AmpUpsell)
+	local Result1 = if Success then Result else nil
 	
-	if not var14 then
+	if not Result1 then
 		logTelemetry(p1, "AmpWizardLoadFailed")
 		
 		return
 	end
-	local ok_1, status_1 = pcall(require, coreGuiService.RobloxGui.Modules.ApolloClient)
-	local var15 = if ok_1 then status_1 else nil
+	local Success1, Result2 = pcall(require, CoreGui.RobloxGui.Modules.ApolloClient)
+	local Result3 = if Success1 then Result2 else nil
 	
-	if not var15 then
+	if not Result3 then
 		logTelemetry(p1, "AmpWizardApolloLoadFailed")
 		
 		return
-	elseif not pcall(function()
-		-- upvalues: var14 (ref), p4 (ref), logTelemetry (copy), p1 (ref), fFlagPioneerLeaveOnInExpFaeDownAge (copy), p2 (ref), maybeLeavePioneerOnFaeDownAgeModule (copy), p7 (ref), p6 (ref), p8 (ref), p5 (ref), var15 (ref), p3 (ref)
-		var14.InExpAmpWizardController.OpenAmpWizardContainerInExp(p4, function(p10, p11)
-			-- upvalues: var14 (copy), logTelemetry (copy), p1 (copy), fFlagPioneerLeaveOnInExpFaeDownAge (copy), p2 (copy), maybeLeavePioneerOnFaeDownAgeModule (copy)
-			local var16 = p10 == var14.AmpEnums.AccessResponseEnum.Granted
+	end
+	if not pcall(function() --[[ Line: 227 ]]
+		-- upvalues: Result1 (copy), FStringLuaAppPlayButtonAgeCheckAmpFeatureName (copy), logTelemetry (upval), p1 (copy), FFlagPioneerLeaveOnInExpFaeDownAge (upval), Callback (copy), MaybeLeavePioneerOnFaeDownAgeModule (upval), p4 (copy), p3 (copy), p5 (copy), FStringLuaAppPlayButtonAgeCheckAmpNameSpace (copy), Result3 (copy), p2 (copy)
+		Result1.InExpAmpWizardController.OpenAmpWizardContainerInExp(FStringLuaAppPlayButtonAgeCheckAmpFeatureName, function(Granted, p6) --[[ Line: 230 ]]
+			-- upvalues: Result1 (upval), logTelemetry (upval), p1 (upval), FFlagPioneerLeaveOnInExpFaeDownAge (upval), Callback (upval), MaybeLeavePioneerOnFaeDownAgeModule (upval)
+			local IsGrantedMatch = Granted == Result1.AmpEnums.AccessResponseEnum.Granted
 			
-			if var16 then
+			if IsGrantedMatch then
 				logTelemetry(p1, "AmpWizardGrantedReconnect")
 				
-				if not fFlagPioneerLeaveOnInExpFaeDownAge then
-					p2()
+				if not FFlagPioneerLeaveOnInExpFaeDownAge then
+					Callback()
 				end
 			else
 				logTelemetry(p1, "AmpWizardNotGranted")
 			end
-			if fFlagPioneerLeaveOnInExpFaeDownAge then
-				local ampEnums = var14.AmpEnums
-				maybeLeavePioneerOnFaeDownAgeModule(p11 ~= nil and p11[ampEnums.ActionTypeEnum.AgeEstimation] == ampEnums.ActionStatusEnum.Success, function()
-					-- upvalues: var16 (ref), p2 (copy)
-					if var16 then
-						p2()
+			if FFlagPioneerLeaveOnInExpFaeDownAge then
+				local AmpEnums = Result1.AmpEnums
+				MaybeLeavePioneerOnFaeDownAgeModule(p6 ~= nil and p6[AmpEnums.ActionTypeEnum.AgeEstimation] == AmpEnums.ActionStatusEnum.Success, function() --[[ Line: 245 ]]
+					-- upvalues: IsGrantedMatch (copy), Callback (upval)
+					if IsGrantedMatch then
+						Callback()
 					end
 				end)
 			end
-		end, p7, p6, p8, p5, var15, p3, true)
+		end, p4, p3, p5, FStringLuaAppPlayButtonAgeCheckAmpNameSpace, Result3, p2, true)
 	end) then
 		logTelemetry(p1, "AmpWizardOpenError")
 	end
@@ -190,52 +185,60 @@ end
 return {
 	PrimaryButtonText = "Continue",
 	PrimaryButtonLocalizationKey = "InGame.ConnectionError.Action.Continue",
-	AgeVerificationRequiredEnum = var1,
-	ParentalApprovalRequiredEnum = var2,
-	createAgeCheckCallback = function(p1, p2, p3)
-		-- upvalues: fFlagConnectionUpsellAnalytics (ref), var10 (ref), var6 (ref), openWizardThenReconnect (ref), fStringLuaAppPlayButtonAgeCheckAmpFeatureName (ref), fStringLuaAppPlayButtonAgeCheckAmpNameSpace (ref)
-		local var14 = p3 + 1
+	AgeVerificationRequiredEnum = PlacelaunchAgeVerificationRequired,
+	ParentalApprovalRequiredEnum = PlacelaunchParentalApprovalRequired,
+	createAgeCheckCallback = function(p1, p2, p3: number) --[[ Line: 267 ]]
+		-- upvalues: FFlagConnectionUpsellAnalytics (copy), Callback2 (copy), Config2 (copy), openWizardThenReconnect (copy), FStringLuaAppPlayButtonAgeCheckAmpFeatureName (copy), FStringLuaAppPlayButtonAgeCheckAmpNameSpace (copy)
+		local v1 = p3 + 1
 		
-		return function()
-			-- upvalues: fFlagConnectionUpsellAnalytics (copy), var10 (copy), var6 (copy), openWizardThenReconnect (copy), p1 (ref), p2 (ref), var14 (ref), fStringLuaAppPlayButtonAgeCheckAmpFeatureName (copy), fStringLuaAppPlayButtonAgeCheckAmpNameSpace (copy)
-			if fFlagConnectionUpsellAnalytics then
-				var10(var6, game.PlaceId, "")
+		return function() --[[ Line: 269 ]]
+			-- upvalues: FFlagConnectionUpsellAnalytics (upval), Callback2 (upval), Config2 (upval), openWizardThenReconnect (upval), p1 (copy), p2 (copy), v1 (copy), FStringLuaAppPlayButtonAgeCheckAmpFeatureName (upval), FStringLuaAppPlayButtonAgeCheckAmpNameSpace (upval)
+			if FFlagConnectionUpsellAnalytics then
+				Callback2(Config2, game.PlaceId, "")
 			end
-			openWizardThenReconnect(p1, p2, var14, fStringLuaAppPlayButtonAgeCheckAmpFeatureName, fStringLuaAppPlayButtonAgeCheckAmpNameSpace, "gameJoinAgeCheckRequired", nil, nil, "AmpAgeCheckOpened")
+			openWizardThenReconnect(p1, p2, v1, FStringLuaAppPlayButtonAgeCheckAmpFeatureName, FStringLuaAppPlayButtonAgeCheckAmpNameSpace, "gameJoinAgeCheckRequired", nil, nil, "AmpAgeCheckOpened")
 		end
 	end,
-	createParentalApprovalCallback = function(p1, p2, p3)
-		-- upvalues: logTelemetry (ref), fetchUniverseIdFromPlaceIdYielding (ref), fFlagConnectionUpsellAnalytics (ref), var10 (ref), var7 (ref), openWizardThenReconnect (ref)
-		local var14 = p3 + 1
+	createParentalApprovalCallback = function(p1, p2, p3: number) --[[ Line: 287 ]]
+		-- upvalues: logTelemetry (copy), fetchUniverseIdFromPlaceIdYielding (copy), FFlagConnectionUpsellAnalytics (copy), Callback2 (copy), Config3 (copy), openWizardThenReconnect (copy)
+		local v1 = p3 + 1
 		
-		return function()
-			-- upvalues: logTelemetry (copy), p1 (ref), fetchUniverseIdFromPlaceIdYielding (copy), fFlagConnectionUpsellAnalytics (copy), var10 (copy), var7 (copy), openWizardThenReconnect (copy), p2 (ref), var14 (ref)
-			local placeId = game.PlaceId
+		return function() --[[ Line: 289 ]]
+			-- upvalues: logTelemetry (upval), p1 (copy), fetchUniverseIdFromPlaceIdYielding (upval), FFlagConnectionUpsellAnalytics (upval), Callback2 (upval), Config3 (upval), openWizardThenReconnect (upval), p2 (copy), v1 (copy)
+			local PlaceId = game.PlaceId
 			
-			if placeId and placeId ~= 0 then
-				task.spawn(function()
-					-- upvalues: fetchUniverseIdFromPlaceIdYielding (copy), placeId (ref), fFlagConnectionUpsellAnalytics (copy), var10 (copy), var7 (copy), logTelemetry (copy), p1 (copy), openWizardThenReconnect (copy), p2 (copy), var14 (copy)
-					local var15 = fetchUniverseIdFromPlaceIdYielding(placeId)
+			if PlaceId and PlaceId ~= 0 then
+				task.spawn(function() --[[ Line: 297 ]]
+					-- upvalues: fetchUniverseIdFromPlaceIdYielding (upval), PlaceId (copy), FFlagConnectionUpsellAnalytics (upval), Callback2 (upval), Config3 (upval), logTelemetry (upval), p1 (upval), openWizardThenReconnect (upval), p2 (upval), v1 (upval)
+					local UniverseIdFromPlaceIdYielding = fetchUniverseIdFromPlaceIdYielding(PlaceId)
 					
-					if fFlagConnectionUpsellAnalytics then
-						var10(var7, placeId, if var15 then tostring(var15) else "")
+					if FFlagConnectionUpsellAnalytics then
+						Callback2(Config3, PlaceId, if UniverseIdFromPlaceIdYielding then tostring(UniverseIdFromPlaceIdYielding) else "")
 					end
-					if var15 then
-						openWizardThenReconnect(p1, p2, var14, "CanApproveExperience", nil, "gameJoinContentMaturityLock", {
+					if UniverseIdFromPlaceIdYielding then
+						openWizardThenReconnect(p1, p2, v1, "CanApproveExperience", nil, "gameJoinContentMaturityLock", {
 							experienceManagementAction = "Approve",
-							universeId = tostring(var15)
+							universeId = tostring(UniverseIdFromPlaceIdYielding)
 						}, nil, "AmpParentApprovalOpened")
 						
 						return
+					else
+						logTelemetry(p1, "AmpParentApprovalUniverseIdLookupFailed")
 					end
-					logTelemetry(p1, "AmpParentApprovalUniverseIdLookupFailed")
 				end)
 				
 				return
+			else
+				logTelemetry(p1, "AmpParentApprovalMissingPlaceId")
 			end
-			logTelemetry(p1, "AmpParentApprovalMissingPlaceId")
 		end
 	end,
-	fireImpressionAgeCheck = var12,
-	fireImpressionParentalApproval = var13
+	fireImpressionAgeCheck = if FFlagConnectionUpsellAnalytics then function(p1, p2) --[[ Line: 177 ]]
+		-- upvalues: Callback1 (copy), Config2 (copy)
+		Callback1(p1, Config2, p2)
+	end else nil,
+	fireImpressionParentalApproval = if FFlagConnectionUpsellAnalytics then function(p1, p2) --[[ Line: 183 ]]
+		-- upvalues: Callback1 (copy), Config3 (copy)
+		Callback1(p1, Config3, p2)
+	end else nil
 }

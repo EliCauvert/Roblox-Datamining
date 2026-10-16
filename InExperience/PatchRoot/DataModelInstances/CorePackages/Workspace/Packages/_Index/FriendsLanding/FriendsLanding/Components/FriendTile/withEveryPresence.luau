@@ -1,31 +1,31 @@
-﻿local dependenciesModule = require(script:FindFirstAncestor("FriendsLanding").dependencies)
-local parentModule = require(script.Parent)
-local roact = dependenciesModule.Roact
-local llama = dependenciesModule.llama
-local friendsWithPresenceModule = require(script.Parent.friendsWithPresence)
+﻿local DependenciesModule = require(script:FindFirstAncestor("FriendsLanding").dependencies)
+local ParentModule = require(script.Parent)
+local Roact = DependenciesModule.Roact
+local Llama = DependenciesModule.llama
+local FriendsWithPresenceModule = require(script.Parent.friendsWithPresence)
 
-return function(p1)
-	-- upvalues: roact (ref), parentModule (ref), llama (ref), friendsWithPresenceModule (ref)
-	return roact.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
-		frame = roact.createElement("Frame", {
+return function(p1) --[[ Line: 10 ]]
+	-- upvalues: Roact (copy), ParentModule (copy), Llama (copy), FriendsWithPresenceModule (copy)
+	return Roact.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
+		frame = Roact.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(0, 150, 0, 0)
 		}, {
-			layout = roact.createElement("UIListLayout", {
+			layout = Roact.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				FillDirection = Enum.FillDirection.Horizontal,
 				Padding = UDim.new(0, 6)
 			}),
-			OnlineFriend = roact.createElement(parentModule, llama.Dictionary.join(p1, { user = friendsWithPresenceModule.OnlineFriend })),
-			DeletedFriend = roact.createElement(parentModule, llama.Dictionary.join(p1, { user = friendsWithPresenceModule.DeletedFriend })),
-			OfflineFriend = roact.createElement(parentModule, llama.Dictionary.join(p1, { user = friendsWithPresenceModule.OfflineFriend })),
-			InGameFriend = roact.createElement(parentModule, llama.Dictionary.join(p1, { user = friendsWithPresenceModule.InGameFriend })),
-			InGameWithoutLastLocationFriend = roact.createElement(parentModule, llama.Dictionary.join(p1, {
-				user = friendsWithPresenceModule.InGameWithoutLastLocationFriend
+			OnlineFriend = Roact.createElement(ParentModule, Llama.Dictionary.join(p1, { user = FriendsWithPresenceModule.OnlineFriend })),
+			DeletedFriend = Roact.createElement(ParentModule, Llama.Dictionary.join(p1, { user = FriendsWithPresenceModule.DeletedFriend })),
+			OfflineFriend = Roact.createElement(ParentModule, Llama.Dictionary.join(p1, { user = FriendsWithPresenceModule.OfflineFriend })),
+			InGameFriend = Roact.createElement(ParentModule, Llama.Dictionary.join(p1, { user = FriendsWithPresenceModule.InGameFriend })),
+			InGameWithoutLastLocationFriend = Roact.createElement(ParentModule, Llama.Dictionary.join(p1, {
+				user = FriendsWithPresenceModule.InGameWithoutLastLocationFriend
 			})),
-			InStudioFriend = roact.createElement(parentModule, llama.Dictionary.join(p1, { user = friendsWithPresenceModule.InStudioFriend })),
-			InStudioWithoutLastLocationFriend = roact.createElement(parentModule, llama.Dictionary.join(p1, {
-				user = friendsWithPresenceModule.InStudioWithoutLastLocationFriend
+			InStudioFriend = Roact.createElement(ParentModule, Llama.Dictionary.join(p1, { user = FriendsWithPresenceModule.InStudioFriend })),
+			InStudioWithoutLastLocationFriend = Roact.createElement(ParentModule, Llama.Dictionary.join(p1, {
+				user = FriendsWithPresenceModule.InStudioWithoutLastLocationFriend
 			}))
 		})
 	})

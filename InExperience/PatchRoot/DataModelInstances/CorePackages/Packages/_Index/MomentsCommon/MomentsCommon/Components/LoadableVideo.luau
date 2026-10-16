@@ -1,85 +1,86 @@
-﻿local momentsCommon = script:FindFirstAncestor("MomentsCommon")
-local parent = momentsCommon.Parent
-local contentProviderService = game:GetService("ContentProvider")
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local skeleton = foundationModule.Skeleton
-local view = foundationModule.View
-local loadingStateModule = require(momentsCommon.Enums.LoadingState)
-local getCropSizeModule = require(momentsCommon.Utils.getCropSize)
-local getFitSizeModule = require(momentsCommon.Utils.getFitSize)
+﻿local MomentsCommon = script:FindFirstAncestor("MomentsCommon")
+local Parent = MomentsCommon.Parent
+local ContentProvider = game:GetService("ContentProvider")
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local Skeleton = FoundationModule.Skeleton
+local View = FoundationModule.View
+local LoadingStateModule = require(MomentsCommon.Enums.LoadingState)
+local GetCropSizeModule = require(MomentsCommon.Utils.getCropSize)
+local GetFitSizeModule = require(MomentsCommon.Utils.getFitSize)
 
-return function(p1)
-	-- upvalues: reactModule (ref), loadingStateModule (ref), contentProviderService (ref), view (ref), getFitSizeModule (ref), getCropSizeModule (ref), skeleton (ref)
-	local var1, var2 = reactModule.useState(Vector2.new(0, 0))
-	local var3, var4 = reactModule.useState(loadingStateModule.Loading)
-	local var5, var6 = reactModule.useState(Vector2.new(0, 0))
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), contentProviderService (copy), var4 (ref), loadingStateModule (copy)
-		if p1.Video == nil or p1.Video == "" then
-			return
-		end
-		local var7 = contentProviderService:GetAssetFetchStatusChangedSignal(p1.Video):Connect(function(p2)
-			-- upvalues: var4 (copy), loadingStateModule (copy)
-			if p2 == Enum.AssetFetchStatus.Failure then
-				var4(loadingStateModule.Failed)
+return function(Frame: Frame) --[[ Line: 38 ]]
+	-- upvalues: ReactModule (copy), LoadingStateModule (copy), ContentProvider (copy), View (copy), GetFitSizeModule (copy), GetCropSizeModule (copy), Skeleton (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.new(0, 0))
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(LoadingStateModule.Loading)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(Vector2.new(0, 0))
+	ReactModule.useEffect(function() --[[ Line: 43 ]]
+		-- upvalues: Frame (copy), ContentProvider (upval), UseStateResult2_1 (copy), LoadingStateModule (upval)
+		if Frame.Video == nil or Frame.Video == "" then return end
+		local Connection = ContentProvider:GetAssetFetchStatusChangedSignal(Frame.Video):Connect(function(AssetFetchStatus) --[[ Line: 49 ]]
+			-- upvalues: UseStateResult2_1 (upval), LoadingStateModule (upval)
+			if AssetFetchStatus == Enum.AssetFetchStatus.Failure then
+				UseStateResult2_1(LoadingStateModule.Failed)
 			end
 		end)
 		
-		return function()
-			-- upvalues: var7 (ref), var4 (copy), loadingStateModule (copy)
-			var7:Disconnect()
-			var4(loadingStateModule.Loading)
+		return function() --[[ Line: 55 ]]
+			-- upvalues: Connection (copy), UseStateResult2_1 (upval), LoadingStateModule (upval)
+			Connection:Disconnect()
+			UseStateResult2_1(LoadingStateModule.Loading)
 		end
-	end, { p1.Video })
+	end, { Frame.Video })
+	local UseResult = ReactModule.useCallback(function(Frame1) --[[ Line: 61 ]]
+		-- upvalues: UseStateResult2 (copy), Frame (copy)
+		UseStateResult2(Frame1.AbsoluteSize)
+		
+		if Frame.onAbsoluteSizeChanged then
+			Frame.onAbsoluteSizeChanged(Frame1)
+		end
+	end, { Frame.onAbsoluteSizeChanged, UseStateResult2 })
+	local UseResult1 = ReactModule.useCallback(function(p1) --[[ Line: 69 ]]
+		-- upvalues: UseStateResult2_2 (copy), Frame (copy)
+		local Resolution = p1.Resolution
+		UseStateResult2_2(Resolution)
+		
+		if Frame.onResolutionChanged then
+			Frame.onResolutionChanged(Resolution)
+		end
+	end, { Frame.onResolutionChanged, UseStateResult2_2 })
+	local UseResult2 = ReactModule.useCallback(function(p1) --[[ Line: 78 ]]
+		-- upvalues: UseStateResult1 (copy), LoadingStateModule (upval), UseStateResult2_1 (copy), Frame (copy)
+		if UseStateResult1 == LoadingStateModule.Loading then
+			UseStateResult2_1(LoadingStateModule.Finished)
+		end
+		Frame.onLoaded(p1)
+	end, { UseStateResult1, Frame.onLoaded })
 	
-	return if var3 == loadingStateModule.Failed then p1.renderOnFailed() else reactModule.createElement(view, {
+	return if UseStateResult1 == LoadingStateModule.Failed then Frame.renderOnFailed() else ReactModule.createElement(View, {
 		isDisabled = true,
-		AnchorPoint = p1.AnchorPoint,
-		BackgroundTransparency = p1.BackgroundTransparency,
-		ClipsDescendants = p1.ClipsDescendants ~= false,
-		onAbsoluteSizeChanged = reactModule.useCallback(function(p2)
-			-- upvalues: var2 (ref), p1 (ref)
-			var2(p2.AbsoluteSize)
-			
-			if p1.onAbsoluteSizeChanged then
-				p1.onAbsoluteSizeChanged(p2)
-			end
-		end, { p1.onAbsoluteSizeChanged, var2 }),
-		Position = p1.Position,
-		Size = p1.Size,
-		ZIndex = p1.ZIndex
+		AnchorPoint = Frame.AnchorPoint,
+		BackgroundTransparency = Frame.BackgroundTransparency,
+		ClipsDescendants = Frame.ClipsDescendants ~= false,
+		onAbsoluteSizeChanged = UseResult,
+		Position = Frame.Position,
+		Size = Frame.Size,
+		ZIndex = Frame.ZIndex
 	}, {
-		VideoFrame = reactModule.createElement("VideoFrame", {
+		VideoFrame = ReactModule.createElement("VideoFrame", {
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			BackgroundTransparency = 1,
-			Looped = p1.Looped ~= nil or p1.Looped,
-			Playing = p1.Playing,
+			Looped = Frame.Looped == nil or Frame.Looped,
+			Playing = Frame.Playing,
 			Position = UDim2.fromScale(0.5, 0.5),
-			ref = p1.videoRef,
-			Size = if p1.scaleType == Enum.ScaleType.Fit then getFitSizeModule(var1, var5) else getCropSizeModule(var1, var5),
-			Video = p1.Video,
-			VideoContent = p1.VideoContent,
-			Visible = var5.X > 0 and var5.Y > 0,
-			[reactModule.Change.Resolution] = reactModule.useCallback(function(p2)
-				-- upvalues: var6 (ref), p1 (ref)
-				local resolution = p2.Resolution
-				var6(resolution)
-				
-				if p1.onResolutionChanged then
-					p1.onResolutionChanged(resolution)
-				end
-			end, { p1.onResolutionChanged, var6 }),
-			[reactModule.Event.Loaded] = reactModule.useCallback(function(p2)
-				-- upvalues: var3 (ref), loadingStateModule (copy), var4 (ref), p1 (ref)
-				if var3 == loadingStateModule.Loading then
-					var4(loadingStateModule.Finished)
-				end
-				p1.onLoaded(p2)
-			end, { var3, p1.onLoaded })
+			ref = Frame.videoRef,
+			Size = if Frame.scaleType == Enum.ScaleType.Fit then GetFitSizeModule(UseStateResult, UseStateResult3) else GetCropSizeModule(UseStateResult, UseStateResult3),
+			Video = Frame.Video,
+			VideoContent = Frame.VideoContent,
+			Visible = UseStateResult3.X > 0 and UseStateResult3.Y > 0,
+			[ReactModule.Change.Resolution] = UseResult1,
+			[ReactModule.Event.Loaded] = UseResult2
 		}, {
-			Corner = if p1.cornerRadius then reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, p1.cornerRadius) }) else nil
+			Corner = if Frame.cornerRadius then ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, Frame.cornerRadius) }) else nil
 		}),
-		Shimmer = if var3 ~= loadingStateModule.Finished then nil else reactModule.createElement(skeleton, { ZIndex = 2, Size = UDim2.fromScale(1, 1) })
+		Shimmer = if UseStateResult1 == LoadingStateModule.Finished then nil else ReactModule.createElement(Skeleton, { ZIndex = 2, Size = UDim2.fromScale(1, 1) })
 	})
 end

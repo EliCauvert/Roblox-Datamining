@@ -1,21 +1,21 @@
-﻿local reactModule = require(script:FindFirstAncestor("TiltLoadingScreen").Parent.Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("TiltLoadingScreen").Parent.Parent.React)
 
-return function(value)
-	-- upvalues: reactModule (ref)
-	local var1, var2 = reactModule.useState(false)
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref)
-		var2(false)
-		local delayedThread = task.delay(0.1, function()
-			-- upvalues: var2 (copy)
-			var2(true)
+return function(Vector) --[[ Line: 9 | Named "useViewportSettled" ]]
+	-- upvalues: ReactModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	ReactModule.useEffect(function() --[[ Line: 12 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(false)
+		local DelayedThread = task.delay(0.1, function() --[[ Line: 14 ]]
+			-- upvalues: UseStateResult2 (upval)
+			UseStateResult2(true)
 		end)
 		
-		return function()
-			-- upvalues: delayedThread (ref)
-			pcall(task.cancel, delayedThread)
+		return function() --[[ Line: 17 ]]
+			-- upvalues: DelayedThread (copy)
+			pcall(task.cancel, DelayedThread)
 		end
-	end, { value.X, value.Y })
+	end, { Vector.X, Vector.Y })
 	
-	return var1
+	return UseStateResult
 end

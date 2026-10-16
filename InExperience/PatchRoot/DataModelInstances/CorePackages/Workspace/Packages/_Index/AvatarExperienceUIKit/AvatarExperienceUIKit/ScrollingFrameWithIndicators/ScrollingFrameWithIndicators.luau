@@ -1,305 +1,317 @@
-﻿local avatarExperienceUIKit = script:FindFirstAncestor("AvatarExperienceUIKit")
-local parent = avatarExperienceUIKit.Parent
-local reactModule = require(parent.React)
-local reactOtterModule = require(parent.ReactOtter)
-local useAnimatedBinding = reactOtterModule.useAnimatedBinding
-local foundationModule = require(parent.Foundation)
-local responsiveModule = require(parent.Responsive)
-local useTokens = foundationModule.Hooks.useTokens
-local view = foundationModule.View
-local iconButton = foundationModule.IconButton
-local inputSize = foundationModule.Enums.InputSize
-local iconName = foundationModule.Enums.IconName
-local iconVariant = foundationModule.Enums.IconVariant
-local makeOtterSpringValueModule = require(avatarExperienceUIKit.Utils.makeOtterSpringValue)
-local shouldShowScrollArrowsForInputTypeModule = require(avatarExperienceUIKit.Utils.shouldShowScrollArrowsForInputType)
-local getFixedTabHeightModule = require(avatarExperienceUIKit.Utils.getFixedTabHeight)
-local gradientTransparencyModule = require(script.Parent.gradientTransparency)
-local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
-local fFlagAXCategoryMenuVisualFixes = avatarExperienceFlagsModule.FFlagAXCategoryMenuVisualFixes
-local fFlagAXFixScrollingFrameGradientOverlap = avatarExperienceFlagsModule.FFlagAXFixScrollingFrameGradientOverlap
-local t = { dampingRatio = 1, frequency = 5 }
-local t_1 = {
-	name = iconName.ChevronLargeLeft,
-	variant = iconVariant.Filled
+﻿local AvatarExperienceUIKit = script:FindFirstAncestor("AvatarExperienceUIKit")
+local Parent = AvatarExperienceUIKit.Parent
+local ReactModule = require(Parent.React)
+local ReactOtterModule = require(Parent.ReactOtter)
+local UseAnimatedBindingFunction = ReactOtterModule.useAnimatedBinding
+local FoundationModule = require(Parent.Foundation)
+local ResponsiveModule = require(Parent.Responsive)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local View = FoundationModule.View
+local IconButton = FoundationModule.IconButton
+local InputSize = FoundationModule.Enums.InputSize
+local IconName = FoundationModule.Enums.IconName
+local IconVariant = FoundationModule.Enums.IconVariant
+local MakeOtterSpringValueModule = require(AvatarExperienceUIKit.Utils.makeOtterSpringValue)
+local ShouldShowScrollArrowsForInputTypeModule = require(AvatarExperienceUIKit.Utils.shouldShowScrollArrowsForInputType)
+local GetFixedTabHeightModule = require(AvatarExperienceUIKit.Utils.getFixedTabHeight)
+local GradientTransparencyModule = require(script.Parent.gradientTransparency)
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
+local FFlagAXCategoryMenuVisualFixes = AvatarExperienceFlagsModule.FFlagAXCategoryMenuVisualFixes
+local FFlagAXFixScrollingFrameGradientOverlap = AvatarExperienceFlagsModule.FFlagAXFixScrollingFrameGradientOverlap
+local config = { dampingRatio = 1, frequency = 5 }
+local Icon = {
+	name = IconName.ChevronLargeLeft,
+	variant = IconVariant.Filled
 }
-local t_2 = {
-	name = iconName.ChevronLargeRight,
-	variant = iconVariant.Filled
+local Icon1 = {
+	name = IconName.ChevronLargeRight,
+	variant = IconVariant.Filled
 }
 
-local function _(p1)
-	return p1.CanvasPosition.X > 0
+local function _(ScrollFrame): boolean --[[ Line: 39 | Named "scrollingFrameCanScrollLeft" ]]
+	return ScrollFrame.CanvasPosition.X > 0
 end
 
-local _ = function(p1)
-	return p1.AbsoluteSize.X < p1.AbsoluteCanvasSize.X - p1.CanvasPosition.X
+local _ = function(ScrollFrame): boolean --[[ Line: 43 | Named "scrollingFrameCanScrollRight" ]]
+	return ScrollFrame.AbsoluteSize.X < ScrollFrame.AbsoluteCanvasSize.X - ScrollFrame.CanvasPosition.X
 end
 
-local function getCanvasPosition(p1)
-	return Vector2.new(p1, 0)
+local function getCanvasPosition(X): Vector2 --[[ Line: 47 ]]
+	return Vector2.new(X, 0)
 end
 
-local function gradientTransparency(p1, p2, p3)
-	local var1 = 1 - p3
-	local var2 = var1 * p1[1]
-	local var3 = var1 * p1[2]
-	local var4 = p1[3]
+local function gradientTransparency(Entry, ScaledSize, BackgroundTransparency: number): NumberSequence? --[[ Line: 51 ]]
+	local v1 = 1 - BackgroundTransparency
+	local ScaledEntry = v1 * Entry[1]
+	local ScaledEntry1 = v1 * Entry[2]
+	local Entry1: number = Entry[3]
 	
-	if var4 < 1 then
+	if Entry1 < 1 then
 		return nil
 	end
-	local var5 = if var4 < p2 then 1 else p2 / var4
-	local t = {}
+	local ScaledSizeRatio = if Entry1 < ScaledSize then 1 else ScaledSize / Entry1
+	local List = {}
 	
-	if var2 > 0 then
-		table.insert(t, NumberSequenceKeypoint.new(0, 1 - var2))
-		table.insert(t, NumberSequenceKeypoint.new(var5, 1 - var2))
-		table.insert(t, NumberSequenceKeypoint.new(var5 + var5 * var2, 1))
+	if ScaledEntry > 0 then
+		table.insert(List, NumberSequenceKeypoint.new(0, 1 - ScaledEntry))
+		table.insert(List, NumberSequenceKeypoint.new(ScaledSizeRatio, 1 - ScaledEntry))
+		table.insert(List, NumberSequenceKeypoint.new(ScaledSizeRatio + ScaledSizeRatio * ScaledEntry, 1))
 	else
-		table.insert(t, NumberSequenceKeypoint.new(0, 1))
+		table.insert(List, NumberSequenceKeypoint.new(0, 1))
 	end
-	if var3 > 0 then
-		table.insert(t, NumberSequenceKeypoint.new(1 - var5 * var3 - var5, 1))
-		table.insert(t, NumberSequenceKeypoint.new(1 - var5, 1 - var3))
-		table.insert(t, NumberSequenceKeypoint.new(1, 1 - var3))
+	if ScaledEntry1 > 0 then
+		table.insert(List, NumberSequenceKeypoint.new(1 - ScaledSizeRatio * ScaledEntry1 - ScaledSizeRatio, 1))
+		table.insert(List, NumberSequenceKeypoint.new(1 - ScaledSizeRatio, 1 - ScaledEntry1))
+		table.insert(List, NumberSequenceKeypoint.new(1, 1 - ScaledEntry1))
 	else
-		table.insert(t, NumberSequenceKeypoint.new(1, 1))
+		table.insert(List, NumberSequenceKeypoint.new(1, 1))
 	end
-	return NumberSequence.new(t)
+	return NumberSequence.new(List)
 end
 
-local _ = function(p1, p2)
-	-- upvalues: fFlagAXFixScrollingFrameGradientOverlap (ref), gradientTransparencyModule (ref), gradientTransparency (ref)
-	return function(p3)
-		-- upvalues: fFlagAXFixScrollingFrameGradientOverlap (copy), gradientTransparencyModule (copy), p1 (ref), p2 (ref), gradientTransparency (copy)
-		return if fFlagAXFixScrollingFrameGradientOverlap then gradientTransparencyModule.fittedGradientTransparency(p3, p1, p2) else gradientTransparency(p3, p1, p2)
+local _ = function(p1, p2) --[[ Line: 88 | Named "makeGradientTransparency" ]]
+	-- upvalues: FFlagAXFixScrollingFrameGradientOverlap (copy), GradientTransparencyModule (copy), gradientTransparency (copy)
+	return function(p3) --[[ Line: 89 ]]
+		-- upvalues: FFlagAXFixScrollingFrameGradientOverlap (upval), GradientTransparencyModule (upval), p1 (copy), p2 (copy), gradientTransparency (upval)
+		return if FFlagAXFixScrollingFrameGradientOverlap then GradientTransparencyModule.fittedGradientTransparency(p3, p1, p2) else gradientTransparency(p3, p1, p2)
 	end
 end
 
-local function makeButtonTransparency(p1)
-	return 1 - p1[1] * p1[2]
+local function makeButtonTransparency(Entry): number --[[ Line: 97 ]]
+	return 1 - Entry[1] * Entry[2]
 end
 
-local function isVisibleFromTransparency(p1)
+local function isVisibleFromTransparency(p1: number): boolean --[[ Line: 103 ]]
 	return p1 < 1
 end
 
-return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useTokens (ref), fFlagAXCategoryMenuVisualFixes (ref), useAnimatedBinding (ref), reactModule (ref), responsiveModule (ref), shouldShowScrollArrowsForInputTypeModule (ref), getCanvasPosition (ref), fFlagAXFixScrollingFrameGradientOverlap (ref), gradientTransparencyModule (ref), gradientTransparency (ref), makeButtonTransparency (ref), isVisibleFromTransparency (ref), reactOtterModule (ref), makeOtterSpringValueModule (ref), t (ref), getFixedTabHeightModule (ref), view (ref), iconButton (ref), inputSize (ref), t_1 (ref), t_2 (ref)
-	local var1 = useTokens()
-	local backgroundTransparency = p1.BackgroundTransparency or var1.Color.Common.NavigationBar.Transparency
-	local backgroundColor3 = p1.BackgroundColor3 or var1.Color.Common.NavigationBar.Color3
-	local var2 = if fFlagAXCategoryMenuVisualFixes then var1.Size.Size_150 else var1.Size.Size_100
-	local var3 = if fFlagAXCategoryMenuVisualFixes then var2 * 2 else var2
-	local var4, var5 = useAnimatedBinding(0)
-	local var6, var7 = useAnimatedBinding(0)
-	local var8, var9 = reactModule.useBinding(0)
-	local var10, var11 = useAnimatedBinding(0)
-	local var12, var13 = reactModule.useState(false)
-	local var14 = if fFlagAXCategoryMenuVisualFixes then shouldShowScrollArrowsForInputTypeModule(responsiveModule.useLastInput()) else nil
-	local var15, var16 = useAnimatedBinding(0)
-	local var17 = reactModule.useRef(nil)
-	local var18 = reactModule.useMemo(function()
-		-- upvalues: var15 (ref), getCanvasPosition (copy)
-		return var15:map(getCanvasPosition)
+return ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 126 | Named "ScrollingFrameWithIndicators" ]]
+	-- upvalues: UseTokensFunction (copy), FFlagAXCategoryMenuVisualFixes (copy), UseAnimatedBindingFunction (copy), ReactModule (copy), ResponsiveModule (copy), ShouldShowScrollArrowsForInputTypeModule (copy), getCanvasPosition (copy), FFlagAXFixScrollingFrameGradientOverlap (copy), GradientTransparencyModule (copy), gradientTransparency (copy), makeButtonTransparency (copy), isVisibleFromTransparency (copy), ReactOtterModule (copy), MakeOtterSpringValueModule (copy), config (copy), GetFixedTabHeightModule (copy), View (copy), IconButton (copy), InputSize (copy), Icon (copy), Icon1 (copy)
+	local UseTokensResult = UseTokensFunction()
+	local BackgroundTransparency = Frame.BackgroundTransparency or UseTokensResult.Color.Common.NavigationBar.Transparency
+	local BackgroundColor3 = Frame.BackgroundColor3 or UseTokensResult.Color.Common.NavigationBar.Color3
+	local Size150 = if FFlagAXCategoryMenuVisualFixes then UseTokensResult.Size.Size_150 else UseTokensResult.Size.Size_100
+	local Offset = if FFlagAXCategoryMenuVisualFixes then Size150 * 2 else Size150
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = UseAnimatedBindingFunction(0)
+	local UseAnimatedBindingResult1, UseAnimatedBindingResult2_1 = UseAnimatedBindingFunction(0)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
+	local UseAnimatedBindingResult3, UseAnimatedBindingResult2_2 = UseAnimatedBindingFunction(0)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local ShouldShowScrollArrowsForInputTypeModule1 = if FFlagAXCategoryMenuVisualFixes then ShouldShowScrollArrowsForInputTypeModule((ResponsiveModule.useLastInput())) else nil
+	local UseAnimatedBindingResult4, UseAnimatedBindingResult2_3 = UseAnimatedBindingFunction(0)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 155 ]]
+		-- upvalues: UseAnimatedBindingResult4 (copy), getCanvasPosition (upval)
+		return UseAnimatedBindingResult4:map(getCanvasPosition)
 	end, {})
-	local var19 = reactModule.useMemo(function()
-		-- upvalues: reactModule (copy), var4 (ref), var6 (ref), var8 (ref), var1 (ref), backgroundTransparency (ref), fFlagAXFixScrollingFrameGradientOverlap (copy), gradientTransparencyModule (copy), gradientTransparency (copy)
-		local var20 = var1.Size.Size_300 * 2
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 159 ]]
+		-- upvalues: ReactModule (upval), UseAnimatedBindingResult (copy), UseAnimatedBindingResult1 (copy), UseBindingResult (copy), UseTokensResult (copy), BackgroundTransparency (copy), FFlagAXFixScrollingFrameGradientOverlap (upval), GradientTransparencyModule (upval), gradientTransparency (upval)
+		local ScaledSize = UseTokensResult.Size.Size_300 * 2
 		
-		return reactModule.joinBindings({ var4, var6, var8 }):map(function(p3)
-			-- upvalues: fFlagAXFixScrollingFrameGradientOverlap (copy), gradientTransparencyModule (copy), var20 (ref), backgroundTransparency (ref), gradientTransparency (copy)
-			return if fFlagAXFixScrollingFrameGradientOverlap then gradientTransparencyModule.fittedGradientTransparency(p3, var20, backgroundTransparency) else gradientTransparency(p3, var20, backgroundTransparency)
+		return ReactModule.joinBindings({
+			UseAnimatedBindingResult,
+			UseAnimatedBindingResult1,
+			UseBindingResult
+		}):map(function(p1) --[[ Line: 89 ]]
+			-- upvalues: FFlagAXFixScrollingFrameGradientOverlap (upval), GradientTransparencyModule (upval), ScaledSize (copy), BackgroundTransparency (copy), gradientTransparency (upval)
+			return if FFlagAXFixScrollingFrameGradientOverlap then GradientTransparencyModule.fittedGradientTransparency(p1, ScaledSize, BackgroundTransparency) else gradientTransparency(p1, ScaledSize, BackgroundTransparency)
 		end)
-	end, { var1, backgroundTransparency })
-	local var20 = reactModule.useMemo(function()
-		-- upvalues: reactModule (copy), var6 (ref), var10 (ref), makeButtonTransparency (copy)
-		return reactModule.joinBindings({ var6, var10 }):map(makeButtonTransparency)
+	end, { UseTokensResult, BackgroundTransparency })
+	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 167 ]]
+		-- upvalues: ReactModule (upval), UseAnimatedBindingResult1 (copy), UseAnimatedBindingResult3 (copy), makeButtonTransparency (upval)
+		return ReactModule.joinBindings({ UseAnimatedBindingResult1, UseAnimatedBindingResult3 }):map(makeButtonTransparency)
 	end, {})
-	local var21 = reactModule.useMemo(function()
-		-- upvalues: reactModule (copy), var4 (ref), var10 (ref), makeButtonTransparency (copy)
-		return reactModule.joinBindings({ var4, var10 }):map(makeButtonTransparency)
+	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 171 ]]
+		-- upvalues: ReactModule (upval), UseAnimatedBindingResult (copy), UseAnimatedBindingResult3 (copy), makeButtonTransparency (upval)
+		return ReactModule.joinBindings({ UseAnimatedBindingResult, UseAnimatedBindingResult3 }):map(makeButtonTransparency)
 	end, {})
-	local var22 = reactModule.useMemo(function()
-		-- upvalues: var21 (ref), isVisibleFromTransparency (copy)
-		return var21:map(isVisibleFromTransparency)
+	local UseMemoResult4 = ReactModule.useMemo(function() --[[ Line: 178 ]]
+		-- upvalues: UseMemoResult3 (copy), isVisibleFromTransparency (upval)
+		return UseMemoResult3:map(isVisibleFromTransparency)
 	end, {})
-	local var23 = reactModule.useMemo(function()
-		-- upvalues: var20 (ref), isVisibleFromTransparency (copy)
-		return var20:map(isVisibleFromTransparency)
+	local UseMemoResult5 = ReactModule.useMemo(function() --[[ Line: 182 ]]
+		-- upvalues: UseMemoResult2 (copy), isVisibleFromTransparency (upval)
+		return UseMemoResult2:map(isVisibleFromTransparency)
 	end, {})
-	local var24 = reactModule.useCallback(function()
-		-- upvalues: var17 (ref), var16 (ref), reactOtterModule (copy), makeOtterSpringValueModule (copy), t (copy)
-		local current = var17.current
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 186 ]]
+		-- upvalues: UseRefResult (copy), UseAnimatedBindingResult2_3 (copy), ReactOtterModule (upval), MakeOtterSpringValueModule (upval), config (upval)
+		local Current = UseRefResult.current
 		
-		if current then
-			var16(reactOtterModule.instant(current.CanvasPosition.X))
-			var16(makeOtterSpringValueModule(current.AbsoluteCanvasSize.X - current.AbsoluteSize.X, t))
+		if Current then
+			UseAnimatedBindingResult2_3(ReactOtterModule.instant(Current.CanvasPosition.X))
+			UseAnimatedBindingResult2_3(MakeOtterSpringValueModule(Current.AbsoluteCanvasSize.X - Current.AbsoluteSize.X, config))
 		end
 	end, {})
-	local var25 = reactModule.useCallback(function()
-		-- upvalues: var17 (ref), var16 (ref), reactOtterModule (copy), makeOtterSpringValueModule (copy), t (copy)
-		local current = var17.current
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 199 ]]
+		-- upvalues: UseRefResult (copy), UseAnimatedBindingResult2_3 (copy), ReactOtterModule (upval), MakeOtterSpringValueModule (upval), config (upval)
+		local Current = UseRefResult.current
 		
-		if current then
-			var16(reactOtterModule.instant(current.CanvasPosition.X))
-			var16(makeOtterSpringValueModule(0, t))
+		if Current then
+			UseAnimatedBindingResult2_3(ReactOtterModule.instant(Current.CanvasPosition.X))
+			UseAnimatedBindingResult2_3(MakeOtterSpringValueModule(0, config))
 		end
 	end, {})
 	
-	local function onMouseEnter()
-		-- upvalues: fFlagAXCategoryMenuVisualFixes (copy), var14 (write), var11 (ref), makeOtterSpringValueModule (copy), t (copy), var13 (ref)
-		if fFlagAXCategoryMenuVisualFixes and not var14 then
-			return
-		end
-		var11(makeOtterSpringValueModule(1, t))
-		var13(true)
-	end
-	
-	local function onMouseLeave()
-		-- upvalues: fFlagAXCategoryMenuVisualFixes (copy), var14 (write), var11 (ref), makeOtterSpringValueModule (copy), t (copy), var13 (ref)
-		if fFlagAXCategoryMenuVisualFixes and not var14 then
-			return
-		end
-		var11(makeOtterSpringValueModule(0, t))
-		var13(false)
-	end
-	
-	if fFlagAXCategoryMenuVisualFixes then
-		reactModule.useEffect(function()
-			-- upvalues: var14 (write), var11 (ref), reactOtterModule (copy), var13 (ref)
-			if not var14 then
-				var11(reactOtterModule.instant(0))
-				var13(false)
-			end
-		end, { var14 })
-	end
-	local function onCanvasChanged(p3)
-		-- upvalues: var5 (ref), makeOtterSpringValueModule (copy), t (copy), var7 (ref)
-		var5(makeOtterSpringValueModule(if p3.CanvasPosition.X > 0 then 1 else 0, t))
-		var7(makeOtterSpringValueModule(if p3.AbsoluteSize.X < p3.AbsoluteCanvasSize.X - p3.CanvasPosition.X then 1 else 0, t))
-	end
-	
-	local function onSizeChanged(p3)
-		-- upvalues: var9 (ref)
-		var9(p3.AbsoluteSize.X)
-	end
-	
-	reactModule.useEffect(function()
-		-- upvalues: var17 (ref), var5 (ref), reactOtterModule (copy), var7 (ref)
-		local current = var17.current
-		
-		if current then
-			var5(reactOtterModule.instant(if current.CanvasPosition.X > 0 then 1 else 0))
-			var7(reactOtterModule.instant(if current.AbsoluteSize.X < current.AbsoluteCanvasSize.X - current.CanvasPosition.X then 1 else 0))
-		end
-	end, {})
-	
-	if fFlagAXCategoryMenuVisualFixes then
-		local var26 = reactModule.useCallback(function(p3)
-			-- upvalues: var17 (ref), var16 (ref), reactOtterModule (copy), makeOtterSpringValueModule (copy), t (copy)
-			local current = var17.current
+	local function onMouseEnter() --[[ Line: 209 ]]
+		-- upvalues: FFlagAXCategoryMenuVisualFixes (upval), ShouldShowScrollArrowsForInputTypeModule1 (ref), UseAnimatedBindingResult2_2 (copy), MakeOtterSpringValueModule (upval), config (upval), UseStateResult2 (copy)
+		if not FFlagAXCategoryMenuVisualFixes or ShouldShowScrollArrowsForInputTypeModule1 then
+			UseAnimatedBindingResult2_2(MakeOtterSpringValueModule(1, config))
+			UseStateResult2(true)
 			
-			if current then
-				var16(reactOtterModule.instant(current.CanvasPosition.X))
-				var16(makeOtterSpringValueModule(p3, t))
+			return
+		end
+	end
+	
+	local function onMouseLeave() --[[ Line: 217 ]]
+		-- upvalues: FFlagAXCategoryMenuVisualFixes (upval), ShouldShowScrollArrowsForInputTypeModule1 (ref), UseAnimatedBindingResult2_2 (copy), MakeOtterSpringValueModule (upval), config (upval), UseStateResult2 (copy)
+		if not FFlagAXCategoryMenuVisualFixes or ShouldShowScrollArrowsForInputTypeModule1 then
+			UseAnimatedBindingResult2_2(MakeOtterSpringValueModule(0, config))
+			UseStateResult2(false)
+			
+			return
+		end
+	end
+	
+	if FFlagAXCategoryMenuVisualFixes then
+		ReactModule.useEffect(function() --[[ Line: 228 ]]
+			-- upvalues: ShouldShowScrollArrowsForInputTypeModule1 (ref), UseAnimatedBindingResult2_2 (copy), ReactOtterModule (upval), UseStateResult2 (copy)
+			if not ShouldShowScrollArrowsForInputTypeModule1 then
+				UseAnimatedBindingResult2_2(ReactOtterModule.instant(0))
+				UseStateResult2(false)
+			end
+		end, { ShouldShowScrollArrowsForInputTypeModule1 })
+	end
+	local function onCanvasChanged(ScrollFrame) --[[ Line: 236 ]]
+		-- upvalues: UseAnimatedBindingResult2 (copy), MakeOtterSpringValueModule (upval), config (upval), UseAnimatedBindingResult2_1 (copy)
+		local IsXAbove = ScrollFrame.CanvasPosition.X > 0
+		UseAnimatedBindingResult2(MakeOtterSpringValueModule(if IsXAbove then 1 else 0, config))
+		local IsXBelow = ScrollFrame.AbsoluteSize.X < ScrollFrame.AbsoluteCanvasSize.X - ScrollFrame.CanvasPosition.X
+		UseAnimatedBindingResult2_1(MakeOtterSpringValueModule(if IsXBelow then 1 else 0, config))
+	end
+	
+	local function onSizeChanged(Frame) --[[ Line: 243 ]]
+		-- upvalues: UseBindingResult2 (copy)
+		UseBindingResult2(Frame.AbsoluteSize.X)
+	end
+	
+	ReactModule.useEffect(function() --[[ Line: 247 ]]
+		-- upvalues: UseRefResult (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), UseAnimatedBindingResult2_1 (copy)
+		local Current = UseRefResult.current
+		
+		if Current then
+			local IsXAbove = Current.CanvasPosition.X > 0
+			UseAnimatedBindingResult2(ReactOtterModule.instant(if IsXAbove then 1 else 0))
+			local IsXBelow = Current.AbsoluteSize.X < Current.AbsoluteCanvasSize.X - Current.CanvasPosition.X
+			UseAnimatedBindingResult2_1(ReactOtterModule.instant(if IsXBelow then 1 else 0))
+		end
+	end, {})
+	
+	if FFlagAXCategoryMenuVisualFixes then
+		local UseResult2 = ReactModule.useCallback(function(p1) --[[ Line: 262 ]]
+			-- upvalues: UseRefResult (copy), UseAnimatedBindingResult2_3 (copy), ReactOtterModule (upval), MakeOtterSpringValueModule (upval), config (upval)
+			local Current = UseRefResult.current
+			
+			if Current then
+				UseAnimatedBindingResult2_3(ReactOtterModule.instant(Current.CanvasPosition.X))
+				UseAnimatedBindingResult2_3(MakeOtterSpringValueModule(p1, config))
 			end
 		end, {})
-		local var27 = reactModule.useCallback(function(p3)
-			-- upvalues: var17 (ref), var16 (ref), reactOtterModule (copy)
-			if var17.current then
-				var16(reactOtterModule.instant(p3))
+		local UseResult3 = ReactModule.useCallback(function(p1) --[[ Line: 271 ]]
+			-- upvalues: UseRefResult (copy), UseAnimatedBindingResult2_3 (copy), ReactOtterModule (upval)
+			if UseRefResult.current then
+				UseAnimatedBindingResult2_3(ReactOtterModule.instant(p1))
 			end
 		end, {})
-		reactModule.useImperativeHandle(p1.controllerRef, function()
-			-- upvalues: var26 (ref), var27 (ref), var17 (ref)
+		ReactModule.useImperativeHandle(Frame.controllerRef, function() --[[ Line: 278 ]]
+			-- upvalues: UseResult2 (copy), UseResult3 (copy), UseRefResult (copy)
 			return {
-				scrollToOffset = var26,
-				setOffset = var27,
-				getScrollingFrame = function()
-					-- upvalues: var17 (copy)
-					return var17.current
+				scrollToOffset = UseResult2,
+				setOffset = UseResult3,
+				getScrollingFrame = function() --[[ Line: 282 ]]
+					-- upvalues: UseRefResult (upval)
+					return UseRefResult.current
 				end
 			}
-		end, { var26, var27 })
+		end, { UseResult2, UseResult3 })
 	end
-	local var28 = getFixedTabHeightModule(var1)
+	local Size1000 = UseTokensResult.Size.Size_1000
+	local FixedTabHeightModule: number = GetFixedTabHeightModule(UseTokensResult)
+	local NewSize = Size150 + FixedTabHeightModule + Offset
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
-		Size = if fFlagAXCategoryMenuVisualFixes then UDim2.new(1, 0, 0, var1.Size.Size_1000) else UDim2.fromScale(1, 0),
-		AutomaticSize = if fFlagAXCategoryMenuVisualFixes then Enum.AutomaticSize.None else Enum.AutomaticSize.Y,
-		ClipsDescendants = if fFlagAXCategoryMenuVisualFixes then false else nil,
-		BackgroundTransparency = backgroundTransparency,
-		BackgroundColor3 = backgroundColor3,
-		LayoutOrder = p1.LayoutOrder,
-		ZIndex = p1.ZIndex,
-		Position = p1.Position,
-		ref = p2
+		Size = if FFlagAXCategoryMenuVisualFixes then UDim2.new(1, 0, 0, Size1000) else UDim2.fromScale(1, 0),
+		AutomaticSize = if FFlagAXCategoryMenuVisualFixes then Enum.AutomaticSize.None else Enum.AutomaticSize.Y,
+		ClipsDescendants = not FFlagAXCategoryMenuVisualFixes and nil,
+		BackgroundTransparency = BackgroundTransparency,
+		BackgroundColor3 = BackgroundColor3,
+		LayoutOrder = Frame.LayoutOrder,
+		ZIndex = Frame.ZIndex,
+		Position = Frame.Position,
+		ref = Ref
 	}, {
-		ScrollingFrame = reactModule.createElement("ScrollingFrame", {
+		ScrollingFrame = ReactModule.createElement("ScrollingFrame", {
 			ClipsDescendants = true,
-			Size = if fFlagAXCategoryMenuVisualFixes then UDim2.new(1, 0, 0, var2 + var28 + var3) else UDim2.fromScale(1, 0),
-			Position = if fFlagAXCategoryMenuVisualFixes then UDim2.fromOffset(0, -var2) else nil,
-			AutomaticSize = if fFlagAXCategoryMenuVisualFixes then Enum.AutomaticSize.None else Enum.AutomaticSize.Y,
+			Size = if FFlagAXCategoryMenuVisualFixes then UDim2.new(1, 0, 0, NewSize) else UDim2.fromScale(1, 0),
+			Position = if FFlagAXCategoryMenuVisualFixes then UDim2.fromOffset(0, -Size150) else nil,
+			AutomaticSize = if FFlagAXCategoryMenuVisualFixes then Enum.AutomaticSize.None else Enum.AutomaticSize.Y,
 			Selectable = false,
 			CanvasSize = UDim2.fromScale(1, 0),
 			AutomaticCanvasSize = Enum.AutomaticSize.XY,
 			ScrollBarThickness = 0,
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
-			ElasticBehavior = if fFlagAXCategoryMenuVisualFixes then Enum.ElasticBehavior.Never else Enum.ElasticBehavior.Always,
+			ElasticBehavior = if FFlagAXCategoryMenuVisualFixes then Enum.ElasticBehavior.Never else Enum.ElasticBehavior.Always,
 			ScrollingDirection = Enum.ScrollingDirection.X,
-			CanvasPosition = var18,
-			[reactModule.Change.AbsoluteSize] = onSizeChanged,
-			[reactModule.Change.CanvasSize] = onCanvasChanged,
-			[reactModule.Change.AbsoluteCanvasSize] = onCanvasChanged,
-			[reactModule.Change.CanvasPosition] = onCanvasChanged,
-			[reactModule.Event.MouseEnter] = onMouseEnter,
-			[reactModule.Event.MouseLeave] = onMouseLeave,
-			ref = var17
-		}, if fFlagAXCategoryMenuVisualFixes then {
-			FocusCursorInset = reactModule.createElement("UIPadding", {
-				PaddingTop = UDim.new(0, var2),
-				PaddingBottom = UDim.new(0, var3),
-				PaddingLeft = UDim.new(0, var2),
-				PaddingRight = UDim.new(0, var2)
+			CanvasPosition = UseMemoResult,
+			[ReactModule.Change.AbsoluteSize] = onSizeChanged,
+			[ReactModule.Change.CanvasSize] = onCanvasChanged,
+			[ReactModule.Change.AbsoluteCanvasSize] = onCanvasChanged,
+			[ReactModule.Change.CanvasPosition] = onCanvasChanged,
+			[ReactModule.Event.MouseEnter] = onMouseEnter,
+			[ReactModule.Event.MouseLeave] = onMouseLeave,
+			ref = UseRefResult
+		}, if FFlagAXCategoryMenuVisualFixes then {
+			FocusCursorInset = ReactModule.createElement("UIPadding", {
+				PaddingTop = UDim.new(0, Size150),
+				PaddingBottom = UDim.new(0, Offset),
+				PaddingLeft = UDim.new(0, Size150),
+				PaddingRight = UDim.new(0, Size150)
 			}),
-			Content = reactModule.createElement(reactModule.Fragment, nil, p1.children)
-		} else reactModule.createElement(reactModule.Fragment, nil, p1.children)),
-		OverlayFrame = reactModule.createElement("Frame", {
+			Content = ReactModule.createElement(ReactModule.Fragment, nil, Frame.children)
+		} else ReactModule.createElement(ReactModule.Fragment, nil, Frame.children)),
+		OverlayFrame = ReactModule.createElement("Frame", {
 			ZIndex = 2,
 			BorderSizePixel = 0,
 			Size = UDim2.fromScale(1, 1),
-			BackgroundColor3 = backgroundColor3
+			BackgroundColor3 = BackgroundColor3
 		}, {
-			Gradient = reactModule.createElement("UIGradient", { Transparency = var19 }),
-			LeftButton = reactModule.createElement(view, {
+			Gradient = ReactModule.createElement("UIGradient", { Transparency = UseMemoResult1 }),
+			LeftButton = ReactModule.createElement(View, {
 				BackgroundTransparency = 1,
-				Position = if fFlagAXCategoryMenuVisualFixes then UDim2.new(0, 0, 0, var28 / 2) else UDim2.fromScale(0, 0.5),
+				Position = if FFlagAXCategoryMenuVisualFixes then UDim2.new(0, 0, 0, FixedTabHeightModule / 2) else UDim2.fromScale(0, 0.5),
 				AnchorPoint = Vector2.new(0, 0.5),
 				AutomaticSize = Enum.AutomaticSize.XY,
-				GroupTransparency = var21,
-				Visible = var22
-			}, reactModule.createElement(iconButton, {
-				isDisabled = not var12,
-				size = inputSize.Small,
-				icon = t_1,
-				onActivated = var25
+				GroupTransparency = UseMemoResult3,
+				Visible = UseMemoResult4
+			}, ReactModule.createElement(IconButton, {
+				isDisabled = not UseStateResult,
+				size = InputSize.Small,
+				icon = Icon,
+				onActivated = UseResult1
 			})),
-			RightButton = reactModule.createElement(view, {
+			RightButton = ReactModule.createElement(View, {
 				BackgroundTransparency = 1,
-				Position = if fFlagAXCategoryMenuVisualFixes then UDim2.new(1, 0, 0, var28 / 2) else UDim2.fromScale(1, 0.5),
+				Position = if FFlagAXCategoryMenuVisualFixes then UDim2.new(1, 0, 0, FixedTabHeightModule / 2) else UDim2.fromScale(1, 0.5),
 				AnchorPoint = Vector2.new(1, 0.5),
 				AutomaticSize = Enum.AutomaticSize.XY,
-				GroupTransparency = var20,
-				Visible = var23
-			}, reactModule.createElement(iconButton, {
-				isDisabled = not var12,
-				size = inputSize.Small,
-				icon = t_2,
-				onActivated = var24
+				GroupTransparency = UseMemoResult2,
+				Visible = UseMemoResult5
+			}, ReactModule.createElement(IconButton, {
+				isDisabled = not UseStateResult,
+				size = InputSize.Small,
+				icon = Icon1,
+				onActivated = UseResult
 			}))
 		})
 	})

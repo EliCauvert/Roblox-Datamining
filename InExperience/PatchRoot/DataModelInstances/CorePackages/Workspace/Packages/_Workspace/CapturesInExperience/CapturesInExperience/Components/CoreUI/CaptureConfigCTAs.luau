@@ -1,162 +1,167 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local guiService = game:GetService("GuiService")
-local userInputService = game:GetService("UserInputService")
-local appCommonLibModule = require(parent_1.AppCommonLib)
-local localizationModule = require(parent_1.Localization)
-local reactModule = require(parent_1.React)
-local UIBloxModule = require(parent_1.UIBlox)
-local foundationModule = require(parent_1.Foundation)
-local getTextSize = require(parent_1.Style).GetTextSize
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local useLocalization = localizationModule.Hooks.useLocalization
-local useStyle = UIBloxModule.Core.Style.useStyle
-local text = appCommonLibModule.Text
-local capturesContextModule = require(parent.Context.CapturesContext)
-local capturesPolicyModule = require(parent.App.CapturesPolicy)
-local onOffButtonModule = require(parent.Components.CoreUI.OnOffButton)
-local videoCaptureCTAModule = require(parent.Components.CoreUI.VideoCaptureCTA)
-local useKeyboardEnabledModule = require(parent.Hooks.useKeyboardEnabled)
-local uDim = UDim.new(0, 8)
-local var1 = if userInputService:GetPlatform() == Enum.Platform.OSX then "Opt" else "Alt"
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local GuiService = game:GetService("GuiService")
+local UserInputService = game:GetService("UserInputService")
+local ReactModule = require(Parent1.React)
+local FoundationModule = require(Parent1.Foundation)
+local GetTextSizeFunction = require(Parent1.Style).GetTextSize
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
+local UseStyleFunction = require(Parent1.UIBlox).Core.Style.useStyle
+local Text = require(Parent1.AppCommonLib).Text
+local CapturesContextModule = require(Parent.Context.CapturesContext)
+local OnOffButtonModule = require(Parent.Components.CoreUI.OnOffButton)
+local VideoCaptureCTAModule = require(Parent.Components.CoreUI.VideoCaptureCTA)
+local UseKeyboardEnabledModule = require(Parent.Hooks.useKeyboardEnabled)
+local _UDim = UDim.new(0, 8)
+local Opt: string = if UserInputService:GetPlatform() == Enum.Platform.OSX then "Opt" else "Alt"
 
-return capturesPolicyModule.connect(function(p1)
+return (require(Parent.App.CapturesPolicy).connect(function(p1) --[[ Line: 245 ]]
 	return { eligibleForVideoCapture = p1.eligibleForVideoCapture() }
-end)(function(p1)
-	-- upvalues: useStyle (ref), reactModule (ref), capturesContextModule (ref), guiService (ref), useLocalization (ref), var1 (ref), userInputService (ref), useKeyboardEnabledModule (ref), foundationFontFaceMigration (ref), getTextSize (ref), text (ref), uDim (ref), normalizeFontFace (ref), onOffButtonModule (ref), videoCaptureCTAModule (ref)
-	local var2 = useStyle()
-	local chromeEnabled = reactModule.useContext(capturesContextModule).chromeEnabled
-	local var3, var4 = reactModule.useState(Vector2.new(0, 0))
-	local var5, var6 = reactModule.useState(guiService.PreferredTextSize)
-	reactModule.useEffect(function()
-		-- upvalues: var6 (ref), guiService (copy)
-		local var7 = guiService:GetPropertyChangedSignal("PreferredTextSize"):Connect(function()
-			-- upvalues: var6 (copy), guiService (copy)
-			var6(guiService.PreferredTextSize)
+end)(function(Frame) --[[ Line: 48 ]]
+	-- upvalues: UseStyleFunction (copy), ReactModule (copy), CapturesContextModule (copy), GuiService (copy), UseLocalizationFunction (copy), Opt (copy), UserInputService (copy), UseKeyboardEnabledModule (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), Text (copy), _UDim (copy), NormalizeFontFaceFunction (copy), OnOffButtonModule (copy), VideoCaptureCTAModule (copy)
+	local UseStyleResult = UseStyleFunction()
+	local ChromeEnabled = ReactModule.useContext(CapturesContextModule).chromeEnabled
+	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.new(0, 0))
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(GuiService.PreferredTextSize)
+	ReactModule.useEffect(function() --[[ Line: 55 ]]
+		-- upvalues: UseStateResult2_1 (copy), GuiService (upval)
+		local Connection = GuiService:GetPropertyChangedSignal("PreferredTextSize"):Connect(function() --[[ Line: 56 | Named "onPreferredTextSizeChangedSignal" ]]
+			-- upvalues: UseStateResult2_1 (upval), GuiService (upval)
+			UseStateResult2_1(GuiService.PreferredTextSize)
 		end)
 		
-		return function()
-			-- upvalues: var7 (ref)
-			var7:Disconnect()
+		return function() --[[ Line: 62 ]]
+			-- upvalues: Connection (copy)
+			Connection:Disconnect()
 		end
 	end, {})
-	local var7 = useLocalization({
+	local UseLocalizationResult = UseLocalizationFunction({
 		capturesTitle = "Feature.Captures.Title.Captures",
 		educationalText = "Feature.Captures.Label.EducationalText",
 		hotkeyEducationalText = {
 			"Feature.Captures.Label.HotkeyEducationalText",
-			keyOne = var1,
-			keyTwo = userInputService:GetStringForKeyCode(Enum.KeyCode.One)
+			keyOne = Opt,
+			keyTwo = UserInputService:GetStringForKeyCode(Enum.KeyCode.One)
 		}
 	})
-	local var8 = if useKeyboardEnabledModule() then var7.hotkeyEducationalText else var7.educationalText
-	local color = var2.Theme.BackgroundDefault.Color
-	local transparency = var2.Theme.BackgroundDefault.Transparency
-	local color_1 = var2.Theme.TextDefault.Color
-	local var9 = if foundationFontFaceMigration then var2.Tokens.Typography.BodySmall.Font else var2.Font.CaptionBody.Font
-	local var10 = var2.Font.BaseSize * var2.Font.CaptionBody.RelativeSize
-	local color_2 = var2.Theme.TextEmphasis.Color
-	local var11 = if foundationFontFaceMigration then var2.Tokens.Typography.TitleLarge.Font else var2.Font.Header2.Font
-	local var12 = var2.Font.BaseSize * var2.Font.Header2.RelativeSize
-	local var13 = reactModule.useCallback(function(p2)
-		-- upvalues: var4 (ref), p1 (ref)
-		var4(p2.AbsoluteSize)
+	local HotkeyEducationalText = if UseKeyboardEnabledModule() then UseLocalizationResult.hotkeyEducationalText else UseLocalizationResult.educationalText
+	local Color = UseStyleResult.Theme.BackgroundDefault.Color
+	local Transparency = UseStyleResult.Theme.BackgroundDefault.Transparency
+	local Color1 = UseStyleResult.Theme.TextDefault.Color
+	local BodySmallFont = if FoundationFontFaceMigration then UseStyleResult.Tokens.Typography.BodySmall.Font else UseStyleResult.Font.CaptionBody.Font
+	local ScaledBaseSize = UseStyleResult.Font.BaseSize * UseStyleResult.Font.CaptionBody.RelativeSize
+	local Color2 = UseStyleResult.Theme.TextEmphasis.Color
+	local TitleLargeFont = if FoundationFontFaceMigration then UseStyleResult.Tokens.Typography.TitleLarge.Font else UseStyleResult.Font.Header2.Font
+	local ScaledBaseSize1 = UseStyleResult.Font.BaseSize * UseStyleResult.Font.Header2.RelativeSize
+	local UseResult = ReactModule.useCallback(function(Frame1: Frame) --[[ Line: 97 ]]
+		-- upvalues: UseStateResult2 (copy), Frame (copy)
+		UseStateResult2(Frame1.AbsoluteSize)
 		
-		if p1.onAbsoluteSizeChanged then
-			p1.onAbsoluteSizeChanged(p2.AbsoluteSize)
+		if Frame.onAbsoluteSizeChanged then
+			Frame.onAbsoluteSizeChanged(Frame1.AbsoluteSize)
 		end
 	end, {})
-	local var14 = reactModule.useMemo(function()
-		-- upvalues: foundationFontFaceMigration (copy), getTextSize (copy), var8 (ref), var10 (ref), var9 (ref), text (copy)
-		return if foundationFontFaceMigration then getTextSize(var8, var10, var9, Vector2.new(10000, 10000)).X else text.GetTextWidth(var8, var9, var10)
-	end, { var9, var10, var5, var8 })
-	local x = var3.X
-	local var15 = var14 < x - 224 - 24
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 104 ]]
+		-- upvalues: FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), HotkeyEducationalText (copy), ScaledBaseSize (copy), BodySmallFont (copy), Text (upval)
+		return if FoundationFontFaceMigration then GetTextSizeFunction(HotkeyEducationalText, ScaledBaseSize, BodySmallFont, Vector2.new(10000, 10000)).X else Text.GetTextWidth(HotkeyEducationalText, BodySmallFont, ScaledBaseSize)
+	end, {
+		BodySmallFont,
+		ScaledBaseSize,
+		UseStateResult1,
+		HotkeyEducationalText
+	})
+	local X: number = UseStateResult.X
+	local IsUseMemoResultBelow = UseMemoResult < X - 224 - 24
+	local YOffset = 20
 	
-	return reactModule.createElement("Frame", {
+	if not IsUseMemoResultBelow and UseMemoResult >= X - 24 then
+		YOffset = (if FoundationFontFaceMigration then GetTextSizeFunction(HotkeyEducationalText, ScaledBaseSize, BodySmallFont, Vector2.new(X - 24, 10000)).Y else Text.GetTextHeight(HotkeyEducationalText, BodySmallFont, ScaledBaseSize, X - 24)) + 10
+	end
+	return ReactModule.createElement("Frame", {
 		AutomaticSize = Enum.AutomaticSize.Y,
-		BackgroundColor3 = color,
-		BackgroundTransparency = transparency,
+		BackgroundColor3 = Color,
+		BackgroundTransparency = Transparency,
 		BorderSizePixel = 0,
-		LayoutOrder = p1.LayoutOrder,
+		LayoutOrder = Frame.LayoutOrder,
 		Size = UDim2.fromScale(1, 0),
-		[reactModule.Change.AbsoluteSize] = var13
+		[ReactModule.Change.AbsoluteSize] = UseResult
 	}, {
-		UICorner = reactModule.createElement("UICorner", { CornerRadius = uDim }),
-		UIPadding = reactModule.createElement("UIPadding", {
+		UICorner = ReactModule.createElement("UICorner", { CornerRadius = _UDim }),
+		UIPadding = ReactModule.createElement("UIPadding", {
 			PaddingBottom = UDim.new(0, 12),
 			PaddingLeft = UDim.new(0, 12),
 			PaddingRight = UDim.new(0, 12),
 			PaddingTop = UDim.new(0, 12)
 		}),
-		Layout = if not chromeEnabled then reactModule.createElement("UIListLayout", {
+		Layout = if ChromeEnabled then nil else ReactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			VerticalAlignment = Enum.VerticalAlignment.Top
-		}) else nil,
-		CapturesToggleCTA = if not chromeEnabled then reactModule.createElement("Frame", {
+		}),
+		CapturesToggleCTA = if ChromeEnabled then nil else ReactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			LayoutOrder = 1,
 			AutomaticSize = Enum.AutomaticSize.Y,
-			BackgroundColor3 = color,
-			BackgroundTransparency = transparency,
+			BackgroundColor3 = Color,
+			BackgroundTransparency = Transparency,
 			Size = UDim2.fromScale(1, 0)
 		}, {
-			TextFrame = reactModule.createElement("Frame", {
+			TextFrame = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				AutomaticSize = Enum.AutomaticSize.Y,
 				Size = UDim2.fromScale(1, 0)
 			}, {
-				Layout = reactModule.createElement("UIListLayout", {
+				Layout = ReactModule.createElement("UIListLayout", {
 					FillDirection = Enum.FillDirection.Vertical,
 					HorizontalAlignment = Enum.HorizontalAlignment.Center,
 					SortOrder = Enum.SortOrder.LayoutOrder,
 					VerticalAlignment = Enum.VerticalAlignment.Top
 				}),
-				Title = reactModule.createElement("TextLabel", {
+				Title = ReactModule.createElement("TextLabel", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 1,
-					Font = if foundationFontFaceMigration then nil else var11,
-					FontFace = if foundationFontFaceMigration then normalizeFontFace(var11) else nil,
+					Font = if FoundationFontFaceMigration then nil else TitleLargeFont,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(TitleLargeFont) else nil,
 					Size = UDim2.new(1, 0, 0, 30),
-					Text = var7.capturesTitle,
-					TextColor3 = color_2,
-					TextSize = var12,
+					Text = UseLocalizationResult.capturesTitle,
+					TextColor3 = Color2,
+					TextSize = ScaledBaseSize1,
 					TextXAlignment = Enum.TextXAlignment.Left
 				}),
-				EducationalLabel = reactModule.createElement("TextLabel", {
+				EducationalLabel = ReactModule.createElement("TextLabel", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 2,
 					TextWrapped = true,
-					Font = if foundationFontFaceMigration then nil else var9,
-					FontFace = if foundationFontFaceMigration then normalizeFontFace(var9) else nil,
-					Size = UDim2.new(1, 0, 0, if not (var15 or var14 < x - 24) then (if foundationFontFaceMigration then getTextSize(var8, var10, var9, Vector2.new(x - 24, 10000)).Y else text.GetTextHeight(var8, var9, var10, x - 24)) + 10 else 20),
-					Text = var8,
-					TextColor3 = color_1,
-					TextSize = var10,
+					Font = if FoundationFontFaceMigration then nil else BodySmallFont,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(BodySmallFont) else nil,
+					Size = UDim2.new(1, 0, 0, YOffset),
+					Text = HotkeyEducationalText,
+					TextColor3 = Color1,
+					TextSize = ScaledBaseSize,
 					TextXAlignment = Enum.TextXAlignment.Left
 				})
 			}),
-			CapturesToggleFrame = reactModule.createElement("Frame", {
+			CapturesToggleFrame = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
-				AnchorPoint = if var15 then Vector2.new(1, 0.5) else Vector2.new(1, 0),
-				Position = if var15 then UDim2.fromScale(1, 0.5) else UDim2.new(1, 0, 0, -10),
+				AnchorPoint = if IsUseMemoResultBelow then Vector2.new(1, 0.5) else Vector2.new(1, 0),
+				Position = if IsUseMemoResultBelow then UDim2.fromScale(1, 0.5) else UDim2.new(1, 0, 0, -10),
 				Size = UDim2.fromOffset(224, 44)
 			}, {
-				OnOffButton = reactModule.createElement(onOffButtonModule, { height = 44, width = 224 })
+				OnOffButton = ReactModule.createElement(OnOffButtonModule, { height = 44, width = 224 })
 			})
-		}) else nil,
-		Space = if p1.eligibleForVideoCapture and not chromeEnabled then reactModule.createElement("Frame", {
+		}),
+		Space = if Frame.eligibleForVideoCapture and not ChromeEnabled then ReactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			BackgroundTransparency = 1,
 			LayoutOrder = 2,
 			Size = UDim2.new(0, 0, 0, 20)
 		}) else nil,
-		VideoCaptureCTA = if p1.eligibleForVideoCapture then reactModule.createElement(videoCaptureCTAModule, {
+		VideoCaptureCTA = if Frame.eligibleForVideoCapture then ReactModule.createElement(VideoCaptureCTAModule, {
 			LayoutOrder = 3,
-			closeSettingsMenu = p1.closeSettingsMenu
+			closeSettingsMenu = Frame.closeSettingsMenu
 		}) else nil
 	})
-end)
+end))

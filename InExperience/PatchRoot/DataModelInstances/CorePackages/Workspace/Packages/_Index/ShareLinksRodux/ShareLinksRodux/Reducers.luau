@@ -1,8 +1,8 @@
-﻿local parent = script.Parent
-local roduxModule = require(parent.Parent.Rodux)
-local invitesModule = require(parent.Reducers.Invites)
+﻿local Parent = script.Parent
+local RoduxModule = require(Parent.Parent.Rodux)
+local InvitesModule = require(Parent.Reducers.Invites)
 
-return function(p1)
-	-- upvalues: roduxModule (ref), invitesModule (ref)
-	return roduxModule.combineReducers({ Invites = invitesModule(p1) })
+return function(p1) --[[ Line: 8 ]]
+	-- upvalues: RoduxModule (copy), InvitesModule (copy)
+	return RoduxModule.combineReducers({ Invites = InvitesModule(p1) })
 end

@@ -1,31 +1,26 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local fFlagMomentsNonInfiniteScrollEndStateFixesModule = require(moments.Flags.FFlagMomentsNonInfiniteScrollEndStateFixes)
-local useFeed = require(moments.Components.Feed.FeedContext).useFeed
-local momentsEndStateViewModule = require(script.Parent.MomentsEndStateView)
-local var1 = if fFlagMomentsNonInfiniteScrollEndStateFixesModule then signalsModule.createSignal(true) else nil
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local FFlagMomentsNonInfiniteScrollEndStateFixesModule = require(Moments.Flags.FFlagMomentsNonInfiniteScrollEndStateFixes)
+local UseFeedFunction = require(Moments.Components.Feed.FeedContext).useFeed
+local MomentsEndStateViewModule = require(script.Parent.MomentsEndStateView)
+local Signal = if FFlagMomentsNonInfiniteScrollEndStateFixesModule then SignalsModule.createSignal(true) else nil
 
-return function(p1)
-	-- upvalues: useFeed (ref), fFlagMomentsNonInfiniteScrollEndStateFixesModule (ref), signalsReactModule (ref), var1 (write), reactModule (ref), momentsEndStateViewModule (ref)
-	local var2 = useFeed()
-	local var3 = true
+return function(Frame) --[[ Line: 31 | Named "MomentsEndStateItem" ]]
+	-- upvalues: UseFeedFunction (copy), FFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), SignalsReactModule (copy), Signal (ref), ReactModule (copy), MomentsEndStateViewModule (copy)
+	local UseFeedResult = UseFeedFunction()
+	local LoadMoreBeyondLimitFunction = UseFeedResult.loadMoreBeyondLimit
 	
-	if fFlagMomentsNonInfiniteScrollEndStateFixesModule then
-		var3 = signalsReactModule.useSignalState(var2.getCanLoadMoreBeyondLimit or var1)
-	end
-	local loadMoreBeyondLimit = var2.loadMoreBeyondLimit
-	
-	return reactModule.createElement(momentsEndStateViewModule, {
-		LayoutOrder = p1.LayoutOrder,
-		onLoadMore = reactModule.useCallback(function()
-			-- upvalues: loadMoreBeyondLimit (ref)
-			if loadMoreBeyondLimit ~= nil then
-				loadMoreBeyondLimit()
+	return ReactModule.createElement(MomentsEndStateViewModule, {
+		LayoutOrder = Frame.LayoutOrder,
+		onLoadMore = ReactModule.useCallback(function() --[[ Line: 41 ]]
+			-- upvalues: LoadMoreBeyondLimitFunction (copy)
+			if LoadMoreBeyondLimitFunction ~= nil then
+				LoadMoreBeyondLimitFunction()
 			end
-		end, { loadMoreBeyondLimit }),
-		showLoadMore = var3
+		end, { LoadMoreBeyondLimitFunction }),
+		showLoadMore = not FFlagMomentsNonInfiniteScrollEndStateFixesModule or SignalsReactModule.useSignalState(UseFeedResult.getCanLoadMoreBeyondLimit or Signal)
 	})
 end

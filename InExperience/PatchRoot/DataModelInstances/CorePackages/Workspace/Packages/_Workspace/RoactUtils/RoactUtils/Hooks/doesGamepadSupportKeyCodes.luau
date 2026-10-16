@@ -1,9 +1,9 @@
-﻿local userInputService = game:GetService("UserInputService")
+﻿local UserInputService = game:GetService("UserInputService")
 
-return function(p1, p2)
-	-- upvalues: userInputService (ref)
-	for i, v in p1 do
-		if not userInputService:GamepadSupports(p2, v) then
+return function(GamepadKeyCodes, GamepadNum): boolean --[[ Line: 3 | Named "doesGamepadSupportKeyCodes" ]]
+	-- upvalues: UserInputService (copy)
+	for _, gamepadKeyCode in GamepadKeyCodes do
+		if not UserInputService:GamepadSupports(GamepadNum, gamepadKeyCode) then
 			return false
 		end
 	end

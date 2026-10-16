@@ -1,8 +1,8 @@
-﻿local robloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
-local _ = require(robloxSubscriptionPurchaseApp.Network.getRobloxSubscriptionProducts)
-local isRobloxSubscriptionProductFreeTrialModule = require(robloxSubscriptionPurchaseApp.Utils.isRobloxSubscriptionProductFreeTrial)
+﻿local RobloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
+local _ = require(RobloxSubscriptionPurchaseApp.Network.getRobloxSubscriptionProducts)
+local IsRobloxSubscriptionProductFreeTrialModule = require(RobloxSubscriptionPurchaseApp.Utils.isRobloxSubscriptionProductFreeTrial)
 
-return function(p1)
-	-- upvalues: isRobloxSubscriptionProductFreeTrialModule (ref)
-	return type(p1) == "table" and p1[1] ~= nil and isRobloxSubscriptionProductFreeTrialModule(p1[1])
+return function(Entry) --[[ Line: 8 | Named "isRobloxPlusFreeTrialEligible" ]]
+	-- upvalues: IsRobloxSubscriptionProductFreeTrialModule (copy)
+	return type(Entry) == "table" and Entry[1] ~= nil and IsRobloxSubscriptionProductFreeTrialModule(Entry[1])
 end

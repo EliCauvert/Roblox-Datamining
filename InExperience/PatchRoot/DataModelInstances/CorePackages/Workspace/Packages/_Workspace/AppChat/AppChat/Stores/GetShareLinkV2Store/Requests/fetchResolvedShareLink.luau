@@ -1,24 +1,38 @@
-﻿local parent = script:FindFirstAncestor("AppChat").Parent
-local httpModule = require(parent.Http)
-local httpClientModule = require(parent.HttpClient)
-local _ = require(parent.ShareLinksNetworking)
-local text = httpModule.Url.APIS_URL .. "deeplinks/v2/resolve"
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local HttpClientModule = require(Parent.HttpClient)
+local _ = require(Parent.ShareLinksNetworking)
+local FFlagAppChatPlusReferralAssetCardModule = require(AppChat.Flags.FFlagAppChatPlusReferralAssetCard)
+local Text = require(Parent.Http).Url.APIS_URL .. "deeplinks/v2/resolve"
 
-local function decodeResolvedShareLink(p1)
-	if type(p1) ~= "table" or type(p1.linkType) ~= "string" or (type(p1.targetId) ~= "string" or type(p1.customData) ~= "string") or type(p1.status) ~= "string" then
+local function decodeResolvedShareLink(p1) --[[ Line: 16 ]]
+	-- upvalues: FFlagAppChatPlusReferralAssetCardModule (copy)
+	if type(p1) ~= "table" or type(p1.linkType) ~= "string" or type(p1.targetId) ~= "string" or type(p1.status) ~= "string" then
 		error("Malformed deeplinks/v2/resolve response")
 	end
-	return p1
+	if FFlagAppChatPlusReferralAssetCardModule then
+		if p1.customData ~= nil and type(p1.customData) ~= "string" then
+			error("Malformed deeplinks/v2/resolve response")
+		end
+		p1.customData = p1.customData or ""
+		
+		return p1
+	else
+		if type(p1.customData) ~= "string" then
+			error("Malformed deeplinks/v2/resolve response")
+		end
+		return p1
+	end
 end
 
-return function(p1, p2)
-	-- upvalues: httpClientModule (ref), text (ref), decodeResolvedShareLink (ref)
-	return httpClientModule.fetch({
+return function(LinkId, Network) --[[ Line: 38 | Named "fetchResolvedShareLink" ]]
+	-- upvalues: HttpClientModule (copy), Text (copy), decodeResolvedShareLink (copy)
+	return HttpClientModule.fetch({
 		method = "POST",
 		analyticsKey = "app-chat.resolve-share-link-v2",
-		url = text,
-		body = { linkId = p1 },
-		network = p2,
+		url = Text,
+		body = { linkId = LinkId },
+		network = Network,
 		decode = decodeResolvedShareLink
 	})
 end

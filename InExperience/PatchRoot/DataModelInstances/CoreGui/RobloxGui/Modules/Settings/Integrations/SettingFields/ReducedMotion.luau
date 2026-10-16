@@ -1,40 +1,40 @@
-﻿local settings = script:FindFirstAncestor("Settings")
-local gameSettings = UserSettings().GameSettings
-local settingsServiceModule = require(game:GetService("CorePackages").Workspace.Packages.SettingsService)
-local valueChangedSignal = settingsServiceModule.ValueChangedSignal
-local settingEnum = settingsServiceModule.SettingEnum
-local LAYOUT_ORDER = require(settings.Integrations.Constants).GAMESETTINGS.LAYOUT_ORDER
+﻿local GameSettings = UserSettings().GameSettings
+local SettingsServiceModule = require(game:GetService("CorePackages").Workspace.Packages.SettingsService)
+local ValueChangedSignal = SettingsServiceModule.ValueChangedSignal
+local LAYOUTORDER = require(script:FindFirstAncestor("Settings").Integrations.Constants).GAMESETTINGS.LAYOUT_ORDER
 
-local function _()
-	-- upvalues: gameSettings (ref), valueChangedSignal (ref)
-	local var1 = valueChangedSignal.new(gameSettings.ReducedMotion)
-	var1:connect(function(p1)
-		-- upvalues: gameSettings (copy)
-		if gameSettings.ReducedMotion == p1 then
+local function _() --[[ Line: 21 | Named "ReducedMotionValue" ]]
+	-- upvalues: GameSettings (copy), ValueChangedSignal (copy)
+	local NewValueChangedSignal = ValueChangedSignal.new(GameSettings.ReducedMotion)
+	NewValueChangedSignal:connect(function(ReducedMotion) --[[ Line: 25 ]]
+		-- upvalues: GameSettings (upval)
+		if GameSettings.ReducedMotion ~= ReducedMotion then
+			GameSettings.ReducedMotion = ReducedMotion
+			
 			return
 		end
-		gameSettings.ReducedMotion = p1
 	end)
 	
-	return var1
+	return NewValueChangedSignal
 end
 
-local t = {
+local ReducedMotionModule = {
 	id = "reduced-motion",
 	label = "CoreScripts.InGameMenu.GameSettings.ReduceMotionLabel",
 	description = "CoreScripts.InGameMenu.GameSettings.ReduceMotionDescription",
 	alreadyLocalized = false,
-	field_type = settingEnum.Toggle
+	field_type = SettingsServiceModule.SettingEnum.Toggle
 }
-local var1 = valueChangedSignal.new(gameSettings.ReducedMotion)
-var1:connect(function(p1)
-	-- upvalues: gameSettings (ref)
-	if gameSettings.ReducedMotion == p1 then
+local NewValueChangedSignal = ValueChangedSignal.new(GameSettings.ReducedMotion)
+NewValueChangedSignal:connect(function(ReducedMotion) --[[ Line: 25 ]]
+	-- upvalues: GameSettings (copy)
+	if GameSettings.ReducedMotion ~= ReducedMotion then
+		GameSettings.ReducedMotion = ReducedMotion
+		
 		return
 	end
-	gameSettings.ReducedMotion = p1
 end)
-t.onChanged = var1
-t.layoutOrder = LAYOUT_ORDER.ReducedMotionFrame
+ReducedMotionModule.onChanged = NewValueChangedSignal
+ReducedMotionModule.layoutOrder = LAYOUTORDER.ReducedMotionFrame
 
-return t
+return ReducedMotionModule

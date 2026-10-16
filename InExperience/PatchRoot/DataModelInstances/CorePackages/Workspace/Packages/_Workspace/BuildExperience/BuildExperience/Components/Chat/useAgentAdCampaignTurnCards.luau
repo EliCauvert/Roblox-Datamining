@@ -1,75 +1,84 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local reactModule = require(buildExperience.Parent.React)
-local _ = require(buildExperience.Chat.chatTypes)
-local adCampaignEligibilityUtilsModule = require(buildExperience.Components.Ads.adCampaignEligibilityUtils)
-local adUpsellVisibilityUtilsModule = require(buildExperience.Components.Ads.AdUpsellMilestone.adUpsellVisibilityUtils)
-local getAgentAdCampaignStoreModule = require(buildExperience.Stores.GetAgentAdCampaignStore)
-local sendBuildExperienceEventModule = require(buildExperience.Telemetry.sendBuildExperienceEvent)
-local fFlagBuildAgentAdCampaignToolCallStatusFallbackModule = require(buildExperience.Flags.FFlagBuildAgentAdCampaignToolCallStatusFallback)
-local useAgentAdCampaignToolCallStatusFallbackModule = require(script.Parent.useAgentAdCampaignToolCallStatusFallback)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local ReactModule = require(BuildExperience.Parent.React)
+local _ = require(BuildExperience.Chat.chatTypes)
+local AdCampaignEligibilityUtilsModule = require(BuildExperience.Components.Ads.adCampaignEligibilityUtils)
+local AdUpsellVisibilityUtilsModule = require(BuildExperience.Components.Ads.AdUpsellMilestone.adUpsellVisibilityUtils)
+local GetAgentAdCampaignStoreModule = require(BuildExperience.Stores.GetAgentAdCampaignStore)
+local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
+local FFlagBuildAgentAdCampaignToolCallStatusFallbackModule = require(BuildExperience.Flags.FFlagBuildAgentAdCampaignToolCallStatusFallback)
+local UseAgentAdCampaignToolCallStatusFallbackModule = require(script.Parent.useAgentAdCampaignToolCallStatusFallback)
+local FFlagBuildAgentAdCampaignRefreshEligibilityModule = require(BuildExperience.Flags.FFlagBuildAgentAdCampaignRefreshEligibility)
 
-return function(p1, p2)
-	-- upvalues: reactModule (ref), fFlagBuildAgentAdCampaignToolCallStatusFallbackModule (ref), useAgentAdCampaignToolCallStatusFallbackModule (ref), adCampaignEligibilityUtilsModule (ref), sendBuildExperienceEventModule (ref), getAgentAdCampaignStoreModule (ref), adUpsellVisibilityUtilsModule (ref)
-	local var1 = reactModule.useRef({})
-	local var2 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref)
-		local t = {}
-		local t_1 = {}
+return function(p1, p2) --[[ Line: 32 | Named "useAgentAdCampaignTurnCards" ]]
+	-- upvalues: ReactModule (copy), FFlagBuildAgentAdCampaignRefreshEligibilityModule (copy), FFlagBuildAgentAdCampaignToolCallStatusFallbackModule (copy), UseAgentAdCampaignToolCallStatusFallbackModule (copy), AdCampaignEligibilityUtilsModule (copy), SendBuildExperienceEventModule (copy), GetAgentAdCampaignStoreModule (copy), AdUpsellVisibilityUtilsModule (copy)
+	local UseRefResult = ReactModule.useRef({})
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 34 ]]
+		-- upvalues: p1 (copy), FFlagBuildAgentAdCampaignRefreshEligibilityModule (upval)
+		local States = {}
+		local Missing = {}
 		
-		for i, v in p1.segments do
-			if v.kind == "agent_ad_campaign_card" then
-				local var3 = if p1.getCardState ~= nil then nil else p1.getCardState(v.toolCallId)
+		for _, segment in p1.segments do
+			if segment.kind == "agent_ad_campaign_card" then
+				local CardState = if p1.getCardState == nil then nil else p1.getCardState(segment.toolCallId)
 				
-				if var3 ~= nil then
-					t[v.toolCallId] = var3
-				elseif v.shouldCheckCampaignStatus then
-					table.insert(t_1, v.toolCallId)
+				if CardState ~= nil then
+					States[segment.toolCallId] = CardState
+				end
+				if (if FFlagBuildAgentAdCampaignRefreshEligibilityModule then CardState == nil or CardState.campaignId == nil else CardState == nil) and segment.shouldCheckCampaignStatus then
+					table.insert(Missing, segment.toolCallId)
 				end
 			end
 		end
-		return { states = t, missing = t_1 }
+		return { states = States, missing = Missing }
 	end, { p1.segments, p1.getCardState })
-	local states = var2.states
-	local missing = var2.missing
-	local var4 = nil
+	local States = UseMemoResult.states
+	local Missing = UseMemoResult.missing
+	local v1 = nil
 	
-	if fFlagBuildAgentAdCampaignToolCallStatusFallbackModule then
-		table.sort(missing)
-		var4 = useAgentAdCampaignToolCallStatusFallbackModule(missing, p2)
+	if FFlagBuildAgentAdCampaignToolCallStatusFallbackModule then
+		table.sort(Missing)
+		v1 = UseAgentAdCampaignToolCallStatusFallbackModule(Missing, p2)
 	end
-	local var5 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), states (ref), var4 (write), adCampaignEligibilityUtilsModule (copy), var1 (ref), reactModule (copy), sendBuildExperienceEventModule (copy)
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 61 ]]
+		-- upvalues: p1 (copy), States (copy), v1 (ref), FFlagBuildAgentAdCampaignRefreshEligibilityModule (upval), AdCampaignEligibilityUtilsModule (upval), UseRefResult (copy), ReactModule (upval), SendBuildExperienceEventModule (upval)
 		local t = {}
 		
-		for i, v in p1.segments do
-			if v.kind == "agent_ad_campaign_card" then
-				local toolCallId = v.toolCallId
-				local var6 = states[toolCallId] or (if var4 ~= nil then nil else var4.cardStates[toolCallId])
-				local var7 = var4 ~= nil and var4.pendingToolCallIds[toolCallId] == true
-				local var8 = if v.offers ~= nil then nil else adCampaignEligibilityUtilsModule.getDefaultOffer(v.offers)
-				local var9 = if var8 ~= nil then "paid" else var8.fundingType
-				local var10 = if p1.onOfferSelected ~= nil then if p1.isPageVisible ~= false then var7 or (p1.isCreateDisabled ~= nil and p1.isCreateDisabled(toolCallId)) else true else true
-				var1.current[toolCallId] = var1.current[toolCallId] or reactModule.createRef()
-				t[toolCallId] = {
-					state = var6,
-					isPending = var7,
-					fundingType = var9,
-					isCreateDisabled = var10,
-					cardRef = var1.current[toolCallId],
-					onCreate = function()
-						-- upvalues: var10 (ref), var6 (ref), v (ref), p1 (copy), sendBuildExperienceEventModule (copy), toolCallId (ref), var9 (ref)
-						if var10 or var6 ~= nil or (v.offers == nil or p1.onOfferSelected == nil) then
+		for _, segment in p1.segments do
+			if segment.kind == "agent_ad_campaign_card" then
+				local ToolCallId = segment.toolCallId
+				local State = States[ToolCallId] or (if v1 == nil then nil else v1.cardStates[ToolCallId])
+				
+				if FFlagBuildAgentAdCampaignRefreshEligibilityModule and State ~= nil and State.campaignId == nil and v1 ~= nil then
+					State = v1.cardStates[ToolCallId] or State
+				end
+				local IsPendingToolCallId: boolean = v1 ~= nil and v1.pendingToolCallIds[ToolCallId] == true
+				local DefaultOffer = if segment.offers == nil then nil else AdCampaignEligibilityUtilsModule.getDefaultOffer(segment.offers)
+				local Paid = if DefaultOffer == nil then "paid" else DefaultOffer.fundingType
+				local NoOnOfferSelected = p1.onOfferSelected == nil or (p1.isPageVisible == false or (IsPendingToolCallId or p1.isCreateDisabled ~= nil and p1.isCreateDisabled(ToolCallId)))
+				UseRefResult.current[ToolCallId] = UseRefResult.current[ToolCallId] or ReactModule.createRef()
+				t[ToolCallId] = {
+					state = State,
+					isPending = IsPendingToolCallId,
+					fundingType = Paid,
+					isCreateDisabled = NoOnOfferSelected,
+					cardRef = UseRefResult.current[ToolCallId],
+					onCreate = function() --[[ Line: 91 ]]
+						-- upvalues: FFlagBuildAgentAdCampaignRefreshEligibilityModule (upval), State (ref), NoOnOfferSelected (copy), segment (copy), p1 (upval), SendBuildExperienceEventModule (upval), ToolCallId (copy), Paid (copy)
+						local HasCampaignId: boolean = if FFlagBuildAgentAdCampaignRefreshEligibilityModule then State ~= nil and State.campaignId ~= nil else State ~= nil
+						
+						if not NoOnOfferSelected and not HasCampaignId and segment.offers ~= nil and p1.onOfferSelected ~= nil then
+							SendBuildExperienceEventModule("AD_UPSELL_CREATE_CLICK", {
+								universeId = p1.universeId,
+								conversationId = p1.sessionId
+							}, {
+								context = "agent_card",
+								toolCallId = ToolCallId,
+								fundingType = Paid
+							})
+							p1.onOfferSelected(ToolCallId, segment.offers)
+							
 							return
 						end
-						sendBuildExperienceEventModule("AD_UPSELL_CREATE_CLICK", {
-							universeId = p1.universeId,
-							conversationId = p1.sessionId
-						}, {
-							context = "agent_card",
-							toolCallId = toolCallId,
-							fundingType = var9
-						})
-						p1.onOfferSelected(toolCallId, v.offers)
 					end
 				}
 			end
@@ -77,60 +86,60 @@ return function(p1, p2)
 		return t
 	end, {
 		p1.segments, p1.onOfferSelected, p1.isPageVisible, p1.isCreateDisabled,
-		p1.universeId, p1.sessionId, states, var4
+		p1.universeId, p1.sessionId, States, v1
 	})
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), getAgentAdCampaignStoreModule (copy), var5 (ref), adUpsellVisibilityUtilsModule (copy), sendBuildExperienceEventModule (copy)
-		local var11 = if p1.scrollingFrameRef ~= nil then nil else p1.scrollingFrameRef.current
+	ReactModule.useEffect(function() --[[ Line: 126 ]]
+		-- upvalues: p1 (copy), GetAgentAdCampaignStoreModule (upval), UseMemoResult1 (copy), AdUpsellVisibilityUtilsModule (upval), SendBuildExperienceEventModule (upval)
+		local Current = if p1.scrollingFrameRef == nil then nil else p1.scrollingFrameRef.current
 		
-		if p1.isPageVisible ~= true or p1.sessionId == nil or var11 == nil then return end
-		local t = {}
-		local var12 = getAgentAdCampaignStoreModule(false)
+		if p1.isPageVisible ~= true or p1.sessionId == nil or Current == nil then return end
+		local List = {}
+		local AgentAdCampaignStoreModule = GetAgentAdCampaignStoreModule(false)
 		
-		for i, v in p1.segments do
-			if v.kind == "agent_ad_campaign_card" and v.offers ~= nil then
-				local toolCallId = var5[v.toolCallId]
-				local current = toolCallId.cardRef.current
+		for _, segment in p1.segments do
+			if segment.kind == "agent_ad_campaign_card" and segment.offers ~= nil then
+				local UseMemoResultEntry = UseMemoResult1[segment.toolCallId]
+				local Current1 = UseMemoResultEntry.cardRef.current
 				
-				if toolCallId.state == nil and not toolCallId.isPending and current ~= nil then
-					local function reportIfVisible()
-						-- upvalues: current (ref), var11 (ref), adUpsellVisibilityUtilsModule (copy), var12 (ref), p1 (copy), v (ref), sendBuildExperienceEventModule (copy), toolCallId (ref)
-						if current:IsDescendantOf(var11) and adUpsellVisibilityUtilsModule.isCardVisibleInScrollViewport(var11, current) and var12.markImpressed(p1.sessionId, v.toolCallId) then
-							sendBuildExperienceEventModule("AD_UPSELL_IMPRESSION", {
+				if UseMemoResultEntry.state == nil and not UseMemoResultEntry.isPending and Current1 ~= nil then
+					local function reportIfVisible() --[[ Line: 142 ]]
+						-- upvalues: Current1 (copy), Current (copy), AdUpsellVisibilityUtilsModule (upval), AgentAdCampaignStoreModule (copy), p1 (upval), segment (copy), SendBuildExperienceEventModule (upval), UseMemoResultEntry (copy)
+						if Current1:IsDescendantOf(Current) and AdUpsellVisibilityUtilsModule.isCardVisibleInScrollViewport(Current, Current1) and AgentAdCampaignStoreModule.markImpressed(p1.sessionId, segment.toolCallId) then
+							SendBuildExperienceEventModule("AD_UPSELL_IMPRESSION", {
 								universeId = p1.universeId,
 								conversationId = p1.sessionId
 							}, {
 								context = "agent_card",
-								toolCallId = v.toolCallId,
-								fundingType = toolCallId.fundingType
+								toolCallId = segment.toolCallId,
+								fundingType = UseMemoResultEntry.fundingType
 							})
 						end
 					end
 					
-					for i_1, v_1 in {
+					for _, PropertyName in {
 						"CanvasPosition",
 						"AbsolutePosition",
 						"AbsoluteWindowSize"
 					} do
-						table.insert(t, var11:GetPropertyChangedSignal(v_1):Connect(reportIfVisible))
+						table.insert(List, Current:GetPropertyChangedSignal(PropertyName):Connect(reportIfVisible))
 					end
-					for i_1, v_1 in { "AbsolutePosition", "AbsoluteSize" } do
-						table.insert(t, current:GetPropertyChangedSignal(v_1):Connect(reportIfVisible))
+					for _, PropertyName1 in { "AbsolutePosition", "AbsoluteSize" } do
+						table.insert(List, Current1:GetPropertyChangedSignal(PropertyName1):Connect(reportIfVisible))
 					end
 					reportIfVisible()
 				end
 			end
 		end
-		return function()
-			-- upvalues: t (ref)
-			for i, v in t do
-				v:Disconnect()
+		return function() --[[ Line: 167 ]]
+			-- upvalues: List (copy)
+			for _, Connection in List do
+				Connection:Disconnect()
 			end
 		end
 	end, {
 		p1.scrollingFrameRef, p1.isPageVisible, p1.sessionId, p1.universeId,
-		p1.segments, var5
+		p1.segments, UseMemoResult1
 	})
 	
-	return var5
+	return UseMemoResult1
 end

@@ -1,18 +1,18 @@
-﻿local errorCodes = require(script.Parent.Acp.AcpProtocol).ErrorCodes
+﻿local ErrorCodes = require(script.Parent.Acp.AcpProtocol).ErrorCodes
 local _ = require(script.Parent.Types.store)
-local t = {
-	[errorCodes.InsufficientFunds] = "payment_required",
-	[errorCodes.Forbidden] = "ineligible",
-	[errorCodes.MissingThumbnail] = "missing_thumbnail"
+local config = {
+	[ErrorCodes.InsufficientFunds] = "payment_required",
+	[ErrorCodes.Forbidden] = "ineligible",
+	[ErrorCodes.MissingThumbnail] = "missing_thumbnail"
 }
 
-return function(p1)
-	-- upvalues: t (ref)
-	local var1 = if type(p1) == "table" and type(p1.responseCode) == "number" then p1.responseCode else nil
+return function(p1) --[[ Line: 10 | Named "classifyAdCampaignFailure" ]]
+	-- upvalues: config (copy)
+	local ResponseCode = if type(p1) == "table" and type(p1.responseCode) == "number" then p1.responseCode else nil
 	
 	return {
-		kind = if var1 ~= nil then "unknown" else t[var1] or "unknown",
-		code = var1,
+		kind = if ResponseCode == nil then "unknown" else config[ResponseCode] or "unknown",
+		code = ResponseCode,
 		message = if type(p1) == "table" and type(p1.errorMessage) == "string" then p1.errorMessage else tostring(p1)
 	}
 end

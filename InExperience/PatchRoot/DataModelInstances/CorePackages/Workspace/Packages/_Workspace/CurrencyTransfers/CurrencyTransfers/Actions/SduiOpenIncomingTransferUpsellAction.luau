@@ -1,122 +1,125 @@
-﻿local currencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
-local parent = currencyTransfers.Parent
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local sduiActionType = sduiCoreSystemModule.SduiActionType
-local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
-local sduiParseHelpers = sduiCoreSystemModule.SduiParseHelpers
-local incomingTransferHomepagePromptDismissModule = require(currencyTransfers.Utils.IncomingTransferHomepagePromptDismiss)
-local appPage = require(parent.RobloxAppEnums).AppPage
-local navigateDown = require(parent.NavigationRodux).Thunks.NavigateDown
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagSignalsNavP3Dispatch = sharedFlagsModule.FFlagSignalsNavP3Dispatch
-local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
-local fFlagSduiDismissPromptPageScope = sharedFlagsModule.FFlagSduiDismissPromptPageScope
+﻿local CurrencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
+local Parent = CurrencyTransfers.Parent
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiActionType = SduiCoreSystemModule.SduiActionType
+local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
+local SduiParseHelpers = SduiCoreSystemModule.SduiParseHelpers
+local IncomingTransferHomepagePromptDismissModule = require(CurrencyTransfers.Utils.IncomingTransferHomepagePromptDismiss)
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local NavigateDownFunction = require(Parent.NavigationRodux).Thunks.NavigateDown
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagSignalsNavP3Dispatch = SharedFlagsModule.FFlagSignalsNavP3Dispatch
+local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
+local FFlagSduiDismissPromptPageScope = SharedFlagsModule.FFlagSduiDismissPromptPageScope
 
-local function parseTransferRequestIdFromUrl(value)
-	local matchIndex = string.find(string.lower(value), "transferrequestid=", 1, true)
+local function parseTransferRequestIdFromUrl(Text: string) --[[ Line: 26 ]]
+	local FoundAt: number? = string.find(string.lower(Text), "transferrequestid=", 1, true)
 	
-	if not matchIndex then
+	if FoundAt then
+		local Segment = string.sub(Text, FoundAt + 18)
+		local FoundAt1: number? = string.find(Segment, "&", 1, true)
+		local Segment1: string = if FoundAt1 then string.sub(Segment, 1, FoundAt1 - 1) else Segment
+		
+		return if Segment1 == "" then nil else Segment1
+	else
 		return nil
 	end
-	local substring = string.sub(value, matchIndex + 18)
-	local matchIndex_1 = string.find(substring, "&", 1, true)
-	local var2 = if matchIndex_1 then string.sub(substring, 1, matchIndex_1 - 1) else substring
-	
-	return if var2 == "" then nil else var2
 end
 
-local function _(p1)
-	-- upvalues: parseTransferRequestIdFromUrl (ref)
-	local transferId = p1.transferId
+local function _(p1) --[[ Line: 43 | Named "resolveTransferId" ]]
+	-- upvalues: parseTransferRequestIdFromUrl (copy)
+	local TransferId = p1.transferId
 	
-	if typeof(transferId) == "string" and transferId ~= "" then
-		return transferId
+	if typeof(TransferId) == "string" and TransferId ~= "" then
+		return TransferId
+	else
+		local Url = p1.url
+		
+		return if typeof(Url) == "string" and Url ~= "" then parseTransferRequestIdFromUrl(Url) else nil
 	end
-	local url = p1.url
-	
-	return if typeof(url) == "string" and url ~= "" then parseTransferRequestIdFromUrl(url) else nil
 end
 
-return function(a, _, p1)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref), parseTransferRequestIdFromUrl (ref), incomingTransferHomepagePromptDismissModule (ref), sduiParseHelpers (ref), fFlagSduiDismissPromptPageScope (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref)
-	local var2 = if a then a.actionParams else nil
+return function(p1, _, p2) --[[ Line: 58 | Named "SduiOpenIncomingTransferUpsellAction" ]]
+	-- upvalues: SduiErrorType (copy), SduiActionType (copy), parseTransferRequestIdFromUrl (copy), IncomingTransferHomepagePromptDismissModule (copy), SduiParseHelpers (copy), FFlagSduiDismissPromptPageScope (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy)
+	local ActionParams = p1 and p1.actionParams or nil
 	
-	if var2 == nil then
-		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if ActionParams == nil then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
-			name = sduiActionType.OpenIncomingTransferUpsell
-		}, p1.appPage)
+			name = SduiActionType.OpenIncomingTransferUpsell
+		}, p2.appPage)
 		
 		return
 	end
-	local url, var3
-	assert(var2, "actionParams must exist")
-	local transferId = var2.transferId
+	assert(ActionParams, "actionParams must exist")
+	local TransferId = ActionParams.transferId
+	local ParseTransferRequestIdFromUrlResult = nil
 	
-	if typeof(transferId) == "string" and transferId ~= "" then
-		var3 = transferId
+	if typeof(TransferId) == "string" and TransferId ~= "" then
+		ParseTransferRequestIdFromUrlResult = TransferId
 	else
-		url = var2.url
-		var3 = if typeof(url) == "string" and url ~= "" then parseTransferRequestIdFromUrl(url) else nil
+		local Url = ActionParams.url
+		ParseTransferRequestIdFromUrlResult = if typeof(Url) == "string" and Url ~= "" then parseTransferRequestIdFromUrl(Url) else nil
 	end
-	if var3 == nil then
-		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if ParseTransferRequestIdFromUrlResult == nil then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Invalid or missing transferId (set transferId or url with transferrequestid)",
 			propName = "transferId",
-			name = sduiActionType.OpenIncomingTransferUpsell
-		}, p1.appPage)
+			name = SduiActionType.OpenIncomingTransferUpsell
+		}, p2.appPage)
 		
 		return
 	end
-	transferId = var2.promptType
+	local PromptType = ActionParams.promptType
 	
-	if typeof(transferId) ~= "string" then
-		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if typeof(PromptType) ~= "string" then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			propName = "promptType",
-			name = sduiActionType.OpenIncomingTransferUpsell,
-			message = `Invalid or missing promptType: {transferId}`
-		}, p1.appPage)
+			name = SduiActionType.OpenIncomingTransferUpsell,
+			message = `Invalid or missing promptType: {PromptType}`
+		}, p2.appPage)
 		
 		return
 	end
-	url = var2.promptId
+	local PromptId = ActionParams.promptId
 	
-	if url ~= nil and typeof(url) ~= "string" then
-		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if PromptId ~= nil and typeof(PromptId) ~= "string" then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			propName = "promptId",
-			name = sduiActionType.OpenIncomingTransferUpsell,
-			message = `Invalid promptId: {url}`
-		}, p1.appPage)
+			name = SduiActionType.OpenIncomingTransferUpsell,
+			message = `Invalid promptId: {PromptId}`
+		}, p2.appPage)
 		
 		return
 	end
-	local var4 = incomingTransferHomepagePromptDismissModule.createCallbacks({
-		networking = p1.dependencies.networking,
-		promptId = url,
-		optimisticHidePromptType = transferId,
-		onReportPromptDismissFailed = function(p2)
-			-- upvalues: p1 (ref), sduiErrorType (copy), sduiActionType (copy), sduiParseHelpers (copy)
-			p1.dependencies.logger.reportError(sduiErrorType.ActionNetworkRequestFailed, {
-				name = sduiActionType.OpenIncomingTransferUpsell,
-				message = "reportPromptDismiss failed: " .. sduiParseHelpers.stringifyValue(p2)
-			}, p1.appPage)
+	local Callbacks = IncomingTransferHomepagePromptDismissModule.createCallbacks({
+		networking = p2.dependencies.networking,
+		promptId = PromptId,
+		optimisticHidePromptType = PromptType,
+		onReportPromptDismissFailed = function(p3) --[[ Line: 110 ]]
+			-- upvalues: p2 (copy), SduiErrorType (upval), SduiActionType (upval), SduiParseHelpers (upval)
+			p2.dependencies.logger.reportError(SduiErrorType.ActionNetworkRequestFailed, {
+				name = SduiActionType.OpenIncomingTransferUpsell,
+				message = "reportPromptDismiss failed: " .. SduiParseHelpers.stringifyValue(p3)
+			}, p2.appPage)
 		end,
-		configKey = if fFlagSduiDismissPromptPageScope then p1.configKey else nil
+		configKey = if FFlagSduiDismissPromptPageScope then p2.configKey else nil
 	})
-	local t = {
-		name = appPage.TransferRobuxFlow,
+	local config = {
+		name = AppPage.TransferRobuxFlow,
 		extraProps = {
 			direction = "receive",
-			transferId = var3,
-			onPromptOptimisticHide = var4.optimisticHide,
-			onPromptDismissCommitted = var4.commitDismiss
+			transferId = ParseTransferRequestIdFromUrlResult,
+			onPromptOptimisticHide = Callbacks.optimisticHide,
+			onPromptDismissCommitted = Callbacks.commitDismiss
 		}
 	}
 	
-	if fFlagSignalsNavP3Dispatch then
-		var1.down(var1.fromLegacyPage(t))
+	if FFlagSignalsNavP3Dispatch then
+		NavigationCommands.down(NavigationCommands.fromLegacyPage(config))
 		
 		return
+	else
+		p2.dependencies.dispatch(NavigateDownFunction(config))
 	end
-	p1.dependencies.dispatch(navigateDown(t))
 end

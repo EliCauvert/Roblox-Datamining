@@ -1,40 +1,39 @@
-﻿local reactModule = require(script.Parent.Parent.Parent.React)
+﻿local ReactModule = require(script.Parent.Parent.Parent.React)
 
-return function()
-	-- upvalues: reactModule (ref)
-	local var1, var2 = reactModule.useState(Vector2.new(0, 0))
-	local var3, var4 = reactModule.useState(workspace.CurrentCamera)
-	reactModule.useEffect(function()
-		-- upvalues: var4 (ref), var3 (ref), var2 (ref)
-		local var5 = workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
-			-- upvalues: var4 (copy)
-			var4(workspace.CurrentCamera)
+return function() --[[ Line: 6 ]]
+	-- upvalues: ReactModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.new(0, 0))
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(workspace.CurrentCamera)
+	ReactModule.useEffect(function() --[[ Line: 10 ]]
+		-- upvalues: UseStateResult2_1 (copy), UseStateResult1 (copy), UseStateResult2 (copy)
+		local Connection = workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function() --[[ Line: 11 ]]
+			-- upvalues: UseStateResult2_1 (upval)
+			UseStateResult2_1(workspace.CurrentCamera)
 		end)
 		
-		if var3 then
-			var2(var3.ViewportSize)
+		if UseStateResult1 then
+			UseStateResult2(UseStateResult1.ViewportSize)
 		end
-		return function()
-			-- upvalues: var5 (ref)
-			var5:Disconnect()
+		return function() --[[ Line: 19 ]]
+			-- upvalues: Connection (copy)
+			Connection:Disconnect()
 		end
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), var2 (ref)
-		if var3 then
-			local var5 = var3:GetPropertyChangedSignal("ViewportSize"):Connect(function()
-				-- upvalues: var3 (copy), var2 (copy)
-				if var3 then
-					var2(var3.ViewportSize)
-				end
-			end)
-			
-			return function()
-				-- upvalues: var5 (ref)
-				var5:Disconnect()
+	ReactModule.useEffect(function() --[[ Line: 24 ]]
+		-- upvalues: UseStateResult1 (copy), UseStateResult2 (copy)
+		if not UseStateResult1 then return end
+		local Connection = UseStateResult1:GetPropertyChangedSignal("ViewportSize"):Connect(function() --[[ Line: 29 ]]
+			-- upvalues: UseStateResult1 (upval), UseStateResult2 (upval)
+			if UseStateResult1 then
+				UseStateResult2(UseStateResult1.ViewportSize)
 			end
+		end)
+		
+		return function() --[[ Line: 35 ]]
+			-- upvalues: Connection (copy)
+			Connection:Disconnect()
 		end
-	end, { var3 })
+	end, { UseStateResult1 })
 	
-	return var1
+	return UseStateResult
 end

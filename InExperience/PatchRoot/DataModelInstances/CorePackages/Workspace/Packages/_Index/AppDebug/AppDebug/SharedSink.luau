@@ -1,25 +1,25 @@
-﻿local t = {}
-t.__index = t
+﻿local SharedSinkModule = {}
+SharedSinkModule.__index = SharedSinkModule
 
-function t.new(p1)
-	-- upvalues: t (ref)
-	local t_1 = { lastContext = nil, log = p1 }
-	setmetatable(t_1, t)
+function SharedSinkModule.new(Log) --[[ Line: 14 ]]
+	-- upvalues: SharedSinkModule (copy)
+	local config = { lastContext = nil, log = Log }
+	setmetatable(config, SharedSinkModule)
 	
-	return t_1
+	return config
 end
 
-function t.newSink(p1, p2)
+function SharedSinkModule.newSink(p1, MaxLevel) --[[ Line: 23 ]]
 	return {
-		maxLevel = p2,
-		log = function(p3, p4, p5)
-			-- upvalues: p1 (ref)
-			if p5 ~= p1.lastContext then
-				p1.lastContext = p5
-				p1.log(p3, p4, p5)
+		maxLevel = MaxLevel,
+		log = function(p2, p3, LastContext) --[[ Line: 26 ]]
+			-- upvalues: p1 (copy)
+			if LastContext ~= p1.lastContext then
+				p1.lastContext = LastContext
+				p1.log(p2, p3, LastContext)
 			end
 		end
 	}
 end
 
-return t
+return SharedSinkModule

@@ -1,32 +1,33 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local parent = momentsCreation.Parent
-local builderIconsModule = require(parent.BuilderIcons)
-local musicPickerModule = require(parent.MusicPicker)
-local momentsCommonModule = require(parent.MomentsCommon)
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local useAudioPlaybackModule = require(momentsCreation.Hooks.useAudioPlayback)
-local musicEditorModule = require(momentsCreation.Components.MusicEditor)
-local getMusicStoreModule = require(momentsCreation.Stores.GetMusicStore)
-local useCreationFlowStringsModule = require(momentsCreation.Hooks.useCreationFlowStrings)
-local _ = require(momentsCreation.Types.CreationFlowTypes)
-local _ = require(momentsCreation.Types.Music)
-local _ = require(parent.MomentsTypes)
-local fireAnalyticsEventModule = require(momentsCreation.Analytics.fireAnalyticsEvent)
-local makeCreationEventFieldsModule = require(momentsCreation.Analytics.makeCreationEventFields)
-local fFlagMomentsCreationMusicPickerTabsModule = require(momentsCreation.Flags.FFlagMomentsCreationMusicPickerTabs)
-local eventNames = momentsCommonModule.Analytics.EventNames
-local sessionManager = momentsCommonModule.Analytics.SessionManager
-local funnelEventNames = momentsCommonModule.Analytics.FunnelEventNames
-local useDeviceInsets = momentsCommonModule.Hooks.useDeviceInsets
-local musicPicker = musicPickerModule.MusicPicker
-local musicPickerContext = musicPickerModule.MusicPickerContext
-local useCallback = reactModule.useCallback
-local useEffect = reactModule.useEffect
-local useMemo = reactModule.useMemo
-local useState = reactModule.useState
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local Parent = MomentsCreation.Parent
+local BuilderIconsModule = require(Parent.BuilderIcons)
+local MusicPickerModule = require(Parent.MusicPicker)
+local MomentsCommonModule = require(Parent.MomentsCommon)
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local UseAudioPlaybackModule = require(MomentsCreation.Hooks.useAudioPlayback)
+local MusicEditorModule = require(MomentsCreation.Components.MusicEditor)
+local GetMusicStoreModule = require(MomentsCreation.Stores.GetMusicStore)
+local UseCreationFlowStringsModule = require(MomentsCreation.Hooks.useCreationFlowStrings)
+local _ = require(MomentsCreation.Types.CreationFlowTypes)
+local _ = require(MomentsCreation.Types.Music)
+local _ = require(Parent.MomentsTypes)
+local FireAnalyticsEventModule = require(MomentsCreation.Analytics.fireAnalyticsEvent)
+local MakeCreationEventFieldsModule = require(MomentsCreation.Analytics.makeCreationEventFields)
+local FFlagMomentsCreationMusicPickerTabsModule = require(MomentsCreation.Flags.FFlagMomentsCreationMusicPickerTabs)
+local FFlagMomentsAudioSaveButton = MomentsCommonModule.Flags.FFlagMomentsAudioSaveButton
+local EventNames = MomentsCommonModule.Analytics.EventNames
+local SessionManager = MomentsCommonModule.Analytics.SessionManager
+local FunnelEventNames = MomentsCommonModule.Analytics.FunnelEventNames
+local UseDeviceInsetsFunction = MomentsCommonModule.Hooks.useDeviceInsets
+local MusicPicker = MusicPickerModule.MusicPicker
+local MusicPickerContext = MusicPickerModule.MusicPickerContext
+local UseCallbackFunction = ReactModule.useCallback
+local UseEffectFunction = ReactModule.useEffect
+local UseMemoFunction = ReactModule.useMemo
+local UseStateFunction = ReactModule.useState
 
-local function _(p1)
+local function _(p1) --[[ Line: 64 | Named "toItem" ]]
 	return {
 		id = p1.AssetId,
 		title = p1.Title,
@@ -35,245 +36,277 @@ local function _(p1)
 	}
 end
 
-local _ = function(p1)
+local _ = function(p1): string --[[ Line: 73 | Named "mapStatus" ]]
 	return if p1 == "loading" then "loading" elseif p1 == "error" then "error" else "success"
 end
 
-local function useStoreContent()
-	-- upvalues: getMusicStoreModule (ref), useCreationFlowStringsModule (ref), useState (ref), useEffect (ref), signalsModule (ref), useMemo (ref)
-	local var1 = getMusicStoreModule()
-	local var2 = useCreationFlowStringsModule()
-	local var3, var4 = useState(var1.getResults(false))
-	local var5, var6 = useState(var1.getSearchStatus(false))
-	useEffect(function()
-		-- upvalues: signalsModule (copy), var4 (ref), var1 (ref), var6 (ref)
-		return signalsModule.createEffect(function(p1)
-			-- upvalues: var4 (copy), var1 (copy), var6 (copy)
-			var4(var1.getResults(p1))
-			var6(var1.getSearchStatus(p1))
+local function useStoreContent() --[[ Line: 85 ]]
+	-- upvalues: GetMusicStoreModule (copy), UseCreationFlowStringsModule (copy), UseStateFunction (copy), UseEffectFunction (copy), SignalsModule (copy), UseMemoFunction (copy)
+	local MusicStoreModule = GetMusicStoreModule()
+	local UseCreationFlowStringsModuleResult = UseCreationFlowStringsModule()
+	local UseStateResult, UseStateResult2 = UseStateFunction(MusicStoreModule.getResults(false))
+	local UseStateResult1, UseStateResult2_1 = UseStateFunction(MusicStoreModule.getSearchStatus(false))
+	local UseStateResult3, UseStateResult2_2 = UseStateFunction(false)
+	UseEffectFunction(function() --[[ Line: 93 ]]
+		-- upvalues: SignalsModule (upval), UseStateResult2 (copy), MusicStoreModule (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy)
+		return SignalsModule.createEffect(function(p1) --[[ Line: 94 ]]
+			-- upvalues: UseStateResult2 (upval), MusicStoreModule (upval), UseStateResult2_1 (upval), UseStateResult2_2 (upval)
+			UseStateResult2(MusicStoreModule.getResults(p1))
+			UseStateResult2_1(MusicStoreModule.getSearchStatus(p1))
+			UseStateResult2_2(MusicStoreModule.getIsLoadingMore(p1))
 		end)
 	end, {})
 	
-	return useMemo(function()
-		-- upvalues: var3 (ref), var5 (ref), var2 (ref), var1 (ref)
-		local t = {}
+	return UseMemoFunction(function() --[[ Line: 101 ]]
+		-- upvalues: UseStateResult (copy), UseStateResult1 (copy), UseCreationFlowStringsModuleResult (copy), MusicStoreModule (copy), UseStateResult3 (copy)
+		local Items = {}
 		
-		for i, v in var3 do
-			t[i] = {
-				id = v.AssetId,
-				title = v.Title,
-				artist = v.Artist,
-				thumbnailAssetId = v.AssetId
+		for i, value in UseStateResult do
+			Items[i] = {
+				id = value.AssetId,
+				title = value.Title,
+				artist = value.Artist,
+				thumbnailAssetId = value.AssetId
 			}
 		end
 		return {
-			items = t,
-			status = if var5 == "loading" then "loading" elseif var5 == "error" then "error" else "success",
-			emptyText = var2.MusicNoResults,
-			errorText = var2.MusicSearchError,
-			retryText = var2.GeneralCtaRetry,
-			onRetry = var1.retry
+			items = Items,
+			status = if UseStateResult1 == "loading" then "loading" elseif UseStateResult1 == "error" then "error" else "success",
+			emptyText = UseCreationFlowStringsModuleResult.MusicNoResults,
+			errorText = UseCreationFlowStringsModuleResult.MusicSearchError,
+			retryText = UseCreationFlowStringsModuleResult.GeneralCtaRetry,
+			onRetry = MusicStoreModule.retry,
+			onLoadMore = MusicStoreModule.loadMore,
+			isLoadingMore = UseStateResult3
 		}
-	end, { var3, var5, var2, var1 })
+	end, {
+		UseStateResult,
+		UseStateResult1,
+		UseCreationFlowStringsModuleResult,
+		MusicStoreModule,
+		UseStateResult3
+	})
 end
 
-local _ = function()
-	-- upvalues: useCreationFlowStringsModule (ref), useMemo (ref), builderIconsModule (ref)
-	local var7 = useCreationFlowStringsModule()
+local _ = function() --[[ Line: 123 | Named "useSavedContent" ]]
+	-- upvalues: UseCreationFlowStringsModule (copy), UseMemoFunction (copy), BuilderIconsModule (copy)
+	local UseCreationFlowStringsModuleResult = UseCreationFlowStringsModule()
 	
-	return useMemo(function()
-		-- upvalues: var7 (ref), builderIconsModule (copy)
+	return UseMemoFunction(function() --[[ Line: 125 ]]
+		-- upvalues: UseCreationFlowStringsModuleResult (copy), BuilderIconsModule (upval)
 		return {
 			status = "success",
 			items = {},
 			emptyState = {
-				title = var7.MusicSavedEmptyTitle,
-				subtitle = var7.MusicSavedEmptySubtitle,
-				icon = builderIconsModule.Icon.Bookmark
+				title = UseCreationFlowStringsModuleResult.MusicSavedEmptyTitle,
+				subtitle = UseCreationFlowStringsModuleResult.MusicSavedEmptySubtitle,
+				icon = BuilderIconsModule.Icon.Bookmark
 			}
 		}
-	end, { var7 })
+	end, { UseCreationFlowStringsModuleResult })
 end
 
-return function(p1)
-	-- upvalues: useCreationFlowStringsModule (ref), getMusicStoreModule (ref), useDeviceInsets (ref), useStoreContent (ref), useMemo (ref), builderIconsModule (ref), useState (ref), useEffect (ref), signalsModule (ref), useAudioPlaybackModule (ref), useCallback (ref), makeCreationEventFieldsModule (ref), sessionManager (ref), funnelEventNames (ref), fireAnalyticsEventModule (ref), eventNames (ref), reactModule (ref), musicEditorModule (ref), musicPickerContext (ref), musicPicker (ref), fFlagMomentsCreationMusicPickerTabsModule (ref)
-	local controller = p1.controller
-	local playback = controller.preview.playback
-	local var7 = useCreationFlowStringsModule()
-	local var8 = getMusicStoreModule()
-	local var9 = useDeviceInsets()
-	local var10 = useStoreContent()
-	local var11 = useCreationFlowStringsModule()
-	local var12 = useMemo(function()
-		-- upvalues: var11 (ref), builderIconsModule (copy)
+return function(p1) --[[ Line: 138 | Named "MusicPickerV2Container" ]]
+	-- upvalues: UseCreationFlowStringsModule (copy), GetMusicStoreModule (copy), UseDeviceInsetsFunction (copy), useStoreContent (copy), UseMemoFunction (copy), BuilderIconsModule (copy), UseStateFunction (copy), UseEffectFunction (copy), SignalsModule (copy), UseAudioPlaybackModule (copy), UseCallbackFunction (copy), MakeCreationEventFieldsModule (copy), SessionManager (copy), FunnelEventNames (copy), FireAnalyticsEventModule (copy), EventNames (copy), FFlagMomentsAudioSaveButton (copy), ReactModule (copy), MusicEditorModule (copy), MusicPickerContext (copy), MusicPicker (copy), FFlagMomentsCreationMusicPickerTabsModule (copy)
+	local Controller = p1.controller
+	local Playback = Controller.preview.playback
+	local UseCreationFlowStringsModuleResult = UseCreationFlowStringsModule()
+	local MusicStoreModule = GetMusicStoreModule()
+	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
+	local UseStoreContentResult = useStoreContent()
+	local UseCreationFlowStringsModuleResult1 = UseCreationFlowStringsModule()
+	local UseMemoResult = UseMemoFunction(function() --[[ Line: 125 ]]
+		-- upvalues: UseCreationFlowStringsModuleResult1 (copy), BuilderIconsModule (upval)
 		return {
 			status = "success",
 			items = {},
 			emptyState = {
-				title = var11.MusicSavedEmptyTitle,
-				subtitle = var11.MusicSavedEmptySubtitle,
-				icon = builderIconsModule.Icon.Bookmark
+				title = UseCreationFlowStringsModuleResult1.MusicSavedEmptyTitle,
+				subtitle = UseCreationFlowStringsModuleResult1.MusicSavedEmptySubtitle,
+				icon = BuilderIconsModule.Icon.Bookmark
 			}
 		}
-	end, { var11 })
-	local var13, var14 = useState(nil)
-	local var15, var16 = useState(false)
-	local var17, var18 = useState({})
-	local var19, var20 = useState(playback.getTimeLength(false))
-	useEffect(function()
-		-- upvalues: signalsModule (copy), var20 (ref), playback (ref)
-		return signalsModule.createEffect(function(p2)
-			-- upvalues: var20 (copy), playback (copy)
-			var20(playback.getTimeLength(p2))
+	end, { UseCreationFlowStringsModuleResult1 })
+	local UseStateResult, UseStateResult2 = UseStateFunction(nil)
+	local UseStateResult1, UseStateResult2_1 = UseStateFunction(false)
+	local UseStateResult3, UseStateResult2_2 = UseStateFunction({})
+	local UseStateResult4, UseStateResult2_3 = UseStateFunction("")
+	local UseStateResult5, UseStateResult2_4 = UseStateFunction(Playback.getTimeLength(false))
+	UseEffectFunction(function() --[[ Line: 154 ]]
+		-- upvalues: SignalsModule (upval), UseStateResult2_4 (copy), Playback (copy)
+		return SignalsModule.createEffect(function(p2) --[[ Line: 155 ]]
+			-- upvalues: UseStateResult2_4 (upval), Playback (upval)
+			UseStateResult2_4(Playback.getTimeLength(p2))
 		end)
-	end, { playback })
-	local var21, var22 = useState(nil)
-	useEffect(function()
-		-- upvalues: signalsModule (copy), controller (ref), var22 (ref)
-		return signalsModule.createEffect(function(p2)
-			-- upvalues: controller (copy), var22 (copy)
-			local activeSession = controller.getActiveSession(p2)
-			var22(if activeSession ~= nil then nil else activeSession.getDraft(p2))
+	end, { Playback })
+	local UseStateResult6, UseStateResult2_5 = UseStateFunction(nil)
+	UseEffectFunction(function() --[[ Line: 162 ]]
+		-- upvalues: SignalsModule (upval), Controller (copy), UseStateResult2_5 (copy)
+		return SignalsModule.createEffect(function(p2) --[[ Line: 163 ]]
+			-- upvalues: Controller (upval), UseStateResult2_5 (upval)
+			local ActiveSession = Controller.getActiveSession(p2)
+			UseStateResult2_5(if ActiveSession == nil then nil else ActiveSession.getDraft(p2))
 		end)
-	end, { controller })
-	local var23 = useAudioPlaybackModule(var13 ~= nil, var13, { autoplay = true, looping = false })
-	useEffect(function()
-		-- upvalues: playback (ref), var8 (ref), var19 (ref)
-		playback.pause()
-		var8.search("", var19)
-	end, { var19 })
-	useEffect(function()
-		-- upvalues: var23 (ref), var14 (ref)
-		if not var23.playback.isPlaying then
-			var14(nil)
+	end, { Controller })
+	local UseAudioPlaybackModuleResult = UseAudioPlaybackModule(UseStateResult ~= nil, UseStateResult, { autoplay = true, looping = false })
+	UseEffectFunction(function() --[[ Line: 176 ]]
+		-- upvalues: Playback (copy), MusicStoreModule (copy), UseStateResult5 (copy)
+		Playback.pause()
+		MusicStoreModule.search("", UseStateResult5)
+	end, { UseStateResult5 })
+	UseEffectFunction(function() --[[ Line: 182 ]]
+		-- upvalues: UseAudioPlaybackModuleResult (copy), UseStateResult2 (copy)
+		if not UseAudioPlaybackModuleResult.playback.isPlaying then
+			UseStateResult2(nil)
 		end
-	end, { var23.playback.isPlaying })
-	local var24 = useCallback(function()
-		-- upvalues: playback (ref), controller (ref)
-		playback.play()
-		playback.setMuted(false)
-		controller.discardActiveTool()
-	end, { controller, playback })
-	local var25 = useCallback(function(p2)
-		-- upvalues: controller (ref), var14 (ref), var16 (ref), makeCreationEventFieldsModule (copy), sessionManager (copy), funnelEventNames (copy), fireAnalyticsEventModule (copy), eventNames (copy)
-		local activeSession = controller.getActiveSession(false)
+	end, { UseAudioPlaybackModuleResult.playback.isPlaying })
+	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 188 ]]
+		-- upvalues: Playback (copy), Controller (copy)
+		Playback.play()
+		Playback.setMuted(false)
+		Controller.discardActiveTool()
+	end, { Controller, Playback })
+	local UseCallbackResult1 = UseCallbackFunction(function(AssetId) --[[ Line: 194 ]]
+		-- upvalues: Controller (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), MakeCreationEventFieldsModule (upval), SessionManager (upval), FunnelEventNames (upval), FireAnalyticsEventModule (upval), EventNames (upval)
+		local ActiveSession = Controller.getActiveSession(false)
 		
-		if activeSession ~= nil then
-			activeSession.update({ startTime = 0, assetId = p2 })
+		if ActiveSession ~= nil then
+			ActiveSession.update({ startTime = 0, assetId = AssetId })
 		end
-		var14(nil)
-		var16(true)
-		local t = { musicAssetId = tostring(p2) }
+		UseStateResult2(nil)
+		UseStateResult2_1(true)
+		local config = { musicAssetId = tostring(AssetId) }
 		
-		for i, v in makeCreationEventFieldsModule.makeToolFieldFromKind("music") do
-			t[i] = v
+		for i, value in MakeCreationEventFieldsModule.makeToolFieldFromKind("music") do
+			config[i] = value
 		end
-		for i_1, v_1 in makeCreationEventFieldsModule.makeCreationBaseFields(sessionManager.getSessionId(funnelEventNames.FunnelTypes.CreationFlow)) do
-			t[i_1] = v_1
+		for i1, value1 in MakeCreationEventFieldsModule.makeCreationBaseFields((SessionManager.getSessionId(FunnelEventNames.FunnelTypes.CreationFlow))) do
+			config[i1] = value1
 		end
-		fireAnalyticsEventModule(eventNames.EditingFlowMusicSelected, t)
-	end, { controller })
-	local var26 = useCallback(function()
-		-- upvalues: controller (ref), var16 (ref), playback (ref), var8 (ref), var19 (ref)
-		local activeSession = controller.getActiveSession(false)
+		FireAnalyticsEventModule(EventNames.EditingFlowMusicSelected, config)
+	end, { Controller })
+	local UseCallbackResult2 = UseCallbackFunction(function() --[[ Line: 216 ]]
+		-- upvalues: Controller (copy), UseStateResult2_1 (copy), Playback (copy)
+		local ActiveSession = Controller.getActiveSession(false)
 		
-		if activeSession ~= nil then
-			activeSession.update(nil)
+		if ActiveSession ~= nil then
+			ActiveSession.update(nil)
 		end
-		var16(false)
-		playback.pause()
-		var8.search("", var19)
-	end, { controller, playback, var8, var19 })
-	local var27 = useCallback(function()
-		-- upvalues: var16 (ref), playback (ref), controller (ref)
-		var16(false)
-		playback.play()
-		playback.setMuted(false)
-		controller.commitActiveTool()
-	end, { controller, playback })
-	local var28 = useCallback(function(p3)
-		-- upvalues: controller (ref)
-		local activeSession = controller.getActiveSession(false)
-		local var29 = if activeSession ~= nil then nil else activeSession.getDraft(false)
+		UseStateResult2_1(false)
+		Playback.pause()
+	end, { Controller, Playback })
+	local UseCallbackResult3 = UseCallbackFunction(function() --[[ Line: 227 ]]
+		-- upvalues: UseStateResult2_1 (copy), Playback (copy), Controller (copy)
+		UseStateResult2_1(false)
+		Playback.play()
+		Playback.setMuted(false)
+		Controller.commitActiveTool()
+	end, { Controller, Playback })
+	local UseCallbackResult4 = UseCallbackFunction(function(StartTime) --[[ Line: 234 ]]
+		-- upvalues: Controller (copy)
+		local ActiveSession = Controller.getActiveSession(false)
+		local Draft = if ActiveSession == nil then nil else ActiveSession.getDraft(false)
 		
-		if activeSession ~= nil and var29 ~= nil then
-			activeSession.update({ assetId = var29.assetId, startTime = p3 })
+		if ActiveSession ~= nil and Draft ~= nil then
+			ActiveSession.update({ assetId = Draft.assetId, startTime = StartTime })
 		end
-	end, { controller })
-	local var29 = useCallback(function(p3)
-		-- upvalues: var13 (ref), var14 (ref), var23 (ref)
-		if var13 == p3 then
-			var14(nil)
+	end, { Controller })
+	local UseCallbackResult5 = UseCallbackFunction(function(PreviewingId) --[[ Line: 248 ]]
+		-- upvalues: UseStateResult (copy), UseStateResult2 (copy), UseAudioPlaybackModuleResult (copy)
+		if UseStateResult == PreviewingId then
+			UseStateResult2(nil)
 			
 			return
+		else
+			UseStateResult2(PreviewingId)
+			UseAudioPlaybackModuleResult.playback.play()
 		end
-		var14(p3)
-		var23.playback.play()
-	end, { var13 or 0 })
-	local var30 = useCallback(function(p3)
-		-- upvalues: var18 (ref)
-		var18(function(p4)
-			-- upvalues: p3 (ref)
+	end, { UseStateResult or 0 })
+	local UseCallbackResult6 = UseCallbackFunction(function(p2) --[[ Line: 257 ]]
+		-- upvalues: UseStateResult2_2 (copy)
+		UseStateResult2_2(function(List) --[[ Line: 258 ]]
+			-- upvalues: p2 (copy)
 			local t = {}
 			
-			for i, v in p4 do
-				if i ~= p3 then
-					t[i] = v
+			for i, value in List do
+				if i ~= p2 then
+					t[i] = value
 				end
 			end
-			if not p4[p3] then
-				t[p3] = true
+			if not List[p2] then
+				t[p2] = true
 			end
 			return t
 		end)
 	end, {})
-	
-	return if var15 and var21 ~= nil then reactModule.createElement(musicEditorModule, {
-		controller = controller,
-		musicEdit = var21,
-		onBack = var26,
-		onDone = var27,
-		onStartTimeChanged = var28
-	}) else reactModule.createElement(musicPickerContext.Provider, {
-		value = useMemo(function()
-			-- upvalues: var13 (ref), var29 (ref), var17 (ref), var30 (ref)
-			return {
-				previewingId = var13,
-				togglePreview = var29,
-				savedIds = var17,
-				toggleSaved = var30
+	local UseCallbackResult7 = UseCallbackFunction(function(p3) --[[ Line: 275 ]]
+		-- upvalues: UseStateResult2 (copy), UseStateResult2_3 (copy), MusicStoreModule (copy), UseStateResult5 (copy)
+		UseStateResult2(nil)
+		UseStateResult2_3(p3)
+		MusicStoreModule.search(p3, UseStateResult5)
+	end, { MusicStoreModule, UseStateResult5 })
+	local UseCallbackResult8 = UseCallbackFunction(function(_) --[[ Line: 283 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(nil)
+	end, {})
+	local UseMemoResult1 = UseMemoFunction(function() --[[ Line: 287 ]]
+		-- upvalues: UseCreationFlowStringsModuleResult (copy), UseStoreContentResult (copy), FFlagMomentsAudioSaveButton (upval), UseMemoResult (copy)
+		local List = {
+			{
+				id = "trending",
+				label = UseCreationFlowStringsModuleResult.MusicTabTrending,
+				content = UseStoreContentResult
 			}
-		end, { var13 or 0, var17, var29, var30 })
-	}, {
-		Picker = reactModule.createElement(musicPicker, {
+		}
+		
+		if FFlagMomentsAudioSaveButton then
+			table.insert(List, { id = "saved", label = "Saved", content = UseMemoResult })
+		end
+		return List
+	end, {
+		UseCreationFlowStringsModuleResult,
+		UseStoreContentResult,
+		UseMemoResult
+	})
+	local UseMemoResult2 = UseMemoFunction(function() --[[ Line: 306 ]]
+		-- upvalues: UseStateResult (copy), UseCallbackResult5 (copy), UseStateResult3 (copy), UseCallbackResult6 (copy), FFlagMomentsAudioSaveButton (upval)
+		return {
+			previewingId = UseStateResult,
+			togglePreview = UseCallbackResult5,
+			savedIds = UseStateResult3,
+			toggleSaved = UseCallbackResult6,
+			showSaveButton = FFlagMomentsAudioSaveButton
+		}
+	end, {
+		UseStateResult or 0,
+		UseStateResult3,
+		UseCallbackResult5,
+		UseCallbackResult6
+	})
+	
+	return if UseStateResult1 and UseStateResult6 ~= nil then ReactModule.createElement(MusicEditorModule, {
+		controller = Controller,
+		musicEdit = UseStateResult6,
+		onBack = UseCallbackResult2,
+		onDone = UseCallbackResult3,
+		onStartTimeChanged = UseCallbackResult4
+	}) else ReactModule.createElement(MusicPickerContext.Provider, { value = UseMemoResult2 }, {
+		Picker = ReactModule.createElement(MusicPicker, {
 			source = "moments",
-			titleText = var7.EditingCtaMusic,
-			searchPlaceholder = var7.GeneralSearchPlaceholder,
-			showTabs = fFlagMomentsCreationMusicPickerTabsModule,
-			tabs = useMemo(function()
-				-- upvalues: var7 (ref), var10 (ref), var12 (ref)
-				return {
-					{
-						id = "trending",
-						label = var7.MusicTabTrending,
-						content = var10
-					},
-					{ id = "saved", label = "Saved", content = var12 }
-				}
-			end, { var7, var10, var12 }),
-			searchContent = var10,
-			onQueryChanged = useCallback(function(p4)
-				-- upvalues: var14 (ref), var8 (ref), var19 (ref)
-				var14(nil)
-				var8.search(p4, var19)
-			end, { var8, var19 }),
-			onTabChanged = useCallback(function(_)
-				-- upvalues: var14 (ref)
-				var14(nil)
-			end, {}),
-			onSelect = var25,
-			onClose = var24,
-			safeAreaInsets = { left = var9.left, right = var9.right }
+			titleText = UseCreationFlowStringsModuleResult.EditingCtaMusic,
+			searchPlaceholder = UseCreationFlowStringsModuleResult.GeneralSearchPlaceholder,
+			showTabs = FFlagMomentsCreationMusicPickerTabsModule and FFlagMomentsAudioSaveButton,
+			tabs = UseMemoResult1,
+			searchContent = UseStoreContentResult,
+			onQueryChanged = UseCallbackResult7,
+			initialQuery = UseStateResult4,
+			onTabChanged = UseCallbackResult8,
+			onSelect = UseCallbackResult1,
+			onClose = UseCallbackResult,
+			safeAreaInsets = {
+				left = UseDeviceInsetsResult.left,
+				right = UseDeviceInsetsResult.right
+			}
 		})
 	})
 end

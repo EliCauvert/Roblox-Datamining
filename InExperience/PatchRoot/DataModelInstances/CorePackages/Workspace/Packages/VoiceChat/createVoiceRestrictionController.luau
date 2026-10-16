@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent._Workspace.VoiceChat.VoiceChat.Restrictions.createVoiceRestrictionController)
+﻿return (require(script.Parent.Parent._Workspace.VoiceChat.VoiceChat.Restrictions.createVoiceRestrictionController))

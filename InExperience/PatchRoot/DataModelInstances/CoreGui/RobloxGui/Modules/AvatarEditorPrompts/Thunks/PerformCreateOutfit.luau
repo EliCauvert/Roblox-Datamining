@@ -1,19 +1,19 @@
-﻿local avatarEditorService = game:GetService("AvatarEditorService")
-local parent = script.Parent.Parent
-local closeOpenPromptModule = require(parent.Actions.CloseOpenPrompt)
-local getConformedHumanoidDescriptionModule = require(parent.GetConformedHumanoidDescription)
+﻿local AvatarEditorService = game:GetService("AvatarEditorService")
+local Parent = script.Parent.Parent
+local CloseOpenPromptModule = require(Parent.Actions.CloseOpenPrompt)
+local GetConformedHumanoidDescriptionModule = require(Parent.GetConformedHumanoidDescription)
 
-return function(p1)
-	-- upvalues: getConformedHumanoidDescriptionModule (ref), avatarEditorService (ref), closeOpenPromptModule (ref)
-	return function(p2)
-		-- upvalues: getConformedHumanoidDescriptionModule (copy), avatarEditorService (copy), p1 (ref), closeOpenPromptModule (copy)
-		getConformedHumanoidDescriptionModule(p2:getState().promptInfo.humanoidDescription, false):andThen(function(p3)
-			-- upvalues: avatarEditorService (copy), p1 (copy)
-			avatarEditorService:PerformCreateOutfitWithDescription(p3, p1)
-		end, function(_)
-			-- upvalues: avatarEditorService (copy)
-			avatarEditorService:SignalCreateOutfitFailed()
+return function(Name) --[[ Line: 8 ]]
+	-- upvalues: GetConformedHumanoidDescriptionModule (copy), AvatarEditorService (copy), CloseOpenPromptModule (copy)
+	return function(p1) --[[ Line: 9 ]]
+		-- upvalues: GetConformedHumanoidDescriptionModule (upval), AvatarEditorService (upval), Name (copy), CloseOpenPromptModule (upval)
+		GetConformedHumanoidDescriptionModule(p1:getState().promptInfo.humanoidDescription, false):andThen(function(Result) --[[ Line: 13 ]]
+			-- upvalues: AvatarEditorService (upval), Name (upval)
+			AvatarEditorService:PerformCreateOutfitWithDescription(Result, Name)
+		end, function(_) --[[ Line: 15 ]]
+			-- upvalues: AvatarEditorService (upval)
+			AvatarEditorService:SignalCreateOutfitFailed()
 		end)
-		p2:dispatch(closeOpenPromptModule())
+		p1:dispatch(CloseOpenPromptModule())
 	end
 end

@@ -1,15 +1,15 @@
-﻿local logger = require(script.Parent.Parent.Lumberyak).Logger.new(nil, "Logger")
-local var1 = logger.Levels.fromString(game:DefineFastString("DebugLuaLogLevel", ""))
-local debugLuaLogPattern = game:DefineFastString("DebugLuaLogPattern", "")
-logger:setContext({ prefix = "[{loggerName}] - " })
-logger:addSink({
-	maxLevel = var1,
-	log = function(_, p1, _)
-		-- upvalues: debugLuaLogPattern (ref)
-		if string.match(p1, debugLuaLogPattern) then
-			print(p1)
+﻿local Logger = require(script.Parent.Parent.Lumberyak).Logger.new(nil, "Logger")
+local FromStringResult = Logger.Levels.fromString((game:DefineFastString("DebugLuaLogLevel", "")))
+local DebugLuaLogPattern = game:DefineFastString("DebugLuaLogPattern", "")
+Logger:setContext({ prefix = "[{loggerName}] - " })
+Logger:addSink({
+	maxLevel = FromStringResult,
+	log = function(_, Text: string, _) --[[ Line: 14 ]]
+		-- upvalues: DebugLuaLogPattern (copy)
+		if string.match(Text, DebugLuaLogPattern) then
+			print(Text)
 		end
 	end
 })
 
-return logger
+return Logger

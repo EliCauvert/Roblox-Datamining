@@ -1,194 +1,191 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local gameSettings = UserSettings().GameSettings
-local fFlagDevConsoleMicroProfilerImproveWordingModule = require(script.Parent.Flags.FFlagDevConsoleMicroProfilerImproveWording)
-local devConsoleMicroProfilerFixAutoTextClear = game:DefineFastFlag("DevConsoleMicroProfilerFixAutoTextClear", false)
-local getClientReplicatorModule = require(script.Parent.Parent.Parent.Util.getClientReplicator)
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
+﻿local CorePackages = game:GetService("CorePackages")
+local GameSettings = UserSettings().GameSettings
+local FFlagDevConsoleMicroProfilerImproveWordingModule = require(script.Parent.Flags.FFlagDevConsoleMicroProfilerImproveWording)
+local DevConsoleMicroProfilerFixAutoTextClear = game:DefineFastFlag("DevConsoleMicroProfilerFixAutoTextClear", false)
+local GetClientReplicatorModule = require(script.Parent.Parent.Parent.Util.getClientReplicator)
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
 local _ = script.Parent.Parent.Parent.Components
-local setRCCProfilerStateModule = require(script.Parent.Parent.Parent.Actions.SetRCCProfilerState)
-local constantsModule = require(script.Parent.Parent.Parent.Constants)
-local _ = constantsModule.GeneralFormatting.MainRowPadding
-local buttonWidth = constantsModule.MicroProfilerFormatting.ButtonWidth
-local buttonTextSize = constantsModule.MicroProfilerFormatting.ButtonTextSize
-local mainWindow = constantsModule.Font.MainWindow
-local mainWindowHeader = constantsModule.Font.MainWindowHeader
-local unselectedGray = constantsModule.Color.UnselectedGray
-local selectedBlue = constantsModule.Color.SelectedBlue
-local unselectedGray_1 = constantsModule.Color.UnselectedGray
-local serverProfilerInteraface = roactModule.Component:extend("ServerProfilerInteraface")
+local SetRCCProfilerStateModule = require(script.Parent.Parent.Parent.Actions.SetRCCProfilerState)
+local ConstantsModule = require(script.Parent.Parent.Parent.Constants)
+local _ = ConstantsModule.GeneralFormatting.MainRowPadding
+local ButtonWidth = ConstantsModule.MicroProfilerFormatting.ButtonWidth
+local ButtonTextSize = ConstantsModule.MicroProfilerFormatting.ButtonTextSize
+local MainWindow = ConstantsModule.Font.MainWindow
+local MainWindowHeader = ConstantsModule.Font.MainWindowHeader
+local UnselectedGray = ConstantsModule.Color.UnselectedGray
+local SelectedBlue = ConstantsModule.Color.SelectedBlue
+local UnselectedGray1 = ConstantsModule.Color.UnselectedGray
+local ServerProfilerInteraface = RoactModule.Component:extend("ServerProfilerInteraface")
 
-function serverProfilerInteraface.init(p1)
-	-- upvalues: gameSettings (ref), getClientReplicatorModule (ref)
-	function p0.onUtilTabHeightChanged(p2)
-		-- upvalues: p1 (ref)
-		p1:setState({ utilTabHeight = p2 })
+function ServerProfilerInteraface.init(p1) --[[ Line: 35 ]]
+	-- upvalues: GameSettings (copy), GetClientReplicatorModule (copy)
+	function p1.onUtilTabHeightChanged(UtilTabHeight) --[[ Line: 36 ]]
+		-- upvalues: p1 (copy)
+		p1:setState({ utilTabHeight = UtilTabHeight })
 	end
 	
-	function p0.onFocusLostFrameRate(p2, _, _)
-		-- upvalues: gameSettings (copy)
-		gameSettings.RCCProfilerRecordFrameRate = p2.Text
-		p2.Text = gameSettings.RCCProfilerRecordFrameRate
+	function p1.onFocusLostFrameRate(p2, _, _) --[[ Line: 42 ]]
+		-- upvalues: GameSettings (upval)
+		GameSettings.RCCProfilerRecordFrameRate = p2.Text
+		p2.Text = GameSettings.RCCProfilerRecordFrameRate
 	end
 	
-	function p0.onFocusLostTimeFrame(p2, _, _)
-		-- upvalues: gameSettings (copy)
-		gameSettings.RCCProfilerRecordTimeFrame = p2.Text
-		p2.Text = gameSettings.RCCProfilerRecordTimeFrame
+	function p1.onFocusLostTimeFrame(p2, _, _) --[[ Line: 50 ]]
+		-- upvalues: GameSettings (upval)
+		GameSettings.RCCProfilerRecordTimeFrame = p2.Text
+		p2.Text = GameSettings.RCCProfilerRecordTimeFrame
 	end
 	
-	function p0.requestRCCProfilerData(_)
-		-- upvalues: getClientReplicatorModule (copy), gameSettings (copy), p1 (ref)
-		local var1 = getClientReplicatorModule()
+	function p1:requestRCCProfilerData() --[[ Line: 58 ]]
+		-- upvalues: GetClientReplicatorModule (upval), GameSettings (upval), p1 (copy)
+		local ClientReplicatorModule = GetClientReplicatorModule()
 		
-		if var1 then
-			var1:RequestRCCProfilerData(gameSettings.RCCProfilerRecordFrameRate, gameSettings.RCCProfilerRecordTimeFrame)
+		if ClientReplicatorModule then
+			ClientReplicatorModule:RequestRCCProfilerData(GameSettings.RCCProfilerRecordFrameRate, GameSettings.RCCProfilerRecordTimeFrame)
 			p1.props.dispatchSetRCCProfilerState(true)
 		end
 	end
 	
-	function p0.changeProfilerState(p2)
-		-- upvalues: gameSettings (copy), p1 (ref)
-		return function()
-			-- upvalues: gameSettings (copy), p2 (ref), p1 (copy)
-			gameSettings.OnScreenProfilerEnabled = p2
-			p1:setState({ clientProfilerEnabled = p2 })
+	function p1.changeProfilerState(ClientProfilerEnabled) --[[ Line: 71 ]]
+		-- upvalues: GameSettings (upval), p1 (copy)
+		return function() --[[ Line: 72 ]]
+			-- upvalues: GameSettings (upval), ClientProfilerEnabled (copy), p1 (upval)
+			GameSettings.OnScreenProfilerEnabled = ClientProfilerEnabled
+			p1:setState({ clientProfilerEnabled = ClientProfilerEnabled })
 		end
 	end
 	
 	p1.state = {
-		frameRate = gameSettings.RCCProfilerRecordFrameRate,
-		timeFrame = gameSettings.RCCProfilerRecordTimeFrame
+		frameRate = GameSettings.RCCProfilerRecordFrameRate,
+		timeFrame = GameSettings.RCCProfilerRecordTimeFrame
 	}
 end
 
-function serverProfilerInteraface.render(p1)
-	-- upvalues: buttonWidth (ref), roactModule (ref), fFlagDevConsoleMicroProfilerImproveWordingModule (ref), mainWindowHeader (ref), buttonTextSize (ref), constantsModule (ref), unselectedGray_1 (ref), mainWindow (ref), devConsoleMicroProfilerFixAutoTextClear (ref), unselectedGray (ref), selectedBlue (ref)
+function ServerProfilerInteraface.render(p1) --[[ Line: 86 ]]
+	-- upvalues: ButtonWidth (copy), RoactModule (copy), FFlagDevConsoleMicroProfilerImproveWordingModule (copy), MainWindowHeader (copy), ButtonTextSize (copy), ConstantsModule (copy), UnselectedGray1 (copy), MainWindow (copy), DevConsoleMicroProfilerFixAutoTextClear (copy), UnselectedGray (copy), SelectedBlue (copy)
 	local _ = p1.props.size
 	local _ = p1.props.formFactor
 	local _ = p1.props.tabList
-	local waitingForRecording = p1.props.waitingForRecording
-	local lastFileOutputLocation = p1.props.lastFileOutputLocation
+	local WaitingForRecording = p1.props.waitingForRecording
+	local LastFileOutputLocation = p1.props.lastFileOutputLocation
 	local _ = p1.state.utilTabHeight
-	local frameRate = p1.state.frameRate
-	local timeFrame = p1.state.timeFrame
 	local _ = p1.state.clientProfilerEnabled
-	local var1 = not waitingForRecording and #lastFileOutputLocation > 0
-	local uDim2 = UDim2.new(0.8, -buttonWidth, 0, 30)
-	local _ = UDim2.new(0.6, buttonWidth, 0, 0)
+	local _UDim2 = UDim2.new(0.8, -ButtonWidth, 0, 30)
+	local _ = UDim2.new(0.6, ButtonWidth, 0, 0)
 	
-	return roactModule.createElement("Frame", {
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		LayoutOrder = 4,
 		Size = UDim2.new(1, 0, 0, 135)
 	}, {
-		Label = roactModule.createElement("TextLabel", {
+		Label = RoactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
-			Size = UDim2.new(0, buttonWidth, 0, 30),
+			Size = UDim2.new(0, ButtonWidth, 0, 30),
 			Position = UDim2.new(0.1, 0, 0, 0),
-			Text = if fFlagDevConsoleMicroProfilerImproveWordingModule then "Server MicroProfiler" else "ServerProfiler",
-			Font = mainWindowHeader,
-			TextSize = buttonTextSize,
-			TextColor3 = constantsModule.Color.Text,
+			Text = if FFlagDevConsoleMicroProfilerImproveWordingModule then "Server MicroProfiler" else "ServerProfiler",
+			Font = MainWindowHeader,
+			TextSize = ButtonTextSize,
+			TextColor3 = ConstantsModule.Color.Text,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Center,
-			BackgroundColor3 = unselectedGray_1
+			BackgroundColor3 = UnselectedGray1
 		}),
-		HorizontalLine = roactModule.createElement("Frame", {
+		HorizontalLine = RoactModule.createElement("Frame", {
 			Size = UDim2.new(1, 0, 0, 1),
 			Position = UDim2.new(0, 0, 0, 30)
 		}),
-		LabelFPS = roactModule.createElement("TextLabel", {
+		LabelFPS = RoactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
-			Size = UDim2.new(0, buttonWidth, 0, 30),
+			Size = UDim2.new(0, ButtonWidth, 0, 30),
 			Position = UDim2.new(0.1, 0, 0, 37.5),
-			Text = if fFlagDevConsoleMicroProfilerImproveWordingModule then "Frames to dump" else "Frames Per Second",
-			Font = mainWindow,
-			TextSize = buttonTextSize,
-			TextColor3 = constantsModule.Color.Text,
+			Text = if FFlagDevConsoleMicroProfilerImproveWordingModule then "Frames to dump" else "Frames Per Second",
+			Font = MainWindow,
+			TextSize = ButtonTextSize,
+			TextColor3 = ConstantsModule.Color.Text,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Center,
-			BackgroundColor3 = unselectedGray_1
+			BackgroundColor3 = UnselectedGray1
 		}),
-		FPSTextBox = roactModule.createElement("TextBox", {
-			Size = uDim2,
-			Position = UDim2.new(0.1, buttonWidth, 0, 37.5),
-			Text = frameRate,
-			Font = mainWindow,
-			TextSize = buttonTextSize,
-			TextColor3 = constantsModule.Color.Text,
+		FPSTextBox = RoactModule.createElement("TextBox", {
+			Size = _UDim2,
+			Position = UDim2.new(0.09999999999999998, ButtonWidth, 0, 37.5),
+			Text = p1.state.frameRate,
+			Font = MainWindow,
+			TextSize = ButtonTextSize,
+			TextColor3 = ConstantsModule.Color.Text,
 			TextXAlignment = Enum.TextXAlignment.Center,
 			TextYAlignment = Enum.TextYAlignment.Center,
-			BackgroundColor3 = unselectedGray_1,
+			BackgroundColor3 = UnselectedGray1,
 			BackgroundTransparency = 0,
-			ClearTextOnFocus = if devConsoleMicroProfilerFixAutoTextClear then false else true,
-			[roactModule.Event.FocusLost] = p1.onFocusLostFrameRate
+			ClearTextOnFocus = not DevConsoleMicroProfilerFixAutoTextClear,
+			[RoactModule.Event.FocusLost] = p1.onFocusLostFrameRate
 		}),
-		LabelTimeFrame = roactModule.createElement("TextLabel", {
+		LabelTimeFrame = RoactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
-			Size = UDim2.new(0, buttonWidth, 0, 30),
+			Size = UDim2.new(0, ButtonWidth, 0, 30),
 			Position = UDim2.new(0.1, 0, 0, 67.5),
-			Text = if fFlagDevConsoleMicroProfilerImproveWordingModule then "Seconds to delay" else "Seconds to Record",
-			Font = mainWindow,
-			TextSize = buttonTextSize,
-			TextColor3 = constantsModule.Color.Text,
+			Text = if FFlagDevConsoleMicroProfilerImproveWordingModule then "Seconds to delay" else "Seconds to Record",
+			Font = MainWindow,
+			TextSize = ButtonTextSize,
+			TextColor3 = ConstantsModule.Color.Text,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Center
 		}),
-		TimeFrameTextBox = roactModule.createElement("TextBox", {
-			Size = uDim2,
-			Position = UDim2.new(0.1, buttonWidth, 0, 67.5),
-			Text = timeFrame,
-			Font = mainWindow,
-			TextSize = buttonTextSize,
-			TextColor3 = constantsModule.Color.Text,
+		TimeFrameTextBox = RoactModule.createElement("TextBox", {
+			Size = _UDim2,
+			Position = UDim2.new(0.09999999999999998, ButtonWidth, 0, 67.5),
+			Text = p1.state.timeFrame,
+			Font = MainWindow,
+			TextSize = ButtonTextSize,
+			TextColor3 = ConstantsModule.Color.Text,
 			TextXAlignment = Enum.TextXAlignment.Center,
 			TextYAlignment = Enum.TextYAlignment.Center,
-			BackgroundColor3 = unselectedGray_1,
+			BackgroundColor3 = UnselectedGray1,
 			BackgroundTransparency = 0,
-			ClearTextOnFocus = if devConsoleMicroProfilerFixAutoTextClear then false else true,
-			[roactModule.Event.FocusLost] = p1.onFocusLostTimeFrame
+			ClearTextOnFocus = not DevConsoleMicroProfilerFixAutoTextClear,
+			[RoactModule.Event.FocusLost] = p1.onFocusLostTimeFrame
 		}, {
-			GetDumpButton = roactModule.createElement("TextButton", {
-				Size = UDim2.new(0, buttonWidth * 0.7, 0, 30),
-				Position = UDim2.new(1, -buttonWidth * 0.7, 1, 30),
-				Text = if waitingForRecording then "Recording" else "Start Recording",
-				Font = mainWindow,
-				TextSize = buttonTextSize,
-				TextColor3 = constantsModule.Color.Text,
+			GetDumpButton = RoactModule.createElement("TextButton", {
+				Size = UDim2.new(0, ButtonWidth * 0.7, 0, 30),
+				Position = UDim2.new(1, -ButtonWidth * 0.7, 1, 30),
+				Text = if WaitingForRecording then "Recording" else "Start Recording",
+				Font = MainWindow,
+				TextSize = ButtonTextSize,
+				TextColor3 = ConstantsModule.Color.Text,
 				TextXAlignment = Enum.TextXAlignment.Center,
 				TextYAlignment = Enum.TextYAlignment.Center,
-				BackgroundColor3 = if waitingForRecording then unselectedGray else selectedBlue,
-				BackgroundTransparency = if waitingForRecording then 0.3 else 0,
-				AutoButtonColor = not waitingForRecording,
-				Active = not waitingForRecording,
-				[roactModule.Event.Activated] = p1.requestRCCProfilerData
+				BackgroundColor3 = WaitingForRecording and UnselectedGray or SelectedBlue,
+				BackgroundTransparency = if WaitingForRecording then 0.3 else 0,
+				AutoButtonColor = not WaitingForRecording,
+				Active = not WaitingForRecording,
+				[RoactModule.Event.Activated] = p1.requestRCCProfilerData
 			})
 		}),
-		OutputPath = var1 and roactModule.createElement("TextLabel", {
+		OutputPath = not WaitingForRecording and #LastFileOutputLocation > 0 and RoactModule.createElement("TextLabel", {
 			Size = UDim2.new(1, 0, 0, 30),
 			Position = UDim2.new(0, 0, 0, 97.5),
-			Text = lastFileOutputLocation,
-			Font = mainWindow,
-			TextSize = buttonTextSize,
-			TextColor3 = constantsModule.Color.Text,
+			Text = LastFileOutputLocation,
+			Font = MainWindow,
+			TextSize = ButtonTextSize,
+			TextColor3 = ConstantsModule.Color.Text,
 			TextXAlignment = Enum.TextXAlignment.Center,
 			TextYAlignment = Enum.TextYAlignment.Center
 		})
 	})
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p1, _)
+return RoactRoduxModule.UNSTABLE_connect2(function(p1, _) --[[ Line: 215 | Named "mapStateToProps" ]]
 	return {
 		waitingForRecording = p1.MicroProfiler.waitingForRecording,
 		lastFileOutputLocation = p1.MicroProfiler.lastFileOutputLocation
 	}
-end, function(p1)
-	-- upvalues: setRCCProfilerStateModule (ref)
+end, function(Callback) --[[ Line: 222 | Named "mapDispatchToProps" ]]
+	-- upvalues: SetRCCProfilerStateModule (copy)
 	return {
-		dispatchSetRCCProfilerState = function(value, p2)
-			-- upvalues: p1 (ref), setRCCProfilerStateModule (copy)
-			p1(setRCCProfilerStateModule(value, p2))
+		dispatchSetRCCProfilerState = function(p1, p2) --[[ Line: 224 ]]
+			-- upvalues: Callback (copy), SetRCCProfilerStateModule (upval)
+			Callback(SetRCCProfilerStateModule(p1, p2))
 		end
 	}
-end)(serverProfilerInteraface)
+end)(ServerProfilerInteraface)

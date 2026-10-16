@@ -1,77 +1,77 @@
-﻿local sduiUsageRecorderModule = require(script:FindFirstAncestor("SduiCoreSystem").Analytics.SduiUsageRecorder)
+﻿local SduiUsageRecorderModule = require(script:FindFirstAncestor("SduiCoreSystem").Analytics.SduiUsageRecorder)
 
-local function recordV1ComponentUsage(p1, p2)
-	-- upvalues: sduiUsageRecorderModule (ref), recordV1ComponentUsage (ref)
+local function recordV1ComponentUsage(p1, p2) --[[ Line: 21 ]]
+	-- upvalues: SduiUsageRecorderModule (copy), recordV1ComponentUsage (copy)
 	if not p2 then return end
-	local var1 = sduiUsageRecorderModule.isTypeSamplingEnabled()
-	local var2 = sduiUsageRecorderModule.isParamSamplingEnabled()
+	local IsTypeSamplingEnabled = SduiUsageRecorderModule.isTypeSamplingEnabled()
+	local IsParamSamplingEnabled = SduiUsageRecorderModule.isParamSamplingEnabled()
 	
-	if not var1 and not var2 then return end
-	local componentType = p2.componentType
+	if not IsTypeSamplingEnabled and not IsParamSamplingEnabled then return end
+	local ComponentType = p2.componentType
 	
-	if typeof(componentType) ~= "string" then return end
-	if var1 then
-		sduiUsageRecorderModule.recordComponentType(p1, "v1", componentType)
+	if typeof(ComponentType) ~= "string" then return end
+	if IsTypeSamplingEnabled then
+		SduiUsageRecorderModule.recordComponentType(p1, "v1", ComponentType)
 	end
-	local recordActionConfig = nil
+	local Callback = nil
 	
-	local function visitValueForActions(p3)
-		-- upvalues: recordActionConfig (write), visitValueForActions (ref)
-		if typeof(p3) ~= "table" then return end
-		if typeof(p3.actionType) == "string" then
-			recordActionConfig(p3)
+	local function visitValueForActions(List) --[[ Line: 45 ]]
+		-- upvalues: Callback (ref), visitValueForActions (copy)
+		if typeof(List) ~= "table" then return end
+		if typeof(List.actionType) == "string" then
+			Callback(List)
 			
 			return
 		end
-		for i, v in p3 do
-			if typeof(v) == "table" then
-				visitValueForActions(v)
+		for _, value in List do
+			if typeof(value) == "table" then
+				visitValueForActions(value)
 			end
 		end
 	end
 	
-	recordActionConfig = function(p4)
-		-- upvalues: var1 (ref), sduiUsageRecorderModule (copy), p1 (ref), var2 (ref), visitValueForActions (ref)
-		local actionType = p4.actionType
+	Callback = function(p3) --[[ Line: 60 | Named "recordActionConfig" ]]
+		-- upvalues: IsTypeSamplingEnabled (copy), SduiUsageRecorderModule (upval), p1 (copy), IsParamSamplingEnabled (copy), visitValueForActions (copy)
+		local ActionType = p3.actionType
 		
-		if typeof(actionType) ~= "string" then return end
-		if var1 then
-			sduiUsageRecorderModule.recordActionType(p1, "v1", actionType)
+		if typeof(ActionType) ~= "string" then return end
+		if IsTypeSamplingEnabled then
+			SduiUsageRecorderModule.recordActionType(p1, "v1", ActionType)
 		end
-		local actionParams = p4.actionParams
+		local ActionParams = p3.actionParams
 		
-		if typeof(actionParams) ~= "table" then return end
-		for i, v in actionParams do
-			if typeof(i) == "string" and var2 then
-				sduiUsageRecorderModule.recordActionParam(p1, "v1", actionType, i)
+		if typeof(ActionParams) ~= "table" then return end
+		for i, actionParam in ActionParams do
+			if typeof(i) == "string" and IsParamSamplingEnabled then
+				SduiUsageRecorderModule.recordActionParam(p1, "v1", ActionType, i)
 			end
-			visitValueForActions(v)
+			visitValueForActions(actionParam)
 		end
 	end
 	
-	local function walkProps(p5)
-		-- upvalues: var2 (ref), sduiUsageRecorderModule (copy), p1 (ref), componentType (ref), visitValueForActions (ref)
-		if typeof(p5) ~= "table" then return end
-		for i, v in p5 do
-			if typeof(i) == "string" and var2 then
-				sduiUsageRecorderModule.recordProp(p1, "v1", componentType, i)
+	local function walkProps(PropOverrides) --[[ Line: 80 ]]
+		-- upvalues: IsParamSamplingEnabled (copy), SduiUsageRecorderModule (upval), p1 (copy), ComponentType (copy), visitValueForActions (copy)
+		if typeof(PropOverrides) ~= "table" then return end
+		for i, propOverride in PropOverrides do
+			if typeof(i) == "string" and IsParamSamplingEnabled then
+				SduiUsageRecorderModule.recordProp(p1, "v1", ComponentType, i)
 			end
-			visitValueForActions(v)
+			visitValueForActions(propOverride)
 		end
 	end
 	
 	walkProps(p2.props)
 	
 	if typeof(p2.conditionalProps) == "table" then
-		for i, v in p2.conditionalProps do
-			if typeof(v) == "table" then
-				walkProps(v.propOverrides)
+		for _, conditionalProp in p2.conditionalProps do
+			if typeof(conditionalProp) == "table" then
+				walkProps(conditionalProp.propOverrides)
 			end
 		end
 	end
 	if typeof(p2.children) == "table" then
-		for i, v in p2.children do
-			recordV1ComponentUsage(p1, v)
+		for _, child in p2.children do
+			recordV1ComponentUsage(p1, child)
 		end
 	end
 end

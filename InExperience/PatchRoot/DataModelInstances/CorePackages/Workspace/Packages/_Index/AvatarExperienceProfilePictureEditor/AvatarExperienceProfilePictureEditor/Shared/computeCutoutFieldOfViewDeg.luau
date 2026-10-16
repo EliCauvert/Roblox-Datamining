@@ -1,13 +1,10 @@
-﻿local constantsModule = require(script.Parent.Parent.Constants)
+﻿local ConstantsModule = require(script.Parent.Parent.Constants)
 
-return function(p1)
-	-- upvalues: constantsModule (ref)
-	local cameraFieldOfViewDeg = p1.cameraFieldOfViewDeg or constantsModule.CameraFieldOfViewDeg
-	local viewportHeightPix = p1.viewportHeightPix
-	local cutoutTopOffsetPix = p1.cutoutTopOffsetPix
-	local cutoutDiameterPix = p1.cutoutDiameterPix
-	local var1 = viewportHeightPix / 2 / math.tan(math.rad(cameraFieldOfViewDeg) / 2)
-	local var2 = viewportHeightPix / 2 - cutoutTopOffsetPix
+return function(p1): number --[[ Line: 18 | Named "computeCutoutFieldOfViewDeg" ]]
+	-- upvalues: ConstantsModule (copy)
+	local ViewportHeightPix: number = p1.viewportHeightPix
+	local X = ViewportHeightPix / 2 / math.tan(math.rad(p1.cameraFieldOfViewDeg or ConstantsModule.CameraFieldOfViewDeg) / 2)
+	local Y = ViewportHeightPix / 2 - p1.cutoutTopOffsetPix
 	
-	return math.deg(math.atan2(var2, var1) - math.atan2(var2 - cutoutDiameterPix, var1))
+	return (math.deg(math.atan2(Y, X) - math.atan2(Y - p1.cutoutDiameterPix, X)))
 end

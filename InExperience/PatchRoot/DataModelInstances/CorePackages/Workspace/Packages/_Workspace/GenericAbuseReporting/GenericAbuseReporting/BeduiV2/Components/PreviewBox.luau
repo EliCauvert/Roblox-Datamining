@@ -1,98 +1,99 @@
-﻿local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
-local parent = genericAbuseReporting.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local var1 = game:DefineFastFlag("AbuseReportingUseProfileFrameThumbnail", false) and require(parent.SharedFlags).GetFFlagProfileFrameThumbnailEnabled()
-local avatar = foundationModule.Avatar
-local image = foundationModule.Image
-local text = foundationModule.Text
-local view = foundationModule.View
-local _ = require(genericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.AbuseSheetFlowTypes)
-local useExperienceDetailsModule = require(genericAbuseReporting.BeduiV2.Hooks.Enrichment.useExperienceDetails)
-local textWithTranslationModule = require(genericAbuseReporting.BeduiV2.Utils.Translate.TextWithTranslation)
+﻿local GenericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
+local Parent = GenericAbuseReporting.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local FFlagProfileFrameThumbnailEnabled = game:DefineFastFlag("AbuseReportingUseProfileFrameThumbnail", false) and require(Parent.SharedFlags).GetFFlagProfileFrameThumbnailEnabled()
+local Avatar = FoundationModule.Avatar
+local Image = FoundationModule.Image
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local _ = require(GenericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.AbuseSheetFlowTypes)
+local UseExperienceDetailsModule = require(GenericAbuseReporting.BeduiV2.Hooks.Enrichment.useExperienceDetails)
+local TextWithTranslationModule = require(GenericAbuseReporting.BeduiV2.Utils.Translate.TextWithTranslation)
 
-local function UserPreview(p1)
-	-- upvalues: reactModule (ref), view (ref), avatar (ref), var1 (ref), text (ref)
-	local preview = p1.preview
+local function UserPreview(p1) --[[ Line: 29 ]]
+	-- upvalues: ReactModule (copy), View (copy), Avatar (copy), FFlagProfileFrameThumbnailEnabled (copy), Text (copy)
+	local Preview = p1.preview
 	
-	if not preview then
-		return nil
-	end
-	local var2
-	local createElement = reactModule.createElement
-	local t = {
+	return if Preview then ReactModule.createElement(View, {
 		tag = "row align-y-center gap-medium size-full-0 auto-y padding-medium radius-medium bg-surface-200",
 		LayoutOrder = p1.layoutOrder
-	}
-	local t_1 = {
-		Avatar = preview.id ~= nil and reactModule.createElement(avatar, {
+	}, {
+		Avatar = Preview.id ~= nil and ReactModule.createElement(Avatar, {
 			LayoutOrder = 1,
-			userId = tonumber(preview.id),
-			includeProfileFrame = var1
-		})
-	}
-	
-	if not preview.displayName then
-		var2 = preview.username and reactModule.createElement(view, { tag = "col fill auto-xy", LayoutOrder = 2 }, {
-			DisplayName = preview.displayName and reactModule.createElement(text, {
+			userId = tonumber(Preview.id),
+			includeProfileFrame = FFlagProfileFrameThumbnailEnabled
+		}),
+		TextContainer = if Preview.displayName then ReactModule.createElement(View, { tag = "col fill auto-xy", LayoutOrder = 2 }, {
+			DisplayName = Preview.displayName and ReactModule.createElement(Text, {
 				RichText = true,
 				tag = "auto-xy text-wrap text-align-x-left content-emphasis",
 				LayoutOrder = 1,
-				Text = preview.displayName
+				Text = Preview.displayName
 			}),
-			Username = preview.username and reactModule.createElement(text, {
+			Username = Preview.username and ReactModule.createElement(Text, {
 				RichText = true,
 				tag = "auto-xy text-wrap text-align-x-left",
 				LayoutOrder = 2,
-				Text = "@" .. preview.username
+				Text = "@" .. Preview.username
+			})
+		}) else Preview.username and ReactModule.createElement(View, { tag = "col fill auto-xy", LayoutOrder = 2 }, {
+			DisplayName = Preview.displayName and ReactModule.createElement(Text, {
+				RichText = true,
+				tag = "auto-xy text-wrap text-align-x-left content-emphasis",
+				LayoutOrder = 1,
+				Text = Preview.displayName
+			}),
+			Username = Preview.username and ReactModule.createElement(Text, {
+				RichText = true,
+				tag = "auto-xy text-wrap text-align-x-left",
+				LayoutOrder = 2,
+				Text = "@" .. Preview.username
 			})
 		})
-	end
-	t_1.TextContainer = var2
-	
-	return createElement(view, t, t_1)
+	}) else nil
 end
 
-local function ChatPreview(p1)
-	-- upvalues: reactModule (ref), view (ref), textWithTranslationModule (ref)
-	local preview = p1.preview
+local function ChatPreview(p1) --[[ Line: 64 ]]
+	-- upvalues: ReactModule (copy), View (copy), TextWithTranslationModule (copy)
+	local Preview = p1.preview
 	
-	return if preview then reactModule.createElement(view, {
+	return if Preview then ReactModule.createElement(View, {
 		tag = "gap-xsmall size-full-0 auto-y padding-medium radius-medium bg-surface-200",
 		LayoutOrder = p1.layoutOrder
 	}, {
-		Message = reactModule.createElement(textWithTranslationModule, {
+		Message = ReactModule.createElement(TextWithTranslationModule, {
 			tag = "auto-xy text-wrap text-align-x-left",
-			input = preview.text
+			input = Preview.text
 		})
 	}) else nil
 end
 
-local function ExperiencePreview(p1)
-	-- upvalues: useExperienceDetailsModule (ref), reactModule (ref), view (ref), image (ref), text (ref)
-	local preview = p1.preview
-	local var2 = useExperienceDetailsModule(preview.id)
+local function ExperiencePreview(p1) --[[ Line: 81 ]]
+	-- upvalues: UseExperienceDetailsModule (copy), ReactModule (copy), View (copy), Image (copy), Text (copy)
+	local Preview = p1.preview
+	local UseExperienceDetailsModuleResult = UseExperienceDetailsModule(Preview.id)
 	
-	return if preview then reactModule.createElement(view, {
+	return if Preview then ReactModule.createElement(View, {
 		tag = "row align-y-center gap-medium size-full-0 auto-y padding-medium radius-medium bg-surface-200",
 		LayoutOrder = p1.layoutOrder
 	}, {
-		ExperienceIcon = reactModule.createElement(image, {
+		ExperienceIcon = ReactModule.createElement(Image, {
 			tag = "radius-medium",
-			Image = `rbxthumb://type=GameIcon&id={preview.id}&w=50&h=50`,
+			Image = `rbxthumb://type=GameIcon&id={Preview.id}&w=50&h=50`,
 			Size = UDim2.fromOffset(40, 40)
 		}),
-		Name = reactModule.createElement(text, {
+		Name = ReactModule.createElement(Text, {
 			RichText = true,
 			tag = "auto-xy text-wrap text-align-x-left",
-			Text = if var2 then var2.name else preview.title or ""
+			Text = UseExperienceDetailsModuleResult and UseExperienceDetailsModuleResult.name or (Preview.title or "")
 		})
 	}) else nil
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), UserPreview (ref), ChatPreview (ref), ExperiencePreview (ref)
-	local preview = p1.preview
+return ReactModule.memo(function(p1) --[[ Line: 108 | Named "PreviewBox" ]]
+	-- upvalues: ReactModule (copy), UserPreview (copy), ChatPreview (copy), ExperiencePreview (copy)
+	local Preview = p1.preview
 	
-	return if preview.type == "user" then reactModule.createElement(UserPreview, { preview = preview, layoutOrder = p1.layoutOrder }) elseif preview.type == "chat" then reactModule.createElement(ChatPreview, { preview = preview, layoutOrder = p1.layoutOrder }) elseif preview.type == "experience" then reactModule.createElement(ExperiencePreview, { preview = preview, layoutOrder = p1.layoutOrder }) else nil
+	return if Preview.type == "user" then ReactModule.createElement(UserPreview, { preview = Preview, layoutOrder = p1.layoutOrder }) elseif Preview.type == "chat" then ReactModule.createElement(ChatPreview, { preview = Preview, layoutOrder = p1.layoutOrder }) elseif Preview.type == "experience" then ReactModule.createElement(ExperiencePreview, { preview = Preview, layoutOrder = p1.layoutOrder }) else nil
 end)

@@ -1,17 +1,17 @@
-﻿local function _(value)
-	local ceiled = math.ceil(value)
+﻿local function _(Value: number): number --[[ Line: 1 | Named "ceilToEven" ]]
+	local Ceiled = math.ceil(Value)
 	
-	if ceiled % 2 == 1 then
-		ceiled += 1
+	if Ceiled % 2 == 1 then
+		Ceiled += 1
 	end
-	return math.max(0, ceiled)
+	return (math.max(0, Ceiled))
 end
 
-return function(p1)
-	local ceiled = math.ceil(p1 * 3 / 4)
+return function(p1: number): number --[[ Line: 9 ]]
+	local Ceiled = math.ceil(p1 * 3 / 4)
 	
-	if ceiled % 2 == 1 then
-		ceiled += 1
+	if Ceiled % 2 == 1 then
+		Ceiled += 1
 	end
-	return math.max(0, ceiled)
+	return (math.max(0, Ceiled))
 end

@@ -1,106 +1,106 @@
-﻿local parent = script:FindFirstAncestor("ShareSheet").Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local userTileModule = require(parent.UserTile)
-local skeleton = foundationModule.Skeleton
-local text = foundationModule.Text
-local view = foundationModule.View
-local radius = foundationModule.Enums.Radius
-local userTile = userTileModule.UserTile
-local layoutMode = userTileModule.LayoutMode
-local useTokens = foundationModule.Hooks.useTokens
+﻿local Parent = script:FindFirstAncestor("ShareSheet").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local UserTileModule = require(Parent.UserTile)
+local Skeleton = FoundationModule.Skeleton
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local Radius = FoundationModule.Enums.Radius
+local UserTile = UserTileModule.UserTile
+local LayoutMode = UserTileModule.LayoutMode
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 
 return {
-	getItemLayoutMetrics = function(p1)
-		local size1400 = p1.Size.Size_1400
-		local small = p1.Padding.Small
-		local xSmall = p1.Padding.XSmall
+	getItemLayoutMetrics = function(p1) --[[ Line: 30 ]]
+		local Size1400 = p1.Size.Size_1400
+		local Small: number = p1.Padding.Small
+		local XSmall: number = p1.Padding.XSmall
 		
 		return {
-			avatarSize = size1400,
-			rowVerticalPadding = small,
-			wrapperVerticalPadding = xSmall,
-			estimatedRowHeight = size1400 + 2 * small + 2 * xSmall
+			avatarSize = Size1400,
+			rowVerticalPadding = Small,
+			wrapperVerticalPadding = XSmall,
+			estimatedRowHeight = Size1400 + 2 * Small + 2 * XSmall
 		}
 	end,
-	Item = function(p1)
-		-- upvalues: useTokens (ref), reactModule (ref), view (ref), skeleton (ref), radius (ref), userTile (ref), layoutMode (ref), text (ref)
-		local var1 = useTokens()
-		local size1400 = var1.Size.Size_1400
-		local small = var1.Padding.Small
-		local xSmall = var1.Padding.XSmall
-		local t = {
-			avatarSize = size1400,
-			rowVerticalPadding = small,
-			wrapperVerticalPadding = xSmall,
-			estimatedRowHeight = size1400 + 2 * small + 2 * xSmall
+	Item = function(p1) --[[ Line: 61 ]]
+		-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Skeleton (copy), Radius (copy), UserTile (copy), LayoutMode (copy), Text (copy)
+		local UseTokensResult = UseTokensFunction()
+		local Size1400 = UseTokensResult.Size.Size_1400
+		local Small: number = UseTokensResult.Padding.Small
+		local XSmall: number = UseTokensResult.Padding.XSmall
+		local config = {
+			avatarSize = Size1400,
+			rowVerticalPadding = Small,
+			wrapperVerticalPadding = XSmall,
+			estimatedRowHeight = Size1400 + 2 * Small + 2 * XSmall
 		}
-		local testId = p1.testId or "people-picker-list-item"
-		local var2 = p1.isLoading == true
-		local leading = p1.leading
+		local TestId = p1.testId or "people-picker-list-item"
+		local IsIsLoading = p1.isLoading == true
+		local Leading = p1.leading
 		
-		return reactModule.createElement(view, { tag = "col size-full-0 auto-y" }, {
-			Wrapper = reactModule.createElement(view, {
+		return ReactModule.createElement(View, { tag = "col size-full-0 auto-y" }, {
+			Wrapper = ReactModule.createElement(View, {
 				tag = "size-full-0 auto-y",
 				padding = {
-					top = UDim.new(0, t.wrapperVerticalPadding),
-					bottom = UDim.new(0, t.wrapperVerticalPadding)
+					top = UDim.new(0, config.wrapperVerticalPadding),
+					bottom = UDim.new(0, config.wrapperVerticalPadding)
 				}
 			}, {
-				Row = reactModule.createElement(view, {
+				Row = ReactModule.createElement(View, {
 					tag = "row align-y-center gap-medium size-full-0 auto-y radius-medium",
 					padding = {
-						top = UDim.new(0, t.rowVerticalPadding),
-						bottom = UDim.new(0, t.rowVerticalPadding)
+						top = UDim.new(0, config.rowVerticalPadding),
+						bottom = UDim.new(0, config.rowVerticalPadding)
 					},
-					onActivated = if var2 then nil else p1.onActivated,
-					selection = { Selectable = not var2 },
-					testId = testId
+					onActivated = if IsIsLoading then nil else p1.onActivated,
+					selection = { Selectable = not IsIsLoading },
+					testId = TestId
 				}, {
-					Leading = reactModule.createElement(view, {
+					Leading = ReactModule.createElement(View, {
 						LayoutOrder = 1,
-						Size = UDim2.fromOffset(t.avatarSize, t.avatarSize),
-						testId = if leading.secondUserId then `{testId}--avatar-pile` else `{testId}--avatar`
+						Size = UDim2.fromOffset(config.avatarSize, config.avatarSize),
+						testId = if Leading.secondUserId then `{TestId}--avatar-pile` else `{TestId}--avatar`
 					}, {
-						Tile = if var2 then reactModule.createElement(skeleton, {
-							radius = radius.Circle,
-							testId = `{testId}--avatar-skeleton`
-						}) else reactModule.createElement(userTile, {
-							userId = leading.userId,
-							facePileSecondUserId = leading.secondUserId,
-							layoutMode = layoutMode.compact,
-							userPresenceType = leading.userPresence
+						Tile = if IsIsLoading then ReactModule.createElement(Skeleton, {
+							radius = Radius.Circle,
+							testId = `{TestId}--avatar-skeleton`
+						}) else ReactModule.createElement(UserTile, {
+							userId = Leading.userId,
+							facePileSecondUserId = Leading.secondUserId,
+							layoutMode = LayoutMode.compact,
+							userPresenceType = Leading.userPresence
 						})
 					}),
-					Content = reactModule.createElement(view, {
+					Content = ReactModule.createElement(View, {
 						tag = "row align-y-center fill gap-medium auto-y",
 						LayoutOrder = 2
 					}, {
-						TextContainer = reactModule.createElement(view, { tag = "col fill gap-xsmall auto-y", LayoutOrder = 1 }, {
-							Title = if var2 then reactModule.createElement(view, { tag = "size-full-500", LayoutOrder = 1 }, {
-								Shimmer = reactModule.createElement(skeleton, {
+						TextContainer = ReactModule.createElement(View, { tag = "col fill gap-xsmall auto-y", LayoutOrder = 1 }, {
+							Title = if IsIsLoading then ReactModule.createElement(View, { tag = "size-full-500", LayoutOrder = 1 }, {
+								Shimmer = ReactModule.createElement(Skeleton, {
 									Size = UDim2.new(0.5, 0, 1, 0),
-									radius = radius.Small,
-									testId = `{testId}--title-skeleton`
+									radius = Radius.Small,
+									testId = `{TestId}--title-skeleton`
 								})
-							}) else reactModule.createElement(text, {
+							}) else ReactModule.createElement(Text, {
 								tag = "size-full-0 auto-y text-title-large text-wrap text-align-x-left content-emphasis",
 								LayoutOrder = 1,
 								Text = p1.title
 							}),
-							Description = if var2 then reactModule.createElement(view, { tag = "size-full-400", LayoutOrder = 2 }, {
-								Shimmer = reactModule.createElement(skeleton, {
+							Description = if IsIsLoading then ReactModule.createElement(View, { tag = "size-full-400", LayoutOrder = 2 }, {
+								Shimmer = ReactModule.createElement(Skeleton, {
 									Size = UDim2.new(0.3, 0, 1, 0),
-									radius = radius.Small,
-									testId = `{testId}--description-skeleton`
+									radius = Radius.Small,
+									testId = `{TestId}--description-skeleton`
 								})
-							}) elseif p1.description ~= nil then nil else reactModule.createElement(text, {
+							}) elseif p1.description == nil then nil else ReactModule.createElement(Text, {
 								tag = "size-full-0 auto-y text-body-medium text-align-x-left text-truncate-split",
 								LayoutOrder = 2,
 								Text = p1.description
 							})
 						}),
-						Trailing = if p1.trailing == nil or var2 then nil else reactModule.createElement(view, {
+						Trailing = if p1.trailing == nil or IsIsLoading then nil else ReactModule.createElement(View, {
 							tag = "align-x-center align-y-center auto-xy",
 							LayoutOrder = 2
 						}, p1.trailing)

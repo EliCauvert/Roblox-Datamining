@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("AddFriendsRefreshRequestOrder", false) and require(script.Parent.FFlagAddFriendsPageHighlightUnseenRequests)
+﻿local FFlagAddFriendsPageHighlightUnseenRequestsModule = require(script.Parent.FFlagAddFriendsPageHighlightUnseenRequests)
+
+return game:DefineFastFlag("AddFriendsRefreshRequestOrder", false) and FFlagAddFriendsPageHighlightUnseenRequestsModule

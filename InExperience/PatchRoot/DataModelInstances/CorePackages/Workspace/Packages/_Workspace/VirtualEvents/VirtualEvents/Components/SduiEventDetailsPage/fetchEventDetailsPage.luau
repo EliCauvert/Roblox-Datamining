@@ -1,19 +1,19 @@
-﻿local parent = script:FindFirstAncestor("VirtualEvents").Parent
-local appPage = require(parent.RobloxAppEnums).AppPage
-local sduiSharedUtilitiesModule = require(parent.SduiSharedUtilities)
-local sduiResponseType = sduiSharedUtilitiesModule.SduiResponseType
-local getSduiApiStore = sduiSharedUtilitiesModule.getSduiApiStore
-local getEventDetailsUrlModule = require(script.Parent.getEventDetailsUrl)
-local getEventDetailsPageKeyModule = require(script.Parent.getEventDetailsPageKey)
+﻿local Parent = script:FindFirstAncestor("VirtualEvents").Parent
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local SduiSharedUtilitiesModule = require(Parent.SduiSharedUtilities)
+local SduiResponseType = SduiSharedUtilitiesModule.SduiResponseType
+local GetSduiApiStoreFunction = SduiSharedUtilitiesModule.getSduiApiStore
+local GetEventDetailsUrlModule = require(script.Parent.getEventDetailsUrl)
+local GetEventDetailsPageKeyModule = require(script.Parent.getEventDetailsPageKey)
 
-return function(p1, p2)
-	-- upvalues: getEventDetailsUrlModule (ref), parent (ref), getSduiApiStore (ref), sduiResponseType (ref), appPage (ref), getEventDetailsPageKeyModule (ref)
-	getSduiApiStore().fetchIfNeeded({
-		responseType = sduiResponseType.Protobuf,
-		url = getEventDetailsUrlModule(p1),
-		surfaceKey = appPage.EventDetails,
-		configKey = getEventDetailsPageKeyModule(p1),
-		loadTimer = p2,
-		apiProto = require(parent.ServiceContractsProto).apppageplatform.experienceevents.experience_event_details_page.ExperienceEventDetailsPageResponse
+return function(p1, LoadTimer) --[[ Line: 13 | Named "fetchEventDetailsPage" ]]
+	-- upvalues: GetEventDetailsUrlModule (copy), Parent (copy), GetSduiApiStoreFunction (copy), SduiResponseType (copy), AppPage (copy), GetEventDetailsPageKeyModule (copy)
+	GetSduiApiStoreFunction().fetchIfNeeded({
+		responseType = SduiResponseType.Protobuf,
+		url = GetEventDetailsUrlModule(p1),
+		surfaceKey = AppPage.EventDetails,
+		configKey = GetEventDetailsPageKeyModule(p1),
+		loadTimer = LoadTimer,
+		apiProto = require(Parent.ServiceContractsProto).apppageplatform.experienceevents.experience_event_details_page.ExperienceEventDetailsPageResponse
 	})
 end

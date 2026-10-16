@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CorePackages").Packages.InputHandlers)
+﻿return (require(game:GetService("CorePackages").Packages.InputHandlers))

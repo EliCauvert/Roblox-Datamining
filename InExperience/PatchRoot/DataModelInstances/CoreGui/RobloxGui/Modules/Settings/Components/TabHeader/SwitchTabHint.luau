@@ -1,59 +1,57 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local userInputService = game:GetService("UserInputService")
-local reactModule = require(corePackagesService.Packages.React)
-local reactUtilsModule = require(corePackagesService.Packages.ReactUtils)
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local helpPageModule = require(corePackagesService.Workspace.Packages.HelpPage)
-local useEventConnection = reactUtilsModule.useEventConnection
-local icon = foundationModule.Icon
-local useTokens = foundationModule.Hooks.useTokens
-local HELP_PAGE = helpPageModule.Constants.HELP_PAGE
-local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
-local fFlagGamepadIconSupportCheck = sharedFlagsModule.FFlagGamepadIconSupportCheck
-local fFlagLuaSupportMicroGamepadPreferredInput = sharedFlagsModule.FFlagLuaSupportMicroGamepadPreferredInput
+﻿local CorePackages = game:GetService("CorePackages")
+local UserInputService = game:GetService("UserInputService")
+local ReactModule = require(CorePackages.Packages.React)
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local UseEventConnectionFunction = require(CorePackages.Packages.ReactUtils).useEventConnection
+local Icon = FoundationModule.Icon
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local HELPPAGE = require(CorePackages.Workspace.Packages.HelpPage).Constants.HELP_PAGE
+local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
+local FFlagGamepadIconSupportCheck = SharedFlagsModule.FFlagGamepadIconSupportCheck
+local FFlagLuaSupportMicroGamepadPreferredInput = SharedFlagsModule.FFlagLuaSupportMicroGamepadPreferredInput
 
-local function getSupportsButton(p1)
-	-- upvalues: fFlagGamepadIconSupportCheck (ref), userInputService (ref)
-	return if fFlagGamepadIconSupportCheck then userInputService:GamepadSupports(userInputService:GetLastInputType(), p1) else true
+local function getSupportsButton(Keycode) --[[ Line: 23 ]]
+	-- upvalues: FFlagGamepadIconSupportCheck (copy), UserInputService (copy)
+	return not FFlagGamepadIconSupportCheck or UserInputService:GamepadSupports(UserInputService:GetLastInputType(), Keycode)
 end
 
-local function _()
-	-- upvalues: userInputService (ref), fFlagLuaSupportMicroGamepadPreferredInput (ref)
-	return if userInputService.PreferredInput ~= Enum.PreferredInput.Gamepad then fFlagLuaSupportMicroGamepadPreferredInput and userInputService.PreferredInput == Enum.PreferredInput.MicroGamepad else true
+local function _(): boolean --[[ Line: 30 | Named "isPreferredInputTypeGamepad" ]]
+	-- upvalues: UserInputService (copy), FFlagLuaSupportMicroGamepadPreferredInput (copy)
+	return UserInputService.PreferredInput == Enum.PreferredInput.Gamepad or FFlagLuaSupportMicroGamepadPreferredInput and UserInputService.PreferredInput == Enum.PreferredInput.MicroGamepad
 end
 
-local _ = function()
-	-- upvalues: userInputService (ref)
-	return userInputService:GetStringForKeyCode(Enum.KeyCode.ButtonA) == "ButtonCross"
+local _ = function(): boolean --[[ Line: 38 | Named "isPlayStationGamepad" ]]
+	-- upvalues: UserInputService (copy)
+	return UserInputService:GetStringForKeyCode(Enum.KeyCode.ButtonA) == "ButtonCross"
 end
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useTokens (ref), reactModule (ref), getSupportsButton (ref), userInputService (ref), fFlagLuaSupportMicroGamepadPreferredInput (ref), useEventConnection (ref), fFlagGamepadIconSupportCheck (ref), HELP_PAGE (ref), icon (ref)
-	local var1 = useTokens()
-	local var2, var3 = reactModule.useState(getSupportsButton(p1.keycode))
-	local var4, var5 = reactModule.useState(userInputService:GetStringForKeyCode(Enum.KeyCode.ButtonA) == "ButtonCross")
-	local useBinding = reactModule.useBinding
-	local var6 = if userInputService.PreferredInput ~= Enum.PreferredInput.Gamepad then fFlagLuaSupportMicroGamepadPreferredInput and userInputService.PreferredInput == Enum.PreferredInput.MicroGamepad else true
-	useBinding, var13 = useBinding(var6)
-	useEventConnection(userInputService:GetPropertyChangedSignal("PreferredInput"), function()
-		-- upvalues: var6 (ref), userInputService (copy), fFlagLuaSupportMicroGamepadPreferredInput (copy), var5 (ref)
-		var6(if userInputService.PreferredInput ~= Enum.PreferredInput.Gamepad then fFlagLuaSupportMicroGamepadPreferredInput and userInputService.PreferredInput == Enum.PreferredInput.MicroGamepad else true)
-		var5(userInputService:GetStringForKeyCode(Enum.KeyCode.ButtonA) == "ButtonCross")
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 43 | Named "SwitchTabHint" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), getSupportsButton (copy), UserInputService (copy), FFlagLuaSupportMicroGamepadPreferredInput (copy), UseEventConnectionFunction (copy), FFlagGamepadIconSupportCheck (copy), HELPPAGE (copy), Icon (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(getSupportsButton(p1.keycode))
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(UserInputService:GetStringForKeyCode(Enum.KeyCode.ButtonA) == "ButtonCross")
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(UserInputService.PreferredInput == Enum.PreferredInput.Gamepad or FFlagLuaSupportMicroGamepadPreferredInput and UserInputService.PreferredInput == Enum.PreferredInput.MicroGamepad)
+	UseEventConnectionFunction(UserInputService:GetPropertyChangedSignal("PreferredInput"), function() --[[ Line: 48 ]]
+		-- upvalues: UseBindingResult2 (copy), UserInputService (upval), FFlagLuaSupportMicroGamepadPreferredInput (upval), UseStateResult2_1 (copy)
+		UseBindingResult2(UserInputService.PreferredInput == Enum.PreferredInput.Gamepad or FFlagLuaSupportMicroGamepadPreferredInput and UserInputService.PreferredInput == Enum.PreferredInput.MicroGamepad)
+		UseStateResult2_1(UserInputService:GetStringForKeyCode(Enum.KeyCode.ButtonA) == "ButtonCross")
 	end, {})
 	
-	if fFlagGamepadIconSupportCheck then
-		useEventConnection(userInputService.LastInputTypeChanged, function()
-			-- upvalues: var3 (ref), getSupportsButton (copy), p1 (ref)
-			var3(getSupportsButton(p1.keycode))
+	if FFlagGamepadIconSupportCheck then
+		UseEventConnectionFunction(UserInputService.LastInputTypeChanged, function() --[[ Line: 53 ]]
+			-- upvalues: UseStateResult2 (copy), getSupportsButton (upval), p1 (copy)
+			UseStateResult2(getSupportsButton(p1.keycode))
 		end, {})
 	end
-	return if var2 then reactModule.createElement(icon, {
-		name = reactModule.useMemo(function()
-			-- upvalues: var4 (ref), HELP_PAGE (copy), p1 (ref)
-			return if var4 then HELP_PAGE.GAMEPAD_ICON_MAP_PLAYSTATION[p1.keycode] else HELP_PAGE.GAMEPAD_ICON_MAP_XBOX[p1.keycode]
-		end, { p1.keycode, var4 }),
-		size = var1.Size.Size_800,
-		Visible = useBinding,
-		ref = p2
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 58 ]]
+		-- upvalues: UseStateResult1 (copy), HELPPAGE (upval), p1 (copy)
+		return if UseStateResult1 then HELPPAGE.GAMEPAD_ICON_MAP_PLAYSTATION[p1.keycode] else HELPPAGE.GAMEPAD_ICON_MAP_XBOX[p1.keycode]
+	end, { p1.keycode, UseStateResult1 })
+	
+	return if UseStateResult then ReactModule.createElement(Icon, {
+		name = UseMemoResult,
+		size = UseTokensResult.Size.Size_800,
+		Visible = UseBindingResult,
+		ref = Ref
 	}) else nil
 end))

@@ -1,41 +1,43 @@
-﻿local httpService = game:GetService("HttpService")
-local squadsCore = script:FindFirstAncestor("SquadsCore")
-local urlBuilderModule = require(squadsCore.Parent.UrlBuilder)
-local loggerModule = require(squadsCore.Logger)
-local serializeTableModule = require(squadsCore.Utils.serializeTable)
-local _ = require(squadsCore.Types)
-local urlBuilder = urlBuilderModule.UrlBuilder
-local urlBase = urlBuilderModule.UrlBase
+﻿local HttpService = game:GetService("HttpService")
+local SquadsCore = script:FindFirstAncestor("SquadsCore")
+local UrlBuilderModule = require(SquadsCore.Parent.UrlBuilder)
+local LoggerModule = require(SquadsCore.Logger)
+local SerializeTableModule = require(SquadsCore.Utils.serializeTable)
+local _ = require(SquadsCore.Types)
+local UrlBuilder = UrlBuilderModule.UrlBuilder
+local UrlBase = UrlBuilderModule.UrlBase
 
-return function(p1, p2, p3)
-	-- upvalues: urlBuilder (ref), urlBase (ref), httpService (ref), loggerModule (ref), serializeTableModule (ref)
-	return httpService:RequestInternal({
+return function(ScheduledGroupUpId, Callback, Callback1) --[[ Line: 17 ]]
+	-- upvalues: UrlBuilder (copy), UrlBase (copy), HttpService (copy), LoggerModule (copy), SerializeTableModule (copy)
+	return HttpService:RequestInternal({
 		Method = "GET",
 		Headers = {
 			["Content-Type"] = "application/json",
 			Accept = "application/json"
 		},
-		Url = urlBuilder.new({
+		Url = UrlBuilder.new({
 			path = "group-up/v1/get-scheduled-group-up-status",
-			base = urlBase.APIS,
-			query = { scheduledGroupUpId = p1 }
+			base = UrlBase.APIS,
+			query = { scheduledGroupUpId = ScheduledGroupUpId }
 		})()
-	}):Start(function(_, p4)
-		-- upvalues: p2 (ref), httpService (copy), loggerModule (copy), serializeTableModule (copy), p3 (ref)
-		if p4.StatusCode == 200 then
-			local body = p4.Body
+	}):Start(function(_, p1) --[[ Line: 38 ]]
+		-- upvalues: Callback (copy), HttpService (upval), LoggerModule (upval), SerializeTableModule (upval), Callback1 (copy)
+		if p1.StatusCode == 200 then
+			local Body = p1.Body
 			
-			if p2 then
-				p2(httpService:JSONDecode(body).scheduledGroupUp)
+			if Callback then
+				Callback(HttpService:JSONDecode(Body).scheduledGroupUp)
 			end
-			loggerModule:debug("Response: {}", serializeTableModule(body))
+			LoggerModule:debug("Response: {}", SerializeTableModule(Body))
 			
-			return p4
-		elseif p3 then
-			p3()
+			return p1
+		else
+			if Callback1 then
+				Callback1()
+			end
+			LoggerModule:error("Error getting scheduled squad status: {}", p1.StatusMessage)
+			
+			return p1
 		end
-		loggerModule:error("Error getting scheduled squad status: {}", p4.StatusMessage)
-		
-		return p4
 	end)
 end

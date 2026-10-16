@@ -1,69 +1,69 @@
-﻿local adService = game:GetService("AdService")
-local coreGuiService = game:GetService("CoreGui")
-local _script = script
-local parent = _script.Parent
-local flagsModule = require(_script.Flags)
-local adPlayerComponentModule = require(_script.components.AdPlayerComponent)
-local adsDisplayOrder = require(parent.AdGuiInteractivity).AdsDisplayOrder
-local reactRobloxModule = require(parent.ReactRoblox)
-local reactModule = require(parent.React)
-local baseComponentModule = require(_script.components.BaseComponent)
+﻿local AdService = game:GetService("AdService")
+local CoreGui = game:GetService("CoreGui")
+local v1 = script
+local Parent = v1.Parent
+local FlagsModule = require(v1.Flags)
+local AdPlayerComponentModule = require(v1.components.AdPlayerComponent)
+local AdsDisplayOrder = require(Parent.AdGuiInteractivity).AdsDisplayOrder
+local ReactRobloxModule = require(Parent.ReactRoblox)
+local ReactModule = require(Parent.React)
+local BaseComponentModule = require(v1.components.BaseComponent)
 
 return {
-	["jest.config"] = _script["jest.config"],
-	init = function()
-		-- upvalues: adsDisplayOrder (ref), coreGuiService (ref), reactRobloxModule (ref), adService (ref), flagsModule (ref), reactModule (ref), baseComponentModule (ref), adPlayerComponentModule (ref)
-		local rewardedVideoAdPlayer = Instance.new("ScreenGui")
-		rewardedVideoAdPlayer.Name = "RewardedVideoAdPlayer"
-		rewardedVideoAdPlayer.DisplayOrder = adsDisplayOrder.AdPlayer
-		rewardedVideoAdPlayer.IgnoreGuiInset = true
-		rewardedVideoAdPlayer.ResetOnSpawn = false
-		rewardedVideoAdPlayer.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-		rewardedVideoAdPlayer.Parent = coreGuiService
-		local var1 = reactRobloxModule.createRoot(rewardedVideoAdPlayer)
+	["jest.config"] = v1["jest.config"],
+	init = function() --[[ Line: 26 ]]
+		-- upvalues: AdsDisplayOrder (copy), CoreGui (copy), ReactRobloxModule (copy), AdService (copy), FlagsModule (copy), ReactModule (copy), BaseComponentModule (copy), AdPlayerComponentModule (copy)
+		local RewardedVideoAdPlayer = Instance.new("ScreenGui")
+		RewardedVideoAdPlayer.Name = "RewardedVideoAdPlayer"
+		RewardedVideoAdPlayer.DisplayOrder = AdsDisplayOrder.AdPlayer
+		RewardedVideoAdPlayer.IgnoreGuiInset = true
+		RewardedVideoAdPlayer.ResetOnSpawn = false
+		RewardedVideoAdPlayer.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+		RewardedVideoAdPlayer.Parent = CoreGui
+		local Root = ReactRobloxModule.createRoot(RewardedVideoAdPlayer)
 		
-		function adService.onDemandVideoPlayInUI(p1)
-			-- upvalues: var1 (ref), adService (copy), flagsModule (copy), reactModule (copy), baseComponentModule (copy), adPlayerComponentModule (copy)
-			local function _(p2)
-				-- upvalues: var1 (copy), adService (copy), p1 (ref)
-				var1:render(nil)
-				adService:onDemandVideoCompleteFromUI(p2, p1.encryptedAdTrackingData, p1.encryptionMetadata, p1.rewardDetails)
+		function AdService.onDemandVideoPlayInUI(p1) --[[ Line: 37 ]]
+			-- upvalues: Root (copy), AdService (upval), FlagsModule (upval), ReactModule (upval), BaseComponentModule (upval), AdPlayerComponentModule (upval)
+			local function _(p2) --[[ Line: 38 | Named "onVideoCompleted" ]]
+				-- upvalues: Root (upval), AdService (upval), p1 (copy)
+				Root:render(nil)
+				AdService:onDemandVideoCompleteFromUI(p2, p1.encryptedAdTrackingData, p1.encryptionMetadata, p1.rewardDetails)
 			end
 			
-			local var2 = if flagsModule.GetEnableLuaRewardTimerUI() and p1.durationNeededForRewardMs and p1.durationNeededEnum == "Variable" then p1.durationNeededForRewardMs / 1000 else nil
-			local bindableEvent = Instance.new("BindableEvent")
-			local var3 = nil
-			var1:render(reactModule.createElement(baseComponentModule, {}, {
-				reactModule.createElement(adPlayerComponentModule, {
+			local DurationNeededForRewardMsRatio = if FlagsModule.GetEnableLuaRewardTimerUI() and p1.durationNeededForRewardMs and p1.durationNeededEnum == "Variable" then p1.durationNeededForRewardMs / 1000 else nil
+			local BindableEvent = Instance.new("BindableEvent")
+			local v2 = nil
+			Root:render(ReactModule.createElement(BaseComponentModule, {}, {
+				ReactModule.createElement(AdPlayerComponentModule, {
 					isEligible = p1.isEligible,
 					creativeAssetUrl = p1.creativeAssetUrl,
-					durationNeededForReward = if flagsModule.GetEnableLuaRewardTimerUI() then var2 else nil,
-					onVideoFrameLoaded = function(p2)
-						-- upvalues: var3 (write), bindableEvent (ref)
-						var3 = p2
+					durationNeededForReward = if FlagsModule.GetEnableLuaRewardTimerUI() then DurationNeededForRewardMsRatio else nil,
+					onVideoFrameLoaded = function(p2) --[[ Line: 66 ]]
+						-- upvalues: v2 (ref), BindableEvent (copy)
+						v2 = p2
 						
-						if bindableEvent then
-							bindableEvent:Fire()
+						if BindableEvent then
+							BindableEvent:Fire()
 						end
 					end,
-					onCancel = function()
-						-- upvalues: var1 (copy), adService (copy), p1 (ref)
-						local showInterrupted = Enum.ShowAdResult.ShowInterrupted
-						var1:render(nil)
-						adService:onDemandVideoCompleteFromUI(showInterrupted, p1.encryptedAdTrackingData, p1.encryptionMetadata, p1.rewardDetails)
+					onCancel = function() --[[ Line: 72 ]]
+						-- upvalues: Root (upval), AdService (upval), p1 (copy)
+						local ShowInterrupted = Enum.ShowAdResult.ShowInterrupted
+						Root:render(nil)
+						AdService:onDemandVideoCompleteFromUI(ShowInterrupted, p1.encryptedAdTrackingData, p1.encryptionMetadata, p1.rewardDetails)
 					end,
-					onComplete = function()
-						-- upvalues: var1 (copy), adService (copy), p1 (ref)
-						local showCompleted = Enum.ShowAdResult.ShowCompleted
-						var1:render(nil)
-						adService:onDemandVideoCompleteFromUI(showCompleted, p1.encryptedAdTrackingData, p1.encryptionMetadata, p1.rewardDetails)
+					onComplete = function() --[[ Line: 75 ]]
+						-- upvalues: Root (upval), AdService (upval), p1 (copy)
+						local ShowCompleted = Enum.ShowAdResult.ShowCompleted
+						Root:render(nil)
+						AdService:onDemandVideoCompleteFromUI(ShowCompleted, p1.encryptedAdTrackingData, p1.encryptionMetadata, p1.rewardDetails)
 					end,
-					showWhyThisAd = function()
-						-- upvalues: adService (copy)
-						adService:HandleWhyThisAdClicked("advertiserName", "payerName")
+					showWhyThisAd = function() --[[ Line: 78 ]]
+						-- upvalues: AdService (upval)
+						AdService:HandleWhyThisAdClicked("advertiserName", "payerName")
 					end,
-					getReportAdInfo = function()
-						-- upvalues: p1 (ref)
+					getReportAdInfo = function() --[[ Line: 81 ]]
+						-- upvalues: p1 (copy)
 						return {
 							adUnitName = "Rewarded Video Ad",
 							assetId = p1.creativeAssetUrl,
@@ -73,10 +73,13 @@ return {
 					end
 				})
 			}))
-			bindableEvent.Event:Wait()
-			bindableEvent:Destroy()
 			
-			return var3
+			if not v2 then
+				BindableEvent.Event:Wait()
+			end
+			BindableEvent:Destroy()
+			
+			return v2
 		end
 	end
 }

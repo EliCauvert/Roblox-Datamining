@@ -1,128 +1,132 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
-local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
-local normalize = require(parent.AvatarExperienceCommon).Utils.normalize
-local normalizeNotEmptyString = normalize.normalizeNotEmptyString
-local makeNormalizeTableFn = normalize.makeNormalizeTableFn
-local makeRequired = normalize.makeRequired
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
+local Normalize = require(Parent.AvatarExperienceCommon).Utils.normalize
+local NormalizeNotEmptyStringFunction = Normalize.normalizeNotEmptyString
+local MakeRequiredFunction = Normalize.makeRequired
 local _ = require(script.Parent.MarketplaceOffersBannerTypes)
-local decodeLuauUnicodeEscapesModule = require(script.Parent.decodeLuauUnicodeEscapes)
-local fFlagAXUpdateOffersEndsUIWithBadge = avatarExperienceFlagsModule.FFlagAXUpdateOffersEndsUIWithBadge
+local DecodeLuauUnicodeEscapesModule = require(script.Parent.decodeLuauUnicodeEscapes)
+local FFlagAXUpdateOffersEndsUIWithBadge = require(Parent.AvatarExperienceFlags).FFlagAXUpdateOffersEndsUIWithBadge
 
-local function normalizeDisplayString(p1)
-	-- upvalues: normalizeNotEmptyString (ref), decodeLuauUnicodeEscapesModule (ref)
-	local var1, var2 = normalizeNotEmptyString(p1)
+local function normalizeDisplayString(p1) --[[ Line: 21 ]]
+	-- upvalues: NormalizeNotEmptyStringFunction (copy), DecodeLuauUnicodeEscapesModule (copy)
+	local NormalizeNotEmptyStringResult, NormalizeNotEmptyStringResult2 = NormalizeNotEmptyStringFunction(p1)
 	
-	if var1 == nil then
-		return nil, var2
+	if NormalizeNotEmptyStringResult == nil then
+		return nil, NormalizeNotEmptyStringResult2
+	else
+		return DecodeLuauUnicodeEscapesModule(NormalizeNotEmptyStringResult), nil
 	end
-	return decodeLuauUnicodeEscapesModule(var1), nil
 end
 
-local var1 = makeNormalizeTableFn({
-	modalTitle = makeRequired(normalizeDisplayString),
-	offerBodyLinkText = makeRequired(normalizeDisplayString),
-	modalHeroIcon = normalizeNotEmptyString,
+local NormalizeTableFn = Normalize.makeNormalizeTableFn({
+	modalTitle = MakeRequiredFunction(normalizeDisplayString),
+	offerBodyLinkText = MakeRequiredFunction(normalizeDisplayString),
+	modalHeroIcon = NormalizeNotEmptyStringFunction,
 	termsBody = normalizeDisplayString,
 	termsModalTitle = normalizeDisplayString
 })
 
-local function _(p1)
-	-- upvalues: normalizeNotEmptyString (ref), var1 (ref)
-	local var2 = nil
+local function _(p1) --[[ Line: 81 | Named "normalizeModalForOfferRow" ]]
+	-- upvalues: NormalizeNotEmptyStringFunction (copy), NormalizeTableFn (copy)
+	local Modal = nil
 	
 	if type(p1.modal) == "table" then
-		var2 = p1.modal
-	elseif normalizeNotEmptyString(p1.modalTitle) ~= nil then
-		var2 = p1
+		Modal = p1.modal
+	elseif NormalizeNotEmptyStringFunction(p1.modalTitle) ~= nil then
+		Modal = p1
 	end
-	if not var2 then
+	if Modal then
+		local NormalizeTableFnResult = NormalizeTableFn(Modal)
+		
+		return if NormalizeTableFnResult and NormalizeTableFnResult.modalTitle and NormalizeTableFnResult.offerBodyLinkText then NormalizeTableFnResult else nil
+	else
 		return nil
 	end
-	local var3 = var1(var2)
-	
-	return if var3 and var3.modalTitle and var3.offerBodyLinkText then var3 else nil
 end
 
-local function normalizeOfferRow(p1)
-	-- upvalues: normalizeNotEmptyString (ref), decodeLuauUnicodeEscapesModule (ref), fFlagAXUpdateOffersEndsUIWithBadge (ref), var1 (ref)
+local function normalizeOfferRow(p1) --[[ Line: 100 ]]
+	-- upvalues: NormalizeNotEmptyStringFunction (copy), DecodeLuauUnicodeEscapesModule (copy), FFlagAXUpdateOffersEndsUIWithBadge (copy), NormalizeTableFn (copy)
 	if type(p1) ~= "table" then
 		return nil, `expected offer row to be a table, got {type(p1)}`
 	end
-	local var2 = normalizeNotEmptyString(p1.icon)
-	local var3, _ = normalizeNotEmptyString(p1.localizedText)
-	local var4 = if var3 == nil then nil else decodeLuauUnicodeEscapesModule(var3)
-	local var5 = normalizeNotEmptyString(p1.offerId)
-	local var6 = if fFlagAXUpdateOffersEndsUIWithBadge then normalizeNotEmptyString(p1.expirationTimeInUTC) else nil
+	local NormalizeNotEmptyStringResult = NormalizeNotEmptyStringFunction(p1.icon)
+	local NormalizeNotEmptyStringResult1, _ = NormalizeNotEmptyStringFunction(p1.localizedText)
+	local DecodeLuauUnicodeEscapesModuleResult = if NormalizeNotEmptyStringResult1 == nil then nil else DecodeLuauUnicodeEscapesModule(NormalizeNotEmptyStringResult1)
+	local NormalizeNotEmptyStringResult2 = NormalizeNotEmptyStringFunction(p1.offerId)
+	local NormalizeNotEmptyStringResult3 = if FFlagAXUpdateOffersEndsUIWithBadge then NormalizeNotEmptyStringFunction(p1.expirationTimeInUTC) else nil
 	
-	if not var2 and not var4 and not var5 then
+	if not NormalizeNotEmptyStringResult and not DecodeLuauUnicodeEscapesModuleResult and not NormalizeNotEmptyStringResult2 then
 		return nil, "offer row has no recognized identity fields (icon, localizedText, offerId)"
 	end
 	local t = {}
 	
-	if var2 then
-		t.icon = var2
+	if NormalizeNotEmptyStringResult then
+		t.icon = NormalizeNotEmptyStringResult
 	end
-	if var4 then
-		t.localizedText = var4
+	if DecodeLuauUnicodeEscapesModuleResult then
+		t.localizedText = DecodeLuauUnicodeEscapesModuleResult
 	end
-	if var5 then
-		t.offerId = var5
+	if NormalizeNotEmptyStringResult2 then
+		t.offerId = NormalizeNotEmptyStringResult2
 	end
-	if fFlagAXUpdateOffersEndsUIWithBadge and var6 then
-		t.expirationTimeInUTC = var6
+	if FFlagAXUpdateOffersEndsUIWithBadge and NormalizeNotEmptyStringResult3 then
+		t.expirationTimeInUTC = NormalizeNotEmptyStringResult3
 	end
-	local var7
-	local var8 = nil
+	local Modal = nil
 	
 	if type(p1.modal) == "table" then
-		var8 = p1.modal
-	elseif normalizeNotEmptyString(p1.modalTitle) ~= nil then
-		var8 = p1
+		Modal = p1.modal
+	elseif NormalizeNotEmptyStringFunction(p1.modalTitle) ~= nil then
+		Modal = p1
 	end
-	if var8 then
-		local var9 = var1(var8)
-		var7 = if var9 and var9.modalTitle and var9.offerBodyLinkText then var9 else nil
+	local Modal1 = nil
+	if Modal then
+		local NormalizeTableFnResult = NormalizeTableFn(Modal)
+		Modal1 = if NormalizeTableFnResult and NormalizeTableFnResult.modalTitle and NormalizeTableFnResult.offerBodyLinkText then NormalizeTableFnResult else nil
 	else
-		var7 = nil
+		Modal1 = nil
 	end
-	t.modal = var7
+	t.modal = Modal1
 	
 	return t, nil
 end
 
-return function(p1)
-	-- upvalues: normalizeOfferRow (ref)
+return function(p1) --[[ Line: 133 | Named "normalizeMarketplaceOffersBannerResponse" ]]
+	-- upvalues: normalizeOfferRow (copy)
 	if p1 == nil then
 		return nil, nil
-	elseif type(p1) ~= "table" then
+	end
+	if type(p1) ~= "table" then
 		return nil, `MarketplaceOffersBanner: expected response body to be a table, got {type(p1)}`
 	end
-	local offers = p1.offers
+	local Offers = p1.offers
 	
-	if offers == nil then
-		return nil, nil
-	elseif type(offers) ~= "table" then
-		return nil, `MarketplaceOffersBanner: expected 'offers' field to be a table, got {type(offers)}`
-	elseif #offers == 0 then
+	if Offers == nil then
 		return nil, nil
 	end
-	local t = {}
-	local t_1 = {}
+	if type(Offers) ~= "table" then
+		return nil, `MarketplaceOffersBanner: expected 'offers' field to be a table, got {type(Offers)}`
+	end
+	if #Offers == 0 then
+		return nil, nil
+	end
+	local List = {}
+	local Offers1 = {}
 	
-	for i, v in offers do
-		local var2, var3 = normalizeOfferRow(v)
+	for i, offer in Offers do
+		local NormalizeOfferRowResult, NormalizeOfferRowResult2 = normalizeOfferRow(offer)
 		
-		if var3 then
-			table.insert(t, `offers[{i}]: {var3}`)
+		if NormalizeOfferRowResult2 then
+			table.insert(List, `offers[{i}]: {NormalizeOfferRowResult2}`)
 		end
-		if var2 then
-			table.insert(t_1, var2)
+		if NormalizeOfferRowResult then
+			table.insert(Offers1, NormalizeOfferRowResult)
 		end
 	end
-	local var4 = if next(t) then "MarketplaceOffersBanner: " .. table.concat(t, "; ") else nil
+	local Text = if next(List) then "MarketplaceOffersBanner: " .. table.concat(List, "; ") else nil
 	
-	if #t_1 == 0 then
-		return nil, var4
+	if #Offers1 == 0 then
+		return nil, Text
+	else
+		return { offers = Offers1 }, Text
 	end
-	return { offers = t_1 }, var4
 end

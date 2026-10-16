@@ -1,43 +1,43 @@
-﻿local holdToPlay = script:FindFirstAncestor("HoldToPlay")
-local parent = holdToPlay.Parent
-local reactModule = require(parent.React)
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local useButtonHold = focusNavigationUtilsModule.useButtonHold
-local constantsModule = require(holdToPlay.Constants)
-local buttonHoldStateEnum = focusNavigationUtilsModule.ButtonHoldStateEnum
+﻿local HoldToPlay = script:FindFirstAncestor("HoldToPlay")
+local Parent = HoldToPlay.Parent
+local ReactModule = require(Parent.React)
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local UseButtonHoldFunction = FocusNavigationUtilsModule.useButtonHold
+local ConstantsModule = require(HoldToPlay.Constants)
+local ButtonHoldStateEnum = FocusNavigationUtilsModule.ButtonHoldStateEnum
 
-return function(p1, p2)
-	-- upvalues: useButtonHold (ref), constantsModule (ref), reactModule (ref), buttonHoldStateEnum (ref)
-	local var1 = useButtonHold(p1 or constantsModule.SIGNAL_HOLD_INTENT_SECONDS, p2 or constantsModule.SIGNAL_HOLD_COMPLETE_SECONDS)
-	local var2, var3 = reactModule.useState(nil)
-	local var4, var5 = reactModule.useState(nil)
-	local var6, var7 = reactModule.useState(nil)
-	local var8 = if var1.holdState ~= buttonHoldStateEnum.HOLDING then var1.holdState == buttonHoldStateEnum.COMPLETED else true
+return function(p1, p2) --[[ Line: 13 | Named "useHoldToPlayStateAndCallbacks" ]]
+	-- upvalues: UseButtonHoldFunction (copy), ConstantsModule (copy), ReactModule (copy), ButtonHoldStateEnum (copy)
+	local UseButtonHoldResult = UseButtonHoldFunction(p1 or ConstantsModule.SIGNAL_HOLD_INTENT_SECONDS, p2 or ConstantsModule.SIGNAL_HOLD_COMPLETE_SECONDS)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(nil)
+	local IsHoldStateMatch: boolean = UseButtonHoldResult.holdState == ButtonHoldStateEnum.HOLDING or UseButtonHoldResult.holdState == ButtonHoldStateEnum.COMPLETED
 	
 	return {
-		selectedEntry = var6,
-		selectedIndex = var4,
-		selectedNavigationUniverseId = var2,
-		onHoldableFocused = reactModule.useCallback(function(p3, p4, p5)
-			-- upvalues: var7 (ref), var5 (ref), var3 (ref)
-			var7(p3)
-			var5(p4)
-			var3(p5)
+		selectedEntry = UseStateResult3,
+		selectedIndex = UseStateResult1,
+		selectedNavigationUniverseId = UseStateResult,
+		onHoldableFocused = ReactModule.useCallback(function(p3, p4, p5) --[[ Line: 24 ]]
+			-- upvalues: UseStateResult2_2 (copy), UseStateResult2_1 (copy), UseStateResult2 (copy)
+			UseStateResult2_2(p3)
+			UseStateResult2_1(p4)
+			UseStateResult2(p5)
 		end, {}),
-		onHoldableUnfocused = reactModule.useCallback(function()
-			-- upvalues: var3 (ref), var5 (ref), var7 (ref)
-			var3(nil)
-			var5(nil)
-			var7(nil)
+		onHoldableUnfocused = ReactModule.useCallback(function() --[[ Line: 30 ]]
+			-- upvalues: UseStateResult2 (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy)
+			UseStateResult2(nil)
+			UseStateResult2_1(nil)
+			UseStateResult2_2(nil)
 		end, {}),
-		shouldRenderHoldToPlayLauncher = var6 ~= nil,
-		shouldDisableHoldable = reactModule.useCallback(function(p3)
-			-- upvalues: var8 (ref), var4 (ref)
-			return var8 and (var4 and p3 == var4)
-		end, { var8, var4 }),
-		holdState = var1.holdState,
-		holdProgress = var1.holdProgress,
-		cancelHold = var1.cancelHold,
-		holdToPlayEventHandler = var1.eventHandler
+		shouldRenderHoldToPlayLauncher = UseStateResult3 ~= nil,
+		shouldDisableHoldable = ReactModule.useCallback(function(SelectedIndex): boolean --[[ Line: 38 ]]
+			-- upvalues: IsHoldStateMatch (copy), UseStateResult1 (copy)
+			return IsHoldStateMatch and (UseStateResult1 and SelectedIndex == UseStateResult1)
+		end, { IsHoldStateMatch, UseStateResult1 }),
+		holdState = UseButtonHoldResult.holdState,
+		holdProgress = UseButtonHoldResult.holdProgress,
+		cancelHold = UseButtonHoldResult.cancelHold,
+		holdToPlayEventHandler = UseButtonHoldResult.eventHandler
 	}
 end

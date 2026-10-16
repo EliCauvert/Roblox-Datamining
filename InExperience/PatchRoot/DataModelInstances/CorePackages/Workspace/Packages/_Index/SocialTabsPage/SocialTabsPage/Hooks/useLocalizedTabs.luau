@@ -1,27 +1,27 @@
-﻿local socialTabsPage = script:FindFirstAncestor("SocialTabsPage")
-local parent = socialTabsPage.Parent
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local _ = require(socialTabsPage.Common.Types)
+﻿local SocialTabsPage = script:FindFirstAncestor("SocialTabsPage")
+local Parent = SocialTabsPage.Parent
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local _ = require(SocialTabsPage.Common.Types)
 
-return function(value)
-	-- upvalues: reactModule (ref), useLocalization (ref), cryoModule (ref)
-	local var1 = useLocalization(reactModule.useMemo(function()
-		-- upvalues: value (ref)
-		local t = {}
+return function(p1) --[[ Line: 11 | Named "useLocalizedTabs" ]]
+	-- upvalues: ReactModule (copy), UseLocalizationFunction (copy), CryoModule (copy)
+	local UseLocalizationResult = UseLocalizationFunction((ReactModule.useMemo(function() --[[ Line: 12 ]]
+		-- upvalues: p1 (copy)
+		local TabLabelKeys = {}
 		
-		for i, v in value do
-			t[v.id] = v.tabLabelKey
+		for _, value in p1 do
+			TabLabelKeys[value.id] = value.tabLabelKey
 		end
-		return t
-	end, { value }))
+		return TabLabelKeys
+	end, { p1 })))
 	
-	return reactModule.useMemo(function()
-		-- upvalues: cryoModule (copy), value (ref), var1 (ref)
-		return cryoModule.List.map(value, function(p1)
-			-- upvalues: var1 (copy)
-			return { id = p1.id, text = var1[p1.id] }
+	return ReactModule.useMemo(function() --[[ Line: 22 ]]
+		-- upvalues: CryoModule (upval), p1 (copy), UseLocalizationResult (copy)
+		return CryoModule.List.map(p1, function(p2) --[[ Line: 23 ]]
+			-- upvalues: UseLocalizationResult (upval)
+			return { id = p2.id, text = UseLocalizationResult[p2.id] }
 		end)
-	end, { value, var1 })
+	end, { p1, UseLocalizationResult })
 end

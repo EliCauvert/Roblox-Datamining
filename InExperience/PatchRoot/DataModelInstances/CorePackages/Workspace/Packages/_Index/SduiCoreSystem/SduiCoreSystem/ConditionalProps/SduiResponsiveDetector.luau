@@ -1,60 +1,61 @@
-﻿local sduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
-local parent = sduiCoreSystem.Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local getDisplayStore = require(parent.Display).GetDisplayStore
-local getInputModeStore = require(parent.Responsive).GetInputModeStore
-local _ = require(sduiCoreSystem.SduiBuilderTypes)
-local _ = require(sduiCoreSystem.ConditionalProps.SduiConditionalPropTypes)
-local checkResponsiveConditions = require(sduiCoreSystem.SduiResponsiveHelpers).checkResponsiveConditions
+﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
+local Parent = SduiCoreSystem.Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local GetDisplayStoreFunction = require(Parent.Display).GetDisplayStore
+local GetInputModeStoreFunction = require(Parent.Responsive).GetInputModeStore
+local _ = require(SduiCoreSystem.SduiBuilderTypes)
+local _ = require(SduiCoreSystem.ConditionalProps.SduiConditionalPropTypes)
+local CheckResponsiveConditionsFunction = require(SduiCoreSystem.SduiResponsiveHelpers).checkResponsiveConditions
 
-return reactModule.memo(function(p1)
-	-- upvalues: getDisplayStore (ref), getInputModeStore (ref), reactModule (ref), checkResponsiveConditions (ref), signalsModule (ref)
-	local allConditionalProps = p1.allConditionalProps
-	local setFailedResponsivePropIndexes = p1.setFailedResponsivePropIndexes
-	local sduiContext = p1.sduiContext
-	local getViewportSize = getDisplayStore(false).getViewportSize
-	local getLastInputType = getInputModeStore(false).getLastInputType
-	local getPreferredInputType = getInputModeStore(false).getPreferredInputType
-	local getIsSpatial = getDisplayStore(false).getIsSpatial
-	reactModule.useLayoutEffect(function()
-		-- upvalues: checkResponsiveConditions (copy), allConditionalProps (ref), sduiContext (ref), setFailedResponsivePropIndexes (ref), getViewportSize (ref), getLastInputType (ref), getPreferredInputType (ref), getIsSpatial (ref), signalsModule (copy)
+return ReactModule.memo(function(p1) --[[ Line: 21 | Named "SduiResponsiveDetector" ]]
+	-- upvalues: GetDisplayStoreFunction (copy), GetInputModeStoreFunction (copy), ReactModule (copy), CheckResponsiveConditionsFunction (copy), SignalsModule (copy)
+	local AllConditionalProps = p1.allConditionalProps
+	local SetFailedResponsivePropIndexesFunction = p1.setFailedResponsivePropIndexes
+	local SduiContext = p1.sduiContext
+	local GetViewportSizeFunction = GetDisplayStoreFunction(false).getViewportSize
+	local GetLastInputTypeFunction = GetInputModeStoreFunction(false).getLastInputType
+	local GetPreferredInputTypeFunction = GetInputModeStoreFunction(false).getPreferredInputType
+	local GetIsSpatialFunction = GetDisplayStoreFunction(false).getIsSpatial
+	ReactModule.useLayoutEffect(function() --[[ Line: 35 ]]
+		-- upvalues: CheckResponsiveConditionsFunction (upval), AllConditionalProps (copy), SduiContext (copy), SetFailedResponsivePropIndexesFunction (copy), GetViewportSizeFunction (copy), GetLastInputTypeFunction (copy), GetPreferredInputTypeFunction (copy), GetIsSpatialFunction (copy), SignalsModule (upval)
 		local t = {}
 		
-		local function checkConditions(p2, p3, p4, p5)
-			-- upvalues: checkResponsiveConditions (copy), allConditionalProps (copy), sduiContext (copy), t (write), setFailedResponsivePropIndexes (copy)
-			local var1 = checkResponsiveConditions(allConditionalProps, p2, p3, p4, p5, sduiContext)
-			local var2 = nil
+		local function checkConditions(p2, p3, p4, p5) --[[ Line: 38 ]]
+			-- upvalues: CheckResponsiveConditionsFunction (upval), AllConditionalProps (upval), SduiContext (upval), t (ref), SetFailedResponsivePropIndexesFunction (upval)
+			local CheckResponsiveConditionsResult = CheckResponsiveConditionsFunction(AllConditionalProps, p2, p3, p4, p5, SduiContext)
+			local Flag: boolean? = nil
 			
-			for i, v in var1 do
-				if not not t[i] ~= not not v then
-					var2 = true
+			for i, value in CheckResponsiveConditionsResult do
+				if not not t[i] ~= not not value then
+					Flag = true
 					break
 				end
 			end
-			if not var2 then
-				for i, v in t do
-					if not not var1[i] ~= not not v then
-						var2 = true
+			if not Flag then
+				for i1, value1 in t do
+					if not not CheckResponsiveConditionsResult[i1] ~= not not value1 then
+						Flag = true
 						break
 					end
 				end
 			end
-			if var2 then
-				t = var1
-				setFailedResponsivePropIndexes(var1)
+			if Flag then
+				t = CheckResponsiveConditionsResult
+				SetFailedResponsivePropIndexesFunction(CheckResponsiveConditionsResult)
 			end
 		end
 		
-		checkConditions(getViewportSize(false), getLastInputType(false), getPreferredInputType(false), getIsSpatial(false))
+		checkConditions(GetViewportSizeFunction(false), GetLastInputTypeFunction(false), GetPreferredInputTypeFunction(false), GetIsSpatialFunction(false))
 		
-		return signalsModule.createEffect(function(p6)
-			-- upvalues: checkConditions (ref), getViewportSize (copy), getLastInputType (copy), getPreferredInputType (copy), getIsSpatial (copy)
-			checkConditions(getViewportSize(p6), getLastInputType(p6), getPreferredInputType(p6), getIsSpatial(p6))
+		return SignalsModule.createEffect(function(p6) --[[ Line: 77 ]]
+			-- upvalues: checkConditions (copy), GetViewportSizeFunction (upval), GetLastInputTypeFunction (upval), GetPreferredInputTypeFunction (upval), GetIsSpatialFunction (upval)
+			checkConditions(GetViewportSizeFunction(p6), GetLastInputTypeFunction(p6), GetPreferredInputTypeFunction(p6), GetIsSpatialFunction(p6))
 		end)
 	end, {
-		getViewportSize, getLastInputType, getPreferredInputType, getIsSpatial,
-		allConditionalProps, setFailedResponsivePropIndexes, sduiContext
+		GetViewportSizeFunction, GetLastInputTypeFunction,
+		GetPreferredInputTypeFunction, GetIsSpatialFunction, AllConditionalProps,
+		SetFailedResponsivePropIndexesFunction, SduiContext
 	})
 	
 	return nil

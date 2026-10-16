@@ -1,104 +1,104 @@
-﻿local avatarExperienceAnalytics = script:FindFirstAncestor("AvatarExperienceAnalytics")
-local cartIdServiceModule = require(avatarExperienceAnalytics.Lib.CartIdService)
-local unifiedEventLogEnumsModule = require(avatarExperienceAnalytics.UnifiedEventLogEnums)
+﻿local AvatarExperienceAnalytics = script:FindFirstAncestor("AvatarExperienceAnalytics")
+local CartIdServiceModule = require(AvatarExperienceAnalytics.Lib.CartIdService)
+local UnifiedEventLogEnumsModule = require(AvatarExperienceAnalytics.UnifiedEventLogEnums)
 local AXAddAttributionToCheckoutCartPurchases = game:DefineFastFlag("AXAddAttributionToCheckoutCartPurchases", false)
 
-local function _(p1)
-	return "MIS_" .. p0
+local function _(Text): string --[[ Line: 10 | Named "appendMISPrefixToCartId" ]]
+	return "MIS_" .. Text
 end
 
-return function(p1, p2, p3, p4, p5)
-	-- upvalues: AXAddAttributionToCheckoutCartPurchases (ref), cartIdServiceModule (ref), unifiedEventLogEnumsModule (ref)
-	local var1
-	local var2 = 0
-	local t = {}
-	local t_1 = {}
-	local var3 = 0
-	local t_2 = {}
-	local t_3 = {}
-	local t_4 = {}
+return function(List, List1, p1, p2, Action) --[[ Line: 20 ]]
+	-- upvalues: AXAddAttributionToCheckoutCartPurchases (copy), CartIdServiceModule (copy), UnifiedEventLogEnumsModule (copy)
+	local NewPriceInRobux = 0
+	local List2 = {}
+	local List3 = {}
+	local NewPriceInRobux1 = 0
+	local List4 = {}
+	local List5 = {}
+	local List6 = {}
+	local v1 = nil
 	
-	for i, v in p1 do
-		if p3 and (p3.lookAssetInfos[v.itemId] or p3.lookBundleInfos[v.itemId]) then
-			if p3.lookAssetInfos[v.itemId] then
-				table.insert(t, v.itemId)
-				var2 += v.priceInRobux
-			elseif p3.lookBundleInfos[v.itemId] then
-				table.insert(t_1, v.itemId)
-				var2 += v.priceInRobux
-			end
-		end
-		if not p4 or not p4.lookAssetInfos[v.itemId] and not p4.lookBundleInfos[v.itemId] then
-			var1 = nil
-			
-			for i_1, v_1 in p2 do
-				if v_1.itemId == v.itemId and v_1.itemType == v.itemType then
-					var1 = v_1
-					break
+	for _, value in List do
+		if not p1 or not p1.lookAssetInfos[value.itemId] and not p1.lookBundleInfos[value.itemId] then
+			if not p2 or not p2.lookAssetInfos[value.itemId] and not p2.lookBundleInfos[value.itemId] then
+				v1 = nil
+				
+				for _, value1 in List1 do
+					if value1.itemId == value.itemId and value1.itemType == value.itemType then
+						v1 = value1
+						break
+					end
 				end
+				table.insert(List6, {
+					cartId = if AXAddAttributionToCheckoutCartPurchases then "MIS_" .. CartIdServiceModule.getCartId() else CartIdServiceModule.getCartId(),
+					action = Action,
+					itemId = value.itemId,
+					itemType = if value.itemType == "Asset" then UnifiedEventLogEnumsModule.MarketplaceUnifiedItemType.ASSET else UnifiedEventLogEnumsModule.MarketplaceUnifiedItemType.BUNDLE,
+					assetType = if value.itemType == "Asset" then value.itemSubType else nil,
+					bundleType = if value.itemType == "Bundle" then value.itemSubType else nil,
+					widgetId = if v1.widgetInfo then v1.widgetInfo.widgetId else nil,
+					widgetType = if v1.widgetInfo then v1.widgetInfo.widgetType else nil,
+					widgetItemPrice = if v1.widgetInfo then value.priceInRobux else nil,
+					organicItemPrice = if v1.widgetInfo then nil else value.priceInRobux,
+					status = value.status
+				})
+				continue
+			elseif p2.lookAssetInfos[value.itemId] then
+				table.insert(List4, value.itemId)
+				NewPriceInRobux1 += value.priceInRobux
+			elseif p2.lookBundleInfos[value.itemId] then
+				table.insert(List5, value.itemId)
+				NewPriceInRobux1 += value.priceInRobux
 			end
-			table.insert(t_4, {
-				cartId = if AXAddAttributionToCheckoutCartPurchases then "MIS_" .. cartIdServiceModule.getCartId() else cartIdServiceModule.getCartId(),
-				action = p5,
-				itemId = v.itemId,
-				itemType = if v.itemType == "Asset" then unifiedEventLogEnumsModule.MarketplaceUnifiedItemType.ASSET else unifiedEventLogEnumsModule.MarketplaceUnifiedItemType.BUNDLE,
-				assetType = if v.itemType == "Asset" then v.itemSubType else nil,
-				bundleType = if v.itemType == "Bundle" then v.itemSubType else nil,
-				widgetId = if var1.widgetInfo then var1.widgetInfo.widgetId else nil,
-				widgetType = if var1.widgetInfo then var1.widgetInfo.widgetType else nil,
-				widgetItemPrice = if var1.widgetInfo then v.priceInRobux else nil,
-				organicItemPrice = if var1.widgetInfo then nil else v.priceInRobux,
-				status = v.status
-			})
-		elseif p4.lookAssetInfos[v.itemId] then
-			table.insert(t_2, v.itemId)
-			var3 += v.priceInRobux
-		elseif p4.lookBundleInfos[v.itemId] then
-			table.insert(t_3, v.itemId)
-			var3 += v.priceInRobux
+		elseif p1.lookAssetInfos[value.itemId] then
+			table.insert(List2, value.itemId)
+			NewPriceInRobux += value.priceInRobux
+		elseif p1.lookBundleInfos[value.itemId] then
+			table.insert(List3, value.itemId)
+			NewPriceInRobux += value.priceInRobux
 		end
 	end
-	if #t > 0 or #t_1 > 0 then
-		local var4 = if #t > 0 then table.concat(t, ",") else ""
-		local var5 = if #t_1 > 0 then table.concat(t_1, ",") else ""
-		local t_5 = {
-			cartId = if AXAddAttributionToCheckoutCartPurchases then "MIS_" .. cartIdServiceModule.getCartId() else cartIdServiceModule.getCartId(),
-			action = p5,
-			itemId = p3.itemId,
-			itemType = unifiedEventLogEnumsModule.MarketplaceUnifiedItemType.LOOK
+	if #List2 > 0 or #List3 > 0 then
+		local Joined2: string = if #List2 > 0 then table.concat(List2, ",") else ""
+		local Joined3: string = if #List3 > 0 then table.concat(List3, ",") else ""
+		local config1 = {
+			cartId = if AXAddAttributionToCheckoutCartPurchases then "MIS_" .. CartIdServiceModule.getCartId() else CartIdServiceModule.getCartId(),
+			action = Action,
+			itemId = p1.itemId,
+			itemType = UnifiedEventLogEnumsModule.MarketplaceUnifiedItemType.LOOK
 		}
 		
-		if p3.isOrganicLook then
-			t_5.organicAssetIds = var4
-			t_5.organicBundleIds = var5
-			t_5.organicItemPrice = var2
+		if p1.isOrganicLook then
+			config1.organicAssetIds = Joined2
+			config1.organicBundleIds = Joined3
+			config1.organicItemPrice = NewPriceInRobux
 		else
-			t_5.assetIds = var4
-			t_5.bundleIds = var5
-			t_5.widgetItemPrice = var2
+			config1.assetIds = Joined2
+			config1.bundleIds = Joined3
+			config1.widgetItemPrice = NewPriceInRobux
 		end
-		table.insert(t_4, t_5)
+		table.insert(List6, config1)
 	end
-	if #t_2 > 0 or #t_3 > 0 then
-		local var6 = if #t_2 > 0 then table.concat(t_2, ",") else ""
-		local var7 = if #t_3 > 0 then table.concat(t_3, ",") else ""
-		local t_5 = {
-			cartId = if AXAddAttributionToCheckoutCartPurchases then "MIS_" .. cartIdServiceModule.getCartId() else cartIdServiceModule.getCartId(),
-			action = p5,
-			itemId = p4.itemId,
-			itemType = unifiedEventLogEnumsModule.MarketplaceUnifiedItemType.LOOK
+	if #List4 > 0 or #List5 > 0 then
+		local Joined: string = if #List4 > 0 then table.concat(List4, ",") else ""
+		local Joined1: string = if #List5 > 0 then table.concat(List5, ",") else ""
+		local config = {
+			cartId = if AXAddAttributionToCheckoutCartPurchases then "MIS_" .. CartIdServiceModule.getCartId() else CartIdServiceModule.getCartId(),
+			action = Action,
+			itemId = p2.itemId,
+			itemType = UnifiedEventLogEnumsModule.MarketplaceUnifiedItemType.LOOK
 		}
 		
-		if p4.isOrganicLook then
-			t_5.organicAssetIds = var6
-			t_5.organicBundleIds = var7
-			t_5.organicItemPrice = var3
+		if p2.isOrganicLook then
+			config.organicAssetIds = Joined
+			config.organicBundleIds = Joined1
+			config.organicItemPrice = NewPriceInRobux1
 		else
-			t_5.assetIds = var6
-			t_5.bundleIds = var7
-			t_5.widgetItemPrice = var3
+			config.assetIds = Joined
+			config.bundleIds = Joined1
+			config.widgetItemPrice = NewPriceInRobux1
 		end
-		table.insert(t_4, t_5)
+		table.insert(List6, config)
 	end
-	return t_4
+	return List6
 end

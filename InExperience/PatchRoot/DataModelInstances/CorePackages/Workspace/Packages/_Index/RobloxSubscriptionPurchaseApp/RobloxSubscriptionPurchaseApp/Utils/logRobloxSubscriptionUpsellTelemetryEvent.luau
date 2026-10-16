@@ -1,22 +1,22 @@
-﻿local robloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
-local loggingProtocolModule = require(robloxSubscriptionPurchaseApp.Parent.LoggingProtocol)
-local surfaceNameModule = require(robloxSubscriptionPurchaseApp.Enums.SurfaceName)
-local robloxSubscriptionStoreModule = require(robloxSubscriptionPurchaseApp.Store.RobloxSubscriptionStore)
-local _ = require(robloxSubscriptionPurchaseApp.types)
+﻿local RobloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
+local LoggingProtocolModule = require(RobloxSubscriptionPurchaseApp.Parent.LoggingProtocol)
+local SurfaceNameModule = require(RobloxSubscriptionPurchaseApp.Enums.SurfaceName)
+local RobloxSubscriptionStoreModule = require(RobloxSubscriptionPurchaseApp.Store.RobloxSubscriptionStore)
+local _ = require(RobloxSubscriptionPurchaseApp.types)
 
-function logRobloxSubscriptionUpsellTelemetryEvent(p1, p2)
-	-- upvalues: robloxSubscriptionStoreModule (ref), surfaceNameModule (ref), loggingProtocolModule (ref)
-	local entryContext = robloxSubscriptionStoreModule.get().getEntryContext()
-	local t = {
-		surface = if entryContext then entryContext.surfaceName else surfaceNameModule.Unspecified
+function logRobloxSubscriptionUpsellTelemetryEvent(p1, List) --[[ Line: 12 ]]
+	-- upvalues: RobloxSubscriptionStoreModule (copy), SurfaceNameModule (copy), LoggingProtocolModule (copy)
+	local EntryContext = RobloxSubscriptionStoreModule.get().getEntryContext()
+	local config = {
+		surface = if EntryContext then EntryContext.surfaceName else SurfaceNameModule.Unspecified
 	}
 	
-	if p2 then
-		for i, v in p2 do
-			t[i] = v
+	if List then
+		for i, value in List do
+			config[i] = value
 		end
 	end
-	loggingProtocolModule.default:logRobloxTelemetryEvent(p1, {}, t)
+	LoggingProtocolModule.default:logRobloxTelemetryEvent(p1, {}, config)
 end
 
 return logRobloxSubscriptionUpsellTelemetryEvent

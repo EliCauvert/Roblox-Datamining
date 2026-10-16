@@ -1,75 +1,77 @@
-﻿local parent = script:FindFirstAncestor("ShareSheet").Parent
-local reactModule = require(parent.React)
-local _ = require(parent.AppChat.GetConversationListStore)
+﻿local ShareSheet = script:FindFirstAncestor("ShareSheet")
+local Parent = ShareSheet.Parent
+local ReactModule = require(Parent.React)
+local _ = require(Parent.AppChat.GetConversationListStore)
 local _ = require(script.Parent.PeoplePickerHeader.PeoplePickerHeaderContainer)
 local _ = require(script.Parent.PeoplePickerList.PeoplePickerListContainer)
-local usePeoplePickerPaginationModule = require(script.Parent.usePeoplePickerPagination)
-local shareSheetPeoplePickerSearchDebounceMs = game:DefineFastInt("ShareSheetPeoplePickerSearchDebounceMs", 250)
+local UsePeoplePickerPaginationModule = require(script.Parent.usePeoplePickerPagination)
+local _ = require(ShareSheet.Types)
+local ShareSheetPeoplePickerSearchDebounceMs = game:DefineFastInt("ShareSheetPeoplePickerSearchDebounceMs", 250)
 
-local function usePeoplePickerSearch()
-	-- upvalues: reactModule (ref), shareSheetPeoplePickerSearchDebounceMs (ref)
-	local var1, var2 = reactModule.useState("")
-	local var3, var4 = reactModule.useState("")
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), var3 (ref), shareSheetPeoplePickerSearchDebounceMs (copy), var4 (ref)
-		if var1 == var3 then
-			return
-		end
-		local var5 = false
-		local delayedThread = task.delay(shareSheetPeoplePickerSearchDebounceMs / 1000, function()
-			-- upvalues: var5 (write), var4 (copy), var1 (copy)
-			if not var5 then
-				var4(var1)
+local function usePeoplePickerSearch() --[[ Line: 45 ]]
+	-- upvalues: ReactModule (copy), ShareSheetPeoplePickerSearchDebounceMs (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState("")
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState("")
+	ReactModule.useEffect(function() --[[ Line: 49 ]]
+		-- upvalues: UseStateResult (copy), UseStateResult1 (copy), ShareSheetPeoplePickerSearchDebounceMs (upval), UseStateResult2_1 (copy)
+		if UseStateResult == UseStateResult1 then return end
+		local Flag = false
+		local DelayedThread = task.delay(ShareSheetPeoplePickerSearchDebounceMs / 1000, function() --[[ Line: 55 ]]
+			-- upvalues: Flag (ref), UseStateResult2_1 (upval), UseStateResult (upval)
+			if not Flag then
+				UseStateResult2_1(UseStateResult)
 			end
 		end)
 		
-		return function()
-			-- upvalues: var5 (write), delayedThread (ref)
-			var5 = true
-			pcall(task.cancel, delayedThread)
+		return function() --[[ Line: 60 ]]
+			-- upvalues: Flag (ref), DelayedThread (copy)
+			Flag = true
+			pcall(task.cancel, DelayedThread)
 		end
-	end, { var3, var1 })
+	end, { UseStateResult1, UseStateResult })
 	
 	return {
-		debouncedQuery = var3,
-		query = var1,
-		reset = reactModule.useCallback(function()
-			-- upvalues: var2 (ref), var4 (ref)
-			var2("")
-			var4("")
+		debouncedQuery = UseStateResult1,
+		query = UseStateResult,
+		reset = ReactModule.useCallback(function() --[[ Line: 66 ]]
+			-- upvalues: UseStateResult2 (copy), UseStateResult2_1 (copy)
+			UseStateResult2("")
+			UseStateResult2_1("")
 		end, {}),
-		setQuery = var2
+		setQuery = UseStateResult2
 	}
 end
 
-return function(p1)
-	-- upvalues: usePeoplePickerSearch (ref), usePeoplePickerPaginationModule (ref), reactModule (ref)
-	local var1 = usePeoplePickerSearch()
-	local var2 = usePeoplePickerPaginationModule({
+return function(p1) --[[ Line: 79 | Named "usePeoplePickerViewModel" ]]
+	-- upvalues: usePeoplePickerSearch (copy), UsePeoplePickerPaginationModule (copy), ReactModule (copy)
+	local UsePeoplePickerSearchResult = usePeoplePickerSearch()
+	local UsePeoplePickerPaginationModuleResult = UsePeoplePickerPaginationModule({
 		conversationCount = #p1.conversations,
 		isEligibilityLoading = p1.isEligibilityLoading,
 		isPeoplePickerDisplayed = p1.isPeoplePickerDisplayed,
-		listStatus = p1.listStatus
+		listStatus = p1.listStatus,
+		loadMore = p1.loadMore,
+		listResult = p1.listResult
 	})
 	
 	return {
 		viewModel = {
 			headerProps = {
-				goBack = reactModule.useCallback(function()
-					-- upvalues: var1 (ref), p1 (ref)
-					var1.reset()
+				goBack = ReactModule.useCallback(function() --[[ Line: 90 ]]
+					-- upvalues: UsePeoplePickerSearchResult (copy), p1 (copy)
+					UsePeoplePickerSearchResult.reset()
 					p1.onBack()
-				end, { p1.onBack, var1.reset }),
-				query = var1.query,
-				setQuery = var1.setQuery
+				end, { p1.onBack, UsePeoplePickerSearchResult.reset }),
+				query = UsePeoplePickerSearchResult.query,
+				setQuery = UsePeoplePickerSearchResult.setQuery
 			},
 			listProps = {
 				LayoutOrder = 1,
 				conversations = p1.conversations,
-				debouncedQuery = var1.debouncedQuery,
-				isLoading = var2.isLoading,
+				debouncedQuery = UsePeoplePickerSearchResult.debouncedQuery,
+				isLoading = UsePeoplePickerPaginationModuleResult.isLoading,
 				onConversationActivated = p1.onConversationActivated,
-				paginationProps = var2.paginationProps,
+				paginationProps = UsePeoplePickerPaginationModuleResult.paginationProps,
 				selectedConversationIds = p1.selectedConversationIds
 			}
 		}

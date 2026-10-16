@@ -1,49 +1,49 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local tModule = require(corePackagesService.Packages.t)
-local toast = UIBloxModule.App.Dialog.Toast
-local images = UIBloxModule.App.ImageSet.Images
-local withLocalization = require(corePackagesService.Workspace.Packages.Localization).withLocalization
-local feedbackSubmissionToast = roactModule.PureComponent:extend("FeedbackSubmissionToast")
-feedbackSubmissionToast.validateProps = tModule.strictInterface({
-	numFeedbackSubmissionAttempts = tModule.optional(tModule.number)
+﻿local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
+local TModule = require(CorePackages.Packages.t)
+local Toast = UIBloxModule.App.Dialog.Toast
+local Images = UIBloxModule.App.ImageSet.Images
+local WithLocalizationFunction = require(CorePackages.Workspace.Packages.Localization).withLocalization
+local FeedbackSubmissionToast = RoactModule.PureComponent:extend("FeedbackSubmissionToast")
+FeedbackSubmissionToast.validateProps = TModule.strictInterface({
+	numFeedbackSubmissionAttempts = TModule.optional(TModule.number)
 })
 
-function feedbackSubmissionToast.render(p1)
-	-- upvalues: roactModule (ref), withLocalization (ref), toast (ref), images (ref)
-	return if p1.props.numFeedbackSubmissionAttempts == nil then nil else roactModule.createElement("Frame", {
+function FeedbackSubmissionToast.render(p1) --[[ Line: 26 ]]
+	-- upvalues: RoactModule (copy), WithLocalizationFunction (copy), Toast (copy), Images (copy)
+	return if p1.props.numFeedbackSubmissionAttempts == nil then nil else RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		ZIndex = 100,
 		Size = UDim2.fromScale(1, 1)
 	}, {
-		Toast = withLocalization({
+		Toast = WithLocalizationFunction({
 			toastTitle = "CoreScripts.Feedback.SubmissionToastHeader",
 			toastSubtitle = "CoreScripts.Feedback.SubmissionToastBody"
-		})(function(p2)
-			-- upvalues: p1 (ref), roactModule (copy), toast (copy), images (copy)
-			local toastTitle = p2.toastTitle
-			local toastSubtitle = p2.toastSubtitle
+		})(function(p2) --[[ Line: 40 ]]
+			-- upvalues: p1 (copy), RoactModule (upval), Toast (upval), Images (upval)
+			local ToastTitle = p2.toastTitle
+			local ToastSubtitle = p2.toastSubtitle
 			
 			if p1.props.numFeedbackSubmissionAttempts % 2 == 0 then
-				toastTitle = p2.toastTitle .. " "
-				toastSubtitle = p2.toastSubtitle .. " "
+				ToastTitle = p2.toastTitle .. " "
+				ToastSubtitle = p2.toastSubtitle .. " "
 			end
-			return roactModule.createElement(toast, {
+			return RoactModule.createElement(Toast, {
 				duration = 3,
 				toastContent = {
-					iconImage = images["icons/status/success"],
-					toastTitle = toastTitle,
-					toastSubtitle = toastSubtitle
+					iconImage = Images["icons/status/success"],
+					toastTitle = ToastTitle,
+					toastSubtitle = ToastSubtitle
 				}
 			})
 		end)
 	})
 end
 
-return roactRoduxModule.connect(function(p1)
+return RoactRoduxModule.connect(function(p1) --[[ Line: 65 ]]
 	return {
 		numFeedbackSubmissionAttempts = p1.common.numFeedbackSubmissionAttempts
 	}
-end, nil)(feedbackSubmissionToast)
+end, nil)(FeedbackSubmissionToast)

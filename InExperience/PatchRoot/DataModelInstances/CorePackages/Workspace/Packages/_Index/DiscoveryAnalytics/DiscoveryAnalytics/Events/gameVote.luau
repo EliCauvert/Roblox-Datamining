@@ -1,31 +1,32 @@
-﻿local telemetryService = game:GetService("TelemetryService")
-local parent = script:FindFirstAncestor("DiscoveryAnalytics").Parent
-local tModule = require(parent.t)
-local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventErrorLogger
-local gameVoteThrottleHundrethsPercent = game:DefineFastInt("GameVoteThrottleHundrethsPercent", 0)
-local var1 = tModule.strictInterface({
-	placeId = tModule.string,
-	vote = tModule.union(tModule.literal("UpVoted"), tModule.literal("DownVoted"), tModule.literal("NotVoted")),
-	prevVote = tModule.union(tModule.literal("UpVoted"), tModule.literal("DownVoted"), tModule.literal("NotVoted")),
-	uid = tModule.string
+﻿local TelemetryService = game:GetService("TelemetryService")
+local Parent = script:FindFirstAncestor("DiscoveryAnalytics").Parent
+local TModule = require(Parent.t)
+local DiscoveryEventErrorLogger = require(Parent.DiscoveryUtils).DiscoveryEventErrorLogger
+local GameVoteThrottleHundrethsPercent = game:DefineFastInt("GameVoteThrottleHundrethsPercent", 0)
+local StrictInterfaceResult = TModule.strictInterface({
+	placeId = TModule.string,
+	vote = TModule.union(TModule.literal("UpVoted"), TModule.literal("DownVoted"), TModule.literal("NotVoted")),
+	prevVote = TModule.union(TModule.literal("UpVoted"), TModule.literal("DownVoted"), TModule.literal("NotVoted")),
+	uid = TModule.string,
+	universeId = if require(Parent.SharedFlags).FFlagLuaAppAddUniverseIdToEngagementEvents then TModule.optional(TModule.string) else nil
 })
 
-return function(p1, p2)
-	-- upvalues: var1 (ref), discoveryEventErrorLogger (ref), gameVoteThrottleHundrethsPercent (ref), telemetryService (ref)
-	local var2, var3 = var1(p1)
+return function(CustomFields, EventContext) --[[ Line: 21 ]]
+	-- upvalues: StrictInterfaceResult (copy), DiscoveryEventErrorLogger (copy), GameVoteThrottleHundrethsPercent (copy), TelemetryService (copy)
+	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(CustomFields)
 	
-	if not var2 then
-		discoveryEventErrorLogger.reportError("GameVoteInvalidInterface", var3)
+	if not StrictInterfaceResultResult then
+		DiscoveryEventErrorLogger.reportError("GameVoteInvalidInterface", StrictInterfaceResultResult2)
 	end
-	telemetryService:LogEvent({
+	TelemetryService:LogEvent({
 		eventName = "vote",
 		description = "User has voted on a game",
 		backends = { "EventIngest" },
-		throttlingPercentage = gameVoteThrottleHundrethsPercent,
+		throttlingPercentage = GameVoteThrottleHundrethsPercent,
 		lastUpdated = { 25, 11, 11 }
 	}, {
-		eventContext = p2,
+		eventContext = EventContext,
 		standardizedFields = { "addSessionInfo" },
-		customFields = p1
+		customFields = CustomFields
 	})
 end

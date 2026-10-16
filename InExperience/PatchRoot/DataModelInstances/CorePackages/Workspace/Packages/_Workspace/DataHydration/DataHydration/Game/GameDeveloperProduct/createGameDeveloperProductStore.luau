@@ -1,95 +1,95 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local promiseModule = require(parent.Promise)
-local discoveryUtilsModule = require(parent.DiscoveryUtils)
-local logResponseError = discoveryUtilsModule.logResponseError
-local discoveryEventErrorLogger = discoveryUtilsModule.DiscoveryEventErrorLogger
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagSduiDevStoreSeeAllSupport = sharedFlagsModule.FFlagSduiDevStoreSeeAllSupport
-local fFlagEnableHomeGameItemOwnershipUpdate = sharedFlagsModule.FFlagEnableHomeGameItemOwnershipUpdate
-local fFlagEnableSearchGameItemOwnershipUpdate = sharedFlagsModule.FFlagEnableSearchGameItemOwnershipUpdate
-local createDataCacheModule = require(dataHydration.createDataCache)
-local createDataResolverModule = require(dataHydration.createDataResolver)
-local _ = require(dataHydration.DataHydrationTypes)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local PromiseModule = require(Parent.Promise)
+local DiscoveryUtilsModule = require(Parent.DiscoveryUtils)
+local LogResponseErrorFunction = DiscoveryUtilsModule.logResponseError
+local DiscoveryEventErrorLogger = DiscoveryUtilsModule.DiscoveryEventErrorLogger
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagSduiDevStoreSeeAllSupport = SharedFlagsModule.FFlagSduiDevStoreSeeAllSupport
+local FFlagEnableHomeGameItemOwnershipUpdate = SharedFlagsModule.FFlagEnableHomeGameItemOwnershipUpdate
+local FFlagEnableSearchGameItemOwnershipUpdate = SharedFlagsModule.FFlagEnableSearchGameItemOwnershipUpdate
+local CreateDataCacheModule = require(DataHydration.createDataCache)
+local CreateDataResolverModule = require(DataHydration.createDataResolver)
+local _ = require(DataHydration.DataHydrationTypes)
 local _ = require(script.Parent.GameDeveloperProductStoreTypes)
-local fetchGameDeveloperProductStatusesModule = require(script.Parent.fetchGameDeveloperProductStatuses)
-local fFlagLuaAppUseGameTransactionsApiForReceipts = sharedFlagsModule.FFlagLuaAppUseGameTransactionsApiForReceipts
+local FetchGameDeveloperProductStatusesModule = require(script.Parent.fetchGameDeveloperProductStatuses)
+local FFlagLuaAppUseGameTransactionsApiForReceipts = SharedFlagsModule.FFlagLuaAppUseGameTransactionsApiForReceipts
 
-local function _(p1, p2)
-	return p1 .. "|" .. p1
+local function _(Text, Text1): string --[[ Line: 31 | Named "buildStatusesKey" ]]
+	return Text .. "|" .. Text1
 end
 
-return function()
-	-- upvalues: createDataCacheModule (ref), fFlagSduiDevStoreSeeAllSupport (ref), fFlagEnableHomeGameItemOwnershipUpdate (ref), fFlagEnableSearchGameItemOwnershipUpdate (ref), createDataResolverModule (ref), logResponseError (ref), fFlagLuaAppUseGameTransactionsApiForReceipts (ref), discoveryEventErrorLogger (ref), promiseModule (ref), fetchGameDeveloperProductStatusesModule (ref)
-	local var1 = createDataCacheModule()
-	local var2 = nil
-	local var3 = nil
+return function() --[[ Line: 35 | Named "createGameDeveloperProductStore" ]]
+	-- upvalues: CreateDataCacheModule (copy), FFlagSduiDevStoreSeeAllSupport (copy), FFlagEnableHomeGameItemOwnershipUpdate (copy), FFlagEnableSearchGameItemOwnershipUpdate (copy), CreateDataResolverModule (copy), LogResponseErrorFunction (copy), FFlagLuaAppUseGameTransactionsApiForReceipts (copy), DiscoveryEventErrorLogger (copy), PromiseModule (copy), FetchGameDeveloperProductStatusesModule (copy)
+	local DataCacheModule = CreateDataCacheModule()
+	local Cache = nil
+	local v1 = nil
 	
-	if fFlagSduiDevStoreSeeAllSupport or fFlagEnableHomeGameItemOwnershipUpdate or fFlagEnableSearchGameItemOwnershipUpdate then
-		var2 = createDataCacheModule()
-		var3 = createDataResolverModule({
+	if FFlagSduiDevStoreSeeAllSupport or FFlagEnableHomeGameItemOwnershipUpdate or FFlagEnableSearchGameItemOwnershipUpdate then
+		Cache = CreateDataCacheModule()
+		v1 = CreateDataResolverModule({
 			supportsMultiGet = false,
-			cache = var2,
-			logError = function(p1)
-				-- upvalues: logResponseError (copy), fFlagLuaAppUseGameTransactionsApiForReceipts (copy), discoveryEventErrorLogger (copy)
-				logResponseError(if fFlagLuaAppUseGameTransactionsApiForReceipts then "game-transactions/v1/receipts" else "developer-products/v1/game-transactions", {
+			cache = Cache,
+			logError = function(p1) --[[ Line: 49 ]]
+				-- upvalues: LogResponseErrorFunction (upval), FFlagLuaAppUseGameTransactionsApiForReceipts (upval), DiscoveryEventErrorLogger (upval)
+				LogResponseErrorFunction(if FFlagLuaAppUseGameTransactionsApiForReceipts then "game-transactions/v1/receipts" else "developer-products/v1/game-transactions", {
 					StatusCode = if type(p1) == "table" and p1.StatusCode then p1.StatusCode else nil
 				})
-				discoveryEventErrorLogger.reportError("GameDeveloperProductStore", "Failed to fetch developer product statuses", { err = tostring(p1) })
+				DiscoveryEventErrorLogger.reportError("GameDeveloperProductStore", "Failed to fetch developer product statuses", { err = tostring(p1) })
 			end,
-			fetchFn = function(p1, p2)
-				-- upvalues: promiseModule (copy), fetchGameDeveloperProductStatusesModule (copy), var1 (ref)
-				local match, match_1 = string.match(p1, "^(.-)|(.+)$")
+			fetchFn = function(Text: string, p1) --[[ Line: 63 ]]
+				-- upvalues: PromiseModule (upval), FetchGameDeveloperProductStatusesModule (upval), DataCacheModule (copy)
+				local Match, Match2 = string.match(Text, "^(.-)|(.+)$")
 				
-				return if match == nil or match_1 == nil then promiseModule.reject("Invalid developer product statuses key: " .. tostring(p1)) else fetchGameDeveloperProductStatusesModule.fetch(match, match_1):andThen(function(p3)
-					-- upvalues: p2 (ref), var1 (copy)
+				return if Match == nil or Match2 == nil then PromiseModule.reject("Invalid developer product statuses key: " .. tostring(Text)) else FetchGameDeveloperProductStatusesModule.fetch(Match, Match2):andThen(function(Result) --[[ Line: 70 ]]
+					-- upvalues: p1 (copy), DataCacheModule (upval)
 					local t = {}
 					
-					for i, v in p3.counts do
-						t[i] = { pendingReceiptCount = v }
+					for i, count in Result.counts do
+						t[i] = { pendingReceiptCount = count }
 					end
-					local var4 = p2 and p2.data(false)
+					local DataResult = p1 and p1.data(false)
 					
-					if var4 and var4.counts then
-						for i_1 in var4.counts do
-							if p3.counts[i_1] == nil then
-								t[i_1] = { pendingReceiptCount = 0 }
+					if DataResult and DataResult.counts then
+						for count1 in DataResult.counts do
+							if Result.counts[count1] == nil then
+								t[count1] = { pendingReceiptCount = 0 }
 							end
 						end
 					end
 					if next(t) ~= nil then
-						var1.updateItems(t)
+						DataCacheModule.updateItems(t)
 					end
-					return p3
+					return Result
 				end)
 			end
 		})
 	end
 	return {
-		getGameDeveloperProductInfo = var1.getItem,
-		updateGameDeveloperProductInfos = var1.updateItems,
-		fetchStatuses = function(p3, p4)
-			-- upvalues: var3 (write)
-			if var3 then
-				var3.fetchItem(p3 .. "|" .. p7)
+		getGameDeveloperProductInfo = DataCacheModule.getItem,
+		updateGameDeveloperProductInfos = DataCacheModule.updateItems,
+		fetchStatuses = function(Text, Text1) --[[ Line: 115 ]]
+			-- upvalues: v1 (ref)
+			if v1 then
+				v1.fetchItem(Text .. "|" .. Text1)
 			end
 		end,
-		clear = function()
-			-- upvalues: var2 (write), var3 (write), var1 (ref)
-			if var2 then
-				var2.clear()
+		clear = function() --[[ Line: 95 ]]
+			-- upvalues: Cache (ref), v1 (ref), DataCacheModule (copy)
+			if Cache then
+				Cache.clear()
 			end
-			if var3 then
-				var3.clear()
+			if v1 then
+				v1.clear()
 			end
-			var1.clear()
+			DataCacheModule.clear()
 		end,
-		dispose = function()
-			-- upvalues: var3 (write), var1 (ref)
-			if var3 then
-				var3.dispose()
+		dispose = function() --[[ Line: 105 ]]
+			-- upvalues: v1 (ref), DataCacheModule (copy)
+			if v1 then
+				v1.dispose()
 			end
-			var1.dispose()
+			DataCacheModule.dispose()
 		end
 	}
 end

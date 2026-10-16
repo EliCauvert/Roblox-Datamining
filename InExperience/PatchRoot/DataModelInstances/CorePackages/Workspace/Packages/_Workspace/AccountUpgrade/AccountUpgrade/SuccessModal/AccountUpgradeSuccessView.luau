@@ -1,18 +1,17 @@
-﻿local parent = script:FindFirstAncestor("AccountUpgrade").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local localizationModule = require(parent.Localization)
-local accountUpgradeDialogModule = require(script.Parent.AccountUpgradeDialog)
-local accountUpgradeIdentityHeaderModule = require(script.Parent.AccountUpgradeIdentityHeader)
-local accountUpgradeDialogActionsModule = require(script.Parent.AccountUpgradeDialogActions)
-local text = foundationModule.Text
-local view = foundationModule.View
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local useLocalization = localizationModule.Hooks.useLocalization
+﻿local Parent = script:FindFirstAncestor("AccountUpgrade").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local AccountUpgradeDialogModule = require(script.Parent.AccountUpgradeDialog)
+local AccountUpgradeIdentityHeaderModule = require(script.Parent.AccountUpgradeIdentityHeader)
+local AccountUpgradeDialogActionsModule = require(script.Parent.AccountUpgradeDialogActions)
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-return function(p1)
-	-- upvalues: useLocalization (ref), buttonVariant (ref), reactModule (ref), view (ref), accountUpgradeIdentityHeaderModule (ref), text (ref), accountUpgradeDialogActionsModule (ref), accountUpgradeDialogModule (ref)
-	local var1 = useLocalization({
+return function(p1) --[[ Line: 43 | Named "AccountUpgradeSuccessView" ]]
+	-- upvalues: UseLocalizationFunction (copy), ButtonVariant (copy), ReactModule (copy), View (copy), AccountUpgradeIdentityHeaderModule (copy), Text (copy), AccountUpgradeDialogActionsModule (copy), AccountUpgradeDialogModule (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
 		respawnNowText = "Authentication.SignUp.Action.RespawnNow",
 		applyLaterText = "Authentication.SignUp.Action.ApplyOnNextRespawn",
 		confirmText = "CommonUI.Controls.Action.OK",
@@ -25,48 +24,48 @@ return function(p1)
 			platform = p1.linkedAccountType
 		}
 	})
-	local var2 = p1.didUsernameChange and p1.canRespawn ~= false
+	local IsCanRespawn: boolean = p1.didUsernameChange and p1.canRespawn ~= false
 	
-	return reactModule.createElement(accountUpgradeDialogModule, {
+	return ReactModule.createElement(AccountUpgradeDialogModule, {
 		testId = "account-upgrade-success-dialog",
 		hasBackdrop = p1.hasBackdrop,
 		children = {
-			Content = reactModule.createElement(view, {
+			Content = ReactModule.createElement(View, {
 				tag = "col align-x-center gap-xxlarge size-full-0 auto-y"
 			}, {
-				IdentityHeader = reactModule.createElement(accountUpgradeIdentityHeaderModule, {
+				IdentityHeader = ReactModule.createElement(AccountUpgradeIdentityHeaderModule, {
 					LayoutOrder = 1,
 					userId = p1.userId,
 					displayName = p1.displayName,
 					username = p1.username
 				}),
-				BodyAndActions = reactModule.createElement(view, {
+				BodyAndActions = ReactModule.createElement(View, {
 					tag = "col align-x-center gap-xlarge size-full-0 auto-y",
 					LayoutOrder = 2
 				}, {
-					Body = reactModule.createElement(text, {
+					Body = ReactModule.createElement(Text, {
 						tag = "size-full-0 auto-y text-body-large text-wrap text-align-x-left content-default",
 						LayoutOrder = 1,
 						testId = "account-upgrade-success-body",
-						Text = if var2 then var1.usernameChangedBody else var1.usernameUnchangedBody
+						Text = if IsCanRespawn then UseLocalizationResult.usernameChangedBody else UseLocalizationResult.usernameUnchangedBody
 					}),
-					Actions = reactModule.createElement(accountUpgradeDialogActionsModule, {
+					Actions = ReactModule.createElement(AccountUpgradeDialogActionsModule, {
 						LayoutOrder = 2,
-						buttons = if var2 then {
+						buttons = if IsCanRespawn then {
 							{
-								text = var1.respawnNowText,
-								variant = buttonVariant.Emphasis,
+								text = UseLocalizationResult.respawnNowText,
+								variant = ButtonVariant.Emphasis,
 								onActivated = p1.onRespawnNow
 							},
 							{
-								text = var1.applyLaterText,
-								variant = buttonVariant.Standard,
+								text = UseLocalizationResult.applyLaterText,
+								variant = ButtonVariant.Standard,
 								onActivated = p1.onApplyLater
 							}
 						} else {
 							{
-								text = var1.confirmText,
-								variant = buttonVariant.Emphasis,
+								text = UseLocalizationResult.confirmText,
+								variant = ButtonVariant.Emphasis,
 								onActivated = p1.onConfirm
 							}
 						}

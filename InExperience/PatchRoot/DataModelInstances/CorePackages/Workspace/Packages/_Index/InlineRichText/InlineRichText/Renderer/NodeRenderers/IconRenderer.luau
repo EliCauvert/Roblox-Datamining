@@ -1,26 +1,27 @@
-﻿local inlineRichText = script:FindFirstAncestor("InlineRichText")
-local name = require(inlineRichText.Logger):new(script.Name)
-local isBuilderIcon = require(inlineRichText.Parent.Foundation).Utility.isBuilderIcon
-local iconElementModule = require(inlineRichText.Renderer.InlineElements.IconElement)
-local _ = require(inlineRichText.Types)
+﻿local InlineRichText = script:FindFirstAncestor("InlineRichText")
+local NewResult = require(InlineRichText.Logger):new(script.Name)
+local IsBuilderIconFunction = require(InlineRichText.Parent.Foundation).Utility.isBuilderIcon
+local IconElementModule = require(InlineRichText.Renderer.InlineElements.IconElement)
+local _ = require(InlineRichText.Types)
 
-return function(p1, p2)
-	-- upvalues: name (ref), isBuilderIcon (ref), iconElementModule (ref)
-	local name_1 = p1.attributes.name
+return function(p1, p2) --[[ Line: 12 ]]
+	-- upvalues: NewResult (copy), IsBuilderIconFunction (copy), IconElementModule (copy)
+	local Name = p1.attributes.name
 	
-	if not name_1 then
-		name:warning("IconRenderer: No name provided for icon")
+	if not Name then
+		NewResult:warning("IconRenderer: No name provided for icon")
 		
 		return {}
-	elseif isBuilderIcon(name_1) then
+	elseif IsBuilderIconFunction(Name) then
 		return {
-			iconElementModule.new({
-				name = name_1,
+			IconElementModule.new({
+				name = Name,
 				size = tonumber(p1.attributes.size) or (p2.styles.fontStyle.FontSize or 18)
 			})
 		}
+	else
+		NewResult:warning(`IconRenderer: Icon {Name} is not a builder icon. You must provide a Foundation builder icon name.`)
+		
+		return {}
 	end
-	name:warning(`IconRenderer: Icon {name_1} is not a builder icon. You must provide a Foundation builder icon name.`)
-	
-	return {}
 end

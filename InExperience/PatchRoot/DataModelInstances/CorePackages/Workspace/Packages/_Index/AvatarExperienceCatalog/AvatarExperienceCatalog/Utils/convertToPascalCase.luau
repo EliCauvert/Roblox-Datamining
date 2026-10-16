@@ -1,22 +1,22 @@
-﻿local function _(p1)
-	return if type(p1) == "string" then p1:gsub("^%l", string.upper) else tostring(p1)
+﻿local function _(Text: string): string --[[ Line: 1 | Named "toPascalCase" ]]
+	return if type(Text) == "string" then Text:gsub("^%l", string.upper) else tostring(Text)
 end
 
-local function convertToPascalCase(p1)
-	-- upvalues: convertToPascalCase (ref)
+local function convertToPascalCase(List) --[[ Line: 10 ]]
+	-- upvalues: convertToPascalCase (copy)
 	local t = {}
 	
-	for i, v in p1 do
-		if type(i) == "string" then
-			local var1 = if type(i) ~= "string" then i:gsub("^%l", string.upper) else tostring(i)
-			
-			if type(v) == "table" then
-				t[var1] = convertToPascalCase(v)
-			else
-				t[var1] = v
-			end
+	for Text, value in List do
+		if type(Text) ~= "string" then
+			t[Text] = value
+			continue
+		end
+		local L = if type(Text) == "string" then Text:gsub("^%l", string.upper) else tostring(Text)
+		
+		if type(value) == "table" then
+			t[L] = convertToPascalCase(value)
 		else
-			t[i] = v
+			t[L] = value
 		end
 	end
 	return t

@@ -1,77 +1,79 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local reactModule = require(parent.React)
-local view = require(parent.Foundation).View
-local constantsModule = require(moments.Constants)
-local useChromeRatioModule = require(moments.Hooks.useChromeRatio)
-local fFlagMomentsImmersiveHeaderFadeOutModule = require(moments.Flags.FFlagMomentsImmersiveHeaderFadeOut)
-local fFlagMomentsUseCompositionLibraryModule = require(moments.Flags.FFlagMomentsUseCompositionLibrary)
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local ReactModule = require(Parent.React)
+local View = require(Parent.Foundation).View
+local ConstantsModule = require(Moments.Constants)
+local UseChromeRatioModule = require(Moments.Hooks.useChromeRatio)
+local FFlagMomentsImmersiveHeaderFadeOutModule = require(Moments.Flags.FFlagMomentsImmersiveHeaderFadeOut)
 
-return function(p1)
-	-- upvalues: useChromeRatioModule (ref), fFlagMomentsUseCompositionLibraryModule (ref), fFlagMomentsImmersiveHeaderFadeOutModule (ref), reactModule (ref), constantsModule (ref), view (ref)
-	local var1 = useChromeRatioModule()
-	local fFlagMomentsImmersiveHeaderFadeOutModule_1 = fFlagMomentsUseCompositionLibraryModule and fFlagMomentsImmersiveHeaderFadeOutModule
-	local var2 = not fFlagMomentsUseCompositionLibraryModule
-	local var3 = not fFlagMomentsUseCompositionLibraryModule or not fFlagMomentsImmersiveHeaderFadeOutModule
-	local var4, var5 = reactModule.useState(function()
-		-- upvalues: fFlagMomentsImmersiveHeaderFadeOutModule_1 (ref), var1 (ref)
-		return fFlagMomentsImmersiveHeaderFadeOutModule_1 and var1:getValue() < 1
+return function(p1) --[[ Line: 21 | Named "ImmersiveHeaderChrome" ]]
+	-- upvalues: UseChromeRatioModule (copy), FFlagMomentsImmersiveHeaderFadeOutModule (copy), ReactModule (copy), ConstantsModule (copy), View (copy)
+	local UseChromeRatioModuleResult = UseChromeRatioModule()
+	local NoFFlagMomentsImmersiveHeaderFadeOutModule = not FFlagMomentsImmersiveHeaderFadeOutModule
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function(): boolean --[[ Line: 29 ]]
+		-- upvalues: FFlagMomentsImmersiveHeaderFadeOutModule (copy), UseChromeRatioModuleResult (copy)
+		return FFlagMomentsImmersiveHeaderFadeOutModule and UseChromeRatioModuleResult:getValue() < 1
 	end)
-	reactModule.useEffect(function()
-		-- upvalues: fFlagMomentsImmersiveHeaderFadeOutModule_1 (ref), var5 (ref), var1 (ref), reactModule (copy)
-		if fFlagMomentsImmersiveHeaderFadeOutModule_1 then
-			local function applyRatio(p2)
-				-- upvalues: var5 (copy)
-				local var6 = p2 < 1
-				var5(function(p3)
-					-- upvalues: var6 (ref)
-					return if p3 == var6 then p3 else var6
-				end)
-			end
-			
-			local var6 = var1:getValue() < 1
-			var5(function(p2)
-				-- upvalues: var6 (ref)
-				return if p2 == var6 then p2 else var6
+	ReactModule.useEffect(function() --[[ Line: 35 ]]
+		-- upvalues: FFlagMomentsImmersiveHeaderFadeOutModule (copy), UseStateResult2 (copy), UseChromeRatioModuleResult (copy), ReactModule (upval)
+		if not FFlagMomentsImmersiveHeaderFadeOutModule then return end
+		local function applyRatio(p2: number) --[[ Line: 40 ]]
+			-- upvalues: UseStateResult2 (upval)
+			local v1 = p2 < 1
+			UseStateResult2(function(p3) --[[ Line: 42 ]]
+				-- upvalues: v1 (copy)
+				return if p3 == v1 then p3 else v1
 			end)
-			
-			return reactModule.__subscribeToBinding(var1, applyRatio)
 		end
-	end, { var1, fFlagMomentsImmersiveHeaderFadeOutModule_1 })
-	local var6, var7 = reactModule.useBinding(0)
-	local var8 = reactModule.useCallback(function(p2)
-		-- upvalues: var7 (ref)
-		var7(p2.AbsoluteSize.Y)
+		
+		local IsValueBelow = UseChromeRatioModuleResult:getValue() < 1
+		UseStateResult2(function(p2) --[[ Line: 42 ]]
+			-- upvalues: IsValueBelow (copy)
+			return if p2 == IsValueBelow then p2 else IsValueBelow
+		end)
+		
+		return ReactModule.__subscribeToBinding(UseChromeRatioModuleResult, applyRatio)
+	end, {
+		UseChromeRatioModuleResult,
+		FFlagMomentsImmersiveHeaderFadeOutModule
+	})
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
+	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 55 ]]
+		-- upvalues: UseBindingResult2 (copy)
+		UseBindingResult2(Frame.AbsoluteSize.Y)
 	end, {})
-	local var9 = reactModule.joinBindings({ ratio = var1, height = var6 }):map(function(p2)
+	local MapResult = ReactModule.joinBindings({
+		ratio = UseChromeRatioModuleResult,
+		height = UseBindingResult
+	}):map(function(p2): UDim2 --[[ Line: 62 ]]
 		return UDim2.new(0, 0, 0, (p2.ratio - 1) * p2.height)
 	end)
-	local t = {
+	local config = {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		LayoutOrder = p1.layoutOrder,
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
-		Interactable = var1:map(function(p2)
+		Interactable = UseChromeRatioModuleResult:map(function(p2: number): boolean --[[ Line: 72 ]]
 			return p2 > 0.01
 		end),
-		ZIndex = constantsModule.DisplayOrder.FeedTopBar,
-		[reactModule.Tag] = "data-testid=--moments-immersive-header-chrome"
+		ZIndex = ConstantsModule.DisplayOrder.FeedTopBar,
+		[ReactModule.Tag] = "data-testid=--moments-immersive-header-chrome"
 	}
 	
-	if var3 then
-		t.Position = var9
-		t[reactModule.Change.AbsoluteSize] = var8
+	if NoFFlagMomentsImmersiveHeaderFadeOutModule then
+		config.Position = MapResult
+		config[ReactModule.Change.AbsoluteSize] = UseResult
 	end
-	local var10 = "Frame"
+	local v1 = "Frame"
 	
-	if var2 or fFlagMomentsImmersiveHeaderFadeOutModule_1 and var4 then
-		var10 = "CanvasGroup"
-		t.GroupTransparency = var1:map(function(p2)
+	if FFlagMomentsImmersiveHeaderFadeOutModule and UseStateResult then
+		v1 = "CanvasGroup"
+		config.GroupTransparency = UseChromeRatioModuleResult:map(function(p2: number): number --[[ Line: 88 ]]
 			return 1 - p2
 		end)
 	end
-	return reactModule.createElement(var10, t, {
-		Header = reactModule.createElement(view, { tag = "size-full-0 auto-y" }, p1.children)
+	return ReactModule.createElement(v1, config, {
+		Header = ReactModule.createElement(View, { tag = "size-full-0 auto-y" }, p1.children)
 	})
 end

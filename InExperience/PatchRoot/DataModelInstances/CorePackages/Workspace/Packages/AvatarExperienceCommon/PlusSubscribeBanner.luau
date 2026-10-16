@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent._Workspace.AvatarExperienceCommon.AvatarExperienceCommon.Components.PlusSubscribeBanner.PlusSubscribeBanner)
+﻿return (require(script.Parent.Parent._Workspace.AvatarExperienceCommon.AvatarExperienceCommon.Components.PlusSubscribeBanner.PlusSubscribeBanner))

@@ -1,11 +1,11 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local actions = expChat.Actions
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local Actions = ExpChat.Actions
 
-return require(expChat.Parent.Rodux).createReducer(false, {
-	[require(actions.ChatPrivacySettingsReceived).name] = function(_, p1)
+return require(ExpChat.Parent.Rodux).createReducer(false, {
+	[require(Actions.ChatPrivacySettingsReceived).name] = function(_, p1) --[[ Line: 10 ]]
 		return p1.canUserChat
 	end,
-	[require(actions.ChatPrivacySettingsFetchFailed).name] = function(_, _)
+	[require(Actions.ChatPrivacySettingsFetchFailed).name] = function(_, _): boolean --[[ Line: 14 ]]
 		return false
 	end
 })

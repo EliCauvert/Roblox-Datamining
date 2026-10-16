@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("ExpChatPresetChatSendEnabled", false) and require(script.Parent.FFlagExpChatPresetChatEnabled)
+﻿local FFlagExpChatPresetChatEnabledModule = require(script.Parent.FFlagExpChatPresetChatEnabled)
+
+return game:DefineFastFlag("ExpChatPresetChatSendEnabled", false) and FFlagExpChatPresetChatEnabledModule

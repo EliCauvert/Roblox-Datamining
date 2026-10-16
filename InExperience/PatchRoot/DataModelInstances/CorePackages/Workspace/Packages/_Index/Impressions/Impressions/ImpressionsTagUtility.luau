@@ -1,19 +1,17 @@
-﻿local collectionService = game:GetService("CollectionService")
-local constantsModule = require(script.Parent.Constants)
+﻿local CollectionService = game:GetService("CollectionService")
+local ConstantsModule = require(script.Parent.Constants)
 
 return {
-	AddTag = function(p1, p2, p3)
-		-- upvalues: constantsModule (ref), collectionService (ref)
-		local var1 = if p1 then p1.current else nil
+	AddTag = function(p1, Tag, Tag1) --[[ Line: 4 ]]
+		-- upvalues: ConstantsModule (copy), CollectionService (copy)
+		local Current = p1 and p1.current or nil
 		
-		if p2 and var1 then
-			if p3 then
-				var1:SetAttribute(constantsModule.ItemIndex, p3)
+		if Tag and Current then
+			if Tag1 then
+				Current:SetAttribute(ConstantsModule.ItemIndex, Tag1)
 				
-				if collectionService:HasTag(var1, p2) then
-					return
-				else
-					collectionService:AddTag(var1, p2)
+				if not CollectionService:HasTag(Current, Tag) then
+					CollectionService:AddTag(Current, Tag)
 					
 					return
 				end
@@ -22,15 +20,15 @@ return {
 			end
 		end
 	end,
-	RemoveTag = function(p1, p2, p3)
-		-- upvalues: constantsModule (ref), collectionService (ref)
-		local var1 = if p1 then p1.current else nil
+	RemoveTag = function(p1, Tag, Tag1) --[[ Line: 18 ]]
+		-- upvalues: ConstantsModule (copy), CollectionService (copy)
+		local Current = p1 and p1.current or nil
 		
-		if p2 and var1 then
-			if p3 then
-				var1:SetAttribute(constantsModule.ItemIndex, nil)
+		if Tag and Current then
+			if Tag1 then
+				Current:SetAttribute(ConstantsModule.ItemIndex, nil)
 			end
-			collectionService:RemoveTag(var1, p2)
+			CollectionService:RemoveTag(Current, Tag)
 		end
 	end
 }

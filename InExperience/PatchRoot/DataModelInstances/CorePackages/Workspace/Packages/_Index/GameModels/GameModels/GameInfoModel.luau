@@ -1,32 +1,36 @@
-﻿local parent = script:FindFirstAncestor("GameModels").Parent
-local resultModule = require(parent.Result)
-local trim = require(parent.LuauPolyfill).String.trim
-local _ = require(parent.DiscoveryTypes)
-local fFlagSearchOmniAutocompletePage = require(parent.SharedFlags).FFlagSearchOmniAutocompletePage
-local fFlagEnableTopSongsSort = require(parent.SharedFlags).FFlagEnableTopSongsSort
-local t = {
-	new = function(p1, p2, p3)
-		-- upvalues: trim (ref)
-		return { universeId = p1, placeId = p2, name = trim(p3) }
+﻿local Parent = script:FindFirstAncestor("GameModels").Parent
+local ResultModule = require(Parent.Result)
+local TrimFunction = require(Parent.LuauPolyfill).String.trim
+local _ = require(Parent.DiscoveryTypes)
+local FFlagSearchOmniAutocompletePage = require(Parent.SharedFlags).FFlagSearchOmniAutocompletePage
+local FFlagEnableTopSongsSort = require(Parent.SharedFlags).FFlagEnableTopSongsSort
+local GameInfoModelModule = {
+	new = function(UniverseId, PlaceId, Name) --[[ Line: 14 ]]
+		-- upvalues: TrimFunction (copy)
+		return {
+			universeId = UniverseId,
+			placeId = PlaceId,
+			name = TrimFunction(Name)
+		}
 	end,
-	_fromSharedJson = function(p1, p2)
-		p1.ageRecommendationDisplayName = p2.ageRecommendationDisplayName
-		p1.minimumAge = p2.minimumAge
-		p1.contentMaturity = p2.contentMaturity
-		p1.playerCount = p2.playerCount
-		p1.primaryWideAssetId = if p2.primaryMediaAsset and p2.primaryMediaAsset.wideImageAssetId then tostring(p2.primaryMediaAsset.wideImageAssetId) else nil
-		p1.primaryWideListId = if p2.primaryMediaAsset and p2.primaryMediaAsset.wideImageListId then tostring(p2.primaryMediaAsset.wideImageListId) else nil
-		p1.totalDownVotes = p2.totalDownVotes
-		p1.totalUpVotes = p2.totalUpVotes
-		p1.defaultLayoutData = p2.defaultLayoutData
-		p1.layoutDataBySort = p2.layoutDataBySort
+	_fromSharedJson = function(NewResult, p1) --[[ Line: 24 ]]
+		NewResult.ageRecommendationDisplayName = p1.ageRecommendationDisplayName
+		NewResult.minimumAge = p1.minimumAge
+		NewResult.contentMaturity = p1.contentMaturity
+		NewResult.playerCount = p1.playerCount
+		NewResult.primaryWideAssetId = if p1.primaryMediaAsset and p1.primaryMediaAsset.wideImageAssetId then tostring(p1.primaryMediaAsset.wideImageAssetId) else nil
+		NewResult.primaryWideListId = if p1.primaryMediaAsset and p1.primaryMediaAsset.wideImageListId then tostring(p1.primaryMediaAsset.wideImageListId) else nil
+		NewResult.totalDownVotes = p1.totalDownVotes
+		NewResult.totalUpVotes = p1.totalUpVotes
+		NewResult.defaultLayoutData = p1.defaultLayoutData
+		NewResult.layoutDataBySort = p1.layoutDataBySort
 	end
 }
 
-function t.mock()
-	-- upvalues: t (ref)
-	local _149757 = t.new("149757", "10395446", "test")
-	t._fromSharedJson(_149757, {
+function GameInfoModelModule.mock() --[[ Line: 41 ]]
+	-- upvalues: GameInfoModelModule (copy)
+	local _149757 = GameInfoModelModule.new("149757", "10395446", "test")
+	GameInfoModelModule._fromSharedJson(_149757, {
 		ageRecommendationDisplayName = "Ages 13+",
 		minimumAge = 13,
 		contentMaturity = "moderate",
@@ -46,98 +50,104 @@ function t.mock()
 	return _149757
 end
 
-function t.fromGamesApi(p1)
-	-- upvalues: resultModule (ref), t (ref)
+function GameInfoModelModule.fromGamesApi(p1) --[[ Line: 73 ]]
+	-- upvalues: ResultModule (copy), GameInfoModelModule (copy)
 	if type(p1.universeId) ~= "number" and type(p1.universeId) ~= "string" then
-		return resultModule.error("GameInfoModel.fromGamesApi expects universeId to be a number or a string")
+		return ResultModule.error("GameInfoModel.fromGamesApi expects universeId to be a number or a string")
 	elseif type(p1.placeId) ~= "number" and type(p1.placeId) ~= "string" then
-		return resultModule.error("GameInfoModel.fromGamesApi expects placeId to be a number or a string")
+		return ResultModule.error("GameInfoModel.fromGamesApi expects placeId to be a number or a string")
 	elseif type(p1.creatorId) == "number" or type(p1.creatorId) == "string" then
-		local var1 = t.new(tostring(p1.universeId), tostring(p1.placeId), p1.name)
-		t._fromSharedJson(var1, p1)
-		var1.creatorId = tostring(p1.creatorId)
-		var1.creatorName = p1.creatorName
+		local NewGameInfoModel = GameInfoModelModule.new(tostring(p1.universeId), tostring(p1.placeId), p1.name)
+		GameInfoModelModule._fromSharedJson(NewGameInfoModel, p1)
+		NewGameInfoModel.creatorId = tostring(p1.creatorId)
+		NewGameInfoModel.creatorName = p1.creatorName
 		
-		return resultModule.success(var1)
+		return ResultModule.success(NewGameInfoModel)
+	else
+		return ResultModule.error("GameInfoModel.fromGamesApi expects creatorId to be a number or a string")
 	end
-	return resultModule.error("GameInfoModel.fromGamesApi expects creatorId to be a number or a string")
 end
 
-function t.fromExperienceApi(p1)
-	-- upvalues: resultModule (ref), t (ref)
+function GameInfoModelModule.fromExperienceApi(p1) --[[ Line: 92 ]]
+	-- upvalues: ResultModule (copy), GameInfoModelModule (copy)
 	if type(p1.universeId) ~= "number" and type(p1.universeId) ~= "string" then
-		return resultModule.error("Game.fromJsonData expects universeId to be a number or a string")
+		return ResultModule.error("Game.fromJsonData expects universeId to be a number or a string")
 	elseif type(p1.rootPlaceId) == "number" or type(p1.rootPlaceId) == "string" then
-		local var1 = t.new(tostring(p1.universeId), tostring(p1.rootPlaceId), p1.name)
-		t._fromSharedJson(var1, p1)
+		local NewGameInfoModel = GameInfoModelModule.new(tostring(p1.universeId), tostring(p1.rootPlaceId), p1.name)
+		GameInfoModelModule._fromSharedJson(NewGameInfoModel, p1)
 		
-		return resultModule.success(var1)
+		return ResultModule.success(NewGameInfoModel)
+	else
+		return ResultModule.error("Game.fromJsonData expects placeId to be a number or a string")
 	end
-	return resultModule.error("Game.fromJsonData expects placeId to be a number or a string")
 end
 
-function t.fromOmniApi(p1)
-	-- upvalues: resultModule (ref), t (ref)
+function GameInfoModelModule.fromOmniApi(p1) --[[ Line: 106 ]]
+	-- upvalues: ResultModule (copy), GameInfoModelModule (copy)
 	if type(p1.universeId) ~= "number" and type(p1.universeId) ~= "string" then
-		return resultModule.error("DiscoveryGame.fromJsonData expects universeId to be a number or a string")
+		return ResultModule.error("DiscoveryGame.fromJsonData expects universeId to be a number or a string")
 	elseif type(p1.rootPlaceId) == "number" or type(p1.rootPlaceId) == "string" then
-		local var1 = t.new(tostring(p1.universeId), tostring(p1.rootPlaceId), p1.name)
-		t._fromSharedJson(var1, p1)
-		var1.friendActivityTitle = p1.friendActivityTitle
-		var1.friendVisitedString = p1.friendVisitedString
-		var1.friendVisits = p1.friendVisits
-		var1.navigationUniverseId = if p1.navigationUid then tostring(p1.navigationUid) else nil
+		local NewGameInfoModel = GameInfoModelModule.new(tostring(p1.universeId), tostring(p1.rootPlaceId), p1.name)
+		GameInfoModelModule._fromSharedJson(NewGameInfoModel, p1)
+		NewGameInfoModel.friendActivityTitle = p1.friendActivityTitle
+		NewGameInfoModel.friendVisitedString = p1.friendVisitedString
+		NewGameInfoModel.friendVisits = p1.friendVisits
+		NewGameInfoModel.navigationUniverseId = if p1.navigationUid then tostring(p1.navigationUid) else nil
 		
-		return resultModule.success(var1)
+		return ResultModule.success(NewGameInfoModel)
+	else
+		return ResultModule.error("DiscoveryGame.fromJsonData expects rootPlaceId to be a number or a string")
 	end
-	return resultModule.error("DiscoveryGame.fromJsonData expects rootPlaceId to be a number or a string")
 end
 
-if fFlagSearchOmniAutocompletePage then
-	function t.fromOmniAutocompleteApi(p1)
-		-- upvalues: resultModule (ref), t (ref)
+if FFlagSearchOmniAutocompletePage then
+	function GameInfoModelModule.fromOmniAutocompleteApi(p1) --[[ Line: 125 ]]
+		-- upvalues: ResultModule (copy), GameInfoModelModule (copy)
 		if type(p1.universeId) ~= "number" and type(p1.universeId) ~= "string" then
-			return resultModule.error("GameInfoModel.fromOmniAutocompleteApi expects universeId to be a number or a string")
+			return ResultModule.error("GameInfoModel.fromOmniAutocompleteApi expects universeId to be a number or a string")
 		elseif type(p1.rootPlaceId) == "number" or type(p1.rootPlaceId) == "string" then
-			local var1 = t.new(tostring(p1.universeId), tostring(p1.rootPlaceId), p1.name)
-			t._fromSharedJson(var1, p1)
+			local NewGameInfoModel = GameInfoModelModule.new(tostring(p1.universeId), tostring(p1.rootPlaceId), p1.name)
+			GameInfoModelModule._fromSharedJson(NewGameInfoModel, p1)
 			
-			return resultModule.success(var1)
+			return ResultModule.success(NewGameInfoModel)
+		else
+			return ResultModule.error("GameInfoModel.fromOmniAutocompleteApi expects placeId to be a number or a string")
 		end
-		return resultModule.error("GameInfoModel.fromOmniAutocompleteApi expects placeId to be a number or a string")
 	end
 end
-function t.fromSearchApi(p1)
-	-- upvalues: resultModule (ref), t (ref)
+function GameInfoModelModule.fromSearchApi(p1) --[[ Line: 140 ]]
+	-- upvalues: ResultModule (copy), GameInfoModelModule (copy)
 	if type(p1.universeId) ~= "number" and type(p1.universeId) ~= "string" then
-		return resultModule.error("GameInfoModel.fromSearchApi expects universeId to be a number or a string")
+		return ResultModule.error("GameInfoModel.fromSearchApi expects universeId to be a number or a string")
 	elseif type(p1.rootPlaceId) ~= "number" and type(p1.rootPlaceId) ~= "string" then
-		return resultModule.error("GameInfoModel.fromSearchApi expects rootPlaceId to be a number or a string")
+		return ResultModule.error("GameInfoModel.fromSearchApi expects rootPlaceId to be a number or a string")
 	elseif type(p1.creatorId) == "number" or type(p1.creatorId) == "string" then
-		local var1 = t.new(tostring(p1.universeId), tostring(p1.rootPlaceId), p1.name)
-		t._fromSharedJson(var1, p1)
-		var1.creatorId = tostring(p1.creatorId)
-		var1.creatorName = p1.creatorName
+		local NewGameInfoModel = GameInfoModelModule.new(tostring(p1.universeId), tostring(p1.rootPlaceId), p1.name)
+		GameInfoModelModule._fromSharedJson(NewGameInfoModel, p1)
+		NewGameInfoModel.creatorId = tostring(p1.creatorId)
+		NewGameInfoModel.creatorName = p1.creatorName
 		
-		return resultModule.success(var1)
+		return ResultModule.success(NewGameInfoModel)
+	else
+		return ResultModule.error("GameInfoModel.fromSearchApi expects creatorId to be a number or a string")
 	end
-	return resultModule.error("GameInfoModel.fromSearchApi expects creatorId to be a number or a string")
 end
 
-if fFlagEnableTopSongsSort then
-	function t.fromMusicDiscoveryApi(p1)
-		-- upvalues: resultModule (ref), t (ref)
+if FFlagEnableTopSongsSort then
+	function GameInfoModelModule.fromMusicDiscoveryApi(p1) --[[ Line: 160 ]]
+		-- upvalues: ResultModule (copy), GameInfoModelModule (copy)
 		if type(p1.universeId) ~= "number" and type(p1.universeId) ~= "string" then
-			return resultModule.error("GameInfoModel.fromMusicDiscoveryApi expects universeId to be a number or a string")
+			return ResultModule.error("GameInfoModel.fromMusicDiscoveryApi expects universeId to be a number or a string")
 		elseif type(p1.rootPlaceId) == "number" or type(p1.rootPlaceId) == "string" then
-			local var1 = t.new(tostring(p1.universeId), tostring(p1.rootPlaceId), p1.name)
-			var1.playerCount = p1.playerCount
-			var1.totalDownVotes = p1.downVotes
-			var1.totalUpVotes = p1.upVotes
+			local NewGameInfoModel = GameInfoModelModule.new(tostring(p1.universeId), tostring(p1.rootPlaceId), p1.name)
+			NewGameInfoModel.playerCount = p1.playerCount
+			NewGameInfoModel.totalDownVotes = p1.downVotes
+			NewGameInfoModel.totalUpVotes = p1.upVotes
 			
-			return resultModule.success(var1)
+			return ResultModule.success(NewGameInfoModel)
+		else
+			return ResultModule.error("GameInfoModel.fromMusicDiscoveryApi expects rootPlaceId to be a number or a string")
 		end
-		return resultModule.error("GameInfoModel.fromMusicDiscoveryApi expects rootPlaceId to be a number or a string")
 	end
 end
-return t
+return GameInfoModelModule

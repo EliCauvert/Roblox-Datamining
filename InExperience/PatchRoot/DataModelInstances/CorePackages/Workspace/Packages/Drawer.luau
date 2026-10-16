@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.Drawer.Drawer)
+﻿return (require(script.Parent._Workspace.Drawer.Drawer))

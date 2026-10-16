@@ -1,47 +1,47 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local _ = require(dataHydration.Parent.HttpClient)
-local createSingleEntityResolverModule = require(dataHydration.createSingleEntityResolver)
-local fetchServerManagementModule = require(script.Parent.fetchServerManagement)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local _ = require(DataHydration.Parent.HttpClient)
+local CreateSingleEntityResolverModule = require(DataHydration.createSingleEntityResolver)
+local FetchServerManagementModule = require(script.Parent.fetchServerManagement)
 local _ = require(script.Parent.ServerManagementStoreTypes)
 
-return function(p1)
-	-- upvalues: createSingleEntityResolverModule (ref), fetchServerManagementModule (ref)
-	p1 = p1 or {}
-	local t = { network = p1.network, baseUrl = p1.baseUrl }
-	local var1 = createSingleEntityResolverModule(function(p2)
-		-- upvalues: fetchServerManagementModule (copy), t (ref)
-		return fetchServerManagementModule.fetchListRestartStatuses(p2, t)
+return function(p1) --[[ Line: 21 | Named "createServerManagementStore" ]]
+	-- upvalues: CreateSingleEntityResolverModule (copy), FetchServerManagementModule (copy)
+	local P0 = p1 or {}
+	local config = { network = P0.network, baseUrl = P0.baseUrl }
+	local SingleEntityResolverModule = CreateSingleEntityResolverModule(function(p2) --[[ Line: 25 ]]
+		-- upvalues: FetchServerManagementModule (upval), config (copy)
+		return FetchServerManagementModule.fetchListRestartStatuses(p2, config)
 	end)
-	local var2 = createSingleEntityResolverModule(function(p2)
-		-- upvalues: fetchServerManagementModule (copy), t (ref)
-		return fetchServerManagementModule.fetchForecastRestart(p2, t)
+	local SingleEntityResolverModule1 = CreateSingleEntityResolverModule(function(p2) --[[ Line: 28 ]]
+		-- upvalues: FetchServerManagementModule (upval), config (copy)
+		return FetchServerManagementModule.fetchForecastRestart(p2, config)
 	end)
 	
 	return {
-		getRestartStatuses = var1.get,
-		fetchRestartStatuses = var1.fetch,
-		getAndFetchRestartStatuses = var1.getAndFetch,
-		getForecast = var2.get,
-		fetchForecast = var2.fetch,
-		getAndFetchForecast = var2.getAndFetch,
-		launchRestart = function(p2, p3)
-			-- upvalues: fetchServerManagementModule (copy), t (ref), var1 (ref)
-			return fetchServerManagementModule.launchRestart(p2, p3, t):andThen(function(p4)
-				-- upvalues: var1 (copy), p2 (ref)
-				var1.fetch(p2)
+		getRestartStatuses = SingleEntityResolverModule.get,
+		fetchRestartStatuses = SingleEntityResolverModule.fetch,
+		getAndFetchRestartStatuses = SingleEntityResolverModule.getAndFetch,
+		getForecast = SingleEntityResolverModule1.get,
+		fetchForecast = SingleEntityResolverModule1.fetch,
+		getAndFetchForecast = SingleEntityResolverModule1.getAndFetch,
+		launchRestart = function(p2, p3) --[[ Line: 32 ]]
+			-- upvalues: FetchServerManagementModule (upval), config (copy), SingleEntityResolverModule (copy)
+			return FetchServerManagementModule.launchRestart(p2, p3, config):andThen(function(Result) --[[ Line: 33 ]]
+				-- upvalues: SingleEntityResolverModule (upval), p2 (copy)
+				SingleEntityResolverModule.fetch(p2)
 				
-				return p4
+				return Result
 			end)
 		end,
-		clear = function()
-			-- upvalues: var1 (ref), var2 (ref)
-			var1.clear()
-			var2.clear()
+		clear = function() --[[ Line: 40 ]]
+			-- upvalues: SingleEntityResolverModule (copy), SingleEntityResolverModule1 (copy)
+			SingleEntityResolverModule.clear()
+			SingleEntityResolverModule1.clear()
 		end,
-		dispose = function()
-			-- upvalues: var1 (ref), var2 (ref)
-			var1.dispose()
-			var2.dispose()
+		dispose = function() --[[ Line: 45 ]]
+			-- upvalues: SingleEntityResolverModule (copy), SingleEntityResolverModule1 (copy)
+			SingleEntityResolverModule.dispose()
+			SingleEntityResolverModule1.dispose()
 		end
 	}
 end

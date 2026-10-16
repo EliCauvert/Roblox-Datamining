@@ -1,403 +1,412 @@
-﻿local parent = script:FindFirstAncestor("Home").Parent
-local appPage = require(parent.RobloxAppEnums).AppPage
-local homeOmniFeedCache = require(parent.DiscoveryUtils).HomeOmniFeedCache
-local getSduiTemplateStore = require(parent.SduiSharedUtilities).getSduiTemplateStore
-local t = { universe = { "player_count" } }
+﻿local Parent = script:FindFirstAncestor("Home").Parent
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local HomeOmniFeedCache = require(Parent.DiscoveryUtils).HomeOmniFeedCache
+local GetSduiTemplateStoreFunction = require(Parent.SduiSharedUtilities).getSduiTemplateStore
+local config = { universe = { "player_count" } }
 
-local function _(p1)
-	return table.clone(p1)
+local function _(Tbl) --[[ Line: 47 | Named "cloneMessage" ]]
+	return table.clone(Tbl)
 end
 
-local _ = function(p1)
-	local var1 = if p1 ~= nil then nil else p1.kind
+local _ = function(p1) --[[ Line: 52 | Named "readInputValue" ]]
+	local Kind = if p1 == nil then nil else p1.kind
 	
-	return if var1 == nil then nil else var1.value
+	return if Kind == nil then nil else Kind.value
 end
 
-local _ = function(p1, p2)
-	local cloned = table.clone(p1)
-	cloned.kind = { type = p1.kind.type, value = p2 }
+local _ = function(Tbl, Value) --[[ Line: 58 | Named "replaceInputValue" ]]
+	local Copy = table.clone(Tbl)
+	Copy.kind = { type = Tbl.kind.type, value = Value }
 	
-	return cloned
+	return Copy
 end
 
-local _ = function(p1)
+local _ = function(p1): boolean --[[ Line: 64 | Named "isFeed" ]]
 	return type(p1) == "table" and type(p1.entry_map) == "table"
 end
 
-local function itemListFields(p1)
-	local t = {}
+local function itemListFields(List) --[[ Line: 76 ]]
+	local List1 = {}
 	
-	for i, v in p1 do
-		if type(v) == "table" and #v > 0 and type(v[1]) == "table" then
-			table.insert(t, i)
+	for i, value in List do
+		if type(value) == "table" and #value > 0 and type(value[1]) == "table" then
+			table.insert(List1, i)
 		end
 	end
-	table.sort(t)
+	table.sort(List1)
 	
-	return t
+	return List1
 end
 
-local _ = function(p2)
-	local poolId = p2.pool_id
+local _ = function(p1) --[[ Line: 87 | Named "readPoolId" ]]
+	local PoolId = p1.pool_id
 	
-	return if type(poolId) == "string" and poolId ~= "" then poolId else nil
+	return if type(PoolId) == "string" and PoolId ~= "" then PoolId else nil
 end
 
-local _ = function(p2, p3)
+local _ = function(p1, p2: number) --[[ Line: 92 | Named "takeItems" ]]
 	local t = {}
 	
-	if p2 == nil then
+	if p1 == nil then
 		return t
 	end
-	for i = 1, math.min(#p2, p3) do
-		t[i] = p2[i]
+	for i = 1, math.min(#p1, p2) do
+		t[i] = p1[i]
 	end
 	return t
 end
 
-local _ = function(p4, p5)
-	local sortId = p5.sort_id
+local _ = function(p3, p4) --[[ Line: 106 | Named "readSortId" ]]
+	local SortId = p4.sort_id
 	
-	if sortId == nil or sortId == "" then
-		warn(`Home SDUI cache entry "{p9}" has no sort_id; using its identifier`)
+	if SortId == nil or SortId == "" then
+		warn(`Home SDUI cache entry "{p7}" has no sort_id; using its identifier`)
 		
-		return p4
+		return p3
+	else
+		return (tostring(SortId))
 	end
-	return tostring(sortId)
 end
 
-local function collectReferencedKeys(p4, p5)
-	-- upvalues: collectReferencedKeys (ref)
-	local var1 = type(p4)
+local function collectReferencedKeys(List, p3) --[[ Line: 125 ]]
+	-- upvalues: collectReferencedKeys (copy)
+	local ValueType = type(List)
 	
-	if var1 == "table" then
-		for i, v in p4 do
-			collectReferencedKeys(v, p5)
+	if ValueType == "table" then
+		for _, value in List do
+			collectReferencedKeys(value, p3)
 		end
 		return
-	elseif var1 == "string" or var1 == "number" then
-		p5[tostring(p4)] = true
+	elseif ValueType == "string" or ValueType == "number" then
+		p3[tostring(List)] = true
 	end
 end
 
-local function filterOrder(p6, p7)
-	local t = {}
+local function filterOrder(EntryOrder, Entry_map) --[[ Line: 136 ]]
+	local List = {}
 	
-	if p6 == nil then
-		return t
+	if EntryOrder == nil then
+		return List
 	end
-	for i, v in p6 do
-		if p7[v] ~= nil then
-			table.insert(t, v)
+	for _, value in EntryOrder do
+		if Entry_map[value] ~= nil then
+			table.insert(List, value)
 		end
 	end
-	return t
+	return List
 end
 
-local function filterOrderMap(p8, p9)
-	-- upvalues: filterOrder (ref)
+local function filterOrderMap(EntryOrderMap, Entry_map) --[[ Line: 149 ]]
+	-- upvalues: filterOrder (copy)
 	local t = {}
 	
-	if p8 == nil then
+	if EntryOrderMap == nil then
 		return t
 	end
-	for i, v in p8 do
-		local var2 = filterOrder(v.items, p9)
+	for i, value in EntryOrderMap do
+		local FilterOrderResult = filterOrder(value.items, Entry_map)
 		
-		if #var2 > 0 then
-			local cloned = table.clone(v)
-			cloned.items = var2
-			t[i] = cloned
+		if #FilterOrderResult > 0 then
+			local Copy = table.clone(value)
+			Copy.items = FilterOrderResult
+			t[i] = Copy
 		end
 	end
 	return t
 end
 
-local function pruneFeed(p10, p11)
-	-- upvalues: itemListFields (ref), filterOrder (ref), filterOrderMap (ref)
+local function pruneFeed(Tbl, TopicIdToNumCacheItems) --[[ Line: 166 ]]
+	-- upvalues: itemListFields (copy), filterOrder (copy), filterOrderMap (copy)
+	local Entry_map = {}
+	local Content_pools = {}
+	local List = {}
 	local t = {}
-	local t_1 = {}
-	local t_2 = {}
-	local t_3 = {}
 	
-	if p10.entry_order ~= nil then
-		for i, v in p10.entry_order do
-			if not t_3[v] then
-				t_3[v] = true
-				table.insert(t_2, v)
+	if Tbl.entry_order ~= nil then
+		for _, value in Tbl.entry_order do
+			if not t[value] then
+				t[value] = true
+				table.insert(List, value)
 			end
 		end
 	end
-	local t_4 = {}
+	local List1 = {}
 	
-	for i in p10.entry_map do
-		if not t_3[i] then
-			t_3[i] = true
-			table.insert(t_4, i)
+	for i in Tbl.entry_map do
+		if not t[i] then
+			t[i] = true
+			table.insert(List1, i)
 		end
 	end
-	table.sort(t_4)
+	table.sort(List1)
 	
-	for i_1, v in t_4 do
-		table.insert(t_2, v)
+	for _, value1 in List1 do
+		table.insert(List, value1)
 	end
-	for i_2, v_1 in t_2 do
-		local var3 = p10.entry_map[v_1]
+	for _, value2 in List do
+		local Entry = Tbl.entry_map[value2]
 		
-		if var3 ~= nil then
-			local inputData = var3.input_data
-			local var4 = if inputData ~= nil then nil else inputData.kind
-			local var5 = if var4 ~= nil then nil else var4.value
+		if Entry ~= nil then
+			local InputData = Entry.input_data
+			local Kind = if InputData == nil then nil else InputData.kind
+			local Value = if Kind == nil then nil else Kind.value
 			
-			if type(var5) == "table" then
-				var4 = var5.pool_id
-				inputData = if type(var4) == "string" and var4 ~= "" then var4 else nil
-				var4 = itemListFields(var5)
+			if type(Value) == "table" then
+				local PoolId = Value.pool_id
+				local PoolId1 = if type(PoolId) == "string" and PoolId ~= "" then PoolId else nil
+				local ItemListFieldsResult = itemListFields(Value)
 				
-				if inputData ~= nil or #var4 ~= 0 then
-					local var6
-					local sortId = var5.sort_id
+				if PoolId1 ~= nil or #ItemListFieldsResult ~= 0 then
+					local SortId = Value.sort_id
+					local value3 = nil
 					
-					if sortId == nil or sortId == "" then
-						warn(`Home SDUI cache entry "{v_1}" has no sort_id; using its identifier`)
-						var6 = v_1
+					if SortId == nil or SortId == "" then
+						warn(`Home SDUI cache entry "{value2}" has no sort_id; using its identifier`)
+						value3 = value2
 					else
-						var6 = tostring(sortId)
+						value3 = tostring(SortId)
 					end
-					local var7 = p11[var6]
+					local TopicIdToNumCacheItem = TopicIdToNumCacheItems[value3]
 					
-					if var7 ~= nil then
-						local items, maxValue, i_3
-						local cloned = table.clone(var5)
+					if TopicIdToNumCacheItem ~= nil then
+						local Copy = table.clone(Value)
 						
-						if inputData == nil then
-							for items, maxValue in var4 do
-								local var8
-								local var9 = var5[maxValue]
-								local maxValue_1 = math.max(var7.cap - var7.count, 0)
-								i_3 = {}
-								
-								if var9 == nil then
-									var8 = i_3
-									var7.count += #var8
-									cloned[maxValue] = var8
-								end
-								for i_5 = 1, math.min(#var9, maxValue_1) do
-									i_3[i_5] = var9[i_5]
-								end
-								var8 = i_3
-							end
-							sortId = table.clone(var3)
-							local inputData_1 = var3.input_data
-							items = table.clone(inputData_1)
-							items.kind = { type = inputData_1.kind.type, value = cloned }
-							sortId.input_data = items
-							t[v_1] = sortId
-						else
-							sortId = (p10.content_pools or {})[inputData]
+						if PoolId1 ~= nil then
+							local ContentPool = (Tbl.content_pools or {})[PoolId1]
 							
-							if sortId ~= nil then
-								if t_1[inputData] == nil then
-									local var10
-									local cloned_1 = table.clone(sortId)
-									items = sortId.items
-									maxValue = math.max(var7.cap - var7.count, 0)
-									local t_5 = {}
+							if ContentPool ~= nil then
+								if Content_pools[PoolId1] == nil then
+									local Copy1 = table.clone(ContentPool)
+									local Items = ContentPool.items
+									local Largest = math.max(TopicIdToNumCacheItem.cap - TopicIdToNumCacheItem.count, 0)
+									local t1 = {}
+									local Items1 = nil
 									
-									if items == nil then
-										var10 = t_5
+									if Items == nil then
+										Items1 = t1
 									else
-										for i_3 = 1, math.min(#items, maxValue) do
-											t_5[i_3] = items[i_3]
+										for i1 = 1, math.min(#Items, Largest) do
+											t1[i1] = Items[i1]
 										end
-										var10 = t_5
+										Items1 = t1
 									end
-									cloned_1.items = var10
-									var7.count += #cloned_1.items
-									t_1[inputData] = cloned_1
+									Copy1.items = Items1
+									TopicIdToNumCacheItem.count += #Copy1.items
+									Content_pools[PoolId1] = Copy1
 								end
+							else
+								continue
+							end
+						else
+							for _, value4 in ItemListFieldsResult do
+								local Entry1 = Value[value4]
+								local Largest = math.max(TopicIdToNumCacheItem.cap - TopicIdToNumCacheItem.count, 0)
+								local t2 = {}
+								local t1 = nil
+								
+								if Entry1 == nil then
+									t1 = t2
+								else
+									for i2 = 1, math.min(#Entry1, Largest) do
+										t2[i2] = Entry1[i2]
+									end
+									t1 = t2
+								end
+								TopicIdToNumCacheItem.count += #t1
+								Copy[value4] = t1
 							end
 						end
+						local Copy2 = table.clone(Entry)
+						local InputData1 = Entry.input_data
+						local Copy3 = table.clone(InputData1)
+						Copy3.kind = { type = InputData1.kind.type, value = Copy }
+						Copy2.input_data = Copy3
+						Entry_map[value2] = Copy2
 					end
 				end
 			end
 		end
 	end
-	if next(t) == nil then
+	if next(Entry_map) == nil then
 		return nil
 	end
-	local cloned = table.clone(p10)
-	cloned.entry_map = t
+	local Copy4 = table.clone(Tbl)
+	Copy4.entry_map = Entry_map
 	
-	if p10.content_pools ~= nil then
-		cloned.content_pools = t_1
+	if Tbl.content_pools ~= nil then
+		Copy4.content_pools = Content_pools
 	end
-	if p10.entry_order ~= nil then
-		cloned.entry_order = filterOrder(p10.entry_order, t)
+	if Tbl.entry_order ~= nil then
+		Copy4.entry_order = filterOrder(Tbl.entry_order, Entry_map)
 	end
-	if p10.entry_order_map ~= nil then
-		cloned.entry_order_map = filterOrderMap(p10.entry_order_map, t)
+	if Tbl.entry_order_map ~= nil then
+		Copy4.entry_order_map = filterOrderMap(Tbl.entry_order_map, Entry_map)
 	end
-	return cloned
+	return Copy4
 end
 
-local function pruneHydration(p12, p13)
-	-- upvalues: t (ref)
-	if p12 == nil then
+local function pruneHydration(Tbl, p4) --[[ Line: 267 ]]
+	-- upvalues: config (copy)
+	if Tbl == nil then
 		return nil
 	end
-	local cloned = table.clone(p12)
+	local Copy = table.clone(Tbl)
 	
-	for i, v in p12 do
-		if type(v) == "table" then
-			local var11 = t[i]
-			local t_1 = {}
+	for i, value in Tbl do
+		if type(value) == "table" then
+			local Entry = config[i]
+			local t = {}
 			
-			for i_1, v_1 in v do
-				if type(v_1) == "table" and p13[tostring(i_1)] then
-					local cloned_1 = table.clone(v_1)
+			for i1, value1 in value do
+				if type(value1) == "table" and p4[tostring(i1)] then
+					local Copy1 = table.clone(value1)
 					
-					if var11 ~= nil then
-						for i_2, v_2 in var11 do
-							cloned_1[v_2] = nil
+					if Entry ~= nil then
+						for _, value2 in Entry do
+							Copy1[value2] = nil
 						end
 					end
-					t_1[i_1] = cloned_1
+					t[i1] = Copy1
 				end
 			end
-			cloned[i] = t_1
+			Copy[i] = t
 		end
 	end
-	return cloned
+	return Copy
 end
 
-local function fillMissingTemplatesFromStore(p14)
-	-- upvalues: getSduiTemplateStore (ref), appPage (ref), parent (ref)
-	local var12 = getSduiTemplateStore()
-	local cachedRobloxComponentToTemplateId = var12.getCachedRobloxComponentToTemplateId(appPage.Home)
+local function fillMissingTemplatesFromStore(p5) --[[ Line: 303 ]]
+	-- upvalues: GetSduiTemplateStoreFunction (copy), AppPage (copy), Parent (copy)
+	local SduiTemplateStore = GetSduiTemplateStoreFunction()
+	local CachedRobloxComponentToTemplateId = SduiTemplateStore.getCachedRobloxComponentToTemplateId(AppPage.Home)
 	
-	if next(cachedRobloxComponentToTemplateId) == nil then return end
-	local cloned = table.clone(p14.templates or {})
-	local templateEntry = require(parent.ServiceContractsProto).apppageplatform.shared.template_entry.TemplateEntry
+	if next(CachedRobloxComponentToTemplateId) == nil then return end
+	local Copy = table.clone(p5.templates or {})
+	local TemplateEntry = require(Parent.ServiceContractsProto).apppageplatform.shared.template_entry.TemplateEntry
 	
-	for i, v in cachedRobloxComponentToTemplateId do
-		if cloned[v] == nil then
-			local template = var12.getTemplate(v)
+	for Roblox_component, value in CachedRobloxComponentToTemplateId do
+		if Copy[value] == nil then
+			local Template = SduiTemplateStore.getTemplate(value)
 			
-			if template ~= nil then
-				cloned[v] = templateEntry.new({ template = template, roblox_component = i })
+			if Template ~= nil then
+				Copy[value] = TemplateEntry.new({ template = Template, roblox_component = Roblox_component })
 			end
 		end
 	end
-	p14.templates = cloned
+	p5.templates = Copy
 end
 
 return {
-	buildSduiHomePageCachePayload = function(p15)
-		-- upvalues: homeOmniFeedCache (ref), pruneFeed (ref), collectReferencedKeys (ref), pruneHydration (ref), fillMissingTemplatesFromStore (ref)
-		local topicIdToNumCacheItems = homeOmniFeedCache.getTopicIdToNumCacheItems()
+	buildSduiHomePageCachePayload = function(Tbl) --[[ Line: 334 ]]
+		-- upvalues: HomeOmniFeedCache (copy), pruneFeed (copy), collectReferencedKeys (copy), pruneHydration (copy), fillMissingTemplatesFromStore (copy)
+		local TopicIdToNumCacheItems = HomeOmniFeedCache.getTopicIdToNumCacheItems()
 		local t = {}
-		local t_1 = {}
-		
-		for i, v in p15.page_entries or {} do
-			local inputData = v.input_data
-			local var13 = if inputData ~= nil then nil else inputData.kind
-			local var14 = if var13 ~= nil then nil else var13.value
+		local Page_entries = {}
+		local PageEntries = Tbl.page_entries or {}
+		for _, pageEntry in PageEntries do
+			local InputData = pageEntry.input_data
+			local Kind = if InputData == nil then nil else InputData.kind
+			local Value = if Kind == nil then nil else Kind.value
 			
-			if type(var14) == "table" and type(var14.entry_map) == "table" then
-				local var15 = pruneFeed(var14, topicIdToNumCacheItems)
+			if type(Value) == "table" and type(Value.entry_map) == "table" then
+				local PruneFeedResult = pruneFeed(Value, TopicIdToNumCacheItems)
 				
-				if var15 ~= nil then
-					local cloned = table.clone(v)
-					local inputData_1 = v.input_data
-					local cloned_1 = table.clone(inputData_1)
-					cloned_1.kind = { type = inputData_1.kind.type, value = var15 }
-					cloned.input_data = cloned_1
-					table.insert(t_1, cloned)
-					collectReferencedKeys(cloned, t)
+				if PruneFeedResult ~= nil then
+					local Copy = table.clone(pageEntry)
+					local InputData1 = pageEntry.input_data
+					local Copy1 = table.clone(InputData1)
+					Copy1.kind = { type = InputData1.kind.type, value = PruneFeedResult }
+					Copy.input_data = Copy1
+					table.insert(Page_entries, Copy)
+					collectReferencedKeys(Copy, t)
 				end
 			end
 		end
-		if #t_1 == 0 then
+		if #Page_entries == 0 then
 			return nil
-		end
-		local cloned = table.clone(p15)
-		cloned.page_entries = t_1
-		cloned.hydration_data = pruneHydration(p15.hydration_data, t)
-		cloned.request_id = ""
-		fillMissingTemplatesFromStore(cloned)
-		
-		return cloned
-	end,
-	serializeSduiHomePageCache = function(p16)
-		-- upvalues: parent (ref)
-		return require(parent.ServiceContractsProto).proto.json.serializeBuffer(p16:encode())
-	end,
-	deserializeSduiHomePageCache = function(p16)
-		-- upvalues: parent (ref)
-		if p16 == nil then
-			return nil
-		end
-		local serviceContractsProtoModule = require(parent.ServiceContractsProto)
-		
-		return serviceContractsProtoModule.apppageplatform.home.home_page.HomePageResponse.decode(serviceContractsProtoModule.proto.json.deserializeBuffer(p16))
-	end,
-	getSduiHomePageItemsForSortId = function(p16)
-		-- upvalues: homeOmniFeedCache (ref), parent (ref), itemListFields (ref)
-		local var16
-		local cachedSduiHomePageData = homeOmniFeedCache.getCachedSduiHomePageData()
-		
-		if cachedSduiHomePageData == nil then
-			var16 = nil
 		else
-			local serviceContractsProtoModule = require(parent.ServiceContractsProto)
-			var16 = serviceContractsProtoModule.apppageplatform.home.home_page.HomePageResponse.decode(serviceContractsProtoModule.proto.json.deserializeBuffer(cachedSduiHomePageData))
+			local Copy = table.clone(Tbl)
+			Copy.page_entries = Page_entries
+			Copy.hydration_data = pruneHydration(Tbl.hydration_data, t)
+			Copy.request_id = ""
+			fillMissingTemplatesFromStore(Copy)
+			
+			return Copy
 		end
-		if var16 == nil then
+	end,
+	serializeSduiHomePageCache = function(p6) --[[ Line: 379 ]]
+		-- upvalues: Parent (copy)
+		return require(Parent.ServiceContractsProto).proto.json.serializeBuffer(p6:encode())
+	end,
+	deserializeSduiHomePageCache = function(p6) --[[ Line: 385 ]]
+		-- upvalues: Parent (copy)
+		if p6 == nil then
+			return nil
+		else
+			local ServiceContractsProtoModule = require(Parent.ServiceContractsProto)
+			
+			return ServiceContractsProtoModule.apppageplatform.home.home_page.HomePageResponse.decode((ServiceContractsProtoModule.proto.json.deserializeBuffer(p6)))
+		end
+	end,
+	getSduiHomePageItemsForSortId = function(p6) --[[ Line: 398 ]]
+		-- upvalues: HomeOmniFeedCache (copy), Parent (copy), itemListFields (copy)
+		local CachedSduiHomePageData = HomeOmniFeedCache.getCachedSduiHomePageData()
+		local DecodeResult = nil
+		
+		if CachedSduiHomePageData == nil then
+			DecodeResult = nil
+		else
+			local ServiceContractsProtoModule = require(Parent.ServiceContractsProto)
+			DecodeResult = ServiceContractsProtoModule.apppageplatform.home.home_page.HomePageResponse.decode((ServiceContractsProtoModule.proto.json.deserializeBuffer(CachedSduiHomePageData)))
+		end
+		if DecodeResult == nil then
 			return nil
 		end
-		for i, v in var16.page_entries do
-			local inputData = v.input_data
-			local var17 = if inputData ~= nil then nil else inputData.kind
-			local var18 = if var17 ~= nil then nil else var17.value
+		local Value1 = nil
+		local Value = nil
+		local PoolId1 = nil
+		local ItemListFieldsResult = nil
+		for _, pageEntry in DecodeResult.page_entries do
+			local InputData = pageEntry.input_data
+			local Kind = if InputData == nil then nil else InputData.kind
+			Value = if Kind == nil then nil else Kind.value
 			
-			if type(var18) == "table" and type(var18.entry_map) == "table" then
-				for i_1, v_1 in var18.entry_map do
-					local inputData_1 = v_1.input_data
-					local var19 = if inputData_1 ~= nil then nil else inputData_1.kind
-					local var20 = if var19 ~= nil then nil else var19.value
+			if type(Value) == "table" and type(Value.entry_map) == "table" then
+				for i, value in Value.entry_map do
+					local InputData1 = value.input_data
+					local Kind1 = if InputData1 == nil then nil else InputData1.kind
+					Value1 = if Kind1 == nil then nil else Kind1.value
 					
-					if type(var20) == "table" then
-						var19 = var20.pool_id
-						inputData_1 = if type(var19) == "string" and var19 ~= "" then var19 else nil
-						var19 = itemListFields(var20)
+					if type(Value1) == "table" then
+						local PoolId = Value1.pool_id
+						PoolId1 = if type(PoolId) == "string" and PoolId ~= "" then PoolId else nil
+						ItemListFieldsResult = itemListFields(Value1)
 						
-						if inputData_1 ~= nil or #var19 ~= 0 then
-							local var21
-							local sortId = var20.sort_id
+						if PoolId1 ~= nil or #ItemListFieldsResult ~= 0 then
+							local SortId = Value1.sort_id
+							local i1 = nil
 							
-							if sortId == nil or sortId == "" then
-								warn(`Home SDUI cache entry "{i_1}" has no sort_id; using its identifier`)
-								var21 = i_1
+							if SortId == nil or SortId == "" then
+								warn(`Home SDUI cache entry "{i}" has no sort_id; using its identifier`)
+								i1 = i
 							else
-								var21 = tostring(sortId)
+								i1 = tostring(SortId)
 							end
-							if var21 == p16 then
-								if inputData_1 == nil then
-									return var20[var19[1]]
+							if i1 == p6 then
+								if PoolId1 == nil then
+									return Value1[ItemListFieldsResult[1]]
 								end
-								local t = {}
-								
-								for i_2, v_2 in ((var18.content_pools or {})[inputData_1] or {}).items or {} do
-									local var22 = if v_2 ~= nil then nil else v_2.kind
-									local var23 = if var22 ~= nil then nil else var22.value
+								local List = {}
+								local Items = ((Value.content_pools or {})[PoolId1] or {}).items or {}
+								for _, item in Items do
+									local Kind2 = if item == nil then nil else item.kind
+									local Value2 = if Kind2 == nil then nil else Kind2.value
 									
-									if var23 ~= nil then
-										table.insert(t, var23)
+									if Value2 ~= nil then
+										table.insert(List, Value2)
 									end
 								end
-								return t
+								return List
 							end
 						end
 					end

@@ -1,7 +1,7 @@
-﻿local inExperienceOffers = script:FindFirstAncestor("InExperienceOffers")
-local promiseModule = require(inExperienceOffers.Parent.Promise)
-local _ = require(inExperienceOffers.Types)
-local t = {
+﻿local InExperienceOffers = script:FindFirstAncestor("InExperienceOffers")
+local PromiseModule = require(InExperienceOffers.Parent.Promise)
+local _ = require(InExperienceOffers.Types)
+local config = {
 	offers = {
 		{
 			offerId = "mock-welcome-offer",
@@ -90,7 +90,7 @@ local t = {
 	}
 }
 
-return function(_)
-	-- upvalues: promiseModule (ref), t (ref)
-	return promiseModule.resolve(t)
+return function(_) --[[ Line: 140 | Named "getAllUserOffersMock" ]]
+	-- upvalues: PromiseModule (copy), config (copy)
+	return PromiseModule.resolve(config)
 end

@@ -1,97 +1,92 @@
-﻿local whatsNew = script:FindFirstAncestor("WhatsNew")
-local parent = whatsNew.Parent
-local enumsModule = require(whatsNew.Enums)
-local _ = require(whatsNew.Types)
-local localization = require(parent.InExperienceLocales).Localization
+﻿local WhatsNew = script:FindFirstAncestor("WhatsNew")
+local EnumsModule = require(WhatsNew.Enums)
+local _ = require(WhatsNew.Types)
+local Localization = require(WhatsNew.Parent.InExperienceLocales).Localization
 local _ = require(script.Parent.ScopeActions)
-local validateRegistryModule = require(script.Parent.validateRegistry)
-local buildTourTipsModule = require(script.Parent.buildTourTips)
-local localizationService = game:GetService("LocalizationService")
+local ValidateRegistryModule = require(script.Parent.validateRegistry)
+local BuildTourTipsModule = require(script.Parent.buildTourTips)
+local LocalizationService = game:GetService("LocalizationService")
 
-local function makeRootTourKey(p1, p2)
-	return `{p1}:{p2}`
-end
-
-local function collectScreenScopeIds(p1)
-	local t = {}
+local function collectScreenScopeIds(ScopeTours) --[[ Line: 26 ]]
+	local List = {}
 	
-	for i, v in p1 do
-		if v.parentScopeId == nil then
-			table.insert(t, i)
+	for i, scopeTour in ScopeTours do
+		if scopeTour.parentScopeId == nil then
+			table.insert(List, i)
 		end
 	end
-	table.sort(t)
+	table.sort(List)
 	
-	return t
+	return List
 end
 
-local function _(p2, p3)
-	-- upvalues: enumsModule (ref)
-	return if p3 == enumsModule.TourType.WhatsNew then p2.whatsNew else p2.onboarding
+local function _(p1, WhatsNew) --[[ Line: 37 | Named "getRegistryEntries" ]]
+	-- upvalues: EnumsModule (copy)
+	return if WhatsNew == EnumsModule.TourType.WhatsNew then p1.whatsNew else p1.onboarding
 end
 
-local function assertValidationPassed(p2, p3)
-	-- upvalues: validateRegistryModule (ref)
-	local var1 = validateRegistryModule(p2, { scopeActions = if p3 then p3.scopeActions else nil })
-	assert(#var1.errors == 0, `loadWhatsNewRegistry validation failed: {table.concat(var1.errors, "; ")}`)
+local function assertValidationPassed(p1, p2) --[[ Line: 44 ]]
+	-- upvalues: ValidateRegistryModule (copy)
+	local ValidateRegistryModuleResult = ValidateRegistryModule(p1, { scopeActions = if p2 then p2.scopeActions else nil })
+	assert(#ValidateRegistryModuleResult.errors == 0, `loadWhatsNewRegistry validation failed: {table.concat(ValidateRegistryModuleResult.errors, "; ")}`)
 end
 
-local _ = function(p2, p3)
-	return if p3 == nil or p3 == "" then p3 else p2:Format(p3)
+local _ = function(p1, p2) --[[ Line: 51 | Named "localizeOptional" ]]
+	return if p2 == nil or p2 == "" then p2 else p1:Format(p2)
 end
 
-local function localizeRegistry(p2)
-	-- upvalues: localization (ref), localizationService (ref)
-	local var1 = localization.new(localizationService.RobloxLocaleId)
-	local t = {}
+local function localizeRegistry(UpdatesModule) --[[ Line: 58 ]]
+	-- upvalues: Localization (copy), LocalizationService (copy)
+	local NewLocalization = Localization.new(LocalizationService.RobloxLocaleId)
+	local ScopeTours = {}
 	
-	for i, v in p2.scopeTours do
-		local cloned = table.clone(v)
-		local onboardingTitle = v.onboardingTitle
-		cloned.onboardingTitle = if onboardingTitle == nil or onboardingTitle == "" then onboardingTitle else var1:Format(onboardingTitle)
-		onboardingTitle = v.onboardingText
-		cloned.onboardingText = if onboardingTitle == nil or onboardingTitle == "" then onboardingTitle else var1:Format(onboardingTitle)
-		onboardingTitle = v.updatesTitle
-		cloned.updatesTitle = if onboardingTitle == nil or onboardingTitle == "" then onboardingTitle else var1:Format(onboardingTitle)
-		onboardingTitle = v.updatesText
-		cloned.updatesText = if onboardingTitle == nil or onboardingTitle == "" then onboardingTitle else var1:Format(onboardingTitle)
-		t[i] = cloned
+	for i, scopeTour in UpdatesModule.scopeTours do
+		local Copy = table.clone(scopeTour)
+		local OnboardingTitle = scopeTour.onboardingTitle
+		Copy.onboardingTitle = if OnboardingTitle == nil or OnboardingTitle == "" then OnboardingTitle else NewLocalization:Format(OnboardingTitle)
+		local OnboardingText = scopeTour.onboardingText
+		Copy.onboardingText = if OnboardingText == nil or OnboardingText == "" then OnboardingText else NewLocalization:Format(OnboardingText)
+		local UpdatesTitle = scopeTour.updatesTitle
+		Copy.updatesTitle = if UpdatesTitle == nil or UpdatesTitle == "" then UpdatesTitle else NewLocalization:Format(UpdatesTitle)
+		local UpdatesText = scopeTour.updatesText
+		Copy.updatesText = if UpdatesText == nil or UpdatesText == "" then UpdatesText else NewLocalization:Format(UpdatesText)
+		ScopeTours[i] = Copy
 	end
-	local function localizeEntries(p3)
-		-- upvalues: var1 (ref)
+	local function localizeEntries(Onboarding) --[[ Line: 71 ]]
+		-- upvalues: NewLocalization (copy)
 		local t = {}
 		
-		for i, v in p3 do
-			local cloned = table.clone(v)
-			cloned.title = var1:Format(v.title)
-			cloned.text = var1:Format(v.text)
-			t[i] = cloned
+		for i, value in Onboarding do
+			local Copy = table.clone(value)
+			Copy.title = NewLocalization:Format(value.title)
+			Copy.text = NewLocalization:Format(value.text)
+			t[i] = Copy
 		end
 		return t
 	end
 	
 	return {
-		constants = p2.constants,
-		scopeTours = t,
-		whatsNew = localizeEntries(p2.whatsNew),
-		onboarding = localizeEntries(p2.onboarding)
+		constants = UpdatesModule.constants,
+		scopeTours = ScopeTours,
+		whatsNew = localizeEntries(UpdatesModule.whatsNew),
+		onboarding = localizeEntries(UpdatesModule.onboarding)
 	}
 end
 
-local function loadWhatsNewRegistry(p3, p4, p5)
-	-- upvalues: assertValidationPassed (ref), collectScreenScopeIds (ref), enumsModule (ref), buildTourTipsModule (ref)
-	assertValidationPassed(p3, p5 or {})
+local function loadWhatsNewRegistry(p1, p2, p3) --[[ Line: 90 ]]
+	-- upvalues: assertValidationPassed (copy), collectScreenScopeIds (copy), EnumsModule (copy), BuildTourTipsModule (copy)
+	assertValidationPassed(p1, p3 or {})
 	local t = {}
 	
-	for i, v in collectScreenScopeIds(p3.scopeTours) do
-		for i_1, v_1 in enumsModule.TourTypeList do
-			local var2 = buildTourTipsModule(p3, p4, v, v_1, if v_1 == enumsModule.TourType.WhatsNew then p3.whatsNew else p3.onboarding, nil)
-			t[`{v}:{v_1}`] = {
-				screenScopeId = v,
-				tourType = v_1,
-				scopeTree = var2.scope,
-				globalTotalSteps = var2.globalTotalSteps,
-				truncated = var2.truncated
+	for _, ScreenScopeId in collectScreenScopeIds(p1.scopeTours) do
+		for _, TourType in EnumsModule.TourTypeList do
+			local TourTipsModule = BuildTourTipsModule(p1, p2, ScreenScopeId, TourType, if TourType == EnumsModule.TourType.WhatsNew then p1.whatsNew else p1.onboarding, nil)
+			t[`{ScreenScopeId}:{TourType}`] = {
+				screenScopeId = ScreenScopeId,
+				tourType = TourType,
+				scopeTree = TourTipsModule.scope,
+				globalTotalSteps = TourTipsModule.globalTotalSteps,
+				truncated = TourTipsModule.truncated
 			}
 		end
 	end
@@ -100,9 +95,11 @@ end
 
 return {
 	loadWhatsNewRegistry = loadWhatsNewRegistry,
-	loadBundledRegistry = function(p6, p7)
-		-- upvalues: loadWhatsNewRegistry (ref), localizeRegistry (ref)
-		return loadWhatsNewRegistry(localizeRegistry(require(script.Parent.Updates)), p6, p7)
+	loadBundledRegistry = function(p4, p5) --[[ Line: 118 ]]
+		-- upvalues: loadWhatsNewRegistry (copy), localizeRegistry (copy)
+		return (loadWhatsNewRegistry(localizeRegistry((require(script.Parent.Updates))), p4, p5))
 	end,
-	makeRootTourKey = makeRootTourKey
+	makeRootTourKey = function(p4, p5): string --[[ Line: 22 ]]
+		return `{p4}:{p5}`
+	end
 }

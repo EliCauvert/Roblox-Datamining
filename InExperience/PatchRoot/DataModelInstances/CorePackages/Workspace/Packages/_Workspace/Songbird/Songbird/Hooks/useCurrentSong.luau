@@ -1,98 +1,103 @@
-﻿local songbird = script:FindFirstAncestor("Songbird")
-local assetFavoritesModule = require(songbird.Parent.AssetFavorites)
-local cryoModule = require(songbird.Parent.Cryo)
-local reactModule = require(songbird.Parent.React)
-local reactSceneUnderstandingModule = require(songbird.Parent.ReactSceneUnderstanding)
-local useAudioMetadataModule = require(songbird.Hooks.useAudioMetadata)
-local getAssetIdForAudioSourceModule = require(songbird.Common.getAssetIdForAudioSource)
-local _ = require(songbird.types)
-local loggerModule = require(songbird.logger)
-local analyticActionsModule = require(songbird.Analytics.AnalyticActions)
-local sendChromeWindowAnalyticsModule = require(songbird.Analytics.sendChromeWindowAnalytics)
-local useMemo = reactModule.useMemo
-local useAudibleSounds = reactSceneUnderstandingModule.useAudibleSounds
-local useAssetFavoriting = assetFavoritesModule.useAssetFavoriting
+﻿local Songbird = script:FindFirstAncestor("Songbird")
+local CryoModule = require(Songbird.Parent.Cryo)
+local UseAudioMetadataModule = require(Songbird.Hooks.useAudioMetadata)
+local GetAssetIdForAudioSourceModule = require(Songbird.Common.getAssetIdForAudioSource)
+local _ = require(Songbird.types)
+local LoggerModule = require(Songbird.logger)
+local AnalyticActionsModule = require(Songbird.Analytics.AnalyticActions)
+local SendChromeWindowAnalyticsModule = require(Songbird.Analytics.sendChromeWindowAnalytics)
+local UseMemoFunction = require(Songbird.Parent.React).useMemo
+local UseAudibleSoundsFunction = require(Songbird.Parent.ReactSceneUnderstanding).useAudibleSounds
+local UseAssetFavoritingFunction = require(Songbird.Parent.AssetFavorites).useAssetFavoriting
 
-return function()
-	-- upvalues: useAudibleSounds (ref), useMemo (ref), cryoModule (ref), getAssetIdForAudioSourceModule (ref), useAudioMetadataModule (ref), useAssetFavoriting (ref), loggerModule (ref), sendChromeWindowAnalyticsModule (ref), analyticActionsModule (ref)
-	local var1 = useAudibleSounds()
-	local var2 = useMemo(function()
-		-- upvalues: cryoModule (copy), var1 (ref), getAssetIdForAudioSourceModule (copy)
-		return cryoModule.List.filter(var1, function(p1)
-			-- upvalues: getAssetIdForAudioSourceModule (copy)
-			return getAssetIdForAudioSourceModule(p1) ~= nil
+return function() --[[ Line: 21 | Named "useCurrentSong" ]]
+	-- upvalues: UseAudibleSoundsFunction (copy), UseMemoFunction (copy), CryoModule (copy), GetAssetIdForAudioSourceModule (copy), UseAudioMetadataModule (copy), UseAssetFavoritingFunction (copy), LoggerModule (copy), SendChromeWindowAnalyticsModule (copy), AnalyticActionsModule (copy)
+	local UseAudibleSoundsResult = UseAudibleSoundsFunction()
+	local UseMemoResult = UseMemoFunction(function() --[[ Line: 30 ]]
+		-- upvalues: CryoModule (upval), UseAudibleSoundsResult (copy), GetAssetIdForAudioSourceModule (upval)
+		return CryoModule.List.filter(UseAudibleSoundsResult, function(p1): boolean --[[ Line: 31 ]]
+			-- upvalues: GetAssetIdForAudioSourceModule (upval)
+			return GetAssetIdForAudioSourceModule(p1) ~= nil
 		end)
-	end, { var1 })
-	local var3 = useMemo(function()
-		-- upvalues: cryoModule (copy), var2 (ref), getAssetIdForAudioSourceModule (copy)
-		return cryoModule.List.map(var2, function(p1)
-			-- upvalues: getAssetIdForAudioSourceModule (copy)
-			return getAssetIdForAudioSourceModule(p1)
+	end, { UseAudibleSoundsResult })
+	local UseMemoResult1 = UseMemoFunction(function() --[[ Line: 36 ]]
+		-- upvalues: CryoModule (upval), UseMemoResult (copy), GetAssetIdForAudioSourceModule (upval)
+		return CryoModule.List.map(UseMemoResult, function(p1) --[[ Line: 37 ]]
+			-- upvalues: GetAssetIdForAudioSourceModule (upval)
+			return GetAssetIdForAudioSourceModule(p1)
 		end)
-	end, { var2 })
-	local var4 = useAudioMetadataModule(var3)
-	local var5 = useAssetFavoriting(var3)
+	end, { UseMemoResult })
+	local UseAudioMetadataModuleResult = UseAudioMetadataModule(UseMemoResult1)
+	local UseAssetFavoritingResult = UseAssetFavoritingFunction(UseMemoResult1)
 	
-	return useMemo(function()
-		-- upvalues: loggerModule (copy), var2 (ref), getAssetIdForAudioSourceModule (copy), var4 (ref), var5 (ref), sendChromeWindowAnalyticsModule (copy), analyticActionsModule (copy)
-		local byAssetId
-		loggerModule:info(`determining currently playing song from {#var2} audio sources...`)
+	return (UseMemoFunction(function() --[[ Line: 47 ]]
+		-- upvalues: LoggerModule (upval), UseMemoResult (copy), GetAssetIdForAudioSourceModule (upval), UseAudioMetadataModuleResult (copy), UseAssetFavoritingResult (copy), SendChromeWindowAnalyticsModule (upval), AnalyticActionsModule (upval)
+		LoggerModule:info(`determining currently playing song from {#UseMemoResult} audio sources...`)
+		local AssetIdForAudioSourceModule = nil
+		local ByAssetId = nil
+		local MeetsCriteria = nil
 		
-		for i, v in var2 do
-			local var6 = getAssetIdForAudioSourceModule(v)
+		for _, Sound in UseMemoResult do
+			AssetIdForAudioSourceModule = GetAssetIdForAudioSourceModule(Sound)
 			
-			if var6 then
-				byAssetId = var4.getByAssetId(var6)
-				local var7 = true
-				loggerModule:info(`processing audio source: {v} (AssetId: {var6}, Path: {v:GetFullName()})`)
+			if AssetIdForAudioSourceModule then
+				ByAssetId = UseAudioMetadataModuleResult.getByAssetId(AssetIdForAudioSourceModule)
+				MeetsCriteria = true
+				LoggerModule:info(`processing audio source: {Sound} (AssetId: {AssetIdForAudioSourceModule}, Path: {Sound:GetFullName()})`)
 				
-				if not byAssetId then
-					loggerModule:warning("no metadata found. skipping...")
-				elseif byAssetId.AudioType then
-					if byAssetId.AudioType ~= Enum.AudioSubType.Music then
-						loggerModule:debug(`{byAssetId.Title} is not classified as music. instead classified as: {byAssetId.AudioType.Name}. skipping...`)
-						continue
-					end
-					loggerModule:debug(`{byAssetId.Title} is classified as music. checking if it meets criteria...`)
+				if not ByAssetId then
+					LoggerModule:warning("no metadata found. skipping...")
+				elseif not ByAssetId.AudioType then
+					LoggerModule:debug(`{ByAssetId.Title} has no AudioSubType classification. skipping...`)
+				elseif ByAssetId.AudioType == Enum.AudioSubType.Music then
+					LoggerModule:debug(`{ByAssetId.Title} is classified as music. checking if it meets criteria...`)
 					
-					if not byAssetId.RecordingCode or byAssetId.RecordingCode == "" then
-						loggerModule:debug(`{byAssetId.Title} does not meet criteria (no recording code found)`)
-						var7 = false
+					if not ByAssetId.RecordingCode or ByAssetId.RecordingCode == "" then
+						LoggerModule:debug(`{ByAssetId.Title} does not meet criteria (no recording code found)`)
+						MeetsCriteria = false
 					end
-					if var7 then
-						loggerModule:info(`{byAssetId.Title} meets criteria`)
+					if MeetsCriteria then
+						LoggerModule:info(`{ByAssetId.Title} meets criteria`)
 					end
 					return {
-						sound = v,
-						metadata = byAssetId,
-						meetsCriteria = var7,
-						isFavorited = var5.getByAssetId(var6),
-						toggleFavorite = function()
-							-- upvalues: var5 (copy), var6 (ref), sendChromeWindowAnalyticsModule (copy), analyticActionsModule (copy), loggerModule (copy)
-							return var5.toggleFavorite(var6):andThen(function(p1)
-								-- upvalues: sendChromeWindowAnalyticsModule (copy), var6 (copy), analyticActionsModule (copy)
-								if p1 then
-									sendChromeWindowAnalyticsModule({ assetId = var6, action = analyticActionsModule.Like })
+						sound = Sound,
+						metadata = ByAssetId,
+						meetsCriteria = MeetsCriteria,
+						isFavorited = UseAssetFavoritingResult.getByAssetId(AssetIdForAudioSourceModule),
+						toggleFavorite = function() --[[ Line: 93 ]]
+							-- upvalues: UseAssetFavoritingResult (upval), AssetIdForAudioSourceModule (copy), SendChromeWindowAnalyticsModule (upval), AnalyticActionsModule (upval), LoggerModule (upval)
+							return UseAssetFavoritingResult.toggleFavorite(AssetIdForAudioSourceModule):andThen(function(Result) --[[ Line: 96 ]]
+								-- upvalues: SendChromeWindowAnalyticsModule (upval), AssetIdForAudioSourceModule (upval), AnalyticActionsModule (upval)
+								if Result then
+									SendChromeWindowAnalyticsModule({
+										assetId = AssetIdForAudioSourceModule,
+										action = AnalyticActionsModule.Like
+									})
 									
 									return
+								else
+									SendChromeWindowAnalyticsModule({
+										assetId = AssetIdForAudioSourceModule,
+										action = AnalyticActionsModule.Unlike
+									})
 								end
-								sendChromeWindowAnalyticsModule({ assetId = var6, action = analyticActionsModule.Unlike })
-							end):catch(function(p1)
-								-- upvalues: loggerModule (copy)
-								loggerModule:warning(p1)
+							end):catch(function(Err) --[[ Line: 103 ]]
+								-- upvalues: LoggerModule (upval)
+								LoggerModule:warning(Err)
 							end)
 						end
 					}
 				else
-					loggerModule:debug(`{byAssetId.Title} has no AudioSubType classification. skipping...`)
+					LoggerModule:debug(`{ByAssetId.Title} is not classified as music. instead classified as: {ByAssetId.AudioType.Name}. skipping...`)
+					continue
 				end
 			end
 		end
 		return nil
 	end, {
-		var4.getByAssetId,
-		var2,
-		var5.getByAssetId,
-		var5.toggleFavorite
-	})
+		UseAudioMetadataModuleResult.getByAssetId,
+		UseMemoResult,
+		UseAssetFavoritingResult.getByAssetId,
+		UseAssetFavoritingResult.toggleFavorite
+	}))
 end

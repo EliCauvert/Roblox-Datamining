@@ -1,15 +1,18 @@
-﻿local parent = script:FindFirstAncestor("SquadsCore").Parent
-local cryoModule = require(parent.Cryo)
-local _ = require(parent.RoduxSquads)
+﻿local Parent = script:FindFirstAncestor("SquadsCore").Parent
+local CryoModule = require(Parent.Cryo)
+local _ = require(Parent.RoduxSquads)
 
-return function(p1, p2)
-	-- upvalues: cryoModule (ref)
+return function(p1, UserId) --[[ Line: 18 | Named "getSquadMemberFromUserId" ]]
+	-- upvalues: CryoModule (copy)
 	if p1 and p1.members then
-		local var1 = cryoModule.List.findWhere(p1.members, function(p3)
-			-- upvalues: p2 (ref)
-			return p3.userId == p2
+		local Where = CryoModule.List.findWhere(p1.members, function(p2): boolean --[[ Line: 20 ]]
+			-- upvalues: UserId (copy)
+			return p2.userId == UserId
 		end)
 		
-		return if var1 then p1.members[var1] else nil
+		if Where then
+			return p1.members[Where]
+		end
 	end
+	return nil
 end

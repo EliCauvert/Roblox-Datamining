@@ -1,112 +1,113 @@
-﻿local telemetryService = game:GetService("TelemetryService")
-local unifiedLogging = script:FindFirstAncestor("UnifiedLogging")
-local parent = unifiedLogging.Parent
-local cryoModule = require(parent.Cryo)
-local getPlatformTarget = require(parent.Analytics).getPlatformTarget
-local tModule = require(parent.t)
-local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventErrorLogger
-local contentTypeModule = require(unifiedLogging.ContentType)
-local fFlagLuaAppLoosenCollectionIdTypeInterface = require(parent.SharedFlags).FFlagLuaAppLoosenCollectionIdTypeInterface
-local fFlagProfilePlatformEnableImpressions = require(parent.SharedFlags).FFlagProfilePlatformEnableImpressions
-local fFlagItemImpressionsAddGameMetadata = require(parent.SharedFlags).FFlagItemImpressionsAddGameMetadata
-local fFlagEnableTopSongsSort = require(parent.SharedFlags).FFlagEnableTopSongsSort
-local fFlagLuaAppMigrateItemEventsTelemetryService = require(parent.SharedFlags).FFlagLuaAppMigrateItemEventsTelemetryService
-local fFlagLuaAppItemEventsTelemetryServiceShadowTraffic = require(parent.SharedFlags).FFlagLuaAppItemEventsTelemetryServiceShadowTraffic
-local var1 = if fFlagLuaAppMigrateItemEventsTelemetryService then {
+﻿local TelemetryService = game:GetService("TelemetryService")
+local UnifiedLogging = script:FindFirstAncestor("UnifiedLogging")
+local Parent = UnifiedLogging.Parent
+local CryoModule = require(Parent.Cryo)
+local GetPlatformTargetFunction = require(Parent.Analytics).getPlatformTarget
+local TModule = require(Parent.t)
+local DiscoveryEventErrorLogger = require(Parent.DiscoveryUtils).DiscoveryEventErrorLogger
+local ContentTypeModule = require(UnifiedLogging.ContentType)
+local FFlagLuaAppLoosenCollectionIdTypeInterface = require(Parent.SharedFlags).FFlagLuaAppLoosenCollectionIdTypeInterface
+local FFlagProfilePlatformEnableImpressions = require(Parent.SharedFlags).FFlagProfilePlatformEnableImpressions
+local FFlagItemImpressionsAddGameMetadata = require(Parent.SharedFlags).FFlagItemImpressionsAddGameMetadata
+local FFlagEnableTopSongsSort = require(Parent.SharedFlags).FFlagEnableTopSongsSort
+local FFlagLuaAppMigrateItemEventsTelemetryService = require(Parent.SharedFlags).FFlagLuaAppMigrateItemEventsTelemetryService
+local FFlagLuaAppItemEventsTelemetryServiceShadowTraffic = require(Parent.SharedFlags).FFlagLuaAppItemEventsTelemetryServiceShadowTraffic
+local LuaAppItemImpressionsEventThrottlingHundredthsPercent = game:DefineFastInt("LuaAppItemImpressionsEventThrottlingHundredthsPercent", 10000)
+local LuaAppItemImpressionsShadowThrottlingHundredthsPercent = game:DefineFastInt("LuaAppItemImpressionsShadowThrottlingHundredthsPercent", 10000)
+local Config = if FFlagLuaAppMigrateItemEventsTelemetryService then {
 	eventName = "itemImpressions",
 	description = "Fires when items become visible to the user, primarily through SDUI",
 	backends = { "EventIngest" },
-	throttlingPercentage = game:DefineFastInt("LuaAppItemImpressionsEventThrottlingHundredthsPercent", 10000),
+	throttlingPercentage = LuaAppItemImpressionsEventThrottlingHundredthsPercent,
 	lastUpdated = { 26, 2, 4 }
 } else nil
-local var2 = if fFlagLuaAppItemEventsTelemetryServiceShadowTraffic then {
+local Config1 = if FFlagLuaAppItemEventsTelemetryServiceShadowTraffic then {
 	eventName = "itemImpressionsShadow",
 	description = "Shadow traffic for itemImpressions event recovery percentage",
 	backends = { "EventIngest" },
-	throttlingPercentage = game:DefineFastInt("LuaAppItemImpressionsShadowThrottlingHundredthsPercent", 10000),
+	throttlingPercentage = LuaAppItemImpressionsShadowThrottlingHundredthsPercent,
 	lastUpdated = { 26, 3, 4 }
 } else nil
-local var3 = nil
-local _ = nil
-local _ = nil
-local var4 = tModule.union(tModule.interface({
-	collectionId = if fFlagLuaAppLoosenCollectionIdTypeInterface then tModule.union(tModule.string, tModule.number) else tModule.number,
-	collectionIdStr = tModule.optional(tModule.string)
-}), tModule.interface({
-	collectionId = tModule.optional(if fFlagLuaAppLoosenCollectionIdTypeInterface then tModule.union(tModule.string, tModule.number) else tModule.number),
-	collectionIdStr = tModule.string
+local IntersectionResult = nil
+local IntersectionResult1 = nil
+local UnionResult = TModule.union(TModule.interface({
+	collectionId = if FFlagLuaAppLoosenCollectionIdTypeInterface then TModule.union(TModule.string, TModule.number) else TModule.number,
+	collectionIdStr = TModule.optional(TModule.string)
+}), TModule.interface({
+	collectionId = TModule.optional(if FFlagLuaAppLoosenCollectionIdTypeInterface then TModule.union(TModule.string, TModule.number) else TModule.number),
+	collectionIdStr = TModule.string
 }))
-local t = {
-	collectionPosition = tModule.number,
-	totalNumberOfItems = tModule.number,
-	contentType = tModule.string,
-	itemIds = tModule.string,
-	itemPositions = tModule.string,
-	rowNumbers = tModule.optional(tModule.string),
-	feedRowNumbers = tModule.optional(tModule.string),
-	positionsInRow = tModule.optional(tModule.string),
-	positionsInTopic = tModule.optional(tModule.string)
+local config = {
+	collectionPosition = TModule.number,
+	totalNumberOfItems = TModule.number,
+	contentType = TModule.string,
+	itemIds = TModule.string,
+	itemPositions = TModule.string,
+	rowNumbers = TModule.optional(TModule.string),
+	feedRowNumbers = TModule.optional(TModule.string),
+	positionsInRow = TModule.optional(TModule.string),
+	positionsInTopic = TModule.optional(TModule.string)
 }
-local var5 = tModule.intersection(var4, tModule.interface(t))
-local var6 = tModule.intersection(var4, tModule.interface(cryoModule.Dictionary.join(t, {
-	sourceCarousel = tModule.string,
-	friendStatuses = tModule.string,
-	presences = tModule.string,
-	presenceUniverseIds = tModule.string
+IntersectionResult1 = TModule.intersection(UnionResult, TModule.interface(config))
+local IntersectionResult2 = TModule.intersection(UnionResult, TModule.interface(CryoModule.Dictionary.join(config, {
+	sourceCarousel = TModule.string,
+	friendStatuses = TModule.string,
+	presences = TModule.string,
+	presenceUniverseIds = TModule.string
 })))
 
-if fFlagItemImpressionsAddGameMetadata then
-	var3 = tModule.intersection(var4, tModule.interface(cryoModule.Dictionary.join(t, {
-		universeId_arr = tModule.string,
-		placeId_arr = tModule.string
+if FFlagItemImpressionsAddGameMetadata then
+	IntersectionResult = TModule.intersection(UnionResult, TModule.interface(CryoModule.Dictionary.join(config, {
+		universeId_arr = TModule.string,
+		placeId_arr = TModule.string
 	})))
 end
-var6 = {
-	[contentTypeModule.User] = var6,
-	[contentTypeModule.Game] = if fFlagItemImpressionsAddGameMetadata and fFlagProfilePlatformEnableImpressions then var3 elseif fFlagProfilePlatformEnableImpressions then var5 else nil,
-	[contentTypeModule.Song] = if fFlagEnableTopSongsSort then var5 else nil,
-	[contentTypeModule.Badge] = var5
+local config1 = {
+	[ContentTypeModule.User] = IntersectionResult2,
+	[ContentTypeModule.Game] = if FFlagItemImpressionsAddGameMetadata and FFlagProfilePlatformEnableImpressions then IntersectionResult elseif FFlagProfilePlatformEnableImpressions then IntersectionResult1 else nil,
+	[ContentTypeModule.Song] = if FFlagEnableTopSongsSort then IntersectionResult1 else nil,
+	[ContentTypeModule.Badge] = IntersectionResult1
 }
 
-return function(p1, p2, p3, p4)
-	-- upvalues: var6 (ref), var5 (write), discoveryEventErrorLogger (ref), fFlagLuaAppMigrateItemEventsTelemetryService (ref), telemetryService (ref), var1 (write), getPlatformTarget (ref), fFlagLuaAppItemEventsTelemetryServiceShadowTraffic (ref), var2 (write)
-	local var7 = var6[p3] or var5
+return function(p1, EventContext, p2, Tbl) --[[ Line: 117 ]]
+	-- upvalues: config1 (copy), IntersectionResult1 (ref), DiscoveryEventErrorLogger (copy), FFlagLuaAppMigrateItemEventsTelemetryService (copy), TelemetryService (copy), Config (ref), GetPlatformTargetFunction (copy), FFlagLuaAppItemEventsTelemetryServiceShadowTraffic (copy), Config1 (ref)
+	local Entry = config1[p2] or IntersectionResult1
 	
-	if var7 then
-		local var8, var9 = var7(p4)
+	if Entry then
+		local EntryResult, EntryResult2 = Entry(Tbl)
 		
-		if not var8 then
-			discoveryEventErrorLogger.reportError("ItemImpressionsEventInvalidInterface", var9)
+		if not EntryResult then
+			DiscoveryEventErrorLogger.reportError("ItemImpressionsEventInvalidInterface", EntryResult2)
 		end
 	end
-	if fFlagLuaAppMigrateItemEventsTelemetryService then
-		for i, v in p4 do
-			if type(v) == "boolean" then
-				p4[i] = if v == true then "true" elseif v == false then "false" else nil
+	if FFlagLuaAppMigrateItemEventsTelemetryService then
+		for i, value in Tbl do
+			if type(value) == "boolean" then
+				Tbl[i] = if value == true then "true" elseif value == false then "false" else nil
 			end
 		end
-		telemetryService:LogEvent(var1, {
-			eventContext = p2,
+		TelemetryService:LogEvent(Config, {
+			eventContext = EventContext,
 			standardizedFields = { "addSessionInfo", "addSessionId", "addOSInfo" },
-			customFields = p4,
-			legacyOverrideTargetForEventIngest = getPlatformTarget()
+			customFields = Tbl,
+			legacyOverrideTargetForEventIngest = GetPlatformTargetFunction()
 		})
 	else
-		p1:sendEventDeferred(p2, "itemImpressions", p4)
+		p1:sendEventDeferred(EventContext, "itemImpressions", Tbl)
 	end
-	if fFlagLuaAppItemEventsTelemetryServiceShadowTraffic then
-		local cloned = table.clone(p4)
+	if FFlagLuaAppItemEventsTelemetryServiceShadowTraffic then
+		local Copy = table.clone(Tbl)
 		
-		for i, v in cloned do
-			if type(v) == "boolean" then
-				cloned[i] = if v == true then "true" elseif v == false then "false" else nil
+		for i1, value1 in Copy do
+			if type(value1) == "boolean" then
+				Copy[i1] = if value1 == true then "true" elseif value1 == false then "false" else nil
 			end
 		end
-		telemetryService:LogEvent(var2, {
-			eventContext = p2,
+		TelemetryService:LogEvent(Config1, {
+			eventContext = EventContext,
 			standardizedFields = { "addSessionInfo", "addSessionId", "addOSInfo" },
-			customFields = cloned,
-			legacyOverrideTargetForEventIngest = getPlatformTarget()
+			customFields = Copy,
+			legacyOverrideTargetForEventIngest = GetPlatformTargetFunction()
 		})
 	end
 end

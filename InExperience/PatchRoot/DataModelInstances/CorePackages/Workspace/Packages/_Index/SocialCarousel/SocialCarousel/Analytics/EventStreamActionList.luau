@@ -1,139 +1,138 @@
-﻿local socialCarousel = script:FindFirstAncestor("SocialCarousel")
-local parent = socialCarousel.Parent
-local socialLuaAnalyticsModule = require(parent.SocialLuaAnalytics)
-local sharedFlagsModule = require(parent.SharedFlags)
-local formatRecommendationContextType = socialLuaAnalyticsModule.Analytics.Formatters.formatRecommendationContextType
-local enums = socialLuaAnalyticsModule.Analytics.Enums
-local contexts = enums.Contexts
-local eventTypes = enums.EventTypes
-local eventNamesModule = require(script.Parent.EventNames)
-local constantsModule = require(socialCarousel.Common.Constants)
-local fIntSocialCarouselShowRecsLimit = require(socialCarousel.Flags).FIntSocialCarouselShowRecsLimit
-local fFlagSocialCarouselShareQREnabled = sharedFlagsModule.FFlagSocialCarouselShareQREnabled
-local fFlagLuaAppUserSeenCollectionUnifiedFields = sharedFlagsModule.FFlagLuaAppUserSeenCollectionUnifiedFields
+﻿local SocialCarousel = script:FindFirstAncestor("SocialCarousel")
+local Parent = SocialCarousel.Parent
+local SocialLuaAnalyticsModule = require(Parent.SocialLuaAnalytics)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FormatRecommendationContextType = SocialLuaAnalyticsModule.Analytics.Formatters.formatRecommendationContextType
+local Enums = SocialLuaAnalyticsModule.Analytics.Enums
+local Contexts = Enums.Contexts
+local EventTypes = Enums.EventTypes
+local EventNamesModule = require(script.Parent.EventNames)
+local ConstantsModule = require(SocialCarousel.Common.Constants)
+local FIntSocialCarouselShowRecsLimit = require(SocialCarousel.Flags).FIntSocialCarouselShowRecsLimit
+local FFlagLuaAppUserSeenCollectionUnifiedFields = SharedFlagsModule.FFlagLuaAppUserSeenCollectionUnifiedFields
 
-local var1 = function(p1)
+local function Source(p1) --[[ Line: 17 ]]
 	return p1
 end
 
 return {
-	[eventNamesModule.UserPressed] = {
-		context = contexts.HomePage,
-		eventType = eventTypes.ButtonClick,
+	[EventNamesModule.UserPressed] = {
+		context = Contexts.HomePage,
+		eventType = EventTypes.ButtonClick,
 		additionalInfo = {
-			btn = constantsModule.ANALYTICS.BTN_VALUES.OPEN_PEOPLE_LIST,
-			contentType = constantsModule.ANALYTICS.CONTENT_TYPE,
-			actionType = constantsModule.ANALYTICS.ACTION_TYPES.OPEN_PROFILE
+			btn = ConstantsModule.ANALYTICS.BTN_VALUES.OPEN_PEOPLE_LIST,
+			contentType = ConstantsModule.ANALYTICS.CONTENT_TYPE,
+			actionType = ConstantsModule.ANALYTICS.ACTION_TYPES.OPEN_PROFILE
 		},
 		formatRulesForAdditionalInfo = {
-			absolutePosition = var1,
-			positionInRow = var1,
-			recommendationContextType = formatRecommendationContextType,
-			friendId = var1,
-			friendStatus = var1,
-			isRecommendation = var1,
-			recommendationRank = var1,
-			universeId = var1,
-			presence = var1,
-			source = var1,
-			interactionUuid = var1
+			absolutePosition = Source,
+			positionInRow = Source,
+			recommendationContextType = FormatRecommendationContextType,
+			friendId = Source,
+			friendStatus = Source,
+			isRecommendation = Source,
+			recommendationRank = Source,
+			universeId = Source,
+			presence = Source,
+			source = Source,
+			interactionUuid = Source
 		}
 	},
-	[eventNamesModule.UserSeen] = {
-		context = contexts.HomePage,
-		eventType = eventTypes.UserSeen,
+	[EventNamesModule.UserSeen] = {
+		context = Contexts.HomePage,
+		eventType = EventTypes.UserSeen,
 		formatRulesForAdditionalInfo = {
-			userId = var1,
-			presence = var1,
-			absolutePosition = var1,
-			recommendationRank = var1,
-			friendStatus = var1,
-			recommendationContextType = formatRecommendationContextType,
-			isRecommendation = var1,
-			source = var1,
-			universeId = var1
+			userId = Source,
+			presence = Source,
+			absolutePosition = Source,
+			recommendationRank = Source,
+			friendStatus = Source,
+			recommendationContextType = FormatRecommendationContextType,
+			isRecommendation = Source,
+			source = Source,
+			universeId = Source
 		}
 	},
-	[eventNamesModule.ViewAddFriends] = {
-		context = contexts.AddFriends,
-		eventType = eventTypes.ButtonClick,
+	[EventNamesModule.ViewAddFriends] = {
+		context = Contexts.AddFriends,
+		eventType = EventTypes.ButtonClick,
 		additionalInfo = {
-			btn = constantsModule.ANALYTICS.BTN_VALUES.ADD_FRIENDS,
-			absolutePosition = var1,
-			positionInRow = var1,
-			contentType = constantsModule.ANALYTICS.CONTENT_TYPE,
-			actionType = constantsModule.ANALYTICS.ACTION_TYPES.OPEN_ADD_FRIENDS
+			btn = ConstantsModule.ANALYTICS.BTN_VALUES.ADD_FRIENDS,
+			absolutePosition = Source,
+			positionInRow = Source,
+			contentType = ConstantsModule.ANALYTICS.CONTENT_TYPE,
+			actionType = ConstantsModule.ANALYTICS.ACTION_TYPES.OPEN_ADD_FRIENDS
 		},
 		formatRulesForAdditionalInfo = {
-			friendCount = var1,
-			recommendationLimit = fIntSocialCarouselShowRecsLimit,
-			recommendationCount = var1,
-			requestCount = var1,
-			source = var1,
-			interactionUuid = var1
+			friendCount = Source,
+			recommendationLimit = FIntSocialCarouselShowRecsLimit,
+			recommendationCount = Source,
+			requestCount = Source,
+			source = Source,
+			interactionUuid = Source
 		}
 	},
-	[eventNamesModule.ViewAllFriends] = {
-		context = contexts.HomePage,
-		eventType = eventTypes.ButtonClick,
+	[EventNamesModule.ViewAllFriends] = {
+		context = Contexts.HomePage,
+		eventType = EventTypes.ButtonClick,
 		additionalInfo = {
-			btn = constantsModule.ANALYTICS.BTN_VALUES.VIEW_ALL_FRIENDS
+			btn = ConstantsModule.ANALYTICS.BTN_VALUES.VIEW_ALL_FRIENDS
 		},
 		formatRulesForAdditionalInfo = {
-			friendCount = var1,
-			recommendationLimit = fIntSocialCarouselShowRecsLimit,
-			recommendationCount = var1,
-			source = var1
+			friendCount = Source,
+			recommendationLimit = FIntSocialCarouselShowRecsLimit,
+			recommendationCount = Source,
+			source = Source
 		}
 	},
-	[eventNamesModule.FriendsCarouselUILoadingTime] = {
-		context = contexts.HomePage,
-		eventType = eventTypes.LoadingTime,
+	[EventNamesModule.FriendsCarouselUILoadingTime] = {
+		context = Contexts.HomePage,
+		eventType = EventTypes.LoadingTime,
 		formatRulesForAdditionalInfo = {
-			status = var1,
-			fetch = var1,
-			loadingTime = var1,
-			loadingThreshold = var1,
-			nextPage = var1,
-			source = var1
+			status = Source,
+			fetch = Source,
+			loadingTime = Source,
+			loadingThreshold = Source,
+			nextPage = Source,
+			source = Source
 		},
 		additionalInfo = {}
 	},
-	[eventNamesModule.StartSquadPressed] = {
-		context = contexts.HomePage,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = { btn = constantsModule.ANALYTICS.BTN_VALUES.START_SQUAD },
-		formatRulesForAdditionalInfo = { absolutePosition = var1, source = var1 }
+	[EventNamesModule.StartSquadPressed] = {
+		context = Contexts.HomePage,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = { btn = ConstantsModule.ANALYTICS.BTN_VALUES.START_SQUAD },
+		formatRulesForAdditionalInfo = { absolutePosition = Source, source = Source }
 	},
-	[eventNamesModule.ShareQRPressed] = if fFlagSocialCarouselShareQREnabled then {
-		context = contexts.HomePage,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = { btn = constantsModule.ANALYTICS.BTN_VALUES.SHARE_QR },
-		formatRulesForAdditionalInfo = { absolutePosition = var1, source = var1 }
+	[EventNamesModule.ShareQRPressed] = if SharedFlagsModule.FFlagSocialCarouselShareQREnabled then {
+		context = Contexts.HomePage,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = { btn = ConstantsModule.ANALYTICS.BTN_VALUES.SHARE_QR },
+		formatRulesForAdditionalInfo = { absolutePosition = Source, source = Source }
 	} else nil,
-	[eventNamesModule.TilesSeenCollection] = {
-		context = contexts.HomePage,
-		eventType = eventTypes.UserSeenCollection,
+	[EventNamesModule.TilesSeenCollection] = {
+		context = Contexts.HomePage,
+		eventType = EventTypes.UserSeenCollection,
 		formatRulesForAdditionalInfo = {
-			userId = var1,
-			absolutePosition = var1,
-			presence = var1,
-			recommendationRank = var1,
-			friendStatus = var1,
-			recommendationContextType = var1,
-			isRecommendation = var1,
-			universeId = var1,
-			tileCount = var1,
-			source = var1,
-			sessionEventCount = var1,
-			contentType = if fFlagLuaAppUserSeenCollectionUnifiedFields then var1 else nil,
-			interactionUuid = if fFlagLuaAppUserSeenCollectionUnifiedFields then var1 else nil,
-			collectionId = if fFlagLuaAppUserSeenCollectionUnifiedFields then var1 else nil,
-			collectionPosition = if fFlagLuaAppUserSeenCollectionUnifiedFields then var1 else nil,
-			positionsInRow = if fFlagLuaAppUserSeenCollectionUnifiedFields then var1 else nil,
-			rowNumbers = if fFlagLuaAppUserSeenCollectionUnifiedFields then var1 else nil,
-			feedRowNumbers = if fFlagLuaAppUserSeenCollectionUnifiedFields then var1 else nil,
-			totalNumberOfItems = if fFlagLuaAppUserSeenCollectionUnifiedFields then var1 else nil
+			userId = Source,
+			absolutePosition = Source,
+			presence = Source,
+			recommendationRank = Source,
+			friendStatus = Source,
+			recommendationContextType = Source,
+			isRecommendation = Source,
+			universeId = Source,
+			tileCount = Source,
+			source = Source,
+			sessionEventCount = Source,
+			contentType = if FFlagLuaAppUserSeenCollectionUnifiedFields then Source else nil,
+			interactionUuid = if FFlagLuaAppUserSeenCollectionUnifiedFields then Source else nil,
+			collectionId = if FFlagLuaAppUserSeenCollectionUnifiedFields then Source else nil,
+			collectionPosition = if FFlagLuaAppUserSeenCollectionUnifiedFields then Source else nil,
+			positionsInRow = if FFlagLuaAppUserSeenCollectionUnifiedFields then Source else nil,
+			rowNumbers = if FFlagLuaAppUserSeenCollectionUnifiedFields then Source else nil,
+			feedRowNumbers = if FFlagLuaAppUserSeenCollectionUnifiedFields then Source else nil,
+			totalNumberOfItems = if FFlagLuaAppUserSeenCollectionUnifiedFields then Source else nil
 		}
 	}
 }

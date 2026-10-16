@@ -1,65 +1,63 @@
-﻿local parent = script.Parent.Parent
-local reactModule = require(parent.React)
-local useEventConnection = require(parent.ReactUtils).useEventConnection
-local fFlagExpChatTextChannelWindowFontOverrideModule = require(script.Parent.Flags.FFlagExpChatTextChannelWindowFontOverride)
+﻿local Parent = script.Parent.Parent
+local ReactModule = require(Parent.React)
+local UseEventConnectionFunction = require(Parent.ReactUtils).useEventConnection
+local FFlagExpChatTextChannelWindowFontOverrideModule = require(script.Parent.Flags.FFlagExpChatTextChannelWindowFontOverride)
 
-local function _(p1)
-	local target = p1.Target
+local function _(Mouse) --[[ Line: 23 | Named "resolveTarget" ]]
+	local Target = Mouse.Target
 	
-	return if target and target:IsA("TextChannel") then target else nil
+	return if Target and Target:IsA("TextChannel") then Target else nil
 end
 
-local _ = function(p1)
-	-- upvalues: fFlagExpChatTextChannelWindowFontOverrideModule (ref)
-	return if fFlagExpChatTextChannelWindowFontOverrideModule then if p1.UseDefaultFont then nil else p1.FontFace else nil
+local _ = function(Label) --[[ Line: 33 | Named "resolveFontOverride" ]]
+	-- upvalues: FFlagExpChatTextChannelWindowFontOverrideModule (copy)
+	return if FFlagExpChatTextChannelWindowFontOverrideModule then if Label.UseDefaultFont then nil else Label.FontFace else nil
 end
 
-return function(value)
-	-- upvalues: reactModule (ref), useEventConnection (ref), fFlagExpChatTextChannelWindowFontOverrideModule (ref)
-	local var1, var2 = reactModule.useState(function()
-		-- upvalues: value (ref)
-		local target = value.Target
+return function(Label) --[[ Line: 43 | Named "useTextChannelWindowProps" ]]
+	-- upvalues: ReactModule (copy), UseEventConnectionFunction (copy), FFlagExpChatTextChannelWindowFontOverrideModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function() --[[ Line: 44 ]]
+		-- upvalues: Label (copy)
+		local Target = Label.Target
 		
-		return if target and target:IsA("TextChannel") then target else nil
+		return if Target and Target:IsA("TextChannel") then Target else nil
 	end)
-	local var3, var4 = reactModule.useState(function()
-		-- upvalues: value (ref)
-		return value.BackgroundColor3
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(function() --[[ Line: 48 ]]
+		-- upvalues: Label (copy)
+		return Label.BackgroundColor3
 	end)
-	local var5 = reactModule.useRef(var1)
-	useEventConnection(value:GetPropertyChangedSignal("Target"), function()
-		-- upvalues: value (ref), var5 (ref), var2 (ref)
-		local target = value.Target
-		local var6 = if target and target:IsA("TextChannel") then target else nil
-		var5.current = var6
-		var2(var6)
-	end, { value })
-	useEventConnection(value:GetPropertyChangedSignal("BackgroundColor3"), function()
-		-- upvalues: var4 (ref), value (ref)
-		var4(value.BackgroundColor3)
-	end, { value })
-	local var6 = nil
+	local UseRefResult = ReactModule.useRef(UseStateResult)
+	UseEventConnectionFunction(Label:GetPropertyChangedSignal("Target"), function() --[[ Line: 54 ]]
+		-- upvalues: Label (copy), UseRefResult (copy), UseStateResult2 (copy)
+		local Target = Label.Target
+		local Target1 = if Target and Target:IsA("TextChannel") then Target else nil
+		UseRefResult.current = Target1
+		UseStateResult2(Target1)
+	end, { Label })
+	UseEventConnectionFunction(Label:GetPropertyChangedSignal("BackgroundColor3"), function() --[[ Line: 61 ]]
+		-- upvalues: UseStateResult2_1 (copy), Label (copy)
+		UseStateResult2_1(Label.BackgroundColor3)
+	end, { Label })
+	local FontOverride = nil
 	
-	if fFlagExpChatTextChannelWindowFontOverrideModule then
-		local _ = nil
-		local var7, var8 = reactModule.useState(function()
-			-- upvalues: value (ref), fFlagExpChatTextChannelWindowFontOverrideModule (copy)
-			return if fFlagExpChatTextChannelWindowFontOverrideModule then if value.UseDefaultFont then nil else value.FontFace else nil
+	if FFlagExpChatTextChannelWindowFontOverrideModule then
+		local UseStateResult2_2 = nil
+		FontOverride, UseStateResult2_2 = ReactModule.useState(function() --[[ Line: 69 ]]
+			-- upvalues: Label (copy), FFlagExpChatTextChannelWindowFontOverrideModule (upval)
+			return if FFlagExpChatTextChannelWindowFontOverrideModule then if Label.UseDefaultFont then nil else Label.FontFace else nil
 		end)
-		var6 = var7
-		local var9 = var8
-		useEventConnection(value:GetPropertyChangedSignal("FontFace"), function()
-			-- upvalues: var9 (write), value (ref), fFlagExpChatTextChannelWindowFontOverrideModule (copy)
-			var9(if not fFlagExpChatTextChannelWindowFontOverrideModule then nil elseif value.UseDefaultFont then nil else value.FontFace)
-		end, { value })
-		useEventConnection(value:GetPropertyChangedSignal("UseDefaultFont"), function()
-			-- upvalues: var9 (write), value (ref), fFlagExpChatTextChannelWindowFontOverrideModule (copy)
-			var9(if not fFlagExpChatTextChannelWindowFontOverrideModule then nil elseif value.UseDefaultFont then nil else value.FontFace)
-		end, { value })
+		UseEventConnectionFunction(Label:GetPropertyChangedSignal("FontFace"), function() --[[ Line: 74 ]]
+			-- upvalues: UseStateResult2_2 (ref), Label (copy), FFlagExpChatTextChannelWindowFontOverrideModule (upval)
+			UseStateResult2_2(if FFlagExpChatTextChannelWindowFontOverrideModule then if Label.UseDefaultFont then nil else Label.FontFace else nil)
+		end, { Label })
+		UseEventConnectionFunction(Label:GetPropertyChangedSignal("UseDefaultFont"), function() --[[ Line: 79 ]]
+			-- upvalues: UseStateResult2_2 (ref), Label (copy), FFlagExpChatTextChannelWindowFontOverrideModule (upval)
+			UseStateResult2_2(if FFlagExpChatTextChannelWindowFontOverrideModule then if Label.UseDefaultFont then nil else Label.FontFace else nil)
+		end, { Label })
 	end
 	return {
-		target = var1,
-		backgroundColor = var3,
-		fontOverride = var6
+		target = UseStateResult,
+		backgroundColor = UseStateResult1,
+		fontOverride = FontOverride
 	}
 end

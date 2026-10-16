@@ -1,260 +1,260 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
+﻿local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
 local _ = game:GetService("ScriptContext")
-local profilerUtilModule = require(script.Parent.ProfilerUtil)
-local dropDownModule = require(script.Parent.Parent.Parent.Components.DropDown)
-local setScriptProfilerStateModule = require(script.Parent.Parent.Parent.Actions.SetScriptProfilerState)
-local constantsModule = require(script.Parent.Parent.Parent.Constants)
-local var1 = constantsModule.GeneralFormatting.MainRowPadding * 2
-local smallFrameHeight = constantsModule.UtilityBarFormatting.SmallFrameHeight
-local mainWindowHeader = constantsModule.Font.MainWindowHeader
-local mainWindow = constantsModule.Font.MainWindow
-local buttonTextSize = constantsModule.MicroProfilerFormatting.ButtonTextSize
-local text = constantsModule.Color.Text
-local _ = constantsModule.Color.UnselectedGray
-local unselectedGray = constantsModule.Color.UnselectedGray
-local selectedBlue = constantsModule.Color.SelectedBlue
-local unselectedGray_1 = constantsModule.Color.UnselectedGray
-local buttonWidth = constantsModule.MicroProfilerFormatting.ButtonWidth
-local dropDownArrowHeight = constantsModule.GeneralFormatting.DropDownArrowHeight
-local var2 = dropDownArrowHeight / 2
-local downArrow = constantsModule.Image.DownArrow
-local scriptProfilerShowPlugins2 = game:DefineFastFlag("ScriptProfilerShowPlugins2", false)
+local ProfilerUtilModule = require(script.Parent.ProfilerUtil)
+local DropDownModule = require(script.Parent.Parent.Parent.Components.DropDown)
+local SetScriptProfilerStateModule = require(script.Parent.Parent.Parent.Actions.SetScriptProfilerState)
+local ConstantsModule = require(script.Parent.Parent.Parent.Constants)
+local ScaledMainRowPadding = ConstantsModule.GeneralFormatting.MainRowPadding * 2
+local SmallFrameHeight = ConstantsModule.UtilityBarFormatting.SmallFrameHeight
+local MainWindowHeader = ConstantsModule.Font.MainWindowHeader
+local MainWindow = ConstantsModule.Font.MainWindow
+local ButtonTextSize = ConstantsModule.MicroProfilerFormatting.ButtonTextSize
+local Text = ConstantsModule.Color.Text
+local _ = ConstantsModule.Color.UnselectedGray
+local UnselectedGray = ConstantsModule.Color.UnselectedGray
+local SelectedBlue = ConstantsModule.Color.SelectedBlue
+local UnselectedGray1 = ConstantsModule.Color.UnselectedGray
+local ButtonWidth = ConstantsModule.MicroProfilerFormatting.ButtonWidth
+local DropDownArrowHeight: number = ConstantsModule.GeneralFormatting.DropDownArrowHeight
+local DropDownArrowHeightRatio = DropDownArrowHeight / 2
+local DownArrow = ConstantsModule.Image.DownArrow
+local ScriptProfilerShowPlugins2 = game:DefineFastFlag("ScriptProfilerShowPlugins2", false)
 
-local function _(p1, p2)
-	local list = table.create(#p1)
+local function _(List, Callback) --[[ Line: 43 | Named "makeFormattedStringTable" ]]
+	local Buffer = table.create(#List)
 	
-	for i, v in p1 do
-		table.insert(list, p2(v))
+	for _, value in List do
+		table.insert(Buffer, Callback(value))
 	end
-	return list
+	return Buffer
 end
 
-local function formatTimeSelection(p3)
-	-- upvalues: profilerUtilModule (ref)
-	return if p3 == 0 then "Off" else profilerUtilModule.formatTimer(p3)
+local function formatTimeSelection(p1) --[[ Line: 53 ]]
+	-- upvalues: ProfilerUtilModule (copy)
+	return if p1 == 0 then "Off" else ProfilerUtilModule.formatTimer(p1)
 end
 
-local list = { "Callgraph", "Functions" }
-local list_1 = {
+local DropDownList = { "Callgraph", "Functions" }
+local List = {
 	0,
 	1,
 	60,
 	300,
 	600
 }
-local list_2 = table.create(#list_1)
+local Buffer = table.create(#List)
 
-for i, v in list_1 do
-	table.insert(list_2, formatTimeSelection(v))
+for _, value in List do
+	table.insert(Buffer, formatTimeSelection(value))
 end
-local list_3 = { 1000, 10000 }
-local formatFrequency = profilerUtilModule.formatFrequency
-local list_4 = table.create(#list_3)
+local List1 = { 1000, 10000 }
+local FormatFrequencyFunction = ProfilerUtilModule.formatFrequency
+local Buffer1 = table.create(#List1)
 
-for i_1, v_1 in list_3 do
-	table.insert(list_4, formatFrequency(v_1))
+for _, value1 in List1 do
+	table.insert(Buffer1, FormatFrequencyFunction(value1))
 end
-local list_5 = { 0, 60, 300, 600 }
-local list_6 = table.create(#list_5)
+local List2 = { 0, 60, 300, 600 }
+local Buffer2 = table.create(#List2)
 
-for i_2, v_2 in list_5 do
-	table.insert(list_6, formatTimeSelection(v_2))
+for _, value2 in List2 do
+	table.insert(Buffer2, formatTimeSelection(value2))
 end
-local mobileSettingsView = roactModule.PureComponent:extend("MobileSettingsView")
+local MobileSettingsView = RoactModule.PureComponent:extend("MobileSettingsView")
 
-function mobileSettingsView.init(_) end
+function MobileSettingsView:init() --[[ Line: 74 ]] end
 
-function mobileSettingsView.didMount(_) end
+function MobileSettingsView:didMount() --[[ Line: 76 ]] end
 
-function mobileSettingsView.didUpdate(_) end
+function MobileSettingsView:didUpdate() --[[ Line: 78 ]] end
 
-function mobileSettingsView.GetState(p3, p4)
-	return (if p3.props.isClientView then p3.props.client else p3.props.server)[p4]
-end
-
-function mobileSettingsView.UpdateState(p3, p4, p5)
-	local cloned = table.clone(if p3.props.isClientView then p3.props.client else p3.props.server)
-	cloned[p4] = p5
-	p3.props.dispatchSetScriptProfilerState(p3.props.isClientView, cloned)
+function MobileSettingsView.GetState(p1, p2) --[[ Line: 80 ]]
+	return (if p1.props.isClientView then p1.props.client else p1.props.server)[p2]
 end
 
-function mobileSettingsView.renderToggle(_, p3, p4, p5)
-	-- upvalues: roactModule (ref), smallFrameHeight (ref), buttonWidth (ref), mainWindowHeader (ref), buttonTextSize (ref), constantsModule (ref), unselectedGray_1 (ref), unselectedGray (ref), selectedBlue (ref)
-	return roactModule.createElement("Frame", {
+function MobileSettingsView.UpdateState(p1, Key, State) --[[ Line: 86 ]]
+	local Copy = table.clone(if p1.props.isClientView then p1.props.client else p1.props.server)
+	Copy[Key] = State
+	p1.props.dispatchSetScriptProfilerState(p1.props.isClientView, Copy)
+end
+
+function MobileSettingsView:renderToggle(Text, State, Callback) --[[ Line: 95 ]]
+	-- upvalues: RoactModule (copy), SmallFrameHeight (copy), ButtonWidth (copy), MainWindowHeader (copy), ButtonTextSize (copy), ConstantsModule (copy), UnselectedGray1 (copy), UnselectedGray (copy), SelectedBlue (copy)
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		LayoutOrder = 2,
-		Size = UDim2.new(1, 0, 0, smallFrameHeight)
+		Size = UDim2.new(1, 0, 0, SmallFrameHeight)
 	}, {
-		Label = roactModule.createElement("TextLabel", {
+		Label = RoactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
-			Size = UDim2.new(0, buttonWidth, 0, smallFrameHeight),
+			Size = UDim2.new(0, ButtonWidth, 0, SmallFrameHeight),
 			Position = UDim2.new(0.1, 0, 0, 0),
-			Text = p3,
-			Font = mainWindowHeader,
-			TextSize = buttonTextSize,
-			TextColor3 = constantsModule.Color.Text,
+			Text = Text,
+			Font = MainWindowHeader,
+			TextSize = ButtonTextSize,
+			TextColor3 = ConstantsModule.Color.Text,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Center,
-			BackgroundColor3 = unselectedGray_1
+			BackgroundColor3 = UnselectedGray1
 		}),
-		ToggleButton = roactModule.createElement("TextLabel", {
+		ToggleButton = RoactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
-			Size = UDim2.new(0, buttonWidth * 2, 0, smallFrameHeight),
-			Position = UDim2.new(0.9, -buttonWidth * 2, 0, 0)
+			Size = UDim2.new(0, ButtonWidth * 2, 0, SmallFrameHeight),
+			Position = UDim2.new(0.9, -ButtonWidth * 2, 0, 0)
 		}, {
-			OffButton = roactModule.createElement("TextButton", {
+			OffButton = RoactModule.createElement("TextButton", {
 				Size = UDim2.new(0.5, 0, 1, 0),
 				Text = "Off",
-				Font = mainWindowHeader,
-				TextSize = buttonTextSize,
-				TextColor3 = constantsModule.Color.Text,
+				Font = MainWindowHeader,
+				TextSize = ButtonTextSize,
+				TextColor3 = ConstantsModule.Color.Text,
 				TextXAlignment = Enum.TextXAlignment.Center,
 				TextYAlignment = Enum.TextYAlignment.Center,
-				BackgroundColor3 = if p4 then unselectedGray else selectedBlue,
-				[roactModule.Event.Activated] = function()
-					-- upvalues: p5 (ref)
-					p5(false)
+				BackgroundColor3 = State and UnselectedGray or SelectedBlue,
+				[RoactModule.Event.Activated] = function() --[[ Line: 129 ]]
+					-- upvalues: Callback (copy)
+					Callback(false)
 				end
 			}),
-			OnButton = roactModule.createElement("TextButton", {
+			OnButton = RoactModule.createElement("TextButton", {
 				Size = UDim2.new(0.5, 0, 1, 0),
 				Position = UDim2.new(0.5, 0, 0, 0),
 				Text = "On",
-				Font = mainWindowHeader,
-				TextSize = buttonTextSize,
-				TextColor3 = constantsModule.Color.Text,
+				Font = MainWindowHeader,
+				TextSize = ButtonTextSize,
+				TextColor3 = ConstantsModule.Color.Text,
 				TextXAlignment = Enum.TextXAlignment.Center,
 				TextYAlignment = Enum.TextYAlignment.Center,
-				BackgroundColor3 = if p4 then selectedBlue else unselectedGray,
-				[roactModule.Event.Activated] = function()
-					-- upvalues: p5 (ref)
-					p5(true)
+				BackgroundColor3 = State and SelectedBlue or UnselectedGray,
+				[RoactModule.Event.Activated] = function() --[[ Line: 145 ]]
+					-- upvalues: Callback (copy)
+					Callback(true)
 				end
 			})
 		})
 	})
 end
 
-function mobileSettingsView.renderStateToggle(p3, p4, p5, _)
-	return p3:renderToggle(p4, p3:GetState(p5), function(p6)
-		-- upvalues: p3 (ref), p5 (ref)
-		p3:UpdateState(p5, p6)
+function MobileSettingsView.renderStateToggle(Humanoid: Humanoid, p1, p2, _) --[[ Line: 153 ]]
+	return Humanoid:renderToggle(p1, Humanoid:GetState(p2), function(p3) --[[ Line: 156 ]]
+		-- upvalues: Humanoid (copy), p2 (copy)
+		Humanoid:UpdateState(p2, p3)
 	end)
 end
 
-function mobileSettingsView.renderDropDown(p3, p4, p5, p6, p7, p8, p9)
-	-- upvalues: roactModule (ref), buttonWidth (ref), smallFrameHeight (ref), buttonTextSize (ref), text (ref), mainWindow (ref), constantsModule (ref), downArrow (ref), dropDownArrowHeight (ref), var2 (ref), dropDownModule (ref), mainWindowHeader (ref), unselectedGray_1 (ref)
-	return roactModule.createElement("Frame", {
+function MobileSettingsView.renderDropDown(Humanoid: Humanoid, Text1, p1, DropDownList, p2, FoundIndex, IsProfilingState) --[[ Line: 161 ]]
+	-- upvalues: RoactModule (copy), ButtonWidth (copy), SmallFrameHeight (copy), ButtonTextSize (copy), Text (copy), MainWindow (copy), ConstantsModule (copy), DownArrow (copy), DropDownArrowHeight (copy), DropDownArrowHeightRatio (copy), DropDownModule (copy), MainWindowHeader (copy), UnselectedGray1 (copy)
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Size = UDim2.new(1, 0, 0, smallFrameHeight)
+		Size = UDim2.new(1, 0, 0, SmallFrameHeight)
 	}, {
-		Label = roactModule.createElement("TextLabel", {
+		Label = RoactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
-			Size = UDim2.new(0, buttonWidth, 0, smallFrameHeight),
+			Size = UDim2.new(0, ButtonWidth, 0, SmallFrameHeight),
 			Position = UDim2.new(0.1, 0, 0, 0),
-			Text = p4,
-			Font = mainWindowHeader,
-			TextSize = buttonTextSize,
-			TextColor3 = constantsModule.Color.Text,
+			Text = Text1,
+			Font = MainWindowHeader,
+			TextSize = ButtonTextSize,
+			TextColor3 = ConstantsModule.Color.Text,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Center,
-			BackgroundColor3 = unselectedGray_1
+			BackgroundColor3 = UnselectedGray1
 		}),
-		DropDown = if p9 then roactModule.createElement("TextButton", {
+		DropDown = if IsProfilingState then RoactModule.createElement("TextButton", {
 			AutoButtonColor = true,
 			BackgroundTransparency = 0,
-			Position = UDim2.new(0.9, -buttonWidth, 0, 0),
-			Size = UDim2.new(0, buttonWidth, 0, smallFrameHeight),
-			Text = p6[p8],
-			TextSize = buttonTextSize,
-			TextColor3 = text,
-			Font = mainWindow,
-			BackgroundColor3 = constantsModule.Color.InactiveBox
+			Position = UDim2.new(0.9, -ButtonWidth, 0, 0),
+			Size = UDim2.new(0, ButtonWidth, 0, SmallFrameHeight),
+			Text = DropDownList[FoundIndex],
+			TextSize = ButtonTextSize,
+			TextColor3 = Text,
+			Font = MainWindow,
+			BackgroundColor3 = ConstantsModule.Color.InactiveBox
 		}, {
-			arrow = roactModule.createElement("ImageLabel", {
+			arrow = RoactModule.createElement("ImageLabel", {
 				BackgroundTransparency = 1,
-				Image = downArrow,
-				Size = UDim2.new(0, dropDownArrowHeight, 0, dropDownArrowHeight),
-				Position = UDim2.new(1, (-dropDownArrowHeight) - var2, 0.5, -var2)
+				Image = DownArrow,
+				Size = UDim2.new(0, DropDownArrowHeight, 0, DropDownArrowHeight),
+				Position = UDim2.new(1, -DropDownArrowHeight - DropDownArrowHeightRatio, 0.5, -DropDownArrowHeightRatio)
 			})
-		}) else roactModule.createElement("Frame", {
-			Position = UDim2.new(0.9, -buttonWidth, 0, 0),
-			Size = UDim2.new(0, buttonWidth, 0, smallFrameHeight)
+		}) else RoactModule.createElement("Frame", {
+			Position = UDim2.new(0.9, -ButtonWidth, 0, 0),
+			Size = UDim2.new(0, ButtonWidth, 0, SmallFrameHeight)
 		}, {
-			Selection = roactModule.createElement(dropDownModule, {
-				buttonSize = UDim2.new(1, 0, 0, smallFrameHeight),
-				dropDownList = p6,
-				selectedIndex = p8,
-				onSelection = function(p10)
-					-- upvalues: p3 (ref), p5 (ref), p7 (ref)
-					local var3 = p3:GetState(p5)
+			Selection = RoactModule.createElement(DropDownModule, {
+				buttonSize = UDim2.new(1, 0, 0, SmallFrameHeight),
+				dropDownList = DropDownList,
+				selectedIndex = FoundIndex,
+				onSelection = function(p3) --[[ Line: 193 ]]
+					-- upvalues: Humanoid (copy), p1 (copy), p2 (copy)
+					local State = Humanoid:GetState(p1)
 					
-					if typeof(var3) == "boolean" then
-						var3 = p10 == 2
-						var3 = nil
-					elseif typeof(var3) == "number" then
-						var3 = p7[p10]
+					if typeof(State) == "boolean" then
+						State = p3 == 2
+					elseif typeof(State) == "number" then
+						State = p2[p3]
 					end
-					p3:UpdateState(p5, var3)
+					Humanoid:UpdateState(p1, State)
 				end
 			})
 		})
 	})
 end
 
-function mobileSettingsView.render(p3)
-	-- upvalues: roactModule (ref), constantsModule (ref), var1 (ref), scriptProfilerShowPlugins2 (ref), list_2 (ref), list_1 (ref), list_4 (ref), list_3 (ref), profilerUtilModule (ref), list_6 (ref), list_5 (ref), list (ref)
-	local isProfilingState = p3:GetState("isProfiling")
+function MobileSettingsView.render(Humanoid: Humanoid) --[[ Line: 229 ]]
+	-- upvalues: RoactModule (copy), ConstantsModule (copy), ScaledMainRowPadding (copy), ScriptProfilerShowPlugins2 (copy), Buffer (copy), List (copy), Buffer1 (copy), List1 (copy), ProfilerUtilModule (copy), Buffer2 (copy), List2 (copy), DropDownList (copy)
+	local IsProfilingState = Humanoid:GetState("isProfiling")
 	
-	return roactModule.createElement("ScrollingFrame", {
+	return RoactModule.createElement("ScrollingFrame", {
 		BackgroundTransparency = 1,
 		LayoutOrder = 2,
-		Size = p3.props.size,
-		BackgroundColor3 = constantsModule.Color.BaseGray,
+		Size = Humanoid.props.size,
+		BackgroundColor3 = ConstantsModule.Color.BaseGray,
 		AutomaticCanvasSize = Enum.AutomaticSize.Y
 	}, {
-		UIListLayout = roactModule.createElement("UIListLayout", {
-			Padding = UDim.new(0, var1),
+		UIListLayout = RoactModule.createElement("UIListLayout", {
+			Padding = UDim.new(0, ScaledMainRowPadding),
 			SortOrder = Enum.SortOrder.LayoutOrder
 		}),
-		Percentages = p3:renderToggle("Percentages", p3.props.usePercentages, function(p4)
-			-- upvalues: p3 (ref)
-			p3.props.dispatchSetScriptProfilerUsePercentages(p4)
+		Percentages = Humanoid:renderToggle("Percentages", Humanoid.props.usePercentages, function(p1) --[[ Line: 245 ]]
+			-- upvalues: Humanoid (copy)
+			Humanoid.props.dispatchSetScriptProfilerUsePercentages(p1)
 		end),
-		LiveToggle = p3:renderStateToggle("Live Update", "liveUpdate"),
-		PluginsToggle = if not scriptProfilerShowPlugins2 then nil else p3:renderStateToggle("Show Plugins", "showPlugins"),
-		GCToggle = p3:renderStateToggle("GC Overhead", "showGc"),
-		AverageDropDown = p3:renderDropDown("Average", "average", list_2, list_1, table.find(list_1, p3:GetState("average")) or 1),
-		FrequencyDropDown = p3:renderDropDown("Frequency", "frequency", list_4, list_3, table.find(list_3, p3:GetState("frequency")) or 1, isProfilingState),
-		TimerDropDown = p3:renderDropDown("Timer" .. (if isProfilingState then ": " .. profilerUtilModule.formatTimer(p3:GetState("timedProfilingCountdown")) else ""), "timedProfilingDuration", list_6, list_5, table.find(list_5, p3:GetState("timedProfilingDuration")) or 1, isProfilingState),
-		ViewDropDown = p3:renderDropDown("View", "isFunctionsView", list, nil, if p3:GetState("isFunctionsView") then 2 else 1)
+		LiveToggle = Humanoid:renderStateToggle("Live Update", "liveUpdate"),
+		PluginsToggle = if ScriptProfilerShowPlugins2 then Humanoid:renderStateToggle("Show Plugins", "showPlugins") else nil,
+		GCToggle = Humanoid:renderStateToggle("GC Overhead", "showGc"),
+		AverageDropDown = Humanoid:renderDropDown("Average", "average", Buffer, List, table.find(List, Humanoid:GetState("average")) or 1),
+		FrequencyDropDown = Humanoid:renderDropDown("Frequency", "frequency", Buffer1, List1, table.find(List1, Humanoid:GetState("frequency")) or 1, IsProfilingState),
+		TimerDropDown = Humanoid:renderDropDown("Timer" .. (if IsProfilingState then ": " .. ProfilerUtilModule.formatTimer(Humanoid:GetState("timedProfilingCountdown")) else ""), "timedProfilingDuration", Buffer2, List2, table.find(List2, Humanoid:GetState("timedProfilingDuration")) or 1, IsProfilingState),
+		ViewDropDown = Humanoid:renderDropDown("View", "isFunctionsView", DropDownList, nil, if Humanoid:GetState("isFunctionsView") then 2 else 1)
 	})
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p3, _)
+return RoactRoduxModule.UNSTABLE_connect2(function(p1, _) --[[ Line: 296 | Named "mapStateToProps" ]]
 	return {
-		usePercentages = p3.ScriptProfiler.usePercentages,
-		isClientView = p3.ScriptProfiler.isClientView,
-		client = p3.ScriptProfiler.client,
-		server = p3.ScriptProfiler.server
+		usePercentages = p1.ScriptProfiler.usePercentages,
+		isClientView = p1.ScriptProfiler.isClientView,
+		client = p1.ScriptProfiler.client,
+		server = p1.ScriptProfiler.server
 	}
-end, function(p3)
-	-- upvalues: setScriptProfilerStateModule (ref)
+end, function(Callback) --[[ Line: 305 | Named "mapDispatchToProps" ]]
+	-- upvalues: SetScriptProfilerStateModule (copy)
 	return {
-		dispatchSetScriptProfilerState = function(value, p4)
-			-- upvalues: p3 (ref), setScriptProfilerStateModule (copy)
-			if value then
-				p3(setScriptProfilerStateModule(value, nil, p4, nil))
+		dispatchSetScriptProfilerState = function(p1, p2) --[[ Line: 307 ]]
+			-- upvalues: Callback (copy), SetScriptProfilerStateModule (upval)
+			if p1 then
+				Callback(SetScriptProfilerStateModule(p1, nil, p2, nil))
 				
 				return
+			else
+				Callback(SetScriptProfilerStateModule(p1, nil, nil, p2))
 			end
-			p3(setScriptProfilerStateModule(value, nil, nil, p4))
 		end,
-		dispatchSetScriptProfilerUsePercentages = function(value)
-			-- upvalues: p3 (ref), setScriptProfilerStateModule (copy)
-			p3(setScriptProfilerStateModule(nil, value))
+		dispatchSetScriptProfilerUsePercentages = function(p1) --[[ Line: 315 ]]
+			-- upvalues: Callback (copy), SetScriptProfilerStateModule (upval)
+			Callback(SetScriptProfilerStateModule(nil, p1))
 		end
 	}
-end)(mobileSettingsView)
+end)(MobileSettingsView)

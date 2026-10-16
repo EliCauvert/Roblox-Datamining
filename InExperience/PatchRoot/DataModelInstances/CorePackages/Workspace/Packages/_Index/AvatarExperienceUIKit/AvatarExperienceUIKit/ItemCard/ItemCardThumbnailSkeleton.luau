@@ -1,38 +1,39 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceUIKit").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local radius = foundationModule.Enums.Radius
-local usePulseBinding = foundationModule.Hooks.usePulseBinding
-local useTokens = foundationModule.Hooks.useTokens
-local withCommonProps = foundationModule.Utility.withCommonProps
-local withDefaults = foundationModule.Utility.withDefaults
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceUIKit").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local Radius = FoundationModule.Enums.Radius
+local UsePulseBindingFunction = FoundationModule.Hooks.usePulseBinding
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local WithCommonPropsFunction = FoundationModule.Utility.withCommonProps
+local WithDefaultsFunction = FoundationModule.Utility.withDefaults
 
-local function _(startValue, endValue, alpha)
-	return (1 - alpha) * startValue + endValue * alpha
+local function _(p1, p2, p3: number) --[[ Line: 28 | Named "lerp" ]]
+	return (1 - p3) * p1 + p2 * p3
 end
 
-local t = {
+local config = {
 	testId = "--foundation-skeleton",
-	radius = radius.None,
+	radius = Radius.None,
 	Size = UDim2.fromScale(1, 1)
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaults (ref), t (ref), usePulseBinding (ref), useTokens (ref), radius (ref), reactModule (ref), view (ref), withCommonProps (ref)
-	local var1 = withDefaults(p1, t)
-	local var2 = useTokens()
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 43 | Named "ItemCardThumbnailSkeleton" ]]
+	-- upvalues: WithDefaultsFunction (copy), config (copy), UsePulseBindingFunction (copy), UseTokensFunction (copy), Radius (copy), ReactModule (copy), View (copy), WithCommonPropsFunction (copy)
+	local WithDefaultsResult = WithDefaultsFunction(p1, config)
+	local UsePulseBindingResult = UsePulseBindingFunction(2)
+	local UseTokensResult = UseTokensFunction()
 	
-	return reactModule.createElement(view, withCommonProps(var1, {
-		cornerRadius = if var1.radius ~= radius.None then nil else UDim.new(0, var2.Radius[var1.radius]),
-		backgroundStyle = usePulseBinding(2):map(function(p3)
-			-- upvalues: var2 (ref)
+	return ReactModule.createElement(View, WithCommonPropsFunction(WithDefaultsResult, {
+		cornerRadius = if WithDefaultsResult.radius == Radius.None then nil else UDim.new(0, UseTokensResult.Radius[WithDefaultsResult.radius]),
+		backgroundStyle = UsePulseBindingResult:map(function(p2: number) --[[ Line: 54 ]]
+			-- upvalues: UseTokensResult (copy)
 			return {
-				Color3 = var2.Color.Shift.Shift_300.Color3,
-				Transparency = (1 - p3) * var2.Color.Extended.White.White_10.Transparency + (var2.Color.Extended.White.White_10.Transparency - 0.1) * p3
+				Color3 = UseTokensResult.Color.Shift.Shift_300.Color3,
+				Transparency = (1 - p2) * UseTokensResult.Color.Extended.White.White_10.Transparency + (UseTokensResult.Color.Extended.White.White_10.Transparency - 0.1) * p2
 			}
 		end),
-		Size = var1.Size,
-		ref = p2
+		Size = WithDefaultsResult.Size,
+		ref = Ref
 	}))
 end))

@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.ScrollTelemetry.ScrollTelemetry)
+﻿return (require(script.Parent.Parent.Parent._Index.ScrollTelemetry.ScrollTelemetry))

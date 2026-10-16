@@ -8,7 +8,7 @@
 	GamepadThumbstickDeadzone = 0.2,
 	GamepadZoomAxisThreshold = 0.5,
 	GamepadOrbitActionName = "AvatarViewportGamepadOrbit",
-	DefaultLightDirection = Vector3.new(-0.5, 0.20000000298, 0.20000000298),
+	DefaultLightDirection = vector.create(-0.5, 0.20000000298023224, 0.20000000298023224),
 	DefaultOrbitBaseDistance = 2.8,
 	DefaultOrbitFieldOfViewDeg = 70,
 	DefaultFocusPartName = "Head",

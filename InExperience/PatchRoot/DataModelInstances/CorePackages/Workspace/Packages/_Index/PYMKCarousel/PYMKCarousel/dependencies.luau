@@ -1,63 +1,61 @@
 ﻿local PYMKCarousel = script:FindFirstAncestor("PYMKCarousel")
-local parent = PYMKCarousel.Parent
-local luaSocialLibrariesDepsModule = require(parent.LuaSocialLibrariesDeps)
-local socialLuaAnalyticsModule = require(parent.SocialLuaAnalytics)
-local lumberyakModule = require(parent.Lumberyak)
-local httpRequest = luaSocialLibrariesDepsModule.httpRequest
-local migratePymkCarouselHttpRequestToRequestInternal = game:DefineFastFlag("MigratePymkCarouselHttpRequestToRequestInternal", false)
-local challengeRequestWrapper = require(parent.GenericChallenges).Middleware.ChallengeRequestWrapper
-local enablePymkCarouselChallengeInterceptor = game:DefineFastFlag("EnablePymkCarouselChallengeInterceptor", false)
-local fFlagPymkCarouselPresenceStoreMigrationModule = require(PYMKCarousel.Flags.FFlagPymkCarouselPresenceStoreMigration)
-local var1 = lumberyakModule.Logger.new(nil, "PYMKCarousel"):new("PYMKCarousel Networking")
-local var2 = httpRequest.config({
-	requestFunction = function(p1, p2, p3)
-		-- upvalues: var1 (ref), migratePymkCarouselHttpRequestToRequestInternal (ref), httpRequest (ref)
-		var1:info("Fetching: {}", string.format("[ requestMethod = %q, url = %q ]", p2, p1))
+local Parent = PYMKCarousel.Parent
+local LuaSocialLibrariesDepsModule = require(Parent.LuaSocialLibrariesDeps)
+local SocialLuaAnalyticsModule = require(Parent.SocialLuaAnalytics)
+local HttpRequest = LuaSocialLibrariesDepsModule.httpRequest
+local MigratePymkCarouselHttpRequestToRequestInternal = game:DefineFastFlag("MigratePymkCarouselHttpRequestToRequestInternal", false)
+local ChallengeRequestWrapperFunction = require(Parent.GenericChallenges).Middleware.ChallengeRequestWrapper
+local FFlagPymkCarouselPresenceStoreMigrationModule = require(PYMKCarousel.Flags.FFlagPymkCarouselPresenceStoreMigration)
+local PYMKCarouselNetworking = require(Parent.Lumberyak).Logger.new(nil, "PYMKCarousel"):new("PYMKCarousel Networking")
+local ConfigResult = HttpRequest.config({
+	requestFunction = function(p1, p2, p3) --[[ Line: 20 ]]
+		-- upvalues: PYMKCarouselNetworking (copy), MigratePymkCarouselHttpRequestToRequestInternal (copy), HttpRequest (copy)
+		PYMKCarouselNetworking:info("Fetching: {}", string.format("[ requestMethod = %q, url = %q ]", p2, p1))
 		
-		return if migratePymkCarouselHttpRequestToRequestInternal then httpRequest.requestFunctions.RequestInternal(p1, p2, p3) else httpRequest.requestFunctions.HttpRbxApi(p1, p2, p3)
+		return if MigratePymkCarouselHttpRequestToRequestInternal then HttpRequest.requestFunctions.RequestInternal(p1, p2, p3) else HttpRequest.requestFunctions.HttpRbxApi(p1, p2, p3)
 	end,
-	postRequestFunction = function(p1, p2)
-		-- upvalues: var1 (ref)
-		var1:debug("Returned: {}", string.format("[ requestMethod = %q, url = %q, statusCode = %s, body = %s ]", p2.requestMethod, p2.url, p1.StatusCode, p1.Body))
+	postRequestFunction = function(p1, p2) --[[ Line: 27 ]]
+		-- upvalues: PYMKCarouselNetworking (copy)
+		PYMKCarouselNetworking:debug("Returned: {}", string.format("[ requestMethod = %q, url = %q, statusCode = %s, body = %s ]", p2.requestMethod, p2.url, p1.StatusCode, p1.Body))
 	end,
 	maxRetryCount = game:DefineFastInt("PYMKCarouselHttpRetryCount", 3)
 })
-local RODUX_KEY = require(PYMKCarousel.Common.Constants).RODUX_KEY
-local var3 = luaSocialLibrariesDepsModule.RoduxNetworking.config({
-	keyPath = RODUX_KEY .. ".NetworkStatus",
-	networkImpl = if enablePymkCarouselChallengeInterceptor then challengeRequestWrapper(var2) else var2
+local RODUXKEY = require(PYMKCarousel.Common.Constants).RODUX_KEY
+local ConfigResult1 = LuaSocialLibrariesDepsModule.RoduxNetworking.config({
+	keyPath = RODUXKEY .. ".NetworkStatus",
+	networkImpl = if game:DefineFastFlag("EnablePymkCarouselChallengeInterceptor", false) then ChallengeRequestWrapperFunction(ConfigResult) else ConfigResult
 })
 
 return {
-	SocialLuaAnalytics = socialLuaAnalyticsModule,
-	UIBlox = require(parent.UIBlox),
-	Roact = require(parent.Roact),
-	React = require(parent.React),
-	Rodux = require(parent.Rodux),
-	RoactRodux = require(parent.RoactRodux),
-	Result = require(parent.Result),
-	llama = luaSocialLibrariesDepsModule.llama,
-	Dash = require(parent.Dash),
-	RoduxNetworking = var3,
-	RoduxFriends = require(parent.FriendsRodux).config({ keyPath = RODUX_KEY .. ".Friends" }),
-	RoduxUsers = luaSocialLibrariesDepsModule.RoduxUsers.config({ keyPath = RODUX_KEY .. ".Users" }),
-	NetworkingFriendsEnums = require(parent.FriendsNetworking).Enums,
-	NetworkingFriends = require(parent.FriendsNetworking).config({ roduxNetworking = var3 }),
-	RoduxAnalytics = socialLuaAnalyticsModule.Analytics.RoduxAnalytics.config({ keyPath = RODUX_KEY .. ".Analytics" }),
+	SocialLuaAnalytics = SocialLuaAnalyticsModule,
+	UIBlox = require(Parent.UIBlox),
+	Roact = require(Parent.Roact),
+	React = require(Parent.React),
+	Rodux = require(Parent.Rodux),
+	RoactRodux = require(Parent.RoactRodux),
+	Result = require(Parent.Result),
+	llama = LuaSocialLibrariesDepsModule.llama,
+	Dash = require(Parent.Dash),
+	RoduxNetworking = ConfigResult1,
+	RoduxFriends = require(Parent.FriendsRodux).config({ keyPath = RODUXKEY .. ".Friends" }),
+	RoduxUsers = LuaSocialLibrariesDepsModule.RoduxUsers.config({ keyPath = RODUXKEY .. ".Users" }),
+	NetworkingFriendsEnums = require(Parent.FriendsNetworking).Enums,
+	NetworkingFriends = require(Parent.FriendsNetworking).config({ roduxNetworking = ConfigResult1 }),
+	RoduxAnalytics = SocialLuaAnalyticsModule.Analytics.RoduxAnalytics.config({ keyPath = RODUXKEY .. ".Analytics" }),
 	Players = game:GetService("Players"),
-	convertActions = require(parent.SocialReducerAdaptors).convertActions,
-	usersActionAdaptor = require(parent.SocialReducerAdaptors).usersActionAdaptor,
-	friendsActionAdaptor = require(parent.SocialReducerAdaptors).friendsActionAdaptor,
-	SocialCommon = require(parent.SocialCommon),
-	SocialLibraries = luaSocialLibrariesDepsModule.SocialLibraries.config({}),
+	convertActions = require(Parent.SocialReducerAdaptors).convertActions,
+	usersActionAdaptor = require(Parent.SocialReducerAdaptors).usersActionAdaptor,
+	friendsActionAdaptor = require(Parent.SocialReducerAdaptors).friendsActionAdaptor,
+	SocialCommon = require(Parent.SocialCommon),
+	SocialLibraries = LuaSocialLibrariesDepsModule.SocialLibraries.config({}),
 	Hooks = {
-		useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector,
-		useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch,
-		useLocalization = require(parent.Localization).Hooks.useLocalization,
-		dependencyArray = require(parent.RoactUtils).Hooks.dependencyArray
+		useSelector = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector,
+		useDispatch = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch,
+		useLocalization = require(Parent.Localization).Hooks.useLocalization,
+		dependencyArray = require(Parent.RoactUtils).Hooks.dependencyArray
 	},
-	LocalizationProvider = require(parent.Localization).LocalizationProvider,
-	enumerate = require(parent.enumerate),
-	getFFlagPYMKAddFriendsEntry = require(parent.SharedFlags).getFFlagPYMKAddFriendsEntry,
-	NetworkingPresence = if not fFlagPymkCarouselPresenceStoreMigrationModule then luaSocialLibrariesDepsModule.NetworkingPresence.config({ roduxNetworking = var3 }) else nil
+	LocalizationProvider = require(Parent.Localization).LocalizationProvider,
+	enumerate = require(Parent.enumerate),
+	getFFlagPYMKAddFriendsEntry = require(Parent.SharedFlags).getFFlagPYMKAddFriendsEntry,
+	NetworkingPresence = if FFlagPymkCarouselPresenceStoreMigrationModule then nil else LuaSocialLibrariesDepsModule.NetworkingPresence.config({ roduxNetworking = ConfigResult1 })
 }

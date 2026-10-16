@@ -1,3 +1,3 @@
-﻿return require(script:FindFirstAncestor("ExpChat").Parent.Rodux).makeActionCreator(script.Name, function(p1, p2)
-	return { endTimestamp = p1, isEnforced = p2 }
+﻿return require(script:FindFirstAncestor("ExpChat").Parent.Rodux).makeActionCreator(script.Name, function(EndTimestamp, IsEnforced) --[[ Line: 10 ]]
+	return { endTimestamp = EndTimestamp, isEnforced = IsEnforced }
 end)

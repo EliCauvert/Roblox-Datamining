@@ -1,90 +1,106 @@
-﻿local parent = script.Parent.Parent.Parent
-local firstPersonToggleEventModule = require(parent.Events.VR.FirstPersonToggleEvent)
-local hapticFeedbackEventModule = require(parent.Events.VR.HapticFeedbackEvent)
-local hapticFeedbackTwiceEventModule = require(parent.Events.VR.HapticFeedbackTwiceEvent)
-local soundFeedbackEventModule = require(parent.Events.VR.SoundFeedbackEvent)
-local jumpEventModule = require(parent.Events.VR.JumpEvent)
-local moveToGoalEventModule = require(parent.Events.VR.MoveToGoalEvent)
-local perspectiveTooltipEventModule = require(parent.Events.VR.PerspectiveTooltipEvent)
-local movementTooltipEventModule = require(parent.Events.VR.MovementTooltipEvent)
-local leaveGameIconHighlightEventModule = require(parent.Events.VR.LeaveGameIconHighlightEvent)
+﻿local Parent = script.Parent.Parent.Parent
+local FirstPersonToggleEventModule = require(Parent.Events.VR.FirstPersonToggleEvent)
+local HapticFeedbackEventModule = require(Parent.Events.VR.HapticFeedbackEvent)
+local HapticFeedbackTwiceEventModule = require(Parent.Events.VR.HapticFeedbackTwiceEvent)
+local SoundFeedbackEventModule = require(Parent.Events.VR.SoundFeedbackEvent)
+local JumpEventModule = require(Parent.Events.VR.JumpEvent)
+local MoveToGoalEventModule = require(Parent.Events.VR.MoveToGoalEvent)
+local PerspectiveTooltipEventModule = require(Parent.Events.VR.PerspectiveTooltipEvent)
+local MovementTooltipEventModule = require(Parent.Events.VR.MovementTooltipEvent)
+local LeaveGameIconHighlightEventModule = require(Parent.Events.VR.LeaveGameIconHighlightEvent)
 local _ = require(script.Parent.Parent.EventType)
-local questVR = require(parent.Resources.FTUXEventTypes)[require(parent.Enums.PlatformEnum).QuestVR]
+local FTUXEventTypesModuleEntry = require(Parent.Resources.FTUXEventTypes)[require(Parent.Enums.PlatformEnum).QuestVR]
 
 return {
 	Name = "VRFTUXEventHandler",
-	StartEvent = function(p1, p2)
-		-- upvalues: questVR (ref), firstPersonToggleEventModule (ref), moveToGoalEventModule (ref), jumpEventModule (ref), perspectiveTooltipEventModule (ref), movementTooltipEventModule (ref), hapticFeedbackEventModule (ref), soundFeedbackEventModule (ref), hapticFeedbackTwiceEventModule (ref), leaveGameIconHighlightEventModule (ref)
-		if p1 == questVR.FirstPersonToggleEvent then
-			task.spawn(firstPersonToggleEventModule.StartEvent, p2)
-			
-			return
-		elseif p1 == questVR.MoveToGoalEvent then
-			task.spawn(moveToGoalEventModule.StartEvent, p2)
-			
-			return
-		elseif p1 == questVR.JumpEvent then
-			task.spawn(jumpEventModule.StartEvent, p2)
-			
-			return
-		elseif p1 == questVR.PerspectiveTooltipEvent then
-			task.spawn(perspectiveTooltipEventModule.StartEvent)
-			
-			return
-		elseif p1 == questVR.MovementTooltipEvent then
-			task.spawn(movementTooltipEventModule.StartEvent)
-			
-			return
-		elseif p1 == questVR.HapticFeedbackEvent then
-			task.spawn(hapticFeedbackEventModule.StartEvent)
-			
-			return
-		elseif p1 == questVR.SoundFeedbackEvent then
-			task.spawn(soundFeedbackEventModule.StartEvent)
-			
-			return
-		elseif p1 == questVR.HapticFeedbackTwiceEvent then
-			task.spawn(hapticFeedbackTwiceEventModule.StartEvent)
-			
-			return
-		elseif p1 == questVR.LeaveGameIconHighlightEvent then
-			task.spawn(leaveGameIconHighlightEventModule.StartEvent)
+	StartEvent = function(FirstPersonToggleEvent, p1) --[[ Line: 25 ]]
+		-- upvalues: FTUXEventTypesModuleEntry (copy), FirstPersonToggleEventModule (copy), MoveToGoalEventModule (copy), JumpEventModule (copy), PerspectiveTooltipEventModule (copy), MovementTooltipEventModule (copy), HapticFeedbackEventModule (copy), SoundFeedbackEventModule (copy), HapticFeedbackTwiceEventModule (copy), LeaveGameIconHighlightEventModule (copy)
+		if FirstPersonToggleEvent == FTUXEventTypesModuleEntry.FirstPersonToggleEvent then
+			task.spawn(FirstPersonToggleEventModule.StartEvent, p1)
 			
 			return
 		end
-		warn("Unmapped VRFTUX event type: " .. tostring(p1))
+		if FirstPersonToggleEvent == FTUXEventTypesModuleEntry.MoveToGoalEvent then
+			task.spawn(MoveToGoalEventModule.StartEvent, p1)
+			
+			return
+		end
+		if FirstPersonToggleEvent == FTUXEventTypesModuleEntry.JumpEvent then
+			task.spawn(JumpEventModule.StartEvent, p1)
+			
+			return
+		end
+		if FirstPersonToggleEvent == FTUXEventTypesModuleEntry.PerspectiveTooltipEvent then
+			task.spawn(PerspectiveTooltipEventModule.StartEvent)
+			
+			return
+		end
+		if FirstPersonToggleEvent == FTUXEventTypesModuleEntry.MovementTooltipEvent then
+			task.spawn(MovementTooltipEventModule.StartEvent)
+			
+			return
+		end
+		if FirstPersonToggleEvent == FTUXEventTypesModuleEntry.HapticFeedbackEvent then
+			task.spawn(HapticFeedbackEventModule.StartEvent)
+			
+			return
+		end
+		if FirstPersonToggleEvent == FTUXEventTypesModuleEntry.SoundFeedbackEvent then
+			task.spawn(SoundFeedbackEventModule.StartEvent)
+			
+			return
+		end
+		if FirstPersonToggleEvent == FTUXEventTypesModuleEntry.HapticFeedbackTwiceEvent then
+			task.spawn(HapticFeedbackTwiceEventModule.StartEvent)
+			
+			return
+		end
+		if FirstPersonToggleEvent == FTUXEventTypesModuleEntry.LeaveGameIconHighlightEvent then
+			task.spawn(LeaveGameIconHighlightEventModule.StartEvent)
+			
+			return
+		else
+			warn("Unmapped VRFTUX event type: " .. tostring(FirstPersonToggleEvent))
+		end
 	end,
-	StopEvent = function(p1)
-		-- upvalues: questVR (ref), firstPersonToggleEventModule (ref), moveToGoalEventModule (ref), jumpEventModule (ref), perspectiveTooltipEventModule (ref), movementTooltipEventModule (ref), leaveGameIconHighlightEventModule (ref)
-		if p1 == questVR.FirstPersonToggleEvent then
-			task.spawn(firstPersonToggleEventModule.StopEvent)
+	StopEvent = function(FirstPersonToggleEvent) --[[ Line: 49 ]]
+		-- upvalues: FTUXEventTypesModuleEntry (copy), FirstPersonToggleEventModule (copy), MoveToGoalEventModule (copy), JumpEventModule (copy), PerspectiveTooltipEventModule (copy), MovementTooltipEventModule (copy), LeaveGameIconHighlightEventModule (copy)
+		if FirstPersonToggleEvent == FTUXEventTypesModuleEntry.FirstPersonToggleEvent then
+			task.spawn(FirstPersonToggleEventModule.StopEvent)
 			
-			return
-		elseif p1 == questVR.MoveToGoalEvent then
-			task.spawn(moveToGoalEventModule.StopEvent)
-			
-			return
-		elseif p1 == questVR.JumpEvent then
-			task.spawn(jumpEventModule.StopEvent)
-			
-			return
-		elseif p1 == questVR.PerspectiveTooltipEvent then
-			task.spawn(perspectiveTooltipEventModule.StopEvent)
-			
-			return
-		elseif p1 == questVR.MovementTooltipEvent then
-			task.spawn(movementTooltipEventModule.StopEvent)
-			
-			return
-		elseif p1 == questVR.LeaveGameIconHighlightEvent then
-			task.spawn(leaveGameIconHighlightEventModule.StopEvent)
-			
-			return
-		elseif p1 == questVR.HapticFeedbackTwiceEvent then return end
-		if p1 == questVR.HapticFeedbackEvent then return end
-		if p1 == questVR.SoundFeedbackEvent then
 			return
 		end
-		warn("Unmapped VRFTUX event type: " .. tostring(p1))
+		if FirstPersonToggleEvent == FTUXEventTypesModuleEntry.MoveToGoalEvent then
+			task.spawn(MoveToGoalEventModule.StopEvent)
+			
+			return
+		end
+		if FirstPersonToggleEvent == FTUXEventTypesModuleEntry.JumpEvent then
+			task.spawn(JumpEventModule.StopEvent)
+			
+			return
+		end
+		if FirstPersonToggleEvent == FTUXEventTypesModuleEntry.PerspectiveTooltipEvent then
+			task.spawn(PerspectiveTooltipEventModule.StopEvent)
+			
+			return
+		end
+		if FirstPersonToggleEvent == FTUXEventTypesModuleEntry.MovementTooltipEvent then
+			task.spawn(MovementTooltipEventModule.StopEvent)
+			
+			return
+		end
+		if FirstPersonToggleEvent == FTUXEventTypesModuleEntry.LeaveGameIconHighlightEvent then
+			task.spawn(LeaveGameIconHighlightEventModule.StopEvent)
+			
+			return
+		end
+		if FirstPersonToggleEvent == FTUXEventTypesModuleEntry.HapticFeedbackTwiceEvent then return end
+		if FirstPersonToggleEvent == FTUXEventTypesModuleEntry.HapticFeedbackEvent then return end
+		if FirstPersonToggleEvent ~= FTUXEventTypesModuleEntry.SoundFeedbackEvent then
+			warn("Unmapped VRFTUX event type: " .. tostring(FirstPersonToggleEvent))
+			
+			return
+		end
 	end
 }

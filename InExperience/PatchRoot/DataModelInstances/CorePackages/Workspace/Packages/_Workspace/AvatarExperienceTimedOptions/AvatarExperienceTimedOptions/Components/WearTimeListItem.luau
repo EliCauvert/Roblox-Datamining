@@ -1,107 +1,107 @@
-﻿local localizationService = game:GetService("LocalizationService")
-local httpService = game:GetService("HttpService")
-local parent = script:FindFirstAncestor("AvatarExperienceTimedOptions").Parent
-local reactModule = require(parent.React)
-local localizationModule = require(parent.Localization)
-local localization = require(parent.RobloxAppLocales).Localization
-local useLocalization = localizationModule.Hooks.useLocalization
-local numberLocalization = localizationModule.NumberLocalization
-local foundationModule = require(parent.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local text = foundationModule.Text
-local view = foundationModule.View
-local enums = foundationModule.Enums
-local avatarExperienceAnalyticsModule = require(parent.AvatarExperienceAnalytics)
-local addUnifiedEventLogging = avatarExperienceAnalyticsModule.addUnifiedEventLogging
-local unifiedEventLogConstants = avatarExperienceAnalyticsModule.UnifiedEventLogConstants
-local unifiedEventLogEnums = avatarExperienceAnalyticsModule.UnifiedEventLogEnums
-local fFlagAXWearTimeListItemUnifiedLogging = require(parent.AvatarExperienceFlags).FFlagAXWearTimeListItemUnifiedLogging
+﻿local LocalizationService = game:GetService("LocalizationService")
+local HttpService = game:GetService("HttpService")
+local Parent = script:FindFirstAncestor("AvatarExperienceTimedOptions").Parent
+local ReactModule = require(Parent.React)
+local LocalizationModule = require(Parent.Localization)
+local Localization = require(Parent.RobloxAppLocales).Localization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
+local NumberLocalization = LocalizationModule.NumberLocalization
+local FoundationModule = require(Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local Enums = FoundationModule.Enums
+local AvatarExperienceAnalyticsModule = require(Parent.AvatarExperienceAnalytics)
+local AddUnifiedEventLoggingFunction = AvatarExperienceAnalyticsModule.addUnifiedEventLogging
+local UnifiedEventLogConstants = AvatarExperienceAnalyticsModule.UnifiedEventLogConstants
+local UnifiedEventLogEnums = AvatarExperienceAnalyticsModule.UnifiedEventLogEnums
+local FFlagAXWearTimeListItemUnifiedLogging = require(Parent.AvatarExperienceFlags).FFlagAXWearTimeListItemUnifiedLogging
 
-return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useTokens (ref), reactModule (ref), localization (ref), localizationService (ref), useLocalization (ref), fFlagAXWearTimeListItemUnifiedLogging (ref), addUnifiedEventLogging (ref), unifiedEventLogEnums (ref), httpService (ref), unifiedEventLogConstants (ref), view (ref), enums (ref), text (ref), foundationModule (ref), numberLocalization (ref)
-	local var1 = useTokens()
-	local var2 = reactModule.useMemo(function()
-		-- upvalues: localization (copy), localizationService (copy)
-		return localization.new(localizationService.RobloxLocaleId)
+return (ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 30 ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), Localization (copy), LocalizationService (copy), UseLocalizationFunction (copy), FFlagAXWearTimeListItemUnifiedLogging (copy), AddUnifiedEventLoggingFunction (copy), UnifiedEventLogEnums (copy), HttpService (copy), UnifiedEventLogConstants (copy), View (copy), Enums (copy), Text (copy), FoundationModule (copy), NumberLocalization (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 32 ]]
+		-- upvalues: Localization (upval), LocalizationService (upval)
+		return Localization.new(LocalizationService.RobloxLocaleId)
 	end, {})
-	local var3 = useLocalization({
+	local UseLocalizationResult = UseLocalizationFunction({
 		infinite = "Feature.Durables.ItemDetails.WearTimeOptions.Button.Infinite",
 		xDay = {
 			"Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay",
-			num = p1.days
+			num = Frame.days
 		},
 		xDays = {
 			"Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays",
-			num = p1.days
+			num = Frame.days
 		}
 	})
-	local var4 = if p1.days == 0 then var3.infinite elseif p1.days == 1 then var3.xDay else var3.xDays
+	local Infinite = if Frame.days == 0 then UseLocalizationResult.infinite elseif Frame.days == 1 then UseLocalizationResult.xDay else UseLocalizationResult.xDays
 	
-	if fFlagAXWearTimeListItemUnifiedLogging and not p2 then
-		p2 = reactModule.createRef()
+	if FFlagAXWearTimeListItemUnifiedLogging and not Ref then
+		Ref = ReactModule.createRef()
 	end
-	if fFlagAXWearTimeListItemUnifiedLogging then
-		reactModule.useEffect(function()
-			-- upvalues: addUnifiedEventLogging (copy), p2 (write), unifiedEventLogEnums (copy), httpService (copy), p1 (ref), unifiedEventLogConstants (copy)
-			addUnifiedEventLogging(p2, {
+	if FFlagAXWearTimeListItemUnifiedLogging then
+		ReactModule.useEffect(function() --[[ Line: 55 ]]
+			-- upvalues: AddUnifiedEventLoggingFunction (upval), Ref (ref), UnifiedEventLogEnums (upval), HttpService (upval), Frame (copy), UnifiedEventLogConstants (upval)
+			AddUnifiedEventLoggingFunction(Ref, {
 				elementName = "TIMED_OPTION_LIST_ITEM",
-				action = unifiedEventLogEnums.MarketplaceUnifiedAction.UI_ELEMENT_CLICK,
-				elementMetadata = httpService:JSONEncode({
-					days = if p1.days == 0 then "permanent" else tostring(p1.days),
-					price = tostring(p1.price)
+				action = UnifiedEventLogEnums.MarketplaceUnifiedAction.UI_ELEMENT_CLICK,
+				elementMetadata = HttpService:JSONEncode({
+					days = if Frame.days == 0 then "permanent" else tostring(Frame.days),
+					price = tostring(Frame.price)
 				})
 			}, {
-				sessionTagName = unifiedEventLogConstants.L2_SESSION_TAG_NAME
+				sessionTagName = UnifiedEventLogConstants.L2_SESSION_TAG_NAME
 			})
-		end, { p1.days, p1.price })
+		end, { Frame.days, Frame.price })
 	end
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "row align-y-center gap-medium padding-medium radius-medium size-full-0 auto-y",
-		ref = p2,
-		onActivated = p1.onActivated,
-		backgroundStyle = if p1.isActive then var1.Color.Shift.Shift_300 else nil,
-		LayoutOrder = p1.LayoutOrder,
-		stateLayer = { affordance = enums.StateLayerAffordance.None },
+		ref = Ref,
+		onActivated = Frame.onActivated,
+		backgroundStyle = if Frame.isActive then UseTokensResult.Color.Shift.Shift_300 else nil,
+		LayoutOrder = Frame.LayoutOrder,
+		stateLayer = { affordance = Enums.StateLayerAffordance.None },
 		selection = { Selectable = true }
 	}, {
-		ContentContainer = reactModule.createElement(view, {
+		ContentContainer = ReactModule.createElement(View, {
 			tag = "row align-y-center size-full-0 auto-y flex-x-between",
 			LayoutOrder = 1
 		}, {
-			DurationText = reactModule.createElement(text, {
+			DurationText = ReactModule.createElement(Text, {
 				tag = "auto-xy",
 				LayoutOrder = 1,
-				Text = var4,
-				textStyle = var1.Color.Content.Emphasis,
+				Text = Infinite,
+				textStyle = UseTokensResult.Color.Content.Emphasis,
 				fontStyle = {
-					Font = var1.Typography.LabelMedium.Font,
-					FontSize = var1.FontSize.FontSize_400
+					Font = UseTokensResult.Typography.LabelMedium.Font,
+					FontSize = UseTokensResult.FontSize.FontSize_400
 				},
 				selection = { Selectable = false }
 			}),
-			PriceContainer = reactModule.createElement(view, {
+			PriceContainer = ReactModule.createElement(View, {
 				tag = "row align-y-center gap-xsmall auto-xy",
 				LayoutOrder = 2
 			}, {
-				RobuxIcon = reactModule.createElement(foundationModule.Icon, {
+				RobuxIcon = ReactModule.createElement(FoundationModule.Icon, {
 					LayoutOrder = 1,
-					name = enums.IconName.Robux,
-					variant = enums.IconVariant.Regular,
-					size = enums.IconSize.Medium,
-					style = var1.Color.Content.Default
+					name = Enums.IconName.Robux,
+					variant = Enums.IconVariant.Regular,
+					size = Enums.IconSize.Medium,
+					style = UseTokensResult.Color.Content.Default
 				}),
-				PriceText = reactModule.createElement(text, {
+				PriceText = ReactModule.createElement(Text, {
 					tag = "auto-xy",
 					LayoutOrder = 2,
-					Text = numberLocalization.localize(p1.price, var2:GetLocale()),
-					textStyle = var1.Color.Content.Default,
+					Text = NumberLocalization.localize(Frame.price, UseMemoResult:GetLocale()),
+					textStyle = UseTokensResult.Color.Content.Default,
 					fontStyle = {
-						Font = var1.Typography.LabelMedium.Font,
-						FontSize = var1.FontSize.FontSize_400
+						Font = UseTokensResult.Typography.LabelMedium.Font,
+						FontSize = UseTokensResult.FontSize.FontSize_400
 					},
 					selection = { Selectable = false }
 				})
 			})
 		})
 	})
-end)
+end))

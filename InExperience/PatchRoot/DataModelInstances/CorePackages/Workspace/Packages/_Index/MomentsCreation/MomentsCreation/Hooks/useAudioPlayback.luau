@@ -1,230 +1,232 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local parent = momentsCreation.Parent
-local playersService = game:GetService("Players")
-local runService = game:GetService("RunService")
-local momentsCommonModule = require(parent.MomentsCommon)
-local reactModule = require(parent.React)
-local fadeVolumeModule = require(momentsCreation.Audio.fadeVolume)
-local startAudioOnLoadModule = require(momentsCreation.Audio.startAudioOnLoad)
-local fFlagMomentsCreationStartAudioOnLoadModule = require(momentsCreation.Flags.FFlagMomentsCreationStartAudioOnLoad)
-local getFFlagMomentsTTSAudioOverlayModule = require(momentsCreation.Flags.GetFFlagMomentsTTSAudioOverlay)
-local useCallback = reactModule.useCallback
-local useEffect = reactModule.useEffect
-local useMemo = reactModule.useMemo
-local useRef = reactModule.useRef
-local useState = reactModule.useState
-local useToggleState = momentsCommonModule.Hooks.useToggleState
-local localPlayer = playersService.LocalPlayer
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local Parent = MomentsCreation.Parent
+local RunService = game:GetService("RunService")
+local ReactModule = require(Parent.React)
+local FadeVolumeModule = require(MomentsCreation.Audio.fadeVolume)
+local StartAudioOnLoadModule = require(MomentsCreation.Audio.startAudioOnLoad)
+local FFlagMomentsCreationStartAudioOnLoadModule = require(MomentsCreation.Flags.FFlagMomentsCreationStartAudioOnLoad)
+local GetFFlagMomentsTTSAudioOverlayModule = require(MomentsCreation.Flags.GetFFlagMomentsTTSAudioOverlay)
+local UseCallbackFunction = ReactModule.useCallback
+local UseEffectFunction = ReactModule.useEffect
+local UseMemoFunction = ReactModule.useMemo
+local UseRefFunction = ReactModule.useRef
+local UseStateFunction = ReactModule.useState
+local UseToggleStateFunction = require(Parent.MomentsCommon).Hooks.useToggleState
+local LocalPlayer = game:GetService("Players").LocalPlayer
 
-local function _(value)
-	return if value == nil then nil else `rbxassetid://{value}`
+local function _(p1) --[[ Line: 68 | Named "assetIdAsContent" ]]
+	return if p1 == nil then nil else `rbxassetid://{p1}`
 end
 
-return function(p1, p2, p3)
-	-- upvalues: useRef (ref), useToggleState (ref), fFlagMomentsCreationStartAudioOnLoadModule (ref), useState (ref), useMemo (ref), useCallback (ref), useEffect (ref), startAudioOnLoadModule (ref), localPlayer (ref), getFFlagMomentsTTSAudioOverlayModule (ref), fadeVolumeModule (ref), runService (ref)
-	p3 = p3 or {}
-	local var1 = if p3.autoplay ~= nil then false else p3.autoplay
-	local var2 = if p3.looping ~= nil then false else p3.looping
-	local playbackRegion = p3.playbackRegion or NumberRange.new(0, 1e999)
-	local var3 = if p3.duckScalar ~= nil then 1 else p3.duckScalar
-	local var4 = useRef(nil)
-	local var5 = useToggleState(var1)
-	local var6 = useToggleState(false)
-	local var7 = useRef(var5.enabled)
+return function(p1, p2, p3) --[[ Line: 75 | Named "useAudioPlayback" ]]
+	-- upvalues: UseRefFunction (copy), UseToggleStateFunction (copy), FFlagMomentsCreationStartAudioOnLoadModule (copy), UseStateFunction (copy), UseMemoFunction (copy), UseCallbackFunction (copy), UseEffectFunction (copy), StartAudioOnLoadModule (copy), LocalPlayer (copy), GetFFlagMomentsTTSAudioOverlayModule (copy), FadeVolumeModule (copy), RunService (copy)
+	local P3 = p3 or {}
+	local Autoplay = P3.autoplay ~= nil and P3.autoplay
+	local Looping = P3.looping ~= nil and P3.looping
+	local PlaybackRegion = P3.playbackRegion or NumberRange.new(0, 1e999)
+	local DuckScalar = if P3.duckScalar == nil then 1 else P3.duckScalar
+	local UseRefResult = UseRefFunction(nil)
+	local UseToggleStateResult = UseToggleStateFunction(Autoplay)
+	local UseToggleStateResult1 = UseToggleStateFunction(false)
+	local UseRefResult1 = UseRefFunction(UseToggleStateResult.enabled)
 	
-	if fFlagMomentsCreationStartAudioOnLoadModule then
-		var7.current = var5.enabled
+	if FFlagMomentsCreationStartAudioOnLoadModule then
+		UseRefResult1.current = UseToggleStateResult.enabled
 	end
-	local var8, var9 = useState(0)
-	local var10, var11 = useState(0)
-	local var12, var13 = useState(0)
-	local var14, var15 = useState(0)
-	local var16 = useMemo(function()
-		-- upvalues: p2 (ref)
+	local UseStateResult, UseStateResult2 = UseStateFunction(0)
+	local UseStateResult1, UseStateResult2_1 = UseStateFunction(0)
+	local UseStateResult3, UseStateResult2_2 = UseStateFunction(0)
+	local UseStateResult4, UseStateResult2_3 = UseStateFunction(0)
+	local UseMemoResult = UseMemoFunction(function() --[[ Line: 103 ]]
+		-- upvalues: p2 (copy)
 		return if p2 == nil then nil else `rbxassetid://{p2}`
 	end, { p2 })
-	local var17 = useCallback(function(p4)
-		-- upvalues: var4 (ref), playbackRegion (ref), var8 (ref)
-		local current = var4.current
+	local UseCallbackResult = UseCallbackFunction(function(p4) --[[ Line: 107 ]]
+		-- upvalues: UseRefResult (copy), PlaybackRegion (copy), UseStateResult (copy)
+		local Current = UseRefResult.current
 		
-		if current then
-			current.TimePosition = math.clamp(p4 + playbackRegion.Min, 0, var8)
+		if Current then
+			Current.TimePosition = math.clamp(p4 + PlaybackRegion.Min, 0, UseStateResult)
 		end
-	end, { var8, playbackRegion })
-	local var18 = useCallback(function()
-		-- upvalues: p1 (ref), var4 (ref), var15 (ref), playbackRegion (ref), var11 (ref)
+	end, { UseStateResult, PlaybackRegion })
+	local UseCallbackResult1 = UseCallbackFunction(function() --[[ Line: 114 ]]
+		-- upvalues: p1 (copy), UseRefResult (copy), UseStateResult2_3 (copy), PlaybackRegion (copy), UseStateResult2_1 (copy)
 		if not p1 then return end
-		local current = var4.current
+		local Current = UseRefResult.current
 		
-		if current then
-			var15(current.TimePosition - playbackRegion.Min)
-			var11(current.TimePosition)
+		if Current then
+			UseStateResult2_3(Current.TimePosition - PlaybackRegion.Min)
+			UseStateResult2_1(Current.TimePosition)
 		end
-	end, { p1, playbackRegion })
-	useEffect(function()
-		-- upvalues: var16 (ref), playbackRegion (ref), var2 (ref), var9 (ref), var4 (ref), fFlagMomentsCreationStartAudioOnLoadModule (copy), startAudioOnLoadModule (copy), var7 (ref), localPlayer (copy)
-		if var16 == nil then
-			return
-		end
-		local folder = Instance.new("Folder")
-		folder.Name = `AudioPlayback_{var16}`
-		local audioPlayer = Instance.new("AudioPlayer")
-		audioPlayer.Asset = var16
-		audioPlayer.PlaybackRegion = playbackRegion
-		audioPlayer.Looping = var2
-		audioPlayer.Parent = folder
-		audioPlayer.Volume = 0.2
-		audioPlayer:GetPropertyChangedSignal("TimeLength"):Connect(function()
-			-- upvalues: var9 (copy), audioPlayer (ref)
-			var9(audioPlayer.TimeLength)
+	end, { p1, PlaybackRegion })
+	UseEffectFunction(function() --[[ Line: 128 ]]
+		-- upvalues: UseMemoResult (copy), PlaybackRegion (copy), Looping (copy), UseStateResult2 (copy), UseRefResult (copy), FFlagMomentsCreationStartAudioOnLoadModule (upval), StartAudioOnLoadModule (upval), UseRefResult1 (copy), LocalPlayer (upval)
+		if UseMemoResult == nil then return end
+		local Folder = Instance.new("Folder")
+		Folder.Name = `AudioPlayback_{UseMemoResult}`
+		local AudioPlayer = Instance.new("AudioPlayer")
+		AudioPlayer.Asset = UseMemoResult
+		AudioPlayer.PlaybackRegion = PlaybackRegion
+		AudioPlayer.Looping = Looping
+		AudioPlayer.Parent = Folder
+		AudioPlayer.Volume = 0.2
+		AudioPlayer:GetPropertyChangedSignal("TimeLength"):Connect(function() --[[ Line: 143 | Named "updateTimeLength" ]]
+			-- upvalues: UseStateResult2 (upval), AudioPlayer (copy)
+			UseStateResult2(AudioPlayer.TimeLength)
 		end)
-		var9(audioPlayer.TimeLength)
-		local audioDeviceOutput = Instance.new("AudioDeviceOutput")
-		audioDeviceOutput.Parent = folder
-		local wire = Instance.new("Wire")
-		wire.SourceInstance = audioPlayer
-		wire.TargetInstance = audioDeviceOutput
-		wire.Parent = folder
-		var4.current = audioPlayer
-		local var19 = if fFlagMomentsCreationStartAudioOnLoadModule then startAudioOnLoadModule(audioPlayer, function()
-			-- upvalues: var7 (copy)
-			return var7.current
+		UseStateResult2(AudioPlayer.TimeLength)
+		local AudioDeviceOutput = Instance.new("AudioDeviceOutput")
+		AudioDeviceOutput.Parent = Folder
+		local Wire = Instance.new("Wire")
+		Wire.SourceInstance = AudioPlayer
+		Wire.TargetInstance = AudioDeviceOutput
+		Wire.Parent = Folder
+		UseRefResult.current = AudioPlayer
+		local StartAudioOnLoadModuleResult = if FFlagMomentsCreationStartAudioOnLoadModule then StartAudioOnLoadModule(AudioPlayer, function() --[[ Line: 160 ]]
+			-- upvalues: UseRefResult1 (upval)
+			return UseRefResult1.current
 		end) else nil
-		local var20 = false
-		task.spawn(function()
-			-- upvalues: localPlayer (copy), var20 (write), folder (ref)
-			local playerGui = localPlayer:WaitForChild("PlayerGui")
+		local Flag = false
+		task.spawn(function() --[[ Line: 167 ]]
+			-- upvalues: LocalPlayer (upval), Flag (ref), Folder (copy)
+			local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
 			
-			if var20 then
+			if not Flag then
+				Folder.Parent = PlayerGui
+				
 				return
 			end
-			folder.Parent = playerGui
 		end)
 		
-		return function()
-			-- upvalues: var20 (write), var19 (write), folder (ref)
-			var20 = true
+		return function() --[[ Line: 175 ]]
+			-- upvalues: Flag (ref), StartAudioOnLoadModuleResult (ref), Folder (copy)
+			Flag = true
 			
-			if var19 ~= nil then
-				var19:Disconnect()
+			if StartAudioOnLoadModuleResult ~= nil then
+				StartAudioOnLoadModuleResult:Disconnect()
 			end
-			folder:Destroy()
+			Folder:Destroy()
 		end
-	end, { var16 })
-	useEffect(function()
-		-- upvalues: var4 (ref), playbackRegion (ref), fFlagMomentsCreationStartAudioOnLoadModule (copy)
-		local current = var4.current
+	end, { UseMemoResult })
+	UseEffectFunction(function() --[[ Line: 184 ]]
+		-- upvalues: UseRefResult (copy), PlaybackRegion (copy), FFlagMomentsCreationStartAudioOnLoadModule (upval)
+		local Current = UseRefResult.current
 		
-		if current then
-			current.PlaybackRegion = playbackRegion
+		if Current then
+			Current.PlaybackRegion = PlaybackRegion
 			
-			if fFlagMomentsCreationStartAudioOnLoadModule then
-				if current.IsReady then
-					current.TimePosition = playbackRegion.Min
+			if not FFlagMomentsCreationStartAudioOnLoadModule then
+				Current.TimePosition = 0
+			elseif Current.IsReady then
+				Current.TimePosition = PlaybackRegion.Min
+				
+				return
+			end
+		end
+	end, { PlaybackRegion })
+	UseEffectFunction(function() --[[ Line: 198 ]]
+		-- upvalues: UseStateResult2_2 (copy), PlaybackRegion (copy), UseStateResult (copy)
+		UseStateResult2_2((math.min(PlaybackRegion.Max - PlaybackRegion.Min, UseStateResult)))
+	end, { UseStateResult, PlaybackRegion })
+	UseEffectFunction(function() --[[ Line: 205 ]]
+		-- upvalues: UseRefResult (copy), FFlagMomentsCreationStartAudioOnLoadModule (upval), UseToggleStateResult (copy)
+		local Current = UseRefResult.current
+		
+		if Current then
+			if FFlagMomentsCreationStartAudioOnLoadModule and not Current.IsReady then
+				Current.PlaybackSpeed = 0
+				
+				return
+			end
+			if UseToggleStateResult.enabled then
+				Current.PlaybackSpeed = 1
+				
+				if not Current.IsPlaying then
+					Current:Play()
 					
 					return
 				end
 			else
-				current.TimePosition = 0
-			end
-		end
-	end, { playbackRegion })
-	useEffect(function()
-		-- upvalues: var13 (ref), playbackRegion (ref), var8 (ref)
-		var13(math.min(playbackRegion.Max - playbackRegion.Min, var8))
-	end, { var8, playbackRegion })
-	useEffect(function()
-		-- upvalues: var4 (ref), fFlagMomentsCreationStartAudioOnLoadModule (copy), var5 (ref)
-		local current = var4.current
-		
-		if current then
-			if fFlagMomentsCreationStartAudioOnLoadModule and not current.IsReady then
-				current.PlaybackSpeed = 0
+				Current.PlaybackSpeed = 0
 				
-				return
-			elseif var5.enabled then
-				current.PlaybackSpeed = 1
-				
-				if current.IsPlaying then
-					return
-				else
-					current:Play()
-					
-					return
-				end
-			else
-				current.PlaybackSpeed = 0
-				
-				if current.IsPlaying then
-					current:Stop()
+				if Current.IsPlaying then
+					Current:Stop()
 				end
 			end
 		end
-	end, { var5.enabled, var16 })
-	useEffect(function()
-		-- upvalues: getFFlagMomentsTTSAudioOverlayModule (copy), var4 (ref), var6 (ref), var5 (ref)
-		if getFFlagMomentsTTSAudioOverlayModule then return end
-		local current = var4.current
+	end, { UseToggleStateResult.enabled, UseMemoResult })
+	UseEffectFunction(function() --[[ Line: 228 ]]
+		-- upvalues: GetFFlagMomentsTTSAudioOverlayModule (upval), UseRefResult (copy), UseToggleStateResult1 (copy), UseToggleStateResult (copy)
+		if GetFFlagMomentsTTSAudioOverlayModule then return end
+		local Current = UseRefResult.current
 		
-		if current ~= nil then
-			current.Volume = if var6.enabled or not var5.enabled then 0 else 0.2
+		if Current ~= nil then
+			Current.Volume = if UseToggleStateResult1.enabled or not UseToggleStateResult.enabled then 0 else 0.2
 		end
-	end, { var6.enabled, var5.enabled })
-	useEffect(function()
-		-- upvalues: getFFlagMomentsTTSAudioOverlayModule (copy), var4 (ref), var6 (ref), var5 (ref), fadeVolumeModule (copy), var3 (ref)
-		if not getFFlagMomentsTTSAudioOverlayModule then return end
-		local current = var4.current
+	end, {
+		UseToggleStateResult1.enabled,
+		UseToggleStateResult.enabled
+	})
+	UseEffectFunction(function() --[[ Line: 240 ]]
+		-- upvalues: GetFFlagMomentsTTSAudioOverlayModule (upval), UseRefResult (copy), UseToggleStateResult1 (copy), UseToggleStateResult (copy), FadeVolumeModule (upval), DuckScalar (copy)
+		if not GetFFlagMomentsTTSAudioOverlayModule then return end
+		local Current = UseRefResult.current
 		
-		if current ~= nil then
-			if var6.enabled or not var5.enabled then
-				fadeVolumeModule(current, 0, true)
+		if Current ~= nil then
+			if UseToggleStateResult1.enabled or not UseToggleStateResult.enabled then
+				FadeVolumeModule(Current, 0, true)
 				
 				return
 			end
-			fadeVolumeModule(current, 0.2 * var3)
+			FadeVolumeModule(Current, 0.2 * DuckScalar)
 		end
-	end, { var6.enabled, var5.enabled, var3, var16 })
-	local var19 = useCallback(function()
-		-- upvalues: var5 (ref)
-		var5.disable()
+	end, {
+		UseToggleStateResult1.enabled,
+		UseToggleStateResult.enabled,
+		DuckScalar,
+		UseMemoResult
+	})
+	local UseCallbackResult2 = UseCallbackFunction(function() --[[ Line: 256 ]]
+		-- upvalues: UseToggleStateResult (copy)
+		UseToggleStateResult.disable()
 	end, {})
-	useEffect(function()
-		-- upvalues: var4 (ref), runService (copy), var18 (ref), var19 (ref)
-		local t = {}
-		local current = var4.current
+	UseEffectFunction(function() --[[ Line: 263 ]]
+		-- upvalues: UseRefResult (copy), RunService (upval), UseCallbackResult1 (copy), UseCallbackResult2 (copy)
+		local List = {}
+		local Current = UseRefResult.current
 		
-		if current then
-			table.insert(t, runService.RenderStepped:Connect(var18))
-			table.insert(t, current.Ended:Connect(var19))
+		if Current then
+			table.insert(List, RunService.RenderStepped:Connect(UseCallbackResult1))
+			table.insert(List, Current.Ended:Connect(UseCallbackResult2))
 		end
-		return function()
-			-- upvalues: t (ref)
-			for i, v in t do
-				v:Disconnect()
+		return function() --[[ Line: 271 ]]
+			-- upvalues: List (copy)
+			for _, Connection in List do
+				Connection:Disconnect()
 			end
 		end
-	end, { var18, var19, var16 })
+	end, { UseCallbackResult1, UseCallbackResult2, UseMemoResult })
 	
 	return {
 		timeline = {
-			duration = var12,
-			elapsed = var14,
-			seek = var17,
-			timeLength = var8,
-			timePosition = var10
+			duration = UseStateResult3,
+			elapsed = UseStateResult4,
+			seek = UseCallbackResult,
+			timeLength = UseStateResult,
+			timePosition = UseStateResult1
 		},
 		playback = {
-			isPlaying = var5.enabled,
-			pause = var5.disable,
-			play = var5.enable,
-			toggle = var5.toggle
+			isPlaying = UseToggleStateResult.enabled,
+			pause = UseToggleStateResult.disable,
+			play = UseToggleStateResult.enable,
+			toggle = UseToggleStateResult.toggle
 		},
 		volume = {
-			isMuted = var6.enabled,
-			mute = var6.enable,
-			unmute = var6.disable,
-			toggle = var6.toggle
+			isMuted = UseToggleStateResult1.enabled,
+			mute = UseToggleStateResult1.enable,
+			unmute = UseToggleStateResult1.disable,
+			toggle = UseToggleStateResult1.toggle
 		},
-		ref = var4
+		ref = UseRefResult
 	}
 end

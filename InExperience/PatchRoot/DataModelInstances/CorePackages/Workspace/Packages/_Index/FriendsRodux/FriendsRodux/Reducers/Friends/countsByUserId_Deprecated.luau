@@ -1,41 +1,42 @@
-﻿local friendsRodux = script:FindFirstAncestor("FriendsRodux")
-local llamaModule = require(friendsRodux.Parent.llama)
-local actions = friendsRodux.Actions
-local friendshipCreatedModule = require(actions.FriendshipCreated)
-local friendshipDestroyedModule = require(actions.FriendshipDestroyed)
-local addUserModule = require(script.Parent.utils.addUser)
-local removeUserModule = require(script.Parent.utils.removeUser)
-local setFriendshipsInStoreModule = require(script.Parent.utils.setFriendshipsInStore)
-local removeTargetUserFriendshipInStoreModule = require(script.Parent.utils.removeTargetUserFriendshipInStore)
-local countUserFriendsInStoreModule = require(script.Parent.utils.countUserFriendsInStore)
-local _ = require(friendsRodux.roduxFriendsTypes)
-local t = { byUserId = {}, countsByUserId = {} }
+﻿local FriendsRodux = script:FindFirstAncestor("FriendsRodux")
+local LlamaModule = require(FriendsRodux.Parent.llama)
+local Actions = FriendsRodux.Actions
+local FriendshipCreatedModule = require(Actions.FriendshipCreated)
+local FriendshipDestroyedModule = require(Actions.FriendshipDestroyed)
+local AddUserModule = require(script.Parent.utils.addUser)
+local RemoveUserModule = require(script.Parent.utils.removeUser)
+local SetFriendshipsInStoreModule = require(script.Parent.utils.setFriendshipsInStore)
+local RemoveTargetUserFriendshipInStoreModule = require(script.Parent.utils.removeTargetUserFriendshipInStore)
+local CountUserFriendsInStoreModule = require(script.Parent.utils.countUserFriendsInStore)
+local _ = require(FriendsRodux.roduxFriendsTypes)
+local config = { byUserId = {}, countsByUserId = {} }
 
-return function(p1)
-	-- upvalues: t (ref), friendshipCreatedModule (ref), llamaModule (ref), addUserModule (ref), friendshipDestroyedModule (ref), removeUserModule (ref), setFriendshipsInStoreModule (ref), countUserFriendsInStoreModule (ref), removeTargetUserFriendshipInStoreModule (ref)
-	local friendsNetworking = p1.friendsNetworking
+return function(p1) --[[ Line: 21 ]]
+	-- upvalues: config (copy), FriendshipCreatedModule (copy), LlamaModule (copy), AddUserModule (copy), FriendshipDestroyedModule (copy), RemoveUserModule (copy), SetFriendshipsInStoreModule (copy), CountUserFriendsInStoreModule (copy), RemoveTargetUserFriendshipInStoreModule (copy)
+	local FriendsNetworking = p1.friendsNetworking
 	
-	return function(p2, p3)
-		-- upvalues: t (copy), friendshipCreatedModule (copy), llamaModule (copy), addUserModule (copy), friendshipDestroyedModule (copy), removeUserModule (copy), friendsNetworking (ref), setFriendshipsInStoreModule (copy), countUserFriendsInStoreModule (copy), removeTargetUserFriendshipInStoreModule (copy)
-		p2 = p2 or t
+	return function(p2, p3) --[[ Line: 24 ]]
+		-- upvalues: config (upval), FriendshipCreatedModule (upval), LlamaModule (upval), AddUserModule (upval), FriendshipDestroyedModule (upval), RemoveUserModule (upval), FriendsNetworking (copy), SetFriendshipsInStoreModule (upval), CountUserFriendsInStoreModule (upval), RemoveTargetUserFriendshipInStoreModule (upval)
+		local P1 = p2 or config
 		
-		if p3 and p3.type == friendshipCreatedModule.name then
+		if p3 and p3.type == FriendshipCreatedModule.name then
 			assert(type(p3.payload.userId1) == "string", "Expected userId1 to be a string")
 			assert(type(p3.payload.userId2) == "string", "Expected userId2 to be a string")
 			
-			return llamaModule.Dictionary.join(p2.countsByUserId, {
-				[p3.payload.userId1] = #addUserModule(p2.byUserId[p3.payload.userId1], p3.payload.userId2),
-				[p3.payload.userId2] = #addUserModule(p2.byUserId[p3.payload.userId2], p3.payload.userId1)
-			})
-		elseif p3 and p3.type == friendshipDestroyedModule.name then
+			return (LlamaModule.Dictionary.join(P1.countsByUserId, {
+				[p3.payload.userId1] = #AddUserModule(P1.byUserId[p3.payload.userId1], p3.payload.userId2),
+				[p3.payload.userId2] = #AddUserModule(P1.byUserId[p3.payload.userId2], p3.payload.userId1)
+			}))
+		elseif p3 and p3.type == FriendshipDestroyedModule.name then
 			assert(type(p3.payload.userId1) == "string", "Expected userId1 to be a string")
 			assert(type(p3.payload.userId2) == "string", "Expected userId2 to be a string")
 			
-			return llamaModule.Dictionary.join(p2.countsByUserId, {
-				[p3.payload.userId1] = #removeUserModule(p2.byUserId[p3.payload.userId1], p3.payload.userId2),
-				[p3.payload.userId2] = #removeUserModule(p2.byUserId[p3.payload.userId2], p3.payload.userId1)
-			})
+			return (LlamaModule.Dictionary.join(P1.countsByUserId, {
+				[p3.payload.userId1] = #RemoveUserModule(P1.byUserId[p3.payload.userId1], p3.payload.userId2),
+				[p3.payload.userId2] = #RemoveUserModule(P1.byUserId[p3.payload.userId2], p3.payload.userId1)
+			}))
+		else
+			return if p3 and p3.type == FriendsNetworking.GetFriendsFromUserId.Succeeded.name then CountUserFriendsInStoreModule((SetFriendshipsInStoreModule(P1.byUserId, p3))) elseif p3 and p3.type == FriendsNetworking.UnfriendTargetUserId.Succeeded.name then CountUserFriendsInStoreModule((RemoveTargetUserFriendshipInStoreModule(p2.byUserId, p3))) else P1.countsByUserId
 		end
-		return if p3 and p3.type == friendsNetworking.GetFriendsFromUserId.Succeeded.name then countUserFriendsInStoreModule(setFriendshipsInStoreModule(p2.byUserId, p3)) elseif p3 and p3.type == friendsNetworking.UnfriendTargetUserId.Succeeded.name then countUserFriendsInStoreModule(removeTargetUserFriendshipInStoreModule(p2.byUserId, p3)) else p2.countsByUserId
 	end
 end

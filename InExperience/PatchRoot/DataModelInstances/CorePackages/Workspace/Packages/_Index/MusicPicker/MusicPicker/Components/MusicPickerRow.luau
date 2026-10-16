@@ -1,89 +1,92 @@
-﻿local musicPicker = script:FindFirstAncestor("MusicPicker")
-local parent = musicPicker.Parent
-local builderIconsModule = require(parent.BuilderIcons)
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local roactUtilsModule = require(parent.RoactUtils)
-local image = foundationModule.Image
-local iconButton = foundationModule.IconButton
-local radius = foundationModule.Enums.Radius
-local skeleton = foundationModule.Skeleton
-local text = foundationModule.Text
-local view = foundationModule.View
-local getRbxThumb = foundationModule.Utility.getRbxThumb
-local useAssetFetchStatus = roactUtilsModule.Hooks.useAssetFetchStatus
-local musicPickerContextModule = require(musicPicker.Context.MusicPickerContext)
-local _ = require(musicPicker.Types.MusicPickerTypes)
-local playLarge = builderIconsModule.Icon.PlayLarge
-local pauseLarge = builderIconsModule.Icon.PauseLarge
-local bookmark = builderIconsModule.Icon.Bookmark
+﻿local MusicPicker = script:FindFirstAncestor("MusicPicker")
+local Parent = MusicPicker.Parent
+local BuilderIconsModule = require(Parent.BuilderIcons)
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local Image = FoundationModule.Image
+local IconButton = FoundationModule.IconButton
+local Radius = FoundationModule.Enums.Radius
+local Skeleton = FoundationModule.Skeleton
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local GetRbxThumbFunction = FoundationModule.Utility.getRbxThumb
+local UseAssetFetchStatusFunction = require(Parent.RoactUtils).Hooks.useAssetFetchStatus
+local MusicPickerContextModule = require(MusicPicker.Context.MusicPickerContext)
+local _ = require(MusicPicker.Types.MusicPickerTypes)
+local PlayLarge = BuilderIconsModule.Icon.PlayLarge
+local PauseLarge = BuilderIconsModule.Icon.PauseLarge
+local Bookmark = BuilderIconsModule.Icon.Bookmark
 
-return function(p1)
-	-- upvalues: reactModule (ref), musicPickerContextModule (ref), getRbxThumb (ref), foundationModule (ref), useAssetFetchStatus (ref), view (ref), image (ref), skeleton (ref), radius (ref), text (ref), iconButton (ref), pauseLarge (ref), playLarge (ref), bookmark (ref), builderIconsModule (ref)
-	local item = p1.item
-	local var1 = reactModule.useContext(musicPickerContextModule)
-	local var2 = getRbxThumb(foundationModule.Enums.ThumbnailType.Asset, item.thumbnailAssetId)
+return function(p1) --[[ Line: 43 | Named "MusicPickerRow" ]]
+	-- upvalues: ReactModule (copy), MusicPickerContextModule (copy), GetRbxThumbFunction (copy), FoundationModule (copy), UseAssetFetchStatusFunction (copy), View (copy), Image (copy), Skeleton (copy), Radius (copy), Text (copy), IconButton (copy), PauseLarge (copy), PlayLarge (copy), Bookmark (copy), BuilderIconsModule (copy)
+	local Item = p1.item
+	local UseContextResult = ReactModule.useContext(MusicPickerContextModule)
+	local IsPreviewingIdMatch = UseContextResult.previewingId == Item.id
+	local IsSavedId = UseContextResult.savedIds[Item.id] == true
+	local RbxThumb = GetRbxThumbFunction(FoundationModule.Enums.ThumbnailType.Asset, Item.thumbnailAssetId)
+	local IsUseAssetFetchStatusResultMatch = UseAssetFetchStatusFunction(RbxThumb) == Enum.AssetFetchStatus.Success
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 61 ]]
+		-- upvalues: UseContextResult (copy), Item (copy)
+		UseContextResult.toggleSaved(Item.id)
+	end, { UseContextResult.toggleSaved, Item.id })
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "row align-x-left align-y-center gap-medium size-full-0 auto-y padding-x-xsmall padding-y-small radius-medium",
 		LayoutOrder = p1.layoutOrder,
-		onActivated = reactModule.useCallback(function()
-			-- upvalues: p1 (ref), item (ref)
-			p1.onSelect(item.id)
-		end, { p1.onSelect, item.id })
+		onActivated = ReactModule.useCallback(function() --[[ Line: 53 ]]
+			-- upvalues: p1 (copy), Item (copy)
+			p1.onSelect(Item.id)
+		end, { p1.onSelect, Item.id })
 	}, {
-		Thumbnail = reactModule.createElement(image, {
+		Thumbnail = ReactModule.createElement(Image, {
 			BackgroundTransparency = 1,
 			LayoutOrder = 1,
 			tag = "position-center-center anchor-center-center size-1200",
 			cornerRadius = UDim.new(0, 8),
-			Image = var2,
+			Image = RbxThumb,
 			ScaleType = Enum.ScaleType.Fit
 		}, {
-			Skeleton = if not (useAssetFetchStatus(var2) == Enum.AssetFetchStatus.Success) then reactModule.createElement(skeleton, { radius = radius.Medium, Size = UDim2.fromScale(1, 1) }) else nil
+			Skeleton = if IsUseAssetFetchStatusResultMatch then nil else ReactModule.createElement(Skeleton, { radius = Radius.Medium, Size = UDim2.fromScale(1, 1) })
 		}),
-		MusicInfo = reactModule.createElement(view, {
+		MusicInfo = ReactModule.createElement(View, {
 			LayoutOrder = 2,
 			tag = "col shrink gap-xxsmall size-full-0 auto-y"
 		}, {
-			Title = reactModule.createElement(text, {
+			Title = ReactModule.createElement(Text, {
 				tag = "auto-xy text-title-medium text-align-x-left text-align-y-top text-truncate-end content-emphasis",
-				Text = item.title or ""
+				Text = Item.title or ""
 			}),
-			Artist = reactModule.createElement(text, {
+			Artist = ReactModule.createElement(Text, {
 				tag = "auto-xy text-body-small text-align-x-left text-align-y-top text-truncate-end content-neutral",
-				Text = item.artist or ""
+				Text = Item.artist or ""
 			})
 		}),
-		Controls = reactModule.createElement(view, {
+		Controls = ReactModule.createElement(View, {
 			LayoutOrder = 3,
 			tag = "row align-x-right align-y-center gap-small auto-xy"
 		}, {
-			PreviewButton = reactModule.createElement(iconButton, {
+			PreviewButton = ReactModule.createElement(IconButton, {
 				isCircular = true,
 				LayoutOrder = 1,
-				icon = if var1.previewingId == item.id then pauseLarge else playLarge,
-				onActivated = reactModule.useCallback(function()
-					-- upvalues: var1 (ref), item (ref)
-					var1.togglePreview(item.id)
-				end, { var1.togglePreview, item.id }),
-				size = foundationModule.Enums.IconSize.Small,
-				variant = foundationModule.Enums.ButtonVariant.Standard
+				icon = if IsPreviewingIdMatch then PauseLarge else PlayLarge,
+				onActivated = ReactModule.useCallback(function() --[[ Line: 57 ]]
+					-- upvalues: UseContextResult (copy), Item (copy)
+					UseContextResult.togglePreview(Item.id)
+				end, { UseContextResult.togglePreview, Item.id }),
+				size = FoundationModule.Enums.IconSize.Small,
+				variant = FoundationModule.Enums.ButtonVariant.Standard
 			}),
-			SaveButton = reactModule.createElement(iconButton, {
+			SaveButton = if UseContextResult.showSaveButton then ReactModule.createElement(IconButton, {
 				isCircular = true,
 				LayoutOrder = 2,
 				icon = {
-					name = bookmark,
-					variant = if var1.savedIds[item.id] == true then builderIconsModule.IconVariant.Filled else builderIconsModule.IconVariant.Regular
+					name = Bookmark,
+					variant = if IsSavedId then BuilderIconsModule.IconVariant.Filled else BuilderIconsModule.IconVariant.Regular
 				},
-				onActivated = reactModule.useCallback(function()
-					-- upvalues: var1 (ref), item (ref)
-					var1.toggleSaved(item.id)
-				end, { var1.toggleSaved, item.id }),
-				size = foundationModule.Enums.IconSize.Small,
-				variant = foundationModule.Enums.ButtonVariant.Utility
-			})
+				onActivated = UseResult,
+				size = FoundationModule.Enums.IconSize.Small,
+				variant = FoundationModule.Enums.ButtonVariant.Utility
+			}) else nil
 		})
 	})
 end

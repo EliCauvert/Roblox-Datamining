@@ -1,14 +1,14 @@
-﻿local t = {}
-local parent = script.Parent.Parent
-local object = require(parent.Parent.LuauPolyfill).Object
-local DEV = require(parent.utilities).DEV
-require(parent.jsutils.invariant).invariant(typeof(DEV) == "boolean", tostring(DEV))
-t.empty = require(script.empty).empty
-t.from = require(script.from).from
-t.split = require(script.split).split
-t.concat = require(script.concat).concat
-t.execute = require(script.execute).execute
-t.ApolloLink = require(script.ApolloLink).ApolloLink
-object.assign(t, require(script.types))
+﻿local CoreModule = {}
+local Parent = script.Parent.Parent
+local Object = require(Parent.Parent.LuauPolyfill).Object
+local DEV = require(Parent.utilities).DEV
+require(Parent.jsutils.invariant).invariant(typeof(DEV) == "boolean", (tostring(DEV)))
+CoreModule.empty = require(script.empty).empty
+CoreModule.from = require(script.from).from
+CoreModule.split = require(script.split).split
+CoreModule.concat = require(script.concat).concat
+CoreModule.execute = require(script.execute).execute
+CoreModule.ApolloLink = require(script.ApolloLink).ApolloLink
+Object.assign(CoreModule, (require(script.types)))
 
-return t
+return CoreModule

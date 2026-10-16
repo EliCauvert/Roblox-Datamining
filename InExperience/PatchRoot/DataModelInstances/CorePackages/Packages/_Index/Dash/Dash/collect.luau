@@ -1,13 +1,13 @@
 ﻿local _ = require(script.Parent.Types)
 
-return function(p1, p2)
+return function(List, Callback) --[[ Line: 16 | Named "collect" ]]
 	local t = {}
 	
-	for i, v in p1 do
-		local var1, var2 = p2(i, v)
+	for i, value in List do
+		local CallbackResult, CallbackResult2 = Callback(i, value)
 		
-		if var1 ~= nil then
-			t[var1] = var2
+		if CallbackResult ~= nil then
+			t[CallbackResult] = CallbackResult2
 		end
 	end
 	return t

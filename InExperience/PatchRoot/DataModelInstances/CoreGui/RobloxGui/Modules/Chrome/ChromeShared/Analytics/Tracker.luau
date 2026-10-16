@@ -1,41 +1,41 @@
-﻿local t = {}
-t.__index = t
+﻿local TrackerModule = {}
+TrackerModule.__index = TrackerModule
 
-function t.new()
-	-- upvalues: t (ref)
-	return setmetatable({ trackers = {} }, t)
+function TrackerModule.new() --[[ Line: 16 ]]
+	-- upvalues: TrackerModule (copy)
+	return (setmetatable({ trackers = {} }, TrackerModule))
 end
 
-function t:toggle(p1)
-	self[p1] = not self[p1]
+function TrackerModule:toggle(Key) --[[ Line: 24 ]]
+	self[Key] = not self[Key]
 	
-	return self[p1]
+	return self[Key]
 end
 
-function t:set(p1, p2)
+function TrackerModule:set(p1, p2) --[[ Line: 29 ]]
 	self.trackers[p1] = p2
 end
 
-function t:get(p1)
+function TrackerModule:get(p1) --[[ Line: 33 ]]
 	return self.trackers[p1]
 end
 
-function t:reset(p1)
+function TrackerModule:reset(p1) --[[ Line: 37 ]]
 	self.trackers[p1] = nil
 end
 
-function t:startTime(p1)
+function TrackerModule:startTime(p1) --[[ Line: 41 ]]
 	self.trackers[p1] = DateTime.now().UnixTimestampMillis
 end
 
-function t:finishTime(p1)
+function TrackerModule:finishTime(p1) --[[ Line: 45 ]]
 	if self.trackers[p1] then
-		local var1 = DateTime.now().UnixTimestampMillis - self.trackers[p1]
 		self.trackers[p1] = 0
 		
-		return var1
+		return DateTime.now().UnixTimestampMillis - self.trackers[p1]
+	else
+		return 0
 	end
-	return 0
 end
 
-return t
+return TrackerModule

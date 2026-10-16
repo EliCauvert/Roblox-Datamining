@@ -1,39 +1,37 @@
-﻿local sduiSharedUtilities = script:FindFirstAncestor("SduiSharedUtilities")
-local parent = sduiSharedUtilities.Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local getSduiPageEntrySnackbarStoreModule = require(sduiSharedUtilities.getSduiPageEntrySnackbarStore)
+﻿local SduiSharedUtilities = script:FindFirstAncestor("SduiSharedUtilities")
+local Parent = SduiSharedUtilities.Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local GetSduiPageEntrySnackbarStoreModule = require(SduiSharedUtilities.getSduiPageEntrySnackbarStore)
 
-return function(p1)
-	-- upvalues: getSduiPageEntrySnackbarStoreModule (ref), signalsReactModule (ref), reactModule (ref)
-	local var1 = signalsReactModule.useSignalState(getSduiPageEntrySnackbarStoreModule().getSignal(p1))
-	local var2 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref), getSduiPageEntrySnackbarStoreModule (copy)
+return function(p1) --[[ Line: 15 | Named "usePageEntrySnackbar" ]]
+	-- upvalues: GetSduiPageEntrySnackbarStoreModule (copy), SignalsReactModule (copy), ReactModule (copy)
+	local UseSignalStateResult = SignalsReactModule.useSignalState((GetSduiPageEntrySnackbarStoreModule().getSignal(p1)))
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 20 ]]
+		-- upvalues: p1 (copy), GetSduiPageEntrySnackbarStoreModule (upval)
 		if p1 then
-			getSduiPageEntrySnackbarStoreModule().hide(p1)
+			GetSduiPageEntrySnackbarStoreModule().hide(p1)
 		end
 	end, { p1 })
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), p1 (ref), getSduiPageEntrySnackbarStoreModule (copy)
-		if var1 == nil then
-			return
-		end
-		local delayedThread = task.delay(var1.durationSeconds or 4, function()
-			-- upvalues: p1 (copy), getSduiPageEntrySnackbarStoreModule (copy)
+	ReactModule.useEffect(function() --[[ Line: 27 ]]
+		-- upvalues: UseSignalStateResult (copy), p1 (copy), GetSduiPageEntrySnackbarStoreModule (upval)
+		if UseSignalStateResult == nil then return end
+		local DelayedThread = task.delay(UseSignalStateResult.durationSeconds or 4, function() --[[ Line: 33 ]]
+			-- upvalues: p1 (upval), GetSduiPageEntrySnackbarStoreModule (upval)
 			if p1 then
-				getSduiPageEntrySnackbarStoreModule().hide(p1)
+				GetSduiPageEntrySnackbarStoreModule().hide(p1)
 			end
 		end)
 		
-		return function()
-			-- upvalues: delayedThread (ref)
-			task.cancel(delayedThread)
+		return function() --[[ Line: 39 ]]
+			-- upvalues: DelayedThread (copy)
+			task.cancel(DelayedThread)
 		end
-	end, { var1 })
+	end, { UseSignalStateResult })
 	
 	return {
-		snackbarConfig = var1,
-		dismissSnackbar = var2,
-		onDismiss = var2
+		snackbarConfig = UseSignalStateResult,
+		dismissSnackbar = UseResult,
+		onDismiss = UseResult
 	}
 end

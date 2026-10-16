@@ -1,3 +1,3 @@
-﻿return function(p1)
-	return if p1.isUniverseChat ~= true then p1.channelNameOverride == "RBXGlobal" else true
+﻿return function(p1): boolean --[[ Line: 8 | Named "isGlobalChatMessage" ]]
+	return p1.isUniverseChat == true or p1.channelNameOverride == "RBXGlobal"
 end

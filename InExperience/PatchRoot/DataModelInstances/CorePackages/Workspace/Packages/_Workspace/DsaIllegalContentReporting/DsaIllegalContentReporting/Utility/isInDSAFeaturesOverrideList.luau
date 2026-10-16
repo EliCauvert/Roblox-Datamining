@@ -1,24 +1,24 @@
-﻿local playersService = game:GetService("Players")
+﻿local Players = game:GetService("Players")
 game:DefineFastString("DSAReportingAndTransparencyOverrideUserIds", "")
 
-function isInDSAFeaturesOverrideList(p1)
-	-- upvalues: playersService (ref)
-	local var1 = 0
+function isInDSAFeaturesOverrideList(p1): boolean --[[ Line: 5 ]]
+	-- upvalues: Players (copy)
+	local UserId = 0
 	
 	if p1 == nil then
-		local localPlayer = playersService.LocalPlayer
-		while not localPlayer do
-			playersService:GetPropertyChangedSignal("LocalPlayer"):Wait()
-			localPlayer = playersService.LocalPlayer
+		local LocalPlayer = Players.LocalPlayer
+		while not LocalPlayer do
+			Players:GetPropertyChangedSignal("LocalPlayer"):Wait()
+			LocalPlayer = Players.LocalPlayer
 		end
-		if localPlayer then
-			var1 = localPlayer.UserId
+		if LocalPlayer then
+			UserId = LocalPlayer.UserId
 		end
 	else
-		var1 = p1
+		UserId = p1
 	end
 	for i in game:GetFastString("DSAReportingAndTransparencyOverrideUserIds"):gmatch("%d+") do
-		if tonumber(i) == var1 then
+		if tonumber(i) == UserId then
 			return true
 		end
 	end

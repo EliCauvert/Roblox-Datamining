@@ -1,6 +1,6 @@
-﻿return function(a, b)
-	local maxValue = math.max(0, math.floor(b))
-	local charCount = utf8.len(a)
+﻿return function(Text: string, Value: number): string --[[ Line: 1 | Named "truncateToMaxLength" ]]
+	local Largest = math.max(0, (math.floor(Value)))
+	local Length = utf8.len(Text)
 	
-	return if charCount == nil then if maxValue < #a then string.sub(a, 1, maxValue) else a elseif charCount <= maxValue then a else string.sub(a, 1, utf8.offset(a, maxValue + 1) - 1)
+	return if Length == nil then if Largest < #Text then string.sub(Text, 1, Largest) else Text elseif Length <= Largest then Text else string.sub(Text, 1, utf8.offset(Text, Largest + 1) - 1)
 end

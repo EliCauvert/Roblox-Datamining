@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("UGCValidationEnforceHRDUpload", false)
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastFlag("UGCValidationEnforceHRDUpload")
 end

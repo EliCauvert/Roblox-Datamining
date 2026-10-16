@@ -1,3 +1,3 @@
-﻿return function(p1, p2)
-	return if p1 == nil or p2 == nil then false else p1.UserInputType == Enum.UserInputType.Touch and p2 ~= p1
+﻿return function(Input, Input1): boolean --[[ Line: 3 ]]
+	return Input ~= nil and Input1 ~= nil and (Input.UserInputType == Enum.UserInputType.Touch and Input1 ~= Input)
 end

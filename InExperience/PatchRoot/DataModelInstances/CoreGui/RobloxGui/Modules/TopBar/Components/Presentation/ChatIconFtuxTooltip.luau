@@ -1,135 +1,141 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local guiService = game:GetService("GuiService")
-local coreGuiService = game:GetService("CoreGui")
-local appStorageService = game:GetService("AppStorageService")
-local useLocalization = require(corePackagesService.Workspace.Packages.Localization).Hooks.useLocalization
-local reactModule = require(corePackagesService.Packages.React)
-local cryoModule = require(corePackagesService.Packages.Cryo)
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local withTooltip = UIBloxModule.App.Dialog.TooltipV2.withTooltip
-local tooltipOrientation = UIBloxModule.App.Dialog.Enum.TooltipOrientation
-local _ = require(corePackagesService.Workspace.Packages.AppCommonLib).Signal
-local luauPolyfillModule = require(corePackagesService.Packages.LuauPolyfill)
-local clearTimeout = luauPolyfillModule.clearTimeout
-local setTimeout = luauPolyfillModule.setTimeout
-local t = {
+﻿local CorePackages = game:GetService("CorePackages")
+local GuiService = game:GetService("GuiService")
+local CoreGui = game:GetService("CoreGui")
+local AppStorageService = game:GetService("AppStorageService")
+local UseLocalizationFunction = require(CorePackages.Workspace.Packages.Localization).Hooks.useLocalization
+local ReactModule = require(CorePackages.Packages.React)
+local CryoModule = require(CorePackages.Packages.Cryo)
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
+local WithTooltipFunction = UIBloxModule.App.Dialog.TooltipV2.withTooltip
+local TooltipOrientation = UIBloxModule.App.Dialog.Enum.TooltipOrientation
+local _ = require(CorePackages.Workspace.Packages.AppCommonLib).Signal
+local LuauPolyfillModule = require(CorePackages.Packages.LuauPolyfill)
+local ClearTimeoutFunction = LuauPolyfillModule.clearTimeout
+local SetTimeoutFunction = LuauPolyfillModule.setTimeout
+local config = {
 	showDelay = 1000,
 	dismissDelay = 7000,
-	onDismissed = function(_, _) end
+	onDismissed = function(_, _) --[[ Line: 26 ]] end
 }
 
-return function(p1)
-	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), setTimeout (ref), appStorageService (ref), useLocalization (ref), guiService (ref), clearTimeout (ref), withTooltip (ref), coreGuiService (ref), tooltipOrientation (ref)
-	local var1 = cryoModule.Dictionary.union(t, p1)
-	local var2, var3 = reactModule.useState(false)
-	local var4, var5 = reactModule.useState(false)
-	local var6 = reactModule.useRef(setTimeout(function() end, var1.showDelay))
-	local var7 = reactModule.useRef(setTimeout(function() end, var1.dismissDelay))
-	local var8 = not (reactModule.useMemo(function()
-		-- upvalues: var1 (ref), appStorageService (copy)
-		local var9 = false
+return function(p1) --[[ Line: 41 ]]
+	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), SetTimeoutFunction (copy), AppStorageService (copy), UseLocalizationFunction (copy), GuiService (copy), ClearTimeoutFunction (copy), WithTooltipFunction (copy), CoreGui (copy), TooltipOrientation (copy)
+	local UnionResult = CryoModule.Dictionary.union(config, p1)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
+	local UseRefResult = ReactModule.useRef(SetTimeoutFunction(function() --[[ Line: 45 ]] end, UnionResult.showDelay))
+	local UseRefResult1 = ReactModule.useRef(SetTimeoutFunction(function() --[[ Line: 46 ]] end, UnionResult.dismissDelay))
+	local Inverted = not (ReactModule.useMemo(function(): boolean --[[ Line: 48 ]]
+		-- upvalues: UnionResult (copy), AppStorageService (upval)
+		local Flag = false
 		
-		if var1.localStorageKey then
-			local ok, status = pcall(function()
-				-- upvalues: appStorageService (copy), var1 (copy)
-				return appStorageService:GetItem(var1.localStorageKey)
+		if UnionResult.localStorageKey then
+			local Success, Result = pcall(function() --[[ Line: 51 ]]
+				-- upvalues: AppStorageService (upval), UnionResult (upval)
+				return AppStorageService:GetItem(UnionResult.localStorageKey)
 			end)
 			
-			if ok then
-				return status == "true"
+			if Success then
+				return Result == "true"
 			end
-			var9 = true
+			Flag = true
 		end
-		return var9
-	end, { var1.localStorageKey }) or var4)
-	local var9 = var2 and var8
-	local var10 = useLocalization({ headerText = var1.headerKey, bodyText = var1.bodyKey })
-	local var11 = reactModule.useCallback(function(p2)
-		-- upvalues: var1 (ref), var9 (ref), var5 (ref)
-		if var1.onDismissed then
-			var1.onDismissed(var9, p2)
+		return Flag
+	end, { UnionResult.localStorageKey }) or UseStateResult1)
+	local Inverted1: boolean = UseStateResult and Inverted
+	local UseLocalizationResult = UseLocalizationFunction({
+		headerText = UnionResult.headerKey,
+		bodyText = UnionResult.bodyKey
+	})
+	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 66 ]]
+		-- upvalues: UnionResult (copy), Inverted1 (copy), UseStateResult2_1 (copy)
+		if UnionResult.onDismissed then
+			UnionResult.onDismissed(Inverted1, p2)
 		end
-		var5(true)
-	end, { var5, var9 })
-	reactModule.useEffect(function()
-		-- upvalues: guiService (copy), var8 (ref), var11 (ref), var1 (ref)
-		local list = {
-			guiService.MenuOpened:Connect(function()
-				-- upvalues: var8 (copy), var11 (copy)
-				if var8 then
-					var11("menuOpened")
+		UseStateResult2_1(true)
+	end, { UseStateResult2_1, Inverted1 })
+	ReactModule.useEffect(function() --[[ Line: 75 ]]
+		-- upvalues: GuiService (upval), Inverted (copy), UseResult (copy), UnionResult (copy)
+		local Connections = {
+			GuiService.MenuOpened:Connect(function() --[[ Line: 77 ]]
+				-- upvalues: Inverted (upval), UseResult (upval)
+				if Inverted then
+					UseResult("menuOpened")
 				end
 			end),
-			var1.iconClickedSignal:connect(function()
-				-- upvalues: var8 (copy), var11 (copy)
-				if var8 then
-					var11("chatIconClicked")
+			UnionResult.iconClickedSignal:connect(function() --[[ Line: 82 ]]
+				-- upvalues: Inverted (upval), UseResult (upval)
+				if Inverted then
+					UseResult("chatIconClicked")
 				end
 			end)
 		}
 		
-		return function()
-			-- upvalues: list (ref)
-			for i, v in list do
-				if v.disconnect then
-					v:disconnect()
-				elseif v.Disconnect then
-					v:Disconnect()
+		return function() --[[ Line: 89 ]]
+			-- upvalues: Connections (copy)
+			for _, connection in Connections do
+				if connection.disconnect then
+					connection:disconnect()
+				elseif connection.Disconnect then
+					connection:Disconnect()
 				end
 			end
 		end
 	end, {
-		guiService.MenuOpened,
-		var1.iconClickedSignal,
-		var8,
-		var11
+		GuiService.MenuOpened,
+		UnionResult.iconClickedSignal,
+		Inverted,
+		UseResult
 	})
-	reactModule.useEffect(function()
-		-- upvalues: clearTimeout (copy), var6 (ref), var8 (ref), setTimeout (copy), var3 (ref), var1 (ref)
-		clearTimeout(var6.current)
+	ReactModule.useEffect(function() --[[ Line: 101 ]]
+		-- upvalues: ClearTimeoutFunction (upval), UseRefResult (copy), Inverted (copy), SetTimeoutFunction (upval), UseStateResult2 (copy), UnionResult (copy)
+		ClearTimeoutFunction(UseRefResult.current)
 		
-		if var8 then
-			var6.current = setTimeout(function()
-				-- upvalues: var8 (copy), var3 (copy)
-				if var8 then
-					var3(true)
+		if Inverted then
+			UseRefResult.current = SetTimeoutFunction(function() --[[ Line: 104 ]]
+				-- upvalues: Inverted (upval), UseStateResult2 (upval)
+				if Inverted then
+					UseStateResult2(true)
 				end
-			end, var1.showDelay)
+			end, UnionResult.showDelay)
 		end
-	end, { var8, var6 })
-	reactModule.useEffect(function()
-		-- upvalues: clearTimeout (copy), var7 (ref), var2 (ref), setTimeout (copy), var11 (ref), var1 (ref)
-		clearTimeout(var7.current)
+	end, { Inverted, UseRefResult })
+	ReactModule.useEffect(function() --[[ Line: 113 ]]
+		-- upvalues: ClearTimeoutFunction (upval), UseRefResult1 (copy), UseStateResult (copy), SetTimeoutFunction (upval), UseResult (copy), UnionResult (copy)
+		ClearTimeoutFunction(UseRefResult1.current)
 		
-		if var2 then
-			var7.current = setTimeout(function()
-				-- upvalues: var11 (copy)
-				var11("timeout")
-			end, var1.dismissDelay)
+		if UseStateResult then
+			UseRefResult1.current = SetTimeoutFunction(function() --[[ Line: 116 ]]
+				-- upvalues: UseResult (upval)
+				UseResult("timeout")
+			end, UnionResult.dismissDelay)
 		end
-	end, { var2, var7 })
-	reactModule.useEffect(function()
-		-- upvalues: var9 (ref), var1 (ref), appStorageService (copy)
-		if var9 and var1.localStorageKey then
-			pcall(function()
-				-- upvalues: appStorageService (copy), var1 (copy)
-				appStorageService:SetItem(var1.localStorageKey, "true")
+	end, { UseStateResult, UseRefResult1 })
+	ReactModule.useEffect(function() --[[ Line: 122 ]]
+		-- upvalues: Inverted1 (copy), UnionResult (copy), AppStorageService (upval)
+		if Inverted1 and UnionResult.localStorageKey then
+			pcall(function() --[[ Line: 124 ]]
+				-- upvalues: AppStorageService (upval), UnionResult (upval)
+				AppStorageService:SetItem(UnionResult.localStorageKey, "true")
 			end)
 		end
-	end, { var9, var1.localStorageKey })
+	end, { Inverted1, UnionResult.localStorageKey })
 	
-	return withTooltip({ headerText = var10.headerText, bodyText = var10.bodyText }, {
+	return WithTooltipFunction({
+		headerText = UseLocalizationResult.headerText,
+		bodyText = UseLocalizationResult.bodyText
+	}, {
 		DisplayOrder = 10,
-		active = var9,
-		guiTarget = coreGuiService,
-		preferredOrientation = tooltipOrientation.Bottom
-	}, function(p2)
-		-- upvalues: reactModule (copy)
-		return reactModule.createElement("Frame", {
+		active = Inverted1,
+		guiTarget = CoreGui,
+		preferredOrientation = TooltipOrientation.Bottom
+	}, function(p2) --[[ Line: 139 ]]
+		-- upvalues: ReactModule (upval)
+		return ReactModule.createElement("Frame", {
 			Size = UDim2.new(1, 0, 1, 0),
 			BackgroundTransparency = 1,
-			[reactModule.Change.AbsoluteSize] = p2,
-			[reactModule.Change.AbsolutePosition] = p2
+			[ReactModule.Change.AbsoluteSize] = p2,
+			[ReactModule.Change.AbsolutePosition] = p2
 		})
 	end)
 end

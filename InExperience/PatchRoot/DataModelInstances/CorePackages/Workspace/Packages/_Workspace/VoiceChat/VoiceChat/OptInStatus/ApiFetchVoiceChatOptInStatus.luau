@@ -1,34 +1,35 @@
-﻿local voiceChat = script:FindFirstAncestor("VoiceChat")
-local getVoiceChatOptInStatusModule = require(voiceChat.OptInStatus.GetVoiceChatOptInStatus)
-local setVoiceChatOptInStatusModule = require(voiceChat.OptInStatus.SetVoiceChatOptInStatus)
-local parent = voiceChat.Parent
-local promiseModule = require(parent.Promise)
-local performFetch = require(parent.Http).PerformFetch
-local logging = require(parent.AppCommonLib).Logging
+﻿local VoiceChat = script:FindFirstAncestor("VoiceChat")
+local GetVoiceChatOptInStatusModule = require(VoiceChat.OptInStatus.GetVoiceChatOptInStatus)
+local SetVoiceChatOptInStatusModule = require(VoiceChat.OptInStatus.SetVoiceChatOptInStatus)
+local Parent = VoiceChat.Parent
+local PromiseModule = require(Parent.Promise)
+local PerformFetch = require(Parent.Http).PerformFetch
+local Logging = require(Parent.AppCommonLib).Logging
 
 return {
 	KeyMapper = "luaapp.voicechatoptinstatus",
-	Fetch = function(p1)
-		-- upvalues: performFetch (ref), getVoiceChatOptInStatusModule (ref), setVoiceChatOptInStatusModule (ref), promiseModule (ref), logging (ref)
-		return performFetch.Single("luaapp.voicechatoptinstatus", function(p2)
-			-- upvalues: getVoiceChatOptInStatusModule (copy), p1 (ref), setVoiceChatOptInStatusModule (copy), promiseModule (copy), logging (copy)
-			return getVoiceChatOptInStatusModule(p1):andThen(function(p3)
-				-- upvalues: p2 (ref), setVoiceChatOptInStatusModule (copy), promiseModule (copy), logging (copy)
-				local responseBody = p3.responseBody
+	Fetch = function(p1) --[[ Line: 16 ]]
+		-- upvalues: PerformFetch (copy), GetVoiceChatOptInStatusModule (copy), SetVoiceChatOptInStatusModule (copy), PromiseModule (copy), Logging (copy)
+		return PerformFetch.Single("luaapp.voicechatoptinstatus", function(p2) --[[ Line: 17 ]]
+			-- upvalues: GetVoiceChatOptInStatusModule (upval), p1 (copy), SetVoiceChatOptInStatusModule (upval), PromiseModule (upval), Logging (upval)
+			return GetVoiceChatOptInStatusModule(p1):andThen(function(Result) --[[ Line: 18 ]]
+				-- upvalues: p2 (copy), SetVoiceChatOptInStatusModule (upval), PromiseModule (upval), Logging (upval)
+				local ResponseBody = Result.responseBody
 				
-				if responseBody == nil or responseBody.isUserOptIn == nil then
-					logging.warn("Response from GetVoiceChatOptInStatus is malformed!")
+				if ResponseBody == nil or ResponseBody.isUserOptIn == nil then
+					Logging.warn("Response from GetVoiceChatOptInStatus is malformed!")
 					
-					return promiseModule.reject({ HttpError = Enum.HttpError.OK })
+					return PromiseModule.reject({ HttpError = Enum.HttpError.OK })
+				else
+					p2:dispatch(SetVoiceChatOptInStatusModule(ResponseBody.isUserOptIn))
+					
+					return PromiseModule.resolve(Result)
 				end
-				p2:dispatch(setVoiceChatOptInStatusModule(responseBody.isUserOptIn))
-				
-				return promiseModule.resolve(p3)
 			end)
 		end)
 	end,
-	GetFetchingStatus = function(p1)
-		-- upvalues: performFetch (ref)
-		return performFetch.GetStatus(p1, "luaapp.voicechatoptinstatus")
+	GetFetchingStatus = function(p1) --[[ Line: 31 ]]
+		-- upvalues: PerformFetch (copy)
+		return PerformFetch.GetStatus(p1, "luaapp.voicechatoptinstatus")
 	end
 }

@@ -1,15 +1,14 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local memo = reactModule.memo
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local skeleton = foundationModule.Skeleton
-local radius = foundationModule.Enums.Radius
-local useTokens = foundationModule.Hooks.useTokens
-local useChatPagePaddingModule = require(appChat.Contexts.ChatPagePadding.useChatPagePadding)
-local list = {
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local Skeleton = FoundationModule.Skeleton
+local Radius = FoundationModule.Enums.Radius
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseChatPagePaddingModule = require(AppChat.Contexts.ChatPagePadding.useChatPagePadding)
+local ItemList = {
 	{
 		heightFactor = 1,
 		isIncoming = true,
@@ -64,15 +63,15 @@ local list = {
 		widthPercentage = 0.5
 	}
 }
-local t = { size = UDim2.fromScale(1, 1), itemList = list }
+local config = { size = UDim2.fromScale(1, 1), itemList = ItemList }
 
-local function renderSkeletonRow(p1, p2, p3, p4)
-	-- upvalues: reactModule (ref), view (ref), skeleton (ref), radius (ref)
-	local size900 = p2.Size.Size_900
+local function renderSkeletonRow(p1, p2, p3, LayoutOrder) --[[ Line: 50 ]]
+	-- upvalues: ReactModule (copy), View (copy), Skeleton (copy), Radius (copy)
+	local Size900 = p2.Size.Size_900
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		testId = "ConversationMessageSkeletonRow",
-		LayoutOrder = p4,
+		LayoutOrder = LayoutOrder,
 		tag = {
 			["row align-y-bottom gap-small size-full-0 auto-y"] = true,
 			["align-x-left"] = p1.isIncoming,
@@ -85,38 +84,38 @@ local function renderSkeletonRow(p1, p2, p3, p4)
 			top = if p1.addTopPadding then UDim.new(0, p2.Size.Size_600) else nil
 		}
 	}, {
-		Avatar = if p1.isIncoming and p1.showAvatarCircle then reactModule.createElement(skeleton, {
+		Avatar = if p1.isIncoming and p1.showAvatarCircle then ReactModule.createElement(Skeleton, {
 			LayoutOrder = 1,
-			radius = radius.Circle,
-			Size = UDim2.fromOffset(size900, size900)
+			radius = Radius.Circle,
+			Size = UDim2.fromOffset(Size900, Size900)
 		}) else nil,
-		Bubble = reactModule.createElement(skeleton, {
+		Bubble = ReactModule.createElement(Skeleton, {
 			LayoutOrder = 2,
-			radius = radius.Medium,
+			radius = Radius.Medium,
 			Size = UDim2.new(p1.widthPercentage, 0, 0, p1.heightFactor * p2.Size.Size_500 + p2.Size.Size_400)
 		})
 	})
 end
 
-return memo(function(p1)
-	-- upvalues: cryoModule (ref), t (ref), useTokens (ref), useChatPagePaddingModule (ref), list (ref), renderSkeletonRow (ref), reactModule (ref), view (ref)
-	local var1 = cryoModule.Dictionary.union(t, p1)
-	local var2 = useTokens()
-	local var3 = useChatPagePaddingModule()
-	local t_1 = {}
+return ReactModule.memo(function(p1) --[[ Line: 90 | Named "ConversationMessageSkeletonList" ]]
+	-- upvalues: CryoModule (copy), config (copy), UseTokensFunction (copy), UseChatPagePaddingModule (copy), ItemList (copy), renderSkeletonRow (copy), ReactModule (copy), View (copy)
+	local UnionResult = CryoModule.Dictionary.union(config, p1)
+	local UseTokensResult = UseTokensFunction()
+	local UseChatPagePaddingModuleResult = UseChatPagePaddingModule()
+	local t = {}
 	
-	for i, v in var1.itemList or list do
-		t_1["SkeletonRow" .. i] = renderSkeletonRow(v, var2, var3, i)
+	for i, value in UnionResult.itemList or ItemList do
+		t["SkeletonRow" .. i] = renderSkeletonRow(value, UseTokensResult, UseChatPagePaddingModuleResult, i)
 	end
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		testId = "ConversationMessageSkeletonList",
 		tag = "size-full clip",
-		Size = var1.size,
-		LayoutOrder = var1.layoutOrder,
+		Size = UnionResult.size,
+		LayoutOrder = UnionResult.layoutOrder,
 		layout = {
 			FillDirection = Enum.FillDirection.Vertical,
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			VerticalAlignment = Enum.VerticalAlignment.Bottom
 		}
-	}, t_1)
+	}, t)
 end)

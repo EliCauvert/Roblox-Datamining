@@ -1,38 +1,39 @@
-﻿local parent = script.Parent.Parent
-local analyticsModule = require(parent.Analytics)
-local _ = require(parent.util.Types)
+﻿local Parent = script.Parent.Parent
+local AnalyticsModule = require(Parent.Analytics)
+local _ = require(Parent.util.Types)
 
-return function(value, p1, p2)
-	-- upvalues: analyticsModule (ref)
-	local handle = value:FindFirstChild("Handle")
-	assert(handle and handle:IsA("MeshPart"))
-	local handle_1 = p1:FindFirstChild("Handle")
-	assert(handle_1 and handle_1:IsA("Part"))
-	local specialMesh = handle_1:FindFirstChildOfClass("SpecialMesh")
-	assert(specialMesh)
+return function(Object, Object1, p1) --[[ Line: 7 | Named "validateLegacyAccessoryMeshPartAssetFormatMatch" ]]
+	-- upvalues: AnalyticsModule (copy)
+	local Handle = Object:FindFirstChild("Handle")
+	assert(Handle and Handle:IsA("MeshPart"))
+	local Handle1 = Object1:FindFirstChild("Handle")
+	assert(Handle1 and Handle1:IsA("Part"))
+	local SpecialMesh = Handle1:FindFirstChildOfClass("SpecialMesh")
+	assert(SpecialMesh)
 	
-	if handle.MeshId ~= specialMesh.MeshId then
-		analyticsModule.reportFailure(analyticsModule.ErrorType.validateLegacyAccessoryMeshPartAssetFormatMatch_MeshIdMismatch, nil, p2)
+	if Handle.MeshId ~= SpecialMesh.MeshId then
+		AnalyticsModule.reportFailure(AnalyticsModule.ErrorType.validateLegacyAccessoryMeshPartAssetFormatMatch_MeshIdMismatch, nil, p1)
 		
 		return false, {
-			string.format("Model meshId mismatch with rigid accessory SpecialMesh.MeshId for '%s'. You need to match the meshIds and try again.", value.Name)
+			string.format("Model meshId mismatch with rigid accessory SpecialMesh.MeshId for '%s'. You need to match the meshIds and try again.", Object.Name)
 		}
 	end
-	local textureID = handle.TextureID
+	local TextureID = Handle.TextureID
 	
-	if textureID == "" then
-		local surfaceAppearance = handle:FindFirstChildOfClass("SurfaceAppearance")
+	if TextureID == "" then
+		local SurfaceAppearance = Handle:FindFirstChildOfClass("SurfaceAppearance")
 		
-		if surfaceAppearance then
-			textureID = surfaceAppearance.ColorMap
+		if SurfaceAppearance then
+			TextureID = SurfaceAppearance.ColorMap
 		end
 	end
-	if textureID == specialMesh.TextureId then
+	if TextureID == SpecialMesh.TextureId then
 		return true
+	else
+		AnalyticsModule.reportFailure(AnalyticsModule.ErrorType.validateLegacyAccessoryMeshPartAssetFormatMatch_TextureIdMismatch, nil, p1)
+		
+		return false, {
+			string.format("Model textureId mismatch with rigid accessory SpecialMesh.TextureId for '%s'. You need to match the textureIds and try again.", Object.Name)
+		}
 	end
-	analyticsModule.reportFailure(analyticsModule.ErrorType.validateLegacyAccessoryMeshPartAssetFormatMatch_TextureIdMismatch, nil, p2)
-	
-	return false, {
-		string.format("Model textureId mismatch with rigid accessory SpecialMesh.TextureId for '%s'. You need to match the textureIds and try again.", value.Name)
-	}
 end

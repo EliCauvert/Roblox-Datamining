@@ -1,43 +1,44 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local useStyle = require(parent.UIBlox).Core.Style.useStyle
-local enumsModule = require(profilePlatform.Common.Enums)
-local useProfileAnalyticsContextModule = require(profilePlatform.Contexts.useProfileAnalyticsContext)
-local useProfileFormFactorModule = require(profilePlatform.Hooks.useProfileFormFactor)
-local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfileWrapperContext)
-local useProfileScrollContextModule = require(profilePlatform.Contexts.ProfileScrollContext.useProfileScrollContext)
-local getPeekViewOpenHeightByProfileTypeModule = require(profilePlatform.Utils.getPeekViewOpenHeightByProfileType)
-local fFlagProfilePlatformEnableImpressions = require(parent.SharedFlags).FFlagProfilePlatformEnableImpressions
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local UseStyleFunction = require(Parent.UIBlox).Core.Style.useStyle
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local UseProfileAnalyticsContextModule = require(ProfilePlatform.Contexts.useProfileAnalyticsContext)
+local UseProfileFormFactorModule = require(ProfilePlatform.Hooks.useProfileFormFactor)
+local UseProfileWrapperContextModule = require(ProfilePlatform.Contexts.useProfileWrapperContext)
+local UseProfileScrollContextModule = require(ProfilePlatform.Contexts.ProfileScrollContext.useProfileScrollContext)
+local GetPeekViewOpenHeightByProfileTypeModule = require(ProfilePlatform.Utils.getPeekViewOpenHeightByProfileType)
+local FFlagProfilePlatformEnableImpressions = require(Parent.SharedFlags).FFlagProfilePlatformEnableImpressions
 
-return function(p1)
-	-- upvalues: useProfileWrapperContextModule (ref), useProfileScrollContextModule (ref), useProfileFormFactorModule (ref), enumsModule (ref), useStyle (ref), fFlagProfilePlatformEnableImpressions (ref), useProfileAnalyticsContextModule (ref), cryoModule (ref), reactModule (ref), getPeekViewOpenHeightByProfileTypeModule (ref)
-	local profileType = useProfileWrapperContextModule().profileType
-	local var1 = useProfileScrollContextModule()
-	local var2 = useProfileFormFactorModule()
-	local var3 = var2.formFactor == enumsModule.ProfileFormFactor.Wide
-	local isFullView = var2.isFullView
-	local theme = useStyle().Theme
-	local var4 = if fFlagProfilePlatformEnableImpressions then (if fFlagProfilePlatformEnableImpressions then useProfileAnalyticsContextModule() else nil).scrollViewPositionChangedSignal else nil
+return function(p1) --[[ Line: 23 | Named "ProfilePlatformPage" ]]
+	-- upvalues: UseProfileWrapperContextModule (copy), UseProfileScrollContextModule (copy), UseProfileFormFactorModule (copy), EnumsModule (copy), UseStyleFunction (copy), FFlagProfilePlatformEnableImpressions (copy), UseProfileAnalyticsContextModule (copy), CryoModule (copy), ReactModule (copy), GetPeekViewOpenHeightByProfileTypeModule (copy)
+	local ProfileType = UseProfileWrapperContextModule().profileType
+	local UseProfileScrollContextModuleResult = UseProfileScrollContextModule()
+	local UseProfileFormFactorModuleResult = UseProfileFormFactorModule()
+	local IsFormFactorMatch = UseProfileFormFactorModuleResult.formFactor == EnumsModule.ProfileFormFactor.Wide
+	local IsFullView = UseProfileFormFactorModuleResult.isFullView
+	local Theme = UseStyleFunction().Theme
+	local UseProfileAnalyticsContextModuleResult = if FFlagProfilePlatformEnableImpressions then UseProfileAnalyticsContextModule() else nil
+	local ScrollViewPositionChangedSignal = if FFlagProfilePlatformEnableImpressions then UseProfileAnalyticsContextModuleResult.scrollViewPositionChangedSignal else nil
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		Position = UDim2.new(0, 0, 0, 0),
-		Size = UDim2.new(1, 0, 0, getPeekViewOpenHeightByProfileTypeModule(profileType)),
+		Size = UDim2.new(1, 0, 0, GetPeekViewOpenHeightByProfileTypeModule(ProfileType)),
 		AutomaticSize = Enum.AutomaticSize.Y,
 		BorderSizePixel = 0,
-		BackgroundTransparency = if profileType == enumsModule.ProfileTypes.Community and not var3 and not isFullView then theme.BackgroundContrast.Transparency else theme.BackgroundDefault.Transparency,
-		BackgroundColor3 = if profileType == enumsModule.ProfileTypes.Community and not var3 and not isFullView then theme.BackgroundContrast.Color else theme.BackgroundDefault.Color,
-		[reactModule.Change.AbsolutePosition] = function(p2)
-			-- upvalues: var1 (ref), var4 (ref)
-			var1.setAbsoluteYPosition(p2.AbsolutePosition.Y)
-			var4:fire()
+		BackgroundTransparency = if ProfileType == EnumsModule.ProfileTypes.Community and not IsFormFactorMatch and not IsFullView then Theme.BackgroundContrast.Transparency else Theme.BackgroundDefault.Transparency,
+		BackgroundColor3 = if ProfileType == EnumsModule.ProfileTypes.Community and not IsFormFactorMatch and not IsFullView then Theme.BackgroundContrast.Color else Theme.BackgroundDefault.Color,
+		[ReactModule.Change.AbsolutePosition] = function(Frame) --[[ Line: 65 ]]
+			-- upvalues: UseProfileScrollContextModuleResult (copy), ScrollViewPositionChangedSignal (copy)
+			UseProfileScrollContextModuleResult.setAbsoluteYPosition(Frame.AbsolutePosition.Y)
+			ScrollViewPositionChangedSignal:fire()
 		end
-	}, cryoModule.Dictionary.join({
-		bottomPadding = reactModule.createElement("Frame", {
+	}, (CryoModule.Dictionary.join({
+		bottomPadding = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 99999,
 			Size = UDim2.fromOffset(0, 8)
 		})
-	}, p1.children))
+	}, p1.children)))
 end

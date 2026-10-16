@@ -1,108 +1,109 @@
-﻿local parent = script:FindFirstAncestor("GenericChallenges").Parent
-local promiseModule = require(parent.Promise)
-local _ = require(parent.HttpClient)
-local isChallengeHttpResponseModule = require(script.Parent.IsChallengeHttpResponse)
-local interceptChallengeModule = require(script.Parent.InterceptChallenge)
+﻿local Parent = script:FindFirstAncestor("GenericChallenges").Parent
+local PromiseModule = require(Parent.Promise)
+local _ = require(Parent.HttpClient)
+local IsChallengeHttpResponseModule = require(script.Parent.IsChallengeHttpResponse)
+local InterceptChallengeModule = require(script.Parent.InterceptChallenge)
 
-return function(p1, p2)
-	-- upvalues: interceptChallengeModule (ref), promiseModule (ref), isChallengeHttpResponseModule (ref)
-	p2 = p2 or interceptChallengeModule
+return function(p1, p2) --[[ Line: 16 ]]
+	-- upvalues: InterceptChallengeModule (copy), PromiseModule (copy), IsChallengeHttpResponseModule (copy)
+	local P1 = p2 or InterceptChallengeModule
 	
 	return {
-		request = function(p3, p4)
-			-- upvalues: promiseModule (copy), p1 (ref), isChallengeHttpResponseModule (copy), p2 (ref)
-			local var1 = false
-			local var2 = false
-			local var3 = nil
+		request = function(Tbl, Callback) --[[ Line: 22 ]]
+			-- upvalues: PromiseModule (upval), p1 (copy), IsChallengeHttpResponseModule (upval), P1 (copy)
+			local Flag = false
+			local Flag1 = false
+			local RequestResult = nil
 			
-			local function _(value, p5)
-				-- upvalues: var1 (write), var2 (write), p4 (ref)
-				if var1 or var2 then
+			local function _(p3, p4) --[[ Line: 31 | Named "settle" ]]
+				-- upvalues: Flag (ref), Flag1 (ref), Callback (copy)
+				if not Flag and not Flag1 then
+					Flag1 = true
+					Callback(p3, p4)
+					
 					return
 				end
-				var2 = true
-				p4(value, p5)
 			end
 			
-			local function retryWithChallengeHeaders(p5)
-				-- upvalues: var1 (write), promiseModule (copy), p3 (ref), var3 (write), p1 (copy)
-				return if var1 then promiseModule.reject() else promiseModule.new(function(p6)
-					-- upvalues: p3 (copy), p5 (ref), var3 (copy), p1 (copy)
-					local var4 = if p3.headers then table.clone(p3.headers) else {}
-					
-					for i, v in p5 do
-						var4[i] = v
+			local function retryWithChallengeHeaders(p3) --[[ Line: 39 ]]
+				-- upvalues: Flag (ref), PromiseModule (upval), Tbl (copy), RequestResult (ref), p1 (upval)
+				return if Flag then PromiseModule.reject() else PromiseModule.new(function(Callback) --[[ Line: 43 ]]
+					-- upvalues: Tbl (upval), p3 (copy), RequestResult (upval), p1 (upval)
+					local Copy = if Tbl.headers then table.clone(Tbl.headers) else {}
+					for i, value in p3 do
+						Copy[i] = value
 					end
-					local cloned = table.clone(p3)
-					cloned.headers = var4
-					var3 = p1.request(cloned, function(p7, p8)
-						-- upvalues: p6 (ref)
-						p6({ success = p7, response = p8 })
+					local Copy1 = table.clone(Tbl)
+					Copy1.headers = Copy
+					RequestResult = p1.request(Copy1, function(Success, Response) --[[ Line: 51 ]]
+						-- upvalues: Callback (copy)
+						Callback({ success = Success, response = Response })
 					end)
 				end)
 			end
 			
-			var3 = p1.request(p3, function(p6, p7)
-				-- upvalues: var3 (write), var1 (write), var2 (write), p4 (ref), isChallengeHttpResponseModule (copy), p2 (copy), retryWithChallengeHeaders (ref)
-				var3 = nil
+			RequestResult = p1.request(Tbl, function(p4, p5) --[[ Line: 57 ]]
+				-- upvalues: RequestResult (ref), Flag (ref), Flag1 (ref), Callback (copy), IsChallengeHttpResponseModule (upval), P1 (upval), retryWithChallengeHeaders (copy)
+				RequestResult = nil
 				
-				if var1 then return end
-				if p6 then
-					local headers = p7.headers
+				if Flag then return end
+				if p4 then
+					local Headers = p5.headers
 					
-					if headers and isChallengeHttpResponseModule(p7.statusCode, headers) then
-						local ok, status = pcall(p2, {
-							rawResponseHeaders = headers,
+					if Headers and IsChallengeHttpResponseModule(p5.statusCode, Headers) then
+						local Success, Result = pcall(P1, {
+							rawResponseHeaders = Headers,
 							retryRequestCallback = retryWithChallengeHeaders
 						})
 						
-						if ok then
-							status:andThen(function(p8)
-								-- upvalues: var1 (copy), var2 (copy), p4 (copy)
-								local success = p8.success
-								local response = p8.response
+						if Success then
+							Result:andThen(function(Result) --[[ Line: 84 ]]
+								-- upvalues: Flag (upval), Flag1 (upval), Callback (upval)
+								local Success = Result.success
+								local Response = Result.response
 								
-								if not var1 then
-									if var2 then return end
-									var2 = true
-									p4(success, response)
+								if not Flag then
+									if Flag1 then return end
+									Flag1 = true
+									Callback(Success, Response)
 								end
-							end):catch(function()
-								-- upvalues: p6 (ref), p7 (ref), var1 (copy), var2 (copy), p4 (copy)
-								if not var1 then
-									if var2 then return end
-									var2 = true
-									p4(p6, p7)
+							end):catch(function() --[[ Line: 87 ]]
+								-- upvalues: p4 (copy), p5 (copy), Flag (upval), Flag1 (upval), Callback (upval)
+								if not Flag then
+									if Flag1 then return end
+									Flag1 = true
+									Callback(p4, p5)
 								end
 							end)
 							
 							return
-						elseif not var1 then
-							if var2 then return end
-							var2 = true
-							p4(p6, p7)
+						end
+						if not Flag then
+							if Flag1 then return end
+							Flag1 = true
+							Callback(p4, p5)
 						end
 						return
-					elseif not var1 then
-						if var2 then return end
-						var2 = true
-						p4(p6, p7)
+					elseif not Flag then
+						if Flag1 then return end
+						Flag1 = true
+						Callback(p4, p5)
 					end
 					return
-				elseif not var1 then
-					if var2 then return end
-					var2 = true
-					p4(p6, p7)
+				elseif not Flag then
+					if Flag1 then return end
+					Flag1 = true
+					Callback(p4, p5)
 				end
 			end)
 			
-			return function()
-				-- upvalues: var1 (write), var3 (write)
-				var1 = true
+			return function() --[[ Line: 93 ]]
+				-- upvalues: Flag (ref), RequestResult (ref)
+				Flag = true
 				
-				if var3 ~= nil then
-					var3()
-					var3 = nil
+				if RequestResult ~= nil then
+					RequestResult()
+					RequestResult = nil
 				end
 			end
 		end

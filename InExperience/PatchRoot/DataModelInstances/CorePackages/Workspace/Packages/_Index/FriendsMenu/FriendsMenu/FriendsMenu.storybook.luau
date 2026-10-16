@@ -1,33 +1,33 @@
-﻿local friendsMenu = script:FindFirstAncestor("FriendsMenu")
-local parent = friendsMenu.Parent
-local UIBloxModule = require(parent.UIBlox)
-UIBloxModule.init(require(parent.Dev.RobloxAppUIBloxConfig))
-local mockLocale = require(parent.Dev.SocialTestHelpers).StoryHelpers.mockLocale
-local cryoModule = require(parent.Cryo)
-local roactModule = require(parent.Dev.Roact)
-local appStyleProvider = UIBloxModule.App.Style.AppStyleProvider
-local t = {
+﻿local FriendsMenu = script:FindFirstAncestor("FriendsMenu")
+local Parent = FriendsMenu.Parent
+local UIBloxModule = require(Parent.UIBlox)
+UIBloxModule.init(require(Parent.Dev.RobloxAppUIBloxConfig))
+local MockLocaleFunction = require(Parent.Dev.SocialTestHelpers).StoryHelpers.mockLocale
+local CryoModule = require(Parent.Cryo)
+local RoactModule = require(Parent.Dev.Roact)
+local AppStyleProvider = UIBloxModule.App.Style.AppStyleProvider
+local config = {
 	Default = { themeName = "Light", fontName = "Gotham" },
 	Light = { themeName = "Light", fontName = "Gotham" },
 	Dark = { themeName = "Dark", fontName = "Gotham" }
 }
-local t_1 = { language = "en-us" }
+local config1 = { language = "en-us" }
 
 return {
 	name = "FriendsMenu",
-	storyRoot = friendsMenu,
-	roact = roactModule,
-	mapDefinition = function(p1)
-		-- upvalues: cryoModule (ref), t_1 (ref)
-		return cryoModule.Dictionary.join(p1, {
-			controls = cryoModule.Dictionary.join(t_1, p1.controls or {})
+	storyRoot = FriendsMenu,
+	roact = RoactModule,
+	mapDefinition = function(p1) --[[ Line: 39 ]]
+		-- upvalues: CryoModule (copy), config1 (copy)
+		return CryoModule.Dictionary.join(p1, {
+			controls = CryoModule.Dictionary.join(config1, p1.controls or {})
 		})
 	end,
-	mapStory = function(p1)
-		-- upvalues: roactModule (ref), appStyleProvider (ref), t (ref), mockLocale (ref)
-		return function(p2)
-			-- upvalues: roactModule (copy), appStyleProvider (copy), t (copy), mockLocale (copy), p1 (ref)
-			return roactModule.createElement(appStyleProvider, { style = if p2 then t[p2.theme] else t.Default }, { Child = mockLocale(p1, p2) })
+	mapStory = function(p1) --[[ Line: 43 ]]
+		-- upvalues: RoactModule (copy), AppStyleProvider (copy), config (copy), MockLocaleFunction (copy)
+		return function(p2) --[[ Line: 44 ]]
+			-- upvalues: RoactModule (upval), AppStyleProvider (upval), config (upval), MockLocaleFunction (upval), p1 (copy)
+			return RoactModule.createElement(AppStyleProvider, { style = p2 and config[p2.theme] or config.Default }, { Child = MockLocaleFunction(p1, p2) })
 		end
 	end
 }

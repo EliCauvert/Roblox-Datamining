@@ -1,50 +1,50 @@
-﻿local loggingProtocolModule = require(script:FindFirstAncestor("AppLaunchTracker").Parent.LoggingProtocol)
+﻿local LoggingProtocolModule = require(script:FindFirstAncestor("AppLaunchTracker").Parent.LoggingProtocol)
 local _ = require(script.Parent.AppLaunchTrackerTypes)
-local discoveryAppLaunchMilestonesHundredthsPercent = game:DefineFastInt("DiscoveryAppLaunchMilestonesHundredthsPercent", 0)
-local t = {
+local DiscoveryAppLaunchMilestonesHundredthsPercent = game:DefineFastInt("DiscoveryAppLaunchMilestonesHundredthsPercent", 0)
+local config = {
 	eventName = "DiscoveryAppLaunch_Milestones",
 	description = "App launch rodux actions",
 	links = "",
 	backends = {
-		loggingProtocolModule.TelemetryBackends.Points,
-		loggingProtocolModule.TelemetryBackends.EventIngest
+		LoggingProtocolModule.TelemetryBackends.Points,
+		LoggingProtocolModule.TelemetryBackends.EventIngest
 	},
-	throttlingPercentage = discoveryAppLaunchMilestonesHundredthsPercent,
+	throttlingPercentage = DiscoveryAppLaunchMilestonesHundredthsPercent,
 	lastUpdated = { 24, 11, 4 }
 }
-local t_1 = {
+local config1 = {
 	eventName = "DiscoveryAppLaunch_Error",
 	description = "Error related to discovery app launch metric tracking",
-	backends = { loggingProtocolModule.TelemetryBackends.Counter },
+	backends = { LoggingProtocolModule.TelemetryBackends.Counter },
 	throttlingPercentage = game:DefineFastInt("DiscoveryAppLaunchErrorHundredthsPercent", 0),
 	lastUpdated = { 24, 11, 4 }
 }
 
 return {
-	reportStatsforMilestone = function(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
-		-- upvalues: discoveryAppLaunchMilestonesHundredthsPercent (ref), t (ref)
+	reportStatsforMilestone = function(p1, Milestone, p2, DurationMs, List, NumTilesInit, NumTileRenders, NumFeedItems, NumFeedRenders, TotalSduiDurationMs) --[[ Line: 37 ]]
+		-- upvalues: DiscoveryAppLaunchMilestonesHundredthsPercent (copy), config (copy)
 		assert(p1, "LoggingProtocol must exist")
 		
-		if discoveryAppLaunchMilestonesHundredthsPercent > 0 then
-			local t_1 = {
-				milestone = p2,
-				milestoneSpan = `{p3}-{p2}`,
-				durationMs = p4,
-				numTilesInit = p6,
-				numTileRenders = p7,
-				numFeedItems = p8,
-				numFeedRenders = p9,
-				totalSduiDurationMs = p10
+		if DiscoveryAppLaunchMilestonesHundredthsPercent > 0 then
+			local config1 = {
+				milestone = Milestone,
+				milestoneSpan = `{p2}-{Milestone}`,
+				durationMs = DurationMs,
+				numTilesInit = NumTilesInit,
+				numTileRenders = NumTileRenders,
+				numFeedItems = NumFeedItems,
+				numFeedRenders = NumFeedRenders,
+				totalSduiDurationMs = TotalSduiDurationMs
 			}
 			
-			for i, v in p5 do
-				t_1[i] = v
+			for i, value in List do
+				config1[i] = value
 			end
-			p1:logRobloxTelemetryEvent(t, { p1.StandardizedFields.addOsInfo }, t_1)
+			p1:logRobloxTelemetryEvent(config, { p1.StandardizedFields.addOsInfo }, config1)
 		end
 	end,
-	reportError = function(p11, p12)
-		-- upvalues: t_1 (ref)
-		p11:logRobloxTelemetryCounter(t_1, 1, { errorTag = p12 })
+	reportError = function(p3, ErrorTag) --[[ Line: 72 ]]
+		-- upvalues: config1 (copy)
+		p3:logRobloxTelemetryCounter(config1, 1, { errorTag = ErrorTag })
 	end
 }

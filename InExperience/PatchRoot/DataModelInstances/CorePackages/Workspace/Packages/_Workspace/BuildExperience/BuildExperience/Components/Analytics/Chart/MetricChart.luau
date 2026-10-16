@@ -1,8 +1,8 @@
-﻿local reactModule = require(script:FindFirstAncestor("BuildExperience").Parent.React)
-local metricChartViewModule = require(script.Parent.MetricChartView)
-local useMetricChartViewModelModule = require(script.Parent.useMetricChartViewModel)
+﻿local ReactModule = require(script:FindFirstAncestor("BuildExperience").Parent.React)
+local MetricChartViewModule = require(script.Parent.MetricChartView)
+local UseMetricChartViewModelModule = require(script.Parent.useMetricChartViewModel)
 
-return function(p1)
-	-- upvalues: useMetricChartViewModelModule (ref), reactModule (ref), metricChartViewModule (ref)
-	return reactModule.createElement(metricChartViewModule, useMetricChartViewModelModule(p1))
+return function(p1) --[[ Line: 11 | Named "MetricChart" ]]
+	-- upvalues: UseMetricChartViewModelModule (copy), ReactModule (copy), MetricChartViewModule (copy)
+	return ReactModule.createElement(MetricChartViewModule, (UseMetricChartViewModelModule(p1)))
 end

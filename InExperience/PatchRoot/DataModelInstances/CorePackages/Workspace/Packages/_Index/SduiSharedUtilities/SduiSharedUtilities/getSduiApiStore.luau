@@ -1,10 +1,10 @@
-﻿local createSduiApiStoreModule = require(script:FindFirstAncestor("SduiSharedUtilities").createSduiApiStore)
-local var1 = nil
+﻿local CreateSduiApiStoreModule = require(script:FindFirstAncestor("SduiSharedUtilities").createSduiApiStore)
+local v1 = nil
 
-return function()
-	-- upvalues: var1 (write), createSduiApiStoreModule (ref)
-	if var1 == nil then
-		var1 = createSduiApiStoreModule()
+return function() --[[ Line: 9 | Named "getSduiApiStore" ]]
+	-- upvalues: v1 (ref), CreateSduiApiStoreModule (copy)
+	if v1 == nil then
+		v1 = CreateSduiApiStoreModule()
 	end
-	return var1
+	return v1
 end

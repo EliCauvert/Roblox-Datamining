@@ -1,7 +1,7 @@
-﻿local reactModule = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.React)
-local analyticsDispatchContextModule = require(script.Parent.AnalyticsDispatchContext)
+﻿local ReactModule = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.React)
+local AnalyticsDispatchContextModule = require(script.Parent.AnalyticsDispatchContext)
 
-return function()
-	-- upvalues: reactModule (ref), analyticsDispatchContextModule (ref)
-	return reactModule.useContext(analyticsDispatchContextModule)
+return function() --[[ Line: 6 | Named "useAnalyticsDispatch" ]]
+	-- upvalues: ReactModule (copy), AnalyticsDispatchContextModule (copy)
+	return (ReactModule.useContext(AnalyticsDispatchContextModule))
 end

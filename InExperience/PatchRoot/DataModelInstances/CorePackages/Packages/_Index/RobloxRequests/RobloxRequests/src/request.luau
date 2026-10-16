@@ -1,182 +1,182 @@
-﻿local parent = script.Parent.Parent
-local lib = parent.lib
-local src = parent.src
-local parent_1 = parent.Parent
-local httpService = game:GetService("HttpService")
-local urlModule = require(lib.url)
-local promiseModule = require(parent_1.Promise)
-local jsonModule = require(src.json)
-local responseModule = require(src.response)
-local cookiesModule = require(src.cookies)
-local ratelimitModule = require(src.ratelimit)
-local utilModule = require(src.util)
-local cacheModule = require(src.cache)
-local t = {}
-t.__index = t
+﻿local Parent = script.Parent.Parent
+local Src = Parent.src
+local HttpService = game:GetService("HttpService")
+local UrlModule = require(Parent.lib.url)
+local PromiseModule = require(Parent.Parent.Promise)
+local JsonModule = require(Src.json)
+local ResponseModule = require(Src.response)
+local CookiesModule = require(Src.cookies)
+local RatelimitModule = require(Src.ratelimit)
+local UtilModule = require(Src.util)
+local CacheModule = require(Src.cache)
+local RequestModule = {}
+RequestModule.__index = RequestModule
 
-function t.new(p1, p2, p3)
-	-- upvalues: t (ref), urlModule (ref), ratelimitModule (ref), cookiesModule (ref)
-	local tbl = setmetatable({}, t)
-	p3 = p3 or {}
-	local var1 = urlModule.parse(p2)
-	local headers = p3.headers or {}
-	tbl.method = p1:upper()
-	tbl.url = var1
-	tbl.input_url = p2
-	tbl.headers = headers
-	tbl.query = {}
-	tbl.data = nil
-	tbl._ratelimits = { ratelimitModule.get("http", 250, 30) }
-	tbl.ignore_ratelimit = p3.ignore_ratelimit or false
+function RequestModule.new(Text: string, Input_url, Elapsed) --[[ Line: 26 ]]
+	-- upvalues: RequestModule (copy), UrlModule (copy), RatelimitModule (copy), CookiesModule (copy)
+	local self = setmetatable({}, RequestModule)
+	local Elapsed1 = Elapsed or {}
+	local ParseResult = UrlModule.parse(Input_url)
+	local Headers = Elapsed1.headers or {}
+	self.method = Text:upper()
+	self.url = ParseResult
+	self.input_url = Input_url
+	self.headers = Headers
+	self.query = {}
+	self.data = nil
+	self._ratelimits = { RatelimitModule.get("http", 250, 30) }
+	self.ignore_ratelimit = Elapsed1.ignore_ratelimit or false
 	
-	if p3.data then
-		tbl:set_data(p3.data)
+	if Elapsed1.data then
+		self:set_data(Elapsed1.data)
 	end
-	tbl:set_query(p3.query or {})
-	local var2 = p3.cookies or {}
+	self:set_query(Elapsed1.query or {})
+	local Cookies = Elapsed1.cookies or {}
 	
-	if not var2.__cookiejar then
-		local var3 = cookiesModule.new()
+	if not Cookies.__cookiejar then
+		local NewCookies = CookiesModule.new()
 		
-		if var2 then
-			for i, v in pairs(var2) do
-				var3:insert(i, v)
+		if Cookies then
+			for i, cooky in pairs(Cookies) do
+				NewCookies:insert(i, cooky)
 			end
 		end
-		var2 = var3
+		Cookies = NewCookies
 	end
-	tbl.cookies = var2
-	tbl.headers.Cookie = var2:string(p2)
-	tbl._callback = nil
-	tbl._log = p3.log == nil or p3.log
+	self.cookies = Cookies
+	self.headers.Cookie = Cookies:string(Input_url)
+	self._callback = nil
+	self._log = Elapsed1.log == nil or Elapsed1.log
 	
-	return tbl
+	return self
 end
 
-function t:set_headers(p4)
-	for i, v in pairs(p4) do
-		self.headers[i] = v
+function RequestModule:set_headers(List) --[[ Line: 87 ]]
+	for i, value in pairs(List) do
+		self.headers[i] = value
 	end
 	return self
 end
 
-t.update_headers = utilModule.deprecate(t.set_headers, "0.5", "update_headers")
+RequestModule.update_headers = UtilModule.deprecate(RequestModule.set_headers, "0.5", "update_headers")
 
-function t:set_query(p5)
-	for i, v in pairs(p5) do
-		self.query[i] = v
+function RequestModule:set_query(Query) --[[ Line: 98 ]]
+	for i, value in pairs(Query) do
+		self.query[i] = value
 	end
 	self.url:setQuery(self.query)
 	
 	return self
 end
 
-t.update_query = utilModule.deprecate(t.set_headers, "0.5", "update_query")
+RequestModule.update_query = UtilModule.deprecate(RequestModule.set_headers, "0.5", "update_query")
 
-function t:set_data(p6)
-	-- upvalues: jsonModule (ref)
-	if type(p6) == "table" then
-		if p6.__FormData then
-			self.headers["Content-Type"] = p6.content_type
-			p6 = p6:build()
+function RequestModule:set_data(EncResult) --[[ Line: 111 ]]
+	-- upvalues: JsonModule (copy)
+	if type(EncResult) == "table" then
+		if EncResult.__FormData then
+			self.headers["Content-Type"] = EncResult.content_type
+			EncResult = EncResult:build()
 		else
-			p6 = jsonModule.enc(p6)
+			EncResult = JsonModule.enc(EncResult)
 			self.headers["Content-Type"] = "application/json"
 		end
 	end
-	self.data = p6
+	self.data = EncResult
 	
 	return self
 end
 
-function t:_ratelimit()
-	for i, v in ipairs(self._ratelimits) do
-		if not v:request() then
+function RequestModule._ratelimit(p1): boolean --[[ Line: 129 ]]
+	for _, ratelimit in ipairs(p1._ratelimits) do
+		if not ratelimit:request() then
 			return false
 		end
 	end
 	return true
 end
 
-function t:_send()
-	-- upvalues: cacheModule (ref), responseModule (ref), httpService (ref)
-	local t = {
+function RequestModule:_send() --[[ Line: 141 ]]
+	-- upvalues: CacheModule (copy), ResponseModule (copy), HttpService (copy)
+	local config = {
 		Url = self.url:build(),
 		Method = self.method,
 		Headers = self.headers
 	}
 	
 	if self.data ~= nil then
-		t.Body = self.data
+		config.Body = self.data
 	end
-	local method = ("Request_%s_%s_%s"):format(self.method, t.Url:sub(-1, -1) == "/" and t.Url:sub(1, -2) or t.Url, t.Body or "")
+	local RequestName: string = ("Request_%s_%s_%s"):format(self.method, config.Url:sub(-1, -1) == "/" and config.Url:sub(1, -2) or config.Url, config.Body or "")
 	
-	if self.method:upper() == "GET" and cacheModule.is_cached(t.Url, method) then
-		local currentTime = tick()
-		local cached, cached_1 = cacheModule.get_cached(t.Url, method)
+	if self.method:upper() == "GET" and CacheModule.is_cached(config.Url, RequestName) then
+		local CurrentTime = tick()
+		local Cached, Cached2 = CacheModule.get_cached(config.Url, RequestName)
 		
-		if currentTime - cached.timestamp <= cacheModule.get_expire(t.Url) then
-			local var4 = responseModule.new(self, cached, tick() - currentTime)
-			var4.from_cache = true
-			print("[http]", cached_1:upper(), "CACHE |", var4.method, var4.url)
+		if CurrentTime - Cached.timestamp <= CacheModule.get_expire(config.Url) then
+			local NewResponse = ResponseModule.new(self, Cached, tick() - CurrentTime)
+			NewResponse.from_cache = true
+			print("[http]", Cached2:upper(), "CACHE |", NewResponse.method, NewResponse.url)
 			
-			return var4
+			return NewResponse
 		end
 	end
-	local var5 = 0
-	local var6 = false
-	local var7 = nil
-	local var8 = nil
-	while var5 < 5 do
+	local Count = 0
+	local Flag = false
+	local NewResult = nil
+	local Input_url = nil
+	while Count < 5 do
 		if not self.ignore_ratelimit and not self:_ratelimit() then
 			warn("[http] Rate limit exceeded. Retrying in 5 seconds")
-			var5 += 1
+			Count += 1
 			wait(5)
 			continue
 		end
-		local currentTime = tick()
-		var8 = httpService:RequestAsync(t)
-		var7 = responseModule.new(self, var8, tick() - currentTime)
-		self.timestamp = currentTime
-		var6 = true
+		local CurrentTime = tick()
+		Input_url = HttpService:RequestAsync(config)
+		NewResult = ResponseModule.new(self, Input_url, tick() - CurrentTime)
+		self.timestamp = CurrentTime
+		Flag = true
 		break
 	end
-	if not var6 then
+	if not Flag then
 		error("[http] Rate limit still exceeded after 5 attempts")
 	end
 	if self._log then
-		print("[http]", var7.code, var7.message, "|", var7.method, var7.url, "(", tostring(math.floor(self._ratelimits[#self._ratelimits]:consumption() * 1000) * 0.1) .. "%", "ratelimit )")
+		print("[http]", NewResult.code, NewResult.message, "|", NewResult.method, NewResult.url, "(", tostring(math.floor(self._ratelimits[#self._ratelimits]:consumption() * 1000) * 0.1) .. "%", "ratelimit )")
 	end
 	if self._callback then
-		self._callback(var7)
+		self._callback(NewResult)
 	end
-	if self.method:upper() == "GET" and var7.ok and cacheModule.should_cache(t.Url) then
-		cacheModule.update_cache(t.Url, method, var8)
+	if self.method:upper() == "GET" and NewResult.ok and CacheModule.should_cache(config.Url) then
+		CacheModule.update_cache(config.Url, RequestName, Input_url)
 	end
-	return var7
+	return NewResult
 end
 
-function t:send(p6)
-	-- upvalues: promiseModule (ref)
-	return if p6 then promiseModule.new(function(p7, p8)
-		-- upvalues: self (ref)
-		local ok, status = pcall(self._send, self)
+function RequestModule.send(p2, p3) --[[ Line: 212 ]]
+	-- upvalues: PromiseModule (copy)
+	return if p3 then PromiseModule.new(function(Callback: (any) -> (), Callback1: (any) -> ()) --[[ Line: 218 ]]
+		-- upvalues: p2 (copy)
+		local Success, Result = pcall(p2._send, p2)
 		
-		if ok and status.ok then
-			p7(status)
-			
-			return
-		elseif ok then
-			p8({ request_sent = true, response = status })
+		if Success and Result.ok then
+			Callback(Result)
 			
 			return
 		end
-		p8({ request_sent = false, error = status })
-	end) else self:_send()
+		if Success then
+			Callback1({ request_sent = true, response = Result })
+			
+			return
+		else
+			Callback1({ request_sent = false, error = Result })
+		end
+	end) else p2:_send()
 end
 
-function t:promise()
+function RequestModule:promise() --[[ Line: 238 ]]
 	return self:send(true)
 end
 
-return t
+return RequestModule

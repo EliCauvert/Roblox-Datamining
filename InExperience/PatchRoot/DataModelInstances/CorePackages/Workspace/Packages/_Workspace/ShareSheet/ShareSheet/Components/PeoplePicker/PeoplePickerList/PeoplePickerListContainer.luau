@@ -1,29 +1,28 @@
-﻿local shareSheet = script:FindFirstAncestor("ShareSheet")
-local parent = shareSheet.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local peoplePickerEmptyStateModule = require(script.Parent.PeoplePickerEmptyState)
-local peoplePickerVirtualizedListModule = require(script.Parent.PeoplePickerVirtualizedList)
-local usePeoplePickerListViewModelModule = require(script.Parent.usePeoplePickerListViewModel)
-local _ = require(shareSheet.Components.PeoplePicker.usePeoplePickerPagination)
-local view = foundationModule.View
+﻿local ShareSheet = script:FindFirstAncestor("ShareSheet")
+local Parent = ShareSheet.Parent
+local ReactModule = require(Parent.React)
+local PeoplePickerEmptyStateModule = require(script.Parent.PeoplePickerEmptyState)
+local PeoplePickerVirtualizedListModule = require(script.Parent.PeoplePickerVirtualizedList)
+local UsePeoplePickerListViewModelModule = require(script.Parent.usePeoplePickerListViewModel)
+local _ = require(ShareSheet.Components.PeoplePicker.usePeoplePickerPagination)
+local View = require(Parent.Foundation).View
 
-return function(p1)
-	-- upvalues: usePeoplePickerListViewModelModule (ref), reactModule (ref), view (ref), peoplePickerVirtualizedListModule (ref), peoplePickerEmptyStateModule (ref)
-	local var1 = usePeoplePickerListViewModelModule(p1)
+return function(Frame) --[[ Line: 20 | Named "PeoplePickerListContainer" ]]
+	-- upvalues: UsePeoplePickerListViewModelModule (copy), ReactModule (copy), View (copy), PeoplePickerVirtualizedListModule (copy), PeoplePickerEmptyStateModule (copy)
+	local UsePeoplePickerListViewModelModuleResult = UsePeoplePickerListViewModelModule(Frame)
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		testId = "share-sheet-people-picker-list",
-		LayoutOrder = p1.LayoutOrder,
+		LayoutOrder = Frame.LayoutOrder,
 		Size = UDim2.fromScale(1, 1)
 	}, {
-		List = reactModule.createElement(peoplePickerVirtualizedListModule, {
-			debouncedQuery = p1.debouncedQuery,
-			items = var1.items,
-			onConversationActivated = p1.onConversationActivated,
-			paginationProps = p1.paginationProps,
-			skeletonCount = var1.skeletonCount
+		List = ReactModule.createElement(PeoplePickerVirtualizedListModule, {
+			debouncedQuery = Frame.debouncedQuery,
+			items = UsePeoplePickerListViewModelModuleResult.items,
+			onConversationActivated = Frame.onConversationActivated,
+			paginationProps = Frame.paginationProps,
+			skeletonCount = UsePeoplePickerListViewModelModuleResult.skeletonCount
 		}),
-		EmptyState = if var1.shouldShowEmptyState then reactModule.createElement(peoplePickerEmptyStateModule, { testId = "share-sheet-people-picker-empty-state" }) else nil
+		EmptyState = if UsePeoplePickerListViewModelModuleResult.shouldShowEmptyState then ReactModule.createElement(PeoplePickerEmptyStateModule, { testId = "share-sheet-people-picker-empty-state" }) else nil
 	})
 end

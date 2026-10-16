@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.SduiCompat.SduiCompat)
+﻿return (require(script.Parent.Parent.Parent._Index.SduiCompat.SduiCompat))

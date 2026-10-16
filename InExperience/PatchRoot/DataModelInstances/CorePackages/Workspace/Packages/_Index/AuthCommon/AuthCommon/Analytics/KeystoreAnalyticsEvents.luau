@@ -1,9 +1,9 @@
-﻿local keystoreEventConstantsModule = require(script.Parent.KeystoreEventConstants)
-local var1 = require(script:FindFirstAncestor("AuthCommon").dependencies).Analytics.AnalyticsReporters.EventIngest.new(game:GetService("EventIngestService"))
+﻿local KeystoreEventConstantsModule = require(script.Parent.KeystoreEventConstants)
+local NewResult = require(script:FindFirstAncestor("AuthCommon").dependencies).Analytics.AnalyticsReporters.EventIngest.new((game:GetService("EventIngestService")))
 
 return {
-	sendPageLoadEvent = function(p1, p2)
-		-- upvalues: var1 (ref), keystoreEventConstantsModule (ref)
-		var1:sendEventDeferred(keystoreEventConstantsModule.ctx.keystoreLogin, keystoreEventConstantsModule.eventNames.pageLoad, { origin = p1, state = p2 or "" })
+	sendPageLoadEvent = function(Origin, p1) --[[ Line: 8 ]]
+		-- upvalues: NewResult (copy), KeystoreEventConstantsModule (copy)
+		NewResult:sendEventDeferred(KeystoreEventConstantsModule.ctx.keystoreLogin, KeystoreEventConstantsModule.eventNames.pageLoad, { origin = Origin, state = p1 or "" })
 	end
 }

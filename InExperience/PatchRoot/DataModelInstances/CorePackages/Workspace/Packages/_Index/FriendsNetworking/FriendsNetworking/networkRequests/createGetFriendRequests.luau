@@ -1,20 +1,20 @@
-﻿local parent = script:FindFirstAncestor("FriendsNetworking").Parent
-local FRIENDS_URLModule = require(script.Parent.Parent.FRIENDS_URL)
+﻿local Parent = script:FindFirstAncestor("FriendsNetworking").Parent
+local FRIENDSURLModule = require(script.Parent.Parent.FRIENDS_URL)
 local _ = require(script.Parent.Parent.networkingFriendsTypes)
-local fFlagAddFriendsSessionId = require(parent.SharedFlags).FFlagAddFriendsSessionId
-local fFlagAddFriendsPageHighlightUnseenRequests = require(parent.SharedFlags).FFlagAddFriendsPageHighlightUnseenRequests
+local FFlagAddFriendsSessionId = require(Parent.SharedFlags).FFlagAddFriendsSessionId
+local FFlagAddFriendsPageHighlightUnseenRequests = require(Parent.SharedFlags).FFlagAddFriendsPageHighlightUnseenRequests
 
-return function(p1)
-	-- upvalues: FRIENDS_URLModule (ref), fFlagAddFriendsSessionId (ref), fFlagAddFriendsPageHighlightUnseenRequests (ref)
-	return p1.roduxNetworking.GET("GetFriendRequests", function(p2, p3)
-		-- upvalues: FRIENDS_URLModule (copy), fFlagAddFriendsSessionId (copy), fFlagAddFriendsPageHighlightUnseenRequests (copy)
-		return p2(FRIENDS_URLModule, { currentUserId = p3.currentUserId }):path("v1"):path("my"):path("friends"):path("requests"):queryArgs({
-			fetchMutualFriends = p3.fetchMutualFriends,
-			sortOrder = p3.sortOrder,
-			limit = p3.limit,
-			cursor = p3.cursor,
-			sessionId = if fFlagAddFriendsSessionId then p3.sessionId else nil,
-			uprankUnseen = if fFlagAddFriendsPageHighlightUnseenRequests then true else nil
+return function(p1) --[[ Line: 11 ]]
+	-- upvalues: FRIENDSURLModule (copy), FFlagAddFriendsSessionId (copy), FFlagAddFriendsPageHighlightUnseenRequests (copy)
+	return p1.roduxNetworking.GET("GetFriendRequests", function(Callback, p2) --[[ Line: 16 ]]
+		-- upvalues: FRIENDSURLModule (upval), FFlagAddFriendsSessionId (upval), FFlagAddFriendsPageHighlightUnseenRequests (upval)
+		return Callback(FRIENDSURLModule, { currentUserId = p2.currentUserId }):path("v1"):path("my"):path("friends"):path("requests"):queryArgs({
+			fetchMutualFriends = p2.fetchMutualFriends,
+			sortOrder = p2.sortOrder,
+			limit = p2.limit,
+			cursor = p2.cursor,
+			sessionId = if FFlagAddFriendsSessionId then p2.sessionId else nil,
+			uprankUnseen = if FFlagAddFriendsPageHighlightUnseenRequests then true else nil
 		})
 	end)
 end

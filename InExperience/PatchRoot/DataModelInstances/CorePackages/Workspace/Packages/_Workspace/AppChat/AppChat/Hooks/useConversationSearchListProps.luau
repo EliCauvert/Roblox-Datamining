@@ -1,103 +1,131 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local cryoModule = require(parent.Cryo)
-local dateTime = require(parent.Time).DateTime
-local reactModule = require(parent.React)
-local signalsExperimentalModule = require(parent.SignalsExperimental)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local useStore = require(parent.RoactUtils).Hooks.RoactRodux.useStore
-local roactPaginator = require(appChat.SocialLibraries).RoactPaginator
-local conversationRoduxSeedModule = require(appChat.Utils.ConversationRoduxSeed)
-local getConversationStoreModule = require(appChat.Stores.GetConversationStore)
-local receivedConversationModule = require(appChat.Conversations.Actions.ReceivedConversation)
-local fetchLatestConversationDetailsModule = require(appChat.Conversations.Thunks.fetchLatestConversationDetails)
-local getConversationTimestampModule = require(appChat.Utils.getConversationTimestamp)
-local getConversationTitleModule = require(appChat.Conversations.getConversationTitle)
-local getLastMessageContentModule = require(appChat.Conversations.getLastMessageContent)
-local getOtherParticipantsModule = require(appChat.Conversations.getOtherParticipants)
-local searchIntroducedConversationIdsModule = require(appChat.Stores.searchIntroducedConversationIds)
-local useConversationSearchModule = require(appChat.Hooks.useConversationSearch)
-local useChatSearchResultsTelemetryModule = require(appChat.Hooks.useChatSearchResultsTelemetry)
-local fFlagAppChatSearchSessionTelemetryModule = require(appChat.Flags.FFlagAppChatSearchSessionTelemetry)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local CryoModule = require(Parent.Cryo)
+local _DateTime = require(Parent.Time).DateTime
+local ReactModule = require(Parent.React)
+local SignalsExperimentalModule = require(Parent.SignalsExperimental)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseStoreFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useStore
+local RoactPaginator = require(AppChat.SocialLibraries).RoactPaginator
+local ConversationRoduxSeedModule = require(AppChat.Utils.ConversationRoduxSeed)
+local GetConversationStoreModule = require(AppChat.Stores.GetConversationStore)
+local GetConversationViewModelStoreModule = require(AppChat.Stores.GetConversationViewModelStore)
+local ReceivedConversationModule = require(AppChat.Conversations.Actions.ReceivedConversation)
+local FetchLatestConversationDetailsModule = require(AppChat.Conversations.Thunks.fetchLatestConversationDetails)
+local GetConversationTimestampModule = require(AppChat.Utils.getConversationTimestamp)
+local GetConversationTitleModule = require(AppChat.Conversations.getConversationTitle)
+local GetLastMessageContentModule = require(AppChat.Conversations.getLastMessageContent)
+local GetOtherParticipantsModule = require(AppChat.Conversations.getOtherParticipants)
+local SearchIntroducedConversationIdsModule = require(AppChat.Stores.searchIntroducedConversationIds)
+local UseConversationSearchModule = require(AppChat.Hooks.useConversationSearch)
+local UseChatSearchResultsTelemetryModule = require(AppChat.Hooks.useChatSearchResultsTelemetry)
+local FFlagAppChatSearchSessionTelemetryModule = require(AppChat.Flags.FFlagAppChatSearchSessionTelemetry)
+local FFlagAppChatDerivedConversationLatestActivityModule = require(AppChat.Flags.FFlagAppChatDerivedConversationLatestActivity)
 local t = {}
-local t_1 = {}
+local t1 = {}
 
-local function _(p1)
-	-- upvalues: dateTime (ref)
-	return if typeof(p1) == "DateTime" then dateTime.fromUnixTimestamp(p1.UnixTimestamp) elseif type(p1) == "table" and typeof(p1.dateTime) == "DateTime" then p1 else nil
+local function _(p1) --[[ Line: 32 | Named "toLuaDateTime" ]]
+	-- upvalues: _DateTime (copy)
+	return if typeof(p1) == "DateTime" then _DateTime.fromUnixTimestamp(p1.UnixTimestamp) elseif type(p1) == "table" and typeof(p1.dateTime) == "DateTime" then p1 else nil
 end
 
-local function buildSearchItemList(p1, p2, p3)
-	-- upvalues: cryoModule (ref), getOtherParticipantsModule (ref), dateTime (ref), getConversationTitleModule (ref), getLastMessageContentModule (ref), getConversationTimestampModule (ref)
-	local t = {}
-	
-	for i, v in p1 do
-		local var1 = if v.otherParticipants == nil then cryoModule.Dictionary.join(v, { otherParticipants = getOtherParticipantsModule(v, p2) }) else v
+local function getInboxRowFields(Id) --[[ Line: 43 ]]
+	-- upvalues: GetConversationStoreModule (copy), GetConversationViewModelStoreModule (copy), _DateTime (copy)
+	if GetConversationStoreModule(false).getConversation(Id, false) == nil then
+		return nil, nil
+	else
+		local ConversationViewModelStoreModule = GetConversationViewModelStoreModule(false)
+		local v1 = ConversationViewModelStoreModule.getUnixTime(Id)(false)
 		
-		if p3 or var1.conversationType ~= "MultiUserConversation" then
-			local lastUpdated = var1.lastUpdated
-			local var2 = if typeof(lastUpdated) == "DateTime" then dateTime.fromUnixTimestamp(lastUpdated.UnixTimestamp) elseif type(lastUpdated) == "table" and typeof(lastUpdated.dateTime) == "DateTime" then lastUpdated else nil
-			table.insert(t, cryoModule.Dictionary.join(var1, {
+		return if v1 == nil then nil else _DateTime.fromUnixTimestamp(v1), ConversationViewModelStoreModule.getSubtitle(Id)(false)
+	end
+end
+
+local function buildSearchItemList(Items, p1, p2) --[[ Line: 57 ]]
+	-- upvalues: CryoModule (copy), GetOtherParticipantsModule (copy), _DateTime (copy), GetLastMessageContentModule (copy), FFlagAppChatDerivedConversationLatestActivityModule (copy), getInboxRowFields (copy), GetConversationTitleModule (copy), GetConversationTimestampModule (copy)
+	local JoinResults = {}
+	
+	for _, item in Items do
+		local JoinResult = if item.otherParticipants == nil then CryoModule.Dictionary.join(item, { otherParticipants = GetOtherParticipantsModule(item, p1) }) else item
+		
+		if p2 or JoinResult.conversationType ~= "MultiUserConversation" then
+			local LastUpdated = JoinResult.lastUpdated
+			local FromUnixTimestampResult = if typeof(LastUpdated) == "DateTime" then _DateTime.fromUnixTimestamp(LastUpdated.UnixTimestamp) elseif type(LastUpdated) == "table" and typeof(LastUpdated.dateTime) == "DateTime" then LastUpdated else nil
+			local LastMessageContentModule = GetLastMessageContentModule(JoinResult) or ""
+			
+			if FFlagAppChatDerivedConversationLatestActivityModule then
+				local InboxRowFields, InboxRowFields2 = getInboxRowFields(JoinResult.id)
+				FromUnixTimestampResult = InboxRowFields or FromUnixTimestampResult
+				LastMessageContentModule = InboxRowFields2 or LastMessageContentModule
+			end
+			table.insert(JoinResults, CryoModule.Dictionary.join(JoinResult, {
 				isSearchResult = true,
-				title = getConversationTitleModule(var1),
-				lastMessageContent = getLastMessageContentModule(var1) or "",
-				shortRelativeTime = var2 and getConversationTimestampModule(var2),
-				longRelativeTime = var2 and var2:GetLongRelativeTime(),
-				unixTime = var2 and var2:GetUnixTimestamp()
+				title = GetConversationTitleModule(JoinResult),
+				lastMessageContent = LastMessageContentModule,
+				shortRelativeTime = FromUnixTimestampResult and GetConversationTimestampModule(FromUnixTimestampResult),
+				longRelativeTime = FromUnixTimestampResult and FromUnixTimestampResult:GetLongRelativeTime(),
+				unixTime = FromUnixTimestampResult and FromUnixTimestampResult:GetUnixTimestamp()
 			}))
 		end
 	end
-	return t
+	return JoinResults
 end
 
-return function(p4, p5, p6, p7, p8)
-	-- upvalues: useConversationSearchModule (ref), useDispatch (ref), useStore (ref), reactModule (ref), getConversationStoreModule (ref), searchIntroducedConversationIdsModule (ref), signalsExperimentalModule (ref), receivedConversationModule (ref), conversationRoduxSeedModule (ref), fetchLatestConversationDetailsModule (ref), t (ref), buildSearchItemList (ref), fFlagAppChatSearchSessionTelemetryModule (ref), useChatSearchResultsTelemetryModule (ref), t_1 (ref), roactPaginator (ref)
-	local var3 = useConversationSearchModule(p4, p5)
-	local var4 = useDispatch()
-	local var5 = useStore()
-	local var6 = reactModule.useCallback(function(p9)
-		-- upvalues: getConversationStoreModule (copy), var5 (ref), searchIntroducedConversationIdsModule (copy), signalsExperimentalModule (copy), var4 (ref), receivedConversationModule (copy), conversationRoduxSeedModule (copy), fetchLatestConversationDetailsModule (copy), p8 (ref)
-		local conversation = getConversationStoreModule(false).getConversation(p9, false)
-		local var7 = conversation ~= nil and var5:getState().ChatAppReducer.Conversations[p9] == nil
+return function(p3, p4, p5, p6, Callback) --[[ Line: 103 | Named "useConversationSearchListProps" ]]
+	-- upvalues: UseConversationSearchModule (copy), UseDispatchFunction (copy), UseStoreFunction (copy), ReactModule (copy), GetConversationStoreModule (copy), SearchIntroducedConversationIdsModule (copy), SignalsExperimentalModule (copy), ReceivedConversationModule (copy), ConversationRoduxSeedModule (copy), FetchLatestConversationDetailsModule (copy), t (copy), buildSearchItemList (copy), FFlagAppChatSearchSessionTelemetryModule (copy), UseChatSearchResultsTelemetryModule (copy), t1 (copy), RoactPaginator (copy)
+	local UseConversationSearchModuleResult = UseConversationSearchModule(p3, p4)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseStoreResult = UseStoreFunction()
+	local UseResult = ReactModule.useCallback(function(p7) --[[ Line: 119 ]]
+		-- upvalues: GetConversationStoreModule (upval), UseStoreResult (copy), SearchIntroducedConversationIdsModule (upval), SignalsExperimentalModule (upval), UseDispatchResult (copy), ReceivedConversationModule (upval), ConversationRoduxSeedModule (upval), FetchLatestConversationDetailsModule (upval), Callback (copy)
+		local Conversation = GetConversationStoreModule(false).getConversation(p7, false)
+		local State = UseStoreResult:getState()
+		local NoConversation: boolean = Conversation ~= nil and State.ChatAppReducer.Conversations[p7] == nil
 		
-		if var7 or searchIntroducedConversationIdsModule.has(p9) then
-			signalsExperimentalModule.batch(function()
-				-- upvalues: var7 (ref), var4 (copy), receivedConversationModule (copy), conversationRoduxSeedModule (copy), conversation (ref), searchIntroducedConversationIdsModule (copy), p9 (ref)
-				if var7 then
-					var4(receivedConversationModule(conversationRoduxSeedModule.normalizeStoreConversationForRodux(conversation)))
+		if NoConversation or SearchIntroducedConversationIdsModule.has(p7) then
+			SignalsExperimentalModule.batch(function() --[[ Line: 129 ]]
+				-- upvalues: NoConversation (copy), UseDispatchResult (upval), ReceivedConversationModule (upval), ConversationRoduxSeedModule (upval), Conversation (copy), SearchIntroducedConversationIdsModule (upval), p7 (copy)
+				if NoConversation then
+					UseDispatchResult(ReceivedConversationModule(ConversationRoduxSeedModule.normalizeStoreConversationForRodux(Conversation)))
 				end
-				searchIntroducedConversationIdsModule.remove(p9)
+				SearchIntroducedConversationIdsModule.remove(p7)
 			end)
 			
-			if not conversationRoduxSeedModule.isFriendsPlaceholderConversationId(p9) then
-				var4(fetchLatestConversationDetailsModule(p9))
+			if not ConversationRoduxSeedModule.isFriendsPlaceholderConversationId(p7) then
+				UseDispatchResult(FetchLatestConversationDetailsModule(p7))
 			end
 		end
-		if p8 ~= nil then
-			p8(p9)
+		if Callback ~= nil then
+			Callback(p7)
 		end
-	end, { var4, p8, var5 })
-	local var7 = reactModule.useMemo(function()
-		-- upvalues: var3 (ref), t (copy), buildSearchItemList (copy), p6 (ref), p7 (ref)
-		return if var3.isActive then buildSearchItemList(var3.items, p6, p7) else t
-	end, { var3.isActive, var3.items, p7, p6 })
+	end, { UseDispatchResult, Callback, UseStoreResult })
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 150 ]]
+		-- upvalues: UseConversationSearchModuleResult (copy), t (upval), buildSearchItemList (upval), p5 (copy), p6 (copy)
+		return if UseConversationSearchModuleResult.isActive then buildSearchItemList(UseConversationSearchModuleResult.items, p5, p6) else t
+	end, {
+		UseConversationSearchModuleResult.isActive,
+		UseConversationSearchModuleResult.items,
+		p6,
+		p5
+	})
 	
-	if fFlagAppChatSearchSessionTelemetryModule then
-		useChatSearchResultsTelemetryModule(var3, #var7)
+	if FFlagAppChatSearchSessionTelemetryModule then
+		UseChatSearchResultsTelemetryModule(UseConversationSearchModuleResult, #UseMemoResult)
 	end
-	if var3.isActive then
+	if UseConversationSearchModuleResult.isActive then
 		return true, {
-			itemList = var7,
-			conversationsIsFetching = var3.isFetching,
-			isSearchAwaitingResults = var3.isAwaitingResults,
-			oldestConversationIsFetched = var3.nextCursor == nil,
-			[roactPaginator.loadNext] = function()
-				-- upvalues: var3 (ref)
-				var3.loadNext()
+			itemList = UseMemoResult,
+			conversationsIsFetching = UseConversationSearchModuleResult.isFetching,
+			isSearchAwaitingResults = UseConversationSearchModuleResult.isAwaitingResults,
+			oldestConversationIsFetched = UseConversationSearchModuleResult.nextCursor == nil,
+			[RoactPaginator.loadNext] = function() --[[ Line: 176 ]]
+				-- upvalues: UseConversationSearchModuleResult (copy)
+				UseConversationSearchModuleResult.loadNext()
 			end,
 			isSearchActive = true,
-			navigateToConversation = var6
+			navigateToConversation = UseResult
 		}
+	else
+		return false, t1
 	end
-	return false, t_1
 end

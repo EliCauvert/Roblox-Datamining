@@ -1,59 +1,59 @@
-﻿local parent = script:FindFirstAncestor("Moments").Parent
-local reactModule = require(parent.React)
-local builderIconsModule = require(parent.BuilderIcons)
-local foundationModule = require(parent.Foundation)
-local localizationModule = require(parent.Localization)
-local badge = foundationModule.Badge
-local chip = foundationModule.Chip
-local view = foundationModule.View
-local badgeShape = foundationModule.Enums.BadgeShape
-local badgeSize = foundationModule.Enums.BadgeSize
-local badgeVariant = foundationModule.Enums.BadgeVariant
-local chipSize = foundationModule.Enums.ChipSize
-local chipVariant = foundationModule.Enums.ChipVariant
-local useLocalization = localizationModule.Hooks.useLocalization
-local momentContextModule = require(script.Parent.Parent.Parent.MomentContext)
-local t = {
+﻿local Parent = script:FindFirstAncestor("Moments").Parent
+local ReactModule = require(Parent.React)
+local BuilderIconsModule = require(Parent.BuilderIcons)
+local FoundationModule = require(Parent.Foundation)
+local Badge = FoundationModule.Badge
+local Chip = FoundationModule.Chip
+local View = FoundationModule.View
+local BadgeShape = FoundationModule.Enums.BadgeShape
+local BadgeSize = FoundationModule.Enums.BadgeSize
+local BadgeVariant = FoundationModule.Enums.BadgeVariant
+local ChipSize = FoundationModule.Enums.ChipSize
+local ChipVariant = FoundationModule.Enums.ChipVariant
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local MomentContextModule = require(script.Parent.Parent.Parent.MomentContext)
+local config = {
 	partnerContent = "Feature.Moments.Label.RobloxPartnerContent"
 }
 
-local function noop() end
+local function noop() --[[ Line: 45 ]] end
 
-return reactModule.memo(function(p1)
-	-- upvalues: useLocalization (ref), t (ref), momentContextModule (ref), reactModule (ref), view (ref), chip (ref), chipSize (ref), chipVariant (ref), builderIconsModule (ref), noop (ref), badge (ref), badgeVariant (ref), badgeSize (ref), badgeShape (ref)
-	local var1 = useLocalization(t)
-	local data = momentContextModule.useMoment().store.getData(false)
+return ReactModule.memo(function(Frame: Frame) --[[ Line: 51 | Named "StatusChip" ]]
+	-- upvalues: UseLocalizationFunction (copy), config (copy), MomentContextModule (copy), ReactModule (copy), View (copy), Chip (copy), ChipSize (copy), ChipVariant (copy), BuilderIconsModule (copy), noop (copy), Badge (copy), BadgeVariant (copy), BadgeSize (copy), BadgeShape (copy)
+	local UseLocalizationResult = UseLocalizationFunction(config)
+	local Data = MomentContextModule.useMoment().store.getData(false)
 	
-	if data.kind == "ad" then
-		return reactModule.createElement(view, {
+	if Data.kind == "ad" then
+		return ReactModule.createElement(View, {
 			tag = "row align-x-left auto-xy",
-			LayoutOrder = p1.LayoutOrder
+			LayoutOrder = Frame.LayoutOrder
 		}, {
-			Chip = reactModule.createElement(chip, {
+			Chip = ReactModule.createElement(Chip, {
 				text = "Ad",
-				size = chipSize.Small,
-				variant = chipVariant.Standard,
+				size = ChipSize.Small,
+				variant = ChipVariant.Standard,
 				trailing = {
-					iconName = builderIconsModule.Icon.CircleI,
+					iconName = BuilderIconsModule.Icon.CircleI,
 					onActivated = noop
 				},
 				onActivated = noop
 			})
 		})
-	elseif not data.isSponsored then
+	elseif Data.isSponsored then
+		local PartnerContent = UseLocalizationResult.partnerContent
+		
+		return ReactModule.createElement(View, {
+			tag = "row align-x-left auto-xy",
+			LayoutOrder = Frame.LayoutOrder
+		}, {
+			Badge = ReactModule.createElement(Badge, {
+				text = if PartnerContent == nil or PartnerContent == "" then "Roblox Partner Content" else PartnerContent,
+				variant = BadgeVariant.Neutral,
+				size = BadgeSize.Small,
+				shape = BadgeShape.Box
+			})
+		})
+	else
 		return nil
 	end
-	local partnerContent = var1.partnerContent
-	
-	return reactModule.createElement(view, {
-		tag = "row align-x-left auto-xy",
-		LayoutOrder = p1.LayoutOrder
-	}, {
-		Badge = reactModule.createElement(badge, {
-			text = if partnerContent == nil or partnerContent == "" then "Roblox Partner Content" else partnerContent,
-			variant = badgeVariant.Neutral,
-			size = badgeSize.Small,
-			shape = badgeShape.Box
-		})
-	})
 end)

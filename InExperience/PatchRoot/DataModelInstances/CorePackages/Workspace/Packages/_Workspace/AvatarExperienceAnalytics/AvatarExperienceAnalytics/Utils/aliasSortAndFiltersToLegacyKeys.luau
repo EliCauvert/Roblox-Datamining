@@ -1,4 +1,4 @@
-﻿local t = {
+﻿local config = {
 	sort = "sortEnumValue",
 	filterSalesType = "filterSalesTypeEnumValue",
 	filterCreators = "filterCreatorsTypeEnumValue",
@@ -6,19 +6,19 @@
 	filterUnavailableItems = "filterUnavailableItemsEnumValue"
 }
 
-return function(p1)
-	-- upvalues: t (ref)
-	if type(p1) ~= "table" then
-		return p1
+return function(Tbl) --[[ Line: 21 | Named "aliasSortAndFiltersToLegacyKeys" ]]
+	-- upvalues: config (copy)
+	if type(Tbl) ~= "table" then
+		return Tbl
 	end
-	local cloned = table.clone(p1)
+	local Copy = table.clone(Tbl)
 	
-	for i, v in t do
-		local var1 = p1[i]
+	for i, value in config do
+		local Entry = Tbl[i]
 		
-		if var1 ~= nil then
-			cloned[v] = var1
+		if Entry ~= nil then
+			Copy[value] = Entry
 		end
 	end
-	return cloned
+	return Copy
 end

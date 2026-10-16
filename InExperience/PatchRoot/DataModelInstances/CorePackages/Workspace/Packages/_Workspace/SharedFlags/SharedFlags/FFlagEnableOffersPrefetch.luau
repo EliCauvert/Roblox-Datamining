@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("EnableOffersPrefetch", false) and require(script.Parent.FFlagEnableUserOffers)
+﻿local FFlagEnableUserOffersModule = require(script.Parent.FFlagEnableUserOffers)
+
+return game:DefineFastFlag("EnableOffersPrefetch", false) and FFlagEnableUserOffersModule

@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.CallProtocol.CallProtocol)
+﻿return (require(script.Parent._Workspace.CallProtocol.CallProtocol))

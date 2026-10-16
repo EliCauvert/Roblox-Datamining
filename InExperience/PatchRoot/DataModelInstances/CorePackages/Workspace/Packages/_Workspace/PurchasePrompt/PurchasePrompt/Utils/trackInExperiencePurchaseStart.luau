@@ -1,23 +1,23 @@
-﻿local purchasePrompt = script:FindFirstAncestor("PurchasePrompt")
-local parent = purchasePrompt.Parent
-local purchasePromptLiteModule = require(parent.PurchasePromptLite)
-local productPurchaseSurface = purchasePromptLiteModule.Enums.ProductPurchaseSurface
-local getTTIEventName = purchasePromptLiteModule.getTTIEventName
-local timeToInteractiveTracker = require(parent.TimeToInteractiveTracker).TimeToInteractiveTracker
-local getPurchaseSurfaceModule = require(purchasePrompt.Utils.getPurchaseSurface)
-local getProductTypeFromRequestTypeModule = require(purchasePrompt.Utils.getProductTypeFromRequestType)
+﻿local PurchasePrompt = script:FindFirstAncestor("PurchasePrompt")
+local Parent = PurchasePrompt.Parent
+local PurchasePromptLiteModule = require(Parent.PurchasePromptLite)
+local ProductPurchaseSurface = PurchasePromptLiteModule.Enums.ProductPurchaseSurface
+local GetTTIEventNameFunction = PurchasePromptLiteModule.getTTIEventName
+local TimeToInteractiveTracker = require(Parent.TimeToInteractiveTracker).TimeToInteractiveTracker
+local GetPurchaseSurfaceModule = require(PurchasePrompt.Utils.getPurchaseSurface)
+local GetProductTypeFromRequestTypeModule = require(PurchasePrompt.Utils.getProductTypeFromRequestType)
 
-return function(p1)
-	-- upvalues: getPurchaseSurfaceModule (ref), productPurchaseSurface (ref), getTTIEventName (ref), timeToInteractiveTracker (ref), getProductTypeFromRequestTypeModule (ref)
-	local state = p1:getState()
+return function(p1) --[[ Line: 15 | Named "trackInExperiencePurchaseStart" ]]
+	-- upvalues: GetPurchaseSurfaceModule (copy), ProductPurchaseSurface (copy), GetTTIEventNameFunction (copy), TimeToInteractiveTracker (copy), GetProductTypeFromRequestTypeModule (copy)
+	local State = p1:getState()
 	
-	if getPurchaseSurfaceModule(state.purchaseAnalyticsMetadata) == productPurchaseSurface.InExperience then
-		local var1 = getTTIEventName(productPurchaseSurface.InExperience)
-		timeToInteractiveTracker.trackStart(var1)
-		timeToInteractiveTracker.updateMetadata(var1, {
+	if GetPurchaseSurfaceModule(State.purchaseAnalyticsMetadata) == ProductPurchaseSurface.InExperience then
+		local TTIEventName = GetTTIEventNameFunction(ProductPurchaseSurface.InExperience)
+		TimeToInteractiveTracker.trackStart(TTIEventName)
+		TimeToInteractiveTracker.updateMetadata(TTIEventName, {
 			category = "unified_purchase_modal",
-			page = productPurchaseSurface.InExperience,
-			subcategory = getProductTypeFromRequestTypeModule(state.promptRequest.requestType)
+			page = ProductPurchaseSurface.InExperience,
+			subcategory = GetProductTypeFromRequestTypeModule(State.promptRequest.requestType)
 		})
 		
 		return

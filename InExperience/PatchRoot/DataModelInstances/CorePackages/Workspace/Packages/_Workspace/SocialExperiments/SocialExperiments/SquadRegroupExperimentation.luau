@@ -1,42 +1,41 @@
-﻿local parent = script:FindFirstAncestor("SocialExperiments").Parent
-local experimentCacheManager = require(parent.ExperimentCacheManager).ExperimentCacheManager
-local sharedFlagsModule = require(parent.SharedFlags)
-local fStringSquadRegroupExpLayer = game:DefineFastString("FStringSquadRegroupExpLayer", "Party.Coordination.UnifyCoplay")
-local squadEnableRegroupVariant = game:DefineFastString("SquadEnableRegroupVariant", "enableSquadRegroup")
-local fFlagForceEnableSquadRegroup = sharedFlagsModule.FFlagForceEnableSquadRegroup
-local fFlagEnableSquadRegroupExperimentation = sharedFlagsModule.FFlagEnableSquadRegroupExperimentation
+﻿local Parent = script:FindFirstAncestor("SocialExperiments").Parent
+local ExperimentCacheManager = require(Parent.ExperimentCacheManager).ExperimentCacheManager
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FStringSquadRegroupExpLayer = game:DefineFastString("FStringSquadRegroupExpLayer", "Party.Coordination.UnifyCoplay")
+local SquadEnableRegroupVariant = game:DefineFastString("SquadEnableRegroupVariant", "enableSquadRegroup")
+local FFlagForceEnableSquadRegroup = SharedFlagsModule.FFlagForceEnableSquadRegroup
+local FFlagEnableSquadRegroupExperimentation = SharedFlagsModule.FFlagEnableSquadRegroupExperimentation
 
-local function _(p1)
-	-- upvalues: experimentCacheManager (ref), fStringSquadRegroupExpLayer (ref)
-	local var1 = experimentCacheManager.default:getLayerVariables(fStringSquadRegroupExpLayer)
+local function _(p1) --[[ Line: 14 | Named "getIsUserInTreatment" ]]
+	-- upvalues: ExperimentCacheManager (copy), FStringSquadRegroupExpLayer (copy)
+	local LayerVariables = ExperimentCacheManager.default:getLayerVariables(FStringSquadRegroupExpLayer)
 	
-	return if var1 and var1[p1] ~= nil then var1[p1] else false
+	return if LayerVariables and LayerVariables[p1] ~= nil then LayerVariables[p1] else false
 end
 
 return {
-	getSquadRegroupEnabled = function()
-		-- upvalues: fFlagForceEnableSquadRegroup (ref), fFlagEnableSquadRegroupExperimentation (ref), squadEnableRegroupVariant (ref), experimentCacheManager (ref), fStringSquadRegroupExpLayer (ref)
-		local var1 = fFlagForceEnableSquadRegroup
+	getSquadRegroupEnabled = function() --[[ Line: 24 ]]
+		-- upvalues: FFlagForceEnableSquadRegroup (copy), FFlagEnableSquadRegroupExperimentation (copy), SquadEnableRegroupVariant (copy), ExperimentCacheManager (copy), FStringSquadRegroupExpLayer (copy)
+		local FFlagForceEnableSquadRegroup1: boolean = FFlagForceEnableSquadRegroup
 		
-		if not var1 then
-			var1 = fFlagEnableSquadRegroupExperimentation
+		if not FFlagForceEnableSquadRegroup1 then
+			FFlagForceEnableSquadRegroup1 = FFlagEnableSquadRegroupExperimentation
 			
-			if var1 then
-				local var2 = squadEnableRegroupVariant
-				local var3 = experimentCacheManager.default:getLayerVariables(fStringSquadRegroupExpLayer)
+			if FFlagForceEnableSquadRegroup1 then
+				local LayerVariables = ExperimentCacheManager.default:getLayerVariables(FStringSquadRegroupExpLayer)
 				
-				if var3 and var3[var2] ~= nil then
-					return var3[var2]
+				if LayerVariables and LayerVariables[SquadEnableRegroupVariant] ~= nil then
+					return LayerVariables[SquadEnableRegroupVariant]
 				end
-				var1 = false
+				FFlagForceEnableSquadRegroup1 = false
 			end
 		end
-		return var1
+		return FFlagForceEnableSquadRegroup1
 	end,
-	logExposure = function()
-		-- upvalues: fFlagForceEnableSquadRegroup (ref), fFlagEnableSquadRegroupExperimentation (ref), experimentCacheManager (ref), fStringSquadRegroupExpLayer (ref)
-		if not fFlagForceEnableSquadRegroup and fFlagEnableSquadRegroupExperimentation and experimentCacheManager.default:getLayerVariables(fStringSquadRegroupExpLayer) ~= nil then
-			experimentCacheManager.default:logLayerExposure(fStringSquadRegroupExpLayer)
+	logExposure = function() --[[ Line: 29 ]]
+		-- upvalues: FFlagForceEnableSquadRegroup (copy), FFlagEnableSquadRegroupExperimentation (copy), ExperimentCacheManager (copy), FStringSquadRegroupExpLayer (copy)
+		if not FFlagForceEnableSquadRegroup and FFlagEnableSquadRegroupExperimentation and ExperimentCacheManager.default:getLayerVariables(FStringSquadRegroupExpLayer) ~= nil then
+			ExperimentCacheManager.default:logLayerExposure(FStringSquadRegroupExpLayer)
 		end
 	end
 }

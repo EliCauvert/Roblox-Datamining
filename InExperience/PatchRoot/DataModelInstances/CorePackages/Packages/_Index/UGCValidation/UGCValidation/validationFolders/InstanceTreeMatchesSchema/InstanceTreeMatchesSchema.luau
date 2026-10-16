@@ -1,34 +1,37 @@
-﻿local parent = script.Parent.Parent.Parent
-local constantsModule = require(parent.Constants)
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
+﻿local Parent = script.Parent.Parent.Parent
+local ConstantsModule = require(Parent.Constants)
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 
 return {
 	categories = {
-		validationEnumsModule.UploadCategory.LAYERED_CLOTHING,
-		validationEnumsModule.UploadCategory.EYEBROW_EYELASH,
-		validationEnumsModule.UploadCategory.RIGID_ACCESSORY,
-		validationEnumsModule.UploadCategory.EMOTE_ANIMATION,
-		validationEnumsModule.UploadCategory.MAKEUP
+		ValidationEnumsModule.UploadCategory.LAYERED_CLOTHING,
+		ValidationEnumsModule.UploadCategory.EYEBROW_EYELASH,
+		ValidationEnumsModule.UploadCategory.RIGID_ACCESSORY,
+		ValidationEnumsModule.UploadCategory.EMOTE_ANIMATION,
+		ValidationEnumsModule.UploadCategory.MAKEUP
 	},
-	requiredData = { validationEnumsModule.SharedDataMember.rootInstance },
+	requiredData = { ValidationEnumsModule.SharedDataMember.rootInstance },
 	expectedFailures = {},
-	run = function(p1, p2)
-		-- upvalues: constantsModule (ref), errorSourceStringsModule (ref)
-		local rootInstance = p2.rootInstance
+	run = function(p1, p2) --[[ Line: 22 ]]
+		-- upvalues: ConstantsModule (copy), ErrorSourceStringsModule (copy)
+		local RootInstance = p2.rootInstance
 		
-		if constantsModule.BANNED_NAMES[rootInstance.Name] then
-			p1:fail(errorSourceStringsModule.Keys.InstanceTreeBannedName, { InstancePath = rootInstance:GetFullName() })
+		if ConstantsModule.BANNED_NAMES[RootInstance.Name] then
+			p1:fail(ErrorSourceStringsModule.Keys.InstanceTreeBannedName, { InstancePath = RootInstance:GetFullName() })
 		end
-		for i, v in rootInstance:GetDescendants() do
-			for i_1, v_1 in constantsModule.BANNED_CLASS_NAMES do
-				if v:IsA(v_1) then
-					p1:fail(errorSourceStringsModule.Keys.InstanceTreeBannedClass, { InstancePath = v:GetFullName(), ClassName = v_1 })
+		for _, descendant in RootInstance:GetDescendants() do
+			for _, bANNEDCLASSNAME in ConstantsModule.BANNED_CLASS_NAMES do
+				if descendant:IsA(bANNEDCLASSNAME) then
+					p1:fail(ErrorSourceStringsModule.Keys.InstanceTreeBannedClass, {
+						InstancePath = descendant:GetFullName(),
+						ClassName = bANNEDCLASSNAME
+					})
 				end
 			end
-			if constantsModule.BANNED_NAMES[v.Name] then
-				p1:fail(errorSourceStringsModule.Keys.InstanceTreeBannedName, { InstancePath = v:GetFullName() })
+			if ConstantsModule.BANNED_NAMES[descendant.Name] then
+				p1:fail(ErrorSourceStringsModule.Keys.InstanceTreeBannedName, { InstancePath = descendant:GetFullName() })
 			end
 		end
 	end

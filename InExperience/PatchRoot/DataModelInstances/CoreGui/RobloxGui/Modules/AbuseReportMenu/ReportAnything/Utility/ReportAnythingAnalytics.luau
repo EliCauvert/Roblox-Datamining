@@ -1,14 +1,14 @@
-﻿local eventIngestService = game:GetService("EventIngestService")
-local corePackagesService = game:GetService("CorePackages")
-local cryoModule = require(corePackagesService.Packages.Cryo)
-local _ = require(corePackagesService.Workspace.Packages.TnSAvatarIdentification)
-local eventIngest = require(corePackagesService.Workspace.Packages.Analytics).AnalyticsReporters.EventIngest
-local t = {
+﻿local EventIngestService = game:GetService("EventIngestService")
+local CorePackages = game:GetService("CorePackages")
+local CryoModule = require(CorePackages.Packages.Cryo)
+local _ = require(CorePackages.Workspace.Packages.TnSAvatarIdentification)
+local EventIngest = require(CorePackages.Workspace.Packages.Analytics).AnalyticsReporters.EventIngest
+local config = {
 	EventType = { AvatarsIdentified = "ReportAnythingAvatarsIdentified" },
 	Context = { LegacyMenu = "ReportAbuseLegacyMenu" }
 }
 
-local _ = function()
+local function _() --[[ Line: 33 ]]
 	return {
 		previewBackCount = 0,
 		previewAttachCount = 0,
@@ -23,7 +23,7 @@ local _ = function()
 	}
 end
 
-local t_1 = {
+local config1 = {
 	previewBackCount = 0,
 	previewAttachCount = 0,
 	retakeCount = 0,
@@ -35,73 +35,81 @@ local t_1 = {
 	annotationRedoCount = 0,
 	annotationNext = false
 }
-local var1 = nil
+local NewResult = nil
 
-local _ = function()
-	-- upvalues: var1 (write), eventIngest (ref), eventIngestService (ref)
-	if not var1 then
-		var1 = eventIngest.new(eventIngestService)
+local _ = function() --[[ Line: 51 ]]
+	-- upvalues: NewResult (ref), EventIngest (copy), EventIngestService (copy)
+	if not NewResult then
+		NewResult = EventIngest.new(EventIngestService)
 	end
-	return var1
+	return NewResult
 end
 
 return {
-	incrementPreviewBack = function()
-		-- upvalues: t_1 (write)
-		t_1.previewBackCount += 1
+	incrementPreviewBack = function() --[[ Line: 59 ]]
+		-- upvalues: config1 (ref)
+		local config = config1
+		config.previewBackCount += 1
 	end,
-	incrementPreviewAttach = function()
-		-- upvalues: t_1 (write)
-		t_1.previewAttachCount += 1
+	incrementPreviewAttach = function() --[[ Line: 62 ]]
+		-- upvalues: config1 (ref)
+		local config = config1
+		config.previewAttachCount += 1
 	end,
-	incrementRetake = function()
-		-- upvalues: t_1 (write)
-		t_1.retakeCount += 1
+	incrementRetake = function() --[[ Line: 65 ]]
+		-- upvalues: config1 (ref)
+		local config = config1
+		config.retakeCount += 1
 	end,
-	setRetakeAbandon = function()
-		-- upvalues: t_1 (write)
-		t_1.retakeAbandon = true
+	setRetakeAbandon = function() --[[ Line: 68 ]]
+		-- upvalues: config1 (ref)
+		config1.retakeAbandon = true
 	end,
-	incrementHighlightScene = function()
-		-- upvalues: t_1 (write)
-		t_1.highlightSceneCount += 1
+	incrementHighlightScene = function() --[[ Line: 71 ]]
+		-- upvalues: config1 (ref)
+		local config = config1
+		config.highlightSceneCount += 1
 	end,
-	incrementAnnotationBack = function()
-		-- upvalues: t_1 (write)
-		t_1.annotationBackCount += 1
+	incrementAnnotationBack = function() --[[ Line: 74 ]]
+		-- upvalues: config1 (ref)
+		local config = config1
+		config.annotationBackCount += 1
 	end,
-	incrementAnnotationPlace = function()
-		-- upvalues: t_1 (write)
-		t_1.annotationPlaceCount += 1
+	incrementAnnotationPlace = function() --[[ Line: 77 ]]
+		-- upvalues: config1 (ref)
+		local config = config1
+		config.annotationPlaceCount += 1
 	end,
-	incrementAnnotationUndo = function()
-		-- upvalues: t_1 (write)
-		t_1.annotationUndoCount += 1
+	incrementAnnotationUndo = function() --[[ Line: 80 ]]
+		-- upvalues: config1 (ref)
+		local config = config1
+		config.annotationUndoCount += 1
 	end,
-	incrementAnnotationRedo = function()
-		-- upvalues: t_1 (write)
-		t_1.annotationRedoCount += 1
+	incrementAnnotationRedo = function() --[[ Line: 83 ]]
+		-- upvalues: config1 (ref)
+		local config = config1
+		config.annotationRedoCount += 1
 	end,
-	setAnnotationNext = function()
-		-- upvalues: t_1 (write)
-		t_1.annotationNext = true
+	setAnnotationNext = function() --[[ Line: 86 ]]
+		-- upvalues: config1 (ref)
+		config1.annotationNext = true
 	end,
-	getAccumulatedParameters = function()
-		-- upvalues: t_1 (write)
-		return t_1
+	getAccumulatedParameters = function() --[[ Line: 90 ]]
+		-- upvalues: config1 (ref)
+		return config1
 	end,
-	emitAvatarsIdentifiedStats = function(p1)
-		-- upvalues: cryoModule (ref), var1 (write), eventIngest (ref), eventIngestService (ref), t (ref)
-		local var2 = cryoModule.Dictionary.join(p1, { duration = p1.duration * 1000000 })
+	emitAvatarsIdentifiedStats = function(p1) --[[ Line: 93 ]]
+		-- upvalues: CryoModule (copy), NewResult (ref), EventIngest (copy), EventIngestService (copy), config (copy)
+		local JoinResult = CryoModule.Dictionary.join(p1, { duration = p1.duration * 1000000 })
 		
-		if not var1 then
-			var1 = eventIngest.new(eventIngestService)
+		if not NewResult then
+			NewResult = EventIngest.new(EventIngestService)
 		end
-		var1:sendEventDeferred(t.Context.LegacyMenu, t.EventType.AvatarsIdentified, var2)
+		NewResult:sendEventDeferred(config.Context.LegacyMenu, config.EventType.AvatarsIdentified, JoinResult)
 	end,
-	clear = function()
-		-- upvalues: t_1 (write)
-		t_1 = {
+	clear = function() --[[ Line: 103 ]]
+		-- upvalues: config1 (ref)
+		config1 = {
 			previewBackCount = 0,
 			previewAttachCount = 0,
 			retakeCount = 0,

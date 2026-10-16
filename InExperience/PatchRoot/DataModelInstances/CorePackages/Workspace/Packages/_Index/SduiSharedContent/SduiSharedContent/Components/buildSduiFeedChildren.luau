@@ -1,119 +1,107 @@
-﻿local sduiSharedContent = script:FindFirstAncestor("SduiSharedContent")
-local parent = sduiSharedContent.Parent
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local discoveryTypesModule = require(parent.DiscoveryTypes)
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local findAnalyticsField = sduiCoreSystemModule.findAnalyticsField
-local getSduiComponentWrapper = sduiCoreSystemModule.getSduiComponentWrapper
-local sduiBuilder = sduiCoreSystemModule.SduiBuilder
-local sduiErrors = sduiCoreSystemModule.SduiErrors
-local sduiFeedItemModule = require(sduiSharedContent.Components.SduiFeedItem)
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagSduiCollectionGridRevealRows = sharedFlagsModule.FFlagSduiCollectionGridRevealRows
-local fFlagAppPageShellScrollToTopFocus = sharedFlagsModule.FFlagAppPageShellScrollToTopFocus
-local fFlagLuaAppsDefaultSelection = sharedFlagsModule.FFlagLuaAppsDefaultSelection
-local fFlagSduiIndividualFeedItemSpacing = sharedFlagsModule.FFlagSduiIndividualFeedItemSpacing
-local fFlagSduiSamePoolFeedItemSpacing = sharedFlagsModule.FFlagSduiSamePoolFeedItemSpacing
-local sduiFeedIndexInExtraLocalProps = game:DefineFastFlag("SduiFeedIndexInExtraLocalProps", false)
-local sduiFeedDebugNameWithImpressionsTag = game:DefineFastFlag("SduiFeedDebugNameWithImpressionsTag", false)
-local SORT_INDEX_SELECTION_ORDER_MULTIPLIER = discoveryTypesModule.Constants.SORT_INDEX_SELECTION_ORDER_MULTIPLIER
+﻿local SduiSharedContent = script:FindFirstAncestor("SduiSharedContent")
+local Parent = SduiSharedContent.Parent
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local FindAnalyticsFieldFunction = SduiCoreSystemModule.findAnalyticsField
+local GetSduiComponentWrapperFunction = SduiCoreSystemModule.getSduiComponentWrapper
+local SduiBuilder = SduiCoreSystemModule.SduiBuilder
+local SduiErrors = SduiCoreSystemModule.SduiErrors
+local SduiFeedItemModule = require(SduiSharedContent.Components.SduiFeedItem)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagSduiCollectionGridRevealRows = SharedFlagsModule.FFlagSduiCollectionGridRevealRows
+local FFlagAppPageShellScrollToTopFocus = SharedFlagsModule.FFlagAppPageShellScrollToTopFocus
+local FFlagLuaAppsDefaultSelection = SharedFlagsModule.FFlagLuaAppsDefaultSelection
+local FFlagSduiIndividualFeedItemSpacing = SharedFlagsModule.FFlagSduiIndividualFeedItemSpacing
+local FFlagSduiSamePoolFeedItemSpacing = SharedFlagsModule.FFlagSduiSamePoolFeedItemSpacing
+local SduiFeedDebugNameWithImpressionsTag = game:DefineFastFlag("SduiFeedDebugNameWithImpressionsTag", false)
+local SORTINDEXSELECTIONORDERMULTIPLIER = require(Parent.DiscoveryTypes).Constants.SORT_INDEX_SELECTION_ORDER_MULTIPLIER
 local t = {}
 
-local function _(p1, p2, p3, p4, p5)
-	-- upvalues: fFlagSduiSamePoolFeedItemSpacing (ref)
-	return if p1 == nil then nil elseif fFlagSduiSamePoolFeedItemSpacing and p4 ~= nil and (p5 ~= nil and p5.continuesPreviousSection == true) then p4 elseif p2 == 1 and p3 ~= nil and p3 >= 0 then p3 else p1
+local function _(p1, p2, p3: number, p4, p5) --[[ Line: 33 | Named "getSpacingAfterFeedItem" ]]
+	-- upvalues: FFlagSduiSamePoolFeedItemSpacing (copy)
+	return if p1 == nil then nil elseif FFlagSduiSamePoolFeedItemSpacing and p4 ~= nil and p5 ~= nil and p5.continuesPreviousSection == true then p4 elseif p2 == 1 and p3 ~= nil and p3 >= 0 then p3 else p1
 end
 
-return function(p1)
-	-- upvalues: fFlagSduiIndividualFeedItemSpacing (ref), findAnalyticsField (ref), t (ref), sduiBuilder (ref), sduiErrors (ref), getSduiComponentWrapper (ref), cryoModule (ref), fFlagSduiCollectionGridRevealRows (ref), sduiFeedIndexInExtraLocalProps (ref), fFlagAppPageShellScrollToTopFocus (ref), SORT_INDEX_SELECTION_ORDER_MULTIPLIER (ref), reactModule (ref), sduiFeedDebugNameWithImpressionsTag (ref), fFlagSduiSamePoolFeedItemSpacing (ref), sduiFeedItemModule (ref), fFlagLuaAppsDefaultSelection (ref)
-	local t_1 = {}
-	local sduiContext = p1.sduiContext
-	local startRow = p1.extraLocalProps and p1.extraLocalProps.startRow
-	local var1 = if typeof(startRow) == "number" then startRow else 1
-	local maxConfigs = p1.maxConfigs
-	local var2 = if fFlagSduiIndividualFeedItemSpacing then p1.gapBetweenFeedItems else nil
-	local var3 = if fFlagSduiIndividualFeedItemSpacing then p1.gapAfterFirstFeedItem else nil
-	
-	for i, v in p1.configs do
-		if maxConfigs ~= nil and maxConfigs < i then break end
-		local componentType = findAnalyticsField("componentType", v.analyticsData or t) or sduiBuilder.getComponentType(v, sduiContext)
+return function(p1) --[[ Line: 86 | Named "buildSduiFeedChildren" ]]
+	-- upvalues: FFlagSduiIndividualFeedItemSpacing (copy), FindAnalyticsFieldFunction (copy), t (copy), SduiBuilder (copy), SduiErrors (copy), GetSduiComponentWrapperFunction (copy), CryoModule (copy), FFlagSduiCollectionGridRevealRows (copy), FFlagAppPageShellScrollToTopFocus (copy), SORTINDEXSELECTIONORDERMULTIPLIER (copy), ReactModule (copy), SduiFeedDebugNameWithImpressionsTag (copy), FFlagSduiSamePoolFeedItemSpacing (copy), SduiFeedItemModule (copy), FFlagLuaAppsDefaultSelection (copy)
+	local Elements = {}
+	local SduiContext = p1.sduiContext
+	local StartRow = p1.extraLocalProps and p1.extraLocalProps.startRow
+	local StartRow1 = if typeof(StartRow) == "number" then StartRow else 1
+	local MaxConfigs = p1.maxConfigs
+	local GapBetweenFeedItems = if FFlagSduiIndividualFeedItemSpacing then p1.gapBetweenFeedItems else nil
+	local GapAfterFirstFeedItem = if FFlagSduiIndividualFeedItemSpacing then p1.gapAfterFirstFeedItem else nil
+	for CollectionPosition, config in p1.configs do
+		if MaxConfigs ~= nil and MaxConfigs < CollectionPosition then break end
+		local ComponentType = FindAnalyticsFieldFunction("componentType", config.analyticsData or t) or SduiBuilder.getComponentType(config, SduiContext)
 		
-		if not componentType then
-			sduiContext.dependencies.logger.reportError(sduiErrors.SduiErrorType.NilComponentType, {
+		if not ComponentType then
+			SduiContext.dependencies.logger.reportError(SduiErrors.SduiErrorType.NilComponentType, {
 				componentType = p1.componentType,
 				name = p1.debugName,
-				message = `Nil componentType in {p1.componentType} at index {i}`
-			}, sduiContext.appPage)
+				message = `Nil componentType in {p1.componentType} at index {CollectionPosition}`
+			}, SduiContext.appPage)
 			continue
 		end
-		local componentType_1 = `{p1.componentType}{i}_{componentType}`
-		local var4 = getSduiComponentWrapper(v)
-		local t_2 = {
-			feedItemPosition = i,
-			itemComponentType = componentType,
-			componentType = componentType,
-			collectionPosition = i
+		local Text: string = `{p1.componentType}{CollectionPosition}_{ComponentType}`
+		local SduiComponentWrapper = GetSduiComponentWrapperFunction(config)
+		local LocalAnalyticsData = {
+			feedItemPosition = CollectionPosition,
+			itemComponentType = ComponentType,
+			componentType = ComponentType,
+			collectionPosition = CollectionPosition
 		}
-		local _ = nil
 		local _ = p1.extraLocalProps
-		local startRowGetter = v.startRowGetter
-		local var5 = if startRowGetter ~= nil then nil else { startRow = startRowGetter }
-		local var6 = cryoModule.Dictionary.join(p1.extraLocalProps or t, {
-			startRow = if startRowGetter ~= nil then var1 + i - 1 else cryoModule.None,
-			setDisplayedRowCount = if fFlagSduiCollectionGridRevealRows then v.setDisplayedRowCount else nil
-		})
+		local StartRowGetter = config.startRowGetter
+		local Config = if StartRowGetter == nil then nil else { startRow = StartRowGetter }
+		local JoinResult = CryoModule.Dictionary.join(CryoModule.Dictionary.join(p1.extraLocalProps or t, {
+			startRow = if StartRowGetter == nil then StartRow1 + CollectionPosition - 1 else CryoModule.None,
+			setDisplayedRowCount = if FFlagSduiCollectionGridRevealRows then config.setDisplayedRowCount else nil
+		}), { index = CollectionPosition })
 		
-		if sduiFeedIndexInExtraLocalProps then
-			var6 = cryoModule.Dictionary.join(var6, { index = i })
-		end
-		if fFlagAppPageShellScrollToTopFocus and p1.selectionOrderBase ~= nil then
-			var6 = cryoModule.Dictionary.join(var6, {
-				selectionOrderBase = p1.selectionOrderBase + i * SORT_INDEX_SELECTION_ORDER_MULTIPLIER
+		if FFlagAppPageShellScrollToTopFocus and p1.selectionOrderBase ~= nil then
+			JoinResult = CryoModule.Dictionary.join(JoinResult, {
+				selectionOrderBase = p1.selectionOrderBase + CollectionPosition * SORTINDEXSELECTIONORDERMULTIPLIER
 			})
 		end
-		local var7, var8
-		local createElement = reactModule.createElement
-		createElement = createElement(var4, {
-			debugName = if sduiFeedDebugNameWithImpressionsTag and p1.impressionsTag ~= nil and p1.impressionsTag ~= "" then `{componentType_1}_{p1.impressionsTag}` else componentType_1,
-			componentConfig = v,
-			sduiContext = sduiContext,
-			localAnalyticsData = t_2,
-			extraLocalProps = var6,
-			extraLocalPropSignals = var5
+		local Element = ReactModule.createElement(SduiComponentWrapper, {
+			debugName = if SduiFeedDebugNameWithImpressionsTag and p1.impressionsTag ~= nil and p1.impressionsTag ~= "" then `{Text}_{p1.impressionsTag}` else Text,
+			componentConfig = config,
+			sduiContext = SduiContext,
+			localAnalyticsData = LocalAnalyticsData,
+			extraLocalProps = JoinResult,
+			extraLocalPropSignals = Config
 		})
-		local var9 = if v.props and v.props.layoutOrder ~= nil then v.props.layoutOrder else i
-		local var10 = if v.props and v.props.zIndex ~= nil then v.props.zIndex else -i
-		local var11 = if p1.negateImpressionIndex then -i else i
-		local var12 = nil
+		local LayoutOrder = if config.props and config.props.layoutOrder ~= nil then config.props.layoutOrder else CollectionPosition
+		local ZIndex = if config.props and config.props.zIndex ~= nil then config.props.zIndex else -CollectionPosition
+		local Negated = if p1.negateImpressionIndex then -CollectionPosition else CollectionPosition
+		local v1: number? = nil
 		
-		if fFlagSduiIndividualFeedItemSpacing then
-			var12 = var9 * 2
-			var7 = if fFlagSduiSamePoolFeedItemSpacing then p1.samePoolFeedItemGap else nil
-			var8 = if fFlagSduiSamePoolFeedItemSpacing then p1.configs[i + 1] else nil
-			local var13 = if var2 == nil then nil elseif fFlagSduiSamePoolFeedItemSpacing and var7 ~= nil and (var8 ~= nil and var8.continuesPreviousSection == true) then var7 elseif i == 1 and var3 ~= nil and var3 >= 0 then var3 else var2
+		if FFlagSduiIndividualFeedItemSpacing then
+			v1 = LayoutOrder * 2
+			local SamePoolFeedItemGap = if FFlagSduiSamePoolFeedItemSpacing then p1.samePoolFeedItemGap else nil
+			local Config1 = if FFlagSduiSamePoolFeedItemSpacing then p1.configs[CollectionPosition + 1] else nil
+			local YOffset = if GapBetweenFeedItems == nil then nil elseif FFlagSduiSamePoolFeedItemSpacing and (SamePoolFeedItemGap ~= nil and Config1 ~= nil and Config1.continuesPreviousSection == true) then SamePoolFeedItemGap elseif CollectionPosition == 1 and GapAfterFirstFeedItem ~= nil and GapAfterFirstFeedItem >= 0 then GapAfterFirstFeedItem else GapBetweenFeedItems
 			
-			if var13 ~= nil and var13 > 0 then
-				t_1[`{componentType_1}_GapAfter`] = reactModule.createElement("Frame", {
+			if YOffset ~= nil and YOffset > 0 then
+				Elements[`{Text}_GapAfter`] = ReactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					BorderSizePixel = 0,
-					Size = UDim2.new(1, 0, 0, var13),
-					LayoutOrder = var12 + 1
+					Size = UDim2.new(1, 0, 0, YOffset),
+					LayoutOrder = v1 + 1
 				})
 			end
 		end
-		local createElement_1 = reactModule.createElement
-		var7 = sduiFeedItemModule
-		var8 = {
-			layoutOrder = if fFlagSduiIndividualFeedItemSpacing then var12 else var9,
-			zIndex = var10,
-			index = var11,
+		Elements[Text] = ReactModule.createElement(SduiFeedItemModule, {
+			layoutOrder = if FFlagSduiIndividualFeedItemSpacing then v1 else LayoutOrder,
+			zIndex = ZIndex,
+			index = Negated,
 			impressionsTag = p1.impressionsTag,
 			selectionBehaviorLeft = p1.selectionBehaviorLeft,
 			selectionBehaviorRight = p1.selectionBehaviorRight,
-			defaultFocusRef = if fFlagAppPageShellScrollToTopFocus and fFlagLuaAppsDefaultSelection and i == 1 then p1.defaultFocusRef else nil
-		}
-		t_1[componentType_1] = createElement_1(var7, var8, { Item = createElement })
+			defaultFocusRef = if FFlagAppPageShellScrollToTopFocus and FFlagLuaAppsDefaultSelection and CollectionPosition == 1 then p1.defaultFocusRef else nil
+		}, { Item = Element })
 	end
-	return t_1
+	return Elements
 end

@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.AppCommonLib.AppCommonLib)
+﻿return (require(script.Parent._Workspace.AppCommonLib.AppCommonLib))

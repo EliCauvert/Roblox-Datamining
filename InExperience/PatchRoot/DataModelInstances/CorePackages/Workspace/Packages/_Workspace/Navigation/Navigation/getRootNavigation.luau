@@ -1,10 +1,10 @@
 ﻿local _ = require(script.Parent.types)
 
-local function getRootNavigation(p1)
-	-- upvalues: getRootNavigation (ref)
-	local var1 = p1._dangerouslyGetParent()
+local function getRootNavigation(DangerouslyGetParentResult) --[[ Line: 4 ]]
+	-- upvalues: getRootNavigation (copy)
+	local DangerouslyGetParentResult1 = DangerouslyGetParentResult._dangerouslyGetParent()
 	
-	return if var1 then getRootNavigation(var1) else p1
+	return if DangerouslyGetParentResult1 then getRootNavigation(DangerouslyGetParentResult1) else DangerouslyGetParentResult
 end
 
 return getRootNavigation

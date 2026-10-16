@@ -1,82 +1,81 @@
-﻿local friendsLanding = script:FindFirstAncestor("FriendsLanding")
-local parent = friendsLanding.Parent
-local dependenciesModule = require(friendsLanding.dependencies)
-local roact = dependenciesModule.Roact
-local withLocalization = dependenciesModule.withLocalization
-local UIBlox = dependenciesModule.UIBlox
-local withStyle = UIBlox.Style.withStyle
-local images = UIBlox.App.ImageSet.Images
-local imageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
-local textKeysModule = require(friendsLanding.Common.TextKeys)
-local constantsModule = require(friendsLanding.Common.Constants)
-local appFonts = require(parent.Style).AppFonts
-local cryoModule = require(parent.Cryo)
-local foundationModule = require(parent.Foundation)
-local image = foundationModule.Image
-local useTokens = foundationModule.Hooks.useTokens
-local foundationCloudAssetsModule = require(parent.FoundationCloudAssets)
-local assets = foundationCloudAssetsModule.Assets
-local preloadAsset = foundationCloudAssetsModule.preloadAsset
-local migrateEmptyResultsViewToFoundation = game:DefineFastFlag("MigrateEmptyResultsViewToFoundation", false)
-local fFlagConnectionsToFriendsRename = require(parent.SharedFlags).FFlagConnectionsToFriendsRename
-local fFlagFriendsEmptyStateIllustrationThemingModule = require(friendsLanding.Flags.FFlagFriendsEmptyStateIllustrationTheming)
-local emptyResultsView = roact.PureComponent:extend("EmptyResultsView")
-emptyResultsView.defaultProps = { layoutOrder = 0, pageLoadingTimeReport = nil }
+﻿local FriendsLanding = script:FindFirstAncestor("FriendsLanding")
+local Parent = FriendsLanding.Parent
+local DependenciesModule = require(FriendsLanding.dependencies)
+local Roact = DependenciesModule.Roact
+local WithLocalizationFunction = DependenciesModule.withLocalization
+local UIBlox = DependenciesModule.UIBlox
+local WithStyleFunction = UIBlox.Style.withStyle
+local Images = UIBlox.App.ImageSet.Images
+local ImageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
+local TextKeysModule = require(FriendsLanding.Common.TextKeys)
+local ConstantsModule = require(FriendsLanding.Common.Constants)
+local AppFonts = require(Parent.Style).AppFonts
+local CryoModule = require(Parent.Cryo)
+local FoundationModule = require(Parent.Foundation)
+local Image = FoundationModule.Image
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local FoundationCloudAssetsModule = require(Parent.FoundationCloudAssets)
+local Assets = FoundationCloudAssetsModule.Assets
+local PreloadAssetFunction = FoundationCloudAssetsModule.preloadAsset
+local MigrateEmptyResultsViewToFoundation = game:DefineFastFlag("MigrateEmptyResultsViewToFoundation", false)
+local FFlagFriendsEmptyStateIllustrationThemingModule = require(FriendsLanding.Flags.FFlagFriendsEmptyStateIllustrationTheming)
+local EmptyResultsView = Roact.PureComponent:extend("EmptyResultsView")
+EmptyResultsView.defaultProps = { layoutOrder = 0, pageLoadingTimeReport = nil }
 
-local function _(value)
-	-- upvalues: preloadAsset (ref), assets (ref)
-	preloadAsset(value)
-	local var1 = assets[value]
+local function _(p1) --[[ Line: 46 | Named "loadFoundationCloudAsset" ]]
+	-- upvalues: PreloadAssetFunction (copy), Assets (copy)
+	PreloadAssetFunction(p1)
+	local Asset = Assets[p1]
 	
-	return var1.assetId, var1.size
+	return Asset.assetId, Asset.size
 end
 
-function emptyResultsView.render(p1)
-	-- upvalues: withStyle (ref), withLocalization (ref), fFlagConnectionsToFriendsRename (ref), textKeysModule (ref), roact (ref), constantsModule (ref), migrateEmptyResultsViewToFoundation (ref), image (ref), fFlagFriendsEmptyStateIllustrationThemingModule (ref), imageSetLabel (ref), images (ref), appFonts (ref)
-	return withStyle(function(p2)
-		-- upvalues: withLocalization (copy), fFlagConnectionsToFriendsRename (copy), textKeysModule (copy), roact (copy), constantsModule (copy), p1 (ref), migrateEmptyResultsViewToFoundation (copy), image (copy), fFlagFriendsEmptyStateIllustrationThemingModule (copy), imageSetLabel (copy), images (copy), appFonts (copy)
-		return withLocalization({
+function EmptyResultsView.render(p1) --[[ Line: 52 ]]
+	-- upvalues: WithStyleFunction (copy), WithLocalizationFunction (copy), TextKeysModule (copy), Roact (copy), ConstantsModule (copy), MigrateEmptyResultsViewToFoundation (copy), Image (copy), FFlagFriendsEmptyStateIllustrationThemingModule (copy), ImageSetLabel (copy), Images (copy), AppFonts (copy)
+	return WithStyleFunction(function(p2) --[[ Line: 53 ]]
+		-- upvalues: WithLocalizationFunction (upval), TextKeysModule (upval), Roact (upval), ConstantsModule (upval), p1 (copy), MigrateEmptyResultsViewToFoundation (upval), Image (upval), FFlagFriendsEmptyStateIllustrationThemingModule (upval), ImageSetLabel (upval), Images (upval), AppFonts (upval)
+		return WithLocalizationFunction({
 			noResultsText = "CommonUI.Messages.Response.NoResults",
-			addFriendsBtn = if fFlagConnectionsToFriendsRename then textKeysModule.ADD_FRIENDS_BTN else textKeysModule.ADD_CONNECTIONS_BTN
-		})(function(p3)
-			-- upvalues: roact (copy), constantsModule (copy), p1 (copy), migrateEmptyResultsViewToFoundation (copy), image (copy), fFlagFriendsEmptyStateIllustrationThemingModule (copy), imageSetLabel (copy), images (copy), p2 (ref), appFonts (copy)
-			return roact.createElement("Frame", {
+			addFriendsBtn = TextKeysModule.ADD_FRIENDS_BTN
+		})(function(p3) --[[ Line: 57 ]]
+			-- upvalues: Roact (upval), ConstantsModule (upval), p1 (upval), MigrateEmptyResultsViewToFoundation (upval), Image (upval), FFlagFriendsEmptyStateIllustrationThemingModule (upval), ImageSetLabel (upval), Images (upval), p2 (copy), AppFonts (upval)
+			return Roact.createElement("Frame", {
 				BackgroundTransparency = 1,
-				Size = UDim2.new(1, 0, 1, -(constantsModule.TOP_BAR_HEIGHT + 45)),
+				Size = UDim2.new(1, 0, 1, -(ConstantsModule.TOP_BAR_HEIGHT + 45)),
 				LayoutOrder = p1.props.layoutOrder
 			}, {
-				IndicatorInner = roact.createElement("Frame", {
+				IndicatorInner = Roact.createElement("Frame", {
 					BackgroundTransparency = 1,
 					AutomaticSize = Enum.AutomaticSize.XY,
 					Size = UDim2.new(0, 0, 0, 0),
 					Position = UDim2.new(0.5, 0, 0.4, 0),
 					AnchorPoint = Vector2.new(0.5, 0.4)
 				}, {
-					UIList = roact.createElement("UIListLayout", {
+					UIList = Roact.createElement("UIListLayout", {
 						VerticalAlignment = Enum.VerticalAlignment.Center,
 						SortOrder = Enum.SortOrder.LayoutOrder,
 						FillDirection = Enum.FillDirection.Vertical,
 						HorizontalAlignment = Enum.HorizontalAlignment.Center,
 						Padding = UDim.new(0, 0)
 					}),
-					Imagelabel = if migrateEmptyResultsViewToFoundation then roact.createElement(image, {
+					Imagelabel = if MigrateEmptyResultsViewToFoundation then Roact.createElement(Image, {
 						LayoutOrder = 1,
 						Image = p1.props.assetId,
-						imageStyle = if fFlagFriendsEmptyStateIllustrationThemingModule then p1.props.tokens.Color.Content.Emphasis else nil,
+						imageStyle = if FFlagFriendsEmptyStateIllustrationThemingModule then p1.props.tokens.Color.Content.Emphasis else nil,
 						Size = UDim2.fromOffset(p1.props.assetSize.X, p1.props.assetSize.Y)
-					}) else roact.createElement(imageSetLabel, {
+					}) else Roact.createElement(ImageSetLabel, {
 						BackgroundTransparency = 1,
 						LayoutOrder = 1,
-						Image = images["icons/status/oof_xlarge"],
+						Image = Images["icons/status/oof_xlarge"],
 						ImageColor3 = p2.Theme.TextMuted.Color,
 						ImageTransparency = p2.Theme.TextMuted.Transparency,
 						Size = UDim2.new(0, 96, 0, 96)
 					}),
-					Textlabel = roact.createElement("TextLabel", {
+					Textlabel = Roact.createElement("TextLabel", {
 						BackgroundTransparency = 1,
 						LayoutOrder = 2,
 						AutomaticSize = Enum.AutomaticSize.XY,
-						Font = appFonts.default:getDefault(),
+						Font = AppFonts.default:getDefault(),
 						Size = UDim2.new(0, 0, 0, 0),
 						Text = p3.noResultsText,
 						TextColor3 = p2.Theme.TextMuted.Color,
@@ -89,14 +88,16 @@ function emptyResultsView.render(p1)
 	end)
 end
 
-return if migrateEmptyResultsViewToFoundation then function(p1)
-	-- upvalues: preloadAsset (ref), assets (ref), useTokens (ref), roact (ref), emptyResultsView (ref), cryoModule (ref)
-	preloadAsset("pictograms/collaborators")
-	local collaborators = assets["pictograms/collaborators"]
+local function EmptyResultsViewContainer(p1) --[[ Line: 111 ]]
+	-- upvalues: PreloadAssetFunction (copy), Assets (copy), UseTokensFunction (copy), Roact (copy), EmptyResultsView (copy), CryoModule (copy)
+	PreloadAssetFunction("pictograms/collaborators")
+	local PictogramsCollaborators = Assets["pictograms/collaborators"]
 	
-	return roact.createElement(emptyResultsView, cryoModule.Dictionary.join(p1, {
-		assetSize = collaborators.size / 3,
-		assetId = collaborators.assetId,
-		tokens = useTokens()
+	return Roact.createElement(EmptyResultsView, CryoModule.Dictionary.join(p1, {
+		assetSize = PictogramsCollaborators.size / 3,
+		assetId = PictogramsCollaborators.assetId,
+		tokens = UseTokensFunction()
 	}))
-end else emptyResultsView
+end
+
+return if MigrateEmptyResultsViewToFoundation then EmptyResultsViewContainer else EmptyResultsView

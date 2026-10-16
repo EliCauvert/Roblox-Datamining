@@ -1,5 +1,5 @@
 ﻿game:DefineFastString("VNGDownloadNowUrl", "https://www.roblox.com")
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastString("VNGDownloadNowUrl")
 end

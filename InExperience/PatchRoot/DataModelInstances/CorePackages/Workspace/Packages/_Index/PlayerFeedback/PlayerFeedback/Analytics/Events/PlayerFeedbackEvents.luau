@@ -1,217 +1,226 @@
-﻿local parent = script:FindFirstAncestor("PlayerFeedback").Parent
-local constantsModule = require(script.Parent.Parent.Constants)
-local cryoModule = require(parent.Cryo)
-local tModule = require(parent.t)
-local mutedError = require(parent.Loggers).mutedError
-local var1 = tModule.optional(tModule.strictInterface({
-	categoryType = tModule.optional(tModule.string),
-	value = tModule.optional(tModule.string)
+﻿local Parent = script:FindFirstAncestor("PlayerFeedback").Parent
+local ConstantsModule = require(script.Parent.Parent.Constants)
+local CryoModule = require(Parent.Cryo)
+local TModule = require(Parent.t)
+local MutedErrorFunction = require(Parent.Loggers).mutedError
+local OptionalResult = TModule.optional(TModule.strictInterface({
+	categoryType = TModule.optional(TModule.string),
+	value = TModule.optional(TModule.string)
 }))
 
-local function _(p1)
-	-- upvalues: var1 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref)
-	return function(p2, p3, p4)
-		-- upvalues: var1 (copy), mutedError (copy), cryoModule (copy), constantsModule (copy), p1 (ref)
-		local var2, var3 = var1(p4)
+local function _(p1) --[[ Line: 12 | Named "gamePlayerFeedbackEvent" ]]
+	-- upvalues: OptionalResult (copy), MutedErrorFunction (copy), CryoModule (copy), ConstantsModule (copy)
+	return function(p2, PlaceId, p3) --[[ Line: 13 ]]
+		-- upvalues: OptionalResult (upval), MutedErrorFunction (upval), CryoModule (upval), ConstantsModule (upval), p1 (copy)
+		local OptionalResultResult, OptionalResultResult2 = OptionalResult(p3)
 		
-		if not var2 then
-			mutedError(var3)
+		if not OptionalResultResult then
+			MutedErrorFunction(OptionalResultResult2)
 		end
-		local t = { placeId = p3 }
+		local JoinResult = { placeId = PlaceId }
 		
-		if p4 then
-			t = cryoModule.Dictionary.join(t, p4)
+		if p3 then
+			JoinResult = CryoModule.Dictionary.join(JoinResult, p3)
 		end
-		p2:sendEventDeferred(constantsModule.Context.GamePlayerFeedback, p1, t)
+		p2:sendEventDeferred(ConstantsModule.Context.GamePlayerFeedback, p1, JoinResult)
 	end
 end
 
-local t = {}
-local clickPlayerFeedbackPromptCta = constantsModule.EventNames.ClickPlayerFeedbackPromptCta
+local ClickPlayerFeedbackPromptCta = ConstantsModule.EventNames.ClickPlayerFeedbackPromptCta
 
-function t.ClickPlayerFeedbackPromptCta(p1, p2, p3)
-	-- upvalues: var1 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref), clickPlayerFeedbackPromptCta (ref)
-	local var2, var3 = var1(p3)
+local function ClickPlayerFeedbackPromptCta1(p1, PlaceId, p2) --[[ Line: 13 ]]
+	-- upvalues: OptionalResult (copy), MutedErrorFunction (copy), CryoModule (copy), ConstantsModule (copy), ClickPlayerFeedbackPromptCta (copy)
+	local OptionalResultResult, OptionalResultResult2 = OptionalResult(p2)
 	
-	if not var2 then
-		mutedError(var3)
+	if not OptionalResultResult then
+		MutedErrorFunction(OptionalResultResult2)
 	end
-	local t = { placeId = p2 }
+	local JoinResult = { placeId = PlaceId }
 	
-	if p3 then
-		t = cryoModule.Dictionary.join(t, p3)
+	if p2 then
+		JoinResult = CryoModule.Dictionary.join(JoinResult, p2)
 	end
-	p1:sendEventDeferred(constantsModule.Context.GamePlayerFeedback, clickPlayerFeedbackPromptCta, t)
+	p1:sendEventDeferred(ConstantsModule.Context.GamePlayerFeedback, ClickPlayerFeedbackPromptCta, JoinResult)
 end
 
-local playerFeedbackPromptMounted = constantsModule.EventNames.PlayerFeedbackPromptMounted
+local PlayerFeedbackPromptMounted = ConstantsModule.EventNames.PlayerFeedbackPromptMounted
 
-function t.PlayerFeedbackPromptMounted(p1, p2, p3)
-	-- upvalues: var1 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref), playerFeedbackPromptMounted (ref)
-	local var2, var3 = var1(p3)
+local function PlayerFeedbackPromptMounted1(p1, PlaceId, p2) --[[ Line: 13 ]]
+	-- upvalues: OptionalResult (copy), MutedErrorFunction (copy), CryoModule (copy), ConstantsModule (copy), PlayerFeedbackPromptMounted (copy)
+	local OptionalResultResult, OptionalResultResult2 = OptionalResult(p2)
 	
-	if not var2 then
-		mutedError(var3)
+	if not OptionalResultResult then
+		MutedErrorFunction(OptionalResultResult2)
 	end
-	local t = { placeId = p2 }
+	local JoinResult = { placeId = PlaceId }
 	
-	if p3 then
-		t = cryoModule.Dictionary.join(t, p3)
+	if p2 then
+		JoinResult = CryoModule.Dictionary.join(JoinResult, p2)
 	end
-	p1:sendEventDeferred(constantsModule.Context.GamePlayerFeedback, playerFeedbackPromptMounted, t)
+	p1:sendEventDeferred(ConstantsModule.Context.GamePlayerFeedback, PlayerFeedbackPromptMounted, JoinResult)
 end
 
-local dismissPlayerFeedbackPrompt = constantsModule.EventNames.DismissPlayerFeedbackPrompt
+local DismissPlayerFeedbackPrompt = ConstantsModule.EventNames.DismissPlayerFeedbackPrompt
 
-function t.DismissPlayerFeedbackPrompt(p1, p2, p3)
-	-- upvalues: var1 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref), dismissPlayerFeedbackPrompt (ref)
-	local var2, var3 = var1(p3)
+local function DismissPlayerFeedbackPrompt1(p1, PlaceId, p2) --[[ Line: 13 ]]
+	-- upvalues: OptionalResult (copy), MutedErrorFunction (copy), CryoModule (copy), ConstantsModule (copy), DismissPlayerFeedbackPrompt (copy)
+	local OptionalResultResult, OptionalResultResult2 = OptionalResult(p2)
 	
-	if not var2 then
-		mutedError(var3)
+	if not OptionalResultResult then
+		MutedErrorFunction(OptionalResultResult2)
 	end
-	local t = { placeId = p2 }
+	local JoinResult = { placeId = PlaceId }
 	
-	if p3 then
-		t = cryoModule.Dictionary.join(t, p3)
+	if p2 then
+		JoinResult = CryoModule.Dictionary.join(JoinResult, p2)
 	end
-	p1:sendEventDeferred(constantsModule.Context.GamePlayerFeedback, dismissPlayerFeedbackPrompt, t)
+	p1:sendEventDeferred(ConstantsModule.Context.GamePlayerFeedback, DismissPlayerFeedbackPrompt, JoinResult)
 end
 
-local playerFeedbackFormModalMounted = constantsModule.EventNames.PlayerFeedbackFormModalMounted
+local PlayerFeedbackFormModalMounted = ConstantsModule.EventNames.PlayerFeedbackFormModalMounted
 
-function t.PlayerFeedbackFormModalMounted(p1, p2, p3)
-	-- upvalues: var1 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref), playerFeedbackFormModalMounted (ref)
-	local var2, var3 = var1(p3)
+local function PlayerFeedbackFormModalMounted1(p1, PlaceId, p2) --[[ Line: 13 ]]
+	-- upvalues: OptionalResult (copy), MutedErrorFunction (copy), CryoModule (copy), ConstantsModule (copy), PlayerFeedbackFormModalMounted (copy)
+	local OptionalResultResult, OptionalResultResult2 = OptionalResult(p2)
 	
-	if not var2 then
-		mutedError(var3)
+	if not OptionalResultResult then
+		MutedErrorFunction(OptionalResultResult2)
 	end
-	local t = { placeId = p2 }
+	local JoinResult = { placeId = PlaceId }
 	
-	if p3 then
-		t = cryoModule.Dictionary.join(t, p3)
+	if p2 then
+		JoinResult = CryoModule.Dictionary.join(JoinResult, p2)
 	end
-	p1:sendEventDeferred(constantsModule.Context.GamePlayerFeedback, playerFeedbackFormModalMounted, t)
+	p1:sendEventDeferred(ConstantsModule.Context.GamePlayerFeedback, PlayerFeedbackFormModalMounted, JoinResult)
 end
 
-local dismissPlayerFeedbackFormModal = constantsModule.EventNames.DismissPlayerFeedbackFormModal
+local DismissPlayerFeedbackFormModal = ConstantsModule.EventNames.DismissPlayerFeedbackFormModal
 
-function t.DismissPlayerFeedbackFormModal(p1, p2, p3)
-	-- upvalues: var1 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref), dismissPlayerFeedbackFormModal (ref)
-	local var2, var3 = var1(p3)
+local function DismissPlayerFeedbackFormModal1(p1, PlaceId, p2) --[[ Line: 13 ]]
+	-- upvalues: OptionalResult (copy), MutedErrorFunction (copy), CryoModule (copy), ConstantsModule (copy), DismissPlayerFeedbackFormModal (copy)
+	local OptionalResultResult, OptionalResultResult2 = OptionalResult(p2)
 	
-	if not var2 then
-		mutedError(var3)
+	if not OptionalResultResult then
+		MutedErrorFunction(OptionalResultResult2)
 	end
-	local t = { placeId = p2 }
+	local JoinResult = { placeId = PlaceId }
 	
-	if p3 then
-		t = cryoModule.Dictionary.join(t, p3)
+	if p2 then
+		JoinResult = CryoModule.Dictionary.join(JoinResult, p2)
 	end
-	p1:sendEventDeferred(constantsModule.Context.GamePlayerFeedback, dismissPlayerFeedbackFormModal, t)
+	p1:sendEventDeferred(ConstantsModule.Context.GamePlayerFeedback, DismissPlayerFeedbackFormModal, JoinResult)
 end
 
-local clickPlayerFeedbackFormModalDisclaimer = constantsModule.EventNames.ClickPlayerFeedbackFormModalDisclaimer
+local ClickPlayerFeedbackFormModalDisclaimer = ConstantsModule.EventNames.ClickPlayerFeedbackFormModalDisclaimer
 
-function t.ClickPlayerFeedbackFormModalDisclaimer(p1, p2, p3)
-	-- upvalues: var1 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref), clickPlayerFeedbackFormModalDisclaimer (ref)
-	local var2, var3 = var1(p3)
+local function ClickPlayerFeedbackFormModalDisclaimer1(p1, PlaceId, p2) --[[ Line: 13 ]]
+	-- upvalues: OptionalResult (copy), MutedErrorFunction (copy), CryoModule (copy), ConstantsModule (copy), ClickPlayerFeedbackFormModalDisclaimer (copy)
+	local OptionalResultResult, OptionalResultResult2 = OptionalResult(p2)
 	
-	if not var2 then
-		mutedError(var3)
+	if not OptionalResultResult then
+		MutedErrorFunction(OptionalResultResult2)
 	end
-	local t = { placeId = p2 }
+	local JoinResult = { placeId = PlaceId }
 	
-	if p3 then
-		t = cryoModule.Dictionary.join(t, p3)
+	if p2 then
+		JoinResult = CryoModule.Dictionary.join(JoinResult, p2)
 	end
-	p1:sendEventDeferred(constantsModule.Context.GamePlayerFeedback, clickPlayerFeedbackFormModalDisclaimer, t)
+	p1:sendEventDeferred(ConstantsModule.Context.GamePlayerFeedback, ClickPlayerFeedbackFormModalDisclaimer, JoinResult)
 end
 
-local clickPlayerFeedbackFormAbuseReportPrompt = constantsModule.EventNames.ClickPlayerFeedbackFormAbuseReportPrompt
+local ClickPlayerFeedbackFormAbuseReportPrompt = ConstantsModule.EventNames.ClickPlayerFeedbackFormAbuseReportPrompt
 
-function t.ClickPlayerFeedbackFormAbuseReportPrompt(p1, p2, p3)
-	-- upvalues: var1 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref), clickPlayerFeedbackFormAbuseReportPrompt (ref)
-	local var2, var3 = var1(p3)
+local function ClickPlayerFeedbackFormAbuseReportPrompt1(p1, PlaceId, p2) --[[ Line: 13 ]]
+	-- upvalues: OptionalResult (copy), MutedErrorFunction (copy), CryoModule (copy), ConstantsModule (copy), ClickPlayerFeedbackFormAbuseReportPrompt (copy)
+	local OptionalResultResult, OptionalResultResult2 = OptionalResult(p2)
 	
-	if not var2 then
-		mutedError(var3)
+	if not OptionalResultResult then
+		MutedErrorFunction(OptionalResultResult2)
 	end
-	local t = { placeId = p2 }
+	local JoinResult = { placeId = PlaceId }
 	
-	if p3 then
-		t = cryoModule.Dictionary.join(t, p3)
+	if p2 then
+		JoinResult = CryoModule.Dictionary.join(JoinResult, p2)
 	end
-	p1:sendEventDeferred(constantsModule.Context.GamePlayerFeedback, clickPlayerFeedbackFormAbuseReportPrompt, t)
+	p1:sendEventDeferred(ConstantsModule.Context.GamePlayerFeedback, ClickPlayerFeedbackFormAbuseReportPrompt, JoinResult)
 end
 
-local togglePlayerFeedbackFormModalReason = constantsModule.EventNames.TogglePlayerFeedbackFormModalReason
+local TogglePlayerFeedbackFormModalReason = ConstantsModule.EventNames.TogglePlayerFeedbackFormModalReason
 
-function t.TogglePlayerFeedbackFormModalReason(p1, p2, p3)
-	-- upvalues: var1 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref), togglePlayerFeedbackFormModalReason (ref)
-	local var2, var3 = var1(p3)
+local function TogglePlayerFeedbackFormModalReason1(p1, PlaceId, p2) --[[ Line: 13 ]]
+	-- upvalues: OptionalResult (copy), MutedErrorFunction (copy), CryoModule (copy), ConstantsModule (copy), TogglePlayerFeedbackFormModalReason (copy)
+	local OptionalResultResult, OptionalResultResult2 = OptionalResult(p2)
 	
-	if not var2 then
-		mutedError(var3)
+	if not OptionalResultResult then
+		MutedErrorFunction(OptionalResultResult2)
 	end
-	local t = { placeId = p2 }
+	local JoinResult = { placeId = PlaceId }
 	
-	if p3 then
-		t = cryoModule.Dictionary.join(t, p3)
+	if p2 then
+		JoinResult = CryoModule.Dictionary.join(JoinResult, p2)
 	end
-	p1:sendEventDeferred(constantsModule.Context.GamePlayerFeedback, togglePlayerFeedbackFormModalReason, t)
+	p1:sendEventDeferred(ConstantsModule.Context.GamePlayerFeedback, TogglePlayerFeedbackFormModalReason, JoinResult)
 end
 
-local focusPlayerFeedbackFormModalComment = constantsModule.EventNames.FocusPlayerFeedbackFormModalComment
+local FocusPlayerFeedbackFormModalComment = ConstantsModule.EventNames.FocusPlayerFeedbackFormModalComment
 
-function t.FocusPlayerFeedbackFormModalComment(p1, p2, p3)
-	-- upvalues: var1 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref), focusPlayerFeedbackFormModalComment (ref)
-	local var2, var3 = var1(p3)
+local function FocusPlayerFeedbackFormModalComment1(p1, PlaceId, p2) --[[ Line: 13 ]]
+	-- upvalues: OptionalResult (copy), MutedErrorFunction (copy), CryoModule (copy), ConstantsModule (copy), FocusPlayerFeedbackFormModalComment (copy)
+	local OptionalResultResult, OptionalResultResult2 = OptionalResult(p2)
 	
-	if not var2 then
-		mutedError(var3)
+	if not OptionalResultResult then
+		MutedErrorFunction(OptionalResultResult2)
 	end
-	local t = { placeId = p2 }
+	local JoinResult = { placeId = PlaceId }
 	
-	if p3 then
-		t = cryoModule.Dictionary.join(t, p3)
+	if p2 then
+		JoinResult = CryoModule.Dictionary.join(JoinResult, p2)
 	end
-	p1:sendEventDeferred(constantsModule.Context.GamePlayerFeedback, focusPlayerFeedbackFormModalComment, t)
+	p1:sendEventDeferred(ConstantsModule.Context.GamePlayerFeedback, FocusPlayerFeedbackFormModalComment, JoinResult)
 end
 
-local clickPlayerFeedbackFormModalSubmit = constantsModule.EventNames.ClickPlayerFeedbackFormModalSubmit
+local ClickPlayerFeedbackFormModalSubmit = ConstantsModule.EventNames.ClickPlayerFeedbackFormModalSubmit
 
-function t.ClickPlayerFeedbackFormModalSubmit(p1, p2, p3)
-	-- upvalues: var1 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref), clickPlayerFeedbackFormModalSubmit (ref)
-	local var2, var3 = var1(p3)
+local function ClickPlayerFeedbackFormModalSubmit1(p1, PlaceId, p2) --[[ Line: 13 ]]
+	-- upvalues: OptionalResult (copy), MutedErrorFunction (copy), CryoModule (copy), ConstantsModule (copy), ClickPlayerFeedbackFormModalSubmit (copy)
+	local OptionalResultResult, OptionalResultResult2 = OptionalResult(p2)
 	
-	if not var2 then
-		mutedError(var3)
+	if not OptionalResultResult then
+		MutedErrorFunction(OptionalResultResult2)
 	end
-	local t = { placeId = p2 }
+	local JoinResult = { placeId = PlaceId }
 	
-	if p3 then
-		t = cryoModule.Dictionary.join(t, p3)
+	if p2 then
+		JoinResult = CryoModule.Dictionary.join(JoinResult, p2)
 	end
-	p1:sendEventDeferred(constantsModule.Context.GamePlayerFeedback, clickPlayerFeedbackFormModalSubmit, t)
+	p1:sendEventDeferred(ConstantsModule.Context.GamePlayerFeedback, ClickPlayerFeedbackFormModalSubmit, JoinResult)
 end
 
-local submitPlayerFeedbackFailCommentValidation = constantsModule.EventNames.SubmitPlayerFeedbackFailCommentValidation
+local SubmitPlayerFeedbackFailCommentValidation = ConstantsModule.EventNames.SubmitPlayerFeedbackFailCommentValidation
 
-function t.SubmitPlayerFeedbackFailCommentValidation(p1, p2, p3)
-	-- upvalues: var1 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref), submitPlayerFeedbackFailCommentValidation (ref)
-	local var2, var3 = var1(p3)
-	
-	if not var2 then
-		mutedError(var3)
+return {
+	ClickPlayerFeedbackPromptCta = ClickPlayerFeedbackPromptCta1,
+	PlayerFeedbackPromptMounted = PlayerFeedbackPromptMounted1,
+	DismissPlayerFeedbackPrompt = DismissPlayerFeedbackPrompt1,
+	PlayerFeedbackFormModalMounted = PlayerFeedbackFormModalMounted1,
+	DismissPlayerFeedbackFormModal = DismissPlayerFeedbackFormModal1,
+	ClickPlayerFeedbackFormModalDisclaimer = ClickPlayerFeedbackFormModalDisclaimer1,
+	ClickPlayerFeedbackFormAbuseReportPrompt = ClickPlayerFeedbackFormAbuseReportPrompt1,
+	TogglePlayerFeedbackFormModalReason = TogglePlayerFeedbackFormModalReason1,
+	FocusPlayerFeedbackFormModalComment = FocusPlayerFeedbackFormModalComment1,
+	ClickPlayerFeedbackFormModalSubmit = ClickPlayerFeedbackFormModalSubmit1,
+	SubmitPlayerFeedbackFailCommentValidation = function(p1, PlaceId, p2) --[[ Line: 13 ]]
+		-- upvalues: OptionalResult (copy), MutedErrorFunction (copy), CryoModule (copy), ConstantsModule (copy), SubmitPlayerFeedbackFailCommentValidation (copy)
+		local OptionalResultResult, OptionalResultResult2 = OptionalResult(p2)
+		
+		if not OptionalResultResult then
+			MutedErrorFunction(OptionalResultResult2)
+		end
+		local JoinResult = { placeId = PlaceId }
+		
+		if p2 then
+			JoinResult = CryoModule.Dictionary.join(JoinResult, p2)
+		end
+		p1:sendEventDeferred(ConstantsModule.Context.GamePlayerFeedback, SubmitPlayerFeedbackFailCommentValidation, JoinResult)
 	end
-	local t = { placeId = p2 }
-	
-	if p3 then
-		t = cryoModule.Dictionary.join(t, p3)
-	end
-	p1:sendEventDeferred(constantsModule.Context.GamePlayerFeedback, submitPlayerFeedbackFailCommentValidation, t)
-end
-
-return t
+}

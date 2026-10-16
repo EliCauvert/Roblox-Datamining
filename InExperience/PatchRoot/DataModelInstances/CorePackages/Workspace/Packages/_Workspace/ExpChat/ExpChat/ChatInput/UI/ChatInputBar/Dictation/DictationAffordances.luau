@@ -1,53 +1,53 @@
-﻿local foundationModule = require(script:FindFirstAncestor("ExpChat").Parent.Foundation)
+﻿local FoundationModule = require(script:FindFirstAncestor("ExpChat").Parent.Foundation)
 
 return {
-	deriveMicSendButton = function(p1, p2)
-		-- upvalues: foundationModule (ref)
-		local idleSendIcon = p2.idleSendIcon
-		local idleSendVariant = p2.idleSendVariant
-		local idleSendActivated = p2.idleSendActivated
-		local idleSendDisabled = p2.idleSendDisabled or false
-		local var1 = false
+	deriveMicSendButton = function(p1, p2) --[[ Line: 56 ]]
+		-- upvalues: FoundationModule (copy)
+		local IdleSendIcon = p2.idleSendIcon
+		local IdleSendVariant = p2.idleSendVariant
+		local IdleSendActivated = p2.idleSendActivated
+		local IdleSendDisabled = p2.idleSendDisabled or false
+		local Flag = false
 		
 		if p1.isRecording then
-			idleSendActivated = p1.onMicTap
-			idleSendDisabled = false
+			IdleSendActivated = p1.onMicTap
+			IdleSendDisabled = false
 		elseif p1.isTranscribing then
-			idleSendDisabled = true
+			IdleSendDisabled = true
 		elseif p1.isListening then
-			idleSendIcon = foundationModule.Enums.IconName.X
-			idleSendVariant = foundationModule.Enums.ButtonVariant.Standard
-			idleSendActivated = p1.dictation.cancel
-			idleSendDisabled = false
+			IdleSendIcon = FoundationModule.Enums.IconName.X
+			IdleSendVariant = FoundationModule.Enums.ButtonVariant.Standard
+			IdleSendActivated = p1.dictation.cancel
+			IdleSendDisabled = false
 		elseif p2.hasEmptyInputText and p1.isDictationEligible then
 			if p2.isTextBoxFocused then
-				idleSendDisabled = true
+				IdleSendDisabled = true
 			else
-				idleSendIcon = foundationModule.Enums.IconName.Microphone
-				idleSendVariant = foundationModule.Enums.ButtonVariant.Utility
-				idleSendActivated = p1.onMicTap
-				idleSendDisabled = false
-				var1 = true
+				IdleSendIcon = FoundationModule.Enums.IconName.Microphone
+				IdleSendVariant = FoundationModule.Enums.ButtonVariant.Utility
+				IdleSendActivated = p1.onMicTap
+				IdleSendDisabled = false
+				Flag = true
 			end
 		end
 		return {
-			icon = idleSendIcon,
-			variant = idleSendVariant,
-			isDisabled = idleSendDisabled,
-			onActivated = idleSendActivated,
-			useLongPressOverlay = var1 and p1.micGestureHandlers ~= nil
+			icon = IdleSendIcon,
+			variant = IdleSendVariant,
+			isDisabled = IdleSendDisabled,
+			onActivated = IdleSendActivated,
+			useLongPressOverlay = Flag and p1.micGestureHandlers ~= nil
 		}
 	end,
-	deriveBackgroundColors = function(value, p1)
-		return if value.isListening then {
-			color3 = p1.listeningColor3,
-			baseTransparency = p1.listeningTransparency
+	deriveBackgroundColors = function(p1, p2) --[[ Line: 115 ]]
+		return if p1.isListening then {
+			color3 = p2.listeningColor3,
+			baseTransparency = p2.listeningTransparency
 		} else {
-			color3 = p1.defaultColor3,
-			baseTransparency = p1.defaultTransparency
+			color3 = p2.defaultColor3,
+			baseTransparency = p2.defaultTransparency
 		}
 	end,
-	shouldPreventFade = function(p1)
+	shouldPreventFade = function(p1) --[[ Line: 131 ]]
 		return p1.isRecording or (p1.isTranscribing or p1.isListening)
 	end
 }

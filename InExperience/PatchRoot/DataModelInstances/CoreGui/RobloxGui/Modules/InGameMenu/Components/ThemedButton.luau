@@ -1,247 +1,247 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local inGameMenuDependenciesModule = require(corePackagesService.Packages.InGameMenuDependencies)
-local roact = inGameMenuDependenciesModule.Roact
-local UIBlox = inGameMenuDependenciesModule.UIBlox
-local t = inGameMenuDependenciesModule.t
-local parent = script.Parent.Parent
-local assetsModule = require(parent.Resources.Assets)
-local divideTransparencyModule = require(parent.Utility.divideTransparency)
-local imageSetButton = UIBlox.Core.ImageSet.ImageSetButton
-local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local fFlagCoreUiMigrateUIBloxToFoundation = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
-local var1 = if fFlagCoreUiMigrateUIBloxToFoundation then foundationModule.UNSTABLE.withCursorMigration else UIBlox.App.SelectionImage.withSelectionCursorProvider
-local var2 = if fFlagCoreUiMigrateUIBloxToFoundation then foundationModule.Enums.CursorType else UIBlox.App.SelectionImage.CursorKind
-local themedButton = roact.PureComponent:extend("ThemedButton")
-themedButton.validateProps = t.strictInterface({
-	normalThemeKey = t.string,
-	hoverThemeKey = t.string,
-	imageProps = t.strictInterface({
-		Image = t.union(t.string, t.table),
-		ScaleType = t.enum(Enum.ScaleType),
-		SliceCenter = t.Rect
+﻿local CorePackages = game:GetService("CorePackages")
+local InGameMenuDependenciesModule = require(CorePackages.Packages.InGameMenuDependencies)
+local Roact = InGameMenuDependenciesModule.Roact
+local UIBlox = InGameMenuDependenciesModule.UIBlox
+local T = InGameMenuDependenciesModule.t
+local Parent = script.Parent.Parent
+local AssetsModule = require(Parent.Resources.Assets)
+local DivideTransparencyModule = require(Parent.Utility.divideTransparency)
+local ImageSetButton = UIBlox.Core.ImageSet.ImageSetButton
+local WithFoundationOrUIBloxStyleFunction = require(CorePackages.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local FFlagCoreUiMigrateUIBloxToFoundation = require(CorePackages.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
+local WithCursorMigration = if FFlagCoreUiMigrateUIBloxToFoundation then FoundationModule.UNSTABLE.withCursorMigration else UIBlox.App.SelectionImage.withSelectionCursorProvider
+local CursorType = if FFlagCoreUiMigrateUIBloxToFoundation then FoundationModule.Enums.CursorType else UIBlox.App.SelectionImage.CursorKind
+local ThemedButton = Roact.PureComponent:extend("ThemedButton")
+ThemedButton.validateProps = T.strictInterface({
+	normalThemeKey = T.string,
+	hoverThemeKey = T.string,
+	imageProps = T.strictInterface({
+		Image = T.union(T.string, T.table),
+		ScaleType = T.enum(Enum.ScaleType),
+		SliceCenter = T.Rect
 	}),
-	enabled = t.optional(t.boolean),
-	renderChildren = t.callback,
-	onActivated = t.callback,
-	AnchorPoint = t.optional(t.Vector2),
-	LayoutOrder = t.optional(t.integer),
-	Position = t.optional(t.UDim2),
-	Size = t.optional(t.UDim2),
-	Visible = t.optional(t.boolean),
-	ButtonRef = t.optional(t.union(t.callback, t.table))
+	enabled = T.optional(T.boolean),
+	renderChildren = T.callback,
+	onActivated = T.callback,
+	AnchorPoint = T.optional(T.Vector2),
+	LayoutOrder = T.optional(T.integer),
+	Position = T.optional(T.UDim2),
+	Size = T.optional(T.UDim2),
+	Visible = T.optional(T.boolean),
+	ButtonRef = T.optional(T.union(T.callback, T.table))
 })
-themedButton.defaultProps = {
+ThemedButton.defaultProps = {
 	enabled = true,
-	imageProps = assetsModule.Images.RoundedRect
+	imageProps = AssetsModule.Images.RoundedRect
 }
 
-function themedButton.init(p1)
+function ThemedButton.init(p1) --[[ Line: 74 ]]
 	p1:setState({ hover = false, press = false })
 end
 
-function themedButton.renderWithSelectionCursor(p1, p2)
-	-- upvalues: withFoundationOrUIBloxStyle (ref), divideTransparencyModule (ref), roact (ref), imageSetButton (ref), var2 (ref)
-	local props = p1.props
-	local var3 = if props.enabled and p1.state.hover then props.hoverThemeKey else props.normalThemeKey
+function ThemedButton.renderWithSelectionCursor(p1, Callback) --[[ Line: 81 ]]
+	-- upvalues: WithFoundationOrUIBloxStyleFunction (copy), DivideTransparencyModule (copy), Roact (copy), ImageSetButton (copy), CursorType (copy)
+	local Props = p1.props
+	local HoverThemeKey = if Props.enabled and p1.state.hover then Props.hoverThemeKey else Props.normalThemeKey
 	
-	return withFoundationOrUIBloxStyle(function(p3)
+	return WithFoundationOrUIBloxStyleFunction(function(p2) --[[ Line: 89 ]]
 		return {
 			Theme = {
 				BackgroundDefault = {
-					Color = p3.Color.Surface.Surface_0.Color3,
-					Transparency = p3.Color.Surface.Surface_0.Transparency
+					Color = p2.Color.Surface.Surface_0.Color3,
+					Transparency = p2.Color.Surface.Surface_0.Transparency
 				},
 				BackgroundContrast = {
-					Color = p3.Color.Surface.Surface_100.Color3,
-					Transparency = p3.Color.Surface.Surface_100.Transparency
+					Color = p2.Color.Surface.Surface_100.Color3,
+					Transparency = p2.Color.Surface.Surface_100.Transparency
 				},
 				BackgroundMuted = {
-					Color = p3.Color.Surface.Surface_200.Color3,
-					Transparency = p3.Color.Surface.Surface_200.Transparency
+					Color = p2.Color.Surface.Surface_200.Color3,
+					Transparency = p2.Color.Surface.Surface_200.Transparency
 				},
 				BackgroundUIDefault = {
-					Color = p3.Color.Surface.Surface_300.Color3,
-					Transparency = p3.Color.Surface.Surface_300.Transparency
+					Color = p2.Color.Surface.Surface_300.Color3,
+					Transparency = p2.Color.Surface.Surface_300.Transparency
 				},
 				BackgroundUIContrast = {
-					Color = p3.Color.OverMedia.OverMedia_0.Color3,
-					Transparency = p3.Color.OverMedia.OverMedia_0.Transparency
+					Color = p2.Color.OverMedia.OverMedia_0.Color3,
+					Transparency = p2.Color.OverMedia.OverMedia_0.Transparency
 				},
 				BackgroundOnHover = {
-					Color = p3.Color.State.Hover.Color3,
-					Transparency = p3.Color.State.Hover.Transparency
+					Color = p2.Color.State.Hover.Color3,
+					Transparency = p2.Color.State.Hover.Transparency
 				},
 				BackgroundOnPress = {
-					Color = p3.Color.State.Press.Color3,
-					Transparency = p3.Color.State.Press.Transparency
+					Color = p2.Color.State.Press.Color3,
+					Transparency = p2.Color.State.Press.Transparency
 				},
 				UIDefault = {
-					Color = p3.Color.Shift.Shift_200.Color3,
-					Transparency = p3.Color.Shift.Shift_200.Transparency
+					Color = p2.Color.Shift.Shift_200.Color3,
+					Transparency = p2.Color.Shift.Shift_200.Transparency
 				},
 				UIMuted = {
-					Color = p3.Color.Shift.Shift_100.Color3,
-					Transparency = p3.Color.Shift.Shift_100.Transparency
+					Color = p2.Color.Shift.Shift_100.Color3,
+					Transparency = p2.Color.Shift.Shift_100.Transparency
 				},
 				UIEmphasis = {
-					Color = p3.Color.Shift.Shift_400.Color3,
-					Transparency = p3.Color.Shift.Shift_400.Transparency
+					Color = p2.Color.Shift.Shift_400.Color3,
+					Transparency = p2.Color.Shift.Shift_400.Transparency
 				},
 				ContextualPrimaryDefault = {
-					Color = p3.Color.ActionEmphasis.Background.Color3,
-					Transparency = p3.Color.ActionEmphasis.Background.Transparency
+					Color = p2.Color.ActionEmphasis.Background.Color3,
+					Transparency = p2.Color.ActionEmphasis.Background.Transparency
 				},
 				ContextualPrimaryContent = {
-					Color = p3.Color.ActionEmphasis.Foreground.Color3,
-					Transparency = p3.Color.ActionEmphasis.Foreground.Transparency
+					Color = p2.Color.ActionEmphasis.Foreground.Color3,
+					Transparency = p2.Color.ActionEmphasis.Foreground.Transparency
 				},
 				SystemPrimaryDefault = {
-					Color = p3.Color.ActionSubEmphasis.Background.Color3,
-					Transparency = p3.Color.ActionSubEmphasis.Background.Transparency
+					Color = p2.Color.ActionSubEmphasis.Background.Color3,
+					Transparency = p2.Color.ActionSubEmphasis.Background.Transparency
 				},
 				SystemPrimaryContent = {
-					Color = p3.Color.ActionSubEmphasis.Foreground.Color3,
-					Transparency = p3.Color.ActionSubEmphasis.Foreground.Transparency
+					Color = p2.Color.ActionSubEmphasis.Foreground.Color3,
+					Transparency = p2.Color.ActionSubEmphasis.Foreground.Transparency
 				},
 				IconDefault = {
-					Color = p3.Color.Content.Default.Color3,
-					Transparency = p3.Color.Content.Default.Transparency
+					Color = p2.Color.Content.Default.Color3,
+					Transparency = p2.Color.Content.Default.Transparency
 				},
 				IconEmphasis = {
-					Color = p3.Color.Content.Emphasis.Color3,
-					Transparency = p3.Color.Content.Emphasis.Transparency
+					Color = p2.Color.Content.Emphasis.Color3,
+					Transparency = p2.Color.Content.Emphasis.Transparency
 				},
 				IconOnHover = {
-					Color = p3.Color.Content.Emphasis.Color3,
-					Transparency = p3.Color.Content.Emphasis.Transparency
+					Color = p2.Color.Content.Emphasis.Color3,
+					Transparency = p2.Color.Content.Emphasis.Transparency
 				},
 				TextEmphasis = {
-					Color = p3.Color.Content.Emphasis.Color3,
-					Transparency = p3.Color.Content.Emphasis.Transparency
+					Color = p2.Color.Content.Emphasis.Color3,
+					Transparency = p2.Color.Content.Emphasis.Transparency
 				},
 				TextDefault = {
-					Color = p3.Color.Content.Default.Color3,
-					Transparency = p3.Color.Content.Default.Transparency
+					Color = p2.Color.Content.Default.Color3,
+					Transparency = p2.Color.Content.Default.Transparency
 				},
 				TextMuted = {
-					Color = p3.Color.Content.Muted.Color3,
-					Transparency = p3.Color.Content.Muted.Transparency
+					Color = p2.Color.Content.Muted.Color3,
+					Transparency = p2.Color.Content.Muted.Transparency
 				},
 				TextLink = {
-					Color = p3.Color.Content.Link.Color3,
-					Transparency = p3.Color.Content.Link.Transparency
+					Color = p2.Color.Content.Link.Color3,
+					Transparency = p2.Color.Content.Link.Transparency
 				},
 				Divider = {
-					Color = p3.Color.Stroke.Emphasis.Color3,
-					Transparency = p3.Color.Stroke.Emphasis.Transparency
+					Color = p2.Color.Stroke.Emphasis.Color3,
+					Transparency = p2.Color.Stroke.Emphasis.Transparency
 				},
 				Overlay = {
-					Color = p3.Color.Common.Scrim.Color3,
-					Transparency = p3.Color.Common.Scrim.Transparency
+					Color = p2.Color.Common.Scrim.Color3,
+					Transparency = p2.Color.Common.Scrim.Transparency
 				},
 				DropShadow = {
-					Color = p3.Color.Common.Shadow.Color3,
-					Transparency = p3.Color.Common.Shadow.Transparency
+					Color = p2.Color.Common.Shadow.Color3,
+					Transparency = p2.Color.Common.Shadow.Transparency
 				},
 				NavigationBar = {
-					Color = p3.Color.Common.NavigationBar.Color3,
-					Transparency = p3.Color.Common.NavigationBar.Transparency
+					Color = p2.Color.Common.NavigationBar.Color3,
+					Transparency = p2.Color.Common.NavigationBar.Transparency
 				},
 				PlaceHolder = {
-					Color = p3.Color.Common.Shimmer.Color3,
-					Transparency = p3.Color.Common.Shimmer.Transparency
+					Color = p2.Color.Common.Shimmer.Color3,
+					Transparency = p2.Color.Common.Shimmer.Transparency
 				},
 				OnlineStatus = {
-					Color = p3.Color.System.Success.Color3,
-					Transparency = p3.Color.System.Success.Transparency
+					Color = p2.Color.System.Success.Color3,
+					Transparency = p2.Color.System.Success.Transparency
 				},
 				OfflineStatus = {
-					Color = p3.Color.System.Neutral.Color3,
-					Transparency = p3.Color.System.Neutral.Transparency
+					Color = p2.Color.System.Neutral.Color3,
+					Transparency = p2.Color.System.Neutral.Transparency
 				},
 				Success = {
-					Color = p3.Color.System.Success.Color3,
-					Transparency = p3.Color.System.Success.Transparency
+					Color = p2.Color.System.Success.Color3,
+					Transparency = p2.Color.System.Success.Transparency
 				},
 				Alert = {
-					Color = p3.Color.System.Alert.Color3,
-					Transparency = p3.Color.System.Alert.Transparency
+					Color = p2.Color.System.Alert.Color3,
+					Transparency = p2.Color.System.Alert.Transparency
 				},
 				Badge = {
-					Color = p3.Color.System.Contrast.Color3,
-					Transparency = p3.Color.System.Contrast.Transparency
+					Color = p2.Color.System.Contrast.Color3,
+					Transparency = p2.Color.System.Contrast.Transparency
 				},
 				BadgeContent = {
-					Color = p3.Inverse.Content.Emphasis.Color3,
-					Transparency = p3.Inverse.Content.Emphasis.Transparency
+					Color = p2.Inverse.Content.Emphasis.Color3,
+					Transparency = p2.Inverse.Content.Emphasis.Transparency
 				},
 				SecondaryDefault = {
-					Color = p3.Color.Extended.White.White_70.Color3,
-					Transparency = p3.Color.Extended.White.White_70.Transparency
+					Color = p2.Color.Extended.White.White_70.Color3,
+					Transparency = p2.Color.Extended.White.White_70.Transparency
 				},
 				SecondaryOnHover = {
-					Color = p3.Color.Extended.White.White_100.Color3,
-					Transparency = p3.Color.Extended.White.White_100.Transparency
+					Color = p2.Color.Extended.White.White_100.Color3,
+					Transparency = p2.Color.Extended.White.White_100.Transparency
 				}
 			}
 		}
-	end, function(p3)
-		-- upvalues: var3 (write), divideTransparencyModule (copy), p1 (ref), props (ref), roact (copy), imageSetButton (copy), p2 (ref), var2 (copy)
-		local var4 = p3.Theme[var3]
-		assert(var4 ~= nil, "theme key " .. var8 .. " is nil")
-		local var5 = if not props.enabled then 0.5 else divideTransparencyModule(var4.Transparency, if p1.state.press then 2 else 1)
+	end, function(p2) --[[ Line: 230 ]]
+		-- upvalues: HoverThemeKey (ref), DivideTransparencyModule (upval), p1 (copy), Props (copy), Roact (upval), ImageSetButton (upval), Callback (copy), CursorType (upval)
+		local ThemeEntry = p2.Theme[HoverThemeKey]
+		assert(ThemeEntry ~= nil, "theme key " .. HoverThemeKey .. " is nil")
+		local DivideTransparencyModuleResult = if Props.enabled then DivideTransparencyModule(ThemeEntry.Transparency, if p1.state.press then 2 else 1) else 0.5
 		
-		return roact.createElement(imageSetButton, {
-			Visible = props.Visible,
+		return Roact.createElement(ImageSetButton, {
+			Visible = Props.Visible,
 			BackgroundTransparency = 1,
-			ImageColor3 = var4.Color,
-			Position = props.Position,
-			Size = props.Size,
-			AnchorPoint = props.AnchorPoint,
-			ImageTransparency = var5,
-			LayoutOrder = props.LayoutOrder,
-			ScaleType = props.imageProps.ScaleType,
-			SliceCenter = props.imageProps.SliceCenter,
-			Image = props.imageProps.Image,
-			SelectionImageObject = p2(var2.RoundedRectNoInset),
-			[roact.Event.Activated] = function()
-				-- upvalues: props (copy)
-				if props.enabled then
-					props.onActivated()
+			ImageColor3 = ThemeEntry.Color,
+			Position = Props.Position,
+			Size = Props.Size,
+			AnchorPoint = Props.AnchorPoint,
+			ImageTransparency = DivideTransparencyModuleResult,
+			LayoutOrder = Props.LayoutOrder,
+			ScaleType = Props.imageProps.ScaleType,
+			SliceCenter = Props.imageProps.SliceCenter,
+			Image = Props.imageProps.Image,
+			SelectionImageObject = Callback(CursorType.RoundedRectNoInset),
+			[Roact.Event.Activated] = function() --[[ Line: 250 ]]
+				-- upvalues: Props (upval)
+				if Props.enabled then
+					Props.onActivated()
 				end
 			end,
-			[roact.Event.MouseEnter] = function()
-				-- upvalues: p1 (copy)
+			[Roact.Event.MouseEnter] = function() --[[ Line: 255 ]]
+				-- upvalues: p1 (upval)
 				p1:setState({ hover = true })
 			end,
-			[roact.Event.MouseLeave] = function()
-				-- upvalues: p1 (copy)
+			[Roact.Event.MouseLeave] = function() --[[ Line: 260 ]]
+				-- upvalues: p1 (upval)
 				p1:setState({ hover = false, press = false })
 			end,
-			[roact.Event.InputBegan] = function(_, p4)
-				-- upvalues: p1 (copy)
-				if p4.UserInputType == Enum.UserInputType.MouseButton1 or p4.UserInputType == Enum.UserInputType.Touch then
+			[Roact.Event.InputBegan] = function(_, Input) --[[ Line: 266 ]]
+				-- upvalues: p1 (upval)
+				if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
 					p1:setState({ press = true })
 				end
 			end,
-			[roact.Event.InputEnded] = function(_, p4)
-				-- upvalues: p1 (copy)
-				if p4.UserInputType == Enum.UserInputType.MouseButton1 or p4.UserInputType == Enum.UserInputType.Touch then
+			[Roact.Event.InputEnded] = function(_, Input) --[[ Line: 276 ]]
+				-- upvalues: p1 (upval)
+				if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
 					p1:setState({ press = false })
 				end
 			end,
-			[roact.Ref] = p1.props.ButtonRef
-		}, props.renderChildren(var5, props.enabled and p1.state.hover, props.enabled and p1.state.press))
+			[Roact.Ref] = p1.props.ButtonRef
+		}, Props.renderChildren(DivideTransparencyModuleResult, Props.enabled and p1.state.hover, Props.enabled and p1.state.press))
 	end)
 end
 
-function themedButton.render(p1)
-	-- upvalues: var1 (ref)
-	return var1(function(p2)
-		-- upvalues: p1 (ref)
+function ThemedButton.render(p1) --[[ Line: 291 ]]
+	-- upvalues: WithCursorMigration (copy)
+	return WithCursorMigration(function(p2) --[[ Line: 292 ]]
+		-- upvalues: p1 (copy)
 		return p1:renderWithSelectionCursor(p2)
 	end)
 end
 
-return themedButton
+return ThemedButton

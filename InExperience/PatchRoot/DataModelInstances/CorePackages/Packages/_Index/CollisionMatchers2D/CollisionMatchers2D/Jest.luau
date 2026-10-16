@@ -1,197 +1,207 @@
-﻿local function _(p1)
-	return function(_, ...)
-		-- upvalues: p1 (ref)
-		local var1 = p1(...)
+﻿local function _(Callback) --[[ Line: 1 | Named "makeJestCompatible" ]]
+	return function(_, ...) --[[ Line: 2 ]]
+		-- upvalues: Callback (copy)
+		local CallbackResult = Callback(...)
 		
 		return {
-			pass = var1.pass,
-			message = function()
-				-- upvalues: var1 (ref)
-				return var1.message
+			pass = CallbackResult.pass,
+			message = function() --[[ Line: 7 ]]
+				-- upvalues: CallbackResult (copy)
+				return CallbackResult.message
 			end
 		}
 	end
 end
 
-local t = {}
-local aboveModule = require(script.Parent.above)
+local AboveModule = require(script.Parent.above)
 
-function t.toBeAbove(_, ...)
-	-- upvalues: aboveModule (ref)
-	local var1 = aboveModule(...)
+local function ToBeAbove(_, ...) --[[ Line: 2 ]]
+	-- upvalues: AboveModule (copy)
+	local CallbackResult = AboveModule(...)
 	
 	return {
-		pass = var1.pass,
-		message = function()
-			-- upvalues: var1 (ref)
-			return var1.message
+		pass = CallbackResult.pass,
+		message = function() --[[ Line: 7 ]]
+			-- upvalues: CallbackResult (copy)
+			return CallbackResult.message
 		end
 	}
 end
 
-local alignedHorizontallyModule = require(script.Parent.alignedHorizontally)
+local AlignedHorizontallyModule = require(script.Parent.alignedHorizontally)
 
-function t.toBeAlignedHorizontally(_, ...)
-	-- upvalues: alignedHorizontallyModule (ref)
-	local var1 = alignedHorizontallyModule(...)
+local function ToBeAlignedHorizontally(_, ...) --[[ Line: 2 ]]
+	-- upvalues: AlignedHorizontallyModule (copy)
+	local CallbackResult = AlignedHorizontallyModule(...)
 	
 	return {
-		pass = var1.pass,
-		message = function()
-			-- upvalues: var1 (ref)
-			return var1.message
+		pass = CallbackResult.pass,
+		message = function() --[[ Line: 7 ]]
+			-- upvalues: CallbackResult (copy)
+			return CallbackResult.message
 		end
 	}
 end
 
-local alignedVerticallyModule = require(script.Parent.alignedVertically)
+local AlignedVerticallyModule = require(script.Parent.alignedVertically)
 
-function t.toBeAlignedVertically(_, ...)
-	-- upvalues: alignedVerticallyModule (ref)
-	local var1 = alignedVerticallyModule(...)
+local function ToBeAlignedVertically(_, ...) --[[ Line: 2 ]]
+	-- upvalues: AlignedVerticallyModule (copy)
+	local CallbackResult = AlignedVerticallyModule(...)
 	
 	return {
-		pass = var1.pass,
-		message = function()
-			-- upvalues: var1 (ref)
-			return var1.message
+		pass = CallbackResult.pass,
+		message = function() --[[ Line: 7 ]]
+			-- upvalues: CallbackResult (copy)
+			return CallbackResult.message
 		end
 	}
 end
 
-local belowModule = require(script.Parent.below)
+local BelowModule = require(script.Parent.below)
 
-function t.toBeBelow(_, ...)
-	-- upvalues: belowModule (ref)
-	local var1 = belowModule(...)
+local function ToBeBelow(_, ...) --[[ Line: 2 ]]
+	-- upvalues: BelowModule (copy)
+	local CallbackResult = BelowModule(...)
 	
 	return {
-		pass = var1.pass,
-		message = function()
-			-- upvalues: var1 (ref)
-			return var1.message
+		pass = CallbackResult.pass,
+		message = function() --[[ Line: 7 ]]
+			-- upvalues: CallbackResult (copy)
+			return CallbackResult.message
 		end
 	}
 end
 
-local insideModule = require(script.Parent.inside)
+local InsideModule = require(script.Parent.inside)
 
-function t.toBeInside(_, ...)
-	-- upvalues: insideModule (ref)
-	local var1 = insideModule(...)
+local function ToBeInside(_, ...) --[[ Line: 2 ]]
+	-- upvalues: InsideModule (copy)
+	local CallbackResult = InsideModule(...)
 	
 	return {
-		pass = var1.pass,
-		message = function()
-			-- upvalues: var1 (ref)
-			return var1.message
+		pass = CallbackResult.pass,
+		message = function() --[[ Line: 7 ]]
+			-- upvalues: CallbackResult (copy)
+			return CallbackResult.message
 		end
 	}
 end
 
-local insideAboveModule = require(script.Parent.insideAbove)
+local InsideAboveModule = require(script.Parent.insideAbove)
 
-function t.toBeInsideAbove(_, ...)
-	-- upvalues: insideAboveModule (ref)
-	local var1 = insideAboveModule(...)
+local function ToBeInsideAbove(_, ...) --[[ Line: 2 ]]
+	-- upvalues: InsideAboveModule (copy)
+	local CallbackResult = InsideAboveModule(...)
 	
 	return {
-		pass = var1.pass,
-		message = function()
-			-- upvalues: var1 (ref)
-			return var1.message
+		pass = CallbackResult.pass,
+		message = function() --[[ Line: 7 ]]
+			-- upvalues: CallbackResult (copy)
+			return CallbackResult.message
 		end
 	}
 end
 
-local insideBelowModule = require(script.Parent.insideBelow)
+local InsideBelowModule = require(script.Parent.insideBelow)
 
-function t.toBeInsideBelow(_, ...)
-	-- upvalues: insideBelowModule (ref)
-	local var1 = insideBelowModule(...)
+local function ToBeInsideBelow(_, ...) --[[ Line: 2 ]]
+	-- upvalues: InsideBelowModule (copy)
+	local CallbackResult = InsideBelowModule(...)
 	
 	return {
-		pass = var1.pass,
-		message = function()
-			-- upvalues: var1 (ref)
-			return var1.message
+		pass = CallbackResult.pass,
+		message = function() --[[ Line: 7 ]]
+			-- upvalues: CallbackResult (copy)
+			return CallbackResult.message
 		end
 	}
 end
 
-local insideLeftOfModule = require(script.Parent.insideLeftOf)
+local InsideLeftOfModule = require(script.Parent.insideLeftOf)
 
-function t.toBeInsideLeftOf(_, ...)
-	-- upvalues: insideLeftOfModule (ref)
-	local var1 = insideLeftOfModule(...)
+local function ToBeInsideLeftOf(_, ...) --[[ Line: 2 ]]
+	-- upvalues: InsideLeftOfModule (copy)
+	local CallbackResult = InsideLeftOfModule(...)
 	
 	return {
-		pass = var1.pass,
-		message = function()
-			-- upvalues: var1 (ref)
-			return var1.message
+		pass = CallbackResult.pass,
+		message = function() --[[ Line: 7 ]]
+			-- upvalues: CallbackResult (copy)
+			return CallbackResult.message
 		end
 	}
 end
 
-local insideRightOfModule = require(script.Parent.insideRightOf)
+local InsideRightOfModule = require(script.Parent.insideRightOf)
 
-function t.toBeInsideRightOf(_, ...)
-	-- upvalues: insideRightOfModule (ref)
-	local var1 = insideRightOfModule(...)
+local function ToBeInsideRightOf(_, ...) --[[ Line: 2 ]]
+	-- upvalues: InsideRightOfModule (copy)
+	local CallbackResult = InsideRightOfModule(...)
 	
 	return {
-		pass = var1.pass,
-		message = function()
-			-- upvalues: var1 (ref)
-			return var1.message
+		pass = CallbackResult.pass,
+		message = function() --[[ Line: 7 ]]
+			-- upvalues: CallbackResult (copy)
+			return CallbackResult.message
 		end
 	}
 end
 
-local leftOfModule = require(script.Parent.leftOf)
+local LeftOfModule = require(script.Parent.leftOf)
 
-function t.toBeLeftOf(_, ...)
-	-- upvalues: leftOfModule (ref)
-	local var1 = leftOfModule(...)
+local function ToBeLeftOf(_, ...) --[[ Line: 2 ]]
+	-- upvalues: LeftOfModule (copy)
+	local CallbackResult = LeftOfModule(...)
 	
 	return {
-		pass = var1.pass,
-		message = function()
-			-- upvalues: var1 (ref)
-			return var1.message
+		pass = CallbackResult.pass,
+		message = function() --[[ Line: 7 ]]
+			-- upvalues: CallbackResult (copy)
+			return CallbackResult.message
 		end
 	}
 end
 
-local rightOfModule = require(script.Parent.rightOf)
+local RightOfModule = require(script.Parent.rightOf)
 
-function t.toBeRightOf(_, ...)
-	-- upvalues: rightOfModule (ref)
-	local var1 = rightOfModule(...)
+local function ToBeRightOf(_, ...) --[[ Line: 2 ]]
+	-- upvalues: RightOfModule (copy)
+	local CallbackResult = RightOfModule(...)
 	
 	return {
-		pass = var1.pass,
-		message = function()
-			-- upvalues: var1 (ref)
-			return var1.message
+		pass = CallbackResult.pass,
+		message = function() --[[ Line: 7 ]]
+			-- upvalues: CallbackResult (copy)
+			return CallbackResult.message
 		end
 	}
 end
 
-local intersectModule = require(script.Parent.intersect)
+local IntersectModule = require(script.Parent.intersect)
 
-function t.toIntersect(_, ...)
-	-- upvalues: intersectModule (ref)
-	local var1 = intersectModule(...)
-	
-	return {
-		pass = var1.pass,
-		message = function()
-			-- upvalues: var1 (ref)
-			return var1.message
-		end
-	}
-end
-
-return t
+return {
+	toBeAbove = ToBeAbove,
+	toBeAlignedHorizontally = ToBeAlignedHorizontally,
+	toBeAlignedVertically = ToBeAlignedVertically,
+	toBeBelow = ToBeBelow,
+	toBeInside = ToBeInside,
+	toBeInsideAbove = ToBeInsideAbove,
+	toBeInsideBelow = ToBeInsideBelow,
+	toBeInsideLeftOf = ToBeInsideLeftOf,
+	toBeInsideRightOf = ToBeInsideRightOf,
+	toBeLeftOf = ToBeLeftOf,
+	toBeRightOf = ToBeRightOf,
+	toIntersect = function(_, ...) --[[ Line: 2 ]]
+		-- upvalues: IntersectModule (copy)
+		local CallbackResult = IntersectModule(...)
+		
+		return {
+			pass = CallbackResult.pass,
+			message = function() --[[ Line: 7 ]]
+				-- upvalues: CallbackResult (copy)
+				return CallbackResult.message
+			end
+		}
+	end
+}

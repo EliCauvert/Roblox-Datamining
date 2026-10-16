@@ -1,79 +1,81 @@
-﻿local statsService = game:GetService("Stats")
-local coreGuiService = game:GetService("CoreGui")
-local baseMemoryAnalyzerModule = require(coreGuiService.RobloxGui.Modules.Stats.BaseMemoryAnalyzer)
-local commonUtilModule = require(coreGuiService.RobloxGui.Modules.Common.CommonUtil)
-local statsUtilsModule = require(coreGuiService.RobloxGui.Modules.Stats.StatsUtils)
-local treeViewItemModule = require(coreGuiService.RobloxGui.Modules.Stats.TreeViewItem)
+﻿local StatsService = game:GetService("Stats")
+local CoreGui = game:GetService("CoreGui")
+local BaseMemoryAnalyzerModule = require(CoreGui.RobloxGui.Modules.Stats.BaseMemoryAnalyzer)
+local CommonUtilModule = require(CoreGui.RobloxGui.Modules.Common.CommonUtil)
+local StatsUtilsModule = require(CoreGui.RobloxGui.Modules.Stats.StatsUtils)
+local TreeViewItemModule = require(CoreGui.RobloxGui.Modules.Stats.TreeViewItem)
 
-local function _()
-	-- upvalues: statsService (ref), statsUtilsModule (ref)
-	local performanceStats = statsService and statsService:FindFirstChild("PerformanceStats")
+local function _() --[[ Line: 19 | Named "__GetMemoryPerformanceStatsItem" ]]
+	-- upvalues: StatsService (copy), StatsUtilsModule (copy)
+	local PerformanceStats = StatsService and StatsService:FindFirstChild("PerformanceStats")
 	
-	return if performanceStats == nil then nil else performanceStats:FindFirstChild(statsUtilsModule.StatNames[statsUtilsModule.StatType_Memory])
+	return if PerformanceStats == nil then nil else PerformanceStats:FindFirstChild(StatsUtilsModule.StatNames[StatsUtilsModule.StatType_Memory])
 end
 
-local function __FillInMemoryUsageTreeRecursive(p1, p2)
-	-- upvalues: statsUtilsModule (ref), commonUtilModule (ref), __FillInMemoryUsageTreeRecursive (ref)
-	p1:setLabelAndValue(statsUtilsModule.GetMemoryAnalyzerStatName(p2.Name), p2:GetValue())
+local function __FillInMemoryUsageTreeRecursive(OrMakeChildById, Child) --[[ Line: 30 ]]
+	-- upvalues: StatsUtilsModule (copy), CommonUtilModule (copy), __FillInMemoryUsageTreeRecursive (copy)
+	OrMakeChildById:setLabelAndValue(StatsUtilsModule.GetMemoryAnalyzerStatName(Child.Name), (Child:GetValue()))
 	
-	for i, v in ipairs(commonUtilModule.SortByName(p2:GetChildren())) do
-		__FillInMemoryUsageTreeRecursive(p1:getOrMakeChildById(v.Name), v)
+	for _, value in ipairs((CommonUtilModule.SortByName((Child:GetChildren())))) do
+		__FillInMemoryUsageTreeRecursive(OrMakeChildById:getOrMakeChildById(value.Name), value)
 	end
 end
 
-local t = {}
-setmetatable(t, baseMemoryAnalyzerModule)
-t.__index = t
+local ClientMemoryAnalyzerModule = {}
+setmetatable(ClientMemoryAnalyzerModule, BaseMemoryAnalyzerModule)
+ClientMemoryAnalyzerModule.__index = ClientMemoryAnalyzerModule
 
-function t.new(p3)
-	-- upvalues: baseMemoryAnalyzerModule (ref), t (ref)
-	local var1 = baseMemoryAnalyzerModule.new(p3)
-	setmetatable(var1, t)
-	var1._rootTreeViewItem = nil
-	var1._shouldListenForUpdates = false
-	var1._spawnedLoopScheduled = false
+function ClientMemoryAnalyzerModule.new(p1) --[[ Line: 61 ]]
+	-- upvalues: BaseMemoryAnalyzerModule (copy), ClientMemoryAnalyzerModule (copy)
+	local NewBaseMemoryAnalyzer = BaseMemoryAnalyzerModule.new(p1)
+	setmetatable(NewBaseMemoryAnalyzer, ClientMemoryAnalyzerModule)
+	NewBaseMemoryAnalyzer._rootTreeViewItem = nil
+	NewBaseMemoryAnalyzer._shouldListenForUpdates = false
+	NewBaseMemoryAnalyzer._spawnedLoopScheduled = false
 	
-	return var1
+	return NewBaseMemoryAnalyzer
 end
 
-function t:startListeningForUpdates()
+function ClientMemoryAnalyzerModule:startListeningForUpdates() --[[ Line: 86 ]]
 	self._shouldListenForUpdates = true
 	
-	if self._spawnedLoopScheduled then
+	if not self._spawnedLoopScheduled then
+		self._spawnedLoopScheduled = true
+		spawn(function() --[[ Line: 95 ]]
+			-- upvalues: self (copy)
+			while self._shouldListenForUpdates do
+				self:refreshMemoryUsageTree()
+				self:renderUpdates()
+				wait(1)
+			end
+			self._spawnedLoopScheduled = false
+		end)
+		
 		return
 	end
-	self._spawnedLoopScheduled = true
-	spawn(function()
-		-- upvalues: self (ref)
-		while self._shouldListenForUpdates do
-			self:refreshMemoryUsageTree()
-			self:renderUpdates()
-			wait(1)
-		end
-		self._spawnedLoopScheduled = false
-	end)
 end
 
-function t:stopListeningForUpdates()
+function ClientMemoryAnalyzerModule:stopListeningForUpdates() --[[ Line: 107 ]]
 	self._shouldListenForUpdates = false
 end
 
-function t:refreshMemoryUsageTree()
-	-- upvalues: treeViewItemModule (ref), statsService (ref), statsUtilsModule (ref), __FillInMemoryUsageTreeRecursive (ref)
+function ClientMemoryAnalyzerModule:refreshMemoryUsageTree() --[[ Line: 112 ]]
+	-- upvalues: TreeViewItemModule (copy), StatsService (copy), StatsUtilsModule (copy), __FillInMemoryUsageTreeRecursive (copy)
 	if self._rootTreeViewItem == nil then
-		self._rootTreeViewItem = treeViewItemModule.new("root", nil)
+		self._rootTreeViewItem = TreeViewItemModule.new("root", nil)
 	end
-	local performanceStats = statsService and statsService:FindFirstChild("PerformanceStats")
-	local var1 = if performanceStats == nil then nil else performanceStats:FindFirstChild(statsUtilsModule.StatNames[statsUtilsModule.StatType_Memory])
+	local PerformanceStats = StatsService and StatsService:FindFirstChild("PerformanceStats")
+	local Child = if PerformanceStats == nil then nil else PerformanceStats:FindFirstChild(StatsUtilsModule.StatNames[StatsUtilsModule.StatType_Memory])
 	
-	if var1 == nil then
+	if Child == nil then
 		return nil
+	else
+		__FillInMemoryUsageTreeRecursive(self._rootTreeViewItem, Child)
 	end
-	__FillInMemoryUsageTreeRecursive(self._rootTreeViewItem, var1)
 end
 
-function t:getMemoryUsageTree()
+function ClientMemoryAnalyzerModule:getMemoryUsageTree() --[[ Line: 125 ]]
 	return self._rootTreeViewItem
 end
 
-return t
+return ClientMemoryAnalyzerModule

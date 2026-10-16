@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("AuthenticationStatus").Parent.Signals).createComputed(require(script.createAuthenticationStatusStore))
+﻿return require(script:FindFirstAncestor("AuthenticationStatus").Parent.Signals).createComputed((require(script.createAuthenticationStatusStore)))

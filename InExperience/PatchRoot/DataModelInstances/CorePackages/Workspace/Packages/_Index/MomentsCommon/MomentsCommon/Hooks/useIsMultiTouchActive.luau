@@ -1,57 +1,58 @@
-﻿local reactModule = require(script:FindFirstAncestor("MomentsCommon").Parent.React)
-local userInputService = game:GetService("UserInputService")
-local useEffect = reactModule.useEffect
-local useState = reactModule.useState
+﻿local ReactModule = require(script:FindFirstAncestor("MomentsCommon").Parent.React)
+local UserInputService = game:GetService("UserInputService")
+local UseEffectFunction = ReactModule.useEffect
+local UseStateFunction = ReactModule.useState
 
-return function(p1)
-	-- upvalues: useState (ref), useEffect (ref), userInputService (ref)
-	local var1, var2 = useState(false)
-	useEffect(function()
-		-- upvalues: p1 (ref), var2 (ref), userInputService (copy)
+return function(p1) --[[ Line: 27 | Named "useIsMultiTouchActive" ]]
+	-- upvalues: UseStateFunction (copy), UseEffectFunction (copy), UserInputService (copy)
+	local UseStateResult, UseStateResult2 = UseStateFunction(false)
+	UseEffectFunction(function() --[[ Line: 30 ]]
+		-- upvalues: p1 (copy), UseStateResult2 (copy), UserInputService (upval)
 		if p1 then
 			local t = {}
 			
-			local function _()
-				-- upvalues: t (ref), var2 (copy)
-				local var3 = 0
+			local function _() --[[ Line: 39 | Named "refreshFromActiveTouches" ]]
+				-- upvalues: t (copy), UseStateResult2 (upval)
+				local Count = 0
 				
-				for i in t do
-					var3 += 1
+				for _ in t do
+					Count += 1
 				end
-				var2(var3 >= 2)
+				UseStateResult2(Count >= 2)
 			end
 			
-			local touchStartedConnection = userInputService.TouchStarted:Connect(function(p2)
-				-- upvalues: t (ref), var2 (copy)
-				t[p2] = true
-				local var4 = 0
+			local TouchStartedConnection = UserInputService.TouchStarted:Connect(function(Touch) --[[ Line: 47 ]]
+				-- upvalues: t (copy), UseStateResult2 (upval)
+				t[Touch] = true
+				local Count = 0
 				
-				for i in t do
-					var4 += 1
+				for _ in t do
+					Count += 1
 				end
-				var2(var4 >= 2)
+				UseStateResult2(Count >= 2)
 			end)
-			local touchEndedConnection = userInputService.TouchEnded:Connect(function(p3)
-				-- upvalues: t (ref), var2 (copy)
-				t[p3] = nil
-				local var5 = 0
+			local TouchEndedConnection = UserInputService.TouchEnded:Connect(function(Hit) --[[ Line: 51 ]]
+				-- upvalues: t (copy), UseStateResult2 (upval)
+				t[Hit] = nil
+				local Count = 0
 				
-				for i in t do
-					var5 += 1
+				for _ in t do
+					Count += 1
 				end
-				var2(var5 >= 2)
+				UseStateResult2(Count >= 2)
 			end)
 			
-			return function()
-				-- upvalues: touchStartedConnection (ref), touchEndedConnection (ref)
-				touchStartedConnection:Disconnect()
-				touchEndedConnection:Disconnect()
+			return function() --[[ Line: 56 ]]
+				-- upvalues: TouchStartedConnection (copy), TouchEndedConnection (copy)
+				TouchStartedConnection:Disconnect()
+				TouchEndedConnection:Disconnect()
 			end
+		else
+			UseStateResult2(false)
+			
+			return nil
 		end
-		var2(false)
-		
-		return nil
 	end, { p1 })
 	
-	return var1
+	return UseStateResult
 end

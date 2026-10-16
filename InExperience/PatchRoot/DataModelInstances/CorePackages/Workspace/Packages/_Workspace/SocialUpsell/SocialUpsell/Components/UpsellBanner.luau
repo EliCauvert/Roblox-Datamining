@@ -1,166 +1,179 @@
-﻿local socialUpsell = script:FindFirstAncestor("SocialUpsell")
-local parent = socialUpsell.Parent
-local httpService = game:GetService("HttpService")
-local reactModule = require(parent.React)
-local useEffect = reactModule.useEffect
-local appBloxModule = require(parent.AppBlox)
-local foundationModule = require(parent.Foundation)
-local useCallback = reactModule.useCallback
-local cryoModule = require(parent.Cryo)
-local _ = require(socialUpsell.Types)
-local constantsModule = require(socialUpsell.Constants)
-local _ = require(socialUpsell.Enum.SocialUpsellType)
-local isCompactUpsellBannerModule = require(socialUpsell.Utils.isCompactUpsellBanner)
-local getUpsellSignalStoreModule = require(socialUpsell.SignalStores.getUpsellSignalStore)
-local socialUpsellAnalyticsModule = require(socialUpsell.Analytics.SocialUpsellAnalytics)
-local upsellComponentModule = require(socialUpsell.Analytics.Enum.UpsellComponent)
-local eventTypes = require(parent.SocialLuaAnalytics).Analytics.Enums.EventTypes
-local fFlagAgeBasedUXHomepageVerificationBannerGreyButton = require(parent.SharedFlags).FFlagAgeBasedUXHomepageVerificationBannerGreyButton
-local UPSELL_BUTTON_ACTION = constantsModule.UPSELL_BUTTON_ACTION
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local banner = appBloxModule.Banner
-local t = { isContained = true }
+﻿local SocialUpsell = script:FindFirstAncestor("SocialUpsell")
+local Parent = SocialUpsell.Parent
+local HttpService = game:GetService("HttpService")
+local ReactModule = require(Parent.React)
+local UseEffectFunction = ReactModule.useEffect
+local FoundationModule = require(Parent.Foundation)
+local UseCallbackFunction = ReactModule.useCallback
+local CryoModule = require(Parent.Cryo)
+local _ = require(SocialUpsell.Types)
+local ConstantsModule = require(SocialUpsell.Constants)
+local _ = require(SocialUpsell.Enum.SocialUpsellType)
+local IsCompactUpsellBannerModule = require(SocialUpsell.Utils.isCompactUpsellBanner)
+local GetUpsellSignalStoreModule = require(SocialUpsell.SignalStores.getUpsellSignalStore)
+local SocialUpsellAnalyticsModule = require(SocialUpsell.Analytics.SocialUpsellAnalytics)
+local UpsellComponentModule = require(SocialUpsell.Analytics.Enum.UpsellComponent)
+local EventTypes = require(Parent.SocialLuaAnalytics).Analytics.Enums.EventTypes
+local FFlagAgeBasedUXHomepageVerificationBannerGreyButton = require(Parent.SharedFlags).FFlagAgeBasedUXHomepageVerificationBannerGreyButton
+local UPSELLBUTTONACTION = ConstantsModule.UPSELL_BUTTON_ACTION
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local Banner = require(Parent.AppBlox).Banner
+local config = { isContained = true }
 
-local function _(p1, p2)
-	-- upvalues: fFlagAgeBasedUXHomepageVerificationBannerGreyButton (ref), isCompactUpsellBannerModule (ref), UPSELL_BUTTON_ACTION (ref), buttonVariant (ref)
-	if fFlagAgeBasedUXHomepageVerificationBannerGreyButton and p1.variantOverride then
+local function _(p1, p2) --[[ Line: 65 | Named "getButtonVariant" ]]
+	-- upvalues: FFlagAgeBasedUXHomepageVerificationBannerGreyButton (copy), IsCompactUpsellBannerModule (copy), UPSELLBUTTONACTION (copy), ButtonVariant (copy)
+	if FFlagAgeBasedUXHomepageVerificationBannerGreyButton and p1.variantOverride then
 		return p1.variantOverride
 	end
-	local var1 = isCompactUpsellBannerModule(p2)
+	local IsCompactUpsellBannerModule1 = IsCompactUpsellBannerModule(p2)
 	
 	if p1.action then
-		return if p1.action == UPSELL_BUTTON_ACTION.Primary then if var1 then buttonVariant.SoftEmphasis else buttonVariant.Emphasis elseif p1.action == UPSELL_BUTTON_ACTION.Secondary then buttonVariant.Utility else nil
-	end
-end
-
-local function getBannerPropsFromConfig(p1, p2)
-	-- upvalues: fFlagAgeBasedUXHomepageVerificationBannerGreyButton (ref), isCompactUpsellBannerModule (ref), UPSELL_BUTTON_ACTION (ref), buttonVariant (ref), constantsModule (ref), foundationModule (ref)
-	local t = {}
-	local t_1 = {}
-	
-	if p1.buttons then
-		for i, v in p1.buttons do
-			local var1
-			local t_2 = { text = v.text }
-			
-			if fFlagAgeBasedUXHomepageVerificationBannerGreyButton and v.variantOverride then
-				var1 = v.variantOverride
-			else
-				local var2 = isCompactUpsellBannerModule(p1)
-				
-				if v.action then
-					var1 = if v.action == UPSELL_BUTTON_ACTION.Primary then if var2 then buttonVariant.SoftEmphasis else buttonVariant.Emphasis elseif v.action == UPSELL_BUTTON_ACTION.Secondary then buttonVariant.Utility else nil
-				end
-			end
-			t_2.variant = var1
-			t_2.onActivated = p2[v.action]
-			table.insert(t_1, t_2)
+		if p1.action == UPSELLBUTTONACTION.Primary then
+			return if IsCompactUpsellBannerModule1 then ButtonVariant.SoftEmphasis else ButtonVariant.Emphasis
+		elseif p1.action == UPSELLBUTTONACTION.Secondary then
+			return ButtonVariant.Utility
 		end
 	end
-	if p1.labelItems then
-		for i, v in p1.labelItems do
-			if v.type == constantsModule.UPSELL_LABEL_ITEM_TYPE_COUNTDOWN then
-				table.insert(t, {
-					text = v.text,
+	return nil
+end
+
+local function getBannerPropsFromConfig(BannerPropsFromConfig, p1) --[[ Line: 82 ]]
+	-- upvalues: FFlagAgeBasedUXHomepageVerificationBannerGreyButton (copy), IsCompactUpsellBannerModule (copy), UPSELLBUTTONACTION (copy), ButtonVariant (copy), ConstantsModule (copy), FoundationModule (copy)
+	local Badges = {}
+	local Buttons = {}
+	
+	if BannerPropsFromConfig.buttons then
+		for _, button in BannerPropsFromConfig.buttons do
+			local config = { text = button.text }
+			local SoftEmphasis = nil
+			
+			if FFlagAgeBasedUXHomepageVerificationBannerGreyButton and button.variantOverride then
+				SoftEmphasis = button.variantOverride
+			else
+				local IsCompactUpsellBannerModule1 = IsCompactUpsellBannerModule(BannerPropsFromConfig)
+				SoftEmphasis = if button.action then if button.action == UPSELLBUTTONACTION.Primary then if IsCompactUpsellBannerModule1 then ButtonVariant.SoftEmphasis else ButtonVariant.Emphasis elseif button.action == UPSELLBUTTONACTION.Secondary then ButtonVariant.Utility else nil else nil
+			end
+			config.variant = SoftEmphasis
+			config.onActivated = p1[button.action]
+			table.insert(Buttons, config)
+		end
+	end
+	if BannerPropsFromConfig.labelItems then
+		for _, labelItem in BannerPropsFromConfig.labelItems do
+			if labelItem.type == ConstantsModule.UPSELL_LABEL_ITEM_TYPE_COUNTDOWN then
+				table.insert(Badges, {
+					text = labelItem.text,
 					icon = {
-						variant = foundationModule.Enums.IconVariant.Filled,
-						position = foundationModule.Enums.IconPosition.Left,
-						name = foundationModule.Enums.IconName.Clock
+						variant = FoundationModule.Enums.IconVariant.Filled,
+						position = FoundationModule.Enums.IconPosition.Left,
+						name = FoundationModule.Enums.IconName.Clock
 					},
-					variant = foundationModule.Enums.BadgeVariant.Neutral
+					variant = FoundationModule.Enums.BadgeVariant.Neutral
 				})
 			end
 		end
 	end
 	return {
-		title = p1.title,
-		body = p1.body,
-		badges = t,
-		buttons = t_1,
-		onDismiss = if p1.isDismissable then p2[UPSELL_BUTTON_ACTION.Dismiss] else nil,
-		image = p1.image,
-		icon = if p1.image then nil else p1.icon
+		title = BannerPropsFromConfig.title,
+		body = BannerPropsFromConfig.body,
+		badges = Badges,
+		buttons = Buttons,
+		onDismiss = if BannerPropsFromConfig.isDismissable then p1[UPSELLBUTTONACTION.Dismiss] else nil,
+		image = BannerPropsFromConfig.image,
+		icon = if BannerPropsFromConfig.image then nil else BannerPropsFromConfig.icon
 	}
 end
 
-return function(p3)
-	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), httpService (ref), getUpsellSignalStoreModule (ref), socialUpsellAnalyticsModule (ref), upsellComponentModule (ref), useEffect (ref), eventTypes (ref), useCallback (ref), UPSELL_BUTTON_ACTION (ref), getBannerPropsFromConfig (ref), banner (ref)
-	local var3 = cryoModule.Dictionary.union(t, p3)
-	local var4 = reactModule.useMemo(function()
-		-- upvalues: var3 (ref), httpService (copy)
-		return var3.impressionId or httpService:GenerateGUID(false)
-	end, { var3.impressionId, var3.config.type })
-	local var5 = reactModule.useRef(nil)
-	local var6 = getUpsellSignalStoreModule()
-	local var7 = reactModule.useMemo(function()
-		-- upvalues: socialUpsellAnalyticsModule (copy), var3 (ref), upsellComponentModule (copy)
-		return socialUpsellAnalyticsModule.evaluateUpsellStage(var3.upsellEntrySurface, upsellComponentModule.Banner, var3.upsellEntryComponent)
-	end, { var3.upsellEntrySurface, var3.upsellEntryComponent })
-	useEffect(function()
-		-- upvalues: var4 (ref), var5 (ref), socialUpsellAnalyticsModule (copy), eventTypes (copy), var3 (ref), var7 (ref), upsellComponentModule (copy)
-		if var4 and var5.current ~= var4 then
-			socialUpsellAnalyticsModule.logUpsellEvent(eventTypes.SocialUpsellShown, {
-				upsellPurpose = var3.config.type,
-				upsellEntrySurface = var3.upsellEntrySurface,
-				upsellStage = var7,
-				upsellImpressionId = var4,
-				upsellComponent = upsellComponentModule.Banner,
-				conversationId = var3.conversationId,
-				upsellEntryComponent = var3.upsellEntryComponent
+return function(p2) --[[ Line: 123 | Named "UpsellBanner" ]]
+	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), HttpService (copy), GetUpsellSignalStoreModule (copy), SocialUpsellAnalyticsModule (copy), UpsellComponentModule (copy), UseEffectFunction (copy), EventTypes (copy), UseCallbackFunction (copy), UPSELLBUTTONACTION (copy), getBannerPropsFromConfig (copy), Banner (copy)
+	local UnionResult = CryoModule.Dictionary.union(config, p2)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 126 ]]
+		-- upvalues: UnionResult (copy), HttpService (upval)
+		return UnionResult.impressionId or HttpService:GenerateGUID(false)
+	end, { UnionResult.impressionId, UnionResult.config.type })
+	local UseRefResult = ReactModule.useRef(nil)
+	local UpsellSignalStoreModule = GetUpsellSignalStoreModule()
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 133 ]]
+		-- upvalues: SocialUpsellAnalyticsModule (upval), UnionResult (copy), UpsellComponentModule (upval)
+		return SocialUpsellAnalyticsModule.evaluateUpsellStage(UnionResult.upsellEntrySurface, UpsellComponentModule.Banner, UnionResult.upsellEntryComponent)
+	end, {
+		UnionResult.upsellEntrySurface,
+		UnionResult.upsellEntryComponent
+	})
+	UseEffectFunction(function() --[[ Line: 142 ]]
+		-- upvalues: UseMemoResult (copy), UseRefResult (copy), SocialUpsellAnalyticsModule (upval), EventTypes (upval), UnionResult (copy), UseMemoResult1 (copy), UpsellComponentModule (upval)
+		if UseMemoResult and UseRefResult.current ~= UseMemoResult then
+			SocialUpsellAnalyticsModule.logUpsellEvent(EventTypes.SocialUpsellShown, {
+				upsellPurpose = UnionResult.config.type,
+				upsellEntrySurface = UnionResult.upsellEntrySurface,
+				upsellStage = UseMemoResult1,
+				upsellImpressionId = UseMemoResult,
+				upsellComponent = UpsellComponentModule.Banner,
+				conversationId = UnionResult.conversationId,
+				upsellEntryComponent = UnionResult.upsellEntryComponent
 			})
-			var5.current = var4
+			UseRefResult.current = UseMemoResult
 		end
 	end, {
-		var3.config.type,
-		var3.upsellEntrySurface,
-		var7,
-		var4,
-		var3.upsellEntryComponent
+		UnionResult.config.type,
+		UnionResult.upsellEntrySurface,
+		UseMemoResult1,
+		UseMemoResult,
+		UnionResult.upsellEntryComponent
 	})
-	useEffect(function()
-		-- upvalues: var3 (ref), var6 (ref)
-		local type = var3.config.type
-		local upsellEntrySurface = var3.upsellEntrySurface
-		var6.setUpsellBannerData(type, upsellEntrySurface, var3.config)
+	UseEffectFunction(function() --[[ Line: 166 ]]
+		-- upvalues: UnionResult (copy), UpsellSignalStoreModule (copy)
+		local Type = UnionResult.config.type
+		local UpsellEntrySurface = UnionResult.upsellEntrySurface
+		UpsellSignalStoreModule.setUpsellBannerData(Type, UpsellEntrySurface, UnionResult.config)
 		
-		return function()
-			-- upvalues: var6 (copy), type (ref), upsellEntrySurface (ref)
-			var6.setUpsellBannerData(type, upsellEntrySurface, nil)
-		end
-	end, { var3.upsellEntrySurface, var3.config, var6 })
-	local var8 = useCallback(function(p4, p5)
-		-- upvalues: socialUpsellAnalyticsModule (copy), eventTypes (copy), var3 (ref), var7 (ref), var4 (ref), upsellComponentModule (copy)
-		return function()
-			-- upvalues: socialUpsellAnalyticsModule (copy), eventTypes (copy), var3 (copy), var7 (copy), var4 (copy), upsellComponentModule (copy), p5 (ref), p4 (ref)
-			socialUpsellAnalyticsModule.logUpsellEvent(eventTypes.SocialUpsellButtonClick, {
-				upsellPurpose = var3.config.type,
-				upsellEntrySurface = var3.upsellEntrySurface,
-				upsellStage = var7,
-				upsellImpressionId = var4,
-				upsellComponent = upsellComponentModule.Banner,
-				btn = p5,
-				conversationId = var3.conversationId,
-				upsellEntryComponent = var3.upsellEntryComponent
-			})
-			p4(var4)
+		return function() --[[ Line: 171 ]]
+			-- upvalues: UpsellSignalStoreModule (upval), Type (copy), UpsellEntrySurface (copy)
+			UpsellSignalStoreModule.setUpsellBannerData(Type, UpsellEntrySurface, nil)
 		end
 	end, {
-		var3.upsellEntrySurface,
-		var3.config.type,
-		var7,
-		var4,
-		var3.upsellEntryComponent
+		UnionResult.upsellEntrySurface,
+		UnionResult.config,
+		UpsellSignalStoreModule
 	})
-	local var9 = useCallback(var8(var3.onPrimaryAction, UPSELL_BUTTON_ACTION.Primary), { var8, var3.onPrimaryAction })
-	local var10 = useCallback(var8(var3.onSecondaryAction, UPSELL_BUTTON_ACTION.Secondary), { var8, var3.onSecondaryAction })
-	local var11 = useCallback(var8(var3.onDismiss, "Dismiss"), { var8, var3.onDismiss })
+	local UseCallbackResult = UseCallbackFunction(function(Callback, Btn) --[[ Line: 178 ]]
+		-- upvalues: SocialUpsellAnalyticsModule (upval), EventTypes (upval), UnionResult (copy), UseMemoResult1 (copy), UseMemoResult (copy), UpsellComponentModule (upval)
+		return function() --[[ Line: 179 ]]
+			-- upvalues: SocialUpsellAnalyticsModule (upval), EventTypes (upval), UnionResult (upval), UseMemoResult1 (upval), UseMemoResult (upval), UpsellComponentModule (upval), Btn (copy), Callback (copy)
+			SocialUpsellAnalyticsModule.logUpsellEvent(EventTypes.SocialUpsellButtonClick, {
+				upsellPurpose = UnionResult.config.type,
+				upsellEntrySurface = UnionResult.upsellEntrySurface,
+				upsellStage = UseMemoResult1,
+				upsellImpressionId = UseMemoResult,
+				upsellComponent = UpsellComponentModule.Banner,
+				btn = Btn,
+				conversationId = UnionResult.conversationId,
+				upsellEntryComponent = UnionResult.upsellEntryComponent
+			})
+			Callback(UseMemoResult)
+		end
+	end, {
+		UnionResult.upsellEntrySurface,
+		UnionResult.config.type,
+		UseMemoResult1,
+		UseMemoResult,
+		UnionResult.upsellEntryComponent
+	})
+	local UseCallbackResult1 = UseCallbackFunction(UseCallbackResult(UnionResult.onPrimaryAction, UPSELLBUTTONACTION.Primary), { UseCallbackResult, UnionResult.onPrimaryAction })
+	local UseCallbackResult2 = UseCallbackFunction(UseCallbackResult(UnionResult.onSecondaryAction, UPSELLBUTTONACTION.Secondary), { UseCallbackResult, UnionResult.onSecondaryAction })
+	local UseCallbackResult3 = UseCallbackFunction(UseCallbackResult(UnionResult.onDismiss, "Dismiss"), { UseCallbackResult, UnionResult.onDismiss })
 	
-	return reactModule.createElement(banner, cryoModule.Dictionary.join(reactModule.useMemo(function()
-		-- upvalues: getBannerPropsFromConfig (copy), var3 (ref), UPSELL_BUTTON_ACTION (copy), var9 (ref), var10 (ref), var11 (ref)
-		return getBannerPropsFromConfig(var3.config, {
-			[UPSELL_BUTTON_ACTION.Primary] = var9,
-			[UPSELL_BUTTON_ACTION.Secondary] = var10,
-			[UPSELL_BUTTON_ACTION.Dismiss] = var11
-		})
-	end, { var3.config, var9, var10, var11 }), { isContained = var3.isContained }))
+	return ReactModule.createElement(Banner, CryoModule.Dictionary.join(ReactModule.useMemo(function() --[[ Line: 219 ]]
+		-- upvalues: getBannerPropsFromConfig (upval), UnionResult (copy), UPSELLBUTTONACTION (upval), UseCallbackResult1 (copy), UseCallbackResult2 (copy), UseCallbackResult3 (copy)
+		return (getBannerPropsFromConfig(UnionResult.config, {
+			[UPSELLBUTTONACTION.Primary] = UseCallbackResult1,
+			[UPSELLBUTTONACTION.Secondary] = UseCallbackResult2,
+			[UPSELLBUTTONACTION.Dismiss] = UseCallbackResult3
+		}))
+	end, {
+		UnionResult.config,
+		UseCallbackResult1,
+		UseCallbackResult2,
+		UseCallbackResult3
+	}), { isContained = UnionResult.isContained }))
 end

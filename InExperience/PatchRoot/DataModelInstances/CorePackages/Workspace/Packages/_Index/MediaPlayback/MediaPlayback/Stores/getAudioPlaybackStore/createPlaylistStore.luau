@@ -1,42 +1,42 @@
-﻿local mediaPlayback = script:FindFirstAncestor("MediaPlayback")
-local _ = require(mediaPlayback.Stores.getAudioPlaybackStore.types)
-local createSignal = require(mediaPlayback.Parent.Signals).createSignal
+﻿local MediaPlayback = script:FindFirstAncestor("MediaPlayback")
+local _ = require(MediaPlayback.Stores.getAudioPlaybackStore.types)
+local CreateSignalFunction = require(MediaPlayback.Parent.Signals).createSignal
 
-return function()
-	-- upvalues: createSignal (ref)
-	local var1, var2 = createSignal({})
-	local var3, var4 = createSignal({})
+return function() --[[ Line: 9 | Named "createPlaylistStore" ]]
+	-- upvalues: CreateSignalFunction (copy)
+	local Signal, Signal2 = CreateSignalFunction({})
+	local Signal1, Signal2_1 = CreateSignalFunction({})
 	
-	local function _(p1, p2)
-		-- upvalues: var3 (ref), var1 (ref)
-		local var5 = var3(false)[tostring(p1)]
+	local function _(p1, p2) --[[ Line: 13 | Named "getRelativeIndex" ]]
+		-- upvalues: Signal1 (copy), Signal (copy)
+		local SignalResultEntry = Signal1(false)[tostring(p1)]
 		
-		return if var5 then var1(false)[var5 + p2] else nil
+		return if SignalResultEntry then Signal(false)[SignalResultEntry + p2] else nil
 	end
 	
 	return {
-		get = var1,
-		set = function(value)
-			-- upvalues: var2 (ref), var4 (ref)
-			var2(value)
+		get = Signal,
+		set = function(List) --[[ Line: 22 ]]
+			-- upvalues: Signal2 (copy), Signal2_1 (copy)
+			Signal2(List)
 			local t = {}
 			
-			for i, v in value do
-				t[tostring(v)] = i
+			for i, value in List do
+				t[tostring(value)] = i
 			end
-			var4(t)
+			Signal2_1(t)
 		end,
-		getNext = function(p1)
-			-- upvalues: var3 (ref), var1 (ref)
-			local var5 = var3(false)[tostring(p1)]
+		getNext = function(p1) --[[ Line: 32 ]]
+			-- upvalues: Signal1 (copy), Signal (copy)
+			local SignalResultEntry: number = Signal1(false)[tostring(p1)]
 			
-			return if var5 then var1(false)[var5 + 1] else nil
+			return if SignalResultEntry then Signal(false)[SignalResultEntry + 1] else nil
 		end,
-		getPrev = function(p1)
-			-- upvalues: var3 (ref), var1 (ref)
-			local var5 = var3(false)[tostring(p1)]
+		getPrev = function(p1) --[[ Line: 36 ]]
+			-- upvalues: Signal1 (copy), Signal (copy)
+			local SignalResultEntry: number = Signal1(false)[tostring(p1)]
 			
-			return if var5 then var1(false)[var5 + -1] else nil
+			return if SignalResultEntry then Signal(false)[SignalResultEntry + -1] else nil
 		end
 	}
 end

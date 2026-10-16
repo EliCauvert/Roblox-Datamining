@@ -1,24 +1,23 @@
-﻿local socialUpsell = script:FindFirstAncestor("SocialUpsell")
-local ampUpsellModule = require(socialUpsell.Parent.AmpUpsell)
-local constantsModule = require(socialUpsell.Constants)
-local inExpAmpWizardController = ampUpsellModule.InExpAmpWizardController
-local accessResponseEnum = ampUpsellModule.AmpEnums.AccessResponseEnum
-local DEFAULT_FAE_ENTRY_POINT_EVENT_CTX = constantsModule.DEFAULT_FAE_ENTRY_POINT_EVENT_CTX
-local fStringCommsFAEFeatureNameModule = require(socialUpsell.Flag.FStringCommsFAEFeatureName)
-local fStringCommsFAENamespaceModule = require(socialUpsell.Flag.FStringCommsFAENamespace)
+﻿local SocialUpsell = script:FindFirstAncestor("SocialUpsell")
+local AmpUpsellModule = require(SocialUpsell.Parent.AmpUpsell)
+local InExpAmpWizardController = AmpUpsellModule.InExpAmpWizardController
+local AccessResponseEnum = AmpUpsellModule.AmpEnums.AccessResponseEnum
+local DEFAULTFAEENTRYPOINTEVENTCTX = require(SocialUpsell.Constants).DEFAULT_FAE_ENTRY_POINT_EVENT_CTX
+local FStringCommsFAEFeatureNameModule = require(SocialUpsell.Flag.FStringCommsFAEFeatureName)
+local FStringCommsFAENamespaceModule = require(SocialUpsell.Flag.FStringCommsFAENamespace)
 
-return function(p1, p2, p3)
-	-- upvalues: DEFAULT_FAE_ENTRY_POINT_EVENT_CTX (ref), inExpAmpWizardController (ref), fStringCommsFAEFeatureNameModule (ref), accessResponseEnum (ref), fStringCommsFAENamespaceModule (ref)
-	return inExpAmpWizardController.OpenAmpWizardContainerInExp(fStringCommsFAEFeatureNameModule, function(p4, _)
-		-- upvalues: accessResponseEnum (copy), p2 (ref), p3 (ref)
-		if p4 == accessResponseEnum.Granted then
-			if p2 then
-				p2()
+return function(p1, Callback, Callback1) --[[ Line: 14 ]]
+	-- upvalues: DEFAULTFAEENTRYPOINTEVENTCTX (copy), InExpAmpWizardController (copy), FStringCommsFAEFeatureNameModule (copy), AccessResponseEnum (copy), FStringCommsFAENamespaceModule (copy)
+	return InExpAmpWizardController.OpenAmpWizardContainerInExp(FStringCommsFAEFeatureNameModule, function(Granted, _) --[[ Line: 18 ]]
+		-- upvalues: AccessResponseEnum (upval), Callback (copy), Callback1 (copy)
+		if Granted == AccessResponseEnum.Granted then
+			if Callback then
+				Callback()
 				
 				return
 			end
-		elseif p3 then
-			p3()
+		elseif Callback1 then
+			Callback1()
 		end
-	end, nil, p1 or DEFAULT_FAE_ENTRY_POINT_EVENT_CTX, nil, fStringCommsFAENamespaceModule)
+	end, nil, p1 or DEFAULTFAEENTRYPOINTEVENTCTX, nil, FStringCommsFAENamespaceModule)
 end

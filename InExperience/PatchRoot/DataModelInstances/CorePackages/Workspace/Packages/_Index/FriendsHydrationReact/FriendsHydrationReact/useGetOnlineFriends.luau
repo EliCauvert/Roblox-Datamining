@@ -1,24 +1,24 @@
-﻿local parent = script:FindFirstAncestor("FriendsHydrationReact").Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local signalsModule = require(parent.Signals)
-local var1 = require(parent.DataHydration).Friends.FriendsStore.get()
+﻿local Parent = script:FindFirstAncestor("FriendsHydrationReact").Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local SignalsModule = require(Parent.Signals)
+local GetResult = require(Parent.DataHydration).Friends.FriendsStore.get()
 
-return function()
-	-- upvalues: reactModule (ref), var1 (ref), signalsModule (ref), signalsReactModule (ref)
-	local var2 = reactModule.useMemo(function()
-		-- upvalues: var1 (copy)
-		return var1.GetOnlineFriends()
+return function() --[[ Line: 15 | Named "useGetOnlineFriends" ]]
+	-- upvalues: ReactModule (copy), GetResult (copy), SignalsModule (copy), SignalsReactModule (copy)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 16 ]]
+		-- upvalues: GetResult (upval)
+		return GetResult.GetOnlineFriends()
 	end, {})
 	
-	return signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), var2 (ref)
-		return signalsModule.createComputed(function(p1)
-			-- upvalues: var2 (copy)
-			return var2(p1)
+	return SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 20 ]]
+		-- upvalues: SignalsModule (upval), UseMemoResult (copy)
+		return SignalsModule.createComputed(function(p1) --[[ Line: 21 ]]
+			-- upvalues: UseMemoResult (upval)
+			return UseMemoResult(p1)
 		end)
-	end, { var2 })), signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: var1 (copy)
-		return var1.GetOnlineFriendsStatus()
-	end, {}))
+	end, { UseMemoResult }))), (SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 26 ]]
+		-- upvalues: GetResult (upval)
+		return GetResult.GetOnlineFriendsStatus()
+	end, {}))))
 end

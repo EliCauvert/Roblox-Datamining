@@ -1,41 +1,38 @@
-﻿local parent = script:FindFirstAncestor("FriendsMenu").Parent
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-local foundationModule = require(parent.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local localizationHelper = require(parent.NotificationsCommon).LocalizationHelper
-local fFlagConnectionsToFriendsRename = require(parent.SharedFlags).FFlagConnectionsToFriendsRename
-local useStyle = UIBloxModule.Core.Style.useStyle
-local getLocalizedStrings = localizationHelper.getLocalizedStrings
+﻿local Parent = script:FindFirstAncestor("FriendsMenu").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local UseStyleFunction = require(Parent.UIBlox).Core.Style.useStyle
+local GetLocalizedStringsFunction = require(Parent.NotificationsCommon).LocalizationHelper.getLocalizedStrings
 
-return function(p1)
-	-- upvalues: useStyle (ref), fFlagConnectionsToFriendsRename (ref), getLocalizedStrings (ref), reactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
-	local var1 = useStyle()
-	local theme = var1.Theme
-	local font = var1.Font
-	local var2 = font.BaseSize * font.Body.RelativeSize
+return function(p1) --[[ Line: 19 ]]
+	-- upvalues: UseStyleFunction (copy), GetLocalizedStringsFunction (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	local UseStyleResult = UseStyleFunction()
+	local Theme = UseStyleResult.Theme
+	local UseStyleResultFont = UseStyleResult.Font
+	local ScaledBaseSize = UseStyleResultFont.BaseSize * UseStyleResultFont.Body.RelativeSize
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		ClipsDescendants = true,
 		Size = UDim2.new(1, 0, 1, 0),
 		Position = UDim2.new(0, 0, 0, 0),
 		Name = p1.msgType
 	}, {
-		subtitle = reactModule.createElement("TextLabel", {
+		subtitle = ReactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
 			TextWrapped = true,
-			Text = getLocalizedStrings({
-				noResultFriendsList = "Feature.SettingsHub.Label.InviteSearchNoResults",
-				errorFriendsList = if fFlagConnectionsToFriendsRename then "Feature.SettingsHub.Label.FriendsListLoadErrorMessage" else "Feature.SettingsHub.Label.ConnectionsListLoadErrorMessage"
+			Text = GetLocalizedStringsFunction({
+				errorFriendsList = "Feature.SettingsHub.Label.FriendsListLoadErrorMessage",
+				noResultFriendsList = "Feature.SettingsHub.Label.InviteSearchNoResults"
 			})[p1.msgType],
-			TextColor3 = theme.TextDefault.Color,
-			TextTransparency = theme.TextDefault.Transparency,
-			TextSize = var2,
-			Font = if foundationFontFaceMigration then nil else font.Body.Font,
-			FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Tokens.Typography.BodyLarge.Font) else nil,
-			Size = UDim2.new(1, 0, 0, var2),
+			TextColor3 = Theme.TextDefault.Color,
+			TextTransparency = Theme.TextDefault.Transparency,
+			TextSize = ScaledBaseSize,
+			Font = if FoundationFontFaceMigration then nil else UseStyleResultFont.Body.Font,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
+			Size = UDim2.new(1, 0, 0, ScaledBaseSize),
 			Position = UDim2.new(0, 0, 0.4, 0),
 			TextYAlignment = Enum.TextYAlignment.Top
 		})

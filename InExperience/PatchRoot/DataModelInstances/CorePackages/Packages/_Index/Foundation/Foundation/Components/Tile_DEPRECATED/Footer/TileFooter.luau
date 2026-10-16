@@ -1,13 +1,13 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local viewModule = require(foundation.Components.View)
-local useTileModule = require(foundation.Components.Tile_DEPRECATED.useTile)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local ViewModule = require(Foundation.Components.View)
+local UseTileModule = require(Foundation.Components.Tile_DEPRECATED.useTile)
 
-return function(p1)
-	-- upvalues: useTileModule (ref), reactModule (ref), viewModule (ref)
-	return reactModule.createElement(viewModule, {
+return function(p1) --[[ Line: 14 | Named "TileFooter" ]]
+	-- upvalues: UseTileModule (copy), ReactModule (copy), ViewModule (copy)
+	return ReactModule.createElement(ViewModule, {
 		LayoutOrder = 2,
 		tag = "shrink size-full-0 auto-y",
-		testId = `{useTileModule().testId}--footer`
+		testId = `{UseTileModule().testId}--footer`
 	}, p1.children)
 end

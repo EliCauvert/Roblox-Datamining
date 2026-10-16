@@ -1,23 +1,25 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local constants = require(parent.UserLib).Utils.Constants
-local enumsModule = require(profilePlatform.Common.Enums)
-local useProfileFormFactorModule = require(profilePlatform.Hooks.useProfileFormFactor)
-local useProfileJsonComponentModule = require(profilePlatform.Hooks.useProfileJsonComponent)
-local useProfileScrollContextModule = require(profilePlatform.Contexts.ProfileScrollContext.useProfileScrollContext)
-local coverPhotoModule = require(profilePlatform.Components.CoverPhoto.CoverPhoto)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local Constants = require(Parent.UserLib).Utils.Constants
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local UseProfileFormFactorModule = require(ProfilePlatform.Hooks.useProfileFormFactor)
+local UseProfileJsonComponentModule = require(ProfilePlatform.Hooks.useProfileJsonComponent)
+local UseProfileScrollContextModule = require(ProfilePlatform.Contexts.ProfileScrollContext.useProfileScrollContext)
+local CoverPhotoModule = require(ProfilePlatform.Components.CoverPhoto.CoverPhoto)
 
-return function(p1)
-	-- upvalues: useProfileJsonComponentModule (ref), enumsModule (ref), useProfileFormFactorModule (ref), useProfileScrollContextModule (ref), constants (ref), reactModule (ref), coverPhotoModule (ref)
-	local coverPhoto = useProfileJsonComponentModule(enumsModule.Components.CoverPhoto) or {}
-	local var1 = useProfileScrollContextModule()
+return function(p1) --[[ Line: 22 | Named "CoverPhotoContainer" ]]
+	-- upvalues: UseProfileJsonComponentModule (copy), EnumsModule (copy), UseProfileFormFactorModule (copy), UseProfileScrollContextModule (copy), Constants (copy), ReactModule (copy), CoverPhotoModule (copy)
+	local UseProfileJsonComponentModuleResult = UseProfileJsonComponentModule(EnumsModule.Components.CoverPhoto) or {}
+	local UseProfileFormFactorModuleResult = UseProfileFormFactorModule()
+	local UseProfileScrollContextModuleResult = UseProfileScrollContextModule()
+	local ScrollYRatio = UseProfileScrollContextModuleResult.scrollY / 2
 	
-	return if coverPhoto.coverPhotoId == nil then nil else reactModule.createElement(coverPhotoModule, {
+	return if UseProfileJsonComponentModuleResult.coverPhotoId == nil then nil else ReactModule.createElement(CoverPhotoModule, {
 		layoutOrder = p1.layoutOrder,
-		coverPhotoThumbnail = string.format("rbxthumb://type=%s&id=%s&w=%d&h=%d", constants.RbxthumbTypes.Asset, coverPhoto.coverPhotoId, 1440, 456),
-		profileFormFactorInfo = useProfileFormFactorModule(),
-		parallaxOffset = var1.scrollY / 2,
-		peekViewOpenPercent = var1.peekViewOpenPercent
+		coverPhotoThumbnail = string.format("rbxthumb://type=%s&id=%s&w=%d&h=%d", Constants.RbxthumbTypes.Asset, UseProfileJsonComponentModuleResult.coverPhotoId, 1440, 456),
+		profileFormFactorInfo = UseProfileFormFactorModuleResult,
+		parallaxOffset = ScrollYRatio,
+		peekViewOpenPercent = UseProfileScrollContextModuleResult.peekViewOpenPercent
 	})
 end

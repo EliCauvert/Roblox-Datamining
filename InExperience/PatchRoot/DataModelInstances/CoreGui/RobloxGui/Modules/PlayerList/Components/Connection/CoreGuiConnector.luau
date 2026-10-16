@@ -1,54 +1,54 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local playersService = game:GetService("Players")
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local userGameSettingsService = UserSettings():GetService("UserGameSettings")
-local blockedStatusChangedEvent = require(corePackagesService.Workspace.Packages.BlockingUtility):GetBlockedStatusChangedEvent()
-local parent = script.Parent.Parent.Parent
-local setPerformanceStatsVisibleModule = require(parent.Actions.SetPerformanceStatsVisible)
-local setPlayerIsBlockedModule = require(parent.Actions.SetPlayerIsBlocked)
-local eventConnectionModule = require(script.Parent.EventConnection)
-local coreGuiConnector = roactModule.PureComponent:extend("CoreGuiConnector")
+﻿local CorePackages = game:GetService("CorePackages")
+local Players = game:GetService("Players")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local UserGameSettings = UserSettings():GetService("UserGameSettings")
+local BlockedStatusChangedEvent = require(CorePackages.Workspace.Packages.BlockingUtility):GetBlockedStatusChangedEvent()
+local Parent = script.Parent.Parent.Parent
+local SetPerformanceStatsVisibleModule = require(Parent.Actions.SetPerformanceStatsVisible)
+local SetPlayerIsBlockedModule = require(Parent.Actions.SetPlayerIsBlocked)
+local EventConnectionModule = require(script.Parent.EventConnection)
+local CoreGuiConnector = RoactModule.PureComponent:extend("CoreGuiConnector")
 
-function coreGuiConnector.didMount(p1)
-	-- upvalues: userGameSettingsService (ref)
-	p1.props.setPerformanceStatsVisible(userGameSettingsService.PerformanceStatsVisible)
+function CoreGuiConnector.didMount(p1) --[[ Line: 22 ]]
+	-- upvalues: UserGameSettings (copy)
+	p1.props.setPerformanceStatsVisible(UserGameSettings.PerformanceStatsVisible)
 end
 
-function coreGuiConnector.render(p1)
-	-- upvalues: roactModule (ref), eventConnectionModule (ref), userGameSettingsService (ref), blockedStatusChangedEvent (ref), playersService (ref)
-	return roactModule.createFragment({
-		PerformanceStatsChangedConnection = roactModule.createElement(eventConnectionModule, {
-			event = userGameSettingsService.PerformanceStatsVisibleChanged,
-			callback = function(p2)
-				-- upvalues: p1 (ref)
+function CoreGuiConnector.render(p1) --[[ Line: 26 ]]
+	-- upvalues: RoactModule (copy), EventConnectionModule (copy), UserGameSettings (copy), BlockedStatusChangedEvent (copy), Players (copy)
+	return RoactModule.createFragment({
+		PerformanceStatsChangedConnection = RoactModule.createElement(EventConnectionModule, {
+			event = UserGameSettings.PerformanceStatsVisibleChanged,
+			callback = function(p2) --[[ Line: 30 ]]
+				-- upvalues: p1 (copy)
 				p1.props.setPerformanceStatsVisible(p2)
 			end
 		}),
-		BlockedStatusChangedConnection = roactModule.createElement(eventConnectionModule, {
-			event = blockedStatusChangedEvent,
-			callback = function(p2, p3)
-				-- upvalues: playersService (copy), p1 (ref)
-				local var1 = playersService:GetPlayerByUserId(p2)
+		BlockedStatusChangedConnection = RoactModule.createElement(EventConnectionModule, {
+			event = BlockedStatusChangedEvent,
+			callback = function(UserId, p2) --[[ Line: 37 ]]
+				-- upvalues: Players (upval), p1 (copy)
+				local Player = Players:GetPlayerByUserId(UserId)
 				
-				if var1 then
-					p1.props.setPlayerIsBlocked(var1, p3)
+				if Player then
+					p1.props.setPlayerIsBlocked(Player, p2)
 				end
 			end
 		})
 	})
 end
 
-return roactRoduxModule.connect(nil, function(p1)
-	-- upvalues: setPerformanceStatsVisibleModule (ref), setPlayerIsBlockedModule (ref)
+return RoactRoduxModule.connect(nil, function(Callback) --[[ Line: 47 | Named "mapDispatchToProps" ]]
+	-- upvalues: SetPerformanceStatsVisibleModule (copy), SetPlayerIsBlockedModule (copy)
 	return {
-		setPerformanceStatsVisible = function(value)
-			-- upvalues: p1 (ref), setPerformanceStatsVisibleModule (copy)
-			return p1(setPerformanceStatsVisibleModule(value))
+		setPerformanceStatsVisible = function(p1) --[[ Line: 49 ]]
+			-- upvalues: Callback (copy), SetPerformanceStatsVisibleModule (upval)
+			return Callback(SetPerformanceStatsVisibleModule(p1))
 		end,
-		setPlayerIsBlocked = function(value, p2)
-			-- upvalues: p1 (ref), setPlayerIsBlockedModule (copy)
-			return p1(setPlayerIsBlockedModule(value, p2))
+		setPlayerIsBlocked = function(p1, p2) --[[ Line: 53 ]]
+			-- upvalues: Callback (copy), SetPlayerIsBlockedModule (upval)
+			return Callback(SetPlayerIsBlockedModule(p1, p2))
 		end
 	}
-end)(coreGuiConnector)
+end)(CoreGuiConnector)

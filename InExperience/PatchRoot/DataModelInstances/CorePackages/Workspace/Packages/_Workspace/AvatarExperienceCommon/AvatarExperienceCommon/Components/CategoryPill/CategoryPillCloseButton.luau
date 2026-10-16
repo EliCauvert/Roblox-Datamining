@@ -1,34 +1,34 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local icon = foundationModule.Icon
-local enums = foundationModule.Enums
-local fFlagAXCategoryPillPositionAnimation = require(parent.AvatarExperienceFlags).FFlagAXCategoryPillPositionAnimation
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local Icon = FoundationModule.Icon
+local Enums = FoundationModule.Enums
+local FFlagAXCategoryPillPositionAnimation = require(Parent.AvatarExperienceFlags).FFlagAXCategoryPillPositionAnimation
 
-return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), foundationModule (ref), fFlagAXCategoryPillPositionAnimation (ref), icon (ref), enums (ref)
-	local actionStandard = useTokens().Color.ActionStandard
-	local var1 = reactModule.useRef(nil)
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), p1 (ref)
-		if var1.current then
-			p1.categoryButtonRefs["X-Button"] = var1
-			p1.navButtonRefs[p1.pillIndex] = var1
+return function(p1) --[[ Line: 28 | Named "CategoryPillCloseButton" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), FoundationModule (copy), FFlagAXCategoryPillPositionAnimation (copy), Icon (copy), Enums (copy)
+	local ActionStandard = UseTokensFunction().Color.ActionStandard
+	local UseRefResult = ReactModule.useRef(nil)
+	ReactModule.useEffect(function() --[[ Line: 35 ]]
+		-- upvalues: UseRefResult (copy), p1 (copy)
+		if UseRefResult.current then
+			p1.categoryButtonRefs["X-Button"] = UseRefResult
+			p1.navButtonRefs[p1.pillIndex] = UseRefResult
 		end
 	end, {})
 	
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "auto-xy radius-circle padding-small align-x-center align-y-center",
-		backgroundStyle = actionStandard.Background,
+		backgroundStyle = ActionStandard.Background,
 		onActivated = p1.onActivated,
-		LayoutOrder = if fFlagAXCategoryPillPositionAnimation then nil else p1.layoutOrder,
-		ref = var1
+		LayoutOrder = if FFlagAXCategoryPillPositionAnimation then nil else p1.layoutOrder,
+		ref = UseRefResult
 	}, {
-		CloseIcon = reactModule.createElement(icon, {
+		CloseIcon = ReactModule.createElement(Icon, {
 			name = "x-small",
-			size = enums.IconSize.Medium,
-			style = actionStandard.Foreground
+			size = Enums.IconSize.Medium,
+			style = ActionStandard.Foreground
 		})
 	})
 end

@@ -1,28 +1,26 @@
-﻿local parent = script.Parent.Parent
-local _ = require(parent.LuauPolyfill)
-local t = {}
-local graphQLModule = require(parent.GraphQL)
-local graphQLError = graphQLModule.GraphQLError
-local versionInfo = graphQLModule.versionInfo
+﻿local Parent = script.Parent.Parent
+local _ = require(Parent.LuauPolyfill)
+local GraphQLModule = require(Parent.GraphQL)
+local GraphQLError = GraphQLModule.GraphQLError
+local VersionInfo = GraphQLModule.versionInfo
 local _ = require(script.Parent.types)
 
-local function createGraphQLError(p1, p2)
-	-- upvalues: versionInfo (ref), graphQLError (ref)
-	return if versionInfo.major >= 17 then graphQLError.new(p1, p2) else graphQLError.new(p1, if typeof(p2) == "table" then p2.nodes else nil, if typeof(p2) == "table" then p2.source else nil, if typeof(p2) == "table" then p2.positions else nil, if typeof(p2) == "table" then p2.path else nil, if typeof(p2) == "table" then p2.originalError else nil, if typeof(p2) == "table" then p2.extensions else nil)
+local function createGraphQLError(Message, p1) --[[ Line: 37 ]]
+	-- upvalues: VersionInfo (copy), GraphQLError (copy)
+	return if VersionInfo.major >= 17 then GraphQLError.new(Message, p1) else GraphQLError.new(Message, if typeof(p1) == "table" then p1.nodes else nil, if typeof(p1) == "table" then p1.source else nil, if typeof(p1) == "table" then p1.positions else nil, if typeof(p1) == "table" then p1.path else nil, if typeof(p1) == "table" then p1.originalError else nil, if typeof(p1) == "table" then p1.extensions else nil)
 end
 
-t.createGraphQLError = createGraphQLError
-
-function t.relocatedError(p1, p2)
-	-- upvalues: createGraphQLError (ref)
-	return createGraphQLError(p1.message, {
-		nodes = p1.nodes,
-		source = p1.source,
-		positions = p1.positions,
-		path = if p2 == nil then p1.path else p2,
-		originalError = p1,
-		extensions = p1.extensions
-	})
-end
-
-return t
+return {
+	createGraphQLError = createGraphQLError,
+	relocatedError = function(OriginalError, p1) --[[ Line: 55 ]]
+		-- upvalues: createGraphQLError (copy)
+		return createGraphQLError(OriginalError.message, {
+			nodes = OriginalError.nodes,
+			source = OriginalError.source,
+			positions = OriginalError.positions,
+			path = if p1 == nil then OriginalError.path else p1,
+			originalError = OriginalError,
+			extensions = OriginalError.extensions
+		})
+	end
+}

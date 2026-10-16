@@ -1,90 +1,91 @@
-﻿local avatarSwitcher = script:FindFirstAncestor("AvatarSwitcher")
-local parent = avatarSwitcher.Parent
-local sessionService = game:GetService("SessionService")
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local avatarExperienceAnalyticsModule = require(parent.AvatarExperienceAnalytics)
-local addUnifiedEventLogging = avatarExperienceAnalyticsModule.addUnifiedEventLogging
-local unifiedEventLogEnums = avatarExperienceAnalyticsModule.UnifiedEventLogEnums
-local unifiedLoggingSurface = require(parent.AvatarExperienceNavigation).Enums.UnifiedLoggingSurface
-local getAvatarSwitcherStoreModule = require(avatarSwitcher.Stores.getAvatarSwitcherStore)
-local _ = require(avatarSwitcher.types)
-local fFlagAvatarSwitcherUseAvatarInventoryEndpoint = require(parent.AvatarExperienceFlags).FFlagAvatarSwitcherUseAvatarInventoryEndpoint
-local fFlagAXBackgroundsInOutfitThumbnails = require(parent.SharedFlags).FFlagAXBackgroundsInOutfitThumbnails
+﻿local AvatarSwitcher = script:FindFirstAncestor("AvatarSwitcher")
+local Parent = AvatarSwitcher.Parent
+local SessionService = game:GetService("SessionService")
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local AvatarExperienceAnalyticsModule = require(Parent.AvatarExperienceAnalytics)
+local AddUnifiedEventLoggingFunction = AvatarExperienceAnalyticsModule.addUnifiedEventLogging
+local UnifiedEventLogEnums = AvatarExperienceAnalyticsModule.UnifiedEventLogEnums
+local UnifiedLoggingSurface = require(Parent.AvatarExperienceNavigation).Enums.UnifiedLoggingSurface
+local GetAvatarSwitcherStoreModule = require(AvatarSwitcher.Stores.getAvatarSwitcherStore)
+local _ = require(AvatarSwitcher.types)
+local FFlagAvatarSwitcherUseAvatarInventoryEndpoint = require(Parent.AvatarExperienceFlags).FFlagAvatarSwitcherUseAvatarInventoryEndpoint
+local FFlagAXBackgroundsInOutfitThumbnails = require(Parent.SharedFlags).FFlagAXBackgroundsInOutfitThumbnails
 
-return reactModule.memo(function(p1)
-	-- upvalues: signalsReactModule (ref), getAvatarSwitcherStoreModule (ref), reactModule (ref), useTokens (ref), addUnifiedEventLogging (ref), unifiedEventLogEnums (ref), unifiedLoggingSurface (ref), sessionService (ref), signalsModule (ref), foundationModule (ref), fFlagAvatarSwitcherUseAvatarInventoryEndpoint (ref), fFlagAXBackgroundsInOutfitThumbnails (ref)
-	local var1 = signalsReactModule.useSignalState(getAvatarSwitcherStoreModule)
-	local var2 = reactModule.useRef(nil)
-	local var3 = useTokens()
-	local id = p1.outfitInfo.id
-	reactModule.useEffect(function()
-		-- upvalues: addUnifiedEventLogging (copy), var2 (ref), unifiedEventLogEnums (copy), unifiedLoggingSurface (copy), p1 (ref), id (ref), sessionService (copy)
-		task.delay(0, function()
-			-- upvalues: addUnifiedEventLogging (copy), var2 (copy), unifiedEventLogEnums (copy), unifiedLoggingSurface (copy), p1 (copy), id (copy), sessionService (copy)
-			addUnifiedEventLogging(var2, {
+return ReactModule.memo(function(Frame) --[[ Line: 39 | Named "OutfitTile" ]]
+	-- upvalues: SignalsReactModule (copy), GetAvatarSwitcherStoreModule (copy), ReactModule (copy), UseTokensFunction (copy), AddUnifiedEventLoggingFunction (copy), UnifiedEventLogEnums (copy), UnifiedLoggingSurface (copy), SessionService (copy), SignalsModule (copy), FoundationModule (copy), FFlagAvatarSwitcherUseAvatarInventoryEndpoint (copy), FFlagAXBackgroundsInOutfitThumbnails (copy)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(GetAvatarSwitcherStoreModule)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseTokensResult = UseTokensFunction()
+	local Id = Frame.outfitInfo.id
+	ReactModule.useEffect(function() --[[ Line: 46 ]]
+		-- upvalues: AddUnifiedEventLoggingFunction (upval), UseRefResult (copy), UnifiedEventLogEnums (upval), UnifiedLoggingSurface (upval), Frame (copy), Id (copy), SessionService (upval)
+		task.delay(0, function() --[[ Line: 49 ]]
+			-- upvalues: AddUnifiedEventLoggingFunction (upval), UseRefResult (upval), UnifiedEventLogEnums (upval), UnifiedLoggingSurface (upval), Frame (upval), Id (upval), SessionService (upval)
+			AddUnifiedEventLoggingFunction(UseRefResult, {
 				elementName = "OUTFIT_TILE",
-				action = unifiedEventLogEnums.MarketplaceUnifiedAction.UI_ELEMENT_CLICK,
-				surface = unifiedLoggingSurface.IN_EXPERIENCE_AVATAR_SWITCHER,
-				gridPositionRow = p1.gridPosition.row,
-				gridPositionColumn = p1.gridPosition.column,
-				itemId = id
-			}, { sessionTagName = sessionService:GetSessionTag("level2a") })
+				action = UnifiedEventLogEnums.MarketplaceUnifiedAction.UI_ELEMENT_CLICK,
+				surface = UnifiedLoggingSurface.IN_EXPERIENCE_AVATAR_SWITCHER,
+				gridPositionRow = Frame.gridPosition.row,
+				gridPositionColumn = Frame.gridPosition.column,
+				itemId = Id
+			}, { sessionTagName = SessionService:GetSessionTag("level2a") })
 		end)
-	end, { p1.gridPosition, id })
-	local var4 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), id (ref), var1 (ref)
-		return signalsModule.createComputed(function(p2)
-			-- upvalues: id (copy), var1 (copy)
-			return id ~= nil and var1.getSelectedOutfitId(p2) == id
+	end, { Frame.gridPosition, Id })
+	local NoDisabled: boolean = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 63 ]]
+		-- upvalues: SignalsModule (upval), Id (copy), UseSignalStateResult (copy)
+		return SignalsModule.createComputed(function(p1): boolean --[[ Line: 64 ]]
+			-- upvalues: Id (upval), UseSignalStateResult (upval)
+			return Id ~= nil and UseSignalStateResult.getSelectedOutfitId(p1) == Id
 		end)
-	end, { var1, id })) and not p1.disabled
+	end, { UseSignalStateResult, Id }))) and not Frame.disabled
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 70 ]]
+		-- upvalues: UseSignalStateResult (copy), Id (copy)
+		UseSignalStateResult.selectOutfit(Id)
+	end, { UseSignalStateResult, Id })
 	
-	return reactModule.createElement(foundationModule.View, {
+	return (ReactModule.createElement(FoundationModule.View, {
 		tag = "col gap-small auto-y size-full-0",
-		GroupTransparency = if p1.disabled then 0.5 else nil,
-		LayoutOrder = p1.LayoutOrder
+		GroupTransparency = if Frame.disabled then 0.5 else nil,
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Thumbnail = id and reactModule.createElement(foundationModule.Image, {
+		Thumbnail = Id and ReactModule.createElement(FoundationModule.Image, {
 			LayoutOrder = 1,
 			tag = {
-				[if fFlagAvatarSwitcherUseAvatarInventoryEndpoint then "radius-medium bg-shift-200 padding-small" else "radius-medium bg-shift-200"] = true,
-				["stroke-standard stroke-system-contrast"] = var4
+				[if FFlagAvatarSwitcherUseAvatarInventoryEndpoint then "radius-medium bg-shift-200 padding-small" else "radius-medium bg-shift-200"] = true,
+				["stroke-standard stroke-system-contrast"] = NoDisabled
 			},
 			Size = UDim2.fromScale(1, 1.5),
 			SizeConstraint = Enum.SizeConstraint.RelativeXX,
-			Image = if fFlagAXBackgroundsInOutfitThumbnails then `rbxthumb://type=Outfit&id={id}&w=150&h=150&includeBackground=true` else `rbxthumb://type=Outfit&id={id}&w=150&h=150`,
+			Image = if FFlagAXBackgroundsInOutfitThumbnails then `rbxthumb://type=Outfit&id={Id}&w=150&h=150&includeBackground=true` else `rbxthumb://type=Outfit&id={Id}&w=150&h=150`,
 			ScaleType = Enum.ScaleType.Crop,
-			onActivated = if p1.disabled then nil else reactModule.useCallback(function()
-				-- upvalues: var1 (ref), id (ref)
-				var1.selectOutfit(id)
-			end, { var1, id }),
-			ref = var2
+			onActivated = if Frame.disabled then nil else UseResult,
+			ref = UseRefResult
 		}, {
-			WarningIcon = fFlagAvatarSwitcherUseAvatarInventoryEndpoint and (p1.outfitInfo.hasWarning and reactModule.createElement(foundationModule.Image, {
+			WarningIcon = FFlagAvatarSwitcherUseAvatarInventoryEndpoint and (Frame.outfitInfo.hasWarning and ReactModule.createElement(FoundationModule.Image, {
 				tag = "size-500",
 				Image = "icons/actions/info",
-				imageStyle = if not var4 then { Transparency = 0.5 } else nil
+				imageStyle = if NoDisabled then nil else { Transparency = 0.5 }
 			}))
 		}),
-		ThumbnailShimmer = not id and reactModule.createElement(foundationModule.View, {
+		ThumbnailShimmer = not Id and ReactModule.createElement(FoundationModule.View, {
 			LayoutOrder = 1,
 			Size = UDim2.fromScale(1, 1.5),
 			SizeConstraint = Enum.SizeConstraint.RelativeXX
 		}, {
-			Shimmer = reactModule.createElement(foundationModule.Skeleton, { Size = UDim2.fromScale(1, 1) })
+			Shimmer = ReactModule.createElement(FoundationModule.Skeleton, { Size = UDim2.fromScale(1, 1) })
 		}),
-		NameLabel = p1.outfitInfo.name and reactModule.createElement(foundationModule.Text, {
+		NameLabel = Frame.outfitInfo.name and ReactModule.createElement(FoundationModule.Text, {
 			tag = "size-full-0 auto-y text-align-x-left text-title-small content-emphasis text-wrap",
 			LayoutOrder = 2,
-			Text = p1.outfitInfo.name
+			Text = Frame.outfitInfo.name
 		}),
-		NameLabelShimmer = not p1.outfitInfo.name and reactModule.createElement(foundationModule.Skeleton, {
+		NameLabelShimmer = not Frame.outfitInfo.name and ReactModule.createElement(FoundationModule.Skeleton, {
 			LayoutOrder = 2,
-			Size = UDim2.new(1, 0, 0, var3.FontSize.FontSize_300)
+			Size = UDim2.new(1, 0, 0, UseTokensResult.FontSize.FontSize_300)
 		})
-	})
+	}))
 end)

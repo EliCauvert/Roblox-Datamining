@@ -1,19 +1,19 @@
-﻿local connectModule = require(script.connect)
-local providerModule = require(script.Provider)
-local getPolicyImplementations = script.getPolicyImplementations
+﻿local ConnectModule = require(script.connect)
+local ProviderModule = require(script.Provider)
+local GetPolicyImplementations = script.getPolicyImplementations
 
 return {
-	withGetPolicyImplementation = function(p1)
-		-- upvalues: connectModule (ref), providerModule (ref)
+	withGetPolicyImplementation = function(p1) --[[ Line: 12 ]]
+		-- upvalues: ConnectModule (copy), ProviderModule (copy)
 		assert(p1.read, "expected getPolicyImpl to have `read` function")
 		assert(p1.onPolicyChanged, "expected getPolicyImpl to have `onPolicyChanged` function")
 		
-		return { connect = connectModule(p1), Provider = providerModule() }
+		return { connect = ConnectModule(p1), Provider = ProviderModule() }
 	end,
 	GetPolicyImplementations = {
-		MemStorageService = require(getPolicyImplementations.fromMemStorageService)(),
-		PolicyService = require(getPolicyImplementations.fromPolicyService)(),
-		Static = require(getPolicyImplementations.fromStaticSource)()
+		MemStorageService = require(GetPolicyImplementations.fromMemStorageService)(),
+		PolicyService = require(GetPolicyImplementations.fromPolicyService)(),
+		Static = require(GetPolicyImplementations.fromStaticSource)()
 	},
 	Logger = require(script.Logger),
 	AppPolicyContext = require(script.AppPolicyContext)

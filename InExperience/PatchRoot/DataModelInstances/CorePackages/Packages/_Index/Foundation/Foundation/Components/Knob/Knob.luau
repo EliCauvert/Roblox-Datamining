@@ -1,124 +1,133 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local _ = require(parent.BuilderIcons)
-local dashModule = require(parent.Dash)
-local reactModule = require(parent.React)
-local reactIsModule = require(parent.ReactIs)
-local components = foundation.Components
-local constantsModule = require(foundation.Constants)
-local iconModule = require(components.Icon)
-local imageModule = require(components.Image)
-local _ = require(components.Types)
-local viewModule = require(components.View)
-local flagsModule = require(foundation.Utility.Flags)
-local blendTransparenciesModule = require(foundation.Utility.blendTransparencies)
-local mapBindableModule = require(foundation.Utility.mapBindable)
-local useBindableModule = require(foundation.Utility.useBindable)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local useKnobVariantsModule = require(script.Parent.useKnobVariants)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local usePresentationContext = require(foundation.Providers.Style.PresentationContext).usePresentationContext
-local colorNamespaceModule = require(foundation.Enums.ColorNamespace)
-local t = {
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local _ = require(Parent.BuilderIcons)
+local DashModule = require(Parent.Dash)
+local ReactModule = require(Parent.React)
+local ReactIsModule = require(Parent.ReactIs)
+local Components = Foundation.Components
+local ConstantsModule = require(Foundation.Constants)
+local IconModule = require(Components.Icon)
+local ImageModule = require(Components.Image)
+local _ = require(Components.Types)
+local ViewModule = require(Components.View)
+local FlagsModule = require(Foundation.Utility.Flags)
+local BlendTransparenciesModule = require(Foundation.Utility.blendTransparencies)
+local MapBindableModule = require(Foundation.Utility.mapBindable)
+local UseBindableModule = require(Foundation.Utility.useBindable)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local UseKnobVariantsModule = require(script.Parent.useKnobVariants)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local UsePresentationContextFunction = require(Foundation.Providers.Style.PresentationContext).usePresentationContext
+local ColorNamespaceModule = require(Foundation.Enums.ColorNamespace)
+local config = {
 	hasShadow = true,
 	isDisabled = false,
 	testId = "--foundation-knob",
-	size = require(foundation.Enums.InputSize).Medium
+	size = require(Foundation.Enums.InputSize).Medium
 }
 
-return reactModule.memo(function(p1)
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), usePresentationContext (ref), useKnobVariantsModule (ref), colorNamespaceModule (ref), flagsModule (ref), mapBindableModule (ref), reactModule (ref), useBindableModule (ref), reactIsModule (ref), viewModule (ref), withCommonPropsModule (ref), iconModule (ref), blendTransparenciesModule (ref), constantsModule (ref), dashModule (ref), imageModule (ref)
-	local var1 = withDefaultsModule(p1, t)
-	local var2 = useTokensModule()
-	local var3 = usePresentationContext()
-	local var4 = useKnobVariantsModule(var2, var1.size, var3 and var3.colorNamespace == colorNamespaceModule.Inverse)
-	local style = var1.style or var4.knob.style
-	local var5 = if flagsModule.FoundationKnobRaisedShadow then mapBindableModule(style, function(p2)
+return ReactModule.memo(function(p1) --[[ Line: 50 | Named "Knob" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UsePresentationContextFunction (copy), UseKnobVariantsModule (copy), ColorNamespaceModule (copy), FlagsModule (copy), MapBindableModule (copy), ReactModule (copy), UseBindableModule (copy), ReactIsModule (copy), ViewModule (copy), WithCommonPropsModule (copy), IconModule (copy), BlendTransparenciesModule (copy), ConstantsModule (copy), DashModule (copy), ImageModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	local UseTokensModuleResult = UseTokensModule()
+	local UsePresentationContextResult = UsePresentationContextFunction()
+	local UseKnobVariantsModuleResult = UseKnobVariantsModule(UseTokensModuleResult, WithDefaultsModuleResult.size, UsePresentationContextResult and UsePresentationContextResult.colorNamespace == ColorNamespaceModule.Inverse)
+	local Style = WithDefaultsModuleResult.style or UseKnobVariantsModuleResult.knob.style
+	local MapBindableModuleResult = if FlagsModule.FoundationKnobRaisedShadow then MapBindableModule(Style, function(p2) --[[ Line: 61 ]]
 		return p2.Transparency or 0
 	end) else nil
-	local var6 = reactModule.useCallback(function(p2)
-		-- upvalues: var2 (ref)
+	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 66 ]]
+		-- upvalues: UseTokensModuleResult (copy)
 		return {
-			Color3 = var2.Color.Extended.White.White_100.Color3,
+			Color3 = UseTokensModuleResult.Color.Extended.White.White_100.Color3,
 			Transparency = p2.Transparency
 		}
-	end, { var2 })
-	local var7 = reactModule.useMemo(function()
-		-- upvalues: var4 (ref), var1 (ref), reactIsModule (copy)
-		local size = var4.knob.size
+	end, { UseTokensModuleResult })
+	local UseBindableModuleResult = UseBindableModule(if WithDefaultsModuleResult.stroke then WithDefaultsModuleResult.stroke.Transparency else nil)
+	local UseBindableModuleResult1 = UseBindableModule(Style)
+	local UseBindableModuleResult2 = UseBindableModule(UseKnobVariantsModuleResult.knob.style)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 77 ]]
+		-- upvalues: UseKnobVariantsModuleResult (copy), WithDefaultsModuleResult (copy), ReactIsModule (upval)
+		local Size = UseKnobVariantsModuleResult.knob.size
 		
-		if var1.stroke and var1.stroke.Thickness then
-			if reactIsModule.isBinding(var1.stroke.Thickness) then
-				return var1.stroke.Thickness:map(function(p2)
-					-- upvalues: size (write)
-					return size - UDim2.fromOffset(p2 * 2, p2 * 2)
+		if WithDefaultsModuleResult.stroke and WithDefaultsModuleResult.stroke.Thickness then
+			if ReactIsModule.isBinding(WithDefaultsModuleResult.stroke.Thickness) then
+				return WithDefaultsModuleResult.stroke.Thickness:map(function(p2: number): UDim2 --[[ Line: 81 ]]
+					-- upvalues: Size (ref)
+					return Size - UDim2.fromOffset(p2 * 2, p2 * 2)
 				end)
 			end
-			local thickness = var1.stroke.Thickness
-			size -= UDim2.fromOffset(thickness * 2, thickness * 2)
+			local Thickness: number = WithDefaultsModuleResult.stroke.Thickness
+			Size -= UDim2.fromOffset(Thickness * 2, Thickness * 2)
 		end
-		return size
-	end, { var4, var1.stroke })
+		return Size
+	end, {
+		UseKnobVariantsModuleResult,
+		WithDefaultsModuleResult.stroke
+	})
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var1, { Size = var4.knob.size, isDisabled = var1.isDisabled }), {
-		Icon = if var1.icon then reactModule.createElement(viewModule, {
+	return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, {
+		Size = UseKnobVariantsModuleResult.knob.size,
+		isDisabled = WithDefaultsModuleResult.isDisabled
+	}), {
+		Icon = if WithDefaultsModuleResult.icon then ReactModule.createElement(ViewModule, {
 			ZIndex = 4,
-			tag = var4.knob.tag,
-			Size = var7,
-			backgroundStyle = var4.iconContainer.backgroundStyle
-		}, reactModule.createElement(iconModule, {
-			name = var1.icon.name,
-			variant = var1.icon.variant,
-			style = if var1.isDisabled then useBindableModule(var4.knob.style):map(function(p2)
-				-- upvalues: blendTransparenciesModule (copy), constantsModule (copy)
+			tag = UseKnobVariantsModuleResult.knob.tag,
+			Size = UseMemoResult,
+			backgroundStyle = UseKnobVariantsModuleResult.iconContainer.backgroundStyle
+		}, ReactModule.createElement(IconModule, {
+			name = WithDefaultsModuleResult.icon.name,
+			variant = WithDefaultsModuleResult.icon.variant,
+			style = if WithDefaultsModuleResult.isDisabled then UseBindableModuleResult2:map(function(p2) --[[ Line: 113 ]]
+				-- upvalues: BlendTransparenciesModule (upval), ConstantsModule (upval)
 				return {
 					Color3 = p2.Color3,
-					Transparency = blendTransparenciesModule(p2.Transparency, constantsModule.DISABLED_TRANSPARENCY)
+					Transparency = BlendTransparenciesModule(p2.Transparency, ConstantsModule.DISABLED_TRANSPARENCY)
 				}
-			end) else var4.knob.style,
-			size = var4.knob.iconSize,
-			testId = `{var1.testId}--icon`
-		})) else reactModule.createElement(viewModule, {
+			end) else UseKnobVariantsModuleResult.knob.style,
+			size = UseKnobVariantsModuleResult.knob.iconSize,
+			testId = `{WithDefaultsModuleResult.testId}--icon`
+		})) else ReactModule.createElement(ViewModule, {
 			ZIndex = 4,
-			tag = var4.knob.tag,
-			backgroundStyle = if var1.isDisabled then useBindableModule(style):map(function(p2)
-				-- upvalues: blendTransparenciesModule (copy), constantsModule (copy)
+			tag = UseKnobVariantsModuleResult.knob.tag,
+			backgroundStyle = if WithDefaultsModuleResult.isDisabled then UseBindableModuleResult1:map(function(p2) --[[ Line: 130 ]]
+				-- upvalues: BlendTransparenciesModule (upval), ConstantsModule (upval)
 				return {
 					Color3 = p2.Color3,
-					Transparency = blendTransparenciesModule(p2.Transparency, constantsModule.DISABLED_TRANSPARENCY)
+					Transparency = BlendTransparenciesModule(p2.Transparency, ConstantsModule.DISABLED_TRANSPARENCY)
 				}
-			end) else style,
-			Size = var7,
-			stroke = useBindableModule(if var1.stroke then var1.stroke.Transparency else nil):map(function(p2)
-				-- upvalues: var1 (ref), dashModule (copy), blendTransparenciesModule (copy), constantsModule (copy)
-				local stroke = var1.stroke
+			end) else Style,
+			Size = UseMemoResult,
+			stroke = UseBindableModuleResult:map(function(p2) --[[ Line: 139 ]]
+				-- upvalues: WithDefaultsModuleResult (copy), DashModule (upval), BlendTransparenciesModule (upval), ConstantsModule (upval)
+				local Stroke = WithDefaultsModuleResult.stroke
 				
-				if var1.stroke and p2 ~= nil and var1.isDisabled then
-					stroke = dashModule.join(stroke, {
-						Transparency = blendTransparenciesModule(p2, constantsModule.DISABLED_TRANSPARENCY)
+				if WithDefaultsModuleResult.stroke and p2 ~= nil and WithDefaultsModuleResult.isDisabled then
+					Stroke = DashModule.join(Stroke, {
+						Transparency = BlendTransparenciesModule(p2, ConstantsModule.DISABLED_TRANSPARENCY)
 					})
 				end
-				return stroke
+				return Stroke
 			end):getValue(),
-			testId = `{var1.testId}--circle`
+			testId = `{WithDefaultsModuleResult.testId}--circle`
 		}),
-		Shadow = if var1.hasShadow and not var1.isDisabled then if flagsModule.FoundationKnobRaisedShadow then reactModule.createElement(viewModule, {
+		Shadow = if WithDefaultsModuleResult.hasShadow and not WithDefaultsModuleResult.isDisabled then if FlagsModule.FoundationKnobRaisedShadow then ReactModule.createElement(ViewModule, {
 			tag = "position-center-center anchor-center-center radius-circle shadow-raised-100",
 			ZIndex = 3,
-			GroupTransparency = var5,
-			Size = var7,
-			Visible = mapBindableModule(var5, function(p2)
+			GroupTransparency = MapBindableModuleResult,
+			Size = UseMemoResult,
+			Visible = MapBindableModule(MapBindableModuleResult, function(p2: number): boolean --[[ Line: 163 ]]
 				return p2 < 1
 			end),
-			testId = `{var1.testId}--shadow`
-		}) else reactModule.createElement(imageModule, {
+			testId = `{WithDefaultsModuleResult.testId}--shadow`
+		}) else ReactModule.createElement(ImageModule, {
 			Image = "component_assets/dropshadow_28",
 			ZIndex = 3,
-			tag = var4.knobShadow.tag,
-			imageStyle = if reactIsModule.isBinding(style) then style:map(var6) else var6(style),
-			Size = var4.knobShadow.size,
-			testId = `{var1.testId}--shadow`
+			tag = UseKnobVariantsModuleResult.knobShadow.tag,
+			imageStyle = if ReactIsModule.isBinding(Style) then Style:map(UseResult) else UseResult(Style),
+			Size = UseKnobVariantsModuleResult.knobShadow.size,
+			testId = `{WithDefaultsModuleResult.testId}--shadow`
 		}) else nil
 	})
 end)

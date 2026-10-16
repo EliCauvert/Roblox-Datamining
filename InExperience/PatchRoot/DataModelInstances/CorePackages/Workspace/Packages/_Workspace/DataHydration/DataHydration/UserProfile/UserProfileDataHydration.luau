@@ -1,136 +1,136 @@
-﻿local playersService = game:GetService("Players")
-local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local createDataCacheModule = require(dataHydration.createDataCache)
-local dataHydrationTypesModule = require(dataHydration.DataHydrationTypes)
-local signalsModule = require(parent.Signals)
-local getLocalPlayerUserId = require(dataHydration.DataHydrationUtils).getLocalPlayerUserId
-local var1 = createDataCacheModule()
-local t = {}
-local var2 = getLocalPlayerUserId()
-playersService:GetPropertyChangedSignal("LocalPlayer"):Connect(function()
-	-- upvalues: getLocalPlayerUserId (ref), var2 (write), t (ref)
-	local var3 = getLocalPlayerUserId()
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local DataHydrationTypesModule = require(DataHydration.DataHydrationTypes)
+local SignalsModule = require(Parent.Signals)
+local GetLocalPlayerUserIdFunction = require(DataHydration.DataHydrationUtils).getLocalPlayerUserId
+local v1 = require(DataHydration.createDataCache)()
+local Tbl = {}
+local LocalPlayerUserId = GetLocalPlayerUserIdFunction()
+game:GetService("Players"):GetPropertyChangedSignal("LocalPlayer"):Connect(function() --[[ Line: 64 ]]
+	-- upvalues: GetLocalPlayerUserIdFunction (copy), LocalPlayerUserId (ref), Tbl (copy)
+	local LocalPlayerUserId1 = GetLocalPlayerUserIdFunction()
 	
-	if var3 ~= var2 then
-		var2 = var3
-		table.clear(t)
+	if LocalPlayerUserId1 ~= LocalPlayerUserId then
+		LocalPlayerUserId = LocalPlayerUserId1
+		table.clear(Tbl)
 	end
 end)
-local var3 = nil
+local UserProfileStore = nil
 
-local function _()
-	-- upvalues: var3 (write), parent (ref)
-	if not var3 then
-		var3 = require(parent.UserProfiles.Stores).UserProfileStore
+local function _() --[[ Line: 73 | Named "getUserProfileStore" ]]
+	-- upvalues: UserProfileStore (ref), Parent (copy)
+	if not UserProfileStore then
+		UserProfileStore = require(Parent.UserProfiles.Stores).UserProfileStore
 	end
-	return var3
+	return UserProfileStore
 end
 
-local _ = function(p1)
-	-- upvalues: var3 (write), parent (ref)
-	if not var3 then
-		var3 = require(parent.UserProfiles.Stores).UserProfileStore
+local _ = function(p1) --[[ Line: 80 | Named "getProfileModel" ]]
+	-- upvalues: UserProfileStore (ref), Parent (copy)
+	if not UserProfileStore then
+		UserProfileStore = require(Parent.UserProfiles.Stores).UserProfileStore
 	end
-	return var3.get().getProfileByUserId(p1)
+	return (UserProfileStore.get().getProfileByUserId(p1))
 end
 
-local function getStatusAndFetch(p1)
-	-- upvalues: var1 (ref), var3 (write), parent (ref)
-	local item, item_1 = var1.getItem(p1)
+local function getStatusAndFetch(p1) --[[ Line: 84 ]]
+	-- upvalues: v1 (copy), UserProfileStore (ref), Parent (copy)
+	local Item, Item2 = v1.getItem(p1)
 	
-	if item_1 then
-		if not var3 then
-			var3 = require(parent.UserProfiles.Stores).UserProfileStore
+	if Item2 then
+		if not UserProfileStore then
+			UserProfileStore = require(Parent.UserProfiles.Stores).UserProfileStore
 		end
-		var3.get().fetchNamesByUserIds({ p1 }, function(p2)
-			-- upvalues: var1 (copy), p1 (ref)
+		UserProfileStore.get().fetchNamesByUserIds({ p1 }, function(p2) --[[ Line: 87 ]]
+			-- upvalues: v1 (upval), p1 (copy)
 			if p2.status == "success" then
-				var1.replaceItem(p1, true)
+				v1.replaceItem(p1, true)
 				
 				return
-			elseif p2.status == "failed" then
-				var1.markItemsAsFailed({ p1 })
+			end
+			if p2.status == "failed" then
+				v1.markItemsAsFailed({ p1 })
 			end
 		end)
 	end
-	return item, item_1
+	return Item, Item2
 end
 
-local function resolveUserProfileField(p1, p2, p3)
-	return if p2 == "userId" then tonumber(p1.userId) elseif p2 == "username" then p1.names.getUsername(p3) elseif p2 == "displayName" then p1.names.getDisplayName(p3) elseif p2 == "isVerified" then if p1.getIsVerified == nil then nil else p1.getIsVerified(p3) else nil
+local function resolveUserProfileField(ProfileByUserId, p1, p2) --[[ Line: 98 ]]
+	return if p1 == "userId" then tonumber(ProfileByUserId.userId) elseif p1 == "username" then ProfileByUserId.names.getUsername(p2) elseif p1 == "displayName" then ProfileByUserId.names.getDisplayName(p2) elseif p1 == "isVerified" then if ProfileByUserId.getIsVerified == nil then nil else ProfileByUserId.getIsVerified(p2) else nil
 end
 
 return {
-	resolveField = function(_, p1, p2, p3, _)
-		-- upvalues: getStatusAndFetch (ref), dataHydrationTypesModule (ref), var3 (write), parent (ref), resolveUserProfileField (ref)
-		if #p1 < 2 then
+	resolveField = function(_, Entry, p1, p2, _) --[[ Line: 111 ]]
+		-- upvalues: getStatusAndFetch (copy), DataHydrationTypesModule (copy), UserProfileStore (ref), Parent (copy), resolveUserProfileField (copy)
+		if #Entry < 2 then
 			return nil, nil
 		end
-		local var4 = tostring(p2)
-		local var5 = getStatusAndFetch(var4).status(p3)
+		local Text = tostring(p1)
+		local StatusResult = getStatusAndFetch(Text).status(p2)
 		
-		if var5 ~= dataHydrationTypesModule.DataStatus.Ready then
-			return nil, var5
-		elseif not var3 then
-			var3 = require(parent.UserProfiles.Stores).UserProfileStore
+		if StatusResult ~= DataHydrationTypesModule.DataStatus.Ready then
+			return nil, StatusResult
 		end
-		local profileByUserId = var3.get().getProfileByUserId(var4)
+		if not UserProfileStore then
+			UserProfileStore = require(Parent.UserProfiles.Stores).UserProfileStore
+		end
+		local ProfileByUserId = UserProfileStore.get().getProfileByUserId(Text)
 		
-		if profileByUserId then
-			return resolveUserProfileField(profileByUserId, p1[2], p3), var5
+		if ProfileByUserId then
+			return resolveUserProfileField(ProfileByUserId, Entry[2], p2), StatusResult
+		else
+			return nil, StatusResult
 		end
-		return nil, var5
 	end,
-	updateFromHydration = function(p1)
-		-- upvalues: var3 (write), parent (ref), var1 (ref)
-		if not var3 then
-			var3 = require(parent.UserProfiles.Stores).UserProfileStore
+	updateFromHydration = function(List) --[[ Line: 178 ]]
+		-- upvalues: UserProfileStore (ref), Parent (copy), v1 (copy)
+		if not UserProfileStore then
+			UserProfileStore = require(Parent.UserProfiles.Stores).UserProfileStore
 		end
-		var3.get().updateFromHydration(p1)
+		UserProfileStore.get().updateFromHydration(List)
 		local t = {}
 		
-		for i, v in p1 do
-			t[if v.userId ~= nil then i else tostring(v.userId)] = true
+		for i, value in List do
+			t[if value.userId == nil then i else tostring(value.userId)] = true
 		end
-		var1.replaceItems(t)
+		v1.replaceItems(t)
 	end,
-	getAndFetchUserInfo = function(p2)
-		-- upvalues: t (ref), signalsModule (ref), getStatusAndFetch (ref), dataHydrationTypesModule (ref), var3 (write), parent (ref)
-		local var4 = tostring(p2)
-		local var5 = t[var4]
+	getAndFetchUserInfo = function(p1) --[[ Line: 143 ]]
+		-- upvalues: Tbl (copy), SignalsModule (copy), getStatusAndFetch (copy), DataHydrationTypesModule (copy), UserProfileStore (ref), Parent (copy)
+		local Text = tostring(p1)
+		local Entry = Tbl[Text]
 		
-		if var5 == nil then
-			local var6 = signalsModule.createComputed(function(p3)
-				-- upvalues: getStatusAndFetch (copy), var4 (ref)
-				return getStatusAndFetch(var4).status(p3)
+		if Entry == nil then
+			local Computed = SignalsModule.createComputed(function(p2) --[[ Line: 150 ]]
+				-- upvalues: getStatusAndFetch (upval), Text (copy)
+				return getStatusAndFetch(Text).status(p2)
 			end)
-			local t_1 = {
-				info = signalsModule.createComputed(function(p3)
-					-- upvalues: var6 (ref), dataHydrationTypesModule (copy), var4 (ref), var3 (copy), parent (copy)
-					if var6(p3) ~= dataHydrationTypesModule.DataStatus.Ready then
+			local config = {
+				info = SignalsModule.createComputed(function(p2) --[[ Line: 155 ]]
+					-- upvalues: Computed (copy), DataHydrationTypesModule (upval), Text (copy), UserProfileStore (upval), Parent (upval)
+					if Computed(p2) ~= DataHydrationTypesModule.DataStatus.Ready then
 						return nil
 					end
-					local var7 = var4
-					
-					if not var3 then
-						var3 = require(parent.UserProfiles.Stores).UserProfileStore
+					if not UserProfileStore then
+						UserProfileStore = require(Parent.UserProfiles.Stores).UserProfileStore
 					end
-					local profileByUserId = var3.get().getProfileByUserId(var7)
+					local ProfileByUserId = UserProfileStore.get().getProfileByUserId(Text)
 					
-					return if profileByUserId == nil then nil else {
-						userId = tonumber(var4),
-						displayName = profileByUserId.names.getDisplayName(p3),
-						username = profileByUserId.names.getUsername(p3),
-						hasVerifiedBadge = if profileByUserId.getIsVerified ~= nil then false else profileByUserId.getIsVerified(p3)
+					return if ProfileByUserId == nil then nil else {
+						userId = tonumber(Text),
+						displayName = ProfileByUserId.names.getDisplayName(p2),
+						username = ProfileByUserId.names.getUsername(p2),
+						hasVerifiedBadge = ProfileByUserId.getIsVerified ~= nil and ProfileByUserId.getIsVerified(p2)
 					}
 				end),
-				status = var6
+				status = Computed
 			}
-			t[var4] = t_1
+			Tbl[Text] = config
 			
-			return t_1
+			return config
+		else
+			return Entry
 		end
-		return var5
 	end
 }

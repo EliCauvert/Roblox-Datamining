@@ -1,144 +1,136 @@
-﻿local parent = script.Parent.Parent
-local reactModule = require(parent.React)
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local object = luauPolyfillModule.Object
-local stackActions = require(parent.RoactNavigation).StackActions
-local fFlagLuaAppDerivedStackAndSwitchState = require(parent.SharedFlags).FFlagLuaAppDerivedStackAndSwitchState
-local viewStateModule = require(script.Parent.ViewState)
+﻿local Parent = script.Parent.Parent
+local ReactModule = require(Parent.React)
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Object = LuauPolyfillModule.Object
+local StackActions = require(Parent.RoactNavigation).StackActions
+local FFlagLuaAppDerivedStackAndSwitchState = require(Parent.SharedFlags).FFlagLuaAppDerivedStackAndSwitchState
+local ViewStateModule = require(script.Parent.ViewState)
 local _ = require(script.Parent.types)
-local _ = {
-	SetCurrent = "SetCurrent",
-	SetOpening = "SetOpening",
-	SetOpened = "SetOpened",
-	SetClosing = "SetClosing",
-	SetClosed = "SetClosed"
-}
 
-local function RouteViewStatesReducer(p1, p2)
-	-- upvalues: array (ref), RouteViewStatesReducer (ref), viewStateModule (ref), object (ref)
-	local var1 = array.findIndex(p1, function(p3)
-		-- upvalues: p2 (ref)
-		return p3.descriptor.key == p2.key
+local function RouteViewStatesReducer(Tbl, p1) --[[ Line: 73 ]]
+	-- upvalues: Array (copy), RouteViewStatesReducer (copy), ViewStateModule (copy), Object (copy)
+	local Index = Array.findIndex(Tbl, function(p2): boolean --[[ Line: 74 ]]
+		-- upvalues: p1 (copy)
+		return p2.descriptor.key == p1.key
 	end)
 	
-	if p2.type == "SetCurrent" then
-		for i, v in p2.navigationState.routes do
-			p1 = RouteViewStatesReducer(p1, {
+	if p1.type == "SetCurrent" then
+		for _, route in p1.navigationState.routes do
+			Tbl = RouteViewStatesReducer(Tbl, {
 				type = "SetOpening",
-				key = v.key,
-				descriptor = p2.descriptors[v.key]
+				key = route.key,
+				descriptor = p1.descriptors[route.key]
 			})
 		end
-		for i, v_1 in p1 do
-			if p2.descriptors[v_1.descriptor.key] == nil then
-				p1 = RouteViewStatesReducer(p1, { type = "SetClosing", key = v_1.descriptor.key })
+		for _, value in Tbl do
+			if p1.descriptors[value.descriptor.key] == nil then
+				Tbl = RouteViewStatesReducer(Tbl, { type = "SetClosing", key = value.descriptor.key })
 			end
 		end
-		return p1
-	elseif p2.type == "SetOpening" then
-		if var1 == -1 then
-			p1 = table.clone(p1)
-			table.insert(p1, {
-				viewState = viewStateModule.Opening,
-				descriptor = p2.descriptor
+		return Tbl
+	else
+		if p1.type ~= "SetOpening" then
+			if p1.type ~= "SetOpened" then
+				if p1.type ~= "SetClosing" then
+					if p1.type == "SetClosed" and Index ~= -1 and Tbl[Index].viewState == ViewStateModule.Closing then
+						Tbl = table.clone(Tbl)
+						table.remove(Tbl, Index)
+					end
+				elseif Index ~= -1 and Tbl[Index].viewState ~= ViewStateModule.Closing then
+					Tbl = table.clone(Tbl)
+					Tbl[Index] = Object.assign({}, Tbl[Index], { viewState = ViewStateModule.Closing })
+					
+					return Tbl
+				end
+			elseif Index ~= -1 and Tbl[Index].viewState == ViewStateModule.Opening then
+				Tbl = table.clone(Tbl)
+				Tbl[Index] = Object.assign({}, Tbl[Index], { viewState = ViewStateModule.Opened })
+				
+				return Tbl
+			end
+		elseif Index == -1 then
+			Tbl = table.clone(Tbl)
+			table.insert(Tbl, {
+				viewState = ViewStateModule.Opening,
+				descriptor = p1.descriptor
 			})
 			
-			return p1
-		elseif p1[var1].viewState == viewStateModule.Closing then
-			p1 = table.clone(p1)
-			p1[var1] = object.assign({}, p1[var1], {
-				viewState = viewStateModule.Opening,
-				descriptor = p2.descriptor
+			return Tbl
+		elseif Tbl[Index].viewState == ViewStateModule.Closing then
+			Tbl = table.clone(Tbl)
+			Tbl[Index] = Object.assign({}, Tbl[Index], {
+				viewState = ViewStateModule.Opening,
+				descriptor = p1.descriptor
 			})
 			
-			return p1
-		elseif p1[var1].descriptor == p2.descriptor then
-			return p1
-		else
-			p1 = table.clone(p1)
-			p1[var1] = object.assign({}, p1[var1], { descriptor = p2.descriptor })
+			return Tbl
+		elseif Tbl[Index].descriptor ~= p1.descriptor then
+			Tbl = table.clone(Tbl)
+			Tbl[Index] = Object.assign({}, Tbl[Index], { descriptor = p1.descriptor })
 			
-			return p1
+			return Tbl
 		end
-	elseif p2.type == "SetOpened" then
-		if var1 == -1 or p1[var1].viewState ~= viewStateModule.Opening then
-		else
-			p1 = table.clone(p1)
-			p1[var1] = object.assign({}, p1[var1], { viewState = viewStateModule.Opened })
-			
-			return p1
-		end
-	elseif p2.type == "SetClosing" then
-		if var1 == -1 or p1[var1].viewState == viewStateModule.Closing then
-		else
-			p1 = table.clone(p1)
-			p1[var1] = object.assign({}, p1[var1], { viewState = viewStateModule.Closing })
-			
-			return p1
-		end
-	elseif p2.type == "SetClosed" and var1 ~= -1 and p1[var1].viewState == viewStateModule.Closing then
-		p1 = table.clone(p1)
-		table.remove(p1, var1)
+		return Tbl
 	end
 end
 
-return function(p3)
-	-- upvalues: reactModule (ref), RouteViewStatesReducer (ref), fFlagLuaAppDerivedStackAndSwitchState (ref), stackActions (ref), array (ref), object (ref)
-	local navigation = p3.navigation
-	local state = navigation.state
-	local descriptors = p3.descriptors
-	local var2, var3 = reactModule.useReducer(RouteViewStatesReducer, {})
+return function(p2) --[[ Line: 147 | Named "useStackScreens" ]]
+	-- upvalues: ReactModule (copy), RouteViewStatesReducer (copy), FFlagLuaAppDerivedStackAndSwitchState (copy), StackActions (copy), Array (copy), Object (copy)
+	local Navigation = p2.navigation
+	local State = Navigation.state
+	local Descriptors = p2.descriptors
+	local UseReducerResult, UseReducerResult2 = ReactModule.useReducer(RouteViewStatesReducer, {})
 	
-	if fFlagLuaAppDerivedStackAndSwitchState then
-		reactModule.useMemo(function()
-			-- upvalues: var3 (ref), state (ref), descriptors (ref)
-			var3({
+	if FFlagLuaAppDerivedStackAndSwitchState then
+		ReactModule.useMemo(function() --[[ Line: 158 ]]
+			-- upvalues: UseReducerResult2 (copy), State (copy), Descriptors (copy)
+			UseReducerResult2({
 				type = "SetCurrent",
-				navigationState = state,
-				descriptors = descriptors
+				navigationState = State,
+				descriptors = Descriptors
 			})
-		end, { state, descriptors })
+		end, { State, Descriptors })
 	else
-		reactModule.useLayoutEffect(function()
-			-- upvalues: var3 (ref), state (ref), descriptors (ref)
-			var3({
+		ReactModule.useLayoutEffect(function() --[[ Line: 166 ]]
+			-- upvalues: UseReducerResult2 (copy), State (copy), Descriptors (copy)
+			UseReducerResult2({
 				type = "SetCurrent",
-				navigationState = state,
-				descriptors = descriptors
+				navigationState = State,
+				descriptors = Descriptors
 			})
-		end, { state, descriptors })
+		end, { State, Descriptors })
 	end
-	local var4 = reactModule.useCallback(function(p4)
-		-- upvalues: navigation (ref), stackActions (copy)
-		if navigation.state.isTransitioning then
-			navigation.dispatch(stackActions.completeTransition({ key = navigation.state.key, toChildKey = p4 }))
+	local UseResult = ReactModule.useCallback(function(ToChildKey) --[[ Line: 175 ]]
+		-- upvalues: Navigation (copy), StackActions (upval)
+		if Navigation.state.isTransitioning then
+			Navigation.dispatch(StackActions.completeTransition({ key = Navigation.state.key, toChildKey = ToChildKey }))
 		end
-	end, { navigation })
-	local var5 = reactModule.useCallback(function(p4)
-		-- upvalues: var3 (ref), var4 (ref)
-		var3({ type = "SetOpened", key = p4.descriptor.key })
-		var4(p4.descriptor.key)
-	end, { var4 })
-	local var6 = reactModule.useCallback(function(p4)
-		-- upvalues: var3 (ref)
-		var3({ type = "SetClosed", key = p4.descriptor.key })
+	end, { Navigation })
+	local UseResult1 = ReactModule.useCallback(function(p3) --[[ Line: 184 ]]
+		-- upvalues: UseReducerResult2 (copy), UseResult (copy)
+		UseReducerResult2({ type = "SetOpened", key = p3.descriptor.key })
+		UseResult(p3.descriptor.key)
+	end, { UseResult })
+	local UseResult2 = ReactModule.useCallback(function(p3) --[[ Line: 192 ]]
+		-- upvalues: UseReducerResult2 (copy)
+		UseReducerResult2({ type = "SetClosed", key = p3.descriptor.key })
 	end, {})
 	
-	return reactModule.useMemo(function()
-		-- upvalues: array (copy), var2 (ref), object (copy), var5 (ref), var6 (ref)
-		return array.map(var2, function(p4)
-			-- upvalues: object (copy), var5 (copy), var6 (copy)
-			return object.assign({}, p4, {
-				setOpened = function()
-					-- upvalues: var5 (copy), p4 (ref)
-					var5(p4)
+	return (ReactModule.useMemo(function() --[[ Line: 199 ]]
+		-- upvalues: Array (upval), UseReducerResult (copy), Object (upval), UseResult1 (copy), UseResult2 (copy)
+		return Array.map(UseReducerResult, function(p3) --[[ Line: 200 ]]
+			-- upvalues: Object (upval), UseResult1 (upval), UseResult2 (upval)
+			return Object.assign({}, p3, {
+				setOpened = function() --[[ Line: 202 ]]
+					-- upvalues: UseResult1 (upval), p3 (copy)
+					UseResult1(p3)
 				end,
-				setClosed = function()
-					-- upvalues: var6 (copy), p4 (ref)
-					var6(p4)
+				setClosed = function() --[[ Line: 205 ]]
+					-- upvalues: UseResult2 (upval), p3 (copy)
+					UseResult2(p3)
 				end
 			})
 		end)
-	end, { var2, var5, var6 })
+	end, { UseReducerResult, UseResult1, UseResult2 }))
 end

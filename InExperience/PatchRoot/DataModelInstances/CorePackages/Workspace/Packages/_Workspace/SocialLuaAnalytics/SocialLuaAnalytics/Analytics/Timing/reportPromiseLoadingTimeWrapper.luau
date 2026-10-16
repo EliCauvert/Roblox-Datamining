@@ -1,48 +1,49 @@
-﻿local socialLuaAnalytics = script:FindFirstAncestor("SocialLuaAnalytics")
-local parent = socialLuaAnalytics.Parent
-local promiseModule = require(parent.Promise)
-local retrievalStatus = require(parent.Http).Enum.RetrievalStatus
-local eventTypes = require(socialLuaAnalytics.Analytics.Enums).EventTypes
-local _ = require(parent.LuauPolyfill)
-local timersModule = require(script.Parent.Timers)
+﻿local SocialLuaAnalytics = script:FindFirstAncestor("SocialLuaAnalytics")
+local Parent = SocialLuaAnalytics.Parent
+local PromiseModule = require(Parent.Promise)
+local RetrievalStatus = require(Parent.Http).Enum.RetrievalStatus
+local EventTypes = require(SocialLuaAnalytics.Analytics.Enums).EventTypes
+local _ = require(Parent.LuauPolyfill)
+local TimersModule = require(script.Parent.Timers)
 
-return function(p1, p2, p3)
-	-- upvalues: timersModule (ref), eventTypes (ref), retrievalStatus (ref), promiseModule (ref)
-	return function(...)
-		-- upvalues: timersModule (copy), p3 (ref), p2 (ref), eventTypes (copy), p1 (ref), retrievalStatus (copy), promiseModule (copy)
+return function(Callback, Callback1, p1) --[[ Line: 54 | Named "reportPromiseLoadingTimeWrapper" ]]
+	-- upvalues: TimersModule (copy), EventTypes (copy), RetrievalStatus (copy), PromiseModule (copy)
+	return function(...) --[[ Line: 59 | Named "reportPromiseLoadingTime" ]]
+		-- upvalues: TimersModule (upval), p1 (copy), Callback1 (copy), EventTypes (upval), Callback (copy), RetrievalStatus (upval), PromiseModule (upval)
 		local list = { ... }
-		local var1 = timersModule()
-		local var2 = var1.start()
+		local TimersModuleResult = TimersModule()
+		local StartResult = TimersModuleResult.start()
 		
-		local var3 = function(p4, p5)
-			-- upvalues: p3 (copy), var1 (ref), var2 (ref), p2 (copy), list (ref), eventTypes (copy)
-			if p3 and p3.fireEvent then
-				local var4 = p2(unpack(list)) or {}
-				p3.fireEvent(eventTypes.LoadingTime, {
-					fetch = var4.fetch,
-					nextPage = var4.nextPage,
-					status = p4,
-					result = p5
-				}, var1.stop(var2))
+		local function v10(Status, Result) --[[ Line: 65 ]]
+			-- upvalues: p1 (upval), TimersModuleResult (copy), StartResult (copy), Callback1 (upval), list (copy), EventTypes (upval)
+			if p1 and p1.fireEvent then
+				local StopResult = TimersModuleResult.stop(StartResult)
+				local CallbackResult = Callback1(unpack(list)) or {}
+				p1.fireEvent(EventTypes.LoadingTime, {
+					fetch = CallbackResult.fetch,
+					nextPage = CallbackResult.nextPage,
+					status = Status,
+					result = Result
+				}, StopResult)
 			end
 		end
 		
-		return p1(...):andThen(function(p4)
-			-- upvalues: var3 (ref), retrievalStatus (copy)
-			pcall(function()
-				-- upvalues: var3 (copy), retrievalStatus (copy), p4 (ref)
-				var3(retrievalStatus.Done, p4)
+		return Callback(...):andThen(function(Result) --[[ Line: 80 ]]
+			-- upvalues: v10 (copy), RetrievalStatus (upval)
+			pcall(function() --[[ Line: 81 ]]
+				-- upvalues: v10 (upval), RetrievalStatus (upval), Result (copy)
+				v10(RetrievalStatus.Done, Result)
 			end)
 			
-			return p4
-		end):catch(function(p4)
-			-- upvalues: var3 (ref), retrievalStatus (copy), promiseModule (copy)
-			pcall(function()
-				-- upvalues: var3 (copy), retrievalStatus (copy)
-				var3(retrievalStatus.Failed)
+			return Result
+		end):catch(function(Err) --[[ Line: 86 ]]
+			-- upvalues: v10 (copy), RetrievalStatus (upval), PromiseModule (upval)
+			pcall(function() --[[ Line: 87 ]]
+				-- upvalues: v10 (upval), RetrievalStatus (upval)
+				v10(RetrievalStatus.Failed)
 			end)
 			
-			return promiseModule.reject(p4)
+			return PromiseModule.reject(Err)
 		end)
 	end
 end

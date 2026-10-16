@@ -1,173 +1,165 @@
-﻿local parent = script:FindFirstAncestor("FlyoutSidePanel").Parent
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-local foundationModule = require(parent.Foundation)
-local builderIconsModule = require(parent.BuilderIcons)
-local getStandardSizeAvatarHeadShotRbxthumb = require(parent.UserLib).Utils.getStandardSizeAvatarHeadShotRbxthumb
-local badge = foundationModule.Badge
-local badgeVariant = foundationModule.Enums.BadgeVariant
-local icon = foundationModule.Icon
-local iconSize = foundationModule.Enums.IconSize
-local iconName = foundationModule.Enums.IconName
-local text = foundationModule.Text
-local useTokens = foundationModule.Hooks.useTokens
-local loadableImage = UIBloxModule.App.Loading.LoadableImage
-local flyoutAnalyticsModule = require(script.Parent.Parent.Analytics.FlyoutAnalytics)
-local useRoactService = require(parent.RobloxAppHooks).useRoactService
-local appEventIngestService = require(parent.RoactServiceTags).AppEventIngestService
-local useAppPolicy = require(parent.UniversalAppPolicy).useAppPolicy
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local chevronSmallDownButtonModule = require(script.Parent.ChevronSmallDownButton)
-local getTestId = require(parent.RoactUtils).getTestId
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagLuaAppAddTestIdsForArrow = sharedFlagsModule.FFlagLuaAppAddTestIdsForArrow
-local fFlagEnableBlackbirdCheck = sharedFlagsModule.FFlagEnableBlackbirdCheck
-local fFlagHidePremiumIconography = sharedFlagsModule.FFlagHidePremiumIconography
-local fFlagEnableFlyoutUncheckedBadge = sharedFlagsModule.FFlagEnableFlyoutUncheckedBadge
-local fFlagEnableDrawerFocusNav = sharedFlagsModule.FFlagEnableDrawerFocusNav
-local fFlagFlyoutSidePanelUseProfileFrameThumbnail = sharedFlagsModule.FFlagFlyoutSidePanelUseProfileFrameThumbnail
+﻿local Parent = script:FindFirstAncestor("FlyoutSidePanel").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local BuilderIconsModule = require(Parent.BuilderIcons)
+local GetStandardSizeAvatarHeadShotRbxthumbFunction = require(Parent.UserLib).Utils.getStandardSizeAvatarHeadShotRbxthumb
+local Badge = FoundationModule.Badge
+local BadgeVariant = FoundationModule.Enums.BadgeVariant
+local Icon = FoundationModule.Icon
+local IconSize = FoundationModule.Enums.IconSize
+local IconName = FoundationModule.Enums.IconName
+local Text = FoundationModule.Text
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local LoadableImage = require(Parent.UIBlox).App.Loading.LoadableImage
+local FlyoutAnalyticsModule = require(script.Parent.Parent.Analytics.FlyoutAnalytics)
+local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
+local AppEventIngestService = require(Parent.RoactServiceTags).AppEventIngestService
+local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local ChevronSmallDownButtonModule = require(script.Parent.ChevronSmallDownButton)
+local GetTestIdFunction = require(Parent.RoactUtils).getTestId
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagLuaAppAddTestIdsForArrow = SharedFlagsModule.FFlagLuaAppAddTestIdsForArrow
+local FFlagEnableBlackbirdCheck = SharedFlagsModule.FFlagEnableBlackbirdCheck
+local FFlagHidePremiumIconography = SharedFlagsModule.FFlagHidePremiumIconography
+local FFlagEnableFlyoutUncheckedBadge = SharedFlagsModule.FFlagEnableFlyoutUncheckedBadge
+local FFlagEnableDrawerFocusNav = SharedFlagsModule.FFlagEnableDrawerFocusNav
+local FFlagFlyoutSidePanelUseProfileFrameThumbnail = SharedFlagsModule.FFlagFlyoutSidePanelUseProfileFrameThumbnail
 
-return function(p1)
-	-- upvalues: useTokens (ref), fFlagEnableFlyoutUncheckedBadge (ref), useLocalization (ref), useAppPolicy (ref), useRoactService (ref), appEventIngestService (ref), reactModule (ref), flyoutAnalyticsModule (ref), getStandardSizeAvatarHeadShotRbxthumb (ref), fFlagFlyoutSidePanelUseProfileFrameThumbnail (ref), fFlagEnableBlackbirdCheck (ref), fFlagHidePremiumIconography (ref), foundationModule (ref), fFlagLuaAppAddTestIdsForArrow (ref), getTestId (ref), fFlagEnableDrawerFocusNav (ref), loadableImage (ref), text (ref), icon (ref), builderIconsModule (ref), iconSize (ref), iconName (ref), badge (ref), badgeVariant (ref), chevronSmallDownButtonModule (ref)
-	local var1
-	local var2 = useTokens()
-	local var3 = if fFlagEnableFlyoutUncheckedBadge then useLocalization({ Unchecked = "CommonUI.Features.Label.Unchecked" }) else nil
-	local var4 = if fFlagEnableFlyoutUncheckedBadge then useAppPolicy(function(p2)
+return function(p1) --[[ Line: 45 | Named "FlyoutProfileCard" ]]
+	-- upvalues: UseTokensFunction (copy), FFlagEnableFlyoutUncheckedBadge (copy), UseLocalizationFunction (copy), UseAppPolicyFunction (copy), UseRoactServiceFunction (copy), AppEventIngestService (copy), ReactModule (copy), FlyoutAnalyticsModule (copy), GetStandardSizeAvatarHeadShotRbxthumbFunction (copy), FFlagFlyoutSidePanelUseProfileFrameThumbnail (copy), FFlagEnableBlackbirdCheck (copy), FFlagHidePremiumIconography (copy), FoundationModule (copy), FFlagLuaAppAddTestIdsForArrow (copy), GetTestIdFunction (copy), FFlagEnableDrawerFocusNav (copy), LoadableImage (copy), Text (copy), Icon (copy), BuilderIconsModule (copy), IconSize (copy), IconName (copy), Badge (copy), BadgeVariant (copy), ChevronSmallDownButtonModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseLocalizationResult = if FFlagEnableFlyoutUncheckedBadge then UseLocalizationFunction({ Unchecked = "CommonUI.Features.Label.Unchecked" }) else nil
+	local UseAppPolicyResult = if FFlagEnableFlyoutUncheckedBadge then UseAppPolicyFunction(function(p2) --[[ Line: 55 ]]
 		return p2.getShowUncheckedBadge()
 	end) else nil
-	local var5 = useRoactService(appEventIngestService)
-	local localUserModel = p1.localUserModel
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref), localUserModel (ref), flyoutAnalyticsModule (copy), var5 (ref)
-		p1.closeDrawer()
-		
-		if p1.onProfileActivated then
-			p1.onProfileActivated()
-			flyoutAnalyticsModule.sendMoreLegacyAndFlyoutItemClickEvent(var5, "Profile", if localUserModel then localUserModel.id else "")
-		end
-	end, {
-		localUserModel,
-		p1.onProfileActivated,
-		p1.closeDrawer,
-		var5
-	})
-	local var7 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref)
+	local UseRoactServiceResult = UseRoactServiceFunction(AppEventIngestService)
+	local LocalUserModel = p1.localUserModel
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 70 ]]
+		-- upvalues: p1 (copy)
 		p1.closeDrawer()
 		
 		if p1.onSwitchAccountActivated then
 			p1.onSwitchAccountActivated()
 		end
 	end, { p1.onSwitchAccountActivated, p1.closeDrawer })
-	local var8 = reactModule.useMemo(function()
-		-- upvalues: localUserModel (ref), getStandardSizeAvatarHeadShotRbxthumb (copy), fFlagFlyoutSidePanelUseProfileFrameThumbnail (copy)
-		return if localUserModel and localUserModel.id then getStandardSizeAvatarHeadShotRbxthumb(localUserModel.id, fFlagFlyoutSidePanelUseProfileFrameThumbnail) else nil
-	end, { localUserModel })
-	local var9 = reactModule.useMemo(function()
-		-- upvalues: localUserModel (ref)
-		return localUserModel and localUserModel.membership == Enum.MembershipType.Premium
-	end, { localUserModel })
-	local var10 = if localUserModel then localUserModel.name else ""
-	local var11 = if localUserModel then localUserModel.displayName else ""
+	local UseMemoResult = ReactModule.useMemo(function(): boolean --[[ Line: 87 ]]
+		-- upvalues: LocalUserModel (copy)
+		return LocalUserModel and LocalUserModel.membership == Enum.MembershipType.Premium
+	end, { LocalUserModel })
+	local IsIsRobloxSubscriber: boolean = if FFlagEnableBlackbirdCheck then p1.isRobloxSubscriber == true else false
+	local NoIsIsRobloxSubscriber: boolean = not FFlagHidePremiumIconography and (UseMemoResult and not IsIsRobloxSubscriber)
 	
-	if fFlagEnableBlackbirdCheck then
-		var1 = p1.isRobloxSubscriber == true
-		var1 = nil
-	else
-		var1 = false
-	end
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = {
 			["auto-y size-full-0"] = true,
-			["row align-y-center gap-small"] = fFlagEnableFlyoutUncheckedBadge
+			["row align-y-center gap-small"] = FFlagEnableFlyoutUncheckedBadge
 		},
 		LayoutOrder = p1.layoutOrder
 	}, {
-		ProfileCardButton = reactModule.createElement("TextButton", {
+		ProfileCardButton = ReactModule.createElement("TextButton", {
 			AutoButtonColor = false,
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			Text = "",
-			AutomaticSize = if fFlagEnableFlyoutUncheckedBadge then Enum.AutomaticSize.Y else Enum.AutomaticSize.XY,
-			LayoutOrder = if fFlagEnableFlyoutUncheckedBadge then 1 else nil,
-			[reactModule.Event.Activated] = var6,
-			[reactModule.Tag] = if fFlagLuaAppAddTestIdsForArrow then getTestId("core-ui-flyout-profile-card") else nil
+			AutomaticSize = if FFlagEnableFlyoutUncheckedBadge then Enum.AutomaticSize.Y else Enum.AutomaticSize.XY,
+			LayoutOrder = if FFlagEnableFlyoutUncheckedBadge then 1 else nil,
+			[ReactModule.Event.Activated] = ReactModule.useCallback(function() --[[ Line: 62 ]]
+				-- upvalues: p1 (copy), LocalUserModel (copy), FlyoutAnalyticsModule (upval), UseRoactServiceResult (copy)
+				p1.closeDrawer()
+				
+				if p1.onProfileActivated then
+					p1.onProfileActivated()
+					FlyoutAnalyticsModule.sendMoreLegacyAndFlyoutItemClickEvent(UseRoactServiceResult, "Profile", LocalUserModel and LocalUserModel.id or "")
+				end
+			end, {
+				LocalUserModel,
+				p1.onProfileActivated,
+				p1.closeDrawer,
+				UseRoactServiceResult
+			}),
+			[ReactModule.Tag] = if FFlagLuaAppAddTestIdsForArrow then GetTestIdFunction("core-ui-flyout-profile-card") else nil
 		}, {
-			UIPadding = if fFlagEnableDrawerFocusNav then reactModule.createElement("UIPadding", { PaddingRight = UDim.new(0, var2.Padding.Small) }) else nil,
-			UIFlexItem = if fFlagEnableFlyoutUncheckedBadge then reactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Fill }) else nil,
-			UIListLayout = reactModule.createElement("UIListLayout", {
+			UIPadding = if FFlagEnableDrawerFocusNav then ReactModule.createElement("UIPadding", {
+				PaddingRight = UDim.new(0, UseTokensResult.Padding.Small)
+			}) else nil,
+			UIFlexItem = if FFlagEnableFlyoutUncheckedBadge then ReactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Fill }) else nil,
+			UIListLayout = ReactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Horizontal,
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
 				VerticalAlignment = Enum.VerticalAlignment.Center,
 				SortOrder = Enum.SortOrder.LayoutOrder,
-				Padding = UDim.new(0, var2.Gap.Medium)
+				Padding = UDim.new(0, UseTokensResult.Gap.Medium)
 			}),
-			UserAvatar = reactModule.createElement(loadableImage, {
+			UserAvatar = ReactModule.createElement(LoadableImage, {
 				useShimmerAnimationWhileLoading = true,
 				shouldHandleReloads = true,
 				LayoutOrder = 1,
-				Size = UDim2.new(0, var2.Size.Size_1600, 0, var2.Size.Size_1600),
-				BackgroundColor3 = var2.Color.Common.Shimmer.Color3,
-				BackgroundTransparency = var2.Color.Common.Shimmer.Transparency,
-				Image = var8,
+				Size = UDim2.new(0, UseTokensResult.Size.Size_1600, 0, UseTokensResult.Size.Size_1600),
+				BackgroundColor3 = UseTokensResult.Color.Common.Shimmer.Color3,
+				BackgroundTransparency = UseTokensResult.Color.Common.Shimmer.Transparency,
+				Image = ReactModule.useMemo(function() --[[ Line: 77 ]]
+					-- upvalues: LocalUserModel (copy), GetStandardSizeAvatarHeadShotRbxthumbFunction (upval), FFlagFlyoutSidePanelUseProfileFrameThumbnail (upval)
+					return if LocalUserModel and LocalUserModel.id then GetStandardSizeAvatarHeadShotRbxthumbFunction(LocalUserModel.id, FFlagFlyoutSidePanelUseProfileFrameThumbnail) else nil
+				end, { LocalUserModel }),
 				cornerRadius = UDim.new(0.5, 0)
 			}),
-			UserInfoContainer = reactModule.createElement(foundationModule.View, {
+			UserInfoContainer = ReactModule.createElement(FoundationModule.View, {
 				LayoutOrder = 2,
 				tag = {
 					col = true,
-					["fill auto-y"] = fFlagEnableFlyoutUncheckedBadge,
-					["position-center-left anchor-center-left auto-xy"] = not fFlagEnableFlyoutUncheckedBadge
+					["fill auto-y"] = FFlagEnableFlyoutUncheckedBadge,
+					["position-center-left anchor-center-left auto-xy"] = not FFlagEnableFlyoutUncheckedBadge
 				}
 			}, {
-				UsernameContainer = reactModule.createElement(foundationModule.View, {
+				UsernameContainer = ReactModule.createElement(FoundationModule.View, {
 					LayoutOrder = 1,
 					tag = {
 						["row gap-xsmall"] = true,
-						["size-full-0 auto-y"] = fFlagEnableFlyoutUncheckedBadge,
-						["position-center-left anchor-center-left auto-xy"] = not fFlagEnableFlyoutUncheckedBadge
+						["size-full-0 auto-y"] = FFlagEnableFlyoutUncheckedBadge,
+						["position-center-left anchor-center-left auto-xy"] = not FFlagEnableFlyoutUncheckedBadge
 					}
 				}, {
-					DisplayNameText = reactModule.createElement(text, {
+					DisplayNameText = ReactModule.createElement(Text, {
 						LayoutOrder = 1,
 						tag = {
 							["auto-xy text-title-medium content-emphasis text-align-x-left"] = true,
-							["shrink text-truncate-split"] = fFlagEnableFlyoutUncheckedBadge
+							["shrink text-truncate-split"] = FFlagEnableFlyoutUncheckedBadge
 						},
-						Text = var11
+						Text = LocalUserModel and LocalUserModel.displayName or ""
 					}),
-					PremiumIcon = if if fFlagHidePremiumIconography then false else var9 and not var1 then reactModule.createElement(icon, {
+					PremiumIcon = if NoIsIsRobloxSubscriber then ReactModule.createElement(Icon, {
 						LayoutOrder = 2,
-						style = var2.Color.Content.Emphasis,
-						name = builderIconsModule.Icon.Premium,
-						size = iconSize.Small
+						style = UseTokensResult.Color.Content.Emphasis,
+						name = BuilderIconsModule.Icon.Premium,
+						size = IconSize.Small
 					}) else nil,
-					SubscriberBadge = if var1 then reactModule.createElement(icon, {
+					SubscriberBadge = if IsIsRobloxSubscriber then ReactModule.createElement(Icon, {
 						LayoutOrder = 3,
-						style = var2.Color.Content.Emphasis,
-						name = iconName.RobloxPlus,
-						size = iconSize.Small
+						style = UseTokensResult.Color.Content.Emphasis,
+						name = IconName.RobloxPlus,
+						size = IconSize.Small
 					}) else nil
 				}),
-				UserName = reactModule.createElement(text, {
+				UserName = ReactModule.createElement(Text, {
 					LayoutOrder = 2,
 					tag = {
 						["text-body-medium content-default text-align-x-left"] = true,
-						["size-full-0 auto-y text-truncate-split"] = fFlagEnableFlyoutUncheckedBadge,
-						["auto-xy"] = not fFlagEnableFlyoutUncheckedBadge
+						["size-full-0 auto-y text-truncate-split"] = FFlagEnableFlyoutUncheckedBadge,
+						["auto-xy"] = not FFlagEnableFlyoutUncheckedBadge
 					},
-					Text = "@" .. var15
+					Text = "@" .. (LocalUserModel and LocalUserModel.name or "")
 				})
 			})
 		}),
-		UncheckedBadge = if fFlagEnableFlyoutUncheckedBadge and var4 then reactModule.createElement(badge, {
+		UncheckedBadge = if FFlagEnableFlyoutUncheckedBadge and UseAppPolicyResult then ReactModule.createElement(Badge, {
 			LayoutOrder = 2,
-			text = var3.Unchecked,
-			variant = badgeVariant.Neutral
+			text = UseLocalizationResult.Unchecked,
+			variant = BadgeVariant.Neutral
 		}) else nil,
-		SwitchAccountButton = if p1.onSwitchAccountActivated then reactModule.createElement(chevronSmallDownButtonModule, {
-			onActivated = var7,
-			layoutOrder = if fFlagEnableFlyoutUncheckedBadge then 3 else nil
+		SwitchAccountButton = if p1.onSwitchAccountActivated then ReactModule.createElement(ChevronSmallDownButtonModule, {
+			onActivated = UseResult,
+			layoutOrder = if FFlagEnableFlyoutUncheckedBadge then 3 else nil
 		}) else nil
 	})
 end

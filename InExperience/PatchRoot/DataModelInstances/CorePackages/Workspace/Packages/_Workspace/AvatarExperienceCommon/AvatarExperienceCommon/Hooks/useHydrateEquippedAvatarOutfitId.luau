@@ -1,12 +1,12 @@
-﻿local avatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
-local reactModule = require(avatarExperienceCommon.Parent.React)
-local getEquippedAvatarOutfitIdStoreModule = require(avatarExperienceCommon.Stores.EquippedAvatarOutfitIdStore.getEquippedAvatarOutfitIdStore)
+﻿local AvatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
+local ReactModule = require(AvatarExperienceCommon.Parent.React)
+local GetEquippedAvatarOutfitIdStoreModule = require(AvatarExperienceCommon.Stores.EquippedAvatarOutfitIdStore.getEquippedAvatarOutfitIdStore)
 
-return function()
-	-- upvalues: getEquippedAvatarOutfitIdStoreModule (ref), reactModule (ref)
-	local var1 = getEquippedAvatarOutfitIdStoreModule(false)
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref)
-		var1.fetchCurrentlyWearingSavedOutfitId()
-	end, { var1 })
+return function() --[[ Line: 8 | Named "useHydrateEquippedAvatarOutfitId" ]]
+	-- upvalues: GetEquippedAvatarOutfitIdStoreModule (copy), ReactModule (copy)
+	local EquippedAvatarOutfitIdStoreModule = GetEquippedAvatarOutfitIdStoreModule(false)
+	ReactModule.useEffect(function() --[[ Line: 11 ]]
+		-- upvalues: EquippedAvatarOutfitIdStoreModule (copy)
+		EquippedAvatarOutfitIdStoreModule.fetchCurrentlyWearingSavedOutfitId()
+	end, { EquippedAvatarOutfitIdStoreModule })
 end

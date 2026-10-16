@@ -1,60 +1,61 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local contextActionService = game:GetService("ContextActionService")
-local guiService = game:GetService("GuiService")
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local tModule = require(corePackagesService.Packages.t)
-local closeOpenPromptModule = require(script.Parent.Parent.Parent.Thunks.CloseOpenPrompt)
-local contextActionsBinder = roactModule.PureComponent:extend("ContextActionsBinder")
-contextActionsBinder.validateProps = tModule.strictInterface({
-	promptOpen = tModule.boolean,
-	closeOpenPrompt = tModule.callback
+﻿local CorePackages = game:GetService("CorePackages")
+local ContextActionService = game:GetService("ContextActionService")
+local GuiService = game:GetService("GuiService")
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local TModule = require(CorePackages.Packages.t)
+local CloseOpenPromptModule = require(script.Parent.Parent.Parent.Thunks.CloseOpenPrompt)
+local ContextActionsBinder = require(CorePackages.Packages.Roact).PureComponent:extend("ContextActionsBinder")
+ContextActionsBinder.validateProps = TModule.strictInterface({
+	promptOpen = TModule.boolean,
+	closeOpenPrompt = TModule.callback
 })
 
-function contextActionsBinder.init(p1)
+function ContextActionsBinder.init(p1) --[[ Line: 27 ]]
 	p1.actionsBound = false
 end
 
-function contextActionsBinder.bindActions(p1)
-	-- upvalues: contextActionService (ref), guiService (ref)
-	if p1.actionsBound then
-		return
-	end
-	p1.actionsBound = true
-	contextActionService:BindCoreAction("CloseAvatarEditorPrompt", function(_, p2, _)
-		-- upvalues: guiService (copy), p1 (ref)
-		if guiService.MenuIsOpen then
-			return Enum.ContextActionResult.Pass
-		elseif p2 == Enum.UserInputState.Begin then
-			p1.props.closeOpenPrompt()
-			
-			return Enum.ContextActionResult.Sink
-		end
-		return Enum.ContextActionResult.Pass
-	end, false, Enum.KeyCode.Escape)
-end
-
-function contextActionsBinder.unbindActions(p1)
-	-- upvalues: contextActionService (ref)
-	if p1.actionsBound then
-		p1.actionsBound = false
-		contextActionService:UnbindCoreAction("CloseAvatarEditorPrompt")
+function ContextActionsBinder.bindActions(p1) --[[ Line: 31 ]]
+	-- upvalues: ContextActionService (copy), GuiService (copy)
+	if not p1.actionsBound then
+		p1.actionsBound = true
+		ContextActionService:BindCoreAction("CloseAvatarEditorPrompt", function(_, UserInputState, _) --[[ Line: 38 ]]
+			-- upvalues: GuiService (upval), p1 (copy)
+			if GuiService.MenuIsOpen then
+				return Enum.ContextActionResult.Pass
+			elseif UserInputState == Enum.UserInputState.Begin then
+				p1.props.closeOpenPrompt()
+				
+				return Enum.ContextActionResult.Sink
+			else
+				return Enum.ContextActionResult.Pass
+			end
+		end, false, Enum.KeyCode.Escape)
 		
 		return
 	end
 end
 
-function contextActionsBinder.didMount(p1)
+function ContextActionsBinder.unbindActions(p1) --[[ Line: 51 ]]
+	-- upvalues: ContextActionService (copy)
+	if p1.actionsBound then
+		p1.actionsBound = false
+		ContextActionService:UnbindCoreAction("CloseAvatarEditorPrompt")
+		
+		return
+	end
+end
+
+function ContextActionsBinder.didMount(p1) --[[ Line: 61 ]]
 	if p1.props.promptOpen then
 		p1:bindActions()
 	end
 end
 
-function contextActionsBinder.render(_)
+function ContextActionsBinder:render() --[[ Line: 67 ]]
 	return nil
 end
 
-function contextActionsBinder.didUpdate(p1, p2, _)
+function ContextActionsBinder.didUpdate(p1, p2, _) --[[ Line: 71 ]]
 	if p1.props.promptOpen ~= p2.promptOpen then
 		if p1.props.promptOpen then
 			p1:bindActions()
@@ -65,20 +66,20 @@ function contextActionsBinder.didUpdate(p1, p2, _)
 	end
 end
 
-function contextActionsBinder.willUnmount(p1)
+function ContextActionsBinder.willUnmount(p1) --[[ Line: 81 ]]
 	if p1.actionsBound then
 		p1:unbindActions()
 	end
 end
 
-return roactRoduxModule.connect(function(p1)
+return RoactRoduxModule.connect(function(p1) --[[ Line: 87 | Named "mapStateToProps" ]]
 	return { promptOpen = p1.promptInfo.promptType ~= nil }
-end, function(p1)
-	-- upvalues: closeOpenPromptModule (ref)
+end, function(Callback) --[[ Line: 93 | Named "mapDispatchToProps" ]]
+	-- upvalues: CloseOpenPromptModule (copy)
 	return {
-		closeOpenPrompt = function()
-			-- upvalues: p1 (ref), closeOpenPromptModule (copy)
-			return p1(closeOpenPromptModule)
+		closeOpenPrompt = function() --[[ Line: 95 ]]
+			-- upvalues: Callback (copy), CloseOpenPromptModule (upval)
+			return Callback(CloseOpenPromptModule)
 		end
 	}
-end)(contextActionsBinder)
+end)(ContextActionsBinder)

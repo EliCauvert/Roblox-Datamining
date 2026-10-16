@@ -1,222 +1,227 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local _ = require(parent.DataHydration.CreatorAgentChat)
-local _ = require(buildExperience.Components.Analytics.StatsCard.StatsCard)
-local statsCardContainerModule = require(buildExperience.Components.Analytics.StatsCardContainer)
-local pastCampaignsListModule = require(script.Parent.PastCampaignsList)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local _ = require(Parent.DataHydration.CreatorAgentChat)
+local _ = require(BuildExperience.Components.Analytics.StatsCard.StatsCard)
+local StatsCardContainerModule = require(BuildExperience.Components.Analytics.StatsCardContainer)
+local PastCampaignsListModule = require(script.Parent.PastCampaignsList)
 local _ = require(script.Parent.PastCampaignRow)
-local createAdCampaignSheetContainerModule = require(script.Parent.CreateAdCampaignSheet.CreateAdCampaignSheetContainer)
-local icon = foundationModule.Icon
-local text = foundationModule.Text
-local view = foundationModule.View
-local skeleton = foundationModule.Skeleton
-local iconName = foundationModule.Enums.IconName
-local radius = foundationModule.Enums.Radius
-local useTokens = foundationModule.Hooks.useTokens
+local CreateAdCampaignSheetContainerModule = require(script.Parent.CreateAdCampaignSheet.CreateAdCampaignSheetContainer)
+local FFlagBuildAdsManagerUniverseUrlModule = require(BuildExperience.Flags.FFlagBuildAdsManagerUniverseUrl)
+local Icon = FoundationModule.Icon
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local Skeleton = FoundationModule.Skeleton
+local IconName = FoundationModule.Enums.IconName
+local Radius = FoundationModule.Enums.Radius
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-local function renderActiveCampaign(p1, p2, p3)
-	-- upvalues: reactModule (ref), view (ref), text (ref), statsCardContainerModule (ref)
-	local var1 = `{p3}-active-{p2}`
+local function renderActiveCampaign(p1, LayoutOrder, TestId) --[[ Line: 88 ]]
+	-- upvalues: ReactModule (copy), View (copy), Text (copy), StatsCardContainerModule (copy)
+	local ActiveName: string = `{TestId}-active-{LayoutOrder}`
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col gap-medium size-full-0 auto-y",
-		LayoutOrder = p2,
-		testId = var1
+		LayoutOrder = LayoutOrder,
+		testId = ActiveName
 	}, {
-		DateRange = reactModule.createElement(text, {
+		DateRange = ReactModule.createElement(Text, {
 			LayoutOrder = 1,
 			tag = "size-full-0 auto-y text-title-medium text-align-x-left content-emphasis",
 			Text = p1.dateText,
-			testId = `{var1}-date-range`
+			testId = `{ActiveName}-date-range`
 		}),
-		Cards = reactModule.createElement(statsCardContainerModule, {
+		Cards = ReactModule.createElement(StatsCardContainerModule, {
 			layoutOrder = 2,
 			cards = p1.summaryCards,
-			testId = `{var1}-cards`
+			testId = `{ActiveName}-cards`
 		})
 	})
 end
 
-local function renderSkeletonTileRow(p1, p2)
-	-- upvalues: reactModule (ref), view (ref), skeleton (ref), radius (ref)
-	local t = {}
+local function renderSkeletonTileRow(LayoutOrder, YOffset) --[[ Line: 110 ]]
+	-- upvalues: ReactModule (copy), View (copy), Skeleton (copy), Radius (copy)
+	local Elements = {}
 	
 	for i = 1, 2 do
-		t[`Cell{i}`] = reactModule.createElement(view, { tag = "fill auto-y", LayoutOrder = i }, {
-			Card = reactModule.createElement(skeleton, { Size = UDim2.new(1, 0, 0, p2), radius = radius.Large })
+		Elements[`Cell{i}`] = ReactModule.createElement(View, { tag = "fill auto-y", LayoutOrder = i }, {
+			Card = ReactModule.createElement(Skeleton, {
+				Size = UDim2.new(1, 0, 0, YOffset),
+				radius = Radius.Large
+			})
 		})
 	end
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "row gap-medium size-full-0 auto-y",
-		LayoutOrder = p1
-	}, t)
+		LayoutOrder = LayoutOrder
+	}, Elements)
 end
 
-local function LoadingSkeleton(p3)
-	-- upvalues: useTokens (ref), reactModule (ref), view (ref), skeleton (ref), radius (ref), renderSkeletonTileRow (ref)
-	local var1 = useTokens()
-	local size400 = var1.Size.Size_400
-	local size1600 = var1.Size.Size_1600
-	local size2000 = var1.Size.Size_2000
+local function LoadingSkeleton(p1) --[[ Line: 132 ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Skeleton (copy), Radius (copy), renderSkeletonTileRow (copy)
+	local UseTokensResult = UseTokensFunction()
+	local Size400 = UseTokensResult.Size.Size_400
+	local Size1600 = UseTokensResult.Size.Size_1600
+	local Size2000 = UseTokensResult.Size.Size_2000
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col gap-xlarge size-full-0 auto-y padding-top-xlarge",
-		LayoutOrder = p3.layoutOrder,
-		testId = p3.testId
+		LayoutOrder = p1.layoutOrder,
+		testId = p1.testId
 	}, {
-		ActiveBlock = reactModule.createElement(view, {
+		ActiveBlock = ReactModule.createElement(View, {
 			LayoutOrder = 1,
 			tag = "col gap-medium size-full-0 auto-y"
 		}, {
-			DateRange = reactModule.createElement(skeleton, {
+			DateRange = ReactModule.createElement(Skeleton, {
 				LayoutOrder = 1,
-				Size = UDim2.new(0.4, 0, 0, size400),
-				radius = radius.Small
+				Size = UDim2.new(0.4, 0, 0, Size400),
+				radius = Radius.Small
 			}),
-			Grid = reactModule.createElement(view, {
+			Grid = ReactModule.createElement(View, {
 				LayoutOrder = 2,
 				tag = "col gap-medium size-full-0 auto-y"
 			}, {
-				Row1 = renderSkeletonTileRow(1, size1600),
-				Row2 = renderSkeletonTileRow(2, size1600)
+				Row1 = renderSkeletonTileRow(1, Size1600),
+				Row2 = renderSkeletonTileRow(2, Size1600)
 			})
 		}),
-		PastSection = reactModule.createElement(view, {
+		PastSection = ReactModule.createElement(View, {
 			LayoutOrder = 2,
 			tag = "col gap-small size-full-0 auto-y"
 		}, {
-			Heading = reactModule.createElement(skeleton, {
+			Heading = ReactModule.createElement(Skeleton, {
 				LayoutOrder = 1,
-				Size = UDim2.new(0.35, 0, 0, size400),
-				radius = radius.Small
+				Size = UDim2.new(0.35, 0, 0, Size400),
+				radius = Radius.Small
 			}),
-			Rows = reactModule.createElement(view, {
+			Rows = ReactModule.createElement(View, {
 				LayoutOrder = 2,
 				tag = "col gap-small size-full-0 auto-y"
 			}, {
-				Row1 = reactModule.createElement(skeleton, {
+				Row1 = ReactModule.createElement(Skeleton, {
 					LayoutOrder = 1,
-					Size = UDim2.new(1, 0, 0, size2000),
-					radius = radius.Large
+					Size = UDim2.new(1, 0, 0, Size2000),
+					radius = Radius.Large
 				}),
-				Row2 = reactModule.createElement(skeleton, {
+				Row2 = ReactModule.createElement(Skeleton, {
 					LayoutOrder = 2,
-					Size = UDim2.new(1, 0, 0, size2000),
-					radius = radius.Large
+					Size = UDim2.new(1, 0, 0, Size2000),
+					radius = Radius.Large
 				})
 			})
 		})
 	})
 end
 
-local function EmptyState(p3)
-	-- upvalues: useTokens (ref), reactModule (ref), view (ref), icon (ref), iconName (ref), text (ref)
-	local var1 = useTokens()
+local function EmptyState(p1) --[[ Line: 191 ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Icon (copy), IconName (copy), Text (copy)
+	local UseTokensResult = UseTokensFunction()
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		LayoutOrder = 1,
 		tag = "col align-x-center gap-small size-full-0 auto-y",
-		testId = `{p3.testId}-empty`
+		testId = `{p1.testId}-empty`
 	}, {
-		Illustration = reactModule.createElement(icon, {
+		Illustration = ReactModule.createElement(Icon, {
 			LayoutOrder = 1,
-			name = iconName.ChartScatterPlot,
-			size = var1.Size.Size_1400,
-			style = var1.Color.Content.Emphasis,
-			testId = `{p3.testId}-empty-illustration`
+			name = IconName.ChartScatterPlot,
+			size = UseTokensResult.Size.Size_1400,
+			style = UseTokensResult.Color.Content.Emphasis,
+			testId = `{p1.testId}-empty-illustration`
 		}),
-		Headings = reactModule.createElement(view, {
+		Headings = ReactModule.createElement(View, {
 			LayoutOrder = 2,
 			tag = "col align-x-center gap-xxsmall size-full-0 auto-y"
 		}, {
-			Title = reactModule.createElement(text, {
+			Title = ReactModule.createElement(Text, {
 				LayoutOrder = 1,
 				tag = "size-full-0 auto-y text-heading-small text-wrap text-align-x-center content-emphasis",
-				Text = p3.title
+				Text = p1.title
 			}),
-			Subtitle = reactModule.createElement(text, {
+			Subtitle = ReactModule.createElement(Text, {
 				LayoutOrder = 2,
 				tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-center content-default",
-				Text = p3.subtitle
+				Text = p1.subtitle
 			})
 		})
 	})
 end
 
-return function(p3)
-	-- upvalues: reactModule (ref), createAdCampaignSheetContainerModule (ref), text (ref), LoadingSkeleton (ref), EmptyState (ref), renderActiveCampaign (ref), view (ref), pastCampaignsListModule (ref)
-	local testId = p3.testId or "AdsStatsView"
-	local t = {
-		PromotionSheet = reactModule.createElement(createAdCampaignSheetContainerModule, {
+return function(p1) --[[ Line: 225 | Named "AdsStatsView" ]]
+	-- upvalues: ReactModule (copy), CreateAdCampaignSheetContainerModule (copy), FFlagBuildAdsManagerUniverseUrlModule (copy), Text (copy), LoadingSkeleton (copy), EmptyState (copy), renderActiveCampaign (copy), View (copy), PastCampaignsListModule (copy)
+	local TestId = p1.testId or "AdsStatsView"
+	local config = {
+		PromotionSheet = ReactModule.createElement(CreateAdCampaignSheetContainerModule, {
 			waitForCreateResult = true,
 			useLocalRunDates = true,
-			isOpen = p3.isPromotionSheetOpen,
-			onClose = p3.onClosePromotionSheet,
-			onCreate = p3.onCreateCampaign,
-			isCreatePending = p3.isPromotionCreatePending,
-			hasCreateError = p3.hasPromotionCreateError,
-			createErrorKind = p3.promotionCreateErrorKind,
-			campaignDurationDays = p3.adCampaignDurationDays,
-			estimatedPriceRobux = p3.adCampaignEstimatedPriceRobux,
-			campaignOffers = p3.adCampaignOffers,
-			runStartTimeMs = p3.adCampaignRunStartTimeMs,
-			runEndTimeMs = p3.adCampaignRunEndTimeMs
+			universeId = if FFlagBuildAdsManagerUniverseUrlModule then p1.universeId else nil,
+			isOpen = p1.isPromotionSheetOpen,
+			onClose = p1.onClosePromotionSheet,
+			onCreate = p1.onCreateCampaign,
+			isCreatePending = p1.isPromotionCreatePending,
+			hasCreateError = p1.hasPromotionCreateError,
+			createErrorKind = p1.promotionCreateErrorKind,
+			campaignDurationDays = p1.adCampaignDurationDays,
+			estimatedPriceRobux = p1.adCampaignEstimatedPriceRobux,
+			campaignOffers = p1.adCampaignOffers,
+			runStartTimeMs = p1.adCampaignRunStartTimeMs,
+			runEndTimeMs = p1.adCampaignRunEndTimeMs
 		})
 	}
 	
-	if p3.isFailed then
-		t.Error = reactModule.createElement(text, {
+	if p1.isFailed then
+		config.Error = ReactModule.createElement(Text, {
 			LayoutOrder = 1,
 			tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-default",
-			Text = p3.errorText,
-			testId = `{testId}-error`
+			Text = p1.errorText,
+			testId = `{TestId}-error`
 		})
-	elseif p3.isLoading then
-		t.Loading = reactModule.createElement(LoadingSkeleton, { layoutOrder = 1, testId = `{testId}-loading` })
-	elseif p3.hasCampaigns then
-		if #p3.activeCampaigns > 0 then
-			local t_1 = {}
+	elseif p1.isLoading then
+		config.Loading = ReactModule.createElement(LoadingSkeleton, { layoutOrder = 1, testId = `{TestId}-loading` })
+	elseif p1.hasCampaigns then
+		if #p1.activeCampaigns > 0 then
+			local t = {}
 			
-			for i, v in p3.activeCampaigns do
-				t_1[v.id] = renderActiveCampaign(v, i, testId)
+			for i, activeCampaign in p1.activeCampaigns do
+				t[activeCampaign.id] = renderActiveCampaign(activeCampaign, i, TestId)
 			end
-			t.ActiveCampaigns = reactModule.createElement(view, {
+			config.ActiveCampaigns = ReactModule.createElement(View, {
 				LayoutOrder = 1,
 				tag = "col gap-large size-full-0 auto-y",
-				testId = `{testId}-active-campaigns`
-			}, t_1)
+				testId = `{TestId}-active-campaigns`
+			}, t)
 		end
-		if #p3.pastCampaigns > 0 then
-			t.PastCampaigns = reactModule.createElement(view, {
+		if #p1.pastCampaigns > 0 then
+			config.PastCampaigns = ReactModule.createElement(View, {
 				LayoutOrder = 2,
 				tag = "col gap-small size-full-0 auto-y",
-				testId = `{testId}-past-campaigns`
+				testId = `{TestId}-past-campaigns`
 			}, {
-				Heading = reactModule.createElement(text, {
+				Heading = ReactModule.createElement(Text, {
 					LayoutOrder = 1,
 					tag = "size-full-0 auto-y text-title-medium text-align-x-left content-emphasis",
-					Text = p3.pastCampaignsTitle
+					Text = p1.pastCampaignsTitle
 				}),
-				List = reactModule.createElement(pastCampaignsListModule, { layoutOrder = 2, rows = p3.pastCampaigns })
+				List = ReactModule.createElement(PastCampaignsListModule, { layoutOrder = 2, rows = p1.pastCampaigns })
 			})
 		end
 	else
-		t.EmptyState = reactModule.createElement(EmptyState, {
-			title = p3.emptyTitle,
-			subtitle = p3.emptySubtitle,
-			testId = testId
+		config.EmptyState = ReactModule.createElement(EmptyState, {
+			title = p1.emptyTitle,
+			subtitle = p1.emptySubtitle,
+			testId = TestId
 		})
 	end
-	local var1 = not p3.isFailed and (not p3.isLoading and not p3.hasCampaigns)
+	local NoHasCampaigns: boolean = not p1.isFailed and (not p1.isLoading and not p1.hasCampaigns)
 	
-	return reactModule.createElement(view, {
-		LayoutOrder = p3.layoutOrder,
+	return ReactModule.createElement(View, {
+		LayoutOrder = p1.layoutOrder,
 		tag = {
-			["col align-y-center size-full"] = var1,
-			["col gap-xlarge size-full-0 auto-y padding-top-xlarge"] = not var1
+			["col align-y-center size-full"] = NoHasCampaigns,
+			["col gap-xlarge size-full-0 auto-y padding-top-xlarge"] = not NoHasCampaigns
 		},
-		testId = testId
-	}, t)
+		testId = TestId
+	}, config)
 end

@@ -1,39 +1,40 @@
 ﻿local IXPServiceWrapper = require(script.Parent.Parent.Parent.Parent.IXPServiceWrapper).IXPServiceWrapper
-local newUpsellModalExperimentForDesktopV2 = game:DefineFastFlag("NewUpsellModalExperimentForDesktopV2", false)
-local desktopUpsellIXPLayer = game:DefineFastString("DesktopUpsellIXPLayer", "Payments.Optimization.InExperienceUpsell.Desktop.UI")
-local t = { Control = 0, OpenRobuxStore = 1, OpenPaymentsPage = 2 }
+local NewUpsellModalExperimentForDesktopV2 = game:DefineFastFlag("NewUpsellModalExperimentForDesktopV2", false)
+local DesktopUpsellIXPLayer = game:DefineFastString("DesktopUpsellIXPLayer", "Payments.Optimization.InExperienceUpsell.Desktop.UI")
+local Variants = { Control = 0, OpenRobuxStore = 1, OpenPaymentsPage = 2 }
 
 return {
-	variants = t,
-	getVariant = function()
-		-- upvalues: newUpsellModalExperimentForDesktopV2 (ref), t (ref), IXPServiceWrapper (ref), desktopUpsellIXPLayer (ref)
-		if not newUpsellModalExperimentForDesktopV2 then
-			return t.Control
+	variants = Variants,
+	getVariant = function() --[[ Line: 14 ]]
+		-- upvalues: NewUpsellModalExperimentForDesktopV2 (copy), Variants (copy), IXPServiceWrapper (copy), DesktopUpsellIXPLayer (copy)
+		if NewUpsellModalExperimentForDesktopV2 then
+			local LayerData = IXPServiceWrapper:GetLayerData(DesktopUpsellIXPLayer)
+			
+			return if LayerData and LayerData.newUpsellModalVariant ~= nil then LayerData.newUpsellModalVariant else Variants.Control
+		else
+			return Variants.Control
 		end
-		local var1 = IXPServiceWrapper:GetLayerData(desktopUpsellIXPLayer)
-		
-		return if var1 and var1.newUpsellModalVariant ~= nil then var1.newUpsellModalVariant else t.Control
 	end,
-	logExposure = function()
-		-- upvalues: newUpsellModalExperimentForDesktopV2 (ref), IXPServiceWrapper (ref), desktopUpsellIXPLayer (ref)
-		if newUpsellModalExperimentForDesktopV2 then
-			IXPServiceWrapper:LogUserLayerExposure(desktopUpsellIXPLayer)
+	logExposure = function() --[[ Line: 29 ]]
+		-- upvalues: NewUpsellModalExperimentForDesktopV2 (copy), IXPServiceWrapper (copy), DesktopUpsellIXPLayer (copy)
+		if NewUpsellModalExperimentForDesktopV2 then
+			IXPServiceWrapper:LogUserLayerExposure(DesktopUpsellIXPLayer)
 			
 			return
 		end
 	end,
-	shouldShowNewModal = function()
-		-- upvalues: newUpsellModalExperimentForDesktopV2 (ref), IXPServiceWrapper (ref), desktopUpsellIXPLayer (ref), t (ref)
-		local control
-		if newUpsellModalExperimentForDesktopV2 then
-			IXPServiceWrapper:LogUserLayerExposure(desktopUpsellIXPLayer)
+	shouldShowNewModal = function(): boolean --[[ Line: 37 ]]
+		-- upvalues: NewUpsellModalExperimentForDesktopV2 (copy), IXPServiceWrapper (copy), DesktopUpsellIXPLayer (copy), Variants (copy)
+		if NewUpsellModalExperimentForDesktopV2 then
+			IXPServiceWrapper:LogUserLayerExposure(DesktopUpsellIXPLayer)
 		end
-		if newUpsellModalExperimentForDesktopV2 then
-			local var1 = IXPServiceWrapper:GetLayerData(desktopUpsellIXPLayer)
-			control = if var1 and var1.newUpsellModalVariant ~= nil then var1.newUpsellModalVariant else t.Control
+		local Control = nil
+		if NewUpsellModalExperimentForDesktopV2 then
+			local LayerData = IXPServiceWrapper:GetLayerData(DesktopUpsellIXPLayer)
+			Control = if LayerData and LayerData.newUpsellModalVariant ~= nil then LayerData.newUpsellModalVariant else Variants.Control
 		else
-			control = t.Control
+			Control = Variants.Control
 		end
-		return control ~= t.Control
+		return Control ~= Variants.Control
 	end
 }

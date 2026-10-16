@@ -1,11 +1,11 @@
-﻿local parent = script:FindFirstAncestor("AuthCommon").Parent
-local url = require(parent.Http).Url
-local fFlagEnableLogoutV3 = require(parent.SharedFlags).FFlagEnableLogoutV3
+﻿local Parent = script:FindFirstAncestor("AuthCommon").Parent
+local Url = require(Parent.Http).Url
+local FFlagEnableLogoutV3 = require(Parent.SharedFlags).FFlagEnableLogoutV3
 
-return function(p1)
-	-- upvalues: fFlagEnableLogoutV3 (ref), url (ref)
-	return p1(if fFlagEnableLogoutV3 then string.format("%sv3/logout", url.AUTH_URL) else string.format("%sv1/logout", url.AUTH_URL), "POST", {
+return function(Callback) --[[ Line: 8 ]]
+	-- upvalues: FFlagEnableLogoutV3 (copy), Url (copy)
+	return Callback(if FFlagEnableLogoutV3 then string.format("%sv3/logout", Url.AUTH_URL) else string.format("%sv1/logout", Url.AUTH_URL), "POST", {
 		maxRetryCount = 0,
-		postBody = if fFlagEnableLogoutV3 then "{}" else ""
+		postBody = if FFlagEnableLogoutV3 then "{}" else ""
 	})
 end

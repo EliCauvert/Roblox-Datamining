@@ -1,79 +1,79 @@
-﻿local parent = script.Parent
-local buttonAssetsModule = require(parent.ButtonAssets)
-local secondsToTimeStrModule = require(parent.SecondsToTimeStr)
-local t = {
+﻿local Parent = script.Parent
+local ButtonAssetsModule = require(Parent.ButtonAssets)
+local SecondsToTimeStrModule = require(Parent.SecondsToTimeStr)
+local CreateButtonsTimeModule = {
 	regularColor = Color3.fromRGB(255, 255, 255),
 	hoverColor = Color3.fromRGB(200, 200, 200),
 	clickColor = Color3.fromRGB(150, 150, 150)
 }
 
-function t.createButtonsTime(currentTimeLabel)
-	-- upvalues: t (ref), buttonAssetsModule (ref), secondsToTimeStrModule (ref)
-	function currentTimeLabel.createControlBarButton(p1, p2)
-		-- upvalues: currentTimeLabel (ref), t (copy)
-		local controlBarButton = Instance.new("ImageButton")
-		controlBarButton.Name = "ControlBarButton"
-		controlBarButton.Parent = currentTimeLabel.ButtonsTimeControlBar
-		controlBarButton.BackgroundTransparency = 1
-		controlBarButton.Image = p1
-		controlBarButton.ImageColor3 = t.regularColor
-		controlBarButton.AnchorPoint = Vector2.new(0, 0.5)
-		controlBarButton.Size = UDim2.new(0.1, 0, 0.9, 0)
-		controlBarButton.SizeConstraint = Enum.SizeConstraint.RelativeXY
-		controlBarButton:SetAttribute("useHoverColor", true)
-		controlBarButton.MouseEnter:Connect(function()
-			-- upvalues: controlBarButton (ref), t (copy)
-			if controlBarButton:GetAttribute("useHoverColor") then
-				controlBarButton.ImageColor3 = t.hoverColor
+function CreateButtonsTimeModule.createButtonsTime(p1) --[[ Line: 12 ]]
+	-- upvalues: CreateButtonsTimeModule (copy), ButtonAssetsModule (copy), SecondsToTimeStrModule (copy)
+	function p1.createControlBarButton(Image, p2) --[[ Line: 14 ]]
+		-- upvalues: p1 (copy), CreateButtonsTimeModule (upval)
+		local ControlBarButton = Instance.new("ImageButton")
+		ControlBarButton.Name = "ControlBarButton"
+		ControlBarButton.Parent = p1.ButtonsTimeControlBar
+		ControlBarButton.BackgroundTransparency = 1
+		ControlBarButton.Image = Image
+		ControlBarButton.ImageColor3 = CreateButtonsTimeModule.regularColor
+		ControlBarButton.AnchorPoint = Vector2.new(0, 0.5)
+		ControlBarButton.Size = UDim2.new(0.1, 0, 0.9, 0)
+		ControlBarButton.SizeConstraint = Enum.SizeConstraint.RelativeXY
+		ControlBarButton:SetAttribute("useHoverColor", true)
+		ControlBarButton.MouseEnter:Connect(function() --[[ Line: 26 ]]
+			-- upvalues: ControlBarButton (copy), CreateButtonsTimeModule (upval)
+			if ControlBarButton:GetAttribute("useHoverColor") then
+				ControlBarButton.ImageColor3 = CreateButtonsTimeModule.hoverColor
 			end
 		end)
-		controlBarButton.MouseLeave:Connect(function()
-			-- upvalues: controlBarButton (ref), t (copy)
-			if controlBarButton:GetAttribute("useHoverColor") then
-				controlBarButton.ImageColor3 = t.regularColor
+		ControlBarButton.MouseLeave:Connect(function() --[[ Line: 31 ]]
+			-- upvalues: ControlBarButton (copy), CreateButtonsTimeModule (upval)
+			if ControlBarButton:GetAttribute("useHoverColor") then
+				ControlBarButton.ImageColor3 = CreateButtonsTimeModule.regularColor
 			end
 		end)
-		controlBarButton.MouseButton1Down:Connect(function()
-			-- upvalues: controlBarButton (ref), t (copy)
-			controlBarButton.ImageColor3 = t.clickColor
+		ControlBarButton.MouseButton1Down:Connect(function() --[[ Line: 36 ]]
+			-- upvalues: ControlBarButton (copy), CreateButtonsTimeModule (upval)
+			ControlBarButton.ImageColor3 = CreateButtonsTimeModule.clickColor
 		end)
 		
 		if p2 then
-			controlBarButton.MouseButton1Up:Connect(function()
-				-- upvalues: controlBarButton (ref), t (copy)
-				controlBarButton.ImageColor3 = t.hoverColor
+			ControlBarButton.MouseButton1Up:Connect(function() --[[ Line: 40 ]]
+				-- upvalues: ControlBarButton (copy), CreateButtonsTimeModule (upval)
+				ControlBarButton.ImageColor3 = CreateButtonsTimeModule.hoverColor
 			end)
 		end
-		local UISizeConstraint = Instance.new("UISizeConstraint")
-		UISizeConstraint.MaxSize = Vector2.new(currentTimeLabel.maxControlBarHeight * 0.9, currentTimeLabel.maxControlBarHeight * 0.9)
-		UISizeConstraint.Parent = controlBarButton
+		local SizeConstraint = Instance.new("UISizeConstraint")
+		SizeConstraint.MaxSize = Vector2.new(p1.maxControlBarHeight * 0.9, p1.maxControlBarHeight * 0.9)
+		SizeConstraint.Parent = ControlBarButton
 		
-		return controlBarButton
+		return ControlBarButton
 	end
 	
-	currentTimeLabel.PlayButton = currentTimeLabel.createControlBarButton(buttonAssetsModule.PlayButton, true)
-	currentTimeLabel.PlayButton.LayoutOrder = 2
-	currentTimeLabel.StopButton = currentTimeLabel.createControlBarButton(buttonAssetsModule.StopButton, false)
-	currentTimeLabel.StopButton.LayoutOrder = 3
-	currentTimeLabel.ReverseButton = currentTimeLabel.createControlBarButton(buttonAssetsModule.ReverseButton, false)
-	currentTimeLabel.ReverseButton.LayoutOrder = 4
-	currentTimeLabel.CurrentTimeLabel = Instance.new("TextLabel")
-	currentTimeLabel.CurrentTimeLabel.Name = "CurrentTimeLabel"
-	currentTimeLabel.CurrentTimeLabel.Font = Enum.Font.SourceSans
-	currentTimeLabel.CurrentTimeLabel.TextXAlignment = Enum.TextXAlignment.Left
-	currentTimeLabel.CurrentTimeLabel.TextYAlignment = Enum.TextYAlignment.Center
-	currentTimeLabel.CurrentTimeLabel.AnchorPoint = Vector2.new(0, 0.5)
-	currentTimeLabel.CurrentTimeLabel.Size = UDim2.new(0.4, 0, 1.3, 0)
-	currentTimeLabel.CurrentTimeLabel.SizeConstraint = Enum.SizeConstraint.RelativeXY
-	currentTimeLabel.CurrentTimeLabel.BackgroundTransparency = 1
-	currentTimeLabel.CurrentTimeLabel.Text = secondsToTimeStrModule.convertSecondsToTimeStr(0)
-	currentTimeLabel.CurrentTimeLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-	currentTimeLabel.CurrentTimeLabel.TextScaled = true
-	currentTimeLabel.CurrentTimeLabel.LayoutOrder = 5
-	currentTimeLabel.CurrentTimeLabel.Parent = currentTimeLabel.ButtonsTimeControlBar
-	local UIPadding = Instance.new("UIPadding")
-	UIPadding.PaddingBottom = UDim.new(0.05, 0)
-	UIPadding.Parent = currentTimeLabel.CurrentTimeLabel
+	p1.PlayButton = p1.createControlBarButton(ButtonAssetsModule.PlayButton, true)
+	p1.PlayButton.LayoutOrder = 2
+	p1.StopButton = p1.createControlBarButton(ButtonAssetsModule.StopButton, false)
+	p1.StopButton.LayoutOrder = 3
+	p1.ReverseButton = p1.createControlBarButton(ButtonAssetsModule.ReverseButton, false)
+	p1.ReverseButton.LayoutOrder = 4
+	p1.CurrentTimeLabel = Instance.new("TextLabel")
+	p1.CurrentTimeLabel.Name = "CurrentTimeLabel"
+	p1.CurrentTimeLabel.Font = Enum.Font.SourceSans
+	p1.CurrentTimeLabel.TextXAlignment = Enum.TextXAlignment.Left
+	p1.CurrentTimeLabel.TextYAlignment = Enum.TextYAlignment.Center
+	p1.CurrentTimeLabel.AnchorPoint = Vector2.new(0, 0.5)
+	p1.CurrentTimeLabel.Size = UDim2.new(0.4, 0, 1.3, 0)
+	p1.CurrentTimeLabel.SizeConstraint = Enum.SizeConstraint.RelativeXY
+	p1.CurrentTimeLabel.BackgroundTransparency = 1
+	p1.CurrentTimeLabel.Text = SecondsToTimeStrModule.convertSecondsToTimeStr(0)
+	p1.CurrentTimeLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+	p1.CurrentTimeLabel.TextScaled = true
+	p1.CurrentTimeLabel.LayoutOrder = 5
+	p1.CurrentTimeLabel.Parent = p1.ButtonsTimeControlBar
+	local Padding = Instance.new("UIPadding")
+	Padding.PaddingBottom = UDim.new(0.05, 0)
+	Padding.Parent = p1.CurrentTimeLabel
 end
 
-return t
+return CreateButtonsTimeModule

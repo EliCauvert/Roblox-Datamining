@@ -1,23 +1,22 @@
 ﻿local _ = require(script.Parent.FeedTypes)
-local momentModule = require(script.Parent.Items.Moment)
-local endStateModule = require(script.Parent.Items.EndState)
-local unavailableMomentModule = require(script.Parent.Items.UnavailableMoment)
-local t = {}
+local EndStateModule = require(script.Parent.Items.EndState)
+local UnavailableMomentModule = require(script.Parent.Items.UnavailableMoment)
+local FeedItemRegistry = {}
 
-local function _(p1)
-	-- upvalues: t (ref)
-	for i, v in p1 do
-		t[v.kind] = v
+local function _(List) --[[ Line: 19 | Named "register" ]]
+	-- upvalues: FeedItemRegistry (copy)
+	for _, value in List do
+		FeedItemRegistry[value.kind] = value
 	end
 end
 
-for i, v in momentModule do
-	t[v.kind] = v
+for _, value in require(script.Parent.Items.Moment) do
+	FeedItemRegistry[value.kind] = value
 end
-for i, v_1 in endStateModule do
-	t[v_1.kind] = v_1
+for _, value1 in EndStateModule do
+	FeedItemRegistry[value1.kind] = value1
 end
-for i, v_2 in unavailableMomentModule do
-	t[v_2.kind] = v_2
+for _, value2 in UnavailableMomentModule do
+	FeedItemRegistry[value2.kind] = value2
 end
-return t
+return FeedItemRegistry

@@ -34,6 +34,7 @@ return {
 	Flags = require(script.Flags),
 	Hooks = require(script.Hooks),
 	Http = require(script.Http),
+	Middleware = require(script.Middleware),
 	Models = require(script.Models),
 	NetworkRequests = require(script.NetworkRequests),
 	RoduxKey = require(script.Common.Constants).RODUX_KEY,

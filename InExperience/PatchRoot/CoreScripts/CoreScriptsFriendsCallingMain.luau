@@ -1,22 +1,20 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local corePackagesService = game:GetService("CorePackages")
-local reactModule = require(corePackagesService.Packages.React)
-local reactRobloxModule = require(corePackagesService.Packages.ReactRoblox)
-local callPipModule = require(corePackagesService.Workspace.Packages.FriendsCalling.CallPip)
-local callPipDisplayOrderModule = require(corePackagesService.Workspace.Packages.FriendsCalling.CallPipDisplayOrder)
-local fFlagFriendsCallingCallPipModule = require(corePackagesService.Workspace.Packages.FriendsCalling.FFlagFriendsCallingCallPip)
-local voiceCallReceivedEventReceiverModule = require(corePackagesService.Workspace.Packages.FriendsCalling.VoiceCallReceivedEventReceiver)
-local friendsCalling = Instance.new("Folder")
-friendsCalling.Name = "FriendsCalling"
-friendsCalling.Parent = coreGuiService
-reactRobloxModule.createRoot(friendsCalling):render(reactModule.createElement(reactModule.Fragment, nil, {
-	CallPip = if fFlagFriendsCallingCallPipModule then reactModule.createElement(callPipModule, {
-		host = {
-			exposesTopSafeArea = true,
-			followsAppColorMode = false,
-			displayOrder = callPipDisplayOrderModule.InExperience,
-			screenInsets = Enum.ScreenInsets.None
-		}
-	}) else nil,
-	VoiceCallReceivedEventReceiver = reactModule.createElement(voiceCallReceivedEventReceiverModule)
+﻿local CorePackages = game:GetService("CorePackages")
+local ReactModule = require(CorePackages.Packages.React)
+local ReactRobloxModule = require(CorePackages.Packages.ReactRoblox)
+local CallPipModule = require(CorePackages.Workspace.Packages.FriendsCalling.CallPip)
+local CallPipDisplayOrderModule = require(CorePackages.Workspace.Packages.FriendsCalling.CallPipDisplayOrder)
+local FFlagFriendsCallingCallPipModule = require(CorePackages.Workspace.Packages.FriendsCalling.FFlagFriendsCallingCallPip)
+local VoiceCallReceivedEventReceiverModule = require(CorePackages.Workspace.Packages.FriendsCalling.VoiceCallReceivedEventReceiver)
+local FriendsCalling = Instance.new("Folder")
+FriendsCalling.Name = "FriendsCalling"
+FriendsCalling.Parent = game:GetService("CoreGui")
+local Host = {
+	exposesTopSafeArea = true,
+	followsAppColorMode = false,
+	displayOrder = CallPipDisplayOrderModule.InExperience,
+	screenInsets = Enum.ScreenInsets.None
+}
+ReactRobloxModule.createRoot(FriendsCalling):render(ReactModule.createElement(ReactModule.Fragment, nil, {
+	CallPip = if FFlagFriendsCallingCallPipModule then ReactModule.createElement(CallPipModule, { host = Host }) else nil,
+	VoiceCallReceivedEventReceiver = ReactModule.createElement(VoiceCallReceivedEventReceiverModule)
 }))

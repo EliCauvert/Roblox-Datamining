@@ -1,19 +1,19 @@
-﻿local parent = script:FindFirstAncestor("SduiSharedContent").Parent
-local reactModule = require(parent.React)
-local viewportVisibilityImpressionsDetector = require(parent.Impressions).ViewportVisibilityImpressionsDetector
-local systemBanner = require(parent.Foundation).SystemBanner
-local fFlagAppChatConversationTrustedFriendUpsellBanner = require(parent.SharedFlags).FFlagAppChatConversationTrustedFriendUpsellBanner
+﻿local Parent = script:FindFirstAncestor("SduiSharedContent").Parent
+local ReactModule = require(Parent.React)
+local ViewportVisibilityImpressionsDetector = require(Parent.Impressions).ViewportVisibilityImpressionsDetector
+local SystemBanner = require(Parent.Foundation).SystemBanner
+local FFlagAppChatConversationTrustedFriendUpsellBanner = require(Parent.SharedFlags).FFlagAppChatConversationTrustedFriendUpsellBanner
 
-return reactModule.memo(function(p1)
-	-- upvalues: fFlagAppChatConversationTrustedFriendUpsellBanner (ref), reactModule (ref), systemBanner (ref), viewportVisibilityImpressionsDetector (ref)
-	local var1 = nil
-	local var2 = nil
+return ReactModule.memo(function(p1) --[[ Line: 40 | Named "SduiSystemBanner" ]]
+	-- upvalues: FFlagAppChatConversationTrustedFriendUpsellBanner (copy), ReactModule (copy), SystemBanner (copy), ViewportVisibilityImpressionsDetector (copy)
+	local UseRefResult = nil
+	local HasOnView: boolean? = nil
 	
-	if fFlagAppChatConversationTrustedFriendUpsellBanner then
-		var1 = reactModule.useRef(nil)
-		var2 = p1.onView ~= nil
+	if FFlagAppChatConversationTrustedFriendUpsellBanner then
+		UseRefResult = ReactModule.useRef(nil)
+		HasOnView = p1.onView ~= nil
 	end
-	local var3 = reactModule.createElement(systemBanner, {
+	local Element = ReactModule.createElement(SystemBanner, {
 		severity = p1.severity,
 		variant = p1.variant,
 		title = p1.title,
@@ -26,11 +26,11 @@ return reactModule.memo(function(p1)
 		Visible = p1.visible,
 		ZIndex = p1.zIndex,
 		testId = p1.testId,
-		ref = if var2 then var1 else nil
+		ref = if HasOnView then UseRefResult else nil
 	})
 	
-	return if var2 then reactModule.createElement(reactModule.Fragment, nil, {
-		Banner = var3,
-		OnViewDetector = reactModule.createElement(viewportVisibilityImpressionsDetector, { targetRef = var1, onImpression = p1.onView })
-	}) else var3
+	return if HasOnView then ReactModule.createElement(ReactModule.Fragment, nil, {
+		Banner = Element,
+		OnViewDetector = ReactModule.createElement(ViewportVisibilityImpressionsDetector, { targetRef = UseRefResult, onImpression = p1.onView })
+	}) else Element
 end)

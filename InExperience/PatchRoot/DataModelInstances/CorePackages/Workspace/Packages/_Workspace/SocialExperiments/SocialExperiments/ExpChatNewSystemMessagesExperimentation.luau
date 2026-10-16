@@ -1,41 +1,40 @@
-﻿local experimentCacheManager = require(script:FindFirstAncestor("SocialExperiments").Parent.ExperimentCacheManager).ExperimentCacheManager
-local expChatNewSystemMessagesExperimentLayer = game:DefineFastString("ExpChatNewSystemMessagesExperimentLayer", "ExperienceChat.SystemMessages")
-local expChatNewSystemMessagesVariant = game:DefineFastString("ExpChatNewSystemMessagesVariant", "enableNewSystemMessages")
-local forceEnableExpChatNewSystemMessages = game:DefineFastFlag("ForceEnableExpChatNewSystemMessages", false)
-local enableExpChatNewSystemMessagesExperimentation = game:DefineFastFlag("EnableExpChatNewSystemMessagesExperimentation", false)
+﻿local ExperimentCacheManager = require(script:FindFirstAncestor("SocialExperiments").Parent.ExperimentCacheManager).ExperimentCacheManager
+local ExpChatNewSystemMessagesExperimentLayer = game:DefineFastString("ExpChatNewSystemMessagesExperimentLayer", "ExperienceChat.SystemMessages")
+local ExpChatNewSystemMessagesVariant = game:DefineFastString("ExpChatNewSystemMessagesVariant", "enableNewSystemMessages")
+local ForceEnableExpChatNewSystemMessages = game:DefineFastFlag("ForceEnableExpChatNewSystemMessages", false)
+local EnableExpChatNewSystemMessagesExperimentation = game:DefineFastFlag("EnableExpChatNewSystemMessagesExperimentation", false)
 
-local function _(p1)
-	-- upvalues: experimentCacheManager (ref), expChatNewSystemMessagesExperimentLayer (ref)
-	local var1 = experimentCacheManager.default:getLayerVariables(expChatNewSystemMessagesExperimentLayer)
+local function _(p1) --[[ Line: 14 | Named "getIsUserInTreatment" ]]
+	-- upvalues: ExperimentCacheManager (copy), ExpChatNewSystemMessagesExperimentLayer (copy)
+	local LayerVariables = ExperimentCacheManager.default:getLayerVariables(ExpChatNewSystemMessagesExperimentLayer)
 	
-	return if var1 and var1[p1] ~= nil then var1[p1] else false
+	return if LayerVariables and LayerVariables[p1] ~= nil then LayerVariables[p1] else false
 end
 
 return {
-	getNewSystemMessagesEnabled = function()
-		-- upvalues: forceEnableExpChatNewSystemMessages (ref), enableExpChatNewSystemMessagesExperimentation (ref), expChatNewSystemMessagesVariant (ref), experimentCacheManager (ref), expChatNewSystemMessagesExperimentLayer (ref)
-		local var1 = forceEnableExpChatNewSystemMessages
+	getNewSystemMessagesEnabled = function() --[[ Line: 25 ]]
+		-- upvalues: ForceEnableExpChatNewSystemMessages (copy), EnableExpChatNewSystemMessagesExperimentation (copy), ExpChatNewSystemMessagesVariant (copy), ExperimentCacheManager (copy), ExpChatNewSystemMessagesExperimentLayer (copy)
+		local Flag: boolean = ForceEnableExpChatNewSystemMessages
 		
-		if not var1 then
-			var1 = enableExpChatNewSystemMessagesExperimentation
+		if not Flag then
+			Flag = EnableExpChatNewSystemMessagesExperimentation
 			
-			if var1 then
-				local var2 = expChatNewSystemMessagesVariant
-				local var3 = experimentCacheManager.default:getLayerVariables(expChatNewSystemMessagesExperimentLayer)
+			if Flag then
+				local LayerVariables = ExperimentCacheManager.default:getLayerVariables(ExpChatNewSystemMessagesExperimentLayer)
 				
-				if var3 and var3[var2] ~= nil then
-					return var3[var2]
+				if LayerVariables and LayerVariables[ExpChatNewSystemMessagesVariant] ~= nil then
+					return LayerVariables[ExpChatNewSystemMessagesVariant]
 				end
-				var1 = false
+				Flag = false
 			end
 		end
-		return var1
+		return Flag
 	end,
-	logExposure = function()
-		-- upvalues: enableExpChatNewSystemMessagesExperimentation (ref), experimentCacheManager (ref), expChatNewSystemMessagesExperimentLayer (ref)
-		if enableExpChatNewSystemMessagesExperimentation and experimentCacheManager.default:getLayerVariables(expChatNewSystemMessagesExperimentLayer) ~= nil then
-			experimentCacheManager.default:logLayerExposure(expChatNewSystemMessagesExperimentLayer)
+	logExposure = function() --[[ Line: 33 ]]
+		-- upvalues: EnableExpChatNewSystemMessagesExperimentation (copy), ExperimentCacheManager (copy), ExpChatNewSystemMessagesExperimentLayer (copy)
+		if EnableExpChatNewSystemMessagesExperimentation and ExperimentCacheManager.default:getLayerVariables(ExpChatNewSystemMessagesExperimentLayer) ~= nil then
+			ExperimentCacheManager.default:logLayerExposure(ExpChatNewSystemMessagesExperimentLayer)
 		end
 	end,
-	isExperimentEnabled = enableExpChatNewSystemMessagesExperimentation
+	isExperimentEnabled = EnableExpChatNewSystemMessagesExperimentation
 }

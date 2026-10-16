@@ -1,148 +1,148 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local signalsModule = require(parent_1.Signals)
-local createSignalMap = require(parent_1.CoreScriptsRoactCommon).Utilities.createSignalMap
-local _ = require(parent.LeaderboardStoreTypes)
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local SignalsModule = require(Parent1.Signals)
+local CreateSignalMapFunction = require(Parent1.CoreScriptsRoactCommon).Utilities.createSignalMap
+local _ = require(Parent.LeaderboardStoreTypes)
 
-return function()
-	-- upvalues: signalsModule (ref), createSignalMap (ref)
-	return function()
-		-- upvalues: signalsModule (copy), createSignalMap (copy)
+return function() --[[ Line: 19 | Named "createMockLeaderboardStore" ]]
+	-- upvalues: SignalsModule (copy), CreateSignalMapFunction (copy)
+	return function() --[[ Line: 20 ]]
+		-- upvalues: SignalsModule (upval), CreateSignalMapFunction (upval)
 		Instance.new("Team").Name = "Neutral"
-		local team = Instance.new("Team")
-		team.Name = "Team 1"
-		local team_1 = Instance.new("Team")
-		team_1.Name = "Team 2"
-		local t = {
+		local Team = Instance.new("Team")
+		Team.Name = "Team 1"
+		local Team1 = Instance.new("Team")
+		Team1.Name = "Team 2"
+		local Player = {
 			Name = "player1",
-			Team = team,
+			Team = Team,
 			UserId = math.random(1, 1234567890),
 			leaderstats = { stat1 = { Value = 100 }, stat2 = { Value = 200 } }
 		}
-		local t_1 = {
-			order = signalsModule.createSignal(1),
-			stats = createSignalMap()
+		local config = {
+			order = SignalsModule.createSignal(1),
+			stats = CreateSignalMapFunction()
 		}
-		t_1.stats.setData("stat1", signalsModule.createSignal(t.leaderstats.stat1.Value), false)
-		t_1.stats.setData("stat2", signalsModule.createSignal(t.leaderstats.stat2.Value), false)
-		local t_2 = {
+		config.stats.setData("stat1", SignalsModule.createSignal(Player.leaderstats.stat1.Value), false)
+		config.stats.setData("stat2", SignalsModule.createSignal(Player.leaderstats.stat2.Value), false)
+		local Player1 = {
 			Name = "player2",
-			Team = team,
+			Team = Team,
 			UserId = math.random(1, 1234567890),
 			leaderstats = { stat1 = { Value = 30 }, stat2 = { Value = 40 } }
 		}
-		local t_3 = {
-			order = signalsModule.createSignal(2),
-			stats = createSignalMap()
+		local config1 = {
+			order = SignalsModule.createSignal(2),
+			stats = CreateSignalMapFunction()
 		}
-		t_3.stats.setData("stat1", signalsModule.createSignal(t_2.leaderstats.stat1.Value), false)
-		t_3.stats.setData("stat2", signalsModule.createSignal(t_2.leaderstats.stat2.Value), false)
-		local t_4 = {
+		config1.stats.setData("stat1", SignalsModule.createSignal(Player1.leaderstats.stat1.Value), false)
+		config1.stats.setData("stat2", SignalsModule.createSignal(Player1.leaderstats.stat2.Value), false)
+		local Player2 = {
 			Name = "player3",
-			Team = team_1,
+			Team = Team1,
 			UserId = math.random(1, 1234567890),
 			leaderstats = { stat1 = { Value = 500 }, stat2 = { Value = 600 } }
 		}
-		local t_5 = {
-			order = signalsModule.createSignal(1),
-			stats = createSignalMap()
+		local config2 = {
+			order = SignalsModule.createSignal(1),
+			stats = CreateSignalMapFunction()
 		}
-		t_5.stats.setData("stat1", signalsModule.createSignal(t_4.leaderstats.stat1.Value), false)
-		t_5.stats.setData("stat2", signalsModule.createSignal(t_4.leaderstats.stat2.Value), false)
-		local t_6 = {
+		config2.stats.setData("stat1", SignalsModule.createSignal(Player2.leaderstats.stat1.Value), false)
+		config2.stats.setData("stat2", SignalsModule.createSignal(Player2.leaderstats.stat2.Value), false)
+		local Player3 = {
 			Name = "player4",
-			Team = team_1,
+			Team = Team1,
 			UserId = math.random(1, 1234567890),
 			leaderstats = { stat1 = { Value = 70 }, stat2 = { Value = 80 } }
 		}
-		local t_7 = {
-			order = signalsModule.createSignal(2),
-			stats = createSignalMap()
+		local config3 = {
+			order = SignalsModule.createSignal(2),
+			stats = CreateSignalMapFunction()
 		}
-		t_7.stats.setData("stat1", signalsModule.createSignal(t_6.leaderstats.stat1.Value), false)
-		t_7.stats.setData("stat2", signalsModule.createSignal(t_6.leaderstats.stat2.Value), false)
-		local t_8 = {
+		config3.stats.setData("stat1", SignalsModule.createSignal(Player3.leaderstats.stat1.Value), false)
+		config3.stats.setData("stat2", SignalsModule.createSignal(Player3.leaderstats.stat2.Value), false)
+		local Player4 = {
 			Name = "player5",
 			UserId = math.random(1, 1234567890),
 			leaderstats = { stat1 = { Value = 90 }, stat2 = { Value = 100 } }
 		}
-		local t_9 = {
-			order = signalsModule.createSignal(1),
-			stats = createSignalMap()
+		local config4 = {
+			order = SignalsModule.createSignal(1),
+			stats = CreateSignalMapFunction()
 		}
-		t_9.stats.setData("stat1", signalsModule.createSignal(t_8.leaderstats.stat1.Value), false)
-		t_9.stats.setData("stat2", signalsModule.createSignal(t_8.leaderstats.stat2.Value), false)
-		local var1 = createSignalMap()
-		var1.setData(t, t_1, false)
-		var1.setData(t_2, t_3, false)
-		var1.setData(t_4, t_5, false)
-		var1.setData(t_6, t_7, false)
-		var1.setData(t_8, t_9, false)
-		local var2 = createSignalMap()
-		local var3 = createSignalMap()
-		var3.setData("Neutral", {
-			name = signalsModule.createSignal("Neutral"),
-			color = signalsModule.createSignal(Color3.fromRGB(0, 0, 0)),
-			order = signalsModule.createSignal(1),
-			stats = createSignalMap(),
-			players = createSignalMap()
+		config4.stats.setData("stat1", SignalsModule.createSignal(Player4.leaderstats.stat1.Value), false)
+		config4.stats.setData("stat2", SignalsModule.createSignal(Player4.leaderstats.stat2.Value), false)
+		local SignalMap = CreateSignalMapFunction()
+		SignalMap.setData(Player, config, false)
+		SignalMap.setData(Player1, config1, false)
+		SignalMap.setData(Player2, config2, false)
+		SignalMap.setData(Player3, config3, false)
+		SignalMap.setData(Player4, config4, false)
+		local SignalMap1 = CreateSignalMapFunction()
+		local SignalMap2 = CreateSignalMapFunction()
+		SignalMap2.setData("Neutral", {
+			name = SignalsModule.createSignal("Neutral"),
+			color = SignalsModule.createSignal(Color3.fromRGB(0, 0, 0)),
+			order = SignalsModule.createSignal(1),
+			stats = CreateSignalMapFunction(),
+			players = CreateSignalMapFunction()
 		}, false)
-		local neutral = var3.getData("Neutral", false)
-		neutral.players.setData(t_8, t_8.UserId, false)
-		neutral.stats.setData("stat1", signalsModule.createSignal(t_8.leaderstats.stat1.Value), false)
-		neutral.stats.setData("stat2", signalsModule.createSignal(t_8.leaderstats.stat2.Value), false)
-		var3.setData(team, {
-			name = signalsModule.createSignal("Team 1"),
-			color = signalsModule.createSignal(Color3.fromRGB(255, 0, 0)),
-			order = signalsModule.createSignal(2),
-			stats = createSignalMap(),
-			players = createSignalMap()
+		local NeutralData = SignalMap2.getData("Neutral", false)
+		NeutralData.players.setData(Player4, Player4.UserId, false)
+		NeutralData.stats.setData("stat1", SignalsModule.createSignal(Player4.leaderstats.stat1.Value), false)
+		NeutralData.stats.setData("stat2", SignalsModule.createSignal(Player4.leaderstats.stat2.Value), false)
+		SignalMap2.setData(Team, {
+			name = SignalsModule.createSignal("Team 1"),
+			color = SignalsModule.createSignal(Color3.fromRGB(255, 0, 0)),
+			order = SignalsModule.createSignal(2),
+			stats = CreateSignalMapFunction(),
+			players = CreateSignalMapFunction()
 		}, false)
-		local data = var3.getData(team, false)
-		data.players.setData(t, t.UserId, false)
-		data.players.setData(t_2, t_2.UserId, false)
-		data.stats.setData("stat1", signalsModule.createSignal(t.leaderstats.stat1.Value + t_2.leaderstats.stat1.Value), false)
-		data.stats.setData("stat2", signalsModule.createSignal(t.leaderstats.stat2.Value + t_2.leaderstats.stat2.Value), false)
-		var3.setData(team_1, {
-			name = signalsModule.createSignal("Team 2"),
-			color = signalsModule.createSignal(Color3.fromRGB(0, 255, 0)),
-			order = signalsModule.createSignal(3),
-			stats = createSignalMap(),
-			players = createSignalMap()
+		local Data = SignalMap2.getData(Team, false)
+		Data.players.setData(Player, Player.UserId, false)
+		Data.players.setData(Player1, Player1.UserId, false)
+		Data.stats.setData("stat1", SignalsModule.createSignal(Player.leaderstats.stat1.Value + Player1.leaderstats.stat1.Value), false)
+		Data.stats.setData("stat2", SignalsModule.createSignal(Player.leaderstats.stat2.Value + Player1.leaderstats.stat2.Value), false)
+		SignalMap2.setData(Team1, {
+			name = SignalsModule.createSignal("Team 2"),
+			color = SignalsModule.createSignal(Color3.fromRGB(0, 255, 0)),
+			order = SignalsModule.createSignal(3),
+			stats = CreateSignalMapFunction(),
+			players = CreateSignalMapFunction()
 		}, false)
-		local data_1 = var3.getData(team_1, false)
-		data_1.players.setData(t_4, t_4.UserId, false)
-		data_1.players.setData(t_6, t_6.UserId, false)
-		data_1.stats.setData("stat1", signalsModule.createSignal(t_4.leaderstats.stat1.Value + t_6.leaderstats.stat1.Value), false)
-		data_1.stats.setData("stat2", signalsModule.createSignal(t_4.leaderstats.stat2.Value + t_6.leaderstats.stat2.Value), false)
-		local var4 = createSignalMap()
-		var4.setData("Neutral", var3.getData("Neutral", false), false)
-		var4.setData(team, var3.getData(team, false), false)
-		var4.setData(team_1, var3.getData(team_1, false), false)
+		local Data1 = SignalMap2.getData(Team1, false)
+		Data1.players.setData(Player2, Player2.UserId, false)
+		Data1.players.setData(Player3, Player3.UserId, false)
+		Data1.stats.setData("stat1", SignalsModule.createSignal(Player2.leaderstats.stat1.Value + Player3.leaderstats.stat1.Value), false)
+		Data1.stats.setData("stat2", SignalsModule.createSignal(Player2.leaderstats.stat2.Value + Player3.leaderstats.stat2.Value), false)
+		local SignalMap3 = CreateSignalMapFunction()
+		SignalMap3.setData("Neutral", SignalMap2.getData("Neutral", false), false)
+		SignalMap3.setData(Team, SignalMap2.getData(Team, false), false)
+		SignalMap3.setData(Team1, SignalMap2.getData(Team1, false), false)
 		
 		return {
-			getGameStatsList = function()
-				-- upvalues: var2 (write)
-				return var2
+			getGameStatsList = function() --[[ Line: 207 ]]
+				-- upvalues: SignalMap1 (ref)
+				return SignalMap1
 			end,
-			getTeamList = function()
-				-- upvalues: var4 (write)
-				return var4
+			getTeamList = function() --[[ Line: 210 ]]
+				-- upvalues: SignalMap3 (ref)
+				return SignalMap3
 			end,
-			getTeamPlayerList = function(p1, _)
-				-- upvalues: var3 (write)
-				return var3.getData(p1, false).players
+			getTeamPlayerList = function(p1, _) --[[ Line: 213 ]]
+				-- upvalues: SignalMap2 (ref)
+				return SignalMap2.getData(p1, false).players
 			end,
-			getPlayerEntry = function(p1)
-				-- upvalues: var1 (write)
-				return var1.getData(p1, false)
+			getPlayerEntry = function(p1) --[[ Line: 217 ]]
+				-- upvalues: SignalMap (ref)
+				return (SignalMap.getData(p1, false))
 			end,
-			cleanUp = function()
-				-- upvalues: var2 (write), var4 (write), var3 (write), var1 (write)
-				var2 = nil
-				var4 = nil
-				var3 = nil
-				var1 = nil
+			cleanUp = function() --[[ Line: 220 ]]
+				-- upvalues: SignalMap1 (ref), SignalMap3 (ref), SignalMap2 (ref), SignalMap (ref)
+				SignalMap1 = nil
+				SignalMap3 = nil
+				SignalMap2 = nil
+				SignalMap = nil
 			end
 		}
 	end

@@ -1,28 +1,30 @@
-﻿local marketplaceService = game:GetService("MarketplaceService")
-local bulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
-local parent = bulkPurchaseApp.Parent
-local reactModule = require(parent.React)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local bulkPurchaseEndedModule = require(bulkPurchaseApp.Store.Actions.BulkPurchaseEnded)
-local selectPurchaseResultsModule = require(bulkPurchaseApp.Store.Selectors.selectPurchaseResults)
-local selectErrorCodeModule = require(bulkPurchaseApp.Store.Selectors.selectErrorCode)
-local selectErrorMetadataModule = require(bulkPurchaseApp.Store.Selectors.selectErrorMetadata)
-local _ = require(bulkPurchaseApp.Enums.ErrorCodeEnum)
+﻿local MarketplaceService = game:GetService("MarketplaceService")
+local BulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
+local Parent = BulkPurchaseApp.Parent
+local ReactModule = require(Parent.React)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local BulkPurchaseEndedModule = require(BulkPurchaseApp.Store.Actions.BulkPurchaseEnded)
+local SelectPurchaseResultsModule = require(BulkPurchaseApp.Store.Selectors.selectPurchaseResults)
+local SelectErrorCodeModule = require(BulkPurchaseApp.Store.Selectors.selectErrorCode)
+local SelectErrorMetadataModule = require(BulkPurchaseApp.Store.Selectors.selectErrorMetadata)
+local _ = require(BulkPurchaseApp.Enums.ErrorCodeEnum)
 local _ = require(script.Parent.BulkPurchaseError)
 
-return function()
-	-- upvalues: useSelector (ref), selectPurchaseResultsModule (ref), selectErrorCodeModule (ref), selectErrorMetadataModule (ref), useDispatch (ref), reactModule (ref), marketplaceService (ref), bulkPurchaseEndedModule (ref)
-	local var1 = useSelector(selectPurchaseResultsModule)
-	local var2 = useDispatch()
+return function() --[[ Line: 16 | Named "useBulkPurchaseErrorProps" ]]
+	-- upvalues: UseSelectorFunction (copy), SelectPurchaseResultsModule (copy), SelectErrorCodeModule (copy), SelectErrorMetadataModule (copy), UseDispatchFunction (copy), ReactModule (copy), MarketplaceService (copy), BulkPurchaseEndedModule (copy)
+	local UseSelectorResult = UseSelectorFunction(SelectPurchaseResultsModule)
+	local UseSelectorResult1 = UseSelectorFunction(SelectErrorCodeModule)
+	local UseSelectorResult2 = UseSelectorFunction(SelectErrorMetadataModule)
+	local UseDispatchResult = UseDispatchFunction()
 	
 	return {
-		onDismiss = reactModule.useCallback(function()
-			-- upvalues: marketplaceService (copy), var1 (ref), var2 (ref), bulkPurchaseEndedModule (copy)
-			marketplaceService:signalPromptBulkPurchaseFinished(3, var1)
-			var2(bulkPurchaseEndedModule())
-		end, { var1, var2 }),
-		errorCode = useSelector(selectErrorCodeModule),
-		errorMetadata = useSelector(selectErrorMetadataModule)
+		onDismiss = ReactModule.useCallback(function() --[[ Line: 22 ]]
+			-- upvalues: MarketplaceService (upval), UseSelectorResult (copy), UseDispatchResult (copy), BulkPurchaseEndedModule (upval)
+			MarketplaceService:signalPromptBulkPurchaseFinished(3, UseSelectorResult)
+			UseDispatchResult(BulkPurchaseEndedModule())
+		end, { UseSelectorResult, UseDispatchResult }),
+		errorCode = UseSelectorResult1,
+		errorMetadata = UseSelectorResult2
 	}
 end

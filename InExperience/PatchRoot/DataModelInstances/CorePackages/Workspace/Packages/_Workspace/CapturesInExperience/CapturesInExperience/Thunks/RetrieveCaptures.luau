@@ -1,68 +1,70 @@
-﻿local parent = script.Parent.Parent
-local captureService = game:GetService("CaptureService")
-local capturesRetrievedModule = require(parent.Actions.CapturesRetrieved)
-local constantsModule = require(parent.Constants)
-local _ = require(parent.Types)
-local fetchCapturesFromGalleryModule = require(parent.Utils.fetchCapturesFromGallery)
-local fFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
-local fFlagCaptureServiceRetrieveCapturesSafeguardModule = require(parent.Flags.FFlagCaptureServiceRetrieveCapturesSafeguard)
-local fFlagCapturesFetchUseSharedUtilityModule = require(parent.Flags.FFlagCapturesFetchUseSharedUtility)
+﻿local Parent = script.Parent.Parent
+local CaptureService = game:GetService("CaptureService")
+local CapturesRetrievedModule = require(Parent.Actions.CapturesRetrieved)
+local ConstantsModule = require(Parent.Constants)
+local _ = require(Parent.Types)
+local FetchCapturesFromGalleryModule = require(Parent.Utils.fetchCapturesFromGallery)
+local FFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(Parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
+local FFlagCaptureServiceRetrieveCapturesSafeguardModule = require(Parent.Flags.FFlagCaptureServiceRetrieveCapturesSafeguard)
+local FFlagCapturesFetchUseSharedUtilityModule = require(Parent.Flags.FFlagCapturesFetchUseSharedUtility)
 
-local function _(p1)
-	-- upvalues: constantsModule (ref)
-	local selectedCaptureIndex = p1[constantsModule.RoduxKey].Carousel.SelectedCaptureIndex
+local function _(p1) --[[ Line: 16 | Named "getSelectedCapture" ]]
+	-- upvalues: ConstantsModule (copy)
+	local SelectedCaptureIndex = p1[ConstantsModule.RoduxKey].Carousel.SelectedCaptureIndex
 	
-	return if selectedCaptureIndex == nil then nil else p1[constantsModule.RoduxKey].Captures[selectedCaptureIndex]
+	return if SelectedCaptureIndex == nil then nil else p1[ConstantsModule.RoduxKey].Captures[SelectedCaptureIndex]
 end
 
-return function()
-	-- upvalues: constantsModule (ref), fFlagCapturesFetchUseSharedUtilityModule (ref), fetchCapturesFromGalleryModule (ref), capturesRetrievedModule (ref), fFlagEnableCapturesGalleryRetrievalCoreScriptModule (ref), captureService (ref), fFlagCaptureServiceRetrieveCapturesSafeguardModule (ref)
-	return function(p1)
-		-- upvalues: constantsModule (copy), fFlagCapturesFetchUseSharedUtilityModule (copy), fetchCapturesFromGalleryModule (copy), capturesRetrievedModule (copy), fFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), captureService (copy), fFlagCaptureServiceRetrieveCapturesSafeguardModule (copy)
-		local state = p1:getState()
-		local selectedCaptureIndex = state[constantsModule.RoduxKey].Carousel.SelectedCaptureIndex
-		local var1 = if selectedCaptureIndex ~= nil then nil else state[constantsModule.RoduxKey].Captures[selectedCaptureIndex]
+return function() --[[ Line: 25 ]]
+	-- upvalues: ConstantsModule (copy), FFlagCapturesFetchUseSharedUtilityModule (copy), FetchCapturesFromGalleryModule (copy), CapturesRetrievedModule (copy), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CaptureService (copy), FFlagCaptureServiceRetrieveCapturesSafeguardModule (copy)
+	return function(p1) --[[ Line: 26 ]]
+		-- upvalues: ConstantsModule (upval), FFlagCapturesFetchUseSharedUtilityModule (upval), FetchCapturesFromGalleryModule (upval), CapturesRetrievedModule (upval), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (upval), CaptureService (upval), FFlagCaptureServiceRetrieveCapturesSafeguardModule (upval)
+		local State = p1:getState()
+		local SelectedCaptureIndex = State[ConstantsModule.RoduxKey].Carousel.SelectedCaptureIndex
+		local Capture = if SelectedCaptureIndex == nil then nil else State[ConstantsModule.RoduxKey].Captures[SelectedCaptureIndex]
 		
-		if fFlagCapturesFetchUseSharedUtilityModule then
-			p1:dispatch(capturesRetrievedModule(fetchCapturesFromGalleryModule(), var1))
+		if FFlagCapturesFetchUseSharedUtilityModule then
+			p1:dispatch(CapturesRetrievedModule(FetchCapturesFromGalleryModule(), Capture))
 			
 			return
-		elseif fFlagEnableCapturesGalleryRetrievalCoreScriptModule then
-			local ok, status = pcall(function()
-				-- upvalues: captureService (copy)
-				local var2, var3 = captureService:ReadCapturesFromGalleryAsync()
+		end
+		if FFlagEnableCapturesGalleryRetrievalCoreScriptModule then
+			local Success, Result = pcall(function() --[[ Line: 34 ]]
+				-- upvalues: CaptureService (upval)
+				local CapturesFromGalleryAsync, CapturesFromGalleryAsync2 = CaptureService:ReadCapturesFromGalleryAsync()
 				
-				return if var2 == Enum.ReadCapturesFromGalleryResult.Success then var3 else nil
+				return if CapturesFromGalleryAsync == Enum.ReadCapturesFromGalleryResult.Success then CapturesFromGalleryAsync2 else nil
 			end)
-			local t = {}
+			local List = {}
 			
-			if ok then
-				for i, v in ipairs(status:GetCurrentPage()) do
-					table.insert(t, v)
-				end
-				p1:dispatch(capturesRetrievedModule(t, var1))
-				
-				return
-			else
+			if not Success then
 				warn("Failed to retrieve captures from gallery")
 				
 				return
 			end
-		elseif not fFlagCaptureServiceRetrieveCapturesSafeguardModule then
-			p1:dispatch(capturesRetrievedModule(captureService:RetrieveCaptures(), var1))
+			for _, value in ipairs((Result:GetCurrentPage())) do
+				table.insert(List, value)
+			end
+			p1:dispatch(CapturesRetrievedModule(List, Capture))
 			
 			return
-		end
-		local ok, status = pcall(function()
-			-- upvalues: captureService (copy)
-			return captureService:RetrieveCaptures()
-		end)
-		
-		if ok then
-			p1:dispatch(capturesRetrievedModule(status, var1))
+		elseif not FFlagCaptureServiceRetrieveCapturesSafeguardModule then
+			p1:dispatch(CapturesRetrievedModule(CaptureService:RetrieveCaptures(), Capture))
 			
 			return
+		else
+			local Success1, Result1 = pcall(function() --[[ Line: 54 ]]
+				-- upvalues: CaptureService (upval)
+				return CaptureService:RetrieveCaptures()
+			end)
+			
+			if Success1 then
+				p1:dispatch(CapturesRetrievedModule(Result1, Capture))
+				
+				return
+			else
+				warn("Failed to retrieve captures from gallery")
+			end
 		end
-		warn("Failed to retrieve captures from gallery")
 	end
 end

@@ -1,21 +1,22 @@
-﻿local abuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
-local _ = require(abuseReportMenu.Components.Types)
-local cryoModule = require(game:GetService("CorePackages").Packages.Cryo)
-local constantsModule = require(abuseReportMenu.Components.Constants)
-local _ = require(abuseReportMenu.ReportAnything.Utility.ReportAnythingAnalytics)
-local abuseReportBuilderModule = require(abuseReportMenu.ReportAnything.Utility.AbuseReportBuilder)
+﻿local AbuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
+local _ = require(AbuseReportMenu.Components.Types)
+local CryoModule = require(game:GetService("CorePackages").Packages.Cryo)
+local ConstantsModule = require(AbuseReportMenu.Components.Constants)
+local _ = require(AbuseReportMenu.ReportAnything.Utility.ReportAnythingAnalytics)
+local AbuseReportBuilderModule = require(AbuseReportMenu.ReportAnything.Utility.AbuseReportBuilder)
 
-local var1 = function(p1, p2, p3)
-	-- upvalues: abuseReportBuilderModule (ref), cryoModule (ref)
-	local var2 = if p1.menuOpenedUnixTimestampMilliseconds > 0 then math.floor(math.floor(workspace:GetServerTimeNow() * 1000) - p1.menuOpenedUnixTimestampMilliseconds) else 0
-	local var3, _ = abuseReportBuilderModule.interpretAnnotations(p2)
+local function v6(p1, p2, p3) --[[ Line: 12 ]]
+	-- upvalues: AbuseReportBuilderModule (copy), CryoModule (copy)
+	local Floored = math.floor(workspace:GetServerTimeNow() * 1000)
+	local Floored1: number = if p1.menuOpenedUnixTimestampMilliseconds > 0 then math.floor(Floored - p1.menuOpenedUnixTimestampMilliseconds) else 0
+	local InterpretAnnotationsResult, _ = AbuseReportBuilderModule.interpretAnnotations(p2)
 	
-	return cryoModule.Dictionary.join({
+	return (CryoModule.Dictionary.join({
 		placeId = game.PlaceId,
 		isPortraitMode = p1.isPortraitMode,
 		viewportSizeX = p1.viewportSizeX,
 		viewportSizeY = p1.viewportSizeY,
-		timeSpentMs = var2,
+		timeSpentMs = Floored1,
 		experiencePersonChangeCount = p1.experiencePersonChangeCount,
 		typeofabuseChangeCount = p1.typeofabuseChangeCount,
 		personChangeCount = p1.personChangeCount,
@@ -25,38 +26,38 @@ local var1 = function(p1, p2, p3)
 		commentAdded = p1.commentAdded,
 		experiencePersonSelection = p1.experiencePersonSelection,
 		annotationFinalCount = #p2.annotationPoints,
-		avatarFinalCount = #var3,
+		avatarFinalCount = #InterpretAnnotationsResult,
 		interactionType = if p1.isSubmissionCompleted then 1 else 2,
 		typeofabuseSelection = p1.typeofabuseSelection,
 		memoryRequirementMet = p1.memoryRequirementMet,
 		preselectedAbuseSelection = p1.preselectedAbuseSelection
-	}, p3)
+	}, p3))
 end
 
 return {
-	forPersonReport = function(p1, p2, p3)
-		-- upvalues: var1 (ref), constantsModule (ref)
-		local var2 = var1(p1, p2, p3)
-		local var3 = nil
-		local chat = constantsModule.AnalyticsAbuseMethods.Chat
+	forPersonReport = function(p1, p2, p3) --[[ Line: 59 ]]
+		-- upvalues: v6 (copy), ConstantsModule (copy)
+		local v1 = v6(p1, p2, p3)
+		local TypeofabuseSelection = nil
+		local Chat = ConstantsModule.AnalyticsAbuseMethods.Chat
 		
-		for i, v in pairs(constantsModule.AbuseMethodToAnalyticsMapping) do
+		for i, value in pairs(ConstantsModule.AbuseMethodToAnalyticsMapping) do
 			if i == p1.typeofabuseSelection then
-				var3 = v
-				chat = v
+				TypeofabuseSelection = value
+				Chat = value
 			end
 		end
-		var2.typeofabuseSelection = var3
-		var2.inferredTypeofabuseSelection = chat
+		v1.typeofabuseSelection = TypeofabuseSelection
+		v1.inferredTypeofabuseSelection = Chat
 		
-		return var2
+		return v1
 	end,
-	forExperienceReport = function(p4, p5, p6)
-		-- upvalues: var1 (ref), constantsModule (ref)
-		local var4 = var1(p4, p5, p6)
-		var4.typeofabuseSelection = constantsModule.AnalyticsAbuseMethods.Game
-		var4.inferredTypeofabuseSelection = constantsModule.AnalyticsAbuseMethods.Game
+	forExperienceReport = function(p4, p5, p6) --[[ Line: 81 ]]
+		-- upvalues: v6 (copy), ConstantsModule (copy)
+		local v2 = v6(p4, p5, p6)
+		v2.typeofabuseSelection = ConstantsModule.AnalyticsAbuseMethods.Game
+		v2.inferredTypeofabuseSelection = ConstantsModule.AnalyticsAbuseMethods.Game
 		
-		return var4
+		return v2
 	end
 }

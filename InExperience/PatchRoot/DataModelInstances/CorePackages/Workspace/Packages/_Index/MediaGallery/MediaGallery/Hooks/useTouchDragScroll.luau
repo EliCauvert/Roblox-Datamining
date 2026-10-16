@@ -1,48 +1,49 @@
-﻿local userInputService = game:GetService("UserInputService")
-local mediaGallery = script:FindFirstAncestor("MediaGallery")
-local reactModule = require(mediaGallery.Parent.React)
-local _ = require(mediaGallery.MediaGalleryTypes)
+﻿local UserInputService = game:GetService("UserInputService")
+local MediaGallery = script:FindFirstAncestor("MediaGallery")
+local ReactModule = require(MediaGallery.Parent.React)
+local _ = require(MediaGallery.MediaGalleryTypes)
 
-return function(value, p1)
-	-- upvalues: reactModule (ref), userInputService (ref)
-	reactModule.useEffect(function()
-		-- upvalues: userInputService (copy), value (ref), p1 (ref)
-		local var1 = false
-		local touchStartedConnection = userInputService.TouchStarted:Connect(function(p2)
-			-- upvalues: value (copy), var1 (write)
-			local current = value.current
+return function(p1, Callback) --[[ Line: 15 | Named "useTouchDragScroll" ]]
+	-- upvalues: ReactModule (copy), UserInputService (copy)
+	ReactModule.useEffect(function() --[[ Line: 19 ]]
+		-- upvalues: UserInputService (upval), p1 (copy), Callback (copy)
+		local Flag = false
+		local TouchStartedConnection = UserInputService.TouchStarted:Connect(function(Touch) --[[ Line: 22 ]]
+			-- upvalues: p1 (upval), Flag (ref)
+			local Current = p1.current
 			
-			if current then
-				local absolutePosition = current.AbsolutePosition
-				local absoluteSize = current.AbsoluteSize
+			if Current then
+				local AbsolutePosition = Current.AbsolutePosition
+				local AbsoluteSize = Current.AbsoluteSize
 				
-				if absolutePosition.X <= p2.Position.X and p2.Position.X <= absolutePosition.X + absoluteSize.X and (absolutePosition.Y <= p2.Position.Y and p2.Position.Y <= absolutePosition.Y + absoluteSize.Y) then
-					var1 = true
+				if AbsolutePosition.X <= Touch.Position.X and Touch.Position.X <= AbsolutePosition.X + AbsoluteSize.X and AbsolutePosition.Y <= Touch.Position.Y and Touch.Position.Y <= AbsolutePosition.Y + AbsoluteSize.Y then
+					Flag = true
 				end
 			end
 		end)
-		local touchEndedConnection = userInputService.TouchEnded:Connect(function()
-			-- upvalues: var1 (write)
-			var1 = false
+		local TouchEndedConnection = UserInputService.TouchEnded:Connect(function() --[[ Line: 38 ]]
+			-- upvalues: Flag (ref)
+			Flag = false
 		end)
-		local touchDragConnection = userInputService.TouchDrag:Connect(function(p2)
-			-- upvalues: var1 (write), p1 (copy)
-			if var1 then
-				if p2 == Enum.SwipeDirection.Right then
-					p1("Left")
+		local TouchDragConnection = UserInputService.TouchDrag:Connect(function(SwipeDirection) --[[ Line: 42 ]]
+			-- upvalues: Flag (ref), Callback (upval)
+			if Flag then
+				if SwipeDirection == Enum.SwipeDirection.Right then
+					Callback("Left")
 					
 					return
-				elseif p2 == Enum.SwipeDirection.Left then
-					p1("Right")
+				end
+				if SwipeDirection == Enum.SwipeDirection.Left then
+					Callback("Right")
 				end
 			end
 		end)
 		
-		return function()
-			-- upvalues: touchStartedConnection (ref), touchEndedConnection (ref), touchDragConnection (ref)
-			touchStartedConnection:Disconnect()
-			touchEndedConnection:Disconnect()
-			touchDragConnection:Disconnect()
+		return function() --[[ Line: 52 ]]
+			-- upvalues: TouchStartedConnection (copy), TouchEndedConnection (copy), TouchDragConnection (copy)
+			TouchStartedConnection:Disconnect()
+			TouchEndedConnection:Disconnect()
+			TouchDragConnection:Disconnect()
 		end
-	end, { p1, value })
+	end, { Callback, p1 })
 end

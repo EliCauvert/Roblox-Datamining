@@ -1,16 +1,16 @@
-﻿local signalsModule = require(script:FindFirstAncestor("ServerDrivenUi").Parent.Signals)
-local var1 = nil
+﻿local SignalsModule = require(script:FindFirstAncestor("ServerDrivenUi").Parent.Signals)
+local Signal = nil
 
 return {
-	getInGameFriendsByGame = function(p1)
-		-- upvalues: var1 (write), signalsModule (ref)
-		if var1 == nil then
-			var1 = signalsModule.createSignal({})
+	getInGameFriendsByGame = function(p1) --[[ Line: 7 ]]
+		-- upvalues: Signal (ref), SignalsModule (copy)
+		if Signal == nil then
+			Signal = SignalsModule.createSignal({})
 		end
-		return var1(p1)
+		return Signal(p1)
 	end,
-	setInGameFriendsByGameSignal = function(value)
-		-- upvalues: var1 (write)
-		var1 = value
+	setInGameFriendsByGameSignal = function(Value) --[[ Line: 14 ]]
+		-- upvalues: Signal (ref)
+		Signal = Value
 	end
 }

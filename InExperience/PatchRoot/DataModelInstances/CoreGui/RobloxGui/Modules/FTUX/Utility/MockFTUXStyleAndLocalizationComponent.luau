@@ -1,18 +1,18 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local roactModule = require(corePackagesService.Packages.Roact)
-local localizationService = game:GetService("LocalizationService")
-local renderWithCoreScriptsStyleProviderModule = require(script.Parent.Parent.Parent.Common.renderWithCoreScriptsStyleProvider)
-local localization = require(corePackagesService.Workspace.Packages.InExperienceLocales).Localization
-local localizationProvider = require(corePackagesService.Workspace.Packages.Localization).LocalizationProvider
+﻿local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local LocalizationService = game:GetService("LocalizationService")
+local RenderWithCoreScriptsStyleProviderModule = require(script.Parent.Parent.Parent.Common.renderWithCoreScriptsStyleProvider)
+local Localization = require(CorePackages.Workspace.Packages.InExperienceLocales).Localization
+local LocalizationProvider = require(CorePackages.Workspace.Packages.Localization).LocalizationProvider
 
-return function(p1)
-	-- upvalues: roactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), renderWithCoreScriptsStyleProviderModule (ref)
-	return roactModule.createElement(localizationProvider, {
-		localization = localization.new(localizationService.RobloxLocaleId)
+return function(p1) --[[ Line: 10 ]]
+	-- upvalues: RoactModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), RenderWithCoreScriptsStyleProviderModule (copy)
+	return RoactModule.createElement(LocalizationProvider, {
+		localization = Localization.new(LocalizationService.RobloxLocaleId)
 	}, {
-		FTUXMock = roactModule.createElement("ScreenGui", {}, {
-			ThemeProvider = renderWithCoreScriptsStyleProviderModule({
-				Frame = roactModule.createElement("Frame", { Size = UDim2.new(1, 0, 1, 0) }, p1)
+		FTUXMock = RoactModule.createElement("ScreenGui", {}, {
+			ThemeProvider = RenderWithCoreScriptsStyleProviderModule({
+				Frame = RoactModule.createElement("Frame", { Size = UDim2.new(1, 0, 1, 0) }, p1)
 			})
 		})
 	})

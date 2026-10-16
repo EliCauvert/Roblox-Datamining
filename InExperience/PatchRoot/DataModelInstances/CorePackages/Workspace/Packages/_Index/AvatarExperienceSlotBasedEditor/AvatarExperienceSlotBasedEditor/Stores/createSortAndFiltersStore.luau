@@ -1,39 +1,37 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceSlotBasedEditor").Parent
-local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
-local signalsModule = require(parent.Signals)
-local inventoryFiltersModule = require(script.Parent.Parent.Enums.InventoryFilters)
-local inventorySortsModule = require(script.Parent.Parent.Enums.InventorySorts)
-local fFlagAXInventoryDurablesExpiredFilter = avatarExperienceFlagsModule.FFlagAXInventoryDurablesExpiredFilter
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceSlotBasedEditor").Parent
+local SignalsModule = require(Parent.Signals)
+local InventoryFiltersModule = require(script.Parent.Parent.Enums.InventoryFilters)
+local InventorySortsModule = require(script.Parent.Parent.Enums.InventorySorts)
+local FFlagAXInventoryDurablesExpiredFilter = require(Parent.AvatarExperienceFlags).FFlagAXInventoryDurablesExpiredFilter
 
-return function()
-	-- upvalues: signalsModule (ref), fFlagAXInventoryDurablesExpiredFilter (ref), inventoryFiltersModule (ref), inventorySortsModule (ref)
-	local var1, var2 = signalsModule.createSignal(if fFlagAXInventoryDurablesExpiredFilter then {
-		filter = inventoryFiltersModule.Active,
-		sort = inventorySortsModule.Newest
-	} else { sort = inventorySortsModule.Newest })
+return function() --[[ Line: 36 | Named "createSortAndFiltersStore" ]]
+	-- upvalues: SignalsModule (copy), FFlagAXInventoryDurablesExpiredFilter (copy), InventoryFiltersModule (copy), InventorySortsModule (copy)
+	local Signal, Signal2 = SignalsModule.createSignal(if FFlagAXInventoryDurablesExpiredFilter then {
+		filter = InventoryFiltersModule.Active,
+		sort = InventorySortsModule.Newest
+	} else { sort = InventorySortsModule.Newest })
 	
 	return {
-		getSortAndFilters = var1,
-		getFiltersCount = signalsModule.createComputed(function(p1)
-			-- upvalues: fFlagAXInventoryDurablesExpiredFilter (copy), var1 (ref), inventorySortsModule (copy), inventoryFiltersModule (copy)
-			if fFlagAXInventoryDurablesExpiredFilter then
-				local var3 = var1(p1)
-				local var4 = 0
-				
-				if var3.sort ~= inventorySortsModule.Newest then
-					var4 += 1
-				end
-				if var3.filter ~= inventoryFiltersModule.Active then
-					var4 += 1
-				end
-				return var4
-			else
-				return if var1(p1).sort == inventorySortsModule.Newest then 0 else 1
+		getSortAndFilters = Signal,
+		getFiltersCount = SignalsModule.createComputed(function(p1): number --[[ Line: 42 ]]
+			-- upvalues: FFlagAXInventoryDurablesExpiredFilter (upval), Signal (copy), InventorySortsModule (upval), InventoryFiltersModule (upval)
+			if not FFlagAXInventoryDurablesExpiredFilter then
+				return if Signal(p1).sort == InventorySortsModule.Newest then 0 else 1
 			end
+			local SignalResult = Signal(p1)
+			local Count = 0
+			
+			if SignalResult.sort ~= InventorySortsModule.Newest then
+				Count += 1
+			end
+			if SignalResult.filter ~= InventoryFiltersModule.Active then
+				Count += 1
+			end
+			return Count
 		end),
-		applySortAndFilters = function(p1)
-			-- upvalues: var2 (ref)
-			var2(p1)
+		applySortAndFilters = function(p1) --[[ Line: 58 ]]
+			-- upvalues: Signal2 (copy)
+			Signal2(p1)
 		end
 	}
 end

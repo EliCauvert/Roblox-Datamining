@@ -1,23 +1,24 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceAnalytics").Parent
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local addUnifiedEventLoggingModule = require(script.Parent.addUnifiedEventLogging)
-local unifiedEventLogConstantsModule = require(script.Parent.UnifiedEventLogConstants)
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceAnalytics").Parent
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local AddUnifiedEventLoggingModule = require(script.Parent.addUnifiedEventLogging)
+local UnifiedEventLogConstantsModule = require(script.Parent.UnifiedEventLogConstants)
 
-return function(p1)
-	-- upvalues: reactModule (ref), cryoModule (ref), unifiedEventLogConstantsModule (ref), addUnifiedEventLoggingModule (ref)
-	local var1 = reactModule.useMemo(function()
-		-- upvalues: cryoModule (copy), unifiedEventLogConstantsModule (copy), p1 (ref)
-		return cryoModule.Dictionary.join({
+return function(p1) --[[ Line: 28 | Named "useUnifiedEventTagging" ]]
+	-- upvalues: ReactModule (copy), CryoModule (copy), UnifiedEventLogConstantsModule (copy), AddUnifiedEventLoggingModule (copy)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 29 ]]
+		-- upvalues: CryoModule (upval), UnifiedEventLogConstantsModule (upval), p1 (copy)
+		return CryoModule.Dictionary.join({
 			hasDeferredActions = true,
-			sessionTagName = unifiedEventLogConstantsModule.L2_SESSION_TAG_NAME
+			sessionTagName = UnifiedEventLogConstantsModule.L2_SESSION_TAG_NAME
 		}, p1.options or {})
 	end, { p1.options })
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), addUnifiedEventLoggingModule (copy), var1 (ref)
-		if p1.isReady == false then
+	ReactModule.useEffect(function() --[[ Line: 36 ]]
+		-- upvalues: p1 (copy), AddUnifiedEventLoggingModule (upval), UseMemoResult (copy)
+		if p1.isReady ~= false then
+			AddUnifiedEventLoggingModule(p1.ref, p1.payload, UseMemoResult)
+			
 			return
 		end
-		addUnifiedEventLoggingModule(p1.ref, p1.payload, var1)
-	end, { p1.ref, p1.payload, p1.isReady, var1 })
+	end, { p1.ref, p1.payload, p1.isReady, UseMemoResult })
 end

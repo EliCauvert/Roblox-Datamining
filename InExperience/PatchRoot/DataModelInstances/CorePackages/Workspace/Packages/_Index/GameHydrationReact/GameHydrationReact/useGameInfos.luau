@@ -1,51 +1,51 @@
-﻿local parent = script:FindFirstAncestor("GameHydrationReact").Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local dataHydrationModule = require(parent.DataHydration)
-local fFlagMigrateGameInfoToStore = require(parent.SharedFlags).FFlagMigrateGameInfoToStore
-local var1 = nil
-local t = nil
+﻿local Parent = script:FindFirstAncestor("GameHydrationReact").Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local DataHydrationModule = require(Parent.DataHydration)
+local FFlagMigrateGameInfoToStore = require(Parent.SharedFlags).FFlagMigrateGameInfoToStore
+local Callback = nil
+local v1 = nil
 
-if fFlagMigrateGameInfoToStore then
-	var1 = signalsModule.createSignal(false)
-	t = {}
+if FFlagMigrateGameInfoToStore then
+	Callback = SignalsModule.createSignal(false)
+	v1 = {}
 end
-return function(p1)
-	-- upvalues: reactModule (ref), dataHydrationModule (ref), fFlagMigrateGameInfoToStore (ref), var1 (write), t (write), signalsReactModule (ref)
-	local t_1 = {}
+return function(List) --[[ Line: 29 | Named "useGameInfos" ]]
+	-- upvalues: ReactModule (copy), DataHydrationModule (copy), FFlagMigrateGameInfoToStore (copy), Callback (ref), v1 (ref), SignalsReactModule (copy)
+	local List1 = {}
 	
-	for i, v in p1 do
-		table.insert(t_1, tostring(v))
+	for _, value in List do
+		table.insert(List1, (tostring(value)))
 	end
-	table.sort(t_1)
-	local joined = table.concat(t_1, ",")
-	local var2 = reactModule.useMemo(function()
-		-- upvalues: joined (ref)
-		return if joined == "" then {} else string.split(joined, ",")
-	end, { joined })
+	table.sort(List1)
+	local Joined = table.concat(List1, ",")
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 38 ]]
+		-- upvalues: Joined (copy)
+		return if Joined == "" then {} else string.split(Joined, ",")
+	end, { Joined })
 	
-	return signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: dataHydrationModule (copy), var2 (ref), fFlagMigrateGameInfoToStore (copy), var1 (copy), t (copy)
-		local gameInfos = dataHydrationModule.Game.getGameInfoStore(false).getGameInfos(var2)
+	return SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 42 ]]
+		-- upvalues: DataHydrationModule (upval), UseMemoResult (copy), FFlagMigrateGameInfoToStore (upval), Callback (upval), v1 (upval)
+		local GameInfos = DataHydrationModule.Game.getGameInfoStore(false).getGameInfos(UseMemoResult)
 		
-		return function(p2)
-			-- upvalues: fFlagMigrateGameInfoToStore (copy), gameInfos (ref), var1 (copy), t (copy)
-			if fFlagMigrateGameInfoToStore and next(gameInfos) == nil then
-				var1(p2)
+		return function(p1) --[[ Line: 44 ]]
+			-- upvalues: FFlagMigrateGameInfoToStore (upval), GameInfos (copy), Callback (upval), v1 (upval)
+			if FFlagMigrateGameInfoToStore and next(GameInfos) == nil then
+				Callback(p1)
 				
-				return t
+				return v1
 			end
-			local t_1 = {}
+			local DataResults = {}
 			
-			for i, v in gameInfos do
-				local var3 = v.data(p2)
+			for i, gameInfo in GameInfos do
+				local DataResult = gameInfo.data(p1)
 				
-				if var3 then
-					t_1[i] = var3
+				if DataResult then
+					DataResults[i] = DataResult
 				end
 			end
-			return t_1
+			return DataResults
 		end
-	end, { var2 }))
+	end, { UseMemoResult })))
 end

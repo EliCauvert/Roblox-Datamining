@@ -1,103 +1,103 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local inGameMenuDependenciesModule = require(corePackagesService.Packages.InGameMenuDependencies)
-local t = inGameMenuDependenciesModule.t
-local roact = inGameMenuDependenciesModule.Roact
-local UIBlox = inGameMenuDependenciesModule.UIBlox
-local cryo = inGameMenuDependenciesModule.Cryo
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local fFlagCoreUiMigrateUIBloxToFoundation = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
-local var1 = if fFlagCoreUiMigrateUIBloxToFoundation then foundationModule.UNSTABLE.withCursorMigration else UIBlox.App.SelectionImage.withSelectionCursorProvider
-local var2 = if fFlagCoreUiMigrateUIBloxToFoundation then foundationModule.Enums.CursorType else UIBlox.App.SelectionImage.CursorKind
-local parent = script.Parent.Parent.Parent
-local assetsModule = require(parent.Resources.Assets)
-local globalConfigModule = require(parent.GlobalConfig)
-local imageSetButton = UIBlox.Core.ImageSet.ImageSetButton
-local image = foundationModule.Image
-local controlState = foundationModule.Enums.ControlState
-local var3 = t.strictInterface({
-	AnchorPoint = t.optional(t.Vector2),
-	Position = t.optional(t.UDim2),
-	layoutOrder = t.optional(t.integer),
-	onActivated = t.callback,
-	onSelectionGained = t.optional(t.callback),
-	onSelectionLost = t.optional(t.callback),
-	forwardRef = t.optional(t.table)
+﻿local CorePackages = game:GetService("CorePackages")
+local InGameMenuDependenciesModule = require(CorePackages.Packages.InGameMenuDependencies)
+local T = InGameMenuDependenciesModule.t
+local Roact = InGameMenuDependenciesModule.Roact
+local UIBlox = InGameMenuDependenciesModule.UIBlox
+local Cryo = InGameMenuDependenciesModule.Cryo
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local FFlagCoreUiMigrateUIBloxToFoundation = require(CorePackages.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
+local WithCursorMigration = if FFlagCoreUiMigrateUIBloxToFoundation then FoundationModule.UNSTABLE.withCursorMigration else UIBlox.App.SelectionImage.withSelectionCursorProvider
+local CursorType = if FFlagCoreUiMigrateUIBloxToFoundation then FoundationModule.Enums.CursorType else UIBlox.App.SelectionImage.CursorKind
+local Parent = script.Parent.Parent.Parent
+local AssetsModule = require(Parent.Resources.Assets)
+local GlobalConfigModule = require(Parent.GlobalConfig)
+local ImageSetButton = UIBlox.Core.ImageSet.ImageSetButton
+local Image = FoundationModule.Image
+local ControlState = FoundationModule.Enums.ControlState
+local StrictInterfaceResult = T.strictInterface({
+	AnchorPoint = T.optional(T.Vector2),
+	Position = T.optional(T.UDim2),
+	layoutOrder = T.optional(T.integer),
+	onActivated = T.callback,
+	onSelectionGained = T.optional(T.callback),
+	onSelectionLost = T.optional(T.callback),
+	forwardRef = T.optional(T.table)
 })
 
-local function _(p1)
-	-- upvalues: controlState (ref)
-	return if p1 ~= controlState.Selected then p1 == controlState.SelectedPressed else true
+local function _(SelectedPressed): boolean --[[ Line: 39 | Named "isSelectedState" ]]
+	-- upvalues: ControlState (copy)
+	return SelectedPressed == ControlState.Selected or SelectedPressed == ControlState.SelectedPressed
 end
 
-local _ = nil
+local CloseMenuButton = nil
 
-if fFlagCoreUiMigrateUIBloxToFoundation then
-	local var4 = roact.Component:extend("CloseMenuButton")
+if FFlagCoreUiMigrateUIBloxToFoundation then
+	CloseMenuButton = Roact.Component:extend("CloseMenuButton")
 	
-	function var8.init(p1)
+	function CloseMenuButton.init(p1) --[[ Line: 48 ]]
 		p1.wasSelected = false
 	end
 	
-	function var8.render(p1)
-		-- upvalues: var1 (ref), globalConfigModule (ref), var3 (ref), roact (ref), image (ref), assetsModule (ref), var2 (ref), controlState (ref)
-		local props = p1.props
+	function CloseMenuButton.render(p1) --[[ Line: 52 ]]
+		-- upvalues: WithCursorMigration (copy), GlobalConfigModule (copy), StrictInterfaceResult (copy), Roact (copy), Image (copy), AssetsModule (copy), CursorType (copy), ControlState (copy)
+		local Props = p1.props
 		
-		return var1(function(p2)
-			-- upvalues: globalConfigModule (copy), var3 (copy), props (ref), roact (copy), image (copy), assetsModule (copy), var2 (copy), controlState (copy), p1 (ref)
-			if globalConfigModule.propValidation then
-				assert(var3(props))
+		return WithCursorMigration(function(Callback) --[[ Line: 54 ]]
+			-- upvalues: GlobalConfigModule (upval), StrictInterfaceResult (upval), Props (copy), Roact (upval), Image (upval), AssetsModule (upval), CursorType (upval), ControlState (upval), p1 (copy)
+			if GlobalConfigModule.propValidation then
+				assert(StrictInterfaceResult(Props))
 			end
-			return roact.createElement(image, {
-				AnchorPoint = props.AnchorPoint,
-				Position = props.Position,
+			return Roact.createElement(Image, {
+				AnchorPoint = Props.AnchorPoint,
+				Position = Props.Position,
 				Size = UDim2.new(0, 32, 0, 32),
 				backgroundStyle = { Transparency = 1 },
-				LayoutOrder = props.layoutOrder,
-				Image = assetsModule.Images.CloseButton,
-				selection = { SelectionImageObject = p2(var2.RoundedRect) },
-				onActivated = props.onActivated,
-				onStateChanged = function(p3)
-					-- upvalues: controlState (copy), p1 (copy), props (copy)
-					local var5 = if p3 ~= controlState.Selected then p3 == controlState.SelectedPressed else true
+				LayoutOrder = Props.layoutOrder,
+				Image = AssetsModule.Images.CloseButton,
+				selection = { SelectionImageObject = Callback(CursorType.RoundedRect) },
+				onActivated = Props.onActivated,
+				onStateChanged = function(SelectedPressed) --[[ Line: 68 ]]
+					-- upvalues: ControlState (upval), p1 (upval), Props (upval)
+					local IsSelectedPressedMatch: boolean = SelectedPressed == ControlState.Selected or SelectedPressed == ControlState.SelectedPressed
 					
-					if var5 and not p1.wasSelected then
-						if props.onSelectionGained then
-							props.onSelectionGained()
+					if IsSelectedPressedMatch and not p1.wasSelected then
+						if Props.onSelectionGained then
+							Props.onSelectionGained()
 						end
-					elseif not var5 and p1.wasSelected and props.onSelectionLost then
-						props.onSelectionLost()
+					elseif not IsSelectedPressedMatch and p1.wasSelected and Props.onSelectionLost then
+						Props.onSelectionLost()
 					end
-					p1.wasSelected = var5
+					p1.wasSelected = IsSelectedPressedMatch
 				end,
-				ref = props.forwardRef
+				ref = Props.forwardRef
 			})
 		end)
 	end
 else
-	local var4 = function(p1)
-		-- upvalues: var1 (ref), globalConfigModule (ref), var3 (ref), roact (ref), imageSetButton (ref), assetsModule (ref), var2 (ref)
-		return var1(function(p2)
-			-- upvalues: globalConfigModule (copy), var3 (copy), p1 (ref), roact (copy), imageSetButton (copy), assetsModule (copy), var2 (copy)
-			if globalConfigModule.propValidation then
-				assert(var3(p1))
+	CloseMenuButton = function(Frame) --[[ Line: 86 ]]
+		-- upvalues: WithCursorMigration (copy), GlobalConfigModule (copy), StrictInterfaceResult (copy), Roact (copy), ImageSetButton (copy), AssetsModule (copy), CursorType (copy)
+		return WithCursorMigration(function(Callback) --[[ Line: 87 ]]
+			-- upvalues: GlobalConfigModule (upval), StrictInterfaceResult (upval), Frame (copy), Roact (upval), ImageSetButton (upval), AssetsModule (upval), CursorType (upval)
+			if GlobalConfigModule.propValidation then
+				assert(StrictInterfaceResult(Frame))
 			end
-			return roact.createElement(imageSetButton, {
-				AnchorPoint = p1.AnchorPoint,
+			return Roact.createElement(ImageSetButton, {
+				AnchorPoint = Frame.AnchorPoint,
 				BackgroundTransparency = 1,
-				Image = assetsModule.Images.CloseButton,
-				Position = p1.Position,
+				Image = AssetsModule.Images.CloseButton,
+				Position = Frame.Position,
 				Size = UDim2.new(0, 32, 0, 32),
-				LayoutOrder = p1.layoutOrder,
-				SelectionImageObject = p2(var2.RoundedRect),
-				[roact.Event.Activated] = p1.onActivated,
-				[roact.Event.SelectionGained] = p1.onSelectionGained,
-				[roact.Event.SelectionLost] = p1.onSelectionLost,
-				[roact.Ref] = p1.forwardRef
+				LayoutOrder = Frame.layoutOrder,
+				SelectionImageObject = Callback(CursorType.RoundedRect),
+				[Roact.Event.Activated] = Frame.onActivated,
+				[Roact.Event.SelectionGained] = Frame.onSelectionGained,
+				[Roact.Event.SelectionLost] = Frame.onSelectionLost,
+				[Roact.Ref] = Frame.forwardRef
 			})
 		end)
 	end
 end
-return roact.forwardRef(function(p1, p2)
-	-- upvalues: roact (ref), var4 (write), cryo (ref)
-	return roact.createElement(var4, cryo.Dictionary.join(p1, { forwardRef = p2 }))
+return Roact.forwardRef(function(p1, ForwardRef) --[[ Line: 110 ]]
+	-- upvalues: Roact (copy), CloseMenuButton (ref), Cryo (copy)
+	return Roact.createElement(CloseMenuButton, Cryo.Dictionary.join(p1, { forwardRef = ForwardRef }))
 end)

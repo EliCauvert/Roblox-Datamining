@@ -1,61 +1,58 @@
-﻿local parent = script.Parent.Parent.Parent
-local constantsModule = require(parent.Constants)
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local collectionService = game:GetService("CollectionService")
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local getFFlagUGCValidateNoExtraTagsRequireHsrAssetsModule = require(parent.flags.getFFlagUGCValidateNoExtraTagsRequireHsrAssets)
-local t = {
-	categories = constantsModule.AllAssetUploadCategories,
-	requiredData = if getFFlagUGCValidateNoExtraTagsRequireHsrAssetsModule() then {
-		validationEnumsModule.SharedDataMember.rootInstance,
-		validationEnumsModule.SharedDataMember.hsrAssets
-	} else { validationEnumsModule.SharedDataMember.rootInstance },
-	expectedFailures = {
-		"Asset_EF_TaggedJacket",
-		"Bundle_EF_BodyWithLLLTagged.LeftLeg"
-	}
-}
+﻿local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local CollectionService = game:GetService("CollectionService")
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local GetFFlagUGCValidateNoExtraTagsRequireHsrAssetsModule = require(Parent.flags.getFFlagUGCValidateNoExtraTagsRequireHsrAssets)
 
-local function collectTaggedPaths(p1, p2)
-	-- upvalues: collectionService (ref)
-	local descendants = p1:GetDescendants()
-	table.insert(descendants, p1)
+local function collectTaggedPaths(RootInstance, List) --[[ Line: 22 ]]
+	-- upvalues: CollectionService (copy)
+	local Descendants = RootInstance:GetDescendants()
+	table.insert(Descendants, RootInstance)
 	
-	for i, v in descendants do
-		if #collectionService:GetTags(v) > 0 then
-			table.insert(p2, v:GetFullName())
+	for _, descendant in Descendants do
+		if #CollectionService:GetTags(descendant) > 0 then
+			table.insert(List, descendant:GetFullName())
 		end
 	end
 end
 
-function t.run(p3, p4)
-	-- upvalues: collectTaggedPaths (ref), getFFlagUGCValidateNoExtraTagsRequireHsrAssetsModule (ref), errorSourceStringsModule (ref)
-	local t = {}
-	collectTaggedPaths(p4.rootInstance, t)
-	
-	if getFFlagUGCValidateNoExtraTagsRequireHsrAssetsModule() then
-		for i, v in p4.hsrAssets do
-			for i_1, v_1 in v do
-				collectTaggedPaths(v_1, t)
-			end
-		end
-	else
-		local hsrAssets = p4.hsrAssets
+return {
+	categories = require(Parent.Constants).AllAssetUploadCategories,
+	requiredData = if GetFFlagUGCValidateNoExtraTagsRequireHsrAssetsModule() then {
+		ValidationEnumsModule.SharedDataMember.rootInstance,
+		ValidationEnumsModule.SharedDataMember.hsrAssets
+	} else { ValidationEnumsModule.SharedDataMember.rootInstance },
+	expectedFailures = {
+		"Asset_EF_TaggedJacket",
+		"Bundle_EF_BodyWithLLLTagged.LeftLeg"
+	},
+	run = function(p1, p2) --[[ Line: 32 ]]
+		-- upvalues: collectTaggedPaths (copy), GetFFlagUGCValidateNoExtraTagsRequireHsrAssetsModule (copy), ErrorSourceStringsModule (copy)
+		local List = {}
+		collectTaggedPaths(p2.rootInstance, List)
 		
-		if type(hsrAssets) == "table" then
-			for i, v in hsrAssets do
-				if type(v) == "table" then
-					for i_1, v_1 in v do
-						collectTaggedPaths(v_1, t)
+		if GetFFlagUGCValidateNoExtraTagsRequireHsrAssetsModule() then
+			for _, hsrAsset in p2.hsrAssets do
+				for _, value in hsrAsset do
+					collectTaggedPaths(value, List)
+				end
+			end
+		else
+			local HsrAssets = p2.hsrAssets
+			
+			if type(HsrAssets) == "table" then
+				for _, hsrAsset1 in HsrAssets do
+					if type(hsrAsset1) == "table" then
+						for _, value1 in hsrAsset1 do
+							collectTaggedPaths(value1, List)
+						end
 					end
 				end
 			end
 		end
+		if #List > 0 then
+			p1:fail(ErrorSourceStringsModule.Keys.InstanceTagsFound, { ProblematicDescendantPaths = table.concat(List, ", ") })
+		end
 	end
-	if #t > 0 then
-		p3:fail(errorSourceStringsModule.Keys.InstanceTagsFound, { ProblematicDescendantPaths = table.concat(t, ", ") })
-	end
-end
-
-return t
+}

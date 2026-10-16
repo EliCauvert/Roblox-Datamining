@@ -1,103 +1,103 @@
-﻿local parent = script:FindFirstAncestor("Moments").Parent
-local builderIconsModule = require(parent.BuilderIcons)
-local foundationModule = require(parent.Foundation)
-local localizationModule = require(parent.Localization)
-local reactModule = require(parent.React)
-local reactOtterModule = require(parent.ReactOtter)
-local icon = foundationModule.Icon
-local text = foundationModule.Text
-local view = foundationModule.View
-local iconSize = foundationModule.Enums.IconSize
-local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
-local useLocalization = localizationModule.Hooks.useLocalization
-local useTokens = foundationModule.Hooks.useTokens
-local t = {
+﻿local Parent = script:FindFirstAncestor("Moments").Parent
+local BuilderIconsModule = require(Parent.BuilderIcons)
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local ReactOtterModule = require(Parent.ReactOtter)
+local Icon = FoundationModule.Icon
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local IconSize = FoundationModule.Enums.IconSize
+local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local config = {
 	title = "Feature.Moments.Label.MomentRemovedTitle",
 	body = "Feature.Moments.Label.MomentRemovedBody"
 }
-local t_1 = {
+local config1 = {
 	title = "Feature.Moments.Label.MomentUnavailable",
 	body = "Feature.Moments.Label.MomentUnavailableDefault"
 }
-local t_2 = { duration = 0.75, easingStyle = { 0.37, 0, 0.63, 1 } }
+local config2 = { duration = 0.75, easingStyle = { 0.37, 0, 0.63, 1 } }
 
-return function(p1)
-	-- upvalues: useTokens (ref), useLocalization (ref), t (ref), t_1 (ref), reactModule (ref), reactOtterModule (ref), t_2 (ref), view (ref), text (ref), stateLayerAffordance (ref), icon (ref), builderIconsModule (ref), iconSize (ref)
-	local var1 = useTokens()
-	local var2 = useLocalization(if p1.isModerated then t else t_1)
-	local animate = p1.animate
-	local var3 = reactModule.useRef(animate)
-	local var4 = reactModule.useRef(nil)
-	local var5, var6 = reactOtterModule.useAnimatedBinding(0, reactModule.useCallback(function(p2)
-		-- upvalues: var4 (ref), var3 (ref), reactOtterModule (copy), t_2 (copy)
-		local current = var4.current
+return function(Frame) --[[ Line: 63 | Named "MomentUnavailableView" ]]
+	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), config (copy), config1 (copy), ReactModule (copy), ReactOtterModule (copy), config2 (copy), View (copy), Text (copy), StateLayerAffordance (copy), Icon (copy), BuilderIconsModule (copy), IconSize (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseLocalizationResult = UseLocalizationFunction(if Frame.isModerated then config else config1)
+	local Animate = Frame.animate
+	local UseRefResult = ReactModule.useRef(Animate)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0, (ReactModule.useCallback(function(p1: number) --[[ Line: 71 ]]
+		-- upvalues: UseRefResult1 (copy), UseRefResult (copy), ReactOtterModule (upval), config2 (upval)
+		local CurrentFunction: (any) -> () = UseRefResult1.current
 		
-		if var3.current and current ~= nil then
-			current(reactOtterModule.ease(if p2 >= 0.5 then 0 else 1, t_2))
+		if UseRefResult.current and CurrentFunction ~= nil then
+			CurrentFunction(ReactOtterModule.ease(if p1 >= 0.5 then 0 else 1, config2))
 		end
-	end, {}))
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), animate (ref), var4 (ref), var6 (ref), reactOtterModule (copy), t_2 (copy)
-		var3.current = animate
-		var4.current = var6
+	end, {})))
+	ReactModule.useEffect(function() --[[ Line: 79 ]]
+		-- upvalues: UseRefResult (copy), Animate (copy), UseRefResult1 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), config2 (upval)
+		UseRefResult.current = Animate
+		UseRefResult1.current = UseAnimatedBindingResult2
 		
-		if animate then
-			var6(reactOtterModule.ease(1, t_2))
+		if Animate then
+			UseAnimatedBindingResult2(ReactOtterModule.ease(1, config2))
 			
 			return
+		else
+			UseAnimatedBindingResult2(ReactOtterModule.instant(0))
 		end
-		var6(reactOtterModule.instant(0))
-	end, { animate, var6 })
-	local var7 = 8 / var1.Size.Size_1200
+	end, { Animate, UseAnimatedBindingResult2 })
+	local v1 = 8 / UseTokensResult.Size.Size_1200
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "size-full bg-surface-0",
 		testId = "moments-unavailable-moment",
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Content = reactModule.createElement(view, {
+		Content = ReactModule.createElement(View, {
 			tag = "col align-x-center align-y-center size-full padding-x-xlarge",
 			ZIndex = 1
 		}, {
-			TextBlock = reactModule.createElement(view, {
+			TextBlock = ReactModule.createElement(View, {
 				tag = "col align-x-center gap-small size-full-0 auto-y",
 				sizeConstraint = { MaxSize = Vector2.new(420, 1e999) }
 			}, {
-				Title = reactModule.createElement(text, {
+				Title = ReactModule.createElement(Text, {
 					LayoutOrder = 1,
 					tag = "size-full-0 auto-y text-heading-small text-wrap text-align-x-center content-emphasis",
-					Text = var2.title
+					Text = UseLocalizationResult.title
 				}),
-				Body = reactModule.createElement(text, {
+				Body = ReactModule.createElement(Text, {
 					LayoutOrder = 2,
 					tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-center content-default",
-					Text = var2.body
+					Text = UseLocalizationResult.body
 				})
 			})
 		}),
-		NextAffordance = reactModule.createElement(view, {
+		NextAffordance = ReactModule.createElement(View, {
 			tag = "position-bottom-center anchor-bottom-center auto-xy",
 			ZIndex = 2,
 			padding = {
-				bottom = UDim.new(0, (p1.bottomInset or 0) + var1.Padding.Small)
+				bottom = UDim.new(0, (Frame.bottomInset or 0) + UseTokensResult.Padding.Small)
 			}
 		}, {
-			NextButton = reactModule.createElement(view, {
+			NextButton = ReactModule.createElement(View, {
 				tag = "size-1200 radius-circle",
 				testId = "moments-unavailable-next",
-				onActivated = p1.onNext,
-				stateLayer = { affordance = stateLayerAffordance.None }
+				onActivated = Frame.onNext,
+				stateLayer = { affordance = StateLayerAffordance.None }
 			}, {
-				Arrow = reactModule.createElement(icon, {
+				Arrow = ReactModule.createElement(Icon, {
 					testId = "moments-unavailable-next-arrow",
 					AnchorPoint = Vector2.new(0.5, 0.5),
-					Position = var5:map(function(p2)
-						-- upvalues: var7 (ref)
-						return UDim2.fromScale(0.5, 0.5 + p2 * var7)
+					Position = UseAnimatedBindingResult:map(function(p1): UDim2 --[[ Line: 92 ]]
+						-- upvalues: v1 (copy)
+						return UDim2.fromScale(0.5, 0.5 + p1 * v1)
 					end),
-					name = builderIconsModule.Icon.DoubleChevronLargeDown,
-					size = iconSize.Large,
-					style = var1.Color.Content.Emphasis
+					name = BuilderIconsModule.Icon.DoubleChevronLargeDown,
+					size = IconSize.Large,
+					style = UseTokensResult.Color.Content.Emphasis
 				})
 			})
 		})

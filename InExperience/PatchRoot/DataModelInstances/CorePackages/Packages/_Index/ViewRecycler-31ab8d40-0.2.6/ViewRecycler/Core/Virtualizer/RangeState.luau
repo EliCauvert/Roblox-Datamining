@@ -1,71 +1,72 @@
-﻿local viewRecycler = script:FindFirstAncestor("ViewRecycler")
-local shallowTableModule = require(viewRecycler.Internal.ShallowTable)
-local typesModule = require(viewRecycler.Core.Types)
-local createEventModule = require(viewRecycler.Internal.createEvent)
-local INDEX_RANGE_KEYS = typesModule.INDEX_RANGE_KEYS
+﻿local ViewRecycler = script:FindFirstAncestor("ViewRecycler")
+local ShallowTableModule = require(ViewRecycler.Internal.ShallowTable)
+local TypesModule = require(ViewRecycler.Core.Types)
+local CreateEventModule = require(ViewRecycler.Internal.createEvent)
+local INDEXRANGEKEYS = TypesModule.INDEX_RANGE_KEYS
 
-return function()
-	-- upvalues: typesModule (ref), createEventModule (ref), shallowTableModule (ref), INDEX_RANGE_KEYS (ref)
-	local EMPTY_INDEX_RANGE = typesModule.EMPTY_INDEX_RANGE
-	local var1 = false
-	local var2 = false
-	local var3 = 0
-	local var4 = createEventModule()
+return function() --[[ Line: 18 | Named "createRangeState" ]]
+	-- upvalues: TypesModule (copy), CreateEventModule (copy), ShallowTableModule (copy), INDEXRANGEKEYS (copy)
+	local EMPTYINDEXRANGE = TypesModule.EMPTY_INDEX_RANGE
+	local Flag = false
+	local Flag1 = false
+	local Count = 0
+	local EventModule = CreateEventModule()
 	
 	return {
-		report = function(p1)
-			-- upvalues: var1 (write), shallowTableModule (copy), EMPTY_INDEX_RANGE (write), INDEX_RANGE_KEYS (copy), var2 (write), var3 (write), var4 (ref)
-			if var1 and shallowTableModule.containsEqual(EMPTY_INDEX_RANGE, p1, INDEX_RANGE_KEYS) then return end
-			var1 = true
-			EMPTY_INDEX_RANGE = p1
-			var2 = false
+		report = function(p1) --[[ Line: 44 ]]
+			-- upvalues: Flag (ref), ShallowTableModule (upval), EMPTYINDEXRANGE (ref), INDEXRANGEKEYS (upval), Flag1 (ref), Count (ref), EventModule (copy)
+			if Flag and ShallowTableModule.containsEqual(EMPTYINDEXRANGE, p1, INDEXRANGEKEYS) then return end
+			Flag = true
+			EMPTYINDEXRANGE = p1
+			Flag1 = false
 			
-			if var3 > 0 then
-				var4.fire(p1)
+			if Count > 0 then
+				EventModule.fire(p1)
 			end
 		end,
-		set = function(value)
-			-- upvalues: var1 (write), shallowTableModule (copy), EMPTY_INDEX_RANGE (write), INDEX_RANGE_KEYS (copy), var2 (write)
-			if var1 and shallowTableModule.containsEqual(EMPTY_INDEX_RANGE, value, INDEX_RANGE_KEYS) then
+		set = function(p1) --[[ Line: 25 ]]
+			-- upvalues: Flag (ref), ShallowTableModule (upval), EMPTYINDEXRANGE (ref), INDEXRANGEKEYS (upval), Flag1 (ref)
+			if not Flag or not ShallowTableModule.containsEqual(EMPTYINDEXRANGE, p1, INDEXRANGEKEYS) then
+				Flag = true
+				EMPTYINDEXRANGE = p1
+				Flag1 = true
+				
 				return
 			end
-			var1 = true
-			EMPTY_INDEX_RANGE = value
-			var2 = true
 		end,
-		publish = function()
-			-- upvalues: var2 (write), var3 (write), var4 (ref), EMPTY_INDEX_RANGE (write)
-			if not var2 then return end
-			var2 = false
+		publish = function() --[[ Line: 34 ]]
+			-- upvalues: Flag1 (ref), Count (ref), EventModule (copy), EMPTYINDEXRANGE (ref)
+			if not Flag1 then return end
+			Flag1 = false
 			
-			if var3 > 0 then
-				var4.fire(EMPTY_INDEX_RANGE)
+			if Count > 0 then
+				EventModule.fire(EMPTYINDEXRANGE)
 			end
 		end,
-		get = function()
-			-- upvalues: EMPTY_INDEX_RANGE (write)
-			return EMPTY_INDEX_RANGE
+		get = function() --[[ Line: 74 ]]
+			-- upvalues: EMPTYINDEXRANGE (ref)
+			return EMPTYINDEXRANGE
 		end,
-		connect = function(p1)
-			-- upvalues: var3 (write), var4 (ref)
-			var3 += 1
-			local var5 = var4.connect(p1)
-			local var6 = true
+		connect = function(p1) --[[ Line: 56 ]]
+			-- upvalues: Count (ref), EventModule (copy)
+			Count += 1
+			local ConnectResult = EventModule.connect(p1)
+			local Flag = true
 			
-			return function()
-				-- upvalues: var6 (write), var3 (copy), var5 (ref)
-				if var6 then
-					var6 = false
-					var3 -= 1
-					var5()
+			return function() --[[ Line: 60 ]]
+				-- upvalues: Flag (ref), Count (upval), ConnectResult (copy)
+				if Flag then
+					Flag = false
+					Count -= 1
+					ConnectResult()
 					
 					return
 				end
 			end
 		end,
-		isObserved = function()
-			-- upvalues: var3 (write)
-			return var3 > 0
+		isObserved = function(): boolean --[[ Line: 78 ]]
+			-- upvalues: Count (ref)
+			return Count > 0
 		end
 	}
 end

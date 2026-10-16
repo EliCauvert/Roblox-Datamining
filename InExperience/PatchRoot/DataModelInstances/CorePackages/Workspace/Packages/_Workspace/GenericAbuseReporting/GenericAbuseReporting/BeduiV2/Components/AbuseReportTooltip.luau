@@ -1,36 +1,37 @@
-﻿local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
-local parent = genericAbuseReporting.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local coachmark = foundationModule.Coachmark
-local popoverAlign = foundationModule.Enums.PopoverAlign
-local popoverSide = foundationModule.Enums.PopoverSide
-local _ = require(genericAbuseReporting.BeduiV2.Utils.Translate.translate)
-local useArTranslation = require(genericAbuseReporting.BeduiV2.Utils.Translate.arTranslation).useArTranslation
+﻿local GenericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
+local Parent = GenericAbuseReporting.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local Coachmark = FoundationModule.Coachmark
+local PopoverAlign = FoundationModule.Enums.PopoverAlign
+local PopoverSide = FoundationModule.Enums.PopoverSide
+local _ = require(GenericAbuseReporting.BeduiV2.Utils.Translate.translate)
+local UseArTranslationFunction = require(GenericAbuseReporting.BeduiV2.Utils.Translate.arTranslation).useArTranslation
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useArTranslation (ref), reactModule (ref), coachmark (ref), popoverAlign (ref), popoverSide (ref), buttonVariant (ref)
-	local translateIntoString = useArTranslation().translateIntoString
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 32 | Named "AbuseReportTooltip" ]]
+	-- upvalues: UseArTranslationFunction (copy), ReactModule (copy), Coachmark (copy), PopoverAlign (copy), PopoverSide (copy), ButtonVariant (copy)
+	local TranslateIntoStringFunction = UseArTranslationFunction().translateIntoString
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 35 ]]
+		-- upvalues: p1 (copy)
+		p1.onClose()
+	end, { p1.onClose })
 	
-	return reactModule.createElement(coachmark, {
-		title = translateIntoString(p1.tooltipTitle),
-		text = translateIntoString(p1.tooltipText),
+	return ReactModule.createElement(Coachmark, {
+		title = TranslateIntoStringFunction(p1.tooltipTitle),
+		text = TranslateIntoStringFunction(p1.tooltipText),
 		isOpen = p1.isOpen,
-		align = popoverAlign.End,
-		side = popoverSide.Bottom,
+		align = PopoverAlign.End,
+		side = PopoverSide.Bottom,
 		onClose = p1.onClose,
 		actions = if p1.buttonLabel then {
 			{
-				text = translateIntoString(p1.buttonLabel),
-				onActivated = reactModule.useCallback(function()
-					-- upvalues: p1 (ref)
-					p1.onClose()
-				end, { p1.onClose }),
-				variant = buttonVariant.Emphasis
+				text = TranslateIntoStringFunction(p1.buttonLabel),
+				onActivated = UseResult,
+				variant = ButtonVariant.Emphasis
 			}
 		} else nil,
 		LayoutOrder = p1.layoutOrder,
-		ref = p2
+		ref = Ref
 	}, p1.children)
 end))

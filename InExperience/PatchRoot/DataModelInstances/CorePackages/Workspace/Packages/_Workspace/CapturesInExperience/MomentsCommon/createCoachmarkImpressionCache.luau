@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent.Parent._Index.MomentsCommon.MomentsCommon.Utils.createCoachmarkImpressionCache)
+﻿return (require(script.Parent.Parent.Parent.Parent._Index.MomentsCommon.MomentsCommon.Utils.createCoachmarkImpressionCache))

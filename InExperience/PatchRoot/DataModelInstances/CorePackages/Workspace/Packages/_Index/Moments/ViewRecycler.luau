@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.ViewRecycler.ViewRecycler)
+﻿return (require(script.Parent.Parent.Parent._Index.ViewRecycler.ViewRecycler))

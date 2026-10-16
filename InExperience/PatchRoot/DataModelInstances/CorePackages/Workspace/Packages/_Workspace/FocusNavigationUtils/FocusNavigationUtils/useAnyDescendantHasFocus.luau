@@ -1,65 +1,66 @@
-﻿local guiService = game:GetService("GuiService")
-local reactModule = require(script:FindFirstAncestor("FocusNavigationUtils").Parent.React)
+﻿local GuiService = game:GetService("GuiService")
+local ReactModule = require(script:FindFirstAncestor("FocusNavigationUtils").Parent.React)
 
-local function hasFocus(p1)
-	-- upvalues: guiService (ref)
-	local selectedCoreObject = guiService.SelectedCoreObject
+local function hasFocus(Ancestors): boolean --[[ Line: 6 ]]
+	-- upvalues: GuiService (copy)
+	local SelectedCoreObject = GuiService.SelectedCoreObject
 	
-	if selectedCoreObject == nil or p1 == nil then
-		return false
-	elseif selectedCoreObject:FindFirstAncestorOfClass("CoreGui") == nil then
+	if SelectedCoreObject == nil or Ancestors == nil then
 		return false
 	end
-	for i, v in p1 do
-		if selectedCoreObject == v or selectedCoreObject:IsDescendantOf(v) then
+	if SelectedCoreObject:FindFirstAncestorOfClass("CoreGui") == nil then
+		return false
+	end
+	for _, ancestor in Ancestors do
+		if SelectedCoreObject == ancestor or SelectedCoreObject:IsDescendantOf(ancestor) then
 			return true
 		end
 	end
 	return false
 end
 
-return function(p2)
-	-- upvalues: hasFocus (ref), reactModule (ref), guiService (ref)
-	local var1, var2 = reactModule.useState(hasFocus(p2))
-	reactModule.useEffect(function()
-		-- upvalues: p2 (ref), var2 (ref), hasFocus (copy), guiService (copy)
-		local var3 = nil
-		local var4 = nil
+return function(p1) --[[ Line: 25 | Named "useAnyDescendantHasFocus" ]]
+	-- upvalues: hasFocus (copy), ReactModule (copy), GuiService (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState((hasFocus(p1)))
+	ReactModule.useEffect(function() --[[ Line: 29 ]]
+		-- upvalues: p1 (copy), UseStateResult2 (copy), hasFocus (upval), GuiService (upval)
+		local Connection = nil
+		local AncestryChangedConnection = nil
 		
-		if p2 ~= nil and #p2 > 0 then
-			var2(hasFocus(p2))
-			var3 = guiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function()
-				-- upvalues: var4 (write), hasFocus (copy), p2 (copy), guiService (copy), var2 (copy)
-				if var4 then
-					var4:Disconnect()
+		if p1 ~= nil and #p1 > 0 then
+			UseStateResult2((hasFocus(p1)))
+			Connection = GuiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function() --[[ Line: 36 ]]
+				-- upvalues: AncestryChangedConnection (ref), hasFocus (upval), p1 (upval), GuiService (upval), UseStateResult2 (upval)
+				if AncestryChangedConnection then
+					AncestryChangedConnection:Disconnect()
 				end
-				local var5 = hasFocus(p2)
-				local selectedCoreObject = guiService.SelectedCoreObject
+				local HasFocus = hasFocus(p1)
+				local SelectedCoreObject = GuiService.SelectedCoreObject
 				
-				if var5 and selectedCoreObject then
-					var4 = selectedCoreObject.AncestryChanged:Connect(function()
-						-- upvalues: selectedCoreObject (ref), var4 (copy), var2 (copy), hasFocus (copy), p2 (copy)
-						if selectedCoreObject:FindFirstAncestorOfClass("CoreGui") == nil then
-							var4:Disconnect()
-							var2(hasFocus(p2))
+				if HasFocus and SelectedCoreObject then
+					AncestryChangedConnection = SelectedCoreObject.AncestryChanged:Connect(function() --[[ Line: 44 ]]
+						-- upvalues: SelectedCoreObject (copy), AncestryChangedConnection (upval), UseStateResult2 (upval), hasFocus (upval), p1 (upval)
+						if SelectedCoreObject:FindFirstAncestorOfClass("CoreGui") == nil then
+							AncestryChangedConnection:Disconnect()
+							UseStateResult2((hasFocus(p1)))
 						end
 					end)
 				end
-				var2(var5)
+				UseStateResult2(HasFocus)
 			end)
 		else
-			var2(false)
+			UseStateResult2(false)
 		end
-		return function()
-			-- upvalues: var3 (write), var4 (write)
-			if var3 then
-				var3:Disconnect()
+		return function() --[[ Line: 58 ]]
+			-- upvalues: Connection (ref), AncestryChangedConnection (ref)
+			if Connection then
+				Connection:Disconnect()
 			end
-			if var4 then
-				var4:Disconnect()
+			if AncestryChangedConnection then
+				AncestryChangedConnection:Disconnect()
 			end
 		end
-	end, { p2 })
+	end, { p1 })
 	
-	return var1
+	return UseStateResult
 end

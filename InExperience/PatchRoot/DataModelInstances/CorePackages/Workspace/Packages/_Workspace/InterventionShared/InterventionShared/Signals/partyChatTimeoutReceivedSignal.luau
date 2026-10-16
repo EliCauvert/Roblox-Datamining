@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("InterventionShared").Parent.AppCommonLib).Signal.new()
+﻿return (require(script:FindFirstAncestor("InterventionShared").Parent.AppCommonLib).Signal.new())

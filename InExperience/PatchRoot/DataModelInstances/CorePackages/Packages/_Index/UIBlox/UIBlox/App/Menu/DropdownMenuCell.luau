@@ -1,271 +1,274 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local parent_2 = parent_1.Parent
-local core = parent_1.Core
-local roactModule = require(parent_2.Roact)
-local tModule = require(parent_2.t)
-local cryoModule = require(parent_2.Cryo)
-local foundationModule = require(parent_2.Foundation)
-local interactableModule = require(core.Control.Interactable)
-local controlStateModule = require(core.Control.Enum.ControlState)
-local withStyleModule = require(core.Style.withStyle)
-local useStyleModule = require(parent_1.Core.Style.useStyle)
-local withSelectionCursorProviderModule = require(parent.SelectionImage.withSelectionCursorProvider)
-local useCursorByTypeModule = require(parent.SelectionCursor.useCursorByType)
-local cursorTypeModule = require(parent.SelectionCursor.CursorType)
-local cursorKindModule = require(parent.SelectionImage.CursorKind)
-local imageSetComponentModule = require(core.ImageSet.ImageSetComponent)
-local skeleton = foundationModule.Skeleton
-local iconSizeModule = require(parent.Constant.IconSize)
-local genericTextLabelModule = require(core.Text.GenericTextLabel.GenericTextLabel)
-local validateImageModule = require(core.ImageSet.Validator.validateImage)
-local getContentStyleModule = require(core.Button.getContentStyle)
-local validateTypographyInfoModule = require(core.Style.Validator.validateTypographyInfo)
-local validateColorInfoModule = require(core.Style.Validator.validateColorInfo)
-local styleDefaultsModule = require(script.Parent.StyleDefaults)
-local dropdownMenuCell = roactModule.PureComponent:extend("DropdownMenuCell")
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local Parent2 = Parent1.Parent
+local Core = Parent1.Core
+local RoactModule = require(Parent2.Roact)
+local TModule = require(Parent2.t)
+local CryoModule = require(Parent2.Cryo)
+local InteractableModule = require(Core.Control.Interactable)
+local ControlStateModule = require(Core.Control.Enum.ControlState)
+local WithStyleModule = require(Core.Style.withStyle)
+local UseStyleModule = require(Parent1.Core.Style.useStyle)
+local WithSelectionCursorProviderModule = require(Parent.SelectionImage.withSelectionCursorProvider)
+local UseCursorByTypeModule = require(Parent.SelectionCursor.useCursorByType)
+local CursorTypeModule = require(Parent.SelectionCursor.CursorType)
+local CursorKindModule = require(Parent.SelectionImage.CursorKind)
+local ImageSetComponentModule = require(Core.ImageSet.ImageSetComponent)
+local Skeleton = require(Parent2.Foundation).Skeleton
+local IconSizeModule = require(Parent.Constant.IconSize)
+local GenericTextLabelModule = require(Core.Text.GenericTextLabel.GenericTextLabel)
+local ValidateImageModule = require(Core.ImageSet.Validator.validateImage)
+local GetContentStyleModule = require(Core.Button.getContentStyle)
+local ValidateTypographyInfoModule = require(Core.Style.Validator.validateTypographyInfo)
+local ValidateColorInfoModule = require(Core.Style.Validator.validateColorInfo)
+local StyleDefaultsModule = require(script.Parent.StyleDefaults)
+local DropdownMenuCell = RoactModule.PureComponent:extend("DropdownMenuCell")
 
-local function getColorFromMap(p1, p2)
-	-- upvalues: controlStateModule (ref)
-	local var1 = p1[p2] or p1[controlStateModule.Default]
+local function getColorFromMap(p1, p2) --[[ Line: 40 ]]
+	-- upvalues: ControlStateModule (copy)
+	local ColorFromMap = p1[p2] or p1[ControlStateModule.Default]
 	
-	return { Color = var1.Color, Transparency = var1.Transparency }
+	return {
+		Color = ColorFromMap.Color,
+		Transparency = ColorFromMap.Transparency
+	}
 end
 
-local function _(p1, p2, p3, p4, p5)
-	-- upvalues: controlStateModule (ref)
-	local var1 = p1(p2, p3, p4)
+local function _(Callback, p1, Disabled, p2, p3) --[[ Line: 48 | Named "getButtonStyle" ]]
+	-- upvalues: ControlStateModule (copy)
+	local CallbackResult = Callback(p1, Disabled, p2)
 	
-	if p3 ~= controlStateModule.Disabled and p3 ~= controlStateModule.Pressed and p5 then
-		var1.Transparency = 0.5 * var1.Transparency + 0.5
+	if Disabled ~= ControlStateModule.Disabled and Disabled ~= ControlStateModule.Pressed and p3 then
+		CallbackResult.Transparency = 0.5 * CallbackResult.Transparency + 0.5
 	end
-	return var1
+	return CallbackResult
 end
 
-local _ = function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: controlStateModule (ref)
-	local var1 = p1(p2, p3, p4)
+local _ = function(Callback, p1, Disabled, p2, p3, p4) --[[ Line: 56 | Named "getButtonContentStyle" ]]
+	-- upvalues: ControlStateModule (copy)
+	local CallbackResult = Callback(p1, Disabled, p2)
 	
-	if p3 ~= controlStateModule.Disabled and p3 ~= controlStateModule.Pressed and (p5 or not p6) then
-		var1.Transparency = 0.5 * var1.Transparency + 0.5
+	if Disabled ~= ControlStateModule.Disabled and Disabled ~= ControlStateModule.Pressed and (p3 or not p4) then
+		CallbackResult.Transparency = 0.5 * CallbackResult.Transparency + 0.5
 	end
-	return var1
+	return CallbackResult
 end
 
-function dropdownMenuCell.init(p1)
-	-- upvalues: controlStateModule (ref)
-	p1:setState({ controlState = controlStateModule.Initialize })
+function DropdownMenuCell.init(p1) --[[ Line: 68 ]]
+	-- upvalues: ControlStateModule (copy)
+	p1:setState({ controlState = ControlStateModule.Initialize })
 	
-	function p13.onStateChanged(p2, p3)
-		-- upvalues: p1 (ref)
-		p1:setState({ controlState = p3 })
+	function p1.onStateChanged(p2, ControlState) --[[ Line: 73 ]]
+		-- upvalues: p1 (copy)
+		p1:setState({ controlState = ControlState })
 		
 		if p1.props.onStateChanged then
-			p1.props.onStateChanged(p2, p3)
+			p1.props.onStateChanged(p2, ControlState)
 		end
 	end
 end
 
-local var1 = tModule.union(tModule.interface({ [controlStateModule.Default] = tModule.string }), tModule.interface({ [controlStateModule.Default] = validateColorInfoModule }))
-dropdownMenuCell.validateProps = tModule.interface({
-	icon = tModule.optional(validateImageModule),
-	text = tModule.optional(tModule.string),
-	textFont = tModule.optional(validateTypographyInfoModule),
-	buttonImage = validateImageModule,
-	buttonStateColorMap = var1,
-	contentStateColorMap = var1,
-	textStateColorMap = tModule.optional(var1),
-	iconStateColorMap = tModule.optional(var1),
-	isDisabled = tModule.optional(tModule.boolean),
-	isActivated = tModule.optional(tModule.boolean),
-	hasContent = tModule.optional(tModule.boolean),
-	isLoading = tModule.optional(tModule.boolean),
-	onActivated = tModule.callback,
-	onStateChanged = tModule.optional(tModule.callback),
-	userInteractionEnabled = tModule.optional(tModule.boolean),
-	iconSize = tModule.optional(tModule.number),
-	containerPadding = tModule.optional(tModule.strictInterface({ left = tModule.number, right = tModule.number })),
-	iconTextSpacing = tModule.optional(tModule.number),
-	border = tModule.optional(tModule.strictInterface({ cornerRadius = tModule.number, size = tModule.number })),
-	enableTokenOverride = tModule.optional(tModule.boolean),
-	selectionOrder = tModule.optional(tModule.number),
-	selectionCursor = tModule.optional(tModule.any)
+local UnionResult = TModule.union(TModule.interface({ [ControlStateModule.Default] = TModule.string }), TModule.interface({ [ControlStateModule.Default] = ValidateColorInfoModule }))
+DropdownMenuCell.validateProps = TModule.interface({
+	icon = TModule.optional(ValidateImageModule),
+	text = TModule.optional(TModule.string),
+	textFont = TModule.optional(ValidateTypographyInfoModule),
+	buttonImage = ValidateImageModule,
+	buttonStateColorMap = UnionResult,
+	contentStateColorMap = UnionResult,
+	textStateColorMap = TModule.optional(UnionResult),
+	iconStateColorMap = TModule.optional(UnionResult),
+	isDisabled = TModule.optional(TModule.boolean),
+	isActivated = TModule.optional(TModule.boolean),
+	hasContent = TModule.optional(TModule.boolean),
+	isLoading = TModule.optional(TModule.boolean),
+	onActivated = TModule.callback,
+	onStateChanged = TModule.optional(TModule.callback),
+	userInteractionEnabled = TModule.optional(TModule.boolean),
+	iconSize = TModule.optional(TModule.number),
+	containerPadding = TModule.optional(TModule.strictInterface({ left = TModule.number, right = TModule.number })),
+	iconTextSpacing = TModule.optional(TModule.number),
+	border = TModule.optional(TModule.strictInterface({ cornerRadius = TModule.number, size = TModule.number })),
+	enableTokenOverride = TModule.optional(TModule.boolean),
+	selectionOrder = TModule.optional(TModule.number),
+	selectionCursor = TModule.optional(TModule.any)
 })
-dropdownMenuCell.defaultProps = {
+DropdownMenuCell.defaultProps = {
 	isDisabled = false,
 	isLoading = false,
 	iconTextSpacing = 5,
 	enableTokenOverride = false,
 	SliceCenter = Rect.new(8, 8, 9, 9),
-	iconSize = iconSizeModule.Regular,
+	iconSize = IconSizeModule.Regular,
 	containerPadding = { left = 12, right = 20 },
 	border = { cornerRadius = 8, size = 1 }
 }
 
-function dropdownMenuCell.render(p1)
-	-- upvalues: withStyleModule (ref), withSelectionCursorProviderModule (ref), tModule (ref), cursorKindModule (ref), getColorFromMap (ref), getContentStyleModule (ref), controlStateModule (ref), roactModule (ref), skeleton (ref), genericTextLabelModule (ref), imageSetComponentModule (ref), cryoModule (ref), interactableModule (ref)
-	return withStyleModule(function(p2)
-		-- upvalues: withSelectionCursorProviderModule (copy), tModule (copy), p1 (ref), cursorKindModule (copy), getColorFromMap (copy), getContentStyleModule (copy), controlStateModule (copy), roactModule (copy), skeleton (copy), genericTextLabelModule (copy), imageSetComponentModule (copy), cryoModule (copy), interactableModule (copy)
-		return withSelectionCursorProviderModule(function(p3)
-			-- upvalues: tModule (copy), p2 (ref), p1 (copy), cursorKindModule (copy), getColorFromMap (copy), getContentStyleModule (copy), controlStateModule (copy), roactModule (copy), skeleton (copy), genericTextLabelModule (copy), imageSetComponentModule (copy), cryoModule (copy), interactableModule (copy)
-			assert(tModule.table(p2), "Style provider is missing.")
-			local controlState = p1.state.controlState
-			local text = p1.props.text
-			local icon = p1.props.icon
-			local iconSize = p1.props.iconSize
-			local containerPadding = p1.props.containerPadding
-			local iconTextSpacing = p1.props.iconTextSpacing
-			local isLoading = p1.props.isLoading
-			local isDisabled = p1.props.isDisabled
-			local buttonStateColorMap = p1.props.buttonStateColorMap
-			local contentStateColorMap = p1.props.contentStateColorMap
-			local textStateColorMap = p1.props.textStateColorMap or contentStateColorMap
-			local iconStateColorMap = p1.props.iconStateColorMap or contentStateColorMap
+function DropdownMenuCell.render(p1) --[[ Line: 186 ]]
+	-- upvalues: WithStyleModule (copy), WithSelectionCursorProviderModule (copy), TModule (copy), CursorKindModule (copy), getColorFromMap (copy), GetContentStyleModule (copy), ControlStateModule (copy), RoactModule (copy), Skeleton (copy), GenericTextLabelModule (copy), ImageSetComponentModule (copy), CryoModule (copy), InteractableModule (copy)
+	return WithStyleModule(function(p2) --[[ Line: 187 ]]
+		-- upvalues: WithSelectionCursorProviderModule (upval), TModule (upval), p1 (copy), CursorKindModule (upval), getColorFromMap (upval), GetContentStyleModule (upval), ControlStateModule (upval), RoactModule (upval), Skeleton (upval), GenericTextLabelModule (upval), ImageSetComponentModule (upval), CryoModule (upval), InteractableModule (upval)
+		return WithSelectionCursorProviderModule(function(Callback) --[[ Line: 188 ]]
+			-- upvalues: TModule (upval), p2 (copy), p1 (upval), CursorKindModule (upval), getColorFromMap (upval), GetContentStyleModule (upval), ControlStateModule (upval), RoactModule (upval), Skeleton (upval), GenericTextLabelModule (upval), ImageSetComponentModule (upval), CryoModule (upval), InteractableModule (upval)
+			assert(TModule.table(p2), "Style provider is missing.")
+			local ControlState = p1.state.controlState
+			local Text = p1.props.text
+			local Icon = p1.props.icon
+			local IconSize = p1.props.iconSize
+			local ContainerPadding = p1.props.containerPadding
+			local IconTextSpacing = p1.props.iconTextSpacing
+			local IsLoading = p1.props.isLoading
+			local IsDisabled = p1.props.isDisabled
+			local ButtonStateColorMap = p1.props.buttonStateColorMap
+			local ContentStateColorMap = p1.props.contentStateColorMap
+			local TextStateColorMap = p1.props.textStateColorMap or ContentStateColorMap
+			local IconStateColorMap = p1.props.iconStateColorMap or ContentStateColorMap
 			
-			if isLoading then
-				isDisabled = true
+			if IsLoading then
+				IsDisabled = true
 			end
-			local selectionCursor = p1.props.selectionCursor or p3 and p3(cursorKindModule.RoundedRectNoInset)
-			local var2 = if p1.props.enableTokenOverride then getColorFromMap else getContentStyleModule
-			local var3 = var2(buttonStateColorMap, controlState, p2)
+			local SelectionCursor = p1.props.selectionCursor or Callback and Callback(CursorKindModule.RoundedRectNoInset)
+			local GetColorFromMap = if p1.props.enableTokenOverride then getColorFromMap else GetContentStyleModule
+			local IsActivated = p1.props.isActivated
+			local ColorFromMap = GetColorFromMap(ButtonStateColorMap, ControlState, p2)
 			
-			if controlState ~= controlStateModule.Disabled and controlState ~= controlStateModule.Pressed and p1.props.isActivated then
-				var3.Transparency = 0.5 * var3.Transparency + 0.5
+			if ControlState ~= ControlStateModule.Disabled and ControlState ~= ControlStateModule.Pressed and IsActivated then
+				ColorFromMap.Transparency = 0.5 * ColorFromMap.Transparency + 0.5
 			end
-			local isActivated
-			local var4 = text
+			local ColorStyle = Text
 			
-			if var4 then
-				isActivated = p1.props.isActivated
-				local var5 = var2(textStateColorMap, controlState, p2)
+			if ColorStyle then
+				local IsActivated1 = p1.props.isActivated
+				local HasContent = p1.props.hasContent
+				local ColorFromMap1 = GetColorFromMap(TextStateColorMap, ControlState, p2)
 				
-				if controlState ~= controlStateModule.Disabled and controlState ~= controlStateModule.Pressed and (isActivated or not p1.props.hasContent) then
-					var5.Transparency = 0.5 * var5.Transparency + 0.5
+				if ControlState ~= ControlStateModule.Disabled and ControlState ~= ControlStateModule.Pressed and (IsActivated1 or not HasContent) then
+					ColorFromMap1.Transparency = 0.5 * ColorFromMap1.Transparency + 0.5
 				end
-				var4 = var5
+				ColorStyle = ColorFromMap1
 			end
-			local var6 = icon
+			local ColorFromMap2 = Icon
 			
-			if var6 then
-				local var7 = var2(iconStateColorMap, controlState, p2)
+			if ColorFromMap2 then
+				local IsActivated2 = p1.props.isActivated
+				local ColorFromMap3 = GetColorFromMap(IconStateColorMap, ControlState, p2)
 				
-				if controlState ~= controlStateModule.Disabled and controlState ~= controlStateModule.Pressed and p1.props.isActivated then
-					var7.Transparency = 0.5 * var7.Transparency + 0.5
+				if ControlState ~= ControlStateModule.Disabled and ControlState ~= ControlStateModule.Pressed and IsActivated2 then
+					ColorFromMap3.Transparency = 0.5 * ColorFromMap3.Transparency + 0.5
 				end
-				var6 = var7
+				ColorFromMap2 = ColorFromMap3
 			end
-			local uDim2, t_1, var8
-			local buttonImage = p1.props.buttonImage
-			isActivated = if p1.props.enableTokenOverride then p1.props.textFont else p2.Font.Header2
-			local _ = nil
-			local var9 = if isLoading then {
-				isLoadingShimmer = roactModule.createElement(skeleton, { Size = UDim2.fromScale(1, 1) })
-			} else p1.props[roactModule.Children] or {
-				TextContainer = roactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, {
-					UIListLayout = roactModule.createElement("UIListLayout", {
+			local ButtonImage = p1.props.buttonImage
+			local TextFont = if p1.props.enableTokenOverride then p1.props.textFont else p2.Font.Header2
+			local Right = if Icon == nil then ContainerPadding.right else IconSize + IconTextSpacing + ContainerPadding.right
+			local Config = if IsLoading then {
+				isLoadingShimmer = RoactModule.createElement(Skeleton, { Size = UDim2.fromScale(1, 1) })
+			} else p1.props[RoactModule.Children] or {
+				TextContainer = RoactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, {
+					UIListLayout = RoactModule.createElement("UIListLayout", {
 						FillDirection = Enum.FillDirection.Horizontal,
 						VerticalAlignment = Enum.VerticalAlignment.Center,
 						HorizontalAlignment = Enum.HorizontalAlignment.Left,
 						SortOrder = Enum.SortOrder.LayoutOrder
 					}),
-					Padding = roactModule.createElement("UIPadding", { PaddingLeft = UDim.new(0, containerPadding.left) }),
-					Text = if text then roactModule.createElement(genericTextLabelModule, {
+					Padding = RoactModule.createElement("UIPadding", { PaddingLeft = UDim.new(0, ContainerPadding.left) }),
+					Text = if Text then RoactModule.createElement(GenericTextLabelModule, {
 						BackgroundTransparency = 1,
 						LayoutOrder = 1,
 						TextWrapped = false,
-						Text = text,
-						fontStyle = isActivated,
-						colorStyle = var4,
-						Size = UDim2.new(1, -(if icon ~= nil then containerPadding.right else iconSize + iconTextSpacing + containerPadding.right), 1, 0),
+						Text = Text,
+						fontStyle = TextFont,
+						colorStyle = ColorStyle,
+						Size = UDim2.new(1, -Right, 1, 0),
 						TextTruncate = Enum.TextTruncate.AtEnd,
 						TextXAlignment = Enum.TextXAlignment.Left
 					}) else nil
 				}),
-				IconContainer = roactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, {
-					UIListLayout = roactModule.createElement("UIListLayout", {
+				IconContainer = RoactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, {
+					UIListLayout = RoactModule.createElement("UIListLayout", {
 						FillDirection = Enum.FillDirection.Horizontal,
 						VerticalAlignment = Enum.VerticalAlignment.Center,
 						HorizontalAlignment = Enum.HorizontalAlignment.Right,
 						SortOrder = Enum.SortOrder.LayoutOrder
 					}),
-					Padding = roactModule.createElement("UIPadding", { PaddingRight = UDim.new(0, containerPadding.right) }),
-					Icon = icon and roactModule.createElement(imageSetComponentModule.Label, {
+					Padding = RoactModule.createElement("UIPadding", { PaddingRight = UDim.new(0, ContainerPadding.right) }),
+					Icon = Icon and RoactModule.createElement(ImageSetComponentModule.Label, {
 						BackgroundTransparency = 1,
 						LayoutOrder = 2,
-						Size = UDim2.fromOffset(iconSize, iconSize),
-						Image = icon,
-						ImageColor3 = var6.Color,
-						ImageTransparency = var6.Transparency
+						Size = UDim2.fromOffset(IconSize, IconSize),
+						Image = Icon,
+						ImageColor3 = ColorFromMap2.Color,
+						ImageTransparency = ColorFromMap2.Transparency
 					}) or nil
 				})
 			}
-			local t = {
-				isActivated = cryoModule.None,
-				hasContent = cryoModule.None,
-				icon = cryoModule.None,
-				text = cryoModule.None,
-				textFont = cryoModule.None,
-				buttonImage = cryoModule.None,
-				buttonStateColorMap = cryoModule.None,
-				contentStateColorMap = cryoModule.None,
-				textStateColorMap = cryoModule.None,
-				iconStateColorMap = cryoModule.None,
-				iconSize = cryoModule.None,
-				containerPadding = cryoModule.None,
-				iconTextSpacing = cryoModule.None,
-				border = cryoModule.None,
-				enableTokenOverride = cryoModule.None,
-				onActivated = cryoModule.None,
-				isLoading = cryoModule.None,
-				[roactModule.Children] = cryoModule.None,
-				isDisabled = isDisabled,
+			local config = {
+				isActivated = CryoModule.None,
+				hasContent = CryoModule.None,
+				icon = CryoModule.None,
+				text = CryoModule.None,
+				textFont = CryoModule.None,
+				buttonImage = CryoModule.None,
+				buttonStateColorMap = CryoModule.None,
+				contentStateColorMap = CryoModule.None,
+				textStateColorMap = CryoModule.None,
+				iconStateColorMap = CryoModule.None,
+				iconSize = CryoModule.None,
+				containerPadding = CryoModule.None,
+				iconTextSpacing = CryoModule.None,
+				border = CryoModule.None,
+				enableTokenOverride = CryoModule.None,
+				onActivated = CryoModule.None,
+				isLoading = CryoModule.None,
+				[RoactModule.Children] = CryoModule.None,
+				isDisabled = IsDisabled,
 				onStateChanged = p1.onStateChanged,
 				userInteractionEnabled = p1.props.userInteractionEnabled,
 				ScaleType = Enum.ScaleType.Slice,
 				BackgroundTransparency = 1,
 				AutoButtonColor = false,
-				selectionCursor = cryoModule.None,
-				SelectionImageObject = selectionCursor,
+				selectionCursor = CryoModule.None,
+				SelectionImageObject = SelectionCursor,
 				SelectionOrder = p1.props.selectionOrder,
-				[roactModule.Event.Activated] = p1.props.onActivated
+				[RoactModule.Event.Activated] = p1.props.onActivated
 			}
-			local _ = nil
-			local _ = nil
-			local _ = nil
+			local _UDim2 = nil
+			local config1 = nil
+			local JoinResult = nil
 			
 			if p1.props.enableTokenOverride then
-				local size = p1.props.border.size
-				uDim2 = UDim2.new(1, -2 * size, 1, -2 * size)
-				t_1 = {
-					UIStroke = roactModule.createElement("UIStroke", {
-						Color = var3.Color,
-						Transparency = var3.Transparency,
-						Thickness = size
+				local Size: number = p1.props.border.size
+				_UDim2 = UDim2.new(1, -2 * Size, 1, -2 * Size)
+				config1 = {
+					UIStroke = RoactModule.createElement("UIStroke", {
+						Color = ColorFromMap.Color,
+						Transparency = ColorFromMap.Transparency,
+						Thickness = Size
 					}),
-					UICorner = roactModule.createElement("UICorner", {
+					UICorner = RoactModule.createElement("UICorner", {
 						CornerRadius = UDim.new(0, p1.props.border.cornerRadius)
 					})
 				}
-				var8 = cryoModule.Dictionary.join(p1.props, t)
+				JoinResult = CryoModule.Dictionary.join(p1.props, config)
 			else
-				uDim2 = UDim2.new(1, 0, 1, 0)
-				t_1 = {}
-				var8 = cryoModule.Dictionary.join(p1.props, {
-					Image = buttonImage,
-					ImageColor3 = var3.Color,
-					ImageTransparency = var3.Transparency
-				}, t)
+				_UDim2 = UDim2.new(1, 0, 1, 0)
+				config1 = {}
+				JoinResult = CryoModule.Dictionary.join(p1.props, {
+					Image = ButtonImage,
+					ImageColor3 = ColorFromMap.Color,
+					ImageTransparency = ColorFromMap.Transparency
+				}, config)
 			end
-			return roactModule.createElement(interactableModule, var8, {
-				ButtonContent = roactModule.createElement("Frame", { BackgroundTransparency = 1, Size = uDim2 }, cryoModule.Dictionary.join(t_1, var9))
+			return RoactModule.createElement(InteractableModule, JoinResult, {
+				ButtonContent = RoactModule.createElement("Frame", { BackgroundTransparency = 1, Size = _UDim2 }, CryoModule.Dictionary.join(config1, Config))
 			})
 		end)
 	end)
 end
 
-return function(p1)
-	-- upvalues: useCursorByTypeModule (ref), cursorTypeModule (ref), cryoModule (ref), useStyleModule (ref), styleDefaultsModule (ref), roactModule (ref), dropdownMenuCell (ref)
-	return roactModule.createElement(dropdownMenuCell, if p1.enableTokenOverride then cryoModule.Dictionary.join(styleDefaultsModule.getDropdownMenuCellDefaultTokens(useStyleModule()), p1) else cryoModule.Dictionary.join(p1, {
-		selectionCursor = useCursorByTypeModule(cursorTypeModule.RoundedRectNoInset)
+return function(p1) --[[ Line: 383 ]]
+	-- upvalues: UseCursorByTypeModule (copy), CursorTypeModule (copy), CryoModule (copy), UseStyleModule (copy), StyleDefaultsModule (copy), RoactModule (copy), DropdownMenuCell (copy)
+	return RoactModule.createElement(DropdownMenuCell, if p1.enableTokenOverride then CryoModule.Dictionary.join(StyleDefaultsModule.getDropdownMenuCellDefaultTokens((UseStyleModule())), p1) else CryoModule.Dictionary.join(p1, {
+		selectionCursor = UseCursorByTypeModule(CursorTypeModule.RoundedRectNoInset)
 	}))
 end

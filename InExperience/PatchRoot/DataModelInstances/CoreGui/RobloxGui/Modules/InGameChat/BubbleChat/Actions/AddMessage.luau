@@ -1,10 +1,9 @@
-﻿local makeActionCreator = require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator
-local maybeAssertModule = require(script.Parent.Parent.Helpers.maybeAssert)
-local typesModule = require(script.Parent.Parent.Types)
+﻿local MaybeAssertModule = require(script.Parent.Parent.Helpers.maybeAssert)
+local TypesModule = require(script.Parent.Parent.Types)
 
-return makeActionCreator(script.Name, function(p1)
-	-- upvalues: maybeAssertModule (ref), typesModule (ref)
-	maybeAssertModule(typesModule.IMessage(p1))
+return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator(script.Name, function(Message) --[[ Line: 7 ]]
+	-- upvalues: MaybeAssertModule (copy), TypesModule (copy)
+	MaybeAssertModule(TypesModule.IMessage(Message))
 	
-	return { message = p1 }
+	return { message = Message }
 end)

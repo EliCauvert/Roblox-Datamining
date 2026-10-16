@@ -1,147 +1,155 @@
-﻿local parent = script.Parent.Parent.Parent
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local boolean = luauPolyfillModule.Boolean
-local error = luauPolyfillModule.Error
-local object = luauPolyfillModule.Object
-local set = luauPolyfillModule.Set
-local t = {}
+﻿local Parent = script.Parent.Parent.Parent
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Boolean = LuauPolyfillModule.Boolean
+local Error1 = LuauPolyfillModule.Error
+local Object = LuauPolyfillModule.Object
+local Set = LuauPolyfillModule.Set
 local _ = require(script.Parent["merge-typedefs_types"])
-local var1 = nil
-local graphQLModule = require(parent.GraphQL)
-local parse = graphQLModule.parse
-local kind = graphQLModule.Kind
-local isSchema = graphQLModule.isSchema
-local isDefinitionNode = graphQLModule.isDefinitionNode
-local utilsModule = require(script.Parent.utils)
-local defaultStringComparator = utilsModule.defaultStringComparator
-local isSourceTypes = utilsModule.isSourceTypes
-local isStringTypes = utilsModule.isStringTypes
-local unknownModule = require(script.Parent["merge-nodes"])
-local mergeGraphQLNodes = unknownModule.mergeGraphQLNodes
-local schemaDefSymbol = unknownModule.schemaDefSymbol
-local utilsModule_1 = require(parent.Utils)
-local getDocumentNodeFromSchema = utilsModule_1.getDocumentNodeFromSchema
-local isDocumentNode = utilsModule_1.isDocumentNode
-local resetComments = utilsModule_1.resetComments
-local printWithComments = utilsModule_1.printWithComments
-local DEFAULT_OPERATION_TYPE_NAME_MAP = require(script.Parent["schema-def"]).DEFAULT_OPERATION_TYPE_NAME_MAP
+local Callback = nil
+local GraphQLModule = require(Parent.GraphQL)
+local ParseFunction = GraphQLModule.parse
+local Kind = GraphQLModule.Kind
+local IsSchemaFunction = GraphQLModule.isSchema
+local IsDefinitionNodeFunction = GraphQLModule.isDefinitionNode
+local UtilsModule = require(script.Parent.utils)
+local DefaultStringComparator = UtilsModule.defaultStringComparator
+local IsSourceTypesFunction = UtilsModule.isSourceTypes
+local IsStringTypesFunction = UtilsModule.isStringTypes
+local MergeNodesModule = require(script.Parent["merge-nodes"])
+local MergeGraphQLNodesFunction = MergeNodesModule.mergeGraphQLNodes
+local SchemaDefSymbol = MergeNodesModule.schemaDefSymbol
+local UtilsModule1 = require(Parent.Utils)
+local GetDocumentNodeFromSchemaFunction = UtilsModule1.getDocumentNodeFromSchema
+local IsDocumentNodeFunction = UtilsModule1.isDocumentNode
+local ResetCommentsFunction = UtilsModule1.resetComments
+local PrintWithCommentsFunction = UtilsModule1.printWithComments
+local DEFAULTOPERATIONTYPENAMEMAP = require(script.Parent["schema-def"]).DEFAULT_OPERATION_TYPE_NAME_MAP
 
-function t.mergeTypeDefs(p1, p2)
-	-- upvalues: resetComments (ref), kind (ref), var1 (write), object (ref), printWithComments (ref)
-	resetComments()
-	local t = {
-		kind = kind.DOCUMENT,
-		definitions = var1(p1, object.assign({}, {
-			useSchemaDefinition = true,
-			forceSchemaDefinition = false,
-			throwOnConflict = false,
-			commentDescriptions = false
-		}, p2))
-	}
-	local _ = nil
-	local var2 = if p2 and p2.commentDescriptions then printWithComments(t) else t
-	resetComments()
+local function visitTypeSources(Callback, p1, p2, NewResult) --[[ Line: 188 ]]
+	-- upvalues: Set (copy), Boolean (copy), visitTypeSources (copy), Array (copy), IsSchemaFunction (copy), GetDocumentNodeFromSchemaFunction (copy), IsStringTypesFunction (copy), IsSourceTypesFunction (copy), ParseFunction (copy), IsDefinitionNodeFunction (copy), IsDocumentNodeFunction (copy), Error1 (copy)
+	local T = if p2 == nil then {} else p2
+	local NewSet = if NewResult == nil then Set.new() else NewResult
 	
-	return var2
-end
-
-local function visitTypeSources(p1, p2, p3, p4)
-	-- upvalues: set (ref), boolean (ref), visitTypeSources (ref), array (ref), isSchema (ref), getDocumentNodeFromSchema (ref), isStringTypes (ref), isSourceTypes (ref), parse (ref), isDefinitionNode (ref), isDocumentNode (ref), error (ref)
-	local var2 = if p3 ~= nil then {} else p3
-	local var3 = if p4 ~= nil then set.new() else p4
-	
-	if boolean.toJSBoolean(if boolean.toJSBoolean(p1) then not boolean.toJSBoolean(var3:has(p1)) else p1) then
-		var3:add(p1)
+	if Boolean.toJSBoolean(if Boolean.toJSBoolean(Callback) then not Boolean.toJSBoolean(NewSet:has(Callback)) else Callback) then
+		NewSet:add(Callback)
 		
-		if typeof(p1) == "function" then
-			visitTypeSources(p1(), p2, var2, var3)
+		if typeof(Callback) == "function" then
+			visitTypeSources(Callback(), p1, T, NewSet)
 			
-			return var2
-		elseif boolean.toJSBoolean(array.isArray(p1)) then
-			for i, v in p1 do
-				visitTypeSources(v, p2, var2, var3)
+			return T
+		end
+		if Boolean.toJSBoolean(Array.isArray(Callback)) then
+			for _, value in Callback do
+				visitTypeSources(value, p1, T, NewSet)
 			end
-			return var2
-		elseif boolean.toJSBoolean(isSchema(p1)) then
-			visitTypeSources(getDocumentNodeFromSchema(p1, p2).definitions, p2, var2, var3)
-			
-			return var2
-		end
-		local var4 = isStringTypes(p1)
-		
-		if boolean.toJSBoolean(if boolean.toJSBoolean(var4) then var4 else isSourceTypes(p1)) then
-			visitTypeSources(parse(p1, p2).definitions, p2, var2, var3)
-			
-			return var2
-		elseif boolean.toJSBoolean(typeof(p1) == "table" and isDefinitionNode(p1)) then
-			table.insert(var2, p1)
-			
-			return var2
-		elseif isDocumentNode(p1) then
-			visitTypeSources(p1.definitions, p2, var2, var3)
-			
-			return var2
-		end
-		error(error.new(("typeDefs must contain only strings, documents, schemas, or functions, got %s"):format(tostring(typeof(p1)))))
-	end
-	return var2
-end
-
-function t.mergeGraphQLTypes(p5, p6)
-	-- upvalues: resetComments (ref), visitTypeSources (ref), mergeGraphQLNodes (ref), boolean (ref), schemaDefSymbol (ref), kind (ref), DEFAULT_OPERATION_TYPE_NAME_MAP (ref), array (ref), defaultStringComparator (ref)
-	resetComments()
-	local var5 = mergeGraphQLNodes(visitTypeSources(p5, p6), p6)
-	
-	if p6 and boolean.toJSBoolean(p6.useSchemaDefinition) then
-		local var6 = boolean.toJSBoolean(var5:get(schemaDefSymbol)) and var5:get(schemaDefSymbol) or { kind = kind.SCHEMA_DEFINITION, operationTypes = {} }
-		local operationTypes = var6.operationTypes
-		
-		for i in DEFAULT_OPERATION_TYPE_NAME_MAP do
-			if not boolean.toJSBoolean(array.find(operationTypes, function(p7)
-				-- upvalues: i (ref)
-				return p7.operation == i
-			end)) then
-				local var7 = var5:get(DEFAULT_OPERATION_TYPE_NAME_MAP[tostring(i)])
+			return T
+		else
+			if Boolean.toJSBoolean(IsSchemaFunction(Callback)) then
+				visitTypeSources(GetDocumentNodeFromSchemaFunction(Callback, p1).definitions, p1, T, NewSet)
 				
-				if var7 ~= nil and var7.name ~= nil then
-					table.insert(operationTypes, {
-						kind = kind.OPERATION_TYPE_DEFINITION,
-						type = { kind = kind.NAMED_TYPE, name = var7.name },
-						operation = i
-					})
-				end
+				return T
 			end
-		end
-		if typeof(var6) == "table" and typeof(var6.operationTypes) == "table" and #var6.operationTypes > 0 then
-			var5:set(schemaDefSymbol, var6)
+			local ToJSBooleanFunction = Boolean.toJSBoolean
+			local IsStringTypes = IsStringTypesFunction(Callback)
+			
+			if ToJSBooleanFunction(Boolean.toJSBoolean(IsStringTypes) and IsStringTypes or IsSourceTypesFunction(Callback)) then
+				visitTypeSources(ParseFunction(Callback, p1).definitions, p1, T, NewSet)
+				
+				return T
+			end
+			if Boolean.toJSBoolean(typeof(Callback) == "table" and IsDefinitionNodeFunction(Callback)) then
+				table.insert(T, Callback)
+				
+				return T
+			end
+			if IsDocumentNodeFunction(Callback) then
+				visitTypeSources(Callback.definitions, p1, T, NewSet)
+				
+				return T
+			end
+			error(Error1.new(("typeDefs must contain only strings, documents, schemas, or functions, got %s"):format((tostring((typeof(Callback)))))))
 		end
 	end
-	if p6 and boolean.toJSBoolean(p6.forceSchemaDefinition) and (typeof(var5:get(schemaDefSymbol)) ~= "table" or typeof(var5:get(schemaDefSymbol).operationTypes) ~= "table" or #var5:get(schemaDefSymbol).operationTypes <= 0) then
-		var5:set(schemaDefSymbol, {
-			kind = kind.SCHEMA_DEFINITION,
+	return T
+end
+
+Callback = function(p3, AssignResult) --[[ Line: 262 | Named "mergeGraphQLTypes" ]]
+	-- upvalues: ResetCommentsFunction (copy), visitTypeSources (copy), MergeGraphQLNodesFunction (copy), Boolean (copy), SchemaDefSymbol (copy), Kind (copy), DEFAULTOPERATIONTYPENAMEMAP (copy), Array (copy), DefaultStringComparator (copy)
+	ResetCommentsFunction()
+	local MergeGraphQLNodesResult = MergeGraphQLNodesFunction(visitTypeSources(p3, AssignResult), AssignResult)
+	
+	if AssignResult and Boolean.toJSBoolean(AssignResult.useSchemaDefinition) then
+		local GetResult = Boolean.toJSBoolean(MergeGraphQLNodesResult:get(SchemaDefSymbol)) and MergeGraphQLNodesResult:get(SchemaDefSymbol) or { kind = Kind.SCHEMA_DEFINITION, operationTypes = {} }
+		local OperationTypes = GetResult.operationTypes
+		
+		for Operation in DEFAULTOPERATIONTYPENAMEMAP do
+			local JSBoolean = Boolean.toJSBoolean((Array.find(OperationTypes, function(p4): boolean --[[ Line: 288 ]]
+				-- upvalues: Operation (copy)
+				return p4.operation == Operation
+			end)))
+			local GetResult1 = nil
+			
+			if not JSBoolean then
+				GetResult1 = MergeGraphQLNodesResult:get(DEFAULTOPERATIONTYPENAMEMAP[tostring(Operation)])
+				JSBoolean = GetResult1 == nil or GetResult1.name == nil
+			end
+			if not JSBoolean then
+				table.insert(OperationTypes, {
+					kind = Kind.OPERATION_TYPE_DEFINITION,
+					type = { kind = Kind.NAMED_TYPE, name = GetResult1.name },
+					operation = Operation
+				})
+			end
+		end
+		if typeof(GetResult) == "table" and typeof(GetResult.operationTypes) == "table" and #GetResult.operationTypes > 0 then
+			MergeGraphQLNodesResult:set(SchemaDefSymbol, GetResult)
+		end
+	end
+	if AssignResult and Boolean.toJSBoolean(AssignResult.forceSchemaDefinition) and (typeof(MergeGraphQLNodesResult:get(SchemaDefSymbol)) ~= "table" or typeof(MergeGraphQLNodesResult:get(SchemaDefSymbol).operationTypes) ~= "table" or #MergeGraphQLNodesResult:get(SchemaDefSymbol).operationTypes <= 0) then
+		MergeGraphQLNodesResult:set(SchemaDefSymbol, {
+			kind = Kind.SCHEMA_DEFINITION,
 			operationTypes = {
 				{
 					operation = "query",
-					kind = kind.OPERATION_TYPE_DEFINITION,
+					kind = Kind.OPERATION_TYPE_DEFINITION,
 					type = {
-						kind = kind.NAMED_TYPE,
-						name = { value = "Query", kind = kind.NAME }
+						kind = Kind.NAMED_TYPE,
+						name = { value = "Query", kind = Kind.NAME }
 					}
 				}
 			}
 		})
 	end
-	local var8 = var5:values()
+	local ValuesResult = MergeGraphQLNodesResult:values()
 	
-	if p6 and boolean.toJSBoolean(p6.sort) then
-		local var9 = if typeof(p6.sort) == "function" then p6.sort else defaultStringComparator
-		array.sort(var8, function(p7, p8)
-			-- upvalues: var9 (ref)
-			return var9(if typeof(p7.name) == "table" then p7.name.value else nil, if typeof(p8.name) == "table" then p8.name.value else nil)
+	if AssignResult and Boolean.toJSBoolean(AssignResult.sort) then
+		local Sort = if typeof(AssignResult.sort) == "function" then AssignResult.sort else DefaultStringComparator
+		Array.sort(ValuesResult, function(p4, p5) --[[ Line: 392 ]]
+			-- upvalues: Sort (copy)
+			return Sort(if typeof(p4.name) == "table" then p4.name.value else nil, if typeof(p5.name) == "table" then p5.name.value else nil)
 		end)
 	end
-	return var8
+	return ValuesResult
 end
 
-return t
+return {
+	mergeTypeDefs = function(p4, p5) --[[ Line: 159 ]]
+		-- upvalues: ResetCommentsFunction (copy), Kind (copy), Callback (ref), Object (copy), PrintWithCommentsFunction (copy)
+		ResetCommentsFunction()
+		local config = {
+			kind = Kind.DOCUMENT,
+			definitions = Callback(p4, Object.assign({}, {
+				useSchemaDefinition = true,
+				forceSchemaDefinition = false,
+				throwOnConflict = false,
+				commentDescriptions = false
+			}, p5))
+		}
+		local PrintWithCommentsResult = if p5 and p5.commentDescriptions then PrintWithCommentsFunction(config) else config
+		ResetCommentsFunction()
+		
+		return PrintWithCommentsResult
+	end,
+	mergeGraphQLTypes = Callback
+}

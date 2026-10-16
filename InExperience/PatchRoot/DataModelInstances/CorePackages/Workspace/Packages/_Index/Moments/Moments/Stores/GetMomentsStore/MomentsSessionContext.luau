@@ -1,14 +1,14 @@
-﻿local reactModule = require(script:FindFirstAncestor("Moments").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("Moments").Parent.React)
 local _ = require(script.Parent.createMomentsStore)
-local parentModule = require(script.Parent)
-local var1 = reactModule.createContext(nil)
+local ParentModule = require(script.Parent)
+local Context = ReactModule.createContext(nil)
 
 return {
-	MomentsSessionContext = var1,
-	useMomentsSession = function()
-		-- upvalues: reactModule (ref), var1 (ref), parentModule (ref)
-		local var2 = reactModule.useContext(var1)
+	MomentsSessionContext = Context,
+	useMomentsSession = function() --[[ Line: 27 ]]
+		-- upvalues: ReactModule (copy), Context (copy), ParentModule (copy)
+		local UseContextResult = ReactModule.useContext(Context)
 		
-		return if var2 == nil then parentModule() else var2
+		return if UseContextResult == nil then ParentModule() else UseContextResult
 	end
 }

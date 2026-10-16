@@ -1,22 +1,22 @@
-﻿local sponsoredTiles = script:FindFirstAncestor("SponsoredTiles")
-local parent = sponsoredTiles.Parent
-local gameCollectionItemTypes = require(parent.DiscoveryTypes).GameCollectionItemTypes
-local reactModule = require(parent.React)
-local gameTileModule = require(parent.GameTile)
-local twoByOneGameTileModule = require(sponsoredTiles.TwoByOneGameTile)
-local getTileBadgeByPositionConfigFromEntry = gameTileModule.getTileBadgeByPositionConfigFromEntry
-local resolveWideAssetId = gameTileModule.resolveWideAssetId
-local _ = require(parent.VideoUtils)
-local fFlagMigrateGameInfoToStore = require(parent.SharedFlags).FFlagMigrateGameInfoToStore
-local fFlagLuaAppEnableReportExperience = require(parent.SharedFlags).FFlagLuaAppEnableReportExperience
-local var1 = reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), getTileBadgeByPositionConfigFromEntry (ref), twoByOneGameTileModule (ref), fFlagLuaAppEnableReportExperience (ref), fFlagMigrateGameInfoToStore (ref), resolveWideAssetId (ref)
-	local var2 = -((p1.maxItemIndex or 0) + 1)
+﻿local SponsoredTiles = script:FindFirstAncestor("SponsoredTiles")
+local Parent = SponsoredTiles.Parent
+local GameCollectionItemTypes = require(Parent.DiscoveryTypes).GameCollectionItemTypes
+local ReactModule = require(Parent.React)
+local GameTileModule = require(Parent.GameTile)
+local TwoByOneGameTileModule = require(SponsoredTiles.TwoByOneGameTile)
+local GetTileBadgeByPositionConfigFromEntryFunction = GameTileModule.getTileBadgeByPositionConfigFromEntry
+local ResolveWideAssetIdFunction = GameTileModule.resolveWideAssetId
+local _ = require(Parent.VideoUtils)
+local FFlagMigrateGameInfoToStore = require(Parent.SharedFlags).FFlagMigrateGameInfoToStore
+local FFlagLuaAppEnableReportExperience = require(Parent.SharedFlags).FFlagLuaAppEnableReportExperience
+local MemoResult = ReactModule.memo(function(p1) --[[ Line: 43 ]]
+	-- upvalues: ReactModule (copy), GetTileBadgeByPositionConfigFromEntryFunction (copy), TwoByOneGameTileModule (copy), FFlagLuaAppEnableReportExperience (copy), FFlagMigrateGameInfoToStore (copy), ResolveWideAssetIdFunction (copy)
+	local Negated = -((p1.maxItemIndex or 0) + 1)
 	
-	return reactModule.createElement(twoByOneGameTileModule, {
+	return ReactModule.createElement(TwoByOneGameTileModule, {
 		size = p1.item.sizeOverride,
 		layoutOrder = p1.index,
-		zIndex = if p1.zIndex then p1.zIndex + var2 else var2,
+		zIndex = if p1.zIndex then p1.zIndex + Negated else Negated,
 		universeId = p1.item.universeId,
 		placeId = p1.item.placeId,
 		topicId = p1.topicId,
@@ -26,7 +26,7 @@ local var1 = reactModule.memo(function(p1)
 		subtitle = p1.item.subtitle,
 		ctaText = p1.item.ctaText,
 		tileVariant = p1.item.tileVariant,
-		badgeOverride = getTileBadgeByPositionConfigFromEntry(p1.item),
+		badgeOverride = GetTileBadgeByPositionConfigFromEntryFunction(p1.item),
 		payerName = p1.item.payerName,
 		adId = p1.item.adId,
 		isSponsored = p1.item.isSponsored,
@@ -41,26 +41,26 @@ local var1 = reactModule.memo(function(p1)
 		reportExperienceLaunched = p1.reportExperienceLaunched,
 		enableSponsoredFeedback = p1.enableSponsoredFeedback,
 		enableReportAd = p1.enableReportAd,
-		enableReportExperience = if fFlagLuaAppEnableReportExperience then p1.enableReportExperience else nil,
+		enableReportExperience = if FFlagLuaAppEnableReportExperience then p1.enableReportExperience else nil,
 		enableExplicitFeedback = p1.enableExplicitFeedback,
 		placeIdOverride = p1.item.placeIdOverride,
 		launchDataOverride = p1.item.launchDataOverride,
-		onSelectionGained = reactModule.useCallback(function()
-			-- upvalues: p1 (ref)
+		onSelectionGained = ReactModule.useCallback(function() --[[ Line: 48 ]]
+			-- upvalues: p1 (copy)
 			if p1.onSelectionGained then
 				p1.onSelectionGained(p1.item, p1.index, p1.item.universeId)
 			end
 		end, { p1.onSelectionGained, p1.item, p1.index }),
 		onSelectionLost = p1.onSelectionLost,
-		primaryWideImageAssetId = if fFlagMigrateGameInfoToStore then nil else p1.item.primaryWideImageAssetId,
-		wideAssetId = if fFlagMigrateGameInfoToStore then resolveWideAssetId(p1.item.primaryWideImageAssetId, p1.item, p1.topicId) else nil,
-		ageRatingLabel = if fFlagMigrateGameInfoToStore then p1.item.ageRecommendationDisplayName else nil,
+		primaryWideImageAssetId = if FFlagMigrateGameInfoToStore then nil else p1.item.primaryWideImageAssetId,
+		wideAssetId = if FFlagMigrateGameInfoToStore then ResolveWideAssetIdFunction(p1.item.primaryWideImageAssetId, p1.item, p1.topicId) else nil,
+		ageRatingLabel = if FFlagMigrateGameInfoToStore then p1.item.ageRecommendationDisplayName else nil,
 		videoPlaybackContext = p1.videoPlaybackContext,
 		SelectionOrder = p1.SelectionOrder
 	})
 end)
 
-return function(p1)
-	-- upvalues: reactModule (ref), var1 (ref), gameCollectionItemTypes (ref)
-	return reactModule.createElement(var1, p1), gameCollectionItemTypes.GameCollectionItemType.TwoByOneTile
+return function(p1) --[[ Line: 105 ]]
+	-- upvalues: ReactModule (copy), MemoResult (copy), GameCollectionItemTypes (copy)
+	return ReactModule.createElement(MemoResult, p1), GameCollectionItemTypes.GameCollectionItemType.TwoByOneTile
 end

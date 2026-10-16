@@ -1,31 +1,32 @@
-﻿local home = script:FindFirstAncestor("Home")
-local sduiSharedUtilitiesModule = require(home.Parent.SduiSharedUtilities)
-local buildHomeSortDetailPageEntryModule = require(home.HomeSortDetailPage.buildHomeSortDetailPageEntry)
-local getHomeSortDetailPageKeyModule = require(home.HomeSortDetailPage.getHomeSortDetailPageKey)
-local homeSortDetailConstantsModule = require(home.HomeSortDetailPage.HomeSortDetailConstants)
+﻿local Home = script:FindFirstAncestor("Home")
+local SduiSharedUtilitiesModule = require(Home.Parent.SduiSharedUtilities)
+local BuildHomeSortDetailPageEntryModule = require(Home.HomeSortDetailPage.buildHomeSortDetailPageEntry)
+local GetHomeSortDetailPageKeyModule = require(Home.HomeSortDetailPage.getHomeSortDetailPageKey)
+local HomeSortDetailConstantsModule = require(Home.HomeSortDetailPage.HomeSortDetailConstants)
 
-return function(p1, p2, p3)
-	-- upvalues: getHomeSortDetailPageKeyModule (ref), buildHomeSortDetailPageEntryModule (ref), sduiSharedUtilitiesModule (ref), homeSortDetailConstantsModule (ref)
-	local var1 = getHomeSortDetailPageKeyModule(p1, p2)
-	local var2 = buildHomeSortDetailPageEntryModule(p1, p2)
+return function(p1, p2, LoadTimer) --[[ Line: 12 | Named "fetchHomeSortDetail" ]]
+	-- upvalues: GetHomeSortDetailPageKeyModule (copy), BuildHomeSortDetailPageEntryModule (copy), SduiSharedUtilitiesModule (copy), HomeSortDetailConstantsModule (copy)
+	local HomeSortDetailPageKeyModule = GetHomeSortDetailPageKeyModule(p1, p2)
+	local HomeSortDetailPageEntryModule = BuildHomeSortDetailPageEntryModule(p1, p2)
 	
-	if var2 == nil then
-		return nil, var1
+	if HomeSortDetailPageEntryModule == nil then
+		return nil, HomeSortDetailPageKeyModule
 	end
-	local createTemplateApiRequestConfig = sduiSharedUtilitiesModule.createTemplateApiRequestConfig
+	local CreateTemplateApiRequestConfigFunction = SduiSharedUtilitiesModule.createTemplateApiRequestConfig
 	
-	if createTemplateApiRequestConfig == nil then
-		return nil, var1
+	if CreateTemplateApiRequestConfigFunction == nil then
+		return nil, HomeSortDetailPageKeyModule
 	end
-	local var3 = createTemplateApiRequestConfig({
-		surfaceKey = homeSortDetailConstantsModule.SurfaceKey,
-		configKey = var1,
-		loadTimer = p3,
-		pageEntries = { var2 }
+	local TemplateApiRequestConfig = CreateTemplateApiRequestConfigFunction({
+		surfaceKey = HomeSortDetailConstantsModule.SurfaceKey,
+		configKey = HomeSortDetailPageKeyModule,
+		loadTimer = LoadTimer,
+		pageEntries = { HomeSortDetailPageEntryModule }
 	})
 	
-	if var3 == nil then
-		return nil, var1
+	if TemplateApiRequestConfig == nil then
+		return nil, HomeSortDetailPageKeyModule
+	else
+		return SduiSharedUtilitiesModule.getSduiApiStore().fetchIfNeeded(TemplateApiRequestConfig), HomeSortDetailPageKeyModule
 	end
-	return sduiSharedUtilitiesModule.getSduiApiStore().fetchIfNeeded(var3), var1
 end

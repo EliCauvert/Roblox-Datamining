@@ -1,30 +1,30 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local creatorAgentChatModule = require(parent.DataHydration.CreatorAgentChat)
-local universeConfigurationModule = require(parent.DataHydration.UniverseConfiguration)
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local useSessionSummaryModule = require(script.Parent.useSessionSummary)
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local CreatorAgentChatModule = require(Parent.DataHydration.CreatorAgentChat)
+local UniverseConfigurationModule = require(Parent.DataHydration.UniverseConfiguration)
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local UseSessionSummaryModule = require(script.Parent.useSessionSummary)
 
 return {
-	isPublishLatest = function(p1, p2)
+	isPublishLatest = function(p1, p2) --[[ Line: 25 ]]
 		return p1 or p2
 	end,
-	usePublishStatus = function(p1)
-		-- upvalues: reactModule (ref), universeConfigurationModule (ref), signalsReactModule (ref), creatorAgentChatModule (ref), useSessionSummaryModule (ref)
-		local var1 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-			-- upvalues: universeConfigurationModule (copy), p1 (ref)
-			return universeConfigurationModule.getUniverseConfigurationStore().getAndFetchSummary(p1.universeId)
+	usePublishStatus = function(p1) --[[ Line: 29 ]]
+		-- upvalues: ReactModule (copy), UniverseConfigurationModule (copy), SignalsReactModule (copy), CreatorAgentChatModule (copy), UseSessionSummaryModule (copy)
+		local UseSignalStateResult = SignalsReactModule.useSignalState(ReactModule.useMemo(function() --[[ Line: 30 ]]
+			-- upvalues: UniverseConfigurationModule (upval), p1 (copy)
+			return UniverseConfigurationModule.getUniverseConfigurationStore().getAndFetchSummary(p1.universeId)
 		end, { p1.universeId }).data)
-		local hasPublishedTurn = useSessionSummaryModule(reactModule.useMemo(function()
-			-- upvalues: creatorAgentChatModule (copy), p1 (ref)
-			return creatorAgentChatModule.getCreatorAgentChatStore().getSessionForProject(p1.universeId, p1.placeId, p1.sessionId)
-		end, { p1.universeId, p1.placeId, p1.sessionId })).hasPublishedTurn
-		local var2 = var1 ~= nil and var1.isActive
+		local HasPublishedTurn = UseSessionSummaryModule((ReactModule.useMemo(function() --[[ Line: 34 ]]
+			-- upvalues: CreatorAgentChatModule (upval), p1 (copy)
+			return CreatorAgentChatModule.getCreatorAgentChatStore().getSessionForProject(p1.universeId, p1.placeId, p1.sessionId)
+		end, { p1.universeId, p1.placeId, p1.sessionId }))).hasPublishedTurn
+		local IsActive = UseSignalStateResult ~= nil and UseSignalStateResult.isActive
 		
 		return {
-			hasPublishedTurn = hasPublishedTurn,
-			hasPublishedVersion = var2,
-			isPublishLatest = var2 or hasPublishedTurn
+			hasPublishedTurn = HasPublishedTurn,
+			hasPublishedVersion = IsActive,
+			isPublishLatest = IsActive or HasPublishedTurn
 		}
 	end
 }

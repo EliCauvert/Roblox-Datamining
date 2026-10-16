@@ -1,11 +1,11 @@
-﻿local actions = require(script:FindFirstAncestor("Navigation").Parent.RoactNavigation).Actions
+﻿local Actions = require(script:FindFirstAncestor("Navigation").Parent.RoactNavigation).Actions
 local _ = require(script.Parent.types)
-local getRootNavigationModule = require(script.Parent.getRootNavigation)
+local GetRootNavigationModule = require(script.Parent.getRootNavigation)
 
-return function(p1)
-	-- upvalues: getRootNavigationModule (ref), actions (ref)
-	local var1 = getRootNavigationModule(p1)
-	local state = var1.state
+return function(p1): boolean --[[ Line: 11 | Named "canGoBack" ]]
+	-- upvalues: GetRootNavigationModule (copy), Actions (copy)
+	local RootNavigationModule = GetRootNavigationModule(p1)
+	local State = RootNavigationModule.state
 	
-	return state ~= var1.router.getStateForAction(actions.back({ key = false }), state)
+	return State ~= RootNavigationModule.router.getStateForAction(Actions.back({ key = false }), State)
 end

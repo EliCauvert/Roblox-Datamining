@@ -1,6 +1,6 @@
-﻿local guiService = game:GetService("GuiService")
+﻿local GuiService = game:GetService("GuiService")
 
-return function()
-	-- upvalues: guiService (ref)
-	return guiService.ShowLeaveConfirmation
+return function() --[[ Line: 4 | Named "getAndroidBackSignal" ]]
+	-- upvalues: GuiService (copy)
+	return GuiService.ShowLeaveConfirmation
 end

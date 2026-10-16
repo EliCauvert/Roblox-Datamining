@@ -1,96 +1,91 @@
-﻿local httpService = game:GetService("HttpService")
-local socialTabsPage = script:FindFirstAncestor("SocialTabsPage")
-local parent = socialTabsPage.Parent
-local dataHydrationModule = require(parent.DataHydration)
-local profileCTAStore = dataHydrationModule.Profile.ProfileCTAStore
-local var1 = dataHydrationModule.Friends.FriendsStore.get()
-local friendingErrorCodesModule = require(socialTabsPage.Enums.FriendingErrorCodes)
-local images = require(parent.UIBlox).App.ImageSet.Images
-local setCurrentToastMessage = require(parent.ToastRodux).Actions.SetCurrentToastMessage
-local networkingFriendsModule = require(socialTabsPage.Networking.NetworkingFriends)
-local fFlagMigrateFriendshipStatusesRemainingActions = require(parent.SharedFlags).FFlagMigrateFriendshipStatusesRemainingActions
-local friendAdd = images["icons/actions/friends/friendAdd"]
-local _ = {
-	BAD_REQUEST = 400,
-	UNAUTHORIZED = 401,
-	FORBIDDEN = 403,
-	TOO_MANY_REQUESTS = 429
-}
+﻿local HttpService = game:GetService("HttpService")
+local SocialTabsPage = script:FindFirstAncestor("SocialTabsPage")
+local Parent = SocialTabsPage.Parent
+local DataHydrationModule = require(Parent.DataHydration)
+local ProfileCTAStore = DataHydrationModule.Profile.ProfileCTAStore
+local FriendsStoreChallengeNetworkModule = require(SocialTabsPage.Networking.friendsStoreChallengeNetwork)
+local FFlagEnableFriendsStoreChallengeInterceptor = require(Parent.SharedFlags).FFlagEnableFriendsStoreChallengeInterceptor
+local GetResult = DataHydrationModule.Friends.FriendsStore.get()
+local FriendingErrorCodesModule = require(SocialTabsPage.Enums.FriendingErrorCodes)
+local SetCurrentToastMessageFunction = require(Parent.ToastRodux).Actions.SetCurrentToastMessage
+local NetworkingFriendsModule = require(SocialTabsPage.Networking.NetworkingFriends)
+local FFlagMigrateFriendshipStatusesRemainingActions = require(Parent.SharedFlags).FFlagMigrateFriendshipStatusesRemainingActions
+local IconsActionsFriendsFriendAdd = require(Parent.UIBlox).App.ImageSet.Images["icons/actions/friends/friendAdd"]
 
-local function _(p1)
-	-- upvalues: profileCTAStore (ref)
-	profileCTAStore.get().getCTA(p1, true)
+local function _(p1) --[[ Line: 66 | Named "refreshCTA" ]]
+	-- upvalues: ProfileCTAStore (copy)
+	ProfileCTAStore.get().getCTA(p1, true)
 end
 
-local function getErrorToastMessage(p1, p2, p3)
-	-- upvalues: friendingErrorCodesModule (ref)
-	return if p2 == 400 then ({
-		[friendingErrorCodesModule.INVALID_TARGET_USER] = p1.invalidTargetUserError,
-		[friendingErrorCodesModule.ALREADY_FRIEND] = p1.alreadyFriendError,
-		[friendingErrorCodesModule.MAX_FRIENDS] = p1.maxFriendsError,
-		[friendingErrorCodesModule.INVALID_NICKNAME] = p1.invalidNicknameError
-	})[p3] elseif p2 == 401 then ({
-		[friendingErrorCodesModule.UNAUTHORIZED] = p1.unauthorizedError
-	})[p3] elseif p2 == 403 then ({
-		[friendingErrorCodesModule.USER_BANNED] = p1.userBannedError,
-		[friendingErrorCodesModule.USER_BLOCKED] = p1.userBlockedError,
-		[friendingErrorCodesModule.USER_NOT_PASSED_CAPTCHA] = p1.userNotPassedCaptchaError
-	})[p3] elseif p2 == 429 then ({
-		[friendingErrorCodesModule.TOO_MANY_REQUESTS] = p1.tooManyRequestsError
-	})[p3] else nil
+local function getErrorToastMessage(p1, StatusCode, Code) --[[ Line: 71 ]]
+	-- upvalues: FriendingErrorCodesModule (copy)
+	return if StatusCode == 400 then ({
+		[FriendingErrorCodesModule.INVALID_TARGET_USER] = p1.invalidTargetUserError,
+		[FriendingErrorCodesModule.ALREADY_FRIEND] = p1.alreadyFriendError,
+		[FriendingErrorCodesModule.MAX_FRIENDS] = p1.maxFriendsError,
+		[FriendingErrorCodesModule.INVALID_NICKNAME] = p1.invalidNicknameError
+	})[Code] elseif StatusCode == 401 then ({
+		[FriendingErrorCodesModule.UNAUTHORIZED] = p1.unauthorizedError
+	})[Code] elseif StatusCode == 403 then ({
+		[FriendingErrorCodesModule.USER_BANNED] = p1.userBannedError,
+		[FriendingErrorCodesModule.USER_BLOCKED] = p1.userBlockedError,
+		[FriendingErrorCodesModule.USER_NOT_PASSED_CAPTCHA] = p1.userNotPassedCaptchaError
+	})[Code] elseif StatusCode == 429 then ({
+		[FriendingErrorCodesModule.TOO_MANY_REQUESTS] = p1.tooManyRequestsError
+	})[Code] else nil
 end
 
-local function showErrorToast(p1, p2, p3)
-	-- upvalues: httpService (ref), getErrorToastMessage (ref), setCurrentToastMessage (ref)
-	local defaultFriendingError = p2.defaultFriendingError
+local function showErrorToast(Callback: (any) -> (), Localized, p1) --[[ Line: 97 ]]
+	-- upvalues: HttpService (copy), getErrorToastMessage (copy), SetCurrentToastMessageFunction (copy)
+	local DefaultFriendingError = Localized.defaultFriendingError
 	
-	if p3 ~= nil then
-		local statusCode = p3.StatusCode
-		local ok, status = pcall(function()
-			-- upvalues: p3 (ref), httpService (copy)
-			return if p3.Body then httpService:JSONDecode(p3.Body) else nil
+	if p1 ~= nil then
+		local StatusCode = p1.StatusCode
+		local Success, Result = pcall(function() --[[ Line: 102 ]]
+			-- upvalues: p1 (copy), HttpService (upval)
+			return if p1.Body then HttpService:JSONDecode(p1.Body) else nil
 		end)
-		defaultFriendingError = getErrorToastMessage(p2, statusCode, if ok and status and (status.errors and status.errors[1]) and status.errors[1].code then status.errors[1].code else nil) or defaultFriendingError
+		DefaultFriendingError = getErrorToastMessage(Localized, StatusCode, if Success and Result and Result.errors and Result.errors[1] and Result.errors[1].code then Result.errors[1].code else nil) or DefaultFriendingError
 	end
-	p1(setCurrentToastMessage({ isLocalized = true, toastMessage = defaultFriendingError }))
+	Callback(SetCurrentToastMessageFunction({ isLocalized = true, toastMessage = DefaultFriendingError }))
 end
 
 return {
-	executeAddFriend = function(p1)
-		-- upvalues: fFlagMigrateFriendshipStatusesRemainingActions (ref), var1 (ref), networkingFriendsModule (ref), profileCTAStore (ref), setCurrentToastMessage (ref), friendAdd (ref), showErrorToast (ref)
-		return (if fFlagMigrateFriendshipStatusesRemainingActions then var1.RequestFriendship(p1.targetUserId, p1.friendshipOriginSourceType) else p1.dispatch(networkingFriendsModule.RequestFriendshipFromUserId.API({
+	executeAddFriend = function(p1) --[[ Line: 121 ]]
+		-- upvalues: FFlagMigrateFriendshipStatusesRemainingActions (copy), GetResult (copy), FFlagEnableFriendsStoreChallengeInterceptor (copy), FriendsStoreChallengeNetworkModule (copy), NetworkingFriendsModule (copy), ProfileCTAStore (copy), SetCurrentToastMessageFunction (copy), IconsActionsFriendsFriendAdd (copy), showErrorToast (copy)
+		return (if FFlagMigrateFriendshipStatusesRemainingActions then GetResult.RequestFriendship(p1.targetUserId, p1.friendshipOriginSourceType, nil, if FFlagEnableFriendsStoreChallengeInterceptor then FriendsStoreChallengeNetworkModule else nil) else p1.dispatch(NetworkingFriendsModule.RequestFriendshipFromUserId.API({
 			currentUserId = p1.currentUserId,
 			targetUserId = p1.targetUserId,
 			friendshipOriginSourceType = p1.friendshipOriginSourceType
-		}))):andThen(function()
-			-- upvalues: p1 (ref), profileCTAStore (copy), setCurrentToastMessage (copy), friendAdd (copy)
-			profileCTAStore.get().getCTA(p1.targetUserId, true)
-			p1.dispatch(setCurrentToastMessage({
+		}))):andThen(function() --[[ Line: 135 ]]
+			-- upvalues: p1 (copy), ProfileCTAStore (upval), SetCurrentToastMessageFunction (upval), IconsActionsFriendsFriendAdd (upval)
+			ProfileCTAStore.get().getCTA(p1.targetUserId, true)
+			p1.dispatch(SetCurrentToastMessageFunction({
 				isLocalized = true,
 				toastMessage = p1.localized.friendRequestSent,
-				toastIcon = friendAdd
+				toastIcon = IconsActionsFriendsFriendAdd
 			}))
-		end):catch(function(p2)
-			-- upvalues: showErrorToast (copy), p1 (ref)
-			showErrorToast(p1.dispatch, p1.localized, p2)
+		end):catch(function(Err) --[[ Line: 143 ]]
+			-- upvalues: showErrorToast (upval), p1 (copy)
+			showErrorToast(p1.dispatch, p1.localized, Err)
 		end)
 	end,
-	executeAcceptFriendRequest = function(p1)
-		-- upvalues: fFlagMigrateFriendshipStatusesRemainingActions (ref), var1 (ref), networkingFriendsModule (ref), profileCTAStore (ref), setCurrentToastMessage (ref), friendAdd (ref), showErrorToast (ref)
-		return (if fFlagMigrateFriendshipStatusesRemainingActions then var1.AcceptFriendRequest(p1.targetUserId) else p1.dispatch(networkingFriendsModule.AcceptFriendRequestFromUserId.API({
+	executeAcceptFriendRequest = function(p1) --[[ Line: 148 ]]
+		-- upvalues: FFlagMigrateFriendshipStatusesRemainingActions (copy), GetResult (copy), NetworkingFriendsModule (copy), ProfileCTAStore (copy), SetCurrentToastMessageFunction (copy), IconsActionsFriendsFriendAdd (copy), showErrorToast (copy)
+		return (if FFlagMigrateFriendshipStatusesRemainingActions then GetResult.AcceptFriendRequest(p1.targetUserId) else p1.dispatch(NetworkingFriendsModule.AcceptFriendRequestFromUserId.API({
 			currentUserId = p1.currentUserId,
 			targetUserId = p1.targetUserId
-		}))):andThen(function()
-			-- upvalues: p1 (ref), profileCTAStore (copy), setCurrentToastMessage (copy), friendAdd (copy)
-			profileCTAStore.get().getCTA(p1.targetUserId, true)
-			p1.dispatch(setCurrentToastMessage({
+		}))):andThen(function() --[[ Line: 156 ]]
+			-- upvalues: p1 (copy), ProfileCTAStore (upval), SetCurrentToastMessageFunction (upval), IconsActionsFriendsFriendAdd (upval)
+			ProfileCTAStore.get().getCTA(p1.targetUserId, true)
+			p1.dispatch(SetCurrentToastMessageFunction({
 				isLocalized = true,
 				toastMessage = p1.localized.friendAdded,
-				toastIcon = friendAdd
+				toastIcon = IconsActionsFriendsFriendAdd
 			}))
-		end):catch(function(p2)
-			-- upvalues: showErrorToast (copy), p1 (ref)
-			showErrorToast(p1.dispatch, p1.localized, p2)
+		end):catch(function(Err) --[[ Line: 164 ]]
+			-- upvalues: showErrorToast (upval), p1 (copy)
+			showErrorToast(p1.dispatch, p1.localized, Err)
 		end)
 	end
 }

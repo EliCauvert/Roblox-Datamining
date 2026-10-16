@@ -1,112 +1,118 @@
-﻿local appStorageService = game:GetService("AppStorageService")
-local parent = script.Parent.Parent.Parent
-local reactModule = require(parent.React)
-local reactRobloxModule = require(parent.ReactRoblox)
-local UIBloxModule = require(parent.UIBlox)
-local default = require(parent.PermissionsProtocol).PermissionsProtocol.default
-local default_1 = require(parent.LoggingProtocol).default
-local useState = reactModule.useState
-local useCallback = reactModule.useCallback
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local sendEventDeferred = require(parent.NotificationsCommon).sendEventDeferred
-local modalEventConstantsModule = require(script.Parent.Parent.Analytics.ModalEventConstants)
-local pushUpsellEventNameModule = require(script.Parent.Parent.Analytics.RobloxTelemetryConfigs.PushUpsellEventName)
-local pushNotificationsUpsellUtilsModule = require(script.Parent.Parent.Util.PushNotificationsUpsellUtils)
-local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local getFFlagLuaAppPushUpsellDeprecateOldEvents = require(parent.SharedFlags).GetFFlagLuaAppPushUpsellDeprecateOldEvents
+﻿local AppStorageService = game:GetService("AppStorageService")
+local Parent = script.Parent.Parent.Parent
+local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.ReactRoblox)
+local UIBloxModule = require(Parent.UIBlox)
+local Default = require(Parent.PermissionsProtocol).PermissionsProtocol.default
+local Default1 = require(Parent.LoggingProtocol).default
+local UseStateFunction = ReactModule.useState
+local UseCallbackFunction = ReactModule.useCallback
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local SendEventDeferredFunction = require(Parent.NotificationsCommon).sendEventDeferred
+local ModalEventConstantsModule = require(script.Parent.Parent.Analytics.ModalEventConstants)
+local PushUpsellEventNameModule = require(script.Parent.Parent.Analytics.RobloxTelemetryConfigs.PushUpsellEventName)
+local PushNotificationsUpsellUtilsModule = require(script.Parent.Parent.Util.PushNotificationsUpsellUtils)
+local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local GetFFlagLuaAppPushUpsellDeprecateOldEventsFunction = require(Parent.SharedFlags).GetFFlagLuaAppPushUpsellDeprecateOldEvents
 
-return function(p1)
-	-- upvalues: useLocalization (ref), useCallback (ref), pushNotificationsUpsellUtilsModule (ref), appStorageService (ref), getFFlagLuaAppPushUpsellDeprecateOldEvents (ref), sendEventDeferred (ref), modalEventConstantsModule (ref), default_1 (ref), pushUpsellEventNameModule (ref), default (ref), useState (ref), reactModule (ref), reactRobloxModule (ref), interactiveAlert (ref), buttonType (ref)
-	local var1 = useLocalization(p1.TranslationKeys)
-	local var2 = useCallback(function()
-		-- upvalues: pushNotificationsUpsellUtilsModule (copy), appStorageService (copy), getFFlagLuaAppPushUpsellDeprecateOldEvents (copy), sendEventDeferred (copy), modalEventConstantsModule (copy), default_1 (copy), pushUpsellEventNameModule (copy), p1 (ref)
-		pushNotificationsUpsellUtilsModule.setPushEduUpsellResponse(appStorageService, "Deny")
-		pushNotificationsUpsellUtilsModule.setPushEduUpsellResponseTimestamp(appStorageService, os.time())
+return function(p1) --[[ Line: 27 ]]
+	-- upvalues: UseLocalizationFunction (copy), UseCallbackFunction (copy), PushNotificationsUpsellUtilsModule (copy), AppStorageService (copy), GetFFlagLuaAppPushUpsellDeprecateOldEventsFunction (copy), SendEventDeferredFunction (copy), ModalEventConstantsModule (copy), Default1 (copy), PushUpsellEventNameModule (copy), Default (copy), UseStateFunction (copy), ReactModule (copy), ReactRobloxModule (copy), InteractiveAlert (copy), ButtonType (copy)
+	local UseLocalizationResult = UseLocalizationFunction(p1.TranslationKeys)
+	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 29 ]]
+		-- upvalues: PushNotificationsUpsellUtilsModule (upval), AppStorageService (upval), GetFFlagLuaAppPushUpsellDeprecateOldEventsFunction (upval), SendEventDeferredFunction (upval), ModalEventConstantsModule (upval), Default1 (upval), PushUpsellEventNameModule (upval), p1 (copy)
+		PushNotificationsUpsellUtilsModule.setPushEduUpsellResponse(AppStorageService, "Deny")
+		PushNotificationsUpsellUtilsModule.setPushEduUpsellResponseTimestamp(AppStorageService, os.time())
 		
-		if not getFFlagLuaAppPushUpsellDeprecateOldEvents() then
-			sendEventDeferred(modalEventConstantsModule.ModalContextPushEduUpsell, modalEventConstantsModule.OptInPushEventName, {
-				[modalEventConstantsModule.ActionType] = modalEventConstantsModule.Clicked,
-				[modalEventConstantsModule.Button] = modalEventConstantsModule.Cancel
+		if not GetFFlagLuaAppPushUpsellDeprecateOldEventsFunction() then
+			SendEventDeferredFunction(ModalEventConstantsModule.ModalContextPushEduUpsell, ModalEventConstantsModule.OptInPushEventName, {
+				[ModalEventConstantsModule.ActionType] = ModalEventConstantsModule.Clicked,
+				[ModalEventConstantsModule.Button] = ModalEventConstantsModule.Cancel
 			})
 		end
-		default_1:logRobloxTelemetryEvent(pushUpsellEventNameModule, {}, {
-			[modalEventConstantsModule.ActionType] = modalEventConstantsModule.Clicked,
-			[modalEventConstantsModule.Button] = modalEventConstantsModule.Cancel
-		}, modalEventConstantsModule.ModalContextPushEduUpsell)
+		Default1:logRobloxTelemetryEvent(PushUpsellEventNameModule, {}, {
+			[ModalEventConstantsModule.ActionType] = ModalEventConstantsModule.Clicked,
+			[ModalEventConstantsModule.Button] = ModalEventConstantsModule.Cancel
+		}, ModalEventConstantsModule.ModalContextPushEduUpsell)
 		p1.CloseModal()
 	end, { p1.CloseModal })
-	local var3 = useCallback(function()
-		-- upvalues: getFFlagLuaAppPushUpsellDeprecateOldEvents (copy), sendEventDeferred (copy), modalEventConstantsModule (copy), default_1 (copy), pushUpsellEventNameModule (copy), pushNotificationsUpsellUtilsModule (copy), appStorageService (copy), default (copy), p1 (ref)
-		if not getFFlagLuaAppPushUpsellDeprecateOldEvents() then
-			sendEventDeferred(modalEventConstantsModule.ModalContextPushEduUpsell, modalEventConstantsModule.OptInPushEventName, {
-				[modalEventConstantsModule.ActionType] = modalEventConstantsModule.Clicked,
-				[modalEventConstantsModule.Button] = modalEventConstantsModule.Confirm
+	local UseCallbackResult1 = UseCallbackFunction(function() --[[ Line: 47 ]]
+		-- upvalues: GetFFlagLuaAppPushUpsellDeprecateOldEventsFunction (upval), SendEventDeferredFunction (upval), ModalEventConstantsModule (upval), Default1 (upval), PushUpsellEventNameModule (upval), PushNotificationsUpsellUtilsModule (upval), AppStorageService (upval), Default (upval), p1 (copy)
+		if not GetFFlagLuaAppPushUpsellDeprecateOldEventsFunction() then
+			SendEventDeferredFunction(ModalEventConstantsModule.ModalContextPushEduUpsell, ModalEventConstantsModule.OptInPushEventName, {
+				[ModalEventConstantsModule.ActionType] = ModalEventConstantsModule.Clicked,
+				[ModalEventConstantsModule.Button] = ModalEventConstantsModule.Confirm
 			})
 		end
-		default_1:logRobloxTelemetryEvent(pushUpsellEventNameModule, {}, {
-			[modalEventConstantsModule.ActionType] = modalEventConstantsModule.Clicked,
-			[modalEventConstantsModule.Button] = modalEventConstantsModule.Confirm
-		}, modalEventConstantsModule.ModalContextPushEduUpsell)
-		pushNotificationsUpsellUtilsModule.setPushEduUpsellResponse(appStorageService, "Allow")
-		pushNotificationsUpsellUtilsModule.setPushEduUpsellResponseTimestamp(appStorageService, os.time())
-		default_1:logRobloxTelemetryEvent(pushUpsellEventNameModule, {}, {
-			[modalEventConstantsModule.ActionType] = modalEventConstantsModule.Opened,
-			[modalEventConstantsModule.EntryPoint] = "LuaPushUpsellModal"
-		}, modalEventConstantsModule.ModalContextSysUpsell)
-		default:requestPermissions({ default.Permissions.POST_NOTIFICATIONS }):andThen(function(_)
-			-- upvalues: pushNotificationsUpsellUtilsModule (copy), appStorageService (copy), getFFlagLuaAppPushUpsellDeprecateOldEvents (copy), sendEventDeferred (copy), modalEventConstantsModule (copy), default_1 (copy), pushUpsellEventNameModule (copy)
-			pushNotificationsUpsellUtilsModule.setPushSysUpsellPromptTimestamp(appStorageService, os.time())
+		Default1:logRobloxTelemetryEvent(PushUpsellEventNameModule, {}, {
+			[ModalEventConstantsModule.ActionType] = ModalEventConstantsModule.Clicked,
+			[ModalEventConstantsModule.Button] = ModalEventConstantsModule.Confirm
+		}, ModalEventConstantsModule.ModalContextPushEduUpsell)
+		PushNotificationsUpsellUtilsModule.setPushEduUpsellResponse(AppStorageService, "Allow")
+		PushNotificationsUpsellUtilsModule.setPushEduUpsellResponseTimestamp(AppStorageService, os.time())
+		Default1:logRobloxTelemetryEvent(PushUpsellEventNameModule, {}, {
+			[ModalEventConstantsModule.ActionType] = ModalEventConstantsModule.Opened,
+			[ModalEventConstantsModule.EntryPoint] = "LuaPushUpsellModal"
+		}, ModalEventConstantsModule.ModalContextSysUpsell)
+		Default:requestPermissions({ Default.Permissions.POST_NOTIFICATIONS }):andThen(function(_) --[[ Line: 74 ]]
+			-- upvalues: PushNotificationsUpsellUtilsModule (upval), AppStorageService (upval), GetFFlagLuaAppPushUpsellDeprecateOldEventsFunction (upval), SendEventDeferredFunction (upval), ModalEventConstantsModule (upval), Default1 (upval), PushUpsellEventNameModule (upval)
+			PushNotificationsUpsellUtilsModule.setPushSysUpsellPromptTimestamp(AppStorageService, os.time())
 			
-			if not getFFlagLuaAppPushUpsellDeprecateOldEvents() then
-				sendEventDeferred(modalEventConstantsModule.ModalContextSysUpsell, modalEventConstantsModule.OptInPushEventName, {
-					[modalEventConstantsModule.ActionType] = modalEventConstantsModule.Opened
+			if not GetFFlagLuaAppPushUpsellDeprecateOldEventsFunction() then
+				SendEventDeferredFunction(ModalEventConstantsModule.ModalContextSysUpsell, ModalEventConstantsModule.OptInPushEventName, {
+					[ModalEventConstantsModule.ActionType] = ModalEventConstantsModule.Opened
 				})
-				sendEventDeferred(modalEventConstantsModule.ModalContextSysUpsell, modalEventConstantsModule.OptInPushEventName, {
-					[modalEventConstantsModule.ActionType] = modalEventConstantsModule.RequestSuccess
-				})
-			end
-			default_1:logRobloxTelemetryEvent(pushUpsellEventNameModule, {}, {
-				[modalEventConstantsModule.ActionType] = modalEventConstantsModule.RequestSuccess
-			}, modalEventConstantsModule.ModalContextSysUpsell)
-		end, function(_)
-			-- upvalues: getFFlagLuaAppPushUpsellDeprecateOldEvents (copy), sendEventDeferred (copy), modalEventConstantsModule (copy), default_1 (copy), pushUpsellEventNameModule (copy)
-			if not getFFlagLuaAppPushUpsellDeprecateOldEvents() then
-				sendEventDeferred(modalEventConstantsModule.ModalContextSysUpsell, modalEventConstantsModule.OptInPushEventName, {
-					[modalEventConstantsModule.ActionType] = modalEventConstantsModule.RequestFailed
+				SendEventDeferredFunction(ModalEventConstantsModule.ModalContextSysUpsell, ModalEventConstantsModule.OptInPushEventName, {
+					[ModalEventConstantsModule.ActionType] = ModalEventConstantsModule.RequestSuccess
 				})
 			end
-			default_1:logRobloxTelemetryEvent(pushUpsellEventNameModule, {}, {
-				[modalEventConstantsModule.ActionType] = modalEventConstantsModule.RequestFailed
-			}, modalEventConstantsModule.ModalContextSysUpsell)
+			Default1:logRobloxTelemetryEvent(PushUpsellEventNameModule, {}, {
+				[ModalEventConstantsModule.ActionType] = ModalEventConstantsModule.RequestSuccess
+			}, ModalEventConstantsModule.ModalContextSysUpsell)
+		end, function(_) --[[ Line: 96 ]]
+			-- upvalues: GetFFlagLuaAppPushUpsellDeprecateOldEventsFunction (upval), SendEventDeferredFunction (upval), ModalEventConstantsModule (upval), Default1 (upval), PushUpsellEventNameModule (upval)
+			if not GetFFlagLuaAppPushUpsellDeprecateOldEventsFunction() then
+				SendEventDeferredFunction(ModalEventConstantsModule.ModalContextSysUpsell, ModalEventConstantsModule.OptInPushEventName, {
+					[ModalEventConstantsModule.ActionType] = ModalEventConstantsModule.RequestFailed
+				})
+			end
+			Default1:logRobloxTelemetryEvent(PushUpsellEventNameModule, {}, {
+				[ModalEventConstantsModule.ActionType] = ModalEventConstantsModule.RequestFailed
+			}, ModalEventConstantsModule.ModalContextSysUpsell)
 		end)
 		p1.CloseModal()
-	end, { p1.CloseModal, var1 })
-	local var4, var5 = useState(Vector2.new(800, 600))
+	end, { p1.CloseModal, UseLocalizationResult })
+	local UseStateResult, UseStateResult2 = UseStateFunction(Vector2.new(800, 600))
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		Size = UDim2.new(1, 0, 1, 0),
 		BackgroundTransparency = 1,
-		[reactRobloxModule.Change.AbsoluteSize] = useCallback(function(p2)
-			-- upvalues: var5 (ref)
-			var5(p2.AbsoluteSize)
-		end, { var5 })
+		[ReactRobloxModule.Change.AbsoluteSize] = UseCallbackFunction(function(Frame) --[[ Line: 120 ]]
+			-- upvalues: UseStateResult2 (copy)
+			UseStateResult2(Frame.AbsoluteSize)
+		end, { UseStateResult2 })
 	}, {
-		ConfirmationPrompt = reactModule.createElement(interactiveAlert, {
+		ConfirmationPrompt = ReactModule.createElement(InteractiveAlert, {
 			richText = true,
-			screenSize = var4,
-			title = var1.Heading,
-			bodyText = var1.Body,
+			screenSize = UseStateResult,
+			title = UseLocalizationResult.Heading,
+			bodyText = UseLocalizationResult.Body,
 			buttonStackInfo = {
 				buttons = {
 					{
 						isDefaultChild = true,
-						props = { onActivated = var2, text = var1.CancelAction }
+						props = {
+							onActivated = UseCallbackResult,
+							text = UseLocalizationResult.CancelAction
+						}
 					},
 					{
 						isDefaultChild = false,
-						buttonType = buttonType.PrimarySystem,
-						props = { onActivated = var3, text = var1.ConfirmAction }
+						buttonType = ButtonType.PrimarySystem,
+						props = {
+							onActivated = UseCallbackResult1,
+							text = UseLocalizationResult.ConfirmAction
+						}
 					}
 				}
 			}

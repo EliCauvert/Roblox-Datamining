@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CorePackages").Packages.ReactRoblox)
+﻿return (require(game:GetService("CorePackages").Packages.ReactRoblox))

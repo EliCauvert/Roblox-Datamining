@@ -1,205 +1,204 @@
-﻿local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-local corePackagesService = game:GetService("CorePackages")
-local roactModule = require(corePackagesService.Packages.Roact)
-local tModule = require(corePackagesService.Packages.t)
-local promiseModule = require(corePackagesService.Packages.Promise)
-local enumerateModule = require(corePackagesService.Packages.enumerate)
-local withStyle = require(corePackagesService.Packages.UIBlox).Core.Style.withStyle
-local fFlagCoreUiMigrateUIBloxToFoundation = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
-local blockingUtilityModule = require(corePackagesService.Workspace.Packages.BlockingUtility)
-local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
-local default = require(robloxGui.Modules.VoiceChat.VoiceChatServiceManager).default
-local constantsModule = require(robloxGui.Modules.VoiceChat.Constants)
-local getFFlagVoiceARUnblockingUnmutingEnabledModule = require(robloxGui.Modules.Flags.GetFFlagVoiceARUnblockingUnmutingEnabled)
-local reportActionSelectionModule = require(script.Parent.ReportActionSelection)
-local reportActionAreYouSureModule = require(script.Parent.ReportActionAreYouSure)
-local var1 = enumerateModule("ReportPages", { SelectActions = 1, ConfirmAction = 2 })
-local reportConfirmationContainer = roactModule.PureComponent:extend("ReportConfirmationContainer")
-reportConfirmationContainer.defaultProps = {
+﻿local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local TModule = require(CorePackages.Packages.t)
+local PromiseModule = require(CorePackages.Packages.Promise)
+local WithStyleFunction = require(CorePackages.Packages.UIBlox).Core.Style.withStyle
+local FFlagCoreUiMigrateUIBloxToFoundation = require(CorePackages.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
+local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
+local ConstantsModule = require(RobloxGui.Modules.VoiceChat.Constants)
+local GetFFlagVoiceARUnblockingUnmutingEnabledModule = require(RobloxGui.Modules.Flags.GetFFlagVoiceARUnblockingUnmutingEnabled)
+local ReportActionSelectionModule = require(script.Parent.ReportActionSelection)
+local ReportActionAreYouSureModule = require(script.Parent.ReportActionAreYouSure)
+local ReportPages = require(CorePackages.Packages.enumerate)("ReportPages", { SelectActions = 1, ConfirmAction = 2 })
+local ReportConfirmationContainer = RoactModule.PureComponent:extend("ReportConfirmationContainer")
+ReportConfirmationContainer.defaultProps = {
 	isVoiceReport = false,
-	blockingUtility = blockingUtilityModule,
-	voiceChatServiceManager = default,
-	closeMenu = function() end
+	blockingUtility = require(CorePackages.Workspace.Packages.BlockingUtility),
+	voiceChatServiceManager = require(RobloxGui.Modules.VoiceChat.VoiceChatServiceManager).default,
+	closeMenu = function() --[[ Line: 36 ]] end
 }
-reportConfirmationContainer.validateProps = tModule.interface({
-	player = tModule.strictInterface({
-		UserId = tModule.number,
-		Name = tModule.string,
-		DisplayName = tModule.string
+ReportConfirmationContainer.validateProps = TModule.interface({
+	player = TModule.strictInterface({
+		UserId = TModule.number,
+		Name = TModule.string,
+		DisplayName = TModule.string
 	}),
-	isVoiceReport = tModule.boolean,
-	closeMenu = tModule.callback,
-	blockingAnalytics = tModule.optional(tModule.table),
-	reportAbuseAnalytics = tModule.optional(tModule.table)
+	isVoiceReport = TModule.boolean,
+	closeMenu = TModule.callback,
+	blockingAnalytics = TModule.optional(TModule.table),
+	reportAbuseAnalytics = TModule.optional(TModule.table)
 })
 
-local function _(p1, p2)
-	-- upvalues: promiseModule (ref)
-	return promiseModule.new(function(p3, _)
-		-- upvalues: p1 (ref), p2 (ref)
-		p3(p1:IsPlayerBlockedByUserId(p2))
+local function _(p1, p2) --[[ Line: 57 | Named "getIsPlayerBlockedByUserId" ]]
+	-- upvalues: PromiseModule (copy)
+	return PromiseModule.new(function(Callback: (any) -> (), _) --[[ Line: 58 ]]
+		-- upvalues: p1 (copy), p2 (copy)
+		Callback(p1:IsPlayerBlockedByUserId(p2))
 	end)
 end
 
-function reportConfirmationContainer.init(p1)
-	-- upvalues: getFFlagVoiceARUnblockingUnmutingEnabledModule (ref), constantsModule (ref), var1 (ref), promiseModule (ref)
-	local player = p1.props.player
-	local participants = p1.props.voiceChatServiceManager.participants
+function ReportConfirmationContainer.init(p1) --[[ Line: 63 ]]
+	-- upvalues: GetFFlagVoiceARUnblockingUnmutingEnabledModule (copy), ConstantsModule (copy), ReportPages (copy), PromiseModule (copy)
+	local Player = p1.props.player
+	local Participants = p1.props.voiceChatServiceManager.participants
 	p1:setState({ absoluteWidth = 0 })
 	
 	if p1.props.onSizeChanged then
-		p1.props.onSizeChanged:Connect(function(p2)
-			-- upvalues: p1 (ref)
+		p1.props.onSizeChanged:Connect(function(p2) --[[ Line: 72 ]]
+			-- upvalues: p1 (copy)
 			p1:setState({ absoluteWidth = p2.X })
 		end)
 	end
-	local userId = participants[tostring(player.UserId)]
-	p1.userFullName = player.DisplayName .. "(@" .. player.Name .. ")"
+	local Participant = Participants[tostring(Player.UserId)]
+	p1.userFullName = Player.DisplayName .. "(@" .. Player.Name .. ")"
 	
-	function p3.onMuteCheckboxActivated(p2)
-		-- upvalues: p1 (ref)
-		p1:setState({ muteFlipped = p2 })
+	function p1.onMuteCheckboxActivated(MuteFlipped) --[[ Line: 82 ]]
+		-- upvalues: p1 (copy)
+		p1:setState({ muteFlipped = MuteFlipped })
 	end
 	
-	function p3.onBlockCheckboxActivated(p2)
-		-- upvalues: p1 (ref)
-		p1:setState({ blockFlipped = p2 })
+	function p1.onBlockCheckboxActivated(BlockFlipped) --[[ Line: 88 ]]
+		-- upvalues: p1 (copy)
+		p1:setState({ blockFlipped = BlockFlipped })
 	end
 	
-	function p3.processMuteAndBlocking()
-		-- upvalues: p1 (ref), player (ref), getFFlagVoiceARUnblockingUnmutingEnabledModule (copy), constantsModule (copy)
-		local blockFlipped = p1.state.blockFlipped
-		local muteFlipped = p1.state.muteFlipped
+	function p1.processMuteAndBlocking() --[[ Line: 94 ]]
+		-- upvalues: p1 (copy), Player (copy), GetFFlagVoiceARUnblockingUnmutingEnabledModule (upval), ConstantsModule (upval)
+		local BlockFlipped = p1.state.blockFlipped
+		local MuteFlipped = p1.state.muteFlipped
 		
-		if blockFlipped and not p1.state.targetInitiallyBlocked then
-			if p1.props.blockingUtility:BlockPlayerAsync(player) then
-				p1.props.blockingAnalytics:action("SettingsHub", "blockUser", { blockeeUserId = player.UserId })
+		if BlockFlipped and not p1.state.targetInitiallyBlocked then
+			if p1.props.blockingUtility:BlockPlayerAsync(Player) then
+				p1.props.blockingAnalytics:action("SettingsHub", "blockUser", { blockeeUserId = Player.UserId })
 			end
-		elseif not blockFlipped and p1.state.targetInitiallyBlocked and (getFFlagVoiceARUnblockingUnmutingEnabledModule() and p1.props.blockingUtility:UnblockPlayerAsync(player)) then
-			p1.props.blockingAnalytics:action("SettingsHub", "unblockUser", { blockeeUserId = player.UserId })
+		elseif not BlockFlipped and p1.state.targetInitiallyBlocked and GetFFlagVoiceARUnblockingUnmutingEnabledModule() and p1.props.blockingUtility:UnblockPlayerAsync(Player) then
+			p1.props.blockingAnalytics:action("SettingsHub", "unblockUser", { blockeeUserId = Player.UserId })
 		end
-		local userId = p1.props.voiceChatServiceManager.participants[tostring(player.UserId)]
+		local Participant = p1.props.voiceChatServiceManager.participants[tostring(Player.UserId)]
 		
-		if muteFlipped and not p1.state.targetInitiallyVoiceMuted then
-			p1.props.blockingUtility:MutePlayer(player)
+		if MuteFlipped and not p1.state.targetInitiallyVoiceMuted then
+			p1.props.blockingUtility:MutePlayer(Player)
 			p1.props.reportAbuseAnalytics:reportEventAndIncrement("muteUser")
 			
-			if userId and not userId.isMutedLocally then
-				p1.props.voiceChatServiceManager:ToggleMutePlayer(player.UserId, constantsModule.VOICE_CONTEXT_TYPE.REPORT_MENU)
+			if Participant and not Participant.isMutedLocally then
+				p1.props.voiceChatServiceManager:ToggleMutePlayer(Player.UserId, ConstantsModule.VOICE_CONTEXT_TYPE.REPORT_MENU)
 			end
-		elseif not muteFlipped and p1.state.targetInitiallyVoiceMuted and getFFlagVoiceARUnblockingUnmutingEnabledModule() then
-			p1.props.blockingUtility:UnmutePlayer(player)
+		elseif not MuteFlipped and p1.state.targetInitiallyVoiceMuted and GetFFlagVoiceARUnblockingUnmutingEnabledModule() then
+			p1.props.blockingUtility:UnmutePlayer(Player)
 			p1.props.reportAbuseAnalytics:reportEventAndIncrement("unmuteUser")
 			
-			if userId and userId.isMutedLocally then
-				p1.props.voiceChatServiceManager:ToggleMutePlayer(player.UserId, constantsModule.VOICE_CONTEXT_TYPE.REPORT_MENU)
+			if Participant and Participant.isMutedLocally then
+				p1.props.voiceChatServiceManager:ToggleMutePlayer(Player.UserId, ConstantsModule.VOICE_CONTEXT_TYPE.REPORT_MENU)
 			end
 		end
 		p1.props.closeMenu()
 	end
 	
-	function p3.onActionSelectionDoneActivated(p2, p3)
-		-- upvalues: p1 (ref), var1 (copy)
-		p1:setState({ blockFlipped = p2, muteFlipped = p3 })
+	function p1.onActionSelectionDoneActivated(BlockFlipped, MuteFlipped) --[[ Line: 151 ]]
+		-- upvalues: p1 (copy), ReportPages (upval)
+		p1:setState({ blockFlipped = BlockFlipped, muteFlipped = MuteFlipped })
 		
-		if (p2 or p3) and (p3 ~= p1.state.targetInitiallyVoiceMuted or p2 ~= p1.state.targetInitiallyBlocked) then
-			p1:setState({ currentPage = var1.ConfirmAction })
+		if (BlockFlipped or MuteFlipped) and (MuteFlipped ~= p1.state.targetInitiallyVoiceMuted or BlockFlipped ~= p1.state.targetInitiallyBlocked) then
+			p1:setState({ currentPage = ReportPages.ConfirmAction })
 			
 			return
+		else
+			p1.processMuteAndBlocking()
 		end
+	end
+	
+	function p1.onYesOrNoConfirmation() --[[ Line: 174 ]]
+		-- upvalues: p1 (copy)
 		p1.processMuteAndBlocking()
 	end
 	
-	function p3.onYesOrNoConfirmation()
-		-- upvalues: p1 (ref)
-		p1.processMuteAndBlocking()
+	function p1.onYesOrNoCancel() --[[ Line: 178 ]]
+		-- upvalues: p1 (copy), ReportPages (upval)
+		p1:setState({ currentPage = ReportPages.SelectActions })
 	end
 	
-	function p3.onYesOrNoCancel()
-		-- upvalues: p1 (ref), var1 (copy)
-		p1:setState({ currentPage = var1.SelectActions })
-	end
+	p1:setState({ currentPage = ReportPages.SelectActions })
 	
-	p1:setState({ currentPage = var1.SelectActions })
-	
-	if userId then
+	if Participant then
 		p1:setState({
-			targetInitiallyVoiceMuted = userId.isMutedLocally,
-			muteFlipped = userId.isMutedLocally
+			targetInitiallyVoiceMuted = Participant.isMutedLocally,
+			muteFlipped = Participant.isMutedLocally
 		})
 	else
 		p1:setState({ targetInitiallyVoiceMuted = false, muteFlipped = false })
 	end
-	local blockingUtility = p1.props.blockingUtility
-	local userId_1 = player.UserId
-	promiseModule.new(function(p2, _)
-		-- upvalues: blockingUtility (ref), userId_1 (ref)
-		p2(blockingUtility:IsPlayerBlockedByUserId(userId_1))
-	end):andThen(function(p2)
-		-- upvalues: p1 (ref)
-		p1:setState({ targetInitiallyBlocked = p2, blockFlipped = p2 })
+	local BlockingUtility = p1.props.blockingUtility
+	local UserId = Player.UserId
+	PromiseModule.new(function(Callback: (any) -> (), _) --[[ Line: 58 ]]
+		-- upvalues: BlockingUtility (copy), UserId (copy)
+		Callback(BlockingUtility:IsPlayerBlockedByUserId(UserId))
+	end):andThen(function(Result) --[[ Line: 201 ]]
+		-- upvalues: p1 (copy)
+		p1:setState({ targetInitiallyBlocked = Result, blockFlipped = Result })
 	end)
 end
 
-function reportConfirmationContainer.renderContent(p1)
-	-- upvalues: roactModule (ref), reportActionSelectionModule (ref), robloxTranslatorModule (ref), reportActionAreYouSureModule (ref), var1 (ref)
-	local currentPage = p1.state.currentPage
-	local var2 = 1.3
+function ReportConfirmationContainer.renderContent(p1) --[[ Line: 209 ]]
+	-- upvalues: RoactModule (copy), ReportActionSelectionModule (copy), RobloxTranslatorModule (copy), ReportActionAreYouSureModule (copy), ReportPages (copy)
+	local CurrentPage = p1.state.currentPage
+	local UiScale = 1.3
 	
 	if p1.props.onSizeChanged then
-		local absoluteWidth = p1.state.absoluteWidth
-		var2 = if absoluteWidth >= 800 then 1.3 elseif absoluteWidth > 600 then 1 else absoluteWidth / 600
+		local AbsoluteWidth: number = p1.state.absoluteWidth
+		UiScale = if AbsoluteWidth >= 800 then 1.3 elseif AbsoluteWidth > 600 then 1 else AbsoluteWidth / 600
 	end
-	local var3 = roactModule.createElement(reportActionSelectionModule, {
-		titleText = robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Heading.Report.ThanksForReport"),
-		subtitleText = robloxTranslatorModule:FormatByKey("Feature.SettingsHub.ReportSubmitted.ThankYou"),
-		instructionText = robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Label.Report.OtherActionsHeader"),
-		muteText = robloxTranslatorModule:FormatByKey("Feature.SettingsHub.ReportSubmitted.MutePlayer", { Player = p1.userFullName }),
-		blockText = robloxTranslatorModule:FormatByKey("Feature.SettingsHub.ReportSubmitted.BlockPlayer", { Player = p1.userFullName }),
-		doneText = robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Action.Report.Done"),
+	local Element = RoactModule.createElement(ReportActionSelectionModule, {
+		titleText = RobloxTranslatorModule:FormatByKey("Feature.SettingsHub.Heading.Report.ThanksForReport"),
+		subtitleText = RobloxTranslatorModule:FormatByKey("Feature.SettingsHub.ReportSubmitted.ThankYou"),
+		instructionText = RobloxTranslatorModule:FormatByKey("Feature.SettingsHub.Label.Report.OtherActionsHeader"),
+		muteText = RobloxTranslatorModule:FormatByKey("Feature.SettingsHub.ReportSubmitted.MutePlayer", { Player = p1.userFullName }),
+		blockText = RobloxTranslatorModule:FormatByKey("Feature.SettingsHub.ReportSubmitted.BlockPlayer", { Player = p1.userFullName }),
+		doneText = RobloxTranslatorModule:FormatByKey("Feature.SettingsHub.Action.Report.Done"),
 		showVoiceMuting = p1.props.isVoiceReport,
-		isVoiceMuted = (if p1.state.muteFlipped ~= nil then false else p1.state.muteFlipped) or p1.state.targetInitiallyVoiceMuted,
-		isBlocked = (if p1.state.blockFlipped ~= nil then false else p1.state.blockFlipped) or p1.state.targetInitiallyBlocked,
+		isVoiceMuted = p1.state.muteFlipped ~= nil and p1.state.muteFlipped or p1.state.targetInitiallyVoiceMuted,
+		isBlocked = p1.state.blockFlipped ~= nil and p1.state.blockFlipped or p1.state.targetInitiallyBlocked,
 		onMuteCheckboxActivated = p1.onMuteCheckboxActivated,
 		onBlockCheckboxActivated = p1.onBlockCheckboxActivated,
 		onDoneActivated = p1.onActionSelectionDoneActivated,
-		uiScale = var2,
+		uiScale = UiScale,
 		ZIndex = p1.props.ZIndex
 	})
-	local var4 = roactModule.createElement(reportActionAreYouSureModule, {
-		mutedTitleText = robloxTranslatorModule:FormatByKey("Feature.SettingsHub.ReportSubmitted.MutePlayer", { Player = p1.userFullName }),
-		blockedTitleText = robloxTranslatorModule:FormatByKey("Feature.SettingsHub.ReportSubmitted.BlockPlayer", { Player = p1.userFullName }),
-		mutedAndBlockedTitleText = robloxTranslatorModule:FormatByKey("Feature.SettingsHub.ReportSubmitted.Label.MuteAndBlockPlayer", { DisplayName = p1.userFullName }),
-		mutedSubtitleText = robloxTranslatorModule:FormatByKey("Feature.SettingsHub.ReportSubmitted.MutedSubtitleText", { Player = p1.userFullName }),
-		blockedSubtitleText = robloxTranslatorModule:FormatByKey("Feature.SettingsHub.ReportSubmitted.BlockedSubtitleText", { Player = p1.userFullName }),
-		mutedAndBlockedSubtitleText = robloxTranslatorModule:FormatByKey("Feature.SettingsHub.ReportSubmitted.Label.MuteAndBlockWarning", { Player = p1.userFullName }),
-		cancelText = robloxTranslatorModule:FormatByKey("InGame.InspectMenu.Action.Cancel"),
-		confirmText = robloxTranslatorModule:FormatByKey("InGame.InspectMenu.Action.Confirm"),
+	local Element1 = RoactModule.createElement(ReportActionAreYouSureModule, {
+		mutedTitleText = RobloxTranslatorModule:FormatByKey("Feature.SettingsHub.ReportSubmitted.MutePlayer", { Player = p1.userFullName }),
+		blockedTitleText = RobloxTranslatorModule:FormatByKey("Feature.SettingsHub.ReportSubmitted.BlockPlayer", { Player = p1.userFullName }),
+		mutedAndBlockedTitleText = RobloxTranslatorModule:FormatByKey("Feature.SettingsHub.ReportSubmitted.Label.MuteAndBlockPlayer", { DisplayName = p1.userFullName }),
+		mutedSubtitleText = RobloxTranslatorModule:FormatByKey("Feature.SettingsHub.ReportSubmitted.MutedSubtitleText", { Player = p1.userFullName }),
+		blockedSubtitleText = RobloxTranslatorModule:FormatByKey("Feature.SettingsHub.ReportSubmitted.BlockedSubtitleText", { Player = p1.userFullName }),
+		mutedAndBlockedSubtitleText = RobloxTranslatorModule:FormatByKey("Feature.SettingsHub.ReportSubmitted.Label.MuteAndBlockWarning", { Player = p1.userFullName }),
+		cancelText = RobloxTranslatorModule:FormatByKey("InGame.InspectMenu.Action.Cancel"),
+		confirmText = RobloxTranslatorModule:FormatByKey("InGame.InspectMenu.Action.Confirm"),
 		isMuted = p1.state.muteFlipped,
 		isBlocked = p1.state.blockFlipped,
 		onCancelActivated = p1.onYesOrNoCancel,
 		onConfirmActivated = p1.onYesOrNoConfirmation,
-		uiScale = var2,
+		uiScale = UiScale,
 		ZIndex = p1.props.ZIndex
 	})
-	local var5 = nil
+	local v1 = nil
 	
-	if currentPage == var1.SelectActions then
-		var5 = var3
+	if CurrentPage == ReportPages.SelectActions then
+		v1 = Element
 		
-		return var5
-	elseif currentPage == var1.ConfirmAction then
-		var5 = var4
+		return v1
 	end
-	return var5
+	if CurrentPage == ReportPages.ConfirmAction then
+		v1 = Element1
+	end
+	return v1
 end
 
-function reportConfirmationContainer.render(p1)
-	-- upvalues: fFlagCoreUiMigrateUIBloxToFoundation (ref), withStyle (ref)
-	return if fFlagCoreUiMigrateUIBloxToFoundation then p1:renderContent() else withStyle(function(_)
-		-- upvalues: p1 (ref)
+function ReportConfirmationContainer.render(p1) --[[ Line: 297 ]]
+	-- upvalues: FFlagCoreUiMigrateUIBloxToFoundation (copy), WithStyleFunction (copy)
+	return if FFlagCoreUiMigrateUIBloxToFoundation then p1:renderContent() else WithStyleFunction(function(_) --[[ Line: 301 ]]
+		-- upvalues: p1 (copy)
 		return p1:renderContent()
 	end)
 end
 
-return reportConfirmationContainer
+return ReportConfirmationContainer

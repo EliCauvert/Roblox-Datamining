@@ -1,10 +1,10 @@
-﻿local checkAndSendEventModule = require(script.Parent.Parent.Utils.checkAndSendEvent)
+﻿local CheckAndSendEventModule = require(script.Parent.Parent.Utils.checkAndSendEvent)
 
-return function(p1, p2, p3, p4)
-	-- upvalues: checkAndSendEventModule (ref)
-	checkAndSendEventModule(p1, "authAccountPickerAccountsFetched", {
-		validSessionUserIds = `[{table.concat(p2, ",")}]`,
-		shownUserIds = `[{table.concat(p3, ",")}]`,
-		appStoragePreviousUserIds = `[{table.concat(p4, ",")}]`
+return function(p1, List, List1, List2) --[[ Line: 4 ]]
+	-- upvalues: CheckAndSendEventModule (copy)
+	CheckAndSendEventModule(p1, "authAccountPickerAccountsFetched", {
+		validSessionUserIds = `[{table.concat(List, ",")}]`,
+		shownUserIds = `[{table.concat(List1, ",")}]`,
+		appStoragePreviousUserIds = `[{table.concat(List2, ",")}]`
 	})
 end

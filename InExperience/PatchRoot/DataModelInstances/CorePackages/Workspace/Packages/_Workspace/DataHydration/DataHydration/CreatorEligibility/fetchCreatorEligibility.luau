@@ -1,26 +1,26 @@
-﻿local parent = script:FindFirstAncestor("DataHydration").Parent
-local httpClientModule = require(parent.HttpClient)
-local urlBase = require(parent.UrlBuilder).UrlBase
+﻿local Parent = script:FindFirstAncestor("DataHydration").Parent
+local HttpClientModule = require(Parent.HttpClient)
+local UrlBase = require(Parent.UrlBuilder).UrlBase
 local _ = require(script.Parent.CreatorEligibilityStoreTypes)
-local fetch = httpClientModule.fetch
-local asPromise = httpClientModule.asPromise
+local FetchFunction = HttpClientModule.fetch
+local AsPromiseFunction = HttpClientModule.asPromise
 
 return {
-	fetchEligibility = function(p1, p2)
-		-- upvalues: urlBase (ref), fetch (ref), asPromise (ref)
-		p2 = p2 or {}
+	fetchEligibility = function(p1, p2) --[[ Line: 19 ]]
+		-- upvalues: UrlBase (copy), FetchFunction (copy), AsPromiseFunction (copy)
+		local P1 = p2 or {}
 		
-		return asPromise(fetch({
+		return AsPromiseFunction((FetchFunction({
 			method = "GET",
 			analyticsKey = "creator-eligibility.get",
-			network = p2.network,
-			url = ("%s/core-content/v1/creator-eligibility/%d"):format(p2.baseUrl or urlBase.APIS, p1),
-			decode = function(p3)
+			network = P1.network,
+			url = ("%s/core-content/v1/creator-eligibility/%d"):format(P1.baseUrl or UrlBase.APIS, p1),
+			decode = function(p3) --[[ Line: 30 ]]
 				return p3
 			end
-		}))
+		})))
 	end,
-	isFlagPresent = function(p1, p2)
-		return table.find(p1.creatorEligibility, p2) ~= nil
+	isFlagPresent = function(p1, Value): boolean --[[ Line: 37 ]]
+		return table.find(p1.creatorEligibility, Value) ~= nil
 	end
 }

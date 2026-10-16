@@ -1,43 +1,40 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local httpService = game:GetService("HttpService")
-local httpModule = require(parent.Http)
-local httpClientModule = require(parent.HttpClient)
-local momentsTypesModule = require(parent.MomentsTypes)
-local sharedFlagsModule = require(parent.SharedFlags)
-local _ = require(dataHydration.Moments.MomentsStoreTypes)
-local text = httpModule.Url.APIS_URL .. "deeplinks/v2/get-or-create-static"
-local fFlagMomentsPassFeedItemIdToBackendApis = sharedFlagsModule.FFlagMomentsPassFeedItemIdToBackendApis
-local shareLinkTargetIdType = momentsTypesModule.Enums.ShareLinkTargetIdType
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local HttpService = game:GetService("HttpService")
+local HttpClientModule = require(Parent.HttpClient)
+local _ = require(DataHydration.Moments.MomentsStoreTypes)
+local Text = require(Parent.Http).Url.APIS_URL .. "deeplinks/v2/get-or-create-static"
+local FFlagMomentsPassFeedItemIdToBackendApis = require(Parent.SharedFlags).FFlagMomentsPassFeedItemIdToBackendApis
+local ShareLinkTargetIdType = require(Parent.MomentsTypes).Enums.ShareLinkTargetIdType
 
-local function decodeShareLink(p1)
+local function decodeShareLink(p1) --[[ Line: 33 ]]
 	return if p1.link and type(p1.link) == "string" then p1.link else nil
 end
 
-return function(p1, p2)
-	-- upvalues: fFlagMomentsPassFeedItemIdToBackendApis (ref), shareLinkTargetIdType (ref), httpClientModule (ref), text (ref), httpService (ref), decodeShareLink (ref)
-	local momentId = p1.momentId
-	local t = { momentId = p1.momentId }
+return function(p1, Network) --[[ Line: 41 | Named "fetchShareLink" ]]
+	-- upvalues: FFlagMomentsPassFeedItemIdToBackendApis (copy), ShareLinkTargetIdType (copy), HttpClientModule (copy), Text (copy), HttpService (copy), decodeShareLink (copy)
+	local MomentId = p1.momentId
+	local config = { momentId = p1.momentId }
 	
-	if fFlagMomentsPassFeedItemIdToBackendApis then
-		local feedItemId = p1.feedItemId
-		assert(feedItemId ~= nil and feedItemId ~= "", "feedItemId is required to create a Moments share link")
-		momentId = feedItemId
-		t.targetIdType = shareLinkTargetIdType.FeedItemId
+	if FFlagMomentsPassFeedItemIdToBackendApis then
+		local FeedItemId = p1.feedItemId
+		assert(FeedItemId ~= nil and FeedItemId ~= "", "feedItemId is required to create a Moments share link")
+		MomentId = FeedItemId
+		config.targetIdType = ShareLinkTargetIdType.FeedItemId
 	end
-	return httpClientModule.fetch({
+	return HttpClientModule.fetch({
 		method = "POST",
 		analyticsKey = "moments.get-or-create-static-share-link",
-		url = text,
+		url = Text,
 		body = {
 			linkType = 6,
 			linkPreviewAssetId = 0,
-			targetId = momentId,
+			targetId = MomentId,
 			linkPreviewTitle = p1.title,
 			linkPreviewDescription = p1.description or "",
-			customData = httpService:JSONEncode(t)
+			customData = HttpService:JSONEncode(config)
 		},
-		network = p2,
+		network = Network,
 		decode = decodeShareLink
 	})
 end

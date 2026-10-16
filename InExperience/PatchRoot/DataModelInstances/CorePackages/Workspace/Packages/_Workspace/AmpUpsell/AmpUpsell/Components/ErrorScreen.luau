@@ -1,61 +1,61 @@
-﻿local ampUpsell = script:FindFirstAncestor("AmpUpsell")
-local parent = ampUpsell.Parent
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local analyticsServiceModule = require(ampUpsell.Analytics.AnalyticsService)
-local UIBloxModule = require(parent.UIBlox)
-local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local sendButtonClickEventModule = require(ampUpsell.Analytics.sendButtonClickEvent)
+﻿local AmpUpsell = script:FindFirstAncestor("AmpUpsell")
+local Parent = AmpUpsell.Parent
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local AnalyticsServiceModule = require(AmpUpsell.Analytics.AnalyticsService)
+local UIBloxModule = require(Parent.UIBlox)
+local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local SendButtonClickEventModule = require(AmpUpsell.Analytics.sendButtonClickEvent)
 
-local function selectScreenSize(p1)
+local function selectScreenSize(p1) --[[ Line: 19 ]]
 	return p1.ScreenSize
 end
 
-return function(p1)
-	-- upvalues: useLocalization (ref), analyticsServiceModule (ref), useSelector (ref), selectScreenSize (ref), reactModule (ref), interactiveAlert (ref), buttonType (ref), sendButtonClickEventModule (ref)
-	local onRetry = p1.onRetry
-	local onCancel = p1.onCancel
-	local featureName = p1.featureName
-	local var1 = useLocalization({
+return function(p1) --[[ Line: 23 | Named "ErrorScreen" ]]
+	-- upvalues: UseLocalizationFunction (copy), AnalyticsServiceModule (copy), UseSelectorFunction (copy), selectScreenSize (copy), ReactModule (copy), InteractiveAlert (copy), ButtonType (copy), SendButtonClickEventModule (copy)
+	local OnRetryFunction = p1.onRetry
+	local OnCancelFunction = p1.onCancel
+	local FeatureName = p1.featureName
+	local AmpErrorScreenTitle = UseLocalizationFunction({
 		title = "Amp.ErrorScreen.Title",
 		bodyText = "Amp.ErrorScreen.BodyText",
 		buttonRetry = "Amp.ErrorScreen.Retry",
 		buttonCancel = "Amp.ErrorScreen.Cancel"
 	})
-	local var2 = if p1.analyticsService then p1.analyticsService else analyticsServiceModule.EventStream
+	local AnalyticsService = if p1.analyticsService then p1.analyticsService else AnalyticsServiceModule.EventStream
 	
-	return reactModule.createElement(interactiveAlert, {
+	return ReactModule.createElement(InteractiveAlert, {
 		anchorPoint = Vector2.new(0.5, 0.5),
 		position = UDim2.new(0.5, 0, 0.5, 0),
-		screenSize = useSelector(selectScreenSize),
-		title = var1.title,
-		bodyText = var1.bodyText,
+		screenSize = UseSelectorFunction(selectScreenSize),
+		title = AmpErrorScreenTitle.title,
+		bodyText = AmpErrorScreenTitle.bodyText,
 		buttonStackInfo = {
 			buttons = {
 				{
-					buttonType = buttonType.Secondary,
+					buttonType = ButtonType.Secondary,
 					props = {
 						isDisabled = false,
-						onActivated = function()
-							-- upvalues: sendButtonClickEventModule (copy), var2 (ref), featureName (ref), onCancel (ref)
-							sendButtonClickEventModule(var2, "AmpErrorScreen", featureName, "Cancel")
-							onCancel()
+						onActivated = function() --[[ Line: 48 ]]
+							-- upvalues: SendButtonClickEventModule (upval), AnalyticsService (copy), FeatureName (copy), OnCancelFunction (copy)
+							SendButtonClickEventModule(AnalyticsService, "AmpErrorScreen", FeatureName, "Cancel")
+							OnCancelFunction()
 						end,
-						text = var1.buttonCancel
+						text = AmpErrorScreenTitle.buttonCancel
 					}
 				},
 				{
-					buttonType = buttonType.PrimarySystem,
+					buttonType = ButtonType.PrimarySystem,
 					props = {
 						isDisabled = false,
-						onActivated = function()
-							-- upvalues: sendButtonClickEventModule (copy), var2 (ref), featureName (ref), onRetry (ref)
-							sendButtonClickEventModule(var2, "AmpErrorScreen", featureName, "Retry")
-							onRetry()
+						onActivated = function() --[[ Line: 59 ]]
+							-- upvalues: SendButtonClickEventModule (upval), AnalyticsService (copy), FeatureName (copy), OnRetryFunction (copy)
+							SendButtonClickEventModule(AnalyticsService, "AmpErrorScreen", FeatureName, "Retry")
+							OnRetryFunction()
 						end,
-						text = var1.buttonRetry
+						text = AmpErrorScreenTitle.buttonRetry
 					}
 				}
 			}

@@ -1,5 +1,5 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local _ = require(dataHydration.DataHydrationTypes)
-local _ = require(dataHydration.CreatorAgentChat.Types.store)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local _ = require(DataHydration.DataHydrationTypes)
+local _ = require(DataHydration.CreatorAgentChat.Types.store)
 
 return {}

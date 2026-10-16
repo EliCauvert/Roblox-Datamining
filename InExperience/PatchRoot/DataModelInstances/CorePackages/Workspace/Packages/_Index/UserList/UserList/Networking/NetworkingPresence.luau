@@ -1,5 +1,5 @@
-﻿local userList = script:FindFirstAncestor("UserList")
+﻿local UserList = script:FindFirstAncestor("UserList")
+local LuaSocialLibrariesDepsModule = require(UserList.Parent.LuaSocialLibrariesDeps)
+local MyRoduxNetworkingModule = require(UserList.Networking.myRoduxNetworking)
 
-return if require(userList.Flags.FFlagUserListPresenceStoreMigration) then nil else require(userList.Parent.LuaSocialLibrariesDeps).NetworkingPresence.config({
-	roduxNetworking = require(userList.Networking.myRoduxNetworking)
-})
+return if require(UserList.Flags.FFlagUserListPresenceStoreMigration) then nil else LuaSocialLibrariesDepsModule.NetworkingPresence.config({ roduxNetworking = MyRoduxNetworkingModule })

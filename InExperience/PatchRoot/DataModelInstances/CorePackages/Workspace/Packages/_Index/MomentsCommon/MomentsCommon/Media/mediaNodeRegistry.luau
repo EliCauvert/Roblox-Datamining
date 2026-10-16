@@ -1,35 +1,35 @@
 ﻿local _ = require(script:FindFirstAncestor("MomentsCommon").Media.MediaTypes)
 
-return function()
+return function() --[[ Line: 45 | Named "createMediaNodeRegistry" ]]
 	local t = {}
 	
 	return {
-		register = function(p1)
-			-- upvalues: t (ref)
+		register = function(p1) --[[ Line: 48 ]]
+			-- upvalues: t (copy)
 			assert(not t[p1.kind], `mediaNodeRegistry: kind "{p0.kind}" already registered`)
 			t[p1.kind] = p1
 		end,
-		getFactory = function(p1)
-			-- upvalues: t (ref)
+		getFactory = function(p1) --[[ Line: 55 ]]
+			-- upvalues: t (copy)
 			return t[p1]
 		end,
-		create = function(p1, p2, p3)
-			-- upvalues: t (ref)
-			local var1 = t[p1]
-			assert(var1, `mediaNodeRegistry: no factory registered for kind "{p2}"`)
+		create = function(p1, p2, p3) --[[ Line: 59 ]]
+			-- upvalues: t (copy)
+			local Entry = t[p1]
+			assert(Entry, `mediaNodeRegistry: no factory registered for kind "{p2}"`)
 			
-			return var1.create(p2, p3)
+			return Entry.create(p2, p3)
 		end,
-		getKinds = function()
-			-- upvalues: t (ref)
-			local t_1 = {}
+		getKinds = function() --[[ Line: 65 ]]
+			-- upvalues: t (copy)
+			local List = {}
 			
 			for i in t do
-				table.insert(t_1, i)
+				table.insert(List, i)
 			end
-			table.sort(t_1)
+			table.sort(List)
 			
-			return t_1
+			return List
 		end
 	}
 end

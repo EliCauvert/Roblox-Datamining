@@ -1,70 +1,75 @@
-﻿local chrome = script:FindFirstAncestor("Chrome")
-local corePackagesService = game:GetService("CorePackages")
-local guiService = game:GetService("GuiService")
-local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-local reactModule = require(corePackagesService.Packages.React)
-local useEventConnection = require(corePackagesService.Packages.ReactUtils).useEventConnection
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local serviceModule = require(chrome.Service)
-local viewportUtilModule = require(chrome.ChromeShared.Service.ViewportUtil)
-local _ = require(chrome.ChromeShared.Service.WindowSizeSignal)
-local constantsModule = require(chrome.ChromeShared.Unibar.Constants)
-local avatarSwitcherContainer = require(corePackagesService.Workspace.Packages.AvatarSwitcher).Components.AvatarSwitcherContainer
+﻿local Chrome = script:FindFirstAncestor("Chrome")
+local CorePackages = game:GetService("CorePackages")
+local GuiService = game:GetService("GuiService")
+local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+local ReactModule = require(CorePackages.Packages.React)
+local UseEventConnectionFunction = require(CorePackages.Packages.ReactUtils).useEventConnection
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local ServiceModule = require(Chrome.Service)
+local ViewportUtilModule = require(Chrome.ChromeShared.Service.ViewportUtil)
+local _ = require(Chrome.ChromeShared.Service.WindowSizeSignal)
+local ConstantsModule = require(Chrome.ChromeShared.Unibar.Constants)
+local AvatarSwitcherContainer = require(CorePackages.Workspace.Packages.AvatarSwitcher).Components.AvatarSwitcherContainer
 
-local function _(p1)
-	return p1.X.Offset / p1.Y.Offset < 1.2
+local function _(Vector): boolean --[[ Line: 27 | Named "shouldUseVerticalLayout" ]]
+	return Vector.X.Offset / Vector.Y.Offset < 1.2
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), robloxGui (ref), guiService (ref), useEventConnection (ref), viewportUtilModule (ref), foundationModule (ref), avatarSwitcherContainer (ref), serviceModule (ref), constantsModule (ref)
-	local windowSize = p1.windowSize
-	local var1 = windowSize:get()
-	local var2, var3 = reactModule.useState(var1.X.Offset / var1.Y.Offset < 1.2)
-	local var4, var5 = reactModule.useState(false)
-	local settingsHubModule = require(robloxGui.Modules.Settings.SettingsHub)
-	local var6 = reactModule.useCallback(function(p2)
-		-- upvalues: guiService (copy), p1 (ref), windowSize (ref), var5 (ref)
-		local y = guiService.TopbarInset.Max.Y
-		local var7 = if p2.X >= p1.maxWindowWidth then p2.Y - y < p1.maxWindowHeight else true
+return function(p1) --[[ Line: 37 | Named "AvatarSwitcherChromeWrapper" ]]
+	-- upvalues: ReactModule (copy), RobloxGui (copy), GuiService (copy), UseEventConnectionFunction (copy), ViewportUtilModule (copy), FoundationModule (copy), AvatarSwitcherContainer (copy), ServiceModule (copy), ConstantsModule (copy)
+	local WindowSize = p1.windowSize
+	local GetResult = WindowSize:get()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(GetResult.X.Offset / GetResult.Y.Offset < 1.2)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
+	local SettingsHubModule = require(RobloxGui.Modules.Settings.SettingsHub)
+	local UseResult = ReactModule.useCallback(function(Vector) --[[ Line: 45 ]]
+		-- upvalues: GuiService (upval), p1 (copy), WindowSize (copy), UseStateResult2_1 (copy)
+		local Y = GuiService.TopbarInset.Max.Y
+		local IsXBelow: boolean = Vector.X < p1.maxWindowWidth or Vector.Y - Y < p1.maxWindowHeight
 		
-		if var7 then
-			windowSize:requestSize(p2.X, p2.Y - y)
+		if IsXBelow then
+			WindowSize:requestSize(Vector.X, Vector.Y - Y)
 		else
-			windowSize:requestSize(math.min(p1.maxWindowWidth, p2.X), math.min(p1.maxWindowHeight, p2.Y - y))
+			WindowSize:requestSize(math.min(p1.maxWindowWidth, Vector.X), (math.min(p1.maxWindowHeight, Vector.Y - Y)))
 		end
-		var5(var7)
-	end, { windowSize, p1.maxWindowWidth, p1.maxWindowHeight, var4 })
-	useEventConnection(guiService:GetPropertyChangedSignal("TopbarInset"), function()
-		-- upvalues: var6 (ref), viewportUtilModule (copy)
-		var6(viewportUtilModule.screenSize:get())
+		UseStateResult2_1(IsXBelow)
+	end, {
+		WindowSize,
+		p1.maxWindowWidth,
+		p1.maxWindowHeight,
+		UseStateResult1
+	})
+	UseEventConnectionFunction(GuiService:GetPropertyChangedSignal("TopbarInset"), function() --[[ Line: 60 ]]
+		-- upvalues: UseResult (copy), ViewportUtilModule (upval)
+		UseResult(ViewportUtilModule.screenSize:get())
 	end)
-	reactModule.useEffect(function()
-		-- upvalues: viewportUtilModule (copy), var6 (ref), windowSize (ref), var3 (ref)
-		local screenSizeConnection = viewportUtilModule.screenSize:connect(var6)
-		local var7 = windowSize:connect(function(p2)
-			-- upvalues: var3 (copy)
-			var3(p2.X.Offset / p2.Y.Offset < 1.2)
+	ReactModule.useEffect(function() --[[ Line: 64 ]]
+		-- upvalues: ViewportUtilModule (upval), UseResult (copy), WindowSize (copy), UseStateResult2 (copy)
+		local ScreenSizeConnection = ViewportUtilModule.screenSize:connect(UseResult)
+		local Connection = WindowSize:connect(function(Vector) --[[ Line: 66 ]]
+			-- upvalues: UseStateResult2 (upval)
+			UseStateResult2(Vector.X.Offset / Vector.Y.Offset < 1.2)
 		end)
-		var6(viewportUtilModule.screenSize:get())
+		UseResult(ViewportUtilModule.screenSize:get())
 		
-		return function()
-			-- upvalues: screenSizeConnection (ref), var7 (ref)
-			screenSizeConnection:disconnect()
-			var7:disconnect()
+		return function() --[[ Line: 70 ]]
+			-- upvalues: ScreenSizeConnection (copy), Connection (copy)
+			ScreenSizeConnection:disconnect()
+			Connection:disconnect()
 		end
-	end, { var6 })
+	end, { UseResult })
 	
-	return reactModule.createElement(foundationModule.View, {
-		tag = `size-full {if var4 then "padding-x-large padding-top-medium padding-bottom-xlarge" else ""}`
+	return ReactModule.createElement(FoundationModule.View, {
+		tag = `size-full {if UseStateResult1 then "padding-x-large padding-top-medium padding-bottom-xlarge" else ""}`
 	}, {
-		AvatarSwitcherContainer = reactModule.createElement(avatarSwitcherContainer, {
-			getRespawnBehaviour = settingsHubModule.GetRespawnBehaviour,
-			respawnBehaviorChangedEvent = settingsHubModule.RespawnBehaviourChangedEvent,
-			toggleWindow = function()
-				-- upvalues: serviceModule (copy), constantsModule (copy)
-				serviceModule:toggleWindow(constantsModule.AVATAR_SWITCHER_ID)
+		AvatarSwitcherContainer = ReactModule.createElement(AvatarSwitcherContainer, {
+			getRespawnBehaviour = SettingsHubModule.GetRespawnBehaviour,
+			respawnBehaviorChangedEvent = SettingsHubModule.RespawnBehaviourChangedEvent,
+			toggleWindow = function() --[[ Line: 82 ]]
+				-- upvalues: ServiceModule (upval), ConstantsModule (upval)
+				ServiceModule:toggleWindow(ConstantsModule.AVATAR_SWITCHER_ID)
 			end,
-			verticalLayout = var2
+			verticalLayout = UseStateResult
 		})
 	})
 end

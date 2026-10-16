@@ -1,64 +1,64 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local httpClientModule = require(parent.HttpClient)
-local promiseModule = require(parent.Promise)
-local _ = require(parent.MomentsTypes)
-local createDataCacheModule = require(dataHydration.createDataCache)
-local createDataResolverModule = require(dataHydration.createDataResolver)
-local _ = require(dataHydration.DataHydrationTypes)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local HttpClientModule = require(Parent.HttpClient)
+local PromiseModule = require(Parent.Promise)
+local _ = require(Parent.MomentsTypes)
+local CreateDataCacheModule = require(DataHydration.createDataCache)
+local CreateDataResolverModule = require(DataHydration.createDataResolver)
+local _ = require(DataHydration.DataHydrationTypes)
 local _ = require(script.Parent.MomentsStoreTypes)
-local getEmojiSetsModule = require(script.Parent.Requests.getEmojiSets)
-local decodeEmojiSetsModule = require(script.Parent.Util.decodeEmojiSets)
-local resolveMomentsEmojiCatalogModule = require(script.Parent.Util.resolveMomentsEmojiCatalog)
-local validateMomentsEmojiCatalogModule = require(script.Parent.Util.validateMomentsEmojiCatalog)
+local GetEmojiSetsModule = require(script.Parent.Requests.getEmojiSets)
+local DecodeEmojiSetsModule = require(script.Parent.Util.decodeEmojiSets)
+local ResolveMomentsEmojiCatalogModule = require(script.Parent.Util.resolveMomentsEmojiCatalog)
+local ValidateMomentsEmojiCatalogModule = require(script.Parent.Util.validateMomentsEmojiCatalog)
 
-local function shouldRefreshCachedEmojiSets(value)
-	return value == nil
+local function shouldRefreshCachedEmojiSets(p1): boolean --[[ Line: 26 ]]
+	return p1 == nil
 end
 
-return function(value)
-	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), httpClientModule (ref), getEmojiSetsModule (ref), validateMomentsEmojiCatalogModule (ref), promiseModule (ref), shouldRefreshCachedEmojiSets (ref), resolveMomentsEmojiCatalogModule (ref), decodeEmojiSetsModule (ref)
-	local value_1 = value or {}
-	local var1 = createDataResolverModule({
+return function(p1) --[[ Line: 30 | Named "createMomentsEmojiSetsStore" ]]
+	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), HttpClientModule (copy), GetEmojiSetsModule (copy), ValidateMomentsEmojiCatalogModule (copy), PromiseModule (copy), shouldRefreshCachedEmojiSets (copy), ResolveMomentsEmojiCatalogModule (copy), DecodeEmojiSetsModule (copy)
+	local P1 = p1 or {}
+	local DataResolverModule = CreateDataResolverModule({
 		supportsMultiGet = false,
 		replaceItems = true,
-		cache = createDataCacheModule(),
-		fetchFn = function(_, _)
-			-- upvalues: httpClientModule (copy), getEmojiSetsModule (copy), value_1 (ref), validateMomentsEmojiCatalogModule (copy), promiseModule (copy)
-			return httpClientModule.asPromise(getEmojiSetsModule(value_1.network)):andThen(function(p1)
-				-- upvalues: validateMomentsEmojiCatalogModule (copy), promiseModule (copy)
-				return if validateMomentsEmojiCatalogModule.isValidCachedGetEmojiSetsResponse(p1) then p1 else promiseModule.reject("Moments emoji-api returned an invalid or empty catalog")
+		cache = CreateDataCacheModule(),
+		fetchFn = function(_, _) --[[ Line: 37 ]]
+			-- upvalues: HttpClientModule (upval), GetEmojiSetsModule (upval), P1 (copy), ValidateMomentsEmojiCatalogModule (upval), PromiseModule (upval)
+			return HttpClientModule.asPromise(GetEmojiSetsModule(P1.network)):andThen(function(Result) --[[ Line: 42 ]]
+				-- upvalues: ValidateMomentsEmojiCatalogModule (upval), PromiseModule (upval)
+				return if ValidateMomentsEmojiCatalogModule.isValidCachedGetEmojiSetsResponse(Result) then Result else PromiseModule.reject("Moments emoji-api returned an invalid or empty catalog")
 			end)
 		end
 	})
 	
 	return {
-		getAndFetchEmojiSets = function()
-			-- upvalues: var1 (ref), shouldRefreshCachedEmojiSets (copy)
-			return var1.getAndFetchItem("emoji-sets", shouldRefreshCachedEmojiSets)
+		getAndFetchEmojiSets = function() --[[ Line: 51 ]]
+			-- upvalues: DataResolverModule (copy), shouldRefreshCachedEmojiSets (upval)
+			return DataResolverModule.getAndFetchItem("emoji-sets", shouldRefreshCachedEmojiSets)
 		end,
-		getEmojis = function(p1)
-			-- upvalues: var1 (ref), resolveMomentsEmojiCatalogModule (copy)
-			return resolveMomentsEmojiCatalogModule.resolveMomentsEmojiCatalog(var1.getCachedItem("emoji-sets").data(p1)).emojis
+		getEmojis = function(p2) --[[ Line: 57 ]]
+			-- upvalues: DataResolverModule (copy), ResolveMomentsEmojiCatalogModule (upval)
+			return ResolveMomentsEmojiCatalogModule.resolveMomentsEmojiCatalog((DataResolverModule.getCachedItem("emoji-sets").data(p2))).emojis
 		end,
-		getCachedEmojiCatalog = function(p1)
-			-- upvalues: var1 (ref), validateMomentsEmojiCatalogModule (copy), decodeEmojiSetsModule (copy)
-			local cachedItem = var1.getCachedItem("emoji-sets")
-			local var2 = cachedItem.data(p1)
+		getCachedEmojiCatalog = function(p2) --[[ Line: 62 ]]
+			-- upvalues: DataResolverModule (copy), ValidateMomentsEmojiCatalogModule (upval), DecodeEmojiSetsModule (upval)
+			local EmojiSetsCachedItem = DataResolverModule.getCachedItem("emoji-sets")
+			local DataResult = EmojiSetsCachedItem.data(p2)
 			
-			return if validateMomentsEmojiCatalogModule.isValidCachedGetEmojiSetsResponse(var2) then {
+			return if ValidateMomentsEmojiCatalogModule.isValidCachedGetEmojiSetsResponse(DataResult) then {
 				source = "cache",
-				emojis = decodeEmojiSetsModule.flattenEmojis(var2),
-				status = cachedItem.status(p1)
+				emojis = DecodeEmojiSetsModule.flattenEmojis(DataResult),
+				status = EmojiSetsCachedItem.status(p2)
 			} else {
 				source = "unavailable",
 				emojis = {},
-				status = cachedItem.status(p1)
+				status = EmojiSetsCachedItem.status(p2)
 			}
 		end,
-		dispose = function()
-			-- upvalues: var1 (ref)
-			var1.dispose()
+		dispose = function() --[[ Line: 79 ]]
+			-- upvalues: DataResolverModule (copy)
+			DataResolverModule.dispose()
 		end
 	}
 end

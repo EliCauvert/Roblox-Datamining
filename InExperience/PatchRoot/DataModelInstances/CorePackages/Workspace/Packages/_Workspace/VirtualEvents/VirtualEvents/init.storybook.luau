@@ -1,7 +1,7 @@
-﻿local virtualEvents = script:FindFirstAncestor("VirtualEvents")
+﻿local VirtualEvents = script:FindFirstAncestor("VirtualEvents")
 
 return {
-	name = virtualEvents.Name,
-	roact = require(virtualEvents.Parent.RoactCompat),
-	storyRoots = { virtualEvents }
+	name = VirtualEvents.Name,
+	roact = require(VirtualEvents.Parent.RoactCompat),
+	storyRoots = { VirtualEvents }
 }

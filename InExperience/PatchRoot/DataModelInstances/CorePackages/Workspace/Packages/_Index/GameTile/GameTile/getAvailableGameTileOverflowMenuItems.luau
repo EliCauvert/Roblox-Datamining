@@ -1,29 +1,29 @@
-﻿local gameTile = script:FindFirstAncestor("GameTile")
-local sharedFlagsModule = require(gameTile.Parent.SharedFlags)
-local tileOverflowMenuItems = require(gameTile.GameTileConstants).TileOverflowMenuItems
-local fFlagLuaAppContinueSortInstantPlay = sharedFlagsModule.FFlagLuaAppContinueSortInstantPlay
-local fFlagLuaAppEnableReportExperience = sharedFlagsModule.FFlagLuaAppEnableReportExperience
+﻿local GameTile = script:FindFirstAncestor("GameTile")
+local SharedFlagsModule = require(GameTile.Parent.SharedFlags)
+local TileOverflowMenuItems = require(GameTile.GameTileConstants).TileOverflowMenuItems
+local FFlagLuaAppContinueSortInstantPlay = SharedFlagsModule.FFlagLuaAppContinueSortInstantPlay
+local FFlagLuaAppEnableReportExperience = SharedFlagsModule.FFlagLuaAppEnableReportExperience
 
-return function(p1)
-	-- upvalues: tileOverflowMenuItems (ref), fFlagLuaAppContinueSortInstantPlay (ref), fFlagLuaAppEnableReportExperience (ref)
+return function(p1) --[[ Line: 10 | Named "getAvailableGameTileOverflowMenuItems" ]]
+	-- upvalues: TileOverflowMenuItems (copy), FFlagLuaAppContinueSortInstantPlay (copy), FFlagLuaAppEnableReportExperience (copy)
 	local t = {}
 	
 	if p1.isSponsored then
 		if p1.enableSponsoredFeedback then
-			t[tileOverflowMenuItems.WhyThisAd] = true
+			t[TileOverflowMenuItems.WhyThisAd] = true
 		end
 		if p1.enableReportAd then
-			t[tileOverflowMenuItems.ReportAd] = true
+			t[TileOverflowMenuItems.ReportAd] = true
 		end
 	end
 	if p1.enableExplicitFeedback then
-		t[tileOverflowMenuItems.NotInterested] = true
+		t[TileOverflowMenuItems.NotInterested] = true
 	end
-	if fFlagLuaAppContinueSortInstantPlay and p1.enableGameDetails then
-		t[tileOverflowMenuItems.GameDetails] = true
+	if FFlagLuaAppContinueSortInstantPlay and p1.enableGameDetails then
+		t[TileOverflowMenuItems.GameDetails] = true
 	end
-	if fFlagLuaAppEnableReportExperience and p1.enableReportExperience and not p1.isSponsored then
-		t[tileOverflowMenuItems.ReportExperience] = true
+	if FFlagLuaAppEnableReportExperience and p1.enableReportExperience and not p1.isSponsored then
+		t[TileOverflowMenuItems.ReportExperience] = true
 	end
 	return t
 end

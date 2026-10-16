@@ -1,52 +1,52 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local appChatNetworkingModule = require(parent.AppChatNetworking)
-local dataHydrationModule = require(parent.DataHydration)
-local _ = require(parent.Signals)
-local localUserIdStore = require(parent.LocalUserIdStore).LocalUserIdStore
-local name = require(appChat.Logger):new(script.Name)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local AppChatNetworkingModule = require(Parent.AppChatNetworking)
+local DataHydrationModule = require(Parent.DataHydration)
+local _ = require(Parent.Signals)
+local LocalUserIdStore = require(Parent.LocalUserIdStore).LocalUserIdStore
+local NewResult = require(AppChat.Logger):new(script.Name)
 
-local function resolveLocalUserId(p1)
-	-- upvalues: localUserIdStore (ref)
-	return localUserIdStore.getCurrentUserId(p1)
+local function resolveLocalUserId(p1) --[[ Line: 24 ]]
+	-- upvalues: LocalUserIdStore (copy)
+	return LocalUserIdStore.getCurrentUserId(p1)
 end
 
-return function()
-	-- upvalues: dataHydrationModule (ref), appChatNetworkingModule (ref), name (ref), resolveLocalUserId (ref), localUserIdStore (ref)
-	local var1 = dataHydrationModule.createDataCache()
-	local var2 = dataHydrationModule.createDataResolver({
+return function() --[[ Line: 28 | Named "createFriendsChatMetadataStore" ]]
+	-- upvalues: DataHydrationModule (copy), AppChatNetworkingModule (copy), NewResult (copy), resolveLocalUserId (copy), LocalUserIdStore (copy)
+	local DataCache = DataHydrationModule.createDataCache()
+	local DataResolver = DataHydrationModule.createDataResolver({
 		supportsMultiGet = false,
-		cache = var1,
-		fetchFn = function(_)
-			-- upvalues: appChatNetworkingModule (copy)
-			return appChatNetworkingModule.http.GetMetadata():andThen(function(p1)
-				return p1.responseBody
+		cache = DataCache,
+		fetchFn = function(_) --[[ Line: 33 ]]
+			-- upvalues: AppChatNetworkingModule (upval)
+			return AppChatNetworkingModule.http.GetMetadata():andThen(function(Result) --[[ Line: 34 ]]
+				return Result.responseBody
 			end)
 		end,
-		logError = function(p1)
-			-- upvalues: name (copy)
-			name:warning(`Failed to fetch Friends Chat metadata: {tostring(p1)}`)
+		logError = function(p1) --[[ Line: 38 ]]
+			-- upvalues: NewResult (upval)
+			NewResult:warning(`Failed to fetch Friends Chat metadata: {tostring(p1)}`)
 		end
 	})
 	
 	return {
-		getFriendsChatMetadata = function(p1)
-			-- upvalues: var2 (ref), resolveLocalUserId (copy)
-			return var2.getAndFetchItem(resolveLocalUserId(p1))
+		getFriendsChatMetadata = function(p1) --[[ Line: 43 ]]
+			-- upvalues: DataResolver (copy), resolveLocalUserId (upval)
+			return DataResolver.getAndFetchItem(resolveLocalUserId(p1))
 		end,
-		getCachedFriendsChatMetadata = function(p1)
-			-- upvalues: var2 (ref), resolveLocalUserId (copy)
-			return var2.getCachedItem(resolveLocalUserId(p1))
+		getCachedFriendsChatMetadata = function(p1) --[[ Line: 47 ]]
+			-- upvalues: DataResolver (copy), resolveLocalUserId (upval)
+			return DataResolver.getCachedItem(resolveLocalUserId(p1))
 		end,
-		fetchFriendsChatMetadata = function()
-			-- upvalues: var2 (ref), resolveLocalUserId (copy)
-			return var2.fetchItem(resolveLocalUserId(false))
+		fetchFriendsChatMetadata = function() --[[ Line: 51 ]]
+			-- upvalues: DataResolver (copy), resolveLocalUserId (upval)
+			return DataResolver.fetchItem(resolveLocalUserId(false))
 		end,
-		updateFriendsChatMetadata = function(p1)
-			-- upvalues: var1 (ref), localUserIdStore (copy)
-			var1.replaceItem(localUserIdStore.getCurrentUserId(false), p1)
+		updateFriendsChatMetadata = function(p1) --[[ Line: 55 ]]
+			-- upvalues: DataCache (copy), LocalUserIdStore (upval)
+			DataCache.replaceItem(LocalUserIdStore.getCurrentUserId(false), p1)
 		end,
-		clear = var2.clear,
-		dispose = var2.dispose
+		clear = DataResolver.clear,
+		dispose = DataResolver.dispose
 	}
 end

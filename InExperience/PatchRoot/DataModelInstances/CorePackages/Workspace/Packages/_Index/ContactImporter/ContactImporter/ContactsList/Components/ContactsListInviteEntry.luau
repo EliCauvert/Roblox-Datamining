@@ -1,1 +1,1 @@
-﻿return require(script.ContactsListInviteEntry)
+﻿return (require(script.ContactsListInviteEntry))

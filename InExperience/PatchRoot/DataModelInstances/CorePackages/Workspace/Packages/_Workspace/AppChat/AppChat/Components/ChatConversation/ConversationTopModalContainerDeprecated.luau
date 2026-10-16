@@ -1,202 +1,215 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local foundationModule = require(parent.Foundation)
-local _ = require(appChat.types)
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local getDeepValue2Module = require(appChat.Utils.getDeepValue2)
-local memo = reactModule.memo
-local useAnalyticsModule = require(appChat.Analytics.useAnalytics)
-local useCallback = reactModule.useCallback
-local useConversationTopModalModule = require(appChat.Hooks.useConversationTopModal)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local useEffect = reactModule.useEffect
-local useRef = reactModule.useRef
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local useStyle = require(parent.UIBlox).Core.Style.useStyle
-local accessResponseEnum = require(parent.AmpUpsell).AmpEnums.AccessResponseEnum
-local appChatNetworkingModule = require(parent.AppChatNetworking)
-local appPage = require(parent.RobloxAppEnums).AppPage
-local _ = require(appChat.Models.ConversationChannels)
-local dismissedConversationTopModalModule = require(appChat.Conversations.Actions.DismissedConversationTopModal)
-local enumScreensModule = require(appChat.EnumScreens)
-local eventNamesModule = require(appChat.Analytics.EventNames)
-local navigateBack = require(parent.NavigationRodux).Thunks.NavigateBack
-local navigateDown = require(parent.NavigationRodux).Thunks.NavigateDown
-local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
-local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
-local refreshAllUnfilteredThreadsDetailsModule = require(appChat.Conversations.Thunks.refreshAllUnfilteredThreadsDetails)
-local unfilteredThreadsAMPFeatureNameModule = require(appChat.Components.UnfilteredThreadsAMPFeatureName)
-local conversationModalModule = require(script.Parent.ConversationModal.ConversationModal)
-local conversationBannerDeprecatedModule = require(script.Parent.ConversationBanner.ConversationBannerDeprecated)
-local t = {
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local FoundationModule = require(Parent.Foundation)
+local _ = require(AppChat.types)
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local GetDeepValue2Module = require(AppChat.Utils.getDeepValue2)
+local UseAnalyticsModule = require(AppChat.Analytics.useAnalytics)
+local UseCallbackFunction = ReactModule.useCallback
+local UseConversationTopModalModule = require(AppChat.Hooks.useConversationTopModal)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseEffectFunction = ReactModule.useEffect
+local UseRefFunction = ReactModule.useRef
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local UseStyleFunction = require(Parent.UIBlox).Core.Style.useStyle
+local AccessResponseEnum = require(Parent.AmpUpsell).AmpEnums.AccessResponseEnum
+local AppChatNetworkingModule = require(Parent.AppChatNetworking)
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local _ = require(AppChat.Models.ConversationChannels)
+local DismissedConversationTopModalModule = require(AppChat.Conversations.Actions.DismissedConversationTopModal)
+local EnumScreensModule = require(AppChat.EnumScreens)
+local EventNamesModule = require(AppChat.Analytics.EventNames)
+local NavigateBackFunction = require(Parent.NavigationRodux).Thunks.NavigateBack
+local NavigateDownFunction = require(Parent.NavigationRodux).Thunks.NavigateDown
+local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
+local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
+local RefreshAllUnfilteredThreadsDetailsModule = require(AppChat.Conversations.Thunks.refreshAllUnfilteredThreadsDetails)
+local UnfilteredThreadsAMPFeatureNameModule = require(AppChat.Components.UnfilteredThreadsAMPFeatureName)
+local ConversationModalModule = require(script.Parent.ConversationModal.ConversationModal)
+local ConversationBannerDeprecatedModule = require(script.Parent.ConversationBanner.ConversationBannerDeprecated)
+local config = {
 	conversation = {},
-	navigateToScreen = function(...) end,
-	setModalHeight = function(_) end
+	navigateToScreen = function(...) --[[ Line: 50 ]] end,
+	setModalHeight = function(_) --[[ Line: 51 ]] end
 }
-local t_1 = {
+local config1 = {
 	conversation_banner_group_phone_verification = true,
 	conversation_banner_group_duplicate_upgrade = true,
 	conversation_banner_learn_more = true,
 	conversation_banner_one_to_one_phone_verification = true
 }
-local createUnfilteredChatPartialModal = enumScreensModule.CreateUnfilteredChatPartialModal
-local learnMorePartialModal = enumScreensModule.LearnMorePartialModal
-local t_2 = {
+local CreateUnfilteredChatPartialModal = EnumScreensModule.CreateUnfilteredChatPartialModal
+local LearnMorePartialModal = EnumScreensModule.LearnMorePartialModal
+local config2 = {
 	conversation_banner_group_phone_verification = "ConversationPvBanner",
 	conversation_banner_one_to_one_phone_verification = "ConversationPvBanner",
 	conversation_banner_group_duplicate_upgrade = "ConversationUpgradeBanner",
 	conversation_banner_learn_more = "ConversationLearnMoreBanner"
 }
 
-return memo(function(p1)
-	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), useAnalyticsModule (ref), useDispatch (ref), useRef (ref), useEffect (ref), useSelector (ref), getDeepValue2Module (ref), useConversationTopModalModule (ref), t_2 (ref), t_1 (ref), useCallback (ref), eventNamesModule (ref), appChatNetworkingModule (ref), dismissedConversationTopModalModule (ref), appPage (ref), unfilteredThreadsAMPFeatureNameModule (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateBack (ref), accessResponseEnum (ref), refreshAllUnfilteredThreadsDetailsModule (ref), navigateDown (ref), createUnfilteredChatPartialModal (ref), learnMorePartialModal (ref), reactModule (ref), conversationBannerDeprecatedModule (ref), conversationModalModule (ref), foundationModule (ref)
-	local var2 = cryoModule.Dictionary.union(t, p1)
-	local var3 = useStyle()
-	local var4 = useAnalyticsModule()
-	local var5 = useDispatch()
-	local size1000 = var3.Tokens.Size.Size_1000
-	local var6 = useRef(var2.setModalHeight)
-	useEffect(function()
-		-- upvalues: var6 (ref), var2 (ref)
-		var6.current = var2.setModalHeight
-	end, { var2.setModalHeight })
-	useEffect(function()
-		-- upvalues: var6 (ref)
-		return function()
-			-- upvalues: var6 (copy)
-			if var6.current then
-				var6.current(0)
+return ReactModule.memo(function(p1) --[[ Line: 71 | Named "ConversationTopModalContainer" ]]
+	-- upvalues: CryoModule (copy), config (copy), UseStyleFunction (copy), UseAnalyticsModule (copy), UseDispatchFunction (copy), UseRefFunction (copy), UseEffectFunction (copy), UseSelectorFunction (copy), GetDeepValue2Module (copy), UseConversationTopModalModule (copy), config2 (copy), config1 (copy), UseCallbackFunction (copy), EventNamesModule (copy), AppChatNetworkingModule (copy), DismissedConversationTopModalModule (copy), AppPage (copy), UnfilteredThreadsAMPFeatureNameModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateBackFunction (copy), AccessResponseEnum (copy), RefreshAllUnfilteredThreadsDetailsModule (copy), NavigateDownFunction (copy), CreateUnfilteredChatPartialModal (copy), LearnMorePartialModal (copy), ReactModule (copy), ConversationBannerDeprecatedModule (copy), ConversationModalModule (copy), FoundationModule (copy)
+	local UnionResult = CryoModule.Dictionary.union(config, p1)
+	local UseStyleResult = UseStyleFunction()
+	local UseAnalyticsModuleResult = UseAnalyticsModule()
+	local UseDispatchResult = UseDispatchFunction()
+	local Size1000 = UseStyleResult.Tokens.Size.Size_1000
+	local UseRefResult = UseRefFunction(UnionResult.setModalHeight)
+	UseEffectFunction(function() --[[ Line: 80 ]]
+		-- upvalues: UseRefResult (copy), UnionResult (copy)
+		UseRefResult.current = UnionResult.setModalHeight
+	end, { UnionResult.setModalHeight })
+	UseEffectFunction(function() --[[ Line: 83 ]]
+		-- upvalues: UseRefResult (copy)
+		return function() --[[ Line: 84 ]]
+			-- upvalues: UseRefResult (upval)
+			if UseRefResult.current then
+				UseRefResult.current(0)
 			end
 		end
 	end, {})
-	local var7 = useSelector(function(p2)
-		-- upvalues: getDeepValue2Module (copy), var2 (ref)
-		return getDeepValue2Module(p2, `ChatAppReducer.Modals.conversationTopModalsDismissed.{var2.conversation.id}`) or {}
+	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 91 ]]
+		-- upvalues: GetDeepValue2Module (upval), UnionResult (copy)
+		return GetDeepValue2Module(p2, `ChatAppReducer.Modals.conversationTopModalsDismissed.{UnionResult.conversation.id}`) or {}
 	end)
-	local id = useConversationTopModalModule(var2.conversation.id) or {}
-	local modalVariant = id.modal_variant
-	local var8 = getDeepValue2Module(id, "modal_layout.id")
-	local var9 = getDeepValue2Module(id, "modal_layout.seen_record_action")
-	local var10 = getDeepValue2Module(id, "modal_layout.dismiss_record_action")
-	local var11 = t_2[modalVariant]
-	local var12 = t_1[modalVariant] and not var7[modalVariant]
-	local var13 = getDeepValue2Module(id, "modal_layout.buttons")
-	local var14 = var13 and var13[1]
-	local var15 = var13 and var13[2]
-	local var16 = useCallback(function()
-		-- upvalues: var4 (ref), var11 (ref), eventNamesModule (copy), var2 (ref)
-		if var4 and var11 then
-			var4.fireAnalyticsEvent(eventNamesModule[`{var11}ActionClicked`], { conversationId = var2.conversation.id })
+	local UseConversationTopModalModuleResult = UseConversationTopModalModule(UnionResult.conversation.id) or {}
+	local ModalVariant = UseConversationTopModalModuleResult.modal_variant
+	local ModalLayoutId = GetDeepValue2Module(UseConversationTopModalModuleResult, "modal_layout.id")
+	local ModalLayoutSeenRecordAction = GetDeepValue2Module(UseConversationTopModalModuleResult, "modal_layout.seen_record_action")
+	local ModalLayoutDismissRecordAction = GetDeepValue2Module(UseConversationTopModalModuleResult, "modal_layout.dismiss_record_action")
+	local Entry = config2[ModalVariant]
+	local Inverted: boolean = config1[ModalVariant] and not UseSelectorResult[ModalVariant]
+	local ModalLayoutButtons = GetDeepValue2Module(UseConversationTopModalModuleResult, "modal_layout.buttons")
+	local ModalLayoutButton = ModalLayoutButtons and ModalLayoutButtons[1]
+	local ModalLayoutButton1 = ModalLayoutButtons and ModalLayoutButtons[2]
+	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 107 ]]
+		-- upvalues: UseAnalyticsModuleResult (copy), Entry (copy), EventNamesModule (upval), UnionResult (copy)
+		if UseAnalyticsModuleResult and Entry then
+			UseAnalyticsModuleResult.fireAnalyticsEvent(EventNamesModule[`{Entry}ActionClicked`], { conversationId = UnionResult.conversation.id })
 		end
-	end, { var4, var11, var2.conversation.id })
-	local var17 = useCallback(function()
-		-- upvalues: var5 (ref), appChatNetworkingModule (copy), var10 (ref), var8 (ref), dismissedConversationTopModalModule (copy), var2 (ref), modalVariant (ref)
-		var5(appChatNetworkingModule.rodux.RecordModalSequenceResponse.API(var10, "conversation_top_modal", var8)):catch(function(p2)
-			warn("Error in ConversationTopModalContainer -> RecordModalSequenceResponse dismissed: " .. tostring(p2))
-		end)
-		var5(dismissedConversationTopModalModule(var2.conversation.id, modalVariant))
 	end, {
-		var5,
-		var10,
-		modalVariant,
-		var8,
-		var2.conversation.id
+		UseAnalyticsModuleResult,
+		Entry,
+		UnionResult.conversation.id
 	})
-	local var18 = useCallback(function()
-		-- upvalues: var16 (ref), appPage (copy), unfilteredThreadsAMPFeatureNameModule (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var5 (ref), navigateBack (copy), accessResponseEnum (copy), refreshAllUnfilteredThreadsDetailsModule (copy), var2 (ref), navigateDown (copy)
-		var16()
-		local t = {
-			name = appPage.AmpWizardContainer,
+	local UseCallbackResult1 = UseCallbackFunction(function() --[[ Line: 115 ]]
+		-- upvalues: UseDispatchResult (copy), AppChatNetworkingModule (upval), ModalLayoutDismissRecordAction (copy), ModalLayoutId (copy), DismissedConversationTopModalModule (upval), UnionResult (copy), ModalVariant (copy)
+		UseDispatchResult(AppChatNetworkingModule.rodux.RecordModalSequenceResponse.API(ModalLayoutDismissRecordAction, "conversation_top_modal", ModalLayoutId)):catch(function(Err) --[[ Line: 122 ]]
+			warn("Error in ConversationTopModalContainer -> RecordModalSequenceResponse dismissed: " .. tostring(Err))
+		end)
+		UseDispatchResult(DismissedConversationTopModalModule(UnionResult.conversation.id, ModalVariant))
+	end, {
+		UseDispatchResult,
+		ModalLayoutDismissRecordAction,
+		ModalVariant,
+		ModalLayoutId,
+		UnionResult.conversation.id
+	})
+	local UseCallbackResult2 = UseCallbackFunction(function() --[[ Line: 127 ]]
+		-- upvalues: UseCallbackResult (copy), AppPage (upval), UnfilteredThreadsAMPFeatureNameModule (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateBackFunction (upval), AccessResponseEnum (upval), RefreshAllUnfilteredThreadsDetailsModule (upval), UnionResult (copy), NavigateDownFunction (upval)
+		UseCallbackResult()
+		local config = {
+			name = AppPage.AmpWizardContainer,
 			extraProps = {
-				featureName = unfilteredThreadsAMPFeatureNameModule,
-				completionCallback = function(p2, _)
-					-- upvalues: fFlagSignalsNavP3Dispatch (copy), var1 (copy), var5 (copy), navigateBack (copy), accessResponseEnum (copy), refreshAllUnfilteredThreadsDetailsModule (copy), var2 (copy)
-					if fFlagSignalsNavP3Dispatch then
-						var1.back(true)
+				featureName = UnfilteredThreadsAMPFeatureNameModule,
+				completionCallback = function(Granted, _) --[[ Line: 133 ]]
+					-- upvalues: FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (upval), NavigateBackFunction (upval), AccessResponseEnum (upval), RefreshAllUnfilteredThreadsDetailsModule (upval), UnionResult (upval)
+					if FFlagSignalsNavP3Dispatch then
+						NavigationCommands.back(true)
 					else
-						var5(navigateBack(true))
+						UseDispatchResult(NavigateBackFunction(true))
 					end
-					if p2 == accessResponseEnum.Granted then
-						var5(refreshAllUnfilteredThreadsDetailsModule(var2.conversation.id))
+					if Granted == AccessResponseEnum.Granted then
+						UseDispatchResult(RefreshAllUnfilteredThreadsDetailsModule(UnionResult.conversation.id))
 					end
 				end
 			}
 		}
 		
-		if fFlagSignalsNavP3Dispatch then
-			var1.down(var1.fromLegacyPage(t))
+		if FFlagSignalsNavP3Dispatch then
+			NavigationCommands.down(NavigationCommands.fromLegacyPage(config))
 			
 			return
+		else
+			UseDispatchResult(NavigateDownFunction(config))
 		end
-		var5(navigateDown(t))
-	end, { var16, var5, var2.conversation.id })
-	local var19 = useCallback(function()
-		-- upvalues: var16 (ref), var2 (ref), createUnfilteredChatPartialModal (copy)
-		var16()
-		var2.navigateToScreen(createUnfilteredChatPartialModal, {}, true)
-	end, { var2.navigateToScreen, var16 })
-	local var20 = useCallback(function()
-		-- upvalues: var16 (ref), var2 (ref), learnMorePartialModal (copy)
-		var16()
-		var2.navigateToScreen(learnMorePartialModal, {}, true)
-	end, { var2.navigateToScreen, var16 })
-	useEffect(function()
-		-- upvalues: var12 (ref), var5 (ref), appChatNetworkingModule (copy), var9 (ref), var8 (ref)
-		if var12 then
-			var5(appChatNetworkingModule.rodux.RecordModalSequenceResponse.API(var9, "conversation_top_modal", var8)):catch(function(p2)
-				warn("Error in ConversationTopModalContainer -> RecordModalSequenceResponse seen: " .. tostring(p2))
+	end, {
+		UseCallbackResult,
+		UseDispatchResult,
+		UnionResult.conversation.id
+	})
+	local UseCallbackResult3 = UseCallbackFunction(function() --[[ Line: 153 ]]
+		-- upvalues: UseCallbackResult (copy), UnionResult (copy), CreateUnfilteredChatPartialModal (upval)
+		UseCallbackResult()
+		UnionResult.navigateToScreen(CreateUnfilteredChatPartialModal, {}, true)
+	end, { UnionResult.navigateToScreen, UseCallbackResult })
+	local UseCallbackResult4 = UseCallbackFunction(function() --[[ Line: 157 ]]
+		-- upvalues: UseCallbackResult (copy), UnionResult (copy), LearnMorePartialModal (upval)
+		UseCallbackResult()
+		UnionResult.navigateToScreen(LearnMorePartialModal, {}, true)
+	end, { UnionResult.navigateToScreen, UseCallbackResult })
+	UseEffectFunction(function() --[[ Line: 163 ]]
+		-- upvalues: Inverted (copy), UseDispatchResult (copy), AppChatNetworkingModule (upval), ModalLayoutSeenRecordAction (copy), ModalLayoutId (copy)
+		if Inverted then
+			UseDispatchResult(AppChatNetworkingModule.rodux.RecordModalSequenceResponse.API(ModalLayoutSeenRecordAction, "conversation_top_modal", ModalLayoutId)):catch(function(Err) --[[ Line: 171 ]]
+				warn("Error in ConversationTopModalContainer -> RecordModalSequenceResponse seen: " .. tostring(Err))
 			end)
 		end
 	end, {
-		var5,
-		var12,
-		var9,
-		var8,
-		var2.conversation.id
+		UseDispatchResult,
+		Inverted,
+		ModalLayoutSeenRecordAction,
+		ModalLayoutId,
+		UnionResult.conversation.id
 	})
-	useEffect(function()
-		-- upvalues: var12 (ref), var4 (ref), var11 (ref), eventNamesModule (copy), var2 (ref)
-		if var12 and var4 and var11 then
-			var4.fireAnalyticsEvent(eventNamesModule[`{var11}Rendered`], { conversationId = var2.conversation.id })
+	UseEffectFunction(function() --[[ Line: 188 ]]
+		-- upvalues: Inverted (copy), UseAnalyticsModuleResult (copy), Entry (copy), EventNamesModule (upval), UnionResult (copy)
+		if Inverted and UseAnalyticsModuleResult and Entry then
+			UseAnalyticsModuleResult.fireAnalyticsEvent(EventNamesModule[`{Entry}Rendered`], { conversationId = UnionResult.conversation.id })
 		end
-	end, { var12, var4, var11, var2.conversation.id })
-	local var21 = ({
-		conversation_banner_group_phone_verification = var18,
-		conversation_banner_one_to_one_phone_verification = var18,
-		conversation_banner_group_duplicate_upgrade = var19
-	})[modalVariant]
-	local var22 = nil
+	end, {
+		Inverted,
+		UseAnalyticsModuleResult,
+		Entry,
+		UnionResult.conversation.id
+	})
+	local Entry1 = ({
+		conversation_banner_group_phone_verification = UseCallbackResult2,
+		conversation_banner_one_to_one_phone_verification = UseCallbackResult2,
+		conversation_banner_group_duplicate_upgrade = UseCallbackResult3
+	})[ModalVariant]
+	local Element = nil
 	
-	if var12 then
-		var22 = if modalVariant == "conversation_banner_learn_more" then reactModule.createElement(conversationBannerDeprecatedModule, {
-			actionText = if var14 then var14.text else nil,
-			bodyText = getDeepValue2Module(id, "modal_layout.body.text"),
-			height = size1000,
-			onActivated = var20,
-			style = var3
-		}) else reactModule.createElement(conversationModalModule, {
-			bodyText = getDeepValue2Module(id, "modal_layout.body.text"),
-			denyText = if var14 then var14.text else nil,
-			acceptText = if var15 and var21 then var15.text else nil,
-			paddingTop = var3.Tokens.Size.Size_300,
-			paddingBottom = var3.Tokens.Size.Size_300,
-			verticalSpacing = var3.Tokens.Size.Size_300,
-			onAccepted = var21,
-			onDenied = var17,
-			style = var3
+	if Inverted then
+		Element = if ModalVariant == "conversation_banner_learn_more" then ReactModule.createElement(ConversationBannerDeprecatedModule, {
+			actionText = if ModalLayoutButton then ModalLayoutButton.text else nil,
+			bodyText = GetDeepValue2Module(UseConversationTopModalModuleResult, "modal_layout.body.text"),
+			height = Size1000,
+			onActivated = UseCallbackResult4,
+			style = UseStyleResult
+		}) else ReactModule.createElement(ConversationModalModule, {
+			bodyText = GetDeepValue2Module(UseConversationTopModalModuleResult, "modal_layout.body.text"),
+			denyText = if ModalLayoutButton then ModalLayoutButton.text else nil,
+			acceptText = if ModalLayoutButton1 and Entry1 then ModalLayoutButton1.text else nil,
+			paddingTop = UseStyleResult.Tokens.Size.Size_300,
+			paddingBottom = UseStyleResult.Tokens.Size.Size_300,
+			verticalSpacing = UseStyleResult.Tokens.Size.Size_300,
+			onAccepted = Entry1,
+			onDenied = UseCallbackResult1,
+			style = UseStyleResult
 		})
-	elseif modalVariant ~= "none" and modalVariant ~= nil and not t_1[modalVariant] then
-		warn("Unsupported ConversationTopModal variant: " .. modalVariant)
+	elseif ModalVariant ~= "none" and (ModalVariant ~= nil and not config1[ModalVariant]) then
+		warn("Unsupported ConversationTopModal variant: " .. ModalVariant)
 	end
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		BackgroundTransparency = 1,
 		AutomaticSize = Enum.AutomaticSize.Y,
 		Size = UDim2.new(1, 0, 0, 0),
-		LayoutOrder = var2.layoutOrder,
-		onAbsoluteSizeChanged = function(value)
-			-- upvalues: var2 (ref)
-			var2.setModalHeight(value.AbsoluteSize.Y)
+		LayoutOrder = UnionResult.layoutOrder,
+		onAbsoluteSizeChanged = function(Frame) --[[ Line: 242 ]]
+			-- upvalues: UnionResult (copy)
+			UnionResult.setModalHeight(Frame.AbsoluteSize.Y)
 		end
-	}, { conversationTopModal = var22 })
+	}, { conversationTopModal = Element })
 end)

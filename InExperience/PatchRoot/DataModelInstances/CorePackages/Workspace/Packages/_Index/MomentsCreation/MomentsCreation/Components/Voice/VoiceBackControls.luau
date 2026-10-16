@@ -1,98 +1,99 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local parent = momentsCreation.Parent
-local builderIconsModule = require(parent.BuilderIcons)
-local foundationModule = require(parent.Foundation)
-local localizationModule = require(parent.Localization)
-local momentsCommonModule = require(parent.MomentsCommon)
-local reactModule = require(parent.React)
-local icon = foundationModule.Icon
-local menu = foundationModule.Menu
-local view = foundationModule.View
-local useTokens = foundationModule.Hooks.useTokens
-local useLocalization = localizationModule.Hooks.useLocalization
-local useDeviceInsets = momentsCommonModule.Hooks.useDeviceInsets
-local useToggleState = momentsCommonModule.Hooks.useToggleState
-local useCreationController = require(momentsCreation.CreationController).useCreationController
-local fireAnalyticsEventModule = require(momentsCreation.Analytics.fireAnalyticsEvent)
-local makeCreationEventFieldsModule = require(momentsCreation.Analytics.makeCreationEventFields)
-local eventNames = momentsCommonModule.Analytics.EventNames
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local Parent = MomentsCreation.Parent
+local BuilderIconsModule = require(Parent.BuilderIcons)
+local FoundationModule = require(Parent.Foundation)
+local MomentsCommonModule = require(Parent.MomentsCommon)
+local ReactModule = require(Parent.React)
+local Icon = FoundationModule.Icon
+local Menu = FoundationModule.Menu
+local View = FoundationModule.View
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseDeviceInsetsFunction = MomentsCommonModule.Hooks.useDeviceInsets
+local UseToggleStateFunction = MomentsCommonModule.Hooks.useToggleState
+local UseCreationControllerFunction = require(MomentsCreation.CreationController).useCreationController
+local FireAnalyticsEventModule = require(MomentsCreation.Analytics.fireAnalyticsEvent)
+local MakeCreationEventFieldsModule = require(MomentsCreation.Analytics.makeCreationEventFields)
+local EventNames = MomentsCommonModule.Analytics.EventNames
 
-return function()
-	-- upvalues: useCreationController (ref), useTokens (ref), useDeviceInsets (ref), useToggleState (ref), useLocalization (ref), fireAnalyticsEventModule (ref), eventNames (ref), makeCreationEventFieldsModule (ref), reactModule (ref), view (ref), menu (ref), foundationModule (ref), icon (ref), builderIconsModule (ref)
-	local var1 = useCreationController()
-	local var2 = useTokens()
-	local var3 = useDeviceInsets()
-	local var4 = useToggleState(false)
-	local var5 = useLocalization({
+return function() --[[ Line: 39 | Named "VoiceBackControls" ]]
+	-- upvalues: UseCreationControllerFunction (copy), UseTokensFunction (copy), UseDeviceInsetsFunction (copy), UseToggleStateFunction (copy), UseLocalizationFunction (copy), FireAnalyticsEventModule (copy), EventNames (copy), MakeCreationEventFieldsModule (copy), ReactModule (copy), View (copy), Menu (copy), FoundationModule (copy), Icon (copy), BuilderIconsModule (copy)
+	local UseCreationControllerResult = UseCreationControllerFunction()
+	local UseTokensResult = UseTokensFunction()
+	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
+	local UseToggleStateResult = UseToggleStateFunction(false)
+	local UseLocalizationResult = UseLocalizationFunction({
 		discard = "Feature.Moments.Action.DiscardChange",
 		keep = "Feature.Moments.Action.KeepEditing"
 	})
 	
-	local function _()
-		-- upvalues: fireAnalyticsEventModule (copy), eventNames (copy), makeCreationEventFieldsModule (copy)
-		fireAnalyticsEventModule(eventNames.EditingFlowVoiceContinueEditingPressed, makeCreationEventFieldsModule.makeVoiceEventFields())
+	local function _() --[[ Line: 55 | Named "fireContinueEditing" ]]
+		-- upvalues: FireAnalyticsEventModule (upval), EventNames (upval), MakeCreationEventFieldsModule (upval)
+		FireAnalyticsEventModule(EventNames.EditingFlowVoiceContinueEditingPressed, MakeCreationEventFieldsModule.makeVoiceEventFields())
 	end
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "position-top-left anchor-top-left auto-xy",
 		ZIndex = 10,
 		padding = {
-			top = UDim.new(0, var3.top + var2.Padding.Medium),
-			left = UDim.new(0, var3.left + var2.Padding.Medium)
+			top = UDim.new(0, UseDeviceInsetsResult.top + UseTokensResult.Padding.Medium),
+			left = UDim.new(0, UseDeviceInsetsResult.left + UseTokensResult.Padding.Medium)
 		}
 	}, {
-		DiscardMenu = reactModule.createElement(menu, {
-			isOpen = var4.enabled,
-			side = foundationModule.Enums.PopoverSide.Bottom,
-			align = foundationModule.Enums.PopoverAlign.Start,
-			onPressedOutside = function()
-				-- upvalues: var4 (ref), fireAnalyticsEventModule (copy), eventNames (copy), makeCreationEventFieldsModule (copy)
-				if var4.enabled then
-					var4.disable()
-					fireAnalyticsEventModule(eventNames.EditingFlowVoiceContinueEditingPressed, makeCreationEventFieldsModule.makeVoiceEventFields())
+		DiscardMenu = ReactModule.createElement(Menu, {
+			isOpen = UseToggleStateResult.enabled,
+			side = FoundationModule.Enums.PopoverSide.Bottom,
+			align = FoundationModule.Enums.PopoverAlign.Start,
+			onPressedOutside = function() --[[ Line: 74 ]]
+				-- upvalues: UseToggleStateResult (copy), FireAnalyticsEventModule (upval), EventNames (upval), MakeCreationEventFieldsModule (upval)
+				if UseToggleStateResult.enabled then
+					UseToggleStateResult.disable()
+					FireAnalyticsEventModule(EventNames.EditingFlowVoiceContinueEditingPressed, MakeCreationEventFieldsModule.makeVoiceEventFields())
 					
 					return
 				end
 			end,
-			onActivated = function(p1)
-				-- upvalues: var4 (ref), var1 (ref), fireAnalyticsEventModule (copy), eventNames (copy), makeCreationEventFieldsModule (copy)
-				var4.disable()
+			onActivated = function(p1) --[[ Line: 82 ]]
+				-- upvalues: UseToggleStateResult (copy), UseCreationControllerResult (copy), FireAnalyticsEventModule (upval), EventNames (upval), MakeCreationEventFieldsModule (upval)
+				UseToggleStateResult.disable()
 				
 				if p1 == "discard" then
-					var1.discardActiveTool()
+					UseCreationControllerResult.discardActiveTool()
 					
 					return
-				elseif p1 == "keep" then
-					fireAnalyticsEventModule(eventNames.EditingFlowVoiceContinueEditingPressed, makeCreationEventFieldsModule.makeVoiceEventFields())
+				end
+				if p1 == "keep" then
+					FireAnalyticsEventModule(EventNames.EditingFlowVoiceContinueEditingPressed, MakeCreationEventFieldsModule.makeVoiceEventFields())
 				end
 			end,
 			items = {
-				{ id = "discard", text = var5.discard },
-				{ id = "keep", text = var5.keep }
+				{ id = "discard", text = UseLocalizationResult.discard },
+				{ id = "keep", text = UseLocalizationResult.keep }
 			}
 		}, {
-			BackButton = reactModule.createElement(view, {
+			BackButton = ReactModule.createElement(View, {
 				tag = "auto-xy padding-small radius-circle",
-				onActivated = function()
-					-- upvalues: fireAnalyticsEventModule (copy), eventNames (copy), makeCreationEventFieldsModule (copy), var1 (ref), var4 (ref)
-					fireAnalyticsEventModule(eventNames.EditingFlowVoiceBackButtonPressed, makeCreationEventFieldsModule.makeVoiceEventFields())
-					local activeSession = var1.getActiveSession(false)
+				onActivated = function() --[[ Line: 94 ]]
+					-- upvalues: FireAnalyticsEventModule (upval), EventNames (upval), MakeCreationEventFieldsModule (upval), UseCreationControllerResult (copy), UseToggleStateResult (copy)
+					FireAnalyticsEventModule(EventNames.EditingFlowVoiceBackButtonPressed, MakeCreationEventFieldsModule.makeVoiceEventFields())
+					local ActiveSession = UseCreationControllerResult.getActiveSession(false)
 					
-					if activeSession ~= nil and activeSession.getIsDirty(false) then
-						var4.toggle()
+					if ActiveSession ~= nil and ActiveSession.getIsDirty(false) then
+						UseToggleStateResult.toggle()
 						
 						return
+					else
+						UseCreationControllerResult.commitActiveTool()
 					end
-					var1.commitActiveTool()
 				end,
 				stateLayer = {
-					affordance = foundationModule.Enums.StateLayerAffordance.Background
+					affordance = FoundationModule.Enums.StateLayerAffordance.Background
 				}
 			}, {
-				BackIcon = reactModule.createElement(icon, {
-					name = builderIconsModule.Icon.ChevronLargeLeft,
-					size = foundationModule.Enums.IconSize.Large,
-					style = var2.Color.Content.Emphasis
+				BackIcon = ReactModule.createElement(Icon, {
+					name = BuilderIconsModule.Icon.ChevronLargeLeft,
+					size = FoundationModule.Enums.IconSize.Large,
+					style = UseTokensResult.Color.Content.Emphasis
 				})
 			})
 		})

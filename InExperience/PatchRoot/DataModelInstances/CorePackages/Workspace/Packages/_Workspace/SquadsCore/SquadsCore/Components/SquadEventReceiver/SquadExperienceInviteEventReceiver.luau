@@ -1,528 +1,568 @@
-﻿local squadsCore = script:FindFirstAncestor("SquadsCore")
-local parent = squadsCore.Parent
-local appStorageService = game:GetService("AppStorageService")
-local httpService = game:GetService("HttpService")
-local messageBusService = game:GetService("MessageBusService")
-local squadLocationEnumModule = require(squadsCore.Enums.SquadLocationEnum)
-local squadToastActionsAndStatesModule = require(squadsCore.Enums.SquadToastActionsAndStates)
-local squadToastTypeModule = require(squadsCore.Enums.SquadToastType)
-local loggerModule = require(squadsCore.Logger)
-local networkingSquadsModule = require(squadsCore.Http.NetworkingSquads)
-local roduxSquadsModule = require(squadsCore.RoduxSquads)
-local serializeTableModule = require(squadsCore.Utils.serializeTable)
-local useCurrentSquadParentChannelIdModule = require(squadsCore.Hooks.useCurrentSquadParentChannelId)
-local cryoModule = require(parent.Cryo)
-local experienceServiceModule = require(parent.ExperienceService)
-local localStorageKey = require(parent.LocalStorage).Enums.LocalStorageKey
-local reactModule = require(parent.React)
-local realtimeDeliveryModule = require(parent.RealtimeDelivery)
-local sharedFlagsModule = require(parent.SharedFlags)
-local soundManagerModule = require(parent.SoundManager)
-local squadCoordinationExperienceJoinExperimentation = require(parent.SocialExperiments).SquadCoordinationExperienceJoinExperimentation
-local toastNotificationModule = require(parent.ToastNotification)
-local toastNotificationsProtocolModule = require(parent.ToastNotificationsProtocol)
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local gameParams = experienceServiceModule.GameParams
-local experienceService = experienceServiceModule.ExperienceService
-local clearInterval = luauPolyfillModule.clearInterval
-local setInterval = luauPolyfillModule.setInterval
-local experienceInviteState = roduxSquadsModule.Enums.ExperienceInviteState
-local experienceInviteVoteType = roduxSquadsModule.Enums.ExperienceInviteVoteType
-local experienceInviteType = roduxSquadsModule.Enums.ExperienceInviteType
-local sounds = soundManagerModule.Sounds
-local soundManager = soundManagerModule.SoundManager
-local squadExternalContractContextModule = require(squadsCore.Components.SquadExternalContractProvider.SquadExternalContractContext)
-local eventNamesModule = require(squadsCore.Analytics.EventNames)
-local lifecycleEvents = toastNotificationModule.LifecycleEvents
-local notificationTypeEnum = toastNotificationModule.ToastNotificationTypeModule.NotificationTypeEnum
-local squadExperienceInvitePollingIntervalSeconds = game:DefineFastInt("SquadExperienceInvitePollingIntervalSeconds", 4)
-local squadExperienceInviteTimeoutSeconds = game:DefineFastInt("SquadExperienceInviteTimeoutSeconds", 30)
-local fFlagDebugSquadLogsEnabled = sharedFlagsModule.FFlagDebugSquadLogsEnabled
-local fFlagSquadLaunchExperienceMobileFix = sharedFlagsModule.FFlagSquadLaunchExperienceMobileFix
-local fFlagEnablePrivatePartyAcceptInvite = sharedFlagsModule.FFlagEnablePrivatePartyAcceptInvite
-local toastNotificationsMessageId = messageBusService:GetMessageId("ToastNotifications", "userActionOnToastNotification")
+﻿local SquadsCore = script:FindFirstAncestor("SquadsCore")
+local Parent = SquadsCore.Parent
+local AppStorageService = game:GetService("AppStorageService")
+local HttpService = game:GetService("HttpService")
+local MessageBusService = game:GetService("MessageBusService")
+local SquadLocationEnumModule = require(SquadsCore.Enums.SquadLocationEnum)
+local SquadToastActionsAndStatesModule = require(SquadsCore.Enums.SquadToastActionsAndStates)
+local SquadToastTypeModule = require(SquadsCore.Enums.SquadToastType)
+local LoggerModule = require(SquadsCore.Logger)
+local NetworkingSquadsModule = require(SquadsCore.Http.NetworkingSquads)
+local RoduxSquadsModule = require(SquadsCore.RoduxSquads)
+local SerializeTableModule = require(SquadsCore.Utils.serializeTable)
+local UseCurrentSquadParentChannelIdModule = require(SquadsCore.Hooks.useCurrentSquadParentChannelId)
+local GetSquadExperienceInviteStoreModule = require(SquadsCore.Stores.GetSquadExperienceInviteStore)
+local CryoModule = require(Parent.Cryo)
+local ExperienceServiceModule = require(Parent.ExperienceService)
+local LocalStorageKey = require(Parent.LocalStorage).Enums.LocalStorageKey
+local ReactModule = require(Parent.React)
+local RealtimeDeliveryModule = require(Parent.RealtimeDelivery)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local SoundManagerModule = require(Parent.SoundManager)
+local SquadCoordinationExperienceJoinExperimentation = require(Parent.SocialExperiments).SquadCoordinationExperienceJoinExperimentation
+local ToastNotificationModule = require(Parent.ToastNotification)
+local ToastNotificationsProtocolModule = require(Parent.ToastNotificationsProtocol)
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local GameParams = ExperienceServiceModule.GameParams
+local ExperienceService = ExperienceServiceModule.ExperienceService
+local ClearIntervalFunction = LuauPolyfillModule.clearInterval
+local SetIntervalFunction = LuauPolyfillModule.setInterval
+local ExperienceInviteState = RoduxSquadsModule.Enums.ExperienceInviteState
+local ExperienceInviteVoteType = RoduxSquadsModule.Enums.ExperienceInviteVoteType
+local ExperienceInviteType = RoduxSquadsModule.Enums.ExperienceInviteType
+local Sounds = SoundManagerModule.Sounds
+local SoundManager = SoundManagerModule.SoundManager
+local SquadExternalContractContextModule = require(SquadsCore.Components.SquadExternalContractProvider.SquadExternalContractContext)
+local EventNamesModule = require(SquadsCore.Analytics.EventNames)
+local LifecycleEvents = ToastNotificationModule.LifecycleEvents
+local NotificationTypeEnum = ToastNotificationModule.ToastNotificationTypeModule.NotificationTypeEnum
+local SquadExperienceInvitePollingIntervalSeconds = game:DefineFastInt("SquadExperienceInvitePollingIntervalSeconds", 4)
+local SquadExperienceInviteTimeoutSeconds = game:DefineFastInt("SquadExperienceInviteTimeoutSeconds", 30)
+local FFlagDebugSquadLogsEnabled = SharedFlagsModule.FFlagDebugSquadLogsEnabled
+local FFlagSquadLaunchExperienceMobileFix = SharedFlagsModule.FFlagSquadLaunchExperienceMobileFix
+local FFlagEnablePrivatePartyAcceptInvite = SharedFlagsModule.FFlagEnablePrivatePartyAcceptInvite
+local FFlagUseSignalsForSquadExperienceInvite = SharedFlagsModule.FFlagUseSignalsForSquadExperienceInvite
+local ToastNotificationsMessageId = MessageBusService:GetMessageId("ToastNotifications", "userActionOnToastNotification")
 
-local _ = function(p1)
-	-- upvalues: fFlagDebugSquadLogsEnabled (ref), httpService (ref)
-	return if fFlagDebugSquadLogsEnabled then httpService:JSONEncode(p1) elseif p1.StatusCode then p1.StatusCode else -1
+local function _(Input) --[[ Line: 76 ]]
+	-- upvalues: FFlagDebugSquadLogsEnabled (copy), HttpService (copy)
+	return if FFlagDebugSquadLogsEnabled then HttpService:JSONEncode(Input) elseif Input.StatusCode then Input.StatusCode else -1
 end
 
-return function(p1)
-	-- upvalues: useDispatch (ref), useLocalUserId (ref), reactModule (ref), squadExternalContractContextModule (ref), appStorageService (ref), localStorageKey (ref), toastNotificationsProtocolModule (ref), useSelector (ref), useCurrentSquadParentChannelIdModule (ref), experienceInviteVoteType (ref), roduxSquadsModule (ref), networkingSquadsModule (ref), loggerModule (ref), fFlagDebugSquadLogsEnabled (ref), httpService (ref), eventNamesModule (ref), cryoModule (ref), squadCoordinationExperienceJoinExperimentation (ref), squadExperienceInviteTimeoutSeconds (ref), experienceInviteState (ref), fFlagEnablePrivatePartyAcceptInvite (ref), experienceInviteType (ref), squadLocationEnumModule (ref), fFlagSquadLaunchExperienceMobileFix (ref), gameParams (ref), experienceService (ref), squadExperienceInvitePollingIntervalSeconds (ref), setInterval (ref), clearInterval (ref), serializeTableModule (ref), squadToastActionsAndStatesModule (ref), squadToastTypeModule (ref), realtimeDeliveryModule (ref), notificationTypeEnum (ref), messageBusService (ref), toastNotificationsMessageId (ref), lifecycleEvents (ref), soundManager (ref), sounds (ref)
-	local var1 = useDispatch()
-	local var2 = tonumber(useLocalUserId()) or 0
-	local var3 = reactModule.useContext(squadExternalContractContextModule)
-	local var4, var5 = reactModule.useState("")
-	reactModule.useEffect(function()
-		-- upvalues: appStorageService (copy), localStorageKey (copy), var5 (ref)
-		local ok, status = pcall(function()
-			-- upvalues: appStorageService (copy), localStorageKey (copy)
-			return appStorageService:GetItem(localStorageKey.BrowserTrackerId)
+return function(p1) --[[ Line: 84 ]]
+	-- upvalues: UseDispatchFunction (copy), UseLocalUserIdFunction (copy), ReactModule (copy), SquadExternalContractContextModule (copy), AppStorageService (copy), LocalStorageKey (copy), ToastNotificationsProtocolModule (copy), FFlagUseSignalsForSquadExperienceInvite (copy), UseSignalStateFunction (copy), GetSquadExperienceInviteStoreModule (copy), UseSelectorFunction (copy), UseCurrentSquadParentChannelIdModule (copy), ExperienceInviteVoteType (copy), RoduxSquadsModule (copy), NetworkingSquadsModule (copy), LoggerModule (copy), FFlagDebugSquadLogsEnabled (copy), HttpService (copy), EventNamesModule (copy), CryoModule (copy), SquadCoordinationExperienceJoinExperimentation (copy), SquadExperienceInviteTimeoutSeconds (copy), ExperienceInviteState (copy), FFlagEnablePrivatePartyAcceptInvite (copy), ExperienceInviteType (copy), SquadLocationEnumModule (copy), FFlagSquadLaunchExperienceMobileFix (copy), GameParams (copy), ExperienceService (copy), SquadExperienceInvitePollingIntervalSeconds (copy), SetIntervalFunction (copy), ClearIntervalFunction (copy), SerializeTableModule (copy), SquadToastActionsAndStatesModule (copy), SquadToastTypeModule (copy), RealtimeDeliveryModule (copy), NotificationTypeEnum (copy), MessageBusService (copy), ToastNotificationsMessageId (copy), LifecycleEvents (copy), SoundManager (copy), Sounds (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local Number: number = tonumber(UseLocalUserIdFunction()) or 0
+	local UseContextResult = ReactModule.useContext(SquadExternalContractContextModule)
+	local UseStateResult, UseStateResult2 = ReactModule.useState("")
+	ReactModule.useEffect(function() --[[ Line: 92 ]]
+		-- upvalues: AppStorageService (upval), LocalStorageKey (upval), UseStateResult2 (copy)
+		local Success, Result = pcall(function() --[[ Line: 94 ]]
+			-- upvalues: AppStorageService (upval), LocalStorageKey (upval)
+			return AppStorageService:GetItem(LocalStorageKey.BrowserTrackerId)
 		end)
 		
-		if ok then
-			var5(status)
+		if Success then
+			UseStateResult2(Result)
 		end
-		local itemWasSetConnection = appStorageService.ItemWasSet:Connect(function(p2, p3)
-			-- upvalues: localStorageKey (copy), var5 (copy)
-			if p2 == localStorageKey.BrowserTrackerId then
-				var5(p3)
+		local ItemWasSetConnection = AppStorageService.ItemWasSet:Connect(function(BrowserTrackerId, Value) --[[ Line: 101 ]]
+			-- upvalues: LocalStorageKey (upval), UseStateResult2 (upval)
+			if BrowserTrackerId == LocalStorageKey.BrowserTrackerId then
+				UseStateResult2(Value)
 			end
 		end)
 		
-		return function()
-			-- upvalues: itemWasSetConnection (ref)
-			itemWasSetConnection:Disconnect()
+		return function() --[[ Line: 106 ]]
+			-- upvalues: ItemWasSetConnection (copy)
+			ItemWasSetConnection:Disconnect()
 		end
-	end, { var5 })
-	local default = toastNotificationsProtocolModule.ToastNotificationProtocol.default
-	local var6 = reactModule.useRef(false)
-	local var7 = useSelector(reactModule.useCallback(function(p2)
+	end, { UseStateResult2 })
+	local Default = ToastNotificationsProtocolModule.ToastNotificationProtocol.default
+	local UseRefResult = ReactModule.useRef(false)
+	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 114 ]]
 		return if p2.Squad and p2.Squad.Squad then p2.Squad.Squad.currentExperienceInvite else nil
-	end, {}))
-	local var8 = useCurrentSquadParentChannelIdModule()
-	local model = var7 and var7.model
-	local var9 = if model then model.experienceInviteId else ""
-	local var10 = if model then model.state else ""
-	local var11 = if model then model.experienceDetail.gameInstanceId else ""
-	local var12 = if model then model.experienceDetail.placeId else 0
-	local var13 = if model then model.inviterId else 0
-	local var14, var15 = reactModule.useMemo(function()
-		-- upvalues: var7 (ref), experienceInviteVoteType (copy), var2 (ref), var4 (ref)
-		if var7 and var7.model then
-			for i, v in ipairs(var7.model.votes) do
-				if v.userId == var2 then
-					return v.voteType, if v.voteIdentifier and v.voteIdentifier ~= "" then v.voteIdentifier ~= var4 else false
+	end, {})
+	local UseSignalStateResult = if FFlagUseSignalsForSquadExperienceInvite then UseSignalStateFunction(GetSquadExperienceInviteStoreModule(false).getCurrentExperienceInvite) else UseSelectorFunction(UseResult)
+	local UseCurrentSquadParentChannelIdModuleResult = UseCurrentSquadParentChannelIdModule()
+	local Model = UseSignalStateResult and UseSignalStateResult.model
+	local ExperienceInviteId = Model and Model.experienceInviteId or ""
+	local State = Model and Model.state or ""
+	local GameInstanceId = Model and Model.experienceDetail.gameInstanceId or ""
+	local PlaceId = Model and Model.experienceDetail.placeId or 0
+	local InviterId = Model and Model.inviterId or 0
+	local UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 136 ]]
+		-- upvalues: UseSignalStateResult (copy), ExperienceInviteVoteType (upval), Number (copy), UseStateResult (copy)
+		if UseSignalStateResult and UseSignalStateResult.model then
+			for _, vote in ipairs(UseSignalStateResult.model.votes) do
+				if vote.userId == Number then
+					return vote.voteType, if vote.voteIdentifier and vote.voteIdentifier ~= "" then vote.voteIdentifier ~= UseStateResult else false
 				end
 			end
-			return experienceInviteVoteType.NoVote, false
-		elseif var7 and var7.notification.isInviter then
-			return experienceInviteVoteType.Accept, false
+			return ExperienceInviteVoteType.NoVote, false
+		elseif UseSignalStateResult and UseSignalStateResult.notification.isInviter then
+			return ExperienceInviteVoteType.Accept, false
+		else
+			return ExperienceInviteVoteType.Invalid, false
 		end
-		return experienceInviteVoteType.Invalid, false
-	end, { var7, var2, var4 })
-	local var16 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: default (ref), var1 (ref), roduxSquadsModule (copy), var6 (ref)
+	end, { UseSignalStateResult, Number, UseStateResult })
+	local UseResult1 = ReactModule.useCallback(function(p2, p3) --[[ Line: 163 ]]
+		-- upvalues: Default (copy), FFlagUseSignalsForSquadExperienceInvite (upval), GetSquadExperienceInviteStoreModule (upval), UseDispatchResult (copy), RoduxSquadsModule (upval), UseRefResult (copy)
 		if p3 then
-			default:dismissNotification(p2)
+			Default:dismissNotification(p2)
 		end
-		var1(roduxSquadsModule.Actions.CurrentExperienceInviteDismissed(p2))
-		var6.current = false
-	end, { var1 })
-	local var17 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: var1 (ref), networkingSquadsModule (copy), loggerModule (copy), fFlagDebugSquadLogsEnabled (copy), httpService (copy)
-		return var1(networkingSquadsModule.GetExperienceInvite.API({ experienceInviteId = p2, membershipEntityId = p3 })):catch(function(p4)
-			-- upvalues: loggerModule (copy), fFlagDebugSquadLogsEnabled (copy), httpService (copy), p2 (ref), p3 (ref)
-			loggerModule:warning("Error getting experience invite. Error: {}, ExperienceInviteId: {}, MembershipEntityId: {}", if fFlagDebugSquadLogsEnabled then httpService:JSONEncode(p4) elseif p4.StatusCode then p4.StatusCode else -1, p2, p3)
+		if FFlagUseSignalsForSquadExperienceInvite then
+			GetSquadExperienceInviteStoreModule(false).currentExperienceInviteDismissed(p2)
+		else
+			UseDispatchResult(RoduxSquadsModule.Actions.CurrentExperienceInviteDismissed(p2))
+		end
+		UseRefResult.current = false
+	end, { UseDispatchResult })
+	local UseResult11 = ReactModule.useCallback(function(ExperienceInviteId, MembershipEntityId) --[[ Line: 178 ]]
+		-- upvalues: UseDispatchResult (copy), NetworkingSquadsModule (upval), LoggerModule (upval), FFlagDebugSquadLogsEnabled (upval), HttpService (upval)
+		return UseDispatchResult(NetworkingSquadsModule.GetExperienceInvite.API({
+			experienceInviteId = ExperienceInviteId,
+			membershipEntityId = MembershipEntityId
+		})):catch(function(Err) --[[ Line: 182 ]]
+			-- upvalues: LoggerModule (upval), FFlagDebugSquadLogsEnabled (upval), HttpService (upval), ExperienceInviteId (copy), MembershipEntityId (copy)
+			LoggerModule:warning("Error getting experience invite. Error: {}, ExperienceInviteId: {}, MembershipEntityId: {}", if FFlagDebugSquadLogsEnabled then HttpService:JSONEncode(Err) elseif Err.StatusCode then Err.StatusCode else -1, ExperienceInviteId, MembershipEntityId)
 		end)
-	end, { var1 })
-	local var18 = reactModule.useCallback(function(p2, p3, p4)
-		-- upvalues: var8 (ref), var1 (ref), networkingSquadsModule (copy), var4 (ref), var3 (ref), eventNamesModule (copy), cryoModule (copy), httpService (copy), loggerModule (copy), fFlagDebugSquadLogsEnabled (copy)
-		local t = {
-			parentChannelId = var8,
-			experienceInviteId = p2,
-			voteType = p3
+	end, { UseDispatchResult })
+	local UseResult2 = ReactModule.useCallback(function(ExperienceInviteId, VoteType, MembershipEntityId) --[[ Line: 191 ]]
+		-- upvalues: UseCurrentSquadParentChannelIdModuleResult (copy), UseDispatchResult (copy), NetworkingSquadsModule (upval), UseStateResult (copy), UseContextResult (copy), EventNamesModule (upval), CryoModule (upval), HttpService (upval), LoggerModule (upval), FFlagDebugSquadLogsEnabled (upval)
+		local config = {
+			parentChannelId = UseCurrentSquadParentChannelIdModuleResult,
+			experienceInviteId = ExperienceInviteId,
+			voteType = VoteType
 		}
 		
-		return var1(networkingSquadsModule.VoteForExperienceInvite.API({
-			experienceInviteId = p2,
-			membershipEntityId = p4,
-			voteIdentifier = var4,
-			voteType = p3
-		})):andThen(function()
-			-- upvalues: var3 (copy), eventNamesModule (copy), cryoModule (copy), t (ref)
-			var3.fireSquadAnalytics(eventNamesModule.SquadVoteApiCall, cryoModule.Dictionary.union(t, { isSuccess = true }))
-		end):catch(function(p5)
-			-- upvalues: httpService (copy), var3 (copy), eventNamesModule (copy), cryoModule (copy), t (ref), loggerModule (copy), fFlagDebugSquadLogsEnabled (copy), p2 (ref), p4 (ref), p3 (ref)
-			local body = p5.Body
-			local ok, status = pcall(function()
-				-- upvalues: httpService (copy), body (ref)
-				return httpService:JSONDecode(body)
+		return UseDispatchResult(NetworkingSquadsModule.VoteForExperienceInvite.API({
+			experienceInviteId = ExperienceInviteId,
+			membershipEntityId = MembershipEntityId,
+			voteIdentifier = UseStateResult,
+			voteType = VoteType
+		})):andThen(function() --[[ Line: 204 ]]
+			-- upvalues: UseContextResult (upval), EventNamesModule (upval), CryoModule (upval), config (copy)
+			UseContextResult.fireSquadAnalytics(EventNamesModule.SquadVoteApiCall, CryoModule.Dictionary.union(config, { isSuccess = true }))
+		end):catch(function(Err) --[[ Line: 212 ]]
+			-- upvalues: HttpService (upval), UseContextResult (upval), EventNamesModule (upval), CryoModule (upval), config (copy), LoggerModule (upval), FFlagDebugSquadLogsEnabled (upval), ExperienceInviteId (copy), MembershipEntityId (copy), VoteType (copy)
+			local Body = Err.Body
+			local Success, Result = pcall(function() --[[ Line: 214 ]]
+				-- upvalues: HttpService (upval), Body (copy)
+				return HttpService:JSONDecode(Body)
 			end)
-			var3.fireSquadAnalytics(eventNamesModule.SquadVoteApiCall, cryoModule.Dictionary.union(t, {
+			UseContextResult.fireSquadAnalytics(EventNamesModule.SquadVoteApiCall, CryoModule.Dictionary.union(config, {
 				isSuccess = false,
-				errorMessage = if ok then status.errorType else nil,
-				errorType = if p5.StatusCode then tostring(p5.StatusCode) else nil
+				errorMessage = if Success then Result.errorType else nil,
+				errorType = if Err.StatusCode then tostring(Err.StatusCode) else nil
 			}))
-			loggerModule:warning("Error voting for experience invite. Error: {}, ExperienceInviteId: {}, MembershipEntityId: {}, VoteType: {}", if fFlagDebugSquadLogsEnabled then httpService:JSONEncode(p5) elseif p5.StatusCode then p5.StatusCode else -1, p2, p4, p3)
+			LoggerModule:warning("Error voting for experience invite. Error: {}, ExperienceInviteId: {}, MembershipEntityId: {}, VoteType: {}", if FFlagDebugSquadLogsEnabled then HttpService:JSONEncode(Err) elseif Err.StatusCode then Err.StatusCode else -1, ExperienceInviteId, MembershipEntityId, VoteType)
 		end)
-	end, { var1, var4 })
-	local var19 = reactModule.useCallback(function(p2)
-		-- upvalues: var3 (ref), eventNamesModule (copy), var9 (ref), var11 (ref), var12 (ref), var13 (ref), var10 (ref), var8 (ref)
-		var3.fireSquadAnalytics(eventNamesModule.SquadExperienceInviteStateChange, {
-			experienceInviteId = var9,
-			invitationGameInstanceId = var11,
-			invitationPlaceId = var12,
-			inviterId = var13,
-			inviteState = var10,
-			parentChannelId = var8,
-			joinAttemptId = p2
+	end, { UseDispatchResult, UseStateResult })
+	local UseResult3 = ReactModule.useCallback(function(JoinAttemptId) --[[ Line: 239 ]]
+		-- upvalues: UseContextResult (copy), EventNamesModule (upval), ExperienceInviteId (copy), GameInstanceId (copy), PlaceId (copy), InviterId (copy), State (copy), UseCurrentSquadParentChannelIdModuleResult (copy)
+		UseContextResult.fireSquadAnalytics(EventNamesModule.SquadExperienceInviteStateChange, {
+			experienceInviteId = ExperienceInviteId,
+			invitationGameInstanceId = GameInstanceId,
+			invitationPlaceId = PlaceId,
+			inviterId = InviterId,
+			inviteState = State,
+			parentChannelId = UseCurrentSquadParentChannelIdModuleResult,
+			joinAttemptId = JoinAttemptId
 		})
 	end, {
-		var11, var9, var13, var12, var10, var8,
-		if squadCoordinationExperienceJoinExperimentation.getIsSquadLobbySessionEnabled() then var3.fireSquadAnalytics else nil
+		GameInstanceId, ExperienceInviteId, InviterId, PlaceId, State,
+		UseCurrentSquadParentChannelIdModuleResult,
+		if SquadCoordinationExperienceJoinExperimentation.getIsSquadLobbySessionEnabled() then UseContextResult.fireSquadAnalytics else nil
 	})
-	reactModule.useEffect(function()
-		-- upvalues: var7 (ref), squadExperienceInviteTimeoutSeconds (copy), var16 (ref)
-		local var20 = if var7 then task.delay(squadExperienceInviteTimeoutSeconds, function()
-			-- upvalues: var16 (copy), var7 (copy)
-			var16(var7.notification.notificationId, true)
+	ReactModule.useEffect(function() --[[ Line: 264 ]]
+		-- upvalues: UseSignalStateResult (copy), SquadExperienceInviteTimeoutSeconds (upval), UseResult1 (copy)
+		local DelayedThread = if UseSignalStateResult then task.delay(SquadExperienceInviteTimeoutSeconds, function() --[[ Line: 267 ]]
+			-- upvalues: UseResult1 (upval), UseSignalStateResult (upval)
+			UseResult1(UseSignalStateResult.notification.notificationId, true)
 		end) else nil
 		
-		return function()
-			-- upvalues: var20 (write)
-			if var20 then
-				task.cancel(var20)
+		return function() --[[ Line: 271 ]]
+			-- upvalues: DelayedThread (ref)
+			if DelayedThread then
+				task.cancel(DelayedThread)
 			end
 		end
-	end, { var16, var7 })
-	reactModule.useEffect(function()
-		-- upvalues: var7 (ref), var14 (ref), experienceInviteVoteType (copy), var6 (ref), experienceInviteState (copy), fFlagEnablePrivatePartyAcceptInvite (copy), experienceInviteType (copy), loggerModule (copy), var16 (ref), var3 (ref), squadLocationEnumModule (copy), fFlagSquadLaunchExperienceMobileFix (copy), squadCoordinationExperienceJoinExperimentation (copy), httpService (copy), var19 (ref), gameParams (copy), experienceService (copy)
-		if not var7 or var14 ~= experienceInviteVoteType.Accept or var6.current then return end
-		local model = var7.model
-		local notification = var7.notification
+	end, { UseResult1, UseSignalStateResult })
+	ReactModule.useEffect(function() --[[ Line: 279 ]]
+		-- upvalues: UseSignalStateResult (copy), UseMemoResult (copy), ExperienceInviteVoteType (upval), UseRefResult (copy), ExperienceInviteState (upval), FFlagEnablePrivatePartyAcceptInvite (upval), ExperienceInviteType (upval), LoggerModule (upval), UseResult1 (copy), UseContextResult (copy), SquadLocationEnumModule (upval), FFlagSquadLaunchExperienceMobileFix (upval), SquadCoordinationExperienceJoinExperimentation (upval), HttpService (upval), UseResult3 (copy), GameParams (upval), ExperienceService (upval)
+		if not UseSignalStateResult or UseMemoResult ~= ExperienceInviteVoteType.Accept or UseRefResult.current then return end
+		local Model = UseSignalStateResult.model
+		local Notification = UseSignalStateResult.notification
 		
-		if not model or model.state ~= experienceInviteState.ReservationSuccessful then return end
-		local gameInstanceId = model.experienceDetail.gameInstanceId
-		local placeId = model.experienceDetail.placeId
+		if not Model or Model.state ~= ExperienceInviteState.ReservationSuccessful then return end
+		local GameInstanceId = Model.experienceDetail.gameInstanceId
+		local PlaceId = Model.experienceDetail.placeId
 		
-		if not fFlagEnablePrivatePartyAcceptInvite or var7.model.inviteType ~= experienceInviteType.PlayWithPartyInPrivatePartyServer then
-			assert(gameInstanceId, "Game instance id should exist.")
+		if not FFlagEnablePrivatePartyAcceptInvite or UseSignalStateResult.model.inviteType ~= ExperienceInviteType.PlayWithPartyInPrivatePartyServer then
+			assert(GameInstanceId, "Game instance id should exist.")
 		end
-		var6.current = true
-		loggerModule:debug("Launching experience. GameInstanceId: {}, PlaceId: {}", gameInstanceId, placeId)
-		local delayedThread = task.delay(1, function()
-			-- upvalues: var16 (copy), notification (ref), var3 (copy), squadLocationEnumModule (copy), fFlagSquadLaunchExperienceMobileFix (copy), squadCoordinationExperienceJoinExperimentation (copy), httpService (copy), var19 (copy), gameParams (copy), placeId (ref), gameInstanceId (ref), fFlagEnablePrivatePartyAcceptInvite (copy), var7 (copy), experienceInviteType (copy), experienceService (copy)
-			var16(notification.notificationId, true)
+		UseRefResult.current = true
+		LoggerModule:debug("Launching experience. GameInstanceId: {}, PlaceId: {}", GameInstanceId, PlaceId)
+		local DelayedThread = task.delay(1, function() --[[ Line: 306 ]]
+			-- upvalues: UseResult1 (upval), Notification (copy), UseContextResult (upval), SquadLocationEnumModule (upval), FFlagSquadLaunchExperienceMobileFix (upval), SquadCoordinationExperienceJoinExperimentation (upval), HttpService (upval), UseResult3 (upval), GameParams (upval), PlaceId (copy), GameInstanceId (copy), FFlagEnablePrivatePartyAcceptInvite (upval), UseSignalStateResult (upval), ExperienceInviteType (upval), ExperienceService (upval)
+			UseResult1(Notification.notificationId, true)
 			
-			if var3.squadLocation == squadLocationEnumModule.InExperience and fFlagSquadLaunchExperienceMobileFix then
+			if UseContextResult.squadLocation == SquadLocationEnumModule.InExperience and FFlagSquadLaunchExperienceMobileFix then
 				game:Shutdown()
 			end
-			local var20 = "SquadExperienceInvite"
+			local SquadExperienceInviteFromUA: string = if UseContextResult.squadLocation == SquadLocationEnumModule.UniversalApp then "SquadExperienceInviteFromUA" elseif UseContextResult.squadLocation == SquadLocationEnumModule.InExperience then "SquadExperienceInviteFromInExp" else "SquadExperienceInvite"
+			local Guid = nil
 			
-			if var3.squadLocation == squadLocationEnumModule.UniversalApp then
-				var20 = "SquadExperienceInviteFromUA"
-			elseif var3.squadLocation == squadLocationEnumModule.InExperience then
-				var20 = "SquadExperienceInviteFromInExp"
+			if SquadCoordinationExperienceJoinExperimentation.getIsSquadLobbySessionEnabled() then
+				Guid = HttpService:GenerateGUID(false)
+				UseResult3(Guid)
 			end
-			local var21 = nil
+			local FromPlaceInstanceResult = GameParams.fromPlaceInstance(PlaceId, GameInstanceId)
 			
-			if squadCoordinationExperienceJoinExperimentation.getIsSquadLobbySessionEnabled() then
-				var21 = httpService:GenerateGUID(false)
-				var19(var21)
+			if SquadCoordinationExperienceJoinExperimentation.getIsSquadLobbySessionEnabled() then
+				FromPlaceInstanceResult.joinAttemptId = Guid
 			end
-			local var22 = gameParams.fromPlaceInstance(placeId, gameInstanceId)
-			
-			if squadCoordinationExperienceJoinExperimentation.getIsSquadLobbySessionEnabled() then
-				var22.joinAttemptId = var21
+			if FFlagEnablePrivatePartyAcceptInvite and UseSignalStateResult.model.inviteType == ExperienceInviteType.PlayWithPartyInPrivatePartyServer then
+				FromPlaceInstanceResult.isPrivateParty = true
 			end
-			if fFlagEnablePrivatePartyAcceptInvite and var7.model.inviteType == experienceInviteType.PlayWithPartyInPrivatePartyServer then
-				var22.isPrivateParty = true
-			end
-			experienceService:LaunchExperience(var22, var20, nil)
+			ExperienceService:LaunchExperience(FromPlaceInstanceResult, SquadExperienceInviteFromUA, nil)
 		end)
 		
-		return function()
-			-- upvalues: delayedThread (ref)
-			task.cancel(delayedThread)
+		return function() --[[ Line: 341 ]]
+			-- upvalues: DelayedThread (copy)
+			task.cancel(DelayedThread)
 		end
 	end, {
-		var3.squadLocation,
-		var7,
-		var16,
-		var14,
-		if squadCoordinationExperienceJoinExperimentation.getIsSquadLobbySessionEnabled() then var19 else nil
+		UseContextResult.squadLocation,
+		UseSignalStateResult,
+		UseResult1,
+		UseMemoResult,
+		if SquadCoordinationExperienceJoinExperimentation.getIsSquadLobbySessionEnabled() then UseResult3 else nil
 	})
-	reactModule.useEffect(function()
-		-- upvalues: squadExperienceInvitePollingIntervalSeconds (copy), var7 (ref), experienceInviteState (copy), setInterval (copy), var17 (ref), clearInterval (copy)
-		local var20 = if var7 and (not var7.model or var7.model.state == experienceInviteState.Active or var7.model.state == experienceInviteState.Reserving) then setInterval(function()
-			-- upvalues: var17 (copy), var7 (copy)
-			var17(var7.notification.experienceInviteId, var7.notification.membershipEntityId)
-		end, squadExperienceInvitePollingIntervalSeconds * 1000) else nil
+	ReactModule.useEffect(function() --[[ Line: 357 ]]
+		-- upvalues: SquadExperienceInvitePollingIntervalSeconds (upval), UseSignalStateResult (copy), ExperienceInviteState (upval), SetIntervalFunction (upval), UseResult11 (copy), ClearIntervalFunction (upval)
+		local SetIntervalResult = if UseSignalStateResult and (not UseSignalStateResult.model or UseSignalStateResult.model.state == ExperienceInviteState.Active or UseSignalStateResult.model.state == ExperienceInviteState.Reserving) then SetIntervalFunction(function() --[[ Line: 368 ]]
+			-- upvalues: UseResult11 (upval), UseSignalStateResult (upval)
+			UseResult11(UseSignalStateResult.notification.experienceInviteId, UseSignalStateResult.notification.membershipEntityId)
+		end, SquadExperienceInvitePollingIntervalSeconds * 1000) else nil
 		
-		return function()
-			-- upvalues: var20 (write), clearInterval (copy)
-			if var20 then
-				clearInterval(var20)
+		return function() --[[ Line: 376 ]]
+			-- upvalues: SetIntervalResult (ref), ClearIntervalFunction (upval)
+			if SetIntervalResult then
+				ClearIntervalFunction(SetIntervalResult)
 			end
 		end
-	end, { var7, var17 })
-	reactModule.useEffect(function()
-		-- upvalues: var7 (ref), p1 (ref), var15 (ref), var16 (ref)
-		if var7 and (p1.currentSquadId ~= var7.notification.membershipEntityId or var15) then
-			var16(var7.notification.notificationId, true)
+	end, { UseSignalStateResult, UseResult11 })
+	ReactModule.useEffect(function() --[[ Line: 385 ]]
+		-- upvalues: UseSignalStateResult (copy), p1 (copy), UseMemoResult2 (copy), UseResult1 (copy)
+		if UseSignalStateResult and (p1.currentSquadId ~= UseSignalStateResult.notification.membershipEntityId or UseMemoResult2) then
+			UseResult1(UseSignalStateResult.notification.notificationId, true)
 		end
-	end, { var7, var16, p1.currentSquadId, var15 })
-	reactModule.useEffect(function()
-		-- upvalues: experienceInviteState (copy), var10 (ref), squadCoordinationExperienceJoinExperimentation (copy), var19 (ref)
-		if experienceInviteState[var10] then
-			if squadCoordinationExperienceJoinExperimentation.getIsSquadLobbySessionEnabled() then
-				if experienceInviteState[var10] == experienceInviteState.ReservationSuccessful then
-					return
-				else
-					var19()
-					
-					return
-				end
-			else
-				var19()
-			end
-		end
-	end, { var10, var19 })
-	reactModule.useEffect(function()
-		-- upvalues: var7 (ref), loggerModule (copy), serializeTableModule (copy), var2 (ref), experienceInviteState (copy), default (ref), var16 (ref), var14 (ref), experienceInviteVoteType (copy), var3 (ref), eventNamesModule (copy), var8 (ref), squadToastActionsAndStatesModule (copy), squadToastTypeModule (copy)
-		if not var7 or not var7.model then return end
-		loggerModule:debug("Current experience invite updated: {}", serializeTableModule(var7.model))
-		local notificationId = var7.notification.notificationId
-		local state = var7.model.state
-		
-		if var7.model.inviterId == var2 then
-			if state == experienceInviteState.Active then
-				if var7.model.spotsTaken > 1 then
-					default:updateNotification(notificationId, var7.model.spotsTaken .. "SpotsFilled")
-					
-					return
-				end
-			elseif state == experienceInviteState.Reserving or state == experienceInviteState.ReservationSuccessful then
-				default:updateNotification(notificationId, "launching")
+	end, {
+		UseSignalStateResult,
+		UseResult1,
+		p1.currentSquadId,
+		UseMemoResult2
+	})
+	ReactModule.useEffect(function() --[[ Line: 395 ]]
+		-- upvalues: ExperienceInviteState (upval), State (copy), SquadCoordinationExperienceJoinExperimentation (upval), UseResult3 (copy)
+		if ExperienceInviteState[State] then
+			if not SquadCoordinationExperienceJoinExperimentation.getIsSquadLobbySessionEnabled() then
+				UseResult3()
+			elseif ExperienceInviteState[State] ~= ExperienceInviteState.ReservationSuccessful then
+				UseResult3()
 				
 				return
 			end
-			var16(notificationId, true)
-			
-			if state == experienceInviteState.Cancelled or state == experienceInviteState.ReservationFailed then
-				return
-			else
-				loggerModule:warning("Invitee unexpected squad experience invite state: {}", state)
+		end
+	end, { State, UseResult3 })
+	ReactModule.useEffect(function() --[[ Line: 413 ]]
+		-- upvalues: UseSignalStateResult (copy), LoggerModule (upval), SerializeTableModule (upval), Number (copy), ExperienceInviteState (upval), Default (copy), UseResult1 (copy), UseMemoResult (copy), ExperienceInviteVoteType (upval), UseContextResult (copy), EventNamesModule (upval), UseCurrentSquadParentChannelIdModuleResult (copy), SquadToastActionsAndStatesModule (upval), SquadToastTypeModule (upval)
+		if not UseSignalStateResult or not UseSignalStateResult.model then return end
+		LoggerModule:debug("Current experience invite updated: {}", SerializeTableModule(UseSignalStateResult.model))
+		local NotificationId = UseSignalStateResult.notification.notificationId
+		local State = UseSignalStateResult.model.state
+		
+		if UseSignalStateResult.model.inviterId == Number then
+			if State == ExperienceInviteState.Active then
+				if UseSignalStateResult.model.spotsTaken > 1 then
+					Default:updateNotification(NotificationId, UseSignalStateResult.model.spotsTaken .. "SpotsFilled")
+					
+					return
+				end
+			elseif State == ExperienceInviteState.Reserving or State == ExperienceInviteState.ReservationSuccessful then
+				Default:updateNotification(NotificationId, "launching")
 				
 				return
+			else
+				UseResult1(NotificationId, true)
+				
+				if State ~= ExperienceInviteState.Cancelled and State ~= ExperienceInviteState.ReservationFailed then
+					LoggerModule:warning("Invitee unexpected squad experience invite state: {}", State)
+					
+					return
+				end
 			end
-		elseif state == experienceInviteState.Active then
-			if var14 == experienceInviteVoteType.Invalid or var14 == experienceInviteVoteType.NoVote then
-				if var7.model.totalSpots <= var7.model.spotsTaken then
-					var3.fireSquadAnalytics(eventNamesModule.SquadToastActions, {
-						parentChannelId = var8,
-						experienceInviteId = var7.model.experienceInviteId,
-						toastAction = squadToastActionsAndStatesModule.ExpInvSlotsFull,
-						toastType = squadToastTypeModule.ExperienceInvite
+		elseif State == ExperienceInviteState.Active then
+			if UseMemoResult == ExperienceInviteVoteType.Invalid or UseMemoResult == ExperienceInviteVoteType.NoVote then
+				if UseSignalStateResult.model.totalSpots <= UseSignalStateResult.model.spotsTaken then
+					UseContextResult.fireSquadAnalytics(EventNamesModule.SquadToastActions, {
+						parentChannelId = UseCurrentSquadParentChannelIdModuleResult,
+						experienceInviteId = UseSignalStateResult.model.experienceInviteId,
+						toastAction = SquadToastActionsAndStatesModule.ExpInvSlotsFull,
+						toastType = SquadToastTypeModule.ExperienceInvite
 					})
-					default:updateNotification(notificationId, "slotsFull")
+					Default:updateNotification(NotificationId, "slotsFull")
 					
 					return
 				end
-			elseif var14 == experienceInviteVoteType.Accept then
-				default:updateNotification(notificationId, "waiting")
+			elseif UseMemoResult == ExperienceInviteVoteType.Accept then
+				Default:updateNotification(NotificationId, "waiting")
 				
 				return
-			elseif var14 == experienceInviteVoteType.Decline or var14 == experienceInviteVoteType.Dismiss then
-				var16(notificationId, true)
-				
-				return
+			else
+				if UseMemoResult == ExperienceInviteVoteType.Decline or UseMemoResult == ExperienceInviteVoteType.Dismiss then
+					UseResult1(NotificationId, true)
+					
+					return
+				end
 			end
-		elseif state == experienceInviteState.Reserving or state == experienceInviteState.ReservationSuccessful then
-			if var14 == experienceInviteVoteType.Invalid or var14 == experienceInviteVoteType.NoVote then
-				var3.fireSquadAnalytics(eventNamesModule.SquadToastActions, {
-					parentChannelId = var8,
-					experienceInviteId = var7.model.experienceInviteId,
-					toastAction = squadToastActionsAndStatesModule.ExpInvExpired,
-					toastType = squadToastTypeModule.ExperienceInvite
+		elseif State == ExperienceInviteState.Reserving or State == ExperienceInviteState.ReservationSuccessful then
+			if UseMemoResult == ExperienceInviteVoteType.Invalid or UseMemoResult == ExperienceInviteVoteType.NoVote then
+				UseContextResult.fireSquadAnalytics(EventNamesModule.SquadToastActions, {
+					parentChannelId = UseCurrentSquadParentChannelIdModuleResult,
+					experienceInviteId = UseSignalStateResult.model.experienceInviteId,
+					toastAction = SquadToastActionsAndStatesModule.ExpInvExpired,
+					toastType = SquadToastTypeModule.ExperienceInvite
 				})
-				default:updateNotification(notificationId, "expired")
-				
-				return
-			elseif var14 == experienceInviteVoteType.Accept then
-				default:updateNotification(notificationId, "waiting")
-				
-				return
-			elseif var14 == experienceInviteVoteType.Decline or var14 == experienceInviteVoteType.Dismiss then
-				var16(notificationId, true)
+				Default:updateNotification(NotificationId, "expired")
 				
 				return
 			end
-		elseif state == experienceInviteState.Cancelled then
-			default:updateNotification(notificationId, "cancelled")
+			if UseMemoResult == ExperienceInviteVoteType.Accept then
+				Default:updateNotification(NotificationId, "waiting")
+				
+				return
+			end
+			if UseMemoResult == ExperienceInviteVoteType.Decline or UseMemoResult == ExperienceInviteVoteType.Dismiss then
+				UseResult1(NotificationId, true)
+				
+				return
+			end
+		elseif State == ExperienceInviteState.Cancelled then
+			Default:updateNotification(NotificationId, "cancelled")
 			
 			return
-		end
-		var16(notificationId, true)
-		
-		if state ~= experienceInviteState.ReservationFailed then
-			loggerModule:warning("Inviter unexpected squad experience invite state: {}", state)
+		else
+			UseResult1(NotificationId, true)
+			
+			if State ~= ExperienceInviteState.ReservationFailed then
+				LoggerModule:warning("Inviter unexpected squad experience invite state: {}", State)
+			end
 		end
 	end, {
-		var7, var8, var16, var2, var3.fireSquadAnalytics, var14
+		UseSignalStateResult, UseCurrentSquadParentChannelIdModuleResult, UseResult1,
+		Number, UseContextResult.fireSquadAnalytics, UseMemoResult
 	})
-	realtimeDeliveryModule.useRealtimeNamespace("ExperienceInviteUpdate", function(p2)
-		-- upvalues: loggerModule (copy), serializeTableModule (copy), var1 (ref), roduxSquadsModule (copy)
-		loggerModule:debug("Experience invite RTN received. Detail: {}", serializeTableModule(p2))
-		var1(roduxSquadsModule.Actions.CurrentExperienceInviteUpdated(p2))
-	end, { var1 })
-	reactModule.useEffect(function()
-		-- upvalues: default (ref), var7 (ref), var14 (ref), experienceInviteVoteType (copy), var16 (ref), experienceInviteState (copy), var3 (ref), eventNamesModule (copy), var8 (ref), squadToastActionsAndStatesModule (copy), squadToastTypeModule (copy), var18 (ref)
-		local var20 = default:listenToDismissNotification(function(p2)
-			-- upvalues: var7 (copy), var14 (copy), experienceInviteVoteType (copy), var16 (copy), experienceInviteState (copy), var3 (copy), eventNamesModule (copy), var8 (copy), squadToastActionsAndStatesModule (copy), squadToastTypeModule (copy), var18 (copy)
-			if var7 and var7.notification.notificationId == p2.notificationId then
-				if var14 ~= experienceInviteVoteType.Accept then
-					var16(p2.notificationId, false)
+	RealtimeDeliveryModule.useRealtimeNamespace("ExperienceInviteUpdate", function(p2) --[[ Line: 505 ]]
+		-- upvalues: LoggerModule (upval), SerializeTableModule (upval), FFlagUseSignalsForSquadExperienceInvite (upval), GetSquadExperienceInviteStoreModule (upval), UseDispatchResult (copy), RoduxSquadsModule (upval)
+		LoggerModule:debug("Experience invite RTN received. Detail: {}", SerializeTableModule(p2))
+		
+		if FFlagUseSignalsForSquadExperienceInvite then
+			GetSquadExperienceInviteStoreModule(false).currentExperienceInviteUpdated(p2)
+			
+			return
+		else
+			UseDispatchResult(RoduxSquadsModule.Actions.CurrentExperienceInviteUpdated(p2))
+		end
+	end, { UseDispatchResult })
+	ReactModule.useEffect(function() --[[ Line: 521 ]]
+		-- upvalues: Default (copy), UseSignalStateResult (copy), UseMemoResult (copy), ExperienceInviteVoteType (upval), UseResult1 (copy), ExperienceInviteState (upval), UseContextResult (copy), EventNamesModule (upval), UseCurrentSquadParentChannelIdModuleResult (copy), SquadToastActionsAndStatesModule (upval), SquadToastTypeModule (upval), UseResult2 (copy)
+		local ListenToDismissNotificationResult = Default:listenToDismissNotification(function(p2) --[[ Line: 523 ]]
+			-- upvalues: UseSignalStateResult (upval), UseMemoResult (upval), ExperienceInviteVoteType (upval), UseResult1 (upval), ExperienceInviteState (upval), UseContextResult (upval), EventNamesModule (upval), UseCurrentSquadParentChannelIdModuleResult (upval), SquadToastActionsAndStatesModule (upval), SquadToastTypeModule (upval), UseResult2 (upval)
+			if UseSignalStateResult and UseSignalStateResult.notification.notificationId == p2.notificationId then
+				if UseMemoResult ~= ExperienceInviteVoteType.Accept then
+					UseResult1(p2.notificationId, false)
 				end
-				if (not var7.model or var7.model.state == experienceInviteState.Active) and (var14 == experienceInviteVoteType.Invalid or var14 == experienceInviteVoteType.NoVote) then
-					var3.fireSquadAnalytics(eventNamesModule.SquadToastActions, {
-						parentChannelId = var8,
-						experienceInviteId = var7.notification.experienceInviteId,
-						toastAction = squadToastActionsAndStatesModule.ExpInvDismiss,
-						toastType = squadToastTypeModule.ExperienceInvite
+				if (not UseSignalStateResult.model or UseSignalStateResult.model.state == ExperienceInviteState.Active) and (UseMemoResult == ExperienceInviteVoteType.Invalid or UseMemoResult == ExperienceInviteVoteType.NoVote) then
+					UseContextResult.fireSquadAnalytics(EventNamesModule.SquadToastActions, {
+						parentChannelId = UseCurrentSquadParentChannelIdModuleResult,
+						experienceInviteId = UseSignalStateResult.notification.experienceInviteId,
+						toastAction = SquadToastActionsAndStatesModule.ExpInvDismiss,
+						toastType = SquadToastTypeModule.ExperienceInvite
 					})
-					var18(var7.notification.experienceInviteId, experienceInviteVoteType.Dismiss, var7.notification.membershipEntityId)
+					UseResult2(UseSignalStateResult.notification.experienceInviteId, ExperienceInviteVoteType.Dismiss, UseSignalStateResult.notification.membershipEntityId)
 				end
 			end
 		end)
 		
-		return function()
-			-- upvalues: var20 (ref)
-			if var20 then
-				var20:Disconnect()
+		return function() --[[ Line: 564 ]]
+			-- upvalues: ListenToDismissNotificationResult (copy)
+			if ListenToDismissNotificationResult then
+				ListenToDismissNotificationResult:Disconnect()
 			end
 		end
 	end, {
-		var7, var8, var16, var1, var3.fireSquadAnalytics, var14, var18
+		UseSignalStateResult, UseCurrentSquadParentChannelIdModuleResult, UseResult1,
+		UseDispatchResult, UseContextResult.fireSquadAnalytics, UseMemoResult,
+		UseResult2
 	})
-	reactModule.useEffect(function()
-		-- upvalues: default (ref), var2 (ref), notificationTypeEnum (copy), httpService (copy), var1 (ref), roduxSquadsModule (copy)
-		local var20 = default:listenToDisplayNotification(function(p2)
-			-- upvalues: var2 (copy), notificationTypeEnum (copy), httpService (copy), var1 (copy), roduxSquadsModule (copy)
+	ReactModule.useEffect(function() --[[ Line: 580 ]]
+		-- upvalues: Default (copy), Number (copy), NotificationTypeEnum (upval), HttpService (upval), FFlagUseSignalsForSquadExperienceInvite (upval), GetSquadExperienceInviteStoreModule (upval), UseDispatchResult (copy), RoduxSquadsModule (upval)
+		local ListenToDisplayNotificationResult = Default:listenToDisplayNotification(function(p2) --[[ Line: 582 ]]
+			-- upvalues: Number (upval), NotificationTypeEnum (upval), HttpService (upval), FFlagUseSignalsForSquadExperienceInvite (upval), GetSquadExperienceInviteStoreModule (upval), UseDispatchResult (upval), RoduxSquadsModule (upval)
 			if not p2 then return end
-			if var2 <= 0 then return end
-			if p2.notificationType == notificationTypeEnum.SquadExperienceInvitation then
-				local lifecycleData = httpService:JSONDecode(p2.lifecycleData)
-				var1(roduxSquadsModule.Actions.CurrentExperienceInviteReceived(lifecycleData.experienceInviteId, lifecycleData.membershipEntityId, p2.notificationId, lifecycleData.isInviter))
+			if Number <= 0 then return end
+			if p2.notificationType == NotificationTypeEnum.SquadExperienceInvitation then
+				local Data = HttpService:JSONDecode(p2.lifecycleData)
+				
+				if FFlagUseSignalsForSquadExperienceInvite then
+					GetSquadExperienceInviteStoreModule(false).currentExperienceInviteReceived(Data.experienceInviteId, Data.membershipEntityId, p2.notificationId, Data.isInviter)
+					
+					return
+				end
+				UseDispatchResult(RoduxSquadsModule.Actions.CurrentExperienceInviteReceived(Data.experienceInviteId, Data.membershipEntityId, p2.notificationId, Data.isInviter))
 			end
 		end)
 		
-		return function()
-			-- upvalues: var20 (ref)
-			if var20 then
-				var20:Disconnect()
+		return function() --[[ Line: 612 ]]
+			-- upvalues: ListenToDisplayNotificationResult (copy)
+			if ListenToDisplayNotificationResult then
+				ListenToDisplayNotificationResult:Disconnect()
 			end
 		end
-	end, { var2 })
-	reactModule.useEffect(function()
-		-- upvalues: messageBusService (copy), toastNotificationsMessageId (copy), notificationTypeEnum (copy), var7 (ref), httpService (copy), var1 (ref), roduxSquadsModule (copy), default (ref), experienceInviteState (copy), var14 (ref), experienceInviteVoteType (copy)
-		local var20 = messageBusService:Subscribe(toastNotificationsMessageId, function(p2)
-			-- upvalues: notificationTypeEnum (copy), var7 (copy), httpService (copy), var1 (copy), roduxSquadsModule (copy), default (copy), experienceInviteState (copy), var14 (copy), experienceInviteVoteType (copy)
-			if p2.notificationType == notificationTypeEnum.SquadExperienceInvitation and p2.userActionType == "timerElapsed" then
-				if not var7 then
-					local parameters = httpService:JSONDecode(p2.parameters)
-					var1(roduxSquadsModule.Actions.CurrentExperienceInviteReceived(parameters.experienceInviteId, parameters.membershipEntityId, p2.notificationId, parameters.isInviter))
-					var1(function()
-						-- upvalues: default (copy), p2 (ref)
-						default:updateNotification(p2.notificationId, "expired")
+	end, { Number })
+	ReactModule.useEffect(function() --[[ Line: 621 ]]
+		-- upvalues: MessageBusService (upval), ToastNotificationsMessageId (upval), NotificationTypeEnum (upval), UseSignalStateResult (copy), HttpService (upval), FFlagUseSignalsForSquadExperienceInvite (upval), GetSquadExperienceInviteStoreModule (upval), UseDispatchResult (copy), RoduxSquadsModule (upval), Default (copy), ExperienceInviteState (upval), UseMemoResult (copy), ExperienceInviteVoteType (upval)
+		local SubscribeResult = MessageBusService:Subscribe(ToastNotificationsMessageId, function(p2) --[[ Line: 624 ]]
+			-- upvalues: NotificationTypeEnum (upval), UseSignalStateResult (upval), HttpService (upval), FFlagUseSignalsForSquadExperienceInvite (upval), GetSquadExperienceInviteStoreModule (upval), UseDispatchResult (upval), RoduxSquadsModule (upval), Default (upval), ExperienceInviteState (upval), UseMemoResult (upval), ExperienceInviteVoteType (upval)
+			if p2.notificationType == NotificationTypeEnum.SquadExperienceInvitation and p2.userActionType == "timerElapsed" then
+				if UseSignalStateResult then
+					assert(UseSignalStateResult, "Experience invite must exist to perform actions.")
+					
+					if (not UseSignalStateResult.model or UseSignalStateResult.model.state == ExperienceInviteState.Active) and (UseMemoResult == ExperienceInviteVoteType.Invalid or UseMemoResult == ExperienceInviteVoteType.NoVote) then
+						Default:updateNotification(p2.notificationId, "expired")
+					end
+				else
+					local Data = HttpService:JSONDecode(p2.parameters)
+					
+					if FFlagUseSignalsForSquadExperienceInvite then
+						GetSquadExperienceInviteStoreModule(false).currentExperienceInviteReceived(Data.experienceInviteId, Data.membershipEntityId, p2.notificationId, Data.isInviter)
+					else
+						UseDispatchResult(RoduxSquadsModule.Actions.CurrentExperienceInviteReceived(Data.experienceInviteId, Data.membershipEntityId, p2.notificationId, Data.isInviter))
+					end
+					UseDispatchResult(function() --[[ Line: 648 ]]
+						-- upvalues: Default (upval), p2 (copy)
+						Default:updateNotification(p2.notificationId, "expired")
 					end)
 					
 					return
 				end
-				assert(var7, "Experience invite must exist to perform actions.")
-				
-				if (not var7.model or var7.model.state == experienceInviteState.Active) and (var14 == experienceInviteVoteType.Invalid or var14 == experienceInviteVoteType.NoVote) then
-					default:updateNotification(p2.notificationId, "expired")
-				end
 			end
 		end, false, true)
 		
-		return function()
-			-- upvalues: var20 (ref)
-			if var20 then
-				var20:Disconnect()
+		return function() --[[ Line: 678 ]]
+			-- upvalues: SubscribeResult (copy)
+			if SubscribeResult then
+				SubscribeResult:Disconnect()
 			end
 		end
-	end, { var7, var14, var18 })
-	reactModule.useEffect(function()
-		-- upvalues: lifecycleEvents (copy), notificationTypeEnum (copy), httpService (copy), var8 (ref), squadToastTypeModule (copy), var7 (ref), var1 (ref), roduxSquadsModule (copy), var3 (ref), eventNamesModule (copy), cryoModule (copy), squadToastActionsAndStatesModule (copy), var18 (ref), experienceInviteVoteType (copy)
-		local userAction = lifecycleEvents:RegisterCallback(lifecycleEvents.ToastEvents.UserAction, notificationTypeEnum.SquadExperienceInvitation, function(p2)
-			-- upvalues: httpService (copy), var8 (copy), squadToastTypeModule (copy), var7 (copy), var1 (copy), roduxSquadsModule (copy), var3 (copy), eventNamesModule (copy), cryoModule (copy), squadToastActionsAndStatesModule (copy), var18 (copy), experienceInviteVoteType (copy)
-			if p2 and p2.userActionType == "click" and (p2.visualItem and p2.visualItem.actionEventParams) then
-				local actionEventParams = httpService:JSONDecode(p2.visualItem.actionEventParams)
-				local t = {
-					parentChannelId = var8,
-					experienceInviteId = actionEventParams.experienceInviteId,
-					toastType = squadToastTypeModule.ExperienceInvite
+	end, { UseSignalStateResult, UseMemoResult, UseResult2 })
+	ReactModule.useEffect(function() --[[ Line: 686 ]]
+		-- upvalues: LifecycleEvents (upval), NotificationTypeEnum (upval), HttpService (upval), UseCurrentSquadParentChannelIdModuleResult (copy), SquadToastTypeModule (upval), UseSignalStateResult (copy), FFlagUseSignalsForSquadExperienceInvite (upval), GetSquadExperienceInviteStoreModule (upval), UseDispatchResult (copy), RoduxSquadsModule (upval), UseContextResult (copy), EventNamesModule (upval), CryoModule (upval), SquadToastActionsAndStatesModule (upval), UseResult2 (copy), ExperienceInviteVoteType (upval)
+		local RegisterResult = LifecycleEvents:RegisterCallback(LifecycleEvents.ToastEvents.UserAction, NotificationTypeEnum.SquadExperienceInvitation, function(p2) --[[ Line: 690 ]]
+			-- upvalues: HttpService (upval), UseCurrentSquadParentChannelIdModuleResult (upval), SquadToastTypeModule (upval), UseSignalStateResult (upval), FFlagUseSignalsForSquadExperienceInvite (upval), GetSquadExperienceInviteStoreModule (upval), UseDispatchResult (upval), RoduxSquadsModule (upval), UseContextResult (upval), EventNamesModule (upval), CryoModule (upval), SquadToastActionsAndStatesModule (upval), UseResult2 (upval), ExperienceInviteVoteType (upval)
+			if p2 and p2.userActionType == "click" and p2.visualItem and p2.visualItem.actionEventParams then
+				local Data = HttpService:JSONDecode(p2.visualItem.actionEventParams)
+				local config = {
+					parentChannelId = UseCurrentSquadParentChannelIdModuleResult,
+					experienceInviteId = Data.experienceInviteId,
+					toastType = SquadToastTypeModule.ExperienceInvite
 				}
 				
-				if not var7 then
-					var1(roduxSquadsModule.Actions.CurrentExperienceInviteReceived(actionEventParams.experienceInviteId, actionEventParams.membershipEntityId, p2.notificationData.id, actionEventParams.isInviter))
+				if not UseSignalStateResult then
+					if FFlagUseSignalsForSquadExperienceInvite then
+						GetSquadExperienceInviteStoreModule(false).currentExperienceInviteReceived(Data.experienceInviteId, Data.membershipEntityId, p2.notificationData.id, Data.isInviter)
+					else
+						UseDispatchResult(RoduxSquadsModule.Actions.CurrentExperienceInviteReceived(Data.experienceInviteId, Data.membershipEntityId, p2.notificationData.id, Data.isInviter))
+					end
 				end
 				if p2.visualItem.eventName == "GroupUpSquadExperience" then
-					var3.fireSquadAnalytics(eventNamesModule.SquadToastActions, cryoModule.Dictionary.union(t, {
-						toastAction = squadToastActionsAndStatesModule.ExpInvAccept
+					UseContextResult.fireSquadAnalytics(EventNamesModule.SquadToastActions, CryoModule.Dictionary.union(config, {
+						toastAction = SquadToastActionsAndStatesModule.ExpInvAccept
 					}))
-					var18(actionEventParams.experienceInviteId, experienceInviteVoteType.Accept, actionEventParams.membershipEntityId)
+					UseResult2(Data.experienceInviteId, ExperienceInviteVoteType.Accept, Data.membershipEntityId)
 					
 					return
-				elseif p2.visualItem.eventName == "DismissSquadExperienceInvited" then
-					var3.fireSquadAnalytics(eventNamesModule.SquadToastActions, cryoModule.Dictionary.union(t, {
-						toastAction = squadToastActionsAndStatesModule.ExpInvDecline
+				end
+				if p2.visualItem.eventName == "DismissSquadExperienceInvited" then
+					UseContextResult.fireSquadAnalytics(EventNamesModule.SquadToastActions, CryoModule.Dictionary.union(config, {
+						toastAction = SquadToastActionsAndStatesModule.ExpInvDecline
 					}))
-					var18(actionEventParams.experienceInviteId, experienceInviteVoteType.Decline, actionEventParams.membershipEntityId)
+					UseResult2(Data.experienceInviteId, ExperienceInviteVoteType.Decline, Data.membershipEntityId)
 					
 					return
-				elseif p2.visualItem.eventName == "CancelSquadExperienceSpotsFilled" then
-					var3.fireSquadAnalytics(eventNamesModule.SquadToastActions, cryoModule.Dictionary.union(t, {
-						toastAction = squadToastActionsAndStatesModule.ExpInvCancel
+				end
+				if p2.visualItem.eventName == "CancelSquadExperienceSpotsFilled" then
+					UseContextResult.fireSquadAnalytics(EventNamesModule.SquadToastActions, CryoModule.Dictionary.union(config, {
+						toastAction = SquadToastActionsAndStatesModule.ExpInvCancel
 					}))
-					var18(actionEventParams.experienceInviteId, experienceInviteVoteType.Cancel, actionEventParams.membershipEntityId)
+					UseResult2(Data.experienceInviteId, ExperienceInviteVoteType.Cancel, Data.membershipEntityId)
 				end
 			end
 		end)
 		
-		return function()
-			-- upvalues: userAction (ref)
-			userAction()
+		return function() --[[ Line: 767 ]]
+			-- upvalues: RegisterResult (copy)
+			RegisterResult()
 		end
 	end, {
-		var7,
-		var8,
-		var1,
-		var3.fireSquadAnalytics,
-		var18
+		UseSignalStateResult,
+		UseCurrentSquadParentChannelIdModuleResult,
+		UseDispatchResult,
+		UseContextResult.fireSquadAnalytics,
+		UseResult2
 	})
-	reactModule.useEffect(function()
-		-- upvalues: lifecycleEvents (copy), notificationTypeEnum (copy), httpService (copy), var3 (ref), eventNamesModule (copy)
-		local display = lifecycleEvents:RegisterCallback(lifecycleEvents.ToastEvents.Display, notificationTypeEnum.SquadExperienceInvitation, function(p2)
-			-- upvalues: httpService (copy), var3 (copy), eventNamesModule (copy)
-			local actionEventParams = p2 and (p2.state and (p2.state.visualItems and (p2.state.visualItems.button and (p2.state.visualItems.button[1] and p2.state.visualItems.button[1].actionEventParams))))
+	ReactModule.useEffect(function() --[[ Line: 779 ]]
+		-- upvalues: LifecycleEvents (upval), NotificationTypeEnum (upval), HttpService (upval), UseContextResult (copy), EventNamesModule (upval)
+		local RegisterResult = LifecycleEvents:RegisterCallback(LifecycleEvents.ToastEvents.Display, NotificationTypeEnum.SquadExperienceInvitation, function(p2) --[[ Line: 783 ]]
+			-- upvalues: HttpService (upval), UseContextResult (upval), EventNamesModule (upval)
+			local ActionEventParams = p2 and (p2.state and (p2.state.visualItems and (p2.state.visualItems.button and (p2.state.visualItems.button[1] and p2.state.visualItems.button[1].actionEventParams))))
 			
-			if actionEventParams then
-				var3.fireSquadAnalytics(eventNamesModule.SquadExperienceInviteImpression, {
-					experienceInviteId = httpService:JSONDecode(actionEventParams).experienceInviteId,
+			if ActionEventParams then
+				UseContextResult.fireSquadAnalytics(EventNamesModule.SquadExperienceInviteImpression, {
+					experienceInviteId = HttpService:JSONDecode(ActionEventParams).experienceInviteId,
 					notificationId = p2.id,
 					clientTimestamp = os.time()
 				})
 			end
 		end)
 		
-		return function()
-			-- upvalues: display (ref)
-			display()
+		return function() --[[ Line: 803 ]]
+			-- upvalues: RegisterResult (copy)
+			RegisterResult()
 		end
-	end, { var3.fireSquadAnalytics })
-	reactModule.useEffect(function()
-		-- upvalues: soundManager (copy), sounds (copy), lifecycleEvents (copy), notificationTypeEnum (copy)
-		local var20 = function(p2)
-			-- upvalues: soundManager (copy), sounds (copy)
+	end, { UseContextResult.fireSquadAnalytics })
+	ReactModule.useEffect(function() --[[ Line: 809 ]]
+		-- upvalues: SoundManager (upval), Sounds (upval), LifecycleEvents (upval), NotificationTypeEnum (upval)
+		local function v95(p2) --[[ Line: 810 ]]
+			-- upvalues: SoundManager (upval), Sounds (upval)
 			if p2.currentState == "invited" then
-				soundManager:PlaySound(sounds.PartyToast.Name)
+				SoundManager:PlaySound(Sounds.PartyToast.Name)
 			end
 		end
 		
-		local display = lifecycleEvents:RegisterCallback(lifecycleEvents.ToastEvents.Display, notificationTypeEnum.SquadExperienceInvitation, var20)
-		local update = lifecycleEvents:RegisterCallback(lifecycleEvents.ToastEvents.Update, notificationTypeEnum.SquadExperienceInvitation, var20)
+		local RegisterResult = LifecycleEvents:RegisterCallback(LifecycleEvents.ToastEvents.Display, NotificationTypeEnum.SquadExperienceInvitation, v95)
+		local RegisterResult1 = LifecycleEvents:RegisterCallback(LifecycleEvents.ToastEvents.Update, NotificationTypeEnum.SquadExperienceInvitation, v95)
 		
-		return function()
-			-- upvalues: display (ref), update (ref)
-			display()
-			update()
+		return function() --[[ Line: 828 ]]
+			-- upvalues: RegisterResult (copy), RegisterResult1 (copy)
+			RegisterResult()
+			RegisterResult1()
 		end
 	end, {})
 	

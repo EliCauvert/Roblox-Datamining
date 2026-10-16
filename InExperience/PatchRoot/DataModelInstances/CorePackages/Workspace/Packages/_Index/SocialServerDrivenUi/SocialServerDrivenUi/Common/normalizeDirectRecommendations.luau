@@ -1,40 +1,40 @@
-﻿local parent = script:FindFirstAncestor("SocialServerDrivenUi").Parent
-local _ = require(parent.PYMKCarousel)
-local contextType = require(parent.DataHydration.FriendsRecommendations).Enums.ContextType
-local recommendationType = require(parent.HomeStore).FriendRecommendations.RecommendationType
+﻿local Parent = script:FindFirstAncestor("SocialServerDrivenUi").Parent
+local _ = require(Parent.PYMKCarousel)
+local ContextType = require(Parent.DataHydration.FriendsRecommendations).Enums.ContextType
+local RecommendationType = require(Parent.HomeStore).FriendRecommendations.RecommendationType
 
-return function(p1, p2)
-	-- upvalues: recommendationType (ref), contextType (ref)
-	local t = {}
+return function(List, p1) --[[ Line: 21 | Named "normalizeDirectRecommendations" ]]
+	-- upvalues: RecommendationType (copy), ContextType (copy)
+	local List1 = {}
 	
-	for i, v in p1 do
-		local id = p2[v.id]
+	for _, value in List do
+		local v1 = p1[value.id]
 		
-		if id ~= nil then
-			if id.recommendationType == recommendationType.User then
-				local mutualFriendsCount = id.mutualFriendsCount or 0
-				table.insert(t, {
-					id = v.id,
-					rank = v.rank,
-					contextType = if id.contextType == contextType.MutualFriends and mutualFriendsCount > 0 then contextType.MutualFriends elseif id.contextType == contextType.Frequents then contextType.Frequents else contextType.None,
-					mutualFriendsCount = mutualFriendsCount,
-					hasIncomingFriendRequest = v.hasPendingFriendRequest
+		if v1 ~= nil then
+			if v1.recommendationType == RecommendationType.User then
+				local MutualFriendsCount = v1.mutualFriendsCount or 0
+				table.insert(List1, {
+					id = value.id,
+					rank = value.rank,
+					contextType = if v1.contextType == ContextType.MutualFriends and MutualFriendsCount > 0 then ContextType.MutualFriends elseif v1.contextType == ContextType.Frequents then ContextType.Frequents else ContextType.None,
+					mutualFriendsCount = MutualFriendsCount,
+					hasIncomingFriendRequest = value.hasPendingFriendRequest
 				})
-			elseif id.recommendationType == recommendationType.Contact then
-				table.insert(t, {
+			elseif v1.recommendationType == RecommendationType.Contact then
+				table.insert(List1, {
 					mutualFriendsCount = 0,
-					id = v.id,
-					rank = v.rank,
-					contextType = contextType.Contacts,
-					hasIncomingFriendRequest = v.hasPendingFriendRequest,
-					entityDisplayName = id.contactName,
+					id = value.id,
+					rank = value.rank,
+					contextType = ContextType.Contacts,
+					hasIncomingFriendRequest = value.hasPendingFriendRequest,
+					entityDisplayName = v1.contactName,
 					thumbnailEntities = {
-						avatarImageUrl = id.avatarThumbnailUrl,
-						headshotImageUrl = id.headshotThumbnailUrl
+						avatarImageUrl = v1.avatarThumbnailUrl,
+						headshotImageUrl = v1.headshotThumbnailUrl
 					}
 				})
 			end
 		end
 	end
-	return t
+	return List1
 end

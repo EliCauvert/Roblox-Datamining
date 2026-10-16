@@ -1,7 +1,7 @@
-﻿local reactModule = require(script:FindFirstAncestor("AppChat").Parent.React)
-local createTelemetryEmitterModule = require(script.Parent.createTelemetryEmitter)
+﻿local ReactModule = require(script:FindFirstAncestor("AppChat").Parent.React)
+local CreateTelemetryEmitterModule = require(script.Parent.createTelemetryEmitter)
 
-return function(value)
-	-- upvalues: reactModule (ref), createTelemetryEmitterModule (ref)
-	return createTelemetryEmitterModule(reactModule.useContext(value))
+return function(p1) --[[ Line: 7 | Named "useTelemetry" ]]
+	-- upvalues: ReactModule (copy), CreateTelemetryEmitterModule (copy)
+	return CreateTelemetryEmitterModule((ReactModule.useContext(p1)))
 end

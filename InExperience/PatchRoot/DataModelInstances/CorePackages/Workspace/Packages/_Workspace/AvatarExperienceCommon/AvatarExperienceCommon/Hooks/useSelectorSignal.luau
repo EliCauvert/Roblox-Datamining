@@ -1,36 +1,36 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local useStore = require(parent.RoactUtils).Hooks.RoactRodux.useStore
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local UseStoreFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useStore
 
-local var1 = function(p1, p2)
+local function v3(p1, p2): boolean --[[ Line: 16 ]]
 	return p1 == p2
 end
 
-return function(value, p1)
-	-- upvalues: useStore (ref), reactModule (ref), signalsModule (ref), var1 (ref)
-	local var2 = useStore()
-	local state = var2:getState()
-	local var3, var4 = reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), state (ref)
-		return signalsModule.createSignal(state)
+return function(Callback, p1) --[[ Line: 20 | Named "useSelectorSignal" ]]
+	-- upvalues: UseStoreFunction (copy), ReactModule (copy), SignalsModule (copy), v3 (copy)
+	local UseStoreResult = UseStoreFunction()
+	local State = UseStoreResult:getState()
+	local UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 24 ]]
+		-- upvalues: SignalsModule (upval), State (copy)
+		return SignalsModule.createSignal(State)
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), var4 (ref)
-		var4(var2:getState())
-		local changedConnection = var2.changed:connect(var4)
+	ReactModule.useEffect(function() --[[ Line: 28 ]]
+		-- upvalues: UseStoreResult (copy), UseMemoResult2 (copy)
+		UseMemoResult2((UseStoreResult:getState()))
+		local ChangedConnection = UseStoreResult.changed:connect(UseMemoResult2)
 		
-		return function()
-			-- upvalues: changedConnection (ref)
-			changedConnection:disconnect()
+		return function() --[[ Line: 32 ]]
+			-- upvalues: ChangedConnection (copy)
+			ChangedConnection:disconnect()
 		end
-	end, { var2 })
+	end, { UseStoreResult })
 	
-	return reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), value (ref), var3 (ref), p1 (ref), var1 (copy)
-		return signalsModule.createComputed(function(p2)
-			-- upvalues: value (copy), var3 (copy)
-			return value(var3(p2))
-		end, p1 or var1)
-	end, { var3, value, p1 })
+	return ReactModule.useMemo(function() --[[ Line: 37 ]]
+		-- upvalues: SignalsModule (upval), Callback (copy), UseMemoResult (copy), p1 (copy), v3 (upval)
+		return SignalsModule.createComputed(function(p2) --[[ Line: 38 ]]
+			-- upvalues: Callback (upval), UseMemoResult (upval)
+			return Callback(UseMemoResult(p2))
+		end, p1 or v3)
+	end, { UseMemoResult, Callback, p1 })
 end

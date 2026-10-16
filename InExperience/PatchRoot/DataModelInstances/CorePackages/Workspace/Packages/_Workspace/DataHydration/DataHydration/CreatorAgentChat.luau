@@ -1,4 +1,4 @@
-﻿local typesModule = require(script.types)
+﻿local TypesModule = require(script.types)
 
 return {
 	FFlagBuildAgentAdCampaignCard = require(script.FFlagBuildAgentAdCampaignCard),
@@ -11,8 +11,9 @@ return {
 	StudioAskUserTool = require(script.StudioAskUserTool),
 	StudioProposePlanTool = require(script.StudioProposePlanTool),
 	SubagentTasks = require(script.SubagentTasks),
-	SubagentTaskStatus = typesModule.SubagentTaskStatus,
-	SubagentTaskCategory = typesModule.SubagentTaskCategory,
+	SubagentTaskStatus = TypesModule.SubagentTaskStatus,
+	SubagentTaskCategory = TypesModule.SubagentTaskCategory,
+	RequestFailureKind = TypesModule.RequestFailureKind,
 	StudioClientLogsTool = require(script.StudioClientLogsTool),
 	StudioClientDataModelTools = require(script.StudioClientDataModelTools),
 	StudioManageDevProductTool = require(script.StudioManageDevProductTool),

@@ -1,46 +1,34 @@
-﻿local function _(p1)
-	return p1:gsub("^%s*(.-)%s*$", "%1")
+﻿local function _(Text: string): string --[[ Line: 13 | Named "trimWhitespace" ]]
+	return (Text:gsub("^%s*(.-)%s*$", "%1"))
 end
 
-return function(p1)
-	local var1
-	local isLoading = p1.ttsState == "loading"
-	local isError = p1.ttsState == "error"
-	local var2 = p1.text:gsub("^%s*(.-)%s*$", "%1")
-	local var3 = utf8.len(var2) or 0
-	var2 = var2 ~= p1.lastGeneratedText
-	local var4 = isError and (p1.errorReason == "moderated" and not var2)
-	local text = utf8.len(p1.text) or 0
-	local var5 = p1.maxChars < text
-	local var6 = var3 == 0 and ((p1.hasGenerated or p1.lastSavedText ~= "") and var2)
-	local var7 = var3 > 0 and (not var5 and var2:match("%w") ~= nil)
-	local var8 = isError and not var4
+return function(p1) --[[ Line: 52 | Named "computeVoiceButtonState" ]]
+	local IsLoading = p1.ttsState == "loading"
+	local IsError = p1.ttsState == "error"
+	local SS = p1.text:gsub("^%s*(.-)%s*$", "%1")
+	local Length: number = utf8.len(SS) or 0
+	local IsNotSSMatch = SS ~= p1.lastGeneratedText
+	local NoIsNotSSMatch: boolean = IsError and (p1.errorReason == "moderated" and not IsNotSSMatch)
+	local NoIsNotSSMatch1: boolean = IsError and (p1.errorReason == "tooManyDigits" and not IsNotSSMatch)
+	local Length1: number = utf8.len(p1.text) or 0
+	local IsMaxCharsBelow = p1.maxChars < Length1
+	local HasGenerated = p1.hasGenerated or p1.lastSavedText ~= ""
+	local IsNotSSMatch1: boolean = Length == 0 and (HasGenerated and IsNotSSMatch)
+	local HasW = SS:match("%w") ~= nil
+	local HasW1: boolean = Length > 0 and (not IsMaxCharsBelow and HasW)
+	local NoNoIsNotSSMatch1: boolean = IsError and (not NoIsNotSSMatch and not NoIsNotSSMatch1)
+	local IsNotLastGeneratedTextMatch = p1.lastGeneratedText ~= p1.lastSavedText
+	local v1: boolean = p1.hasGenerated and (p1.startTime or 0) ~= (p1.lastSavedStartTime or 0)
+	local v2: boolean = p1.hasGenerated and (p1.voiceId or 0) ~= (p1.lastSavedVoiceId or 0)
 	
-	if not var6 then
-		var1 = var7
-		
-		if var1 then
-			if not var2 then
-				var1 = var8 and not isLoading
-			end
-		end
-		local hasGenerated = p1.hasGenerated or p1.hasCleared
-		local var9 = p1.lastGeneratedText ~= p1.lastSavedText
-		local var10 = p1.hasGenerated and (p1.startTime or 0) ~= (p1.lastSavedStartTime or 0)
-		local var11 = p1.hasGenerated and (p1.voiceId or 0) ~= (p1.lastSavedVoiceId or 0)
-		local var12 = hasGenerated
-		
-		if var12 and not var9 and not var10 then
-			var12 = var11 and (not var2 and (not isLoading and not isError))
-		end
-		return {
-			isGenerating = isLoading,
-			isError = isError,
-			charCount = text,
-			isOverLimit = var5,
-			canGenerate = var1,
-			isModerated = var4,
-			showSave = var12
-		}
-	end
+	return {
+		isGenerating = IsLoading,
+		isError = IsError,
+		charCount = Length1,
+		isOverLimit = IsMaxCharsBelow,
+		canGenerate = if IsNotSSMatch1 then if IsNotSSMatch then not IsLoading else NoNoIsNotSSMatch1 and not IsLoading else HasW1 and (if IsNotSSMatch then not IsLoading else NoNoIsNotSSMatch1 and not IsLoading),
+		isModerated = NoIsNotSSMatch,
+		isTooManyDigits = NoIsNotSSMatch1,
+		showSave = (p1.hasGenerated or p1.hasCleared) and (if IsNotLastGeneratedTextMatch or v1 then not IsNotSSMatch and (not IsLoading and not IsError) else v2 and (not IsNotSSMatch and (not IsLoading and not IsError)))
+	}
 end

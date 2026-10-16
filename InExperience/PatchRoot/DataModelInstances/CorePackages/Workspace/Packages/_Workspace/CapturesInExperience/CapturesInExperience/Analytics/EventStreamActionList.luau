@@ -1,421 +1,421 @@
-﻿local parent = script.Parent.Parent.Parent
-local dashModule = require(parent.Dash)
-local enums = require(parent.SocialLuaAnalytics).Analytics.Enums
-local contexts = enums.Contexts
-local eventTypes = enums.EventTypes
-local eventNamesModule = require(script.Parent.EventNames)
+﻿local Parent = script.Parent.Parent.Parent
+local DashModule = require(Parent.Dash)
+local Enums = require(Parent.SocialLuaAnalytics).Analytics.Enums
+local Contexts = Enums.Contexts
+local EventTypes = Enums.EventTypes
+local EventNamesModule = require(script.Parent.EventNames)
 
 return {
-	[eventNamesModule.CapturesActivatedChrome] = {
-		additionalInfo = { btn = eventNamesModule.CapturesActivatedChrome },
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+	[EventNamesModule.CapturesActivatedChrome] = {
+		additionalInfo = { btn = EventNamesModule.CapturesActivatedChrome },
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturesActivatedInGameMenu] = {
-		additionalInfo = { btn = eventNamesModule.CapturesActivatedInGameMenu },
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+	[EventNamesModule.CapturesActivatedInGameMenu] = {
+		additionalInfo = { btn = EventNamesModule.CapturesActivatedInGameMenu },
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturesCarouselClosed] = {
-		additionalInfo = { btn = eventNamesModule.CapturesCarouselClosed },
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+	[EventNamesModule.CapturesCarouselClosed] = {
+		additionalInfo = { btn = EventNamesModule.CapturesCarouselClosed },
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturesCarouselClosedByKeyboard] = {
-		additionalInfo = { btn = eventNamesModule.CapturesCarouselClosedByKeyboard },
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+	[EventNamesModule.CapturesCarouselClosedByKeyboard] = {
+		additionalInfo = { btn = EventNamesModule.CapturesCarouselClosedByKeyboard },
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturesCarouselNavigated] = {
-		additionalInfo = { btn = eventNamesModule.CapturesCarouselNavigated },
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick,
-		formatRulesForAdditionalInfo = { direction = dashModule.identity }
+	[EventNamesModule.CapturesCarouselNavigated] = {
+		additionalInfo = { btn = EventNamesModule.CapturesCarouselNavigated },
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick,
+		formatRulesForAdditionalInfo = { direction = DashModule.identity }
 	},
-	[eventNamesModule.CapturesCarouselNavigatedByKeyboard] = {
+	[EventNamesModule.CapturesCarouselNavigatedByKeyboard] = {
 		additionalInfo = {
-			btn = eventNamesModule.CapturesCarouselNavigatedByKeyboard
+			btn = EventNamesModule.CapturesCarouselNavigatedByKeyboard
 		},
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick,
-		formatRulesForAdditionalInfo = { direction = dashModule.identity }
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick,
+		formatRulesForAdditionalInfo = { direction = DashModule.identity }
 	},
-	[eventNamesModule.CapturesCarouselOpened] = {
-		additionalInfo = { btn = eventNamesModule.CapturesCarouselOpened },
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+	[EventNamesModule.CapturesCarouselOpened] = {
+		additionalInfo = { btn = EventNamesModule.CapturesCarouselOpened },
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturesCarouselSaveToExternalStorageActivated] = {
+	[EventNamesModule.CapturesCarouselSaveToExternalStorageActivated] = {
 		additionalInfo = {
-			btn = eventNamesModule.CapturesCarouselSaveToExternalStorageActivated
+			btn = EventNamesModule.CapturesCarouselSaveToExternalStorageActivated
 		},
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturesCarouselScrolled] = {
-		additionalInfo = { btn = eventNamesModule.CapturesCarouselScrolled },
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick,
-		formatRulesForAdditionalInfo = { direction = dashModule.identity }
+	[EventNamesModule.CapturesCarouselScrolled] = {
+		additionalInfo = { btn = EventNamesModule.CapturesCarouselScrolled },
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick,
+		formatRulesForAdditionalInfo = { direction = DashModule.identity }
 	},
-	[eventNamesModule.CapturesCarouselVideoExpanded] = {
-		additionalInfo = { btn = eventNamesModule.CapturesCarouselVideoExpanded },
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+	[EventNamesModule.CapturesCarouselVideoExpanded] = {
+		additionalInfo = { btn = EventNamesModule.CapturesCarouselVideoExpanded },
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturesCarouselVideoMuteButtonActivated] = {
+	[EventNamesModule.CapturesCarouselVideoMuteButtonActivated] = {
 		additionalInfo = {
-			btn = eventNamesModule.CapturesCarouselVideoMuteButtonActivated
+			btn = EventNamesModule.CapturesCarouselVideoMuteButtonActivated
 		},
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturesCarouselVideoSaveToExternalStorageActivated] = {
+	[EventNamesModule.CapturesCarouselVideoSaveToExternalStorageActivated] = {
 		additionalInfo = {
-			btn = eventNamesModule.CapturesCarouselVideoSaveToExternalStorageActivated
+			btn = EventNamesModule.CapturesCarouselVideoSaveToExternalStorageActivated
 		},
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturesCarouselVideoShareActivated] = {
+	[EventNamesModule.CapturesCarouselVideoShareActivated] = {
 		additionalInfo = {
-			btn = eventNamesModule.CapturesCarouselVideoShareActivated
+			btn = EventNamesModule.CapturesCarouselVideoShareActivated
 		},
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturesCarouselVideoShrank] = {
-		additionalInfo = { btn = eventNamesModule.CapturesCarouselVideoShrank },
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+	[EventNamesModule.CapturesCarouselVideoShrank] = {
+		additionalInfo = { btn = EventNamesModule.CapturesCarouselVideoShrank },
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturesCarouselShareActivated] = {
-		additionalInfo = { btn = eventNamesModule.CapturesCarouselShareActivated },
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+	[EventNamesModule.CapturesCarouselShareActivated] = {
+		additionalInfo = { btn = EventNamesModule.CapturesCarouselShareActivated },
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturesCoreGuiDisabled] = {
-		additionalInfo = { btn = eventNamesModule.CapturesCoreGuiDisabled },
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick,
-		formatRulesForAdditionalInfo = { allTypeChanged = dashModule.identity }
+	[EventNamesModule.CapturesCoreGuiDisabled] = {
+		additionalInfo = { btn = EventNamesModule.CapturesCoreGuiDisabled },
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick,
+		formatRulesForAdditionalInfo = { allTypeChanged = DashModule.identity }
 	},
-	[eventNamesModule.CapturesCoreGuiEnabled] = {
-		additionalInfo = { btn = eventNamesModule.CapturesCoreGuiEnabled },
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick,
-		formatRulesForAdditionalInfo = { allTypeChanged = dashModule.identity }
+	[EventNamesModule.CapturesCoreGuiEnabled] = {
+		additionalInfo = { btn = EventNamesModule.CapturesCoreGuiEnabled },
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick,
+		formatRulesForAdditionalInfo = { allTypeChanged = DashModule.identity }
 	},
-	[eventNamesModule.CapturesDeactivatedChrome] = {
-		additionalInfo = { btn = eventNamesModule.CapturesDeactivatedChrome },
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+	[EventNamesModule.CapturesDeactivatedChrome] = {
+		additionalInfo = { btn = EventNamesModule.CapturesDeactivatedChrome },
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturesDeactivatedInGameMenu] = {
-		additionalInfo = { btn = eventNamesModule.CapturesDeactivatedInGameMenu },
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+	[EventNamesModule.CapturesDeactivatedInGameMenu] = {
+		additionalInfo = { btn = EventNamesModule.CapturesDeactivatedInGameMenu },
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturesDeleteActivatedInCaptureManager] = {
+	[EventNamesModule.CapturesDeleteActivatedInCaptureManager] = {
 		additionalInfo = {
-			btn = eventNamesModule.CapturesDeleteActivatedInCaptureManager
+			btn = EventNamesModule.CapturesDeleteActivatedInCaptureManager
 		},
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturesDeleteActivatedInCarousel] = {
-		additionalInfo = { btn = eventNamesModule.CapturesDeleteActivatedInCarousel },
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+	[EventNamesModule.CapturesDeleteActivatedInCarousel] = {
+		additionalInfo = { btn = EventNamesModule.CapturesDeleteActivatedInCarousel },
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturesVideoDeleteActivatedInCarousel] = {
+	[EventNamesModule.CapturesVideoDeleteActivatedInCarousel] = {
 		additionalInfo = {
-			btn = eventNamesModule.CapturesVideoDeleteActivatedInCarousel
+			btn = EventNamesModule.CapturesVideoDeleteActivatedInCarousel
 		},
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturesDeleteWarningModalCancelPressed] = {
+	[EventNamesModule.CapturesDeleteWarningModalCancelPressed] = {
 		additionalInfo = {
-			btn = eventNamesModule.CapturesDeleteWarningModalCancelPressed
+			btn = EventNamesModule.CapturesDeleteWarningModalCancelPressed
 		},
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturesDeleteWarningModalDeletePressed] = {
+	[EventNamesModule.CapturesDeleteWarningModalDeletePressed] = {
 		additionalInfo = {
-			btn = eventNamesModule.CapturesDeleteWarningModalDeletePressed
+			btn = EventNamesModule.CapturesDeleteWarningModalDeletePressed
 		},
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturesDeleteWarningModalOptedOut] = {
+	[EventNamesModule.CapturesDeleteWarningModalOptedOut] = {
 		additionalInfo = {
-			btn = eventNamesModule.CapturesDeleteWarningModalOptedOut
+			btn = EventNamesModule.CapturesDeleteWarningModalOptedOut
 		},
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturesDesktopHotkeyCaptureTriggered] = {
+	[EventNamesModule.CapturesDesktopHotkeyCaptureTriggered] = {
 		additionalInfo = {
-			btn = eventNamesModule.CapturesDesktopHotkeyCaptureTriggered
+			btn = EventNamesModule.CapturesDesktopHotkeyCaptureTriggered
 		},
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturesEntrypointActivated] = {
-		additionalInfo = { btn = eventNamesModule.CapturesEntrypointActivated },
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+	[EventNamesModule.CapturesEntrypointActivated] = {
+		additionalInfo = { btn = EventNamesModule.CapturesEntrypointActivated },
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturesEntrypointVideoActivated] = {
-		additionalInfo = { btn = eventNamesModule.CapturesEntrypointVideoActivated },
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+	[EventNamesModule.CapturesEntrypointVideoActivated] = {
+		additionalInfo = { btn = EventNamesModule.CapturesEntrypointVideoActivated },
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturesEntrypointVideoDeactivated] = {
+	[EventNamesModule.CapturesEntrypointVideoDeactivated] = {
 		additionalInfo = {
-			btn = eventNamesModule.CapturesEntrypointVideoDeactivated
+			btn = EventNamesModule.CapturesEntrypointVideoDeactivated
 		},
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturesEntrypointVideoDeactivatedAutomatically] = {
+	[EventNamesModule.CapturesEntrypointVideoDeactivatedAutomatically] = {
 		additionalInfo = {
-			btn = eventNamesModule.CapturesEntrypointVideoDeactivatedAutomatically
+			btn = EventNamesModule.CapturesEntrypointVideoDeactivatedAutomatically
 		},
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturesEntrypointDragged] = {
-		additionalInfo = { btn = eventNamesModule.CapturesEntrypointDragged },
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+	[EventNamesModule.CapturesEntrypointDragged] = {
+		additionalInfo = { btn = EventNamesModule.CapturesEntrypointDragged },
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturesEntrypointHotkeyTooltipActivated] = {
+	[EventNamesModule.CapturesEntrypointHotkeyTooltipActivated] = {
 		additionalInfo = {
-			btn = eventNamesModule.CapturesEntrypointHotkeyTooltipActivated
+			btn = EventNamesModule.CapturesEntrypointHotkeyTooltipActivated
 		},
-		context = contexts.Captures,
-		eventType = eventTypes.UserSeen
+		context = Contexts.Captures,
+		eventType = EventTypes.UserSeen
 	},
-	[eventNamesModule.CapturesEntrypointViewed] = {
-		additionalInfo = { btn = eventNamesModule.CapturesEntrypointViewed },
-		context = contexts.Captures,
-		eventType = eventTypes.UserSeen
+	[EventNamesModule.CapturesEntrypointViewed] = {
+		additionalInfo = { btn = EventNamesModule.CapturesEntrypointViewed },
+		context = Contexts.Captures,
+		eventType = EventTypes.UserSeen
 	},
-	[eventNamesModule.CapturesManagerBulkSaveToExternalStorageActivated] = {
+	[EventNamesModule.CapturesManagerBulkSaveToExternalStorageActivated] = {
 		additionalInfo = {
-			btn = eventNamesModule.CapturesManagerBulkSaveToExternalStorageActivated
+			btn = EventNamesModule.CapturesManagerBulkSaveToExternalStorageActivated
 		},
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturesManagerShareVideoActivated] = {
+	[EventNamesModule.CapturesManagerShareVideoActivated] = {
 		additionalInfo = {
-			btn = eventNamesModule.CapturesManagerShareVideoActivated
+			btn = EventNamesModule.CapturesManagerShareVideoActivated
 		},
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturesManagerItemActivated] = {
-		additionalInfo = { btn = eventNamesModule.CapturesManagerItemActivated },
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+	[EventNamesModule.CapturesManagerItemActivated] = {
+		additionalInfo = { btn = EventNamesModule.CapturesManagerItemActivated },
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturesManagerOpened] = {
-		additionalInfo = { btn = eventNamesModule.CapturesManagerOpened },
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+	[EventNamesModule.CapturesManagerOpened] = {
+		additionalInfo = { btn = EventNamesModule.CapturesManagerOpened },
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturesManagerSaveToExternalStorageActivated] = {
+	[EventNamesModule.CapturesManagerSaveToExternalStorageActivated] = {
 		additionalInfo = {
-			btn = eventNamesModule.CapturesManagerSaveToExternalStorageActivated
+			btn = EventNamesModule.CapturesManagerSaveToExternalStorageActivated
 		},
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturesManagerSelectAllActivated] = {
-		additionalInfo = { btn = eventNamesModule.CapturesManagerSelectAllActivated },
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+	[EventNamesModule.CapturesManagerSelectAllActivated] = {
+		additionalInfo = { btn = EventNamesModule.CapturesManagerSelectAllActivated },
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturesManagerShareActivated] = {
-		additionalInfo = { btn = eventNamesModule.CapturesManagerShareActivated },
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+	[EventNamesModule.CapturesManagerShareActivated] = {
+		additionalInfo = { btn = EventNamesModule.CapturesManagerShareActivated },
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturesMigratedLegacyVideoRecordActivated] = {
+	[EventNamesModule.CapturesMigratedLegacyVideoRecordActivated] = {
 		additionalInfo = {
-			btn = eventNamesModule.CapturesMigratedLegacyVideoRecordActivated
+			btn = EventNamesModule.CapturesMigratedLegacyVideoRecordActivated
 		},
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturesMigratedLegacyVideoRecordDeactivated] = {
+	[EventNamesModule.CapturesMigratedLegacyVideoRecordDeactivated] = {
 		additionalInfo = {
-			btn = eventNamesModule.CapturesMigratedLegacyVideoRecordDeactivated
+			btn = EventNamesModule.CapturesMigratedLegacyVideoRecordDeactivated
 		},
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturesPageOpenedInGameMenu] = {
-		context = contexts.Captures,
-		eventType = eventTypes.PageLoad
+	[EventNamesModule.CapturesPageOpenedInGameMenu] = {
+		context = Contexts.Captures,
+		eventType = EventTypes.PageLoad
 	},
-	[eventNamesModule.CapturesSavedToDeviceToastOpenButtonActivated] = {
+	[EventNamesModule.CapturesSavedToDeviceToastOpenButtonActivated] = {
 		additionalInfo = {
-			btn = eventNamesModule.CapturesSavedToDeviceToastOpenButtonActivated
+			btn = EventNamesModule.CapturesSavedToDeviceToastOpenButtonActivated
 		},
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturesSavePermissionModalAllowPressed] = {
+	[EventNamesModule.CapturesSavePermissionModalAllowPressed] = {
 		additionalInfo = {
-			btn = eventNamesModule.CapturesSavePermissionModalAllowPressed
+			btn = EventNamesModule.CapturesSavePermissionModalAllowPressed
 		},
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturesSavePermissionModalCancelPressed] = {
+	[EventNamesModule.CapturesSavePermissionModalCancelPressed] = {
 		additionalInfo = {
-			btn = eventNamesModule.CapturesSavePermissionModalCancelPressed
+			btn = EventNamesModule.CapturesSavePermissionModalCancelPressed
 		},
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturesShareFromNonStandardServer] = {
+	[EventNamesModule.CapturesShareFromNonStandardServer] = {
 		additionalInfo = {
-			btn = eventNamesModule.CapturesShareFromNonStandardServer
+			btn = EventNamesModule.CapturesShareFromNonStandardServer
 		},
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturesShareToastButtonActivated] = {
-		additionalInfo = { btn = eventNamesModule.CapturesShareToastButtonActivated },
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+	[EventNamesModule.CapturesShareToastButtonActivated] = {
+		additionalInfo = { btn = EventNamesModule.CapturesShareToastButtonActivated },
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturesVideoShareToastButtonActivated] = {
+	[EventNamesModule.CapturesVideoShareToastButtonActivated] = {
 		additionalInfo = {
-			btn = eventNamesModule.CapturesVideoShareToastButtonActivated
+			btn = EventNamesModule.CapturesVideoShareToastButtonActivated
 		},
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturesShareToastViewed] = {
-		additionalInfo = { btn = eventNamesModule.CapturesShareToastViewed },
-		context = contexts.Captures,
-		eventType = eventTypes.UserSeen
+	[EventNamesModule.CapturesShareToastViewed] = {
+		additionalInfo = { btn = EventNamesModule.CapturesShareToastViewed },
+		context = Contexts.Captures,
+		eventType = EventTypes.UserSeen
 	},
-	[eventNamesModule.CapturesVideoShareToastViewed] = {
-		additionalInfo = { btn = eventNamesModule.CapturesVideoShareToastViewed },
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+	[EventNamesModule.CapturesVideoShareToastViewed] = {
+		additionalInfo = { btn = EventNamesModule.CapturesVideoShareToastViewed },
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturesShowMoreInGameMenu] = {
-		additionalInfo = { btn = eventNamesModule.CapturesShowMoreInGameMenu },
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+	[EventNamesModule.CapturesShowMoreInGameMenu] = {
+		additionalInfo = { btn = EventNamesModule.CapturesShowMoreInGameMenu },
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturesVideoCaptureDevApiStarted] = {
-		additionalInfo = { btn = eventNamesModule.CapturesVideoCaptureDevApiStarted },
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+	[EventNamesModule.CapturesVideoCaptureDevApiStarted] = {
+		additionalInfo = { btn = EventNamesModule.CapturesVideoCaptureDevApiStarted },
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturesVideoCaptureDevApiEnded] = {
-		additionalInfo = { btn = eventNamesModule.CapturesVideoCaptureDevApiEnded },
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+	[EventNamesModule.CapturesVideoCaptureDevApiEnded] = {
+		additionalInfo = { btn = EventNamesModule.CapturesVideoCaptureDevApiEnded },
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturesViewToastButtonActivated] = {
-		additionalInfo = { btn = eventNamesModule.CapturesViewToastButtonActivated },
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+	[EventNamesModule.CapturesViewToastButtonActivated] = {
+		additionalInfo = { btn = EventNamesModule.CapturesViewToastButtonActivated },
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.SaveCapturesPromptVideoAccepted] = {
-		additionalInfo = { btn = eventNamesModule.SaveCapturesPromptVideoAccepted },
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+	[EventNamesModule.SaveCapturesPromptVideoAccepted] = {
+		additionalInfo = { btn = EventNamesModule.SaveCapturesPromptVideoAccepted },
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.SaveCapturesPromptVideoPrompted] = {
-		additionalInfo = { btn = eventNamesModule.SaveCapturesPromptVideoPrompted },
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+	[EventNamesModule.SaveCapturesPromptVideoPrompted] = {
+		additionalInfo = { btn = EventNamesModule.SaveCapturesPromptVideoPrompted },
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.SaveCapturesPromptVideoRejected] = {
-		additionalInfo = { btn = eventNamesModule.SaveCapturesPromptVideoRejected },
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+	[EventNamesModule.SaveCapturesPromptVideoRejected] = {
+		additionalInfo = { btn = EventNamesModule.SaveCapturesPromptVideoRejected },
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.SaveCapturesPromptAccepted] = {
-		additionalInfo = { btn = eventNamesModule.SaveCapturesPromptAccepted },
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick,
+	[EventNamesModule.SaveCapturesPromptAccepted] = {
+		additionalInfo = { btn = EventNamesModule.SaveCapturesPromptAccepted },
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick,
 		formatRulesForAdditionalInfo = {
-			savedCaptures = dashModule.identity,
-			totalCaptures = dashModule.identity
+			savedCaptures = DashModule.identity,
+			totalCaptures = DashModule.identity
 		}
 	},
-	[eventNamesModule.SaveCapturesPromptRejected] = {
-		additionalInfo = { btn = eventNamesModule.SaveCapturesPromptRejected },
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+	[EventNamesModule.SaveCapturesPromptRejected] = {
+		additionalInfo = { btn = EventNamesModule.SaveCapturesPromptRejected },
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.SaveCapturesPromptViewed] = {
-		additionalInfo = { btn = eventNamesModule.SaveCapturesPromptViewed },
-		context = contexts.Captures,
-		eventType = eventTypes.UserSeen
+	[EventNamesModule.SaveCapturesPromptViewed] = {
+		additionalInfo = { btn = EventNamesModule.SaveCapturesPromptViewed },
+		context = Contexts.Captures,
+		eventType = EventTypes.UserSeen
 	},
-	[eventNamesModule.ShareCaptureGenerateLinkFailed] = {
-		additionalInfo = { btn = eventNamesModule.ShareCaptureGenerateLinkFailed },
-		context = contexts.Captures,
-		eventType = eventTypes.GenerateLinkFailed,
-		formatRulesForAdditionalInfo = { httpError = dashModule.identity }
+	[EventNamesModule.ShareCaptureGenerateLinkFailed] = {
+		additionalInfo = { btn = EventNamesModule.ShareCaptureGenerateLinkFailed },
+		context = Contexts.Captures,
+		eventType = EventTypes.GenerateLinkFailed,
+		formatRulesForAdditionalInfo = { httpError = DashModule.identity }
 	},
-	[eventNamesModule.ShareCapturePromptAccepted] = {
-		additionalInfo = { btn = eventNamesModule.ShareCapturePromptAccepted },
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+	[EventNamesModule.ShareCapturePromptAccepted] = {
+		additionalInfo = { btn = EventNamesModule.ShareCapturePromptAccepted },
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.ShareCapturePromptRejected] = {
-		additionalInfo = { btn = eventNamesModule.ShareCapturePromptRejected },
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+	[EventNamesModule.ShareCapturePromptRejected] = {
+		additionalInfo = { btn = EventNamesModule.ShareCapturePromptRejected },
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.ShareCapturePromptVideoAccepted] = {
-		additionalInfo = { btn = eventNamesModule.ShareCapturePromptVideoAccepted },
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+	[EventNamesModule.ShareCapturePromptVideoAccepted] = {
+		additionalInfo = { btn = EventNamesModule.ShareCapturePromptVideoAccepted },
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.ShareCapturePromptVideoPrompted] = {
-		additionalInfo = { btn = eventNamesModule.ShareCapturePromptVideoPrompted },
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+	[EventNamesModule.ShareCapturePromptVideoPrompted] = {
+		additionalInfo = { btn = EventNamesModule.ShareCapturePromptVideoPrompted },
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.ShareCapturePromptVideoRejected] = {
-		additionalInfo = { btn = eventNamesModule.ShareCapturePromptVideoRejected },
-		context = contexts.Captures,
-		eventType = eventTypes.UserSeen
+	[EventNamesModule.ShareCapturePromptVideoRejected] = {
+		additionalInfo = { btn = EventNamesModule.ShareCapturePromptVideoRejected },
+		context = Contexts.Captures,
+		eventType = EventTypes.UserSeen
 	},
-	[eventNamesModule.ShareCapturePromptViewed] = {
-		additionalInfo = { btn = eventNamesModule.ShareCapturePromptViewed },
-		context = contexts.Captures,
-		eventType = eventTypes.UserSeen
+	[EventNamesModule.ShareCapturePromptViewed] = {
+		additionalInfo = { btn = EventNamesModule.ShareCapturePromptViewed },
+		context = Contexts.Captures,
+		eventType = EventTypes.UserSeen
 	},
-	[eventNamesModule.CapturePermissionsPromptAccepted] = {
-		additionalInfo = { btn = eventNamesModule.CapturePermissionsPromptAccepted },
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+	[EventNamesModule.CapturePermissionsPromptAccepted] = {
+		additionalInfo = { btn = EventNamesModule.CapturePermissionsPromptAccepted },
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturePermissionsPromptRejected] = {
-		additionalInfo = { btn = eventNamesModule.CapturePermissionsPromptRejected },
-		context = contexts.Captures,
-		eventType = eventTypes.ButtonClick
+	[EventNamesModule.CapturePermissionsPromptRejected] = {
+		additionalInfo = { btn = EventNamesModule.CapturePermissionsPromptRejected },
+		context = Contexts.Captures,
+		eventType = EventTypes.ButtonClick
 	},
-	[eventNamesModule.CapturePermissionsPromptViewed] = {
-		additionalInfo = { btn = eventNamesModule.CapturePermissionsPromptViewed },
-		context = contexts.Captures,
-		eventType = eventTypes.UserSeen
+	[EventNamesModule.CapturePermissionsPromptViewed] = {
+		additionalInfo = { btn = EventNamesModule.CapturePermissionsPromptViewed },
+		context = Contexts.Captures,
+		eventType = EventTypes.UserSeen
 	}
 }

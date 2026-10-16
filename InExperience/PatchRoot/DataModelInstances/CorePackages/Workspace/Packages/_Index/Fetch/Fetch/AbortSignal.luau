@@ -1,51 +1,51 @@
-﻿local error = require(script.Parent.Parent.LuauPolyfill).Error
-local t = {}
-t.__index = t
+﻿local Error1 = require(script.Parent.Parent.LuauPolyfill).Error
+local Module = {}
+Module.__index = Module
 
-function t.new()
-	-- upvalues: t (ref), error (ref)
-	local t_1 = {}
-	setmetatable(t_1, t)
-	t_1.aborted = false
-	t_1.reason = error.new("Undefined Error")
-	t_1._signal = Instance.new("BindableEvent")
+function Module.new() --[[ Line: 20 ]]
+	-- upvalues: Module (copy), Error1 (copy)
+	local t = {}
+	setmetatable(t, Module)
+	t.aborted = false
+	t.reason = Error1.new("Undefined Error")
+	t._signal = Instance.new("BindableEvent")
 	
-	return t_1
+	return t
 end
 
-function t.abort(p1)
-	-- upvalues: t (ref), error (ref)
-	local var1 = t.new()
-	var1.reason = p1 or error.new("Signal Aborted")
+function Module.abort(p1) --[[ Line: 32 ]]
+	-- upvalues: Module (copy), Error1 (copy)
+	local NewModule = Module.new()
+	NewModule.reason = p1 or Error1.new("Signal Aborted")
 	
-	return var1
+	return NewModule
 end
 
-function t.timeout(p1)
-	-- upvalues: t (ref), error (ref)
-	local var1 = t.new()
-	var1.reason = error.new("TimeoutError")
-	task.delay(p1 / 1000, function()
-		-- upvalues: var1 (ref)
-		var1:fire()
+function Module.timeout(p1: number) --[[ Line: 38 ]]
+	-- upvalues: Module (copy), Error1 (copy)
+	local NewModule = Module.new()
+	NewModule.reason = Error1.new("TimeoutError")
+	task.delay(p1 / 1000, function() --[[ Line: 41 ]]
+		-- upvalues: NewModule (copy)
+		NewModule:fire()
 	end)
 	
-	return var1
+	return NewModule
 end
 
-function t:throwIfAborted()
+function Module:throwIfAborted() --[[ Line: 47 ]]
 	if self.aborted then
 		error(self.reason)
 	end
 end
 
-function t:connect(p1)
-	return self._signal.Event:Connect(p1)
+function Module:connect(Callback) --[[ Line: 55 ]]
+	return self._signal.Event:Connect(Callback)
 end
 
-function t:fire()
+function Module:fire() --[[ Line: 60 ]]
 	self.aborted = true
 	self._signal:Fire()
 end
 
-return { AbortSignal = t }
+return { AbortSignal = Module }

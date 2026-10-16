@@ -1,135 +1,133 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local parent = avatarExperienceCatalog.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local tutilsModule = require(parent.tutils)
-local cryoModule = require(parent.Cryo)
-local sharedFlagsModule = require(parent.SharedFlags)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useTokens = foundationModule.Hooks.useTokens
-local avatarExperienceCommonModule = require(parent.AvatarExperienceCommon)
-local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
-local getTryOnItemReducerKey = avatarExperienceCommonModule.Utils.getTryOnItemReducerKey
-local constants = avatarExperienceCommonModule.Constants
-local checkoutRowItemCardModule = require(avatarExperienceCatalog.Components.Checkout.CheckoutRowItemCard)
-local checkoutErrorBannerModule = require(avatarExperienceCatalog.Components.Checkout.CheckoutErrorBanner)
-local useTimedOptionsFtuxModule = require(avatarExperienceCatalog.Hooks.useTimedOptionsFtux)
-local fFlagAXMISWithBlackbird = sharedFlagsModule.FFlagAXMISWithBlackbird
-local fFlagAXDurables2Option = avatarExperienceFlagsModule.FFlagAXDurables2Option
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local Parent = AvatarExperienceCatalog.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local TutilsModule = require(Parent.tutils)
+local CryoModule = require(Parent.Cryo)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local AvatarExperienceCommonModule = require(Parent.AvatarExperienceCommon)
+local GetTryOnItemReducerKeyFunction = AvatarExperienceCommonModule.Utils.getTryOnItemReducerKey
+local Constants = AvatarExperienceCommonModule.Constants
+local CheckoutRowItemCardModule = require(AvatarExperienceCatalog.Components.Checkout.CheckoutRowItemCard)
+local CheckoutErrorBannerModule = require(AvatarExperienceCatalog.Components.Checkout.CheckoutErrorBanner)
+local UseTimedOptionsFtuxModule = require(AvatarExperienceCatalog.Hooks.useTimedOptionsFtux)
+local FFlagAXMISWithBlackbird = require(Parent.SharedFlags).FFlagAXMISWithBlackbird
+local FFlagAXDurables2Option = require(Parent.AvatarExperienceFlags).FFlagAXDurables2Option
 
-local function filterCartItems(p1, p2)
-	-- upvalues: getTryOnItemReducerKey (ref), reactModule (ref), checkoutRowItemCardModule (ref), cryoModule (ref)
-	local t = {}
-	local var1 = 0
+local function filterCartItems(CartItems, Callback) --[[ Line: 30 ]]
+	-- upvalues: GetTryOnItemReducerKeyFunction (copy), ReactModule (copy), CheckoutRowItemCardModule (copy), CryoModule (copy)
+	local Elements = {}
+	local LayoutOrder = 0
 	
-	for i, v in p1 do
-		if p2(v) then
-			var1 += 1
-			t[`{getTryOnItemReducerKey(v.itemId, v.itemType)}`] = reactModule.createElement(checkoutRowItemCardModule, cryoModule.Dictionary.join(v, { LayoutOrder = var1 }))
+	for _, cartItem in CartItems do
+		if Callback(cartItem) then
+			LayoutOrder += 1
+			Elements[`{GetTryOnItemReducerKeyFunction(cartItem.itemId, cartItem.itemType)}`] = ReactModule.createElement(CheckoutRowItemCardModule, CryoModule.Dictionary.join(cartItem, { LayoutOrder = LayoutOrder }))
 		end
 	end
-	return t
+	return Elements
 end
 
-return reactModule.memo(function(p3)
-	-- upvalues: fFlagAXDurables2Option (ref), useTokens (ref), useLocalization (ref), useTimedOptionsFtuxModule (ref), reactModule (ref), filterCartItems (ref), constants (ref), tutilsModule (ref), foundationModule (ref), fFlagAXMISWithBlackbird (ref), checkoutErrorBannerModule (ref)
-	local var2 = if fFlagAXDurables2Option then useTokens() else nil
-	local var3 = useLocalization({
+return ReactModule.memo(function(p1) --[[ Line: 50 | Named "CheckoutPageBody" ]]
+	-- upvalues: FFlagAXDurables2Option (copy), UseTokensFunction (copy), UseLocalizationFunction (copy), UseTimedOptionsFtuxModule (copy), ReactModule (copy), filterCartItems (copy), Constants (copy), TutilsModule (copy), FoundationModule (copy), FFlagAXMISWithBlackbird (copy), CheckoutErrorBannerModule (copy)
+	local UseTokensResult = if FFlagAXDurables2Option then UseTokensFunction() else nil
+	local UseLocalizationResult = UseLocalizationFunction({
 		makeupTitle = "Feature.Catalog.Label.Makeup",
 		makeupCartDescriptionText = "Feature.Catalog.Label.MakeupCartDescriptionText",
-		rentalFtuxText = if fFlagAXDurables2Option then "Feature.Catalog.Title.RentalFtuxText" else nil
+		rentalFtuxText = if FFlagAXDurables2Option then "Feature.Catalog.Title.RentalFtuxText" else nil
 	})
-	local var4 = nil
-	local _ = nil
-	local var5 = nil
+	local v1 = nil
+	local UseStateResult2 = nil
+	local UseResult = nil
 	
-	if fFlagAXDurables2Option then
-		local var6 = useTimedOptionsFtuxModule()
-		local var7, var8 = reactModule.useState(var6.shouldShow2OptionToolTipInCheckoutPage())
-		var4 = var7
-		local var9 = var8
-		var5 = reactModule.useCallback(function()
-			-- upvalues: var6 (ref), var9 (write)
-			var6.hide2OptionToolTipInCheckoutPage()
-			var9(false)
-		end, { var6 })
+	if FFlagAXDurables2Option then
+		local UseTimedOptionsFtuxModuleResult = UseTimedOptionsFtuxModule()
+		v1, UseStateResult2 = ReactModule.useState(UseTimedOptionsFtuxModuleResult.shouldShow2OptionToolTipInCheckoutPage())
+		UseResult = ReactModule.useCallback(function() --[[ Line: 64 ]]
+			-- upvalues: UseTimedOptionsFtuxModuleResult (copy), UseStateResult2 (ref)
+			UseTimedOptionsFtuxModuleResult.hide2OptionToolTipInCheckoutPage()
+			UseStateResult2(false)
+		end, { UseTimedOptionsFtuxModuleResult })
 	end
-	local var10 = reactModule.useMemo(function()
-		-- upvalues: filterCartItems (copy), p3 (ref), constants (copy)
-		return filterCartItems(p3.cartItems, function(p4)
-			-- upvalues: constants (copy)
-			return constants.MAKEUP_LOOK_ASSET_TYPES[p4.itemSubType] ~= nil
-		end)
-	end, { p3.cartItems })
-	local var11 = reactModule.useMemo(function()
-		-- upvalues: filterCartItems (copy), p3 (ref), constants (copy)
-		return filterCartItems(p3.cartItems, function(p4)
-			-- upvalues: constants (copy)
-			return not constants.MAKEUP_LOOK_ASSET_TYPES[p4.itemSubType]
-		end)
-	end, { p3.cartItems })
-	local var12 = tutilsModule.fieldCount(var10) > 0
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 72 ]]
+		-- upvalues: filterCartItems (upval), p1 (copy), Constants (upval)
+		return (filterCartItems(p1.cartItems, function(p2): boolean --[[ Line: 73 ]]
+			-- upvalues: Constants (upval)
+			return Constants.MAKEUP_LOOK_ASSET_TYPES[p2.itemSubType] ~= nil
+		end))
+	end, { p1.cartItems })
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 78 ]]
+		-- upvalues: filterCartItems (upval), p1 (copy), Constants (upval)
+		return (filterCartItems(p1.cartItems, function(p2): boolean --[[ Line: 79 ]]
+			-- upvalues: Constants (upval)
+			return not Constants.MAKEUP_LOOK_ASSET_TYPES[p2.itemSubType]
+		end))
+	end, { p1.cartItems })
+	local IsFieldCountResultAbove = TutilsModule.fieldCount(UseMemoResult) > 0
+	local IsFieldCountResultAbove1 = TutilsModule.fieldCount(UseMemoResult1) > 0
+	local UseMemoResult2 = ReactModule.useMemo(function(): boolean --[[ Line: 86 ]]
+		-- upvalues: p1 (copy)
+		for _, cartItem in p1.cartItems do
+			if cartItem.timedOptions and (not cartItem.isOwned or cartItem.expirationTime ~= nil) then
+				return true
+			end
+		end
+		return false
+	end, { p1.cartItems })
 	
-	return reactModule.createElement(foundationModule.View, {
-		tag = if fFlagAXMISWithBlackbird then "col auto-y" else "col",
-		Size = if fFlagAXMISWithBlackbird then UDim2.fromScale(1, 0) else UDim2.fromScale(1, 1)
+	return ReactModule.createElement(FoundationModule.View, {
+		tag = if FFlagAXMISWithBlackbird then "col auto-y" else "col",
+		Size = if FFlagAXMISWithBlackbird then UDim2.fromScale(1, 0) else UDim2.fromScale(1, 1)
 	}, {
-		CheckoutErrorBannerView = if p3.erroredItemCount and p3.erroredItemCount > 0 then reactModule.createElement(foundationModule.View, {
+		CheckoutErrorBannerView = if p1.erroredItemCount and p1.erroredItemCount > 0 then ReactModule.createElement(FoundationModule.View, {
 			tag = "auto-xy padding-x-xxlarge padding-y-medium",
 			LayoutOrder = 1,
 			Size = UDim2.fromScale(1, 0)
 		}, {
-			CheckoutErrorBanner = reactModule.createElement(checkoutErrorBannerModule, { erroredItemCount = p3.erroredItemCount })
+			CheckoutErrorBanner = ReactModule.createElement(CheckoutErrorBannerModule, { erroredItemCount = p1.erroredItemCount })
 		}) else nil,
-		Tooltip2OptionBanner = if fFlagAXDurables2Option and var4 and reactModule.useMemo(function()
-			-- upvalues: p3 (ref)
-			for i, v in p3.cartItems do
-				if v.timedOptions and (not v.isOwned or v.expirationTime ~= nil) then
-					return true
-				end
-			end
-			return false
-		end, { p3.cartItems }) then reactModule.createElement(foundationModule.View, {
+		Tooltip2OptionBanner = if FFlagAXDurables2Option and v1 and UseMemoResult2 then ReactModule.createElement(FoundationModule.View, {
 			tag = "size-full-0 auto-y padding-x-xxlarge",
 			AnchorPoint = Vector2.new(0, 1),
-			Position = UDim2.new(0, 0, 1, -var2.Size.Size_1800)
+			Position = UDim2.new(0, 0, 1, -UseTokensResult.Size.Size_1800)
 		}, {
-			Banner = reactModule.createElement(foundationModule.View, {
+			Banner = ReactModule.createElement(FoundationModule.View, {
 				tag = "row align-y-center gap-medium size-full-0 auto-y padding-left-xlarge padding-right-xsmall padding-y-xsmall radius-medium bg-surface-300"
 			}, {
-				Description = reactModule.createElement(foundationModule.Text, {
+				Description = ReactModule.createElement(FoundationModule.Text, {
 					tag = "fill auto-y text-caption-large text-align-x-left text-truncate-end content-emphasis",
 					LayoutOrder = 1,
-					Text = var3.rentalFtuxText
+					Text = UseLocalizationResult.rentalFtuxText
 				}),
-				DismissIcon = reactModule.createElement(foundationModule.IconButton, {
+				DismissIcon = ReactModule.createElement(FoundationModule.IconButton, {
 					icon = "icons/navigation/close",
 					LayoutOrder = 2,
 					testId = "Checkout2OptionFtuxDismiss",
-					size = foundationModule.Enums.IconSize.Small,
-					onActivated = var5
+					size = FoundationModule.Enums.IconSize.Small,
+					onActivated = UseResult
 				})
 			})
 		}) else nil,
-		AllItemsView = if tutilsModule.fieldCount(var11) > 0 then reactModule.createElement(foundationModule.View, {
+		AllItemsView = if IsFieldCountResultAbove1 then ReactModule.createElement(FoundationModule.View, {
 			tag = "col auto-y gap-medium padding-x-xxlarge padding-y-medium",
 			LayoutOrder = 2,
 			Size = UDim2.fromScale(1, 0)
-		}, var11) else nil,
-		MakeupText = if var12 then reactModule.createElement(foundationModule.Text, {
+		}, UseMemoResult1) else nil,
+		MakeupText = if IsFieldCountResultAbove then ReactModule.createElement(FoundationModule.Text, {
 			tag = "auto-xy padding-x-xxlarge padding-top-medium text-title-medium content-emphasis",
 			LayoutOrder = 3,
-			Text = var3.makeupTitle .. " (" .. tutilsModule.fieldCount(var10) .. "/8)"
+			Text = UseLocalizationResult.makeupTitle .. " (" .. TutilsModule.fieldCount(UseMemoResult) .. "/8)"
 		}) else nil,
-		MakeupDescriptionText = if var12 then reactModule.createElement(foundationModule.Text, {
+		MakeupDescriptionText = if IsFieldCountResultAbove then ReactModule.createElement(FoundationModule.Text, {
 			tag = "auto-xy padding-x-xxlarge padding-top-xxsmall padding-bottom-medium text-body-small",
 			LayoutOrder = 4,
-			Text = var3.makeupCartDescriptionText
+			Text = UseLocalizationResult.makeupCartDescriptionText
 		}) else nil,
-		MakeupItemsView = if var12 then reactModule.createElement(foundationModule.View, {
+		MakeupItemsView = if IsFieldCountResultAbove then ReactModule.createElement(FoundationModule.View, {
 			tag = "col auto-y gap-medium padding-x-xxlarge padding-y-medium",
 			LayoutOrder = 5,
 			Size = UDim2.fromScale(1, 0)
-		}, var10) else nil
+		}, UseMemoResult) else nil
 	})
-end, tutilsModule.deepEqual)
+end, TutilsModule.deepEqual)

@@ -1,13 +1,12 @@
-﻿local var1 = function(p1)
+﻿local function v0(p1) --[[ Line: 3 ]]
 	return p1
 end
 
-return function(p1, p2)
-	-- upvalues: var1 (ref)
-	p2 = p2 or var1
-	
-	for i, v in p1 do
-		if not p2(v, i) then
+return function(List, p1): boolean --[[ Line: 17 | Named "all" ]]
+	-- upvalues: v0 (copy)
+	local Callback = p1 or v0
+	for i, value in List do
+		if not Callback(value, i) then
 			return false
 		end
 	end

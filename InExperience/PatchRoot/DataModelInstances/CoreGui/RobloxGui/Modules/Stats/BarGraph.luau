@@ -1,33 +1,33 @@
-﻿local statsUtilsModule = require(game:GetService("CoreGui").RobloxGui.Modules.Stats.StatsUtils)
-local t = {}
-t.__index = t
+﻿local StatsUtilsModule = require(game:GetService("CoreGui").RobloxGui.Modules.Stats.StatsUtils)
+local BarGraphModule = {}
+BarGraphModule.__index = BarGraphModule
 
-function t.new(p1)
-	-- upvalues: t (ref)
-	local pSLineFrame = {}
-	setmetatable(pSLineFrame, t)
-	pSLineFrame._barFrame = Instance.new("Frame")
-	pSLineFrame._barFrame.Name = "PS_BarFrame"
-	pSLineFrame._barFrame.BackgroundTransparency = 1
-	pSLineFrame._lineFrame = Instance.new("Frame")
-	pSLineFrame._lineFrame.Name = "PS_LineFrame"
-	pSLineFrame._lineFrame.BackgroundTransparency = 1
-	pSLineFrame._showExtras = p1
-	pSLineFrame._values = {}
-	pSLineFrame._bars = {}
-	pSLineFrame._average = 0
-	pSLineFrame._target = 0
+function BarGraphModule.new(_showExtras) --[[ Line: 23 ]]
+	-- upvalues: BarGraphModule (copy)
+	local t = {}
+	setmetatable(t, BarGraphModule)
+	t._barFrame = Instance.new("Frame")
+	t._barFrame.Name = "PS_BarFrame"
+	t._barFrame.BackgroundTransparency = 1
+	t._lineFrame = Instance.new("Frame")
+	t._lineFrame.Name = "PS_LineFrame"
+	t._lineFrame.BackgroundTransparency = 1
+	t._showExtras = _showExtras
+	t._values = {}
+	t._bars = {}
+	t._average = 0
+	t._target = 0
 	
-	if pSLineFrame._showExtras then
-		pSLineFrame:_addGraphTarget()
-		pSLineFrame:_addGraphAverage()
+	if t._showExtras then
+		t:_addGraphTarget()
+		t:_addGraphAverage()
 	end
-	return pSLineFrame
+	return t
 end
 
-function t:SetZIndex(p1)
-	self._barFrame.ZIndex = p1
-	self._lineFrame.ZIndex = p1 + 1
+function BarGraphModule:SetZIndex(ZIndex: number) --[[ Line: 53 ]]
+	self._barFrame.ZIndex = ZIndex
+	self._lineFrame.ZIndex = ZIndex + 1
 	
 	if self._showExtras then
 		self._targetLine.ZIndex = self._lineFrame.ZIndex
@@ -35,127 +35,129 @@ function t:SetZIndex(p1)
 	end
 end
 
-function t:PlaceInParent(p1, p2, p3)
-	self._barFrame.Position = p3
-	self._barFrame.Size = p2
-	self._barFrame.Parent = p1
-	self._lineFrame.Position = p3
-	self._lineFrame.Size = p2
-	self._lineFrame.Parent = p1
+function BarGraphModule:PlaceInParent(Parent, Size, Position) --[[ Line: 62 ]]
+	self._barFrame.Position = Position
+	self._barFrame.Size = Size
+	self._barFrame.Parent = Parent
+	self._lineFrame.Position = Position
+	self._lineFrame.Size = Size
+	self._lineFrame.Parent = Parent
 end
 
-function t:SetAxisMax(b)
-	self._axisMax = b
+function BarGraphModule:SetAxisMax(_axisMax) --[[ Line: 71 ]]
+	self._axisMax = _axisMax
 end
 
-function t:SetValues(p1)
-	self._values = p1
+function BarGraphModule:SetValues(_values) --[[ Line: 75 ]]
+	self._values = _values
 end
 
-function t:SetAverage(p1)
-	self._average = p1
+function BarGraphModule:SetAverage(_average) --[[ Line: 79 ]]
+	self._average = _average
 end
 
-function t:SetTarget(p1)
-	self._target = p1
+function BarGraphModule:SetTarget(_target) --[[ Line: 83 ]]
+	self._target = _target
 	self:_moveGraphTarget()
 end
 
-function t:_updateBarCount(p1)
-	local t = {}
-	local barsCount = #self._bars
+function BarGraphModule:_updateBarCount(CountValues) --[[ Line: 90 ]]
+	local List = {}
+	local CountBars = #self._bars
 	
-	for i = 1, barsCount do
-		if i <= barsCount then
-			table.insert(t, self._bars[i])
+	for i = 1, CountBars do
+		if i <= CountBars then
+			table.insert(List, self._bars[i])
 		else
 			self._bars[i].Destroy()
 		end
 	end
-	for i_1 = barsCount + 1, p1 do
-		table.insert(t, self:_makeNthBar(i_1))
+	for i1 = CountBars + 1, CountValues do
+		table.insert(List, self:_makeNthBar(i1))
 	end
-	self._bars = t
+	self._bars = List
 end
 
-function t:Render()
-	local valuesCount = #self._values
-	self:_updateBarCount(valuesCount)
+function BarGraphModule:Render() --[[ Line: 113 ]]
+	local CountValues = #self._values
+	self:_updateBarCount(CountValues)
 	
-	for i, v in ipairs(self._values) do
-		self:_updateBar(i, v, valuesCount)
+	for i, value in ipairs(self._values) do
+		self:_updateBar(i, value, CountValues)
 	end
 	if self._showExtras then
 		self:_moveGraphAverage()
 	end
 end
 
-function t:_addGraphTarget()
-	-- upvalues: statsUtilsModule (ref)
-	local targetLine = Instance.new("ImageLabel")
-	targetLine.Name = "TargetLine"
-	targetLine.Size = UDim2.new(1, 0, 0, statsUtilsModule.GraphTargetLineInnerThickness)
-	targetLine.Image = "rbxasset://textures/ui/PerformanceStats/TargetLine.png"
-	targetLine.BackgroundTransparency = 1
-	targetLine.Parent = self._lineFrame
-	targetLine.ZIndex = self._lineFrame.ZIndex
-	targetLine.BorderSizePixel = 0
-	targetLine.Changed:connect(function()
-		-- upvalues: self (ref)
+function BarGraphModule:_addGraphTarget() --[[ Line: 128 ]]
+	-- upvalues: StatsUtilsModule (copy)
+	local TargetLine = Instance.new("ImageLabel")
+	TargetLine.Name = "TargetLine"
+	TargetLine.Size = UDim2.new(1, 0, 0, StatsUtilsModule.GraphTargetLineInnerThickness)
+	TargetLine.Image = "rbxasset://textures/ui/PerformanceStats/TargetLine.png"
+	TargetLine.BackgroundTransparency = 1
+	TargetLine.Parent = self._lineFrame
+	TargetLine.ZIndex = self._lineFrame.ZIndex
+	TargetLine.BorderSizePixel = 0
+	TargetLine.Changed:connect(function() --[[ Line: 140 ]]
+		-- upvalues: self (copy)
 		self:_updateTargetLineImageSize()
 	end)
-	self._targetLine = targetLine
+	self._targetLine = TargetLine
 	self:_updateTargetLineImageSize()
 end
 
-function t:_updateTargetLineImageSize()
+function BarGraphModule:_updateTargetLineImageSize() --[[ Line: 148 ]]
 	self._targetLine.ImageRectSize = self._targetLine.AbsoluteSize
 end
 
-function t:_addGraphAverage()
-	-- upvalues: statsUtilsModule (ref)
-	local averageLine = Instance.new("Frame")
-	averageLine.Name = "AverageLine"
-	averageLine.Size = UDim2.new(1, 0, 0, statsUtilsModule.GraphAverageLineInnerThickness)
-	averageLine.Parent = self._lineFrame
-	averageLine.ZIndex = self._lineFrame.ZIndex
-	statsUtilsModule.StyleAverageLine(averageLine)
-	self._averageLine = averageLine
+function BarGraphModule:_addGraphAverage() --[[ Line: 152 ]]
+	-- upvalues: StatsUtilsModule (copy)
+	local AverageLine = Instance.new("Frame")
+	AverageLine.Name = "AverageLine"
+	AverageLine.Size = UDim2.new(1, 0, 0, StatsUtilsModule.GraphAverageLineInnerThickness)
+	AverageLine.Parent = self._lineFrame
+	AverageLine.ZIndex = self._lineFrame.ZIndex
+	StatsUtilsModule.StyleAverageLine(AverageLine)
+	self._averageLine = AverageLine
 end
 
-function t:_moveGraphTarget()
-	-- upvalues: statsUtilsModule (ref)
-	if self._targetLine == nil then
+function BarGraphModule:_moveGraphTarget() --[[ Line: 166 ]]
+	-- upvalues: StatsUtilsModule (copy)
+	if self._targetLine ~= nil then
+		self._targetLine.Position = UDim2.new(0, 0, (self._axisMax - self._target) / self._axisMax, -StatsUtilsModule.GraphTargetLineInnerThickness / 2)
+		
 		return
 	end
-	self._targetLine.Position = UDim2.new(0, 0, (self._axisMax - self._target) / self._axisMax, -statsUtilsModule.GraphTargetLineInnerThickness / 2)
 end
 
-function t:_moveGraphAverage()
-	-- upvalues: statsUtilsModule (ref)
-	if self._averageLine == nil then
+function BarGraphModule:_moveGraphAverage() --[[ Line: 177 ]]
+	-- upvalues: StatsUtilsModule (copy)
+	if self._averageLine ~= nil then
+		self._averageLine.Position = UDim2.new(0, 0, (self._axisMax - math.min(self._average, self._axisMax)) / self._axisMax, -StatsUtilsModule.GraphAverageLineTotalThickness / 2)
+		
 		return
 	end
-	self._averageLine.Position = UDim2.new(0, 0, (self._axisMax - math.min(self._average, self._axisMax)) / self._axisMax, -statsUtilsModule.GraphAverageLineTotalThickness / 2)
 end
 
-function t:_makeNthBar(p2)
-	local frame = Instance.new("Frame")
-	frame.Name = string.format("Bar_%d", p2 - 1)
-	frame.Parent = self._barFrame
-	frame.ZIndex = self._barFrame.ZIndex
-	frame.BorderSizePixel = 0
+function BarGraphModule:_makeNthBar(p1: number) --[[ Line: 192 ]]
+	local Frame = Instance.new("Frame")
+	Frame.Name = string.format("Bar_%d", p1 - 1)
+	Frame.Parent = self._barFrame
+	Frame.ZIndex = self._barFrame.ZIndex
+	Frame.BorderSizePixel = 0
 	
-	return frame
+	return Frame
 end
 
-function t:_updateBar(p2, p3, p4)
-	-- upvalues: statsUtilsModule (ref)
-	local var1 = self._bars[p2]
-	local maxValue = math.max(0, math.min(p3, self._axisMax))
-	var1.Position = UDim2.new((p2 - 1) / p4, 0, (self._axisMax - maxValue) / self._axisMax, 0)
-	var1.Size = UDim2.new(1 / p4, 0, maxValue / self._axisMax, 0)
-	var1.BackgroundColor3 = statsUtilsModule.GetColorForValue(p3, self._target)
+function BarGraphModule:_updateBar(p1: number, p2: number, CountValues: number) --[[ Line: 203 ]]
+	-- upvalues: StatsUtilsModule (copy)
+	local Bar = self._bars[p1]
+	local Largest = math.max(0, (math.min(p2, self._axisMax)))
+	Bar.Position = UDim2.new((p1 - 1) / CountValues, 0, (self._axisMax - Largest) / self._axisMax, 0)
+	Bar.Size = UDim2.new(1 / CountValues, 0, Largest / self._axisMax, 0)
+	Bar.BackgroundColor3 = StatsUtilsModule.GetColorForValue(p2, self._target)
 end
 
-return t
+return BarGraphModule

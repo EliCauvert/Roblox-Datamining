@@ -1,31 +1,31 @@
-﻿local friendsLanding = script:FindFirstAncestor("FriendsLanding")
-local parent = friendsLanding.Parent
-local dependenciesModule = require(friendsLanding.dependencies)
-local headerBar = dependenciesModule.UIBlox.App.Bar.HeaderBar
-local useDesignTokens = require(parent.Style).useDesignTokens
-local getFFlagFixConnectTabSearchBarHeight = dependenciesModule.GetFFlagFixConnectTabSearchBarHeight
-local reactModule = require(parent.React)
+﻿local FriendsLanding = script:FindFirstAncestor("FriendsLanding")
+local Parent = FriendsLanding.Parent
+local DependenciesModule = require(FriendsLanding.dependencies)
+local HeaderBar = DependenciesModule.UIBlox.App.Bar.HeaderBar
+local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
+local GetFFlagFixConnectTabSearchBarHeightFunction = DependenciesModule.GetFFlagFixConnectTabSearchBarHeight
+local ReactModule = require(Parent.React)
 
-return function(p1)
-	-- upvalues: useDesignTokens (ref), reactModule (ref), headerBar (ref), getFFlagFixConnectTabSearchBarHeight (ref)
-	local size2400 = useDesignTokens().Size.Size_2400
+return function(p1) --[[ Line: 13 | Named "FriendsLandingHeaderBarPresentational" ]]
+	-- upvalues: UseDesignTokensFunction (copy), ReactModule (copy), HeaderBar (copy), GetFFlagFixConnectTabSearchBarHeightFunction (copy)
+	local Size2400 = UseDesignTokensFunction().Size.Size_2400
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		LayoutOrder = -1,
 		ZIndex = 2,
-		Size = UDim2.new(1, 0, 0, size2400)
+		Size = UDim2.new(1, 0, 0, Size2400)
 	}, {
-		headerBar = reactModule.createElement(headerBar, {
+		headerBar = ReactModule.createElement(HeaderBar, {
 			title = p1.title,
-			barHeight = size2400,
+			barHeight = Size2400,
 			renderLeft = p1.renderLeft,
 			renderCenter = p1.renderCenter,
 			renderRight = p1.renderRight,
 			isSecondary = p1.isSecondary,
 			shouldHideSecondaryLeftItem = p1.shouldHideSecondaryLeftItem,
-			paddingTop = if getFFlagFixConnectTabSearchBarHeight() then UDim.new(0, 0) else nil,
-			paddingBottom = if getFFlagFixConnectTabSearchBarHeight() then UDim.new(0, 0) else nil
+			paddingTop = if GetFFlagFixConnectTabSearchBarHeightFunction() then UDim.new(0, 0) else nil,
+			paddingBottom = if GetFFlagFixConnectTabSearchBarHeightFunction() then UDim.new(0, 0) else nil
 		})
 	})
 end

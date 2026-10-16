@@ -1,9 +1,9 @@
-﻿local parent = script:FindFirstAncestor("AuthCommon").Parent
-local url = require(parent.Http).Url
-local _ = require(parent.Http)
-local urlBuilder = require(parent.UrlBuilder).UrlBuilder
+﻿local Parent = script:FindFirstAncestor("AuthCommon").Parent
+local Url = require(Parent.Http).Url
+local _ = require(Parent.Http)
+local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
 
-return function(p1, p2)
-	-- upvalues: urlBuilder (ref), url (ref)
-	return p1(urlBuilder.new({ base = url.USERS_URL, path = `users/{p2}` })(), "GET")
+return function(Callback, p1) --[[ Line: 33 ]]
+	-- upvalues: UrlBuilder (copy), Url (copy)
+	return Callback(UrlBuilder.new({ base = Url.USERS_URL, path = `users/{p1}` })(), "GET")
 end

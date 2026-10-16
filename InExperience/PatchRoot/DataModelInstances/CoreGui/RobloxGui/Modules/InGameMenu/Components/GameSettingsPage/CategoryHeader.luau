@@ -1,31 +1,31 @@
-﻿local inGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
-local roact = inGameMenuDependenciesModule.Roact
-local t = inGameMenuDependenciesModule.t
-local parent = script.Parent.Parent.Parent
-local globalConfigModule = require(parent.GlobalConfig)
-local themedTextLabelModule = require(script.Parent.Parent.ThemedTextLabel)
-local withLocalizationModule = require(parent.Localization.withLocalization)
-local var1 = t.strictInterface({ LayoutOrder = t.integer, localizationKey = t.string })
+﻿local InGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
+local Roact = InGameMenuDependenciesModule.Roact
+local T = InGameMenuDependenciesModule.t
+local Parent = script.Parent.Parent.Parent
+local GlobalConfigModule = require(Parent.GlobalConfig)
+local ThemedTextLabelModule = require(script.Parent.Parent.ThemedTextLabel)
+local WithLocalizationModule = require(Parent.Localization.withLocalization)
+local StrictInterfaceResult = T.strictInterface({ LayoutOrder = T.integer, localizationKey = T.string })
 
-return function(p1)
-	-- upvalues: globalConfigModule (ref), var1 (ref), roact (ref), withLocalizationModule (ref), themedTextLabelModule (ref)
-	if globalConfigModule.propValidation then
-		assert(var1(p1))
+return function(Frame) --[[ Line: 20 ]]
+	-- upvalues: GlobalConfigModule (copy), StrictInterfaceResult (copy), Roact (copy), WithLocalizationModule (copy), ThemedTextLabelModule (copy)
+	if GlobalConfigModule.propValidation then
+		assert(StrictInterfaceResult(Frame))
 	end
-	return roact.createElement("Frame", {
+	return Roact.createElement("Frame", {
 		BackgroundTransparency = 1,
-		LayoutOrder = p1.LayoutOrder,
+		LayoutOrder = Frame.LayoutOrder,
 		Size = UDim2.new(1, 0, 0, 36)
 	}, {
-		Label = withLocalizationModule({ text = p1.localizationKey })(function(p2)
-			-- upvalues: roact (copy), themedTextLabelModule (copy)
-			return roact.createElement(themedTextLabelModule, {
+		Label = WithLocalizationModule({ text = Frame.localizationKey })(function(p1) --[[ Line: 32 ]]
+			-- upvalues: Roact (upval), ThemedTextLabelModule (upval)
+			return Roact.createElement(ThemedTextLabelModule, {
 				fontKey = "Footer",
 				themeKey = "TextEmphasis",
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Position = UDim2.new(0.5, 0, 0.5, 0),
 				Size = UDim2.new(1, -48, 0, 14),
-				Text = p2.text,
+				Text = p1.text,
 				TextTruncate = Enum.TextTruncate.AtEnd,
 				TextXAlignment = Enum.TextXAlignment.Left
 			})

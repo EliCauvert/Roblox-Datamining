@@ -1,32 +1,32 @@
-﻿local createSignal = require(script.Parent.Parent.Signal).createSignal
-local animationStepSignalModule = require(script.Parent.AnimationStepSignal)
+﻿local CreateSignalFunction = require(script.Parent.Parent.Signal).createSignal
+local AnimationStepSignalModule = require(script.Parent.AnimationStepSignal)
 local _ = require(script.Parent.types)
-local t = {}
-t.__index = t
+local Module = {}
+Module.__index = Module
 
-local function createSingleMotor(p1)
-	-- upvalues: createSignal (ref), t (ref)
-	local var1, var2 = createSignal()
-	local var3, var4 = createSignal()
-	local t_1 = {
+local function createSingleMotor(Value) --[[ Line: 41 ]]
+	-- upvalues: CreateSignalFunction (copy), Module (copy)
+	local Signal, Signal2 = CreateSignalFunction()
+	local Signal1, Signal2_1 = CreateSignalFunction()
+	local config = {
 		__goal = nil,
 		__running = false,
-		__state = { complete = true, value = p1 },
-		__onComplete = var1,
-		__fireOnComplete = var2,
-		__onStep = var3,
-		__fireOnStep = var4
+		__state = { complete = true, value = Value },
+		__onComplete = Signal,
+		__fireOnComplete = Signal2,
+		__onStep = Signal1,
+		__fireOnStep = Signal2_1
 	}
-	setmetatable(t_1, t)
+	setmetatable(config, Module)
 	
-	return t_1
+	return config
 end
 
-function t.start(p1)
-	-- upvalues: animationStepSignalModule (ref)
+function Module.start(p1) --[[ Line: 63 ]]
+	-- upvalues: AnimationStepSignalModule (copy)
 	if p1.__running then return end
-	p1.__connection = animationStepSignalModule:Connect(function(p2)
-		-- upvalues: p1 (ref)
+	p1.__connection = AnimationStepSignalModule:Connect(function(p2) --[[ Line: 68 ]]
+		-- upvalues: p1 (copy)
 		p1:step(p2)
 	end)
 	p1.__running = true
@@ -41,20 +41,20 @@ function t.start(p1)
 	end
 end
 
-function t.stop(p1)
+function Module.stop(p1) --[[ Line: 83 ]]
 	if p1.__connection ~= nil then
 		p1.__connection:Disconnect()
 	end
 	p1.__running = false
 end
 
-function t.step(p1, p2)
+function Module.step(p1, p2) --[[ Line: 91 ]]
 	if p1.__state.complete then return end
 	if p1.__goal == nil then return end
-	local var1 = p1.__goal.step(p1.__state, p2)
+	local StepResult = p1.__goal.step(p1.__state, p2)
 	
-	if var1 ~= nil then
-		p1.__state = var1
+	if StepResult ~= nil then
+		p1.__state = StepResult
 	end
 	p1.__fireOnStep(p1.__state.value)
 	
@@ -64,31 +64,31 @@ function t.step(p1, p2)
 	end
 end
 
-function t.setGoal(value, p1)
-	value.__goal = p1
-	value.__state.complete = false
-	value:start()
+function Module.setGoal(p1, p2) --[[ Line: 114 ]]
+	p1.__goal = p2
+	p1.__state.complete = false
+	p1:start()
 end
 
-function t.onStep(p1, p2)
-	local var1 = p1.__onStep:subscribe(p2)
+function Module.onStep(p1, p2) --[[ Line: 120 ]]
+	local SubscribeResult = p1.__onStep:subscribe(p2)
 	
-	return function()
-		-- upvalues: var1 (ref)
-		var1:unsubscribe()
+	return function() --[[ Line: 123 ]]
+		-- upvalues: SubscribeResult (copy)
+		SubscribeResult:unsubscribe()
 	end
 end
 
-function t.onComplete(p1, p2)
-	local var1 = p1.__onComplete:subscribe(p2)
+function Module.onComplete(p1, p2) --[[ Line: 128 ]]
+	local SubscribeResult = p1.__onComplete:subscribe(p2)
 	
-	return function()
-		-- upvalues: var1 (ref)
-		var1:unsubscribe()
+	return function() --[[ Line: 131 ]]
+		-- upvalues: SubscribeResult (copy)
+		SubscribeResult:unsubscribe()
 	end
 end
 
-function t.destroy(p1)
+function Module.destroy(p1) --[[ Line: 136 ]]
 	p1:stop()
 end
 

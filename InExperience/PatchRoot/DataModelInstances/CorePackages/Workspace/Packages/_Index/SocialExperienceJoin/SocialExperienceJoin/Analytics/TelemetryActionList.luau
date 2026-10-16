@@ -1,69 +1,69 @@
-﻿local parent = script:FindFirstAncestor("SocialExperienceJoin").Parent
-local supportedTelemetryBackends = require(parent.SocialLuaAnalytics).Analytics.Enums.SupportedTelemetryBackends
-local eventNamesModule = require(script.Parent.EventNames)
+﻿local Parent = script:FindFirstAncestor("SocialExperienceJoin").Parent
+local SupportedTelemetryBackends = require(Parent.SocialLuaAnalytics).Analytics.Enums.SupportedTelemetryBackends
+local EventNamesModule = require(script.Parent.EventNames)
 
 return {
 	defaults = {
 		links = "",
 		throttlingThousandths = game:DefineFastInt("SocialExperienceJoinAnalyticsThrottlingThousandths", 1000)
 	},
-	[eventNamesModule.JoinExperience] = {
+	[EventNamesModule.JoinExperience] = {
 		description = "Experience launch attempt from another user's presence; followUser differentiates Join from Play.",
 		lastUpdated = { 26, 10, 5 },
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.RobloxTelemetryCounter,
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					status = function(p1)
+					status = function(p1) --[[ Line: 21 ]]
 						return p1
 					end,
-					followUser = if require(parent.SharedFlags).FFlagJoinabilityCTARefactor then function(p1)
+					followUser = if require(Parent.SharedFlags).FFlagJoinabilityCTARefactor then function(p1) --[[ Line: 25 ]]
 						return p1
 					end else nil
 				}
 			}
 		}
 	},
-	[eventNamesModule.PurchaseExperienceAttempt] = {
+	[EventNamesModule.PurchaseExperienceAttempt] = {
 		description = "Purchase Experience Attempt Status after requesting",
 		lastUpdated = { 24, 7, 17 },
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.RobloxTelemetryCounter,
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					status = function(p1)
+					status = function(p1) --[[ Line: 40 ]]
 						return p1
 					end
 				}
 			}
 		}
 	},
-	[eventNamesModule.PurchaseExperience] = {
+	[EventNamesModule.PurchaseExperience] = {
 		description = "Purchase Experience Button click",
 		lastUpdated = { 24, 7, 17 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.CancelPurchaseExperience] = {
+	[EventNamesModule.CancelPurchaseExperience] = {
 		description = "Cancel Purchase Experience Attempt from other user",
 		lastUpdated = { 24, 7, 17 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.UnableToJoinViewDetails] = {
+	[EventNamesModule.UnableToJoinViewDetails] = {
 		description = "Unable to Join Experience View Details",
 		lastUpdated = { 24, 7, 17 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.UnableToJoinCancel] = {
+	[EventNamesModule.UnableToJoinCancel] = {
 		description = "Unable to Join Experience Cancel",
 		lastUpdated = { 24, 7, 17 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	}
 }

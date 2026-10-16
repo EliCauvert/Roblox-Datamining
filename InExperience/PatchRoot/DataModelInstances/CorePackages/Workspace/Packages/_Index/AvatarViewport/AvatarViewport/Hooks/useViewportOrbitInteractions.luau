@@ -1,250 +1,256 @@
-﻿local avatarViewport = script:FindFirstAncestor("AvatarViewport")
-local reactModule = require(avatarViewport.Parent.React)
-local cameraMathModule = require(avatarViewport.CameraMath)
-local getFIntAvatarViewportDegreesPerPixelModule = require(avatarViewport.Flags.GetFIntAvatarViewportDegreesPerPixel)
-local _ = require(avatarViewport.Types)
-local viewportInputTypesModule = require(avatarViewport.ViewportInputTypes)
-local viewportUserInputSubscriptionsModule = require(avatarViewport.ViewportUserInputSubscriptions)
+﻿local AvatarViewport = script:FindFirstAncestor("AvatarViewport")
+local ReactModule = require(AvatarViewport.Parent.React)
+local CameraMathModule = require(AvatarViewport.CameraMath)
+local GetFIntAvatarViewportDegreesPerPixelModule = require(AvatarViewport.Flags.GetFIntAvatarViewportDegreesPerPixel)
+local _ = require(AvatarViewport.Types)
+local ViewportInputTypesModule = require(AvatarViewport.ViewportInputTypes)
+local ViewportUserInputSubscriptionsModule = require(AvatarViewport.ViewportUserInputSubscriptions)
 
-return function(p1)
-	-- upvalues: getFIntAvatarViewportDegreesPerPixelModule (ref), cameraMathModule (ref), reactModule (ref), viewportUserInputSubscriptionsModule (ref), viewportInputTypesModule (ref)
-	local var1 = p1.enabled == nil or p1.enabled
-	local degreesPerPixel = p1.degreesPerPixel or getFIntAvatarViewportDegreesPerPixelModule()
-	local pinchDeltaToZoomDelta = p1.pinchDeltaToZoomDelta or cameraMathModule.PINCH_DELTA_TO_ZOOM_DELTA
-	local var2 = cameraMathModule.clampYRotDeg(p1.initialYRotDeg or 0)
-	local var3, var4 = reactModule.useState(var2)
-	local var5 = reactModule.useRef(var2)
-	local var6 = reactModule.useRef(false)
-	local var7 = reactModule.useRef(false)
-	local var8 = reactModule.useRef(nil)
-	local var9 = reactModule.useRef(0)
-	local var10 = reactModule.useRef({})
-	local var11 = reactModule.useRef(nil)
-	local var12 = reactModule.useRef(1)
-	local var13 = reactModule.useRef(p1.distanceScale)
-	local var14 = reactModule.useRef(p1.onYRotDegChanged)
-	local var15 = reactModule.useRef(p1.onDistanceScaleChanged)
-	local var16 = reactModule.useRef(p1.onCameraUpdateRequested)
-	var14.current = p1.onYRotDegChanged
-	var15.current = p1.onDistanceScaleChanged
-	var16.current = p1.onCameraUpdateRequested
-	reactModule.useEffect(function()
-		-- upvalues: var13 (ref), cameraMathModule (copy), p1 (ref)
-		var13.current = cameraMathModule.clampDistanceScale(p1.distanceScale)
+return function(p1) --[[ Line: 36 | Named "useViewportOrbitInteractions" ]]
+	-- upvalues: GetFIntAvatarViewportDegreesPerPixelModule (copy), CameraMathModule (copy), ReactModule (copy), ViewportUserInputSubscriptionsModule (copy), ViewportInputTypesModule (copy)
+	local NoEnabled = p1.enabled == nil or p1.enabled
+	local DegreesPerPixel = p1.degreesPerPixel or GetFIntAvatarViewportDegreesPerPixelModule()
+	local PinchDeltaToZoomDelta = p1.pinchDeltaToZoomDelta or CameraMathModule.PINCH_DELTA_TO_ZOOM_DELTA
+	local ClampYRotDegResult = CameraMathModule.clampYRotDeg(p1.initialYRotDeg or 0)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(ClampYRotDegResult)
+	local UseRefResult = ReactModule.useRef(ClampYRotDegResult)
+	local UseRefResult1 = ReactModule.useRef(false)
+	local UseRefResult2 = ReactModule.useRef(false)
+	local UseRefResult3 = ReactModule.useRef(nil)
+	local UseRefResult4 = ReactModule.useRef(0)
+	local UseRefResult5 = ReactModule.useRef({})
+	local UseRefResult6 = ReactModule.useRef(nil)
+	local UseRefResult7 = ReactModule.useRef(1)
+	local UseRefResult8 = ReactModule.useRef(p1.distanceScale)
+	local UseRefResult9 = ReactModule.useRef(p1.onYRotDegChanged)
+	local UseRefResult10 = ReactModule.useRef(p1.onDistanceScaleChanged)
+	local UseRefResult11 = ReactModule.useRef(p1.onCameraUpdateRequested)
+	UseRefResult9.current = p1.onYRotDegChanged
+	UseRefResult10.current = p1.onDistanceScaleChanged
+	UseRefResult11.current = p1.onCameraUpdateRequested
+	ReactModule.useEffect(function() --[[ Line: 63 ]]
+		-- upvalues: UseRefResult8 (copy), CameraMathModule (upval), p1 (copy)
+		UseRefResult8.current = CameraMathModule.clampDistanceScale(p1.distanceScale)
 	end, { p1.distanceScale })
-	local var17 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: var5 (ref), var4 (ref), var14 (ref), var16 (ref)
-		var5.current = p2
+	local UseResult = ReactModule.useCallback(function(Current, p2) --[[ Line: 68 ]]
+		-- upvalues: UseRefResult (copy), UseStateResult2 (copy), UseRefResult9 (copy), UseRefResult11 (copy)
+		UseRefResult.current = Current
 		
-		if p3 and p3.syncReactState then
-			var4(p2)
+		if p2 and p2.syncReactState then
+			UseStateResult2(Current)
 		end
-		if p3 and p3.notifyParent == true and var14.current then
-			var14.current(p2)
+		if p2 and p2.notifyParent == true and UseRefResult9.current then
+			UseRefResult9.current(Current)
 		end
-		if var16.current then
-			var16.current()
-		end
-	end, {})
-	local var18 = reactModule.useRef(var2)
-	local var19 = reactModule.useRef(nil)
-	local var20 = reactModule.useCallback(function()
-		-- upvalues: var5 (ref), var18 (ref), var4 (ref), var14 (ref)
-		local current = var5.current
-		
-		if current == var18.current then return end
-		var18.current = current
-		var4(current)
-		
-		if var14.current then
-			var14.current(current)
+		if UseRefResult11.current then
+			UseRefResult11.current()
 		end
 	end, {})
-	var19.current = var20
-	local var21 = reactModule.useCallback(function(p2)
-		-- upvalues: cameraMathModule (copy), p1 (ref), var18 (ref), var17 (ref)
-		local var22 = cameraMathModule.clampYRotDeg(p2 or (p1.initialYRotDeg or 0))
-		var18.current = var22
-		var17(var22, { syncReactState = true })
-	end, { var17, p1.initialYRotDeg })
-	local var22 = reactModule.useCallback(function(p2)
-		-- upvalues: cameraMathModule (copy), var13 (ref), var15 (ref), var16 (ref)
-		local var23 = cameraMathModule.adjustDistanceScaleByZoomGesture(var13.current, p2)
+	local UseRefResult12 = ReactModule.useRef(ClampYRotDegResult)
+	local UseRefResult13 = ReactModule.useRef(nil)
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 87 ]]
+		-- upvalues: UseRefResult (copy), UseRefResult12 (copy), UseStateResult2 (copy), UseRefResult9 (copy)
+		local Current = UseRefResult.current
 		
-		if var23 == var13.current then return end
-		var13.current = var23
+		if Current == UseRefResult12.current then return end
+		UseRefResult12.current = Current
+		UseStateResult2(Current)
 		
-		if var15.current then
-			var15.current(var23)
-		end
-		if var16.current then
-			var16.current()
+		if UseRefResult9.current then
+			UseRefResult9.current(Current)
 		end
 	end, {})
-	local var23 = reactModule.useCallback(function(p2)
-		-- upvalues: var9 (ref), var6 (ref), var1 (ref), var8 (ref), cameraMathModule (copy), var5 (ref), degreesPerPixel (ref), var17 (ref)
-		if var9.current > 1 or not var6.current or not var1 then return end
-		local current = var8.current
+	UseRefResult13.current = UseResult1
+	local UseResult2 = ReactModule.useCallback(function(p2) --[[ Line: 100 ]]
+		-- upvalues: CameraMathModule (upval), p1 (copy), UseRefResult12 (copy), UseResult (copy)
+		local ClampYRotDegResult = CameraMathModule.clampYRotDeg(p2 or (p1.initialYRotDeg or 0))
+		UseRefResult12.current = ClampYRotDegResult
+		UseResult(ClampYRotDegResult, { syncReactState = true })
+	end, { UseResult, p1.initialYRotDeg })
+	local UseResult3 = ReactModule.useCallback(function(p2) --[[ Line: 106 ]]
+		-- upvalues: CameraMathModule (upval), UseRefResult8 (copy), UseRefResult10 (copy), UseRefResult11 (copy)
+		local AdjustDistanceScaleByZoomGestureResult = CameraMathModule.adjustDistanceScaleByZoomGesture(UseRefResult8.current, p2)
 		
-		if current then
-			local var24 = p2.Position.X - current.X
-			var8.current = p2.Position
-			var17(cameraMathModule.clampYRotDeg(var5.current - var24 * degreesPerPixel), { syncReactState = false, notifyParent = false })
+		if AdjustDistanceScaleByZoomGestureResult == UseRefResult8.current then return end
+		UseRefResult8.current = AdjustDistanceScaleByZoomGestureResult
+		
+		if UseRefResult10.current then
+			UseRefResult10.current(AdjustDistanceScaleByZoomGestureResult)
+		end
+		if UseRefResult11.current then
+			UseRefResult11.current()
+		end
+	end, {})
+	local UseResult4 = ReactModule.useCallback(function(p2) --[[ Line: 121 ]]
+		-- upvalues: UseRefResult4 (copy), UseRefResult1 (copy), NoEnabled (copy), UseRefResult3 (copy), CameraMathModule (upval), UseRefResult (copy), DegreesPerPixel (copy), UseResult (copy)
+		if UseRefResult4.current > 1 or not UseRefResult1.current or not NoEnabled then return end
+		local Current = UseRefResult3.current
+		
+		if Current then
+			local XDelta = p2.Position.X - Current.X
+			UseRefResult3.current = p2.Position
+			UseResult(CameraMathModule.clampYRotDeg(UseRefResult.current - XDelta * DegreesPerPixel), { syncReactState = false, notifyParent = false })
+			
+			return
+		else
+			UseRefResult3.current = p2.Position
+		end
+	end, { NoEnabled, DegreesPerPixel, UseResult })
+	local UseResult5 = ReactModule.useCallback(function(p2) --[[ Line: 140 ]]
+		-- upvalues: NoEnabled (copy), CameraMathModule (upval), UseRefResult (copy), UseResult (copy)
+		if NoEnabled then
+			UseResult(CameraMathModule.clampYRotDeg(UseRefResult.current + p2), { syncReactState = false, notifyParent = false })
 			
 			return
 		end
-		var8.current = p2.Position
-	end, { var1, degreesPerPixel, var17 })
-	local var24 = reactModule.useCallback(function(p2)
-		-- upvalues: var1 (ref), cameraMathModule (copy), var5 (ref), var17 (ref)
-		if var1 then
-			var17(cameraMathModule.clampYRotDeg(var5.current + p2), { syncReactState = false, notifyParent = false })
+	end, { NoEnabled, UseResult })
+	ReactModule.useEffect(function() --[[ Line: 148 ]]
+		-- upvalues: UseRefResult1 (copy), UseResult2 (copy), ClampYRotDegResult (copy)
+		if not UseRefResult1.current then
+			UseResult2(ClampYRotDegResult)
 			
 			return
 		end
-	end, { var1, var17 })
-	reactModule.useEffect(function()
-		-- upvalues: var6 (ref), var21 (ref), var2 (ref)
-		if var6.current then
-			return
-		end
-		var21(var2)
-	end, { var2, var21 })
-	reactModule.useEffect(function()
-		-- upvalues: viewportUserInputSubscriptionsModule (copy), var7 (ref), viewportInputTypesModule (copy), var23 (ref), var6 (ref), var9 (ref), var11 (ref), var8 (ref), var19 (ref), var10 (ref)
-		local var25 = viewportUserInputSubscriptionsModule.connectInputChanged(function(p2)
-			-- upvalues: var7 (copy), viewportInputTypesModule (copy), var23 (copy), var6 (copy), var9 (copy), var11 (copy)
-			if var7.current then
-				if viewportInputTypesModule.isMouseMovement(p2) then
-					var23(p2)
+	end, { ClampYRotDegResult, UseResult2 })
+	ReactModule.useEffect(function() --[[ Line: 155 ]]
+		-- upvalues: ViewportUserInputSubscriptionsModule (upval), UseRefResult2 (copy), ViewportInputTypesModule (upval), UseResult4 (copy), UseRefResult1 (copy), UseRefResult4 (copy), UseRefResult6 (copy), UseRefResult3 (copy), UseRefResult13 (copy), UseRefResult5 (copy)
+		local ConnectInputChangedResult = ViewportUserInputSubscriptionsModule.connectInputChanged(function(Current) --[[ Line: 156 ]]
+			-- upvalues: UseRefResult2 (upval), ViewportInputTypesModule (upval), UseResult4 (upval), UseRefResult1 (upval), UseRefResult4 (upval), UseRefResult6 (upval)
+			if UseRefResult2.current then
+				if ViewportInputTypesModule.isMouseMovement(Current) then
+					UseResult4(Current)
 				end
 				return
-			elseif var6.current and var9.current == 1 and (viewportInputTypesModule.isTouch(p2) and p2 == var11.current) then
-				var23(p2)
+			elseif UseRefResult1.current and UseRefResult4.current == 1 and ViewportInputTypesModule.isTouch(Current) and Current == UseRefResult6.current then
+				UseResult4(Current)
 			end
 		end)
-		local var26 = viewportUserInputSubscriptionsModule.connectInputEnded(function(p2)
-			-- upvalues: viewportInputTypesModule (copy), var7 (copy), var6 (copy), var8 (copy), var19 (copy), var10 (copy), var9 (copy), var11 (copy)
-			if viewportInputTypesModule.isPrimaryPointerEnded(p2) then
-				if not var7.current then return end
-				var7.current = false
-				var6.current = false
-				var8.current = nil
+		local ConnectInputEndedResult = ViewportUserInputSubscriptionsModule.connectInputEnded(function(p2) --[[ Line: 176 ]]
+			-- upvalues: ViewportInputTypesModule (upval), UseRefResult2 (upval), UseRefResult1 (upval), UseRefResult3 (upval), UseRefResult13 (upval), UseRefResult5 (upval), UseRefResult4 (upval), UseRefResult6 (upval)
+			if ViewportInputTypesModule.isPrimaryPointerEnded(p2) then
+				if not UseRefResult2.current then return end
+				UseRefResult2.current = false
+				UseRefResult1.current = false
+				UseRefResult3.current = nil
 				
-				if var19.current then
-					var19.current()
+				if UseRefResult13.current then
+					UseRefResult13.current()
 				end
 				return
-			elseif viewportInputTypesModule.isTouch(p2) then
-				if not var10.current[p2] then return end
-				var10.current[p2] = nil
-				var9.current = math.max(0, var9.current - 1)
+			elseif ViewportInputTypesModule.isTouch(p2) then
+				if not UseRefResult5.current[p2] then return end
+				UseRefResult5.current[p2] = nil
+				UseRefResult4.current = math.max(0, UseRefResult4.current - 1)
 				
-				if var9.current == 0 then
-					var6.current = false
-					var11.current = nil
-					var8.current = nil
+				if UseRefResult4.current == 0 then
+					UseRefResult1.current = false
+					UseRefResult6.current = nil
+					UseRefResult3.current = nil
 					
-					if var19.current then
-						var19.current()
+					if UseRefResult13.current then
+						UseRefResult13.current()
 						
 						return
 					end
-				elseif var9.current > 1 then
-					var6.current = false
-					var11.current = nil
-					var8.current = nil
+				elseif UseRefResult4.current > 1 then
+					UseRefResult1.current = false
+					UseRefResult6.current = nil
+					UseRefResult3.current = nil
 				end
 			end
 		end)
 		
-		return function()
-			-- upvalues: var25 (ref), var26 (ref), var7 (copy), var6 (copy), var8 (copy), var9 (copy), var10 (copy), var11 (copy)
-			var25:Disconnect()
-			var26:Disconnect()
-			var7.current = false
-			var6.current = false
-			var8.current = nil
-			var9.current = 0
-			table.clear(var10.current)
-			var11.current = nil
+		return function() --[[ Line: 211 ]]
+			-- upvalues: ConnectInputChangedResult (copy), ConnectInputEndedResult (copy), UseRefResult2 (upval), UseRefResult1 (upval), UseRefResult3 (upval), UseRefResult4 (upval), UseRefResult5 (upval), UseRefResult6 (upval)
+			ConnectInputChangedResult:Disconnect()
+			ConnectInputEndedResult:Disconnect()
+			UseRefResult2.current = false
+			UseRefResult1.current = false
+			UseRefResult3.current = nil
+			UseRefResult4.current = 0
+			table.clear(UseRefResult5.current)
+			UseRefResult6.current = nil
 		end
-	end, { var23 })
+	end, { UseResult4 })
 	
 	return {
-		yRotDeg = var3,
-		yRotDegRef = var5,
-		distanceScaleRef = var13,
-		resetYaw = var21,
-		commitYaw = var20,
-		applyYawDelta = var24,
-		applyZoomGesture = var22,
+		yRotDeg = UseStateResult,
+		yRotDegRef = UseRefResult,
+		distanceScaleRef = UseRefResult8,
+		resetYaw = UseResult2,
+		commitYaw = UseResult1,
+		applyYawDelta = UseResult5,
+		applyZoomGesture = UseResult3,
 		inputHandlers = {
-			onInputBegan = reactModule.useCallback(function(_, p2)
-				-- upvalues: var1 (ref), viewportInputTypesModule (copy), var7 (ref), var6 (ref), var8 (ref), var10 (ref), var9 (ref), var11 (ref)
-				if not var1 then return end
-				if viewportInputTypesModule.isPrimaryPointerBegan(p2) then
-					var7.current = true
-					var6.current = true
-					var8.current = p2.Position
+			onInputBegan = ReactModule.useCallback(function(_, Current) --[[ Line: 250 ]]
+				-- upvalues: NoEnabled (copy), ViewportInputTypesModule (upval), UseRefResult2 (copy), UseRefResult1 (copy), UseRefResult3 (copy), UseRefResult5 (copy), UseRefResult4 (copy), UseRefResult6 (copy)
+				if not NoEnabled then return end
+				if ViewportInputTypesModule.isPrimaryPointerBegan(Current) then
+					UseRefResult2.current = true
+					UseRefResult1.current = true
+					UseRefResult3.current = Current.Position
 					
 					return
-				elseif not viewportInputTypesModule.isTouch(p2) then return end
-				if var10.current[p2] then return end
-				var10.current[p2] = true
-				var9.current += 1
+				end
+				if not ViewportInputTypesModule.isTouch(Current) then return end
+				if UseRefResult5.current[Current] then return end
+				UseRefResult5.current[Current] = true
+				UseRefResult4.current += 1
 				
-				if var9.current > 1 then
-					var6.current = false
-					var11.current = nil
-					var8.current = nil
+				if UseRefResult4.current > 1 then
+					UseRefResult1.current = false
+					UseRefResult6.current = nil
+					UseRefResult3.current = nil
+					
+					return
+				else
+					UseRefResult1.current = true
+					UseRefResult6.current = Current
+					UseRefResult3.current = Current.Position
+				end
+			end, { NoEnabled }),
+			onInputChanged = ReactModule.useCallback(function(_, p2) --[[ Line: 288 ]]
+				-- upvalues: ViewportInputTypesModule (upval), UseResult3 (copy), UseRefResult2 (copy), UseRefResult1 (copy), UseRefResult4 (copy), UseResult4 (copy)
+				if ViewportInputTypesModule.isMouseWheel(p2) then
+					UseResult3(p2.Position.Z)
 					
 					return
 				end
-				var6.current = true
-				var11.current = p2
-				var8.current = p2.Position
-			end, { var1 }),
-			onInputChanged = reactModule.useCallback(function(_, p2)
-				-- upvalues: viewportInputTypesModule (copy), var22 (ref), var7 (ref), var6 (ref), var9 (ref), var23 (ref)
-				if viewportInputTypesModule.isMouseWheel(p2) then
-					var22(p2.Position.Z)
+				if UseRefResult2.current then return end
+				if not UseRefResult1.current or UseRefResult4.current < 1 or not ViewportInputTypesModule.isTouch(p2) then
+					UseResult4(p2)
 					
-					return
-				elseif var7.current then return end
-				if var6.current and var9.current >= 1 and viewportInputTypesModule.isTouch(p2) then
 					return
 				end
-				var23(p2)
-			end, { var23, var22 }),
-			onInputEnded = reactModule.useCallback(function(_, p2)
-				-- upvalues: viewportInputTypesModule (copy), var7 (ref), var6 (ref), var8 (ref), var19 (ref)
-				if viewportInputTypesModule.isPrimaryPointerEnded(p2) then
-					var7.current = false
-					var6.current = false
-					var8.current = nil
+			end, { UseResult4, UseResult3 }),
+			onInputEnded = ReactModule.useCallback(function(_, p2) --[[ Line: 308 ]]
+				-- upvalues: ViewportInputTypesModule (upval), UseRefResult2 (copy), UseRefResult1 (copy), UseRefResult3 (copy), UseRefResult13 (copy)
+				if ViewportInputTypesModule.isPrimaryPointerEnded(p2) then
+					UseRefResult2.current = false
+					UseRefResult1.current = false
+					UseRefResult3.current = nil
 					
-					if var19.current then
-						var19.current()
+					if UseRefResult13.current then
+						UseRefResult13.current()
 					end
 				end
 			end, {}),
-			onTouchPinch = reactModule.useCallback(function(_, p2, _, _, p3)
-				-- upvalues: var1 (ref), var12 (ref), var6 (ref), var11 (ref), var8 (ref), var22 (ref), pinchDeltaToZoomDelta (ref)
-				if not var1 or #p2 < 2 then return end
-				if p3 == Enum.UserInputState.Begin then
-					var12.current = (p2[1] - p2[2]).Magnitude
-					var6.current = false
-					var11.current = nil
-					var8.current = nil
+			onTouchPinch = ReactModule.useCallback(function(_, Entry, _, _, UserInputState) --[[ Line: 224 ]]
+				-- upvalues: NoEnabled (copy), UseRefResult7 (copy), UseRefResult1 (copy), UseRefResult6 (copy), UseRefResult3 (copy), UseResult3 (copy), PinchDeltaToZoomDelta (copy)
+				if not NoEnabled or #Entry < 2 then return end
+				if UserInputState == Enum.UserInputState.Begin then
+					UseRefResult7.current = (Entry[1] - Entry[2]).Magnitude
+					UseRefResult1.current = false
+					UseRefResult6.current = nil
+					UseRefResult3.current = nil
 					
 					return
+				else
+					local Distance = (Entry[1] - Entry[2]).Magnitude
+					UseRefResult7.current = Distance
+					UseResult3((Distance - UseRefResult7.current) * PinchDeltaToZoomDelta)
 				end
-				local magnitude = (p2[1] - p2[2]).Magnitude
-				local var25 = magnitude - var12.current
-				var12.current = magnitude
-				var22(var25 * pinchDeltaToZoomDelta)
-			end, { var1, var22, pinchDeltaToZoomDelta })
+			end, { NoEnabled, UseResult3, PinchDeltaToZoomDelta })
 		}
 	}
 end

@@ -1,114 +1,119 @@
-﻿local parent = script:FindFirstAncestor("AccountUpgrade").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local authAnalyticsModule = require(parent.AuthAnalytics)
-local authSignupModule = require(parent.AuthSignup)
-local eventStreamConstants = authAnalyticsModule.EventStreamConstants
-local usernameSuggestionShown = authAnalyticsModule.Events.usernameSuggestionShown
-local collapsingTextInputValidator = authSignupModule.Components.CollapsingTextInputValidator
-local usernameValidator = authSignupModule.Thunks.UsernameValidator
-local view = foundationModule.View
-local text = foundationModule.Text
-local chip = foundationModule.Chip
-local inputSize = foundationModule.Enums.InputSize
-local inputLabelSize = foundationModule.Enums.InputLabelSize
+﻿local AccountUpgrade = script:FindFirstAncestor("AccountUpgrade")
+local Parent = AccountUpgrade.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local AuthAnalyticsModule = require(Parent.AuthAnalytics)
+local AuthSignupModule = require(Parent.AuthSignup)
+local EventStreamConstants = AuthAnalyticsModule.EventStreamConstants
+local UsernameSuggestionShownFunction = AuthAnalyticsModule.Events.usernameSuggestionShown
+local FFlagAccountUpgradeOAuthTelemetryModule = require(AccountUpgrade.Flags.FFlagAccountUpgradeOAuthTelemetry)
+local CollapsingTextInputValidator = AuthSignupModule.Components.CollapsingTextInputValidator
+local UsernameValidator = AuthSignupModule.Thunks.UsernameValidator
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local Chip = FoundationModule.Chip
+local InputSize = FoundationModule.Enums.InputSize
+local InputLabelSize = FoundationModule.Enums.InputLabelSize
 
-local function UsernameSuggestionList(p1)
-	-- upvalues: reactModule (ref), chip (ref), usernameSuggestionShown (ref), eventStreamConstants (ref), view (ref), text (ref)
-	local t = {}
+local function UsernameSuggestionList(Frame) --[[ Line: 56 ]]
+	-- upvalues: ReactModule (copy), Chip (copy), UsernameSuggestionShownFunction (copy), EventStreamConstants (copy), View (copy), Text (copy)
+	local Elements = {}
 	
-	for i, v in ipairs(p1.suggestionUsernames) do
-		t[`Suggestion{i}`] = reactModule.createElement(chip, {
-			text = v,
-			onActivated = function()
-				-- upvalues: p1 (ref), v (ref)
-				p1.onUsernameSelected(v)
+	for LayoutOrder, suggestionUsername in ipairs(Frame.suggestionUsernames) do
+		Elements[`Suggestion{LayoutOrder}`] = ReactModule.createElement(Chip, {
+			text = suggestionUsername,
+			onActivated = function() --[[ Line: 68 ]]
+				-- upvalues: Frame (copy), suggestionUsername (copy)
+				Frame.onUsernameSelected(suggestionUsername)
 			end,
-			LayoutOrder = i
+			LayoutOrder = LayoutOrder
 		})
 	end
-	reactModule.useEffect(function()
-		-- upvalues: usernameSuggestionShown (copy), p1 (ref), eventStreamConstants (copy)
-		usernameSuggestionShown(p1.eventContext, p1.inputUsername, p1.suggestionUsernames, eventStreamConstants.Field.Username)
+	ReactModule.useEffect(function() --[[ Line: 78 ]]
+		-- upvalues: UsernameSuggestionShownFunction (upval), Frame (copy), EventStreamConstants (upval)
+		UsernameSuggestionShownFunction(Frame.eventContext, Frame.inputUsername, Frame.suggestionUsernames, EventStreamConstants.Field.Username)
 	end, {})
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "row align-y-top gap-small size-full-0 auto-y padding-top-large",
 		testId = "AccountUpgradeUsernameSuggestions",
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Prompt = if p1.promptText == nil or p1.promptText == "" then nil else reactModule.createElement(text, {
+		Prompt = if Frame.promptText == nil or Frame.promptText == "" then nil else ReactModule.createElement(Text, {
 			tag = "auto-xy text-body-small text-align-x-left content-emphasis",
 			LayoutOrder = 1,
 			testId = "AccountUpgradeUsernameSuggestionsPrompt",
-			Text = p1.promptText
+			Text = Frame.promptText
 		}),
-		Options = reactModule.createElement(view, {
+		Options = ReactModule.createElement(View, {
 			tag = "col align-x-left gap-small auto-xy",
 			LayoutOrder = 2
-		}, t)
+		}, Elements)
 	})
 end
 
-return function(p2)
-	-- upvalues: reactModule (ref), view (ref), collapsingTextInputValidator (ref), usernameValidator (ref), inputSize (ref), inputLabelSize (ref), UsernameSuggestionList (ref), eventStreamConstants (ref)
-	local var1 = reactModule.useRef(nil)
-	local onSuggestionSelected = p2.onSuggestionSelected
-	local updatePillClicked = p2.updatePillClicked
-	local suggestions = p2.suggestions or {}
+return function(Frame) --[[ Line: 109 | Named "UsernameFieldWithSuggestions" ]]
+	-- upvalues: ReactModule (copy), View (copy), CollapsingTextInputValidator (copy), UsernameValidator (copy), InputSize (copy), InputLabelSize (copy), UsernameSuggestionList (copy), FFlagAccountUpgradeOAuthTelemetryModule (copy), EventStreamConstants (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	local OnSuggestionSelectedFunction = Frame.onSuggestionSelected
+	local UpdatePillClickedFunction = Frame.updatePillClicked
+	local UseResult = ReactModule.useCallback(function(Text) --[[ Line: 115 ]]
+		-- upvalues: UpdatePillClickedFunction (copy), UseRefResult (copy), OnSuggestionSelectedFunction (copy)
+		if UpdatePillClickedFunction ~= nil then
+			UpdatePillClickedFunction()
+		end
+		local Current = UseRefResult.current
+		
+		if Current ~= nil then
+			Current.Text = Text
+		end
+		if OnSuggestionSelectedFunction ~= nil then
+			OnSuggestionSelectedFunction(Text)
+		end
+	end, { OnSuggestionSelectedFunction, UpdatePillClickedFunction })
+	local Suggestions = Frame.suggestions or {}
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col size-full-0 auto-y",
 		testId = "AccountUpgradeUsernameField",
-		LayoutOrder = p2.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Validator = reactModule.createElement(collapsingTextInputValidator, {
+		Validator = ReactModule.createElement(CollapsingTextInputValidator, {
 			layoutOrder = 1,
 			useFoundationTitle = true,
 			foundationTitleIsRequired = true,
 			paddingTopOverride = 0,
 			useTrailingPadding = true,
-			titleTextKey = p2.titleTextKey,
-			summaryErrorTextKey = p2.summaryErrorTextKey,
-			prerequisiteMet = p2.isPrerequisiteMet,
-			placeholderText = p2.placeholderText,
-			prefilledText = p2.prefilledUsername,
+			titleTextKey = Frame.titleTextKey,
+			summaryErrorTextKey = Frame.summaryErrorTextKey,
+			prerequisiteMet = Frame.isPrerequisiteMet,
+			placeholderText = Frame.placeholderText,
+			prefilledText = Frame.prefilledUsername,
 			textInputType = Enum.TextInputType.Username,
 			returnKeyType = Enum.ReturnKeyType.Next,
-			validator = usernameValidator,
-			validatorAdditionalProps = p2.validatorAdditionalProps,
-			onInputTextChanged = p2.onTextChanged,
-			onInputTextValidated = p2.onTextValidated,
-			updateIssueCondition = p2.onIssueConditionChanged,
-			textBoxRef = var1,
-			pillClicked = p2.pillClicked,
-			resetPillClicked = p2.resetPillClicked,
-			useFoundationTextInput = p2.useFoundationTextInput,
-			foundationInputSize = inputSize.Medium,
-			foundationTitleSize = inputLabelSize.Medium,
-			contentGapOverride = p2.contentGap,
-			colorContentOverride = p2.colorContentOverride
+			validator = UsernameValidator,
+			validatorAdditionalProps = Frame.validatorAdditionalProps,
+			onInputTextChanged = Frame.onTextChanged,
+			onInputTextValidated = Frame.onTextValidated,
+			textBoxFocusedCallback = Frame.onFocused,
+			updateIssueCondition = Frame.onIssueConditionChanged,
+			textBoxRef = UseRefResult,
+			pillClicked = Frame.pillClicked,
+			resetPillClicked = Frame.resetPillClicked,
+			useFoundationTextInput = Frame.useFoundationTextInput,
+			foundationInputSize = Frame.inputSize or InputSize.Medium,
+			foundationTitleSize = Frame.titleSize or InputLabelSize.Medium,
+			foundationTitleIsBold = Frame.isTitleBold,
+			contentGapOverride = Frame.contentGap,
+			colorContentOverride = Frame.colorContentOverride
 		}),
-		Suggestions = if #suggestions > 0 and onSuggestionSelected ~= nil then reactModule.createElement(UsernameSuggestionList, {
+		Suggestions = if #Suggestions > 0 and OnSuggestionSelectedFunction ~= nil then ReactModule.createElement(UsernameSuggestionList, {
 			LayoutOrder = 2,
-			inputUsername = p2.username,
-			suggestionUsernames = suggestions,
-			promptText = p2.suggestionPrompt,
-			eventContext = eventStreamConstants.Context.SinglePageSignUpScreen,
-			onUsernameSelected = reactModule.useCallback(function(p3)
-				-- upvalues: updatePillClicked (ref), var1 (ref), onSuggestionSelected (ref)
-				if updatePillClicked ~= nil then
-					updatePillClicked()
-				end
-				local current = var1.current
-				
-				if current ~= nil then
-					current.Text = p3
-				end
-				if onSuggestionSelected ~= nil then
-					onSuggestionSelected(p3)
-				end
-			end, { onSuggestionSelected, updatePillClicked })
+			inputUsername = Frame.username,
+			suggestionUsernames = Suggestions,
+			promptText = Frame.suggestionPrompt,
+			eventContext = if FFlagAccountUpgradeOAuthTelemetryModule and Frame.eventContext then Frame.eventContext else EventStreamConstants.Context.SinglePageSignUpScreen,
+			onUsernameSelected = UseResult
 		}) else nil
 	})
 end

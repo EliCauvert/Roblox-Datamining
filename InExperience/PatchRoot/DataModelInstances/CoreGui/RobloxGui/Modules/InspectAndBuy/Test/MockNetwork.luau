@@ -1,8 +1,8 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local cryoModule = require(corePackagesService.Packages.Cryo)
-local promiseModule = require(corePackagesService.Packages.Promise)
-local playabilityStatusEnum = require(corePackagesService.Workspace.Packages.DiscoveryTypes).PlayabilityStatusEnum
-local t = {
+﻿local CorePackages = game:GetService("CorePackages")
+local CryoModule = require(CorePackages.Packages.Cryo)
+local PromiseModule = require(CorePackages.Packages.Promise)
+local PlayabilityStatusEnum = require(CorePackages.Workspace.Packages.DiscoveryTypes).PlayabilityStatusEnum
+local config = {
 	[1] = {
 		id = 100425207,
 		name = "Reinforced Wizard",
@@ -19,7 +19,7 @@ local t = {
 		assetType = { id = 17, name = "Head" }
 	}
 }
-local t_1 = {
+local config1 = {
 	data = {
 		[1] = {
 			id = 451,
@@ -45,18 +45,18 @@ local t_1 = {
 		}
 	}
 }
-local humanoidDescription = Instance.new("HumanoidDescription")
-humanoidDescription.HatAccessory = 1
-humanoidDescription.LeftArm = 2
-humanoidDescription.ClimbAnimation = 3
-humanoidDescription.BodyTypeScale = 0.3
-humanoidDescription.LeftLegColor = Color3.new(0, 0, 0)
-humanoidDescription.GraphicTShirt = 4
-local humanoidDescription_1 = Instance.new("HumanoidDescription")
-humanoidDescription_1:SetEmotes({ Wave = { 1 }, Laugh = { 2 }, Cheer = { 3 } })
-local humanoidDescription_2 = Instance.new("HumanoidDescription")
-local t_2 = { assetId = 123, userId = 401784814, created = "" }
-local t_3 = {
+local HumanoidDescription = Instance.new("HumanoidDescription")
+HumanoidDescription.HatAccessory = 1
+HumanoidDescription.LeftArm = 2
+HumanoidDescription.ClimbAnimation = 3
+HumanoidDescription.BodyTypeScale = 0.3
+HumanoidDescription.LeftLegColor = Color3.new(0, 0, 0)
+HumanoidDescription.GraphicTShirt = 4
+local HumanoidDescription1 = Instance.new("HumanoidDescription")
+HumanoidDescription1:SetEmotes({ Wave = { 1 }, Laugh = { 2 }, Cheer = { 3 } })
+local HumanoidDescription2 = Instance.new("HumanoidDescription")
+local config2 = { assetId = 123, userId = 401784814, created = "" }
+local config3 = {
 	Name = "test name",
 	Description = "test description",
 	PriceInRobux = 100,
@@ -65,141 +65,145 @@ local t_3 = {
 	ProductId = 18929548,
 	Creator = { Id = 1, Name = "TEST CREATOR" }
 }
-local t_4 = {
+local config4 = {
 	Owned = true,
 	IsPurchasable = false,
 	Id = 100425207,
 	ItemType = "Asset"
 }
-local t_5 = {
+local config5 = {
 	purchasable = false,
 	reason = "InsufficientFunds",
 	price = 200,
 	assetId = 10
 }
-local t_6 = {
+local config6 = {
 	universeId = 13,
 	isPlayable = true,
-	playabilityStatus = playabilityStatusEnum.Playable
+	playabilityStatus = PlayabilityStatusEnum.Playable
 }
-local t_7 = { name = "fakename", id = 13, rootPlaceId = 17 }
+local config7 = { name = "fakename", id = 13, rootPlaceId = 17 }
 
-local function getRobloxProductInfo(p1)
-	-- upvalues: cryoModule (ref), t_3 (ref), promiseModule (ref)
-	return promiseModule.resolve(cryoModule.Dictionary.join(t_3, { AssetId = p1 }))
+local function getRobloxProductInfo(AssetId) --[[ Line: 145 ]]
+	-- upvalues: CryoModule (copy), config3 (copy), PromiseModule (copy)
+	return PromiseModule.resolve((CryoModule.Dictionary.join(config3, { AssetId = AssetId })))
 end
 
-local function getProductInfo(p1)
-	-- upvalues: cryoModule (ref), t_3 (ref), promiseModule (ref)
-	local var1 = cryoModule.Dictionary.join(t_3, { AssetId = p1 })
-	var1.Creator.Id = 2
+local function getProductInfo(AssetId) --[[ Line: 150 ]]
+	-- upvalues: CryoModule (copy), config3 (copy), PromiseModule (copy)
+	local JoinResult = CryoModule.Dictionary.join(config3, { AssetId = AssetId })
+	JoinResult.Creator.Id = 2
 	
-	return promiseModule.resolve(var1)
+	return PromiseModule.resolve(JoinResult)
 end
 
-local function getItemDetails(p1, p2)
-	-- upvalues: cryoModule (ref), t_4 (ref), promiseModule (ref)
-	return promiseModule.resolve(cryoModule.Dictionary.join(t_4, { Id = p1, ItemType = p2 }))
+local function getItemDetails(Id, ItemType) --[[ Line: 156 ]]
+	-- upvalues: CryoModule (copy), config4 (copy), PromiseModule (copy)
+	return PromiseModule.resolve((CryoModule.Dictionary.join(config4, { Id = Id, ItemType = ItemType })))
 end
 
-local function getBatchItemDetails(p1)
-	-- upvalues: cryoModule (ref), t_4 (ref), promiseModule (ref)
-	local t = {}
+local function getBatchItemDetails(Ids) --[[ Line: 161 ]]
+	-- upvalues: CryoModule (copy), config4 (copy), PromiseModule (copy)
+	local JoinResults = {}
 	
-	for i, v in ipairs(p1) do
-		table.insert(t, cryoModule.Dictionary.join(t_4, { Id = v }))
+	for _, id in ipairs(Ids) do
+		table.insert(JoinResults, CryoModule.Dictionary.join(config4, { Id = id }))
 	end
-	return promiseModule.resolve(t)
+	return PromiseModule.resolve(JoinResults)
 end
 
-local t_8 = { data = { { assetId = 17, creatingUniverseId = 13 } } }
+local config8 = { data = { { assetId = 17, creatingUniverseId = 13 } } }
 
-local function getVersionInfo(p2)
-	-- upvalues: cryoModule (ref), t_8 (ref), promiseModule (ref)
-	return promiseModule.resolve(cryoModule.Dictionary.join(t_8, { AssetId = p2 }))
+local function getVersionInfo(AssetId) --[[ Line: 183 ]]
+	-- upvalues: CryoModule (copy), config8 (copy), PromiseModule (copy)
+	return PromiseModule.resolve((CryoModule.Dictionary.join(config8, { AssetId = AssetId })))
 end
 
-local function getExperiencePlayability(p2)
-	-- upvalues: cryoModule (ref), t_6 (ref), promiseModule (ref)
-	return promiseModule.resolve({ cryoModule.Dictionary.join(t_6, { universeId = p2 }) })
+local function getExperiencePlayability(UniverseId) --[[ Line: 188 ]]
+	-- upvalues: CryoModule (copy), config6 (copy), PromiseModule (copy)
+	return PromiseModule.resolve({
+		(CryoModule.Dictionary.join(config6, { universeId = UniverseId }))
+	})
 end
 
-local function getExperienceInfo(p2)
-	-- upvalues: cryoModule (ref), t_7 (ref), promiseModule (ref)
-	return promiseModule.resolve({ data = { cryoModule.Dictionary.join(t_7, { id = p2 }) } })
+local function getExperienceInfo(Id) --[[ Line: 193 ]]
+	-- upvalues: CryoModule (copy), config7 (copy), PromiseModule (copy)
+	return PromiseModule.resolve({
+		data = { (CryoModule.Dictionary.join(config7, { id = Id })) }
+	})
 end
 
-local function getAssetBundles(_)
-	-- upvalues: promiseModule (ref), t_1 (ref)
-	return promiseModule.resolve(t_1)
+local function getAssetBundles(_) --[[ Line: 198 ]]
+	-- upvalues: PromiseModule (copy), config1 (copy)
+	return PromiseModule.resolve(config1)
 end
 
-local function getPlayerName(_)
-	-- upvalues: promiseModule (ref)
-	return promiseModule.resolve("TEST")
+local function getPlayerName(_) --[[ Line: 202 ]]
+	-- upvalues: PromiseModule (copy)
+	return PromiseModule.resolve("TEST")
 end
 
-local function createFavoriteForAsset(_)
-	-- upvalues: promiseModule (ref)
-	return promiseModule.resolve()
+local function createFavoriteForAsset(_) --[[ Line: 206 ]]
+	-- upvalues: PromiseModule (copy)
+	return PromiseModule.resolve()
 end
 
-local function createFavoriteForBundle(_)
-	-- upvalues: promiseModule (ref)
-	return promiseModule.resolve()
+local function createFavoriteForBundle(_) --[[ Line: 210 ]]
+	-- upvalues: PromiseModule (copy)
+	return PromiseModule.resolve()
 end
 
-local function deleteFavoriteForAsset(_)
-	-- upvalues: promiseModule (ref)
-	return promiseModule.resolve()
+local function deleteFavoriteForAsset(_) --[[ Line: 214 ]]
+	-- upvalues: PromiseModule (copy)
+	return PromiseModule.resolve()
 end
 
-local function deleteFavoriteForBundle(_)
-	-- upvalues: promiseModule (ref)
-	return promiseModule.resolve()
+local function deleteFavoriteForBundle(_) --[[ Line: 218 ]]
+	-- upvalues: PromiseModule (copy)
+	return PromiseModule.resolve()
 end
 
-local function getAssetFavoriteCount(_)
-	-- upvalues: promiseModule (ref)
-	return promiseModule.resolve(120)
+local function getAssetFavoriteCount(_) --[[ Line: 222 ]]
+	-- upvalues: PromiseModule (copy)
+	return PromiseModule.resolve(120)
 end
 
-local function getBundleFavoriteCount(_)
-	-- upvalues: promiseModule (ref)
-	return promiseModule.resolve(120)
+local function getBundleFavoriteCount(_) --[[ Line: 226 ]]
+	-- upvalues: PromiseModule (copy)
+	return PromiseModule.resolve(120)
 end
 
-local function getFavoriteForAsset(value)
-	-- upvalues: promiseModule (ref), t_2 (ref)
-	return if value == "GetFavoriteModel" then promiseModule.resolve(t_2) else promiseModule.resolve("null")
+local function getFavoriteForAsset(p1) --[[ Line: 230 ]]
+	-- upvalues: PromiseModule (copy), config2 (copy)
+	return if p1 == "GetFavoriteModel" then PromiseModule.resolve(config2) else PromiseModule.resolve("null")
 end
 
-local function getFavoriteForBundle(p2)
-	-- upvalues: promiseModule (ref), t_2 (ref)
-	return if p2 == "GetFavoriteModel" then promiseModule.resolve(t_2) else promiseModule.resolve("null")
+local function getFavoriteForBundle(p1) --[[ Line: 238 ]]
+	-- upvalues: PromiseModule (copy), config2 (copy)
+	return if p1 == "GetFavoriteModel" then PromiseModule.resolve(config2) else PromiseModule.resolve("null")
 end
 
-local function getEconomyProductInfo(_)
-	-- upvalues: promiseModule (ref), t_5 (ref)
-	return promiseModule.resolve(t_5)
+local function getEconomyProductInfo(_) --[[ Line: 246 ]]
+	-- upvalues: PromiseModule (copy), config5 (copy)
+	return PromiseModule.resolve(config5)
 end
 
-local function getModelFromUserId(_)
-	-- upvalues: promiseModule (ref)
-	return promiseModule.resolve()
+local function getModelFromUserId(_) --[[ Line: 250 ]]
+	-- upvalues: PromiseModule (copy)
+	return PromiseModule.resolve()
 end
 
-local function networkFailure(_, _)
-	-- upvalues: promiseModule (ref)
-	return promiseModule.reject("Failed to access network service")
+local function networkFailure(_, _) --[[ Line: 254 ]]
+	-- upvalues: PromiseModule (copy)
+	return PromiseModule.reject("Failed to access network service")
 end
 
-local t_9 = {}
-t_9.__index = t_9
+local MockNetworkModule = {}
+MockNetworkModule.__index = MockNetworkModule
 
-function t_9.new(p2, p3)
-	-- upvalues: networkFailure (ref), getProductInfo (ref), getRobloxProductInfo (ref), getPlayerName (ref), getAssetBundles (ref), createFavoriteForAsset (ref), createFavoriteForBundle (ref), deleteFavoriteForAsset (ref), deleteFavoriteForBundle (ref), getAssetFavoriteCount (ref), getBundleFavoriteCount (ref), getFavoriteForAsset (ref), getFavoriteForBundle (ref), getEconomyProductInfo (ref), getModelFromUserId (ref), getVersionInfo (ref), getExperiencePlayability (ref), getExperienceInfo (ref), getItemDetails (ref), getBatchItemDetails (ref)
-	local var1 = if p2 then {
+function MockNetworkModule.new(p1, p2) --[[ Line: 261 ]]
+	-- upvalues: networkFailure (copy), getProductInfo (copy), getRobloxProductInfo (copy), getPlayerName (copy), getAssetBundles (copy), createFavoriteForAsset (copy), createFavoriteForBundle (copy), deleteFavoriteForAsset (copy), deleteFavoriteForBundle (copy), getAssetFavoriteCount (copy), getBundleFavoriteCount (copy), getFavoriteForAsset (copy), getFavoriteForBundle (copy), getEconomyProductInfo (copy), getModelFromUserId (copy), getVersionInfo (copy), getExperiencePlayability (copy), getExperienceInfo (copy), getItemDetails (copy), getBatchItemDetails (copy)
+	local Config = if p1 then {
 		getProductInfo = networkFailure,
 		getPlayerName = networkFailure,
 		getAssetBundles = networkFailure,
@@ -219,7 +223,7 @@ function t_9.new(p2, p3)
 		getItemDetails = networkFailure,
 		getBatchItemDetails = networkFailure
 	} else {
-		getProductInfo = if p3 then getProductInfo else getRobloxProductInfo,
+		getProductInfo = p2 and getProductInfo or getRobloxProductInfo,
 		getPlayerName = getPlayerName,
 		getAssetBundles = getAssetBundles,
 		createFavoriteForAsset = createFavoriteForAsset,
@@ -238,75 +242,75 @@ function t_9.new(p2, p3)
 		getItemDetails = getItemDetails,
 		getBatchItemDetails = getBatchItemDetails
 	}
-	setmetatable(var1, {
-		__tostring = function()
+	setmetatable(Config, {
+		__tostring = function(): string --[[ Line: 309 ]]
 			return "MockService(Network)"
 		end
 	})
 	
-	return var1
+	return Config
 end
 
-function t_9.GetMockAssetData()
-	-- upvalues: t (ref)
-	return t
+function MockNetworkModule.GetMockAssetData() --[[ Line: 317 ]]
+	-- upvalues: config (copy)
+	return config
 end
 
-function t_9.GetMockHumanoidDescription()
-	-- upvalues: humanoidDescription (ref)
-	return humanoidDescription
+function MockNetworkModule.GetMockHumanoidDescription() --[[ Line: 321 ]]
+	-- upvalues: HumanoidDescription (copy)
+	return HumanoidDescription
 end
 
-function t_9.GetMockHumanoidDescriptionEmpty()
-	-- upvalues: humanoidDescription_2 (ref)
-	return humanoidDescription_2
+function MockNetworkModule.GetMockHumanoidDescriptionEmpty() --[[ Line: 325 ]]
+	-- upvalues: HumanoidDescription2 (copy)
+	return HumanoidDescription2
 end
 
-function t_9.GetMockPlayerName()
+function MockNetworkModule.GetMockPlayerName(): string --[[ Line: 329 ]]
 	return "TEST"
 end
 
-function t_9.GetMockAssetBundlesData()
-	-- upvalues: t_1 (ref)
-	return t_1
+function MockNetworkModule.GetMockAssetBundlesData() --[[ Line: 333 ]]
+	-- upvalues: config1 (copy)
+	return config1
 end
 
-function t_9.GetMockFavoriteCount()
+function MockNetworkModule.GetMockFavoriteCount(): number --[[ Line: 337 ]]
 	return 120
 end
 
-function t_9.GetFavoriteModelId()
+function MockNetworkModule.GetFavoriteModelId(): string --[[ Line: 341 ]]
 	return "GetFavoriteModel"
 end
 
-function t_9.GetProductInfo()
-	-- upvalues: t_3 (ref)
-	return t_3
+function MockNetworkModule.GetProductInfo() --[[ Line: 345 ]]
+	-- upvalues: config3 (copy)
+	return config3
 end
 
-function t_9.GetEconomyProductInfo()
-	-- upvalues: t_5 (ref)
-	return t_5
+function MockNetworkModule.GetEconomyProductInfo() --[[ Line: 349 ]]
+	-- upvalues: config5 (copy)
+	return config5
 end
 
-function t_9.GetMockHumanoidDescriptionEmotes()
-	-- upvalues: humanoidDescription_1 (ref)
-	return humanoidDescription_1
+function MockNetworkModule.GetMockHumanoidDescriptionEmotes() --[[ Line: 353 ]]
+	-- upvalues: HumanoidDescription1 (copy)
+	return HumanoidDescription1
 end
 
-function t_9.GetVersionInfo()
-	-- upvalues: t_8 (ref)
-	return t_8
+function MockNetworkModule.GetVersionInfo() --[[ Line: 357 ]]
+	-- upvalues: config8 (copy)
+	return config8
 end
 
-function t_9.GetExperiencePlayability()
-	-- upvalues: t_6 (ref)
-	return { t_6 }
+function MockNetworkModule.GetExperiencePlayability() --[[ Line: 361 ]]
+	-- upvalues: config6 (copy)
+	return { config6 }
 end
 
-function t_9.GetExperienceInfo()
-	-- upvalues: t_7 (ref)
-	return { data = { t_7 } }
+function MockNetworkModule.GetExperienceInfo() --[[ Line: 365 ]]
+	-- upvalues: config7 (copy)
+	return { data = { config7 } }
 end
 
-return t_9
+return MockNetworkModule

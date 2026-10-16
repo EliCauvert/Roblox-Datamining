@@ -1,31 +1,30 @@
-﻿local parent = script:FindFirstAncestor("AppBlox").Parent
-local cryoModule = require(parent.Cryo)
-local logger = require(parent.Loggers).Logger
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local useStyle = UIBloxModule.Core.Style.useStyle
-local name = logger:new(script.Name)
+﻿local Parent = script:FindFirstAncestor("AppBlox").Parent
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local UIBloxModule = require(Parent.UIBlox)
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local NewResult = require(Parent.Loggers).Logger:new(script.Name)
 
-return function(p1)
-	-- upvalues: useStyle (ref), reactModule (ref), cryoModule (ref), name (ref), imageSetLabel (ref)
-	local tokens = useStyle().Tokens
-	local var1 = cryoModule.Dictionary.union(reactModule.useMemo(function()
-		-- upvalues: tokens (ref)
+return function(p1) --[[ Line: 22 | Named "ImagePile" ]]
+	-- upvalues: UseStyleFunction (copy), ReactModule (copy), CryoModule (copy), NewResult (copy), ImageSetLabel (copy)
+	local Tokens = UseStyleFunction().Tokens
+	local UnionResult = CryoModule.Dictionary.union(ReactModule.useMemo(function() --[[ Line: 26 ]]
+		-- upvalues: Tokens (copy)
 		return {
-			imageBorderColor = tokens.Color.Extended.White.White_100.Color3,
-			imageBorderThickness = tokens.Size.Size_50
+			imageBorderColor = Tokens.Color.Extended.White.White_100.Color3,
+			imageBorderThickness = Tokens.Size.Size_50
 		}
-	end, { tokens }), p1)
-	local var2 = reactModule.useMemo(function()
-		-- upvalues: tokens (ref)
+	end, { Tokens }), p1)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 35 ]]
+		-- upvalues: Tokens (copy)
 		return {
 			[1] = {
 				Attribute1 = {
 					ZIndex = 1,
 					AnchorPoint = Vector2.new(0, 0),
 					Position = UDim2.fromScale(0, 0),
-					Size = UDim2.fromOffset(tokens.Size.Size_1000, tokens.Size.Size_1000)
+					Size = UDim2.fromOffset(Tokens.Size.Size_1000, Tokens.Size.Size_1000)
 				}
 			},
 			[2] = {
@@ -33,58 +32,58 @@ return function(p1)
 					ZIndex = 2,
 					AnchorPoint = Vector2.new(0, 1),
 					Position = UDim2.fromScale(0, 1),
-					Size = UDim2.fromOffset(tokens.Size.Size_700, tokens.Size.Size_700)
+					Size = UDim2.fromOffset(Tokens.Size.Size_700, Tokens.Size.Size_700)
 				},
 				Attribute2 = {
 					ZIndex = 1,
 					AnchorPoint = Vector2.new(1, 0),
 					Position = UDim2.fromScale(1, 0),
-					Size = UDim2.fromOffset(tokens.Size.Size_700, tokens.Size.Size_700)
+					Size = UDim2.fromOffset(Tokens.Size.Size_700, Tokens.Size.Size_700)
 				}
 			}
 		}
-	end, { tokens })
-	local var3 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: var2 (ref)
-		return var2[math.min(p2, 2)]["Attribute" .. p2]
-	end, { var2 })
-	local var4 = reactModule.useMemo(function()
-		-- upvalues: var1 (ref), name (copy), var3 (ref), reactModule (copy), imageSetLabel (copy)
-		local t = {}
+	end, { Tokens })
+	local UseResult = ReactModule.useCallback(function(p2: number, Text) --[[ Line: 62 ]]
+		-- upvalues: UseMemoResult (copy)
+		return UseMemoResult[math.min(p2, 2)]["Attribute" .. Text]
+	end, { UseMemoResult })
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 67 ]]
+		-- upvalues: UnionResult (copy), NewResult (upval), UseResult (copy), ReactModule (upval), ImageSetLabel (upval)
+		local Elements = {}
 		
-		for i, v in var1.images do
-			if i <= 2 then
-				local var5 = var3(#var1.images, i)
-				v.AnchorPoint = var5.AnchorPoint
-				v.Position = var5.Position
-				v.Size = var5.Size
-				v.ZIndex = var5.ZIndex
-				t[tostring(i)] = reactModule.createElement(imageSetLabel, v, {
-					UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) }),
-					UIStroke = reactModule.createElement("UIStroke", {
-						Transparency = 0,
-						Color = var1.imageBorderColor,
-						Thickness = var1.imageBorderThickness
-					})
-				})
-				continue
+		for i, image in UnionResult.images do
+			if i > 2 then
+				NewResult:warning("More than 2 images provided but only the first 2 will be shown.")
+				
+				return Elements
 			end
-			name:warning("More than 2 images provided but only the first 2 will be shown.")
-			
-			return t
+			local UseResultResult = UseResult(#UnionResult.images, i)
+			image.AnchorPoint = UseResultResult.AnchorPoint
+			image.Position = UseResultResult.Position
+			image.Size = UseResultResult.Size
+			image.ZIndex = UseResultResult.ZIndex
+			Elements[tostring(i)] = ReactModule.createElement(ImageSetLabel, image, {
+				UICorner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) }),
+				UIStroke = ReactModule.createElement("UIStroke", {
+					Transparency = 0,
+					Color = UnionResult.imageBorderColor,
+					Thickness = UnionResult.imageBorderThickness
+				})
+			})
 		end
-		return t
-	end, { var1.images })
+		return Elements
+	end, { UnionResult.images })
 	
-	if #var1.images == 0 then
-		name:warning("Cannot have empty list of images")
+	if #UnionResult.images == 0 then
+		NewResult:warning("Cannot have empty list of images")
 		
 		return nil
+	else
+		return ReactModule.createElement("Frame", {
+			[ReactModule.Tag] = "data-testid=ImagePile",
+			BackgroundTransparency = 1,
+			Name = "ImagePile",
+			Size = UDim2.fromOffset(Tokens.Size.Size_1000, Tokens.Size.Size_1000)
+		}, UseMemoResult1)
 	end
-	return reactModule.createElement("Frame", {
-		[reactModule.Tag] = "data-testid=ImagePile",
-		BackgroundTransparency = 1,
-		Name = "ImagePile",
-		Size = UDim2.fromOffset(tokens.Size.Size_1000, tokens.Size.Size_1000)
-	}, var4)
 end

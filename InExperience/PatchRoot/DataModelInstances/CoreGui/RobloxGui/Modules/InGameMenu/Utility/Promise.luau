@@ -1,332 +1,339 @@
-﻿local function pack(...)
+﻿local function pack(...) --[[ Line: 13 ]]
 	return select("#", ...), { ... }
 end
 
-local function wpcallPacked(p1, ...)
-	-- upvalues: pack (ref)
-	local var1, var2 = pack(...)
-	local var3, var4 = pack(xpcall(function()
-		-- upvalues: p1 (ref), var2 (ref), var1 (ref)
-		return p1(unpack(var2, 1, var1))
+local function wpcallPacked(Callback, ...) --[[ Line: 26 ]]
+	-- upvalues: pack (copy)
+	local PackResult, PackResult2 = pack(...)
+	local PackResult1, PackResult2_1 = pack(xpcall(function() --[[ Line: 29 ]]
+		-- upvalues: Callback (copy), PackResult2 (copy), PackResult (copy)
+		return Callback(unpack(PackResult2, 1, PackResult))
 	end, debug.traceback))
 	
-	return var3, var4
+	return PackResult1, PackResult2_1
 end
 
-local function _(p1, p2, p3)
-	-- upvalues: wpcallPacked (ref)
-	return function(...)
-		-- upvalues: wpcallPacked (copy), p1 (ref), p2 (ref), p3 (ref)
-		local var1, var2 = wpcallPacked(p1, ...)
+local function _(p1, p2, p3) --[[ Line: 49 | Named "createAdvancer" ]]
+	-- upvalues: wpcallPacked (copy)
+	return function(...) --[[ Line: 50 ]]
+		-- upvalues: wpcallPacked (upval), p1 (copy), p2 (copy), p3 (copy)
+		local v1, v2 = wpcallPacked(p1, ...)
 		
-		if var2[1] then
-			p2(unpack(var2, 2, var1))
+		if v2[1] then
+			p2(unpack(v2, 2, v1))
 			
 			return
+		else
+			p3(unpack(v2, 2, v1))
 		end
-		p3(unpack(var2, 2, var1))
 	end
 end
 
-local _ = function(p1)
+local _ = function(p1): boolean --[[ Line: 62 | Named "isEmpty" ]]
 	return next(p1) == nil
 end
 
-local _ = function(p1)
+local _ = function(p1) --[[ Line: 66 | Named "createSymbol" ]]
 	assert(type(p1) == "string", "createSymbol requires `name` to be a string.")
-	local var1 = newproxy(true)
+	local Proxy = newproxy(true)
 	
-	getmetatable(var1).__tostring = function()
-		-- upvalues: p1 (ref)
+	getmetatable(Proxy).__tostring = function(): string --[[ Line: 71 ]]
+		-- upvalues: p1 (copy)
 		return ("Symbol(%s)"):format(p1)
 	end
 	
-	return var1
+	return Proxy
 end
 
 assert(true, "createSymbol requires `name` to be a string.")
-local var1 = newproxy(true)
-local var2 = "PromiseMarker"
+local Proxy = newproxy(true)
+local v1 = "PromiseMarker"
 
-getmetatable(var1).__tostring = function()
-	-- upvalues: var2 (ref)
-	return ("Symbol(%s)"):format(var2)
+getmetatable(Proxy).__tostring = function(): string --[[ Line: 71 ]]
+	-- upvalues: v1 (copy)
+	return ("Symbol(%s)"):format(v1)
 end
 
-local t = { prototype = {} }
-t.__index = t.prototype
-local t_1 = {}
+local PromiseModule = { prototype = {} }
+PromiseModule.__index = PromiseModule.prototype
+local Status = {}
 assert(true, "createSymbol requires `name` to be a string.")
-local var3 = newproxy(true)
-local var4 = "Started"
+local Proxy1 = newproxy(true)
+local v2 = "Started"
 
-getmetatable(var3).__tostring = function()
-	-- upvalues: var4 (ref)
-	return ("Symbol(%s)"):format(var4)
+getmetatable(Proxy1).__tostring = function(): string --[[ Line: 71 ]]
+	-- upvalues: v2 (copy)
+	return ("Symbol(%s)"):format(v2)
 end
 
-t_1.Started = var3
+Status.Started = Proxy1
 assert(true, "createSymbol requires `name` to be a string.")
-local var5 = newproxy(true)
-local var6 = "Resolved"
+local Proxy2 = newproxy(true)
+local v3 = "Resolved"
 
-getmetatable(var5).__tostring = function()
-	-- upvalues: var6 (ref)
-	return ("Symbol(%s)"):format(var6)
+getmetatable(Proxy2).__tostring = function(): string --[[ Line: 71 ]]
+	-- upvalues: v3 (copy)
+	return ("Symbol(%s)"):format(v3)
 end
 
-t_1.Resolved = var5
+Status.Resolved = Proxy2
 assert(true, "createSymbol requires `name` to be a string.")
-local var7 = newproxy(true)
-local var8 = "Rejected"
+local Proxy3 = newproxy(true)
+local v4 = "Rejected"
 
-getmetatable(var7).__tostring = function()
-	-- upvalues: var8 (ref)
-	return ("Symbol(%s)"):format(var8)
+getmetatable(Proxy3).__tostring = function(): string --[[ Line: 71 ]]
+	-- upvalues: v4 (copy)
+	return ("Symbol(%s)"):format(v4)
 end
 
-t_1.Rejected = var7
-t.Status = t_1
+Status.Rejected = Proxy3
+PromiseModule.Status = Status
 
-function t.new(p1)
-	-- upvalues: var1 (ref), t (ref), wpcallPacked (ref)
-	local t_1 = {
+function PromiseModule.new(p1) --[[ Line: 114 ]]
+	-- upvalues: Proxy (copy), PromiseModule (copy), wpcallPacked (copy)
+	local config = {
 		_source = debug.traceback(),
-		[var1] = true,
-		_status = t.Status.Started,
+		[Proxy] = true,
+		_status = PromiseModule.Status.Started,
 		_values = nil,
 		_valuesLength = -1,
 		_unhandledRejection = false,
 		_queuedResolve = {},
 		_queuedReject = {}
 	}
-	setmetatable(t_1, t)
+	setmetatable(config, PromiseModule)
 	
-	local function reject(...)
-		-- upvalues: t_1 (ref)
-		t_1:_reject(...)
+	local function reject(...) --[[ Line: 146 ]]
+		-- upvalues: config (copy)
+		config:_reject(...)
 	end
 	
-	local _, var9 = wpcallPacked(p1, function(...)
-		-- upvalues: t_1 (ref)
-		t_1:_resolve(...)
+	local _, WpcallPackedResult2 = wpcallPacked(p1, function(...) --[[ Line: 142 | Named "resolve" ]]
+		-- upvalues: config (copy)
+		config:_resolve(...)
 	end, reject)
-	local var10 = var9[2]
+	local WpcallPackedResultEntry = WpcallPackedResult2[2]
 	
-	if not var9[1] and t_1._status == t.Status.Started then
-		reject(var10)
+	if not WpcallPackedResult2[1] and config._status == PromiseModule.Status.Started then
+		reject(WpcallPackedResultEntry)
 	end
-	return t_1
+	return config
 end
 
-function t.resolve(p1)
-	-- upvalues: t (ref)
-	return t.new(function(p2)
-		-- upvalues: p1 (ref)
-		p2(p1)
+function PromiseModule.resolve(p1) --[[ Line: 164 ]]
+	-- upvalues: PromiseModule (copy)
+	return PromiseModule.new(function(Callback: (any) -> ()) --[[ Line: 165 ]]
+		-- upvalues: p1 (copy)
+		Callback(p1)
 	end)
 end
 
-function t.reject(p1)
-	-- upvalues: t (ref)
-	return t.new(function(_, p2)
-		-- upvalues: p1 (ref)
-		p2(p1)
+function PromiseModule.reject(p1) --[[ Line: 173 ]]
+	-- upvalues: PromiseModule (copy)
+	return PromiseModule.new(function(_, Callback: (any) -> ()) --[[ Line: 174 ]]
+		-- upvalues: p1 (copy)
+		Callback(p1)
 	end)
 end
 
-function t:all()
-	-- upvalues: t (ref)
+function PromiseModule:all() --[[ Line: 184 ]]
+	-- upvalues: PromiseModule (copy)
 	if type(self) ~= "table" then
 		error("Please pass a list of promises to Promise.all", 2)
 	end
 	if #self == 0 then
-		return t.resolve({})
+		return PromiseModule.resolve({})
 	end
 	for i = 1, #self do
-		if not t.is(self[i]) then
+		if not PromiseModule.is(self[i]) then
 			error(("Non-promise value passed into Promise.all at index #%d"):format(i), 2)
 		end
 	end
-	return t.new(function(p1, p2)
-		-- upvalues: self (ref)
+	return PromiseModule.new(function(Callback, Callback1) --[[ Line: 202 ]]
+		-- upvalues: self (copy)
 		local t = {}
-		local var9 = 0
+		local Count = 0
 		
-		local function resolveOne(p3, ...)
-			-- upvalues: t (ref), var9 (write), self (copy), p1 (ref)
-			t[p3] = ...
-			var24 += 1
+		local function resolveOne(Key, ...) --[[ Line: 211 ]]
+			-- upvalues: t (copy), Count (ref), self (upval), Callback (copy)
+			t[Key] = (...)
+			Count += 1
 			
-			if var9 == #self then
-				p1(t)
+			if Count == #self then
+				Callback(t)
 			end
 		end
 		
 		for i = 1, #self do
-			self[i]:andThen(function(...)
-				-- upvalues: resolveOne (ref), i (ref)
+			self[i]:andThen(function(...) --[[ Line: 224 ]]
+				-- upvalues: resolveOne (copy), i (copy)
 				resolveOne(i, ...)
-			end, function(...)
-				-- upvalues: p2 (ref)
-				p2(...)
+			end, function(...) --[[ Line: 227 ]]
+				-- upvalues: Callback1 (copy)
+				Callback1(...)
 			end)
 		end
 	end)
 end
 
-function t:is()
-	-- upvalues: var1 (ref)
-	return type(self) == "table" and self[var1] == true
+function PromiseModule:is(): boolean --[[ Line: 238 ]]
+	-- upvalues: Proxy (copy)
+	return type(self) == "table" and self[Proxy] == true
 end
 
-function t.prototype.getStatus(p1)
+function PromiseModule.prototype.getStatus(p1) --[[ Line: 246 ]]
 	return p1._status
 end
 
-function t.prototype.andThen(p1, p2, p3)
-	-- upvalues: t (ref), wpcallPacked (ref)
+function PromiseModule.prototype.andThen(p1, p2, p3) --[[ Line: 255 ]]
+	-- upvalues: PromiseModule (copy), wpcallPacked (copy)
 	p1._unhandledRejection = false
 	
-	return t.new(function(p4, p5)
-		-- upvalues: p2 (ref), wpcallPacked (copy), p3 (ref), p1 (ref), t (copy)
-		local var9 = p4
-		
-		if p2 then
-			local var10 = p2
+	return PromiseModule.new(function(Callback2, Callback3) --[[ Line: 259 ]]
+		-- upvalues: p2 (copy), wpcallPacked (upval), p3 (copy), p1 (copy), PromiseModule (upval)
+		local Callback: (any) -> () = if p2 then function(...) --[[ Line: 50 ]]
+			-- upvalues: wpcallPacked (upval), p2 (copy), Callback2 (copy), Callback3 (copy)
+			local v5, v6 = wpcallPacked(p2, ...)
 			
-			var9 = function(...)
-				-- upvalues: wpcallPacked (copy), var10 (ref), p4 (ref), p5 (ref)
-				local var11, var12 = wpcallPacked(var10, ...)
+			if v6[1] then
+				Callback2(unpack(v6, 2, v5))
 				
-				if var12[1] then
-					p4(unpack(var12, 2, var11))
-					
-					return
-				end
-				p5(unpack(var12, 2, var11))
+				return
+			else
+				Callback3(unpack(v6, 2, v5))
 			end
-		end
-		local var11 = p5
-		
-		if p3 then
-			local var12 = p3
+		end else Callback2
+		local Callback1: (any) -> () = if p3 then function(...) --[[ Line: 50 ]]
+			-- upvalues: wpcallPacked (upval), p3 (copy), Callback2 (copy), Callback3 (copy)
+			local v5, v6 = wpcallPacked(p3, ...)
 			
-			var11 = function(...)
-				-- upvalues: wpcallPacked (copy), var12 (ref), p4 (ref), p5 (ref)
-				local var13, var14 = wpcallPacked(var12, ...)
+			if v6[1] then
+				Callback2(unpack(v6, 2, v5))
 				
-				if var14[1] then
-					p4(unpack(var14, 2, var13))
-					
-					return
-				end
-				p5(unpack(var14, 2, var13))
+				return
+			else
+				Callback3(unpack(v6, 2, v5))
 			end
-		end
-		if p1._status == t.Status.Started then
-			table.insert(p1._queuedResolve, var9)
-			table.insert(p1._queuedReject, var11)
+		end else Callback3
+		
+		if p1._status == PromiseModule.Status.Started then
+			table.insert(p1._queuedResolve, Callback)
+			table.insert(p1._queuedReject, Callback1)
 			
 			return
-		elseif p1._status == t.Status.Resolved then
-			var9(unpack(p1._values, 1, p1._valuesLength))
+		end
+		if p1._status == PromiseModule.Status.Resolved then
+			Callback(unpack(p1._values, 1, p1._valuesLength))
 			
 			return
-		elseif p1._status == t.Status.Rejected then
-			var11(unpack(p1._values, 1, p1._valuesLength))
+		end
+		if p1._status == PromiseModule.Status.Rejected then
+			Callback1(unpack(p1._values, 1, p1._valuesLength))
 		end
 	end)
 end
 
-function t.prototype.catch(p1, p2)
-	return p1:andThen(nil, p2)
+function PromiseModule.prototype.catch(Promise, p1) --[[ Line: 290 ]]
+	return Promise:andThen(nil, p1)
 end
 
-function t.prototype.await(p1)
-	-- upvalues: t (ref), pack (ref)
-	p1._unhandledRejection = false
+function PromiseModule.prototype.await(Promise) --[[ Line: 299 ]]
+	-- upvalues: PromiseModule (copy), pack (copy)
+	Promise._unhandledRejection = false
 	
-	if p1._status == t.Status.Started then
-		local var9 = nil
-		local var10 = nil
-		local bindableEvent = Instance.new("BindableEvent")
-		p1:andThen(function(...)
-			-- upvalues: var10 (write), var9 (write), pack (copy), bindableEvent (ref)
-			local var11, var12 = pack(...)
-			var10 = var11
-			var9 = var12
-			bindableEvent:Fire(true)
-		end, function(...)
-			-- upvalues: var10 (write), var9 (write), pack (copy), bindableEvent (ref)
-			local var11, var12 = pack(...)
-			var10 = var11
-			var9 = var12
-			bindableEvent:Fire(false)
+	if Promise._status == PromiseModule.Status.Started then
+		local Status = nil
+		local Status1 = nil
+		local BindableEvent = Instance.new("BindableEvent")
+		Promise:andThen(function(...) --[[ Line: 308 ]]
+			-- upvalues: Status1 (ref), Status (ref), pack (upval), BindableEvent (copy)
+			Status1, Status = pack(...)
+			BindableEvent:Fire(true)
+		end, function(...) --[[ Line: 312 ]]
+			-- upvalues: Status1 (ref), Status (ref), pack (upval), BindableEvent (copy)
+			Status1, Status = pack(...)
+			BindableEvent:Fire(false)
 		end)
-		local var11 = bindableEvent.Event:Wait()
-		bindableEvent:Destroy()
+		local WaitResult = BindableEvent.Event:Wait()
+		BindableEvent:Destroy()
 		
-		return var11, unpack(var9, 1, var10)
-	elseif p1._status == t.Status.Resolved then
-		return true, unpack(p1._values, 1, p1._valuesLength)
-	elseif p1._status == t.Status.Rejected then
-		return false, unpack(p1._values, 1, p1._valuesLength)
+		return WaitResult, unpack(Status, 1, Status1)
 	end
-	error("Promise had an invalid status.")
+	local Status = Promise._status
+	local Status1 = PromiseModule
+	Status1 = Status1.Status
+	Status1 = Status1.Resolved
+	
+	if Status == Status1 then
+		Status = true
+		Status1 = unpack
+		
+		return Status, Status1(Promise._values, 1, Promise._valuesLength)
+	end
+	Status = Promise._status
+	Status1 = PromiseModule
+	Status1 = Status1.Status
+	Status1 = Status1.Rejected
+	
+	if Status == Status1 then
+		Status = false
+		Status1 = unpack
+		
+		return Status, Status1(Promise._values, 1, Promise._valuesLength)
+	else
+		Status = error
+		Status1 = "Promise had an invalid status."
+		Status(Status1)
+	end
 end
 
-function t.prototype._unwrap(p1)
-	-- upvalues: t (ref)
-	if p1._status == t.Status.Started then
+function PromiseModule.prototype._unwrap(p1) --[[ Line: 338 ]]
+	-- upvalues: PromiseModule (copy)
+	if p1._status == PromiseModule.Status.Started then
 		error("Promise has not resolved or rejected.", 2)
 	end
-	return p1._status == t.Status.Resolved, unpack(p1._values, 1, p1._valuesLength)
+	return p1._status == PromiseModule.Status.Resolved, unpack(p1._values, 1, p1._valuesLength)
 end
 
-function t.prototype._resolve(p1, ...)
-	-- upvalues: t (ref), pack (ref)
-	if p1._status ~= t.Status.Started then return end
-	if t.is(...) then
+function PromiseModule.prototype._resolve(p1, ...) --[[ Line: 348 ]]
+	-- upvalues: PromiseModule (copy), pack (copy)
+	if p1._status ~= PromiseModule.Status.Started then return end
+	if PromiseModule.is((...)) then
 		if select("#", ...) > 1 then
-			warn(("When returning a Promise from andThen, extra arguments are discarded! See:\n\n%s"):format(p1._source))
+			warn((("When returning a Promise from andThen, extra arguments are discarded! See:\n\n%s"):format(p1._source)))
 		end;
-		(...):andThen(function(...)
-			-- upvalues: p1 (ref)
+		(...):andThen(function(...) --[[ Line: 367 ]]
+			-- upvalues: p1 (copy)
 			p1:_resolve(...)
-		end, function(...)
-			-- upvalues: p1 (ref)
+		end, function(...) --[[ Line: 370 ]]
+			-- upvalues: p1 (copy)
 			p1:_reject(...)
 		end)
 		
 		return
 	else
-		p1._status = t.Status.Resolved
-		local var9, var10 = pack(...)
-		p1._valuesLength = var9
-		p1._values = var10
+		p1._status = PromiseModule.Status.Resolved
+		p1._valuesLength, p1._values = pack(...)
 		
-		for i, v in ipairs(p1._queuedResolve) do
-			v(...)
+		for _, value in ipairs(p1._queuedResolve) do
+			value(...)
 		end
 	end
 end
 
-function t.prototype._reject(p2, ...)
-	-- upvalues: t (ref), pack (ref)
-	if p2._status ~= t.Status.Started then return end
-	p2._status = t.Status.Rejected
-	local var11, var12 = pack(...)
-	p2._valuesLength = var11
-	p2._values = var12
+function PromiseModule.prototype._reject(p2, ...) --[[ Line: 387 ]]
+	-- upvalues: PromiseModule (copy), pack (copy)
+	if p2._status ~= PromiseModule.Status.Started then return end
+	p2._status = PromiseModule.Status.Rejected
+	p2._valuesLength, p2._values = pack(...)
 	
 	if next(p2._queuedReject) == nil then
 		p2._unhandledRejection = true
-		local var13 = tostring(...)
-		spawn(function()
-			-- upvalues: p2 (ref), var13 (ref)
+		local Text = tostring((...))
+		spawn(function() --[[ Line: 410 ]]
+			-- upvalues: p2 (copy), Text (copy)
 			if p2._unhandledRejection then
-				warn(("Unhandled promise rejection:\n\n%s\n\n%s"):format(var13, p2._source))
+				warn((("Unhandled promise rejection:\n\n%s\n\n%s"):format(Text, p2._source)))
 				
 				return
 			end
@@ -334,9 +341,9 @@ function t.prototype._reject(p2, ...)
 		
 		return
 	end
-	for i, v in ipairs(p2._queuedReject) do
-		v(...)
+	for _, value in ipairs(p2._queuedReject) do
+		value(...)
 	end
 end
 
-return t
+return PromiseModule

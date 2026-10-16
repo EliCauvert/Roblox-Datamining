@@ -1,102 +1,103 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local icon = foundationModule.Icon
-local skeleton = foundationModule.Skeleton
-local text = foundationModule.Text
-local view = foundationModule.View
-local useTokens = foundationModule.Hooks.useTokens
-local iconName = foundationModule.Enums.IconName
-local iconPosition = foundationModule.Enums.IconPosition
-local iconSize = foundationModule.Enums.IconSize
-local iconVariant = foundationModule.Enums.IconVariant
-local radius = foundationModule.Enums.Radius
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local Icon = FoundationModule.Icon
+local Skeleton = FoundationModule.Skeleton
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local IconName = FoundationModule.Enums.IconName
+local IconPosition = FoundationModule.Enums.IconPosition
+local IconSize = FoundationModule.Enums.IconSize
+local IconVariant = FoundationModule.Enums.IconVariant
+local Radius = FoundationModule.Enums.Radius
 
-return function(p1)
-	-- upvalues: useTokens (ref), iconName (ref), iconPosition (ref), reactModule (ref), view (ref), text (ref), skeleton (ref), radius (ref), icon (ref), iconSize (ref), iconVariant (ref)
-	local var1 = useTokens()
-	local testId = p1.testId or "StatsCardView"
-	local var2 = if p1.isDeltaPositive then var1.Color.System.Success else var1.Color.Content.Default
-	local var3 = if p1.isDeltaPositive then iconName.ArrowWideShortUp else iconName.ArrowWideShortDown
-	local var4 = (p1.statIconPosition or iconPosition.Left) == iconPosition.Left
-	local var5 = (p1.deltaIconPosition or iconPosition.Left) == iconPosition.Left
-	local var6 = p1.isSelected == true
+return function(p1) --[[ Line: 57 | Named "StatsCardView" ]]
+	-- upvalues: UseTokensFunction (copy), IconName (copy), IconPosition (copy), ReactModule (copy), View (copy), Text (copy), Skeleton (copy), Radius (copy), Icon (copy), IconSize (copy), IconVariant (copy)
+	local UseTokensResult = UseTokensFunction()
+	local TestId = p1.testId or "StatsCardView"
+	local Success = if p1.isDeltaPositive then UseTokensResult.Color.System.Success else UseTokensResult.Color.Content.Default
+	local ArrowWideShortUp = if p1.isDeltaPositive then IconName.ArrowWideShortUp else IconName.ArrowWideShortDown
+	local IsLeftMatch = (p1.statIconPosition or IconPosition.Left) == IconPosition.Left
+	local IsLeftMatch1 = (p1.deltaIconPosition or IconPosition.Left) == IconPosition.Left
+	local Config = if p1.isDeltaPositive then {
+		Color3 = UseTokensResult.Color.System.Success.Color3,
+		Transparency = UseTokensResult.Color.Shift.Shift_300.Transparency
+	} else nil
+	local IsIsSelected = p1.isSelected == true
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		LayoutOrder = p1.layoutOrder,
 		tag = {
 			["col gap-xsmall size-full-0 auto-y padding-large stroke-standard radius-large clip"] = true,
-			["stroke-emphasis bg-surface-100"] = var6,
-			["stroke-default"] = not var6
+			["stroke-emphasis bg-surface-100"] = IsIsSelected,
+			["stroke-default"] = not IsIsSelected
 		},
-		testId = testId,
+		testId = TestId,
 		onActivated = p1.onActivated
 	}, {
-		Header = reactModule.createElement(view, { LayoutOrder = 1, tag = "row size-full-0 auto-y" }, {
-			Title = reactModule.createElement(text, {
+		Header = ReactModule.createElement(View, { LayoutOrder = 1, tag = "row size-full-0 auto-y" }, {
+			Title = ReactModule.createElement(Text, {
 				tag = "size-full-0 auto-y text-body-medium text-align-x-left text-truncate-end content-default",
 				Text = p1.title,
-				testId = `{testId}-title`
+				testId = `{TestId}-title`
 			})
 		}),
-		StatRow = reactModule.createElement(view, {
+		StatRow = ReactModule.createElement(View, {
 			LayoutOrder = 2,
 			tag = "row align-y-center gap-small size-full-0 auto-y"
 		}, if p1.isLoading then {
-			Loading = reactModule.createElement(skeleton, {
+			Loading = ReactModule.createElement(Skeleton, {
 				LayoutOrder = 1,
-				Size = UDim2.new(1, 0, 0, var1.Size.Size_500),
-				radius = radius.Small,
-				testId = `{testId}-loading`
+				Size = UDim2.new(1, 0, 0, UseTokensResult.Size.Size_500),
+				radius = Radius.Small,
+				testId = `{TestId}-loading`
 			})
 		} else {
-			Stat = reactModule.createElement(view, {
+			Stat = ReactModule.createElement(View, {
 				LayoutOrder = 1,
 				tag = "row align-y-center gap-xsmall auto-xy"
 			}, {
-				Icon = if p1.statIcon then reactModule.createElement(icon, {
+				Icon = if p1.statIcon then ReactModule.createElement(Icon, {
 					tag = "content-emphasis",
-					LayoutOrder = if var4 then 1 else 2,
+					LayoutOrder = if IsLeftMatch then 1 else 2,
 					name = p1.statIcon,
-					size = iconSize.Small,
-					testId = `{testId}-stat-icon`
+					size = IconSize.Small,
+					testId = `{TestId}-stat-icon`
 				}) else nil,
-				Value = reactModule.createElement(text, {
+				Value = ReactModule.createElement(Text, {
 					tag = "auto-xy text-heading-small text-align-x-left content-emphasis",
-					LayoutOrder = if var4 then 2 else 1,
+					LayoutOrder = if IsLeftMatch then 2 else 1,
 					Text = p1.statText,
-					testId = `{testId}-stat`
+					testId = `{TestId}-stat`
 				})
 			}),
-			Delta = if p1.deltaText ~= nil then nil else reactModule.createElement(view, {
+			Delta = if p1.deltaText == nil then nil else ReactModule.createElement(View, {
 				LayoutOrder = 2,
 				tag = {
 					["row align-y-center gap-xxsmall auto-xy padding-y-xxsmall padding-left-xsmall padding-right-small radius-small"] = true,
 					["bg-shift-200"] = not p1.isDeltaPositive
 				},
-				backgroundStyle = if p1.isDeltaPositive then {
-					Color3 = var1.Color.System.Success.Color3,
-					Transparency = var1.Color.Shift.Shift_300.Transparency
-				} else nil,
-				testId = `{testId}-delta`
+				backgroundStyle = Config,
+				testId = `{TestId}-delta`
 			}, {
-				Arrow = reactModule.createElement(icon, {
+				Arrow = ReactModule.createElement(Icon, {
 					LayoutOrder = 1,
-					name = var3,
-					size = iconSize.XSmall,
-					variant = iconVariant.Filled,
-					style = var2
+					name = ArrowWideShortUp,
+					size = IconSize.XSmall,
+					variant = IconVariant.Filled,
+					style = Success
 				}),
-				Icon = if p1.deltaIcon then reactModule.createElement(icon, {
+				Icon = if p1.deltaIcon then ReactModule.createElement(Icon, {
 					tag = "content-default",
-					LayoutOrder = if var5 then 2 else 3,
+					LayoutOrder = if IsLeftMatch1 then 2 else 3,
 					name = p1.deltaIcon,
-					size = iconSize.XSmall,
-					testId = `{testId}-delta-icon`
+					size = IconSize.XSmall,
+					testId = `{TestId}-delta-icon`
 				}) else nil,
-				Value = reactModule.createElement(text, {
+				Value = ReactModule.createElement(Text, {
 					tag = "auto-xy text-caption-small text-align-x-left content-default",
-					LayoutOrder = if var5 then 3 else 2,
+					LayoutOrder = if IsLeftMatch1 then 3 else 2,
 					Text = p1.deltaText
 				})
 			})

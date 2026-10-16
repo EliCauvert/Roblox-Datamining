@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Index.ReactUtils.ReactUtils)
+﻿return (require(script.Parent._Index.ReactUtils.ReactUtils))

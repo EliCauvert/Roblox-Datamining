@@ -1,25 +1,24 @@
-﻿local avatarExperienceRodux = script:FindFirstAncestor("AvatarExperienceRodux")
-local parent = avatarExperienceRodux.Parent
-local roduxModule = require(parent.Rodux)
-local _ = require(parent.AvatarExperienceCommon)
-local _ = require(parent.AvatarExperienceModel)
-local fFlagAXDurablesForMIS = require(parent.AvatarExperienceFlags).FFlagAXDurablesForMIS
-local _ = require(avatarExperienceRodux.Types.OutfitTryOn)
+﻿local AvatarExperienceRodux = script:FindFirstAncestor("AvatarExperienceRodux")
+local Parent = AvatarExperienceRodux.Parent
+local _ = require(Parent.AvatarExperienceCommon)
+local _ = require(Parent.AvatarExperienceModel)
+local FFlagAXDurablesForMIS = require(Parent.AvatarExperienceFlags).FFlagAXDurablesForMIS
+local _ = require(AvatarExperienceRodux.Types.OutfitTryOn)
 
-return roduxModule.makeActionCreator(script.Name, function(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12)
-	-- upvalues: fFlagAXDurablesForMIS (ref)
+return require(Parent.Rodux).makeActionCreator(script.Name, function(ItemType, ItemSubType, ItemId, SelectedInTryOnManager, OverrideOrder, BundleInfo, WidgetInfo, ReceivedBundleInfo, IsRecolorable, BundleItems, ResetTryOnsBeforeToggleOn, p1) --[[ Line: 40 ]]
+	-- upvalues: FFlagAXDurablesForMIS (copy)
 	return {
-		itemType = p1,
-		itemSubType = p2,
-		itemId = p3,
-		selectedInTryOnManager = p4,
-		overrideOrder = p5,
-		bundleInfo = p6,
-		widgetInfo = p7,
-		receivedBundleInfo = p8,
-		isRecolorable = p9,
-		bundleItems = p10,
-		resetTryOnsBeforeToggleOn = p11,
-		selectedTimedOptionIndex = if fFlagAXDurablesForMIS then p12 else nil
+		itemType = ItemType,
+		itemSubType = ItemSubType,
+		itemId = ItemId,
+		selectedInTryOnManager = SelectedInTryOnManager,
+		overrideOrder = OverrideOrder,
+		bundleInfo = BundleInfo,
+		widgetInfo = WidgetInfo,
+		receivedBundleInfo = ReceivedBundleInfo,
+		isRecolorable = IsRecolorable,
+		bundleItems = BundleItems,
+		resetTryOnsBeforeToggleOn = ResetTryOnsBeforeToggleOn,
+		selectedTimedOptionIndex = if FFlagAXDurablesForMIS then p1 else nil
 	}
 end)

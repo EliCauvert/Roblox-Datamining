@@ -1,46 +1,45 @@
-﻿local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
-local parent = genericAbuseReporting.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local UIBloxModule = require(parent.UIBlox)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useLocalizedStringsModule = require(genericAbuseReporting.LocalizationKeys.useLocalizedStrings)
-local useLayerCollector = UIBloxModule.Core.Layout.LayerCollector.useLayerCollector
-local view = foundationModule.View
-local text = foundationModule.Text
-local useTokens = foundationModule.Hooks.useTokens
-local createNextOrder = require(parent.ReactUtils).createNextOrder
-local buttonListModule = require(genericAbuseReporting.Common.ButtonList)
-local commentTextFieldModule = require(genericAbuseReporting.Common.CommentTextField)
-local _ = require(genericAbuseReporting.Common.ReasonDropdown)
-local scrollViewGradientModule = require(genericAbuseReporting.Common.ScrollViewGradient)
-local sideModalModule = require(genericAbuseReporting.Common.SideModal)
-local sideModalDropdownButtonModule = require(genericAbuseReporting.Common.SideModalDropdownButton)
+﻿local GenericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
+local Parent = GenericAbuseReporting.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalizedStringsModule = require(GenericAbuseReporting.LocalizationKeys.useLocalizedStrings)
+local UseLayerCollectorFunction = require(Parent.UIBlox).Core.Layout.LayerCollector.useLayerCollector
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local CreateNextOrderFunction = require(Parent.ReactUtils).createNextOrder
+local ButtonListModule = require(GenericAbuseReporting.Common.ButtonList)
+local CommentTextFieldModule = require(GenericAbuseReporting.Common.CommentTextField)
+local _ = require(GenericAbuseReporting.Common.ReasonDropdown)
+local ScrollViewGradientModule = require(GenericAbuseReporting.Common.ScrollViewGradient)
+local SideModalModule = require(GenericAbuseReporting.Common.SideModal)
+local SideModalDropdownButtonModule = require(GenericAbuseReporting.Common.SideModalDropdownButton)
 
-local function _(p1, p2)
+local function _(p1, p2): number --[[ Line: 43 | Named "getContentRightPadding" ]]
 	return if p2.Y < p1.Y then 16 else 1
 end
 
-return function(p1)
-	-- upvalues: useTokens (ref), useLayerCollector (ref), reactModule (ref), useLocalizedStringsModule (ref), useLocalization (ref), createNextOrder (ref), view (ref), sideModalModule (ref), scrollViewGradientModule (ref), text (ref), sideModalDropdownButtonModule (ref), commentTextFieldModule (ref), buttonListModule (ref)
-	local var1 = useTokens()
-	local absoluteSize = useLayerCollector().absoluteSize
-	local var2, var3 = reactModule.useState(false)
-	local var4, var5 = reactModule.useState(false)
-	local var6, var7 = reactModule.useState("")
-	local var8, var9 = reactModule.useState("")
-	local var10, var11 = reactModule.useState("")
-	local var12, var13 = reactModule.useState("")
-	local var14, var15 = reactModule.useState("")
-	local var16, var17 = reactModule.useState(false)
-	local var18, var19 = reactModule.useState(false)
-	local var20, var21 = reactModule.useState(false)
-	local var22, var23 = reactModule.useState("")
-	local var24 = reactModule.useRef(nil)
-	local var25, var26 = reactModule.useState(Vector2.zero)
-	local var27, var28 = reactModule.useState(Vector2.zero)
-	local var29 = useLocalizedStringsModule()
-	local var30 = useLocalization({
+return function(p1) --[[ Line: 47 | Named "DualDropdownSubmitDialog" ]]
+	-- upvalues: UseTokensFunction (copy), UseLayerCollectorFunction (copy), ReactModule (copy), UseLocalizedStringsModule (copy), UseLocalizationFunction (copy), CreateNextOrderFunction (copy), View (copy), SideModalModule (copy), ScrollViewGradientModule (copy), Text (copy), SideModalDropdownButtonModule (copy), CommentTextFieldModule (copy), ButtonListModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	local AbsoluteSize = UseLayerCollectorFunction().absoluteSize
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState("")
+	local UseStateResult4, UseStateResult2_3 = ReactModule.useState("")
+	local UseStateResult5, UseStateResult2_4 = ReactModule.useState("")
+	local UseStateResult6, UseStateResult2_5 = ReactModule.useState("")
+	local UseStateResult7, UseStateResult2_6 = ReactModule.useState("")
+	local UseStateResult8, UseStateResult2_7 = ReactModule.useState(false)
+	local UseStateResult9, UseStateResult2_8 = ReactModule.useState(false)
+	local UseStateResult10, UseStateResult2_9 = ReactModule.useState(false)
+	local UseStateResult11, UseStateResult2_10 = ReactModule.useState("")
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseStateResult12, UseStateResult2_11 = ReactModule.useState(Vector2.zero)
+	local UseStateResult13, UseStateResult2_12 = ReactModule.useState(Vector2.zero)
+	local UseLocalizedStringsModuleResult = UseLocalizedStringsModule()
+	local UseLocalizationResult = UseLocalizationFunction({
 		submitDialogProblemSubheading = "Feature.ReportAbuse.Label.WhatWasWrong",
 		submitDialogSurfaceSubheading = "Feature.ReportAbuse.Label.WhereDidItHappen",
 		selectOnePrompt = "Feature.ReportAbuse.Label.PleaseSelectOne",
@@ -49,227 +48,240 @@ return function(p1)
 		submitDialogOptional = "Feature.ReportAbuse.Label.Optional",
 		chooseOne = "Feature.ReportAbuse.Label.ChooseOne"
 	})
-	local var31 = createNextOrder()
-	reactModule.useLayoutEffect(function()
-		-- upvalues: var24 (ref), var26 (ref), var28 (ref)
-		if var24.current then
-			local scrollingFrame = var24.current:FindFirstChildWhichIsA("ScrollingFrame")
+	local NextOrder = CreateNextOrderFunction()
+	ReactModule.useLayoutEffect(function() --[[ Line: 80 ]]
+		-- upvalues: UseRefResult (copy), UseStateResult2_11 (copy), UseStateResult2_12 (copy)
+		if UseRefResult.current then
+			local ScrollingFrame = UseRefResult.current:FindFirstChildWhichIsA("ScrollingFrame")
 			
-			if scrollingFrame then
-				var26(scrollingFrame.AbsoluteCanvasSize)
-				var28(scrollingFrame.AbsoluteWindowSize)
-				local var32 = scrollingFrame:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(function()
-					-- upvalues: var26 (copy), scrollingFrame (ref)
-					var26(scrollingFrame.AbsoluteCanvasSize)
+			if ScrollingFrame then
+				UseStateResult2_11(ScrollingFrame.AbsoluteCanvasSize)
+				UseStateResult2_12(ScrollingFrame.AbsoluteWindowSize)
+				local Connection = ScrollingFrame:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(function() --[[ Line: 89 ]]
+					-- upvalues: UseStateResult2_11 (upval), ScrollingFrame (copy)
+					UseStateResult2_11(ScrollingFrame.AbsoluteCanvasSize)
 				end)
-				local var33 = scrollingFrame:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(function()
-					-- upvalues: var28 (copy), scrollingFrame (ref)
-					var28(scrollingFrame.AbsoluteWindowSize)
+				local Connection1 = ScrollingFrame:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(function() --[[ Line: 94 ]]
+					-- upvalues: UseStateResult2_12 (upval), ScrollingFrame (copy)
+					UseStateResult2_12(ScrollingFrame.AbsoluteWindowSize)
 				end)
 				
-				return function()
-					-- upvalues: var32 (ref), var33 (ref)
-					var32:Disconnect()
-					var33:Disconnect()
+				return function() --[[ Line: 97 ]]
+					-- upvalues: Connection (copy), Connection1 (copy)
+					Connection:Disconnect()
+					Connection1:Disconnect()
 				end
 			end
 		else
-			var26(Vector2.zero)
-			var28(Vector2.zero)
+			UseStateResult2_11(Vector2.zero)
+			UseStateResult2_12(Vector2.zero)
 		end
-		return function() end
-	end, { var24.current, absoluteSize })
+		return function() --[[ Line: 106 ]] end
+	end, { UseRefResult.current, AbsoluteSize })
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 127 ]]
+		-- upvalues: UseStateResult2_7 (copy), UseStateResult2_8 (copy)
+		UseStateResult2_7(false)
+		UseStateResult2_8(false)
+	end, { UseStateResult2_7, UseStateResult2_8 })
 	
-	return reactModule.createElement(view, { tag = "size-full auto-xy" }, {
-		ReportFlowModal = reactModule.createElement(sideModalModule, {
-			screenSize = absoluteSize,
+	return ReactModule.createElement(View, { tag = "size-full auto-xy" }, {
+		ReportFlowModal = ReactModule.createElement(SideModalModule, {
+			screenSize = AbsoluteSize,
 			buttonProps = {
-				text = var29.formSubmit,
-				onActivated = reactModule.useCallback(function()
-					-- upvalues: p1 (ref), var6 (ref), var12 (ref), var22 (ref)
-					p1.onSubmit(var6, var12, var22)
-				end, { p1.onSubmit, var6, var12, var22 }),
-				validateState = reactModule.useCallback(function()
-					-- upvalues: var6 (ref), var12 (ref), var3 (ref), var5 (ref)
-					if var6 ~= "" and var12 ~= "" then
+				text = UseLocalizedStringsModuleResult.formSubmit,
+				onActivated = ReactModule.useCallback(function() --[[ Line: 109 ]]
+					-- upvalues: p1 (copy), UseStateResult3 (copy), UseStateResult6 (copy), UseStateResult11 (copy)
+					p1.onSubmit(UseStateResult3, UseStateResult6, UseStateResult11)
+				end, {
+					p1.onSubmit,
+					UseStateResult3,
+					UseStateResult6,
+					UseStateResult11
+				}),
+				validateState = ReactModule.useCallback(function(): boolean --[[ Line: 113 ]]
+					-- upvalues: UseStateResult3 (copy), UseStateResult6 (copy), UseStateResult2 (copy), UseStateResult2_1 (copy)
+					if UseStateResult3 ~= "" and UseStateResult6 ~= "" then
 						return true
-					elseif var6 == "" then
-						var3(true)
 					end
-					if var12 == "" then
-						var5(true)
+					if UseStateResult3 == "" then
+						UseStateResult2(true)
+					end
+					if UseStateResult6 == "" then
+						UseStateResult2_1(true)
 					end
 					return false
-				end, { var6, var12, var3, var5 })
+				end, {
+					UseStateResult3,
+					UseStateResult6,
+					UseStateResult2,
+					UseStateResult2_1
+				})
 			},
 			footerContent = p1.footerContent,
 			onAbandon = p1.onAbandon,
-			title = var29.formTitle,
-			width = math.min(400, absoluteSize.X - 50),
-			height = math.min(500, absoluteSize.Y - 50)
+			title = UseLocalizedStringsModuleResult.formTitle,
+			width = math.min(400, AbsoluteSize.X - 50),
+			height = math.min(500, AbsoluteSize.Y - 50)
 		}, {
-			SubmitReportFrame = reactModule.createElement(scrollViewGradientModule, {
+			SubmitReportFrame = ReactModule.createElement(ScrollViewGradientModule, {
 				gradientHeight = 40,
 				Size = UDim2.new(1, 0, 1, 0),
-				ref = var24
+				ref = UseRefResult
 			}, {
-				Layout = reactModule.createElement("UIListLayout", {
+				Layout = ReactModule.createElement("UIListLayout", {
 					Padding = UDim.new(0, 30),
 					FillDirection = Enum.FillDirection.Vertical,
 					HorizontalAlignment = Enum.HorizontalAlignment.Left,
 					SortOrder = Enum.SortOrder.LayoutOrder
 				}),
-				Padding = reactModule.createElement("UIPadding", {
+				Padding = ReactModule.createElement("UIPadding", {
 					PaddingBottom = UDim.new(0, 10),
 					PaddingLeft = UDim.new(0, 1),
-					PaddingRight = UDim.new(0, if var27.Y < var25.Y then 16 else 1)
+					PaddingRight = UDim.new(0, if UseStateResult13.Y < UseStateResult12.Y then 16 else 1)
 				}),
-				ReportProblemFrame = reactModule.createElement(view, {
+				ReportProblemFrame = ReactModule.createElement(View, {
 					ZIndex = 3,
 					tag = "size-full-0 auto-y col align-x-left",
-					LayoutOrder = var31()
+					LayoutOrder = NextOrder()
 				}, {
-					ProblemHeading = reactModule.createElement(text, {
+					ProblemHeading = ReactModule.createElement(Text, {
 						tag = "auto-xy padding-bottom-medium",
-						Text = "1. " .. var39.submitDialogProblemSubheading,
-						fontStyle = var1.Typography.TitleLarge,
-						textStyle = var1.Color.Content.Emphasis,
-						LayoutOrder = var31()
+						Text = "1. " .. UseLocalizationResult.submitDialogProblemSubheading,
+						fontStyle = UseTokensResult.Typography.TitleLarge,
+						textStyle = UseTokensResult.Color.Content.Emphasis,
+						LayoutOrder = NextOrder()
 					}),
-					ProblemDropdownPosition = reactModule.createElement(view, {
+					ProblemDropdownPosition = ReactModule.createElement(View, {
 						tag = "col align-x-left",
 						Size = UDim2.new(1, 0, 0, 48),
-						LayoutOrder = var31()
+						LayoutOrder = NextOrder()
 					}, {
-						ProblemDropdown = reactModule.createElement(sideModalDropdownButtonModule, {
-							setDropdownError = var3,
-							onActivated = function()
-								-- upvalues: var17 (ref), var21 (ref)
-								var17(true)
-								var21(false)
+						ProblemDropdown = ReactModule.createElement(SideModalDropdownButtonModule, {
+							setDropdownError = UseStateResult2,
+							onActivated = function() --[[ Line: 185 ]]
+								-- upvalues: UseStateResult2_7 (copy), UseStateResult2_9 (copy)
+								UseStateResult2_7(true)
+								UseStateResult2_9(false)
 							end,
-							title = var30.submitDialogProblemSubheading,
-							text = if var8 ~= "" then var8 else var30.chooseOne,
-							isDropdownError = var2
+							title = UseLocalizationResult.submitDialogProblemSubheading,
+							text = if UseStateResult4 == "" then UseLocalizationResult.chooseOne else UseStateResult4 or UseLocalizationResult.chooseOne,
+							isDropdownError = UseStateResult
 						}),
-						ProblemSubtext = reactModule.createElement(text, {
+						ProblemSubtext = ReactModule.createElement(Text, {
 							TextWrapped = true,
 							tag = "auto-xy padding-top-xxsmall",
-							Text = if var2 then var30.selectOnePrompt else var10,
+							Text = UseStateResult and UseLocalizationResult.selectOnePrompt or UseStateResult5,
 							TextXAlignment = Enum.TextXAlignment.Left,
-							fontStyle = var1.Typography.BodySmall,
-							textStyle = if var2 then var1.Color.System.Alert else var1.Color.Content.Muted,
-							LayoutOrder = var31()
+							fontStyle = UseTokensResult.Typography.BodySmall,
+							textStyle = UseStateResult and UseTokensResult.Color.System.Alert or UseTokensResult.Color.Content.Muted,
+							LayoutOrder = NextOrder()
 						})
 					})
 				}),
-				ReportSurfaceFrame = reactModule.createElement(view, {
+				ReportSurfaceFrame = ReactModule.createElement(View, {
 					tag = "size-full-0 auto-y col align-x-left",
-					LayoutOrder = var31()
+					LayoutOrder = NextOrder()
 				}, {
-					SurfaceHeading = reactModule.createElement(text, {
+					SurfaceHeading = ReactModule.createElement(Text, {
 						tag = "auto-xy padding-bottom-medium",
-						Text = "2. " .. var39.submitDialogSurfaceSubheading,
-						fontStyle = var1.Typography.TitleLarge,
-						textStyle = var1.Color.Content.Emphasis,
-						LayoutOrder = var31()
+						Text = "2. " .. UseLocalizationResult.submitDialogSurfaceSubheading,
+						fontStyle = UseTokensResult.Typography.TitleLarge,
+						textStyle = UseTokensResult.Color.Content.Emphasis,
+						LayoutOrder = NextOrder()
 					}),
-					SurfaceDropdownPosition = reactModule.createElement(view, {
+					SurfaceDropdownPosition = ReactModule.createElement(View, {
 						tag = "col align-x-left",
 						Size = UDim2.new(1, 0, 0, 48),
-						LayoutOrder = var31()
+						LayoutOrder = NextOrder()
 					}, {
-						SurfaceDropdown = reactModule.createElement(sideModalDropdownButtonModule, {
-							setDropdownError = var5,
-							onActivated = function()
-								-- upvalues: var19 (ref), var21 (ref)
-								var19(true)
-								var21(false)
+						SurfaceDropdown = ReactModule.createElement(SideModalDropdownButtonModule, {
+							setDropdownError = UseStateResult2_1,
+							onActivated = function() --[[ Line: 224 ]]
+								-- upvalues: UseStateResult2_8 (copy), UseStateResult2_9 (copy)
+								UseStateResult2_8(true)
+								UseStateResult2_9(false)
 							end,
-							title = var30.submitDialogSurfaceSubheading,
-							text = if var12 ~= "" then var14 else var30.chooseOne,
-							isDropdownError = var4
+							title = UseLocalizationResult.submitDialogSurfaceSubheading,
+							text = if UseStateResult6 == "" then UseLocalizationResult.chooseOne else UseStateResult7 or UseLocalizationResult.chooseOne,
+							isDropdownError = UseStateResult1
 						}),
-						SurfaceSubtext = reactModule.createElement(text, {
+						SurfaceSubtext = ReactModule.createElement(Text, {
 							TextWrapped = true,
 							tag = "auto-xy padding-top-xxsmall",
-							Text = if var4 then var30.selectOnePrompt else "",
+							Text = UseStateResult1 and UseLocalizationResult.selectOnePrompt or "",
 							TextXAlignment = Enum.TextXAlignment.Left,
-							fontStyle = var1.Typography.BodySmall,
-							textStyle = var1.Color.System.Alert,
-							LayoutOrder = var31()
+							fontStyle = UseTokensResult.Typography.BodySmall,
+							textStyle = UseTokensResult.Color.System.Alert,
+							LayoutOrder = NextOrder()
 						})
 					})
 				}),
-				ReportCommentFrame = reactModule.createElement(view, {
+				ReportCommentFrame = ReactModule.createElement(View, {
 					tag = "size-full-0 auto-y col align-x-left",
-					LayoutOrder = var31()
+					LayoutOrder = NextOrder()
 				}, {
-					CommentHeading = reactModule.createElement(text, {
+					CommentHeading = ReactModule.createElement(Text, {
 						tag = "auto-xy padding-bottom-medium",
-						Text = "3. " .. var39.submitDialogCommentSubheading,
-						fontStyle = var1.Typography.TitleLarge,
-						textStyle = var1.Color.Content.Emphasis,
-						LayoutOrder = var31()
+						Text = "3. " .. UseLocalizationResult.submitDialogCommentSubheading,
+						fontStyle = UseTokensResult.Typography.TitleLarge,
+						textStyle = UseTokensResult.Color.Content.Emphasis,
+						LayoutOrder = NextOrder()
 					}),
-					CommentTextContainer = reactModule.createElement(view, {
+					CommentTextContainer = ReactModule.createElement(View, {
 						tag = "size-full-0 auto-y col align-x-left stroke-thick stroke-default radius-medium",
-						LayoutOrder = var31()
+						LayoutOrder = NextOrder()
 					}, {
-						CommentTextField = reactModule.createElement(commentTextFieldModule, {
-							text = var22,
-							backgroundColor3 = var1.Color.Surface.Surface_100.Color3,
-							placeholderText = var30.submitDialogTextBoxPlaceholder,
-							onUpdate = var23,
-							layoutOrder = var31()
+						CommentTextField = ReactModule.createElement(CommentTextFieldModule, {
+							text = UseStateResult11,
+							backgroundColor3 = UseTokensResult.Color.Surface.Surface_100.Color3,
+							placeholderText = UseLocalizationResult.submitDialogTextBoxPlaceholder,
+							onUpdate = UseStateResult2_10,
+							layoutOrder = NextOrder()
 						})
 					}),
-					CommentSubtext = reactModule.createElement(text, {
+					CommentSubtext = ReactModule.createElement(Text, {
 						TextWrapped = true,
 						tag = "auto-xy padding-top-xxsmall",
-						Text = var30.submitDialogOptional,
+						Text = UseLocalizationResult.submitDialogOptional,
 						TextXAlignment = Enum.TextXAlignment.Left,
-						fontStyle = var1.Typography.CaptionSmall,
-						LayoutOrder = var31()
+						fontStyle = UseTokensResult.Typography.CaptionSmall,
+						LayoutOrder = NextOrder()
 					})
 				})
 			})
 		}),
-		DropdownSideModalBackground = if var16 or var18 then reactModule.createElement(view, { tag = "size-full" }, {
-			DropdownSideModalContainer = reactModule.createElement(view, { tag = "size-full" }, {
-				DropdownSideModal = reactModule.createElement(sideModalModule, {
-					screenSize = absoluteSize,
-					title = if var16 then var30.submitDialogProblemSubheading else var30.submitDialogSurfaceSubheading,
-					width = math.min(400, absoluteSize.X - 50) - 50,
-					height = math.min(500, absoluteSize.Y - 50) - 50,
-					onAbandon = reactModule.useCallback(function()
-						-- upvalues: var17 (ref), var19 (ref)
-						var17(false)
-						var19(false)
-					end, { var17, var19 }),
-					closeWithAnimation = var20
+		DropdownSideModalBackground = if UseStateResult8 or UseStateResult9 then ReactModule.createElement(View, { tag = "size-full" }, {
+			DropdownSideModalContainer = ReactModule.createElement(View, { tag = "size-full" }, {
+				DropdownSideModal = ReactModule.createElement(SideModalModule, {
+					screenSize = AbsoluteSize,
+					title = if UseStateResult8 then UseLocalizationResult.submitDialogProblemSubheading else UseLocalizationResult.submitDialogSurfaceSubheading,
+					width = math.min(400, AbsoluteSize.X - 50) - 50,
+					height = math.min(500, AbsoluteSize.Y - 50) - 50,
+					onAbandon = UseResult,
+					closeWithAnimation = UseStateResult10
 				}, {
-					ScrollView = reactModule.createElement(scrollViewGradientModule, { gradientHeight = 48, Size = UDim2.new(1, 0, 1, 0) }, {
-						Padding = reactModule.createElement("UIPadding", { PaddingRight = UDim.new(0, 16) }),
-						ButtonList = reactModule.createElement(buttonListModule, {
-							options = if var16 then p1.reportProblems else p1.reportSurfaces,
-							onSelected = function(p2, p3)
-								-- upvalues: var16 (ref), var7 (ref), var9 (ref), var3 (ref), var21 (ref), var13 (ref), var15 (ref), var5 (ref)
-								if var16 then
-									var7(p2)
-									var9(p3)
-									var3(false)
-									var21(true)
+					ScrollView = ReactModule.createElement(ScrollViewGradientModule, { gradientHeight = 48, Size = UDim2.new(1, 0, 1, 0) }, {
+						Padding = ReactModule.createElement("UIPadding", { PaddingRight = UDim.new(0, 16) }),
+						ButtonList = ReactModule.createElement(ButtonListModule, {
+							options = if UseStateResult8 then p1.reportProblems else p1.reportSurfaces,
+							onSelected = function(p2, p3) --[[ Line: 304 ]]
+								-- upvalues: UseStateResult8 (copy), UseStateResult2_2 (copy), UseStateResult2_3 (copy), UseStateResult2 (copy), UseStateResult2_9 (copy), UseStateResult2_5 (copy), UseStateResult2_6 (copy), UseStateResult2_1 (copy)
+								if UseStateResult8 then
+									UseStateResult2_2(p2)
+									UseStateResult2_3(p3)
+									UseStateResult2(false)
+									UseStateResult2_9(true)
 									
 									return
+								else
+									UseStateResult2_5(p2)
+									UseStateResult2_6(p3)
+									UseStateResult2_1(false)
+									UseStateResult2_9(true)
 								end
-								var13(p2)
-								var15(p3)
-								var5(false)
-								var21(true)
 							end,
-							setDescription = if var16 then var11 else nil,
-							defaultValue = if var16 then var6 else var12
+							setDescription = if UseStateResult8 then UseStateResult2_4 else nil,
+							defaultValue = if UseStateResult8 then UseStateResult3 else UseStateResult6
 						})
 					})
 				})

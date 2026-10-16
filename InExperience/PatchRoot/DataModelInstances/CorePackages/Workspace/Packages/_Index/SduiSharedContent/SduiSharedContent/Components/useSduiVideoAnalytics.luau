@@ -1,182 +1,197 @@
-﻿local parent = script:FindFirstAncestor("SduiSharedContent").Parent
-local reactModule = require(parent.React)
-local discoveryAnalyticsModule = require(parent.DiscoveryAnalytics)
-local discoveryVideoEndEvent = discoveryAnalyticsModule.Events.discoveryVideoEndEvent
-local discoveryVideoLoadEvent = discoveryAnalyticsModule.Events.discoveryVideoLoadEvent
-local discoveryVideoLoopEvent = discoveryAnalyticsModule.Events.discoveryVideoLoopEvent
-local discoveryVideoPlayEvent = discoveryAnalyticsModule.Events.discoveryVideoPlayEvent
-local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventErrorLogger
-local findAnalyticsFieldInAncestors = require(parent.SduiCoreSystem).findAnalyticsFieldInAncestors
-local videoUtilsModule = require(parent.VideoUtils)
-local videoActions = videoUtilsModule.AnalyticsEnums.VideoActions
-local videoLogger = videoUtilsModule.VideoLogger
-local fFlagLuaAppBroadenVideoAnalytics = require(parent.SharedFlags).FFlagLuaAppBroadenVideoAnalytics
+﻿local Parent = script:FindFirstAncestor("SduiSharedContent").Parent
+local ReactModule = require(Parent.React)
+local DiscoveryAnalyticsModule = require(Parent.DiscoveryAnalytics)
+local DiscoveryVideoEndEventFunction = DiscoveryAnalyticsModule.Events.discoveryVideoEndEvent
+local DiscoveryVideoLoadEventFunction = DiscoveryAnalyticsModule.Events.discoveryVideoLoadEvent
+local DiscoveryVideoLoopEventFunction = DiscoveryAnalyticsModule.Events.discoveryVideoLoopEvent
+local DiscoveryVideoPlayEventFunction = DiscoveryAnalyticsModule.Events.discoveryVideoPlayEvent
+local DiscoveryUtilsModule = require(Parent.DiscoveryUtils)
+local DiscoveryEventErrorLogger = DiscoveryUtilsModule.DiscoveryEventErrorLogger
+local ParseBooleanStringFunction = DiscoveryUtilsModule.parseBooleanString
+local FindAnalyticsFieldInAncestorsFunction = require(Parent.SduiCoreSystem).findAnalyticsFieldInAncestors
+local VideoUtilsModule = require(Parent.VideoUtils)
+local VideoActions = VideoUtilsModule.AnalyticsEnums.VideoActions
+local VideoLogger = VideoUtilsModule.VideoLogger
+local FFlagLuaAppBroadenVideoAnalytics = require(Parent.SharedFlags).FFlagLuaAppBroadenVideoAnalytics
+local FFlagLuaAppDiscoveryMomentVideoTelemetry = require(Parent.SharedFlags).FFlagLuaAppDiscoveryMomentVideoTelemetry
 
-local function _(p1)
+local function _(p1) --[[ Line: 51 | Named "asOptionalString" ]]
 	return if p1 == nil then nil else tostring(p1)
 end
 
-local _ = function(value, p1, p2, p3)
-	-- upvalues: discoveryEventErrorLogger (ref)
-	discoveryEventErrorLogger.reportError("UnifiedVideoEngagementEvent_MissingVideoAssetId", `SDUI video analytics "{value}" is missing videoAssetId on page "{p1}"`, {
-		actionType = value,
-		pageContext = p1,
-		universeId = p2,
-		placeId = p3
+local _ = function(p1) --[[ Line: 55 | Named "asOptionalBoolean" ]]
+	-- upvalues: ParseBooleanStringFunction (copy)
+	return if type(p1) == "boolean" then p1 elseif type(p1) == "string" then ParseBooleanStringFunction(p1) else nil
+end
+
+local _ = function(ActionType, PageContext, UniverseId, PlaceId) --[[ Line: 62 | Named "reportMissingVideoAssetId" ]]
+	-- upvalues: DiscoveryEventErrorLogger (copy)
+	DiscoveryEventErrorLogger.reportError("UnifiedVideoEngagementEvent_MissingVideoAssetId", `SDUI video analytics "{ActionType}" is missing videoAssetId on page "{PageContext}"`, {
+		actionType = ActionType,
+		pageContext = PageContext,
+		universeId = UniverseId,
+		placeId = PlaceId
 	})
 end
 
-return function(p1, p2, p3)
-	-- upvalues: reactModule (ref), findAnalyticsFieldInAncestors (ref), fFlagLuaAppBroadenVideoAnalytics (ref), discoveryEventErrorLogger (ref), discoveryVideoPlayEvent (ref), discoveryVideoLoadEvent (ref), videoLogger (ref), videoActions (ref), discoveryVideoLoopEvent (ref), discoveryVideoEndEvent (ref)
-	local var1 = reactModule.useCallback(function(p4)
-		-- upvalues: p1 (ref), findAnalyticsFieldInAncestors (copy), p3 (ref), fFlagLuaAppBroadenVideoAnalytics (copy)
-		local var2
-		local var3 = if p1.getCollectionData then p1.getCollectionData() else nil
-		local var4 = findAnalyticsFieldInAncestors("videoAssetId", p1)
-		local var5 = if var4 == nil then nil else tostring(var4)
-		local nativeAdData = findAnalyticsFieldInAncestors("nativeAdData", p1) or findAnalyticsFieldInAncestors("adId", p1)
-		local t = {
-			videoAssetId = var5,
-			videoPlaybackSessionId = p4 or "INVALID_SESSION_ID",
-			universeId = p3.universeId,
-			rootPlaceId = p3.placeId
+return function(p1, PageContext, p2) --[[ Line: 75 | Named "useSduiVideoAnalytics" ]]
+	-- upvalues: ReactModule (copy), FindAnalyticsFieldInAncestorsFunction (copy), FFlagLuaAppBroadenVideoAnalytics (copy), FFlagLuaAppDiscoveryMomentVideoTelemetry (copy), ParseBooleanStringFunction (copy), DiscoveryEventErrorLogger (copy), DiscoveryVideoPlayEventFunction (copy), DiscoveryVideoLoadEventFunction (copy), VideoLogger (copy), VideoActions (copy), DiscoveryVideoLoopEventFunction (copy), DiscoveryVideoEndEventFunction (copy)
+	local UseResult = ReactModule.useCallback(function(p3) --[[ Line: 80 ]]
+		-- upvalues: p1 (copy), FindAnalyticsFieldInAncestorsFunction (upval), p2 (copy), FFlagLuaAppBroadenVideoAnalytics (upval), FFlagLuaAppDiscoveryMomentVideoTelemetry (upval), ParseBooleanStringFunction (upval)
+		local CollectionData = if p1.getCollectionData then p1.getCollectionData() else nil
+		local VideoAssetId = FindAnalyticsFieldInAncestorsFunction("videoAssetId", p1)
+		local Text = if VideoAssetId == nil then nil else tostring(VideoAssetId)
+		local NativeAdData = FindAnalyticsFieldInAncestorsFunction("nativeAdData", p1) or FindAnalyticsFieldInAncestorsFunction("adId", p1)
+		local config = {
+			videoAssetId = Text,
+			videoPlaybackSessionId = p3 or "INVALID_SESSION_ID",
+			universeId = p2.universeId,
+			rootPlaceId = p2.placeId
 		}
+		local Text1 = nil
 		
-		if var3 then
-			local collectionId = var3.collectionId
-			var2 = if collectionId == nil then nil else tostring(collectionId)
+		if CollectionData then
+			local CollectionId = CollectionData.collectionId
+			Text1 = if CollectionId == nil then nil else tostring(CollectionId)
 		else
-			var2 = nil
+			Text1 = nil
 		end
-		local var6
-		t.gameSetTypeId = var2
-		t.sortPos = if var3 then var3.collectionPosition else nil
-		t.nativeAdData = if fFlagLuaAppBroadenVideoAnalytics then if nativeAdData == nil then nil else tostring(nativeAdData) else nil
+		config.gameSetTypeId = Text1
+		config.sortPos = if CollectionData then CollectionData.collectionPosition else nil
+		config.nativeAdData = if FFlagLuaAppBroadenVideoAnalytics then if NativeAdData == nil then nil else tostring(NativeAdData) else nil
+		local Text2 = nil
 		
-		if fFlagLuaAppBroadenVideoAnalytics then
-			local var7 = findAnalyticsFieldInAncestors("tileType", p1)
-			var6 = if var7 == nil then nil else tostring(var7)
+		if FFlagLuaAppBroadenVideoAnalytics then
+			local TileType = FindAnalyticsFieldInAncestorsFunction("tileType", p1)
+			Text2 = if TileType == nil then nil else tostring(TileType)
 		else
-			var6 = nil
+			Text2 = nil
 		end
-		local var8
-		t.tileType = var6
+		config.tileType = Text2
+		local Text3 = nil
 		
-		if fFlagLuaAppBroadenVideoAnalytics then
-			local var9 = findAnalyticsFieldInAncestors("contentType", p1)
-			var8 = if var9 == nil then nil else tostring(var9)
+		if FFlagLuaAppBroadenVideoAnalytics then
+			local ContentType = FindAnalyticsFieldInAncestorsFunction("contentType", p1)
+			Text3 = if ContentType == nil then nil else tostring(ContentType)
 		else
-			var8 = nil
+			Text3 = nil
 		end
-		t.contentType = var8
+		config.contentType = Text3
+		local IsMoment1 = nil
 		
-		return t
-	end, { p1, p3.universeId, p3.placeId })
-	local var2 = reactModule.useCallback(function(_, p4)
-		-- upvalues: var1 (ref), p2 (ref), p3 (ref), discoveryEventErrorLogger (copy), discoveryVideoPlayEvent (copy)
-		local var3 = var1(p4)
+		if FFlagLuaAppDiscoveryMomentVideoTelemetry then
+			local IsMoment = FindAnalyticsFieldInAncestorsFunction("isMoment", p1)
+			IsMoment1 = if type(IsMoment) == "boolean" then IsMoment elseif type(IsMoment) == "string" then ParseBooleanStringFunction(IsMoment) else nil
+		else
+			IsMoment1 = nil
+		end
+		config.isMoment = IsMoment1
 		
-		if not var3.videoAssetId then
-			local var4 = p2
-			discoveryEventErrorLogger.reportError("UnifiedVideoEngagementEvent_MissingVideoAssetId", `SDUI video analytics "play" is missing videoAssetId on page "{var19}"`, {
+		return config
+	end, { p1, p2.universeId, p2.placeId })
+	local UseResult1 = ReactModule.useCallback(function(_, p3) --[[ Line: 106 ]]
+		-- upvalues: UseResult (copy), PageContext (copy), p2 (copy), DiscoveryEventErrorLogger (upval), DiscoveryVideoPlayEventFunction (upval)
+		local UseResultResult = UseResult(p3)
+		
+		if not UseResultResult.videoAssetId then
+			DiscoveryEventErrorLogger.reportError("UnifiedVideoEngagementEvent_MissingVideoAssetId", `SDUI video analytics "play" is missing videoAssetId on page "{PageContext}"`, {
 				actionType = "play",
-				pageContext = var4,
-				universeId = p3.universeId,
-				placeId = p3.placeId
+				pageContext = PageContext,
+				universeId = p2.universeId,
+				placeId = p2.placeId
 			})
 		end
-		discoveryVideoPlayEvent(p2, var3)
-	end, { var1, p2, p3.universeId, p3.placeId })
-	local var3 = reactModule.useCallback(function(_, p4, p5, p6)
-		-- upvalues: var1 (ref), p2 (ref), p3 (ref), discoveryEventErrorLogger (copy), discoveryVideoLoadEvent (copy), videoLogger (copy), videoActions (copy)
-		local var4 = var1(p4)
+		DiscoveryVideoPlayEventFunction(PageContext, UseResultResult)
+	end, { UseResult, PageContext, p2.universeId, p2.placeId })
+	local UseResult2 = ReactModule.useCallback(function(_, p3, TotalDuration, LoadTime) --[[ Line: 115 ]]
+		-- upvalues: UseResult (copy), PageContext (copy), p2 (copy), DiscoveryEventErrorLogger (upval), DiscoveryVideoLoadEventFunction (upval), FFlagLuaAppDiscoveryMomentVideoTelemetry (upval), VideoLogger (upval), VideoActions (upval)
+		local UseResultResult = UseResult(p3)
 		
-		if not var4.videoAssetId then
-			local var5 = p2
-			discoveryEventErrorLogger.reportError("UnifiedVideoEngagementEvent_MissingVideoAssetId", `SDUI video analytics "load" is missing videoAssetId on page "{var21}"`, {
+		if not UseResultResult.videoAssetId then
+			DiscoveryEventErrorLogger.reportError("UnifiedVideoEngagementEvent_MissingVideoAssetId", `SDUI video analytics "load" is missing videoAssetId on page "{PageContext}"`, {
 				actionType = "load",
-				pageContext = var5,
-				universeId = p3.universeId,
-				placeId = p3.placeId
+				pageContext = PageContext,
+				universeId = p2.universeId,
+				placeId = p2.placeId
 			})
 		end
-		discoveryVideoLoadEvent(p2, {
-			videoAssetId = var4.videoAssetId,
-			videoPlaybackSessionId = var4.videoPlaybackSessionId,
-			totalDuration = p5,
-			loadTime = p6,
-			universeId = var4.universeId,
-			rootPlaceId = var4.rootPlaceId,
-			gameSetTypeId = var4.gameSetTypeId,
-			sortPos = var4.sortPos,
-			nativeAdData = var4.nativeAdData,
-			tileType = var4.tileType,
-			contentType = var4.contentType
+		DiscoveryVideoLoadEventFunction(PageContext, {
+			videoAssetId = UseResultResult.videoAssetId,
+			videoPlaybackSessionId = UseResultResult.videoPlaybackSessionId,
+			totalDuration = TotalDuration,
+			loadTime = LoadTime,
+			universeId = UseResultResult.universeId,
+			rootPlaceId = UseResultResult.rootPlaceId,
+			gameSetTypeId = UseResultResult.gameSetTypeId,
+			sortPos = UseResultResult.sortPos,
+			nativeAdData = UseResultResult.nativeAdData,
+			tileType = UseResultResult.tileType,
+			contentType = UseResultResult.contentType,
+			isMoment = if FFlagLuaAppDiscoveryMomentVideoTelemetry then UseResultResult.isMoment else nil
 		})
 		
-		if var4.videoAssetId and p3.sourceId then
-			videoLogger.reportVideoAction(videoActions.load, p2, {
-				videoAssetId = var4.videoAssetId,
-				source = p3.source,
-				sourceId = p3.sourceId,
-				playbackSessionId = var4.videoPlaybackSessionId
-			}, { loadTime = p6 })
+		if UseResultResult.videoAssetId and p2.sourceId then
+			VideoLogger.reportVideoAction(VideoActions.load, PageContext, {
+				videoAssetId = UseResultResult.videoAssetId,
+				source = p2.source,
+				sourceId = p2.sourceId,
+				playbackSessionId = UseResultResult.videoPlaybackSessionId
+			}, { loadTime = LoadTime })
 		end
 	end, {
-		var1, p2, p3.source, p3.sourceId, p3.universeId, p3.placeId
+		UseResult, PageContext, p2.source, p2.sourceId, p2.universeId, p2.placeId
 	})
-	local var4 = reactModule.useCallback(function(_, p4)
-		-- upvalues: var1 (ref), p2 (ref), p3 (ref), discoveryEventErrorLogger (copy), discoveryVideoLoopEvent (copy)
-		local var5 = var1(p4)
+	local UseResult3 = ReactModule.useCallback(function(_, p3) --[[ Line: 154 ]]
+		-- upvalues: UseResult (copy), PageContext (copy), p2 (copy), DiscoveryEventErrorLogger (upval), DiscoveryVideoLoopEventFunction (upval)
+		local UseResultResult = UseResult(p3)
 		
-		if not var5.videoAssetId then
-			local var6 = p2
-			discoveryEventErrorLogger.reportError("UnifiedVideoEngagementEvent_MissingVideoAssetId", `SDUI video analytics "loop" is missing videoAssetId on page "{var23}"`, {
+		if not UseResultResult.videoAssetId then
+			DiscoveryEventErrorLogger.reportError("UnifiedVideoEngagementEvent_MissingVideoAssetId", `SDUI video analytics "loop" is missing videoAssetId on page "{PageContext}"`, {
 				actionType = "loop",
-				pageContext = var6,
-				universeId = p3.universeId,
-				placeId = p3.placeId
+				pageContext = PageContext,
+				universeId = p2.universeId,
+				placeId = p2.placeId
 			})
 		end
-		discoveryVideoLoopEvent(p2, var5)
-	end, { var1, p2, p3.universeId, p3.placeId })
-	local var5 = reactModule.useCallback(function(_, p4, p5, p6, p7)
-		-- upvalues: var1 (ref), p2 (ref), p3 (ref), discoveryEventErrorLogger (copy), discoveryVideoEndEvent (copy)
-		local var6 = var1(p5)
+		DiscoveryVideoLoopEventFunction(PageContext, UseResultResult)
+	end, { UseResult, PageContext, p2.universeId, p2.placeId })
+	local UseResult4 = ReactModule.useCallback(function(_, EndReason, p3, PlaybackTime, TargetUniverseId) --[[ Line: 163 ]]
+		-- upvalues: UseResult (copy), PageContext (copy), p2 (copy), DiscoveryEventErrorLogger (upval), DiscoveryVideoEndEventFunction (upval), FFlagLuaAppDiscoveryMomentVideoTelemetry (upval)
+		local UseResultResult = UseResult(p3)
 		
-		if not var6.videoAssetId then
-			local var7 = p2
-			discoveryEventErrorLogger.reportError("UnifiedVideoEngagementEvent_MissingVideoAssetId", `SDUI video analytics "end" is missing videoAssetId on page "{var25}"`, {
+		if not UseResultResult.videoAssetId then
+			DiscoveryEventErrorLogger.reportError("UnifiedVideoEngagementEvent_MissingVideoAssetId", `SDUI video analytics "end" is missing videoAssetId on page "{PageContext}"`, {
 				actionType = "end",
-				pageContext = var7,
-				universeId = p3.universeId,
-				placeId = p3.placeId
+				pageContext = PageContext,
+				universeId = p2.universeId,
+				placeId = p2.placeId
 			})
 		end
-		discoveryVideoEndEvent(p2, {
-			videoAssetId = var6.videoAssetId,
-			videoPlaybackSessionId = var6.videoPlaybackSessionId,
-			endReason = p4,
-			playbackTime = p6,
-			universeId = var6.universeId,
-			rootPlaceId = var6.rootPlaceId,
-			gameSetTypeId = var6.gameSetTypeId,
-			sortPos = var6.sortPos,
-			targetUniverseId = p7,
-			nativeAdData = var6.nativeAdData,
-			tileType = var6.tileType,
-			contentType = var6.contentType
+		DiscoveryVideoEndEventFunction(PageContext, {
+			videoAssetId = UseResultResult.videoAssetId,
+			videoPlaybackSessionId = UseResultResult.videoPlaybackSessionId,
+			endReason = EndReason,
+			playbackTime = PlaybackTime,
+			universeId = UseResultResult.universeId,
+			rootPlaceId = UseResultResult.rootPlaceId,
+			gameSetTypeId = UseResultResult.gameSetTypeId,
+			sortPos = UseResultResult.sortPos,
+			targetUniverseId = TargetUniverseId,
+			nativeAdData = UseResultResult.nativeAdData,
+			tileType = UseResultResult.tileType,
+			contentType = UseResultResult.contentType,
+			isMoment = if FFlagLuaAppDiscoveryMomentVideoTelemetry then UseResultResult.isMoment else nil
 		})
-	end, { var1, p2, p3.universeId, p3.placeId })
+	end, { UseResult, PageContext, p2.universeId, p2.placeId })
 	
-	return reactModule.useMemo(function()
-		-- upvalues: var2 (ref), var3 (ref), var4 (ref), var5 (ref)
+	return ReactModule.useMemo(function() --[[ Line: 194 ]]
+		-- upvalues: UseResult1 (copy), UseResult2 (copy), UseResult3 (copy), UseResult4 (copy)
 		return {
 			reportVideoMute = nil,
-			reportVideoPlay = var2,
-			reportVideoLoad = var3,
-			reportVideoLoop = var4,
-			reportVideoEnd = var5
+			reportVideoPlay = UseResult1,
+			reportVideoLoad = UseResult2,
+			reportVideoLoop = UseResult3,
+			reportVideoEnd = UseResult4
 		}
-	end, { var2, var3, var4, var5 })
+	end, { UseResult1, UseResult2, UseResult3, UseResult4 })
 end

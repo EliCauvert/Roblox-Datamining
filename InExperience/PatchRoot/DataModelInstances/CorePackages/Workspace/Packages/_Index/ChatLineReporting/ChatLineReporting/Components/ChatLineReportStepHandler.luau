@@ -1,111 +1,158 @@
-﻿local chatLineReporting = script:FindFirstAncestor("ChatLineReporting")
-local playersService = game:GetService("Players")
-local parent = chatLineReporting.Parent
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
-local focusRoot = focusNavigationUtilsModule.FocusRoot
-local inputHandlersModule = require(parent.InputHandlers)
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local reactOtterModule = require(parent.ReactOtter)
-local guiService = game:GetService("GuiService")
-local defaultReportDialogModule = require(parent.GenericAbuseReporting.DefaultReportDialog)
-local notificationModalsManagerModule = require(parent.NotificationModalsManager)
-local useTokens = require(parent.Foundation).Hooks.useTokens
-local images = require(parent.UIBlox).App.ImageSet.Images
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local constantsModule = require(chatLineReporting.Common.Constants)
-local analyticsReducerModule = require(chatLineReporting.Common.AnalyticsReducer)
-local chatLineReportAnalyticsModule = require(chatLineReporting.Common.ChatLineReportAnalytics)
-local buildReportModule = require(chatLineReporting.Common.buildReport)
-local isSystemMessageModule = require(chatLineReporting.Common.isSystemMessage)
-local chatLineReportSelectionModalOldModule = require(chatLineReporting.Components.ChatLineReportSelectionModalOld)
-local chatLineReportVerbatimModule = require(chatLineReporting.Components.ChatLineReportVerbatim)
-local chatLineReportCompleteModalModule = require(chatLineReporting.Components.ChatLineReportCompleteModal)
-local reportCategoriesModule = require(chatLineReporting.Common.ReportCategories)
+﻿local ChatLineReporting = script:FindFirstAncestor("ChatLineReporting")
+local Players = game:GetService("Players")
+local Parent = ChatLineReporting.Parent
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
+local FocusRoot = FocusNavigationUtilsModule.FocusRoot
+local InputHandlersModule = require(Parent.InputHandlers)
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local ReactOtterModule = require(Parent.ReactOtter)
+local GuiService = game:GetService("GuiService")
+local DefaultReportDialogModule = require(Parent.GenericAbuseReporting.DefaultReportDialog)
+local NotificationModalsManagerModule = require(Parent.NotificationModalsManager)
+local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+local Images = require(Parent.UIBlox).App.ImageSet.Images
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local ConstantsModule = require(ChatLineReporting.Common.Constants)
+local AnalyticsReducerModule = require(ChatLineReporting.Common.AnalyticsReducer)
+local ChatLineReportAnalyticsModule = require(ChatLineReporting.Common.ChatLineReportAnalytics)
+local BuildReportModule = require(ChatLineReporting.Common.buildReport)
+local IsSystemMessageModule = require(ChatLineReporting.Common.isSystemMessage)
+local ChatLineReportSelectionModalOldModule = require(ChatLineReporting.Components.ChatLineReportSelectionModalOld)
+local ChatLineReportVerbatimModule = require(ChatLineReporting.Components.ChatLineReportVerbatim)
+local ChatLineReportCompleteModalModule = require(ChatLineReporting.Components.ChatLineReportCompleteModal)
+local ReportCategoriesModule = require(ChatLineReporting.Common.ReportCategories)
 local SSUIMetaLuaEngineFeature = game:GetEngineFeature("SSUIMetaLua")
-local fFlagEnableGlobalChatAbuseReporting = require(parent.SharedFlags).FFlagEnableGlobalChatAbuseReporting
-local fFlagGenericAbuseReportingGranularExports = require(parent.SharedFlags).FFlagGenericAbuseReportingGranularExports
-local fFlagEnableChatReportingTextChannelTag = require(parent.SharedFlags).FFlagEnableChatReportingTextChannelTag
-local t = { stiffness = 400, damping = 40, mass = 1 }
-local t_1 = {
-	[Enum.KeyCode.ButtonB] = focusNavigationEventNameEnum.NavigateBack,
-	[Enum.KeyCode.Escape] = focusNavigationEventNameEnum.NavigateBack
+local FFlagEnableGlobalChatAbuseReporting = require(Parent.SharedFlags).FFlagEnableGlobalChatAbuseReporting
+local FFlagGenericAbuseReportingGranularExports = require(Parent.SharedFlags).FFlagGenericAbuseReportingGranularExports
+local FFlagEnableChatReportingTextChannelTag = require(Parent.SharedFlags).FFlagEnableChatReportingTextChannelTag
+local config = { stiffness = 400, damping = 40, mass = 1 }
+local EventMap = {
+	[Enum.KeyCode.ButtonB] = FocusNavigationEventNameEnum.NavigateBack,
+	[Enum.KeyCode.Escape] = FocusNavigationEventNameEnum.NavigateBack
 }
 
-return function(p1)
-	-- upvalues: reactModule (ref), constantsModule (ref), analyticsReducerModule (ref), guiService (ref), useLocalization (ref), useTokens (ref), isSystemMessageModule (ref), fFlagEnableGlobalChatAbuseReporting (ref), SSUIMetaLuaEngineFeature (ref), reactOtterModule (ref), notificationModalsManagerModule (ref), images (ref), t (ref), chatLineReportAnalyticsModule (ref), fFlagEnableChatReportingTextChannelTag (ref), buildReportModule (ref), playersService (ref), cryoModule (ref), chatLineReportSelectionModalOldModule (ref), defaultReportDialogModule (ref), chatLineReportVerbatimModule (ref), fFlagGenericAbuseReportingGranularExports (ref), reportCategoriesModule (ref), chatLineReportCompleteModalModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), focusRoot (ref), t_1 (ref), focusNavigableSurfaceIdentifierEnum (ref)
-	local var1, var2 = reactModule.useState(constantsModule.ReportSteps.SELECT)
-	local var3, var4 = reactModule.useState(nil)
-	local var5, var6 = reactModule.useReducer(analyticsReducerModule, constantsModule.AnalyticsInitialState)
-	local var7, var8 = reactModule.useState(not guiService.MenuIsOpen)
-	local var9, var10 = reactModule.useState(guiService.MenuIsOpen)
-	local var11, var12 = reactModule.useState(false)
-	local var13, var14 = reactModule.useState(nil)
-	local var15, var16 = reactModule.useState("")
-	local var17 = useLocalization(constantsModule.ChatLineLocalizationKeys)
-	local var18 = useLocalization({
-		ChatToastTitleSuccess = { "Feature.ReportAbuse.Label.UserTextMuted", name = var15 },
+return function(p1) --[[ Line: 54 | Named "ChatLineReportStepHandler" ]]
+	-- upvalues: ReactModule (copy), ConstantsModule (copy), AnalyticsReducerModule (copy), GuiService (copy), UseLocalizationFunction (copy), UseTokensFunction (copy), IsSystemMessageModule (copy), FFlagEnableGlobalChatAbuseReporting (copy), SSUIMetaLuaEngineFeature (copy), ReactOtterModule (copy), NotificationModalsManagerModule (copy), Images (copy), config (copy), ChatLineReportAnalyticsModule (copy), FFlagEnableChatReportingTextChannelTag (copy), BuildReportModule (copy), Players (copy), CryoModule (copy), ChatLineReportSelectionModalOldModule (copy), DefaultReportDialogModule (copy), ChatLineReportVerbatimModule (copy), FFlagGenericAbuseReportingGranularExports (copy), ReportCategoriesModule (copy), ChatLineReportCompleteModalModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), FocusRoot (copy), EventMap (copy), FocusNavigableSurfaceIdentifierEnum (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(ConstantsModule.ReportSteps.SELECT)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
+	local UseReducerResult, UseReducerResult2 = ReactModule.useReducer(AnalyticsReducerModule, ConstantsModule.AnalyticsInitialState)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(not GuiService.MenuIsOpen)
+	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(GuiService.MenuIsOpen)
+	local UseStateResult5, UseStateResult2_4 = ReactModule.useState(false)
+	local UseStateResult6, UseStateResult2_5 = ReactModule.useState(nil)
+	local UseStateResult7, UseStateResult2_6 = ReactModule.useState("")
+	local UseLocalizationResult = UseLocalizationFunction(ConstantsModule.ChatLineLocalizationKeys)
+	local UseLocalizationResult1 = UseLocalizationFunction({
+		ChatToastTitleSuccess = {
+			"Feature.ReportAbuse.Label.UserTextMuted",
+			name = UseStateResult7
+		},
 		ChatToastTitleError = {
 			"Feature.ReportAbuse.Label.UserTextMutedError",
-			name = var15
+			name = UseStateResult7
 		},
 		ChatToastDescriptionErrorDoesNotExist = {
 			"Feature.ReportAbuse.Message.UserTextMutedErrorDoesNotExist",
-			name = var15
+			name = UseStateResult7
 		}
 	})
-	local var19 = useTokens()
-	reactModule.useEffect(function()
-		-- upvalues: var6 (ref), constantsModule (copy), p1 (ref), isSystemMessageModule (copy), fFlagEnableGlobalChatAbuseReporting (copy), guiService (copy), var10 (ref), var8 (ref)
--- FATAL: Failed to generate AST for `unnamed` function:
-runtime : [KeyError] :11990: 15
-Traceback:
-	runtime : [lunaux]:11990 function decompile_function
-	runtime : [lunaux]:1933 function normalize_cfg
-	runtime : [lunaux]:1320 function match_weird_patterns
-	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: SSUIMetaLuaEngineFeature (copy), var7 (ref)
-		if SSUIMetaLuaEngineFeature then
-			pcall(function()
-				-- upvalues: var7 (copy)
-				local safetyService = game:GetService("SafetyService")
+	local UseTokensResult = UseTokensFunction()
+	ReactModule.useEffect(function() --[[ Line: 78 ]]
+		-- upvalues: UseReducerResult2 (copy), ConstantsModule (upval), p1 (copy), IsSystemMessageModule (upval), FFlagEnableGlobalChatAbuseReporting (upval), GuiService (upval), UseStateResult2_3 (copy), UseStateResult2_2 (copy)
+		UseReducerResult2({
+			type = ConstantsModule.AnalyticsActions.AccumulateForTimeSpent,
+			accumulated_time_ms = workspace:GetServerTimeNow() * 1000
+		})
+		UseReducerResult2({
+			type = ConstantsModule.AnalyticsActions.SetPlaceId,
+			place_id = game.PlaceId
+		})
+		local ViewportSize = game.Workspace.CurrentCamera.ViewportSize
+		UseReducerResult2({
+			type = ConstantsModule.AnalyticsActions.SetViewportInformation,
+			viewport_size_x = ViewportSize.X,
+			viewport_size_y = ViewportSize.Y,
+			is_portrait_mode = ViewportSize.X < ViewportSize.Y and ViewportSize.X < 800
+		})
+		local Selectable_chat_history_size = 0
+		local Num_non_general_channel_chats = 0
+		
+		for _, message in ipairs(p1.messages) do
+			if not IsSystemMessageModule(message) then
+				Selectable_chat_history_size += 1
 				
-				if var7 then
-					safetyService:ReportChatLineReportingOpen()
+				if if FFlagEnableGlobalChatAbuseReporting then message.textChannel and message.textChannel.Name ~= ConstantsModule.ChannelTypes.General else message.textChannel.Name ~= ConstantsModule.ChannelTypes.General then
+					Num_non_general_channel_chats += 1
+				end
+			end
+		end
+		UseReducerResult2({
+			type = ConstantsModule.AnalyticsActions.SetChatHistoryInformation,
+			selectable_chat_history_size = Selectable_chat_history_size,
+			total_chat_history_size = #p1.messages,
+			num_non_general_channel_chats = Num_non_general_channel_chats
+		})
+		local MenuOpenedConnection = GuiService.MenuOpened:Connect(function() --[[ Line: 120 ]]
+			-- upvalues: UseStateResult2_3 (upval), UseStateResult2_2 (upval)
+			UseStateResult2_3(true)
+			UseStateResult2_2(false)
+		end)
+		local MenuClosedConnection = GuiService.MenuClosed:Connect(function() --[[ Line: 124 ]]
+			-- upvalues: UseStateResult2_3 (upval), UseStateResult2_2 (upval)
+			UseStateResult2_3(false)
+			UseStateResult2_2(true)
+		end)
+		
+		return function() --[[ Line: 128 ]]
+			-- upvalues: MenuOpenedConnection (copy), MenuClosedConnection (copy)
+			MenuOpenedConnection:Disconnect()
+			MenuClosedConnection:Disconnect()
+		end
+	end, {})
+	ReactModule.useEffect(function() --[[ Line: 135 ]]
+		-- upvalues: SSUIMetaLuaEngineFeature (upval), UseStateResult3 (copy)
+		if SSUIMetaLuaEngineFeature then
+			pcall(function() --[[ Line: 137 ]]
+				-- upvalues: UseStateResult3 (upval)
+				local SafetyService = game:GetService("SafetyService")
+				
+				if UseStateResult3 then
+					SafetyService:ReportChatLineReportingOpen()
 					
 					return
+				else
+					SafetyService:ReportChatLineReportingClose()
 				end
-				safetyService:ReportChatLineReportingClose()
 			end)
 		end
-	end, { var7 })
-	local var20, var21 = reactOtterModule.useAnimatedBinding(1, function()
-		-- upvalues: var7 (ref), var11 (ref), var13 (ref), constantsModule (copy), notificationModalsManagerModule (copy), images (copy), var18 (ref), var17 (ref), var19 (ref), p1 (ref)
-		if not var7 then
-			if var11 then
-				if var13 and var13.key == constantsModule.SuccessfulMuteKey then
-					notificationModalsManagerModule.SetUIBloxToast({
-						iconImage = images[constantsModule.ToastIconImageSuccess],
-						toastTitle = var18.ChatToastTitleSuccess,
-						toastSubtitle = var17.ChatToastDescriptionSuccess,
+	end, { UseStateResult3 })
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(1, function() --[[ Line: 148 ]]
+		-- upvalues: UseStateResult3 (copy), UseStateResult5 (copy), UseStateResult6 (copy), ConstantsModule (upval), NotificationModalsManagerModule (upval), Images (upval), UseLocalizationResult1 (copy), UseLocalizationResult (copy), UseTokensResult (copy), p1 (copy)
+		if not UseStateResult3 then
+			if UseStateResult5 then
+				if UseStateResult6 and UseStateResult6.key == ConstantsModule.SuccessfulMuteKey then
+					NotificationModalsManagerModule.SetUIBloxToast({
+						iconImage = Images[ConstantsModule.ToastIconImageSuccess],
+						toastTitle = UseLocalizationResult1.ChatToastTitleSuccess,
+						toastSubtitle = UseLocalizationResult.ChatToastDescriptionSuccess,
 						sequenceNumber = DateTime.now().UnixTimestamp,
 						iconColorStyle = {
 							Transparency = 0,
-							Color = var19.Color.System.Success.Color3
+							Color = UseTokensResult.Color.System.Success.Color3
 						}
 					})
-				elseif var13 then
-					notificationModalsManagerModule.SetUIBloxToast({
-						iconImage = images[constantsModule.ToastIconImageError],
-						toastTitle = var18.ChatToastTitleError,
-						toastSubtitle = if var13.key == constantsModule.ErrorSelfMuteKey then var17.ChatToastDescriptionErrorSelf else var18.ChatToastDescriptionErrorDoesNotExist,
+				elseif UseStateResult6 then
+					NotificationModalsManagerModule.SetUIBloxToast({
+						iconImage = Images[ConstantsModule.ToastIconImageError],
+						toastTitle = UseLocalizationResult1.ChatToastTitleError,
+						toastSubtitle = if UseStateResult6.key == ConstantsModule.ErrorSelfMuteKey then UseLocalizationResult.ChatToastDescriptionErrorSelf else UseLocalizationResult1.ChatToastDescriptionErrorDoesNotExist,
 						sequenceNumber = DateTime.now().UnixTimestamp,
 						iconColorStyle = {
 							Transparency = 0,
-							Color = var19.Color.System.Warning.Color3
+							Color = UseTokensResult.Color.System.Warning.Color3
 						}
 					})
 				end
@@ -113,56 +160,106 @@ Traceback:
 			p1.unmount()
 		end
 	end)
-	local var22 = reactModule.useMemo(function()
-		-- upvalues: var7 (ref)
-		return if var7 then 0 else 1
-	end, { var7 })
-	reactModule.useEffect(function()
-		-- upvalues: var21 (ref), reactOtterModule (copy), var22 (ref), t (copy)
-		var21(reactOtterModule.spring(var22, t))
-	end, { var22 })
-	local var23 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref), var2 (ref), constantsModule (copy)
-		if var3 ~= nil then
-			var2(constantsModule.ReportSteps.SUBMIT)
+	local UseMemoResult = ReactModule.useMemo(function(): number --[[ Line: 184 ]]
+		-- upvalues: UseStateResult3 (copy)
+		return if UseStateResult3 then 0 else 1
+	end, { UseStateResult3 })
+	ReactModule.useEffect(function() --[[ Line: 188 ]]
+		-- upvalues: UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), UseMemoResult (copy), config (upval)
+		UseAnimatedBindingResult2(ReactOtterModule.spring(UseMemoResult, config))
+	end, { UseMemoResult })
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 193 ]]
+		-- upvalues: UseStateResult1 (copy), UseStateResult2 (copy), ConstantsModule (upval)
+		if UseStateResult1 ~= nil then
+			UseStateResult2(ConstantsModule.ReportSteps.SUBMIT)
 		end
 	end)
-	local var24 = reactModule.useCallback(function()
-		-- upvalues: chatLineReportAnalyticsModule (copy), var5 (ref), var8 (ref)
-		chatLineReportAnalyticsModule(var5, 2, false)
-		var8(false)
-	end, { var5 })
-	local var25 = if var1 == constantsModule.ReportSteps.COMPLETE then reactModule.useCallback(function()
-		-- upvalues: chatLineReportAnalyticsModule (copy), var5 (ref), var8 (ref)
-		chatLineReportAnalyticsModule(var5, 1, false)
-		var8(false)
-	end, { var5 }) else var24
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 199 ]]
+		-- upvalues: ChatLineReportAnalyticsModule (upval), UseReducerResult (copy), UseStateResult2_2 (copy)
+		ChatLineReportAnalyticsModule(UseReducerResult, 2, false)
+		UseStateResult2_2(false)
+	end, { UseReducerResult })
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 206 ]]
+		-- upvalues: UseStateResult2 (copy), ConstantsModule (upval), UseStateResult2_1 (copy)
+		UseStateResult2(ConstantsModule.ReportSteps.SELECT)
+		UseStateResult2_1(nil)
+	end)
+	local UseResult3 = ReactModule.useCallback(function(Reason_selection, p2): boolean --[[ Line: 211 ]]
+		-- upvalues: FFlagEnableChatReportingTextChannelTag (upval), BuildReportModule (upval), Players (upval), UseStateResult1 (copy), CryoModule (upval), p1 (copy), IsSystemMessageModule (upval), UseReducerResult2 (copy), ConstantsModule (upval), UseStateResult2 (copy)
+		local EligibleChatLines = {}
+		local ReportModule = if FFlagEnableChatReportingTextChannelTag then BuildReportModule(Players.LocalPlayer.UserId, UseStateResult1.userId, Reason_selection, p2, UseStateResult1.messageId, UseStateResult1.presetId, UseStateResult1.presetChatVersion, if UseStateResult1.textChannel then UseStateResult1.textChannel.Name else nil) else BuildReportModule(Players.LocalPlayer.UserId, UseStateResult1.userId, Reason_selection, p2, UseStateResult1.messageId, UseStateResult1.presetId, UseStateResult1.presetChatVersion)
+		CryoModule.Dictionary.map(p1.messages, function(p3) --[[ Line: 238 ]]
+			-- upvalues: IsSystemMessageModule (upval), EligibleChatLines (copy)
+			if not IsSystemMessageModule(p3) then
+				EligibleChatLines[#EligibleChatLines + 1] = { channel = p3.textChannel, messageId = p3.messageId }
+			end
+		end)
+		local TargetChatLines = {
+			{
+				channel = UseStateResult1.textChannel,
+				messageId = UseStateResult1.messageId
+			}
+		}
+		UseReducerResult2({
+			type = ConstantsModule.AnalyticsActions.SetReasonSelection,
+			reason_selection = Reason_selection
+		})
+		UseReducerResult2({
+			type = ConstantsModule.AnalyticsActions.SetCommentAdded,
+			comment_added = #p2 > 0
+		})
+		Players:ReportChatAbuse(EligibleChatLines, TargetChatLines, ReportModule)
+		UseStateResult2(ConstantsModule.ReportSteps.COMPLETE)
+		
+		return true
+	end, { p1.messages, UseStateResult1 })
+	local UseResult4 = ReactModule.useCallback(function(p2) --[[ Line: 270 ]]
+		-- upvalues: ChatLineReportAnalyticsModule (upval), UseReducerResult (copy), UseStateResult2_5 (copy), UseStateResult2_6 (copy), UseStateResult2_4 (copy), UseStateResult2_2 (copy)
+		if p2 then
+			ChatLineReportAnalyticsModule(UseReducerResult, 1, true)
+			UseStateResult2_5(p2)
+			UseStateResult2_6(p2.args.RBX_NAME)
+			UseStateResult2_4(true)
+			UseStateResult2_2(false)
+			
+			return
+		else
+			ChatLineReportAnalyticsModule(UseReducerResult, 1, false)
+			UseStateResult2_2(false)
+		end
+	end, { UseReducerResult })
+	local UseResult5 = ReactModule.useCallback(function() --[[ Line: 284 ]]
+		-- upvalues: ChatLineReportAnalyticsModule (upval), UseReducerResult (copy), UseStateResult2_2 (copy)
+		ChatLineReportAnalyticsModule(UseReducerResult, 1, false)
+		UseStateResult2_2(false)
+	end, { UseReducerResult })
+	local Callback = if UseStateResult == ConstantsModule.ReportSteps.COMPLETE then UseResult5 else UseResult1
 	
-	return reactModule.createElement(focusRoot, {
+	return ReactModule.createElement(FocusRoot, {
 		isAutoFocusRoot = true,
 		isIsolated = true,
-		eventHandlers = reactModule.useMemo(function()
-			-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), var25 (ref)
+		eventHandlers = ReactModule.useMemo(function() --[[ Line: 365 ]]
+			-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), Callback (copy)
 			return {
-				[focusNavigationEventNameEnum.NavigateBack] = {
-					handler = inputHandlersModule.onRelease(function(p2)
-						-- upvalues: var25 (copy)
-						var25()
+				[FocusNavigationEventNameEnum.NavigateBack] = {
+					handler = InputHandlersModule.onRelease(function(p2) --[[ Line: 368 ]]
+						-- upvalues: Callback (upval)
+						Callback()
 						p2:cancel()
 					end)
 				}
 			}
-		end, { var25 }),
-		eventMap = t_1,
-		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.PopUp
+		end, { Callback }),
+		eventMap = EventMap,
+		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.PopUp
 	}, {
-		ChatLineReportStepHandler = reactModule.createElement("TextButton", {
-			Active = var20:map(function(p2)
+		ChatLineReportStepHandler = ReactModule.createElement("TextButton", {
+			Active = UseAnimatedBindingResult:map(function(p2): boolean --[[ Line: 294 ]]
 				return p2 == 0
 			end),
 			AutoButtonColor = false,
 			BorderSizePixel = 0,
-			BackgroundTransparency = var20:map(function(p2)
+			BackgroundTransparency = UseAnimatedBindingResult:map(function(p2: number): number --[[ Line: 299 ]]
 				return p2 + 0.3
 			end),
 			BackgroundColor3 = Color3.fromHex("#000000"),
@@ -171,86 +268,41 @@ Traceback:
 			Size = UDim2.new(1, 0, 1, 0),
 			Position = UDim2.fromScale(0.5, 0.5),
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			[reactModule.Event.Activated] = var25,
+			[ReactModule.Event.Activated] = Callback,
 			ZIndex = 10
 		}, {
-			Frame = reactModule.createElement("Frame", {
+			Frame = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, 0, 1, 0),
-				Position = var20:map(function(p2)
-					-- upvalues: var9 (ref)
-					return if var9 then UDim2.new(0, 0, -p2, 0) else UDim2.new(0, 0, p2, 0)
+				Position = UseAnimatedBindingResult:map(function(YScale): UDim2 --[[ Line: 314 ]]
+					-- upvalues: UseStateResult4 (copy)
+					return if UseStateResult4 then UDim2.new(0, 0, -YScale, 0) else UDim2.new(0, 0, YScale, 0)
 				end)
 			}, {
-				ChatLineReportStep = if var1 == constantsModule.ReportSteps.SELECT then reactModule.createElement(chatLineReportSelectionModalOldModule, {
-					onContinue = var23,
-					onBack = var24,
+				ChatLineReportStep = if UseStateResult == ConstantsModule.ReportSteps.SELECT then ReactModule.createElement(ChatLineReportSelectionModalOldModule, {
+					onContinue = UseResult,
+					onBack = UseResult1,
 					messages = p1.messages,
-					selectedMessage = var3,
-					setSelectedMessage = var4,
-					analyticsDispatch = var6
-				}) elseif var1 == constantsModule.ReportSteps.SUBMIT then reactModule.createElement(defaultReportDialogModule, {
+					selectedMessage = UseStateResult1,
+					setSelectedMessage = UseStateResult2_1,
+					analyticsDispatch = UseReducerResult2
+				}) elseif UseStateResult == ConstantsModule.ReportSteps.SUBMIT then ReactModule.createElement(DefaultReportDialogModule, {
 					analyticsContext = "ReportViaChatLine",
-					topCustomComponent = reactModule.createElement(chatLineReportVerbatimModule, { selectedMessage = var3 }),
-					onSubmitProps = {
-						hasNextSteps = true,
-						onProceedToNextStep = reactModule.useCallback(function(p2, p3)
-							-- upvalues: fFlagEnableChatReportingTextChannelTag (copy), buildReportModule (copy), playersService (copy), var3 (ref), cryoModule (copy), p1 (ref), isSystemMessageModule (copy), var6 (ref), constantsModule (copy), var2 (ref)
-							local t = {}
-							local var26 = if fFlagEnableChatReportingTextChannelTag then buildReportModule(playersService.LocalPlayer.UserId, var3.userId, p2, p3, var3.messageId, var3.presetId, var3.presetChatVersion, if var3.textChannel then var3.textChannel.Name else nil) else buildReportModule(playersService.LocalPlayer.UserId, var3.userId, p2, p3, var3.messageId, var3.presetId, var3.presetChatVersion)
-							cryoModule.Dictionary.map(p1.messages, function(p4)
-								-- upvalues: isSystemMessageModule (copy), t (ref)
-								if not isSystemMessageModule(p4) then
-									t[#t + 1] = { channel = p4.textChannel, messageId = p4.messageId }
-								end
-							end)
-							local list = {
-								{ channel = var3.textChannel, messageId = var3.messageId }
-							}
-							var6({
-								type = constantsModule.AnalyticsActions.SetReasonSelection,
-								reason_selection = p2
-							})
-							var6({
-								type = constantsModule.AnalyticsActions.SetCommentAdded,
-								comment_added = #p3 > 0
-							})
-							playersService:ReportChatAbuse(t, list, var26)
-							var2(constantsModule.ReportSteps.COMPLETE)
-							
-							return true
-						end, { p1.messages, var3 })
-					},
-					localizationKeys = if fFlagGenericAbuseReportingGranularExports then constantsModule.SubmitDialogLocalizationKeys else constantsModule.GenericAbuseReportingLocalizationKeys,
+					topCustomComponent = ReactModule.createElement(ChatLineReportVerbatimModule, { selectedMessage = UseStateResult1 }),
+					onSubmitProps = { hasNextSteps = true, onProceedToNextStep = UseResult3 },
+					localizationKeys = if FFlagGenericAbuseReportingGranularExports then ConstantsModule.SubmitDialogLocalizationKeys else ConstantsModule.GenericAbuseReportingLocalizationKeys,
 					onCloseProps = {
 						hasPreviousSteps = true,
-						onBackToPreviousStep = reactModule.useCallback(function()
-							-- upvalues: var2 (ref), constantsModule (copy), var4 (ref)
-							var2(constantsModule.ReportSteps.SELECT)
-							var4(nil)
-						end)
+						onBackToPreviousStep = UseResult2
 					},
-					reportCategories = reportCategoriesModule,
-					onBeforeSubmitAnalytics = function(p2)
+					reportCategories = ReportCategoriesModule,
+					onBeforeSubmitAnalytics = function(p2) --[[ Line: 348 ]]
 						return p2
 					end
-				}) elseif var1 == constantsModule.ReportSteps.COMPLETE then reactModule.createElement(chatLineReportCompleteModalModule, {
-					localizationKeys = if fFlagGenericAbuseReportingGranularExports then constantsModule.CompleteDialogLocalizationKeys else constantsModule.GenericAbuseReportingLocalizationKeys,
-					onDismiss = reactModule.useCallback(function(p2)
-						-- upvalues: chatLineReportAnalyticsModule (copy), var5 (ref), var14 (ref), var16 (ref), var12 (ref), var8 (ref)
-						if p2 then
-							chatLineReportAnalyticsModule(var5, 1, true)
-							var14(p2)
-							var16(p2.args.RBX_NAME)
-							var12(true)
-							var8(false)
-							
-							return
-						end
-						chatLineReportAnalyticsModule(var5, 1, false)
-						var8(false)
-					end, { var5 }),
-					selectedMessage = var3
+				}) elseif UseStateResult == ConstantsModule.ReportSteps.COMPLETE then ReactModule.createElement(ChatLineReportCompleteModalModule, {
+					localizationKeys = if FFlagGenericAbuseReportingGranularExports then ConstantsModule.CompleteDialogLocalizationKeys else ConstantsModule.GenericAbuseReportingLocalizationKeys,
+					onDismiss = UseResult4,
+					selectedMessage = UseStateResult1
 				}) else nil
 			})
 		})

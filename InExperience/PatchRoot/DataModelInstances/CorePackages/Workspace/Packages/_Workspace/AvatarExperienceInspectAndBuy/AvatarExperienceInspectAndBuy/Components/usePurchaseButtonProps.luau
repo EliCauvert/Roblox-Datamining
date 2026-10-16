@@ -1,59 +1,62 @@
-﻿local avatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
-local parent = avatarExperienceInspectAndBuy.Parent
-local reactModule = require(parent.React)
-local useConvertedItemDataModule = require(avatarExperienceInspectAndBuy.Hooks.useConvertedItemData)
-local useItemStatusLocalizationModule = require(avatarExperienceInspectAndBuy.Hooks.useItemStatusLocalization)
-local getPriceStatusModule = require(avatarExperienceInspectAndBuy.Utils.getPriceStatus)
-local _ = require(avatarExperienceInspectAndBuy.Components.Common.BuyActionBar)
-local foundationModule = require(parent.Foundation)
-local _ = require(avatarExperienceInspectAndBuy.Types)
-local priceStatusModule = require(avatarExperienceInspectAndBuy.Enums.PriceStatus)
-local itemDetailsUtilsModule = require(avatarExperienceInspectAndBuy.Utils.itemDetailsUtils)
-local isCollectible = itemDetailsUtilsModule.isCollectible
-local calculatePurchaseStatusForItem = itemDetailsUtilsModule.calculatePurchaseStatusForItem
-local getPriceInRobux = itemDetailsUtilsModule.getPriceInRobux
-local formatNumberModule = require(avatarExperienceInspectAndBuy.Utils.formatNumber)
+﻿local AvatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
+local Parent = AvatarExperienceInspectAndBuy.Parent
+local ReactModule = require(Parent.React)
+local UseConvertedItemDataModule = require(AvatarExperienceInspectAndBuy.Hooks.useConvertedItemData)
+local UseItemStatusLocalizationModule = require(AvatarExperienceInspectAndBuy.Hooks.useItemStatusLocalization)
+local GetPriceStatusModule = require(AvatarExperienceInspectAndBuy.Utils.getPriceStatus)
+local _ = require(AvatarExperienceInspectAndBuy.Components.Common.BuyActionBar)
+local FoundationModule = require(Parent.Foundation)
+local _ = require(AvatarExperienceInspectAndBuy.Types)
+local PriceStatusModule = require(AvatarExperienceInspectAndBuy.Enums.PriceStatus)
+local ItemDetailsUtilsModule = require(AvatarExperienceInspectAndBuy.Utils.itemDetailsUtils)
+local IsCollectibleFunction = ItemDetailsUtilsModule.isCollectible
+local CalculatePurchaseStatusForItemFunction = ItemDetailsUtilsModule.calculatePurchaseStatusForItem
+local GetPriceInRobuxFunction = ItemDetailsUtilsModule.getPriceInRobux
+local FormatNumberModule = require(AvatarExperienceInspectAndBuy.Utils.formatNumber)
 
-return function(p1)
-	-- upvalues: useConvertedItemDataModule (ref), getPriceStatusModule (ref), useItemStatusLocalizationModule (ref), reactModule (ref), foundationModule (ref), priceStatusModule (ref), isCollectible (ref), calculatePurchaseStatusForItem (ref), formatNumberModule (ref), getPriceInRobux (ref)
-	local var1 = useConvertedItemDataModule(p1.selectedItem)
-	local var2 = getPriceStatusModule(var1)
-	local var3 = useItemStatusLocalizationModule(var1)
+return function(p1) --[[ Line: 40 | Named "usePurchaseButtonProps" ]]
+	-- upvalues: UseConvertedItemDataModule (copy), GetPriceStatusModule (copy), UseItemStatusLocalizationModule (copy), ReactModule (copy), FoundationModule (copy), PriceStatusModule (copy), IsCollectibleFunction (copy), CalculatePurchaseStatusForItemFunction (copy), FormatNumberModule (copy), GetPriceInRobuxFunction (copy)
+	local UseConvertedItemDataModuleResult = UseConvertedItemDataModule(p1.selectedItem)
+	local PriceStatusModule1 = GetPriceStatusModule(UseConvertedItemDataModuleResult)
+	local UseItemStatusLocalizationModuleResult = UseItemStatusLocalizationModule(UseConvertedItemDataModuleResult)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 46 ]]
+		-- upvalues: p1 (copy), FoundationModule (upval)
+		return {
+			showRobuxIcon = false,
+			purchaseButtonText = p1.purchaseButtonText,
+			onPurchase = p1.onBulkPurchase,
+			isDisabled = p1.isDisabled,
+			variant = FoundationModule.Enums.ButtonVariant.Emphasis
+		}
+	end, { p1 })
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 57 ]]
+		-- upvalues: PriceStatusModule1 (copy), PriceStatusModule (upval), UseItemStatusLocalizationModuleResult (copy), FoundationModule (upval), UseConvertedItemDataModuleResult (copy), IsCollectibleFunction (upval), CalculatePurchaseStatusForItemFunction (upval), p1 (copy)
+		local IsPriceStatusModuleMatch: boolean = PriceStatusModule1 == PriceStatusModule.Free or (PriceStatusModule1 == PriceStatusModule.PurchaseFromRoblox or PriceStatusModule1 == PriceStatusModule.PurchaseFromResale)
+		
+		return {
+			purchaseButtonText = UseItemStatusLocalizationModuleResult[PriceStatusModule1],
+			isDisabled = not IsPriceStatusModuleMatch,
+			variant = if IsPriceStatusModuleMatch then FoundationModule.Enums.ButtonVariant.Emphasis else FoundationModule.Enums.ButtonVariant.Standard,
+			onPurchase = function() --[[ Line: 70 ]]
+				-- upvalues: UseConvertedItemDataModuleResult (upval), IsCollectibleFunction (upval), CalculatePurchaseStatusForItemFunction (upval), PriceStatusModule1 (upval), p1 (upval)
+				if UseConvertedItemDataModuleResult then
+					local IsCollectible = IsCollectibleFunction(UseConvertedItemDataModuleResult)
+					local PurchaseStatusForItem = CalculatePurchaseStatusForItemFunction(UseConvertedItemDataModuleResult, PriceStatusModule1)
+					p1.onPromptPurchase(UseConvertedItemDataModuleResult.id, UseConvertedItemDataModuleResult.itemType, PurchaseStatusForItem.collectibleItemId, PurchaseStatusForItem.collectibleLowestAvailableResaleProductId, PurchaseStatusForItem.collectibleLowestAvailableResaleItemInstanceId, PurchaseStatusForItem.collectibleLowestResalePrice, IsCollectible)
+				end
+			end
+		}
+	end, { p1, PriceStatusModule1, UseConvertedItemDataModuleResult })
 	
 	return if p1.selectedItem then {
-		purchaseButtonProps = reactModule.useMemo(function()
-			-- upvalues: var2 (ref), priceStatusModule (copy), var3 (ref), foundationModule (copy), var1 (ref), isCollectible (copy), calculatePurchaseStatusForItem (copy), p1 (ref)
-			local var4 = if var2 ~= priceStatusModule.Free then if var2 ~= priceStatusModule.PurchaseFromRoblox then var2 == priceStatusModule.PurchaseFromResale else true else true
-			
-			return {
-				purchaseButtonText = var3[var2],
-				isDisabled = not var4,
-				variant = if not var4 then foundationModule.Enums.ButtonVariant.Standard else foundationModule.Enums.ButtonVariant.Emphasis,
-				onPurchase = function()
-					-- upvalues: var1 (copy), isCollectible (copy), calculatePurchaseStatusForItem (copy), var2 (copy), p1 (copy)
-					if var1 then
-						local var5 = calculatePurchaseStatusForItem(var1, var2)
-						p1.onPromptPurchase(var1.id, var1.itemType, var5.collectibleItemId, var5.collectibleLowestAvailableResaleProductId, var5.collectibleLowestAvailableResaleItemInstanceId, var5.collectibleLowestResalePrice, isCollectible(var1))
-					end
-				end
-			}
-		end, { p1, var2, var1 }),
+		purchaseButtonProps = UseMemoResult1,
 		priceLabel = {
 			leftLabel = p1.localizedStrings.total or "",
-			priceInRobux = formatNumberModule(getPriceInRobux(var1, var2))
+			priceInRobux = FormatNumberModule(GetPriceInRobuxFunction(UseConvertedItemDataModuleResult, PriceStatusModule1))
 		},
-		priceStatus = var2
+		priceStatus = PriceStatusModule1
 	} else {
-		purchaseButtonProps = reactModule.useMemo(function()
-			-- upvalues: p1 (ref), foundationModule (copy)
-			return {
-				showRobuxIcon = false,
-				purchaseButtonText = p1.purchaseButtonText,
-				onPurchase = p1.onBulkPurchase,
-				isDisabled = p1.isDisabled,
-				variant = foundationModule.Enums.ButtonVariant.Emphasis
-			}
-		end, { p1 }),
+		purchaseButtonProps = UseMemoResult,
 		priceLabel = {
 			leftLabel = p1.localizedStrings.totalItems or "",
 			priceInRobux = p1.formattedTotalPrice

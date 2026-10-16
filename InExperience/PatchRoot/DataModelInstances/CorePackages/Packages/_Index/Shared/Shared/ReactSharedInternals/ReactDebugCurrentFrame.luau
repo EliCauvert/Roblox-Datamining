@@ -1,30 +1,30 @@
-﻿local reactGlobalsModule = require(script.Parent.Parent.Parent.ReactGlobals)
-local t = {}
-local var1 = nil
-
-function t.setExtraStackFrame(value)
-	-- upvalues: reactGlobalsModule (ref), var1 (write)
-	if reactGlobalsModule.__DEV__ then
-		var1 = value
+﻿local ReactGlobalsModule = require(script.Parent.Parent.Parent.ReactGlobals)
+local ExtraStackFrame = nil
+local ReactDebugCurrentFrameModule = {
+	setExtraStackFrame = function(Value) --[[ Line: 19 ]]
+		-- upvalues: ReactGlobalsModule (copy), ExtraStackFrame (ref)
+		if ReactGlobalsModule.__DEV__ then
+			ExtraStackFrame = Value
+		end
 	end
-end
+}
 
-if reactGlobalsModule.__DEV__ then
-	t.getCurrentStack = nil
+if ReactGlobalsModule.__DEV__ then
+	ReactDebugCurrentFrameModule.getCurrentStack = nil
 	
-	function t.getStackAddendum()
-		-- upvalues: var1 (write), t (ref)
-		local var2 = ""
+	function ReactDebugCurrentFrameModule.getStackAddendum(): string --[[ Line: 36 ]]
+		-- upvalues: ExtraStackFrame (ref), ReactDebugCurrentFrameModule (copy)
+		local Text = ""
 		
-		if var1 then
-			var2 ..= var1
+		if ExtraStackFrame then
+			Text ..= ExtraStackFrame
 		end
-		local getCurrentStack = t.getCurrentStack
+		local GetCurrentStackFunction = ReactDebugCurrentFrameModule.getCurrentStack
 		
-		if getCurrentStack then
-			var2 ..= getCurrentStack() or ""
+		if GetCurrentStackFunction then
+			Text ..= GetCurrentStackFunction() or ""
 		end
-		return var2
+		return Text
 	end
 end
-return t
+return ReactDebugCurrentFrameModule

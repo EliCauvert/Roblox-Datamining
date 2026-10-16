@@ -1,26 +1,26 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local roactModule = require(parent.Roact)
-local roactNavigationModule = require(parent.RoactNavigation)
-local enumScreensModule = require(appChat.EnumScreens)
-local toastScreenModule = require(appChat.Components.Toast.ToastScreen)
-local fFlagAppChatDisableAbsorbInputSelectableModule = require(appChat.Flags.FFlagAppChatDisableAbsorbInputSelectable)
-local chatLandingWithDialogsNavigatorModule = require(script.Parent.chatLandingWithDialogsNavigator)
-local chatLandingWithDialogsNavigatorConnector = roactModule.Component:extend("ChatLandingWithDialogsNavigatorConnector")
-chatLandingWithDialogsNavigatorConnector.router = chatLandingWithDialogsNavigatorModule.router
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local RoactModule = require(Parent.Roact)
+local RoactNavigationModule = require(Parent.RoactNavigation)
+local EnumScreensModule = require(AppChat.EnumScreens)
+local ToastScreenModule = require(AppChat.Components.Toast.ToastScreen)
+local FFlagAppChatDisableAbsorbInputSelectableModule = require(AppChat.Flags.FFlagAppChatDisableAbsorbInputSelectable)
+local ChatLandingWithDialogsNavigatorModule = require(script.Parent.chatLandingWithDialogsNavigator)
+local ChatLandingWithDialogsNavigatorConnector = RoactModule.Component:extend("ChatLandingWithDialogsNavigatorConnector")
+ChatLandingWithDialogsNavigatorConnector.router = ChatLandingWithDialogsNavigatorModule.router
 
-function chatLandingWithDialogsNavigatorConnector.render(p1)
-	-- upvalues: roactModule (ref), chatLandingWithDialogsNavigatorModule (ref)
-	return roactModule.createElement(chatLandingWithDialogsNavigatorModule, p1.props)
+function ChatLandingWithDialogsNavigatorConnector.render(p1) --[[ Line: 16 ]]
+	-- upvalues: RoactModule (copy), ChatLandingWithDialogsNavigatorModule (copy)
+	return RoactModule.createElement(ChatLandingWithDialogsNavigatorModule, p1.props)
 end
 
-return roactNavigationModule.createRobloxStackNavigator({
+return RoactNavigationModule.createRobloxStackNavigator({
 	{
-		ChatLandingWithDialogs = chatLandingWithDialogsNavigatorConnector
+		ChatLandingWithDialogs = ChatLandingWithDialogsNavigatorConnector
 	},
 	{
-		[enumScreensModule.RoactChatToast] = {
-			screen = toastScreenModule,
+		[EnumScreensModule.RoactChatToast] = {
+			screen = ToastScreenModule,
 			navigationOptions = {
 				overlayEnabled = true,
 				overlayTransparency = 1,
@@ -29,6 +29,6 @@ return roactNavigationModule.createRobloxStackNavigator({
 		}
 	}
 }, {
-	defaultNavigationOptions = if fFlagAppChatDisableAbsorbInputSelectableModule then { absorbInputSelectable = false } else nil,
-	mode = roactNavigationModule.StackPresentationStyle.Overlay
+	defaultNavigationOptions = if FFlagAppChatDisableAbsorbInputSelectableModule then { absorbInputSelectable = false } else nil,
+	mode = RoactNavigationModule.StackPresentationStyle.Overlay
 })

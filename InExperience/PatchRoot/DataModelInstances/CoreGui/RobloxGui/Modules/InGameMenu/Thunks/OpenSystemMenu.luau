@@ -1,22 +1,22 @@
-﻿local guiService = game:GetService("GuiService")
-local parent = script.Parent.Parent
-local setMenuOpenModule = require(parent.Actions.SetMenuOpen)
-local sendAnalyticsModule = require(parent.Utility.SendAnalytics)
-local constantsModule = require(parent.Resources.Constants)
-local setCurrentPageModule = require(parent.Actions.SetCurrentPage)
-local setMenuIconTooltipOpenModule = require(parent.Actions.SetMenuIconTooltipOpen)
+﻿local GuiService = game:GetService("GuiService")
+local Parent = script.Parent.Parent
+local SetMenuOpenModule = require(Parent.Actions.SetMenuOpen)
+local SendAnalyticsModule = require(Parent.Utility.SendAnalytics)
+local ConstantsModule = require(Parent.Resources.Constants)
+local SetCurrentPageModule = require(Parent.Actions.SetCurrentPage)
+local SetMenuIconTooltipOpenModule = require(Parent.Actions.SetMenuIconTooltipOpen)
 
-return function(p1)
-	-- upvalues: guiService (ref), setMenuOpenModule (ref), setCurrentPageModule (ref), constantsModule (ref), setMenuIconTooltipOpenModule (ref), sendAnalyticsModule (ref)
-	return function(p2)
-		-- upvalues: guiService (copy), setMenuOpenModule (copy), setCurrentPageModule (copy), constantsModule (copy), setMenuIconTooltipOpenModule (copy), sendAnalyticsModule (copy), p1 (ref)
-		guiService:SetMenuIsOpen(true, "InGameMenu")
-		p2:dispatch(setMenuOpenModule(true))
-		p2:dispatch(setCurrentPageModule(constantsModule.MainPagePageKey))
+return function(Source) --[[ Line: 10 ]]
+	-- upvalues: GuiService (copy), SetMenuOpenModule (copy), SetCurrentPageModule (copy), ConstantsModule (copy), SetMenuIconTooltipOpenModule (copy), SendAnalyticsModule (copy)
+	return function(p1) --[[ Line: 11 ]]
+		-- upvalues: GuiService (upval), SetMenuOpenModule (upval), SetCurrentPageModule (upval), ConstantsModule (upval), SetMenuIconTooltipOpenModule (upval), SendAnalyticsModule (upval), Source (copy)
+		GuiService:SetMenuIsOpen(true, "InGameMenu")
+		p1:dispatch(SetMenuOpenModule(true))
+		p1:dispatch(SetCurrentPageModule(ConstantsModule.MainPagePageKey))
 		
-		if p2:getState().nativeClosePrompt.menuIconTooltipOpen then
-			p2:dispatch(setMenuIconTooltipOpenModule(false))
+		if p1:getState().nativeClosePrompt.menuIconTooltipOpen then
+			p1:dispatch(SetMenuIconTooltipOpenModule(false))
 		end
-		sendAnalyticsModule(constantsModule.AnalyticsMenuOpenName, constantsModule.AnalyticsMenuActionName, { source = p1 })
+		SendAnalyticsModule(ConstantsModule.AnalyticsMenuOpenName, ConstantsModule.AnalyticsMenuActionName, { source = Source })
 	end
 end

@@ -1,106 +1,107 @@
-﻿local parent = script:FindFirstAncestor("GraphQLServer").Parent
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local boolean = luauPolyfillModule.Boolean
-local error = luauPolyfillModule.Error
-local t = {}
-local graphQLModule = require(parent.GraphQL)
-local graphQLScalarType = graphQLModule.GraphQLScalarType
-local kind = graphQLModule.Kind
-local print = graphQLModule.print
-local parseLiteral = nil
+﻿local Parent = script:FindFirstAncestor("GraphQLServer").Parent
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Boolean = LuauPolyfillModule.Boolean
+local Error1 = LuauPolyfillModule.Error
+local GraphQLModule = require(Parent.GraphQL)
+local GraphQLScalarType = GraphQLModule.GraphQLScalarType
+local Kind = GraphQLModule.Kind
+local PrintFunction = GraphQLModule.print
+local ParseLiteral = nil
 
-local function _(p1, p2)
-	return tonumber(p1, p2)
+local function _(p1, p2): number --[[ Line: 32 | Named "parseFloat" ]]
+	return (tonumber(p1, p2))
 end
 
-local function identity(p1)
+local function identity(p1) --[[ Line: 36 ]]
 	return p1
 end
 
-local function ensureObject(p1)
-	-- upvalues: boolean (ref), array (ref), error (ref)
-	if boolean.toJSBoolean(if typeof(p1) == "table" then if p1 ~= nil then array.isArray(p1) else true else true) then
-		error(error.new(("JSONObject cannot represent non-object value: %s"):format(tostring(p1))))
+local function ensureObject(p1) --[[ Line: 40 ]]
+	-- upvalues: Boolean (copy), Array (copy), Error1 (copy)
+	if Boolean.toJSBoolean(typeof(p1) ~= "table" or (p1 == nil or Array.isArray(p1))) then
+		error(Error1.new(("JSONObject cannot represent non-object value: %s"):format((tostring(p1)))))
 	end
 	return p1
 end
 
-local _ = function(p1, p2, p3)
-	-- upvalues: array (ref), parseLiteral (write)
+local _ = function(p1, p2, p3) --[[ Line: 47 | Named "parseObject" ]]
+	-- upvalues: Array (copy), ParseLiteral (ref)
 	local t = {}
-	array.forEach(p2.fields, function(p4)
-		-- upvalues: t (ref), parseLiteral (copy), p1 (ref), p3 (ref)
-		t[p4.name.value] = parseLiteral(p1, p4.value, p3)
+	Array.forEach(p2.fields, function(p4) --[[ Line: 49 ]]
+		-- upvalues: t (copy), ParseLiteral (upval), p1 (copy), p3 (copy)
+		t[p4.name.value] = ParseLiteral(p1, p4.value, p3)
 	end)
 	
 	return t
 end
 
-parseLiteral = function(p1, p2, p3)
-	-- upvalues: kind (ref), array (ref), parseLiteral (write), boolean (ref), error (ref), print (ref)
-	local kind_1 = p2.kind
+ParseLiteral = function(p1, p2, p3) --[[ Line: 56 | Named "parseLiteral" ]]
+	-- upvalues: Kind (copy), Array (copy), ParseLiteral (ref), Boolean (copy), Error1 (copy), PrintFunction (copy)
+	local Kind1 = p2.kind
 	
-	if kind_1 == kind.STRING or kind_1 == kind.BOOLEAN then
+	if Kind1 == Kind.STRING or Kind1 == Kind.BOOLEAN then
 		return p2.value
-	elseif kind_1 == kind.INT or kind_1 == kind.FLOAT then
-		return tonumber(p2.value, nil)
-	elseif kind_1 == kind.OBJECT then
+	elseif Kind1 == Kind.INT or Kind1 == Kind.FLOAT then
+		return (tonumber(p2.value, nil))
+	elseif Kind1 == Kind.OBJECT then
 		local t = {}
-		array.forEach(p2.fields, function(p4)
-			-- upvalues: t (ref), parseLiteral (copy), p1 (ref), p3 (ref)
-			t[p4.name.value] = parseLiteral(p1, p4.value, p3)
+		Array.forEach(p2.fields, function(p4) --[[ Line: 49 ]]
+			-- upvalues: t (copy), ParseLiteral (upval), p1 (copy), p3 (copy)
+			t[p4.name.value] = ParseLiteral(p1, p4.value, p3)
 		end)
 		
 		return t
-	elseif kind_1 == kind.LIST then
-		return array.map(p2.values, function(p4)
-			-- upvalues: parseLiteral (copy), p1 (ref), p3 (ref)
-			return parseLiteral(p1, p4, p3)
+	elseif Kind1 == Kind.LIST then
+		return Array.map(p2.values, function(p4) --[[ Line: 65 ]]
+			-- upvalues: ParseLiteral (upval), p1 (copy), p3 (copy)
+			return ParseLiteral(p1, p4, p3)
 		end)
-	elseif kind_1 == kind.NULL then
+	elseif Kind1 == Kind.NULL then
 		return nil
-	elseif kind_1 ~= kind.VARIABLE then
-		error(error.new(("%s cannot represent value: %s"):format(p1, print(p2))))
+	elseif Kind1 == Kind.VARIABLE then
+		return if Boolean.toJSBoolean(p3) then p3[p2.name.value] else nil
+	else
+		error(Error1.new(("%s cannot represent value: %s"):format(p1, PrintFunction(p2))))
 		
 		return nil
 	end
-	return if boolean.toJSBoolean(p3) then p3[p2.name.value] else nil
 end
 
-local var1 = graphQLScalarType.new({
+local JSON = GraphQLScalarType.new({
 	name = "JSON",
 	description = "The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).",
 	specifiedByUrl = "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf",
 	serialize = identity,
 	parseValue = identity,
-	parseLiteral = function(p1, p2)
-		-- upvalues: parseLiteral (write)
-		return parseLiteral("JSON", p1, p2)
-	end
-})
-t.GraphQLJSON = var1
-t.default = var1
-t.GraphQLJSONObject = graphQLScalarType.new({
-	name = "JSONObject",
-	description = "The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).",
-	specifiedByUrl = "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf",
-	serialize = ensureObject,
-	parseValue = ensureObject,
-	parseLiteral = function(p1, p2)
-		-- upvalues: kind (ref), error (ref), print (ref), array (ref), parseLiteral (write)
-		if p1.kind ~= kind.OBJECT then
-			error(error.new(("JSONObject cannot represent non-object value: %s"):format(print(p1))))
-		end
-		local t = {}
-		local var2 = "JSONObject"
-		array.forEach(p1.fields, function(p3)
-			-- upvalues: t (ref), parseLiteral (copy), var2 (ref), p2 (ref)
-			t[p3.name.value] = parseLiteral(var2, p3.value, p2)
-		end)
-		
-		return t
+	parseLiteral = function(p1, p2) --[[ Line: 86 ]]
+		-- upvalues: ParseLiteral (ref)
+		return ParseLiteral("JSON", p1, p2)
 	end
 })
 
-return t
+return {
+	GraphQLJSON = JSON,
+	default = JSON,
+	GraphQLJSONObject = GraphQLScalarType.new({
+		name = "JSONObject",
+		description = "The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).",
+		specifiedByUrl = "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf",
+		serialize = ensureObject,
+		parseValue = ensureObject,
+		parseLiteral = function(p1, p2) --[[ Line: 99 ]]
+			-- upvalues: Kind (copy), Error1 (copy), PrintFunction (copy), Array (copy), ParseLiteral (ref)
+			if p1.kind ~= Kind.OBJECT then
+				error(Error1.new(("JSONObject cannot represent non-object value: %s"):format(PrintFunction(p1))))
+			end
+			local t = {}
+			local v1 = "JSONObject"
+			Array.forEach(p1.fields, function(p3) --[[ Line: 49 ]]
+				-- upvalues: t (copy), ParseLiteral (upval), v1 (copy), p2 (copy)
+				t[p3.name.value] = ParseLiteral(v1, p3.value, p2)
+			end)
+			
+			return t
+		end
+	})
+}

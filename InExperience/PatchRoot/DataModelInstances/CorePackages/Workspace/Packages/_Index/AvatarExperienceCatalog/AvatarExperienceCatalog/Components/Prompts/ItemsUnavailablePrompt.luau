@@ -1,28 +1,26 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local parent = avatarExperienceCatalog.Parent
-local reactModule = require(parent.React)
-local roactNavigationModule = require(parent.RoactNavigation)
-local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
-local sendAXCounterV2 = require(parent.AvatarExperienceAnalytics).sendAXCounterV2
-local constantsModule = require(avatarExperienceCatalog.Constants)
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local withMappedNavigationParams = require(parent.AvatarExperienceNavigation).withMappedNavigationParams
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local text = foundationModule.Text
-local button = foundationModule.Button
-local modalWindow = require(parent.UIBlox).App.Dialog.Modal.ModalWindow
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local fillBehavior = foundationModule.Enums.FillBehavior
-local inputSize = foundationModule.Enums.InputSize
-local fFlagAXInventoryDurablesSupport = avatarExperienceFlagsModule.FFlagAXInventoryDurablesSupport
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local Parent = AvatarExperienceCatalog.Parent
+local ReactModule = require(Parent.React)
+local RoactNavigationModule = require(Parent.RoactNavigation)
+local SendAXCounterV2Function = require(Parent.AvatarExperienceAnalytics).sendAXCounterV2
+local ConstantsModule = require(AvatarExperienceCatalog.Constants)
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local Button = FoundationModule.Button
+local ModalWindow = require(Parent.UIBlox).App.Dialog.Modal.ModalWindow
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local FillBehavior = FoundationModule.Enums.FillBehavior
+local InputSize = FoundationModule.Enums.InputSize
+local FFlagAXInventoryDurablesSupport = require(Parent.AvatarExperienceFlags).FFlagAXInventoryDurablesSupport
 
-local var1 = function(p1)
+local function v14(p1) --[[ Line: 40 ]]
 	return p1.ScreenSize
 end
 
-local t = {
+local config = {
 	UnavailableItems = {
 		TitleText = "Feature.Avatar.UnavailableItems.TitleText",
 		BodyText = "Feature.Avatar.UnavailableItems.BodyText",
@@ -42,155 +40,163 @@ local t = {
 		TitleText = "Feature.Avatar.ItemDidNotMeetRobloxCommunityStandards.TitleText",
 		BodyText = "Feature.Avatar.ItemDidNotMeetRobloxCommunityStandards.BodyText"
 	},
-	PartiallyExpiredItems = if fFlagAXInventoryDurablesSupport then {
+	PartiallyExpiredItems = if FFlagAXInventoryDurablesSupport then {
 		TitleText = "Feature.Durables.PartiallyExpiredItems.TitleText",
 		BodyText = "Feature.Durables.PartiallyExpiredItems.BodyText"
 	} else nil
 }
 
-return withMappedNavigationParams(function(p1)
-	-- upvalues: reactModule (ref), sendAXCounterV2 (ref), constantsModule (ref), fFlagAXInventoryDurablesSupport (ref), useLocalization (ref), t (ref), useSelector (ref), var1 (ref), roactNavigationModule (ref), view (ref), text (ref), button (ref), buttonVariant (ref), fillBehavior (ref), inputSize (ref), modalWindow (ref)
-	reactModule.useEffect(function()
-		-- upvalues: sendAXCounterV2 (copy), constantsModule (copy), p1 (ref)
-		sendAXCounterV2(constantsModule.COUNTERS.ItemsUnavailablePromptShown, { messageType = p1.messageType })
+return (require(Parent.AvatarExperienceNavigation).withMappedNavigationParams(function(p1) --[[ Line: 95 | Named "ItemsUnavailablePrompt" ]]
+	-- upvalues: ReactModule (copy), SendAXCounterV2Function (copy), ConstantsModule (copy), FFlagAXInventoryDurablesSupport (copy), UseLocalizationFunction (copy), config (copy), UseSelectorFunction (copy), v14 (copy), RoactNavigationModule (copy), View (copy), Text (copy), Button (copy), ButtonVariant (copy), FillBehavior (copy), InputSize (copy), ModalWindow (copy)
+	ReactModule.useEffect(function() --[[ Line: 96 ]]
+		-- upvalues: SendAXCounterV2Function (upval), ConstantsModule (upval), p1 (copy)
+		SendAXCounterV2Function(ConstantsModule.COUNTERS.ItemsUnavailablePromptShown, { messageType = p1.messageType })
 	end, {})
-	local t_1 = {}
+	local CategoryLocs = {}
 	
-	if not fFlagAXInventoryDurablesSupport then
-		for i, v in p1.items do
-			if v.categoryLoc then
-				t_1[v.categoryLoc] = v.categoryLoc
+	if FFlagAXInventoryDurablesSupport then
+		if p1.items then
+			for _, item in p1.items do
+				if item.categoryLoc then
+					CategoryLocs[item.categoryLoc] = item.categoryLoc
+				end
 			end
 		end
-	elseif p1.items then
-		for i, v in p1.items do
-			if v.categoryLoc then
-				t_1[v.categoryLoc] = v.categoryLoc
+	else
+		for _, item1 in p1.items do
+			if item1.categoryLoc then
+				CategoryLocs[item1.categoryLoc] = item1.categoryLoc
 			end
 		end
 	end
-	local bodyText, var2
-	local var3 = useLocalization(t_1)
+	local UseLocalizationResult = UseLocalizationFunction(CategoryLocs)
 	
-	local function _(p2)
-		-- upvalues: var3 (ref)
-		return if p2.categoryLoc and var3[p2.categoryLoc] then var3[p2.categoryLoc] else p2.category or ""
+	local function _(p2) --[[ Line: 121 | Named "localizeCategory" ]]
+		-- upvalues: UseLocalizationResult (copy)
+		return if p2.categoryLoc and UseLocalizationResult[p2.categoryLoc] then UseLocalizationResult[p2.categoryLoc] else p2.category or ""
 	end
 	
-	local function createItemListString(p2)
-		-- upvalues: var3 (ref)
-		local var4 = ""
+	local function createItemListString(Items): string --[[ Line: 128 ]]
+		-- upvalues: UseLocalizationResult (copy)
+		local Text = ""
 		
-		for i, v in p2 do
-			var4 ..= "\226\128\162 " .. if v.categoryLoc and var3[v.categoryLoc] then var3[v.categoryLoc] else v.category or "" .. " \"" .. v.itemName .. "\"" .. if v ~= p2[#p2] then "" else "\n"
+		for _, item in Items do
+			Text ..= "• " .. if item.categoryLoc and UseLocalizationResult[item.categoryLoc] then UseLocalizationResult[item.categoryLoc] else item.category or "" .. " \"" .. item.itemName .. "\"" .. if item == Items[#Items] then "" else "\n"
 		end
-		return var4
+		return Text
 	end
+	local BodyText = nil
 	
-	local _ = nil
-	
-	if fFlagAXInventoryDurablesSupport then
-		if not p1.items or #p1.items <= 0 then
-			bodyText = t[p1.messageType].BodyText
-		elseif t[p1.messageType].BodyTextMultiple and #p1.items > 1 then
-			bodyText = {
-				t[p1.messageType].BodyTextMultiple,
-				items = createItemListString(p1.items),
-				lineBreak = "\n\n"
-			}
+	if FFlagAXInventoryDurablesSupport then
+		if p1.items and #p1.items > 0 then
+			if config[p1.messageType].BodyTextMultiple and #p1.items > 1 then
+				BodyText = {
+					config[p1.messageType].BodyTextMultiple,
+					items = createItemListString(p1.items),
+					lineBreak = "\n\n"
+				}
+			else
+				local Item = p1.items[1]
+				BodyText = {
+					config[p1.messageType].BodyText,
+					item = p1.items[1].itemName,
+					category = if Item.categoryLoc and UseLocalizationResult[Item.categoryLoc] then UseLocalizationResult[Item.categoryLoc] else Item.category or "",
+					lineBreak = "\n\n"
+				}
+			end
 		else
-			local t_2 = { t[p1.messageType].BodyText, item = p1.items[1].itemName }
-			var2 = p1.items[1]
-			t_2.category = if var2.categoryLoc and var3[var2.categoryLoc] then var3[var2.categoryLoc] else var2.category or ""
-			t_2.lineBreak = "\n\n"
-			bodyText = t_2
+			BodyText = config[p1.messageType].BodyText
 		end
-	elseif t[p1.messageType].BodyTextMultiple and #p1.items > 1 then
-		bodyText = {
-			t[p1.messageType].BodyTextMultiple,
+	elseif config[p1.messageType].BodyTextMultiple and #p1.items > 1 then
+		BodyText = {
+			config[p1.messageType].BodyTextMultiple,
 			items = createItemListString(p1.items),
 			lineBreak = "\n\n"
 		}
 	else
-		local t_2 = { t[p1.messageType].BodyText, item = p1.items[1].itemName }
-		var2 = p1.items[1]
-		t_2.category = if var2.categoryLoc and var3[var2.categoryLoc] then var3[var2.categoryLoc] else var2.category or ""
-		t_2.lineBreak = "\n\n"
-		bodyText = t_2
+		local Item = p1.items[1]
+		BodyText = {
+			config[p1.messageType].BodyText,
+			item = p1.items[1].itemName,
+			category = if Item.categoryLoc and UseLocalizationResult[Item.categoryLoc] then UseLocalizationResult[Item.categoryLoc] else Item.category or "",
+			lineBreak = "\n\n"
+		}
 	end
-	local var5 = useLocalization({
+	local UseLocalizationResult1 = UseLocalizationFunction({
 		ConfirmText = "Feature.Avatar.UnavailableItems.ConfirmText",
 		ViewInbox = "Feature.Avatar.RevokedItems.ViewInbox",
-		TitleText = t[p1.messageType].TitleText,
-		BodyText = bodyText
+		TitleText = config[p1.messageType].TitleText,
+		BodyText = BodyText
 	})
-	local var6 = useSelector(var1)
-	local var7 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref), roactNavigationModule (copy)
-		p1.navigation.dispatch(roactNavigationModule.Actions.back(nil))
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 187 ]]
+		-- upvalues: p1 (copy), RoactNavigationModule (upval)
+		p1.navigation.dispatch(RoactNavigationModule.Actions.back(nil))
 	end, { p1.navigation })
-	var2 = reactModule.useCallback(function()
-		-- upvalues: var7 (ref), p1 (ref)
-		var7()
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 191 ]]
+		-- upvalues: UseResult (copy), p1 (copy)
+		UseResult()
 		
 		if p1.onConfirm then
 			p1.onConfirm()
 		end
-	end, { p1.onConfirm, var7 })
-	local var8 = reactModule.useCallback(function()
-		-- upvalues: var7 (ref), p1 (ref)
-		var7()
+	end, { p1.onConfirm, UseResult })
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 198 ]]
+		-- upvalues: UseResult (copy), p1 (copy)
+		UseResult()
 		
 		if p1.navigateDown then
 			p1.navigateDown()
 		end
-	end, { p1.navigateDown, var7 })
+	end, { p1.navigateDown, UseResult })
 	
-	return reactModule.createElement(modalWindow, { isFullHeight = false, screenSize = var6 }, {
-		ViewFrame = reactModule.createElement(view, {
+	return ReactModule.createElement(ModalWindow, {
+		isFullHeight = false,
+		screenSize = UseSelectorFunction(v14)
+	}, {
+		ViewFrame = ReactModule.createElement(View, {
 			tag = "auto-y size-full-0 padding-xxlarge col align-x-left align-y-top"
 		}, {
-			ContentContainer = (function()
-				-- upvalues: reactModule (copy), view (copy), text (copy), var5 (ref)
-				return reactModule.createElement(view, {
+			ContentContainer = (function() --[[ Line: 207 ]]
+				-- upvalues: ReactModule (upval), View (upval), Text (upval), UseLocalizationResult1 (copy)
+				return ReactModule.createElement(View, {
 					tag = "auto-y size-full-0 padding-bottom-xxlarge col align-x-left align-y-top"
 				}, {
-					PromptBodyTitle = reactModule.createElement(text, {
+					PromptBodyTitle = ReactModule.createElement(Text, {
 						tag = "auto-xy text-align-x-left text-truncate-end text-heading-small text-wrap",
 						LayoutOrder = 1,
-						Text = var5.TitleText,
+						Text = UseLocalizationResult1.TitleText,
 						padding = { bottom = UDim.new(0, 8) }
 					}),
-					PromptBodyText = reactModule.createElement(text, {
+					PromptBodyText = ReactModule.createElement(Text, {
 						tag = "auto-xy text-align-x-left text-body-large text-wrap",
 						LayoutOrder = 2,
-						Text = var5.BodyText
+						Text = UseLocalizationResult1.BodyText
 					})
 				})
 			end)(),
-			ButtonContainer = (function()
-				-- upvalues: reactModule (copy), view (copy), button (copy), var2 (ref), var5 (ref), buttonVariant (copy), fillBehavior (copy), inputSize (copy), p1 (ref), var8 (ref)
-				return reactModule.createElement(view, { tag = "col gap-medium auto-y size-full-0 fill-x" }, {
-					Buttons = reactModule.createElement(button, {
+			ButtonContainer = (function() --[[ Line: 227 ]]
+				-- upvalues: ReactModule (upval), View (upval), Button (upval), UseResult1 (copy), UseLocalizationResult1 (copy), ButtonVariant (upval), FillBehavior (upval), InputSize (upval), p1 (copy), UseResult2 (copy)
+				return ReactModule.createElement(View, { tag = "col gap-medium auto-y size-full-0 fill-x" }, {
+					Buttons = ReactModule.createElement(Button, {
 						tag = "size-full-0 auto-y",
 						LayoutOrder = 3,
-						onActivated = var2,
-						text = var5.ConfirmText,
-						variant = buttonVariant.Emphasis,
+						onActivated = UseResult1,
+						text = UseLocalizationResult1.ConfirmText,
+						variant = ButtonVariant.Emphasis,
 						width = UDim.new(1, 0),
-						fillBehavior = fillBehavior.Fill,
-						size = inputSize.Medium
+						fillBehavior = FillBehavior.Fill,
+						size = InputSize.Medium
 					}),
-					ViewDetailButton = if p1.messageType == "RevokedItems" then reactModule.createElement(button, {
+					ViewDetailButton = if p1.messageType == "RevokedItems" then ReactModule.createElement(Button, {
 						tag = "size-full-0 auto-y",
 						LayoutOrder = 4,
-						onActivated = var8,
-						text = var5.ViewInbox,
-						variant = buttonVariant.Standard,
+						onActivated = UseResult2,
+						text = UseLocalizationResult1.ViewInbox,
+						variant = ButtonVariant.Standard,
 						width = UDim.new(1, 0)
 					}) else nil
 				})
 			end)()
 		})
 	})
-end)
+end))

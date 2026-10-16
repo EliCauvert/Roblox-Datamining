@@ -1,119 +1,119 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local textKeysModule = require(profilePlatform.Common.TextKeys)
-local UIBloxModule = require(parent.UIBlox)
-local images = UIBloxModule.App.ImageSet.Images
-local playerContext = UIBloxModule.App.Indicator.PlayerContext
-local userProfilesModule = require(parent.UserProfiles)
-local fFlagConnectionsToFriendsRename = require(parent.SharedFlags).FFlagConnectionsToFriendsRename
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local TextKeysModule = require(ProfilePlatform.Common.TextKeys)
+local UIBloxModule = require(Parent.UIBlox)
+local Images = UIBloxModule.App.ImageSet.Images
+local PlayerContext = UIBloxModule.App.Indicator.PlayerContext
+local UserProfilesModule = require(Parent.UserProfiles)
 
-local function truncateSomeNames(p1, p2)
-	return if p2.shouldTruncateLongNames and #p1 >= 13 then string.format("%s%s", string.sub(p1, 1, 12), "\226\128\166") else p1
+local function truncateSomeNames(Text: string, p1): string --[[ Line: 29 ]]
+	return if p1.shouldTruncateLongNames and #Text >= 13 then string.format("%s%s", string.sub(Text, 1, 12), "…") else Text
 end
 
-local function getNamesListText(p1, p2)
-	-- upvalues: cryoModule (ref), truncateSomeNames (ref)
-	local t = {}
+local function getNamesListText(CombinedNameFromIds, p1): string --[[ Line: 36 ]]
+	-- upvalues: CryoModule (copy), truncateSomeNames (copy)
+	local List = {}
 	
-	for i = 1, math.min(#p1, 3) do
-		table.insert(t, p1[i])
+	for i = 1, math.min(#CombinedNameFromIds, 3) do
+		table.insert(List, CombinedNameFromIds[i])
 	end
-	return table.concat(cryoModule.List.map(t, function(p3)
-		-- upvalues: truncateSomeNames (copy), p2 (ref)
-		return truncateSomeNames(p3, p2)
+	return table.concat(CryoModule.List.map(List, function(p2) --[[ Line: 44 ]]
+		-- upvalues: truncateSomeNames (upval), p1 (copy)
+		return truncateSomeNames(p2, p1)
 	end), ", ")
 end
 
-local function _(p3, p4, p5)
-	local oneMutualFriendText = p5.oneMutualFriendText
-	local pluralMutualFriendsText = p5.pluralMutualFriendsText
-	local oneOtherMutualFriendText = p5.oneOtherMutualFriendText
-	local pluralOtherMutualFriendsText = p5.pluralOtherMutualFriendsText
+local function _(p2: number, p3: number, p4) --[[ Line: 51 | Named "getOthersText" ]]
+	local OneMutualFriendText = p4.oneMutualFriendText
+	local PluralMutualFriendsText = p4.pluralMutualFriendsText
+	local OneOtherMutualFriendText = p4.oneOtherMutualFriendText
+	local PluralOtherMutualFriendsText = p4.pluralOtherMutualFriendsText
 	
-	if p3 == 1 then
-		return oneMutualFriendText
-	elseif p3 <= 3 then
-		return pluralMutualFriendsText
-	end
-	local var1 = p3 - p4
-	
-	return `+ {var1} {if var1 == 1 then oneOtherMutualFriendText else pluralOtherMutualFriendsText}`
-end
-
-local _ = function(p6, p7, p8, p9)
-	-- upvalues: getNamesListText (ref)
-	local var2
-	local var3 = getNamesListText(p7, p8)
-	local minValue = math.min(#p7, 3)
-	local oneMutualFriendText = p9.oneMutualFriendText
-	local pluralMutualFriendsText = p9.pluralMutualFriendsText
-	local oneOtherMutualFriendText = p9.oneOtherMutualFriendText
-	local pluralOtherMutualFriendsText = p9.pluralOtherMutualFriendsText
-	
-	if p6 == 1 then
-		var2 = oneMutualFriendText
-	elseif p6 <= 3 then
-		var2 = pluralMutualFriendsText
+	if p2 == 1 then
+		return OneMutualFriendText
+	elseif p2 <= 3 then
+		return PluralMutualFriendsText
 	else
-		local var4 = p6 - minValue
-		var2 = `+ {var4} {if var4 == 1 then oneOtherMutualFriendText else pluralOtherMutualFriendsText}`
+		local v1 = p2 - p3
+		
+		return `+ {v1} {if v1 == 1 then OneOtherMutualFriendText else PluralOtherMutualFriendsText}`
 	end
-	return `{var3} {var2}`
 end
 
-return function(p10)
-	-- upvalues: useLocalization (ref), fFlagConnectionsToFriendsRename (ref), textKeysModule (ref), cryoModule (ref), userProfilesModule (ref), getNamesListText (ref), reactModule (ref), playerContext (ref), images (ref)
-	local var5 = useLocalization({
-		oneMutualFriendText = if fFlagConnectionsToFriendsRename then textKeysModule.OneMutualFriend else textKeysModule.OneMutualConnection,
-		pluralMutualFriendsText = if fFlagConnectionsToFriendsRename then textKeysModule.PluralMutualFriends else textKeysModule.PluralMutualConnections,
-		oneOtherMutualFriendText = if fFlagConnectionsToFriendsRename then textKeysModule.OneOtherMutualFriend else textKeysModule.OneOtherMutualConnection,
-		pluralOtherMutualFriendsText = if fFlagConnectionsToFriendsRename then textKeysModule.PluralOtherMutualFriends else textKeysModule.PluralOtherMutualConnections
-	})
-	local mutualFriendsCount = p10.mutualFriendsCount
-	local var6 = cryoModule.List.map(p10.mutualFriends, function(p11)
-		return tostring(p11)
-	end)
-	local var7 = userProfilesModule.Hooks.useUserProfilesFetch({
-		userIds = var6,
-		query = userProfilesModule.Queries.userProfilesCombinedNameByUserIds
-	})
-	local t = {}
-	local var8 = ""
-	local mutualFriendsCount_1 = #p10.mutualFriends
+local _ = function(p5: number, p6, p7, p8): string --[[ Line: 74 | Named "getText" ]]
+	-- upvalues: getNamesListText (copy)
+	local NamesListText = getNamesListText(p6, p7)
+	local Smallest = math.min(#p6, 3)
+	local OneMutualFriendText = p8.oneMutualFriendText
+	local PluralMutualFriendsText = p8.pluralMutualFriendsText
+	local OneOtherMutualFriendText = p8.oneOtherMutualFriendText
+	local PluralOtherMutualFriendsText = p8.pluralOtherMutualFriendsText
+	local OneMutualFriendText1 = nil
 	
-	if var7.data then
-		for i, v in ipairs(var6) do
-			local combinedNameFromId = userProfilesModule.Selectors.getCombinedNameFromId(var7.data, v)
-			var8 ..= combinedNameFromId
+	if p5 == 1 then
+		OneMutualFriendText1 = OneMutualFriendText
+	elseif p5 <= 3 then
+		OneMutualFriendText1 = PluralMutualFriendsText
+	else
+		local v2 = p5 - Smallest
+		OneMutualFriendText1 = `+ {v2} {if v2 == 1 then OneOtherMutualFriendText else PluralOtherMutualFriendsText}`
+	end
+	return `{NamesListText} {OneMutualFriendText1}`
+end
+
+return function(p9) --[[ Line: 83 | Named "contextualPresence" ]]
+	-- upvalues: UseLocalizationFunction (copy), TextKeysModule (copy), CryoModule (copy), UserProfilesModule (copy), getNamesListText (copy), ReactModule (copy), PlayerContext (copy), Images (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
+		oneMutualFriendText = TextKeysModule.OneMutualFriend,
+		pluralMutualFriendsText = TextKeysModule.PluralMutualFriends,
+		oneOtherMutualFriendText = TextKeysModule.OneOtherMutualFriend,
+		pluralOtherMutualFriendsText = TextKeysModule.PluralOtherMutualFriends
+	})
+	local MutualFriendsCount: number = p9.mutualFriendsCount
+	local MapResult = CryoModule.List.map(p9.mutualFriends, function(p10): string --[[ Line: 93 ]]
+		return (tostring(p10))
+	end)
+	local UseUserProfilesFetchResult = UserProfilesModule.Hooks.useUserProfilesFetch({
+		userIds = MapResult,
+		query = UserProfilesModule.Queries.userProfilesCombinedNameByUserIds
+	})
+	local CombinedNameFromIds = {}
+	local Text = ""
+	local CountMutualFriends = #p9.mutualFriends
+	
+	if UseUserProfilesFetchResult.data then
+		for i, value in ipairs(MapResult) do
+			local CombinedNameFromId = UserProfilesModule.Selectors.getCombinedNameFromId(UseUserProfilesFetchResult.data, value)
+			Text ..= CombinedNameFromId
 			
-			if i ~= mutualFriendsCount_1 then
-				var8 ..= ", "
+			if i ~= CountMutualFriends then
+				Text ..= ", "
 			end
-			t[i] = combinedNameFromId
+			CombinedNameFromIds[i] = CombinedNameFromId
 		end
 	end
-	local var9
-	local var10 = getNamesListText(t, { shouldTruncateLongNames = mutualFriendsCount > 1 })
-	local minValue = math.min(#t, 3)
-	local oneMutualFriendText = var5.oneMutualFriendText
-	local pluralMutualFriendsText = var5.pluralMutualFriendsText
-	local oneOtherMutualFriendText = var5.oneOtherMutualFriendText
-	local pluralOtherMutualFriendsText = var5.pluralOtherMutualFriendsText
+	local NamesListText = getNamesListText(CombinedNameFromIds, { shouldTruncateLongNames = MutualFriendsCount > 1 })
+	local Smallest = math.min(#CombinedNameFromIds, 3)
+	local OneMutualFriendText = UseLocalizationResult.oneMutualFriendText
+	local PluralMutualFriendsText = UseLocalizationResult.pluralMutualFriendsText
+	local OneOtherMutualFriendText = UseLocalizationResult.oneOtherMutualFriendText
+	local PluralOtherMutualFriendsText = UseLocalizationResult.pluralOtherMutualFriendsText
+	local OneMutualFriendText1 = nil
 	
-	if mutualFriendsCount == 1 then
-		var9 = oneMutualFriendText
-	elseif mutualFriendsCount <= 3 then
-		var9 = pluralMutualFriendsText
+	if MutualFriendsCount == 1 then
+		OneMutualFriendText1 = OneMutualFriendText
+	elseif MutualFriendsCount <= 3 then
+		OneMutualFriendText1 = PluralMutualFriendsText
 	else
-		local var11 = mutualFriendsCount - minValue
-		var9 = `+ {var11} {if var11 == 1 then oneOtherMutualFriendText else pluralOtherMutualFriendsText}`
+		local MutualFriendsCountDelta = MutualFriendsCount - Smallest
+		OneMutualFriendText1 = `+ {MutualFriendsCountDelta} {if MutualFriendsCountDelta == 1 then OneOtherMutualFriendText else PluralOtherMutualFriendsText}`
 	end
-	return reactModule.createElement(playerContext, {
+	return ReactModule.createElement(PlayerContext, {
 		textHeight = 30,
-		icon = images["icons/status/player/friend"],
-		text = `{var10} {var9}`
+		icon = Images["icons/status/player/friend"],
+		text = `{NamesListText} {OneMutualFriendText1}`
 	})
 end

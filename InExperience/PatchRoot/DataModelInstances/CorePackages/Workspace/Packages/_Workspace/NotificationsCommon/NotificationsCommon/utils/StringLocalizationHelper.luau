@@ -1,28 +1,28 @@
-﻿local parent = script.Parent.Parent.Parent
-local reactModule = require(parent.React)
-local localizationRoactContext = require(parent.Localization).LocalizationRoactContext
-local useLocalization = require(parent.Localization).Hooks.useLocalization
+﻿local Parent = script.Parent.Parent.Parent
+local ReactModule = require(Parent.React)
+local LocalizationRoactContext = require(Parent.Localization).LocalizationRoactContext
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local _ = require(script:FindFirstAncestor("NotificationsCommon").type)
-local robloxTranslatorModule = require(parent.RobloxTranslator)
+local RobloxTranslatorModule = require(Parent.RobloxTranslator)
 
 return {
-	getLocalizedStrings = function(p1)
-		-- upvalues: reactModule (ref), localizationRoactContext (ref), useLocalization (ref), robloxTranslatorModule (ref)
-		if reactModule.useContext(localizationRoactContext) ~= nil then
-			return useLocalization(p1)
+	getLocalizedStrings = function(List) --[[ Line: 13 ]]
+		-- upvalues: ReactModule (copy), LocalizationRoactContext (copy), UseLocalizationFunction (copy), RobloxTranslatorModule (copy)
+		if ReactModule.useContext(LocalizationRoactContext) ~= nil then
+			return UseLocalizationFunction(List)
 		end
 		local t = {}
 		
-		for i, v in pairs(p1) do
-			local ok, status = pcall(function()
-				-- upvalues: robloxTranslatorModule (copy), v (ref)
-				return robloxTranslatorModule:FormatByKey(v)
+		for i, value in pairs(List) do
+			local Success, Result = pcall(function() --[[ Line: 24 ]]
+				-- upvalues: RobloxTranslatorModule (upval), value (copy)
+				return RobloxTranslatorModule:FormatByKey(value)
 			end)
 			
-			if ok then
-				t[i] = status
+			if Success then
+				t[i] = Result
 			else
-				t[i] = v
+				t[i] = value
 			end
 		end
 		return t

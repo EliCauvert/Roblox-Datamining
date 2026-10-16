@@ -1,28 +1,28 @@
-﻿local avatarSwitcher = script:FindFirstAncestor("AvatarSwitcher")
-local signalsReactModule = require(avatarSwitcher.Parent.SignalsReact)
-local getAvatarSwitcherStoreModule = require(avatarSwitcher.Stores.getAvatarSwitcherStore)
-local _ = require(avatarSwitcher.types)
-local experienceAvatarSupportTypeModule = require(avatarSwitcher.Enums.ExperienceAvatarSupportType)
-local avatarSwitcherShimmerTiles = game:DefineFastInt("AvatarSwitcherShimmerTiles", 12)
+﻿local AvatarSwitcher = script:FindFirstAncestor("AvatarSwitcher")
+local SignalsReactModule = require(AvatarSwitcher.Parent.SignalsReact)
+local GetAvatarSwitcherStoreModule = require(AvatarSwitcher.Stores.getAvatarSwitcherStore)
+local _ = require(AvatarSwitcher.types)
+local ExperienceAvatarSupportTypeModule = require(AvatarSwitcher.Enums.ExperienceAvatarSupportType)
+local AvatarSwitcherShimmerTiles = game:DefineFastInt("AvatarSwitcherShimmerTiles", 12)
 
-return function()
-	-- upvalues: signalsReactModule (ref), getAvatarSwitcherStoreModule (ref), experienceAvatarSupportTypeModule (ref), avatarSwitcherShimmerTiles (ref)
-	local var1 = signalsReactModule.useSignalState(getAvatarSwitcherStoreModule)
-	local var2 = signalsReactModule.useSignalState(var1.getOutfits)
-	local var3 = signalsReactModule.useSignalState(var1.getLastPageReached)
-	local var4 = signalsReactModule.useSignalState(var1.getExperienceAvatarSupportType) == experienceAvatarSupportTypeModule.NoSupport
+return function() --[[ Line: 19 | Named "useOutfitsGridProps" ]]
+	-- upvalues: SignalsReactModule (copy), GetAvatarSwitcherStoreModule (copy), ExperienceAvatarSupportTypeModule (copy), AvatarSwitcherShimmerTiles (copy)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(GetAvatarSwitcherStoreModule)
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(UseSignalStateResult.getOutfits)
+	local UseSignalStateResult2 = SignalsReactModule.useSignalState(UseSignalStateResult.getLastPageReached)
+	local IsUseSignalStateResultMatch = SignalsReactModule.useSignalState(UseSignalStateResult.getExperienceAvatarSupportType) == ExperienceAvatarSupportTypeModule.NoSupport
 	
-	if #var2 == 0 and not var3 then
-		var2 = {}
+	if #UseSignalStateResult1 == 0 and not UseSignalStateResult2 then
+		UseSignalStateResult1 = {}
 		
-		for _ = 1, avatarSwitcherShimmerTiles do
-			table.insert(var2, {})
+		for _ = 1, AvatarSwitcherShimmerTiles do
+			table.insert(UseSignalStateResult1, {})
 		end
 	end
 	return {
-		outfits = var2,
-		lastPageReached = var3,
-		fetchNextOutfitsPage = var1.fetchNextOutfitsPage,
-		disabled = var4
+		outfits = UseSignalStateResult1,
+		lastPageReached = UseSignalStateResult2,
+		fetchNextOutfitsPage = UseSignalStateResult.fetchNextOutfitsPage,
+		disabled = IsUseSignalStateResultMatch
 	}
 end

@@ -1,291 +1,317 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local reactModule = require(buildExperience.Parent.React)
-local chatScrollModule = require(script.Parent.chatScroll)
-local fFlagBuildExperienceChatAccordionScrollAnchorModule = require(buildExperience.Flags.FFlagBuildExperienceChatAccordionScrollAnchor)
-local fFlagBuildExperienceChatHistoryPrefetchModule = require(buildExperience.Flags.FFlagBuildExperienceChatHistoryPrefetch)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local ReactModule = require(BuildExperience.Parent.React)
+local ChatScrollModule = require(script.Parent.chatScroll)
+local FFlagBuildExperienceChatAccordionScrollAnchorModule = require(BuildExperience.Flags.FFlagBuildExperienceChatAccordionScrollAnchor)
+local FFlagBuildExperienceChatHistoryPrefetchModule = require(BuildExperience.Flags.FFlagBuildExperienceChatHistoryPrefetch)
+local FFlagBuildExperienceChatSheetReversedContentModule = require(BuildExperience.Flags.FFlagBuildExperienceChatSheetReversedContent)
 
-return function(p1)
-	-- upvalues: reactModule (ref), fFlagBuildExperienceChatAccordionScrollAnchorModule (ref), fFlagBuildExperienceChatHistoryPrefetchModule (ref), chatScrollModule (ref)
-	local var1 = reactModule.useRef(nil)
-	local var2 = reactModule.useRef(nil)
-	local var3 = reactModule.useRef(true)
-	local var4 = reactModule.useRef(true)
-	local var5 = reactModule.useRef(false)
-	local var6 = reactModule.useRef(0)
-	local var7 = reactModule.useRef(false)
-	local var8 = reactModule.useRef(nil)
-	local var9 = reactModule.useRef(false)
-	local var10 = reactModule.useRef(Vector2.zero)
-	local var11 = reactModule.useRef(Vector2.zero)
-	local var12 = reactModule.useRef(nil)
-	local var13 = if fFlagBuildExperienceChatAccordionScrollAnchorModule then reactModule.useRef(nil) else { current = nil }
-	local var14 = reactModule.useCallback(function()
-		-- upvalues: fFlagBuildExperienceChatHistoryPrefetchModule (copy), var4 (ref), var8 (ref), var5 (ref), var9 (ref)
-		if fFlagBuildExperienceChatHistoryPrefetchModule then
-			local current = var5.current
+return function(p1) --[[ Line: 47 | Named "useChatScroll" ]]
+	-- upvalues: ReactModule (copy), FFlagBuildExperienceChatAccordionScrollAnchorModule (copy), FFlagBuildExperienceChatSheetReversedContentModule (copy), FFlagBuildExperienceChatHistoryPrefetchModule (copy), ChatScrollModule (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseRefResult2 = ReactModule.useRef(true)
+	local UseRefResult3 = ReactModule.useRef(true)
+	local UseRefResult4 = ReactModule.useRef(false)
+	local UseRefResult5 = ReactModule.useRef(0)
+	local UseRefResult6 = ReactModule.useRef(false)
+	local UseRefResult7 = ReactModule.useRef(nil)
+	local UseRefResult8 = ReactModule.useRef(false)
+	local UseRefResult9 = ReactModule.useRef(Vector2.zero)
+	local UseRefResult10 = ReactModule.useRef(Vector2.zero)
+	local UseRefResult11 = ReactModule.useRef(nil)
+	local UseRefResult12 = if FFlagBuildExperienceChatAccordionScrollAnchorModule then ReactModule.useRef(nil) else { current = nil }
+	local UseRefResult13 = if FFlagBuildExperienceChatSheetReversedContentModule then ReactModule.useRef(nil) else { current = nil }
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 70 ]]
+		-- upvalues: FFlagBuildExperienceChatHistoryPrefetchModule (upval), UseRefResult3 (copy), UseRefResult7 (copy), UseRefResult4 (copy), UseRefResult8 (copy)
+		if FFlagBuildExperienceChatHistoryPrefetchModule then
+			local Current = UseRefResult4.current
 			
-			if current and not var9.current and var8.current ~= nil then
-				var8.current()
+			if Current and not UseRefResult8.current and UseRefResult7.current ~= nil then
+				UseRefResult7.current()
 			end
-			var9.current = current
+			UseRefResult8.current = Current
 			
 			return
-		elseif var4.current and var8.current ~= nil then
-			var8.current()
+		elseif UseRefResult3.current and UseRefResult7.current ~= nil then
+			UseRefResult7.current()
 		end
 	end, {})
-	local var15 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref), var13 (write), var5 (ref), var9 (ref)
-		local current = var2.current
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 85 ]]
+		-- upvalues: UseRefResult1 (copy), UseRefResult12 (ref), FFlagBuildExperienceChatSheetReversedContentModule (upval), UseRefResult13 (ref), UseRefResult4 (copy), UseRefResult8 (copy)
+		local Current = UseRefResult1.current
 		
-		if current then
-			current.canvasPosition:Disconnect()
-			current.canvasSize:Disconnect()
-			current.windowSize:Disconnect()
-			var2.current = nil
+		if Current then
+			Current.canvasPosition:Disconnect()
+			Current.canvasSize:Disconnect()
+			Current.windowSize:Disconnect()
+			UseRefResult1.current = nil
 		end
-		var13.current = nil
-		var5.current = false
-		var9.current = false
-	end, {})
-	local var16 = reactModule.useCallback(function()
-		-- upvalues: var1 (ref), p1 (ref), var10 (ref), var11 (ref), var6 (ref), chatScrollModule (copy), var3 (ref), var4 (ref), fFlagBuildExperienceChatHistoryPrefetchModule (copy), var5 (ref)
-		local current = var1.current
+		UseRefResult12.current = nil
 		
-		if current then
+		if FFlagBuildExperienceChatSheetReversedContentModule then
+			UseRefResult13.current = nil
+		end
+		UseRefResult4.current = false
+		UseRefResult8.current = false
+	end, {})
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 101 ]]
+		-- upvalues: UseRefResult (copy), p1 (copy), UseRefResult9 (copy), UseRefResult10 (copy), UseRefResult5 (copy), ChatScrollModule (upval), FFlagBuildExperienceChatSheetReversedContentModule (upval), UseRefResult13 (ref), UseRefResult2 (copy), UseRefResult3 (copy), FFlagBuildExperienceChatHistoryPrefetchModule (upval), UseRefResult4 (copy)
+		local Current = UseRefResult.current
+		
+		if Current then
 			if p1 then
-				var10.current = current.AbsoluteCanvasSize
-				var11.current = current.AbsoluteWindowSize
+				UseRefResult9.current = Current.AbsoluteCanvasSize
+				UseRefResult10.current = Current.AbsoluteWindowSize
 			end
-			var6.current = chatScrollModule.getDistanceFromBottom(current)
-			var3.current = chatScrollModule.isScrolledToBottom(current)
-			var4.current = chatScrollModule.isScrolledToTop(current)
+			UseRefResult5.current = ChatScrollModule.getDistanceFromBottom(Current)
 			
-			if fFlagBuildExperienceChatHistoryPrefetchModule then
-				var5.current = chatScrollModule.isScrolledNearTop(current)
+			if FFlagBuildExperienceChatSheetReversedContentModule then
+				UseRefResult13.current = Vector2.new(Current.AbsoluteCanvasSize.Y, Current.AbsoluteWindowSize.Y)
+			end
+			UseRefResult2.current = ChatScrollModule.isScrolledToBottom(Current)
+			UseRefResult3.current = ChatScrollModule.isScrolledToTop(Current)
+			
+			if FFlagBuildExperienceChatHistoryPrefetchModule then
+				UseRefResult4.current = ChatScrollModule.isScrolledNearTop(Current)
 			end
 		end
 	end, { p1 })
-	local var17 = reactModule.useCallback(function()
-		-- upvalues: var1 (ref), p1 (ref), var10 (ref), var11 (ref), var12 (ref), var13 (write), fFlagBuildExperienceChatAccordionScrollAnchorModule (copy), var16 (ref), var7 (ref), var3 (ref), var14 (ref)
-		local current = var1.current
-		local var18 = p1 and (current ~= nil and (if current.AbsoluteCanvasSize == var10.current then current.AbsoluteWindowSize ~= var11.current else true))
-		local var19 = p1 and (current ~= nil and current.CanvasPosition == var12.current)
-		local current_1 = var13.current
+	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 121 ]]
+		-- upvalues: UseRefResult (copy), FFlagBuildExperienceChatSheetReversedContentModule (upval), UseRefResult13 (ref), p1 (copy), UseRefResult9 (copy), UseRefResult10 (copy), UseRefResult11 (copy), UseRefResult12 (ref), FFlagBuildExperienceChatAccordionScrollAnchorModule (upval), UseResult2 (copy), UseRefResult6 (copy), UseRefResult2 (copy), UseResult (copy)
+		local Current = UseRefResult.current
 		
-		if fFlagBuildExperienceChatAccordionScrollAnchorModule and current_1 ~= nil and (current ~= nil and math.abs(current.CanvasPosition.Y - current_1.canvasPositionY) > 0.5) then
-			var13.current = nil
+		if FFlagBuildExperienceChatSheetReversedContentModule and Current ~= nil then
+			local Current2 = UseRefResult13.current
+			
+			if Current2 ~= nil and (Current2.X ~= Current.AbsoluteCanvasSize.Y or Current2.Y ~= Current.AbsoluteWindowSize.Y) then return end
 		end
-		var16()
+		local IsNotAbsoluteCanvasSizeMatch: boolean = p1 and (Current ~= nil and (Current.AbsoluteCanvasSize ~= UseRefResult9.current or Current.AbsoluteWindowSize ~= UseRefResult10.current))
+		local IsCanvasPositionMatch: boolean = p1 and (Current ~= nil and Current.CanvasPosition == UseRefResult11.current)
+		local Current1 = UseRefResult12.current
 		
-		if var7.current and not var3.current and (not var18 and not var19) then
-			var7.current = false
+		if FFlagBuildExperienceChatAccordionScrollAnchorModule and Current1 ~= nil and Current ~= nil and math.abs(Current.CanvasPosition.Y - Current1.canvasPositionY) > 0.5 then
+			UseRefResult12.current = nil
 		end
-		var14()
-	end, { var14, var16, p1 })
-	local var18 = reactModule.useCallback(function()
-		-- upvalues: var1 (ref)
-		local current = var1.current
+		UseResult2()
 		
-		return current ~= nil and current.AbsoluteCanvasSize.Y <= current.AbsoluteWindowSize.Y
+		if UseRefResult6.current and not UseRefResult2.current and not IsNotAbsoluteCanvasSizeMatch and not IsCanvasPositionMatch then
+			UseRefResult6.current = false
+		end
+		UseResult()
+	end, { UseResult, UseResult2, p1 })
+	local UseResult4 = ReactModule.useCallback(function(): boolean --[[ Line: 163 ]]
+		-- upvalues: UseRefResult (copy)
+		local Current = UseRefResult.current
+		
+		return Current ~= nil and Current.AbsoluteCanvasSize.Y <= Current.AbsoluteWindowSize.Y
 	end, {})
-	local var19 = reactModule.useCallback(function(p2)
-		-- upvalues: var13 (write), chatScrollModule (copy)
-		local current = var13.current
+	local UseResult5 = ReactModule.useCallback(function(ScrollFrame): boolean --[[ Line: 168 ]]
+		-- upvalues: UseRefResult12 (ref), ChatScrollModule (upval)
+		local Current = UseRefResult12.current
 		
-		if current == nil then
+		if Current == nil then
 			return false
-		elseif not current.instance:IsDescendantOf(p2) then
-			var13.current = nil
+		elseif not Current.instance:IsDescendantOf(ScrollFrame) then
+			UseRefResult12.current = nil
 			
 			return false
-		end
-		local var20 = chatScrollModule.getOffsetInViewport(p2, current.instance) - current.offsetY
-		
-		if var20 == 0 then
-			return true
-		end
-		local var21 = p2.CanvasPosition.Y + var20
-		local bottomCanvasPosition = chatScrollModule.getBottomCanvasPosition(p2)
-		
-		if var21 < 0 or bottomCanvasPosition < var21 then
-			var13.current = nil
-			p2.CanvasPosition = Vector2.new(0, math.clamp(var21, 0, bottomCanvasPosition))
+		else
+			local OffsetInViewportDelta = ChatScrollModule.getOffsetInViewport(ScrollFrame, Current.instance) - Current.offsetY
 			
-			return true
-		end
-		current.canvasPositionY = var21
-		p2.CanvasPosition = Vector2.new(0, var21)
-		
-		return true
-	end, {})
-	local var20 = reactModule.useCallback(function()
-		-- upvalues: var1 (ref), fFlagBuildExperienceChatAccordionScrollAnchorModule (copy), var19 (ref), chatScrollModule (copy), var6 (ref), var16 (ref)
-		local current = var1.current
-		
-		if current then
-			if not fFlagBuildExperienceChatAccordionScrollAnchorModule or not var19(current) then
-				chatScrollModule.syncScrollFromBottom(current, var6.current)
+			if OffsetInViewportDelta == 0 then
+				return true
 			end
-			var16()
+			local NewY = ScrollFrame.CanvasPosition.Y + OffsetInViewportDelta
+			local BottomCanvasPosition: number = ChatScrollModule.getBottomCanvasPosition(ScrollFrame)
+			
+			if NewY < 0 or BottomCanvasPosition < NewY then
+				UseRefResult12.current = nil
+				ScrollFrame.CanvasPosition = Vector2.new(0, (math.clamp(NewY, 0, BottomCanvasPosition)))
+				
+				return true
+			else
+				Current.canvasPositionY = NewY
+				ScrollFrame.CanvasPosition = Vector2.new(0, NewY)
+				
+				return true
+			end
 		end
-	end, { var19, var16 })
-	local var21 = reactModule.useCallback(function()
-		-- upvalues: var1 (ref), p1 (ref), var12 (ref), var16 (ref)
-		local current = var1.current
+	end, {})
+	local UseResult6 = ReactModule.useCallback(function() --[[ Line: 195 ]]
+		-- upvalues: UseRefResult (copy), FFlagBuildExperienceChatAccordionScrollAnchorModule (upval), UseResult5 (copy), ChatScrollModule (upval), UseRefResult5 (copy), UseResult2 (copy)
+		local Current = UseRefResult.current
 		
-		if current then
-			current.CanvasPosition = Vector2.new(0, 9007199254740992)
+		if Current then
+			if not FFlagBuildExperienceChatAccordionScrollAnchorModule or not UseResult5(Current) then
+				ChatScrollModule.syncScrollFromBottom(Current, UseRefResult5.current)
+			end
+			UseResult2()
+		end
+	end, { UseResult5, UseResult2 })
+	local UseResult7 = ReactModule.useCallback(function() --[[ Line: 205 ]]
+		-- upvalues: UseRefResult (copy), p1 (copy), UseRefResult11 (copy), UseResult2 (copy)
+		local Current = UseRefResult.current
+		
+		if Current then
+			Current.CanvasPosition = Vector2.new(0, 9007199254740992)
 			
 			if p1 then
-				var12.current = current.CanvasPosition
-				var16()
+				UseRefResult11.current = Current.CanvasPosition
+				UseResult2()
 			end
 		end
-	end, { p1, var16 })
-	local var22 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref), var20 (ref)
-		if var3.current then
-			var20()
+	end, { p1, UseResult2 })
+	local UseResult8 = ReactModule.useCallback(function() --[[ Line: 216 ]]
+		-- upvalues: UseRefResult2 (copy), UseResult6 (copy)
+		if UseRefResult2.current then
+			UseResult6()
 		end
-	end, { var20 })
-	local var23 = reactModule.useCallback(function()
-		-- upvalues: var16 (ref)
-		var16()
-	end, { var16 })
-	local var24 = reactModule.useCallback(function(p2)
-		-- upvalues: var1 (ref), var15 (ref), var7 (ref), var21 (ref), var16 (ref), var20 (ref), fFlagBuildExperienceChatHistoryPrefetchModule (copy), var14 (ref), fFlagBuildExperienceChatAccordionScrollAnchorModule (copy), var13 (write), var2 (ref), var17 (ref)
-		if var1.current == p2 then return end
-		var15()
-		var1.current = p2
+	end, { UseResult6 })
+	local UseResult9 = ReactModule.useCallback(function() --[[ Line: 222 ]]
+		-- upvalues: UseResult2 (copy)
+		UseResult2()
+	end, { UseResult2 })
+	local UseResult10 = ReactModule.useCallback(function(Current) --[[ Line: 227 ]]
+		-- upvalues: UseRefResult (copy), UseResult1 (copy), UseRefResult6 (copy), UseResult7 (copy), UseResult2 (copy), UseResult6 (copy), FFlagBuildExperienceChatSheetReversedContentModule (upval), FFlagBuildExperienceChatHistoryPrefetchModule (upval), UseResult (copy), FFlagBuildExperienceChatAccordionScrollAnchorModule (upval), UseRefResult12 (ref), UseRefResult1 (copy), UseResult3 (copy)
+		if UseRefResult.current == Current then return end
+		UseResult1()
+		UseRefResult.current = Current
 		
-		if not p2 then return end
-		if var7.current then
-			var21()
+		if not Current then return end
+		if UseRefResult6.current then
+			UseResult7()
 		else
-			var16()
-			var20()
-			task.defer(var20)
+			UseResult2()
+			UseResult6()
+			task.defer(UseResult6)
 		end
-		local function onScrollViewportChanged()
-			-- upvalues: var7 (copy), var21 (copy), var20 (copy), fFlagBuildExperienceChatHistoryPrefetchModule (copy), var14 (copy)
-			if var7.current then
-				var21()
+		local function onScrollViewportChanged() --[[ Line: 247 ]]
+			-- upvalues: UseRefResult6 (upval), UseResult7 (upval), UseResult6 (upval), FFlagBuildExperienceChatSheetReversedContentModule (upval), UseResult2 (upval), FFlagBuildExperienceChatHistoryPrefetchModule (upval), UseResult (upval)
+			if UseRefResult6.current then
+				UseResult7()
 			else
-				var20()
-				task.defer(var20)
+				UseResult6()
+				task.defer(UseResult6)
 			end
-			if fFlagBuildExperienceChatHistoryPrefetchModule then
-				var14()
+			if FFlagBuildExperienceChatSheetReversedContentModule then
+				UseResult2()
+			end
+			if FFlagBuildExperienceChatHistoryPrefetchModule then
+				UseResult()
 			end
 		end
 		
-		var2.current = {
-			canvasPosition = p2:GetPropertyChangedSignal("CanvasPosition"):Connect(var17),
-			canvasSize = p2:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(onScrollViewportChanged),
-			windowSize = p2:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(if fFlagBuildExperienceChatAccordionScrollAnchorModule then function()
-				-- upvalues: var13 (copy), var7 (copy), var21 (copy), var20 (copy), fFlagBuildExperienceChatHistoryPrefetchModule (copy), var14 (copy)
-				var13.current = nil
+		UseRefResult1.current = {
+			canvasPosition = Current:GetPropertyChangedSignal("CanvasPosition"):Connect(UseResult3),
+			canvasSize = Current:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(onScrollViewportChanged),
+			windowSize = Current:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(if FFlagBuildExperienceChatAccordionScrollAnchorModule then function() --[[ Line: 264 ]]
+				-- upvalues: UseRefResult12 (upval), UseRefResult6 (upval), UseResult7 (upval), UseResult6 (upval), FFlagBuildExperienceChatSheetReversedContentModule (upval), UseResult2 (upval), FFlagBuildExperienceChatHistoryPrefetchModule (upval), UseResult (upval)
+				UseRefResult12.current = nil
 				
-				if var7.current then
-					var21()
+				if UseRefResult6.current then
+					UseResult7()
 				else
-					var20()
-					task.defer(var20)
+					UseResult6()
+					task.defer(UseResult6)
 				end
-				if fFlagBuildExperienceChatHistoryPrefetchModule then
-					var14()
+				if FFlagBuildExperienceChatSheetReversedContentModule then
+					UseResult2()
+				end
+				if FFlagBuildExperienceChatHistoryPrefetchModule then
+					UseResult()
 				end
 			end else onScrollViewportChanged)
 		}
 		
-		if fFlagBuildExperienceChatHistoryPrefetchModule then
-			var14()
+		if FFlagBuildExperienceChatHistoryPrefetchModule then
+			UseResult()
 		end
 	end, {
-		var15, var21, var20, var14, var16, var17
+		UseResult1, UseResult7, UseResult6, UseResult, UseResult2, UseResult3
 	})
-	local var25 = reactModule.useCallback(function(p2)
-		-- upvalues: var1 (ref), var7 (ref), chatScrollModule (copy), var13 (write)
-		local current = var1.current
+	local UseResult11 = ReactModule.useCallback(function(Object) --[[ Line: 296 ]]
+		-- upvalues: UseRefResult (copy), UseRefResult6 (copy), ChatScrollModule (upval), UseRefResult12 (ref)
+		local Current = UseRefResult.current
 		
-		if current == nil or p2 == nil or not p2:IsDescendantOf(current) then
+		if Current ~= nil and Object ~= nil and Object:IsDescendantOf(Current) then
+			UseRefResult6.current = false
+			local Current1 = {
+				instance = Object,
+				offsetY = ChatScrollModule.getOffsetInViewport(Current, Object),
+				canvasPositionY = Current.CanvasPosition.Y
+			}
+			UseRefResult12.current = Current1
+			task.delay(0.25, function() --[[ Line: 308 ]]
+				-- upvalues: UseRefResult12 (upval), Current1 (copy)
+				if UseRefResult12.current == Current1 then
+					UseRefResult12.current = nil
+				end
+			end)
+			
 			return
 		end
-		var7.current = false
-		local t = {
-			instance = p2,
-			offsetY = chatScrollModule.getOffsetInViewport(current, p2),
-			canvasPositionY = current.CanvasPosition.Y
-		}
-		var13.current = t
-		task.delay(0.25, function()
-			-- upvalues: var13 (copy), t (ref)
-			if var13.current == t then
-				var13.current = nil
-			end
-		end)
 	end, {})
-	local var26 = reactModule.useCallback(function()
-		-- upvalues: var13 (write), var6 (ref), var3 (ref), var7 (ref), var21 (ref)
-		var13.current = nil
-		var6.current = 0
-		var3.current = true
-		var7.current = true
-		var21()
-	end, { var21 })
-	local var27 = reactModule.useCallback(function()
-		-- upvalues: var16 (ref)
-		var16()
-	end, { var16 })
-	local var28 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref), var13 (write), var6 (ref), var20 (ref)
-		if var3.current then
-			var13.current = nil
-			var6.current = 0
-			var20()
+	local UseResult12 = ReactModule.useCallback(function() --[[ Line: 315 ]]
+		-- upvalues: UseRefResult12 (ref), UseRefResult5 (copy), UseRefResult2 (copy), UseRefResult6 (copy), UseResult7 (copy)
+		UseRefResult12.current = nil
+		UseRefResult5.current = 0
+		UseRefResult2.current = true
+		UseRefResult6.current = true
+		UseResult7()
+	end, { UseResult7 })
+	local UseResult13 = ReactModule.useCallback(function() --[[ Line: 323 ]]
+		-- upvalues: UseResult2 (copy)
+		UseResult2()
+	end, { UseResult2 })
+	local UseResult14 = ReactModule.useCallback(function() --[[ Line: 327 ]]
+		-- upvalues: UseRefResult2 (copy), UseRefResult12 (ref), UseRefResult5 (copy), UseResult6 (copy)
+		if UseRefResult2.current then
+			UseRefResult12.current = nil
+			UseRefResult5.current = 0
+			UseResult6()
 		end
-	end, { var20 })
-	local var29 = reactModule.useCallback(function()
-		-- upvalues: var13 (write), var6 (ref), var3 (ref), var20 (ref)
-		var13.current = nil
-		var6.current = 0
-		var3.current = true
-		var20()
-		task.defer(var20)
-	end, { var20 })
-	local var30 = reactModule.useCallback(function(p2)
-		-- upvalues: var8 (ref), fFlagBuildExperienceChatHistoryPrefetchModule (copy), var9 (ref), var14 (ref)
-		var8.current = p2
+	end, { UseResult6 })
+	local UseResult15 = ReactModule.useCallback(function() --[[ Line: 335 ]]
+		-- upvalues: UseRefResult12 (ref), UseRefResult5 (copy), UseRefResult2 (copy), UseResult6 (copy)
+		UseRefResult12.current = nil
+		UseRefResult5.current = 0
+		UseRefResult2.current = true
+		UseResult6()
+		task.defer(UseResult6)
+	end, { UseResult6 })
+	local UseResult16 = ReactModule.useCallback(function(Current) --[[ Line: 343 ]]
+		-- upvalues: UseRefResult7 (copy), FFlagBuildExperienceChatHistoryPrefetchModule (upval), UseRefResult8 (copy), UseResult (copy)
+		UseRefResult7.current = Current
 		
-		if fFlagBuildExperienceChatHistoryPrefetchModule then
-			var9.current = false
+		if FFlagBuildExperienceChatHistoryPrefetchModule then
+			UseRefResult8.current = false
 		end
-		task.defer(var14)
-	end, { var14 })
-	reactModule.useEffect(function()
-		-- upvalues: var15 (ref)
-		return var15
-	end, { var15 })
+		task.defer(UseResult)
+	end, { UseResult })
+	ReactModule.useEffect(function() --[[ Line: 351 ]]
+		-- upvalues: UseResult1 (copy)
+		return UseResult1
+	end, { UseResult1 })
 	
-	return reactModule.useMemo(function()
-		-- upvalues: var24 (ref), var25 (ref), var26 (ref), var22 (ref), var23 (ref), var27 (ref), var28 (ref), var29 (ref), var18 (ref), var3 (ref), var4 (ref), var5 (ref), var30 (ref)
+	return ReactModule.useMemo(function() --[[ Line: 356 ]]
+		-- upvalues: UseResult10 (copy), UseResult11 (copy), UseResult12 (copy), UseResult8 (copy), UseResult9 (copy), UseResult13 (copy), UseResult14 (copy), UseResult15 (copy), UseResult4 (copy), UseRefResult2 (copy), UseRefResult3 (copy), UseRefResult4 (copy), UseResult16 (copy)
 		return {
-			setScrollingFrame = var24,
-			anchorToInstance = var25,
-			lockToBottom = var26,
-			scrollToBottomIfNeeded = var22,
-			captureDistanceFromBottom = var23,
-			captureStickToBottomForSend = var27,
-			scrollToBottomAfterSend = var28,
-			scrollToBottomUnconditionally = var29,
-			isViewportUnderfilled = var18,
-			isAtBottomRef = var3,
-			isAtTopRef = var4,
-			isNearTopRef = var5,
-			setOnScrolledToTop = var30
+			setScrollingFrame = UseResult10,
+			anchorToInstance = UseResult11,
+			lockToBottom = UseResult12,
+			scrollToBottomIfNeeded = UseResult8,
+			captureDistanceFromBottom = UseResult9,
+			captureStickToBottomForSend = UseResult13,
+			scrollToBottomAfterSend = UseResult14,
+			scrollToBottomUnconditionally = UseResult15,
+			isViewportUnderfilled = UseResult4,
+			isAtBottomRef = UseRefResult2,
+			isAtTopRef = UseRefResult3,
+			isNearTopRef = UseRefResult4,
+			setOnScrolledToTop = UseResult16
 		}
 	end, {
-		var24, var25, var26, var22, var23, var27, var28, var29, var18, var30
+		UseResult10, UseResult11, UseResult12, UseResult8, UseResult9, UseResult13,
+		UseResult14, UseResult15, UseResult4, UseResult16
 	})
 end

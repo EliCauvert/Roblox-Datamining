@@ -1,16 +1,13 @@
-﻿local luauPolyfillModule = require(script.Parent.Parent.Parent.Parent.LuauPolyfill)
-local t = {}
-local slot = require(script.Parent.slot).Slot
-t.Slot = slot
-local bind = slot.bind
-local noContext = slot.noContext
-t.bind = bind
-t.noContext = noContext
-local setTimeout = luauPolyfillModule.setTimeout
+﻿local Slot = require(script.Parent.slot).Slot
+local BindFunction = Slot.bind
+local SetTimeoutFunction = require(script.Parent.Parent.Parent.Parent.LuauPolyfill).setTimeout
 
-function t.setTimeoutWithContext(value, p1)
-	-- upvalues: setTimeout (ref), bind (ref)
-	return setTimeout(bind(value), p1)
-end
-
-return t
+return {
+	Slot = Slot,
+	bind = BindFunction,
+	noContext = Slot.noContext,
+	setTimeout = function(p1, p2) --[[ Line: 27 ]]
+		-- upvalues: SetTimeoutFunction (copy), BindFunction (copy)
+		return SetTimeoutFunction(BindFunction(p1), p2)
+	end
+}

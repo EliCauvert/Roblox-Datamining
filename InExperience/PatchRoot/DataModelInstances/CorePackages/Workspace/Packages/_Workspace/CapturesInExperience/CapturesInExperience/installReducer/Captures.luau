@@ -1,8 +1,8 @@
-﻿local parent = script.Parent.Parent
-local _ = require(parent.Types)
+﻿local Parent = script.Parent.Parent
+local _ = require(Parent.Types)
 
-return require(parent.Parent.Rodux).createReducer({}, {
-	[require(parent.Actions.CapturesRetrieved).name] = function(_, p1)
+return require(Parent.Parent.Rodux).createReducer({}, {
+	[require(Parent.Actions.CapturesRetrieved).name] = function(_, p1) --[[ Line: 14 ]]
 		return p1.captures
 	end
 })

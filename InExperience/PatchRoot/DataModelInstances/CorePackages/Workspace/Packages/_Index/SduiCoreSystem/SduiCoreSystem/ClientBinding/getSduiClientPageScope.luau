@@ -1,76 +1,78 @@
-﻿local signalsModule = require(script:FindFirstAncestor("SduiCoreSystem").Parent.Signals)
-local tbl = setmetatable({}, { __mode = "v" })
+﻿local SignalsModule = require(script:FindFirstAncestor("SduiCoreSystem").Parent.Signals)
+local self = setmetatable({}, { __mode = "v" })
 
-local function _(value, p1)
-	-- upvalues: signalsModule (ref)
-	local var1 = value[p1]
+local function _(p1, Key) --[[ Line: 17 | Named "ensureFieldSignal" ]]
+	-- upvalues: SignalsModule (copy)
+	local v1 = p1[Key]
 	
-	if var1 then
-		return var1
+	if v1 then
+		return v1
+	else
+		local Signal, Signal2 = SignalsModule.createSignal(nil)
+		local config = { get = Signal, set = Signal2 }
+		p1[Key] = config
+		
+		return config
 	end
-	local var2, var3 = signalsModule.createSignal(nil)
-	local t = { get = var2, set = var3 }
-	value[p1] = t
-	
-	return t
 end
 
-return function(p1)
-	-- upvalues: tbl (ref), signalsModule (ref)
-	local var1 = tbl[p1]
+return function(Key) --[[ Line: 40 | Named "getSduiClientPageScope" ]]
+	-- upvalues: self (copy), SignalsModule (copy)
+	local SelfEntry = self[Key]
 	
-	if var1 then
-		return var1
+	if SelfEntry then
+		return SelfEntry
+	else
+		local t = {}
+		local config = {
+			get = function(Key) --[[ Line: 49 ]]
+				-- upvalues: t (copy), SignalsModule (upval)
+				local Entry = t[Key]
+				local Entry1 = nil
+				
+				if Entry then
+					Entry1 = Entry
+				else
+					local Signal, Signal2 = SignalsModule.createSignal(nil)
+					local config = { get = Signal, set = Signal2 }
+					t[Key] = config
+					Entry1 = config
+				end
+				return Entry1.get(false)
+			end,
+			set = function(Key, p1) --[[ Line: 52 ]]
+				-- upvalues: t (copy), SignalsModule (upval)
+				local Entry = t[Key]
+				local Entry1 = nil
+				
+				if Entry then
+					Entry1 = Entry
+				else
+					local Signal, Signal2 = SignalsModule.createSignal(nil)
+					local config = { get = Signal, set = Signal2 }
+					t[Key] = config
+					Entry1 = config
+				end
+				Entry1.set(p1)
+			end,
+			getSignal = function(Key) --[[ Line: 55 ]]
+				-- upvalues: t (copy), SignalsModule (upval)
+				local Entry = t[Key]
+				local Entry1 = nil
+				
+				if Entry then
+					Entry1 = Entry
+				else
+					local Signal, Signal2 = SignalsModule.createSignal(nil)
+					local config = { get = Signal, set = Signal2 }
+					t[Key] = config
+					Entry1 = config
+				end
+				return Entry1.get
+			end
+		}
+		self[Key] = config
+		
+		return config
 	end
-	local t = {}
-	local t_1 = {
-		get = function(p2)
-			-- upvalues: t (ref), signalsModule (copy)
-			local var2
-			local var3 = t[p2]
-			
-			if var3 then
-				var2 = var3
-			else
-				local var4, var5 = signalsModule.createSignal(nil)
-				local t_1 = { get = var4, set = var5 }
-				t[p2] = t_1
-				var2 = t_1
-			end
-			return var2.get(false)
-		end,
-		set = function(value, p2)
-			-- upvalues: t (ref), signalsModule (copy)
-			local var2
-			local var3 = t[value]
-			
-			if var3 then
-				var2 = var3
-			else
-				local var4, var5 = signalsModule.createSignal(nil)
-				local t_1 = { get = var4, set = var5 }
-				t[value] = t_1
-				var2 = t_1
-			end
-			var2.set(p2)
-		end,
-		getSignal = function(value)
-			-- upvalues: t (ref), signalsModule (copy)
-			local var2
-			local var3 = t[value]
-			
-			if var3 then
-				var2 = var3
-			else
-				local var4, var5 = signalsModule.createSignal(nil)
-				local t_1 = { get = var4, set = var5 }
-				t[value] = t_1
-				var2 = t_1
-			end
-			return var2.get
-		end
-	}
-	tbl[p1] = t_1
-	
-	return t_1
 end

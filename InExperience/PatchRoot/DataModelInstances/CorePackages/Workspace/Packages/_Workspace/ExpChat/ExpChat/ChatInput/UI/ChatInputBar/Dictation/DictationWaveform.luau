@@ -1,90 +1,86 @@
-﻿local parent = script:FindFirstAncestor("ExpChat").Parent
-local reactModule = require(parent.React)
-local useTokens = require(parent.Foundation).Hooks.useTokens
-local waveformModule = require(script.Parent.Parent.Waveform)
+﻿local Parent = script:FindFirstAncestor("ExpChat").Parent
+local ReactModule = require(Parent.React)
+local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+local WaveformModule = require(script.Parent.Parent.Waveform)
 local _ = require(script.Parent.useTranscribedSamples)
-local var1 = reactModule.createBinding({})
+local Binding = ReactModule.createBinding({})
 
-local function _(p1, p2)
-	for i, v in p1 do
-		if v.startIdx <= p2 and p2 <= v.endIdx then
+local function _(List, p1): boolean --[[ Line: 34 | Named "isItemTranscribed" ]]
+	for _, value in List do
+		if value.startIdx <= p1 and p1 <= value.endIdx then
 			return true
 		end
 	end
 	return false
 end
 
-local _ = function(p3, p4)
-	return if p4 <= p3 then 0 else 1 - p3 / p4
+local _ = function(p2, p3): number --[[ Line: 43 | Named "fadeInTransparency" ]]
+	return if p3 <= p2 then 0 else 1 - p2 / p3
 end
 
-local _ = function(p3, p4)
-	return p3 + p4 * (1 - p3)
+local _ = function(p2: number, p3): number --[[ Line: 50 | Named "compositeWithFade" ]]
+	return p2 + p3 * (1 - p2)
 end
 
-return reactModule.memo(function(p3)
-	-- upvalues: useTokens (ref), var1 (ref), reactModule (ref), waveformModule (ref)
-	local var2 = useTokens()
-	local color3 = var2.Color.Content.Emphasis.Color3
-	local color3_1 = var2.Color.Content.Muted.Color3
-	local color3_2 = var2.Color.System.Success.Color3
-	local transcribedSamplesBinding = p3.transcribedSamplesBinding or var1
-	local transparencyValue = p3.transparencyValue
-	local fadeInTicks = p3.fadeInTicks or 10
+return ReactModule.memo(function(p2) --[[ Line: 63 | Named "DictationWaveform" ]]
+	-- upvalues: UseTokensFunction (copy), Binding (copy), ReactModule (copy), WaveformModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	local EmphasisColor3 = UseTokensResult.Color.Content.Emphasis.Color3
+	local MutedColor3 = UseTokensResult.Color.Content.Muted.Color3
+	local SuccessColor3 = UseTokensResult.Color.System.Success.Color3
+	local TranscribedSamplesBinding = p2.transcribedSamplesBinding or Binding
+	local TransparencyValue = p2.transparencyValue
+	local FadeInTicks = p2.fadeInTicks or 10
 	
-	return reactModule.createElement(waveformModule, {
-		isActive = p3.isActive,
-		audioDeviceInput = p3.audioDeviceInput,
-		onSample = p3.onSample,
-		bindBarStyle = reactModule.useCallback(function(p4)
-			-- upvalues: transcribedSamplesBinding (ref), transparencyValue (ref), reactModule (copy), color3_1 (ref), color3_2 (ref), fadeInTicks (ref), color3 (ref)
-			local t = { sample = p4, transcribed = transcribedSamplesBinding }
+	return ReactModule.createElement(WaveformModule, {
+		isActive = p2.isActive,
+		audioDeviceInput = p2.audioDeviceInput,
+		onSample = p2.onSample,
+		bindBarStyle = ReactModule.useCallback(function(Sample) --[[ Line: 74 ]]
+			-- upvalues: TranscribedSamplesBinding (copy), TransparencyValue (copy), ReactModule (upval), MutedColor3 (copy), SuccessColor3 (copy), FadeInTicks (copy), EmphasisColor3 (copy)
+			local config = { sample = Sample, transcribed = TranscribedSamplesBinding }
 			
-			if transparencyValue ~= nil then
-				t.fade = transparencyValue
+			if TransparencyValue ~= nil then
+				config.fade = TransparencyValue
 			end
-			return reactModule.joinBindings(t):map(function(p5)
-				-- upvalues: color3_1 (copy), color3_2 (copy), fadeInTicks (copy), color3 (copy)
-				local var3, var4
-				local sample = p5.sample
-				local transcribed = p5.transcribed
-				local _ = nil
-				local _ = nil
+			return ReactModule.joinBindings(config):map(function(p3) --[[ Line: 82 ]]
+				-- upvalues: MutedColor3 (upval), SuccessColor3 (upval), FadeInTicks (upval), EmphasisColor3 (upval)
+				local Sample = p3.sample
+				local Transcribed = p3.transcribed
+				local Color = nil
+				local NewFade = nil
 				
-				if sample.age == nil then
-					var3 = color3_1
-					var4 = 0.85
+				if Sample.age == nil then
+					Color = MutedColor3
+					NewFade = 0.85
 				else
-					local age
-					local itemIdx = sample.itemIdx
+					local ItemIdx = Sample.itemIdx
+					local Flag = false
 					
-					for i, v in transcribed do
-						if v.startIdx <= itemIdx and itemIdx <= v.endIdx then
-							age = true
-							if age then
-								var3 = color3_2
-								age = sample.age
-								itemIdx = fadeInTicks
-								var4 = if itemIdx <= age then 0 else 1 - age / itemIdx
-							else
-								var3 = color3
-								age = sample.age
-								itemIdx = fadeInTicks
-								var4 = if itemIdx <= age then 0 else 1 - age / itemIdx
-							end
+					for _, value in Transcribed do
+						if value.startIdx <= ItemIdx and ItemIdx <= value.endIdx then
+							Flag = true
+							break
 						end
 					end
-					age = false
+					if Flag then
+						Color = SuccessColor3
+						local Age = Sample.age
+						NewFade = if Age >= FadeInTicks then 0 else 1 - Age / FadeInTicks
+					else
+						Color = EmphasisColor3
+						local Age = Sample.age
+						NewFade = if Age >= FadeInTicks then 0 else 1 - Age / FadeInTicks
+					end
 				end
-				if p5.fade ~= nil then
-					local var5 = var4
-					var4 = var5 + p5.fade * (1 - var5)
+				if p3.fade ~= nil then
+					NewFade += p3.fade * (1 - NewFade)
 				end
-				return { color = var3, transparency = var4 }
+				return { color = Color, transparency = NewFade }
 			end)
 		end, {
-			color3, color3_1, color3_2, transcribedSamplesBinding, transparencyValue,
-			fadeInTicks
+			EmphasisColor3, MutedColor3, SuccessColor3, TranscribedSamplesBinding,
+			TransparencyValue, FadeInTicks
 		})
 	})
 end)

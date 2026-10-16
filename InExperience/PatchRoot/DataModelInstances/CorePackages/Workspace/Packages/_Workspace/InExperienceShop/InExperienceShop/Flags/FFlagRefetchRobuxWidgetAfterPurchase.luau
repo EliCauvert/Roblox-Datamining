@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("RefetchRobuxWidgetAfterPurchase", false) and require(script:FindFirstAncestor("InExperienceShop").Parent.SharedFlags).FFlagEnableBonusJwtInShop
+﻿local FFlagEnableBonusJwtInShop = require(script:FindFirstAncestor("InExperienceShop").Parent.SharedFlags).FFlagEnableBonusJwtInShop
+
+return game:DefineFastFlag("RefetchRobuxWidgetAfterPurchase", false) and FFlagEnableBonusJwtInShop

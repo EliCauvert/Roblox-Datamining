@@ -1,41 +1,41 @@
-﻿local parent = script:FindFirstAncestor("GameTile").Parent
-local cryoModule = require(parent.Cryo)
-local fetchGamePlayabilityAndProductInfo = require(parent.GameDetailRodux).FetchGamePlayabilityAndProductInfo
-local retrievalStatus = require(parent.Http).Enum.RetrievalStatus
-local playabilityStatusEnum = require(parent.DiscoveryTypes).PlayabilityStatusEnum
-local isVideoEligibleForPlayability = require(parent.VideoUtils).isVideoEligibleForPlayability
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local fFlagLuaAppUsePrevalidatedVideoGamePlayability = require(parent.SharedFlags).FFlagLuaAppUsePrevalidatedVideoGamePlayability
-local fFlagLuaAppSduiVideoThumbnail = require(parent.SharedFlags).FFlagLuaAppSduiVideoThumbnail
-local var1 = if not fFlagLuaAppSduiVideoThumbnail then {
-	playabilityStatusEnum.UnderReview,
-	playabilityStatusEnum.UniverseRootPlaceIsPrivate,
-	playabilityStatusEnum.InsufficientPermissionFriendsOnly,
-	playabilityStatusEnum.InsufficientPermissionGroupOnly,
-	playabilityStatusEnum.GameUnapproved, playabilityStatusEnum.AccountRestricted,
-	playabilityStatusEnum.ComplianceBlocked,
-	playabilityStatusEnum.ContextualPlayabilityRegionalCompliance,
-	playabilityStatusEnum.ContextualPlayabilityAgeRecommendationParentalControls,
-	playabilityStatusEnum.ContextualPlayabilityAgeGated,
-	playabilityStatusEnum.ContextualPlayabilityUnrated,
-	playabilityStatusEnum.ContextualPlayabilityAgeGatedByDescriptor,
-	playabilityStatusEnum.ContextualPlayabilityExperienceBlockedParentalControls,
-	playabilityStatusEnum.ContextualPlayabilityRequireParentApproval,
-	playabilityStatusEnum.ContextualPlayabilityAgeCheckRequired,
-	playabilityStatusEnum.ContextualPlayabilityCoreGated,
-	playabilityStatusEnum.ContextualPlayabilityUnverifiedSeventeenPlusUser
-} else nil
+﻿local Parent = script:FindFirstAncestor("GameTile").Parent
+local CryoModule = require(Parent.Cryo)
+local FetchGamePlayabilityAndProductInfo = require(Parent.GameDetailRodux).FetchGamePlayabilityAndProductInfo
+local RetrievalStatus = require(Parent.Http).Enum.RetrievalStatus
+local PlayabilityStatusEnum = require(Parent.DiscoveryTypes).PlayabilityStatusEnum
+local IsVideoEligibleForPlayabilityFunction = require(Parent.VideoUtils).isVideoEligibleForPlayability
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local FFlagLuaAppUsePrevalidatedVideoGamePlayability = require(Parent.SharedFlags).FFlagLuaAppUsePrevalidatedVideoGamePlayability
+local FFlagLuaAppSduiVideoThumbnail = require(Parent.SharedFlags).FFlagLuaAppSduiVideoThumbnail
+local List = if FFlagLuaAppSduiVideoThumbnail then nil else {
+	PlayabilityStatusEnum.UnderReview,
+	PlayabilityStatusEnum.UniverseRootPlaceIsPrivate,
+	PlayabilityStatusEnum.InsufficientPermissionFriendsOnly,
+	PlayabilityStatusEnum.InsufficientPermissionGroupOnly,
+	PlayabilityStatusEnum.GameUnapproved, PlayabilityStatusEnum.AccountRestricted,
+	PlayabilityStatusEnum.ComplianceBlocked,
+	PlayabilityStatusEnum.ContextualPlayabilityRegionalCompliance,
+	PlayabilityStatusEnum.ContextualPlayabilityAgeRecommendationParentalControls,
+	PlayabilityStatusEnum.ContextualPlayabilityAgeGated,
+	PlayabilityStatusEnum.ContextualPlayabilityUnrated,
+	PlayabilityStatusEnum.ContextualPlayabilityAgeGatedByDescriptor,
+	PlayabilityStatusEnum.ContextualPlayabilityExperienceBlockedParentalControls,
+	PlayabilityStatusEnum.ContextualPlayabilityRequireParentApproval,
+	PlayabilityStatusEnum.ContextualPlayabilityAgeCheckRequired,
+	PlayabilityStatusEnum.ContextualPlayabilityCoreGated,
+	PlayabilityStatusEnum.ContextualPlayabilityUnverifiedSeventeenPlusUser
+}
 
-return function(p1, p2)
-	-- upvalues: useSelector (ref), fetchGamePlayabilityAndProductInfo (ref), fFlagLuaAppSduiVideoThumbnail (ref), isVideoEligibleForPlayability (ref), retrievalStatus (ref), fFlagLuaAppUsePrevalidatedVideoGamePlayability (ref), cryoModule (ref), var1 (write)
-	local var2 = useSelector(function(p3)
-		-- upvalues: fetchGamePlayabilityAndProductInfo (copy), p1 (ref)
-		return fetchGamePlayabilityAndProductInfo.GetFetchingStatus(p3, p1)
+return function(p1, p2) --[[ Line: 45 | Named "useIsVideoEligible" ]]
+	-- upvalues: UseSelectorFunction (copy), FetchGamePlayabilityAndProductInfo (copy), FFlagLuaAppSduiVideoThumbnail (copy), IsVideoEligibleForPlayabilityFunction (copy), RetrievalStatus (copy), FFlagLuaAppUsePrevalidatedVideoGamePlayability (copy), CryoModule (copy), List (ref)
+	local UseSelectorResult = UseSelectorFunction(function(p3) --[[ Line: 46 ]]
+		-- upvalues: FetchGamePlayabilityAndProductInfo (upval), p1 (copy)
+		return FetchGamePlayabilityAndProductInfo.GetFetchingStatus(p3, p1)
 	end)
-	local var3 = useSelector(function(p3)
-		-- upvalues: p1 (ref)
-		return if p3.PlayabilityStatus then p3.PlayabilityStatus[p1] else nil
+	local UseSelectorResult1 = UseSelectorFunction(function(p3) --[[ Line: 50 ]]
+		-- upvalues: p1 (copy)
+		return p3.PlayabilityStatus and p3.PlayabilityStatus[p1] or nil
 	end)
 	
-	return if fFlagLuaAppSduiVideoThumbnail then isVideoEligibleForPlayability(var2 == retrievalStatus.Done, var3, p2) elseif fFlagLuaAppUsePrevalidatedVideoGamePlayability and p2 then true else not (var2 ~= retrievalStatus.Done or var3 == nil) and (var3.isPlayable == true or cryoModule.List.find(var1, var3.playabilityStatus) == nil)
+	return if FFlagLuaAppSduiVideoThumbnail then IsVideoEligibleForPlayabilityFunction(UseSelectorResult == RetrievalStatus.Done, UseSelectorResult1, p2) elseif FFlagLuaAppUsePrevalidatedVideoGamePlayability and p2 then true else UseSelectorResult == RetrievalStatus.Done and UseSelectorResult1 ~= nil and (UseSelectorResult1.isPlayable == true or CryoModule.List.find(List, UseSelectorResult1.playabilityStatus) == nil)
 end

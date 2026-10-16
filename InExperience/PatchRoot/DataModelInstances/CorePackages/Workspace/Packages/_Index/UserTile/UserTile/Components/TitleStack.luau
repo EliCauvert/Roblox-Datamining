@@ -1,369 +1,300 @@
-﻿local userTile = script:FindFirstAncestor("UserTile")
-local parent = userTile.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local llama = require(parent.LuaSocialLibrariesDeps).llama
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local verifiedBadgeModule = require(parent.VerifiedBadges.VerifiedBadge)
-local constantsModule = require(userTile.Constants)
-local layoutModeModule = require(script.Parent.Parent.Enums.LayoutMode)
-local textKeysModule = require(userTile.TextKeys)
-local view = foundationModule.View
-local text = foundationModule.Text
-local image = foundationModule.Image
-local icon = foundationModule.Icon
-local skeleton = foundationModule.Skeleton
-local enums = foundationModule.Enums
-local stateLayerAffordance = enums.StateLayerAffordance
-local radius = enums.Radius
-local iconSize = enums.IconSize
-local fFlagProfilePlatformNewProfileHeader = require(parent.SharedFlags).FFlagProfilePlatformNewProfileHeader
-local fFlagUserTileShowShimmerWhenLoadingModule = require(userTile.Flags.FFlagUserTileShowShimmerWhenLoading)
-local fFlagUserTileTextTCIndicator = require(parent.SharedFlags).FFlagUserTileTextTCIndicator
-local fFlagUserTileShowBadges = require(parent.SharedFlags).FFlagUserTileShowBadges
-local fFlagEnableBlackbirdCheck = require(parent.SharedFlags).FFlagEnableBlackbirdCheck
-local fFlagHidePremiumIconography = require(parent.SharedFlags).FFlagHidePremiumIconography
-local fFlagEnableMobileGameJoinCard = require(parent.SharedFlags).FFlagEnableMobileGameJoinCard
-local fFlagUserTileAddContextualInfoIcon = require(parent.SharedFlags).FFlagUserTileAddContextualInfoIcon
-local userTileRemoveContextualInfoTag = game:DefineFastFlag("UserTileRemoveContextualInfoTag", false)
-local fFlagUserTileTitleStackAddExtraInfo = require(parent.SharedFlags).FFlagUserTileTitleStackAddExtraInfo
-local fFlagUserTileUnfilteredChatIndicator = require(parent.SharedFlags).FFlagUserTileUnfilteredChatIndicator
-local fFlagUnifyVerifiedBadgeComponent = require(parent.SharedFlags).FFlagUnifyVerifiedBadgeComponent
-local t = { layoutOrder = 2 }
+﻿local UserTile = script:FindFirstAncestor("UserTile")
+local Parent = UserTile.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local Llama = require(Parent.LuaSocialLibrariesDeps).llama
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local VerifiedBadgeModule = require(Parent.VerifiedBadges.VerifiedBadge)
+local ConstantsModule = require(UserTile.Constants)
+local LayoutModeModule = require(script.Parent.Parent.Enums.LayoutMode)
+local TextKeysModule = require(UserTile.TextKeys)
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local Image = FoundationModule.Image
+local Icon = FoundationModule.Icon
+local Skeleton = FoundationModule.Skeleton
+local Enums = FoundationModule.Enums
+local StateLayerAffordance = Enums.StateLayerAffordance
+local Radius = Enums.Radius
+local IconSize = Enums.IconSize
+local FFlagProfilePlatformNewProfileHeader = require(Parent.SharedFlags).FFlagProfilePlatformNewProfileHeader
+local FFlagUserTileShowShimmerWhenLoadingModule = require(UserTile.Flags.FFlagUserTileShowShimmerWhenLoading)
+local FFlagUserTileShowBadges = require(Parent.SharedFlags).FFlagUserTileShowBadges
+local FFlagEnableBlackbirdCheck = require(Parent.SharedFlags).FFlagEnableBlackbirdCheck
+local FFlagHidePremiumIconography = require(Parent.SharedFlags).FFlagHidePremiumIconography
+local FFlagEnableMobileGameJoinCard = require(Parent.SharedFlags).FFlagEnableMobileGameJoinCard
+local FFlagUserTileAddContextualInfoIcon = require(Parent.SharedFlags).FFlagUserTileAddContextualInfoIcon
+local UserTileRemoveContextualInfoTag = game:DefineFastFlag("UserTileRemoveContextualInfoTag", false)
+local FFlagUserTileTitleStackAddExtraInfo = require(Parent.SharedFlags).FFlagUserTileTitleStackAddExtraInfo
+local FFlagUserTileUnfilteredChatIndicator = require(Parent.SharedFlags).FFlagUserTileUnfilteredChatIndicator
+local FFlagUnifyVerifiedBadgeComponent = require(Parent.SharedFlags).FFlagUnifyVerifiedBadgeComponent
+local FFlagSocialCarouselInGameTitleMarquee = require(Parent.SharedFlags).FFlagSocialCarouselInGameTitleMarquee
+local config = { layoutOrder = 2 }
 
-return function(p1)
-	-- upvalues: llama (ref), t (ref), useTokens (ref), layoutModeModule (ref), reactModule (ref), image (ref), fFlagUserTileTitleStackAddExtraInfo (ref), fFlagUserTileShowShimmerWhenLoadingModule (ref), constantsModule (ref), fFlagEnableBlackbirdCheck (ref), fFlagHidePremiumIconography (ref), fFlagUserTileTextTCIndicator (ref), useLocalization (ref), textKeysModule (ref), fFlagUserTileUnfilteredChatIndicator (ref), view (ref), skeleton (ref), radius (ref), fFlagProfilePlatformNewProfileHeader (ref), text (ref), fFlagUserTileShowBadges (ref), fFlagUnifyVerifiedBadgeComponent (ref), verifiedBadgeModule (ref), iconSize (ref), foundationModule (ref), fFlagEnableMobileGameJoinCard (ref), stateLayerAffordance (ref), fFlagUserTileAddContextualInfoIcon (ref), icon (ref), userTileRemoveContextualInfoTag (ref)
-	local var1
-	p1 = llama.Dictionary.join(t, p1 or {})
-	local var2 = useTokens()
-	local var3 = if p1.layoutMode == layoutModeModule.compact then "align-x-center" else "align-x-left"
-	local var4 = if p1.titleIcon then reactModule.createElement(image, {
+return function(p1) --[[ Line: 73 | Named "TitleStack" ]]
+	-- upvalues: Llama (copy), config (copy), UseTokensFunction (copy), LayoutModeModule (copy), ReactModule (copy), Image (copy), FFlagSocialCarouselInGameTitleMarquee (copy), FFlagUserTileTitleStackAddExtraInfo (copy), FFlagUserTileShowShimmerWhenLoadingModule (copy), ConstantsModule (copy), FFlagEnableBlackbirdCheck (copy), FFlagHidePremiumIconography (copy), UseLocalizationFunction (copy), TextKeysModule (copy), FFlagUserTileUnfilteredChatIndicator (copy), View (copy), Skeleton (copy), Radius (copy), FFlagProfilePlatformNewProfileHeader (copy), Text (copy), FFlagUserTileShowBadges (copy), FFlagUnifyVerifiedBadgeComponent (copy), VerifiedBadgeModule (copy), IconSize (copy), FoundationModule (copy), FFlagEnableMobileGameJoinCard (copy), StateLayerAffordance (copy), FFlagUserTileAddContextualInfoIcon (copy), Icon (copy), UserTileRemoveContextualInfoTag (copy)
+	local JoinResult = Llama.Dictionary.join(config, p1 or {})
+	local UseTokensResult = UseTokensFunction()
+	local AlignXCenter: string = if JoinResult.layoutMode == LayoutModeModule.compact then "align-x-center" else "align-x-left"
+	local Element = if JoinResult.titleIcon then ReactModule.createElement(Image, {
 		tag = "size-300-300 radius-circle",
 		LayoutOrder = 1,
-		Image = p1.titleIcon
+		Image = JoinResult.titleIcon
 	}) else nil
-	local var5 = if p1.contextualInfo and not p1.subtitle then false elseif p1.layoutMode ~= layoutModeModule.compact then p1.subtitle ~= nil else true
-	local var6 = (p1.titleStyle or var2.Typography.TitleMedium).FontSize - var2.Padding.XSmall * 2
-	local var7 = (p1.subtitleStyle or var2.Typography.BodyMedium).FontSize - var2.Padding.XSmall * 2
-	local var8 = (p1.contextualInfoStyle or var2.Typography.BodySmall).FontSize - var2.Padding.XSmall * 2
-	local var9 = if fFlagUserTileTitleStackAddExtraInfo then (p1.extraInfoStyle or var2.Typography.BodySmall).FontSize - var2.Padding.XSmall * 2 else 0
+	local Subtitle = if typeof(JoinResult.subtitle) == "string" then JoinResult.subtitle else nil
+	local Subtitle1 = if FFlagSocialCarouselInGameTitleMarquee and typeof(JoinResult.subtitle) == "table" then JoinResult.subtitle else nil
+	local IsLayoutModeMatch: boolean = (not JoinResult.contextualInfo or Subtitle) and (JoinResult.layoutMode == LayoutModeModule.compact or Subtitle ~= nil)
+	local FontSizeDelta = (JoinResult.titleStyle or UseTokensResult.Typography.TitleMedium).FontSize - UseTokensResult.Padding.XSmall * 2
+	local FontSizeDelta1 = (JoinResult.subtitleStyle or UseTokensResult.Typography.BodyMedium).FontSize - UseTokensResult.Padding.XSmall * 2
+	local FontSizeDelta2 = (JoinResult.contextualInfoStyle or UseTokensResult.Typography.BodySmall).FontSize - UseTokensResult.Padding.XSmall * 2
+	local FontSizeDelta3 = if FFlagUserTileTitleStackAddExtraInfo then (JoinResult.extraInfoStyle or UseTokensResult.Typography.BodySmall).FontSize - UseTokensResult.Padding.XSmall * 2 else 0
+	local IsLayoutModeMatch1 = if FFlagUserTileShowShimmerWhenLoadingModule then JoinResult.layoutMode == LayoutModeModule.compact else nil
+	local XScale = nil
+	local XScale1 = nil
+	local XScale2 = nil
+	local XScale3 = nil
 	
-	if fFlagUserTileShowShimmerWhenLoadingModule then
-		var1 = p1.layoutMode == layoutModeModule.compact
-		var1 = nil
-	else
-		var1 = nil
-	end
-	local TITLE_SHIMMER_WIDTH_SCALE_WIDE = nil
-	local SUBTITLE_SHIMMER_WIDTH_SCALE_WIDE = nil
-	local CONTEXTUAL_INFO_SHIMMER_WIDTH_SCALE_WIDE = nil
-	local EXTRA_INFO_SHIMMER_WIDTH_SCALE_WIDE = nil
-	
-	if fFlagUserTileShowShimmerWhenLoadingModule then
-		if var1 then
-			TITLE_SHIMMER_WIDTH_SCALE_WIDE = constantsModule.TITLE_SHIMMER_WIDTH_SCALE_COMPACT
-			SUBTITLE_SHIMMER_WIDTH_SCALE_WIDE = constantsModule.SUBTITLE_SHIMMER_WIDTH_SCALE_COMPACT
-			CONTEXTUAL_INFO_SHIMMER_WIDTH_SCALE_WIDE = constantsModule.CONTEXTUAL_INFO_SHIMMER_WIDTH_SCALE_COMPACT
-			EXTRA_INFO_SHIMMER_WIDTH_SCALE_WIDE = constantsModule.EXTRA_INFO_SHIMMER_WIDTH_SCALE_COMPACT
+	if FFlagUserTileShowShimmerWhenLoadingModule then
+		if IsLayoutModeMatch1 then
+			XScale = ConstantsModule.TITLE_SHIMMER_WIDTH_SCALE_COMPACT
+			XScale1 = ConstantsModule.SUBTITLE_SHIMMER_WIDTH_SCALE_COMPACT
+			XScale2 = ConstantsModule.CONTEXTUAL_INFO_SHIMMER_WIDTH_SCALE_COMPACT
+			XScale3 = ConstantsModule.EXTRA_INFO_SHIMMER_WIDTH_SCALE_COMPACT
 		else
-			TITLE_SHIMMER_WIDTH_SCALE_WIDE = constantsModule.TITLE_SHIMMER_WIDTH_SCALE_WIDE
-			SUBTITLE_SHIMMER_WIDTH_SCALE_WIDE = constantsModule.SUBTITLE_SHIMMER_WIDTH_SCALE_WIDE
-			CONTEXTUAL_INFO_SHIMMER_WIDTH_SCALE_WIDE = constantsModule.CONTEXTUAL_INFO_SHIMMER_WIDTH_SCALE_WIDE
-			EXTRA_INFO_SHIMMER_WIDTH_SCALE_WIDE = constantsModule.EXTRA_INFO_SHIMMER_WIDTH_SCALE_WIDE
+			XScale = ConstantsModule.TITLE_SHIMMER_WIDTH_SCALE_WIDE
+			XScale1 = ConstantsModule.SUBTITLE_SHIMMER_WIDTH_SCALE_WIDE
+			XScale2 = ConstantsModule.CONTEXTUAL_INFO_SHIMMER_WIDTH_SCALE_WIDE
+			XScale3 = ConstantsModule.EXTRA_INFO_SHIMMER_WIDTH_SCALE_WIDE
 		end
 	end
-	local var10
-	local var11 = if fFlagUserTileShowShimmerWhenLoadingModule and p1.layoutMode == layoutModeModule.compact then "align-x-center" else "align-x-left"
-	local var12 = if p1.layoutMode == layoutModeModule.compact then "size-full-0" else "grow"
-	local customTextTruncation = p1.customTextTruncation or Enum.TextTruncate.AtEnd
+	local AlignXCenter1: string = if FFlagUserTileShowShimmerWhenLoadingModule and JoinResult.layoutMode == LayoutModeModule.compact then "align-x-center" else "align-x-left"
+	local CustomTextTruncation = JoinResult.customTextTruncation or Enum.TextTruncate.AtEnd
+	local IsIsRobloxSubscriber = if FFlagEnableBlackbirdCheck then JoinResult.isRobloxSubscriber == true else nil
+	local NoIsIsRobloxSubscriber: boolean = not FFlagHidePremiumIconography and (JoinResult.isPremium and not IsIsRobloxSubscriber)
+	local UseLocalizationResult = UseLocalizationFunction({
+		trustedLabel = TextKeysModule.trustedLabel,
+		unfilteredChatLabel = TextKeysModule.unfilteredChatLabel
+	})
+	local IsShouldShowUnfilteredChatIndicator: boolean = FFlagUserTileUnfilteredChatIndicator and JoinResult.shouldShowUnfilteredChatIndicator == true
+	local v1 = (JoinResult.trustedConnectionIndicatorEnabled and JoinResult.isTrustedConnection) == true
+	local IsNotSubtitleMatch: boolean = Subtitle ~= nil and Subtitle ~= ""
 	
-	if fFlagEnableBlackbirdCheck then
-		var10 = p1.isRobloxSubscriber == true
-		var10 = nil
-	else
-		var10 = nil
-	end
-	local createElement_1
-	local var13 = if fFlagHidePremiumIconography then false else p1.isPremium and not var10
-	local var14 = if fFlagUserTileTextTCIndicator then useLocalization({
-		trustedLabel = textKeysModule.trustedLabel,
-		unfilteredChatLabel = textKeysModule.unfilteredChatLabel
-	}) else nil
-	local var15 = fFlagUserTileUnfilteredChatIndicator and p1.shouldShowUnfilteredChatIndicator == true
-	local var16 = (p1.trustedConnectionIndicatorEnabled and p1.isTrustedConnection) == true
-	local var17 = p1.subtitle ~= nil and p1.subtitle ~= ""
-	local createElement = reactModule.createElement
-	local t_1 = { tag = `{var12} auto-y col`, LayoutOrder = p1.layoutOrder }
-	local t_2 = {
-		Title = if fFlagUserTileShowShimmerWhenLoadingModule and p1.isTitleLoading then reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
+		tag = `{if JoinResult.layoutMode == LayoutModeModule.compact then "size-full-0" else "grow"} auto-y col`,
+		LayoutOrder = JoinResult.layoutOrder
+	}, {
+		Title = if FFlagUserTileShowShimmerWhenLoadingModule and JoinResult.isTitleLoading then ReactModule.createElement(View, {
 			LayoutOrder = 1,
-			tag = `size-full-0 auto-y padding-xsmall {var11}`
+			tag = `size-full-0 auto-y padding-xsmall {AlignXCenter1}`
 		}, {
-			TitleSkeleton = reactModule.createElement(skeleton, {
-				Size = UDim2.new(TITLE_SHIMMER_WIDTH_SCALE_WIDE, 0, 0, var6),
-				radius = radius.Small
+			TitleSkeleton = ReactModule.createElement(Skeleton, {
+				Size = UDim2.new(XScale, 0, 0, FontSizeDelta),
+				radius = Radius.Small
 			})
-		}) else reactModule.createElement(view, {
+		}) else ReactModule.createElement(View, {
 			LayoutOrder = 1,
-			tag = `size-full-0 row auto-y gap-xxsmall align-y-center {var3}`
+			tag = `size-full-0 row auto-y gap-xxsmall align-y-center {AlignXCenter}`
 		}, {
-			TitleIcon = var4,
-			TitleText = if fFlagProfilePlatformNewProfileHeader then p1.title and reactModule.createElement(view, {
+			TitleIcon = Element,
+			TitleText = if FFlagProfilePlatformNewProfileHeader then JoinResult.title and ReactModule.createElement(View, {
 				LayoutOrder = 2,
 				tag = {
 					["row align-y-center gap-xsmall content-emphasis"] = true,
-					["auto-xy text-align-x-center"] = p1.layoutMode == layoutModeModule.compact,
-					["auto-y size-full-0 text-align-x-left"] = p1.layoutMode == layoutModeModule.wide
+					["auto-xy text-align-x-center"] = JoinResult.layoutMode == LayoutModeModule.compact,
+					["auto-y size-full-0 text-align-x-left"] = JoinResult.layoutMode == LayoutModeModule.wide
 				}
 			}, {
-				Title = reactModule.createElement(text, {
+				Title = ReactModule.createElement(Text, {
 					LayoutOrder = 1,
 					RichText = true,
 					tag = {
 						["shrink content-default auto-xy"] = true,
-						["text-align-x-left"] = p1.layoutMode == layoutModeModule.wide,
-						["text-align-x-center"] = p1.layoutMode == layoutModeModule.compact
+						["text-align-x-left"] = JoinResult.layoutMode == LayoutModeModule.wide,
+						["text-align-x-center"] = JoinResult.layoutMode == LayoutModeModule.compact
 					},
-					fontStyle = p1.titleStyle or var2.Typography.TitleMedium,
-					Text = p1.title,
-					TextTruncate = customTextTruncation
+					fontStyle = JoinResult.titleStyle or UseTokensResult.Typography.TitleMedium,
+					Text = JoinResult.title,
+					TextTruncate = CustomTextTruncation
 				}),
-				BadgesRow = if fFlagUserTileShowBadges then reactModule.createElement(view, {
+				BadgesRow = if FFlagUserTileShowBadges then ReactModule.createElement(View, {
 					tag = "row align-y-center auto-xy content-default gap-xxsmall",
-					["text-align-x-left"] = p1.layoutMode == layoutModeModule.wide,
-					["text-align-x-center"] = p1.layoutMode == layoutModeModule.compact,
+					["text-align-x-left"] = JoinResult.layoutMode == LayoutModeModule.wide,
+					["text-align-x-center"] = JoinResult.layoutMode == LayoutModeModule.compact,
 					LayoutOrder = 2
 				}, {
-					VerifiedBadge = p1.isVerified and (if fFlagUnifyVerifiedBadgeComponent then reactModule.createElement(verifiedBadgeModule, { LayoutOrder = 2, size = iconSize.Large }) else reactModule.createElement(view, { tag = "auto-xy content-default", LayoutOrder = 2 }, {
-						VerifiedBackplateIcon = reactModule.createElement(foundationModule.Icon, {
+					VerifiedBadge = JoinResult.isVerified and (if FFlagUnifyVerifiedBadgeComponent then ReactModule.createElement(VerifiedBadgeModule, { LayoutOrder = 2, size = IconSize.Large }) else ReactModule.createElement(View, { tag = "auto-xy content-default", LayoutOrder = 2 }, {
+						VerifiedBackplateIcon = ReactModule.createElement(FoundationModule.Icon, {
 							ZIndex = 1,
-							name = foundationModule.Enums.IconName.VerifiedBackplate,
-							size = foundationModule.Enums.IconSize.Large,
-							style = var2.Color.System.Emphasis,
+							name = FoundationModule.Enums.IconName.VerifiedBackplate,
+							size = FoundationModule.Enums.IconSize.Large,
+							style = UseTokensResult.Color.System.Emphasis,
 							AnchorPoint = Vector2.new(0, 0),
 							Position = UDim2.fromScale(0, 0)
 						}),
-						VerifiedCheckIcon = reactModule.createElement(foundationModule.Icon, {
+						VerifiedCheckIcon = ReactModule.createElement(FoundationModule.Icon, {
 							ZIndex = 2,
-							name = foundationModule.Enums.IconName.VerifiedCheck,
-							size = foundationModule.Enums.IconSize.Large,
+							name = FoundationModule.Enums.IconName.VerifiedCheck,
+							size = FoundationModule.Enums.IconSize.Large,
 							style = { Transparency = 0, Color3 = Color3.fromRGB(255, 255, 255) },
 							AnchorPoint = Vector2.new(0, 0),
 							Position = UDim2.fromScale(0, 0)
 						})
 					})),
-					SubscriptionBadge = if var10 then reactModule.createElement(foundationModule.Icon, {
+					SubscriptionBadge = if IsIsRobloxSubscriber then ReactModule.createElement(FoundationModule.Icon, {
 						LayoutOrder = 3,
-						name = foundationModule.Enums.IconName.RobloxPlus,
-						size = foundationModule.Enums.IconSize.Small,
-						style = var2.Color.Content.Emphasis
+						name = FoundationModule.Enums.IconName.RobloxPlus,
+						size = FoundationModule.Enums.IconSize.Small,
+						style = UseTokensResult.Color.Content.Emphasis
 					}) else nil,
-					PremiumBadge = if var13 then reactModule.createElement(foundationModule.Icon, {
+					PremiumBadge = if NoIsIsRobloxSubscriber then ReactModule.createElement(FoundationModule.Icon, {
 						LayoutOrder = 4,
-						name = foundationModule.Enums.IconName.Premium,
-						size = foundationModule.Enums.IconSize.Large
+						name = FoundationModule.Enums.IconName.Premium,
+						size = FoundationModule.Enums.IconSize.Large
 					}) else nil,
-					AdminBadge = p1.isRobloxAdmin and reactModule.createElement(foundationModule.Icon, {
+					AdminBadge = JoinResult.isRobloxAdmin and ReactModule.createElement(FoundationModule.Icon, {
 						LayoutOrder = 5,
-						name = foundationModule.Enums.IconName.Tilt,
-						size = foundationModule.Enums.IconSize.Large
+						name = FoundationModule.Enums.IconName.Tilt,
+						size = FoundationModule.Enums.IconSize.Large
 					})
 				}) else nil
-			}) else p1.title and reactModule.createElement(text, {
+			}) else JoinResult.title and ReactModule.createElement(Text, {
 				LayoutOrder = 2,
 				RichText = true,
 				tag = {
 					["content-emphasis"] = true,
-					["auto-xy text-align-x-center"] = p1.layoutMode == layoutModeModule.compact,
-					["auto-y size-full-0 text-align-x-left"] = p1.layoutMode == layoutModeModule.wide
+					["auto-xy text-align-x-center"] = JoinResult.layoutMode == LayoutModeModule.compact,
+					["auto-y size-full-0 text-align-x-left"] = JoinResult.layoutMode == LayoutModeModule.wide
 				},
-				fontStyle = p1.titleStyle or var2.Typography.TitleMedium,
-				Text = p1.title,
-				TextTruncate = customTextTruncation
+				fontStyle = JoinResult.titleStyle or UseTokensResult.Typography.TitleMedium,
+				Text = JoinResult.title,
+				TextTruncate = CustomTextTruncation
 			}) or nil
-		})
-	}
-	
-	if fFlagUserTileShowShimmerWhenLoadingModule and p1.isSubtitleLoading then
-		createElement_1 = reactModule.createElement(view, {
+		}),
+		Subtitle = if Subtitle1 then Subtitle1 elseif FFlagUserTileShowShimmerWhenLoadingModule and JoinResult.isSubtitleLoading then ReactModule.createElement(View, {
 			LayoutOrder = 2,
-			tag = `size-full-0 auto-y padding-xsmall {var11}`
+			tag = `size-full-0 auto-y padding-xsmall {AlignXCenter1}`
 		}, {
-			SubtitleSkeleton = reactModule.createElement(skeleton, {
-				Size = UDim2.new(SUBTITLE_SHIMMER_WIDTH_SCALE_WIDE, 0, 0, var7),
-				radius = radius.Small
+			SubtitleSkeleton = ReactModule.createElement(Skeleton, {
+				Size = UDim2.new(XScale1, 0, 0, FontSizeDelta1),
+				radius = Radius.Small
 			})
-		})
-	elseif not fFlagUserTileTextTCIndicator and var5 then
-		createElement_1 = reactModule.createElement
-		createElement_1 = createElement_1(text, {
-			LayoutOrder = 2,
-			RichText = true,
-			tag = {
-				["auto-y size-full-0 content-default"] = true,
-				["text-align-x-center"] = p1.layoutMode == layoutModeModule.compact,
-				["text-align-x-left"] = p1.layoutMode == layoutModeModule.wide
-			},
-			fontStyle = p1.subtitleStyle or var2.Typography.BodyMedium,
-			Text = p1.subtitle or "",
-			TextTruncate = customTextTruncation,
-			onActivated = if (fFlagProfilePlatformNewProfileHeader or fFlagEnableMobileGameJoinCard) and p1.onSubtitleClicked then function()
-				-- upvalues: p1 (write)
-				p1.onSubtitleClicked()
-			end else nil,
-			stateLayer = if (fFlagProfilePlatformNewProfileHeader or fFlagEnableMobileGameJoinCard) and p1.onSubtitleClicked then { affordance = stateLayerAffordance.None } else nil
-		})
-	elseif fFlagUserTileTextTCIndicator and (var5 or var15) then
-		local var18
-		createElement_1 = reactModule.createElement
-		local var19 = view
-		local t_3 = {
+		}) elseif IsLayoutModeMatch or IsShouldShowUnfilteredChatIndicator then ReactModule.createElement(View, {
 			LayoutOrder = 2,
 			tag = {
 				["row auto-y size-full-0 align-y-center"] = true,
-				["align-x-center"] = p1.layoutMode == layoutModeModule.compact,
-				["align-x-left"] = p1.layoutMode == layoutModeModule.wide
+				["align-x-center"] = JoinResult.layoutMode == LayoutModeModule.compact,
+				["align-x-left"] = JoinResult.layoutMode == LayoutModeModule.wide
 			},
-			onActivated = if (fFlagProfilePlatformNewProfileHeader or fFlagEnableMobileGameJoinCard) and p1.onSubtitleClicked then function()
-				-- upvalues: p1 (write)
-				p1.onSubtitleClicked()
+			onActivated = if (FFlagProfilePlatformNewProfileHeader or FFlagEnableMobileGameJoinCard) and JoinResult.onSubtitleClicked then function() --[[ Line: 284 ]]
+				-- upvalues: JoinResult (ref)
+				JoinResult.onSubtitleClicked()
 			end else nil,
-			stateLayer = if (fFlagProfilePlatformNewProfileHeader or fFlagEnableMobileGameJoinCard) and p1.onSubtitleClicked then { affordance = stateLayerAffordance.None } else nil
-		}
-		local t_4 = {
-			SubtitleText = reactModule.createElement(text, {
+			stateLayer = if (FFlagProfilePlatformNewProfileHeader or FFlagEnableMobileGameJoinCard) and JoinResult.onSubtitleClicked then { affordance = StateLayerAffordance.None } else nil
+		}, {
+			SubtitleText = ReactModule.createElement(Text, {
 				LayoutOrder = 1,
 				RichText = true,
 				tag = {
 					["auto-xy shrink content-default"] = true,
-					["text-align-x-center"] = p1.layoutMode == layoutModeModule.compact,
-					["text-align-x-left"] = p1.layoutMode == layoutModeModule.wide
+					["text-align-x-center"] = JoinResult.layoutMode == LayoutModeModule.compact,
+					["text-align-x-left"] = JoinResult.layoutMode == LayoutModeModule.wide
 				},
-				fontStyle = p1.subtitleStyle or var2.Typography.BodyMedium,
-				Text = p1.subtitle or "",
-				TextTruncate = customTextTruncation
-			})
-		}
-		
-		if p1.trustedConnectionIndicatorEnabled and p1.isTrustedConnection then
-			var18 = reactModule.createElement
-			var18 = var18(text, {
+				fontStyle = JoinResult.subtitleStyle or UseTokensResult.Typography.BodyMedium,
+				Text = Subtitle or "",
+				TextTruncate = CustomTextTruncation
+			}),
+			TCTextLabel = if JoinResult.trustedConnectionIndicatorEnabled and JoinResult.isTrustedConnection then ReactModule.createElement(Text, {
 				LayoutOrder = 2,
 				RichText = true,
 				tag = {
 					["auto-xy content-default"] = true,
-					["text-align-x-center"] = p1.layoutMode == layoutModeModule.compact,
-					["text-align-x-left"] = p1.layoutMode == layoutModeModule.wide
+					["text-align-x-center"] = JoinResult.layoutMode == LayoutModeModule.compact,
+					["text-align-x-left"] = JoinResult.layoutMode == LayoutModeModule.wide
 				},
-				fontStyle = p1.subtitleStyle or var2.Typography.BodyMedium,
-				Text = (if fFlagUserTileUnfilteredChatIndicator and not var17 then "" else " \226\128\162 ") .. var14.trustedLabel,
-				TextTruncate = customTextTruncation
-			})
-		else
-			var18 = nil
-		end
-		local createElement_2
-		t_4.TCTextLabel = var18
-		
-		if var15 then
-			createElement_2 = reactModule.createElement
-			createElement_2 = createElement_2(text, {
+				fontStyle = JoinResult.subtitleStyle or UseTokensResult.Typography.BodyMedium,
+				Text = (if FFlagUserTileUnfilteredChatIndicator and not IsNotSubtitleMatch then "" else " • ") .. UseLocalizationResult.trustedLabel,
+				TextTruncate = CustomTextTruncation
+			}) else nil,
+			UnfilteredChatLabel = if IsShouldShowUnfilteredChatIndicator then ReactModule.createElement(Text, {
 				LayoutOrder = 3,
 				RichText = true,
 				tag = {
 					["auto-xy content-default"] = true,
-					["text-align-x-center"] = p1.layoutMode == layoutModeModule.compact,
-					["text-align-x-left"] = p1.layoutMode == layoutModeModule.wide
+					["text-align-x-center"] = JoinResult.layoutMode == LayoutModeModule.compact,
+					["text-align-x-left"] = JoinResult.layoutMode == LayoutModeModule.wide
 				},
-				fontStyle = p1.subtitleStyle or var2.Typography.BodyMedium,
-				Text = (if var17 or var16 then " \226\128\162 " else "") .. var14.unfilteredChatLabel,
-				TextTruncate = customTextTruncation
-			})
-		else
-			createElement_2 = nil
-		end
-		t_4.UnfilteredChatLabel = createElement_2
-		createElement_1 = createElement_1(var19, t_3, t_4)
-	else
-		createElement_1 = nil
-	end
-	local var20
-	t_2.Subtitle = createElement_1
-	
-	if fFlagUserTileShowShimmerWhenLoadingModule and p1.isContextualInfoLoading then
-		var20 = reactModule.createElement(view, {
+				fontStyle = JoinResult.subtitleStyle or UseTokensResult.Typography.BodyMedium,
+				Text = (if IsNotSubtitleMatch or v1 then " • " else "") .. UseLocalizationResult.unfilteredChatLabel,
+				TextTruncate = CustomTextTruncation
+			}) else nil
+		}) else nil,
+		ContextualInfo = if FFlagUserTileShowShimmerWhenLoadingModule and JoinResult.isContextualInfoLoading then ReactModule.createElement(View, {
 			LayoutOrder = 3,
-			tag = `size-full-0 auto-y padding-xsmall {var11}`
+			tag = `size-full-0 auto-y padding-xsmall {AlignXCenter1}`
 		}, {
-			ContextualInfoSkeleton = reactModule.createElement(skeleton, {
-				Size = UDim2.new(CONTEXTUAL_INFO_SHIMMER_WIDTH_SCALE_WIDE, 0, 0, var8),
-				radius = radius.Small
+			ContextualInfoSkeleton = ReactModule.createElement(Skeleton, {
+				Size = UDim2.new(XScale2, 0, 0, FontSizeDelta2),
+				radius = Radius.Small
 			})
-		})
-	elseif p1.contextualInfo then
-		var20 = if fFlagUserTileAddContextualInfoIcon and p1.contextualInfoIcon then reactModule.createElement(view, {
+		}) else JoinResult.contextualInfo and (if FFlagUserTileAddContextualInfoIcon and JoinResult.contextualInfoIcon then ReactModule.createElement(View, {
 			LayoutOrder = 3,
 			tag = {
 				["row align-y-center gap-xsmall size-full-0 auto-y"] = true,
-				["align-x-center"] = p1.layoutMode == layoutModeModule.compact,
-				["align-x-left"] = p1.layoutMode == layoutModeModule.wide
+				["align-x-center"] = JoinResult.layoutMode == LayoutModeModule.compact,
+				["align-x-left"] = JoinResult.layoutMode == LayoutModeModule.wide
 			}
 		}, {
-			ContextualInfoIcon = reactModule.createElement(icon, {
+			ContextualInfoIcon = ReactModule.createElement(Icon, {
 				LayoutOrder = 1,
-				name = p1.contextualInfoIcon,
-				size = iconSize.XSmall
+				name = JoinResult.contextualInfoIcon,
+				size = IconSize.XSmall
 			}),
-			ContextualInfoText = reactModule.createElement(text, {
+			ContextualInfoText = ReactModule.createElement(Text, {
 				LayoutOrder = 2,
 				RichText = true,
 				tag = {
-					["content-secondary shrink auto-xy"] = not userTileRemoveContextualInfoTag,
-					["shrink auto-xy"] = userTileRemoveContextualInfoTag
+					["content-secondary shrink auto-xy"] = not UserTileRemoveContextualInfoTag,
+					["shrink auto-xy"] = UserTileRemoveContextualInfoTag
 				},
-				fontStyle = p1.contextualInfoStyle or var2.Typography.BodySmall,
-				TextTruncate = customTextTruncation,
-				Text = p1.contextualInfo
+				fontStyle = JoinResult.contextualInfoStyle or UseTokensResult.Typography.BodySmall,
+				TextTruncate = CustomTextTruncation,
+				Text = JoinResult.contextualInfo
 			})
-		}) else reactModule.createElement(text, {
+		}) else ReactModule.createElement(Text, {
 			LayoutOrder = 3,
 			RichText = true,
 			tag = {
-				["auto-y size-full-0 content-secondary"] = not userTileRemoveContextualInfoTag,
-				["size-full-0 auto-y"] = userTileRemoveContextualInfoTag,
-				["text-align-x-center"] = p1.layoutMode == layoutModeModule.compact,
-				["text-align-x-left"] = p1.layoutMode == layoutModeModule.wide
+				["auto-y size-full-0 content-secondary"] = not UserTileRemoveContextualInfoTag,
+				["size-full-0 auto-y"] = UserTileRemoveContextualInfoTag,
+				["text-align-x-center"] = JoinResult.layoutMode == LayoutModeModule.compact,
+				["text-align-x-left"] = JoinResult.layoutMode == LayoutModeModule.wide
 			},
-			fontStyle = p1.contextualInfoStyle or var2.Typography.BodySmall,
-			TextTruncate = customTextTruncation,
-			Text = p1.contextualInfo
-		})
-		var20 = var20 or nil
-	end
-	t_2.ContextualInfo = var20
-	t_2.ExtraInfo = if fFlagUserTileTitleStackAddExtraInfo and p1.isExtraInfoLoading then reactModule.createElement(view, {
-		LayoutOrder = 4,
-		tag = `size-full-0 auto-y padding-xsmall {var11}`
-	}, {
-		ExtraInfoSkeleton = reactModule.createElement(skeleton, {
-			Size = UDim2.new(EXTRA_INFO_SHIMMER_WIDTH_SCALE_WIDE, 0, 0, var9),
-			radius = radius.Small
-		})
-	}) elseif fFlagUserTileTitleStackAddExtraInfo and p1.extraInfo then reactModule.createElement(text, {
-		LayoutOrder = 4,
-		RichText = true,
-		tag = {
-			["size-full-0 auto-y"] = true,
-			["text-align-x-center"] = p1.layoutMode == layoutModeModule.compact,
-			["text-align-x-left"] = p1.layoutMode == layoutModeModule.wide
-		},
-		fontStyle = p1.extraInfoStyle or var2.Typography.BodySmall,
-		TextTruncate = customTextTruncation,
-		Text = p1.extraInfo,
-		onActivated = p1.onExtraInfoClicked,
-		stateLayer = if p1.onExtraInfoClicked then { affordance = stateLayerAffordance.None } else nil
-	}) else nil
-	
-	return createElement(view, t_1, t_2)
+			fontStyle = JoinResult.contextualInfoStyle or UseTokensResult.Typography.BodySmall,
+			TextTruncate = CustomTextTruncation,
+			Text = JoinResult.contextualInfo
+		})) or nil,
+		ExtraInfo = if FFlagUserTileTitleStackAddExtraInfo and JoinResult.isExtraInfoLoading then ReactModule.createElement(View, {
+			LayoutOrder = 4,
+			tag = `size-full-0 auto-y padding-xsmall {AlignXCenter1}`
+		}, {
+			ExtraInfoSkeleton = ReactModule.createElement(Skeleton, {
+				Size = UDim2.new(XScale3, 0, 0, FontSizeDelta3),
+				radius = Radius.Small
+			})
+		}) elseif FFlagUserTileTitleStackAddExtraInfo and JoinResult.extraInfo then ReactModule.createElement(Text, {
+			LayoutOrder = 4,
+			RichText = true,
+			tag = {
+				["size-full-0 auto-y"] = true,
+				["text-align-x-center"] = JoinResult.layoutMode == LayoutModeModule.compact,
+				["text-align-x-left"] = JoinResult.layoutMode == LayoutModeModule.wide
+			},
+			fontStyle = JoinResult.extraInfoStyle or UseTokensResult.Typography.BodySmall,
+			TextTruncate = CustomTextTruncation,
+			Text = JoinResult.extraInfo,
+			onActivated = JoinResult.onExtraInfoClicked,
+			stateLayer = if JoinResult.onExtraInfoClicked then { affordance = StateLayerAffordance.None } else nil
+		}) else nil
+	})
 end

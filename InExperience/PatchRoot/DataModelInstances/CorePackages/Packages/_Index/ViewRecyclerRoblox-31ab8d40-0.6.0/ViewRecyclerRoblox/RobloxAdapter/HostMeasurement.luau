@@ -1,246 +1,241 @@
-﻿local viewRecyclerRoblox = script:FindFirstAncestor("ViewRecyclerRoblox")
-local _ = require(viewRecyclerRoblox.Parent.ViewRecycler)
-local measurementBatcherModule = require(viewRecyclerRoblox.RobloxAdapter.MeasurementBatcher)
-local measurerModule = require(viewRecyclerRoblox.RobloxAdapter.Measurer)
-local runService = game:GetService("RunService")
+﻿local ViewRecyclerRoblox = script:FindFirstAncestor("ViewRecyclerRoblox")
+local _ = require(ViewRecyclerRoblox.Parent.ViewRecycler)
+local MeasurementBatcherModule = require(ViewRecyclerRoblox.RobloxAdapter.MeasurementBatcher)
+local MeasurerModule = require(ViewRecyclerRoblox.RobloxAdapter.Measurer)
+local RunService = game:GetService("RunService")
 
-local function noDependencies()
+local function noDependencies() --[[ Line: 60 ]]
 	return {}
 end
 
-local function noSubscription()
-	return function() end
+local function noSubscription() --[[ Line: 64 ]]
+	return function() --[[ Line: 65 ]] end
 end
 
 return {
-	new = function(p1)
-		-- upvalues: measurementBatcherModule (ref), runService (ref), measurerModule (ref), noDependencies (ref), noSubscription (ref)
-		local axis = p1.axis
-		local t = {}
-		local var1 = 0
-		local var2 = false
-		local var3 = true
-		local var4 = nil
-		local var5 = 0
-		local var6 = measurementBatcherModule.new(p1.onItemMeasurements)
+	new = function(OnItemMeasurements) --[[ Line: 70 ]]
+		-- upvalues: MeasurementBatcherModule (copy), RunService (copy), MeasurerModule (copy), noDependencies (copy), noSubscription (copy)
+		local Axis = OnItemMeasurements.axis
+		local Tbl = {}
+		local Count = 0
+		local Flag = false
+		local Flag1 = true
+		local PreRenderConnection = nil
+		local Count1 = 0
+		local NewMeasurementBatcher = MeasurementBatcherModule.new(OnItemMeasurements.onItemMeasurements)
 		
-		local function measureRounds()
-			-- upvalues: var2 (write), p1 (ref), var3 (write), t (ref), var5 (write), var6 (ref)
-			local var7
+		local function measureRounds() --[[ Line: 82 ]]
+			-- upvalues: Flag (ref), OnItemMeasurements (copy), Flag1 (ref), Tbl (copy), Count1 (ref), NewMeasurementBatcher (copy)
+			local Flag2 = nil
 			for _ = 1, 4 do
-				if not var2 then
-					if not p1.isUnchanged() or var3 then
-						var3 = false
-						
-						for i, v in t do
-							var5 += 1
-							v.measurer.measureNow()
-						end
-						var7 = false
-						
-						for i_1, v_1 in var6.flush() or {} do
-							if v_1.length ~= v_1.state.itemLayout.length then
-								var7 = true
-								break
-							end
-						end
-						if var7 then
-							continue
-						end
-						return
-					end
-					return
+				if Flag then break end
+				if OnItemMeasurements.isUnchanged() and not Flag1 then break end
+				Flag1 = false
+				
+				for _, value in Tbl do
+					Count1 += 1
+					value.measurer.measureNow()
 				end
-				return
+				Flag2 = false
+				local FlushResult = NewMeasurementBatcher.flush() or {}
+				for _, value1 in FlushResult do
+					if value1.length ~= value1.state.itemLayout.length then
+						Flag2 = true
+						break
+					end
+				end
+				if not Flag2 then break end
 			end
 		end
 		
-		local function measureBeforePaint()
-			-- upvalues: measureRounds (ref), var2 (write), t (ref), var3 (write)
+		local function measureBeforePaint() --[[ Line: 112 ]]
+			-- upvalues: measureRounds (copy), Flag (ref), Tbl (copy), Flag1 (ref)
 			measureRounds()
 			
-			if var2 then return end
-			for i, v in t do
-				local assignment = v.state.assignment
+			if Flag then return end
+			for _, value in Tbl do
+				local Assignment = value.state.assignment
 				
-				if v.renderedAssignment ~= assignment then
-					v.renderedAssignment = assignment
-					var3 = true
+				if value.renderedAssignment ~= Assignment then
+					value.renderedAssignment = Assignment
+					Flag1 = true
 				end
 			end
 		end
 		
-		local function _()
-			-- upvalues: var2 (write), var1 (write), var4 (write), var3 (write), runService (copy), measureBeforePaint (ref)
-			local var8 = not var2 and var1 > 0
+		local function _() --[[ Line: 128 | Named "syncConnection" ]]
+			-- upvalues: Flag (ref), Count (ref), PreRenderConnection (ref), Flag1 (ref), RunService (upval), measureBeforePaint (copy)
+			local IsCountAbove: boolean = not Flag and Count > 0
 			
-			if var8 and var4 == nil then
-				var3 = true
-				var4 = runService.PreRender:Connect(measureBeforePaint)
+			if IsCountAbove and PreRenderConnection == nil then
+				Flag1 = true
+				PreRenderConnection = RunService.PreRender:Connect(measureBeforePaint)
 				
 				return
-			elseif not var8 and var4 ~= nil then
-				var4:Disconnect()
-				var4 = nil
+			end
+			if not IsCountAbove and PreRenderConnection ~= nil then
+				PreRenderConnection:Disconnect()
+				PreRenderConnection = nil
 			end
 		end
 		
-		local _ = function(p2)
-			-- upvalues: t (ref), var1 (write), var2 (write), var4 (write), var3 (write), runService (copy), measureBeforePaint (ref)
-			local var8 = t[p2]
+		local _ = function(Key) --[[ Line: 139 | Named "stop" ]]
+			-- upvalues: Tbl (copy), Count (ref), Flag (ref), PreRenderConnection (ref), Flag1 (ref), RunService (upval), measureBeforePaint (copy)
+			local Entry = Tbl[Key]
 			
-			if var8 ~= nil then
-				t[p2] = nil
-				var1 -= 1
-				var8.measurer.disconnect()
-				local var9 = not var2 and var1 > 0
+			if Entry ~= nil then
+				Tbl[Key] = nil
+				Count -= 1
+				Entry.measurer.disconnect()
+				local IsCountAbove: boolean = not Flag and Count > 0
 				
-				if var9 and var4 == nil then
-					var3 = true
-					var4 = runService.PreRender:Connect(measureBeforePaint)
+				if IsCountAbove and PreRenderConnection == nil then
+					Flag1 = true
+					PreRenderConnection = RunService.PreRender:Connect(measureBeforePaint)
 					
 					return
-				elseif not var9 and var4 ~= nil then
-					var4:Disconnect()
-					var4 = nil
+				end
+				if not IsCountAbove and PreRenderConnection ~= nil then
+					PreRenderConnection:Disconnect()
+					PreRenderConnection = nil
 				end
 			end
 		end
 		
 		return {
-			measure = function(p2, p3, p4, p5)
-				-- upvalues: var2 (write), t (ref), var1 (write), var4 (write), var3 (write), runService (copy), measureBeforePaint (ref), measurerModule (copy), axis (write), noDependencies (copy), noSubscription (copy), var6 (ref)
-				if var2 then return end
-				local var8
-				local var9 = t[p2]
+			measure = function(ItemView, Host, State, Dependencies) --[[ Line: 149 ]]
+				-- upvalues: Flag (ref), Tbl (copy), Count (ref), PreRenderConnection (ref), Flag1 (ref), RunService (upval), measureBeforePaint (copy), MeasurerModule (upval), Axis (ref), noDependencies (upval), noSubscription (upval), NewMeasurementBatcher (copy)
+				if Flag then return end
+				local Entry = Tbl[ItemView]
 				
-				if var9 ~= nil and (p3 == nil or p4 == nil or (var9.host ~= p3 or var9.dependencies ~= p5)) then
-					local var10 = t[p2]
+				if Entry ~= nil and (Host == nil or State == nil or Entry.host ~= Host or Entry.dependencies ~= Dependencies) then
+					local Entry1 = Tbl[ItemView]
 					
-					if var10 ~= nil then
-						t[p2] = nil
-						var1 -= 1
-						var10.measurer.disconnect()
-						var8 = not var2 and var1 > 0
+					if Entry1 ~= nil then
+						Tbl[ItemView] = nil
+						Count -= 1
+						Entry1.measurer.disconnect()
+						local IsCountAbove: boolean = not Flag and Count > 0
 						
-						if var8 and var4 == nil then
-							var3 = true
-							var4 = runService.PreRender:Connect(measureBeforePaint)
-						elseif not var8 and var4 ~= nil then
-							var4:Disconnect()
-							var4 = nil
+						if IsCountAbove and PreRenderConnection == nil then
+							Flag1 = true
+							PreRenderConnection = RunService.PreRender:Connect(measureBeforePaint)
+						elseif not IsCountAbove and PreRenderConnection ~= nil then
+							PreRenderConnection:Disconnect()
+							PreRenderConnection = nil
 						end
 					end
-					var9 = nil
+					Entry = nil
 				end
-				if p3 == nil or p4 == nil then return end
-				if var9 == nil then
-					local t_1 = nil
-					t_1 = {
+				if Host == nil or State == nil then return end
+				if Entry == nil then
+					local v1 = nil
+					v1 = {
 						renderedAssignment = nil,
-						host = p3,
-						dependencies = p5,
-						state = p4,
-						measurer = measurerModule.attach({
-							instance = p3,
-							axis = axis,
-							getState = function()
-								-- upvalues: t (copy), p2 (ref), t_1 (write)
-								return if t[p2] == t_1 then t_1.state else nil
+						host = Host,
+						dependencies = Dependencies,
+						state = State,
+						measurer = MeasurerModule.attach({
+							instance = Host,
+							axis = Axis,
+							getState = function() --[[ Line: 185 ]]
+								-- upvalues: Tbl (upval), ItemView (copy), v1 (ref)
+								return if Tbl[ItemView] == v1 then v1.state else nil
 							end,
-							getMeasurementDependencies = if p5 == nil then noDependencies else p5.get,
-							subscribeMeasurementDependencies = if p5 == nil then noSubscription else p5.subscribe,
-							isRendered = function()
-								-- upvalues: t_1 (write)
-								return t_1.state.assignment == t_1.renderedAssignment
+							getMeasurementDependencies = if Dependencies == nil then noDependencies else Dependencies.get,
+							subscribeMeasurementDependencies = if Dependencies == nil then noSubscription else Dependencies.subscribe,
+							isRendered = function(): boolean --[[ Line: 192 ]]
+								-- upvalues: v1 (ref)
+								return v1.state.assignment == v1.renderedAssignment
 							end,
-							onItemMeasured = function(p6, p7)
-								-- upvalues: var6 (copy), p2 (ref)
-								var6.add({ itemView = p2, state = p6, length = p7 })
+							onItemMeasured = function(State, Length) --[[ Line: 195 ]]
+								-- upvalues: NewMeasurementBatcher (upval), ItemView (copy)
+								NewMeasurementBatcher.add({ itemView = ItemView, state = State, length = Length })
 							end
 						})
 					}
-					t[p2] = t_1
-					var1 += 1
-					var3 = true
-					var8 = not var2 and var1 > 0
+					Tbl[ItemView] = v1
+					Count += 1
+					Flag1 = true
+					local IsCountAbove: boolean = not Flag and Count > 0
 					
-					if var8 and var4 == nil then
-						var3 = true
-						var4 = runService.PreRender:Connect(measureBeforePaint)
-					elseif not var8 and var4 ~= nil then
-						var4:Disconnect()
-						var4 = nil
+					if IsCountAbove and PreRenderConnection == nil then
+						Flag1 = true
+						PreRenderConnection = RunService.PreRender:Connect(measureBeforePaint)
+					elseif not IsCountAbove and PreRenderConnection ~= nil then
+						PreRenderConnection:Disconnect()
+						PreRenderConnection = nil
 					end
-					t_1.measurer.scheduleSettle()
+					v1.measurer.scheduleSettle()
 					
 					return
-				elseif var9.state ~= p4 then
-					var9.state = p4
-					var9.measurer.scheduleSettle()
+				elseif Entry.state ~= State then
+					Entry.state = State
+					Entry.measurer.scheduleSettle()
 				end
 			end,
-			setAxis = function(value)
-				-- upvalues: axis (write), t (ref), var1 (write), var2 (write), var4 (write), var3 (write), runService (copy), measureBeforePaint (ref)
-				if value == axis then return end
-				axis = value
-				local t_1 = {}
+			setAxis = function(Value) --[[ Line: 213 ]]
+				-- upvalues: Axis (ref), Tbl (copy), Count (ref), Flag (ref), PreRenderConnection (ref), Flag1 (ref), RunService (upval), measureBeforePaint (copy)
+				if Value == Axis then return end
+				Axis = Value
+				local List = {}
 				
-				for i in t do
-					table.insert(t_1, i)
+				for i in Tbl do
+					table.insert(List, i)
 				end
-				for i_1, v in t_1 do
-					local var8 = t[v]
+				for _, value in List do
+					local Entry = Tbl[value]
 					
-					if var8 ~= nil then
-						t[v] = nil
-						var1 -= 1
-						var8.measurer.disconnect()
-						local var9 = not var2 and var1 > 0
+					if Entry ~= nil then
+						Tbl[value] = nil
+						Count -= 1
+						Entry.measurer.disconnect()
+						local IsCountAbove: boolean = not Flag and Count > 0
 						
-						if var9 and var4 == nil then
-							var3 = true
-							var4 = runService.PreRender:Connect(measureBeforePaint)
-						elseif not var9 and var4 ~= nil then
-							var4:Disconnect()
-							var4 = nil
+						if IsCountAbove and PreRenderConnection == nil then
+							Flag1 = true
+							PreRenderConnection = RunService.PreRender:Connect(measureBeforePaint)
+						elseif not IsCountAbove and PreRenderConnection ~= nil then
+							PreRenderConnection:Disconnect()
+							PreRenderConnection = nil
 						end
 					end
 				end
 			end,
-			cancelPending = function()
-				-- upvalues: var6 (ref)
-				var6.cancelPending()
+			cancelPending = function() --[[ Line: 226 ]]
+				-- upvalues: NewMeasurementBatcher (copy)
+				NewMeasurementBatcher.cancelPending()
 			end,
-			isPassConnected = function()
-				-- upvalues: var4 (write)
-				return var4 ~= nil
+			isPassConnected = function(): boolean --[[ Line: 229 ]]
+				-- upvalues: PreRenderConnection (ref)
+				return PreRenderConnection ~= nil
 			end,
-			getPassReadCount = function()
-				-- upvalues: var5 (write)
-				return var5
+			getPassReadCount = function() --[[ Line: 232 ]]
+				-- upvalues: Count1 (ref)
+				return Count1
 			end,
-			destroy = function()
-				-- upvalues: var2 (write), var6 (ref), t (ref), var1 (write), var4 (write), var3 (write), runService (copy), measureBeforePaint (ref)
-				if var2 then return end
-				var2 = true
-				var6.destroy()
+			destroy = function() --[[ Line: 235 ]]
+				-- upvalues: Flag (ref), NewMeasurementBatcher (copy), Tbl (copy), Count (ref), PreRenderConnection (ref), Flag1 (ref), RunService (upval), measureBeforePaint (copy)
+				if Flag then return end
+				Flag = true
+				NewMeasurementBatcher.destroy()
 				
-				for i, v in t do
-					v.measurer.disconnect()
+				for _, value in Tbl do
+					value.measurer.disconnect()
 				end
-				table.clear(t)
-				var1 = 0
-				local var10 = not var2 and var1 > 0
+				table.clear(Tbl)
+				Count = 0
+				local IsCountAbove: boolean = not Flag and Count > 0
 				
-				if var10 and var4 == nil then
-					var3 = true
-					var4 = runService.PreRender:Connect(measureBeforePaint)
+				if IsCountAbove and PreRenderConnection == nil then
+					Flag1 = true
+					PreRenderConnection = RunService.PreRender:Connect(measureBeforePaint)
 					
 					return
-				elseif not var10 and var4 ~= nil then
-					var4:Disconnect()
-					var4 = nil
+				end
+				if not IsCountAbove and PreRenderConnection ~= nil then
+					PreRenderConnection:Disconnect()
+					PreRenderConnection = nil
 				end
 			end
 		}

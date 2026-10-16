@@ -1,71 +1,73 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local parent = momentsCreation.Parent
-local foundationModule = require(parent.Foundation)
-local momentsCommonModule = require(parent.MomentsCommon)
-local reactModule = require(parent.React)
-local view = foundationModule.View
-local useCallback = reactModule.useCallback
-local useState = reactModule.useState
-local useTokens = foundationModule.Hooks.useTokens
-local eventNames = momentsCommonModule.Analytics.EventNames
-local fireAnalyticsEventModule = require(momentsCreation.Analytics.fireAnalyticsEvent)
-local makeCreationEventFieldsModule = require(momentsCreation.Analytics.makeCreationEventFields)
-local fFlagMomentsTextOverlayV2Redesign = momentsCommonModule.Flags.FFlagMomentsTextOverlayV2Redesign
-local textAlignmentButtonModule = require(momentsCreation.Components.TextOverlay.TextAlignmentButton)
-local textColorButtonModule = require(momentsCreation.Components.TextOverlay.TextColorButton)
-local textColorSwatchRowModule = require(momentsCreation.Components.TextOverlay.TextColorSwatchRow)
-local textFontButtonModule = require(momentsCreation.Components.TextOverlay.TextFontButton)
-local textFontRowModule = require(momentsCreation.Components.TextOverlay.TextFontRow)
-local _ = require(momentsCreation.Types.CreationFlowTypes)
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local Parent = MomentsCreation.Parent
+local FoundationModule = require(Parent.Foundation)
+local MomentsCommonModule = require(Parent.MomentsCommon)
+local ReactModule = require(Parent.React)
+local View = FoundationModule.View
+local UseCallbackFunction = ReactModule.useCallback
+local UseStateFunction = ReactModule.useState
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local EventNames = MomentsCommonModule.Analytics.EventNames
+local FireAnalyticsEventModule = require(MomentsCreation.Analytics.fireAnalyticsEvent)
+local MakeCreationEventFieldsModule = require(MomentsCreation.Analytics.makeCreationEventFields)
+local FFlagMomentsTextOverlayV2Redesign = MomentsCommonModule.Flags.FFlagMomentsTextOverlayV2Redesign
+local TextAlignmentButtonModule = require(MomentsCreation.Components.TextOverlay.TextAlignmentButton)
+local TextColorButtonModule = require(MomentsCreation.Components.TextOverlay.TextColorButton)
+local TextColorSwatchRowModule = require(MomentsCreation.Components.TextOverlay.TextColorSwatchRow)
+local TextFontButtonModule = require(MomentsCreation.Components.TextOverlay.TextFontButton)
+local TextFontRowModule = require(MomentsCreation.Components.TextOverlay.TextFontRow)
+local _ = require(MomentsCreation.Types.CreationFlowTypes)
 
-return function(p1)
-	-- upvalues: useTokens (ref), useState (ref), useCallback (ref), fFlagMomentsTextOverlayV2Redesign (ref), fireAnalyticsEventModule (ref), eventNames (ref), makeCreationEventFieldsModule (ref), reactModule (ref), view (ref), textFontButtonModule (ref), textColorButtonModule (ref), textAlignmentButtonModule (ref), textColorSwatchRowModule (ref), textFontRowModule (ref)
-	local controller = p1.controller
-	local var1 = useTokens()
-	local var2, var3 = useState(nil)
+return function(p1) --[[ Line: 45 | Named "TextOverlayToolbar" ]]
+	-- upvalues: UseTokensFunction (copy), UseStateFunction (copy), UseCallbackFunction (copy), FFlagMomentsTextOverlayV2Redesign (copy), FireAnalyticsEventModule (copy), EventNames (copy), MakeCreationEventFieldsModule (copy), ReactModule (copy), View (copy), TextFontButtonModule (copy), TextColorButtonModule (copy), TextAlignmentButtonModule (copy), TextColorSwatchRowModule (copy), TextFontRowModule (copy)
+	local Controller = p1.controller
+	local UseTokensResult = UseTokensFunction()
+	local UseStateResult, UseStateResult2 = UseStateFunction(nil)
+	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 57 ]]
+		-- upvalues: UseStateResult (copy), FFlagMomentsTextOverlayV2Redesign (upval), FireAnalyticsEventModule (upval), EventNames (upval), MakeCreationEventFieldsModule (upval), UseStateResult2 (copy)
+		local Color = if UseStateResult == "Color" then nil else "Color"
+		
+		if FFlagMomentsTextOverlayV2Redesign then
+			FireAnalyticsEventModule(EventNames.EditingFlowTextOverlayColorPickerToggled, MakeCreationEventFieldsModule.makeTextOverlayEventFields({ buttonToggled = if Color == nil then "close" else "open" }))
+		end
+		UseStateResult2(Color)
+	end, { UseStateResult })
+	local UseCallbackResult1 = UseCallbackFunction(function() --[[ Line: 70 ]]
+		-- upvalues: UseStateResult (copy), FFlagMomentsTextOverlayV2Redesign (upval), FireAnalyticsEventModule (upval), EventNames (upval), MakeCreationEventFieldsModule (upval), UseStateResult2 (copy)
+		local v1 = if UseStateResult == "Font" then nil else "Font"
+		
+		if FFlagMomentsTextOverlayV2Redesign then
+			FireAnalyticsEventModule(EventNames.EditingFlowTextOverlayFontToolbarToggled, MakeCreationEventFieldsModule.makeTextOverlayEventFields({ buttonToggled = if v1 == nil then "close" else "open" }))
+		end
+		UseStateResult2(v1)
+	end, { UseStateResult })
 	
-	return if p1.isKeyboardVisible or not fFlagMomentsTextOverlayV2Redesign then nil else reactModule.createElement(view, {
+	return if p1.isKeyboardVisible or not FFlagMomentsTextOverlayV2Redesign then nil else ReactModule.createElement(View, {
 		tag = "col align-x-center gap-medium position-bottom-center anchor-bottom-center size-full-0 auto-y",
 		ZIndex = 10,
-		padding = { bottom = UDim.new(0, var1.Padding.Large) }
+		padding = { bottom = UDim.new(0, UseTokensResult.Padding.Large) }
 	}, {
-		IconRow = reactModule.createElement(view, {
+		IconRow = ReactModule.createElement(View, {
 			LayoutOrder = 1,
 			tag = "row gap-xsmall auto-xy",
 			padding = {
-				left = UDim.new(0, var1.Padding.Large),
-				right = UDim.new(0, var1.Padding.Large)
+				left = UDim.new(0, UseTokensResult.Padding.Large),
+				right = UDim.new(0, UseTokensResult.Padding.Large)
 			}
 		}, {
-			FontButton = if fFlagMomentsTextOverlayV2Redesign then reactModule.createElement(textFontButtonModule, {
+			FontButton = if FFlagMomentsTextOverlayV2Redesign then ReactModule.createElement(TextFontButtonModule, {
 				LayoutOrder = 1,
-				expanded = var2 == "Font",
-				onToggle = useCallback(function()
-					-- upvalues: var2 (ref), fFlagMomentsTextOverlayV2Redesign (copy), fireAnalyticsEventModule (copy), eventNames (copy), makeCreationEventFieldsModule (copy), var3 (ref)
-					local var4 = if var2 == "Font" then nil else "Font"
-					
-					if fFlagMomentsTextOverlayV2Redesign then
-						fireAnalyticsEventModule(eventNames.EditingFlowTextOverlayFontToolbarToggled, makeCreationEventFieldsModule.makeTextOverlayEventFields({ buttonToggled = if var4 ~= nil then "close" else "open" }))
-					end
-					var3(var4)
-				end, { var2 })
+				expanded = UseStateResult == "Font",
+				onToggle = UseCallbackResult1
 			}) else nil,
-			ColorButton = if fFlagMomentsTextOverlayV2Redesign then reactModule.createElement(textColorButtonModule, {
+			ColorButton = if FFlagMomentsTextOverlayV2Redesign then ReactModule.createElement(TextColorButtonModule, {
 				LayoutOrder = 2,
-				expanded = var2 == "Color",
-				onToggle = useCallback(function()
-					-- upvalues: var2 (ref), fFlagMomentsTextOverlayV2Redesign (copy), fireAnalyticsEventModule (copy), eventNames (copy), makeCreationEventFieldsModule (copy), var3 (ref)
-					local var4 = if var2 == "Color" then nil else "Color"
-					
-					if fFlagMomentsTextOverlayV2Redesign then
-						fireAnalyticsEventModule(eventNames.EditingFlowTextOverlayColorPickerToggled, makeCreationEventFieldsModule.makeTextOverlayEventFields({ buttonToggled = if var4 ~= nil then "close" else "open" }))
-					end
-					var3(var4)
-				end, { var2 })
+				expanded = UseStateResult == "Color",
+				onToggle = UseCallbackResult
 			}) else nil,
-			AlignmentButton = if fFlagMomentsTextOverlayV2Redesign then reactModule.createElement(textAlignmentButtonModule, { LayoutOrder = 3, controller = controller }) else nil
+			AlignmentButton = if FFlagMomentsTextOverlayV2Redesign then ReactModule.createElement(TextAlignmentButtonModule, { LayoutOrder = 3, controller = Controller }) else nil
 		}),
-		SwatchRow = if fFlagMomentsTextOverlayV2Redesign and var2 == "Color" then reactModule.createElement(textColorSwatchRowModule, { LayoutOrder = 2, controller = controller }) else nil,
-		FontRow = if fFlagMomentsTextOverlayV2Redesign and var2 == "Font" then reactModule.createElement(textFontRowModule, { LayoutOrder = 3, controller = controller }) else nil
+		SwatchRow = if FFlagMomentsTextOverlayV2Redesign and UseStateResult == "Color" then ReactModule.createElement(TextColorSwatchRowModule, { LayoutOrder = 2, controller = Controller }) else nil,
+		FontRow = if FFlagMomentsTextOverlayV2Redesign and UseStateResult == "Font" then ReactModule.createElement(TextFontRowModule, { LayoutOrder = 3, controller = Controller }) else nil
 	})
 end

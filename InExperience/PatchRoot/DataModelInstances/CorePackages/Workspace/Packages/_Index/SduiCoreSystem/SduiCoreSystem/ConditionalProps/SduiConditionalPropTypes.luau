@@ -1,5 +1,5 @@
-﻿local tModule = require(script:FindFirstAncestor("SduiCoreSystem").Parent.t)
-local var1 = tModule.union(tModule.literal("Touch"), tModule.literal("Pointer"), tModule.literal("Directional"))
+﻿local TModule = require(script:FindFirstAncestor("SduiCoreSystem").Parent.t)
+local UnionResult = TModule.union(TModule.literal("Touch"), TModule.literal("Pointer"), TModule.literal("Directional"))
 
 return {
 	SduiConditionKey = {
@@ -24,16 +24,16 @@ return {
 		isSpatial = "isSpatial"
 	},
 	ConditionalPropsInterface = {
-		propOverrides = tModule.table,
-		conditions = tModule.optional(tModule.interface({
-			imageQualityLevel = tModule.optional(tModule.string),
-			isPortrait = tModule.optional(tModule.boolean),
-			isSpatial = tModule.optional(tModule.boolean),
-			lastInput = tModule.optional(var1),
-			maxScreenWidth = tModule.optional(tModule.number),
-			minScreenWidth = tModule.optional(tModule.number),
-			performanceLevel = tModule.optional(tModule.string),
-			preferredInput = tModule.optional(var1)
-		}))
+		propOverrides = TModule.table,
+		conditions = TModule.optional((TModule.interface({
+			imageQualityLevel = TModule.optional(TModule.string),
+			isPortrait = TModule.optional(TModule.boolean),
+			isSpatial = TModule.optional(TModule.boolean),
+			lastInput = TModule.optional(UnionResult),
+			maxScreenWidth = TModule.optional(TModule.number),
+			minScreenWidth = TModule.optional(TModule.number),
+			performanceLevel = TModule.optional(TModule.string),
+			preferredInput = TModule.optional(UnionResult)
+		})))
 	}
 }

@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CorePackages").Packages.NetworkingUsers)
+﻿return (require(game:GetService("CorePackages").Packages.NetworkingUsers))

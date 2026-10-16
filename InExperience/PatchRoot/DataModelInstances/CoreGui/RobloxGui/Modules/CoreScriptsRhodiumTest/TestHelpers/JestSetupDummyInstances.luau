@@ -1,28 +1,28 @@
-﻿local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-local robloxReplicatedStorageService = game:GetService("RobloxReplicatedStorage")
+﻿local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+local RobloxReplicatedStorage = game:GetService("RobloxReplicatedStorage")
 
-if not robloxGui:FindFirstChild("SendNotificationInfo") then
-	local sendNotificationInfo = Instance.new("BindableEvent")
-	sendNotificationInfo.Name = "SendNotificationInfo"
-	sendNotificationInfo.Parent = robloxGui
+if not RobloxGui:FindFirstChild("SendNotificationInfo") then
+	local SendNotificationInfo = Instance.new("BindableEvent")
+	SendNotificationInfo.Name = "SendNotificationInfo"
+	SendNotificationInfo.Parent = RobloxGui
 end
-if not robloxGui:FindFirstChild("Sounds") then
-	local sounds = Instance.new("Folder")
-	sounds.Name = "Sounds"
-	sounds.Parent = robloxGui
+if not RobloxGui:FindFirstChild("Sounds") then
+	local Sounds = Instance.new("Folder")
+	Sounds.Name = "Sounds"
+	Sounds.Parent = RobloxGui
 end
-if not robloxReplicatedStorageService:FindFirstChild("NewPlayerGroupDetails") then
-	local newPlayerGroupDetails = Instance.new("RemoteEvent")
-	newPlayerGroupDetails.Name = "NewPlayerGroupDetails"
-	newPlayerGroupDetails.Parent = robloxReplicatedStorageService
+if not RobloxReplicatedStorage:FindFirstChild("NewPlayerGroupDetails") then
+	local NewPlayerGroupDetails = Instance.new("RemoteEvent")
+	NewPlayerGroupDetails.Name = "NewPlayerGroupDetails"
+	NewPlayerGroupDetails.Parent = RobloxReplicatedStorage
 end
-if not robloxReplicatedStorageService:FindFirstChild("UpdatePlayerBlockList") then
-	local updatePlayerBlockList = Instance.new("RemoteEvent")
-	updatePlayerBlockList.Name = "UpdatePlayerBlockList"
-	updatePlayerBlockList.Parent = robloxReplicatedStorageService
+if not RobloxReplicatedStorage:FindFirstChild("UpdatePlayerBlockList") then
+	local UpdatePlayerBlockList = Instance.new("RemoteEvent")
+	UpdatePlayerBlockList.Name = "UpdatePlayerBlockList"
+	UpdatePlayerBlockList.Parent = RobloxReplicatedStorage
 end
-if not robloxReplicatedStorageService:FindFirstChild("NewPlayerCanManageDetails") then
-	local newPlayerCanManageDetails = Instance.new("RemoteEvent")
-	newPlayerCanManageDetails.Name = "NewPlayerCanManageDetails"
-	newPlayerCanManageDetails.Parent = robloxReplicatedStorageService
+if not RobloxReplicatedStorage:FindFirstChild("NewPlayerCanManageDetails") then
+	local NewPlayerCanManageDetails = Instance.new("RemoteEvent")
+	NewPlayerCanManageDetails.Name = "NewPlayerCanManageDetails"
+	NewPlayerCanManageDetails.Parent = RobloxReplicatedStorage
 end

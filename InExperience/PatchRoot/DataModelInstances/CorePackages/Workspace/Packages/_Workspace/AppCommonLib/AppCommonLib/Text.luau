@@ -1,94 +1,97 @@
-﻿local textService = game:GetService("TextService")
-local t = { PADDING = Vector2.new(2, 2) }
+﻿local TextService = game:GetService("TextService")
+local TextModule = { PADDING = Vector2.new(2, 2) }
 
-function t.GetTextBounds(p1, p2, p3, p4)
-	-- upvalues: textService (ref), t (ref)
-	return textService:GetTextSize(p1, p3, p2, p4) + t.PADDING
+function TextModule.GetTextBounds(String1, p1, FontSize, Vector) --[[ Line: 12 ]]
+	-- upvalues: TextService (copy), TextModule (copy)
+	return TextService:GetTextSize(String1, FontSize, p1, Vector) + TextModule.PADDING
 end
 
-function t.GetTextWidth(p1, p2, p3)
-	-- upvalues: t (ref)
-	return t.GetTextBounds(p1, p2, p3, Vector2.new(10000, 10000)).X
+function TextModule.GetTextWidth(p1, p2, p3) --[[ Line: 16 ]]
+	-- upvalues: TextModule (copy)
+	return TextModule.GetTextBounds(p1, p2, p3, Vector2.new(10000, 10000)).X
 end
 
-function t.GetTextHeight(p1, p2, p3, p4)
-	-- upvalues: t (ref)
-	return t.GetTextBounds(p1, p2, p3, Vector2.new(p4, 10000)).Y
+function TextModule.GetTextHeight(p1, p2, p3, X) --[[ Line: 20 ]]
+	-- upvalues: TextModule (copy)
+	return TextModule.GetTextBounds(p1, p2, p3, Vector2.new(X, 10000)).Y
 end
 
-function t.Truncate(p1, p2, p3, p4, p5)
-	-- upvalues: t (ref)
-	p5 = p5 or ""
+function TextModule.Truncate(Text: string, p1, TextSize, X, p2): string --[[ Line: 25 ]]
+	-- upvalues: TextModule (copy)
+	local P13 = p2 or ""
 	
-	if p4 >= t.GetTextWidth(p1, p2, p3) then
-		return p1
+	if X >= TextModule.GetTextWidth(Text, p1, TextSize) then
+		return Text
 	end
-	local var1 = ""
+	local v1 = ""
 	
-	for i, v in utf8.graphemes(p1) do
-		local text = string.sub(p1, 1, v) .. p15
+	for _, value in utf8.graphemes(Text) do
+		local Text1 = string.sub(Text, 1, value) .. P13
 		
-		if p4 >= t.GetTextWidth(text, p2, p3) then
-			var1 = text
-			continue
+		if X < TextModule.GetTextWidth(Text1, p1, TextSize) then
+			return v1
 		end
-		return var1
+		v1 = Text1
 	end
 	return ""
 end
 
-function t.TruncateTextLabel(p6, p7)
-	-- upvalues: t (ref)
-	p6.Text = t.Truncate(p6.Text, p6.Font, p6.TextSize, p6.AbsoluteSize.X, p7)
+function TextModule.TruncateTextLabel(Frame, p3) --[[ Line: 45 ]]
+	-- upvalues: TextModule (copy)
+	Frame.Text = TextModule.Truncate(Frame.Text, Frame.Font, Frame.TextSize, Frame.AbsoluteSize.X, p3)
 end
 
-function t.Trim(p6)
-	if type(p6) ~= "string" then
-		error(string.format("Text.Trim called on non-string type %s.", type(p6)), 2)
+function TextModule.Trim(Text: string): string --[[ Line: 51 ]]
+	if type(Text) ~= "string" then
+		error(string.format("Text.Trim called on non-string type %s.", (type(Text))), 2)
 	end
-	return p6:gsub("^%s*(.-)%s*$", "%1")
+	return (Text:gsub("^%s*(.-)%s*$", "%1"))
 end
 
-function t.RightTrim(p6)
-	if type(p6) ~= "string" then
-		error(string.format("Text.RightTrim called on non-string type %s.", type(p6)), 2)
+function TextModule.RightTrim(Text: string): string --[[ Line: 59 ]]
+	if type(Text) ~= "string" then
+		error(string.format("Text.RightTrim called on non-string type %s.", (type(Text))), 2)
 	end
-	return p6:gsub("%s+$", "")
+	return (Text:gsub("%s+$", ""))
 end
 
-function t.LeftTrim(p6)
-	if type(p6) ~= "string" then
-		error(string.format("Text.LeftTrim called on non-string type %s.", type(p6)), 2)
+function TextModule.LeftTrim(Text: string): string --[[ Line: 67 ]]
+	if type(Text) ~= "string" then
+		error(string.format("Text.LeftTrim called on non-string type %s.", (type(Text))), 2)
 	end
-	return p6:gsub("^%s+", "")
+	return (Text:gsub("^%s+", ""))
 end
 
-function t.SpaceNormalize(p6)
-	if type(p6) ~= "string" then
-		error(string.format("Text.SpaceNormalize called on non-string type %s.", type(p6)), 2)
+function TextModule.SpaceNormalize(Text: string) --[[ Line: 75 ]]
+	if type(Text) ~= "string" then
+		error(string.format("Text.SpaceNormalize called on non-string type %s.", (type(Text))), 2)
 	end
-	return p6:gsub("%s+", " "):gsub("^%s+", ""):gsub("%s+$", "")
+	return (Text:gsub("%s+", " "):gsub("^%s+", ""):gsub("%s+$", ""))
 end
 
-function t.Split(p6, p7)
-	if type(p6) ~= "string" then
-		error(string.format("Text.Split called on non-string type %s.", type(p6)), 2)
-	elseif type(p7) ~= "string" then
-		error(string.format("Text.Split called with a pattern that is non-string type %s.", type(p7)), 2)
-	elseif p7 == "" then
-		error("Text.Split called with an empty pattern.", 2)
+function TextModule.Split(Text: string, Pattern: string) --[[ Line: 83 ]]
+	if type(Text) == "string" then
+		if type(Pattern) == "string" then
+			if Pattern == "" then
+				error("Text.Split called with an empty pattern.", 2)
+			end
+		else
+			error(string.format("Text.Split called with a pattern that is non-string type %s.", (type(Pattern))), 2)
+		end
+	else
+		error(string.format("Text.Split called on non-string type %s.", (type(Text))), 2)
 	end
-	local t = {}
-	local var2 = 1
+	local List = {}
+	local StartIndex = 1
 	while true do
-		local matchIndex, matchIndex_1 = string.find(p6, p7, var2, true)
-		if not matchIndex or not matchIndex_1 then break end
-		table.insert(t, string.sub(p6, var2, matchIndex - 1))
-		var2 = matchIndex_1 + 1
-		table.insert(t, string.sub(p6, var2, string.len(p6)))
-		
-		return t
+		local StartIndex1, EndIndex = string.find(Text, Pattern, StartIndex, true)
+		if not StartIndex1 or not EndIndex then break end
+		table.insert(List, (string.sub(Text, StartIndex, StartIndex1 - 1)))
+		StartIndex = EndIndex + 1
 	end
+	table.insert(List, (string.sub(Text, StartIndex, (string.len(Text)))))
+	
+	return List
 end
 
-return t
+return TextModule

@@ -1,3 +1,3 @@
-﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator("SET_INPUT_TYPE", function(p1)
-	return { inputType = p1 }
+﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator("SET_INPUT_TYPE", function(InputType) --[[ Line: 5 ]]
+	return { inputType = InputType }
 end)

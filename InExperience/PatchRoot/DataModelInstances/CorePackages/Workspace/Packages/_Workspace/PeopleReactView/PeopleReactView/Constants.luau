@@ -1,5 +1,5 @@
-﻿local parent = script:FindFirstAncestor("PeopleReactView").Parent
-local fFlagConnectionsToFriendsRename = require(parent.SharedFlags).FFlagConnectionsToFriendsRename
+﻿local Parent = script:FindFirstAncestor("PeopleReactView").Parent
+local UniversesExposedToPeopleCardsTooltipKey = game:DefineFastString("UniversesExposedToPeopleCardsTooltipKey", "UniversesExposedToCardTooltipKey2")
 
 return {
 	PEOPLEPAGE = {
@@ -26,8 +26,7 @@ return {
 				MUTE_ALL = "Feature.SettingsHub.Action.MuteAll",
 				UNMUTE_ALL = "Feature.SettingsHub.Action.UnmuteAll",
 				MUTE_SELF = "CoreScripts.InGameMenu.QuickActions.MuteSelf",
-				UNMUTE_SELF = "CoreScripts.InGameMenu.QuickActions.UnmuteSelf",
-				INVITE_CONNECTIONS = if fFlagConnectionsToFriendsRename then nil else "CommonUI.Features.Label.InviteConnections"
+				UNMUTE_SELF = "CoreScripts.InGameMenu.QuickActions.UnmuteSelf"
 			},
 			ICON = {
 				MICROPHONE = "microphone",
@@ -49,9 +48,7 @@ return {
 				REQUEST_SENT = "CoreScripts.InGameMenu.GameSettings.RequestSent",
 				MUTE = "Feature.SettingsHub.Label.Mute",
 				UNMUTE = "Feature.SettingsHub.Label.Unmute",
-				REPORT = "CoreScripts.InGameMenu.QuickActions.Report",
-				CONNECTION = if fFlagConnectionsToFriendsRename then nil else "CommonUI.Features.Label.Connection",
-				ADD_CONNECTION = if fFlagConnectionsToFriendsRename then nil else "CommonUI.Features.Label.AddConnection"
+				REPORT = "CoreScripts.InGameMenu.QuickActions.Report"
 			},
 			ICON = {
 				ADD_FRIEND_NEW = "person-plus",
@@ -64,7 +61,7 @@ return {
 				REPORT_PLAYER_NEW = "speech-bubble-exclamation",
 				INSPECT_LEGACY = "icons/actions/zoomIn",
 				INSPECT_NEW = "magnifying-glass-plus",
-				REPORT_PLAYER_FLAG = require(parent.Foundation).Enums.IconName.Flag
+				REPORT_PLAYER_FLAG = require(Parent.Foundation).Enums.IconName.Flag
 			}
 		},
 		CARD_MENU = {
@@ -79,7 +76,7 @@ return {
 				SELECT_USERNAME_TO_VIEW_PROFILE = "Feature.SettingsHub.Description.SelectUsernameToViewProfile",
 				OK = "Feature.SettingsHub.Action.Ok"
 			},
-			UNIVERSES_EXPOSED_TO_CARD_TOOLTIP = if require(parent.PeopleService).getService("Flags").GetFFlagFixPeoplePageCardTooltip() then game:DefineFastString("UniversesExposedToPeopleCardsTooltipKey", "UniversesExposedToCardTooltipKey2") else "UniversesExposedToCardTooltipKey2"
+			UNIVERSES_EXPOSED_TO_CARD_TOOLTIP = if require(Parent.PeopleService).getService("Flags").GetFFlagFixPeoplePageCardTooltip() then UniversesExposedToPeopleCardsTooltipKey else "UniversesExposedToCardTooltipKey2"
 		},
 		BUTTON_ACTIVATED_TABLE_KEYS = { SWITCH_SERVER = "switchServer" }
 	}

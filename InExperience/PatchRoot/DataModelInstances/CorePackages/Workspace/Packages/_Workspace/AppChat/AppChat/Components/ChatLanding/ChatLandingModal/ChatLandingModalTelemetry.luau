@@ -1,67 +1,67 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local socialLuaAnalyticsModule = require(appChat.Parent.SocialLuaAnalytics)
-local _ = require(appChat.Telemetry.Layers.ChatLandingTelemetryLayer)
-local telemetryModule = require(appChat.Telemetry.Telemetry)
-local modalTelemetryModule = require(appChat.Components.ModalTelemetry)
-local defaultTelemetryEventsModule = require(appChat.Telemetry.DefaultTelemetryEvents)
-local t = {
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local SocialLuaAnalyticsModule = require(AppChat.Parent.SocialLuaAnalytics)
+local _ = require(AppChat.Telemetry.Layers.ChatLandingTelemetryLayer)
+local TelemetryModule = require(AppChat.Telemetry.Telemetry)
+local ModalTelemetryModule = require(AppChat.Components.ModalTelemetry)
+local DefaultTelemetryEventsModule = require(AppChat.Telemetry.DefaultTelemetryEvents)
+
+local function _(Format) --[[ Line: 14 | Named "eventIngestWithFormatFunction" ]]
+	-- upvalues: SocialLuaAnalyticsModule (copy), DefaultTelemetryEventsModule (copy)
+	return {
+		overrideName = nil,
+		throttlingThousandths = nil,
+		type = SocialLuaAnalyticsModule.Analytics.Enums.SupportedTelemetryBackends.EventIngest,
+		standardizedFields = DefaultTelemetryEventsModule.STANDARDIZED_FIELDS,
+		format = Format
+	}
+end
+
+local ChatLandingModalTelemetryModule = {
 	Constants = {
 		FaeModalShownField = "fae",
 		ConfirmFaeBtn = "confirmFae",
 		CancelFaeBtn = "cancelFae",
-		EventStreamCtx = socialLuaAnalyticsModule.Analytics.Enums.Contexts.Party
+		EventStreamCtx = SocialLuaAnalyticsModule.Analytics.Enums.Contexts.Party
 	}
 }
-
-local function _(p1)
-	-- upvalues: socialLuaAnalyticsModule (ref), defaultTelemetryEventsModule (ref)
-	return {
-		overrideName = nil,
-		throttlingThousandths = nil,
-		type = socialLuaAnalyticsModule.Analytics.Enums.SupportedTelemetryBackends.EventIngest,
-		standardizedFields = defaultTelemetryEventsModule.STANDARDIZED_FIELDS,
-		format = p1
-	}
-end
-
-t.Events = {
-	FaeModalShown = telemetryModule.new({
+ChatLandingModalTelemetryModule.Events = {
+	FaeModalShown = TelemetryModule.new({
 		name = "authModalShown",
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			defaultTelemetryEventsModule.namedCounterConfigurationNoEmittedInfo("AppChat.ChatLandingModal.FaeModal.Shown"),
+			DefaultTelemetryEventsModule.namedCounterConfigurationNoEmittedInfo("AppChat.ChatLandingModal.FaeModal.Shown"),
 			{
 				overrideName = nil,
 				throttlingThousandths = nil,
-				type = socialLuaAnalyticsModule.Analytics.Enums.SupportedTelemetryBackends.EventIngest,
-				standardizedFields = defaultTelemetryEventsModule.STANDARDIZED_FIELDS,
-				format = function(_, _)
-					-- upvalues: t (ref)
+				type = SocialLuaAnalyticsModule.Analytics.Enums.SupportedTelemetryBackends.EventIngest,
+				standardizedFields = DefaultTelemetryEventsModule.STANDARDIZED_FIELDS,
+				format = function(_, _) --[[ Line: 38 ]]
+					-- upvalues: ChatLandingModalTelemetryModule (copy)
 					return {
-						field = t.Constants.FaeModalShownField,
+						field = ChatLandingModalTelemetryModule.Constants.FaeModalShownField,
 						os_time = os.time(),
 						os_clock = os.clock()
 					}
 				end
 			}
 		},
-		eventStreamCtx = t.Constants.EventStreamCtx
+		eventStreamCtx = ChatLandingModalTelemetryModule.Constants.EventStreamCtx
 	}),
-	TelemetryFaeButtonClick = telemetryModule.new({
+	TelemetryFaeButtonClick = TelemetryModule.new({
 		name = "authButtonClick",
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			defaultTelemetryEventsModule.namedCounterConfigurationAndFormat("AppChat.ChatLandingModal.FaeButton.Click", function(p1)
+			DefaultTelemetryEventsModule.namedCounterConfigurationAndFormat("AppChat.ChatLandingModal.FaeButton.Click", function(p1) --[[ Line: 55 ]]
 				return { btn = p1.btn }
 			end),
 			{
 				overrideName = nil,
 				throttlingThousandths = nil,
-				type = socialLuaAnalyticsModule.Analytics.Enums.SupportedTelemetryBackends.EventIngest,
-				standardizedFields = defaultTelemetryEventsModule.STANDARDIZED_FIELDS,
-				format = function(p1, _)
+				type = SocialLuaAnalyticsModule.Analytics.Enums.SupportedTelemetryBackends.EventIngest,
+				standardizedFields = DefaultTelemetryEventsModule.STANDARDIZED_FIELDS,
+				format = function(p1, _) --[[ Line: 65 ]]
 					return {
 						state = p1.state,
 						btn = p1.btn,
@@ -71,23 +71,23 @@ t.Events = {
 				end
 			}
 		},
-		eventStreamCtx = t.Constants.EventStreamCtx
+		eventStreamCtx = ChatLandingModalTelemetryModule.Constants.EventStreamCtx
 	}),
-	ModalRendered = modalTelemetryModule.Events.modalRenderedWithSequence({
-		modalSequence = modalTelemetryModule.Enums.ModalSequence.ChatLandingModal,
-		counterFormat = function(p1, _)
+	ModalRendered = ModalTelemetryModule.Events.modalRenderedWithSequence({
+		modalSequence = ModalTelemetryModule.Enums.ModalSequence.ChatLandingModal,
+		counterFormat = function(p1, _) --[[ Line: 82 ]]
 			return { modalVariant = p1.modalVariant }
 		end
 	}),
-	ModalAction = modalTelemetryModule.Events.modalActionWithSequence({
-		modalSequence = modalTelemetryModule.Enums.ModalSequence.ChatLandingModal,
-		counterFormat = function(p1, _)
+	ModalAction = ModalTelemetryModule.Events.modalActionWithSequence({
+		modalSequence = ModalTelemetryModule.Enums.ModalSequence.ChatLandingModal,
+		counterFormat = function(p1, _) --[[ Line: 90 ]]
 			return { modalVariant = p1.modalVariant, action = p1.action }
 		end
 	}),
-	ModalActionResult = modalTelemetryModule.Events.modalActionResultWithSequence({
-		modalSequence = modalTelemetryModule.Enums.ModalSequence.ChatLandingModal,
-		counterFormat = function(p1, _)
+	ModalActionResult = ModalTelemetryModule.Events.modalActionResultWithSequence({
+		modalSequence = ModalTelemetryModule.Enums.ModalSequence.ChatLandingModal,
+		counterFormat = function(p1, _) --[[ Line: 102 ]]
 			return {
 				modalVariant = p1.modalVariant,
 				action = p1.action,
@@ -97,4 +97,4 @@ t.Events = {
 	})
 }
 
-return t
+return ChatLandingModalTelemetryModule

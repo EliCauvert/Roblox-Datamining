@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CorePackages").Packages.Otter)
+﻿return (require(game:GetService("CorePackages").Packages.Otter))

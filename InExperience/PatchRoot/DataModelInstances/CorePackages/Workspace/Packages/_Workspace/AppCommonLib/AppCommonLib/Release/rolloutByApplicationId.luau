@@ -1,27 +1,21 @@
-﻿local getNumericalApplicationIdModule = require(script.Parent.getNumericalApplicationId)
+﻿local GetNumericalApplicationIdModule = require(script.Parent.getNumericalApplicationId)
 
-local function _(p1, p2)
-	-- upvalues: getNumericalApplicationIdModule (ref)
-	local var1 = p1()
-	local var2 = getNumericalApplicationIdModule(p2)
+local function _(Callback, p1): boolean --[[ Line: 9 | Named "getRolloutEnabledForUser" ]]
+	-- upvalues: GetNumericalApplicationIdModule (copy)
+	local CallbackResult: number = Callback()
+	local NumericalApplicationIdModule: number = GetNumericalApplicationIdModule(p1)
 	
-	return if var2 == nil then var1 >= 100 else var2 % 100 + 1 <= var1
+	return if NumericalApplicationIdModule == nil then CallbackResult >= 100 else NumericalApplicationIdModule % 100 + 1 <= CallbackResult
 end
 
-return function(p1, p2)
-	-- upvalues: getNumericalApplicationIdModule (ref)
-	local var1
-	local var2 = p1()
-	local var3 = getNumericalApplicationIdModule(p2)
+return function(Callback, p1) --[[ Line: 28 ]]
+	-- upvalues: GetNumericalApplicationIdModule (copy)
+	local CallbackResult: number = Callback()
+	local NumericalApplicationIdModule: number = GetNumericalApplicationIdModule(p1)
+	local IsCallbackResultAbove: boolean = if NumericalApplicationIdModule == nil then CallbackResult >= 100 else NumericalApplicationIdModule % 100 + 1 <= CallbackResult
 	
-	if var3 == nil then
-		var1 = var2 >= 100
-		var1 = nil
-	else
-		var1 = var3 % 100 + 1 <= var2
-	end
-	return function()
-		-- upvalues: var1 (ref)
-		return var1
+	return function() --[[ Line: 34 ]]
+		-- upvalues: IsCallbackResultAbove (copy)
+		return IsCallbackResultAbove
 	end
 end

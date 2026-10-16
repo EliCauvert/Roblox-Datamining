@@ -1,7 +1,7 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local _ = require(profilePlatform.Common.Enums)
-local _ = require(parent.CatalogNetworking)
-local _ = require(parent.AvatarExperienceInspectAndBuy)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local _ = require(ProfilePlatform.Common.Enums)
+local _ = require(Parent.CatalogNetworking)
+local _ = require(Parent.AvatarExperienceInspectAndBuy)
 
 return {}

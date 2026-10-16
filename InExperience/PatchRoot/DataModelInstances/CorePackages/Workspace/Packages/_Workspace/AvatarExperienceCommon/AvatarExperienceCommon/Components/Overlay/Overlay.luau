@@ -1,21 +1,19 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
-local reactModule = require(parent.React)
-local useFocusNavigableSurfaceRegistryConnection = require(parent.FocusNavigationUtils).useFocusNavigableSurfaceRegistryConnection
-local focusNavigableSurfaceIdentifierEnum = require(parent.FocusNavigationUtils).FocusNavigableSurfaceIdentifierEnum
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
+local ReactModule = require(Parent.React)
+local UseFocusNavigableSurfaceRegistryConnectionFunction = require(Parent.FocusNavigationUtils).useFocusNavigableSurfaceRegistryConnection
+local FocusNavigableSurfaceIdentifierEnum = require(Parent.FocusNavigationUtils).FocusNavigableSurfaceIdentifierEnum
 
-return function(p1)
-	-- upvalues: reactModule (ref), useFocusNavigableSurfaceRegistryConnection (ref), focusNavigableSurfaceIdentifierEnum (ref)
-	local _ = nil
-	local _ = nil
-	local var1, var2 = reactModule.useState(nil)
-	useFocusNavigableSurfaceRegistryConnection(var1, focusNavigableSurfaceIdentifierEnum.CentralOverlay)
-	local cloned = table.clone(p1)
-	cloned.ref = var2
-	cloned.SelectionGroup = true
-	cloned.SelectionBehaviorDown = Enum.SelectionBehavior.Stop
-	cloned.SelectionBehaviorUp = Enum.SelectionBehavior.Stop
-	cloned.SelectionBehaviorRight = Enum.SelectionBehavior.Stop
-	cloned.SelectionBehaviorLeft = Enum.SelectionBehavior.Stop
+return function(Tbl) --[[ Line: 8 | Named "Overlay" ]]
+	-- upvalues: ReactModule (copy), UseFocusNavigableSurfaceRegistryConnectionFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	UseFocusNavigableSurfaceRegistryConnectionFunction(UseStateResult, FocusNavigableSurfaceIdentifierEnum.CentralOverlay)
+	local Copy = table.clone(Tbl)
+	Copy.ref = UseStateResult2
+	Copy.SelectionGroup = true
+	Copy.SelectionBehaviorDown = Enum.SelectionBehavior.Stop
+	Copy.SelectionBehaviorUp = Enum.SelectionBehavior.Stop
+	Copy.SelectionBehaviorRight = Enum.SelectionBehavior.Stop
+	Copy.SelectionBehaviorLeft = Enum.SelectionBehavior.Stop
 	
-	return reactModule.createElement("Frame", cloned)
+	return ReactModule.createElement("Frame", Copy)
 end

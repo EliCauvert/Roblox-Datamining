@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("AXFixContextualActionVisibility2", false) and require(script.Parent.FFlagAXMoveContextualActionButtons)

@@ -1,6 +1,6 @@
-﻿local userInputService = game:GetService("UserInputService")
+﻿local UserInputService = game:GetService("UserInputService")
 
-return function()
-	-- upvalues: userInputService (ref)
-	return not userInputService.TouchEnabled and not userInputService.MouseEnabled
+return function(): boolean --[[ Line: 3 | Named "getUserInputIsSelectionOnly" ]]
+	-- upvalues: UserInputService (copy)
+	return not UserInputService.TouchEnabled and not UserInputService.MouseEnabled
 end

@@ -1,213 +1,212 @@
-﻿local ampUpsell = script:FindFirstAncestor("AmpUpsell")
-local parent = ampUpsell.Parent
-local UIBloxModule = require(parent.UIBlox)
-local foundationModule = require(parent.Foundation)
-local iconSize = foundationModule.Enums.IconSize
-local loading = foundationModule.Loading
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local analyticsServiceModule = require(ampUpsell.Analytics.AnalyticsService)
-local sendButtonClickEventModule = require(ampUpsell.Analytics.sendButtonClickEvent)
-local appScreensModule = require(ampUpsell.Common.AppScreens)
-local partialPageModal = UIBloxModule.App.Dialog.Modal.PartialPageModal
-local useStyle = UIBloxModule.Core.Style.useStyle
-local linkButton = UIBloxModule.App.Button.LinkButton
-local directionsTileModule = require(script.Parent.DirectionsTile)
-local styledTextLabel = UIBloxModule.App.Text.StyledTextLabel
-local QRCodeDisplayModule = require(parent.QRCodeDisplay)
-local displayQRCode = QRCodeDisplayModule.DisplayQRCode
+﻿local AmpUpsell = script:FindFirstAncestor("AmpUpsell")
+local Parent = AmpUpsell.Parent
+local UIBloxModule = require(Parent.UIBlox)
+local FoundationModule = require(Parent.Foundation)
+local IconSize = FoundationModule.Enums.IconSize
+local Loading = FoundationModule.Loading
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local AnalyticsServiceModule = require(AmpUpsell.Analytics.AnalyticsService)
+local SendButtonClickEventModule = require(AmpUpsell.Analytics.sendButtonClickEvent)
+local AppScreensModule = require(AmpUpsell.Common.AppScreens)
+local PartialPageModal = UIBloxModule.App.Dialog.Modal.PartialPageModal
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local LinkButton = UIBloxModule.App.Button.LinkButton
+local DirectionsTileModule = require(script.Parent.DirectionsTile)
+local StyledTextLabel = UIBloxModule.App.Text.StyledTextLabel
+local QRCodeDisplayModule = require(Parent.QRCodeDisplay)
+local DisplayQRCode = QRCodeDisplayModule.DisplayQRCode
 local ECLevels = QRCodeDisplayModule.ECLevels
-local progressChecklistModule = require(script.Parent.ProgressChecklist)
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local idvWithQRCodeUpsellStrings = require(ampUpsell.Common.LocalizationStrings).idvWithQRCodeUpsellStrings
+local ProgressChecklistModule = require(script.Parent.ProgressChecklist)
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local IdvWithQRCodeUpsellStrings = require(AmpUpsell.Common.LocalizationStrings).idvWithQRCodeUpsellStrings
 
-return function(p1)
-	-- upvalues: useLocalization (ref), idvWithQRCodeUpsellStrings (ref), useStyle (ref), analyticsServiceModule (ref), useSelector (ref), reactModule (ref), partialPageModal (ref), sendButtonClickEventModule (ref), appScreensModule (ref), styledTextLabel (ref), directionsTileModule (ref), progressChecklistModule (ref), displayQRCode (ref), ECLevels (ref), loading (ref), iconSize (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), linkButton (ref)
-	local featureName = p1.featureName
-	local qrCodeLink = p1.qrCodeLink
-	local var1 = useLocalization(idvWithQRCodeUpsellStrings)
-	local var2 = useStyle()
-	local onClose = p1.onClose
-	local openPrivacyPolicyLink = p1.openPrivacyPolicyLink
-	local font = var2.Font.Body.Font
-	local transparency = var2.Theme.TextEmphasis.Transparency
-	local var3 = var2.Font.BaseSize * var2.Font.CaptionBody.RelativeSize
-	local var4 = if p1.analyticsService then p1.analyticsService else analyticsServiceModule.EventStream
-	local uDim2 = UDim2.fromOffset(153, 153)
-	local latestStepCompleted = p1.latestStepCompleted
-	local var5 = latestStepCompleted > 0
+return function(p1) --[[ Line: 45 | Named "IDVWithQRCodeUpsell" ]]
+	-- upvalues: UseLocalizationFunction (copy), IdvWithQRCodeUpsellStrings (copy), UseStyleFunction (copy), AnalyticsServiceModule (copy), UseSelectorFunction (copy), ReactModule (copy), PartialPageModal (copy), SendButtonClickEventModule (copy), AppScreensModule (copy), StyledTextLabel (copy), DirectionsTileModule (copy), ProgressChecklistModule (copy), DisplayQRCode (copy), ECLevels (copy), Loading (copy), IconSize (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), LinkButton (copy)
+	local FeatureName = p1.featureName
+	local QrCodeLink = p1.qrCodeLink
+	local UseLocalizationResult = UseLocalizationFunction(IdvWithQRCodeUpsellStrings)
+	local UseStyleResult = UseStyleFunction()
+	local OnCloseFunction = p1.onClose
+	local OpenPrivacyPolicyLinkFunction = p1.openPrivacyPolicyLink
+	local BodyFont = UseStyleResult.Font.Body.Font
+	local Transparency = UseStyleResult.Theme.TextEmphasis.Transparency
+	local ScaledBaseSize = UseStyleResult.Font.BaseSize * UseStyleResult.Font.CaptionBody.RelativeSize
+	local AnalyticsService = if p1.analyticsService then p1.analyticsService else AnalyticsServiceModule.EventStream
+	local LatestStepCompleted: number = p1.latestStepCompleted
+	local IsLatestStepCompletedAbove = LatestStepCompleted > 0
 	
-	return reactModule.createElement(partialPageModal, {
+	return ReactModule.createElement(PartialPageModal, {
 		bottomPadding = 0,
-		title = var1.title,
-		screenSize = useSelector(function(p2)
+		title = UseLocalizationResult.title,
+		screenSize = UseSelectorFunction(function(p2) --[[ Line: 60 ]]
 			return p2.ScreenSize
 		end),
-		onCloseClicked = function()
-			-- upvalues: sendButtonClickEventModule (copy), var4 (ref), appScreensModule (copy), featureName (ref), onClose (ref)
-			sendButtonClickEventModule(var4, appScreensModule.IDVWithQRCodeUpsell, featureName, "CloseModal")
-			onClose()
+		onCloseClicked = function() --[[ Line: 67 ]]
+			-- upvalues: SendButtonClickEventModule (upval), AnalyticsService (copy), AppScreensModule (upval), FeatureName (copy), OnCloseFunction (copy)
+			SendButtonClickEventModule(AnalyticsService, AppScreensModule.IDVWithQRCodeUpsell, FeatureName, "CloseModal")
+			OnCloseFunction()
 		end
 	}, {
-		QRCodeViewFrame = reactModule.createElement("Frame", {
+		QRCodeViewFrame = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			AutomaticSize = Enum.AutomaticSize.XY
 		}, {
-			UIPadding = reactModule.createElement("UIPadding", {
+			UIPadding = ReactModule.createElement("UIPadding", {
 				PaddingTop = UDim.new(0, 24),
 				PaddingBottom = UDim.new(0, 24)
 			}),
-			UIListLayout = reactModule.createElement("UIListLayout", {
+			UIListLayout = ReactModule.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				FillDirection = Enum.FillDirection.Vertical,
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
 				VerticalAlignment = Enum.VerticalAlignment.Center,
 				Padding = UDim.new(0, 24)
 			}),
-			HeaderText = reactModule.createElement(styledTextLabel, {
+			HeaderText = ReactModule.createElement(StyledTextLabel, {
 				lineHeight = 1,
 				layoutOrder = 0,
-				text = if var5 then var1.verifyInBrowser else var1.ageVerifyPrompt,
-				fontStyle = var2.Font.Header2,
-				colorStyle = var2.Theme.TextEmphasis,
+				text = if IsLatestStepCompletedAbove then UseLocalizationResult.verifyInBrowser else UseLocalizationResult.ageVerifyPrompt,
+				fontStyle = UseStyleResult.Font.Header2,
+				colorStyle = UseStyleResult.Theme.TextEmphasis,
 				size = UDim2.new(1, 0, 0, 0),
 				textTruncate = Enum.TextTruncate.AtEnd,
 				textXAlignment = Enum.TextXAlignment.Center,
 				textYAlignment = Enum.TextYAlignment.Center,
 				automaticSize = Enum.AutomaticSize.XY
 			}),
-			DirectionsFrame = if not var5 then reactModule.createElement("Frame", {
+			DirectionsFrame = if IsLatestStepCompletedAbove then nil else ReactModule.createElement("Frame", {
 				BackgroundTransparency = 0,
 				LayoutOrder = 1,
 				Size = UDim2.new(1, 0, 0, 144),
-				BackgroundColor3 = var2.Theme.BackgroundContrast.Color
+				BackgroundColor3 = UseStyleResult.Theme.BackgroundContrast.Color
 			}, {
-				UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) }),
-				UIPadding = reactModule.createElement("UIPadding", {
+				UICorner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) }),
+				UIPadding = ReactModule.createElement("UIPadding", {
 					PaddingTop = UDim.new(0, 12),
 					PaddingBottom = UDim.new(0, 12),
 					PaddingLeft = UDim.new(0, 12),
 					PaddingRight = UDim.new(0, 12)
 				}),
-				UIListLayout = reactModule.createElement("UIListLayout", {
+				UIListLayout = ReactModule.createElement("UIListLayout", {
 					SortOrder = Enum.SortOrder.LayoutOrder,
 					FillDirection = Enum.FillDirection.Vertical,
 					HorizontalAlignment = Enum.HorizontalAlignment.Center,
 					VerticalAlignment = Enum.VerticalAlignment.Center,
 					Padding = UDim.new(0, 24)
 				}),
-				IDDirection = reactModule.createElement(directionsTileModule, {
+				IDDirection = ReactModule.createElement(DirectionsTileModule, {
 					imagePath = "icons/menu/document",
 					frameHeight = 48,
 					layoutOrder = 1,
-					headerText = var1.idDirectionsHeader,
-					descriptionText = var1.idDirectionsBody
+					headerText = UseLocalizationResult.idDirectionsHeader,
+					descriptionText = UseLocalizationResult.idDirectionsBody
 				}),
-				PhoneDirection = reactModule.createElement(directionsTileModule, {
+				PhoneDirection = ReactModule.createElement(DirectionsTileModule, {
 					imagePath = "icons/menu/mobile",
 					frameHeight = 48,
 					layoutOrder = 2,
-					headerText = var1.phoneDirectionsHeader,
-					descriptionText = var1.phoneDirectionsBody
+					headerText = UseLocalizationResult.phoneDirectionsHeader,
+					descriptionText = UseLocalizationResult.phoneDirectionsBody
 				})
-			}) else nil,
-			Checklist = if var5 then reactModule.createElement(progressChecklistModule, {
+			}),
+			Checklist = if IsLatestStepCompletedAbove then ReactModule.createElement(ProgressChecklistModule, {
 				entryHeight = 18,
 				layoutOrder = 1,
-				latestStepCompleted = latestStepCompleted
+				latestStepCompleted = LatestStepCompleted
 			}) else nil,
-			BeginText = if not var5 then reactModule.createElement(styledTextLabel, {
+			BeginText = if IsLatestStepCompletedAbove then nil else ReactModule.createElement(StyledTextLabel, {
 				lineHeight = 1,
 				layoutOrder = 2,
-				text = var1.beginText,
-				fontStyle = var2.Font.Header1,
-				colorStyle = var2.Theme.TextEmphasis,
+				text = UseLocalizationResult.beginText,
+				fontStyle = UseStyleResult.Font.Header1,
+				colorStyle = UseStyleResult.Theme.TextEmphasis,
 				size = UDim2.new(1, 0, 0, 0),
 				textTruncate = Enum.TextTruncate.AtEnd,
 				textXAlignment = Enum.TextXAlignment.Center,
 				textYAlignment = Enum.TextYAlignment.Center,
 				automaticSize = Enum.AutomaticSize.XY
-			}) else nil,
-			QRCodeWrapper = reactModule.createElement("Frame", {
+			}),
+			QRCodeWrapper = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 0,
 				LayoutOrder = 3,
-				Size = uDim2,
+				Size = UDim2.fromOffset(153, 153),
 				BackgroundColor3 = Color3.fromHex("#FFFFFF")
 			}, {
-				QrCode = if qrCodeLink ~= nil then reactModule.createElement(loading, { size = iconSize.Medium }) else reactModule.createElement(displayQRCode, {
+				QrCode = if QrCodeLink == nil then ReactModule.createElement(Loading, { size = IconSize.Medium }) else ReactModule.createElement(DisplayQRCode, {
 					sideLength = 150,
 					backgroundTransparency = 1,
 					ecLevel = ECLevels.EC_LEVEL_1,
-					toEncode = qrCodeLink
+					toEncode = QrCodeLink
 				}),
-				UIListLayout = reactModule.createElement("UIListLayout", {
+				UIListLayout = ReactModule.createElement("UIListLayout", {
 					HorizontalAlignment = Enum.HorizontalAlignment.Center,
 					VerticalAlignment = Enum.VerticalAlignment.Center
 				}),
-				UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) }),
-				UIPadding = reactModule.createElement("UIPadding", {
+				UICorner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) }),
+				UIPadding = ReactModule.createElement("UIPadding", {
 					PaddingBottom = UDim.new(0, 4),
 					PaddingLeft = UDim.new(0, 4),
 					PaddingRight = UDim.new(0, 4),
 					PaddingTop = UDim.new(0, 4)
 				})
 			}),
-			DisclaimerFrame = reactModule.createElement("Frame", {
+			DisclaimerFrame = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 4,
 				Size = UDim2.new(1, 0, 0, 100)
 			}, {
-				UIListLayout = reactModule.createElement("UIListLayout", {
+				UIListLayout = ReactModule.createElement("UIListLayout", {
 					SortOrder = Enum.SortOrder.LayoutOrder,
 					FillDirection = Enum.FillDirection.Vertical,
 					HorizontalAlignment = Enum.HorizontalAlignment.Center,
 					VerticalAlignment = Enum.VerticalAlignment.Top
 				}),
-				Disclaimer = if not var5 then reactModule.createElement("TextLabel", {
+				Disclaimer = if IsLatestStepCompletedAbove then nil else ReactModule.createElement("TextLabel", {
 					TextWrapped = true,
 					BackgroundTransparency = 1,
 					LayoutOrder = 1,
-					Text = var1.disclaimer,
-					Font = if foundationFontFaceMigration then nil else font,
-					FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Tokens.Typography.BodyLarge.Font) else nil,
-					TextSize = var3,
-					TextColor3 = var2.Theme.TextDefault.Color,
-					TextTransparency = transparency,
+					Text = UseLocalizationResult.disclaimer,
+					Font = if FoundationFontFaceMigration then nil else BodyFont,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
+					TextSize = ScaledBaseSize,
+					TextColor3 = UseStyleResult.Theme.TextDefault.Color,
+					TextTransparency = Transparency,
 					TextXAlignment = Enum.TextXAlignment.Center,
 					AutomaticSize = Enum.AutomaticSize.XY,
 					Size = UDim2.new(1, 0, 0, 24)
-				}) else nil,
-				PrivacyPolicy = if not var5 then reactModule.createElement(linkButton, {
+				}),
+				PrivacyPolicy = if IsLatestStepCompletedAbove then nil else ReactModule.createElement(LinkButton, {
 					layoutOrder = 2,
 					fontStyle = "CaptionBody",
 					underlineAlwaysEnabled = true,
-					text = var1.privacyLinkText,
-					onActivated = function()
-						-- upvalues: sendButtonClickEventModule (copy), var4 (ref), appScreensModule (copy), featureName (ref), openPrivacyPolicyLink (ref)
-						sendButtonClickEventModule(var4, appScreensModule.IDVWithQRCodeUpsell, featureName, "OpenPrivacyPolicy")
-						openPrivacyPolicyLink()
+					text = UseLocalizationResult.privacyLinkText,
+					onActivated = function() --[[ Line: 232 ]]
+						-- upvalues: SendButtonClickEventModule (upval), AnalyticsService (copy), AppScreensModule (upval), FeatureName (copy), OpenPrivacyPolicyLinkFunction (copy)
+						SendButtonClickEventModule(AnalyticsService, AppScreensModule.IDVWithQRCodeUpsell, FeatureName, "OpenPrivacyPolicy")
+						OpenPrivacyPolicyLinkFunction()
 					end
-				}) else nil,
-				HavingTroubleInfoText = if var5 then reactModule.createElement(styledTextLabel, {
+				}),
+				HavingTroubleInfoText = if IsLatestStepCompletedAbove then ReactModule.createElement(StyledTextLabel, {
 					lineHeight = 1,
 					layoutOrder = 1,
-					text = var1.havingTroubleInfoText,
+					text = UseLocalizationResult.havingTroubleInfoText,
 					size = UDim2.new(1, 0, 0.5, 0),
-					fontStyle = var2.Font.CaptionBody,
-					colorStyle = var2.Theme.TextEmphasis,
+					fontStyle = UseStyleResult.Font.CaptionBody,
+					colorStyle = UseStyleResult.Theme.TextEmphasis,
 					textTruncate = Enum.TextTruncate.AtEnd,
 					textXAlignment = Enum.TextXAlignment.Center,
 					textYAlignment = Enum.TextYAlignment.Center
 				}) else nil,
-				DontCloseWindowDisclaimer = if var5 then reactModule.createElement(styledTextLabel, {
+				DontCloseWindowDisclaimer = if IsLatestStepCompletedAbove then ReactModule.createElement(StyledTextLabel, {
 					lineHeight = 1,
 					layoutOrder = 2,
-					text = var1.dontCloseWindowDisclaimer,
-					fontStyle = var2.Font.CaptionBody,
+					text = UseLocalizationResult.dontCloseWindowDisclaimer,
+					fontStyle = UseStyleResult.Font.CaptionBody,
 					size = UDim2.new(1, 0, 0.5, 0),
-					colorStyle = var2.Theme.TextEmphasis,
+					colorStyle = UseStyleResult.Theme.TextEmphasis,
 					textTruncate = Enum.TextTruncate.AtEnd,
 					textXAlignment = Enum.TextXAlignment.Center,
 					textYAlignment = Enum.TextYAlignment.Center

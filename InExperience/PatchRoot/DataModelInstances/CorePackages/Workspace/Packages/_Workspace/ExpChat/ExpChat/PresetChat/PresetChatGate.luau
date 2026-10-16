@@ -1,9 +1,12 @@
-﻿local reactModule = require(script:FindFirstAncestor("ExpChat").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("ExpChat").Parent.React)
 local _ = require(script.Parent.Constants)
-local useLayoutModeModule = require(script.Parent.useLayoutMode)
-local usePresetSurfaceAvailableModule = require(script.Parent.usePresetSurfaceAvailable)
+local UseLayoutModeModule = require(script.Parent.useLayoutMode)
+local UsePresetSurfaceAvailableModule = require(script.Parent.usePresetSurfaceAvailable)
 
-return reactModule.memo(function(value)
-	-- upvalues: usePresetSurfaceAvailableModule (ref), useLayoutModeModule (ref), reactModule (ref)
-	return if usePresetSurfaceAvailableModule(value.targetTextChannel) then if value.layoutMode == nil or useLayoutModeModule() == value.layoutMode then reactModule.createElement(reactModule.Fragment, nil, value.children) else nil else nil
+return ReactModule.memo(function(p1) --[[ Line: 27 | Named "PresetChatGate" ]]
+	-- upvalues: UsePresetSurfaceAvailableModule (copy), UseLayoutModeModule (copy), ReactModule (copy)
+	local UsePresetSurfaceAvailableModuleResult = UsePresetSurfaceAvailableModule(p1.targetTextChannel)
+	local UseLayoutModeModuleResult = UseLayoutModeModule()
+	
+	return if UsePresetSurfaceAvailableModuleResult and (p1.layoutMode == nil or UseLayoutModeModuleResult == p1.layoutMode) then ReactModule.createElement(ReactModule.Fragment, nil, p1.children) else nil
 end)

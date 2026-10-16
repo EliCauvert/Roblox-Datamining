@@ -1,71 +1,73 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local urlBuilder = require(parent.UrlBuilder).UrlBuilder
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local _ = require(parent.DataHydration.AdCampaigns)
-local _ = require(parent.DataHydration.CampaignStats)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local _ = require(Parent.DataHydration.AdCampaigns)
+local _ = require(Parent.DataHydration.CampaignStats)
+local GetAdsManagerUrlModule = require(script.Parent.getAdsManagerUrl)
 local _ = require(script.Parent.AdsManagerMenuButtonView)
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local useOpenWebViewWithResumeRefreshModule = require(buildExperience.utils.useOpenWebViewWithResumeRefresh)
-local useRefreshAdsDataModule = require(script.Parent.useRefreshAdsData)
-local fFlagBuildDesktopReadinessModule = require(buildExperience.Flags.FFlagBuildDesktopReadiness)
-local iconName = foundationModule.Enums.IconName
-local inputSize = foundationModule.Enums.InputSize
-local useScaledValue = foundationModule.Hooks.useScaledValue
-local buildAdsManagerMenuWidth = game:DefineFastInt("BuildAdsManagerMenuWidth", 162)
-local var1 = urlBuilder.fromString("create:advertise")
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local UseOpenWebViewWithResumeRefreshModule = require(BuildExperience.utils.useOpenWebViewWithResumeRefresh)
+local UseRefreshAdsDataModule = require(script.Parent.useRefreshAdsData)
+local FFlagBuildAdsManagerUniverseUrlModule = require(BuildExperience.Flags.FFlagBuildAdsManagerUniverseUrl)
+local IconName = FoundationModule.Enums.IconName
+local InputSize = FoundationModule.Enums.InputSize
+local UseScaledValueFunction = FoundationModule.Hooks.useScaledValue
+local BuildAdsManagerMenuWidth = game:DefineFastInt("BuildAdsManagerMenuWidth", 162)
 
-return function(p1)
-	-- upvalues: reactModule (ref), useScaledValue (ref), buildAdsManagerMenuWidth (ref), useLocalization (ref), localizationStringsModule (ref), useRefreshAdsDataModule (ref), useOpenWebViewWithResumeRefreshModule (ref), var1 (ref), iconName (ref), fFlagBuildDesktopReadinessModule (ref), inputSize (ref)
-	local var2, var3 = reactModule.useState(false)
-	local var4 = useScaledValue(buildAdsManagerMenuWidth)
-	local adsManager = useLocalization({
-		adsManager = localizationStringsModule.ADS_STATS_ADS_MANAGER
+return function(p1) --[[ Line: 40 | Named "useAdsManagerMenuButtonViewModel" ]]
+	-- upvalues: ReactModule (copy), UseScaledValueFunction (copy), BuildAdsManagerMenuWidth (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseRefreshAdsDataModule (copy), FFlagBuildAdsManagerUniverseUrlModule (copy), GetAdsManagerUrlModule (copy), UseOpenWebViewWithResumeRefreshModule (copy), IconName (copy), InputSize (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseScaledValueResult = UseScaledValueFunction(BuildAdsManagerMenuWidth)
+	local AdsManager = UseLocalizationFunction({
+		adsManager = LocalizationStringsModule.ADS_STATS_ADS_MANAGER
 	}).adsManager
-	local var5 = useOpenWebViewWithResumeRefreshModule(var1(), adsManager, useRefreshAdsDataModule(p1.universeId, {
+	local UniverseId = p1.universeId
+	local UseRefreshAdsDataModuleResult = UseRefreshAdsDataModule(UniverseId, {
 		adCampaignsStore = p1.adCampaignsStore,
 		campaignStatsStore = p1.campaignStatsStore
-	}), p1.appLifecycleObserverService)
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref), var5 (ref)
-		var3(false)
-		var5()
-	end, { var5 })
+	})
+	local UseOpenWebViewWithResumeRefreshModuleResult = nil
+	UseOpenWebViewWithResumeRefreshModuleResult = if FFlagBuildAdsManagerUniverseUrlModule then UseOpenWebViewWithResumeRefreshModule(GetAdsManagerUrlModule.getAdsManagerUrl(UniverseId), AdsManager, UseRefreshAdsDataModuleResult, p1.appLifecycleObserverService) else UseOpenWebViewWithResumeRefreshModule(GetAdsManagerUrlModule.getDefaultAdsManagerUrl(), AdsManager, UseRefreshAdsDataModuleResult, p1.appLifecycleObserverService)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 67 ]]
+		-- upvalues: UseStateResult2 (copy), UseOpenWebViewWithResumeRefreshModuleResult (ref)
+		UseStateResult2(false)
+		UseOpenWebViewWithResumeRefreshModuleResult()
+	end, { UseOpenWebViewWithResumeRefreshModuleResult })
 	
 	return {
 		layoutOrder = p1.layoutOrder,
 		testId = p1.testId or "AdsManagerMenuButton",
-		buttonSize = if fFlagBuildDesktopReadinessModule then inputSize.Large else inputSize.Medium,
-		isMenuOpen = var2,
-		menuSize = if fFlagBuildDesktopReadinessModule then inputSize.Large else nil,
-		menuWidth = var4,
-		menuItems = reactModule.useMemo(function()
-			-- upvalues: adsManager (ref), iconName (copy)
+		buttonSize = InputSize.Large,
+		isMenuOpen = UseStateResult,
+		menuSize = InputSize.Large,
+		menuWidth = UseScaledValueResult,
+		menuItems = ReactModule.useMemo(function() --[[ Line: 88 ]]
+			-- upvalues: AdsManager (copy), IconName (upval)
 			return {
 				{
 					id = "ads-manager",
-					text = adsManager,
-					trailing = { iconName = iconName.ArrowUpRightFromSquare }
+					text = AdsManager,
+					trailing = { iconName = IconName.ArrowUpRightFromSquare }
 				}
 			}
-		end, { adsManager }),
-		onToggleMenu = reactModule.useCallback(function()
-			-- upvalues: var3 (ref)
-			var3(function(p2)
+		end, { AdsManager }),
+		onToggleMenu = ReactModule.useCallback(function() --[[ Line: 78 ]]
+			-- upvalues: UseStateResult2 (copy)
+			UseStateResult2(function(p2): boolean --[[ Line: 79 ]]
 				return not p2
 			end)
 		end, {}),
-		onCloseMenu = reactModule.useCallback(function()
-			-- upvalues: var3 (ref)
-			var3(false)
+		onCloseMenu = ReactModule.useCallback(function() --[[ Line: 84 ]]
+			-- upvalues: UseStateResult2 (copy)
+			UseStateResult2(false)
 		end, {}),
-		onItemActivated = reactModule.useCallback(function(p2)
-			-- upvalues: var6 (ref)
+		onItemActivated = ReactModule.useCallback(function(p2) --[[ Line: 72 ]]
+			-- upvalues: UseResult (copy)
 			if p2 == "ads-manager" then
-				var6()
+				UseResult()
 			end
-		end, { var6 })
+		end, { UseResult })
 	}
 end

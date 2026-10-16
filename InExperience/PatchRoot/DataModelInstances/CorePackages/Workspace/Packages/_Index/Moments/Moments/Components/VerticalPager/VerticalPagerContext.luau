@@ -1,43 +1,42 @@
-﻿local parent = script:FindFirstAncestor("Moments").Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
+﻿local Parent = script:FindFirstAncestor("Moments").Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
 local _ = require(script.Parent.Types)
-local createPagerStoreModule = require(script.Parent.createPagerStore)
 
-local function noop() end
+local function noop() --[[ Line: 24 ]] end
 
-local var1 = signalsModule.createSignal(false)
-local var2 = reactModule.createContext({
+local Signal = SignalsModule.createSignal(false)
+local Context = ReactModule.createContext({
 	analytics = nil,
-	store = createPagerStoreModule(),
-	getActiveIndex = signalsModule.createSignal(1),
-	getScrollState = signalsModule.createSignal("Idle"),
+	store = require(script.Parent.createPagerStore)(),
+	getActiveIndex = SignalsModule.createSignal(1),
+	getScrollState = SignalsModule.createSignal("Idle"),
 	scrollToIndex = noop,
 	next = noop,
 	previous = noop,
 	removeItem = noop
 })
-local var3 = reactModule.createContext({
+local Context1 = ReactModule.createContext({
 	index = 0,
 	item = nil,
-	getIsActive = var1,
-	getIsVisible = var1
+	getIsActive = Signal,
+	getIsVisible = Signal
 })
 
 return {
-	VerticalPagerContext = var2,
-	PagerItemContext = var3,
-	useVerticalPager = function()
-		-- upvalues: reactModule (ref), var2 (ref)
-		return reactModule.useContext(var2)
+	VerticalPagerContext = Context,
+	PagerItemContext = Context1,
+	useVerticalPager = function() --[[ Line: 61 ]]
+		-- upvalues: ReactModule (copy), Context (copy)
+		return (ReactModule.useContext(Context))
 	end,
-	usePagerItem = function()
-		-- upvalues: reactModule (ref), var3 (ref)
-		return reactModule.useContext(var3)
+	usePagerItem = function() --[[ Line: 75 ]]
+		-- upvalues: ReactModule (copy), Context1 (copy)
+		return (ReactModule.useContext(Context1))
 	end,
-	useIsPagerItemActive = function()
-		-- upvalues: reactModule (ref), var3 (ref), signalsReactModule (ref)
-		return signalsReactModule.useSignalState(reactModule.useContext(var3).getIsActive)
+	useIsPagerItemActive = function() --[[ Line: 84 ]]
+		-- upvalues: ReactModule (copy), Context1 (copy), SignalsReactModule (copy)
+		return SignalsReactModule.useSignalState(ReactModule.useContext(Context1).getIsActive)
 	end
 }

@@ -1,18 +1,18 @@
-﻿local avatarSwitcher = script:FindFirstAncestor("AvatarSwitcher")
-local parent = avatarSwitcher.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local avatarsUnsupportedMessageModule = require(avatarSwitcher.Components.Messages.AvatarsUnsupportedMessage)
-local pendingAvatarSwitchMessageModule = require(avatarSwitcher.Components.Messages.PendingAvatarSwitchMessage)
-local outfitsGridContainerModule = require(avatarSwitcher.Components.OutfitsGrid.OutfitsGridContainer)
+﻿local AvatarSwitcher = script:FindFirstAncestor("AvatarSwitcher")
+local Parent = AvatarSwitcher.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local AvatarsUnsupportedMessageModule = require(AvatarSwitcher.Components.Messages.AvatarsUnsupportedMessage)
+local PendingAvatarSwitchMessageModule = require(AvatarSwitcher.Components.Messages.PendingAvatarSwitchMessage)
+local OutfitsGridContainerModule = require(AvatarSwitcher.Components.OutfitsGrid.OutfitsGridContainer)
 
-return function()
-	-- upvalues: reactModule (ref), foundationModule (ref), avatarsUnsupportedMessageModule (ref), pendingAvatarSwitchMessageModule (ref), outfitsGridContainerModule (ref)
-	return reactModule.createElement(foundationModule.View, { tag = "size-full-full col gap-large" }, {
-		AvatarsUnsupportedMessage = reactModule.createElement(avatarsUnsupportedMessageModule, { LayoutOrder = 1 }),
-		PendingAvatarSwitchMessage = reactModule.createElement(pendingAvatarSwitchMessageModule, { LayoutOrder = 2 }),
-		GridContainer = reactModule.createElement(foundationModule.View, { tag = "size-full-0 grow", LayoutOrder = 3 }, {
-			OutfitsGridContainer = reactModule.createElement(outfitsGridContainerModule)
+return function() --[[ Line: 17 | Named "OutfitsGridWithMessage" ]]
+	-- upvalues: ReactModule (copy), FoundationModule (copy), AvatarsUnsupportedMessageModule (copy), PendingAvatarSwitchMessageModule (copy), OutfitsGridContainerModule (copy)
+	return (ReactModule.createElement(FoundationModule.View, { tag = "size-full-full col gap-large" }, {
+		AvatarsUnsupportedMessage = ReactModule.createElement(AvatarsUnsupportedMessageModule, { LayoutOrder = 1 }),
+		PendingAvatarSwitchMessage = ReactModule.createElement(PendingAvatarSwitchMessageModule, { LayoutOrder = 2 }),
+		GridContainer = ReactModule.createElement(FoundationModule.View, { tag = "size-full-0 grow", LayoutOrder = 3 }, {
+			OutfitsGridContainer = ReactModule.createElement(OutfitsGridContainerModule)
 		})
-	})
+	}))
 end

@@ -1,27 +1,27 @@
-﻿local promptsServerDrivenUi = script:FindFirstAncestor("PromptsServerDrivenUi")
-local parent = promptsServerDrivenUi.Parent
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local sduiActionType = sduiCoreSystemModule.SduiActionType
-local getSduiActionHandlerRegistry = sduiCoreSystemModule.getSduiActionHandlerRegistry
-local fFlagSduiDismissPromptAction = require(parent.SharedFlags).FFlagSduiDismissPromptAction
-local fFlagLuaAppSduiMovePromptsActions = require(parent.SharedFlags).FFlagLuaAppSduiMovePromptsActions
-local fFlagSduiRequestPushNotificationPermissionActionHandler = require(parent.SharedFlags).FFlagSduiRequestPushNotificationPermissionActionHandler
+﻿local PromptsServerDrivenUi = script:FindFirstAncestor("PromptsServerDrivenUi")
+local Parent = PromptsServerDrivenUi.Parent
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiActionType = SduiCoreSystemModule.SduiActionType
+local GetSduiActionHandlerRegistryFunction = SduiCoreSystemModule.getSduiActionHandlerRegistry
+local FFlagSduiDismissPromptAction = require(Parent.SharedFlags).FFlagSduiDismissPromptAction
+local FFlagLuaAppSduiMovePromptsActions = require(Parent.SharedFlags).FFlagLuaAppSduiMovePromptsActions
+local FFlagSduiRequestPushNotificationPermissionActionHandler = require(Parent.SharedFlags).FFlagSduiRequestPushNotificationPermissionActionHandler
 
-return function()
-	-- upvalues: sduiActionType (ref), fFlagLuaAppSduiMovePromptsActions (ref), fFlagSduiDismissPromptAction (ref), promptsServerDrivenUi (ref), fFlagSduiRequestPushNotificationPermissionActionHandler (ref), getSduiActionHandlerRegistry (ref)
-	getSduiActionHandlerRegistry().registerActionHandlerConfigs({
-		[sduiActionType.DismissPrompt] = if fFlagLuaAppSduiMovePromptsActions and fFlagSduiDismissPromptAction then {
+return function() --[[ Line: 16 | Named "registerPromptsActions" ]]
+	-- upvalues: SduiActionType (copy), FFlagLuaAppSduiMovePromptsActions (copy), FFlagSduiDismissPromptAction (copy), PromptsServerDrivenUi (copy), FFlagSduiRequestPushNotificationPermissionActionHandler (copy), GetSduiActionHandlerRegistryFunction (copy)
+	GetSduiActionHandlerRegistryFunction().registerActionHandlerConfigs({
+		[SduiActionType.DismissPrompt] = if FFlagLuaAppSduiMovePromptsActions and FFlagSduiDismissPromptAction then {
 			skipUnifiedLogging = false,
-			lazyHandler = function()
-				-- upvalues: promptsServerDrivenUi (copy)
-				return require(promptsServerDrivenUi.Actions.SduiDismissPromptAction)
+			lazyHandler = function() --[[ Line: 20 ]]
+				-- upvalues: PromptsServerDrivenUi (upval)
+				return require(PromptsServerDrivenUi.Actions.SduiDismissPromptAction)
 			end
 		} else nil,
-		[sduiActionType.RequestPushNotificationPermission] = if fFlagSduiRequestPushNotificationPermissionActionHandler then {
+		[SduiActionType.RequestPushNotificationPermission] = if FFlagSduiRequestPushNotificationPermissionActionHandler then {
 			skipUnifiedLogging = false,
-			lazyHandler = function()
-				-- upvalues: promptsServerDrivenUi (copy)
-				return require(promptsServerDrivenUi.Actions.SduiRequestPushNotificationPermissionAction)
+			lazyHandler = function() --[[ Line: 28 ]]
+				-- upvalues: PromptsServerDrivenUi (upval)
+				return require(PromptsServerDrivenUi.Actions.SduiRequestPushNotificationPermissionAction)
 			end
 		} else nil
 	})

@@ -1,12 +1,12 @@
-﻿local roundedVariantModule = require(script:FindFirstAncestor("AppChat").Enums.RoundedVariant)
-local getCornerRadiiModule = require(script.Parent.Parent.getCornerRadii)
-local t = {
-	[roundedVariantModule.Top] = { topLeft = true, topRight = true },
-	[roundedVariantModule.TopLeft] = { topLeft = true },
-	[roundedVariantModule.TopRight] = { topRight = true }
+﻿local RoundedVariantModule = require(script:FindFirstAncestor("AppChat").Enums.RoundedVariant)
+local GetCornerRadiiModule = require(script.Parent.Parent.getCornerRadii)
+local config = {
+	[RoundedVariantModule.Top] = { topLeft = true, topRight = true },
+	[RoundedVariantModule.TopLeft] = { topLeft = true },
+	[RoundedVariantModule.TopRight] = { topRight = true }
 }
 
-return function(p1, p2)
-	-- upvalues: t (ref), roundedVariantModule (ref), getCornerRadiiModule (ref)
-	return getCornerRadiiModule(t[p1 or roundedVariantModule.Top] or t[roundedVariantModule.Top], p2)
+return function(p1, p2) --[[ Line: 14 | Named "getGameCardThumbnailCornerRadii" ]]
+	-- upvalues: config (copy), RoundedVariantModule (copy), GetCornerRadiiModule (copy)
+	return GetCornerRadiiModule(config[p1 or RoundedVariantModule.Top] or config[RoundedVariantModule.Top], p2)
 end

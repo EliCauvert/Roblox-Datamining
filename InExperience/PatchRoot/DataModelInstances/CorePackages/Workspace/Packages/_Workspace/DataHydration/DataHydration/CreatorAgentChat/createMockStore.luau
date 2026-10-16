@@ -1,369 +1,376 @@
-﻿local httpService = game:GetService("HttpService")
-local acpProtocolModule = require(script.Parent.Acp.AcpProtocol)
+﻿local HttpService = game:GetService("HttpService")
+local AcpProtocolModule = require(script.Parent.Acp.AcpProtocol)
 local _ = require(script.Parent.types)
-local createCreatorAgentChatStoreModule = require(script.Parent.createCreatorAgentChatStore)
+local CreateCreatorAgentChatStoreModule = require(script.Parent.createCreatorAgentChatStore)
 
-local function _()
+local function _() --[[ Line: 74 | Named "isoNow" ]]
 	return DateTime.now():ToIsoDate()
 end
 
-local function jsonError(p1, p2, p3, p4)
-	-- upvalues: httpService (ref)
+local function jsonError(Id, Code, Message, StatusCode) --[[ Line: 78 ]]
+	-- upvalues: HttpService (copy)
 	return {
-		statusCode = p4,
-		responseBody = httpService:JSONEncode({
+		statusCode = StatusCode,
+		responseBody = HttpService:JSONEncode({
 			jsonrpc = "2.0",
-			id = p1,
-			error = { code = p2, message = p3 }
+			id = Id,
+			error = { code = Code, message = Message }
 		})
 	}
 end
 
-local function jsonOk(p1, p2)
-	-- upvalues: httpService (ref)
+local function jsonOk(Id, Result) --[[ Line: 89 ]]
+	-- upvalues: HttpService (copy)
 	return {
 		statusCode = 200,
-		responseBody = httpService:JSONEncode({ jsonrpc = "2.0", id = p1, result = p2 })
+		responseBody = HttpService:JSONEncode({ jsonrpc = "2.0", id = Id, result = Result })
 	}
 end
 
-local function streamWords(p1)
-	local t = {}
-	local var1 = true
+local function streamWords(Text: string) --[[ Line: 96 ]]
+	local List = {}
+	local Flag = true
 	
-	for i in p1:gmatch("%S+") do
-		if var1 then
-			table.insert(t, i)
-			var1 = false
+	for i in Text:gmatch("%S+") do
+		if Flag then
+			table.insert(List, i)
+			Flag = false
 		else
-			table.insert(t, " " .. i)
+			table.insert(List, " " .. i)
 		end
 	end
-	return t
+	return List
 end
 
-local function httpStatusForCode(p2)
-	-- upvalues: acpProtocolModule (ref)
-	return if p2 == acpProtocolModule.ErrorCodes.NotFound then 404 elseif p2 == acpProtocolModule.ErrorCodes.Gone then 410 elseif p2 == acpProtocolModule.ErrorCodes.Conflict then 409 elseif p2 == acpProtocolModule.ErrorCodes.UpstreamUnavailable then 502 elseif p2 == acpProtocolModule.ErrorCodes.Unauthorized then 401 elseif p2 == acpProtocolModule.ErrorCodes.Forbidden then 403 elseif p2 == acpProtocolModule.ErrorCodes.InternalError then 500 else 400
+local function httpStatusForCode(Code): number --[[ Line: 111 ]]
+	-- upvalues: AcpProtocolModule (copy)
+	return if Code == AcpProtocolModule.ErrorCodes.NotFound then 404 elseif Code == AcpProtocolModule.ErrorCodes.Gone then 410 elseif Code == AcpProtocolModule.ErrorCodes.Conflict then 409 elseif Code == AcpProtocolModule.ErrorCodes.UpstreamUnavailable then 502 elseif Code == AcpProtocolModule.ErrorCodes.Unauthorized then 401 elseif Code == AcpProtocolModule.ErrorCodes.Forbidden then 403 elseif Code == AcpProtocolModule.ErrorCodes.InternalError then 500 else 400
 end
 
-return function(p2)
-	-- upvalues: acpProtocolModule (ref), streamWords (ref), jsonError (ref), httpStatusForCode (ref), jsonOk (ref), httpService (ref), createCreatorAgentChatStoreModule (ref)
-	p2 = p2 or {}
-	local chunkDelay = p2.chunkDelay or 0.04
+return function(p1) --[[ Line: 130 | Named "createMockStore" ]]
+	-- upvalues: AcpProtocolModule (copy), streamWords (copy), jsonError (copy), httpStatusForCode (copy), jsonOk (copy), HttpService (copy), CreateCreatorAgentChatStoreModule (copy)
+	local P8 = p1 or {}
+	local ChunkDelay = P8.chunkDelay or 0.04
 	local t = {}
-	local var2 = 0
+	local Count = 0
 	
-	if p2.initialSessions then
-		for i, v in p2.initialSessions do
-			var2 += 1
-			local sessionId = v.sessionId or ("mock_seed_%08d"):format(var2)
-			local var3 = DateTime.now():ToIsoDate()
-			t[sessionId] = {
+	if P8.initialSessions then
+		for _, initialSession in P8.initialSessions do
+			Count += 1
+			local SessionId = initialSession.sessionId or ("mock_seed_%08d"):format(Count)
+			local IsoDate = DateTime.now():ToIsoDate()
+			t[SessionId] = {
 				closedUtc = nil,
-				sessionId = sessionId,
-				title = v.title,
-				createdUtc = var3,
-				updatedUtc = var3
+				sessionId = SessionId,
+				title = initialSession.title,
+				createdUtc = IsoDate,
+				updatedUtc = IsoDate
 			}
 		end
 	end
-	local function _()
-		-- upvalues: var2 (write)
-		var2 += 1
+	local function _(): string --[[ Line: 152 | Named "newSessionId" ]]
+		-- upvalues: Count (ref)
+		Count += 1
 		
-		return ("mock_%08d"):format(var2)
+		return ("mock_%08d"):format(Count)
 	end
 	
-	local var4 = nil
+	local v1 = nil
 	
-	local function emitNotification(p3, p4, p5)
-		-- upvalues: var4 (write), acpProtocolModule (copy)
-		var4.ingestFrame({
+	local function emitNotification(SessionId, Update, Count) --[[ Line: 159 ]]
+		-- upvalues: v1 (ref), AcpProtocolModule (upval)
+		v1.ingestFrame({
 			kind = "notification",
 			notification = {
-				method = acpProtocolModule.Notifications.SessionUpdate,
-				params = { sessionId = p3, update = p4 }
+				method = AcpProtocolModule.Notifications.SessionUpdate,
+				params = { sessionId = SessionId, update = Update }
 			}
-		}, { sequenceNumber = p5 })
+		}, { sequenceNumber = Count })
 	end
 	
-	local function emitResponse(p3, p4)
-		-- upvalues: var4 (write)
-		var4.ingestFrame({
+	local function emitResponse(Id, p2) --[[ Line: 171 ]]
+		-- upvalues: v1 (ref)
+		v1.ingestFrame({
 			kind = "response",
 			response = {
 				jsonrpc = "2.0",
-				id = p3,
-				result = p4.result,
-				error = p4.error
+				id = Id,
+				result = p2.result,
+				error = p2.error
 			}
 		})
 	end
 	
-	local function defaultResponder(p3)
-		-- upvalues: streamWords (copy), chunkDelay (ref)
-		for i, v in streamWords(("Sure! I'll work on \"%s\" for you."):format(p3.promptText:sub(1, 60))) do
-			p3.emitText(v)
-			p3.sleep(chunkDelay)
+	local function defaultResponder(p2) --[[ Line: 183 ]]
+		-- upvalues: streamWords (upval), ChunkDelay (copy)
+		for _, value in streamWords((("Sure! I'll work on \"%s\" for you."):format(p2.promptText:sub(1, 60)))) do
+			p2.emitText(value)
+			p2.sleep(ChunkDelay)
 		end
-		p3.finish("end_turn")
+		p2.finish("end_turn")
 	end
 	
-	local _ = function(p4)
-		-- upvalues: streamWords (copy), chunkDelay (ref)
-		return function(p5)
-			-- upvalues: streamWords (copy), p4 (ref), chunkDelay (copy)
-			for i, v in streamWords(p4) do
-				p5.emitText(v)
-				p5.sleep(chunkDelay)
+	local _ = function(p3) --[[ Line: 192 | Named "stringResponder" ]]
+		-- upvalues: streamWords (upval), ChunkDelay (copy)
+		return function(p4) --[[ Line: 193 ]]
+			-- upvalues: streamWords (upval), p3 (copy), ChunkDelay (upval)
+			for _, value in streamWords(p3) do
+				p4.emitText(value)
+				p4.sleep(ChunkDelay)
 			end
-			p5.finish("end_turn")
+			p4.finish("end_turn")
 		end
 	end
 	
-	local _ = function()
-		-- upvalues: p2 (ref), defaultResponder (ref), streamWords (copy), chunkDelay (ref)
-		local respond = p2.respond
+	local _ = function() --[[ Line: 202 | Named "pickResponder" ]]
+		-- upvalues: P8 (copy), defaultResponder (copy), streamWords (upval), ChunkDelay (copy)
+		local Respond = P8.respond
 		
-		return if respond == nil then defaultResponder elseif typeof(respond) == "string" then function(p5)
-			-- upvalues: streamWords (copy), respond (ref), chunkDelay (copy)
-			for i, v in streamWords(respond) do
-				p5.emitText(v)
-				p5.sleep(chunkDelay)
+		return if Respond == nil then defaultResponder elseif typeof(Respond) == "string" then function(p4) --[[ Line: 193 ]]
+			-- upvalues: streamWords (upval), Respond (copy), ChunkDelay (upval)
+			for _, value in streamWords(Respond) do
+				p4.emitText(value)
+				p4.sleep(ChunkDelay)
 			end
-			p5.finish("end_turn")
-		end else respond
+			p4.finish("end_turn")
+		end else Respond
 	end
 	
-	local function runResponder(p5, p6, p7)
-		-- upvalues: p2 (ref), emitNotification (ref), emitResponse (ref), t (ref), defaultResponder (ref), streamWords (copy), chunkDelay (ref), acpProtocolModule (copy)
-		local var5 = tostring(p5)
-		local var6 = `{var5}:user`
-		local var7 = `{var5}:assistant`
-		local var8 = ""
+	local function runResponder(Id, SessionId, Content) --[[ Line: 212 ]]
+		-- upvalues: P8 (copy), emitNotification (copy), emitResponse (copy), t (copy), defaultResponder (copy), streamWords (upval), ChunkDelay (copy), AcpProtocolModule (upval)
+		local Text = tostring(Id)
+		local UserName: string = `{Text}:user`
+		local AssistantName: string = `{Text}:assistant`
+		local Text1 = ""
 		
-		for i, v in p7 do
-			if v.type == "text" and typeof(v.text) == "string" then
-				var8 = if var8 == "" then v.text else var8 .. "\n" .. v.text
+		for _, value in Content do
+			if value.type == "text" and typeof(value.text) == "string" then
+				if Text1 == "" then
+					Text1 = value.text
+				else
+					Text1 ..= "\n" .. value.text
+				end
 			end
 		end
-		local var9 = 0
+		local Count = 0
 		
-		local function _(p8)
-			-- upvalues: p2 (copy), var9 (write), emitNotification (copy), p6 (ref)
-			if p2.onSessionUpdate then
-				p2.onSessionUpdate(p8, var9)
+		local function _(Update) --[[ Line: 224 | Named "emitSessionUpdate" ]]
+			-- upvalues: P8 (upval), Count (ref), emitNotification (upval), SessionId (copy)
+			if P8.onSessionUpdate then
+				P8.onSessionUpdate(Update, Count)
 			end
-			emitNotification(p6, p8, var9)
-			var9 += 1
+			emitNotification(SessionId, Update, Count)
+			Count += 1
 		end
 		
-		local var10 = false
+		local Flag = false
 		
-		i = function(p8)
-			-- upvalues: var10 (write), p2 (copy), var9 (write), emitNotification (copy), p6 (ref)
-			if var10 then return end
-			var10 = true
-			local t = {
+		local _ = function(p4) --[[ Line: 233 | Named "finishTurn" ]]
+			-- upvalues: Flag (ref), P8 (upval), Count (ref), emitNotification (upval), SessionId (copy)
+			if Flag then return end
+			Flag = true
+			local config = {
 				sessionUpdate = "state_change",
 				state = "idle",
-				stop_reason = p8 or "end_turn"
+				stop_reason = p4 or "end_turn"
 			}
 			
-			if p2.onSessionUpdate then
-				p2.onSessionUpdate(t, var9)
+			if P8.onSessionUpdate then
+				P8.onSessionUpdate(config, Count)
 			end
-			emitNotification(p6, t, var9)
-			var9 += 1
+			emitNotification(SessionId, config, Count)
+			Count += 1
 		end
 		
-		local function failTurn(p8, p9)
-			-- upvalues: var10 (write), emitResponse (copy), p5 (ref)
-			if var10 then
+		local function failTurn(Code, Message) --[[ Line: 245 ]]
+			-- upvalues: Flag (ref), emitResponse (upval), Id (copy)
+			if not Flag then
+				Flag = true
+				emitResponse(Id, { error = { code = Code, message = Message } })
+				
 				return
 			end
-			var10 = true
-			emitResponse(p5, { error = { code = p8, message = p9 } })
 		end
 		
-		local t_1 = {
+		local config = {
 			sessionUpdate = "user_message",
-			messageId = var6,
-			content = p7
+			messageId = UserName,
+			content = Content
 		}
 		
-		if p2.onSessionUpdate then
-			p2.onSessionUpdate(t_1, var9)
+		if P8.onSessionUpdate then
+			P8.onSessionUpdate(config, Count)
 		end
-		emitNotification(p6, t_1, var9)
-		var9 += 1
-		local t_2 = { sessionUpdate = "state_change", state = "running" }
+		emitNotification(SessionId, config, Count)
+		Count += 1
+		local config1 = { sessionUpdate = "state_change", state = "running" }
 		
-		if p2.onSessionUpdate then
-			p2.onSessionUpdate(t_2, var9)
+		if P8.onSessionUpdate then
+			P8.onSessionUpdate(config1, Count)
 		end
-		emitNotification(p6, t_2, var9)
-		var9 += 1
-		local t_3 = {
-			sessionId = p6,
-			promptText = var8,
-			promptBlocks = p7,
+		emitNotification(SessionId, config1, Count)
+		Count += 1
+		local config2 = {
+			sessionId = SessionId,
+			promptText = Text1,
+			promptBlocks = Content,
 			sleep = task.wait,
-			emitText = function(p8)
-				-- upvalues: var7 (ref), p2 (copy), var9 (write), emitNotification (copy), p6 (ref)
-				local t = {
+			emitText = function(Text) --[[ Line: 268 ]]
+				-- upvalues: AssistantName (copy), P8 (upval), Count (ref), emitNotification (upval), SessionId (copy)
+				local config = {
 					sessionUpdate = "agent_message_chunk",
-					messageId = var7,
-					content = { type = "text", text = p8 }
+					messageId = AssistantName,
+					content = { type = "text", text = Text }
 				}
 				
-				if p2.onSessionUpdate then
-					p2.onSessionUpdate(t, var9)
+				if P8.onSessionUpdate then
+					P8.onSessionUpdate(config, Count)
 				end
-				emitNotification(p6, t, var9)
-				var9 += 1
+				emitNotification(SessionId, config, Count)
+				Count += 1
 			end,
-			emitToolCall = function(p8)
-				-- upvalues: p2 (copy), var9 (write), emitNotification (copy), p6 (ref)
-				local t = {
+			emitToolCall = function(Update) --[[ Line: 275 ]]
+				-- upvalues: P8 (upval), Count (ref), emitNotification (upval), SessionId (copy)
+				local config = {
 					sessionUpdate = "tool_call_update",
-					toolCallId = p8.toolCallId,
-					title = p8.title,
-					kind = p8.kind,
-					status = p8.status,
-					rawInput = p8.rawInput
+					toolCallId = Update.toolCallId,
+					title = Update.title,
+					kind = Update.kind,
+					status = Update.status,
+					rawInput = Update.rawInput
 				}
 				
-				if p2.onSessionUpdate then
-					p2.onSessionUpdate(t, var9)
+				if P8.onSessionUpdate then
+					P8.onSessionUpdate(config, Count)
 				end
-				emitNotification(p6, t, var9)
-				var9 += 1
+				emitNotification(SessionId, config, Count)
+				Count += 1
 			end,
-			updateToolCall = function(p8, p9)
-				-- upvalues: p2 (copy), var9 (write), emitNotification (copy), p6 (ref)
-				local t = {
+			updateToolCall = function(ToolCallId, Update) --[[ Line: 285 ]]
+				-- upvalues: P8 (upval), Count (ref), emitNotification (upval), SessionId (copy)
+				local config = {
 					sessionUpdate = "tool_call_update",
-					toolCallId = p8,
-					status = p9.status,
-					rawOutput = p9.rawOutput,
-					content = p9.content
+					toolCallId = ToolCallId,
+					status = Update.status,
+					rawOutput = Update.rawOutput,
+					content = Update.content
 				}
 				
-				if p2.onSessionUpdate then
-					p2.onSessionUpdate(t, var9)
+				if P8.onSessionUpdate then
+					P8.onSessionUpdate(config, Count)
 				end
-				emitNotification(p6, t, var9)
-				var9 += 1
+				emitNotification(SessionId, config, Count)
+				Count += 1
 			end,
-			setTitle = function(value)
-				-- upvalues: t (copy), p6 (ref), p2 (copy), var9 (write), emitNotification (copy)
-				local var11 = t[p6]
+			setTitle = function(Title) --[[ Line: 294 ]]
+				-- upvalues: t (upval), SessionId (copy), P8 (upval), Count (ref), emitNotification (upval)
+				local Entry = t[SessionId]
 				
-				if var11 then
-					var11.title = value
-					var11.updatedUtc = DateTime.now():ToIsoDate()
+				if Entry then
+					Entry.title = Title
+					Entry.updatedUtc = DateTime.now():ToIsoDate()
 				end
-				local t_1 = { sessionUpdate = "session_info_update", title = value }
+				local config = { sessionUpdate = "session_info_update", title = Title }
 				
-				if p2.onSessionUpdate then
-					p2.onSessionUpdate(t_1, var9)
+				if P8.onSessionUpdate then
+					P8.onSessionUpdate(config, Count)
 				end
-				emitNotification(p6, t_1, var9)
-				var9 += 1
+				emitNotification(SessionId, config, Count)
+				Count += 1
 			end,
-			finish = function(p8)
-				-- upvalues: var10 (write), p2 (copy), var9 (write), emitNotification (copy), p6 (ref)
-				if var10 then return end
-				var10 = true
-				local t = {
+			finish = function(p4) --[[ Line: 302 ]]
+				-- upvalues: Flag (ref), P8 (upval), Count (ref), emitNotification (upval), SessionId (copy)
+				if Flag then return end
+				Flag = true
+				local config = {
 					sessionUpdate = "state_change",
 					state = "idle",
-					stop_reason = p8 or "end_turn"
+					stop_reason = p4 or "end_turn"
 				}
 				
-				if p2.onSessionUpdate then
-					p2.onSessionUpdate(t, var9)
+				if P8.onSessionUpdate then
+					P8.onSessionUpdate(config, Count)
 				end
-				emitNotification(p6, t, var9)
-				var9 += 1
+				emitNotification(SessionId, config, Count)
+				Count += 1
 			end,
-			fail = function(p8, p9)
-				-- upvalues: failTurn (ref)
-				failTurn(p8, p9)
+			fail = function(Code, Message) --[[ Line: 305 ]]
+				-- upvalues: failTurn (copy)
+				failTurn(Code, Message)
 			end
 		}
-		task.spawn(function()
-			-- upvalues: p2 (copy), defaultResponder (copy), streamWords (copy), chunkDelay (copy), t_3 (ref), failTurn (ref), acpProtocolModule (copy), var10 (write), var9 (write), emitNotification (copy), p6 (ref)
-			local ok, status = pcall(function()
-				-- upvalues: p2 (copy), defaultResponder (copy), streamWords (copy), chunkDelay (copy), t_3 (copy)
-				local respond = p2.respond;
-				(if respond == nil then defaultResponder elseif typeof(respond) == "string" then function(p8)
-					-- upvalues: streamWords (copy), respond (ref), chunkDelay (copy)
-					for i, v in streamWords(respond) do
-						p8.emitText(v)
-						p8.sleep(chunkDelay)
+		task.spawn(function() --[[ Line: 310 ]]
+			-- upvalues: P8 (upval), defaultResponder (upval), streamWords (upval), ChunkDelay (upval), config2 (copy), failTurn (copy), AcpProtocolModule (upval), Flag (ref), Count (ref), emitNotification (upval), SessionId (copy)
+			local Success, Result = pcall(function() --[[ Line: 312 | Named "callResponder" ]]
+				-- upvalues: P8 (upval), defaultResponder (upval), streamWords (upval), ChunkDelay (upval), config2 (upval)
+				local Respond = P8.respond;
+				(if Respond == nil then defaultResponder elseif typeof(Respond) == "string" then function(p4) --[[ Line: 193 ]]
+					-- upvalues: streamWords (upval), Respond (copy), ChunkDelay (upval)
+					for _, value in streamWords(Respond) do
+						p4.emitText(value)
+						p4.sleep(ChunkDelay)
 					end
-					p8.finish("end_turn")
-				end else respond)(t_3)
+					p4.finish("end_turn")
+				end else Respond)(config2)
 				
 				return nil
 			end)
 			
-			if not ok then
-				failTurn(acpProtocolModule.ErrorCodes.InternalError, "Mock responder errored: " .. tostring(status))
+			if not Success then
+				failTurn(AcpProtocolModule.ErrorCodes.InternalError, "Mock responder errored: " .. tostring(Result))
 				
 				return
-			elseif not var10 then
-				if var10 then return end
-				var10 = true
-				local t = {
+			end
+			if not Flag then
+				if Flag then return end
+				Flag = true
+				local config1 = {
 					sessionUpdate = "state_change",
 					state = "idle",
 					stop_reason = "end_turn"
 				}
 				
-				if p2.onSessionUpdate then
-					p2.onSessionUpdate(t, var9)
+				if P8.onSessionUpdate then
+					P8.onSessionUpdate(config1, Count)
 				end
-				emitNotification(p6, t, var9)
-				var9 += 1
+				emitNotification(SessionId, config1, Count)
+				Count += 1
 			end
 		end)
 	end
 	
-	local _ = function(p8)
-		-- upvalues: t (ref), acpProtocolModule (copy)
-		local var11 = t[p8]
+	local _ = function(p4) --[[ Line: 325 | Named "findSession" ]]
+		-- upvalues: t (copy), AcpProtocolModule (upval)
+		local Entry = t[p4]
 		
-		if var11 == nil or var11.closedUtc ~= nil then
+		if Entry == nil or Entry.closedUtc ~= nil then
 			return nil, {
 				message = "session not found",
-				code = acpProtocolModule.ErrorCodes.NotFound
+				code = AcpProtocolModule.ErrorCodes.NotFound
 			}
+		else
+			return Entry, nil
 		end
-		return var11, nil
 	end
 	
-	local function sessionListEntry(p8)
-		local t = {
-			sessionId = p8.sessionId,
-			title = p8.title,
-			updatedAt = p8.updatedUtc
+	local function sessionListEntry(p4) --[[ Line: 333 ]]
+		local config = {
+			sessionId = p4.sessionId,
+			title = p4.title,
+			updatedAt = p4.updatedUtc
 		}
 		
-		if p8.project ~= nil then
-			t._meta = { _roblox = { universeId = p8.project.universeId } }
+		if p4.project ~= nil then
+			config._meta = { _roblox = { universeId = p4.project.universeId } }
 		end
-		return t
+		return config
 	end
 	
-	local t_1 = {
-		[acpProtocolModule.Methods.Initialize] = function()
-			-- upvalues: acpProtocolModule (copy)
+	local config = {
+		[AcpProtocolModule.Methods.Initialize] = function() --[[ Line: 352 ]]
+			-- upvalues: AcpProtocolModule (upval)
 			return {
-				protocolVersion = acpProtocolModule.ProtocolVersion,
+				protocolVersion = AcpProtocolModule.ProtocolVersion,
 				capabilities = {
 					session = {
 						load = {},
@@ -375,175 +382,169 @@ return function(p2)
 				agentInfo = { name = "mock-my-stats-service", version = "0.0.1-mock" }
 			}, nil
 		end,
-		[acpProtocolModule.Methods.SessionNew] = function(p8)
-			-- upvalues: acpProtocolModule (copy), var2 (write), t (ref)
-			local var11 = acpProtocolModule.extractSessionNewProject(p8)
+		[AcpProtocolModule.Methods.SessionNew] = function(p4) --[[ Line: 367 ]]
+			-- upvalues: AcpProtocolModule (upval), Count (ref), t (copy)
+			local ExtractSessionNewProjectResult = AcpProtocolModule.extractSessionNewProject(p4)
 			
-			if var11 == nil then
+			if ExtractSessionNewProjectResult == nil then
 				return nil, {
 					message = "_meta._roblox universeId/placeId is required on session/new",
-					code = acpProtocolModule.ErrorCodes.InvalidParams
+					code = AcpProtocolModule.ErrorCodes.InvalidParams
 				}
+			else
+				Count += 1
+				local MockName: string = ("mock_%08d"):format(Count)
+				local IsoDate = DateTime.now():ToIsoDate()
+				t[MockName] = {
+					title = nil,
+					closedUtc = nil,
+					sessionId = MockName,
+					createdUtc = IsoDate,
+					updatedUtc = IsoDate,
+					project = ExtractSessionNewProjectResult
+				}
+				
+				return { sessionId = MockName }, nil
 			end
-			var2 += 1
-			local var12 = ("mock_%08d"):format(var2)
-			local var13 = DateTime.now():ToIsoDate()
-			t[var12] = {
-				title = nil,
-				closedUtc = nil,
-				sessionId = var12,
-				createdUtc = var13,
-				updatedUtc = var13,
-				project = var11
-			}
-			
-			return { sessionId = var12 }, nil
 		end,
-		[acpProtocolModule.Methods.SessionList] = function(_)
-			-- upvalues: t (ref), sessionListEntry (ref)
-			local t_1 = {}
+		[AcpProtocolModule.Methods.SessionList] = function(_) --[[ Line: 388 ]]
+			-- upvalues: t (copy), sessionListEntry (copy)
+			local List = {}
 			
-			for i, v in t do
-				if v.closedUtc == nil then
-					table.insert(t_1, sessionListEntry(v))
+			for _, value in t do
+				if value.closedUtc == nil then
+					table.insert(List, (sessionListEntry(value)))
 				end
 			end
-			table.sort(t_1, function(p8, p9)
-				return (p9.updatedAt or "") < (p8.updatedAt or "")
+			table.sort(List, function(A, B): boolean --[[ Line: 395 ]]
+				return (B.updatedAt or "") < (A.updatedAt or "")
 			end)
 			
-			return { sessions = t_1 }, nil
+			return { sessions = List }, nil
 		end,
-		[acpProtocolModule.Methods.SessionFindByUniverse] = function(p8)
-			-- upvalues: acpProtocolModule (copy), t (ref), sessionListEntry (ref)
-			if typeof(p8.universeId) ~= "number" or p8.universeId == 0 then
+		[AcpProtocolModule.Methods.SessionFindByUniverse] = function(p4) --[[ Line: 400 ]]
+			-- upvalues: AcpProtocolModule (upval), t (copy), sessionListEntry (copy)
+			if typeof(p4.universeId) ~= "number" or p4.universeId == 0 then
 				return nil, {
 					message = "universeId is required",
-					code = acpProtocolModule.ErrorCodes.InvalidParams
+					code = AcpProtocolModule.ErrorCodes.InvalidParams
 				}
 			end
-			local t_1 = {}
+			local List = {}
 			
-			for i, v in t do
-				if v.closedUtc == nil and v.project ~= nil and v.project.universeId == p8.universeId then
-					table.insert(t_1, sessionListEntry(v))
+			for _, value in t do
+				if value.closedUtc == nil and value.project ~= nil and value.project.universeId == p4.universeId then
+					table.insert(List, (sessionListEntry(value)))
 				end
 			end
-			table.sort(t_1, function(p9, p10)
-				return (p10.updatedAt or "") < (p9.updatedAt or "")
+			table.sort(List, function(A, B): boolean --[[ Line: 418 ]]
+				return (B.updatedAt or "") < (A.updatedAt or "")
 			end)
 			
-			return { sessions = t_1 }, nil
+			return { sessions = List }, nil
 		end,
-		[acpProtocolModule.Methods.SessionLoad] = function(p9)
-			-- upvalues: t (ref), acpProtocolModule (copy)
-			local var11, t_1
-			local sessionId = t[p9.sessionId]
+		[AcpProtocolModule.Methods.SessionLoad] = function(p5) --[[ Line: 423 ]]
+			-- upvalues: t (copy), AcpProtocolModule (upval)
+			local Entry = t[p5.sessionId]
+			local v2 = nil
+			local config = nil
 			
-			if sessionId == nil or sessionId.closedUtc ~= nil then
-				var11 = nil
-				t_1 = {
+			if Entry == nil or Entry.closedUtc ~= nil then
+				v2 = nil
+				config = {
 					message = "session not found",
-					code = acpProtocolModule.ErrorCodes.NotFound
+					code = AcpProtocolModule.ErrorCodes.NotFound
 				}
 			else
-				var11 = sessionId
-				t_1 = nil
+				v2 = Entry
+				config = nil
 			end
-			if t_1 then
-				return nil, t_1
-			end
-			return {
-				_meta = {
-					_roblox = {
-						universeId = if var11.project ~= nil then nil else var11.project.universeId
+			if config then
+				return nil, config
+			else
+				return {
+					_meta = {
+						_roblox = {
+							universeId = if v2.project == nil then nil else v2.project.universeId
+						}
 					}
-				}
-			}, nil
+				}, nil
+			end
 		end,
-		[acpProtocolModule.Methods.SessionReadTasks] = function(p9)
-			-- upvalues: t (ref), acpProtocolModule (copy)
-			local var11, t_1
-			local sessionId = t[p9.sessionId]
+		[AcpProtocolModule.Methods.SessionReadTasks] = function(p5) --[[ Line: 439 ]]
+			-- upvalues: t (copy), AcpProtocolModule (upval)
+			local Entry = t[p5.sessionId]
+			local Config = if Entry == nil or Entry.closedUtc ~= nil then {
+				message = "session not found",
+				code = AcpProtocolModule.ErrorCodes.NotFound
+			} else nil
 			
-			if sessionId == nil or sessionId.closedUtc ~= nil then
-				var11 = nil
-				t_1 = {
-					message = "session not found",
-					code = acpProtocolModule.ErrorCodes.NotFound
-				}
+			if Config then
+				return nil, Config
 			else
-				var11 = sessionId
-				t_1 = nil
+				return { tasks = {} }, nil
 			end
-			if t_1 then
-				return nil, t_1
-			end
-			return { tasks = {} }, nil
 		end,
-		[acpProtocolModule.Methods.SessionCancel] = function(p9)
-			-- upvalues: t (ref), acpProtocolModule (copy)
-			local var11, t_1
-			local sessionId = t[p9.sessionId]
+		[AcpProtocolModule.Methods.SessionCancel] = function(p5) --[[ Line: 446 ]]
+			-- upvalues: t (copy), AcpProtocolModule (upval)
+			local Entry = t[p5.sessionId]
+			local Config = if Entry == nil or Entry.closedUtc ~= nil then {
+				message = "session not found",
+				code = AcpProtocolModule.ErrorCodes.NotFound
+			} else nil
 			
-			if sessionId == nil or sessionId.closedUtc ~= nil then
-				var11 = nil
-				t_1 = {
-					message = "session not found",
-					code = acpProtocolModule.ErrorCodes.NotFound
-				}
+			if Config then
+				return nil, Config
 			else
-				var11 = sessionId
-				t_1 = nil
+				return {}, nil
 			end
-			if t_1 then
-				return nil, t_1
-			end
-			return {}, nil
 		end,
-		[acpProtocolModule.Methods.SessionDelete] = function(p9)
-			-- upvalues: t (ref), acpProtocolModule (copy)
-			local sessionId = t[p9.sessionId]
+		[AcpProtocolModule.Methods.SessionDelete] = function(p5) --[[ Line: 454 ]]
+			-- upvalues: t (copy), AcpProtocolModule (upval)
+			local Entry = t[p5.sessionId]
 			
-			if sessionId == nil then
+			if Entry == nil then
 				return nil, {
 					message = "session not found",
-					code = acpProtocolModule.ErrorCodes.NotFound
-				}
-			end
-			sessionId.closedUtc = DateTime.now():ToIsoDate()
-			
-			return {}, nil
-		end,
-		[acpProtocolModule.Methods.SessionUpdateInfo] = function(p9)
-			-- upvalues: t (ref), acpProtocolModule (copy)
-			local var11, t_1
-			local sessionId = t[p9.sessionId]
-			
-			if sessionId == nil or sessionId.closedUtc ~= nil then
-				var11 = nil
-				t_1 = {
-					message = "session not found",
-					code = acpProtocolModule.ErrorCodes.NotFound
+					code = AcpProtocolModule.ErrorCodes.NotFound
 				}
 			else
-				var11 = sessionId
-				t_1 = nil
+				Entry.closedUtc = DateTime.now():ToIsoDate()
+				
+				return {}, nil
 			end
-			if t_1 then
-				return nil, t_1
-			elseif p9.title ~= nil then
-				var11.title = p9.title
-				var11.updatedUtc = DateTime.now():ToIsoDate()
+		end,
+		[AcpProtocolModule.Methods.SessionUpdateInfo] = function(p5) --[[ Line: 462 ]]
+			-- upvalues: t (copy), AcpProtocolModule (upval)
+			local Entry = t[p5.sessionId]
+			local v2 = nil
+			local config = nil
+			
+			if Entry == nil or Entry.closedUtc ~= nil then
+				v2 = nil
+				config = {
+					message = "session not found",
+					code = AcpProtocolModule.ErrorCodes.NotFound
+				}
+			else
+				v2 = Entry
+				config = nil
+			end
+			if config then
+				return nil, config
+			end
+			if p5.title ~= nil then
+				v2.title = p5.title
+				v2.updatedUtc = DateTime.now():ToIsoDate()
 			end
 			return {}, nil
 		end,
-		[acpProtocolModule.Methods.SessionSaveAndPublish] = function(_)
+		[AcpProtocolModule.Methods.SessionSaveAndPublish] = function(_) --[[ Line: 474 ]]
 			return { status = "success", version = "1" }, nil
 		end,
-		[acpProtocolModule.Methods.AdCampaignEligibility] = function(p9)
-			-- upvalues: acpProtocolModule (copy)
-			if typeof(p9.universeId) == "number" and p9.universeId > 0 then
+		[AcpProtocolModule.Methods.AdCampaignEligibility] = function(p5) --[[ Line: 477 ]]
+			-- upvalues: AcpProtocolModule (upval)
+			if typeof(p5.universeId) == "number" and p5.universeId > 0 then
 				return {
 					schemaVersion = 2,
 					userEligible = true,
@@ -567,98 +568,106 @@ return function(p2)
 						}
 					}
 				}, nil
-			end
-			return nil, {
-				message = "universeId is required",
-				code = acpProtocolModule.ErrorCodes.InvalidParams
-			}
-		end,
-		[acpProtocolModule.Methods.AdCampaignCheckFunds] = function(p9)
-			-- upvalues: acpProtocolModule (copy)
-			if p9.campaignOption == "feedback" or p9.campaignOption == "plays" then
-				return { canFund = true, fundingSource = "robux" }, nil
-			end
-			return nil, {
-				message = "campaignOption is required",
-				code = acpProtocolModule.ErrorCodes.InvalidParams
-			}
-		end,
-		[acpProtocolModule.Methods.AdCampaignCreate] = function(p9)
-			-- upvalues: acpProtocolModule (copy)
-			if typeof(p9.universeId) ~= "number" or p9.universeId <= 0 then
+			else
 				return nil, {
 					message = "universeId is required",
-					code = acpProtocolModule.ErrorCodes.InvalidParams
+					code = AcpProtocolModule.ErrorCodes.InvalidParams
 				}
-			elseif typeof(p9.idempotencyKey) == "string" and p9.idempotencyKey ~= "" then
+			end
+		end,
+		[AcpProtocolModule.Methods.AdCampaignCheckFunds] = function(p5) --[[ Line: 509 ]]
+			-- upvalues: AcpProtocolModule (upval)
+			if p5.campaignOption == "feedback" or p5.campaignOption == "plays" then
+				return { canFund = true, fundingSource = "robux" }, nil
+			else
+				return nil, {
+					message = "campaignOption is required",
+					code = AcpProtocolModule.ErrorCodes.InvalidParams
+				}
+			end
+		end,
+		[AcpProtocolModule.Methods.AdCampaignCreate] = function(p5) --[[ Line: 518 ]]
+			-- upvalues: AcpProtocolModule (upval)
+			if typeof(p5.universeId) ~= "number" or p5.universeId <= 0 then
+				return nil, {
+					message = "universeId is required",
+					code = AcpProtocolModule.ErrorCodes.InvalidParams
+				}
+			elseif typeof(p5.idempotencyKey) == "string" and p5.idempotencyKey ~= "" then
 				return {
 					campaignId = "mock_campaign_0001",
 					status = "in_review",
-					toolCallId = p9.toolCallId
+					toolCallId = p5.toolCallId
 				}, nil
+			else
+				return nil, {
+					message = "idempotencyKey is required",
+					code = AcpProtocolModule.ErrorCodes.InvalidParams
+				}
 			end
-			return nil, {
-				message = "idempotencyKey is required",
-				code = acpProtocolModule.ErrorCodes.InvalidParams
-			}
 		end
 	}
 	
-	local function dispatch(p9)
-		-- upvalues: acpProtocolModule (copy), t (ref), jsonError (copy), httpStatusForCode (copy), runResponder (ref), jsonOk (copy), t_1 (ref)
-		local var11
-		if p9.method == acpProtocolModule.Methods.SessionPrompt then
-			local var12, t_2
-			var11 = t[p9.params.sessionId]
+	local function dispatch(p5) --[[ Line: 534 ]]
+		-- upvalues: AcpProtocolModule (upval), t (copy), jsonError (upval), httpStatusForCode (upval), runResponder (copy), jsonOk (upval), config (copy)
+		if p5.method == AcpProtocolModule.Methods.SessionPrompt then
+			local Entry = t[p5.params.sessionId]
+			local v2 = nil
+			local config1 = nil
 			
-			if var11 == nil or var11.closedUtc ~= nil then
-				var12 = nil
-				t_2 = {
+			if Entry == nil or Entry.closedUtc ~= nil then
+				v2 = nil
+				config1 = {
 					message = "session not found",
-					code = acpProtocolModule.ErrorCodes.NotFound
+					code = AcpProtocolModule.ErrorCodes.NotFound
 				}
 			else
-				var12 = var11
-				t_2 = nil
+				v2 = Entry
+				config1 = nil
 			end
-			if t_2 then
-				return jsonError(p9.id, t_2.code, t_2.message, httpStatusForCode(t_2.code))
+			if config1 then
+				return (jsonError(p5.id, config1.code, config1.message, (httpStatusForCode(config1.code))))
+			else
+				v2.updatedUtc = DateTime.now():ToIsoDate()
+				runResponder(p5.id, p5.params.sessionId, p5.params.prompt or {})
+				
+				return (jsonOk(p5.id, {}))
 			end
-			var12.updatedUtc = DateTime.now():ToIsoDate()
-			runResponder(p9.id, p9.params.sessionId, p9.params.prompt or {})
-			
-			return jsonOk(p9.id, {})
 		else
-			local method = t_1[p9.method]
+			local Entry1 = config[p5.method]
 			
-			if method == nil then
-				return jsonError(p9.id, acpProtocolModule.ErrorCodes.MethodNotFound, "Method not found: " .. p49.method, 404)
+			if Entry1 == nil then
+				return (jsonError(p5.id, AcpProtocolModule.ErrorCodes.MethodNotFound, "Method not found: " .. p5.method, 404))
+			else
+				local Success, Result, Result3 = pcall(Entry1, p5.params or {})
+				
+				return if Success then if Result3 then jsonError(p5.id, Result3.code, Result3.message, (httpStatusForCode(Result3.code))) else jsonOk(p5.id, Result) else jsonError(p5.id, AcpProtocolModule.ErrorCodes.InternalError, tostring(Result), 500)
 			end
-			ok, status, var58 = pcall(method, p9.params or {})
-			
-			return if ok then if var11 then jsonError(p9.id, var11.code, var11.message, httpStatusForCode(var11.code)) else jsonOk(p9.id, status) else jsonError(p9.id, acpProtocolModule.ErrorCodes.InternalError, tostring(status), 500)
 		end
 	end
 	
-	return createCreatorAgentChatStoreModule({
+	v1 = CreateCreatorAgentChatStoreModule({
 		baseUrl = "mock://my-stats/v2",
 		network = {
-			request = function(p9, p10)
-				-- upvalues: httpService (copy), dispatch (ref)
-				local var11 = httpService:JSONDecode(p9.body or "{}")
+			request = function(p5, Callback: (any, any) -> ()) --[[ Line: 563 ]]
+				-- upvalues: HttpService (upval), dispatch (copy)
+				local Data = HttpService:JSONDecode(p5.body or "{}")
 				
-				if typeof(var11) == "table" and typeof(var11.result) == "table" and var11.result.tool_name == "ask_tool" then
-					p10(true, {
+				if typeof(Data) == "table" and typeof(Data.result) == "table" and Data.result.tool_name == "ask_tool" then
+					Callback(true, {
 						statusCode = 200,
 						responseBody = "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{}}"
 					})
 					
-					return function() end
+					return function() --[[ Line: 571 ]] end
+				else
+					Callback(true, (dispatch(Data)))
+					
+					return function() --[[ Line: 574 ]] end
 				end
-				p10(true, dispatch(var11))
-				
-				return function() end
 			end
 		}
 	})
+	
+	return v1
 end

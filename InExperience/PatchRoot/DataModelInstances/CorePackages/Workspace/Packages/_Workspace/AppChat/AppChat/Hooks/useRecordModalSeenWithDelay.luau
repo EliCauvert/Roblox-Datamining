@@ -1,66 +1,63 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local appChatNetworkingModule = require(parent.AppChatNetworking)
-local reactModule = require(parent.React)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local clearTimeout = luauPolyfillModule.clearTimeout
-local setTimeout = luauPolyfillModule.setTimeout
-local statusCodes = require(parent.Http).StatusCodes
-local loggerModule = require(appChat.Logger)
-local useRecordModalSequenceResponseForConversationModule = require(appChat.Hooks.useRecordModalSequenceResponseForConversation)
-local fFlagAppChatEnableDoubleOptIn = require(parent.SharedFlags).FFlagAppChatEnableDoubleOptIn
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local AppChatNetworkingModule = require(Parent.AppChatNetworking)
+local ReactModule = require(Parent.React)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local ClearTimeoutFunction = LuauPolyfillModule.clearTimeout
+local SetTimeoutFunction = LuauPolyfillModule.setTimeout
+local StatusCodes = require(Parent.Http).StatusCodes
+local LoggerModule = require(AppChat.Logger)
+local UseRecordModalSequenceResponseForConversationModule = require(AppChat.Hooks.useRecordModalSequenceResponseForConversation)
+local FFlagAppChatEnableDoubleOptIn = require(Parent.SharedFlags).FFlagAppChatEnableDoubleOptIn
 
-return function(p1)
-	-- upvalues: useDispatch (ref), reactModule (ref), useRecordModalSequenceResponseForConversationModule (ref), fFlagAppChatEnableDoubleOptIn (ref), appChatNetworkingModule (ref), statusCodes (ref), loggerModule (ref), setTimeout (ref), clearTimeout (ref)
-	local var1 = useDispatch()
-	local var2, var3 = reactModule.useState(false)
-	local var4 = useRecordModalSequenceResponseForConversationModule(p1.conversationId)
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref)
-		var3(false)
+return function(p1) --[[ Line: 26 | Named "useRecordModalSeenWithDelay" ]]
+	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), UseRecordModalSequenceResponseForConversationModule (copy), FFlagAppChatEnableDoubleOptIn (copy), AppChatNetworkingModule (copy), StatusCodes (copy), LoggerModule (copy), SetTimeoutFunction (copy), ClearTimeoutFunction (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseRecordModalSequenceResponseForConversationModuleResult = UseRecordModalSequenceResponseForConversationModule(p1.conversationId)
+	ReactModule.useEffect(function() --[[ Line: 32 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(false)
 	end, {
 		p1.modalSequence,
 		p1.modalId,
 		p1.conversationId,
-		if fFlagAppChatEnableDoubleOptIn then p1.modalVariant else nil
+		if FFlagAppChatEnableDoubleOptIn then p1.modalVariant else nil
 	})
-	local modalId = p1.canRecordAction and (not var2 and (p1.actionToRecord and (p1.modalSequence and p1.modalId)))
-	
-	if fFlagAppChatEnableDoubleOptIn then
-		modalId = p1.canRecordAction and (not var2 and (p1.actionToRecord and (p1.modalSequence and (p1.modalId or p1.modalVariant))))
-	end
-	local var5 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref), var4 (ref), var1 (ref), appChatNetworkingModule (copy), statusCodes (copy), var3 (ref), loggerModule (copy)
-		local actionToRecord = p1.actionToRecord;
-		(if p1.conversationId then var4(actionToRecord, p1.modalSequence, p1.modalId, p1.modalVariant) else var1(appChatNetworkingModule.rodux.RecordModalSequenceResponse.API(actionToRecord, p1.modalSequence, p1.modalId))):andThen(function(p2)
-			-- upvalues: statusCodes (copy), var3 (copy)
-			if p2 and p2.responseCode == statusCodes.OK then
-				var3(true)
+	local ModalId = if FFlagAppChatEnableDoubleOptIn then p1.canRecordAction and (not UseStateResult and (p1.actionToRecord and (p1.modalSequence and (p1.modalId or p1.modalVariant)))) else p1.canRecordAction and (not UseStateResult and (p1.actionToRecord and (p1.modalSequence and p1.modalId)))
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 56 ]]
+		-- upvalues: p1 (copy), UseRecordModalSequenceResponseForConversationModuleResult (copy), UseDispatchResult (copy), AppChatNetworkingModule (upval), StatusCodes (upval), UseStateResult2 (copy), LoggerModule (upval)
+		local ActionToRecord = p1.actionToRecord;
+		(if p1.conversationId then UseRecordModalSequenceResponseForConversationModuleResult(ActionToRecord, p1.modalSequence, p1.modalId, p1.modalVariant) else UseDispatchResult(AppChatNetworkingModule.rodux.RecordModalSequenceResponse.API(ActionToRecord, p1.modalSequence, p1.modalId))):andThen(function(Result) --[[ Line: 74 ]]
+			-- upvalues: StatusCodes (upval), UseStateResult2 (upval)
+			if Result and Result.responseCode == StatusCodes.OK then
+				UseStateResult2(true)
 			end
-		end):catch(function(p2)
-			-- upvalues: loggerModule (copy), p1 (copy)
-			loggerModule:warning(`Error in {p1.modalSequence} {p1.modalId} -> RecordModalSequenceResponse seen: {tostring(p2)}`)
+		end):catch(function(Err) --[[ Line: 79 ]]
+			-- upvalues: LoggerModule (upval), p1 (upval)
+			LoggerModule:warning(`Error in {p1.modalSequence} {p1.modalId} -> RecordModalSequenceResponse seen: {tostring(Err)}`)
 		end)
 	end, {
-		var1, p1.actionToRecord, p1.modalId, p1.modalSequence, p1.conversationId, var4
+		UseDispatchResult, p1.actionToRecord, p1.modalId, p1.modalSequence,
+		p1.conversationId, UseRecordModalSequenceResponseForConversationModuleResult
 	})
-	reactModule.useEffect(function()
-		-- upvalues: modalId (write), p1 (ref), setTimeout (copy), var5 (ref), clearTimeout (copy)
-		local var6 = nil
+	ReactModule.useEffect(function() --[[ Line: 97 ]]
+		-- upvalues: ModalId (ref), p1 (copy), SetTimeoutFunction (upval), UseResult (copy), ClearTimeoutFunction (upval)
+		local v1 = nil
 		
-		if modalId then
+		if ModalId then
 			if p1.delayMs and p1.delayMs > 0 then
-				var6 = setTimeout(var5, p1.delayMs)
+				v1 = SetTimeoutFunction(UseResult, p1.delayMs)
 			else
-				var5()
+				UseResult()
 			end
 		end
-		return function()
-			-- upvalues: var6 (write), clearTimeout (copy)
-			if var6 then
-				clearTimeout(var6)
+		return function() --[[ Line: 106 ]]
+			-- upvalues: v1 (ref), ClearTimeoutFunction (upval)
+			if v1 then
+				ClearTimeoutFunction(v1)
 			end
 		end
-	end, { p1.delayMs, var5, modalId })
+	end, { p1.delayMs, UseResult, ModalId })
 end

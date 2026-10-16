@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent.Parent._Workspace.GenericAbuseReporting.GenericAbuseReporting.UXFlow.DualDropdownReport.DualDropdownReport)
+﻿return (require(script.Parent.Parent.Parent.Parent._Workspace.GenericAbuseReporting.GenericAbuseReporting.UXFlow.DualDropdownReport.DualDropdownReport))

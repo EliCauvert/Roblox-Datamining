@@ -1,7 +1,7 @@
-﻿local reactModule = require(script:FindFirstAncestor("Foundation").Parent.React)
-local inputGroupContextModule = require(script.Parent.InputGroupContext)
+﻿local ReactModule = require(script:FindFirstAncestor("Foundation").Parent.React)
+local InputGroupContextModule = require(script.Parent.InputGroupContext)
 
-return function()
-	-- upvalues: reactModule (ref), inputGroupContextModule (ref)
-	return reactModule.useContext(inputGroupContextModule)
+return function() --[[ Line: 9 | Named "useInputGroup" ]]
+	-- upvalues: ReactModule (copy), InputGroupContextModule (copy)
+	return ReactModule.useContext(InputGroupContextModule)
 end

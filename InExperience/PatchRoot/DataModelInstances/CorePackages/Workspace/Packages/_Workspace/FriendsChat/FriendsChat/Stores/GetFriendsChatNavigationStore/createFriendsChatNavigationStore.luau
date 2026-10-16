@@ -1,69 +1,71 @@
-﻿local parent = script:FindFirstAncestor("FriendsChat").Parent
-local signalsModule = require(parent.Signals)
-local createSignal = signalsModule.createSignal
-local getConversationStoreModule = require(parent.AppChat.GetConversationStore)
-local getFFlagAppChatEnableRootedNavigationModule = require(parent.AppChat.getFFlagAppChatEnableRootedNavigation)
+﻿local Parent = script:FindFirstAncestor("FriendsChat").Parent
+local SignalsModule = require(Parent.Signals)
+local CreateSignalFunction = SignalsModule.createSignal
+local GetConversationStoreModule = require(Parent.AppChat.GetConversationStore)
+local GetFFlagAppChatEnableRootedNavigationModule = require(Parent.AppChat.getFFlagAppChatEnableRootedNavigation)
 
-return function()
-	-- upvalues: createSignal (ref), getFFlagAppChatEnableRootedNavigationModule (ref), signalsModule (ref), getConversationStoreModule (ref)
-	local var1, var2 = createSignal(nil)
-	local var3, var4 = createSignal(nil)
-	local var5, var6 = createSignal(nil)
-	local var7, var8 = createSignal(false)
-	local var9 = var1
+return function() --[[ Line: 39 ]]
+	-- upvalues: CreateSignalFunction (copy), GetFFlagAppChatEnableRootedNavigationModule (copy), SignalsModule (copy), GetConversationStoreModule (copy)
+	local Signal, Signal2 = CreateSignalFunction(nil)
+	local Signal1, Signal2_1 = CreateSignalFunction(nil)
+	local Signal3, Signal2_2 = CreateSignalFunction(nil)
+	local Signal4, Signal2_3 = CreateSignalFunction(false)
+	local Callback = Signal
 	
-	local var10 = function() end
+	local function Effect() --[[ Line: 48 ]] end
 	
-	if getFFlagAppChatEnableRootedNavigationModule() then
-		var9 = signalsModule.createComputed(function(p1)
-			-- upvalues: var1 (ref), getConversationStoreModule (copy)
-			local var11 = var1(p1)
+	if GetFFlagAppChatEnableRootedNavigationModule() then
+		Callback = SignalsModule.createComputed(function(p1) --[[ Line: 50 ]]
+			-- upvalues: Signal (copy), GetConversationStoreModule (upval)
+			local SignalResult = Signal(p1)
 			
-			return if var11 == nil then nil elseif getConversationStoreModule(p1).getConversation(var11, p1) == nil then nil else var11
+			return if SignalResult == nil then nil elseif GetConversationStoreModule(p1).getConversation(SignalResult, p1) == nil then nil else SignalResult
 		end)
-		local var11 = nil
-		var10 = signalsModule.createEffect(function(p1)
-			-- upvalues: var1 (ref), var9 (write), var11 (write), var2 (ref)
-			local var12 = var1(p1)
-			local var13 = var9(p1)
+		local v1 = nil
+		Effect = SignalsModule.createEffect(function(p1) --[[ Line: 59 ]]
+			-- upvalues: Signal (copy), Callback (ref), v1 (ref), Signal2 (copy)
+			local SignalResult = Signal(p1)
+			local CallbackResult = Callback(p1)
 			
-			if var13 ~= nil then
-				var11 = var13
-				
-				return
-			elseif var12 == nil or var12 ~= var11 then
-				var11 = nil
+			if CallbackResult ~= nil then
+				v1 = CallbackResult
 				
 				return
 			end
-			var11 = nil
-			var2(nil)
+			if SignalResult == nil or SignalResult ~= v1 then
+				v1 = nil
+				
+				return
+			else
+				v1 = nil
+				Signal2(nil)
+			end
 		end)
 	end
 	return {
-		getSelectedConversationId = var1,
-		getEffectiveConversationId = var9,
-		setSelectedConversationId = var2,
-		getFocusInputBarRequestTime = var3,
-		requestFocusInputBar = function(p1)
-			-- upvalues: var4 (ref)
-			var4(p1 or os.clock())
+		getSelectedConversationId = Signal,
+		getEffectiveConversationId = Callback,
+		setSelectedConversationId = Signal2,
+		getFocusInputBarRequestTime = Signal1,
+		requestFocusInputBar = function(p1) --[[ Line: 78 ]]
+			-- upvalues: Signal2_1 (copy)
+			Signal2_1(p1 or os.clock())
 		end,
-		clearFocusInputBarRequest = function()
-			-- upvalues: var4 (ref)
-			var4(nil)
+		clearFocusInputBarRequest = function() --[[ Line: 81 ]]
+			-- upvalues: Signal2_1 (copy)
+			Signal2_1(nil)
 		end,
-		getConversationListFocusRequestTime = var5,
-		requestFocusConversationList = function(p1)
-			-- upvalues: var6 (ref)
-			var6(p1 or os.clock())
+		getConversationListFocusRequestTime = Signal3,
+		requestFocusConversationList = function(p1) --[[ Line: 85 ]]
+			-- upvalues: Signal2_2 (copy)
+			Signal2_2(p1 or os.clock())
 		end,
-		clearConversationListFocusRequest = function()
-			-- upvalues: var6 (ref)
-			var6(nil)
+		clearConversationListFocusRequest = function() --[[ Line: 88 ]]
+			-- upvalues: Signal2_2 (copy)
+			Signal2_2(nil)
 		end,
-		getIsInputBarFocused = var7,
-		setInputBarFocused = var8,
-		cleanup = var10
+		getIsInputBarFocused = Signal4,
+		setInputBarFocused = Signal2_3,
+		cleanup = Effect
 	}
 end

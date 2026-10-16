@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("ServerTriggeredModals").Parent.Loggers).Logger:new("ServerTriggeredModals")
+﻿return (require(script:FindFirstAncestor("ServerTriggeredModals").Parent.Loggers).Logger:new("ServerTriggeredModals"))

@@ -1,7 +1,7 @@
-﻿local setAliasAnalyticsContextModule = require(script.Parent.SetAliasAnalyticsContext)
-local react = require(script.Parent.Parent.dependencies).React
+﻿local SetAliasAnalyticsContextModule = require(script.Parent.SetAliasAnalyticsContext)
+local React = require(script.Parent.Parent.dependencies).React
 
-return function()
-	-- upvalues: react (ref), setAliasAnalyticsContextModule (ref)
-	return react.useContext(setAliasAnalyticsContextModule)
+return function() --[[ Line: 8 ]]
+	-- upvalues: React (copy), SetAliasAnalyticsContextModule (copy)
+	return React.useContext(SetAliasAnalyticsContextModule)
 end

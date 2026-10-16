@@ -1,69 +1,69 @@
-﻿local parent = script.Parent.Parent
-local messageBus = require(parent.MessageBus).MessageBus
-local promiseModule = require(parent.Promise)
-local tModule = require(parent.t)
+﻿local Parent = script.Parent.Parent
+local MessageBus = require(Parent.MessageBus).MessageBus
+local PromiseModule = require(Parent.Promise)
+local TModule = require(Parent.t)
 local _ = require(script.Parent.SMSProtocolTypes)
-local t = {
+local SMSProtocolModule = {
 	SEND_SMS_PROTOCOL_METHOD_REQUEST_DESCRIPTOR = {
 		protocolName = "SMSProtocol",
 		methodName = "sendSMS",
-		validateParams = tModule.strictInterface({ address = tModule.string, message = tModule.string })
+		validateParams = TModule.strictInterface({ address = TModule.string, message = TModule.string })
 	},
 	SEND_SMS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR = {
 		protocolName = "SMSProtocol",
 		methodName = "sendSMS",
-		validateParams = tModule.strictInterface({ sent = tModule.optional(tModule.boolean) })
+		validateParams = TModule.strictInterface({ sent = TModule.optional(TModule.boolean) })
 	},
 	SUPPORTS_SMS_PROTOCOL_METHOD_REQUEST_DESCRIPTOR = {
 		protocolName = "SMSProtocol",
 		methodName = "supportsSMS",
-		validateParams = tModule.table
+		validateParams = TModule.table
 	},
 	SUPPORTS_SMS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR = {
 		protocolName = "SMSProtocol",
 		methodName = "supportsSMS",
-		validateParams = tModule.table
+		validateParams = TModule.table
 	}
 }
-t.__index = t
+SMSProtocolModule.__index = SMSProtocolModule
 
-function t.new()
-	-- upvalues: messageBus (ref), t (ref)
-	return setmetatable({ subscriber = messageBus.Subscriber.new() }, t)
+function SMSProtocolModule.new() --[[ Line: 59 ]]
+	-- upvalues: MessageBus (copy), SMSProtocolModule (copy)
+	return (setmetatable({ subscriber = MessageBus.Subscriber.new() }, SMSProtocolModule))
 end
 
-function t:sendSMS(p1)
-	-- upvalues: promiseModule (ref), messageBus (ref)
-	local var1 = promiseModule.new(function(p2, _)
-		-- upvalues: self (ref)
-		local SEND_SMS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR = self.SEND_SMS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR
-		self.subscriber:subscribeProtocolMethodResponse(SEND_SMS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR, function(p3)
-			-- upvalues: self (copy), SEND_SMS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR (ref), p2 (ref)
-			self.subscriber:unsubscribeToProtocolMethodResponse(SEND_SMS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR)
-			p2(p3)
+function SMSProtocolModule:sendSMS(p1) --[[ Line: 72 ]]
+	-- upvalues: PromiseModule (copy), MessageBus (copy)
+	local NewPromise = PromiseModule.new(function(Callback, _) --[[ Line: 73 ]]
+		-- upvalues: self (copy)
+		local SENDSMSPROTOCOLMETHODRESPONSEDESCRIPTOR = self.SEND_SMS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR
+		self.subscriber:subscribeProtocolMethodResponse(SENDSMSPROTOCOLMETHODRESPONSEDESCRIPTOR, function(p2) --[[ Line: 75 ]]
+			-- upvalues: self (upval), SENDSMSPROTOCOLMETHODRESPONSEDESCRIPTOR (copy), Callback (copy)
+			self.subscriber:unsubscribeToProtocolMethodResponse(SENDSMSPROTOCOLMETHODRESPONSEDESCRIPTOR)
+			Callback(p2)
 		end)
 	end)
-	messageBus.publishProtocolMethodRequest(self.SEND_SMS_PROTOCOL_METHOD_REQUEST_DESCRIPTOR, p1, {})
+	MessageBus.publishProtocolMethodRequest(self.SEND_SMS_PROTOCOL_METHOD_REQUEST_DESCRIPTOR, p1, {})
 	
-	return var1
+	return NewPromise
 end
 
-function t:supportsSMS()
-	-- upvalues: promiseModule (ref), messageBus (ref)
-	local var1 = promiseModule.new(function(p1, _)
-		-- upvalues: self (ref)
-		local SUPPORTS_SMS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR = self.SUPPORTS_SMS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR
-		self.subscriber:subscribeProtocolMethodResponse(SUPPORTS_SMS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR, function(p2)
-			-- upvalues: self (copy), SUPPORTS_SMS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR (ref), p1 (ref)
-			self.subscriber:unsubscribeToProtocolMethodResponse(SUPPORTS_SMS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR)
-			p1(p2.support)
+function SMSProtocolModule:supportsSMS() --[[ Line: 93 ]]
+	-- upvalues: PromiseModule (copy), MessageBus (copy)
+	local NewPromise = PromiseModule.new(function(Callback, _) --[[ Line: 94 ]]
+		-- upvalues: self (copy)
+		local SUPPORTSSMSPROTOCOLMETHODRESPONSEDESCRIPTOR = self.SUPPORTS_SMS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR
+		self.subscriber:subscribeProtocolMethodResponse(SUPPORTSSMSPROTOCOLMETHODRESPONSEDESCRIPTOR, function(p1) --[[ Line: 96 ]]
+			-- upvalues: self (upval), SUPPORTSSMSPROTOCOLMETHODRESPONSEDESCRIPTOR (copy), Callback (copy)
+			self.subscriber:unsubscribeToProtocolMethodResponse(SUPPORTSSMSPROTOCOLMETHODRESPONSEDESCRIPTOR)
+			Callback(p1.support)
 		end)
 	end)
-	messageBus.publishProtocolMethodRequest(self.SUPPORTS_SMS_PROTOCOL_METHOD_REQUEST_DESCRIPTOR, { includeStatus = false }, {})
+	MessageBus.publishProtocolMethodRequest(self.SUPPORTS_SMS_PROTOCOL_METHOD_REQUEST_DESCRIPTOR, { includeStatus = false }, {})
 	
-	return var1
+	return NewPromise
 end
 
-t.default = t.new()
+SMSProtocolModule.default = SMSProtocolModule.new()
 
-return t
+return SMSProtocolModule

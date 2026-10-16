@@ -1,87 +1,86 @@
-﻿local parent = script:FindFirstAncestor("AuthCommon").Parent
-local argCheckModule = require(parent.ArgCheck)
-local tModule = require(parent.t)
-local fFlagEnableLuaAccountSwitch = require(parent.SharedFlags).FFlagEnableLuaAccountSwitch
+﻿local Parent = script:FindFirstAncestor("AuthCommon").Parent
+local ArgCheckModule = require(Parent.ArgCheck)
+local TModule = require(Parent.t)
+local FFlagEnableLuaAccountSwitch = require(Parent.SharedFlags).FFlagEnableLuaAccountSwitch
 local t = {}
-local t_1 = {}
-t[t_1] = true
-local var1 = tModule.interface({
-	user = tModule.interface({ id = tModule.number, name = tModule.string }),
-	twoStepVerificationData = tModule.optional(tModule.interface({ mediaType = tModule.string, ticket = tModule.string })),
-	twoStepVerificationDataV2 = tModule.optional(tModule.interface({ mediaType = tModule.string, ticket = tModule.string })),
-	accountBlob = tModule.optional(tModule.string)
+local LoginResultModule = { [t] = true }
+local InterfaceResult = TModule.interface({
+	user = TModule.interface({ id = TModule.number, name = TModule.string }),
+	twoStepVerificationData = TModule.optional(TModule.interface({ mediaType = TModule.string, ticket = TModule.string })),
+	twoStepVerificationDataV2 = TModule.optional(TModule.interface({ mediaType = TModule.string, ticket = TModule.string })),
+	accountBlob = TModule.optional(TModule.string)
 })
 
-function t.new(p1)
-	-- upvalues: fFlagEnableLuaAccountSwitch (ref), t (ref)
-	local t_1 = { user = { id = "0", name = "" } }
+function LoginResultModule.new(p1) --[[ Line: 51 ]]
+	-- upvalues: FFlagEnableLuaAccountSwitch (copy), LoginResultModule (copy)
+	local config = { user = { id = "0", name = "" } }
 	
 	if p1 and type(p1) == "table" then
 		if p1.user then
-			t_1.user.id = tostring(p1.user.id) or t_1.user.id
-			t_1.user.name = p1.user.name or t_1.user.name
+			config.user.id = tostring(p1.user.id) or config.user.id
+			config.user.name = p1.user.name or config.user.name
 		end
 		if p1.twoStepVerificationData then
-			t_1.twoStepVerificationData = {}
-			t_1.twoStepVerificationData.mediaType = p1.twoStepVerificationData.mediaType or ""
-			t_1.twoStepVerificationData.ticket = p1.twoStepVerificationData.ticket or ""
+			config.twoStepVerificationData = {}
+			config.twoStepVerificationData.mediaType = p1.twoStepVerificationData.mediaType or ""
+			config.twoStepVerificationData.ticket = p1.twoStepVerificationData.ticket or ""
 		end
-		if fFlagEnableLuaAccountSwitch and p1.accountBlob then
-			t_1.accountBlob = p1.accountBlob
+		if FFlagEnableLuaAccountSwitch and p1.accountBlob then
+			config.accountBlob = p1.accountBlob
 		end
 	end
-	setmetatable(t_1, t)
+	setmetatable(config, LoginResultModule)
 	
-	return t_1
+	return config
 end
 
-function t.mock()
-	-- upvalues: t (ref)
-	local var2 = t.new()
-	var2.user = { id = "1", name = "ROBLOX" }
-	var2.twoStepVerificationData = {
+function LoginResultModule.mock() --[[ Line: 79 ]]
+	-- upvalues: LoginResultModule (copy)
+	local NewLoginResult = LoginResultModule.new()
+	NewLoginResult.user = { id = "1", name = "ROBLOX" }
+	NewLoginResult.twoStepVerificationData = {
 		mediaType = "Email",
 		ticket = "00000000-0000-0000-0000-000000000000"
 	}
 	
-	return var2
+	return NewLoginResult
 end
 
-function t:fromJsonData()
-	-- upvalues: t (ref), var1 (ref), fFlagEnableLuaAccountSwitch (ref), argCheckModule (ref)
-	local var2 = t.new()
-	local var3, var4 = var1(self)
+function LoginResultModule:fromJsonData() --[[ Line: 95 ]]
+	-- upvalues: LoginResultModule (copy), InterfaceResult (copy), FFlagEnableLuaAccountSwitch (copy), ArgCheckModule (copy)
+	local NewLoginResult = LoginResultModule.new()
+	local InterfaceResultResult, InterfaceResultResult2 = InterfaceResult(self)
 	
-	if var3 then
-		var2.user = { id = tostring(self.user.id), name = self.user.name }
+	if InterfaceResultResult then
+		NewLoginResult.user = { id = tostring(self.user.id), name = self.user.name }
 		
 		if self.twoStepVerificationData then
-			var2.twoStepVerificationData = {
+			NewLoginResult.twoStepVerificationData = {
 				mediaType = self.twoStepVerificationData.mediaType,
 				ticket = self.twoStepVerificationData.ticket
 			}
 		end
-		if fFlagEnableLuaAccountSwitch and self.accountBlob then
-			var2.accountBlob = self.accountBlob
+		if FFlagEnableLuaAccountSwitch and self.accountBlob then
+			NewLoginResult.accountBlob = self.accountBlob
 			
-			return var2
+			return NewLoginResult
 		end
 	else
-		argCheckModule.assert(false, var4)
+		ArgCheckModule.assert(false, InterfaceResultResult2)
 	end
-	return var2
+	return NewLoginResult
 end
 
-function t:is()
-	-- upvalues: t_1 (ref)
-	return type(self) == "table" and self[t_1] == true
+function LoginResultModule:is(): boolean --[[ Line: 126 ]]
+	-- upvalues: t (copy)
+	return type(self) == "table" and self[t] == true
 end
 
-function t:hasTwoStepData()
-	-- upvalues: t (ref)
-	return t.is(self) and type(self.twoStepVerificationData) == "table"
+function LoginResultModule:hasTwoStepData(): boolean --[[ Line: 134 ]]
+	-- upvalues: LoginResultModule (copy)
+	return LoginResultModule.is(self) and type(self.twoStepVerificationData) == "table"
 end
 
-t.__index = t
+LoginResultModule.__index = LoginResultModule
 
-return t
+return LoginResultModule

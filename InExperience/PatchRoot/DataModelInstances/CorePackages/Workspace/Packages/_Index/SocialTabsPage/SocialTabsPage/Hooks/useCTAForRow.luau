@@ -1,48 +1,49 @@
-﻿local socialTabsPage = script:FindFirstAncestor("SocialTabsPage")
-local parent = socialTabsPage.Parent
-local reactModule = require(parent.React)
-local useSignalState = require(parent.SignalsReact).useSignalState
-local dataStatus = require(parent.DataHydration).DataStatus
-local buttonTypes = require(parent.UserList).Enums.ButtonTypes
-local mapProfileCTAToRowCTAModule = require(socialTabsPage.Utils.mapProfileCTAToRowCTA)
-local _ = require(socialTabsPage.Common.Types)
+﻿local SocialTabsPage = script:FindFirstAncestor("SocialTabsPage")
+local Parent = SocialTabsPage.Parent
+local ReactModule = require(Parent.React)
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local DataStatus = require(Parent.DataHydration).DataStatus
+local ButtonTypes = require(Parent.UserList).Enums.ButtonTypes
+local MapProfileCTAToRowCTAModule = require(SocialTabsPage.Utils.mapProfileCTAToRowCTA)
+local _ = require(SocialTabsPage.Common.Types)
 
-local var1 = function()
+local function v7() --[[ Line: 27 ]]
 	return nil
 end
 
-return function(p1, p2, p3, p4)
-	-- upvalues: var1 (ref), useSignalState (ref), reactModule (ref), dataStatus (ref), mapProfileCTAToRowCTAModule (ref), buttonTypes (ref)
-	local var2 = useSignalState(if p1 then p1.data else var1)
-	local var3 = useSignalState(if p1 then p1.status else var1)
+return function(p1, p2, p3, p4) --[[ Line: 31 | Named "useCTAForRow" ]]
+	-- upvalues: v7 (copy), UseSignalStateFunction (copy), ReactModule (copy), DataStatus (copy), MapProfileCTAToRowCTAModule (copy), ButtonTypes (copy)
+	local UseSignalStateResult = UseSignalStateFunction(if p1 then p1.data else v7)
+	local UseSignalStateResult1 = UseSignalStateFunction(if p1 then p1.status else v7)
 	
-	return reactModule.useMemo(function()
-		-- upvalues: var3 (ref), dataStatus (copy), mapProfileCTAToRowCTAModule (copy), var2 (ref), p2 (ref), p3 (ref), buttonTypes (copy), p4 (ref)
-		if var3 == dataStatus.NotReady then
+	return ReactModule.useMemo(function() --[[ Line: 43 ]]
+		-- upvalues: UseSignalStateResult1 (copy), DataStatus (upval), MapProfileCTAToRowCTAModule (upval), UseSignalStateResult (copy), p2 (copy), p3 (copy), ButtonTypes (upval), p4 (copy)
+		if UseSignalStateResult1 == DataStatus.NotReady then
 			return nil
 		end
-		local var4 = mapProfileCTAToRowCTAModule(var2, p2, p3)
+		local MapProfileCTAToRowCTAModuleResult = MapProfileCTAToRowCTAModule(UseSignalStateResult, p2, p3)
 		
-		if var4 and var4.type == buttonTypes.Join and p4 then
-			local onActivated = var4.onActivated
+		if MapProfileCTAToRowCTAModuleResult and MapProfileCTAToRowCTAModuleResult.type == ButtonTypes.Join and p4 then
+			local OnActivatedFunction = MapProfileCTAToRowCTAModuleResult.onActivated
 			
 			return {
-				type = var4.type,
-				onActivated = function()
-					-- upvalues: onActivated (ref), p4 (copy)
-					if onActivated then
-						onActivated()
+				type = MapProfileCTAToRowCTAModuleResult.type,
+				onActivated = function() --[[ Line: 54 ]]
+					-- upvalues: OnActivatedFunction (copy), p4 (upval)
+					if OnActivatedFunction then
+						OnActivatedFunction()
 					end
 					p4.joinExperience()
 				end,
 				isDisabled = not p4.isInExperience,
 				isLoading = p4.isLoading
 			}
+		else
+			return MapProfileCTAToRowCTAModuleResult
 		end
-		return var4
 	end, {
-		var2,
-		var3,
+		UseSignalStateResult,
+		UseSignalStateResult1,
 		p2,
 		p3,
 		p4

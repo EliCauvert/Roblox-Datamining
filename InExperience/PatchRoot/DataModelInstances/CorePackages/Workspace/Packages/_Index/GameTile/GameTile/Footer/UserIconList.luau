@@ -1,87 +1,86 @@
-﻿local gameTile = script:FindFirstAncestor("GameTile")
-local parent = gameTile.Parent
-local roactModule = require(parent.Roact)
-local imageSetLabel = require(parent.UIBlox).Core.ImageSet.ImageSetLabel
-local getImageData = require(parent.RobloxAppAssets).GetImageData
-local friendIconModule = require(gameTile.Footer.FriendIcon)
-local sourceSans = Enum.Font.SourceSans
-local color = Color3.fromRGB(117, 117, 117)
+﻿local GameTile = script:FindFirstAncestor("GameTile")
+local Parent = GameTile.Parent
+local RoactModule = require(Parent.Roact)
+local ImageSetLabel = require(Parent.UIBlox).Core.ImageSet.ImageSetLabel
+local GetImageDataFunction = require(Parent.RobloxAppAssets).GetImageData
+local FriendIconModule = require(GameTile.Footer.FriendIcon)
+local SourceSans = Enum.Font.SourceSans
+local _Color3 = Color3.fromRGB(117, 117, 117)
 
-local function NumberedIcon(p1)
-	-- upvalues: roactModule (ref), imageSetLabel (ref), getImageData (ref), sourceSans (ref), color (ref)
-	local size = p1.size
+local function NumberedIcon(p1) --[[ Line: 22 ]]
+	-- upvalues: RoactModule (copy), ImageSetLabel (copy), GetImageDataFunction (copy), SourceSans (copy), _Color3 (copy)
+	local Size = p1.size
 	
-	return roactModule.createElement(imageSetLabel, {
+	return RoactModule.createElement(ImageSetLabel, {
 		BackgroundTransparency = 1,
-		Size = UDim2.new(0, size, 0, size),
+		Size = UDim2.new(0, Size, 0, Size),
 		LayoutOrder = p1.layoutOrder,
-		Image = getImageData("LuaApp/graphic/gr-counter-slot-32x32") or "LuaApp/graphic/gr-counter-slot-32x32"
+		Image = GetImageDataFunction("LuaApp/graphic/gr-counter-slot-32x32") or "LuaApp/graphic/gr-counter-slot-32x32"
 	}, {
-		Count = roactModule.createElement("TextLabel", {
+		Count = RoactModule.createElement("TextLabel", {
 			TextSize = 15,
 			BackgroundTransparency = 1,
 			Size = UDim2.new(0.5, 0, 0.5, 0),
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.new(0.5, 0, 0.5, 0),
-			Font = sourceSans,
-			Text = "+" .. p0.count,
-			TextColor3 = color
+			Font = SourceSans,
+			Text = "+" .. p1.count,
+			TextColor3 = _Color3
 		})
 	})
 end
 
-local userIconList = roactModule.PureComponent:extend("UserIconList")
-userIconList.defaultProps = { users = {} }
+local UserIconList = RoactModule.PureComponent:extend("UserIconList")
+UserIconList.defaultProps = { users = {} }
 
-function userIconList.render(p1)
-	-- upvalues: roactModule (ref), friendIconModule (ref), NumberedIcon (ref)
-	local width = p1.props.width
-	local height = p1.props.height
-	local layoutOrder = p1.props.layoutOrder
-	local users = p1.props.users
-	local usersCount = #users
-	local var1 = 0
-	local maskColor = p1.props.maskColor
+function UserIconList.render(p1) --[[ Line: 52 ]]
+	-- upvalues: RoactModule (copy), FriendIconModule (copy), NumberedIcon (copy)
+	local Width: number = p1.props.width
+	local Height: number = p1.props.height
+	local LayoutOrder = p1.props.layoutOrder
+	local Users = p1.props.users
+	local CountUsers = #Users
+	local Count = 0
+	local MaskColor = p1.props.maskColor
 	
-	if usersCount <= 0 then
+	if CountUsers <= 0 then
 		return nil
 	end
-	local function _(a, b)
-		return math.floor((b + 3) / (a + 3))
+	local function _(p2: number, p3: number): number --[[ Line: 65 | Named "GetMaxNumberOfIconsInWidth" ]]
+		return (math.floor((p3 + 3) / (p2 + 3)))
 	end
 	
-	local _ = nil
-	local var2 = if height >= 32 and math.floor((width + 3) / 35) >= 3 then 32 elseif height >= 24 then 24 else height
-	local t = {}
-	local floored = math.floor((width + 3) / (var2 + 3))
+	local Height1 = if Height >= 32 and math.floor((Width + 3) / 35) >= 3 then 32 elseif Height >= 24 then 24 else Height
+	local Elements = {}
+	local Floored = math.floor((Width + 3) / (Height1 + 3))
 	
-	if floored > 0 then
-		if floored < usersCount then
-			var1 = usersCount - (floored - 1)
+	if Floored > 0 then
+		if Floored < CountUsers then
+			Count = CountUsers - (Floored - 1)
 		end
-		t.ListLayout = roactModule.createElement("UIListLayout", {
+		Elements.ListLayout = RoactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Horizontal,
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			Padding = UDim.new(0, 3)
 		})
-		
-		for i = 1, if var1 > 0 then floored - 1 else math.min(floored, usersCount) do
-			t["UserIcon" .. i] = roactModule.createElement(friendIconModule, {
-				user = users[i],
-				itemSize = var2,
+		local FlooredDelta: number = Count > 0 and Floored - 1 or math.min(Floored, CountUsers)
+		for i = 1, FlooredDelta do
+			Elements["UserIcon" .. i] = RoactModule.createElement(FriendIconModule, {
+				user = Users[i],
+				itemSize = Height1,
 				layoutOrder = i,
-				maskColor = maskColor
+				maskColor = MaskColor
 			})
 		end
-		t.NumberedIcon = var1 > 0 and roactModule.createElement(NumberedIcon, { size = var2, layoutOrder = floored, count = var1 })
+		Elements.NumberedIcon = Count > 0 and RoactModule.createElement(NumberedIcon, { size = Height1, layoutOrder = Floored, count = Count })
 	end
-	return roactModule.createElement("Frame", {
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Size = UDim2.new(0, width, 0, height),
-		LayoutOrder = layoutOrder
-	}, t)
+		Size = UDim2.new(0, Width, 0, Height),
+		LayoutOrder = LayoutOrder
+	}, Elements)
 end
 
-return userIconList
+return UserIconList

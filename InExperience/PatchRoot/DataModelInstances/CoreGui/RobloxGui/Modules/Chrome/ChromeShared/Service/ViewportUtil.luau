@@ -1,68 +1,67 @@
-﻿local chromeShared = script:FindFirstAncestor("ChromeShared")
-local workspaceService = game:GetService("Workspace")
-local userInputService = game:GetService("UserInputService")
-local observableValue = require(chromeShared.Service.ChromeUtils).ObservableValue
-local var1 = observableValue.new(Vector2.new(0, 0))
-local var2 = observableValue.new(false)
-local var3 = nil
+﻿local Workspace = game:GetService("Workspace")
+local UserInputService = game:GetService("UserInputService")
+local ObservableValue = require(script:FindFirstAncestor("ChromeShared").Service.ChromeUtils).ObservableValue
+local NewObservableValue = ObservableValue.new(Vector2.new(0, 0))
+local NewObservableValue1 = ObservableValue.new(false)
+local Connection = nil
 
-function createViewportInfo(p1)
-	-- upvalues: userInputService (ref)
-	local var4 = p1.X < p1.Y
-	local platform = userInputService:GetPlatform()
-	local var5 = if platform ~= Enum.Platform.IOS then platform == Enum.Platform.Android else true
+function createViewportInfo(Size) --[[ Line: 25 ]]
+	-- upvalues: UserInputService (copy)
+	local IsXBelow = Size.X < Size.Y
+	local Platform = UserInputService:GetPlatform()
+	local IsPlatformMatch: boolean = Platform == Enum.Platform.IOS or Platform == Enum.Platform.Android
 	
 	return {
-		size = p1,
-		portraitOrientation = var4,
-		tinyPortrait = var5 and (var4 and p1.X < 360),
-		isMobileDevice = var5
+		size = Size,
+		portraitOrientation = IsXBelow,
+		tinyPortrait = IsPlatformMatch and (IsXBelow and Size.X < 360),
+		isMobileDevice = IsPlatformMatch
 	}
 end
 
-local var4 = observableValue.new(createViewportInfo(Vector2.zero))
+local NewObservableValue2 = ObservableValue.new(createViewportInfo(Vector2.zero))
 
-function updateViewportSize(p1)
-	-- upvalues: var1 (ref), var4 (ref)
-	local vector2 = Vector2.new(p1.X, p1.Y)
-	var1:set(vector2)
-	var4:set(createViewportInfo(vector2))
+function updateViewportSize(Vector) --[[ Line: 39 ]]
+	-- upvalues: NewObservableValue (copy), NewObservableValue2 (copy)
+	local _Vector2 = Vector2.new(Vector.X, Vector.Y)
+	NewObservableValue:set(_Vector2)
+	NewObservableValue2:set(createViewportInfo(_Vector2))
 end
 
-function setCurrentCamera(value)
-	-- upvalues: var3 (write), userInputService (ref), var2 (ref)
-	if var3 then
-		pcall(function()
-			-- upvalues: var3 (copy)
-			var3:Disconnect()
+function setCurrentCamera(Camera: Camera) --[[ Line: 45 ]]
+	-- upvalues: Connection (ref), UserInputService (copy), NewObservableValue1 (copy)
+	if Connection then
+		pcall(function() --[[ Line: 47 ]]
+			-- upvalues: Connection (upval)
+			Connection:Disconnect()
 		end)
-		var3 = nil
+		Connection = nil
 	end
-	if value then
-		local platform = userInputService:GetPlatform()
-		var2:set(if platform ~= Enum.Platform.IOS then platform == Enum.Platform.Android else true)
-		var3 = value:GetPropertyChangedSignal("ViewportSize"):Connect(function()
-			-- upvalues: value (ref)
-			updateViewportSize(value.ViewportSize)
+	if Camera then
+		local Platform = UserInputService:GetPlatform()
+		NewObservableValue1:set(Platform == Enum.Platform.IOS or Platform == Enum.Platform.Android)
+		Connection = Camera:GetPropertyChangedSignal("ViewportSize"):Connect(function() --[[ Line: 56 ]]
+			-- upvalues: Camera (copy)
+			updateViewportSize(Camera.ViewportSize)
 		end)
-		updateViewportSize(value.ViewportSize)
+		updateViewportSize(Camera.ViewportSize)
 	end
 end
 
-workspaceService:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
-	-- upvalues: workspaceService (ref)
-	setCurrentCamera(workspaceService.CurrentCamera)
+Workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function() --[[ Line: 63 ]]
+	-- upvalues: Workspace (copy)
+	setCurrentCamera(Workspace.CurrentCamera)
 end)
-setCurrentCamera(workspaceService.CurrentCamera)
+setCurrentCamera(Workspace.CurrentCamera)
 
 return {
-	screenSize = var1,
-	mobileDevice = var2,
-	viewport = var4,
-	isSmallTouchScreen = function()
-		-- upvalues: var1 (ref), userInputService (ref)
-		local var5 = var1:get()
+	screenSize = NewObservableValue,
+	mobileDevice = NewObservableValue1,
+	viewport = NewObservableValue2,
+	isSmallTouchScreen = function(): boolean --[[ Line: 72 ]]
+		-- upvalues: NewObservableValue (copy), UserInputService (copy)
+		local GetResult = NewObservableValue:get()
 		
-		return userInputService.TouchEnabled and (if var5.Y >= 500 then var5.X < 700 else true)
+		return UserInputService.TouchEnabled and (GetResult.Y < 500 or GetResult.X < 700)
 	end
 }

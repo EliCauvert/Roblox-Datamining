@@ -1,51 +1,50 @@
-﻿local bulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
-local parent = bulkPurchaseApp.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local text = foundationModule.Text
-local useTokens = foundationModule.Hooks.useTokens
-local priceBoxLineLayoutModule = require(script.Parent.PriceBoxLineLayout)
-local priceModule = require(script.Parent.Price)
-local priceBoxLineVariantEnumModule = require(bulkPurchaseApp.Enums.PriceBoxLineVariantEnum)
+﻿local BulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
+local Parent = BulkPurchaseApp.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local PriceBoxLineLayoutModule = require(script.Parent.PriceBoxLineLayout)
+local PriceModule = require(script.Parent.Price)
+local PriceBoxLineVariantEnumModule = require(BulkPurchaseApp.Enums.PriceBoxLineVariantEnum)
 
-return function(p1)
-	-- upvalues: useTokens (ref), priceBoxLineVariantEnumModule (ref), reactModule (ref), priceBoxLineLayoutModule (ref), text (ref), view (ref), priceModule (ref)
-	local var1 = useTokens()
-	local t = {
-		LineHeight = var1.Typography.BodyLarge.LineHeight,
-		FontSize = var1.Typography.BodyLarge.FontSize,
-		Font = if p1.variant == priceBoxLineVariantEnumModule.Danger then var1.Typography.TitleLarge.Font else var1.Typography.BodyLarge.Font
+return function(Frame) --[[ Line: 22 | Named "PriceBoxLine" ]]
+	-- upvalues: UseTokensFunction (copy), PriceBoxLineVariantEnumModule (copy), ReactModule (copy), PriceBoxLineLayoutModule (copy), Text (copy), View (copy), PriceModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	local FontStyle = {
+		LineHeight = UseTokensResult.Typography.BodyLarge.LineHeight,
+		FontSize = UseTokensResult.Typography.BodyLarge.FontSize,
+		Font = if Frame.variant == PriceBoxLineVariantEnumModule.Danger then UseTokensResult.Typography.TitleLarge.Font else UseTokensResult.Typography.BodyLarge.Font
 	}
-	local default = var1.Color.Content.Default
+	local Emphasis = if Frame.variant == PriceBoxLineVariantEnumModule.Highlight then UseTokensResult.Color.Content.Emphasis elseif Frame.variant == PriceBoxLineVariantEnumModule.Danger then UseTokensResult.Color.System.Alert else UseTokensResult.Color.Content.Default
 	
-	if p1.variant == priceBoxLineVariantEnumModule.Highlight then
-		default = var1.Color.Content.Emphasis
-	elseif p1.variant == priceBoxLineVariantEnumModule.Danger then
-		default = var1.Color.System.Alert
-	end
-	return reactModule.createElement(priceBoxLineLayoutModule, {
-		LayoutOrder = p1.LayoutOrder,
-		startSlot = reactModule.createElement(text, {
+	return ReactModule.createElement(PriceBoxLineLayoutModule, {
+		LayoutOrder = Frame.LayoutOrder,
+		startSlot = ReactModule.createElement(Text, {
 			tag = "auto-xy",
-			fontStyle = t,
-			textStyle = default,
-			Text = p1.text
+			fontStyle = FontStyle,
+			textStyle = Emphasis,
+			Text = Frame.text
 		}),
-		endSlot = if p1.originalPrice then reactModule.createElement(view, { tag = "row align-y-center gap-small auto-xy" }, {
-			OriginalPrice = reactModule.createElement(priceModule, {
+		endSlot = if Frame.originalPrice then ReactModule.createElement(View, { tag = "row align-y-center gap-small auto-xy" }, {
+			OriginalPrice = ReactModule.createElement(PriceModule, {
 				strikethrough = true,
 				LayoutOrder = 1,
-				textStyle = default,
-				fontStyle = t,
-				amount = p1.originalPrice
+				textStyle = Emphasis,
+				fontStyle = FontStyle,
+				amount = Frame.originalPrice
 			}),
-			CurrentPrice = reactModule.createElement(priceModule, {
+			CurrentPrice = ReactModule.createElement(PriceModule, {
 				LayoutOrder = 2,
-				textStyle = default,
-				fontStyle = t,
-				amount = p1.amount
+				textStyle = Emphasis,
+				fontStyle = FontStyle,
+				amount = Frame.amount
 			})
-		}) else reactModule.createElement(priceModule, { textStyle = default, fontStyle = t, amount = p1.amount })
+		}) else ReactModule.createElement(PriceModule, {
+			textStyle = Emphasis,
+			fontStyle = FontStyle,
+			amount = Frame.amount
+		})
 	})
 end

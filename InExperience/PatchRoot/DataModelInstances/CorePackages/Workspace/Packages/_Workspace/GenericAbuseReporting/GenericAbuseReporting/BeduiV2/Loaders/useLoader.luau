@@ -1,127 +1,129 @@
-﻿local reactModule = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.React)
-local loaderContextModule = require(script.Parent.LoaderContext)
+﻿local ReactModule = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.React)
+local LoaderContextModule = require(script.Parent.LoaderContext)
 
-local function _(p1)
+local function _(p1): boolean --[[ Line: 19 | Named "isLoadDescriptor" ]]
 	return typeof(p1) == "table" and p1["$load"] ~= nil
 end
 
-local function cacheKey(p1, p2)
-	if not p2 then
-		return p1 .. "::{}"
+local function cacheKey(Load, Params): string --[[ Line: 26 ]]
+	if not Params then
+		return Load .. "::{}"
 	end
-	local t = {}
+	local List = {}
 	
-	for i in pairs(p2) do
-		table.insert(t, i)
+	for param in pairs(Params) do
+		table.insert(List, param)
 	end
-	table.sort(t)
-	local t_1 = {}
+	table.sort(List)
+	local List1 = {}
 	
-	for i_1, v in ipairs(t) do
-		table.insert(t_1, v .. "=" .. p2[v])
+	for _, value in ipairs(List) do
+		table.insert(List1, value .. "=" .. Params[value])
 	end
-	return p1 .. "::" .. table.concat(t_1, ",")
+	return Load .. "::" .. table.concat(List1, ",")
 end
 
-local function useLoader(p3)
-	-- upvalues: loaderContextModule (ref), reactModule (ref), cacheKey (ref)
-	local var1 = loaderContextModule.useLoaderContext()
-	local registryRef = var1.registryRef
-	local cacheRef = var1.cacheRef
-	local var2 = typeof(p3) == "table" and p3["$load"] ~= nil
-	local var3 = if var2 then p3["$load"] else nil
-	local var4 = if var2 then p3.params else nil
-	local var5, var6 = reactModule.useState(if var2 then { data = nil, loading = true, error = nil } else { loading = false, error = nil, data = p3 })
-	local var7, var8 = reactModule.useState(0)
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), var6 (ref), p3 (ref), registryRef (ref), var3 (ref), cacheKey (copy), var4 (ref), cacheRef (ref)
-		if not var2 then
-			var6({ loading = false, error = nil, data = p3 })
+local function useLoader(Data) --[[ Line: 60 ]]
+	-- upvalues: LoaderContextModule (copy), ReactModule (copy), cacheKey (copy)
+	local UseLoaderContextResult = LoaderContextModule.useLoaderContext()
+	local RegistryRef = UseLoaderContextResult.registryRef
+	local CacheRef = UseLoaderContextResult.cacheRef
+	local HasLoad: boolean = typeof(Data) == "table" and Data["$load"] ~= nil
+	local Load = if HasLoad then Data["$load"] else nil
+	local Params = if HasLoad then Data.params else nil
+	local UseStateResult, UseStateResult2 = ReactModule.useState(if HasLoad then { data = nil, loading = true, error = nil } else { loading = false, error = nil, data = Data })
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(0)
+	ReactModule.useEffect(function() --[[ Line: 78 ]]
+		-- upvalues: HasLoad (copy), UseStateResult2 (copy), Data (copy), RegistryRef (copy), Load (copy), cacheKey (upval), Params (copy), CacheRef (copy)
+		if not HasLoad then
+			UseStateResult2({ loading = false, error = nil, data = Data })
 			
 			return
 		end
-		local var9 = registryRef.current[var3]
+		local CurrentEntry = RegistryRef.current[Load]
 		
-		if not var9 then
-			var6({
+		if not CurrentEntry then
+			UseStateResult2({
 				data = nil,
 				loading = false,
-				error = string.format("Loader \"%s\" not found in registry", var3)
+				error = string.format("Loader \"%s\" not found in registry", Load)
 			})
 			
 			return
 		end
-		local var10 = cacheKey(var3, var4)
-		local var11 = cacheRef.current[var10]
+		local CacheKeyResult = cacheKey(Load, Params)
+		local CurrentEntry1 = CacheRef.current[CacheKeyResult]
 		
-		if var11 then
-			var6({ loading = false, error = nil, data = var11 })
+		if CurrentEntry1 then
+			UseStateResult2({ loading = false, error = nil, data = CurrentEntry1 })
 			
 			return
 		end
-		local var12 = false
-		var6({ data = nil, loading = true, error = nil })
-		var9.fetch(var4 or {}):andThen(function(p4)
-			-- upvalues: var12 (write), cacheRef (copy), var10 (ref), var6 (copy)
-			if var12 then
+		local Flag = false
+		UseStateResult2({ data = nil, loading = true, error = nil })
+		CurrentEntry.fetch(Params or {}):andThen(function(Result) --[[ Line: 109 ]]
+			-- upvalues: Flag (ref), CacheRef (upval), CacheKeyResult (copy), UseStateResult2 (upval)
+			if not Flag then
+				CacheRef.current[CacheKeyResult] = Result
+				UseStateResult2({ loading = false, error = nil, data = Result })
+				
 				return
 			end
-			cacheRef.current[var10] = p4
-			var6({ loading = false, error = nil, data = p4 })
-		end):catch(function(p4)
-			-- upvalues: var12 (write), var6 (copy)
-			if var12 then
+		end):catch(function(Err) --[[ Line: 116 ]]
+			-- upvalues: Flag (ref), UseStateResult2 (upval)
+			if not Flag then
+				UseStateResult2({ data = nil, loading = false, error = tostring(Err) })
+				
 				return
 			end
-			var6({ data = nil, loading = false, error = tostring(p4) })
 		end)
 		
-		return function()
-			-- upvalues: var12 (write)
-			var12 = true
+		return function() --[[ Line: 127 ]]
+			-- upvalues: Flag (ref)
+			Flag = true
 		end
-	end, { var4, p3, var7, var2 })
+	end, { Params, Data, UseStateResult1, HasLoad })
 	
 	return {
-		data = var5.data,
-		loading = var5.loading,
-		error = var5.error,
-		retry = reactModule.useCallback(function()
-			-- upvalues: var2 (ref), cacheRef (ref), cacheKey (copy), var3 (ref), var4 (ref), var8 (ref)
-			if var2 then
-				cacheRef.current[cacheKey(var3, var4)] = nil
-				var8(function(p4)
-					return p4 + 1
+		data = UseStateResult.data,
+		loading = UseStateResult.loading,
+		error = UseStateResult.error,
+		retry = ReactModule.useCallback(function() --[[ Line: 132 ]]
+			-- upvalues: HasLoad (copy), CacheRef (copy), cacheKey (upval), Load (copy), Params (copy), UseStateResult2_1 (copy)
+			if HasLoad then
+				CacheRef.current[cacheKey(Load, Params)] = nil
+				UseStateResult2_1(function(p1: number): number --[[ Line: 137 ]]
+					return p1 + 1
 				end)
 				
 				return
 			end
-		end, { p3, var4, var2 })
+		end, { Data, Params, HasLoad })
 	}
 end
 
 return {
 	useLoader = useLoader,
-	useListLoader = function(p3)
-		-- upvalues: useLoader (ref)
-		local var1 = useLoader(p3)
+	useListLoader = function(p1) --[[ Line: 156 ]]
+		-- upvalues: useLoader (copy)
+		local UseLoaderResult = useLoader(p1)
 		
 		return {
-			data = var1.data,
-			loading = var1.loading,
-			error = var1.error,
-			retry = var1.retry
+			data = UseLoaderResult.data,
+			loading = UseLoaderResult.loading,
+			error = UseLoaderResult.error,
+			retry = UseLoaderResult.retry
 		}
 	end,
-	useGroupedListLoader = function(p3)
-		-- upvalues: useLoader (ref)
-		local var1 = useLoader(p3)
+	useGroupedListLoader = function(p1) --[[ Line: 172 ]]
+		-- upvalues: useLoader (copy)
+		local UseLoaderResult = useLoader(p1)
 		
 		return {
-			data = var1.data,
-			loading = var1.loading,
-			error = var1.error,
-			retry = var1.retry
+			data = UseLoaderResult.data,
+			loading = UseLoaderResult.loading,
+			error = UseLoaderResult.error,
+			retry = UseLoaderResult.retry
 		}
 	end
 }

@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.FitFrame.FitFrame)
+﻿return (require(script.Parent.Parent.Parent._Index.FitFrame.FitFrame))

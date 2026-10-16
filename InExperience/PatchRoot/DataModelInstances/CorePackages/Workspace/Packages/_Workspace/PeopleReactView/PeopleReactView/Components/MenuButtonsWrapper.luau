@@ -1,36 +1,35 @@
-﻿local menuButtons = game:GetService("CoreGui"):WaitForChild("RobloxGui"):WaitForChild("Modules"):WaitForChild("Settings"):WaitForChild("Components"):WaitForChild("MenuButtons")
-local parent = script:FindFirstAncestor("PeopleReactView").Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local peopleServiceModule = require(parent.PeopleService)
-local view = foundationModule.View
-local useSignalState = require(parent.SignalsReact).useSignalState
-local menuButtonsModule = require(menuButtons:WaitForChild("MenuButtons"))
+﻿local Parent = script:FindFirstAncestor("PeopleReactView").Parent
+local ReactModule = require(Parent.React)
+local PeopleServiceModule = require(Parent.PeopleService)
+local View = require(Parent.Foundation).View
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local MenuButtonsModule = require(game:GetService("CoreGui"):WaitForChild("RobloxGui"):WaitForChild("Modules"):WaitForChild("Settings"):WaitForChild("Components"):WaitForChild("MenuButtons"):WaitForChild("MenuButtons"))
 
-return function()
-	-- upvalues: reactModule (ref), peopleServiceModule (ref), useSignalState (ref), view (ref), menuButtonsModule (ref)
-	local var1 = reactModule.useMemo(function()
-		-- upvalues: peopleServiceModule (copy)
-		return peopleServiceModule.getService("SettingsHubService")
+return function() --[[ Line: 27 ]]
+	-- upvalues: ReactModule (copy), PeopleServiceModule (copy), UseSignalStateFunction (copy), View (copy), MenuButtonsModule (copy)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 28 ]]
+		-- upvalues: PeopleServiceModule (upval)
+		return PeopleServiceModule.getService("SettingsHubService")
 	end, {})
-	local var2 = reactModule.useMemo(function()
-		-- upvalues: var1 (ref)
-		local var3 = var1.hubRef()
+	local UseSignalStateResult = UseSignalStateFunction(UseMemoResult.showMenuButtonsContainer)
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 34 ]]
+		-- upvalues: UseMemoResult (copy)
+		local HubRefResult = UseMemoResult.hubRef()
 		
-		return if var3 then var3:GetExperienceControlStore() else nil
+		return if HubRefResult then HubRefResult:GetExperienceControlStore() else nil
 	end, {})
 	
-	return if var2 and useSignalState(var1.showMenuButtonsContainer) then reactModule.createElement(view, { LayoutOrder = -1, tag = "size-full-1000" }, {
-		MenuButtonsContainer = reactModule.createElement(menuButtonsModule, {
-			onLeaveGame = var2.onLeaveGame,
-			onRespawn = var2.onRespawn,
-			onResume = var2.onResume,
-			setAddMenuKeyBindings = function() end,
-			setRemoveMenuKeyBindings = function() end,
-			getVisibility = function()
+	return if UseMemoResult1 and UseSignalStateResult then ReactModule.createElement(View, { LayoutOrder = -1, tag = "size-full-1000" }, {
+		MenuButtonsContainer = ReactModule.createElement(MenuButtonsModule, {
+			onLeaveGame = UseMemoResult1.onLeaveGame,
+			onRespawn = UseMemoResult1.onRespawn,
+			onResume = UseMemoResult1.onResume,
+			setAddMenuKeyBindings = function() --[[ Line: 54 ]] end,
+			setRemoveMenuKeyBindings = function() --[[ Line: 55 ]] end,
+			getVisibility = function(): boolean --[[ Line: 56 ]]
 				return true
 			end,
-			getCanRespawn = var2.getCanRespawn
+			getCanRespawn = UseMemoResult1.getCanRespawn
 		})
 	}) else nil
 end

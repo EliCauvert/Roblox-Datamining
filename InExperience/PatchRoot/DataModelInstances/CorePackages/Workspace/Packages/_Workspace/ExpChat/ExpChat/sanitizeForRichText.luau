@@ -1,3 +1,3 @@
-﻿return function(p1)
-	return string.gsub(p1, "%p", { ["<"] = "&lt;", [">"] = "&gt;", ["&"] = "&amp;" })
+﻿return function(Text: string): string --[[ Line: 1 ]]
+	return (string.gsub(Text, "%p", { ["<"] = "&lt;", [">"] = "&gt;", ["&"] = "&amp;" }))
 end

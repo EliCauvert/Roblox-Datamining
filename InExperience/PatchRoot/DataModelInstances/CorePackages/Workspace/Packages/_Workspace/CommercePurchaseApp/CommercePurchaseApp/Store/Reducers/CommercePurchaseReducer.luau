@@ -1,6 +1,6 @@
-﻿local parent = script:FindFirstAncestor("CommercePurchaseApp").Parent
+﻿local Parent = script:FindFirstAncestor("CommercePurchaseApp").Parent
 
-return require(parent.Rodux).combineReducers({
+return require(Parent.Rodux).combineReducers({
 	commercePurchaseState = require(script.Parent.PromptStateReducer),
-	currentToastMessages = require(parent.ToastLite).Reducers.CurrentToastMessagesReducer
+	currentToastMessages = require(Parent.ToastLite).Reducers.CurrentToastMessagesReducer
 })

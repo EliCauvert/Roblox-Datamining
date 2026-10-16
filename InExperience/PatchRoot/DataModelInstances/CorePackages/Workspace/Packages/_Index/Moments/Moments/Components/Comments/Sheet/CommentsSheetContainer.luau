@@ -1,23 +1,23 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local reactModule = require(moments.Parent.React)
-local commentsSheetViewModule = require(script.Parent.CommentsSheetView)
-local useCommentsSheetViewModelModule = require(script.Parent.useCommentsSheetViewModel)
-local useHideTabBarWhileOpenModule = require(moments.ExperienceDetailsSheet.Sheet.useHideTabBarWhileOpen)
-local fFlagMomentsTabsBehindModalScrimModule = require(moments.Flags.FFlagMomentsTabsBehindModalScrim)
+﻿local Moments = script:FindFirstAncestor("Moments")
+local ReactModule = require(Moments.Parent.React)
+local CommentsSheetViewModule = require(script.Parent.CommentsSheetView)
+local UseCommentsSheetViewModelModule = require(script.Parent.useCommentsSheetViewModel)
+local UseHideTabBarWhileOpenModule = require(Moments.ExperienceDetailsSheet.Sheet.useHideTabBarWhileOpen)
+local FFlagMomentsTabsBehindModalScrimModule = require(Moments.Flags.FFlagMomentsTabsBehindModalScrim)
 
-local function TabBarVisibilityController()
-	-- upvalues: useHideTabBarWhileOpenModule (ref)
-	useHideTabBarWhileOpenModule(true)
+local function TabBarVisibilityController() --[[ Line: 14 ]]
+	-- upvalues: UseHideTabBarWhileOpenModule (copy)
+	UseHideTabBarWhileOpenModule(true)
 	
 	return nil
 end
 
-return reactModule.memo(function()
-	-- upvalues: useCommentsSheetViewModelModule (ref), reactModule (ref), commentsSheetViewModule (ref), fFlagMomentsTabsBehindModalScrimModule (ref), TabBarVisibilityController (ref)
-	local var1 = useCommentsSheetViewModelModule()
+return ReactModule.memo(function() --[[ Line: 19 | Named "CommentsSheetContainer" ]]
+	-- upvalues: UseCommentsSheetViewModelModule (copy), ReactModule (copy), CommentsSheetViewModule (copy), FFlagMomentsTabsBehindModalScrimModule (copy), TabBarVisibilityController (copy)
+	local UseCommentsSheetViewModelModuleResult = UseCommentsSheetViewModelModule()
 	
-	return reactModule.createElement(reactModule.Fragment, nil, {
-		Sheet = reactModule.createElement(commentsSheetViewModule, var1),
-		TabBarVisibilityController = if fFlagMomentsTabsBehindModalScrimModule or not var1.isOpen then nil else reactModule.createElement(TabBarVisibilityController)
+	return ReactModule.createElement(ReactModule.Fragment, nil, {
+		Sheet = ReactModule.createElement(CommentsSheetViewModule, UseCommentsSheetViewModelModuleResult),
+		TabBarVisibilityController = if FFlagMomentsTabsBehindModalScrimModule or not UseCommentsSheetViewModelModuleResult.isOpen then nil else ReactModule.createElement(TabBarVisibilityController)
 	})
 end)

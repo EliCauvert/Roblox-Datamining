@@ -1,37 +1,35 @@
-﻿local parent = script:FindFirstAncestor("InteractionFeedback").Parent
-local soundManagerModule = require(parent.SoundManager)
-local soundManager = soundManagerModule.SoundManager
-local sounds = soundManagerModule.Sounds
-local soundGroups = soundManagerModule.SoundGroups
+﻿local SoundManagerModule = require(script:FindFirstAncestor("InteractionFeedback").Parent.SoundManager)
+local SoundManager = SoundManagerModule.SoundManager
+local Sounds = SoundManagerModule.Sounds
+local SoundGroups = SoundManagerModule.SoundGroups
 local _ = require(script.Parent.InteractionFeedbackContext)
-local triggerHapticModule = require(script.Parent.triggerHaptic)
-soundManager.init()
-local fFlagLuaAppHapticTriggeredTelemetry = require(parent.SharedFlags).FFlagLuaAppHapticTriggeredTelemetry
+local TriggerHapticModule = require(script.Parent.triggerHaptic)
+SoundManager.init()
 
-return function(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: sounds (ref), soundManager (ref), soundGroups (ref), triggerHapticModule (ref), fFlagLuaAppHapticTriggeredTelemetry (ref)
-	if not p3 then
+return function(Text, p1, p2, p3, p4, p5, p6) --[[ Line: 16 | Named "triggerFeedback" ]]
+	-- upvalues: Sounds (copy), SoundManager (copy), SoundGroups (copy), TriggerHapticModule (copy)
+	if not p2 then
 		error("No config table was provided to InteractionFeedbackManager. Something is wrong.")
 	end
-	local var1 = p3[p1]
+	local v1 = p2[Text]
 	
-	if not var1 then return end
-	local var2 = var1[p2]
+	if not v1 then return end
+	local v2 = v1[p1]
 	
-	if not var2 then return end
-	local sound = var2.Sound
+	if not v2 then return end
+	local Sound = v2.Sound
 	
-	if sound then
-		local var3 = sounds[sound]
+	if Sound then
+		local Sound1 = Sounds[Sound]
 		
-		if not var3 then
-			error("Sound " .. sound .. " not found in SoundManager given contextKey: " .. p0 .. " and interactionType: " .. tostring(p2) .. ". Please check the Sounds.lua file.")
+		if not Sound1 then
+			error("Sound " .. Sound .. " not found in SoundManager given contextKey: " .. Text .. " and interactionType: " .. tostring(p1) .. ". Please check the Sounds.lua file.")
 		end
-		soundManager:PlaySound(var3.Name, {}, soundGroups.AppBackground)
+		SoundManager:PlaySound(Sound1.Name, {}, SoundGroups.AppBackground)
 	end
-	local haptic = var2.Haptic
+	local Haptic = v2.Haptic
 	
-	if haptic then
-		triggerHapticModule(haptic, p4, p5, if fFlagLuaAppHapticTriggeredTelemetry then p1 else nil, if fFlagLuaAppHapticTriggeredTelemetry then p2 else nil, if fFlagLuaAppHapticTriggeredTelemetry then p6 else nil, if fFlagLuaAppHapticTriggeredTelemetry then p7 else nil)
+	if Haptic then
+		TriggerHapticModule(Haptic, p3, p4, Text, p1, p5, p6)
 	end
 end

@@ -1,39 +1,38 @@
-﻿return function(p1)
-	local playersService = game:GetService("Players")
+﻿return function(Text: string) --[[ Line: 7 | Named "getPlayersFromService" ]]
+	local Players = game:GetService("Players")
 	
-	if not p1 then
+	if not Text then
 		return {}
 	end
-	local substring
-	local lowerText = string.lower(p1)
+	local Lowered = string.lower(Text)
 	
-	if string.sub(lowerText, 1, 1) == "@" then
-		substring = string.sub(lowerText, 2)
+	if string.sub(Lowered, 1, 1) == "@" then
+		local Segment = string.sub(Lowered, 2)
 		
-		for i, v in playersService:GetPlayers() do
-			if string.lower(v.Name) == substring then
+		for _, player in Players:GetPlayers() do
+			if string.lower(player.Name) == Segment then
 				return {
 					{
-						userId = tostring(v.UserId),
-						username = v.Name,
-						displayName = v.DisplayName
+						userId = tostring(player.UserId),
+						username = player.Name,
+						displayName = player.DisplayName
 					}
 				}
 			end
 		end
 		return {}
 	else
-		substring = {}
+		local List = {}
 		
-		for i, v in playersService:GetPlayers() do
-			if string.lower(v.DisplayName) == lowerText then
-				table.insert(substring, {
-					userId = tostring(v.UserId),
-					username = v.Name,
-					displayName = v.DisplayName
+		for _, player1 in Players:GetPlayers() do
+			if string.lower(player1.DisplayName) == Lowered then
+				table.insert(List, {
+					userId = tostring(player1.UserId),
+					username = player1.Name,
+					displayName = player1.DisplayName
 				})
 			end
 		end
-		return substring
+		return List
 	end
 end

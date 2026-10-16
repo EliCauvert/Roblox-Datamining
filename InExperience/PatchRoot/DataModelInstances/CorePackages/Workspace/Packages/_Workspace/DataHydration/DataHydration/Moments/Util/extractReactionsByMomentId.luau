@@ -1,169 +1,174 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local momentsTypesModule = require(dataHydration.Parent.MomentsTypes)
-local _ = require(dataHydration.Moments.MomentsStoreTypes)
-local hardcodedMomentsEmojisModule = require(dataHydration.Moments.Util.hardcodedMomentsEmojis)
-local resolveEmoteIdModule = require(dataHydration.Moments.Util.resolveEmoteId)
-local resolveMomentsEmojiCatalogModule = require(dataHydration.Moments.Util.resolveMomentsEmojiCatalog)
-local fFlagMomentsEmojiSetsApiModule = require(dataHydration.Moments.FFlagMomentsEmojiSetsApi)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local _ = require(DataHydration.Moments.MomentsStoreTypes)
+local HardcodedMomentsEmojisModule = require(DataHydration.Moments.Util.hardcodedMomentsEmojis)
+local ResolveEmoteIdModule = require(DataHydration.Moments.Util.resolveEmoteId)
+local ResolveMomentsEmojiCatalogModule = require(DataHydration.Moments.Util.resolveMomentsEmojiCatalog)
+local FFlagMomentsEmojiSetsApiModule = require(DataHydration.Moments.FFlagMomentsEmojiSetsApi)
 local t = {}
 
-for i, v in momentsTypesModule.Enums.ReactionType do
-	t[v] = true
+for _, value in require(DataHydration.Parent.MomentsTypes).Enums.ReactionType do
+	t[value] = true
 end
-local function _(p1)
-	-- upvalues: t (ref), resolveEmoteIdModule (ref)
-	return if t[p1] ~= true then t[resolveEmoteIdModule.normalizeName(p1)] == true else true
-end
-
-local _ = function(p1)
-	-- upvalues: resolveEmoteIdModule (ref), t (ref)
-	local var1 = resolveEmoteIdModule.normalizeName(p1)
-	
-	return if t[var1] then var1 else nil
+local function _(p1): boolean --[[ Line: 33 | Named "isValidReactionType" ]]
+	-- upvalues: t (copy), ResolveEmoteIdModule (copy)
+	return t[p1] == true or t[ResolveEmoteIdModule.normalizeName(p1)] == true
 end
 
-local function convertReactionCountsArray(p1, p2)
-	-- upvalues: resolveEmoteIdModule (ref), t (ref)
-	local t_1 = {}
-	local var1 = false
-	local var2 = nil
+local _ = function(p1) --[[ Line: 37 | Named "asReactionType" ]]
+	-- upvalues: ResolveEmoteIdModule (copy), t (copy)
+	local NormalizeNameResult = ResolveEmoteIdModule.normalizeName(p1)
 	
-	for i, v in p1 do
-		if type(v) == "table" then
-			local count = v.count
+	return if t[NormalizeNameResult] then NormalizeNameResult else nil
+end
+
+local function convertReactionCountsArray(ReactionCounts, Emojis) --[[ Line: 45 ]]
+	-- upvalues: ResolveEmoteIdModule (copy), t (copy)
+	local t1 = {}
+	local Flag = false
+	local UserReaction = nil
+	
+	for _, reactionCount in ReactionCounts do
+		if type(reactionCount) == "table" then
+			local Count: number = reactionCount.count
 			
-			if type(count) == "number" and count > 0 then
-				local var3 = nil
+			if type(Count) == "number" and Count > 0 then
+				local v1 = nil
 				
-				if type(v.name) == "string" then
-					local var4 = resolveEmoteIdModule.normalizeName(v.name)
-					var3 = if t[var4] then var4 else nil
+				if type(reactionCount.name) == "string" then
+					local NormalizeNameResult = ResolveEmoteIdModule.normalizeName(reactionCount.name)
+					v1 = if t[NormalizeNameResult] then NormalizeNameResult else nil
 				end
-				if var3 == nil then
-					local emoteId = v.emote_id or v.emoteId
+				if v1 == nil then
+					local EmoteId = reactionCount.emote_id or reactionCount.emoteId
 					
-					if type(emoteId) == "string" then
-						local var5 = resolveEmoteIdModule.reactionTypeForEmoteId(p2, emoteId)
+					if type(EmoteId) == "string" then
+						local ReactionTypeForEmoteIdResult = ResolveEmoteIdModule.reactionTypeForEmoteId(Emojis, EmoteId)
 						
-						if var5 ~= nil then
-							local var6 = resolveEmoteIdModule.normalizeName(var5)
-							var3 = if t[var6] then var6 else nil
+						if ReactionTypeForEmoteIdResult ~= nil then
+							local NormalizeNameResult = ResolveEmoteIdModule.normalizeName(ReactionTypeForEmoteIdResult)
+							v1 = if t[NormalizeNameResult] then NormalizeNameResult else nil
 						end
 					end
 				end
-				if var3 ~= nil then
-					t_1[var3] = count
-					var1 = true
-					local hasUserReacted = v.has_user_reacted
+				if v1 ~= nil then
+					t1[v1] = Count
+					Flag = true
+					local HasUserReacted = reactionCount.has_user_reacted
 					
-					if hasUserReacted == nil then
-						hasUserReacted = v.hasUserReacted
+					if HasUserReacted == nil then
+						HasUserReacted = reactionCount.hasUserReacted
 					end
-					if hasUserReacted == true then
-						var2 = var3
+					if HasUserReacted == true then
+						UserReaction = v1
 					end
 				end
 			end
 		end
 	end
-	if var2 ~= nil then
-		t_1.userReaction = var2
-		var1 = true
+	if UserReaction ~= nil then
+		t1.userReaction = UserReaction
+		Flag = true
 	end
-	return if var1 then t_1 else nil
+	return if Flag then t1 else nil
 end
 
-local function convertLegacyApiReactions(p3)
-	-- upvalues: fFlagMomentsEmojiSetsApiModule (ref), t (ref), resolveEmoteIdModule (ref)
-	local t_1 = {}
-	local var7 = false
-	local counts = p3.counts
+local function convertLegacyApiReactions(Reactions) --[[ Line: 106 ]]
+	-- upvalues: FFlagMomentsEmojiSetsApiModule (copy), t (copy), ResolveEmoteIdModule (copy)
+	local t2 = {}
+	local Flag = false
+	local Counts = Reactions.counts
 	
-	if type(counts) == "table" then
-		for i, v in counts do
-			if type(i) == "string" and type(v) == "number" and v > 0 then
-				if fFlagMomentsEmojiSetsApiModule then
-					local var8 = if t[i] ~= true then t[resolveEmoteIdModule.normalizeName(i)] == true else true
-					
-					if var8 then
-						local var9 = resolveEmoteIdModule.normalizeName(i)
-						var8 = if t[var9] then var9 else nil
+	if type(Counts) == "table" then
+		for i, count in Counts do
+			if type(i) == "string" and type(count) == "number" and count > 0 then
+				if FFlagMomentsEmojiSetsApiModule then
+					if t[i] == true or t[ResolveEmoteIdModule.normalizeName(i)] == true then
+						local NormalizeNameResult = ResolveEmoteIdModule.normalizeName(i)
+						local NormalizeNameResult1 = if t[NormalizeNameResult] then NormalizeNameResult else nil
 						
-						if var8 ~= nil then
-							t_1[var8] = v
-							var7 = true
+						if NormalizeNameResult1 ~= nil then
+							t2[NormalizeNameResult1] = count
+							Flag = true
 						end
 					end
 				elseif t[i] then
-					t_1[i] = v
-					var7 = true
+					t2[i] = count
+					Flag = true
 				end
 			end
 		end
 	end
-	local userReaction = p3.userReaction or p3.viewerReaction
+	local UserReaction = Reactions.userReaction or Reactions.viewerReaction
 	
-	if type(userReaction) == "string" then
-		if fFlagMomentsEmojiSetsApiModule then
-			local var10 = resolveEmoteIdModule.normalizeName(userReaction)
-			local var11 = if t[var10] then var10 else nil
+	if type(UserReaction) == "string" then
+		if FFlagMomentsEmojiSetsApiModule then
+			local NormalizeNameResult = ResolveEmoteIdModule.normalizeName(UserReaction)
+			local NormalizeNameResult2 = if t[NormalizeNameResult] then NormalizeNameResult else nil
 			
-			if var11 ~= nil then
-				t_1.userReaction = var11
-				var7 = true
+			if NormalizeNameResult2 ~= nil then
+				t2.userReaction = NormalizeNameResult2
+				Flag = true
 			end
-		elseif t[userReaction] then
-			t_1.userReaction = userReaction
-			var7 = true
+		elseif t[UserReaction] then
+			t2.userReaction = UserReaction
+			Flag = true
 		end
 	end
-	return if var7 then t_1 else nil
+	return if Flag then t2 else nil
 end
 
-local _ = function(p4, p5)
-	-- upvalues: fFlagMomentsEmojiSetsApiModule (ref), convertReactionCountsArray (ref), convertLegacyApiReactions (ref)
-	if type(p4) ~= "table" then
+local _ = function(p1, p2) --[[ Line: 151 | Named "convertApiReactions" ]]
+	-- upvalues: FFlagMomentsEmojiSetsApiModule (copy), convertReactionCountsArray (copy), convertLegacyApiReactions (copy)
+	if type(p1) ~= "table" then
 		return nil
-	elseif fFlagMomentsEmojiSetsApiModule then
-		local reactionCounts = p4.reaction_counts or p4.reactionCounts
+	end
+	if FFlagMomentsEmojiSetsApiModule then
+		local ReactionCounts = p1.reaction_counts or p1.reactionCounts
 		
-		if type(reactionCounts) == "table" then
-			local var12 = convertReactionCountsArray(reactionCounts, p5)
+		if type(ReactionCounts) == "table" then
+			local ConvertReactionCountsArrayResult = convertReactionCountsArray(ReactionCounts, p2)
 			
-			return if var12 == nil then convertLegacyApiReactions(p4) else var12
+			if ConvertReactionCountsArrayResult ~= nil then
+				return ConvertReactionCountsArrayResult
+			end
 		end
 	end
+	return (convertLegacyApiReactions(p1))
 end
 
-return function(p4)
-	-- upvalues: fFlagMomentsEmojiSetsApiModule (ref), resolveMomentsEmojiCatalogModule (ref), hardcodedMomentsEmojisModule (ref), convertReactionCountsArray (ref), convertLegacyApiReactions (ref)
+return function(List) --[[ Line: 169 | Named "extractReactionsByMomentId" ]]
+	-- upvalues: FFlagMomentsEmojiSetsApiModule (copy), ResolveMomentsEmojiCatalogModule (copy), HardcodedMomentsEmojisModule (copy), convertReactionCountsArray (copy), convertLegacyApiReactions (copy)
 	local t = {}
-	local var12 = if fFlagMomentsEmojiSetsApiModule then resolveMomentsEmojiCatalogModule.resolveMomentsEmojiCatalog(nil).emojis else hardcodedMomentsEmojisModule
+	local Emojis = if FFlagMomentsEmojiSetsApiModule then ResolveMomentsEmojiCatalogModule.resolveMomentsEmojiCatalog(nil).emojis else HardcodedMomentsEmojisModule
 	
-	if p4 == nil then
+	if List == nil then
 		return t
 	end
-	for i, v in p4 do
-		local entityId = v.entityId or v.id
+	for _, value in List do
+		local EntityId = value.entityId or value.id
 		
-		if entityId ~= nil then
-			local var13
-			local reactions = v.reactions
+		if EntityId ~= nil then
+			local Reactions = value.reactions
+			local v2 = nil
 			
-			if type(reactions) == "table" then
-				if fFlagMomentsEmojiSetsApiModule then
-					local reactionCounts = reactions.reaction_counts or reactions.reactionCounts
+			if type(Reactions) == "table" then
+				if FFlagMomentsEmojiSetsApiModule then
+					local ReactionCounts = Reactions.reaction_counts or Reactions.reactionCounts
 					
-					if type(reactionCounts) == "table" then
-						local var14 = convertReactionCountsArray(reactionCounts, var12)
-						var13 = if var14 == nil then convertLegacyApiReactions(reactions) else var14
+					if type(ReactionCounts) == "table" then
+						local ConvertReactionCountsArrayResult = convertReactionCountsArray(ReactionCounts, Emojis)
+						
+						if ConvertReactionCountsArrayResult ~= nil then
+							v2 = ConvertReactionCountsArrayResult
+						end
 					end
 				end
+				v2 = convertLegacyApiReactions(Reactions)
 			else
-				var13 = nil
+				v2 = nil
 			end
-			if var13 ~= nil then
-				t[entityId] = var13
+			if v2 ~= nil then
+				t[EntityId] = v2
 			end
 		end
 	end

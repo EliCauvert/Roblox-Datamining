@@ -1,96 +1,97 @@
-﻿local contextActionService = game:GetService("ContextActionService")
-local guiService = game:GetService("GuiService")
+﻿local ContextActionService = game:GetService("ContextActionService")
+local GuiService = game:GetService("GuiService")
 local VRService = game:GetService("VRService")
-local parent = script:FindFirstAncestor("CoreGuiCommon").Parent
-local foundationModule = require(parent.Foundation)
-local localizationModule = require(parent.Localization)
-local reactModule = require(parent.React)
-local dialog = foundationModule.Dialog
-local useLocalization = localizationModule.Hooks.useLocalization
+local Parent = script:FindFirstAncestor("CoreGuiCommon").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local Dialog = FoundationModule.Dialog
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-function HeadsetDisconnectDialog(value)
-	-- upvalues: guiService (ref), VRService (ref), useLocalization (ref), reactModule (ref), contextActionService (ref), dialog (ref), foundationModule (ref)
-	local mockGuiService = value.mockGuiService or guiService
-	local mockVRService = value.mockVRService or VRService
-	local var1 = useLocalization({
+function HeadsetDisconnectDialog(p1) --[[ Line: 30 ]]
+	-- upvalues: GuiService (copy), VRService (copy), UseLocalizationFunction (copy), ReactModule (copy), ContextActionService (copy), Dialog (copy), FoundationModule (copy)
+	local MockGuiService = p1.mockGuiService or GuiService
+	local MockVRService = p1.mockVRService or VRService
+	local UseLocalizationResult = UseLocalizationFunction({
 		titleText = "InGame.ConnectionError.Heading.VRDisconnected",
 		bodyText = "InGame.ConnectionError.Message.RestartApp",
 		buttonText = "InGame.ConnectionError.Action.Restart"
 	})
-	local var2, var3 = reactModule.useState(false)
-	reactModule.useEffect(function()
-		-- upvalues: mockVRService (ref), var3 (ref)
-		local var4 = mockVRService:GetPropertyChangedSignal("VRDeviceAvailable"):Connect(function(p1)
-			-- upvalues: var3 (copy)
-			var3(not p1)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	ReactModule.useEffect(function() --[[ Line: 43 ]]
+		-- upvalues: MockVRService (copy), UseStateResult2 (copy)
+		local Connection = MockVRService:GetPropertyChangedSignal("VRDeviceAvailable"):Connect(function(p2) --[[ Line: 44 ]]
+			-- upvalues: UseStateResult2 (upval)
+			UseStateResult2(not p2)
 		end)
 		
-		return function()
-			-- upvalues: var4 (ref)
-			var4:Disconnect()
+		return function() --[[ Line: 48 ]]
+			-- upvalues: Connection (copy)
+			Connection:Disconnect()
 		end
 	end, {})
-	local var4 = reactModule.useCallback(function()
-		-- upvalues: mockGuiService (ref)
-		local notificationTypeList = mockGuiService:GetNotificationTypeList()
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 53 ]]
+		-- upvalues: MockGuiService (copy)
+		local NotificationTypeList = MockGuiService:GetNotificationTypeList()
 		
 		if game:GetEngineFeature("EnableLuaControlsRestartApp") then
-			mockGuiService:BroadcastNotification("", notificationTypeList.RESTART_APP)
+			MockGuiService:BroadcastNotification("", NotificationTypeList.RESTART_APP)
 			
 			return
+		else
+			MockGuiService:BroadcastNotification("", NotificationTypeList.NATIVE_EXIT)
 		end
-		mockGuiService:BroadcastNotification("", notificationTypeList.NATIVE_EXIT)
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), mockGuiService (ref), contextActionService (copy), var4 (ref)
-		if var2 then
-			mockGuiService:SetMenuIsOpen(true, "HeadsetDisconnectedDialog")
-			contextActionService:BindCoreAction("TopBarGamepadDisableMenuShortcut", function()
+	ReactModule.useEffect(function() --[[ Line: 63 ]]
+		-- upvalues: UseStateResult (copy), MockGuiService (copy), ContextActionService (upval), UseResult (copy)
+		if UseStateResult then
+			MockGuiService:SetMenuIsOpen(true, "HeadsetDisconnectedDialog")
+			ContextActionService:BindCoreAction("TopBarGamepadDisableMenuShortcut", function() --[[ Line: 67 ]]
 				return Enum.ContextActionResult.Sink
 			end, false, Enum.KeyCode.ButtonStart, Enum.KeyCode.Escape)
-			contextActionService:BindCoreAction("TopBarDialogConfirm", function(_, p1, _)
-				-- upvalues: var4 (copy)
-				if p1 == Enum.UserInputState.Begin then
-					var4()
+			ContextActionService:BindCoreAction("TopBarDialogConfirm", function(_, UserInputState, _) --[[ Line: 71 ]]
+				-- upvalues: UseResult (upval)
+				if UserInputState == Enum.UserInputState.Begin then
+					UseResult()
 					
 					return Enum.ContextActionResult.Sink
+				else
+					return Enum.ContextActionResult.Pass
 				end
-				return Enum.ContextActionResult.Pass
 			end, false, Enum.KeyCode.Return, Enum.KeyCode.ButtonA)
 		else
-			mockGuiService:SetMenuIsOpen(false, "HeadsetDisconnectedDialog")
-			contextActionService:UnbindCoreAction("TopBarGamepadDisableMenuShortcut")
-			contextActionService:UnbindCoreAction("TopBarDialogConfirm")
+			MockGuiService:SetMenuIsOpen(false, "HeadsetDisconnectedDialog")
+			ContextActionService:UnbindCoreAction("TopBarGamepadDisableMenuShortcut")
+			ContextActionService:UnbindCoreAction("TopBarDialogConfirm")
 		end
-		return function()
-			-- upvalues: mockGuiService (copy), contextActionService (copy)
-			mockGuiService:SetMenuIsOpen(false, "HeadsetDisconnectedDialog")
-			contextActionService:UnbindCoreAction("TopBarGamepadDisableMenuShortcut")
-			contextActionService:UnbindCoreAction("TopBarDialogConfirm")
+		return function() --[[ Line: 85 ]]
+			-- upvalues: MockGuiService (upval), ContextActionService (upval)
+			MockGuiService:SetMenuIsOpen(false, "HeadsetDisconnectedDialog")
+			ContextActionService:UnbindCoreAction("TopBarGamepadDisableMenuShortcut")
+			ContextActionService:UnbindCoreAction("TopBarDialogConfirm")
 		end
-	end, { var2 })
+	end, { UseStateResult })
 	
-	return if var2 then reactModule.createElement(dialog.Root, {
+	return if UseStateResult then ReactModule.createElement(Dialog.Root, {
 		testId = "headset-disconnect-dialog",
-		size = foundationModule.Enums.DialogSize.Small,
-		hasBackdrop = value.hasBackdrop ~= nil or value.hasBackdrop,
-		disablePortal = value.disablePortal
+		size = FoundationModule.Enums.DialogSize.Small,
+		hasBackdrop = p1.hasBackdrop == nil or p1.hasBackdrop,
+		disablePortal = p1.disablePortal
 	}, {
-		DialogTitle = reactModule.createElement(dialog.Title, { text = var1.titleText }),
-		DialogContent = reactModule.createElement(dialog.Content, nil, {
-			DialogText = reactModule.createElement(dialog.Text, { Text = var1.bodyText })
+		DialogTitle = ReactModule.createElement(Dialog.Title, { text = UseLocalizationResult.titleText }),
+		DialogContent = ReactModule.createElement(Dialog.Content, nil, {
+			DialogText = ReactModule.createElement(Dialog.Text, { Text = UseLocalizationResult.bodyText })
 		}),
-		DialogActions = reactModule.createElement(dialog.Actions, {
+		DialogActions = ReactModule.createElement(Dialog.Actions, {
 			actions = {
 				{
 					testId = "restart-button",
-					text = var1.buttonText,
-					variant = foundationModule.Enums.ButtonVariant.Emphasis,
-					onActivated = var4
+					text = UseLocalizationResult.buttonText,
+					variant = FoundationModule.Enums.ButtonVariant.Emphasis,
+					onActivated = UseResult
 				}
 			}
 		})
 	}) else nil
 end
 
-return reactModule.memo(HeadsetDisconnectDialog)
+return ReactModule.memo(HeadsetDisconnectDialog)

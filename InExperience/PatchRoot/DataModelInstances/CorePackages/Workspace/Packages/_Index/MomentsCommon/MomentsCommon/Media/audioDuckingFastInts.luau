@@ -6,10 +6,10 @@ game:DefineFastInt("MomentsAudioDuckRatio", 4)
 game:DefineFastInt("MomentsAudioDuckMakeupGainDb", 0)
 
 return {
-	getTtsVolume = function()
+	getTtsVolume = function() --[[ Line: 24 ]]
 		return game:GetFastInt("MomentsTTSVolumePercent") / 100
 	end,
-	getCompressorParams = function()
+	getCompressorParams = function() --[[ Line: 28 ]]
 		return {
 			threshold = game:GetFastInt("MomentsAudioDuckThresholdDb"),
 			ratio = game:GetFastInt("MomentsAudioDuckRatio"),

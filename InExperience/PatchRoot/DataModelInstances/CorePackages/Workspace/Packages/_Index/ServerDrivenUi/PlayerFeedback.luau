@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.PlayerFeedback.PlayerFeedback)
+﻿return (require(script.Parent.Parent.Parent._Index.PlayerFeedback.PlayerFeedback))

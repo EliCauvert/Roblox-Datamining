@@ -1,78 +1,78 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
-local avatarExperienceCommonModule = require(parent.AvatarExperienceCommon)
-local avatarExperienceAnalyticsModule = require(parent.AvatarExperienceAnalytics)
-local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
-local performFetch = require(parent.Http).PerformFetch
-local promiseModule = require(parent.Promise)
-local toastRoduxModule = require(parent.ToastRodux)
-local AVATAR_EDITOR_CONSTANTS = avatarExperienceCommonModule.Constants.AVATAR_EDITOR_CONSTANTS
-local toastType = toastRoduxModule.Enums.ToastType
-local setCurrentToastMessage = toastRoduxModule.Actions.SetCurrentToastMessage
-local constants = avatarExperienceAnalyticsModule.Constants
-local getGearAssetIdFromState = avatarExperienceCommonModule.Utils.getGearAssetIdFromState
-local reportAvatarEventCounterNoAnalyticsArgument = avatarExperienceAnalyticsModule.reportAvatarEventCounterNoAnalyticsArgument
-local reportAvatarEventCounterV1 = avatarExperienceAnalyticsModule.reportAvatarEventCounterV1
-local fIntAXLookOutfitCreationDelayMs = avatarExperienceFlagsModule.FIntAXLookOutfitCreationDelayMs
-local t = {
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
+local AvatarExperienceCommonModule = require(Parent.AvatarExperienceCommon)
+local AvatarExperienceAnalyticsModule = require(Parent.AvatarExperienceAnalytics)
+local PerformFetch = require(Parent.Http).PerformFetch
+local PromiseModule = require(Parent.Promise)
+local ToastRoduxModule = require(Parent.ToastRodux)
+local AVATAREDITORCONSTANTS = AvatarExperienceCommonModule.Constants.AVATAR_EDITOR_CONSTANTS
+local ToastType = ToastRoduxModule.Enums.ToastType
+local SetCurrentToastMessageFunction = ToastRoduxModule.Actions.SetCurrentToastMessage
+local Constants = AvatarExperienceAnalyticsModule.Constants
+local GetGearAssetIdFromStateFunction = AvatarExperienceCommonModule.Utils.getGearAssetIdFromState
+local ReportAvatarEventCounterNoAnalyticsArgumentFunction = AvatarExperienceAnalyticsModule.reportAvatarEventCounterNoAnalyticsArgument
+local ReportAvatarEventCounterV1Function = AvatarExperienceAnalyticsModule.reportAvatarEventCounterV1
+local FIntAXLookOutfitCreationDelayMs = require(Parent.AvatarExperienceFlags).FIntAXLookOutfitCreationDelayMs
+local config = {
 	toastMessage = "Feature.Avatar.Message.InvalidName",
 	isLocalized = false,
-	toastType = toastType.InformationMessage
+	toastType = ToastType.InformationMessage
 }
-local t_1 = {
+local config1 = {
 	toastMessage = "Feature.Avatar.Message.ReachedMaxOutfits",
 	isLocalized = false,
-	toastType = toastType.InformationMessage
+	toastType = ToastType.InformationMessage
 }
-local t_2 = {
+local config2 = {
 	toastMessage = "Feature.Avatar.Message.UnknownErrorCreatingOutfit",
 	isLocalized = false,
-	toastType = toastType.InformationMessage
+	toastType = ToastType.InformationMessage
 }
 
-return function(p1, p2, p3, p4)
-	-- upvalues: performFetch (ref), AVATAR_EDITOR_CONSTANTS (ref), getGearAssetIdFromState (ref), fIntAXLookOutfitCreationDelayMs (ref), promiseModule (ref), reportAvatarEventCounterNoAnalyticsArgument (ref), constants (ref), reportAvatarEventCounterV1 (ref), setCurrentToastMessage (ref), t (ref), t_1 (ref), t_2 (ref)
-	return function(p5, p6)
-		-- upvalues: performFetch (copy), AVATAR_EDITOR_CONSTANTS (copy), getGearAssetIdFromState (copy), p2 (ref), p3 (ref), fIntAXLookOutfitCreationDelayMs (copy), promiseModule (copy), p1 (ref), reportAvatarEventCounterNoAnalyticsArgument (copy), constants (copy), reportAvatarEventCounterV1 (copy), p4 (ref), setCurrentToastMessage (copy), t (copy), t_1 (copy), t_2 (copy)
-		local avatarEditorService = p6.avatarEditorService
+return function(Name, Callback, p1, Callback1) --[[ Line: 41 ]]
+	-- upvalues: PerformFetch (copy), AVATAREDITORCONSTANTS (copy), GetGearAssetIdFromStateFunction (copy), FIntAXLookOutfitCreationDelayMs (copy), PromiseModule (copy), ReportAvatarEventCounterNoAnalyticsArgumentFunction (copy), Constants (copy), ReportAvatarEventCounterV1Function (copy), SetCurrentToastMessageFunction (copy), config (copy), config1 (copy), config2 (copy)
+	return function(p2, p3) --[[ Line: 47 ]]
+		-- upvalues: PerformFetch (upval), AVATAREDITORCONSTANTS (upval), GetGearAssetIdFromStateFunction (upval), Callback (copy), p1 (copy), FIntAXLookOutfitCreationDelayMs (upval), PromiseModule (upval), Name (copy), ReportAvatarEventCounterNoAnalyticsArgumentFunction (upval), Constants (upval), ReportAvatarEventCounterV1Function (upval), Callback1 (copy), SetCurrentToastMessageFunction (upval), config (upval), config1 (upval), config2 (upval)
+		local AvatarEditorService = p3.avatarEditorService
 		
-		return performFetch.Single(AVATAR_EDITOR_CONSTANTS.CreateOutfitKey, function(p7)
-			-- upvalues: getGearAssetIdFromState (copy), p2 (copy), p3 (copy), fIntAXLookOutfitCreationDelayMs (copy), promiseModule (copy), avatarEditorService (ref), p1 (copy), reportAvatarEventCounterNoAnalyticsArgument (copy), constants (copy), reportAvatarEventCounterV1 (copy), p4 (copy), setCurrentToastMessage (copy), t (copy), t_1 (copy), t_2 (copy)
-			local state = p7:getState()
-			local avatarType = Enum.HumanoidRigType[state.AvatarExperience.AvatarEditor.Character.AvatarType]
-			local var1 = getGearAssetIdFromState(state.AvatarExperience)
-			local var2 = p2(state, p3)
-			task.spawn(function()
-				-- upvalues: fIntAXLookOutfitCreationDelayMs (copy), promiseModule (copy), avatarEditorService (copy), var2 (ref), avatarType (ref), p1 (copy), var1 (ref), reportAvatarEventCounterNoAnalyticsArgument (copy), constants (copy), reportAvatarEventCounterV1 (copy), p4 (copy), p7 (ref), setCurrentToastMessage (copy), t (copy), t_1 (copy), t_2 (copy)
-				task.wait(fIntAXLookOutfitCreationDelayMs / 1000)
-				promiseModule.new(function(p8, p9)
-					-- upvalues: avatarEditorService (copy), var2 (copy), avatarType (copy), p1 (copy), var1 (copy), reportAvatarEventCounterNoAnalyticsArgument (copy), constants (copy), reportAvatarEventCounterV1 (copy), p4 (copy), p7 (copy), setCurrentToastMessage (copy), t (copy), t_1 (copy), t_2 (copy)
-					local var3 = avatarEditorService:NoPromptCreateOutfit(var2, avatarType, p1, var1)
-					while not var3 do
-						avatarEditorService.PromptCreateOutfitCompleted:Wait()
-						var3 = avatarEditorService:NoPromptCreateOutfit(var2, avatarType, p1, 0)
-						reportAvatarEventCounterNoAnalyticsArgument(constants.AVATAR_EDITOR_SERVICE_ERRORS.NoPromptCreateOutfit)
+		return PerformFetch.Single(AVATAREDITORCONSTANTS.CreateOutfitKey, function(p4) --[[ Line: 49 ]]
+			-- upvalues: GetGearAssetIdFromStateFunction (upval), Callback (upval), p1 (upval), FIntAXLookOutfitCreationDelayMs (upval), PromiseModule (upval), AvatarEditorService (copy), Name (upval), ReportAvatarEventCounterNoAnalyticsArgumentFunction (upval), Constants (upval), ReportAvatarEventCounterV1Function (upval), Callback1 (upval), SetCurrentToastMessageFunction (upval), config (upval), config1 (upval), config2 (upval)
+			local State = p4:getState()
+			local HumanoidRigTypeEntry = Enum.HumanoidRigType[State.AvatarExperience.AvatarEditor.Character.AvatarType]
+			local GearAssetIdFromState = GetGearAssetIdFromStateFunction(State.AvatarExperience)
+			local CallbackResult = Callback(State, p1)
+			task.spawn(function() --[[ Line: 59 ]]
+				-- upvalues: FIntAXLookOutfitCreationDelayMs (upval), PromiseModule (upval), AvatarEditorService (upval), CallbackResult (copy), HumanoidRigTypeEntry (copy), Name (upval), GearAssetIdFromState (copy), ReportAvatarEventCounterNoAnalyticsArgumentFunction (upval), Constants (upval), ReportAvatarEventCounterV1Function (upval), Callback1 (upval), p4 (copy), SetCurrentToastMessageFunction (upval), config (upval), config1 (upval), config2 (upval)
+				task.wait(FIntAXLookOutfitCreationDelayMs / 1000)
+				PromiseModule.new(function(Callback: () -> (), Callback2: () -> ()) --[[ Line: 63 ]]
+					-- upvalues: AvatarEditorService (upval), CallbackResult (upval), HumanoidRigTypeEntry (upval), Name (upval), GearAssetIdFromState (upval), ReportAvatarEventCounterNoAnalyticsArgumentFunction (upval), Constants (upval), ReportAvatarEventCounterV1Function (upval), Callback1 (upval), p4 (upval), SetCurrentToastMessageFunction (upval), config (upval), config1 (upval), config2 (upval)
+					local NoPromptCreateOutfitResult = AvatarEditorService:NoPromptCreateOutfit(CallbackResult, HumanoidRigTypeEntry, Name, GearAssetIdFromState)
+					while not NoPromptCreateOutfitResult do
+						AvatarEditorService.PromptCreateOutfitCompleted:Wait()
+						NoPromptCreateOutfitResult = AvatarEditorService:NoPromptCreateOutfit(CallbackResult, HumanoidRigTypeEntry, Name, 0)
+						ReportAvatarEventCounterNoAnalyticsArgumentFunction(Constants.AVATAR_EDITOR_SERVICE_ERRORS.NoPromptCreateOutfit)
 					end
-					local var4, var5 = avatarEditorService.PromptCreateOutfitCompleted:Wait()
+					local Result, FailureType = AvatarEditorService.PromptCreateOutfitCompleted:Wait()
 					
-					if var4 == Enum.AvatarPromptResult.Success then
-						reportAvatarEventCounterV1(constants.AVATAR_EVENT_COUNTER_NAME.AXCreateCostume)
-						p4()
-						p8()
+					if Result == Enum.AvatarPromptResult.Success then
+						ReportAvatarEventCounterV1Function(Constants.AVATAR_EVENT_COUNTER_NAME.AXCreateCostume)
+						Callback1()
+						Callback()
 						
 						return
-					elseif var5 == Enum.CreateOutfitFailure.InvalidName then
-						p7:dispatch(setCurrentToastMessage(t))
-					elseif var5 == Enum.CreateOutfitFailure.OutfitLimitReached then
-						p7:dispatch(setCurrentToastMessage(t_1))
-					elseif var5 == Enum.CreateOutfitFailure.Other then
-						p7:dispatch(setCurrentToastMessage(t_2))
 					end
-					reportAvatarEventCounterNoAnalyticsArgument(constants.AVATAR_EDITOR_SERVICE_ERRORS.CreateOutfit)
-					p9()
+					if FailureType == Enum.CreateOutfitFailure.InvalidName then
+						p4:dispatch(SetCurrentToastMessageFunction(config))
+					elseif FailureType == Enum.CreateOutfitFailure.OutfitLimitReached then
+						p4:dispatch(SetCurrentToastMessageFunction(config1))
+					elseif FailureType == Enum.CreateOutfitFailure.Other then
+						p4:dispatch(SetCurrentToastMessageFunction(config2))
+					end
+					ReportAvatarEventCounterNoAnalyticsArgumentFunction(Constants.AVATAR_EDITOR_SERVICE_ERRORS.CreateOutfit)
+					Callback2()
 				end)
 			end)
 			
-			return promiseModule.resolve()
-		end)(p5):catch(function(_) end)
+			return PromiseModule.resolve()
+		end)(p2):catch(function(_) --[[ Line: 110 ]] end)
 	end
 end

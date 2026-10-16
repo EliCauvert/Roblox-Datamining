@@ -1,9 +1,9 @@
-﻿local roactModule = require(script:FindFirstAncestor("RoactUtils").Parent.Roact)
+﻿local RoactModule = require(script:FindFirstAncestor("RoactUtils").Parent.Roact)
 
-return function(p1)
-	-- upvalues: roactModule (ref)
-	p1.forwardRef = p1[roactModule.Ref]
-	p1[roactModule.Ref] = nil
+return function(p1) --[[ Line: 6 | Named "validateWithRefForwarding" ]]
+	-- upvalues: RoactModule (copy)
+	p1.forwardRef = p1[RoactModule.Ref]
+	p1[RoactModule.Ref] = nil
 	
 	return p1
 end

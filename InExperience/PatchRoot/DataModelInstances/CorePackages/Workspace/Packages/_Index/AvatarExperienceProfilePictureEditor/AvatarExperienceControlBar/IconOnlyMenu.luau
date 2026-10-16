@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent.Parent._Index.AvatarExperienceControlBar.AvatarExperienceControlBar.Components.IconOnlyMenu)
+﻿return (require(script.Parent.Parent.Parent.Parent._Index.AvatarExperienceControlBar.AvatarExperienceControlBar.Components.IconOnlyMenu))

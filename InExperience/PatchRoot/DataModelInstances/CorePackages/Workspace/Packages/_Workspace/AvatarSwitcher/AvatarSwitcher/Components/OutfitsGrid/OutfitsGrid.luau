@@ -1,78 +1,78 @@
-﻿local avatarSwitcher = script:FindFirstAncestor("AvatarSwitcher")
-local parent = avatarSwitcher.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local flatList = require(parent.VirtualizedList).FlatList
-local outfitsRowModule = require(avatarSwitcher.Components.OutfitsRow)
-local _ = require(avatarSwitcher.types)
-local avatarSwitcherGridWindowSize = game:DefineFastInt("AvatarSwitcherGridWindowSize", 10)
-local avatarSwitcherGridInitialNumToRender = game:DefineFastInt("AvatarSwitcherGridInitialNumToRender", 10)
-local var1 = game:DefineFastInt("AvatarSwitcherGridOnEndReachedThreshold", 200) / 100
-local var2 = if require(parent.AvatarExperienceFlags).FFlagAvatarSwitcherUiFixes then game:DefineFastInt("AvatarSwitcherTileSize", 98) else 108
+﻿local AvatarSwitcher = script:FindFirstAncestor("AvatarSwitcher")
+local Parent = AvatarSwitcher.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local FlatList = require(Parent.VirtualizedList).FlatList
+local OutfitsRowModule = require(AvatarSwitcher.Components.OutfitsRow)
+local _ = require(AvatarSwitcher.types)
+local AvatarSwitcherGridWindowSize = game:DefineFastInt("AvatarSwitcherGridWindowSize", 10)
+local AvatarSwitcherGridInitialNumToRender = game:DefineFastInt("AvatarSwitcherGridInitialNumToRender", 10)
+local AvatarSwitcherGridOnEndReachedThresholdRatio = game:DefineFastInt("AvatarSwitcherGridOnEndReachedThreshold", 200) / 100
+local AvatarSwitcherTileSize = if require(Parent.AvatarExperienceFlags).FFlagAvatarSwitcherUiFixes then game:DefineFastInt("AvatarSwitcherTileSize", 98) else 108
 
-return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), outfitsRowModule (ref), var2 (ref), foundationModule (ref), flatList (ref), avatarSwitcherGridWindowSize (ref), avatarSwitcherGridInitialNumToRender (ref), var1 (ref)
-	local var3 = useTokens()
-	local var4, var5 = reactModule.useState(3)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref)
-		task.spawn(function()
-			-- upvalues: p1 (copy)
+return function(p1) --[[ Line: 35 | Named "OutfitsGrid" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), OutfitsRowModule (copy), AvatarSwitcherTileSize (copy), FoundationModule (copy), FlatList (copy), AvatarSwitcherGridWindowSize (copy), AvatarSwitcherGridInitialNumToRender (copy), AvatarSwitcherGridOnEndReachedThresholdRatio (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(3)
+	ReactModule.useEffect(function() --[[ Line: 40 ]]
+		-- upvalues: p1 (copy)
+		task.spawn(function() --[[ Line: 41 ]]
+			-- upvalues: p1 (upval)
 			p1.fetchNextOutfitsPage()
 		end)
 	end, {})
 	
-	return reactModule.createElement(foundationModule.View, {
+	return (ReactModule.createElement(FoundationModule.View, {
 		tag = "size-full-full",
-		onAbsoluteSizeChanged = reactModule.useCallback(function(p2)
-			-- upvalues: var5 (ref), var2 (copy)
-			var5(math.max(3, math.floor(p2.AbsoluteSize.X / var2)))
+		onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame) --[[ Line: 64 ]]
+			-- upvalues: UseStateResult2 (copy), AvatarSwitcherTileSize (upval)
+			UseStateResult2((math.max(3, (math.floor(Frame.AbsoluteSize.X / AvatarSwitcherTileSize)))))
 		end, {}),
 		padding = {
-			left = UDim.new(0, -var3.Padding.XXSmall),
-			right = UDim.new(0, -var3.Padding.XXSmall)
+			left = UDim.new(0, -UseTokensResult.Padding.XXSmall),
+			right = UDim.new(0, -UseTokensResult.Padding.XXSmall)
 		}
 	}, {
-		ClipFrame = reactModule.createElement(foundationModule.View, {
+		ClipFrame = ReactModule.createElement(FoundationModule.View, {
 			tag = "size-full-full clip",
 			padding = {
-				top = UDim.new(0, var3.Padding.XXSmall),
-				left = UDim.new(0, var3.Padding.XXSmall),
-				right = UDim.new(0, var3.Padding.XXSmall)
+				top = UDim.new(0, UseTokensResult.Padding.XXSmall),
+				left = UDim.new(0, UseTokensResult.Padding.XXSmall),
+				right = UDim.new(0, UseTokensResult.Padding.XXSmall)
 			}
 		}, {
-			OutfitsList = reactModule.createElement(flatList, {
-				renderItem = reactModule.useCallback(function(p2)
-					-- upvalues: reactModule (copy), outfitsRowModule (copy), var4 (ref), p1 (ref)
-					return reactModule.createElement(outfitsRowModule, {
+			OutfitsList = ReactModule.createElement(FlatList, {
+				renderItem = ReactModule.useCallback(function(p2) --[[ Line: 55 ]]
+					-- upvalues: ReactModule (upval), OutfitsRowModule (upval), UseStateResult (copy), p1 (copy)
+					return ReactModule.createElement(OutfitsRowModule, {
 						outfits = p2.item,
-						desiredItemsCount = var4,
+						desiredItemsCount = UseStateResult,
 						rowNumber = p2.index,
 						disabled = p1.disabled
 					})
-				end, { var4 }),
-				data = reactModule.useMemo(function()
-					-- upvalues: p1 (ref), var4 (ref)
-					local t = {}
+				end, { UseStateResult }),
+				data = ReactModule.useMemo(function() --[[ Line: 46 ]]
+					-- upvalues: p1 (copy), UseStateResult (copy)
+					local List = {}
 					
-					for i = 1, #p1.outfits, var4 do
-						table.insert(t, { unpack(p1.outfits, i, i + var4 - 1) })
+					for i = 1, #p1.outfits, UseStateResult do
+						table.insert(List, { unpack(p1.outfits, i, i + UseStateResult - 1) })
 					end
-					return t
-				end, { p1.outfits, var4 }),
+					return List
+				end, { p1.outfits, UseStateResult }),
 				onEndReached = p1.fetchNextOutfitsPage,
-				windowSize = avatarSwitcherGridWindowSize,
-				initialNumToRender = avatarSwitcherGridInitialNumToRender,
-				onEndReachedThreshold = var1,
+				windowSize = AvatarSwitcherGridWindowSize,
+				initialNumToRender = AvatarSwitcherGridInitialNumToRender,
+				onEndReachedThreshold = AvatarSwitcherGridOnEndReachedThresholdRatio,
 				contentContainerStyle = { BackgroundTransparency = 1 },
 				style = {
 					BackgroundTransparency = 1,
 					ScrollBarThickness = 0,
 					ClipsDescendants = false
 				},
-				ListFooterComponent = not p1.lastPageReached and reactModule.createElement(foundationModule.View, { tag = "size-0-full position-top-center padding-small" }, { reactModule.createElement(foundationModule.Loading) })
+				ListFooterComponent = not p1.lastPageReached and ReactModule.createElement(FoundationModule.View, { tag = "size-0-full position-top-center padding-small" }, { ReactModule.createElement(FoundationModule.Loading) })
 			})
 		})
-	})
+	}))
 end

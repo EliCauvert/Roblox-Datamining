@@ -1,17 +1,17 @@
-﻿local friendsLanding = script:FindFirstAncestor("FriendsLanding")
-local dependenciesModule = require(friendsLanding.dependencies)
-local roactNavigation = dependenciesModule.RoactNavigation
+﻿local FriendsLanding = script:FindFirstAncestor("FriendsLanding")
+local DependenciesModule = require(FriendsLanding.dependencies)
+local RoactNavigation = DependenciesModule.RoactNavigation
 
-return roactNavigation.createRobloxStackNavigator({
+return (RoactNavigation.createRobloxStackNavigator({
 	{
 		ModalStackNavigator = {
-			screen = require(friendsLanding.Navigator.ModalStackNavigator),
+			screen = require(FriendsLanding.Navigator.ModalStackNavigator),
 			navigationOptions = { transparent = true, absorbInputSelectable = false }
 		}
 	},
 	{
-		[require(friendsLanding.EnumScreens).GenericToast] = {
-			screen = dependenciesModule.SocialLibraries.Components.ToastScreen,
+		[require(FriendsLanding.EnumScreens).GenericToast] = {
+			screen = DependenciesModule.SocialLibraries.Components.ToastScreen,
 			navigationOptions = {
 				overlayEnabled = true,
 				overlayTransparency = 1,
@@ -19,4 +19,4 @@ return roactNavigation.createRobloxStackNavigator({
 			}
 		}
 	}
-}, { mode = roactNavigation.StackPresentationStyle.Overlay })
+}, { mode = RoactNavigation.StackPresentationStyle.Overlay }))

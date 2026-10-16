@@ -1,18 +1,21 @@
-﻿return function(p1)
+﻿return function(p1) --[[ Line: 10 | Named "normalizeFaeStatus" ]]
 	if type(p1) ~= "table" then
 		return nil, `Type table required, got {type(p1)}.`
 	end
-	local features = p1.features
+	local Features = p1.features
 	
-	if type(features) ~= "table" then
-		return nil, `features field is required and must be a table, got {type(features)}.`
+	if type(Features) ~= "table" then
+		return nil, `features field is required and must be a table, got {type(Features)}.`
 	end
-	local t = {}
+	local Features1 = {}
 	
-	for i, v in features do
-		if type(v) == "table" and type(v.featureName) == "string" and type(v.access) == "string" then
-			table.insert(t, { featureName = v.featureName, access = v.access })
+	for _, feature in Features do
+		if type(feature) == "table" and type(feature.featureName) == "string" and type(feature.access) == "string" then
+			table.insert(Features1, {
+				featureName = feature.featureName,
+				access = feature.access
+			})
 		end
 	end
-	return { features = t }, nil
+	return { features = Features1 }, nil
 end

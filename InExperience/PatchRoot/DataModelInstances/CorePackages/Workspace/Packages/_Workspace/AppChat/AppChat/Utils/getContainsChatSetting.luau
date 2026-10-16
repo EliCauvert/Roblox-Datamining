@@ -1,3 +1,3 @@
-﻿return function(p1)
-	return if p1 then (table.find(p1, "WhoCanChatWithMeInApp") or (table.find(p1, "WhoCanGroupChatWithMeInApp") or (table.find(p1, "WhoCanOneOnOnePartyWithMe") or table.find(p1, "WhoCanGroupPartyWithMe")))) ~= nil else false
+﻿return function(List): boolean --[[ Line: 1 ]]
+	return if List then (table.find(List, "WhoCanChatWithMeInApp") or (table.find(List, "WhoCanGroupChatWithMeInApp") or (table.find(List, "WhoCanOneOnOnePartyWithMe") or table.find(List, "WhoCanGroupPartyWithMe")))) ~= nil else false
 end

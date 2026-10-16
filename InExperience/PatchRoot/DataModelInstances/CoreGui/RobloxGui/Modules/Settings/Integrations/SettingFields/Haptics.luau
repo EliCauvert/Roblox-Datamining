@@ -1,34 +1,32 @@
-﻿local settings = script:FindFirstAncestor("Settings")
-local gameSettings = UserSettings().GameSettings
-local settingsServiceModule = require(game:GetService("CorePackages").Workspace.Packages.SettingsService)
-local valueChangedSignal = settingsServiceModule.ValueChangedSignal
-local settingEnum = settingsServiceModule.SettingEnum
-local LAYOUT_ORDER = require(settings.Integrations.Constants).GAMESETTINGS.LAYOUT_ORDER
-local t = { ON = true, OFF = false }
-local t_1 = { MAX = 1, MIN = 0 }
+﻿local GameSettings = UserSettings().GameSettings
+local SettingsServiceModule = require(game:GetService("CorePackages").Workspace.Packages.SettingsService)
+local ValueChangedSignal = SettingsServiceModule.ValueChangedSignal
+local config = { ON = true, OFF = false }
+local config1 = { MAX = 1, MIN = 0 }
 
 return {
 	id = "haptics",
 	label = "CoreScripts.InGameMenu.GameSettings.Haptics",
 	alreadyLocalized = false,
-	field_type = settingEnum.Toggle,
-	layoutOrder = LAYOUT_ORDER.HapticsFrame,
-	onChanged = (function()
-		-- upvalues: gameSettings (ref), valueChangedSignal (ref), t_1 (ref), t (ref)
-		local _ = function()
-			-- upvalues: gameSettings (copy)
-			return gameSettings.HapticStrength ~= 0
+	field_type = SettingsServiceModule.SettingEnum.Toggle,
+	layoutOrder = require(script:FindFirstAncestor("Settings").Integrations.Constants).GAMESETTINGS.LAYOUT_ORDER.HapticsFrame,
+	onChanged = (function() --[[ Line: 29 | Named "HapticValue" ]]
+		-- upvalues: GameSettings (copy), ValueChangedSignal (copy), config1 (copy), config (copy)
+		local function _(): boolean --[[ Line: 30 ]]
+			-- upvalues: GameSettings (upval)
+			return GameSettings.HapticStrength ~= 0
 		end
 		
-		local var1 = valueChangedSignal.new(if gameSettings.HapticStrength == t_1.MIN then t.OFF else t.ON)
-		var1:connect(function(p1)
-			-- upvalues: gameSettings (copy), t_1 (copy), t (copy)
-			if (if gameSettings.HapticStrength == t_1.MIN then t.OFF else t.ON) == p1 then
+		local NewValueChangedSignal = ValueChangedSignal.new(if GameSettings.HapticStrength == config1.MIN then config.OFF else config.ON)
+		NewValueChangedSignal:connect(function(Enabled) --[[ Line: 35 ]]
+			-- upvalues: GameSettings (upval), config1 (upval), config (upval)
+			if (if GameSettings.HapticStrength == config1.MIN then config.OFF else config.ON) ~= Enabled then
+				GameSettings.HapticStrength = if Enabled == true then 1 else 0
+				
 				return
 			end
-			gameSettings.HapticStrength = if p1 == true then 1 else 0
 		end)
 		
-		return var1
+		return NewValueChangedSignal
 	end)()
 }

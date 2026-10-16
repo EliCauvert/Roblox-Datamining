@@ -1,26 +1,26 @@
-﻿local httpService = game:GetService("HttpService")
-local var1, var2 = require(script.Parent.Parent.Parent.Signals).createSignal("")
+﻿local HttpService = game:GetService("HttpService")
+local Signal, Signal2 = require(script.Parent.Parent.Parent.Signals).createSignal("")
 
 return {
-	Get = function(_)
-		-- upvalues: var1 (ref), httpService (ref), var2 (ref)
-		local var3 = var1(false)
+	Get = function(_) --[[ Line: 15 ]]
+		-- upvalues: Signal (copy), HttpService (copy), Signal2 (copy)
+		local SignalResult = Signal(false)
 		
-		if var3 == "" then
-			var3 = httpService:GenerateGUID(false)
-			var2(var3)
+		if SignalResult == "" then
+			SignalResult = HttpService:GenerateGUID(false)
+			Signal2(SignalResult)
 		end
-		return var3
+		return SignalResult
 	end,
-	Refresh = function(_)
-		-- upvalues: httpService (ref), var2 (ref)
-		local var3 = httpService:GenerateGUID(false)
-		var2(var3)
+	Refresh = function(_) --[[ Line: 24 ]]
+		-- upvalues: HttpService (copy), Signal2 (copy)
+		local Guid = HttpService:GenerateGUID(false)
+		Signal2(Guid)
 		
-		return var3
+		return Guid
 	end,
-	GetSignal = function(_)
-		-- upvalues: var1 (ref)
-		return var1
+	GetSignal = function(_) --[[ Line: 30 ]]
+		-- upvalues: Signal (copy)
+		return Signal
 	end
 }

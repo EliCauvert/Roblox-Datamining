@@ -1,6 +1,6 @@
 ﻿return {
 	PromptSidePadding = 24,
-	ViewportLightDirection = Vector3.new(9.5, -12, 7.5),
+	ViewportLightDirection = vector.create(9.5, -12, 7.5),
 	ItemCardWidthLandscape = 150,
 	ItemCardWidthPortrait = 100,
 	ViewportLightColor = Color3.fromRGB(240, 240, 240),

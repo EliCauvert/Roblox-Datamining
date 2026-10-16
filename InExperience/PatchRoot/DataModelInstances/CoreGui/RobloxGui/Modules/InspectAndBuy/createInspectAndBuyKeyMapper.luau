@@ -1,11 +1,11 @@
-﻿return function(p1)
-	return function(p2, ...)
-		-- upvalues: p1 (ref)
-		local text = "inspectAndBuy." .. p1 .. "." .. p0
+﻿return function(p1) --[[ Line: 7 | Named "createInspectAndBuyKeyMapper" ]]
+	return function(Text, ...): string --[[ Line: 9 ]]
+		-- upvalues: p1 (copy)
+		local Text1 = "inspectAndBuy." .. Text .. "." .. p1
 		
 		for i = 1, select("#", ...) do
-			text ..= "." .. tostring(select(i, ...))
+			Text1 ..= "." .. tostring(select(i, ...))
 		end
-		return text
+		return Text1
 	end
 end

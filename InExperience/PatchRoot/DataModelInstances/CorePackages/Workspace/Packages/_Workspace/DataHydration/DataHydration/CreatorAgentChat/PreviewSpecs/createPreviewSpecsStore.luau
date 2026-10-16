@@ -1,33 +1,33 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local _ = require(dataHydration.Parent.HttpClient)
-local createDataCacheModule = require(dataHydration.createDataCache)
-local createDataResolverModule = require(dataHydration.createDataResolver)
-local _ = require(dataHydration.DataHydrationTypes)
-local fetchPreviewSpecsModule = require(script.Parent.fetchPreviewSpecs)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local _ = require(DataHydration.Parent.HttpClient)
+local CreateDataCacheModule = require(DataHydration.createDataCache)
+local CreateDataResolverModule = require(DataHydration.createDataResolver)
+local _ = require(DataHydration.DataHydrationTypes)
+local FetchPreviewSpecsModule = require(script.Parent.fetchPreviewSpecs)
 local _ = require(script.Parent.PreviewSpecsTypes)
 
-return function(p1)
-	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), fetchPreviewSpecsModule (ref)
-	p1 = p1 or {}
-	local t = { network = p1.network, baseUrl = p1.baseUrl }
-	local var1 = createDataResolverModule({
+return function(p1) --[[ Line: 24 | Named "createPreviewSpecsStore" ]]
+	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), FetchPreviewSpecsModule (copy)
+	local P0 = p1 or {}
+	local config = { network = P0.network, baseUrl = P0.baseUrl }
+	local DataResolverModule = CreateDataResolverModule({
 		supportsMultiGet = false,
 		replaceItems = true,
-		cache = createDataCacheModule(),
-		fetchFn = function(_, _)
-			-- upvalues: fetchPreviewSpecsModule (copy), t (ref)
-			return fetchPreviewSpecsModule(t)
+		cache = CreateDataCacheModule(),
+		fetchFn = function(_, _) --[[ Line: 33 ]]
+			-- upvalues: FetchPreviewSpecsModule (upval), config (copy)
+			return FetchPreviewSpecsModule(config)
 		end
 	})
 	
 	return {
-		refreshPreviewSpecs = function()
-			-- upvalues: var1 (ref)
-			var1.clear()
+		refreshPreviewSpecs = function() --[[ Line: 39 ]]
+			-- upvalues: DataResolverModule (copy)
+			DataResolverModule.clear()
 			
-			return var1.fetchItem("preview-specs")
+			return (DataResolverModule.fetchItem("preview-specs"))
 		end,
-		clear = var1.clear,
-		dispose = var1.dispose
+		clear = DataResolverModule.clear,
+		dispose = DataResolverModule.dispose
 	}
 end

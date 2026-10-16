@@ -1,9 +1,9 @@
-﻿local parent = script.Parent
+﻿local Parent = script.Parent
 
-return require(game:GetService("CorePackages").Packages.Rodux).combineReducers({
-	displayOptions = require(parent.DisplayOptions),
-	emotesPage = require(parent.EmotesPage),
-	emotesWheel = require(parent.EmotesWheel),
-	layout = require(parent.Layout),
-	locale = require(parent.Locale)
-})
+return (require(game:GetService("CorePackages").Packages.Rodux).combineReducers({
+	displayOptions = require(Parent.DisplayOptions),
+	emotesPage = require(Parent.EmotesPage),
+	emotesWheel = require(Parent.EmotesWheel),
+	layout = require(Parent.Layout),
+	locale = require(Parent.Locale)
+}))
